@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-faithful-semisimple-trace-form",
+ "kind": "statement",
+ "title": "Nondegeneracy of faithful semisimple trace forms",
+ "statement": "Let $F$ be a field of characteristic zero [def-weil-field], let $L$ be a finite-dimensional semisimple $F$-Lie algebra [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], let $M$ be a finite-dimensional $F$-vector space [def-weil-finite-dimensional-subspace], and let $\\rho:L\\to\\operatorname{End}_F(M)$ be an injective Lie representation, meaning a linear map with $\\rho([x,y])=\\rho(x)\\rho(y)-\\rho(y)\\rho(x)$. The symmetric bilinear form, using ordinary trace [def-weil-endomorphism-trace],\n$$B_\\rho(x,y)=\\operatorname{Tr}_M(\\rho(x)\\rho(y))$$\nis nondegenerate: if $B_\\rho(x,y)=0$ for all $y\\in L$, then $x=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [
+  {
+   "text": "By the matrix-diagonal formula for trace [def-weil-endomorphism-trace], trace is $F$-linear. Composition is bilinear, so $B_\\rho$ is bilinear. Apply [lem-pc-finite-dimensional-trace-cyclic] to the two endomorphisms $\\rho(x),\\rho(y)$ of $M$ to obtain $B_\\rho(x,y)=B_\\rho(y,x)$.",
+   "uses": [
+    "def-weil-endomorphism-trace",
+    "lem-pc-finite-dimensional-trace-cyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+   }
+  },
+  {
+   "text": "Put $R=\\{x\\in L:B_\\rho(x,y)=0\\text{ for all }y\\in L\\}$. Bilinearity makes $R$ a linear subspace. For $z,y\\in L$ and $x\\in R$, bracket preservation [def-wf-lie-algebra] and trace cyclicity [lem-pc-finite-dimensional-trace-cyclic] give $B_\\rho([z,x],y)=\\operatorname{Tr}(\\rho(z)\\rho(x)\\rho(y)-\\rho(x)\\rho(z)\\rho(y))=\\operatorname{Tr}(\\rho(x)(\\rho(y)\\rho(z)-\\rho(z)\\rho(y)))=B_\\rho(x,[y,z])=0$. Here cyclicity moves the first factor $\\rho(z)$ of the first triple product to the end. Hence $[L,R]\\subseteq R$, so $R$ is an ideal.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-pc-finite-dimensional-trace-cyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+   }
+  },
+  {
+   "text": "The image $A=\\rho(R)$ is a Lie subalgebra of $\\operatorname{End}_F(M)$, because $R$ is bracket-closed and $\\rho$ preserves brackets. For $u,v\\in R$ we have $\\operatorname{Tr}_M(\\rho(u)\\rho(v))=B_\\rho(u,v)=0$. Thus trace vanishes on all of $A\\times A$, in particular on $[A,A]\\times A$. Apply [lem-sfb-cartan-trace-criterion-characteristic-zero], with the given characteristic-zero field $F$ and finite-dimensional space $M$, to conclude that $A$ is solvable.",
+   "uses": [
+    "lem-sfb-cartan-trace-criterion-characteristic-zero",
+    "def-wf-lie-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+   }
+  },
+  {
+   "text": "By induction on $j$, linearity and bracket preservation give $\\rho(D^jR)=D^jA$: this is the definition of $A$ for $j=0$, and taking linear spans of brackets proves the successor case [def-wf-lie-algebra]. Choose $j$ with $D^jA=0$. Injectivity of $\\rho$ then gives $D^jR=0$, so $R$ is solvable. Since $R$ is an ideal and $L$ has no nonzero solvable ideal [def-wf-semisimple-lie-algebra], $R=0$. Every $x$ orthogonal to all of $L$ belongs to $R$ and is therefore zero, as required.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-semisimple-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endomorphism-trace",
+  "lem-pc-finite-dimensional-trace-cyclic",
+  "def-wf-lie-algebra",
+  "lem-sfb-cartan-trace-criterion-characteristic-zero",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.475, The Casimir operator, paragraph applying Cartan criterion to the kernel of the trace form of a faithful representation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The trace form of any faithful finite dimensional representation of a semisimple Lie algebra over a characteristic zero field is nondegenerate",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.traceForm_cartan_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra],\\n  (LieModule.traceForm R (↥H) L).Nondegenerate\", \"doc\": \"Let $\\\\mathfrak{g}$ be a Lie algebra over a commutative ring $R$, and let $\\\\mathfrak{h} \\\\subseteq \\\\mathfrak{g}$ be a Cartan subalgebra. If $\\\\mathfrak{g}$ is both Noetherian and Artinian as an $R$-modul\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.killingForm_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L], (killingForm R L).Nondegenerate\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the Killing form is non-degenerate. That is, for every $x \\\\in \\\\mathfrak{g}$, if $\\\\operatorname{tr}(\\\\operatorname{ad}(x) \\\\circ \\\\operatornam\"}\n  {\"name\": \"LieModule.isLieAbelian_of_ker_traceForm_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [LieRing.IsNilpotent L] [IsDomain R] [Module.Free R M] [Module.Finite R M],\\n  \", \"doc\": \"If the trace form on a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial kernel (i.e., is non-degenerate) when acting on a finite free $R$-module $M$, then $\\\\mathfrak{g}$ is an abel\"}\n  {\"name\": \"LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra],\\n  LinearMap.ker (LieModule.traceForm R (↥H) L) = ⊥\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the kernel of the Killing form restricted to $ \\\\mathfrak{h} $ is trivial, i.e., $ \\\\ker(\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"(R : Type u_1) →\\n  {L : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → [Module.Finite R L] → [Module.Free R L] → L → Prop\", \"doc\": \"An element $ x $ in a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is called regular if the adjoint action $ \\\\text{ad}_x : \\\\mathfrak{g} \\\\to \\\\mathfrak{g} $ defined by $ \\\\text{ad}_x(y) = [\"}\n  {\"name\": \"LieDerivation.IsKilling.killingForm_restrict_range_ad_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L],\\n  ((killingForm R (LieDerivation R L L)).restrict (LieDerivation.ad R L).range.toSubmodule).Nondegenerate\", \"doc\": \"The restriction of the Killing form on the Lie algebra $ \\\\mathfrak{g} $ to the image of the adjoint representation $ \\\\mathrm{ad}(\\\\mathfrak{g}) $ is non-degenerate, meaning that for any nonzero element\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the Cartan-subalgebra restriction of the adjoint Killing form is not the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"traceForm\", \"Nondegenerate\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.traceForm_cartan_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" (R : Type u_1) (L : Type u_3) [CommRing R] [LieRing L] [LieAlgebra R L] [LieAlgebra.IsKilling R L] [IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra] : (LieModule.traceForm R (↥H) L).Nondegenerate\", \"doc\": \"\"}\n  {\"name\": \"traceForm_nondegenerate\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \" (K : Type u_3) (L : Type u_4) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] [Algebra.IsSeparable K L] : (Algebra.traceForm K L).Nondegenerate\", \"doc\": \"Let $L/K$ be a finite extension of fields. If $L/K$ is separable,\\nthen `traceForm` is nondegenerate.\"}\n  {\"name\": \"traceForm_nondegenerate_tfae\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \" (K : Type u_3) (L : Type u_4) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] : [Algebra.IsSeparable K L, Algebra.trace K L ≠ 0, (Algebra.traceForm K L).Nondegenerate].TFAE\", \"doc\": \"[Stacks Tag 0BIL](https://stacks.math.columbia.edu/tag/0BIL)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the Cartan-subalgebra restriction of the adjoint Killing form is not the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "grep",
+   "query": "traceForm|trace_form",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the Cartan-subalgebra restriction of the adjoint Killing form is not the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan criterion implies nondegeneracy of the bilinear form trace rho x rho y for a faithful representation of a semisimple Lie algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.traceForm\", \"module\": \"Mathlib.Algebra.Lie.TraceForm\", \"type\": \": LinearMap.BilinForm R L\", \"doc\": \"The bilinear form on a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, defined by $ (x, y) \\\\mapsto \\\\operatorname{tr}(\\\\varphi(x) \\\\circ \\\\varphi(y)) $ where $\\\\varphi: \\\\mathfrak{g} \\\\to \\\\operatorna\"}\n  {\"name\": \"LieAlgebra.IsKilling.traceForm_cartan_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"[IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra] :\\n  (LieModule.traceForm R H L).Nondegenerate\", \"doc\": \"Let $\\\\mathfrak{g}$ be a Lie algebra over a commutative ring $R$, and let $\\\\mathfrak{h} \\\\subseteq \\\\mathfrak{g}$ be a Cartan subalgebra. If $\\\\mathfrak{g}$ is both Noetherian and Artinian as an $R$-modul\"}\n  {\"name\": \"LieAlgebra.IsKilling.killingForm_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.Killing\", \"type\": \": (killingForm R L).Nondegenerate\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the Killing form is non-degenerate. That is, for every $x \\\\in \\\\mathfrak{g}$, if $\\\\operatorname{tr}(\\\\operatorname{ad}(x) \\\\circ \\\\operatornam\"}\n  {\"name\": \"traceForm_nondegenerate\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \"[FiniteDimensional K L] [Algebra.IsSeparable K L] : (traceForm K L).Nondegenerate\", \"doc\": \"The trace form associated with a finite-dimensional separable algebra $ L $ over a field $ K $ is non-degenerate.\"}\n  {\"name\": \"LieModule.traceForm_apply_apply\", \"module\": \"Mathlib.Algebra.Lie.TraceForm\", \"type\": \"(x y : L) : traceForm R L M x y = trace R _ (φ x ∘ₗ φ y)\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ and an $R$-module $M$, the trace form is a bilinear form $B: \\\\mathfrak{g} \\\\times \\\\mathfrak{g} \\\\to R$ defined by $B(x, y) = \\\\operatorname{tr\"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.InvariantForm\", \"type\": \": IsSemisimple K L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsKilling\", \"module\": \"Mathlib.Algebra.Lie.Killing\", \"type\": \"(R : Type u_1) → (L : Type u_3) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Killing form of the Lie algebra $ L $ over the commutative ring $ R $ is non-degenerate\"}\n  {\"name\": \"LieModule.isLieAbelian_of_ker_traceForm_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.TraceForm\", \"type\": \"[Module.Free R M] [Module.Finite R M] (h : LinearMap.ker (traceForm R L M) = ⊥) : IsLieAbelian L\", \"doc\": \"If the trace form on a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial kernel (i.e., is non-degenerate) when acting on a finite free $R$-module $M$, then $\\\\mathfrak{g}$ is an abel\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the Cartan-subalgebra restriction of the adjoint Killing form is not the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a finite dimensional Lie algebra has no nonzero solvable ideals then the trace pairing induced by an injective representation has zero radical",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieModule.isLieAbelian_of_ker_traceForm_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [LieRing.IsNilpotent L] [IsDomain R] [Module.Free R M] [Module.Finite R M],\\n  \", \"doc\": \"If the trace form on a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial kernel (i.e., is non-degenerate) when acting on a finite free $R$-module $M$, then $\\\\mathfrak{g}$ is an abel\"}\n  {\"name\": \"LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra],\\n  LinearMap.ker (LieModule.traceForm R (↥H) L) = ⊥\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the kernel of the Killing form restricted to $ \\\\mathfrak{h} $ is trivial, i.e., $ \\\\ker(\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], LieModule.IsFaithful R L L\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then $ L $ is a faithful Lie module over itself. This means the action of $ L $ on its\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the Cartan-subalgebra restriction of the adjoint Killing form is not the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace form of a faithful finite dimensional representation of a semisimple Lie algebra over a field of characteristic zero is nondegenerate",
+   "results": "8 hits: LieAlgebra.IsKilling.traceForm_cartan_nondegenerate; LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; LieAlgebra.IsKilling.killingForm_nondegenerate; LieModule.isLieAbelian_of_ker_traceForm_eq_bot; LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra; LieAlgebra.IsKilling.instSemisimple; LieDerivation.IsKilling.killingForm_restrict_range_ad_nondegenerate; LieSubmodule.traceForm_eq_zero_of_isTrivial",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"traceForm\", \"Nondegenerate\"",
+   "results": "3 hits: LieAlgebra.IsKilling.traceForm_cartan_nondegenerate; traceForm_nondegenerate; traceForm_nondegenerate_tfae",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "grep",
+   "query": "traceForm.*(nondegenerate|Nondegenerate)|ker_traceForm|isSolvable.*trace",
+   "results": "10 hits: Mathlib/Algebra/Lie/Killing.lean; Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/TraceForm.lean; directory Algebra/Lie",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The radical of the trace form of a faithful representation of a semisimple Lie algebra in characteristic zero is zero",
+   "results": "8 hits: LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; LieAlgebra.IsSemisimple.instHasTrivialRadical; LieAlgebra.IsKilling.instHasTrivialRadical; LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful; LieAlgebra.HasTrivialRadical.mk; LieModule.isLieAbelian_of_ker_traceForm_eq_bot; LieAlgebra.hasTrivialRadical_iff; LieAlgebra.IsKilling.traceForm_cartan_nondegenerate",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective Lie algebra representation over a characteristic zero field the kernel of the trace pairing is a solvable ideal",
+   "results": "8 hits: LieModule.lowerCentralSeries_one_inf_center_le_ker_traceForm; LieModule.isLieAbelian_of_ker_traceForm_eq_bot; LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; LieSubmodule.traceForm_eq_zero_of_isTrivial; LieAlgebra.IsKilling.instHasTrivialRadical; LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra; LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful; LieAlgebra.IsKilling.ker_killingForm_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  },
+  {
+   "tool": "grep",
+   "query": "traceForm|solvable|Solvable",
+   "results": "5 hits: 11; 27; 30; 31; 33; directory Algebra/Lie/CartanCriterion.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: adjoint Killing forms and Cartan restrictions do not give the trace form of an arbitrary faithful representation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-casimir-trace",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Nondegeneracy of faithful semisimple trace forms.",
+   "via": [
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-faithful-semisimple-trace-form",
+  "worker": "stage1",
+  "summary": "Expanded Milne §22c p.475 into bilinearity/symmetry, the explicit trace-radical ideal calculation, Cartan solvability of its image, and derived-series transport followed by semisimplicity. General-field Cartan criterion has a new statement-only node attached to the existing closed project declaration; existing DAG Cartan statements have narrower coefficient context. Added explicit finite-dimensional-space and trace definition citations; mathematical statement unchanged.",
+  "blueprint": "The inherited place det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/GIT/complete-reducibility/Casimir chain, requires precisely Milne’s faithful trace-form input. Steps 1–4 realize that supporting input. blueprint_refs.py ancestor returns None for this existing imported creation chain; the inherited null ancestor and via list are preserved. Whole-blueprint searches for Cartan and trace form found no node stating this arbitrary faithful-representation theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-892927880",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-892927880 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 §22c, printed p.475: char-0 field k, all Lie algebras and representations finite-dimensional, and 'when (V,ρ) is faithful, Cartan's criterion shows that the kernel of B_ρ is a solvable ideal, hence 0'. Item hypotheses match the source; against live the item statement only gained two definition citations, and the item is still unsplit in live and side-live, so no other group superseded it. Step 1 (symmetry via the trace-cyclic Mathlib leaf) is correct. Step 2: recomputed B([z,x],y)=Tr(ρzρxρy−ρxρzρy)=Tr(ρxρ([y,z]))=B(x,[y,z])=0, sign right, so R is an ideal. Step 3 applies the new Cartan node to A=ρ(R), with the trace vanishing on A×A. Step 4: induction ρ(D^jR)=D^jA plus injectivity makes R a solvable ideal, then def-wf-semisimple gives R=0. The new node lem-sfb-cartan-trace-criterion-characteristic-zero is statement-only and self-contained, true over any char-0 field, and tested on 0, gl_1, strictly upper triangular matrices and sl_2 (hypothesis fails since tr(hh)=2). It is not a clause of the item. lem-wf-cartan-trace-criterion (over Q̄_ℓ), sk-lem-walg-trace-criterion (algebraically closed) and the Killing-form nodes (adjoint only) are narrower, so the node is not a duplicate. The project Lean LieSubalgebra.isSolvable_of_trace_mul_eq_zero (CartanCriterion.lean lines 44–70, Field+CharZero+FiniteDimensional, sorry-free) states the node exactly. Mathlib's CartanCriterion.lean has only the two aux lemmas, so neither node is a Mathlib leaf. No SGA. FIX (B10): the report says the declaration was recorded in lean_audit, but the node has no lean_audit field; added lean_audit.slopmaster2 closed with that declaration in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-cartan-trace-criterion-characteristic-zero.json, nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.FaithfulSemisimpleTraceForm",
+  "declaration": "LieAlgebra.trace_pairing_nondegenerate_of_faithful",
+  "file": "lean/Sheaf/Algebra/Lie/FaithfulSemisimpleTraceForm.lean",
+  "statement": "theorem trace_pairing_nondegenerate_of_faithful (F : Type u) [Field F] [CharZero F] (L : Type v) [LieRing L] [LieAlgebra F L] [FiniteDimensional F L] [HasTrivialRadical F L] (M : Type w) [AddCommGroup M] [Module F M] [FiniteDimensional F M] (ρ : L →ₗ[F] Module.End F M) (hbracket : ∀ x y : L, ρ ⁅x, y⁆ = ρ x ∘ₗ ρ y - ρ y ∘ₗ ρ x) (hfaithful : Function.Injective ρ) : ∀ x : L, (∀ y : L, LinearMap.trace F M (ρ x ∘ₗ ρ y) = 0) → x = 0",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54c5b8e96",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement matches node and Milne §22c p.475 clause by clause: Field+CharZero F; f.d. LieAlgebra L with HasTrivialRadical (recorded semisimple leaf, no-solvable-ideal); f.d. M; ρ linear with bracket equation and Function.Injective; conclusion ∀x,(∀y, trace(ρx∘ρy)=0)→x=0, same quantifier order. No extra hypotheses; universes u v w independent and bound. Node unchanged except lean record; lean.statement verbatim; stmt_deps all used. Private imports CartanCriterion/Radical exist in side-live as module files. Mathlib/project search finds no duplicate (only Cartan-subalgebra/Killing/irreducible variants). Docstrings carry source place, blueprint tag, 4 proof steps; proof sorry; no defs; report sections present. No compile run (no file changed); worker compiled via scompile. No findings."
+ }
+}

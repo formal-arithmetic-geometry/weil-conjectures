@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-tower-line-bundle-etale-class-additive",
+ "kind": "statement",
+ "title": "Additivity of the integral line class after change of site",
+ "statement": "theorem tower_lineBundleEtaleClass_mul (T : Scheme.{u}) (L M : T.Pic) :\n    lineBundleEtaleClass T (L * M) =\n      lineBundleEtaleClass T L + lineBundleEtaleClass T M",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "paragraph (2), the integral Picard class, change of site and constant-system realization"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-reduction"
+ ],
+ "proof": [
+  {
+   "text": "The Picard-to-H1 map sends tensor products to sums of Ext classes.",
+   "uses": [
+    "lem-sc-h1-gm-pic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realizing Ext classes as shifted single morphisms preserves addition. The exact derived change of site preserves addition, as do pre- and postcomposition with the fixed integer and units comparisons. Applying these generic transport identities gives the stated lineBundleEtaleClass equation.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction",
+  "lem-sc-h1-gm-pic"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "paragraph (2), Picard class and additive exact realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lineBundleClass|mapSingleArrow|mapExtensionEndpoints",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the source-specific integral line class. Generic additive functor and Ext transport laws are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral line bundle class in an etale or constant pro-etale derived category sends tensor products in the scheme Picard group to sums of morphisms",
+   "results": "8 hits: CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, Submodule.unitsToPic, CommRing.Pic.mapRingHom, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the source-specific integral line class. Generic additive functor and Ext transport laws are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived morphism representing the integral Picard class preserves multiplication as addition after exact change of site and making a constant tower",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.instAddCommGroupHom, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the source-specific integral line class. Generic additive functor and Ext transport laws are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), additivity in the divisor Chern adjunct decomposition; extracted proved API to keep each file within the compile limit",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-pretrace-components",
+    "lem-sfb-diagonal-trace-divisor-chern-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerLineBundleEtaleClassAdditive",
+  "file": "lean/Sheaf/Paper/TowerLineBundleEtaleClassAdditive.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_lineBundleEtaleClass_mul",
+  "statement": "theorem tower_lineBundleEtaleClass_mul (T : Scheme.{u}) (L M : T.Pic) :\n    lineBundleEtaleClass T (L * M) =\n      lineBundleEtaleClass T L + lineBundleEtaleClass T M",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "worker": "S4",
+  "summary": "Additivity of the integral line class after change of site; fully proved, extracted after profiling the combined file over 60 seconds",
+  "blueprint": "paragraph (2), the additive Picard-class transport used in the divisor Chern adjunct calculation",
+  "tool_uses": [
+   {
+    "node": "lem-sc-h1-gm-pic",
+    "why": "Generic additivity of the Picard-to-H1 map, with no trace or integration assertion."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

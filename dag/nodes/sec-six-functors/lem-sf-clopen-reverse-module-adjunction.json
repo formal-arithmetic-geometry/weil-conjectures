@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-clopen-reverse-module-adjunction",
+ "kind": "statement",
+ "title": "Normalized reverse clopen module adjunction",
+ "statement": "For either Mode, every clopen immersion s:A→X, and every ring sheaf R on its ringed site, there exists an OpenExtension e of [lem-sf-open-tensor-normalization] and a reverse adjunction restrict m s R ⊣ e.ordinary whose counit is inverse to e.adjunction.unit. Both functors are exact, as recorded by OpenExtension and restriction. This is a statement on modules on the ordinary or vertical sequence site itself, before localization. Its precise formulation using [def-sf-clopen-comparison-tensor-data] is: theorem clopen_reverse_module_adjunction (m : Mode) {A X : Scheme.{u}}\n    (s : A ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]\n    (R : Sheaf (topology m X) CommRingCat.{u + 1}) :\n    ∃ e : OpenExtension m s R, ∃ ar : restrict m s R ⊣ e.ordinary,\n      ∀ M, e.adjunction.unit.app M ≫ ar.counit.app M = 𝟙 M",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS, lemma-mapping-property-glue, disjoint two-open ringed-module specialization; extend componentwise to the vertical sequence site. Original clopen tensor refinement, steps 3 and 4."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-comparison-tensor-data",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Let c be the complementary open subscheme. For any module M, restriction of its sections to the two pieces is a bijective linear map. In ordinary mode this is clopenSections_bijective, the disjoint-cover step of clopen ringed-module gluing. In systems mode restrict the actual ring and module to a vertical slice and apply the same result; evaluation is continuous for the vertical topology. Thus no flatness or constancy of coefficient transitions is used.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-coef-semilinear-system-models",
+    "def-sf-open-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the sectionwise restriction/direct-image adjunction b from openRestrictionAdjunction. Its counit is restriction along the composition/base-change diagonal, which is an isomorphism for an open immersion. The same holds in systems mode by taking its product with the identity on the coefficient index.",
+   "uses": [
+    "lem-sf-open-operation-models",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the bijective linear section map and apply it to (x,0). Naturality of both restriction units proves that this defines a natural module morphism v from direct-image-after-restriction to the identity. Restricting v to the selected open gives precisely b.counit: the first coordinate follows from the site adjunction triangle and invertibility of the diagonal, and the second coordinate is unique since the complementary pullback is empty.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the opposite adjunction a with unit the inverse of b.counit and counit v. Its right triangle is the restriction identity just proved. For its left triangle apply the inverse hom equivalence of b, then use that identity and naturality of b.counit. Direct image is additive on sections, preserves finite limits as the right adjoint in b, and preserves finite colimits as the left adjoint in a. Package it as OpenExtension with sectionIso=b.counit, and take b as the requested reverse adjunction. The asserted normalization is the inverse-hom identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-coef-semilinear-system-models",
+  "def-sf-open-normalization-data",
+  "lem-sf-open-operation-models"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 04TQ, 04TR and 04TS, disjoint two-open section gluing; agent explicit inverse-coordinate construction on the ordinary and vertical ringed sites. The adjunction triangle calculations are categorical.",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClopenComparisonTensorSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence: The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]; clopen comparison tensor compatibility, original seven-step refinement.",
+   "via": [
+    "lem-sf-clopen-comparison-tensor-square",
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClopenReverseModuleAdjunction",
+  "file": "lean/Sheaf/SixFunctors/ClopenReverseModuleAdjunction.lean",
+  "declaration": "SheafOfModules.ClopenComparisonTensorSquare.clopen_reverse_module_adjunction",
+  "statement": "theorem clopen_reverse_module_adjunction (m : Mode) {A X : Scheme.{u}}\n    (s : A ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]\n    (R : Sheaf (topology m X) CommRingCat.{u + 1}) :\n    ∃ e : OpenExtension m s R, ∃ ar : restrict m s R ⊣ e.ordinary,\n      ∀ M, e.adjunction.unit.app M ≫ ar.counit.app M = 𝟙 M",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor pullback comparison and clopen restriction extension adjunction",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary pullback adjunctions and module formulas do not give normalized derived tensor compatibility or the clopen reverse module adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits; CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-24",
+   "verdict": "Useful formal adjunction API; no geometric tensor comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Aa]dj|tensor.*[Bb]ase[Cc]hange",
+   "results": "25 hits; Mathlib/Algebra/Lie/Nilpotent.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar tensor calculations only; the required derived ringed-site statements remain separate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen restriction adjunction tensor pullback comparison on derived sheaves",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary adjunctions, no canonical derived tensor compatibility or reverse clopen adjunction on these ringed sites."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T054603-L-967256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

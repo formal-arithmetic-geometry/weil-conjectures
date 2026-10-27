@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-flat-residue-fibre-square",
+ "kind": "statement",
+ "title": "Cartesian comparison of residue fibres with flat horizontal projections",
+ "statement": "Let $S,X,Y,T$ be schemes [def-pc-scheme] and $p:X\\to S$, $q:Y\\to S$, $f:X\\to Y$, $h:T\\to S$ morphisms satisfying $q\\circ f=p$. Set $X_T=X\\times_ST$, $Y_T=Y\\times_ST$ with projections $\\pi_X,\\pi_Y,p_T,q_T$, and let $f_T:X_T\\to Y_T$ be induced by $f$ and $\\mathrm{id}_T$ [def-pc-fibre-product]. For $t\\in T$ and $s=h(t)$, let $r:\\kappa(s)\\to\\kappa(t)$ be the induced residue-field homomorphism [def-weil-residue-field], and put $e=\\operatorname{Spec}(r):\\operatorname{Spec}\\kappa(t)\\to\\operatorname{Spec}\\kappa(s)$ [def-weil-affine-spectrum]. There are canonical isomorphisms $(X_T)_t\\cong X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(t)$ and $(Y_T)_t\\cong Y_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(t)$ [def-pc-scheme-fibre]. Write $a:(X_T)_t\\to X_s$ and $b:(Y_T)_t\\to Y_s$ for the first projections under these isomorphisms. They satisfy $f_s\\circ a=b\\circ(f_T)_t$, and the square with horizontal maps $a,b$ and vertical maps $(f_T)_t,f_s$ is cartesian. If $\\iota_s:X_s\\to X$ and $\\iota'_t:(X_T)_t\\to X_T$ are fibre inclusions, then $\\iota_s\\circ a=\\pi_X\\circ\\iota'_t$, and the analogous identity holds for $Y$. The morphisms $e,a,b$ are flat [def-weil-flat-morphism]. No finite-type, finite-presentation, flatness, or Noetherian hypothesis on $p,q,f,h$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof final displayed cartesian fibre square and the following sentence asserting flatness of its horizontal arrows. Canonical projection compatibility and flatness of the residue-field extension are included."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-of-base-change] to $(p,h,t)$ and $(q,h,t)$. Write $K=\\operatorname{Spec}\\kappa(s)$, $L=\\operatorname{Spec}\\kappa(t)$, $A=(X_T)_t$, $B=(Y_T)_t$, and $\\rho_X:A\\to L$, $\\rho_Y:B\\to L$ for their structure maps. It gives the canonical identifications $A\\cong X_s\\times_K L$, $B\\cong Y_s\\times_K L$ with first projections $a,b$, and gives exactly $\\iota_s a=\\pi_X\\iota'_t$ and its $Y$ analogue. In particular $a,b$ are base changes of $e:L\\to K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, final cartesian diagram and its following sentence; expansion of the canonical maps by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Here is the universal-property check of the square [def-pc-fibre-product, def-pc-scheme-fibre]. Put $F=(f_T)_t$. By the definition of the induced fibre map, $\\rho_YF=\\rho_X$. The two maps $f_sa,bF:A\\to Y_s$ have the same composites to $Y$, namely $f\\pi_X\\iota'_t$, and to $K$, namely $e\\rho_X$; hence they are equal. To prove cartesianness, let $D$ be any scheme with $u:D\\to X_s$ and $v:D\\to B$ satisfying $f_su=bv$. Set $\\ell=\\rho_Yv$. If $k_X:X_s\\to K$ and $k_Y:Y_s\\to K$ are the structure maps, then $k_Xu=k_Yf_su=k_Ybv=e\\ell$. The universal property of $A=X_s\\times_K L$ gives a unique $w:D\\to A$ with $aw=u$ and $\\rho_Xw=\\ell$. Now $Fw$ and $v$ have the same composites with $b$ and $\\rho_Y$, so the universal property of $B=Y_s\\times_K L$ gives $Fw=v$. Any other lift has the same $a$-projection and, because $\\rho_YF=\\rho_X$, the same $L$-projection; thus it equals $w$. This is the required cartesian universal property.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, final cartesian diagram and its following sentence; expansion of the canonical maps by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "The residue-field map $r:\\kappa(s)\\to\\kappa(t)$ makes $\\kappa(t)$ a field extension of $\\kappa(s)$ [def-weil-residue-field]. By [lem-pc-field-extension-flat], $e=\\operatorname{Spec}(r)$ is flat. By [lem-weil-pbc-flat-morphism-base-change] applied to the two cartesian identifications of step 1, its base changes $a$ and $b$ are flat. All three cited statements allow arbitrary field extensions and arbitrary parameter morphisms; no finiteness or flatness hypothesis on $p,q,f,h$ was used.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, final cartesian diagram and its following sentence; expansion of the canonical maps by the fibre-product universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, final cartesian diagram and its following sentence; expansion of the canonical maps by the fibre-product universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiber.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*fiber|fiber.*[Ff]lat|[Ff]lat.*fiber",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"grep\", \"query\": \"fiber.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*fiber|fiber.*[Ff]lat|[Ff]lat.*fiber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\"], \"digest\": \"37f8e2463273fefd\"}; no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established.",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.fiber\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.Hom.fiber\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established.",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map on fibres of a base changed morphism is the base change by the residue field extension and the horizontal fibre comparison morphisms are flat",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"leansearch\", \"query\": \"The map on fibres of a base changed morphism is the base change by the residue field extension and the horizontal fibre comparison morphisms are flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.stalkMap\", \"KaehlerDifferential.mapBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\"], \"digest\": \"dd7975fe62dbf884\"}; no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established.",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map of S schemes and any T to S, the square between the maps on fibres at t and s is cartesian and its horizontal maps are flat because the residue fields form a field extension",
+   "results": "{\"t\": \"2026-10-23T09:40:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a map of S schemes and any T to S, the square between the maps on fibres at t and s is cartesian and its horizontal maps are flat because the residue fields form a field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\"], \"digest\": \"999a7583f216ff50\"}; no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established.",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary morphisms X to Y over S and T to S and t in T, the canonical maps from the t fibres to the h(t) fibres form a pullback square compatible with the maps to X and Y; both fibre comparison projections are flat without any finiteness assumptions",
+   "results": "{\"t\": \"2026-10-23T09:41:31Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary morphisms X to Y over S and T to S and t in T, the canonical maps from the t fibres to the h(t) fibres form a pullback square compatible with the maps to X and Y; both fibre comparison projections are flat without any finiteness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"HasFibers.pullbackMap\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply\", \"HasFibers.mkPullback\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_snd_apply\"], \"digest\": \"0df8237f1daaf637\"}; no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established.",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback triplets describe spectra of tensor products of residue fields, not this simultaneous natural comparison of two scheme fibres. Flat.instFstScheme supplies permanence only after the flat residue-field map and the cartesian comparison are established."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*fiber|Flat.*[Ss]pec|flat.*field",
+   "results": "{\"t\": \"2026-10-23T11:04:11Z\", \"tool\": \"grep\", \"query\": \"fiber.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*fiber|Flat.*[Ss]pec|flat.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"88122e3dd802acea\"}; Related fibre definitions, residue-field naturality, pullback-coordinate identities and flatness permanence only; no single declaration covers the simultaneous natural square with all three flatness conclusions. Existing DAG leaves supply its separate ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.fiber\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T11:04:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.Hom.fiber\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Related fibre definitions, residue-field naturality, pullback-coordinate identities and flatness permanence only; no single declaration covers the simultaneous natural square with all three flatness conclusions. Existing DAG leaves supply its separate ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme fibre after arbitrary base change is the base change of the old fibre by the residue field map, naturally in a morphism of schemes, with flat comparison maps",
+   "results": "{\"t\": \"2026-10-23T11:04:21Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme fibre after arbitrary base change is the base change of the old fibre by the residue field map, naturally in a morphism of schemes, with flat comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\"], \"digest\": \"26bfe09a91ae79d3\"}; Related fibre definitions, residue-field naturality, pullback-coordinate identities and flatness permanence only; no single declaration covers the simultaneous natural square with all three flatness conclusions. Existing DAG leaves supply its separate ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of scheme theoretic fibres is scalar extension along the residue field homomorphism",
+   "results": "{\"t\": \"2026-10-23T11:05:13Z\", \"tool\": \"leansearch\", \"query\": \"Base change of scheme theoretic fibres is scalar extension along the residue field homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.baseChange\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"IsBaseChange\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueFieldMap\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\"], \"digest\": \"92b5e89094632642\"}; Related fibre definitions, residue-field naturality, pullback-coordinate identities and flatness permanence only; no single declaration covers the simultaneous natural square with all three flatness conclusions. Existing DAG leaves supply its separate ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback associativity and naturality identify fibres of base changed schemes with scalar extensions of fibres",
+   "results": "{\"t\": \"2026-10-23T11:05:16Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback associativity and naturality identify fibres of base changed schemes with scalar extensions of fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc\"], \"digest\": \"cb19b25306d2c890\"}; Related fibre definitions, residue-field naturality, pullback-coordinate identities and flatness permanence only; no single declaration covers the simultaneous natural square with all three flatness conclusions. Existing DAG leaves supply its separate ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; Tag 05XC reduction to the flat case, expanded via Tag 05XB: the source flat locus is open and commutes with arbitrary parameter base change (scheme form Tag 05VK).; repair extraction, old steps 5–6: natural cartesian residue-fibre square and flatness of both horizontal arrows",
+   "via": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-residue-fibre-square",
+  "worker": "stage1",
+  "summary": "Reused the existing fibre-of-base-change, field-extension-flatness and flat-base-change Mathlib leaves. Wrote the simultaneous square and naturality argument explicitly using the universal property. No statement change and no new nodes. Repaired the null blueprint ancestor using the retained provenance chain ending at lem-sfb-admissible-direct-image.",
+  "blueprint": "Retains the recorded alteration-route prerequisite attached to det-thm-sf-ctf-stability-direct-images, proof (3), and the extracted old steps 5–6 of lem-sfb-relative-flat-locus-base-change; realizes precisely the final fibre square and flat-horizontal-maps sentence in Stacks 05VJ. The latest blueprint proof (3) now has a different higher-level direct-image argument; this item does not modify that route or assert an alteration theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-a98c57409",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-a98c57409 (reviewer sub-agent of L); spot-checked: PASS with no changes. One commit; the item statement is byte-identical to the live one (the live node was unsplit with an empty proof); no new nodes; no repair note, so the 2026-10-21 re-split rule does not apply. Sources: I read Stacks 05VJ at more-morphisms.tex ~4740-4756 (final cartesian X'_{s'}/X_s square, horizontal maps are base changes of the flat map Spec κ(s')→Spec κ(s)), 02V4 line 7381 and 01U9. The item's lack of hypotheses on p,q,f,h is correct, since 05VJ needs finite presentation only for the flat-locus part. Step 1: the Mathlib leaf lem-weil-pbc-fibre-of-base-change, applied to (p,h,t) and (q,h,t) with g'=π_X, gives a, b, both cartesian identifications and ι_s a=π_X ι'_t. Step 2 (elementary) checked line by line: f_s a=bF via the composites to Y (fπ_Xι'_t) and to K (eρ_X); the cartesian lift w from k_X u=eρ_Y v; Fw=v via b and ρ_Y; uniqueness via ρ_YF=ρ_X. Step 3: r is injective, so lem-pc-field-extension-flat makes e flat, and lem-weil-pbc-flat-morphism-base-change makes a, b flat (base change of e along k_X, k_Y). Edge cases: empty T or fibres, h=id, transcendental or inseparable residue extensions, non-reduced schemes. blueprint.from.node changed from null to det-thm-sf-ctf-stability-direct-images; that node exists and the sibling lem-sfb-pointwise-flatness-base-change carries the same value. same_as=[] confirmed by my statement search. No duplicate node, no SGA, no tool_uses (cross-unit cites are all Mathlib leaves)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatResidueFibreSquare",
+  "declaration": "AlgebraicGeometry.flat_residue_fibre_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatResidueFibreSquare.lean",
+  "statement": "theorem flat_residue_fibre_square {S X Y T : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (h : T ⟶ S) (hf : f ≫ q = p) (t : T) : ∃ (a : (pullback.snd p h).fiber t ⟶ p.fiber (h t)) (b : (pullback.snd q h).fiber t ⟶ q.fiber (h t)), (∃ α : (pullback.snd p h).fiber t ≅ pullback (p.fiberToSpecResidueField (h t)) (Spec.map (h.residueFieldMap t)), α.hom ≫ pullback.fst _ _ = a ∧ α.hom ≫ pullback.snd _ _ = (pullback.snd p h).fiberToSpecResidueField t) ∧ (∃ β : (pullback.snd q h).fiber t ≅ pullback (q.fiberToSpecResidueField (h t)) (Spec.map (h.residueFieldMap t)), β.hom ≫ pullback.fst _ _ = b ∧ β.hom ≫ pullback.snd _ _ = (pullback.snd q h).fiberToSpecResidueField t) ∧ a ≫ ((Over.pullback (S.fromSpecResidueField (h t))).map (Over.homMk f hf : Over.mk p ⟶ Over.mk q)).left = ((Over.pullback (T.fromSpecResidueField t)).map ((Over.pullback h).map (Over.homMk f hf : Over.mk p ⟶ Over.mk q))).left ≫ b ∧ IsPullback a (((Over.pullback (T.fromSpecResidueField t)).map ((Over.pullback h).map (Over.homMk f hf : Over.mk p ⟶ Over.mk q))).left) (((Over.pullback (S.fromSpecResidueField (h t))).map (Over.homMk f hf : Over.mk p ⟶ Over.mk q)).left) b ∧ a ≫ p.fiberι (h t) = (pullback.snd p h).fiberι t ≫ pullback.fst p h ∧ b ≫ q.fiberι (h t) = (pullback.snd q h).fiberι t ≫ pullback.fst q h ∧ Flat (Spec.map (h.residueFieldMap t)) ∧ Flat a ∧ Flat b",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfa898cc1",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Q117 lem-sfb-flat-residue-fibre-square dfa898cc: single sorry theorem flat_residue_fibre_square; node diff vs live = lean field only. Matches Stacks 05VJ final square + flatness sentence (no finiteness hyps needed, none imposed). f_T,(f_T)_t,f_s are Over.pullback maps = pullback.lift(fst≫f,snd), canonical; types defeq to Scheme.Hom.fiber. Existential a,b,α,β fully pinned (fiberι identity + α snd-projection fix both coordinates). IsPullback orientation, fiberι identities, Flat e/a/b correct; provable via isPullback_fiberToSpecResidueField_of_isPullback + Flat base change. Edge cases (empty T/fibres, id maps, arbitrary residue extensions) OK; no duplicate (baseChange_fiber differs); docstrings/source/blueprint id present; statement verbatim; report has both sections. No compile run (no change)."
+ }
+}

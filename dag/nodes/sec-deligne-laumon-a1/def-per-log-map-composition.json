@@ -1,0 +1,112 @@
+{
+ "id": "def-per-log-map-composition",
+ "kind": "definition",
+ "title": "Composition of relative-section logarithmic morphisms",
+ "status": "split",
+ "statement": "Let $X,Y,Z$ be arbitrary schemes [def-pc-scheme] with etale log structures $L,M,N$ and log morphisms $f:(X,L)\\to(Y,M)$ and $g:(Y,M)\\to(Z,N)$ in the relative-section sense of [def-trf-log-ideal-chart-presentation]. Define their composite as follows. Its underlying scheme morphism is $g\\circ f$. For an etale object $W\\to Z$, an etale object $V\\to X$, and $k:V\\to W$ with $W\\to Z$ composed with $k$ equal to $V\\to X\\to Y\\to Z$, form $U=Y\\times_ZW$ [def-pc-fibre-product], an object of the small etale site of $Y$ [def-weil-pbc-etale-site]. Let $l:V\\to U$ be the canonical map with components $V\\to X\\to Y$ and $k$. The composite relative section homomorphism is $N(W)\\xrightarrow{g^\\flat}M(U)\\xrightarrow{f^\\flat}L(V)$, using the second projection $U\\to W$ and $l$. Retain the naturality and structural compatibility inherited from these section maps. This is the canonical construction on all relative etale diagrams, without an etaleness, strictness, fineness, saturation or Noetherian assumption on $f$ or $g$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-log-ideal-chart-presentation",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, printed p.69 (log morphisms), and VIII 3.3.4(ii), printed p.107; the canonical relative-etale pullback construction already published in LogMorphismOperations."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of morphisms of logarithmic schemes via relative etale diagrams",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.LocallyRingedSpace.comp, AlgebraicGeometry.Scheme.Hom.comp_toLRSHom, AlgebraicGeometry.Scheme.Hom.comp_appLE, AlgebraicGeometry.Scheme.stalkMap_comp, AlgebraicGeometry.Scheme.comp_app, AlgebraicGeometry.Scheme.comp_appLE, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib results only; the exact construction is already published in Sheaf and is reused with existing: true. No definition node owns it; only a theorem node lists the helper declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of morphisms of logarithmic schemes on relative etale sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.comp_toLRSHom, AlgebraicGeometry.Scheme.comp_toLRSHom, AlgebraicGeometry.Scheme.Hom.comp_appTop, AlgebraicGeometry.Scheme.comp_appTop, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Hom.comp_toLRSHom_assoc, AlgebraicGeometry.Scheme.Hom.comp_base, AlgebraicGeometry.Scheme.comp_toLRSHom_assoc",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib results only; the exact construction is already published in Sheaf and is reused with existing: true. No definition node owns it; only a theorem node lists the helper declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLogMap|logDifferentialStructureRing|differentialSheaf",
+   "results": "0 hits: ; rg of lean/WeilConjectures and lean/Sheaf found only ChartLogSmoothDeformationCalculus and LogMorphismOperations. DAG declaration scan found only lem-sfb-chart-log-smooth-deformation-calculus and lem-sfb-log-morphism-operations. blueprint_refs.py search returned 0 blueprint nodes for logarithmic differential and log morphism composition.",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib results only; the exact construction is already published in Sheaf and is reused with existing: true. No definition node owns it; only a theorem node lists the helper declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-strict-log-differentials-pushout",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Composition of relative-section logarithmic morphisms used in the strict differential pushout statement; VI 1.1, printed p.69 (log morphisms), and VIII 3.3.4(ii), printed p.107; the canonical relative-etale pullback construction already published in LogMorphismOperations.",
+   "via": [
+    "lem-per-strict-log-differentials-pushout",
+    "lem-per-strict-smooth-log-differential-sequence",
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-kato-lattice-chart-realization",
+    "lem-per-trait-log-smooth-uniformizer-chart",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogMorphismOperations",
+  "declaration": "AlgebraicGeometry.EtaleLogMap.comp",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogMap.comp"
+  ],
+  "statement": "noncomputable def EtaleLogMap.comp {X Y Z : Scheme.{u}}\n    {L : EtaleLogStructure X} {M : EtaleLogStructure Y} {N : EtaleLogStructure Z}\n    (f : EtaleLogMap L M) (g : EtaleLogMap M N) : EtaleLogMap L N",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Return L H2 repair: definition ownership of existing helper declarations, without changing their published module or using its theorem. The statement specifies exactly the existing construction."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4a91250",
+  "group": "Q59",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4a91250",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L (H2). Lean files byte-identical to 94cd0ce71700; only DAG records changed. Item and def-per-etale-differential-pullback-presentation now cite new existing:true definition nodes def-per-log-differential-symbol-sheaf (12 plain defs in ChartLogSmoothDeformationCalculus) and def-per-log-map-composition (EtaleLogMap.comp in LogMorphismOperations) instead of the lem-sfb theorem nodes. Checked: all declarations are plain defs, none a .choose; statements verbatim in modules identical on live/side-live; TeX matches the code (six relations, least submodule, cokernel + sheafification; composition via pullback Y x_Z W); stmt_deps exist as definition nodes; no live owner collision or supersession; base stmt_deps kept. Statement re-read independently: A, B, C fixed by universal properties; u, v, j, iota, Phi pinned on generators; cokernel P, IsPushout and all three inverse formulas present; edge cases and universes ok. Advisories A1-A3 answered in the report. Minor: EtaleLogStructure owner reached only transitively; published docstrings keep the old blueprint tags (accepted existing:true pattern). No FIX, no compile."
+ }
+}

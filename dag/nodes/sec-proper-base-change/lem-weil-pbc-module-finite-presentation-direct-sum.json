@@ -14,7 +14,7 @@
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite direct sums of finite-presentation modules are finite presentation",
@@ -30,101 +30,77 @@
  ],
  "proof": [
   {
-   "text": "Notation and coproduct property of $\\mathcal O_U^{\\oplus n}$. For an open $U\\subseteq X$, $\\mathcal O_U$, $\\mathcal F|_U$ (sections $\\mathcal F(W)$, $W\\subseteq U$ open) and the free module $\\mathcal O_U^{\\oplus n}$ with basis sections $e_1,\\dots,e_n$ are as in [def-weil-pbc-module-finite-type-presentation]; on morphisms $(\\alpha|_U)_W=\\alpha_W$, so restriction is a functor sending zero maps to zero maps. Let $\\varepsilon_i:\\mathcal O_U=\\mathcal O_U^{\\oplus1}\\to\\mathcal O_U^{\\oplus n}$ be the map $e_1\\mapsto e_i$. By the definition node, for every $\\mathcal O_U$-module $\\mathcal M$ the $\\mathcal O_U$-linear maps $\\mathcal O_U^{\\oplus n}\\to\\mathcal M$ are exactly the maps $e_i\\mapsto s_i$ for arbitrary $s_1,\\dots,s_n\\in\\mathcal M(U)$ (with $s_i=f(e_i)$ recovered from the map $f$), and in the case $n=1$ the maps $\\mathcal O_U\\to\\mathcal M$ are exactly $e_1\\mapsto s$, $s\\in\\mathcal M(U)$. Hence a family $f_i:\\mathcal O_U\\to\\mathcal M$ ($f_i(e_1)=s_i$) has exactly one $f:\\mathcal O_U^{\\oplus n}\\to\\mathcal M$ with $f\\varepsilon_i=f_i$ for all $i$, namely $e_i\\mapsto s_i$: $(\\mathcal O_U^{\\oplus n},(\\varepsilon_i)_i)$ is a coproduct of $n$ copies of $\\mathcal O_U$ in $\\Mod(\\mathcal O_U)$, i.e. a colimit of the discrete diagram of $n$ copies [def-weil-pbc-category-colimit].",
+   "text": "Fix $x\\in X$. Choose presentations of $\\mathcal G$ on $U_1\\ni x$ and $\\mathcal H$ on $U_2\\ni x$, of ranks $(m_k,n_k)$, using [def-weil-pbc-module-finite-type-presentation](2). Put $U=U_1\\cap U_2$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof of filteredness at the direct-sum assertion; expanded using Modules Tag 01BN, definition-finite-presentation."
+   }
+  },
+  {
+   "text": "Restrict the two presentations to U using SheafOfModules.Presentation.map, the Mathlib realization of [lem-weil-pbc-colimit-functor-presentation-transport]. Mathlib overMapPushforwardAdj makes restriction a left adjoint, so it preserves colimits; overMapUnitIso identifies its image of the unit with the unit. The source-library Presentation.isFinite_map shows finiteness since the generator and relation index sets are unchanged. Transport the results along overFunctorMap to obtain finite global presentations of G|U and H|U.",
+   "uses": [
+    "lem-weil-pbc-colimit-functor-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof of filteredness at the direct-sum assertion; expanded using Modules Tag 01BN, definition-finite-presentation."
+   }
+  },
+  {
+   "text": "The restriction functor overFunctor is additive and preserves finite colimits (Mathlib restriction adjunction, also supplied by the existing moduleOverFunctor instances). Functor.mapBiprod gives (G ⊕ H)|U ≅ G|U ⊕ H|U. This is the canonical comparison from the biproduct universal property [def-weil-additive-category] in the module-sheaf categories [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof of filteredness at the direct-sum assertion; expanded using Modules Tag 01BN, definition-finite-presentation."
+   }
+  },
+  {
+   "text": "Apply the already proved source-library construction SheafOfModules.Presentation.sigma to the two restricted presentations, indexed by the universe-lifted walking pair. It constructs the coproduct presentation by taking coproducts of the generator and relation maps and using the cokernel universal property; the free-sheaf comparison identifies the generators and relations with the disjoint unions of the original index sets. Presentation.isFinite_sigma proves this presentation finite, since the index family and the supplied generator and relation sets are finite [def-weil-pbc-module-finite-type-presentation]. This directly realizes the block-diagonal construction without the separate unproved binary cokernel lemma.",
    "uses": [
     "def-weil-pbc-module-finite-type-presentation",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Definition 01BN (label definition-finite-presentation) and the description of maps out of O_U^{\\oplus n} by sections recorded in the definition node"
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof of filteredness at the direct-sum assertion; expanded using Modules Tag 01BN, definition-finite-presentation."
    }
   },
   {
-   "text": "Fix $x\\in X$. By the definition of finite presentation [def-weil-pbc-module-finite-type-presentation] applied to $\\mathcal G$ there are an open $U_1\\ni x$, integers $m_1,n_1$, an $\\mathcal O_{U_1}$-linear map $a_1:\\mathcal O_{U_1}^{\\oplus m_1}\\to\\mathcal O_{U_1}^{\\oplus n_1}$ and an isomorphism $\\mathcal G|_{U_1}\\cong\\operatorname{Coker}(a_1)$; applied to $\\mathcal H$ it gives $U_2\\ni x$, $m_2,n_2$, $a_2:\\mathcal O_{U_2}^{\\oplus m_2}\\to\\mathcal O_{U_2}^{\\oplus n_2}$ and $\\mathcal H|_{U_2}\\cong\\operatorname{Coker}(a_2)$. Put $U=U_1\\cap U_2$, an open neighbourhood of $x$ contained in both.",
+   "text": "Sigma.reindex removes the universe lift from the two-element index set, and biprod.isoCoprod identifies the resulting binary coproduct with G|U ⊕ H|U [def-weil-additive-category]. Presentation.ofIsIso transports the finite presentation across this isomorphism. Presentation.isFinitePresentation gives local finite presentation, then transport along the comparison of Step 3 and apply IsFinitePresentation.of_coversTop to the intersection cover. This proves the claim by [def-weil-pbc-module-finite-type-presentation], including empty spaces and zero generator or relation ranks.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Definition 01BN (label definition-finite-presentation)"
-   }
-  },
-  {
-   "text": "Restriction of the presentation of $\\mathcal G$ from $U_1$ to $U$ (Step 1). Apply [lem-weil-pbc-ringed-space-colimit-restriction] to the ringed space $(U_1,\\mathcal O_{U_1})$ and the open $j:U\\hookrightarrow U_1$. For $W\\subseteq U$ open, the inverse image $j^{-1}\\mathcal M$ there has sections $\\mathcal M(W)$: the presheaf inverse image is $\\varinjlim_{V\\supseteq W}\\mathcal M(V)$ over opens $V$ of $U_1$ containing $W$, and $V=W$ is the smallest of them, so the colimit is $\\mathcal M(W)$ and this presheaf is already a sheaf. Hence $j^{-1}$ is the restriction $(-)|_U$ of Step 0, $(\\mathcal G|_{U_1})|_U=\\mathcal G|_U$ and $\\mathcal O_{U_1}|_U=\\mathcal O_U$. (i) $\\mathcal O_{U_1}^{\\oplus n_1}$ with the maps $\\varepsilon_i$ is a coproduct of $n_1$ copies of $\\mathcal O_{U_1}$ (Step 0 on $U_1$), i.e. a colimit of a discrete diagram [def-weil-pbc-category-colimit]; by [lem-weil-pbc-ringed-space-colimit-restriction] its restriction with the restricted coprojections is a coproduct of $n_1$ copies of $\\mathcal O_U$, hence there is an isomorphism $\\nu:\\mathcal O_{U_1}^{\\oplus n_1}|_U\\cong\\mathcal O_U^{\\oplus n_1}$ compatible with the coprojections (two coproducts of one family are isomorphic by the unique map compatible with the coprojections); likewise $\\mu:\\mathcal O_{U_1}^{\\oplus m_1}|_U\\cong\\mathcal O_U^{\\oplus m_1}$. (ii) The cokernel $c_1:\\mathcal O_{U_1}^{\\oplus n_1}\\to\\operatorname{Coker}(a_1)$ is a colimit of the diagram formed by the parallel pair $a_1,0$; by the same lemma $c_1|_U$ is a colimit of the pair $a_1|_U,0|_U=0$, i.e. a cokernel of $a_1|_U$. (iii) Applying the functor $(-)|_U$ to the isomorphism $\\mathcal G|_{U_1}\\cong\\operatorname{Coker}(a_1)$ gives $\\mathcal G|_U\\cong\\operatorname{Coker}(a_1)|_U\\cong\\operatorname{Coker}(a_1|_U)$. (iv) Put $a_1'=\\nu\\circ a_1|_U\\circ\\mu^{-1}:\\mathcal O_U^{\\oplus m_1}\\to\\mathcal O_U^{\\oplus n_1}$; then $c_1|_U\\circ\\nu^{-1}$ is a cokernel of $a_1'$ (a map $f$ out of $\\mathcal O_U^{\\oplus n_1}$ kills $a_1'$ iff $f\\nu$ kills $a_1|_U$, as $\\mu$ is invertible), so $\\mathcal G|_U\\cong\\operatorname{Coker}(a_1')$. The same argument with $U_2$ gives $a_2':\\mathcal O_U^{\\oplus m_2}\\to\\mathcal O_U^{\\oplus n_2}$ and $\\mathcal H|_U\\cong\\operatorname{Coker}(a_2')$.",
-   "uses": [
-    "lem-weil-pbc-ringed-space-colimit-restriction",
-    "def-weil-pbc-category-colimit",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (label lemma-limits-colimits) (2): colimits in Mod(O_X); restriction to an open as in Sheaves, Section 009E"
-   }
-  },
-  {
-   "text": "$(\\mathcal G\\oplus\\mathcal H)|_U\\cong\\mathcal G|_U\\oplus\\mathcal H|_U$. In an additive category [def-weil-additive-category] a biproduct $A\\oplus B$ with $i_A,i_B,p_A,p_B$ is a coproduct of $A,B$ with coprojections $i_A,i_B$: for $f:A\\to T$, $g:B\\to T$ the map $h=fp_A+gp_B$ satisfies $hi_A=f$, $hi_B=g$ (from $p_Ai_A=\\mathrm{id}$, $p_Bi_A=0$ and symmetrically), and any $h'$ with $h'i_A=f$, $h'i_B=g$ equals $h'(i_Ap_A+i_Bp_B)=fp_A+gp_B$. So $(\\mathcal G\\oplus\\mathcal H,i_{\\mathcal G},i_{\\mathcal H})$ is a coproduct, i.e. a colimit of the discrete diagram $\\{\\mathcal G,\\mathcal H\\}$ [def-weil-pbc-category-colimit], in $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-ringed-space-colimit-restriction] (for $U\\subseteq X$, with $j^{-1}$ identified with $(-)|_U$ as in Step 2) $((\\mathcal G\\oplus\\mathcal H)|_U,i_{\\mathcal G}|_U,i_{\\mathcal H}|_U)$ is a coproduct of $\\mathcal G|_U,\\mathcal H|_U$ in $\\Mod(\\mathcal O_U)$. The biproduct $\\mathcal G|_U\\oplus\\mathcal H|_U$ in the abelian, hence additive, category $\\Mod(\\mathcal O_U)$ is another coproduct of the same pair, so the unique map between them compatible with the coprojections is an isomorphism.",
-   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
     "def-weil-additive-category",
-    "def-weil-pbc-category-colimit",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-ringed-space-colimit-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (label lemma-limits-colimits) (2): colimits in Mod(O_X); restriction to an open as in Sheaves, Section 009E"
-   }
-  },
-  {
-   "text": "Biproducts of cokernels. Let $\\mathcal A$ be an additive category [def-weil-additive-category], and for $k=1,2$ let $a_k:Q_k\\to P_k$ be a morphism with cokernel $c_k:P_k\\to C_k$ (so $c_ka_k=0$ and every $f:P_k\\to T$ with $fa_k=0$ is $gc_k$ for a unique $g:C_k\\to T$; in particular $c_k$ is an epimorphism). Put $a=i_{P_1}a_1p_{Q_1}+i_{P_2}a_2p_{Q_2}:Q_1\\oplus Q_2\\to P_1\\oplus P_2$ and $c=i_{C_1}c_1p_{P_1}+i_{C_2}c_2p_{P_2}:P_1\\oplus P_2\\to C_1\\oplus C_2$. By the biproduct identities $a\\,i_{Q_k}=i_{P_k}a_k$, $c\\,i_{P_k}=i_{C_k}c_k$ and $p_{P_l}i_{P_k}=\\delta_{kl}$. Claim: $c$ is a cokernel of $a$. (i) $ca=i_{C_1}c_1a_1p_{Q_1}+i_{C_2}c_2a_2p_{Q_2}=0$. (ii) Let $f:P_1\\oplus P_2\\to T$ with $fa=0$. Then $(fi_{P_k})a_k=f\\,a\\,i_{Q_k}=0$, so $fi_{P_k}=g_kc_k$ for a unique $g_k:C_k\\to T$. Put $g=g_1p_{C_1}+g_2p_{C_2}$; then $gc=g_1c_1p_{P_1}+g_2c_2p_{P_2}=fi_{P_1}p_{P_1}+fi_{P_2}p_{P_2}=f$. (iii) If also $g'c=f$, then $g'i_{C_k}c_k=g'c\\,i_{P_k}=fi_{P_k}=g_kc_k$, so $g'i_{C_k}=g_k$ as $c_k$ is an epimorphism, and $g'=g'(i_{C_1}p_{C_1}+i_{C_2}p_{C_2})=g$. Hence $C_1\\oplus C_2$ with $c$ is a cokernel of $a$, so $\\operatorname{Coker}(a)\\cong C_1\\oplus C_2$.",
-   "uses": [
-    "def-weil-additive-category"
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Agent-written argument for the claim used in Properties, Lemma 01PJ proof; the categories are additive by Modules, Lemma 01AG (label lemma-abelian)"
-   }
-  },
-  {
-   "text": "Rank bookkeeping. In $\\Mod(\\mathcal O_U)$, $\\mathcal O_U^{\\oplus m_1}\\oplus\\mathcal O_U^{\\oplus m_2}$ with the $m_1+m_2$ composites $i_1\\circ\\varepsilon_j$, $i_2\\circ\\varepsilon_j$ is a coproduct of $m_1+m_2$ copies of $\\mathcal O_U$: a family of maps out of the copies is first assembled on each $\\mathcal O_U^{\\oplus m_k}$ (a coproduct by Step 0) and then on the biproduct of the two (a coproduct by Step 3), each time uniquely. Hence there is an isomorphism $\\sigma:\\mathcal O_U^{\\oplus m_1}\\oplus\\mathcal O_U^{\\oplus m_2}\\cong\\mathcal O_U^{\\oplus(m_1+m_2)}$, and likewise $\\tau:\\mathcal O_U^{\\oplus n_1}\\oplus\\mathcal O_U^{\\oplus n_2}\\cong\\mathcal O_U^{\\oplus(n_1+n_2)}$. For $a'=a_1'\\oplus a_2'$ as in Step 4, put $b=\\tau a'\\sigma^{-1}:\\mathcal O_U^{\\oplus(m_1+m_2)}\\to\\mathcal O_U^{\\oplus(n_1+n_2)}$, an $\\mathcal O_U$-linear map; as in Step 2 (iv), composing with isomorphisms on both sides does not change the cokernel up to isomorphism: $\\operatorname{Coker}(b)\\cong\\operatorname{Coker}(a')$.",
-   "uses": [
-    "def-weil-additive-category",
-    "def-weil-pbc-module-finite-type-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Agent-written argument for the claim used in Properties, Lemma 01PJ proof; the categories are additive by Modules, Lemma 01AG (label lemma-abelian)"
-   }
-  },
-  {
-   "text": "Conclusion. In the abelian, hence additive, category $\\Mod(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category], Step 3, Step 2 (with the biproduct of the two isomorphisms $\\mathcal G|_U\\cong\\operatorname{Coker}(a_1')$, $\\mathcal H|_U\\cong\\operatorname{Coker}(a_2')$, which is an isomorphism with inverse the biproduct of the inverses), Step 4 (applied to $a_1',a_2'$; cokernels are unique up to isomorphism) and Step 5 give\n$$(\\mathcal G\\oplus\\mathcal H)|_U\\cong\\mathcal G|_U\\oplus\\mathcal H|_U\\cong\\operatorname{Coker}(a_1')\\oplus\\operatorname{Coker}(a_2')\\cong\\operatorname{Coker}(a_1'\\oplus a_2')\\cong\\operatorname{Coker}(b).$$\nSo $x$ has an open neighbourhood $U$ on which $\\mathcal G\\oplus\\mathcal H$ is the cokernel of a map $\\mathcal O_U^{\\oplus(m_1+m_2)}\\to\\mathcal O_U^{\\oplus(n_1+n_2)}$. As $x\\in X$ was arbitrary, $\\mathcal G\\oplus\\mathcal H$ is of finite presentation.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Definition 01BN (label definition-finite-presentation)"
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof of filteredness at the direct-sum assertion; expanded using Modules Tag 01BN, definition-finite-presentation."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-colimit-functor-presentation-transport",
+  "def-weil-additive-category",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-ringed-space-colimit-restriction",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-additive-category"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Definition 01BN (label definition-finite-presentation) and Lemma 01AH (label lemma-limits-colimits); the claim is asserted without proof in Properties, Lemma 01PJ proof (properties.tex); the steps were written by the agent"
+  "place": "Agent-written expansion of the direct-sum assertion in Properties Tag 01PJ, using Modules Tag 01BN; Lean assembly by V1, 2026-10-23. Uses the already proved source-library Presentation.sigma/isFinite_sigma to assemble coproduct presentations, Presentation.map for restriction, and locality. Mathlib restriction adjunctions supply preservation directly."
  },
  "mathlib_searches": [
   {
@@ -175,6 +151,41 @@
    "results": "only Quasicoherent.lean:273 (abbrev isFinitePresentation) and :411 (instance IsClosedUnderIsomorphisms); no closure under binary biproducts or finite coproducts",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|isFinitePresentation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; source read: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:263-285. No sheaf biproduct-closure declaration. Module.FinitePresentation.prod concerns modules over a single ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "biproduct of finitely presented sheaves of modules is finitely presented",
+   "results": "SheafOfModules.isFinitePresentation, Module.FinitePresentation.prod, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.mk, CategoryTheory.Abelian.hasFiniteBiproducts, SheafOfModules.IsFinitePresentation, CategoryTheory.Abelian.hasBinaryBiproducts; source read: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:263-285. No sheaf biproduct-closure declaration. Module.FinitePresentation.prod concerns modules over a single ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk; source read: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:263-285. No sheaf biproduct-closure declaration. Module.FinitePresentation.prod concerns modules over a single ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The binary direct sum of two finitely presented sheaves of modules on a ringed space is finitely presented",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; source read: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:263-285. No sheaf biproduct-closure declaration. Module.FinitePresentation.prod concerns modules over a single ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation is closed under finite coproducts in the category of module sheaves",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, PresheafOfModules.Finite.hasFiniteColimits, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData; source read: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:263-285. No sheaf biproduct-closure declaration. Module.FinitePresentation.prod concerns modules over a single ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -185,20 +196,34 @@
   "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-module-finite-presentation-direct-sum",
   "worker": "stage1",
-  "summary": "The source (Properties 01PJ proof) asserts the claim without proof; the proof is agent-written from Modules 01BN and 01AH. Statement now cites def-weil-pbc-module-finite-type-presentation (created meanwhile by the sibling worker; same 01BN cokernel form) and def-weil-additive-category for the biproduct (both added to stmt_deps). Seven steps: the coproduct property of O_U^{⊕n} from the definition node; choose presentations on a common open U = U_1 ∩ U_2; restrict them to U via lem-weil-pbc-ringed-space-colimit-restriction (restriction preserves the coproducts O^{⊕n} and the cokernels, both colimits); (G⊕H)|_U ≅ G|_U ⊕ H|_U by the same lemma (biproducts are coproducts); the biproduct of two cokernels is the cokernel of the biproduct map (written out in an additive category); rank bookkeeping O^{⊕m_1}⊕O^{⊕m_2} ≅ O^{⊕(m_1+m_2)}; conclusion. No new node. Mathlib re-searched with the three kinds: SheafOfModules.IsFinitePresentation exists, no biproduct closure."
+  "summary": "Q46 extracted two independent reusable ingredients from the old proof: colimit-functor transport of supplied presentations (Mathlib leaf) and the generic block-diagonal cokernel cofork (statement-only unsplit). The five-step proof applies them to common open neighbourhoods and performs rank bookkeeping. Statement and maintainer metadata retained; current dependency statements checked with verbatim citations and edge cases. The proof is under 3000 characters.",
+  "blueprint": "Nearest blueprint ancestor lemma-weil-pbc-h1-constructible-representation, constructible finite-pushforward reduction; this auxiliary fact serves the 01PJ filtered finite-presentation construction reached through the recorded via chain. Current main-20261015 ancestor proof, finite-pushforward paragraph, is compatible with the retained construction. Whole-blueprint searches for finite presentation, finitely presented, and biproduct found no equivalent node."
  },
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "by": "L",
-  "result": "accepted",
-  "note": "7 steps (agent proof; Stacks 01PJ asserts it without proof): presentations on U_1, U_2 restricted to U = U_1 cap U_2 (restriction preserves colimits, existing node); the restriction of a biproduct; the biproduct of two cokernels is the cokernel of the biproduct map (written out in an additive category); rank bookkeeping. Statement reworded to cite def-weil-pbc-module-finite-type-presentation and the biproduct. No new nodes."
+  "reviewer": "NT-cc-Q46-eb8fd003f",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-eb8fd003f (reviewer sub-agent of L); spot-checked: Re-split of an 8339-character, 7-step proof under the human's 2026-10-21 note (repair note released 2026-10-22); the live item is still the base version. I mapped every old step to its new place. Old step 3 (restricting the presentation) is now covered by the new Mathlib leaf lem-weil-pbc-colimit-functor-presentation-transport together with the existing lem-weil-pbc-ringed-space-colimit-restriction(1). I checked the leaf against Mathlib Quasicoherent.lean: presentationOfIsCokernelFree l.114, Presentation.map l.180 (PreservesColimitsOfSize.{u,u}, η : unit S ≅ F(unit R), index sets kept), mapRelations l.159 (gives F(a) conjugated), map_π_eq l.189, isColimit l.123. The O^n-versus-free identification is already part of the def node's Mathlib match, so the leaf hides no comparison theorem. Old step 5 is now the new unsplit node lem-weil-pbc-biproduct-cokernel-cofork. Its statement is true: I checked existence and uniqueness, and the edge cases a_k=0, a_k an iso, and zero objects. No Mathlib match; my own grep of biprod/cokernel found nothing. lem-sfb-arrow-exact-colimits generalizes it for abelian categories but is not a one-line citation (advisory only). The two nodes are of comparable size, and neither restates the item. Old steps 1, 2, 4, 6 and 7 stay as elementary assembly steps in the item. Fixes (3; D/E5): (1) step 5 had cut old steps 1/6 to one vague sentence; I restored the argument that O_U^r is a coproduct of copies of O_U (from the def node's basis-section description, initial for r=0), so O^r⊕O^s ≅ O^{r+s} compatibly with coprojections, and added def-weil-pbc-category-colimit to the step's uses; (2) step 3 had replaced the proof that a biproduct is a coproduct with 'by the biproduct identities'; I restored the computation; (3) step 2 composed the cokernel with the chosen iso where its inverse is needed; corrected. Proof is now 2866 characters; proof_deps unchanged; only `proof` changed. Source: Stacks 01PJ properties.tex l.3089-3095 states the closure without proof; I also read 01BN, 01BQ and 0104. All citations are definitions or same-unit nodes; no SGA; no cycle; statement unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FinitePresentationBiprod",
@@ -217,5 +242,15 @@
   "group": "H1",
   "result": "pass",
   "note": "X:RingedSpace.{u} = ringed space; SheafOfModules.{u} (moduleRings X) = Mod(O_X) (Mathlib record of def-weil-sheaf-of-modules-category, instAbelian); [G/H.IsFinitePresentation] = 01BN local cokernel presentation (Mathlib record of def-weil-pbc-module-finite-type-presentation; inferInstance fails, not hollow); G ⊞ H = binary biproduct (HasFiniteBiproducts record); conclusion (G ⊞ H).IsFinitePresentation; universes all u, QuasicoherentData index universe tied to u, not vacuous; #check confirms AlgebraicGeometry.moduleRings; no Mathlib closure lemma"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261023T132000-L-2180057",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

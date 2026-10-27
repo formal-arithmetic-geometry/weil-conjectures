@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-section-tensor-comparison",
+ "kind": "definition",
+ "title": "Projection tensor comparison for a specified section and unit",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and let $D(X)$ denote the unbounded derived category of its internal modules [sk-def-sfb-module-derived-pushpull], equipped with the fixed native tensor [def-sfb-projective-diagonal-pullback]. For arbitrary schemes $X,S$, arrows $g:X\\to S$, $p:S\\to X$, a specified natural isomorphism $s:Lg^*Lp^*\\simeq\\mathrm{id}_{D(X)}$, an object $U\\in D(X)$ and an isomorphism $e:U\\simeq\\mathbf1_{D(X)}$, define $c_M:Lp^*M\\otimes Rg_*U\\to Rg_*M$ by the fixed canonical projection [def-sfb-projective-diagonal-composition] followed by $Rg_*((s_M\\otimes e);\\rho_M)$. This is explicit data for every $M\\in D(X)$; no invertibility of $c_M$ is asserted and no geometric section equation is required beyond the supplied comparison $s$.",
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.md",
+  "place": "clause 1, parametric form of its projection/section/unit composite; naturality in the final sentence of the companion proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical projection map followed by tensor of a natural section comparison and unit isomorphism",
+   "results": "8 hits including CategoryTheory.unitOfTensorIsoUnit, HomologicalComplex.rightUnitor and algebraic tensor maps; none is the internal derived-module composite.",
+   "date": "2026-10-26",
+   "verdict": "No exact construction in Mathlib; compose existing project maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "One hit in Mathlib.CategoryTheory.Monoidal.Category: composition of tensor morphisms. Used in the private naturality proof, but not this construction.",
+   "date": "2026-10-26",
+   "verdict": "Generic tensor identity only; no exact construction."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionTensorMap|projectionMap.*naturality (Mathlib through msearch.py); sectionTensorMap and def-sfb-section-tensor-comparison in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py search section tensor comparison",
+   "results": "Mathlib: zero hits. Project results are unrelated moduleCup_sectionTensorMap declarations. No rational-projective-line sectionTensorMap or matching blueprint node.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; factor the existing diagonal composite at arbitrary schemes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1DiagonalTensor",
+  "date": "2026-10-26",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "clause 1: the canonical projection followed by the section comparison and coefficient unitor; final naturality paragraph of the proof",
+   "via": [
+    "def-sfb-internal-diagonal-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1DiagonalTensor",
+  "file": "lean/Sheaf/Paper/RationalP1DiagonalTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.sectionTensorMap",
+  "statement": "def sectionTensorMap {X S : Scheme.{u}} (g : X ⟶ S) (p : S ⟶ X)\n    (s : moduleObjectDerivedPullback Λ p ⋙ moduleObjectDerivedPullback Λ g ≅\n      𝟭 (DerivedCategory (Modules Λ X)))\n    (U : DerivedCategory (Modules Λ X)) (e : U ≅ 𝟙_ (DerivedCategory (Modules Λ X)))\n    (M : DerivedCategory (Modules Λ X)) :\n    (moduleObjectDerivedPullback Λ p).obj M ⊗\n      (moduleObjectDerivedPushforward Λ g).obj U ⟶\n        (moduleObjectDerivedPushforward Λ g).obj M",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T071447-L-3934752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T181434-L-3461775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.RationalP1.diagonalTensorMap_isIso"
+  ],
+  "sorry_after": []
+ }
+}

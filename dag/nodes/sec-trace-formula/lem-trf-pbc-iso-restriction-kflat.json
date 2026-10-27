@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-pbc-iso-restriction-kflat",
+ "kind": "statement",
+ "title": "Restriction along a coefficient isomorphism preserves K-flatness",
+ "statement": "Let $T$ be a scheme and let $R,S$ be sheaves of commutative rings on its pro-etale site [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let $e:R\\simeq S$ be a ring-sheaf isomorphism. For every K-flat cochain complex $P$ of $S$-module sheaves [def-pc-kflat-complex], termwise restriction of scalars along $e$ [def-pc-sheaf-restrict-scalars] is a K-flat cochain complex of $R$-modules. There is no boundedness or termwise-flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN, definition-K-flat; Tag 0G7E, scalar-extension preservation; recorded step 7 of lem-trf-point-quotient-tower-homotopy, coefficient transport along the completed ring isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply K-flat preservation for ordinary scalar extension to the inverse ring-sheaf isomorphism e.inv, using the published reductionChange object and morphism identifications. This gives a K-flat complex over R.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise restriction compositors and identity restriction isomorphism make restriction along e.hom and e.inv inverse equivalences. In particular restriction along e.hom is left adjoint to restriction along e.inv. Ordinary extension along e.inv has this same right adjoint, so uniqueness of left adjoints gives a natural isomorphism between it and restriction along e.hom. Map this to cochain complexes and tensor with every acyclic test complex; the resulting isomorphism transports acyclicity. This includes the identity isomorphism and zero complex.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN, definition-K-flat; Tag 0G7E, scalar-extension preservation; recorded step 7 of lem-trf-point-quotient-tower-homotopy, coefficient transport along the completed ring isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring along an isomorphism preserves K flat complexes and identifies tensor quotient towers",
+   "results": "OK 8 hits, including RingHom.Flat.respectsIso, RingHom.FaithfullyFlat.respectsIso, Module.Flat.baseChange and Module.Flat.of_linearEquiv. These concern ordinary flat modules, not K-flat sheaf complexes or normalized strict quotient diagrams.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "OK 0 hits; unknown identifier 'Functor.mapHomologicalComplex'. Local Mathlib search supplies NatIso.mapHomologicalComplex in Algebra/Homology/Additive.lean, but no coefficient-transport statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[kK][fF]lat|[kK][fF]lat.*restrictScalars",
+   "results": "OK 0 hits. Local source search found the scalar-extension ring-isomorphism theorem and K-flat preservation under scalar extension; these give the proof route for restriction along an isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficient ring along an isomorphism preserves K flat complexes and identifies tensor quotient towers",
+   "results": "OK 8 hits: RingHom.Flat.respectsIso, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.respectsIso, Module.FaithfullyFlat.instTensorProduct, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, KaehlerDifferential.mapBaseChange.congr_simp. These supply generic flatness, localization or inverse sequence infrastructure, not the completed coefficient sheaf tower construction and its normalized whole-diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointQuotientTowerHomotopy",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "Clause (3), coherent-source identification: Restriction along a coefficient isomorphism preserves K-flatness",
+   "via": [
+    "lem-trf-point-quotient-tower-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcIsoRestrictionKFlat",
+  "file": "lean/Sheaf/Paper/PbcIsoRestrictionKFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIsoRestriction_isKFlat",
+  "statement": "theorem pbcIsoRestriction_isKFlat (T : Scheme.{u})\n    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S)\n    (P : CochainComplex (pbcModules T S) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := S) P) :\n    CochainComplex.IsKFlatIndependentCoefficients (R := R)\n      (((pbcRestrict e.hom).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "independent cc review: E4 PointQuotientTowerHomotopy f148: verbatim extraction of 17 defs to PointQuotientTowerData + proved coherentSource (via proved pbcIsoRestriction_isKFlat, published towerCounit_isIso, new true hole strictPresentationComparison) against lem-trf-point-quotient-tower-homotopy and the 4 new nodes; sandbox compile of all 5 modules OK, axioms clean apart from sorryAx from the new hole; item 0 importers"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sp-field-scalar-ordinary-coordinates",
+ "kind": "statement",
+ "title": "Finite-basis coordinates and balanced ordinary scalar composition",
+ "statement": "Let C be a small category with topology J and ring sheaves R,S,U. For finite-free scalar arrows [def-sp-field-scalar-strict-limit-data], any finite basis theta of S over R determines a natural iso from scalar extension followed by restriction to the finite power functor on R-module sheaves. On pure sections [def-sfb-scalar-inverse-image-normalization] its ith coordinate is the ith coordinate of s under theta times m. Its inverse is the finite sum of the basis vectors tensored with the given module coordinates. Composite finite-free scalar arrows are finite free, and ordinary balanced scalar extension [def-weil-pbc-ringed-tensor-section-calculus] has the associator z tensor (s tensor x) mapping to b(s)z tensor x and inverse inserting one. The induced tower associator is levelwise that associator [def-sbc-strict-projection-tower-data]. The identity arrow is finite free and has multiplication unitor r tensor x mapping to rx, also levelwise on towers. No derived functor or Roos comparison is part of this statement.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), finite basis, ordinary balanced associator and identity calculations"
+ },
+ "stmt_deps": [
+  "def-sp-field-scalar-strict-limit-data",
+  "def-sfb-scalar-inverse-image-normalization",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-sbc-strict-projection-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the S factor in a pure tensor in the chosen finite basis. The coordinate map is the basis coordinate of s times m. The inverse sums basis vectors tensored with the module coordinates. Both composites are identities by the basis equations and balancing. Restriction compatibility descends these maps through module sheafification. This also includes rank zero.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-sfb-scalar-inverse-image-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable finite-free arrows, the products of the two basis vectors form a finite basis over the first ring. The balanced reassociation sends z tensor (s tensor x) to b(s)z tensor x and its inverse inserts one. The balancing relations give both inverse identities. Apply this natural iso termwise to define AT. For an identity arrow take the rank-one basis and multiplication unitor with inverse insertion of one; apply it termwise to define UT.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-sfb-scalar-inverse-image-normalization",
+    "def-sbc-strict-projection-tower-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-sfb-scalar-inverse-image-normalization",
+  "def-sbc-strict-projection-tower-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), finite basis, ordinary balanced associator and identity calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a finite free sheaf of algebras is the finite power functor after restriction of scalars",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.freeFunctor, Algebra.TensorProduct.piScalarRight and presheaf change-of-rings constructions. No finite-basis sheaf tensor comparison with the displayed normalization.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; existing scalar and product APIs supply ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact countable products of sheaves of modules on a small site equivalent to a scheme pro etale site",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, Condensed.hasExactLimitsOfShape, and condensed module constructions. No arbitrary coefficient sheaf on a specified small pro-etale model.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the existing project pro-etale product theorem is the geometric ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "countableProducts_exact|tensorFunctor|scalarReassoc",
+   "results": "msearch Mathlib grep: 0 hits. Project rg finds scalarReassoc_normalized in ScalarInverseImageTowerDiagram and countableProducts_exact in ProEtaleCountableProductsExact.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the project tensor and geometric APIs; no Mathlib theorem states these interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldScalarStrictLimit",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1), finite basis, ordinary balanced associator and identity calculations",
+   "via": [
+    "lem-sp-field-scalar-strict-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldScalarOrdinaryCoordinates",
+  "file": "lean/Sheaf/Paper/FieldScalarOrdinaryCoordinates.lean",
+  "declaration": "SheafOfModules.fieldScalarOrdinaryCoordinates",
+  "statement": "theorem fieldScalarOrdinaryCoordinates :\n    (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S)\n          (d : ℕ) (theta : (∏ᶜ fun _ : Fin d ↦ unit (ringSheaf R)) ≅\n            (restriction a.val).obj (unit (ringSheaf S))),\n          ∃ phi : tensorFunctor a.val ⋙ restriction a.val ≅\n              Functor.const (Discrete (Fin d)) ⋙ lim,\n            (∀ (M : SheafOfModules.{u} (ringSheaf R)) (V : Cᵒᵖ)\n              (s : S.obj.obj V) (m : M.val.obj V) (i : Fin d),\n              (phi.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V\n                  (scalarPure a.val M V s m) =\n                (theta.inv ≫ Pi.π (fun _ : Fin d ↦ unit (ringSheaf R)) i).val.app V s\n                  • m) ∧\n            (∀ (M : SheafOfModules.{u} (ringSheaf R)) (V : Cᵒᵖ)\n              (x : ((Functor.const (Discrete (Fin d)) ⋙ lim).obj M).val.obj V),\n              (phi.inv.app M).val.app V x =\n                ∑ i : Fin d, scalarPure a.val M V\n                  ((Pi.lift (fun j : Fin d ↦ if i = j then 𝟙 _ else 0) ≫ theta.hom).val.app V\n                    (@id ((unit (ringSheaf R)).val.obj V) (1 : R.obj.obj V)))\n                  ((Pi.π (fun _ : Fin d ↦ M) i).val.app V x))) ∧\n    (∀ {R S U : Sheaf J CommRingCat.{u}}\n          (a : FiniteFreeScalarArrow J R S) (b : FiniteFreeScalarArrow J S U),\n          ∃ (ab : FiniteFreeScalarArrow J R U) (_hab : ab.val = a.val ≫ b.val)\n            (A : tensorFunctor a.val ⋙ tensorFunctor b.val ≅ tensorFunctor ab.val)\n            (AT : projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val) ⋙\n                projectionPost (I := ℕᵒᵖ) (tensorFunctor b.val) ≅\n                  projectionPost (I := ℕᵒᵖ) (tensorFunctor ab.val)),\n            (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ)\n              (s : S.obj.obj V) (z : U.obj.obj V) (x : M.val.obj V),\n              (A.hom.app M).val.app V\n                  (scalarPure b.val ((tensorFunctor a.val).obj M) V z\n                    (scalarPure a.val M V s x)) =\n                scalarPure ab.val M V (b.val.hom.app V s * z) x) ∧\n            (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ)\n              (z : U.obj.obj V) (x : M.val.obj V),\n              (A.inv.app M).val.app V (scalarPure ab.val M V z x) =\n                scalarPure b.val ((tensorFunctor a.val).obj M) V z\n                  (scalarPure a.val M V 1 x)) ∧\n            (∀ (X : ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) (n : ℕᵒᵖ),\n              (AT.hom.app X).app n = A.hom.app (X.obj n))) ∧\n    (∀ R : Sheaf J CommRingCat.{u},\n          ∃ (a : FiniteFreeScalarArrow J R R) (_ha : a.val = 𝟙 R)\n            (U : tensorFunctor a.val ≅ 𝟭 (ringedSiteModules.{u} (ringSheaf R)))\n            (UT : projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val) ≅\n              𝟭 (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R))),\n            (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ)\n              (r : R.obj.obj V) (x : M.val.obj V),\n              (U.hom.app M).val.app V (scalarPure a.val M V r x) = r • x) ∧\n            (∀ (X : ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) (n : ℕᵒᵖ),\n              (UT.hom.app X).app n = U.hom.app (X.obj n)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "independent cc review: delivered FieldScalarStrictLimit theorem statement vs clone (identical); FieldScalarStrictLimitData vs the clone's interface block (verbatim); the two sorry statements vs their nodes and the item's needs; node proof_deps vs Lean imports/uses; #print axioms on a scratch build"
+ }
+}

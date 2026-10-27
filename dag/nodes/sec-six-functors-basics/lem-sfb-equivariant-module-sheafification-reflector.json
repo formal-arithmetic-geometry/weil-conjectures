@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-equivariant-module-sheafification-reflector",
+ "kind": "statement",
+ "title": "Equivariant module sheafification as a reflector",
+ "statement": "Fix a universe $\\mathcal V$ [def-weil-size-convention]. Let $(C,J)$ be a $\\mathcal V$-small site with finite limits [def-weil-pbc-sites-and-cohomology], and let $K:C^{\\mathrm{op}}\\to\\mathrm{Grp}$ be a sheaf of groups with $\\mathcal V$-small values. Let $R$ be a sheaf of commutative unital rings on $C$ with $\\mathcal V$-small values and trivial $K$-action. Let $P$ be a presheaf of $R$-modules [def-weil-presheaf-modules-sheafification] with operations $K(U)\\times P(U)\\to P(U)$ natural in $U$, satisfying the left group-action laws and $R(U)$-linearity in $P(U)$. Morphisms of such objects mean natural componentwise $R(U)$-linear maps commuting with the actions. Put $A=P^\\#$, the ordinary module sheafification on $C$, with its unit $\\eta_P:P\\to A$.\n\nThere is a unique natural $K$-action on $A$ making $\\eta_P$ equivariant. This action satisfies the identity, associativity, additivity and scalar-linearity laws and makes $A$ a $K$-equivariant $R$-module sheaf [def-weil-sheaf-of-modules-category]. For every equivariant $R$-module sheaf $Q$ and every equivariant presheaf map $v:P\\to Q$, there is a unique equivariant $R$-linear sheaf map $v^\\#:A\\to Q$ with $v^\\#\\eta_P=v$. These extensions define a functor from equivariant presheaves to equivariant sheaves, left adjoint to their inclusion. After forgetting the actions, the functor and its unit are ordinary module sheafification and its unit, naturally in $P$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules, supplies ordinary module sheafification, not the equivariant assertion. The extension to an internal group action and its reflector is agent-formulated for paragraph (3) of the blueprint direct-images proof, returned proof steps 7--8; exact external reference WANTED. Additional background: sites.tex lemma-sheafification-exact and section-sheaves-algebraic-structures."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary module sheafification [lem-pc-sites-module-sheafification-interface], whose underlying abelian sheafification unit is linear and locally surjective. Forgetting abelian groups preserves sheafification [lem-pc-sites-sheafification-underlying-sets], so the underlying set unit η is a J-local equivalence. Finite-product preservation [lem-weil-pbc-sheafification-sets-exact] implies that id_K × η is a J-local equivalence: conjugate its image under set sheafification by the product comparison isomorphisms. This works even when K is merely a group presheaf. Maps from its codomain to a set sheaf therefore factor uniquely across this product unit [def-weil-pbc-sheafification].",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; Tag 00WH, proposition-sheafification-adjoint; Tag 00YR, section-sheaves-algebraic-structures. Agent extension to the internal equivariant module assertion."
+   }
+  },
+  {
+   "text": "Form the natural map K × |P| → |P| given by the original action, followed by η. The bijection on maps into the sheaf |P^#| supplied by the J-local equivalence id_K × η uniquely extends it to a natural map β:K × |P^#| → |P^#| [def-weil-pbc-sheafification]. Its factorization equation says β(g,η(p))=η(g·p).",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; Tag 00WH, proposition-sheafification-adjoint; Tag 00YR, section-sheaves-algebraic-structures. Agent extension to the internal equivariant module assertion."
+   }
+  },
+  {
+   "text": "Check the group and linearity equations locally using the locally surjective module sheafification unit from [lem-pc-sites-module-sheafification-interface]. For a section p of P^#, its image sieve is covering. Restrict there and choose q with η(q)=p restricted. Naturality of β and the factorization equation reduce identity, multiplication and scalar-linearity to their laws on P; η is linear. For additivity first lift p locally, then lift the restriction of the second section on a further cover. Separatedness of P^# proves each equality from these local equalities. Bundle β as a monoid hom into linear endomorphisms, obtaining LinearAction. Any natural competing action agreeing with η is equal to β by exactly the same local-preimage and separatedness argument. No commutativity of the group is used.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; Tag 00WH, proposition-sheafification-adjoint; Tag 00YR, section-sheaves-algebraic-structures. Agent extension to the internal equivariant module assertion."
+   }
+  },
+  {
+   "text": "Use [lem-pc-sites-module-sheafification-interface] to extend an equivariant map v:P→Q uniquely to an ordinary linear sheaf morphism w:P^#→Q. To check equivariance at p, locally lift p along η. Naturality of w and both actions identifies the restricted equivariance equation with the original equivariance of v. Separatedness of Q proves it globally. Ordinary uniqueness gives uniqueness among equivariant extensions.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; Tag 00WH, proposition-sheafification-adjoint; Tag 00YR, section-sheaves-algebraic-structures. Agent extension to the internal equivariant module assertion."
+   }
+  },
+  {
+   "text": "Package each P^# with the constructed action and its equivariant unit. Precomposition with this unit is bijective on equivariant maps into any equivariant sheaf, by step 4, and natural in the target by associativity. Mathlib Adjunction.leftAdjointOfEquiv and Adjunction.adjunctionOfEquivLeft give the functor and adjunction. The adjunction unit is the constructed unit. The underlying objects are definitionally ordinary module sheafification. Naturality of the adjunction unit and ordinary sheafification uniqueness [lem-pc-sites-module-sheafification-interface] show that the maps are ordinary module sheafification as well. The resulting identity-component comparison is natural and preserves the unit.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules and following adjunction discussion; agent equivariant extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "B2 Lean proof: extend the underlying set action across the product local equivalence (00WJ, 00WH, 00YR), verify laws and equivariance by local preimages and separatedness, then construct the adjunction from natural hom-set bijections (03CY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]ction.*[Ss]heafif|[Ss]heafif.*[Aa]ction|[Ee]quivariant.*[Ss]heafif",
+   "results": "{\"t\": \"2026-10-22T05:59:21Z\", \"tool\": \"grep\", \"query\": \"[Aa]ction.*[Ss]heafif|[Ss]heafif.*[Aa]ction|[Ee]quivariant.*[Ss]heafif\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"2ac440814585cbad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and its adjunction do not extend an internal group-sheaf action or prove equivariance of its universal factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T05:59:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafification\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and its adjunction do not extend an internal group-sheaf action or prove equivariance of its universal factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification extends a linear action of an internal group and every equivariant map to a sheaf extends equivariantly through the sheafification unit",
+   "results": "{\"t\": \"2026-10-22T05:59:21Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification extends a linear action of an internal group and every equivariant map to a sheaf extends equivariantly through the sheafification unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.toSheafify\", \"CategoryTheory.sheafification\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.sheafificationIso\", \"CategoryTheory.toSheafification\", \"CategoryTheory.isoSheafify\", \"PresheafOfModules.sheafification\"], \"digest\": \"3cda4d28744b50e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and its adjunction do not extend an internal group-sheaf action or prove equivariance of its universal factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a module presheaf with a linear action of a sheaf of groups carries a unique induced action and is left adjoint to equivariant sheaves",
+   "results": "{\"t\": \"2026-10-22T05:59:32Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a module presheaf with a linear action of a sheaf of groups carries a unique induced action and is left adjoint to equivariant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafify\"], \"digest\": \"378b847db443e9e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and its adjunction do not extend an internal group-sheaf action or prove equivariance of its universal factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quivariant.*[Ss]heafif|[Ss]heafif.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-22T07:07:06Z\", \"tool\": \"grep\", \"query\": \"[Ee]quivariant.*[Ss]heafif|[Ss]heafif.*[Aa]ction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T07:07:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafification\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification extends an internal group action linearly and gives a reflector on equivariant modules",
+   "results": "{\"t\": \"2026-10-22T07:07:06Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification extends an internal group action linearly and gives a reflector on equivariant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafify\", \"PresheafOfModules.sheafifyMap\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafification_map\", \"CategoryTheory.plusPlusAdjunction\", \"PresheafOfModules.toSheafify_app_apply'\", \"CategoryTheory.isoSheafify\"], \"digest\": \"e77fa0375bcd13c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of modules with an action of a sheaf of groups is left adjoint to equivariant module sheaves",
+   "results": "{\"t\": \"2026-10-22T07:07:17Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of modules with an action of a sheaf of groups is left adjoint to equivariant module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\"], \"digest\": \"44ca345ce26a31c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|sheafificationCompToSheaf",
+   "results": "{\"t\": \"2026-10-22T07:20:07Z\", \"tool\": \"grep\", \"query\": \"sheafificationAdjunction|sheafificationCompToSheaf\", \"sub\": \"Algebra/Category/ModuleCat/Presheaf\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\"], \"digest\": \"a65eddacd80a8a69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact sheafification functor preserves internal group actions on modules and induces an adjunction on equivariant objects",
+   "results": "{\"t\": \"2026-10-22T07:20:18Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact sheafification functor preserves internal group actions on modules and induces an adjunction on equivariant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.sheafificationCompPullback\", \"LightCondensed.freeForgetAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"Condensed.freeForgetAdjunction\"], \"digest\": \"e18d8a74c3a33adc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module sheafification and adjunction do not assert an internal group-sheaf action or equivariant extensions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-action-site-presentation",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supports det-thm-sf-ctf-stability-direct-images paragraph (3), via the internal-action site presentation: extending the linear group-sheaf action across ordinary module sheafification and retaining its universal factorization. The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-module-sheafification-reflector",
+  "worker": "stage1",
+  "summary": "Proved the equivariant reflector by sheafifying the action map using preservation of finite products. Checked identity, associativity, additivity and scalar-linearity on the product units, and proved equivariance and naturality of ordinary universal extensions. Statement unchanged; all ingredients reuse existing nodes; no new nodes.",
+  "blueprint": "Provides the sheafification ingredient of the internal-action site presentation under paragraph (3) of det-thm-sf-ctf-stability-direct-images; the inherited ancestor chain ends without a blueprint id. Whole-blueprint searches for sheafification and action found no equivalent reflector statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-23da6fc10",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-23da6fc10 (reviewer sub-agent of L); spot-checked: Read the item, all 4 cited nodes and the 4 stmt_deps in full. The 4 cited nodes are all Mathlib leaves: interface 03CY, underlying-sets 00YR, sheafification 00WH, sets-exact 00WJ. They are tools, not route, and no tool_use is needed. Checked the Stacks labels in tags and sites.tex l.2134 / sites-modules.tex l.815; the proof of 03CY uses the same exactness technique. The statement is unchanged from base and side, and side is still unsplit. There is no repair note, and the item is not in route-pivot-dropped. Step 1: by 00WJ, the product of η_P with identities on the sheaves K and |R| is again a set sheafification, so maps out of it are unique. Step 2: the action b is the unique factorisation of η∘a, which gives the uniqueness clause. Step 3: identity, associativity, additivity and R-linearity each follow from comparing both sides after 1×η or 1×1×η. This uses that η is linear (03CY) and that R carries the trivial action; commutativity of K is never used. Step 4: equivariance of the ordinary extension follows by uniqueness into the set sheaf |Q|. Step 5: the functor laws, the natural adjunction bijection and the identification with ordinary sheafification all follow by uniqueness. Edge cases tested: trivial K, P=0, P already a sheaf, non-abelian K. lem-sc-sheafify-add-action is related but not a duplicate: it covers only abelian G acting on sets, with no modules and no reflector. The parent internal-action-site-presentation proves the C_K comparison itself, so the item is a strictly smaller ingredient and not a restatement. proof_deps equals the union of the step uses, and the Mathlib searches record no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivariantModuleSheafificationReflector",
+  "declaration": "CategoryTheory.InternalActionSite.equivariantModuleSheafification_reflector",
+  "file": "lean/Sheaf/CategoryTheory/EquivariantModuleSheafificationReflector.lean",
+  "statement": "theorem equivariantModuleSheafification_reflector {C : Type u} [SmallCategory C] [HasFiniteLimits C] (J : GrothendieckTopology C) (K : Cᵒᵖ ⥤ GrpCat.{u}) (hK : Presheaf.IsSheaf J (K ⋙ forget GrpCat.{u})) (S : Sheaf J CommRingCat.{u}) : (∀ P : EquivariantPresheaf K (baseRing J S).obj, ∃ a : LinearAction K ((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val, (∀ (X : Cᵒᵖ) (g : K.obj X) (p : P.val.obj X), (toSheafify J P.val.presheaf).app X (P.action.act X g p) = a.act X g ((toSheafify J P.val.presheaf).app X p)) ∧ (∀ b : ∀ X : Cᵒᵖ, K.obj X →* Function.End (((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.obj X), (∀ (X Y : Cᵒᵖ) (f : X ⟶ Y) (g : K.obj X) (p : ((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.obj X), ((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.map f (b X g p) = b Y (K.map f g) (((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.map f p)) → (∀ (X : Cᵒᵖ) (g : K.obj X) (p : P.val.obj X), (toSheafify J P.val.presheaf).app X (P.action.act X g p) = b X g ((toSheafify J P.val.presheaf).app X p)) → ∀ (X : Cᵒᵖ) (g : K.obj X) (p : ((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.obj X), b X g p = a.act X g p) ∧ (∀ (Q : EquivariantSheaf (K := K) J (baseRing J S)) (v : P ⟶ Q.obj), ∃! w : (PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val ⟶ (forgetSheaf J (baseRing J S)).obj Q, (∀ (X : Cᵒᵖ) (g : K.obj X) (p : ((PresheafOfModules.sheafification (𝟙 (baseRing J S).obj)).obj P.val).val.obj X), w.val.app X (a.act X g p) = Q.obj.action.act X g (w.val.app X p)) ∧ toSheafify J P.val.presheaf ≫ (PresheafOfModules.toPresheaf (baseRing J S).obj).map w.val = (PresheafOfModules.toPresheaf (baseRing J S).obj).map v.val)) ∧ (∃ F : EquivariantPresheaf K (baseRing J S).obj ⥤ EquivariantSheaf (K := K) J (baseRing J S), ∃ adj : F ⊣ inclusion J (baseRing J S), ∃ comparison : F ⋙ forgetSheaf J (baseRing J S) ≅ forgetPresheaf ⋙ PresheafOfModules.sheafification (𝟙 (baseRing J S).obj), ∀ P : EquivariantPresheaf K (baseRing J S).obj, (PresheafOfModules.toPresheaf (baseRing J S).obj).map (forgetPresheaf.map (adj.unit.app P)) ≫ ((SheafOfModules.toSheaf (baseRing J S)).map (comparison.hom.app P)).hom = toSheafify J P.val.presheaf)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem states unique natural linear action on the ordinary module sheafification, unique equivariant extension, and an equivariant sheafification adjunction with its unit-compatible natural comparison to ordinary module sheafification. It reuses the existing InternalActionSite data definitions, without invoking the downstream presentation theorem. The Q95 PASS was stage 1, not a Lean delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2bd4a5b4",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches node lem-sfb-equivariant-module-sheafification-reflector clause by clause. V-small site with finite limits (GrothendieckTopology, more general), K a sheaf of groups (hK), commutative R via baseRing, genuine EquivariantPresheaf/LinearAction data. Existence of a natural LinearAction a on PresheafOfModules.sheafification making toSheafify (the genuine unit, Mathlib rfl lemma) equivariant; uniqueness over all natural group actions (stronger, true by product-unit uniqueness); unique equivariant extension w with toSheafify ≫ w = v; ∃ F ⊣ inclusion with a natural comparison to ordinary sheafification and unit compatibility, which pins F's action and maps. Only the lean field changed and lean.statement is verbatim in the file. No defs, sorry only, docstrings with source, blueprint id and 5 proof steps, single universe u, no extra hypotheses. Not compiled per the 2026-10-21 instruction; worker reports clean compiles at 4.5/4.2 s. Advisories: action/equivariant-category decls are owned by theorem node lem-sfb-internal-action-site-presentation, which has this item as a proof_dep (cannot cite, cycle) → suggest an existing:true def node; stage-3 import cycle (item imports parent module); public imports SiteCoveringAxioms/RingedSiteModules/Mathlib Sheafification and the LeftExact proof-dep import are already re-exported by the parent module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261023T123331-L-1163001",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

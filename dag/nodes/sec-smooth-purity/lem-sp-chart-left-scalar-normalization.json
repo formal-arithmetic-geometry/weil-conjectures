@@ -25,79 +25,61 @@
  ],
  "proof": [
   {
-   "text": "Work on the ordinary etale site, as in the asserted equation. By [lem-sp-etale-ctf-chart-domain], each $F_{h,R}$ and coefficient extension preserves the indicated finite-Tor categories. By [lem-asd-etale-compact-support-normalization], $c_{e,R}:F_{e,R}\\simeq E_R$ is the canonical refinement-compatible isomorphism, so $E_R$ also preserves this category. The composition comparison $\\alpha_R$ is an isomorphism by [lem-amb-etale-compact-comparisons]. Hence $\\lambda_R=\\alpha_RF_{d,R}(c_{e,R}^{-1})$ is an isomorphism. Take the datum of [def-sp-etale-compact-support-normalization] entering [def-sp-etale-adjoint-chart-comparison] to be the family $c_{v,c}$ of [lem-asd-etale-compact-support-normalization]: its degree-zero sum-component description gives the graph-extension condition and the derived formula for $c^{-1}$, and its proper-refinement agreement, base-change square with identity and composition normalization, and counit identification are the remaining conditions of the datum. So the comparison $c_e$ used here is the one that enters [lem-sp-et-proet-coefficient-compatibility] in Steps 3–5. The specified chart comparison of [def-sp-etale-adjoint-chart-comparison] uses a compatible restricted-closure compactification; refinement compatibility of $c_e$ and composition identifies it with this same formula for the independently chosen compactifications.",
+   "text": "By [lem-sp-etale-ctf-chart-domain], restrict every compact-support, coefficient and geometric right functor to the stated finite-Tor categories. Apply [lem-sp-chart-normalized-model-identification] with $f=p_d$ and $R=A,B$. It identifies the canonical graph-normalized family with the datum entering the specified restricted-closure chart comparison, and gives the isomorphism $\\lambda_R=\\alpha_RF_{d,R}(c_{e,R}^{-1})$ for all three independently chosen compactifications. Since $c_{e,R}:F_{e,R}\\simeq E_R$ and the finite-Tor category is a full subcategory closed under isomorphism, $E_R$ also preserves it; as $\\mathcal C_{U,R}\\subset D^+(U_{et},R)$, $\\lambda_R$ is an isomorphism on $\\mathcal C_{U,R}$.",
    "uses": [
     "lem-sp-etale-ctf-chart-domain",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-amb-etale-compact-comparisons",
-    "def-sp-etale-adjoint-chart-comparison",
-    "def-sp-etale-compact-support-normalization",
+    "lem-sp-chart-normalized-model-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: normalized left comparison, ordered counit and coefficient square; assembly of the re-split arguments"
+   }
+  },
+  {
+   "text": "Use [lem-sp-chart-sum-affine-counit-transport] for each ring. With $G_{d,R}=p_d^*(-)(d)[2d]$ and $H_R=e_R^*G_{d,R}$, its Hom bijection is exactly transport by the $\\lambda_R$ of Step 1. Thus $\\epsilon_{g,R,K}\\lambda_{R,H_RK}=\\epsilon_{d,R,K}F_{d,R}(v_{R,G_{d,R}K})$, retaining the specified sum-then-affine counit, including $d=0$.",
+   "uses": [
+    "lem-sp-chart-sum-affine-counit-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: normalized left comparison, ordered counit and coefficient square; assembly of the re-split arguments"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-scalar-compositor-replacement-pasting] on $\\mathcal C_{U,R},\\mathcal C_{V,R},\\mathcal C_{Y,R}$ with $(F_R,E_R,P_R,Q_R)=(F_{e,R},E_R,F_{d,R},F_{g,R})$, $T_i$ the stated coefficient functors, $c_R=c_{e,R}$, $\\alpha_R$ the compact-support compositor and $\\sigma=\\sigma_e$. Its two hypotheses are precisely the final etale-sum square and the composition equation in [lem-sp-et-proet-coefficient-compatibility]; these use the canonical family identified in Step 1. The conclusion is\n$$\\beta_g\\circ T_Y\\lambda_A=\\lambda_BT_U\\circ F_{d,B}\\sigma_e\\circ\\beta_dE_A.$$\nNo inverse of $\\beta_d$ or flatness hypothesis enters this application.",
+   "uses": [
+    "lem-sp-scalar-compositor-replacement-pasting",
     "lem-sp-et-proet-coefficient-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized chart left comparison and coefficient compatibility"
+    "place": "Charts: normalized left comparison, ordered counit and coefficient square; assembly of the re-split arguments"
    }
   },
   {
-   "text": "Write $G_{d,R}=p_d^*(-)(d)[2d]$, $H_R=e_R^*G_{d,R}$, and let $v_R:E_Re_R^*\\to\\mathrm{id}$ be the sum/evaluation counit. The affine adjunction is the ordered one of [lem-amb-affine-space-top-trace], and the sum adjunction is specified by [def-sp-etale-adjoint-chart-comparison]. By the explicit composite-adjunction formula [def-weil-pbc-composite-adjunction], the counit for $L_R=F_{d,R}E_R\\dashv H_R$ is $\\delta_{R,K}=\\epsilon_{d,R,K}\\circ F_{d,R}(v_{R,G_{d,R}K})$. Transfer its Hom bijection to $F_{g,R}$ by sending $a:F_{g,R}M\\to K$ first to $a\\circ\\lambda_{R,M}:L_RM\\to K$, then to its composite adjunct. Precomposition with $\\lambda_R$ is a natural bijection, with inverse precomposition with $\\lambda_R^{-1}$. Evaluating the resulting Hom bijection at the identity of $H_RK$ gives the counit $\\epsilon_{g,R,K}=\\delta_{R,K}\\circ\\lambda_{R,H_RK}^{-1}$, so $\\epsilon_{g,R,K}\\circ\\lambda_{R,H_RK}=\\delta_{R,K}$. This is precisely the chart adjunction obtained using the specified left comparison. It retains the actual sum-then-affine counit, rather than choosing a new trace.",
+   "text": "For any second triple of compactifications, [lem-sp-chart-normalized-model-identification] gives $c'_e\\rho_e=c_e$ and $\\lambda'_R(\\rho_{d,R}E_R)=\\rho_{g,R}\\lambda_R$, with common-refinement cocycle coherence. Expanding $\\lambda'_R(\\rho_{d,R}E_R)=\\alpha'_R(\\rho_{d,R}F'_{e,R})F_{d,R}(\\rho_{e,R})F_{d,R}(c_{e,R}^{-1})=\\alpha'_RF'_{d,R}(\\rho_{e,R})(\\rho_{d,R}F_{e,R})F_{d,R}(c_{e,R}^{-1})$ by naturality of $\\rho_d$ and $(c'_e)^{-1}=\\rho_ec_e^{-1}$, and cancelling the isomorphism $F_{d,R}(c_{e,R}^{-1})$, gives $\\alpha'_RF'_{d,R}(\\rho_{e,R})(\\rho_{d,R}F_{e,R})=\\rho_{g,R}\\alpha_R$. With $c'_e\\rho_e=c_e$ and the refinement squares of [lem-sp-et-proet-coefficient-compatibility] for $e,p_d,g$, these are the model-change hypotheses of [lem-sp-scalar-compositor-replacement-pasting], which identifies the primed coefficient equation with Step 3. The counit identities and their coherent transport for the same changes are exactly those of [lem-sp-chart-sum-affine-counit-transport]. Thus both assertions hold for every specified compactification and any common refinement.",
    "uses": [
-    "lem-amb-affine-space-top-trace",
-    "def-sp-etale-adjoint-chart-comparison",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized chart left comparison and coefficient compatibility"
-   }
-  },
-  {
-   "text": "For $M\\in\\mathcal C_{U,A}$, [lem-sp-et-proet-coefficient-compatibility] gives $c_{e,B,T_UM}\\circ\\beta_{e,M}=\\sigma_{e,M}\\circ T_V(c_{e,A,M})$. Compose on the left with $c_{e,B,T_UM}^{-1}$ and on the right with $T_V(c_{e,A,M}^{-1})$. Functoriality and cancellation yield\n$$\\beta_{e,M}\\circ T_V(c_{e,A,M}^{-1})=c_{e,B,T_UM}^{-1}\\circ\\sigma_{e,M}.$$\nThis uses the stated graph-normalized comparison, not an arbitrary isomorphism from $F_e$ to sum extension.",
-   "uses": [
-    "lem-sp-et-proet-coefficient-compatibility"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized chart left comparison and coefficient compatibility"
-   }
-  },
-  {
-   "text": "Apply the composition equation of [lem-sp-et-proet-coefficient-compatibility] to $(e,p_d)$, and then naturality of $\\beta_d$ at $c_{e,A,M}^{-1}:E_AM\\to F_{e,A}M$. Suppressing only component subscripts, the resulting calculation is\n$$\\begin{aligned}\n\\beta_gT_Y(\\lambda_A)\n&=\\alpha_BT_U\\,F_{d,B}(\\beta_e)\\,\\beta_dF_{e,A}\\,T_YF_{d,A}(c_{e,A}^{-1})\\\\\n&=\\alpha_BT_U\\,F_{d,B}\\bigl(\\beta_e\\circ T_V(c_{e,A}^{-1})\\bigr)\\,\\beta_dE_A\\\\\n&=\\alpha_BT_U\\,F_{d,B}(c_{e,B}^{-1}T_U)\\,F_{d,B}(\\sigma_e)\\,\\beta_dE_A\\\\\n&=\\lambda_BT_U\\,F_{d,B}(\\sigma_e)\\,\\beta_dE_A.\n\\end{aligned}$$\nThe third line is Step 3. Every arrow is $B$-linear with source $T_YF_{d,A}E_A$ and target $F_{g,B}T_U$; in particular no inverse of $\\beta_d$ and no flatness of $B$ over $A$ has been used.",
-   "uses": [
-    "lem-sp-et-proet-coefficient-compatibility"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized chart left comparison and coefficient compatibility"
-   }
-  },
-  {
-   "text": "For another specified compactification of $g$, write $\\rho_R:F_{g,R}\\simeq F'_{g,R}$ for the canonical common-refinement comparison. Coherence of composition in [lem-amb-etale-compact-comparisons] gives $\\lambda'_R=\\rho_R\\lambda_R$. The refinement square of [lem-sp-et-proet-coefficient-compatibility] says $\\beta'_gT_Y(\\rho_A)=\\rho_BT_U\\,\\beta_g$. Thus the left side of Step 4 for $\\lambda'$ is $\\rho_BT_U$ times its old left side, and its right side is $\\rho_BT_U$ times its old right side. For a change of the compactification of $e$, refinement compatibility in [lem-asd-etale-compact-support-normalization] gives $c'_e\\rho_e=c_e$, so $\\rho_e$ cancels in $\\alpha'F_d((c'_e)^{-1})$. For a change of the compactification of $p_d$, naturality and coherent composition give $\\lambda'_R\\circ(\\rho_{d,R}E_R)=\\lambda_R$; its coefficient square is the same refinement square, now for $p_d$, whiskered by $E_A$. These identities prove the equation for every set of choices. The transported counit formula in Step 2 likewise becomes $\\epsilon'_g=\\epsilon_g\\rho_H^{-1}$ under a change of $g$; substituting $\\lambda'=\\rho\\lambda$ cancels $\\rho_H^{-1}\\rho_H$. Changes of the two constituent models are already the adjunction-preserving identifications used to define the ordered affine adjunction and the graph-normalized sum comparison. Common-refinement independence and the cocycle law make these identifications independent of the refinement chosen.",
-   "uses": [
-    "lem-amb-etale-compact-comparisons",
+    "lem-sp-chart-normalized-model-identification",
     "lem-sp-et-proet-coefficient-compatibility",
-    "lem-asd-etale-compact-support-normalization"
+    "lem-sp-scalar-compositor-replacement-pasting",
+    "lem-sp-chart-sum-affine-counit-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized chart left comparison and coefficient compatibility"
+    "place": "Charts: normalized left comparison, ordered counit and coefficient square; assembly of the re-split arguments"
    }
   }
  ],
  "proof_deps": [
   "lem-sp-etale-ctf-chart-domain",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-amb-etale-compact-comparisons",
-  "def-sp-etale-adjoint-chart-comparison",
-  "lem-amb-affine-space-top-trace",
-  "def-weil-pbc-composite-adjunction",
-  "lem-sp-et-proet-coefficient-compatibility",
-  "def-sp-etale-compact-support-normalization"
+  "lem-sp-chart-normalized-model-identification",
+  "lem-sp-chart-sum-affine-counit-transport",
+  "lem-sp-scalar-compositor-replacement-pasting",
+  "lem-sp-et-proet-coefficient-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
@@ -203,27 +185,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-chart-left-scalar-normalization",
   "worker": "stage1",
-  "summary": "Kept the statement and all existing metadata. Reused the finite-Tor domain, graph-normalized etale comparison, coherent compact-support composition, explicit composite adjunction and coefficient-compatibility statements. Wrote the actual transported counit, the inverse etale coefficient square, the naturality calculation for beta_d, and the refinement cancellations. No new nodes or Mathlib leaves.",
-  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: normalized left comparison and preservation of the sum-then-affine counit, followed by the scalar square for the specified compactification (retained Step 11, last five sentences).",
+  "summary": "Explicit human re-split repair: kept the statement and existing metadata unchanged. Three statement-only unsplit children separate graph-datum/model recognition, ordered sum-affine counit transport, and formal replacement/compositor coefficient pasting with three model comparisons. The former five-step argument is retained verbatim and assigned by subargument in report.md. The item is now only their application on the finite-Tor chart domain.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph, specified chart left identification and sum-then-affine counit with coefficient compatibility; former Steps 1–5 are assigned exhaustively to the three new child statements.",
   "tool_uses": [
    {
-    "node": "lem-asd-etale-compact-support-normalization",
-    "why": "Generic graph-normalized etale compact-support/sum-extension comparison, including refinement and counit normalization; used as a tool for the chart route, not as a replacement for its purity argument."
-   },
-   {
-    "node": "lem-amb-etale-compact-comparisons",
-    "why": "Generic coherent compact-support composition and common-refinement identifications used to fix the left chart functor."
-   },
-   {
-    "node": "lem-amb-affine-space-top-trace",
-    "why": "Provides exactly the ordered affine-space adjunction stipulated by the chart route; its trace construction is reused, not replaced."
-   },
-   {
     "node": "lem-sp-et-proet-coefficient-compatibility",
-    "why": "Generic normalized coefficient composition, refinement and etale-sum squares; these establish the actual named beta_g in the chart calculation."
+    "why": "Generic canonical etale sum, compact-support composition and refinement coefficient squares are the hypotheses for the chart replacement-pasting lemma."
    }
   ]
  },
@@ -234,12 +204,50 @@
   "lem-sp-et-proet-coefficient-compatibility"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q02-404bc1d6a",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q10-c24e857e0",
+  "group": "Q10",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-404bc1d6a (reviewer sub-agent of L); spot-checked: The delivery is one commit on base 50ac2a2 with no new nodes. The statement and stmt_deps are byte-identical to base. The live node is still unsplit (mtime 11:47), so the delivery is not superseded. The item has no repair note of its own. I read all five steps against the cited statements and the blueprint main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (l.20-36). Parent step 3 uses exactly λ_R, the counit preservation, the β_g square and refinement, and the item states exactly these. Step 2: the composite-adjunction counit is ε_d∘F_d(v_{G_dK}); transport by λ through precomposition gives ε_g=δλ^{-1}, with the correct orientation. Step 3 is cancellation in the final square c_Bβ_e=σ_e T(c_A) of lem-sp-et-proet-coefficient-compatibility. Step 4 I recomputed: the composition equation for (e,p_d), then naturality of β_d at c^{-1}, then Step 3, then α_BF_d(c_B^{-1})=λ_B. The types match, it uses no β_d^{-1} and no flatness, and the input F_eM lies in D^b_ctf. Step 5: I checked the changes of the g, e and p_d compactifications through the refinement squares and c'ρ_e=c. Small cases checked: d=0, e=id, A=B, empty U, and non-flat Z/ℓ²→F_ℓ. FIX (C3), Step 1: def-sp-etale-adjoint-chart-comparison takes an arbitrary graph-normalized datum M, but Step 3 needs the c_e of lem-asd-etale-compact-support-normalization, which is the one inside the coefficient-compatibility node. I added one sentence that takes M to be lem-asd's family, checking each datum condition against lem-asd's clauses. I also added def-sp-etale-compact-support-normalization and lem-sp-et-proet-coefficient-compatibility to Step 1's uses. I accepted the 4 declared tool_uses (asd normalization, amb composition, amb affine top trace, coefficient compatibility). Batch-5 flag: lem-asd-etale-compact-support-normalization ends in the generic lem-pod-lisse-module-sheaves-as-module-objects (lisse ⇔ FLC module object). That node is not part of the Poincaré-duality or trace-formula proof, and lem-asd is already in the base closure through the stmt_dep lem-sp-et-proet-coefficient-compatibility. The new-minus-base closure contains no pod or trf node, so I accepted the flag, as in Q41 ec3cb943.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c24e857e0 (reviewer sub-agent of L); spot-checked: Re-split of lem-sp-chart-left-scalar-normalization (Q10 c24e857e, base 0192b75), answering the human's 2026-10-21 re-split note; side-live still holds the Q02 FIXed 5-step proof, so this delivery is not superseded. Statement and stmt_deps are unchanged and the target is not weakened. Source checked: blueprint main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph l.20-36. Coefficient category D^b_ctf with T=-⊗^L_A B, as in the master statement. No SGA anywhere. Three new nodes of comparable size (2099/2408/2074 chars); every old step's argument moved into one of them; none restates the item. (1) lem-sp-chart-normalized-model-identification: hypotheses match lem-asd and lem-amb-etale-compact-comparisons; restricted-closure λ=αF(c^{-1}) is independent of c_e; model-change identities type-check. (2) lem-sp-chart-sum-affine-counit-transport: composite counit ε_dF_d(v)λ^{-1} is correct (ofNatIsoLeft orientation); model invariance re-derived; d=0 and e=id cases fine. (3) lem-sp-scalar-compositor-replacement-pasting: pure category theory; both conclusions and the primed transport recomputed, no β inverse needed. All three are distinct from the nearby DAG nodes I searched. FIX to item steps 1 and 4 only: (a) E5: restored the dropped sentence 'E_R preserves ctf via c_e: F_e≅E_R, and the full subcategory is closed under isomorphism', which step 3 needs; (b) C3/E5: step 4 claimed the pasting node's compositor-coherence hypothesis follows from the refinement squares; it actually follows from λ'(ρ_dE)=ρ_gλ by naturality of ρ_d and c'^{-1}=ρ_e c^{-1}, cancelling the iso F_d(c^{-1}); I wrote that derivation. Batch-5 flag lem-sp-chart-normalized-model-identification → lem-asd-etale-compact-support-normalization accepted: lem-asd is already a stmt_dep of lem-sp-et-proet-coefficient-compatibility, which is in the item's base stmt_deps, so the citation adds nothing to the closure. lem-asd is a general six-functor compact-support normalization, not a step of the trace formula or Poincaré duality, and lem-pod-lisse-module-sheaves-as-module-objects is the generic lisse⇔module-object equivalence. Accepted tool_uses: lem-asd, lem-amb-etale-compact-comparisons, lem-amb-affine-space-top-trace, lem-sp-et-proet-coefficient-compatibility. This run was a re-dispatch on the same head: the earlier review.md and fix file were already in place; I re-checked the fix diff and the step-4 derivation, confirmed the delivery is not superseded and appended a note to review.md.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartLeftScalarNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartLeftScalarNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartScalarLeftComparison",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartScalarAffineAdjunction",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartLeftScalarNormalization",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartLeftScalarNormalization_refinement",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartLeftScalarNormalization_comparison",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.chartLeftScalarNormalization_counit"
+  ],
+  "file": "lean/Sheaf/Paper/ChartLeftScalarNormalization.lean",
+  "statement": "theorem chartLeftScalarNormalization (L : Etale.DerivedCategoryModule A U) (_hL : AdjunctionTransfer.etaleProperty A U L) : (Etale.scalarExtension φ Y).map ((chartScalarLeftComparison A k MA e (affineTraceProjection Y d) ce cp cg).hom.app L) ≫ etaleCoefficientMap φ cg L = etaleCoefficientMap φ cp ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.obj L) ≫ (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cp).map ((sumCoefficientIso φ e).hom.app L) ≫ (chartScalarLeftComparison B k MB e (affineTraceProjection Y d) ce cp cg).hom.app ((Etale.scalarExtension φ U).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficient square, comparison with the recorded restricted-closure chart, common-refinement invariance, and the actual sum-then-affine counit are stated separately. Definitions compose the existing normalized comparisons and transport the existing ordered affine adjunction; no new trace, tensor, or compact-support construction is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b2b727b8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Single module Sheaf.Paper.ChartLeftScalarNormalization; only the item's lean field changes; statement field verbatim (script check); 4 sorry theorems, 2 non-hollow defs (lambda = F_d(c_e^-1) then etaleCompositor; affine adjunction = affineTraceAdjunction.ofNatIsoLeft reductionEtaleAffineLeftIso); docstrings carry the source place and all 5 proof steps; report sections present. Clause check: k of char p>0, l prime with l!=p, finite A,B killed by l^n, no flatness; ctf = etaleProperty; e separated etale of finite type into the affine tower; ce/cp/cg arbitrary. c_e is EtaleCompactSupportNormalization, which is unique (proved theorem in EtaleAmbientAdjointLocality), so MA/MB is not a free choice. Equation T_Y(lam_A) then beta_g = beta_d(E_A L) then F_d,B(sigma_e) then lam_B(T_U L): types and orientations checked against etaleCoefficientMap and sumCoefficientIso. The refinement theorem covers changes of all three compactifications. The comparison theorem identifies lambda with etaleAmbientLeftComparison. The counit theorem is the Adjunction.comp counit F_d(v_{G_d K}) then eps_d, after lambda at HK. Edge cases d=0, e=id, empty U, A=B, non-flat Z/l^2->F_l, n=0, universes all fine. stmt_deps unchanged from S1; theorem-module plain defs of lem-sp-et-proet-coefficient-compatibility accepted as in the sibling lem-sp-affine-counit-scalar PASS. No compile (no change). Maintainer note: the public import of parent module ReductionExceptional (det-sp-reduction-exceptional lists the item in proof_deps) blocks the parent's stage-3 import; move reductionEtaleAffineLeftIso into a def-node module. Advisories: declarations from non-stmt_dep owners (affine trace tower/adjunction, derivedEtaleLowerShriekUpperStarAdjunction); 4 unused public imports."
+ }
 }

@@ -15,38 +15,64 @@
  },
  "proof": [
   {
-   "text": "For pullbackTensorIndependent use the first property of the given flat-term K-flat representative: at these universes the two K-flat predicates are definitionally equal.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For pullbackTensorFiniteRepresentative_existsUnique use ObjectProperty.ιOfLE to include flat-term K-flat complexes among all K-flat complexes, and whisker T.comparison with the product inclusion. Set the tensor field to S.tensor. The component equation is reflexive. For uniqueness eliminate the asserted tensor-functor equality, then use isomorphism and natural-transformation extensionality and the prescribed component equations.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For pullbackTensorFiniteRealization_existsUnique specialize openSquarePullbackModel_existsUnique to the finite coefficient ring at exponent n+1. The constant-ring identifications and the displayed adjunction-unit section equations agree definitionally. The five remaining coherence obligations retain their named theorem statements and their docstring proof plans.",
+   "text": "The existing coefficient comparison types, unit-normalized finite realization, tensor-model restriction, signed total symmetry and its derived descent are re-exported from the construction and braiding layers. canonicalFinitePullbackTensor is a definitionally identical API alias of finitePullbackTensorConstruction.",
    "uses": [
-    "lem-trf-open-square-exchange"
+    "def-pur-finite-pullback-tensor-construction",
+    "def-pur-finite-pullback-tensor-braiding"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For signed braiding, form two natural transformations from tensor_Y followed by finite pullback to the swapped tensor of the pullbacks, using finitePullbackTensorConstructionIso and the two signed braidings. They agree on the localized flat K-flat pairs by lem-pur-finite-pullback-tensor-signed-representatives. For an arbitrary derived object choose a cochain preimage under Q and a flat K-flat resolution; its quasi-isomorphism gives an isomorphism to the original object. Naturality of the two transformations along the product of these isomorphisms, followed by cancellation of its invertible image, proves equality for every derived pair.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-signed-representatives",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "For pullbackTensorSignedTotal_existsUnique use the existing CochainComplex.Monoidal.braiding with the independent-universe monoidal, additive and coproduct-preserving sheaf tensor instances. Its ι_braiding_hom equation is the signed summand formula. Naturality of the sheafification unit and the braided sheafification functor show that the ordinary sheaf braiding swaps the displayed sheafified pure tensors. Evaluation is additive, so the integer sign passes through evaluation, giving exactly the required generator formula. For uniqueness apply isomorphism extensionality, complex-map extensionality and total-summand extensionality. Cancel the tensor-to-sheafification isomorphism and use the sheafification adjunction; presheaf and tensor-product extensionality reduce the result to equality of the prescribed generator formulas.",
+   "text": "For composition, form two natural transformations from tensor followed by pullback along the composite to tensor of the two iterated pullbacks, using the natural canonical comparison isomorphisms and the specified pullback compositor. They agree on flat K-flat pairs by lem-pur-finite-pullback-tensor-composition-representatives. Resolve both inputs, use naturality along the product of the resolving isomorphisms, and cancel its invertible image to extend equality to every pair.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-finite-pullback-tensor-composition-representatives",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the two associativity paths as natural transformations from left-associated triple tensor followed by finite pullback to right-associated tensor of the three pullbacks. They agree on localized flat K-flat triples by the representative associativity calculation. Resolve all three inputs using finiteTensor_flat_representatives. Naturality along the product of the three resolving isomorphisms and cancellation of its invertible image give equality on every derived triple. Take the component and unfold only the canonical comparison alias.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-associativity-representatives",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the single unit isomorphism supplied by the representative unit existence theorem. Each unit-equation path is a natural transformation: tensor-comparison naturality, tensor interchange and unitor naturality prove this in Lean. Resolve an arbitrary derived input and cancel the invertible source map to extend both equations from representatives. For uniqueness evaluate the right-unit equation at the source tensor unit, cancel the comparison and right unitor, and conjugate the resulting equality id tensor epsilon=id tensor epsilon-prime by the chosen unit isomorphism. Left-unitor naturality and cancellation give epsilon=epsilon-prime. Thus neither arbitrary-input unit coherence nor uniqueness is assumed by the new representative theorem.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-unit-representatives",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-trf-open-square-exchange",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-finite-pullback-tensor-construction",
+  "def-pur-finite-pullback-tensor-braiding",
+  "lem-pur-finite-pullback-tensor-signed-representatives",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-finite-pullback-tensor-composition-representatives",
+  "lem-pur-finite-pullback-tensor-associativity-representatives",
+  "lem-pur-finite-pullback-tensor-unit-representatives"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS and 07A4; componentwise restriction of the prescribed tensor model and specialization of the existing unit-normalized pullback comparison (S1 stage-3 partial proof). The signed-total proof uses the existing cochain Koszul braiding and its summand formula; sheafification naturality identifies the pure-tensor generators, and the adjunction and total-summand universal properties prove uniqueness."
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 07A4 and 03EL. D2 extends associativity and both unit equations from flat K-flat representatives by naturality and resolving isomorphisms, and proves unit uniqueness by tensor/unitor cancellation. Existing composition and signed-braiding proofs retained."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -103,39 +129,32 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
  "lean": {
   "module": "Sheaf.Paper.FinitePullbackTensorComparison",
   "declaration": "WeilConjectures.canonicalFinitePullbackTensor",
   "declarations": [
-   "WeilConjectures.FinitePullbackTensorComparison",
-   "WeilConjectures.IntegralPullbackTensorComparison",
-   "WeilConjectures.RationalPullbackTensorComparison",
-   "WeilConjectures.CommonStagePullbackTensorComparison",
-   "WeilConjectures.pullbackTensorCoefficientFinite",
-   "WeilConjectures.pullbackTensorCoefficientIso",
-   "WeilConjectures.pullbackTensorIndependent",
-   "WeilConjectures.pullbackTensorFiniteRepresentative_existsUnique",
-   "WeilConjectures.pullbackTensorFiniteModel",
-   "WeilConjectures.pullbackTensorFiniteModelIso",
-   "WeilConjectures.pullbackTensorFiniteRealization_existsUnique",
-   "WeilConjectures.pullbackTensorFiniteRealization",
    "WeilConjectures.canonicalFinitePullbackTensor",
    "WeilConjectures.canonicalFinitePullbackTensor_associativity",
    "WeilConjectures.canonicalFinitePullbackTensor_unit",
    "WeilConjectures.canonicalFinitePullbackTensor_composition",
-   "WeilConjectures.pullbackTensorSwap",
-   "WeilConjectures.pullbackTensorSignedTotal_existsUnique",
-   "WeilConjectures.pullbackTensorSignedTotal",
-   "WeilConjectures.pullbackTensorBraiding_existsUnique",
-   "WeilConjectures.pullbackTensorBraiding",
-   "WeilConjectures.pullbackTensorSiteSmall",
-   "WeilConjectures.canonicalFinitePullbackTensor_braiding",
    "WeilConjectures.canonicalFinitePullbackTensor_associativity_condition",
    "WeilConjectures.canonicalFinitePullbackTensor_unit_condition",
    "WeilConjectures.canonicalFinitePullbackTensor_composition_condition",
+   "WeilConjectures.canonicalFinitePullbackTensor_braiding",
    "WeilConjectures.canonicalFinitePullbackTensor_braiding_condition"
   ],
   "file": "lean/Sheaf/Paper/FinitePullbackTensorComparison.lean",
@@ -162,13 +181,13 @@
   "note": "Read all 3 modules (Finite 27 decls, Completed 96+3, main 62), both new nodes (the finite node read from commit 03260642e6 because it was missing from the snapshot), deps and Stacks 07A4. Every node clause is in derivedPullbackTensorIso: finite mu for arbitrary ambient inputs (the recorded proEtaleCanonicalTensorComparison, conjugated by unique normalizations); integral (Rlim of the K-flat-fixed system comparison, plus the reduction square and the finite evaluation equation), rational (localization) and common-stage (ofHom at every stage) NatIsos with canonical components; assoc/signed braiding/unit/composition at all four levels; quotient square for every q<=m incl. q=m; integral and rational scalar squares for every L and iota (ramified and identity). No extra hypotheses, Omega in its own universe v, L: Type u forced by the recorded API. No hollow data: each def is a real construction or the choice from an exists-unique statement; calculus choice same as the recorded operations. No duplicate associator/unitor for the completed tensor exists. Signatures verbatim, no doubly owned declaration, lines <=100. Compile: unmodified files passed once at 21.5/46.9/54.8 s, exit 0, no diagnostics (first run: main timed out); with my docstring-fixed main file, main timed out at 60 s in both runs; that file differs only by comment lines; delivery record 40.0 s; borderline under load 90-117 on 80 cores. FIX 1: the completed node's lean.declarations lacked 3 sorry @[instance] theorems (pullbackTensorSequenceBase_continuous, pullbackTensorSequenceDirect_rightAdjoint, pullbackTensorOrdinaryLimit_rightAdjoint): fixes/def-pur-completed-pullback-tensor-comparison.json. FIX 2: main theorem docstring lacked a source place: fixes/DerivedPullbackTensorIso.lean adds the Stacks 07A4 source, docstring only, signature unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261019T034306-L-418064",
-  "kind": "proof",
+  "landing": "20261026T222610-L-672941",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

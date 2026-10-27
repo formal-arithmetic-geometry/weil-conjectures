@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "The augmentation is the inverse additive-functor single-complex comparison followed by the mapped resolution augmentation; exactness preserves its quasi-isomorphism. Etale restriction preserves injectives and a bounded-below complex of injectives is K-injective. Define the restricted K-injective resolution and compose its sections comparison with localization restriction, terminal evaluation and homology evaluation. Transport the homology presheaf through the specified component isomorphisms with the generic normalizationTransportPresheaf constructor; the identity and composition laws follow by cancelling adjacent inverse isomorphisms.",
+   "text": "Name the original integer-indexed injective resolution complex I.cochainComplex and augmentation I.ι', without changing either construction or the canonical abelian structure. Restrict the same complex and augmentation termwise. Use the original exactness proof for its quasi-isomorphism and the original bounded-below injective proof for K-injectivity. Name the native restricted-resolution derived-sections comparison, then compose it with the same sections and homology-evaluation factors. Push forward the original complex for the homology presheaf. Transport presheaf identities and composition laws follow by cancelling inverse isomorphisms.",
    "uses": [
     "lem-sbc-etale-abelian-restriction-injectives",
     "lem-weil-pbc-etale-inverse-image-restriction"
@@ -36,7 +36,7 @@
    "elementary": false
   },
   {
-   "text": "For kappa additivity and naturality, the existing constructed canonicalComparison has exactly the specified class formula. Take its sheafification-unit composite: additivity of components and naturality give the required properties. Define kappa from this named class function, and lift it through the sheafification hom-equivalence. All other maps are explicit composites.",
+   "text": "The sheafification unit followed by canonicalComparison has the specified class function. Generic additivity gives the original class additivity statement. Compare components at op U for U in the original etale category; a proved generic lemma handles opposite-category naturality before specialization. Keep the original AddMonoidHom.mk' class component. A generic natural-transformation constructor retains exactly those original components and their naturality, giving the same kappa and its original unique sheafification lift. The cohomology restriction names its original single-functor and inverse-image-composition coefficient composite, constructed by a generic single-complex map. All other coefficient maps are unchanged.",
    "uses": [
     "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
@@ -49,9 +49,9 @@
   "lem-sbc-abelian-higher-direct-image-natural-comparison"
  ],
  "proof_origin": {
-  "by": "F2",
-  "document": "Existing V2 constructions, with abstract transport of presheaf restrictions; Stacks Project Tags 03Q8 and 072W",
-  "place": "Data required to state the independent fixed-resolution comparison lemmas without a cycle."
+  "by": "K4",
+  "document": "Stacks Project Tags 03Q8 and 072W; Mathlib injective resolutions",
+  "place": "The original resolution, augmentation and their original proofs; shared names for the three comparison factors and coefficient composite; unchanged class components."
  },
  "mathlib_searches": [
   {
@@ -108,6 +108,8 @@
   "module": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalizationData",
   "declaration": "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
   "declarations": [
+   "AlgebraicGeometry.Etale.normalizationBaseComplex",
+   "AlgebraicGeometry.Etale.normalizationBaseAugmentation",
    "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
    "AlgebraicGeometry.Etale.normalizationMappedAugmentation",
    "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation",
@@ -116,16 +118,20 @@
    "AlgebraicGeometry.Etale.normalizationRestrictedResolution",
    "AlgebraicGeometry.Etale.normalizationSectionsIso",
    "AlgebraicGeometry.Etale.normalizationPresheafComplex",
+   "AlgebraicGeometry.Etale.normalizationChartResolutionIso",
    "AlgebraicGeometry.Etale.normalizationRestrictedIso",
    "AlgebraicGeometry.Etale.normalizationResolutionClass",
    "AlgebraicGeometry.Etale.normalizationIota",
    "AlgebraicGeometry.Etale.normalizationTransportPresheaf",
    "AlgebraicGeometry.Etale.normalizationRestrictedPresheaf",
    "AlgebraicGeometry.Etale.normalizationChartMap",
+   "AlgebraicGeometry.Etale.normalizationSingleCoefficientMap",
+   "AlgebraicGeometry.Etale.normalizationRestrictionCoefficientMap",
    "AlgebraicGeometry.Etale.normalizationCohomologyRestriction",
    "AlgebraicGeometry.Etale.normalizationClass_add",
    "AlgebraicGeometry.Etale.normalizationKappaComponent",
    "AlgebraicGeometry.Etale.normalizationKappaComponent_naturality",
+   "AlgebraicGeometry.Etale.normalizationOpNaturalTransformation",
    "AlgebraicGeometry.Etale.normalizationKappa",
    "AlgebraicGeometry.Etale.normalizationLift",
    "AlgebraicGeometry.Etale.normalizationRawCoefficient",
@@ -150,13 +156,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-11761",
-  "group": "F2",
-  "result": "pass",
-  "landing": "20261022T011833-L-3222256",
+  "reviewer": "C-4afa3",
+  "group": "K4",
+  "result": "fix",
+  "landing": "20261026T091912-L-3385309",
   "kind": "interface",
-  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+  "note": "independent cc review: item statement vs clone (byte-identical); data-module diff vs clone and change record (signatures kept, bodies rfl-equal sharing); importer compiles in §3b vs my concurrent published-baseline compiles of the two SLOW importers (72.8 s / 61.0 s, pre-existing); node proof_deps vs declarations used in the proof"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

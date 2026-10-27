@@ -1,0 +1,183 @@
+{
+ "id": "lem-sf-slice-scalar-adjunction-comparison",
+ "kind": "statement",
+ "title": "Scalar and localized extension commute by normalized adjunctions",
+ "statement": "Let C have Grothendieck topology J and let a:A→S be a unital morphism of commutative ring sheaves, with module sheafification and its locally bijective characterization in a common universe on J and J/U. For each A|_U-module G there is an S-linear isomorphism S tensor_A j_A!G ≅ j_S!(S|_U tensor_(A|_U) G), sending b tensor [x]_f to [b tensor x]_f for every original summand f:W→U. Moreover for any S-module N, two maps from S tensor_A j_A!G to N are equal if they agree on all 1 tensor [x]_f. The latter assertion only requires sheafification on J. Unlike [lem-sf-slice-scalar-level-comparison], this has no coefficient tower, presentation transports, scalar-restriction identification or transition and module-map coherence assertions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+ },
+ "stmt_deps": [
+  "def-sf-semilinear-slice-scalar-data",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sectionwise scalar extension/restriction Hom equivalence. Naturality follows on 1 tensor x from the presheaf morphism equation. Compose it with the module sheafification adjunction. The transpose evaluates on the sheafification image of 1 tensor x.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+   }
+  },
+  {
+   "text": "Compose this normalized coefficient Hom equivalence with localized extension adjunction in both orders. Restricting scalars and restricting to the slice commute definitionally, so the two results are maps from G to (Res N)|_U. Evaluation on original summands identifies the transposes. Equality on unit tensors gives equal transposes and hence the Hom extensionality assertion.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-ringed-slice-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+   }
+  },
+  {
+   "text": "The resulting Hom equivalence is natural in N, as evaluation on unit tensors shows. Apply its two directions to identity maps; naturality proves the inverse identities. Evaluation gives the generator formula for coefficient 1. Linearity of both the comparison and the sheafified summand insertion gives the formula for every b.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03CY, 03EK and the Hom/Yoneda proof of 0E8I; specialized to coefficient extension, with the already proved scalar/slice comparison and original generator equations. Formalized by P7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars functor along a diagram of coefficient rings with compatible units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.coextendScalars",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.CoextendScalars.obj'",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "PresheafOfModules.restrictScalars"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project scalar models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars for a morphism of sheaves of rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "ModuleCat.Tilde.res_apply",
+     "ModuleCat.Tilde.toOpen_res"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:124",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:126"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No duplicate; reuse the named declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SliceScalarLevelComparison",
+  "group": "P7",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-slice-scalar-level-comparison",
+   "place": "Generic scalar/slice adjunction argument, separated from the tower coherence proof for compilation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SliceScalarLevelAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/SliceScalarLevelAdjunction.lean",
+  "declaration": "SheafOfModules.exists_scalarSliceAdjunctionComparison",
+  "declarations": [
+   "SheafOfModules.exists_scalarSliceAdjunctionComparison",
+   "SheafOfModules.scalarSliceAdjunctionHom_ext"
+  ],
+  "statement": "theorem exists_scalarSliceAdjunctionComparison\n    (A S : Sheaf J CommRingCat.{max c v r}) (a : A ⟶ S) (U : C)\n    [HasSheafify (J.over U) AddCommGrpCat.{max c v r}]\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (G : SheafOfModules.{max c v r}\n      (((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U)) :\n    ∃ e : changeOfRings.{v, c, max c v r} a\n        ((localizedSystemExtension.{c, v, r} A U).obj G) ≅\n      (localizedSystemExtension.{c, v, r} S U).obj\n        (changeOfRings.{v, max c v, max c v r}\n          ((J.overPullback CommRingCat.{max c v r} U).map a) G),\n      ∀ (W : Over U) (x : G.val.obj (op W)) (b : S.obj.obj (op W.left)),\n        e.hom.val.app (op W.left)\n          (sliceScalarPure.{c, v, r} a _ (op W.left)\n            (ringedSliceExtensionSection.{c, v, r} A U G W x) b) =\n          ringedSliceExtensionSection.{c, v, r} S U _ W\n            (sliceScalarPure.{max c v, v, r}\n              ((J.overPullback CommRingCat.{max c v r} U).map a) G (op W) x b)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7be4b",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T065859-L-2486306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7be4b",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T065859-L-2486306",
+  "kind": "interface",
+  "note": "independent cc review: item proof (Hom-equivalence/Yoneda via new SliceScalarLevelAdjunction + RingedOpenScalar.comparison) vs node lem-sf-slice-scalar-level-comparison; Basic data split vs clone f87ce49ef44 (verbatim); sandbox compile of 3 files + importer SemilinearSliceScalarGenerators OK; axioms clean"
+ }
+}

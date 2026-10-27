@@ -1,0 +1,242 @@
+{
+ "id": "lem-pur-supported-tensor-isomorphism-transport",
+ "kind": "statement",
+ "title": "Cartesian isomorphism transport and uniqueness of supported tensor comparisons",
+ "statement": "Fix the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. All schemes below are separated finite-type $k$-schemes. Write $D_A(T)=D(T_{\\mathrm{proet}},A)$ for the ordinary unbounded derived category of constant-$A$ module sheaves. Use the actual pullback, derived tensor, signed symmetry $\\sigma$, section-normalized adjunction units $\\eta^i$, open base-change maps $\\beta$, open tensor maps $\\gamma$, and unique-left-adjoint open compositors of [def-sf-finite-open-tensor-operations], with their normalization as in [lem-sf-open-tensor-normalization] and the canonical tensor/pullback identifications of [lem-pur-derived-pullback-tensor-iso]. All complexes are arbitrary unbounded objects. Let $i:W\\hookrightarrow Y$ and $i':W'\\hookrightarrow Y'$ be open immersions, and let $g:Y\\xrightarrow{\\sim}Y'$, $h:W\\xrightarrow{\\sim}W'$ be scheme isomorphisms with $gi=i'h$ and Cartesian square. Let $R',H'\\in D_A(Y')$, $P',Q'\\in D_A(W')$, and isomorphisms $a':Li'^*R'\\xrightarrow{\\sim}P'$, $b':Li'^*H'\\xrightarrow{\\sim}Q'$ be given. Suppose $f':R'\\otimes_A^LH'\\xrightarrow{\\sim}i'_!(P'\\otimes_A^LQ')$ is an isomorphism satisfying the actual unit equation\n$$Li'^*f'=\\eta^{i'}_{P'\\otimes_A^LQ'}\\circ(a'\\otimes b')\\circ\\mu_{i';R',H'}.$$\nSet $R=Lg^*R'$, $H=Lg^*H'$, $P=Lh^*P'$, $Q=Lh^*Q'$. Let $a:Li^*R\\xrightarrow{\\sim}P$ and $b:Li^*H\\xrightarrow{\\sim}Q$ be obtained from $Lh^*a'$ and $Lh^*b'$ by the canonical Cartesian pullback-composition comparisons. With the normalized open base-change map $\\beta: Lg^*i'_!\\xrightarrow{\\sim}i_!Lh^*$ define\n$$f=i_!(\\mu_{h;P',Q'})\\circ\\beta_{P'\\otimes_A^LQ'}\\circ Lg^*(f')\\circ\\mu_{g;R',H'}^{-1}:R\\otimes_A^LH\\longrightarrow i_!(P\\otimes_A^LQ).$$\nThen $f$ is an isomorphism and\n$$Li^*f=\\eta^i_{P\\otimes_A^LQ}\\circ(a\\otimes b)\\circ\\mu_{i;R,H}.$$\nFor every $D_0\\in D_A(W)$, restriction is injective on the set of morphisms $R\\otimes_A^LH\\to i_!D_0$, and also on the set of morphisms $H\\otimes_A^LR\\to i_!D_0$. In particular any map with the same source, target and restriction as $f$ equals $f$.\n\nThe actual signed conjugate\n$$f^{\\mathrm{rev}}=i_!(\\sigma_{P,Q})\\circ f\\circ\\sigma_{H,R}:H\\otimes_A^LR\\longrightarrow i_!(Q\\otimes_A^LP)$$\nsatisfies\n$$Li^*f^{\\mathrm{rev}}=\\eta^i_{Q\\otimes_A^LP}\\circ(b\\otimes a)\\circ\\mu_{i;H,R}.$$\nIt is the unique morphism with this unit equation. This assertion includes the identity square $g=1_Y,h=1_W$, in which the canonical transport identifies $f$ with $f'$. No faithfulness of restriction on arbitrary ambient sources is asserted, and no boundedness, constructibility or finite Tor-amplitude is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry reduction for open extensions; returned open-product proof Steps 7--9: injectivity on the supported source, normalized Cartesian transport, and signed conjugation. Agent-formulated unbounded open-operation lemma; the full retained argument is in the delivery report, not asserted to be a literal theorem of the blueprint."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-finite-open-tensor-operations",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [
+  {
+   "text": "Every factor in the defined transport is the hom or inverse of a specified isomorphism, or its functorial image. Thus the composite is invertible.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Cartesian unit calculation to f' and its given unit equation. This gives exactly UnitEquation for the defined transport and identifications.",
+   "uses": [
+    "lem-pur-supported-tensor-cartesian-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any adjunction J left adjoint to U and isomorphism e:E to J(P), equality U(x)=U(y) implies equality of the adjoints of e inverse followed by x and e inverse followed by y: homEquiv sends them to eta(P);U(e inverse);U(x) and the same expression with y. Injectivity of homEquiv and cancellation of e inverse prove x=y. Apply this first to the transport isomorphism, then to the packaged canonical derived tensor symmetry followed by transport. The general-category construction canonicalTensorSymmetry in the symmetry module applies to the fixed-scalar pro-etale sheaf category and gives the required isomorphism; no identification with the separately specified sigma is needed for this injectivity argument. This proves both injectivity claims and the first uniqueness claim.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the signed-unit calculation to the transported map. Its unit equation and injectivity for the reversed source prove the existence and uniqueness of the specified signed reverse.",
+   "uses": [
+    "lem-pur-supported-tensor-signed-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the identity-unitor calculation to the original arrow f'. The expanded equality is definitionally IdentityEquation.",
+   "uses": [
+    "lem-pur-supported-tensor-identity-unitor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-open-tensor-operations",
+  "lem-pur-supported-tensor-cartesian-unit",
+  "lem-pur-supported-tensor-signed-unit",
+  "lem-pur-supported-tensor-identity-unitor",
+  "lem-kun-tensor-sym"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "R6: decomposition into Cartesian, signed and identity-unit calculations; adjunction Hom equivalence proves supported-source uniqueness directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "externalProductSwap|externalProductFlip|symmetry_naturality",
+   "results": "{\"hits\": [\"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\"], \"count\": 4, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Braided, CategoryTheory.Iso",
+   "results": "{\"hits\": [\"CategoryTheory.Equivalence.mapCommMon_unitIso\", \"CategoryTheory.Equivalence.mapCommMon_counitIso\", \"CategoryTheory.Functor.mapCommGrpNatIso\", \"CategoryTheory.Functor.mapCommGrpCompIso\", \"CategoryTheory.Equivalence.mapCommGrp_unitIso\", \"CategoryTheory.Equivalence.mapCommGrp_counitIso\", \"CategoryTheory.Functor.mapCommGrpNatIso_hom_app_hom_hom_hom\", \"CategoryTheory.Functor.mapCommGrpNatIso_inv_app_hom_hom_hom\"], \"count\": 9, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull a tensor comparison with open support across a Cartesian square of scheme isomorphisms using normalized open base change: restriction remains identity and conjugation by Koszul symmetries remains normalized",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized isomorphism from a tensor product to extension by zero transports through a Cartesian square and signed tensor symmetries to the unique normalized comparison",
+   "results": "{\"hits\": [\"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor\", \"TensorProduct.AlgebraTensorModule.congr\", \"Mathlib.Tactic.Monoidal.normalizeIsoComp\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\", \"CategoryTheory.zeroMul\", \"TensorProduct.tensorTensorTensorComm\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change along isomorphisms preserves normalization of derived open supported tensor comparison maps; full faithfulness of extension by zero detects equality after restriction",
+   "results": "{\"hits\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\"], \"count\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension.*zero|openImmersion.*[Ff]aithful",
+   "results": "{\"t\": \"2026-10-22T06:57:55Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension.*zero|openImmersion.*[Ff]aithful\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\"], \"digest\": \"ad6948ad19bb1b47\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism to extension by zero makes restriction injective on morphisms from that object, and tensor symmetry preserves unit normalization",
+   "results": "{\"t\": \"2026-10-22T06:57:55Z\", \"tool\": \"leansearch\", \"query\": \"An isomorphism to extension by zero makes restriction injective on morphisms from that object, and tensor symmetry preserves unit normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isoOfIsIsomorphicZero\", \"CategoryTheory.Limits.isoZeroOfMonoZero\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\", \"CategoryTheory.Limits.isIsoZeroEquivIsoZero\", \"CategoryTheory.Limits.isoZeroBiprod\", \"CategoryTheory.Injective.zero_injective\", \"CategoryTheory.Limits.isoBiprodZero\", \"CategoryTheory.unitOfTensorIsoUnit\"], \"digest\": \"b9ec6bd22d85ef9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T06:57:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a normalized tensor comparison across Cartesian base change for open extension by zero in unbounded derived categories",
+   "results": "{\"t\": \"2026-10-22T06:58:05Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a normalized tensor comparison across Cartesian base change for open extension by zero in unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.instHasTensorTensorUnit\"], \"digest\": \"095a7afe06eadf5a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|map_braiding|braiding_naturality",
+   "results": "{\"t\": \"2026-10-22T06:58:34Z\", \"tool\": \"grep\", \"query\": \"homEquiv_unit|map_braiding|braiding_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\"], \"digest\": \"c7c80eb72fa908b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_unit\"",
+   "results": "{\"t\": \"2026-10-22T06:58:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"homEquiv_unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_unit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit\", \"CategoryTheory.Adjunction.mkOfHomEquiv_unit_app\"], \"digest\": \"9a81c5c05f5cde16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of an open extension by zero detects equality after restriction for a source isomorphic to an extension by zero, and base change preserves tensor unit equations",
+   "results": "{\"t\": \"2026-10-22T06:58:44Z\", \"tool\": \"leanfinder\", \"query\": \"Full faithfulness of an open extension by zero detects equality after restriction for a source isomorphic to an extension by zero, and base change preserves tensor unit equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.homEquiv_extendScalarsId\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\"], \"digest\": \"ab58d0aae2473307\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, monoidal, or ordinary scheme-module facts do not state the normalized unbounded pro-etale supported-tensor transport theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-open-product-swap",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry reduction for open extensions; returned open-product proof Steps 7--9: injectivity on the supported source, normalized Cartesian transport, and signed conjugation.",
+   "via": [
+    "lem-pur-finite-open-product-swap",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-supported-tensor-isomorphism-transport",
+  "worker": "stage1",
+  "summary": "Q82: split the actual transport into its normalized beta-unit identity, explicit tensor/composition identity, substitution proving the unit equation, supported-source injectivity, signed conjugation, and identity-square comparison. Reused the three existing operation/normalization/coherence nodes; no new nodes or statement changes. Exact Lean attachment search and two semantic Mathlib phrasings found no match.",
+  "blueprint": "Realizes the open-product symmetry subargument of lem-sf-kunneth-coherence, as reached through prop-pur-affine-space-composition-law and the recorded via chain: Cartesian swap transport and uniqueness of the signed comparison. The higher affine-space route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-sf-finite-open-tensor-operations",
+    "why": "Definitions of the actual finite open operations and Cartesian pullback comparisons; this is generic notation, not a replacement for a purity argument."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic unbounded open-extension units, full faithfulness, normalized Cartesian base change, and its restriction equation; no node of sk-prop-an supplies that ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-finite-open-tensor-operations",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-ea20f260a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-ea20f260a (reviewer sub-agent of L); spot-checked: Zero new nodes. Statement, stmt_deps, source and blueprint are unchanged against side-live, where the item is still unsplit (created by Q117 for lem-pur-finite-open-product-swap). There is no repair note, the item is in no dropped list, and the cited nodes do not cycle back to it. I read and re-derived all 7 steps against the cited statements. Step 1: orientation of lem-sf-open-tensor-normalization is X=Y', j=i', g_U=h. The adjunct of beta^{-1} is theta^{-1}∘T(eta'), which gives U(beta)∘theta^{-1}∘T(eta') = eta. Step 2: all types check and every factor is an isomorphism. Step 3: both sides are typed UGE'→TVR'⊗TVH'; it combines the composition clause of mu for i'h=gi with naturality for (a',b'). Step 4: the unit equation follows by naturality of theta and eta. Step 5: injectivity follows from full faithfulness plus an invertible unit, for every D_0 and for the reversed source. Step 6: it uses naturality of sigma, the signed-commutativity clause and Koszul involutivity, and the signs cancel. Step 7: the identity-square case needs the pullComp unitor coherence, which is accepted as elementary; the parent uses only the injectivity part. Source: lem-sf-kunneth-coherence.proof.md (main-20261015); the agent origin is declared and there is no SGA. Route: lem-pur-derived-pullback-tensor-iso is on route via sk-def-purity-conv. Tool uses accepted: lem-sf-open-tensor-normalization (a generic open-extension tool from sk-thm-sf-compatibility) and def-sf-finite-open-tensor-operations (a definition). Edge cases checked: i=id, W empty, zero inputs, odd shifts, unbounded inputs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedTensorIsomorphismTransport",
+  "declaration": "WeilConjectures.FiniteOpenProduct.supportedTensorIsomorphismTransport",
+  "declarations": [
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.UnitEquation",
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.identification",
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.transport",
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.reverse",
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.identityPull",
+   "WeilConjectures.FiniteOpenProduct.SupportedTensor.IdentityEquation",
+   "WeilConjectures.FiniteOpenProduct.supportedTensorIsomorphismTransport"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedTensorIsomorphismTransport.lean",
+  "statement": "theorem supportedTensorIsomorphismTransport (S : PurityFiniteSetting.{u}) {W Y W' Y' : Scheme.{u}} [W.Over (Spec (.of S.field.k))] [Y.Over (Spec (.of S.field.k))] [W'.Over (Spec (.of S.field.k))] [Y'.Over (Spec (.of S.field.k))] [IsSeparated (W ↘ Spec (.of S.field.k))] [IsSeparated (Y ↘ Spec (.of S.field.k))] [IsSeparated (W' ↘ Spec (.of S.field.k))] [IsSeparated (Y' ↘ Spec (.of S.field.k))] [LocallyOfFiniteType (W ↘ Spec (.of S.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of S.field.k))] [LocallyOfFiniteType (W' ↘ Spec (.of S.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of S.field.k))] [QuasiCompact (W ↘ Spec (.of S.field.k))] [QuasiCompact (Y ↘ Spec (.of S.field.k))] [QuasiCompact (W' ↘ Spec (.of S.field.k))] [QuasiCompact (Y' ↘ Spec (.of S.field.k))] (i : W ⟶ Y) (i' : W' ⟶ Y') [IsOpenImmersion i] [IsOpenImmersion i'] (g : Y ≅ Y') (h : W ≅ W') (s : IsPullback h.hom i i' g.hom) (R' H' : FiniteD S.Coefficient Y') (P' Q' : FiniteD S.Coefficient W') (a' : (pull S.Coefficient i').obj R' ≅ P') (b' : (pull S.Coefficient i').obj H' ≅ Q') (f' : tensor S.Coefficient Y' R' H' ≅ (finiteShriek S.Coefficient i').obj (tensor S.Coefficient W' P' Q')) (hf' : SupportedTensor.UnitEquation S.Coefficient i' R' H' P' Q' a' b' f'.hom) : IsIso (SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom) ∧ SupportedTensor.UnitEquation S.Coefficient i ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient h.hom).obj P') ((pull S.Coefficient h.hom).obj Q') (SupportedTensor.identification S.Coefficient i i' g h s R' P' a') (SupportedTensor.identification S.Coefficient i i' g h s H' Q' b') (SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom) ∧ (∀ D0 : FiniteD S.Coefficient W, Function.Injective (fun x : tensor S.Coefficient Y ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient g.hom).obj H') ⟶ (finiteShriek S.Coefficient i).obj D0 => (pull S.Coefficient i).map x)) ∧ (∀ D0 : FiniteD S.Coefficient W, Function.Injective (fun x : tensor S.Coefficient Y ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient g.hom).obj R') ⟶ (finiteShriek S.Coefficient i).obj D0 => (pull S.Coefficient i).map x)) ∧ (∀ x : tensor S.Coefficient Y ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient g.hom).obj H') ⟶ (finiteShriek S.Coefficient i).obj (tensor S.Coefficient W ((pull S.Coefficient h.hom).obj P') ((pull S.Coefficient h.hom).obj Q')), (pull S.Coefficient i).map x = (pull S.Coefficient i).map (SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom) → x = SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom) ∧ SupportedTensor.UnitEquation S.Coefficient i ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient h.hom).obj Q') ((pull S.Coefficient h.hom).obj P') (SupportedTensor.identification S.Coefficient i i' g h s H' Q' b') (SupportedTensor.identification S.Coefficient i i' g h s R' P' a') (SupportedTensor.reverse S.Coefficient i ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient h.hom).obj P') ((pull S.Coefficient h.hom).obj Q') (SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom)) ∧ (∀ x : tensor S.Coefficient Y ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient g.hom).obj R') ⟶ (finiteShriek S.Coefficient i).obj (tensor S.Coefficient W ((pull S.Coefficient h.hom).obj Q') ((pull S.Coefficient h.hom).obj P')), SupportedTensor.UnitEquation S.Coefficient i ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient h.hom).obj Q') ((pull S.Coefficient h.hom).obj P') (SupportedTensor.identification S.Coefficient i i' g h s H' Q' b') (SupportedTensor.identification S.Coefficient i i' g h s R' P' a') x → x = SupportedTensor.reverse S.Coefficient i ((pull S.Coefficient g.hom).obj R') ((pull S.Coefficient g.hom).obj H') ((pull S.Coefficient h.hom).obj P') ((pull S.Coefficient h.hom).obj Q') (SupportedTensor.transport S.Coefficient i i' g h s R' H' P' Q' f'.hom)) ∧ SupportedTensor.IdentityEquation S.Coefficient i' R' H' P' Q' f'.hom",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Stage 2 attachment only: Q82 reviewed the stage-1 split, not a Lean statement. Helpers name exactly the displayed composites, actual unit equations and identity-unit transport; all operations are the recorded FiniteOpenProduct definitions. The sole postponed theorem is this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-600fafd9d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Only the item lean record and the new module SupportedTensorIsomorphismTransport changed against live; statement verbatim. Every node clause checked: transport = μ_g⁻¹ ≫ g*f' ≫ beta(h,i,i',g,s) ≫ i_!μ_h (orientation and types checked); UnitEquation = pull(i).map f = μ_i ≫ (a⊗b) ≫ adj.unit; a,b = square.app ≪≫ pull(h).mapIso a'; IsIso; injectivity for all D0 for R⊗H and H⊗R; uniqueness of f; reverse = σ_{H,R} ≫ f ≫ i_!σ_{P,Q} with its (b,a) unit equation and uniqueness; identity-square clause via identityPull (upperStarId + mapDerivedCategoryIdIso) at IsPullback.of_id_fst with no object equalities. No extra hypotheses (k-structure only on objects), unbounded FiniteD, universes u/u+1. Helpers are real constructions from the recorded FiniteOpenProduct operations (def-sf-finite-open-tensor-operations, existing:true, in stmt_deps); identityPull is not a duplicate (other pullId/identityPull are étale). Docstrings and sorry-only gates ok. No compile (no file changed). Maintainer note: the item imports FiniteOpenProductSwap, which is also the module of the parent lem-pur-finite-open-product-swap whose proof_deps cite the item, so stage 3 would hit an import cycle. The group cannot fix this; split the 17 plain defs into a def-node data module. Advisory: lem-pur-derived-pullback-tensor-iso supplies nothing used in the Lean statement (tensorPullIso is the same canonical 07A4 map)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T204854-L-3030948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

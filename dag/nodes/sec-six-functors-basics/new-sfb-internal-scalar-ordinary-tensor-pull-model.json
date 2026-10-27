@@ -1,0 +1,130 @@
+{
+ "id": "new-sfb-internal-scalar-ordinary-tensor-pull-model",
+ "kind": "statement",
+ "title": "The ordinary scalar tensor square for the native pullback tensorator",
+ "statement": "Let a:Lambda to Lambda-prime be a morphism of commutative condensed rings and f:X to Y a scheme morphism. Use the restricted regular coefficients B0 from [def-sfb-internal-derived-scalar-comparisons], the coefficient isomorphism e of [new-integral-residue-ordinary-tensor-square], and its homotopy image eH. For every homotopy complex P, inverse restriction/pullback followed by restriction of inverse scalar/pullback, the X tensor presentation, inverse single-tensor comparison and eH inverse on the coefficient equals ordinary pullback of the Y tensor presentation and inverse single-tensor comparison, followed by the homotopy tensorator of the native monoidal pullback. This is the formula of [new-integral-residue-ordinary-tensor-normalization] with the native composite monoidal structure. No derived scalar comparison or flatness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "new-integral-residue-ordinary-tensor-square",
+  "lem-weil-pbc-integral-reduction-tensor",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "On the preserved balanced tensor coequalizer, native mapMod followed by restriction along the inverse coefficient isomorphism has the same tensorator as ResidueOrdinary.tensorComparison. This follows from their defining projection equations and coequalizer uniqueness.",
+   "uses": [
+    "def-sfb-mapmod-strong-monoidal",
+    "def-sfb-comap-iso-strong-monoidal",
+    "new-integral-residue-ordinary-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport through extendScalarsIsoComapInv. Naturality of that isomorphism and Monoidal.transport_delta identify the native composite pullback tensorator with the transported one. The unit maps agree by map_id. OplaxMonoidal.ext gives equality of the two oplax structures.",
+   "uses": [
+    "new-integral-residue-ordinary-monoidal",
+    "def-sfb-comap-iso-strong-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply residueOrdinaryTensorPull_homotopy to the arbitrary coefficient map a and rewrite its oplax structure using the preceding equality. No derived comparison or flatness assumption is involved.",
+   "uses": [
+    "new-integral-residue-ordinary-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-mapmod-strong-monoidal",
+  "def-sfb-comap-iso-strong-monoidal",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-ordinary-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "Explicit balanced-coequalizer comparison of the native and transported ordinary tensorators, then the existing arbitrary-coefficient homotopy square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor transport through a natural isomorphism agrees with composition on tensorators",
+   "date": "2026-10-26",
+   "results": "8 hits, including Monoidal.transport_mu, transport_delta, transport and natTransIsMonoidal_of_transport.",
+   "verdict": "Use transport_delta. The relative module tensor comparison is in the project source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transport_δ\"",
+   "date": "2026-10-26",
+   "results": "Monoidal.transport_delta and its reassociated equation.",
+   "verdict": "Used in the native/transported comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapModComapMonoidal|tensorPullCounit_fac|scalarTensorRegularPullIso",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Local rg locates the project module-object constructions and the arbitrary-coefficient ordinary homotopy square.",
+   "verdict": "Apply the project square after proving equality of the oplax structures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarPullRouteModel",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps. Step 3: identify the native and transported ordinary pullback tensorators.",
+   "via": [
+    "lem-sfb-internal-scalar-pull-route-model"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalScalarOrdinaryTensorPullModel",
+  "file": "lean/Sheaf/Paper/InternalScalarOrdinaryTensorPullModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalar_ordinary_tensor_pull_model",
+  "statement": "theorem scalar_ordinary_tensor_pull_model (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :\n    let F := CondensedRing.upperStar Λ f\n    let FP := (F.mapHomotopyCategory (.up ℤ)).obj P\n    let e := CondensedRing.residueOrdinaryRestrictedRegularPullIso Λ Λ' a f\n    let eH := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj (B₀ a Y)) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app (B₀ a Y) ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let TP := ((extension a Y).mapHomotopyCategory (.up ℤ)).obj P\n    (NatTrans.mapHomotopyCategory (CondensedRing.comapUpperStarIso a f).inv\n        (.up ℤ)).app TP ≫\n      ((V₀ a X).mapHomotopyCategory (.up ℤ)).map\n        ((NatTrans.mapHomotopyCategory (CondensedRing.pullIso a f).inv (.up ℤ)).app P) ≫\n      (Mod.tensorPresentationHomotopyIso (coefficientMap a X)).hom.app FP ≫\n      (homotopyTensorSingleIso (B₀ a X)).inv.app FP ≫ eH.inv ▷ FP =\n    (F.mapHomotopyCategory (.up ℤ)).map\n        ((Mod.tensorPresentationHomotopyIso (coefficientMap a Y)).hom.app P ≫\n          (homotopyTensorSingleIso (B₀ a Y)).inv.app P) ≫\n      ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app\n        (Functor.tensorModelCoefficient (B₀ a Y))).app P",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

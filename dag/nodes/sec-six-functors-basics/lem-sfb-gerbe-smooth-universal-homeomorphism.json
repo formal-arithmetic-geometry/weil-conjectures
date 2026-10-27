@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-gerbe-smooth-universal-homeomorphism",
+ "kind": "statement",
+ "title": "Geometry and topology of algebraic gerbes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Algebraic stacks and algebraic spaces over $S$ use [def-sfb-algebraic-moduli-stack, def-trf-algebraic-space], with 2-fibre products as in [def-sfb-stable-pointed-moduli-groupoids] and point spaces as in [lem-sfb-stack-point-topology-flat-lfp-open]. Let $p:\\mathcal X\\to Q$ be a gerbe with $\\mathcal X$ an algebraic stack and $Q$ an algebraic space. A map $p:\\mathcal X\\to Q$ to an algebraic space is a gerbe if for every scheme $T\\to Q$ its fibre groupoid has objects fppf locally on $T$, and any two objects of that fibre groupoid are isomorphic fppf locally on $T$ [def-pc-fppf-site]. Then $p$ is surjective and smooth. More explicitly, for every smooth surjective scheme atlas $u:U\\to\\mathcal X$, the composite $pu:U\\to Q$ is surjective, flat and locally of finite presentation, tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-sbc-smooth-morphisms]. For every algebraic stack $\\mathcal T/S$ and morphism $\\mathcal T\\to Q$, the projection induces a homeomorphism $|\\mathcal X\\times_Q\\mathcal T|\\to|\\mathcal T|$. No reducedness, Noetherian, quasi-compactness or inertia-finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0DN8 (lemma-gerbe-smooth), 06QI (lemma-gerbe-fppf), 06R9 (lemma-gerbe-bijection-points), 06QE (lemma-base-change-gerbe), 075V (lemma-composition-smooth); stacks-properties.tex Tag 04ZT (lemma-composition-surjective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-pc-fppf-site",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-gerbe-moduli-map",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "The gerbe condition is preserved by base change to a scheme $V\\to Q$: its lift groupoids over $T\\to V$ are precisely those over the composite $T\\to Q$. The same observation applies to $\\mathcal P=\\mathcal X\\times_Q\\mathcal T\\to\\mathcal T$, whose objects are pairs with an isomorphism over $Q$. The fibre products are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products]. For any field object $t:\\operatorname{Spec}K\\to\\mathcal T$, local nonemptiness gives an fppf covering of $\\operatorname{Spec}K$ with lifts. Choose a point on a nonempty member and its residue field $L$; this gives a lift over $L/K$. Thus $|\\mathcal P|\\to|\\mathcal T|$ is surjective, including $p$ itself.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06QE (lemma-base-change-gerbe), 06R9 (lemma-gerbe-bijection-points), surjectivity and explicit base-change argument"
+   }
+  },
+  {
+   "text": "Fix an arbitrary smooth surjective scheme atlas $U\\to\\mathcal X$ and an etale scheme chart $V\\to Q$. Put $\\mathcal G=\\mathcal X\\times_QV$ and $U_V=U\\times_QV$; the latter is a scheme by the representable diagonal of $Q$ [def-trf-algebraic-space]. The atlas base changes to a smooth surjective map $U_V\\to\\mathcal G$ by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The gerbe condition gives an fppf cover $\\{V_i\\to V\\}$ and objects $x_i\\in\\mathcal G(V_i)$. Set $\\mathcal G_i=\\mathcal G\\times_VV_i$, $U_i=U_V\\times_VV_i$ and $W_i=U_i\\times_{\\mathcal G_i}V_i$. By [lem-sfb-neutral-gerbe-section-fppf], the section $V_i\\to\\mathcal G_i$ is representable, surjective, flat and locally of finite presentation. Consequently $W_i$ is an algebraic space, $W_i\\to U_i$ has those three properties, and $W_i\\to V_i$ is smooth as the base change of the atlas. These base changes use [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-pc-fppf-site",
+    "lem-sfb-neutral-gerbe-section-fppf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QG (lemma-gerbe-with-section)(3); Tag 0DLS (lemma-smooth-quotient-stack), diagram behind the source-descent argument"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $Z_i\\to W_i$. The calculus [lem-sfb-stack-chartwise-smooth-etale-calculus] makes $Z_i\\to U_i$ surjective, flat and locally of finite presentation, and $Z_i\\to V_i$ smooth. Both $U_i$ and $V_i$ are schemes, so [lem-sbc-smooth-flat-surjective-source-descent] gives $U_i\\to V_i$ smooth. By [lem-sfb-space-smooth-surjective-fppf-locality] on the scheme target $V$, smoothness descends from all $U_i\\to V_i$ to $U_V\\to V$. This holds for every etale scheme chart $V\\to Q$, hence $U\\to Q$ is smooth by the chart test. Since the original atlas was arbitrary, $p$ is smooth in the atlas sense, and every composite $U\\to Q$ is flat and locally of finite presentation by the same calculus. It is surjective: step 1 lifts each field-valued point to $\\mathcal X$ after extension, and the atlas lifts that object after a further extension. This proves every geometric clause without asserting smoothness of a gerbe section.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DLS (lemma-smooth-quotient-stack), 0DN8 (lemma-gerbe-smooth); descent.tex Tag 05B5 (lemma-smooth-permanence)"
+   }
+  },
+  {
+   "text": "Fix $\\mathcal T\\to Q$ and write $b:\\mathcal P\\to\\mathcal T$ for the projection. To check injectivity on points, suppose field-valued objects $(x_1,t_1,\\alpha_1)$ and $(x_2,t_2,\\alpha_2)$ have the same image class in $|\\mathcal T|$. By [lem-sfb-stack-point-topology-flat-lfp-open], pass to a common field $M$ and choose an isomorphism $t_1\\simeq t_2$. Using it and the two $\\alpha_i$, view $x_1,x_2$ as objects of the same gerbe fibre over the map $\\operatorname{Spec}M\\to Q$. Local connectedness gives an fppf covering on which they are isomorphic in that fibre. Taking a point of a nonempty member yields a field extension $N/M$ and an isomorphism compatible with the chosen isomorphism of the $t_i$. By the explicit triple description [def-sfb-stable-pointed-moduli-groupoids], these are isomorphic objects of $\\mathcal P(N)$. Thus they give the same point. Combined with step 1 this proves bijectivity of $|b|$.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06R9 (lemma-gerbe-bijection-points), injectivity: details of the omitted field-extension argument"
+   }
+  },
+  {
+   "text": "Continuity of $|b|$ follows from [lem-sfb-stack-point-topology-flat-lfp-open]. Choose a smooth surjective scheme atlas $A\\to\\mathcal T$, set $\\mathcal B=\\mathcal P\\times_{\\mathcal T}A=\\mathcal X\\times_QA$, and choose a smooth surjective scheme atlas $Z\\to\\mathcal B$. These products are algebraic by [lem-sfb-algebraic-stack-fibre-products]. Steps 2--3 apply to the gerbe $\\mathcal B\\to A$, and show $Z\\to A$ flat and locally of finite presentation. Its point map is open by [lem-sfb-stack-point-topology-flat-lfp-open]. For open $O\\subseteq|\\mathcal P|$, let $O_Z$ be its inverse image in $|Z|$, open by continuity. Then $|A\\to\\mathcal T|^{-1}(|b|(O))$, equals the image of $O_Z$ in $|A|$. For the nontrivial inclusion, a point of $A$ and a point in $O$ with the same image in $\\mathcal T$ have representatives with isomorphic images after common field extension. Their pair with that isomorphism gives a point of $\\mathcal B$; the atlas $Z$ lifts it after further extension. The lift is in $O_Z$. The other inclusion follows from commutativity. Thus this inverse image is open, and the atlas criterion for $A\\to\\mathcal T$ makes $|b|(O)$ open. A continuous open bijection is a homeomorphism: its inverse takes the open set $O$ to the open set $|b|(O)$.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06R9 (lemma-gerbe-bijection-points), openness; stacks-properties.tex Tags 04XH (lemma-points-cartesian), 04XL (lemma-topology-points)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-neutral-gerbe-section-fppf",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-stack-point-topology-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06QG(3), 0DLS, 0DN8, 06QE and 06R9; smoothness descent and point-space arguments written out on charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A gerbe morphism of algebraic stacks is surjective smooth and a universal homeomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [inst_2 : CategoryTheory.Limits.HasColimits C] [CategoryTheory.Limits.HasLimits C]\\n  [CategoryT\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, a morphism $f: X \\\\to Y$ is an epimorphism in the category of sheafed spaces over $\\\\mathcal{C}$ if the underlying continuous map of $f$ is \"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsPreimmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"If $ f : X \\\\to Y $ is a preimmersion of schemes, then the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes such that both $ f $ and $ g $ induce surject\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes having surjective induced maps on stalks is Zariski-local at the source, meaning it can be checked locally on an open cover of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isPreimmersion_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsPreimmersion f ↔\\n    AlgebraicGeometry.SurjectiveOnStalks f ∧ Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, $ f $ is a preimmersion if and only if the induced maps on stalks are surjective and the underlying continuous map $ f : X \\to Y $ is a topological embedding\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it is both an open immersion and a surjective morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every base change of a gerbe induces a homeomorphism on underlying spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.base_isIso_of_iso\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y)\\n  [CategoryTheory.IsIso f], CategoryTheory.IsIso f.base\", \"doc\": \"Given a category $\\\\mathcal{C}$, the collection of presheafed spaces over $\\\\mathcal{C}$ forms a category. The objects are presheafed spaces (topological spaces equipped with presheaves in $\\\\mathcal{C}$\"}\n  {\"name\": \"TopCat.Presheaf.presheafEquivOfIso_functor_obj_obj\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {X Y : TopCat} (H : X ≅ Y)\\n  (G : CategoryTheory.Functor (TopologicalSpace.Opens ↑X)ᵒᵖ C) (X_1 : (TopologicalSpace.Opens ↑Y)ᵒᵖ),\\n  ((TopCat.Presheaf.presheafEquivOfIso C H).functor.obj G).obj X_1 =\\n    G.obj (Opposite.op ((TopologicalSpace.Ope\", \"doc\": \"For any category $\\\\mathcal{C}$, homeomorphism $H : X \\\\cong Y$ between topological spaces, presheaf $G$ on $X$, and open set $U \\\\subseteq Y$, the evaluation of the presheaf $H_*(G)$ on $Y$ at $U$ is eq\"}\n  {\"name\": \"TopCat.Presheaf.pullbackHomIsoPushforwardInv\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} → (H : X ≅ Y) → TopCat.Presheaf.pullback C H.hom ≅ TopCat.Presheaf.pushforward C H.inv\", \"doc\": \"Given a homeomorphism $ H : X \\\\cong Y $ between topological spaces, there is an isomorphism between the pullback functor along $ H $ and the pushforward functor along $ H^{-1} $. This isomorphism is c\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.isoOfComponents_hom\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (H : ↑X ≅ ↑Y)\\n  (α : (TopCat.Presheaf.pushforward C H.hom).obj X.presheaf ≅ Y.presheaf),\\n  (AlgebraicGeometry.PresheafedSpace.isoOfComponents H α).hom = { base := H.hom, c := α.inv }\", \"doc\": \"For presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, if there exists an isomorphism $H: X_{\\\\text{base}} \\\\cong Y_{\\\\text{base}}$ of their underlying topological spaces and an isomorphism $\\\\a\"}\n  {\"name\": \"TopCat.Presheaf.presheafEquivOfIso_functor_obj_map\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {X Y : TopCat} (H : X ≅ Y)\\n  (G : CategoryTheory.Functor (TopologicalSpace.Opens ↑X)ᵒᵖ C) {X_1 Y_1 : (TopologicalSpace.Opens ↑Y)ᵒᵖ}\\n  (f : X_1 ⟶ Y_1),\\n  ((TopCat.Presheaf.presheafEquivOfIso C H).functor.obj G).map f =\\n    G.map ((TopologicalSp\", \"doc\": \"Given a homeomorphism $ H : X \\\\cong Y $ between topological spaces, there exists an equivalence between the category of presheaves on $ X $ with values in $ \\\\mathcal{C} $ and the category of presheave\"}\n  {\"name\": \"TopCat.Presheaf.presheafEquivOfIso\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → {X Y : TopCat} → (X ≅ Y) → (TopCat.Presheaf C X ≌ TopCat.Presheaf C Y)\", \"doc\": \"Given a homeomorphism $ H : X \\\\cong Y $ between topological spaces, this constructs an equivalence between the category of presheaves on $ X $ with values in $ \\\\mathcal{C} $ and the category of preshe\"}\n  {\"name\": \"TopCat.Presheaf.pullbackInvIsoPushforwardHom\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} → (H : X ≅ Y) → TopCat.Presheaf.pullback C H.inv ≅ TopCat.Presheaf.pushforward C H.hom\", \"doc\": \"Given a homeomorphism $ H : X \\\\cong Y $ between topological spaces, this constructs an isomorphism between the pullback presheaf functor along the inverse map $ H^{-1} $ and the pushforward presheaf f\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.isoOfComponents\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : AlgebraicGeometry.PresheafedSpace C} →\\n      (H : ↑X ≅ ↑Y) → ((TopCat.Presheaf.pushforward C H.hom).obj X.presheaf ≅ Y.presheaf) → (X ≅ Y)\", \"doc\": \"Given presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, if there exists an isomorphism $H: X_{\\\\text{base}} \\\\cong Y_{\\\\text{base}}$ of their underlying topological spaces and an isomorphism $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gerbe\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe|AlgebraicStack|universalHomeomorph",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic gerbe map is smooth surjective and universally homeomorphic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(h : Function.Surjective (algebraMap R A)) :\\n  Algebra.FormallySmooth R A ↔ IsIdempotentElem (RingHom.ker (algebraMap R A))\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ A $, if the canonical algebra map $ R \\\\to A $ is surjective, then $ A $ is formally smooth over $ R $ if and only if the kernel of this map is an \"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singleton-stack-finite-field-homeomorphism",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison.",
+   "via": [
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "worker": "stage1",
+  "summary": "One neutral-section input, explicit source descent on scheme charts, and field-extension/topological proof for arbitrary algebraic-stack base change. Corrected doubled TeX escaping only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme source descent (05B5) applied to Z_i -> U_i -> V_i, exactly the 0DLS argument; no same-unit node states source descent for a merely fppf cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-6d568eb5a",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-6d568eb5a (reviewer sub-agent of L); spot-checked: Read Stacks 06QG with its proof, 06QI, 0DN8, 0DLS with its proof, 06R9 with its proof and 06QE. The item statement, stmt_deps and blueprint are identical to live; only the proof fields changed, there is no re-split note and live still shows the item unsplit. Step 1 (base change of the gerbe condition, surjectivity via a nonempty fppf member and its residue field) is correct because Q is a sheaf of sets. Step 2: U_V is a scheme by the representable diagonal of Q; U_V->G is a base change of the atlas; the sections over the fppf cover V_i make W_i->U_i fppf (new node) and W_i->V_i smooth, and the two arrows are not swapped. Step 3: an etale chart Z_i plus 05B5 source descent on schemes, then fppf locality on the scheme V, gives U->Q smooth, and flat, lfp and surjective follow. Step 4 writes out the injectivity Stacks omits; the compatibility of (gamma, beta) is automatic since Q is discrete. Step 5: openness via Z->A between schemes with the two-sided image equality, then the atlas criterion. New node = 06QG(3) over a scheme base. Representability follows from the diagonal. Tested on the trivial gerbe, on B mu_p in char p (fppf but not smooth; no smoothness is claimed) and on an empty base. It is strictly smaller than the item, has a statement only, and has no duplicate in the DAG: rg over gerbe, 06QG/0DN8/06R9/0DLS, [U/G] and classifying stack found only singleton-stack, flat-inertia-quotient and free-group-quotient nodes, all distinct. The dependency closure (~9.9k nodes) contains no cycle back to the item. Accepted tool_use: lem-sbc-smooth-flat-surjective-source-descent (generic 05B5, already used in this unit by flat-inertia-algebraic-space-quotient). Batch-5: each listed citation reaches sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-projective-bundle-morphism. Neither is part of the statement or proof of the trace formula or of Poincare duality, so no assumption leaf is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GerbeSmoothUniversalHomeomorphism",
+  "declaration": "CategoryTheory.gerbe_smooth_universal_homeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/GerbeSmoothUniversalHomeomorphism.lean",
+  "statement": "theorem gerbe_smooth_universal_homeomorphism {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (Q : AlgebraicSpace S) (p : BasedFunctor F (discreteModuli Q.obj.obj)) (hF : IsAlgebraicModuliStack F) (hp : IsGerbeModuliMap p) : Function.Surjective (moduliPointMap p) ∧ (∀ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a → ModuliSpaceTest @Smooth (a.comp p) ∧ Function.Surjective (moduliPointMap (a.comp p)) ∧ ModuliSpaceTest @Flat (a.comp p) ∧ ModuliSpaceTest @LocallyOfFinitePresentation (a.comp p)) ∧ (∀ (T : BasedCategory.{v₂, w₂} (Over S)), IsAlgebraicModuliStack T → ∀ t : BasedFunctor T (discreteModuli Q.obj.obj), IsHomeomorph (moduliPointMap (moduliTwoFiberSnd p t)))",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-274c557c1",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause (Stacks 0DN8/06QI/06R9/06QC/06P1(2)): IsAlgebraicModuliStack F, AlgebraicSpace Q, actual p; new IsGerbeModuliMap = 06P1 (2)(a)/(2)(b) on fppfTopology.over S covering sieves, restriction via discreteModuliMap(yoneda.map a), (2)(b) compatibility automatic by discrete fibres; conclusions: Surjective moduliPointMap p; for every IsSmoothModuliAtlas, ModuliSpaceTest Smooth/Flat/LFP (pinned HasSpaceBaseChange, all étale charts) + surjective composite; for every algebraic stack T→Q IsHomeomorph of moduliPointMap of actual moduliTwoFiberSnd with atlas-sup topology (04XL). No extra hypotheses, independent universes (v1,w1)/(v2,w2), edge cases (empty, trivial gerbe, Bμ_p) OK. Item differs from live only in lean+stmt_deps; added open-moduli-substack and dm-stack-morphism-properties on base with records; new def node justified (no gerbe def live/in-flight; other gerbe nodes are theorems with lean null). Statements verbatim, docstrings with source/blueprint/5 proof steps, single sorry, no axioms, proof imports exist live. Second-reading section is worker self-reread (dispatcher forbade agents) — noted. No file changed, no compile."
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "def-sp-complete-compactification-scalar-comparison-data",
+ "kind": "definition",
+ "title": "Normalized scalar comparison data for completed compactifications",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$. Use the completed integral sheaves, exact strict coefficient-tower presentations, reductions, normalized limit presentations, ordinary section-model operations, evaluations and scalar squares of [def-sp-complete-compactification-limit-comparison]. For a compactification $c=(j,p)$, presentations $D_X,D_{\\bar X},D_Y$, reductions $r_X,r_{\\bar X},r_Y$, limit presentations $a_X,a_{\\bar X},a_Y$ and evaluations $v_X,v_{\\bar X},v_Y$, define a normalized scalar comparison datum to consist of: an ordinary natural isomorphism $U_X\\mathbin{\\ggg}j_{!,R}^{\\mathrm{Tow}}\\simeq j_{!,\\bullet}\\mathbin{\\ggg}U_{\\bar X}$; an ordinary natural isomorphism $U_{\\bar X}\\mathbin{\\ggg}p_{*,R}^{\\mathrm{Tow}}\\simeq p_{*,\\bullet}\\mathbin{\\ggg}U_Y$; and a derived isomorphism $(U_{\\bar X})^D\\mathbin{\\ggg}Rp_{*,R}^{\\mathrm{Tow}}\\simeq Rp_{*,\\bullet}\\mathbin{\\ggg}(U_Y)^D$. Each ordinary comparison, followed by the fixed finite evaluation comparison and finite scalar restriction, must equal the canonical ordinary open or pushforward scalar comparison at every strict tower and positive index. The derived direct-image comparison must satisfy the composition-unit normalization IsPushScalarNormalized relative to the ordinary direct-image comparison, on every complex. This defines a type of normalized data, asserting no inhabitant and no invertibility of any compactification limit word.",
+ "stmt_deps": [
+  "def-sp-complete-compactification-limit-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Normalization and Bijections: canonical reduction/total-limit and compactification comparison data"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized integral coefficient tower reconstruction comparison data with natural compact support and exceptional inverse limit isomorphisms",
+   "results": "8 hits; ProfiniteGrp.isIso_toLimit, Profinite.isIso_asLimitCone_lift, IsLocalization.integerNormalization_coeff, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, Profinite.isoAsLimitConeLift, Profinite.asLimitConeIso, IsLocalization.integerNormalization, IsLocalization.coeffIntegerNormalization.congr_simp. No Mathlib match for this geometric data.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized scalar restriction comparisons for completed compactification direct image on strict coefficient towers",
+   "results": "8 hits; IsScalarTower.AlgEquiv.restrictNormalHom_comp, AlgHom.restrictNormal_comp, AlgHom.restrictNormalAux, AlgHom.restrictNormal, AbstractCompletion.compare_comp_eq_compare, IsAdicComplete.StrictMono.of_comp_lift, IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, AlgHom.restrictNormal_commutes. No Mathlib match for this geometric data.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarComparison|reconstructionResult|SpIntegralAdjunction",
+   "results": "0 hits; . No Mathlib category-theory declaration; project ScalarComparison exists in CompleteCompactificationLimitRealization. Reconstruction helpers exist only in returned head aad47d6d3da7; now relocated without duplicate declarations. DAG search has no definition-node owner.",
+   "date": "2026-10-25",
+   "verdict": "existing project structure; definition-node owner missing"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-adjunction-bijection",
+  "date": "2026-10-25",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Bijections: canonical reduction/total-limit and compactification comparison data",
+   "via": [
+    "det-sp-integral-adjunction-bijection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "module": "Sheaf.Paper.CompleteCompactificationLimitRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteCompactificationLimit.ScalarComparison",
+  "statement": "structure ScalarComparison (b : SpTowerShriek.Base l E)\n    (o : SpTowerShriek.Operations l E b) (h : ScalarSquares l E)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (DX : SpCoefficientTowersAbelian l E X) (DZ : SpCoefficientTowersAbelian l E c.Z)\n    (DY : SpCoefficientTowersAbelian l E Y)\n    (rX : SpReductionTower l E X DX) (rZ : SpReductionTower l E c.Z DZ)\n    (rY : SpReductionTower l E Y DY)\n    (aX : LimitPresentation l E X DX rX) (aZ : LimitPresentation l E c.Z DZ rZ)\n    (aY : LimitPresentation l E Y DY rY)\n    (vX : Evaluation l E b X DX) (vZ : Evaluation l E b c.Z DZ)\n    (vY : Evaluation l E b Y DY)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition-node ownership of the existing ScalarComparison structure, as explicitly requested in H2 of the return of aad47d6d3da7. The structure is reused in place, not redefined; its existence or inhabitance is not asserted by this definition node."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a86bd3e1a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a86bd3e1a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "H2 repaired: plain defs (limit/reduction/reduce/support/exceptional/right/ordinaryConjugation/towerWord/Reconstruction/reconstructionResult) moved verbatim (diff vs aad47d6d: only blueprint tags, removed theorem, unused Restrict import) to new def node def-sp-integral-reconstruction-comparison-data / IntegralReconstructionComparisonData; ScalarComparison owned by existing:true def-sp-complete-compactification-scalar-comparison-data (statement verbatim in CompleteCompactificationLimitRealization, node text matches fields); item stmt_deps swap the two theorem nodes for the two def nodes, proof_deps unchanged; lemma module theorem-only. Maths re-checked: hypotheses match the node (no extra Noetherian/CharP), homChain = three bijections, unit/counit reduction typed by hand (restrictFullyFaithful formulas), limit/finite clauses pinned, purity ∀ s IsIso covers canonical q_K, imageComparison pinned via element-normalized presentations; edge cases (empty, zero, f=id d=0, n↦ℓ^{n+1}) fine; lean.statement verbatim for all 4 records; sorry only in the 2 theorems. Note: O2 0bf51034 (PASS, unlanded) delivers the same lemma node at the same module path with different content; second lander is refused by merge (dep lean changed); NZ item is independent of the lemma (private import), so only a rebind is needed if O2 lands first. Advisory: uncited def owners of interface decls (SpTowerCalculus.realization/C/F, reductionCompactSupport, SpChartAdmissibility.Twists, SpTowerGamma.factorization in lemma); second reading is a self-reading. No fix, no compile.; reverted the delivery's change of existing node(s) lem-sp-integral-reconstruction-comparisons (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd90f",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162110-L-278300",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from 3 new sorried statements) vs packet nodes, support defs (openLimit/pushLimit/fixedOpenEvaluation), proEtaleRingedExtensionByZero_products and ringedTowerPushforwardLimitComparison hypotheses, unit realized (empty); sandbox compile of 3 new modules + item + importer IntegralReconstructionComparisons OK; axioms propext/sorryAx/choice/Quot.sound",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CompleteCompactificationLimit.complete_compactification_limit_realization"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,315 @@
+{
+ "id": "lem-trf-power-map-smooth-graph-local-data",
+ "kind": "statement",
+ "title": "Power-map differential and smooth local graph data",
+ "statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field], and let $X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism]. Let $h:X\\to X$ be a $k$-endomorphism and $x:\\operatorname{Spec}k\\to X$ a $k$-point with $h\\circ x=x$. Assume that $x$ has an $h$-stable affine open neighbourhood $\\operatorname{Spec}B$ [def-weil-affine-spectrum], that $B$ is generated as a $k$-algebra by $t_1,\\ldots,t_r$, and that $h^\\#(t_i)=t_i^{p^n}$ for some integer $n\\geq1$. On tangent spaces [def-sc-scheme-tangent-space] one has $dh_x=0$ and $1-dh_x=1$, including when $x$ is singular. Under the canonical identification $T_{X\\times_kX,(x,x)}\\simeq T_{X,x}\\oplus T_{X,x}$ [def-pc-fibre-product], the tangent images of the graph $(1,h)$ and the diagonal $(1,1)$ are respectively $\\{(v,0):v\\in T_{X,x}\\}$ and $\\{(v,v):v\\in T_{X,x}\\}$; they have zero intersection and their sum is the whole tangent space.\nSuppose in addition that $x$ belongs to a smooth open $U\\subseteq X$ [def-sbc-smooth-morphisms], and that the local ring of the equalizer $F=X\\times_{X\\times_kX,(1,h),\\Delta_X}X$ at the point specified by $x$ is $k$ via its structural map. Put $d=\\dim\\mathcal O_{X,x}$ [def-weil-pbc-krull-dimension-ring]. There exist affine open neighbourhoods $W\\subseteq V\\subseteq U$ of $x$ with $h(W)\\subseteq V$. The open neighbourhood $W\\times_kV$ of $(x,x)$ in $X\\times_kX$ is smooth over $k$, and the graph of $h|_W:W\\to V$ and of the inclusion $W\\hookrightarrow V$ are closed subschemes [def-weil-closed-immersion] isomorphic to $W$. Write $A=\\mathcal O_{X\\times_kX,(x,x)}$, and let $I,J\\subset A$ be the kernels of the stalk maps from $A$ to $\\mathcal O_{X,x}$ induced respectively by these graph and diagonal maps. Then $A,A/I,A/J$ are regular local rings [def-weil-regular-scheme], with residue field $k$, and\n$$\\dim_kT_{X,x}=d,\\quad\\dim A=2d,\\quad\\dim(A/I)=\\dim(A/J)=d,\\quad I+J=\\mathfrak m_A,\\quad A/(I+J)\\simeq k.$$\nThe last isomorphism identifies this quotient with the given equalizer local ring. No global separatedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+  "place": "Step 3, vanishing differential on model coordinates and complementary graph/diagonal tangents, then smooth affine local ambient and graph quotient data (old expanded steps 7–8)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-sc-scheme-tangent-space",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "For the rational point x, the structural residue map k → κ(x) is bijective. The canonical residue-field point therefore equals x. The given fixed-point identity transports to this canonical point. Graph and diagonal carry x to the specified product point by the fibre-product universal property.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a tangent vector v, the dual-number source has a closed point mapping to x, hence factors through the affine open O. Compare v followed by h with the zero tangent vector on sections of O. The maps agree on structural constants because both are over k, and their first dual-number coordinates agree because x is fixed. In characteristic p the second coordinate of a power a^(p^n) is zero for n ≥ 1, by the explicit square-zero power formula. The zero tangent vector also has zero second coordinate. The generator-closure hypothesis implies equality of ring maps, hence equality of the morphisms. Choose the zero linear map D, proving the required postcomposition formula and id-D=id.",
+   "uses": [
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rational product tangent-space equivalence and transport its base point from the canonical residue-field point to the specified x. Its projection formulas and the vanishing just proved show, by pullback hom-extensionality, the required graph and diagonal formulas. Injectivity of the equivalence gives the zero intersection; the identity (a,b)=(a-b,0)+(b,b) gives the sum assertion.",
+   "uses": [
+    "lem-sc-product-tangent-space-direct-sum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Smooth regularity on U and the stalk isomorphism of its open immersion imply regularity of O_X,x. Use the existing rational tangent/cotangent linear equivalence, equality of ranks under the bijective structural residue map, invariance of finrank under duality, and the regular-local cotangent dimension formula. Thus d=finrank_k T_X,x is a natural number equal to the Krull dimension of O_X,x.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-rational-point-tangent-derivation-identification",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose affine V containing x inside U, then affine W containing x inside V intersect h^(-1)(V). Restriction gives hW:W→V. The two graph maps into W×_k V are sections of its first projection. That projection is separated because V is affine over the affine base; consequently both sections are closed immersions. Smoothness is preserved by restriction, base change and composition. The canonical map W×_k V→X×_k X is an open immersion containing the rational product point, and smooth regularity transfers its stalk regularity to the ambient stalk A. Its residue field is k, since the displayed product point is a section over k. The product tangent equivalence and regular-local dimension formula give dim A=2d; no shrinking to constant relative dimension is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-product-tangent-space-direct-sum",
+    "lem-sc-rational-point-tangent-derivation-identification",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The global graph and diagonal maps are sections of the first projection. Functoriality on stalks therefore gives right inverses to their stalk ring maps α,β:A→R, without assuming global separatedness. These maps are surjective. Take I=ker α and J=ker β and use the quotient-by-kernel ring equivalences to R. Regularity, dimension d and bijectivity of the structural residue maps transfer along these ring equivalences; structural compatibility follows from functoriality of the stalk maps.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the local intersection quotient directly by universal properties. At the specified point w of the graph/diagonal pullback, the composite stalk map π:A→O_F,w kills I+J by the two pullback projections. Set Q=A/(I+J); it is a nonzero local ring because π factors through it. Surjectivity of α and β induces surjective local maps R→Q. Their spectra, followed by the canonical stalk-to-scheme maps, agree in the ambient scheme, so lift uniquely to F. This lift sends the closed point to w: the diagonal is a monomorphism and hence the first pullback projection is injective. The universal property of a local-ring spectrum then supplies a map O_F,w→Q. After precomposing with the quotient and using α,β surjective, the two composites are identities; equality of the scheme maps is checked on the pullback projections and by cancelling the canonical stalk-to-scheme monomorphisms. This gives the required eF with its prescribed values. Compose eF with the inverse of the assumed bijective structural map k→O_F,w to define eK. The kernel of the surjection A→Q→k is I+J, hence the unique maximal ideal of A. The final structural identity follows from the two inverse identities.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scheme-tangent-space",
+  "def-pc-fibre-product",
+  "lem-sc-product-tangent-space-direct-sum",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-morphism-from-spec-local-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+  "place": "Step 3. R9: explicit dual-number sections calculation; product tangent equivalence; smooth affine graph charts; stalk section surjectivity and the local-spectrum universal property replace the longer affine tensor/localization calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A characteristic p power endomorphism has zero tangent differential at a fixed rational point and its graph and diagonal have complementary tangent spaces and regular local quotient rings at a smooth fixed point",
+   "results": "[leanfinder] OK 8 hit(s); SmoothBumpCovering.embeddingPiTangent_ker_mfderiv; StandardEtalePair.instFormallyEtaleRing; RingHom.IsStandardSmooth; VectorField.pullback_eq_of_not_isInvertible; RingHom.IsStandardSmooth.smooth; OpenPartialHomeomorph.MDifferentiable.ker_mfderiv_eq_bot; VectorField.pullbackWithin_eq_of_not_isInvertible; RingHom.Smooth.locally_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At a smooth rational fixed point of an endomorphism with zero differential the graph and diagonal define regular local quotients of complementary dimensions",
+   "results": "[leansearch] OK 8 hit(s); hfdifferential; Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; ContMDiffAt.div₀; fdifferential; AlgebraicGeometry.IsSmooth.recOn; Algebra.smoothLocus; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"tangent\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*([Tt]angent|[Dd]eriv)|[Tt]angent.*frobenius",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a reduced fixed rational point a smooth graph and diagonal have local defining ideals whose sum is the maximal ideal and ambient local dimension is twice the source dimension",
+   "results": "[leanfinder] OK 8 hit(s); RingHom.IsStandardSmoothOfRelativeDimension; Algebra.IsSmoothAt; Algebra.IsStandardSmoothOfRelativeDimension; RingHom.Smooth.locally_isStandardSmooth; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.smoothLocus; Algebra.IsStandardSmooth; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power endomorphism on generators in positive characteristic has zero tangent map at a rational fixed point and smooth graph and diagonal have regular local rings",
+   "results": "8 hits: RingHom.IsStandardSmooth; RingHom.IsStandardSmooth.smooth; Algebra.IsStandardSmooth; RingHom.Smooth.locally_isStandardSmooth; RingHom.IsStandardSmoothOfRelativeDimension; RingHom.Smooth; Algebra.Smooth; Algebra.Etale",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and relative-dimension declarations do not state the power differential and graph/equalizer local-ring assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*([Tt]angent|[Dd]eriv)|[Tt]angent.*frobenius",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and relative-dimension declarations do not state the power differential and graph/equalizer local-ring assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth rational fixed point graph and diagonal complementary tangent spaces regular local quotients dimension",
+   "results": "8 hits: AlgebraicGeometry.isSmoothOfRelativeDimension_comp; QPF.Fix; Manifold.termCMDiffAt____; AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and relative-dimension declarations do not state the power differential and graph/equalizer local-ring assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"tangent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and relative-dimension declarations do not state the power differential and graph/equalizer local-ring assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a smooth rational fixed point with zero differential the local graph and diagonal ideals sum to the maximal ideal and their quotient rings have half the ambient dimension",
+   "results": "8 hits: Algebra.IsStandardSmooth.relativeDimension; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.IsStandardSmooth; RingHom.IsStandardSmoothOfRelativeDimension; IsLocalRing.finrank_cotangentSpace_eq_zero; Algebra.IsStandardSmoothOfRelativeDimension.out; Algebra.IsStandardSmoothOfRelativeDimension.id; Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and relative-dimension declarations do not state the power differential and graph/equalizer local-ring assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-trf-frobenius-fixed-points",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-frobenius-fixed-points",
+   "place": "Step 3, vanishing differential on model coordinates and complementary graph/diagonal tangents, then smooth affine local ambient and graph quotient data (old expanded steps 7–8).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-power-map-smooth-graph-local-data",
+  "worker": "stage1",
+  "summary": "Q42: proved the power differential directly on dual numbers, complementary tangents, smooth affine shrinking, regularity and dimensions via existing cotangent lemmas, affine graph surjections, and the localized tensor-quotient equalizer calculation. Statement unchanged; no new nodes. Existing generic tools reused after reading their statements.",
+  "blueprint": "thm-trf-frobenius-fixed-points proof Step 3: the zero differential and transverse graph/diagonal tangent argument, expanded to the smooth local graph rings used by its current split.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-product-tangent-space-direct-sum",
+    "why": "Product tangent spaces; generic scheme tool needed by Step 3 of the blueprint. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity of arbitrary smooth schemes over a field; no coefficient or six-functor input. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Identifies tangent dimension with cotangent dimension at rational points. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "Converts regular local cotangent dimension to Krull dimension. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "Relates rational-point stalk dimension to the fibre dimension used in smooth relative dimension. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Allows constant-relative-dimension shrinking of the smooth open. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Chooses affine neighbourhoods inside the specified open intersections. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smoothness and relative dimensions of the local product via base change and composition. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine tensor-ring description of products and graph intersection. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Surjective affine graph ring maps give closed immersions. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies the ambient and graph stalks with explicit prime localizations. The unit has no replacement for this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Identifies the induced stalk maps with the explicit localized ring homomorphisms. The unit has no replacement for this generic algebraic-geometry fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-product-tangent-space-direct-sum",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-8db465031",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-8db465031 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, with all 14 cited statements, against blueprint main-20261015 thm-trf-frobenius-fixed-points Step 3 (l.131 ff.). The delivery is one commit with the item and its report. It adds no new nodes. The statement is identical to the base (live and side-live are still unsplit). There is no repair note, so this is a first split. Nothing matches the SGA route-lock regex. Step 1 is genuinely elementary: the dual-number map t_i -> a_i+b_i eps goes to a_i^q=a_i (p|q, eps^2=0, fixed point), giving the zero vector, also at singular points. Step 2 uses 0BEB with the (v,0)/(v,v) decomposition. Step 3 uses 056S, then 0B2E duality, then the 00KU cotangent dimension to get dim T=d. Step 4 uses the rational-point stalk dimension node, then 02G1 local constancy, then the 01IT basis twice to get W in V∩h^{-1}V without assuming the intersection is affine. Step 5 uses 01VB/01VA permanence for relative dimension 2d, and regularity plus the product tangent to get dim A=2d. Step 6 uses P=C⊗D with surjective alpha and beta and the 01QO(2) single affine cover, so both graphs are closed without separatedness. Step 7 uses 01HV/01I1: A=P_q, and alpha_q is surjective since alpha(P∖q)=C∖m_C, so A/I≅R≅A/J. Step 8 gives the fibre-product ring P/K⊗P/L≅P/(K+L) as an open of F; localization exactness gives I+J, and the hypothesis O_F≅k gives I+J=m_A. Edge cases checked: d=0, k[t]/(t^2), affine space, imperfect k, non-separated X. Accepted tool_uses (generic AG tools from other units, all Lean-closed or Mathlib leaves, no cycle): 0BEB, 056S, 0B2E, 00KU, 00OU-node, 02G1, 01IT, 01VA/01VB, 01I4, 01QO, 01HV, 01I1. Implicit but acceptable: an open of a smooth scheme is smooth of the same local dimension."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PowerMapSmoothGraphLocalData",
+  "declaration": "AlgebraicGeometry.powerMap_smooth_graph_local_data",
+  "declarations": [
+   "AlgebraicGeometry.PowerMapLocalData.stalkStructure",
+   "AlgebraicGeometry.PowerMapLocalData.residueStructure",
+   "AlgebraicGeometry.PowerMapLocalData.graph",
+   "AlgebraicGeometry.PowerMapLocalData.fixedLift",
+   "AlgebraicGeometry.PowerMapLocalData.stalkMapAt",
+   "AlgebraicGeometry.PowerMapLocalData.productPoint",
+   "AlgebraicGeometry.PowerMapLocalData.fixedScheme",
+   "AlgebraicGeometry.PowerMapLocalData.fixedStructure",
+   "AlgebraicGeometry.PowerMapLocalData.fixedPoint",
+   "AlgebraicGeometry.PowerMapLocalData.sectionStructure",
+   "AlgebraicGeometry.schemeTangentSpaceBaseModule",
+   "AlgebraicGeometry.powerMap_smooth_graph_local_data"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PowerMapSmoothGraphLocalData.lean",
+  "statement": "theorem powerMap_smooth_graph_local_data (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : p.Prime) (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [LocallyOfFiniteType s] [QuasiCompact s] (h : X ⟶ X) (hs : h ≫ s = s) (x : Spec (.of k) ⟶ X) (xs : x ≫ s = 𝟙 _) (hx : x ≫ h = x) (O : X.Opens) (hO : IsAffineOpen O) (xO : x (IsLocalRing.closedPoint k) ∈ O) (hstable : O ≤ h ⁻¹ᵁ O) (r : ℕ) (t : Fin r → Γ(X, O)) (ht : Subring.closure (Set.range (sectionStructure s O) ∪ Set.range t) = ⊤) (n : ℕ) (hn : 1 ≤ n) (hpower : ∀ i : Fin r, (h.appLE O O hstable).hom (t i) = t i ^ (p ^ n)) : ∃ (hr : Function.Bijective (residueStructure k X s (x (IsLocalRing.closedPoint k)))) (hg : graph s h hs (x (IsLocalRing.closedPoint k)) = productPoint s x) (hd : pullback.diagonal s (x (IsLocalRing.closedPoint k)) = productPoint s x), ∃ D : schemeTangentSpace k X s (x (IsLocalRing.closedPoint k)) →ₗ[k] schemeTangentSpace k X s (x (IsLocalRing.closedPoint k)), (∀ v, (D v).val = v.val ≫ h) ∧ D = 0 ∧ LinearMap.id - D = LinearMap.id ∧ ∃ E : schemeTangentSpace k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x) ≃ₗ[k] (schemeTangentSpace k X s (x (IsLocalRing.closedPoint k)) × schemeTangentSpace k X s (x (IsLocalRing.closedPoint k))), (∀ v, v.val ≫ pullback.fst s s = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((residueStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)).comp (RingEquiv.ofBijective (residueStructure k X s (x (IsLocalRing.closedPoint k))) hr).symm.toRingHom))) ≫ (E v).1.val) ∧ (∀ v, v.val ≫ pullback.snd s s = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((residueStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)).comp (RingEquiv.ofBijective (residueStructure k X s (x (IsLocalRing.closedPoint k))) hr).symm.toRingHom))) ≫ (E v).2.val) ∧ (∀ v, (E.symm (v, 0)).val = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((residueStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)).comp (RingEquiv.ofBijective (residueStructure k X s (x (IsLocalRing.closedPoint k))) hr).symm.toRingHom))) ≫ v.val ≫ graph s h hs) ∧ (∀ v, (E.symm (v, v)).val = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((residueStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)).comp (RingEquiv.ofBijective (residueStructure k X s (x (IsLocalRing.closedPoint k))) hr).symm.toRingHom))) ≫ v.val ≫ pullback.diagonal s) ∧ (Set.range (fun v ↦ E.symm (v, 0)) ∩ Set.range (fun v ↦ E.symm (v, v)) = {0}) ∧ (∀ a, ∃ v w, a = E.symm (v, 0) + E.symm (w, w)) ∧ ∀ (U : X.Opens), x (IsLocalRing.closedPoint k) ∈ U → Smooth (U.ι ≫ s) → Function.Bijective (stalkStructure k (fixedScheme s h hs) (fixedStructure s h hs) (fixedPoint s h hs x hx)) → ∃ (d : ℕ), ringKrullDim (X.presheaf.stalk (x (IsLocalRing.closedPoint k))) = d ∧ Module.finrank k (schemeTangentSpace k X s (x (IsLocalRing.closedPoint k))) = d ∧ ∃ (W V : X.Opens) (hWV : W ≤ V), V ≤ U ∧ x (IsLocalRing.closedPoint k) ∈ W ∧ IsAffineOpen W ∧ IsAffineOpen V ∧ W ≤ h ⁻¹ᵁ V ∧ Smooth (pullback.fst (W.ι ≫ s) (V.ι ≫ s) ≫ W.ι ≫ s) ∧ ∃ (hW : W.toScheme ⟶ V.toScheme), hW ≫ V.ι = W.ι ≫ h ∧ ∃ (gW dW : W.toScheme ⟶ pullback (W.ι ≫ s) (V.ι ≫ s)), gW ≫ pullback.fst _ _ = 𝟙 _ ∧ gW ≫ pullback.snd _ _ = hW ∧ dW ≫ pullback.fst _ _ = 𝟙 _ ∧ dW ≫ pullback.snd _ _ = X.homOfLE hWV ∧ IsClosedImmersion gW ∧ IsClosedImmersion dW ∧ ∃ (m : pullback (W.ι ≫ s) (V.ι ≫ s) ⟶ pullback s s), m ≫ pullback.fst s s = pullback.fst _ _ ≫ W.ι ∧ m ≫ pullback.snd s s = pullback.snd _ _ ≫ V.ι ∧ IsOpenImmersion m ∧ productPoint s x ∈ Set.range m ∧ ∃ (I J : Ideal ((pullback s s).presheaf.stalk (productPoint s x))), I = RingHom.ker (stalkMapAt (graph s h hs) (x (IsLocalRing.closedPoint k)) (productPoint s x) hg) ∧ J = RingHom.ker (stalkMapAt (pullback.diagonal s) (x (IsLocalRing.closedPoint k)) (productPoint s x) hd) ∧ ∃ (_ : IsRegularLocalRing ((pullback s s).presheaf.stalk (productPoint s x))) (_ : IsRegularLocalRing (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ I)) (_ : IsRegularLocalRing (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ J)), Function.Bijective (residueStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)) ∧ Function.Bijective ((IsLocalRing.residue (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ I)).comp ((Ideal.Quotient.mk I).comp (stalkStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)))) ∧ Function.Bijective ((IsLocalRing.residue (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ J)).comp ((Ideal.Quotient.mk J).comp (stalkStructure k (pullback s s) (pullback.fst s s ≫ s) (productPoint s x)))) ∧ ringKrullDim ((pullback s s).presheaf.stalk (productPoint s x)) = 2 * d ∧ ringKrullDim (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ I) = d ∧ ringKrullDim (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ J) = d ∧ I ⊔ J = IsLocalRing.maximalIdeal ((pullback s s).presheaf.stalk (productPoint s x)) ∧ ∃ (eI : (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ I) ≃+* X.presheaf.stalk (x (IsLocalRing.closedPoint k))) (eJ : (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ J) ≃+* X.presheaf.stalk (x (IsLocalRing.closedPoint k))), (∀ a, eI (Ideal.Quotient.mk I a) = stalkMapAt (graph s h hs) (x (IsLocalRing.closedPoint k)) (productPoint s x) hg a) ∧ (∀ a, eJ (Ideal.Quotient.mk J a) = stalkMapAt (pullback.diagonal s) (x (IsLocalRing.closedPoint k)) (productPoint s x) hd a) ∧ ∃ (hf : (pullback.fst (graph s h hs) (pullback.diagonal s) ≫ graph s h hs) (fixedPoint s h hs x hx) = productPoint s x) (eF : (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ (I ⊔ J)) ≃+* (fixedScheme s h hs).presheaf.stalk (fixedPoint s h hs x hx)) (eK : (((pullback s s).presheaf.stalk (productPoint s x)) ⧸ (I ⊔ J)) ≃+* k), (∀ a, eF (Ideal.Quotient.mk (I ⊔ J) a) = stalkMapAt (pullback.fst (graph s h hs) (pullback.diagonal s) ≫ graph s h hs) (fixedPoint s h hs x hx) (productPoint s x) hf a) ∧ ∀ c : k, eK (eF.symm (stalkStructure k (fixedScheme s h hs) (fixedStructure s h hs) (fixedPoint s h hs x hx) c)) = c",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper declarations construct the canonical structural maps, graph, specified fixed point and stalk transports using the recorded fibre product and tangent space. The base-field module is restriction of the existing residue-field module, with no new tangent-space notion. The differential and product equivalence are characterized on dual-number morphisms, and the quotient identifications are characterized by the canonical stalk maps. The accepted Q42 stage-1 split is preserved verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-818fcef6b",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Only the item node changed (lean only), and lean.statement matches the file verbatim. Every node clause has its Lean counterpart: first part without smoothness (D pinned to composition with h, D=0, id-D=id, product tangent iso fixed by its projections as in the product-tangent lemma, graph/diagonal images (v,0)/(v,v), zero intersection, full sum). Second part assumes the smooth open and the equalizer local ring = k via its structure map, and gives d, W⊆V⊆U with h(W)⊆V, smooth W×V, closed graph/inclusion out of W, open neighbourhood of (x,x), I/J as kernels of the actual stalk maps, A, A/I, A/J regular local with residue field k, dimensions 2d/d/d, I+J=m_A, and A/(I+J)≃k tied to the equalizer's structure map. The extra A/I≅O_{X,x} and A/J≅O_{X,x} conclusions follow from the closed-immersion clauses. Edge cases r=0, n=1, p=2, singular point, d=0, imperfect k and non-separated X are covered; universes standard. Advisory: public k-module instance on the tangent space (same compHom as neighbouring modules); the second-reading section is by the same worker. No compile run because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020129-L-2557509",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

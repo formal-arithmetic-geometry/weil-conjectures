@@ -1,0 +1,124 @@
+{
+ "id": "def-pur-finite-pullback-tensor-braiding",
+ "kind": "definition",
+ "title": "Signed total and derived braiding of the prescribed tensor model",
+ "status": "split",
+ "statement": "Let C be a site with coefficient-universe sheafification and local-bijectivity hypotheses, and let A be a sheaf of commutative rings. Use the actual unbounded total tensor and pure-tensor generators of [def-coef-ringed-tensor-hom-model]. The signed total exchange on complexes P,Q is the unique isomorphism sending the (p,q) generator x tensor y to (-1)^(pq) y tensor x in the (q,p) summand. For a coefficient closed monoidal structure S and its full K-flat tensor model T from [def-coef-ringed-tensor-hom-model], there is a unique derived tensor braiding whose square with T.comparison and the localized signed total exchange commutes on every pair of K-flat complexes. Define pullbackTensorSignedTotal and pullbackTensorBraiding by these unique normalizations. These definitions and their uniqueness proofs are the existing constructions extracted from the assigned module unchanged.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product)."
+ },
+ "proof": [
+  {
+   "text": "For pullbackTensorSignedTotal_existsUnique use the existing native CochainComplex.Monoidal.braiding. The proved complexConstraints symmetry field gives exactly its signed formula on coefficientTensorGenerator. For uniqueness apply isomorphism extensionality, complex-map extensionality and total-summand extensionality. Cancel the tensor-to-sheafification isomorphism and use the sheafification adjunction; presheaf and tensor-product extensionality reduce the result to equality of the prescribed generator formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For pullbackTensorBraiding_existsUnique, identify the selected signed total symmetry with the native cochain Koszul braiding by the existing generator uniqueness theorem. Conjugating the generic braided natural isomorphism by the identity-on-objects comparison with the total-tensor functor gives its native natural isomorphism; the tensor-map equation supplies naturality. Descend this native isomorphism and use generator uniqueness to replace its components by the selected signed symmetry. Every homotopy complex has a K-flat resolution by lem-pc-kflat-resolution. Apply resolvingRepresentativesFullyFaithfulWhiskering to the full quotient from complexes to their homotopy category and its quasi-isomorphism localization. Transfer full faithfulness along quotientCompQhIso. Conjugate the representative signed symmetry by T.comparison and its swapped comparison. Fully faithful precomposition lifts this natural isomorphism; cancellation of the representative comparison proves its required component square, and faithfulness proves uniqueness.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product). Q2 separation of construction, representative calculation and naturality descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor comparison commutes with signed symmetry on K flat representatives",
+   "results": "8 hits, including TensorProduct.lift_comp_comm_eq, TensorProduct.gradedComm_symm and categorical pullback symmetry. No derived ringed-site normalization result.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived inverse image tensor isomorphism normalized on K flat resolutions and signed braiding",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, HomologicalComplex.leftUnitor'_inv_comm, CategoryTheory.Tor', CategoryTheory.Tor'_map_app, CategoryTheory.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding.*pullback|pullback.*braiding|tensor.*[Kk][Ff]lat",
+   "results": "3 hits: AlgebraicGeometry/Limits.lean:451, CategoryTheory/Extensive.lean:123 and :125; these concern coproducts and categorical pullbacks.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The clause \"These actions commute with finite reduction and scalar extension to Qlb\"; via lem-pur-derived-pullback-tensor-iso and def-pur-finite-pullback-tensor-comparison, using the fixed finite tensor/pullback comparison and its signed coherence.",
+   "via": [
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorBraiding",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorBraiding.lean",
+  "declaration": "WeilConjectures.pullbackTensorBraiding_existsUnique",
+  "declarations": [
+   "WeilConjectures.pullbackTensorSwap",
+   "WeilConjectures.pullbackTensorSignedTotal_existsUnique",
+   "WeilConjectures.pullbackTensorSignedTotal",
+   "WeilConjectures.pullbackTensorBraiding_existsUnique",
+   "WeilConjectures.pullbackTensorBraiding"
+  ],
+  "statement": "theorem pullbackTensorBraiding_existsUnique : ∃! e : S.tensor ≅ pullbackTensorSwap _ ⋙ S.tensor, ∀ (P Q : CochainComplex (SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (J := J) (R := A) P) (hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (J := J) (R := A) Q), DerivedCategory.Q.map (pullbackTensorSignedTotal J A P Q).hom ≫ (CoefficientTensorModels.iso.{u, u + 1, u, u + 2} J A S T Q P hQ hP).hom = (CoefficientTensorModels.iso.{u, u + 1, u, u + 2} J A S T P Q hP hQ).hom ≫ e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c1754",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130643-L-3488572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c1754",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130643-L-3488572",
+  "kind": "interface",
+  "note": "independent cc review: 4 delivered modules vs published FinitePullbackTensorComparison (verbatim move except rename to finitePullbackTensorConstruction + new ConstructionIso); new hole vs item braiding statement (special case on flat K-flat Q-images); node records vs Lean; direct importer CompletedPullbackTensorComparison compiled against delivered set (exit 0)"
+ }
+}

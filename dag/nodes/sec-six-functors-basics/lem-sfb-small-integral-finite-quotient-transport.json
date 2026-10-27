@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-small-integral-finite-quotient-transport",
+ "kind": "statement",
+ "title": "Normalized finite quotient modules under an integral coefficient isomorphism",
+ "statement": "For prime ell, finite extensions E in any universe and F in the universe of a scheme X, and a condensed integral ring isomorphism e, let G restrict modules along the composite of the absolute/spectral point comparison and e inverse, pulled back to X. For every n, G carries the small positive finite quotient module to the ordinary F quotient module by isomorphisms preserving the quotient unit (with the inverse monoidal unit comparison) and the consecutive quotient transition. No complex, completeness, boundedness or constructibility is assumed.",
+ "stmt_deps": [
+  "def-sfb-small-coefficient-derived-completion",
+  "def-sfb-integral-constant-model-realization",
+  "sk-def-pe-derived-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Tags 099L and 099M (section-derived-completion-noetherian and lemma-naive-completion); Tag 0A0E (lemma-derived-completion-koszul); integral-heart-local-model clause (2), Completeness, comparison with the explicit quotient Roos augmentation"
+ },
+ "proof": [
+  {
+   "text": "Forget the condensed monoid isomorphism to presheaves and use the tensor-product universal property to recover a sheaf-of-rings isomorphism. Compose e with the inverse point comparison. Evaluation at the singleton gives an ordinary ring isomorphism; naturality at singleton inclusions proves that its action on every continuous section is postcomposition by this ring isomorphism. The coefficient DVR theorem identifies each chosen uniformizer ideal with the unique maximal ideal. Ring equivalences preserve this ideal, and Ideal.map_pow then identifies every coefficient ideal.",
+   "uses": [
+    "def-sfb-integral-constant-model-realization",
+    "def-sfb-small-coefficient-derived-completion",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Ideal.quotientEquiv on the corresponding coefficient ideals. The coset neighborhood basis makes the spectral coefficient quotients discrete; the existing absolute quotient discreteness lemma supplies the other side. Postcomposition with the quotient equivalences and their inverses therefore gives continuous-function sheaf isomorphisms. Check reduction compatibility pointwise by Ideal.quotientEquiv_mk, and transition compatibility after choosing a representative of each quotient element. No inverse-limit or profinite-tower isomorphism is needed.",
+   "uses": [
+    "lem-sfb-integers-coset-basis",
+    "det-pe-derived-nakayama-resolution",
+    "def-sfb-small-coefficient-derived-completion",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the quotient isomorphisms to X. Lax monoidal naturality expresses the pulled-back quotient action as restriction of regular multiplication. The monoid-hom multiplication identity and reduction compatibility give linearity after scalar restriction along the inverse integral comparison, hence Mod.isoMk supplies the module isomorphisms. Their unit identity is reduction compatibility together with the inverse monoidal unit comparison; their transition identity is the pulled-back quotient transition identity.",
+   "uses": [
+    "def-sfb-small-coefficient-derived-completion",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-small-coefficient-derived-completion",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-coset-basis",
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Finite quotient identification in integral-heart-local-model clause (2); direct singleton evaluation, quotient equivalence, and monoidal scalar restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion preserved under an exact equivalence of module categories and computed by the Roos complex of quotient reductions",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; AdicCompletion.map_exact; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero; CategoryTheory.Functor.leftDerivedZeroIsoSelf; DerivedCategory.instLinearCochainComplexIntQ; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "IsAdicComplete; IsAdicComplete.of_subsingleton; IsAdicComplete.toIsHausdorff; IsAdicComplete.toIsPrecomplete; IsAdicComplete.mk; isAdicComplete_iff; IsAdicComplete.bot; IsAdicComplete.subsingleton",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|IsDerivedComplete",
+   "results": "No matches",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of condensed discrete valuation rings induces compatible isomorphisms of their finite quotient module towers",
+   "results": "Ideal.quotientRangePowQuotSuccInclusionEquiv; Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField; IsDiscreteValuationRing.RingEquivClass.isDiscreteValuationRing; Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField; IsDiscreteValuationRing.TFAE; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField; localCohomology.isoSelfLERadical",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv",
+   "results": "Ideal.quotientEquiv; Ideal.quotientEquiv_mk; Ideal.quotientEquiv_symm_mk; Ideal.quotientEquiv_apply; Ideal.quotientEquiv_symm_apply; PowerBasis.quotientEquivQuotientMinpolyMap_apply; PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply",
+   "date": "2026-10-26",
+   "verdict": "No complete transport theorem; use exact-functor APIs and quotient equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmallIntegralRoosCompletenessTransport",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-local-model",
+   "place": "Clause (2), Completeness: Finite quotient identification",
+   "via": [
+    "lem-sfb-integral-heart-constructible-module-complete",
+    "lem-sfb-small-integral-roos-completeness-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallIntegralFiniteQuotientTransport",
+  "file": "lean/Sheaf/Paper/SmallIntegralFiniteQuotientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.smallIntegralFiniteQuotientTransport",
+  "statement": "theorem smallIntegralFiniteQuotientTransport\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    (F : Type u) [Field F] [Algebra (Padic ℓ) F] [FiniteDimensional (Padic ℓ) F]\n    (e : Mon.mk (SmallAdicCompletion.Coefficients.integerRing.{u} ℓ E) ≅\n      sfbCondensedIntegers ℓ F) (X : Scheme.{u}) :\n    let G := Mod.comap (coefficientMap (IntegralConstantModel.pointComparison ℓ F).hom.hom X ≫\n      coefficientMap e.inv.hom X)\n    ∃ b : ∀ n : ℕ, G.obj (SmallAdicCompletion.finiteModule ℓ E X n) ≅\n        AdicCompletion.finiteModule ℓ F X n,\n      (∀ n : ℕ, G.map (SmallAdicCompletion.finiteUnit ℓ E X n) ≫ (b n).hom =\n        (Functor.Monoidal.εIso G).inv ≫ AdicCompletion.finiteUnit ℓ F X n) ∧\n      ∀ n : ℕ,\n        G.map ((SmallAdicCompletion.Coefficients.pullback.{u, v} ℓ E X).map\n            (SmallAdicCompletion.quotientStep.{u, v} ℓ E n)) ≫ (b n).hom =\n          (b (n + 1)).hom ≫ (DerivedNakayama.pullback ℓ F X).map\n            (AdicCompletion.quotientStep.{u} ℓ F n)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023603-L-584355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T065612-L-3116945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

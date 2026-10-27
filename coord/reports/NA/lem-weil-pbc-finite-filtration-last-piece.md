@@ -1,0 +1,41 @@
+## Worker report
+
+1. Files written:
+   - `dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-filtration-last-piece.json`: statement retained; split into the zero-cokernel inclusion argument, bounded induction, quotient-by-zero inverse, and explicit comparison formulas. No Mathlib declaration states the whole item.
+   - `citations.json`: verbatim statements for every step/node citation.
+   - `report.md`: this report. `searches.jsonl` was written by the prescribed search command.
+   No new nodes, no new Mathlib leaves, no unit edits.
+2. Attachments: none. Searches of `lean/WeilConjectures/` for the blueprint tag and for finite filtration, last graded piece, collapse and cokernel/isomorphism notions found no project declaration giving every clause. The existing `CategoryTheory.DecreasingFiltration` and finite-filtration comparison modules define the filtration or prove other assertions, and do not attach this item. Their source was read only.
+3. WANTED: none.
+4. What was wrong: the item was a statement-only node, not a completed proof. Its statement is true and was retained verbatim. The older imported unit record and ancestor provenance mention the former location in `sk-thm-reduction`; the current blueprint puts cancellation in `sk-lem-pbc-composition-cancellation`. I read the current proof there and retained all maintainer-owned fields. The source's spectral-sequence collapse sentence is not itself the elementary filtration proof; this delivery supplies that proof. No source or statement dispute was found.
+5. Unfinished: none in this one-level split. The only theorem used from the DAG is already a Mathlib leaf. No Lean was written or compiled, no build was run, and no repository or launcher file was edited.
+
+## Sources and searches
+
+Read `GOAL.md`, the worker brief, worker role, stage-1 document, three-level rules in SETUP, the chapter/unit records, and delivery-errors B–E (including the merged copy). Read the current blueprint's `sk-thm-reduction/_section.md` and `sk-lem-pbc-composition-cancellation/lemma-weil-pbc-cancellation.md` and `.proof.md`. Its paragraph (1) uses row collapse to identify the abutment; this item is precisely the filtration part of that identification, not a new route for cancellation.
+
+For the actual argument I read `literature/stacks-project/homology.tex`: Tag 0121, label `definition-filtered`; Tag 012W, label `lemma-biregular-ss-converges`, especially proof of (4); and Tag 010C, label `lemma-characterize-injective`, alongside the quotient convention immediately following it. Read Tag 0A4C, `etale-cohomology.tex`, label `lemma-sandwich`, second proof paragraph. Tags and labels were checked in `tags/tags`. The collapse of this particular filtration and the comparison inverse formulas are elementary details written out by NA, so `proof_origin.by` is `agent`.
+
+Whole-DAG searches used cokernel/zero, mono/epi/isomorphism, and filtration concepts. `tools/blueprint_refs.py search` was run for `filtration`, `cokernel`, and `last graded`, and `ancestor` for the item. The last-graded search found no blueprint duplicate. `lem-sp-edge-collapse` assumes a convergent exact couple and a different surviving column; it is not an attachment or a required dependency. `lem-sp-finite-filtration-induction` compares two filtered objects and does not state the canonical quotient assertion here. The exact preadditive zero-cokernel criterion already exists as `lem-weil-pbc-preadditive-epi-iff-cokernel-zero`, so it is reused.
+
+The prescribed `msearch.py` ran LeanFinder twice with distinct finite-chain/graded-piece phrasings, Loogle, LeanSearch, and two Mathlib greps. Their exact queries and returned names are retained in `searches.jsonl` and recorded in the node. Semantic hits concerning ring/module filtrations, graded single objects, derived objects concentrated in one degree, and Artinian chain conditions do not state the item. Loogle's `kernelSubobject_comp_mono_isIso` concerns invariance of kernels under postcomposition by a mono, not this filtration. The grep's general balanced/abelian facts are smaller tools, not a one-line specialization proving every clause. The existing cited Mathlib leaf matches `CategoryTheory.Preadditive.epi_iff_isZero_cokernel'`, read at Mathlib/CategoryTheory/Preadditive/Basic.lean:273; no new node is justified.
+
+## Review by NA
+
+I checked every proof step against the actual cited statements, not the proofs or implementation names behind those statements.
+
+Step 1 cites `def-sp-filtration` for a decreasing chain of subobjects and for gr as the successive quotient. The inclusion is therefore a mono and its cokernel is exactly the assumed zero graded object. The statement of `lem-weil-pbc-preadditive-epi-iff-cokernel-zero` allows an arbitrary specified cokernel in any preadditive category; `def-sp-abelian` supplies preadditivity. Thus all its hypotheses hold and it says exactly that the inclusion is epi. The same abelian definition says every mono is a kernel. I expanded the remaining inverse construction: epi cancellation makes its kernel-defining map zero; the kernel universal property supplies a right inverse; monicity supplies the other inverse identity. This is a few-line definitional calculation, not an uncited appeal to a balanced-category theorem. Equality of subobjects follows because the isomorphism commutes with their maps to V. All three cited statements are quoted verbatim in `citations.json`.
+
+Step 2 uses only Step 1, induction on nonnegative integer indices, and the given F^0=V. Its claim, base case, successor condition k<n, and resulting full range k<=n are explicit. Equality with the full subobject means isomorphism of representing monos over V; the right inverse and monicity check show that the actual inclusion j is invertible. No theorem about another filtration or any extra exhaustiveness/separatedness hypothesis is used.
+
+Step 3 cites only the graded-quotient clause of `def-sp-filtration`, quoted verbatim in `citations.json`. The hypothesis F^(n+1)=0 makes the map whose cokernel is rho zero, without asserting F^n=0. I gave both inverse identities using the cokernel universal property, including its uniqueness, so there is no hidden assertion that an arbitrary quotient map is invertible. This is elementary from the definition of a cokernel.
+
+Step 4 is multiplication and cancellation of the stated isomorphisms. I checked domains in rho inverse, c inverse, a and j and in a inverse, c, rho, j inverse: they give A -> F^n V -> V and V -> A respectively. The two displayed composite calculations prove both inverse identities. Uniqueness follows by composing with rho inverse. For V zero, the explicit identity of A is zero, which gives uniqueness of every incoming and outgoing map; the conclusion therefore says zero object rather than equality with a chosen zero object. No unproved compatibility or existence of a or c is asserted: they are inputs.
+
+I tested n=0 with V any nonzero abelian group and filtration F^p=V for p<=0, F^p=0 for p>=1: the empty range is respected and rho is the quotient by zero. For n=1, the single zero quotient forces F^1=F^0 and F^2=0 gives the final identification. The same argument works in the zero category and with V=0; the supplied isomorphisms force A and B to be zero as claimed. If one drops the last cutoff, the quotient need not be invertible, which confirms exactly where that hypothesis is used.
+
+Against delivery-errors B–E: no new object/node lacks hypotheses, no new node restates a clause or duplicates a source tag, no search is invented, no citation uses an absent clause, and no proof step imports spectral-sequence convergence or an off-route theorem. All four steps are below 2000 characters; the whole assembly is below 3000. The explicit universal-property arguments are the two- or three-line elementary calculations the brief says to leave in the item, so creating nodes for them would violate the elementary-node rule. I corrected the quotient step's antecedent to say “the inclusion's source” to avoid confusing it with rho's source. The item statement and all hypotheses remain unchanged.
+
+## Not duplicates
+
+No new nodes were created. The existing Mathlib leaf for the zero-cokernel criterion is cited directly.

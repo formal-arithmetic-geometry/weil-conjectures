@@ -1,0 +1,281 @@
+{
+ "id": "lem-pod-equivariant-mates-coefficient-transport",
+ "kind": "statement",
+ "title": "Equivariant mates and their rational/common-stage coefficient transport",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal D$ be categories with endofunctors $P_{\\mathcal A},P_{\\mathcal B},P_{\\mathcal C},P_{\\mathcal D}$. Use their fixed-pair categories [def-weil-endofunctor-fixed-pair-category], whose objects are $(K,\\theta:P K\\xrightarrow{\\sim}K)$ and arrows obey $u\\theta_K=\\theta_LP(u)$. Let $L_1:\\mathcal A\\to\\mathcal B\\dashv R_1$, $L_2:\\mathcal C\\to\\mathcal D\\dashv R_2$ be adjunctions, with units $\\eta_i$ and counits $\\varepsilon_i$, and let $U:\\mathcal A\\to\\mathcal C$, $V:\\mathcal B\\to\\mathcal D$ be functors. Suppose all six functors have specified lifts to these fixed-pair categories, with the specified units and counits lifting the carrier units and counits. Let $\\alpha:L_2U\\to VL_1$ be a natural transformation inducing morphisms of fixed pairs. Its right mate [def-weil-pbc-adjunction-mate]\n$$\\alpha^\\flat_d=R_2V(\\varepsilon_{1,d})\\,R_2(\\alpha_{R_1d})\\,\\eta_{2,UR_1d}:UR_1d\\to R_2Vd$$\ninduces a natural transformation between the lifted functors. Pasting on the non-adjoint sides, composition of the adjunctions, and change of adjunction by a transformation give exactly the mates specified by [lem-weil-pbc-mate-pasting](1)--(3), as equalities of fixed-pair morphisms. The carrier of the lifted mate is the specified three-factor mate, not a choice of a naturally isomorphic map.\n\nFor coefficient transport, fix $p\\ne\\ell$, $q=p^a$ with $a\\geq1$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ [def-weil-finite-field-fiber], finite-type $k_0$-schemes, and $E/\\mathbf Q_\\ell$ finite in a fixed $\\overline{\\mathbf Q}_\\ell$. Take the categories above to be the stipulated constructible coefficient categories on their geometric fibers, the endofunctors to be geometric Frobenius pullback, and fixed pairs to be [def-weil-weil-sheaf-complex]. Use the rationalization and common-stage operation and map constructions of [def-weil-derived-pullback-tensor-hom, def-exchange-projection]. Assume that the comparisons for the functors involved intertwine the units, counits and $\\alpha$, are identities for identity extensions, and satisfy the tower cocycle. The rational image of an integral mate equals the mate of the rational images. Under a finite field extension, the transported mate equals the mate of the transported maps, conjugated by the supplied comparisons at its source and target. These identities also hold for pasted mates. Their common-stage classes are independent of the finite coefficient field and of the morphism representative. They apply to every morphism of the localized/common-stage categories and every Weil structure there, without requiring a Frobenius-stable integral lattice. Finally, if a lifted mate or comparison has an invertible carrier on the stipulated domain, its carrier inverse is a morphism of fixed pairs, hence it is an isomorphism there. Equivariance alone makes no additional comparison invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentence 1; lem-fix-weil-operations.proof.md, ordinary adjunction, tensor/Hom, exchange-pasting and projection paragraphs; explicit argument of returned lem-pod-constructible-mate-coherence, steps 7, 14, 15."
+ },
+ "stmt_deps": [
+  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Construct the two adjunctions from exactly the supplied units and counits. For each triangle, use the strict lifting equalities to identify objects and mapped arrows heterogeneously with the carrier triangle. The carrier triangle is the given adjunction identity; the forgetful functor is faithful, so the lifted triangle holds.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "Expand Mathlib mateEquiv at each fixed pair into its three factors. Identify the unit with the carrier unit, the lifted square with the carrier square, and the image of the counit with the carrier functor image, using the strict over equalities for every vertex. Compose these heterogeneous equalities. The carrier is exactly the specified three-factor composite.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "Apply mateEquiv_vcomp, mateEquiv_hcomp, mateEquiv_conjugateEquiv_vcomp and conjugateEquiv_mateEquiv_vcomp directly in the fixed-pair categories. These give the four stated pasting and change-of-adjunction equalities.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "For coefficient transport, cancel the source comparison and expand the mate. Naturality moves the right-adjoint comparison past the square and the counit; naturality of the vertical comparison and compatibility of the first counit identify the final factors. Apply the square compatibility after mapping by the second right adjoint. The second unit compatibility cancels the first factors. Finally, naturality of the target unit and square gives the target mate. This is valid for arbitrary categories and functors; specialize it to the actual rationalization, finite-stage transition, and common-stage inclusion functors. The exact rational formula is simply map_comp on the three mate factors.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "Functoriality and associativity prove transport of a threefold composite: the two intermediate comparison/inverse pairs cancel. For composite comparisons, expand their definition. The identity follows by mapping the identity equation for the first operation through the second and then using its identity equation. For the tower, naturality of the second operation comparison interchanges the middle factors. Combine the three maps under the second operation, apply the first tower equation, and then the second tower equation.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "Naturality for every common-stage arrow is naturality of the mate transformation itself. For representatives, use GeneralAlgebraicallyClosedCoefficients.representatives to turn equality at a common later stage into equality of the two quotient arrows; substitute and apply naturality. For rational and common-stage Weil objects, apply fixedPair_mate to the actual Frobenius endofunctors, and append naturality of the lifted mate. No integral lattice or integral representative of a rational inverse is required.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  },
+  {
+   "text": "For a fixed-pair arrow with invertible carrier, construct the actual inverse using Algebra.isoMk on the carrier isomorphism and the original equivariance equation. Its two inverse equations follow by applying the faithful forgetful functor and using the carrier inverse identities.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Ordinary-adjunction and exchange-pasting paragraphs; explicit coefficient calculation in the original node proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "U3: Lean proof of all 16 statements, using faithful strict lifts, Mathlib mates, functoriality and the supplied coefficient interfaces; no scalar-coordinate calculation needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv|IsoAlgebra|equivariant|CommonStage",
+   "results": "5 hit(s): Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; searched Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant mates and pasting under adjunctions in fixed pair categories commute with scalar localization and common coefficient stages",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+   "results": "1 hit(s): CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates of equivariant natural transformations commute with coefficient localization and coherent common finite coefficient field descent for fixed pairs",
+   "results": "8 hit(s): CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.Adjunction.Localization.ε_app; Rep.coinvariantsAdjunction_homEquiv_apply_hom; Rep.indResAdjunction; Rep.coindResAdjunction_homEquiv_apply; Rep.invariantsAdjunction_homEquiv_symm_apply_hom; Rep.resCoindAdjunction; LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension transports fixed pair adjunction units counits and their pasted mates without invariant integral lattice",
+   "results": "8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.unit_app; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.homEquiv_extendScalarsId; ModuleCat.extendRestrictScalarsAdj; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv|IsoAlgebra",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; searched Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary mates/localization/representation results do not state the combined specified fixed-pair mate and rational/common-stage coefficient transport assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mates of lifted adjunctions in categories of objects with an automorphism, compatible with localization of morphisms",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Localization.liftingLift, CategoryTheory.Localization.lift, CategoryTheory.Adjunction.localization_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary mates/localization/representation results do not state the combined specified fixed-pair mate and rational/common-stage coefficient transport assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary mates/localization/representation results do not state the combined specified fixed-pair mate and rational/common-stage coefficient transport assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation given by unit followed by a functor applied to a square and a counit remains equivariant and commutes with scalar extension",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary mates/localization/representation results do not state the combined specified fixed-pair mate and rational/common-stage coefficient transport assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates of equivariant natural transformations in fixed pair categories commute with scalar localization and coherent change of coefficient fields",
+   "results": "8 hits: Rep.homEquiv_def, CategoryTheory.mateEquiv_apply, ModuleCat.homEquiv_extendScalarsComp, Rep.coinvariantsAdjunction_homEquiv_apply_hom, Rep.invariantsAdjunction_homEquiv_symm_apply_hom, Rep.indResAdjunction, Rep.coindResAdjunction_homEquiv_apply, Rep.resCoindAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary mates/localization/representation results do not state the combined specified fixed-pair mate and rational/common-stage coefficient transport assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-constructible-mate-coherence",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "prop-weil-operations.proof.md sentence 1, via lem-fix-weil-operations.proof.md paragraphs on ordinary/exceptional adjunctions and exchange-pasting; exact mate and coefficient-transport expansion.",
+   "via": [
+    "lem-pod-constructible-mate-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-equivariant-mates-coefficient-transport",
+  "worker": "stage1",
+  "summary": "Expanded the three-factor mate in fixed-pair categories, applied the existing Mathlib-backed pasting theorem, and proved rational and coherent common-stage transport by explicit factor comparisons and cancellation. Verified arbitrary rational/common-stage morphisms and Weil structures and the conditional inverse assertion. No new nodes and no statement change.",
+  "blueprint": "Steps 1–3 realize the ordinary/exceptional adjunction and exchange-pasting part of lem-fix-weil-operations, cited in prop-weil-operations sentence 1; steps 4–9 make its coefficient-domain transport precise; step 10 verifies its inverse condition."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-0b166360e",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-0b166360e (reviewer sub-agent of L); spot-checked: Read the full item (statement unchanged, empty proof replaced by 10 steps, no new nodes), all 9 cited statements, the blueprint text (prop-weil-operations.proof sentence 1 and lem-fix-weil-operations.proof in full, main-20261015) and the parent re-split context. The route matches the blueprint's 'mate calculus' and 'pasting identities', and no SGA is cited. Step 2's three equivariance equations with vertices UR1d, R2L2UR1d, R2VL1R1d, R2Vd are correct, and the carrier is exactly the mate. Step 3 applies lem-weil-pbc-mate-pasting (1), (2), (3a), (3b) in the fixed-pair categories; that node is a Mathlib leaf, so its use is a tool and not a route departure, and the orientations match. Step 4 holds because Q is multiplicative and the rational operations are linear extensions; I checked this for pullback/tensor/Hom, the direct image and the exceptional inverse image. Step 6 holds: I verified the type of c_GF=G_L(c_F)c_G and the unit, alpha and counit intertwining by naturality, and the product telescopes. Steps 7 and 8 (cocycle and representative independence) agree with def-weil-algebraically-closed-coefficients and def-weil-derived-pullback-tensor-hom. Steps 5, 9 and 10 need no lattice, and the inverse equation is correct. Advisory: the intertwining hypothesis must be read as covering each pasted square; the parent supplies all comparisons through def-exchange-projection, so no change is needed. Edge cases tested: identity adjunctions (mate = alpha), identity or iterated field extensions, the l^-1-scalar line with no stable lattice, and the zero map. Duplicate search over mate/fixed-pair/scalar-extension nodes found no duplicate (closest candidates: lem-sf-fixed-pair-adjunction-lift, lem-pur-fixed-pair-right-adjoint-comparison, lem-pod-semilinear-field-operation-lifts). proof_deps is the union of uses, and the stmt_deps are correct. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EquivariantMatesCoefficientTransport",
+  "declaration": "CategoryTheory.EquivariantMates.fixedPair_mate",
+  "declarations": [
+   "CategoryTheory.EquivariantMates.Square",
+   "CategoryTheory.EquivariantMates.Square.mate",
+   "CategoryTheory.EquivariantMates.FixedLift",
+   "CategoryTheory.EquivariantMates.fixedPair_mate",
+   "CategoryTheory.EquivariantMates.fixedPair_mate_pasting",
+   "CategoryTheory.EquivariantMates.fixedPair_mate_adjunctionComposition",
+   "CategoryTheory.EquivariantMates.fixedPair_mate_changeSecond",
+   "CategoryTheory.EquivariantMates.fixedPair_mate_changeFirst",
+   "CategoryTheory.EquivariantMates.fixedPair_inverse",
+   "CategoryTheory.EquivariantMates.compositeComparison",
+   "CategoryTheory.EquivariantMates.CoefficientComparison",
+   "CategoryTheory.EquivariantMates.CoefficientComparison.source",
+   "CategoryTheory.EquivariantMates.CoefficientComparison.target",
+   "CategoryTheory.EquivariantMates.mate_coefficientTransport",
+   "CategoryTheory.EquivariantMates.pasted_coefficientTransport",
+   "CategoryTheory.EquivariantMates.compositeComparison_cocycle",
+   "WeilConjectures.rational_mate_coefficientTransport",
+   "WeilConjectures.rational_mate_exact",
+   "WeilConjectures.finiteExtension_mate_coefficientTransport",
+   "WeilConjectures.commonStage_mate_coefficientTransport",
+   "WeilConjectures.commonStage_mate_representatives",
+   "WeilConjectures.rational_weil_mate",
+   "WeilConjectures.commonStage_weil_mate"
+  ],
+  "file": "lean/Sheaf/Paper/EquivariantMatesCoefficientTransport.lean",
+  "statement": "theorem fixedPair_mate (S : Square A B C D) (PA : A ⥤ A) (PB : B ⥤ B) (PC : C ⥤ C) (PD : D ⥤ D) (W : FixedLift S PA PB PC PD) : ∃ (a₁ : W.left₁ ⊣ W.right₁) (a₂ : W.left₂ ⊣ W.right₂), a₁.unit = W.unit₁ ∧ a₁.counit = W.counit₁ ∧ a₂.unit = W.unit₂ ∧ a₂.counit = W.counit₂ ∧ ∀ K : IsoAlgebra PB, HEq ((mateEquiv a₁ a₂ W.square).app K).hom.f (S.adj₂.unit.app (S.horizontal.obj (S.right₁.obj K.carrier)) ≫ S.right₂.map (S.square.app (S.right₁.obj K.carrier)) ≫ S.right₂.map (S.vertical.map (S.adj₁.counit.app K.carrier)))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations together render all clauses: arbitrary specified fixed-pair lifts and their exact carrier, the four lifted pasting identities, actual rationalization/finite-extension/common-stage transport, identity and tower normalization, representative independence, arbitrary Weil structures, and the conditional actual carrier inverse. Auxiliary records package only the supplied data; they introduce no alternate coefficient categories or operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d34130f7",
+  "group": "O1",
+  "result": "pass",
+  "note": "Only the item node's lean field changes; the 7 stmt_dep nodes equal live; statement field verbatim. fixedPair_mate: lifted adjunctions pinned to the supplied unit/counit, carrier HEq = η₂(UR₁K)≫R₂(α R₁K)≫R₂V(ε₁K), matching mateEquiv and the node formula. The 4 pasting theorems are exact specialisations of Mathlib mateEquiv_vcomp/hcomp/conjugate lemmas (orientations checked). CoefficientComparison uses the recorded ExchangeProjectionAdjunctionComparison/ComparisonPreserves; mate_coefficientTransport checked by hand (true, correctly directed); compositeComparison_cocycle true. Rational/stageTransition/inclusion specialisations use the actual recorded functors. Weil theorems cover all fixed pairs and arrows with no lattice; fixedPair_inverse requires IsIso. No extra hypotheses; universes forced by deps. All theorems sorry, defs real, docstrings carry source and blueprint. Advisories: proof_dep-owned decls (sfRational*/GeneralAlgebraicallyClosedCoefficients) used without being stmt_deps; commonStage_mate_representatives nearly tautological; private imports possibly redundant. No recompile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T123957-L-1922869",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

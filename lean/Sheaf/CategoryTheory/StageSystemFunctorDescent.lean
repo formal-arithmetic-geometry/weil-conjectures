@@ -5,6 +5,7 @@ Authors: SHEAF group NU
 -/
 module
 
+public import Mathlib.CategoryTheory.NatIso
 public import Sheaf.CategoryTheory.CoherentPairFunctorDescent
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 import WeilConjectures.CategoryTheory.StageSystem.Functor
@@ -52,7 +53,18 @@ def pairFunctorCoherent : Prop :=
 Source: sketch32, lines 1419--1426
 (blueprint: lem-sbc-coherent-pair-functor-descent). -/
 def coefficientPairFunctorObject (P : S.PairCategory) : T.PairCategory :=
-  ⟨P.stage, (φ P.stage).obj P.obj⟩
+  match P with
+  | ⟨i, X⟩ => ⟨i, (φ i).obj X⟩
+
+omit [IsDirectedOrder I] in
+/-- Matching the pair first preserves the original stagewise object formula.
+Source: sketch32, lines 1419--1426
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: destruct the pair; both sides are the same pair constructor. -/
+theorem coefficientPairFunctorObject_eq (P : S.PairCategory) :
+    coefficientPairFunctorObject S T φ P = ⟨P.stage, (φ P.stage).obj P.obj⟩ := by
+  cases P
+  rfl
 
 /-- The functor on the upstream quotient is uniquely prescribed by all representatives.
 Source: sketch32, lines 1291--1338 and 1419--1426; sketch42 pair universal property
@@ -78,17 +90,48 @@ theorem coefficientPairFunctor_exists (hb : pairFunctorCoherent S T φ b) :
             (Y := coefficientPairFunctorObject S T φ Q) M hP hQ
             ((b hP).hom.app P.obj ≫ (φ M).map f ≫ (b hQ).inv.app Q.obj))) := by
   let G : S.Morphism T := ⟨φ, b, hb⟩
-  refine ⟨G.functor, ⟨fun _ ↦ rfl, fun _ _ _ _ ↦ HEq.rfl⟩, ?_⟩
+  refine ⟨G.functor, ⟨fun P ↦ by cases P; rfl, fun _ _ _ _ ↦ HEq.rfl⟩, ?_⟩
   intro F hF
   apply Functor.hext hF.1
   intro P Q f
   induction f using PairCategory.hom_induction with
   | h M hP hQ f => exact hF.2 M hP hQ f
 
+private theorem copyObj_eq_of_eq {A B : Type*} [Category A] [Category B]
+    (F : A ⥤ B) (obj : A → B) (h : ∀ X, F.obj X = obj X) :
+    F.copyObj obj (fun X ↦ eqToIso (h X)) = F := by
+  apply Functor.hext (fun X ↦ (h X).symm)
+  intro X Y f
+  dsimp only [Functor.copyObj, eqToIso.hom, eqToIso.inv]
+  exact (eqToHom_comp_heq _ (h X).symm).trans (comp_eqToHom_heq _ (h Y))
+
 /-- Coherent-pair descent, with uniquely determined object and arrow formulas.
 Source: sketch32, lines 1291--1338 and 1419--1426
 (blueprint: lem-sbc-coherent-pair-functor-descent). -/
 @[irreducible] def coefficientPairFunctor (hb : pairFunctorCoherent S T φ b) :=
-  (coefficientPairFunctor_exists S T φ b hb).exists.choose
+  ((coefficientPairFunctor_exists S T φ b hb).exists.choose).copyObj
+    (coefficientPairFunctorObject S T φ)
+    (fun P ↦ eqToIso ((coefficientPairFunctor_exists S T φ b hb).exists.choose_spec.1 P))
+
+/-- The normalized object construction is the uniquely specified descended functor.
+Source: sketch32, lines 1291--1338 and 1419--1426
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: copyObj conjugates each map by the identity transports induced by its
+object equalities. Functor heterogeneous extensionality removes these transports. -/
+theorem coefficientPairFunctor_eq_chosen (hb : pairFunctorCoherent S T φ b) :
+    coefficientPairFunctor S T φ b hb =
+      (coefficientPairFunctor_exists S T φ b hb).exists.choose := by
+  unfold coefficientPairFunctor
+  exact copyObj_eq_of_eq _ _ _
+
+/-- The descended object function is the specified literal stagewise construction.
+Source: sketch32, lines 1419--1426
+(blueprint: lem-sbc-coherent-pair-functor-descent).
+Proof: copyObj has precisely its supplied object function; project that record field. -/
+theorem coefficientPairFunctor_obj (hb : pairFunctorCoherent S T φ b)
+    (P : S.PairCategory) :
+    (coefficientPairFunctor S T φ b hb).obj P = coefficientPairFunctorObject S T φ P := by
+  unfold coefficientPairFunctor
+  rfl
 
 end CategoryTheory.StageSystem

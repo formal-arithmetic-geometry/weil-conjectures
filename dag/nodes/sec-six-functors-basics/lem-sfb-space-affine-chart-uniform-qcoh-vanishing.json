@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+ "kind": "statement",
+ "title": "Uniform quasi-coherent sheaf vanishing over affine etale charts",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$, with their small etale structure sheaves [def-trf-algebraic-space]. Assume that $Y$ is quasi-compact, that $f$ is quasi-compact (each pullback over an affine scheme has quasi-compact source), and that its relative diagonal is quasi-compact. Use module sheaves [def-weil-sheaf-of-modules-category] and quasi-coherence [def-trf-space-quasi-coherent-module]. For an affine etale scheme $V\\to Y$, put $W=X\\times_YV$. Extend a module $M$ from the small etale site of $X$ to the enlarged etale site $\\mathcal C_X$ of [lem-trf-space-enlarged-etale-ringed-site-model], and denote its extension by $\\widetilde M$. Define the additive functor $F_V:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ by $F_V(M)=\\widetilde M(W)$, forgetting the section ring action. Write $R^pF_V(M)$ for degree $p$ cohomology after applying $F_V$ to an injective resolution in all module sheaves. There exists an integer $N\\geq1$, depending only on $f$, such that $R^pF_V(M)=0$ for every affine etale $V\\to Y$, every quasi-coherent $M$ on $X$, and every integer $p\\geq N$. No Noetherian, finite-type, finite-presentation or coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073G (lemma-vanishing-higher-direct-images), combined with Tag 08EX (lemma-quasi-coherence-higher-direct-images-application); exactly the sheaf-cohomology bound used in spaces-perfect.tex Tag 08FA, proof of (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose once and for all an affine scheme $T$ and a surjective etale map $a:T\\to Y$ using [lem-sfb-qc-space-affine-etale-atlas]. Put $Z=X\\times_YT$ and $g:Z\\to T$. By [lem-sfb-space-quasicompact-affine-tests], $g$ is quasi-compact. Its diagonal is the base change of $\\Delta_f$, so the same node applied to $\\Delta_f$ makes $g$ quasi-separated. Since $T$ is affine, it is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; [lem-sfb-space-qcqs-source-products] then makes $Z$ quasi-separated. The affine-test hypothesis on $f$ makes $Z$ quasi-compact. The fibre products and etale projections exist by [lem-trf-space-fibre-products-etale-covers]. This argument applies also to the pullback of $f$ over any other affine scheme over $Y$. It requires no quasi-separatedness of $Y$.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073G, lemma-vanishing-higher-direct-images, reduction to an affine etale cover of Y."
+   }
+  },
+  {
+   "text": "Apply the existing single-space bound [lem-sfb-space-global-sections-amplitude] to $Z$ and fix its integer $c\\geq0$. Set $N=c+1$. For every quasi-coherent module $Q$ on $Z$, the object $Q[0]$ has quasi-coherent cohomology and lies in degrees $\\leq0$, so $H^pR\\Gamma(Z,Q[0])=0$ for $p\\geq N$. This is also $H^p(Z,Q)$ in the module-injective convention: [lem-sfb-module-resolution-derived-presheaf-comparison] supplies a nonnegative injective module resolution, and [lem-weil-pbc-bounded-below-injectives-kinjective] makes that resolution K-injective. Thus the same section complex computes both expressions. The choice of $c$, and hence of $N$, depends on the one fixed space $Z$, not on $Q$.",
+   "uses": [
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, lemma-vanishing-quasi-separated; its single-space bound is supplied by the existing global-sections-amplitude node (spaces-perfect.tex Tag 08F7)."
+   }
+  },
+  {
+   "text": "For every such $Q$ and $p\\geq N$, [lem-sfb-space-higher-direct-image-quasi-coherent] makes $A_p=R^pg_*Q$ quasi-coherent, and [lem-sfb-space-affine-base-higher-image-sections] gives $\\Gamma(T,A_p)\\cong H^p(Z,Q)=0$. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $A_p$ comes from a quasi-coherent Zariski module $B_p$ with the same global sections. The counit in [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $B_p$ with $\\widetilde{\\Gamma(T,B_p)}=\\widetilde0=0$. Hence $A_p=0$. This proves $R^pg_*Q=0$ for all quasi-coherent $Q$ with the one bound $N$.",
+   "uses": [
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073G, lemma-vanishing-higher-direct-images, affine-base reduction; Tag 08EX, lemma-quasi-coherence-higher-direct-images-application."
+   }
+  },
+  {
+   "text": "Now let $M$ be quasi-coherent on $X$. Its restriction $M_Z$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. By [lem-sfb-space-higher-image-etale-restriction], $(R^pf_*M)|_T\\cong R^pg_*M_Z=0$ for $p\\geq N$. This implies $R^pf_*M=0$: for an etale scheme object $U\\to Y$, the scheme $U\\times_YT$ is an etale surjective cover of $U$ by [lem-trf-space-fibre-products-etale-covers]. Every section of $R^pf_*M$ over $U$ restricts to zero on that cover, so is zero by the separatedness axiom of a sheaf. This proves vanishing on every object of the small etale site of $Y$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073G, lemma-vanishing-higher-direct-images, first paragraph: etale descent of higher direct images."
+   }
+  },
+  {
+   "text": "For an arbitrary affine etale $V\\to Y$, put $W=X\\times_YV$ and $h:W\\to V$. The base-change argument of step 1 gives that $h$ is quasi-compact and quasi-separated. Its coefficient $M_W$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. By [lem-sfb-space-higher-image-etale-restriction] and step 4, $R^ph_*M_W\\cong(R^pf_*M)|_V=0$ for $p\\geq N$. Apply [lem-sfb-space-affine-base-higher-image-sections] to $h$ to obtain $H^p(W,M_W)\\cong\\Gamma(V,R^ph_*M_W)=0$. The integer $N$ was fixed before choosing $V$ or $M$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-sfb-space-affine-base-higher-image-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08EX, lemma-quasi-coherence-higher-direct-images-application, applied after etale base change."
+   }
+  },
+  {
+   "text": "It remains to identify the functor actually stated in the item. A nonnegative injective module resolution exists by [lem-sfb-module-resolution-derived-presheaf-comparison]. The module equivalence in [lem-trf-space-enlarged-etale-ringed-site-model] carries it to an injective resolution on $\\mathcal C_X$, by [lem-weil-pbc-equivalence-injective-resolutions]. Consequently $R^pF_V(M)$ is derived module evaluation of $\\widetilde M$ at the object $W$ on this enlarged site. By [lem-pe-ringed-site-derived-evaluation-slice] this is $H^p(\\mathcal C_X/W,\\widetilde M_{ab}|_W)$, computed in abelian sheaves. The enlarged-site model identifies this ringed slice with $\\mathcal C_W$, with the coefficient given by the extension of $M_W$. The comparison [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison], applied to the terminal object of $\\mathcal C_W$, identifies its abelian cohomology with module global-section cohomology there. Finally, the module equivalence between $\\mathcal C_W$ and $W_{\\mathrm{et}}$ preserves injective resolutions and global sections, again by [lem-weil-pbc-equivalence-injective-resolutions]. Thus $R^pF_V(M)\\cong H^p(W,M_W)$, and step 5 proves the assertion. No underlying additive sheaf of an injective module was assumed injective. Empty spaces and zero modules give zero section complexes; $N\\geq1$ keeps all asserted degrees nonnegative.",
+   "uses": [
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; spaces-properties.tex Tags 03G1 (lemma-compare-etale-sites), 03LP (lemma-etale-morphism-topoi), and localization equations 04LY/04LZ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-global-sections-amplitude",
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-higher-image-etale-restriction",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Reduction of Tag 073G to an affine etale base and the single-space bound, combined with Tag 08EX. Uses the existing single-space global-sections-amplitude statement rather than duplicating Tag 072C. The enlarged-site injective-resolution comparison is expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs morphism of algebraic spaces with quasi compact target there is one bound for cohomology of every quasi coherent sheaf on inverse images of all affine etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (U : c.pt.\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme affine-limit algebra, underived sheaf functors, or generic cohomological support, not the stated unbounded algebraic-space or ringed-site theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaf cohomology on algebraic spaces has finite cohomological dimension uniformly over affine charts of a fixed quasi compact quasi separated morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme affine-limit algebra, underived sheaf functors, or generic cohomological support, not the stated unbounded algebraic-space or ringed-site theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"QuasiCompact\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching theorem; returned general Kan-extension and derived-functor comparison infrastructure does not discharge the ringed-site or quasi-coherent hypotheses in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?dimension|vanishing.*quasi.?coherent|quasi.?coherent.*vanish",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration stating the requested cohomological bound or unbounded ringed-site Leray theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite cohomological dimension for quasi coherent sheaves on algebraic spaces over affine etale charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give quasi-coherence definitions, underived pushforward, classical right derived functors, or support of complexes, not this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?dimension|vanishing.*quasi.?coherent|quasi.?coherent.*vanish",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-limit or etale-locus lemmas, quasicoherence definitions, and the generic vanishing theorem for injective inputs do not give this uniform bound for all quasicoherent modules on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Quasicoherent\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-limit or etale-locus lemmas, quasicoherence definitions, and the generic vanishing theorem for injective inputs do not give this uniform bound for all quasicoherent modules on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cohomological dimension for quasi coherent modules over algebraic spaces",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.recOn",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.QuasicoherentData.I",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-limit or etale-locus lemmas, quasicoherence definitions, and the generic vanishing theorem for injective inputs do not give this uniform bound for all quasicoherent modules on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of derived evaluation of quasicoherent modules over affine etale charts of a quasi compact quasi separated morphism of algebraic spaces",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-limit or etale-locus lemmas, quasicoherence definitions, and the generic vanishing theorem for injective inputs do not give this uniform bound for all quasicoherent modules on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The higher derived functors of sections of a quasi coherent sheaf vanish in a fixed finite range on etale affine base changes of a qcqs algebraic space morphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.Modules.instAbelian",
+     "Algebra.etaleLocus_eq_compl_support",
+     "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+     "AlgebraicGeometry.IsEtale.of_comp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-limit or etale-locus lemmas, quasicoherence definitions, and the generic vanishing theorem for injective inputs do not give this uniform bound for all quasicoherent modules on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-pushforward-upper-bound",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): the uniform bound on H^p(V times_Y X, M), before applying 08F7.",
+   "via": [
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Reduced the uniform affine-chart assertion to the already-existing single-space cohomology bound on one fixed affine etale pullback, then used affine higher-image sections, quasi-coherence, etale descent, and an explicit injective-resolution comparison for enlarged-site evaluation. All required facts already have nodes; no new nodes or Mathlib leaves.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting coherent-duality chain recorded in blueprint.from.place: the sheaf-cohomology input in spaces-perfect.tex Tag 08FA proof (2). The six steps establish exactly the uniform affine-chart bound required by lem-sfb-space-derived-pushforward-upper-bound.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings tool used in the cited step; it supplies geometry, affine module reconstruction, or injective-resolution/localization infrastructure, without replacing the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially tool used in the cited step; it supplies geometry, affine module reconstruction, or injective-resolution/localization infrastructure, without replacing the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces tool used in the cited step; it supplies geometry, affine module reconstruction, or injective-resolution/localization infrastructure, without replacing the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic Derived module evaluation is abelian cohomology on the slice tool used in the cited step; it supplies geometry, affine module reconstruction, or injective-resolution/localization infrastructure, without replacing the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic Module and abelian cohomology over an object of a ringed site agree tool used in the cited step; it supplies geometry, affine module reconstruction, or injective-resolution/localization infrastructure, without replacing the constructible-direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-9cf7bc070",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-9cf7bc070 (reviewer sub-agent of L); spot-checked: PASS, no changes, no new nodes. Statement and stmt_deps are identical to side-live. The item is still unsplit on live and side-live and has no repair note, so the delivery is not superseded. All 24 cited ids exist and are unmerged, with statements unchanged on both clones. The citation closure does not reach the item, so there is no cycle. Sources read: Stacks 073G (spaces-cohomology l.1249), 072C (l.1168), 08EX (l.238) and spaces-perfect 08FA proof (2). The statement matches the 08FA(2) input hypothesis by hypothesis (f qcqs, Y quasi-compact, uniform N over affine etale V; Y need not be quasi-separated). Small cases: id_Y over a non-quasi-separated Y, X empty, affine f. Steps: (1) fixed affine atlas T; Z=X×_Y T is qcqs by the affine-tests node (Δ_g is a base change of Δ_f), affine-scheme-qcqs and qcqs-source-products. (2) the existing amplitude node for Q[0] with t=0 gives N=c+1; the injective resolution is K-injective. (3) R^pg_*Q is quasi-coherent with Γ(T,·)=H^p(Z,Q)=0, so it is zero by the Zariski/etale equivalence and the tilde-gamma counit. (4) the etale-restriction node gives vanishing on T; sheaf separatedness on the scheme cover U×_Y T descends it to every U in Y_et. (5) restriction plus 08EX on V gives H^p(W,M_W)=0. (6) enlarged-site module equivalence, injective transport, derived-evaluation-slice, C_X/W≅C_W, module/abelian comparison: R^pF_V(M)=H^p(W,M_W). Duplicate search over 073G/072C/08EX and their labels: the hits state 073H, 01XK, 071N or the single-space bound, none the uniform chart bound. Tool uses accepted as generic infrastructure: the lem-trf fibre-products, Zariski/etale-qcoh and enlarged-site nodes, and the 03FD module/abelian comparison; derived-evaluation-slice is on the route via sk-prop-sf-comparison. Batch-5: the 7 sfb citations reach sec-trace-formula only through the definition def-trf-algebraic-space and algebraic-space foundations. The 2 trf nodes are general fibre-product and qcoh-equivalence results, not steps of the trace-formula or Poincare-duality proofs, and the closure contains no assume leaf or poincare node, so all are accepted. Maintainer note: the unsplit lem-sfb-space-global-sections-amplitude must be split via 072C directly, not via this item, or it closes a cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineChartUniformQcohVanishing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineChartModuleSections_uniform_vanishing",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineChartModuleSections",
+   "AlgebraicGeometry.AlgebraicSpace.affineChartModuleSections_additive",
+   "AlgebraicGeometry.AlgebraicSpace.smallAffineChartModuleSections_additive",
+   "AlgebraicGeometry.AlgebraicSpace.affineChartModuleSections_uniform_vanishing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineChartUniformQcohVanishing.lean",
+  "statement": "theorem affineChartModuleSections_uniform_vanishing (f : X ⟶ Y) (hYqc : IsQuasiCompact Y.obj) (hfqc : IsQuasiCompactPresheafMap f.hom.hom) (hfqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) : ∃ N : ℕ, 1 ≤ N ∧ ∀ (V : Y.EtaleSite), IsAffine (Y.etaleForget.obj V) → ∀ (M : X.Modules), M.IsQuasicoherent → ∀ p : ℕ, N ≤ p → IsZero (((X.smallModuleEquivalence.inverse ⋙ affineChartModuleSections f V).rightDerived p).obj (X.smallModuleRestriction.obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "F_V is the actual normalized enlarged-module extension followed by additive section evaluation at the base-changed scheme chart. Right derivation is in all modules on the already recorded equivalent small affine model, retaining section universe u; no derived category of QCoh is used. The positive natural bound and natural degrees encode exactly the integer degrees >= N >= 1. Quasi-compactness of Y uses the existing IsQuasiCompact predicate, owned by def-sfb-stack-qcqs-morphism. The affine-test and diagonal predicates are cited through their existing definition nodes, not the etale-locality theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d04aed364",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery of returned head e94a41c255d9 (F1 H2, F2 H4). A diff against the returned snapshot shows only those repairs. F1 fixed: lem-trf-space-qc-separated-etale-local removed from stmt_deps; existing:true owners def-sfb-space-quasi-compact-presheaf-map (IsQuasiCompactPresheafMap) and def-sfb-presheaf-map-separated-diagonal (diagonalPresheafMap) cited; both on base and identical to side-live. F2 fixed: hYqc is now IsQuasiCompact Y.obj (StackQcqsMorphism l.38-41), whose body is exactly the former inline atlas hypothesis; import added; owner def-sfb-stack-qcqs-morphism cited and on base, no cycle. lean.statement matches the file verbatim. Statement, proof and proof_deps unchanged; the rest was already judged faithful to 073G/08EX/08FA(2). Spot-checked: smallModuleEquivalence = smallModuleRestriction.asEquivalence, quantifier order, relative diagonal, edge cases (empty X/Y, zero module, p=N), no extra hypotheses. Theorems are sorry only, with source/blueprint docstrings; Worker report and Second reading by Q87 present. No file changed, so no compile."
+ }
+}

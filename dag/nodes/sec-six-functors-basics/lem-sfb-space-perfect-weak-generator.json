@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-space-perfect-weak-generator",
+ "kind": "statement",
+ "title": "A single perfect weak generator for an algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$, with its small etale site and structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Module sheaves are [def-weil-sheaf-of-modules-category], and quasi-coherence is [def-trf-space-quasi-coherent-module]. Write $D(\\mathcal O_X)$ for the unbounded derived category [def-weil-abstract-derived-category] and $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for its full subcategory of objects with quasi-coherent cohomology. A perfect object means one etale locally represented by a bounded complex of direct summands of finite free $\\mathcal O_X$-modules [def-weil-pbc-strict-perfect-coefficient-package]. Assume $X$ is quasi-compact and quasi-separated: every open cover of $|X|$ has a finite subcover, and its diagonal is quasi-compact. There is a perfect object $P\\in C_X$ such that, for every $E\\in C_X$, $E\\cong0$ if and only if $\\operatorname{Hom}_{D(\\mathcal O_X)}(P[n],E)=0$ for every $n\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IY, theorem-bondal-van-den-Bergh, zero-detection statement."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-qcqs-distinguished-square-induction] to the isomorphism-invariant property that $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ admits a perfect object detecting zero by all shifted Hom groups. We verify its affine case and its elementary-square implication below. In the latter implication write $j:U\\hookrightarrow Y$, $f:V\\to Y$, and $W=U\\times_YV$; $Y$ is quasi-compact quasi-separated, $U$ is quasi-compact and $V$ is affine. The induction principle ensures all four vertices are in its quasi-compact quasi-separated domain. Its hypotheses include the property for $U,V,W$; only that for $U$ will be needed.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, first paragraph; Tag 08GP, lemma-induction-principle."
+   }
+  },
+  {
+   "text": "For affine $Y$, take a scheme perfect generator from [lem-pc-perfect-generator-exists]. The weak-generator definition [def-pc-generators] says that vanishing of all shifted Hom groups forces zero: rewrite $\\operatorname{Hom}(P,E[m])$ as $\\operatorname{Hom}(P[-m],E)$. Pass to the small etale site by [lem-sfb-derived-etale-zariski-equivalence]; full faithfulness and compatibility with shifts preserve these Hom groups and zero objects. Perfectness is preserved by [lem-sfb-etale-detects-perfect]. This proves the affine case, including the empty affine scheme. We use the existing scheme theorem rather than reintroducing its affine special case.",
+   "uses": [
+    "lem-pc-perfect-generator-exists",
+    "def-pc-generators",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, affine paragraph; scheme theorem Tag 09IS."
+   }
+  },
+  {
+   "text": "In the elementary square, choose a perfect weak generator $P$ on $U$ using the inductive hypothesis. Apply [lem-sfb-space-perfect-open-retract] to get a perfect $Q$ on $Y$ and maps $P\\xrightarrow{i}Q|_U\\xrightarrow{r}P$ with $ri=1$. Write $V=\\operatorname{Spec}A$. The open $W\\subset V$ is quasi-compact. Its complement is $V(I)$ for an ideal $I\\subset A$; the opens $D(a)$, $a\\in I$, cover $W$ by the definition of $V(I)$. Choose a finite subcover $D(a_1),\\ldots,D(a_t)$. Thus $V\\setminus W=V(a_1,\\ldots,a_t)$. Let $K$ be the etale realization of the finite Koszul complex on these elements. It is a bounded finite-free complex, hence perfect by the local definition. It vanishes on $W$ by [lem-pc-koszul-restriction-zero] and the derived etale comparison, so is supported on $f^{-1}(Y\\setminus U)$.",
+   "uses": [
+    "lem-sfb-space-perfect-open-retract",
+    "lem-pc-koszul-restriction-zero",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, elementary-square paragraph."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-supported-etale-excision], $K^{\\prime}=Rf_*K$ agrees with $f_!K$, restricts to $K$ on $V$, and restricts to zero on $U$. Both restrictions are perfect. Since $U\\amalg V\\to Y$ is an etale cover, the local definition [def-weil-pbc-strict-perfect-coefficient-package] makes $K^{\\prime}$ perfect (the argument of Tag 08HK). Put $G=Q\\oplus K^{\\prime}$. Finite direct sums of the bounded local finite-projective representatives are again such representatives, after refining the two local covers, so $G$ is perfect. Since $Y$ is qcqs, the quasi-coherent-cohomology clause of [lem-sfb-space-perfect-objects-compact] gives $G\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. Suppose $E$ belongs to this category and $\\operatorname{Hom}(G[n],E)=0$ for all $n$. The inclusions and projections of the summands give $\\operatorname{Hom}(Q[n],E)=\\operatorname{Hom}(K^{\\prime}[n],E)=0$. Apply the Hom bijection in the excision statement with $M=E$ and integer $-n$, and move the shift from the target to the source: $\\operatorname{Hom}(K^{\\prime}[n],E)\\cong\\operatorname{Hom}(K[n],f^*E)$.",
+   "uses": [
+    "lem-sfb-space-supported-etale-excision",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-space-perfect-objects-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, construction of Q plus K prime and first Hom formula."
+   }
+  },
+  {
+   "text": "The etale restriction $E|_V$ has quasi-coherent cohomology by [lem-sfb-space-derived-etale-chart-calculus]. Apply [lem-pc-perfect-generation-koszul-orthogonal] on the Zariski affine scheme $V$, taking its ambient scheme $X=V$ and open $U=W$ (so $X=U\\cup V$). All its hypotheses hold, especially the quasi-compactness of $W$. The equivalence [lem-sfb-derived-etale-zariski-equivalence] preserves the Koszul complex, restriction, shifted Hom and the derived pushforward along $h:W\\hookrightarrow V$. Hence its conclusion on the etale site is that the canonical unit $E|_V\\to Rh_*(E|_W)$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, use of orthogonal Koszul complexes, Tag 09IR."
+   }
+  },
+  {
+   "text": "We now supply the omitted detail. Consider the canonical unit $\\eta:E\\to Rj_*j^*E$. On $U$ it is the identity under $j^*Rj_*\\simeq\\mathrm{id}$: etale base change for the open $j$ gives this identification, since $U\\times_YU=U$. On $V$, etale base change identifies $f^*Rj_*j^*E$ with $Rh_*(E|_W)$ and identifies $f^*\\eta$ with the unit of the preceding step, because [lem-sfb-space-derived-etale-chart-calculus] respects units. Thus $\\eta$ is an isomorphism on both members of the jointly surjective etale cover $U\\amalg V\\to Y$. Its cone has zero cohomology on that cover; a sheaf whose restrictions vanish on a cover is zero by the sheaf axiom. Consequently the cone is acyclic and $\\eta$ is an isomorphism globally. In particular $E\\simeq Rj_*(E|_U)$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, sentence This implies that E equals R(U to X) star E restricted to U (small detail omitted)."
+   }
+  },
+  {
+   "text": "Using $j^*\\dashv Rj_*$ from [lem-sfb-space-derived-etale-chart-calculus] and $E\\simeq Rj_*E|_U$, we have $\\operatorname{Hom}(Q[n],E)\\cong\\operatorname{Hom}(Q|_U[n],E|_U)=0$. Given $a:P[n]\\to E|_U$, the composite $a r[n]$ is zero; composing with $i[n]$ gives $a=0$ since $ri=1$. Thus $\\operatorname{Hom}(P[n],E|_U)=0$ for every $n$. The inductive detection property of $P$ yields $E|_U=0$, and the unit isomorphism gives $E=Rj_*0=0$. Conversely every map to a zero object is zero. This completes the elementary-square implication and therefore the induction in step 1.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, final paragraph and final Hom formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-pc-perfect-generator-exists",
+  "def-pc-generators",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-sfb-space-perfect-open-retract",
+  "lem-pc-koszul-restriction-zero",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-supported-etale-excision",
+  "lem-sfb-space-perfect-objects-compact",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-pc-perfect-generation-koszul-orthogonal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IY, theorem-bondal-van-den-Bergh; omitted local-unit verification expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space has a single perfect complex detecting zero by shifted Hom",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"CategoryTheory.hasExt_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C],\\n  CategoryTheory.HasExt C ↔\\n    ∀ (X Y : C) (n : ℤ),\\n      0 ≤ n →\\n        Small.{w, w'}\\n          ((DerivedCategory.singleFunctor C 0).obj X ⟶\\n            (CategoryTheory.\", \"doc\": \"For an abelian category $\\\\mathcal{C}$ with a derived category, the property $\\\\text{HasExt}$ holds if and only if for all objects $X, Y \\\\in \\\\mathcal{C}$ and non-negative integers $n$, the hom-set betwe\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give derived localizations, t-structures, scheme quasi-compactness and local presentation data; none gives perfect zero-detection for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bondal Van den Bergh perfect weak generator of the unbounded quasi coherent derived category of algebraic spaces",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give derived localizations, t-structures, scheme quasi-compactness and local presentation data; none gives perfect zero-detection for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject, DerivedCategory",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsCompactObject'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give derived localizations, t-structures, scheme quasi-compactness and local presentation data; none gives perfect zero-detection for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*generat|generat.*perfect|algebraic.?space",
+   "sub": "",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"106\", \"text\": \"that freeness follows automatically since two finitely-generated Abelian groups in perfect pairing\"}\n  {\"file\": \"Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean\", \"line\": \"67\", \"text\": \"-- TODO: Show that this is perfect when `N` is a lattice and `B` is nondegenerate.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"line\": \"269\", \"text\": \"If the Killing form is non-degenerate and the coefficients are a perfect field, this space is\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"114\", \"text\": \"  that `K` is a perfect field and `L` has non-degenerate Killing form. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"line\": \"311\", \"text\": \"/-- Any finitely generated extension over perfect fields are separably generated. -/\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"60\", \"text\": \"If `k` is a perfect ring of characteristic `p`, a Witt vector `x : 𝕎 k` falls in ideal generated by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"77\", \"text\": \"If `k` is a perfect ring of characteristic `p`, a Witt vector `x : 𝕎 k` falls in ideal generated by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Field.lean\", \"line\": \"16\", \"text\": \"In particular finitely generated field extensions over perfect fields are smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give derived localizations, t-structures, scheme quasi-compactness and local presentation data; none gives perfect zero-detection for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex weakly generates the derived category of quasi coherent modules on a qcqs algebraic space",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"{K L : HomologicalComplex C c} (f : K ⟶ L) : IsIso (Q.map f) ↔ HomologicalComplex.quasiIso C c f\", \"doc\": \"A morphism $ f $ between homological complexes becomes an isomorphism in the derived category $ \\\\mathcal{D} = \\\\mathcal{K}[\\\\text{QuasiIso}^{-1}] $ if and only if $ f $ is a quasi-isomorphism (i.e., ind\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give derived localizations, t-structures, scheme quasi-compactness and local presentation data; none gives perfect zero-detection for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-localizing-generation",
+  "date": "2026-10-23",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, first paragraph: reduction to perfect tests using the perfect generator, including the ambient-coproduct interpretation. Supporting input for this split: Tag 09IY, theorem-bondal-van-den-Bergh, zero-detection statement.",
+   "via": [
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-weak-generator",
+  "worker": "stage1",
+  "group": "Q38",
+  "summary": "Followed Tag 09IY via existing distinguished-square induction, open extension, supported etale excision and scheme/Koszul comparison. Reused newly available support excision; proved supported pushforward perfectness locally in the item, and supplied the omitted canonical-unit argument. No new nodes; statement unchanged.",
+  "blueprint": "Inherited supporting route to det-thm-sf-ctf-stability-direct-images, proof (3), through Tag 0D3F first paragraph. This split realizes its perfect-test prerequisite by the full proof of Tag 09IY: affine case, distinguished-square construction, Koszul orthogonality, local-unit descent, and final open adjunction. Ancestor command returns None for this imported ancestry chain; retained that value.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-generator-exists",
+    "why": "The existing scheme generator theorem supplies the affine base of the spaces induction, exactly the representable input to Tag 09IY."
+   },
+   {
+    "node": "lem-pc-koszul-restriction-zero",
+    "why": "Finite Koszul complexes vanish on their principal-open complement; this scheme tool is transferred by the existing etale comparison."
+   },
+   {
+    "node": "lem-pc-perfect-generation-koszul-orthogonal",
+    "why": "Tag 09IR is explicitly the affine Koszul orthogonality tool used by the source Tag 09IY; it does not replace the spaces induction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-generator-exists",
+  "lem-pc-koszul-restriction-zero",
+  "lem-pc-perfect-generation-koszul-orthogonal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-906c57330",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-906c57330 (reviewer sub-agent of L); spot-checked: I read Stacks 09IY (spaces-perfect.tex:3674) in full. The statement, stmt_deps and blueprint fields are byte-identical to live, and live is unsplit with no repair note, so the target is unchanged and the delivery is not superseded. There are no new nodes. The seven steps follow the source in order: 08GP distinguished-square induction (all square vertices qcqs, so W is quasi-compact); the affine case via the scheme generator 09IS plus the etale/Zariski D_QCoh equivalence and etale-detects-perfect; Q from the open-retract lemma 09IX; a finite principal cover of W with V minus W = V(a_1..a_t) and Koszul vanishing on W; supported-etale-excision 08GG, whose hypotheses are exactly the elementary square with K|_W=0, giving K' perfect locally on {U,V} (08HK argument, using a K-injective representative) and G = Q plus K' in D_QCoh by perfect-objects-compact; Koszul orthogonality 09IR on V with X=V and U=W; the omitted unit-isomorphism detail written out by etale base change and the sheaf axiom on the cover U and V; and the final open adjunction with the retract identity ri=1. Edge cases checked: empty X, empty W (empty Koszul list) and W=V (acyclic K). No hypothesis is added. proof_deps equals the union of uses, and there is no cycle in the snapshot DAG. No duplicate: lem-sfb-space-compact-perfect-generator and lem-sfb-space-perfect-localizing-generation both cite this item. I accept the tool_uses for lem-pc-perfect-generator-exists, lem-pc-koszul-restriction-zero and lem-pc-perfect-generation-koszul-orthogonal as generic scheme tools that the source itself calls. Batch-5 check: no cited node's closure reaches the trace-formula or Poincare key theorems or any nt-* node. The flagged reaches are the general definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module (already stmt_deps of the item) and the generic Zariski/etale comparison square lem-trf-zariski-etale-functor-comparison-square. None is a step of either assumed proof. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePerfectWeakGenerator",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_perfect_weak_generator",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePerfectWeakGenerator.lean",
+  "statement": "theorem exists_perfect_weak_generator {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) : ∃ P : X.DerivedQCoh, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P.obj ∧ ∀ E : X.DerivedQCoh, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (P.obj⟦n⟧ ⟶ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine etale ringed model, the existing quasi-coherent cohomology full subcategory, and the existing absolute quasi-separatedness predicate. The added statement dependencies only name these already landed interfaces; the mathematical statement and accepted proof split are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bccba072",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 09IY: S scheme with no hypotheses; X algebraic space; D(O_X)=DerivedModules on the small affine model under HasDerivedCategory.{w}; C_X=DerivedQCoh (full subcategory, cohomology quasi-coherent after transport back); qc = CompactSpace (Point X.obj.obj); qs = IsAbsolutelyQuasiSeparated, which is Stacks' absolute convention (spaces-properties definition-separated); exists P in DerivedQCoh with IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} (08G5 local bounded finite-free retracts; site universes u); for all E, IsZero iff for all n:Z Subsingleton(P[n]->E) in the ambient category. Same form as the landed sibling exists_compact_perfect_generator. Item diff vs live: only the lean field plus 3 landed def stmt_deps (derived-module-calculus, absolute-quasi-separated, point-topology), all used. Statement verbatim, sorry only, docstrings give source place, blueprint tag and 7 proof steps. Plain imports = existing proof_dep modules; other proof_deps have no Lean record. Edge cases: empty X, E=0, all n. No duplicate. Report sections present. No files changed, no compile."
+ }
+}

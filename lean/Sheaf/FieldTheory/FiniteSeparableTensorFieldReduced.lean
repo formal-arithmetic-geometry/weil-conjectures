@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.GroupWithZero.Basic
-import Sheaf.RingTheory.SeparablePolynomialQuotientReduced
+import Mathlib.RingTheory.Unramified.Field
 
 /-!
 # Reducedness of a finite separable extension tensored with a field
@@ -34,24 +34,17 @@ Source: Stacks Project, Algebra, Tag 030U, first paragraph of the proof; Fields,
 (blueprint: lem-weil-pbc-finite-separable-tensor-field-reduced).
 
 Proof:
-1. Choose a primitive element alpha (`lem-weil-pbc-finite-separable-extension-primitive-element`).
-   Its minimal polynomial P is monic, irreducible and separable
-   (`def-weil-pbc-separable-algebraic-extension`, `def-weil-polynomial-ring`,
-   `def-pc-separable-polynomial`). The power basis
-   (`lem-weil-pbc-simple-algebraic-extension-power-basis`) identifies K with L[T]/(P).
-2. Swap tensor factors and extend scalars in this presentation. Polynomial scalar extension
-   (`lem-weil-pbc-polynomial-scalar-extension`, `def-weil-polynomial-ring`) and quotient base
-   change (`lem-weil-pbc-tensor-quotient-base-change`) identify K tensor E with E[T]/(P bar).
-3. Extend the coefficients of a Bezout identity for P and its derivative to E. Coefficient
-   extension commutes with the derivative, so P bar is separable
-   (`def-pc-separable-polynomial`).
-4. The quotient by P bar is reduced (`lem-weil-pbc-separable-polynomial-quotient-reduced`).
-   Transport reducedness through the ring isomorphism from step 2: it maps nilpotents to
-   nilpotents and is injective. -/
+A separable field extension is formally unramified
+(`Algebra.FormallyUnramified.of_isSeparable`). Base change makes `E ⊗[L] K` formally
+unramified over `E`. Finiteness of `K/L` makes this tensor product finite type over `E`,
+so `Algebra.FormallyUnramified.isReduced_of_field` shows that it is reduced.
+Transport reducedness along the tensor commutativity isomorphism. -/
 theorem isReduced_tensorProduct_of_finiteSeparable
     (L : Type u) (K : Type v) (E : Type w)
     [Field L] [Field K] [Field E] [Algebra L K] [Algebra L E]
     [FiniteDimensional L K] [Algebra.IsSeparable L K] : IsReduced (K ⊗[L] E) := by
-  sorry
+  have : FormallyUnramified L K := FormallyUnramified.of_isSeparable L K
+  have : IsReduced (E ⊗[L] K) := FormallyUnramified.isReduced_of_field E _
+  exact isReduced_of_injective (TensorProduct.comm L K E) (AlgEquiv.injective _)
 
 end Algebra

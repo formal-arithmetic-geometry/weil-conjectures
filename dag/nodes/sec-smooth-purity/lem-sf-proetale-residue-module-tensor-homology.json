@@ -15,56 +15,61 @@
  ],
  "proof": [
   {
-   "text": "Restrict scalar actions along the constant-presheaf sheafification unit. Because r kills M, the restriction is a presheaf of modules over the field k=A/(r), with compatible restriction maps. Module sheafification over the constant presheaf k recovers its underlying abelian sheaf. Form the analogous k-presheaf complex presenting C=P tensor_A N.",
+   "text": "Construct the residue-presheaf action on the underlying additive sheaf of M using Module.IsTorsionBy.module sectionwise. Restrictions are linear since quotient representatives lift to A. Extend this action along the locally bijective constant-ring unit by PresheafOfModules.sheafify, using the identity on the additive sheaf. Naturality of constant sheafification and local surjectivity of the A-unit identify restriction of this new residue-field module MB with M.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
-    "def-weil-pbc-proetale-operations"
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-proetale-locally-constant-sheaf"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CY, 03EI and 0GMW; residue-test proof step 3"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+    "place": "Converse, residue-field module calculation before the uniformizer filtration"
    }
   },
   {
-   "text": "Use tensor/sheafification comparison in the site object and Hom universes to identify sheafified presheaf tensors with intrinsic sheaf tensors. Work over the constant presheaf field k, never over a section ring of its sheafification.",
+   "text": "Form the additive scalar-extension functor E by sectionwise ModuleCat.extendScalars and module sheafification. Write U for restriction of scalars. The proved scalar-tensor cancellation is natural in both variables, hence gives E followed by tensorLeft L followed by U isomorphic to tensorLeft (U L). At the regular residue-field module the left unitor identifies E followed by U with tensorLeft N. Restriction U is faithful and exact because it preserves the underlying additive sheaf; use the proved restriction-exact helper in RingedToposFlatPullback.",
    "uses": [
-    "lem-sf-proetale-sheafification-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CY, 03EI and 0GMW; residue-test proof step 3"
-   }
-  },
-  {
-   "text": "Apply the existing constant-field tensor/cohomology theorem to the field-module complex C and the factored module M. It gives H^i(C tensor_k M) isomorphic to H^i(C) tensor_k M. Its sectionwise proof uses split vector-space sequences, with the canonical map [z] tensor m -> [z tensor m], followed by exact sheafification; no vanishing of presheaf section homology is assumed. The right side is zero by the given sheaf homology vanishing, after the comparisons of step 2.",
-   "uses": [
-    "lem-exc-constant-field-sheaf-tensor-cohomology",
-    "lem-sf-proetale-sheafification-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CY, 03EI and 0GMW; residue-test proof step 3"
-   }
-  },
-  {
-   "text": "The balanced maps (p tensor t) tensor m -> p tensor (t m) and p tensor m -> (p tensor 1) tensor m are inverse and commute with restrictions and differentials. After sheafification they identify C tensor_k M with P tensor_A M. Transport the vanishing from step 3 through this isomorphism. The zero module and zero complex, all integer degrees, and the empty scheme are included.",
-   "uses": [
+    "lem-sfb-scalar-tensor-cancellation-independent",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CY, 03EI and 0GMW; residue-test proof step 3"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+    "place": "Converse, residue-field module calculation before the uniformizer filtration"
+   }
+  },
+  {
+   "text": "Translate homology vanishing into exactness of the three-term short complex P.sc i. The hypothesis and the regular-module comparison imply exactness of its scalar extension, since faithful exact scalar restriction reflects exactness. Maximality makes A/(r) a field. Every module over its constant sheaf is flat. Transfer its exact site-tensor functor to the monoidal tensor using siteSheafTensorRightIso, and use symmetry to tensor on the left by MB.",
+   "uses": [
+    "lem-exc-constant-field-module-flat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+    "place": "Converse, residue-field module calculation before the uniformizer filtration"
+   }
+  },
+  {
+   "text": "Apply exact restriction U and scalar-tensor cancellation at MB to identify the resulting exact short complex with P.sc i tensorLeft (U MB). Transport across U MB isomorphic to M, then use symmetry and exactAt_iff_isZero_homology to conclude the stated tensorRight M homology vanishing. This uses neither stalks nor sectionwise homology vanishing and works for all integers and the empty scheme.",
+   "uses": [
+    "lem-sfb-scalar-tensor-cancellation-independent",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+    "place": "Converse, residue-field module calculation before the uniformizer filtration"
    }
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
-  "place": "G3 isolates precisely the ordinary field-module calculation of proof step 3, not a new Tor-amplitude test"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.proof.md",
+  "place": "Q7: ordinary scalar-tensor cancellation, faithful exact restriction and flatness over the constant residue field; no separate cohomology comparison needed"
  },
  "mathlib_searches": [
   {
@@ -127,10 +132,13 @@
  },
  "proof_deps": [
   "lem-pc-sites-module-sheafification-interface",
-  "def-weil-pbc-proetale-operations",
-  "lem-sf-proetale-sheafification-tensor-comparison",
-  "lem-exc-constant-field-sheaf-tensor-cohomology",
-  "def-pur-sheaf-tensor-product"
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -143,14 +151,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261018T071153-L-1667997",
+  "landing": "20261025T071134-L-101330",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

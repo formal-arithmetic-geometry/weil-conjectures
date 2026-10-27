@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-space-coherent-ideal-filtration",
+ "kind": "statement",
+ "title": "Finite coherent ideal filtration on a Noetherian algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth], quasi-compact, and quasi-separated; the last two conditions mean that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Modules are on the small etale ringed site, with quasi-coherence as in [def-trf-space-quasi-coherent-module]. On a locally Noetherian space, coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Write $\\operatorname{Supp}(M)$ for the locus of nonzero geometric stalks, with the atlas topology [def-a1-space-point-topology]. A closed immersion is representable and a closed immersion after every scheme base change [def-weil-closed-immersion]; reduced means that etale scheme charts have local rings without nonzero nilpotents, and irreducible means nonempty and not the union of two proper closed subsets. Assume $X$ is Noetherian and let $F$ be a coherent $\\mathcal O_X$-module. There are an integer $m\\geq0$ and a filtration by coherent submodules $$0=F_0\\subseteq F_1\\subseteq\\cdots\\subseteq F_m=F$$ such that for every $1\\leq j\\leq m$ there are a reduced closed subspace $i_j:Z_j\\hookrightarrow X$ with $|Z_j|$ irreducible and a nonzero coherent ideal $K_j\\subseteq\\mathcal O_{Z_j}$ satisfying $$F_j/F_{j-1}\\cong(i_j)_*K_j.$$ Here direct image is [def-trf-space-etale-module-functors] and the quotient is the cokernel of the inclusion. The filtration may be chosen with $|i_j|(|Z_j|)=\\operatorname{Supp}(F_j/F_{j-1})\\subseteq\\operatorname{Supp}(F)$ and $\\operatorname{Supp}(K_j)=|Z_j|$ for every $j$. In particular, if $\\operatorname{Supp}(F)$ is empty, then $m=0$ and $F=0$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UR, lemma-coherent-filter, statement and proof; omit zero factors. The support control is that of the subquotients in this proof and of the nonzero ideals on reduced irreducible subspaces in Tag 07UQ, lemma-prepare-filter-irreducible."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-support"
+ ],
+ "proof": [
+  {
+   "text": "Filtrations concatenate across a short exact sequence $0\\to A\\to B\\xrightarrow{p}C\\to0$: first use the filtration of $A$ inside $B$, then the inverse images $p^{-1}(C_j)$. These inverse images are the kernels of $B\\to C/C_j$, hence coherent by [lem-sfb-space-coherent-abelian]. The quotient $p^{-1}(C_j)/p^{-1}(C_{j-1})$ maps isomorphically to $C_j/C_{j-1}$: local lifts give surjectivity, and its kernel is exactly the denominator. Thus the factors are precisely those of $A$ and $C$. This also refines any finite coherent filtration once its factors have the required filtrations.",
+   "uses": [
+    "lem-sfb-space-coherent-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, the induced-filtration argument in the reducible-support paragraph and the refinement in the ideal-power paragraph."
+   }
+  },
+  {
+   "text": "Support bookkeeping will be used throughout. Restriction to an etale chart is exact by [lem-weil-pbc-site-restriction-exact]; for modules this follows from sectionwise kernels and sheafified cokernels [def-weil-sheaf-of-modules-category]. On a locally Noetherian scheme chart, coherent Zariski kernels and cokernels exist in all modules by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Their images under the exact functor [lem-sfb-scheme-etale-module-exact-finiteness-comparison] are the etale kernels and cokernels. Thus the equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies coherent subquotients with Zariski subquotients. Now [lem-weil-pbc-module-stalk-exact] and [lem-sfb-space-etale-chart-support] show that every coherent subquotient has support contained in that of its parent. A quasi-coherent module with empty support is zero: on each chart all ordinary stalks vanish, so its Zariski module is zero by [lem-weil-pbc-module-iso-on-stalks], then its etale restriction is zero by the equivalence. The sheaf axiom on chart coverings shows that the module is zero. Every coherent support is closed by [lem-sfb-space-noetherian-coherent-support], applied with $N=F$.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-sfb-space-etale-chart-support",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "lem-sfb-space-noetherian-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, minimal-support choice and empty-support case; support of subquotients in every induction step, checked on etale charts."
+   }
+  },
+  {
+   "text": "Fix $X$ and argue by well-founded induction on closed subsets $T\\subseteq|X|$ using [lem-sfb-noetherian-space-topology]. The inductive assertion is the entire desired filtration statement for every coherent module $M$ with $\\operatorname{Supp}(M)=T$. The hypothesis is therefore available simultaneously for all modules with proper closed support in $T$. For $T=\\varnothing$, Step 2 gives $M=0$ and we take $m=0$. If $T$ is nonempty and reducible, write $T=T_1\\cup T_2$ with both $T_i$ proper closed. Apply [lem-sfb-space-coherent-support-union-sequence] to get $0\\to A\\to M\\to B\\to0$ with supports contained in $T_1,T_2$. Their supports are closed by Step 2 and proper in $T$. The induction hypothesis supplies both filtrations, and Step 1 concatenates them. Their support control remains inside $T$.",
+   "uses": [
+    "lem-sfb-noetherian-space-topology",
+    "lem-sfb-space-coherent-support-union-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, choice of minimal bad support and the reducible-support paragraph."
+   }
+  },
+  {
+   "text": "It remains to treat nonempty irreducible $T=\\operatorname{Supp}(M)$. Use [lem-sfb-space-reduced-closed-support] to put the reduced closed structure $i:Z\\hookrightarrow X$ on $T$. The defining ideal $J=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ is quasi-coherent by [lem-sfb-space-closed-immersion-quasi-coherent-modules]. By [lem-sfb-space-coherent-support-ideal-power] choose $n\\geq0$ with $J^nM=0$, all $J^kM$ and $M/J^kM$ being coherent. If $n=0$ then $M=0$ and Step 2 applies. Otherwise put $P_k=J^kM/J^{k+1}M$ for $0\\leq k<n$. These are coherent by [lem-sfb-space-coherent-abelian]. Multiplication gives $JP_k=0$ since $J(J^kM)=J^{k+1}M$. Each support is contained in $T$ by Step 2.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-coherent-support-ideal-power",
+    "lem-sfb-space-coherent-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, irreducible-support and ideal-power paragraph. The displayed I in that paragraph denotes the same defining ideal as J."
+   }
+  },
+  {
+   "text": "For each $P=P_k$, if its closed support is proper in $T$, use the induction hypothesis of Step 3. Otherwise $\\operatorname{Supp}(P)=T$ and $JP=0$. Apply [lem-sfb-space-reduced-support-generic-ideal-inclusion] with this $i:Z\\hookrightarrow X$ and $P$: obtain $r\\geq1$, a nonzero coherent ideal $K$ of full support on $Z$, and $0\\to E\\to P\\to Q\\to0$ where $E=i_*(K^{\\oplus r})$ and $\\operatorname{Supp}(Q)\\subsetneq T$. All hypotheses hold because $X$ is Noetherian, $Z$ is reduced with nonempty irreducible support $T$, and $JP=0$ was proved in Step 4. The coherent $Q$ has the desired filtration by the same induction hypothesis.",
+   "uses": [
+    "lem-sfb-space-reduced-support-generic-ideal-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, final paragraph, applying Tag 07UQ to each full-support ideal-power factor."
+   }
+  },
+  {
+   "text": "Filter $E$ by $E_t=i_*(K^{\\oplus t})$ for $0\\leq t\\leq r$, using the first $t$ summands. The sequences $0\\to K^{\\oplus(t-1)}\\to K^{\\oplus t}\\to K\\to0$ split by the coordinate inclusion and projection. Exactness of closed direct image on quasi-coherent modules [lem-sfb-space-closed-immersion-quasi-coherent-modules] gives $E_t/E_{t-1}\\cong i_*K$. Finite sums are coherent by [lem-sfb-space-coherent-abelian], and the $E_t$ are coherent by [lem-sfb-space-closed-coherent-modules]. The same closed-support statement gives $\\operatorname{Supp}(i_*K)=|i|(\\operatorname{Supp}(K))=T$. Each factor is nonzero since this support is nonempty. Step 1 combines this filtration of $E$ with that of $Q$ to filter $P$.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-coherent-abelian",
+    "lem-sfb-space-closed-coherent-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, final contradiction: filter the finite ideal sum by its coordinate sums, then lift the cokernel filtration."
+   }
+  },
+  {
+   "text": "All $P_k$ now have the required filtrations. Refine $0=J^nM\\subseteq J^{n-1}M\\subseteq\\cdots\\subseteq JM\\subseteq M$ by repeated use of Step 1. Every factor is one of the nonzero ideal direct images supplied either by the induction hypothesis or by Step 6, so its ideal has full support on its reduced irreducible closed subspace. Step 2 puts its support inside $\\operatorname{Supp}(M)=T$. Delete any repeated terms in the finite refinements; their quotients are zero. This proves the induction assertion, hence the result for $M=F$, including the empty-support case already proved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UR, refinement of the ideal-power filtration and completion of the induction; omit zero factors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-abelian",
+  "lem-weil-pbc-site-restriction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sfb-space-etale-chart-support",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sfb-space-coherent-support-union-sequence",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-coherent-support-ideal-power",
+  "lem-sfb-space-reduced-support-generic-ideal-inclusion",
+  "lem-sfb-space-closed-coherent-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UR, lemma-coherent-filter, proof, with the coordinate and inverse-image refinements written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on a Noetherian algebraic space has a finite filtration by pushforwards of ideals from integral closed subspaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring, then the scheme $ \\\\operatorname{Spec}(R) $ is a Noetherian scheme. This instance asserts that the prime spectrum of a Noetherian ring, equipped with the Zari\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec { carrier := R, commRing := inst })\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"filtration\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*filtr|filtr.*coherent|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filter coherent modules by ideal sheaves on reduced irreducible closed subspaces of a Noetherian algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3\", \"doc\": \"The structure of a filtration on an $ R $-module $ M $ associated with an ideal $ I $ of a commutative ring $ R $, where $ M $ is an additive commutative group equipped with an $ R $-module structure.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : Ideal Γ(X, ⊤)) : IdealSheafData X\", \"doc\": \"Given a scheme $X$ and an ideal $I$ in the global sections of its structure sheaf over the entire space $X$, this constructor defines an ideal sheaf data on $X$ by restricting $I$ to affine open subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"[IsReduced X] {I : X.IdealSheafData} : I.support = ⊤ ↔ I = ⊥\", \"doc\": \"For a reduced scheme $X$ and an ideal sheaf data $I$ on $X$, the support of $I$ is the entire topological space of $X$ if and only if $I$ is the trivial ideal sheaf (the canonical bottom element of th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(Z : Closeds X) : IdealSheafData X\", \"doc\": \"Given a scheme $X$ and a closed subset $Z \\\\subseteq X$, this defines the corresponding vanishing ideal sheaf, denoted $\\\\mathcal{I}_Z$. This is a sheaf of ideals of the structure sheaf $\\\\mathcal{O}_X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a scheme $X$ with ideal sheaf data and an affine open subset $U$ of $X$, this function returns the ideal in the ring of sections $\\\\mathcal{O}_X(U)$ corresponding to the ideal sheaf data restricted\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Devissage finite filtration coherent sheaf integral closed support ideal sheaf factors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"Ideal.Filtration.Stable\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → {I : Ideal R} → I.Filtration M → Prop\", \"doc\": \"A filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$ is called stable if there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the equality $I\"}\n  {\"name\": \"Ideal.Filtration\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3\", \"doc\": \"The structure of a filtration on an $ R $-module $ M $ associated with an ideal $ I $ of a commutative ring $ R $, where $ M $ is an additive commutative group equipped with an $ R $-module structure.\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ (k : ℕ), F.N (n₀ + k) = I ^ k • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$, there exists an integer $n_0$ such that for all $k \\\\geq 0$, the equality $I^k \\\\bullet\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ n ≥ n₀, F.N n = I ^ (n - n₀) • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ by an ideal $I$, there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the submodule $I^n M$ is equal to $I^{n - n_0} \\\\cdot I^{n_0} M$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-devissage",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, the support and nilpotent-thickening reduction, packaged using the preceding Tag 07UR filtration.",
+   "via": [
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-ideal-filtration",
+  "worker": "stage1",
+  "summary": "Follow Tag 07UR by induction on closed support, using existing topology/coherence/closed-immersion nodes and three statement-only inputs for support separation (07UP), ideal-power annihilation (07UK), and the ideal-sum inclusion (07UQ). Write out filtration concatenation, coordinate refinement, and the support and zero-module bookkeeping. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, the support and nilpotent-thickening reduction, packaged using the preceding Tag 07UR filtration. Steps 1-7 supply this Tag 07UR prerequisite of Tag 07UT; latest direct-image proof (3) is unchanged. The ancestor command returns None, so the inherited null ancestor is retained with its explicit place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Exact restriction to etale chart slices; a generic site tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Ambient coherent Zariski kernels and cokernels on locally Noetherian scheme charts."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Chartwise identification with Zariski quasi-coherent modules, for support bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Ordinary chart stalks preserve exactness and therefore bound supports of subquotients."
+   },
+   {
+    "node": "lem-sfb-space-etale-chart-support",
+    "why": "Identifies geometric support with inverse images of ordinary chart supports."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Zero ordinary stalks detect the zero module on a scheme chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sfb-space-etale-chart-support",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-81973fc34",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-81973fc34 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-cohomology.tex 07UK/07UP/07UQ/07UR (lines 2121-2400) in full, the item, the three new nodes and every cited statement. The item statement is identical to live/side-live (still unsplit); this is a first split, not a re-split. Steps 1-7 follow 07UR. Step 3 sets up well-founded induction on closed supports via lem-sfb-noetherian-space-topology for all M with Supp M=T, with the empty case from step 2. The reducible case uses the new union-sequence node (07UP). The irreducible case uses the reduced structure, J-adic layers from the new ideal-power node (07UK+07UD) and the new generic-inclusion node (07UQ via 08AM: JF=0 plus full support is equivalent to F=i_*G). Steps 6-7 write out the coordinate splitting and the concatenation. There is no circularity, and the hypotheses hold at each use. Edge cases tested: Z empty, Z=X, k[e]/e^2, a field and zero modules; all three new statements are true. They are separate Stacks lemmas, not clauses of the item. No duplicates: the existing analogues are scheme-only (weil-pbc, pc-s3), and generic-multiple-embedding is the 07UT comparison. Declared tool uses (site restriction, Zariski kernels/stalks, trf Zariski-etale equivalence) are generic and accepted. Batch-5: every listed citation is a general definition (def-trf-algebraic-space, quasi-coherent module, etale module functors, def-a1 point topology) or a generic coherent/topology fact whose closure reaches sec-trace-formula only through def-trf-algebraic-space. lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the generic 03DX-type equivalence. None is part of the trace formula or Poincaré duality or their proofs. No SGA citation. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentIdealFiltration",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_coherent_ideal_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentIdealFiltration.lean",
+  "statement": "theorem exists_coherent_ideal_filtration {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (F : X.Modules) (hF : F.IsFinitePresentation) : ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c), IsZero (c 0 : X.Modules) ∧ IsIso (c (Fin.last m)).arrow ∧ (∀ k : Fin (m + 1), SheafOfModules.IsFinitePresentation (c k : X.Modules)) ∧ (∀ j : Fin m, ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ (∀ T : Z.EtaleSite, IsReduced (Z.etaleForget.obj T)) ∧ IrreducibleSpace (Point Z.obj.obj) ∧ ∃ K : Subobject (SheafOfModules.unit Z.structureSheaf), ¬ IsZero (K : Z.Modules) ∧ SheafOfModules.IsFinitePresentation (K : Z.Modules) ∧ moduleSupport (K : Z.Modules) = Set.univ ∧ ∃ (Q : X.Modules) (q : (c j.succ : X.Modules) ⟶ Q) (w : Subobject.ofLE (c j.castSucc) (c j.succ) (hc j.castSucc_le_succ) ≫ q = 0), Nonempty (IsColimit (CokernelCofork.ofπ q w)) ∧ Nonempty (Q ≅ (moduleDirectImage i).obj (K : Z.Modules)) ∧ pointImage i.hom.hom = moduleSupport Q ∧ moduleSupport Q ⊆ moduleSupport F) ∧ (moduleSupport F = ∅ → m = 0 ∧ IsZero F)",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1e97359f",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Item lem-sfb-space-coherent-ideal-filtration checked clause by clause against node and Stacks 07UR/07UQ: hln (all charts loc. Noetherian), CompactSpace |X|, absolute affine-pair qs (Stacks absolute notion), coherent = IsFinitePresentation (07UB, landed AlgebraicSpaceCoherentAbelian convention); monotone Fin(m+1) Subobject chain with IsZero bottom / IsIso top, coherent steps; per factor closed immersion via IsRepresentableWith, reduced charts, IrreducibleSpace points, nonzero coherent ideal K ⊆ O_Z with full support, true cokernel Q ≅ moduleDirectImage i K, pointImage = Supp Q ⊆ Supp F, Supp F = ∅ → m=0 ∧ F=0. New def-sfb-space-module-support (04JY/04K4/04KA tags verified) is a real nonzero-germ test equal to nonzero geometric stalk; no duplicate on live/side-live (Q53's competing moduleGeometricSupport was RETURNed, not landed; second lander must reuse). Dep records identical to side-live; lean.statement verbatim for both; only sorry; universes single u; edge cases empty X/F=0, field, k[e]/e^2, reducible support, arbitrary S. Advisory: Point via point-classes owner through def-a1 module; unused public import CoherentFiniteType (H9 advisory); same-worker second reading. No file changed, no compile."
+ }
+}

@@ -1,0 +1,452 @@
+{
+ "id": "lem-sfb-divided-power-variable-adjunction",
+ "kind": "statement",
+ "title": "Adjoining exterior and divided-power variables to a graded divided-power algebra",
+ "statement": "Let $R$ be a commutative ring, let $A=\\bigoplus_{i\\geq0}A_i$ be a nonnegative strictly graded commutative unital $R$-algebra [def-sfb-nonnegative-strict-graded-algebra] with a graded divided-power structure $\\gamma$ [def-sfb-graded-divided-power-structure], and let $e>0$ be an integer. (1) Odd variable. Let $e$ be odd and put $A\\langle T\\rangle=A\\oplus AT$, a free left $A$-module on $1,T$, graded by $A\\langle T\\rangle_m=A_m\\oplus A_{m-e}T$, with the $R$-bilinear multiplication $(a+bT)(c+b'T)=ac+(ab'+(-1)^{j}bc)T$ for $a,b,b'\\in A$ and homogeneous $c\\in A_j$ (so $T^2=0$ and $Tc=(-1)^jcT$). Then $A\\langle T\\rangle$ is a nonnegative strictly graded commutative unital $R$-algebra containing $A$ as a graded subalgebra, and there is exactly one graded divided-power structure on $A\\langle T\\rangle$ restricting to $\\gamma$ on $A_{\\mathrm{even},+}$; it is $\\gamma_n(x+yT)=\\gamma_n(x)+\\gamma_{n-1}(x)yT$ for $n>0$, $x\\in A_{\\mathrm{even},+}$ and $y\\in A_{\\mathrm{odd}}$. (2) Even variable. Let $e$ be even and put $A\\langle T\\rangle=\\bigoplus_{a\\geq0}AT^{[a]}$, a free left $A$-module on symbols $T^{[a]}$ of degree $ae$, graded by $A\\langle T\\rangle_m=\\bigoplus_{a\\geq0}A_{m-ae}T^{[a]}$, with the $R$-bilinear multiplication $(bT^{[a]})(cT^{[a']})=\\binom{a+a'}{a}bc\\,T^{[a+a']}$ for $b,c\\in A$; write $T^{[0]}=1$ and $T=T^{[1]}$. Then $A\\langle T\\rangle$ is a nonnegative strictly graded commutative unital $R$-algebra containing $A$ as a graded subalgebra, and there is exactly one graded divided-power structure on $A\\langle T\\rangle$ restricting to $\\gamma$ on $A_{\\mathrm{even},+}$ with $\\gamma_a(T)=T^{[a]}$ for all $a\\geq1$. It satisfies $\\gamma_n(T^{[a]})=\\frac{(na)!}{n!(a!)^n}T^{[na]}$ for $n,a\\geq1$ (an integer coefficient acting by repeated addition) and $\\gamma_n(bT^{[a]})=\\frac{(na)!}{n!(a!)^n}b^nT^{[na]}$ for $b\\in A_{\\mathrm{even}}$, $a\\geq1$. (3) Sets of variables. For a set $J$ and a fixed degree $e>0$, let $A\\langle T_j:j\\in J\\rangle$ be the directed union, over the finite subsets $S\\subseteq J$, of the algebras obtained from $A$ by adjoining the $T_j$, $j\\in S$, one at a time as in (1) or (2) (for different orders of adjunction these are identified by the unique isomorphisms of graded $R$-algebras that preserve divided powers, are the identity on $A$ and fix every $T_j$ (hence fix every $T_j^{[a]}$ when $e$ is even)). It is a nonnegative strictly graded commutative unital $R$-algebra with exactly one graded divided-power structure restricting to $\\gamma$ on $A$ and, for even $e$, with $\\gamma_a(T_j)=T_j^{[a]}$ for all $j$ and $a\\geq1$. (4) Unions. If $A=A^{(0)}\\subseteq A^{(1)}\\subseteq A^{(2)}\\subseteq\\cdots$ are graded subalgebras, each $A^{(k+1)}$ obtained from $A^{(k)}$ as in (3) with its extended divided powers, then $\\bigcup_kA^{(k)}$, with the union grading, is a nonnegative strictly graded commutative unital $R$-algebra with exactly one graded divided-power structure restricting to the given one on every $A^{(k)}$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PH (example-adjoining-odd), Tag 09PI (example-adjoining-even; the iterate formula corrected to the coefficient forced by 09PG(7), see the review of def-sfb-divided-power-dga), Tag 0F4I (remark-adjoining-set-of-variables), in section-tate"
+ },
+ "stmt_deps": [
+  "def-sfb-nonnegative-strict-graded-algebra",
+  "def-sfb-graded-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=A_{\\mathrm{even}}$, $I=A_{\\mathrm{even},+}$ and $O=A_{\\mathrm{odd}}$. The strict graded-commutativity axioms make $C$ a commutative ring, $I$ an ideal, and $O$ a $C$-module. The five ordinary divided-power axioms on $(C,I)$ are exactly the corresponding axioms of the given graded structure, with $\\gamma_0=1$. Thus the ordinary extension lemmas apply without assuming that the whole algebra $A$ is commutative.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PG, paragraph after definition-divided-powers-graded"
+   }
+  },
+  {
+   "text": "For odd $e$, let $\\sigma$ act by $(-1)^i$ on $A_i$. It is an algebra involution. On pairs representing $a+bT$, multiplication is $(a,b)(c,d)=(ac,ad+b\\sigma(c))$. Expanding either association of three factors gives $(acf,acg+ad\\sigma(f)+b\\sigma(c)\\sigma(f))$, so the product is associative and $(1,0)$ is a unit. The indicated degrees add. For homogeneous inputs, moving $T$ past a coefficient gives precisely the graded sign; hence the product is graded commutative. A homogeneous odd element has $a$ odd and $b$ even, and its square is $a^2+(ab-ba)T=0$. The inclusion $a\\mapsto(a,0)$ is injective and graded.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH, example-adjoining-odd, underlying algebra"
+   }
+  },
+  {
+   "text": "The even ring of this odd-variable algebra is $C\\oplus OT$, with square-zero ideal $OT$, and its positive-even ideal is $I\\oplus OT$. Apply the split square-zero lemma with $M=OT$. It gives the ordinary structure $\\delta_n(x+yT)=\\gamma_n(x)+\\gamma_{n-1}(x)yT$. If $x+yT$ is homogeneous of degree $m>0$, both summands have degree $nm$, so this structure preserves degrees.",
+   "uses": [
+    "lem-sfb-split-square-zero-divided-powers",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH, displayed divided-power formula"
+   }
+  },
+  {
+   "text": "To verify the extra odd-product axiom, take as generators of the odd part over its even ring all homogeneous odd elements of $A$, together with $T$. For two old generators the required vanishing is the given axiom on $A$. For an old generator and $T$ it is the square-zero lemma, and for $(T,T)$ it follows from $T^2=0$ and $\\delta_n(0)=0$. This generator check implies the axiom for arbitrary odd products by the following explicit two expansions. For a fixed odd generator $s$, expand $v=\\sum c_jt_j$ with even $c_j$: higher divided powers of each $c_jst_j$ vanish, and any two of these terms multiply to zero since they share $s$ and $s^2=0$. The addition formula gives $\\delta_n(sv)=0$ for $n>1$. Next expand $u=\\sum d_is_i$: the same argument applies to $d_is_iv$, since every two terms share $v$ and $v^2=0$. Here every odd $v$, even inhomogeneous, squares to zero: its homogeneous component squares vanish and its cross terms cancel in pairs. For uniqueness, any graded extension must vanish for $n>1$ on every $y_iT$ with $y_i$ homogeneous odd. Such summands multiply to zero, so the addition formula forces vanishing on every $yT$; the same formula then forces the displayed value on $x+yT$.",
+   "uses": [
+    "lem-sfb-split-square-zero-divided-powers",
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tags 09PG(5),(6) and 09PH"
+   }
+  },
+  {
+   "text": "For even $e$, the basis symbols are central. On three basis elements associativity follows from $\\binom{a+b}{a}\\binom{a+b+c}{a+b}=(a+b+c)!/(a!b!c!)=\\binom{b+c}{b}\\binom{a+b+c}{a}$, an identity of integers. This proves associativity after extension by distributivity; $T^{[0]}$ is the unit. Degrees add and the sign is the sign of the coefficients, so graded commutativity holds. In the square of a homogeneous odd sum $\\sum b_aT^{[a]}$, each $b_a$ is odd: diagonal terms vanish by $b_a^2=0$ and terms with distinct indices cancel in pairs. Thus the algebra is strictly graded commutative and contains $A$ injectively.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PI, underlying graded algebra"
+   }
+  },
+  {
+   "text": "Its even ring is the ordinary divided-power polynomial algebra $C\\langle T\\rangle$, and its positive-even ideal is $IC\\langle T\\rangle+C\\langle T\\rangle_+$. Apply the ordinary polynomial-extension lemma with one variable. The iterate axiom forces $\\delta_n(T^{[a]})=(na)!/(n!(a!)^n)T^{[na]}$, and the scalar axiom gives the asserted formula for $bT^{[a]}$. For $z=x_0+\\sum_{a>0}x_aT^{[a]}$ its addition formula expands $\\delta_n(z)$ into terms $\\gamma_{k_0}(x_0)\\prod_{a>0}\\delta_{k_a}(x_aT^{[a]})$ with $\\sum k_a=n$, taking zeroth factors as 1. If $z$ is homogeneous of degree $m$, each such factor has degree $k_am$ (and the constant factor degree $k_0m$). Consequently every term has degree $nm$.",
+   "uses": [
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tags 07H5 and 09PI, with the iterate coefficient required by 09PG(7)"
+   }
+  },
+  {
+   "text": "The homogeneous odd elements of $A$ generate the odd part of the even-variable algebra over its even ring, since $\\sum u_aT^{[a]}$ has odd coefficients $u_a$. On each pair of these generators the extended divided powers agree with those on $A$, which vanish for $n>1$. To pass from pairs of these generators to arbitrary odd elements, first expand $v=\\sum c_jt_j$ for fixed generator $s$: each $c_jst_j$ has zero higher divided powers by the scalar axiom, and all products of two terms are zero because $s^2=0$. The addition formula gives $\\delta_n(sv)=0$ for $n>1$. Expanding $u=\\sum d_is_i$ gives the same conclusion for $uv$, since products of two $d_is_iv$ vanish by $v^2=0$. The latter identity holds for every odd $v$ by cancellation of homogeneous cross terms. This proves the extra graded axiom. Any graded extension restricts to an ordinary divided-power structure on exactly the ideal in the preceding step, fixes the given structure on $I$, and sends $T$ to its prescribed divided powers; ordinary uniqueness proves graded uniqueness.",
+   "uses": [
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tags 09PG(5), 09PI and 07H5 uniqueness"
+   }
+  },
+  {
+   "text": "Induct on the number of variables in a finite set $S$: the empty set gives $A$, and adjoining one further variable is the construction already proved, so every ordering gives the required structure. Comparisons are explicit: move each odd $T_j$ to the target symbol and use its square-zero relation and graded signs; for even variables move $T_j^{[a]}$ to the target $\\gamma_a(T_j)$. The odd relations and the binomial multiplication identity for divided powers prove that these maps respect products. At each adjunction, the odd formula or the finite-sum expansion in step 6 proves that they preserve divided powers. The reverse assignment is inverse, since the maps fix the coefficient algebra and every basis monomial. A map preserving divided powers and fixing $T_j$ fixes every divided symbol, so these maps are unique. Thus comparisons compose coherently. The inclusions for $S\\subset S\\cup\\{j\\}$ are injective because they include precisely the basis monomials with exponent zero in $T_j$.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 0F4I, remark-adjoining-set-of-variables; repeated application of 09PH/09PI and their formulas"
+   }
+  },
+  {
+   "text": "For any set $J$, use these coherent inclusions to identify the finite algebras inside the free $A$-module on finite-support variable monomials (exponents 0 or 1 in the odd case). Any two finite supports are contained in their finite union. Therefore addition, multiplication and divided powers on an element are computed in any finite algebra containing its support, independently of that choice. Every algebra identity and every divided-power axiom has finitely many inputs, so it holds in one such finite algebra. A homogeneous input has the same degree there, proving the grading axiom. A putative extending structure restricts on each finite algebra to the unique structure already proved, giving uniqueness on the union.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 0F4I, directed union over finite subsets; explicit finite-support argument"
+   }
+  },
+  {
+   "text": "For the increasing sequence in (4), define each operation on an element using any $A^{(k)}$ containing it. The inclusions preserve all the operations, so this does not depend on $k$. Finitely many inputs belong to one stage (take the largest index); every algebra and divided-power identity follows there. The inclusions preserve the grading, so a finite sum of components which is zero already vanishes in one stage, where each component is zero. Thus the union grading is a direct sum, remains nonnegative, and has the asserted degrees. Finally any structure restricting to all stages agrees on every element with these operations, proving uniqueness.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 0F4I finite-stage argument, applied to increasing unions; section-tate, Tate construction union"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-nonnegative-strict-graded-algebra",
+  "def-sfb-graded-divided-power-structure",
+  "lem-sfb-split-square-zero-divided-powers",
+  "lem-sfb-ordinary-pd-polynomial-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tags 09PH, 09PI, 0F4I, expanded using 07H5 and explicit even-part/odd-product arguments; source coefficient and comparison uniqueness clarified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l -i \"divided.?power\" Mathlib",
+   "results": {
+    "t": "2026-10-24",
+    "tool": "grep",
+    "query": "divided.?power",
+    "ok": true,
+    "n_hits": 7,
+    "top": [
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/Algebra/Vertex/VertexOperator.lean"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowerAlgebra R M (DividedPowerAlgebra/Init.lean:100) is the ungraded universal divided power algebra of a module over a commutative semiring, without its divided-power structure yet and without odd generators or a graded base algebra; DividedPowers (Basic.lean:78) is the ordinary ideal structure."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l DividedPowers Mathlib | xargs rg -l -i \"GradedAlgebra|GradedRing|SetLike.GradedMonoid\"",
+   "results": {
+    "t": "2026-10-24",
+    "tool": "grep",
+    "query": "DividedPowers with GradedAlgebra|GradedRing|SetLike.GradedMonoid",
+    "ok": true,
+    "n_hits": 0,
+    "top": []
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no Mathlib file combines divided powers with a grading."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i \"graded|odd|exterior\" Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+   "results": {
+    "t": "2026-10-24",
+    "tool": "grep",
+    "query": "graded|odd|exterior in DividedPowerAlgebra/Init.lean",
+    "ok": true,
+    "n_hits": 0,
+    "top": []
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the Mathlib divided power algebra has no grading, sign or exterior variable. LeanSearch/Loogle were not available to the reviewer; the node is unsplit and is re-searched in the queue."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining odd exterior and even divided power variables to a strictly graded commutative algebra with graded divided powers",
+   "results": {
+    "t": "2026-10-23T23:51:16Z",
+    "tool": "leanfinder",
+    "query": "Adjoining odd exterior and even divided power variables to a strictly graded commutative algebra with graded divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CliffordAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.gradedAlgebra",
+     "CliffordAlgebra.GradedAlgebra.ι_apply",
+     "CliffordAlgebra.evenOdd.gradedMonoid",
+     "ExteriorAlgebra.GradedAlgebra.ι",
+     "CliffordAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.GradedAlgebra.liftι",
+     "CliffordAlgebra.GradedAlgebra.lift_ι_eq"
+    ],
+    "digest": "ebe2a8528983496e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\"",
+   "results": {
+    "t": "2026-10-23T23:51:18Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "DividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.exp",
+     "instCoeFunDividedPowersForallNatForall",
+     "DividedPowers.coe_injective",
+     "dividedPowersBot",
+     "instInhabitedDividedPowersBotIdeal",
+     "DividedPowers.dpow_eval_zero"
+    ],
+    "digest": "ce04877781bef148"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "DividedPowerAlgebra|divided.*[Pp]ower.*[Gg]rad|[Gg]rad.*[Dd]ivided",
+   "results": {
+    "t": "2026-10-23T23:51:18Z",
+    "tool": "grep",
+    "query": "DividedPowerAlgebra|divided.*[Pp]ower.*[Gg]rad|[Gg]rad.*[Dd]ivided",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean",
+     "Mathlib/RingTheory/DividedPowerAlgebra/Init.lean"
+    ],
+    "digest": "7291fc32ad900cb6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of divided powers after adjoining exterior or divided power indeterminates to a graded commutative ring",
+   "results": {
+    "t": "2026-10-23T23:53:13Z",
+    "tool": "leansearch",
+    "query": "Extension of divided powers after adjoining exterior or divided power indeterminates to a graded commutative ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.DPMorphism.ext",
+     "DividedPowers.dpow",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.ext",
+     "DividedPowers.dpow_null",
+     "DividedPowers.mk.injEq",
+     "DividedPowers.exp_add'",
+     "DividedPowers.CharP.dividedPowers"
+    ],
+    "digest": "f4ae10c4a6a62b6a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power polynomial algebra over a divided power ring with its canonical extended divided powers",
+   "results": {
+    "t": "2026-10-23T23:53:15Z",
+    "tool": "leanfinder",
+    "query": "Divided power polynomial algebra over a divided power ring with its canonical extended divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.RatAlgebra.dpow",
+     "DividedPowers.RatAlgebra.dividedPowers_unique",
+     "DividedPowers.exp",
+     "DividedPowers.dpow",
+     "DividedPowers.RatAlgebra.dpow_apply",
+     "DividedPowers.Quotient.OfSurjective.dpow",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "345e0815d6f6d77d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow.*(add|mul|comp)|OfSquareZero|TrivSqZeroExt",
+   "results": {
+    "t": "2026-10-23T23:53:15Z",
+    "tool": "grep",
+    "query": "dpow.*(add|mul|comp)|OfSquareZero|TrivSqZeroExt",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean"
+    ],
+    "digest": "a704fa866639e1b4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has ordinary DividedPowers (Basic.lean:78) and an ungraded universal algebra (DividedPowerAlgebra/Init.lean:100), without its canonical divided powers (TODO at lines 60-64); exterior grading is not an extension theorem for a general graded divided-power algebra. No exact project declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-divided-power-dga",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3).",
+   "via": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-divided-power-variable-adjunction",
+  "worker": "stage1",
+  "summary": "Split through ordinary even-part extension, split square-zero calculation, and explicit alternating expansions for odd products. Checked all four clauses, signs and integer coefficients; corrected the claimed uniqueness of order-comparison maps to require preservation of divided powers. Two supporting statement-only nodes and one Mathlib definition leaf (ordinary DividedPowers).",
+  "blueprint": "Supports branch (3), proper/open direct-image stability, of the latest det-thm-sf-ctf-stability-direct-images proof, through the existing local complete-intersection/Tate-resolution ancestry. The item is created, with no imported blueprint ancestor (blueprint_refs ancestor returns None); its existing provenance and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-4161d3061",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-4161d3061 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement against Stacks dpa.tex: 07GL (l.36), 07GP (l.151), 07H5 (l.708-760), 09PG, 09PH (l.1004), 09PI (l.1024) and 0F4I (l.1061). Also read Mathlib DividedPowers (Basic.lean:78-92). Statement change vs the NR-created base: only the order-identification parenthesis of (3), which now requires the maps to preserve divided powers. The report's F_3 counterexample is correct (T^[a] -> 2^{a_1}T^[a] is an algebra automorphism by Lucas, fixes T, and moves gamma_3(T)), so the old sentence was false. The report flags it under Source error. No citer uses plain-algebra uniqueness. The corrected coefficient (na)!/(n!(a!)^n) is kept (over Q, gamma_2(T^[2])=3T^[4]). Steps checked by hand: odd associativity and graded signs with e odd; odd squares, including characteristic 2; the odd even ring = C plus OT as a split square-zero extension, with positive part I plus OT; the even even ring = C<T>, whose positive part equals IP+P_+; degree bookkeeping k(m-ae)+kae=km; the generator-to-arbitrary odd-product expansions (s_k v=-v s_k, v^2=0); and uniqueness via the addition formula and 07H5. The split square-zero lemma holds: all five axioms verified (scalar via gamma_{n-1}(x)x=n gamma_n(x), Pascal, iterate via c_{n-1,m} binom(nm-1,m-1)=c_{n,m}). The polynomial node is exactly 07H5 with its universal property. The ordinary definition leaf correctly specializes DividedPowers at line 78. Duplicate search (rg -L over the DAG for 07H5/07GL/07GP/07GQ and divided-power terms; Mathlib OfSquareZero covers only I^2=0) found no existing node, and no new node restates an item clause. The step-9 restriction-to-finite-stage argument is brief but elementary. No SGA source, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DividedPowerVariableAdjunction",
+  "declaration": "GradedAlgebra.VariableAdjunction.odd_variable",
+  "declarations": [
+   "GradedAlgebra.VariableAdjunction.AlgebraData",
+   "GradedAlgebra.VariableAdjunction.Hom",
+   "GradedAlgebra.VariableAdjunction.Preserves",
+   "GradedAlgebra.VariableAdjunction.OddPresentation",
+   "GradedAlgebra.VariableAdjunction.EvenPresentation",
+   "GradedAlgebra.VariableAdjunction.EvenNormalized",
+   "GradedAlgebra.VariableAdjunction.odd_variable",
+   "GradedAlgebra.VariableAdjunction.even_variable",
+   "GradedAlgebra.VariableAdjunction.Step",
+   "GradedAlgebra.VariableAdjunction.FiniteTower",
+   "GradedAlgebra.VariableAdjunction.FiniteTower.top",
+   "GradedAlgebra.VariableAdjunction.FiniteTower.coefficients",
+   "GradedAlgebra.VariableAdjunction.FiniteTower.variables",
+   "GradedAlgebra.VariableAdjunction.FiniteTower.symbols",
+   "GradedAlgebra.VariableAdjunction.finite_order_comparison",
+   "GradedAlgebra.VariableAdjunction.SetPresentation",
+   "GradedAlgebra.VariableAdjunction.SetNormalized",
+   "GradedAlgebra.VariableAdjunction.set_variables",
+   "GradedAlgebra.VariableAdjunction.UnionPresentation",
+   "GradedAlgebra.VariableAdjunction.increasing_union"
+  ],
+  "file": "lean/Sheaf/RingTheory/DividedPowerVariableAdjunction.lean",
+  "statement": "theorem odd_variable (R : Type u) [CommRing R] (A : AlgebraData.{u, v} R) (γ : GradedDividedPowers A.grade) (e : ℕ) (he : 0 < e) (heodd : Odd e) : ∃ (B : AlgebraData.{u, v} R) (p : OddPresentation A B e) (δ : GradedDividedPowers B.grade), Preserves p.inclusion γ δ ∧ (∀ δ' : GradedDividedPowers B.grade, Preserves p.inclusion γ δ' → δ' = δ) ∧ ∀ (n : ℕ) (x : evenSubalgebra A.grade) (y : A.Carrier) (z : evenSubalgebra B.grade), 0 < n → x ∈ positiveEvenIdeal A.grade → y ∈ oddPart A.grade → (z : B.Carrier) = p.coordinates.symm ((x : A.Carrier), y) → (δ.dpow n z : B.Carrier) = p.coordinates.symm ((γ.dpow n x : A.Carrier), (γ.dpow (n - 1) x : A.Carrier) * y)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four clauses are odd_variable, even_variable, set_variables, and increasing_union; finite_order_comparison states the unique divided-power-preserving order identification in clause (3). The other declarations are presentation and transport helpers for these same constructions, with real data and no chosen algebra from a sorry existence theorem. AlgebraData packages exactly the recorded grading and strict-commutativity interfaces; it adds no algebra axiom."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-543dc4016",
+  "group": "Q42",
+  "result": "pass",
+  "note": "I read all four clauses against the node (Stacks 09PH/09PI/0F4I; the corrected iterate coefficient and the divided-power-preserving comparison are kept). Odd: (a,b)(c,d)=(ac,ad+(-1)^j bc) and B_m=A_m⊕A_{m-e}T via integerComponent; the inclusion is injective; δ is unique among all structures satisfying Preserves; the δ_n(x+yT) formula holds for n>0. Even: binomial multiplication; δ_a(T)=T^[a]; Nat.uniformBell n a=(na)!/(n!(a!)^n) by uniformBell_mul_eq; the scalar formula holds for b∈A_even. Sets: the finite-order comparison is ∃! among bijective, dp-preserving maps fixing A and the variables (true for any two towers and any σ); SetPresentation pins B by injective maps fixing coefficients, generators and divided symbols, plus coverage and the union grading; uniqueness quantifies over all δ'; J may be empty; B lives in max v w. Unions: injective compatible maps, union grading, ∃! δ restricting to every stage. The node json differs from side-live only in lean; not superseded; lean.statement verbatim; 20 declarations present; stmt_dep declarations match their records; no name clash; docstrings present; only the five theorems are sorry; report sections present. Advisory only: possibly redundant imports, unused universe v₃. No fixes, no compile."
+ }
+}

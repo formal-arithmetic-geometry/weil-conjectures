@@ -1,0 +1,152 @@
+{
+ "id": "lem-zl-geometric-curve-diagram-descent",
+ "kind": "statement",
+ "title": "Descend a given geometric curve and a source Weil diagram with local polynomial powers",
+ "statement": "Let $k_0$ be finite, $\\ell$ invertible in it, and $X$ affine of finite type over $k_0$. Let $G_1\\hookrightarrow G_2\\hookrightarrow G$ be monomorphisms of lisse source pro-etale Weil sheaves [def-weil-weil-sheaf-complex; def-pod-lisse-l-adic-sheaves]. Let $x,y$ be closed points. Put $\\bar X=X\\times_{k_0}\\overline{k_0}$ [def-pc-base-change]. Suppose a closed immersion $v:D\\hookrightarrow\\bar X$ is given, with $D$ a smooth connected affine curve over $\\overline{k_0}$, and that $v^*\\operatorname{coker}(G_1\\to G_2)$ is an irreducible geometric lisse sheaf (nonzero and no proper nonzero lisse subobject). Suppose geometric points $s_x,s_y$ of $D$ map to the canonical geometric lifts of $x,y$ used by the source local Frobenius construction [def-weil-local-frobenius-trace]. Then there exist a finite extension $k_1/k_0$, a smooth geometrically connected separated affine finite-type curve $C/k_1$, and lisse monomorphisms $H_1\\hookrightarrow H_2\\hookrightarrow H$ with irreducible lisse cokernel, and closed $s,t$ with positive $e,f$, such that $q_s=q_x^e$, $q_t=q_y^f$, and the characteristic polynomials of the cokernel Frobenii at $s,t$ equal those of $F_{x,\\operatorname{coker}(G_1\\to G_2)}^e$ and $F_{y,\\operatorname{coker}(G_1\\to G_2)}^f$. For every coefficient embedding $\\iota$, reality [def-wf-iota-real] of $G$ implies reality of $H$. A morphism $c:C\\to X$ satisfies $c(s)=x$, $c(t)=y$ and $c\\gg p_X=p_C\\gg\\operatorname{Spec}(k_0\\to k_1)$. No input or output eigenvalue is selected; no curve-existence or geometric-constituent assertion is made. Coincident points are allowed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights",
+  "def-wf-iota-real",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-closed-immersion",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the marked geometric model theorem to choose a finite field, a single model C, its map c, its closure comparison u, its positive degree r and both marked finite points.",
+   "uses": [
+    "lem-zl-marked-geometric-curve-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Apply the explicit exact powered geometric pullback to the two monomorphisms and the ambient object. Exactness identifies its actual cokernel with the pulled-back cokernel. Pulling its carrier back along z identifies it with the input v* quotient. Reflection of geometric simplicity along z and geometric-to-arithmetic simplicity prove irreducibility. All objects and arrows are constructed and the combination is proved in Lean.",
+   "uses": [
+    "def-zl-powered-geometric-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Apply the single-object stalk comparison at both marked points to the original quotient. Transfer characteristic polynomials across the exact cokernel isomorphism. Apply the same comparison at every point to the ambient object; the proved source FrobeniusModule.IsReal.of_charpoly_eq_pow supplies reality for each embedding. The model already supplies the structure square and marked images.",
+   "uses": [
+    "lem-zl-powered-geometric-pullback-stalk",
+    "def-wf-iota-real"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-marked-geometric-curve-model",
+  "def-zl-powered-geometric-pullback",
+  "lem-zl-powered-geometric-pullback-stalk",
+  "def-wf-iota-real"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descend a smooth geometric curve and a lisse Weil subquotient diagram to a finite field with local Frobenius characteristic polynomial power comparison",
+   "results": "8 hits about finite-field Frobenius, Witt-vector Frobenius and perfect closures; no Weil diagram descent theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend a smooth geometric curve and a lisse Weil subquotient diagram to a finite field with local Frobenius characteristic polynomial power comparison",
+   "results": "8 hits about arithmetic Frobenius, Witt-vector isocrystals and etale residue factorization; no smooth curve diagram descent theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*charpoly|charpoly.*frobenius",
+   "results": "0 Mathlib hits through msearch.py.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.PairEigenvalueCurveTest",
+  "date": "2026-10-25",
+  "group": "D9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+   "via": [
+    "lem-zl-smooth-affine-constituent-purity",
+    "lem-zl-pair-eigenvalue-curve-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.GeometricCurveDiagramDescent",
+  "file": "lean/Sheaf/DeligneLaumon/GeometricCurveDiagramDescent.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_geometric_curve_diagram_descent",
+  "statement": "theorem exists_geometric_curve_diagram_descent\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))] [IsAffine X]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    {G : WeilSheaf k₀ l X} (hG : G.IsLisse) {G₁ G₂ : WeilSheaf k₀ l X}\n    (i : G₁ ⟶ G₂) (j : G₂ ⟶ G) [Mono i] [Mono j]\n    (h₁ : G₁.IsLisse) (h₂ : G₂.IsLisse)\n    (x y : X.finitePoints) (D : Scheme.{u})\n    (v : D ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n    [IsClosedImmersion v] [IsAffine D]\n    [SmoothOfRelativeDimension 1\n      (v ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure)]\n    [ConnectedSpace D]\n    (hgeo : ProEtale.IsIrreducibleAdicLocalSystem\n      ((v)^*ᵃ[l].obj (cokernel i).obj.carrier))\n    (sx sy : Spec (.of (AlgebraicClosure k₀)) ⟶ D)\n    (hsx : sx ≫ v = (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x)\n    (hsy : sy ≫ v = (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y) :\n    ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₀ k₁)\n      (_ : Fact (ringChar k₁ ≠ l)) (C : Scheme.{u})\n      (_ : C.Over (Spec (CommRingCat.of k₁))) (_ : IsAffine C)\n      (_ : SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : GeometricallyConnected (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : IsSeparated (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : QuasiCompact (C ↘ Spec (CommRingCat.of k₁)))\n      (H H₁ H₂ : WeilSheaf k₁ l C) (a : H₁ ⟶ H₂) (b : H₂ ⟶ H)\n      (_ : Mono a) (_ : Mono b),\n      H.IsLisse ∧ H₁.IsLisse ∧ H₂.IsLisse ∧ (cokernel a).IsIrreducibleLisse ∧\n      (∀ ι : PadicAlgCl l →+* ℂ, G.IsReal ι → H.IsReal ι) ∧\n      ∃ (s t : C.finitePoints) (e f : ℕ), 0 < e ∧ 0 < f ∧\n        (C ↘ Spec (CommRingCat.of k₁)).residueCard s.1 =\n          (X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 ^ e ∧\n        (C ↘ Spec (CommRingCat.of k₁)).residueCard t.1 =\n          (X ↘ Spec (CommRingCat.of k₀)).residueCard y.1 ^ f ∧\n        ((cokernel a).stalk s).frobeniusEnd.charpoly =\n          (((cokernel i).stalk x).frobeniusEnd ^ e).charpoly ∧\n        ((cokernel a).stalk t).frobeniusEnd.charpoly =\n          (((cokernel i).stalk y).frobeniusEnd ^ f).charpoly ∧\n        ∃ c : C ⟶ X,\n          c ≫ (X ↘ Spec (CommRingCat.of k₀)) =\n            (C ↘ Spec (CommRingCat.of k₁)) ≫\n              Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁)) ∧\n          c s.1 = x.1 ∧ c t.1 = y.1",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T180618-L-4010896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T001517-L-4755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

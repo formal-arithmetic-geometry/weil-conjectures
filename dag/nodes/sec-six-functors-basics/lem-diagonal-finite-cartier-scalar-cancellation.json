@@ -1,0 +1,127 @@
+{
+ "id": "lem-diagonal-finite-cartier-scalar-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of normalized finite Cartier scalar adjuncts",
+ "statement": "Let R,A be ordinary commutative rings, phi:R->A a unital map, N natural, N=0 in both rings, and Y any scheme with P=ProjectiveLine Y, W=diagonalSurface Y and i the diagonal. Let cR be a supported GeoCartierClass over R and cA,cAprime supported GeoCartierClasses over A, with positive Tate lines at exponent N. Suppose GeoCartierScalarCompatibility(phi,N,hR,hA,i,cR,cAprime) holds [def-sfb-geo-cartier-interface]. Suppose every CartierScalarMaps with those parameters satisfies its Equation for cR,cA [def-diagonal-coefficient-arrow-transport]. Then cA=cAprime. The assertion requires no completion, canonical-class hypothesis, Noetherian hypothesis, or existence of a finite realization.",
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface",
+  "def-diagonal-coefficient-arrow-transport"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Extract eta,theta, their generator and root normalizations, the supported GeoCartierScalarUnit and the canonical square from GeoCartierScalarCompatibility. Build CartierScalarMaps from the same eta and theta and apply the other square.",
+   "uses": [
+    "def-sfb-geo-cartier-interface",
+    "def-diagonal-coefficient-arrow-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the supported GeoCartierScalarUnit into the exact restriction functor DerivedUnit, and apply its degree-two Ext bijection.",
+   "uses": [
+    "lem-diagonal-scalar-unit-derived-unit",
+    "lem-sp-scalar-unit-ext-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two squares have the same right side. Their left sides are the two classes under the same injective Ext map. Apply injectivity.",
+   "uses": [
+    "lem-sp-scalar-unit-ext-bijective"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-geo-cartier-interface",
+  "def-diagonal-coefficient-arrow-transport",
+  "lem-diagonal-scalar-unit-derived-unit",
+  "lem-sp-scalar-unit-ext-bijective"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "R4",
+  "note": "Separate the cyclic completed projection from coefficient continuation; the parent combines their equations using the existing scalar-unit Ext bijection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar unit induces a bijection on Ext groups and finite coefficient changes preserve the supported Cartier class",
+   "date": "2026-10-27",
+   "results": "8 hits: Ext.chgUniv, Ext.homEquiv_chgUniv, Ext.mk₀_bijective, Ext.homLinearEquiv, Ext.homLinearEquiv_apply, Ext.mk₀_linearEquiv₀_apply, Ext.smul_eq_comp_mk₀, ProjectiveResolution.extAddEquivCohomologyClass_apply.",
+   "verdict": "Generic Ext APIs only. Local search found scalar_unit_ext_bijective (proved), geoCartierCanonicalClass_scalar (stated), and the completed and scalar endpoint interfaces; reuse them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-27",
+   "results": "6 hits, including CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp and map_comp_assoc.",
+   "verdict": "Functor composition API is available, but not the normalized completed/condensed/finite cyclic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CyclicCartier|CartierFrame|cyclic.*[Cc]artier",
+   "date": "2026-10-27",
+   "results": "0 hits.",
+   "verdict": "No existing cyclic Cartier frame or its projection/continuation theorem in the search index. Local rg additionally inspected DiagonalCoefficient*, DiagonalUniformizer*, GeoCartier*, CartierReduction*, and ScalarUnitExt."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerCartierReduction",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteCartierScalarCancellation",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteCartierScalarCancellation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.class_eq_of_scalar_square",
+  "statement": "theorem class_eq_of_scalar_square\n    {R A : Type (u + 1)} [CommRing R] [CommRing A]\n    (φ : R →+* A) {N : ℕ} {hR : (N : R) = 0} {hA : (N : A) = 0}\n    {Y : Scheme.{u}} (cR : GeoCartierClass R N hR (diagonalImmersion Y))\n    (cA cA' : GeoCartierClass A N hA (diagonalImmersion Y))\n    (hcompat : GeoCartierScalarCompatibility φ N hR hA (diagonalImmersion Y) cR cA')\n    (hsq : ∀ maps : CartierScalarMaps φ N hR hA Y, maps.Equation cR cA) :\n    cA = cA'",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

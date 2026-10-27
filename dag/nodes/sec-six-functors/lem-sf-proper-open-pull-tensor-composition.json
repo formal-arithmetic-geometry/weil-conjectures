@@ -1,0 +1,103 @@
+{
+ "id": "lem-sf-proper-open-pull-tensor-composition",
+ "kind": "statement",
+ "title": "Tensor compatibility of derived inverse-image composition",
+ "statement": "For any Grothendieck abelian symmetric closed monoidal coefficient category V₀ with the stated functorial flat resolutions and flat-preserving pro-etale inverse images, and scheme arrows s:U→V and b:V→X, the canonical derived inverse-image compositor P_(sb)→P_s P_b commutes with the canonical derived tensor comparisons. For all unbounded M,N on X, c_(M⊗N); P_s(mu_b); mu_s = mu_(sb); (c_M⊗c_N). The maps are the published leftDerivedUpperStarComp and leftDerivedUpperStarTensorIso.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (pullback and tensor product), with sites.tex Tag 03EL (composition of inverse images); derived monoidal-composition calculation for the proper/open tensor square"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary upperStar compositor is monoidal by conjugating the monoidal lowerStar compositor under the inverse-image/direct-image adjunctions. Apply the existing source-library map_leftDerivedTensorComparison_app_app_comp to the two inverse images; expand the derived compositor, cancel its hom/inv pair, and apply leftDerivedTensorComparison_naturality_app for the ordinary compositor. Combine the two tensor maps with tensorHom_comp_tensorHom and rewrite the curried tensor as the displayed uncurry map.",
+   "uses": [
+    "lem-pur-co-smooth-pf-exchange-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-co-smooth-pf-exchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; canonical derived monoidal-compositor argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison commutes with composition of pullbacks",
+   "results": "Eight ordinary pullback-composition matches, no derived tensor equation.",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement; source-library derived tensor composition lemma applies."
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedTensorComparison",
+   "results": "Unknown identifier in Mathlib search index.",
+   "date": "2026-10-25",
+   "verdict": "Use source-library declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "map_leftDerivedTensorComparison_app_app_comp",
+   "results": "No Mathlib matches. Source-library Monoidal.lean has the generic component formula.",
+   "date": "2026-10-25",
+   "verdict": "Generic source theorem plus monoidal compositor naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProperOpenProjectionMate",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-open-projection-mate",
+   "place": "Tensor compatibility of the composite-open comparison in the finite alpha tensor-square calculation",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperOpenPullTensorComposition",
+  "file": "lean/Sheaf/SixFunctors/ProperOpenPullTensorComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.properOpenPullTensorComposition",
+  "statement": "theorem properOpenPullTensorComposition\n    (V₀ : Type*) [Category.{u + 1} V₀] [Abelian V₀]\n    [IsGrothendieckAbelian.{u + 1} V₀] [MonoidalCategory V₀]\n    [MonoidalPreadditive V₀] [SymmetricCategory V₀] [MonoidalClosed V₀]\n    [Abelian.HasFunctorialFlatResolution V₀] [UpperStarPreservesFlat V₀]\n    {U V X : Scheme.{u}} (s : U ⟶ V) (b : V ⟶ X)\n    (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology X) V₀)) :\n    (leftDerivedUpperStarComp (V₀) s b).hom.app\n        (((derivedTensor V₀ X).obj M).obj N) ≫\n      ((upperStar V₀ s).leftDerivedFunctor).map (leftDerivedUpperStarTensorIso\n        (V₀) b M N).hom ≫\n      (leftDerivedUpperStarTensorIso (V₀) s\n        (((upperStar V₀ b).leftDerivedFunctor).obj M)\n        (((upperStar V₀ b).leftDerivedFunctor).obj N)).hom =\n    (leftDerivedUpperStarTensorIso (V₀) (s ≫ b) M N).hom ≫\n      (Functor.uncurry.obj (derivedTensor V₀ U)).map\n        (Prod.mkHom\n          ((leftDerivedUpperStarComp (V₀) s b).hom.app M)\n          ((leftDerivedUpperStarComp (V₀) s b).hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

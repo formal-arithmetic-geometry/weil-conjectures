@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Choose the inverse function $d:M\\to L$ of the bijection $e$. It is a $k$-algebra homomorphism in the sense of [def-weil-pbc-algebra-hom-quotient]: applying the injective map $e$ to $d(m+m')$ and $d(m)+d(m')$ gives $m+m'$ in both cases, and the same argument proves preservation of multiplication, zero and one. For $r\\in k$, both $d(\\iota_M(r))$ and $\\iota_L(r)$ map to $\\iota_M(r)$, so $d$ commutes with the structure maps. Thus $de=1_L$ and $ed=1_M$ as algebra maps.",
+   "text": "Promote the bijective k-algebra homomorphism e to the algebra equivalence AlgEquiv.ofBijective e he (Mathlib/Algebra/Algebra/Equiv.lean). Its inverse is a k-algebra map in the sense of [def-weil-pbc-algebra-hom-quotient]; the equivalence records both inverse identities.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient"
    ],
@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "Put $S=A\\otimes_kL$ and $T=A\\otimes_kM$. Clause (1) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives their commutative $k$-algebra structures, factor inclusions and multiplication $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$. In clause (2), take the target to be $T$ and the two maps to be $a\\mapsto a\\otimes1$ and $\\ell\\mapsto1\\otimes e(\\ell)$, the latter being the composite of $e$ and the right inclusion. This constructs a $k$-algebra map $F:S\\to T$ with $F(a\\otimes\\ell)=(a\\otimes1)(1\\otimes e(\\ell))=a\\otimes e(\\ell)$. Applying the same clause with target $S$ and maps $a\\mapsto a\\otimes1$, $m\\mapsto1\\otimes d(m)$ constructs a $k$-algebra map $G:T\\to S$ satisfying $G(a\\otimes m)=a\\otimes d(m)$. All maps agree on $k$ because $e$ and $d$ do.",
+   "text": "Apply Algebra.TensorProduct.congr to the identity algebra equivalence on A and the equivalence of L with M. This constructs E : $A\\otimes_k L$ ≃ₐ[k] $A\\otimes_k M$ using the algebra tensor maps of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The forward map sends $a\\otimes l$ to $a\\otimes e(l)$, and its inverse uses the inverse scalar map.",
    "uses": [
     "lem-weil-pbc-algebra-tensor-pushout-universal-property"
    ],
@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "For every pure tensor, $GF(a\\otimes\\ell)=a\\otimes d(e(\\ell))=a\\otimes\\ell$ and $FG(a\\otimes m)=a\\otimes e(d(m))=a\\otimes m$. These maps are $k$-linear, and pure tensors generate the tensor product as a $k$-module by [def-weil-pbc-module-tensor-product]. Hence the displayed identities extend to every element: $GF=1_S$ and $FG=1_T$.",
+   "text": "The construction Algebra.TensorProduct.congr verifies the two inverse identities by tensor extensionality: on pure tensors they are the inverse identities of the two factor equivalences. Pure tensors generate by [def-weil-pbc-module-tensor-product]. Thus E and E.symm are injective.",
    "uses": [
     "def-weil-pbc-module-tensor-product"
    ],
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Assume $S$ is reduced, meaning that its only nilpotent element is zero (Stacks Tag 00B3). If $y\\in T$ satisfies $y^n=0$ for some $n\\ge1$, then $G(y)^n=G(y^n)=G(0)=0$. Preservation of powers follows by induction from preservation of multiplication and one. Reducedness of $S$ gives $G(y)=0$, and therefore $y=F(G(y))=F(0)=0$. Thus $T$ is reduced.",
+   "text": "Assume $A\\otimes_k L$ is reduced. Apply Mathlib isReduced_of_injective to E.symm and its injectivity. Explicitly a nilpotent y maps to a nilpotent E.symm(y), which is zero in the reduced source tensor product. Injectivity then gives y = 0, proving reducedness of $A\\otimes_k M$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Conversely assume $T$ is reduced. If $x\\in S$ satisfies $x^n=0$ for some $n\\ge1$, then $F(x)^n=F(x^n)=0$, so $F(x)=0$ and $x=G(F(x))=G(0)=0$. Hence $S$ is reduced. Together with the preceding step this proves $A\\otimes_kL$ reduced if and only if $A\\otimes_kM$ reduced.",
+   "text": "Conversely assume $A\\otimes_k M$ is reduced. Apply Mathlib isReduced_of_injective to E and its injectivity. A nilpotent x maps to zero, and injectivity gives x = 0. The two implications give the required equivalence.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -73,7 +73,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tensor transport from Tags 00CX and 05G3; expanded using the algebra tensor universal property in schemes.tex Tag 01I4 and the reduced-ring convention Tag 00B3"
+  "place": "Tags 00CX, 05G3 and 00B3; the original tensor-transport and nilpotent argument, implemented using Mathlib AlgEquiv.ofBijective, Algebra.TensorProduct.congr and isReduced_of_injective (Y3, 2026-10-23)."
  },
  "mathlib_searches": [
   {
@@ -174,5 +174,26 @@
   "result": "pass",
   "note": "Lean signature matches node clause by clause: Field k; CommRing A + Algebra k A; Field/Algebra k for L and M; e : L →ₐ[k] M with explicit Function.Bijective; IsReduced (A ⊗[k] L) ↔ IsReduced (A ⊗[k] M); four independent universes, no extra hypotheses, lean.statement verbatim. Only the node's lean field changed; no new nodes or helpers; stmt_deps are Mathlib matches used exactly (Field, TensorProduct, Algebra/AlgHom). Stacks tags 00CX/05G3/00B3/00AT/01I4 checked. Edge cases (A=0, nonreduced A, any characteristic, identity e) covered. No existing duplicate in Mathlib or Sheaf. Docstrings carry the source, blueprint id and all 5 proof steps; body is sorry only; report has both sections. nt_compile.py --json clean (rc=0, 3.1 s); a broken copy fails, so the compile is real. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261023T110147-L-3656701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

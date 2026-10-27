@@ -47,5 +47,74 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-base-change",
  "unit": "sk-thm-sbc-coefficients",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Consider a cartesian square with $u:X'\\to X$, $f':X'\\to Y'$, $f:X\\to Y$, $g:Y'\\to Y$, and\nthe exchange map $\\operatorname{Ex}_{g,f}(K):g^*Rf_*K\\to Rf'_*u^*K$ of\n[sk-lem-sbc-exchange-compatibility].\nAssume the standing finite-type hypotheses\nand that $g$ is smooth. For every admissible coefficient ring\n\n$$\n \\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\overline{\\mathbf Q}_\\ell\\}\n$$\n\nand every $K\\in\\Dctf(X,\\Lambda)$, the\ncanonical map is an isomorphism\n\n$$\n g^*Rf_*K\\xrightarrow{\\sim}Rf'_*u^*K\n       \\quad\\text{in }\\Dctf(Y',\\Lambda).\n \\tag{1}\n$$\n\nThese isomorphisms respect pasting and all coefficient comparisons in\nProposition [sk-prop-scalar-six].\n\nFor integral and rational coefficients $\\Dctf=\\Dbc$, so in those cases\nthe theorem concerns all bounded constructible complexes.\n\n*Complement.* In the setting of the complement of [sk-thm-sbc-derived], with all schemes\nNoetherian and $\\ell$ invertible, the exchange isomorphism also holds at a finite stage on\nthe pro-étale site, by conjugating the étale statement by the site comparison\n([sbc-thm-finite-proetale-smooth-base-change]). At $\\mathcal O_E$, $E$ and $\\Qlb$ the main\nstatement already covers all of the condensed $\\Dbc$.",
+  "proof": [
+   {
+    "text": "By Proposition [sk-thm-sf-ctf-stability] both sides lie in\n$\\Dctf(Y',\\Lambda)$; it remains to show that the canonical exchange map\n$\\operatorname{Ex}_{g,f}(K)$ is invertible for each kind of coefficient ring.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Finite rings $A$.* By the constructible comparison\n([sk-thm-pe-constructible-comparison]), constructible\npro-étale sheaves with discrete Noetherian coefficients are\nclassical, so $K$ is a bounded classical complex. The torsion\ntheorem ([sk-thm-sbc-derived]) gives the isomorphism for every\nbounded-below classical complex with coefficients killed by an\ninteger invertible on $Y$. Finite Tor amplitude enters only through\nProposition [sk-thm-sf-ctf-stability], which places both sides in\n$\\Dctf(Y',A)$, so every finite admissible ring $A$ is allowed, regular\nor not.",
+    "uses": [
+     "sk-thm-pe-constructible-comparison",
+     "sk-thm-sbc-derived"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Integral coefficients.* Let $\\pi_E$ be the uniformizer of\n$\\mathcal O_E$ and\n$K_n=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E^n)_X$\nthe reductions of [sk-def-pe-derived-completion].\nBy Proposition [sk-thm-sf-ctf-stability] the objects $g^*Rf_*K$ and\n$Rf'_*u^*K$ lie in $\\Dbc(Y',\\mathcal O_E)$, and by the integral\nconstructibility criterion ([sk-prop-integral-criterion])\nevery object of $\\Dbc(-,\\mathcal O_E)$ is derived $\\pi_E$-complete.\nSince $\\mathcal O_E/\\pi_E^n$ has the two-term free resolution\n$[\\mathcal O_E\\xrightarrow{\\pi_E^n}\\mathcal O_E]$, reduction modulo\n$\\pi_E^n$ is the cone of multiplication by $\\pi_E^n$, so it commutes with\nthe exact functors $Rf_*$, $Rf'_*$, $g^*$ and $u^*$. By its\nunit–counit definition, or by\n[sk-lem-sbc-exchange-compatibility], the reduction of\nthe exchange map is then the exchange map for the finite ring\n$\\mathcal O_E/\\pi_E^n$,\n\n$$\n g^*Rf_*K_n\\longrightarrow Rf'_*u^*K_n.\n$$\n\nThe complexes $K_n$ are bounded constructible and classical, so the\nfinite case makes these maps isomorphisms; already $n=1$ suffices.\nThe cone of $g^*Rf_*K\\to Rf'_*u^*K$ is therefore derived complete\nwith zero reduction modulo $\\pi_E$, and derived Nakayama\n([sk-lem-pe-derived-nakayama]: a derived complete complex whose\nreduction modulo $\\pi_E$ vanishes is zero) shows that the cone is zero.\nTaking $E=\\Ql$ gives the case $\\Zl$.\n\nEquivalently, the integral exchange map is the derived limit of the\nfinite ones, which form a morphism of inverse systems, under the\nisomorphisms\n\n$$\n \\begin{aligned}\n g^*Rf_*K&\\simeq R\\varprojlim_n g^*Rf_*K_n,\\\\\n Rf'_*u^*K&\\simeq R\\varprojlim_n Rf'_*u^*K_n.\n \\end{aligned}\n$$\n\nThe first holds by completeness of $g^*Rf_*K$, the second by\ncompleteness of $u^*K$ and because the right adjoint $Rf'_*$ preserves\nderived limits.",
+    "uses": [
+     "sk-def-pe-derived-completion",
+     "sk-lem-sbc-exchange-compatibility",
+     "sk-lem-pe-derived-nakayama"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Finite extensions $E$ of $\\Ql$.* By\npart (4) of [sk-lem-integral-models], every object of $\\Dbc(X,E)$ is\nobtained by finitely many cones and shifts from objects\n$K_0[1/\\ell]$ with $K_0=a_!L_0\\in\\Dbc(X,\\mathcal O_E)$, where $a$ is\na locally closed immersion and $L_0$ is lisse and finite free. The\nobjects on which a natural transformation of exact functors is an\nisomorphism are closed under cones and shifts, so it suffices to treat\n$K_0[1/\\ell]$. This dévissage replaces a lattice of $K$, which may\nnot exist.\nThe object $K_0[1/\\ell]$ is the filtered colimit of\nmultiplication by $\\ell$ on the fixed bounded-below complex $K_0$.\nInverse image commutes with this colimit, and so do $Rf_*$ and\n$Rf'_*$ by continuity of cohomology\n([sk-cor-pe-bounded-continuity]: for a qcqs morphism, $R^qf_*$\ncommutes with filtered colimits of complexes bounded below uniformly).\nThese are the localization comparisons of\nProposition [sk-prop-scalar-six]. By\n[sk-lem-sbc-exchange-compatibility], the exchange map for\n$K_0[1/\\ell]$ is the localization of the exchange map for $K_0$, which\nis an isomorphism by the integral case. Taking $E=\\Ql$ gives the case\n$\\Ql$.",
+    "uses": [
+     "sk-lem-integral-models",
+     "sk-lem-sbc-exchange-compatibility"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Algebraic rational coefficients.* By\nProposition [sk-thm-sfb-qlbar-two-colimit], every object of\n$\\Dbc(X,\\overline{\\mathbf Q}_\\ell)$ is\nobtained by extension of scalars from a finite coefficient field: for\n$K\\in\\Dbc(X,\\overline{\\mathbf Q}_\\ell)$ there are a finite $E\\subset\\overline{\\mathbf Q}_\\ell$ and\n$K_E\\in\\Dbc(X,E)$ with $(K_E)_{\\overline{\\mathbf Q}_\\ell}\\simeq K$. The scalar comparisons\nof Proposition [sk-prop-scalar-six] identify both sides and their exchange\nmap with the scalar extension of the exchange map for $K_E$, which is\nan isomorphism by the previous case. Two models, or a model and its\nextension to a larger finite field, become isomorphic after a common\nfinite extension, and [sk-lem-sbc-exchange-compatibility] identifies\ntheir exchange maps there. So the isomorphism is independent of the\nmodel.\n\nFinally, pasting and coefficient compatibility hold for the exchange\ntransformation itself by [sk-lem-sbc-exchange-compatibility], so\nthe isomorphisms inherit them.",
+    "uses": [
+     "sk-thm-sfb-qlbar-two-colimit",
+     "sk-lem-sbc-exchange-compatibility"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complement.* The finite pro-étale case conjugates the étale isomorphism of the\ncomplement of [sk-thm-sbc-derived] by the site comparison\n([sbc-thm-finite-proetale-smooth-base-change]).",
+    "uses": [
+     "sk-thm-sbc-derived",
+     "sbc-thm-finite-proetale-smooth-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ }
 }

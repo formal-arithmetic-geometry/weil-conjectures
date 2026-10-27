@@ -1,0 +1,157 @@
+{
+ "id": "lem-ringed-hom-restriction-ordinary",
+ "kind": "statement",
+ "title": "Coherent ordinary internal Hom complexes under slice restriction",
+ "statement": "For a small ringed site (C,J,R), write H for the ordinary internal Hom complex bifunctor [def-pur-hom-complex]. There are natural isomorphisms a_U:H followed by termwise slice restriction F_U isomorphic to (F_U opposite times F_U) followed by H_U, and b_f:H_U followed by termwise relocalization G_f isomorphic to (G_f opposite times G_f) followed by H_V, for every f:V to U [def-pur-localized-ringed-site]. If c:F_U composed with G_f isomorphic to F_V is the canonical termwise overFunctorMap comparison, then for every L,M the composite G_f(a_U(L,M)), b_f(F_U L,F_U M), and H_V(c_L inverse,c_M) equals c_{H(L,M)} followed by a_V(L,M). There is no derived category or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "lem-ringed-hom-restriction-comparison-descent"
+ ],
+ "proof": [
+  {
+   "text": "For a continuous site functor F whose functors Over.post F are equivalences, construct the sheaf Hom factor map by precomposition with Over.post F. Prove its components invertible by full faithfulness of presheaf precomposition along an equivalence; the inverse is linear by transporting scalar compatibility along an essential-surjectivity isomorphism. Factor naturality follows by evaluating each local module morphism. Forgetting to abelian presheaves shows restriction preserves integer-indexed products.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the Hom-complex functor, factor objects and maps, canonical projections, product-limit property, differential formula and map formula as private projection data, supplied explicitly from the proved API. Work generically with this data in preadditive categories, then specialize to sheaf modules. The product universal properties give degreewise comparison isomorphisms with prescribed factor equations. Applying each product projection reduces the chain-map equation to the two differential terms; additivity and factor naturality identify them. The same projection calculation proves bifunctor naturality in both variables. Assemble these component isomorphisms into a natural isomorphism.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize to Over.forget U and Over.map f. Their induced slice functors are equivalences by the iterated-slice equivalence; for Over.map f, compose with iteratedSliceForward at the image object. After projecting both sides of the compatibility equation, apply the comparison projection formulas and Hom-complex functoriality. The remaining sheaf-factor equation is reflexivity on local sections: successive precomposition and direct precomposition have identical components, and overFunctorMap has identity components. Naturality of overFunctorMap moves the initial product projection through the composition transport.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section Hom complexes (0A8X) and lemma-restriction-RHom-to-U (08JB); explicit product and sectionwise coherence proof by U1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom complex of sheaves of modules commutes naturally with restriction to a slice site and with successive restrictions",
+   "results": "CategoryTheory.sheafHom and scheme-module Hom declarations; no complex restriction or successive-comparison statement.",
+   "date": "2026-10-25",
+   "verdict": "No match; ordinary sheaf Hom alone does not supply chain or composition coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with restriction to a slice site naturally and compatibly with composition",
+   "results": "sheafHom, sheaf Hom equivalences, general exact-derived-functor factorization comparisons",
+   "date": "2026-10-25",
+   "verdict": "No direct statement; use the general localization machinery."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext, fullyFaithfulWhiskeringLeft and liftNatIso",
+   "date": "2026-10-25",
+   "verdict": "General descent and extensionality only; no internal-Hom normalization or coherent restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Rr]estrict|[Rr]estrict.*homComplex",
+   "results": "No Mathlib match; project ElementRestrictionHom provides a private ordinary comparison without a coherence equation, InternalHomOverNaturality gives the sheaf factor naturality.",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the new statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
+  "date": "2026-10-25",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "via": [
+    "lem-route-ringed-internal-hom-restriction",
+    "lem-sf-ringed-rhom-derived-complete",
+    "lem-sf-rational-thick-evaluation"
+   ],
+   "place": "prop-sf-dualizable-hom.proof.md first paragraph: local Hom computation via ambient derived-Hom restriction in lem-sf-ringed-rhom-derived-complete"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedHomRestrictionOrdinary",
+  "file": "lean/Sheaf/Algebra/Homology/RingedHomRestrictionOrdinary.lean",
+  "declaration": "CategoryTheory.RingedHomRestriction.ordinary_comparisons",
+  "statement": "theorem ordinary_comparisons\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u})\n    [∀ U : C, (SheafOfModules.overFunctor.{u} (Rings R) U).Additive]\n    [∀ (U V : C) (f : V ⟶ U), (SheafOfModules.overMap.{u} (Rings R) f).Additive] :\n    ∃ (a : ∀ U : C,\n      ordinary R ⋙ (SheafOfModules.overFunctor.{u} (Rings R) U).mapHomologicalComplex (.up ℤ) ≅\n        (((SheafOfModules.overFunctor.{u} (Rings R) U).mapHomologicalComplex (.up ℤ)).op.prod\n          ((SheafOfModules.overFunctor.{u} (Rings R) U).mapHomologicalComplex (.up ℤ))) ⋙\n            ordinary (R.over U))\n      (b : ∀ (U V : C) (f : V ⟶ U),\n        ordinary (R.over U) ⋙\n            (SheafOfModules.overMap.{u} (Rings R) f).mapHomologicalComplex (.up ℤ) ≅\n          (((SheafOfModules.overMap.{u} (Rings R) f).mapHomologicalComplex (.up ℤ)).op.prod\n            ((SheafOfModules.overMap.{u} (Rings R) f).mapHomologicalComplex (.up ℤ))) ⋙\n              ordinary (R.over V)),\n      ∀ (U V : C) (f : V ⟶ U),\n        Compatible (ordinary R) (ordinary (R.over U)) (ordinary (R.over V))\n          ((SheafOfModules.overFunctor.{u} (Rings R) U).mapHomologicalComplex (.up ℤ))\n          ((SheafOfModules.overMap.{u} (Rings R) f).mapHomologicalComplex (.up ℤ))\n          ((SheafOfModules.overFunctor.{u} (Rings R) V).mapHomologicalComplex (.up ℤ))\n          (Functor.mapHomologicalComplexCompIso (SheafOfModules.overFunctorMap (Rings R) f)\n            (.up ℤ)) (a U) (b U V f) (a V)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-ringed-hom-restriction-ordinary",
+  "worker": "stage3-U9",
+  "summary": "Separated the ordinary chain calculation, including naturality and coherence, from derived descent.",
+  "blueprint": [
+   "prop-sf-dualizable-hom.proof.md first paragraph via ambient derived Hom restriction"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sc-internal-hom-over-naturality",
+    "why": "Naturality of the canonical sheaf-factor restriction comparison is a generic sheaf-Hom tool; the complex and coherent restriction calculation remain here."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T164521-L-1029987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T002930-L-129456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

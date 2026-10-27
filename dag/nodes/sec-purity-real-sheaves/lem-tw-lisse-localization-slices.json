@@ -1,0 +1,143 @@
+{
+ "id": "lem-tw-lisse-localization-slices",
+ "kind": "statement",
+ "title": "Normalized localization and strict-limit comparison on one chart",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, any scheme $X$, any pro-etale object $U\\to X$, and LocalizationData $d_X,d_U$ for $X,U$ [def-tw-lisse-localization-data]. There is SliceCoefficients $c$ on this chart for which SliceLocalization $d_X,U,d_U,c$ is nonempty and SliceLimitCompatibility holds for $B_X$ [def-tw-lisse-localization-interfaces]. In particular these are the constant-, projection-, fraction-, tensor- and cochain-counit-normalized comparisons, and the universal strict derived inverse limits with their normalized Roos-triangle realizations and every projection. No local freeness, realization of a lisse object, or finite-type chart hypothesis is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Definitions 6.8.3 and 6.8.8; source restriction and exact scalar localization in Proposition 6.8.14(2)"
+ },
+ "stmt_deps": [
+  "def-tw-lisse-localization-data",
+  "def-tw-lisse-localization-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Apply completedRingMap_slice with the identity of X. Its integral and residue comparisons respect projections and constant sections. Joint completed projections identify the restricted parameter. Transport sectionwise localization through the slice equivalence and sheafification to obtain the rational ring comparison, unit equation and fraction formula.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-localization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact restriction and the pure-tensor-normalized sheaf comparison give the ordinary extension/restriction comparison. Take it termwise and descend to the unbounded derived categories. Uniqueness of universal derived pairs gives the derived comparison and precisely its counit equation.",
+   "uses": [
+    "lem-weil-pbc-finite-type-restriction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sliceRestrictionStrictDerivedLimit to the ringed site. For both universal derived limits, compare with the K-injective strict-tower realizations by uniqueness of right derived pairs. The counit comparison transports the normalized projections and Roos triangles, proving StrictLimitRealizes and the full SliceLimitCompatibility.",
+   "uses": [
+    "lem-sp-slice-restriction-strict-derived-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "lem-weil-pbc-ringed-localization-restriction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Extraction of original localization-restriction argument, Original proof steps 3, 4 and 5; models on the two schemes are inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor localization sends a lisse rational constructible sheaf to a finite locally free module sheaf",
+   "results": "8 hits, including IsLocalization.tensorProduct_isLocalizedModule and Functor.mapDerivedCategoryFactors; none states the completed coefficient/slice or lisse realization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar localization of module sheaves commutes with restriction and sends locally free lisse objects to degree zero modules",
+   "results": "8 hits, including SheafOfModules.mapFree and freeFunctor. These cover free sheaves, but not completed coefficient derived localization or completed chart pullback.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, Function.Bijective",
+   "results": "Functor.FullyFaithful.map_bijective and nonempty_iff_map_bijective. Used for the Hom clause in the parent; no match for the new localization assertions.",
+   "date": "2026-10-25",
+   "verdict": "partial match in parent only"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*(bijective|Full)|exists_lisseLocalization",
+   "results": "DerivedCategory singleFunctor Full/Faithful found in Mathlib. Project search for LocalizationData, SliceCoefficients, exists_lisseLocalization found only the assigned module; generic scalar, slice and tensor tools read separately.",
+   "date": "2026-10-25",
+   "verdict": "existing tools need the stated interface assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseLocalizationRestriction",
+  "date": "2026-10-25",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "First dual-stalk identification in lem-tw-dual-negation.proof.md: realizing lisse rational objects as ordinary finite locally free coefficient modules before identifying the dual stalk; localization and slice-restriction part of the realization infrastructure. Original proof steps 3, 4 and 5; models on the two schemes are inputs.",
+   "via": [
+    "lem-tw-lisse-localization-restriction",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseLocalizationSlices",
+  "file": "lean/Sheaf/Paper/LisseLocalizationSlices.lean",
+  "declaration": "WeilConjectures.LisseLocalization.localization_slice",
+  "declarations": [
+   "WeilConjectures.LisseLocalization.localization_slice"
+  ],
+  "statement": "theorem localization_slice {X : Scheme.{u}} (dx : LocalizationData l E X) (U : X.ProEt) (du : LocalizationData l E U.left) : ∃ c : SliceCoefficients l E U, Nonempty (SliceLocalization l E dx U du c) ∧ SliceLimitCompatibility U (X.adicLisseForget.obj (integralRing l E X))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fd009",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T122910-L-1816599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fd009",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T122910-L-1816599",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement and moved data block byte-identical to clone; 3 new sorried substeps (existence, slices, local freeness) checked true against def-tw-lisse-localization-data / interfaces owners; axioms of exists_lisseLocalizationRestriction = propext, sorryAx (substeps only), Classical.choice, Quot.sound in scratch compile; no Lean importers, DAG citers only via proof_deps"
+ }
+}

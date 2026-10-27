@@ -1,0 +1,504 @@
+# AlgebraicGeometry.ProEtale.CondensedGenericScalarModel.CoverModel
+
+## Reason
+
+Extract the existing data and comparison definitions verbatim to
+`Sheaf.AlgebraicGeometry.CondensedGenericScalarModelData`. The parent publicly
+re-exports that module. The four proof-step modules can refer to these data
+without creating an import cycle with the parent's theorem. No mathematical
+object, declaration name, signature, definition body or instance body changes.
+This is an ownership and public-import change, not a statement correction.
+
+## Old
+
+The following public imports were followed directly by the data declarations
+in `Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel`:
+
+```lean
+public import Sheaf.Topology.ProfiniteCondensedRing
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+public import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+public import WeilConjectures.RingTheory.ProEtale.WContractible
+public import Sheaf.Topology.SpectralSpace.ConnectedComponentsProfinite
+public import Sheaf.AlgebraicGeometry.CondensedScalarRealization
+public import Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation
+public import Sheaf.Paper.ComponentDerivedPullbackSquare
+public import Sheaf.RingTheory.IndEtaleUniverseTransport
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.Irreducible
+
+```
+
+The old data block, verbatim:
+
+```lean
+namespace CondensedGenericScalarModel
+
+/-- The generic fibre of an affine scheme over an affine base is affine. This merely
+registers the existing affine-pullback instance, using the existing affine-morphism theorem.
+Source: HRS Theorem 4.13, (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance fiberAffine {X U : Scheme.{u}} [IsAffine X] [IsAffine U]
+    (f : U ⟶ X) (Ω : Type u) [Field Ω] (η : Spec (.of Ω) ⟶ X) :
+    IsAffine (pullback f η) :=
+  letI : IsAffineHom f := isAffineHom_of_isAffine f
+  inferInstance
+
+/-- The canonical identification of the two restrictions to the generic fibre, obtained
+from the ordinary derived composition comparisons and the pullback square equality.
+Source: HRS Theorem 4.13, (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def genericRestriction (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X U : Scheme.{u}} (f : U ⟶ X) (Ω : Type u) [Field Ω]
+    (η : Spec (.of Ω) ⟶ X)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) :
+    (CondensedRing.upperStar Λ.X (pullback.fst f η)).mapDerivedCategory.obj
+        ((CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K) ≅
+      (CondensedRing.upperStar Λ.X (pullback.snd f η)).mapDerivedCategory.obj
+        ((CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K) :=
+  ((ComponentDerivedSquare.schemeComposition Λ f (pullback.fst f η)).app K).symm ≪≫
+    eqToIso (congrArg
+      (fun a => (CondensedRing.upperStar Λ.X a).mapDerivedCategory.obj K)
+      (pullback.condition (f := f) (g := η))) ≪≫
+    (ComponentDerivedSquare.schemeComposition Λ η (pullback.snd f η)).app K
+
+/-- The common point-valued part of the existing scalar realization, before inverse image.
+This is a transparent intermediate composite of the recorded scalar-realization construction.
+Source: HRS Definition 3.5 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def pointRealization (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] :=
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence
+    (coherentTopology Profinite.{u}) Λ.X
+  letI := Functor.additive_of_preserves_binary_products e.inverse
+  commutativeSiteDerivedConstantModuleFunctor (coherentTopology Profinite.{u})
+      (condensedScalarRing Λ.X) ⋙
+    (condensedScalarExtensionModel Λ.X).T ⋙ e.inverse.mapDerivedCategory
+
+/-- Additivity of restriction of modules from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance slicePointAdditive (Λ : Profinite.CondensedRing.{u}) (S : Profinite.{u}) :
+    (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ.X).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+/-- Additivity of the actual module inverse image from the condensed point to a scheme.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointAdditive (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    ((upperStarFromPoint T).mapMod Λ.X).Additive :=
+  letI : PreservesFiniteLimits (upperStarFromPoint T) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  Functor.additive_of_preserves_binary_products _
+
+/-- Exactness of the actual module inverse image from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointFiniteLimits (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    PreservesFiniteLimits ((upperStarFromPoint T).mapMod Λ.X) :=
+  letI : PreservesFiniteLimits (upperStarFromPoint T) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  inferInstance
+
+/-- Colimit preservation of the actual module inverse image from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointFiniteColimits (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    PreservesFiniteColimits ((upperStarFromPoint T).mapMod Λ.X) :=
+  letI : PreservesFiniteColimits (upperStarFromPoint T) := by
+    let : pointUpperStar.{u}.IsLeftAdjoint :=
+      pointUpperStarLowerStarAdjunction.isLeftAdjoint
+    unfold upperStarFromPoint
+    infer_instance
+  inferInstance
+
+/-- The scalar comparison is the localization of the specified ordinary comparison,
+precomposed with the common point realization. No arbitrary derived map is selected.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def cornerScalarComparison (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    (T : Scheme.{u}) [IsAffine T] (c : ComponentDerivedSquare.Corner Λ T)
+    (ordinary : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+        (affineComponentSpace T)).mapMod Λ.X ⋙ c.modules Λ T ≅
+      (upperStarFromPoint T).mapMod Λ.X) :
+    CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace T) ⋙
+      c.derived Λ T ≅ condensedScalarRealization Λ.X T :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso
+      (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+        (affineComponentSpace T)).mapMod Λ.X) (c.modules Λ T)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso ordinary)
+
+/-- The scheme scalar comparison is likewise the localization of its specified ordinary
+module comparison, before precomposition with the point realization.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def schemeScalarComparison (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {T V : Scheme.{u}} (h : V ⟶ T)
+    (ordinary : (upperStarFromPoint T).mapMod Λ.X ⋙ CondensedRing.upperStar Λ.X h ≅
+      (upperStarFromPoint V).mapMod Λ.X) :
+    condensedScalarRealization Λ.X T ⋙
+      (CondensedRing.upperStar Λ.X h).mapDerivedCategory ≅
+    condensedScalarRealization Λ.X V :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso ((upperStarFromPoint T).mapMod Λ.X)
+      (CondensedRing.upperStar Λ.X h)).symm ≪≫ Functor.mapDerivedCategoryNatIso ordinary)
+
+/-- Canonically normalized identity and scalar comparisons for a section of a component map.
+The test-object projection fixes the underlying identity comparison via its adjunction mate;
+the scalar comparison has underlying map the slice's absolute-test comparison.
+Source: HRS Theorem 4.13, after (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+structure SectionComparison (Λ : Profinite.CondensedRing.{u})
+    {S V : Profinite.{u}} (r : V ⟶ S) (s : S ⟶ V)
+    (restriction : ComponentDerivedSquare.Slice Λ r) where
+  inverse : ComponentDerivedSquare.Slice Λ s
+  tests : Over.pullback r ⋙ Over.pullback s ≅ 𝟭 (Over S)
+  tests_projection : ∀ E : Over S, (tests.hom.app E).left =
+    pullback.fst ((Over.pullback r).obj E).hom s ≫ pullback.fst E.hom r
+  abelian : restriction.inverse ⋙ inverse.inverse ≅ 𝟭 _
+  abelian_mate : ∀ (G : Sheaf ((coherentTopology Profinite.{u}).over S) Ab.{u + 1}) E,
+    (((conjugateIsoEquiv
+      (restriction.adjunction.comp inverse.adjunction) (Adjunction.id)
+      abelian.symm).hom.app G).hom.app (op E)) = G.obj.map (tests.inv.app E).op
+  ordinary : restriction.modules Λ ⋙ inverse.modules Λ ≅ 𝟭 _
+  ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
+  scalar : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} V).mapMod Λ.X ⋙
+      inverse.modules Λ ≅
+    ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ.X
+  scalar_underlying : ∀ M, (scalar.hom.app M).hom = inverse.beta.hom.app M.X
+
+/-- The identity comparison on derived objects is the localization of the normalized
+ordinary comparison in the section data.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def SectionComparison.identityDerived (Λ : Profinite.CondensedRing.{u})
+    {S V : Profinite.{u}} {r : V ⟶ S} {s : S ⟶ V}
+    {restriction : ComponentDerivedSquare.Slice Λ r}
+    (c : SectionComparison Λ r s restriction) :
+    restriction.derived Λ ⋙ c.inverse.derived Λ ≅ 𝟭 _ :=
+  (Functor.mapDerivedCategoryCompIso (restriction.modules Λ) (c.inverse.modules Λ)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso c.ordinary ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- The scalar comparison on derived objects is the localization of the absolute-test
+comparison, with the same fixed scalar complex as before restriction.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def SectionComparison.scalarDerived (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {S V : Profinite.{u}} {r : V ⟶ S} {s : S ⟶ V}
+    {restriction : ComponentDerivedSquare.Slice Λ r}
+    (c : SectionComparison Λ r s restriction) :
+    CondensedRing.profiniteScalarRealization Λ.X V ⋙ c.inverse.derived Λ ≅
+      CondensedRing.profiniteScalarRealization Λ.X S :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso
+      (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} V).mapMod Λ.X)
+      (c.inverse.modules Λ)).symm ≪≫ Functor.mapDerivedCategoryNatIso c.scalar)
+
+/-- Witnesses for the more precise component/section assertion. The corners and slice
+pullbacks have their canonical coefficient comparisons, normalized by absolute test objects
+in `ComponentDerivedSquare.Corner` and `ComponentDerivedSquare.Slice`. The equality
+`generic_induced` says that delta is the descent of the restriction of the fixed alpha.
+`sections` expresses pullback of that delta along every splitting, using the natural
+identity and scalar composition comparisons, rather than choosing a new perfect model.
+Source: HRS Theorem 4.13, diagram (4.4) and the following paragraph
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+structure CoverModel (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X U : Scheme.{u}} [IsAffine X] [IsAffine U] (f : U ⟶ X)
+    (Ω : Type u) [Field Ω] (η : Spec (.of Ω) ⟶ X)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)))
+    (P : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ.X)))
+    (α : (CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K ≅
+      (condensedScalarRealization Λ.X (Spec (.of Ω))).obj P) where
+  cornerU : ComponentDerivedSquare.Corner Λ U
+  cornerV : ComponentDerivedSquare.Corner Λ (pullback f η)
+  restriction : ComponentDerivedSquare.Slice Λ (affineComponentMap (pullback.fst f η))
+  square : ComponentDerivedSquare.Square Λ (pullback.fst f η) cornerU cornerV restriction
+  scalarV : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+      (affineComponentSpace (pullback f η))).mapMod Λ.X ⋙
+      cornerV.modules Λ (pullback f η) ≅ (upperStarFromPoint (pullback f η)).mapMod Λ.X
+  scalarV_underlying : ∀ N, (scalarV.hom.app N).hom = cornerV.beta.hom.app N.X
+  scalarH : (upperStarFromPoint (Spec (.of Ω))).mapMod Λ.X ⋙
+      CondensedRing.upperStar Λ.X (pullback.snd f η) ≅
+    (upperStarFromPoint (pullback f η)).mapMod Λ.X
+  scalarH_underlying : ∀ N, (scalarH.hom.app N).hom =
+    (ComponentDerivedSquare.schemeUnderlying Λ (pullback.snd f η)).hom.app
+        (((upperStarFromPoint (Spec (.of Ω))).mapMod Λ.X).obj N) ≫
+      (upperStarFromPointComp (pullback.snd f η)).hom.app N.X
+  M : CondensedRing.Evaluation.D
+    ((coherentTopology Profinite.{u}).over (affineComponentSpace U))
+    (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace U))
+  dualizable : Nonempty (HasRightDual M)
+  beta : (cornerU.derived Λ U).obj M ≅
+    (CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K
+  delta : (restriction.derived Λ).obj M ≅
+    (CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace (pullback f η))).obj P
+  generic_induced : (cornerV.derived Λ (pullback f η)).mapIso delta ≪≫
+      (cornerScalarComparison Λ (pullback f η) cornerV scalarV).app P =
+    (square.theta Λ).symm.app M ≪≫
+      (CondensedRing.upperStar Λ.X (pullback.fst f η)).mapDerivedCategory.mapIso beta ≪≫
+      genericRestriction Λ f Ω η K ≪≫
+      (CondensedRing.upperStar Λ.X (pullback.snd f η)).mapDerivedCategory.mapIso α ≪≫
+      (schemeScalarComparison Λ (pullback.snd f η) scalarH).app P
+  splitting : ∃ s : affineComponentSpace U ⟶ affineComponentSpace (pullback f η),
+    s ≫ affineComponentMap (pullback.fst f η) = 𝟙 (affineComponentSpace U)
+  sections : ∀ (s : affineComponentSpace U ⟶ affineComponentSpace (pullback f η)),
+    s ≫ affineComponentMap (pullback.fst f η) = 𝟙 (affineComponentSpace U) →
+    ∃ (c : SectionComparison Λ (affineComponentMap (pullback.fst f η)) s restriction)
+      (γ : M ≅ (CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace U)).obj P),
+      (c.inverse.derived Λ).mapIso delta ≪≫ (c.scalarDerived Λ).app P =
+        (c.identityDerived Λ).app M ≪≫ γ
+  model : (CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K ≅
+    (condensedScalarRealization Λ.X U).obj P
+
+end CondensedGenericScalarModel
+```
+
+## New
+
+```lean
+public import Sheaf.AlgebraicGeometry.CondensedGenericScalarModelData
+```
+
+The same imports and the following unchanged data block are in that new module:
+
+```lean
+namespace CondensedGenericScalarModel
+
+/-- The generic fibre of an affine scheme over an affine base is affine. This merely
+registers the existing affine-pullback instance, using the existing affine-morphism theorem.
+Source: HRS Theorem 4.13, (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance fiberAffine {X U : Scheme.{u}} [IsAffine X] [IsAffine U]
+    (f : U ⟶ X) (Ω : Type u) [Field Ω] (η : Spec (.of Ω) ⟶ X) :
+    IsAffine (pullback f η) :=
+  letI : IsAffineHom f := isAffineHom_of_isAffine f
+  inferInstance
+
+/-- The canonical identification of the two restrictions to the generic fibre, obtained
+from the ordinary derived composition comparisons and the pullback square equality.
+Source: HRS Theorem 4.13, (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def genericRestriction (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X U : Scheme.{u}} (f : U ⟶ X) (Ω : Type u) [Field Ω]
+    (η : Spec (.of Ω) ⟶ X)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) :
+    (CondensedRing.upperStar Λ.X (pullback.fst f η)).mapDerivedCategory.obj
+        ((CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K) ≅
+      (CondensedRing.upperStar Λ.X (pullback.snd f η)).mapDerivedCategory.obj
+        ((CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K) :=
+  ((ComponentDerivedSquare.schemeComposition Λ f (pullback.fst f η)).app K).symm ≪≫
+    eqToIso (congrArg
+      (fun a => (CondensedRing.upperStar Λ.X a).mapDerivedCategory.obj K)
+      (pullback.condition (f := f) (g := η))) ≪≫
+    (ComponentDerivedSquare.schemeComposition Λ η (pullback.snd f η)).app K
+
+/-- The common point-valued part of the existing scalar realization, before inverse image.
+This is a transparent intermediate composite of the recorded scalar-realization construction.
+Source: HRS Definition 3.5 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def pointRealization (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] :=
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence
+    (coherentTopology Profinite.{u}) Λ.X
+  letI := Functor.additive_of_preserves_binary_products e.inverse
+  commutativeSiteDerivedConstantModuleFunctor (coherentTopology Profinite.{u})
+      (condensedScalarRing Λ.X) ⋙
+    (condensedScalarExtensionModel Λ.X).T ⋙ e.inverse.mapDerivedCategory
+
+/-- Additivity of restriction of modules from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance slicePointAdditive (Λ : Profinite.CondensedRing.{u}) (S : Profinite.{u}) :
+    (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ.X).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+/-- Additivity of the actual module inverse image from the condensed point to a scheme.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointAdditive (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    ((upperStarFromPoint T).mapMod Λ.X).Additive :=
+  letI : PreservesFiniteLimits (upperStarFromPoint T) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  Functor.additive_of_preserves_binary_products _
+
+/-- Exactness of the actual module inverse image from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointFiniteLimits (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    PreservesFiniteLimits ((upperStarFromPoint T).mapMod Λ.X) :=
+  letI : PreservesFiniteLimits (upperStarFromPoint T) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  inferInstance
+
+/-- Colimit preservation of the actual module inverse image from the condensed point.
+Source: HRS Section 3 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+instance schemePointFiniteColimits (Λ : Profinite.CondensedRing.{u}) (T : Scheme.{u}) :
+    PreservesFiniteColimits ((upperStarFromPoint T).mapMod Λ.X) :=
+  letI : PreservesFiniteColimits (upperStarFromPoint T) := by
+    let : pointUpperStar.{u}.IsLeftAdjoint :=
+      pointUpperStarLowerStarAdjunction.isLeftAdjoint
+    unfold upperStarFromPoint
+    infer_instance
+  inferInstance
+
+/-- The scalar comparison is the localization of the specified ordinary comparison,
+precomposed with the common point realization. No arbitrary derived map is selected.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def cornerScalarComparison (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    (T : Scheme.{u}) [IsAffine T] (c : ComponentDerivedSquare.Corner Λ T)
+    (ordinary : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+        (affineComponentSpace T)).mapMod Λ.X ⋙ c.modules Λ T ≅
+      (upperStarFromPoint T).mapMod Λ.X) :
+    CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace T) ⋙
+      c.derived Λ T ≅ condensedScalarRealization Λ.X T :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso
+      (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+        (affineComponentSpace T)).mapMod Λ.X) (c.modules Λ T)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso ordinary)
+
+/-- The scheme scalar comparison is likewise the localization of its specified ordinary
+module comparison, before precomposition with the point realization.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def schemeScalarComparison (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {T V : Scheme.{u}} (h : V ⟶ T)
+    (ordinary : (upperStarFromPoint T).mapMod Λ.X ⋙ CondensedRing.upperStar Λ.X h ≅
+      (upperStarFromPoint V).mapMod Λ.X) :
+    condensedScalarRealization Λ.X T ⋙
+      (CondensedRing.upperStar Λ.X h).mapDerivedCategory ≅
+    condensedScalarRealization Λ.X V :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso ((upperStarFromPoint T).mapMod Λ.X)
+      (CondensedRing.upperStar Λ.X h)).symm ≪≫ Functor.mapDerivedCategoryNatIso ordinary)
+
+/-- Canonically normalized identity and scalar comparisons for a section of a component map.
+The test-object projection fixes the underlying identity comparison via its adjunction mate;
+the scalar comparison has underlying map the slice's absolute-test comparison.
+Source: HRS Theorem 4.13, after (4.4)
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+structure SectionComparison (Λ : Profinite.CondensedRing.{u})
+    {S V : Profinite.{u}} (r : V ⟶ S) (s : S ⟶ V)
+    (restriction : ComponentDerivedSquare.Slice Λ r) where
+  inverse : ComponentDerivedSquare.Slice Λ s
+  tests : Over.pullback r ⋙ Over.pullback s ≅ 𝟭 (Over S)
+  tests_projection : ∀ E : Over S, (tests.hom.app E).left =
+    pullback.fst ((Over.pullback r).obj E).hom s ≫ pullback.fst E.hom r
+  abelian : restriction.inverse ⋙ inverse.inverse ≅ 𝟭 _
+  abelian_mate : ∀ (G : Sheaf ((coherentTopology Profinite.{u}).over S) Ab.{u + 1}) E,
+    (((conjugateIsoEquiv
+      (restriction.adjunction.comp inverse.adjunction) (Adjunction.id)
+      abelian.symm).hom.app G).hom.app (op E)) = G.obj.map (tests.inv.app E).op
+  ordinary : restriction.modules Λ ⋙ inverse.modules Λ ≅ 𝟭 _
+  ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
+  scalar : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} V).mapMod Λ.X ⋙
+      inverse.modules Λ ≅
+    ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ.X
+  scalar_underlying : ∀ M, (scalar.hom.app M).hom = inverse.beta.hom.app M.X
+
+/-- The identity comparison on derived objects is the localization of the normalized
+ordinary comparison in the section data.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def SectionComparison.identityDerived (Λ : Profinite.CondensedRing.{u})
+    {S V : Profinite.{u}} {r : V ⟶ S} {s : S ⟶ V}
+    {restriction : ComponentDerivedSquare.Slice Λ r}
+    (c : SectionComparison Λ r s restriction) :
+    restriction.derived Λ ⋙ c.inverse.derived Λ ≅ 𝟭 _ :=
+  (Functor.mapDerivedCategoryCompIso (restriction.modules Λ) (c.inverse.modules Λ)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso c.ordinary ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- The scalar comparison on derived objects is the localization of the absolute-test
+comparison, with the same fixed scalar complex as before restriction.
+Source: HRS Theorem 4.13 (blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+def SectionComparison.scalarDerived (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {S V : Profinite.{u}} {r : V ⟶ S} {s : S ⟶ V}
+    {restriction : ComponentDerivedSquare.Slice Λ r}
+    (c : SectionComparison Λ r s restriction) :
+    CondensedRing.profiniteScalarRealization Λ.X V ⋙ c.inverse.derived Λ ≅
+      CondensedRing.profiniteScalarRealization Λ.X S :=
+  Functor.isoWhiskerLeft (pointRealization Λ)
+    ((Functor.mapDerivedCategoryCompIso
+      (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} V).mapMod Λ.X)
+      (c.inverse.modules Λ)).symm ≪≫ Functor.mapDerivedCategoryNatIso c.scalar)
+
+/-- Witnesses for the more precise component/section assertion. The corners and slice
+pullbacks have their canonical coefficient comparisons, normalized by absolute test objects
+in `ComponentDerivedSquare.Corner` and `ComponentDerivedSquare.Slice`. The equality
+`generic_induced` says that delta is the descent of the restriction of the fixed alpha.
+`sections` expresses pullback of that delta along every splitting, using the natural
+identity and scalar composition comparisons, rather than choosing a new perfect model.
+Source: HRS Theorem 4.13, diagram (4.4) and the following paragraph
+(blueprint: lem-zl-condensed-irreducible-generic-scalar-model). -/
+structure CoverModel (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X U : Scheme.{u}} [IsAffine X] [IsAffine U] (f : U ⟶ X)
+    (Ω : Type u) [Field Ω] (η : Spec (.of Ω) ⟶ X)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)))
+    (P : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ.X)))
+    (α : (CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K ≅
+      (condensedScalarRealization Λ.X (Spec (.of Ω))).obj P) where
+  cornerU : ComponentDerivedSquare.Corner Λ U
+  cornerV : ComponentDerivedSquare.Corner Λ (pullback f η)
+  restriction : ComponentDerivedSquare.Slice Λ (affineComponentMap (pullback.fst f η))
+  square : ComponentDerivedSquare.Square Λ (pullback.fst f η) cornerU cornerV restriction
+  scalarV : ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1}
+      (affineComponentSpace (pullback f η))).mapMod Λ.X ⋙
+      cornerV.modules Λ (pullback f η) ≅ (upperStarFromPoint (pullback f η)).mapMod Λ.X
+  scalarV_underlying : ∀ N, (scalarV.hom.app N).hom = cornerV.beta.hom.app N.X
+  scalarH : (upperStarFromPoint (Spec (.of Ω))).mapMod Λ.X ⋙
+      CondensedRing.upperStar Λ.X (pullback.snd f η) ≅
+    (upperStarFromPoint (pullback f η)).mapMod Λ.X
+  scalarH_underlying : ∀ N, (scalarH.hom.app N).hom =
+    (ComponentDerivedSquare.schemeUnderlying Λ (pullback.snd f η)).hom.app
+        (((upperStarFromPoint (Spec (.of Ω))).mapMod Λ.X).obj N) ≫
+      (upperStarFromPointComp (pullback.snd f η)).hom.app N.X
+  M : CondensedRing.Evaluation.D
+    ((coherentTopology Profinite.{u}).over (affineComponentSpace U))
+    (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace U))
+  dualizable : Nonempty (HasRightDual M)
+  beta : (cornerU.derived Λ U).obj M ≅
+    (CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K
+  delta : (restriction.derived Λ).obj M ≅
+    (CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace (pullback f η))).obj P
+  generic_induced : (cornerV.derived Λ (pullback f η)).mapIso delta ≪≫
+      (cornerScalarComparison Λ (pullback f η) cornerV scalarV).app P =
+    (square.theta Λ).symm.app M ≪≫
+      (CondensedRing.upperStar Λ.X (pullback.fst f η)).mapDerivedCategory.mapIso beta ≪≫
+      genericRestriction Λ f Ω η K ≪≫
+      (CondensedRing.upperStar Λ.X (pullback.snd f η)).mapDerivedCategory.mapIso α ≪≫
+      (schemeScalarComparison Λ (pullback.snd f η) scalarH).app P
+  splitting : ∃ s : affineComponentSpace U ⟶ affineComponentSpace (pullback f η),
+    s ≫ affineComponentMap (pullback.fst f η) = 𝟙 (affineComponentSpace U)
+  sections : ∀ (s : affineComponentSpace U ⟶ affineComponentSpace (pullback f η)),
+    s ≫ affineComponentMap (pullback.fst f η) = 𝟙 (affineComponentSpace U) →
+    ∃ (c : SectionComparison Λ (affineComponentMap (pullback.fst f η)) s restriction)
+      (γ : M ≅ (CondensedRing.profiniteScalarRealization Λ.X (affineComponentSpace U)).obj P),
+      (c.inverse.derived Λ).mapIso delta ≪≫ (c.scalarDerived Λ).app P =
+        (c.identityDerived Λ).app M ≪≫ γ
+  model : (CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K ≅
+    (condensedScalarRealization Λ.X U).obj P
+
+end CondensedGenericScalarModel
+```
+
+The declarations stay in the same namespace. The parent theorem retains its exact signature. The new
+proof-step lemmas state separate necessary inputs, rather than choosing data
+from their unproved existence statements inside definitions.
+
+## Users
+
+| module | group holding it | effect |
+| --- | --- | --- |
+| Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel | K2 | Publicly re-exports all moved declarations and assembles the proof. |
+| Sheaf.AlgebraicGeometry.CondensedGenericScalarModelData | new, K2 | Owns the unchanged data block. |
+| Sheaf.AlgebraicGeometry.CondensedGeometricFieldPerfectModel | new, K2 | States geometric-point existence only. |
+| Sheaf.AlgebraicGeometry.CondensedContractibleCornerLisseLift | new, K2 | States lifting through a normalized contractible corner. |
+| Sheaf.AlgebraicGeometry.CondensedGenericFiberCornerFullyFaithful | new, K2 | States full faithfulness on the generic fibre. |
+| Sheaf.AlgebraicGeometry.CondensedSliceSectionComparison | new, K2 | States normalized comparisons for a profinite section. |
+
+`tools/downstream.py` reports zero downstream modules of the parent and only
+the parent itself as a current user of CoverModel. No existing consumer needs
+adaptation and no target meaning changes. Parents with unfinished proofs may
+still cite the node; it remains attached and its theorem is preserved.
+
+## Status
+
+landed 20261025T101212-L-3670642 2026-10-25 (merge of deliver/K2/Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel)

@@ -1,0 +1,145 @@
+{
+ "id": "lem-pe-internal-principal-cone-hom-reflection",
+ "kind": "statement",
+ "title": "Hom reflection into internal principal cone outputs",
+ "statement": "Fix a prime l, finite extension E/Q_l [def-weil-l-adic-coefficient-extension], and scheme X. Work in the internal integral module category A and its derived category [sk-def-pe-derived-completion]. Let d be an endomorphism of the regular condensed integral module whose action on every continuous function f on every profinite S is pointwise multiplication by the chosen uniformizer pi_E [det-pe-derived-nakayama-resolution]. Put mu_P=scalarOnComplex(d,P). For arbitrary unbounded cochain complexes P,Q in A, precomposition with Q(unit(mu_P)) induces a bijection Hom_D(Q(completion(mu_P)),Q(completion(mu_Q))) -> Hom_D(Q(P),Q(completion(mu_Q))), where completion and unit are the explicit principal mapping cocone constructions [def-pur-principal-cone-tower]. No K-flatness or termwise flatness is assumed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "det-pe-derived-nakayama-resolution",
+  "def-pur-principal-cone-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); sites-cohomology.tex Tag 0941; the singleton case; coefficient regularity and the internal tower are as in sk-def-pe-derived-completion and det-pe-derived-nakayama-resolution."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the pulled-back endomorphism d to an endomorphism of the tensor unit. The section-module equivalence sends its tensor action on a module to multiplication by the compatible section obtained by evaluating the unit endomorphism at one. Prove this on local pure tensors, using tensor naturality and the left-unitor formula. No regularity or identification with a constant uniformizer is needed for this reflection assertion.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the section-module equivalence with direct restriction to the canonical AsSmall model. This is an additive equivalence. Pro-etale repleteness makes countable products exact in internal modules; transport that exactness to the small model. The principalCompletionMap comparison identifies each mapped completion and its actual unit with the completion of the mapped scalar.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-slices",
+    "lem-pur-principal-cone-exact-equivalence",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the small site represent the principal ideal as the image of multiplication by the scalar section. The singleton generating-list theorem applies also to zero or invertible scalars. Apply the ringed Koszul reflector, and compose the principal-cone/Koszul-Roos comparison with the strict Koszul presentation comparison for P and Q. Both comparisons preserve the specified augmentation. The reflector output for Q is complete, so its Hom bijection at P transfers to the two principal cone completions.",
+   "uses": [
+    "lem-pur-unit-power-completeness",
+    "lem-pur-principal-ideal-local-test-criterion",
+    "lem-pur-principal-cone-koszul-roos-comparison",
+    "lem-pur-principal-koszul-roos-presentation-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the precomposition bijection back through the fully faithful derived equivalence. For injectivity, map two morphisms and cancel the comparison isomorphisms. For surjectivity, extend the mapped morphism by the small-site bijection, conjugate by the comparison isomorphisms, and take the full functor preimage. The derived localization factorization identifies the unit square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-principal-cone-exact-equivalence",
+  "sk-def-pe-derived-completion",
+  "lem-pur-unit-power-completeness",
+  "lem-pur-principal-ideal-local-test-criterion",
+  "lem-pur-principal-cone-koszul-roos-comparison",
+  "lem-pur-principal-koszul-roos-presentation-comparison",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, singleton image ideal; sites-cohomology.tex Tag 0941; normalized comparisons and exact section/small-model transport. R4 proves all assembly and scalar-identification steps without adding holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion is a reflection: precomposition with its unit is bijective for maps into a derived complete complex",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.unitCompPartialBijective\", \"AdicCompletion.of_bijective\", \"CategoryTheory.unitCompPartialBijectiveAux_symm_apply\", \"CategoryTheory.unitCompPartialBijective_symm_apply\", \"CategoryTheory.unitCompPartialBijective.congr_simp\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.unitCompPartialBijectiveAux\", \"CochainComplex.IsKInjective.Qh_map_bijective\"], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact internal-module derived principal cone statement. Ordinary adic module completeness and generic mapping-cone definitions do not supply the required normalized derived comparison or Hom bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with the canonical unit of the inverse limit of cones of powers of a scalar is bijective into another such inverse limit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AdicCompletion.of_bijective\", \"AdicCompletion.piEquivFin\", \"AdicCompletion.piEquivOfFintype\", \"AdicCompletion.of_bijective_iff\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"AdicCompletion.piEquivFin_apply\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.congr\"], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact internal-module derived principal cone statement. Ordinary adic module completeness and generic mapping-cone definitions do not supply the required normalized derived comparison or Hom bijection."
+  },
+  {
+   "tool": "grep",
+   "query": "PrincipalCone|principal.*completion|Koszul.*quotient",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"top\": [\"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\"], \"note\": \"\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact internal-module derived principal cone statement. Ordinary adic module completeness and generic mapping-cone definitions do not supply the required normalized derived comparison or Hom bijection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalRoosOutputComplete",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final interpretation via the derived-completion reflector: its output is complete. Hom reflection into internal principal cone outputs.",
+   "via": [
+    "lem-pe-internal-roos-output-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalPrincipalConeHomReflection",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalPrincipalConeHomReflection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicCompletion.internal_principal_cone_hom_reflection",
+  "statement": "theorem internal_principal_cone_hom_reflection\n    (d : End (Mod.regular (DerivedNakayama.integerRing l E)))\n    (hd : ∀ (S : Profinite.{u}ᵒᵖ) (f : (DerivedNakayama.integerRing l E).obj.obj S)\n      (s : S.unop), ((d.hom.hom.app S) f).down s =\n        Padic.coefficientExtensionUniformizer l E * f.down s)\n    (P Q : CochainComplex (Modules l E X) ℤ) :\n    Function.Bijective (fun f :\n      DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion\n        (DerivedNakayama.scalarOnComplex l E X d P)) ⟶\n      DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion\n        (DerivedNakayama.scalarOnComplex l E X d Q)) ↦\n      DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit\n        (DerivedNakayama.scalarOnComplex l E X d P)) ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T144225-L-1210924",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T202949-L-2770812",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

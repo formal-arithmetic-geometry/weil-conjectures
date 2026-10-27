@@ -1,0 +1,362 @@
+{
+ "id": "lem-sfb-geometric-torus-fppf-lift",
+ "kind": "statement",
+ "title": "Fppf local lifting of a geometric split torus",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Group schemes over $S$ have the multiplication, inverse and identity diagrams of [def-sc-group-scheme], with base $S$. Write $\\mathbf G_{m,S}=\\operatorname{Spec}_S\\mathcal O_S[t,t^{-1}]$ with multiplication of units, and let $T=\\mathbf G_{m,S}^r$ for $r\\geq0$. Let $s\\in|S|$, let $\\Omega$ be an algebraic closure [def-weil-algebraic-closure] of the residue field $\\kappa(s)$ [def-weil-residue-field], and let $j_0:\\mathbf G_{m,\\Omega}^r\\hookrightarrow G_\\Omega$ be a closed subgroup immersion [def-weil-closed-immersion]. There exist an affine open neighborhood $U\\subseteq S$ of $s$, an affine scheme $S'$, a flat morphism [def-weil-flat-morphism] $p:S'\\to S$ factoring through $U$ such that $S'\\to U$ is of finite presentation [def-weil-pbc-scheme-conventions] and has finite fibres, a point $s'\\in S'$ above $s$ with a $\\kappa(s)$-embedding $\\kappa(s')\\hookrightarrow\\Omega$, and a closed subgroup immersion $j:\\mathbf G_{m,S'}^r\\hookrightarrow G\\times_S S'$ whose fibre at $s'$, extended along this embedding to $\\Omega$, equals $j_0$ as a homomorphism. Here finite fibres means finitely many points with finite residue-field extensions; in particular $p$ is locally quasi-finite and locally of finite presentation. If $S$ is quasi-separated [def-weil-quasi-separated-morphism], $p$ is moreover quasi-compact and of finite presentation over $S$, hence quasi-finite. No reductivity, connectedness, henselian or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Proposition 3.1.6, printed pp.83-84, and Proposition 3.1.9 proof (1), first paragraph, printed p.86: finite residue extension, fppf neighborhood, etale lifting and splitting. The quasi-finite refinement uses successive monic polynomial lifts of a finite residue extension before the etale neighborhood."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-algebraic-closure",
+  "def-weil-residue-field",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ containing $s$, and write $\\mathfrak p$ for its prime. We work over $U$ and will check the composite to $S$ at the end. The finite intermediate extensions $L/\\kappa(s)$ in $\\Omega$ form a directed union with colimit $\\Omega$. Apply [thm-pd-spreading-out] to the homomorphism $j_0$ between the two finitely presented affine schemes over this limit. Descend its multiplication, inverse and identity equalities at a common stage by the equality clause of that node. By [lem-weil-pbc-descend-closed-immersion], increase the finite field extension once more so the descended homomorphism $i_L:\\mathbf G_{m,L}^r\\to G_L$ is a closed immersion. Its extension to $\\Omega$ is the given map $j_0$, with its original parametrization. The inverse systems and their models are affine, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]; the inverse limit is the spectrum of the field union by the affine spectrum universal property.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.86: descent to a finite residue extension; Stacks Tag 01ZM and Tag 01ZP."
+   }
+  },
+  {
+   "text": "Write $L$ as a finite tower of simple algebraic extensions of $\\kappa(s)$. Starting at $(A,\\mathfrak p)$, suppose a prime $\\mathfrak q_i$ in a finitely presented algebra $B_i$ has the required intermediate residue field. The finitely many coefficients of the next monic minimal polynomial in $\\kappa(\\mathfrak q_i)$ are fractions of elements of $B_i/\\mathfrak q_i$; invert their denominators, none in $\\mathfrak q_i$. Lift the coefficients to this localization and adjoin one root of the monic lift. The map to the next residue field, sending that root to the prescribed generator, has a prime kernel whose residue field is the next field. By [lem-weil-pbc-monic-quotient-free] the monic quotient has a finite power basis, so is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. Localization is flat because tensoring with a localization is localization, and localization preserves kernels (a zero fraction is killed by one denominator) and cokernels. Thus [lem-weil-pbc-flat-ring-map-comp] makes the resulting $A\\to B$ flat. Each localization and monic adjunction is finitely presented, so [lem-weil-pbc-finite-presentation-base-change-composition] makes $B$ finitely presented over $A$. Every fibre is a succession of localizations of finite-dimensional algebras over the residue field, hence has finitely many points with finite residue extensions. At the final prime $\\mathfrak q$, $\\kappa(\\mathfrak q)=L$ with the specified embedding in $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.86, fppf residue extension; explicit monic-tower refinement as in Stacks Tag 07NE."
+   }
+  },
+  {
+   "text": "Let $H=G\\times_U\\operatorname{Spec}B$. Smoothness persists under base change by [lem-pc-proper-base-change](2). Apply [lem-sfb-residue-marked-smooth-group-integer-model] to $H$, the prime $\\mathfrak q$, and $i_L$. Obtain $B_0\\subset B$, $H_0/B_0$, $\\mathfrak q_0=B_0\\cap\\mathfrak q$, and $i_0$ over $k_0=\\kappa(\\mathfrak q_0)$ whose extension to $L$ is exactly $i_L$. Put $R=(B_0)_{\\mathfrak q_0}$. By [lem-weil-pbc-finite-type-z-g-ring], $B_0$ is a G-ring and thus Noetherian. By [lem-weil-pbc-localization-noetherian], $R$ is Noetherian. It is a G-ring as well: every prime localization of $R$ is the corresponding prime localization of $B_0$, so the completion maps in [def-weil-pbc-g-ring] are the same maps. The affine smoothness dictionary is [lem-weil-pbc-smooth-ring-map-iff-smooth-affine].",
+   "uses": [
+    "lem-sfb-residue-marked-smooth-group-integer-model",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 proof, printed p.84, first reduction to a finite-type integer base with the marked fibre retained."
+   }
+  },
+  {
+   "text": "Let $C=\\widehat R$ be the maximal-adic completion. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with residue field $k_0$ by [lem-weil-pbc-local-completion-local-ring], and complete by [lem-weil-pbc-adic-completion-mod-ideal]. Base-change $H_0$ to $C$, retaining smoothness by [lem-pc-proper-base-change](2). Apply [lem-sfb-complete-local-split-torus-hom-lift] to the fixed split torus and the specified closed immersion $i_0$. This gives a closed homomorphism $\\widehat i:\\mathbf G_{m,C}^r\\hookrightarrow(H_0)_C$ reducing to $i_0$, without changing its source identification.",
+   "uses": [
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 proof, printed p.84, application of Corollary B.3.5 to the completed local ring."
+   }
+  },
+  {
+   "text": "Express $C$ as the directed union of its finite-type $R$-subalgebras. By [thm-pd-spreading-out], the map $\\widehat i$ descends to a homomorphism $i_D:\\mathbf G_{m,D}^r\\to(H_0)_D$ over one such algebra $D$: the multiplication, unit and inverse equalities descend at a common later stage. Increase $D$ once more using [lem-weil-pbc-descend-closed-immersion] so that $i_D$ is closed. All schemes here are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs] as required by both cited statements. By [lem-weil-pbc-finite-type-noetherian-finite-presentation], $D$ has a finite presentation $R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$. The images $a_i\\in C$ of its generators solve the finitely many equations $f_j=0$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 proof, printed p.84, finite-type subalgebras of the completion and descent before Artin approximation."
+   }
+  },
+  {
+   "text": "Choose $h\\in B_0\\setminus\\mathfrak q_0$ clearing the finitely many coefficient denominators of the $f_j$, so that they are polynomials over $B_0[1/h]$. This ring is again finite type over $\\mathbf Z$, hence Noetherian and a G-ring by [lem-weil-pbc-finite-type-z-g-ring]; its localization at $\\mathfrak q_0$ is $R$. Apply [lem-trf-artin-approximation-etale-local-map] with $N=1$. Obtain an etale $B_0[1/h]$-algebra $E$, a prime $\\mathfrak e$ above $\\mathfrak q_0$ with residue field $k_0$, and elements $b_i\\in E$ satisfying $f_j(b)=0$ and reducing to the same residues as $a_i$. In $E_{\\mathfrak e}$ all elements of $B_0\\setminus\\mathfrak q_0$ are units; the solution therefore defines an $R$-algebra map $D\\to E_{\\mathfrak e}$. It has exactly the same reduction $D\\to k_0$ as the inclusion $D\\subset C$. Base-changing $i_D$ yields a closed homomorphism over $E_{\\mathfrak e}$ whose special fibre is $i_0$. Closedness here follows directly by tensoring the surjective map of affine coordinate rings. Closed-immersion base change is [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lem-trf-artin-approximation-etale-local-map",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 proof, printed p.84, Theorem 3.1.7 with residue agreement; Stacks Tag 0CAR, N=1."
+   }
+  },
+  {
+   "text": "The localization $E_{\\mathfrak e}$ is the union of the $E[1/b]$ with $b\\notin\\mathfrak e$. Apply [thm-pd-spreading-out] to spread the preceding map, then its group equalities, over one such principal open. Apply [lem-weil-pbc-descend-closed-immersion] to arrange it is a closed immersion there. Denote this affine etale neighborhood of $\\operatorname{Spec}B_0$ by $V$, with distinguished point $v$ and $\\kappa(v)=k_0$. It is etale over $\\operatorname{Spec}B_0$: the principal opens $\\operatorname{Spec}E[1/b]\\subseteq\\operatorname{Spec}E$ and $\\operatorname{Spec}B_0[1/h]\\subseteq\\operatorname{Spec}B_0$ are open immersions, hence etale, and composites of etale morphisms are etale, both by [lem-weil-pbc-etale-composition-cancellation](1),(2). It is finitely presented over $B_0$ by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Form $S'=V\\times_{B_0}\\operatorname{Spec}B$. It is affine and etale over $\\operatorname{Spec}B$ by [lem-weil-pbc-etale-scheme-base-change]. The point $(v,\\mathfrak q)$ in the fibre product has residue field $k_0\\otimes_{k_0}L=L$, with the chosen inclusion in $\\Omega$. Pull back the closed homomorphism on $V$ to get $j$ on $S'$. Tensoring its surjective coordinate map proves closedness; tensoring the group equalities proves it is a homomorphism. At this distinguished point its fibre is $(i_0)_L=i_L$, hence its extension to $\\Omega$ equals $j_0$. Affine qcqs hypotheses follow from [lem-weil-pbc-affine-scheme-qcqs]. Closed-immersion base change is [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 proof, printed p.84, final spreading over an etale neighborhood; then Proposition 3.1.9 proof (1), printed p.86."
+   }
+  },
+  {
+   "text": "The map $S'\\to\\operatorname{Spec}B$ is etale, so flat and locally finitely presented by [def-weil-etale-morphism]; since both schemes are affine it is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Its fibres are finite, with finite residue extensions, by [lem-weil-pbc-etale-ring-map-quasi-finite]. Compose with $\\operatorname{Spec}B\\to U$. Using the affine flatness dictionary [lem-weil-pbc-flat-morphism-affine-criterion], flatness and finite presentation follow from [lem-weil-pbc-flat-ring-map-comp] and [lem-weil-pbc-finite-presentation-base-change-composition]. The fibre over any $u\\in U$ is the union over finitely many points of the $B$-fibre of their finite etale fibres; residue degrees multiply, so it too has finitely many points with finite residue extensions. The composite $p$ with the open immersion $U\\hookrightarrow S$ is flat, since $\\mathcal O_{S,u}=\\mathcal O_{U,u}$ for $u\\in U$ and flatness is a condition on these local rings [def-weil-flat-morphism]. The open immersion is etale [lem-weil-pbc-open-immersion-etale], so lfp, and $p$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. Its fibres are those above, empty off $U$. Now let $S$ be quasi-separated. For an affine open $W\\subseteq S$, [lem-weil-pbc-quasi-separated-affine-cover-criterion](1) makes $W\\cap U$ quasi-compact, hence a finite union of affine opens $D_k\\subseteq U$. Since $S'\\to U$ is of finite presentation, hence quasi-compact [def-weil-finite-type-morphism], each $p^{-1}(D_k)$ is quasi-compact, and so is $p^{-1}(W)$. As $U\\to S$ is a monomorphism, $S'\\times_SS'=S'\\times_US'$ is affine, so the diagonal of $p$ is a morphism of affine schemes and is quasi-compact: $p$ is quasi-separated. By the definition recalled in [def-sbc-locally-finite-presentation], $p$ is of finite presentation over $S$, and with its finite fibres it is quasi-finite. The case $r=0$ gives the identity subgroup.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.86, composition of the residue extension and etale neighborhood; corrected distinction between local finite presentation and finite presentation over a non-quasi-separated base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-residue-marked-smooth-group-integer-model",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sfb-complete-local-split-torus-hom-lift",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-trf-artin-approximation-etale-local-map",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sbc-locally-finite-presentation-composition",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Online Proposition 3.1.6 proof and Corollary B.3.5, with explicit marked integer-model reduction, monic residue-extension tower, and correction for non-quasi-separated bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed split torus in a geometric fibre of a smooth affine group scheme of finite presentation lifts to a split closed torus after a flat finitely presented neighborhood of the base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine inverse-limit descent and formally smooth nilpotent lifting do not extend a torus subgroup across a general base point"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed split torus in a geometric fibre of a smooth affine group scheme of finite presentation lifts to a split closed torus after a flat finitely presented neighborhood of the base point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_of_liftPropAt_of_mem_nhds\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(h : LiftPropAt P g x) (hs : s ∈ 𝓝 x) : LiftPropWithinAt P g s x\", \"doc\": \"If a property $P$ is lifted at a point $x$ via charts (i.e., holds for the induced maps in local coordinates around $x$) and $s$ is a neighborhood of $x$, then $P$ also holds within the neighborhood $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine inverse-limit descent and formally smooth nilpotent lifting do not extend a torus subgroup across a general base point"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine inverse-limit descent and formally smooth nilpotent lifting do not extend a torus subgroup across a general base point"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus|[Dd]iagonalizable|[Mm]ultiplicative[Tt]ype",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine inverse-limit descent and formally smooth nilpotent lifting do not extend a torus subgroup across a general base point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A given geometric fibre torus subgroup extends after an fppf neighborhood of a smooth affine group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] (y : ↥Y),\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine inverse-limit descent and formally smooth nilpotent lifting do not extend a torus subgroup across a general base point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric split torus closed subgroup of a smooth affine group scheme lifts to a flat quasi finite finitely presented neighborhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness and underlying smooth-algebra descent do not lift a closed torus homomorphism with its prescribed geometric parametrization; topological tori and closed subgroups are different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric split torus closed subgroup of a smooth affine group scheme lifts to a flat quasi finite finitely presented neighborhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ULift.sub\", \"module\": \"Mathlib.Algebra.Group.ULift\", \"type\": \"{α : Type u} → [Sub α] → Sub (ULift.{u_1, u} α)\", \"doc\": \"The function maps a subgroup of $\\\\alpha$ to a subgroup of the universe-lifted type $\\\\mathrm{ULift}\\\\ \\\\alpha$ by lifting each element of the subgroup.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"ClosedSubgroup.recOn\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] →\\n      {motive : ClosedSubgroup G → Sort u_1} →\\n        (t : ClosedSubgroup G) →\\n          ((toSubgroup : Subgroup G) →\\n              (isClosed' : IsClosed toSubgroup.carrier) → motive { toSubgroup := toSubgroup, isClosed' := isC\", \"doc\": \"A closed subgroup of a topological group $ G $ is a subgroup $ H $ of $ G $ that is closed in the topology of $ G $, meaning its underlying subset of $ G $ is a closed set in the topological space str\"}\n  {\"name\": \"ClosedSubgroup.ctorIdx\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} → {inst : Group G} → {inst_1 : TopologicalSpace G} → ClosedSubgroup G → ℕ\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness and underlying smooth-algebra descent do not lift a closed torus homomorphism with its prescribed geometric parametrization; topological tori and closed subgroups are different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness and underlying smooth-algebra descent do not lift a closed torus homomorphism with its prescribed geometric parametrization; topological tori and closed subgroups are different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable|multiplicativeType",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"30\", \"text\": \"This theorem applies, e.g., to the map `z ↦ n • z` on the additive circle or a torus.\"}\n  {\"file\": \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"line\": \"88\", \"text\": \"  for some flows on the two-torus (e.g., one can take a constant flow and glue in a few Cherry\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/Real.lean\", \"line\": \"52\", \"text\": \"abbrev UnitAddTorus (d : Type*) := d → UnitAddCircle\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"line\": \"120\", \"text\": \"product space is simultaneously diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"40\", \"text\": \"namespace UnitAddTorus\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"49\", \"text\": \"def mFourier : C(UnitAddTorus d, ℂ) where\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"53\", \"text\": \"variable {n} {x : UnitAddTorus d}\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"88\", \"text\": \"/-- The star subalgebra of `C(UnitAddTorus d, ℂ)` generated by `mFourier n` for `n ∈ ℤᵈ`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"89\", \"text\": \"def mFourierSubalgebra (d : Type*) [Fintype d] : StarSubalgebra ℂ C(UnitAddTorus d, ℂ) where\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"12\", \"text\": \"# Integral over a torus in `ℂⁿ`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"14\", \"text\": \"In this file we define the integral of a function `f : ℂⁿ → E` over a torus\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"16\", \"text\": \"`torusMap (c : ℂⁿ) (R θ : ℝⁿ)` to be the point in `ℂⁿ` given by $z_k=c_k+R_ke^{θ_ki}$,\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"17\", \"text\": \"where $i$ is the imaginary unit, then define `torusIntegral f c R` as the integral over\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"19\", \"text\": \"`torusMap` multiplied by `f (torusMap c R θ)`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness and underlying smooth-algebra descent do not lift a closed torus homomorphism with its prescribed geometric parametrization; topological tori and closed subgroups are different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending an embedding of a multiplicative group into a smooth affine algebraic group from a geometric fibre to a local base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness and underlying smooth-algebra descent do not lift a closed torus homomorphism with its prescribed geometric parametrization; topological tori and closed subgroups are different objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-fibre-openness",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2)); Supporting proof of Proposition 3.1.9: Proposition 3.1.6, printed pp.83-84, and Proposition 3.1.9 proof (1), first paragraph, printed p.86: finite residue extension, fppf neighborhood, etale lifting and splitting. The quasi-finite refinement uses successive monic polynomial lifts of a finite residue extension before the etale neighborhood.",
+   "via": [
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-torus-fppf-lift",
+  "worker": "stage1",
+  "summary": "Read Conrad online, preserving the parametrized map via a marked integer model, complete-local lifting, finite-type subalgebra descent and Artin approximation with residue agreement. One statement-only marked-model prerequisite was isolated; the concurrently landed complete-local lifting theorem is reused; the monic residue-extension tower remains in the proof. STATEMENT-DISPUTED: finite presentation over an arbitrary non-quasi-separated S is false; repaired to a finitely presented neighborhood over an affine U, locally finitely presented over S, and retained finite presentation over S when S is quasi-separated. Explicit counterexample in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2)); Supporting proof of Proposition 3.1.9: Proposition 3.1.6, printed pp.83-84, and Proposition 3.1.9 proof (1), first paragraph, printed p.86: finite residue extension, fppf neighborhood, etale lifting and splitting. The quasi-finite refinement uses successive monic polynomial lifts of a finite residue extension before the etale neighborhood. Steps 1-2 refine the finite residue extension, 3-7 implement Proposition 3.1.6 with the source split torus fixed, and 8 checks the neighborhood properties.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic tool: Descent of finitely presented data at a filtered limit. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic tool: Closed immersions descend to a finite stage of a limit. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool: Proper and smooth morphisms are stable under base change. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-z-g-ring",
+    "why": "Generic tool: Finitely generated Z-algebras are G-rings. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic tool: The completion of a Noetherian ring is Noetherian. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-trf-artin-approximation-etale-local-map",
+    "why": "Generic tool: Artin approximation by an etale local algebra. It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic tool: An etale ring map is quasi-finite at every prime (Stacks 00U5). It supplies only this stated operation or property, with its hypotheses checked in the proof; no node of the current unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-trf-artin-approximation-etale-local-map",
+  "lem-weil-pbc-etale-ring-map-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-3c390ddcf",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-3c390ddcf (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and the new node in full against every cited statement, plus Stacks 0CAR (smoothing.tex 3347-3374) and 01ZM/01ZP/0C0C (limits.tex). The steps are sound: the field descent, the monic tower (it handles inseparable generators), the marked integer model, the complete-local lift (lem-sfb-complete-local-split-torus-hom-lift with f_0=i_0, so the parametrization is kept), spreading out to D, Artin approximation with N=1 and the same residue map, and the étale neighbourhood whose point has residue field k_0⊗L=L. The STATEMENT-DISPUTED change holds: I checked the non-quasi-separated counterexample (eventually-constant-sequence spectrum glued along its open points, rank-2 torus glued by M_n=((1,n),(0,1))). The only citer, reductive-torus-fibre-openness, needs only openness and finite fibres, which remain. New node lem-sfb-residue-marked-smooth-group-integer-model: true (descend the Hopf data, then add the numerators and denominators of the Laurent coefficients, since κ(p) is the directed union of the κ(p_0)); statement-only and strictly smaller than the item; no existing node states it. FIX, 2 citation faults: step 7 used without a node that V→Spec B_0 is étale (open immersions, composites) → cite lem-weil-pbc-etale-composition-cancellation; step 8 applied ring-level composition to the open immersion U⊂S → rewrote with def-weil-flat-morphism, lem-weil-pbc-open-immersion-etale, lem-sbc-locally-finite-presentation-composition, and explicit qc/qs and fp arguments. Batch-5: the fppf-covering base change reached via relative-torus-monomorphism-closed and the trf Artin approximation are generic facts that neither assumption gives and that are not steps of their proofs; accepted. Maintainer note: existing lem-sfb-split-torus-etale-subgroup-lift assumes κ(s) algebraically closed but never uses it; steps 3-7 re-prove it for any residue field (the item cannot cite it). Not a fault.; 1 file(s) fixed by the reviewer"
+ }
+}

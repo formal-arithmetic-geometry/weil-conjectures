@@ -1,0 +1,148 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-a1-integral-finite-pullback-tower",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 (lemma-pullback-module), 03D7 (lemma-adjoint-pullback-pushforward-modules) and 03CZ (lemma-adjointness-tensor-restrict), applied on the sequence site of sites-cohomology.tex, setup preceding Tag 0941 (lemma-derived-limit-is-ok). This is the successor-square refinement in step 1 of lem-trf-ordinary-quotient-pullback-tower-comparison, for the finite quotient system used in proetale.tex Tag 099N(5) (lemma-pushforward-Noetherian-case), not a verbatim Stacks theorem."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "id": "lem-trf-ordinary-quotient-pullback-successor",
+ "title": "Successor compatibility of normalized ordinary pullback levels",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme map $f:X\\to Y$, an ordinary quotient model $M$ [def-trf-completion-unit-models], and a cochain complex $P$ of completed-coefficient module sheaves. Let $T$ be termwise sequence inverse image followed by completed scalar restriction and transposition to towers [def-trf-integral-comparison-sequence-systems] [def-trf-integral-comparison-realization-models]. Suppose isomorphisms $e_n:T(M(P))_n\\xrightarrow{\\sim}B_f(P)_n$ with the defining integral finite pullback tower [def-a1-integral-finite-pullback-tower] send every sequence-unit generator at $(n,U)$ to the finite pullback unit generator of its $M.\\mathrm{evaluation}_n$ image, in every degree $i\\in\\mathbf Z$. Then these isomorphisms intertwine every successor transition: $T(M(P))(n+1\\to n);e_n=e_{n+1};B_f(P)(n+1\\to n)$. The level isomorphisms and their generator equations are given; the conclusion asserts their successor compatibility.",
+ "proof": [
+  {
+   "text": "For a completed-coefficient module A, compose the unit of M.adjunction with each ordinary limit projection to obtain maps a_n:A→Res_n M(A)_n. These form a compatible cone by limit.w. Read their sections as original sequence sections using integralComparisonRestrictedSectionType. Their images through M.evaluation are precisely 1 tensor x by M.unit_tensor. Naturality of the sequence inverse-image unit along a horizontal sequence-site arrow and the sectionwise characterization of coefficientSequenceRestriction show that the pulled-back generators of these cone sections also form a compatible sequence.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each degree conjugate the source successor by e_(n+1) inverse and e_n. Equality of completed-linear maps out of the higher finite pullback can be tested on finite pullback unit generators of 1 tensor x. Indeed, local surjectivity of the completed projection makes these maps finite-linear after restricting the target along finite reduction. The finite pullback adjunction and the scalar-reduction adjunction successively reduce equality to those generators. The existing scalarUnit_tensor normalization from the proved coherent ordinary reconstruction module identifies the latter adjunction unit with 1 tensor x.",
+   "uses": [
+    "def-a1-integral-finite-pullback-tower",
+    "def-weil-integral-reduction-tower",
+    "lem-trf-coherent-quotient-ordinary-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization hypothesis sends the compatible pulled-back cone generators of the first step to the finite pullback generators of 1 tensor x. Thus the conjugated source successor sends the higher such generator to the lower one. The published finite pullback transition does the same by its generator equation and the pure-tensor formula for unrestrictedIntegralTransition, since coefficient reduction preserves 1. The extensionality of the second step identifies the conjugated maps, and cancellation of the level isomorphism proves the original successor square. This is degreewise and uses no boundedness or flatness.",
+   "uses": [
+    "def-a1-integral-finite-pullback-tower",
+    "def-trf-completion-unit-models",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-completion-unit-models",
+  "def-a1-integral-finite-pullback-tower",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-integral-reduction-tower",
+  "lem-trf-coherent-quotient-ordinary-lift"
+ ],
+ "proof_origin": {
+  "by": "F6 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03CZ (pullback and tensor/restriction adjunctions), together with the ordinary compatible inverse-system projections in sites-cohomology.tex preceding Tag 0941. Uses M.unit_tensor to test only compatible limit-unit generators and avoids a separate comparison of ordinary quotient transition constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized adjunction unit comparisons commute with quotient transitions of sheaf module towers",
+   "results": "Generic sheafification and pullback adjunction unit lemmas; no quotient successor comparison.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only; no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Left adjoint uniqueness and unit normalization are available, but do not assert horizontal quotient compatibility.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only; no exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceEvaluation.*pull|pull.*coefficientSequenceEvaluation",
+   "results": "msearch zero matches. Local source search finds private evaluation comparisons and the existing finite transition generator characterization, but no theorem comparing these successors for an arbitrary OrdinaryModel.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only; no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryQuotientPullbackTowerComparison",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting. Genuine substep: Strict ordinary quotient pullback tower comparison. Only the successor-square part of the strict tower assembly.",
+   "via": [
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "lem-trf-primitive-quotient-pullback-model-existence",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientPullbackSuccessor",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientPullbackSuccessor.lean",
+  "declaration": "WeilConjectures.ordinaryQuotientPullback_successor",
+  "statement": "theorem ordinaryQuotientPullback_successor {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (M : CompletionUnit.OrdinaryModel l E Y)\n    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :\n    let T := (integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ) ⋙\n      (coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ) ⋙\n      HomologicalComplex.complexOfFunctorsToFunctorToComplex\n    ∀ (e : ∀ n : ℕ, (T.obj ((M.quotient l E Y).obj P)).obj (op n) ≅\n        ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n)),\n      (∀ (n : ℕ) (i : ℤ) (U : Y.ProEt)\n        (x : (M.tensor.obj (P.X i)).val.obj (op (n, U))),\n        (((e n).hom.f i).val.app (op ((proEtaleBaseChange f).obj U)))\n          (integralComparisonRestrictedSection l E X\n            ((integralComparisonSequencePullback l E f).obj (M.tensor.obj (P.X i))) n\n            (op ((proEtaleBaseChange f).obj U))\n            (integralComparisonSequenceGenerator l E f (M.tensor.obj (P.X i)) n U x)) =\n          integralOperationsPullbackGenerator l E f n\n            ((scalarReductionExtension l E Y n).obj (P.X i)) U\n            (((M.evaluation n).hom.app (P.X i)).val.app (op U)\n              (coefficientEvaluationSection l E Y (M.tensor.obj (P.X i)) n (op U) x))) →\n      ∀ n : ℕ,\n        (T.obj ((M.quotient l E Y).obj P)).map (homOfLE (Nat.le_succ n)).op ≫\n            (e n).hom =\n          (e (n + 1)).hom ≫\n            ((integralOperationsPullbackTowerFunctor l E f).obj P).map\n              (homOfLE (Nat.le_succ n)).op",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T121112-L-2750280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T112340-L-1574188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

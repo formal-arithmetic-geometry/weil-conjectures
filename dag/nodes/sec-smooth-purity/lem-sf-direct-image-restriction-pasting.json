@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-direct-image-restriction-pasting",
+ "kind": "statement",
+ "title": "Compatibility of normalized direct-image squares with successive restriction",
+ "statement": "Fix a scheme map p:X→Y, a normalized DirectData d and n≥0. For every finite-coefficient derived object B at level n, the completed/level-(n+1) comparison at Res_(n,n+1) B, followed by restricted d.comparison_n and the target restriction compositor, equals the completed direct image of the source restriction compositor followed by the completed/level-n comparison at B. This contains neither a completed input object K nor a coefficient reduction morphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6; Stacks Tags 0D6E and 0D6J"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfDirectImageTransitionPresentation",
+  "date": "2026-10-27",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-direct-image-adjacent-presentation",
+   "place": "proof step 3",
+   "via": [
+    "def-weil-derived-direct-image",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-compact-support-proper-image-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfDirectImageTransition|normalized_cube|compactSupportInput_completed_tower",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a composite derived direct image coefficient restriction comparison on K-injective representatives",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.iso_inv_naturality",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-proper-image-tower"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary completed/finite and finite/finite restriction squares preserve sections by their normalizations. Their pastes with the restriction compositors agree on sections. Take a K-injective representative of B and K-injective resolutions of its restrictions. The normalization of d.comparison and the resolution characterization of sfDerivedRestrictionComparison identify the derived pastes with the derived image of that same ordinary paste. Cancel the invertible resolution maps and use naturality to obtain the formula for B, without assuming restriction preserves K-injectives.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-compact-support-proper-image-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-proper-image-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6; Stacks Tags 0D6E and 0D6J"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfDirectImageRestrictionPasting",
+  "file": "lean/Sheaf/Paper/SfDirectImageRestrictionPasting.lean",
+  "declaration": "WeilConjectures.sfDirectImageRestriction_pasting",
+  "statement": "theorem sfDirectImageRestriction_pasting\n    (d : CompactSupportProperImageTower.DirectData l E p) (n : ℕ)\n    (B : normalizedDVRDerived l E X n) :\n    (sfDerivedRestrictionComparison l E p (n + 1)).hom.app\n          ((normalizedDVRRes l E X (Nat.le_succ n)).obj B) ≫\n        (coefficientFiniteDerivedRestriction l E Y (n + 1)).map\n          ((d.comparison n).hom.app B) ≫\n        (compactSupportSystemRestrictionComp l E Y (Nat.le_succ n)).hom.app\n          ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.obj B) =\n      (sfCompletedDerivedDirectImage l E p).map\n          ((compactSupportSystemRestrictionComp l E X (Nat.le_succ n)).hom.app B) ≫\n        (sfDerivedRestrictionComparison l E p n).hom.app B",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T021301-L-2752709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T021301-L-2752709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

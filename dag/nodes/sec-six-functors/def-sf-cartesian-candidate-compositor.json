@@ -1,0 +1,115 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, compactification independence and compatible triangle"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/SixFunctors/CartesianCompactSupportCompositor.lean",
+  "place": "The existing candidateCompositor construction, relocated without changing its signature, attributes or body"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian proper open derived mate computes canonical compact support compositor on etale origin objects",
+   "results": "Eight hits, including Scheme.Modules.restrictAdjunction, IsEtale.instHasOfPostcompPropertyScheme, and Condensed.profiniteSolidCounit; no derived compact-support tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match for either specified comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.IsEquivalence",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*[Cc]ompositor|[Cc]ompositor.*cartesian",
+   "results": "0 hits. Local rg finds the assigned module and its parent; neither supplies the restriction or candidate site square.",
+   "date": "2026-10-27",
+   "verdict": "No existing replacement theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison between etale and proetale derived compact support commutes with composition on a Cartesian proper open tower",
+   "results": "Eight hits: Algebra.Etale.comp, Algebra.FormallyEtale.comp, RingHom.Etale.stableUnderComposition, IsEtale.of_comp, IsEtale.instHasOfPostcompPropertyScheme, Scheme.Modules.restrictFunctorComp_hom_app_app, Scheme.Modules.restrictFunctorComp, IsProper.instCompScheme.",
+   "date": "2026-10-27",
+   "verdict": "No match for the derived site square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CartesianCompactSupportCompositor",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The composition identity in the sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\"; Cartesian compact-support-compositor normalization for that composition clause.",
+   "via": [
+    "lem-sf-cartesian-compact-support-compositor",
+    "lem-sf-projection-compatible-triangle-assembly"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-sf-cartesian-candidate-compositor",
+ "title": "The specified compositor on three compactification candidates",
+ "statement": "For a finite commutative coefficient ring A and quasi-compact morphisms f:X -> Y and g:Y -> Z, let c_f,c_g,c_gf be compactifications of f,g,f g. For an object K of the full bounded-below etale-origin category on X, define candidateCompositor to be the four-factor composite of the c_g image of the comparison c_f to the chosen f candidate, the c_g to chosen g candidate comparison at originCompactSupport f K, the canonical originCompositionAmbient f g, and the comparison from the chosen composite candidate to c_gf. The comparisons and canonical composition are those of [def-sf-origin-candidate-comparison, thm-sf-comp-composition]. This is the existing construction relocated verbatim into a shared module; it selects no new maps.",
+ "proof": [
+  {
+   "text": "Compose the four specified comparison components in their given order. The endpoint compatibilities are the definitions of originCompactSupport and of compact support for the chosen compactification. This is a concrete construction, identical to its earlier declaration in the assigned module.",
+   "uses": [
+    "def-sf-origin-candidate-comparison",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "stmt_deps": [
+  "def-sf-origin-candidate-comparison",
+  "thm-sf-comp-composition"
+ ],
+ "proof_deps": [
+  "def-sf-origin-candidate-comparison",
+  "thm-sf-comp-composition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CartesianCandidateCompositor",
+  "file": "lean/Sheaf/SixFunctors/CartesianCandidateCompositor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly.candidateCompositor",
+  "statement": "def candidateCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    [QuasiCompact f] [QuasiCompact g]\n    (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))\n    (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).FullSubcategory) :\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cg).obj\n        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cf).obj K.obj) ⟶\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cfg).obj K.obj",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f2d5",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T034638-L-3669558",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f2d5",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T034638-L-3669558",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry lemmas + verbatim candidateCompositor move against clone, FiniteSiteTower.paste and alpha defs; sandbox compile incl. importer ProjectionCompatibleTriangleAssembly OK; axioms OK"
+ }
+}

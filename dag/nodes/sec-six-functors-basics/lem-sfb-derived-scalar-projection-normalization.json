@@ -1,0 +1,167 @@
+{
+ "id": "lem-sfb-derived-scalar-projection-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Scalar-mate subargument of direct-image proof paragraph (3): Restriction of the scalar mate is the specified projection arrow",
+   "via": [
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of the scalar mate is the specified projection arrow",
+ "statement": "Let $f:Z\\to T$ be any scheme morphism and $a:A\\to B$ any map of commutative ring sheaves on $T_{\\mathrm{proet}}$. Put $A_Z=f^{-1}A$, $B_Z=f^{-1}B$ and $a_Z=f^{-1}a$. Use the normalized scalar/tensor identifications $e$ and the source/target identifications [lem-sfb-derived-scalar-tensor-identification], the canonical geometric adjunctions and the balanced inverse-mate scalar/pullback comparison $\\lambda$. Let $T_T,T_Z$ denote derived scalar extension and $r_T,r_Z$ restriction. Define $\\beta:T_TRf_{*,A}\\to Rf_{*,B}T_Z$ to be the geometric mate of $\\lambda$. For every pair $t,z$ of the prescribed tensor presentations and every $K\\in D(A_Z)$,\n$$(\\mathrm{targetIso})_K\\circ r_T(\\beta_K)\\circ(\\mathrm{sourceIso})_K^{-1}=\\pi_{K,r_TB},$$\nwhere $\\pi$ is the canonical projection-formula mate [def-weil-pbc-projection-formula-map] and targetIso includes the specified pullback identification of the coefficient. No flatness or boundedness hypothesis is imposed, and no invertibility of $\\pi$ or $\\beta$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the pullback-only tensor normalization at M = Rf_* K. Write e_Z' for e_Z followed by tensoring with the inverse of the fixed coefficient pullback. This identifies b^{-1} followed by restricted lambda and e_Z' with U(e_T) followed by mu.",
+   "uses": [
+    "lem-sfb-derived-scalar-pullback-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  },
+  {
+   "text": "The scalar comparison component followed by extension of the A-geometric counit is q_K. The mateEquiv_counit identity says its B-adjunct is beta_K. Apply proEtaleRingSheafChangeAdjunction to q_K to identify the A-transpose of r_T(beta_K) followed by d with b^{-1} followed by r_Z(q_K). Naturality of e_Z' moves the geometric counit through the tensor identification. Insert the preceding pullback-only identity, cancel U(e_T^{-1}) U(e_T), and recognize mu followed by counit tensor identity as the defining transpose of the projection map. Injectivity of the A-adjunction Hom equivalence yields the asserted equality with sourceIso and targetIso.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-derived-scalar-tensor-identification",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-scalar-pullback-tensor-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-derived-scalar-tensor-identification",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source.; H2 Lean proof via the restriction-adjunction equation and explicit naturality/cancellation, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The geometric adjunction mate of scalar extension and pullback, after scalar restriction, equals the projection formula morphism",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized unbounded derived sheaf-ring comparison; ordinary maps and generic shift infrastructure do not supply its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the derived scalar extension direct image comparison is the projection formula mate",
+   "results": "ModuleCat.restrictCoextendScalarsAdj; ModuleCat.homEquiv_extendScalarsComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match. The project already defines the scalar adjunctions and tensor presentations; this node isolates their remaining compatibility calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(projection|shift)|projection.*scalar|tensor.*(changeOfRings|restrictScalars)",
+   "results": "Broad Mathlib grep returned 25 hits, including Algebra/Algebra/Epi.lean, RingTheory/PicardGroup.lean, RingTheory/Localization/BaseChange.lean and RingTheory/IsTensorProduct.lean. These concern ordinary linear tensor maps. Targeted grep of Mathlib sheaf modules, DerivedCategory and Adjunction found no normalized derived scalar projection/shift comparison. Project and DAG matches are the parent and its constant/condensed specializations; isoLocus supplies only categorical closure.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Blueprint search for scalar projection normalization returned zero nodes; the parent supplies precisely the argument split here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarMateProjectionNormalization",
+  "file": "lean/Sheaf/Paper/DerivedScalarMateProjectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarMate_projection_normalization",
+  "statement": "theorem scalarMate_projection_normalization\n    {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (t : ProEtaleTensorModel T A) (z : ProEtaleTensorModel Z (inverseRing f A)) :\n    (∀ K : DerivedCategory (proEtaleRingModules Z (inverseRing f A)),\n      (sourceIso f a t).inv.app K ≫\n        (restriction a).mapDerivedCategory.map ((beta f a).app K) ≫\n        (targetIso f a z).hom.app K =\n      proEtaleProjectionFormulaMate f A (inverseRing f A) (Iso.refl _) t z K\n        (DerivedCategory.Q.obj (coefficientComplex a)))",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "worker": "stage3",
+  "summary": "Extract a strictly smaller part of the already reviewed scalar-mate plan. No hypothesis is added, no canonical map is changed, and no thickness conclusion is assumed.",
+  "blueprint": "Retain the original small-pro-etale scalar-comparison argument used in the direct-image step (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d53ab",
+  "group": "H6",
+  "result": "fix",
+  "landing": "20261027T050605-L-241597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T054601-L-966644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

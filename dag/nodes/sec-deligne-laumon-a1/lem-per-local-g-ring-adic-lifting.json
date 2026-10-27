@@ -1,0 +1,416 @@
+{
+ "id": "lem-per-local-g-ring-adic-lifting",
+ "kind": "statement",
+ "title": "Local lifting of the G-ring property through an adic quotient",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], where local means that $\\mathfrak m$ is its unique maximal ideal. Let $I\\subseteq\\mathfrak m$ be an ideal and assume that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. If $A/I$ is a G-ring [def-weil-pbc-g-ring], then $A$ is a G-ring. No hypothesis on characteristic, dimension, or universal catenarity is imposed.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 2, equation (5.1), printed p.9; Appendix A, Definition A.1(2), printed p.14, and the G-ring LLP assertion printed p.15, citing Rotthaus [14] (1979). Local case of that semilocal lifting theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-domain generic-fibre criterion to the local ring $A$. Fix an arbitrary finite $A$-algebra domain $B$; its structure map need not be injective. The criterion gives that $B$ is Noetherian semilocal. Put $J=IB$ and $\\mathfrak r=\\operatorname{Jac}(B)$. Finite-module completeness gives $B\\simeq\\varprojlim_nB/J^n$, since $J^n=I^nB$.",
+   "uses": [
+    "lem-per-g-ring-finite-domain-generic-test",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 3, p.176, reduction to finite domain algebras by Lemma 1."
+   }
+  },
+  {
+   "text": "Every maximal ideal of $B$ contracts to $\\mathfrak m$: finite algebras are integral and maximal ideals contract to maximal ideals. Conversely every prime containing $\\mathfrak mB$ is maximal, since $B/\\mathfrak mB$ is integral over the field $A/\\mathfrak m$ and has dimension zero. Thus $J\\subseteq\\mathfrak r=\\sqrt{\\mathfrak mB}$. The radical-power bound gives $\\mathfrak r^t\\subseteq\\mathfrak mB\\subseteq\\mathfrak r$ for some $t$, so the two filtrations are cofinal. Consequently\n$$C:=\\varprojlim_nB/\\mathfrak r^n=\\widehat A\\otimes_A B\\simeq\\prod_{\\mathfrak n\\in\\operatorname{Max}B}\\widehat{B_{\\mathfrak n}}.$$\nHere the finite-extension completion theorem at $\\mathfrak m$ gives the displayed product and tensor identifications. Each factor is a Noetherian local ring with maximal ideal extended from $\\mathfrak n$. Hence $C$ is Noetherian, and $\\mathfrak rC=\\operatorname{Jac}(C)$, so $JC\\subseteq\\operatorname{Jac}(C)$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-weil-pbc-fg-ideal-radical-power",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 1 and conventions p.173; standard finite semilocal completion identifications (Stacks 07N9)."
+   }
+  },
+  {
+   "text": "The algebra $B/J$ is finite over $A/I$, hence of finite type (module generators also generate it as an algebra). Finite-type stability of G-rings makes $B/J$ a G-ring. It is semilocal, so the semilocal G-ring criterion makes it quasi-excellent and therefore Nagata. Apply Nagata lifting to the already verified $J$-complete ring $B$: it is Nagata. Each domain $B_{\\mathfrak n}$ is then local Nagata and has reduced maximal completion. The product description above shows that $C$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-per-semilocal-g-ring-j2",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-per-adic-nagata-lifting",
+    "lem-weil-pbc-nagata-localization",
+    "lem-weil-pbc-local-nagata-domain-analytically-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 1 (Marot), pp.173–174, used in Theorem 3 Claim 1, p.177; existing Nagata-lifting route supplies the needed reducedness."
+   }
+  },
+  {
+   "text": "For every nonmaximal $\\mathfrak Q\\supseteq JC$ put $\\mathfrak p=\\mathfrak Q\\cap B$, $U_{\\mathfrak p}=\\widehat{B_{\\mathfrak p}}$ and $T_{\\mathfrak Q}=\\widehat{C_{\\mathfrak Q}}$. The completed-local comparison theorem applies to $B/J$, giving canonical regular, faithfully flat maps $U_{\\mathfrak p}\\to T_{\\mathfrak Q}$. This asserts regularity only after completing the source $B_{\\mathfrak p}$; no G-ring property of $B$ is used.",
+   "uses": [
+    "lem-per-g-quotient-completed-local-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 4, Corollaries 4.1–4.2, pp.175–176."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\supseteq J$ of $B$, the domain $B/\\mathfrak p$ is a G-ring, being a quotient of $B/J$. As a semilocal G-ring it is Nagata. Its localizations at maximal ideals are Nagata domains, so their maximal completions are reduced. Apply the finite-extension completion product theorem to the finite $A$-algebra $B/\\mathfrak p$. Exactness of completion on finite $A$-modules, and the natural tensor description of completion, identify its $\\mathfrak m$-adic completion with $C/\\mathfrak pC$. Thus $C/\\mathfrak pC$ is reduced, i.e. $\\mathfrak pC$ is radical. This checks the reduced-prime-extension hypothesis needed for primary descent, also for maximal $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-g-ring-quotient",
+    "lem-per-semilocal-g-ring-j2",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-localization",
+    "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 3, Claim 4 and (4.3), pp.178–179: reduced prime extensions needed for the primary decomposition argument."
+   }
+  },
+  {
+   "text": "It suffices to show that every singular prime $\\mathfrak P$ of $C$ contracts to a nonzero ideal of $B$. The singular-ideal patching theorem applies: $B$ is a semilocal Nagata domain, and all the required completed comparisons are regular. It gives a nonzero radical ideal $D\\subseteq C$, with $DT_{\\mathfrak Q}=s(U_{\\mathfrak Q\\cap B})T_{\\mathfrak Q}$ above $J$, where $s(U)$ is the intersection of the singular primes of $U$. It also says every singular $\\mathfrak P$ of $C$ is nonzero.",
+   "uses": [
+    "lem-per-formal-singular-ideal-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 3 construction of D and Claims 1–2, pp.176–177."
+   }
+  },
+  {
+   "text": "Fix such a singular $\\mathfrak P$. If a nonmaximal prime contains $\\mathfrak P+JC$, the patching theorem gives $D\\subseteq\\mathfrak P$; take $E=D$. The compatible ideals for descent are $e_{\\mathfrak p}=s(U_{\\mathfrak p})$, one and the same ideal for all $\\mathfrak Q$ over $\\mathfrak p$. Otherwise take $E=\\mathfrak P$. In this case every nonmaximal $\\mathfrak Q\\supseteq JC$ avoids some element of $\\mathfrak P$, so $ET_{\\mathfrak Q}=T_{\\mathfrak Q}$, and take $e_{\\mathfrak p}=U_{\\mathfrak p}$. In both cases $0\\ne E\\subseteq\\mathfrak P$.",
+   "uses": [
+    "lem-per-formal-singular-ideal-patching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 3, cases 1–2, p.176, and Claim 3, p.178."
+   }
+  },
+  {
+   "text": "Apply compatible-formal-ideal descent to this $E$. Step 4 provides faithful flatness of each completed comparison, step 5 gives radicality of every prime extension above $J$, and step 7 supplies a single compatible ideal for each $\\mathfrak p$. Thus for $a_n=(E+J^nC)\\cap B$ and every $n\\ge1$,\n$$a_nC=E+J^nC,\\qquad a_{n+1}+J^n=a_n.$$\nThe boundary case in step 7 is included: its compatibility condition uses unit ideals and makes no affineness or positive-dimensional-fibre assumption.",
+   "uses": [
+    "lem-per-compatible-formal-ideal-adic-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 3 and Theorem 3 Claim 4, (4.1)–(4.3), pp.175,178–179."
+   }
+  },
+  {
+   "text": "We now give the nonzero-contraction argument of Lemma 2 explicitly. Since $E\\ne0$ and $\\bigcap_r(\\operatorname{Jac}C)^r=0$ by Krull intersection, choose $r\\ge1$ with $E\\not\\subseteq(\\operatorname{Jac}C)^r$. Because $E\\subseteq a_rC$, some $f_r\\in a_r$ has image outside $(\\operatorname{Jac}C)^r$. Recursively choose $f_{n+1}\\in a_{n+1}$ with $f_{n+1}-f_n\\in J^n$, using $a_{n+1}+J^n=a_n$. Then $f_n\\equiv f_r\\pmod{J^r}$ for every $n\\ge r$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 2, pp.174–175, choose a nonzero-compatible residue and lift it successively."
+   }
+  },
+  {
+   "text": "The sequence is $J$-adic Cauchy: for $k\\ge n\\ge r$, $f_k-f_n\\in J^n$. Since $B$ is $J$-complete, its compatible residue classes give $f\\in B$ with $f-f_n\\in J^n$ for every $n\\ge r$. In particular the image of $f$ in $C$ is congruent to that of $f_r$ modulo $J^rC\\subseteq(\\operatorname{Jac}C)^r$. The latter image was nonzero in this quotient, so $f\\ne0$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 2, pp.174–175, convergence and the nonzero residue."
+   }
+  },
+  {
+   "text": "Fix $n\\ge r$. For all $k\\ge n$ the nesting of the $a_k$ gives $f_k\\in a_n$, so the class of $f$ in the finite $B$-module $B/a_n$ belongs to every $J^k(B/a_n)$. Krull intersection, with $J\\subseteq\\operatorname{Jac}(B)$, makes this class zero. Hence $f\\in a_n$ for every $n\\ge r$, and its image in $C/E$ belongs to every $J^n(C/E)$. Krull intersection again, now over $C$ with $JC\\subseteq\\operatorname{Jac}(C)$, gives $f\\in E\\cap B\\subseteq\\mathfrak P\\cap B$. This proves $\\mathfrak P\\cap B\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Lemma 2, conclusion p.175; Theorem 3 conclusion p.179."
+   }
+  },
+  {
+   "text": "Therefore no singular prime of $C$ contracts to $(0)$ in $B$. Every $C_{\\mathfrak P}$ with $\\mathfrak P\\cap B=(0)$ is regular local. Since the finite $A$-algebra domain $B$ was arbitrary, the finite-domain generic-fibre criterion proves that $A$ is a G-ring. Neither a characteristic restriction nor universal catenarity entered any step.",
+   "uses": [
+    "lem-per-g-ring-finite-domain-generic-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+    "place": "Theorem 3, final application of Lemma 1, p.179."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-g-ring-finite-domain-generic-test",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-per-semilocal-g-ring-j2",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-per-adic-nagata-lifting",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+  "lem-per-g-quotient-completed-local-comparison",
+  "lem-weil-pbc-g-ring-quotient",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-per-formal-singular-ideal-patching",
+  "lem-per-compatible-formal-ideal-adic-descent",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus (1979), Lemma 1, Lemmas 2–4, Corollaries 4.1–4.2 and Theorem 3, pp.173–179; read online. Not archived in literature/, archival copy WANTED. Adapted using existing Nagata-lifting nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-g-ring-adic-lifting: A Noetherian local ring complete for an ideal is a G-ring if its quotient by that ideal is a G-ring",
+   "results": "{\"t\": \"2026-10-24T04:27:09Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-local-g-ring-adic-lifting: A Noetherian local ring complete for an ideal is a G-ring if its quotient by that ideal is a G-ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.liftRingHom.congr_simp\", \"IsAdicComplete.StrictMono.liftRingHom.congr_simp\", \"IsAdicComplete.mk_comp_liftRingHom\", \"AdicCompletion.flat_of_isNoetherian\", \"IsAdicComplete.mk_lift\", \"IsAdicComplete.henselianRing\", \"AdicCompletion.liftAlgHom.congr_simp\", \"AdicCompletion.instCommRing\"], \"digest\": \"c9f77abf93dc7b1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-g-ring-adic-lifting: A Noetherian local ring complete for an ideal is a G-ring if its quotient by that ideal is a G-ring",
+   "results": "{\"t\": \"2026-10-24T04:27:16Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-g-ring-adic-lifting: A Noetherian local ring complete for an ideal is a G-ring if its quotient by that ideal is a G-ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsHausdorff.of_isLocalRing\", \"HenselianRing\", \"AdicCompletion.flat_of_isNoetherian\", \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"WittVector.isAdicCompleteIdealSpanP\", \"instCommRingBDeRhamPlus\"], \"digest\": \"7738a77dedc4fc1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-g-ring-adic-lifting: Geometrically regular formal fibres lift from a quotient of an ideal-adically complete local ring",
+   "results": "{\"t\": \"2026-10-24T04:27:17Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-g-ring-adic-lifting: Geometrically regular formal fibres lift from a quotient of an ideal-adically complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.henselianRing\", \"IsAdicComplete.liftRingHom\", \"HenselianLocalRing\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsAdicComplete.of_liftRingHom\", \"Algebra.IsSmoothAt\"], \"digest\": \"ad7068cf63226f9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"G_ring\"",
+   "results": "{\"t\": \"2026-10-24T04:27:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"G_ring\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "G.?ring|Rotthaus|quasi.?excellent",
+   "results": "{\"t\": \"2026-10-24T04:27:09Z\", \"tool\": \"grep\", \"query\": \"G.?ring|Rotthaus|quasi.?excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Gal.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/MulOpposite.lean\", \"Mathlib/Order/RelIso/Basic.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"Mathlib/Algebra/Algebra/Defs.lean\", \"Mathlib/Algebra/Algebra/Defs.lean\", \"Mathlib/Algebra/Field/IsField.lean\"], \"digest\": \"d212734c4f70aaa0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGRing|G[Rr]ing|Rotthaus|geometrically.regular.*formal",
+   "results": "{\"t\": \"2026-10-24T05:11:42Z\", \"tool\": \"grep\", \"query\": \"IsGRing|G[Rr]ing|Rotthaus|geometrically.regular.*formal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\"], \"digest\": \"4067cfcd5346d578\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; none states G-ring lifting. The grep hits RingRing are section names."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically regular formal fibres lift from the quotient of an ideal-adically complete Noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T05:11:42Z\", \"tool\": \"leansearch\", \"query\": \"Geometrically regular formal fibres lift from the quotient of an ideal-adically complete Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.mk_comp_liftRingHom\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.lift\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.mk_liftRingHom\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.mk_liftAlgHom\", \"IsAdicComplete.of_liftRingHom\"], \"digest\": \"c51595c2aaa83983\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; none states G-ring lifting. The grep hits RingRing are section names."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGRing\"",
+   "results": "{\"t\": \"2026-10-24T05:11:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; none states G-ring lifting. The grep hits RingRing are section names."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local ring complete for an ideal I is a G-ring if the quotient by I is a G-ring",
+   "results": "{\"t\": \"2026-10-24T05:11:43Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian local ring complete for an ideal I is a G-ring if the quotient by I is a G-ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsHausdorff.of_isLocalRing\", \"IsLocalRing.finite_quotient_iff\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"IsAdic.isAdicComplete_iff\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"6f9162ef16d12d0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; none states G-ring lifting. The grep hits RingRing are section names."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGRing\"",
+   "results": "{\"t\": \"2026-10-24T05:18:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; none states G-ring lifting. The grep hits RingRing are section names."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-minimal-formal-defect",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179.",
+   "via": [
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-local-g-ring-adic-lifting",
+  "worker": "stage1",
+  "summary": "Kept the statement. Read the original Rotthaus proof, and separated the finite-domain test, completed-local regular comparison, singular-ideal patching and compatible primary descent as four strictly smaller statement-only inputs. Reused the existing finite-extension completion theorem instead of creating a duplicate. Wrote out the boundary case and successive-residue nonzero-contraction argument, and checked positive characteristic, noninjective finite algebra maps, J=0 and unit singular ideals.",
+  "blueprint": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-fg-ideal-radical-power",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-localization",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-quotient",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-completion-exact-finite-modules",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "General commutative algebra used on its exact stated hypotheses in the indicated proof steps. The perverse/Fourier unit has no replacement for this algebra input to the pre-existing quasi-excellence branch."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+  "lem-weil-pbc-g-ring-quotient",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-7b9c7dd7f",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-7b9c7dd7f (reviewer sub-agent of L); spot-checked: PASS with no changes; the full review is in review.md. Rotthaus 1979 and Kurano–Shimomoto are not in literature/, so I checked each new statement by my own proof, not against the source. The item statement is unchanged, it is not in a cycle, and its only citer (lem-per-qe-minimal-formal-defect step 3) uses exactly what it states. All 12 steps check against the cited statements. Step 1: B is finite over the complete ring A, so B is J-complete (finite-module-complete node). Step 2: Max B lies over m, r^t ⊆ mB ⊆ r, and 07N9 gives C = Â⊗B = ∏ (B_n)^ with rC = Jac C. Step 3: B/J is finite type over A/I, hence a G-ring (07PV), quasi-excellent (semilocal-g-ring-j2) and Nagata (07QV); adic-nagata-lifting makes B Nagata, and C is reduced by 032U and 0331. Step 5: B/p is a G-ring and Nagata, and 07N9, 00MA and 00MB identify C/pC with a reduced product, so pC is radical. Step 7 picks E = D or E = P with a single e_p for each p; it is correctly elementary. Steps 9–11 carry the Krull-intersection argument of Rotthaus's Lemma 2; the hypotheses J ⊆ Jac B and JC ⊆ Jac C are both checked. All four new nodes are true. (1) finite-domain-generic-test: forward because finite-type algebras over a G-ring are G-rings; backward through finite subalgebras B ⊆ κ' over R/q, using the allowed noninjective map R → B. (2) completed-local-comparison: the map of completions is flat local and its closed fibre is the completed generic formal fibre of the G-ring B/p, which is geometrically regular; with a complete source this gives a regular map. (3) formal-singular-ideal-patching: C is excellent and reduced, so s(C) ≠ 0, s(C) ⊆ D and s(C)T_Q = s(T_Q) = s(U_p)T_Q; D ⊆ P follows from ascent and descent of regularity. (4) compatible-formal-ideal-adic-descent: proved by taking a minimal point of Supp(F/aĈ), applying Matsumura 23.2 with pC radical, preservation of length and a local-cohomology argument; the single e_p is essential. I also tested the small cases J = 0, V(J) = Max, a transcendental curve (correctly excluded), and unit or zero E. No new node restates the item or one of its clauses (D1/D2). A DAG-wide search for duplicates found none; the nearest candidates (check-pairs-of-primes, 07PT, local-closed-fibre-criterion, qe-rotthaus-finite-boundary) are different statements. Form B1–B9 holds: statements only, unsplit, from/via/same_as filled, four kinds of search recorded, stmt_deps equal to the citations. I accept the tool_uses: they are generic commutative-algebra lemmas from sk-thm-p1 and 07QV (sk-prop-a1-kummer), all declared. WANTED: an archived copy of Rotthaus 1979 and of Kurano–Shimomoto."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalGRingAdicLifting",
+  "declaration": "IsLocalRing.isGRing_of_isAdicComplete_quotient",
+  "file": "lean/Sheaf/RingTheory/LocalGRingAdicLifting.lean",
+  "statement": "theorem isGRing_of_isAdicComplete_quotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (I : Ideal A) (hI : I ≤ maximalIdeal A) [IsAdicComplete I A] (hquot : IsGRing (A ⧸ I)) : IsGRing A",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45a53d01f",
+  "group": "N0",
+  "result": "pass",
+  "note": "Lean signature matches the node clause by clause: CommRing+IsNoetherianRing+IsLocalRing A, I ≤ maximalIdeal A, IsAdicComplete I A (the recorded leaf), hquot : IsGRing (A ⧸ I) → IsGRing A. IsGRing read at side-live GRing.lean:61 (the recorded declaration of def-weil-pbc-g-ring). No extra hypotheses; one arbitrary universe u; lean.statement verbatim; item node differs from live only in lean; docstrings carry the source place, blueprint tag and the 12 proof steps; the only proof is sorry; no new definitions. All 15 imports exist; no duplicate theorem in WeilConjectures/Sheaf (CompleteLocalGRing needs maximal-ideal completeness; GRingCompletionRegular is a different statement); no module or name clash. Edge cases I=0, I=m, fields and every characteristic admitted; zero ring and I=⊤ excluded as in the node. Source PDF not local: judged from the stage-1-accepted node and Rotthaus 1979 (local case of semilocal lifting). Report has Worker report and Second reading by N0 (in-thread, disclosed). No recompile per instruction; no files changed."
+ }
+}

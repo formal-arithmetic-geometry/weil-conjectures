@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-supported-coefficient-braid",
+ "kind": "statement",
+ "title": "Even common-coefficient braid for the two pullbacks",
+ "statement": "Let $A$ be a commutative ring, $f:X\\to Y$ any morphism of schemes, $L\\in D_A(Y)$ with canonical self-symmetry $\\sigma_{L,L}=1$, $B\\in D_A(X)$, $e:B\\simeq f^*L$, and $K\\in D_A(Y)$. Use the ordinary unbounded derived tensor and canonical coordinate comparisons of [def-sf-supported-diagonal-calculus], with the canonical signed symmetry of [lem-kun-tensor-sym]. Put $W=X\\times_YX$, $U=f^*$, $R=p_1^*$, $V=p_2^*$, $Q=UK$ and $M=B\\otimes Q$. Write $\\delta_R$, $\\delta_V$, $\\delta_U$ for the canonical inverse-image tensor isomorphisms, and $\\theta:VU\\simeq RU$ for the canonical square comparison. Define $d:RM\\simeq RB\\otimes VQ$ as $\\delta_R(B,Q)$ followed by $1_{RB}\\otimes\\theta_K^{-1}$; this is coefficientSplit. Define $z:(RB\\otimes VQ)\\otimes VB\\simeq VM\\otimes RB$ as the associator, $1\\otimes\\sigma_{VQ,VB}$, $1\\otimes\\delta_V(B,Q)^{-1}$, then $\\sigma_{RB,VM}$; this is cyclicShuffle. Set $c_B=R(e);\\theta_L^{-1};V(e^{-1})$, the canonical coordinate comparison on $B$. Set $e_K=(e\\otimes1_Q);\\delta_U(L,K)^{-1}$ and $c_M=R(e_K);\\theta_{L\\otimes K}^{-1};V(e_K^{-1})$, the canonical coordinateTwisted comparison on $M$. The generic inverse-image constructions coefficientCoordinate and tensorCoordinate specialize to exactly these maps. Then\n$$ (d\\otimes1_{VB});z=(c_M\\otimes1_{VB});(1_{VM}\\otimes c_B^{-1}). $$\nNo direct image, projection formula, scalar trace, diagonal class, properness, nonzero coefficient, or invertibility of $L$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle: common-coefficient extraction and interchange of the two copies of the even coefficient, before the scalar trace."
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus",
+  "lem-kun-tensor-sym",
+  "lem-sf-supported-coordinate-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Apply coordinateTensor from lem-sf-supported-coordinate-tensor. This gives cM followed by the V tensor comparison as the R tensor comparison followed by cB tensor the common-base comparison on K. The reversed square comparison is inverse to the original one: expand both through their common composite and use proof irrelevance.",
+   "uses": [
+    "lem-sf-supported-coordinate-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Braidedness of f* transports identity self-braiding of L to f*L. Naturality with e transports it to B; braidedness of p2* transports it to VB. Cancellation of the invertible tensor comparisons proves these equalities also for zero objects.",
+   "uses": [
+    "lem-asd-derived-pullback-symmetry",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand d and z. Postcompose both sides with id_VM tensor cB and delta_V(B,Q) tensor id_VB, an isomorphism. Naturality moves the V tensor comparison through the final braiding and cancels it. Naturality moves cB through the remaining braiding and associator. The hexagon expands the resulting braid into the self-braiding of VB, which is identity, and two opposite braidings with VQ, which cancel by symmetry. What remains is the equation from the first step tensored with VB. Cancel the postcomposition.",
+   "uses": [
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit inverse-image tensor calculation of the common coefficient; U4, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal pullback functor transports identity self braiding and its monoidal comparison commutes with a tensor coefficient permutation",
+   "results": "Over.instBraidedPullback and Functor.Braided provide generic braided functor structure; no exact etale common-coefficient identity.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use canonical pullback braidedness and generic coherence in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category, an object whose self braiding is the identity can exchange its two copies around a third tensor factor",
+   "results": "SymmetricCategory.symmetry, braiding tensor hexagon identities; no exact common-coefficient conjugation statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic identities in a direct proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.braiding_tensor_right_hom",
+   "results": "Exact generic hexagon identity, used in even_cyclic_braid; no etale coordinate statement.",
+   "date": "2026-10-27",
+   "verdict": "Generic supporting identity only."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_tensor_right_hom|SymmetricCategory.symmetry",
+   "results": "16 Mathlib hits provide generic symmetry and hexagon calculations. Project searches found no duplicate coefficientSplit/cyclicShuffle identity.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the statement is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedSecondExtraction",
+  "date": "2026-10-27",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The coefficient-braid part of lem-sf-supported-second-extraction; inherited null blueprint ancestor.",
+   "via": [
+    "lem-sf-supported-second-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfSupportedCoefficientBraid",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfSupportedCoefficientBraid.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.coefficientBraid",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SupportedTrace.coefficientBraid"
+  ],
+  "statement": "theorem coefficientBraid {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (hL : (((derivedTensorSymmetry (ModuleCat.{u + 1} A) Y).app L).app L).hom = 𝟙 _)\n    {B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}\n    (e : B ≅ (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj L)\n    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    ((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).mapIso\n        (coefficientSplit (ModuleCat.{u + 1} A) f B K)).app\n          ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f f)).leftDerivedFunctor.obj B) ≪≫\n        cyclicShuffle (ModuleCat.{u + 1} A) (pullback.snd f f)\n          ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f f)).leftDerivedFunctor.obj B) B\n          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K) =\n      ((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).mapIso\n        (tensorCoordinate (ModuleCat.{u + 1} A) f L K e)).app\n          ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f f)).leftDerivedFunctor.obj B) ≪≫\n        ((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).obj\n          ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f f)).leftDerivedFunctor.obj\n            (((derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n              ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)))).mapIso\n                (coefficientCoordinate (ModuleCat.{u + 1} A) f L e).symm",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-27",
+  "note": "The statement uses the explicit generic coordinate constructions imported from SfSupportedCoordinateTensor. They specialize definitionally to the existing supported-diagonal coordinate and coordinateTwisted maps. This keeps the module independent of trace and direct-image data."
+ },
+ "proof_deps": [
+  "lem-sf-supported-coordinate-tensor",
+  "lem-asd-derived-pullback-symmetry",
+  "lem-kun-tensor-sym"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T034752-L-3684687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T034752-L-3684687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

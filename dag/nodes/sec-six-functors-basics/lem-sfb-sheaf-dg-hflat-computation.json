@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-sheaf-dg-hflat-computation",
+ "kind": "statement",
+ "title": "Homotopically flat sheaf dg resolutions compute derived extension",
+ "statement": "Let $X$ be a topological space, $\\mathcal O$ a sheaf of commutative rings, and $\\mathcal A$ a sheaf of associative unital dg $\\mathcal O$-algebras, with left dg modules, homotopies, shifts, localization and ordinary balanced tensor as in [def-sfb-sheaf-dg-module-localization, def-pc-tensor-complex-sheaves]. Work in the universes of [def-weil-size-convention]. A left dg $\\mathcal A$-module $H$ is called homotopically flat over $\\mathcal A$ if $T\\otimes_{\\mathcal A}H$ is acyclic for every acyclic right dg $\\mathcal A$-module $T$. Here a right module has $d(ta)=d(t)a+(-1)^{|t|}t\\,d(a)$, the tensor is the sheafified direct-sum total balanced tensor, and acyclic means all underlying cohomology sheaves vanish. Equivalently, $-\\otimes_{\\mathcal A}H$ preserves quasi-isomorphisms of right dg modules.\n\nEvery possibly unbounded left dg $\\mathcal A$-module $M$ admits a quasi-isomorphism $h:H\\to M$ with $H$ homotopically flat over $\\mathcal A$ and flat as a graded $\\mathcal A$-module (graded flat means that tensoring with it is exact on right graded module sheaves). For any homomorphism $\\mathcal A\\to\\mathcal B$ of sheaf dg $\\mathcal O$-algebras, let $L=\\mathcal B\\otimes_{\\mathcal A}^{\\mathbf L}-$ be the universal left derived extension and $\\varepsilon_H:L(H)\\to\\mathcal B\\otimes_{\\mathcal A}H$ its comparison, which exist by [lem-sfb-ringed-dg-scalar-adjunction]. For every graded-flat homotopically flat $H$, $\\varepsilon_H$ is an isomorphism in $D_X(\\mathcal B)$. These comparison isomorphisms are natural for dg module maps between such $H$. No flatness over $\\mathcal O$ of $\\mathcal A$, $\\mathcal B$ or $M$, and no boundedness, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSH (lemma-resolve), Tag 0FSI (lemma-acyclic-good), Tag 0FSC (lemma-good-admissible-ses), and Tag 0FTF (lemma-derived-tensor-product). Left modules by opposite algebras. The source good resolutions have the stated two flatness properties; the computation for the class defined by these two properties follows by the same cone argument of 0FSI and 0FTF, dropping only the unused universal-base-change property of good modules."
+ },
+ "stmt_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-size-convention",
+  "lem-sfb-ringed-dg-scalar-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal P$ for the graded-flat homotopically flat left modules. First record the cone calculation. For a right-module map $g$, $C(g)\\otimes_{\\mathcal A}H\\cong C(g\\otimes1)$ by the identity on its two summands. For a left-module map $f$, the map $T\\otimes C(f)\\to C(1\\otimes f)$ is $t\\otimes(n,m)\\mapsto(t\\otimes n,(-1)^{|t|}t\\otimes m)$. Substitution in $d(t\\otimes m)=dt\\otimes m+(-1)^{|t|}t\\otimes dm$ verifies both formulas and their inverses. The same signs send homotopies to homotopies. The cone short exact sequence and its cohomology sequence say that a map is a quasi-isomorphism exactly when its cone is acyclic. Consequently the stated acyclic-tensor condition for $H$ implies preservation of all quasi-isomorphisms of right modules. Conversely apply preservation to $T\\to0$ for acyclic $T$. This proves the equivalence in the statement without a flatness hypothesis.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSI (lemma-acyclic-good), cone argument; explicit tensor signs from section-dg-bimodules"
+   }
+  },
+  {
+   "text": "By [lem-sfb-sheaf-dg-good-resolutions], in its left-module form, every left dg $\\mathcal A$-module $M$ admits a quasi-isomorphism $h:H\\to M$ with $H$ good. The first two conditions of goodness for a left module say exactly that $-\\otimes_{\\mathcal A}H$ is exact on graded right module sheaves and that $T\\otimes_{\\mathcal A}H$ is acyclic for every acyclic right dg module $T$. Hence $H\\in\\mathcal P$, which proves the resolution clause of the statement; the base-change condition of goodness is not used. The right-module form of the same node gives, for every right dg module $N$, a quasi-isomorphism $R\\to N$ with $R$ good, so that $R\\otimes_{\\mathcal A}C$ is acyclic for every acyclic left dg module $C$. The conventions of that node (Leibniz rules, sheafified balanced direct-sum total tensor, underlying cohomology sheaves) are those of [def-sfb-sheaf-dg-module-localization] and [def-pc-tensor-complex-sheaves]; the open site of $X$ is small in the universes fixed by the statement.",
+   "uses": [
+    "lem-sfb-sheaf-dg-good-resolutions",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSH (lemma-resolve), with Tags 0FSF (remark-sheaf-graded-sets) and 0FSG (lemma-free-graded-module-good) in its first proof; conditions (1) and (2) of good modules"
+   }
+  },
+  {
+   "text": "An acyclic homotopically flat left module $C$ tensors acyclically with every right dg module $N$. Indeed choose a right resolution $R\\to N$ from step 2, so $R$ is homotopically flat and $E=C(R\\to N)$ is acyclic. The complex $R\\otimes_{\\mathcal A}C$ is acyclic by right homotopical flatness and acyclicity of $C$; $E\\otimes_{\\mathcal A}C$ is acyclic by left homotopical flatness and acyclicity of $E$. The cone identity of step 1 and the cohomology sequence of its degreewise split cone sequence imply $N\\otimes_{\\mathcal A}C$ is acyclic. This is precisely the argument of lemma-acyclic-good; it uses only the two tensor-acyclicity properties, not the stronger requirement of remaining good after all base changes.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-sheaf-dg-good-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSI (lemma-acyclic-good), proof (1), with opposite module sides"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism $f:P\\to P'$ between objects of $\\mathcal P$, its cone $C$ is acyclic by the sheaf dg cone lemma. Its graded module is $P'\\oplus P[1]$, so it is graded-flat. For acyclic right $T$, the cone identity $T\\otimes C\\cong C(T\\otimes f)$ and the cohomology sequence show acyclicity, since both $T\\otimes P$ and $T\\otimes P'$ are acyclic. Thus $C$ is also homotopically flat. Step 3 with $N=\\mathcal B$ gives $\\mathcal B\\otimes_{\\mathcal A}C$ acyclic, and step 1 identifies it with $C(\\mathcal B\\otimes f)$. Therefore ordinary extension followed by localization, $F:K_X(\\mathcal A)\\to D_X(\\mathcal B)$, inverts every quasi-isomorphism between objects of $\\mathcal P$. It is a functor on the homotopy category by the homotopy calculation in step 1.",
+   "uses": [
+    "lem-sfb-sheaf-dg-homotopy-system",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTF (lemma-derived-tensor-product), proof, cone test for preservation"
+   }
+  },
+  {
+   "text": "Apply the existing sheaf dg homotopy-system theorem to the open site of $X$. Its right-module assertion applies to left $\\mathcal A$-modules through the graded opposite algebra $\\mathcal A^{\\rm op}$, with $a^{\\rm op}b^{\\rm op}=(-1)^{|a||b|}(ba)^{\\rm op}$ and $a^{\\rm op}m=(-1)^{|a||m|}ma$; substitution shows that this matches the Leibniz rules, the Koszul-signed shifted action, the graded homotopies and the cones of [def-sfb-sheaf-dg-module-localization]. It gives the triangulated homotopy category and the quasi-isomorphisms $W$ with a right calculus of fractions and two-out-of-three; these are exactly the hypotheses required by the following categorical tools. By steps 2 and 4, $\\mathcal P$ resolves every object and $F$ inverts its $W$-arrows. Apply the resolving-class essential-constancy theorem: the denominator diagram $W/X\\to D_X(\\mathcal B)$ is essentially constant for every $X$, with its identity leg invertible when $X\\in\\mathcal P$. The pointwise-Kan bridge gives a limit of the structured-arrow diagram with this same identity leg as comparison. The pointwise right-Kan theorem then assembles these limits into a universal left derived pair $(L',\\varepsilon')$; in particular $\\varepsilon'_P$ is invertible for all $P\\in\\mathcal P$. This applies to dg modules as a category in its own right, not to ordinary complexes in the abelian category of graded modules.",
+   "uses": [
+    "lem-sfb-sheaf-dg-homotopy-system",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-sfb-pointwise-right-kan-from-limits",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTF (lemma-derived-tensor-product), invoking derived.tex Tag 06XN (lemma-find-existence-computes), dual criterion; expanded with existing general categorical nodes"
+   }
+  },
+  {
+   "text": "The pair $(L,\\varepsilon)$ specified in the statement exists by the scalar-adjunction node. Its universal property and that of $(L',\\varepsilon')$ give unique maps $u:L\\to L'$ and $v:L'\\to L$ satisfying $\\varepsilon'\\circ(uQ)=\\varepsilon$ and $\\varepsilon\\circ(vQ)=\\varepsilon'$. Their composites are identities by the uniqueness clauses of the same two universal properties. Hence $\\varepsilon_P=\\varepsilon'_P u_{QP}$ is an isomorphism for every $P\\in\\mathcal P$. For a dg map $f:P\\to P'$ between such modules, naturality of the specified $\\varepsilon$ is the equation $\\varepsilon_{P'}L(Qf)=Q(\\mathcal B\\otimes f)\\varepsilon_P$. This is exactly the required naturality of the comparison isomorphisms. Throughout, flatness has been used only over the graded algebra $\\mathcal A$, so no flatness over $\\mathcal O$ of either algebra or $M$ has entered.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTF (lemma-derived-tensor-product), comparison with the universal derived extension; uniqueness and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sfb-sheaf-dg-good-resolutions",
+  "lem-sfb-sheaf-dg-homotopy-system",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-sfb-pointwise-right-kan-from-limits",
+  "lem-sfb-ringed-dg-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSH (lemma-resolve), via the existing good-resolution node; Tag 0FSI (lemma-acyclic-good), proof (1); Tag 0FTF (lemma-derived-tensor-product), proof; retaining only graded flatness and homotopical flatness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf differential graded modules admit good K flat resolutions and acyclic good modules tensor acyclically with every module",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf differential graded modules admit good K flat resolutions and acyclic good modules tensor acyclically with every module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.Tor_obj\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.Tor'_obj_obj\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\"], \"digest\": \"055069a2eba81f8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-24T03:39:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"KFlat\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "grep",
+   "query": "good.*[Dd]ifferential|[Dd]ifferential.*graded.*[Ss]heaf|acyclic.*good",
+   "results": "{\"t\": \"2026-10-24T03:39:29Z\", \"tool\": \"grep\", \"query\": \"good.*[Dd]ifferential|[Dd]ifferential.*graded.*[Ss]heaf|acyclic.*good\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good resolutions of sheaf differential graded modules and quasi isomorphism localization",
+   "results": "{\"t\": \"2026-10-24T03:39:29Z\", \"tool\": \"leansearch\", \"query\": \"Good resolutions of sheaf differential graded modules and quasi isomorphism localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HasDerivedCategory.standard\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.Q\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\"], \"digest\": \"ec83508112fce790\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A resolving subcategory of dg sheaf modules consisting of graded flat and homotopically flat modules resolves every unbounded module",
+   "results": "{\"t\": \"2026-10-24T03:39:33Z\", \"tool\": \"leanfinder\", \"query\": \"A resolving subcategory of dg sheaf modules consisting of graded flat and homotopically flat modules resolves every unbounded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.HasInjectiveResolution\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.ProjectiveResolution.of_def\"], \"digest\": \"e217d3884eaba9cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopically flat resolution of a sheaf dg module computes derived tensor with any bimodule",
+   "results": "{\"t\": \"2026-10-24T03:48:59Z\", \"tool\": \"leansearch\", \"query\": \"A homotopically flat resolution of a sheaf dg module computes derived tensor with any bimodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_flat_tensorProduct\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"Module.Flat.iff_rTensor_injectiveₛ\"], \"digest\": \"2230f397a305e946\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf dg derived tensor can be computed on graded flat K flat resolutions with no flatness of the sheaf algebra",
+   "results": "{\"t\": \"2026-10-24T03:49:00Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf dg derived tensor can be computed on graded flat K flat resolutions with no flatness of the sheaf algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor\"], \"digest\": \"7b694bf9708103df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][Ff]lat|[Hh]omotopically[Ff]lat|[Gg]oodResolution",
+   "results": "{\"t\": \"2026-10-24T03:48:59Z\", \"tool\": \"grep\", \"query\": \"[Kk][Ff]lat|[Hh]omotopically[Ff]lat|[Gg]oodResolution\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KProjective and bounded projective resolutions concern ordinary complexes in an abelian category; Module.Flat tensor exactness concerns ordinary modules. None supplies resolving sheaf dg modules or their unbounded derived-tensor comparison. Read Algebra/Homology/HomotopyCategory/KProjective.lean:31-48 and RingTheory/Flat/CategoryTheory.lean (ordinary ModuleCat tensor exactness)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unbounded sheaf dg module has a graded flat homotopically flat resolution computing derived extension of scalars",
+   "results": "{\"t\": \"2026-10-24T04:22:09Z\", \"tool\": \"leanfinder\", \"query\": \"Every unbounded sheaf dg module has a graded flat homotopically flat resolution computing derived extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"Ext\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.projectiveResolutions\"], \"digest\": \"b7e8263f1e0f7af7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary commutative-module tensor exactness, projective resolutions and general derived-category localizations do not give the sheaf dg algebra resolution/comparison statement. Candidate files read as recorded in report.md."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat resolutions of unbounded modules over sheaves of differential graded algebras compute derived tensor",
+   "results": "{\"t\": \"2026-10-24T04:22:09Z\", \"tool\": \"leansearch\", \"query\": \"K flat resolutions of unbounded modules over sheaves of differential graded algebras compute derived tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"ModuleCat.projectiveResolution\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.iff_rTensor_injectiveₛ\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"d506e218fa88c696\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary commutative-module tensor exactness, projective resolutions and general derived-category localizations do not give the sheaf dg algebra resolution/comparison statement. Candidate files read as recorded in report.md."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:22:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"KFlat\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary commutative-module tensor exactness, projective resolutions and general derived-category localizations do not give the sheaf dg algebra resolution/comparison statement. Candidate files read as recorded in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|homotopically.flat",
+   "results": "{\"t\": \"2026-10-24T04:22:10Z\", \"tool\": \"grep\", \"query\": \"KFlat|K.flat|homotopically.flat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary commutative-module tensor exactness, projective resolutions and general derived-category localizations do not give the sheaf dg algebra resolution/comparison statement. Candidate files read as recorded in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension for sheaf dg algebras is computed by graded flat modules preserving acyclic tensor products",
+   "results": "{\"t\": \"2026-10-24T04:22:11Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension for sheaf dg algebras is computed by graded flat modules preserving acyclic tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"Ext\", \"PresheafOfModules.Derivation'\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"PresheafOfModules.Derivation'.Universal.mk\"], \"digest\": \"0b1b1049632896e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary commutative-module tensor exactness, projective resolutions and general derived-category localizations do not give the sheaf dg algebra resolution/comparison statement. Candidate files read as recorded in report.md."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Sheaf dg coefficient realizations and normalized arrows. Third paragraph: D-relative flat bar resolution retaining O_Y action; final paragraph: actual action counit, and E=D specialization. Computational prerequisite: replace a left sheaf dg module by a homotopically flat one before comparing the bar augmentation with ordinary extension.",
+   "via": [
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-hflat-computation",
+  "worker": "stage1",
+  "summary": "Read the Stacks sheaf dg resolution and derived tensor proofs and retained the exact statement. The resolution clause and the right resolutions used in the acyclic-flat tensor argument come from the existing sheaf dg good-resolution node (conditions (1) and (2) of goodness); reused the sheaf dg homotopy-system node. Expanded the acyclic-flat tensor argument for the larger graded-flat homotopically flat class and used existing general fraction/pointwise-Kan nodes without identifying dg modules with ordinary complexes. Reviewer FIX: the inline reconstruction of 0FSH and its free-cell node were replaced by the existing lem-sfb-sheaf-dg-good-resolutions.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite: D-relative flat bar extension retaining the scheme coefficient action. The latest blueprint proof (3) is the direct-image assembly. This is a supporting sheaf dg tensor computation, not a change to its route. The nearest imported blueprint ancestor is null as reported by blueprint_refs.py; the existing from/via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Cohomology sequence for degreewise split cone and cell sequences in underlying module sheaves; a general homological tool."
+   },
+   {
+    "node": "lem-pur-resolving-class-essential-constancy",
+    "why": "General right-fraction resolving-class computation criterion, with no ordinary-complex restriction."
+   },
+   {
+    "node": "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "why": "General category-theoretic bridge from denominator essential constancy to the universal derived comparison."
+   },
+   {
+    "node": "lem-sfb-pointwise-right-kan-from-limits",
+    "why": "General assembly of the pointwise limits into the universal right Kan extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-sfb-pointwise-right-kan-from-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-2b182689d",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-2b182689d (reviewer sub-agent of L); spot-checked: C5 duplicate of an existing node. lem-sfb-sheaf-dg-good-resolutions (NQ) was already on the base. It states that every right or left sheaf dg module has a quasi-isomorphism from a good module (conditions (1) graded-flat, (2) acyclic tensor), that good modules are closed under cones, and the acyclic-good tensor clause. The worker found and reused the sibling homotopy-system node but missed this one. Delivered steps 2-4 rebuild 0FSH inline (free cells, attachment, filtered colimit), and the new node free-graded-flat (0FSG) is used only by them. I read that inline construction against sdga.tex 0FSH l.2969 and 0FSG l.2912 and it is correct: d^2(ae)=0, the kernel class dies via a degree n-1 generator, and the new node holds via T⊗F(S)=⊕(T⊗Z_{S^n})[-n]. So this is a citation repair, not a RETURN. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-sheaf-dg-hflat-computation.json: old steps 2-4 become one step citing good-resolutions (left form for H in P, right form for R->N, base-change condition unused). Old steps 5-8 are renumbered 3-6 with their internal step references updated. The graded-opposite sign check that old step 7 took from old step 4 is now written in that step. proof_deps are recomputed as the union of uses: free-graded-flat and the filtered-colimit tool are removed, good-resolutions is added. The filtered-colimit tool_use is removed. The statement and stmt_deps are unchanged. No other node cites free-graded-flat, so it is dropped. Other checks: step 1 cone signs, including B-linearity for the Koszul-shifted action, are correct. Step 3 (0FSI(1) for the larger graded-flat + homotopically flat class) is correct and still needed, since such a module need not be good. Step 4 needs no O-flatness of B. Step 5 meets the hypotheses of resolving-class-essential-constancy, the Kan bridge and pointwise-right-kan, with the op-transfer of homotopies and shifts checked. Step 6 compares the two universal pairs by uniqueness. No cycle (good-resolutions and homotopy-system are unsplit; scalar-adjunction does not cite the item). No SGA. Edge cases checked: X empty, M=0, A in degree 0, B not flat, unbounded M.; 1 file(s) fixed by the reviewer"
+ }
+}

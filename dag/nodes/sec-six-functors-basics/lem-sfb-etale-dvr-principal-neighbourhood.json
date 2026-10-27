@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-etale-dvr-principal-neighbourhood",
+ "kind": "statement",
+ "title": "A special-fibre point of an etale DVR algebra has a principal DVR neighbourhood",
+ "statement": "Let $R$ be a discrete valuation ring with maximal ideal $\\mathfrak m_R$ [def-sc-discrete-valuation-ring]. Let $B$ be a commutative ring and $\\varphi:R\\to B$ a ring homomorphism such that $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is etale [def-weil-affine-spectrum, def-weil-etale-morphism]. Let $\\mathfrak q\\subset B$ be a prime ideal with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak m_R$. There is an element $b\\in B\\setminus\\mathfrak q$ such that $R\\prime=B[1/b]$ [def-weil-ring-localization-away] is a discrete valuation ring, its unique maximal ideal is $\\mathfrak qB[1/b]$, and the composite $R\\to B\\to R\\prime$ is injective and local (the inverse image of its maximal ideal is $\\mathfrak m_R$). The induced morphism $\\operatorname{Spec}R\\prime\\to\\operatorname{Spec}R$ is etale. No finiteness of $B$ as an $R$-module, excellence, henselianity or completeness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AP2, lemma-Dedekind-etale-extension, applied over the closed point of a DVR; principal-neighbourhood consequence used in models.tex lemma-etale-local-at-worst-nodal, third proof paragraph. The closed-fibre condition excludes field factors."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}B$ and $S=\\operatorname{Spec}R$. First $S$ has exactly the two points $(0)$ and $\\mathfrak m_R$. Indeed, $(0)$ is prime because $R$ is a domain. If a nonzero prime is $(a)$, then $a\\ne0$ and $a$ is not a unit. For any proper ideal $(d)$ containing $(a)$ write $a=de$. Primality gives $d\\in(a)$ or $e\\in(a)$. The first alternative gives $(d)=(a)$; in the second, writing $e=ac$ and cancelling $a$ gives $dc=1$, contradicting properness. Thus every nonzero prime is maximal, and localness makes it $\\mathfrak m_R$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr; elementary consequence of the local PID definition"
+   }
+  },
+  {
+   "text": "For either $s\\in S$, the scheme-theoretic fibre $X_s$ is affine by the affine fibre-product theorem, and therefore quasi-compact. The etale-fibre theorem says its underlying space is discrete. Covering this space by its open singletons and taking a finite subcover shows that $|X_s|$ is finite. The first fibre projection identifies $|X_s|$ with the set-theoretic fibre in $X$. Since $S$ has just two points, $|X|$, equivalently the set of prime ideals of $B$, is finite. This proves the quasi-local finiteness needed for the principal-neighbourhood argument without assuming $B$ finite as an $R$-module.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, third proof paragraph; finiteness expanded with Morphisms Tag 02GL and Algebra Tag 00E8"
+   }
+  },
+  {
+   "text": "Let $T$ be the finite set of prime ideals $\\mathfrak p\\subset B$ not contained in $\\mathfrak q$. For each $\\mathfrak p\\in T$ choose $c_{\\mathfrak p}\\in\\mathfrak p\\setminus\\mathfrak q$, and set $b=\\prod_{\\mathfrak p\\in T}c_{\\mathfrak p}$, with empty product $1$. Primality of $\\mathfrak q$ gives $b\\notin\\mathfrak q$. Every prime in $T$ contains $b$, while no prime contained in $\\mathfrak q$ contains $b$. Consequently the primes not containing $b$ are exactly the primes contained in $\\mathfrak q$. This is the explicit finite prime-avoidance calculation used to shrink around the chosen point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, third proof paragraph: standard open obtained by prime avoidance"
+   }
+  },
+  {
+   "text": "Set $C=B[1/b]$ and $\\lambda:B\\to C$. Apply the localization prime correspondence to the powers of $b$. The ideal $\\mathfrak qC$ is prime and contracts to $\\mathfrak q$; every prime of $C$ is $\\mathfrak pC$ for a prime $\\mathfrak p\\subseteq\\mathfrak q$, so it is contained in $\\mathfrak qC$. Every proper ideal of $C$ is contained in a maximal ideal. Applying this first to $\\mathfrak qC$ shows it is maximal; applying the containment just proved to any maximal ideal shows that it equals $\\mathfrak qC$. Thus $C$ is local with unique maximal ideal $\\mathfrak qC$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, and Tag 00E0, lemma-Zariski-topology (2) and proof of (8)"
+   }
+  },
+  {
+   "text": "The canonical homomorphism $\\alpha:C\\to B_{\\mathfrak q}$ sends $x/b^n$ to the same fraction. For $s\\notin\\mathfrak q$, contraction of $\\mathfrak qC$ implies $\\lambda(s)\\notin\\mathfrak qC$, so the local unit criterion makes $\\lambda(s)$ invertible. Hence each fraction $r/s$ in $B_{\\mathfrak q}$ is the image of $\\lambda(r)\\lambda(s)^{-1}$: $\\alpha$ is surjective. If $\\alpha(x/b^n)=0$, the definition of prime localization supplies $s\\notin\\mathfrak q$ with $sx=0$ in $B$. Multiplication by the unit $\\lambda(s)$ then shows $x/b^n=0$ in $C$, proving injectivity. The fraction formulas make $\\alpha$ a $B$-algebra isomorphism. An element $x/b^n$ belongs to $\\mathfrak qC$ exactly when $x\\in\\mathfrak q$, so $\\alpha$ carries this ideal onto $\\mathfrak qB_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO, definition-localization, and 00E3, lemma-spec-localization; explicit fraction calculation"
+   }
+  },
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$. The point $\\mathfrak q\\in X$ maps to the closed point $\\mathfrak m_R$ by hypothesis. The etale trait stalk theorem therefore applies to the actual stalk $A=\\mathcal O_{X,\\mathfrak q}$: $A$ is a DVR and the canonical map $R\\to A$ is injective. The affine stalk localization theorem identifies $B_{\\mathfrak q}\\cong A$ by $r/s\\mapsto r_{\\mathfrak q}s_{\\mathfrak q}^{-1}$, so this identification respects the structural map from $R$. Composing it with $\\alpha$ gives an $R$-algebra isomorphism $C\\cong A$. Thus $C$ is a DVR and $R\\to C$ is injective. Finally $\\lambda^{-1}(\\mathfrak qC)=\\mathfrak q$, so the inverse image of the unique maximal ideal of $C$ under $R\\to C$ is $\\varphi^{-1}(\\mathfrak q)=\\mathfrak m_R$: the map is local.",
+   "uses": [
+    "lem-sbc-etale-trait-stalk",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP2, lemma-Dedekind-etale-extension, at a prime over the closed point; Schemes Tag 01HV, lemma-spec-sheaves (6)"
+   }
+  },
+  {
+   "text": "The principal-localization open-immersion theorem identifies the morphism $\\operatorname{Spec}C\\to X$ induced by $B\\to C$ as an open immersion with image $D(b)$. Open immersions are etale, and composites of etale morphisms are etale. Composing with the given $X\\to S$ proves that the morphism induced by $R\\to C$ is etale. Taking $R\\prime=C$ now gives all the required clauses, with $b\\notin\\mathfrak q$ supplied by step 3.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, shrinking V to D(f); Schemes Tag 01I3; Morphisms Tags 02GP and 02GN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "lem-sbc-etale-trait-stalk",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, third proof paragraph; explicit finite-spectrum prime-avoidance expansion, using the existing etale trait stalk theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Etale.*IsDiscreteValuationRing|IsDiscreteValuationRing.*Etale|etale.*dedekind|dedekind.*etale",
+   "results": "{\"t\": \"2026-10-22T05:15:59Z\", \"tool\": \"grep\", \"query\": \"Etale.*IsDiscreteValuationRing|IsDiscreteValuationRing.*Etale|etale.*dedekind|dedekind.*etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special fibre point of an etale algebra over a DVR has an affine open neighbourhood which is the spectrum of a DVR",
+   "results": "{\"t\": \"2026-10-22T05:16:00Z\", \"tool\": \"leansearch\", \"query\": \"A special fibre point of an etale algebra over a DVR has an affine open neighbourhood which is the spectrum of a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.Etale.casesOn\", \"Algebra.IsEtaleAt\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"79d6fae5e93a2266\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T05:16:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale scheme over a discrete valuation ring has a principal open neighbourhood of any special fibre point whose ring is a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:16:01Z\", \"tool\": \"leanfinder\", \"query\": \"An affine etale scheme over a discrete valuation ring has a principal open neighbourhood of any special fibre point whose ring is a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"10a0288ee26d9c33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscreteValuationRing|is_dvr_at_nonzero_prime",
+   "results": "{\"t\": \"2026-10-22T05:16:13Z\", \"tool\": \"grep\", \"query\": \"isDiscreteValuationRing|is_dvr_at_nonzero_prime\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\"], \"digest\": \"d988ba5f9708a282\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebra B over a local Dedekind domain R, every prime above the maximal ideal is isolated by a localization B[1/g] which is a local discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:16:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale algebra B over a local Dedekind domain R, every prime above the maximal ideal is isolated by a localization B[1/g] which is a local discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"RingHom.Etale.ofLocalizationSpan\", \"IsLocalRing.primesOver_eq\", \"IsLocalRing.primesOverFinset_eq\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.exists_etale_of_isEtaleAt\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\"], \"digest\": \"8538d4fafec24545\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give localization of an already Dedekind domain at a prime, or spreading the etale locus; they do not give a principal open which is a DVR in an arbitrary etale algebra over a DVR."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|isDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T05:36:23Z\", \"tool\": \"grep\", \"query\": \"IsDiscreteValuationRing|isDiscreteValuationRing\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over a discrete valuation ring has a principal open neighbourhood of each point over the maximal ideal which is itself a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:36:23Z\", \"tool\": \"leansearch\", \"query\": \"An etale algebra over a discrete valuation ring has a principal open neighbourhood of each point over the maximal ideal which is itself a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.recOn\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.etaleLocus\", \"IsDiscreteValuationRing.toIsLocalRing\"], \"digest\": \"3dc30737864f4dfb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T05:36:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscreteValuationRing_of_dedekind_domain|is_dvr_at_nonzero_prime",
+   "results": "{\"t\": \"2026-10-22T05:36:32Z\", \"tool\": \"grep\", \"query\": \"isDiscreteValuationRing_of_dedekind_domain|is_dvr_at_nonzero_prime\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\"], \"digest\": \"1473d176eac6d2cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra over a discrete valuation ring has a principal open neighbourhood of each point over the maximal ideal which is itself a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T05:36:33Z\", \"tool\": \"leanfinder\", \"query\": \"An etale algebra over a discrete valuation ring has a principal open neighbourhood of each point over the maximal ideal which is itself a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus\", \"RingHom.Etale.ofLocalizationSpan\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"19545b73d4b98bdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite etale algebra over a trait is locally a trait at every point of its closed fibre, with the local ring realized by inverting a single element",
+   "results": "{\"t\": \"2026-10-22T05:36:43Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi finite etale algebra over a trait is locally a trait at every point of its closed fibre, with the local ring realized by inverting a single element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\"], \"digest\": \"4f76536ba6218ca0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected etale-locus and principal-localization hits, and DedekindDomain/Dvr.lean:128-137; none constructs a principal open which is a DVR from an arbitrary etale DVR algebra. The Dedekind result only concerns an already specified prime localization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-etale-local-form",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. special-fibre normal forms. In the nodal-chart proof, shrink the etale base around the image of the chosen special-fibre point to an affine DVR.",
+   "via": [
+    "lem-sfb-dvr-nodal-etale-local-form",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-etale-dvr-principal-neighbourhood",
+  "worker": "stage1",
+  "summary": "Expanded the principal-neighbourhood argument: two affine discrete etale fibres give a finite spectrum; an explicit product removes all primes not below the chosen prime; localization becomes the actual DVR stalk. Reused existing DAG statements throughout, with no new nodes. Checked all clauses, localization structural maps, and generic-only field factors.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), common-nodal-model / persistent-node-normalization / lem-sfb-dvr-nodal-etale-local-form: justify shrinking the etale affine base to a DVR at the chosen special-fibre image. The ancestor command returns None, retained as JSON null.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-trait-stalk",
+    "why": "Supplies the actual DVR stalk and injective structural map at a special-fibre point; no node of this unit supplies this local algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Supplies extension/contraction of prime ideals under localization; this is a generic commutative algebra tool, not a replacement of the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-etale-trait-stalk",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-30c79ce3b",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-30c79ce3b (reviewer sub-agent of L); spot-checked: Q81 lem-sfb-etale-dvr-principal-neighbourhood 30c79ce3: no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to live, where the item is still unsplit; not superseded, not on the drop list. Statement checked against Models 0CDD (models.tex ~l.5945-5958: shrink to a standard open D(f) by prime avoidance using 0AP2) and More on Algebra 0AP2. The closed-fibre hypothesis is needed: R[1/pi]=Frac R is a counterexample without it, and the report's 0AP2 field-exception remark is correct. Steps: (1) the two primes of a DVR, a correct elementary cancellation argument. (2) Spec B is finite: fibres are affine (01I4 node), quasi-compact and discrete (etale-fibre node), and def-pc-scheme-fibre gives the homeomorphism onto f^-1(s). (3) Explicit product b of c_p in p minus q over the finitely many p not in q, so D(b) = {p in q}; correct. (4) C=B[1/b] is local with maximal ideal qC, by clause (1) of the localization prime correspondence and maximal-ideal existence. (5) C is isomorphic to B_q by an elementary fraction and unit-criterion calculation. (6) lem-sbc-etale-trait-stalk at q over m_R, plus affine-open-stalk-localization (c), gives a DVR with R->C injective; localness from phi^-1(q)=m_R. (7) Open immersion plus etale composition. Edge cases tested: B=R, R x Frac R, Z_(5)[i] (two closed primes), B=0. No cycle (closure checked). No duplicate in the DAG: trait-stalk and trait-section-lift differ. Mathlib searches recorded in all three kinds; no SGA cited. tool_uses: lem-sbc-etale-trait-stalk (off route, generic local-algebra black box) accepted. The localization-prime declaration is on route via sk-thm-p1, so it is redundant but harmless. Minor implicit point, accepted: delta(r)=phi(r)_q in step 6 is the meaning of Spec phi."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDvrPrincipalNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_etale_dvr_principal_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDvrPrincipalNeighbourhood.lean",
+  "statement": "theorem exists_etale_dvr_principal_neighbourhood (R B : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [CommRing B] (φ : R →+* B) [Etale (Spec.map (CommRingCat.ofHom φ))] (q : Ideal B) [q.IsPrime] (hq : q.comap φ = IsLocalRing.maximalIdeal R) : ∃ (b : B), b ∉ q ∧ ∃ (_ : IsDomain (Localization.Away b)) (_ : IsDiscreteValuationRing (Localization.Away b)), IsLocalRing.maximalIdeal (Localization.Away b) = q.map (algebraMap B (Localization.Away b)) ∧ Function.Injective ((algebraMap B (Localization.Away b)).comp φ) ∧ (IsLocalRing.maximalIdeal (Localization.Away b)).comap ((algebraMap B (Localization.Away b)).comp φ) = IsLocalRing.maximalIdeal R ∧ Etale (Spec.map (CommRingCat.ofHom ((algebraMap B (Localization.Away b)).comp φ)))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-444425cdb",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Single sorry theorem; only the item's lean field changed (live null). H3: every clause (DVR R, arbitrary CommRing B, actual φ, Etale Spec.map φ, prime q with q.comap φ = m_R; ∃ b ∉ q, IsDomain+DVR Prop witnesses on Localization.Away b, maximalIdeal = q.map, injectivity, contraction = m_R and étaleness of the same composite) matches the node exactly; no extra assumptions; shared universe u is required by Spec.map. Statement true (finite spectrum + prime avoidance + normality); edge cases B=R, R×R, R×FracR, FracR (excluded by hq), B=0, empty product. Stmt_deps records correct (DVR mathlib, Spec, Etale, Localization.Away). lean.statement verbatim (script check). Docstrings have source places 0AP2/0CDD and blueprint tag; proof docstring follows the 7 node steps. No duplicate in Sheaf/WeilConjectures (etale_trait_stalk is a stalk). Proof imports exist. No compile (no change); relied on the worker's clean scompile. Source .tex not readable locally; statement unchanged from the stage-1 L review against 0CDD/0AP2."
+ }
+}

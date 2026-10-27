@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-purely-inseparable-curve-frobenius",
+ "kind": "statement",
+ "title": "Purely inseparable smooth proper curve maps are relative Frobenius",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$ [def-weil-field], [def-weil-algebraic-closure], [def-pc-field-characteristic]. Let $X,Y$ be smooth proper integral $k$-curves of dimension one [def-sc-curves], [def-pc-integral-scheme], and let $f:X\\to Y$ be a nonconstant $k$-morphism, where nonconstant means not factoring through a $k$-rational point of $Y$. Assume that the induced extension $k(X)/f^*k(Y)$ of function fields is finite purely inseparable [def-sc-function-field], [def-pc-field-extension], [def-pc-field-tower]. Then there are a unique integer $n\\geq0$ and a unique $k$-isomorphism $h:X^{(p^n)}\\xrightarrow{\\sim}Y$ such that $f=h\\circ F_{X/k,n}$. Here\n$$X^{(p^n)}=X\\times_{\\operatorname{Spec}k,\\operatorname{Spec}(\\varphi_n)}\\operatorname{Spec}k,\\qquad \\varphi_n(a)=a^{p^n},$$\nwith structure morphism the second projection [def-pc-base-change]. The relative Frobenius $F_{X/k,n}:X\\to X^{(p^n)}$ is the morphism defined by the pair consisting of the $n$-fold absolute Frobenius on $X$ and its structure morphism to $\\operatorname{Spec}k$. Absolute Frobenius [def-weil-absolute-frobenius-scheme] is the identity on points and raises local sections to their $p$th powers; for $n=0$ the canonical identification $X^{(1)}\\cong X$ makes $F_{X/k,0}$ the identity.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCZ (curves-lemma-purely-inseparable-smooth), restricted to algebraically closed k and smooth target; the n-fold relative Frobenius is varieties.tex Tag 0CCG (varieties-remark-n-fold-relative-frobenius), including n=0 by the identity convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-characteristic",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-base-change",
+  "def-weil-absolute-frobenius-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=k(X)$ and $E=f^*k(Y)\\subseteq L$. By [lem-sfb-proper-curve-function-field-morphisms], these are finitely generated fields of transcendence degree one over $k$, with the given compatible $k$-inclusions. Apply [lem-sfb-one-variable-purely-inseparable-subfield] to the assumed finite purely inseparable extension $L/E$. Obtain $r\\geq0$ with $[L:E]=p^r$ and $E=L^{p^r}$.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-one-variable-purely-inseparable-subfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CCX (lemma-purely-inseparable) and 0CCY (lemma-inseparable-deg-p-smooth), field-theoretic content of their proofs, specialized to algebraically closed k: degree-p tower and equality with the power subfield."
+   }
+  },
+  {
+   "text": "Put $T=X^{(p^r)}$ and $F=F_{X/k,r}$. By [lem-sfb-smooth-curve-relative-frobenius-degree], $T$ is a smooth proper integral dimension-one curve and $F$ is nonconstant. By [lem-sfb-relative-frobenius-function-field-image], $F^*k(T)=L^{p^r}=E=f^*k(Y)$. Thus $\\theta=(F^*)^{-1}\\circ f^*:k(Y)\\xrightarrow{\\sim}k(T)$ is a $k$-isomorphism, where the inverse is taken on the common image.",
+   "uses": [
+    "lem-sfb-smooth-curve-relative-frobenius-degree",
+    "lem-sfb-relative-frobenius-function-field-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), defining projection formula, and curves.tex Tag 0CCY (lemma-inseparable-deg-p-smooth), identification of the Frobenius image field with kK^p; over algebraically closed k use the affine power calculation, for all n including n=0."
+   }
+  },
+  {
+   "text": "By [lem-sfb-proper-curve-function-field-morphisms], $\\theta$ and $\\theta^{-1}$ induce nonconstant $k$-morphisms $h:T\\to Y$ and $h^{\\prime}:Y\\to T$. Their composites induce the identity field maps, so injectivity of that correspondence gives $h^{\\prime}h=\\operatorname{id}_T$ and $hh^{\\prime}=\\operatorname{id}_Y$. Finally $(h\\circ F)^*=F^*\\theta=f^*$, and the same injectivity gives $f=h\\circ F$. This also covers $r=0$, with the canonical identity-base-change identification.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCY (curves-lemma-inseparable-deg-p-smooth), passage from equal function subfields to a unique curve isomorphism by Tag 0BY1; iterated in Tag 0CCZ."
+   }
+  },
+  {
+   "text": "If $f=g\\circ F_{X/k,m}$ for a $k$-isomorphism $g:X^{(p^m)}\\to Y$ and an integer $m\\geq0$, then [lem-sfb-proper-curve-function-field-morphisms] says $g^*$ is an isomorphism and $f^*=F_{X/k,m}^*g^*$. Consequently [lem-sfb-smooth-curve-relative-frobenius-degree] gives $p^r=[L:E]=p^m$. Since $p\\geq2$, the sequence $p^n$ is strictly increasing, so $m=r$. With this exponent fixed, $F^*h^*=f^*=F^*g^*$ and injectivity of the field embedding $F^*$ give $h^*=g^*$. Injectivity in [lem-sfb-proper-curve-function-field-morphisms] now gives $h=g$.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-smooth-curve-relative-frobenius-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCZ (curves-lemma-purely-inseparable-smooth), uniqueness of exponent and isomorphism; degree of relative Frobenius from varieties.tex Tags 0CCF and 0CCG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-curve-function-field-morphisms",
+  "lem-sfb-one-variable-purely-inseparable-subfield",
+  "lem-sfb-smooth-curve-relative-frobenius-degree",
+  "lem-sfb-relative-frobenius-function-field-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CCZ, 0CCX and 0CCY: degree-p tower and equality of index-p subfields, specialized to algebraically closed k using pth powers instead of differentials; varieties.tex Tags 0CCF and 0CCG for Frobenius degree and iteration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A purely inseparable morphism of smooth proper curves in positive characteristic is an iterated relative Frobenius up to unique isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      [inst : Field K] →\\n        [inst_1 : Field L] →\\n          [inst_2 : Algebra K L] →\\n            [inst_3 : IsPurelyInseparable.HasExponent K L] →\\n              (p : ℕ) →\\n                [ExpChar K p] →\\n                  [inst_5 : Field F] \", \"doc\": \"Given a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, this defines the scalar-linear map $ L \\\\to K $ obtained by raising elements to the $ p\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"(K : Type u_2) →\\n  (L : Type u_3) →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] →\\n          [inst_3 : IsPurelyInseparable.HasExponent K L] →\\n            (p : ℕ) → [ExpChar K p] → {n : ℕ} → IsPurelyInseparable.exponent K L ≤ n → L →+* K\", \"doc\": \"Given a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, this function defines the ring homomorphism $ L \\\\to K $ obtained by raising elements t\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, the $ n $-th iterate of the Frobenius endomorphism applied to the image of an element $ \"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, applying the $ n $-th iterate of the Frobenius endomorphism to the image of an element $\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, and for any element $ a \\\\in L $, the image of the $ n $-th iterate of the Frobenius endo\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (K : Type u_2) {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] {n : ℕ}\\n  (hn : IsPurelyInseparable.exponent K L ≤ n) (a : L),\\n  (algebraMap K L) ((IsPurelyInseparable.iterateFrobenius K L p hn\", \"doc\": \"For a purely inseparable field extension $L/K$ with exponential characteristic $p$ and exponent $\\\\leq n$, the canonical algebra homomorphism from $K$ to $L$ applied to the iterated Frobenius homomorph\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ {K : Type u_2} (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] {n : ℕ}\\n  (hn : IsPurelyInseparable.exponent K L ≤ n) (a : K),\\n  (IsPurelyInseparable.iterateFrobenius K L p hn) ((algebraMap K L\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, and for any element $ a \\\\in K $, the iterated Frobenius homomorphism $ \\\\operatorname{Fro\"}\n  {\"name\": \"instUniqueAlgHomOfIsPurelyInseparable\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          [IsPurelyInseparable F E] →\\n            (L : Type w) →\\n              [inst_4 : CommRing L] →\\n                [IsReduced L] →\\n                  [inst_6 : Algebra F L] → [inst_7\", \"doc\": \"If $ E $ is a purely inseparable field extension of $ F $, and $ L $ is a commutative reduced $ F $-algebra equipped with compatible $ E $-algebra and scalar tower structures, then the type of $ F $-a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Frobenius maps, semilinear maps, elliptic-curve and isocrystal facts do not identify a purely inseparable map of arbitrary smooth proper curves with relative Frobenius"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: field Frobenius maps, semilinear maps, elliptic-curve and isocrystal facts do not identify a purely inseparable map of arbitrary smooth proper curves with relative Frobenius"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|purelyInseparable).*(curve|twist)|curve.*(frobenius|purelyInseparable)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: field Frobenius maps, semilinear maps, elliptic-curve and isocrystal facts do not identify a purely inseparable map of arbitrary smooth proper curves with relative Frobenius"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite radicial map between nonsingular projective curves equals a power of the relative Frobenius",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.frobenius\", \"module\": \"Mathlib.Algebra.CharP.Frobenius\", \"type\": \"[Algebra R S] : S →ₛₗ[frobenius R p] S\", \"doc\": \"The Frobenius endomorphism on a commutative semiring $ S $ of characteristic $ p $, extended to a semilinear map on an $ R $-algebra $ S $ by raising elements to the $ p $-th power and preserving the \"}\n  {\"name\": \"iterateFrobeniusEquiv_eq_pow\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \": iterateFrobeniusEquiv R p n = frobeniusEquiv R p ^ n\", \"doc\": \"In a perfect ring of exponential characteristic $ p $, the $ n $-th iterate of the Frobenius endomorphism (mapping $ x $ to $ x^{p^n} $) coincides with the $ n $-th power of the Frobenius ring equival\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{n : ℕ} (hn : exponent K L ≤ n) (a : L) : algebraMap K L (iterateFrobeniusₛₗ F K L p hn a) = a ^ p ^ n\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, and for any element $ a \\\\in L $, the image of the $ n $-th iterate of the Frobenius endo\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{n : ℕ} (hn : exponent K L ≤ n) (a : K) : iterateFrobeniusₛₗ F K L p hn (algebraMap K L a) = a ^ p ^ n\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, applying the $ n $-th iterate of the Frobenius endomorphism to the image of an element $\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{n : ℕ} (hn : exponent K L ≤ n) (a : L) : algebraMap K L (iterateFrobenius K L p hn a) = a ^ p ^ n\", \"doc\": \"For a purely inseparable field extension $L/K$ with exponential characteristic $p$ and exponent $\\\\leq n$, the canonical algebra homomorphism from $K$ to $L$ applied to the iterated Frobenius homomorph\"}\n  {\"name\": \"frobeniusEquiv_def\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"(x : R) : frobeniusEquiv R p x = x ^ p\", \"doc\": \"For a perfect ring $ R $ of characteristic $ p $, the Frobenius ring equivalence is defined by mapping each element $ x \\\\in R $ to its $ p $-th power $ x^p $.\"}\n  {\"name\": \"FiniteField.coe_frobeniusAlgHom\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \": ⇑(frobeniusAlgHom K R) = (· ^ q)\", \"doc\": \"The Frobenius algebra homomorphism from a $ K $-algebra $ R $ to itself, when coerced to a function, is equal to the map that raises each element to the power of $ q $, where $ q = \\\\#K $ is the cardin\"}\n  {\"name\": \"LinearMap.iterateFrobenius\", \"module\": \"Mathlib.Algebra.CharP.Frobenius\", \"type\": \"[Algebra R S] : S →ₛₗ[iterateFrobenius R p n] S\", \"doc\": \"Given a commutative semiring $ R $ with exponential characteristic $ p $ and an $ R $-algebra $ S $, this is the linear map $ S \\to S $ defined by raising each element to the $ p^n $-th power, where $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Frobenius maps, semilinear maps, elliptic-curve and isocrystal facts do not identify a purely inseparable map of arbitrary smooth proper curves with relative Frobenius"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classify purely inseparable maps of smooth complete curves by Frobenius twists",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"IsPurelyInseparable.instNonemptyAlgHomOfPerfectField\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E]\\n  (L : Type u_2) [inst_4 : Field L] [PerfectField L] [inst_6 : Algebra F L], Nonempty (E →ₐ[F] L)\", \"doc\": \"If $ L $ is a perfect field and an algebra over $ F $, then there exists an algebra homomorphism from the purely inseparable field extension $ E $ over $ F $ to $ L $ over $ F $. This instance asserts\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.ofJ\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [Field F] → F → [DecidableEq F] → WeierstrassCurve F\", \"doc\": \"The function constructs a Weierstrass curve over a field $ F $ with j-invariant $ j $, defined by different equations depending on the value of $ j $: \\n- If $ j = 0 $, it uses the curve $ y^2 + y = x^\"}\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.ofJ_0_of_two_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"∀ {F : Type u_2} [inst : Field F] [inst_1 : DecidableEq F], 2 = 0 → WeierstrassCurve.ofJ 0 = WeierstrassCurve.ofJ0 F\", \"doc\": \"For a field $ F $ where $ 2 = 0 $, the Weierstrass curve with $ j $-invariant $ 0 $ constructed via the $ \\\\text{ofJ} $ function is equal to the curve constructed via the $ \\\\text{ofJ0} $ function.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field Frobenius maps, semilinear maps, elliptic-curve and isocrystal facts do not identify a purely inseparable map of arbitrary smooth proper curves with relative Frobenius"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"Scheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "grep",
+   "query": "purely.?inseparable.*curve|curve.*purely.?inseparable|frobenius.*twist|twist.*frobenius",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classify finite radicial morphisms of smooth complete curves as powers of relative Frobenius",
+   "results": "8 hits; iterateFrobeniusEquiv_eq_pow, AlgebraicGeometry.IsFinite.recOn, LinearMap.frobenius, frobeniusEquiv_def, FiniteField.Extension.frob, AlgebraicGeometry.IsFinite, IsPurelyInseparable.isPRadical, frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every purely inseparable map between smooth proper curves is a unique iterated relative Frobenius up to isomorphism",
+   "results": "8 hits; IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobenius, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, instUniqueEmbOfIsPurelyInseparable, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, instUniqueAlgHomOfIsPurelyInseparable, IsPurelyInseparable.algebraMap_iterateFrobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-frobenius-separable-factorization",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ.",
+   "via": [
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-purely-inseparable-curve-frobenius",
+  "worker": "stage1",
+  "summary": "Repair of the batch-5 spreading request: extracted two independent statement-only work items, the one-variable purely inseparable subfield theorem (old steps 1, 2, 4 and the p-rank consequence of 3) and the relative-Frobenius function-field image computation (old step 3). The parent retains its statement exactly and assembles them with the existing Frobenius degree and curve correspondence. The isomorphism construction and both uniqueness arguments remain explicit. All old arguments are preserved and assigned in report.md; no Lean was changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-trf-algclosed-curve-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-0f1f2edc6",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-0f1f2edc6 (reviewer sub-agent of L); spot-checked: PASS, no changes; full review in review.md. This delivery answers the human re-split note of 2026-10-21, released 2026-10-22. The item statement and stmt_deps are byte-identical to live; only proof, proof_deps and split_report differ. No other group has re-split the item, and neither new id exists live. Placement of the old six steps: (a) new node lem-sfb-one-variable-purely-inseparable-subfield takes old steps 1, 2 and 4 plus the [K_j:K_j^p]=p consequence of step 3, as a self-contained field statement: [L:E]=p^r and E=L^{p^r} for f.g. trdeg-1 L/E over algebraically closed k; (b) new node lem-sfb-relative-frobenius-function-field-image takes the affine image calculation of old step 3, F^*k(T)=k(C)^{p^n}; (c) old steps 5 and 6 stay almost verbatim as parent steps 2–4. The parent proof is 1766 chars, and the two nodes are of comparable size (about 1.9k and 0.85k chars of old proof). Neither node restates the item or one of its clauses. Both nodes are true. Tests: E=L gives r=0; L=k(t), E=k(t^{p^r}) works; k(s,t)⊃k(s^p,t) shows trdeg 1 is needed; for node 2, P^1 gives t↦t^{p^n}, n=0 gives the identity, and k perfect handles the scalars. Each parent step was checked against the statements of lem-sfb-proper-curve-function-field-morphisms (f.g./trdeg, k-embedding, bijection, composition, injectivity) and lem-sfb-smooth-curve-relative-frobenius-degree (T a smooth proper integral curve, F nonconstant, degree p^m giving m=r). All four cited nodes are in the item's own unit. Sources read: Stacks 0CCX/0CCY/0CCZ (curves.tex lines 2551–2621) and 0CCG (varieties.tex line 7254). No SGA, no trf cites. Duplicate search over the whole DAG (pbc inseparable-degree-drop, make-separably-generated, finite-rooted-extension, pth-root-tower, the trf Frobenius finiteness nodes, the degree node, separable-factorization) found no duplicate and no cycle. Both new nodes are statement-only and unsplit, with four kinds of search recorded and no Mathlib leaf. No tool_uses added."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PurelyInseparableFrobenius",
+  "declaration": "AlgebraicGeometry.existsUnique_purelyInseparable_curve_frobenius",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PurelyInseparableFrobenius.lean",
+  "statement": "theorem existsUnique_purelyInseparable_curve_frobenius (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) (hp : p.Prime) (hk : (p : k) = 0) (X Y : Scheme.{u}) (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) [IsCurve sX] [IsCurve sY] [Smooth sX] [Smooth sY] [IsProper sX] [IsProper sY] [IsIntegral X] [IsIntegral Y] (hXdim : topologicalKrullDim X = 1) (hYdim : topologicalKrullDim Y = 1) (f : X ⟶ Y) (hf : f ≫ sY = sX) (hf_nonconstant : ¬ ∃ y : Spec (.of k) ⟶ Y, y ≫ sY = 𝟙 _ ∧ sX ≫ y = f) (hfield : ∃ i : Y.functionField →+* X.functionField, Spec.map (CommRingCat.ofHom i) ≫ Y.fromSpecStalk (genericPoint Y) = X.fromSpecStalk (genericPoint X) ≫ f ∧ @Module.Finite Y.functionField X.functionField _ _ (@Algebra.toModule _ _ _ _ i.toAlgebra) ∧ @IsPurelyInseparable Y.functionField X.functionField _ _ i.toAlgebra) : ∃! nh : Σ n : ℕ, pullback sX (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) ≅ Y, nh.2.hom ≫ sY = pullback.snd sX (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk nh.1))) ∧ ∃ (hX : (p : Γ(X, ⊤)) = 0) (F : X ⟶ pullback sX (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk nh.1)))), F ≫ pullback.fst sX (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk nh.1))) = X.iterateFrobenius hp hX nh.1 ∧ F ≫ pullback.snd sX (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk nh.1))) = sX ∧ F ≫ nh.2.hom = f",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e394423",
+  "group": "NR",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion against the node, Stacks 0CCZ/0CCG and the dependency declarations. Characteristic p is p prime with p = 0 in k, equivalent for a field. The function-field map is pinned by the generic-point square (Spec K(Y) -> Y is a monomorphism), with Module.Finite and IsPurelyInseparable checked on it. The twist is the pullback along Spec of the p^n-power map, structure morphism the second projection. The relative Frobenius is fixed by its two projection equations (first one = Scheme.iterateFrobenius), so it is canonical. Unique-existence over pairs (n, iso) gives both uniqueness of n and of h; n = 0 is covered. The citer FrobeniusSeparableFactorization uses the same conventions. Only the lean field changed; the statement is verbatim in the file; side-live has no binding for this node. No new definitions, proof is sorry, docstrings carry source, blueprint and six-step proof. Not recompiled since no file changed; worker reports a clean compile. Advisory only: two imports are for the future proof and unused by the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

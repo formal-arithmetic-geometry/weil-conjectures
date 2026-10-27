@@ -15,23 +15,12 @@ public import Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.AlgebraicSpace
-import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.AlgebraicGeometry.Descent
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import WeilConjectures.AlgebraicGeometry.Sites.Ga
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction
-import Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentModule
 
 /-!
 # Quasi-coherent modules on the Zariski and small étale sites
@@ -67,7 +56,44 @@ the sheaf separatedness identities show that the glued map preserves every ring 
 This proves the ring-valued sheaf condition without any enlargement of section rings. -/
 theorem smallEtaleModulePresheaf_isSheaf (X : Scheme.{u}) :
     Presheaf.IsSheaf X.smallEtaleTopology (smallEtaleModulePresheaf X) := by
-  sorry
+  have h : Presieve.IsSheaf X.smallEtaleTopology
+      (smallEtaleModulePresheaf X ⋙ CategoryTheory.forget RingCat) :=
+    X.isSheaf_etaleStructurePresheaf_comp_forget
+  intro E V S hS x hx
+  have hQ := h S hS
+  let y (e : E) : Presieve.FamilyOfElements
+      (smallEtaleModulePresheaf X ⋙ CategoryTheory.forget RingCat) S :=
+    fun W f hf ↦ (x f hf).hom e
+  have hy (e : E) : (y e).Compatible := by
+    intro W₁ W₂ Z g₁ g₂ f₁ f₂ h₁ h₂ fac
+    exact congrArg (fun φ : E ⟶ (smallEtaleModulePresheaf X).obj (op Z) ↦ φ.hom e)
+      (hx g₁ g₂ h₁ h₂ fac)
+  let g (e : E) : (smallEtaleModulePresheaf X).obj (op V) :=
+    hQ.amalgamate (y e) (hy e)
+  have hg (e : E) {W : X.Etale} (f : W ⟶ V) (hf : S f) :
+      (smallEtaleModulePresheaf X).map f.op (g e) = (x f hf).hom e :=
+    hQ.valid_glue (hy e) f hf
+  have ext {a b : (smallEtaleModulePresheaf X).obj (op V)}
+      (hab : ∀ {W : X.Etale} (f : W ⟶ V),
+        S f → (smallEtaleModulePresheaf X).map f.op a =
+          (smallEtaleModulePresheaf X).map f.op b) : a = b :=
+    hQ.isSeparatedFor.ext fun _ f hf ↦ hab f hf
+  let φ : E ⟶ (smallEtaleModulePresheaf X).obj (op V) := RingCat.ofHom
+    { toFun := g
+      map_one' := ext fun f hf ↦ by rw [hg _ f hf, map_one, map_one]
+      map_mul' := fun a b ↦ ext fun f hf ↦ by
+        rw [map_mul, hg _ f hf, hg _ f hf, hg _ f hf, map_mul]
+      map_zero' := ext fun f hf ↦ by rw [hg _ f hf, map_zero, map_zero]
+      map_add' := fun a b ↦ ext fun f hf ↦ by
+        rw [map_add, hg _ f hf, hg _ f hf, hg _ f hf, map_add] }
+  refine ⟨φ, fun W f hf ↦ ?_, fun ψ hψ ↦ ?_⟩
+  · change φ ≫ (smallEtaleModulePresheaf X).map f.op = x f hf
+    ext e
+    exact hg e f hf
+  · refine RingCat.hom_ext (RingHom.ext fun e ↦ ?_)
+    refine ext fun f hf ↦ ?_
+    exact (congrArg (fun χ : E ⟶ (smallEtaleModulePresheaf X).obj (op _) ↦ χ.hom e)
+      (hψ f hf)).trans (hg e f hf).symm
 
 /-- The usual structure sheaf on the small étale site, with its actual section rings.
 Source: Stacks 03DU (blueprint: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence). -/
@@ -215,7 +241,10 @@ usual gluing universal property is precisely the sheafification adjunction on th
 slice site. The construction is invariant under changing the affine cover. -/
 @[instance] theorem smallEtaleModuleOverHasWeakSheafify (T : Scheme.{u}) (V : T.Etale) :
     HasWeakSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} := by
-  sorry
+  have : HasSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} :=
+    (Scheme.Etale.overEquiv V).hasSheafify (T.smallEtaleTopology.over V)
+      V.left.smallEtaleTopology AddCommGrpCat.{u}
+  infer_instance
 
 /-- Sheafification inverts exactly the locally bijective additive maps on these slices.
 Source: Stacks, Sites, sheafification; Descent 03DX
@@ -229,7 +258,15 @@ representatives. Refinement transfers this equivalence to the full slice site. -
 @[instance] theorem smallEtaleModuleOverWEqualsLocallyBijective
     (T : Scheme.{u}) (V : T.Etale) :
     (T.smallEtaleTopology.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := by
-  sorry
+  have : ((Scheme.Etale.overEquiv V).inverse.sheafPushforwardContinuous
+      AddCommGrpCat.{u} V.left.smallEtaleTopology
+        (T.smallEtaleTopology.over V)).IsEquivalence :=
+    inferInstanceAs (((Scheme.Etale.overEquiv V).sheafCongr
+      (T.smallEtaleTopology.over V) V.left.smallEtaleTopology
+        AddCommGrpCat.{u}).functor.IsEquivalence)
+  exact GrothendieckTopology.WEqualsLocallyBijective.transport (T.smallEtaleTopology.over V)
+    V.left.smallEtaleTopology (Scheme.Etale.overEquiv V).inverse
+    (Functor.IsDenseSubsite.coverPreserving _ _ _)
 
 /-- Zariski and small étale quasi-coherent modules agree, with the canonical functors,
 open-section normalizations, line modules, and pullback/direct-image comparisons.
@@ -348,3 +385,7 @@ theorem scheme_zariski_etale_quasiCoherent_equivalence :
 
 end
 end AlgebraicGeometry.Scheme.Modules
+
+#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf_isSheaf
+#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverHasWeakSheafify
+#print axioms AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverWEqualsLocallyBijective

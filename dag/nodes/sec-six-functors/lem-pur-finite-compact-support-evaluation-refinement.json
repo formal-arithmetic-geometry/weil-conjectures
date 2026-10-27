@@ -1,0 +1,358 @@
+{
+ "id": "lem-pur-finite-compact-support-evaluation-refinement",
+ "kind": "statement",
+ "title": "Finite evaluation normalization of compact-support exchanges and refinements",
+ "statement": "Let $\\Lambda$ be a finite commutative ring, $f:X\\to Y$ a separated finite-type morphism of schemes, and $a:Y'\\to Y$ any scheme morphism, with Cartesian pullback $f':X'\\to Y'$ and $a_X:X'\\to X$ [def-weil-pbc-cartesian-square]. Supply compactifications $c_i=(j_i:X\\hookrightarrow\\overline X_i,p_i:\\overline X_i\\to Y)$ with quasi-compact open $j_i$ and proper $p_i$ [def-weil-compactifications-refinements], and their pullbacks $c_i'$ [pur713-def-base-changed-compactification]. Use strict constant-$\\Lambda$ tower operations and evaluation $\\operatorname{ev}_n$ with the normalized adjunction-mate direct-image comparison [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Put $F_i^{\\mathcal T}=R_{p_i}^{\\mathcal T}J_{j_i}$ and $F_i=Rp_{i,*}j_{i!}$ on ordinary constant-$\\Lambda$ derived categories [def-weil-pbc-proetale-operations]. Let $e_i^{\\mathcal T}:G_aF_i^{\\mathcal T}\\to(F_i')^{\\mathcal T}G_{a_X}$ be the proper mate followed by the canonical open comparison; let $e_i$ be that same ordered compactification formula on ordinary complexes [def-exchange-projection]. For a proper refinement $u:c_1\\to c_2$ fixing $X$, let $C_u^{\\mathcal T}:F_2^{\\mathcal T}\\to F_1^{\\mathcal T}$ be the normalized refinement map of [lem-cbc-complete-proetale-refinement-exchange-coherence], and let $C_u$ be the ordinary normalized proper/open refinement map, given on ordinary pro-etale complexes by the same proper-adjunction mate formula $\\gamma$ as in [lem-cbc-strict-tower-proper-open-calculus] followed by the proper direct image; on bounded-below etale-origin objects it is the map of [lem-cbc-proper-open-interchange-coherence].\nFor every $M\\in D(\\mathcal T_X)$ and every index $n$, the canonical evaluation comparisons identify $\\operatorname{ev}_n(e_{i,M}^{\\mathcal T})$ with $e_{i,\\operatorname{ev}_nM}$ and $\\operatorname{ev}_n(C_{u,M}^{\\mathcal T})$ with $C_{u,\\operatorname{ev}_nM}$. These identifications include the proper derived adjunction units and counits, not only underived maps. On the full domain where each $\\operatorname{ev}_nM$ has a bounded-below etale-origin witness [def-weil-pbc-etale-origin-witness], the $C_u$ are isomorphisms and\n$$C'_u e_2=e_1G_aC_u,\\qquad C_{\\mathrm{id}}=1,\\qquad C_{v\\circ u}=C_uC_v.$$\nThe induced $I_{12}=C_{u_2}^{-1}C_{u_1}$ from common refinements are independent of the refinement, satisfy $I_{23}I_{12}=I_{13}$, and intertwine $e_i$. Consequently compactification-relative pasting equations transport through these $I$ to the specified compactification-independent finite exchanges on the finite witnessed domain of [fix-lem-exchanges]. This conclusion applies in particular by taking a constant tower on any such finite complex. It asserts no faithfulness of derived evaluation.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), with finite proper/open refinement normalization; agent extension to evaluation of derived strict towers and compactification-independent maps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-compactifications-refinements",
+  "pur713-def-base-changed-compactification",
+  "def-weil-pbc-proetale-operations",
+  "def-exchange-projection",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "lem-cbc-proper-open-interchange-coherence",
+  "def-weil-pbc-etale-origin-witness",
+  "fix-lem-exchanges",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=\\operatorname{ev}_nM$ and $B=\\Lambda$. Apply [lem-cbc-tower-mate-evaluation-scalars] to obtain the canonical comparisons $\\operatorname{ev}_nR_u^{\\mathcal T}\\cong Ru_*\\operatorname{ev}_n$, together with the termwise comparisons for $G_u$ and $J_j$. The cited statement preserves the derived units, counits and transposes, for arbitrary unbounded tower objects. Its comparison is the K-injective resolution comparison and hence the adjunction-mate comparison specified in the item. Composition comparisons also agree: inverse-image compositors are termwise; their right-adjoint conjugates evaluate to the ordinary conjugates because the evaluation comparisons preserve the units and counits. Equivalently, [lem-sfb-derived-composition-adjunction-normalization] identifies these conjugates with the resolution-normalized derived direct-image compositors. This fixes the comparisons for $R_{p_2}^{\\mathcal T}R_u^{\\mathcal T}$ as well as for a single direct image. Lean implementation: derived_adjunction_evaluation is the existing evaluation_units_counits theorem verbatim, and evaluationF_isIso follows by whiskering evalR_isIso and evalJ. presentation_isIso transports the adjunction across the finite-presentation equivalences using [lem-weil-mate-iso-along-equivalences]. The expanded composition exchange is identified with the relative compact-support tower exchange by the split-off compatibility statement.",
+   "uses": [
+    "lem-cbc-tower-mate-evaluation-scalars",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-mate-iso-along-equivalences",
+    "new-finite-compact-support-composition-tower-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0D6E (lemma-derived-pushforward-composition); strict-tower evaluation refinement supplied by the cited DAG statements."
+   }
+  },
+  {
+   "text": "Write $\\bar a_i:\\overline X_i\\times_Y Y'\\to\\overline X_i$. Expand the proper exchange using [def-weil-pbc-adjunction-mate]: $E_{p_i}=(R_{p_i'}G_{\\bar a_i}\\varepsilon_{p_i})\\circ(R_{p_i'}\\theta_iR_{p_i})\\circ(\\eta_{p_i'}G_aR_{p_i})$, with the analogous tower formula. Step 1 carries each of its three factors to the displayed ordinary derived factor, since $\\theta_i$ is the termwise pullback square comparison. By [lem-cbc-tower-open-beta-normalization], evaluation carries $\\beta_{j_i,\\bar a_i}^{\\mathcal T}$ to the specified finite open comparison. Evaluation preserves composition and whiskering, so the evaluated ordered composite $(R_{p_i'}^{\\mathcal T}\\beta_{j_i,\\bar a_i}^{\\mathcal T})E_{p_i}^{\\mathcal T}$ is precisely $(Rp_{i,*}'\\beta_{j_i,\\bar a_i})E_{p_i}$ at $N$, namely $e_{i,N}$. No boundedness or witness is used here.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-cbc-tower-open-beta-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), unit-square-counit formula; open factor as in more-etale.tex Tag 0F7F (lemma-shriek-proper-and-open-base-change)."
+   }
+  },
+  {
+   "text": "For a refinement $u:c_1\\to c_2$, take the square $Q_u$ with top $j_1$, bottom $j_2$, left $1_X$ and right $u$. It has proper verticals and quasi-compact open horizontals. Its intrinsic $\\alpha_{Q_u}$ is projection to the clopen section of $\\overline X_1\\times_{\\overline X_2}X$ specified in [lem-cbc-strict-tower-proper-open-calculus]. Apply [lem-cbc-tower-mate-evaluation-scalars]: evaluation of $\\gamma_{Q_u}^{\\mathcal T}=(R_u^{\\mathcal T}J_{j_1}\\varepsilon_1)\\circ(R_u^{\\mathcal T}\\alpha_{Q_u}R_1^{\\mathcal T})\\circ(\\eta_uJ_{j_2}R_1^{\\mathcal T})$ is the ordinary proper mate of this same clopen projector. Now apply the $R_{p_2}$ comparison and the composition comparison fixed in step 1. Thus evaluation of $C_u^{\\mathcal T}=R_{p_2}^{\\mathcal T}\\gamma_{Q_u}^{\\mathcal T}$, with $R_{p_2}R_u\\cong R_{p_1}$ inserted, is exactly $C_u$ at $N$. This argument applies to arbitrary $M$, not only witnessed objects.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-tower-mate-evaluation-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7F (lemma-shriek-proper-and-open-base-change); clopen mate and derived evaluation normalization are the cited refinements."
+   }
+  },
+  {
+   "text": "On the witnessed domain, write $N\\cong\\nu_X^*L$ with $L\\in D^+(X_{\\mathrm{et}},\\Lambda)$. By [lem-cbc-finite-clopen-mate-site-transport], the ordinary mate just obtained on $Q_u$ is the canonical transport of the normalized finite etale proper/open comparison; this is an isomorphism and includes the refinement normalization. Apply the ordinary $Rp_{2,*}$ to get the corresponding assertion for $C_u$. For exchanges apply [lem-weil-pbc-transport-identifies-exchange] to the proper square for $p_i$, and combine it with the finite open comparison in [lem-cbc-tower-open-beta-normalization]. The direct-image transport hypotheses hold because $p_i,p_i'$ are proper, hence quasi-compact and quasi-separated, and $j_{i!}L$ is bounded below by exactness of open extension. The resulting ordered composite is the transported etale compactification exchange, exactly the specified exchange of [thm-cbc-finite-level-proetale]. Its hypotheses require a supplied compactification, which we have; they impose neither qcqs on the base nor a restriction on $a$ or on residue characteristics. Lean implementation: ordinaryGamma_etale is the identity-scalar specialization of [lem-cbc-single-level-finite-proper-open-transport]. Transport a retained fixed-module Origin to its etale antecedent using exact-derived composition, then use that equation and the proper direct-image comparison isomorphisms to show ordinaryC_isIso. pullOrigin applies the actual site pullback comparison and exact finite-presentation pullback comparison to the retained witness.",
+   "uses": [
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-cbc-tower-open-beta-normalization",
+    "thm-cbc-finite-level-proetale",
+    "lem-cbc-single-level-finite-proper-open-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), finite etale proper/open square; pro-etale witness transport and mate normalization as in the cited DAG statements."
+   }
+  },
+  {
+   "text": "Fix a witnessed finite complex $N$. Choose a representative complex and take its constant strict tower $\\Delta N$, with identity transition maps. The constant-diagram construction is exact, since kernels and cokernels are levelwise, so this defines an object of $D(\\mathcal T_X)$ independent of the representative. Every evaluation is $N$, and [lem-cbc-complete-proetale-refinement-exchange-coherence] applies with $B=\\Lambda$, $\\Lambda_r=\\Lambda$ and the identity scalar maps at every index. Evaluate its actual tower identities $C'_ue_2=e_1G_aC_u$, $C_{\\mathrm{id}}=1$, and $C_{v\\circ u}=C_uC_v$ at any index. Steps 1-3 identify all the factors and compositors with the ordinary ones, so these are the required finite identities at $N$. For the original $M$ apply this argument separately to $N=\\operatorname{ev}_nM$; no uniform lower bound is needed. Evaluation is used only to preserve already established equalities.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-cbc-complete-proetale-refinement-exchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7F (lemma-shriek-proper-and-open-base-change); constant-tower specialization of the cited coherence statement."
+   }
+  },
+  {
+   "text": "Common refinements and equalizers of parallel refinement arrows exist by [lem-cbc-compactifiable-cofiltered]. Passing from $d\\xrightarrow{u_i}c_i$ to $d'\\xrightarrow{t}d$ replaces $C_{u_i}$ by $C_tC_{u_i}$, hence leaves $C_{u_2}^{-1}C_{u_1}$ unchanged. Two choices admit a common refinement and then refinements equalizing their finitely many competing arrows; this proves independence of both objects and arrows. On one common refinement of three compactifications, $(C_3^{-1}C_2)(C_2^{-1}C_1)=C_3^{-1}C_1$, proving the cocycle. Writing $C_i'e_i=e_dG_aC_i$ twice and cancelling gives $I_{12}'e_1=e_2G_aI_{12}$. Finally, a compactification-relative pasting equation is an equality of composites. Replacing its corners by these isomorphisms replaces each arrow $h:A\\to B$ by $I_BhI_A^{-1}$; intermediate inverse pairs cancel and the cocycle identifies the exterior comparisons. Thus the pasting equation holds for the compactification-independent exchanges. Step 4 identifies these with the specified finite maps on the domain of [fix-lem-exchanges]; this uses that domain and its specified maps, not its coherence theorem as a premise. Taking $M=\\Delta N$ gives the last assertion. Lean implementation: equalize parallel refinements by cofilteredness and cancel ordinaryC of the equalizing arrow; composition then shows the ratio is unchanged by a further refinement. A common cone proves independence; a common cone for two of three pairs gives the cocycle by cancelling the middle inverse. ordinaryI_exchange follows from two instances of ordinaryC_exchange by cancelling the second primed refinement. transport_pasting is associativity, inverse cancellation, and the supplied pasting equality.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0ATU (lemma-compactifications-cofiltered); cancellation argument with the arbitrary-base supplied-compactification version stated in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-cbc-single-level-finite-proper-open-transport",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-tower-category-levelwise-abelian",
+  "thm-cbc-finite-level-proetale",
+  "new-finite-compact-support-composition-tower-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "R1 stage-3 partial proof: finite proper/open scalar transport, finite-presentation equivalences, and cofiltered ratio cancellation. Original exchange-evaluation, refinement-evaluation, ordinary identity/composition, refinement/exchange, and specified-map obligations remain named theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image on strict towers of sheaves identifies canonical proper base change mates and compactification refinement comparisons at finite coefficients",
+   "results": "SheafOfModules.pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous); topCatToSheafCompHausLike_map_val_app (Mathlib/Condensed/TopComparison); SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous); SheafOfModules.pushforwardComp_hom_app_val_app (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous); AlgebraicGeometry.Scheme.Modules.pushforwardComp (Mathlib/AlgebraicGeometry/Modules/Sheaf); LightCondensed.ihomPoints_symm_comp (Mathlib/Condensed/Light/InternallyProjective); AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction (Mathlib/AlgebraicGeometry/Modules/Sheaf); AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward (Mathlib/AlgebraicGeometry/Modules/Sheaf)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient compactification exchange independence from common refinement via evaluation of K injective inverse systems",
+   "results": "InverseSystem.pEquivOnLim (Mathlib/Order/DirectedInverseSystem); InverseSystem.piLTLim (Mathlib/Order/DirectedInverseSystem); Profinite.NobelingProof.GoodProducts.smaller_factorization (Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit); Profinite.NobelingProof.eval_eq_πJ (Mathlib/Topology/Category/Profinite/Nobeling/Span); InverseSystem.pEquivOnSucc (Mathlib/Order/DirectedInverseSystem); InverseSystem.piEquivSucc_self (Mathlib/Order/DirectedInverseSystem); InverseSystem.isNatEquiv_piEquivSucc (Mathlib/Order/DirectedInverseSystem); InverseSystem.piEquivSucc (Mathlib/Order/DirectedInverseSystem)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint, CategoryTheory.Limits.preservesLimitOfIsoDiagram",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.preservesLimitOfIsoDiagram'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison for finite coefficient compact support base change commutes with refinement by evaluating strict towers",
+   "results": "RingHom.IsStableUnderBaseChange (Mathlib.RingTheory.RingHomProperties); IsBaseChange.of_comp (Mathlib.RingTheory.IsTensorProduct); IsBaseChange.pi (Mathlib.RingTheory.TensorProduct.IsBaseChangePi); IsBaseChange.finitePow (Mathlib.RingTheory.TensorProduct.IsBaseChangePi); LinearMap.baseChange_baseChange (Mathlib.LinearAlgebra.TensorProduct.Tower); AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Finite); IsBaseChange.finsuppPow (Mathlib.RingTheory.TensorProduct.IsBaseChangePi); Module.Dual.baseChange_baseChange (Mathlib.LinearAlgebra.Dual.BaseChange)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][Ii]njective.*eval|eval.*[Kk][Ii]njective|compactification.*refinement",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*(evaluation|refinement)|evaluation.*(adjunction|counit)|eval.*[Kk]Injective",
+   "results": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf adjunctions, ordinary functor-category evaluation, or unrelated inverse systems; none gives normalized derived compact-support mates and refinement transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived evaluation of inverse systems commutes with proper base change mates and refinement comparisons for compact support",
+   "results": "InverseSystem.invLimEquiv.congr_simp; InverseSystem.globalEquiv_naturality; CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc; InverseSystem.limit; InverseSystem.invLimEquiv_symm_apply_coe; CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.piEquivLim.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf adjunctions, ordinary functor-category evaluation, or unrelated inverse systems; none gives normalized derived compact-support mates and refinement transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf adjunctions, ordinary functor-category evaluation, or unrelated inverse systems; none gives normalized derived compact-support mates and refinement transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact evaluation inverse systems derived direct image adjunction mate base change extension by zero",
+   "results": "Profinite.NobelingProof.succ_exact; Condensed.profiniteSolidCounit; Profinite.NobelingProof.CC_exact; Condensed.profiniteSolid; localCohomology.diagram; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; LightCondensed.ihomPoints_symm_comp; Condensed.profiniteSolidification",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf adjunctions, ordinary functor-category evaluation, or unrelated inverse systems; none gives normalized derived compact-support mates and refinement transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of strict towers of sheaves preserves derived adjunction units counits compact support exchange and proper compactification refinement maps",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.sheafComposeNatIso; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.sheafComposeNatTrans",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf adjunctions, ordinary functor-category evaluation, or unrelated inverse systems; none gives normalized derived compact-support mates and refinement transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-basechange-semilinear-pasting",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph: base-change compatibility; returned auxiliary lem-pur-weil-basechange-semilinear-pasting Step 6.",
+   "via": [
+    "lem-pur-weil-basechange-semilinear-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-finite-compact-support-evaluation-refinement",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-object evaluation statement and the restricted witnessed coherence domain. Expanded both proper mates and preserved derived units/counits via existing evaluation normalization; used constant towers to specialize actual tower coherence to ordinary finite maps, without faithfulness. Reused existing clopen-mate site transport and cofilteredness; created no nodes.",
+  "blueprint": "prop-pur-weil-equivariance-compatibilities constituent base-change compatibility, via lem-pur-weil-basechange-semilinear-pasting returned Step 6; realizes fix-lem-exchanges ordered compactification formula and common-refinement normalization.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-refinement-exchange-coherence",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-finite-clopen-mate-site-transport",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-tower-mate-evaluation-scalars",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-cbc-tower-open-beta-normalization",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic derived evaluation, proper/open mate normalization, finite site transport, or compactification cofilteredness used in the package base-change assembly; the package unit does not reprove this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-tower-category-levelwise-abelian",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-b074b9da0",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-b074b9da0 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps in full against the statement of every cited node. Shape: one commit; only the item JSON and the report change; no new nodes. The statement and stmt_deps are identical to the live node, which is still unsplit live and on side-live, so nothing supersedes the delivery. No repair note. proof_deps equals the union of uses; no cycle; no SGA. Route: every cited statement's unit (sk-prop-sf-cbc, sk-thm-properbasechange, sk-thm-sf-comp-composition) is in the uses of sk-thm-sf-package. Sources checked: Stacks more-etale 0F7F (l.2830) and flat 0ATU; the arbitrary-base cofilteredness comes from lem-cbc-compactifiable-cofiltered. Steps 1-3: lem-cbc-tower-mate-evaluation-scalars gives the K-injective evaluation comparisons and keeps the derived units and counits, so the three mate factors and the R-compositors (conjugates, via lem-sfb-derived-composition-adjunction-normalization) evaluate correctly. lem-cbc-tower-open-beta-normalization covers finite B = Lambda. In the refinement square Q_u, alpha is the clopen-section projector by lem-cbc-strict-tower-proper-open-calculus; u is proper by definition of a refinement. Step 4: lem-cbc-finite-clopen-mate-site-transport applies with L in D^+(X_et); lem-weil-pbc-transport-identifies-exchange applies because p_i and p_i' are proper, hence qcqs, and j_!L is in D^+. thm-cbc-finite-level-proetale requires only a supplied compactification and allows arbitrary g. Step 5: the constant tower is exact by levelwise kernels and cokernels, and the coherence node applies with B = Lambda_n = Lambda; no faithfulness is used. Step 6: I checked the cancellation C_{u t} = C_t C_u, the cocycle and the intertwining algebra; C' is invertible because G_a N is witnessed. Edge cases checked: empty X, identity refinement, identity base change, non-qcqs Y. Batch-5: lem-cbc-finite-clopen-mate-site-transport reaches only def-trf-schematically-dense-open, a general definition; lem-cbc-tower-mate-evaluation-scalars and lem-cbc-tower-open-beta-normalization reach only lem-trf-iterated-square-mates, the generic Mathlib mate identity. Neither is part of the trace formula or Poincare duality, so all three citations are accepted. The split_report tool_uses are redundant (every citation is on the route) but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCompactSupportEvaluationRefinement",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.finiteCompactSupportEvaluationRefinement",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryDerivedCategory",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.pullComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.pushComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.pullId",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.pushId",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.square",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.properExchange",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryF",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryE",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryC",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.evaluationF",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.finiteCompactSupportEvaluationRefinement",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.refinement_evaluation",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.finitePresentation",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.Origin",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryC_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.pullOrigin",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryI",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryC_identity_composition",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryC_exchange",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryI_independence_cocycle",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryI_exchange",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.presentationPull",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.presentationPush",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.presentationOpen",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.presentationF",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryE_specified",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.transport_pasting",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.constantTower",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.constantEvaluation",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.etalePresentation",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.etaleOpen",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.etalePush",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryGamma_etale",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.derived_adjunction_evaluation",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.evaluationF_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.presentation_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCompactSupportEvaluationRefinement.lean",
+  "statement": "theorem finiteCompactSupportEvaluationRefinement [Finite B] {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (x : X' ⟶ X) (y : Y' ⟶ Y) (sf : IsPullback x f' f y) (c : Compactification f) (c' : Compactification f') (s : c'.Z ⟶ c.Z) (si : IsPullback x c'.i c.i s) (sp : IsPullback s c'.g c.g y) (M : Derived B X) (n : ℕ) : (ev B Y' n).map ((compositionE B c c' x y s si.w sp.w si).app M) ≫ (evaluationF B c' n).app ((G B x).obj M) ≫ (ordinaryF B c').map ((evalG B x n).hom.app M) = (evalG B y n).hom.app ((compositionF B c).obj M) ≫ (g B y).map ((evaluationF B c n).app M) ≫ (ordinaryE B c c' x y s si sp).app ((ev B X n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The full statement is distributed across the listed exchange/refinement evaluation, derived-adjunction normalization, retained fixed-ring Origin domain, ordinaryC invertibility/identity/composition/exchange, ordinaryI independence/cocycle/exchange, finite specified-map identification and pasting transport. Helpers construct the actual ordinary proper/open maps and normalized endpoint comparisons from recorded operations. No statement correction or additional mathematical hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83004b393",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Only the item's lean record changed (diffed with side-live; the other 21 snapshot nodes are byte-identical). The statement is verbatim in the file; the 37 declarations match the list exactly; 14 sorry theorems, no sorry in any def, no opaque or .choose; every declaration has a source and blueprint docstring; no line over 100 characters; all imports exist. ordinaryF/E/C mirror the tower compositionF/E/C term by term: pushId/pushComp are conjugates built from the same moduleRId and moduleGComp; properExchange is the mate of the pullComp square; openBetaSingle is the open comparison; singleDerivedGamma is the clopen mate on Q_u (top c.i, bottom d.i, left 1, right v.hom). Clause by clause: evaluation of e and C for every tower and index with no witness; derived units and counits (derived_adjunction_evaluation); on the Origin domain (the dependency's FixedEtaleOriginWitness retained, ring B itself) C is iso, C_id=1, C_{v∘u}=C_uC_v and C'e2=e1G_aC; ordinaryI is literally asIso C1 ≪≫ (asIso C2).symm with independence, cocycle and intertwining; ordinaryE_specified identifies it with the upstream rightDerivedLowerShriekOfCompactificationBaseChange used by fix-lem-exchanges; constant tower; ordinaryGamma_etale matches normalizedComparison of properOpenInterchangeCoherence. Edge cases: empty X, zero ring, identity maps, non-qcqs base, unbounded towers. Advisory only: decls from proof_dep theorem modules (tower-mate-evaluation-scalars, tower-open-beta-normalization, etale-clopen-mate-normalization) and def-cbc-finite-constant-coefficient-transport / strict-tower-composition-maps are used without being in stmt_deps (stage-1 stmt_deps unchanged); sf unused; three dependency-module imports not referenced by name. No file changed, so no compile; the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T023129-L-522818",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

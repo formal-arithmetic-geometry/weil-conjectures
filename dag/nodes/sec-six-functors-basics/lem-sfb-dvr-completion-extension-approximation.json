@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-dvr-completion-extension-approximation",
+ "kind": "statement",
+ "title": "Approximation of finite extensions over a DVR completion with prescribed roots",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $F$ [def-pc-field-extension], and let $\\pi$ be a uniformizer of $A$. Put $\\widehat A=\\varprojlim_{n\\geq1}A/(\\pi^n)$, its maximal-ideal-adic completion [def-weil-pbc-adic-completion], and $\\widehat F=\\operatorname{Frac}(\\widehat A)$, with the canonical inclusion $F\\hookrightarrow\\widehat F$. Let $H/\\widehat F$ be a finite field extension, meaning finite-dimensional. Assume either that $H/\\widehat F$ is separable, or that $F$ has characteristic $p>0$ and $H$ is the compositum of a finite separable extension $M/\\widehat F$ and $\\widehat F[(\\widehat\\pi)^{1/p^r}]$ for some integer $r\\geq0$ [def-weil-pbc-separable-algebraic-extension]. Here $\\widehat\\pi$ is the image of $\\pi$, the roots and extensions are embedded in one common field, and compositum means their generated subfield. Then there exists a finite field extension $N/F$ and an isomorphism $\\widehat F\\otimes_FN\\simeq H$ of $\\widehat F$-algebras [def-weil-pbc-module-tensor-product]. If $H/\\widehat F$ is separable, $N/F$ may be chosen separable. No henselian, excellence, or residue-field hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EJ, lemma-approximate-separable-extension, statement and proof; Tag 09F9, theorem-epp, completion paragraph applying 09EJ to a compositum with a prescribed p-power root of a uniformizer. The root is the same element before and after completion."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=\\widehat A$, $K=\\widehat F$, and also write $\\pi$ for its image in $C$. The completion is a DVR by [lem-weil-pbc-completion-of-dvr-is-dvr]. Its maximal ideal is $\\pi C$ by [lem-weil-pbc-local-completion-local-ring]. Apply [lem-weil-pbc-module-completion-complete] to $I=(\\pi)$ and the module $A$: $C$ is complete for $\\pi C$, and $C/\\pi^nC\\cong A/\\pi^nA$ for every $n\\ge1$. Thus each finite list of coefficients in $C$ can be lifted modulo $\\pi^n$ to a list in $A$.",
+   "uses": [
+    "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09EJ, first paragraph; 0AP1 (lemma-completion-dvr) and 05GG (algebra-lemma-hathat-finitely-generated)"
+   }
+  },
+  {
+   "text": "First let $E/K$ be any finite separable extension. Choose $\\theta$ generating it by [lem-weil-pbc-finite-separable-extension-primitive-element], with monic minimal polynomial $P=T^d+\\sum_{i<d}a_iT^i$ as in [def-weil-pbc-separable-algebraic-extension]. Replacing $\\theta$ by $\\pi^s\\theta$ replaces $a_i$ by $\\pi^{s(d-i)}a_i$; choose $s$ so these finitely many coefficients lie in $C$. This preserves the generated field and separability. Put $B=C[\\theta]\\subset E$. Division by the monic $P$ identifies $B=C[T]/(P)$: a remainder of degree less than $d$ vanishing at $\\theta$ must be zero over $K$. By [lem-weil-pbc-monic-quotient-free], $B$ is free of rank $d$ over $C$, with basis $1,\\theta,\\ldots,\\theta^{d-1}$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09EJ, primitive element, scaling, and monogenic algebra paragraph"
+   }
+  },
+  {
+   "text": "The domain $B$ is Noetherian, local, and complete at its maximal ideal $\\mathfrak n$ by [lem-weil-pbc-finite-over-complete-local-product]. It is integral over $C$ by [lem-weil-pbc-finite-algebra-is-integral]. Hence [lem-weil-pbc-integral-extension-dimension] gives $\\dim B\\le1$ and $\\mathfrak n\\cap C=\\pi C$. Since $0\\ne\\pi\\in\\mathfrak n$ and $B$ is a domain, $(0)\\subsetneq\\mathfrak n$ is a prime chain, so $\\dim B=1$. Separability of $\\theta$ gives $P^{\\prime}(\\theta)\\ne0$: evaluate a Bezout identity for $P,P^{\\prime}$ over $K$ at $\\theta$. Apply [lem-sfb-complete-local-domain-root-perturbation] in $B$, with $t=\\pi$, $a=\\theta$, and $c=1$, to obtain a sufficient precision $n$. Lift the $d$ lower coefficients of $P$ modulo $\\pi^nC$ to $A$, retaining leading coefficient $1$, to form $P_1\\in A[T]$. For $Q=P_1-P$ the lemma gives a root $\\beta\\in B$ of $P_1$ with $\\beta-\\theta\\in\\pi B$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-extension-dimension",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-sfb-complete-local-domain-root-perturbation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09EJ, complete local domain and application of 09EI; 0325 (algebra-lemma-quotient-complete-local), 00GK (algebra-lemma-finite-is-integral), 00OJ (algebra-lemma-integral-dim-up)"
+   }
+  },
+  {
+   "text": "For every $i<d$, $\\beta^i\\equiv\\theta^i\\pmod{\\pi B}$, by factoring their difference. Thus $1,\\beta,\\ldots,\\beta^{d-1}$ span $B/\\pi B$. Nakayama [lem-weil-pbc-nakayama-local-generators], over the local ring $C$ with maximal ideal $\\pi C$, says that they span $B$. Evaluation at $\\beta$ therefore gives a surjection $C[T]/(P_1)\\to B$. Both sides are free of rank $d$ by [lem-weil-pbc-monic-quotient-free]. In their indicated bases this surjection is a square matrix; modulo $\\pi$ it is invertible, so its determinant is a unit of $C$ and its adjugate gives an inverse. Localizing at $\\pi$ yields $K[T]/(P_1)\\cong E$, taking the class of $T$ to $\\beta$. Here $B[1/\\pi]=K[\\theta]=E$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09EJ, map Phi, Nakayama, and equal-rank argument; 00DV (algebra-lemma-NAK)"
+   }
+  },
+  {
+   "text": "The polynomial $P_1$ is irreducible over $K$, since its quotient is the field $E$. It is also irreducible over $F$: a factorization into positive-degree polynomials over $F$ would remain such over $K$. Put $N_0=F[T]/(P_1)$; it is a degree-$d$ field extension. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] identifies $K\\otimes_FN_0$ with $K[T]/(P_1)$ by $c\\otimes[g(T)]\\mapsto[cg(T)]$, with inverse taking $c$ to $c\\otimes1$ and $T$ to $1\\otimes[T]$. Thus $K\\otimes_FN_0\\cong E$. Over $K$, $P_1$ is the minimal polynomial of the generator $\\beta$ of the separable extension $E/K$, so $P_1^{\\prime}\\ne0$. The derivative over $F$ is consequently nonzero as well. By [lem-trf-irreducible-separable-derivative] $P_1$ is separable over $F$, and [lem-trf-simple-separable-field-extension] makes $N_0/F$ separable. Taking $E=H$ proves the separable case.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-trf-irreducible-separable-derivative",
+    "lem-trf-simple-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09EJ, final polynomial quotient and field descent; 09H0 (fields-lemma-irreducible-polynomials) and 09H9 (fields-lemma-separably-generated-separable)"
+   }
+  },
+  {
+   "text": "Now suppose $\\operatorname{char}F=p>0$ and $H=M K(\\alpha)$, where $\\alpha^{p^r}=\\pi$ is the prescribed root in $H$. Set $q=p^r$, $L=F(\\alpha)$, and $L_K=K(\\alpha)$. Apply [lem-sbc-dvr-uniformizer-root-algebra] to $A$ and $C$ with exponent $q>0$: the algebras $A[T]/(T^q-\\pi)$ and $C[T]/(T^q-\\pi)$ are domains. After inverting $\\pi$, they are finite-dimensional domains over $F$ and $K$, hence fields (multiplication by a nonzero element is an injective endomorphism of a finite-dimensional vector space and is therefore surjective). Evaluating $T$ at $\\alpha$ embeds these fields into $H$, with images $L$ and $L_K$. Their bases from [lem-weil-pbc-monic-quotient-free] have $q$ elements. As in step 5, the tensor universal property gives $K\\otimes_FL\\cong L_K$, sending $1\\otimes\\alpha$ to this very $\\alpha$. Both $L/F$ and $L_K/K$ are purely inseparable: the $q$th power of any rational expression in $\\alpha$ lies in the base field by Frobenius. This includes $r=0$, when $q=1$ and $L=F$.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09F9 (theorem-epp), completion paragraph and the prescribed root; 09EV (lemma-pull-root-uniformizer), root algebra argument"
+   }
+  },
+  {
+   "text": "Apply steps 2--5 to $E=M$ and embed the resulting separable $N_0/F$ into $M$ using $n\\mapsto$ the image of $1\\otimes n$ under $K\\otimes_FN_0\\cong M$. By [lem-weil-pbc-separable-purely-inseparable-linear-disjoint], the multiplication map $N_0\\otimes_FL\\to H$ is injective. Its image is a finite-dimensional domain over $F$, hence a field by the same multiplication argument as in step 6, and therefore equals the compositum $N=N_0L$. In particular $N/F$ is finite. Apply that same cited node over $K$ to $M$ and $L_K$: multiplication identifies $M\\otimes_KL_K$ with $ML_K=H$, since its image is again a finite-dimensional field containing both factors. Finally the tensor universal property gives\n$$K\\otimes_FN\\cong (K\\otimes_FN_0)\\otimes_K(K\\otimes_FL)\\cong M\\otimes_KL_K\\cong H.$$\nThe first map sends $c\\otimes(n\\otimes l)$ to $(c\\otimes n)\\otimes(1\\otimes l)$; its inverse sends $(c\\otimes n)\\otimes(d\\otimes l)$ to $cd\\otimes(n\\otimes l)$. Balancing verifies that these maps are well defined and mutually inverse. In particular the construction uses the original $\\pi$ and its prescribed root throughout.",
+   "uses": [
+    "lem-weil-pbc-separable-purely-inseparable-linear-disjoint",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "09F9 (theorem-epp), completion paragraph expanding its application of 09EJ to a separable/power-root compositum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-sfb-complete-local-domain-root-perturbation",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-trf-simple-separable-field-extension",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-separable-purely-inseparable-linear-disjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EJ, lemma-approximate-separable-extension, proof; Tag 09F9, theorem-epp, completion paragraph, with the tensor/root argument written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "approximate.*separable|separable.*completion|completion.*separable|Krasner",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"grep\", \"query\": \"approximate.*separable|separable.*completion|completion.*separable|Krasner\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern separable degrees, scalar extension, and valued completions, not descent of a finite extension of Frac(completion) as this tensor product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite separable field extension of completed discretely valued field is tensor base change of finite separable extension of dense fraction field",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"leansearch\", \"query\": \"finite separable field extension of completed discretely valued field is tensor base change of finite separable extension of dense fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WithAbs.instIsSeparable\", \"Field.sepDegree\", \"IsSepClosure.recOn\", \"Field.finInsepDegree\", \"separableClosure.isPurelyInseparable\", \"IntermediateField.lift_sepDegree_bot'\", \"Algebra.Unramified.baseChange\", \"Field.finSepDegree_eq_finrank_of_isSeparable\"], \"digest\": \"37e08603abdc27ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern separable degrees, scalar extension, and valued completions, not descent of a finite extension of Frac(completion) as this tensor product."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern separable degrees, scalar extension, and valued completions, not descent of a finite extension of Frac(completion) as this tensor product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable extension of the fraction field of the completion of a DVR descends to a finite separable fraction field extension before completion, including a prescribed purely inseparable uniformizer root",
+   "results": "{\"t\": \"2026-10-24T05:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"A finite separable extension of the fraction field of the completion of a DVR descends to a finite separable fraction field extension before completion, including a prescribed purely inseparable uniformizer root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"Tilt.instField\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"Field.henselian\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"NumberField.FinitePlace.embedding\"], \"digest\": \"b6e52aa8d35e8c8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern separable degrees, scalar extension, and valued completions, not descent of a finite extension of Frac(completion) as this tensor product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a separable defining polynomial over a DVR completion so that the induced tensor product of fields is the original extension",
+   "results": "{\"t\": \"2026-10-24T05:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate a separable defining polynomial over a DVR completion so that the induced tensor product of fields is the original extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.FormallySmooth.of_perfectField\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsSepClosed.lift_def\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Field.henselian\", \"galLift\"], \"digest\": \"c4b7fe79ddb46981\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern separable degrees, scalar extension, and valued completions, not descent of a finite extension of Frac(completion) as this tensor product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "approximate a defining polynomial to descend a finite separable extension of a DVR completion",
+   "results": "{\"t\": \"2026-10-24T07:14:06Z\", \"tool\": \"leansearch\", \"query\": \"approximate a defining polynomial to descend a finite separable extension of a DVR completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.exists_Polynomial_intValuation_lt\", \"Polynomial.Separable\", \"IsSeparable\", \"Polynomial.HasSeparableContraction\", \"Polynomial.IsSeparableContraction\", \"minpoly.map_eq_of_isSeparable_of_isPurelyInseparable\", \"sum_smul_minpolyDiv_eq_X_pow\", \"Field.powerBasisOfFiniteOfSeparable\"], \"digest\": \"0602a0f077d65981\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give completion constructions, separability notions, or polynomial coefficient approximation over normed fields; none gives finite-extension descent as this tensor algebra. Normed/Field/Approximation.lean was read: its root continuity requires a splitting hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable extension of the fraction field of a completed discrete valuation ring descends as tensor product from the fraction field of the original DVR",
+   "results": "{\"t\": \"2026-10-24T07:14:06Z\", \"tool\": \"leanfinder\", \"query\": \"finite separable extension of the fraction field of a completed discrete valuation ring descends as tensor product from the fraction field of the original DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"Tilt.instField\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"94ee6561bfb8d8cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give completion constructions, separability notions, or polynomial coefficient approximation over normed fields; none gives finite-extension descent as this tensor algebra. Normed/Field/Approximation.lean was read: its root continuity requires a splitting hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "approximate.*separable|separable.*completion|completion.*separable",
+   "results": "{\"t\": \"2026-10-24T07:14:28Z\", \"tool\": \"grep\", \"query\": \"approximate.*separable|separable.*completion|completion.*separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Approximation.lean\", \"Mathlib/Topology/UniformSpace/Completion.lean\", \"Mathlib/Topology/UniformSpace/Completion.lean\", \"Mathlib/Topology/UniformSpace/Completion.lean\", \"Mathlib/Topology/Bases.lean\"], \"digest\": \"9ee70c3158f78ed8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give completion constructions, separability notions, or polynomial coefficient approximation over normed fields; none gives finite-extension descent as this tensor algebra. Normed/Field/Approximation.lean was read: its root continuity requires a splitting hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T07:14:29Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give completion constructions, separability notions, or polynomial coefficient approximation over normed fields; none gives finite-extension descent as this tensor algebra. Normed/Field/Approximation.lean was read: its root continuity requires a splitting hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner approximation finite extension of completion generated by a perturbed minimal polynomial over the original discrete valuation fraction field",
+   "results": "{\"t\": \"2026-10-24T07:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner approximation finite extension of completion generated by a perturbed minimal polynomial over the original discrete valuation fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.FinitePlace.embedding\", \"Valued.completable\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"NumberField.InfinitePlace.Completion.instAlgebra\", \"Tilt.instField\", \"Valuation.Completion\", \"NumberField.instNormedFieldValuedAdicCompletion\"], \"digest\": \"eab288718c33aaef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give completion constructions, separability notions, or polynomial coefficient approximation over normed fields; none gives finite-extension descent as this tensor algebra. Normed/Field/Approximation.lean was read: its root continuity requires a splitting hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-strict-complete-reduction",
+  "date": "2026-10-24",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Strict residue and completion reduction in the proof of Epp. Completion paragraph: approximate the finite separable part while retaining the prescribed p-power root of the chosen lower uniformizer.",
+   "via": [
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-completion-extension-approximation",
+  "worker": "stage1",
+  "summary": "Followed 09EJ by integral primitive generator, root perturbation and Nakayama, then expanded 09F9 by tensoring with the identical uniformizer-root algebra. Added only the strictly smaller 09EI root-perturbation input; reused existing algebra nodes. Statement unchanged.",
+  "blueprint": "Historical supporting algebra through the recorded creation chain of det-thm-sf-ctf-stability-direct-images, proof (3); latest blueprint direct-image proof (3) has no explicit Epp/completion lemma, as already recorded by the item. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "why": "Generic commutative-algebra input used in the Stacks 09EJ/09F9 argument; the inherited unit has no statement of this algebra fact. Its statement is used as a black box, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic commutative-algebra input used in the Stacks 09EJ/09F9 argument; the inherited unit has no statement of this algebra fact. Its statement is used as a black box, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Generic commutative-algebra input used in the Stacks 09EJ/09F9 argument; the inherited unit has no statement of this algebra fact. Its statement is used as a black box, without replacing a unit step."
+   },
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic commutative-algebra input used in the Stacks 09EJ/09F9 argument; the inherited unit has no statement of this algebra fact. Its statement is used as a black box, without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-sbc-dvr-uniformizer-root-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-8b08ee5f4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8b08ee5f4 (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra.tex: 09EI lemma-krasner in full, 09EJ lemma-approximate-separable-extension in full, and the 09F9 theorem-epp completion paragraph. The item's two cases (separable; char p compositum with K̂(π^{1/p^r})) match the source, and the statement is unchanged. The new node lem-sfb-complete-local-domain-root-perturbation is 09EI with Noetherian made explicit and precision in a fixed parameter t. It is true: dim 1 gives m=√(t), so m^k⊂(t), and the Stacks proof already works with π=t. I tested it on k[[u]] with a non-unit derivative, on the singular domain k[[u^2,u^3]] with T^2−u^4, and on Artin–Schreier; T^p at 0 is correctly excluded. Grep over the DAG finds no duplicate: the henselian simple-root, henselian Krasner and normed Krasner nodes are field-valued, not roots inside B. The node is statement-only, self-contained and strictly smaller than the item. Steps 1–7 each check against the cited statements: completion is a DVR with C/π^n≅A/π^n; the integral primitive element gives B=C[T]/(P) free of rank d; B is local, complete, of dimension 1, with P'(θ)≠0 by Bezout, which meets every hypothesis of the root lemma; Nakayama over C plus the determinant argument give C[T]/(P1)≅B; P1 is irreducible and separable over F; the root algebra for q=p^r is purely inseparable; linear disjointness is applied twice, then the tensor associativity. Edge cases d=1, r=0, A already complete, mixed characteristic and imperfect residue field are all fine. I accept the tool uses completion-of-dvr-is-dvr, finite-over-complete-local-product, integral-extension-dimension and sbc-dvr-uniformizer-root-algebra. Batch 5: lem-trf-irreducible-separable-derivative and lem-trf-simple-separable-field-extension are status-mathlib generic field-theory leaves with empty proof_deps. They are not part of the trace formula or Poincaré duality statements or proofs, so the citations are OK. Minor: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrCompletionExtensionApproximation",
+  "declaration": "IsDiscreteValuationRing.exists_finite_extension_tensor_equiv",
+  "file": "lean/Sheaf/RingTheory/DvrCompletionExtensionApproximation.lean",
+  "statement": "theorem exists_finite_extension_tensor_equiv (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (F : Type v) [Field F] [Algebra A F] [IsFractionRing A F] (pi : A) (hpi : Irreducible pi) (K : Type w) [Field K] [Algebra (AdicCompletion (IsLocalRing.maximalIdeal A) A) K] [IsFractionRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) K] [Algebra F K] (hcompat : ∀ a : A, algebraMap F K (algebraMap A F a) = algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) K (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) a)) (H : Type z) [Field H] [Algebra K H] [FiniteDimensional K H] (hH : Algebra.IsSeparable K H ∨ ∃ (p r : ℕ) (M : IntermediateField K H) (alpha : H), 0 < p ∧ CharP F p ∧ Algebra.IsSeparable K M ∧ alpha ^ (p ^ r) = algebraMap K H (algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) K (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) pi)) ∧ M ⊔ IntermediateField.adjoin K {alpha} = ⊤) : ∃ (N : Type v) (_ : Field N) (_ : Algebra F N), FiniteDimensional F N ∧ Nonempty ((K ⊗[F] N) ≃ₐ[K] H) ∧ (Algebra.IsSeparable K H → Algebra.IsSeparable F N)",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13292240f",
+  "group": "N6",
+  "result": "pass",
+  "note": "Item lean only change vs live; statement verbatim. Clauses checked: DVR A, IsFractionRing F, Irreducible pi = uniformizer, AdicCompletion (maximalIdeal A) A, IsFractionRing Â K, canonical F→K via hcompat on A (localization uniqueness), finite H/K, separable alternative, CharP F p ∧ 0<p with separable M, alpha^(p^r)=image of the same pi, M ⊔ adjoin K {alpha} = ⊤; conclusion ∃ N : Type v field, finite F-algebra, Nonempty (K ⊗[F] N ≃ₐ[K] H), separability conditional on the same N. Stmt_dep records (IsDiscreteValuationRing, Algebra, AdicCompletion, Algebra.IsSeparable, TensorProduct) correct. Edge cases r=0, H=K, complete A, mixed characteristic, universes OK. No defs, sorry only, docstrings with source and blueprint, proof steps 1-7, report sections present. No findings."
+ }
+}

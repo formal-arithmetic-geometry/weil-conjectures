@@ -1,0 +1,385 @@
+{
+ "id": "lem-per-generically-reduced-rational-invariant-calculus",
+ "kind": "statement",
+ "title": "Local invariant calculus including embedded nilpotents over Q",
+ "statement": "Work over $\\mathbf Q$. Let $X\\hookrightarrow P$ be a closed immersion [def-weil-closed-immersion] with $P$ smooth [def-sbc-smooth-morphisms], separated and finite type [def-weil-finite-type-morphism] and $X$ finite type and generically reduced (its local rings at the generic points of its irreducible components are reduced [def-pc-reduced-scheme]). Reducedness at all points is not assumed. Allow finite disjoint unions of such pairs. There is a local Hilbert--Samuel/marked-ideal calculus with the following properties. A history retains the successive ordinary ambient blowups [def-nagata-global-blowup], their coherent center ideals, the scheme-theoretic strict transforms [def-nagata-strict-transform] of $X$, and the order of the preceding center ideals on those transforms. The histories considered are prefixes of the maximum-stratum construction below, their open restrictions, and their smooth pullbacks, with empty stages deleted.\n\n(1) Simultaneously on all these histories there are invariant functions on the current strict transforms with values in one totally ordered set $V\\cup\\{\\bot\\}$, with least value $\\bot$, finite image on each finite-type input, and closed upper strata. The values are synchronization values, normalized under adjoining smooth factors; they are not the raw Hilbert--Samuel functions. If the maximum is greater than $\\bot$, its reduced stratum $C$ is a nonempty regular [def-weil-regular-scheme] closed subscheme, nowhere dense in the current strict transform, with coherent ideal [pqf-def-coherent] both there and in the current ambient scheme. The center avoids the inverse image of the regular locus of the INITIAL $X$. Blowing up $C$ in the ambient scheme is an allowed next history; the ambient scheme remains smooth and finite type, and the new strict transform remains generically reduced. A history all of whose points have value $\\bot$ has regular strict transform. Initially regular schemes, and the empty scheme, have no active strata.\n\n(2) For each finite history the values and the reduced ideals of the individual strata agree under open restriction and smooth pullback, with no constant-relative-dimension hypothesis. This includes comparison of histories on smooth morphisms of the strict-transform schemes, using local ambient embeddings. If two ambient embeddings present the same intrinsic history, identifying the earlier center ideals and their order, their invariant functions and stratum ideals agree. These identifications respect further restriction, smooth pullback, and a third embedding. The retained history includes earlier ideal centers even when their intrinsic blowup is an identity.\n\n(3) Starting at the empty history and successively blowing up the reduced FULL maximum stratum whenever its value exceeds $\\bot$ terminates after finitely many steps. This assertion includes finite disjoint unions. The next stages are the ambient ordinary blowup and scheme-theoretic strict transform; no passage to the reduction of $X$ is allowed. The calculus may retain regular centers needed for exceptional-divisor cleanup after the strict transform becomes regular; they must still avoid the inverse image of the original regular locus as in (1).",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Theorem/Addendum 6.1, §§6.1--6.3, pp.12--15, and the marked-ideal construction referenced there (BM2 Chapters II--III and BM4 §7); https://arxiv.org/pdf/0905.3580 (arXiv:0905.3580v1), WANTED archival copy"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "pqf-def-coherent",
+  "def-weil-regular-scheme",
+  "def-weil-proper-morphism",
+  "def-per-generically-reduced-invariant-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "We construct the singular-locus part and stop as soon as the strict transform is regular. At every nonregular point take the full-envelope maximal-order presentation supplied by [lem-per-scheme-hilbert-samuel-test-presentations], retaining the earlier center ideals and their order. Use the head $A_x=(c_x,\\Delta^{q_x}h_x)$ of [lem-per-scheme-normalized-hilbert-head]. Apply [lem-trf-marked-ideal-numerical-resolution-engine] to the presentations, and remove their common leading word entry $1$. Denote the remaining marked word by $t_x$. Define $\\nu_H(x)=\\bot$ at regular points and $\\nu_H(x)=(A_x,t_x)$ otherwise, in the fixed lexicographic product of the head space and marked-word space, with a new least element $\\bot$. This definition is simultaneous on finite histories, not an induction assuming termination.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-trf-marked-ideal-numerical-resolution-engine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§§6.2--6.3, replacing the leading 1 of the maximal-order marked word."
+   }
+  },
+  {
+   "text": "These are well-defined values. For two presentations of the same germ and retained level, [lem-per-scheme-hilbert-samuel-test-presentations] gives test equivalence on equal-dimensional minimal envelopes. For different dimensions, it gives the comparison after adjoining relative smooth parameters. The marked engine equates the tails under the former equivalence and under the latter smooth pullback; the normalized head is unchanged by [lem-per-scheme-normalized-hilbert-head]. Therefore every choice gives the same pair $(A,t)$. On overlaps these equalities glue the pointwise assignments. Three choices give equalities of the same values, so the comparison is transitive. The retained earlier ideals and their birth data, rather than a renumbered tower, are used throughout.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-trf-marked-ideal-numerical-resolution-engine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§6.3, minimal-envelope independence and arbitrary smooth comparison."
+   }
+  },
+  {
+   "text": "There are finitely many heads on each finite-type stage by [lem-per-scheme-normalized-hilbert-head]. On each head locus choose finitely many presentation charts: finite-type schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and finite subcovers can be chosen as follows. On each affine an ambient union of basic opens is the union for an ideal $J$; [lem-weil-pbc-noetherian-submodule-finite] gives finitely many generators, hence finitely many of the original basic opens cover that union. Apply this to the open neighbourhoods covered by the local presentation charts of [lem-per-scheme-hilbert-samuel-test-presentations] and restrict to the head locus. The engine gives finite image and closed upper sets for the tails on these charts. Thus the glued word has finite image. For upper semicontinuity, near a point remove the finitely many larger head loci; on the remaining maximum-head locus the assertion is the engine's upper semicontinuity. The boundary of a head locus can only have greater head, already included in any upper set containing that locus. Hence the lexicographic upper sets are closed. The regular head criterion shows that our bottom locus is exactly the regular locus.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§§6.1--6.3, local finiteness and upper semicontinuity."
+   }
+  },
+  {
+   "text": "If the greatest word is $m=(A,t)>\\bot$, its locus $T$ is nonempty and closed. At each point of $T$, use a presentation of the maximum head $A$ and restrict away from greater heads. Its cosupport is the head-$A$ locus by [lem-per-scheme-normalized-hilbert-head], and removing the initial $1$ identifies its full marked-word maximum with $T$ on that chart. The engine supplies a smooth closed center on this exact locus, with the required normal crossings. Form $C=T_{\\mathrm{red}}$ by [lem-weil-pbc-reduced-induced-closed-subscheme]. On an etale presentation chart its pullback is reduced by [lem-trf-etale-reduced-cartier-descent]; the smooth center is reduced by [lem-sc-smooth-algebra-reduced-field]. The defining equations of the pulled-back $X_H$ vanish on all points of this reduced center, hence vanish in its coordinate rings; the center therefore factors through the actual $X_H$. Uniqueness of the reduced closed structure identifies these centers scheme-theoretically with the pullback of $C$, in both the ambient and intrinsic schemes. Their ideals agree on overlaps.",
+   "uses": [
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-etale-reduced-cartier-descent",
+    "lem-sc-smooth-algebra-reduced-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§6.3, full maximum center and descent of its actual ideal."
+   }
+  },
+  {
+   "text": "The center is regular: its local etale charts are smooth over $\\mathbf Q$, hence regular by [lem-weil-pbc-smooth-scheme-over-field-regular], and their maps to $C$ are etale by [lem-weil-pbc-etale-scheme-base-change], hence their local maps are flat by [def-weil-etale-morphism]. Apply [lem-weil-pbc-flat-under-regular] to these Noetherian local rings. It is also coherent in both ambient and intrinsic schemes. Indeed the reduced-induced lemma gives quasi-coherent radical ideals on affine charts; the coordinate rings are Noetherian by finite type and quotient permanence [lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-surjective-image-noetherian]. Every such ideal is finitely generated by [lem-weil-pbc-noetherian-submodule-finite], and [pqf-lem-coherent-ft-locnoeth] makes it coherent.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-under-regular",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Center descent and coherence; regularity via flat local descent, coherence on Noetherian affines."
+   }
+  },
+  {
+   "text": "At a generic point the current generically reduced scheme has a field as local ring by [lem-per-generically-reduced-strict-transform-geometry], hence value $\\bot$. Thus $T$ contains no generic point and contains no nonempty open subset: an open containing a specialization also contains its component's generic point. This proves nowhere denseness. The ambient blowup remains smooth, separated and finite type by [lem-trf-smooth-center-blowup-geometry], using regular-implies-smooth over the perfect field $\\mathbf Q$ from [lem-trf-regular-perfect-field-smooth] for $C$. Only the ambient assertion of the blowup lemma is used; its reduced-strict-transform clause is not applicable. Generic reducedness of the new scheme-theoretic strict transform is instead supplied by [lem-per-generically-reduced-strict-transform-geometry]. Its test admissibility and the agreement with controlled marked transforms follow from the presentation theorem and the engine. This inductively constructs all finite maximum histories, starting with the given pair.",
+   "uses": [
+    "lem-per-generically-reduced-strict-transform-geometry",
+    "lem-trf-smooth-center-blowup-geometry",
+    "lem-trf-regular-perfect-field-smooth",
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-trf-marked-ideal-numerical-resolution-engine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§§6.2--6.3; ordinary ambient blowups, preserving generic reducedness."
+   }
+  },
+  {
+   "text": "The centers avoid the inverse image of the INITIAL regular locus. Induct on history length. The initial map is the identity. If earlier centers avoid that inverse image, the blowups and strict transforms over it are identities by [lemma-nagata-strict-transform-over-complement]. Its local rings therefore remain the original regular local rings, and the next center, whose word is greater than $\\bot$, misses it. The same induction works after restriction and smooth comparison, since the normalized head detects regularity and is smooth invariant. A regular or empty initial input has no nonbottom point and consequently no step.",
+   "uses": [
+    "lemma-nagata-strict-transform-over-complement",
+    "lem-per-scheme-normalized-hilbert-head"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Theorem 6.1(2); induction using the complement of every center."
+   }
+  },
+  {
+   "text": "For smooth comparison, [lem-per-generically-reduced-strict-transform-geometry] supplies the actual pulled-back finite diagrams and their retained ideals, deleting just empty centers. The presentation comparison, normalized head equality and marked-engine smooth functoriality show pointwise equality of $\\nu$; they apply equally to intrinsic smooth maps using local envelopes. This has no relative-dimension restriction. If $S$ is any individual stratum, its reduced locally closed structure pulls back to a reduced structure by [lem-trf-smooth-reduced-dense-pullback], applied to the reduced locally Noetherian scheme $S$. On an open where $S$ is closed, uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies the pulled-back ideal with the reduced stratum ideal. The same argument in ambient charts gives the ambient ideal. This includes empty inverse-image strata (unit ideals). For identical intrinsic histories the equalities in step 2 give the same ideals and are compatible with third embeddings. All these equalities commute with further pullbacks because they identify the same functions and unique reduced structures, not independently chosen centers.",
+   "uses": [
+    "lem-per-generically-reduced-strict-transform-geometry",
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§6.3; comparisons of finite histories and each reduced stratum."
+   }
+  },
+  {
+   "text": "It remains to prove termination rather than infer it from strict lexicographic decrease. By [lem-per-scheme-normalized-hilbert-head] the greatest heads cannot increase and can strictly drop only finitely often. Suppose an infinite maximum history existed. After its last head drop the greatest head would be fixed, say $A$. On that interval the maximum-center steps are exactly the synchronized maximum steps of the presentations retaining $A$: their words all start with $1$, and comparing their remaining tails is exactly comparing our words with head $A$. The marked engine rules out an infinite synchronized fixed-head process, including finitely many patched presentations; when their cosupports empty, the presentation theorem removes $A$, forcing another head drop or regularity. This is a contradiction. All finite chart choices can be made at the start of that interval, using Noetherian quasi-compactness as in step 3. Finite disjoint unions are treated by the same union of presentations and the same maximum, so the argument also proves their termination. We keep the actual scheme-theoretic strict transforms throughout, and take no cleanup steps after regularity.",
+   "uses": [
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§§6.1--6.3 and Remark 6.2, finite head drops and termination of constant-head tails."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-per-generically-reduced-strict-transform-geometry",
+  "lem-per-scheme-hilbert-samuel-test-presentations",
+  "lem-per-scheme-normalized-hilbert-head",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-trf-etale-reduced-cartier-descent",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-trf-smooth-center-blowup-geometry",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lemma-nagata-strict-transform-over-complement",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Assembly following BMT §§6.1--6.3, pp.13--15 (online text read); archival PDF and detailed BM2/BM4 references absent locally, recorded WANTED. New presentation/head inputs are statement-only, not asserted proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|desingulari[sz]|marked.?ideal",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant of singularities selects smooth centers and terminates for generically reduced schemes in characteristic zero",
+   "results": "; 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsReduced.recOn, Algebra.smoothLocus, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsReduced.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Hilbert Samuel invariant for embedded generically reduced rational schemes with regular maximum centers smooth functoriality and termination",
+   "results": "; 8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.smoothLocus, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution of singularities by repeated maxima of a Hilbert Samuel invariant on a scheme with embedded nilpotents",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, Algebra.smoothLocus, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isReduced_of_isIntegral",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel marked ideal resolution invariant generically reduced scheme characteristic zero embedded nilpotents smooth functoriality",
+   "results": "; 8 hits: Algebra.smoothLocus, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsReduced, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|desingulari[sz]|marked.?ideal",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of nonreduced generically reduced schemes by maximum strata of a smooth invariant",
+   "results": "; 8 hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isAffine_isReduced, isReduced_ofLocalizationMaximal, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel marked ideal resolution invariant generically reduced scheme characteristic zero embedded nilpotents smooth functoriality",
+   "results": "; 8 hits: Algebra.smoothLocus, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsReduced, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|desingulari[sz]|marked.?ideal",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of nonreduced generically reduced schemes by maximum strata of a smooth invariant",
+   "results": "; 8 hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isAffine_isReduced, isReduced_ofLocalizationMaximal, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel marked ideal resolution invariant generically reduced scheme characteristic zero embedded nilpotents smooth functoriality",
+   "results": "; 8 hits: Algebra.smoothLocus, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsReduced, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|desingulari[sz]|marked.?ideal",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of nonreduced generically reduced schemes by maximum strata of a smooth invariant",
+   "results": "; 8 hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isAffine_isReduced, isReduced_ofLocalizationMaximal, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-variety-strong-resolution",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 3 (duality) of the ancestor, via the regular-resolution branch: Theorem/Addendum 6.1, §§6.1--6.3, pp.12--15, and the marked-ideal construction referenced there (BM2 Chapters II--III and BM4 §7); https://arxiv.org/pdf/0905.3580 (arXiv:0905.3580v1), WANTED archival copy",
+   "via": [
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-generically-reduced-rational-invariant-calculus",
+  "worker": "stage1",
+  "summary": "Constructs normalized head plus marked-ideal tail on finite histories; proves maximum-center descent, coherence, nowhere denseness, preservation of the initial regular open, intrinsic/smooth comparisons and termination by finitely many head drops plus marked-ideal termination. Adds arbitrary-scheme HS presentations and normalized-head inputs, without applying reduced-only lemmas to schemes with embedded nilpotents. Adds generic reducedness and strict-transform comparison geometry. Uses no SGA and writes no Lean.",
+  "blueprint": "Current latest blueprint lem-per-artin-gabber-affine-curve proof Step 3, through the existing regular-resolution ancestry; BMT §§6.1--6.3 is the local invariant branch. Unit and chapter routes are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-reduced-cartier-descent",
+    "why": "Generic scheme/algebra geometry used in the construction and descent of the maximum center; no theorem of the perverse-sheaf unit supplies this tool."
+   },
+   {
+    "node": "lem-trf-marked-ideal-numerical-resolution-engine",
+    "why": "Generic marked-ideal numerical-resolution input, independent of reducedness of the singular scheme."
+   },
+   {
+    "node": "lem-trf-smooth-center-blowup-geometry",
+    "why": "Generic scheme/algebra geometry used in the construction and descent of the maximum center; no theorem of the perverse-sheaf unit supplies this tool."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic scheme/algebra geometry used in the construction and descent of the maximum center; no theorem of the perverse-sheaf unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic scheme/algebra geometry used in the construction and descent of the maximum center; no theorem of the perverse-sheaf unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme/algebra geometry used in the construction and descent of the maximum center; no theorem of the perverse-sheaf unit supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-reduced-cartier-descent",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-trf-smooth-center-blowup-geometry",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-eacb91f19",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-eacb91f19 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Item statement byte-identical to live; added stmt_dep def-weil-proper-morphism defines 'separated'. Three new unsplit statement-only nodes are nonreduced generalizations of reduced-only nodes the item cannot cite (taking X_red would change the strict transforms); no duplicate found in a DAG-wide Hilbert-Samuel/generically-reduced scan. Strict-transform node: checked against Stacks 080E(1) and 036C (R_0); Cartier exceptional divisor gives density and the generic-point bijection; the excluded doubled-line case is correctly kept out by nowhere-density. Head node: regular head (1,(1,1,...)) is least and only at regular points (entry 1 = embdim-q+1, or 1+embdim when q=0); smooth y over x gives h_y=Lambda^s h_x, q+s, same c by the dimension formula. Presentation node: Bennett/BM need no reducedness; tested on x^2 in A^1 and y^2 in A^2. Steps 1-9: every cited statement was checked for the clause used. Step 3 subcover and closed upper sets, step 4 etale-reduced descent plus uniqueness, step 5 flat descent of regularity and coherence, step 6 nowhere density and regular=>smooth over Q, step 7 complement induction, step 8 stratum ideals via smooth-reduced pullback, step 9 finite head drops plus engine patched termination. Step 9 is terse but every fact it uses is a cited statement. Batch-5: all 5 lem-trf citations and 2 def-trf citations are reached from nt-target-weil-conjectures through sk-thm-sf-package (finiteness/purity/alteration branch) without either assumption leaf or this item. They are generic char-0 resolution and scheme geometry, not steps of the trace formula or Poincare duality proofs; trace-formula closure membership is uninformative because it contains about 26.6k nodes including this item. tool_uses accepted as generic; lem-trf-regular-perfect-field-smooth is unlisted. BMT is still WANTED locally."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericallyReducedRationalInvariantCalculus",
+  "declaration": "AlgebraicGeometry.GenericallyReducedResolution.exists_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericallyReducedRationalInvariantCalculus.lean",
+  "statement": "theorem exists_calculus : ∃ (V : Type (u + 1)) (_ : LinearOrder V) (_ : OrderBot V), Nonempty (Calculus.{u} V)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f58a8e56",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read both modules in full, the item and new def node, all stmt_dep records and the project strictTransform/toModules/IsCoherent/IsRegularScheme sources. Every node clause is matched in Calculus: Pair hypotheses exact (no IsReduced, ULift Q only); actual scheme-theoretic strict transforms and ordered retained centers; Admissible generated class = max prefixes + open/smooth pullbacks; finite image, closed upper sets; maximum center nonempty, regular, nowhere dense (interior of closed range empty), coherent ambient+intrinsic ideals, avoids initial regular locus; stage geometry; bottomRegular/regularInput; ambient and intrinsic value and every-stratum ideal pullback including ambient charts and unit ideals, no relative-dimension parameter; embedding comparison; termination. regularPoint (bottom iff regular) picks the no-cleanup option the node allows ('may') and its proof uses. Edge cases (empty X, length 0, collapsed centers, nilpotents, universes) covered. lean.statement fields verbatim, docstrings carry source/blueprint and 9 steps, no hollow defs, single sorry, live node diff = lean + new stmt_dep only, new def node justified (reduced-only interface needs IsReduced). No files changed, no compile."
+ }
+}

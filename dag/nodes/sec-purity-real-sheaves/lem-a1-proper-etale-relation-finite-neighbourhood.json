@@ -58,52 +58,25 @@
    }
   },
   {
-   "text": "Put $U_0=U\\times_TT'$, $R_0=R\\times_TT'$, and write $s_0,t_0:R_0\\to U_0$ for the pulled-back projections. Define $R'$ to be the induced open subscheme with underlying subset $s_0^{-1}(U')\\cap t_0^{-1}(U')$, and let $W'$ be its induced open complement. Both inverse images are open and closed, so their intersection and its complement are open and closed. Thus $R_0=R'\\amalg W'$. For every $T'$-scheme $H$, a map $H\\to R_0$ factors through $R'$ exactly when its two composites to $U_0$ factor through $U'$, and the factorizations are unique. By [def-pc-fibre-product] this identifies $R'$ with $U'\\times_{U_0,s_0}R_0\\times_{t_0,U_0}U'$ as schemes, with the stated projections. This also identifies $R'$ with the pullback of $j:R\\to U\\times_TU$ along $U'\\times_{T'}U'\\to U\\times_TU$.",
+   "text": "Apply [lem-a1-clopen-relation-base-change-identification] to the given relation, $B=T'$, and $V=U'$. It gives the clopen decomposition $R\\times_TT'=R'\\amalg W'$, the required iterated fibre-product identification, and the equivalence-relation assertion for the two induced projections on every $T'$-scheme. Here the base-changed endpoint maps are used, so all points and relation axioms are relative to the same fixed map to $T'$.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), restriction in (h); direct construction for closed j"
-   }
-  },
-  {
-   "text": "The map $R'\\to U'\\times_{T'}U'$ is a closed immersion: its pullback square with $j$ was identified in step 4, so apply [lem-weil-pbc-closed-immersion-base-change]. It is finite by [lem-weil-pbc-closed-immersion-finite]. The projection $U'\\times_{T'}U'\\to U'$ is a base change of the finite map $U'\\to T'$, hence finite; its composite with $U'\\to T'$ is finite. Composing once more with $R'\\to U'\\times_{T'}U'$ proves $R'\\to T'$ finite. The base-change and composition assertions here are precisely the finite-morphism clauses of [lem-trf-finite-radicial-basechange]; they do not require any radicial hypothesis.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-trf-finite-radicial-basechange"
+    "lem-a1-clopen-relation-base-change-identification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01QR (lemma-base-change-closed-immersion), 035C (lemma-closed-immersion-finite), 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite)"
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VD (lemma-restrict-groupoid-relation), with arbitrary base change and the induced clopen open-subscheme realization; specialization used in more-groupoids.tex Tag 03X5 (lemma-quasi-finite-over-base-j-proper), conclusion (h)."
    }
   },
   {
-   "text": "The maps $s_0,t_0:R_0\\to U_0$ are base changes of $s,t$, hence etale by [lem-weil-pbc-etale-scheme-base-change]. Since $R'\\hookrightarrow R_0$ is an open immersion, the composites $R'\\to R_0\\rightrightarrows U_0$ are etale by [lem-weil-pbc-etale-composition-cancellation](1),(2). Each factors through the etale open immersion $U'\\hookrightarrow U_0$; part (3) of the same node then gives that the factors $s',t':R'\\to U'$ are etale.",
+   "text": "Apply [lem-a1-finite-clopen-relation-projection-properties] with $B=T'$ and the finite clopen piece $V=U'$ of step 3. Its hypotheses are precisely the assumed closed immersion $j$ and etale maps $s,t$. The identification in step 4 commutes with both endpoint maps; hence the two statements concern the same restricted projections. Thus it makes $R'$ finite over $T'$ and its two restricted projections etale. Together with $u'$ and the residue-field isomorphism from step 3, these are all the required conclusions.",
    "uses": [
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-a1-finite-clopen-relation-projection-properties"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 02GO (lemma-base-change-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 02GW (lemma-etale-permanence)"
-   }
-  },
-  {
-   "text": "For a $T'$-scheme $H$, maps $H\\to U_0$ over $T'$ identify with maps $H\\to U$ over $T$, and similarly for $R_0$, by [def-pc-fibre-product]. Thus $R_0(H)$ is an equivalence relation on $U_0(H)$ by the hypothesis. The open immersion identifies $U'(H)$ with a subset of $U_0(H)$ [def-weil-open-immersion]. Step 4 says exactly that $R'(H)$ is the restriction of that relation to this subset. Reflexivity holds because $(a,a)$ is related for each $a\\in U'(H)$; symmetry holds because reversing a related pair still has both entries in the subset; transitivity holds because if $(a,b)$ and $(b,c)$ are related then so is $(a,c)$ and both endpoints remain in the subset. This proves the required equivalence-relation assertion for every $H$, completing all the conclusions.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-open-immersion"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), conclusion (h); restriction of the assumed functor-of-points equivalence relation"
+    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), closed-immersion specialization of the restricted-relation argument and finiteness of the object square; etale projection permanence as in the preceding lemma-quasi-finite-over-base."
    }
   }
  ],
@@ -117,10 +90,8 @@
   "def-weil-open-immersion",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-trf-finite-radicial-basechange",
-  "lem-weil-pbc-etale-scheme-base-change"
+  "lem-a1-clopen-relation-base-change-identification",
+  "lem-a1-finite-clopen-relation-projection-properties"
  ],
  "proof_origin": {
   "by": "agent",
@@ -222,10 +193,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-proper-etale-relation-finite-neighbourhood",
   "worker": "stage1",
-  "summary": "Checked 03X5 and 02LN. Retained the statement. Split off a single finite clopen U-piece by existing 02LN, shrink the base to an affine open, construct the restricted relation as a clopen inverse image, and prove its finiteness by closed immersion into the finite square. Etaleness follows by base change and cancellation against the target open immersion; the equivalence axioms restrict pointwise. No new nodes.",
+  "summary": "Repair of the released batch5 re-split order. Statement and statement dependencies unchanged. Retained old steps 1-3; extracted old steps 4 and 7 into the clopen relation base-change identification, and old steps 5 and 6 into the finite/etale projection properties. Both new nodes are self-contained and statement-only, searched with two semantic phrasings plus Loogle, LeanSearch and logged Mathlib grep. The assembly proof is below 3000 characters. Repair of the later landing return: compared the retained delivery 02210780eaa with the current live item (still the seven-step version), reread all current cited statements and verified every citation quote. Kept both independent children, and made the relative base and endpoint compatibility explicit in assembly steps 4-5. The delivery is rebuilt on current origin/sheaf-dag by the prescribed delivery tool, for promotion into the live DAG rather than side completion.",
   "blueprint": "The inherited ancestor lem-a1-affine-hc0 is realized through the separated-etale-space and locally-quasi-finite-space representability branch: this item provides the finite clopen affine relation required in the fourth paragraph of the proof of Stacks 03XX. It is a created auxiliary node, not the key Rankin–Selberg unit statement.",
   "tool_uses": [
    {
@@ -239,10 +210,6 @@
    {
     "node": "lem-weil-pbc-etale-splits-off-isolated-points-technical",
     "why": "The existing elementary etale finite-piece splitting theorem 02LN is the geometric tool used by the 03X5 route, not a replacement for the unit argument."
-   },
-   {
-    "node": "lem-trf-finite-radicial-basechange",
-    "why": "Only its general finite-morphism base-change and composition clauses are used to make the restricted relation finite; this unit has no permanence theorem."
    }
   ]
  },
@@ -253,12 +220,12 @@
   "lem-trf-finite-radicial-basechange"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N1-29d42e667",
-  "group": "N1",
+  "reviewer": "NT-cc-Q144-5c8d08726",
+  "group": "Q144",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-29d42e667 (reviewer sub-agent of L); spot-checked: I read the whole item and its 7 steps, the statement of every cited node, the parent node that uses the item (lem-a1-separated-locally-qf-space-representable), and the unit record. On the source side I read Stacks 03X5 and 03X4 in full (more-groupoids.tex, lemma-quasi-finite-over-base-j-proper and lemma-quasi-finite-over-base) and 02LN (more-morphisms.tex, lemma-etale-splits-off-quasi-finite-part-technical). The statement is unchanged and keeps conclusions (a), (d), (g) and (h) of 03X5 for an affine étale equivalence relation whose relation map j is a closed immersion. It also adds étaleness of s' and t', which step 6 proves. The parent uses exactly these conclusions. Step checks: step 1 gives locally finite type (01TD remark), separatedness (01KN/01KV, since U is affine) and that u is isolated in its fibre (01TH). These are exactly the hypotheses of 02LN with n=1. Step 2 takes from the 02LN node the elementary étale neighbourhood, so κ(p)≅κ(p'). Step 3 shrinks to an affine open and uses only clause (a) of the finite-permanence node. Step 4 is genuinely elementary: R' is the clopen set s0^{-1}(U')∩t0^{-1}(U'), and as a scheme it is the pullback of j. Step 5 shows R'→U'×_{T'}U' is a closed immersion, hence finite (035C), and that the square is finite over T'. It uses only the finite base-change and composition clauses of a Mathlib leaf. Step 6 is étale base change, then composition with an open immersion, then cancellation (02GW). Step 7 restricts the equivalence relation to the subset U'(H). Edge cases tested: U=T=Spec k with the diagonal relation; two points with the total relation, where the chosen piece U' need not be R-invariant and the item does not claim it is; a base point whose residue field is not that of u; U empty. None breaks the statement or the proof. An rg search for 03X5, 03X4 and restricted relations found no duplicate (02WU is a different statement). There are no new nodes and no SGA citation. I accept the declared tool uses: three generic scheme lemmas from sk-thm-p1 and lem-trf-finite-radicial-basechange, which is a Mathlib leaf. None of them replaces a step of the unit's route. One cosmetic point: the same verdict text is copied into every search record. I made no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-5c8d08726 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Both new nodes are byte-identical to the previously PASSed head 16321d5c. The only changes are two clarifying sentences in item steps 4-5 and an extended split_report. The released re-split note (2026-10-22) is satisfied. Old steps 1-3 stay verbatim and only apply cited nodes. Old steps 4 and 7 are now lem-a1-clopen-relation-base-change-identification (1263 chars) and old steps 5 and 6 are now lem-a1-finite-clopen-relation-projection-properties (1008 chars). Nothing was dropped. The assembly is 2586 chars, under the 3000 limit. The item is not superseded: live and side-live still have the 7-step proof and neither new node exists there. Steps 1-3: I checked the cited statements (lqf implies lft, affine source implies separated, 01TH isolated point, 02LN with n=1 clauses (i)-(iii), etale composition, finite permanence (a)). Node 1 is true: the clopen intersection gives R_B = C + D, factorization through open subschemes gives the iterated fibre product, and both descriptions agree with (V x_B V) x_{UxU} R on H-points, which matches Stacks 02VD at groupoids.tex:3522. C(H) is the restriction of the relation, so C is an equivalence relation. Node 2 is true: C is a base change of j, so it is closed in the finite object square V x_B V and finite over B. C -> R_B is a base change of the clopen immersion into U_B x_B U_B. s_C and t_C are etale by base change and cancellation (02GW). No equivalence-relation hypothesis is needed. Source 03X5 checked at more-groupoids.tex:2347-2405. Edge cases: V empty, V = U_B, the diagonal relation, the total relation on two points with a non-invariant V, and a non-equivalence closed etale correspondence. An rg -L search over the DAG found no duplicate: lem-trf-etale-relation-restriction-quotient overlaps only partly, and lem-a1-closed-relation-schematic-neighbourhood is a larger later consumer. No SGA citation. Inherited tool_uses accepted. Maintainer notes: (1) lem-trf-finite-radicial-basechange in tool_uses is stale, because old step 5 moved to node 2. (2) Since the Q124 re-split, no node cites this item in proof_deps. The parent now cites the unsplit lem-a1-closed-relation-schematic-neighbourhood, whose future proof should cite this item."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -279,5 +246,16 @@
   "existing": false,
   "fixed_by": "NT-stage2-cc-ccecf4e19"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

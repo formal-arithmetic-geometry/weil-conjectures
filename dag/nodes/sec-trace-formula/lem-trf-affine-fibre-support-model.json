@@ -1,0 +1,303 @@
+{
+ "id": "lem-trf-affine-fibre-support-model",
+ "kind": "statement",
+ "title": "Affine supporting model preserving fibre-support dimension",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], let $\\mathcal F$ be a finite-type quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $x\\in\\operatorname{Supp}(\\mathcal F_s)$, where $s=f(x)$, $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-fibre-product, def-weil-residue-field], $\\mathcal F_s$ is its module pullback [def-pc-module-pullback], and support means the locus of nonzero stalks [def-weil-pbc-module-stalk]. Put $n=\\dim_x\\operatorname{Supp}(\\mathcal F_s)$, with dimension at a point the minimum of the Krull dimensions of its open neighbourhoods [def-kun-dimension]. There exist affine open neighbourhoods $u:U\\hookrightarrow X$ of $x$ and $v:V\\hookrightarrow S$ of $s$ [def-weil-affine-spectrum, def-weil-open-immersion], a finite type morphism $p:U\\to V$ with $fu=vp$, an affine scheme $Z$, a closed immersion $j:Z\\hookrightarrow U$ of finite presentation (locally of finite presentation, quasi-compact and quasi-separated) [def-weil-closed-immersion, def-sbc-locally-finite-presentation], a finite-type quasi-coherent $\\mathcal O_Z$-module $\\mathcal H$, and a point $z\\in Z_s$ with $j(z)=x$, such that $pj:Z\\to V$ is finite type and $j_*\\mathcal H\\cong u^*\\mathcal F$. Here $j_*\\mathcal H(E)=\\mathcal H(j^{-1}E)$ for open $E\\subseteq U$, and the fibre $Z_s$ is formed over $V$ at its point corresponding to $s$. Under $U_s\\subseteq X_s$, the closed immersion $j_s$ identifies $|Z_s|$ homeomorphically with $\\operatorname{Supp}((u^*\\mathcal F)_s)=\\operatorname{Supp}(\\mathcal F_s)\\cap U_s$, and $\\dim_z Z_s=n$. Both $u$ and $v$ are etale [def-weil-etale-morphism] and their maps on residue fields at every point are isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057S, lemma-elementary-devissage, proof: affine reduction and general case using lemma-sheaf-lives-on-subscheme (Tag 057Q)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "def-kun-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine opens V about f(x) and U about x contained in the inverse image of V. Let p be the restriction f.resLE V U. The restriction instance gives local finite type, and a morphism between affine schemes is affine and therefore quasi-compact. Set a=(x,hxU), sV=p(a); the restriction square gives v(sV)=f(x).",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, first paragraph of proof; finite-type restriction and affine permanence."
+   }
+  },
+  {
+   "text": "Put FU=u*F. Pullback preserves finite type and quasi-coherence; for the tensor-formula pullback, quasi-coherence is transported through the ordinary-pullback comparison. Apply the existing supporting-subscheme theorem to p, FU and a. It gives j:Z→U of finite presentation, H and a pushforward isomorphism, with its canonical fibre map js having range equal to Supp(FU_sV). Closed immersion base change makes js closed. Closed immersions are affine, so Z is affine; composition gives local finite type of j≫p, and affineness gives quasi-compactness.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison",
+    "lem-trf-finite-type-sheaf-fp-support",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, general-case paragraph applying Tag 057Q, lemma-sheaf-lives-on-subscheme; Modules Tag 01B6 and Tag 01BG."
+   }
+  },
+  {
+   "text": "The field map κ(fx)→κ(sV) induced by v and the equality v(sV)=f(x) is an isomorphism. Let k be its map of spectra. Naturality makes the square between the residue-field points commute; since k is an isomorphism and v a monomorphism, this square is Cartesian. Paste it with the defining square of U_sV. Cancellation against the defining square of X_fx shows that the induced map us:U_sV→X_fx is the base change of u, hence an open immersion. The pullback map equations are precisely the two required projections.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, affine reduction; residue-field naturality and Schemes Tag 01JY, base change of open immersions."
+   }
+  },
+  {
+   "text": "Apply the support-pullback theorem to F along u and the original fibre projection, and to FU along its fibre projection. These identify each support with the inverse image of the original support of F. The first projection equation for us now gives us(Supp(FU_sV))=Supp(F_fx)∩range(us) by elementary image-preimage reasoning. The given nonzero fibre stalk implies that the original stalk at x is nonzero; consequently p.asFiber(a) belongs to Supp(FU_sV). The range equality for js supplies z with js(z)=p.asFiber(a). Its projection gives u(j(z))=x, and injectivity of the original fibre projection gives us(js(z))=f.asFiber(x).",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "def-weil-pbc-module-stalk",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, affine reduction and Tag 057Q; Morphisms Tag 056J, lemma-support-finite-type."
+   }
+  },
+  {
+   "text": "The composite us∘js is an embedding with range Supp(F_fx)∩range(us). Corestricting to Supp(F_fx) therefore gives an open embedding: its range is the inverse image of the open range of us under the support inclusion. An open embedding preserves local Krull dimension: pull back open neighbourhoods for one inequality and take their open images for the other, using invariance of topological Krull dimension under embeddings onto their range. Apply this to z and use us(js(z))=f.asFiber(x). Finally open immersions u and v are etale and induce residue-field isomorphisms at all points.",
+   "uses": [
+    "def-kun-dimension",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, dimension comparison in affine reduction; Topology Tag 0055, dimension at a point; Morphisms Tag 02GP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "lem-trf-finite-type-sheaf-fp-support",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-support-pullback-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057S, lemma-elementary-devissage, affine reduction and general-case supporting-subscheme argument using Tag 057Q; support comparison by Morphisms Tag 056J, and dimension comparison through open embeddings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "support.*(fiber|fibre)|(?:fiber|fibre).*support",
+   "results": "0 hits: none; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsFiniteType\"",
+   "results": "0 hits: none; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine finite presentation closed subscheme supporting a finite type quasi coherent sheaf with the same support in a given fiber",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; SheafOfModules.quasicoherentDataOfIsFinitePresentation; AlgebraicGeometry.isFinite_iff; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion; AlgebraicGeometry.IsFinite.toIsAffineHom; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism and a finite type quasi coherent module admit affine neighborhoods and a finitely presented closed supporting subscheme whose fiber has the same local support dimension",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; AlgebraicGeometry.Scheme.Hom.finiteType_appLE; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting a finite type quasi coherent sheaf to affine charts and realizing it as the direct image from a finite presentation closed subscheme with prescribed fiber support",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support|annihilator|FinitePresentation",
+   "results": "0 hits: none; read the saved complete responses in search-results/. The hits concern affine ring-map finiteness, ideal-sheaf quotients or classes of morphisms, not a finite-type module with prescribed fibre support and its local dimension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(fiber|fibre)|(fiber|fibre).*support",
+   "results": "0 hits: none. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type quasi coherent sheaf is carried by a finite presentation closed subscheme with the same support in a given fibre",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.Presentation.IsFinite.isFiniteType_generators; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.QuasicoherentData.presentation. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsFiniteType\"",
+   "results": "0 hits: none. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine neighborhoods and a finitely presented closed subscheme carrying a finite type quasi coherent sheaf with the same fibre support and dimension",
+   "results": "8 hits: AlgebraicGeometry.reduce_to_affine_nbhd; AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.Scheme.IsQuasiAffine; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.locallyOfFinitePresentation_iff. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite module annihilator gives a finitely presented closed subscheme having the same fibre support after restricting to affine open neighborhoods",
+   "results": "8 hits: Module.support_eq_zeroLocus; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter; AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem; AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem; AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus; AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter; AlgebraicGeometry.Scheme.IdealSheafData.supportSet_inter. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support_eq_zeroLocus|finiteType_of_affine_subset",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; Mathlib/RingTheory/Spectrum/Prime/Module.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Depth/Rees.lean; Mathlib/RingTheory/Depth/Rees.lean; Mathlib/RingTheory/Depth/Rees.lean; Mathlib/RingTheory/Smooth/Locus.lean; Mathlib/RingTheory/Support.lean. Read the command responses; the affine-neighbourhood, ideal-sheaf and module-annihilator facts do not supply the full supporting model with its fibre support and point dimension. Module.support_eq_zeroLocus was read at Mathlib/RingTheory/Support.lean:216; finiteType_of_affine_subset at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:51.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-module-devissage",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 2: apply elementary devissage and replace the module by its finite pushforward on a smooth family. Elementary module devissage (Stacks 057S): affine reduction and supporting subscheme, old steps 1--2.",
+   "via": [
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-fibre-support-model",
+  "worker": "stage1",
+  "summary": "Followed Stacks 057S affine reduction and reused the existing reviewed Stacks 057Q supporting-subscheme lemma. Supplied the affine finite-type verification, pullback finiteness and quasi-coherence, residue-field and fibre restriction comparison, quotient-algebra finite type of Z over V, closed fibre embedding and invariance of local support dimension. No statement changes, new nodes or Mathlib leaves. Every non-elementary input is an existing cited statement; searches found no exact project attachment or Mathlib match.",
+  "blueprint": "Serves lem-trf-local-term-locality proof (1)--(2) through its existing specialization/semistable-alteration/flattening branch, specifically the affine preparation of elementary module devissage (Stacks 057S first and general-case paragraphs). Read latest blueprint main 7284bb09daf97437d544c51882b325f9c52cd345. This subordinate algebraic supporting-model argument does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Generic finite-type preservation under scheme-module pullback, applied to open and fibre restriction; no trace-formula-unit lemma supplies this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic quasi-coherence preservation under scheme-module pullback for the affine support lemma; no trace-formula-unit substitute."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Pure topology of local Krull dimension, comparing the original fibre support with its open affine restriction; no local-term statement gives this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-9fb4ac1af",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-9fb4ac1af (reviewer sub-agent of L); spot-checked: Read the whole item, all 6 steps and every cited statement, plus Stacks flat.tex 057S (lemma-elementary-devissage: affine reduction and the 'in general' 057Q paragraph). The statement is unchanged and keeps 057S's hypotheses (f locally of finite type with no qc/qs, F finite-type quasi-coherent); x in Supp(F_s) comes from the parent. Step 1: the affine-basis node and def-weil-finite-type-morphism give V=Spec A and U=Spec B with B finitely generated; the pointwise lft criterion plus affine permanence (3) give p of finite type. Step 2: the pullback finite-type and quasi-coherence lemmas hold for arbitrary morphisms. Step 3: residue-field naturality (iso for open immersions), open-immersion base change, pullback composition, and restriction preserving stalks give Supp((u*F)_s)=Supp(F_s)∩U_s; that v is a monomorphism is elementary from the definition. Step 4: the hypotheses of the existing 057Q node lem-trf-finite-type-sheaf-fp-support are met; Z=Spec(B/I) by the 01QO clause of def-weil-closed-immersion, so pj is of finite type. Step 5: closed-immersion base change plus the homeomorphism clause, and the open-subspace dimension lemma, give dim_z Z_s=n; that lemma uses def-kun-topological-dimension-at-point, which has the same min-over-opens formula as def-kun-dimension, so there is no gap. Step 6: open immersion is etale, and residue-field iso holds at every point. proof_deps equals the union of uses. The rg -L search for 057S, 057Q, labels and support wording finds no duplicate. The three declared tool_uses are accepted as generic: the two pullback-permanence lemmas and the topological dimension lemma. Edge cases checked: point base, F=0, non-reduced support, non-quasi-separated X, non-closed x. No new nodes, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFibreSupportModel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_fibre_support_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFibreSupportModel.lean",
+  "statement": "theorem exists_affine_fibre_support_model {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (x : X) (hx : ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk (f.asFiber x))) : ∃ (U V : Scheme.{u}) (u : U ⟶ X) (v : V ⟶ S) (p : U ⟶ V), IsAffine U ∧ IsAffine V ∧ IsOpenImmersion u ∧ IsOpenImmersion v ∧ LocallyOfFiniteType p ∧ QuasiCompact p ∧ u ≫ f = p ≫ v ∧ ∃ (sV : V) (hv : v sV = f x) (Z : Scheme.{u}) (j : Z ⟶ U), IsAffine Z ∧ IsClosedImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ LocallyOfFiniteType (j ≫ p) ∧ QuasiCompact (j ≫ p) ∧ ∃ (H : Z.Modules) (z : (j ≫ p).fiber sV) (us : p.fiber sV ⟶ f.fiber (f x)) (js : (j ≫ p).fiber sV ⟶ p.fiber sV), H.IsQuasiCoherentFiniteType ∧ Nonempty ((pushforward j).obj H ≅ (tensorPullback u).obj F) ∧ u (j ((j ≫ p).fiberι sV z)) = x ∧ us ≫ f.fiberι (f x) = p.fiberι sV ≫ u ∧ us ≫ f.fiberToSpecResidueField (f x) = p.fiberToSpecResidueField sV ≫ Spec.map ((S.residueFieldCongr hv).inv ≫ v.residueFieldMap sV) ∧ js ≫ p.fiberι sV = (j ≫ p).fiberι sV ≫ j ∧ js ≫ p.fiberToSpecResidueField sV = (j ≫ p).fiberToSpecResidueField sV ∧ IsOpenImmersion us ∧ IsClosedImmersion js ∧ Set.range js.base = {y : p.fiber sV | ¬ Subsingleton (((tensorPullback (p.fiberι sV)).obj ((tensorPullback u).obj F)).presheaf.stalk y)} ∧ us.base '' {y : p.fiber sV | ¬ Subsingleton (((tensorPullback (p.fiberι sV)).obj ((tensorPullback u).obj F)).presheaf.stalk y)} = {y : f.fiber (f x) | ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk y)} ∩ Set.range us.base ∧ topologicalKrullDimAt z = topologicalKrullDimAt (⟨f.asFiber x, hx⟩ : {y : f.fiber (f x) | ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk y)}) ∧ Etale u ∧ Etale v ∧ (∀ y : U, IsIso (u.residueFieldMap y)) ∧ (∀ t : V, IsIso (v.residueFieldMap t))",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60a1fb61a",
+  "group": "Q139",
+  "result": "fix",
+  "note": "Read the 057S/057Q source, the node (6 steps, 13 stmt_deps), the module, and the dependency records and declarations (Fiber.lean, Modules pushforward, topologicalKrullDimAt). The statement is exact clause by clause. No hypothesis is stronger: f only locally of finite type, F finite-type quasi-coherent, hx at asFiber x. us and js are each pinned by both projections, and the residueFieldCongr inverse direction is correct. Closed immersion plus range equality gives the homeomorphism onto Supp((u*F)_s); the support intersection is in X_s; dim_z Z_s = n uses the same support subspace; u and v are etale with residue-field isos at every point. No def node owns another module pushforward, and Mathlib's matches the landed 057Q dependency. The JSON differs from live only in lean, the statement is verbatim in the file, and the item has not landed elsewhere. Edge cases checked: F=0, empty schemes, non-closed x, non-reduced Z, non-qc/qs X and S, a single universe u. Sole fault H11: the second reading is a self-reread by the delivering worker. FIX = fixes/lem-trf-affine-fibre-support-model.report.md, which keeps the Worker report verbatim and adds an independent clause-by-clause second reading. No Lean change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261026T091942-L-3389562",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

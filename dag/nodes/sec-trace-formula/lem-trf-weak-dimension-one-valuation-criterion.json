@@ -1,0 +1,330 @@
+{
+ "id": "lem-trf-weak-dimension-one-valuation-criterion",
+ "kind": "statement",
+ "title": "Weak dimension at most one and valuation local rings",
+ "statement": "Let $R$ be a commutative ring. The following are equivalent: (i) for every $R$-module $M$ there are flat $R$-modules $F_0,F_1$ [def-weil-pbc-flat-ring-map] and $R$-linear maps $F_1\\xrightarrow{a}F_0\\xrightarrow{b}M$ with $a$ injective, $b$ surjective, and $\\operatorname{im}(a)=\\ker(b)$ (a flat resolution of length at most one); (ii) for every prime ideal $\\mathfrak p\\subset R$, the localization $R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is a valuation domain [def-trf-valuation-ring]. In particular, for a nonzero local commutative ring $R$ (one with a unique maximal ideal), condition (i) is equivalent to $R$ itself being a valuation domain. No Noetherian or dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 092S, lemma-weak-dimension-at-most-1, equivalence (1) and (5); Tag 092D, definition-weak-dimension, and the proof (4) implies (1) giving a length-one flat resolution."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Assume (i) and fix an ideal $I\\subseteq R$. Apply (i) to $R/I$, writing $0\\to F_1\\xrightarrow{a}F_0\\xrightarrow{b}R/I\\to0$. Choose $x\\in F_0$ with $b(x)=1+I$ and put $E=\\{(u,r)\\in F_0\\oplus R:b(u)=r+I\\}$. The map $F_1\\oplus R\\to E$, $(v,r)\\mapsto(a(v)+rx,r)$, is an isomorphism: given $(u,r)$, exactness gives a unique $v$ with $a(v)=u-rx$. Thus $E$ is flat. Indeed, tensoring any injection with $F_1\\oplus R$ is the direct sum of its tensor with $F_1$ and itself, under $n\\otimes(v,r)\\mapsto(n\\otimes v,rn)$; the inverse is the sum of the two component inclusions, so this map is injective by the flatness definition [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (2); elementary pullback comparison of the supplied length-one resolution with $R\to R/I$."
+   }
+  },
+  {
+   "text": "Projection $E\\to F_0$ is surjective: lift $b(u)\\in R/I$ to $r\\in R$. Its kernel consists exactly of $(0,r)$ with $r\\in I$. Therefore $0\\to I\\to E\\to F_0\\to0$ is short exact. Both $E$ (step 1) and $F_0$ are flat, so [lem-weil-pbc-flat-ses-kernel-flat] makes $I$ flat. This proves that (i) implies flatness of every ideal, with no finite-generation assumption on $I$.",
+   "uses": [
+    "lem-weil-pbc-flat-ses-kernel-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (2); Tag 00HM, algebra-lemma-flat-ses, second assertion."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p$ and write $A=R_{\\mathfrak p}$. For any ideal $J\\subseteq A$, let $I=\\{r\\in R:r/1\\in J\\}$. By [lem-trf-module-submodule-localization], $J=I_{\\mathfrak p}$ inside $A$; step 2 makes $I$ flat over $R$. By [lem-weil-pbc-flat-module-base-change], $A\\otimes_R I$ is flat over $A$. Its identification with $I_{\\mathfrak p}$ sends $(r/s)\\otimes i$ to $ri/s$, with inverse $i/s\\mapsto(1/s)\\otimes i$; the fraction relations and balancing relation give mutual inverses. Hence every ideal of $A$ is flat. The ring $A$ is nonzero and local, with maximal ideal $\\mathfrak pA$, by [def-weil-pbc-localization-at-prime]; nonzeroness also follows directly since $1/1=0$ would force $0\\notin\\mathfrak p$.",
+   "uses": [
+    "lem-trf-module-submodule-localization",
+    "lem-weil-pbc-flat-module-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (5); localization of ideals, Tags 00CU and 00HI."
+   }
+  },
+  {
+   "text": "Continue with $A$ from step 3. Every finitely generated ideal is free by [lem-weil-pbc-finite-flat-local-free], applied using its flatness and the locality of $A$. A nonzero free ideal has exactly one basis element: an empty basis would give the zero ideal, while two distinct basis elements $u,v\\in J\\subseteq A$ satisfy $v\\cdot u-u\\cdot v=0$, contradicting independence (their coefficients force $u=v=0$). Thus every nonzero finitely generated ideal is principal with a generator $h$ for which $ch=0$ forces $c=0$. If $0\\ne f\\in A$, apply this to $(f)=(h)$ and write $f=ah$, $h=bf$. Then $(1-ba)h=0$, so $ba=1$ and $a$ is a unit. Therefore $f$ is a nonzerodivisor. Since $A\\ne0$, it is a domain. The zero ideal is principal too.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (5), finite-flat-local and rank-one argument; Tag 00NZ."
+   }
+  },
+  {
+   "text": "For nonzero $f,g\\in A$, step 4 gives $(f,g)=(h)$ with $h\\ne0$. Write $f=ah$, $g=bh$, $h=cf+dg$. Cancelling $h$ in the domain gives $ca+db=1$. At least one of $a,b$ is a unit: otherwise both belong to the unique maximal ideal of the local ring $A$, contradicting this equality. If $a$ is a unit then $g/f=b/a\\in A$, and if $b$ is a unit then $f/g=a/b\\in A$. Every nonzero element of $\\operatorname{Frac}(A)$ is such an $f/g$, so $A$ is a valuation domain by [def-trf-valuation-ring]. Since $\\mathfrak p$ was arbitrary, this proves (ii).",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (5); explicit algebra of Tag 090Q, algebra-lemma-characterize-valuation-ring."
+   }
+  },
+  {
+   "text": "Assume (ii) and let $I\\subseteq R$ be any ideal. For every maximal ideal $\\mathfrak m$, which is prime, exactness of localization [lem-weil-pbc-localization-module-exact] applied to $0\\to I\\to R$ embeds $I_{\\mathfrak m}$ into the domain $A=R_{\\mathfrak m}$. Hence $I_{\\mathfrak m}$ is torsion-free over $A$: if $0\\ne a\\in A$ kills $z$, its image in $A$ satisfies $az=0$, so $z=0$. By (ii), $A$ is a valuation domain; [lem-trf-valuation-torsionfree-flat] makes $I_{\\mathfrak m}$ flat over $A$. The localization scalar comparison [lem-weil-pbc-flat-over-localization] makes it flat over $R$. Apply [lem-sfb-base-flatness-maximal-localizations] with $C=R$ and $N=I$ to conclude that $I$ is flat over $R$. This also handles the zero ring: the local hypotheses are vacuous and that cited statement explicitly allows zero rings.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-sfb-base-flatness-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (5) implies (3), with the stronger torsion-free flatness input Tag 0539; Tag 00HT, algebra-lemma-flat-localization, parts (2),(4)."
+   }
+  },
+  {
+   "text": "Let $N\\subseteq P$ with $P$ flat. By [lem-weil-pbc-flat-fg-ideal-criterion], to prove $N$ flat it suffices, for every finitely generated ideal $J$, to prove that $\\mu_N:J\\otimes_R N\\to N$ is injective. Step 6 says that $J$ is flat. Thus the map $J\\otimes_R N\\to J\\otimes_R P$ induced by $N\\hookrightarrow P$ is injective by [def-weil-pbc-flat-ring-map], using tensor symmetry $j\\otimes n\\leftrightarrow n\\otimes j$. The map $\\mu_P:J\\otimes_R P\\to P$ is injective by the same flat-ideal criterion, since $P$ is flat. Their composite equals $J\\otimes_R N\\xrightarrow{\\mu_N}N\\hookrightarrow P$: both send $j\\otimes n$ to $jn$. An injective composite has an injective first factor, so $\\mu_N$ is injective, proving $N$ flat.",
+   "uses": [
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (2) implies (4); direct tensor-square proof of this implication as in Ring.WeakDimensionLEOne.flat_submodule."
+   }
+  },
+  {
+   "text": "For any $R$-module $M$, take the free module $F=\\bigoplus_{m\\in M}R$ of finitely supported families and the surjection $q:F\\to M$, $(r_m)\\mapsto\\sum_m r_m m$ (the vector supported at $m$ with coefficient $1$ maps to $m$). By [lem-weil-pbc-projective-module-flat], $F$ is flat. Step 7 makes $K=\\ker(q)\\subseteq F$ flat. Then the inclusion and $q$ give $0\\to K\\to F\\to M\\to0$, with exactly the injectivity, surjectivity and image-kernel equality required in (i). No finite generation of $M$ or $F$ is used.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, (4) implies (1), construction of a free surjection and its flat kernel."
+   }
+  },
+  {
+   "text": "For the local assertion, suppose first that the nonzero local ring $R$ satisfies (i). Steps 1--2 make its ideals flat; the arguments of steps 4--5 apply directly with $A=R$ and prove it a valuation domain. Conversely, let $R$ itself be a valuation domain. Every ideal $J\\subseteq R$ is torsion-free by cancellation in $R$, hence flat by [lem-trf-valuation-torsionfree-flat]. The tensor-square argument of step 7 now applies using this ideal flatness, and the construction of step 8 gives (i). This proves the local assertion without assuming that $R$ is Noetherian or has finite Krull dimension.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092S, lemma-weak-dimension-at-most-1, local case of (3) implies (5), and (5) implies (3); Tag 0539."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-ses-kernel-flat",
+  "lem-trf-module-submodule-localization",
+  "lem-weil-pbc-flat-module-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-flat-local-free",
+  "def-trf-valuation-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-sfb-base-flatness-maximal-localizations",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 092S, lemma-weak-dimension-at-most-1, (1) implies (2), (1) implies (5), (5) implies (3), (2) implies (4), (4) implies (1); expanded pullback and tensor-square arguments replace the Tor and Lazard detours, and Tag 0539 replaces the principal-ideal proof of local flatness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Vv]aluation.*[Ff]lat|[Ff]lat.*[Vv]aluation|flat_of_fg|WeakDimensionLEOne",
+   "results": "OK 3 hit(s): Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local ring whose finitely generated ideals are flat is a valuation ring",
+   "results": "OK 8 hit(s): ValuationRing.mk, ValuationRing, IsDiscreteValuationRing.toIsLocalRing, IsDiscreteValuationRing.TFAE, ValuationRing.isLocalRing, ValuationRing.TFAE, ValuationRing.instOfIsLocalRingOfIsBezout, ValuationRing.iff_local_bezout_domain",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, Module.Flat",
+   "results": "OK 1 hit(s): Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative local ring is a valuation domain if and only if every finitely generated ideal is flat",
+   "results": "OK 8 hit(s): ValuationRing.instOfIsLocalRingOfIsBezout, ValuationRing.TFAE, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.TFAE, ValuationRing.iff_local_bezout_domain, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, IsDiscreteValuationRing, Module.free_of_flat_of_isLocalRing",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?[Dd]imension|[Ff]lat[Rr]esolution|[Vv]aluation.*[Rr]esolution",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak global dimension at most one characterizes rings whose local rings are valuation domains",
+   "results": "OK 8 hit(s): Ring.DimensionLEOne, IsDiscreteValuationRing.TFAE, ValuationRing.TFAE, ValuationRing, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.toIsLocalRing, IsLocalRing.finrank_CotangentSpace_eq_one_iff, ValuationRing.isLocalRing",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every module over a commutative ring has a flat resolution of length at most one if and only if every prime localization is a valuation domain",
+   "results": "OK 8 hit(s): Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.flat_of_localized_maximal, Module.flat_of_isLocalized_maximal, RingHom.Flat.ofLocalizationPrime, Module.freeLocus_eq_univ, Module.free_of_flat_of_isLocalRing, instFlatAtPrime, IsDedekindDomain.flat_iff_torsion_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat module if and only if every localization at a prime ideal is flat",
+   "results": "OK 8 hit(s): Module.flat_of_localized_maximal, RingHom.Flat.ofLocalizationPrime, RingHom.Flat.propertyIsLocal, instFlatAtPrime, Module.flat_of_isLocalized_maximal, Module.flat_iff_of_isLocalization, RingHom.Flat.holdsForLocalizationAway, Module.flat_of_localized_span",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalization",
+   "results": "OK 4 hit(s): Module.Flat.of_isLocalizedModule, IsLocalization.flat, Module.flat_iff_of_isLocalization, Algebra.FormallySmooth.of_formallySmooth_residueField_tensor",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_localized_maximal|instFlatAtPrime|flat_of_isLocalized",
+   "results": "OK 6 hit(s): Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/TorsionFree.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module is flat if its localizations at all maximal ideals are flat",
+   "results": "OK 8 hit(s): Module.flat_of_isLocalized_maximal, Module.flat_of_localized_maximal, Module.flat_of_isLocalized_span, Module.Flat.of_isLocalizedModule, Module.Flat, Module.flat_iff_of_isLocalization, IsLocalization.flat, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every module has a flat resolution of length one if and only if localizations of the ring at prime ideals are valuation domains",
+   "results": "OK 8 hit(s): Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.flat_of_localized_maximal, Module.flat_of_isLocalized_maximal, Module.free_of_flat_of_isLocalRing, Module.freeLocus_eq_univ, instFlatAtPrime, Module.flat_of_isLocalized_span, RingHom.Flat.ofLocalizationPrime",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, Module.Flat",
+   "results": "OK 1 hit(s): Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every module has flat dimension at most one exactly when every prime localization is a valuation ring",
+   "results": "OK 8 hit(s): Module.flat_of_isLocalized_span, Module.flat_of_isLocalized_maximal, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.Flat.of_isLocalizedModule, Module.flat_of_localized_maximal, Ring.DimensionLEOne.mk, RingHom.Flat.ofLocalizationPrime, Module.flat_of_localized_span",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "WeakDimensionLEOne|weak.?dimension|flat.?resolution|valuation.*resolution",
+   "results": "OK 1 hit(s): Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole criterion; localization and torsion-free flatness hits are used through existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-localization-valuation-domain",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Tags 04GH (lemma-finite-over-henselian) and 04GK (lemma-henselian-cat-finite-etale), valuation-ring specialization and residue-power-basis calculation used in Temkin Proposition 2.2.1, proof, pp. 11--12. Valuation-domain input for the localization of the etale algebra: Stacks 0ASJ, first assertion; no henselian hypothesis. General algebra input for the valuation-domain assertion: Tag 0ASJ first proof paragraph invokes Tag 092S in both directions.",
+   "via": [
+    "lem-trf-etale-localization-valuation-domain",
+    "lem-trf-henselian-valuation-etale-local-factors",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-weak-dimension-one-valuation-criterion",
+  "worker": "stage1",
+  "summary": "Statement preserved. Proved the two implications and local case in nine explicit steps using existing DAG nodes only: pullback comparison, kernel flatness, localization, local finite-flat freeness, rank-one/cancellation argument, valuation fraction criterion, local flatness descent, tensor square and free surjection. No new nodes, no Lean edits or compilation.",
+  "blueprint": "Realizes the inherited general-algebra input of lem-trf-local-term-locality proof (1)--(2), via lem-trf-etale-localization-valuation-domain: the two uses of Tag 092S in Tag 0ASJ, as specified in blueprint.from.place. Latest blueprint ef6f9619fdbffa59e88528fb56483d76c70258c8 read; no duplicate criterion found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-ses-kernel-flat",
+    "why": "General kernel-flatness tool (00HM) for the pullback comparison in step 2; the unit provides no module short-exact-sequence substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-ses-kernel-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-fc01b31ad",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-fc01b31ad (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra 092S (full proof) and 092D. The statement and stmt_deps are unchanged and correct; tested on the zero ring, a field, a product of two fields, k[e]/(e^2) and non-Noetherian valuation domains. All 9 steps check against the statements of the cited nodes: (1) the pullback E is isomorphic to F1�(+)R (map, injectivity and surjectivity checked; elementary direct-sum flatness); (2) the kernel I of E→F0 is flat by 00HM, a declared tool_use I accept (generic, Lean-closed in slopmaster2); (3) ideals of R_p are flat, via 00CU and 00HI, with the tensor identification checked; (4) by 00NZ, f.g. ideals of R_p are free, the rank-one argument holds and R_p is a domain; (5) the local-Bezout-to-valuation algebra is correct and elementary; (6) for (ii) to flat ideals I checked 00CS, 0539, 00HT(2) and the maximal-localization flatness node (it allows zero rings); (7) the tensor-square argument with 00HD is correct; (8) the free surjection gives (i); (9) the local case is correct. No new nodes. No duplicate of 092S was found in the DAG. proof_deps equal the union of uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeakDimensionOneValuationCriterion",
+  "declaration": "Ring.flat_resolution_length_one_iff_prime_localizations_valuation",
+  "declarations": [
+   "Ring.flat_resolution_length_one_iff_prime_localizations_valuation",
+   "Ring.flat_resolution_length_one_iff_valuation_of_isLocalRing"
+  ],
+  "file": "lean/Sheaf/RingTheory/WeakDimensionOneValuationCriterion.lean",
+  "statement": "theorem flat_resolution_length_one_iff_prime_localizations_valuation (R : Type u) [CommRing R] : (∀ M : ModuleCat.{max u v} R, ∃ F₀ F₁ : ModuleCat.{max u v} R, Module.Flat R F₀ ∧ Module.Flat R F₁ ∧ ∃ (a : F₁ →ₗ[R] F₀) (b : F₀ →ₗ[R] M), Function.Injective a ∧ Function.Surjective b ∧ LinearMap.range a = LinearMap.ker b) ↔ ∀ (p : Ideal R) [p.IsPrime], ∃ h : IsDomain (Localization.AtPrime p), @ValuationRing (Localization.AtPrime p) _ h",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The second declaration states the final nonzero local-ring clause. Module carriers and resolution carriers lie in max u v, allowing arbitrary module size without making the test condition vacuous below the ring universe. Domain structures are existential conclusions because ValuationRing takes IsDomain as an input."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-379e561b2",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 092S (1)<->(5) and 092D: arbitrary CommRing R, (i) as ∀ M : ModuleCat.{max u v} R with flat F0,F1 and injective a, surjective b, range a = ker b; (ii) ∀ prime p, ∃ IsDomain (Localization.AtPrime p) with ValuationRing (domain is a conclusion; ValuationRing.TFAE gives the fraction-field definition). The max u v universe is no restriction. The local clause is a second theorem with [IsLocalRing R] (includes Nontrivial) and conclusion ∃ IsDomain R, ValuationRing R. Edge cases checked: zero ring, field, product of fields, k[ε]/ε², non-Noetherian valuation rings. lean.statement matches the file verbatim; the node diff against live is only the lean record; proofs are sorry; docstrings give source, blueprint and the 9-step proof; no definitions; upstream Ring.WeakDimensionLEOne is a different form and not a duplicate; the report has the Worker report and Second reading sections. No fixes."
+ }
+}

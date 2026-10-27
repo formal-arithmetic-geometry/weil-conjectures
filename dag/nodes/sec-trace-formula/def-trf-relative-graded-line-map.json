@@ -1,0 +1,128 @@
+{
+ "id": "def-trf-relative-graded-line-map",
+ "kind": "definition",
+ "title": "Relative graded maps into tensor powers of a line module",
+ "status": "split",
+ "statement": "Let $Z,S$ be schemes [def-pc-scheme], $h:Z\\to S$ any morphism, $A$ an affine-basis quasi-coherent graded $\\mathcal O_S$-algebra as in [def-nagata-relative-proj], and $L$ an $\\mathcal O_Z$-module. Use tensor powers [def-pur-sheaf-tensor-product], with $L^{\\otimes0}=\\mathcal O_Z$, and tensor pullback [def-pc-module-pullback] with its canonical tensor-power comparison [def-sc-tensor-pullback-power-comparison]. Define a relative graded line map $\\psi$ by additive maps $\\psi_{V,n}:A(V)_n\\to\\Gamma(h^{-1}V,L^{\\otimes n})$ for every affine open $V\\subseteq S$ and $n\\ge0$. Require $\\psi_{V,n}(ra)=h^*(r)\\psi_{V,n}(a)$, $\\psi_{V,0}(1)=1$, and $\\psi_{V,m+n}(ab)=\\psi_{V,m}(a)\\otimes\\psi_{V,n}(b)$ under the canonical tensor-power isomorphism. For affine $V\\subseteq V'$, require $\\psi_{V,n}(a|_V)=\\psi_{V',n}(a)|_{h^{-1}V}$. No condition $A_0=\\mathcal O_S$, degree-one generation, finiteness or quasi-compactness is part of this data.\n\nFor a scheme morphism $j:W\\to Z$ whose image lies over $V$, define $\\psi$ evaluated on $W$ by pulling back the section $\\psi_{V,n}(a)$ along the canonical section map and applying $j^*(L^{\\otimes n})\\simeq(j^*L)^{\\otimes n}$. Define $\\psi.\\mathrm{GeneratesEverywhere}$ to mean that for every $x\\in Z$ there are an affine $V$ with $h(x)\\in V$, $n>0$, and $a\\in A(V)_n$ such that the germ of $\\psi_{V,n}(a)$ at $x$ is not in $\\mathfrak m_x(L^{\\otimes n})_x$. For invertible $L$ [def-sc-invertible-module], this is the condition that the positive-degree generation locus is all of $Z$.\n\nFor $r:Z\\to\\operatorname{Proj}_S A$, define $\\psi.\\mathrm{IsCanonicalMap}(r)$ by $\\pi\\circ r=h$ together with the following chart condition. For every open immersion $j:W\\to Z$, affine $V\\subseteq S$ containing the image of $h\\circ j$, trivialization $e:j^*L\\simeq\\mathcal O_W$, and ring homomorphism $\\alpha:A(V)\\to\\Gamma(W,\\mathcal O_W)$ whose value on every $a\\in A(V)_n$ is the evaluated section expressed in the $n$th power of $e$, whenever the image of the irrelevant ideal generates the unit ideal, require $r\\circ j=i_V\\circ\\operatorname{Proj.fromOfGlobalSections}(\\alpha)$. Here $i_V$ is the canonical relative-Proj chart embedding and the homogeneous-section construction, including its tensor-power trivializations, is the one in [def-trf-space-line-module-proj-input]. These are definitions, not an assertion of existence of $r$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O9, section-invertible-relative-proj: graded map and definition of U(psi) before lemma-invertible-map-into-relative-proj; characterization (3)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RelativeGradedLineMap|GradedLineMap|fromOfGlobalSections",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. Absolute Proj construction only. Local rg of lean/WeilConjectures found no RelativeGradedLineMap; rg of lean/Sheaf found the four existing declarations in Sheaf.TraceFormula.GradedImmersionAmpleCriterion. DAG rg found them recorded only as auxiliaries of the ampleness theorem, with no definition node owning them. blueprint_refs.py search relative graded line map returned 0 blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Graded algebra map into tensor powers of a line bundle generation locus canonical relative Proj morphism",
+   "results": "8 hits: TensorPower.galgebra, GradedTensorProduct.algebraMap_def, TensorPower.galgebra_toFun_def, GradedTensorProduct.algebraMap_def', TensorAlgebra.gradedAlgebra, GradedTensorProduct.includeRight, GradedTensorProduct.includeLeft, DirectSum.gMulLHom. Tensor or absolute Proj ingredients, not the scheme-relative graded line-map structure and generation/canonical-map predicates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative graded line map affine components tensor powers generation everywhere canonical map relative Proj",
+   "results": "8 hits: AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.toSpecZero, ProjectiveSpectrum. Tensor or absolute Proj ingredients, not the scheme-relative graded line-map structure and generation/canonical-map predicates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-line-quotient-homogeneous-fraction-map",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The graded extension and canonical relative-Proj map in the projective-bundle quotient geometry used in the fibrewise-ampleness/projectivity step; scheme specialization of Stacks 01O9 input.",
+   "via": [
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.RelativeGradedLineMap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.evaluate",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.GeneratesEverywhere",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.IsCanonicalMap"
+  ],
+  "statement": "structure RelativeGradedLineMap {Z S : Scheme.{u}} (h : Z ⟶ S)\n    (A : S.GradedAlgebraData) (L : Z.Modules)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "S2 2026-10-23: the existing structure and three definitions are moved verbatim to this independent module, publicly re-exported from their original module. This lets the affine-chart lemma depend on the definitions without a cycle through the ampleness criterion. Names, signatures, visibility, and data are unchanged.",
+  "file": "lean/Sheaf/TraceFormula/RelativeGradedLineMap.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e5eda835",
+  "group": "Q53",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e5eda835",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Re-delivery of the 66d14ec2 H2/H12 RETURN. The Lean file is byte-identical, and its clauses were already reviewed with no fault (arbitrary quasi-coherent E, Epi q, unique psi, fraction charts with d=0, unrestricted generator cover, scalar/Spec/overlap/frame/restriction clauses, uniqueness of F, IsCanonicalMap). The item swaps the theorem stmt_dep for the new def-trf-relative-graded-line-map, existing:true on the unchanged GradedImmersionAmpleCriterion (RelativeGradedLineMap/evaluate/GeneratesEverywhere/IsCanonicalMap); its TeX matches the Lean; check_existing and check_new_node are clean; no cycle. FIX: evaluate uses boundaryPullbackPowIso, owned by def-sc-tensor-pullback-power-comparison, which was not cited; fixes/def-trf-relative-graded-line-map.json adds it to stmt_deps and the TeX, and both checks are clean. Advisory: IsFreeGenerator (def-sc-local-free-generator) is not in the item's stmt_deps. No compile: the Lean is unchanged and the fix is JSON only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6ccea",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191003-L-203224",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/definition/affine-chart modules and 3 node files vs clone live (verbatim move diff, unchanged item statement); new sorry affine_chart_formulas vs IsCanonicalMap and the hypotheses of exists_proj_canonical_map_twist_comparison; 3 direct importers compiled against the delivered modules"
+ }
+}

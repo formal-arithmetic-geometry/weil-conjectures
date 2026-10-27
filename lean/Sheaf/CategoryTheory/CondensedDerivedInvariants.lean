@@ -14,13 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.DerivedAdjunctionShift
-import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 
 /-! # Derived restriction calculus for internal condensed actions
 
@@ -73,6 +67,29 @@ theorem forgetExact :
       S.Exact ↔ (S.map (CondensedBar.forgetAction (A := A) (G := G))).Exact) := by
   sorry
 
+private theorem forgetReflects (A : CondensedBar.Ring.{u}) (G : Type u) [Group G]
+    [TopologicalSpace G] [IsTopologicalGroup G] :
+    (CondensedBar.forgetAction (A := A) (G := G)).ReflectsIsomorphisms where
+  reflects {M N} f hf := by
+    have : IsIso f.val := hf
+    let i := inv f.val
+    have hi : Profinite.CondensedAction.Equivariant N M i := by
+      intro S g x
+      have hf (y : Profinite.CondensedAction.sectionModule A.toMon N.module S) :
+          (f.val.hom.hom.app (op S)).hom ((i.hom.hom.app (op S)).hom y) = y := by
+        exact ConcreteCategory.congr_hom (congr_app
+          (congrArg (fun k ↦ k.hom.hom) (IsIso.inv_hom_id f.val)) (op S)) y
+      have hg (y : Profinite.CondensedAction.sectionModule A.toMon M.module S) :
+          (i.hom.hom.app (op S)).hom ((f.val.hom.hom.app (op S)).hom y) = y := by
+        exact ConcreteCategory.congr_hom (congr_app
+          (congrArg (fun k ↦ k.hom.hom) (IsIso.hom_inv_id f.val)) (op S)) y
+      have h := congrArg (fun y ↦ (i.hom.hom.app (op S)).hom y)
+        (f.property S g ((i.hom.hom.app (op S)).hom x))
+      rw [hg, hf] at h
+      exact h.symm
+    exact ⟨⟨⟨i, hi⟩, Subtype.ext (IsIso.hom_inv_id f.val),
+      Subtype.ext (IsIso.inv_hom_id f.val)⟩⟩
+
 /-- Existence of the normalized invariant-submodule adjunction already specified by the
 recorded action-module definition. Its universal property determines it up to the unique
 isomorphism commuting with its inclusion.
@@ -86,21 +103,31 @@ theorem invariantsExist : Nonempty (Invariants A G) := by
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: it leaves objects and maps unchanged and preserves the induced kernels and cokernels. -/
 @[instance] theorem trivialAdditive : (trivial (R := A.toMon) (P := G)).Additive := by
-  sorry
+  exact ⟨by intros; rfl⟩
 
 /-- Exactness of trivial action, on kernels.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: the underlying kernel with trivial action is the equivariant kernel. -/
 @[instance] theorem trivialLimits :
     PreservesFiniteLimits (trivial (R := A.toMon) (P := G)) := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := G)
+  have : U.ReflectsIsomorphisms := forgetReflects A G
+  have : PreservesFiniteLimits U := (forgetExact A G).1
+  have : PreservesFiniteLimits (trivial (R := A.toMon) (P := G) ⋙ U) :=
+    show PreservesFiniteLimits (𝟭 (Modules A)) from inferInstance
+  exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
 /-- Exactness of trivial action, on cokernels.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: the underlying sheafified cokernel retains trivial action. -/
 @[instance] theorem trivialColimits :
     PreservesFiniteColimits (trivial (R := A.toMon) (P := G)) := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := G)
+  have : U.ReflectsIsomorphisms := forgetReflects A G
+  have : PreservesFiniteColimits U := (forgetExact A G).2.1
+  have : PreservesFiniteColimits (trivial (R := A.toMon) (P := G) ⋙ U) :=
+    show PreservesFiniteColimits (𝟭 (Modules A)) from inferInstance
+  exact preservesFiniteColimits_of_reflects_of_preserves _ U
 
 variable {A G} {H : Type u} [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
 
@@ -109,27 +136,40 @@ Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: precomposition changes no underlying map, hence preserves sums. -/
 @[instance] theorem restrictionAdditive (v : H →ₜ* G) :
     (inflate (R := A.toMon) v).Additive := by
-  sorry
+  exact ⟨by intros; rfl⟩
 
 /-- Restriction is left exact, with the induced action on the same kernel.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: precomposition of the action commutes with the kernel construction. -/
 @[instance] theorem restrictionLimits (v : H →ₜ* G) :
     PreservesFiniteLimits (inflate (R := A.toMon) v) := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := H)
+  have : U.ReflectsIsomorphisms := forgetReflects A H
+  have : PreservesFiniteLimits U := (forgetExact A H).1
+  have : PreservesFiniteLimits (inflate (R := A.toMon) v ⋙ U) :=
+    show PreservesFiniteLimits (CondensedBar.forgetAction (A := A) (G := G)) from
+      (forgetExact A G).1
+  exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
 /-- Restriction is right exact, with the induced action on the same cokernel.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: precomposition of the action commutes with sheafified cokernels. -/
 @[instance] theorem restrictionColimits (v : H →ₜ* G) :
     PreservesFiniteColimits (inflate (R := A.toMon) v) := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := H)
+  have : U.ReflectsIsomorphisms := forgetReflects A H
+  have : PreservesFiniteColimits U := (forgetExact A H).2.1
+  have : PreservesFiniteColimits (inflate (R := A.toMon) v ⋙ U) :=
+    show PreservesFiniteColimits (CondensedBar.forgetAction (A := A) (G := G)) from
+      (forgetExact A G).2.1
+  exact preservesFiniteColimits_of_reflects_of_preserves _ U
 
 section Derived
 variable [HasDerivedCategory.{u + 1} (Modules A)]
   [HasDerivedCategory.{u + 1} (Equivariant A G)]
   [HasDerivedCategory.{u + 1} (Equivariant A H)]
 
+set_option linter.unusedSectionVars false in
 /-- The invariant inclusion uniquely determines the underived restriction map.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: a fully G-fixed section is H-fixed after precomposition. Restrict the codomain
@@ -137,7 +177,32 @@ using the normalized invariant inclusion, which is a monomorphism on every secti
 theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     ∃! b : V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor,
       ∀ N, b.app N ≫ W.inclusion.app ((inflate v).obj N) = V.inclusion.app N := by
-  sorry
+  have hc (N : Equivariant A G) :
+      (V.adjunction.counit.app N).val = V.inclusion.app N := by
+    simpa only [Adjunction.homEquiv_symm_id, Category.id_comp] using
+      V.untranspose (V.functor.obj N) N (𝟙 _)
+  let b : V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor :=
+    { app := fun N ↦ W.adjunction.homEquiv _ _
+        ((inflate v).map (V.adjunction.counit.app N))
+      naturality := fun {N N'} f ↦ by
+        dsimp only [Functor.comp_map]
+        rw [← W.adjunction.homEquiv_naturality_left]
+        erw [← W.adjunction.homEquiv_naturality_right]
+        apply congrArg (W.adjunction.homEquiv _ _)
+        apply Subtype.ext
+        exact congrArg (fun h ↦ h.val) (V.adjunction.counit.naturality f) }
+  refine ⟨b, ?_, ?_⟩
+  · intro N
+    exact (W.transpose _ _ _).trans (hc N)
+  · intro b' hb'
+    apply NatTrans.ext
+    funext N
+    dsimp only [b]
+    apply (W.adjunction.homEquiv _ _).symm.injective
+    apply Subtype.ext
+    rw [W.untranspose]
+    erw [Equiv.symm_apply_apply]
+    exact (hb' N).trans (hc N).symm
 
 /-- The unique map into the invariant subsheaf; uniqueness fixes the actual arrow.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
@@ -166,7 +231,7 @@ construction is functorial and gives a left resolution by flat objects. -/
 @[instance] theorem sheafFlatResolution :
     Abelian.HasFunctorialFlatResolution
       (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) := by
-  sorry
+  infer_instance
 
 
 /-- Canonical invariants, selected by their fixed-section inclusion universal property.
@@ -212,7 +277,8 @@ Proof: apply the ordinary K-injective right-derived functor construction to the 
 invariants functor. Its homotopy-category localization preserves shifts and cone triangles. -/
 theorem derivedProperties : (derived A G).Additive ∧
     Nonempty ((derived A G).CommShift ℤ) := by
-  sorry
+  exact ⟨inferInstanceAs ((invariants A G).functor.rightDerivedFunctor.Additive),
+    ⟨inferInstanceAs ((invariants A G).functor.rightDerivedFunctor.CommShift ℤ)⟩⟩
 
 
 /-- The derived invariant functor has its canonical integer-shift structure.
@@ -236,7 +302,39 @@ Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
 Proof: write the restriction as the mate of the exact trivial-action comparison.
 Its units and counits commute with shifts; composition and whiskering preserve this. -/
 theorem groupMapShift (v : H →ₜ* G) : NatTrans.CommShift (groupMap A v) ℤ := by
-  sorry
+  let V := invariants A G
+  let W := invariants A H
+  have := canonicalRightDerivedAdjunctionShift V.adjunction
+  have := canonicalRightDerivedAdjunctionShift W.adjunction
+  have : NatTrans.CommShift V.functor.rightDerivedFunctorUnit ℤ :=
+    V.adjunction.commShift_rightDerivedFunctorUnit
+  have : NatTrans.CommShift W.functor.rightDerivedFunctorUnit ℤ :=
+    W.adjunction.commShift_rightDerivedFunctorUnit
+  have : IsIso (Functor.whiskerLeft
+      (ObjectProperty.ι (HomotopyCategory.subcategoryAcyclic (Equivariant A G)).rightOrthogonal)
+      V.functor.rightDerivedFunctorUnit) := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun X ↦ ?_)
+    obtain ⟨K, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective X
+    dsimp
+    infer_instance
+  have haux : NatTrans.CommShift
+      (Functor.rightDerivedPullbackAux (inflate v) (invariantRestriction V W v)) ℤ := by
+    have : NatTrans.CommShift (Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (inflate v ⋙ W.functor)) (.up ℤ)).inv ℤ :=
+      NatTrans.CommShift.of_iso_inv _ ℤ
+    dsimp only [Functor.rightDerivedPullbackAux]
+    infer_instance
+  have hfac : V.functor.rightDerivedFunctorUnit ≫
+      Functor.whiskerLeft DerivedCategory.Qh (groupMap A v) =
+        Functor.rightDerivedPullbackAux (inflate v) (invariantRestriction V W v) :=
+    V.functor.rightDerivedFunctor.rightDerived_fac V.functor.rightDerivedFunctorUnit
+      (HomotopyCategory.quasiIso (Equivariant A G) (.up ℤ)) _ _
+  have : NatTrans.CommShift (V.functor.rightDerivedFunctorUnit ≫
+      Functor.whiskerLeft DerivedCategory.Qh (groupMap A v)) ℤ := by
+    rw [hfac]
+    exact haux
+  exact NatTrans.CommShift.of_comp_whiskerLeft_Qh V.functor.rightDerivedFunctorUnit
+    (groupMap A v)
 
 /-- The derived map is normalized by the invariant inclusion on all complexes. On
 bounded-below objects its two units are computed by equivariant injective resolutions.
@@ -253,7 +351,8 @@ theorem groupMapNormalization (v : H →ₜ* G)
         (invariantRestriction (invariants A G) (invariants A H) v) (.up ℤ)).app K) ≫
       (invariants A H).functor.rightDerivedFunctorUnitQ
         (((inflate v).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  exact Functor.rightDerivedFunctorUnitQ_rightDerivedPullback_app (inflate v)
+    (invariantRestriction (invariants A G) (invariants A H) v) K
 
 /-- Degree zero is the actual invariant functor, with the comparison induced by the
 right-derived unit, not an arbitrarily chosen cohomology isomorphism.
@@ -303,7 +402,20 @@ and after restricting scalars; their induced group actions are unchanged. -/
 theorem scalarExact (a : A ⟶ A') :
     PreservesFiniteLimits (scalarAction (G := G) a).functor ∧
     PreservesFiniteColimits (scalarAction (G := G) a).functor := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := G)
+  have : U.ReflectsIsomorphisms := forgetReflects A G
+  have : PreservesFiniteLimits U := (forgetExact A G).1
+  have : PreservesFiniteColimits U := (forgetExact A G).2.1
+  have : PreservesFiniteLimits (CondensedBar.forgetAction (A := A') (G := G)) :=
+    (forgetExact A' G).1
+  have : PreservesFiniteColimits (CondensedBar.forgetAction (A := A') (G := G)) :=
+    (forgetExact A' G).2.1
+  have : PreservesFiniteLimits ((scalarAction (G := G) a).functor ⋙ U) :=
+    preservesFiniteLimits_of_natIso (scalarAction a).underlying.symm
+  have : PreservesFiniteColimits ((scalarAction (G := G) a).functor ⋙ U) :=
+    preservesFiniteColimits_of_natIso (scalarAction a).underlying.symm
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
+    preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
 /-- Exactness on kernels, from the preceding statement.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
@@ -441,7 +553,13 @@ equivariant, invertible, and natural. Faithfulness determines the comparison uni
 theorem identityActionExist :
     ∃! e : inflate (R := A.toMon) (ContinuousMonoidHom.id G) ≅ 𝟭 (Equivariant A G),
       ∀ N, (e.hom.app N).val = 𝟙 N.module := by
-  sorry
+  let e : inflate (R := A.toMon) (ContinuousMonoidHom.id G) ≅
+      𝟭 (Equivariant A G) := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  refine ⟨e, fun _ ↦ rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext N
+  exact Subtype.ext (he' N)
 
 /-- The identity comparison fixed by the original internal-module identity maps.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/

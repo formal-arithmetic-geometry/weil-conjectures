@@ -1,0 +1,195 @@
+{
+ "id": "lem-trf-simplicial-normalized-kernel-acyclic",
+ "kind": "statement",
+ "title": "Normalized kernel of a surjective simplicial quasi-isomorphism is acyclic",
+ "statement": "Let $X,Y:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be simplicial abelian groups and $f:X\\to Y$ a morphism [def-weil-pbc-simplicial-object]. For any simplicial abelian group $A$, put $s(A)^{-m}=A_m$ for $m\\geq0$, with differential $\\sum_{i=0}^m(-1)^id_i$ for $m>0$, zero differential out of degree zero, and zero positive cochain terms. Suppose every $f_m$ is surjective and $s(f)$ induces an isomorphism on every cohomology group [def-weil-abstract-derived-category]. Let $K_m=\\ker(f_m)$, with simplicial operators restricted from $X$. Then $H^r(s(K))=0$ for every integer $r$. Moreover, let $N(K)_0=K_0$ and $N(K)_m=\\bigcap_{i=1}^m\\ker(d_i:K_m\\to K_{m-1})$ for $m>0$, with differential $\\partial_m=d_0$ for $m>0$ and $\\partial_0:K_0\\to0$. Then $\\ker\\partial_m=\\operatorname{im}\\partial_{m+1}$ for every $m\\geq0$, including $m=0$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), second and last proof paragraphs: acyclic kernel and normalization comparison; Homology Tag 0117 (lemma-long-exact-sequence-cochain); Tag 019C (lemma-quasi-isomorphism). Positive-face normalization as in the existing lem-cbc-normalized-alternating-homotopy-equivalence. Returned proof Steps 1-2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of $f$ gives $f_j X(\\alpha)(k)=Y(\\alpha)f_m(k)=0$ for each simplicial operator $X(\\alpha):X_m\\to X_j$ and $k\\in K_m$. Thus all simplicial operators restrict to $K$, and their identities restrict as well. The inclusions $K_m\\hookrightarrow X_m$ commute with the alternating face differentials. By degreewise surjectivity, $0\\to s(K)\\to s(X)\\xrightarrow{s(f)}s(Y)\\to0$ is short exact in every nonpositive degree; in positive degrees it is the zero sequence. At degree zero the outgoing differential is zero as prescribed.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), second proof paragraph: replacing X by Ker(f)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-homology-long-exact] to the short exact sequence of integer cochain complexes from Step 1, in the abelian category $\\mathrm{Ab}$. For every $r\\in\\mathbf Z$ it gives the exact segment $H^{r-1}(s(X))\\xrightarrow{H^{r-1}(s(f))}H^{r-1}(s(Y))\\xrightarrow{\\delta}H^r(s(K))\\xrightarrow{a}H^r(s(X))\\xrightarrow{H^r(s(f))}H^r(s(Y))$. The first map is surjective, so $\\delta=0$ and $\\ker a=0$. The last map is injective, so $\\operatorname{im}a=0$. Hence $H^r(s(K))=0$. These are exactly the cohomology isomorphisms assumed in the item; no boundedness hypothesis is needed, and the argument includes $r=0$ and positive $r$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain), applied as in Simplicial Tag 08P1, second proof paragraph"
+   }
+  },
+  {
+   "text": "Write $C_m=K_m$ for the nonnegative alternating chain complex, so $C_m=s(K)^{-m}$ with the same differential. By [lem-cbc-normalized-alternating-homotopy-equivalence], the inclusion $j:N(K)\\to C$ has a chain-map homotopy inverse $p$ and maps $h_m:N(K)_m\\to N(K)_{m+1}$ with $1-pj=\\partial h+h\\partial$ (negate the homotopy if necessary). For $m\\ge0$ and $z\\in\\ker\\partial_m$, the element $jz$ is a cycle of $C$. Step 2 and the definition $H^{-m}(s(K))=\\ker d/\\operatorname{im}d$ give $t\\in C_{m+1}$ with $dt=jz$. Therefore $\\partial(pt+h_mz)=pdt+(1-pj)z=z$. Thus every normalized cycle is a normalized boundary. Conversely every boundary is a cycle because $N(K)$ is a chain complex by the cited statement. For $m=0$, the same computation uses $\\partial_0=0$, so it proves surjectivity $\\partial_1:N(K)_1\\to K_0$ without requiring a nonexistent face out of $K_0$.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1, last proof paragraph, and Tag 019C (lemma-quasi-isomorphism); positive-face convention supplied by the cited Mathlib normalization comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P1, second and last proof paragraphs; Homology Tag 0117; positive-face normalization comparison from the existing Mathlib leaf lem-cbc-normalized-alternating-homotopy-equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "acyclic|exact|quasiIso|kernel [sub=AlgebraicTopology/DoldKan]",
+   "results": "25 hits; top=['Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean', 'Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean', 'Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean']; note=; digest=646b06883eab9800. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizedMooreComplex\", \"Exact\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective quasi-isomorphism of simplicial abelian groups has acyclic kernel and acyclic normalized Moore complex",
+   "results": "8 hits; top=['AlgebraicTopology.NormalizedMooreComplex.objX', 'AlgebraicTopology.NormalizedMooreComplex.obj', 'AlgebraicTopology.normalizedMooreComplex', 'QuasiIso', 'CategoryTheory.ShortComplex.QuasiIso.casesOn', 'CategoryTheory.Abelian.DoldKan.N', 'AlgebraicTopology.NormalizedMooreComplex.objD', 'HomologicalComplex.quasiIso']; note=; digest=3837446510e64626. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The positive-face normalized Moore complex of the kernel of a degreewise surjective quasi-isomorphism of simplicial abelian groups is acyclic",
+   "results": "8 hits; top=['AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace', 'AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty', 'AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f', 'AlgebraicTopology.NormalizedMooreComplex.obj', 'AlgebraicTopology.normalizedMooreComplex_obj', 'AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap', 'AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex', 'HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt']; note=; digest=193de8b43a1cfbfc. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "(theorem|lemma|instance|def).*([Ee]xact|[Qq]uasiIso|[Aa]cyclic|[Kk]ernel) [sub=AlgebraicTopology/DoldKan]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a short exact sequence of simplicial abelian groups whose quotient map is a quasi-isomorphism, the normalized chain complex of the kernel has zero homology",
+   "results": "8 hits; top=[\"quasiIsoAt_iff_exactAt'\", 'quasiIsoAt_iff_exactAt', 'ChainComplex.quasiIsoAt₀_iff', 'groupHomology.isIso_δ_of_isZero', \"CategoryTheory.ShortComplex.quasiIso_iff_of_zeros'\", 'CategoryTheory.ShortComplex.ShortExact.isIso_δ', 'exactAt_iff_of_quasiIsoAt', 'CategoryTheory.ShortComplex.ShortExact.δIso']; note=; digest=f2f4b11ff5717dc7. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions and comparison maps for normalization do not prove acyclicity of the simplicial kernel. QuasiIso exactAt equivalences need an already established quasi-isomorphism to an acyclic complex; isIso_δ needs zero middle homology, not an isomorphism between the middle and quotient homologies. The kernel short exact sequence and the normalization comparison remain separate arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|exact|quasiIso|kernel [sub=AlgebraicTopology/DoldKan]",
+   "results": "25 hits; top=['Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean', 'Mathlib/AlgebraicTopology/DoldKan/Faces.lean', 'Mathlib/AlgebraicTopology/DoldKan/PInfty.lean', 'Mathlib/AlgebraicTopology/DoldKan/PInfty.lean']; digest=8c08f875c357f2d3. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: normalized-complex definitions and quasiIsoAt exactness equivalences do not combine the kernel short exact sequence with normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a surjective quasi-isomorphism of simplicial abelian groups has zero normalized homology",
+   "results": "8 hits; top=['CategoryTheory.ShortComplex.QuasiIso.isIso', \"CategoryTheory.ShortComplex.QuasiIso.isIso'\", 'CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles', 'quasiIso_of_isIso', 'CategoryTheory.ShortComplex.LeftHomologyData.isIso_i', 'HomologicalComplex.homologyIsKernel', 'CategoryTheory.ShortComplex.RightHomologyData.ofHasKernel_H', 'CategoryTheory.ShortComplex.homologyIsKernel']; digest=3781d2c2146fdfb9. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: normalized-complex definitions and quasiIsoAt exactness equivalences do not combine the kernel short exact sequence with normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizedMooreComplex\", \"Exact\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: normalized-complex definitions and quasiIsoAt exactness equivalences do not combine the kernel short exact sequence with normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise surjective quasi-isomorphism of simplicial abelian groups has an acyclic kernel and an exact normalized Moore complex",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty', 'HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt', 'AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace', 'HomologicalComplex.Acyclic', \"quasiIsoAt_iff_exactAt'\", 'Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'HomologicalComplex.acyclic_iff', 'quasiIsoAt_iff_exactAt']; digest=6d16cf66831dd369. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: normalized-complex definitions and quasiIsoAt exactness equivalences do not combine the kernel short exact sequence with normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(exact|Exact)|[Ee]xact.*quasiIso|[Kk]ernel.*[Qq]uasi [sub=Algebra/Homology]",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Factorizations/CM5b.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/HomologySequenceLemmas.lean', 'Mathlib/Algebra/Homology/HomologySequenceLemmas.lean', 'Mathlib/Algebra/Homology/Augment.lean']; digest=9b887cc277b6b80f. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "partial match: ShortComplex.ShortExact.acyclic_X₁, HomologySequenceLemmas.lean:232, proves acyclicity once the short exact sequence is supplied. It does not supply the normalized-complex clause. Reuse the existing long-exact-sequence Mathlib node and normalized comparison leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a short exact sequence of complexes, if the quotient map is a quasi-isomorphism then the kernel complex is exact",
+   "results": "8 hits; top=[\"quasiIsoAt_iff_exactAt'\", 'CategoryTheory.ShortComplex.QuasiIso.exact_iff', 'HomologicalComplex.HomologySequence.quasiIso_τ₃', \"CategoryTheory.ShortComplex.quasiIso_iff_of_zeros'\", 'quasiIsoAt_iff_exactAt', 'CategoryTheory.ShortComplex.quasiIso_iff_of_zeros', 'exactAt_iff_of_quasiIsoAt', 'CategoryTheory.ShortComplex.ShortExact.homology_exact₂']; digest=fde8803a97abf24f. Read the returned hits; QuasiIso.lean:73-88 requires an already exact source or target; HomologySequenceLemmas.lean:232 proves the kernel-complex clause under ShortExact and QuasiIso. HomotopyEquivalence.lean:79-87 and MooreComplex.lean:64-90 supply only the normalization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: normalized-complex definitions and quasiIsoAt exactness equivalences do not combine the kernel short exact sequence with normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: termwise surjective quasi-isomorphism has boundary lifting (Stacks 08P1). Extracted argument: Tag 08P1 (lemma-qis-simplicial-abelian-groups), second and last proof paragraphs: acyclic kernel and normalization comparison; Homology Tag 0117 (lemma-long-exact-sequence-cochain); Tag 019C (lemma-quasi-isomorphism). Positive-face normalization as in the existing lem-cbc-normalized-alternating-homotopy-equivalence. Returned proof Steps 1-2.",
+   "via": [
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-simplicial-normalized-kernel-acyclic",
+  "worker": "stage1",
+  "summary": "Q138 checked the full statement, Stacks 08P1/0117/019C, the live Lean attachment search, and both existing Mathlib inputs. The kernel short exact sequence, the long-exact-sequence vanishing argument and the normalized-cycle boundary formula are explicit, including degree zero. No statement change and no new nodes.",
+  "blueprint": "The existing from.place records the supporting simplicial boundary-lifting input below lem-trf-local-term-locality, proof (1)-(2). Steps 1-2 realize its extracted acyclic-kernel argument (Stacks 08P1, second paragraph); Step 3 realizes its normalization comparison and boundary consequence (last paragraph), retaining the positive-face convention. The latest blueprint ancestor was read; no alternative unit route is substituted."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-f5d75d785",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-f5d75d785 (reviewer sub-agent of L); spot-checked: I read the whole item; there are no new nodes. The statement and stmt_deps are unchanged: they match the item in the four NH parent snapshots. There is no repair note, so this is not a re-split. Against Stacks 08P1 (simplicial.tex, lemma-qis-simplicial-abelian-groups), Step 1 is the second proof paragraph (replace X by Ker f) and Step 3 is the last paragraph (normalization). Step 1 is elementary: naturality from def-weil-pbc-simplicial-object makes the kernel a simplicial object, and surjectivity plus the kernels give a degreewise short exact sequence of cochain complexes. Step 2 cites the Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact. On the segment from H^{r-1} to H^r, surjectivity gives delta=0 and injectivity gives im a=0, so H^r(s(K))=0 for every integer r, including 0 and positive r. Step 3 cites the Mathlib leaf lem-cbc-normalized-alternating-homotopy-equivalence, which uses the positive-face convention: kernels of d_1..d_n with differential d_0. That is the item's convention, while Stacks uses the opposite one, so no convention is swapped silently. I checked the formula d(pt+hz)=pjz+(1-pj)z=z, and at m=0 that d_1 is surjective because H^0=K_0/im=0. All four cited nodes are existing Mathlib leaves, so no tool_uses are needed and proof_deps equals the union of the uses. I tested small cases: K=0; a Dold–Kan split-off kernel for [Λ→Λ]; a constant kernel, which the hypothesis excludes. A DAG search (08P1, normalized+acyclic regex) found no duplicate. Mathlib searches cover all three kinds, and the partial match ShortExact.acyclic_X₁ covers only the first conclusion, so mathlib_match null is correct. No SGA is cited. No fixes."
+ }
+}

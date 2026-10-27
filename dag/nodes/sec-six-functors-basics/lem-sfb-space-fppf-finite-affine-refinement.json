@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-space-fppf-finite-affine-refinement",
+ "kind": "statement",
+ "title": "Finite affine scheme refinement of an algebraic-space fppf covering",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Let $\\{q_i:Y_i\\to Y\\}_{i\\in I}$ be a small jointly surjective family on field-valued point classes [def-trf-algebraic-space-jointly-surjective-family], whose maps are flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. For every affine $S$-scheme $T$ and morphism $t:T\\to Y$, there exist a finite set $J$, a function $a:J\\to I$, affine schemes $V_j$, morphisms $r_j:V_j\\to Y_{a(j)}$, and scheme morphisms $p_j:V_j\\to T$ such that $q_{a(j)}r_j=tp_j$, each $p_j$ is flat and locally of finite presentation, and $\\bigcup_{j\\in J}p_j(|V_j|)=|T|$. Moreover the scheme coproduct $T'=\\coprod_{j\\in J}V_j$ [lem-weil-pbc-scheme-coproduct-family] is affine, and its induced map $p:T'\\to T$ is flat, surjective [def-weil-surjective-morphism] and locally of finite presentation. The singleton $\\{p\\}$ is an fppf covering [def-pc-fppf-site] and an fpqc covering [def-weil-pbc-fpqc-covering]. The case $T=\\varnothing$ allows $J=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof: choose affine etale charts V_ij of V times_U U_i and a finite subfamily of their open images; finite coproduct refinement of the resulting standard covering."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-surjective-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z_i=T\\times_Y Y_i$. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], and their projections to $T$ form an fppf covering by clause (2) of [lem-sfb-space-fppf-covering-calculus]. Choose a representable surjective etale scheme atlas $e_i:W_i\\to Z_i$ for each $i$, using [def-trf-algebraic-space]. Clause (1) of the covering calculus makes each singleton $\\{e_i\\}$ fppf, clause (3) makes $\\{W_i\\to T\\}_{i\\in I}$ fppf, and clause (4) identifies this as a scheme fppf covering. All choices and families are in the fixed universes; no $Z_i$ or $W_i$ is assumed quasi-compact or separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, choice of etale scheme charts of the pullbacks; Tag 03Y9 (lemma-fppf), parts (2),(3)."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-fppf-affine-refinement] to the scheme covering $\\{W_i\\to T\\}$: $T$ is affine by hypothesis. Obtain a finite set $J$, labels $a:J\\to I$, and affine opens $V_j\\subseteq W_{a(j)}$ whose composites $p_j:V_j\\to T$ are flat and locally of finite presentation and jointly surjective. Define $r_j$ as $V_j\\to W_{a(j)}\\to Z_{a(j)}\\to Y_{a(j)}$. The fibre-product identity $Z_i=T\\times_Y Y_i$ gives $q_{a(j)}r_j=tp_j$ after precomposition with $V_j\\to Z_{a(j)}$. These are exactly the required labelled refinement and image-union equality.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ, proof, finite subfamily of affine chart images; topologies.tex Tag 021P (lemma-fppf-affine)."
+   }
+  },
+  {
+   "text": "Form $T'=\\coprod_{j\\in J}V_j$ and the induced $p:T'\\to T$ using [lem-weil-pbc-scheme-coproduct-family]. Write $V_j\\simeq\\operatorname{Spec}A_j$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $T'\\simeq\\operatorname{Spec}(\\prod_j A_j)$, hence $T'$ is affine. The coprojections $\\iota_j$ are open immersions covering $T'$ by the coproduct lemma, and are etale by [lem-weil-pbc-open-immersion-etale]. Apply the last family criterion of [lem-sfb-scheme-etale-source-target-properties] twice to this etale source cover, for flatness and local finite presentation: $p\\iota_j=p_j$ has each property, so $p$ has each. For every $x\\in|T|$, step 2 supplies $j$ and $v\\in|V_j|$ with $p_j(v)=x$; then $p(\\iota_j(v))=x$. Thus $p$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ, proof, finite affine refinement packaged by its coproduct; schemes.tex Tags 01JB/01JC, disjoint gluing; descent.tex Tags 04R1, 04R3, etale source locality."
+   }
+  },
+  {
+   "text": "The properties of $p$ in step 3 say precisely that $\\{p\\}$ is an fppf covering by [def-pc-fppf-site]; [lem-trf-fppf-covering-is-fpqc] makes this same singleton an fpqc covering. If $T=\\varnothing$, take $J=\\varnothing$ from the outset. Its coproduct is the empty scheme, affine by the empty instance of [lem-weil-pbc-finite-affine-coproduct-spectrum], with empty product the zero ring. The unique map $p:\\varnothing\\to\\varnothing$ is surjective; flatness and local finite presentation hold vacuously by [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. All factorization conditions are empty. The same singleton fppf and fpqc conclusions therefore apply.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "topologies.tex Tags 021L (definition-fppf-covering), 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc); empty case of the finite coproduct."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof; scheme finite refinement isolated as the existing Tag 021P node, followed by finite coproduct packaging."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fppf.*[Rr]efin|[Rr]efin.*fppf|exists.*[Aa]ffine.*[Cc]over",
+   "results": "Actual logged search: 4 hits; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covering families, scheme affine refinements, and scheme flatness. Fpqc.lean:41-73 defines only scheme precoverages; QuasiCompact.lean:60-69 refines a scheme-source cover. None supplies affine scheme refinement of algebraic-space members; Mathlib grep has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refine a jointly surjective family of flat locally finitely presented algebraic space morphisms by affine schemes over an affine target",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage, AlgebraicGeometry.Scheme.JointlySurjective.mk, AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.Scheme.Cover.mkOfCovers, AlgebraicGeometry.Scheme.Cover.mkOfCovers_X, AlgebraicGeometry.Scheme.affineCover",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covering families, scheme affine refinements, and scheme flatness. Fpqc.lean:41-73 defines only scheme precoverages; QuasiCompact.lean:60-69 refines a scheme-source cover. None supplies affine scheme refinement of algebraic-space members; Mathlib grep has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fppf\", \"Cover\"",
+   "results": "Actual logged search: 7 hits; AlgebraicGeometry.Scheme.fppfPrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage, AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf, AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage, AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage, AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covering families, scheme affine refinements, and scheme flatness. Fpqc.lean:41-73 defines only scheme precoverages; QuasiCompact.lean:60-69 refines a scheme-source cover. None supplies affine scheme refinement of algebraic-space members; Mathlib grep has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf covering of algebraic spaces admits over every affine scheme a finite affine scheme refinement whose coproduct is affine faithfully flat",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.AffineCover.J, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.AffineCover.I₀",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covering families, scheme affine refinements, and scheme flatness. Fpqc.lean:41-73 defines only scheme precoverages; QuasiCompact.lean:60-69 refines a scheme-source cover. None supplies affine scheme refinement of algebraic-space members; Mathlib grep has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine faithfully flat refinement of an fppf cover with algebraic space members over an affine scheme",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.AffineCover.I₀, AlgebraicGeometry.Scheme.AffineCover.J, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covering families, scheme affine refinements, and scheme flatness. Fpqc.lean:41-73 defines only scheme precoverages; QuasiCompact.lean:60-69 refines a scheme-source cover. None supplies affine scheme refinement of algebraic-space members; Mathlib grep has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fppf.*refin|finite.*affine.*cover",
+   "results": "{\"t\": \"2026-10-23T13:54:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fppf.*refin|finite.*affine.*cover\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"7453c98dbedaeff1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme-only precoverages, affine open covers or affine criteria; none treats algebraic-space members. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-73 and project Fpqc.lean:189-218; the latter only refines scheme-source families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A jointly surjective flat locally finitely presented family of algebraic spaces has a finite affine scheme refinement over an affine test scheme",
+   "results": "{\"t\": \"2026-10-23T13:54:19Z\", \"tool\": \"leansearch\", \"query\": \"A jointly surjective flat locally finitely presented family of algebraic spaces has a finite affine scheme refinement over an affine test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.casesOn\"], \"digest\": \"447d0f36a937b526\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme-only precoverages, affine open covers or affine criteria; none treats algebraic-space members. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-73 and project Fpqc.lean:189-218; the latter only refines scheme-source families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"Cover\"",
+   "results": "{\"t\": \"2026-10-23T13:54:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\", \\\"Cover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage\", \"AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage\"], \"digest\": \"b5f108bc9899021e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme-only precoverages, affine open covers or affine criteria; none treats algebraic-space members. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-73 and project Fpqc.lean:189-218; the latter only refines scheme-source families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every fppf covering family of algebraic spaces over an affine scheme has a finite affine scheme refinement with affine coproduct",
+   "results": "{\"t\": \"2026-10-23T13:54:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every fppf covering family of algebraic spaces over an affine scheme has a finite affine scheme refinement with affine coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"66a6a2d760a763c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme-only precoverages, affine open covers or affine criteria; none treats algebraic-space members. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-73 and project Fpqc.lean:189-218; the latter only refines scheme-source families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine faithfully flat refinement of an algebraic space fppf cover after pulling back to an affine scheme",
+   "results": "{\"t\": \"2026-10-23T13:55:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine faithfully flat refinement of an algebraic space fppf cover after pulling back to an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\"], \"digest\": \"1aa59caed6efc990\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme-only precoverages, affine open covers or affine criteria; none treats algebraic-space members. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-73 and project Fpqc.lean:189-218; the latter only refines scheme-source families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-four-property-fppf-descent",
+  "date": "2026-10-23",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack. Supporting general input: descent of properties of the diagonal from the smooth presentation, independent of quotient stacks and group actions. Supporting input: space-level base-change stability and fppf descent, before the scheme-test argument of 04XD. Supporting input for this split: finite affine scheme refinement of an fppf covering over an affine test scheme, Stacks 0DFQ proof.",
+   "via": [
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fppf-finite-affine-refinement",
+  "worker": "stage1",
+  "summary": "Completed the 0DFQ refinement proof with existing covering calculus, scheme affine refinement and finite affine coproduct nodes. No new nodes; statement unchanged; explicitly treated empty affine test schemes and verified every cited statement.",
+  "blueprint": "Inherited from.place locates this input beneath det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli descent. The creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returned None). Read the current latest blueprint sk-thm-sf-ctf-stability proof, direct-image compactification paragraph. Steps 1-2 realize 0DFQ chart and finite-refinement argument, steps 3-4 its affine singleton packaging.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of space fibre products used to form T times_Y Y_i, not a trace-formula step."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic scheme fppf affine refinement (021P); it supplies the finite selection after scheme atlases, which no algebraic-space clause of this item is delegated to."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic comparison of scheme covering topologies (022C) applied only to the resulting singleton."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme coproduct construction used only to assemble the finite affine source."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-fppf-affine-refinement",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-af3a82e34",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-af3a82e34 (reviewer sub-agent of L); spot-checked: I read the whole item, which has no new nodes, and its statement is unchanged against live; live still has the item unsplit, so no other group superseded it. It follows the 0DFQ proof (spaces-topologies.tex l.1267-1300) through scheme atlases, with the scheme lemma 021P doing the finite selection where the source argues openness plus quasi-compactness of |V|; that substitution is valid because step 1 yields a genuine scheme fppf covering of the affine T. Step 1: the fibre-product node gives Z_i; covering-calculus clause (2) with v=t pulls the family back; an atlas W_i is a jointly surjective étale singleton (elementary: Spec K ×_{Z_i} W_i is non-empty), so clause (1) applies, then clause (3) composes and clause (4) makes {W_i→T} a scheme fppf covering; no quasi-compactness is assumed. Step 2: 021P on affine T gives finitely many affine V_j ⊆ W_{a(j)}, fppf and jointly surjective; the cartesian square gives q r_j = t p_j. Step 3: finite coproduct ≅ Spec ∏A_j, so T' is affine; the coprojections are open hence étale and cover T'; the étale-local family criterion for flat and lfp gives the same for p; surjectivity is pointwise. Step 4: {p} is fppf by def-pc-fppf-site and fpqc by 022C; for T empty, J=∅ gives Spec 0 and every condition holds vacuously. Edge cases checked: I empty forces Y and T empty; empty members; identity singleton; non-quasi-compact or non-separated Y_i. No duplicates found by rg -L for 0DFQ and fppf/space/affine (finite-fppf-descent, a1 atlas-open-refinement, a1 fpqc-sheaf and trf finite-qc-atlas-assembly read). Batch-5: all four flagged citations are generic and neither assumption gives any of them — scheme étale-local properties (closure reaches smooth composition), the space fppf calculus (reaches the space definition), 022C fppf⇒fpqc, and space fibre products (02X2); none is a step of the trace-formula or Poincaré proof. I accept the split_report tool_uses (trf fibre products, 021P, 022C, scheme coproduct) as generic covering geometry. No SGA is used. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFppfFiniteAffineRefinement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_fppf_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFppfFiniteAffineRefinement.lean",
+  "statement": "theorem exists_finite_affine_fppf_refinement {S : Scheme.{u}} {I : Type w} (Y : AlgebraicSpace S) (Yᵢ : I → AlgebraicSpace S) (q : ∀ i : I, Yᵢ i ⟶ Y) (hflat : ∀ i : I, MapIsFlat (q i)) (hlfp : ∀ i : I, MapIsLocallyOfFinitePresentation (q i)) (hsurj : IsJointlySurjective (fun i : I ↦ (q i).hom.hom)) (T : Over S) [IsAffine T.left] (t : yoneda.obj T ⟶ Y.obj.obj) : ∃ (n : ℕ) (a : Fin n → I) (V : Fin n → Over S) (p : ∀ j : Fin n, V j ⟶ T) (r : ∀ j : Fin n, yoneda.obj (V j) ⟶ (Yᵢ (a j)).obj.obj), (∀ j : Fin n, IsAffine (V j).left) ∧ (∀ j : Fin n, r j ≫ (q (a j)).hom.hom = yoneda.map (p j) ≫ t) ∧ (∀ j : Fin n, Flat (p j).left ∧ LocallyOfFinitePresentation (p j).left) ∧ (∀ x : T.left, ∃ (j : Fin n) (v : (V j).left), (p j).left.base v = x) ∧ IsAffine (∐ fun j : Fin n ↦ (V j).left) ∧ Flat (Sigma.desc (fun j : Fin n ↦ (p j).left)) ∧ Surjective (Sigma.desc (fun j : Fin n ↦ (p j).left)) ∧ LocallyOfFinitePresentation (Sigma.desc (fun j : Fin n ↦ (p j).left)) ∧ Presieve.singleton (Sigma.desc (fun j : Fin n ↦ (p j).left)) ∈ Scheme.fppfPrecoverage T.left ∧ Presieve.singleton (Sigma.desc (fun j : Fin n ↦ (p j).left)) ∈ Scheme.fpqcPrecoverage T.left",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The scheme maps p_j are over S; r_j are Yoneda maps. Fin n allows the empty family. Sigma.desc fixes the induced coproduct map in every concluding property. Reuses the landed chartwise MapIsFlat and MapIsLocallyOfFinitePresentation predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40d4a7455",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement matches node and the Stacks 0DFQ proof (spaces-topologies.tex l.1267-1300) clause by clause. Hypotheses: IsJointlySurjective is the field-extension point-class condition; MapIsFlat/MapIsLocallyOfFinitePresentation are the landed chart predicates; no extra qc, separated, representable or Nonempty hypothesis; I : Type w is a harmless generalization. Conclusions: Fin n family (n=0 covers empty T), affine V_j over S, r j ≫ q = yoneda.map (p j) ≫ t, flat+lfp p_j, pointwise union, affine coproduct, and flat/surjective/lfp/fppf/fpqc all on the same Sigma.desc. Only node change is the lean record plus landed def node def-sfb-space-morphism-properties in stmt_deps. lean.statement verbatim. Docstrings have source, blueprint and 4 proof steps; sorry only; imports are the statement predicates plus proof_dep modules. Not superseded live; no duplicate in project or Mathlib. No compile run (no file changed); worker reports a clean scompile. No findings."
+ }
+}

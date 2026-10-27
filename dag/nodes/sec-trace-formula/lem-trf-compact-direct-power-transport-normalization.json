@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-compact-direct-power-transport-normalization",
+ "kind": "statement",
+ "title": "Direct power compact transport agrees with repeated transport",
+ "statement": "Fix a prime $p$, integers $a,n\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and its fixed algebraic closure $k$, and a prime $\\ell\\ne p$. Fix a finite extension $E/\\mathbf Q_\\ell$ in the chosen algebraic closure, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$, and put $A=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a separated finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and write $a_X:X\\to s$. Use $D^b_c(X,A)$ and the compact-support functor $H(M)=R\\Gamma_c(X,M)=\\operatorname{Fib}_s(Ra_{X!}M)$ of [def-trf-coefficient-conventions]. Put $\\gamma=(z\\mapsto z^q)^{-1}$, $g=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$ as in [def-trf-scheme-frobenius], and $P_r=L(g^r)^*$, $T=P_1$, with derived pullback [def-weil-derived-pullback-tensor-hom]. Fix one compactification $c_0=(X_0\\hookrightarrow\\overline X_0\\to\\operatorname{Spec}k_0)$ of $a_{X_0}$ [def-weil-compactifications-refinements], and use its base change $c$ to represent $Ra_{X!}$ for every power.\n\nFor every $r\\geq1$ let $\\tau^{(r)}_{c,M}:H(M)\\to H(P_rM)$ be the specified direct compact-support transport of [lem-trf-compact-frobenius-transport-composition]: the point transport along $h^r$ followed by the point fiber of the compactification exchange for the $r$-th-power square, using this same $c_0$. Write $\\tau_{c,M}=\\tau^{(1)}_{c,M}$ for the degree-one transport of [def-weil-frobenius-cohomology-transport].\n\nUse the actual canonical comparisons $d_r:P_r\\xrightarrow{\\sim}T^r$ of [def-trf-frobenius-pullback-power-comparison], normalized by $T^1=T$, $T^{r+1}=T\\circ T^r$, and $d_1=\\mathrm{id}_T$. For $M\\in D^b_c(X,A)$ and $r\\geq1$ set\n$$S_{r,M}=H(d_{r,M}^{-1})\\circ\\tau_{c,T^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M},$$\nwhere the repeated transport has exactly $r$ factors (and $T^0=\\mathrm{id}$). Then every $P_rM$ and $T^rM$ lies in $D^b_c(X,A)$, and the following equality holds in the derived category of finite $A$-module coefficient complexes:\n$$S_{r,M}=\\tau^{(r)}_{c,M}.$$\nBoth sides are isomorphisms $H(M)\\xrightarrow{\\sim}H(P_rM)$. No Weil structure or finite Tor-amplitude condition on $M$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Proof, second sentence: the scheme-variable compact-support base-change isomorphism along the finite automorphism g_gamma^m; returned split steps 2-3 (domain, invertibility, comparison coherence and induction); expanded in the returned DAG proof and the docstring of Sheaf/Paper/FrobeniusOperatorCompactDescription.lean, proof paragraphs 2-3"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-compactifications-refinements",
+  "lem-trf-compact-frobenius-transport-composition",
+  "def-weil-frobenius-cohomology-transport",
+  "def-trf-frobenius-pullback-power-comparison",
+  "def-trf-frobenius-operators"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause 1 of [lem-weil-frobenius-square-cartesian] to the structure morphism of X_0: g is an isomorphism with the specified inverse. Each g^r is therefore an isomorphism, with inverse (g^{-1})^r. Since ell is invertible in k, the finite-coefficient clause of [lem-weil-isomorphism-derived-pullback] gives P_r M in D^b_c(X,A). Applying its degree-one case repeatedly gives T^r M in that category, starting with T^0 M=M. Thus P_r and T restrict to endofunctors of this full subcategory, and the actual natural comparisons restrict as well.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-isomorphism-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, second sentence, compact-support transport along g_gamma^m; explicit assembly of the returned proof paragraphs 2-3"
+   }
+  },
+  {
+   "text": "Retain the given c_0 throughout. Set eta_M=tau_{c,M}; [def-weil-frobenius-cohomology-transport] states its naturality. With b_r=c_r, the inverse of the canonical comparison P_{r+1} to T P_r, [lem-trf-compact-frobenius-transport-composition] gives tau^{(1)}=eta and tau^{(r+1)}_M=H(b_{r,M}) eta_{P_r M} tau^{(r)}_M. These are the specified direct exchanges, rather than maps defined by this recurrence. For the actual d_r of [def-trf-frobenius-pullback-power-comparison]: in its recursion d_{r+1}=T(d_r)∘C_{1,r} the composite is defined only when C_{1,r} has codomain T∘P_r, so C_{1,r} is the canonical comparison c_{g,g^r}:P_{r+1}→T∘P_r (the displayed P_b∘P_a of that node is read this way). Hence the recursion splits g^{r+1} into r+1 copies of g by canonical composition comparisons with d_1=id, and the independence clause of [lem-trf-frobenius-pullback-comparison-coherence] identifies it with the d_r of that lemma, which gives d_{r+1}^{-1} T(d_r)=b_r. Both cited statements use the same canonical pullback-composition comparison.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "lem-trf-compact-frobenius-transport-composition",
+    "def-trf-frobenius-pullback-power-comparison",
+    "lem-trf-frobenius-pullback-comparison-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, second sentence, compact-support transport along g_gamma^m; explicit assembly of the returned proof paragraphs 2-3"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-frobenius-transport-induction] with C=D^b_c(X,A), D the derived category of finite A-module coefficient complexes, H=R Gamma_c(X,-) of [def-trf-coefficient-conventions], T=P_1, eta=tau_c and tau_r=tau^{(r)}_c. Step 1 verifies the functor domains, and step 2 supplies every recurrence and normalization hypothesis. The lemma identifies exactly H(d_{r,M}^{-1}) eta_{T^{r-1}M} ... eta_M with tau^{(r)}_{c,M} for all positive r. This is the asserted equality S_{r,M}=tau^{(r)}_{c,M}, in the derived category before taking cohomology.",
+   "uses": [
+    "lem-trf-frobenius-transport-induction",
+    "def-trf-coefficient-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, second sentence, compact-support transport along g_gamma^m; explicit assembly of the returned proof paragraphs 2-3"
+   }
+  },
+  {
+   "text": "For each j from 0 to r-1, clause 3 of [lem-weil-frobenius-cohomology-transport-iso], at Lambda=A and the object T^j M from step 1, makes eta_{T^j M} invertible. Since d_{r,M} is an isomorphism, H(d_{r,M}^{-1}) has inverse H(d_{r,M}). The inverse of their composite S_{r,M} is the reversed composite of these inverses. Step 3 therefore makes tau^{(r)}_{c,M} an isomorphism too. None of the cited finite-level assertions requires a Weil structure or finite Tor-amplitude.",
+   "uses": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Proof, second sentence, compact-support transport along g_gamma^m; explicit assembly of the returned proof paragraphs 2-3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-trf-compact-frobenius-transport-composition",
+  "def-trf-frobenius-pullback-power-comparison",
+  "lem-trf-frobenius-pullback-comparison-coherence",
+  "lem-trf-frobenius-transport-induction",
+  "def-trf-coefficient-conventions",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Proof, second sentence, compact-support transport along g_gamma^m; explicit assembly of the returned proof paragraphs 2-3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficient pro etale sheaves on a scheme over a finite field the direct compact support Frobenius power transport is invertible and equals repeated degree one transport under canonical pullback composition",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.Isocrystal.frobenius, WittVector.Isocrystal.frob, WittVector.instIsocrystalStandardOneDimIsocrystal, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, WittVector.IsocrystalEquiv, WittVector.IsocrystalHom.frob_equivariant",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"Iso\"",
+   "results": "12 hits: CategoryTheory.Limits.widePullbackShapeOpEquiv_counitIso, CategoryTheory.Limits.WidePullbackShape.diagramIsoWideCospan, CategoryTheory.Limits.widePullbackShapeOpEquiv_unitIso, CategoryTheory.Limits.PullbackCone.flipFlipIso, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.pullbackProdFstIsoProd",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*transport|transport.*frobenius|compact.*(pullback|baseChange)|proEtale",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct compactly supported cohomology transport along a power of geometric Frobenius agrees with iterated transport",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural cohomology transport and coherent pullback composition identify transport along an iterated automorphism with the composite of its one step transports",
+   "results": "8 hits: groupCohomology.cocyclesMap_comp_isoCocycles₁_hom, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply, groupCohomology.cocyclesMap_comp_isoCocycles₂_hom, groupCohomology.cocyclesMap_comp_isoCocycles₂_hom_apply, groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*transport|transport.*frobenius|compact.*baseChange",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean; read QuasiCompact.lean:165, unrelated stability-under-base-change instance.",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated results or comparison ingredients, not the stated finite-coefficient derived compact-support normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported derived cohomology transport along an iterated automorphism equals repeated transport",
+   "results": "8 hits: ContinuousCohomology.MultiInd.functor, AlgEquiv.coe_pow, HasCompactSupport.iteratedFDeriv, ContDiffMapSupportedIn.iteratedFDerivLM_apply, iteratedDeriv_comp_const_add, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, ContDiffMapSupportedIn.iteratedFDerivWithOrderLM, ContDiffMapSupportedIn.structureMapLM_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated results or comparison ingredients, not the stated finite-coefficient derived compact-support normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"NatIso\"",
+   "results": "12 hits: CategoryTheory.Functor.essImage.ofNatIso, CategoryTheory.Functor.essImage_eq_of_natIso, CategoryTheory.Discrete.natIsoFunctor, CategoryTheory.Discrete.natIsoFunctor_hom_app, CategoryTheory.Discrete.natIsoFunctor_inv_app, CategoryTheory.Functor.FullyFaithful.homNatIso', CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.sectionsFunctorNatIsoCoyoneda",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated results or comparison ingredients, not the stated finite-coefficient derived compact-support normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct compact support transport along a Frobenius power equals repeated degree one transport after the canonical derived pullback power comparison",
+   "results": "8 hits: iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_symm_add, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.comp_pushforward, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; read closest module-pullback comparison in PullbackContinuous.lean:167-182 and shift-pullback comparison in CategoryTheory/Shift/Pullback.lean:252; these give no compact-support transport assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated results or comparison ingredients, not the stated finite-coefficient derived compact-support normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation H to H composed with T and coherent pullback power comparisons give equality of direct power transport and its repeated composition",
+   "results": "8 hits: CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, PresheafOfModules.pullbackComp, CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq, CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; read closest module-pullback comparison in PullbackContinuous.lean:167-182 and shift-pullback comparison in CategoryTheory/Shift/Pullback.lean:252; these give no compact-support transport assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated results or comparison ingredients, not the stated finite-coefficient derived compact-support normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-operator-compact-description",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Proof, second sentence: the scheme-variable compact-support base-change isomorphism along the finite automorphism g_gamma^m; returned split steps 2-3 (domain, invertibility, comparison coherence and induction)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-compact-direct-power-transport-normalization",
+  "worker": "stage1",
+  "summary": "Assembled the direct-power normalization from existing transport composition, actual-comparison coherence and natural transport induction. Checked bounded-constructible domains and finite-coefficient invertibility separately, without assuming finite Tor-amplitude or a Weil structure. No new nodes and no statement change. Read Deligne Weil II (1.1.10)-(1.1.14), the main blueprint proof, and the actual project comparison/transport interfaces; Mathlib searches found ingredients but no whole-item match.",
+  "blueprint": "Realizes the second sentence of lem-trf-frobenius-operator-compact-description.proof.md: the scheme-variable compact-support base-change isomorphism along g_gamma^m; returned proof paragraphs 2-3 (domains, comparison normalization, induction and invertibility).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic geometric base-change automorphism statement needed for g^r to be an isomorphism; the unit does not reprove the square geometry."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic finite-coefficient preservation of bounded constructibility under scheme isomorphisms; needed to restrict the functor domains, not to replace the unit transport argument."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Generic degree-one compact cohomology transport invertibility, applied at the iterated objects; the unit then proves power normalization using its own recurrence and comparison lemmas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-9b43e733f",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-9b43e733f (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, and the parent blueprint proof (main-20261015, which only names g^{m,*}_{γ,c}; proof_origin agent is right). Deligne Weil II (1.1.14) is motivation only. No SGA. There are no new nodes and the statement is byte-identical to live; the item is unsplit on live and side-live, not dropped, and has no repair note. No cycle; the only citer is the parent. The 4 steps check. Step 1: square-cartesian clause 1 makes g^r an isomorphism; isomorphism-derived-pullback (ℓ≠p, Λ=A_{E,n}) puts P_rM and T^rM in D^b_c, a full isomorphism-closed subcategory of D(X_proet,A). Step 2: the composition lemma's c_m is the inverse of the canonical comparison for (h,k)=(g,g^m), which equals b_r of the coherence lemma; pur713 makes the constant-sheaf identifications agree; τ_c is natural by its definition. Step 3: I matched every hypothesis of the transport-induction lemma and re-derived it through naturality of η. Step 4: clause 3 of transport-iso at T^jM makes each η invertible, so the composite is invertible (elementary). Edge cases checked: r=1, r=2 (d_2=c_{g,g}), M=0, X_0 empty, and non-perfect M. No duplicates: integral-compact-transport-recurrence, the weil-cocycle sibling and the a1 germ node all state different things. The three tool_uses are accepted; the same tools are already on the sibling composition lemma. FIX, step 2 text only: def-trf-frobenius-pullback-power-comparison displays C_{a,b}:P_{a+b}≅P_b∘P_a, which makes its recursion ill-typed, and the step applied the coherence lemma to the definition's d_r without a bridge. The new text says that by typing C_{1,r}=c_{g,g^r}:P_{r+1}→T∘P_r, and that the independence clause of the coherence lemma identifies the recursive d_r with the lemma's d_r. Maintainer note: correct that display in def-trf-frobenius-pullback-power-comparison (another group's node, not edited).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompactDirectPowerTransportNormalization",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.compact_direct_power_transport_normalization",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.compactDirectPowerTransport",
+   "WeilConjectures.TraceFormulaCoefficientConventions.compact_direct_power_transport_normalization"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CompactDirectPowerTransportNormalization.lean",
+  "statement": "theorem compact_direct_power_transport_normalization (T : TraceFormulaCoefficientConventions.{u}) (c₀ : Compactification T.X₀.hom) (M : T.boundedConstructible.FullSubcategory) (r : ℕ) : T.boundedConstructible ((T.frobeniusPullbackPower r).obj M.obj) ∧ T.boundedConstructible ((trfPositiveFunctorPower (T.frobeniusPullbackPower 0) r).obj M.obj) ∧ T.finiteGlobalComparedTransport c₀ M.obj r = T.compactDirectPowerTransport c₀ M.obj r ∧ IsIso (T.finiteGlobalComparedTransport c₀ M.obj r) ∧ IsIso (T.compactDirectPowerTransport c₀ M.obj r)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The positive exponent is r + 1. Uses the existing finiteGlobalCompactSections and finiteGlobalComparedTransport definitions from def-trf-frobenius-operators, added as an already landed statement dependency. The helper only expresses the specified compactPowerTransport in the canonical pullback coordinates of the actual d comparison. Includes both bounded-constructibility clauses, the derived equality, and invertibility of both maps; no Weil structure or finite Tor-amplitude hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38fa300e2",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Only the item changed, in lean and stmt_deps; the added stmt_dep def-trf-frobenius-operators is landed (STMT_DEPS MAY GAIN LANDED NODES), and its closure does not reach the item or its parent, so no cycle. The recorded statement matches the file verbatim. Every node clause maps onto a recorded declaration: T conventions; one c0 via frobeniusCohomologyCompactification; H = finiteGlobalCompactSections (defeq compactPowerCohomology); P_r = frobeniusPullbackPower with the predecessor index; T^{r+1} = T∘T^r via trfPositiveFunctorPower; d = frobeniusPullbackPowerComparison (canonical); S = finiteGlobalComparedTransport (r+1 factors, then H(d^-1)); tau^(r) = compactPowerTransport plus the canonical pointPowerPullbackModel presentation iso (real data, not the recurrence). All five conjuncts are present (two D^b_c clauses, the derived equality, two IsIso); no Weil or finite-Tor hypothesis, universe u only. Edge cases r=1, n=1, M=0 and empty X0 are covered. Advisory: pointPowerPullbackModel comes from a node outside stmt_deps; the Lean composition lemma lacks the node's tau^(1)=tau remark, which step 2 of the item's proof needs at stage 3."
+ }
+}

@@ -55,11 +55,12 @@
    }
   },
   {
-   "text": "The statements [def-sfb-dc-upper-lower-adjunction], [def-sfb-dc-open-lower-shriek-adjunction] and [def-sfb-dc-tensor-hom-adjunction] specify the three adjunctions as the ambient Hom-bijections on the indicated restricted objects. In particular, the second statement includes the ambient identification $D(j^*)\\cong Lj^*$; no identification of unrelated coefficient categories is used. For each pair of bounded constructible objects, the full-subcategory Hom-sets are exactly the ambient Hom-sets, so these bijections and their inverses have the required source and target. Their naturality equations are the ambient equations on the same morphisms. They therefore give the asserted restricted adjunctions. For $Lf^*\\dashv Rf_*$ use the coefficients for which $Rf_*$ preserves; for $j_!\\dashv Lj^*$ use any $\\Lambda$; for tensor–Hom require both preservation properties and fix $K$ bounded constructible, exactly as in the cited statements.",
+   "text": "Apply [lem-sp-fully-faithful-adjunction-restriction] to the full inclusions and the restricted functors of step 2. The ambient Hom-bijections specified in [def-sfb-dc-upper-lower-adjunction], [def-sfb-dc-open-lower-shriek-adjunction] and [def-sfb-dc-tensor-hom-adjunction] give the inputs; the open case includes $D(j^*)\\cong Lj^*$. The lemma supplies the natural restricted Hom-bijections and triangle identities. Use the pushforward-preserving coefficients for $Lf^*\\dashv Rf_*$, every $\\Lambda$ for $j_!\\dashv Lj^*$, and both preservation assumptions with fixed bounded constructible $K$ for tensor–Hom.",
    "uses": [
     "def-sfb-dc-upper-lower-adjunction",
     "def-sfb-dc-open-lower-shriek-adjunction",
-    "def-sfb-dc-tensor-hom-adjunction"
+    "def-sfb-dc-tensor-hom-adjunction",
+    "lem-sp-fully-faithful-adjunction-restriction"
    ],
    "elementary": false,
    "source": {
@@ -68,9 +69,12 @@
    }
   },
   {
-   "text": "Use the composition isomorphism specified by [def-sfb-dc-upper-star-comp]. At each bounded constructible $K$ its component and inverse are the ambient composition-isomorphism component and its inverse, regarded as maps in the full subcategory. Their two composites are identities and their naturality squares commute because the corresponding ambient equations hold. Faithfulness of the inclusion proves uniqueness of this natural isomorphism with its prescribed ambient image. Its hypotheses allow every commutative condensed $\\Lambda$ and composable morphisms of the setting, as required.",
+   "text": "For the two composites in [def-sfb-dc-upper-star-comp], postcomposition by the full inclusion is fully faithful by [lem-sfb-fully-faithful-postcomposition]. Apply [lem-cbc-fully-faithful-isomorphism-lift] in these functor categories to the specified ambient composition isomorphism. This gives its unique natural-isomorphism preimage. By [lem-sfb-fully-faithful-cancel-iso-components], its forward and inverse components are the preimages of the ambient components; all inverse and naturality equations are retained. The schemes are composable in the setting, and $\\Lambda$ is arbitrary.",
    "uses": [
-    "def-sfb-dc-upper-star-comp"
+    "def-sfb-dc-upper-star-comp",
+    "lem-sfb-fully-faithful-postcomposition",
+    "lem-cbc-fully-faithful-isomorphism-lift",
+    "lem-sfb-fully-faithful-cancel-iso-components"
    ],
    "elementary": false,
    "source": {
@@ -94,7 +98,11 @@
   "def-sfb-dc-upper-lower-adjunction",
   "def-sfb-dc-open-lower-shriek-adjunction",
   "def-sfb-dc-tensor-hom-adjunction",
-  "def-sfb-dc-upper-star-comp"
+  "lem-sp-fully-faithful-adjunction-restriction",
+  "def-sfb-dc-upper-star-comp",
+  "lem-sfb-fully-faithful-postcomposition",
+  "lem-cbc-fully-faithful-isomorphism-lift",
+  "lem-sfb-fully-faithful-cancel-iso-components"
  ],
  "proof_origin": {
   "by": "agent",
@@ -143,6 +151,55 @@
    "results": "25 hits: Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean; directory CategoryTheory",
    "date": "2026-10-16",
    "verdict": "no match: generic full-subcategory restriction and adjunction constructions only; no constructibility-preservation assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful",
+   "results": "17 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Sites/Pullback.lean; digest 9164ebbbd3781b77",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "6 hits: CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; digest 58c0010ab28cc44c",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between ambient categories restricts along fully faithful inclusions to full subcategories when both functors preserve the subcategories",
+   "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Subobject.lowerAdjunction, CategoryTheory.Reflective.comparison_full; digest 0829a6e5aa59b654",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restrict an adjunction to full subcategories with compatible inclusions and natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.ofNatIsoRight, Rep.resCoindAdjunction; digest 51be5c4308b7009b",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringRight|def preimageIso|def preimageNatIso|fullyFaithful.*whisker",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean; digest 1e7189d9871d44ca",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "7 hits: CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.preimageIso_hom, CategoryTheory.Functor.FullyFaithful.preimageIso_inv, CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply, CategoryTheory.Equivalence.congrFullSubcategory_counitIso, CategoryTheory.Equivalence.congrFullSubcategory_unitIso, CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq; digest 4d9666410908062e",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a fully faithful functor is fully faithful and every natural isomorphism between the postcomposed functors has a unique natural isomorphism preimage",
+   "results": "8 hits: CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app, CategoryTheory.Functor.fullyFaithfulCancelRight, CategoryTheory.Functor.FullyFaithful.whiskeringRight, CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app, CategoryTheory.Functor.FullyFaithful.comp, CategoryTheory.StructuredArrow.instFullObjCompPostOfFaithful, CategoryTheory.Functor.FullyFaithful.under, CategoryTheory.CostructuredArrow.instFullCompObjPostOfFaithful; digest 2d918ad017b627ee",
+   "date": "2026-10-22",
+   "verdict": "generic match, reused via existing DAG Mathlib leaves; no match for the aggregate coefficient-specific preservation and restriction statement"
   }
  ],
  "mathlib_match": null,
@@ -202,23 +259,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "sk-def-sfb-dc-restricted-functors",
   "worker": "stage1",
-  "summary": "Reuse the existing five preservation lemmas and nine restricted-functor/adjunction/composition definitions. Spell out the full-subcategory construction and its uniqueness. Replace the dangling aggregate-factorization reference by the existing levelwise-extension restriction definition, remove the unused two-colimit statement dependency, and discard the earlier attempt’s unnecessary aggregate node. No mathematical clause or coefficient hypothesis changes. Expanded the setting reference into its explicit prime, field, scheme and morphism hypotheses after preflight requested self-contained wording.",
-  "blueprint": "Proof paragraph 1 is realized by step 1 (preservation) and step 2 (the named restrictions); paragraph 2 by step 2 (factorization through full subcategories), step 3 (Hom-bijections) and step 4 (composition isomorphism)."
+  "summary": "Answer the released 2026-10-22 re-split note by citing existing generic Mathlib leaves for restriction of adjunctions, fully faithful postcomposition, and unique isomorphism lifting with specified components. Reuse the two 2026-10-21 leaves rather than duplicate them. Preserve the complete explicit full-subcategory object/map construction and all five preservation inputs. Statement unchanged; no new nodes.",
+  "blueprint": "First paragraph: step 1 cites all five preservation assertions and step 2 constructs the five named restrictions. Second paragraph: step 2 retains the explicit full-subcategory factorization; step 3 applies the generic adjunction theorem; step 4 applies generic full-faithful postcomposition and isomorphism lifting, retaining forward/inverse components and uniqueness."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N0-cb80252f0",
-  "group": "N0",
+  "reviewer": "NT-cc-NL-226937356",
+  "group": "NL",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-cb80252f0 (reviewer sub-agent of L); spot-checked: Read the item, report, AGENTS/stage guidance, DAG sync, delivery-errors A–F, chapter route, blueprint section/proof, and every cited node statement. Verified all four steps, hypotheses, coefficient scopes, restriction/adjunction/composition constructions, edge cases, duplicate checks, and Mathlib searches. No new nodes or repairs are required; review.md records the full audit."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-226937356 (reviewer sub-agent of L); spot-checked: PASS with a count-waiver maintainer note: the delivery adds 0 new nodes, and the re-split note asks for at least 1. Statement, stmt_deps and lean_audit are byte-identical to the side-live/live base (2026-10-16 split, 3187 chars). The proof is now 2851 chars. Step 1 (unchanged): the five preservation lemmas have exactly the item's coefficient scope. Upper-star and open-lower-shriek hold for every Λ. Lower-star, tensor and hom hold for O_E, E and Q̄_ℓ; lower-star also covers finite ℓ-primary T, which is extra scope. Step 2 (unchanged, elementary): this is the full-subcategory lift. Each instance is the statement of a cited def node (def-sfb-dc-tensor is itself the ObjectProperty.lift leaf, FullSubcategory.lean:159-177). Uniqueness follows from Prop proof irrelevance and the faithful inclusion. Under brief §2 this should be an elementary step, not a node. Step 3: the restrictFullyFaithful leaf (Restrict.lean:26-42) with the full inclusions and identity comparisons gives the ambient bijections that the three adjunction defs specify; the open case uses D(j^*)≅Lj^*, and tensor-Hom uses fixed K with both preservations. Step 4: whiskeringRight (Whiskering.lean:116), FullyFaithful.isoEquiv (FullyFaithful.lean:217) and fullyFaithfulCancelRight (lines 372/378/384) give the unique preimage of the ambient composition iso. Its forward and inverse components are preimages, matching def-sfb-dc-upper-star-comp. Every old argument now has a carrier in an existing node or Mathlib leaf; nothing was summarised away. The blueprint proof's two general facts map to steps 2-4. There is no SGA citation, and the off-unit citations are all Mathlib leaves, so no tool_use is needed. The unit realization is correct. Precedents for the waiver: Q41/Q33/Q04 and Q57/Q62/O4."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
+   ]
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.BoundedConstructiblePushforwardRestriction",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStarOfPreserves",
@@ -275,5 +373,42 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Work in the setting of [sk-def-sfb-dc-setting], and let $\\Lambda$ be a commutative condensed\nring. Consider the following functors on the ambient derived categories of module objects:\n\n- the derived pullback $Lf^*\\colon D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda_X})$ and the derived\n  pushforward $Rf_*\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y})$ of a morphism\n  $f\\colon X\\to Y$ ([sk-def-sfb-module-derived-pushpull]);\n- the extension by zero $j_!=D(j_!)\\colon D(\\Mod_{\\Lambda_U})\\to D(\\Mod_{\\Lambda_X})$ along an\n  open immersion $j\\colon U\\to X$, applied levelwise to complexes\n  ([sk-def-sfb-module-lower-shriek], [sk-prop-sfb-module-derived-factorization]);\n- the derived tensor product $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ and the derived internal hom\n  $\\RHom_{\\Lambda_X}(-,-)$ on $D(\\Mod_{\\Lambda_X})$ ([det-def-sfb-derived-tensor-hom]).\n\nEach of them carries bounded constructible complexes ([det-def-sfb-bounded-constructible]) to\nbounded constructible complexes in the following cases. For $Lf^*$ and $j_!$ this holds for every\n$\\Lambda$. For $Rf_*$, $\\otimes^{\\mathrm L}$ and $\\RHom$ it holds for the $\\ell$-adic rings\n$\\Lambda=\\underline{\\cO}_E$, $\\underline E$ ($E/\\mathbf Q_\\ell$ finite;\n[det-def-sfb-condensed-ring]) and $\\Lambda=\\underline{\\Qlb}$ ([det-def-sfb-qlbar-condensed]); these\nare Deligne's finiteness theorems. It fails for a general $\\Lambda$.\n\nWhen the preservation property holds, the functor on $D_{\\mathrm{cons}}$ is defined as the\n**restriction** of the ambient functor: it is the unique functor whose composite with the fully\nfaithful inclusion $D_{\\mathrm{cons}}\\subseteq D(\\Mod)$ equals the composite of the inclusion with\nthe ambient functor. This gives\n\n$$\n\\begin{gathered}\nLf^*\\colon D_{\\mathrm{cons}}(Y,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\nRf_*\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Y,\\Lambda),\\qquad\nj_!\\colon D_{\\mathrm{cons}}(U,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\\\\n-\\otimes^{\\mathrm L}-\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\n\\RHom(-,-)\\colon D_{\\mathrm{cons}}(X,\\Lambda)^{\\mathrm{op}}\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda).\n\\end{gathered}\n$$\n\nBy construction they commute with the inclusions. Nothing is derived afresh. The following\nstructure is also restricted along the fully faithful inclusions:\n\n- the adjunctions $Lf^*\\dashv Rf_*$, $j_!\\dashv Lj^*$, and $K\\otimes^{\\mathrm L}-\\dashv\\RHom(K,-)$ for\n  $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$;\n- the composition isomorphism $L(g\\circ f)^*\\cong Lf^*\\circ Lg^*$ for $f\\colon X\\to Y$,\n  $g\\colon Y\\to Z$.",
+  "proof": [
+   {
+    "text": "The preservation statements are [lem-sfb-dc-upper-star-preserves],\n[lem-sfb-dc-lower-star-preserves], [lem-sfb-dc-open-lower-shriek-preserves],\n[lem-sfb-dc-tensor-preserves] and [lem-sfb-dc-hom-preserves]. The restricted functors are\n[def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor] and [def-sfb-dc-hom].",
+    "uses": [
+     "lem-sfb-dc-upper-star-preserves",
+     "lem-sfb-dc-lower-star-preserves",
+     "lem-sfb-dc-open-lower-shriek-preserves",
+     "lem-sfb-dc-tensor-preserves",
+     "lem-sfb-dc-hom-preserves",
+     "def-sfb-dc-upper-star",
+     "def-sfb-dc-lower-star",
+     "def-sfb-dc-open-lower-shriek",
+     "def-sfb-dc-tensor",
+     "def-sfb-dc-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Two general facts are used. If an ambient functor $F$ carries the full subcategory $\\mathcal C$ into\nthe full subcategory $\\mathcal C'$, then $F\\circ\\iota_{\\mathcal C}$ factors uniquely through\n$\\iota_{\\mathcal C'}$. If the two functors of an ambient adjunction $L\\dashv R$ both restrict, then\nthe Hom-bijections restrict too, since Hom-sets in a full subcategory are the ambient ones. So the\nadjunction restricts. In the same way, a natural isomorphism between composites of restricted\nfunctors is the preimage, under the fully faithful inclusion, of the ambient one. This gives the\nadjunctions [def-sfb-dc-upper-lower-adjunction], [def-sfb-dc-open-lower-shriek-adjunction] and\n[def-sfb-dc-tensor-hom-adjunction], and the composition isomorphism [def-sfb-dc-upper-star-comp].",
+    "uses": [
+     "def-sfb-dc-upper-lower-adjunction",
+     "def-sfb-dc-open-lower-shriek-adjunction",
+     "def-sfb-dc-tensor-hom-adjunction",
+     "def-sfb-dc-upper-star-comp"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

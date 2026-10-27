@@ -1,0 +1,277 @@
+{
+ "id": "lem-sp-raw-chart-scalar-counit-pasting",
+ "kind": "statement",
+ "title": "Raw etale chart: right scalar factorization and composite counit equation",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. All schemes are separated of finite type over $k$, and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\varphi:A\\to B$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$, and choose $N=\\ell^n\\geq1$ annihilating both. On either the ordinary etale or pro-etale site let $\\mathcal C_{T,R}=D^b_{ctf}(T,R)$ mean the full category of constant-$R$ module complexes with bounded constructible cohomology and finite Tor amplitude: tensor with any degree-zero module sheaf has cohomology in one fixed finite interval [def-weil-pbc-derived-categories, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude, det-sp-et-proet-adjunction-transfer]. Write $T_T=-\\otimes^L_{A_T}B_T$ [det-sp-scalar-extension-functor, lem-pur-derived-change-of-rings]. The finite Tate line is $R_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}R_T$ on the etale site and its comparison inverse image on the pro-etale site; $(d)$ denotes tensor with its $d$th tensor power [def-asd-finite-etale-tate-twist].\nWork on the ordinary etale site. Let $d\\geq0$, $V=\\mathbf A^d_Y$, $p_d:V\\to Y$ and $e:U\\to V$ be separated etale of finite type. Put $E_R=De_{\\Sigma!,R}$, $h_R=e_R^*$, $P_R=Rp_{d!,R}$ and $G_R=p_{d,R}^*(-)(d)[2d]$ for $R=A,B$. Use the sum adjunction $E_R\\dashv h_R$ with counit $v_R$ and the ordered affine-space adjunction $P_R\\dashv G_R$ with counit $u_R$ [lem-sp-etale-sum-counit-scalar, lem-sp-affine-counit-scalar]. The composite adjunction $P_RE_R\\dashv h_RG_R$ has counit\n$$w_{R,K}=u_{R,K}\\circ P_R(v_{R,G_RK}).$$\nUse the specified affine compact-support coefficient comparison $\\beta_d:T_YP_A\\to P_BT_V$, summandwise comparison $\\sigma_e:T_VE_A\\to E_BT_U$, and canonical right comparisons $a_d:T_VG_A\\to G_BT_Y$, $a_e:T_Uh_A\\to h_BT_V$ from those nodes. Define\n$$s_M=P_B(\\sigma_e(M))\\circ\\beta_d(E_AM),\\qquad\n a_K:T_Uh_AG_AK\\xrightarrow{\\sim}h_BG_BT_YK$$\nwhere $a_K$ is the canonical derived tensor/pullback, Tate and shift identification of the explicit composite right functor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Then, on these finite-Tor categories, the right comparison factors as\n$$a_K=h_B(a_{d,K})\\circ a_e(G_AK),$$\nand the raw composite counit satisfies\n$$w_{B,T_YK}\\circ P_BE_B(a_K)\\circ s_{h_AG_AK}=T_Y(w_{A,K})$$\nfor every $K\\in\\mathcal C_{Y,A}$. All intermediate objects and the scalar extensions in this formula lie in the indicated bounded constructible finite-Tor categories [lem-sp-etale-ctf-chart-domain]. The assertions use the given order of affine integrations and the actual sum counit, for arbitrary $A\\to B$, with no flatness or finite projective-dimension assumption. No compact-support left comparison for $p_de$ is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: sum-then-ordered-affine integration before the graph-normalized left comparison; returned proof Steps 1--3; agent-written categorical expansion of the Charts paragraph"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-et-proet-adjunction-transfer",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-derived-change-of-rings",
+  "def-asd-finite-etale-tate-twist",
+  "lem-sp-etale-sum-counit-scalar",
+  "lem-sp-affine-counit-scalar",
+  "lem-sp-etale-ctf-chart-domain",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply etaleCtfChartDomain separately for A and B to the tower projection and to e. The schemes in the tower carry their composite structure maps to Spec k and are separated of finite type. Finite type over the field gives Noetherianity. The named affineTraceRight_normalForm identifies the ordered right functor with derived pullback, right tensor by the positive finite Tate power, and shift by 2d. Transport the chart-domain assertion across the exact/left-derived pullback isomorphism and derived tensor symmetry. The zeroth-twist, zero-shift chart operation identifies with exact pullback by the tensor unitor. For sum extension, choose a compactification over k and transport compact-support preservation across EtaleCompactSupportNormalization.comparison. Apply etaleCtfChartScalarDomain at Y, the tower, and U. This proves every displayed domain implication, including dimension zero and the zero coefficient ring.",
+   "uses": [
+    "lem-sp-etale-ctf-chart-domain",
+    "sk-def-sfb-dc-setting",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-affine-trace-right-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, domains of the sum-then-affine construction"
+   }
+  },
+  {
+   "text": "Unfold rawChartScalarIso, reductionEtaleChartScalarIso, and properOpenCoefficientPullbackIso. By definition the derived chart comparison is scalarPullbackIso inverse at G_A K followed by derived pullback of reductionEtaleAffineScalarIso. Naturality of leftDerivedUpperStarIsoMapDerivedCategory for B moves that affine scalar arrow through the final presentation isomorphism. The resulting composite is exactly properOpenCoefficientPullbackIso inverse at G_A K followed by exact pullback of the affine scalar arrow. This is rawChartScalarIso_factor, proved for every derived input without a finite-Tor hypothesis. No new Tate, monoidal-comparison, or shift coherence calculation is required because the canonical chart scalar comparison is already defined as this ordered composite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, canonical scalar identification of the explicit twisted pullback; Stacks 07A4 (sites-cohomology lemma-pullback-tensor-product) and 03EL (sites-modules lemma-tensor-product-pullback), with the cited coherence refinements"
+   }
+  },
+  {
+   "text": "Fix $K$ and abbreviate $J=G_AK$, $J'=G_BT_YK$, $t=a_{d,K}:T_VJ\\to J'$. By naturality of the actual etale counit at $t$,\n$$v_{B,J'}\\circ E_Bh_B(t)=t\\circ v_{B,T_VJ}.$$\nSubstitute the factorization of Step 2 and $s_{h_AJ}=P_B(\\sigma_e(h_AJ))\\circ\\beta_d(E_Ah_AJ)$ into the required left side, and use functoriality of $P_B,E_B$. The result is\n$$u_{B,T_YK}\\circ P_B(t)\\circ P_B\\bigl(v_{B,T_VJ}\\circ E_B(a_e(J))\\circ\\sigma_e(h_AJ)\\bigr)\\circ\\beta_d(E_Ah_AJ).$$\nApply the precise sum-counit equation of [lem-sp-etale-sum-counit-scalar] at the permitted input $J$. This expression becomes\n$$u_{B,T_YK}\\circ P_B(t)\\circ P_BT_V(v_{A,J})\\circ\\beta_d(E_Ah_AJ).$$\nThis is substitution and naturality of the given natural transformations, without replacing the sum counit by a transported compact-support counit.",
+   "uses": [
+    "lem-sp-etale-sum-counit-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, summation over etale fibres commutes with coefficients; explicit naturality calculation"
+   }
+  },
+  {
+   "text": "Apply the published etaleProEtaleCoefficientCompatibility_naturality at the sum counit v_A(J), using the domain conclusions of Step 1 for its source and target. It moves scalar extension of P_A(v_A(J)) across the specified affine coefficient arrow. Reassociate and apply affine_counit_scalar at K. Its existential Noetherianity and invertibility proofs agree with the chosen ones by proof irrelevance. Functoriality of scalarExtension identifies the result with its map of P_A(v_A(J)) followed by the affine counit. Together with Step 3, this is exactly the expanded rawChartCounit equation. The zero-coordinate case uses the same identities, with the published identity tower.",
+   "uses": [
+    "lem-sp-affine-counit-scalar",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, iterated projective-line integration and the raw composite counit identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-etale-ctf-chart-domain",
+  "sk-def-sfb-dc-setting",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-sp-etale-sum-counit-scalar",
+  "lem-sp-affine-counit-scalar",
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts; P6 Lean proof: existing ordered right normal form for domains, definitional factorization, and naturality pasting of the published sum and affine counit equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "counit.*(scalar|coefficient)|scalar.*counit|comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T05:55:33Z\", \"tool\": \"grep\", \"query\": \"counit.*(scalar|coefficient)|scalar.*counit|comp_counit_app\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"8a24e0b545c3830e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and etale algebra hits do not state this derived chart identity; comp_counit_app only expands the composite counit and does not supply its scalar equation or the Tate/pullback factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of an etale affine chart preserves the composite sum and affine integration counit",
+   "results": "{\"t\": \"2026-10-22T05:55:34Z\", \"tool\": \"leansearch\", \"query\": \"Derived scalar extension of an etale affine chart preserves the composite sum and affine integration counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.extendScalars\", \"Algebra.Etale.baseChange\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"Algebra.FormallyEtale.of_restrictScalars\", \"LinearMap.extendScalarsOfIsLocalization\", \"PolynomialLaw.comp_toFun'\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"Derivation.coe_restrictScalars\"], \"digest\": \"6eb533c850889a81\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and etale algebra hits do not state this derived chart identity; comp_counit_app only expands the composite counit and does not supply its scalar equation or the Tate/pullback factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T05:55:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and etale algebra hits do not state this derived chart identity; comp_counit_app only expands the composite counit and does not supply its scalar equation or the Tate/pullback factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting the scalar counit equations of etale sum extension and ordered affine integration gives the counit equation before compactification normalization",
+   "results": "{\"t\": \"2026-10-22T05:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"Pasting the scalar counit equations of etale sum extension and ordered affine integration gives the counit equation before compactification normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\"], \"digest\": \"6102f7c11ed8713e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and etale algebra hits do not state this derived chart identity; comp_counit_app only expands the composite counit and does not supply its scalar equation or the Tate/pullback factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale chart e into affine space, derived scalar extension factors through pullback Tate twists and shifts and preserves the raw sum then affine composite counit",
+   "results": "{\"t\": \"2026-10-22T05:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale chart e into affine space, derived scalar extension factors through pullback Tate twists and shifts and preserves the raw sum then affine composite counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"26a50974a93b585c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and etale algebra hits do not state this derived chart identity; comp_counit_app only expands the composite counit and does not supply its scalar equation or the Tate/pullback factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma comp_counit_app|def ofNatIsoLeft|counit := Functor.whiskerLeft _ iso.inv|lemma conjugateEquiv_counit|lemma leftAdjointUniq_hom_app_counit",
+   "results": "{\"t\": \"2026-10-22T05:57:10Z\", \"tool\": \"grep\", \"query\": \"lemma comp_counit_app|def ofNatIsoLeft|counit := Functor.whiskerLeft _ iso.inv|lemma conjugateEquiv_counit|lemma leftAdjointUniq_hom_app_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"046690a34c4596db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the exact expansion/transport declarations: these give only one counit formula, not the full scalar comparison assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|scalar.*counit|counit.*scalar|etale.*Tate",
+   "results": "{\"t\": \"2026-10-22T12:08:39Z\", \"tool\": \"grep\", \"query\": \"comp_counit_app|scalar.*counit|counit.*scalar|etale.*Tate\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"82296b16a18ee902\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Adjunction/Basic.lean:580-582; comp_counit_app states the composite counit formula only, not the scalar equation or canonical right factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T12:08:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Adjunction/Basic.lean:580-582; comp_counit_app states the composite counit formula only, not the scalar equation or canonical right factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite adjunction counit commutes with derived change of coefficients for an etale chart in affine space",
+   "results": "{\"t\": \"2026-10-22T12:08:40Z\", \"tool\": \"leansearch\", \"query\": \"Composite adjunction counit commutes with derived change of coefficients for an etale chart in affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.counit_naturality\"], \"digest\": \"84d296d00e1ef00f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_counit_app expands a composite counit; derivedε_fac_app concerns derived adjunction factorization, not these specified scalar and Tate comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived scalar comparison for etale pullback of a Tate twisted affine space right adjoint factors and preserves its composite counit",
+   "results": "{\"t\": \"2026-10-22T12:08:41Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived scalar comparison for etale pullback of a Tate twisted affine space right adjoint factors and preserves its composite counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.over_over\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\"], \"digest\": \"6ab4013c13ed52c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AffineSpace and GammaSpec declarations concern schemes and their adjunctions, not the specified derived coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficients commutes with composition of pullback tensor line and even shift comparisons and with pasting two adjunction counits",
+   "results": "{\"t\": \"2026-10-22T12:11:20Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficients commutes with composition of pullback tensor line and even shift comparisons and with pasting two adjunction counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PullbackShift.adjunction\", \"CategoryTheory.Adjunction.commShiftPullback\", \"CategoryTheory.PullbackShift.adjunction_counit\", \"CategoryTheory.NatTrans.PullbackShift.natIsoComp\", \"CategoryTheory.PullbackShift.adjunction_unit\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift\"], \"digest\": \"e0f943550bb5275a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PullbackShift adjunction and shift-counit identities change shift indices; PresheafOfModules.pullbackComp is underived. None states the etale/Tate scalar factorization and counit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackComp|def commShiftPullback|lemma derivedε_fac_app|def adjunction|lemma adjunction_counit",
+   "results": "{\"t\": \"2026-10-22T12:16:04Z\", \"tool\": \"grep\", \"query\": \"def pullbackComp|def commShiftPullback|lemma derivedε_fac_app|def adjunction|lemma adjunction_counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"25c0ee45d304442d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: locations of derived adjunction factorization and unrelated ordinary composition comparisons; these do not supply the specified etale scalar/Tate comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-counit-scalar-transport",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: sum-then-ordered-affine integration before the graph-normalized left comparison; returned proof Steps 1--3",
+   "via": [
+    "lem-sp-chart-counit-scalar-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-raw-chart-scalar-counit-pasting",
+  "worker": "stage1",
+  "summary": "Kept the statement and specified comparisons unchanged. Checked the ordinary-etale finite-Tor domains via compact-support normalization for sum extension, identified the right comparison using existing monoidal and finite-Tate pullback coherence, and wrote the two naturality substitutions proving the raw composite counit equation. No new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: scalar compatibility of the actual sum-then-ordered-affine counit, before graph normalization or site transfer.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-dc-setting",
+    "why": "Standing compactification existence inside the same finite-type scheme setting. The unit has no replacement assertion for this generic tool."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic identification of exact etale sum extension with chosen compact supports, used only for the finite-Tor domain check. The unit has no replacement assertion for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian finiteness lemma verifying the normalization hypotheses. The unit has no replacement assertion for this generic tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic monoidality and composition normalization for derived pullbacks, including coefficient-change morphisms. The unit has no replacement assertion for this generic tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic roots-induced Tate tensor identification and its composition compatibility. The unit has no replacement assertion for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "why": "Generic chain-level compatibility of normalized pullback/tensor comparisons with shifts. The unit has no replacement assertion for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-dc-setting",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-084df07ea",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-084df07ea (reviewer sub-agent of L); spot-checked: There are no new nodes and no fixes. I read the item's statement in full and its four steps against every cited statement. Step 1 checks the domains. lem-sp-etale-ctf-chart-domain covers P, G, h and T. For E it uses sk-def-sfb-dc-setting for a compactification, then lem-asd-etale-compact-support-normalization; the Noetherian hypothesis holds by lem-weil-pbc-finite-type-over-noetherian over Spec k. Step 2 shows a_K=h_B(a_d)∘a_e(G_AK) as a coherence of the canonical composite comparison. It cites monoidal pullback comparisons, the θ^1/θ^0 Tate squares (N=ℓ^n is invertible since ℓ≠p), twist pullback compatibility and shift compatibility. Steps 3 and 4 are elementary and I checked them by hand. In Step 3, naturality of v_B at t=a_{d,K} plus the sum-counit equation at J=G_AK∈D^b_ctf gives P_B T_V(v_{A,J}). In Step 4, naturality of β_d at v_{A,J} plus the affine counit equation gives T_Y(u_A∘P_A(v_{A,G_A K}))=T_Y(w_A). I tested the cases d=0, e=id, φ=id, U=∅ and N=1. There is no cycle: the parent lem-sp-chart-counit-scalar-transport cites the item and not conversely, and the item is not in its own closure. The only duplicate candidate, lem-pur-exceptional-coefficient-comparison, is a different global statement. The source is the Charts paragraph of the main-20261015 sk-lem-sp-reduction-exceptional.proof.md, and there is no SGA. The generic tool_uses are accepted. Batch-5 flag on lem-asd-etale-compact-support-normalization: it is a general identification of étale compact support with sum extension, not part of the trace formula or Poincaré duality. Its chain ends in the generic lem-pod-lisse-module-sheaves-as-module-objects, and it is already in the item's base closure through the stmt_dep lem-sp-etale-sum-counit-scalar. Accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RawChartScalarCounitPasting",
+  "declaration": "AlgebraicGeometry.Etale.rawChartScalarCounitPasting",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rawChartRight",
+   "AlgebraicGeometry.Etale.rawChartScalarIso",
+   "AlgebraicGeometry.Etale.rawChartLeftScalarMap",
+   "AlgebraicGeometry.Etale.rawChartCounit",
+   "AlgebraicGeometry.Etale.rawChartScalarCounitPasting"
+  ],
+  "file": "lean/Sheaf/Paper/RawChartScalarCounitPasting.lean",
+  "statement": "theorem rawChartScalarCounitPasting (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (n : ℕ) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) {U Y : Scheme.{u}} [U.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (d : ℕ) (e : U ⟶ affineTraceTower Y d) (_he : e ≫ affineTraceProjection Y d ≫ (Y ↘ Spec (.of k)) = (U ↘ Spec (.of k))) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification (affineTraceProjection Y d)) : ∃ (hNoeth : IsNoetherian Y) (hY : IsUnit ((ell ^ n : ℕ) : Γ(Y, ⊤))), (∀ (K : DerivedCategoryModule A Y) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A Y K), (rawChartScalarIso φ (ell ^ n) hA hB hY d e K).hom = (properOpenCoefficientPullbackIso φ e).inv.app ((affineTraceRight A (ell ^ n) hA Y d).obj K) ≫ (upperStar (ModuleCat.{u + 1} B) e).mapDerivedCategory.map (ProEtale.reductionEtaleAffineScalarIso φ Y (ell ^ n) hA hB hY d K).hom) ∧ (∀ (K : DerivedCategoryModule A Y) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A Y K), rawChartLeftScalarMap φ d e c ((rawChartRight A (ell ^ n) hA d e).obj K) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).map ((etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory.map (rawChartScalarIso φ (ell ^ n) hA hB hY d e K).hom) ≫ @rawChartCounit.{u} (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) B _ _ hB U Y hNoeth hY d e _ c ((scalarExtension φ Y).obj K) = (scalarExtension φ Y).map (@rawChartCounit.{u} (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) A _ _ hA U Y hNoeth hY d e _ c K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A Y K → ProEtale.AdjunctionTransfer.etaleProperty A (affineTraceTower Y d) ((affineTraceRight A (ell ^ n) hA Y d).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A (affineTraceTower Y d) K → ProEtale.AdjunctionTransfer.etaleProperty A U (((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A U K → ProEtale.AdjunctionTransfer.etaleProperty A (affineTraceTower Y d) (((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A (affineTraceTower Y d) K → ProEtale.AdjunctionTransfer.etaleProperty A Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty B Y K → ProEtale.AdjunctionTransfer.etaleProperty B (affineTraceTower Y d) ((affineTraceRight B (ell ^ n) hB Y d).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty B (affineTraceTower Y d) K → ProEtale.AdjunctionTransfer.etaleProperty B U (((upperStar (ModuleCat.{u + 1} B) e).mapDerivedCategory).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty B U K → ProEtale.AdjunctionTransfer.etaleProperty B (affineTraceTower Y d) (((etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance).mapDerivedCategory).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty B (affineTraceTower Y d) K → ProEtale.AdjunctionTransfer.etaleProperty B Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A Y K → ProEtale.AdjunctionTransfer.etaleProperty B Y ((scalarExtension φ Y).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A (affineTraceTower Y d) K → ProEtale.AdjunctionTransfer.etaleProperty B (affineTraceTower Y d) ((scalarExtension φ (affineTraceTower Y d)).obj K)) ∧ (∀ K, ProEtale.AdjunctionTransfer.etaleProperty A U K → ProEtale.AdjunctionTransfer.etaleProperty B U ((scalarExtension φ U).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The published ordered affine-space model affineTraceTower and affineTraceRight is used, with exact etale inverse image. The canonical reductionEtaleChartScalarIso is transported along the canonical left-derived/exact inverse-image isomorphism. The k-morphism condition is the explicit structure-map equation, avoiding an unstated Over instance on the tower. No new hypotheses or statement correction. Domain clauses state preservation of G, h, E and P for A and B, and scalar extension at U, V and Y; thus every intermediate in the two equations belongs to the required full subcategory."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ded4401f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, 12 stmt_dep records, module, report (Worker report + Second reading by Q22 present). Factorization clause true by naturality: properOpenCoefficientPullbackIso = L_B^-1·scalarPullbackIso·L_A and rawChartScalarIso is reductionEtaleChartScalarIso (scalarPullbackIso then pullback of reductionEtaleAffineScalarIso) transported by the same L. Counit equation s ≫ P_B E_B(a_K) ≫ w_B = T_Y(w_A) matches node; rawChartCounit/LeftScalarMap literally w_R/s_M from the same declarations as etaleSumCounitScalar and affine_counit_scalar. 11 ctf preservation clauses true and cover all intermediates. No flatness or extra hypotheses; ∃ IsNoetherian/IsUnit Prop witnesses true; universes match deps; d=0, e=id, φ=id, empty schemes, n=0 covered. lean.statement verbatim; single sorry; docstrings ok; node differs from live only by lean. No duplicate (parent coordinateChartScalarIso is a different parametrised presentation). No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261024T214919-L-732388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

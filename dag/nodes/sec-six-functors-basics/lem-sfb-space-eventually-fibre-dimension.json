@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-space-eventually-fibre-dimension",
+ "kind": "statement",
+ "title": "Eventual geometric fibre dimension bound for finitely presented algebraic spaces",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. A morphism of algebraic spaces is finitely presented if it is quasi-compact, quasi-separated (its diagonal is quasi-compact), and locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. Let $I$ be a small nonempty directed set, let $(T_i)_{i\\in I}$ be an inverse system of affine schemes with affine transition maps, and let $T=\\varprojlim_i T_i$. Fix $i_0\\in I$ and a finitely presented morphism $f_{i_0}:X_{i_0}\\to T_{i_0}$ of an algebraic space to $T_{i_0}$. For $i\\ge i_0$ put $X_i=X_{i_0}\\times_{T_{i_0}}T_i$, $f_i:X_i\\to T_i$, and put $X=X_{i_0}\\times_{T_{i_0}}T$, $f:X\\to T$ [def-pc-fibre-product]. Fix an integer $d\\ge0$. A geometric fibre here means the algebraic-space fibre product with $\\operatorname{Spec}\\Omega$ along a geometric point, with $\\Omega$ algebraically closed, using the convention of [def-weil-geometric-fibre]; its dimension is its topological Krull dimension [def-kun-topological-krull-dimension]. Empty fibres impose no condition. If every geometric fibre of $f$ has dimension at most $d$, there is $i\\ge i_0$ such that every geometric fibre of $f_j$ has dimension at most $d$ for every $j\\ge i$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0D4K (lemma-eventually-relative-dimension), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; geometric fibre interpretation and persistence: spaces-morphisms.tex, Tags 06LR (definition-relative-dimension) and 04NS (lemma-dimension-fibre-after-base-change)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "The quasi-compactness of $f_{i_0}$, tested against the affine scheme $T_{i_0}$, says that $X_{i_0}$ is quasi-compact: use the scheme-test definition in [lem-trf-space-qc-separated-etale-local]. Thus there is a representable surjective etale map $C\\to X_{i_0}$ with $C$ a quasi-compact scheme. Apply [lem-a1-qc-map-affine-etale-neighbourhood] to this map. It gives an affine scheme $U_{i_0}$ and a representable etale map $p_{i_0}:U_{i_0}\\to X_{i_0}$ for which $C\\times_{X_{i_0}}U_{i_0}\\to C$ is surjective. Hence $p_{i_0}$ is surjective: every point of $X_{i_0}$ lifts to $C$ and then to this fibre product, and projecting gives a lift to $U_{i_0}$. This supplies the affine atlas chosen in the source, with $V_{i_0}=T_{i_0}$.",
+   "uses": [
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-a1-qc-map-affine-etale-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K (lemma-eventually-relative-dimension), choice of affine U_0 and V_0; spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover), realized here using existing atlas nodes"
+   }
+  },
+  {
+   "text": "Put $g_{i_0}=f_{i_0}\\circ p_{i_0}:U_{i_0}\\to T_{i_0}$. It is locally of finite presentation by the hypothesis that $f_{i_0}$ is locally of finite presentation on compatible etale scheme charts (use the identity chart of $T_{i_0}$). Every algebra $R[x_1,\\ldots,x_n]/(a_1,\\ldots,a_m)$ is generated over $R$ by the images of $x_1,\\ldots,x_n$, so the definition [def-sbc-locally-finite-presentation] makes $g_{i_0}$ locally of finite type [def-weil-finite-type-morphism]. Since its source and target are affine, it is affine by [pqf-lem-affine-local-target], applied to the one-open cover of its target. It is therefore quasi-compact by [lem-weil-pbc-affine-morphism-permanence](3). Thus $g_{i_0}$ is of finite type, as required for the scheme limit lemma.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K, last paragraph: U_0 -> V_0 is locally of finite type; finite type follows because both are affine"
+   }
+  },
+  {
+   "text": "For $i\\ge i_0$ define $U_i=U_{i_0}\\times_{T_{i_0}}T_i$ and put $U=U_{i_0}\\times_{T_{i_0}}T$. The algebraic-space fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] identifies $U_i$ with $U_{i_0}\\times_{X_{i_0}}X_i$, and similarly for $U$. Its etale-cover clause makes the atlas projections $p_i:U_i\\to X_i$ and $p:U\\to X$ surjective etale. Each $g_i:U_i\\to T_i$ and $g:U\\to T$ is of finite type by [lem-sfb-finite-type-composition-base-change](2). The limit $T$ is affine by [lem-weil-pbc-limit-affine-transition]. All $U_i$ and $U$ are affine by [lem-weil-pbc-fibre-product-affine-spectra]. They form the limit diagram $g=\\varprojlim g_i$: by [def-pc-fibre-product], compatible maps from any scheme $Z$ to all $U_i$ are exactly a map $Z\\to U_{i_0}$ and a compatible cone $Z\\to T_i$ agreeing at $i_0$, hence exactly a map $Z\\to U$. This also proves that $U_j\\to U_i\\times_{T_i}T_j$ is an isomorphism. Finally all $f_i$ and $f$ are locally of finite type on these charts. Write $X_0=X_{i_0}$, $T_0=T_{i_0}$ and $\\Delta_0:X_0\\to X_0\\times_{T_0}X_0$. For any affine scheme test $Z\\to X_i\\times_{T_i}X_i$, the fibre-product universal property identifies $Z\\times_{X_i\\times_{T_i}X_i}X_i$ with $Z\\times_{X_0\\times_{T_0}X_0}X_0$. The latter is quasi-compact because $\\Delta_0$ is quasi-compact. This proves $f_i$ quasi-separated; the same calculation with $T$ proves it for $f$. The tail $i\\ge i_0$ is nonempty, directed and cofinal. Explicitly, a cone over this tail extends to any $T_k$ by choosing $j\\ge k,i_0$ and composing its map to $T_j$ with $T_j\\to T_k$; two choices agree after passing to a common upper bound. Thus its limit is still $T$. Each $T_i$ is quasi-compact and quasi-separated since it is affine, by [lem-weil-pbc-affine-morphism-permanence](3) applied to its structure map to the affine scheme $\\operatorname{Spec}\\mathbf Z$ and [pqf-lem-affine-local-target].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K, base-changed diagrams, affineness, and identification of their limits; cartesian identities written out"
+   }
+  },
+  {
+   "text": "For $t\\in T$ choose an algebraic closure $\\Omega$ of $\\kappa(t)$. By [lem-trf-space-fibre-products-etale-covers], the pullback $U_\\Omega\\to X_\\Omega$ of $p$ is still surjective etale. The diagonal test calculation in step 3, now with $\\operatorname{Spec}\\Omega$ as base, shows that $X_\\Omega$ is quasi-separated over $\\Omega$. Apply [lem-sfb-quasiseparated-space-atlas-dimension] with $k=\\Omega$, $Y=X_\\Omega$ and atlas $U_\\Omega$: it gives $\\dim|X_\\Omega|=\\dim|U_\\Omega|$. The affine scheme fibre $U_t$ is of finite type over $\\kappa(t)$ by [lem-sfb-finite-type-composition-base-change](2) and [lem-weil-pbc-fibre-product-affine-spectra], so its coordinate algebra is of finite type by [lem-pc-affine-finite-type-algebra]. Writing $U_t=\\operatorname{Spec}B$, the affine fibre-product formula gives $U_\\Omega=\\operatorname{Spec}(B\\otimes_{\\kappa(t)}\\Omega)$; swapping tensor factors by $b\\otimes\\omega\\mapsto\\omega\\otimes b$ identifies this with the algebra in 00P3. By the fibre-product identity $U_\\Omega=U_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}\\Omega$ [def-pc-fibre-product] and [lem-weil-pbc-dimension-preserved-field-extension], $\\dim U_t=\\dim U_\\Omega=\\dim|X_\\Omega|\\le d$. Thus every ordinary fibre of $g$ satisfies the bound. This is an application of the cited dimension equalities, not an identification of ordinary and geometric fibres themselves.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-atlas-dimension",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-pc-fibre-product",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K, chart comparison, using decent-spaces.tex Tag 0A4J (lemma-dimension-decent-space), spaces-properties.tex Tag 0A4H (lemma-dimension-decent-invariant-under-etale) and algebra.tex Tag 00P3 (lemma-dimension-preserved-field-extension)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-limit-fibre-dimension-bound] to $g_i:U_i\\to T_i$ over the tail $i\\ge i_0$. Its affine-transition, quasi-compact and quasi-separated base hypotheses and finite-type source maps were checked in step 3. The comparison $U_j\\to U_i\\times_{T_i}T_j$ is an isomorphism, hence a closed immersion: its scheme-test image is the whole target, cut out by the zero ideal [def-weil-closed-immersion]. Step 4 gives the bound for every limiting ordinary fibre. The scheme limit lemma supplies $i\\ge i_0$ for which every ordinary fibre of $g_i$ has dimension at most $d$.",
+   "uses": [
+    "lem-trf-limit-fibre-dimension-bound",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K, final application of limits.tex Tag 05M5 (lemma-limit-dimension)"
+   }
+  },
+  {
+   "text": "For this $i$, take any geometric point $\\operatorname{Spec}\\Omega\\to T_i$ with image $t_i$. Put $V=(U_i)_{t_i}$ and $W=(U_i)_\\Omega$; these are fibres of the stage-$i$ chart, not of the limiting chart $U$. The pullback $W\\to (X_i)_\\Omega$ of $p_i$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. By [def-pc-fibre-product], $W=V\\times_{\\operatorname{Spec}\\kappa(t_i)}\\operatorname{Spec}\\Omega$. The scheme $V$ is affine and of finite type by [lem-sfb-finite-type-composition-base-change](2) and [lem-weil-pbc-fibre-product-affine-spectra]. Writing $V=\\operatorname{Spec}B_i$, [lem-pc-affine-finite-type-algebra] makes $B_i$ a finite-type $\\kappa(t_i)$-algebra, and the affine fibre-product formula identifies $W$ with $\\operatorname{Spec}(B_i\\otimes_{\\kappa(t_i)}\\Omega)$. Swapping tensor factors by $b\\otimes\\omega\\mapsto\\omega\\otimes b$ and applying [lem-weil-pbc-dimension-preserved-field-extension] give $\\dim W=\\dim V\\le d$. The diagonal test calculation in step 3 also proves that $(X_i)_\\Omega$ is quasi-separated over $\\Omega$. Apply [lem-sfb-quasiseparated-space-atlas-dimension] with $k=\\Omega$, $Y=(X_i)_\\Omega$ and its surjective etale atlas $W$. This gives $\\dim |(X_i)_\\Omega|=\\dim W\\le d$. This works for every algebraically closed extension $\\Omega/\\kappa(t_i)$ and requires no equidimensionality.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-atlas-dimension",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-pc-fibre-product",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0D4K, return from the scheme chart to the algebraic space; the same Tags 0A4J, 0A4H and 00P3 as in step 4"
+   }
+  },
+  {
+   "text": "For every $j\\ge i$, the map $f_j$ is the base change of $f_i$ along $T_j\\to T_i$: by the universal property of algebraic-space fibre products [lem-trf-space-fibre-products-etale-covers], pasted as in [def-pc-fibre-product], $X_j=X_{i_0}\\times_{T_{i_0}}T_j=(X_{i_0}\\times_{T_{i_0}}T_i)\\times_{T_i}T_j=X_i\\times_{T_i}T_j$. Apply the base-change clause of [lem-sfb-space-relative-dimension-base-change] to $f_i$, which is quasi-separated and locally of finite type by step 3: step 6 proves $P_d(f_i)$ (the condition of that node that every geometric fibre has topological Krull dimension at most $d$), i.e. the bound for the geometric fibre over every map $\\operatorname{Spec}\\Omega\\to T_i$ with $\\Omega$ any algebraically closed field, not only a chosen algebraic closure of a residue field. The clause gives $P_d(X_i\\times_{T_i}T_j\\to T_j)$, so every geometric fibre of $f_j$, over every algebraically closed $\\Omega$, has dimension at most $d$. Empty fibres are allowed in $P_d$ (dimension $-\\infty$), so no nonemptiness or equidimensionality assumption has entered the argument.",
+   "uses": [
+    "lem-sfb-space-relative-dimension-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), part (1), giving persistence of the bound after the stage obtained from Tag 0D4K; realized by the base-change clause of the property P_d for all algebraically closed fields"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-quasiseparated-space-atlas-dimension",
+  "lem-trf-limit-fibre-dimension-bound",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-lem-affine-local-target",
+  "lem-sfb-space-relative-dimension-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0D4K (lemma-eventually-relative-dimension), affine etale chart reduction to Tag 05M5; persistence by spaces-morphisms.tex Tag 04NS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented algebraic space over a directed inverse limit of affine schemes a bound on geometric fibre dimensions holds at a sufficiently late stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dimension at most d for an algebraic space descends along a filtered colimit of base rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n m : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u_1)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S] [Algebra.IsStandardSmoothOfRelativeD\", \"doc\": \"If $ S $ is a standard smooth $ R $-algebra of relative dimension $ n $ and $ T $ is a standard smooth $ S $-algebra of relative dimension $ m $, then $ T $ is a standard smooth $ R $-algebra of relat\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"relativeDimension\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*dimension|dimension.*eventually|limit.*dimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre dimension bounds for algebraic spaces descend through affine inverse limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] :\\n  TopologicalSpace.Opens.IsBasis {(c.π.app i ⁻¹ᵁ V : c.pt.Opens) | (i : I) (V : (D.obj i).Opens) (_ : IsAffineOpen V)}\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebraic space over an inverse limit of affine schemes with geometric fibres of dimension at most d has this bound at a finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no eventual geometric-fibre bound for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dimension upper bound for algebraic spaces descends to a sufficiently late stage in a filtered inverse system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n m : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u_1)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S] [Algebra.IsStandardSmoothOfRelativeD\", \"doc\": \"If $ S $ is a standard smooth $ R $-algebra of relative dimension $ n $ and $ T $ is a standard smooth $ S $-algebra of relative dimension $ m $, then $ T $ is a standard smooth $ R $-algebra of relat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {ι' : Type u_1} {σ' : Type u_2} {T : Type u_3} [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (Q : Algebra.PreSubmersivePrese\", \"doc\": \"For two pre-submersive presentations $ P $ and $ Q $ with finite generating sets $ \\\\iota, \\\\iota' $ and finite relation sets $ \\\\sigma, \\\\sigma' $, the dimension of their composition $ Q \\\\circ P $ satisf\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E],\\n  InverseSystem (Field.Emb.Cardinal.embFunctor F E)\", \"doc\": \"There exists an inverse system of field embeddings between intermediate fields in the algebraic closure of $ F $ within $ E $, indexed by ordinals extended with a top element. This system is construct\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no eventual geometric-fibre bound for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventual bounded geometric fibre dimension for finitely presented algebraic spaces over affine inverse limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no eventual geometric-fibre bound for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"relativeDimension\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no eventual geometric-fibre bound for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*dimension|dimension.*eventually|limit.*dimension",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"line\": \"666\", \"text\": \"    exact M.closed_of_finiteDimensional.mem_of_tendsto hm_tendsto (Eventually.of_forall hm)\"}\n  {\"file\": \"Mathlib/Probability/Process/FiniteDimensionalLaws.lean\", \"line\": \"51\", \"text\": \"/-- The projective limit of the finite-dimensional distributions of a stochastic process is the law\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"91\", \"text\": \"lemma Limits.IsZero.hasInjectiveDimensionLT_zero (hX : IsZero X) :\"}\n  {\"file\": \"Mathlib/Probability/CentralLimitTheorem.lean\", \"line\": \"18\", \"text\": \"We prove the central limit theorem in dimension 1.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean\", \"line\": \"91\", \"text\": \"lemma Limits.IsZero.hasProjectiveDimensionLT_zero (hX : IsZero X) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/FGModuleCat/Limits.lean\", \"line\": \"47\", \"text\": \"/-- Finite limits of finite-dimensional vector spaces are finite dimensional,\"}\n  {\"file\": \"Mathlib/Topology/CWComplex/Classical/Subcomplex.lean\", \"line\": \"161\", \"text\": \"    filter_upwards [FiniteDimensional.eventually_isEmpty_cell (C := C) (D := D)] with n hn\"}\n  {\"file\": \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"line\": \"45\", \"text\": \"alias CWComplex.FiniteDimensional.eventually_isEmpty_cell :=\"}\n  {\"file\": \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"line\": \"46\", \"text\": \"  RelCWComplex.FiniteDimensional.eventually_isEmpty_cell\"}\n  {\"file\": \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"line\": \"65\", \"text\": \"  eventually_isEmpty_cell := FiniteDimensional.eventually_isEmpty_cell\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no eventual geometric-fibre bound for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-limit-preservation",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 0D4K (lemma-eventually-relative-dimension), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; geometric fibre interpretation and persistence: spaces-morphisms.tex, Tags 06LR (definition-relative-dimension) and 04NS (lemma-dimension-fibre-after-base-change).",
+   "via": [
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-eventually-fibre-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Realized Stacks 0D4K using an affine etale atlas, the existing scheme theorem 05M5, and existing dimension/base-change statements. No new nodes: the existing space-relative-dimension node explicitly identifies topological dimension on geometric fibres with chart dimension, and existing finite-type-algebra/field-extension nodes give the ordinary-to-geometric fibre comparison in short applications. Checked all limit hypotheses, quasi-separatedness, empty fibres and persistence. Return repair (returned head debf79ae313): compared the retained split with the current unsplit DAG item, reread all seventeen proof-dependency statements and revalidated every quotation. Clarified the algebraic-space cartesian identifications in steps 3 and 7 using the space fibre-product universal property, separately from the scheme-only universal property used for the affine limit diagram. The delivery is rebuilt on current sheaf-dag; live promotion belongs to L. Current return repair (head 1d6abb76897): repeated current-DAG statement and quotation checks after the live-promotion refusal; made the preservation of the surjective etale charts under geometric-point base change explicit in steps 4 and 6, citing the existing cover theorem in both steps. No statement or route changes. Repair of returned head 55af9ff300e: revalidated all current dependency statements and all 31 quotes after rebuilding on the current DAG. Corrected the stage-i chart notation in step 6, and made the coordinate-algebra/tensor identification used by 00P3 explicit in steps 4 and 6. The statement, dependencies and source route are unchanged. Repair of returned head 7a844dcf5fe: compared all split-owned fields with the current unsplit item, reread all seventeen current proof statements and the Stacks source passages, and verified all 31 quotation entries. Replaced the shorthand quasi-separatedness assertion in step 3 by the explicit affine scheme-test fibre-product isomorphism for the diagonal, for both finite stages and the limit. No statement, dependency, route, or search claim changed; the required delivery tool rebuilds on the current DAG. Repair of returned head 1780bbea813: compared all current dependency statements with the retained snapshot and reread the changed relative-dimension statement. Steps 4 and 6 now cite the existing explicit atlas-dimension lemma directly, with its field and quasi-separated diagonal hypotheses checked. Updated both exact citation quotations and the proof-dependency union; the seven-step proof, statement, sources and actual search history are retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 0D4K (lemma-eventually-relative-dimension), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; geometric fibre interpretation and persistence: spaces-morphisms.tex, Tags 06LR (definition-relative-dimension) and 04NS (lemma-dimension-fibre-after-base-change). Realizes the 0D4K prerequisite in the Tag 0D55 curve limit-preservation input: steps 1-3 construct the source diagrams, steps 4-6 implement the chart reduction and 05M5, step 7 supplies persistence. The current inherited ancestry has from.node null; the ancestor tool also returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Uses its explicit quasi-compact scheme-test/atlas definition to obtain a quasi-compact scheme covering X; it does not use the separatedness equivalence. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-a1-qc-map-affine-etale-neighbourhood",
+    "why": "Obtains an affine etale chart covering the image of the quasi-compact scheme atlas. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "pqf-lem-affine-local-target",
+    "why": "Shows a scheme map between two affine schemes is affine using the one-open cover. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Supplies quasi-compactness and quasi-separatedness of affine schemes and quasi-compactness of the affine chart morphism. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Preserves representable surjective etale atlases under the specified base changes. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies fibre products of affine schemes with spectra of tensor products. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-limit-fibre-dimension-bound",
+    "why": "Is precisely the scheme limit-dimension theorem Tag 05M5 cited by the source Tag 0D4K; the unit contains no scheme limit-dimension theorem. This is a generic tool below the prescribed moduli/alteration route, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Identifies the coordinate algebra of each affine finite-type scheme fibre as a finite-type algebra over its residue field. No node of the unit states this generic algebraic input; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Identifies the dimensions of the ordinary affine scheme fibre and its extension to any algebraically closed field. No node of the unit states this generic algebraic input; it does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Provides the affine spectrum description of an inverse limit of affine schemes, as used in the source diagram construction. This generic limit tool does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-limit-fibre-dimension-bound",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-b994e40c3",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-b994e40c3 (reviewer sub-agent of L); spot-checked: 6th delivery of the same split with no new nodes. The five earlier heads (debf79ae, 1d6abb76, 55af9ff3, 7a844dcf, 1780bbea) were all FIX. The return of 1780bbea was for drift in lem-sfb-space-relative-dimension-base-change; I diffed that statement and the only change is T\\prime written as T', so the content is the same. Statement, 8 stmt_deps, source, blueprint fields, unit and chapter are unchanged. No SGA citation and no cycle (closure over 401 nodes). I read Stacks 0D4K in full (spaces-limits.tex, statement and proof), 04NS(1) and 0A4J, and the full statement of every cited node. Steps 1-3 and 5 are correct. Step 1: a quasi-compact atlas C from lem-trf-space-qc-separated-etale-local, then lem-a1 gives an affine etale U, and point lifting shows it is surjective. Steps 2-3 check every hypothesis of 05M5: lfp gives lft, an affine source and target give an affine hence qc morphism, finite type is kept under base change, U_i and T are affine, the cofinal tail needs no least index, and the diagonal of f_i is a base change of Delta_0. Step 5 uses that an isomorphism is a closed immersion. Steps 4 and 6 now cite the existing node lem-sfb-quasiseparated-space-atlas-dimension (0A4J+03JX; dim|Y| = dim U for any surjective etale scheme atlas of a space quasi-separated over a field; checked on A^n with a two-copy chart and on the empty space). They verify quasi-separatedness of X_Omega over Omega and the base-changed chart, and use 00P3 with the tensor swap. Both steps are correct for every algebraically closed Omega. Step 7 has the C4 fault again: lem-sfb-space-fibre-dimension-base-change only covers geometric fibres in the def-weil-geometric-fibre sense (a chosen algebraic closure of each residue field), but the item needs every algebraically closed Omega. FIX: I restored the reviewed step 7, which makes X_j = X_i x_{T_i} T_j explicit and applies the base-change clause of P_d in lem-sfb-space-relative-dimension-base-change; step 6 proves P_d(f_i). proof_deps is again the exact union of uses (17 ids: -fibre-dimension-base-change, +relative-dimension-base-change), and every step is under 2000 characters. Edge cases checked: empty base, space and fibres, d=0, fibres of mixed dimension, singleton I, I with no least element, non-surjective transitions, and Omega larger than an algebraic closure. Batch-5 flags: lem-trf-limit-fibre-dimension-bound (05M5), lem-trf-space-fibre-products-etale-covers (02X2/041F), lem-trf-space-qc-separated-etale-local (03KG/03KM), and lem-a1-qc-map-affine-etale-neighbourhood (0APL, reaches trf only through the definition def-trf-algebraic-space) are generic algebraic geometry, not steps of the trace formula or of Poincare duality, so I accept them; after the fix the item no longer cites lem-sfb-space-fibre-dimension-base-change. The 10 declared tool_uses are generic and accepted. Maintainer notes: this step-7 FIX has now been lost five times, so please land the fix file. lem-sfb-space-fibre-dimension-base-change is a special case of lem-sfb-space-relative-dimension-base-change (both are 04NS(1)) and they should be merged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEventuallyFibreDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.eventually_geometric_fibre_dimension_le_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEventuallyFibreDimension.lean",
+  "statement": "theorem eventually_geometric_fibre_dimension_le_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over (Spec (.of (ULift.{u} ℤ)))) [∀ i : I, IsAffine (D.obj (op i)).left] (haff : ∀ {i j : I} (hij : i ≤ j), IsAffineHom (D.map (homOfLE hij).op).left) (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f₀ : X₀.obj.obj ⟶ yoneda.obj (D.obj (op i₀))) (hqc : MapIsQuasiCompact f₀) (hqs : MapIsQuasiCompact (pullback.diagonal f₀)) (hlfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X₀ (D.obj (op i₀)) f₀) (d : ℕ) (hdim : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ c.pt.left), topologicalKrullDim (Point (Limits.pullback f₀ (yoneda.map (Over.homMk (U := Over.mk (a ≫ c.pt.hom)) (V := D.obj (op i₀)) (a ≫ (c.π.app (op i₀)).left) (by simp))))) ≤ (d : WithBot ℕ∞)) : ∃ (i : I) (hi : i₀ ≤ i), ∀ (j : I) (hij : i ≤ j), ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ (D.obj (op j)).left), topologicalKrullDim (Point (Limits.pullback f₀ (yoneda.map (Over.homMk (U := Over.mk (a ≫ (D.obj (op j)).hom)) (V := D.obj (op i₀)) (a ≫ (D.map (homOfLE (le_trans hi hij)).op).left) (by simp))))) ≤ (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-197334d92",
+  "group": "NW",
+  "result": "fix",
+  "note": "Lean exact: base Spec(ULift ℤ), I : Type u nonempty directed preorder, affine D with affine transitions, IsLimit cone in Over Spec Z (connected limit = scheme limit); finite presentation = MapIsQuasiCompact f₀ + MapIsQuasiCompact (diagonal) + MapToSchemeIsLocally LFP, same conjuncts as landed IsProperCurveFamily; geometric fibres as presheaf pullback along the composite geometric point (canonically the fibre of f/f_j by pasting), all alg. closed Ω : Type u; topologicalKrullDim Point ≤ d (d=0, empty fibres ⊥ covered); ∃ i ≥ i₀ ∀ j ≥ i. lean.statement verbatim; added stmt_deps def-sfb-proper-curve-moduli / def-a1-space-point-topology / def-a1-algebraic-space-point-classes are landed owners, no cycle; docstring has the 7 node steps (step 7 relative-dimension-base-change), sorry only, imports exist. Sole fault H11: 'Second reading by NW' was the author's own second pass → fixes/lem-sfb-space-eventually-fibre-dimension.report.md = worker report verbatim + independent clause-by-clause second reading. No compile (Lean unchanged)."
+ }
+}

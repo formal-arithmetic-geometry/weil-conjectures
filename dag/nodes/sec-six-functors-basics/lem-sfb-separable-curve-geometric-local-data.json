@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-separable-curve-geometric-local-data",
+ "kind": "statement",
+ "title": "Affine geometric stalks at a separable closed point",
+ "statement": "Let $k$ be a field and $f:C\\to\\operatorname{Spec}k$ a scheme locally of finite type over $k$ [def-weil-finite-type-morphism], of pure dimension $d\\in\\mathbb N$ [def-weil-pure-dimension]. Let $x\\in C$ be closed, with residue field $F=\\kappa(x)$ [def-weil-residue-field] finite separable over $k$ [def-weil-pbc-separable-algebraic-extension]. Let $K/k$ be an algebraic closure [def-weil-algebraic-closure], and $y\\in C_K=C\\times_k\\operatorname{Spec}K$ [def-pc-fibre-product] a point over $x$. Set $A=\\mathcal O_{C,x}$, $B=\\mathcal O_{C_K,y}$ and let $\\mathfrak m,\\mathfrak n$ be their unique maximal ideals. For every affine open neighbourhood $U=\\operatorname{Spec}S$ of $x$ [def-weil-affine-spectrum], the algebra $S$ is finitely generated over $k$ [def-weil-pbc-finite-type-algebra], the prime $\\mathfrak p$ corresponding to $x$ is maximal, $S/\\mathfrak p=F$ compatibly with $k$, and the germ map identifies $S_{\\mathfrak p}=A$ [def-weil-pbc-localization-at-prime]. The base change $U_K$ is the open inverse image of $U$ in $C_K$, compatibly with projections, and is $\\operatorname{Spec}(S\\otimes_kK)$, with tensor product as in [def-weil-pbc-module-tensor-product]. The point $y$ corresponds to a maximal ideal $\\mathfrak q$ of $S\\otimes_kK$ with structural residue field $K$. There is a $k$-embedding $\\iota:F\\hookrightarrow K$ for which\n$$\\mathfrak q=\\ker(S\\otimes_kK\\longrightarrow K),\\qquad s\\otimes\\lambda\\longmapsto\\iota(\\bar s)\\lambda,$$\nand the germ map identifies $B=(S\\otimes_kK)_{\\mathfrak q}$, compatibly with $A\\to B$ and the maps on residue fields. The rings $A,B$ are Noetherian local [def-weil-pbc-noetherian-ring]; $A$ is essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra] and has Krull dimension $d$ [def-weil-pbc-krull-dimension-ring]. The germ identifications induce isomorphisms of the maximal-ideal-adic completions [def-weil-pbc-adic-completion] $\\widehat A\\cong\\widehat{S_{\\mathfrak p}}$ and $\\widehat B\\cong\\widehat{(S\\otimes_kK)_{\\mathfrak q}}$. The local map $A\\to B$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map], with $\\mathfrak mB=\\mathfrak n$ and $B/\\mathfrak mB=K$. Quotient rings and algebra maps use [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), affine-neighbourhood and geometric-stalk reduction in the arbitrary-field paragraph; varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), closed-point dimension."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary affine open $U=\\operatorname{Spec}S$ containing $x$. Apply the affine-pairs characterization of locally finite type to $U$ and $\\operatorname{Spec}k$: $S$ is finitely generated over $k$. Since $x$ is closed, its corresponding prime $\\mathfrak p$ is maximal: any prime containing it is a specialization of $x$ in $U$, hence is $x$. The affine-open stalk theorem identifies $S_{\\mathfrak p}$ with $A$ by $s/u\\mapsto s_x/u_x$. The prime-residue-field theorem identifies the residue field with the fraction field of $S/\\mathfrak p$; since this quotient is already a field, it is $F$, with the structural $k$-map. These identifications are induced by the germ and quotient maps.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (lemma-locally-finite-type-characterize); schemes.tex Tag 01HV (lemma-spec-sheaves), (6)"
+   }
+  },
+  {
+   "text": "Use the open-fibre-product lemma with $V=U$, $W=\\operatorname{Spec}K$ and base open $\\operatorname{Spec}k$. It identifies $U_K$ with the inverse image of $U$ in $C_K$, compatibly with both projections. The affine fibre-product theorem identifies this open with $\\operatorname{Spec}T$, where $T=S\\otimes_kK$, and the maps with $s\\mapsto s\\otimes1$ and $\\lambda\\mapsto1\\otimes\\lambda$. Thus $y$ corresponds to a prime $\\mathfrak q$ of $T$ contracting to $\\mathfrak p$. The affine-open stalk theorem gives $B=T_{\\mathfrak q}$ by its germ map. Under these germ identifications the local map is $s/u\\mapsto(s\\otimes1)/(u\\otimes1)$: the equality holds first for sections by the projection formula just specified, then for fractions because ring maps preserve inverses.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "The tensor-quotient isomorphism and tensor universal property give $T/\\mathfrak pT\\cong F\\otimes_kK$, with $[s\\otimes\\lambda]\\mapsto\\bar s\\otimes\\lambda$. More explicitly, apply the tensor-quotient theorem to $S\\to T$, then identify $T\\otimes_S(S/\\mathfrak p)$ with $(S/\\mathfrak p)\\otimes_kK$ by $(s\\otimes\\lambda)\\otimes\\bar a\\mapsto\\overline{sa}\\otimes\\lambda$, inverse $\\bar a\\otimes\\lambda\\mapsto(1\\otimes\\lambda)\\otimes\\bar a$; tensor balancing verifies both inverses. Because $F/k$ is finite separable and $K$ is algebraically closed, the separable-tensor lemma identifies this quotient with a finite product of copies of $K$. A prime of this product has quotient $K$: in the domain quotient the orthogonal coordinate idempotents are $0$ or $1$, their sum is $1$, and exactly one is $1$; the kernel is precisely the elements whose surviving coordinate is zero. Apply this to $\\mathfrak q/\\mathfrak pT$. Consequently $\\mathfrak q$ is maximal and $T/\\mathfrak q\\cong K$ as a $K$-algebra. Restrict $T\\to T/\\mathfrak q\\cong K$ to $S$ to obtain $\\iota:S/\\mathfrak p=F\\to K$. It is a $k$-embedding, since a unital field homomorphism is injective. The same map sends $s\\otimes\\lambda$ to $\\iota(\\bar s)\\lambda$, so its kernel is exactly $\\mathfrak q$. The prime-residue-field theorem identifies $\\kappa(y)$ with this quotient because $\\mathfrak q$ is maximal; the structural map $K\\to\\kappa(y)$ is the specified isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-pc-separable-tensor-algebraic-closure",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), affine proof and residue-fibre description; separable tensor decomposition as in Tag 0FD1 (lemma-baby-stein), via the existing separable-tensor lemma"
+   }
+  },
+  {
+   "text": "Apply the separable-evaluation local-base-change lemma to the finitely generated algebra $S$, its maximal ideal $\\mathfrak p$, the given finite separable field $F/k$, and the embedding $\\iota$ just obtained. Its evaluation kernel is precisely the prime representing $y$, so its local map is the actual map $A\\to B$ from step 2. It gives Noetherian local $A,B$, faithful flatness, $\\mathfrak mB=\\mathfrak qB=\\mathfrak n$, and $B/\\mathfrak mB=K$. Its residue formula sends the class of $(s\\otimes\\lambda)/v$ to $\\iota(\\bar s)\\lambda/\\epsilon(v)$; hence the residue map $F\\to K$ is exactly $\\iota$. Also $A$ is essentially of finite type by its displayed localization of the finite type $k$-algebra $S$, which is precisely the definition of that notion.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y (lemma-change-fields-flat), (1), (4), and 0C50 (lemma-change-fields-algebraic-unramified); algebra.tex Tag 00QM (definition-essentially-finite-p-t)"
+   }
+  },
+  {
+   "text": "Pure dimension means all irreducible components of $C$ have dimension $d$. Apply the equidimensional-open local-dimension lemma with $Y=C$ and $O=C$: $\\dim_x C=d$. Open-subspace invariance gives $\\dim_x U=d$. Since $S$ is finitely generated and $\\mathfrak p$ is maximal, the closed-point local-dimension theorem gives $\\dim S_{\\mathfrak p}=\\dim_x U=d$. Transport this equality through the germ isomorphism $S_{\\mathfrak p}\\cong A$ to obtain $\\dim A=d$.",
+   "uses": [
+    "def-weil-pure-dimension",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), (2), (5); algebra.tex Tag 00OU (lemma-dimension-closed-point-finite-type-field)"
+   }
+  },
+  {
+   "text": "Each germ isomorphism of local rings carries the unique maximal ideal onto the unique maximal ideal (units, and therefore nonunits, are preserved in both directions). It consequently carries every power of that ideal onto the corresponding power, and induces mutually inverse quotient-ring maps at each level. Apply these quotient maps coordinatewise to compatible sequences in the definition of adic completion. The inverse germ maps give inverse maps of compatible sequences. This supplies the asserted isomorphisms $\\widehat A\\cong\\widehat{S_{\\mathfrak p}}$ and $\\widehat B\\cong\\widehat{T_{\\mathfrak q}}$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), definition of completion as compatible quotient sequences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-trf-separable-evaluation-local-base-change",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pure-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), affine and geometric-local reductions, expanded using varieties.tex Tags 0C4Y and 0A21 and the existing DAG tool lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "separable.*completion|completion.*separable|closedPoint.*dim|dim.*closedPoint",
+   "results": "{\"t\": \"2026-10-23T09:45:42Z\", \"tool\": \"grep\", \"query\": \"separable.*completion|completion.*separable|closedPoint.*dim|dim.*closedPoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a closed point local ring on a pure dimensional scheme over a field equals the dimension of the scheme",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"leansearch\", \"query\": \"The dimension of a closed point local ring on a pure dimensional scheme over a field equals the dimension of the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"IsLocalRing.closedPoint\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"AlgebraicGeometry.Scheme.height_of_isClosed\", \"IsLocalRing.specializes_closedPoint\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalRing.closedPoint.congr_simp\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\"], \"digest\": \"6247452bade2ba9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsSeparable\"",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"IsSeparable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separable closed point on an equidimensional algebraic scheme has a finite type affine neighborhood and compatible formal presentations after field extension",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"leansearch\", \"query\": \"A separable closed point on an equidimensional algebraic scheme has a finite type affine neighborhood and compatible formal presentations after field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.of_isSeparable\", \"IsSepClosure.recOn\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"AlgebraicGeometry.isProper_eq\", \"Algebra.FormallyEtale.iff_isSeparable\", \"IsSepClosure.separable\"], \"digest\": \"9e5261a11c4bb6ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equidimensional scheme locally of finite type over a field has a closed point local ring of the same dimension, with coefficient field and formal power series presentation at a separable residue field",
+   "results": "{\"t\": \"2026-10-23T09:45:50Z\", \"tool\": \"leanfinder\", \"query\": \"An equidimensional scheme locally of finite type over a field has a closed point local ring of the same dimension, with coefficient field and formal power series presentation at a separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\"], \"digest\": \"1b3d758bb097b79d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local ring of a finite type algebra with finite separable residue field has a coefficient field in its completion and compatible completed geometric stalk",
+   "results": "{\"t\": \"2026-10-23T09:45:51Z\", \"tool\": \"leanfinder\", \"query\": \"A local ring of a finite type algebra with finite separable residue field has a coefficient field in its completion and compatible completed geometric stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"3f353d1f6b7e3ae7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps, formal etaleness, and dimension-height identities do not give the simultaneous geometric stalk and coefficient-compatible completed presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T11:07:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk_assoc\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_comp\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\"], \"digest\": \"90c9d250c7dd981e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned stalk maps, local-ring residue definitions and unramified criteria do not state the full affine/geometric local-data bundle or the pure-dimensional closed-point assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*stalk|stalk.*separable|pure.*dimension",
+   "results": "{\"t\": \"2026-10-23T11:07:29Z\", \"tool\": \"grep\", \"query\": \"geometric.*stalk|stalk.*separable|pure.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\"], \"digest\": \"e8839d027e6b0c26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned stalk maps, local-ring residue definitions and unramified criteria do not state the full affine/geometric local-data bundle or the pure-dimensional closed-point assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine neighbourhoods and geometric stalks of a locally finite type pure dimensional scheme at a closed point with finite separable residue field",
+   "results": "{\"t\": \"2026-10-23T11:07:29Z\", \"tool\": \"leanfinder\", \"query\": \"Affine neighbourhoods and geometric stalks of a locally finite type pure dimensional scheme at a closed point with finite separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.fromSpecStalk\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.residue\", \"AlgebraicGeometry.stalkClosedPointIso\"], \"digest\": \"13e355a915c609fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned stalk maps, local-ring residue definitions and unramified criteria do not state the full affine/geometric local-data bundle or the pure-dimensional closed-point assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local ring of a geometric point after algebraic closure extension at a separable closed point has residue field the algebraic closure and extended maximal ideal",
+   "results": "{\"t\": \"2026-10-23T11:07:29Z\", \"tool\": \"leansearch\", \"query\": \"Local ring of a geometric point after algebraic closure extension at a separable closed point has residue field the algebraic closure and extended maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"IsLocalRing.closedPoint\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\"], \"digest\": \"cea5a755fa882ac4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned stalk maps, local-ring residue definitions and unramified criteria do not state the full affine/geometric local-data bundle or the pure-dimensional closed-point assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite separable residue field the closed fibre of the geometric local ring is the algebraic closure and the local map is faithfully flat",
+   "results": "{\"t\": \"2026-10-23T11:09:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite separable residue field the closed fibre of the geometric local ring is the algebraic closure and the local map is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"IsLocalRing.ResidueField.finite_of_finite\"], \"digest\": \"2e76120bcdf41bcd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned stalk maps, local-ring residue definitions and unramified criteria do not state the full affine/geometric local-data bundle or the pure-dimensional closed-point assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separable-node-quadratic-completion",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT. Geometric local-ring setup before the quadratic calculation; old steps 1--3 of the item (without the formal presentations, which lem-trf-geometric-node-fitting-depth and lem-trf-depth-fitting-quadratic-lci take internally), with pure dimension d.",
+   "via": [
+    "lem-sfb-separable-node-quadratic-completion",
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separable-curve-geometric-local-data",
+  "worker": "stage1",
+  "summary": "Q154: six-step proof using existing affine, separable-tensor, evaluation-localization and dimension lemmas; no new nodes and no statement change. Explicitly obtains the embedding from the given geometric point before applying the evaluation lemma. Completion isomorphisms are constructed on quotient sequences.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), the alteration/nodal local calculation tracked by the inherited from.place; the present node supplies only the separable closed-point affine and local-ring setup. The latest proof invokes the direct-image preservation theorem at this level, so this inherited auxiliary node has no direct blueprint counterpart.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separable-tensor-algebraic-closure",
+    "why": "Finite separable field tensor decomposition identifies the given geometric point, a generic algebra tool needed for the inherited local nodal calculation."
+   },
+   {
+    "node": "lem-trf-separable-evaluation-local-base-change",
+    "why": "Evaluation at the now identified embedding supplies the local flatness and closed-fibre calculation; no new copy of this existing algebra lemma is needed."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic dimension theorem converts pure dimension to local topological dimension without assuming irreducibility."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "Generic closed-point dimension theorem converts the topological local dimension to ring dimension."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic open-subspace invariance compares C and its affine neighbourhood in the dimension calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-trf-separable-evaluation-local-base-change",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-a9095487b",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-a9095487b (reviewer sub-agent of L); spot-checked: First S1 delivery: 6-step split, no new nodes, statement unchanged; the only citer is quadratic-completion step 1, which gets every clause it uses. Step 1: lft-affine-pairs makes S finite type over k; closedness of x makes p maximal; stalk lemma (c) gives S_p≅A; residue lemma (b) gives κ=S/p=F. Step 2: 01JR open-fibre-product and 01I4 affine fibre product give U_K=Spec(S⊗K), q contracts to p, B=T_q. Step 3: 00CT-type quotient plus pushout give T/pT≅F⊗K≅∏K (separable-tensor lemma: F/k finite separable, K algebraically closed); the idempotent argument gives T/q≅K; ι is obtained from the given y, so its kernel is exactly q. Step 4: trf evaluation lemma applies hypothesis by hypothesis (Noetherian, faithfully flat local, mB=qB=n, residue map ι); essential finite type from the definition. Step 5: pure dimension → 0A21 equidimensional lemma with O=C → open-subspace invariance → 00OU, so dim A=d. Step 6: completion iso, elementary. Small cases checked: Spec F, F=k, k[t]/(t²), and the inseparable case the hypothesis excludes. No duplicate: the trf nodes start from a chosen embedding, while the item handles an arbitrary y. Batch-5: lem-trf-separable-evaluation-local-base-change is generic 0C4Y/0C50 algebra; its 32-node closure is pbc algebra only, with no trf, PD or target nodes → accepted. All five split_report tool_uses are accepted as generic tools. No SGA. Stacks 0C4D read at the cited arbitrary-field paragraph."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparableCurveGeometricLocalData",
+  "declaration": "AlgebraicGeometry.separable_curve_geometric_local_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparableCurveGeometricLocalData.lean",
+  "statement": "theorem separable_curve_geometric_local_data {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (d : ℕ) (hdim : C.IsPureDimension d) (x : C) (hx : IsClosed ({x} : Set C)) (hfin : (f.residueFieldAlgebraMap x).Finite) (hsep : @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra) (K : Type u) [Field K] [Algebra k K] [IsAlgClosure k K] (Y : Scheme.{u}) (π : Y ⟶ C) (g : Y ⟶ Spec (.of K)) (hcart : IsPullback π g f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (y : Y) (hy : π y = x) (S : Type u) [CommRing S] [Algebra k S] (i : Spec (.of S) ⟶ C) [IsOpenImmersion i] (hi : i ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k S))) (p : PrimeSpectrum S) (hp : i p = x) : (algebraMap k S).FiniteType ∧ p.asIdeal.IsMaximal ∧ IsNoetherianRing (C.presheaf.stalk x) ∧ IsNoetherianRing (Y.presheaf.stalk y) ∧ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ C.presheaf.Γgerm x).hom).EssFiniteType ∧ ringKrullDim (C.presheaf.stalk x) = (d : WithBot ℕ∞) ∧ ∃ (eA : C.presheaf.stalk x ≃+* Localization.AtPrime p.asIdeal) (eF : (S ⧸ p.asIdeal) ≃+* C.residueField x) (j : Spec (.of (S ⊗[k] K)) ⟶ Y) (hj : IsOpenImmersion j), eA = (C.presheaf.stalkCongr (Inseparable.of_eq hp.symm) ≪≫ asIso (i.stalkMap p) ≪≫ Spec.stalkIso (.of S) p).commRingCatIsoToRingEquiv ∧ (∀ s : S, eF (Ideal.Quotient.mk p.asIdeal s) = IsLocalRing.residue (C.presheaf.stalk x) (eA.symm (algebraMap S (Localization.AtPrime p.asIdeal) s))) ∧ eF.toRingHom.comp ((Ideal.Quotient.mk p.asIdeal).comp (algebraMap k S)) = f.residueFieldAlgebraMap x ∧ Set.range j = π ⁻¹' Set.range i ∧ j ≫ π = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeft : S →ₐ[k] S ⊗[k] K).toRingHom) ≫ i ∧ j ≫ g = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : K →ₐ[k] S ⊗[k] K).toRingHom) ∧ ∃ (q : PrimeSpectrum (S ⊗[k] K)) (hq : j q = y) (eB : Y.presheaf.stalk y ≃+* Localization.AtPrime q.asIdeal) (ι : C.residueField x →+* K) (ε : S ⊗[k] K →+* K) (eK : Y.residueField y ≃+* K), q.asIdeal.IsMaximal ∧ eB = (Y.presheaf.stalkCongr (Inseparable.of_eq hq.symm) ≪≫ asIso (j.stalkMap q) ≪≫ Spec.stalkIso (.of (S ⊗[k] K)) q).commRingCatIsoToRingEquiv ∧ ι.comp (f.residueFieldAlgebraMap x) = algebraMap k K ∧ (∀ (s : S) (l : K), ε (s ⊗ₜ[k] l) = ι (eF (Ideal.Quotient.mk p.asIdeal s)) * l) ∧ q.asIdeal = RingHom.ker ε ∧ eK.toRingHom.comp (g.residueFieldAlgebraMap y) = RingHom.id K ∧ (∀ t : S ⊗[k] K, eK (IsLocalRing.residue (Y.presheaf.stalk y) (eB.symm (algebraMap (S ⊗[k] K) (Localization.AtPrime q.asIdeal) t))) = ε t) ∧ (∀ s : S, eB (((C.presheaf.stalkCongr (Inseparable.of_eq hy.symm)).hom ≫ π.stalkMap y).hom (eA.symm (algebraMap S (Localization.AtPrime p.asIdeal) s))) = algebraMap (S ⊗[k] K) (Localization.AtPrime q.asIdeal) (s ⊗ₜ[k] (1 : K))) ∧ (∀ a : C.presheaf.stalk x, eK (IsLocalRing.residue (Y.presheaf.stalk y) (((C.presheaf.stalkCongr (Inseparable.of_eq hy.symm)).hom ≫ π.stalkMap y).hom a)) = ι (IsLocalRing.residue (C.presheaf.stalk x) a)) ∧ @Module.FaithfullyFlat (C.presheaf.stalk x) (Y.presheaf.stalk y) _ _ (((C.presheaf.stalkCongr (Inseparable.of_eq hy.symm)).hom ≫ π.stalkMap y).hom.toAlgebra.toModule) ∧ Ideal.map (((C.presheaf.stalkCongr (Inseparable.of_eq hy.symm)).hom ≫ π.stalkMap y).hom) (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) = IsLocalRing.maximalIdeal (Y.presheaf.stalk y) ∧ ∃ (EA : AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)) (Localization.AtPrime p.asIdeal)) (EB : AdicCompletion (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) (Localization.AtPrime q.asIdeal)), (∀ (n : ℕ) (z : AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x)) (a : C.presheaf.stalk x), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) n z = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (C.presheaf.stalk x) ^ n) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)) n (EA z) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ n) (eA a)) ∧ (∀ (n : ℕ) (z : AdicCompletion (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y)) (b : Y.presheaf.stalk y), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) n z = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Y.presheaf.stalk y) ^ n) b → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) n (EB z) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n) (eB b))",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04c44d731",
+  "group": "Q134",
+  "result": "pass",
+  "note": "First S2 delivery; node = live except lean; statement verbatim in file. Every hypothesis and conclusion matches the node with nothing stronger. All maps (eA/eB/eF, j, q, iota, eps, eK, EA/EB) are pinned to the canonical ones, not arbitrary. Conjuncts checked consistent on generators; flatness, mB=n, residue K and dim A=d hold by Stacks 0C4Y/0C50/0A21/00OU. Edge cases (empty C, d=0, F=k, k[t]/(t^2), completion level 0, universes) fine. No defs; only proof is sorry; docstrings carry source places and blueprint tag; plain imports = proof_dep modules; citer quadratic-completion step 1 gets every clause it uses. Advisories: residueFieldAlgebraMap owned outside stmt_deps but standard; IsPullback in place of recorded pullback. Nothing compiled (no file changed)."
+ }
+}

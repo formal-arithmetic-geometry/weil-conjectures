@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-scalar-residue-coefficient-iso",
+ "kind": "statement",
+ "title": "The coefficient module of one integral scalar residue layer",
+ "statement": "Let O_L be the specified coefficient valuation ring, pi its specified uniformizer, and B=ULift(O_L/(pi^(n+1))). For 0≤j≤n the constant B-module sheaf of (pi^j B)/(pi^(j+1) B) is isomorphic to the restriction of the regular residue ring sheaf ULift(O_L/(pi)), along the actual quotient projection. The first quotient is a field. For every coefficient-field embedding E→L the completed scalar map followed by this residue projection equals the source residue projection followed by the induced first quotient map.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; Serre, Local Fields",
+  "place": "Modules on Sites, tensor cancellation (Tag 05V4), and Local Fields, Chapter I, section 1; residue-layer multiplication argument."
+ },
+ "stmt_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "The DVR witness says that the specified uniformizer generates the nonzero maximal ideal. Hence it is nonzero and its first quotient is a field. Quotient induction and the limit projection identities prove the scalar residue triangle.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication by the j-th uniformizer power surjects the truncated ring onto its j-th successive ideal layer. Lift to O_L and cancel the nonzero uniformizer power to show that the kernel equals that of the residue projection. The two first isomorphism theorems give the B-linear layer isomorphism.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the constant module functor. Its comparison with restriction of the regular residue sheaf comes from the ring-sheafification unit, which is locally bijective. The induced map after additive sheafification is an isomorphism and hence so is the module-sheaf map.",
+   "uses": [
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "Direct formalization of tensor balancing and the principal-ideal layer argument; no interval or constructibility assumption used in these comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a nonzero element power identifies consecutive principal ideal power quotients with the first quotient in a domain",
+   "results": "Ideal.quotEquivPowQuotPowSucc and Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow cover the untruncated R-linear comparison. The proof below uses the first isomorphism theorem directly to retain the actual truncated-ring action.",
+   "date": "2026-10-26",
+   "verdict": "related infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotKerEquivOfSurjective\"",
+   "results": "LinearMap.quotKerEquivOfSurjective and its apply_mk and symm_apply lemmas. Used for the coefficient module isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|leftAdjointCompIso|exists_changeOfRings_tensorCancellation",
+   "results": "Mathlib principal-power quotient comparisons and Adjunction.leftAdjointCompIso; project search found the proved natural tensor cancellation theorem.",
+   "date": "2026-10-26",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarResidueLayerVanishing",
+  "date": "2026-10-26",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-scalar-residue-layer-vanishing",
+   "place": "Coefficient comparison in the residue-layer vanishing argument.",
+   "via": [
+    "lem-sf-integral-scalar-residue-layer-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarResidueCoefficientIso",
+  "file": "lean/Sheaf/Paper/IntegralScalarResidueCoefficientIso.lean",
+  "declaration": "WeilConjectures.integralScalarResidueCoefficientIso",
+  "declarations": [
+   "WeilConjectures.integralScalarResidueField",
+   "WeilConjectures.integralScalarResidueRingProjection",
+   "WeilConjectures.integralScalarResidueProjection",
+   "WeilConjectures.integralScalarResidue_triangle",
+   "WeilConjectures.integralScalarResidueCoefficientIso"
+  ],
+  "statement": "theorem integralScalarResidueCoefficientIso (n : ℕ)\n    (F : Fin (n + 1 + 1) → Submodule\n      (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1)))\n      (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))))\n    (hF : F = fun (j : Fin (n + 1 + 1)) ↦ (Ideal.span ({ULift.up ((Ideal.Quotient.mk\n      (Padic.coefficientExtensionIdeal l L (n + 1)))\n        (Padic.coefficientExtensionUniformizer l L))} :\n          Set (ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))))) ^ (j : ℕ))\n    (j : Fin (n + 1)) :\n    let B := ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))\n    Nonempty ((adicLisseConstantModules Y B).obj\n      (ModuleCat.of B ((F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype)) ≅\n        (pbcRestrict (integralScalarResidueProjection l L Y n)).obj\n          (SheafOfModules.unit (integralCoefficientSheaf l L Y 0)))",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T023144-L-524429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T023144-L-524429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

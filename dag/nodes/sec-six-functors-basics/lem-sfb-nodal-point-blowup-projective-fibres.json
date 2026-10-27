@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-nodal-point-blowup-projective-fibres",
+ "kind": "statement",
+ "title": "Projectivity and geometric fibres of an arithmetic nodal point blowup",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, and put $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $X$ be Noetherian (quasi-compact and locally Noetherian) [pqf-def-locnoeth], and let $f:X\\to S$ be H-projective, meaning it factors as a closed immersion into some finite-dimensional projective space over $S$ [def-kun-projective]. Let $x\\in X$ be a closed point of the special fibre. Suppose there are a local injective etale extension of DVRs $R\\to R'$ for which $\\pi$ remains a uniformizer, an integer $n\\geq2$, and etale $S$-maps $(X,x)\\leftarrow(U,u)\\to(M_n,o)$, where $M_n=\\operatorname{Spec}(R'[a,b]/(ab-\\pi^n))$ and $o=(\\pi,a,b)$ [def-weil-etale-morphism, def-weil-polynomial-ring]. Put $b:B=\\operatorname{Bl}_xX\\to X$, the ordinary blowup of the reduced point [def-nagata-global-blowup]. Assume $g=f\\circ b$ is flat and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Then both $b$ and $g$ are H-projective and proper [def-weil-proper-morphism]; $g$ is flat and finitely presented, and $B$ is Noetherian. Every fibre $b^{-1}(y)$, $y\\in X$, is nonempty and geometrically connected over $\\kappa(y)$, that is, connected after base change to every field extension of $\\kappa(y)$ [def-pc-geometrically-irreducible]; in particular every geometric fibre of $b$ is nonempty and connected [def-weil-geometric-fibre]. More precisely, away from $x$ the fibres stay single points after arbitrary residue-field extensions; over an algebraic closure of $\\kappa(x)$ the exceptional fibre is isomorphic to $\\mathbf P^1$ if $n=2$, and to two copies of $\\mathbf P^1$ meeting at one reduced point if $n>2$ [def-weil-residue-field, def-sc-p1-standard, def-weil-algebraic-closure]. Consequently $b$ is surjective, and nonemptiness of every geometric fibre of $f$ implies nonemptiness of every geometric fibre of $g$. No connectedness of the fibres of $f$ or $g$, split-node hypothesis over $\\kappa(x)$, excellence or characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDC (example-blowup), exceptional fibres, and Tag 0CDE (lemma-blowup-at-worst-nodal), Cartesian point-blowup comparison; divisors.tex Tag 02NS (lemma-blowing-up-projective), H-projectivity over an affine Noetherian base as in lem-sfb-projective-affine-base-blowup."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-kun-projective",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring",
+  "def-nagata-global-blowup",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-weil-residue-field",
+  "def-sc-p1-standard",
+  "def-weil-algebraic-closure",
+  "def-sfb-surface-point-blowup-data",
+  "def-sfb-arithmetic-nodal-model-origin"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal I$ be the ideal of the reduced closed point $x$. By [def-sbc-closed-immersion-ideal-sheaf] it is quasi-coherent and on each affine open it is an ordinary ideal. Since $X$ is locally Noetherian, each of these ideals is finitely generated, so $\\mathcal I$ is of finite type. The DVR $R$ is Noetherian by [def-sc-discrete-valuation-ring]. Apply [lem-sfb-projective-affine-base-blowup] to $A=R$, the given H-projective $f$, and $\\mathcal I$. Both $b$ and $g$ are H-projective. Apply [lem-kun-projective-implies-proper] to each to obtain properness.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-projective-affine-base-blowup",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective); H-projectivity supplied by the existing affine-base theorem"
+   }
+  },
+  {
+   "text": "Properness includes finite type and separatedness by [def-weil-proper-morphism]. Thus $g$ is quasi-compact and, by [lem-pc-separated-quasi-separated], quasi-separated. Together with the assumed local finite presentation, the definition [def-sbc-locally-finite-presentation] gives finite presentation. Flatness is already assumed. Since $S=\\operatorname{Spec}R$ is Noetherian and $g$ is finite type, [lem-weil-pbc-finite-type-over-noetherian] gives that $B$ is Noetherian.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian) and Tag 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Put $l=\\kappa(x)$, $k_o=\\kappa(o)=R\\prime/(\\pi)$ and $L=\\kappa(u)$. The two etale maps have discrete reduced fibres consisting of spectra of finite separable residue extensions by [lem-weil-pbc-etale-fibre-discrete-separable-points]. Write $p:U\\to X$ and $q:U\\to M_n$. Since $x$ and $o$ are closed points, the fibres $p^{-1}(x)$ and $q^{-1}(o)$ are closed in $U$. Each is discrete, so $\\{u\\}$ is open in it and $p^{-1}(x)\\setminus\\{u\\}$, $q^{-1}(o)\\setminus\\{u\\}$ are closed in the fibre, hence closed in $U$. Remove these two closed sets from $U$; the restrictions of $p$ and $q$ to this open neighbourhood of $u$ remain etale. On the resulting common neighbourhood, both scheme-theoretic inverse images are exactly $\\operatorname{Spec}L$. Etaleness gives flatness by [def-weil-etale-morphism]. Apply [thm-nagata-blowup-flat-base-change] with its comparison [def-nagata-blowup-flat-base-change-map] to both maps. Taking their fibres at $u$ gives $E_x\\times_l L\\cong E_o\\times_{k_o}L$, where $E_x=b^{-1}(x)$ and $E_o$ is the exceptional fibre of the model point blowup. This uses the whole fibre via the Cartesian squares, not just an etale cover of it.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-etale-morphism",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), shrinking U and the two Cartesian squares"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-binomial-blowup-chart-algebras] with domain $R\\prime$, nonzero element $\\pi$ and exponent $n$. Its extended-ideal quotients and overlap maps give a cover of $E_o$ by $\\operatorname{Spec}k_o[t]$, $\\operatorname{Spec}k_o[r,s]/(rs-\\epsilon)$ and $\\operatorname{Spec}k_o[h]$, with $\\epsilon=1$ for $n=2$ and $0$ for $n>2$. For $n=2$ the middle open is the common punctured affine line and $h=t^{-1}$. These are precisely the two standard charts of $\\mathbf P^1_{k_o}$ in [def-sc-p1-standard]. For $n>2$ the closed subschemes $s=0$ and $r=0$ of the middle chart extend respectively across the first and third outer charts. The overlap coordinates are $r=t^{-1}$ and $s=h^{-1}$; each closed subscheme is therefore $\\mathbf P^1_{k_o}$. They cover $E_o$ scheme-theoretically since $(r)\\cap(s)=0$ in $k_o[r,s]/(rs)$, and their scheme-theoretic intersection is $\\operatorname{Spec}k_o$ since the sum of the ideals is $(r,s)$. This proves the stated configuration including reducedness of the intersection. All the displayed quotient rings and substitutions stay the same after every field extension of $k_o$.",
+   "uses": [
+    "lem-sfb-binomial-blowup-chart-algebras",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC (example-blowup); elementary gluing from the existing chart-algebra statement"
+   }
+  },
+  {
+   "text": "Over every field $F$ extending $k_o$, each standard affine line of $\\mathbf P^1_F$ is irreducible: the zero prime of $F[t]$ belongs to every nonempty basic open. The two affine lines meet in $\\operatorname{Spec}F[t,t^{-1}]$, so their union is nonempty and connected. In the two-component case a clopen partition restricts to a trivial partition on each of the two projective lines; their common $F$-point forces both lines into the same part. Thus $E_o$ is nonempty and geometrically connected. Step 3 and [lem-weil-geometrically-connected-check-after-extension] first give geometric connectedness of $(E_x)_L$ and then of $E_x$ over $l$. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], embed the finite separable extension $L/l$ into an algebraic closure $\\bar l$. Base changing the isomorphism of Step 3 to $\\bar l$ and using Step 4 identifies $(E_x)_{\\bar l}$ with exactly the asserted projective-line configuration. This does not assert that its components are individually defined over $l$.",
+   "uses": [
+    "lem-weil-geometrically-connected-check-after-extension",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054N (lemma-geometrically-connected-check-after-extension), with the explicit chart argument of Step 4"
+   }
+  },
+  {
+   "text": "By [thm-nagata-global-blowup-complement], $b$ is an isomorphism over $X\\setminus\\{x\\}$. For every $y\\ne x$ its fibre is $\\operatorname{Spec}\\kappa(y)$, and after any extension $F/\\kappa(y)$ it is $\\operatorname{Spec}F$, a single point. Together with Step 5 this gives all the nonempty geometrically connected fibres and surjectivity of $b$. For a geometric point $\\bar s\\to S$, [lem-weil-pbc-surjective-base-change] applied to $b$ and $X_{\\bar s}\\to X$ gives a surjection $B\\times_X X_{\\bar s}\\to X_{\\bar s}$. The source is $B_{\\bar s}$ by the fibre-product universal property. Hence $X_{\\bar s}\\ne\\varnothing$ implies $B_{\\bar s}\\ne\\varnothing$, as claimed.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01OF (section-blowing-up), blowup is an isomorphism off the centre; final fibrewise surjectivity is base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-projective-affine-base-blowup",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-etale-morphism",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "lem-sfb-binomial-blowup-chart-algebras",
+  "def-sc-p1-standard",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tags 0CDC (example-blowup) and 0CDE (lemma-blowup-at-worst-nodal), with explicit exceptional-curve gluing and geometric connectedness; projectivity from the existing affine-base blowup node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blowup at a nonregular point of a projective nodal trait curve is projective with geometrically connected exceptional fibre a conic or two projective lines",
+   "results": "8 hits: WeierstrassCurve.Projective.nonsingularLift_iff, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.nonsingularLift_some, WeierstrassCurve.Projective.nonsingular_some, WeierstrassCurve.Projective.nonsingular_of_Z_ne_zero, WeierstrassCurve.Projective.Point.toAffine_of_singular, WeierstrassCurve.Projective.nonsingularLift_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-spectrum properness and the definition/stability of GeometricallyConnected do not compute exceptional conics or their descent, nor H-projectivity of these point blowups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional divisor of the blowup of a double point on an arithmetic surface is geometrically connected, and projectivity is preserved",
+   "results": "8 hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-spectrum properness and the definition/stability of GeometricallyConnected do not compute exceptional conics or their descent, nor H-projectivity of these point blowups."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.IsProper",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-spectrum properness and the definition/stability of GeometricallyConnected do not compute exceptional conics or their descent, nor H-projectivity of these point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|IsHProjective",
+   "results": "Mathlib/AlgebraicGeometry: 5 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-spectrum properness and the definition/stability of GeometricallyConnected do not compute exceptional conics or their descent, nor H-projectivity of these point blowups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectivity and geometric connectedness of exceptional fibres of singular point blowups",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|exceptional[Ff]ib|isHProjective_blowup",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness and elliptic-curve reduction do not compute these point-blowup fibres or their H-projectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The blowup of a nodal singularity over a discrete valuation ring has geometrically connected exceptional fibre",
+   "results": "8 hits: WeierstrassCurve.isGoodReduction_iff, IsDiscreteValuationRing.mk, IsDiscreteValuationRing.exists_lift_of_le_one, IsDiscreteValuationRing.toIsLocalRing, IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation, IsLocalRing.finrank_CotangentSpace_eq_one, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, Valuation.Integers.maximalIdeal_pow_eq_setOf_le_v_algebraMap_pow",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness and elliptic-curve reduction do not compute these point-blowup fibres or their H-projectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.IsProper",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness and elliptic-curve reduction do not compute these point-blowup fibres or their H-projectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional curve of the blowup of xy equals pi to the n at the closed origin is a projective line for n two and two projective lines meeting for n greater than two",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj, WeierstrassCurve.Projective, AlgebraicGeometry.projIsoSpec, WeierstrassCurve.Projective.nonsingularLift_zero, WeierstrassCurve.Projective.PointClass, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness and elliptic-curve reduction do not compute these point-blowup fibres or their H-projectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup of a closed arithmetic nodal point on an H projective scheme over a discrete valuation ring is H projective with geometrically connected fibres",
+   "results": "8 hits: AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.valuativeCriterion_existence_aux, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness and elliptic-curve reduction do not compute these point-blowup fibres or their H-projectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-regularization",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 7--8 (projectivity and geometric exceptional fibres)",
+   "via": [
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-point-blowup-projective-fibres",
+  "worker": "stage1",
+  "group": "Q130",
+  "summary": "Unchanged statement; six-step proof reuses the existing affine-base H-projectivity, binomial blowup charts, flat-base-change and geometric-connectedness descent nodes. No new nodes or Mathlib leaves. Distinguishes the residue field of the common etale point from both downstairs residue fields.",
+  "blueprint": "Inherited from.place: regularization original steps 7--8, projectivity and geometric exceptional fibres, below det-thm-sf-ctf-stability-direct-images (3). Steps 1--2 give projectivity and finiteness; Steps 3--5 give the exceptional fibre; Step 6 gives all fibres and propagation of nonemptiness.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-check-after-extension",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic input used exactly as stated in the indicated step; the unit supplies no replacement for this elementary geometric bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Extends the embedding l into its algebraic closure to the finite separable extension L/l of the common etale point, so the fibre comparison applies over that closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-fa2d1c541",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-fa2d1c541 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 6 steps, no new nodes), every cited node's statement, Stacks 0CDC (models.tex l.5839, charts agree with lem-sfb-binomial-blowup-chart-algebras for a=π), 0CDE, and the tags 02NS, 01T6, 01TP, 054N, 0805, 01OF. Step 1: the reduced-point ideal is of finite type (locally Noetherian), and lem-sfb-projective-affine-base-blowup and kun projective⇒proper apply under the H-convention. Step 2: proper ⇒ finite type, separated ⇒ quasi-separated, so g is finitely presented and B is Noetherian. Step 3: the étale fibres are reduced, discrete and separable; after shrinking, both extended ideals are the reduced point u, and the Nagata flat-base-change comparison gives E_x×_l L ≅ E_o×_{k_o} L over L. Step 4: I checked the gluing myself. For n=2 the middle chart lies in chart 1 and the result is P¹. For n>2 the two lines are {s=0} with chart 1 and {r=0} with chart 3, chart 1 ∩ chart 3 is empty, (r)∩(s)=0 in k[r,s]/(rs), and (r)+(s)=(r,s), so they meet in a reduced point. Step 5: geometric connectedness passes from k_o to L to l via 054N, and embedding L/l into l̄ gives the configuration. Step 6: b is an isomorphism off x, so it is surjective; surjectivity survives base change, so nonempty geometric fibres of f give nonempty ones of g. Edge cases checked: n=2 in characteristic 2, n=3, n≥4, imperfect or inseparable residue fields, empty generic fibre. FIX: (1) Step 3 replaced an unneeded, under-cited finiteness and Noetherian argument by the direct one (fibre∖{u} is closed in U because x and o are closed and the fibre is discrete); its uses drop the finite-type-over-Noetherian node (still cited in Step 2) and def-weil-finite-type-morphism, and proof_deps is recomputed. (2) Step 6 source label corrected: 01OF is section-blowing-up, not lemma-blowing-up (B5). Maintainer note: existing lem-sfb-dvr-nodal-chart-blowup-calculus and lem-sfb-flat-pullback-blowup-chart-restrictions overlap Steps 3–4. This is proof redundancy, not a duplicate node, and the item's derivation also gives the reduced intersection point. Batch-5: lem-sfb-projective-affine-base-blowup reaches def-trf-projective-bundle-morphism and generic relative-Proj/H-projective trf lemmas. These are general projective-geometry definitions and bookkeeping, not steps of the trace formula or Poincaré duality proofs, so accepted. All declared tool_uses are accepted as generic. No SGA source used, no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointBlowupProjectiveFibres",
+  "declaration": "AlgebraicGeometry.nodal_point_blowup_projective_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPointBlowupProjectiveFibres.lean",
+  "statement": "theorem nodal_point_blowup_projective_fibres (R R' : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] [IsDomain R'] [IsDiscreteValuationRing R'] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (ι : R ⟶ R') [IsLocalHom ι.hom] (hι : Function.Injective ι.hom) [Etale (Spec.map ι)] (hπ' : IsLocalRing.maximalIdeal R' = Ideal.span {ι π}) (X : Scheme.{u}) [IsNoetherian X] (f : X ⟶ Spec R) [IsHProjective f] (x : X) (hx : IsClosed ({x} : Set X)) (hxs : f x = IsLocalRing.closedPoint R) (n : ℕ) (hn : 2 ≤ n) (U : Scheme.{u}) (p : U ⟶ X) (q : U ⟶ DvrNodal.model R' (ι π) n) [Etale p] [Etale q] (hover : p ≫ f = q ≫ DvrNodal.projection R' (ι π) n ≫ Spec.map ι) (z : U) (hz : p z = x) (ho : DvrNodal.IsOrigin R' (ι π) n (q z)) [Flat ((pointIdeal x hx).blowupMap ≫ f)] [LocallyOfFinitePresentation ((pointIdeal x hx).blowupMap ≫ f)] : IsHProjective (pointIdeal x hx).blowupMap ∧ IsProper (pointIdeal x hx).blowupMap ∧ IsHProjective ((pointIdeal x hx).blowupMap ≫ f) ∧ IsProper ((pointIdeal x hx).blowupMap ≫ f) ∧ Flat ((pointIdeal x hx).blowupMap ≫ f) ∧ LocallyOfFinitePresentation ((pointIdeal x hx).blowupMap ≫ f) ∧ QuasiCompact ((pointIdeal x hx).blowupMap ≫ f) ∧ QuasiSeparated ((pointIdeal x hx).blowupMap ≫ f) ∧ IsNoetherian (pointIdeal x hx).blowup ∧ (∀ y : X, Nonempty ((pointIdeal x hx).blowupMap.fiber y) ∧ GeometricallyConnected ((pointIdeal x hx).blowupMap.fiberToSpecResidueField y)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X), Nonempty (pullback (pointIdeal x hx).blowupMap t : Scheme.{u}) ∧ ConnectedSpace (pullback (pointIdeal x hx).blowupMap t : Scheme.{u})) ∧ (∀ (y : X), y ≠ x → ∀ (K : Type u) [Field K] [Algebra (X.residueField y) K], IsIso (pullback.snd ((pointIdeal x hx).blowupMap.fiberToSpecResidueField y) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField y) K))))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra (X.residueField x) Ω] [IsAlgClosure (X.residueField x) Ω], n = 2 → ∃ e : pullback ((pointIdeal x hx).blowupMap.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) Ω))) ≅ ProjectiveLine (Spec (.of Ω)), e.hom ≫ ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) = pullback.snd ((pointIdeal x hx).blowupMap.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) Ω)))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra (X.residueField x) Ω] [IsAlgClosure (X.residueField x) Ω], 2 < n → ∃ (i j : ProjectiveLine (Spec (.of Ω)) ⟶ pullback ((pointIdeal x hx).blowupMap.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) Ω)))) (a b : Spec (.of Ω) ⟶ ProjectiveLine (Spec (.of Ω))), IsClosedImmersion i ∧ IsClosedImmersion j ∧ i ≫ pullback.snd ((pointIdeal x hx).blowupMap.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) Ω))) = ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) ∧ j ≫ pullback.snd ((pointIdeal x hx).blowupMap.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) Ω))) = ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) ∧ a ≫ ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) = 𝟙 _ ∧ b ≫ ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) = 𝟙 _ ∧ IsPullback a b i j ∧ i.ker ⊓ j.ker = ⊥ ∧ Set.range i ∪ Set.range j = Set.univ) ∧ Surjective (pointIdeal x hx).blowupMap ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec R), Nonempty (pullback f s : Scheme.{u}) → Nonempty (pullback ((pointIdeal x hx).blowupMap ≫ f) s : Scheme.{u}))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the statement uses the existing DvrNodal model/projection/IsOrigin definitions, now owned by def-sfb-arithmetic-nodal-model-origin, rather than citing their module's theorem node. SurfacePointBlowup.pointIdeal is owned by def-sfb-surface-point-blowup-data. The Lean module and statement are byte-identical to returned delivery 3a8563c2b22f."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28db20ddf",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3a8563c2. The Lean module is byte-identical to the earlier delivery; the item node differs from live only in lean and stmt_deps, which now cite the new definition node def-sfb-arithmetic-nodal-model-origin instead of the theorem node lem-sfb-dvr-nodal-chart-blowup-calculus. The new node is existing:true on the six landed plain definitions (constant, coordinate, originIdeal, model, projection, IsOrigin) in DvrNodalChartBlowupCalculus. Their bodies are real quotient and spectrum constructions that use no theorem conclusion. Its source (models.tex 0CDC, R[x,y]/(xy-pi^n) and (pi,x,y)) is verified, its stmt_deps are live definition nodes with no cycle, and no other definition node owns these declarations. Hypotheses, conclusions and edge cases were rechecked against the node with no mismatch. Sorry only; docstrings carry the source place, blueprint tag and proof steps. No file changed, so no compile."
+ }
+}

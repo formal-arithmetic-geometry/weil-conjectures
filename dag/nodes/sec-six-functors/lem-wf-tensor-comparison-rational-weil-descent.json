@@ -1,0 +1,268 @@
+{
+ "id": "lem-wf-tensor-comparison-rational-weil-descent",
+ "kind": "statement",
+ "title": "Rational Weil descent of a unit-compatible integral tensor comparison",
+ "statement": "Fix primes $p\\ne\\ell$, $q=p^a$ with $a\\ge1$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E\\subset\\Omega$, with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $W_0$ be a separated finite-type $k_0$-scheme, $W=W_0\\times_{k_0}k$, and $B=\\varprojlim_{n\\ge1}(R/\\varpi^n)_W$ on the small pro-etale site. Use the integral bounded-constructible category $\\mathcal C_E$ underlying [def-wf-weil-category].\nLet $H=\\Phi_W^*$ be geometric-Frobenius coefficient transport [def-wf-weil-category]. Suppose the ordinary tensor $T_E(M,N)=M\\otimes_B^L N$ and completed tensor $\\widehat T_E(M,N)=C(T_E(M,N))$ [def-wf-tensor-product] are bifunctors on $\\mathcal C_E$ with their prescribed pullback comparisons $\\mu_E^{\\mathrm{ord}}$ and $\\widehat\\mu_E$. Suppose the actual completion-unit components $\\chi_{M,N}=\\eta_{T_E(M,N)}$ form a natural isomorphism and satisfy\n$$\\widehat\\mu_E\\circ H(\\chi_{M,N})=\\chi_{HM,HN}\\circ\\mu_E^{\\mathrm{ord}}.$$\nUse raw rationalization $\\mathcal C_E[1/\\varpi]$ [def-weil-pbc-rational-category], keeping objects and localizing Hom modules, with the prescribed tensor action $(u/\\varpi^r,v/\\varpi^s)\\mapsto T_E(u,v)/\\varpi^{r+s}$, and likewise for $\\widehat T_E$. The localized $\\chi$ is natural on all rational arrows. For arbitrary rational Weil isomorphisms $\\varphi_M:HM\\to M$, $\\varphi_N:HN\\to N$ it satisfies\n$$\\chi_{M,N}\\circ T_E(\\varphi_M,\\varphi_N)\\circ\\mu_E^{\\mathrm{ord}}\n=\\widehat T_E(\\varphi_M,\\varphi_N)\\circ\\widehat\\mu_E\\circ H(\\chi_{M,N}).$$\nConsequently $\\chi$ and $\\chi^{-1}$ are inverse morphisms of the corresponding rational Weil pairs. Integral numerators representing the rational Weil isomorphisms are not required to be integral isomorphisms.\nIf the stated integral hypotheses hold at every finite intermediate field, let input Weil objects be given at finite fields $E,F\\subset\\Omega$, and let $L\\subset\\Omega$ be any finite field containing both. Apply the transition functors $T_{L/E},T_{L/F}$ of [def-wf-weil-category]. The comparison on these two objects at $L$, and its inverse, give inverse common-stage Weil morphisms $[L,\\chi]$, $[L,\\chi^{-1}]$ between the ordinary and completed tensor objects represented at $L$. This conclusion includes $L=E=F$ and makes no assertion equating comparison components at different fields without the transition identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q$ for raw rationalization and suppress $Q$ on components. By [def-weil-linear-scalar-localization], $Q$ preserves composition and identities. Thus $Q(\\chi_{M,N})Q(\\chi_{M,N}^{-1})=1$ and $Q(\\chi_{M,N}^{-1})Q(\\chi_{M,N})=1$; the localized components are isomorphisms.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  },
+  {
+   "text": "Let $u:M\\to M'$, $v:N\\to N'$ be integral arrows. Integral naturality gives $\\chi_{M',N'}T_E(u,v)=\\widehat T_E(u,v)\\chi_{M,N}$. For $f=u/\\varpi^r$, $g=v/\\varpi^s$, divide this equality in the localized Hom module by $\\varpi^{r+s}$. The prescribed tensor actions give $\\chi_{M',N'}T_E(f,g)=\\widehat T_E(f,g)\\chi_{M,N}$. This covers all arrows: each element of $\\operatorname{Hom}\\otimes_R E$ is a finite sum of pure tensors; each scalar has a power-of-$\\varpi$ denominator, and a common denominator puts the sum in the displayed form. No cancellation in an integral Hom module is used.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  },
+  {
+   "text": "Apply $Q$ to the assumed integral compatibility. Since Frobenius on the rational category is the rationalization of integral coefficient transport [def-wf-weil-category], this reads $\\widehat\\mu_E H(\\chi_{M,N})=\\chi_{HM,HN}\\mu_E^{\\mathrm{ord}}$ in the rational category. This step only sends a given equality through a functor.",
+   "uses": [
+    "def-wf-weil-category",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  },
+  {
+   "text": "Apply Step 2 with $f=\\varphi_M:HM\\to M$ and $g=\\varphi_N:HN\\to N$, then compose on the right with $\\mu_E^{\\mathrm{ord}}$. Substitution from Step 3 gives $\\chi_{M,N}T_E(\\varphi_M,\\varphi_N)\\mu_E^{\\mathrm{ord}}=\\widehat T_E(\\varphi_M,\\varphi_N)\\widehat\\mu_E H(\\chi_{M,N})$. The two tensor Frobenius maps are precisely these composites [def-wf-tensor-product]. Step 2 used arbitrary numerators, so their integral invertibility was never needed.",
+   "uses": [
+    "def-wf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  },
+  {
+   "text": "Put $A=T_E(M,N)$, $D=\\widehat T_E(M,N)$, with tensor Weil maps $\\alpha,\\delta$. Step 4 is $\\chi\\alpha=\\delta H(\\chi)$, the Weil-morphism condition [def-wf-weil-category]. Multiplying on the left by $\\chi^{-1}$ and on the right by $H(\\chi^{-1})$ gives $\\alpha H(\\chi^{-1})=\\chi^{-1}\\delta$, since $H(\\chi)H(\\chi^{-1})=1$. Thus the inverse is also a Weil morphism, and both composites are identities by Step 1.",
+   "uses": [
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  },
+  {
+   "text": "For inputs at $E,F$ and the specified common field $L$, apply the transition functors of [def-wf-weil-category] to obtain two Weil pairs at $L$, then apply Steps 1–5 there. Represent the tensor objects at $L$. The common-stage composition rule gives $[L,\\chi^{-1}][L,\\chi]=[L,1]$ and $[L,\\chi][L,\\chi^{-1}]=[L,1]$, hence inverse common-stage morphisms. If $L=E=F$, use the same rule and the prescribed identity-stage identifications. Nothing here compares components calculated at distinct fields.",
+   "uses": [
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-rational-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-wf-weil-category",
+  "def-wf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 5; raw rationalization and common-stage Weil morphisms; explicit fraction and fixed-pair calculation by Q148"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bilinear tensor natural isomorphism compatible with an endofunctor descends through scalar localization to Weil objects",
+   "results": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso; PresheafOfModules.monoidalCategoryStruct; PresheafOfModules.monoidalCategory; PresheafOfModules.Monoidal.tensorObjMap; IsLocalization.moduleLid; PresheafOfModules.Monoidal.tensorObj; IsLocalizedModule.map_lTensor; CategoryTheory.Localization.Monoidal.tensorBifunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural tensor comparison equivariant under Frobenius extends to localized morphisms and common finite coefficient fields",
+   "results": "FiniteField.frobeniusAlgEquiv; IsLocalization.algebraTensorEquiv; WittVector.IsocrystalEquiv.frob_equivariant; IsLocalization.moduleTensorEquiv; homTensorHomEquiv; IsLocalization.instIsLocalizedModuleTensorProductMap; FiniteField.frobeniusAlgEquiv_apply; IsLocalizedModule.rTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-22",
+   "verdict": "invalid query; superseded below"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|scalar.*localiz|localiz.*bilinear",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Module/FinitePresentation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "results": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-22",
+   "verdict": "no match: localizes a monoidal tensor, not a comparison between two tensors with Frobenius and common-stage Weil morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBifunctorIso|IsoAlgebra|localiz.*[Nn]at[Tt]rans|[Nn]at[Tt]rans.*localiz",
+   "results": "Mathlib/Algebra/Homology/Localization.lean; Mathlib/CategoryTheory/Center/Localization.lean; Mathlib/CategoryTheory/Center/Localization.lean; Mathlib/CategoryTheory/Center/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/Topology/Sheaves/CommRingCat.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic monoidal localization and module scalar extension ingredients do not state the conditional two-tensor comparison with rational Weil maps and common-stage inverse morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "results": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic monoidal localization and module scalar extension ingredients do not state the conditional two-tensor comparison with rational Weil maps and common-stage inverse morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor comparison between ordinary and completed derived tensor of sheaves descends to scalar localized Weil categories",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; IsLocalizedModule.rTensor; HasDerivedCategory.standard; IsLocalization.instIsLocalizedModuleTensorProductMap; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; PresheafOfModules.Sheafify.smul.congr_simp; CategoryTheory.Sheaf.monoidalCategory; IsLocalization.moduleTensorEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic monoidal localization and module scalar extension ingredients do not state the conditional two-tensor comparison with rational Weil maps and common-stage inverse morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral natural isomorphism between bilinear tensor bifunctors remains natural after inverting a scalar and intertwines arbitrary rational Frobenius isomorphisms",
+   "results": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso; CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso; CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost; Rep.coinvariantsTensorIndNatIso_inv_app; CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app; CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic monoidal localization and module scalar extension ingredients do not state the conditional two-tensor comparison with rational Weil maps and common-stage inverse morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a natural transformation of bilinear functors gives a natural transformation on rationalized Hom modules and an isomorphism of equivariant objects",
+   "results": "CategoryTheory.Functor.ratLinear; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.homEquiv_extendScalarsComp; Rep.Tor_map; ModuleCat.CoextendScalars.map'; ModuleCat.CoextendScalars.map'_hom_apply_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: generic monoidal localization and module scalar extension ingredients do not state the conditional two-tensor comparison with rational Weil maps and common-stage inverse morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-tensor-completion-frobenius",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof, penultimate sentence: 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'; rational and common-coefficient-field Weil descent",
+   "via": [
+    "lem-wf-tensor-completion-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-wf-tensor-comparison-rational-weil-descent",
+  "worker": "stage1",
+  "summary": "Proved the conditional rational/common-stage descent by six explicit elementary calculations. No new lemma is needed because integral naturality, invertibility, tensor bifunctors and the Frobenius square are hypotheses. Checked arbitrary rational numerators and both inverse composites. Corrected doubled TeX escape characters only, with no mathematical statement change. Preserved inherited searches and added the five actually run by Q148.",
+  "blueprint": "fix-prop-projection-formula.proof.md, penultimate sentence on Weil equivariance, via lem-wf-tensor-completion-frobenius: the rational and common-finite-stage part is realized by Steps 1–6.",
+  "tool_uses": [
+   {
+    "node": "def-weil-linear-scalar-localization",
+    "why": "Generic definition of raw Hom-module scalar extension, bilinear composition and localization functor; used for fraction arithmetic without changing the unit route."
+   },
+   {
+    "node": "def-weil-pbc-rational-category",
+    "why": "Generic raw rational-category convention needed for the finite-sum description of rational arrows."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic coefficient definition provides the uniformizer decomposition of nonzero scalars used to choose common denominators."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-rational-category",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-94700160b",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-94700160b (reviewer sub-agent of L); spot-checked: Read the item and the source in full; no fixes were needed. The source is the penultimate sentence of main-20261015 fix-prop-projection-formula.proof.md. It states only the Weil-equivariance obligation, so marking the proof as agent-written is correct. The delivery adds no new nodes, has no doubled backslashes and cites no SGA. proof_deps equals the union of the step uses. The item is cited only by its parent lem-wf-tensor-completion-frobenius (step 3), which discharges its integral hypotheses in steps 1-2. Step checks: (1) Q preserves identities and composition, so the localized chi is invertible. (2) Every element of Hom tensored with O_E[1/varpi] has the form h/varpi^r. With bilinear composition and the prescribed tensor action, both sides of the naturality square become (integral equality)/varpi^(r+s); no cancellation in an integral Hom group is used. (3) P_E is integral transport followed by rationalization, so the integral square passes through Q. (4) I recomputed this by hand: chi T(phi) mu_ord = T-hat(phi) chi_{HM,HN} mu_ord = T-hat(phi) mu-hat H(chi). (5) chi alpha = delta H(chi) is exactly the Weil-morphism condition of def-wf-weil-category, and conjugating gives the inverse condition. (T, alpha) is a Weil pair because mu_ord = chi^-1 mu-hat H(chi) is invertible. (6) prop-weil-pbc-scalar-extension sets T_{E/E}=id literally, so at the common field L the classes satisfy [L,chi^-1][L,chi]=[L,1] in both orders; the case L=E=F is included, and no comparison across different fields is claimed. Duplicate check: I read lem-sf-completed-tensor-rational-naturality (a different map, mu-bar), lem-sf-tensor-comparison-localization-descent (a different setting: monoidal realization into Perf), and the two Q140 sibling nodes. None duplicates the item, and it does not restate a clause of its parent. Edge cases checked: zero objects, exponents r=s=0, a numerator varpi*id that is not an integral isomorphism, L=E=F, and inputs at E different from F. All ten Mathlib search records agree there is no match. Accepted tool_uses: three generic definitions from other chapters (def-weil-linear-scalar-localization, def-weil-pbc-rational-category, def-weil-l-adic-coefficient-extension)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilTensorComparisonRationalDescent",
+  "declaration": "WeilConjectures.WfTensorComparison.rational_descent",
+  "declarations": [
+   "WeilConjectures.WfTensorComparison.Integral",
+   "WeilConjectures.WfTensorComparison.Rational",
+   "WeilConjectures.WfTensorComparison.ambientOrdinary",
+   "WeilConjectures.WfTensorComparison.completion",
+   "WeilConjectures.WfTensorComparison.completeInclusion",
+   "WeilConjectures.WfTensorComparison.Closure",
+   "WeilConjectures.WfTensorComparison.ordinary",
+   "WeilConjectures.WfTensorComparison.completed",
+   "WeilConjectures.WfTensorComparison.transport",
+   "WeilConjectures.WfTensorComparison.ordinaryMu",
+   "WeilConjectures.WfTensorComparison.completedMu",
+   "WeilConjectures.WfTensorComparison.IntegralData",
+   "WeilConjectures.WfTensorComparison.RationalData",
+   "WeilConjectures.WfTensorComparison.component",
+   "WeilConjectures.WfTensorComparison.rationalMu",
+   "WeilConjectures.WfTensorComparison.ordinaryPair",
+   "WeilConjectures.WfTensorComparison.completedPair",
+   "WeilConjectures.WfTensorComparison.rational_descent",
+   "WeilConjectures.WfTensorComparison.common_stage_descent"
+  ],
+  "file": "lean/Sheaf/Paper/WeilTensorComparisonRationalDescent.lean",
+  "statement": "theorem rational_descent (d : RationalData (D := D) (c := c) (W₀ := W₀) (E := E)) : (∀ (M N M' N' : Rational D c W₀ E) (f : M ⟶ M') (g : N ⟶ N'), d.ordinary.map (Prod.mkHom f g) ≫ (component d M' N').hom = (component d M N).hom ≫ d.completed.map (Prod.mkHom f g)) ∧ ∀ K L : WeilD D c W₀ E, (rationalMu (ordinary d.integral.closure) d.ordinary d.ordinary_raw.2.1 (ordinaryMu d.integral.closure) K.carrier L.carrier).hom ≫ d.ordinary.map (Prod.mkHom K.str.hom L.str.hom) ≫ (component d K.carrier L.carrier).hom = (weilFrobeniusPullback D c W₀ E).map (component d K.carrier L.carrier).hom ≫ (rationalMu (completed d.integral.closure) d.completed d.completed_raw.2.1 (completedMu d.integral.closure) K.carrier L.carrier).hom ≫ d.completed.map (Prod.mkHom K.str.hom L.str.hom) ∧ ∃ e : ordinaryPair d K L ≅ completedPair d K L, HEq e.hom.hom.f (component d K.carrier L.carrier).hom ∧ HEq e.inv.hom.f (component d K.carrier L.carrier).inv",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorems state finite-stage rational descent and arbitrary common-stage descent. The auxiliary records package exactly the conditional tensor closure, actual-unit and Frobenius-square hypotheses; all tensor, completion, transport and localization constructions are published dependencies.",
+  "fixed_by": "NT-stage2-cc-c8d03288b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8d03288b",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Every hypothesis and conclusion matches the node: closure is a hypothesis; chi is pinned to wfCompletionUnit; the integral Frobenius square is in the right order; IsRawExtension carries the r+s fraction rule; naturality covers all rational arrows; equivariance covers arbitrary WeilD structure isos; the Weil-pair iso has hom chi and inv chi^-1; common stage allows any E,F<=L including L=E=F. Edge cases and universes are fine. lean.statement is verbatim and all 19 declarations exist; no hollow defs, sorry only, docstrings present. FIX (H4): completedMu re-composed wfIntegralTensorPullback (def-wf-tensor-product) by hand; it now restricts that declaration along wfIntegralConstructibleInclusion, as the landed parent does. Definitionally equal, so no statement or record change. Compiled once: clean, 52.0 s under load 48 (limit 60 s; original not compiled). If landing times out, restore the delivered completedMu body. Advisory: proEtaleCanonicalTensorComparison's owner lem-weil-pbc-ringed-topoi-derived-tensor-pullback is uncited, as in the landed parent; the second reading is a worker self-check."
+ }
+}

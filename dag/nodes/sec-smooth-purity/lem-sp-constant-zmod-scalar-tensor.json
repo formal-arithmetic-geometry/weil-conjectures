@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-constant-zmod-scalar-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [
+    "lem-route-sp-integral-twist-level-comparison",
+    "lem-pur-native-integral-tate-finite-representation",
+    "lem-pur-native-integral-tate-tower-limit"
+   ],
+   "place": "Integral twist paragraph: identify B_X tensor_Z mu_(ell^(n+1)) with the finite scalar extension from the constant cyclic ring."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Absolute tensor agrees with extension from a constant cyclic ring",
+ "statement": "Let X be an arbitrary scheme [def-weil-pbc-proetale-site]. Fix natural numbers ell,n, put N=ell^(n+1), and write R=(ULift(ZMod N))_X for the constant commutative ring sheaf, using the canonical universe lift [def-weil-pbc-constant-sheaf]. Let A be any commutative ring in the coefficient universe, and let a:ZMod N -> A be a unital ring homomorphism. Let M be any sheaf of R-modules [def-weil-sheaf-of-modules-category]. Use the constant-ring scalar map a_X:R -> A_X [def-pur-finite-tate-line-signed-comparison]. Then there is an isomorphism of abelian sheaves A_X tensor_Z U(M) ≅ U(A_X tensor_R M). Here U forgets the module action, the left tensor is the sheafified objectwise integer tensor [det-def-sfb-sheaf-tensor-structure], and the right tensor is the actual module scalar extension [def-pur-sheaf-tensor-product]. Neither finiteness of A nor invertibility or primality of ell is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Finite-level scalar-extension formula and local-generator paragraph; the integer-versus-cyclic-ring balancing step in lem-route-sp-integral-twist-level-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-finite-tate-line-signed-comparison",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Form the presheaf P(V)=A_X(V) tensor_Z M(V) with A_X(V) acting on the first factor and the tensor-product restriction maps. Sheafify it as a module sheaf Q. Its underlying abelian sheaf is the tensor of the underlying coefficient sheaf with U(M), since module sheafification retains abelian sheafification and abelian sheafification is strong monoidal. Forgetting the constant commutative ring agrees with the constant underlying additive group.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Finite-level scalar-extension formula and local-generator paragraph; the integer-versus-cyclic-ring balancing step in lem-route-sp-integral-twist-level-comparison."
+   }
+  },
+  {
+   "text": "The bilinear map b,m -> b tensor_R m induces a module map p:Q -> A_X tensor_R M after sheafification. Conversely insertion m -> image(1 tensor_Z m) is additive. It is R-linear: locally every constant cyclic scalar lifts to an integer and every additive map commutes with integer multiplication; separatedness descends this equality. Apply the scalar-extension universal property to get q:A_X tensor_R M -> Q, with q(b tensor_R m)=image(b tensor_Z m). The additive-to-linear lift is proved directly: restrict to constant scalars along the locally surjective sheafification unit, lift every ZMod scalar to an integer, use preservation of integer multiplication, and descend with Mathlib restrictHomEquivOfIsLocallySurjective.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Finite-level scalar-extension formula and local-generator paragraph; the integer-versus-cyclic-ring balancing step in lem-route-sp-integral-twist-level-comparison."
+   }
+  },
+  {
+   "text": "On every integer pure tensor, q p is the sheafification unit; tensor generation and the sheafification adjunction therefore give q p=1_Q. On every relative pure tensor, p q is the identity, so scalar-extension tensor generation gives p q=1. Forget their coefficient actions and compose the coefficient and sheaf-tensor identifications from the first step. For N=0 the cyclic ring is Z and the integer-lift argument is unchanged; for the zero ring and the empty scheme the same formulas and identities apply.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Finite-level scalar-extension formula and local-generator paragraph; the integer-versus-cyclic-ring balancing step in lem-route-sp-integral-twist-level-comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Finite-level tensor formula; explicit two-sided comparison using Stacks 03EK tensor construction and 03CY sheafification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf killed by N tensored over the integers with a ZMod N algebra agrees with scalar extension over the constant ZMod N ring sheaf",
+   "results": "8 hits about light condensed tensor monoidal structures; none is the constant cyclic ring comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.equivOfCompatibleSMul",
+   "results": "TensorProduct.equivOfCompatibleSMul is a tensor-product comparison for compatible module structures, without the local constant-ring and sheafification comparison.",
+   "date": "2026-10-26",
+   "verdict": "Useful algebraic analogy, not a sheaf-level proof."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.equivOfCompatibleSMul|restrictHomEquivOfIsLocallySurjective",
+   "results": "7 hits including Mathlib sheaf ChangeOfRings and module sheafification; these supply tensor and locally surjective restriction APIs, but no theorem with the required statement.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing APIs and prove the comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a sheaf of modules over the constant ring ZMod N with a constant ring A agrees on underlying abelian sheaves with tensor over integers",
+   "results": "8 hits: IsLocalization.moduleLid, PresheafOfModules.Sheafify.map_smul, SheafOfModules.toSheaf_obj_val, Scheme.Modules.presheaf, SheafOfModules.instAbelian, SheafOfModules.toSheaf, PresheafOfModules.Sheafify.map_smul_eq, TensorProduct.CompatibleSMul.int.",
+   "date": "2026-10-26",
+   "verdict": "No direct comparison theorem; existing sheafification and integer-compatible scalar APIs support the constructed proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleTateTwists",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantZModScalarTensor",
+  "file": "lean/Sheaf/Paper/ConstantZModScalarTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantZMod_scalarTensor",
+  "statement": "theorem constantZMod_scalarTensor (X : Scheme.{u}) (ℓ n : ℕ)\n    (A : Type (u + 1)) [CommRing A] (a : ZMod (ℓ ^ (n + 1)) →+* A)\n    (M : SheafOfModules.{u + 1} (purTwistRing X (purTwistFiniteRing X ℓ n))) :\n    Nonempty (((constantSheaf (ProEt.topology X) AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of A) ⊗ (SheafOfModules.toSheaf _).obj M) ≅\n      (SheafOfModules.toSheaf _).obj\n        (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n          (tateFiniteScalar X ℓ A n a) M))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T065912-L-3292638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T065912-L-3292638",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

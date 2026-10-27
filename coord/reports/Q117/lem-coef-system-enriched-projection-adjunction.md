@@ -1,0 +1,57 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors/lem-coef-system-enriched-projection-adjunction.json (statement, split; not a Mathlib leaf), citations.json, and this report. The sandbox also contains the real search log searches.jsonl and the local JSON-writing helper write_split.py. No repository file, Lean source, launcher file, or unit/chapter record was changed. No compiler or build was run.
+
+## New nodes
+
+None: 0 new nodes and 0 new Mathlib leaves. All mathematical ingredients already have DAG nodes. In particular, ordinary Yoneda full faithfulness is lem-galois-yoneda-fully-faithful, not the scheme-only lem-pc-yoneda. The enriched-isomorphism lemma for a strong monoidal left adjoint is not used: compact support is not assumed strong monoidal.
+
+## Attachments
+
+None. Searched the live WeilConjectures source both for the item's blueprint tag and for enriched/system/tower adjunction terminology. Read WeilConjectures/SixFunctors/Etale/Derived/TensorHom.lean, particularly derivedHomRightDerivedLowerShriekIso at line 129. It provides the finite/single-coefficient tensor-Hom exchange, not this full statement about ordinary derived semilinear coefficient systems, the punctual representing objects, their underlying pro-etale towers and total derived limit. It therefore does not attach this item.
+
+## WANTED
+
+None. The proof is explicitly agent-formulated: the blueprint supplies the displayed RHom calculation but does not itself supply the all-test representing-system argument. The Stacks source supplies the categorical and derived-functor foundations already represented by the cited nodes.
+
+## Changes and sources
+
+The sandbox had no item or report on entry. The live item was unsplit with an empty proof and no released repair note. I retained its statement, statement dependencies, source, blueprint ancestry, inherited Mathlib searches, and all other metadata. No STATEMENT-DISPUTED issue was found. I replaced the empty proof with seven explicit steps and set status split.
+
+Read the live chapter and unit records, GOAL.md, the three route levels in SETUP.md, and the second and final paragraphs of literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. The argument realizes exactly the middle RHom isomorphism and the identities before derived inverse limit. It uses no SGA source and does not alter the unit or chapter route.
+
+Also read Stacks categories.tex, lemma-yoneda (001P), and sites-cohomology.tex, lemma-adjoint (07A6), lemma-internal-hom (08J9), equation-projection-formula-map (0B56), and section-derived-limits with lemma-derived-limit-is-ok (0941). In particular 0941 constructs an actual derived functor on strict tower complexes; the definition of a homotopy-limit triangle alone would not suffice. The representing objects, varying-ring evaluation, finite projection map and site comparison come from existing explicit DAG statement nodes, not from pretending these Stacks tags assert those refinements themselves.
+
+Blueprint and duplicate searches: ran tools/blueprint_refs.py ancestor for this item and whole-blueprint searches for Yoneda, representing, adjunction, and projection adjunction; searched all DAG nodes by Yoneda, enriched adjunction and tensor-Hom projection, and inspected the candidate statements. The item's existing ancestry remains prop-coef-integral-exceptional-adjoint through lem-coef-cartesian-section-adjoint-mates and lem-coef-finite-adjunction-diagram-realization. No other blueprint node states the full item, so same_as remains empty. The searches found all necessary ingredients and no new lemma was introduced.
+
+The item's actual new Mathlib searches used only msearch.py: LeanFinder with two phrasings, LeanSearch, Loogle for CategoryTheory.Adjunction.homEquiv, and grep for enriched adjunction or conjugateIso. Both semantic phrasings returned module tensor-Hom, condensed or adjunction primitives, not the coefficient-system assertion. Loogle returned homEquiv and its unit/counit formulas; grep returned conjugateIsoEquiv. Read the local Mathlib Yoneda and Adjunction sources for the generic candidates. These confirm the existing categorical leaves, but they are not an exact or one-line match for this entire geometric/system statement. Searches are recorded verbatim in the node and searches.jsonl; inherited searches were preserved rather than presented as new work.
+
+## Not duplicates
+
+No new nodes, hence no pairs requiring distinction. Reused the existing representing-system, semilinear-calculus, compact-support-projection, ordinary Yoneda, ordinary adjunction-formula, ringed projection-normalization and strict-tower derived-limit nodes.
+
+## Review by Q117
+
+I checked the seven steps against the actual statements of every cited node, with those JSON statements open, and read delivery-errors B through E in full. There are no new statements whose hypotheses or source could be hidden in a proof sketch. citations.json contains one verbatim statement excerpt for each node used by each step; these are statement citations, not citations of another node's proof. No proof step exceeds 2000 characters.
+
+Step 1 uses lem-coef-system-internal-hom-representability for its representability assertion, explicitly stated there without any finiteness condition on the test P. It uses lem-coef-system-compact-support-projection for the actual natural projection map and its finite evaluation, and lem-weil-pbc-adjunction-of-natural-bijection for the adjunction Hom bijection. I checked the direction: pi goes from a_Y^*P tensor FM to F(a_X^*P tensor M), so a map from the former is precomposed with pi inverse to become a map from the latter before adjunction. No projection is required on GN, on an arbitrary internal Hom, or on a tensor assumed constructible; the hypothesis and existing projection statement cover all tests P. The ordinary actual adjunction is the one in the item's hypothesis.
+
+Step 2 uses precisely the arbitrary-category full faithfulness in lem-galois-yoneda-fully-faithful, including its inverse by evaluation at the identity. The natural transformations have representable source and target, so full faithfulness really does suffice here. It is not being cited for Hom(h_A,F)=F(A) for arbitrary F. Apply the bijection in both directions, compose, and use its injectivity. This proves the inverse equations inside D(S_s^et), not by trying to detect equality using the finite evaluations. Naturality in M and N follows by the same injectivity after the factor-by-factor naturality of step 1.
+
+Step 3 is elementary after those cited bijections: evaluate the inverse bijection at 1_B, expand the inverse adjunction formula from lem-weil-pbc-adjunction-of-natural-bijection, and use the evaluation morphism supplied by representability. I wrote out epsilon_N F(v_X) pi, including the actual counit, and the forward word G(v_Y pi inverse) eta. This corrects the potential gap of merely announcing a transpose without specifying which counit or which direction of projection is involved. The statement retains its existing mate convention; the expansion is exactly the ordinary inverse transpose in that convention.
+
+Step 4 uses lem-coef-semilinear-derived-sections for actual derived tensor/pushforward evaluation and the agreement of evaluation with the specified closed transposes. It uses lem-coef-system-internal-hom-representability for internal-Hom evaluation and the punctual representing objects, and lem-coef-system-compact-support-projection for the finite projection comparison. I checked that M and FM, the first internal-Hom inputs, are normalized. M, N, FM and GN all have the constructibility and finite-Tor hypotheses required by the item and the representing comparison. Evaluation of epsilon is invoked only under the explicit conditional counit-compatible identification with the finite adjunctions. Identifying the evaluated inverse by its transpose is justified because the finite tensor-Hom and sections adjunctions are bijections; its inverse is then identified using the system inverse equations from step 2. No lifting from finite levels is asserted.
+
+Step 5 is an elementary unit specialization. The proper tensor-unit projection normalization is exactly the last clause of lem-weil-pbc-ringed-projection-mate-exact on the sequence ringed topoi. In the open tensor balancing map, tensoring with the unit has the section formula m tensor 1 mapped to m tensor 1, so its unit specialization is the identity; this is written explicitly rather than assumed to follow from arbitrary naturality. The ordinary forward and reverse formulas are the two formulas in lem-weil-pbc-adjunction-of-natural-bijection. The arbitrary-P projection identities are explicitly displayed, so the final references to projection identities have an actual equation to preserve.
+
+Step 6 uses the final clause of lem-coef-system-internal-hom-representability for the natural underlying-tower comparisons, their compatibility with evaluation/transposition, and the absence of a common level bound. I checked its hypotheses separately on the pairs (FM,N) and (M,GN). Conjugation by these isomorphisms and cancellation prove the tower inverse equations. This is a statement about D(Tow(Ab)), not a collection of unrelated isomorphisms in D(Ab).
+
+Step 7 specializes lem-weil-pbc-ringed-strict-tower-homotopy-limit to the one-point site and ring Z, so its domain is exactly the ordinary derived category of strict abelian towers. Its statement gives an actual exact Rlim functor. Applying a functor to the existing product, naturality and projection equations is elementary. I deliberately did not use lem-weil-derived-limit-morphism, whose nonunique triangle morphisms cannot provide the required functoriality.
+
+Hypothesis and small-case checks: no uniform cohomological or Tor interval was introduced; no flatness of A_m to A_n was assumed; the arbitrary test P can be unbounded and nonnormalized; only the indicated first inputs need normalization for Hom evaluation. With F=G=id and identity projection, the construction is the identity; with M=0 or N=0 both representing mapping objects are zero and the same words give their identity isomorphism; with P=0 all test bijections are the unique maps of singleton Hom sets. For a nontrivial adjunction, the reverse expression ends in its supplied epsilon and therefore does not accidentally normalize the counit to an unrelated isomorphism. The degree-zero test uses the unit system (A_n), with its quotient transitions, not a constant system over one quotient. The strict tower limit is used only after the tower maps and equations exist. These tests expose none of the false flatness, equality-detection or choice-of-limit assumptions listed in delivery-errors E.
+
+The only generic off-unit tools are the tensor-unit projection normalization and the existence of the total strict-tower derived-limit functor; both are declared in split_report.tool_uses with their exact purpose. The ordinary Yoneda and adjunction formula nodes are existing Mathlib leaves. No argument from SGA, no new definition, no new leaf, and no relabelled clause of this item was introduced.
+
+## Unfinished work
+
+None in the requested stage-1 split. The already-existing unsplit dependencies remain separate DAG work, as required by the one-level split contract. Dry run and push results are recorded by the delivery tool.

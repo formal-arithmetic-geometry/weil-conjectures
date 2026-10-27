@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-binomial-geometric-fibres",
+ "kind": "statement",
+ "title": "Geometric fibres of a binomial plane curve",
+ "statement": "Let $F$ be a field, $a\\in F$ and $C_a=\\operatorname{Spec}F[x,y]/(xy-a)$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. This is a nonempty connected reduced scheme of pure dimension one [def-weil-connected-scheme, def-pc-reduced-scheme, def-weil-pure-dimension]. If $a\\ne0$, the map $x\\mapsto z$, $y\\mapsto az^{-1}$ identifies its coordinate ring with $F[z,z^{-1}]$, and $C_a$ is smooth over $F$ [def-sbc-smooth-morphisms]. If $a=0$, restriction to the two axes identifies its coordinate ring with\n$$\\{(f,g)\\in F[x]\\times F[y]:f(0)=g(0)\\}.$$\nIts irreducible components are the two affine lines $V(x)$ and $V(y)$; they meet scheme-theoretically in the single reduced point $(x,y)$. Its complement is smooth over $F$ and is the disjoint union of the two punctured axes. Each local ring has dimension at most one, and the local ring at $(x,y)$ has dimension one; explicitly its primes include the strict chain $(x)\\subsetneq(x,y)$. All these conclusions persist after any extension of $F$. In particular, after extension to an algebraically closed field, the only nonsmooth point when $a=0$ is the crossing. Here reduced means having no nonzero nilpotents and local dimension means Krull dimension [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent two-axis and Laurent-coordinate calculation, inherited step 4 and the fibre-local chain in step 5. Supporting algebra.tex Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth); curves.tex Tag 0C59 (lemma-nodal-family) for context, not a claim that it supplies this explicit computation."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-irreducible-components",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=F[x,y]/(xy-a)$ and denote the classes of the variables again by $x,y$. Suppose $a\\ne0$. Then $x^{-1}=a^{-1}y$. The homomorphism $A\\to F[z,z^{-1}]$ given by $x\\mapsto z$, $y\\mapsto az^{-1}$ is well defined since $z(az^{-1})=a$. Its inverse sends $z$ to $x$ and $z^{-1}$ to $a^{-1}y$: the latter elements multiply to $1$. The composites fix both generators on each side and hence every polynomial or Laurent polynomial. This proves the asserted $F$-algebra isomorphism, with no irreducibility assertion about $xy-a$ needed.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent explicit inverse maps; supporting Tag 00T6 (definition-standard-smooth)."
+   }
+  },
+  {
+   "text": "Still with $a\\ne0$, the Laurent ring is a domain, being a subring of $F(z)$. Its spectrum is integral by the spectrum-of-domain theorem, hence reduced, irreducible and connected (an irreducible nonempty space cannot be partitioned into two nonempty clopen subsets). To compute dimension, write the Laurent ring as $F[z]_z$: fractions are precisely $p/z^n$, with equality tested after multiplication by a power of $z$. The localization-prime theorem shows that contraction of a prime is prime and that extension recovers it; thus contraction sends a strict prime chain to a strict prime chain of $F[z]$. The polynomial-dimension theorem bounds its length by one. The chain $(0)\\subsetneq(z-1)$ in the Laurent ring has length one: evaluation at $z=1$ has quotient $F$, and $z-1\\ne0$, also over $\\mathbf F_2$. Thus its dimension is one. Its unique irreducible component is the whole spectrum, so it has pure dimension one.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-pc-integral-scheme",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-localization-quotient-by-prime",
+    "lem-sc-p1-polynomial-dimension-one",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent Laurent calculation; polynomial dimension and localization of primes, as in the cited general nodes."
+   }
+  },
+  {
+   "text": "Now let $a=0$. The map $F[x,y]\\to F[x]\\times F[y]$, $h\\mapsto(h(x,0),h(0,y))$, has kernel $(xy)$: vanishing of both restrictions means every nonzero monomial has positive $x$- and $y$-exponents, so is divisible by $xy$. Its image consists exactly of pairs with equal constant term. Indeed a pair $(f,g)$ with common constant $c$ is the image of $f(x)+g(y)-c$. This gives the asserted isomorphism. Each polynomial ring is a domain (the leading coefficient of a product of nonzero polynomials is nonzero), so their product, and its subring $A$, have no nonzero nilpotents. Each localization of $A$ is reduced: if $(b/s)^n=0$, some inverted $t$ satisfies $tb^n=0$, whence $(tb)^n=0$, so $tb=0$ and $b/s=0$. The stalk-localization theorem therefore makes $\\operatorname{Spec}A$ a reduced scheme.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent restriction map and mixed-monomial kernel calculation; no external nodal-family criterion is used."
+   }
+  },
+  {
+   "text": "Every prime of $A$ contains $x$ or $y$, since $xy=0$. Therefore $\\operatorname{Spec}A=V(x)\\cup V(y)$. The quotient maps identify these closed subschemes with $\\operatorname{Spec}F[y]$ and $\\operatorname{Spec}F[x]$, respectively. Each is integral by the spectrum-of-domain theorem, so irreducible. Neither contains the other: their generic primes are $(x)$ and $(y)$, and the other variable is nonzero in the corresponding polynomial quotient. Any irreducible subset of a union of two closed sets lies in one of them, by the definition of irreducibility. Thus these are exactly the irreducible components. Both have dimension one by the polynomial-dimension theorem and the prime-chain/topological-dimension dictionary, proving purity. They are connected and share $(x,y)$; any clopen partition restricts trivially to each irreducible axis, and the shared point forces the same part for both, so the whole spectrum is connected and nonempty.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "lem-sc-p1-polynomial-dimension-one",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pure-dimension",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent prime/axis computation; supporting polynomial-dimension and spectrum-of-domain facts are the cited nodes."
+   }
+  },
+  {
+   "text": "The scheme-theoretic intersection of the axes is $\\operatorname{Spec}F$. The closed subschemes are $V(x)=\\operatorname{Spec}A/(x)$ and $V(y)=\\operatorname{Spec}A/(y)$, mapping to $\\operatorname{Spec}A$ by the quotient maps. By the affine fibre-product theorem their fibre product over $\\operatorname{Spec}A$ is $\\operatorname{Spec}\\bigl(A/(x)\\otimes_AA/(y)\\bigr)$ with the projections induced by $a\\mapsto a\\otimes1$, $b\\mapsto1\\otimes b$. Here $A/(x)\\otimes_AA/(y)\\cong A/(x,y)$ via $\\bar a\\otimes\\bar b\\mapsto\\overline{ab}$ (inverse $\\bar c\\mapsto\\bar c\\otimes1$), and $A/(x,y)=F[x,y]/(x,y)=F$. So the intersection is $\\operatorname{Spec}F$, mapping to the prime $(x,y)$. Its single point is reduced because $F$ is a field. The complement of this point is $D(x)\\amalg D(y)$: a prime $\\mathfrak p\\ne(x,y)$ cannot contain both $x$ and $y$, since $(x,y)$ is maximal (its quotient is $F$), so $\\mathfrak p$ lies in $D(x)$ or $D(y)$; and $D(x)\\cap D(y)=D(xy)=\\emptyset$ since $xy=0$. In $A_x$, $y=xy/x=0$, giving $A_x=F[x,x^{-1}]$ by mutually inverse substitutions; similarly $A_y=F[y,y^{-1}]$. The principal-localization theorem identifies these rings with the two stated punctured-axis open subschemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent quotient/intersection universal property and punctured-axis coordinate calculation."
+   }
+  },
+  {
+   "text": "In the zero case every increasing chain of primes of $A$ lies over one axis: its smallest prime contains $x$ or $y$, and then so do all larger primes. Quotienting by that variable gives a strict chain in a one-variable polynomial ring. Conversely inverse image under the quotient map preserves prime ideals and strict inclusions; these assertions follow directly from the definition of prime and surjectivity of the quotient map. Thus every chain has length at most one. The strict chain $(x)\\subsetneq(x,y)$ exists, because the corresponding quotient chain in $F[y]$ is $(0)\\subsetneq(y)$. In either case $a=0$ or $a\\ne0$, the stalk-localization theorem and the localization-dimension theorem now bound every local dimension by one, using the global chain bounds of step 2 (transported along the isomorphism of step 1) and of this step. At the crossing the displayed chain ends at $(x,y)$, so its local dimension is exactly one.",
+   "uses": [
+    "lem-sc-p1-polynomial-dimension-one",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent prime-chain argument; local-dimension statement of localization at a prime from the cited node."
+   }
+  },
+  {
+   "text": "If $a\\ne0$, $F[x,y]/(xy-a)$ has a standard smooth presentation: with first variable $x$ and one equation $xy-a$, the one-by-one Jacobian determinant is $y$, a unit with inverse $a^{-1}x$. The standard-smooth theorem gives a smooth ring map $F\\to A$, and the theorem comparing smooth ring maps with smooth morphisms of affine schemes makes $C_a\\to\\operatorname{Spec}F$ smooth in the sense of the smooth-morphism definition. In the zero case each punctured axis is smooth for the same reason, using $F[z,w]/(zw-1)$, identified with $F[z,z^{-1}]$ by $z\\mapsto z$, $w\\mapsto z^{-1}$ and its inverse. Its Jacobian determinant with respect to $w$ is the unit $z$. Smoothness local on the source then proves that the complement of the crossing is smooth.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth); morphisms.tex Tag 01V5 (definition-smooth); more-morphisms.tex Tag 02H6 (lemma-smooth-formally-smooth)."
+   }
+  },
+  {
+   "text": "For $a=0$, the crossing is not smooth, already over $F$. Set $B=F[u,v]/(u^2,v^2)$, $I=(uv)$, and $\\overline B=B/I$. The four monomials $1,u,v,uv$ form an $F$-basis of $B$, so $I^2=0$, $uv\\ne0$, and $I=F\\,uv$. The map $A\\to\\overline B$, $x\\mapsto u$, $y\\mapsto v$, defines a map from the affine first-order thickening $T=\\operatorname{Spec}\\overline B\\subset T'=\\operatorname{Spec}B$ to $C_0$. Both spectra have one point, mapping to the crossing, since $u,v$ are nilpotent and their quotient is $F$. If an open neighbourhood $U$ of the crossing were smooth, this map would factor through $U$ and formal smoothness would lift it to $T'\\to U$. Its composite to the affine $C_0$ would give lifts of $u,v$ in $B$ whose product is zero. All such lifts have the form $u+cuv$, $v+duv$ with $c,d\\in F$, and their product is $uv\\ne0$, a contradiction. Together with step 7 this gives exactly the asserted nonsmooth locus, without using perfection or a characteristic assumption.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-formally-smooth",
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0 (definition-formally-smooth), Tag 02H6 (lemma-smooth-formally-smooth); agent explicit square-zero lifting obstruction."
+   }
+  },
+  {
+   "text": "Finally let $F\\hookrightarrow E$ be any field extension. The base-changed affine scheme is $\\operatorname{Spec}E[x,y]/(xy-a_E)$. Explicitly, $E\\otimes_F A\\to E[x,y]/(xy-a_E)$ sends $e\\otimes h$ to $e h$; its inverse sends $e$ to $e\\otimes1$ and the variables to $1\\otimes x,1\\otimes y$. The tensor relations and the defining equation show both maps are well defined and inverse. By the affine fibre-product theorem, $C_a\\times_{\\operatorname{Spec}F}\\operatorname{Spec}E\\cong\\operatorname{Spec}(A\\otimes_FE)$, which is the base change of the definition; with the displayed isomorphism it is $C_{a_E}$ over $E$. Field embeddings preserve whether $a$ is zero. Apply steps 1--8 over $E$: the displayed substitutions, the axis ideals, the crossing quotient, the prime chains, the unit Jacobian entries and the monomial lifting obstruction use no property beyond being a field. This proves every conclusion after extension, including when $E$ is algebraically closed.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-extension maps and pushout universal property; the same computations over the extended field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-laurent-polynomial-ring",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-pc-integral-scheme",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "lem-sc-p1-polynomial-dimension-one",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pure-dimension",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-first-order-thickening",
+  "def-sbc-formally-smooth",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit two-axis and Laurent-coordinate calculation, with standard-smooth input from Tags 00T6/00T7 and the 02H0 square-zero obstruction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field F and scalar a, Spec F[x,y]/(xy-a) is a smooth connected Laurent line if a is nonzero, and for a zero it is reduced connected union of two affine lines with one node and completed local ring F[[x,y]]/(xy).",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instSubsingleton\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Subsingleton R], Subsingleton W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R], IsDomain W'.CoordinateRing\", \"doc\": \"If $ R $ is a domain, then the coordinate ring of an affine Weierstrass curve over $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Affine R} →\\n      {x : R} →\\n        {y : Polynomial R} →\\n          Polynomial.eval x (Polynomial.eval y W'.polynomial) = 0 →\\n            (W'.CoordinateRing ⧸ WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x y) ≃ₐ[R] R\", \"doc\": \"Given a point $(x, y)$ on the affine Weierstrass curve $W'$ (satisfying the Weierstrass equation $Y^2 + (a_1 X + a_3) Y = X^3 + a_2 X^2 + a_4 X + a_6$), the quotient of the coordinate ring of $W'$ by \"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $ is the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X^3 + a_2\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → {W' : WeierstrassCurve.Affine R} → Algebra R W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a commutative ring $ R $ is an $ R $-algebra, inheriting the structure from the polynomial ring $ R[X, Y] $ modulo the ideal generated by the We\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → (W' : WeierstrassCurve.Affine R) → R → W'.CoordinateRing\", \"doc\": \"For each element $ x $ in the base ring $ R $, this defines the equivalence class of the polynomial $ X - x $ in the coordinate ring of an affine Weierstrass curve $ W' $, obtained by quotienting $ R[\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsReduced\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"MvPolynomial.instIsReduced\", \"module\": \"Mathlib.Algebra.MvPolynomial.Nilpotent\", \"type\": \" {σ : Type u_1} {R : Type u_2} [CommRing R] [IsReduced R] : IsReduced (MvPolynomial σ R)\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isUnit_iff_eq_C_of_isReduced\", \"module\": \"Mathlib.Algebra.MvPolynomial.Nilpotent\", \"type\": \" {σ : Type u_1} {R : Type u_2} [CommRing R] {P : MvPolynomial σ R} [IsReduced R] : IsUnit P ↔ ∃ r, IsUnit r ∧ P = MvPolynomial.C r\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isUnit_iff_totalDegree_of_isReduced\", \"module\": \"Mathlib.Algebra.MvPolynomial.Nilpotent\", \"type\": \" {σ : Type u_1} {R : Type u_2} [CommRing R] {P : MvPolynomial σ R} [IsReduced R] : IsUnit P ↔ IsUnit (P.coeff 0) ∧ P.totalDegree = 0\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "xy.*(nodal|[Ss]mooth)|([Nn]odal|[Nn]ode).*([Pp]olynomial|[Aa]ffine)|axes.*(quotient|ring)",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"651\", \"text\": \"    nodalWeight s v i = (eval (v i) (Polynomial.derivative (nodal s v)))⁻¹ := by\"}\n  {\"file\": \"Mathlib/Tactic/Translate/Core.lean\", \"line\": \"116\", \"text\": \"-- We omit a doc-string on these syntaxes to instead show the `to_additive` or `to_dual` doc-string\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine plane curve xy equals a over a field is a hyperbola or two transverse lines.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_neg\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Formula\", \"type\": \"(x y : R) : W'.Nonsingular x (W'.negY x y) ↔ W'.Nonsingular x y\", \"doc\": \"For an affine Weierstrass curve over a commutative ring $ R $ with coefficients $ a_1 $ and $ a_3 $, a point $ (x, y) $ is nonsingular if and only if the point $ (x, -y - a_1 x - a_3) $ is nonsingular\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \": Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \"(x y : R) :\\n  W.Nonsingular x y ↔ W.Equation x y ∧ (W.a₁ * y ≠ 3 * x ^ 2 + 2 * W.a₂ * x + W.a₄ ∨ y ≠ -y - W.a₁ * x - W.a₃)\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if and only if it satisfies the Weierstrass equation $y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6$ and at least on\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"[DecidableEq F] {x₁ x₂ y₁ y₂ : F} (h₁ : W.Equation x₁ y₁) (h₂ : W.Equation x₂ y₂)\\n  (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)) :\\n  XIdeal W (W.addX x₁ x₂ <| W.slope x₁ x₂ y₁ y₂) * (XYIdeal W x₁ (C y₁) * XYIdeal W x₂ (C y₂)) =\\n    YIdeal W (linePolynomial x₁ y₁ <| W.slope x₁ x₂ y₁ y₂) *\\n      XYIdeal W (\", \"doc\": \"For two points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ satisfying $x_1 \\neq x_2$ or $y_1 \\neq -y_2 - a_1 x_2 - a_3$, the product of the ideal generated by $X - \"}\n  {\"name\": \"WeierstrassCurve.toAffine\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \"(W : WeierstrassCurve R) : Affine R\", \"doc\": \"The affine representation of a Weierstrass curve over a base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_some\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(a b : R) : W'.Nonsingular ![a, b, 1] ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For any elements $a, b$ in a ring $R$, the point $[a : b : 1]$ on the projective Weierstrass curve $W'$ is nonsingular if and only if the corresponding point $(a, b)$ on the affine Weierstrass curve $\"}\n  {\"name\": \"WeierstrassCurve.Affine.Equation\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \"(x y : R) : Prop\", \"doc\": \"For elements $x, y$ in the base ring $R$, this defines the condition that the Weierstrass polynomial $Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)$ evaluated at $(x, y)$ equals zero, which ch\"}\n  {\"name\": \"WeierstrassCurve.Affine.evalEval_polynomialX\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \"(x y : R) : W.polynomialX.evalEval x y = W.a₁ * y - (3 * x ^ 2 + 2 * W.a₂ * x + W.a₄)\", \"doc\": \"For any elements $x, y$ in a ring $R$ and a Weierstrass curve $W$ over $R$, evaluating the polynomial $a_1 Y - (3X^2 + 2a_2 X + a_4)$ at $x$ and $y$ yields $a_1 y - (3x^2 + 2a_2 x + a_4)$, where $a_1,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate ring of crossing coordinate axes is the fibre product of two polynomial rings over the field; hyperbola is a Laurent polynomial ring.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Affine R} →\\n      {x : R} →\\n        {y : Polynomial R} →\\n          Polynomial.eval x (Polynomial.eval y W'.polynomial) = 0 →\\n            (W'.CoordinateRing ⧸ WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x y) ≃ₐ[R] R\", \"doc\": \"Given a point $(x, y)$ on the affine Weierstrass curve $W'$ (satisfying the Weierstrass equation $Y^2 + (a_1 X + a_3) Y = X^3 + a_2 X^2 + a_4 X + a_6$), the quotient of the coordinate ring of $W'$ by \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $ is the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X^3 + a_2\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → (W' : WeierstrassCurve.Affine R) → Polynomial (Polynomial R) →+* W'.CoordinateRing\", \"doc\": \"The canonical ring homomorphism from the polynomial ring $ R[X,Y] $ to the coordinate ring of an affine Weierstrass curve over $ R $, which maps each polynomial to its equivalence class modulo the ide\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instAlgebraPolynomial\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → {W' : WeierstrassCurve.Affine R} → Algebra (Polynomial R) W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as the quotient ring $ R[X,Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x : W'.CoordinateRing),\\n  ∃ p q, p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X = x\", \"doc\": \"Let $W$ be an affine Weierstrass curve over a commutative ring $R$, and let $A(W)$ be its coordinate ring. Any element $x \\\\in A(W)$ can be expressed as $x = p + qY$, where $p$ and $q$ are polynomials \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → (W' : WeierstrassCurve.Affine R) → R → W'.CoordinateRing\", \"doc\": \"For each element $ x $ in the base ring $ R $, this defines the equivalence class of the polynomial $ X - x $ in the coordinate ring of an affine Weierstrass curve $ W' $, obtained by quotienting $ R[\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → {W' : WeierstrassCurve.Affine R} → Algebra R W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a commutative ring $ R $ is an $ R $-algebra, inheriting the structure from the polynomial ring $ R[X, Y] $ modulo the ideal generated by the We\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field F the curve xy equals a is reduced connected of pure dimension one, a torus for a nonzero and two crossing affine lines for a zero.",
+   "results": "{\"t\": \"2026-10-23T04:24:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a field F the curve xy equals a is reduced connected of pure dimension one, a torus for a nonzero and two crossing affine lines for a zero.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine\", \"WeierstrassCurve\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"WeierstrassCurve.Jacobian\"], \"digest\": \"ee89df349aa03ea9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are general spectrum/localization tools or Weierstrass curves, not every clause of this binomial fibre statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum of a field polynomial ring in two variables modulo X times Y is a reduced connected curve with two line components.",
+   "results": "{\"t\": \"2026-10-23T04:26:05Z\", \"tool\": \"leansearch\", \"query\": \"The spectrum of a field polynomial ring in two variables modulo X times Y is a reduced connected curve with two line components.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.primeSpectrumProd\", \"PrimeSpectrum.primeSpectrumProdOfSum\", \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"SpecOfNotation.termSpec(_)\", \"PrimeSpectrum.irreducibleSpace\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"Prod.spectrum_eq\"], \"digest\": \"339fac85c5f515cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are general spectrum/localization tools or Weierstrass curves, not every clause of this binomial fibre statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "LaurentPolynomial, IsReduced",
+   "results": "{\"t\": \"2026-10-23T04:26:06Z\", \"tool\": \"loogle\", \"query\": \"LaurentPolynomial, IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are general spectrum/localization tools or Weierstrass curves, not every clause of this binomial fibre statement"
+  },
+  {
+   "tool": "grep",
+   "query": "strictNodalRing|xy.*(smooth|Smooth)|crossing.*axes|binomial.*[Ff]ib",
+   "results": "{\"t\": \"2026-10-23T04:26:06Z\", \"tool\": \"grep\", \"query\": \"strictNodalRing|xy.*(smooth|Smooth)|crossing.*axes|binomial.*[Ff]ib\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are general spectrum/localization tools or Weierstrass curves, not every clause of this binomial fibre statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient by XY is the pullback of the two polynomial rings along evaluation at zero, while the quotient by XY-a for a unit is a Laurent polynomial algebra.",
+   "results": "{\"t\": \"2026-10-23T04:28:07Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient by XY is the pullback of the two polynomial rings along evaluation at zero, while the quotient by XY-a for a unit is a Laurent polynomial algebra.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.quotientSpanCXSubCXSubCAlgEquiv\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"IsLocalization.Away.mvPolynomialQuotientEquiv_apply\", \"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"Polynomial.quotientSpanCXSubCAlgEquiv\", \"LaurentPolynomial.isLocalization\", \"MvPolynomial.quotientEquivQuotientMvPolynomial_rightInverse\", \"Polynomial.quotientSpanXSubCAlgEquiv_symm_apply\"], \"digest\": \"8511f55c1338ceef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are general spectrum/localization tools or Weierstrass curves, not every clause of this binomial fibre statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; base step 4: fibre rings, reducedness, connectedness, line dimensions and smooth loci; step 5: the fibre chain",
+   "via": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-binomial-geometric-fibres",
+  "worker": "stage1",
+  "summary": "Explicit inverse coordinate maps, mixed-monomial restriction kernel, prime-chain and connected-union arguments, intersection and punctured-open identifications, unit Jacobian presentations and an explicit square-zero obstruction at the crossing. Reused all general facts from existing nodes; no new nodes. Statement unchanged; added missing notion dependencies.",
+  "blueprint": "Realizes inherited base step 4 and fibre-local chain of step 5 of lem-sfb-dvr-nodal-chart-blowup-calculus, on its recorded det-thm-sf-ctf-stability-direct-images clause (3) alteration/plurinodal route. blueprint_refs.py ancestor prints None; preserved inherited null from.node, from.place and via chain. No matching blueprint statement found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-6cf988ccb",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-6cf988ccb (reviewer sub-agent of L); spot-checked: Read the item's 9 steps and every cited statement; there are no new nodes. The statement is byte-identical to base and the item is still unsplit live. Added stmt_deps (Laurent ring, irreducible components, closed immersion, fibre product, base change) are notions the statement uses. No SGA. Checked the math: x↦z, y↦az^{-1} inverse maps; the a=0 restriction kernel (xy) and equal-constant image; localization reducedness via (tb)^n=0; the components V(x), V(y) and connectedness; dimension bounds via localization-quotient-by-prime, lem-sc-p1 and height = dim A_p; Jacobians y and z are units; the step-8 square-zero lift obstruction with B=F[u,v]/(u^2,v^2), where lifts u+c uv and v+d uv multiply to uv≠0, valid in every characteristic. Small cases a=1 over F_2, a=0 imperfect F, generic points. No duplicate found in a scan of dag/nodes. Fixes (C1/C4/C5): (1) steps 5 and 9 used the Spec adjunction for arbitrary T ('check on affine opens and glue'); they now cite the existing Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (A/(x) ⊗_A A/(y) = A/(x,y) = F; Spec(A⊗_F E) is the base change). Step 5 also gains the missing complement-cover argument: (x,y) is maximal. (2) Step 7 went from a smooth ring map to a smooth morphism through a parenthetical in def-sbc-smooth-morphisms; it now cites lem-weil-pbc-smooth-ring-map-iff-smooth-affine (unit sk-thm-p1, in route closure). Also a step-6 self-reference wording fix. proof_deps = union of uses; statement and stmt_deps unchanged; no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BinomialGeometricFibres",
+  "declaration": "AlgebraicGeometry.BinomialPlaneCurve.geometric_properties",
+  "declarations": [
+   "AlgebraicGeometry.BinomialPlaneCurve.Ring",
+   "AlgebraicGeometry.BinomialPlaneCurve.coord",
+   "AlgebraicGeometry.BinomialPlaneCurve.curve",
+   "AlgebraicGeometry.BinomialPlaneCurve.toField",
+   "AlgebraicGeometry.BinomialPlaneCurve.axisIdeal",
+   "AlgebraicGeometry.BinomialPlaneCurve.axisMap",
+   "AlgebraicGeometry.BinomialPlaneCurve.puncturedAxis",
+   "AlgebraicGeometry.BinomialPlaneCurve.axisPairs",
+   "AlgebraicGeometry.BinomialPlaneCurve.geometric_properties",
+   "AlgebraicGeometry.BinomialPlaneCurve.nonzero_fibre",
+   "AlgebraicGeometry.BinomialPlaneCurve.zero_fibre",
+   "AlgebraicGeometry.BinomialPlaneCurve.coefficient_extension",
+   "AlgebraicGeometry.BinomialPlaneCurve.field_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BinomialGeometricFibres.lean",
+  "statement": "theorem geometric_properties (F : Type u) [Field F] (a : F) : ConnectedSpace (curve F a) ∧ IsReduced (curve F a) ∧ (curve F a).IsPureDimension 1 ∧ ∀ p : curve F a, ringKrullDim ((curve F a).presheaf.stalk p) ≤ 1",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The five theorems jointly render every clause: geometric_properties, nonzero_fibre, zero_fibre, coefficient_extension, field_baseChange. Auxiliary declarations name the explicit coordinate rings, quotient maps and opens of this calculation; they have real data and introduce no alternate general notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48349b06d",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: connected (incl. nonempty), reduced, pure dim 1 and stalk dim ≤1 at all points for all a; a≠0 Laurent iso pinned on x↦T1, y↦C a·T(-1) and Smooth; a=0: equal-constant equalizer iso pinned on x↦(X,0), y↦(0,X); axis quotients ≅F[other var], closed immersions; irreducibleComponents equal to {V(x),V(y)}; pullback of axes ≅Spec F over F with range {p}, p=(x,y), reduced; D(x),D(y) disjoint, union {p}ᶜ, each ≅Spec F[t,t⁻¹] over F, union smooth; crossing stalk dim 1, chain (x)<(x,y); IsAlgClosed-conditional smooth-nbhd ↔ q≠p; coefficient_extension with independent universes and field_baseChange matching the def-pc-base-change pullback/snd convention. Only `lean` changed; statement verbatim; no line >100; defs have real data; all proofs sorry; docstrings carry source, blueprint id and steps 1-9; both report sections present. Edge cases a=1 over F_2, char 2, imperfect F, generic points checked. Note: the project helper AlgebraicGeometry.strictNodalRing (def-trf-strict-semistable-curve) is the same quotient ring, but the node builds C_a from polynomial ring + Spec only and Ring F a is a transparent abbrev for the literal Mathlib quotient, so this is not counted as an H4 duplicate. No file changed, so no compile run."
+ }
+}

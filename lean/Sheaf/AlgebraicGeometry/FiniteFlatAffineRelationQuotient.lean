@@ -14,33 +14,12 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.RingTheory.FlatLocalExtensionGivenResidueField
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.Localization
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardLocallyFree
-import Sheaf.AlgebraicGeometry.FiniteFreeAlgebraSpectrum
-import Mathlib.RingTheory.Ideal.GoingUp
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover
-import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.CategoryTheory.Sites.Precoverage
-import Sheaf.AlgebraicGeometry.AffineGroupoidBasisDescent
-import Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants
-import Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres
-import Sheaf.RingTheory.SemilocalSubmoduleBasis
+import Sheaf.AlgebraicGeometry.AffineRelationComparisonPreparation
+import Sheaf.AlgebraicGeometry.AffineRelationLocalBasisReduction
+import Sheaf.AlgebraicGeometry.AffineRelationFlatLocalDescent
+import Sheaf.AlgebraicGeometry.FppfKernelPairQuotientDescent
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 
 /-!
 # The affine quotient of a finite locally free equivalence relation
@@ -56,9 +35,11 @@ specifies its sheafification by the universal property, including its canonical 
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 
 namespace AlgebraicGeometry
+
+open scoped TensorProduct
 
 /-- The invariant subring C = {a | s♯(a) = t♯(a)} for an affine relation.
 This is Mathlib's ring-homomorphism equalizer, applied to the affine coordinate maps.
@@ -74,6 +55,105 @@ Source: Stacks Project, Groupoids, Tag 03BM, proposition-finite-flat-equivalence
 noncomputable def affineRelationQuotientMap {A B : CommRingCat.{u}} (s t : Spec B ⟶ Spec A) :
     Spec A ⟶ Spec (CommRingCat.of (affineRelationInvariants s t)) :=
   Spec.map (CommRingCat.ofHom (affineRelationInvariants s t).subtype)
+
+section LocalTensorComparison
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra
+
+/-- Reconcile the local tensor-square comparison with the scalar extension used by descent. -/
+private theorem tensorComparison_of_basis
+    (C A B D : Type u) [CommRing C] [CommRing A] [CommRing B] [CommRing D]
+    [Algebra C A] [Algebra C B] [Algebra C D]
+    (σ τ : A →ₐ[C] B)
+    (σD τD : A ⊗[C] D →ₐ[D] B ⊗[C] D)
+    (hσ : ∀ (a : A) (d : D), σD (a ⊗ₜ d) = σ a ⊗ₜ d)
+    (hτ : ∀ (a : A) (d : D), τD (a ⊗ₜ d) = τ a ⊗ₜ d)
+    [Module.Finite D (A ⊗[C] D)] [Module.Free D (A ⊗[C] D)]
+    (φ : ((A ⊗[C] D) ⊗[D] (A ⊗[C] D)) ≃+* B ⊗[C] D)
+    (hφ : ∀ x y : A ⊗[C] D, φ (x ⊗ₜ y) = σD x * τD y) :
+    Module.Finite D (D ⊗[C] A) ∧ Module.Free D (D ⊗[C] A) ∧
+      Function.Bijective (Algebra.TensorProduct.map
+        (affineRelationTensorComparison σ τ) (AlgHom.id C D)) := by
+  let ε := (Algebra.TensorProduct.commRight C D A).symm.toLinearEquiv
+  refine ⟨Module.Finite.equiv ε, Module.Free.of_equiv ε, ?_⟩
+  let θ : ((A ⊗[C] D) ⊗[D] (A ⊗[C] D)) ≃ₐ[D] (A ⊗[C] A) ⊗[C] D :=
+    (((Algebra.TensorProduct.congr (Algebra.TensorProduct.commRight C D A).symm
+      (Algebra.TensorProduct.commRight C D A).symm).trans
+      (Algebra.TensorProduct.cancelBaseChange C D D (D ⊗[C] A) A)).trans
+      (Algebra.TensorProduct.assoc C C D D A A)).trans
+      (Algebra.TensorProduct.commRight C D (A ⊗[C] A))
+  have hθ : ∀ (a b : A) (d d' : D),
+      θ ((a ⊗ₜ d) ⊗ₜ (b ⊗ₜ d')) = (a ⊗ₜ b) ⊗ₜ (d * d') := by
+    intro a b d d'
+    simp [θ, TensorProduct.smul_tmul', smul_eq_mul, mul_comm]
+  have hcomp : ∀ z, (Algebra.TensorProduct.map
+      (affineRelationTensorComparison σ τ) (AlgHom.id C D)) (θ z) = φ z := by
+    intro z
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | add z z' hz hz' => simp only [_root_.map_add, hz, hz']
+    | tmul x y =>
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x x' hx hx' => simp only [TensorProduct.add_tmul, _root_.map_add, hx, hx']
+      | tmul a d =>
+        induction y using TensorProduct.induction_on with
+        | zero => simp
+        | add y y' hy hy' => simp only [TensorProduct.tmul_add, _root_.map_add, hy, hy']
+        | tmul b d' =>
+          simp [hθ, hφ, hσ, hτ, affineRelationTensorComparison,
+            Algebra.TensorProduct.tmul_mul_tmul]
+  apply (Function.Bijective.of_comp_iff _ θ.bijective).mp
+  have hfun : (Algebra.TensorProduct.map
+      (affineRelationTensorComparison σ τ) (AlgHom.id C D)) ∘ θ = φ :=
+    funext hcomp
+  rw [hfun]
+  exact φ.bijective
+
+end LocalTensorComparison
+
+/-- Reflect a sheafification universal property through the fully faithful universe lift. -/
+private theorem smallSheafification
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    {P Q T : Cᵒᵖ ⥤ Type u} (f g : P ⟶ Q) (q : Q ⟶ T)
+    (η : coequalizer (whiskerRight f uliftFunctor.{u + 1})
+        (whiskerRight g uliftFunctor.{u + 1}) ⟶ T ⋙ uliftFunctor.{u + 1})
+    (hη : coequalizer.π _ _ ≫ η = whiskerRight q uliftFunctor.{u + 1})
+    (hu : ∀ G : Sheaf J (Type (u + 1)),
+      Function.Bijective (fun k : T ⋙ uliftFunctor.{u + 1} ⟶ G.obj ↦ η ≫ k)) :
+    ∃ η₀ : coequalizer f g ⟶ T, coequalizer.π f g ≫ η₀ = q ∧
+      ∀ G : Sheaf J (Type u), Function.Bijective (fun k : T ⟶ G.obj ↦ η₀ ≫ k) := by
+  let W := (whiskeringRight Cᵒᵖ (Type u) (Type (u + 1))).obj uliftFunctor.{u + 1}
+  let κ := PreservesCoequalizer.iso W f g
+  let η₀ : coequalizer f g ⟶ T := W.preimage (κ.inv ≫ η)
+  have hmap : W.map η₀ = κ.inv ≫ η := W.map_preimage _
+  refine ⟨η₀, ?_, ?_⟩
+  · apply W.map_injective
+    rw [W.map_comp, hmap, ← Category.assoc]
+    change W.map (coequalizer.π f g) ≫ κ.inv ≫ η = W.map q
+    rw [show κ = PreservesCoequalizer.iso W f g from rfl,
+      map_π_preserves_coequalizer_inv_assoc]
+    exact hη
+  · intro G
+    have hG : Presheaf.IsSheaf J (G.obj ⋙ uliftFunctor.{u + 1}) := by
+      apply (isSheaf_iff_isSheaf_of_type _ _).mpr
+      exact Presieve.isSheaf_comp_uliftFunctor J
+        ((isSheaf_iff_isSheaf_of_type _ _).mp G.property)
+    let G' : Sheaf J (Type (u + 1)) := ⟨G.obj ⋙ uliftFunctor.{u + 1}, hG⟩
+    constructor
+    · intro k l h
+      apply W.map_injective
+      apply (hu G').1
+      apply (cancel_epi κ.inv).mp
+      have hm := congrArg W.map h
+      simpa only [W.map_comp, hmap, Category.assoc] using hm
+    · intro α
+      obtain ⟨k, hk⟩ := (hu G').2 (κ.hom ≫ W.map α)
+      change η ≫ k = κ.hom ≫ W.map α at hk
+      refine ⟨W.preimage k, ?_⟩
+      apply W.map_injective
+      rw [W.map_comp, hmap, W.map_preimage, Category.assoc, hk]
+      simp
 
 /-- A finite locally free affine equivalence relation has its affine invariant-spectrum
 quotient. The quotient map is finite locally free and surjective, its kernel pair is the
@@ -249,6 +329,121 @@ theorem finiteFlat_affineRelation_quotient
             yoneda.map (Over.homMk (affineRelationQuotientMap s.left t.left) hq) ∧
           ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u),
             Function.Bijective (fun k : yoneda.obj (Over.mk m) ⟶ G.obj ↦ η ≫ k) := by
-  sorry
+  classical
+  let σ := (Spec.preimage s.left).hom
+  let τ := (Spec.preimage t.left).hom
+  have hs : Spec.map (CommRingCat.ofHom σ) = s.left := Spec.map_preimage _
+  have ht : Spec.map (CommRingCat.ofHom τ) = t.left := Spec.map_preimage _
+  have hsfin : (Spec.map (CommRingCat.ofHom σ)).IsFiniteLocallyFree := hs ▸ inferInstance
+  have htfin : (Spec.map (CommRingCat.ofHom τ)).IsFiniteLocallyFree := ht ▸ inferInstance
+  have hpoints : ∀ H : Over S,
+      Function.Injective (fun r : H ⟶ Over.mk b ↦
+        (r.left ≫ Spec.map (CommRingCat.ofHom σ),
+          r.left ≫ Spec.map (CommRingCat.ofHom τ))) ∧
+      Equivalence (fun x y : H ⟶ Over.mk a ↦ ∃ r : H ⟶ Over.mk b,
+        r.left ≫ Spec.map (CommRingCat.ofHom σ) = x.left ∧
+          r.left ≫ Spec.map (CommRingCat.ofHom τ) = y.left) := by
+    intro H
+    constructor
+    · intro r r' h
+      apply (cancel_mono (prod.lift s t)).mp
+      apply prod.hom_ext
+      · simpa using Over.OverMorphism.ext (by simpa [hs] using congrArg Prod.fst h)
+      · simpa using Over.OverMorphism.ext (by simpa [ht] using congrArg Prod.snd h)
+    · simpa only [hs, ht, ← Over.comp_left, Over.OverMorphism.ext_iff] using hrel H
+  obtain ⟨e, i, c, hG, he, hi, hc, hunique, hq, hcompare, hfinite, hmono, hclosed,
+    hsurj, hformula, hintegral, hqsurj, horbits, n, f, hfree, hbase⟩ :=
+    affineRelation_comparison_preparation a b σ τ (hs ▸ s.w) (ht ▸ t.w) hpoints
+  have hgeometry :
+      (affineRelationQuotientMap s.left t.left).IsFiniteLocallyFree ∧
+      Surjective (affineRelationQuotientMap s.left t.left) ∧
+      (∃ e : Spec B ≅ pullback (affineRelationQuotientMap s.left t.left)
+          (affineRelationQuotientMap s.left t.left),
+        e.hom ≫ pullback.fst _ _ = s.left ∧ e.hom ≫ pullback.snd _ _ = t.left) := by
+    let C := σ.eqLocus τ
+    let : Algebra A B := σ.toAlgebra
+    let : Algebra C B := (σ.comp C.subtype).toAlgebra
+    let : IsScalarTower C A B := IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+    let τ' : A →ₐ[C] B := AffineRelationComparison.target σ τ
+    have hφ : Function.Surjective
+        (affineGroupoidInvariantTensorComparison s.left t.left) := hsurj
+    have hlocals : ∀ p : PrimeSpectrum C,
+        ∃ (D : Type u) (_ : CommRing D) (_ : IsLocalRing D)
+          (g : Localization.AtPrime p.asIdeal →+* D),
+          g.FaithfullyFlat ∧ IsAffineGroupoidLocalBasisData s.left t.left p D g := by
+      intro p
+      have : Nontrivial C := p.nontrivial
+      have : Nontrivial A := (show Function.Injective C.subtype from
+        Subtype.val_injective).nontrivial
+      obtain ⟨e', i', c', hG'⟩ : ∃ (e' : Spec A ⟶ Spec B) (i' : Spec B ⟶ Spec B)
+          (c' : pullback s.left t.left ⟶ Spec B),
+          IsGroupoidScheme s.left t.left e' i' c' := by
+        have hex : ∃ (e' : Spec A ⟶ Spec B) (i' : Spec B ⟶ Spec B)
+            (c' : pullback (Spec.map (CommRingCat.ofHom σ))
+              (Spec.map (CommRingCat.ofHom τ)) ⟶ Spec B),
+            IsGroupoidScheme (Spec.map (CommRingCat.ofHom σ))
+              (Spec.map (CommRingCat.ofHom τ)) e' i' c' := ⟨e, i, c, hG⟩
+        rw [hs, ht] at hex
+        exact hex
+      have hlocal := affineGroupoid_local_basis_reduction A B s.left t.left e' i' c' hG' hφ
+      obtain ⟨D, hD, hlocalD, g, hg, hflat, hinfinite⟩ := (hlocal p).1
+      obtain ⟨hfaithful, hdata⟩ := (hlocal p).2 D g hg hflat hinfinite
+      exact ⟨D, hD, hlocalD, g, hfaithful, hdata⟩
+    choose D hD hlocalD g hfaithful hdata using hlocals
+    let : ∀ p, CommRing (D p) := hD
+    let : ∀ p, IsLocalRing (D p) := hlocalD
+    let : ∀ p, Algebra (Localization.AtPrime p.asIdeal) (D p) :=
+      fun p ↦ (g p).toAlgebra
+    let : ∀ p, Algebra C (D p) := fun p ↦
+      ((g p).comp (algebraMap C (Localization.AtPrime p.asIdeal))).toAlgebra
+    let : ∀ p, IsScalarTower C (Localization.AtPrime p.asIdeal) (D p) :=
+      fun p ↦ IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+    have hff : ∀ p, Module.FaithfullyFlat (Localization.AtPrime p.asIdeal) (D p) :=
+      hfaithful
+    have hlocal : ∀ p, Module.Finite (D p) ((D p) ⊗[C] A) ∧
+        Module.Free (D p) ((D p) ⊗[C] A) ∧
+        Function.Bijective (Algebra.TensorProduct.map
+          (affineRelationTensorComparison (IsScalarTower.toAlgHom C A B) τ')
+          (AlgHom.id C (D p))) := by
+      intro p
+      obtain ⟨σD, τD, hσD, hτD, _, _, _, _, _, eD, iD, cD, _, _, _, r, x,
+        _, _, _, _, hfiniteD, hfreeD, φD, hφD⟩ := hdata p
+      exact tensorComparison_of_basis C A B (D p)
+        (IsScalarTower.toAlgHom C A B) τ' σD τD hσD hτD φD hφD
+    have hspec : Function.Surjective (PrimeSpectrum.comap (algebraMap C A)) :=
+      hqsurj.surj
+    have hcover : ∀ j : Fin (n true),
+        Module.Finite (Localization.Away (f true j))
+          (LocalizedModule.Away (f true j) B) ∧
+        Module.Free (Localization.Away (f true j))
+          (LocalizedModule.Away (f true j) B) := by
+      exact (hfree true).2
+    obtain ⟨_, _, _, _, _, _, hfiniteq, hsurjectiveq, _, E, hE₁, hE₂⟩ :=
+      affineRelation_flat_local_descent C A B τ' Subtype.val_injective hspec
+        (f true) (hfree true).1 hcover D hff hlocal
+    refine ⟨hfiniteq, hsurjectiveq, E, ?_, ?_⟩
+    · change E.hom ≫ _ = Spec.map (CommRingCat.ofHom σ) at hE₁
+      exact hE₁.trans hs
+    · change E.hom ≫ _ = Spec.map (CommRingCat.ofHom τ) at hE₂
+      exact hE₂.trans ht
+  obtain ⟨hqfinite, hqsurjective, E, hE₁, hE₂⟩ := hgeometry
+  have hqs : s.left ≫ affineRelationQuotientMap s.left t.left =
+      t.left ≫ affineRelationQuotientMap s.left t.left := by
+    change s.left ≫ Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype) =
+      t.left ≫ Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)
+    simpa only [hs, ht] using hq
+  have hE : pullback.lift s.left t.left hqs = E.hom := by
+    apply pullback.hom_ext <;> simp [hE₁, hE₂]
+  have hiso : IsIso (pullback.lift s.left t.left hqs) := hE ▸ inferInstance
+  obtain ⟨_, _, _, _, m, hqm, hm, _, hsheaf, η, hη, _, _, hu⟩ :=
+    fppf_kernelPair_quotient_descent.{u, u, u} a b s t
+      (affineRelationQuotientMap s.left t.left) hqs
+  refine ⟨hqfinite, hqsurjective, ⟨E, hE₁, hE₂⟩, m, hqm, hm, ?_, ?_⟩
+  · apply (isSheaf_iff_isSheaf_of_type _ _).mpr
+    exact (Presieve.isSheaf_comp_uliftFunctor_iff _).mp
+      ((isSheaf_iff_isSheaf_of_type _ _).mp hsheaf)
+  · apply smallSheafification (Scheme.fppfTopology.over S) (yoneda.map s) (yoneda.map t)
+      (yoneda.map (Over.homMk (affineRelationQuotientMap s.left t.left) hqm :
+        Over.mk a ⟶ Over.mk m)) η hη hu
 
 end AlgebraicGeometry

@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-ringed-counit-from-cohomology",
+ "kind": "statement",
+ "title": "Bounded-below derived counit detected on cohomology sheaves",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O)\\to(\\operatorname{Sh}(\\mathcal D),R)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with sheaves of commutative rings on sites small in the module universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Use module sheaves [def-weil-sheaf-of-modules-category] and their ordinary unbounded derived categories with cohomology $H^q$ [def-weil-abstract-derived-category]. Suppose module pullback $f^*$ is exact. Write $f^*=Lf^*$ for its termwise derived functor and $Rf_*$ for total right derived direct image, computed by K-injective resolutions, with their canonical derived adjunction unit $\\eta:1\\to Rf_*f^*$ and counit $\\varepsilon:f^*Rf_*\\to1$. Let $K\\in D(\\mathcal O)$ satisfy $H^q(K)=0$ for all $q<a$ for some integer $a$. If $\\varepsilon_{H^q(K)[0]}:f^*Rf_*(H^q(K)[0])\\to H^q(K)[0]$ is an isomorphism for every integer $q$, then $\\varepsilon_K:f^*Rf_*K\\to K$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7S, lemma-bounded-in-image-upstairs, statement and proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ and $\\mathcal B=\\operatorname{Mod}(R)$. The sites are small in the module universe, so these are Grothendieck abelian categories admitting K-injective resolutions. Exactness of module pullback gives a triangulated termwise functor $F_D=f^*:D(\\mathcal B)\\to D(\\mathcal A)$, with the canonical shift comparisons. Its cohomology comparison is $H^q(f^*M)\\cong f^*H^q(M)$: represent $M$ by a complex and apply the exact-functor cohomology lemma. Hence $f^*$ preserves every standard lower cohomological bound, including negative bounds.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7S (lemma-bounded-in-image-upstairs), exact pullback in its cohomology comparison; homology.tex Tag 010N (lemma-exact-functor)."
+   }
+  },
+  {
+   "text": "The K-injective total right derived functor $Rf_*$ is triangulated by the right-derived-functor lemma. Apply clause (1) of the exact-derived-adjunction bounds lemma with $F=f^*$, $F_D=f^*$ and $R_D=Rf_*$. The required termwise factorization was established in step 1, and $f^*\\dashv Rf_*$ is the canonical adjunction in the hypothesis. Thus $Rf_*$ preserves every standard lower cohomological bound. Consequently $\\Phi=f^*Rf_*$ and $\\Psi=1$ restrict to triangulated endofunctors of $D^+(\\mathcal A)$, and both preserve every lower bound.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pur-exact-derived-adjunction-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7S, comparison with the upper truncation; derived.tex Tag 05TC (lemma-negative-vanishing) and Tag 0A8D (lemma-adjoint-is-exact)."
+   }
+  },
+  {
+   "text": "The module pullback and direct image have their underived adjunction. Its left adjoint is exact by hypothesis, its right adjoint is additive, and its target module category has K-injective resolutions by step 1. The canonical-right-derived-adjunction shift lemma therefore applies to this very adjunction: its derived counit $\\varepsilon:\\Phi\\to\\Psi$ commutes with the canonical shifts, retaining the K-injective shift on $Rf_*$. Restricting to $D^+(\\mathcal A)$ retains this compatibility and the given counit components.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tag 0A8D (lemma-adjoint-is-exact), canonical counit shift comparisons used in Tag 0D7S."
+   }
+  },
+  {
+   "text": "Apply the bounded-below heart test with both abelian categories equal to $\\mathcal A$, with $\\Phi,\\Psi$ from step 2, transformation $\\varepsilon$ from step 3, and object $E=K$. Boundedness below is exactly $H^q(K)=0$ for $q<a$, and the heart-test hypothesis on $\\varepsilon_{H^q(K)[0]}$ is precisely the assumption of the item. All its functor and shift hypotheses have been verified. It gives invertibility of $\\varepsilon_K$. Explicitly, for every integer $m$ it gives an invertible $\\varepsilon_{\\tau_{\\le m}K}$ and invertible degree-$m$ images of $c_m:\\tau_{\\le m}K\\to K$ under both functors, with $H^m(\\varepsilon_K)=H^m(c_m)\\circ H^m(\\varepsilon_{\\tau_{\\le m}K})\\circ H^m(\\Phi(c_m))^{-1}$. This is the degreewise truncation comparison of Tag 0D7S; the heart test packages its finite Postnikov induction. Its conclusion includes $m<a$ and requires no upper bound or infinite-limit preservation.",
+   "uses": [
+    "lem-weil-pbc-heart-test-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7S (lemma-bounded-in-image-upstairs), full proof: finite truncation devissage followed by the degreewise comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-heart-test-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7S (lemma-bounded-in-image-upstairs), proof; the existing general heart-test node packages the same finite Postnikov and upper-truncation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of ringed topoi the derived counit on a bounded below complex is invertible if it is invertible on every cohomology sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} (c : ComplexShape ι)\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"The composite of the induced functor on homological complexes from a zero-preserving functor $ F $ and the localization functor $ Q $ at quasi-isomorphisms inverts quasi-isomorphisms, meaning that eve\"}\n  {\"name\": \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} H]\\n  {L : CategoryTheory.Functor C D} {W : CategoryTheory.MorphismProperty C} [inst_3 : L.IsLocalization W]\\n  {F : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $RF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a morphism property $W$\"}\n  {\"name\": \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {K L : CochainComplex C ℤ} (φ : K ⟶ L),\\n  CategoryTheory.IsIso (DerivedCategory.Q.map φ) ↔ QuasiIso φ\", \"doc\": \"A morphism $\\\\phi$ between cochain complexes $K$ and $L$ is a quasi-isomorphism if and only if its image under the localization functor $Q$ is an isomorphism in the derived category. This equivalence c\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f],\\n  CategoryTheory.IsIso (DerivedCategory.Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the composition of the quotient functor from the category of chain com\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the natural transformation from $ F $ to its 0th right-derived functor $ R^0F $ is an iso\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical counit through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact pullback of right derived direct image counit is an isomorphism on bounded below complexes whenever it is so on all cohomology objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsIsoAppRanCounit_1\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(F : C ⥤ H) [HasPointwiseRightKanExtension L F] [∀ (F : C ⥤ H), HasRightKanExtension L F] : IsIso (L.ranCounit.app F)\", \"doc\": \"Under the assumption that the right Kan extension of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ along $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ exists pointwise and that all right Kan extensions along $ \"}\n  {\"name\": \"CategoryTheory.Functor.instIsIsoAppRanCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(F : C ⥤ H) (X : C) [HasPointwiseRightKanExtension L F] [∀ (F : C ⥤ H), HasRightKanExtension L F] :\\n  IsIso ((L.ranCounit.app F).app X)\", \"doc\": \"For any functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ and object $ X \\\\in \\\\mathcal{C} $, if the right Kan extension of $ F $ along $ L $ exists pointwise and for all functors, then the component of the c\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": IsIso F.toRightDerivedZero\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the natural transformation from $ F $ to its 0th right-derived functor $ R^0F $ is an iso\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": F.rightDerived 0 ≅ F\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is given \"}\n  {\"name\": \"CategoryTheory.IsPullback.exact_shortComplex'\", \"module\": \"Mathlib.CategoryTheory.Abelian.CommSq\", \"type\": \"(h : IsPullback t l r b) : h.shortComplex'.Exact\", \"doc\": \"In an abelian category, if a square is a pullback, then the associated short complex constructed from the commutative square using binary biproducts is exact. Specifically, the image of the first diff\"}\n  {\"name\": \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso\", \"module\": \"Mathlib.Algebra.Homology.DifferentialObject\", \"type\": \": homologicalComplexToDGO b V ⋙ dgoToHomologicalComplex b V ≅ 𝟭 (HomologicalComplex V (ComplexShape.up' b))\", \"doc\": \"A natural isomorphism between the composition of the functors converting homological complexes to differential objects and back to homological complexes, and the identity functor on homological comple\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[F.Final] : IsIso (pullbackObjUnitToUnit φ)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists an isomorphism in $\\\\mathcal{D}$ between \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical counit through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\", \"DerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical counit through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit|descent).*(truncation|bounded)|bounded.*counit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical counit through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit|descent).*(truncation|bounded)|bounded.*counit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical counit through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit|isIso).*(cohomology|homology|bounded)|bounded.*counit",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived counit for an exact pullback is an isomorphism on a bounded below complex if it is an isomorphism on each cohomology sheaf",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedε, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f, CategoryTheory.IsPullback.exact_shortComplex', HomologicalComplex.dgoEquivHomologicalComplexCounitIso, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f, CategoryTheory.ShortComplex.FunctorEquivalence.counitIso, HomologicalComplex.opEquivalence_counitIso",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"DerivedCategory\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shift-compatible natural transformation between lower-bound-preserving triangulated functors on bounded below derived categories is invertible on a complex if invertible on its cohomology objects",
+   "results": "8 hits; CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  },
+  {
+   "tool": "grep",
+   "query": "counit|[Hh]eart.*[Ii]so|[Ii]so.*[Hh]eart",
+   "results": "1 hits; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ringed topos morphism f, if f star R f lower star Hq K to Hq K is an isomorphism for all q, the adjunction counit f star R f lower star K to K is an isomorphism for bounded below K",
+   "results": "8 hits; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.isIso_sheafificationAdjunction_counit, CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations construct derived counits, exact functor/shift structures or cohomology detection, or concern other adjunctions; none supplies bounded-below propagation from the individual cohomology objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-bounded-below-descent-criterion",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: the bounded-below equivalence before passing to truncations; supporting input: Stacks 0D7S, lemma-bounded-in-image-upstairs, used in Tag 0D7U to pass from cohomology sheaves to bounded-below complexes",
+   "via": [
+    "lem-sfb-ringed-bounded-below-descent-criterion",
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-counit-from-cohomology",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0D7S against the unchanged statement. Applied existing generic exact-functor, derived-bound, canonical-shift and bounded-below heart-test nodes, checking all hypotheses and actual counit normalization. No new nodes or statement correction; no unbounded limit argument.",
+  "blueprint": "Inherited supporting input to det-thm-sf-ctf-stability-direct-images proof (3), via the existing bounded-below descent criterion: Stacks 0D7S finite Postnikov devissage and upper-truncation comparison. Read current latest blueprint; this is a generic supporting tool below its geometric route. The inherited null from.node is retained as maintainer-owned metadata.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small-site module categories are Grothendieck and have K-injective resolutions; this is a general construction input, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Supplies triangulatedness of the K-injective total right derived functor for any additive functor; no unit-specific geometric input gives this abstract fact."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Only clause (1) is used: the right adjoint of termwise exact derived pullback preserves every standard lower bound."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies the ordinary module adjunction on arbitrary small ringed sites, needed to apply the canonical shift-compatibility theorem."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Supplies compatibility of the actual canonical derived counit with the fixed shifts, for any exact additive left adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-heart-test-bounded-below",
+    "why": "The generic lower-bound-preserving natural-transformation theorem packages exactly the finite Postnikov and degreewise truncation proof of Stacks 0D7S."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-heart-test-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-303fcd866",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-303fcd866 (reviewer sub-agent of L); spot-checked: Read the item and all 8 cited statements in full (no new nodes) against Stacks sites-cohomology Tag 0D7S at lines 6343-6365. The item matches 0D7S exactly: flat is rendered as exact f^*, bounded below as H^q=0 for q<a, and hypothesis (3) as the counit at H^q(K)[0]; the statement is unchanged and not weakened. Step 1: K-injective resolutions exist on both small module categories, exact f^* gives a triangulated termwise derived functor, and the cohomology comparison makes f^* preserve every lower bound. Step 2: Rf_* is triangulated, and only clause (1) of exact-derived-adjunction-bounds is used; I checked it directly (Hom(X,Rf_*M)=Hom(f^*X,M)=0 for X in D^{<=n-1}). So Phi=f^*Rf_* and Psi=1 are endofunctors of D^+ that preserve lower bounds. Step 3: the module adjunction plus canonicalRightDerivedAdjunctionShift (CommShift of the actual derived adjunction) gives the counit's shift compatibility required by the heart test. Step 4: the hypothesis of lem-weil-pbc-heart-test-bounded-below is verbatim the item's hypothesis, and it applies with A=B=Mod(O) and E=K. Edge cases checked: K=0, shifted sheaves of either sign, f=id, and bounded below with no upper bound. No duplicate in the DAG (lem-pe-classical-derived-counit is a different, pro-etale statement), no cycle, no SGA, and the generic tool_uses are accepted. The inherited null blueprint.from.node is a base metadata issue (maintainer note), not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedCounitFromCohomology",
+  "declaration": "CategoryTheory.RingedToposMorphism.counit_isIso_of_cohomology",
+  "declarations": [
+   "CategoryTheory.RingedToposMorphism.exactModuleDerivedAdjunction",
+   "CategoryTheory.RingedToposMorphism.counit_isIso_of_cohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedCounitFromCohomology.lean",
+  "statement": "theorem counit_isIso_of_cohomology {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {T : GrothendieckTopology D} (A : Sheaf J CommRingCat.{u}) (B : Sheaf T CommRingCat.{u}) [HasDerivedCategory.{wA} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))] [HasDerivedCategory.{wB} (ringedSiteModules.{u} ((sheafCompose T (forget₂ CommRingCat RingCat)).obj B))] (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose T (forget₂ CommRingCat RingCat)).obj B)) (L : ringedSiteModules.{u} ((sheafCompose T (forget₂ CommRingCat RingCat)).obj B) ⥤ ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ f.modules) (K : DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))) (hK : ∃ a : ℤ, ∀ q : ℤ, q < a → IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) (hH : ∀ q : ℤ, IsIso ((exactModuleDerivedAdjunction A B f L adj).counit.app ((DerivedCategory.singleFunctor _ 0).obj ((DerivedCategory.homologyFunctor _ q).obj K)))) : IsIso ((exactModuleDerivedAdjunction A B f L adj).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcb81bcf5",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0D7S clause by clause: small sites at u, CommRingCat sheaves, recorded RingedToposMorphism, exact pullback as left adjoint L ⊣ f.modules (unique up to iso; same pattern as landed RingedConstantTowerPushforwardNormalization), ∃a lower bound, counit tested on singleFunctor 0 (H^q K) for all q, conclusion IsIso counit.app K. Helper exactModuleDerivedAdjunction is literally upstream canonical adj.mapDerivedCategoryRightDerivedAdjunction with K-injective resolutions from published SheafOfModules.isGrothendieckAbelian: real data, no choice. lean.statement verbatim in file; node differs from live only by the lean field; other 5 snapshot nodes identical; no name collision; docstrings with source and blueprint plus proof steps; theorem proof only sorry; all imports exist; independent wA/wB; heart_test_bounded_below hypotheses match the proof steps. No findings; nothing compiled since no file was changed."
+ }
+}

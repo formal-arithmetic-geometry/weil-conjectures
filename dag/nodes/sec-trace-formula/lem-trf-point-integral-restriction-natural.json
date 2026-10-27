@@ -1,0 +1,112 @@
+{
+ "id": "lem-trf-point-integral-restriction-natural",
+ "kind": "statement",
+ "title": "The section-normalized natural restriction on completed integral point modules",
+ "statement": "Let D be the finite-field datum of [def-trf-scheme-frobenius], with algebraic closure k, and let l be prime and E a finite-dimensional field extension of Q_l as in [def-trf-coefficient-conventions]. Let F be pointIntegralSections with its canonical integral scalar action [def-weil-point-section-scalar-functors], on the completed-coefficient module category [def-weil-integral-reduction-tower] over Spec k. For every natural number r, let P_r be the recorded completed-module inverse-image functor for the r-th power of point Frobenius [def-weil-inverse-image-pullback-comparison], and rho_r the actual point-site restriction arrow [lem-trf-point-transport-composition]. There is a unique natural transformation sigma:F→P_r⋙F whose component on every module M sends each section x over the final object to M(rho_r)(x). The components are linear for the actual completed coefficient action. No constructibility or completeness hypothesis on M, or condition l≠char(k), is imposed.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), p. 150 and (1.1.7), pp. 150–151; the explicit pro-etale/completed-coefficient scalar-normalization argument of lem-weil-point-automorphism-restriction-natural, extracted for prerequisite steps 1–3 of lem-trf-integral-point-transport-tower-powers. This formulation is an agent extraction, not a theorem asserted verbatim by Deligne."
+ },
+ "stmt_deps": [
+  "def-trf-scheme-frobenius",
+  "def-trf-coefficient-conventions",
+  "def-weil-point-section-scalar-functors",
+  "def-weil-integral-reduction-tower",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-point-transport-composition"
+ ],
+ "proof": [
+  {
+   "text": "The universe-normalized constant-to-completion coefficient map equals the original map: after every limit projection both are the same quotient map. The canonical site restriction arrow equals pointPowerRestriction by faithfulness of the forgetful functor. Apply the existing scalar-normalization square, then cancel the inverse completed coefficient isomorphism. This proves that section restriction is linear for the required transported action. Additivity is inherited from the module restriction map.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use these linear maps as the components of sigma. Naturality is precisely PresheafOfModules.naturality_apply for the actual site restriction arrow. The construction gives the displayed formula on every section. For any second transformation with this formula, natural-transformation extensionality and linear-map extensionality identify every component. At r=0 the same argument applies to the identity power, and for the zero module it is the unique zero map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-automorphism-restriction-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Factorization of the already proved scalar-restriction construction and its ordinary naturality from the item into a separate compiled module. Every helper and the public theorem is proved; no hole is moved or added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of section restriction for sheaves of modules, with the transported scalar action under an automorphism of the point pro-etale site",
+   "results": "8 hits, including Sheaf.ΓRes_naturality, Sheaf.natTransΓRes, Sheaf.ΓObjEquivSections_naturality and ModuleCat.Tilde.res_apply. They give general section naturality, but not the completed coefficient action or inverse-image normalization.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.naturality_apply",
+   "results": "1 hit: PresheafOfModules.naturality_apply, Mathlib.Algebra.Category.ModuleCat.Presheaf. Used directly for naturality.",
+   "date": "2026-10-27",
+   "verdict": "ingredient used"
+  },
+  {
+   "tool": "grep",
+   "query": "pointIntegralSections.*inverseImageIntegralModules",
+   "results": "0 Mathlib hits; the specialized coefficient construction is project-specific.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerPowers",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-integral-point-transport-tower-powers",
+   "place": "Ordinary completed-linear point restriction in prerequisite steps 1–3; then termwise passage to towers and complexes.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointIntegralRestrictionNatural",
+  "file": "lean/Sheaf/Paper/PointIntegralRestrictionNatural.lean",
+  "declaration": "WeilConjectures.PointIntegralRestrictionNatural.existsUnique",
+  "statement": "theorem existsUnique (r : ℕ) :\n    ∃! sigma : pointIntegralSections l E D.k ⟶\n        inverseImageIntegralModules l E ((pointFrobeniusAut D) ^ r).hom ⋙\n          pointIntegralSections l E D.k,\n      ∀ (M : integralTowerModules l E (Spec (.of D.k)))\n        (x : M.val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),\n        sigma.app M x = M.val.map (pointPowerRestriction D r).op x",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "independent cc review: moved comparison block vs clone item file (verbatim apart from the two proofs and the order), 4 delivered modules + 3 direct importers compiled in sandbox (all OK), axioms of the proved declarations, item/new node JSON vs Lean"
+ }
+}

@@ -23,7 +23,7 @@
    }
   },
   {
-   "text": "Apply [lem-trf-rational-cone-dual-integral-forms] to the lattice $G$ and cone $C$. Obtain $r$ and integral homomorphisms $\\varphi_i:G\\to\\mathbf Z$ whose rational extensions span the dual of $V$ and satisfy $C=\\{v: \\varphi_i(v)\\ge0\\ \\text{for all }i\\}$.",
+   "text": "Apply [lem-trf-rational-cone-dual-integral-forms] to the lattice $G$ and cone $C$. Obtain $r$ and integral homomorphisms $\\varphi_i:G\\to\\mathbf Z$ whose rational extensions span the dual of $V$ and satisfy $C=\\{v: \\varphi_i(v)\\ge0\\ \\text{for all }i\\}$. Identify the finite cone hull with the explicit finite nonnegative rational sums by Submodule.mem_span_range_iff_exists_fun, converting between the nonnegative subtype and NNRat.",
    "uses": [
     "lem-trf-rational-cone-dual-integral-forms",
     "lem-trf-sharp-cone-lattice-intersection"
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "Define $\\lambda:G\\to\\mathbf Z^r$ by $\\lambda(g)=(\\varphi_1(g),\\ldots,\\varphi_r(g))$. It is a group homomorphism. If $\\lambda(g)=0$, then $g\\otimes1$ is annihilated by every member of a spanning family of $\\operatorname{Hom}_{\\mathbf Q}(V,\\mathbf Q)$, so $g\\otimes1=0$; the torsion-freeness of the free abelian group $G$ from Step 1 gives $g=0$, hence $\\lambda$ is injective. For $g\\in G$, the coordinates of $\\lambda(g)$ are all nonnegative exactly when $g\\in C$, and Step 1 identifies this with $g\\in P$. Therefore $\\lambda(P)=\\lambda(G)\\cap\\mathbf N^r$. Restriction to $P$ is consequently an additive-monoid identification. If $G=0$, the dual space is zero and the empty family gives $r=0$; this also covers $P=\\{0\\}$.",
+   "text": "Define $\\lambda:G\\to\\mathbf Z^r$ by $\\lambda(g)_i=\\varphi_i(g)$. For each $g$, compatibility of the rational forms with the integral forms gives $\\lambda(g)\\ge0$ if and only if $1\\otimes g\\in C$. If $\\lambda(g)=0$, then both $1\\otimes g$ and its negative belong to $C$. The no-line property from Step 1 gives $1\\otimes g=0$, and the injective rationalization from Step 1 gives $g=0$. Hence the group homomorphism $\\lambda$ is injective. The lattice-intersection equivalence from Step 1 now identifies the inverse image of the nonnegative orthant with the canonical monoid image. Taking images gives $\\lambda(P)=\\lambda(G)\\cap\\mathbf N^r$. All finite sums and universal conditions allow the empty indexing type, so the zero-rank case needs no exception.",
    "uses": [
     "lem-trf-rational-cone-dual-integral-forms",
     "lem-trf-sharp-cone-lattice-intersection"
@@ -54,7 +54,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VIII 3.1.17 and Remark 3.1.29 motivate the cone and dual-cone route; the explicit lattice-intersection embedding is supplied here, with Kato 1994 WANTED for the toric polyhedral input."
+  "place": "Expose VIII 3.1.17 and Remark 3.1.29 motivate the cone and dual-cone route; the explicit lattice-intersection embedding is supplied here, with Kato 1994 WANTED for the toric polyhedral input. J5 formalization: injectivity follows directly from the common zero locus and the no-line property, without a separate dual-separation argument."
  },
  "mathlib_searches": [
   {
@@ -156,5 +156,26 @@
   "result": "pass",
   "note": "Reviewed node, dependency records, source module, docstrings, edge cases, route-pivot compliance, and reports. Existing cone and dual-form proof dependencies were verified in the NC clone. No substantive defects found; scompile was invoked but server saturation prevented completion without reported Lean errors."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261023T123648-L-1230286",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

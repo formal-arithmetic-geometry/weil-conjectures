@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-subdirect-product-reductivity",
+ "kind": "statement",
+ "title": "Reductivity of a smooth connected subdirect product",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Reductive means smooth and connected with no nontrivial smooth connected normal unipotent subgroup; unipotent means that geometric points are unipotent matrices in a faithful representation. Split maximal tori, character lattices, roots, coroots, positive systems and simple-root bases are as in [lem-sfb-reductive-borel-pair-structure]. Let $G_1,G_0$ be reductive. Let $H\\hookrightarrow G_1\\times_F G_0$ be a smooth connected closed subgroup such that both coordinate projections $H\\to G_i$ are surjective on underlying spaces. Then $H$ is reductive. No finiteness, separability or centrality of either projection kernel is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assertion 23.20 and its proof, printed p.491: images of the unipotent radical under the two surjective projections are smooth connected unipotent normal subgroups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_i:H\\to G_i$ for the two projection homomorphisms, $i\\in\\{1,0\\}$. Each $G_i$ is smooth by the definition of reductive in the statement. Apply [sbc-lem-smooth-geometrically-reduced] to $G_i\\to\\operatorname{Spec}F$: its unique fibre is $G_i$, which is therefore reduced. By [def-pc-reduced-scheme], $A_i=F[G_i]$ has no nonzero nilpotents.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assertion 23.20, printed p.491; smooth targets are reduced by Stacks Tag 056T (varieties-lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "For either $i$, factor $p_i=j_i u_i$ by [lem-sfb-affine-homomorphism-flat-image], with $u_i:H\\to D_i$ faithfully flat and $j_i:D_i\\hookrightarrow G_i$ a closed immersion. By [def-weil-closed-immersion], write $D_i=\\operatorname{Spec}(A_i/J_i)$ over $G_i=\\operatorname{Spec}A_i$. Surjectivity of $p_i$ on spaces implies surjectivity of $j_i$, so every prime of $A_i$ contains $J_i$. The intersection formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] gives $J_i\\subseteq\\sqrt{(0)}=0$, by step 1. Thus $j_i$ is an isomorphism, and $p_i$ is faithfully flat: its coordinate-algebra map is the faithfully flat map for $u_i$ after identifying $F[D_i]$ with $A_i$. This uses no smoothness of a projection kernel.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assertion 23.20, printed p.491, interpreting surjective projections via Theorem 3.34, printed p.75; Stacks Tag 00E0 (algebra-lemma-Zariski-topology), part (7)."
+   }
+  },
+  {
+   "text": "Let $N\\subseteq H$ be any smooth connected normal unipotent closed subgroup. For each $i$, apply [lem-sfb-affine-homomorphism-flat-image] to $p_i|_N$ to obtain homomorphisms $q_i:N\\to I_i$ and $k_i:I_i\\hookrightarrow G_i$, with $q_i$ faithfully flat, $k_i$ a closed immersion, and $p_i|_N=k_i q_i$. All groups here are affine and of finite type as required. Apply [lem-sfb-unipotent-normal-quotient-image] with $A=H$, $D=G_i$, $f=p_i$, $u=q_i$ and $j=k_i$. The ambient map is faithfully flat by step 2, and $N$ has exactly the required smoothness, connectedness, normality and geometric-point unipotence. It follows that $I_i$ is smooth, connected and unipotent and $k_i(I_i)$ is normal in $G_i$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-unipotent-normal-quotient-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assertion 23.20 and its proof, printed p.491"
+   }
+  },
+  {
+   "text": "Reductivity of $G_i$, as defined in the statement, now forces the closed subgroup scheme $k_i(I_i)$ to be the identity subgroup. Consequently $p_i|_N$ is the trivial homomorphism for both $i=1,0$. For any commutative $F$-algebra $R$ and $n\\in N(R)$, its image in $G_1(R)\\times G_0(R)$ is therefore $(1,1)$. The inclusion of $N$ in $H$ and that of $H$ in the product are injective on $R$-points by [def-sc-group-scheme-subgroup]. Comparing $n$ with the identity shows $N(R)=\\{1\\}$ for every $R$, including nonreduced algebras.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assertion 23.20 and its proof, printed p.491"
+   }
+  },
+  {
+   "text": "To make the last conclusion scheme-theoretic without a point-density argument, put $C=F[N]$. By [def-weil-affine-spectrum], the universal point of $N(C)$ corresponds to $\\operatorname{id}_C:C\\to C$, whereas its identity point corresponds to $C\\xrightarrow{\\varepsilon}F\\xrightarrow{\\eta}C$, with $\\varepsilon$ the identity-section map. Step 4 gives $\\operatorname{id}_C=\\eta\\varepsilon$. Since $\\varepsilon\\eta=\\operatorname{id}_F$, the structure map $\\eta$ is an isomorphism with inverse $\\varepsilon$. Hence $N$ is the trivial group scheme. Every smooth connected normal unipotent subgroup of $H$ is thus trivial. The assumed smoothness and connectedness of $H$ prove its reductivity.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assertion 23.20 and its proof, printed p.491"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assertion 23.20 and its proof, printed p.491; Theorem 3.34, printed p.75. The radical argument is applied to an arbitrary smooth connected normal unipotent subgroup, so no existence theorem for the unipotent radical is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced connected closed subgroup of a product of reductive algebraic groups surjective onto each factor is smooth and reductive",
+   "results": "{\"t\": \"2026-10-23T21:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced connected closed subgroup of a product of reductive algebraic groups surjective onto each factor is smooth and reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"Prod.instLieGroup\", \"solvable_prod\", \"Prod.instLieAddGroup\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"LieAlgebra.IsSemisimple\", \"RootPairing.GeckConstruction.instIsIrreducible\"], \"digest\": \"17f3be49a74c05aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieAlgebra.HasTrivialRadical (Mathlib/Algebra/Lie/Semisimple/Defs.lean:59) concerns a Lie algebra radical, not the smooth unipotent radical of an algebraic group. Goursat, solvable_prod and Subgroup.prod_eq_bot_iff concern abstract groups and do not prove this geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "subdirect|unipotent.*radical|IsReductive",
+   "results": "{\"t\": \"2026-10-23T21:35:09Z\", \"tool\": \"grep\", \"query\": \"subdirect|unipotent.*radical|IsReductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieAlgebra.HasTrivialRadical (Mathlib/Algebra/Lie/Semisimple/Defs.lean:59) concerns a Lie algebra radical, not the smooth unipotent radical of an algebraic group. Goursat, solvable_prod and Subgroup.prod_eq_bot_iff concern abstract groups and do not prove this geometric statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected subdirect product of reductive algebraic groups has trivial unipotent radical",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"leansearch\", \"query\": \"A connected subdirect product of reductive algebraic groups has trivial unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.pi_eq_bot_iff\", \"Subgroup.prod_eq_bot_iff\", \"Subgroup.pi_bot\", \"instConnectedSpaceProd\", \"Subgroup.prod_mono\", \"Subgroup.prod\", \"Submonoid.pi_eq_bot_iff\", \"AddSubgroup.pi_top\"], \"digest\": \"7bc7e893d817949a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieAlgebra.HasTrivialRadical (Mathlib/Algebra/Lie/Semisimple/Defs.lean:59) concerns a Lie algebra radical, not the smooth unipotent radical of an algebraic group. Goursat, solvable_prod and Subgroup.prod_eq_bot_iff concern abstract groups and do not prove this geometric statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.HasTrivialRadical",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.HasTrivialRadical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.HasTrivialRadical\", \"LieAlgebra.instHasTrivialRadicalOfSubsingleton\", \"LieAlgebra.HasTrivialRadical.mk\", \"LieAlgebra.HasTrivialRadical.radical_eq_bot\", \"LieAlgebra.hasTrivialRadical_iff\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\"], \"digest\": \"9ecacabc80cd0fb8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieAlgebra.HasTrivialRadical (Mathlib/Algebra/Lie/Semisimple/Defs.lean:59) concerns a Lie algebra radical, not the smooth unipotent radical of an algebraic group. Goursat, solvable_prod and Subgroup.prod_eq_bot_iff concern abstract groups and do not prove this geometric statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent radical of a smooth connected subgroup of a product of reductive groups is trivial if both coordinate projections are surjective",
+   "results": "{\"t\": \"2026-10-23T21:35:14Z\", \"tool\": \"leanfinder\", \"query\": \"The unipotent radical of a smooth connected subgroup of a product of reductive groups is trivial if both coordinate projections are surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"Subgroup.normal_goursatSnd\", \"Subgroup.normal_goursatFst\", \"solvable_prod\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"Subgroup.goursat\", \"isNilpotent_prod\", \"Subgroup.mem_goursatFst\"], \"digest\": \"2c3697bd1f90f553\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieAlgebra.HasTrivialRadical (Mathlib/Algebra/Lie/Semisimple/Defs.lean:59) concerns a Lie algebra radical, not the smooth unipotent radical of an algebraic group. Goursat, solvable_prod and Subgroup.prod_eq_bot_iff concern abstract groups and do not prove this geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "subdirect|unipotent.*radical|IsReductive",
+   "results": "{\"t\": \"2026-10-23T22:45:26Z\", \"tool\": \"grep\", \"query\": \"subdirect|unipotent.*radical|IsReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/Algebra/CharZero/AddMonoidHom.lean\"], \"digest\": \"6e47d679679129de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract subgroup products and normality, Lie algebra radicals, analytic Lie groups, or the abstract matrix subgroup Matrix.SpecialLinearGroup.lineStab (Stabilizer.lean:34). None states reductivity for affine group schemes or the geometric unipotent image theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subdirect product of reductive algebraic groups has trivial unipotent radical",
+   "results": "{\"t\": \"2026-10-23T22:45:26Z\", \"tool\": \"leansearch\", \"query\": \"A subdirect product of reductive algebraic groups has trivial unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SemidirectProduct.noConfusion\", \"Subgroup.prod\", \"Subgroup.pi_eq_bot_iff\", \"Subgroup.prod_eq_bot_iff\", \"Subgroup.pi_bot\", \"LieAlgebra.HasTrivialRadical.mk\", \"Algebra.FormallyUnramified.pi_iff\", \"SemidirectProduct.mulEquivProd\"], \"digest\": \"df4463e2d1ca71e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract subgroup products and normality, Lie algebra radicals, analytic Lie groups, or the abstract matrix subgroup Matrix.SpecialLinearGroup.lineStab (Stabilizer.lean:34). None states reductivity for affine group schemes or the geometric unipotent image theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReductive\"",
+   "results": "{\"t\": \"2026-10-23T22:45:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract subgroup products and normality, Lie algebra radicals, analytic Lie groups, or the abstract matrix subgroup Matrix.SpecialLinearGroup.lineStab (Stabilizer.lean:34). None states reductivity for affine group schemes or the geometric unipotent image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected closed subgroup of a product of two reductive algebraic groups that surjects onto both factors is reductive",
+   "results": "{\"t\": \"2026-10-23T22:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected closed subgroup of a product of two reductive algebraic groups that surjects onto both factors is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_prod\", \"Subgroup.normal_goursatFst\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"Prod.instLieGroup\", \"solvable_of_surjective\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"99cd70c211d38792\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract subgroup products and normality, Lie algebra radicals, analytic Lie groups, or the abstract matrix subgroup Matrix.SpecialLinearGroup.lineStab (Stabilizer.lean:34). None states reductivity for affine group schemes or the geometric unipotent image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a normal unipotent algebraic subgroup under a surjective homomorphism to a reductive group is trivial",
+   "results": "{\"t\": \"2026-10-23T22:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a normal unipotent algebraic subgroup under a surjective homomorphism to a reductive group is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini_le_comap_frattini_of_surjective\", \"solvable_of_surjective\", \"Subgroup.Normal.map\", \"nilpotent_of_surjective\", \"Sylow.coe_mapSurjective\", \"nilpotencyClass_le_of_surjective\", \"map_derivedSeries_eq\", \"upperCentralSeries.map\"], \"digest\": \"86813767ad736651\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract subgroup products and normality, Lie algebra radicals, analytic Lie groups, or the abstract matrix subgroup Matrix.SpecialLinearGroup.lineStab (Stabilizer.lean:34). None states reductivity for affine group schemes or the geometric unipotent image theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-compatible-rank-one-graph-geometry",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Assertion 23.20 and its proof, printed p.491: images of the unipotent radical under the two surjective projections are smooth connected unipotent normal subgroups.",
+   "via": [
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-subdirect-product-reductivity",
+  "worker": "stage1",
+  "summary": "Five steps following Milne 23.20 reuse existing image-factorization and normal-unipotent-image nodes. Proved faithful flatness from topological surjectivity and reduced targets; tested arbitrary normal unipotent subgroups and established triviality on all algebra points. No new nodes. Only statement edit repairs doubled TeX escapes.",
+  "blueprint": "Current latest direct-images proof (3), supporting Milne 23.20 prerequisite in the inherited compatible-rank-one-graph chain. The ancestor command returns None; preserve the inherited null ancestor and via chain. Steps 1--2 justify surjective projection quotients, step 3 is the image assertion of 23.20, and steps 4--5 prove triviality.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness, specialized to the structure morphisms of the reductive factors; this supports the given Milne route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-28505af55",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-28505af55 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, and Milne iAG2017 23.19–23.20 (printed p.491). The item restates Milne 23.20 for an arbitrary smooth connected closed H in G1×G0 whose projections are surjective on spaces. It runs the argument on any smooth connected normal unipotent N, so no radical-existence theorem is needed, and the statement is true. Edge cases checked: trivial factors, products, the diagonal, isogeny and Frobenius graphs with infinitesimal kernels, and the excluded non-surjective cases B⊂SL2 and the trivial-homomorphism graph. Step 1: smooth implies geometrically reduced (tool use declared and accepted as generic), so A_i is reduced. Step 2: flat-image factorization; surjectivity on spaces puts J_i in every prime, the radical leaf gives J_i ⊆ √0 = 0, so p_i is faithfully flat. Step 3: all hypotheses of unipotent-normal-quotient-image are met. Steps 4–5: R-point injectivity and Yoneda give N trivial. No new nodes, no cycle, no duplicate found by DAG search, no SGA, and the citer compatible-rank-one-graph step 3 matches the hypotheses. Batch-5: the flagged lem-trf-flat-tensor-preserves-injection is the generic Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap. It is not part of the trace formula or Poincaré duality, so it is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SubdirectProductReductivity",
+  "declaration": "AlgebraicGeometry.isReductive_of_smooth_connected_subdirect_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SubdirectProductReductivity.lean",
+  "statement": "theorem isReductive_of_smooth_connected_subdirect_product {F : Type u} [Field F] [IsAlgClosed F] (G₁ G₀ H : Grp (Over (Spec (.of F)))) (hG₁ : ReductiveTorusCentralizer.IsReductive G₁) (hG₀ : ReductiveTorusCentralizer.IsReductive G₀) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] [ConnectedSpace H.X.left] (i : H ⟶ G₁ ⊗ G₀) [@IsClosedSubgroupScheme F _ H.X (G₁ ⊗ G₀).X H.grp (G₁ ⊗ G₀).grp i.hom.hom] [Surjective (i ≫ fst G₁ G₀).hom.hom.left] [Surjective (i ≫ snd G₁ G₀).hom.hom.left] : ReductiveTorusCentralizer.IsReductive H",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dce60023",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Every clause matches the node and Milne 23.20 (p.491). F: Field + IsAlgClosed. G1, G0: ReductiveTorusCentralizer.IsReductive, which tests after AlgebraicClosure F and equals the node's convention because F is algebraically closed. H: affine, LFT+QC, Smooth, ConnectedSpace, nothing more. i : H ⟶ G1 ⊗ G0 with IsClosedSubgroupScheme, the product being the fibre product over F. Surjective on underlying spaces for i≫fst (G1) and i≫snd (G0). No kernel condition. Conclusion IsReductive H, same predicate, not weakened. Edge cases: trivial factors, product, diagonal, Frobenius graph with nonsmooth kernel, every characteristic; B⊂SL2 excluded only by surjectivity, as in the source. Single universe u, no unbound variables. Item changes only in lean, all dependency node files byte-identical to live, statement verbatim, no definitions, proof sorry, docstrings carry source place, blueprint tag and all 5 steps, report has both sections. Advisory: IsReductive is owned by def-sfb-reductive-torus-centralizer-terminology, reached via the stage-1 theorem stmt_dep lem-sfb-reductive-borel-pair-structure; landed precedent (six items incl. the citer compatible-rank-one-graph-geometry) does the same. No compile: no file changed."
+ }
+}

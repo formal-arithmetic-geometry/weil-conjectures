@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-native-ordinary-representative-currying",
+ "kind": "statement",
+ "title": "Natural normalized currying from native product Hom representatives",
+ "statement": "Let l be prime, Y any scheme and A its native module category. Let H:D(A)^op × D(A)→D(A) and R be NativeHomRepresentatives for ordinaryIhomBifunctor, as in [def-sf-native-weil-closed-models]. Suppose model(P,Q): Q(Q) tensor Q(P) ≅ Q(ordinaryTensorTotal(P,Q)) is given whenever P is NativeOrdinaryKFlat and is natural on complex maps f:P→P' and g:Q→Q' for K-flat P,P'. Then there are bijections e(T,P,I): Hom(T tensor P,I) ≃ Hom(T,H(P,I)) for all derived T,P,I. Their inverses satisfy e(T',P',I')^{-1}(f;phi;H(g,h)) = (f tensor g);e(T,P,I)^{-1}(phi);h for all derived f:T'→T, g:P'→P, h:I→I'. For K-flat complexes P,Q, K-injective I and a chain map phi:Q→bifunctorHomObj(P,I), there exists a chain map psi:ordinaryTensorTotal(P,Q)→I whose (p,q) component is the unsigned ordinary tensor-Hom counit applied to phi_q followed by the (q,p,p+q) Hom projection. Furthermore model(P,Q);Q(psi) = e(Q(Q),Q(P),Q(I))^{-1}(Q(phi);R.model(P,I)^{-1}). No closed structure, adjunction or symmetry is part of this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 0A90, 0A8Z and 0A97: tensor-Hom bijection, homotopy classes and evaluation; native transport step 1, Hom comparison. Labels lemma-internal-hom, lemma-compose, equation-global-cohomology-hom-complex and lemma-internal-hom-evaluate."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Work directly in an abstract native module-object category. The underived adjunction Mod.ihomAdjunction, with its precomposition mate, is parametrized by the right tensor factor. Define currying and uncurrying for degree-n cochains by multiplying the (p,q) component by (-1)^(p*n). Products and coproducts give inverse additive maps. Expanding the total differential and the native row-sign Hom differential shows that these maps commute with the cochain differential. On degree-zero cocycles obtain inverse bijections of chain maps, with unsigned counit components; on degree-minus-one cochains obtain preservation of homotopies.",
+   "uses": [
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For acyclic N and K-flat P, the total(P,N) is acyclic by definition. A map N to Hom(P,I) uncurries to a map total(P,N) to the K-injective I and is null-homotopic. Currying the homotopy proves that Hom(P,I) is K-injective. The standard bijection from homotopy maps into a K-injective to derived maps therefore turns the chain/homotopy bijection into a derived Hom equivalence on representatives. Compose with the supplied tensor model and inverse of R.model. Surjectivity from chain maps into K-injectives, chain-level naturality, hn and R.naturality prove three-variable inverse-currying naturality on representatives.",
+   "uses": [
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved ordinaryTotalIso to identify native acyclic-test K-flatness with the K-flatness satisfied by functorial flat resolutions. Lift the reduced flat resolution functor to the full subcategory of native K-flat complexes. Its quasi-isomorphic augmentation proves that the inclusion followed by Q localizes at the restricted quasi-isomorphisms. Grothendieck K-injective resolutions give the K-injective localization in the target. Combine it with this K-flat localization and Q on arbitrary source complexes by product and opposite localization.",
+   "uses": [
+    "lem-sf-native-ordinary-tensor-representatives",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard the inverse representative equivalences as a natural isomorphism between the restrictions of the two derived Hom functors. Fully faithful restriction along the product localization lifts it to a natural isomorphism on all derived objects. Its component equivalences give e; its naturality is exactly the required inverse-currying equation. The map-preimage law of fully faithful restriction proves that its restriction is the representative isomorphism with which it was constructed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the input phi take the actual degree-zero uncurried chain map psi. The chain-level component calculation gives the unsigned homogeneous counit formula. Restricting the lifted Hom isomorphism back to (Q,P,I) and evaluating its inverse-currying map at Q(phi);R.model.inv yields model.hom;Q(psi), proving the final equation. Specialize the abstract native module calculation to ProEtale.AdicSheaf. No scalar forgetting or section-ring equivalence is required; the calculation also covers zero complexes and the empty scheme.",
+   "uses": [
+    "lem-sf-native-hom-precomposition-quasi-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-closed-models",
+  "lem-sf-native-ordinary-tensor-representatives",
+  "lem-sf-native-hom-precomposition-quasi-iso",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A90, 0A8Z, 08J9 and 0A97; direct native parametrized tensor-Hom calculation and product-localization descent. Chain calculation follows the existing DerivedNativeTensorProof private calculation, re-established here without its cyclic downstream import."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of sheaves of modules is adjoint to product total internal Hom, with natural currying on K-flat and K-injective representatives",
+   "results": "Eight hits including ihom.adjunction, internalHomAdjunction₂ and ModuleCat.monoidalClosedHomEquiv. These give underived closedness, not the prescribed native product-total normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a closed monoidal adjunction from natural Hom equivalences on K-flat representatives through localization",
+   "results": "Adjunction.localization and generic monoidal localization found; they do not supply the native total tensor comparison or the row-sign Hom normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic localization tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mkOfHomEquiv\"",
+   "results": "Adjunction.mkOfHomEquiv and its homEquiv/counit formulas found; these are used in the proved parent assembly, after the analytic bijections are supplied.",
+   "date": "2026-10-27",
+   "verdict": "assembly tool found"
+  },
+  {
+   "tool": "grep",
+   "query": "NativeOrdinaryTensorModels|NativeAdjunctionNormalization|ordinaryTensorTotal|mapBifunctorFlipIso",
+   "results": "msearch grep returned nine Mathlib occurrences of mapBifunctorFlipIso and its component/naturality formulas. Local rg over WeilConjectures and Sheaf found the existing right-adjoint identification, ringed adjunction and tensor models, but no exact native representative conclusion.",
+   "date": "2026-10-27",
+   "verdict": "ringed input and generic tools, no exact native conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOrdinaryClosedTensorModels",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison and transposition paragraph of cor-coef-verdier-weil-equivariance; ordinary construction in the native tensor transport refinement. ancestor returns None for the parent. Natural normalized currying from native product Hom representatives.",
+   "via": [
+    "lem-sf-native-ordinary-closed-tensor-models",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryRepresentativeCurrying",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryRepresentativeCurrying.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_representative_currying",
+  "statement": "theorem native_ordinary_representative_currying\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×\n      DerivedCategory (ProEtale.AdicSheaf l Y) ⥤\n        DerivedCategory (ProEtale.AdicSheaf l Y))\n    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)\n    (model : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n      NativeOrdinaryKFlat l Y P →\n        (DerivedCategory.Q.obj Q ⊗ DerivedCategory.Q.obj P ≅\n          DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q)))\n    (hn : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n      (hP : NativeOrdinaryKFlat l Y P) (hP' : NativeOrdinaryKFlat l Y P')\n      (f : P ⟶ P') (g : Q ⟶ Q'),\n      (DerivedCategory.Q.map g ⊗ₘ DerivedCategory.Q.map f) ≫ (model P' Q' hP').hom =\n        (model P Q hP).hom ≫ DerivedCategory.Q.map\n          (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ))) :\n    ∃ e : ∀ T P I : DerivedCategory (ProEtale.AdicSheaf l Y),\n      (T ⊗ P ⟶ I) ≃ (T ⟶ H.obj (op P, I)),\n      (∀ (T T' P P' I I' : DerivedCategory (ProEtale.AdicSheaf l Y))\n        (f : T' ⟶ T) (g : P' ⟶ P) (h : I ⟶ I') (φ : T ⟶ H.obj (op P, I)),\n        (e T' P' I').symm (f ≫ φ ≫ H.map (Prod.mkHom g.op h)) =\n          (f ⊗ₘ g) ≫ (e T P I).symm φ ≫ h) ∧\n      (∀ (P Q I : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (_hQ : NativeOrdinaryKFlat l Y Q)\n        (hI : I.IsKInjective)\n        (φ : Q ⟶ CochainComplex.bifunctorHomObj (ordinaryIhomBifunctor l Y) P I),\n        ∃ ψ : ordinaryTensorTotal l Y P Q ⟶ I,\n          (∀ (p q n : ℤ) (hpq : p + q = n),\n            HomologicalComplex.ιMapBifunctor P Q (ordinaryTensorBifunctor l Y)\n                (.up ℤ) p q n hpq ≫ ψ.f n =\n              ((ordinaryTensorBifunctor l Y).obj (P.X p)).map (φ.f q ≫\n                  CochainComplex.bifunctorHomπ (ordinaryIhomBifunctor l Y) P I q p n hpq) ≫\n                (Mod.ihomAdjunction (P.X p)).counit.app (I.X n)) ∧\n          (model P Q hP).hom ≫ DerivedCategory.Q.map ψ =\n            (e (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)\n              (DerivedCategory.Q.obj I)).symm\n                (DerivedCategory.Q.map φ ≫ (R.model P I hI).inv))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T195108-L-2733322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T222723-L-686275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

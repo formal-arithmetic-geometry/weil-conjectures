@@ -220,7 +220,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-pe-wlocal",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
@@ -248,5 +259,37 @@
   "landing": "20261018T145055-L-3637216",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a w-local spectral space [def-weil-pbc-w-local], with set $T^c$ of closed\npoints.\n\n1. $T^c$, with the subspace topology, is spectral, $T_1$ and compact; hence it is\n   profinite.\n2. The composite $T^c\\hookrightarrow T\\to\\pi_0(T)$ is a homeomorphism; in particular\n   $\\pi_0(T)$ is profinite, and two closed points lying in the same connected component are\n   equal.\n3. The connected component of $c\\in T^c$ is the set of generalizations of $c$; thus the\n   connected components of $T$ are the fibres of the map $T\\to T^c$ sending a point to its\n   unique closed specialization.\n4. For $T=\\operatorname{Spec}R$ and $\\mathfrak m\\in T^c$, the component of $\\mathfrak m$\n   is the image of $\\operatorname{Spec}R_{\\mathfrak m}\\to\\operatorname{Spec}R$.",
+  "proof": [
+   {
+    "text": "*1.* A closed subspace of a spectral space is spectral, so $T^c$ is spectral, and every\npoint of $T^c$ is closed, so $T^c$ is $T_1$; it is compact as a closed subset of the\nquasi-compact space $T$. In a spectral space the constructible (patch) topology is compact\nHausdorff with a basis of clopen sets, it is finer than the given topology, and a subset\nthat is closed in the constructible topology and stable under specialization is closed\n(Stacks, Topology, section on spectral spaces). In $T^c$ the specialization order is\ntrivial, so every patch-closed subset is closed: the topology of $T^c$ equals its patch\ntopology, which is profinite.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*2.* Every point $x$ specializes to some closed point, since $\\overline{\\{x\\}}$ is a\nnonempty quasi-compact closed subset; by Zorn's lemma and quasi-compactness it contains a\nminimal nonempty closed subset, which is a single point since $T$ is sober and $T_0$. That\nclosed point lies in the connected component of $x$, as $\\overline{\\{x\\}}$ is connected;\nso $T^c\\to\\pi_0(T)$ is surjective. For injectivity let $c\\neq c'$ in $T^c$. By 1 there is\na clopen $U_0\\subset T^c$ with $c\\in U_0$, $c'\\notin U_0$. Let $U$ and $V$ be the sets of\ngeneralizations of points of $U_0$ and of $T^c\\setminus U_0$. In a w-local space the set of\ngeneralizations of a closed subset of $T^c$ is closed (Stacks, Tag 096A), so $U$ and $V$\nare closed. They cover $T$ because every point has a closed specialization, and they are\ndisjoint because closed specializations are unique. So $U$ is clopen, contains $c$ and\nnot $c'$, and $c,c'$ lie in different components. The map $T^c\\to\\pi_0(T)$ is continuous,\nbijective, from a compact space to the Hausdorff space $\\pi_0(T)$ (connected components of\na compact space form a compact Hausdorff space), hence a homeomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*3.* For a generalization $x$ of $c$, the closure $\\overline{\\{x\\}}$ is connected and\ncontains $c$, so $x$ lies in the component of $c$. Conversely, if $x$ lies in the component\nof $c$, let $c'$ be a closed specialization of $x$; then $c'$ lies in the component of $x$,\nwhich is that of $c$, so $c'=c$ by 2.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*4.* The primes contained in $\\mathfrak m$ are the generalizations of $\\mathfrak m$, i.e.\nthe image of $\\operatorname{Spec}R_{\\mathfrak m}$; by 3 this set is the component of\n$\\mathfrak m$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

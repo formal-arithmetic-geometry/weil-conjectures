@@ -25,77 +25,35 @@
    }
   },
   {
-   "text": "Put $T=R\\otimes_{\\mathbf Z}C$. The tensor-product universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $T\\to A$, $r\\otimes c\\mapsto r_Au(c)$, where $r_A$ is the image of $r$ in $A$. A finite presentation [def-weil-pbc-finitely-presented-algebra] supplies finitely many ring generators $c_1,\\ldots,c_s$ of $C$. Every $t\\in T$ is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product]; writing its $C$-coefficients as integer polynomials in the $c_i$ shows that $t$ is an $R$-polynomial in $1\\otimes c_i$. Thus $T$ is finite type over $R$ by [def-weil-pbc-finite-type-algebra]. This is the elementary base-extension part of the general-base reduction in 034Y.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0367, first sentence; Algebra 034Y, final paragraph, base extension from Z to R, needing only finite type of the model base."
-   }
-  },
-  {
-   "text": "Choose $R$-algebra generators $b_1,\\ldots,b_n$ of $B$ by [def-weil-pbc-finite-type-algebra]. By [def-weil-pbc-module-tensor-product], write $e^{-1}(b_j)=\\sum_{k=1}^{m_j}a_{jk}\\otimes d_{jk}$, absorbing module coefficients into the $A$-factors. Introduce one variable $X_{jk}$ for each of these finitely many coefficients and put $P=T[X_{jk}]$. Let $\\varphi:P\\to A$ extend $T\\to A$ and send $X_{jk}$ to $a_{jk}$. The images of $1\\otimes c_i$ together with all $X_{jk}$ generate $P$ over $R$: expand the coefficients of each polynomial using the generators of $T$. Consequently $P$ is finite type over $R$ without a Noetherian assumption.",
+   "text": "Choose finite $R$-algebra generators $b_j$ of $B$ by [def-weil-pbc-finite-type-algebra]. Apply [lem-a1-finite-coefficient-polynomial-lifts] to the rings $R,C,A,D$, their model maps and $x_j=e^{-1}(b_j)$. Its finite-presentation hypothesis on $C$ is supplied by step 1. It gives $T=R\\otimes_{\\mathbf Z}C$, a finite type $R$-algebra $P=T[X_{jk}]$, a compatible $\\varphi:P\\to A$, and $z_j\\in P\\otimes_C D$ mapping to $x_j$. Composing this tensor map with $e$ sends $z_j$ to $b_j$.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-module-tensor-product"
+    "lem-a1-finite-coefficient-polynomial-lifts"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0367, sentence beginning Since R to B is of finite type: explicit finite coefficient enlargement."
+    "place": "Tag 0367, lemma-finite-type-local-source-fppf-algebra, proof: the finite coefficient enlargement sentence, expanded in old steps 2 and 3 (relative base extension, tensor coefficients, polynomial variables and their R-generators). Base extension from the absolute integer model follows Tag 034Y, lemma-descend-faithfully-flat-finite-presentation, algebra.tex, final paragraph."
    }
   },
   {
-   "text": "Form $Q=P\\otimes_C D$, where $C\\to P$ factors through $T$. Since $C\\to D$ is faithfully flat, [lem-weil-pbc-faithfully-flat-base-change] gives that $P\\to Q$, $p\\mapsto p\\otimes1$, is faithfully flat. The tensor-product universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $q:Q\\to B$, $p\\otimes d\\mapsto f(\\varphi(p))g(d)$. Its image contains the image of $R$ and each $b_j=q(\\sum_kX_{jk}\\otimes d_{jk})$. Since these $b_j$ generate $B$ as an $R$-algebra, writing any element as an $R$-polynomial in them proves that $q$ is surjective.",
+   "text": "Apply [lem-a1-fppf-tensor-model-surjectivity] to $R\\to P\\xrightarrow{\\varphi}A\\xrightarrow{f}B$, $C\\to P$, $C\\to D$, $g$ and $e$. Compatibility comes from steps 1 and 2; $C\\to D$ is faithfully flat by step 1, and the $z_j$ lift the generators by step 2. The criterion gives the faithfully flat base change, the comparison with $B$ and surjectivity of $\\varphi$. Since $P$ has finitely many $R$-generators, their images under $\\varphi$ generate $A$ over $R$. This is finite type by [def-weil-pbc-finite-type-algebra].",
    "uses": [
-    "lem-weil-pbc-faithfully-flat-base-change",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-a1-fppf-tensor-model-surjectivity",
     "def-weil-pbc-finite-type-algebra"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0367, coefficient enlargement and the assertion that the model map to B is surjective."
-   }
-  },
-  {
-   "text": "The base change of $\\varphi:P\\to A$ along $P\\to Q$ identifies with $q$. Explicitly $\\theta:A\\otimes_P Q\\to B$ sends $a\\otimes(p\\otimes d)$ to $e(a\\varphi(p)\\otimes d)$. Its inverse sends $e(a\\otimes d)$ to $a\\otimes(1\\otimes d)$. Both maps are well defined by [lem-weil-pbc-algebra-tensor-pushout-universal-property]; the balancing relation $a\\varphi(p)\\otimes z=a\\otimes pz$ shows their composites fix every pure tensor, hence every element by [def-weil-pbc-module-tensor-product]. Moreover $\\theta(1\\otimes z)=q(z)$. Thus the complex $P\\to A\\to0$ becomes exact after tensoring with the faithfully flat $P$-module $Q$, since its first map is the surjection $q$ under this identification. By the exactness-reflection definition in [def-weil-pbc-faithfully-flat-ring-map], $P\\to A\\to0$ is exact. Its kernel at $A$ is all of $A$, so $\\varphi$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-faithfully-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0367, displayed tensor comparison and faithful-flat reflection of surjectivity; exactness reflection is Algebra Definition 00HB."
-   }
-  },
-  {
-   "text": "Let $p_1,\\ldots,p_N$ be the finite $R$-algebra generators of $P$ obtained in step 3. Given $a\\in A$, choose $p\\in P$ with $\\varphi(p)=a$. Express $p$ as an $R$-polynomial in the $p_i$ and apply $\\varphi$. This expresses $a$ as the same polynomial in $\\varphi(p_i)$. Hence these finitely many images generate $A$ over $R$, which is the conclusion by [def-weil-pbc-finite-type-algebra].",
-   "uses": [
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0367, final sentence: a surjective image of the finite type R-algebra P is finite type."
+    "place": "Tag 0367, lemma-finite-type-local-source-fppf-algebra, proof: the model map to B is surjective, the displayed tensor comparison, reflection of surjectivity and final finite generation of its quotient (old steps 4, 5 and 6)."
    }
   }
  ],
  "proof_deps": [
   "lem-a1-fppf-integer-model",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-faithfully-flat-base-change",
-  "def-weil-pbc-faithfully-flat-ring-map"
+  "lem-a1-finite-coefficient-polynomial-lifts",
+  "lem-a1-fppf-tensor-model-surjectivity"
  ],
  "proof_origin": {
   "by": "document",
@@ -208,21 +166,32 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-finite-type-fppf-source-algebra",
   "worker": "stage1",
-  "summary": "Expanded Stacks 0367 into the absolute integer model, elementary base extension, finite coefficient polynomial enlargement, faithfully flat base change, explicit tensor comparison and exactness reflection, and finite generation of a quotient. One supporting node records an exact proved source-library model attachment; its audit state is left for the maintainer tool. No Mathlib match for the item. Normalized TeX escaping without changing the statement.",
-  "blueprint": "Auxiliary schemehood branch below lem-a1-affine-hc0, through lem-a1-lft-flat-lfp-source-descent: the Stacks 02KL ring-theoretic finite-type input 0367. The blueprint support argument is retained; these steps supply only its already selected schemehood algebra tool."
+  "summary": "Q36 repairs the released 2026-10-22 re-split order. Statement and route unchanged. Existing closed integer model is reused; old steps 2-3 become a statement-only simultaneous coefficient polynomial lift node, and old steps 4-6 a statement-only faithfully flat tensor model criterion including the comparison and quotient generators. Every old argument is preserved in these interfaces and mapped verbatim in the report. Both nodes are searched, unsplit, and independent of each other; the item assembles them in three short steps. Landing-return repair: rebased onto the current DAG after the side-completion promotion issue; the returned parent baseline is identical to current live, all cited live statements were reread, and all citation quotes were revalidated. The two statement-only helpers and all prior proof/search material are retained.",
+  "blueprint": "Auxiliary schemehood branch below lem-a1-affine-hc0, through lem-a1-lft-flat-lfp-source-descent: the Stacks 02KL ring-theoretic finite-type input 0367. The blueprint support argument is retained; these steps supply only its already selected schemehood algebra tool. The two new nodes expose the finite-coefficient and tensor-surjectivity arguments of the existing 0367 input, without altering any unit route."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q11-30680b008",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q36-31564b942",
+  "group": "Q36",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-30680b008 (reviewer sub-agent of L); spot-checked: Read the item, new model node, all cited statements, Stacks Tags 0367/034Y, source-library theorem, chapter/unit route, and delivery rules. Verified hypotheses, tensor comparison, faithful-flat exactness reflection, universes, edge cases, duplicate searches, and absence of SGA/route-pivot violations. Wrote review.md with step-by-step checks; no repairs or tool_uses are required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-31564b942 (reviewer sub-agent of L); spot-checked: This is a redelivery after an administrative landing return (side-completion promotion); the previous head d84ebcbc was PASSed. I diffed the delivered files: both new node JSONs are identical, the item changed only in split_report.summary, and the report only gained a 'landing-return' section. The old base DAG is no longer on disk, so I re-checked everything on base ee2994b. Re-split: none of the old six steps was shortened or dropped. Old step 1 is the existing lem-a1-fppf-integer-model, whose statement I reread: it gives f∘u=g∘v, C finitely presented over Z, C→D faithfully flat, and e an A-algebra isomorphism. Old steps 2-3 become lem-a1-finite-coefficient-polynomial-lifts (T=R⊗C and its R-generators 1⊗c_i, the pure-tensor expansions, P=T[X_jk], φ compatible with R and C, P of finite type, λ(z_j)=x_j). Old steps 4-6 become lem-a1-fppf-tensor-model-surjectivity (P→Q faithfully flat, q surjective, θ with its formula and inverse, θ(1⊗z)=q(z), φ surjective, image generators). The two statements are of comparable size (1466 and 1465 characters). Neither cites the other or restates the item. The assembly is 3 steps and 1397 characters. Both statements are true: node 1 is pure-tensor sums plus the polynomial universal property; node 2 is cancellation A⊗_P(P⊗_C D)≅A⊗_C D, right exactness, and exactness reflection from the faithful-flatness definition. Edge cases checked: n=0, D=0, empty generator family, C=D. Assembly: e∘λ=q gives q(z_j)=b_j, and the R and C structures through P agree because φ is compatible with both. Source: Stacks descent.tex Tag 0367, lines 4351-4381, read in full; 034Y enters through the existing model node; no SGA. DAG rg -L for 0367 and tensor-model wording on the new base found no duplicate. The item is not Lean-closed: the live FiniteTypeFppfSourceDescent.lean still has sorry at line 70. No fixes."
  },
  "lean": {
   "module": "Sheaf.RingTheory.FiniteTypeFppfSourceDescent",

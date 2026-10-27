@@ -1,0 +1,54 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NI
+-/
+module
+
+public import Sheaf.Paper.SectionwiseFiniteConstantLocalModel
+public import Sheaf.AlgebraicGeometry.CondensedLisseEvaluationModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+
+/-! # Finite scalar local models on a profinite slice
+
+Source: blueprint latest, sk-def-sfb-constructible, clause (1); Hemo--Richarz--Scholbach,
+Remark 3.2 and Definition 3.5 (blueprint: sk-def-sfb-constructible).
+
+This is the profinite-slice companion of the imported scheme-site predicate. A finite
+presentation on the condensed point is a cokernel of a finite scalar matrix: maps between
+finite free regular modules are matrices over the sections at the one-point space.
+Its slice pullback is therefore exactly scalar extension from discrete constant scalars.
+The covering sieve permits different scalar presentations on its different members.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ]
+
+/-- Finite scalar local models on the actual profinite slice. The presentation is chosen
+on the condensed point before pulling to the slice, so its matrix has scalar entries.
+Restriction uses the existing monoidal slice inverse image, including its module action.
+Source: blueprint sk-def-sfb-constructible, clause (1); HRS Remark 3.2, Definition 3.5
+(blueprint: sk-def-sfb-constructible). -/
+def HasFiniteConstantProfiniteLocalModel (P : Profinite.{u})
+    (M : Mod (Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1})
+      (CondensedRing.profiniteCoefficient Λ P)) : Prop :=
+  ∃ W : Sieve (Over.mk (𝟙 P)), W ∈ ((coherentTopology Profinite.{u}).over P) _ ∧
+    ∀ (U : Over P) (f : U ⟶ Over.mk (𝟙 P)), W f →
+      ∃ B : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ,
+        Mod.IsFinitelyPresented Λ B ∧
+        Nonempty
+          (((((coherentTopology Profinite.{u}).over P).overPullback Ab.{u + 1} U).mapMod
+              (CondensedRing.profiniteCoefficient Λ P)).obj M ≅
+            ((((coherentTopology Profinite.{u}).over P).overPullback Ab.{u + 1} U).mapMod
+              (CondensedRing.profiniteCoefficient Λ P)).obj
+              ((((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} P).mapMod Λ).obj B))
+
+end AlgebraicGeometry.ProEtale

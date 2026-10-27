@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-two-sided-bar-horizontal-augmentation",
+ "kind": "statement",
+ "title": "Two-sided bar horizontal contraction and total augmentation",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal D$ be a small ordinary category, $R$ a commutative ring, $F:\\mathcal D\\to\\operatorname{Mod}_R$ a covariant functor, and $Q:\\Delta^{\\mathrm{op}}\\to\\mathcal D$ a simplicial object [def-weil-pbc-simplicial-object]. For $p,q\\geq0$ put\n$$A_{p,q}=\\bigoplus_{T_0\\to\\cdots\\to T_p\\xrightarrow f Q_q}F(T_0).$$\nHorizontal faces delete $T_i$, applying $F(T_0\\to T_1)$ when $i=0$ and composing with $f$ when $i=p$; vertical operators postcompose $f$ with the operators of $Q$. Let $\\partial_h,\\partial_v$ be the alternating face sums in positive respective indices, zero at index zero. Put $A_{p,q}$ in cochain bidegree $(-p,-q)$ and use finite-diagonal total differential $\\partial_h+(-1)^p\\partial_v$ [def-sp-double-complex-total]. Put $S^{-q}=F(Q_q)$ with alternating-face differential and zero positive terms. Put $B^{-p}=\\bigoplus_{T_0\\to\\cdots\\to T_p}F(T_0)$, zero in positive degrees, with alternating faces deleting $T_i$ and applying $F$ only at the first face. Complexes and their derived categories mean [def-weil-abstract-derived-category]. These formulas define a commuting double complex. The map $e_Q:\\operatorname{Tot}A\\to S$, zero for $p>0$ and $(T\\xrightarrow fQ_q,x)\\mapsto F(f)x$ for $p=0$, and the map $e_B:\\operatorname{Tot}A\\to B$, zero for $q>0$ and forgetting $f:T_p\\to Q_0$ for $q=0$, are chain maps.\nFor every fixed $q$, augment the horizontal chain complex by $F(Q_q)$ in augmented degree $-1$. The maps\n$$h_{-1}(y)=(Q_q\\xrightarrow1 Q_q,y),\\qquad h_p(T_0\\to\\cdots\\to T_p\\xrightarrow fQ_q,x)=(-1)^{p+1}(T_0\\to\\cdots\\to T_p\\xrightarrow fQ_q\\xrightarrow1Q_q,x)$$\nfor $p\\geq0$ satisfy $\\partial h+h\\partial=1$, including augmented degree $-1$. The map $e_Q$ is a quasi-isomorphism, hence $e_Q:\\operatorname{Tot}A\\xrightarrow{\\sim}S$ in $D(R)$. The transpose total convention $\\partial_v+(-1)^q\\partial_h$ is identified with the chosen convention by multiplication by $(-1)^{pq}$ on $A_{p,q}$; this identification is the identity on the edge $p=0$ defining $e_Q$. These conclusions impose no contractibility hypothesis on any representable evaluation of $Q$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), explicit two-sided-bar replacement of its double-complex argument; Homology Tags 0132 (lemma-first-quadrant-ss), 0133 (lemma-double-complex-gives-resolution), finite-diagonal dual form. Agent-written slice contraction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "All sums are indexed by sets: smallness of $\\mathcal D$ bounds both its strings and the arrows into $Q_q$. Define every operator by its $R$-linear map on a summand, and extend by the universal property of the direct sum. Thus each finitely supported vector has a finitely supported image. Write $d_i^h$ and $d_j^v$ for the horizontal and vertical faces. The identity $d_i^h d_j^h=d_{j-1}^h d_i^h$ for $i<j$ is deletion of the same two vertices. At adjacent deletions it is associativity of composition; when the first vertex is deleted it is $F(ba)=F(b)F(a)$, including the last-face composite into $Q_q$. The vertical identity $d_i^v d_j^v=d_{j-1}^v d_i^v$ follows from functoriality of $Q$ on the two equal injections in $\\Delta$. Every horizontal face commutes with every vertical face: only the last arrow changes vertically, and $Q(\\delta)(fa)=(Q(\\delta)f)a$, while the first-face coefficient map is unchanged.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), explicit categorical two-sided-bar construction; agent verification of face formulas"
+   }
+  },
+  {
+   "text": "Pairing the two occurrences of each double deletion with opposite signs gives $\\partial_h^2=\\partial_v^2=0$; the same cancellation proves that $S$ and $B$ are complexes. The commuting-face identities give $\\partial_h\\partial_v=\\partial_v\\partial_h$. For the displayed total differential, its cross terms on $A_{p,q}$ are $(-1)^{p-1}\\partial_v\\partial_h$ and $(-1)^p\\partial_h\\partial_v$, which cancel. Terms leaving the axes are zero by convention. In cochain degree $-n$ the diagonal has just the $n+1$ possible pairs $(p,q)$ with $p+q=n$; in positive degrees it is zero. Therefore the finite direct sums and the differential in the statement define the asserted total complex. This is the signed formula of [def-sp-double-complex-total] applied to bidegrees $(-p,-q)$, with $(-1)^{-p}=(-1)^p$.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132 (lemma-first-quadrant-ss), finite-diagonal setting; direct sign calculation, not an application of its spectral-sequence conclusion"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_q:A_{0,q}\\to F(Q_q)$ be the sum of the maps $F(f)$. On a summand indexed by $T_0\\xrightarrow aT_1\\xrightarrow fQ_q$ the two terms of $\\epsilon_q\\partial_h$ are $F(f)F(a)x$ and $-F(fa)x$, so they cancel. Postcomposition gives $\\epsilon_{q-1}d_j^v=F(d_j^Q)\\epsilon_q$. At $p=0$ the total vertical sign is $1$. Hence $e_QD=d_Se_Q$ there. At $p=1$ the only surviving component of $e_QD$ is the horizontal one, just proved zero; for $p>1$ both sides are zero. Thus $e_Q$ is a chain map.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), augmentation comparisons; direct check for the displayed bar"
+   }
+  },
+  {
+   "text": "At $q=0$, forgetting $f$ commutes with each horizontal face: for the last face both orders delete $T_p$ and forget the composite arrow to $Q_0$, and for the first face both apply the same map of $F$. At $q=1$ the two vertical faces have exactly the same image after forgetting their final arrows, so $e_B\\partial_v=0$; multiplying this zero by $(-1)^p$ has no effect. For $q>1$ neither vertical face reaches the edge $q=0$, and horizontal faces preserve $q$. These exhaust the cases in the chain-map equality, proving $e_BD=d_Be_B$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), edge augmentation; direct check for the displayed bar"
+   }
+  },
+  {
+   "text": "Fix $q$. Let $t_p$ append $Q_q\\xrightarrow1Q_q$ without a sign. For $p\\geq1$, the first $p+1$ faces of this appended string are $t_{p-1}d_i^h$ ($0\\leq i\\leq p$), and its last face is the original string. Thus $\\partial_ht_p=t_{p-1}\\partial_h+(-1)^{p+1}1$. Multiplication by $(-1)^{p+1}$ and the formula $h_{p-1}=(-1)^pt_{p-1}$ give $\\partial_hh_p+h_{p-1}\\partial_h=1$. At $p=0$, the boundary of the appended string is $(Q_q\\xrightarrow1Q_q,F(f)x)-(T\\xrightarrow fQ_q,x)$. Since $h_0=-t_0$, this says $\\partial_hh_0=1-h_{-1}\\epsilon_q$. Finally $\\epsilon_qh_{-1}(y)=F(1)y=y$, proving the identity also in augmented degree $-1$. In particular, if $u\\in A_{0,q}$ has $\\epsilon_qu=0$ then $\\partial_hh_0u=u$; if $u\\in A_{p,q}$ with $p>0$ has $\\partial_hu=0$, then $\\partial_hh_pu=u$. These consequences will supply the lifts below.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), agent-written append-at-the-end slice contraction"
+   }
+  },
+  {
+   "text": "We prove surjectivity on cohomology by a finite recursion, using homological degree $n=-r\\geq0$. Let $y\\in S^{-n}$ have $d_Sy=0$. Put $x_0=h_{-1}y\\in A_{0,n}$. For $0\\leq j<n$, having chosen $x_j\\in A_{j,n-j}$, put\n$$x_{j+1}=(-1)^{j+1}h_j\\partial_vx_j\\in A_{j+1,n-j-1}.$$\nFor $j=0$, $\\epsilon_{n-1}\\partial_vx_0=d_S\\epsilon_nx_0=d_Sy=0$. For $j>0$, the induction hypothesis $\\partial_hx_j=(-1)^j\\partial_vx_{j-1}$ gives $\\partial_h\\partial_vx_j=(-1)^j\\partial_v^2x_{j-1}=0$. The two lifting identities established in the preceding step therefore give $\\partial_hx_{j+1}=(-1)^{j+1}\\partial_vx_j$. Thus the components of $D(\\sum_{j=0}^nx_j)$ cancel consecutively, and the remaining $\\partial_vx_n$ is zero since its vertical degree is zero. The resulting total cycle maps to $y$. When $n=0$ this is just $x_0$ and no recursion is needed. It proves surjectivity of $H^{-n}(e_Q)$ directly from the definition of cohomology, without a total-comparison theorem.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), agent-written finite-diagonal dual argument with the specified augmentation"
+   }
+  },
+  {
+   "text": "For injectivity let $z\\in(\\operatorname{Tot}A)^{-n}$ be a cycle with $e_Qz=d_Sy$ for $y\\in S^{-n-1}$. Regard $w_0=h_{-1}y\\in A_{0,n+1}$ as a total element. Then $z'=z-Dw_0$ is a cycle whose $p=0$ component has augmentation zero. Set $r^{(0)}=z'$. Inductively suppose $r^{(k)}$ is a cycle supported in horizontal degrees $k,\\ldots,n$. Its component $u_k\\in A_{k,n-k}$ has augmentation zero if $k=0$; for $k>0$ its horizontal boundary is zero, since the component of $Dr^{(k)}$ in $A_{k-1,n-k}$ has no other contribution. Put $b_{k+1}=h_ku_k\\in A_{k+1,n-k}$. The contraction gives $\\partial_hb_{k+1}=u_k$. Subtract $Db_{k+1}$: the component in degree $k$ disappears, and the only extra component has horizontal degree $k+1$ and vertical degree $n-k-1$. The residual $r^{(k+1)}$ remains a cycle since $D^2=0$. For $k=n$ that vertical contribution is zero, so $r^{(n+1)}=0$. Hence $z=D(w_0+\\sum_{k=0}^nb_{k+1})$ is a boundary. The recursion also works at $n=0$. This proves injectivity of $H^{-n}(e_Q)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), agent-written finite boundary elimination; verifies that the isomorphism is induced by e_Q"
+   }
+  },
+  {
+   "text": "The two recursions prove that $H^r(e_Q)$ is an isomorphism for every $r\\leq0$. For $r>0$ both complexes have zero terms and hence zero cohomology. Thus $e_Q$ is a quasi-isomorphism by [def-weil-abstract-derived-category], and localization sends this very chain map to an isomorphism in $D(R)$. No contraction of $\\operatorname{Hom}(T,Q_\\bullet)$ entered: the contraction used only the final arrow to the particular $Q_q$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), conclusion and identification of the displayed augmentation"
+   }
+  },
+  {
+   "text": "Write $D'=\\partial_v+(-1)^q\\partial_h$ for the transpose total differential and let $u_{p,q}=(-1)^{pq}1$. On the horizontal output $A_{p-1,q}$, $uD'$ has coefficient $(-1)^q(-1)^{(p-1)q}=(-1)^{pq}$, the coefficient of $Du$. On the vertical output $A_{p,q-1}$, its coefficient is $(-1)^{p(q-1)}=(-1)^{pq+p}$, again that of $Du$. On the axes missing components are zero. Consequently $uD'=Du$ and $u^2=1$, so $u$ is a chain isomorphism from the transpose convention to the chosen convention. On $p=0$ its coefficient is $1$, so composing with $e_Q$ gives the same edge augmentation.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Double-complex total sign convention preceding Tag 0132 (lemma-first-quadrant-ss); direct transpose calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), explicit two-sided categorical bar; Homology Tag 0133 (lemma-double-complex-gives-resolution), finite-diagonal dual proved here by concrete cycle recursions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The two sided bar double complex indexed by strings T0 to Tp to Qq has a horizontal augmentation to F(Qq) contracted by appending the identity of Qq",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingFaceMapComplex.ε', 'AlgebraicTopology.DoldKan.Γ₀.Obj.summand', 'classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'HomologicalComplex.ιTensorObj', 'ChainComplex.augment', 'HomologicalComplex.tensor_unit_d₂', 'AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero', 'AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ']; note=; digest=cbd5d3a8726d9087. Full returned types in search-horizontal-0.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: alternating-face augmentation, extra-degeneracy homotopy equivalence and the monoid standard resolution are support only; none constructs the displayed two-sided bar double complex, its append-at-the-end contraction and its signed total augmentation. Read ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two sided simplicial replacement total complex maps quasi isomorphically to the alternating complex of evaluation on a simplicial object using contractible slice categories",
+   "results": "8 hits; top=['QuasiIso', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId', 'CategoryTheory.ShortComplex.quasiIso_iff_comp_left', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex', 'quasiIso_of_isIso', 'HomologicalComplex₂.total.mapIso', 'AlgebraicTopology.alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingFaceMapComplex.obj']; note=; digest=fa344dccfd72d6e3. Full returned types in search-horizontal-1.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: alternating-face augmentation, extra-degeneracy homotopy equivalence and the monoid standard resolution are support only; none constructs the displayed two-sided bar double complex, its append-at-the-end contraction and its signed total augmentation. Read ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"homotopy\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types in search-horizontal-2.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: alternating-face augmentation, extra-degeneracy homotopy equivalence and the monoid standard resolution are support only; none constructs the displayed two-sided bar double complex, its append-at-the-end contraction and its signed total augmentation. Read ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "two.sided.*bar|bar.*augmentation|extraDegeneracy [sub=AlgebraicTopology]",
+   "results": "5 hits; top=['Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean']; note=; digest=36e0d35e189f91e5. Full returned types in search-horizontal-3.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: alternating-face augmentation, extra-degeneracy homotopy equivalence and the monoid standard resolution are support only; none constructs the displayed two-sided bar double complex, its append-at-the-end contraction and its signed total augmentation. Read ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A terminal object contracts each augmented row of a two sided categorical bar construction and the signed finite diagonal total augmentation is a quasi isomorphism",
+   "results": "8 hits; top=['Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'AlgebraicTopology.DoldKan.Γ₀NondegComplexIso', 'Rep.standardComplex.compForgetAugmentedIso', 'SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁', 'ChainComplex.augmentTruncate', 'AlgebraicTopology.alternatingFaceMapComplexConst', 'SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁_hom_f_f']; note=; digest=e7df26593f5783e9. Full returned types in search-horizontal-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: alternating-face augmentation, extra-degeneracy homotopy equivalence and the monoid standard resolution are support only; none constructs the displayed two-sided bar double complex, its append-at-the-end contraction and its signed total augmentation. Read ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "two.sided.*bar|bar.*augmentation|extraDegeneracy [sub=AlgebraicTopology]",
+   "results": "5 hits; top=['Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean', 'Mathlib/AlgebraicTopology/ExtraDegeneracy.lean']; note=; digest=36e0d35e189f91e5",
+   "date": "2026-10-23",
+   "verdict": "no match: terminal-object facts, extra-degeneracy homotopy equivalences and the monoid standard resolution do not state the two-sided bar, its specific signed contraction, both edge maps and the total comparison. ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicTopology.ExtraDegeneracy",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'AlgebraicTopology.ExtraDegeneracy'; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: this mistyped namespace was not recognized; repeated below with the correct full name."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented two sided categorical bar complex is contracted by appending the terminal object and its finite diagonal total augmentation is a quasi isomorphism",
+   "results": "8 hits; top=['Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv', 'CochainComplex.cm5b.instQuasiIsoIntP', 'classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'Rep.standardComplex.compForgetAugmentedIso', 'Rep.FiniteCyclicGroup.resolution_quasiIso', 'ChainComplex.augmentTruncate']; note=; digest=40d31e2a197cd870",
+   "date": "2026-10-23",
+   "verdict": "no match: terminal-object facts, extra-degeneracy homotopy equivalences and the monoid standard resolution do not state the two-sided bar, its specific signed contraction, both edge maps and the total comparison. ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A terminal object contracts the augmented categorical bar construction and its total augmentation is a quasi isomorphism",
+   "results": "8 hits; top=['CategoryTheory.Limits.IsInitial.uniqueUpToIso', 'CategoryTheory.WithTerminal', 'CategoryTheory.Limits.IsTerminal', 'CategoryTheory.instInhabitedWithTerminal.default', 'CategoryTheory.Limits.InitialMonoClass.casesOn', 'CategoryTheory.WithTerminal.ctorElimType', 'CategoryTheory.WithTerminal.of.noConfusion', 'CategoryTheory.Limits.IsInitial']; note=; digest=a259817d82c2a640",
+   "date": "2026-10-23",
+   "verdict": "no match: terminal-object facts, extra-degeneracy homotopy equivalences and the monoid standard resolution do not state the two-sided bar, its specific signed contraction, both edge maps and the total comparison. ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small category D and functor F to modules the two sided bar double complex of strings T0 to Tp to Qq has an explicit append identity contracting horizontal homotopy",
+   "results": "8 hits; top=['Homotopy.mkInductiveAux₂', 'Homotopy.mkInductiveAux₃', 'Homotopy.mkInductiveAux₂_add_one', 'AlgebraicTopology.DoldKan.homotopyPToId', 'HomologicalComplex.mapBifunctorMapHomotopy.zero₁', 'Homotopy.mkInductiveAux₁', 'Homotopy.mkInductiveAux₂_zero', 'AlgebraicTopology.DoldKan.homotopyPInftyToId']; note=; digest=85488a438a2fec8a",
+   "date": "2026-10-23",
+   "verdict": "no match: terminal-object facts, extra-degeneracy homotopy equivalences and the monoid standard resolution do not state the two-sided bar, its specific signed contraction, both edge maps and the total comparison. ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+   "results": "1 hits; top=['CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv']; note=; digest=f781d430bb3bbc21",
+   "date": "2026-10-23",
+   "verdict": "no match: terminal-object facts, extra-degeneracy homotopy equivalences and the monoid standard resolution do not state the two-sided bar, its specific signed contraction, both edge maps and the total comparison. ExtraDegeneracy.lean and RepresentationTheory/Homological/Resolution.lean were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-derived-colimit-computation",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality. Two-sided-bar re-split: Two-sided bar horizontal contraction and total augmentation (old proof steps 2, 3 and horizontal half of 5).",
+   "via": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-sided-bar-horizontal-augmentation",
+  "worker": "stage1",
+  "summary": "Checked the source double-complex argument and the actual project Lean source; no exact closed attachment. Proved face identities, both chain maps, the signed augmented contraction including the axes, and the total quasi-isomorphism by explicit finite cycle-lifting and boundary-elimination recursions. Verified the transpose signs and absence of representable-contractibility hypotheses. No new nodes: all calculations are for this bar and all auxiliary identities are proved in its steps.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality. Two-sided-bar re-split: Two-sided bar horizontal contraction and total augmentation (old proof steps 2, 3 and horizontal half of 5)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-c34fd061c",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-c34fd061c (reviewer sub-agent of L); spot-checked: I read the item and its nine steps in full; the delivery creates no new nodes. Statement, stmt_deps and blueprint fields are identical to the copies in clones/live and clones/side-live, and the item is unsplit in both. There is no repair note for this item, so the 2026-10-21 re-split rule does not apply. I recomputed each step. (1) The face identities hold. (2) The cross terms of D² cancel ((-1)^p∂_h∂_v against (-1)^{p-1}∂_v∂_h), and the diagonal in degree -n has n+1 bidegrees. (3) εq∂_h vanishes on T0→T1→Q_q (F(f)F(a)x−F(fa)x=0) and ε commutes with the vertical faces, so e_Q is a chain map. (4) At q=0 forgetting f matches the bar faces, and at q=1 the two vertical faces agree, so e_B is a chain map. (5) With t_p appending 1_{Q_q}, ∂_h t_p=t_{p-1}∂_h+(-1)^{p+1}, so h_p=(-1)^{p+1}t_p is a contraction; at p=0, ∂_h h_0=1−h_{-1}ε, and εh_{-1}=1. (6) The cycle-lifting recursion x_{j+1}=(-1)^{j+1}h_j∂_v x_j is correct, with the j=0 case from d_S y=0. (7) The boundary-elimination induction is correct; at k=n the leftover term has q=-1 and vanishes. (8) The quasi-isomorphism follows from the definition. (9) The transpose signs check out: (-1)^{pq} on both horizontal and vertical outputs, and the identity on p=0. Edge cases tested: n=0, the axes, F=0, characteristic 2, a one-object category. The proof never uses representable contractibility; that hypothesis belongs to the sibling node lem-trf-two-sided-bar-contractible-augmentation. Sources: Stacks 08Q9 (sites-cohomology.tex:10229), 0132 and 0133 (homology.tex:6672, 6699); labels match tags/tags. The proof is correctly marked as agent-written: it replaces the spectral sequence of 0133 by explicit recursions, which also prove that e_Q itself induces the isomorphism. No SGA citation. All cited nodes are definitions, so there are no tool uses to judge. Duplicate search over the DAG ('two-sided bar', 'extra degeneracy') found only distinct siblings, the parent (whose step 2 uses exactly these conclusions), lem-coef-ordinary-two-sided-bar-comparison and the six-functors ∞-bar nodes, none of them a duplicate or generalization. The Mathlib search record covers LeanSearch, LeanFinder/Loogle and grep. No fixes."
+ }
+}

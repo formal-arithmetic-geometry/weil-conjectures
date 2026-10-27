@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-rigidified-space-picard",
+ "kind": "statement",
+ "title": "Rigidified Picard representability for proper geometrically integral algebraic-space families",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], and $f:X\\to S$ a proper flat finitely presented algebraic space [def-trf-algebraic-space] with geometrically integral fibres and a section $e:S\\to X$. Proper means separated, of finite type and universally closed; flatness and finite presentation are tested on etale scheme charts. A line module is an $\\mathcal O_{X,\\mathrm{et}}$-module locally isomorphic to $\\mathcal O_{X,\\mathrm{et}}$ [def-sc-invertible-module]. For every $S$-scheme $T$ the canonical map $\\mathcal O_T\\to(f_T)_*\\mathcal O_{X_T}$ is an isomorphism. The functor assigning to $T$ the isomorphism classes of pairs $(M,r)$ with $M$ a line module on $X_T$ and $r:e_T^*M\\xrightarrow{\\sim}\\mathcal O_T$ is represented by a separated commutative group algebraic space $P\\to S$ locally of finite presentation, with group law tensor product. Any automorphism of $(M,r)$ is the identity. The same classification and uniqueness apply to algebraic-space parameters $T$. There is a universal rigidified line module on $X\\times_SP$, also when the parameter $P$ is an algebraic space. The zero section represents the trivial rigidified module. This representation and the universal module commute with arbitrary scheme base change. The geometric fibre $P_{\\bar s}$ represents the ordinary rigidified Picard functor of $X_{\\bar s}$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D28 (lemma-flat-geometrically-connected-fibres-with-section), 0D2B (lemma-flat-geometrically-connected-fibres-with-section-functor-stack), 0D2C (proposition-pic-functor); spaces-perfect.tex Tag 0E0S (lemma-proper-flat-geom-red-connected); moduli.tex Tags 0DNI (lemma-pic-functor-qs-lfp), 0DNJ (lemma-pic-functor-uniqueness-part). Universal family over an algebraic-space parameter is etale descent of rigidified line modules."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "pqf-def-locnoeth",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-rigidified-picard-representation",
+  "def-sfb-abelian-space-poincare-data",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-a1-space-point-topology",
+  "def-pc-reduced-scheme",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "A nonempty integral geometric fibre is reduced and irreducible, hence connected. Apply [lem-sfb-space-geometric-h0] to $f$. It gives the canonical structure-sheaf isomorphism for every scheme parameter and, in fact, every algebraic-space parameter. Apply [lem-sfb-space-picard-sheaf-representability] to obtain a quasi-separated locally finitely presented commutative group algebraic space $P$ representing the fppf sheafification of $T\\mapsto\\operatorname{Pic}(X_T)$. This application uses properness, flatness, finite presentation and precisely the universal structure-sheaf isomorphism just proved; it does not require $X$ to be a scheme.",
+   "uses": [
+    "lem-sfb-space-geometric-h0",
+    "lem-sfb-space-picard-sheaf-representability",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E0S; quot.tex Tag 0D2C; moduli.tex Tag 0DNI"
+   }
+  },
+  {
+   "text": "For any parameter $T$, a module endomorphism of a line module is locally multiplication by a function in a frame. Changing a frame conjugates by a unit, so leaves this function unchanged. These functions therefore glue to a global function; automorphisms correspond exactly to global units. By Step 1 every such unit on $X_T$ is the pullback of a unique unit on $T$, and pulling back along $e_T$ recovers that unit. Thus an automorphism preserving a rigidification is multiplication by $1$. Two rigidification-preserving isomorphisms, if they exist, are equal. For any line module $M$ define $N(M)=M\\otimes f_T^*(e_T^*M)^{-1}$ with its evaluation rigidification at $e_T$. This kills every base pullback: $N(M\\otimes f_T^*B)\\simeq N(M)$ canonically, and if $(M,r)$ was rigidified then evaluation using $r$ gives $N(M)\\simeq M$ preserving rigidifications. These formulas commute with pullback because they are formulas for tensor product, duals and evaluation.",
+   "uses": [
+    "lem-sfb-space-geometric-h0",
+    "def-trf-algebraic-space",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D28 and 0D2B, explicit scalar correction and automorphism calculation"
+   }
+  },
+  {
+   "text": "For a scheme $T$ let $R(T)$ be the rigidified isomorphism classes. A matching family for an fppf cover has unique rigidified overlap isomorphisms by Step 2, so these satisfy the cocycle. The pulled-back cover of $X_T$ is fppf by [lem-sfb-space-fppf-covering-calculus]. Each line module is quasi-coherent: on a local frame it has the presentation $0\\to\\mathcal O\\xrightarrow{\\sim}M\\to0$ [def-trf-space-quasi-coherent-module]. Apply [lem-sfb-space-fppf-qcoh-descent] to descend to a quasi-coherent module; [lem-sfb-space-fppf-invertible-locality] makes it a line module. Full faithfulness on $T$ descends the compatible section trivializations and their inverses. Thus $R$ is an fppf sheaf. Normalization gives a map from the Picard presheaf to $R$ and hence from its sheafification. Forgetting rigidification gives the reverse map. The first composite differs from a Picard presheaf class by $f_T^*e_T^*M$, which is locally trivial and hence zero in the sheafification; the other composite is identity by the rigidified isomorphism $N(M)\\simeq M$. Thus $P(T)\\simeq R(T)$ naturally. Tensor product gives the group law; zero is the trivial module with identity rigidification.",
+   "uses": [
+    "lem-sfb-space-fppf-qcoh-descent",
+    "lem-sfb-space-fppf-invertible-locality",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-trf-space-quasi-coherent-module",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D28, normalization and effective descent; Tag 0D2B; spaces-descent.tex Tags 04W8 and 060X"
+   }
+  },
+  {
+   "text": "To prove separatedness let $R$ be any valuation ring with fraction field $K$, and let two $R$-points of $P$ agree over $K$. By Step 3 choose their rigidified representatives $(M,r)$ and $(M_2,r_2)$. Their tensor difference $L=M\\otimes(M_2)^{-1}$ is trivial on $X_K$. The generic-triviality theorem [lem-sfb-space-valuation-line-triviality] applies to the base-changed family, which is proper flat and finitely presented by [lem-sfb-space-flat-proper-fp-locality]: its geometric fibres are the geometric fibres in the original hypothesis. It gives an unrigidified trivialization $L\\simeq\\mathcal O_{X_R}$. Its pullback to the section differs from the specified rigidification of $L$ by a unit of $R$; multiplying by the inverse of this unit corrects it. Thus the two rigidified classes agree over $R$. Since Step 1 gives a quasi-compact diagonal, [lem-sfb-space-valuative-separatedness] now proves that $P\\to S$ is separated. This argument uses all valuation rings, with no discrete or Noetherian restriction.",
+   "uses": [
+    "lem-sfb-space-valuation-line-triviality",
+    "lem-sfb-space-valuative-separatedness",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DNJ, valuative argument; spaces-morphisms.tex Tag 03KV"
+   }
+  },
+  {
+   "text": "Let $T$ be an algebraic-space parameter. Fibre products and base-changed etale covers exist by [lem-trf-space-fibre-products-etale-covers]. Choose a surjective etale scheme atlas $U\\to T$; its overlaps are schemes by the representable diagonal [def-trf-algebraic-space]. A map $T\\to P$ gives scheme-parameter rigidified modules on $X_U$ with matching overlap classes by Step 3. Their unique rigidified isomorphisms satisfy the cocycle by Step 2. The cover $X_U\\to X_T$ is fppf by [lem-sfb-space-fppf-covering-calculus]. The line modules are quasi-coherent by their local rank-one presentations [def-trf-space-quasi-coherent-module], so [lem-sfb-space-fppf-qcoh-descent] descends them to a quasi-coherent module. It is a line module by [lem-sfb-space-fppf-invertible-locality]. Full faithfulness on $U\\to T$ descends the section trivialization and its inverse. Conversely a rigidified module on $X_T$ gives an atlas map $U\\to P$ agreeing on overlaps; these maps descend uniquely since $P$ is an etale sheaf. These constructions are inverse and independent of atlas refinement by unique descent; uniqueness of rigidified isomorphisms is checked on $U$. At $T=P$, the identity map therefore gives a universal rigidified module on $X\\times_SP$ whose pullbacks are the classified modules.",
+   "uses": [
+    "lem-sfb-space-fppf-qcoh-descent",
+    "lem-sfb-space-fppf-invertible-locality",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-trf-space-quasi-coherent-module",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 04W8 and 060X, descent of the universal rigidified module; spaces.tex Tag 025Y"
+   }
+  },
+  {
+   "text": "For any scheme base change $S_1\\to S$, a scheme over $S_1$ has the same fibre product family, section, line modules and rigidifications whether evaluated relative to $S$ or $S_1$. The classification just proved therefore identifies $P\\times_SS_1$ with the representing space for that family, naturally on all scheme tests. The pulled-back universal module classifies the identity under this identification, so it is isomorphic to the universal module there by Step 5, uniquely as a rigidified module by Step 2. Identity and iterated base-change comparisons consequently agree. This proves arbitrary scheme base-change compatibility even when $S_1$ is not locally Noetherian. Taking $S_1=\\bar s$ yields the ordinary rigidified Picard functor of the geometric fibre, with its universal module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D25, base-change remark after situation-pic; normalization and uniqueness in Tags 0D28 and 0D2B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-geometric-h0",
+  "lem-sfb-space-picard-sheaf-representability",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "lem-sfb-space-fppf-invertible-locality",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-valuation-line-triviality",
+  "lem-sfb-space-valuative-separatedness",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D28, 0D2B and 0D2C; explicit normalization and universal-family descent using the existing fppf quasi-coherent descent node and spaces-descent.tex 060X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat proper finitely presented algebraic space with geometrically integral fibres and a section has a separated locally finitely presented Picard space representing rigidified line bundles",
+   "results": "8 hits; logged top: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Flat, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness and local representability, ring Picard groups and module pullback do not represent relative rigidified line bundles on proper algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Picard functor of a proper flat family with section is represented by an algebraic space and rigidification eliminates automorphisms",
+   "results": "8 hits; logged top: CommRing.Pic.functor, CommRing.relPic, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic_symm_apply, Submodule.unitsQuotEquivRelPic, CommRing.relPic_eq_top, Submodule.range_unitsToPic, CommRing.Pic.mk.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness and local representability, ring Picard groups and module pullback do not represent relative rigidified line bundles on proper algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "0 hits; logged top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness and local representability, ring Picard groups and module pullback do not represent relative rigidified line bundles on proper algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|rigidifi|picardFunctor",
+   "results": "23 hits; logged top: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness and local representability, ring Picard groups and module pullback do not represent relative rigidified line bundles on proper algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaves trivialized on a section of a proper flat family form a representable sheaf with no automorphisms",
+   "results": "8 hits; logged top: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness and local representability, ring Picard groups and module pullback do not represent relative rigidified line bundles on proper algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat algebraic space with geometrically integral fibres and a section has a Picard space representing rigidified invertible sheaves",
+   "results": "8 hits; top: CommRing.Pic, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.over, CommRing.relPic, CommRing.Pic.functor, CommRing.Pic.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal rigidified line bundle on the relative Picard algebraic space of a proper flat family with integral fibres and section",
+   "results": "8 hits; top: CommRing.relPic, Submodule.unitsQuotEquivRelPic, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic_symm_apply, CommRing.Pic.mk_eq_one, Submodule.range_unitsToPic, CommRing.relPic_eq_top, CommRing.Pic.mk.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picardFunctor|rigidifi",
+   "results": "23 hits; top: Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/CategoryTheory/Skeletal.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-space-poincare-calculus",
+  "date": "2026-10-23",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families.",
+   "via": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rigidified-space-picard",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E0S, 0D25, 0D28, 0D2B, 0D2C, 0DNI, 0DNJ, 03KV and 060X. Extracted five smaller tools for algebraic spaces and proved normalization, scalar uniqueness, sheaf comparison, valuative separation and the universal-module descent explicitly. Reused the newly available lem-sfb-space-fppf-qcoh-descent and its covering calculus rather than duplicating effective module descent; the new descent input asserts only locality of invertibility.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images (3) route via the full existing alteration/stable-curve/Jacobian/Poincare chain. This auxiliary node establishes the relative rigidified Picard input to lem-sfb-abelian-space-poincare-calculus. Latest blueprint direct-images proof (3) inspected; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Fibre products and base-changed etale atlases for algebraic spaces; the inherited unit has no separate construction of the underlying space geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-0142ebd9d",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-0142ebd9d (reviewer sub-agent of L); spot-checked: I read the item, all six steps and all five new nodes in full against the Stacks sources, and no fault needs a fix or a return. The item is still unsplit with an empty proof on base and on live, none of the new ids exists there, and there is no repair note, so this is a first split. The item statement is unchanged; its stmt_deps add only def-trf-space-etale-module-functors, which it uses for direct image and pullback. Sources read: 0D25, 0D2C (proposition-pic-functor), 0D2B/0D28 (the rigidified lemmas), 0DNI (lemma-pic-functor-qs-lfp), the full proof of 0DNJ (lemma-pic-functor-uniqueness-part), 0E0S (lemma-proper-flat-geom-red-connected), 03KV (lemma-valuative-criterion-separatedness) and 060X (lemma-finite-locally-free-descends) with 0DFQ. The new nodes are exact space-level statements of 0E0S, of 0D2C+0DNI over a scheme base, of 060X in rank one for fppf covers, of the valuation-ring paragraph of the 0DNJ proof (which uses no section or Picard space), and of 03KV. Each generalizes an existing scheme-only node (lem-sc-proper-flat-global-sections, lem-sfb-flat-proper-picard-algebraic-space, lem-sc-picard-locus-closed-valuation-triviality) rather than duplicating it, and none restates a clause of the item. Step checks: in Step 1 the hypotheses of the H0 node and of the representability node hold. Step 2 is elementary: rigidified automorphisms are 1 and the normalization N(M) works for space parameters too. Step 3 descends rigidified line modules with fppf-qcoh-descent, the invertibility node and descent of the rigidification on T; it does not spell out that locally equal classes are equal, but that follows from the same full faithfulness, and the comparison of both composites with the Picard sheaf is correct. Step 4 proves separatedness over arbitrary valuation rings and uses the quasi-compact diagonal from Step 1. Step 5 descends along a space atlas with scheme overlaps and gives the universal module. Step 6 is elementary restriction to the base change. Small cases checked: X=S, P^n over a field (P=Z, not quasi-compact), S empty, R a field. I accept the tool_use lem-trf-space-fibre-products-etale-covers, which supplies space fibre products. All batch-5 flags are generic: four def-trf definitions, the generic fibre-product lemma, and three sfb space lemmas that reach sec-trace-formula only through the definition def-trf-algebraic-space. None is part of the trace formula or Poincare duality proofs. Advisory only: valuative-separatedness uses closed immersion and quasi-compact defined inline without def citations. No fixes written; review.md lists the checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RigidifiedSpacePicard",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_rigidifiedSpacePicard",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_rigidifiedSpacePicard"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RigidifiedSpacePicard.lean",
+  "statement": "theorem exists_rigidifiedSpacePicard [IsLocallyNoetherian S] (A : Pointed (groupSpaceBase S)) (hp : MapIsProper A.p) (hf : MapIsFlat A.p) (hfp : MapIsLocallyOfFinitePresentation A.p ∧ MapIsQuasiCompact A.p.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal A.p.hom.hom)) (hgeom : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ S), IrreducibleSpace (Point (product A.p (groupSchemeMap (Over.homMk (U := Over.mk s) (V := Over.mk (𝟙 S)) s (by simp)))).obj.obj) ∧ ∀ V : (product A.p (groupSchemeMap (Over.homMk (U := Over.mk s) (V := Over.mk (𝟙 S)) s (by simp)))).EtaleSite, AlgebraicGeometry.IsReduced ((etaleForget _).obj V)) : UniversalStructureIso A ∧ AllRigidifiedAutomorphisms A ∧ ∃ (P : AlgebraicSpace S) (G : CommutativeSpaceGroup P) (U : (product A.p (groupSpaceProjection P)).SmallModules) (rU : Axes A (pointedGroup P G) U), MapIsSeparated (groupSpaceProjection P) ∧ MapIsLocallyOfFinitePresentation (groupSpaceProjection P) ∧ RepresentsAllRigidifiedLines A (pointedGroup P G) U rU ∧ PicardTensorLaw A P G U rU ∧ AllRigidifiedPicardBaseChange A (pointedGroup P G) U rU",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05d6d1702",
+  "group": "O4",
+  "result": "pass",
+  "note": "Clause-by-clause match: locally Noetherian S only; Pointed space with section; MapIsProper/Flat/lfp (+redundant qc, qc diagonal); geometric integrality = irreducible Point (instance topology; constructible topology is only a def) + reduced etale charts for all alg. closed K : Type u; UniversalStructureIso via canonical moduleStructureMap (space parameters, per proof step 1, equivalent by etale locality); ∃ P, CommutativeSpaceGroup, U, Axes with separated + lfp; RepresentsAllRigidifiedLines = ∃! classifying map for all space parameters (bijection with rigidified iso classes); AllRigidifiedAutomorphisms; PicardTensorLaw via addition; zero section via pointedGroup identity + right axis; AllRigidifiedPicardBaseChange over every T : Over S without Noetherianity, covering geometric fibres. New def node def-sfb-rigidified-picard-representation: real Prop defs, docstrings, searches; existing Poincare.Represents/UniversalBaseChange are narrower. lean.statement verbatim for both nodes; stmt_deps all definitions (Point owner reached via def-a1-space-point-topology). sorry only; report sections present; first delivery. Advisory: inline hgeom mirrors GroupSpaceIntegralFibres; hfp qc parts redundant. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-finite-constructible-complex-heart-presentations",
+ "kind": "definition",
+ "title": "Finite constructible complex hearts and their filtered presentations",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $X$ a scheme. Use the finite constant scalar-model constructible modules of [sk-def-sfb-constructible] in $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ and cochain complexes of [def-pc-cochain-complex-modules]. A finite constructible complex is a cochain complex $K^\\bullet$ in $\\mathcal A_X$ whose terms are constructible and for which there is a finite subset $S\\subset\\mathbf Z$ with $K^n=0$ for $n\\notin S$. Its differentials are arbitrary module-sheaf maps. Define $\\mathcal H_X$ to be the replete class of modules isomorphic to $H^0(K^\\bullet)=\\ker(d^0)/\\operatorname{im}(d^{-1})$ for such a complex; impose no constructibility condition on this cohomology. Define $\\mathcal I_X$ as the replete class of small filtered ambient colimits of modules in $\\mathcal H_X$, using [def-weil-pbc-category-colimit]. The indexing universe is the same fixed universe as the module Hom sets, and arrows are arbitrary module maps, with no lift to complexes required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+  "place": "Filtered-colimit heart construction, in the finite-complex formulation of lem-sfb-finite-complex-heart-filtered-approximation, paragraphs 2 and 4. This definition packages the finite-stage and presentation classes already specified in that item."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Small filtered colimits of zeroth cohomology of finite complexes of constructible sheaves",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; AddMonCat.FilteredColimits.colimit; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; AddGrpCat.FilteredColimits.colimitCocone; AddCommGrpCat.FilteredColimits.colimitCocone; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AddGrpCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.colimit_zero_eq.",
+   "date": "2026-10-23",
+   "verdict": "No match for the finite-complex heart property or its constructible filtered presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of zeroth cohomology of bounded constructible complexes of pro etale modules are closed under kernels cokernels extensions and coproducts",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.instAB5CondensedMod; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; instAbelianCondensedMod; instAbelianLightCondMod; LightCondensed.instCountableAB4StarLightCondMod; instHasColimitsCondensedMod.",
+   "date": "2026-10-23",
+   "verdict": "No exact match; these describe ambient condensed module categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty, CategoryTheory.IsFiltered",
+   "results": "2 hits: CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι; CategoryTheory.ObjectProperty.of_essentiallySmall_index.",
+   "date": "2026-10-23",
+   "verdict": "The latter points to ObjectProperty.ind, reused as the filtered-colimit construction rather than duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteConstructibleComplexHeart|finiteConstantConstructibleComplex|IndFiniteComplexHeart",
+   "results": "msearch Mathlib: 0 hits. rg of lean/WeilConjectures and lean/Sheaf: 0 hits. DAG search of finite complex/filtered heart descriptions found only the item, its users and lem-sfb-qcqs-finite-complex-heart-filtered-closure (a theorem with no Lean record), not a definition node. tools/blueprint_refs.py search \"finite constructible complex\": 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition of the particular finite-stage class. Reuse CochainComplex, IsZero, IsConstantModelConstructible, homology and ObjectProperty.ind."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-complex-heart-filtered-approximation",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: filtered presentations of finite constructible complex cohomology in the coefficient-transfer heart step.",
+   "via": [
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteConstructibleComplexHeartPresentations",
+  "declaration": "AlgebraicGeometry.ProEtale.indFiniteConstructibleComplexHearts",
+  "file": "lean/Sheaf/Paper/FiniteConstructibleComplexHeartPresentations.lean",
+  "statement": "def indFiniteConstructibleComplexHearts : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsFiniteConstantConstructibleComplex",
+   "AlgebraicGeometry.ProEtale.finiteConstructibleComplexHearts",
+   "AlgebraicGeometry.ProEtale.indFiniteConstructibleComplexHearts"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-866547dfd",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-866547dfd",
+  "group": "NL",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean statement against the node: the six coefficient cases (same encoding as the landed FiniteConstructibleComplexHeartCd; the finite-subextension-valued algebraic-closure variant is correctly excluded), affine + locally Noetherian + CompactSpace X, a cohomology-bound hypothesis using module-derived sections at affine pro-etale U with q > c, the hull as ObjectProperty.ind.{u+1} of K.homology 0 (arbitrary module maps; u+1 is the size-convention universe), and conclusions ContainsZero, constructibles ≤ hull, closure under kernels, cokernels, extensions and coproducts over every I : Type (u+1). Edge cases (empty scheme, zero ring, zero complex, c = 0, empty coproduct) are covered. The new definition node has real bodies and source/blueprint docstrings and does not duplicate the existing ind-constructible classes. Recorded statements match the files verbatim; single sorry; node statement unchanged from live; no prior S2 run for this item. Nothing recompiled because no file changed; the worker's dry run was OK. Advisory: sk-def-localizing-closure is cited in prose but its predicate is not used in Lean (inherited stage-1 dependency)."
+ }
+}

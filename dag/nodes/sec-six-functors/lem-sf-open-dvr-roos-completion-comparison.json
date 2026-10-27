@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-open-dvr-roos-completion-comparison",
+ "kind": "statement",
+ "title": "Normalized scalar comparison of DVR quotient completion and integral Roos completion",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell with integers R, an adic datum d on R, a scheme T, and the canonical coefficient model C of [def-sf-open-quotient-koszul-models]. For every P in the unbounded derived category of completed integral modules, there is an isomorphism from the completed-adic total derived limit of the strict quotient reduction tower of C(P) to C of IntegralOnSlice.completion(P) [def-pur-integral-derived-operations]. Composing the specified quotient completion unit with this isomorphism is exactly the scalar image under C.derived of IntegralOnSlice.completionUnit at P. Neither completeness of P nor a choice of generators for d.ideal is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (sites-cohomology-lemma-derived-limit-is-ok); normalized strict inverse-limit comparison under canonical coefficient transport."
+ },
+ "stmt_deps": [
+  "def-sf-open-quotient-koszul-models",
+  "def-pur-integral-derived-operations",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative Q. Apply openDvrAugmentedTowerComparison to the normalized coefficient calculus. Its representative field gives a complex B of strict integral quotient towers, the augmentation a, and the simultaneous comparison with the recorded integral tower. Its unit field identifies the quotient completion unit with the scalar image of the actual sequence adjunction unit.",
+   "uses": [
+    "lem-sf-open-dvr-augmented-tower-comparison",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (sites-cohomology-lemma-derived-limit-is-ok); normalized strict inverse-limit comparison under canonical coefficient transport."
+   }
+  },
+  {
+   "text": "The generic strictRoosDerivation computes total inverse limit by the signed Roos complex. Its universal right-derived comparison respects the ordinary inverse-limit comparison. Projection extensionality and the strict augmentation show that this comparison takes the constant/limit adjunct of a to the recorded zero-homotopy integral Roos unit. All equations are in the whole derived inverse limit; level projections are used only for ordinary limits and chain maps.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-pur-completed-reduction-augmentation-iso",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (sites-cohomology-lemma-derived-limit-is-ok); normalized strict inverse-limit comparison under canonical coefficient transport."
+   }
+  },
+  {
+   "text": "Compose the quotient-tower comparison, the inverse-limit comparison, and IntegralOnSlice.completionComparison. Its defining equation identifies the Roos unit with the specified integral completion unit. Naturality of both units transports this comparison from Q to arbitrary P. Exact scalar equivalence preserves the isomorphisms. No completeness or generator hypothesis is used.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (sites-cohomology-lemma-derived-limit-is-ok); normalized strict inverse-limit comparison under canonical coefficient transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-dvr-augmented-tower-comparison",
+  "def-pur-integral-derived-operations",
+  "lem-weil-strict-roos-derivation",
+  "lem-pur-completed-reduction-augmentation-iso",
+  "lem-pur-roos-intrinsic-completeness-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; F7 specialization of the existing strict Roos derivation and augmented coefficient-tower comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completeness is equivalent to invertibility of the Koszul completion unit under an exact equivalence of coefficient modules",
+   "results": "8 hits on ordinary adic completion; none compares the specified sheaf-derived quotient and Roos units.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\", \"equivalence\"",
+   "results": "4 ordinary adjunction equivalence-unit instances; no quotient completion comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]omplet|[Cc]omplet.*Koszul",
+   "results": "0 Mathlib hits; project search found normalized augmented tower, integral Roos criterion and strict Roos derivation, used in this proof.",
+   "date": "2026-10-27",
+   "verdict": "reuse project declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenDvrIntrinsicCriterion",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof of fix-prop-coherence, sentence identifying the maps as tensor reassociation, evaluation, and adjunction units and counits: normalize the quotient completion unit under scalar transport.",
+   "via": [
+    "lem-sf-open-dvr-intrinsic-criterion",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrRoosCompletionComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrRoosCompletionComparison.lean",
+  "declaration": "WeilConjectures.openDvrRoosCompletionComparison",
+  "statement": "theorem openDvrRoosCompletionComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)\n    (P : DerivedCategory (scalarReductionSource.{u, u} l E T)) :\n    ∃ j : (completedAdicReduction T d ⋙ reconstructionRlim T d).obj\n        (C.derived.functor.obj P) ≅\n        C.derived.functor.obj ((IntegralOnSlice.completion l E T none).obj P),\n      (reconstructionCompletionUnit T d).app (C.derived.functor.obj P) ≫ j.hom =\n        C.derived.functor.map ((IntegralOnSlice.completionUnit l E T none).app P)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T222645-L-679244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T222645-L-679244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

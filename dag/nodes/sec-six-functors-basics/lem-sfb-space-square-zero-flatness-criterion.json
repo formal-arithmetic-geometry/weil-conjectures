@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-space-square-zero-flatness-criterion",
+ "kind": "statement",
+ "title": "Flatness and cartesianness from the square-zero ideal map",
+ "statement": "Use algebraic spaces over a scheme $S$ and their small etale sites and structure sheaves [def-trf-algebraic-space, def-pc-scheme], in the universes of [def-weil-size-convention]. A first order thickening $Z\\hookrightarrow Z\\prime$ means a representable closed immersion whose ideal sheaf has square zero and whose underlying closed subset is all of $Z\\prime$; closed immersion is tested after every scheme base change, closed immersions of schemes being [def-weil-closed-immersion]. Module sheaves and quasi-coherence are [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. Sheaf tensor products are [def-pur-sheaf-tensor-product]. Let $(f,f\\prime):(Z\\subset Z\\prime)\\to(Y\\subset Y\\prime)$ be a commutative square of first order thickenings over $S$. Let $\\mathcal J_Y$ and $\\mathcal J_Z$ be the respective ideal sheaves, regarded as modules on $Y$ and $Z$ on the common etale sites. Put $f^*\\mathcal J_Y=\\mathcal O_Z\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal J_Y$. If $f$ is flat (flatness on etale scheme charts [def-weil-flat-morphism]), the following are equivalent: $f\\prime$ is flat and $Z\\cong Y\\times_{Y\\prime}Z\\prime$ via the given square; the canonical map $f^*\\mathcal J_Y\\to\\mathcal J_Z$ is an isomorphism. Fibre products are the sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06BH (lemma-deform), both directions."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-flat-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "At each geometric point $\\bar z$ of $Z$, apply [lem-sfb-space-stalk-ideal-pullback] to obtain $A\\prime\\to B\\prime$, quotients $A=A\\prime/I$, $B=B\\prime/J$, and the ideal-map stalk $q:I\\otimes_A B\\to J$. Both ideals have square zero. By [lem-sfb-space-strict-local-flatness], the assumed flatness of $f$ says that $B$ is flat over $A$ at every such point; flatness of $f\\prime$ is equivalent to flatness of every $B\\prime$ over $A\\prime$. The stalk-calculus node also detects the sheaf isomorphism and identifies the cartesian condition with $J=IB\\prime$ everywhere. Thus it remains to prove the two implications for these rings.",
+   "uses": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "06BH, lemma-deform, reduction to scheme charts; expressed in geometric stalks."
+   }
+  },
+  {
+   "text": "Assume $f\\prime$ is flat and the square is cartesian. At the fixed stalk $J=IB\\prime$. Apply [lem-trf-flat-tensor-preserves-injection] to the inclusion $I\\hookrightarrow A\\prime$ and the flat $A\\prime$-module $B\\prime$. Using tensor symmetry and $A\\prime\\otimes_{A\\prime}B\\prime=B\\prime$, its conclusion makes multiplication $I\\otimes_{A\\prime}B\\prime\\to B\\prime$ injective, with image $IB\\prime=J$. Because $I^2=0$, the module $I$ is an $A$-module. Clause (2) of [lem-weil-pbc-tensor-over-quotient-ring] identifies its source with $I\\otimes_A(B\\prime/IB\\prime)=I\\otimes_A B$. The multiplication is precisely $q$, so $q$ is bijective. This holds at every geometric point, hence the original ideal map is an isomorphism by [lem-sfb-space-stalk-ideal-pullback].",
+   "uses": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "063Y, lemma-deform, direction (1) implies (2)."
+   }
+  },
+  {
+   "text": "Conversely suppose the ideal map is an isomorphism. Its stalk $q$ is surjective by [lem-sfb-space-stalk-ideal-pullback]. Its image in $B\\prime$ is exactly $IB\\prime$: every image $q(i\\otimes b)$ is the product of the image of $i$ and a lift of $b$, and each product $f\\prime{}^\\sharp(i)b\\prime$ is $q(i\\otimes\\bar b\\prime)$. Finite sums give both inclusions, so $J=IB\\prime$. The value is independent of the lift since $f\\prime{}^\\sharp(I)\\subseteq J$ and $J^2=0$. This equality at all stalks proves that the given square is cartesian by the same stalk-calculus node.",
+   "uses": [
+    "lem-sfb-space-stalk-ideal-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "063Y, lemma-deform, direction (2) implies (1), first sentence."
+   }
+  },
+  {
+   "text": "With $J=IB\\prime$, clause (2) of [lem-weil-pbc-tensor-over-quotient-ring] gives $I\\otimes_{A\\prime}B\\prime\\cong I\\otimes_A B$. Under this isomorphism multiplication into $B\\prime$ factors as the bijection $q$ followed by the inclusion $J\\hookrightarrow B\\prime$, hence is injective. Moreover $B\\prime/IB\\prime=B$ is flat over $A\\prime/I=A$ by Step 1. Apply [lem-sfb-nilpotent-ideal-module-flatness] with $R=A\\prime$, $M=B\\prime$ and $n=2$ to deduce that $B\\prime$ is flat over $A\\prime$. This at every geometric point implies that $f\\prime$ is flat by [lem-sfb-space-strict-local-flatness]. Together with Step 3 it proves the converse.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-sfb-nilpotent-ideal-module-flatness",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "051C, lemma-what-does-it-mean, nilpotent final assertion, as used in Tag 063Y."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-stalk-ideal-pullback",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-sfb-nilpotent-ideal-module-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06BH (lemma-deform), via Tag 063Y (more-morphisms.tex, lemma-deform) and Tag 051C; the etale-local reduction is expressed using geometric stalks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between square zero thickenings of algebraic spaces is flat and cartesian if its reduction is flat and the canonical pullback map on ideal modules is an isomorphism",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flatness, ideal-sheaf kernels, and flat monomorphisms do not state the square-zero ideal criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat deformation criterion identifying the kernel of the structure sheaf quotient with the pulled back base ideal",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  RingHom.ker (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop (I.glueDataObjι U))) =\\n    Ideal.comap (CommRingCat.Hom.hom (↑U).topIso.hom) (I.ideal U)\", \"doc\": \"For an affine open subset $U$ of a scheme $X$ and an ideal sheaf $\\\\mathcal{I}$, the kernel of the ring homomorphism $\\\\operatorname{Hom}_{\\\\text{appTop}}$ induced by the gluing data $\\\\mathcal{I}.\\\\text{g\"}\n  {\"name\": \"Algebra.Extension.ker_infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), P.infinitesimal.ker = P.ker.cotangentIdeal\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the kernel of the infinitesimal extension $ P_{\\text{infinitesimal}} $ coincides with the cotangent ideal of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.Hom Y → Y.IdealSheafData\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"AlgHom.ker_kerSquareLift\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {A : Type u_1} {B : Type u_2} [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (f : A →ₐ[R] B),\\n  RingHom.ker f.kerSquareLift.toRingHom = (RingHom.ker f.toRingHom).cotangentIdeal\", \"doc\": \"For an algebra homomorphism $ f : A \\\\to B $ over a commutative ring $ R $, the kernel of the ring homomorphism obtained from the kernel square lift of $ f $ is equal to the cotangent ideal of the kern\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  RingHom.ker (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U)) = I.ideal U\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the kernel of the ring homomorphism induced by the canonical morphism from the closed subscheme defined by an ideal sheaf $\\\\mathcal{I}$ to $X$, when res\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U V : ↑X.affineOpens),\\n  I.ideal V ≤\\n    RingHom.ker\\n      (CommRingCat.Hom.hom\\n        (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app (↑U).ι ↑V)\\n          (AlgebraicGeometry.Scheme.Hom.app (I.glueDataObjι U) ((Topologic\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and affine open subsets $U,V \\\\subseteq X$, the ideal $\\\\mathcal{I}(V)$ is contained in the kernel of the ring homomorphism obtained by composing the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Scheme.Hom.ker f =\\n    AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\\n      (RingHom.ker (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)))\", \"doc\": \"For schemes $X$ and $Y$ with $Y$ affine, and a morphism $f : X \\\\to Y$, the kernel sheaf $\\\\ker(f)$ equals the ideal sheaf constructed from the kernel of the ring homomorphism $f^\\\\sharp : \\\\Gamma(Y, \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ideal_ker_le\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) (U : ↑Y.affineOpens),\\n  f.ker.ideal U ≤ RingHom.ker (CommRingCat.Hom.hom (f.app ↑U))\", \"doc\": \"For a morphism of schemes $ f: X \\to Y $ and an affine open subset $ U $ of $ Y $, the ideal corresponding to the kernel of $ f $ over $ U $ is contained in the kernel of the ring homomorphism induced \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flatness, ideal-sheaf kernels, and flat monomorphisms do not state the square-zero ideal criterion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.IsIso",
+   "sub": "",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f] : CategoryTheory.IsIso f\", \"doc\": \"[Stacks Tag 06NC](https://stacks.math.columbia.edu/tag/06NC)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ S) [CategoryTheory.IsIso f] [AlgebraicGeometry.Flat g] [AlgebraicGeometry.IsFinite g] : AlgebraicGeometry.Scheme.Hom.finrank (CategoryTheory.CategoryStruct.comp f g) = AlgebraicGeometry.Scheme.Hom.finrank g\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsFinite f] : CategoryTheory.IsIso f ↔ AlgebraicGeometry.Scheme.Hom.finrank f = 1\", \"doc\": \"A finite flat locally finitely presented morphism is an isomorphism if and only if\\nits rank is constant equal to `1`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flatness, ideal-sheaf kernels, and flat monomorphisms do not state the square-zero ideal criterion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|conormal|[Ff]lat.*[Nn]ilpotent",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flatness, ideal-sheaf kernels, and flat monomorphisms do not state the square-zero ideal criterion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between square zero thickenings of algebraic spaces is flat and cartesian if its reduction is flat and the canonical pullback map on ideal modules is an isomorphism",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv_apply\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flatness, ideal-sheaf kernels, and flat monomorphisms do not state the square-zero ideal criterion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|conormal|[Ff]lat.*[Nn]ilpotent",
+   "sub": "AlgebraicGeometry",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, formal smoothness and etaleness lifting properties do not state the ideal-map equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat deformation of algebraic spaces criterion using an isomorphism on square zero ideals",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallyEtale.iff_comp_bijective, RingHom.Flat.respectsIso, Algebra.FormallySmooth.of_comp_surjective, RingHom.Flat, Algebra.FormallyUnramified.iff_comp_injective_of_small, AlgebraicGeometry.Flat.mk, Algebra.FormallyUnramified.iff_comp_injective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, formal smoothness and etaleness lifting properties do not state the ideal-map equivalence for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.IsIso",
+   "sub": "",
+   "results": "Search succeeded; 6 hits: AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left, AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right, AlgebraicGeometry.isIso_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso, AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, formal smoothness and etaleness lifting properties do not state the ideal-map equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between square zero thickenings of algebraic spaces is flat and cartesian if its reduction is flat and the canonical pullback map on ideal modules is an isomorphism",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Flat.instOfIsOpenImmersion, Algebra.Extension.homInfinitesimal, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, formal smoothness and etaleness lifting properties do not state the ideal-map equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat reduction of a square zero deformation lifts to a flat cartesian morphism exactly when the conormal pullback is bijective",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.comp_bijective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, RingHom.FaithfullyFlat.codescendsAlong_bijective, Algebra.FormallySmooth.of_split, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.Extension.Cotangent.map_toInfinitesimal_bijective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, formal smoothness and etaleness lifting properties do not state the ideal-map equivalence for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 06BH (lemma-deform), both directions.",
+   "via": [
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-square-zero-flatness-criterion",
+  "worker": "stage1",
+  "summary": "Wrote both implications via geometric stalks and the source ring calculation, deriving J=IBprime before the quotient tensor identification; reused strict-local flatness, flat tensor injectivity and quotient tensor nodes; added two strictly auxiliary statement-only nodes. The item statement is unchanged.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), direct-image stability; the inherited supporting route through algebraization of nodal curves needs Tag 06BH. The ancestry tool returns None because created.item of lem-sfb-admissible-direct-image names a module rather than a DAG node; retained None and recorded the intended current blueprint place explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic tensor balancing across a quotient ring, used in the source ring argument; no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-e3a515b6b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-e3a515b6b (reviewer sub-agent of L); spot-checked: Read Stacks 06BH and its proof, which reduces to 063Y (proof read in full), plus 051C (final nilpotent assertion) and 00M6 (Tor_1 = ker(I⊗M→M)). The item statement matches 06BH and is unchanged. Step 1: strict-local-flatness turns flatness of f and f' into flatness of the stalk maps A→B and A'→B', and the stalk node supplies q, conservativity and cartesian ⇔ J=IB'. Step 2: the flat-tensor Mathlib leaf on I↪A' with M=B' makes I⊗_{A'}B'→B' injective with image IB'=J; quotient-tensor clause (2), valid since I²=0 and J=IB', turns this into q bijective. Step 3 is elementary: the image of q is IB', so J=IB'. Step 4: J=IB' makes multiplication injective, B=B'/IB' is flat over A, and the new nilpotent lemma with n=2 gives B' flat over A'. The worker correctly avoids Stacks' early 'I⊗_A B = I⊗_{A'}B''. The nilpotent node is true (051C+00M6; tested on R=k[ε], M=k), is not in Mathlib (grep of RingTheory/Flat) and has no DAG duplicate. The stalk node is correct and is not a clause of the item. One fault, B2: it used f^*𝓘 and 'the canonical ideal map' without defining them and did not name the cartesian morphism. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-stalk-ideal-pullback.json by adding the O_X⊗_{f^{-1}O_Y}f^{-1}𝓘 definition, the map a⊗j↦ã f'^♯(j), and 'X→Y×_{Y'}X' iso'; stmt_deps unchanged. Batch-5 citations: lem-trf-flat-tensor-preserves-injection is a generic Mathlib flat-module leaf; def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are a foundational definition and the existence of fibre products, both already in the base item's stmt_deps. None of the three is trace-formula or Poincaré content, so all are accepted. blueprint.from.node=null is inherited (ancestor tool None) and goes to the maintainer as a note. The tool_use lem-weil-pbc-tensor-over-quotient-ring is accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

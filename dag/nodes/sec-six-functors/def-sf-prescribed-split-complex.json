@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-prescribed-split-complex",
+ "kind": "definition",
+ "title": "Prescribed split free complex, cell inclusions and canonical cohomology map",
+ "status": "split",
+ "statement": "Let $U$ be a scheme [def-pc-scheme], with small pro-etale site $U_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $C$ be a sheaf of commutative rings on this site. Write $R$ for $C$ with commutativity forgotten, and use the category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category]. For integers $a,b$ and a rank function $r:\\mathbf Z\\to\\mathbf N$, define the split cochain complex $S(C,a,b,r)$ [def-weil-abstract-derived-category] by $S^q=R^{\\oplus r(q)}$ if $a\\leq q\\leq b$, and $S^q=0$ otherwise, with every differential zero. For $a\\leq q\\leq b$, define $\\iota_q:R^{\\oplus r(q)}[-q]\\to S(C,a,b,r)$ to be the chain map whose degree-$q$ component is the canonical identification with $S^q$ and whose other components are zero. In the derived category with localization $Q$, for every integer $q$, natural number $m$, object $N$ and arrow $f:Q(R^{\\oplus m}[-q])\\to N$, define its free cohomology map to be the composite $R^{\\oplus m}\\xrightarrow{\\sim}H^q(Q(R^{\\oplus m}[-q]))\\xrightarrow{H^q(f)}H^q(N)$, using the canonical single-complex homology identification and localization comparison [def-weil-derived-cohomology-sheaves]. These are explicit constructions; no projectivity, evaluation-exactness hypothesis, splitting theorem, nonempty interval or positive rank is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph: shifted free top cell and generator lifting; explicit zero-differential model and canonical cohomology comparison in Sheaf.Paper.ProjectiveCohomologySplitModel, lines 46-91."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A zero differential bounded cochain complex of finite free module sheaves with its summand inclusions and the canonical cohomology map from a single free complex",
+   "results": "8 hits: CochainComplex.HomComplex.δ_ofHom, CochainComplex.singleFunctor_obj_d, CochainComplex.cochainComplex_d_succ_succ_zero, CochainComplex.mk_d_1_0, CochainComplex.cm5b.I, CochainComplex.HomComplex.Cochain.ofHom_zero, CochainComplex.HomComplex.Cochain.ofHoms_zero, Homotopy.prevD_zero_cochainComplex",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions in Sheaf.Paper.ProjectiveCohomologySplitModel, with an existing:true definition record"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zero differential split complex of finite free sheaves on a ringed site, with its cell inclusion and canonical derived cohomology map",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CochainComplex.homOfDegreewiseSplit_f, CochainComplex.homOfDegreewiseSplit, CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.cocycleOfDegreewiseSplit",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions in Sheaf.Paper.ProjectiveCohomologySplitModel, with an existing:true definition record"
+  },
+  {
+   "tool": "grep",
+   "query": "sfSplitRings|sfSplitComplex|sfSplitCell|sfFreeCohomologyMap|mkHomFromSingle|singleObjHomologySelfIso",
+   "results": "19 hits: Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/Double.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match; reuse the existing project definitions in Sheaf.Paper.ProjectiveCohomologySplitModel, with an existing:true definition record"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-prescribed-residue-cell-cone-model",
+  "date": "2026-10-23",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: A lifted top residue cell with a complete cone of shorter amplitude; old parent steps 5-6. Re-split: Residue cone amplitude assertion (details omitted in the source), expanded by old item proof steps 4-6 and the residue zero case of step 7; cone convention: derived.tex, definition-cone. Definition of the prescribed zero-differential residue model and its top summand inclusion, before applying the splitting theorem.",
+   "via": [
+    "lem-sf-prescribed-residue-cell-cone-model",
+    "lem-sf-complete-top-residue-cell-cone",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveCohomologySplitModel",
+  "declaration": "WeilConjectures.sfSplitComplex",
+  "declarations": [
+   "WeilConjectures.sfSplitRings",
+   "WeilConjectures.sfSplitComplex",
+   "WeilConjectures.sfSplitCell",
+   "WeilConjectures.sfFreeCohomologyMap"
+  ],
+  "statement": "def sfSplitComplex (a b : ℤ) (r : ℤ → ℕ) :\n    CochainComplex (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "F1 repair requested by the independent review of 09f94468ef69: this definition node records the four unchanged explicit definitions in the existing module, not the projective splitting theorem. The C and U parameters and the derived-localization instance are declared in the surrounding section. The definitions do not choose data from that theorem. No module is copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22b13c79",
+  "group": "Q120",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22b13c79",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 09f94468ef69. The Lean module is byte-identical (the math was already judged correct) and lean.statement matches the file verbatim. F1 repaired: theorem stmt_dep replaced by new existing:true node def-sf-prescribed-split-complex owning sfSplitRings/sfSplitComplex/sfSplitCell/sfFreeCohomologyMap in the unchanged ProjectiveCohomologySplitModel (lines 46-91 read; no .choose; statement faithful; signature verbatim; no duplicate owner in live DAG); theorem stays in proof_deps only. F2 repaired: def-weil-derived-tensor and all other stmt_dep records are byte-identical to side-live; the note names the intrinsic siteDerivedTensorIndependentCoefficients of the landed Tor-amplitude record. Item differs from live only in lean and the added stmt_deps; statement, proof and proof_deps are unchanged. Clauses, edge cases (a=b, zero ranks, negative b, empty scheme, arbitrary U, independent universes) and gates (sorry only, docstrings with source and blueprint, six proof steps) all re-checked. No compile: nothing changed."
+ }
+}

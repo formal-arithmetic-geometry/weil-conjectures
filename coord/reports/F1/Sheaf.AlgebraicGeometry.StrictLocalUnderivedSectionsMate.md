@@ -1,63 +1,58 @@
 ## What changed
 
-Restored Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate from its quarantined
-assignment as a public re-export of the existing, proved adopted source module.
-This repairs strictLocalUnderivedMateSections: neighbourhood restriction, the exchange
-square, global sections, and Q.legs now all use Scheme.strictLocalization and
-Scheme.strictLocalizationToBase. The comparison strictLocalUnderivedMateSections_eq
-is supplied by the same implementation, under its existing qualified name.
+Retired the zero-declaration wrapper
+Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate, as currently assigned in
+coord/retire-items.tsv. Its sole live consumer,
+Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreOrdinaryGerm, imports
+WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate directly.
+Only that private import line changes; its statement, docstring and proof stay verbatim.
+The adopted implementation already supplies the constructed map
+AlgebraicGeometry.Etale.strictLocalUnderivedMateSections and its complete comparison
+AlgebraicGeometry.Etale.strictLocalUnderivedMateSections_eq.
 
-The archive's line-392 and line-441 errors were reproduced with lcompile.py. The restored
-module compiles. The exact current adopted implementation is also compiled in a scratch
-file with its full comparison type and defining construction equation checked. Both
-public names have only propext, Classical.choice and Quot.sound in their axiom lists.
-The import-only probe checks name visibility through the restored Sheaf path.
+The node lem-weil-pbc-strict-local-underived-sections-mate changes only lean.note.
+Its SmallModel attachment, statement, proof, all dependencies and parent edges remain
+intact. Its separate live implementation and the quarantine archives are preserved.
 
-The node keeps its module/file/declaration attachment, mathematical statement, all
-statement and proof dependencies, and all proof-step uses. Its proof and proof_origin
-record adopted-source reuse; lean.statement uses the canonical model and lean.note
-explains this representation repair. No source-library or quarantine file is edited.
-The consumer scan reports zero live downstream modules. All three archived/DAG parents
-remain recorded; their existing model migrations are independent rework.
-
-Change record: coord/changes/F1-strict-local-underived-sections-mate-source-reuse.md.
+Change record: coord/changes/F1-retire-strict-local-underived-sections-mate.md.
 
 ## Proved and sorry left
 
-This is an assigned definition repair with zero original sorry holes. Closed: 0 of 0.
-Added: 0. Split off: 0. Sorry left in the delivered module: none.
+Retirement with zero original holes: proved 0 of 0; added 0; split off 0.
+The withdrawn wrapper has no declarations and no sorry. The comparison theorem
+strictLocalUnderivedMateSections_eq remains proved in the identical upstream provider.
 
-Reused complete proof: AlgebraicGeometry.Etale.strictLocalUnderivedMateSections_eq,
-node lem-weil-pbc-strict-local-underived-sections-mate. Its companion definition
-AlgebraicGeometry.Etale.strictLocalUnderivedMateSections is actual constructed data.
-Both declarations have only the three permitted axioms. This is not claimed as a
-new reduction of a proof hole or as positive net hole progress.
+The adapted consumer's pre-existing hole is unchanged:
+AlgebraicGeometry.Etale.closedFibre_unit_stalk_comparison
+(node lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ).
+No proof-hole closure or decomposition is claimed.
 
 ## No longer needed
 
-The restored file no longer separately imports
-Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm,
-WeilConjectures.SixFunctors.BaseChange.Square,
-WeilConjectures.AlgebraicGeometry.EtaleObjectSections, or
-WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence.
-The adopted mate module retains the corresponding mathematical dependencies and
-its complete six-helper proof. No dependency node or module is pruned, and no
-upstream declaration, proof, public import, or attribute is removed.
+The redundant module Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate and
+its private import in the ordinary-germ consumer are retired. Its upstream provider
+is imported directly. No mathematical dependency node or upstream declaration is
+pruned. In particular Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate
+and its two public declarations are still needed by the recorded original-model route.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The archive predates adoption of the canonical strict-local model. Its base-change
-construction uses the old model although the restriction transformation and Q.legs
-already use the canonical one, so restoring the archived text alone is ill-typed.
-The source counterpart supplies a complete coherent implementation; another split
-or a new proof chain is unnecessary. There is no mathematical statement correction.
+The generic proving brief describes a sorry-bearing item, but the current queue
+assigns retirement of a wrapper that already has zero holes. The historical
+DIFFERENT classification describes the former copied construction, not this current
+re-export. The DAG's current attachment realizes the distinct small-colimit-model
+statement and is intentionally preserved. A canonical-model theorem would not replace
+that statement without transport. No new split or mathematical proof is needed for
+this path retirement.
 
-The published compile cache still exposes an old-model mate and comparison despite
-having canonical geometry/restriction dependencies. A direct full-signature import
-probe therefore detects a model mismatch; compiling the current source implementation
-in a scratch file validates the canonical definition and complete proof directly.
-The restored import itself compiles, and the delivery/global build must verify the
-actual current source dependency set. The quarantine archive is preserved.
+Validation through lcompile.py: the adapted consumer compiled in 2.1 seconds;
+the original consumer compiled in 1.9 seconds; the direct upstream-import probe
+compiled in 1.7 seconds. The probe checks the full comparison equation and
+prints only propext, Classical.choice and Quot.sound for both upstream declarations.
+
+Earlier unanswered compile attempts occurred during the launcher-reported
+infrastructure outage of 2026-10-22 22:33 to 2026-10-23 02:05 (+08:00); they
+provided no Lean diagnostics. The successful checks above supersede them.
 
 ## Second reading by F1
 

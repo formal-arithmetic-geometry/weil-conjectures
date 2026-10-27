@@ -1,0 +1,76 @@
+{
+ "id": "det-pbc-complete-tower-calculus",
+ "kind": "statement",
+ "title": "Calculus of towers: evaluation, derived limits, direct and inverse images",
+ "statement": "In the notation of [det-pbc-complete-towers], let $u\\colon T'\\to T$ be a\nmorphism of schemes.\n\n1. $\\operatorname{Tow}(T)$ is a Grothendieck abelian category. Each\n   $\\operatorname{ev}_n$ is exact and has an exact left adjoint, so it carries\n   K-injective complexes of towers to K-injective complexes of modules.\n2. A morphism $a$ of $D(\\operatorname{Tow}(T))$ is an isomorphism if and only if\n   $\\operatorname{ev}_n(a)$ is an isomorphism in $D(T_{\\mathrm{proét}},\\mathcal O_E)$\n   for every $n$.\n3. $\\operatorname{ev}_n\\circ u^*_{\\operatorname{Tow}}=u^*\\circ\\operatorname{ev}_n$ and\n   $\\operatorname{ev}_n\\circ Ru^{\\operatorname{Tow}}_*\\simeq Ru_*\\circ\\operatorname{ev}_n$,\n   compatibly with the units and counits of $u^*\\dashv Ru_*$ and\n   $u^*_{\\operatorname{Tow}}\\dashv Ru^{\\operatorname{Tow}}_*$.\n4. There is a canonical isomorphism\n   $Ru_*\\circ R\\varprojlim\\simeq R\\varprojlim\\circ Ru_*^{\\operatorname{Tow}}$ of\n   functors $D(\\operatorname{Tow}(T'))\\to D(T_{\\mathrm{proét}},\\mathcal O_E)$.\n5. $R\\varprojlim$ is exact. For an exact equivalence\n   $F\\colon\\Mod_{\\mathcal O_{E,T}}\\to\\Mod_{\\mathcal O_{E,T'}}$, applied levelwise\n   as $F^{\\operatorname{Tow}}$, one has $F\\circ R\\varprojlim\\simeq\n   R\\varprojlim\\circ F^{\\operatorname{Tow}}$; and\n   $R\\varprojlim(M_\\bullet)\\otimes_{\\mathcal O_{E,T}}P\\simeq\n   R\\varprojlim(M_\\bullet\\otimes_{\\mathcal O_{E,T}}P)$ for every bounded complex\n   $P$ of finite free $\\mathcal O_{E,T}$-modules.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-proper-base-change/sk-prop-pbc-complete/det-pbc-complete-tower-calculus.md",
+  "place": "node det-pbc-complete-tower-calculus, order 1324"
+ },
+ "stmt_deps": [
+  "det-pbc-complete-towers"
+ ],
+ "proof": [
+  {
+   "text": "(1) $\\operatorname{Tow}(T)$ is the category of functors from the poset\n$\\mathbf Z_{\\geq1}^{\\mathrm{op}}$ to the Grothendieck abelian category\n$\\Mod_{\\mathcal O_{E,T}}$, hence Grothendieck abelian, with limits, colimits and\nexactness computed levelwise. The left adjoint of $\\operatorname{ev}_n$ sends\n$N$ to the tower equal to $N$ in levels $m\\leq n$, with identity transitions\nthere, and to $0$ in levels $m>n$; it is exact. A right adjoint of a functor\nwith an exact left adjoint preserves K-injective complexes:\n$\\operatorname{Hom}(B,\\operatorname{ev}_nI)=\\operatorname{Hom}(L_nB,I)$ is acyclic\nfor acyclic $B$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(2) Cohomology in $\\operatorname{Tow}(T)$ is computed levelwise, so a complex of\ntowers is acyclic if and only if each level is. Apply this to the cone of a\nrepresentative of $a$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(3) The first equality holds on the nose. For the second, compute\n$Ru^{\\operatorname{Tow}}_*$ by a K-injective complex of towers $I_\\bullet$; by\n(1) each $\\operatorname{ev}_nI_\\bullet$ is K-injective, so\n$\\operatorname{ev}_nu^{\\operatorname{Tow}}_*I_\\bullet=u_*\\operatorname{ev}_nI_\\bullet$\ncomputes $Ru_*\\operatorname{ev}_nI_\\bullet$. Units and counits are defined\nlevelwise, so they are compatible.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(4) The functor $u^{\\operatorname{Tow}}_*$ is right adjoint to the exact functor\n$u^*_{\\operatorname{Tow}}$ ([sk-prop-sfb-module-pullback-exact], levelwise), and\n$\\varprojlim$ is right adjoint to the exact functor $c$; hence both preserve\nK-injective complexes, by the argument of (1). Therefore\n$R\\varprojlim\\circ Ru^{\\operatorname{Tow}}_*=R(\\varprojlim\\circ u^{\\operatorname{Tow}}_*)$\nand $Ru_*\\circ R\\varprojlim=R(u_*\\circ\\varprojlim)$. The underived functors agree,\n$\\varprojlim\\circ u^{\\operatorname{Tow}}_*=u_*\\circ\\varprojlim$, because $u_*$\ncommutes with limits; this gives the isomorphism.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(5) Products in $\\Mod_{\\mathcal O_{E,T}}$ are exact ([sk-prop-pe-products]), so\n$R\\varprojlim$ is computed on any tower of complexes by the Milnor cone of\n[sk-prop-pe-milnor], which agrees with the K-injective computation by\n[lem-weil-derived-limit-existence] (3). The Milnor cone is built from a\nproduct and a cone. An exact equivalence preserves products and cones. For a\nbounded complex $P$ of finite free modules, $-\\otimes P$ is a finite iterated\ncone of finite direct sums of shifts of the identity, applied termwise, so it\ncommutes with $\\prod_n$ and with the cone of $1-T$.",
+   "uses": [
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-proper-base-change/sk-prop-pbc-complete/det-pbc-complete-tower-calculus.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1324,
+ "blueprint_uses": [
+  "det-pbc-complete-towers",
+  "sk-prop-pe-products",
+  "sk-prop-pe-milnor",
+  "lem-weil-derived-limit-existence",
+  "sk-prop-sfb-module-pullback-exact"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "det-pbc-complete-tower-calculus",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-prop-pbc-complete"
+}

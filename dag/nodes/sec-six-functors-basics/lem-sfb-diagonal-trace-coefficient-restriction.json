@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-diagonal-trace-coefficient-restriction",
+ "kind": "statement",
+ "title": "Exact scalar restriction and normalized coefficient cones at one site",
+ "statement": "Fix a prime l and a scheme T with DiagonalTraceLocalizations l T [def-sfb-diagonal-trace-models]. For normalized Chern data c for E=ULift Q_l [def-sp-tower-class-chern], there exists an exact section-preserving residue Restriction r [def-sfb-diagonal-trace-models] and a Coefficients record for c,r [def-sfb-diagonal-trace-coefficients]. This constructs only data at T, without a scheme morphism or any ordinary or derived direct-image comparison.",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "proof": [
+  {
+   "text": "Choose the exact residue restriction independently of the Chern data. Choose the unital additive coefficient identification and the pure-tensor root identification for this restriction. These are separate finite constructions; neither produces a completed projection cone.",
+   "uses": [
+    "lem-sfb-diagonal-trace-residue-restriction",
+    "lem-sfb-diagonal-trace-coefficient-identification",
+    "lem-sfb-diagonal-trace-line-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar equation for r at z=l^(n+1) shows that every level section is killed by l^(n+1). For any additive map from a Z_l-module into this level, write z-a=l^(n+1)b using the p-adic approximation a; additivity and annihilation imply f(zx)=z f(x). Thus every additive sheaf map into a level lifts to a unique discrete-Z_l-linear map.",
+   "uses": [
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the lifting result componentwise to the actual ring-limit projection cone followed by coefficientForget inverse, and to the actual root-limit projection cone followed by lineForget inverse. Naturality survives because lifting leaves the additive maps unchanged. Cancelling each inverse followed by its comparison proves both sectionwise projection equations. Package these cones with the finite identifications into Coefficients.",
+   "uses": [
+    "def-sfb-diagonal-trace-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-residue-restriction",
+  "lem-sfb-diagonal-trace-coefficient-identification",
+  "lem-sfb-diagonal-trace-line-identification",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of integers of the p-adic field modulo p to the n is ZMod p to the n",
+   "results": "PadicInt.toZModPow, PadicInt.ker_toZModPow, PadicInt.ext_of_toZModPow and five related residue-map results.",
+   "date": "2026-10-27",
+   "verdict": "Residue-map ingredients, no normalized scalar restriction, coefficient cones or direct-image square for the project presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules commutes with direct image",
+   "results": "SheafOfModules.restrictScalars, its obj_val/map_val equations, PresheafOfModules.pushforward_obj_obj, SheafOfModules.pushforwardSections and generic forgetful comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary ingredients only; no result states the project-specific normalized coefficient cones or the required squares."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*pushforward|pushforward.*restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:90 defines pushforward by pushforward0 followed by restriction. Also inspected ConstantSheaf.lean constantCommuteCompose and PreservesSheafification.lean sheafComposeIso_hom_fac.",
+   "date": "2026-10-27",
+   "verdict": "Use ordinary scalar and sheafification definitions; finite-system assembly and completed structural-map compatibility require a separate argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceOrdinaryScalars",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), ordinary scalar restrictions before right derivation",
+   "via": [
+    "lem-sfb-diagonal-trace-ordinary-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCoefficientRestriction",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCoefficientRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceCoefficientRestriction",
+  "statement": "theorem exists_diagonalTraceCoefficientRestriction (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) [DiagonalTraceLocalizations l T]\n    (c : Chern l (ULift.{u} (Padic l)) T)\n    (hc : c.Normalized l (ULift.{u} (Padic l))) :\n    ∃ r : Restriction l (ULift.{u} (Padic l)) T,\n      Nonempty (Coefficients l (ULift.{u} (Padic l)) T c r)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T050535-L-234389",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

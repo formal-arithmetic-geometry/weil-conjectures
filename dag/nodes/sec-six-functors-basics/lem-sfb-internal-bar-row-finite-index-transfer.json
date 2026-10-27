@@ -1,0 +1,383 @@
+{
+ "id": "lem-sfb-internal-bar-row-finite-index-transfer",
+ "kind": "statement",
+ "title": "Finite-index transfer and horizontal homotopy on internal bar rows",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent profinite site in [def-weil-size-convention]. Let $G$ be a profinite group, meaning a compact Hausdorff totally disconnected topological group, and let $I^\\bullet$ be a nonnegative cochain complex of internal $A$-modules with $A$-linear condensed $G$-action and equivariant differential [sk-def-sfb-module-objects, def-sfb-condensed-action-module, sk-def-sfb-derived-categories]. No injectivity or resolution hypothesis on $I$ is imposed. For every open subgroup $J\\subseteq G$, including $G$, form\n$$D_J^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline J^p],UI^q),\\qquad p,q\\geq0,$$\nwith the inhomogeneous action-dependent differential $d_h$ and commuting resolution differential $d_v$ of [def-sfb-condensed-equivariant-bar-data, def-sp-double-complex-total]. The symbol $U$ forgets the action, the free module is on the representable profinite parameter $J^p$, and internal Hom is right adjoint to internal module tensor. Let $r_H:D_G^{\\bullet,\\bullet}\\to D_H^{\\bullet,\\bullet}$ be restriction along $H^p\\hookrightarrow G^p$ for an open subgroup $H$ of $G$.\nThere are internal $A$-linear maps $t_H^{p,q}:D_H^{p,q}\\to D_G^{p,q}$ and $h_H^{p,q}:D_G^{p,q}\\to D_G^{p-1,q}$, zero for $p=0$, satisfying\n$$d_ht_H=t_Hd_h,\\qquad d_vt_H=t_Hd_v,\\qquad d_vh_H=h_Hd_v,\\qquad t_Hr_H-[G:H]1=d_hh_H+h_Hd_h.$$\nThey may be chosen, by fixing a finite coset transversal, naturally in equivariant chain maps of $I$. They commute with restriction along every map of profinite test sets. Thus for the internal vertical cohomology complexes $V_{J,q}^p=H^q(D_J^{p,\\bullet},d_v)$, with kernels and sheaf images taken before section evaluation, they induce cochain maps $\\bar t_H,\\bar r_H$ and a horizontal homotopy. On the internal modules $E_J^{p,q}=H^p(V_{J,q}^\\bullet,d_h)$ the induced maps satisfy\n$$H^p(\\bar t_H)H^p(\\bar r_H)=[G:H]1_{E_G^{p,q}}.$$\nThe statement includes the zero ring, $H=G$, trivial $G$, and the zero complex. It asserts no vanishing and requires no rationality, norm topology, or completeness of coefficients.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel input: finite-coset transfer on the internal resolution double complex, before sections and vertical cohomology. Agent-formulated sheaf version of finite-index bar transfer; exact external reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-internal-bar-coefficient-transfer] to the fixed F,B,B_H. It supplies coefficient-natural restriction and transfer cochain maps and a coefficient-natural homotopy from their composite to multiplication by the subgroup index.",
+   "uses": [
+    "lem-sfb-internal-bar-coefficient-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coefficient cochain functors and natural transformations termwise to a nonnegative equivariant complex, then flip the two complex directions as in [def-sfb-condensed-equivariant-bar-data, def-sp-double-complex-total]. In bidegree (p,q) the maps are the degree-p coefficient maps at I^q. Naturality in the coefficient differential makes these vertical chain maps. The horizontal homotopy has components at I^q; coefficient naturality makes each a vertical chain map as well. Its zero and boundary identities follow componentwise from the coefficient homotopy. Naturality for a chain map follows by applying coefficient naturality to each component. The evaluation of restriction is precisely the coefficient formula at I^q.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the additive internal homology functor H^q to the horizontal homotopy of vertical complexes. Functoriality and additivity preserve composites, identities and the natural-number scalar, giving the required horizontal homotopy on vertical cohomology with components H^q(h_ij). Apply horizontal homology H^p: homotopic maps have equal homology maps (Mathlib Homotopy.homologyMap_eq), and homology preserves composites, identities and natural-number multiples. Thus H^p(r_bar) followed by H^p(t_bar) equals [G:H] times the identity. All homology is in the internal module category, before section evaluation.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-bar-coefficient-transfer",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal transfer argument: coefficient construction isolated in lem-sfb-internal-bar-coefficient-transfer; componentwise lifting to complexes and functorial internal homology descent proved in Lean by F4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction followed by corestriction on a profinite group bar complex is chain homotopic to multiplication by the finite subgroup index, also on vertical cohomology sheaves of a double complex",
+   "results": {
+    "t": "2026-10-23T10:40:51Z",
+    "tool": "leanfinder",
+    "query": "Restriction followed by corestriction on a profinite group bar complex is chain homotopic to multiplication by the finite subgroup index, also on vertical cohomology sheaves of a double complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1InfRes_X₂",
+     "groupCohomology.H1InfRes_g",
+     "groupHomology.H1CoresCoinf_f",
+     "groupCohomology.H1InfRes_f",
+     "groupCohomology.H1InfRes_X₃",
+     "groupHomology.H1CoresCoinf_X₁",
+     "groupCohomology.infNatTrans_app",
+     "groupCohomology.infNatTrans"
+    ],
+    "digest": "35dc5b33cfcf4091"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "corestrict|corestriction|transfer|finiteIndex",
+   "results": {
+    "t": "2026-10-23T10:48:50Z",
+    "tool": "grep",
+    "query": "corestrict|corestriction|transfer|finiteIndex",
+    "sub": "RepresentationTheory/Homological",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean"
+    ],
+    "digest": "f96763bfde920a60"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite index subgroup restriction followed by transfer on internal sheaf group cochains is homotopic to multiplication by the index naturally in a coefficient complex",
+   "results": {
+    "t": "2026-10-23T10:48:50Z",
+    "tool": "leansearch",
+    "query": "For a finite index subgroup restriction followed by transfer on internal sheaf group cochains is homotopic to multiplication by the index naturally in a coefficient complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupHomology.indIso",
+     "MonoidHom.transferSylow_restrict_eq_pow",
+     "AddMonoidHom.transfer",
+     "MonoidHom.transfer",
+     "groupCohomology.resNatTrans",
+     "MonoidHom.transfer_eq_pow",
+     "MonoidHom.transfer.congr_simp",
+     "groupCohomology.coindIso"
+    ],
+    "digest": "01ebf5521e282c87"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"transfer\"",
+   "results": {
+    "t": "2026-10-23T10:48:50Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"transfer\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module sheaf bar complex restriction corestriction chain homotopy identity for open subgroups commuting with a second differential and profinite base change",
+   "results": {
+    "t": "2026-10-23T10:48:52Z",
+    "tool": "leanfinder",
+    "query": "Internal module sheaf bar complex restriction corestriction chain homotopy identity for open subgroups commuting with a second differential and profinite base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1InfRes_g",
+     "groupHomology.H1CoresCoinf_f",
+     "Rep.barComplex.isoStandardComplex",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv_f_0_eq",
+     "Rep.standardComplex.εToSingle₀_comp_eq",
+     "groupHomology.H1CoresCoinf_X₁",
+     "groupHomology.inhomogeneousChainsIso",
+     "Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq"
+    ],
+    "digest": "7ac21106d407b519"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "transfer|corestrict|coset",
+   "results": {
+    "t": "2026-10-23T10:49:52Z",
+    "tool": "grep",
+    "query": "transfer|corestrict|coset",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: discrete Rep Shapiro and restriction maps do not provide a continuous internal sheaf transfer/homotopy commuting with a second differential; groupHomology corestriction is covariant homology functoriality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction transfer finite open subgroup on internal condensed module bar rows homotopy multiplication by index natural in coefficient complex",
+   "results": {
+    "t": "2026-10-23T11:51:52Z",
+    "tool": "leanfinder",
+    "query": "Restriction transfer finite open subgroup on internal condensed module bar rows homotopy multiplication by index natural in coefficient complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.d",
+     "Rep.barComplex",
+     "Rep.barComplex.d_def",
+     "Rep.standardComplex.forget₂ToModuleCat",
+     "ContinuousCohomology.MultiInd.d_succ",
+     "Rep.barComplex.d",
+     "Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq",
+     "Rep.barComplex.d_single"
+    ],
+    "digest": "ec07da6608f3633f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep transfer/coinduction and topological cochain definitions do not supply internal condensed-module transfer on arbitrary coefficient complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"transfer\"",
+   "results": {
+    "t": "2026-10-23T11:51:53Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"transfer\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep transfer/coinduction and topological cochain definitions do not supply internal condensed-module transfer on arbitrary coefficient complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "transfer|corestrict|coset",
+   "results": {
+    "t": "2026-10-23T11:51:53Z",
+    "tool": "grep",
+    "query": "transfer|corestrict|coset",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep transfer/coinduction and topological cochain definitions do not supply internal condensed-module transfer on arbitrary coefficient complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite index subgroup corestriction restriction on internal sheaf group cochains chain homotopic to index commuting with vertical differential",
+   "results": {
+    "t": "2026-10-23T11:51:53Z",
+    "tool": "leansearch",
+    "query": "Finite index subgroup corestriction restriction on internal sheaf group cochains chain homotopic to index commuting with vertical differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.coindResAdjunction",
+     "groupCohomology.H1InfRes_g",
+     "groupCohomology.H1InfRes",
+     "groupCohomology.resNatTrans",
+     "groupCohomology.cochainsMap_comp",
+     "groupHomology.indIso",
+     "Rep.resIndAdjunction",
+     "CochainComplex.ConnectData.restrictionLEIso_hom_f"
+    ],
+    "digest": "b2b0c97d51dfb34d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep transfer/coinduction and topological cochain definitions do not supply internal condensed-module transfer on arbitrary coefficient complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module double complex finite coset transfer commutes with coefficient differential and induces index identity on vertical then horizontal cohomology",
+   "results": {
+    "t": "2026-10-23T11:51:57Z",
+    "tool": "leanfinder",
+    "query": "Internal module double complex finite coset transfer commutes with coefficient differential and induces index identity on vertical then horizontal cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.mapCocycles₂_comp_i",
+     "groupCohomology.δ_apply",
+     "groupCohomology.comp_d₂₃_eq",
+     "groupCohomology.comp_d₁₂_eq",
+     "groupCohomology.mapCocycles₂_comp_i_apply",
+     "groupCohomology.mapCocycles₂_comp_i_assoc",
+     "groupCohomology.toCocycles_comp_isoCocycles₂_hom",
+     "groupCohomology.comp_d₀₁_eq"
+    ],
+    "digest": "7adb37ef78c61045"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Rep transfer/coinduction and topological cochain definitions do not supply internal condensed-module transfer on arbitrary coefficient complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-scalar-bar-model",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input.",
+   "via": [
+    "lem-sfb-prime-to-ell-scalar-bar-model",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-bar-row-finite-index-transfer",
+  "worker": "stage1",
+  "summary": "Construct internal transfer via homogeneous coordinates, the existing finite transversal, and a coefficient-independent vertex prism. Descend the identities through internal vertical kernels and sheaf images. Two genuinely smaller internal function lemmas remain statement-only. Statement unchanged.",
+  "blueprint": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input. Steps 1–4 realize transfer before vertical cohomology; step 5 realizes the induced index identity. The recorded ancestor command returns None for this existing created-node chain; preserved that value."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-aa439f540",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-aa439f540 (reviewer sub-agent of L); spot-checked: Item statement is byte-identical to live (live: unsplit, empty proof); not a re-split note case. Re-checked each of the 5 steps against the cited statements. Coset lemma: only its group-theoretic part is used (S, ρ, π_a, a_s(ax)=a·a_{π_a(s)}(x), re-derived), via zero-coefficient instantiation. T is homogeneous by sa=h_s u and s^{-1}h_s=au^{-1}, with a finite clopen partition for variable a; TR=Σa_s^*. K=Σ P_{1,a_s} gives δK+Kδ=TR-[G:H], and K preserves homogeneity. Conjugation via Φ/Ψ uses RΨ_G=Ψ_H r_H. Vertical compatibility comes from coefficient naturality. Descent is through internal kernel/image quotients. New coordinate node: ΦΨ=1, ΨΦ=1, Φδ=dΦ checked against Tag 0DVG and the bar-data coface convention; restriction along homomorphisms and degree 0 checked. New prism node: degree 0 and degree 1 expanded by hand; naturality and empty-set cases checked; source Tag 019S read. Duplicate search: injective-bar-rows, homogeneous-bar-coordinate-normalization, equivariant-resolution-bar-normalization (injective or trivial-action only), trf coefficient-bar prism (covariant, presheaf colimits) and the Q69 evaluated-positive-bar-row-transfer (evaluated sections over ℚ, not internal) — none is a duplicate. Same unit throughout, no SGA. Advisory: r_H being a d_h-cochain map is used tacitly but is elementary (r=Φ_H R Ψ_G)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalBarFiniteIndexTransfer",
+  "declaration": "CategoryTheory.CondensedBar.internal_bar_finite_index_transfer",
+  "declarations": [
+   "CategoryTheory.CondensedBar.barTransferSubgroupCompact",
+   "CategoryTheory.CondensedBar.barTransferInclusion",
+   "CategoryTheory.CondensedBar.barTransferPowerInclusion",
+   "CategoryTheory.CondensedBar.restrictedBarCochains",
+   "CategoryTheory.CondensedBar.restrictedBarCochainsAdditive",
+   "CategoryTheory.CondensedBar.barTransferDouble",
+   "CategoryTheory.CondensedBar.barTransferVerticalCohomology",
+   "CategoryTheory.CondensedBar.internal_bar_finite_index_transfer"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalBarFiniteIndexTransfer.lean",
+  "statement": "theorem internal_bar_finite_index_transfer (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (H : OpenSubgroup G) (F : InternalFunctions A) (B : BarDiagram (G := G) F) (BH : BarDiagram (G := H.toSubgroup) F) : ∃ r : barTransferDouble (cochains B) ⟶ barTransferDouble (restrictedBarCochains H BH), ∃ t : barTransferDouble (restrictedBarCochains H BH) ⟶ barTransferDouble (cochains B), ∃ h : ∀ I : CochainComplex (Equivariant A G) ℕ, Homotopy (r.app I ≫ t.app I) (H.toSubgroup.index • 𝟙 ((barTransferDouble (cochains B)).obj I)), (∀ (I : CochainComplex (Equivariant A G) ℕ) (p q : ℕ) (S : Profinite.{u}) (x : sections A ((F.functor (power G p)).obj (I.X q).module) S) (T : Profinite.{u}) (f : T ⟶ S) (g : C(T, power H.toSubgroup p)), (F.evaluate (power H.toSubgroup p) S (I.X q).module (((B.term (I.X q) p).inv ≫ ((r.app I).f p).f q ≫ (BH.term ((Profinite.CondensedAction.inflate (R := A.toMon) (barTransferInclusion H)).obj (I.X q)) p).hom).hom.hom.app (op S) x)).val T f g = (F.evaluate (power G p) S (I.X q).module x).val T f ((barTransferPowerInclusion H p).comp g)) ∧ (∀ (I J : CochainComplex (Equivariant A G) ℕ) (f : I ⟶ J) (i j : ℕ), ((barTransferDouble (cochains B)).map f).f i ≫ (h J).hom i j = (h I).hom i j ≫ ((barTransferDouble (cochains B)).map f).f j) ∧ (∀ (I : CochainComplex (Equivariant A G) ℕ) (q : ℕ), ∃ hv : Homotopy ((barTransferVerticalCohomology A q).map (r.app I) ≫ (barTransferVerticalCohomology A q).map (t.app I)) (H.toSubgroup.index • 𝟙 ((barTransferVerticalCohomology A q).obj ((barTransferDouble (cochains B)).obj I))), ∀ i j : ℕ, hv.hom i j = HomologicalComplex.homologyMap ((h I).hom i j) q) ∧ (∀ (I : CochainComplex (Equivariant A G) ℕ) (p q : ℕ), HomologicalComplex.homologyMap ((barTransferVerticalCohomology A q).map (r.app I)) p ≫ HomologicalComplex.homologyMap ((barTransferVerticalCohomology A q).map (t.app I)) p = H.toSubgroup.index • 𝟙 (((barTransferVerticalCohomology A q).obj ((barTransferDouble (cochains B)).obj I)).homology p))",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3e68e2df",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Clause-by-clause match: r is restriction, pinned by evaluation through the shared InternalFunctions F and inflate along H↪G. t is a bicomplex map natural in I; h is a bar-direction homotopy (zero at p=0, no sign with d_v), natural in chain maps, giving t∘r−[G:H]=d_h h+h d_h via Homotopy.comm. Internal vertical cohomology (homologyFunctor in Modules A) carries the induced homotopy, and H^p(t̄)H^p(r̄)=index on E_G. Statement field verbatim; node unchanged except the lean record. Edge cases checked: H=G, trivial G, zero ring/complex, p=0, empty test sets, non-normal H. No extra hypotheses or hollow defs; only the theorem is sorry; the DoubleComplexTotal plain import is a stmt/proof_dep module. Advisories: inclusion helper parallels Q68's inductionSubgroupInclusion (ClosedSubgroup, lemma node); the second reading is a self-review. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T081742-L-2060412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

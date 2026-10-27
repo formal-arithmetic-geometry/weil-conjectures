@@ -1,0 +1,192 @@
+{
+ "id": "lem-sfb-sylow-constants-field-degree",
+ "kind": "statement",
+ "title": "Prime-to-Sylow degree of the constants fixed field",
+ "statement": "Let $e$ be a field [def-weil-field], $K/e$ a finite field extension [def-pc-field-extension], and $\\ell$ a prime different from $\\operatorname{char}(e)$. Let a finite group $G$ act on $K$ by $e$-automorphisms, where finite means finite underlying set [def-sfb-finite-infinite-set]. Assume that $E=K^G=\\{x\\in K:gx=x\\text{ for all }g\\in G\\}$ is purely inseparable over $e$. Let $L\\leq G$ have $\\ell$-power order and index prime to $\\ell$, and set $F=K^L$. Then $F/e$ is finite of degree prime to $\\ell$, and $K/F$ is finite Galois with automorphism group exactly the image of $L$ in $\\operatorname{Aut}_e(K)$, viewed as a group of $F$-automorphisms of $K$. Neither group action is assumed faithful. Degrees and finite, purely inseparable, and Galois field-extension terminology have their usual meanings: degree is vector-space dimension; purely inseparable means every element has some characteristic-power in the base, and equality with the base in characteristic zero; Galois means normal and separable [def-pc-field-tower].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose X 2.3 Step 2, printed p.151, diagram (2.c), constants S1/L over S and S1 over S1/L. Agent-extracted field argument of returned item steps 1--2, with ineffective actions allowed; inseparable degrees: Stacks fields.tex Tag 09HI (lemma-finite-purely-inseparable)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sfb-finite-infinite-set",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\rho:G\\to\\operatorname{Aut}_e(K)$ be the action, $H=\\rho(G)$ and $J=\\rho(L)\\leq H$. These are finite groups acting faithfully on $K$ by inclusion. The fixed-element equations give $K^H=E$ and $K^J=F$ and inclusions $e\\subseteq E\\subseteq F\\subseteq K$. These are fields because sums, products and inverses of fixed elements remain fixed. Moreover $E/e$ and $F/e$ are finite: an $e$-linearly independent family in either subspace is linearly independent in $K$, hence has size at most $[K:e]$; successively adjoining vectors outside the span therefore terminates at a finite basis. An $e$-spanning family for $F$ is also an $E$-spanning family, so $F/E$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 2, diagram (2.c), replacing possibly ineffective actions by their image; the fixed-field and finite-dimensional-subspace verifications are elementary."
+   }
+  },
+  {
+   "text": "Apply [lem-wf-finite-field-action-fixed-degree] to the faithful actions of $H$ and $J$: $K/E$ and $K/F$ are finite Galois, with $[K:E]=|H|$ and $[K:F]=|J|$. By [lem-weil-pbc-finite-galois-fixed-field], the full group $A=\\operatorname{Aut}_F(K)$ has order $[K:F]=|J|$. Each element of $J$ fixes $F$, giving an injection $J\\hookrightarrow A$ which sends an automorphism to the identical underlying function. An injection between finite sets of the same size is surjective. Thus every $F$-automorphism of $K$ is the actual image of an element of $L$, and conversely every such image fixes $F$. This proves precisely the automorphism-group clause, without assuming either original action faithful.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field), applied to the two effective image groups; Tag 09I1 (lemma-finite-Galois), order of the full Galois group."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-field-degree-multiplicativity] to $E\\subseteq F\\subseteq K$. Substituting the preceding degrees gives $|H|=|J|[F:E]$. Apply [lem-sfb-surjective-subgroup-image-index] to the surjection $G\\to H$ and subgroup $L$, to obtain $|H|=|J|[H:J]$ and $[H:J]\\mid[G:L]$. Since $|J|>0$, cancellation gives $[F:E]=[H:J]$. Consequently $\\ell\\nmid[F:E]$: otherwise $\\ell$ would divide $[G:L]$, contrary to the hypothesis.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-sfb-surjective-subgroup-image-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 2, printed p.151, prime-to-ell degree of S1/L over S1/G1; Stacks Tag 09G9 (lemma-multiplicativity-degrees) for the field tower."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}(e)=0$, the purely inseparable hypothesis means $E=e$, hence $[E:e]=1$. If $\\operatorname{char}(e)=p>0$, then $p$ is prime. Apply [lem-weil-pbc-purely-inseparable-pth-root-tower] to the finite purely inseparable extension $E/e$. Write its tower as $e=E_0\\subseteq E_1\\subseteq\\cdots\\subseteq E_n=E$, where every $[E_i:E_{i-1}]=p$. Starting with $[E_0:e]=1$, repeated application of [lem-weil-pbc-field-degree-multiplicativity] yields $[E_i:e]=p^i$ for $i=0,\\ldots,n$, including $n=0$. Since the distinct primes $p$ and $\\ell$ do not divide one another, $\\ell$ does not divide $p^n$. Thus in either characteristic $\\ell\\nmid[E:e]$.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HI (lemma-finite-purely-inseparable), its degree-p tower; Tag 09G9 (lemma-multiplicativity-degrees); the characteristic-zero branch is the stated definition."
+   }
+  },
+  {
+   "text": "Finally apply [lem-weil-pbc-field-degree-multiplicativity] to $e\\subseteq E\\subseteq F$: $[F:e]=[F:E][E:e]$. Both factors are prime to $\\ell$ by steps 3 and 4. If the prime $\\ell$ divided their product it would divide one factor, so $[F:e]$ is prime to $\\ell$. The finiteness of $F/e$ was established in step 1, and the finite Galois and exact image-group clauses were established in step 2.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 2, printed p.151, diagram (2.c), S prime S1/L over S; Stacks Tag 09G9 (lemma-multiplicativity-degrees)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-sfb-surjective-subgroup-image-index",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 2, printed p.151, diagram (2.c). Explicit effective-image and field-degree argument extracted from the source; the field-theory inputs are Stacks Tags 09I3, 09I1, 09G9 and 09HI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fixed field of a Sylow subgroup in a finite semilinear field action has degree prime to ell over a purely inseparable fixed base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IntermediateField.finrank_fixedField_eq_card\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] (H : Subgroup Gal(E/F))\\n  [FiniteDimensional F E], Module.finrank (↥(IntermediateField.fixedField H)) E = Nat.card ↥H\", \"doc\": \"For a finite-dimensional field extension $ E/F $, the finite rank of $ E $ over the fixed subfield under the action of a finite group $ H $ equals the cardinality of $ H $, i.e., $[E : \\text{Fix}(H)] =\"}\n  {\"name\": \"IsGaloisGroup.finrank_fixedPoints_eq_card_subgroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (H : Subgroup G) [inst_5 : IsGaloisGroup G K L],\\n  Module.finrank (↥(FixedPoints.intermediateField ↥H)) L = Nat.card ↥H\", \"doc\": \"For a Galois extension $ L $ over $ K $ with Galois group $ G $, and a finite subgroup $ H $ of $ G $, the degree of the field extension $ [L : L^H] $ equals the cardinality $ |H| $ of the subgroup, w\"}\n  {\"name\": \"IsGaloisGroup.card_fixingSubgroup_eq_finrank\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G] [IsGaloisGroup G K L],\\n  Nat.card ↥(fixingSubgroup G ↑F) = Module.finrank (↥F) L\", \"doc\": \"For a finite Galois group $ G $ of the field extension $ L $ over $ K $, and an intermediate field $ F $, the cardinality of the subgroup of $ G $ fixing $ F $ is equal to the finite rank of $ L $ as \"}\n  {\"name\": \"IsGalois.card_fixingSubgroup_eq_finrank\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] (K : IntermediateField F E)\\n  [FiniteDimensional F E] [IsGalois F E], Nat.card ↥K.fixingSubgroup = Module.finrank (↥K) E\", \"doc\": \"For a finite Galois field extension $ E/F $ and an intermediate field $ K $, the cardinality of the subgroup $ \\\\text{Gal}(E/K) $ (consisting of automorphisms fixing every element of $ K $) is equal to\"}\n  {\"name\": \"FixedPoints.finrank_le_card\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [inst_3 : Fintype G],\\n  Module.finrank (↥(FixedPoints.subfield G F)) F ≤ Fintype.card G\", \"doc\": \"For a finite group $G$ acting on a field $F$, the finite rank of the subfield of elements fixed by all elements of $G$ is less than or equal to the cardinality of $G$.\"}\n  {\"name\": \"IntermediateField.finrank_eq_fixingSubgroup_index\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {k : Type u_1} {K : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (L : IntermediateField k K)\\n  [IsGalois k K], Module.finrank k ↥L = L.fixingSubgroup.index\", \"doc\": \"For a Galois extension $ K/k $ with intermediate field $ L $, the degree of the field extension $ [L : k] $ is equal to the index of the subgroup $ \\\\text{Gal}(K/L) $ in the Galois group $ \\\\text{Gal}(K\"}\n  {\"name\": \"FixedPoints.finrank_eq_card\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F]\\n  [inst_3 : Fintype G] [FaithfulSMul G F], Module.finrank (↥(FixedPoints.subfield G F)) F = Fintype.card G\", \"doc\": \"For a finite group $ G $ acting faithfully on a field $ F $, the finite rank of the fixed subfield of $ F $ under the action of $ G $ is equal to the cardinality of $ G $.\"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.fixedField, Sylow",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField|finrank.*fixed|fixed.*finrank",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"137\", \"text\": \"    have : ∀ i, u₁ i ∈ fixedField (⊤ : Subgroup (K ≃ₐ[F] K)) := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"143\", \"text\": \"    have ffb : fixedField ⊤ = ⊥ := (IsGalois.tfae.out 0 1).mp (inferInstance : IsGalois F K)\"}\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"149\", \"text\": \"    have : v₁ ∈ fixedField (⊤ : Subgroup (K ≃ₐ[F] K)) := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"25\", \"text\": \"then `finrank (FixedPoints.subfield G F) F = Fintype.card G`.\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"347\", \"text\": \"    finrank (FixedPoints.subfield G F) F = Fintype.card G :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"348\", \"text\": \"  le_antisymm (FixedPoints.finrank_le_card G F) <|\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"352\", \"text\": \"      _ ≤ finrank F (F →ₗ[FixedPoints.subfield G F] F) := finrank_algHom (subfield G F) F\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"353\", \"text\": \"      _ = finrank (FixedPoints.subfield G F) F := finrank_linearMap_self _ _ _\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"21\", \"text\": \"- `fixedField H` where `H : Subgroup Gal(E/F)`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"27\", \"text\": \"- `IntermediateField.fixingSubgroup_fixedField` : If `E/F` is finite dimensional (but not\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"28\", \"text\": \"  necessarily Galois) then `fixingSubgroup (fixedField H) = H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"29\", \"text\": \"- `IsGalois.fixedField_fixingSubgroup`: If `E/F` is finite dimensional and Galois\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"30\", \"text\": \"  then `fixedField (fixingSubgroup K) = K`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"88\", \"text\": \"    rw [← IntermediateField.finrank_bot', ← fixedPoints_eq_bot G, Nat.card_eq_fintype_card]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"89\", \"text\": \"    exact (FixedPoints.finrank_eq_card G L).symm\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"185\", \"text\": \"theorem finrank_fixedPoints_eq_card_subgroup [IsGaloisGroup G K L] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"186\", \"text\": \"    Module.finrank (FixedPoints.intermediateField H : IntermediateField K L) L = Nat.card H :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"187\", \"text\": \"  (card_eq_finrank H (FixedPoints.intermediateField H) L).symm\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"18\", \"text\": \"`IntermediateField.fixedField` are inverses of each other between intermediate fields and\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"27\", \"text\": \"* `fixedField_fixingSubgroup` : the field fixed by the\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"32\", \"text\": \"* `restrict_fixedField` : For a Galois intermediate field `M`, the fixed field of the image of `H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"34\", \"text\": \"* `fixingSubgroup_fixedField` : If `H` is closed, the fixing subgroup of the fixed field of `H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"85\", \"text\": \"lemma fixedField_fixingSubgroup (L : IntermediateField k K) [IsGalois k K] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite field automorphism groups the fixed field of a Sylow subgroup has degree coprime to the Sylow prime over a purely inseparable base",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension with group action has Galois extension over subgroup invariants and prime to p constants degree for a p Sylow subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.card_fixingSubgroup_eq_finrank\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G] [IsGaloisGroup G K L],\\n  Nat.card ↥(fixingSubgroup G ↑F) = Module.finrank (↥F) L\", \"doc\": \"For a finite Galois group $ G $ of the field extension $ L $ over $ K $, and an intermediate field $ F $, the cardinality of the subgroup of $ G $ fixing $ F $ is equal to the finite rank of $ L $ as \"}\n  {\"name\": \"IsGaloisGroup.finrank_fixedPoints_eq_card_subgroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (H : Subgroup G) [inst_5 : IsGaloisGroup G K L],\\n  Module.finrank (↥(FixedPoints.intermediateField ↥H)) L = Nat.card ↥H\", \"doc\": \"For a Galois extension $ L $ over $ K $ with Galois group $ G $, and a finite subgroup $ H $ of $ G $, the degree of the field extension $ [L : L^H] $ equals the cardinality $ |H| $ of the subgroup, w\"}\n  {\"name\": \"IsGaloisGroup.subgroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (H : Subgroup G) [hGKL : IsGaloisGroup G K L],\\n  IsGaloisGroup (↥H) (↥(FixedPoints.intermediateField ↥H)) L\", \"doc\": \"If $ G $ is the Galois group of the field extension $ L $ over $ K $, then any subgroup $ H $ of $ G $ is the Galois group of the fixed field of $ H $ in $ L $ over $ K $. The fixed field consists of \"}\n  {\"name\": \"IsGalois.card_fixingSubgroup_eq_finrank\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] (K : IntermediateField F E)\\n  [FiniteDimensional F E] [IsGalois F E], Nat.card ↥K.fixingSubgroup = Module.finrank (↥K) E\", \"doc\": \"For a finite Galois field extension $ E/F $ and an intermediate field $ K $, the cardinality of the subgroup $ \\\\text{Gal}(E/K) $ (consisting of automorphisms fixing every element of $ K $) is equal to\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G]\\n  [hGKL : IsGaloisGroup G K L], IsGaloisGroup (↥(fixingSubgroup G ↑F)) (↥F) L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}\n  {\"name\": \"IntermediateField.finrank_eq_fixingSubgroup_index\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {k : Type u_1} {K : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (L : IntermediateField k K)\\n  [IsGalois k K], Module.finrank k ↥L = L.fixingSubgroup.index\", \"doc\": \"For a Galois extension $ K/k $ with intermediate field $ L $, the degree of the field extension $ [L : k] $ is equal to the index of the subgroup $ \\\\text{Gal}(K/L) $ in the Galois group $ \\\\text{Gal}(K\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Re-split input: ILO Expose X 2.3 Step 2, printed p.151, diagram (2.c), constants S1/L over S and S1 over S1/L. Agent-extracted field argument of returned item steps 1--2, with ineffective actions allowed; inseparable degrees: Stacks fields.tex Tag 09HI (lemma-finite-purely-inseparable).",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sylow-constants-field-degree",
+  "worker": "stage1",
+  "summary": "Proved the constants-field calculation in five steps using the effective image of each possibly ineffective action. Reused the faithful fixed-field degree, finite Galois automorphism count, field tower multiplicativity, and degree-p purely inseparable tower nodes. Created one exact Mathlib leaf for subgroup image index divisibility and the order-index identity. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, clause (3), through the alteration/tame-boundary input; ILO Expose X 2.3 Step 2, printed p.151, diagram (2.c), the sentence that S1/L over S1/G1 has degree prime to ell. Here the group-index input is made explicit after passage to the effective image. The source places of steps 1--5 expand the constants calculation; the creation-chain ancestor command currently returns null (the chain ends at the module-named creation item of lem-sfb-admissible-direct-image), so the inherited null node is retained. The descriptive blueprint ancestor is det-thm-sf-ctf-stability-direct-images, clause (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic field-theory tool giving the degree-p tower of the purely inseparable constants extension; together with the existing tower law it supplies the characteristic-power factor in ILO X 2.3. The constructibility unit provides no substitute; this node is Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-b7916c1b4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-b7916c1b4 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and the new leaf in full. The source is ILO X 2.3 Step 2, printed p.151: S1/G1→S is radicial, S1/L→S1/G1 has degree prime to ℓ, S1→S' is Galois of group L. The item correctly uses the image of L because the action may be ineffective, and the statement is unchanged; the parent semilinear-sylow-good-components cites exactly these clauses. Step 1: effective images H, J have fixed fields E and F, and finiteness follows by elementary arguments. Step 2: 09I3 (injective action) gives [K:E]=|H| and [K:F]=|J|; 09I1 gives |Aut(K/F)|=[K:F], so J is the full group. Step 3: 09G9 gives |H|=|J|[F:E]; the new leaf gives |H|=|J|[H:J] and [H:J]|[G:L], so ℓ∤[F:E]. Step 4: E=e in characteristic 0; in characteristic p the 09HI p-th-root tower plus 09G9 gives [E:e]=p^n. Step 5: the assembly is correct. New leaf lem-sfb-surjective-subgroup-image-index: I checked Subgroup.index_map_dvd (Index.lean:314, surjective hypothesis) and card_mul_index (:290), and tested the identity map, C4→C2 with L=1, and the map onto the trivial group. It is generic group theory, not a clause of the parent, and a scan of the DAG found no duplicate. Accepted tool use: lem-weil-pbc-purely-inseparable-pth-root-tower (other unit, Lean-closed, declared). No SGA is cited. The unused ℓ-power-order hypothesis is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SylowConstantsFieldDegree",
+  "declaration": "FieldExtension.sylow_fixedField_degree",
+  "file": "lean/Sheaf/FieldTheory/SylowConstantsFieldDegree.lean",
+  "statement": "theorem sylow_fixedField_degree (e : Type u) (K : Type v) [Field e] [Field K] [Algebra e K] [FiniteDimensional e K] (ℓ : ℕ) (hℓ : Nat.Prime ℓ) (hchar : ℓ ≠ ringChar e) (G : Type w) [Group G] [Finite G] (ρ : G →* (K ≃ₐ[e] K)) (hinsep : IsPurelyInseparable e (IntermediateField.fixedField ρ.range)) (L : Subgroup G) (hpower : ∃ n : ℕ, Nat.card L = ℓ ^ n) (hindex : ¬ ℓ ∣ L.index) : Module.Finite e (IntermediateField.fixedField (L.map ρ)) ∧ (¬ ℓ ∣ Module.finrank e (IntermediateField.fixedField (L.map ρ))) ∧ Module.Finite (IntermediateField.fixedField (L.map ρ)) K ∧ IsGalois (IntermediateField.fixedField (L.map ρ)) K ∧ Set.range (fun σ : K ≃ₐ[IntermediateField.fixedField (L.map ρ)] K ↦ (σ : K → K)) = Set.range (fun g : L ↦ (ρ g : K → K))",
+  "branch": "sheaf-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0f050076",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: no faithfulness assumption (ρ : G →* (K ≃ₐ[e] K)); E = fixedField ρ.range, F = fixedField (L.map ρ); ℓ ≠ ringChar e, IsPurelyInseparable, ℓ-power order and prime-to-ℓ index; conclusions are Module.Finite, ¬ℓ∣finrank, Module.Finite and IsGalois for K/F, and equality of the sets of underlying functions of all F-automorphisms with the image of L. Mathematics checked ([F:E]=[ρG:ρL] divides [G:L]; [E:e] a power of p or 1). Edge cases: trivial action, L=1, L=G, characteristic 0, independent universes u v w. Snapshot node differs from live only in lean; statement verbatim in file; imports exist live; no name clash or parallel landing. No defs, sorry only, docstrings carry source, blueprint tag and 5 steps, report sections present. No file changed, so no compile."
+ }
+}

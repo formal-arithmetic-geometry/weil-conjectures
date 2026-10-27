@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-coherent-raw-scalar-restriction",
+ "kind": "statement",
+ "title": "Local scalar multiplication commutes with raw coherent cohomology restriction",
+ "statement": "Let f:X to S be an arbitrary scheme morphism, G a quasi-coherent module on X, q a natural number, h:V′ to V an arrow of the small etale site of S, a a global function on V, and z a raw derived-Hom cohomology class on V. Use P=abelianHigherDirectImageRawPresheaf(f,q,L(G_et)) and the constructed additive equivalences e_V=affineRealizationRawEquiv of [def-weil-pbc-coherent-higher-image-classes]. Let mu_V(a) be the map on etale cohomology induced by coherentEtaleMap of multiplication by the first pullback projection applied to a on G_V. Then P(h)(e_V.symm(mu_V(a)(e_V(z)))) equals e_V′.symm(mu_V′(h.appTop(a))(e_V′(P(h)(z)))). This is an equality before sheafification, with no higher-image module structure or realization coefficient assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images, restriction of cohomology classes; Descent Tag 03DR, tensor-section restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes"
+ ],
+ "proof": [
+  {
+   "text": "Use raw_evaluation_formula_aux and coefficient naturality of sheafHToDerived. A general conjugation identity transports the raw scalar action to derived cohomology of restrictionScalar. Cancel normalizationRestrictedIso in rawRestrictedResolution_naturality and rawRestrictedResolution_restriction to identify raw presheaf restriction with normalizationCohomologyRestriction; the full class-normalization theorem is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-coherent-raw-evaluation-formula",
+    "new-sheaf-h-derived-naturality",
+    "lem-weil-pbc-raw-restricted-resolution-naturality",
+    "lem-weil-pbc-raw-restricted-resolution-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restrictionScalar_comp_aux to the etale chart triangle. Its coefficient maps are the two scalar conjugates and the prescribed inverse-image composition map.",
+   "uses": [
+    "lem-weil-pbc-coherent-restricted-scalar-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct normalizationCohomologySquare from the coefficient scalar square. Its three formula fields identify the retained maps with the original cohomology actions and normalizationCohomologyRestriction. Use the retained commutation field on an element. Its action formulas combine with the raw scalar evaluation formulas, and its pullback formula combines with the raw restriction formula.",
+   "uses": [
+    "def-weil-pbc-normalization-cohomology-square",
+    "def-weil-pbc-raw-restricted-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the elementary square_transport identity to raw restriction and the raw cohomology comparisons. The target comparison is an isomorphism, hence injective. The retained cohomology actions and pullback give the three commuting squares. Finally apply congruence to the chart projection identity for the scalar; this is exactly the original raw scalar restriction identity.",
+   "uses": [
+    "def-weil-pbc-coherent-higher-image-classes",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-raw-evaluation-formula",
+  "new-sheaf-h-derived-naturality",
+  "lem-weil-pbc-raw-restricted-resolution-naturality",
+  "lem-weil-pbc-raw-restricted-resolution-restriction",
+  "lem-weil-pbc-coherent-restricted-scalar-composition",
+  "def-weil-pbc-normalization-cohomology-square",
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8 and 03DR; formal proof by the fixed-resolution restriction equations, sectionwise scalar naturality, and coefficient naturality of the explicit derived pullback, whose component formula is proved (G1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluation isomorphism for etale cohomology on fibre products commutes with multiplication by local functions and restriction of etale charts",
+   "results": "8 hits, including Scheme.Modules.map_smul and residue-field evaluation naturality; none concern raw derived-Hom evaluation.",
+   "date": "2026-10-25",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw evaluation of sheaf cohomology commutes with scalar multiplication and pullback between etale charts",
+   "results": "8 hits, smooth-function sheaf stalk evaluation formulas only.",
+   "date": "2026-10-25",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "1 hit, CategoryTheory.Sheaf.H.map_comp_apply, which handles composition of coefficient maps but not the raw chart comparison.",
+   "date": "2026-10-25",
+   "verdict": "Useful functoriality tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "raw.*scalar|scalar.*raw|cohomology.*smul",
+   "results": "1 hit, groupCohomology.isMulCoboundary_1_of_isMulCocycle_1_of_aut_to_units docstring; no relevant raw scalar compatibility.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentHigherImageModuleAction",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "03Q8 higher direct image presheaf, scalar compatibility of raw restriction before module sheafification.",
+   "via": [
+    "lem-weil-pbc-coherent-higher-image-module-action",
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentRawScalarRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentRawScalarRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentRawScalarRestriction",
+  "statement": "theorem coherentRawScalarRestriction {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) {V V' : S.Etale} (h : V' ⟶ V)\n    (a : Γ(V.left, ⊤))\n    (z : (Etale.abelianHigherDirectImageRawPresheaf f q\n      (liftedCoherentEtaleSheaf G)).obj (op V)) :\n    (Etale.abelianHigherDirectImageRawPresheaf f q\n        (liftedCoherentEtaleSheaf G)).map h.op\n      ((affineRealizationRawEquiv f G q V).symm\n        (Sheaf.H.map (coherentEtaleMap _ _\n          ((affineRealizationCoefficient f G V).smulHom\n            ((Limits.pullback.fst V.hom f).appTop a))) q\n              (affineRealizationRawEquiv f G q V z))) =\n      (affineRealizationRawEquiv f G q V').symm\n        (Sheaf.H.map (coherentEtaleMap _ _\n          ((affineRealizationCoefficient f G V').smulHom\n            ((Limits.pullback.fst V'.hom f).appTop (h.left.appTop a)))) q\n              (affineRealizationRawEquiv f G q V'\n                ((Etale.abelianHigherDirectImageRawPresheaf f q\n                  (liftedCoherentEtaleSheaf G)).map h.op z)))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T144138-L-1200493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

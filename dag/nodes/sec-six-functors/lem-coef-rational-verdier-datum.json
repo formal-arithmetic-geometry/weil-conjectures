@@ -1,0 +1,183 @@
+{
+ "id": "lem-coef-rational-verdier-datum",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraphs 1--2; recorded DAG proof steps 1--5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rationalization of one normalized integral Verdier datum",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, and a separated finite-type $D.k$-scheme $X$ [def-weil-finite-field-fiber, def-weil-proper-morphism, def-weil-finite-type-morphism]. Use the raw rational constructible categories and canonical coefficient functors [def-weil-rationalization-karoubi], and the normalized rational Verdier data and comparison predicate [def-sf-rational-verdier-data]. For every field $E$ finite over $\\mathbf Q_\\ell$ and every coherent integral dualizing datum $w_E$ [def-sf-coherent-integral-dualizing-datum], there exists a rational Verdier datum with integral origin $w_E$ whose signed symmetry is natural in both variables. This includes the ordinary tensor presentation, its signed symmetry, normalized completion comparison, constructibility preservation, exact linear anti-equivalence with its object and pure-tensor formulas, and the normalized evaluation and biduality. Its ordinary signed symmetry is natural in both derived variables (the swap commutes with the tensor images of arbitrary pairs of derived maps), which with its Koszul normalization on K-flat pairs determines the swap and hence the biduality map. No finite coefficient-extension comparison or coherence equation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-data",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C_R=D^b_c(X,R)$ and $D_R=D_{X,R}$. By [lem-coef-integral-residue-tor], every object of this actual integral category belongs to its finite-Tor subcategory: $\\ell$ is invertible on the $k$-scheme $X$, so the lemma applies. The integral theorem [thm-coef-integral-verdier] gives an exact anti-equivalence $D_R:\\mathcal C_R^{\\mathrm{op}}\\to\\mathcal C_R$, and its actual double-dual map is invertible. The object $\\omega_{X,R}$ belongs to $\\mathcal C_R$ by [prop-coef-integral-dualizing]. The internal Hom construction in [def-weil-derived-pullback-tensor-hom] is $R$-linear on morphisms in its first, contravariant variable: precomposition satisfies $h\\circ(rf)=r(h\\circ f)$, so $D_R(rf)=rD_R(f)$, also on the derived internal Hom. Thus no involution on scalars occurs.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "thm-coef-integral-verdier",
+    "prop-coef-integral-dualizing",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+   }
+  },
+  {
+   "text": "Let $Q_R:\\mathcal C_R\\to\\mathcal C_R[1/\\varpi_E]$ be [def-weil-linear-scalar-localization]; this is $D^b_c(X,E)$ by [def-weil-rationalization-karoubi]. Define $D_EK=D_RK$ on objects and $D_E(f\\otimes a)=D_R(f)\\otimes a$. The balancing relation is preserved since $D_R(rf)\\otimes a=D_R(f)\\otimes ra$. For $f:K\\to M$, $g:M\\to N$, the two formulas for a composite give\n$$D_E((g\\otimes b)(f\\otimes a))=D_R(f)D_R(g)\\otimes ab=(D_R(f)\\otimes a)(D_R(g)\\otimes b).$$\nIdentities go to identities; additivity extends these equations to sums of tensors. This defines an $E$-linear contravariant functor on the prescribed raw localization, including any torsion identifications imposed by the tensor product. It also identifies $(\\mathcal C_R^{\\mathrm{op}})[1/\\varpi_E]$ with $(\\mathcal C_R[1/\\varpi_E])^{\\mathrm{op}}$: both have Hom module $\\operatorname{Hom}_{\\mathcal C_R}(M,K)\\otimes_R E$ and the same reversed composition. No application of a transport theorem outside its stated category is needed.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+   }
+  },
+  {
+   "text": "The exactness assertion follows on the specified triangulations. By [def-weil-rationalization-karoubi], every distinguished rational triangle is isomorphic to $Q_R(T)$ for an integral distinguished triangle $T$. Apply the integral exact contravariant functor of [thm-coef-integral-verdier] to $T$ and then $Q_R$; the resulting reversed triangle is distinguished, and is precisely the $D_E$-image with its localized integral shift comparison. That comparison is invertible because its integral inverse also localizes. Images of the triangle isomorphism remain isomorphisms, proving exactness for every rational triangle.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+   }
+  },
+  {
+   "text": "For $K,M\\in\\mathcal C_R$, integral anti-equivalence [thm-coef-integral-verdier] makes $f\\mapsto D_R(f)$ an $R$-linear bijection $\\operatorname{Hom}(K,M)\\to\\operatorname{Hom}(D_RM,D_RK)$. Its inverse is $R$-linear (apply the bijection to sums and scalar multiples); tensoring both maps with $E$ leaves their composites equal to the identities. By the Hom formula in [def-weil-rationalization-karoubi], these are the Hom maps of $D_E$ and their inverses. Thus $D_E$ is fully faithful. Every object $K$ is isomorphic to $D_E(D_EK)$ by $Q_R(\\delta_K)$, with inverse $Q_R(\\delta_K^{-1})$, so it is essentially surjective and hence an anti-equivalence. The natural integral transformation $\\delta:\\mathrm{id}\\to D_R^2$ extends by [prop-weil-pbc-rational-transport], applied only to the covariant exact endofunctors $\\mathrm{id},D_R^2$ of the integral category. Explicitly, $D_E^2(f\\otimes a)(\\delta_K\\otimes1)=(\\delta_M\\otimes1)(f\\otimes a)$ is integral naturality tensored with $a$. This proves naturality and invertibility of the claimed actual double-dual map, not just existence of some isomorphism.",
+   "uses": [
+    "thm-coef-integral-verdier",
+    "def-weil-rationalization-karoubi",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+   }
+  },
+  {
+   "text": "The rational tensor is the localization of the completed integral tensor $\\widehat\\otimes^L_R$ [def-weil-derived-pullback-tensor-hom]; its integral source stays in $\\mathcal C_R$ by clause 2 of [lem-pur-integral-operations-preserve-constructible] ($f=\\mathrm{id}_X$). Integral evaluation $\\mathrm{ev}^\\circ_K:D_RK\\otimes^L_{\\widehat R_X}K\\to\\omega_{X,R}$ and the transpose equation defining $\\delta_{R,K}$ in [thm-coef-integral-verdier] use the ordinary ambient tensor. Since $X$ is quasi-compact and quasi-separated with $\\ell$ invertible and $D_RK,K\\in\\mathcal C_R$, [lem-fix-constructible-tensor-completion] gives the natural isomorphism $\\chi_{A,B}:A\\otimes^L_{\\widehat R_X}B\\xrightarrow{\\sim}A\\widehat\\otimes^L_RB$ for $A,B\\in\\mathcal C_R$. Put $\\mathrm{ev}_{R,K}=\\mathrm{ev}^\\circ_K\\chi_{D_RK,K}^{-1}$, $\\widehat\\sigma_{A,B}=\\chi_{B,A}\\sigma_{A,B}\\chi_{A,B}^{-1}$, $\\omega_{X,E}=Q_R\\omega_{X,R}$ and $\\mathrm{ev}_{E,K}=Q_R(\\mathrm{ev}_{R,K})$. For $f:K\\to M$ both $\\mathrm{ev}^\\circ_K(D_R(f)\\otimes1_K)$ and $\\mathrm{ev}^\\circ_M(1_{D_RM}\\otimes f)$ are the tensor-Hom transpose of $D_R(f)$; naturality of $\\chi$ in both variables turns this into\n$$\\mathrm{ev}_{R,K}(D_R(f)\\widehat\\otimes1_K)=\\mathrm{ev}_{R,M}(1_{D_RM}\\widehat\\otimes f).$$\nAfter applying $Q_R$, the equation for $f\\otimes a$ is this same equality multiplied by $a$, because tensor and duality act linearly in each variable. Sums give naturality for all rational morphisms. The double-dual map is $\\delta_{E,K}=Q_R\\delta_{R,K}$ from step 4. Its defining equation $\\mathrm{ev}^\\circ_{D_RK}(\\delta_{R,K}\\otimes1)=\\mathrm{ev}^\\circ_K\\sigma_{K,D_RK}$ becomes, by the same naturality of $\\chi$, $\\mathrm{ev}_{R,D_RK}(\\delta_{R,K}\\widehat\\otimes1)=\\mathrm{ev}_{R,K}\\widehat\\sigma_{K,D_RK}$, an equality of composites of evaluation, tensor and identities; its image under $Q_R$ is the same equality for the localized maps. This verifies the asserted rationalization of evaluation and its transpose. The signed symmetry is the transport of the Koszul swap of total tensor complexes along the representative isomorphism; it is natural for chain maps of K-flat complexes, hence for all derived maps between them (roofs through K-flat resolutions), and it extends naturally to all objects through K-flat resolution isomorphisms.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-preserve-constructible",
+    "thm-coef-integral-verdier",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraphs 1--2; recorded DAG proof steps 1--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "thm-coef-integral-verdier",
+  "prop-coef-integral-dualizing",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-linear-scalar-localization",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; recorded DAG proof steps 1--5; proof written by B6 from the recorded integral rationalization plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization of a contravariant duality with canonical evaluation and coherent scalar extension",
+   "results": "LinearMap.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv (Mathlib.RingTheory.Localization.Module); no constructible-category duality or normalized coherence statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "CategoryTheory.Equivalence.op and its functor/inverse formulas in Mathlib.CategoryTheory.Opposites; no raw scalar localization or normalized Verdier comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|ScalarLocalization|scalar localization",
+   "results": "25 hits in Mathlib, including CategoryTheory/Shift/CommShift.lean, Algebra/Homology/HomotopyCategory/Pretriangulated.lean, CategoryTheory/Localization/Triangulated.lean, CategoryTheory/Triangulated/Subcategory.lean; no normalized rational Verdier comparison. Local rg also found the existing project ScalarLocalization and RationalVerdier definitions, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdier",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierDatum",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierDatum.lean",
+  "declaration": "WeilConjectures.RationalVerdier.datum_exists",
+  "statement": "theorem datum_exists\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E) :\n    ∃ A : Datum D l hl X E wE,\n      ∀ (K L K' L' : IntegralHom.Derived.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X))\n        (f : K ⟶ K') (g : L ⟶ L'),\n        A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' L').hom =\n          (A.symmetry.swap K L).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+ }
+}

@@ -1,0 +1,363 @@
+{
+ "id": "lem-sf-purity-orientation-datum",
+ "kind": "statement",
+ "title": "The normalized smooth purity maps form an orientation datum",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "statement": "Fix the six-functor datum [def-sf-datum] over $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and the coefficient stages $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$, with the twists of [def-coefficient-twists-detailed]. For every smooth separated finite-type $k$-morphism $f:X\\to Y$ of pure relative dimension $d\\geq0$ between separated finite-type $k$-schemes, specify an isomorphism $\\gamma_{f,\\Lambda_Y}:Lf^*\\Lambda_Y(d)[2d]\\xrightarrow{\\sim}Rf^!\\Lambda_Y$ at each stage as follows. At $A_{E,n}$ it is the smooth purity map of [def-pur-smooth-purity-map] at $K=\\Lambda_Y$, an isomorphism by [thm-pur-finite-coefficient-smooth-purity]. At $\\mathcal O_E$ it is the component at the completed unit of the simultaneous scalar-natural family of integral purity isomorphisms of [lem-pur-adic-purity-scalar-naturality], whose finite reductions are exactly the finite purity maps as in [thm-pur-adic-reconstruction]. At $E$ and $\\overline{\\mathbf Q}_\\ell$ it is the rationalization, respectively the image at a common finite coefficient field, of the integral component for the corresponding finite coefficient field, as in [thm-pur-rational-and-qbar-purity].\n\nThen there is an orientation datum in the sense of [def-sf-orientation] whose component $\\gamma_{f,\\Lambda_Y}$ is the specified map for every such $f$ and every stage. That is, together with suitable etale components $\\gamma^e_f$ at the finite stages, the family satisfies the four conditions of [def-sf-orientation], with the maps $\\theta$, $\\beta$ and comparisons $t_C,w_C$ defined there: the base-naturality equation for every Cartesian square of the setting, the composition equation, the coefficient-comparison and pro-etale realization equations, and, for the projection $\\mathbf A^1_Y\\to Y$, equality with the canonical affine-line orientation (the adjoint transpose of integration through the projective-line trace). In particular, for $X$ smooth separated of pure dimension $d$ over $k$, the component at the structure morphism $a_X$, read in reverse, is the identification $\\omega_{X,\\Lambda}=Ra_X^!\\Lambda\\cong\\Lambda_X(d)[2d]$ obtained by inverting the specified purity map at the coefficient unit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Proof, sentences \"Clause (6) is [thm-pur-finite-coefficient-smooth-purity], [thm-pur-adic-reconstruction], and [thm-pur-rational-and-qbar-purity].\" and \"For (7), ... [thm-sf-dual-perfect] reduces the smooth site-perfect case to local perfect-complex biduality\": the orientation that theorem is applied with is the normalized purity orientation of clause (6); existence of this canonical family is the theorem that sk-def-sf-orientation points to"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-coefficient-twists-detailed",
+  "def-sf-orientation",
+  "def-pur-smooth-purity-map",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-rational-and-qbar-purity",
+  "def-pur-conventions",
+  "def-pur-smooth-trace",
+  "def-sf-etale-power-presentation",
+  "def-pur-canonical-rational-purity-realization",
+  "def-weil-pbc-integer-quotient-inclusions",
+  "def-pur-finite-tate-scalar-source-data",
+  "lem-pur-finite-tate-scalar-source-normalization",
+  "def-pur-vector-purity-scalar-single",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "def-sf-orientation-finite-realization",
+  "def-pur-finite-tate-site-comparison",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Choose the specified finite components by evaluating the smooth purity map at the coefficient unit. They are isomorphisms by [thm-pur-finite-coefficient-smooth-purity]. At integral coefficients choose the simultaneous family of [lem-pur-adic-purity-scalar-naturality], and evaluate at the completed unit. Its finite reductions are the specified finite components by [thm-pur-adic-reconstruction]. At field stages apply [thm-pur-rational-and-qbar-purity] to this same integral family. Thus these choices give precisely the components demanded in the statement, in the stated finite-Tor categories. In what follows write $T_{X,d}=\\Lambda_X(d)[2d]$, $\\gamma_f:T_{X,d}\\to\\omega_f$, and $t_f=\\varepsilon_f Rf_!(\\gamma_f)$, with unit identifications understood.",
+   "uses": [
+    "def-sf-orientation",
+    "thm-pur-finite-coefficient-smooth-purity",
+    "lem-pur-adic-purity-scalar-naturality",
+    "thm-pur-adic-reconstruction",
+    "thm-pur-rational-and-qbar-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): choose the finite, integral and field purity maps"
+   }
+  },
+  {
+   "text": "At finite coefficients $t_f$ is exactly the smooth trace of [def-pur-smooth-trace]. For a Cartesian square write $C=\\operatorname{Ex}_!$ and let $l:Lu^*T_{X,d}\\xrightarrow{\\sim}T_{X',d}$ be the twist comparison in [def-sf-orientation]. The arbitrary-base-change assertion of [thm-pur-trace-normalization-transitivity] says $t_{f'}Rf'_!(l)C_{T_{X,d}}=Lv^*(t_f)$. Apply [lem-pur-trace-transpose-base-change] to $L=T_{X,d}$ and $t'=t_{f'}Rf'_!(l)$. Its conclusion is $\\gamma_{f'}l=\\beta_{f,v}Lu^*(\\gamma_f)$, which is condition 1. The node's $B$ and the definition's $\\beta$ are both the transpose of $Lv^*\\varepsilon_f C^{-1}$, so they are the same map by the adjunction bijection. No identification of the purity-defined smooth exchange with a mate has been assumed.",
+   "uses": [
+    "def-sf-orientation",
+    "def-pur-smooth-trace",
+    "thm-pur-trace-normalization-transitivity",
+    "lem-pur-trace-transpose-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): base naturality, using the counit-defined map"
+   }
+  },
+  {
+   "text": "For finite coefficients apply [thm-pur-composition-coherence] at $K=\\Lambda_Z$. In its composite expand $\\gamma_{f,Rg^!\\Lambda_Z}$ using [def-pur-smooth-purity-map]: it is $\\theta_{f,\\omega_g}(1\\otimes\\gamma_f)$, with twist reassociation. Here the unit component is $\\Pi_f^{-1}$: the formula defining $\\theta_{f,\\Lambda_Y}$ has transpose $\\varepsilon_f$, so its unit-identified value is the identity of $\\omega_f$. Naturality of $\\theta$ follows directly by transposing its formula: for $a:K\\to K'$, naturality of the projection map and counit makes both transposes equal. Apply this to $a=\\gamma_g:T_{Y,e}\\to\\omega_g$. It moves $Lf^*(\\gamma_g)$ across $\\theta_f$, giving $Rf^!(\\gamma_g)\\theta_{f,T_{Y,e}}(1\\otimes\\gamma_f)$. Follow by $c_{g,f}^{-1}$. This is exactly the composition equation of [def-sf-orientation]. The two twist factors have shifts $2d,2e$, so their interchange has sign $(-1)^{(2d)(2e)}=1$.",
+   "uses": [
+    "thm-pur-composition-coherence",
+    "def-pur-smooth-purity-map",
+    "def-sf-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): finite composition equation"
+   }
+  },
+  {
+   "text": "For the finite reductions $A_{E,n}\\to A_{E,m}$ apply [thm-pur-finite-reduction-of-purity] to $K=(A_{E,n})_Y$. Its two vertical comparisons are the twist/pullback and exceptional comparisons of the datum, so the equation it supplies is $w_C C_X(\\gamma_f)=\\gamma'_f t_C$. The integral-to-finite equations, with these same comparisons and all quotient transitions, are exactly the first equation of [lem-sf-normalized-integral-purity-trace] at the unit. For integral scalar extension and rationalization/common-field extension the corresponding equations are respectively [lem-pur-adic-purity-scalar-naturality] and [lem-sf-normalized-field-purity-trace], again evaluated at the unit. Coefficient-unit naturality identifies the extended unit with the target unit. These are equations of actual arrows, not just existence of isomorphic source and target objects.",
+   "uses": [
+    "thm-pur-finite-reduction-of-purity",
+    "lem-sf-normalized-integral-purity-trace",
+    "lem-pur-adic-purity-scalar-naturality",
+    "lem-sf-normalized-field-purity-trace",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): coefficient comparisons"
+   }
+  },
+  {
+   "text": "If (A5) compares finite coefficient fields, obtain its equation by reducing the integral scalar-naturality square of the preceding step. For $E\\subset F$, write $\\varpi_E\\mathcal O_F=\\varpi_F^e\\mathcal O_F$ up to a unit. Extension followed by reduction at $\\varpi_F^{en}$ is the same derived tensor functor as reduction at $\\varpi_E^n$ followed by $A_{E,n}\\to A_{F,en}$; both are tensor with $A_{F,en}$. A further quotient is handled by the finite-reduction equation. Insert the integral-to-finite squares on both sides of the integral scalar square. Axiom (A5) identifies the composite twist and exceptional comparisons with those of the composite coefficient functor. Cancel the common invertible comparisons. The remaining outside square is precisely $w_C C(\\gamma_f)=\\gamma'_f t_C$ for the allowed finite comparison. This includes ramification and identity comparisons; no field-to-finite functor is used.",
+   "uses": [
+    "def-sf-datum",
+    "lem-pur-adic-purity-scalar-naturality",
+    "lem-sf-normalized-integral-purity-trace",
+    "thm-pur-finite-reduction-of-purity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): mixed finite-field coefficient squares"
+   }
+  },
+  {
+   "text": "At finite coefficients put $C_T=\\nu_T^*$. By [def-weil-exceptional-inverse-image] and the comparison unit of [thm-weil-pbc-site-comparison], $\\omega_f$ is identified with $C_X(f^\\times A_Y)$ using exactly the $w_C$ in condition 3. The bounded-below domains of this formula are part of that definition. By [lem-pur-vector-integration-site-comparison] over $X$, the shifted $d$-th power of $\\tau_X$ identifies $C_XL_X(d)[2d]$ with $T_{X,d}$. Hence $w_C^{-1}\\gamma_f t_C$ is an arrow between two objects in the image of the fully faithful bounded-below functor $C_X$. Lift that arrow uniquely to $\\gamma_f^e$. Lift its inverse as well; faithfulness makes their composites identities. This constructs the required etale isomorphism and, by its defining equation, proves the pro-etale realization condition with the prescribed $t_C,w_C$.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-vector-integration-site-comparison",
+    "def-sf-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): etale components and pro-etale realization"
+   }
+  },
+  {
+   "text": "For $f=\\pi:\\mathbf A^1_Y\\to Y$, apply [lem-pur-diagonal-affine-trace-site-comparison] with $d=1$ and $K=A_Y$. It identifies $\\varepsilon_\\pi R\\pi_!(\\gamma_\\pi)$ with integration given by the restricted projective-line trace. By [lem-pur-vector-integration-site-comparison] this is exactly the trace transported using $\\tau$, $\\beta_q$ and the open-extension counit in condition 4, for every annihilating exponent $\\ell^r$. Transposing that equality under $R\\pi_!\\dashv R\\pi^!$ proves equality of $\\gamma_\\pi$ with the canonical affine-line orientation. This works for every $n\\ge1$, with no divisibility condition on $n$.",
+   "uses": [
+    "lem-pur-diagonal-affine-trace-site-comparison",
+    "lem-pur-vector-integration-site-comparison",
+    "def-sf-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): finite affine-line normalization"
+   }
+  },
+  {
+   "text": "For the integral verification use the following elementary detection argument only for shifted lines. By [lem-pur-twist-sheaf-locally-free] and [lem-pur-integral-line-reduction-restriction], $T_{X,d}$ is the shift of a locally free rank-one sheaf over $R_X=\\lim_n(A_{E,n})_X$, with its stated finite reductions. By [lem-weil-pbc-derived-single-fully-faithful], canceling the common shift identifies its derived endomorphisms with sheaf endomorphisms. Locally a basis identifies an endomorphism with multiplication by a section $a$ of $R_X$. If all reductions are zero, every projection of $a$ to $(A_{E,n})_X$ is zero; the defining inverse-limit property gives $a=0$. This holds on each trivializing open of the site and hence globally by the sheaf axiom. Consequently two arrows $T_{X,d}\\to\\omega_f$ with equal reductions are equal: compose their difference with the inverse of the chosen integral $\\gamma_f$, whose reductions are its finite inverses. This does not assert faithfulness of finite evaluation on arbitrary derived morphisms.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-integral-line-reduction-restriction",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-normalized-integral-purity-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): detection for the integral unit components"
+   }
+  },
+  {
+   "text": "Form the two arrows in the integral base-naturality equation, from $T_{X',d}$ to $\\omega_{f'}$, using the specified completed comparisons of [def-sf-orientation]. By (A5) of [def-sf-datum], reduction identifies completed pullback, exchange, counit, twists and their composites with the finite ones. Reduction of a transpose is the finite transpose because the coefficient comparison preserves the counit (A1),(A5): apply the formula $\\varepsilon F(h)$ on both sides. The first equation of [lem-sf-normalized-integral-purity-trace] identifies the reduced chosen components with the finite components. Therefore the two reduced arrows are equal by step 2, for every $n$. Step 8 gives equality integrally. The same argument applies to the two integral composition arrows from $T_{X,d+e}$ to $\\omega_{gf}$: (A5) identifies the reduced tensor/counit transpose $\\theta$ and composition mate with the finite ones, and step 3 gives equality. Thus conditions 1 and 2 hold for the selected integral family, including arbitrary base morphisms in the datum's setting.",
+   "uses": [
+    "def-sf-orientation",
+    "def-sf-datum",
+    "lem-sf-normalized-integral-purity-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): integral base naturality and composition"
+   }
+  },
+  {
+   "text": "The completed canonical affine-line map of [def-sf-orientation] has, by its normalization convention, the finite integration transposes as its reductions. Step 7 and the integral reduction equation identify these with the reductions of the chosen $\\gamma_\\pi$. Step 8 proves equality of the two integral arrows. This also shows that this characterization of the completed normalization is unambiguous: any two such arrows coincide. Existence can be witnessed by the chosen integral component itself. The integral coefficient equations were already proved in steps 4–5; thus the entire integral verification concerns the specified component, irrespective of possible nonuniqueness of coherent lifts for general inputs.",
+   "uses": [
+    "def-sf-orientation",
+    "lem-sf-normalized-integral-purity-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): completed affine-line normalization"
+   }
+  },
+  {
+   "text": "At $E$ apply rationalization to each integral equation from steps 9–10. A functor preserves composition and equality; the comparisons in (A5) identify each resulting vertex and structural arrow with its field counterpart, including counit-defined $\\theta$ and $\\beta$. The chosen field components are these rationalized components by [thm-pur-rational-and-qbar-purity]. Hence the base, composition and affine-line equations hold at $E$. For $\\overline{\\mathbf Q}_\\ell$, choose one finite coefficient field containing the finitely many fields representing a given diagram. The coefficient equation of [lem-sf-normalized-field-purity-trace] identifies every orientation component with the image of its component over that field. Apply its equation there and then the common-stage functor; the same coefficient equation makes the result independent of enlargement. This proves all remaining geometric and normalization equations at the closed field stage.",
+   "uses": [
+    "def-sf-datum",
+    "thm-pur-rational-and-qbar-purity",
+    "lem-sf-normalized-field-purity-trace",
+    "def-sf-orientation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6): rationalization and common-stage equations"
+   }
+  },
+  {
+   "text": "Collect the components of step 1 and the etale components of step 6. Steps 2–11 establish the four conditions in [def-sf-orientation], so they define the asserted orientation datum. For $a_X:X\\to\\operatorname{Spec}k$, its component is the specified isomorphism $\\Lambda_X(d)[2d]\\to Ra_X^!\\Lambda$; its inverse is the stated identification of $\\omega_{X,\\Lambda}$. This is an inverse of this component, not an independently chosen purity isomorphism.",
+   "uses": [
+    "def-sf-orientation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clauses (6)–(7): assemble the orientation used for smooth perfect duality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-orientation",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-rational-and-qbar-purity",
+  "def-pur-smooth-trace",
+  "thm-pur-trace-normalization-transitivity",
+  "lem-pur-trace-transpose-base-change",
+  "thm-pur-composition-coherence",
+  "def-pur-smooth-purity-map",
+  "thm-pur-finite-reduction-of-purity",
+  "lem-sf-normalized-integral-purity-trace",
+  "lem-sf-normalized-field-purity-trace",
+  "def-sf-datum",
+  "def-weil-exceptional-inverse-image",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-diagonal-affine-trace-site-comparison",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-integral-line-reduction-restriction",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6) and smooth site-perfect part of (7); assembly of the existing normalized-purity and trace statements with explicit unit-line detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'orientation datum|OrientationDatum' Mathlib",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'smooth purity|purityIso|upperShriek|exceptionalInverseImage' Mathlib",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no etale exceptional inverse image or smooth purity"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'Tate twist|tateTwist' Mathlib",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: no l-adic Tate twists in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical smooth purity isomorphisms form an orientation datum compatible with base change composition coefficient change and affine line trace",
+   "results": "8 hits: RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.isStandardSmoothOfRelativeDimension_respectsIso, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.isStandardSmooth_respectsIso, Algebra.IsStandardSmoothOfRelativeDimension, RingHom.Smooth.isStableUnderBaseChange. Read returned signatures: none states the normalized etale/pro-etale smooth-purity family.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "OrientationDatum, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'OrientationDatum'. Read returned signatures: none states the normalized etale/pro-etale smooth-purity family.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "OrientationDatum|smoothPurity|smooth_purity",
+   "results": "0 hits: . Read returned signatures: none states the normalized etale/pro-etale smooth-purity family.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity orientation isomorphism compatible with composition and coefficient extension",
+   "results": "8 hits: PolynomialLaw.comp_toFun', CategoryTheory.Limits.Cocones.extendComp, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, RingHom.isStandardSmooth_stableUnderComposition, RingHom.FormallySmooth.stableUnderComposition, Algebra.Smooth.comp, RingHom.Smooth.stableUnderComposition, RingHom.FormallySmooth.respectsIso. Read returned signatures: none states the normalized etale/pro-etale smooth-purity family.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology extraordinary inverse image smooth morphism Tate twist canonical orientation",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv_symm_apply. Read returned signatures: none states the normalized etale/pro-etale smooth-purity family.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sf-package-normalized-orientation-perfect-duality",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6) and the point/site-perfect sentence of (7): the purity orientation to which thm-sf-dual-perfect is applied",
+   "via": [
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-purity-orientation-datum",
+  "worker": "stage1",
+  "summary": "Assembled the orientation without new nodes. Used actual trace base change to obtain the counit-mate equation, finite composition at the unit, finite and integral coefficient equations, full faithfulness for etale components, trace normalization, and finite detection restricted to shifted integral Tate lines to verify integral equations for the chosen scalar-natural family. Statement unchanged.",
+  "blueprint": "prop-functor-package.proof.md clause (6), and the orientation used in the smooth site-perfect sentence of clause (7). The componentwise isomorphism theorems alone do not supply all four equations; the added steps carry that assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-line-reduction-restriction",
+    "why": "Generic completed rank-one tensor/reduction comparison used to identify the integral Tate line and its finite reductions in the elementary detection argument; it supplies no alternative purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-line-reduction-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-8c7c20416",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-8c7c20416 (reviewer sub-agent of L); spot-checked: Read the source (main-20261015 prop-functor-package proof, clause (6) and the site-perfect sentence of (7)), def-sf-orientation in full and the statements of all 21 cited nodes. The delivery has no new nodes and keeps the statement unchanged; there is no repair note and no SGA citation, and the cycle check is clean. Step by step: Step 2 reads thm-pur-trace-normalization-transitivity's 'compatible with arbitrary base change' as t_{f'}Rf'_!(l)Ex_!=Lv^*t_f. With lem-pur-trace-transpose-base-change (L=T, P=γ_f, t'=t_{f'}Rf'_!(l)) this gives γ_{f'}l=B·Lu^*γ_f, and B=β because both are transposes of the same map. Step 3: thm-pur-composition-coherence at K=Λ_Z; θ_{f,Λ}=id gives γ_f=Π_f^{-1}, and naturality of θ, checked by transposing, gives condition 2 with no sign (4de even). Steps 4–5: finite reduction at the unit, the first equation of the integral normalized lemma, the scalar-naturality square and the field lemma give condition 3; finite scalar extension uses the cofinal level en. Step 6: the étale components come from full faithfulness of ν^* on D^+, with f^×A bounded below. Step 7: the d=1 diagonal-trace site comparison gives s_1=∫_π, and the t_q^p of the vector-integration lemma is the formula of def-sf-orientation clause 4. Step 8: detection holds only for shifted rank-one lines. The integral category is a full subcategory of D(Ô_E), End(L[2d])=Γ(Ô_E) by the Mathlib leaf, and Ô_E=lim A_n. Steps 9–11 transfer the finite equations to the integral and field stages using (A5). Edge cases checked: d=0, empty X, arbitrary separated finite-type v. Advisory: lem-pur-adic-purity-scalar-naturality (unit sk-thm-sf-compatibility) is off the unit route and not declared as a tool use. Its citation is forced because it is a stmt_dep that defines the integral component, and off-route uses are recorded, not refused. The declared tool use lem-pur-integral-line-reduction-restriction is already on the route via sk-prop-an; I accept it. No duplicate: thm-pur-smooth-base-change-coherence uses the purity-defined exchange, not the counit-mate β."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityOrientationDatum",
+  "declaration": "WeilConjectures.purityOrientationDatum",
+  "declarations": [
+   "WeilConjectures.sfPurityUnitExceptionalPresentation",
+   "WeilConjectures.SfPurityFiniteNormalized",
+   "WeilConjectures.sfPurityCoefficientModelEquiv",
+   "WeilConjectures.sfPurityFiniteScalarLine",
+   "WeilConjectures.SfPurityCoefficientFiniteNormalized",
+   "WeilConjectures.purityOrientationDatum"
+  ],
+  "file": "lean/Sheaf/Paper/PurityOrientationDatum.lean",
+  "statement": "theorem purityOrientationDatum (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (m : ℕ) (S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))) : ∃ O : SfOrientationDatum S, SfPurityFiniteNormalized D C E m S.toSixFunctorFiniteOperations O.primary ∧ (∀ a : ℕ, SfPurityFiniteNormalized D C E a (S.integralNormalization.finiteLevels a) (O.finite a)) ∧ ∀ (L : Padic.FiniteCoefficientFields C.l C.Qbar) (a : ℕ), SfPurityCoefficientFiniteNormalized D C E m S O L a",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "Repair of 2b8c937a6659: both normalization predicates are actual arrow equations with PurityFiniteSetting.smoothPurityMap at coefficientUnit. The coefficient-field equation contains (O.coefficientFinite L a).etale, through the explicit Shrink.algEquiv-induced quotient ring equivalence, uniquely root-balanced scalar line map, and canonical exceptional counit mate. All four repeated structure-field conjuncts are removed. Canonical source and exceptional-image helpers have real data. The added stmt_deps own the unit and comparison declarations used in these signatures. Repair of 5d810e6b099b H2: etalePowerComparison and EtalePowerPresentation are owned by new existing-definition node def-sf-etale-power-presentation; integralScalarIntegerInclusion and integralScalarQuotientMap are owned by the landed def-weil-pbc-integer-quotient-inclusions. Their theorem-module owner substitutes are removed from stmt_deps. Lean equations are retained byte-for-byte."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4126d48da",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after 5d810e6 H2 RETURN. Lean file byte-identical; only stmt_deps/lean record changed (−cor-pur-adic-and-rational-smooth-dualizing-complexes, −lem-weil-integral-scalar-extension-well-defined, +new existing:true def-sf-etale-power-presentation, +landed def-weil-pbc-integer-quotient-inclusions). New node: all 7 declarations exist in live AdicSmoothDualizingComplexes, lean.statement verbatim, statement matches EtalePowerPresentation zero/successor normalization exactly, stmt_deps all exist and cover statement refs, no other owner. Integer/quotient maps owned by def-weil-pbc-integer-quotient-inclusions (covers Shrink.algEquiv both directions, all n). Mechanical theorem stmt_dep lem-pur-finite-tate-scalar-source-normalization: sfPurityFiniteScalarLine is .choose of its ∃! balancing (the theorem's conclusion; def-pur-finite-tate-scalar-source-data explicitly selects none) → genuine, PASS on that point. Math as previously accepted: finite/primary/all-L-all-level arrows pinned to smoothPurityMap at coefficientUnit via canonical comparisons; integral/field via datum fields + line detection; no extra hypotheses, universes bound, edge cases d=0, a=0, empty X, ramified L OK; sorry only; docstrings OK. No compile (no file changed; worker scompile clean 42.8s/36.5s). Advisory: balancing helper duplicates theorem-module VectorTraceScalar.balancing; second reading is a self-check."
+ }
+}

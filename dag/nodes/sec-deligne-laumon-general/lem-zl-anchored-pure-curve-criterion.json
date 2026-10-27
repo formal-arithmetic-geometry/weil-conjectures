@@ -1,0 +1,277 @@
+{
+ "id": "lem-zl-anchored-pure-curve-criterion",
+ "kind": "statement",
+ "title": "Fixed-anchor criterion for purity from a family of curves",
+ "statement": "Fix $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, $\\Qlb=\\overline{\\mathbf Q}_\\ell$ and $\\iota:\\Qlb\\simeq\\mathbf C$ [def-weil-punctual-weights]. Let $X_0$ be a nonempty geometrically connected separated finite-type $k_0$-scheme and $\\mathcal S$ a nonzero classical lisse $\\Qlb$-Weil sheaf [def-pc-geometrically-irreducible; def-weil-finite-type-morphism; def-pod-lisse-l-adic-sheaves; def-wf-fundamental-representation], interpreted with the same local operators in [def-weil-local-frobenius-trace]. Fix a closed point $x_*$. Let $\\mathscr T$ be any collection of data $(m,C_m,h_m)$, where $m\\ge1$, $C_m$ is a smooth geometrically connected affine curve over $k_m=\\mathbf F_{q^m}\\subset k$, and $h_m:C_m\\hookrightarrow X_0\\times_{k_0}k_m$ is a closed immersion [d-real-setup; def-weil-closed-immersion; def-pc-base-change]. Write $R_m\\mathcal S$ for constant restriction followed by immersion pullback [def-dl-a1-constant-extension-data; def-zl-constant-extension-restriction-local-data; def-weil-derived-pullback-tensor-hom]. Assume: (i) for each closed point $x$ of $X_0$, including $x=x_*$, some member has closed points $z_*,z$ over $x_*,x$; (ii) each $R_m\\mathcal S$ is punctually pure of some real weight $v_t$; (iii) at every closed $z$ above $x$, with $f=[\\kappa(z):\\kappa(x)]\\ge1$, the local eigenvalue multiset is the multiset of $f$th powers at $x$ and $q_z=q_x^f$. Then there exists a unique real $w$ such that $\\mathcal S$ is punctually $\\iota$-pure of weight $w$. Every eigenvalue $\\alpha$ at $x_*$ is nonzero and satisfies $w=2\\log_{q_{x_*}}|\\iota(\\alpha)|$, independently of $\\alpha$, and every supplied weight $v_t$ on a member through $x_*$ equals $w$. More generally, any further curve with a closed point over $x_*$ satisfying (iii) and with pure restriction of weight $v$ has $v=w$. For every closed $x$ and every eigenvalue $\\beta$ at $x$, $|\\iota(\\beta)|=q_x^{w/2}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 3-4: existence of anchor eigenvalues, logarithmic uniqueness, comparison at the other point and global purity (old steps 7-8)."
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-fundamental-representation",
+  "def-weil-local-frobenius-trace",
+  "d-real-setup",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-wf-positive-real-logarithm",
+  "def-zl-normalized-classical-weil-realization",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-zl-classical-realized-anchor-eigenvalue] to obtain a punctual eigenvalue alpha at the anchor. This step is independent of the family of curves and its weights.",
+   "uses": [
+    "lem-zl-classical-realized-anchor-eigenvalue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 3: existence of an eigenvalue at the fixed anchor; expanded step 1 of lem-zl-anchored-pure-curve-criterion."
+   }
+  },
+  {
+   "text": "For each closed $x$, [lem-kun-closed-point-field](a) makes $\\kappa(x)$ finite-dimensional over the finite field $k_0$. A basis of size $d$ identifies its underlying set with $k_0^d$, so $q_x$ is finite. Its distinct elements $0,1$ give $q_x\\ge2$. Hence $\\log q_x>0$ by [def-wf-positive-real-logarithm]; in particular all logarithmic denominators used below are nonzero. We use $\\log_{q_x}a=\\log(a)/\\log(q_x)$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-wf-positive-real-logarithm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 3-4: positivity of residue cardinalities and logarithmic denominators."
+   }
+  },
+  {
+   "text": "Here is the elementary power calculation, for any one of the given pure restrictions of weight $v$ and a closed $z$ over $x$ of degree $f\\ge1$. For each eigenvalue $\\beta$ at $x$, hypothesis (iii) and purity [def-weil-punctual-weights] give\n$$a^f=(q_x^f)^{v/2},\\qquad a=|\\iota(\\beta)|\\ge0.$$\nIndeed $\\iota$ preserves powers, and multiplicativity of [def-weil-complex-absolute-value] gives $|\\iota(\\beta^f)|=a^f$. The right side is positive, so $a>0$. By [def-weil-real-power] and [def-wf-positive-real-logarithm], $\\log(b^t)=t\\log b$ for $b>0$: substitute $b^t=\\exp(t\\log b)$ into $\\log(\\exp s)=s$. Applying this identity to both sides gives\n$$f\\log a=(v/2)f\\log q_x,\\qquad 2\\log_{q_x}a=v.$$\nThe final equality cancels the positive integer $f$ and the nonzero $\\log q_x$. In Lean first obtain a finite Weil presentation of the target sheaf by specializing [lem-wf-common-stage-weil-iterate] to a one-vertex quiver with no arrows. Characteristic polynomials commute with scalar extension, and their roots are exactly the eigenvalues. Thus LocalPower sends each source eigenvalue beta to beta^f at z. Cancel the positive natural power on nonnegative reals to obtain directly a=q_x^(v/2), then apply logb only at the anchor. This is a generic finite-diagram tool and does not replace any part of the unit route.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-complex-absolute-value",
+    "def-weil-real-power",
+    "def-wf-positive-real-logarithm",
+    "lem-wf-common-stage-weil-iterate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 3, the eigenvalue-power and residue-cardinality calculation, expanded."
+   }
+  },
+  {
+   "text": "Apply (i) with $x=x_*$ and select a member of weight $v_0$ with a closed point over $x_*$. For every anchor eigenvalue $\\alpha$, step 3 at that point gives $|\\iota(\\alpha)|>0$; since $|z|=0$ only for $z=0$ [def-weil-complex-absolute-value] and $\\iota$ is a field isomorphism, $\\alpha\\ne0$. Set $A=|\\iota(\\alpha_*)|>0$ and $w=2\\log_{q_{x_*}}A$. Step 3 at that point gives $w=v_0$. Applying the same calculation on this single member to every anchor eigenvalue $\\alpha$ gives $2\\log_{q_{x_*}}|\\iota(\\alpha)|=v_0=w$. This proves the nonvanishing, the anchor formula and its independence of the choice of eigenvalue.",
+   "uses": [
+    "def-weil-complex-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 3: define the common weight at the fixed anchor."
+   }
+  },
+  {
+   "text": "Let any supplied member through $x_*$ have pure weight $v_t$. Use $\\alpha_*$ and its closed point over $x_*$ in step 3: $v_t=2\\log_{q_{x_*}}A=w$. For a further curve in the last assertion, its assumed point over $x_*$, power formula (iii) and purity of weight $v$ give exactly the same equation. Thus $v=w$ as well; no membership in $\\mathscr T$ was used in that calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 3: the anchor fixes the weight on every curve, including additional curves."
+   }
+  },
+  {
+   "text": "Fix a closed point x and eigenvalue beta. Choose by the covering hypothesis a supplied curve with closed points above both x and the anchor. Step 5 makes its weight w. The norm conclusion a=q_x^(v/2) established in step 3, at its point over x, gives directly norm(iota beta)=q_x^(w/2). Since x and beta were arbitrary, this is exactly SfIsPunctuallyPureOfWeight [def-weil-punctual-weights]. No inverse-logarithm exponentiation is needed.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 4: compare at the other point and conclude global purity."
+   }
+  },
+  {
+   "text": "If $w'$ is another punctual purity weight, the existing eigenvalue $\\alpha_*$ satisfies $A=q_{x_*}^{w'/2}$ by [def-weil-punctual-weights]. Taking the natural logarithm, using $b^t=\\exp(t\\log b)$ and $\\log(\\exp s)=s$ [def-weil-real-power; def-wf-positive-real-logarithm], gives $w'=2\\log A/\\log q_{x_*}=w$. This proves uniqueness.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-real-power",
+    "def-wf-positive-real-logarithm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 3-4: logarithmic uniqueness of the global weight."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-classical-realized-anchor-eigenvalue",
+  "lem-kun-closed-point-field",
+  "def-wf-positive-real-logarithm",
+  "def-weil-punctual-weights",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power",
+  "lem-wf-common-stage-weil-iterate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "The original seven-step argument: step 1 isolated as the classical anchor-spectrum lemma; the other steps are proved from finite-stage descent, LocalPower, characteristic-polynomial scalar extension and real power cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pure restrictions of a nonzero lisse Weil sheaf on curves through a fixed closed point have a unique weight and imply global punctual purity from Frobenius power and residue size formulas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  {a : FractionRing (WittVector p k)},\\n  a ≠ 0 → ∃ b, b ≠ 0 ∧ ∃ m, (IsFractionRing.ringEquivOfRingEquiv (WittVector.frobeniusEquiv p k)) b * a = ↑p ^ m * b\", \"doc\": \"For any non-zero element $ a $ in the fraction field of Witt vectors over a perfect field $ k $ of characteristic $ p $, there exist a non-zero element $ b $ and an integer $ m $ such that $ \\\\varphi(b\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] (x : ↥X), IsReduced ↑(X.presheaf.stalk x)\", \"doc\": \"For any reduced scheme $ X $, the stalk of its structure sheaf at every point $ x \\\\in X $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize logarithmic weights by residue degrees to compare Frobenius eigenvalues along two point curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.Affine.map_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Affine F} [inst_2 : DecidableEq F]\\n  [inst_3 : DecidableEq K] (f : F →+* K) (x₁ x₂ y₁ y₂ : F),\\n  (WeierstrassCurve.map W f).toAffine.slope (f x₁) (f x₂) (f y₁) (f y₂) = f (W.slope x₁ x₂ y₁ y₂)\", \"doc\": \"For any ring homomorphism $ f : F \\\\to K $ between fields $ F $ and $ K $, and for any two points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve over $ F $, the slope between the images o\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.isMinimal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsMinimal R W ↔\\n    MaximalFor (fun C => WeierstrassCurve.IsIntegral R\", \"doc\": \"A Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $ is minimal if and only if the constant function $ 1 $ is the maximal element among all variable changes $ C $\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsMinimal R W],\\n  MaximalFor (fun C => WeierstrassCurve.IsInteg\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (p q : Polynomial R),\\n  (AdjoinRoot.of W'.polynomial)\\n      ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)) =\\n    (WeierstrassCurve.Affine.CoordinateRing.mk W')\\n      ((Polyn\", \"doc\": \"For an affine Weierstrass curve over a commutative ring $ R $, the norm map $ \\\\mathrm{Norm}_{R[X]} $ applied to an element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring $ R[X,Y]/(Y^2 + a_1XY + a_3Y\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Real.logb, Real.rpow",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "logb.*rpow|rpow.*logb|punctual.*pur",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"194\", \"text\": \"    _ = 1 / 2 := rpow_logb hx0 hx1.ne one_half_pos\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"215\", \"text\": \"    simpa using (rpow_logb (zero_lt_one.trans hp) hp.ne' hp0).symm⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"370\", \"text\": \"    inv_mul_cancel₀ (mod_cast hk), rpow_one, mul_comm (logb ..)]\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"392\", \"text\": \"    rpow_logb (mod_cast zero_lt_of_lt hm) (mod_cast hm.ne') (mod_cast zero_lt_of_lt hn)]\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"420\", \"text\": \"      rw [rpow_logb (by positivity) (by norm_cast; omega) (zero_lt_one.trans hfm1)]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"line\": \"361\", \"text\": \"      rw [Real.rpow_logb (lt_trans zero_lt_one h₂) (ne_of_gt h₂) (by positivity), ← mul_assoc,\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Log/Base.lean\", \"line\": \"121\", \"text\": \"theorem logb_rpow_eq_mul_logb_of_pos (hx : 0 < x) : logb b (x ^ y) = y * logb b x := by\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Log/Base.lean\", \"line\": \"122\", \"text\": \"  rw [logb, log_rpow hx, logb, mul_div_assoc]\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Log/Base.lean\", \"line\": \"133\", \"text\": \"theorem logb_rpow : logb b (b ^ x) = x := by\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Log/Base.lean\", \"line\": \"134\", \"text\": \"  rw [logb, div_eq_iff, log_rpow b_pos]\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Log/Base.lean\", \"line\": \"137\", \"text\": \"theorem rpow_logb_eq_abs (hx : x ≠ 0) : b ^ logb b x = |x| := by\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean\", \"line\": \"139\", \"text\": \"    rw [← rpow_intCast, logb_rpow (by norm_num) (by norm_num), ← neg_le_neg_iff]\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean\", \"line\": \"147\", \"text\": \"    rw [← rpow_intCast, logb_rpow (by norm_num) (by norm_num), ← neg_le_neg_iff]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pure restrictions of a nonzero lisse Weil sheaf on curves through a fixed closed point have a unique weight and imply global punctual purity from Frobenius power and residue size formulas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R).presheaf.stalk (closedPoint R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}\n  {\"name\": \"LieModule.Weight.instFinite\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsNoetherian R M] : Finite (Weight R L M)\", \"doc\": \"If $ M $ is a Noetherian module over a commutative ring $ R $, and $ L $ is a nilpotent Lie ring acting on $ M $, then the set of weights $ \\\\text{Weight}(R, L, M) $ is finite.\"}\n  {\"name\": \"LieModule.Weight.mk.noConfusion\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      {inst : CommRing R} →\\n        {inst_1 : LieRing L} →\\n          {inst_2 : LieAlgebra R L} →\\n            {inst_3 : AddCommGroup M} →\\n              {inst_4 : Module R M} →\\n                {inst_5 : LieRingModule L M} →\\n                  {in\", \"doc\": \"For a commutative ring $ R $, nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, and Lie module $ M $ over $ \\\\mathfrak{g} $, this function establishes that two weights in $ M $ are equal if and only i\"}\n  {\"name\": \"LieModule.Weight.noConfusion\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{P : Sort u} →\\n  {R : Type u_2} →\\n    {L : Type u_3} →\\n      {M : Type u_4} →\\n        {inst : CommRing R} →\\n          {inst_1 : LieRing L} →\\n            {inst_2 : LieAlgebra R L} →\\n              {inst_3 : AddCommGroup M} →\\n                {inst_4 : Module R M} →\\n                  {inst_5 : LieRingMo\", \"doc\": \"For a commutative ring $ R $, nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, and Lie module $ M $ over $ \\\\mathfrak{g} $, this function establishes that two weights in $ M $ are equal if and only i\"}\n  {\"name\": \"MvPowerSeries.IsWeightedHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(f : MvPowerSeries σ R) (p : ℕ) : Prop\", \"doc\": \"A multivariate power series $ f $ is weighted homogeneous of degree $ p $ with respect to weight vector $ w $ if every non-zero coefficient of $ f $ corresponds to a monomial whose weighted degree $ \\\\\"}\n  {\"name\": \"LieModule.Weight.IsNonZero\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : Weight R L M)\", \"doc\": \"A weight $\\\\chi$ in a Lie module over a nilpotent Lie ring is called non-zero if the associated linear functional $\\\\chi : L \\\\to R$ is not identically zero, i.e., there exists some $x \\\\in L$ such that $\"}\n  {\"name\": \"LieModule.Weight.mk.sizeOf_spec\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : SizeOf R] [inst_9 : SizeOf L] [inst\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $, if the generalized wei\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|lisse.*weight|logb_rpow|logb_pow",
+   "results": "Actual search OK; 9 hits; Mathlib/NumberTheory/Ostrowski.lean, Mathlib/NumberTheory/Ostrowski.lean, Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean, Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean, Mathlib/Analysis/SpecialFunctions/Log/Base.lean, Mathlib/Analysis/SpecialFunctions/Log/Base.lean, Mathlib/Analysis/SpecialFunctions/Log/Base.lean, Mathlib/Analysis/SpecialFunctions/Log/Base.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated affine section, elliptic curve and Lie or polynomial weight results; analytic log-power primitives alone do not state the lisse-Weil-sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero lisse Weil sheaf is pure of a unique weight if pure restrictions to curves through a fixed closed point cover every closed point",
+   "results": "Actual search OK; 8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, WittVector.isocrystal_classification, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; ",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated affine section, elliptic curve and Lie or polynomial weight results; analytic log-power primitives alone do not state the lisse-Weil-sheaf criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse Weil sheaf whose restrictions to two point curves are pure has a unique global weight determined by an anchor eigenvalue",
+   "results": "Actual search OK; 8 hits; MvPolynomial.IsWeightedHomogeneous.inj_right, LieModule.Weight.ext, LieModule.Weight.ext_iff, LieModule.Weight.mk.noConfusion, LieModule.Weight.noConfusion, LieModule.Weight.mk.sizeOf_spec, LieModule.Weight.ext_iff', LieModule.Weight.hasEigenvalueAt; ",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated affine section, elliptic curve and Lie or polynomial weight results; analytic log-power primitives alone do not state the lisse-Weil-sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare normalized Frobenius eigenvalue moduli by positive residue degree powers and deduce global purity from curves",
+   "results": "Actual search OK; 8 hits; WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction, WeierstrassCurve.reduction, WeierstrassCurve.minimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.isMinimal_iff, WeierstrassCurve.isGoodReduction_iff; ",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated affine section, elliptic curve and Lie or polynomial weight results; analytic log-power primitives alone do not state the lisse-Weil-sheaf criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-two-point-curve-constituent-purity",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 3-4: existence of anchor eigenvalues, logarithmic uniqueness, comparison at the other point and global purity (old steps 7-8).",
+   "via": [
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-anchored-pure-curve-criterion",
+  "worker": "stage1",
+  "summary": "Proved the fixed-anchor criterion in seven steps using existing fibre-equivalence, algebraically closed eigenvalue, closed-point and real-power nodes. The positive residue-degree cancellations, additional-curve comparison, eigenvalue-independent anchor formula and global uniqueness are explicit. No new node is necessary; the original statement is retained.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraphs 3-4: nonempty anchor spectrum, fixed logarithmic weight and comparison at every other closed point; via lem-zl-two-point-curve-constituent-purity.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Its coefficient-field fibre equivalence reflects the zero lisse object and supplies a nonzero finite-dimensional anchor fibre on the connected geometric scheme. This generic lisse-sheaf tool is already a statement dependency of def-wf-fundamental-representation and does not replace the curve/anchor route."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Its finite-residue-field assertion verifies q_x is finite and greater than one for the logarithmic calculation. It is a generic finite-type scheme tool already used by def-weil-local-frobenius-trace; the unit has no replacement for Zariski lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-9d9fd11fb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9d9fd11fb (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement, and main-20261015 thm-zl-real-mixed-by-curves.proof.md paragraphs 3-4 (anchor x_*, the α^e powers, w=2log_{q_{x*}}|ι α|, the same calculation at x). The item matches that calculation. Hypotheses (i)-(iii) supply the curve covering, curve purity and the power formulas. No cycle, no SGA citation, no new nodes. Steps 2, 3, 5, 6 and 7 check from the cited statements. Step 2: lem-kun-closed-point-field(a) gives q_x>=2, and def-wf-positive-real-logarithm gives log q_x>0. Step 3: (iii) gives β^f at z and q_z=q_x^f, then |ι β|^f=(q_x^f)^{v/2}>0 and the logs cancel. Steps 6-7: lem-a1-real-logarithm-power, and uniqueness from α_*. Two repairs. (1) C4/C3, step 1 claimed F_{x_*} is invertible 'by its defining composite in def-weil-local-frobenius-trace'. But def-weil-frobenius-point-transport says that ι_N being an isomorphism is not part of that definition (it is part 1 of lem-weil-frobenius-cohomology-transport-iso). I removed the claim and now derive nonvanishing of anchor eigenvalues in step 4 from step 3 (|ι(α)|>0) and def-weil-complex-absolute-value. (2) C1, step 1 found a nonzero classical fibre (cor-galois-lisse-representations(2): X connected, Noetherian, separated, ℓ invertible; an equivalence reflects zero). But no cited statement identified that fibre and its operator with the heart stalk and operator of def-weil-punctual-weights. I added the citation of the same-unit node lem-zl-classical-local-frobenius-iterate-comparison: c_x̄ intertwines the classical and normalized operators for all n, rank zero included. Its closure does not contain the item and adds no sec-trace-formula or sec-poincare-duality node. Batch-5 flag on cor-galois-lisse-representations: this is the general lisse-sheaf/π_1-representation equivalence, not a step of the trace formula or of Poincaré duality. It is already in the item's statement closure through def-wf-fundamental-representation, and its own closure is pod Galois/lattice foundations, so it is accepted. tool_uses cor-galois-lisse-representations and lem-kun-closed-point-field (Zariski finiteness, also used by def-weil-local-frobenius-trace) are accepted. Small cases: x=x_*, coinciding powers, dim X_0=0 (vacuous), q_x=2, S=0 excluded (needed for uniqueness).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AnchoredPureCurveCriterion",
+  "declaration": "WeilConjectures.anchoredPureCurveCriterion",
+  "declarations": [
+   "WeilConjectures.anchoredRealizedSheaf",
+   "WeilConjectures.AnchoredCurveTest",
+   "WeilConjectures.AnchoredCurveTest.projection",
+   "WeilConjectures.AnchoredCurveTest.restriction",
+   "WeilConjectures.anchoredFiniteLocalSpectrum",
+   "WeilConjectures.AnchoredCurveTest.LocalPower",
+   "WeilConjectures.anchoredPureCurveCriterion"
+  ],
+  "file": "lean/Sheaf/Paper/AnchoredPureCurveCriterion.lean",
+  "statement": "theorem anchoredPureCurveCriterion (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type (u + 1)) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (iota : Ω ≃+* ℂ) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [Nonempty X₀.left] [GeometricallyConnected X₀.hom] (A : @ZlClassicalRealization D l _ hl Ω _ _ _ X₀ _ _ _ (⟨fun x ↦ @isUnit_of_invertible _ _ _ (zlClassicalStalkInvertible D l hl X₀ x)⟩)) (S : @ZlClassicalWeil D l _ Ω _ _ _ X₀ _ _ _ (⟨fun x ↦ @isUnit_of_invertible _ _ _ (zlClassicalStalkInvertible D l hl X₀ x)⟩)) (hne : ¬ IsZero S.carrier) (R : ∀ (m : ℕ) (hm : 1 ≤ m), sfCommonStageWeilSheaf D l hl X₀ Ω ⥤ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω) (hR : ∀ (m : ℕ) (hm : 1 ≤ m), ConstantExtensionRestrictionSpec D m hm X₀ l hl Ω (R m hm)) (anchor : {x : X₀.left // x ∈ closedPoints X₀.left}) (I : Type w) (tests : I → AnchoredCurveTest D X₀) (weights : I → ℝ) (hcover : ∀ x : {x : X₀.left // x ∈ closedPoints X₀.left}, ∃ (i : I) (za z : {z : (tests i).curve.left // z ∈ closedPoints (tests i).curve.left}), (tests i).projection D X₀ za.val = anchor.val ∧ (tests i).projection D X₀ z.val = x.val) (hpure : ∀ i : I, SfIsPunctuallyPureOfWeight (constantExtensionDatum D (tests i).m (tests i).positive) l hl Ω (tests i).curve iota.toRingHom ((tests i).restriction D l hl Ω X₀ (R (tests i).m (tests i).positive) (anchoredRealizedSheaf D l hl Ω X₀ A S)) (weights i)) (hpower : ∀ i : I, (tests i).LocalPower D l hl Ω X₀ (anchoredRealizedSheaf D l hl Ω X₀ A S) ((tests i).restriction D l hl Ω X₀ (R (tests i).m (tests i).positive) (anchoredRealizedSheaf D l hl Ω X₀ A S))) : ∃ weight : ℝ, SfIsPunctuallyPureOfWeight D l hl Ω X₀ iota.toRingHom (anchoredRealizedSheaf D l hl Ω X₀ A S) weight ∧ (∀ weight' : ℝ, SfIsPunctuallyPureOfWeight D l hl Ω X₀ iota.toRingHom (anchoredRealizedSheaf D l hl Ω X₀ A S) weight' → weight' = weight) ∧ (∀ α : Ω, SfPunctualEigenvalue D l hl Ω X₀ (anchoredRealizedSheaf D l hl Ω X₀ A S) anchor α → α ≠ 0 ∧ weight = 2 * Real.logb (Nat.card (X₀.left.residueField anchor.val) : ℝ) ‖iota α‖) ∧ (∀ i : I, (∃ z : {z : (tests i).curve.left // z ∈ closedPoints (tests i).curve.left}, (tests i).projection D X₀ z.val = anchor.val) → weights i = weight) ∧ (∀ (t : AnchoredCurveTest D X₀) (v : ℝ), (∃ z : {z : t.curve.left // z ∈ closedPoints t.curve.left}, t.projection D X₀ z.val = anchor.val) → t.LocalPower D l hl Ω X₀ (anchoredRealizedSheaf D l hl Ω X₀ A S) (t.restriction D l hl Ω X₀ (R t.m t.positive) (anchoredRealizedSheaf D l hl Ω X₀ A S)) → SfIsPunctuallyPureOfWeight (constantExtensionDatum D t.m t.positive) l hl Ω t.curve iota.toRingHom (t.restriction D l hl Ω X₀ (R t.m t.positive) (anchoredRealizedSheaf D l hl Ω X₀ A S)) v → v = weight) ∧ ∀ (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (β : Ω), SfPunctualEigenvalue D l hl Ω X₀ (anchoredRealizedSheaf D l hl Ω X₀ A S) x β → ‖iota β‖ = (Nat.card (X₀.left.residueField x.val) : ℝ) ^ (weight / 2)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded classical lisse Weil category and normalized realization, canonical constant restriction specified by ConstantExtensionRestrictionSpec, and the recorded immersion pullback. LocalPower retains algebraic multiplicities and zero eigenvalues by evaluating charpoly at finite Weil presentations. Added the two already landed statement interfaces used explicitly; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf8887a62",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and source thm-zl-real-mixed-by-curves.proof.md ¶3-4. All hypotheses (separated finite-type geometrically connected nonempty X0, nonzero ZlClassicalWeil S via recorded ZlClassicalRealization, arbitrary family of smooth geom-connected affine dim-1 curves with closed immersion into constantExtensionModel, R pinned by ConstantExtensionRestrictionSpec then zlWeilPull, hcover/hpure/LocalPower) and all six conclusion clauses (existence, separate uniqueness, nonzero anchor eigenvalues with logb formula, supplied weights, arbitrary further curve, q_x^{w/2}) are present and neither weaker nor stronger. anchoredFiniteLocalSpectrum uses charpoly.roots along the same embedding as sfAdicCoefficientEmbedding; charpoly rather than the existing charpolyRev keeps zero eigenvalues, so it is not an H4 duplicate (ConstantExtensionLocalConjugacy/fdWeilLocalEigenvalues are different notions). Item changed only in lean/stmt_deps; the two added stmt_deps are landed def owners used directly; dependency nodes identical to live; statement verbatim; lines <=100; docstrings with source/blueprint and 7 proof steps; sorry only; no hollow defs. No recompile per instructions. Advisory: f>=1 and q_z=q_x^f conjuncts are automatically true but literal to the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80666",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122710-L-1798032",
+  "kind": "interface",
+  "note": "independent cc review: delivered AnchoredPureCurveCriterion.lean + new ClassicalRealizedAnchorEigenvalue.lean and both node JSONs against the live clone, the unit sk-i-dl-general-real realized route, ZlClassicalRealization/SfPunctualEigenvalue definitions; scratch compile with #print axioms (exit 0)"
+ }
+}

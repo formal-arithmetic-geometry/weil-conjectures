@@ -43,7 +43,15 @@ private theorem symmetricCongr_ι {R M N : Type u}
     symmetricCongr e (SymmetricAlgebra.ι R M m) = SymmetricAlgebra.ι R N (e m) := by
   exact SymmetricAlgebra.lift_ι_apply _ _
 
-private theorem exists_sectionTensorEquiv {X : Scheme.{u}}
+/-- Affine restriction of the sectionwise symmetric algebra is extension of scalars.
+Source: Stacks Project, Constructions, Lemma 01LN; Algebra, Lemma 0C6F.
+(blueprint: lem-weil-pbc-symmetric-algebra-affine-section-comparison).
+
+Proof: quasi-coherent affine-section base change gives the module equivalence after
+swapping the tensor factors. Symmetric algebra base change and the symmetric-algebra
+lifts of this equivalence and its inverse give the required linear equivalence.
+Symmetric-algebra induction identifies its pure tensor formula with restriction. -/
+theorem exists_sectionTensorEquiv {X : Scheme.{u}}
     (F : X.Modules) [F.IsQuasicoherent] {U W : X.Opens}
     (hU : IsAffineOpen U) (hW : IsAffineOpen W) (hUW : U ≤ W) :
     letI : Algebra Γ(X, W) Γ(X, U) :=

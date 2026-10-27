@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-product-open-adjunction-normalization",
+ "kind": "statement",
+ "title": "Restriction, exchange and open adjunct normalization in product coordinates",
+ "statement": "For arbitrary compactifications cf,cg, quasi-compact g, finite commutative A, and every unbounded derived object Q on cf.Z×B cg.Z, sectionwise rho_Q equals the specified proper exchange. The open Hom equivalence sends properOpenMate at P_i Q to lambda_(P_i Q) inverse. Finally P_k R_t(epsilon_i,Q) followed by rho_Q equals lambda_(P_i Q). All coordinates are those of def-pur-product-exchange-coordinate-data; no exchange on a proper map is inverted.",
+ "stmt_deps": [
+  "def-pur-product-exchange-coordinate-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "proof": [
+  {
+   "text": "Represent Q by a K-injective complex. Sectionwise open restriction evaluates on the same pullback object as the transpose of the unit-square-counit exchange. The equality holds termwise and survives right-derived localization.",
+   "uses": [
+    "lem-exc-proetale-derived-open-restriction",
+    "def-exchange-projection",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Cartesian square makes the clopen intermediate lift an isomorphism. Restrict the canonical clopen-projection proper mate, paste its proper adjunctions and use triangle identities; its open adjunct is inverse restriction followed by open unit, hence lambda inverse.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of rho at epsilon_i gives P_k R_t(epsilon_i) followed by rho_Q equal to rho_(i! P_i Q) followed by R_v P_i(epsilon_i). The open triangle identity identifies P_i(epsilon_i) with inverse eta_i at P_i Q. Transport between exact and total pullback gives exactly the composite used by lambda.",
+   "uses": [
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proper-open-tensor-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived open restriction equals base change exchange and proper open interchange is its inverse open adjunction mate",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction and IsProper.instMorphismRestrict. These concern ordinary scheme modules or geometry, not the specified unbounded pro-etale maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of an inverse open restriction isomorphism commutes with the counit and computes compactly supported pushforward composition",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction_counit_app_app and SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. No matching pro-etale comparison or compactification-coordinate formula.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hit, CategoryTheory.Adjunction.homEquiv_counit. Used for the elementary adjunction argument, but does not identify independently specified geometric comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction API only"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|towerOpenUnit|counit_naturality",
+   "results": "25 Mathlib hits for generic adjunction counit naturality, no project-specific comparisons. Searches of lean/WeilConjectures and lean/Sheaf found RelativeCompactSupportPasting, ProEtaleCompositionTowerNormalization, ProEtaleCompositionTowerFormula and ProperOpenProjectionMate; their interfaces do not state the explicit product-coordinate identifications. blueprint_refs searches: open counit (2 unrelated blueprint nodes), horizontal exchange (0), composition coordinate (0).",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductExchangeCounitCoordinates",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J.",
+   "via": [
+    "lem-pur-product-exchange-counit-coordinates",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductOpenAdjunctionNormalization",
+  "file": "lean/Sheaf/Paper/ProductOpenAdjunctionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ProductExchangeCoordinates.productOpenAdjunctionNormalization",
+  "statement": "theorem productOpenAdjunctionNormalization\n    {B X Z : Scheme.{u}} {f : X ⟶ B} {g : Z ⟶ B}\n    (cf : Compactification f) (cg : Compactification g) [QuasiCompact g]\n    (A : Type u) [CommRing A] [Finite A]\n    (Q : ProperOpenDerived (ULift.{u + 1} A) (pullback cf.g cg.g)) :\n    (rho A (pullback.snd cf.g g) (i cf cg) cg.i\n      (pullback.snd cf.g cg.g) (square cf cg)).hom.app Q =\n        (derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} A))\n          (square cf cg).flip.toCommSq).app Q ∧\n    (properOpenAdj (ULift.{u + 1} A) cg.i).homEquiv _ _\n      ((properOpenMate (ULift.{u + 1} A) (i cf cg) (pullback.snd cf.g g)\n        (pullback.snd cf.g cg.g) cg.i (comm cf cg)).app\n          ((ProperOpenPull (ULift.{u + 1} A) (i cf cg)).obj Q)) =\n      (lambda cf cg A ((ProperOpenPull (ULift.{u + 1} A) (i cf cg)).obj Q)).inv ∧\n    (ProperOpenPull (ULift.{u + 1} A) cg.i).map\n        ((ProperOpenPush (ULift.{u + 1} A) (pullback.snd cf.g cg.g)).map\n          ((properOpenAdj (ULift.{u + 1} A) (i cf cg)).counit.app Q)) ≫\n      (rho A (pullback.snd cf.g g) (i cf cg) cg.i\n        (pullback.snd cf.g cg.g) (square cf cg)).hom.app Q =\n      (lambda cf cg A ((ProperOpenPull (ULift.{u + 1} A) (i cf cg)).obj Q)).hom",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 23 moved decls verbatim vs clone; 3 new sorry statements vs original Equations/alpha conjuncts and proEtaleCompositionTowerFormula generality; item node fields vs live node"
+ }
+}

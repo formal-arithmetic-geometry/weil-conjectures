@@ -5,6 +5,7 @@ Authors: SHEAF group Q43
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.LocallyClosedComparisonCoordinates
 public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -17,31 +18,13 @@ public import Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.RingedTopoiModuleAdjunctionRepair
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.Paper.BoundedSiteAdjunctionTranspose
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.SixFunctors.FiniteDualityClosedComparison
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+
+import Sheaf.AlgebraicGeometry.LocallyClosedCounitComparison
+import Sheaf.AlgebraicGeometry.LocallyClosedRelativeHomIdentity
+import Sheaf.CategoryTheory.ExactDerivedAdjunctionBounds
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
 
 /-!
 # Locally closed exceptional comparison with its adjunction normalization
@@ -53,184 +36,12 @@ lem-weil-finite-duality-site-comparison.proof.md, second paragraph
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
-
-/-- Coordinates for the two ambient closed right adjoints. Each functor is determined
-up to the unique counit-compatible adjoint isomorphism, rather than freely chosen data.
-Source: blueprint locally closed exceptional comparison, closed factor
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-structure LocallyClosedComparisonAdjoints (A : Type (u + 1)) [CommRing A]
-    {S V : Scheme.{u}} (c : S ⟶ V) where
-  etale : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
-    DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))
-  proetale : DerivedCategory (Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} A)) ⥤
-    DerivedCategory (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))
-  etaleAdjunction : (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⊣ etale
-  proetaleAdjunction : (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⊣ proetale
-
-/-- The etale closed-then-open extension on ordinary derived categories.
-Source: blueprint locally closed exceptional comparison, F_et
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-abbrev locallyClosedEtaleExtension (A : Type (u + 1)) [CommRing A]
-    {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
-  (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⋙
-    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
-
-/-- The pro-etale closed-then-open extension on ordinary derived categories.
-Source: blueprint locally closed exceptional comparison, F_proet
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-abbrev locallyClosedProEtaleExtension (A : Type (u + 1)) [CommRing A]
-    {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
-  (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⋙
-    (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
-
-namespace LocallyClosedComparisonAdjoints
-
-variable {A : Type (u + 1)} [CommRing A] {S V T : Scheme.{u}} {c : S ⟶ V}
-
-/-- Open restriction followed by the ambient closed etale right adjoint.
-Source: blueprint locally closed exceptional comparison, J_et
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-abbrev etaleRight (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
-    [IsOpenImmersion v] :=
-  (Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory ⋙ a.etale
-
-/-- Open restriction followed by the ambient closed pro-etale right adjoint.
-Source: blueprint locally closed exceptional comparison, J_proet
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-abbrev proetaleRight (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
-    [IsOpenImmersion v] :=
-  (upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory ⋙ a.proetale
-
-/-- The literal pasted etale adjunction, fixing its unit and counit.
-Source: blueprint locally closed exceptional comparison, pasted adjunction
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def etalePasted (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
-    [IsOpenImmersion v] : locallyClosedEtaleExtension A c v ⊣ a.etaleRight v :=
-  a.etaleAdjunction.comp
-    (Etale.openImmersionLowerShriekUpperStarAdjunction
-      (ModuleCat.{u + 1} A) v).mapDerivedCategoryAdjunction
-
-/-- The literal pasted pro-etale adjunction, fixing its unit and counit.
-Source: blueprint locally closed exceptional comparison, pasted adjunction
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def proetalePasted (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
-    [IsOpenImmersion v] : locallyClosedProEtaleExtension A c v ⊣ a.proetaleRight v :=
-  a.proetaleAdjunction.comp
-    (openImmersionLowerShriekUpperStarAdjunction
-      (ModuleCat.{u + 1} A) v).mapDerivedCategoryAdjunction
-
-end LocallyClosedComparisonAdjoints
-
-/-- Delta is the specified closed counit mate followed by open extension comparison.
-Source: blueprint locally closed exceptional comparison, Delta
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def locallyClosedExtensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
-    [IsClosedImmersion c] [IsOpenImmersion v] :
-    DerivedCategory.Plus.ι ⋙ locallyClosedEtaleExtension A c v ⋙
-        (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ≅
-      DerivedCategory.Plus.ι ⋙
-        (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory ⋙
-        locallyClosedProEtaleExtension A c v :=
-  Functor.isoWhiskerLeft
-      (DerivedCategory.Plus.ι ⋙
-        (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor)
-      ((Functor.mapDerivedCategoryCompIso
-        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v)
-        (comparisonUpperStar (ModuleCat.{u + 1} A) T)).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) v) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) ≪≫
-    Functor.isoWhiskerRight (fixedDirectImageComparisonIso A c)
-      (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
-
-/-- The scheme-theoretic closure compactification of an immersion. No density or
-nonemptiness assumption is imposed.
-Source: blueprint locally closed exceptional comparison, closure factorization
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def locallyClosedImageCompactification {S T : Scheme.{u}} (s : S ⟶ T)
-    [IsImmersion s] [QuasiCompact s] : Compactification s where
-  Z := s.image
-  i := s.toImage
-  g := s.imageι
-  comm := s.toImage_imageι.symm
-  isOpenImmersion := inferInstance
-  isProper := inferInstance
-
-/-- The unique identity-on-the-source sheaf comparison, oriented from closed/open
-extension to closure extension. The existing theorem specifies uniqueness by the open
-unit and closed counit, so this choice cannot introduce a scalar twist.
-Source: Stacks 0GJ1; blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def locallyClosedEtaleSheafIso (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
-    [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
-    Etale.lowerStar (ModuleCat.{u + 1} A) c ⋙
-        Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v ≅
-      Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) (c ≫ v).toImage ⋙
-        Etale.lowerStar (ModuleCat.{u + 1} A) (c ≫ v).imageι :=
-  (((((etale_locallyClosed_extension_comparison (A := A) T (𝟙 T) v).2 (c ≫ v)).choose_spec).1
-    c v rfl).choose).symm
-
-/-- The normalized identification with etale compact support at the closure
-compactification. Both closed direct images are exact; the comparison is the
-localization of the preceding uniquely normalized sheaf map.
-Source: Stacks 0GJ1; blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def locallyClosedEtaleSupportIso (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
-    [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
-    locallyClosedEtaleExtension A c v ≅
-      Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-        (locallyClosedImageCompactification (c ≫ v)) :=
-  Functor.isoWhiskerRight
-      (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorIsoMapDerivedCategory _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (locallyClosedEtaleSheafIso A c v) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerLeft _
-      ((Etale.lowerStar (ModuleCat.{u + 1} A)
-        (c ≫ v).imageι).rightDerivedFunctorIsoMapDerivedCategory).symm
-
-/-- The existing Brown-adjoint theorem at the closure compactification. The
-Noetherian and compact hypotheses it needs follow from the immersion into T; they
-are constructed here rather than imposed on the statement as additional assumptions.
-Source: blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-instance locallyClosedImage_isLeftAdjoint (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S T : Scheme.{u}} (s : S ⟶ T) [IsImmersion s] [QuasiCompact s] [IsNoetherian T] :
-    (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-      (locallyClosedImageCompactification s)).IsLeftAdjoint :=
-  letI : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian s
-  letI : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace s
-  letI : IsLocallyNoetherian s.image := LocallyOfFiniteType.isLocallyNoetherian s.imageι
-  letI : CompactSpace s.image := QuasiCompact.compactSpace_of_compactSpace s.imageι
-  Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A
-    (locallyClosedImageCompactification s)
-
-/-- The ordinary etale exceptional right adjoint in closure coordinates.
-Source: blueprint locally closed exceptional comparison, s-times
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-abbrev locallyClosedEtaleExceptional (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S T : Scheme.{u}} (s : S ⟶ T) [IsImmersion s] [QuasiCompact s] [IsNoetherian T] :=
-  (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-    (locallyClosedImageCompactification s)).rightAdjoint
-
-/-- The counit-compatible etale adjoint identification induced by the normalized
-left-adjoint comparison, with no independently chosen right-adjoint isomorphism.
-Source: blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
-def locallyClosedEtaleRightIso {A : Type (u + 1)} [CommRing A] [Finite A]
-    {S V T : Scheme.{u}} {c : S ⟶ V} (v : V ⟶ T)
-    [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)]
-    (a : LocallyClosedComparisonAdjoints A c) :
-    a.etaleRight v ≅ locallyClosedEtaleExceptional A (c ≫ v) :=
-  (a.etalePasted v).rightAdjointUniq
-    ((Adjunction.ofIsLeftAdjoint _).ofNatIsoLeft (locallyClosedEtaleSupportIso A c v).symm)
 
 /-- All clauses of locally closed exceptional comparison, on exactly bounded
 constructible targets and bounded-below etale-origin tests. The natural transformations
@@ -491,7 +302,153 @@ theorem finiteDuality_locallyClosed_comparison
         (Padic.coefficientExtensionRing l E (n + 1)) inferInstance
         (Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)))
         S V T c v inferInstance inferInstance hT hqc) := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  have : IsNoetherian T := {
+    __ := LocallyOfFiniteType.isLocallyNoetherian aT
+    __ := QuasiCompact.compactSpace_of_compactSpace aT }
+  have : IsNoetherian S := {
+    __ := LocallyOfFiniteType.isLocallyNoetherian aS
+    __ := QuasiCompact.compactSpace_of_compactSpace aS }
+  have : QuasiCompact (c ≫ v) := inferInstance
+  let W : V.Opens := ⟨(Set.range c)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding c).isClosed_range.isOpen_compl⟩
+  have : TopologicalSpace.NoetherianSpace V := v.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace W := W.ι.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact W.ι := inferInstance
+  have hij : IsCompl (Set.range c) (Set.range W.ι) := by
+    rw [Scheme.Opens.range_ι]
+    exact isCompl_compl
+  let a : LocallyClosedComparisonAdjoints A c := {
+    etale := (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor.rightAdjoint
+    proetale := (closedUpperShriek (ModuleCat.{u + 1} A) c W.ι).rightDerivedFunctor
+    etaleAdjunction := Adjunction.ofIsLeftAdjoint _
+    proetaleAdjunction := derivedLowerStarClosedUpperShriekAdjunction c W.ι hij }
+  have bounded (M : Etale.BoundedConstructibleDerivedCategory A T) :
+      _root_.DerivedCategory.TStructure.t.plus ((a.etaleRight v).obj M.obj) := by
+    obtain ⟨k, b, hkb, hz⟩ := M.property.2
+    have : M.obj.IsGE k :=
+      (_root_.DerivedCategory.isGE_iff M.obj k).2 (fun i hi ↦ hz i (.inl hi))
+    have : ((Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory.obj M.obj).IsGE k :=
+      Functor.isGE_mapDerivedCategory_obj _ M.obj k
+    refine ⟨k, ?_⟩
+    exact exactDerivedAdjunction_isGE (Etale.lowerStar (ModuleCat.{u + 1} A) c)
+      (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor
+      ((Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorIsoMapDerivedCategory |>
+        Functor.isoWhiskerLeft DerivedCategory.Q |>.trans
+          (Etale.lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategoryFactors)
+      a.etaleAdjunction _ k
+  let g := locallyClosedCounitMate A c v a bounded
+  have (M : Etale.BoundedConstructibleDerivedCategory A T) : IsIso (g.app M) :=
+    locallyClosedCounitMate_isIso D l _hl E n aS aT c v _hs a bounded M
+  have : IsIso g := NatIso.isIso_of_isIso_app g
+  let gamma := asIso g
+  have hc (M : Etale.BoundedConstructibleDerivedCategory A T) :
+      (locallyClosedExtensionComparison A c v).hom.app
+          ⟨(a.etaleRight v).obj M.obj, bounded M⟩ ≫
+        (locallyClosedProEtaleExtension A c v).map (gamma.hom.app M) ≫
+          (a.proetalePasted v).counit.app
+            ((comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj M.obj) =
+      (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.map
+        ((a.etalePasted v).counit.app M.obj) := by
+    have h := ((a.proetalePasted v).homEquiv _ _).symm_apply_apply
+      ((locallyClosedExtensionComparison A c v).inv.app
+          ⟨(a.etaleRight v).obj M.obj, bounded M⟩ ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.map
+          ((a.etalePasted v).counit.app M.obj))
+    rw [Adjunction.homEquiv_counit] at h
+    change _ ≫ ((locallyClosedProEtaleExtension A c v).map _ ≫ _) = _
+    erw [show (locallyClosedProEtaleExtension A c v).map (gamma.hom.app M) ≫
+        (a.proetalePasted v).counit.app _ = _ from h]
+    simp
+  let CS := (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory
+  let CT := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  let U := (comparisonLowerStar (ModuleCat.{u + 1} A) T).rightDerivedFunctor
+  let X := locallyClosedEtaleExceptional A (c ≫ v)
+  let r := locallyClosedEtaleRightIso v a
+  let eta := (derivedComparisonAdjunction (ModuleCat.{u + 1} A) T).unit
+  let rho : (Etale.DerivedCategory.isBoundedConstructible A T).ι ⋙ a.etaleRight v ⋙ CS ⟶
+      (Etale.DerivedCategory.isBoundedConstructible A T).ι ⋙ CT ⋙ U ⋙ X ⋙ CS := {
+    app M := CS.map (r.hom.app M.obj ≫ X.map (eta.app M.obj))
+    naturality M N f := by
+      have hr := r.hom.naturality f.hom
+      change (a.etaleRight v).map f.hom ≫ r.hom.app N.obj =
+        r.hom.app M.obj ≫ X.map f.hom at hr
+      have he := eta.naturality f.hom
+      change f.hom ≫ eta.app N.obj = eta.app M.obj ≫ U.map (CT.map f.hom) at he
+      change CS.map ((a.etaleRight v).map f.hom) ≫
+        CS.map (r.hom.app N.obj ≫ X.map (eta.app N.obj)) =
+          CS.map (r.hom.app M.obj ≫ X.map (eta.app M.obj)) ≫
+            CS.map (X.map (U.map (CT.map f.hom)))
+      rw [← CS.map_comp, ← CS.map_comp]
+      congr 1
+      rw [← Category.assoc, hr, Category.assoc, ← X.map_comp, he,
+        X.map_comp, Category.assoc] }
+  have hrho (M : Etale.BoundedConstructibleDerivedCategory A T) : IsIso (rho.app M) := by
+    obtain ⟨k, b, hkb, hz⟩ := M.property.2
+    have hM : _root_.DerivedCategory.TStructure.t.plus M.obj :=
+      ⟨k, (_root_.DerivedCategory.isGE_iff M.obj k).2 (fun i hi ↦ hz i (.inl hi))⟩
+    have : IsIso (eta.app M.obj) :=
+      isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} A) T M.obj hM
+    dsimp [rho]
+    infer_instance
+  have : IsIso rho := NatIso.isIso_of_isIso_app rho
+  let theta := gamma.symm ≪≫ asIso rho
+  refine ⟨inferInstance, inferInstance, ⟨{
+    adjoints := a
+    bounded := bounded
+    gamma := gamma
+    counit := hc
+    transport := theta
+    unit_normalization := ?_
+    relative_hom := ?_ }⟩⟩
+  · intro M
+    change gamma.hom.app M ≫ (gamma.inv.app M ≫ rho.app M) = rho.app M
+    simp
+  · exact locallyClosedRelativeHomIdentity A c v a bounded gamma hc
+
+
+private theorem normalizedComparison_unique
+    {C₁ C₂ C₃ C₄ B : Type*}
+    [Category C₁] [Category C₂] [Category C₃] [Category C₄] [Category B]
+    (ι : B ⥤ C₁) (CS : C₂ ⥤ C₄) (CT : C₁ ⥤ C₃) (U : C₃ ⥤ C₁)
+    (η : 𝟭 C₁ ⟶ CT ⋙ U)
+    (J J' X X' : C₁ ⥤ C₂) (P P' : C₃ ⥤ C₄) (hX : X = X')
+    (r : J ≅ X) (r' : J' ≅ X')
+    (γ : ι ⋙ J ⋙ CS ≅ ι ⋙ CT ⋙ P)
+    (γ' : ι ⋙ J' ⋙ CS ≅ ι ⋙ CT ⋙ P')
+    (θ : ι ⋙ CT ⋙ P ≅ ι ⋙ CT ⋙ U ⋙ X ⋙ CS)
+    (θ' : ι ⋙ CT ⋙ P' ≅ ι ⋙ CT ⋙ U ⋙ X' ⋙ CS)
+    (h : ∀ M, γ.hom.app M ≫ θ.hom.app M =
+      CS.map (r.hom.app (ι.obj M) ≫ X.map (η.app (ι.obj M))))
+    (h' : ∀ M, γ'.hom.app M ≫ θ'.hom.app M =
+      CS.map (r'.hom.app (ι.obj M) ≫ X'.map (η.app (ι.obj M)))) :
+    ∃! e : (J ≅ J') × (ι ⋙ CT ⋙ P ≅ ι ⋙ CT ⋙ P'),
+      HEq (e.1 ≪≫ r') r ∧ HEq (e.2 ≪≫ θ') θ ∧
+        ∀ M, CS.map (e.1.hom.app (ι.obj M)) ≫ γ'.hom.app M =
+          γ.hom.app M ≫ e.2.hom.app M := by
+  subst X'
+  -- Both comparisons factor through the common normalized values.
+  refine ⟨(r ≪≫ r'.symm, θ ≪≫ θ'.symm), ?_, ?_⟩
+  · refine ⟨?_, ?_, ?_⟩
+    · simp
+    · simp
+    · intro M
+      -- The two unit equations reduce the gamma square to inverse cancellation.
+      apply (cancel_mono (θ'.hom.app M)).1
+      simp only [Category.assoc, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+        Iso.inv_hom_id_app, Category.comp_id]
+      rw [h', h]
+      rw [← CS.map_comp]
+      simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  · intro e he
+    apply Prod.ext
+    · apply Iso.ext
+      apply (cancel_mono r'.hom).1
+      simpa using congrArg Iso.hom (eq_of_heq he.1)
+    · apply Iso.ext
+      apply (cancel_mono θ'.hom).1
+      simpa using congrArg Iso.hom (eq_of_heq he.2.1)
 
 /-- The normalized comparisons between two closed/open factorizations are unique.
 Consequently identity comparisons and composition comparisons satisfy the cocycle law.
@@ -539,6 +496,26 @@ theorem locallyClosed_comparison_factorization
           (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.map
               (e.1.hom.app M.obj) ≫ z'.gamma.hom.app M =
             z.gamma.hom.app M ≫ e.2.hom.app M := by
-  sorry
+  let CS := (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory
+  let CT := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  let U := (comparisonLowerStar (ModuleCat.{u + 1} A) T).rightDerivedFunctor
+  let X := locallyClosedEtaleExceptional A (c ≫ v)
+  let X' := locallyClosedEtaleExceptional A (c' ≫ v')
+  -- Package the proof-valued instances so congruence identifies the closure functors.
+  let exceptional (s : {f : S ⟶ T // IsImmersion f ∧ QuasiCompact f}) :=
+    @locallyClosedEtaleExceptional A _ _ S T s.val s.property.1 s.property.2 _
+  have hsub : (⟨c ≫ v, inferInstance, inferInstance⟩ :
+      {f : S ⟶ T // IsImmersion f ∧ QuasiCompact f}) =
+      ⟨c' ≫ v', inferInstance, inferInstance⟩ := Subtype.ext _hs
+  have hX := congrArg exceptional hsub
+  change X = X' at hX
+  exact normalizedComparison_unique
+    (Etale.DerivedCategory.isBoundedConstructible A T).ι CS CT U
+    (derivedComparisonAdjunction (ModuleCat.{u + 1} A) T).unit
+    (z.adjoints.etaleRight v) (z'.adjoints.etaleRight v') X X'
+    (z.adjoints.proetaleRight v) (z'.adjoints.proetaleRight v') hX
+    (locallyClosedEtaleRightIso v z.adjoints)
+    (locallyClosedEtaleRightIso v' z'.adjoints)
+    z.gamma z'.gamma z.transport z'.transport z.unit_normalization z'.unit_normalization
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-lattice-koszul-injective-normalization",
+ "kind": "statement",
+ "title": "Injective-normalized comparison for lattice Koszul totalization",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $r\\geq0$, and put $D=\\mathbf Z^r$, $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $t:\\mathcal M\\to\\mathcal E$ for trivial action and $\\Gamma$ for invariants [lem-sfb-condensed-derived-restriction-calculus]. Use ordinary derived categories and localization $Q$ [def-weil-abstract-derived-category]. For equivariant cochain complexes use the finite Koszul complex of [lem-sfb-discrete-lattice-koszul-resolution] and its total $K(P)^n=\\bigoplus_{a+b=n}K_R(P^b;T)^a$, with differential $d_K+(-1)^a d_P$. Use the total functor and its specified shifts and cone maps from [lem-sfb-lattice-koszul-total-triangles]. For every bounded-below termwise injective $J$, the degree-zero invariant inclusion defines a natural quasi-isomorphism $b_J:\\Gamma(J)\\to K(J)$. For every monomorphic quasi-isomorphism $s:P\\to J$ to such a complex, the formula\n$$\\lambda_P=Q(b_J)^{-1}\\circ Q(Ks):QK(P)\\longrightarrow Q\\Gamma(J)=R\\Gamma(P)$$\n(using the canonical injective-resolution identification of the last object) is independent of the resolution and lifts. These arrows form an isomorphism of triangulated functors $\\mathsf K\\cong R\\Gamma$ with the specified shift comparisons. In particular the canonical connecting morphism for any short exact sequence of equivariant modules agrees with the one from its termwise exact Koszul sequence. On modules the composite $P^D[0]\\to QK(P)\\xrightarrow{\\lambda_P}R\\Gamma(P)$ is the canonical invariant-inclusion map, so it supplies a simultaneous normalized choice of the module comparisons. For $r=0$ it is the identity under the normalized derived identity functor. The equality $\\lambda_P=\\lambda_J\\circ Q(Ks)$ holds with the canonical derived identifications for every such $s$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; agent-formulated lattice expansion, returned proof steps 4–6: injective comparison, independence, triangle and invariant normalization. The blueprint supplies the route, not this structural calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-total-triangles"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized injective computation of [lem-sfb-condensed-action-injective-infrastructure], writing $\\eta_C:Q\\Gamma C\\to R\\Gamma(QC)$ for the computation unit. In particular, for an injective equivariant module $I$, $\\eta_{I[0]}$ identifies $R\\Gamma(I[0])$ with $\\Gamma(I)[0]$. Apply [lem-sfb-discrete-lattice-koszul-resolution] to $I$. Its module comparison is an isomorphism, and its normalization says that the composite of the actual invariant inclusion $e_I:\\Gamma(I)[0]\\to K_R(I;T)$ with that comparison is the canonical invariant-inclusion map to $R\\Gamma(I[0])$, namely $\\eta_{I[0]}$. Consequently $Q(e_I)$ is an isomorphism and $e_I$ is a quasi-isomorphism. This uses the module theorem's stated normalization, not a choice of its proof's resolution.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  },
+  {
+   "text": "Use the invariant subsheaf and its actual inclusion supplied by [lem-sfb-condensed-action-injective-infrastructure]. For any equivariant complex $C$, put the invariant inclusion $\\Gamma(C^b)\\to C^b$ in Koszul degree $a=0$ and zero in the other summands. This is a chain map $b_C:\\Gamma C\\to K(C)$: $d_K$ vanishes on invariants, and at $a=0$ the other differential is $d_C$, with sign $1$. Equivariant maps preserve invariants, so $K(u)b_C=b_{C'}\\Gamma(u)$. For bounded-below termwise injective $J$, apply [lem-sc-finite-strip-row-augmentation] to the commuting double complex $B^{a,b}=K_R(J^b;T)^a$, with strip bound $r+1$, not $r$. Its rows have the quasi-isomorphisms $e_{J^b}$ of step 1; its augmentation is exactly $b_J$. The total exists by the finite sums in [lem-sfb-lattice-koszul-total-triangles] and has the required differential. Hence $b_J$ is a quasi-isomorphism. In particular this works when $r=0$.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sc-finite-strip-row-augmentation",
+    "lem-sfb-lattice-koszul-total-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133, lemma-double-complex-gives-resolution, second-variable variant; finite horizontal strip 0 through r"
+   }
+  },
+  {
+   "text": "First, the stated monomorphism $s:P\\to J$ forces $P$ to be bounded below: if $J^b=0$ for $b<N$, then $P^b\\hookrightarrow0$ gives $P^b=0$ for $b<N$. Thus the total functor of [lem-sfb-lattice-koszul-total-triangles] applies to every resolution allowed in the statement. For a resolution $s:P\\to J$ set\n$$c_s=\\eta_J^{-1}R\\Gamma(Qs):R\\Gamma(QP)\\xrightarrow{\\sim}Q\\Gamma J,\\qquad L_s=c_s^{-1}Q(b_J)^{-1}Q(Ks).$$\nThese are isomorphisms: the unit is invertible on $J$ by [lem-sfb-condensed-action-injective-infrastructure], and $K$ preserves quasi-isomorphisms by [lem-sfb-lattice-koszul-total-triangles]. The formula for $c_s$ is precisely the canonical computation isomorphism of [def-sfb-right-derived-functor]. It remains to verify naturality and independence, rather than regard a cohomology isomorphism as a chosen derived comparison.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-lattice-koszul-total-triangles",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  },
+  {
+   "text": "Let $s:P\\to J$, $t:P'\\to J'$ be two such resolutions and $v:QP\\to QP'$ any derived morphism. The targets $J,J'$ are K-injective by [lem-sfb-condensed-action-injective-infrastructure]. By [lem-weil-pbc-kinjective-hom-derived], choose a chain map $u:J\\to J'$ whose homotopy class represents $Qt\\,v\\,(Qs)^{-1}$; it is unique up to homotopy. Naturality of the computation unit gives\n$$c_tR\\Gamma(v)=Q\\Gamma(u)c_s.$$\nAlso $\\mathsf K(v)=Q(Kt)^{-1}Q(Ku)Q(Ks)$. The chain identity of step 2 gives $Q(Ku)Q(b_J)=Q(b_{J'})Q\\Gamma(u)$. Substitution and cancellation therefore give $L_t\\mathsf K(v)=R\\Gamma(v)L_s$. Applying an additive functor to a homotopy preserves it, and the Koszul total homotopy has the sign $(-1)^a$ specified in [lem-sfb-lattice-koszul-total-triangles], so the equations do not depend on the representative $u$. Taking $P=P'$ and $v=1$ proves independence of $s,J$ with the canonical value identifications. For arbitrary $v$ it proves naturality. Thus $L_s$ defines a natural isomorphism $\\lambda:\\mathsf K\\simeq R\\Gamma$ on $D^+(\\mathcal E)$, and in the model $c_s$ its component is exactly the formula of the statement.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-lattice-koszul-total-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  },
+  {
+   "text": "Check the specified shifts, including the unit identification. The exact trivial-action functor is left adjoint to $\\Gamma$ by [lem-sfb-condensed-action-injective-infrastructure]. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to $\\Gamma$. Both module categories have K-injective resolutions (for $\\mathcal M$ use the same infrastructure with the trivial group). The shift clause of [lem-weil-pbc-kinjective-fiber-triangle-comparison], with $G=\\Gamma$, consequently gives the fixed comparison $\\sigma_R$ with $\\sigma_R\\eta_{J[n]}=\\eta_J[n]$, under termwise shift identifications, by iteration and inversion from shift $1$. On the Koszul side, [lem-sfb-lattice-koszul-total-triangles] gives $\\sigma_K$ equal to $(-1)^{an}$ on the summand of Koszul degree $a$. Since $b$ is supported in degree $a=0$, $\\sigma_K b_{J[n]}=b_J[n]$. As $\\lambda_{QJ}=\\eta_J Q(b_J)^{-1}$, these two identities imply\n$$\\sigma_R\\lambda_{Q(J[n])}=\\lambda_{QJ}[n]\\sigma_K.$$\nFor general $P$, use the shifted resolution $s[n]$ and naturality from step 4; cancel $QK(s[n])$. This proves the same equality on every object, with coherence for addition supplied by the two specified shift structures.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+    "lem-sfb-lattice-koszul-total-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  },
+  {
+   "text": "Both functors are triangulated by [lem-sfb-condensed-action-injective-infrastructure] and [lem-sfb-lattice-koszul-total-triangles]. For a distinguished triangle, naturality of $\\lambda$ gives its first two arrow squares, and naturality on its last arrow followed by step 5 gives the last-arrow square with the specified shifts. Thus $\\lambda$ is an isomorphism of triangulated functors. In particular, let $0\\to A\\to B\\to C\\to0$ be an equivariant module sequence and $\\delta:QC\\to QA[1]$ its canonical boundary from [lem-weil-pbc-complex-ses-triangle]. Its image under $\\mathsf K$ has boundary equal to that of the termwise exact Koszul sequence, by the last clause of [lem-sfb-lattice-koszul-total-triangles]. Therefore\n$$\\sigma_R R\\Gamma(\\delta)\\lambda_C=\\lambda_A[1]\\delta_K.$$\nThe cone convention here is the given negative projection, not a freely chosen sign on the boundary. This is the required connecting-morphism compatibility.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-lattice-koszul-total-triangles",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  },
+  {
+   "text": "For a module $P$ and resolution $s:P[0]\\to J$, the actual chain square is $K(s)b_{P[0]}=b_J\\Gamma(s)$: both maps place the invariant section's image in $J^0$ in Koszul degree zero. Hence\n$$\\lambda_P Q(b_{P[0]})=c_s^{-1}Q\\Gamma(s)=\\eta_{P[0]},$$\nwhere the last equality is naturality of the unit with $c_s=\\eta_J^{-1}R\\Gamma(Qs)$ [def-sfb-right-derived-functor]. This is the canonical invariant-inclusion map on modules, simultaneously for all modules by step 4. When $r=0$, $\\Gamma$ and $K$ are both the identity and $b_J=1_J$; the normalized derived-identity computation identifies $L_s$ with $Q(s)^{-1}Q(s)=1$. Finally step 4 applied to $v=Qs$ and to the identity resolution of $J$ gives $\\lambda_P=\\lambda_J Q(Ks)$ after the canonical resolution identification, as asserted. The zero module and zero ring give only zero objects and identity maps of those objects, so introduce no exceptions.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sfb-lattice-koszul-total-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image; agent lattice comparison calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "def-weil-abstract-derived-category",
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-sfb-lattice-koszul-total-triangles",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; explicit injective-normalized lattice calculation using Stacks 0133, 070I, 05TH, 08BJ and existing unit-normalized derived comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The invariant inclusion into lattice Koszul cochains on an injective resolution gives a natural normalized triangulated derived invariants comparison",
+   "results": "{\"t\": \"2026-10-22T06:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"The invariant inclusion into lattice Koszul cochains on an injective resolution gives a natural normalized triangulated derived invariants comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CochainComplex.cm5b.instInjectiveXIntMappingConeIdI\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\", \"CategoryTheory.InjectiveResolution.ι'\"], \"digest\": \"c22fbaf2bb943ea6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightDerived\", \"iso\"",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightDerived\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\"], \"digest\": \"545f5e8ba520a02c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(injective|invariant)|invariant.*koszul",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"grep\", \"query\": \"koszul.*(injective|invariant)|invariant.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invariant inclusion into lattice Koszul cochains on an injective resolution gives a natural normalized triangulated derived invariants comparison",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"leansearch\", \"query\": \"The invariant inclusion into lattice Koszul cochains on an injective resolution gives a natural normalized triangulated derived invariants comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.ι\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.InjectiveResolution.desc_commutes\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.Hom.hom'\"], \"digest\": \"415e864176b2d973\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of derived functors by a finite exact cochain model and injective resolutions respects connecting morphisms",
+   "results": "{\"t\": \"2026-10-22T06:02:19Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of derived functors by a finite exact cochain model and injective resolutions respects connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\"], \"digest\": \"501a5761f6e3c7a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory|isoRightDerivedObj_hom_naturality|theorem derived_counit",
+   "results": "{\"t\": \"2026-10-22T06:03:50Z\", \"tool\": \"grep\", \"query\": \"totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory|isoRightDerivedObj_hom_naturality|theorem derived_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\"], \"digest\": \"112073ccfeab3350\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the injective-resolution hits compare ordinary right-derived cohomology on objects; none compares the lattice Koszul total functor on D+ with its specified shift, cone and invariant normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural triangulated comparison between finite lattice Koszul cochains and derived invariants, normalized on injective complexes",
+   "results": "{\"t\": \"2026-10-22T12:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"Natural triangulated comparison between finite lattice Koszul cochains and derived invariants, normalized on injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"33007e4bf7961968\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern general injective resolutions, ordinary right-derived functors or t-structures; none states this finite lattice total comparison with its normalized shift and boundary clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "{\"t\": \"2026-10-22T12:07:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\"], \"digest\": \"545f5e8ba520a02c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern general injective resolutions, ordinary right-derived functors or t-structures; none states this finite lattice total comparison with its normalized shift and boundary clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(injective|invariant)|invariant.*koszul",
+   "results": "{\"t\": \"2026-10-22T12:07:51Z\", \"tool\": \"grep\", \"query\": \"koszul.*(injective|invariant)|invariant.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern general injective resolutions, ordinary right-derived functors or t-structures; none states this finite lattice total comparison with its normalized shift and boundary clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul cohomology of a discrete free abelian group computed by injective resolutions",
+   "results": "{\"t\": \"2026-10-22T12:08:25Z\", \"tool\": \"leansearch\", \"query\": \"Koszul cohomology of a discrete free abelian group computed by injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.of\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CategoryTheory.InjectiveResolution.mk\"], \"digest\": \"25959d4f12a14f8b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern general injective resolutions, ordinary right-derived functors or t-structures; none states this finite lattice total comparison with its normalized shift and boundary clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite exact complex of functors whose degree zero cycles are a left exact functor computes its derived functor via injective acyclicity",
+   "results": "{\"t\": \"2026-10-22T12:10:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite exact complex of functors whose degree zero cycles are a left exact functor computes its derived functor via injective acyclicity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Functor.leftDerived\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"1e755fa84be05555\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern general injective resolutions, ordinary right-derived functors or t-structures; none states this finite lattice total comparison with its normalized shift and boundary clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; agent lattice expansion: returned proof steps 4–6: injective comparison, independence, triangle and invariant normalization.",
+   "via": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-koszul-injective-normalization",
+  "worker": "stage1",
+  "summary": "Repaired the promotion-return delivery against the current DAG: re-read every cited statement, retained all seven arguments and the unchanged statement, cited the normalized action infrastructure directly for the invariant augmentation, and verified boundedness of every allowed resolution source from its monomorphism. Naturality, fixed shifts, canonical SES boundaries and rank-zero normalization remain explicit. No new nodes or repeated searches.",
+  "blueprint": "Realizes the item source paragraph (3), open direct image, through the agent lattice expansion steps 4–6: injective comparison, resolution independence, specified shifts/triangles, invariant and rank-zero normalization. No blueprint node states this calculation; the existing null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-strip-row-augmentation",
+    "why": "Generic finite-strip row augmentation criterion, applied with strip bound r+1; this unit has no such general totalization criterion."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic full faithfulness of localization on maps into K-injectives; it represents arbitrary derived morphisms between the chosen resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion verifies the hypothesis of the unit-normalized shift theorem for invariants."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+    "why": "Only its first, generic computation-unit shift formula is used; none of its endomorphism/fibre assertions is used."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic canonical triangle of a termwise short exact complex sequence, needed to identify the actual connecting arrow."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-a0ba89da4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-a0ba89da4 (reviewer sub-agent of L); spot-checked: This is a promotion-return re-delivery of the 0213bf094c1d head, which a previous cc review had PASSed; it adds no new nodes. I compared the item JSON field by field with the 0213 snapshot. The statement, stmt_deps, source, created and via fields are identical, so no target is weakened. Only steps 2 and 3 of the proof changed. Step 2 now cites lem-sfb-condensed-action-injective-infrastructure for the invariant subsheaf and its inclusion, which that node does define. Step 3 adds a correct argument that P is bounded below: a monomorphism s:P→J into a bounded-below J forces P^b=0 below N. proof_deps now equals the union of the step uses. I re-read the current statements of all cited nodes. Infrastructure, module-Koszul, total-triangles, restriction-calculus and condensed-action-module are unchanged since the 0213 base. I rechecked all 7 steps. Step 1: e_I is a quasi-isomorphism by eta invertibility plus the module node's normalization, with no cycle. Step 2: b is a chain map, and the finite-strip lemma is applied with strip bound r+1. Step 3: c_s is the canonical computation isomorphism. Step 4: I recomputed L_t K(v)=RGamma(v) L_s through the K-injective Hom bijection, which also holds in D+. Step 5: Gamma preserves K-injectives because it is right adjoint to the exact trivial inflation; the fiber-triangle node's first clause gives sigma, and sigma_K=(-1)^{an} is 1 on the a=0 support of b. Step 6: the triangulated isomorphism and the SES boundary follow from complex-ses-triangle and the last clause of total-triangles. Step 7: the module normalization and the r=0 identity check out. Edge cases r=0, r=1, zero module/ring and non-injective trivial-action modules are fine. The route is blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), with Stacks 0133 for step 2; there is no SGA. Accepted tool_uses: finite-strip-row-augmentation, right-adjoint-preserves-kinjective, kinjective-fiber-triangle-comparison (first clause only), and the Mathlib leaves kinjective-hom-derived and complex-ses-triangle. Maintainer note (advisory): the existing node lem-sfb-lattice-injective-koszul-acyclicity (Q73, 2026-10-22) states step 1's conclusion directly and could be cited there instead; the current route is valid. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeKoszulInjectiveNormalization",
+  "declaration": "Profinite.DiscreteLattice.InjectiveNormalization.lattice_koszul_injective_normalization",
+  "declarations": [
+   "Profinite.DiscreteLattice.InjectiveNormalization.inclusion_naturality",
+   "Profinite.DiscreteLattice.InjectiveNormalization.inclusion_quasiIso",
+   "Profinite.DiscreteLattice.InjectiveNormalization.resolutionValueIso",
+   "Profinite.DiscreteLattice.InjectiveNormalization.lattice_koszul_injective_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeKoszulInjectiveNormalization.lean",
+  "statement": "theorem lattice_koszul_injective_normalization (K : ∀ r : ℕ, KoszulModel R r) : ∃ (M : ∀ r : ℕ, TriangulatedCup.TriangulatedModel R r (K r)) (c : ∀ r : ℕ, Comparison R r (K r)), (∀ r : ℕ, TriangulatedCup.ComparisonProperties R r (K r) (M r) (c r)) ∧ TriangulatedCup.IsRankZero R (K 0) (M 0) ∧ (∀ (r : ℕ) (P J : CochainComplex.Plus (Equivariant R r)) [∀ n : ℤ, Injective (J.obj.X n)] (s : P.obj ⟶ J.obj) [Mono s] [QuasiIso s], TriangulatedCup.onComplex R r (M r) P ≫ (resolutionValueIso R r J s).hom = DerivedCategory.Q.map ((TriangulatedCup.total R r (K r)).map s) ≫ inv (DerivedCategory.Q.map (TriangulatedCup.totalInclusion R r (K r) J.obj))) ∧ (∀ (r : ℕ) (P J : CochainComplex.Plus (Equivariant R r)) [∀ n : ℤ, Injective (J.obj.X n)] (s : P.obj ⟶ J.obj) [Mono s] [QuasiIso s], TriangulatedCup.onComplex R r (M r) P ≫ (derivedInvariants R r).map (DerivedCategory.Q.map s) = DerivedCategory.Q.map ((TriangulatedCup.total R r (K r)).map s) ≫ TriangulatedCup.onComplex R r (M r) J)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded KoszulModel and TriangulatedCup total, inclusion, TriangulatedModel, ComparisonProperties and IsRankZero without duplicating them. The named auxiliary theorems state naturality and quasi-isomorphy of the actual invariant inclusion. The canonical resolutionValueIso constructs the existing universal derived computation isomorphism at bounded-below termwise injectives. The main theorem fixes comparisons before quantifying over every monomorphic quasi-isomorphism, explicitly giving the inverse-inclusion formula and the final resolution-compatibility equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82198fcf7",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Only the item's lean field changed; lean.statement matches the file verbatim. Every node clause maps to the Lean: KoszulModel pins coordinates, signs and augmentation, so the universal quantification over K is harmless. inclusion_naturality holds for all chain maps; inclusion_quasiIso for Plus complexes with termwise-injective terms. Conjunct 3 states onComplex P ≫ resolutionValueIso.hom = Q(Ks) ≫ inv Q(b_J) for every mono quasi-iso s after M and c are fixed; resolutionValueIso is the generic rightDerivedFunctorOfQuasiIsoResolutionsObjIso (= c_s, no data chosen). TriangulatedModel gives the triangulated iso with the specified signed shifts; ComparisonProperties gives the module normalization, the extension of the module comparisons and the triangleOfSESδ connecting clause; IsRankZero pins the rank-zero identity; conjunct 4 is λ_P=λ_J∘Q(Ks). Single universe u, no stronger hypotheses; edge cases r=0, negative bounds and zero objects covered. Advisory: the TriangulatedCup interface is owned by the parent theorem lem-sfb-lattice-koszul-triangulated-cup-comparison, whose proof_deps cite this item, so its stage-3 proof faces an import cycle (same as landed sibling Q69 total-triangles); maintainer should split the interface into a def-node module. ComparisonProperties.normalization is stated for all bounded-below complexes, a true strengthening. No compile (no FIX)."
+ }
+}

@@ -72,5 +72,58 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-common",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.nonempty_commonModification"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.nonempty_commonModification",
+     "module": "WeilConjectures.Compactification.CommonModification",
+     "lines": [
+      207,
+      439
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be qcqs and $U\\subseteq T_i$ ($i=1,2$) be quasi-compact open\nimmersions between separated finite-type $S$-schemes. There are\n$U$-admissible blow-ups $T_i'\\to T_i$ ([sk-def-nagata-admissible]) and open\nimmersions $T_i'\\to T$ agreeing on $U$, with $T$ separated and of finite\ntype over $S$. If $U$ is dense in both $T_i$, it is dense in $T$.",
+  "proof": [
+   {
+    "text": "Since $U\\to T_1$ is quasi-compact and $T_2$ is separated over $S$, the\ngraph $U\\to T_1\\times_ST_2$ is a quasi-compact immersion. Take the schematic\nclosure $G$ of $U$ in $T_1\\times_ST_2$ ([sk-lem-nagata-sketch-closure]).\nApply [sk-lem-nagata-sketch-elimination] to its two projections. The strict transforms then become opens in suitable\nblow-ups of the two sides. Their further common refinement is obtained by\nblowing up the product of the two pulled-back centers on $G$. Extend these\nfurther centers from the resulting opens to each side using\n[sk-lem-nagata-sketch-blowups]. The final comparison scheme $G'$ is now an\nopen in both $T_i'$.",
+    "uses": [
+     "sk-lem-nagata-sketch-closure",
+     "sk-lem-nagata-sketch-elimination",
+     "sk-lem-nagata-sketch-blowups"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Its map to $T_1'\\times_ST_2'$ is a closed immersion: it is an immersion, and\nis proper because $G'\\to G$ is proper, $G\\subseteq T_1\\times_ST_2$ is\nclosed, and the modified product is separated over the original product.\nGlue the two $T_i'$ along $G'$. On products of these two opens the diagonal is\neither their own closed diagonal or the just established closed graph $G'$.\nThus the glued scheme is separated. Finite type follows from the finite open\ncover. Density follows from density on each side, since a $U$-admissible\nblow-up of a qcqs scheme keeps $U$ dense;\n[sk-lem-nagata-boundary-divisor] can ensure schematic density before\nperforming further modifications. This construction is Stacks 0F3X.",
+    "uses": [
+     "sk-lem-nagata-boundary-divisor"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

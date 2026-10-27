@@ -1,0 +1,502 @@
+{
+ "id": "lem-sfb-equivariant-coherent-proper-pushforward",
+ "kind": "statement",
+ "title": "Proper pushforward on equivariant coherent Grothendieck groups",
+ "statement": "For an affine finite-type group scheme $G$ over a field $F$ [def-weil-field, def-sc-group-scheme] acting on an $F$-scheme $Y$ [def-pc-scheme], a $G$-linearized coherent module means a coherent $\\mathcal O_Y$-module [pqf-def-coherent] with an isomorphism $a^*\\mathcal M\\simeq\\operatorname{pr}_2^*\\mathcal M$ on $G\\times_FY$, satisfying the identity and cocycle identities; its geometric fibre action is from $y$ to $gy$. Let $G_0^G(Y)$ be the abelian group on isomorphism classes of these modules, with relations $[\\mathcal M]=[\\mathcal M']+[\\mathcal M'']$ for every equivariant short exact sequence $0\\to\\mathcal M'\\to\\mathcal M\\to\\mathcal M''\\to0$. Let $R(G)$ be the analogous group of finite-dimensional rational $G$-modules, with multiplication induced by tensor product. Rational means a counital coassociative coaction $V\\to V\\otimes_FF[G]$. Tensoring a sheaf with the trivial vector bundle associated to such a module makes $G_0^G(Y)$ an $R(G)$-module. Let $X,Y$ be separated finite-type $F$-schemes with $G$-actions and let $f:X\\to Y$ be a $G$-equivariant proper morphism [def-weil-proper-morphism]. For every $G$-linearized coherent $\\mathcal M$ on $X$, the Zariski higher direct images $R^qf_*\\mathcal M$ are coherent, carry natural $G$-linearizations, and vanish for $q\\gg0$. The formula $f_*[\\mathcal M]=\\sum_{q\\ge0}(-1)^q[R^qf_*\\mathcal M]$ defines an $R(G)$-linear homomorphism $G_0^G(X)\\to G_0^G(Y)$. These homomorphisms satisfy $(g\\circ f)_*=g_*f_*$ for composable equivariant proper morphisms of separated finite-type $F$-schemes, and commute with restriction of the action to a closed subgroup scheme. For $Y=\\operatorname{Spec}F$, the groups $H^q(X,\\mathcal M)$ are finite-dimensional rational $G$-modules and this pushforward is their alternating class in $R(G)$. For a closed immersion, it is the class of ordinary extension by zero.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22d, Theorem 22.50, p.480: agent-supplied proper equivariant pushforward prerequisite to the general fixed-point input. Milne does not prove this prerequisite. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique (1986), proper-pushforward construction; not present locally."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-module-pullback",
+  "def-pc-derived-direct-image",
+  "def-sfb-equivariant-coherent-groups",
+  "def-sfb-module-base-change-map",
+  "def-pc-derived-base-change-map",
+  "def-sfb-exact-derived-cohomology-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-sfb-equivariant-coherent-gzero",
+  "def-sfb-rational-representation-gzero"
+ ],
+ "proof": [
+  {
+   "text": "Since a field is Noetherian (its only ideals are $0,F$), the finite-type schemes $X,Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. They are quasi-compact, and $f$ is quasi-compact and separated because it is proper. Apply [lem-pc-coherent-hi] to $f,\\mathcal M$: every $R^qf_*\\mathcal M$ is coherent and the higher images vanish globally for large $q$, since $Y$ is quasi-compact. This proves finiteness of the alternating sum before adding an action. A single bound for all quasi-coherent inputs can also be obtained by a finite cover of $Y$ using [lem-pc-local-uniform-higher-direct-image-bound].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-coherent-hi",
+    "lem-pc-local-uniform-higher-direct-image-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 02O5 (proposition-proper-pushforward-coherent), 02O6 (lemma-proper-over-affine-cohomology-finite), 01XJ; morphisms.tex Tag 01T6"
+   }
+  },
+  {
+   "text": "Put $f_G=1_G\\times f$, and denote projection and action on a $G$-scheme $Z$ by $p_Z,a_Z:G\\times_F Z\\to Z$. Both squares $(p_X,p_Y,f_G,f)$ and $(a_X,a_Y,f_G,f)$ are Cartesian: in the second, a point $(g,y,x)$ with $gy=f(x)$ corresponds to $(g,g^{-1}x)$. Projection is flat: on affine charts it is extension $B\\to F[G]\\otimes_F B$, a free $B$-module after choosing an $F$-basis of $F[G]$. Action is projection after the isomorphism $(g,z)\\mapsto(g,gz)$, whose inverse uses $g^{-1}$. The same statements hold for $G^r$ and for any closed subgroup $H$, even when nonreduced. These formulas are morphisms of schemes, by the group and action identities, and establish Cartesianity and flatness without a test only on geometric points.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, flatness hypotheses for the two action/projection squares; group-action diagram calculation"
+   }
+  },
+  {
+   "text": "Using the derived adjunctions [lem-pc-ringed-spaces-derived-adjoint] and [lem-pc-derived-direct-image-composition], form on all $D^+$ the same unit/composition mate as in the canonical derived exchange $\\beta_b:Lb^*Rf_*K\\to Rf'_*Lb_X^*K$ of [def-pc-derived-base-change-map]. For either flat map $b=p_Y,a_Y$, both pullbacks are exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective], and are their termwise derived functors by [lem-weil-pbc-exact-functor-derived-functor]. For $K=N[0]$ with $N$ quasi-coherent, its degree-$q$ cohomology map is precisely the canonical map of [lem-pc-flat-base-change-cohom]; negative cohomology is zero. Thus $\\beta_b$ is invertible by [lem-weil-pbc-unbounded-derived-iso-cohomology]. The same holds for bounded $K$ with quasi-coherent cohomology: apply the finite Postnikov induction of [lem-weil-pbc-finite-postnikov-isomorphism] to the two sides of $\\beta_b$. The functors are triangulated by [lem-pc-right-derived-functor-triangulated] and [lem-sf-exact-functor-derived-triangulated]. Exchange commutes with shifts and triangles because its resolution-level unit and counit maps commute with the differentials and with the cone maps. The canonical exact-pullback cohomology identifications are those of [lem-pur-exact-derived-cohomology-coherence]. This applies in particular to $\\mathcal M[0]$ and later to $Rf_*\\mathcal M$.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-finite-postnikov-isomorphism",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-exact-derived-cohomology-coherence",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 02N7 (lemma-base-change-map-flat-case), 08HY (remark-base-change); coherent.tex 02KH; finite truncation argument"
+   }
+  },
+  {
+   "text": "Write $\\theta:p_X^*\\mathcal M\\to a_X^*\\mathcal M$ for the fibre-action direction of the given linearization, taking the inverse if its supplied direction is $a_X^*\\to p_X^*$. Define on $K=Rf_*\\mathcal M$ the isomorphism\n$$\\Theta=\\beta_{a_Y}^{-1}\\circ R(f_G)_*(\\theta)\\circ\\beta_{p_Y}:p_Y^*K\\longrightarrow a_Y^*K.$$\nThe pullback compositors are unital and associative by [lem-pc-ringed-spaces-derived-pullback-composition]. Apply the two pasting identities of [lem-weil-pbc-mate-pasting] to the projection/action squares. On $G\\times G\\times Y$, the maps induced by $\\Theta_{g,hy}\\Theta_{h,y}$ and $\\Theta_{gh,y}$ are the images of $\\theta_{g,hx}\\theta_{h,x}$ and $\\theta_{gh,x}$ under the SAME outer exchange. The middle exchange and its inverse cancel, and the input cocycle equates the remaining coefficient maps. At $e\\times Y$, the identity mate is the identity, so $\\Theta_e=1$. Pasting is valid for arbitrary maps, including $e$ and multiplication; no flatness of those maps is needed. Therefore $\\Theta$ is a genuine derived linearization, natural in equivariant coefficient maps.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0ATM (remark-compose-base-change-horizontal), 08HY; mate pasting fills the omitted verification"
+   }
+  },
+  {
+   "text": "Exactness of $p_Y^*,a_Y^*$ identifies $H^q(\\Theta)$ with an isomorphism $p_Y^*R^qf_*\\mathcal M\\to a_Y^*R^qf_*\\mathcal M$; the normalized comparisons respect composites by [lem-pur-exact-derived-cohomology-coherence]. Taking cohomology in the identity and cocycle equalities gives the required sheaf linearizations. For an equivariant short exact sequence, form its triangle, apply the triangulated $Rf_*$, and take the long exact sequence of [lem-sf-derived-homology-long-exact]. The construction of $\\Theta$ is a morphism of these triangles, including the shifted last arrow, as in step 3. Hence every map of the long exact sequence, including its connecting maps, is equivariant. Kernels and images carry the restricted linearizations because the two flat pullbacks preserve kernels and cokernels; their coherence follows from [lem-weil-pbc-coherent-kernel-cokernel-locnoeth].",
+   "uses": [
+    "lem-pur-exact-derived-cohomology-coherence",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02N7, resolution-level naturality; coherent.tex Tag 01Y0 (lemma-coherent-abelian-Noetherian)"
+   }
+  },
+  {
+   "text": "For any finite exact sequence of equivariant coherent sheaves $0\\to A_0\\to\\cdots\\to A_n\\to0$, put $I_j=\\operatorname{im}(A_{j-1}\\to A_j)$ and $I_0=I_{n+1}=0$. Then $[A_j]=[I_j]+[I_{j+1}]$ by the defining short-exact-sequence relation, so $\\sum_j(-1)^j[A_j]=0$ by cancellation. Apply this to the finite long exact sequence of step 5 (all its tails vanish by step 1). It gives $\\chi_f(\\mathcal M)=\\chi_f(\\mathcal M')+\\chi_f(\\mathcal M'')$. Naturality also gives invariance under equivariant isomorphism. The generators-and-relations definition of $G_0^G$ therefore yields the stated group homomorphism. Tensoring an equivariant coherent sheaf with a finite-dimensional rational module is a finite direct sum on underlying sheaves; it is coherent and exact in either variable. Associativity and unit of tensor make the stated $R(G)$-action well defined on the relations.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y0; elementary cancellation in the generators-and-relations group"
+   }
+  },
+  {
+   "text": "Let $V$ be a finite-dimensional rational $G$-module. The bilinear map on sections $v\\otimes s\\mapsto v\\otimes s$ induces\n$$V\\otimes_F R^qf_*\\mathcal M\\longrightarrow R^qf_*(V\\otimes_F\\mathcal M).$$\nChoose a basis of $V$: the map becomes the direct-sum comparison for finitely many copies of $R^qf_*$ and is an isomorphism, since finite sums of resolutions compute finite sums of derived images. Its construction is natural in both $V$ and $\\mathcal M$. To check the linearizations, pass to $G\\times Y$ using the exchange of step 3. If the universal group element has matrix $(c_{ij})$ on $V$, both routes send $v_j\\otimes z$ to $\\sum_i c_{ij}v_i\\otimes\\Theta(z)$; $R(f_G)_*$ is $\\mathcal O_{G\\times Y}$-linear, so the coefficients $c_{ij}\\in F[G]$ can be pulled outside it. Thus the isomorphism is equivariant over the whole group scheme. Taking alternating classes gives $\\chi_f(V\\otimes\\mathcal M)=[V]\\chi_f(\\mathcal M)$, and additivity gives $R(G)$-linearity for virtual modules.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH; finite-free tensor comparison by an explicit basis computation"
+   }
+  },
+  {
+   "text": "For composable $X\\xrightarrow fY\\xrightarrow gZ$, let $K=Rf_*\\mathcal M$. It has bounded coherent cohomology by step 1; $Rg_*K$ and the direct images of its finitely many truncations have bounded coherent cohomology by [lem-pc-noetherian-proper-bounded-coherent-image]. On bounded derived categories the flat pullbacks $p_Y^*,a_Y^*$ are t-exact. Consequently they preserve the WHOLE canonical truncation triangles, with their last arrows, by [lem-pod-texact-truncation-triangle-comparison]. Functoriality of [lem-weil-pbc-truncation-triangle] applies to the derived isomorphism $\\Theta$. Thus the triangle $\\tau_{\\le q-1}K\\to\\tau_{\\le q}K\\to H^q(K)[-q]\\to$ carries compatible actions. Apply $Rg_*$ and step 3 to obtain compatible actions on its image triangle. The long exact cohomology sequence is equivariant; the same finite image cancellation as step 6 gives\n$$\\chi(Rg_*\\tau_{\\le q}K)=\\chi(Rg_*\\tau_{\\le q-1}K)+(-1)^q\\chi_g(H^qK).$$\nHere $\\chi(L)=\\sum_i(-1)^i[H^iL]$ with the induced linearizations; shifts give the displayed sign. Summing from the first to the last nonzero cohomology degree telescopes to $\\chi(Rg_*K)=\\sum_q(-1)^q\\chi_g(R^qf_*\\mathcal M)$.",
+   "uses": [
+    "lem-pc-noetherian-proper-bounded-coherent-image",
+    "lem-pod-texact-truncation-triangle-comparison",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Canonical finite truncation argument in place of relative Leray, Tag 01F6 (lemma-relative-Leray); finite Euler cancellation"
+   }
+  },
+  {
+   "text": "The canonical isomorphism $\\rho:R(gf)_*\\mathcal M\\simeq Rg_*Rf_*\\mathcal M$ is [lem-pc-derived-direct-image-composition]. For each of the action and projection squares, [lem-sfb-derived-base-change-vertical-pasting] gives the equality\n$$\\rho'\\beta^{\\mathrm{out}}=Rg'_*\\beta^{\\mathrm{top}}\\circ\\beta^{\\mathrm{bottom}}\\circ b^*\\rho.$$\nAll its quasi-compact/quasi-separated hypotheses hold for $f,g$; the intermediate $Rf_*\\mathcal M$ is quasi-coherent in cohomology by step 1. Substitute this equality for both exchange factors in step 4: the intervening factors cancel, leaving exactly the iterated action on $Rg_*Rf_*\\mathcal M$. Naturality in the coefficient map $\\theta$ identifies the middle factors. Hence $\\rho$ is equivariant. Taking cohomology and applying step 8 yields $\\chi_{gf}(\\mathcal M)=g_*f_*[\\mathcal M]$, proving composition on generators and therefore on the group.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "lem-sfb-derived-base-change-vertical-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0ATL (remark-compose-base-change), explicit vertical exchange equality"
+   }
+  },
+  {
+   "text": "Let $j:H\\hookrightarrow G$ be a closed subgroup. The underlying coherent sheaf and its higher direct images do not change on restriction. To identify their linearizations, pull the formula for $\\Theta$ back along $j\\times Y$ and apply mate pasting to the square of $j\\times X,j\\times Y$ and $f_H,f_G$. The identities $p_G(j\\times Y)=p_H$ and $a_G(j\\times Y)=a_H$ identify the outer exchanges with the $H$-exchanges. Although $j$ need not be flat, derived pullback gives exactly these identities by [lem-pc-ringed-spaces-derived-pullback-composition]. Both $p_H,a_H$ are flat by step 2, so the two resulting endpoints compute ordinary pullback and its cohomology; the derived middle exchange is invertible because its composite with the invertible $G$-exchange is the invertible $H$-exchange. The coefficient map becomes the restricted $\\theta$. The same cancellation as in step 4 therefore yields $L(j\\times Y)^*\\Theta_G=\\Theta_H$ in the derived category. To pass to the sheaf linearizations although $u=j\\times Y$ is not flat, fix $q$ and put $A=\\tau_{\\le q}Lp_G^*K$, $B=\\tau_{\\le q}La_G^*K$, which have no cohomology above $q$. By [lem-weil-pbc-derived-pullback-top-cohomology] the comparisons $\\kappa_{u,A},\\kappa_{u,B}$ identify $H^q(Lu^*A),H^q(Lu^*B)$ with $u^*H^q(A)=u^*p_G^*R^qf_*\\mathcal M$ and $u^*a_G^*R^qf_*\\mathcal M$, naturally for the morphism $\\tau_{\\le q}\\Theta_G:A\\to B$, and compatibly with the composition $p_G\\circ u=p_H$ (resp. $a_G\\circ u=a_H$). Since $Lu^*Lp_G^*K\\simeq Lp_H^*K$ and $p_H$ is flat, $Lu^*$ of $\\tau_{\\ge q+1}Lp_G^*K$ has no cohomology in degrees $\\le q$, so $H^q(Lu^*A)\\to H^q(Lu^*Lp_G^*K)$ is an isomorphism, and likewise for $B$. Hence $H^q(\\Theta_H)=u^*H^q(\\Theta_G)$ under the ordinary composition isomorphisms $u^*p_G^*\\simeq p_H^*$, $u^*a_G^*\\simeq a_H^*$: the $H$-linearization of $R^qf_*\\mathcal M$ is the restriction of its $G$-linearization. Alternating classes prove restriction compatibility. This argument also applies to $e:\\operatorname{Spec}F\\to G$, justifying the identity check without assuming $e$ flat.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pur-exact-derived-cohomology-coherence",
+    "lem-weil-pbc-derived-pullback-top-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0ATM and 08HY; arbitrary-map pasting between the two flat outer base changes"
+   }
+  },
+  {
+   "text": "For $Y=\\operatorname{Spec}F$, [lem-pc-coherent-hi] makes $H^q(X,\\mathcal M)$ finite-dimensional and zero for large $q$. Apply [lem-sfb-linearized-qcoherent-cohomology-coaction], whose hypotheses hold because $X$ is quasi-compact and separated and $\\mathcal M$ is quasi-coherent. It gives counital coassociative rational coactions and the usual action $s(y)\\mapsto\\theta_{g,g^{-1}y}s(g^{-1}y)$, including connecting-map compatibility. Its canonical flat-base-change identification is the same as the one used in steps 3--4, so these are the cohomological actions already constructed. Finally modules over $\\operatorname{Spec}F$ are vector spaces: the two pullbacks to affine $G$ identify a linearization with the matrix of a coaction into $V\\otimes_F F[G]$; the cocycle and identity are respectively coassociativity and the counit. Thus $G_0^G(\\operatorname{Spec}F)=R(G)$ and the pushforward is exactly the alternating rational cohomology class.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 02O5, 02O6, 02KH; the existing universal-group-element coaction lemma"
+   }
+  },
+  {
+   "text": "If $f=i$ is a closed immersion, it is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc]. Hence [lem-pc-affine-morphism-hi] gives $R^qi_*\\mathcal M=0$ for $q>0$. Only $i_*\\mathcal M$ remains, with its natural action from step 4. Its sections on an open $U\\subseteq Y$ are $\\mathcal M(i^{-1}U)$ by the definition of module direct image; on the complement of the closed image all stalks are zero, and on the image they are the original stalks with the restricted scalar action. This is the ordinary extension by zero along a closed immersion. Therefore $i_*[\\mathcal M]=[i_*\\mathcal M]$ as asserted.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-pc-affine-morphism-hi",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XC (lemma-relative-affine-vanishing); morphisms.tex Tag 01SE (lemma-closed-immersion-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-group-scheme",
+  "def-weil-flat-morphism",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-coherent-hi",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-local-uniform-higher-direct-image-bound",
+  "lem-pc-noetherian-proper-bounded-coherent-image",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pod-texact-truncation-triangle-comparison",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-derived-base-change-vertical-pasting",
+  "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-postnikov-isomorphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "02O5, 02O6, 02KH, 01XC, with canonical derived mate pasting (cohomology.tex 0ATL and 0ATM); equivariant assembly supplied by NI because the Thomason source is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivariant.*(cohomology|pushforward)|cohomology.*rational.*(group|action)",
+   "results": "0 hits: . Read the returned signatures; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract monoid representations, sheaf pushforward, scalar localization and exterior-power constructions do not state this equivariant coherent-sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherent\", \"representation\"",
+   "results": "0 hits: . Read the returned signatures; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract monoid representations, sheaf pushforward, scalar localization and exterior-power constructions do not state this equivariant coherent-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward in equivariant coherent Grothendieck groups via alternating higher direct images",
+   "results": "8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforward.congr_simp, CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, CategoryTheory.Functor.sheafPushforwardCocontinuous, SheafOfModules.pushforwardSections_coe. Read the returned signatures; digest 9a375bb76a746de1. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract monoid representations, sheaf pushforward, scalar localization and exterior-power constructions do not state this equivariant coherent-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper equivariant pushforward of coherent sheaves gives rational algebraic group actions on higher direct images and functorial map on Grothendieck groups",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso_hom. Read the returned signatures; digest 4b241ff3ad407930. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract monoid representations, sheaf pushforward, scalar localization and exterior-power constructions do not state this equivariant coherent-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant higher direct image of coherent sheaves proper morphism rational representation linearization composition projection formula",
+   "results": "8 hits: SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom. Read the returned signatures; digest 758ada13a0f15fe3. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract monoid representations, sheaf pushforward, scalar localization and exterior-power constructions do not state this equivariant coherent-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of equivariant coherent sheaves gives an R(G) linear map on Grothendieck groups via alternating higher direct images",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforward, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatTrans. Read returned signatures; digest 4fae816ffe4f30d6.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforwards, monoid group completions and alternating multilinear maps do not construct equivariant coherent higher direct images or their Grothendieck-group functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Representation",
+   "results": "0 hits: . Read returned signatures; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforwards, monoid group completions and alternating multilinear maps do not construct equivariant coherent higher direct images or their Grothendieck-group functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*(coherent|pushforward)|lineariz.*coherent",
+   "results": "0 hits: . Read returned signatures; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforwards, monoid group completions and alternating multilinear maps do not construct equivariant coherent higher direct images or their Grothendieck-group functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant coherent Grothendieck group proper pushforward alternating cohomology",
+   "results": "8 hits: Algebra.GrothendieckGroup.lift, Algebra.GrothendieckAddGroup.lift, Algebra.GrothendieckAddGroup.lift_symm_apply, LinearEquiv.alternatingMapCongrRight_apply_apply, AlternatingMap.instAddCommGroup, MulActionHom.instAddCommGroup, alternatingGroup, MulActionHom.instAddGroup. Read returned signatures; digest 78e31a371b97c515.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforwards, monoid group completions and alternating multilinear maps do not construct equivariant coherent higher direct images or their Grothendieck-group functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating higher coherent direct images under a proper map define functorial pushforward on equivariant K theory",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward, SheafOfModules.pushforward_obj_val, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatTrans. Read returned signatures; digest 391cff9cba75f27d.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforwards, monoid group completions and alternating multilinear maps do not construct equivariant coherent higher direct images or their Grothendieck-group functoriality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-coherent-fixed-point-formula",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, Theorem 22.50, p.480: agent-supplied proper equivariant pushforward prerequisite to the general fixed-point input. Milne does not prove this prerequisite. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique (1986), proper-pushforward construction; not present locally.",
+   "via": [
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-equivariant-coherent-proper-pushforward",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed derived action via the two Cartesian projection/action squares, proved identity and cocycle by mate pasting, and passed to coherent higher direct images. Proved additivity by finite image cancellation, R(G)-linearity by the finite-basis universal-matrix calculation, composition by finite equivariant truncation triangles and vertical exchange pasting, subgroup restriction even for nonflat inclusions, rationality and the closed-immersion case. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/moduli/Haboush/flag Euler-characteristic chain recorded in blueprint.from.place. The ancestor tool returns None; retained its null ancestor and existing via chain. Milne 22.50 uses a fixed-point theorem but does not prove this equivariant proper-pushforward prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "General Higher direct images of affine morphisms used for 12; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "General Coherence and finiteness of higher direct images used for 1, 11; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "General Composition of derived direct images used for 9; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "General Cohomology and flat base change used for 3, 7; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-local-uniform-higher-direct-image-bound",
+    "why": "General LocalUniformHigherDirectImageBound used for 1; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-noetherian-proper-bounded-coherent-image",
+    "why": "General Bounded coherent image for proper morphisms over a Noetherian base used for 8; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "General The unbounded right derived functor is triangulated used for 3, 5, 8; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "General Composition of derived pullbacks used for 4, 10; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pod-texact-truncation-triangle-comparison",
+    "why": "General Normalized t-exact comparison of entire truncation triangles used for 8; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "General Normalized derived cohomology comparisons for exact functors and their composites used for 3, 5, 10; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "General Long exact cohomology sequence of a distinguished triangle in the derived category used for 5, 8; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General An exact functor of abelian categories induces a triangulated functor on derived categories used for 3; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "General Closed immersions are separated, affine, integral and universally closed; composites of integral or universally closed morphisms used for 12; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "General Coherent modules on a locally Noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules used for 5, 6; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General The functor induced by an exact functor is its own right and left derived functor used for 3; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-postnikov-isomorphism",
+    "why": "General Finite Postnikov propagation of invertibility used for 3; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used for 1; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "General Flat module pullback is exact and direct image preserves injectives used for 3, 5; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General Mates of pasted squares and of conjugate-whiskered squares used for 4, 10; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used for 8; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General Isomorphisms in the unbounded derived category detected by cohomology used for 3; this unit has no separate replacement for this foundational coherent/derived-category tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "General derived module adjunctions define the exchange on all bounded-below complexes before finite Postnikov propagation in step 3; no separate unit-level replacement exists."
+   },
+   {
+    "node": "lem-weil-pbc-derived-pullback-top-cohomology",
+    "why": "General top-degree comparison H^n(Lg^*C) = g^*H^n(C), natural and composition-compatible, used in step 10 to restrict sheaf linearizations along the possibly nonflat j x Y and e x Y; no node of this unit gives it (added by maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-coherent-hi",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-local-uniform-higher-direct-image-bound",
+  "lem-pc-noetherian-proper-bounded-coherent-image",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pod-texact-truncation-triangle-comparison",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-postnikov-isomorphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-weil-pbc-derived-pullback-top-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-90ff38080",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-90ff38080 (reviewer sub-agent of L); spot-checked: I read the whole delivery and give it a FIX. It is one commit with no new nodes. The statement is unchanged (Thomason-type equivariant G_0 proper pushforward). The source is given honestly as agent-written: Milne 22.50 p.480 only cites Nielsen/Iversen, and Thomason is WANTED. I checked all 12 steps against the full statements of the 28 cited nodes. Step 2: the action square is Cartesian via (g,y,x)<->(g,g^-1 x), and projection is flat over a field. Step 3: the flat derived exchange is invertible by lem-pc-flat-base-change-cohom (whose proof names the 02N7 map, checked in cohomology.tex) plus cohomology detection and finite Postnikov. Step 4: the cocycle argument is correct; the three composite maps G×G×Y→Y are y, hy, ghy, and the middle exchange cancels by mate pasting. Step 9: I recomputed the vertical-pasting substitution, and rho is equivariant. Steps 8, 11 and 12 also checked. Edge cases: empty X, the zero sheaf, trivial G, nonreduced G (alpha_p, mu_p), closed immersions. FIX: in step 10, u=j×Y (and e×Y) is not flat, so H^q(Lu^*Theta_G)=u^*H^q(Theta_G) was asserted without argument. I added lem-weil-pbc-derived-pullback-top-cohomology, applied to tau_{<=q}Theta_G and using flatness of p_H, to proof_deps and declared it in tool_uses. Its closure contains no trace-formula or Poincare-duality node and no cycle. Batch-5 flags: lem-pc-coherent-hi and lem-pc-noetherian-proper-bounded-coherent-image reach only the definition def-trf-schematically-dense-open, and proper coherence is not assumed by either leaf. lem-pod-texact-truncation-triangle-comparison is an abstract t-structure lemma whose closure has no duality content, and neither leaf gives it. I accept all three as generic tools. No duplicate exists in the DAG, and no SGA source is cited. Advisory: the step-3 identification of the derived-mate H^q with the 02N7 map is asserted rather than cited, though true by construction; the step-1 uniform-bound citation is unnecessary.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantCoherentProperPushforward",
+  "declaration": "AlgebraicGeometry.EquivariantCoherent.equivariant_coherent_proper_pushforward",
+  "declarations": [
+   "AlgebraicGeometry.EquivariantCoherent.IsHigherPushforward",
+   "AlgebraicGeometry.EquivariantCoherent.higherBaseChange",
+   "AlgebraicGeometry.EquivariantCoherent.exactPullbackComparison",
+   "AlgebraicGeometry.EquivariantCoherent.IsOrdinaryPushforward",
+   "AlgebraicGeometry.EquivariantCoherent.ProperPushforwardSystem",
+   "AlgebraicGeometry.EquivariantCoherent.equivariant_coherent_proper_pushforward"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantCoherentProperPushforward.lean",
+  "statement": "theorem equivariant_coherent_proper_pushforward : Nonempty (ProperPushforwardSystem k)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H4 repair of 69ec64e940d2: ProperPushforwardSystem uses Q60 Coherent/GZero/classOf and Representation/RationalModule/RepresentationGZero with IsRepresentationRing, IsAssociated and IsRepresentationAction. Both owning Q60 definition nodes are statement dependencies. The groups module now contains only missing geometric, higher-image, subgroup-restriction and point-comparison interfaces in the disjoint ProperPushforwardData namespace. The accepted all-degree IsHigherPushforward/higherBaseChange/exactPullbackComparison repair, exact-cohomology existing:true node, and genuine derived-pullback-composition dependency remain. On arbitrary action schemes, tensor_class gives the finite-direct-sum tensor action without assuming coherent O_X; on finite-type schemes the same action satisfies Q60 IsRepresentationAction. The point equivalence is fixed on the canonical quotient additive structures before the ring witnesses are bound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30b901a28",
+  "group": "Q54",
+  "result": "pass",
+  "note": "H4 repair correct: groups module reduced to the missing interfaces (Group, Space, FiniteSpace, ProperMap, ClosedSubgroup, RestrictedSpace/IsRestriction, point, IsPointEquivalence, higher, cohomologyVector) in the disjoint namespace ProperPushforwardData. The item uses Q60 Coherent/GZero/classOf/linearization and RationalModule/RepresentationGZero/IsRepresentationRing/IsAssociated/IsRepresentationAction, citing both Q60 nodes; no name clash in side-live (the only exactPullbackComparison is in CategoryTheory.ConstantPerfectProjection). All dependency records equal side-live; the exact-cohomology existing:true node is unchanged from the 69ec push. Clause-by-clause: actionIso = linearization.symm is p^*->a^* (y to gy); IsHigherPushforward pins every degree via schemeDerivedBaseChangeMap with ha/hp matching higherBaseChange, made non-vacuous by pullbackExact; tensor_class basis-matrix twist uses the same convention as IsAssociated, and moduleAction_spec agrees; point equivalence pinned and non-vacuous; restriction, composition, linearity, closed-immersion and Spec k cohomology clauses checked; edge cases and universes OK. Mechanical finding: the theorem stmt_dep lem-pc-ringed-spaces-derived-pullback-composition is genuine (Classical.choose counit epsilon and IsLeftDerivedFunctor proof of exists_derivedPullbackComposition), so PASS on that point. Single sorry; lean.statement verbatim; docstrings present; report has Worker report and Second reading by Q54. Advisory: Scheme.Modules.H and smulHom come from modules no stmt_dep node owns. No compile (no file changed)."
+ }
+}

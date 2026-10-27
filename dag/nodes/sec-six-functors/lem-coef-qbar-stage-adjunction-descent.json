@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-qbar-stage-adjunction-descent",
+ "kind": "lemma",
+ "title": "Compatible finite-stage units and counits descend to an adjunction",
+ "statement": "Let I be a directed preorder, S and T stage systems on C_i and D_i, and F:S.Morphism T and G:T.Morphism S coherent morphisms. Suppose adjunctions a_i:F.Phi_i left-adjoint G.Phi_i are given. Suppose their units form a compatible morphism from the identity stage-system morphism to F.comp G, and their counits a compatible morphism from G.comp F to the identity. Then the induced pair functors F.functor and G.functor are adjoint. Their unit and counit at (i,x) are precisely the inclusions of the finite unit and counit, through the canonical identity-component composition comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph (thm-coef-qbar-verdier); formal expansion of retained proof steps 6--8, descent of the finite exceptional adjunction; detailed retained argument: dag/nodes/sec-six-functors/thm-coef-qbar-verdier.json, original proof steps"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Descend each compatible family with Morphism.descNatTrans. Compose with functorIdIso and functorCompIso to give transformations of the required functors.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an object (i,x) both comparison isomorphisms have identity components. Functor_map_iota identifies the image of the descended unit under F with the inclusion of F_i applied to the finite unit. Its composite with the descended counit is therefore the inclusion of the finite left triangle, hence the identity. The right triangle is identical with G in place of F. These transformations and the two equations construct the adjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal categorical expansion of the retained common-stage argument, retained proof steps 6--8, descent of the finite exceptional adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunctions on a directed system of categories descend to the category of finite-stage pairs when their units and counits commute with transition functors",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.mk\", \"CategoryTheory.Adjunction.ofCat\", \"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Adjunction.CoreUnitCounit.noConfusionType\", \"CategoryTheory.Adjunction\", \"CategoryTheory.Adjunction.CoreUnitCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit.mk\", \"CategoryTheory.Adjunction.CommShift.mk'\"], \"note\": \"\", \"digest\": \"e1c787b4e3be575e\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible units and counits of adjunctions on a directed system of categories induce an adjunction on the category of finite stage representatives",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.functorialityAdjunction\", \"LightCondSet.sequentialAdjunction\", \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjoint\", \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv\", \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"CategoryTheory.Adjunction.functorialityRightAdjoint\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjoint\", \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjointObj\"], \"note\": \"\", \"digest\": \"5dcb2f3e2db2d321\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "{\"n_hits\": 3, \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\", \"CategoryTheory.Adjunction.mkOfUnitCounit_unit\"], \"note\": \"\", \"digest\": \"60db32356171ff58\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem.*adjunction|adjunction.*StageSystem",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdier",
+  "date": "2026-10-25",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "retained proof steps 6--8, descent of the finite exceptional adjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StageSystemAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemAdjunction.lean",
+  "declaration": "CategoryTheory.StageSystem.Morphism.adjunction",
+  "statement": "def adjunction : F.functor ⊣ G.functor",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.StageSystem.Morphism.adjunction",
+   "CategoryTheory.StageSystem.Morphism.adjunction_unit_app",
+   "CategoryTheory.StageSystem.Morphism.adjunction_counit_app"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
+ }
+}

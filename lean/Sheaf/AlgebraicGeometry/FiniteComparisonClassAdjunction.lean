@@ -540,6 +540,33 @@ private def buildFixedComparisonClassAdjunction
     rw [← h]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
 
+/-- The normalized comparison-class datum for any specified ordinary etale adjunction
+whose right functor preserves a lower bound after derived comparison direct image.
+Source: blueprint thm-sf-ambient-adjoint-class, proof of clauses (2)--(3)
+(blueprint: lem-sf-specified-comparison-class-construction).
+
+Proof: on each bounded-below etale representative, compose the fixed compact-support
+comparison, the comparison adjunction, the supplied etale adjunction, and full faithfulness
+of comparison pullback on bounded-below targets. Descend these natural bijections along
+the equivalence onto the etale-origin full subcategory. Transport the canonical etale
+compactification comparisons through that same equivalence. Their identity and cocycle
+laws, and compatibility with the Hom bijections, descend because the equivalence is fully
+faithful. This is the existing construction `buildFixedComparisonClassAdjunction`, with
+its specified-adjoint and coefficient parameters retained. -/
+theorem nonempty_fixedComparisonClassAdjunction_of_boundedBelow
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c₀ : Compactification f)
+    (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c₀ ⊣ G)
+    (hG : ∀ L, _root_.DerivedCategory.TStructure.t.plus L →
+      _root_.DerivedCategory.TStructure.t.plus
+        (G.obj (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L))) :
+    Nonempty (FixedComparisonClassAdjunction Λ f c₀ G adj
+      (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X)
+      _root_.DerivedCategory.TStructure.t.plus) := by
+  exact ⟨buildFixedComparisonClassAdjunction Λ c₀ G adj hG⟩
+
 /-- The etale exceptional adjoint, transported by comparison, is the exceptional adjoint
 relative to bounded-below etale-origin inputs, with uniform class-restricted vanishing
 and coherent compactification comparisons.

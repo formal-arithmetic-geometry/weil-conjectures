@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-scheme-specialization-prescribed-field-probe",
+ "kind": "statement",
+ "title": "Valuation probe of a scheme specialization with a prescribed generic field",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $K$ be a field [def-weil-field], and let $u:\\operatorname{Spec}K\\to Y$ be a morphism [def-weil-affine-spectrum]. Write $y\\prime$ for the image of its unique point, and let $y\\in Y$ be a specialization of $y\\prime$, meaning $y\\in\\overline{\\{y\\prime\\}}$. There exist a valuation subring $A\\subseteq K$ with fraction field $K$ [def-trf-valuation-ring] and a morphism $v:\\operatorname{Spec}A\\to Y$ such that $v$ sends the closed point $\\mathfrak m_A$ to $y$ and $v|_{\\operatorname{Spec}K}=u$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01J8, lemma-points-specialize, parts (1)-(2), prescribed extension K/kappa(y-prime), with the given field-point morphism; proof using Tag 00IA (algebra-lemma-dominate)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R\\subseteq Y$ containing $y$. Every open containing $y$ contains $y\\prime$, since $y\\in\\overline{\\{y\\prime\\}}$. Thus $u$ restricts to $u_U:\\operatorname{Spec}K\\to U$ (restrict its continuous map and structure-sheaf map). By the affine-spectrum correspondence write $u_U=\\operatorname{Spec}\\varphi$ for $\\varphi:R\\to K$. Let $\\mathfrak p,\\mathfrak q$ represent $y,y\\prime$ in $U$; then $\\mathfrak q=\\ker\\varphi$. Also $\\mathfrak q\\subseteq\\mathfrak p$: otherwise an $a\\in\\mathfrak q\\setminus\\mathfrak p$ would make $D(a)$ an open containing $y$ but not $y\\prime$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J8 (lemma-points-specialize), affine form of the first sentence of its proof; Tag 01J7 (lemma-specialize-points), affine-chart argument"
+   }
+  },
+  {
+   "text": "Put $S=\\varphi(R)\\subseteq K$ and $P=\\varphi(\\mathfrak p)\\subseteq S$. This is an ideal, and $\\varphi^{-1}(P)=\\mathfrak p$, because $\\ker\\varphi\\subseteq\\mathfrak p$. Hence $P$ is proper and prime: lift two elements of $S$ to $R$ and apply primality of $\\mathfrak p$. Form $B=S_P$. It embeds in $K$ by $s/t\\mapsto s/t$, since $S\\subseteq K$ and $t\\notin P$ implies $t\\ne0$. The localization node says $B$ is local with maximal ideal $PB$. Its contraction to $S$ is $P$: if $s/1=a/t$ with $a\\in P$ and $t\\notin P$, then $ts=a$ in the domain $S$, so $s\\in P$. Therefore the composite $R\\to S\\to B$ contracts $\\mathfrak m_B$ to $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J8 (lemma-points-specialize), local image of the map to K; explicit affine localization of that image"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-local-domain-valuation-dominates] to the local subring $B\\subseteq K$. Obtain a valuation subring $A\\subseteq K$, with fraction field $K$, containing $B$ and satisfying $\\mathfrak m_A\\cap B=\\mathfrak m_B$. Thus for $\\alpha:R\\to S\\to B\\hookrightarrow A$ one has $\\alpha^{-1}(\\mathfrak m_A)=\\mathfrak p$.",
+   "uses": [
+    "lemma-nagata-local-domain-valuation-dominates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J8 (lemma-points-specialize), invocation of Algebra Tag 00IA (lemma-dominate)"
+   }
+  },
+  {
+   "text": "Define $v$ to be $\\operatorname{Spec}A\\xrightarrow{\\operatorname{Spec}\\alpha}U\\hookrightarrow Y$. On prime ideals $\\operatorname{Spec}\\alpha$ acts by inverse image, so the equality just proved sends the closed point to $\\mathfrak p$, hence to $y$. The composite $R\\xrightarrow{\\alpha}A\\hookrightarrow K$ is exactly $\\varphi$ by the definitions of $S$ and the embedding of $S_P$. Contravariant functoriality of $\\operatorname{Spec}$ gives $v\\circ\\operatorname{Spec}(A\\hookrightarrow K)=u_U$ followed by $U\\hookrightarrow Y$, which is $u$. This proves the required equality of morphisms, including the prescribed field map.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J8 (lemma-points-specialize), final sentence, checking the centre and the prescribed generic restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lemma-nagata-local-domain-valuation-dominates"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01J8 (lemma-points-specialize), proof; affine-chart expansion using Tag 01J7 (lemma-specialize-points) and Algebra Tag 00IA (lemma-dominate)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a specialization of points in a scheme and any field extension of the residue field of the general point there is a valuation ring in that field realizing the specialization",
+   "results": "{\"t\": \"2026-10-23T19:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"Given a specialization of points in a scheme and any field extension of the residue field of the general point there is a valuation ring in that field realizing the specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"4703b2155fb1e453\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:113-130. Existence.specializingMap is a different statement and its proof constructs a valuation subring internally. The project Scheme.exists_valuationSubring_of_specializes fixes an algebraic closure; neither is this prescribed-field declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a specialization of points in a scheme and any field extension of the residue field of the general point there is a valuation ring in that field realizing the specialization",
+   "results": "{\"t\": \"2026-10-23T19:48:36Z\", \"tool\": \"leansearch\", \"query\": \"Given a specialization of points in a scheme and any field extension of the residue field of the general point there is a valuation ring in that field realizing the specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"Valuation.HasExtension.ofComapInteger\", \"ValuativeExtension\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Scheme.residueField\"], \"digest\": \"9fc382f18955b0ac\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:113-130. Existence.specializingMap is a different statement and its proof constructs a valuation subring internally. The project Scheme.exists_valuationSubring_of_specializes fixes an algebraic closure; neither is this prescribed-field declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuationSubring\", \"Specializes\"",
+   "results": "{\"t\": \"2026-10-23T19:48:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"ValuationSubring\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:113-130. Existence.specializingMap is a different statement and its proof constructs a valuation subring internally. The project Scheme.exists_valuationSubring_of_specializes fixes an algebraic closure; neither is this prescribed-field declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Vv]aluation.*[Ss]pecial|exists.*[Vv]aluation|of_specializes",
+   "results": "{\"t\": \"2026-10-23T19:48:37Z\", \"tool\": \"grep\", \"query\": \"exists.*[Vv]aluation.*[Ss]pecial|exists.*[Vv]aluation|of_specializes\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"7a44f6b093a51cd3\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:113-130. Existence.specializingMap is a different statement and its proof constructs a valuation subring internally. The project Scheme.exists_valuationSubring_of_specializes fixes an algebraic closure; neither is this prescribed-field declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field valued scheme point specializing to y extends over a valuation subring of the same field with closed point y",
+   "results": "{\"t\": \"2026-10-23T19:48:45Z\", \"tool\": \"leanfinder\", \"query\": \"A field valued scheme point specializing to y extends over a valuation subring of the same field with closed point y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\"], \"digest\": \"d15e375d7e6f2877\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:113-130. Existence.specializingMap is a different statement and its proof constructs a valuation subring internally. The project Scheme.exists_valuationSubring_of_specializes fixes an algebraic closure; neither is this prescribed-field declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*valuation|exists.*Valuation|of_specializes",
+   "results": "{\"t\": \"2026-10-23T20:47:28Z\", \"tool\": \"grep\", \"query\": \"exists.*valuation|exists.*Valuation|of_specializes\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"7a44f6b093a51cd3\"}; Read the returned types. ValuativeCriterion.Existence.specializingMap (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:115-130) assumes a valuative criterion for a scheme morphism; its internal construction is not this declaration. ValuativeCommSq fields are data/projections, not an existence theorem. The project exists_valuationSubring_of_specializes at line 218 fixes the algebraic closure rather than the given K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field valued point of a scheme extends to a valuation ring with prescribed closed point and unchanged fraction field",
+   "results": "{\"t\": \"2026-10-23T20:47:29Z\", \"tool\": \"leansearch\", \"query\": \"A field valued point of a scheme extends to a valuation ring with prescribed closed point and unchanged fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"Valuation.HasExtension.ofComapInteger\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"ValuationRing.of_field\", \"Valuation.Integers.isIntegrallyClosed_integers\"], \"digest\": \"8918a099169dfe8e\"}; Read the returned types. ValuativeCriterion.Existence.specializingMap (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:115-130) assumes a valuative criterion for a scheme morphism; its internal construction is not this declaration. ValuativeCommSq fields are data/projections, not an existence theorem. The project exists_valuationSubring_of_specializes at line 218 fixes the algebraic closure rather than the given K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuationSubring\", \"Specializes\"",
+   "results": "{\"t\": \"2026-10-23T20:47:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"ValuationSubring\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. ValuativeCriterion.Existence.specializingMap (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:115-130) assumes a valuative criterion for a scheme morphism; its internal construction is not this declaration. ValuativeCommSq fields are data/projections, not an existence theorem. The project exists_valuationSubring_of_specializes at line 218 fixes the algebraic closure rather than the given K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field valued point of a scheme extends to the spectrum of a valuation subring of the same field centered at any specialization of its image",
+   "results": "{\"t\": \"2026-10-23T20:47:32Z\", \"tool\": \"leanfinder\", \"query\": \"A field valued point of a scheme extends to the spectrum of a valuation subring of the same field centered at any specialization of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\"], \"digest\": \"68891079ca24aa2a\"}; Read the returned types. ValuativeCriterion.Existence.specializingMap (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:115-130) assumes a valuative criterion for a scheme morphism; its internal construction is not this declaration. ValuativeCommSq fields are data/projections, not an existence theorem. The project exists_valuationSubring_of_specializes at line 218 fixes the algebraic closure rather than the given K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given Spec K to Y and y in the closure of its image there exists a valuation ring A inside K and Spec A to Y extending the given morphism",
+   "results": "{\"t\": \"2026-10-23T20:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"Given Spec K to Y and y in the closure of its image there exists a valuation ring A inside K and Spec A to Y extending the given morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"80f76b214688e2ec\"}; Read the returned types. ValuativeCriterion.Existence.specializingMap (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:115-130) assumes a valuative criterion for a scheme morphism; its internal construction is not this declaration. ValuativeCommSq fields are data/projections, not an existence theorem. The project exists_valuationSubring_of_specializes at line 218 fixes the algebraic closure rather than the given K.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-valuative-existence-closed",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Convert valuative uniqueness for the represented Picard group into separatedness; its diagonal is quasi-compact by 0DNI. In the diagonal argument of Tag 03KV: the quasi-compact diagonal satisfies valuative existence, so Tag 03KA gives universal closedness. Supporting input: Tag 03KA proof, valuation ring in the chosen field representing x-prime, dominating the local image at y.",
+   "via": [
+    "lem-sfb-space-qc-valuative-existence-closed",
+    "lem-sfb-space-valuative-separatedness",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-specialization-prescribed-field-probe",
+  "worker": "stage1",
+  "summary": "N8: read Tags 01J8, 01J7, 01J6 and 00IA; checked the existing domination Mathlib leaf. Expanded the local-image construction in affine coordinates and checked equality with the specified field-point morphism. No new nodes, statement changes or attachments. Mathlib searches do not give the prescribed-field scheme statement.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited Picard separatedness chain, needs Tag 03KA. This split supplies exactly its prescribed-field specialization probe using the local-image domination argument of Tag 01J8; it does not replace any unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-1426977e4",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-1426977e4 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 4 steps, 0 new nodes, and the statement is unchanged from live, where the item is still unsplit; there is no repair note. The statement matches Stacks 01J8 parts (1)-(2) (schemes.tex lemma-points-specialize): valuation subring A of the given K with Frac A = K, closed point sent to y, and v|SpecK = u as morphisms, which is exactly what the citer lem-sfb-space-qc-valuative-existence-closed uses in its step 3. Step 1: u factors through an affine open Spec R because opens around y contain y'; q = ker φ, and the D(a) argument gives q ⊆ p with the right orientation. Step 2: S = φ(R) is a domain, P = φ(p) is prime because φ⁻¹(P) = p (ker φ ⊆ p), S_P embeds in K, and its maximal ideal contracts to P and then to p; checked line by line. Step 3: lemma-nagata-local-domain-valuation-dominates (Mathlib leaf LocalSubring.exists_le_valuationSubring, read at LocalSubring.lean:119-145; Stacks 00IA) needs no condition Frac B = K, so transcendental K is fine; this is a generic Mathlib-leaf tool. Step 4: functoriality of Spec gives the closed point ↦ p and v∘Spec(A↪K) = u; no separatedness is used. Edge cases checked: y = y' (trivial valuation), nonreduced R, empty Y. Duplicate search: lem-trf-valuation-ring-specialization-lift is the algebraic-closure special case, not a generalization; no other node states this. No SGA. One report inaccuracy: it says it wrote citations.json, which is not in the commit; this does not affect the DAG. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecializationPrescribedFieldProbe",
+  "declaration": "AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes_fieldPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecializationPrescribedFieldProbe.lean",
+  "statement": "theorem Scheme.exists_valuationSubring_of_specializes_fieldPoint {Y : Scheme.{u}} {K : Type u} [Field K] (u : Spec (CommRingCat.of K) ⟶ Y) (y : Y) (h : u (IsLocalRing.closedPoint K) ⤳ y) : ∃ (A : ValuationSubring K) (v : Spec (CommRingCat.of A) ⟶ Y), v (IsLocalRing.closedPoint A) = y ∧ Spec.map (CommRingCat.ofHom A.subtype) ≫ v = u",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9ad551ee",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 01J8(1)-(2) clause by clause: Y : Scheme.{u}; K a field in the same universe (forced by Spec K ⟶ Y); u; y' = u(closedPoint K) with h : y' ⤳ y (correct direction); conclusion ∃ A : ValuationSubring K (Mathlib instances ValuationRing A, IsFractionRing A K at ValuationSubring.lean:124/153 match def-trf-valuation-ring, so no second definition), ∃ v with v(closedPoint A) = y and Spec.map A.subtype ≫ v = u as an equality of morphisms. No extra hypotheses. Edge cases: empty Y vacuous, y = y' via A = K, transcendental K. Dep records (def-pc-scheme, def-weil-field, def-weil-affine-spectrum, def-trf-valuation-ring) used as recorded. Not a duplicate: project exists_valuationSubring_of_specializes is the algebraic-closure special case; no name clash in side-live. Node changes only by its lean record; lean.statement verbatim; docstrings carry source, blueprint id and 4 proof steps; sorry only. Report sections present. Citer lem-sfb-space-qc-valuative-existence-closed step 3 needs exactly this form. No compile (no changes)."
+ }
+}

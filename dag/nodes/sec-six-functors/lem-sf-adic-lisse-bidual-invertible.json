@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-adic-lisse-bidual-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the native lisse adic bidual map",
+ "statement": "Let $\\ell$ be a prime and $X$ any scheme [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R$ be the native adic coefficient ring sheaf, and let $M$ be an $R$-module sheaf in the native internal-module presentation [def-weil-sheaf-of-modules-category]. Assume $M$ is pro-etale locally isomorphic to a finite direct sum of copies of the regular module, with ranks allowed to vary. Put $D(M)=\\mathcal Hom_R(M,R)$. The actual native map $\\delta_M:M\\to D(D(M))$ of [lem-sf-adic-native-bidual], defined by transposing $1_{D(M)}$, is an isomorphism. No Frobenius structure or arithmetic base field is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-adic-native-bidual"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the native/slice comparison P from [lem-sf-adic-module-slice-hom-comparison]. At any base, compose its Hom comparison with its regular-module comparison to get an isomorphism from the image of the native dual to the sectionwise dual; apply the same construction again contravariantly to get the double-dual comparison. The bidual_sections and evaluation fields, together with section_map and section_restriction, show on each further slice that the transported bidual sends x to the functional lambda ↦ lambda(x restricted). Uncurrying and bidual_transpose identify P.bidual with the named adicNativeBidual of [lem-sf-adic-native-bidual].",
+   "uses": [
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-adic-native-bidual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "For a module isomorphic to a finite sum of regular modules, use the equivalence and its freeIso to obtain a sectionwise free module. Write its coordinate inclusions s_i and projections c_i; their total sum is the identity. On every slice, x = sum_i c_i(x) s_i(1), so evaluation into the double dual is injective. A double-dual section Psi is evaluation at sum_i Psi(c_i) s_i(1): express each local functional as the sum of its basis values times the restrictions of the c_i, and use naturality and commutativity of the coefficient ring. This proves surjectivity. The empty sum handles rank zero. This is the finite dual-basis proof of PresheafOfModules.bidual_app_bijective, written privately with independent object and morphism universes and for a supplied evaluation map. Componentwise inverses form a presheaf isomorphism by PresheafOfModules.isoMk; reflect it through the fully faithful forgetful functor and P.E to prove P.bidual invertible for each finite-free native module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "Choose the pro-etale covering family in the definition of lisse and its finite-free trivializations. On each member apply the preceding finite-free calculation at that base. The bidual_slice equation of [lem-sf-adic-module-slice-hom-comparison] identifies the pullback of P.bidual, up to the two canonical invertible native-dual comparison maps, with this invertible local bidual. Thus its pullbacks are invertible. Apply the already proved ProEtale.isIso_of_isIso_localizationRestriction to the underlying coefficient-vector-space sheaf, using upperStarIsoLocalizationRestriction and NatIso.isIso_map_iff to identify the maps. The underlying-sheaf functor reflects isomorphisms. Finally replace P.bidual by adicNativeBidual using its transpose characterization. This is exactly the finite-free evaluation and locality route, with no uniform rank or points.",
+   "uses": [
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-adic-native-bidual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-slice-hom-comparison",
+  "lem-sf-adic-native-bidual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "Finite-free evaluation and locality; the complete coordinate calculation follows the proved source declaration PresheafOfModules.bidual_app_bijective, generalized privately to the unequal site universes. Native evaluation normalization uses the comparison fields, and locality uses the proved source theorem ProEtale.isIso_of_isIso_localizationRestriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluation map from a locally free sheaf of finite rank to its double dual is an isomorphism",
+   "results": "Module.IsReflexive.of_finite_of_free, Module.evalEquiv, Module.bijective_dual_eval.",
+   "date": "2026-10-26",
+   "verdict": "These concern ordinary modules, not the native adic module-object sheaf category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom from a finite locally free sheaf is tensor with its dual, and evaluation into the double dual is an isomorphism",
+   "results": "ModuleCat.monoidalClosedHomEquiv, LightCondensed.ihomPoints and SheafOfModules.unitHomEquiv.",
+   "date": "2026-10-26",
+   "verdict": "No native adic invertibility statement. The existing sectionwise bidual theorem needs comparison with the native transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_bidual|isIso_toIhomIhomUnit|bijective_dual_eval|IsReflexive.of_finite_of_free",
+   "results": "12 hits: Mathlib/LinearAlgebra/Dual/Lemmas.lean 259-262, IsReflexive.of_finite_of_free; Dual/Defs.lean 218-230, bijective_dual_eval and evalEquiv; PerfectPairing/Basic.lean 73,86. Separate source rg finds SheafOfModules.isIso_bidual, adicNativeBidual_transpose and AdicModuleSliceHomComparison, but no duplicate native isomorphism assertion.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the comparison and sectionwise invertibility declarations; the native invertibility bridge is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sf-hom-finite-projective.proof.md, first and third sentences: finite-free bidual identity and locality. The ancestor tool for lem-sf-weil-lisse-biduality returns None.",
+   "via": [
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicLisseBidualInvertible",
+  "file": "lean/Sheaf/SixFunctors/AdicLisseBidualInvertible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_adicNativeBidual_of_isLisse",
+  "statement": "theorem isIso_adicNativeBidual_of_isLisse {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}\n    (M : AdicSheaf l X) (hM : IsAdicLisseSheaf M) :\n    IsIso (adicNativeBidual M)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T065742-L-3222368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T142119-L-268139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

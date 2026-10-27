@@ -1,0 +1,273 @@
+{
+ "id": "lem-trf-normalized-free-module-comparison-calculus",
+ "kind": "statement",
+ "title": "Semilinear naturality and coherence of normalized free realizations",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology]. For every commutative ring sheaf $B$ and set sheaf $E$ on either site write $B[E]$ for the module sheafification [def-weil-presheaf-modules-sheafification] of $U\\mapsto B(U)[E(U)]$ [def-weil-pbc-free-module], with restrictions $\\sum b_e[e]\\mapsto\\sum(b_e|_V)[e|_V]$ and generator $i_{B,E}$. Let $L:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ preserve finite limits, transporting ring and module operations by the finite-product comparisons [def-weil-pbc-algebraic-inverse-image, def-weil-sheaf-of-modules-category]. Suppose for each $B,E$ that restriction along $Li_{B,E}$ gives a bijection $\\operatorname{Hom}_{LB}(L(B[E]),H)\\cong\\operatorname{Hom}(LE,|H|)$ for every $LB$-module sheaf $H$. Suppose given linear isomorphisms $p^L_{B,E}:L(B[E])\\cong(LB)[LE]$ with $|p^L_{B,E}|\\circ Li_{B,E}=i_{LB,LE}$. For a ring-sheaf map $b:B\\to B'$ and set-sheaf map $u:E\\to E'$, let $c(b,u):B[E]\\to B'[E']$ be the sheafified $b$-semilinear extension $[e]\\mapsto[u(e)]$, where semilinear means additive and $c(ax)=b(a)c(x)$. Then, as semilinear maps, $$p^L_{B',E'}\\circ Lc(b,u)=c(Lb,Lu)\\circ p^L_{B,E}.$$ For any set-sheaf map $v:LE\\to F$ on $\\mathcal D$, $$|c(1,v)\\circ p^L_{B,E}|\\circ Li_{B,E}=i_{LB,F}\\circ v.$$ In particular, when $E=\\prod_{i\\in I}E_i$ with $I$ finite and $v$ is the product comparison $\\lambda:L(\\prod_iE_i)\\cong\\prod_iLE_i$, this equation holds including $I=\\varnothing$, and the squares for the product projections commute. For $L=\\mathrm{id}$, $p^L_{B,E}=\\mathrm{id}$. If $\\mathcal H$ is another small site and $K:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal H)$ preserves finite limits, suppose the same representing property and normalized comparisons are given for $K$ and $KL$, using composite transported operations and underlying-sheaf identifications. Then $$p^{KL}_{B,E}=p^K_{LB,LE}\\circ K(p^L_{B,E}).$$ These conclusions require no adjoint to $L$ or $K$ in addition to the stated representing properties.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TQ, lemma-pullback-differentials, proof: free-module identifications for O_2, O_1 and O_2 times O_2, with generator compatibility; conditional naturality and coherence elaboration."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "First make the semilinear extension precise. For a ring-sheaf map $b:B\\to B'$ and a $B'$-module sheaf $N$, keep its underlying abelian sheaf and define a $B$-action by $a\\cdot x=b(a)x$. Its module axioms follow from $b(aa')=b(a)b(a')$, $b(a+a')=b(a)+b(a')$ and $b(1)=1$; its restrictions satisfy $(b(a)x)|_V=b(a|_V)(x|_V)$. Thus it is a $B$-module sheaf, denoted $N_b$, and $B$-linear maps to $N_b$ are exactly $b$-semilinear maps to $N$. Apply the free-sheaf universal property to $N=B'[E']$ and $i_{B',E'}\\circ u:E\\to|N_b|$. Its unique extension is $c(b,u)$, with $$|c(b,u)|\\circ i_{B,E}=i_{B',E'}\\circ u.$$ On a finite formal sum its value is $\\sum a_e[e]\\mapsto\\sum b(a_e)[u(e)]$. This formula commutes with restrictions since $b$ and $u$ are sheaf maps; the module-sheafification factorization identifies it with the extension specified in the statement. The same argument applies on each of the three sites in the statement.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "Check the type of $Lc(b,u)$ before comparing it with other maps. For a $b$-semilinear map $h:M\\to N$, write its scalar compatibility as the equality of sheaf maps $h\\circ\\mu_M=\\mu_N\\circ(b\\times h):B\\times|M|\\to|N|$, and likewise write additivity and zero compatibility. Apply $L$ to these equalities. The natural finite-product comparison identifies $L(b\\times h)$ with $Lb\\times Lh$ and identifies the two transported actions with $L\\mu_M$ and $L\\mu_N$. Consequently $Lh$ is $Lb$-semilinear; additivity and zero follow in exactly the same way from their displayed operation diagrams. This uses only the specified transport of operations. The argument also applies to $K$, in particular to the linear map $p^L_{B,E}$.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "Put $P=L(B[E])$ and $N=(LB')[LE']$. The two maps $$A=p^L_{B',E'}\\circ Lc(b,u),\\qquad D=c(Lb,Lu)\\circ p^L_{B,E}$$ are $Lb$-semilinear by step 2 and hence linear maps from $P$ to $N_{Lb}$, the scalar restriction explicitly defined in step 1. Compute their restrictions along $Li_{B,E}$. Functoriality, step 1 and normalization give $$|A|\\circ Li_{B,E}=|p^L_{B',E'}|\\circ L(i_{B',E'}\\circ u)=i_{LB',LE'}\\circ Lu,$$ whereas $$|D|\\circ Li_{B,E}=|c(Lb,Lu)|\\circ i_{LB,LE}=i_{LB',LE'}\\circ Lu.$$ The representing bijection assumed for $L,B,E$, applied to the $LB$-module $N_{Lb}$, is injective, so $A=D$. This proves simultaneous naturality, without requiring $b$ to be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "For an arbitrary $v:LE\\to F$, step 1 on $\\mathcal D$ and normalization immediately give $$|c(1,v)\\circ p^L_{B,E}|\\circ Li_{B,E}=|c(1,v)|\\circ i_{LB,LE}=i_{LB,F}\\circ v.$$ No assumption that $v$ is an isomorphism is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "For $E=\\prod_i E_i$, set $T=\\prod_i LE_i$ and $t=c(1,\\lambda)\\circ p^L_{B,E}$. Step 4 gives $|t|Li_{B,E}=i_{LB,T}\\lambda$. For each projection $\\pi_i:E\\to E_i$ and $q_i:T\\to LE_i$, the definition of the product comparison gives $q_i\\lambda=L\\pi_i$. The two linear maps $$c(1,q_i)\\circ t,\\qquad p^L_{B,E_i}\\circ Lc(1,\\pi_i):L(B[E])\\longrightarrow(LB)[LE_i]$$ both restrict along $Li_{B,E}$ to $i_{LB,LE_i}L\\pi_i$, by steps 1 and 4 and normalization. Injectivity of the assumed representing bijection proves equality, which is the required projection square. If the index set is empty, $E$ and $T$ are terminal sheaves and $\\lambda:L1\\cong1$ exists by finite-limit preservation. Step 4 still gives the generator equation; there are no projection squares to check. This case does not identify $B[1]$ with the zero module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "For $L=\\mathrm{id}$, the underlying source and target are both $B[E]$ with their original operations. Normalization says $|p^{\\mathrm{id}}_{B,E}|i_{B,E}=i_{B,E}=|\\mathrm{id}_{B[E]}|i_{B,E}$. The injective restriction-to-generators map of the free-sheaf universal property therefore gives $p^{\\mathrm{id}}_{B,E}=\\mathrm{id}_{B[E]}$.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  },
+  {
+   "text": "For composable $L,K$, work throughout with the composite transported operations and underlying-sheaf identifications required in the statement. Step 2 implies that $$r=p^K_{LB,LE}\\circ K(p^L_{B,E}):KL(B[E])\\longrightarrow(KLB)[KLE]$$ is $KLB$-linear. Functoriality and the two normalizations compute its restriction as $$|r|\\circ KLi_{B,E}=|p^K_{LB,LE}|\\circ K(|p^L_{B,E}|\\circ Li_{B,E})=|p^K_{LB,LE}|\\circ Ki_{LB,LE}=i_{KLB,KLE}.$$ This is also the restriction of $p^{KL}_{B,E}$. Injectivity of the representing bijection assumed for $KL,B,E$ gives $r=p^{KL}_{B,E}$. Every equality used only finite-product transport, the given representing bijections, and normalization; no adjunction for $L$ or $K$ was introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-free-module-sheaf-universal-property",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TQ (lemma-pullback-differentials), proof, free-module identifications; Tag 04BL (lemma-universal-module), proof, generator extension. Conditional comparison calculus supplied by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generator normalized comparisons for free module sheaves are natural for simultaneous change of coefficient ring and generator sheaf and coherent under composition",
+   "results": "8 hits; SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.mapRelations_mapGenerators, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.Presentation.map_generators_I, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.ιFree_freeMap. No match: freeMap, freeHomEquiv_comp_apply and mapFreeIso concern constant index types and linear module functors; they do not assert simultaneous semilinear coefficient/generator naturality and coherent comparison for arbitrary sheaves of generators. Read Sheaf/Free.lean:39-75 and Presheaf/Free.lean:67-108.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given free sheaf realizations and generator preserving isomorphisms, prove semilinear naturality and identity and composition coherence by generator uniqueness",
+   "results": "8 hits; SheafOfModules.freeHomEquiv, SheafOfModules.freeMap, SheafOfModules.Presentation.mapGenerators, SheafOfModules.GeneratingSections.π, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeFunctor_obj, SheafOfModules.freeSection, SheafOfModules.ιFree. No match: freeMap, freeHomEquiv_comp_apply and mapFreeIso concern constant index types and linear module functors; they do not assert simultaneous semilinear coefficient/generator naturality and coherent comparison for arbitrary sheaves of generators. Read Sheaf/Free.lean:39-75 and Presheaf/Free.lean:67-108.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeObjDesc",
+   "results": "2 hits; PresheafOfModules.freeObjDesc, PresheafOfModules.freeObjDesc_app. No match: freeMap, freeHomEquiv_comp_apply and mapFreeIso concern constant index types and linear module functors; they do not assert simultaneous semilinear coefficient/generator naturality and coherent comparison for arbitrary sheaves of generators. Read Sheaf/Free.lean:39-75 and Presheaf/Free.lean:67-108.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeObjDesc|mapFree|ιFree",
+   "results": "19 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean. No match: freeMap, freeHomEquiv_comp_apply and mapFreeIso concern constant index types and linear module functors; they do not assert simultaneous semilinear coefficient/generator naturality and coherent comparison for arbitrary sheaves of generators. Read Sheaf/Free.lean:39-75 and Presheaf/Free.lean:67-108.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semilinear coefficient change and generator change commute with normalized comparisons between free sheaf realizations, including product and composite functors",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv_comp|freeHomEquiv_freeMap|mapFreeIso",
+   "results": "11 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean. No match for this item: SheafOfModules.free and its comparison lemmas use a constant index type and linear module functors; PresheafOfModules.free is more general in generators but is a presheaf construction over fixed coefficients. None gives the stated simultaneous semilinear coefficient/generator naturality and identity/composite coherence for arbitrary sheaf generators and a finite-limit-preserving functor without an adjunction. Read Sheaf/Free.lean:39-77,99-111,180-230, Presheaf/Free.lean:51-108, and Sheaf/PullbackFree.lean:20-43, where pullback uses its adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.freeHomEquiv, SheafOfModules.freeMap",
+   "results": "1 hits: SheafOfModules.freeHomEquiv_freeMap. No match for this item: SheafOfModules.free and its comparison lemmas use a constant index type and linear module functors; PresheafOfModules.free is more general in generators but is a presheaf construction over fixed coefficients. None gives the stated simultaneous semilinear coefficient/generator naturality and identity/composite coherence for arbitrary sheaf generators and a finite-limit-preserving functor without an adjunction. Read Sheaf/Free.lean:39-77,99-111,180-230, Presheaf/Free.lean:51-108, and Sheaf/PullbackFree.lean:20-43, where pullback uses its adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized isomorphism of free module sheaves is natural for coefficient ring maps and generator maps and compatible with composition of finite limit preserving functors",
+   "results": "8 hits: PresheafOfModules.free, SheafOfModules.freeFunctor, PresheafOfModules.isoMk, SheafOfModules.pullbackObjFreeIso_hom_naturality, PresheafOfModules.freeAdjunctionUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.freeHomEquiv_freeMap. No match for this item: SheafOfModules.free and its comparison lemmas use a constant index type and linear module functors; PresheafOfModules.free is more general in generators but is a presheaf construction over fixed coefficients. None gives the stated simultaneous semilinear coefficient/generator naturality and identity/composite coherence for arbitrary sheaf generators and a finite-limit-preserving functor without an adjunction. Read Sheaf/Free.lean:39-77,99-111,180-230, Presheaf/Free.lean:51-108, and Sheaf/PullbackFree.lean:20-43, where pullback uses its adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized comparisons between free module sheaves commute with semilinear maps changing both the coefficient ring sheaf and generator sheaf, and compose coherently",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_freeMap_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.ιFree_freeMap. No match for this item: SheafOfModules.free and its comparison lemmas use a constant index type and linear module functors; PresheafOfModules.free is more general in generators but is a presheaf construction over fixed coefficients. None gives the stated simultaneous semilinear coefficient/generator naturality and identity/composite coherence for arbitrary sheaf generators and a finite-limit-preserving functor without an adjunction. Read Sheaf/Free.lean:39-77,99-111,180-230, Presheaf/Free.lean:51-108, and Sheaf/PullbackFree.lean:20-43, where pullback uses its adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness on generators proves compatibility of semilinear maps between free sheaves with a finite limit preserving functor and identity and composition comparisons",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Presentation.mapGenerators, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeMap. No match for this item: SheafOfModules.free and its comparison lemmas use a constant index type and linear module functors; PresheafOfModules.free is more general in generators but is a presheaf construction over fixed coefficients. None gives the stated simultaneous semilinear coefficient/generator naturality and identity/composite coherence for arbitrary sheaf generators and a finite-limit-preserving functor without an adjunction. Read Sheaf/Free.lean:39-77,99-111,180-230, Presheaf/Free.lean:51-108, and Sheaf/PullbackFree.lean:20-43, where pullback uses its adjunction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-inverse-image-free-module",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Underived input: inverse image preserves sheaf differentials; comparison of the free-module terms in the cokernel presentation. Re-split of lem-trf-geometric-inverse-image-free-module: old steps 5-6 (simultaneous semilinear naturality, generator products, identity and composite coherence).",
+   "via": [
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-normalized-free-module-comparison-calculus",
+  "worker": "stage1",
+  "summary": "Proved the conditional comparison calculus directly on generators, using the existing free-module-sheaf universal property. Made scalar restriction and semilinear functorial transport explicit, wrote both naturality composites and the product projection squares, checked the empty product, and proved identity and composite coherence by injectivity. No new nodes or statement changes.",
+  "blueprint": "Underived free-module comparison in the differential presentation: resolves the generator naturality, finite-product and identity/composite comparison obligations isolated in steps 5-6 of lem-trf-geometric-inverse-image-free-module, along the recorded ancestry to lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-67b28198b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-67b28198b (reviewer sub-agent of L); spot-checked: Q112 67b28198, lem-trf-normalized-free-module-comparison-calculus: 7-step split, no new nodes; statement, stmt_deps and blueprint are unchanged from the live node, which is still unsplit and not reviewed, so the delivery is not superseded. The item is not on the 2026-10-19 drop list. It is a statement-only child from the NL re-split of lem-trf-geometric-inverse-image-free-module (parent note resolved) and has no repair note of its own. Sources: Stacks 04BL (lemma-universal-module, l.5951; sheafified O_2[F] and extension rule) and 08TQ (lemma-pullback-differentials, l.6062; the three f^{-1} free identifications). Neither states the generalized calculus, so proof_origin=agent is correct. Cited statements read: free-sheaf universal property (bijection for every B-module sheaf M, so step 1 can apply it to N_b and step 6 can use its injectivity), module sheafification factorization, sheaf-of-modules category, and pbc algebraic inverse-image transport (step 2: L applied to h∘μ=μ∘(b×h) plus the product comparison gives Lb-semilinearity). I recomputed every generator equation: in step 3 both composites restrict to i_{LB',LE'}∘Lu and are separated by the assumed representing bijection with H=N_{Lb}; step 4 holds for arbitrary v; in step 5 both sides restrict to i∘Lπ_i via q_iλ=Lπ_i, and I=∅ uses L1≅1 without B[1]=0; step 6 is identity by injectivity; in step 7 |r|∘KLi=i_{KLB,KLE}, so injectivity of the KL representing bijection gives the result. Edge cases checked: empty E, zero ring, non-injective b, non-iso v, K or L the identity. Same-unit cites only; no tool_uses; no cycle; no SGA. The DAG rg search found no duplicate. Searches cover all three kinds (one LeanSearch honestly marked unavailable, another ran). Advisory: the proof is 4408 characters, above the 3000 the 2026-10-21 sweep uses. No note gates this item and each step is under 2000, but a future sweep may cut off the step-1 scalar-restriction construction."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.NormalizedFreeModuleComparison",
+  "declaration": "CategoryTheory.SheafFreeModule.normalizedFreeModule_naturality",
+  "declarations": [
+   "CategoryTheory.SheafFreeModule.normalizedFreeComparison",
+   "CategoryTheory.SheafFreeModule.HasTransportedFreeUniversalProperty",
+   "CategoryTheory.SheafFreeModule.transportedFreeChange",
+   "CategoryTheory.SheafFreeModule.transportedFreeChangeSection",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_change_semilinear",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_naturality",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_generators",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_products",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_identity",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/NormalizedFreeModuleComparison.lean",
+  "statement": "theorem normalizedFreeModule_naturality (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L] {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}} (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} L B BI) (F' : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} L B' BI') (b : B ⟶ B') (bi : BI ⟶ BI') (hb : L.map ((sheafCompose J (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).map b) ≫ F'.ringUnderlying.hom = F.ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).map bi) {E E' : Sheaf J (Type w)} (u : E ⟶ E') (hL : HasTransportedFreeUniversalProperty L F E) (p : F.modules.obj ((free B).obj E) ≅ (free BI).obj (L.obj E)) (p' : F'.modules.obj ((free B').obj E') ≅ (free BI').obj (L.obj E')) (hp : L.map (generator B E) ≫ normalizedFreeComparison L F E p = generator BI (L.obj E)) (hp' : L.map (generator B' E') ≫ normalizedFreeComparison L F' E' p' = generator BI' (L.obj E')) : L.map (changeSets b u) ≫ normalizedFreeComparison L F' E' p' = normalizedFreeComparison L F E p ≫ changeSets bi (L.map u)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Six theorem declarations state semilinearity, simultaneous naturality, arbitrary-generator normalization, finite-product projection squares (including empty products), identity, and composition. Four data/predicate helpers retain the recorded algebraic-transport identifications. The existing free, generator and change constructions are reused. No geometric-morphism or adjunction hypothesis is imposed. Do not add a reverse proof import from InverseImageFreeModule: it owns the shared free-sheaf constructions and such an import would create a cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7bc1972c",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: semilinearity of Lc(b,u) (bi pinned by hb), naturality (lean.statement equals the file signature exactly), generator equation for arbitrary v with no IsIso, finite products with [Finite I] including I empty plus projection squares, identity stated literally as p = Iso.refl, and composition with arbitrary FG tied only by hB (still true because the graph laws fix the transported operations, so injectivity of hKL decides it; the omitted K-only representing hypothesis is unused). Reuses free/generator/change from InverseImageFreeModule, no duplicate notions; helpers are real constructions; docstrings carry source, blueprint and proof steps; both report sections present; node unchanged from live except lean. Maintainer note: the item imports the theorem module InverseImageFreeModule, whose node lem-trf-geometric-inverse-image-free-module lists this item in proof_deps (stage-3 import cycle, as for Q99); move ring/moduleSets/free/generator/change/changeSets into a definition-node module. Advisory: the parent's comparison is normalizedFreeComparison specialized to f.inverse. No compile, since nothing was changed; worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261024T022013-L-2890635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_change_semilinear",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_composition",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_generators",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_identity",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_naturality",
+   "CategoryTheory.SheafFreeModule.normalizedFreeModule_products"
+  ],
+  "sorry_after": []
+ }
+}

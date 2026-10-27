@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-maximal-torus-field-extension",
+ "kind": "statement",
+ "title": "Maximal tori remain maximal after extension of the ground field",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $T\\subseteq G$ be a closed torus subgroup [def-sc-group-scheme-subgroup, def-sfb-tori-multiplicative-type]. A torus is a group scheme becoming $\\mathbf G_m^r$ over an algebraic closure for some integer $r\\geq0$ [def-sc-gm-ga]. It is maximal in $G$ if no strictly larger closed torus subgroup of $G$ contains it. For every field extension $L/k$ [def-pc-field-extension], $T$ is maximal in $G$ if and only if $T_L$ is maximal in $G_L$, where scalar extension is the fibre product with $\\operatorname{Spec}L$ [def-pc-fibre-product]. No reductivity, splitting, perfectness or characteristic assumption is imposed; the rank-zero torus is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "For later use, any closed torus $R$ in an affine finite-type group is smooth and geometrically connected. Its coordinate algebra is a quotient of a finitely generated algebra. Over any field extension $F$, embed its splitting algebraic closure into an algebraic closure $\\Omega$ of $F$; the coordinate algebra of $R_F$ injects into $\\Omega[x_1^{\\pm1},\\ldots,x_r^{\\pm1}]$. This Laurent ring is a domain: the lexicographically largest exponents in two nonzero finite sums add to the uniquely largest exponent of their product, with nonzero coefficient. Hence the injected algebra is reduced and has only idempotents 0 and 1. It is nonzero by the identity point. Apply [lem-pc-scheme-connected-iff-idempotents] to get connectedness over every $F$, and [lem-sfb-geometrically-reduced-group-smooth] to get smoothness. The identity section of $G$ is a $k$-point. Apply [lem-sbc-connected-rational-point-geometrically-connected] to conclude that $G_F$ is connected for every field extension $F/k$. It is smooth by [lem-pc-proper-base-change](2). The coordinate algebra of $G_F$ is obtained by extending scalars, and the same finite set of algebra generators generates after tensoring. Thus $G_F$ is affine of finite type. A torus remains a torus under field extension: embed an algebraic closure of $k$ in an algebraic closure of $F$; the given splitting remains an isomorphism after tensoring. The group law, commutativity and the closed inclusion also extend by tensoring. These observations let us use the following argument over both $k$ and $L$.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "def-weil-finite-type-morphism",
+    "def-sfb-tori-multiplicative-type",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379, connected case; Stacks Tag 04KV, varieties.tex, lemma-geometrically-connected-if-connected-and-point; scalar extension of affine coordinate algebras. Milne Proposition 1.26(b), printed p.13, and the following idempotent discussion on pp.14–15, for the torus properties."
+   }
+  },
+  {
+   "text": "Put $C=C_G(T)$, using the centralizer functor in [lem-sfb-torus-centralizer-smooth-connected]. Step 1 verifies its geometric-connectedness hypothesis, so $C$ is smooth, geometrically connected, affine and of finite type. Since $T$ is commutative, it is contained in $C$, and its elements commute with every element of $C$ after every algebra extension; hence $T$ is central and normal in $C$. Apply [lem-sfb-affine-normal-quotient-geometry] to obtain the affine smooth geometrically connected quotient $Q=C/T$ and its faithfully flat finitely presented map $q:C\\to Q$, with kernel $T$. Any torus $S\\subseteq G$ containing $T$ lies in $C$: on every algebra its elements commute with those of $T$, because $S$ is commutative. Conversely a torus in $C$ is a torus in $G$. Thus maximality of $T$ in $G$ is equivalent to maximality in $C$.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379, first equivalence; 17.72, p.376, and quotient geometry in Theorem 5.28, pp.104–105."
+   }
+  },
+  {
+   "text": "Assume $T$ is maximal in $C$. If $R\\subseteq Q$ is a torus defined over the ground field, take $P=q^{-1}(R)$. By [lem-sfb-affine-normal-quotient-geometry], $P$ is smooth and connected, and $P\\to R$ is faithfully flat and finitely presented with kernel $T$. The kernel is central in $P$ since it is central in $C$. Apply [lem-sfb-central-extension-of-tori] with $E=P$ and $S=R$: it gives that $P$ is a torus. We have $T\\subseteq P\\subseteq C$, so maximality forces $P=T$. Since $P/T\\simeq R$ by the quotient node, $R$ is trivial. All hypotheses, in particular connectedness of $P$ and centrality of its kernel, have been verified.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-central-extension-of-tori"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379: T maximal in C implies C/T has no nontrivial torus; Lemma 16.43, p.340, applied to its inverse image."
+   }
+  },
+  {
+   "text": "The smooth connected affine finite-type group $Q$ has no nontrivial torus defined over the ground field by step 3. Apply [lem-sfb-torus-free-implies-unipotent-arbitrary-field] to $H=Q$. It gives that $Q$ is unipotent. This applies over finite and imperfect fields as well: we have not replaced base-field tori by geometric tori in the hypothesis.",
+   "uses": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.81, pp.378–379, as used in the displayed equivalence in Theorem 17.82, p.379."
+   }
+  },
+  {
+   "text": "Conversely assume $Q$ is unipotent, and let $S$ be a torus in $C$ containing $T$. Extend to an algebraic closure $\\Omega$ of the ground field. By [lem-sfb-unipotent-to-multiplicative-trivial], unipotence persists, and its stated meaning supplies a closed immersion of $Q_\\Omega$ into an upper unitriangular group. By [lem-sfb-diagonalizable-group-geometric-criteria], the split torus $S_\\Omega\\simeq\\mathbf G_m^r$ is $D_\\Omega(\\mathbf Z^r)$. Therefore [lem-sfb-diagonalizable-to-unipotent-trivial] makes $q_\\Omega|_{S_\\Omega}$ trivial on all algebras, including nonreduced ones. It follows that $q|_S$ is trivial: its coordinate map and the coordinate map of the constant identity agree after tensoring with $\\Omega$, and $V\\to V\\otimes\\Omega$ is injective for every vector space $V$ (extend a nonzero vector to a basis). Hence $S$ factors through the scheme-theoretic kernel $T$ of $q$. Together with $T\\subseteq S$ this gives $S=T$. Combining steps 2–5 proves $T$ maximal in $G$ if and only if $C_G(T)/T$ is unipotent.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379, reverse implication of the displayed criterion; Corollary 14.18(b), p.284, and Theorem 12.9, pp.233–234; coordinate-map descent written explicitly."
+   }
+  },
+  {
+   "text": "For any $L$-algebra $A$, the fibre-product definition identifies $C_L(A)$ with the elements of $G_L(A)$ commuting with $T_L$ after every algebra extension. Indeed any extension of the $k$-algebra $A$ inherits its compatible $L$-structure through $L\\to A$, so the two sets of tests agree. Thus $C_L=C_{G_L}(T_L)$ as represented functors. By [lem-sfb-affine-normal-quotient-geometry], $Q_L\\simeq C_L/T_L$. By the field-extension clause of [lem-sfb-unipotent-to-multiplicative-trivial], $Q$ is unipotent if and only if $Q_L$ is unipotent. Step 1 supplies the hypotheses for the criterion of steps 2–5 over $L$ as well as over $k$. Consequently $T$ is maximal in $G$ if and only if $Q$ is unipotent, if and only if $Q_L$ is unipotent, if and only if $T_L$ is maximal in $G_L$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379, final sentence, using Corollary 14.9, p.282; centralizer field base change after Proposition 1.92, p.34."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "def-weil-finite-type-morphism",
+  "def-sfb-tori-multiplicative-type",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-central-extension-of-tori",
+  "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.82, printed p.379, with the inverse-image and reverse-kernel arguments written explicitly; Proposition 17.81, Lemma 16.43, Corollaries 14.9 and 14.18(b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Mm]aximal[Tt]orus|[Gg]eometrically[Cc]onnected|[Ii]s[Tt]orus",
+   "results": "{\"t\": \"2026-10-24T03:49:02Z\", \"tool\": \"grep\", \"query\": \"[Mm]aximal[Tt]orus|[Gg]eometrically[Cc]onnected|[Ii]s[Tt]orus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"f48fd85825251808\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field scalar-restriction and abstract Galois-category connectedness do not state maximality of algebraic tori; the geometric-connectedness file supplies a definition, not this group theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal torus in a smooth connected algebraic group stays maximal after scalar extension",
+   "results": "{\"t\": \"2026-10-24T03:49:03Z\", \"tool\": \"leansearch\", \"query\": \"A maximal torus in a smooth connected algebraic group stays maximal after scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.restrictScalars_top\", \"IsStronglyTranscendental.restrictScalars\", \"Algebra.Smooth.baseChange\", \"Algebra.IsAlgebraic.extendScalars\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Algebra.Extension.baseChange\", \"AlgHom.extendScalars\", \"Subalgebra.restrictScalars_top\"], \"digest\": \"6ea94b3ad1ad0c3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field scalar-restriction and abstract Galois-category connectedness do not state maximality of algebraic tori; the geometric-connectedness file supplies a definition, not this group theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGeometricallyConnected\"",
+   "results": "{\"t\": \"2026-10-24T03:49:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGeometricallyConnected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field scalar-restriction and abstract Galois-category connectedness do not state maximality of algebraic tori; the geometric-connectedness file supplies a definition, not this group theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connectedness of a smooth group scheme over a field and maximality of its tori are invariant under extension of the field",
+   "results": "{\"t\": \"2026-10-24T03:49:04Z\", \"tool\": \"leanfinder\", \"query\": \"Connectedness of a smooth group scheme over a field and maximality of its tori are invariant under extension of the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"CategoryTheory.PreGaloisCategory.PreservesIsConnected.preserves\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\"], \"digest\": \"05b91211c6077907\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field scalar-restriction and abstract Galois-category connectedness do not state maximality of algebraic tori; the geometric-connectedness file supplies a definition, not this group theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected algebraic groups are geometrically connected and maximal tori remain maximal after any field extension",
+   "results": "{\"t\": \"2026-10-24T03:49:05Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected algebraic groups are geometrically connected and maximal tori remain maximal after any field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"krullTopology_isTotallySeparated\", \"Field.absoluteGaloisGroupAbelianization\"], \"digest\": \"962587e395df222c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field scalar-restriction and abstract Galois-category connectedness do not state maximality of algebraic tori; the geometric-connectedness file supplies a definition, not this group theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal torus of a smooth connected affine algebraic group remains maximal under any extension of the ground field",
+   "results": "{\"t\": \"2026-10-24T04:18:36Z\", \"tool\": \"leanfinder\", \"query\": \"A maximal torus of a smooth connected affine algebraic group remains maximal under any extension of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure.maxIdeal.isMaximal\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\", \"LieAlgebra.engel_isBot_of_isMin\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top\"], \"digest\": \"023cafd51c0b37bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximality of tori in algebraic group schemes is invariant under field extension",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"leansearch\", \"query\": \"Maximality of tori in algebraic group schemes is invariant under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsMaximal.under\", \"IntermediateField.restrictScalars_top\", \"Algebra.Unramified.baseChange\", \"tangentConeAt_mono_field\", \"Ideal.primesOver.isMaximal\", \"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"Ideal.IsMaximal.of_isMaximal_liesOver\", \"Ideal.inertiaDegIn_eq_inertiaDeg\"], \"digest\": \"6c137b28d6a2d99d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.?torus|IsTorus|unipotent",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"grep\", \"query\": \"maximal.?torus|IsTorus|unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-characteristic-sequence",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups.",
+   "via": [
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-maximal-torus-field-extension",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 17.82 and its cited inputs. Proved the maximality criterion using inverse images of quotient tori and the all-algebras vanishing of torus maps to unipotent groups. Reused existing connectedness, centralizer, quotient and unipotence-invariance nodes; created only the arbitrary-field no-torus criterion and central extension of tori. Statement unchanged; no perfectness, splitting or reductivity added.",
+  "blueprint": "Supports the inherited characteristic-sequence prerequisite below det-thm-sf-ctf-stability-direct-images (3). The latest blueprint has no torus field-extension node; blueprint_refs ancestor returns None, retained as inherited. The six proof steps realize Milne 17.82 in that supporting input. Latest sk-thm-sf-ctf-stability direct-images proof (3) checked; no unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic Stacks 04KV connected scheme with rational point; supplies geometric connectedness before using the centralizer theorem."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Uses only clause (2), stability of smoothness under base change, a generic scheme-theoretic tool not a proper-base-change cohomology route."
+   },
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Generic scheme connectedness criterion used to verify torus connectedness from its Laurent coordinate algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "lem-pc-scheme-connected-iff-idempotents"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-c7675aa98",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-c7675aa98 (reviewer sub-agent of L); spot-checked: The item matches Milne Thm 17.82 (p.379) for smooth connected affine finite-type G; the statement is unchanged and nothing is weakened. All six steps check against the cited statements: step 1 gives torus and base-change smoothness and connectedness (Laurent-domain injection, idempotents, geometric reducedness, 04KV, base change of smoothness); step 2 forms C_G(T) and the quotient Q=C/T and shows maximality in G equals maximality in C; step 3 shows the inverse image of a k-torus is a torus via the central-extension node, with every hypothesis verified; step 4 applies the arbitrary-field 17.81 node and avoids the k̄-only lem-sfb-no-torus-unipotent; step 5 uses the diagonalizable→unipotent vanishing in the correct direction and descends it through V→V⊗Ω; step 6 uses centralizer base change by functor of points, quotient base change and unipotence invariance. The new node lem-sfb-central-extension-of-tori is Milne 16.43 plus 'smooth connected multiplicative type is a torus', true and self-contained. The new node lem-sfb-torus-free-implies-unipotent-arbitrary-field is Milne 17.81 (pp.378-379, finite fields via 17.99) with the 14.5 meaning of unipotence. It is the base case of Milne's reduction; the item still does real work on top of it, so it is not a D1 restatement. A DAG search found no duplicate of either. All three batch-5 trf closure nodes (smooth-at-point fibre criterion, fppf descent-datum definition, flat ⊗ preserves injection) are generic facts outside the trace-formula and Poincaré statements and proofs, so they are accepted. I accept the three declared generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MaximalTorusFieldExtension",
+  "declaration": "AlgebraicGeometry.maximal_torus_iff_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MaximalTorusFieldExtension.lean",
+  "statement": "theorem maximal_torus_iff_baseChange {k : Type u} [Field k] (T G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (i : T ⟶ G) [IsClosedSubgroupScheme i.hom.hom] (hT : MultiplicativeType.IsTorus T) (L : Type u) [Field L] [Algebra k L] : ReductiveTorusCentralizer.IsMaximalTorus i ↔ ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := L)).map i)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-812bd330b",
+  "group": "NI",
+  "result": "pass",
+  "note": "Lean maximal_torus_iff_baseChange matches lem-sfb-maximal-torus-field-extension and Milne Thm 17.82 p.379 clause by clause: k field; G Smooth/ConnectedSpace/IsAffine/LocallyOfFiniteType+QuasiCompact (recorded predicates, nothing stronger); i closed subgroup (IsClosedSubgroupScheme) with IsTorus T (rank 0 = trivial group included); arbitrary L with Algebra k L; scalar extension = recorded MultiplicativeType.baseChange (Over.pullback ... mapGrp, fibre product); conclusion IsMaximalTorus i <-> IsMaximalTorus (baseChange.map i), both directions, no reductive/split/perfect/characteristic hypothesis. Node diff vs side-live: only new lean record plus added stmt_dep def-sfb-reductive-torus-centralizer-terminology, a landed definition that owns IsMaximalTorus (matches its def text). Statement verbatim; imports exist, no cycle; docstrings with source and blueprint plus 6 proof steps; sorry only; no new defs. L shares universe u with k, required by the recorded baseChange API. No recompile (no change). No findings."
+ }
+}

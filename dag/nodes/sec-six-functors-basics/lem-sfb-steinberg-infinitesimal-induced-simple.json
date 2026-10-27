@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-steinberg-infinitesimal-induced-simple",
+ "kind": "statement",
+ "title": "The infinitesimal induced Steinberg module is simple",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], of prime characteristic $p>0$, and let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]. Semisimple means smooth, affine, connected and of finite type, with no nontrivial smooth connected solvable normal subgroup, where solvable means that the successive commutator subgroup schemes eventually become trivial. Simply connected means that every surjective homomorphism $S'\\to S$ from a semisimple group scheme with finite central kernel is an isomorphism; finite means finite-dimensional coordinate algebra and central means commuting with every element after every scalar extension. A split torus is a group scheme isomorphic to $\\mathbf G_m^r$ for some $r\\ge0$, where $\\mathbf G_m(A)=A^\\times$; a maximal torus is one not contained in a larger torus. A Borel subgroup is a maximal smooth connected solvable closed subgroup. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$. For this pair, let $\\Phi^+$ be the positive roots given by the nonzero characters of the adjoint action of $T$ on $\\operatorname{Lie}(B)$, where $\\operatorname{Lie}(B)$ is the kernel of $B(F[\\varepsilon]/(\\varepsilon^2))\\to B(F)$, with its tangent-space structure. A character is a group-scheme homomorphism $T\\to\\mathbf G_m$; addition of characters means multiplication of their values. Let $\\rho\\in X^*(T)$ satisfy $2\\rho=\\sum_{\\alpha\\in\\Phi^+}\\alpha$, and let $\\widetilde\\rho:B\\to\\mathbf G_m$ extend it and be trivial on the unipotent radical of $B$; this radical is its largest smooth connected normal unipotent subgroup, with unipotent meaning that all geometric points are unipotent matrices in a faithful linear representation. Fix an integer $r\\ge1$ and write $q=p^r$ and $\\lambda=(q-1)\\rho$. If $C=F[S]$, define $S^{(q)}=\\operatorname{Spec}(C\\otimes_{F,a\\mapsto a^q}F)$ [def-weil-affine-spectrum, def-weil-pbc-module-tensor-product]; its group operations are obtained by this base change. The relative Frobenius $F^r_{S/F}:S\\to S^{(q)}$ has coordinate map $c\\otimes a\\mapsto ac^q$. Let $T^{(q)}\\subseteq S^{(q)}$ be the base change of $T$, let $S_r=\\ker F^r_{S/F}$, and define the closed subgroup schemes $L_r=(F^r_{S/F})^{-1}(T^{(q)})$ and $P_r=B\\cap L_r$, with scheme-theoretic inverse image and intersection. Use the notation $S_rT=L_r$ and $B_rT=P_r$. On $P_r$ use the restriction of the given $B$-character $\\widetilde\\rho$. Define the actual infinitesimal induced module\n$$Z_r=\\{f\\in F[L_r]:f(xb)=\\widetilde\\rho(b)^{q-1}f(x)\\text{ for every commutative }F\\text{-algebra }D,\\ x\\in L_r(D),\\ b\\in P_r(D)\\}.$$\nUse left translation $(h f)(x)=f(h^{-1}x)$. A rational module for an affine group scheme $K$ is an $F$-vector space with a coassociative counital coaction $M\\to M\\otimes_FF[K]$; a submodule is an $F$-linear subspace whose coaction lands in its tensor product with $F[K]$. Equivariance means equality of coactions, equivalently equality after every commutative $F$-algebra extension. Write $\\widehat Z'_r(\\lambda)=Z_r$ for this choice of positive roots in $\\operatorname{Lie}(B)$. Left translation gives $Z_r$ a finite-dimensional simple rational $L_r$-module structure: $Z_r\\ne0$, and the only $F$-linear subspaces stable under the $F[L_r]$-coaction are $0$ and $Z_r$. This includes the trivial group and all primes $p$, including $2$.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, 3.18, simplicity of the infinitesimal induced module at (p^r-1)rho, before II.3.19 and Kempf II.4.5; compatible G_rT notation in II.9.1. Use the infinitesimal argument, not global induced-module dimensions or Weyl filtrations. Local book WANTED. Primary corroboration read online: Kaneda, On the Frobenius morphism of flag schemes (1994), Section 2.5, equations (4)--(9), printed pp.322--323. The precise restriction formulation follows the returned-review II.3.18--3.19 route; not a claim that Kaneda proves that embedding.",
+  "url": "https://msp.org/pjm/1994/163-2/pjm-v163-n2-p07-s.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-rho-section-module-data",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-frobenius-kernel-induced-dual-pbw] with $\\eta=(q-1)\\rho$ and $\\widetilde\\eta=\\widetilde\\rho^{q-1}$. Its function space is exactly the stated $Z_r$. It gives a rational $L_r$-action, dimension $q^N$, an opposite Borel with radical $U^-$, and $M=A\\otimes_{D_B}F_\\lambda\\simeq Z_r^\\vee$ with $v=1\\otimes1\\ne0$ and $H=\\operatorname{Dist}(U^-_r)\\xrightarrow{\\sim}M$, $h\\mapsto hv$. The last assertion of [lem-sfb-reductive-borel-pair-structure] makes $S$ reductive, so [lem-sfb-reductive-root-subgroup-parametrizations] supplies root parametrizations for the positive and negative roots. Thus $Z_r\\ne0$, and it remains to exclude proper nonzero submodules.",
+   "uses": [
+    "lem-sfb-frobenius-kernel-induced-dual-pbw",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "Q86 agent assembly of the infinitesimal route; finite-kernel evaluation duality (local book WANTED)"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq M$ be any nonzero $A$-submodule. Under $H\\simeq M$, [lem-sfb-unipotent-frobenius-distribution-socle] gives a nilpotent augmentation ideal $J$ and $\\operatorname{Ann}_M(J)=F f_{\\rm top}v$. Choose the largest $n\\ge0$ with $J^nW\\ne0$, which exists since $J^m=0$ and $J^0W=W$. Then $0\\ne J^nW\\subseteq W\\cap\\operatorname{Ann}_M(J)$. A nonzero subspace of this one-dimensional line is the whole line, so $f_{\\rm top}v\\in W$.",
+   "uses": [
+    "lem-sfb-unipotent-frobenius-distribution-socle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "Q86 agent assembly of the infinitesimal route; unipotent augmentation-socle argument (local book WANTED)"
+   }
+  },
+  {
+   "text": "By [lem-sfb-steinberg-top-distribution-recovery], $e_{\\rm top}f_{\\rm top}v=cv$ for some $c\\in F^\\times$. Since $e_{\\rm top}\\in A$ and $W$ is $A$-stable, $v\\in W$. Every tensor $a\\otimes t$ is $tav$, so $M=Av\\subseteq W$. This proves that $M$ is simple as an $A$-module.",
+   "uses": [
+    "lem-sfb-steinberg-top-distribution-recovery"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "Q86 agent assembly of the infinitesimal route; top-root distribution calculation at Steinberg weight (local book WANTED)"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq Z_r$ be stable under the $L_r$-coaction. Restricting that coaction to $S_r$ shows $aV\\subseteq V$ for every $a\\in A$. Its annihilator $V^\\perp\\subseteq Z_r^\\vee$ is $A$-stable: $(a\\ell)(w)=\\ell(\\sigma(a)w)=0$ for $w\\in V$, using the dual action in [lem-sfb-frobenius-kernel-induced-dual-pbw]. Identify it with a submodule of $M$. By the preceding steps it is $0$ or $M$. In a finite-dimensional vector space a proper subspace has a nonzero annihilating functional, by extending a basis; hence $V^\\perp=0$ gives $V=Z_r$, whereas $V^\\perp=Z_r^\\vee$ gives $V=0$. Together with $\\dim Z_r=q^N\\ge1$, this is the required simplicity. For $S=1$ the products are empty and $Z_r=F$; none of the steps divides by a factorial or excludes $p=2$.",
+   "uses": [
+    "lem-sfb-frobenius-kernel-induced-dual-pbw"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "Q86 agent assembly of the infinitesimal route; finite-dimensional annihilator argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-frobenius-kernel-induced-dual-pbw",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-unipotent-frobenius-distribution-socle",
+  "lem-sfb-steinberg-top-distribution-recovery"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Supporting infinitesimal route specified in the item source; Kaneda Section 2.5 (4)-(9) corroborates the statement. Jantzen local book WANTED; this assembly is agent-written, not transcribed from an unread book."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An induced module from a Borel Frobenius kernel times torus at weight p power minus one times rho is simple as a Frobenius kernel torus representation",
+   "results": "OK 8 hits: RootPairing.isSimpleModule_weylGroupRootRep, Representation.IsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep_iff, Representation.is_simple_module_iff_irreducible_ofModule, FDRep.simple_iff_end_is_rank_one, Representation.IsIrreducible.toIsSimpleOrder, Representation.irreducible_iff_isSimpleModule_asModule, FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected abstract group restriction and irreducibility, root-reflection representations and Lie-module weight-space results do not state the rational Frobenius-kernel group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsIrreducible\"",
+   "results": "OK 10 hits: Representation.IsIrreducible, Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative, Representation.IsIrreducible.instFiniteDimensionalAsModuleOfFinite, Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule, Representation.IsIrreducible.instSubsingletonIntertwiningMapOfIsEmptyEquiv, Representation.IsIrreducible.finrank_intertwiningMap_self, Representation.IsIrreducible.injective_or_eq_zero, Representation.IsIrreducible.surjective_or_eq_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected abstract group restriction and irreducibility, root-reflection representations and Lie-module weight-space results do not state the rational Frobenius-kernel group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|baby.?Verma|Frobenius.*kernel|Jantzen",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected abstract group restriction and irreducibility, root-reflection representations and Lie-module weight-space results do not state the rational Frobenius-kernel group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinitesimal induced Steinberg module for G r T is simple at weight p to the r minus one times rho",
+   "results": "OK 8 hits: RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.isSimpleModule_weylGroupRootRep, simple_of_isSimpleModule, instIsSimpleModuleSubtypeMemSubmoduleValSetSetOfNonemptyLinearEquivId, IsSimpleModule, isSimpleModule_of_simple, simple_iff_isSimpleModule, isSimpleModule_iff_isAtom",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected abstract group restriction and irreducibility, root-reflection representations and Lie-module weight-space results do not state the rational Frobenius-kernel group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The baby Verma coinduced module at highest weight p to the r minus one times rho for a semisimple algebraic group is irreducible in every prime characteristic",
+   "results": "OK 8 hits: RootPairing.GeckConstruction.instIsIrreducible, Representation.IsIrreducible, LieModule.IsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep, Representation.IsIrreducible.toIsSimpleOrder, Representation.is_simple_module_iff_irreducible_ofModule, Representation.irreducible_iff_isSimpleModule_asModule, Representation.isIrreducible_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected abstract group restriction and irreducibility, root-reflection representations and Lie-module weight-space results do not state the rational Frobenius-kernel group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinitesimal induced module of a semisimple algebraic group at Steinberg weight (p^r-1)rho is irreducible",
+   "results": "{\"t\": \"2026-10-24T10:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"The infinitesimal induced module of a semisimple algebraic group at Steinberg weight (p^r-1)rho is irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.IsIrreducible\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.IsIrreducible.mk\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"Representation.irreducible_iff_isSimpleModule_asModule\", \"LieModule.nontrivial_of_isIrreducible\"], \"digest\": \"c0571b8efd7ede63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group irreducibility, Weyl reflection representations and Lie-module weight-chain results do not give simplicity of a rational Frobenius-kernel induced module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsIrreducible\"",
+   "results": "{\"t\": \"2026-10-24T10:12:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"IsIrreducible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Representation.IsIrreducible\", \"Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative\", \"Representation.IsIrreducible.instFiniteDimensionalAsModuleOfFinite\", \"Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule\", \"Representation.IsIrreducible.instSubsingletonIntertwiningMapOfIsEmptyEquiv\", \"Representation.IsIrreducible.finrank_intertwiningMap_self\", \"Representation.IsIrreducible.injective_or_eq_zero\", \"Representation.IsIrreducible.surjective_or_eq_zero\"], \"digest\": \"7a3e628662cd3ba2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group irreducibility, Weyl reflection representations and Lie-module weight-chain results do not give simplicity of a rational Frobenius-kernel induced module"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|baby.?Verma|Frobenius.*kernel|hyperalgebra",
+   "results": "{\"t\": \"2026-10-24T10:12:57Z\", \"tool\": \"grep\", \"query\": \"Steinberg|baby.?Verma|Frobenius.*kernel|hyperalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group irreducibility, Weyl reflection representations and Lie-module weight-chain results do not give simplicity of a rational Frobenius-kernel induced module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicity of the infinitesimal induced Steinberg representation for a Frobenius kernel times a torus",
+   "results": "{\"t\": \"2026-10-24T10:12:57Z\", \"tool\": \"leansearch\", \"query\": \"Simplicity of the infinitesimal induced Steinberg representation for a Frobenius kernel times a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IndV\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"FDRep.simple_iff_char_is_norm_one\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"Rep.coindToInd.congr_simp\", \"Rep.ind\", \"Representation.IsIrreducible.toIsSimpleOrder\", \"Representation.isIrreducible_iff\"], \"digest\": \"7758b6f8459325f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group irreducibility, Weyl reflection representations and Lie-module weight-chain results do not give simplicity of a rational Frobenius-kernel induced module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A baby Verma module with highest weight p power minus one times the half sum of positive roots is simple",
+   "results": "{\"t\": \"2026-10-24T10:13:03Z\", \"tool\": \"leanfinder\", \"query\": \"A baby Verma module with highest weight p power minus one times the half sum of positive roots is simple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"LieModule.chainBot\", \"LieModule.chainTopCoeff\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"LieModule.chainTop\", \"LieModule.genWeightSpace_add_chainTop\", \"LieModule.chainBot_zero\"], \"digest\": \"3b0ac1b3ed5c6879\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group irreducibility, Weyl reflection representations and Lie-module weight-chain results do not give simplicity of a rational Frobenius-kernel induced module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-rho-section-self-duality",
+  "date": "2026-10-24",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18, simplicity of the infinitesimal induced module at (p^r-1)rho, before II.3.19 and Kempf II.4.5; compatible G_rT notation in II.9.1. Use the infinitesimal argument, not global induced-module dimensions or Weyl filtrations.",
+   "via": [
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-steinberg-infinitesimal-induced-simple",
+  "worker": "stage1",
+  "summary": "Q86: retained the exact actual regular-function module and all hypotheses. Split its infinitesimal proof into evaluation/dual-induction freeness, the higher-kernel unipotent distribution socle, and a top-root identity. Proved the remaining simplicity and dual-annihilator steps explicitly. Searched the current DAG, blueprint, project Lean and Mathlib; no attachment or full Mathlib match. Book WANTED; source provenance is explicitly agent-written.",
+  "blueprint": "The latest direct-images proof (3) is the ancestor route recorded by this created item. This supporting algebraic-group argument realizes the II.3.18 infinitesimal input in its existing provenance; it does not replace a unit step. The main proof carries simplicity, not a new node restating it."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-bc4f43b10",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-bc4f43b10 (reviewer sub-agent of L); spot-checked: Read the item, all three new unsplit nodes and the cited statements in full (reductive-borel-pair-structure, root-subgroup-parametrizations, affine-group-distribution-calculus). Jantzen RAG is absent from literature/; the worker recorded WANTED and marked the proof agent-written (allowed). I checked the mathematics myself. Item statement unchanged and true: it is the w0-twist of Jantzen's Z'_r((q-1)rho), the Steinberg module, which is simple. Node dual-pbw: I verified that Theta(a⊗1)(f)=a(f|S_r) is well defined (b·1=b(eta~)), A-linear and an isomorphism; dimension q^N and A free over D_B follow from the big cell, and the sign is correct. Node socle: PBW basis holds for any ordering; J is nilpotent and kills the top-weight monomial z; the annihilator is Fz because the left integrals of a finite Hopf algebra form a line. Node top-recovery: M is the baby Verma module of weight (q-1)rho, so e_top f_top v lies in Fv; c≠0 by the Kac-Weisfeiler/Rudakov product at r=1 (±((p-1)!)^N) and by Steinberg simplicity in general; SL2 with p=2, r=2 gives c=1 and weight 0 gives c=0. It is an operator identity, not the item restated. Steps 1-4 match their cited statements (semisimple ⇒ reductive from the last sentence of the pair-structure node, ±root parametrizations, U^- ordering gives f_top, transport along h↦hv, annihilator argument). No cycle. No duplicates among about 13 related Dist/restricted/Steinberg nodes or in the blueprint. Batch-5: all 8 flagged citations of reductive-borel-pair-structure and root-subgroup-parametrizations are generic reductive-group structure theory; both nodes are already in the parent's closure without the item, and the closure diff is the item plus the 3 new nodes, so all are accepted. FIX (B2/B3): 'opposite Borel' was undefined in unipotent-frobenius-distribution-socle (last clause) and steinberg-top-distribution-recovery; it is now defined inline (B^-⊇T, B∩B^-=T) and the negative-root data are named. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SteinbergInfinitesimalInducedSimple",
+  "declaration": "AlgebraicGeometry.steinberg_infinitesimal_induced_simple",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SteinbergInfinitesimalInducedSimple.lean",
+  "statement": "theorem steinberg_infinitesimal_induced_simple {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (r : ℕ) (hr : 1 ≤ r) (S : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (g : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) → IsIso f) (T B U : Grp (Over (Spec (.of F)))) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (iU : U ⟶ B) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ n : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F n)) (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) [IsCommMonObj (StandardGroupSchemes.multiplicative F)] [ModObj T.X B.X] (hconj : γ[T.X,B.X] = (fst T.X B.X ≫ j.hom.hom) * snd T.X B.X * (fst T.X B.X ≫ j.hom.hom)⁻¹) (Φplus : Finset (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hΦplus : ∀ χ, χ ∈ Φplus ↔ χ ≠ 1 ∧ TorusCharacterTangent.weightSpace T B χ ≠ ⊥) (ρ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hρ : ρ ^ 2 = ∏ α ∈ Φplus, α) (ρB : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hρB : j ≫ ρB = ρ) (hρU : iU ≫ ρB = 1) (Sq Tq : Over (Spec (.of F))) (πS : Sq.left ⟶ S.X.left) (πT : Tq.left ⟶ T.X.left) (hSq : IsPullback πS Sq.hom S.X.hom (Spec.map (CommRingCat.ofHom (iterateFrobenius F p r)))) (hTq : IsPullback πT Tq.hom T.X.hom (Spec.map (CommRingCat.ofHom (iterateFrobenius F p r)))) (iTq : Tq ⟶ Sq) (hiTq : iTq.left ≫ πS = πT ≫ iT.hom.hom.left) (Fr : S.X ⟶ Sq) (hFr : ∀ c : Γ(S.X.left, ⊤), Fr.left.appTop (πS.appTop c) = c ^ (p ^ r)) (L P : Grp (Over (Spec (.of F)))) [IsAffine L.X.left] (iL : L ⟶ S) (tL : L.X ⟶ Tq) (hL : IsPullback tL iL.hom.hom iTq Fr) (iP : P ⟶ L) (pB : P ⟶ B) (hP : IsPullback pB.hom.hom iP.hom.hom iB.hom.hom iL.hom.hom) (Z : Submodule F (RhoSection.Coordinate L.X)) (hZ : Z = RhoSection.sectionModule L P iP (pB ≫ ρB) (p ^ r - 1)) : FiniteDimensional F Z ∧ ∃ c : Z →ₗ[F] Z ⊗[F] RationalHighestWeight.coordinateAlgebra L, HopfAction.Coassociative F (RationalHighestWeight.coordinateAlgebra L) Z c ∧ HopfAction.Counital F (RationalHighestWeight.coordinateAlgebra L) Z c ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (h x : StandardGroupSchemes.affine F A ⟶ L.X) (f : Z) (n : ℕ) (fi : Fin n → Z) (ai : Fin n → RationalHighestWeight.coordinateAlgebra L), c f = ∑ i, fi i ⊗ₜ[F] ai i → ∑ i, RhoSection.evaluate x (fi i).val * (Scheme.ΓSpecIso (.of A)).hom (h.left.appTop (ai i)) = RhoSection.evaluate (h⁻¹ * x) f.val) ∧ RationalHighestWeight.IsSimple c",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical twists and relative Frobenius are specified by cartesian base-change squares and the q-power normalization on regular functions; L and P by their scheme-theoretic pullbacks. The actual sectionModule has a coassociative counital simple coaction characterized by left translation on every algebra-valued point. Added six already landed definition nodes for the terminology used, without new definitions or a statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aeaf1f66",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item lean matches node clause by clause: semisimple + inline simply-connected hsc (same form as landed simplyConnected_character_lattice), split maximal torus, Borel, maximal unipotent radical, Φ⁺ via conjugation ModObj + weightSpace≠⊥, ρ²=∏Φ⁺, ρ̃ extending ρ trivial on U; S^(q)/T^(q) cartesian over Spec(iterateFrobenius) = C⊗_{F,a↦a^q}F; hFr + over-F pins F^r (c⊗a↦ac^q); L,P scheme pullbacks; Z = sectionModule L P iP (pB≫ρB) (p^r-1) = node's semi-invariants over all test algebras; conclusion FiniteDimensional ∧ ∃ c coassoc/counital pinned by Σfi(x)ai(h)=f(h⁻¹x) on all A-points ∧ IsSimple c (checked coassociativity convention by hand). Edge cases trivial group, p=2, r=1 covered; single universe. Only stmt_deps (+6 landed def owners) and lean changed; other used project notions reached transitively; no theorem stmt_dep; no duplicate notion; no hollow def; docstrings/proof plan OK; proof_dep imports correct. No recompile (no change)."
+ }
+}

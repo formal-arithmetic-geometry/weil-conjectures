@@ -1,0 +1,351 @@
+{
+ "id": "lem-pur-finite-diagonal-orientation-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of supported Kummer products and the diagonal orientation chain",
+ "statement": "Fix the finite-coefficient purity conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A=A_{E,n}$, $B=A_{E,m}$, $1\\le m\\le n$. All schemes are separated finite-type $k$-schemes. Work in the ordinary small pro-etale bounded constructible finite-Tor categories and put $Q_T=(-)\\otimes_A^LB$. Use the specified Tate twists [def-coefficient-twists-detailed], actual coefficient comparisons [def-pur-finite-reduction-comparisons], and their shifted-line and zero-section exceptional versions [def-pur-finite-affine-orientation-comparison].\n\nFor a zero section $s:S\\hookrightarrow\\mathbf A^1_S$, let $c_{s(S),R}:s_*R_S\\to R_{\\mathbf A^1_S}(1)[2]$, $R=A,B$, be the supported Cartier-Kummer map [lem-amb-cartier-kummer-map], and $o_{s,R}:R_S\\to Rs_R^!R_{\\mathbf A^1_S}(1)[2]$ its exceptional adjunct, the orientation of [thm-pur-affine-line-orientation]. Under the specified comparisons,\n$$Q_{\\mathbf A^1_S}(c_{s(S),A})=c_{s(S),B},\\qquad Q_S(o_{s,A})=o_{s,B}.$$\nFor every $r\\ge0$ and zero section $z:S\\hookrightarrow\\mathbf A^r_S$, the same reduction identity holds for the ordered $r$-fold supported product giving $\\mathrm{th}_{r,R}:R_S\\to Rz_R^!R_{\\mathbf A^r_S}(r)[2r]$ of [cor-pur-affine-space-zero-section-purity]; for $r=0$ this is the unit.\n\nLet $f:X\\to Y$ be smooth separated of pure relative dimension $d\\ge0$. Put $W=X\\times_YX$, with projections $p_1,p_2$ and diagonal $\\Delta:X\\hookrightarrow W$. Its normal bundle $N=N_{\\Delta/W}\\cong T_{X/Y}$ has rank $d$ [lem-pur-diagonal-regular-immersion, def-pur-normal-bundle]; write $\\pi:N\\to X$ and $z:X\\to N$. Set $\\omega_{f,R}=Rf_R^!R_Y$, $C_R(g,t)=Lt^*Rg_R^!R_{\\mathrm{base}(g)}$ [def-pur-section-invariant]. Let $a_R:\\omega_{f,R}\\xrightarrow{\\sim}C_R(p_1,\\Delta)$ be the inverse diagonal base-change identification [lem-pur-diagonal-base-change], $\\delta_R:C_R(p_1,\\Delta)\\xrightarrow{\\sim}C_R(\\pi,z)$ the normalized DNC comparison [thm-pur-dnc-invariance], and $v_R:C_R(\\pi,z)\\xrightarrow{\\sim}R_X(d)[2d]$ the zero-section restriction of the integration-normalized vector-bundle comparison [cor-pur-vector-bundle-purity]. The diagonal orientation is the specified map\n$$\\alpha_{f,R}=v_R\\delta_Ra_R:\\omega_{f,R}\\xrightarrow{\\sim}R_X(d)[2d]$$\nof [thm-pur-diagonal-dualizing-object], with its actual local assembly as in [lem-pur-diagonal-dnc-chart-normalization]. Denote the coefficient comparisons on $\\omega_f,C(p_1,\\Delta),C(\\pi,z),R_X(d)[2d]$ respectively by $q_\\omega,q_C,q_N,q_L$. Then\n$$q_CQ_X(a_A)=a_Bq_\\omega,\\qquad q_NQ_X(\\delta_A)=\\delta_Bq_C,\\qquad q_LQ_X(v_A)=v_Bq_N.$$\nConsequently $q_LQ_X(\\alpha_{f,A})=\\alpha_{f,B}q_\\omega$. All identities concern these normalized maps, including arbitrary ramification, identity reductions and relative dimension zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Steps 3-4: supported Kummer boundary and products, and normalized diagonal/base-change/DNC/vector-bundle chain; returned proof Steps 3-4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-finite-affine-orientation-comparison",
+  "lem-amb-cartier-kummer-map",
+  "thm-pur-affine-line-orientation",
+  "cor-pur-affine-space-zero-section-purity",
+  "lem-pur-diagonal-regular-immersion",
+  "def-pur-normal-bundle",
+  "def-pur-section-invariant",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "thm-pur-diagonal-dualizing-object",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "def-pur-finite-orientation-scalar-presentation",
+  "def-pur-finite-supported-reduction-equation",
+  "def-pur-finite-product-scalar-presentation",
+  "def-pur-finite-product-reduction-comparisons",
+  "def-pur-finite-diagonal-reduction-comparisons",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-dnc-coefficient-section-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-amb-cartier-kummer-map] to the effective Cartier divisor $s(S)$: the coordinate $t$ is a nonzerodivisor even when $S$ is nonreduced. Its coefficient-compatibility clause is the supported Ext equation with the actual scalar-extension units of [def-amb-proetale-supported-coefficient-reduction]. Those units send supported constants by $a\\mapsto\\bar a$ and root-limit tensors by $x\\otimes a\\mapsto x\\otimes\\bar a$. By their stated universal property, the Ext equation is exactly equality of the two $B$-linear derived adjuncts, namely $Q(c_{s(S),A})=c_{s(S),B}$ under the prescribed source and target comparisons. These are the coefficient-unit and shifted-line comparisons of [def-pur-finite-affine-orientation-comparison], not chosen trivializations. The Cartier theorem allows every positive uniformizer level and arbitrary ramification.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "def-amb-proetale-supported-coefficient-reduction",
+    "def-pur-finite-affine-orientation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 4, affine orientations; Step 3, reduction of the supported Kummer boundary"
+   }
+  },
+  {
+   "text": "For $s$, the last clause of [lem-pur-finite-adjoint-mate-compatibility] identifies the reduction of the exceptional transpose of a compact-support arrow with the transpose of its reduction. Apply it to $s_*A_S\\to A_{\\mathbf A^1_S}(1)[2]$ from Step 1. The resulting transpose is $o_{s,B}$, since [thm-pur-affine-line-orientation] and [def-pur-finite-affine-orientation-comparison] identify the affine orientation with this supported boundary's adjunct. Thus $Q_S(o_{s,A})=o_{s,B}$, including the coefficient-unit input comparison. The zero section is closed and all the schemes are separated finite type, so this is within the cited adjunction domain.",
+   "uses": [
+    "lem-pur-finite-adjoint-mate-compatibility",
+    "thm-pur-affine-line-orientation",
+    "def-pur-finite-affine-orientation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 4, Kummer orientation and exceptional adjunction"
+   }
+  },
+  {
+   "text": "Here is the scalar calculation for the supported product. In [def-pur-supported-cup] its source comparison is multiplication $\\theta_R:i_*R_Z\\otimes_R^Lj_*R_W\\simeq h_*R_{Z\\times_TW}$, and its shift comparison on $P[a]^u\\otimes Q[b]^v$ is multiplication by $(-1)^{bu}$. The same statement identifies each closed supported constant with a flat quotient of the constant coefficient sheaf. Consequently its scalar extension is the corresponding $B$-supported constant. On local sections both scalar/multiplication composites send $(x\\otimes y)\\otimes b$ to $\\bar x\\bar yb$; this proves the square for $\\theta$, and hence for its inverse. Scalar change preserves the displayed sign. The finite-reduction tensor/unit coherence of [lem-fix-operation-reduction] identifies the intervening tensor maps. The last map in [def-pur-supported-class-operations] is ordered Tate multiplication; its scalar square sends every root tensor with coefficient $a$ to that same root tensor with coefficient $\\bar a$, by the specified line and tensor-power comparisons [def-pur-finite-reduction-comparisons, def-coefficient-twists-detailed]. Thus reduction of the explicitly defined cup composite is the cup composite of the reductions.",
+   "uses": [
+    "def-pur-supported-cup",
+    "lem-fix-operation-reduction",
+    "def-pur-supported-class-operations",
+    "def-pur-finite-reduction-comparisons",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3, supported products and their coefficient maps"
+   }
+  },
+  {
+   "text": "Induct on the number $r$ of ordered coordinate divisors in $\\mathbf A^r_S$. The empty product is the coefficient unit, whose reduction is the unit by [def-pur-finite-reduction-comparisons]. For the successor product, regard the first $j$ factors and the $(j+1)$st factor as supported arrows on this same affine space. Each factor reduces by the Cartier theorem used in Step 1; Step 3 gives reduction of their cup product. This proves by induction equality of the ordered $r$-fold supported maps. The supports intersect in the scheme-theoretic zero section, since the sum of their coordinate ideals is $(t_1,\\ldots,t_r)$. By [cor-pur-affine-space-zero-section-purity] this is the supported product defining $\\mathrm{th}_{r,R}$ after exceptional transposition. The transpose clause of [lem-pur-finite-adjoint-mate-compatibility] therefore gives the claimed reduction identity for $\\mathrm{th}_r$. This argument also covers $r=0$ without a divisor or a Kummer class.",
+   "uses": [
+    "def-pur-finite-reduction-comparisons",
+    "lem-amb-cartier-kummer-map",
+    "cor-pur-affine-space-zero-section-purity",
+    "lem-pur-finite-adjoint-mate-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Steps 3-4, ordered products and the affine zero-section orientations"
+   }
+  },
+  {
+   "text": "Apply the separately stated inverse-alpha coefficient square [lem-pur-finite-diagonal-base-change-reduction] to the actual normalized base-change factor. This is the first conjunct of the diagonal theorem.",
+   "uses": [
+    "lem-pur-finite-diagonal-base-change-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3, coefficient compatibility of the diagonal base-change constituent"
+   }
+  },
+  {
+   "text": "The separate theorem [lem-pur-finite-diagonal-dnc-reduction] records the coefficient squares for centred source and normal coordinates and the resulting normalized DNC equality. Its proof compares the exceptional mates and the coefficient-independent normal frame in every chart.",
+   "uses": [
+    "lem-pur-finite-diagonal-dnc-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3, actual etale coordinates for the normalized DNC comparison"
+   }
+  },
+  {
+   "text": "Use [lem-pur-finite-diagonal-dnc-reduction] to obtain the second conjunct, the delta coefficient square. Coordinate-normalized uniqueness and locality are contained in that genuinely separate DNC step.",
+   "uses": [
+    "lem-pur-finite-diagonal-dnc-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3, normalization and uniqueness of the DNC gluing"
+   }
+  },
+  {
+   "text": "Obtain the generator-normalized coefficient-line comparison e and the vector-factor square from [lem-pur-finite-diagonal-vector-reduction]. This gives the third conjunct and fixes the same e that will be used for the composite square.",
+   "uses": [
+    "lem-pur-finite-diagonal-vector-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Steps 3-4, integration-normalized vector-bundle constituent and its actual finite coefficient map"
+   }
+  },
+  {
+   "text": "Use [lem-pur-finite-diagonal-orientation-assembly] at each coefficient stage to write the actual orientation as inverse alpha, then delta, then the vector factor. A functor maps this composite to the composite of the images. Compose the three squares furnished by [lem-pur-finite-diagonal-base-change-reduction], [lem-pur-finite-diagonal-dnc-reduction] and [lem-pur-finite-diagonal-vector-reduction]; associativity yields the required last equality. This is a direct Lean calculation. Assembly is coefficient-independent and applies globally, including empty schemes and dimension zero. All comparisons remain the specified maps, including identity reductions.",
+   "uses": [
+    "lem-pur-finite-diagonal-orientation-assembly",
+    "lem-pur-finite-diagonal-base-change-reduction",
+    "lem-pur-finite-diagonal-dnc-reduction",
+    "lem-pur-finite-diagonal-vector-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3, composite orientation; Step 4, identity reductions and dimension-zero normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-pur-affine-space-zero-section-purity",
+  "def-amb-proetale-supported-coefficient-reduction",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-affine-orientation-comparison",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-cup",
+  "lem-amb-cartier-kummer-map",
+  "lem-fix-operation-reduction",
+  "lem-pur-finite-adjoint-mate-compatibility",
+  "lem-pur-finite-diagonal-base-change-reduction",
+  "lem-pur-finite-diagonal-dnc-reduction",
+  "lem-pur-finite-diagonal-orientation-assembly",
+  "lem-pur-finite-diagonal-vector-reduction",
+  "thm-pur-affine-line-orientation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 3-4, with explicit supported-product, mate and DNC-normalization calculations; F1 decomposes diagonal compatibility into its three constituent squares and the coefficient-independent global assembly, combined by functoriality and associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Kummer|dnc|deformationToNormal|diagonalOrientation",
+   "results": "0 hits: ; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "diagonal dualizing orientation commutes with quotient coefficients Kummer supported class",
+   "results": "8 hits: Submodule.dualCopairing_eq, Submodule.dualQuotEquivDualAnnihilator, Submodule.quotDualCoannihilatorToDual_apply, KummerDedekind.quotMapEquivQuotQuotMap.congr_simp, Subspace.dualQuotDistrib, FractionalIdeal.dual_div_dual, Submodule.dualCopairing_apply, Subspace.quotDualCoannihilatorToDual_bijective; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "8 hits: KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient reduction of supported Kummer affine orientation and normalized diagonal deformation to normal bundle",
+   "results": "8 hits: WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis, WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq, WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.exists_variableChange_isShortNF, WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq, AlgebraicGeometry.AffineSpace.reindex; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|normalBundle|supported.*boundary|purity",
+   "results": "0 hits: ; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\", \"map\"",
+   "results": "0 hits: ; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "change of rings preserves normal bundle specialization orientation of smooth morphism diagonal dualizing complex",
+   "results": "8 hits: RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.specializingMap_respectsIso, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|diagonalOrientation|deformationToNormal",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean; read returned results: no supported Kummer or DNC coefficient-compatibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived coefficient change preserves supported Kummer class and smooth diagonal purity orientation",
+   "results": "8 hits: Algebra.Smooth.baseChange, CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, WeierstrassCurve.variableChange_b₄, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, WeierstrassCurve.variableChange_a₄, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, Derivation.mapCoeffs_apply; read returned results: no supported Kummer or DNC coefficient-compatibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient reduction of supported Kummer cup products and diagonal DNC orientation",
+   "results": "8 hits: RootPairing.chainBotCoeff_mul_chainTopCoeff, ClassGroup.finsetApprox, groupCohomology.Hilbert90.aux, ClassGroup.mem_finsetApprox, RootPairing.chainCoeff_chainTopIdx_aux, RootPairing.chainBotCoeff_sub_chainTopCoeff, RootPairing.chainTopCoeff_sub_chainBotCoeff, RootPairing.chainBotCoeff_add_chainTopCoeff_eq_pairingIn_chainTopIdx; read returned results: no supported Kummer or DNC coefficient-compatibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|supported.*[Kk]ummer|deformation.*normal|[Tt]hom",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean; read returned results: no supported Kummer or DNC coefficient-compatibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "change of coefficients commutes with normalized fundamental class of zero section and deformation to normal cone purity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc; read returned results: no supported Kummer or DNC coefficient-compatibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-finite-reduction-of-purity",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Steps 3-4: supported Kummer boundary and products, and normalized diagonal/base-change/DNC/vector-bundle chain; returned proof Steps 3-4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-diagonal-orientation-reduction",
+  "worker": "stage1",
+  "summary": "Q19 retains the statement and splits its supported Kummer, product, and actual normalized diagonal-chain equalities into nine steps using existing nodes only. Scalar-extension units, exceptional transposes, chart squares and DNC uniqueness are explicit. No stalkwise equality argument, flat quotient hypothesis, SGA route, or replacement orientation is used.",
+  "blueprint": "thm-pur-finite-reduction-of-purity proof Steps 3-4: supported boundary/products and the diagonal base-change/DNC/vector-bundle normalization chain.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coherence of the actual scalar comparisons with pullback, tensor, units and counits; it does not replace a geometric purity step."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "The supported Cartier boundary coefficient law is the existing smaller input to the unit's Kummer-orientation reduction step."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic normalization of the actual site transport of vector-bundle integration and its exceptional adjunct."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Generic interchange of site comparison with coefficient-counit maps, needed to keep the ordinary-etale bundle formula and intrinsic pro-etale maps identical."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-operation-reduction",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-171315f74",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-171315f74 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and every cited statement in full, against blueprint thm-pur-finite-reduction-of-purity.proof.md Steps 3-4 (main-20261015). There are no new nodes. Statement and stmt_deps are identical to the Q72 delivery that created the node; there is no repair note and the live node is unsplit. review_split passes. Steps 1-6 and 8-9 are sound. Step 1: lem-amb-cartier-kummer-map's reduction clause is the def-amb-proetale-supported-coefficient-reduction Ext equation, and transposing it through the two scalar-unit bijections gives Q(c_A)=c_B. Step 2 uses the last (transpose) clause of mate-compatibility for the closed zero section. Step 3: the closed constants are flat in degree 0, so the cup square can be checked on sections; the sign (-1)^{bu} is unchanged. Step 4 is a real induction with the unit as base, using cor-pur-affine-space-zero-section-purity. Step 5 uses the base-change clause on the actual square (p_2 on top, p_1 on the left); I checked the inversion. Step 6 builds the chart squares from the exceptional exchanges and the coefficient-free map [y(a)-x(a)]->da. Step 8 handles the etale-to-pro-etale gap with lem-pur-vector-integration-site-comparison and lem-sp-et-proet-coefficient-compatibility; I checked the inversion b·Q(gamma_A)=gamma_B·a. Step 9 is composition, with the n=m case from adjoint-comparisons. Edge cases checked: r=0, d=0, m=n, nonreduced S, ramified E with m<=e, and no flatness of B over A. Repair (E5): Step 7 used thm-pur-dnc-invariance's uniqueness after checking the conjugated map only in the chart-normalization charts. I added that the Step 6 argument applies in every etale coordinate chart, with the middle identity coming from the normalization of delta_A at level A. Batch-5 flag: the three flagged cites reach lem-trf-site-functorial-flat-resolution only through det-sp-scalar-extension-functor. That node is generic homological algebra (functorial flat resolutions of module sheaves), not part of the trace formula or Poincare duality. It is already in the statement closure, and adding the proof adds 0 trf/pd nodes, so I accept the flag. I accept all four tool uses. No duplicates: lem-pur-finite-smooth-adjunction-general-base (Z/l^n, etale chain) is an overlap only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDiagonalOrientationReduction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.diagonalOrientationReduction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.supportedKummerReduction",
+   "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.affineOrientationReduction",
+   "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.supportedProductsReduction",
+   "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.supportedProductsUnit",
+   "WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction.diagonalOrientationReduction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDiagonalOrientationReduction.lean",
+  "statement": "theorem diagonalOrientationReduction : ∃ e : CoefficientLineComparison (quotient P m hm hmn) P.diagonalExponent (P.finiteReductionSetting m hm).diagonalExponent P.diagonalExponent_annihilates (P.finiteReductionSetting m hm).diagonalExponent_annihilates X, (proScalar (quotient P m hm hmn) X).map (P.chartDiagonalAlpha d f aY).inv ≫ diagonalSectionMap P m hm hmn d f aY = omegaMap P m hm hmn f aY ≫ ((P.finiteReductionSetting m hm).chartDiagonalAlpha d f aY).inv ∧ (proScalar (quotient P m hm hmn) X).map (P.chartDiagonalDelta d f aY).hom ≫ normalSectionMap P m hm hmn d f aY = diagonalSectionMap P m hm hmn d f aY ≫ ((P.finiteReductionSetting m hm).chartDiagonalDelta d f aY).hom ∧ (proScalar (quotient P m hm hmn) X).map (vectorFactor P d f aY).hom ≫ proTwistMap d e = normalSectionMap P m hm hmn d f aY ≫ (vectorFactor (P.finiteReductionSetting m hm) d f aY).hom ∧ (proScalar (quotient P m hm hmn) X).map (P.diagonalDualizingObject d f aY).hom ≫ proTwistMap d e = omegaMap P m hm hmn f aY ≫ ((P.finiteReductionSetting m hm).diagonalDualizingObject d f aY).hom",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Statement suite: supported Cartier reduction with actual scalar units; finite affine adjunct; ordered supported products and Thom adjuncts; empty-product unit; all three normalized diagonal factor squares and the specified composite. The fixed-scalar categories are the canonical presentations of the intrinsic ordinary small pro-etale categories. Positive predecessor indices cover all uniformizer levels."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7acaf3e89",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 074e (H2). The diff shows the six Lean modules and all signatures are unchanged. The item and def-pur-finite-diagonal-reduction-comparisons swap the stmt_dep lem-pur-dnc-coefficient-transport for the new existing:true def-pur-dnc-coefficient-section-maps, which owns DncCoefficientTransport.dualizingMap/sectionMap. The node text matches the Lean bodies: mateMap then G_B(unitIso); scalarPullbackIso.inv then Ls_B^*(c_g). The signature is verbatim. Its def stmt_deps own mateMap, unitIso, scalarPullbackIso and upperStar; thm-amb-etale-exceptional-adjoint is cited for its IsLeftAdjoint conclusion, which is legitimate. The text citation is updated. No other owner exists. The four-clause diagonal statement, the pinned ∃ e, and the r=0, d=0 and m=n cases were re-read and are fine. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T201817-L-2621907",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

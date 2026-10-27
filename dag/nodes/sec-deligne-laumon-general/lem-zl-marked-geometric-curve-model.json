@@ -1,0 +1,136 @@
+{
+ "id": "lem-zl-marked-geometric-curve-model",
+ "kind": "statement",
+ "title": "Marked finite-field curve model in the source closure conventions",
+ "statement": "Let $k_0$ be a finite field, $\\ell$ a prime invertible in $k_0$, and $X/k_0$ an affine finite-type scheme. Write $\\bar X=X\\times_{k_0}\\overline{k_0}$ [def-pc-base-change]. Let $v:D\\hookrightarrow\\bar X$ be a closed immersion [def-weil-closed-immersion], with $D$ affine, connected and smooth of relative dimension one over $\\overline{k_0}$ [def-sbc-smooth-morphisms]. Let $x,y$ be finite points of $X$ and $s_x,s_y:\\operatorname{Spec}\\overline{k_0}\\to D$ whose composites with $v$ are their canonical geometric lifts [def-weil-local-frobenius-trace]. There exist a finite extension $k_1/k_0$ with $\\ell$ invertible in $k_1$, an integer $r>0$ with $|k_1|=|k_0|^r$, and an affine, separated, smooth, geometrically connected finite-type curve $C/k_1$. There are $c:C\\to X$ compatible with the structure morphisms, a field isomorphism $\\tau:\\overline{k_0}\\simeq\\overline{k_1}$ compatible with $k_0$, an isomorphism $z:D\\simeq\\bar C$, and $u:\\bar C\\to\\bar X$ with $u\\circ z=v$. The two projection squares for $u$ commute with $c$ and $\\operatorname{Spec}\\tau$, and $u\\circ\\operatorname{Fr}_C=\\operatorname{Fr}_X^r\\circ u$. There are finite points $s,t$ of $C$ with $c(s)=x$ and $c(t)=y$. No Weil sheaf or local representation is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness and connectedness give irreducibility via regular local rings. Relative dimension one gives pure dimension one. Apply the existing finite-field model theorem to this prescribed curve and immersion.",
+   "uses": [
+    "lem-zl-geometric-closed-curve-smooth-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Use the model subfield and its specified embedding in kbar0. Its cardinality is the r-th power of the base cardinality. Identify its chosen closure with kbar0, construct u from its two projections, and compare the Frobenius powers by the finite-field cardinality relation. The closed images supplied universally by the model theorem give both marked finite points. This is implemented in Lean from the existing model theorem.",
+   "uses": [
+    "lem-zl-geometric-closed-curve-smooth-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-geometric-closed-curve-smooth-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected closed affine curve over an algebraic closure has a finite field model with marked points",
+   "results": "8 Weierstrass-curve, smooth-morphism and algebraic-closure hits; no general curve model theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine closed curve over an algebraic closure of a finite field descends to a finite extension",
+   "results": "8 hits about ordinary module sheaf pullbacks or Weierstrass curves; none about the source Weil category.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "poweredGeometricPullback|exists_marked_geometric_curve_model|WeilSheaf",
+   "results": "0 Mathlib hits through msearch.py.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.GeometricCurveDiagramDescent",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+   "via": [
+    "lem-zl-geometric-curve-diagram-descent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.MarkedGeometricCurveModel",
+  "file": "lean/Sheaf/DeligneLaumon/MarkedGeometricCurveModel.lean",
+  "declaration": "AlgebraicGeometry.exists_marked_geometric_curve_model",
+  "statement": "theorem exists_marked_geometric_curve_model\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (.of k₀))] [IsAffine X]\n    [LocallyOfFiniteType (X ↘ Spec (.of k₀))]\n    [QuasiCompact (X ↘ Spec (.of k₀))]\n    (x y : X.finitePoints) (D : Scheme.{u})\n    (v : D ⟶ (X ↘ Spec (.of k₀)).geometricFiber)\n    [IsClosedImmersion v] [IsAffine D]\n    [SmoothOfRelativeDimension 1\n      (v ≫ (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure)]\n    [ConnectedSpace D]\n    (sx sy : Spec (.of (AlgebraicClosure k₀)) ⟶ D)\n    (hsx : sx ≫ v = (X ↘ Spec (.of k₀)).geometricFiberPointOfFinitePoint x)\n    (hsy : sy ≫ v = (X ↘ Spec (.of k₀)).geometricFiberPointOfFinitePoint y) :\n    Nonempty (MarkedGeometricCurveModel l x y D v)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.MarkedGeometricCurveModel",
+   "AlgebraicGeometry.exists_marked_geometric_curve_model"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T001517-L-4755",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T001517-L-4755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

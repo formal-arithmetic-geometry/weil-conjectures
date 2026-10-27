@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-affine-comparison-pullback",
+ "kind": "statement",
+ "title": "Canonical affine coherent comparison and structural pullback",
+ "statement": "Let f:X→S be quasi-compact and separated, G quasi-coherent, V,V′ affine etale over S and h:V′→V. Put b=affineRealizationChartMap f h:V′×_S X→V×_S X and psi=affineRealizationCoefficientMap f G h, the constructed induced map and tensor-composition coefficient morphism [def-weil-pbc-affine-pullback-coefficient-map]. Use HasQcoherentPullbackSectionFormula to retain exactly the universal section equation, and coherentEtalePullbackMap for exactly cohomologyMap followed by the adjunct coefficient H.map [def-weil-pbc-coherent-etale-pullback-data]. There exists theta from the lifted tensor pullback coefficient on V×_S X to b_* of the coefficient on V′×_S X, with section formula qcoherentPullbackSection for tensorSectionsComp followed by b.w [lem-weil-pbc-qcoherent-pullback-sections-map]. For every Ext cohomology class x, apply cohomologyMap(b), then H.map of the adjoint of theta, then affineRealizationAffineComparison at V′. The result equals affineRealizationRestriction of affineRealizationAffineComparison at V applied to x [def-weil-pbc-affine-cohomology-comparison-data]. This is the ordinary-cohomology square, with no raw derived-Hom class or raw evaluation.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD, coherent comparison and module/abelian cohomology; Tag 01FD, Cech refinement. Canonical affine specialization of the existing normalized comparison pullback square."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-affine-pullback-coefficient-map",
+  "def-weil-pbc-coherent-etale-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The base changes of f over the affine charts are compact and separated. Use affineNormalizedComparisonFamily on these two actual fibre-product schemes. Its normalization theorem supplies the hypotheses of qcoherentNormalizedComparison_pullback_square. Apply the normalized square with affineRealizationChartMap and affineRealizationCoefficientMap. The private generic transport lemma specializes its all-degrees conclusion to q and composes pointwise comparison and restriction equalities. Identify each affineRealizationAffineComparison first with affineRealizationComparison by the existing affine specialization equation, and then with the inverse named family. Identify the ordinary map by affineRealizationRestriction_apply. These equalities produce the required section formula and cohomology square. The named constructions are exactly the original base-change arrow, normalized tensor composition, equality transport and uniquely normalized comparison; no hypothesis or conclusion changes. Empty schemes, zero modules, identities and q=0 remain covered. The proposition structure stores exactly the full section formula. Its constructor and the pullback-map evaluation equation turn the generic square into the named statement without changing any section or cohomology class.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "def-weil-pbc-affine-cohomology-comparison-data",
+    "def-weil-pbc-affine-normalized-comparison-family",
+    "lem-weil-pbc-affine-restriction-equation",
+    "lem-weil-pbc-affine-comparison-chosen-equality",
+    "def-weil-pbc-coherent-etale-pullback-data",
+    "def-weil-pbc-affine-pullback-coefficient-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcoherent-normalized-pullback-square",
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "def-weil-pbc-affine-normalized-comparison-family",
+  "lem-weil-pbc-affine-restriction-equation",
+  "lem-weil-pbc-affine-comparison-chosen-equality",
+  "def-weil-pbc-coherent-etale-pullback-data",
+  "def-weil-pbc-affine-pullback-coefficient-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD, coherent comparison and module/abelian cohomology; Tag 01FD, Cech refinement. Canonical affine specialization of the existing normalized comparison pullback square. A4: specialize through named typed maps and the uniquely normalized family."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized coherent etale cohomology comparison commutes with pullback between affine charts",
+   "results": "8 hits, open-cover pullback affine refinement and normalization morphism equations; none is a cohomology comparison square.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "12 hits, H.map identity, composition, degree-zero naturality and standard functor equations; none uses the canonical project comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "qcoherentNormalizedComparison_pullback_square|affineRealizationAffineComparison_eq",
+   "results": "0 Mathlib hits. Local search read QcoherentNormalizedPullbackSquare and AffineCohomologyComparisonData: the arbitrary-family theorem and definitional equality exist, but their canonical affine specialization is not stated.",
+   "date": "2026-10-25",
+   "verdict": "Existing theorem gives the mathematics; canonical conversion glue remains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCohomologyRawRestriction",
+  "date": "2026-10-25",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "03Q8 affine coherent realization: canonical specialization of normalized ordinary-cohomology square.",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-raw-restriction",
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison_pullback",
+  "statement": "theorem affineRealizationComparison_pullback {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] (G : X.Modules) [G.IsQuasicoherent]\n    (q : ℕ) (V V' : S.Etale) [IsAffine V.left] [IsAffine V'.left] (h : V' ⟶ V) :\n    ∃ θ : liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V) ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1} (affineRealizationChartMap f h)).obj\n        (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V')),\n      HasQcoherentPullbackSectionFormula (affineRealizationChartMap f h)\n        (affineRealizationCoefficient f G V) (affineRealizationCoefficient f G V')\n        (affineRealizationCoefficientMap f G h) θ ∧\n      ∀ x : Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q,\n        affineRealizationAffineComparison f G q V'\n          (coherentEtalePullbackMap (affineRealizationChartMap f h)\n            (affineRealizationCoefficient f G V) (affineRealizationCoefficient f G V') θ q x) =\n          affineRealizationRestriction f G q h\n            (affineRealizationAffineComparison f G q V x)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T164444-L-1018028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "A4 stage 2",
+  "old_statement": "Let f:X→S be quasi-compact and separated, G quasi-coherent, V,V′ affine etale over S and h:V′→V. Put b:V′×_S X→V×_S X. There exists theta from the lifted tensor pullback coefficient on V×_S X to b_* of the coefficient on V′×_S X, with section formula qcoherentPullbackSection for tensorSectionsComp followed by b.w [lem-weil-pbc-qcoherent-pullback-sections-map]. For every Ext cohomology class x, apply cohomologyMap(b), then H.map of the adjoint of theta, then affineRealizationAffineComparison at V′. The result equals affineRealizationRestriction of affineRealizationAffineComparison at V applied to x [def-weil-pbc-affine-cohomology-comparison-data]. This is the ordinary-cohomology square, with no raw derived-Hom class or raw evaluation.",
+  "what": "Name the induced arrow with its actual fibre-product source and target and the same tensor-composition coefficient morphism. Package the unchanged universal section formula as a proposition structure and the unchanged cohomology composite as a constructed function with its evaluation equation. The old comma-category-inferred arrow causes quasi-coherence synthesis failures with respectTransparency enabled; the explicitly typed statement compiles. All original hypotheses, all etale objects and sections, and every cohomology class remain quantified. This is an equivalent interface, not a weakened square.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+   "place": "Tags 03P2 and 03FD, coherent comparison and module/abelian cohomology; Tag 01FD, Cech refinement. Canonical affine specialization of the existing normalized comparison pullback square."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-affine-cohomology-raw-restriction",
+    "holds": true,
+    "note": "The comparison square, coefficient section formula, all hypotheses and conclusion are mathematically identical. The sole Lean consumer is checked with the named typed maps."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-affine-cohomology-comparison-data",
+   "lem-weil-pbc-qcoherent-pullback-sections-map"
+  ],
+  "old_proof": [
+   {
+    "text": "Put Y=V times_S X and Y'=V' times_S X, with induced etale map b.\nBase change of quasi-compactness makes Y and Y' compact over the affine charts.\nSeparatedness over an affine scheme gives absolute separatedness of each.\nLet c and c' be the uniquely normalized comparison families chosen in\nexists_unique_qcoherentNormalizedComparison. The definitions of\naffineRealizationComparison and affineRealizationAffineComparison use exactly\nthese families. Take psi to be tensorSectionsComp(b,pullback.snd) followed by\nthe transport along b.w. Apply qcoherentNormalizedComparison_pullback_square\nto c,c', their normalization properties, and psi. It supplies theta and exactly\nthe section formula in the statement. Its equation holds for every Ext class x.\nRewrite the affine comparisons using affineRealizationAffineComparison_eq;\nunfold affineRealizationComparison to identify them with c.symm and c'.symm.\nUnfold affineRealizationRestriction: its chosen tensor adjunction and psi are\nprecisely those in the ordinary map of the square. Substitute these equalities.\nNo raw comparison or Ext-to-derived evaluation is used. Empty charts, zero\ncoefficients and degree zero are covered by the same equations.",
+    "uses": [
+     "lem-weil-pbc-qcoherent-normalized-pullback-square",
+     "def-weil-pbc-affine-cohomology-comparison-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-qcoherent-normalized-pullback-square",
+   "def-weil-pbc-affine-cohomology-comparison-data"
+  ]
+ }
+}

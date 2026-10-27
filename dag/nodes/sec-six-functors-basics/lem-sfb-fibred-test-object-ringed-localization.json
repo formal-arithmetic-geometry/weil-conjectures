@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-fibred-test-object-ringed-localization",
+ "kind": "statement",
+ "title": "Localization of a fibred ringed site at a scheme test object",
+ "statement": "Work in the universes and small-site convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $p:\\mathcal C\\to\\mathit{Sch}/S$ a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids]. For $\\tau\\in\\{\\mathrm{et},\\mathrm{fppf}\\}$ give $\\mathcal C$ the topology whose coverings lie over jointly surjective scheme coverings for $\\tau$, and the structure sheaf $\\mathcal O_{\\mathcal C}(z)=\\Gamma(T,\\mathcal O_T)$ for $z$ over $T$ [def-sfb-stack-quasi-coherent-algebra]; in the etale case the scheme maps are etale [def-weil-etale-morphism], and in the fppf case use [def-pc-fppf-site]. Let $x\\in\\mathcal C$ lie over $U$. The functor $p_x:\\mathcal C/x\\to\\mathit{Sch}/U$ sends an arrow $z\\to x$ to its underlying scheme map $T\\to U$. With the localized topology and restricted ring sheaf [def-pur-localized-ringed-site], this is an equivalence of ringed sites\n$$ (\\mathcal C_\\tau/x,\\mathcal O_{\\mathcal C}|_x)\\simeq((\\mathit{Sch}/U)_\\tau,\\mathcal O). $$\nThe equivalence sends the terminal object $\\mathrm{id}_x$ to $\\mathrm{id}_U$ and identifies the value of both ring sheaves on an object over $T$ with $\\Gamma(T,\\mathcal O_T)$. For every module sheaf $M$ [def-weil-sheaf-of-modules-category], the localized module $M|_x$ corresponds to the module $x^{-1}M$ on $(\\mathit{Sch}/U)_\\tau$ obtained by evaluating $M$ on cartesian lifts of schemes over $U$, with the original restriction maps. These identifications are compatible with further restriction along arrows $x'\\to x$. No algebraicity, representability, quasi-coherence or flatness hypothesis on $\\mathcal C$ or $M$ is required.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06W0 (lemma-localizing), 06W9 (lemma-localizing-structure-sheaf), and definition-pullback immediately following 06W0."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For arrows $a:z\\to x$ and $b:w\\to x$, a morphism $a\\to b$ in the slice is a map $c:z\\to w$ with $bc=a$. For each scheme map $v:p(z)\\to p(w)$ satisfying $p(b)v=p(a)$, the unique-factorization clause of [def-sfb-stable-pointed-moduli-groupoids] gives exactly one such $c$ over $v$. Thus $p_x$ gives a bijection on every Hom set. In particular, two lifts of the same $T\\to U$ have unique maps in both directions over $\\mathrm{id}_T$; their composites are identities by the same uniqueness. This proves full faithfulness and the unique compatible isomorphism between any two choices of lift.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CN0, lemma-localizing, proof; Categories Tag 003T, definition-fibred-groupoids"
+   }
+  },
+  {
+   "text": "For every $u:T\\to U$, lift $u$ to $q_u:u^*x\\to x$ by [def-sfb-stable-pointed-moduli-groupoids]. Choose these lifts in the small universes of [def-weil-size-convention], with $q_{\\mathrm{id}_U}=\\mathrm{id}_x$. Send a map $v:(T,u)\\to(T',u')$ to the unique map $c_v:u^*x\\to(u')^*x$ over $v$ satisfying $q_{u'}c_v=q_u$. The uniqueness in step 1 gives $c_{\\mathrm{id}}=\\mathrm{id}$ and $c_{v'v}=c_{v'}c_v$, so this is a functor $Q_x$. We have $p_xQ_x=\\mathrm{id}$; the unique slice isomorphisms of step 1 give $Q_xp_x\\cong\\mathrm{id}$, natural because the two maps in each naturality square have the same base map and composite to $x$. Hence $p_x$ is an equivalence, and it sends $\\mathrm{id}_x$ to $\\mathrm{id}_U$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CN0, lemma-localizing, proof (equivalence of categories)"
+   }
+  },
+  {
+   "text": "By [def-pur-localized-ringed-site], a family in $\\mathcal C/x$ covers precisely when its underlying family in $\\mathcal C$ covers. By the topology in the hypothesis this means precisely that its image under $p_x$ is a jointly surjective $\\tau$-family of schemes over $U$. Conversely $Q_x$ lifts any such family and keeps exactly its underlying scheme maps, so the lifted family covers. The same argument applies with any target $a:z\\to x$, not just $\\mathrm{id}_x$. Thus both quasi-inverse functors preserve coverings, which is the asserted equivalence of sites. No stack descent or algebraicity is used.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CN0, lemma-localizing, proof (inherited topology); stacks-sheaves.tex Tag 06W0, lemma-localizing"
+   }
+  },
+  {
+   "text": "At $a:z\\to x$ over $T\\to U$, the restricted ring sheaf has value $\\mathcal O_{\\mathcal C}(z)=\\Gamma(T,\\mathcal O_T)$ by [def-pur-localized-ringed-site] and [def-sfb-stack-quasi-coherent-algebra]. This is exactly the value of $\\mathcal O$ on $T/U$. An arrow over $v:T\\to T'$ acts on both rings by the same regular-function pullback $v^*$. The identity on these rings therefore gives an isomorphism of ring sheaves under $p_x$, with inverse also the identity. Together with step 3 this is the equivalence of ringed sites in the statement.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06W9, lemma-localizing-structure-sheaf, proof"
+   }
+  },
+  {
+   "text": "Put $N=M|_x$. By [def-pur-localized-ringed-site] its value at $a:z\\to x$ is $M(z)$. Precomposing $N$ with $Q_x$ gives the presheaf $G(T\\xrightarrow{u}U)=M(u^*x)$, with restriction $M(c_v)$ along $v$. By [def-weil-sheaf-of-modules-category] this is a module over $\\Gamma(T,\\mathcal O_T)$ and the maps $M(c_v)$ are semilinear over $v^*$, as required. The ring identification of step 4 changes no action or restriction. This is exactly the meaning of $x^{-1}M$ in definition-pullback following Tag 06W0: the restriction to $\\mathcal C/x$ viewed through its equivalence with schemes over $U$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06W0 and definition-pullback; paragraph after Tag 06W9"
+   }
+  },
+  {
+   "text": "The presheaf $G$ in step 5 is a sheaf: for a covering in $\\mathit{Sch}/U$, step 3 gives the corresponding covering under $Q_x$. Its overlap objects correspond too, since a map to a fibre product is a pair of maps with equal composites, and the Hom bijections of step 1 identify exactly these pairs in the two categories. The sheaf equalizer diagram in [def-weil-pbc-sites-and-cohomology] for $G$ is therefore the sheaf equalizer diagram for $N$ on that lifted covering. Precomposition with $p_x$ works in the reverse direction by the identical argument. The isomorphisms of step 2, evaluated by these sheaves, are inverse natural module isomorphisms; module morphisms are transported componentwise. Consequently the ringed-site equivalence indeed gives the stated correspondence of module sheaves, independently up to canonical isomorphism of the lift choices.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Definition-pullback following Tag 06W0; paragraph after Tag 06W9 (expanded sheaf check)"
+   }
+  },
+  {
+   "text": "Let $a:x'\\to x$ lie over $f:U'\\to U$. The functors sending $(z\\xrightarrow{b}x')$ to $(z\\xrightarrow{ab}x)$ and $(T\\xrightarrow{u}U')$ to $(T\\xrightarrow{fu}U)$ form a strictly commuting square with $p_{x'}$ and $p_x$. On rings both routes give $\\Gamma(T,\\mathcal O_T)$ and on modules both give $M(z)$ with the original maps, by [def-pur-localized-ringed-site]. More explicitly, if $q'_u:u^*x'\\to x'$ and $q_{fu}:(fu)^*x\\to x$ are independently chosen lifts, step 1 gives a unique isomorphism $h:u^*x'\\to(fu)^*x$ over $\\mathrm{id}_T$ with $q_{fu}h=aq'_u$. The component $M(h)$ identifies $M((fu)^*x)$ with $M(u^*x')$. Naturality and the identity/composition compatibilities hold because both candidate arrows over each base map have equal composite to $x$, so are equal by the unique-factorization clause of [def-sfb-stable-pointed-moduli-groupoids]. This proves the claimed compatibility with further restriction, without imposing a cartesian condition on $M$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Definition-pullback after Tag 06W0, and restriction of modules after Tag 06W9; relocalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06W0 and 06W9 and definition-pullback; 06W0 refers to stacks.tex Tag 0CN0, lemma-localizing, whose definition-level proof is expanded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a category fibred in groupoids on schemes the slice over an object lying over U is equivalent as a ringed site to schemes over U",
+   "results": "{\"t\": \"2026-10-23T20:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a category fibred in groupoids on schemes the slice over an object lying over U is equivalent as a ringed site to schemes over U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.overGrothendieckTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"CategoryTheory.instIsDenseSubsiteOverLeftDiscretePUnitOverInverseIteratedSliceEquiv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget\"], \"digest\": \"dc11571515b31294\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the ringed site of a category fibered in groupoids over schemes at an object is equivalent to the big ringed site of its base scheme",
+   "results": "{\"t\": \"2026-10-23T20:00:39Z\", \"tool\": \"leansearch\", \"query\": \"Localization of the ringed site of a category fibered in groupoids over schemes at an object is equivalent to the big ringed site of its base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkToFiberRingHom_assoc\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\", \"AlgebraicGeometry.Spec_toLocallyRingedSpace\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkToFiberRingHom\", \"AlgebraicGeometry.Scheme.residueField\"], \"digest\": \"9d879ee083b0a0f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fibered\", \"Over\"",
+   "results": "{\"t\": \"2026-10-23T20:00:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fibered\\\", \\\"Over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.equifibered\", \"CategoryTheory.NatTrans.instIsClosedUnderLimitsOfShapeOverFunctorEquifiberedHomOfHasCoproductsOfShapeHom\"], \"digest\": \"867bc93cc922a927\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]ib[er]*red|[Ff]ib[er]*ration",
+   "results": "{\"t\": \"2026-10-23T20:00:39Z\", \"tool\": \"grep\", \"query\": \"[Ff]ib[er]*red|[Ff]ib[er]*ration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"ab7d257c3660f975\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The slice category of a groupoid fibration over a chosen object is equivalent to the slice of the base category and identifies the structure sheaves",
+   "results": "{\"t\": \"2026-10-23T20:00:41Z\", \"tool\": \"leanfinder\", \"query\": \"The slice category of a groupoid fibration over a chosen object is equivalent to the slice of the base category and identifies the structure sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.postEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Over.instIsEquivalenceObjPost\", \"CategoryTheory.groupoidOfElements\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.instIsDenseSubsiteOverLeftDiscretePUnitOverInverseIteratedSliceEquiv\"], \"digest\": \"b4b28e14ed972e80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]ver|[Ee]quivalence|[Gg]roupoid",
+   "results": "{\"t\": \"2026-10-23T20:01:14Z\", \"tool\": \"grep\", \"query\": \"[Oo]ver|[Ee]quivalence|[Gg]roupoid\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\"], \"digest\": \"37b4825b5dbadb52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Over.iteratedSliceEquiv only localizes an ordinary over category; HasFibers.inducedFunctor identifies a chosen fibre with its standard fibre, not the slice of a groupoid fibration with the base slice or its ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quivalence|[Oo]ver|[Gg]roupoid",
+   "results": "{\"t\": \"2026-10-23T20:30:30Z\", \"tool\": \"grep\", \"query\": \"[Ee]quivalence|[Oo]ver|[Gg]roupoid\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"9baa12a4ec18ee6e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A groupoid fibration induces an equivalence between the slice over an object and the slice of the base category",
+   "results": "{\"t\": \"2026-10-23T20:30:30Z\", \"tool\": \"leansearch\", \"query\": \"A groupoid fibration induces an equivalence between the slice over an object and the slice of the base category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Sieve.overEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.postEquiv\", \"HomotopicalAlgebra.fibrations_over_def\", \"HasFibers.mk\", \"HasFibers.Fib\", \"HasFibers.canonical\"], \"digest\": \"a70b6d7eb73344cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fibered\", \"Over\"",
+   "results": "{\"t\": \"2026-10-23T20:30:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fibered\\\", \\\"Over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.equifibered\", \"CategoryTheory.NatTrans.instIsClosedUnderLimitsOfShapeOverFunctorEquifiberedHomOfHasCoproductsOfShapeHom\"], \"digest\": \"867bc93cc922a927\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The slice of a category fibred in groupoids over an object x is equivalent to the slice of the base over p x, compatibly with induced ringed site topologies",
+   "results": "{\"t\": \"2026-10-23T20:30:31Z\", \"tool\": \"leanfinder\", \"query\": \"The slice of a category fibred in groupoids over an object x is equivalent to the slice of the base over p x, compatibly with induced ringed site topologies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsDenseSubsiteOverLeftDiscretePUnitOverInverseIteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver\", \"CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceForwardOver\", \"CategoryTheory.GrothendieckTopology.over_forget_compatiblePreserving\", \"CategoryTheory.GrothendieckTopology.overPullback\", \"CategoryTheory.Sheaf.over\"], \"digest\": \"9d331e091d5f0e65\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  },
+  {
+   "tool": "grep",
+   "query": "Over|Equivalence|equivalence|Groupoid",
+   "results": "{\"t\": \"2026-10-23T20:30:56Z\", \"tool\": \"grep\", \"query\": \"Over|Equivalence|equivalence|Groupoid\", \"sub\": \"CategoryTheory/FiberedCategory/HasFibers.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"27\", \"40\", \"41\", \"42\"], \"digest\": \"70d902f66f661f1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a groupoid fibration with topology pulled back from the base gives the big ringed site of the base scheme and restriction of module sheaves",
+   "results": "{\"t\": \"2026-10-23T20:30:57Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a groupoid fibration with topology pulled back from the base gives the big ringed site of the base scheme and restriction of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"ModuleCat.Tilde.Localizations\", \"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.Tilde.toOpen\", \"ModuleCat.Tilde.openToLocalization\"], \"digest\": \"39b93f4e5490d653\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved ordinary iterated-slice equivalence and equivalence of a chosen fibre with the standard fibre do not state the ringed-site equivalence for a groupoid fibration; remaining results concern scheme modules or equifibered natural transformations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-lfp-topology-comparison",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Local ringed-site localization used in the affine-object cohomology calculation.",
+   "via": [
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-test-object-ringed-localization",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks localization proof into Hom bijections, an explicit quasi-inverse, the covering comparison, sectionwise ring and module identifications, the sheaf check, and the restriction square. The fibred-groupoid definition already states exactly the universal property needed; no new lemma is necessary. Statement and inherited metadata retained. No exact sorry-free project attachment or Mathlib match was found.",
+  "blueprint": "Local ringed-site input to the affine-object cohomology calculation of lem-sfb-stack-lqc-lfp-topology-comparison, on the inherited direct-image stability branch. Read the current latest blueprint sk-thm-sf-ctf-stability and det-thm-sf-ctf-stability-direct-images, proof (3). This is a definition-level supporting argument; it changes no unit route. The inherited ancestor query returns None, retained rather than inventing a blueprint ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6eecb55d2",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6eecb55d2 (reviewer sub-agent of L); spot-checked: Read the item in full. There are 0 new nodes and the statement is unchanged; the delivery adds a 7-step proof and searches. Sources match: stacks-sheaves.tex 06W0 lemma-localizing, definition-pullback, 06W9 and the module paragraph after it; stacks.tex 0CN0 and its proof; Categories 003T. Tags were confirmed in the tags file. Step 1: the unique-factorization clause of def-sfb-stable-pointed-moduli-groupoids gives the slice Hom bijection and unique comparisons over id_T. Step 2: Q_x with q_id=id_x; functoriality follows from uniqueness; p_xQ_x=id strictly and Q_xp_x≅id naturally. Step 3: the inherited covering in def-pur-localized-ringed-site plus the item's topology means p_x preserves and reflects coverings. Step 4: O|_x=Γ(T,O_T) via def-sfb-stack-quasi-coherent-algebra, with the same v^*. Step 5: G=N∘Q_x, semilinear by def-weil-sheaf-of-modules-category, which equals the item's x^{-1}M. Step 6: the equalizer of def-weil-pbc-sites-and-cohomology transports through the Hom bijections, giving an equivalence of module categories, which is what the parent lqc-lfp step 1 uses. Step 7: h: u^*x'→(fu)^*x is unique over id_T and M(h) runs in the correct direction. All cited nodes are definitions, so there is no route, tool_uses or SGA issue; proof_deps equals the union of the uses. Edge cases checked: identity fibration, constant BG fibration (G does not break faithfulness), the empty scheme, and noncartesian M. Duplicate search: fibred-big-etale-restriction-calculus (small site), fibred-fppf-ringed-inverse-image (functor between fibred categories) and stack-quasi-coherent-scheme-restriction (qc case) are distinct; neither the DAG nor blueprint main-20261015 states the 06W0/06W9 equivalence. Searches cover LeanSearch, LeanFinder/Loogle and grep. No fixes."
+ }
+}

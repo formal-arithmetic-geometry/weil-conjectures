@@ -1,0 +1,118 @@
+{
+ "id": "new-unit-coherent-raw-evaluation-formula-map-aux",
+ "kind": "statement",
+ "title": "Generic evaluation cancellation intermediate",
+ "statement": "For a morphism k of etale sheaves, degree q and derived cohomology class t, fixed sheafH evaluation of the Ext inverse followed by k equals derived cohomology map of k applied to t.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-cohomology-presentation",
+  "new-sheaf-h-derived-naturality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "Unfold the recorded raw evaluation or apply sheafHToDerived naturality, then cancel the additive equivalence with its inverse. The argument is valid in every degree and on empty etale charts.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology-presentation",
+    "new-sheaf-h-derived-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology-presentation",
+  "new-sheaf-h-derived-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitCoherentRawEvaluationFormula",
+  "date": "2026-10-26",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitCoherentRawEvaluationFormulaMapAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitCoherentRawEvaluationFormulaMapAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unit_evaluation_map_symm",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.unit_evaluation_map_symm"
+  ],
+  "statement": "theorem unit_evaluation_map_symm {Y : Scheme.{u}}\n    {A B : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (k : A ⟶ B) (q : ℕ)\n    (t : (Etale.cohomology AddCommGrpCat.{u + 1} Y (q : ℤ)).obj\n      (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj A))) :\n    Etale.sheafHToDerived B q\n        (Sheaf.H.map k q ((Etale.sheafHDerivedEquiv A q).symm t)) =\n      (Etale.cohomology AddCommGrpCat.{u + 1} Y (q : ℤ)).map\n        (DerivedCategory.Q.map ((CochainComplex.singleFunctor _ 0).map k)) t",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T212744-L-229344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T212744-L-229344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

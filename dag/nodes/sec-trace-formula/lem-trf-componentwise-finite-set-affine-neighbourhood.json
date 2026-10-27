@@ -1,0 +1,312 @@
+{
+ "id": "lem-trf-componentwise-finite-set-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Assembling an affine neighbourhood from finitely many irreducible components",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with finitely many irreducible components $C_1,\\ldots,C_s$ [def-weil-irreducible-components]. Give each $C_a$ its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]. Let $T\\subseteq X$ be a finite set of points. Assume that for each $a$ there exists an affine open subscheme $V_a\\subseteq C_a$ containing $T\\cap C_a$ [def-weil-affine-spectrum]. Then there exists an affine open subscheme $V\\subseteq X$ containing $T$. Empty $X$, empty $T$, and $s=0$ are allowed. No separatedness, Noetherianity, reducedness, or dimension assumption on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NM (lemma-finite-set-codim-1-points-in-affine-per-component), statement; used in Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), proof, second sentence: reduction to the reduced irreducible components."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "First work on $X_{\\mathrm{red}}$. The reduction map is a surjective closed immersion and identifies underlying spaces [lem-weil-pbc-reduction-universal-homeomorphism]. The reduced induced subschemes on the components are unchanged: their ideals on affine charts are the same radical ideals after quotienting by the nilradical, as in [lem-weil-pbc-reduced-induced-closed-subscheme]. If an affine open $W$ in the reduction contains $T$, its underlying open defines $V\\subseteq X$ and $W\\to V$ is a surjective closed immersion by the affine-quotient description of [def-weil-closed-immersion]. Thus $V$ is affine by [lem-weil-pbc-thickening-affine-scheme]. It suffices to construct $W$ in the reduced scheme. Give all subsequent closed subsets their reduced induced structures.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-thickening-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  },
+  {
+   "text": "Write $Y_r=C_1\\cup\\cdots\\cup C_r$, with its reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme]. Induct on $r$ to obtain an affine open of $Y_r$ containing $T\\cap Y_r$. For $r=0$ take the empty scheme, affine by the empty-cover case of [lem-sc-closed-affine-union-affine]; for $r=1$ use the hypothesis. In the induction step write $A=Y_{r-1}$, $B=C_r$, $Y=Y_r$. Choose the induction open $U\\subseteq A$ and the hypothesis open $V\\subseteq B$, both affine and containing the respective intersections with $T$. A finite union of components is closed; the affine radical-ideal description of the reduced induced structure makes $A,B$ closed subschemes of $Y$. If $T$ is empty the same induction applies (or the empty open suffices).",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  },
+  {
+   "text": "The subset $\\Delta=(U\\cap B)\\setminus V$ is closed in $U$ and disjoint from $T$. In $U=\\operatorname{Spec}R$ it is $V(J)$ for a radical ideal $J$, by [lem-weil-pbc-reduced-induced-closed-subscheme]. For each of the finitely many $t\\in T\\cap U$, $J\\not\\subseteq\\mathfrak p_t$. If this set is nonempty, prime avoidance [lem-weil-pbc-prime-avoidance] gives $f\\in J$ outside all these primes; if empty use $f=0$. Replace $U$ by $D(f)$. It is affine, still contains $T\\cap A$, and avoids $\\Delta$ by [lem-weil-pbc-affine-open-section-vanishing-prime]. Hence $U\\cap B\\subseteq V$ and $W=U\\cap B=U\\cap V$ is closed in $U$. Give $W$ its reduced induced structure.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  },
+  {
+   "text": "Next use the closed subset $\\Delta^{\\prime}=(V\\cap A)\\setminus U$ of $V$. It misses $T$, since $T\\cap A\\subseteq U$. As in the preceding step, apply prime avoidance to its radical ideal and the primes of $T\\cap V$ (use $h=0$ if there are no such points). Obtain $h\\in\\Gamma(V,\\mathcal O_V)$ with $V_h=D(h)$ affine, $T\\cap B\\subseteq V_h$, and $V_h\\cap A\\subseteq U$. Consequently $V_h\\cap A=W\\cap D(h)$ as subsets. This is the symmetric shrinking required here; the printed expression for $\\Delta^{\\prime}$ in Tag 09NM erroneously starts with $U$ instead of $V$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  },
+  {
+   "text": "Put $R=\\Gamma(U,\\mathcal O_U)$ and write $W=\\operatorname{Spec}(R/I)$. This is a closed subscheme of the affine $U$, so the affine description of [def-weil-closed-immersion] identifies its sections with $R/I$. Write $U=A\\cap\\Omega_1$, $V=B\\cap\\Omega_2$ with $\\Omega_i\\subseteq Y$ open and $\\Omega=\\Omega_1\\cap\\Omega_2$; then $W=\\Omega\\cap A\\cap B$ is closed in $\\Omega$, and the reduced structures on $W$ from $U$ and from $V$ (open in the closed $V\\cap A$) are both reduced closed subschemes of $\\Omega$ on $W$, hence equal by uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme]. Let $\\bar h\\in R/I$ be the restriction of $h$ to $W$. For the finitely many $t\\in(T\\cap U)\\setminus W$, $I\\not\\subseteq\\mathfrak p_t$. Apply [lem-trf-quotient-lift-finite-prime-avoidance] to lift $\\bar h$ to $g\\in R$ outside these primes. At every $t\\in T\\cap W$, $h(t)\\ne0$ because $V_h$ contains $T\\cap B$; equality of the restrictions gives $g(t)=h(t)\\ne0$. Thus $U_g=D(g)$ is affine and contains $T\\cap A$ [lem-weil-pbc-affine-open-section-vanishing-prime]. The identical restrictions on $W$ give $U_g\\cap B=W\\cap D(g)=W\\cap D(h)=V_h\\cap A$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-quotient-lift-finite-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  },
+  {
+   "text": "Let $O=U_g\\cup V_h\\subseteq Y$. The equality $U_g\\cap B=V_h\\cap A$ shows $O\\cap A=U_g$ and $O\\cap B=V_h$. Thus $Y\\setminus O=(A\\setminus U_g)\\cup(B\\setminus V_h)$ is closed in $Y$, so $O$ is open. The closed subschemes $A,B$ restrict to closed subschemes of $O$ with underlying sets $U_g,V_h$. Their structures are exactly those of these affine opens: restricting the defining radical ideals to an open preserves the affine radical-quotient construction, and uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies them. They cover $O$, so [lem-sc-closed-affine-union-affine] makes $O$ affine. It contains $T\\cap Y$, completing the induction. At $r=s$ we have $Y_s=X_{\\mathrm{red}}$, and Step 1 lifts this affine open to $X$. No quasi-compactness of $X$, separatedness, Noetherianity, or nilpotence bound has entered.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-sc-closed-affine-union-affine",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-trf-quotient-lift-finite-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NM, label lemma-finite-set-codim-1-points-in-affine-per-component, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"grep\", \"query\": \"finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"8284f0fed80bd1dc\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a scheme has finitely many irreducible components and a finite set meets each reduced component in an affine open neighbourhood then the finite set has a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"leansearch\", \"query\": \"If a scheme has finitely many irreducible components and a finite set meets each reduced component in an affine open neighbourhood then the finite set has a common affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.exists_basicOpen_le_affine_inter\", \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint\"], \"digest\": \"c4d2b67220770ce2\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"grep\", \"query\": \"(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"5ee91cec53cb490c\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of a neighbourhood of a finite subset can be checked on each irreducible component of a scheme with finitely many components",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"leanfinder\", \"query\": \"Affineness of a neighbourhood of a finite subset can be checked on each irreducible component of a scheme with finitely many components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"b54c002d59464938\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a scheme admits an affine neighbourhood if its intersection with each of finitely many irreducible components admits one in that component",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a scheme admits an affine neighbourhood if its intersection with each of finitely many irreducible components admits one in that component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\"], \"digest\": \"c961366aafb15c29\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of points whose local rings are Noetherian of dimension at most one in a separated scheme with locally finite irreducible components lies in an affine open",
+   "results": "{\"t\": \"2026-10-22T06:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite set of points whose local rings are Noetherian of dimension at most one in a separated scheme with locally finite irreducible components lies in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\"], \"digest\": \"a028659c6d6f51cf\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, irreducibleComponents",
+   "results": "{\"t\": \"2026-10-23T04:26:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsAffine, irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a scheme is contained in an affine open if it has an affine neighbourhood on each of the finitely many reduced irreducible components",
+   "results": "{\"t\": \"2026-10-23T04:27:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a scheme is contained in an affine open if it has an affine neighbourhood on each of the finitely many reduced irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\"], \"digest\": \"15541c5312aeb76d\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(irreducible|component|reduc).*(affine|Affine)|(affine|Affine).*(irreducible|component|reduc)",
+   "results": "{\"t\": \"2026-10-23T04:28:38Z\", \"tool\": \"grep\", \"query\": \"(irreducible|component|reduc).*(affine|Affine)|(affine|Affine).*(irreducible|component|reduc)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\"], \"digest\": \"ce9dc9a44da8301b\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite set of points has a common affine neighbourhood if it has one in every irreducible component of a scheme with finitely many components",
+   "results": "{\"t\": \"2026-10-23T04:28:38Z\", \"tool\": \"leansearch\", \"query\": \"A finite set of points has a common affine neighbourhood if it has one in every irreducible component of a scheme with finitely many components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"genericPoints\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"e5977acda6ab295d\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of a common neighbourhood of finitely many points can be tested separately on finitely many irreducible components without Noetherian or separated hypotheses",
+   "results": "{\"t\": \"2026-10-23T04:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"Affineness of a common neighbourhood of finitely many points can be tested separately on finitely many irreducible components without Noetherian or separated hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint\", \"AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"43ff3d60aea1a589\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, irreducibleComponents",
+   "results": "{\"t\": \"2026-10-23T04:26:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsAffine, irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a scheme is contained in an affine open if it has an affine neighbourhood on each of the finitely many reduced irreducible components",
+   "results": "{\"t\": \"2026-10-23T04:27:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a scheme is contained in an affine open if it has an affine neighbourhood on each of the finitely many reduced irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\"], \"digest\": \"15541c5312aeb76d\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(irreducible|component|reduc).*(affine|Affine)|(affine|Affine).*(irreducible|component|reduc)",
+   "results": "{\"t\": \"2026-10-23T04:28:38Z\", \"tool\": \"grep\", \"query\": \"(irreducible|component|reduc).*(affine|Affine)|(affine|Affine).*(irreducible|component|reduc)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\"], \"digest\": \"ce9dc9a44da8301b\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite set of points has a common affine neighbourhood if it has one in every irreducible component of a scheme with finitely many components",
+   "results": "{\"t\": \"2026-10-23T04:28:38Z\", \"tool\": \"leansearch\", \"query\": \"A finite set of points has a common affine neighbourhood if it has one in every irreducible component of a scheme with finitely many components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"genericPoints\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"e5977acda6ab295d\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of a common neighbourhood of finitely many points can be tested separately on finitely many irreducible components without Noetherian or separated hypotheses",
+   "results": "{\"t\": \"2026-10-23T04:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"Affineness of a common neighbourhood of finitely many points can be tested separately on finitely many irreducible components without Noetherian or separated hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint\", \"AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"43ff3d60aea1a589\"}; Read returned hits: affine bases concern one point, finite affine open covers do not imply affineness, and generic-point or Noetherian statements do not give simultaneous neighbourhoods on arbitrary finitely many components. No exact or one-line-generalization match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-codimension-one-points-affine-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 09NN proof, second sentence: reduction to the reduced irreducible components; this is the componentwise reduction supporting the finite-pinching affine-neighbourhood hypothesis in the ancestor contraction paragraph.",
+   "via": [
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-componentwise-finite-set-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Verified Tag 09NM for arbitrary schemes, expanded reduction and the component induction, corrected the symmetric shrinking typo in its proof, reused 06AD, 09NL, and 00DS, and isolated only the independent algebraic coset-avoidance lemma 09NK.",
+  "blueprint": "The existing ancestor branch place records Tag 09NN componentwise reduction supporting finite pinching below lem-trf-local-term-locality. Steps 1-6 realize precisely that reduction through Tag 09NM; the current main-20261015 ancestor no longer contains that old contraction paragraph, so provenance via the unchanged created-item chain is retained, with the actual Stacks place specified.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "Generic affineness under a surjective closed immersion, for the reduction step; the trace unit supplies no such scheme lemma."
+   },
+   {
+    "node": "lem-sc-closed-affine-union-affine",
+    "why": "Generic finite closed affine cover criterion used to assemble the induction open; no such affine gluing criterion belongs to the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic affine principal-open and prime-point dictionary, needed for both shrinkings; no trace-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-sc-closed-affine-union-affine",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-77ddfab27",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-77ddfab27 (reviewer sub-agent of L); spot-checked: I read Stacks varieties.tex 09NK (lemma-extra-silly) and 09NM (lemma-finite-set-codim-1-points-in-affine-per-component) in full, with 09NN, and the statement of every cited node. The item statement matches 09NM hypothesis by hypothesis. It is unchanged from the base and from live/side-live, where the item is still unsplit, so nothing supersedes it. Both source corrections the delivery makes are genuine. First, the printed Δ' in 09NM reduces to U∖V, which does not lie in V; the delivery uses (V∩A)∖U, which is closed in V and misses T. Second, 09NK applies only at points of T∩U off W; on W the delivery gets nonvanishing from g|_W=h|_W and T∩B⊆V_h. Steps 3, 4 and 6 check out: Δ is closed and misses T, so 00DS applies with f=0 or h=0 when there are no points; V_h∩A=W∩D(h); O∩A=U_g, Y∖O is closed, and 09NL applies to the cover A×_Y O, B×_Y O (both affine principal opens). Step 1's 06AD use is correct for any surjective closed immersion. FIX in step 5: h lives on V, but W's sections R/I come from its structure as a closed subscheme of U, and W is only locally closed in V. I added one sentence: with U=A∩Ω1, V=B∩Ω2 and Ω=Ω1∩Ω2, W is closed in Ω, so the two reduced structures agree by uniqueness (3) of lem-weil-pbc-reduced-induced-closed-subscheme, which I added to the step's uses (proof_deps unchanged). New node lem-trf-quotient-lift-finite-prime-avoidance is exactly 09NK with ideal, prime and coset defined inline and no proof. I checked it with the J=I·∏p_i argument and on small cases: r=0, the zero ring, repeated primes, Z/(2) with p=(3), and the counterexample when I⊆p. It is not a restatement of 00DS or of any clause of the item. I found no duplicate in the snapshot DAG, live, side-live, blueprint main-20261015 or Mathlib. I accept the declared tool_uses (06AD, 09NL, principal-open dictionary) as generic black-box lemmas. The reduction and reduced-induced nodes are Lean-closed, and the delivery cites no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentwiseFiniteSetAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_componentwise_finite_set",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentwiseFiniteSetAffineNeighbourhood.lean",
+  "statement": "theorem exists_isAffineOpen_of_componentwise_finite_set (X : Scheme.{u}) (hcomponents : (irreducibleComponents X).Finite) (T : Set X) (hT : T.Finite) (hlocal : ∀ C : TopologicalSpace.Closeds X, (C : Set X) ∈ irreducibleComponents X → ∃ U : (Scheme.IdealSheafData.vanishingIdeal C).subscheme.Opens, IsAffineOpen U ∧ (Scheme.IdealSheafData.vanishingIdeal C).subschemeι ⁻¹' T ⊆ (U : Set _)) : ∃ V : X.Opens, IsAffineOpen V ∧ T ⊆ (V : Set X)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5b1cadc9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read Stacks 09NM (varieties.tex 9084-9092), item node, 4 stmt_dep records, module and report. Lean matches clause by clause: Scheme.{u}; (irreducibleComponents X).Finite; T finite; per component C : Closeds X with membership guard, affine U in (vanishingIdeal C).subscheme with subschemeι⁻¹' T ⊆ U (= T∩C via the reduced_induced_closed_subscheme range/closed-immersion facts); conclusion ∃ affine V ⊇ T. No extra assumptions; empty X/T, s=0, non-reduced X covered. Only the lean field differs from the live node; statement verbatim. No new defs or copies; docstrings carry source, blueprint id and the 6 proof steps; sorry only; proof imports exist; missing quotient-lift record correctly omitted. Second-reading section present but self-written and brief (note only). Compile not reproduced per instructions."
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-formally-etale-power-step",
+ "kind": "statement",
+ "title": "Extend one infinitesimal quotient inverse by square-zero lifting",
+ "statement": "Let $\\varphi:A\\to C$ be a homomorphism of commutative rings, let $J\\subseteq C$ be an ideal, and suppose $A\\to C/J$ is surjective with kernel $I$. Assume that for every commutative $A$-algebra $E$ and ideal $N\\subseteq E$ with $N^2=0$, reduction induces a bijection $\\operatorname{Hom}_{A\\text{-alg}}(C,E)\\to\\operatorname{Hom}_{A\\text{-alg}}(C,E/N)$. Quotients, ideal powers and algebra maps have the meanings of [def-weil-pbc-algebra-hom-quotient]. For $m\\ge1$, put $f_m:A/I^m\\to C/J^m$, $[a]\\mapsto[\\varphi(a)]$, and let $\\pi_{I,m}$ and $\\pi_{J,m}$ be the quotient maps from $A$ and $C$. Fix an integer $n\\ge1$ and assume $f_n$ is an isomorphism with inverse $g_n$. Write $r_n:A/I^{n+1}\\to A/I^n$ and $s_n:C/J^{n+1}\\to C/J^n$ for reduction. There is a unique $A$-algebra map $\\ell:C\\to A/I^{n+1}$ with $r_n\\ell=g_n\\pi_{J,n}$. It satisfies $\\ell(J)\\subseteq I/I^{n+1}$ and $\\ell(J^{n+1})=0$. Its induced map $g_{n+1}:C/J^{n+1}\\to A/I^{n+1}$ satisfies\n$$g_{n+1}f_{n+1}=\\mathrm{id},\\qquad f_{n+1}g_{n+1}=\\mathrm{id},\\qquad r_ng_{n+1}=g_ns_n.$$\nNo finiteness, Noetherianity or equality $J=IC$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Since $I=\\varphi^{-1}(J)$, products and sums give $\\varphi(I^m)\\subseteq J^m$. Thus $f_m([a])=[\\varphi(a)]$ is well defined. These maps commute with reductions by evaluation on representatives. Also $g_n$ is an $A$-algebra map: $g_n(\\pi_{J,n}\\varphi(a))=g_nf_n(\\pi_{I,n}(a))=\\pi_{I,n}(a)$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "Put $E=A/I^{n+1}$ and $N=I^n/I^{n+1}$. Reduction $r_n$ has kernel $N$, and $E/N\\cong A/I^n$: the maps $[[a]_{I^{n+1}}]_N\\mapsto[a]_{I^n}$ and $[a]_{I^n}\\mapsto[[a]_{I^{n+1}}]_N$ are well defined inverse algebra maps. Products of two representatives from $I^n$ belong to $I^{2n}\\subseteq I^{n+1}$, since $n\\ge1$, so $N^2=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "The assumed bijection, applied to this $E,N$ and the $A$-algebra map $g_n\\pi_{J,n}:C\\to A/I^n\\cong E/N$, gives a unique $A$-algebra map $\\ell:C\\to A/I^{n+1}$ with $r_n\\ell=g_n\\pi_{J,n}$. This is a direct application of the stated hypothesis, with no theorem about formal etaleness invoked.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "For $j\\in J$, choose $a\\in A$ with $\\ell(j)=[a]_{I^{n+1}}$. The lifting equality gives $[a]_{I^n}=g_n([j]_{J^n})$, hence $[\\varphi(a)]_{J^n}=[j]_{J^n}$. Therefore $\\varphi(a)-j\\in J^n\\subseteq J$ and $a\\in I$. Thus $\\ell(J)\\subseteq I/I^{n+1}$. Every product of $n+1$ elements of $J$ is killed by $\\ell$, since its image is a product of $n+1$ classes from $I$. Sums and multiples give $\\ell(J^{n+1})=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "Define $g_{n+1}([c]_{J^{n+1}})=\\ell(c)$. It is well defined because $\\ell$ kills $J^{n+1}$; its algebra laws follow from those of $\\ell$. On $[a]_{I^{n+1}}$, its composite with $f_{n+1}$ is $\\ell(\\varphi(a))=[a]_{I^{n+1}}$ by $A$-linearity of $\\ell$. Hence $g_{n+1}f_{n+1}=\\mathrm{id}$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "In $E'=C/J^{n+1}$ put $N'=J^n/J^{n+1}$. As in Step 2, $N'^2=0$ and $E'/N'\\cong C/J^n$, with quotient map $s_n$. The two $A$-algebra maps $u=f_{n+1}\\ell$ and $v=\\pi_{J,n+1}$ from $C$ satisfy $s_nu=f_nr_n\\ell=f_ng_n\\pi_{J,n}=\\pi_{J,n}=s_nv$. Injectivity in the assumed lifting bijection for $E',N'$ gives $u=v$. On every $[c]_{J^{n+1}}$, this says $f_{n+1}g_{n+1}([c])=[c]$, proving the other inverse identity.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "Finally, for every $[c]_{J^{n+1}}$, the defining lift equality gives $r_ng_{n+1}([c])=r_n\\ell(c)=g_n\\pi_{J,n}(c)=g_ns_n([c])$. Quotient representatives exhaust the domain, so $r_ng_{n+1}=g_ns_n$. All power containments used above follow from $n\\ge1$ and ideal multiplication; neither $J=IC$ nor any finiteness hypothesis was used.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(formallyEtale|FormallyEtale).*(quotient|pow)|quotient.*(formallyEtale|FormallyEtale)",
+   "results": "{\"t\": \"2026-10-22T06:01:05Z\", \"tool\": \"grep\", \"query\": \"(formallyEtale|FormallyEtale).*(quotient|pow)|quotient.*(formallyEtale|FormallyEtale)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"9eed1619b753dec4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_bijective and iff_comp_bijective give the assumed unique square-zero lifting property, not the factorization through the next J-power, both inverse identities and reduction compatibility; these require a separate argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T06:01:05Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyEtale, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: Loogle rejected Ideal.Quotient as an unknown identifier; retained actual result and followed up with a valid name-substring query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally etale map A to C with I the inverse image of an ideal J induces an isomorphism modulo I^(n+1) and J^(n+1) if its induced map modulo the nth powers is an isomorphism, by a unique square zero lift of the inverse",
+   "results": "{\"t\": \"2026-10-22T06:01:19Z\", \"tool\": \"leanfinder\", \"query\": \"A formally etale map A to C with I the inverse image of an ideal J induces an isomorphism modulo I^(n+1) and J^(n+1) if its induced map modulo the nth powers is an isomorphism, by a unique square zero lift of the inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"88e6fc4db61b830c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_bijective and iff_comp_bijective give the assumed unique square-zero lifting property, not the factorization through the next J-power, both inverse identities and reduction compatibility; these require a separate argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend the inverse of A/I^n to C/J^n by formal etaleness to get an inverse modulo the next ideal powers",
+   "results": "{\"t\": \"2026-10-22T06:01:06Z\", \"tool\": \"leansearch\", \"query\": \"Extend the inverse of A/I^n to C/J^n by formal etaleness to get an inverse modulo the next ideal powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.formallyEtale\", \"RingHom.FormallyEtale\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.FormallyEtale.comp\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\"], \"digest\": \"13f28ed99c4ca58f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits (Algebra.Etale.formallyEtale, Algebra.FormallyEtale.iff_comp_bijective, .comp, StandardEtalePair.instFormallyEtaleRing, of_formallyUnramified_and_formallySmooth) give formal etaleness and the assumed unique square-zero lifting, not the factorization through the next J-power, both inverse identities and reduction compatibility (record moved here by the Q31 maintainer reader from lem-sfb-power-quotient-graded-comparison, where it was misfiled)"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_bijective|iff_comp_bijective|lift.*[Pp]ow|[Pp]ow.*lift",
+   "results": "{\"t\": \"2026-10-22T06:01:43Z\", \"tool\": \"grep\", \"query\": \"comp_bijective|iff_comp_bijective|lift.*[Pp]ow|[Pp]ow.*lift\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"adfa8bd457f84d42\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_bijective and iff_comp_bijective give the assumed unique square-zero lifting property, not the factorization through the next J-power, both inverse identities and reduction compatibility; these require a separate argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FormallyEtale\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T06:01:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.FormallyEtale\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\"], \"digest\": \"5105f09baff8381d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_bijective and iff_comp_bijective give the assumed unique square-zero lifting property, not the factorization through the next J-power, both inverse identities and reduction compatibility; these require a separate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given inverse maps A/I^n and B/J^n for a formally etale homomorphism A to B, the unique lift B to A/I^(n+1) kills J^(n+1) and induces mutually inverse quotient maps compatible with reduction",
+   "results": "{\"t\": \"2026-10-22T06:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"Given inverse maps A/I^n and B/J^n for a formally etale homomorphism A to B, the unique lift B to A/I^(n+1) kills J^(n+1) and induces mutually inverse quotient maps compatible with reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.exists_lift\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"StandardEtalePair.lift\"], \"digest\": \"bf3be86fae9886d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: comp_bijective and iff_comp_bijective give the assumed unique square-zero lifting property, not the factorization through the next J-power, both inverse identities and reduction compatibility; these require a separate argument"
+  },
+  {
+   "tool": "grep",
+   "query": "(formallyEtale|FormallyEtale).*(quotient|pow)|quotient.*(formallyEtale|FormallyEtale)",
+   "results": "{\"t\": \"2026-10-23T09:31:39Z\", \"tool\": \"grep\", \"query\": \"(formallyEtale|FormallyEtale).*(quotient|pow)|quotient.*(formallyEtale|FormallyEtale)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"9eed1619b753dec4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift an inverse modulo ideal powers for a formally etale ring map to obtain inverse compatible quotient algebra maps at the next power",
+   "results": "{\"t\": \"2026-10-23T09:31:39Z\", \"tool\": \"leansearch\", \"query\": \"Lift an inverse modulo ideal powers for a formally etale ring map to obtain inverse compatible quotient algebra maps at the next power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.liftₐ\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.StrictMono.lift\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"IsAdicComplete.mk_liftAlgHom\", \"Algebra.FormallySmooth.lift\", \"IsAdicComplete.mk_liftRingHom\", \"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"8acfac289e17fde0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FormallyEtale\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T09:31:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.FormallyEtale\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\"], \"digest\": \"5105f09baff8381d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally etale A algebra C and ideals I and J with A/I isomorphic to C/J admit compatible inverse maps A/I^n and C/J^n by square zero lifting of the inverse at the previous power",
+   "results": "{\"t\": \"2026-10-23T09:31:49Z\", \"tool\": \"leanfinder\", \"query\": \"A formally etale A algebra C and ideals I and J with A/I isomorphic to C/J admit compatible inverse maps A/I^n and C/J^n by square zero lifting of the inverse at the previous power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"ffac56c3f8d626cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_bijective|iff_comp_bijective|lift.*[Pp]ow|[Pp]ow.*lift",
+   "results": "{\"t\": \"2026-10-23T09:33:07Z\", \"tool\": \"grep\", \"query\": \"comp_bijective|iff_comp_bijective|lift.*[Pp]ow|[Pp]ow.*lift\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"825e39675345f42c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a formally etale ring homomorphism R to S inducing R/I isomorphic to S/J, the induced maps R/I^n to S/J^n are isomorphisms for all positive integers n",
+   "results": "{\"t\": \"2026-10-23T09:33:15Z\", \"tool\": \"leanfinder\", \"query\": \"For a formally etale ring homomorphism R to S inducing R/I isomorphic to S/J, the induced maps R/I^n to S/J^n are isomorphisms for all positive integers n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.Etale.formallyEtale\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallyEtale.of_equiv\", \"RingHom.formallyEtale_algebraMap\"], \"digest\": \"0ad60a35bc741e80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the square-zero lifting assumption, general quotient factorization or adic-completion lifts, not the simultaneous factorization, both inverse identities and reduction compatibility of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-augmented-etale-associated-graded",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Old item proof Steps 3-4: square-zero extension of the inverse at one level; Step 2 provides the canonical quotient maps.",
+   "via": [
+    "lem-sfb-augmented-etale-associated-graded",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-formally-etale-power-step",
+  "worker": "stage1",
+  "summary": "Q91 expands the successive dotted arrow in Stacks 0H1D into explicit representative calculations: square-zero kernel, unique lift from the hypothesis, image of J and factorization, left inverse from the algebra structure, right inverse from the assumed injectivity, and reduction compatibility. Statement unchanged; no new nodes are needed because each step is a direct use of the hypotheses or elementary quotient and ideal arithmetic.",
+  "blueprint": "Realizes the inherited local infinitesimal-neighbourhood comparison in the nodal-branch-double-cover ancestry, cited under det-thm-sf-ctf-stability-direct-images (3). More precisely this proves the one-level inverse extension used in Step 3 of lem-sfb-augmented-etale-associated-graded. The current latest blueprint direct-images proof (3) is a higher-level compactification assembly; no change to that unit or chapter is made."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-0da9e90db",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-0da9e90db (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against Stacks algebra.tex 41256-41290 (tag 0H1D, lemma-formally-etale-lift-infinitesimal; tag and label confirmed in the tags file). The item is one inductive step of the dotted-arrow argument plus its uniqueness argument. It matches the use in the parent's Step 3 (lem-sfb-augmented-etale-associated-graded). The statement and stmt_deps are byte-identical to live, which is still unsplit, and to the Q31 creation. There is no repair note for this item, so this is a first split, not a re-split. Steps: (1) phi(I^m)⊆J^m, and g_n is A-linear because g_n f_n = id. (2) N=I^n/I^{n+1}: N^2=0 because 2n≥n+1, and E/N≅A/I^n. (3) The lifting bijection gives a unique ℓ. (4) φ(a)−j∈J^n⊆J gives a∈I; products of n+1 elements of J vanish, so ℓ(J^{n+1})=0. (5) g_{n+1}f_{n+1}=id because ℓ is an A-algebra map. (6) Injectivity of the lifting map for C/J^{n+1} with N'=J^n/J^{n+1} gives f_{n+1}ℓ=π_{J,n+1}, using s_n f_{n+1}=f_n r_n. (7) r_n g_{n+1}=g_n s_n. All steps are correct and genuinely elementary. The source proof uses only the lifting property, so citing only def-weil-pbc-algebra-hom-quotient, which defines every notion used, is fine. Small cases checked: Z→Z[1/2] with J=3C; k→k×k with J=0×k idempotent and J≠IC; I=A with J=C; n=1. No duplicate in the DAG: the other 0H1D carriers are the parent, a sibling that assumes the isomorphisms, applications, and different finite-étale or adic lifts. There is no Mathlib lemma for the ideal-power isomorphism; the recorded searches cover all three kinds. No new nodes, no tool_uses, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallyEtalePowerStep",
+  "declaration": "Ideal.formallyEtale_powerStep",
+  "file": "lean/Sheaf/RingTheory/FormallyEtalePowerStep.lean",
+  "statement": "theorem formallyEtale_powerStep {A : Type u} {C : Type v} [CommRing A] [CommRing C] [Algebra A C] (I : Ideal A) (J : Ideal C) (hI : I = J.comap (algebraMap A C)) (hsurj : Function.Surjective ((Ideal.Quotient.mk J).comp (algebraMap A C))) (hlift : ∀ (E : Type (max u v)) [CommRing E] [Algebra A E] (N : Ideal E), N ^ 2 = ⊥ → Function.Bijective (fun h : C →ₐ[A] E ↦ (Ideal.Quotient.mkₐ A N).comp h)) (n : ℕ) (hn : 1 ≤ n) (g : C ⧸ J ^ n →+* A ⧸ I ^ n) (hleft : g.comp (Ideal.quotientMap (J ^ n) (algebraMap A C) ((pow_le_pow_left' hI.le n).trans (Ideal.le_comap_pow (algebraMap A C) n))) = RingHom.id (A ⧸ I ^ n)) (hright : (Ideal.quotientMap (J ^ n) (algebraMap A C) ((pow_le_pow_left' hI.le n).trans (Ideal.le_comap_pow (algebraMap A C) n))).comp g = RingHom.id (C ⧸ J ^ n)) : ∃ ell : C →ₐ[A] A ⧸ I ^ (n + 1), (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ n))).comp ell.toRingHom = g.comp (Ideal.Quotient.mk (J ^ n)) ∧ (∀ ell' : C →ₐ[A] A ⧸ I ^ (n + 1), (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ n))).comp ell'.toRingHom = g.comp (Ideal.Quotient.mk (J ^ n)) → ell' = ell) ∧ (∀ j : C, j ∈ J → ∃ a : A, a ∈ I ∧ Ideal.Quotient.mk (I ^ (n + 1)) a = ell j) ∧ (∀ c : C, c ∈ J ^ (n + 1) → ell c = 0) ∧ ∃ gnext : C ⧸ J ^ (n + 1) →+* A ⧸ I ^ (n + 1), gnext.comp (Ideal.Quotient.mk (J ^ (n + 1))) = ell.toRingHom ∧ gnext.comp (Ideal.quotientMap (J ^ (n + 1)) (algebraMap A C) ((pow_le_pow_left' hI.le (n + 1)).trans (Ideal.le_comap_pow (algebraMap A C) (n + 1)))) = RingHom.id (A ⧸ I ^ (n + 1)) ∧ (Ideal.quotientMap (J ^ (n + 1)) (algebraMap A C) ((pow_le_pow_left' hI.le (n + 1)).trans (Ideal.le_comap_pow (algebraMap A C) (n + 1)))).comp gnext = RingHom.id (C ⧸ J ^ (n + 1)) ∧ (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ n))).comp gnext = g.comp (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ n)))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07ca8278f",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 0H1D (algebra.tex 41256-41288): kernel condition is I = J.comap with surjectivity hsurj; square-zero lifting hlift at Type (max u v) follows Mathlib's iff_comp_bijective convention, so it is equivalent to FormallyEtale and smaller quotients are reached via ULift; g_n is a ring hom with both inverse identities, A-linear automatically; the ∃ ell with uniqueness quantified over every ell' satisfying the same equation; ell(J) ⊆ I/I^{n+1}; ell kills J^{n+1}; gnext pinned by gnext∘mk = ell; both inverse identities and r_n gnext = g s_n use the canonical Ideal.quotientMap and Quotient.factor. n≥1 kept; no finiteness, Noetherian or J=IC assumption. lean.statement verbatim; no new defs, and the downstream powerQuotientMap is correctly not imported; no Mathlib match or name clash; docstrings carry source, blueprint and 7 steps; Mathlib-only import; report has Worker report and Second reading sections. No changes, so no compile."
+ }
+}

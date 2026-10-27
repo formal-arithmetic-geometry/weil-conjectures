@@ -1,0 +1,245 @@
+{
+ "id": "lem-trf-sharp-section-basic-chart-data",
+ "kind": "statement",
+ "title": "Prime maps and compatible sharp basic-chart homomorphisms from global sections",
+ "statement": "Let $T$ be a topological space, $\\mathcal A$ a sheaf of commutative monoids with sharp stalks, and $P$ a fine sharp monoid, with additive notation and monoid-spectrum conventions as in [def-trf-fine-fan-blowup]. For a monoid homomorphism $\\varphi:P\\to\\Gamma(T,\\mathcal A)$ put $\\mathfrak m_x=\\{p\\in P:\\varphi(p)_x\\ne0\\}$ and $V_a=\\{x\\in T:\\varphi(a)_x=0\\}$. Then $\\mathcal A(V)$ is sharp for every open $V\\subseteq T$, every $\\mathfrak m_x$ is a prime ideal, and $h_\\varphi(x)=\\mathfrak m_x$ is a continuous map to $X=\\operatorname{Spec}_{\\mathrm{mon}}P$ with $h_\\varphi^{-1}D(a)=V_a$. Moreover $\\varphi(a)|_{V_a}=0$. Write $P_a=P-\\mathbf N a$. There is a unique homomorphism $\\lambda_a:P_a\\to\\mathcal A(V_a)$ extending restriction of $\\varphi$, given by $\\lambda_a(p-na)=\\varphi(p)|_{V_a}$. It kills $P_a^\\times$ and descends to $\\theta_a:P_a/P_a^\\times\\to\\mathcal A(V_a)$. Under the canonical section identifications of [lem-trf-affine-fan-localization-sections], the $\\theta_a$ commute with restrictions for every inclusion $D(b)\\subseteq D(a)$ and agree after restriction to $D(a)\\cap D(b)=D(a+b)$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i)--(ii), printed p.99: construction of the prime map and extension to localizations; 3.1.1--3.1.4, p.98. Expands old parent Steps 1--2 and the descent/compatibility part of Step 3. No Stacks tag states this monoidal-geometric assertion."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheaf and germ conventions of [def-trf-fine-fan-blowup]. If $u+v=0$ in $\\mathcal A(V)$, their germs satisfy $u_x+v_x=0$ for every $x\\in V$. Thus $u_x$ is a unit, hence zero by sharpness. Equality of germs means that, for every $x$, $u$ and zero agree on some open neighborhood of $x$ in $V$. These neighborhoods cover $V$, so uniqueness in the sheaf axiom gives $u=0$. This also covers $V=\\varnothing$ by the empty-cover sheaf axiom. Therefore $\\mathcal A(V)$ is sharp for every open $V$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "For each $x$, let $f_x(p)=\\varphi(p)_x$. The complement of $\\mathfrak m_x$ contains $0$ and is closed under addition, since $f_x$ is a homomorphism. If $p\\in\\mathfrak m_x$ and $q\\in P$, an equation $f_x(p+q)=0$ would make $f_x(p)$ a unit with inverse $f_x(q)$; sharpness would give $f_x(p)=0$, a contradiction. Thus $\\mathfrak m_x+P\\subseteq\\mathfrak m_x$ and $0\\notin\\mathfrak m_x$. By the definition of prime ideal in [def-trf-fine-fan-blowup], $\\mathfrak m_x$ is prime, including the possible empty ideal.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "By the definition of a germ [def-trf-fine-fan-blowup], $\\varphi(a)_x=0$ holds exactly when $\\varphi(a)$ is zero on some open neighborhood of $x$. Hence $V_a$ is the union of such neighborhoods and is open; their local equalities with zero glue to $\\varphi(a)|_{V_a}=0$. From the definitions, $h_\\varphi^{-1}D(a)=\\{x:a\\notin\\mathfrak m_x\\}=V_a$. Since the $D(a)$ form the spectrum topology basis in [def-trf-fine-fan-blowup], these open inverse images prove continuity.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "Fix $a$ and set $g(p)=\\varphi(p)|_{V_a}$, so $g(a)=0$ by Step 3. The fine monoid $P$ embeds in $P^{\\mathrm{gp}}$ [def-trf-fine-fan-blowup]. If $p-na=q-ma$ in $P_a$, then $p+ma=q+na$ in $P$; applying $g$ gives $g(p)=g(q)$. Thus $\\lambda_a(p-na)=g(p)$ is well-defined. Addition of two representatives gives $\\lambda_a((p-na)+(q-ma))=g(p+q)=g(p)+g(q)$, and $\\lambda_a(0)=0$. It extends $g$. Any extension sends $-a$ to an additive inverse of $g(a)=0$, necessarily zero, and therefore sends every $p-na$ to $g(p)$. This proves uniqueness.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "For a unit $u\\in P_a^\\times$ choose $v$ with $u+v=0$. Then $\\lambda_a(u)+\\lambda_a(v)=0$; Step 1 gives $\\lambda_a(u)=0$. If two elements of $P_a$ differ by addition of a unit, their images under $\\lambda_a$ are consequently equal. The sharpening quotient in [def-trf-fine-fan-blowup] therefore gives a unique homomorphism $\\theta_a:P_a/P_a^\\times\\to\\mathcal A(V_a)$ with $\\theta_a(\\operatorname{cl}(p-na))=\\varphi(p)|_{V_a}$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "For D(b) contained in D(a), inverse image under the continuous prime map gives V_b contained in V_a. Represent q in P_a by p/a^n and r in P_b by t/b^m with equal ambient values. Cross multiplication in P^gp and injectivity of P into P^gp give p*b^m=t*a^n in P. On V_b, both phi(b) and the restriction of phi(a) are 1. Applying the restricted numerator homomorphism therefore gives phi(p)|V_b=phi(t)|V_b. The fraction formulas for lambda_a and lambda_b, functoriality of restriction, and the quotient formulas for theta_a and theta_b give the required equality. This proves the ambient-fraction formulation directly from [def-trf-fine-fan-blowup], without using the affine section identifications theorem.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  },
+  {
+   "text": "For any prime ideal $\\mathfrak p$, its ideal property and the closure of its complement show $a+b\\notin\\mathfrak p$ if and only if $a,b\\notin\\mathfrak p$ [def-trf-fine-fan-blowup]. Hence $D(a)\\cap D(b)=D(a+b)$, and Step 3 gives $V_a\\cap V_b=V_{a+b}$. Apply Step 6 to the two inclusions $D(a+b)\\subseteq D(a),D(b)$. Both restriction squares have the same map $\\theta_{a+b}$ on the smaller chart, which proves agreement on the overlap.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.3, printed p.98, and proof of Lemma 3.1.8(i)--(ii), printed p.99; explicit sharp-stalk and localization calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, proof of Lemma 3.1.8(i)--(ii), printed p.99, with localization conventions of 3.1.1--3.1.4, p.98. Steps 1--5 and 7 follow the existing plan. Step 6 is proved directly by cross multiplication and restriction of numerators, avoiding affineFan_localization_sections. Lean proof completed by G7, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a fine sharp commutative monoid P and a sheaf A with sharp stalks, a homomorphism P to global sections defines a continuous prime-ideal map and compatible homomorphisms on sharpened basic-open localizations",
+   "results": "{\"t\": \"2026-10-22T06:11:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a fine sharp commutative monoid P and a sheaf A with sharp stalks, a homomorphism P to global sections defines a continuous prime-ideal map and compatible homomorphisms on sharpened basic-open localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.StructureSheaf.comapFun\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.StructureSheaf.comap_basicOpen\", \"AlgebraicGeometry.StructureSheaf.localization_toBasicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.toOpen\"], \"digest\": \"945f6876652508a4\"} Read the returned signatures. The hits concern commutative rings/semirings, modules, or monoidal structures on categories of sheaves, rather than sharp commutative monoids and their monoid spectra; no exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidSpectrum\"",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration was returned.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidalSpace|KatoFan|sharp.*stalk|sharpening",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidalSpace|KatoFan|sharp.*stalk|sharpening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration was returned.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a commutative monoid to sections of a sharp monoid sheaf extends to localization modulo units on the open zero-germ locus",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"leansearch\", \"query\": \"A map from a commutative monoid to sections of a sharp monoid sheaf extends to localization modulo units on the open zero-germ locus\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Service returned a rate-limit error; no absence claim is made from this unavailable search.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the unit group under a commutative monoid homomorphism defines a prime ideal and localization maps to a sharp monoid sheaf",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of the unit group under a commutative monoid homomorphism defines a prime ideal and localization maps to a sharp monoid sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isUnit_to_map_iff\", \"PrimeSpectrum.localization_away_comap_range\", \"IsLocalization.AtPrime.isUnit_mk'_iff\", \"AlgebraicGeometry.StructureSheaf.isUnit_toStalk\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"Algebra.PreSubmersivePresentation.localizationAway_map\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\"], \"digest\": \"29835393760ce35d\"} Read the returned signatures. The hits concern commutative rings/semirings, modules, or monoidal structures on categories of sheaves, rather than sharp commutative monoids and their monoid spectra; no exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|KatoFan|sharp.*stalk|sharpening",
+   "results": "{\"t\": \"2026-10-23T09:27:02Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|KatoFan|sharp.*stalk|sharpening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned ring-spectrum and module-sheaf statements do not apply to arbitrary sharp monoid stalks. The localization lift is a component, not the full monoid-spectrum/sheaf statement. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T09:27:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned ring-spectrum and module-sheaf statements do not apply to arbitrary sharp monoid stalks. The localization lift is a component, not the full monoid-spectrum/sheaf statement. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoid homomorphism to sections of a sheaf with sharp stalks gives prime ideals and compatible maps from localizations modulo units",
+   "results": "{\"t\": \"2026-10-23T09:27:03Z\", \"tool\": \"leansearch\", \"query\": \"A monoid homomorphism to sections of a sheaf with sharp stalks gives prime ideals and compatible maps from localizations modulo units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"ModuleCat.Tilde.openToLocalization\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.toOpen_apply\", \"Submonoid.LocalizationMap.lift\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\"], \"digest\": \"53d9d24d39e93024\"} Returned ring-spectrum and module-sheaf statements do not apply to arbitrary sharp monoid stalks. The localization lift is a component, not the full monoid-spectrum/sheaf statement. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fine sharp monoid P, global sections of a sheaf with sharp monoid stalks induce a continuous map to the monoid spectrum and compatible maps from sharpened localizations",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a fine sharp monoid P, global sections of a sheaf with sharp monoid stalks induce a continuous map to the monoid spectrum and compatible maps from sharpened localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens\"], \"digest\": \"01a17ec11929cec5\"} Returned ring-spectrum and module-sheaf statements do not apply to arbitrary sharp monoid stalks. The localization lift is a component, not the full monoid-spectrum/sheaf statement. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sharp commutative monoids defines a locally monoidal map to an affine Kato fan from a map on global sections using zero loci of germs and localization at one element",
+   "results": "{\"t\": \"2026-10-23T09:28:05Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf of sharp commutative monoids defines a locally monoidal map to an affine Kato fan from a map on global sections using zero loci of germs and localization at one element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.StructureSheaf.comapFun\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\"], \"digest\": \"9f80cae405fcde26\"} Returned ring-spectrum and module-sheaf statements do not apply to arbitrary sharp monoid stalks. The localization lift is a component, not the full monoid-spectrum/sheaf statement. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-fan-hom-universal",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, p.109, paragraph beginning Choose a point y, restricted to strict morphisms; affine fan interpretation: 3.1.8(ii), 3.1.10(ii). Supporting affine-target comparison: ILO VIII 3.1.8(ii), invoked in the final sentence of the point-local comparison paragraph in the proof of 3.3.15, printed p.109. Supporting argument of ILO VIII 3.1.8(ii): Expose VIII, Lemma 3.1.8(i)--(ii), printed p.99: construction of the prime map and extension to localizations; 3.1.1--3.1.4, p.98. Expands old parent Steps 1--2 and the descent/compatibility part of Step 3. No Stacks tag states this monoidal-geometric assertion.",
+   "via": [
+    "lem-trf-affine-fan-hom-universal",
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-sharp-section-basic-chart-data",
+  "worker": "stage1",
+  "summary": "Expanded ILO VIII 3.1.8 into seven checked steps. Sharpness, prime ideals, openness, vanishing, the fraction formula and quotient descent are proved directly from the definitions. Only the canonical affine-fan section identifications and localization restrictions are taken from the existing section lemma. No new nodes or changed statements.",
+  "blueprint": "Historical monoidal-resolution branch under lem-trf-local-term-locality, recorded in blueprint.from: supporting affine fan universal property ILO VIII 3.1.8(ii), used by the point-local comparison in VIII 3.3.15. Steps 1--5 realize prime-map and sharp basic-chart construction; Steps 6--7 realize restriction and overlap compatibility. The current latest locality blueprint has removed this historical alteration branch; no change is made to its current contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-f5a05cd63",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-f5a05cd63 (reviewer sub-agent of L); spot-checked: I read ILO VIII 3.1.1–3.1.8 (printed pp.98–99): conventions 3.1.1–3.1.3 (sharpening, M[S^-1]⊆M^gp, ∅ counted as a prime, D(f) basis) and the proof of 3.1.8, whose remaining construction it calls 'straightforward'. The item states exactly that construction. For sharp stalks the source's prime P∖φ_x^{-1}(units) equals the item's m_x. Coefficient objects agree: a sheaf of commutative monoids with sharp stalks, and the sharp structure sheaf of Spec_mon P. Every step checks: S1 sharpness of A(V) from germs plus sheaf uniqueness (V=∅ by the empty cover); S2 the complement of m_x is closed under addition, the ideal property comes from sharpness, and the empty ideal is allowed; S3 V_a is open, φ(a) vanishes on V_a, h^{-1}D(a)=V_a, continuity via the D(a) basis; S4 well-definedness uses only integrality of P (no cancellation in A), additivity checked, uniqueness from −a ↦ inverse of 0; S5 units killed via S1, descent through the quotient by the unit group; S6 uses only the statement of lem-trf-affine-fan-localization-sections (restrictions induced by localization; numerators preserved; cl(−a)=0 in P_a/P_a^×); S7 D(a)∩D(b)=D(a+b) and agreement through θ_{a+b}. The output matches exactly the hypotheses of lem-trf-affine-fan-basic-map-local-lift, so step 1 of the parent lem-trf-affine-fan-hom-universal is served. Small cases tested: T=∅, P={0}, a=0, φ=0, N→N on a point, N²→N, and a non-cancellative target {0,e}. No new nodes. proof_deps equals the union of the step uses, and both deps are in unit sk-i-curve-zero, so there are no tool uses to accept. Searches cover LeanFinder, Loogle, grep and LeanSearch; a rate-limited LeanSearch is honestly marked unavailable and a later one ran. No SGA. Duplicate search over the affine-fan family (hom-universal, basic-map-local-lift, canonical-section-rigidity, germ-rigidity, localization-sections) found no duplicate and no restated parent clause. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SharpSectionBasicChartData",
+  "declaration": "AlgebraicGeometry.FineFan.sharp_section_basic_chart_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/SharpSectionBasicChartData.lean",
+  "statement": "theorem sharp_section_basic_chart_data (T : SheafedSpace CommMonCat.{u}) (hT : ∀ x : T, IsSharp (stalk T.presheaf x)) (P : Type u) [CommMonoid P] (hP : IsFine P) (sP : IsSharp P) (φ : P →* T.presheaf.obj (op ⊤)) : (∀ U : Opens T, IsSharp (T.presheaf.obj (op U))) ∧ ∃ (h : T.carrier ⟶ TopCat.of (MonoidPrime P)) (V : P → Opens T), (∀ x : T, (h x).carrier = {p : P | germ T.presheaf ⊤ x (by trivial) (φ p) ≠ 1}) ∧ (∀ a : P, (V a : Set T) = {x : T | germ T.presheaf ⊤ x (by trivial) (φ a) = 1}) ∧ (∀ a : P, V a = (Opens.map h).obj (basicOpen a)) ∧ (∀ a : P, T.presheaf.map (homOfLE le_top).op (φ a) = (1 : T.presheaf.obj (op (V a)))) ∧ ∃ (lam : ∀ a : P, Algebra.faceLocalization P (Submonoid.powers a) →* T.presheaf.obj (op (V a))) (θ : ∀ a : P, Associates (Algebra.faceLocalization P (Submonoid.powers a)) →* T.presheaf.obj (op (V a))), (∀ (a p : P) (n : ℕ) (q : Algebra.faceLocalization P (Submonoid.powers a)), q.val = Algebra.GrothendieckGroup.of p * (Algebra.GrothendieckGroup.of a ^ n)⁻¹ → lam a q = T.presheaf.map (homOfLE le_top).op (φ p)) ∧ (∀ (a : P) (μ : Algebra.faceLocalization P (Submonoid.powers a) →* T.presheaf.obj (op (V a))), (∀ (p : P) (q : Algebra.faceLocalization P (Submonoid.powers a)), q.val = Algebra.GrothendieckGroup.of p → μ q = T.presheaf.map (homOfLE le_top).op (φ p)) → μ = lam a) ∧ (∀ (a : P) (q : Algebra.faceLocalization P (Submonoid.powers a)), IsUnit q → lam a q = 1) ∧ (∀ (a : P) (q : Algebra.faceLocalization P (Submonoid.powers a)), θ a (Associates.mk q) = lam a q) ∧ (∀ (a b : P), basicOpen b ≤ basicOpen a → ∃ i : V b ⟶ V a, ∀ (q : Algebra.faceLocalization P (Submonoid.powers a)) (r : Algebra.faceLocalization P (Submonoid.powers b)), r.val = q.val → T.presheaf.map i.op (θ a (Associates.mk q)) = θ b (Associates.mk r)) ∧ (∀ a b : P, basicOpen (a * b) = basicOpen a ⊓ basicOpen b ∧ V (a * b) = V a ⊓ V b ∧ ∃ (i : V (a * b) ⟶ V a) (j : V (a * b) ⟶ V b), ∀ (q : Algebra.faceLocalization P (Submonoid.powers a)) (r : Algebra.faceLocalization P (Submonoid.powers b)) (s : Algebra.faceLocalization P (Submonoid.powers (a * b))), (s.val = q.val → T.presheaf.map i.op (θ a (Associates.mk q)) = θ (a * b) (Associates.mk s)) ∧ (s.val = r.val → T.presheaf.map j.op (θ b (Associates.mk r)) = θ (a * b) (Associates.mk s)))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92f7c4ac8",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Clause-by-clause match of sharp_section_basic_chart_data against node and ILO VIII 3.1.8 (p.99): hypotheses exact (SheafedSpace CommMonCat.{u}, sharp FineFan stalks, IsFine/IsSharp P, φ to Γ); conclusions present: section sharpness for all opens incl. ⊥, MonoidPrime map pinned by germ≠1 carriers, V a = germ=1 locus = h⁻¹D(a), φ a|V a = 1, λ_a fraction formula + uniqueness on numerators + kills units, θ via Associates, restriction squares via r.val=q.val (= dep's localization restriction; verified true via a·d=b^k and sharp sections), overlap D(a*b)=D(a)⊓D(b) with both restrictions = θ_{a*b}. Edge cases T=∅, U=⊥, trivial P, empty prime, a=1, n=0, disjoint V's ok; single universe from dep interface. No defs, sorry only, docstrings with source/blueprint/7 steps, lean.statement verbatim (script check), imports = stmt_deps, node unchanged except lean record, no duplicate found. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T081952-L-2112258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

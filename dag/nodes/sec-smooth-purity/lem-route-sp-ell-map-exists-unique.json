@@ -1,0 +1,251 @@
+{
+ "id": "lem-route-sp-ell-map-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [],
+   "place": "Proof, “The integral twist”: finite coefficients (O_E/ell^m)_X in the inverse system; coefficient-field transition through their integral reductions, used by the rational/algebraic-closure paragraph."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The induced quotient inclusion is characterized by the two integral reductions.",
+ "statement": "Let $\\ell$ be a prime, let $E\\subseteq F\\subseteq\\overline{\\mathbf Q}_\\ell$ be finite extensions of $\\mathbf Q_\\ell$, with the restricted absolute values and integer rings $\\mathcal O_E,\\mathcal O_F$ of [def-sfb-padic-integers-condensed-ring], and let $X$ be any scheme. For $G=E,F$ and $n\\geq0$, put $B_{G,n}=\\mathcal O_G/\\ell^{n+1}\\mathcal O_G$, with the discrete topology, and let $q_{G,n}:\\mathcal O_G\\to B_{G,n}$ be reduction, a continuous ring homomorphism ([lem-sp-ell-quotient-finite-discrete]), with condensation $\\underline{q_{G,n}}$ of [def-sfb-continuous-map-condensed-ring-map]. Write $\\underline T(S)=C(S,T)$ for the underlying abelian sheaf of the condensed ring of [def-sfb-continuous-map-condensed-ring], and put $T_X=p_X^*\\underline T$ using [sk-def-sfb-pullback-from-point]. Let $r_{G,n}=p_X^*\\underline{q_{G,n}}:\\mathcal O_{G,X}\\to B_{G,n,X}$ be the coefficient map of [def-sfb-coefficient-map]. Let $\\iota_{E,F}:\\underline E\\to\\underline F$ be the field inclusion of [def-sfb-qlbar-subextension-map] and $\\kappa_G:\\underline{\\mathcal O}_G\\to\\underline G$ the integer inclusion of [def-sfb-integers-to-subfield-point]. Let $i_{E,F,X}:\\mathcal O_{E,X}\\to\\mathcal O_{F,X}$ be the unique morphism of ring objects with $(\\kappa_F)_X\\circ i_{E,F,X}=(\\iota_{E,F})_X\\circ(\\kappa_E)_X$, given by [lem-route-sp-integers-map-exists-unique]. Then there exists exactly one morphism of abelian sheaves\n$$\\phi:B_{E,n,X}\\longrightarrow B_{F,n,X}$$\nsatisfying\n$$\\phi\\circ r_{E,n}=r_{F,n}\\circ i_{E,F,X}.$$\nThe uniqueness is among all abelian-sheaf morphisms, without requiring them to preserve the ring structures.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.md",
+  "place": "det-prop-sfb-cartesian-coefficients-twists: the Lean of this node (its module Sheaf.Paper.CartesianCoefficientTwists uses) reaches AlgebraicGeometry.ProEtale.spEllMap_existsUnique, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spEllMap_existsUnique (module Sheaf.Paper.ProEtaleTateTwists, lines 295-306, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sfb-padic-integers-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "lem-sp-ell-quotient-finite-discrete",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-coefficient-map",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-integers-to-subfield-point",
+  "lem-route-sp-integers-map-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "The inclusions into the fixed algebraic closure identify the restricted norms on $E$ and $F$, so $j:\\mathcal O_E\\to\\mathcal O_F$, $x\\mapsto x$, is a continuous unital ring homomorphism: membership is $|x|\\leq1$, and both topologies are subspace topologies. By [def-sfb-continuous-map-condensed-ring-map] and [def-sfb-coefficient-map], $p_X^*\\underline j$ is a ring-object morphism. Its composite with $\\mathcal O_{F,X}\\to F_X$ equals the composite $\\mathcal O_{E,X}\\to E_X\\to F_X$: before pullback both send $a:S\\to\\mathcal O_E$ to the same function $S\\to F$, and functors preserve composition. The two field and integer inclusion maps here are those of [def-sfb-qlbar-subextension-map] and [def-sfb-integers-to-subfield-point]. The uniqueness clause of [lem-route-sp-integers-map-exists-unique] therefore identifies $p_X^*\\underline j=i_{E,F,X}$.",
+   "uses": [
+    "def-sfb-padic-integers-condensed-ring",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-coefficient-map",
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-integers-to-subfield-point",
+    "lem-route-sp-integers-map-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Field-extension transitions: identify the selected integral map with pullback of the actual continuous integer inclusion"
+   }
+  },
+  {
+   "text": "Define $\\bar j:B_{E,n}\\to B_{F,n}$ by $[x]\\mapsto[j(x)]$. This is well-defined: if $x-y=\\ell^{n+1}a$ in $\\mathcal O_E$, then $j(x)-j(y)=\\ell^{n+1}j(a)$ in $\\mathcal O_F$. Addition, multiplication and one are preserved by applying $j$ to representatives. Thus $\\bar j q_{E,n}=q_{F,n}j$. The discrete quotient topologies make $\\bar j$ continuous. For $G=E,F$ the absolute value $|x|_G=|x|$ restricted from $\\overline{\\mathbf Q}_\\ell$ ([def-sfb-padic-subfield-condensed-ring]) restricts to $|\\cdot|_\\ell$ on $\\mathbf Q_\\ell\\subseteq G$, so by the uniqueness in clause 1 of [def-weil-l-adic-coefficient-extension] it is the extending absolute value there; hence $\\mathcal O_G=\\{|x|_G\\le1\\}$ of [def-sfb-padic-integers-condensed-ring] is the ring of clause 2, with the topology of [def-sfb-coefficient-extension-integers-topology]. So [lem-sp-ell-quotient-finite-discrete] applies to $E$ and $F$ with exponent $n+1$: the reductions are continuous and the quotients finite.",
+   "uses": [
+    "lem-sp-ell-quotient-finite-discrete",
+    "def-sfb-padic-subfield-condensed-ring",
+    "def-weil-l-adic-coefficient-extension",
+    "def-sfb-padic-integers-condensed-ring",
+    "def-sfb-coefficient-extension-integers-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral finite quotient coefficients: descend the actual inclusion modulo the same positive power of ell"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring-map] to $\\bar j,q_{E,n},q_{F,n},j$. On a profinite test $S$, the two composites in their square send $a:S\\to\\mathcal O_E$ to $s\\mapsto[j(a(s))]$, so they agree. Apply the functor $p_X^*$ of [sk-def-sfb-pullback-from-point] and use the coefficient-map definition [def-sfb-coefficient-map]. The resulting morphism $\\phi=p_X^*\\underline{\\bar j}$ satisfies $\\phi r_{E,n}=r_{F,n}i_{E,F,X}$ by step 1. It is in particular a morphism of the underlying abelian sheaves, giving existence.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pullback-from-point",
+    "def-sfb-coefficient-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Field-extension transitions: condense the quotient map and pull its commuting reduction square back to X"
+   }
+  },
+  {
+   "text": "Put $q=\\underline{q_{E,n}}$. For any profinite $S$ and $b\\in C(S,B_{E,n})$, choose for each of the finitely many $t\\in B_{E,n}$ a representative $a_t\\in\\mathcal O_E$. Then $a(s)=a_{b(s)}$ is continuous: each fibre $b^{-1}(t)$ is open, and the inverse image of any open subset of $\\mathcal O_E$ under $a$ is a union of these fibres. Moreover $q_{E,n}a=b$. Hence every component $q(S)$ is surjective. If additive sheaf maps $u,v$ out of $\\underline{B_{E,n}}$ agree after $q$, evaluation on such lifts gives $u_S(b)=v_S(b)$ for every $S,b$; thus $u=v$. This proves that $q$ is epimorphic directly, using precisely the finiteness from [lem-sp-ell-quotient-finite-discrete] (applicable by step 2) and the section description of [def-sfb-continuous-map-condensed-ring].",
+   "uses": [
+    "lem-sp-ell-quotient-finite-discrete",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Uniqueness: a section of the finite discrete quotient lifts by choosing representatives of its finitely many values"
+   }
+  },
+  {
+   "text": "Use the adjunction $p_X^*\\dashv p_{X*}$ stated in [sk-def-sfb-pullback-from-point]. For any abelian sheaf $H$ on $X_{\\mathrm{pro\\acute et}}$, transpose maps $u,v:p_X^*\\underline{B_{E,n}}\\to H$ to $u^\\#,v^\\#:\\underline{B_{E,n}}\\to p_{X*}H$. Naturality of this Hom bijection in its source sends $u\\circ p_X^*q=v\\circ p_X^*q$ to $u^\\#q=v^\\#q$. Step 4 gives $u^\\#=v^\\#$; the bijection then gives $u=v$. Thus $r_{E,n}=p_X^*q$ is epimorphic. Apply this cancellation to any two morphisms satisfying the asserted square: their composites with $r_{E,n}$ both equal $r_{F,n}i_{E,F,X}$, hence they coincide. This proves uniqueness in the full abelian-sheaf Hom set.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Uniqueness: transport cancellation through the point-pullback adjunction, then cancel the pulled-back reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-padic-integers-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-coefficient-map",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-integers-to-subfield-point",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-sp-ell-quotient-finite-discrete",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-coefficient-extension-integers-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral twist formula, its positive finite quotient coefficient maps; explicit coefficient-field transition argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spIntegersMap_existsUnique and spEllMap_existsUnique, lines 271–306",
+  "note": "Expands the Lean docstring route; finite-value lifting and adjunction cancellation are written out rather than assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spEllMap_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique morphism between condensed quotient rings of integers of finite p-adic extensions commuting with reduction",
+   "results": "RingCon.Quotient.hom_ext; Ideal.Quotient.ringHom_ext; PadicInt.lift_unique; PadicInt.toZMod; RingCon.lift_unique; PadicInt.toZMod_eq_residueField_comp_residue; Submodule.linearMap_qext; PadicInt.toZModPow. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient, RingHom",
+   "results": "Query rejected: loogle: unknown identifier 'Ideal.Quotient'; retried with quoted existing declaration name.",
+   "date": "2026-10-25",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "spEllMap|padic.*[Qq]uotient|[Qq]uotient.*padic",
+   "results": "Mathlib/NumberTheory/Padics/RingHoms.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inclusion of finite extensions of the p-adic numbers induces a unique morphism of pulled back condensed additive sheaves modulo a positive power of the prime commuting with quotient reduction",
+   "results": "BDeRhamPlus; Condensed.profiniteSolid; LightCondensed.ihomPoints_symm_comp; PadicInt.cast_toZModPow; PadicInt.lift_spec; WittVector.factorPowSucc_comp_fontaineThetaModPPow; PadicInt.zmod_cast_comp_toZModPow; PadicInt.toZModPow_eq_iff_ext. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous maps to finite discrete quotients of rings lift along a surjective quotient map, and inverse image of sheaves preserves epimorphisms",
+   "results": "LightCondMod.instPreservesEpimorphismsLightCondSetForget; LightCondMod.instReflectsEpimorphismsLightCondSetForget; CondensedMod.epi_iff_locallySurjective_on_compHaus; LightCondMod.epi_iff_locallySurjective_on_lightProfinite; TopCat.Presheaf.instEpiCommRingCatToTotalQuotientPresheaf; Condensed.epi_iff_locallySurjective_on_compHaus; CondensedMod.epi_iff_surjective_on_stonean; CategoryTheory.presheafIsFinite_of_epi. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spEllMap\"",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringHom_ext|def map|map_mk",
+   "results": "Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean; Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean; Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of a sheaf of abelian groups preserves epimorphisms and finite discrete quotient rings of p-adic integer rings",
+   "results": "CategoryTheory.ObjectProperty.instIsClosedUnderQuotientsInverseImageOfPreservesEpimorphisms; PresheafOfModules.epi_of_surjective; CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify; PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits; CategoryTheory.Sheaf.epi_of_isLocallySurjective'; PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp; CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val; SheafOfModules.Finite.forgetPreservesFiniteLimits. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient.ringHom_ext\"",
+   "results": "Ideal.Quotient.ringHom_ext; Ideal.Quotient.ringHom_ext_iff. These are algebraic quotient or general sheaf tools, not the stated pulled-back coefficient theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spEllMap_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spEllMap_existsUnique"
+  ],
+  "statement": "theorem spEllMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)\n    (n : ℕ) :\n    ∃! φ : condensedRingObj.{u} (spEllPointRingObj ℓ E n) X ⟶\n        condensedRingObj.{u} (spEllPointRingObj ℓ F n) X,\n      spEllReduction X ℓ E n ≫ φ =\n        spIntegersMap X ℓ h ≫ spEllReduction X ℓ F n := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-ell-map-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced the provisional signature text by its full mathematical statement, retaining arbitrary X, positive levels n+1 and uniqueness among additive sheaf maps. Constructed the quotient inclusion on representatives and explicitly proved epimorphic reduction by finite-value lifting and adjunction naturality. No new node is needed; the supporting coefficient definitions and finite-quotient theorem already exist.",
+  "blueprint": "Supports the integral-twist paragraph of det-prop-sfb-cartesian-coefficients-twists and the rational/algebraic-closure passage: its finite coefficient-field maps are the actual quotient inclusions. This is an auxiliary coefficient fact, not an alternative purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-ell-quotient-finite-discrete",
+    "why": "Finiteness and continuity of the actual positive ell-power integer quotients; a coefficient-topology tool needed before condensation, not a replacement of any affine-space purity step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-ell-quotient-finite-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NM-11312bdc7",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-11312bdc7 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement, the Lean spEllMap_existsUnique/spIntegersMap_existsUnique (ProEtaleTateTwists.lean 271-306), and the blueprint sk-def-sp-tate-twist and det-prop-sfb-cartesian-coefficients-twists (paragraphs on the integral twist and on the rational/algebraic closure). The statement matches the Lean: it uses arbitrary morphisms in Sh(X_proet,Ab) with no IsMonHom condition, exponent n+1 with n>=0, the discrete B, integer rings restricted from Qbar_l, and an arbitrary X. It is not weakened. The steps are correct. Step 1 identifies p_X^*j with i through the uniqueness clause (IsMonHom plus square) of lem-route-sp-integers-map-exists-unique. Step 2 descends j to the quotient using x-y=l^{n+1}a. Step 3 gets the square by strict functoriality and p_X^*. Step 4 lifts continuous maps into the finite discrete quotient by choosing representatives, which gives sectionwise surjectivity and componentwise cancellation. Step 5 uses that the left adjoint p_X^* preserves epimorphisms. Edge cases checked: E=F, n=0, ramified F/E, empty S and empty X. There are no new nodes. No existing node duplicates the item: def-weil-pbc-integer-quotient-inclusions uses separate uniformizer powers, so it is a different object. I accept the tool_use lem-sp-ell-quotient-finite-discrete (unit sk-def-sp-tate-twist, a coefficient-topology fact). Two repairs, both in fixes/dag/nodes/sec-smooth-purity/lem-route-sp-ell-map-exists-unique.json. (1) B3/B2: the statement condensed q_{G,n} without citing def-sfb-continuous-map-condensed-ring-map or the continuity of q. I added both to the statement and stmt_deps (continuity via lem-sp-ell-quotient-finite-discrete) and wrote out the square that characterizes i_{E,F,X}, adding the stmt_deps def-sfb-qlbar-subextension-map and def-sfb-integers-to-subfield-point. (2) C4/E1: step 2 applied lem-sp-ell-quotient-finite-discrete, which is stated for O_E of def-weil-l-adic-coefficient-extension with the topology of def-sfb-coefficient-extension-integers-topology, to the O_E restricted from Qbar_l without identifying the two. I added that identification, which follows from the uniqueness of the extension of |.|_l (clause 1), with the citations and proof_deps it needs. Step 4 now refers to step 2 for this.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

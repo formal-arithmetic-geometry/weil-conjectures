@@ -1,0 +1,466 @@
+{
+ "id": "lem-sfb-profinite-action-cech-recovery",
+ "kind": "statement",
+ "title": "Action-cover Cech equalizers and natural recovery isomorphisms",
+ "statement": "Work in compatible universes and small skeletons [def-weil-size-convention]. Let $J$ be a compact Hausdorff totally disconnected topological group, let $P$ be the profinite site with finite jointly surjective covers [sk-def-sfb-condensed-ring], and let $P_J$ have profinite continuous left $J$-spaces, continuous equivariant maps and finite jointly surjective covers [def-weil-pbc-sites-and-cohomology]. Write $H(S)=J\\times S$ with left translation on $J$, and $tS=S$ with trivial action [def-sfb-profinite-action-parameters]. Put $\\mathscr E=\\operatorname{Sh}(P)$ and let $\\mathscr E^{\\underline J}$ be the category of internal actions: a sheaf $X$ with a natural unital associative action $C(S,J)\\times X(S)\\to X(S)$ [lem-sfb-action-topos-geometric-restriction]. Write $h_T(S)=C(S,T)$, with the induced action when $T\\in P_J$. Use the functors $\\Phi$ and $G$ specified by [lem-sfb-profinite-action-yoneda-free-evaluation, lem-sfb-profinite-action-free-restriction]. For each $T\\in P_J$ the equivariant map $a_T:H(T)\\to T$, $(j,t)\\mapsto jt$, is a singleton cover. There is an equivariant homeomorphism\n$$H(J\\times T)\\xrightarrow{\\sim}H(T)\\times_TH(T),\\quad (j,k,t)\\longmapsto((j,kt),(jk,t)),$$\nwhose inverse sends $((j,u),(j',v))$ to $(j,j^{-1}j',v)$. Its two projections are $H(\\alpha_T)$ and $H(\\pi_T)\\circ r_\\gamma$, with $\\gamma(k,t)=k$. For every sheaf $F$ on $P_J$, pullback $F(a_T)$ is a bijection from $F(T)$ onto\n$$\\{x\\in G(F)(T):G(F)(\\alpha_T)x=\\gamma\\cdot G(F)(\\pi_T)x\\}=Q_{G(F)}(T).$$\nUnder the equivariant Yoneda identification this yields a natural isomorphism $\\eta_F:F\\xrightarrow{\\sim}\\Phi G(F)$. For every internal action $X$, the maps $e_{X,S}:\\Phi(X)(H(S))\\to X(S)$ given by evaluation at $(1,\\operatorname{id}_S)$ are the components of an equivariant natural isomorphism $\\epsilon_X:G\\Phi(X)\\xrightarrow{\\sim}X$. Here naturality of $\\eta$ includes all equivariant $u:T\\to T'$, with $u a_T=a_{T'}H(u)$; the evaluation maps intertwine $\\Phi(X)(r_g)$ with the given action of $g$ on $X(S)$. Both isomorphisms are natural in sheaf morphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated profinite-action infrastructure; extracted from the returned presentation proof steps 9,10. Exact external non-SGA source WANTED; this is an agent-formulated auxiliary lemma, not a theorem asserted by the blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-profinite-action-yoneda-free-evaluation",
+  "lem-sfb-profinite-action-free-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The map $a_T(j,t)=jt$ is continuous by continuity of the given action. It is equivariant because $a_T(gj,t)=(gj)t=g(jt)$ for the free action on $H(T)$, and it is surjective since $a_T(1,t)=t$. Thus its singleton family is a covering by the stated finite jointly surjective covering rule. This uses no equivariant section of $a_T$.",
+   "uses": [
+    "def-sfb-profinite-action-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated action-cover infrastructure: verification of the covering used in the extracted presentation step 9"
+   }
+  },
+  {
+   "text": "Put $B=\\{((j,u),(j^{\\prime},v)):ju=j^{\\prime}v\\}$, the fiber product with its subspace topology and diagonal action. The map $c(j,k,t)=((j,kt),(jk,t))$ lies in $B$ because $j(kt)=(jk)t$. For a point of $B$, the equality $ju=j^{\\prime}v$ gives $u=(j^{-1}j^{\\prime})v$; hence $d((j,u),(j^{\\prime},v))=(j,j^{-1}j^{\\prime},v)$ satisfies $cd=1$ and $dc=1$. Both maps are continuous by continuity of multiplication, inversion and the action. Moreover $c(gj,k,t)=g\\cdot c(j,k,t)$, so they give the required equivariant homeomorphism. The projections of $c$ are $(j,k,t)\\mapsto(j,kt)=H(\\alpha_T)(j,k,t)$ and $(j,k,t)\\mapsto(jk,t)=(H(\\pi_T)\\circ r_\\gamma)(j,k,t)$, with exactly the right-translation convention in the cited statement.",
+   "uses": [
+    "def-sfb-profinite-action-parameters",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated infrastructure: explicit two-sided inverse and projections for the action-cover fiber square"
+   }
+  },
+  {
+   "text": "Apply the defining sheaf equalizer to the singleton cover $a_T$. It identifies $F(T)$, by $F(a_T)$, with the equalizer of the two pullbacks $F(H(T))\\rightrightarrows F(B)$. Since $F(c)$ has inverse $F(d)$ by functoriality and $cd=dc=1$, applying $F(c)$ preserves and reflects equality. The two arrows therefore become $F(H(\\alpha_T))$ and $F(r_\\gamma)F(H(\\pi_T))$; contravariance fixes this order. By the cited free-restriction statement these are $G(F)(\\alpha_T)$ and $\\gamma\\cdot G(F)(\\pi_T)$. Thus the equalizer is precisely $Q_{G(F)}(T)$, as an equality of sections on the entire profinite parameter $J\\times T$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VM, definition-sheaf-sets, equation-sheaf-condition; specialize to the singleton action cover and use step 2"
+   }
+  },
+  {
+   "text": "Let $q_{X,T}:\\Phi(X)(T)\\to Q_X(T)$ be the evaluation bijection in the cited Yoneda statement. Define $\\eta_{F,T}=q_{G(F),T}^{-1}\\circ F(a_T)$, with $F(a_T)$ corestricted to the equalizer of step 3. Both factors are bijective. For an equivariant $u:T\\to T^{\\prime}$, one has $u a_T=a_{T^{\\prime}}H(u)$, since $u(jt)=ju(t)$. Consequently $F(H(u))F(a_{T^{\\prime}})=F(a_T)F(u)$. The cited statement identifies restriction on $Q$ with $G(F)(u)=F(H(u))$, so this equality is the naturality square for $\\eta$. Its componentwise inverse is natural by composing this square with the two inverses. Hence $\\eta_F$ is a sheaf isomorphism.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated recovery: construction and object-naturality of the first recovery isomorphism"
+   }
+  },
+  {
+   "text": "For a sheaf morphism $v:F\\to F^{\\prime}$, naturality at $a_T$ gives $v_{H(T)}F(a_T)=F^{\\prime}(a_T)v_T$. Free restriction makes $G(v)_T=v_{H(T)}$, and the Yoneda identification makes the induced map on $Q$ this same component. Applying $q^{-1}$ therefore gives $(\\Phi G(v))_T\\eta_{F,T}=\\eta_{F^{\\prime},T}v_T$. This proves naturality of the first recovery isomorphism in the sheaf variable.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated recovery: naturality of the first recovery isomorphism in sheaf maps"
+   }
+  },
+  {
+   "text": "Take $\\epsilon_{X,S}=e_{X,S}$ from the cited free-evaluation bijection. Its explicit inverse sends $x\\in X(S)$ to $b_x$ with $(b_x)_V(a,b)=a\\cdot b^*x$. For a continuous $f:V\\to S$, restriction along $H(f)$ followed by evaluation gives $b_V(1,f)=X(f)(b_S(1,\\operatorname{id}_S))$, by naturality of the sheaf map $b$. For an equivariant sheaf map $w:X\\to Y$, postcomposition gives $(w\\circ b)_S(1,\\operatorname{id}_S)=w_S(e_{X,S}(b))$. These identities prove naturality in both the profinite parameter and the internal-action variable; the explicit inverse gives the inverse underlying sheaf map.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated recovery: free-evaluation bijection and its two naturality squares"
+   }
+  },
+  {
+   "text": "It remains to verify the action on this sheaf isomorphism. By free restriction, $g:S\\to J$ acts on $G\\Phi(X)(S)$ by $\\Phi(X)(r_g)$. This sends $b:h_{H(S)}\\to X$ to $b\\circ h_{r_g}$. Its evaluation is $b_S(g,\\operatorname{id}_S)=g\\cdot b_S(1,\\operatorname{id}_S)$: equivariance of $b$ applied to $g\\cdot(1,\\operatorname{id}_S)=(g,\\operatorname{id}_S)$ gives the equality. Thus $e_{X,S}(\\Phi(X)(r_g)b)=g\\cdot e_{X,S}(b)$ for every profinite $S$ and every continuous $g$, rather than just constant $g$. Bijectivity makes the inverse equivariant as well: apply this equality to $b=e_{X,S}^{-1}(x)$. Together with steps 6 and 5 this gives both asserted natural recovery isomorphisms.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "lem-sfb-profinite-action-free-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated recovery: equivariance on all profinite parameters"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-profinite-action-free-restriction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-profinite-action-yoneda-free-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary action-space infrastructure, not an assertion of the blueprint paragraph; explicit action-cover and naturality calculations, using Stacks Tag 00VM for the sheaf axiom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Profinite, Cech",
+   "results": {
+    "t": "2026-10-22T06:03:32Z",
+    "tool": "loogle",
+    "query": "Profinite, Cech",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Cech'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: unknown identifier 'Cech'"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Aa]ction|[Aa]ction.*[Cc]ech|Condensed.*equiv",
+   "results": {
+    "t": "2026-10-22T06:03:32Z",
+    "tool": "grep",
+    "query": "[Cc]ech.*[Aa]ction|[Aa]ction.*[Cc]ech|Condensed.*equiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Discrete/Characterization.lean",
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/Condensed/Light/Epi.lean",
+     "Mathlib/Condensed/Light/Epi.lean",
+     "Mathlib/Condensed/Light/Epi.lean"
+    ],
+    "digest": "73ea9c7c3dd9276d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent along the free action cover identifies sections with equivariant Yoneda sections and gives the unit and counit of the presentation",
+   "results": {
+    "t": "2026-10-22T06:03:33Z",
+    "tool": "leansearch",
+    "query": "Descent along the free action cover identifies sections with equivariant Yoneda sections and gives the unit and counit of the presentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Presheaf.freeYonedaHomEquiv",
+     "PresheafOfModules.freeYonedaEquiv",
+     "CategoryTheory.OverPresheafAux.counit",
+     "CategoryTheory.Limits.compYonedaSectionsEquiv",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "PresheafOfModules.freeHomEquiv",
+     "CategoryTheory.typeEquiv",
+     "CategoryTheory.OverPresheafAux.counitAux"
+    ],
+    "digest": "7a7a13d3decf0abe"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech equalizer of the action map from J times T to T recovers a sheaf on profinite group spaces from free restriction and gives natural quasi-inverse maps",
+   "results": {
+    "t": "2026-10-22T06:03:33Z",
+    "tool": "leansearch",
+    "query": "The Cech equalizer of the action map from J times T to T recovers a sheaf on profinite group spaces from free restriction and gives natural quasi-inverse maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor",
+     "CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app",
+     "TopCat.Presheaf.isSheaf_iff_isSheafEqualizerProducts",
+     "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctorObj",
+     "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_inverse",
+     "CategoryTheory.GrothendieckTopology.isoSheafify_inv",
+     "SheafOfModules.freeHomEquiv",
+     "CategoryTheory.Equivalence.sheafCongr"
+    ],
+    "digest": "744de4a81d27c88e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech equalizer of the action map from J times T to T recovers a sheaf on profinite group spaces from free restriction and gives natural quasi-inverse maps",
+   "results": {
+    "t": "2026-10-22T06:03:36Z",
+    "tool": "leanfinder",
+    "query": "The Cech equalizer of the action map from J times T to T recovers a sheaf on profinite group spaces from free restriction and gives natural quasi-inverse maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ofSheafLightProfinite_val",
+     "LightCondensed.ofSheafForgetLightProfinite_val",
+     "Condensed.ofSheafProfinite",
+     "LightCondSet.ofSheafLightProfinite",
+     "LightCondensed.isoLocallyConstantOfIsColimit_inv",
+     "CondensedSet.ofSheafProfinite",
+     "Condensed.isoLocallyConstantOfIsColimit_inv",
+     "Condensed.ofSheafForgetProfinite"
+    ],
+    "digest": "1c1313f2918a1096"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ction|[Cc]ech",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "grep",
+    "query": "[Aa]ction|[Cc]ech",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "6ced45b36b6544c7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"cech\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"cech\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed comparisons and abstract presheaf counits do not identify this action-cover fibre square or the two equivariant recovery maps."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Aa]ction|[Aa]ction.*[Cc]ech|profinite.*recovery",
+   "results": {
+    "t": "2026-10-22T13:28:49Z",
+    "tool": "grep",
+    "query": "[Cc]ech.*[Aa]ction|[Aa]ction.*[Cc]ech|profinite.*recovery",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean"
+    ],
+    "digest": "b93bbe9ef9b148b9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the two hits identify a simplicial nerve for abstract group sets, not these profinite sheaf recovery maps; read Resolution.lean lines 84-119."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of sheaves on profinite group actions with internal actions on condensed sets, recovery by free objects",
+   "results": {
+    "t": "2026-10-22T13:28:49Z",
+    "tool": "leansearch",
+    "query": "Equivalence of sheaves on profinite group actions with internal actions on condensed sets, recovery by free objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.free",
+     "LightCondensed",
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "LightCondensed.free",
+     "Condensed.isSheafProfinite",
+     "profiniteToCondensed",
+     "Condensed.lanSheafProfinite",
+     "Condensed.ofSheafForgetCompHaus"
+    ],
+    "digest": "2aa32cadd8ed8330"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: condensed/profinite presentation and free module functors do not state the action-site Cech square or either natural recovery map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"action\"",
+   "results": {
+    "t": "2026-10-22T13:28:49Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on profinite continuous group spaces recovered by the Cech equalizer of the free action cover",
+   "results": {
+    "t": "2026-10-22T13:28:53Z",
+    "tool": "leanfinder",
+    "query": "Sheaves on profinite continuous group spaces recovered by the Cech equalizer of the free action cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.isSheafProfinite",
+     "Condensed.lanSheafProfinite",
+     "CondensedSet.ofSheafProfinite",
+     "Condensed.ofSheafProfinite",
+     "Condensed.ofSheafForgetProfinite",
+     "LightCondensed.ofSheafLightProfinite_val",
+     "LightCondAb.ofSheafLightProfinite",
+     "LightCondensed.ofSheafLightProfinite"
+    ],
+    "digest": "5200390e2d44b009"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: condensed/profinite presentation and free module functors do not state the action-site Cech square or either natural recovery map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Yoneda evaluation and restriction to free profinite group spaces give natural inverse isomorphisms",
+   "results": {
+    "t": "2026-10-22T13:29:12Z",
+    "tool": "leanfinder",
+    "query": "Equivariant Yoneda evaluation and restriction to free profinite group spaces give natural inverse isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.isoFinYoneda_inv_app",
+     "Condensed.isoFinYonedaComponents_inv_comp",
+     "LightCondensed.isoFinYoneda_inv_app",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.isoFinYonedaComponents_inv_comp",
+     "Condensed.isoFinYonedaComponents",
+     "Condensed.isoFinYoneda",
+     "LightCondensed.isoFinYonedaComponents"
+    ],
+    "digest": "98a96e24140edd24"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-space Yoneda component isomorphisms, not actions by a profinite group or recovery of sheaves on its continuous action site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: coherent action-space presentation needed for filtered passage in the internal derived-invariant input. Re-split of the auxiliary presentation: returned proof steps 9,10.",
+   "via": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-action-cech-recovery",
+  "worker": "stage1",
+  "summary": "Q92 repair of returned head e6717520714: reread every current statement and proof dependency, retained the approved seven-step argument and logged searches, and made explicit why the fiber-product isomorphism preserves and reflects the sheaf equalizer. Updated the repair review and citation excerpts against the current DAG; no mathematical statement change or new nodes.",
+  "blueprint": "main-20261015 direct-images proof paragraph (3), auxiliary infrastructure below the filtered internal-invariant input; realizes the extracted presentation steps 9 and 10 without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-a0c99d311",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-a0c99d311 (reviewer sub-agent of L); spot-checked: Re-delivery of e6717520714, which passed review on the mathematics but was refused at landing because it had not been promoted. The node is still unsplit in both clones/live and side-live, there is no repair note, and no other group has split it. A diff against the prior run's snapshot shows two changes: one added sentence in step 3 (F(c) has inverse F(d), so it preserves and reflects the equalizer), which is correct, and an updated split_report date and summary. The statement, stmt_deps, proof_deps, source and blueprint fields are unchanged, and all seven cited dependency statements are textually identical to the prior snapshot. I re-derived all seven steps by hand. Step 1: a_T is continuous, equivariant and surjective via (1,t), so it is a singleton cover. Step 2: H(alpha_T)=(j,kt) and H(pi_T)∘r_gamma=(jk,t) under the right-translation r_g(j,s)=(jg(s),s); c and d are mutually inverse and c is equivariant. Step 3: the singleton-cover equalizer of def-weil-pbc (1), checked against Stacks 00VM, transported along F(c), gives exactly Q_{G(F)}(T). Steps 4-5: naturality of eta from u a_T=a_{T'}H(u), using equivariance of u, and from G(v)_T=v_{H(T)}. Steps 6-7: e is natural via b_V(1,f)=X(f)b_S(1,id), and equivariant for every continuous g via b_S(g,id)=g·b_S(1,id). proof_deps equals the union of the uses lists. Edge cases checked: T empty, J trivial, S_3 (factor order), non-free actions. There are no new nodes; rg scan found no duplicate (internal-action-sheaf-equivalence is about a different site C_K). Source is honestly marked agent-formulated with an external source WANTED, no SGA is cited, and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionCechRecovery",
+  "declaration": "Profinite.CondensedAction.CechRecovery.profiniteAction_cech_recovery",
+  "declarations": [
+   "Profinite.CondensedAction.CechRecovery.actionCover_wellDefined",
+   "Profinite.CondensedAction.CechRecovery.actionCover",
+   "Profinite.CondensedAction.CechRecovery.cechSpace",
+   "Profinite.CondensedAction.CechRecovery.cechFirst",
+   "Profinite.CondensedAction.CechRecovery.cechSecond",
+   "Profinite.CondensedAction.CechRecovery.actionCover_cech",
+   "Profinite.CondensedAction.CechRecovery.actionCover_naturality",
+   "Profinite.CondensedAction.CechRecovery.actionCover_descent",
+   "Profinite.CondensedAction.CechRecovery.profiniteAction_cech_recovery"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionCechRecovery.lean",
+  "statement": "theorem profiniteAction_cech_recovery (G : FreeRestriction J) (h : Space J ⥤ Actions J) (hs : ∀ T : Space J, (h.obj T).X.obj ≅ yoneda.obj (base J T)) (hh : ∀ X : Actions J, Presheaf.IsSheaf (coverage J).toGrothendieck ((phiPresheaves J h).obj X)) : (∀ (T V : Space J) (f : T ⟶ V), (h.map f).hom.hom ≫ (hs V).hom = (hs T).hom ≫ yoneda.map (AsSmall.up.map ((underlying J).map f))) → (∀ (T : Space J) (S : Base.{u}ᵒᵖ) (a : (groupPresheaf J).obj S) (x : (h.obj T).X.obj.obj S) (s : parameter S.unop), ((hs T).hom.app S (InternalActionSite.setAction _ _ _ (h.obj T) S a x)).down s = ((AsSmall.down.obj T).obj.ρ (a.down s)).hom.hom (((hs T).hom.app S x).down s)) → ∃ (η : 𝟭 (Sheaf (coverage J).toGrothendieck (Type (u + 1))) ≅ G.functor ⋙ phi J h hh) (ε : phi J h hh ⋙ G.functor ≅ 𝟭 (Actions J)), (∀ (F : Sheaf (coverage J).toGrothendieck (Type (u + 1))) (T : Space J) (y : F.obj.obj (op T)), identityEvaluation h hs (G.functor.obj F) T ((η.hom.app F).hom.app (op T) y) = (G.sections F).inv.app (op (base J T)) (F.obj.map (actionCover J T).op y)) ∧ (∀ (X : Actions J) (S : Base.{u}) (b : (G.functor.obj ((phi J h hh).obj X)).X.obj.obj (op S)), (ε.hom.app X).hom.hom.app (op S) b = freeEvaluation h hs X S ((G.sections ((phi J h hh).obj X)).hom.app (op S) b)) ∧ (∀ (X : Actions J) (S : Base.{u}) (g : (groupPresheaf J).obj (op S)) (b : h.obj ((freeParameter J).obj S) ⟶ X), freeEvaluation h hs X S (((phi J h hh).obj X).obj.map (freeRightTranslation J S g.down).op b) = InternalActionSite.setAction _ _ _ X (op S) g (freeEvaluation h hs X S b))",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the normalized FreeRestriction and YonedaFreeEvaluation interfaces from the recorded dependencies, universally in their realizations. The recovery isomorphisms are fixed by identity and free evaluation; no equivalence or arbitrary map is assumed. Helpers state the action cover, its explicit Cech coordinate isomorphism, its naturality and its exact sheaf equalizer. Only the lean field changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e97de7a1",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean, none weaker or stronger: a_T singleton cover; the equivariant homeomorphism c with both projections H(α), r_γ≫H(π) and inverse (j,j⁻¹j',v), checked by hand; F(a_T) BijOn onto IsEquivariantSection of G(F); η : 𝟭 ≅ G⋙phi fixed by identityEvaluation = G.sections⁻¹∘F(a_T); actionCover_naturality f(jt)=j f(t); ε fixed by freeEvaluation at (1,id); intertwining for every continuous g, with r_g(1,s)=g·(1,s). Arbitrary h/hs/hh under the dependency's verbatim normalizations: the conclusion holds for every such realization, so no added assumption; G is the fully pinned FreeRestriction. The six J instances are exact; universes are the dependencies' common ones. Edge cases checked: T=∅, S=∅, J=1, non-abelian J, non-free T. Item differs from live only in lean; all 7 dependency nodes byte-identical to live; statement verbatim; 9 declarations present; sorry-only proofs; real data in the definitions; docstrings carry source and blueprint id; maximum line 91; no name clash; report sections present. No FIX, so no compile. Advisories: (A1) owner def nodes base-coefficients and space-site are reached only through free-restriction, as on the landed Yoneda sibling; (A2) the pullback uses space_hasFiniteLimits, owned by the parent coherent-presentation node, the family-wide stage-3 import cycle; (A3) redundant transitive imports."
+ }
+}

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.ContinuousIntegralCoefficientData
 import Sheaf.Paper.IntegralConstructibleKernels
 import Sheaf.Paper.ConstructibleCokernelsExtensions
 

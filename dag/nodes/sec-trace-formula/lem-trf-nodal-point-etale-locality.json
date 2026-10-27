@@ -20,38 +20,35 @@
  ],
  "proof": [
   {
-   "text": "Assume $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$ as $k$-algebras. The nodal ring is local with maximal ideal $(u,v)$ and residue field $k$ (as a $k$-algebra). The local ring $\\mathcal O_{C,x}$ is Noetherian, being a localization of a finitely generated $k$-algebra on an affine open of $C$ (Hilbert basis theorem; Mathlib's locally Noetherian instance for schemes locally of finite type over a field). Hence [lem-weil-pbc-local-completion-local-ring] applies: the canonical $k$-algebra map $\\mathcal O_{C,x}\\to\\widehat{\\mathcal O}_{C,x}$ induces an isomorphism of residue fields, so $k\\to\\kappa(x)$ is an isomorphism. Apply [lem-trf-etale-completed-local-ring-iso] to this $k$-algebra isomorphism $\\kappa(x)\\cong k$: it makes $x$ and $y$ closed, identifies $\\kappa(x)$ with $\\kappa(y)$, and identifies the completed local rings. Transporting the displayed ring isomorphism across that completion isomorphism gives $\\widehat{\\mathcal O}_{D,y}\\cong k[[u,v]]/(uv)$. Both points are closed.",
-   "uses": [
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-trf-etale-completed-local-ring-iso"
-   ],
-   "elementary": false,
+   "text": "Given a nodal completed local k-algebra presentation at either point, descend the constant coefficient map to k[[u,v]]/(uv), since the constant coefficient of uv is zero. Compose with that presentation and the stalk-to-completion map. This gives a ring retraction of the structural map k -> O. A surjective map from a local ring to a field is local (Mathlib IsLocalHom.of_surjective), so it factors through the residue field. Its factor is injective, being a field map; applying this injectivity to its retraction identity proves the structural residue map k -> kappa is bijective. This argument does not use Noetherianity or a residue-field comparison for completions.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C57, lemma-node-etale-local, using the nodal completed-local-algebra definition and Tag 039M after the residue-field/closed-point reduction"
+    "place": "section-nodal (Tag 0C46), the nodal completed-local-algebra presentation; elementary residue-field argument expanded by K5."
    }
   },
   {
-   "text": "Conversely, assume $\\widehat{\\mathcal O}_{D,y}\\cong k[[u,v]]/(uv)$ as $k$-algebras. The local ring $\\mathcal O_{D,y}$ is Noetherian, $D$ being locally of finite type over $k$ (etale morphisms are locally of finite presentation, and compositions of morphisms locally of finite type are locally of finite type). The same completion-residue-field argument using [lem-weil-pbc-local-completion-local-ring] gives that $k\\to\\kappa(y)$ is an isomorphism. Apply [lem-trf-etale-completed-local-ring-iso] in its second case: $x$ and $y$ are closed, $\\kappa(x)\\to\\kappa(y)$ is an isomorphism, and the completed local rings are isomorphic. Transporting the nodal presentation back along this isomorphism gives $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$. Thus the two conditions are equivalent and either one implies closedness of both points.",
+   "text": "Apply [lem-trf-etale-completed-local-ring-iso] with the residue-map alternative furnished by the first step. It gives closedness of both points and a bijective completed stalk ring map. For each scalar and every quotient by a maximal-ideal power, its specified coordinate formula and naturality of the germ map identify the image of the source scalar with the target scalar. AdicCompletion.ext_evalₐ then proves scalar compatibility, so AlgEquiv.ofBijective packages the completed map as a k-algebra equivalence. Compose a source nodal presentation with its inverse for the forward implication, and a target presentation with it for the reverse implication. The same application gives both closedness assertions in either case.",
    "uses": [
-    "lem-weil-pbc-local-completion-local-ring",
     "lem-trf-etale-completed-local-ring-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C57, converse direction of lemma-node-etale-local, using the same Tag 039M completion identification"
+    "place": "Tag 0C57, lemma-node-etale-local, proof by invariance of completed local algebras."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-etale-completed-local-ring-iso",
-  "lem-weil-pbc-local-completion-local-ring"
+  "lem-trf-etale-completed-local-ring-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "K5",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0C57, lemma-node-etale-local; proof via Tag 039M and the section-nodal completed-local-algebra definition."
+  "place": "Tag 0C57, lemma-node-etale-local; canonical scalar compatibility expanded in Lean; nodal residue-field reduction shortened using the constant coefficient retraction."
  },
  "mathlib_searches": [
   {
@@ -155,5 +152,26 @@
   "result": "pass",
   "note": "Clause-by-clause match of nodalPoint_etale_locality against the node and Stacks 0C57 (curves.tex lemma-node-etale-local): alg. closed k, C ->Spec k LocallyOfFiniteType, IsPureDimension 1 (recorded ND def), Etale e (current Mathlib name), arbitrary y, maximal-ideal AdicCompletion with the canonical k-algebra structure via completedLocalScalarMap (f, resp. e≫f), MvPowerSeries (Fin 2) k/(X0*X1); iff conjunct and disjunction→both closed points; no extra hypotheses; universe forced by Spec k. Helper is the canonical composite ΓSpecIso.inv≫appTop≫Γgerm then algebraMap: real data, docstrings, listed in lean.declarations; no named duplicate (IsOrdinaryNode is a different notion with closedness and a ring iso). lean.statement verbatim in file; stmt_deps complete; proof sorry only; report has Worker report and Second reading by NS. nt_compile.py --json: clean 2.9 s; axioms propext/sorryAx/Classical.choice/Quot.sound. Edge cases (empty D, generic point, smooth point, open immersion, char 2) fine. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261023T123820-L-1257280",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

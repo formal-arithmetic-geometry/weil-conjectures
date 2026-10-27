@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-space-global-idempotent-clopen",
+ "kind": "statement",
+ "title": "Global idempotents and clopen subspaces of an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf [def-trf-algebraic-space]. Give $|X|$ its atlas topology [def-a1-space-point-topology], and put $A=\\Gamma(X_{\\mathrm{et}},\\mathcal O_X)$. There is a bijection $e\\mapsto U_e$ between idempotents $e^2=e$ in $A$ and open subspaces of $X$ [def-a1-space-open-subspace] whose point images are closed. Their point images are exactly the clopen subsets of $|X|$, each with a unique open-subspace structure. For every affine etale chart $T=\\operatorname{Spec}B\\to X$ [def-weil-affine-spectrum], the pullback of $U_e$ is the principal open $D(e|_T)\\subseteq\\operatorname{Spec}B$. The inverse sends $U$ to the global section equal to $1$ on $U$ and $0$ on its complement. One has $U_0=\\varnothing$, $U_1=X$, $U_{1-e}=X\\setminus U_e$, and $U_{ef}=U_e\\cap U_f$. No properness, quasi-compactness or Noetherian hypothesis is imposed; the empty space is allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, proof (2), idempotent/decomposition paragraph, which uses no properness; Tag 03BZ, lemma-open-subspaces, for the unique open-subspace structure."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:P\\to X$. Put $R=P\\times_XP$, with projections $s,t$. The enlarged ringed-site model identifies $A$ with the equalizer of $\\Gamma(P,\\mathcal O_P)\\rightrightarrows\\Gamma(R,\\mathcal O_R)$, naturally under etale base change. Thus restriction to $P$ is injective and ring operations are computed there. For $e^2=e$, write $a=e|_P$; then $a^2=a$ and $s^*a=t^*a$. Apply the scheme idempotent correspondence to obtain a clopen $V=U_a\\subseteq|P|$. Its pullback compatibility gives $s^{-1}V=t^{-1}V$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-scheme-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0DMY (lemma-proper-geometrically-reduced-global-sections), proof (2), idempotent paragraph; Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G7 (definition-structure-sheaf), 03BZ (lemma-open-subspaces), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "Put $C=|p|(V)$. The point fibre-product surjectivity says that any two points of $P$ with the same image in $X$ lift together to a point of $R$. The equality $s^{-1}V=t^{-1}V$ therefore gives $|p|^{-1}C=V$. Since $|p|$ is surjective and open, $C$ and its complement $|p|(|P|\\setminus V)$ are open. The open-subspace classification gives a unique open subspace $U_e$ with image $C$. For any etale scheme chart $q:T\\to X$, let $W=P\\times_XT$ with projections $r:W\\to P$ and $v:W\\to T$. The atlas map $v$ is surjective, and $r^*a=v^*(e|_T)$. Scheme pullback compatibility gives $r^{-1}V=v^{-1}U_{e|_T}$. Point fibre-product surjectivity and $|p|^{-1}C=V$ identify the left side with $v^{-1}q^{-1}C$; surjectivity of $v$ gives $q^{-1}C=U_{e|_T}$. The open-subspace point calculus identifies this with the point image of $T\\times_XU_e$. If $T=\\operatorname{Spec}B$, the spectrum correspondence identifies $U_{e|_T}$ with $D(e|_T)$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0DMY (lemma-proper-geometrically-reduced-global-sections), proof (2), idempotent paragraph; Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G7 (definition-structure-sheaf), 03BZ (lemma-open-subspaces), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "Conversely let $C\\subseteq|X|$ be clopen, and let $U$ and $Z$ be the unique open subspaces for $C$ and its complement. By the point calculus their pullbacks to $P$ have point sets $V=|p|^{-1}C$ and $|P|\\setminus V$. The scheme correspondence gives the unique idempotent $a$ equal to $1$ on $V$ and $0$ off $V$. On $R$, both $s^*a$ and $t^*a$ correspond to the same clopen $(ps)^{-1}C=(pt)^{-1}C$; scheme injectivity gives equality. The equalizer now descends $a$ to a unique $e\\in A$. Since $a^2=a$, injectivity of restriction gives $e^2=e$. The chart formula in step 2 shows that its clopen is $C$. Moreover $e|_U=1$ and $e|_Z=0$: these equalities hold on the pulled-back scheme atlases, where they are exactly the defining restrictions of $a$, and are detected by the equalizer on $U$ and $Z$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0DMY (lemma-proper-geometrically-reduced-global-sections), proof (2), idempotent paragraph; Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G7 (definition-structure-sheaf), 03BZ (lemma-open-subspaces), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "If two global idempotents give the same open subspace, their clopens on $P$ are equal by the chart formula. Scheme injectivity makes their restrictions equal, and equalizer injectivity makes the global sections equal. Together with step 3 this proves the claimed bijection and inverse. A section restricting to $1$ on $U$ and $0$ on $Z$ is unique even among all sections: on $P$ the two restrictions cover $P$ and the sheaf uniqueness axiom makes the sections equal; atlas injectivity then applies. Open-subspace uniqueness is exactly the existing open-subspace classification.",
+   "uses": [
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0DMY (lemma-proper-geometrically-reduced-global-sections), proof (2), idempotent paragraph; Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G7 (definition-structure-sheaf), 03BZ (lemma-open-subspaces), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "Finally $0,1,1-e,ef$ are idempotent by ring identities, using commutativity for $ef$. On $P$, idempotent germs are $0$ or $1$: the scheme correspondence says their nonzero locus is their one locus. Hence the loci for $0$ and $1$ are empty and full, the locus for $1-a$ is the complement of that for $a$, and the locus for $ab$ is the intersection of those for $a$ and $b$. The chart formula and surjectivity of $|p|$ give the same identities on $|X|$; uniqueness of open subspaces gives the asserted identities as subspaces. All arguments use arbitrary scheme atlases, with no finiteness assumptions. When $X$ is empty, the sheaf empty-cover axiom gives the zero ring of global sections; its sole idempotent corresponds to the sole open subspace, so all formulas still hold.",
+   "uses": [
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0DMY (lemma-proper-geometrically-reduced-global-sections), proof (2), idempotent paragraph; Tags 03G1 (lemma-compare-etale-sites), 03H7 (remark-explain-equivalence), 03G7 (definition-structure-sheaf), 03BZ (lemma-open-subspaces), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0DMY proof (2), idempotent paragraph, expanded by scheme correspondence and atlas descent from Tags 03BZ, 03BX, 03H4, 03G1, 03H7 and 03G7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsIdempotentElem\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: spectra and schemes are not arbitrary algebraic spaces; no algebraic-space idempotent/clopen comparison is present."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]dempotent.*[Cc]lopen|[Cc]lopen.*[Ii]dempotent|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: spectra and schemes are not arbitrary algebraic spaces; no algebraic-space idempotent/clopen comparison is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connectedness of an algebraic space is equivalent to having no nontrivial idempotent global sections of the structure sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \":\\n  toOpen R ⊤ =\\n    CommRingCat.ofHom (algebraMap R (Localization.Away (1 : R))) ≫\\n      CommRingCat.ofHom (toBasicOpen R (1 : R)) ≫ (structureSheaf R).1.map (eqToHom PrimeSpectrum.basicOpen_one.symm).op\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the ring of global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphism. \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"connectedSpace_iff_clopen\", \"module\": \"Mathlib.Topology.Connected.Clopen\", \"type\": \": ConnectedSpace α ↔ Nonempty α ∧ ∀ s : Set α, IsClopen s → s = ∅ ∨ s = Set.univ\", \"doc\": \"A topological space $\\\\alpha$ is connected if and only if it is non-empty and every clopen subset of $\\\\alpha$ is either the empty set or the entire space $\\\\alpha$ itself.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.id_appTop\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.Scheme.Hom.appTop (CategoryTheory.CategoryStruct.id X) =\\n    CategoryTheory.CategoryStruct.id (X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any scheme $X$, the sheaf morphism component at the entire space induced by the identity morphism of $X$ is equal to the identity morphism on the global sections of the structure sheaf of $X$.\"}\n  {\"name\": \"ConnectedSpace\", \"module\": \"Mathlib.Topology.Connected.Basic\", \"type\": \"(α : Type u) → [TopologicalSpace α] → Prop\", \"doc\": \"A topological space $\\\\alpha$ is connected if there do not exist non-empty open sets $U$ and $V$ such that $U \\\\cap V = \\\\emptyset$ and $U \\\\cup V = \\\\alpha$.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": CommRingCat.of R ≅ (structureSheaf R).1.obj (op ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphis\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": { e : R // IsIdempotentElem e } ≃o Clopens (PrimeSpectrum R)\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: spectra and schemes are not arbitrary algebraic spaces; no algebraic-space idempotent/clopen comparison is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotent global regular functions on any algebraic space correspond bijectively to open and closed subspaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (e : { e // IsIdempotentElem e }),\\n  ↑(PrimeSpectrum.isIdempotentElemEquivClopens e) = ↑(PrimeSpectrum.basicOpen ↑e)\", \"doc\": \"There exists a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equippe\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (e : { e // IsIdempotentElem e }),\\n  (PrimeSpectrum.isIdempotentElemEquivClopens e).toOpens = PrimeSpectrum.basicOpen ↑e\", \"doc\": \"For a commutative semiring $ R $, the canonical order isomorphism between idempotent elements of $ R $ and clopen subsets of the prime spectrum $ \\\\operatorname{Spec}(R) $ with the Zariski topology map\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} → [inst : CommRing R] → { e // IsIdempotentElem e } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n  {\"name\": \"PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (s : TopologicalSpace.Clopens (PrimeSpectrum R)),\\n  PrimeSpectrum.basicOpen ↑(PrimeSpectrum.isIdempotentElemEquivClopens.symm s) = s.toOpens\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens_symm_top\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R], PrimeSpectrum.isIdempotentElemEquivClopens.symm ⊤ = ⟨1, ⋯⟩\", \"doc\": \"The inverse of the canonical order isomorphism between the idempotent elements of a commutative semiring $ R $ and the clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ maps the top clop\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_SpecMap_iff_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  Function.Surjective ⇑(CommRingCat.Hom.hom f) →\\n    (AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Spec.map f) ↔\\n      ∃ e, IsIdempotentElem e ∧ RingHom.ker (CommRingCat.Hom.hom f) = Ideal.span {e})\", \"doc\": \"Let $ f: R \\\\to S $ be a surjective ring homomorphism between commutative rings. The induced morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is an open immersion if and only if the kerne\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecMapBasicOpen_eq\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\\n  X.toΓSpecMapBasicOpen r = X.toRingedSpace.basicOpen r\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, the preimage of the basic open set $D(r)$ in the prime spectrum $\\\\operatorname{Spec}(\\\\Gamma(X))$ under the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_one\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens}, X.basicOpen 1 = U\", \"doc\": \"For a scheme $X$ and an open subset $U$, the basic open set associated to the constant section $1$ over $U$ is equal to $U$ itself, i.e., $D(1) = U$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: spectra and schemes are not arbitrary algebraic spaces; no algebraic-space idempotent/clopen comparison is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen decompositions of an algebraic space are classified by idempotents of its global function ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} → [inst : CommRing R] → { e // IsIdempotentElem e } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n  {\"name\": \"PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃! e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"For any clopen set $ s $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exists a unique idempotent element $ e \\\\in R $ (satisfying $ e^2 = e $) such that $ s $\"}\n  {\"name\": \"PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (e : { e // IsIdempotentElem e }),\\n  ↑(PrimeSpectrum.isIdempotentElemEquivClopens e) = ↑(PrimeSpectrum.basicOpen ↑e)\", \"doc\": \"There exists a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equippe\"}\n  {\"name\": \"PrimeSpectrum.isClopen_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s ↔ ∃ e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"A subset of the prime spectrum $\\\\operatorname{Spec}(R)$ equipped with the Zariski topology is clopen if and only if it is the basic open set $D(e)$ for some idempotent element $e \\\\in R$, where $e$ sat\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} →\\n  [inst : CommSemiring R] → { e // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (e : { e // IsIdempotentElem e }),\\n  (PrimeSpectrum.isIdempotentElemEquivClopens e).toOpens = PrimeSpectrum.basicOpen ↑e\", \"doc\": \"For a commutative semiring $ R $, the canonical order isomorphism between idempotent elements of $ R $ and clopen subsets of the prime spectrum $ \\\\operatorname{Spec}(R) $ with the Zariski topology map\"}\n  {\"name\": \"PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (s : TopologicalSpace.Clopens (PrimeSpectrum R)),\\n  PrimeSpectrum.basicOpen ↑(PrimeSpectrum.isIdempotentElemEquivClopens.symm s) = s.toOpens\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n  {\"name\": \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e, IsIdempotentElem e ∧ s = ↑(PrimeSpectrum.basicOpen e)\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative semiring $ R $, every clopen set $ s $ is equal to the basic open set $ D(e) $ for some idempotent element $ e \\\\in R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: spectra and schemes are not arbitrary algebraic spaces; no algebraic-space idempotent/clopen comparison is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotent global sections of the structure sheaf of an algebraic space correspond to clopen open subspaces",
+   "results": "Hits: PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm, PrimeSpectrum.isIdempotentElemEquivClopens, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isIdempotentElemEquivClopens_symm_top Read Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1077-1089: affine spectrum idempotent/clopen correspondence only.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]dempotent.*[Cc]lopen|[Cc]lopen.*[Ii]dempotent|AlgebraicSpace",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Idempotents in global functions on an algebraic space classify open and closed subspaces",
+   "results": "Hits: PrimeSpectrum.mulZeroAddOneEquivClopens, PrimeSpectrum.isIdempotentElemEquivClopens, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isClopen_iff_zeroLocus, PrimeSpectrum.isClopen_iff, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm, Submodule.isIdempotentElemEquiv Read Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1077-1089: affine spectrum idempotent/clopen correspondence only.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsIdempotentElem\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "isIdempotentElemEquivClopens|isClopen_iff",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean Read Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1077-1089: affine spectrum idempotent/clopen correspondence only.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen decompositions of a ringed algebraic space are classified by idempotents of its global function ring",
+   "results": "Hits: PrimeSpectrum.isIdempotentElemEquivClopens, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isClopen_iff, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm, PrimeSpectrum.isIdempotentElemEquivClopens_symm_top Read Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1077-1089: affine spectrum idempotent/clopen correspondence only.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spectrum results do not state descent for arbitrary algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-global-algebra-components",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Final shrinking after the proper open has been spread to an etale neighbourhood: Tag 0E1E keeps the number of geometric connected components equal to one. Supporting input: Tag 0E1E proof, identification of geometric component count with the dimension of global sections, using Tag 0DMY. General geometric input for the idempotent/decomposition paragraph of Tag 0DMY proof (2), before using the finiteness of the global algebra.",
+   "via": [
+    "lem-sfb-space-proper-global-algebra-components",
+    "lem-sfb-space-proper-flat-geometric-component-count",
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-global-idempotent-clopen",
+  "worker": "stage1",
+  "summary": "Expanded the general idempotent paragraph of Tag 0DMY into atlas equalizer descent, saturated clopen construction, inverse descent, uniqueness and Boolean identities. Reused all prerequisite statements; no new nodes. Statement and inherited blueprint ancestry are unchanged.",
+  "blueprint": "Auxiliary to det-thm-sf-ctf-stability-direct-images proof (3), through the inherited stable-Picard alteration chain and Tag 0DMY proof (2); realizes its idempotent/decomposition paragraph without using properness. The imported ancestor tool reports None for this existing chain; retained its existing from.node and via. Searched blueprint idempotent, open subspace, global sections; no exact algebraic-space duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed-site atlas equalizer and localization tool; the current unit supplies no alternative descent interface."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point fibre-product, surjectivity and open-subspace pullback calculus; needed to descend the saturated chart locus."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic classification of opens of an algebraic space by unique open subspaces; no current-unit node states that classification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-817370352",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-817370352 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement in full. There are no new nodes, and the statement and stmt_deps are unchanged. Source check: Stacks 0DMY proof (2) (spaces-over-fields.tex l.2429ff) gives the idempotent↔decomposition paragraph without using properness, and 03BZ gives the unique open subspace. Step 1: the enlarged-site equalizer gives A=Eq(O(P)⇉O(P×_XP)), and scheme clause (c) gives s^{-1}V=t^{-1}V. Step 2: point fibre-product surjectivity shows V is saturated; since |p| is open and surjective, C is clopen and corresponds to a unique open subspace. The chart formula follows from W=P×_XT, a surjective base change; for a non-atlas chart T the cited arbitrary-morphism image clause applies. The affine case gives D(e|_T) from the Mathlib leaf. Step 3: descent of a via scheme injectivity and the equalizer; 1/0 on U and Z is checked on the pulled-back atlases. Steps 4 and 5: injectivity, sheaf uniqueness, and Boolean identities from germs being 0 or 1. Tested the empty space, e=0/1, Spec k[ε], an infinite disjoint union and a non-quasi-separated space; nothing assumes finiteness. proof_deps equal the union of the step uses. No duplicate exists in the DAG: the only citer is the proper-global-algebra-components node, which uses only clauses stated here. Batch-5 check: lem-trf-space-enlarged-etale-ringed-site-model is generic algebraic-space site foundations (03G1/03H7), not part of the trace formula or Poincaré duality or their proofs. The two a1 point/open-subspace calculus nodes reach trf only through the general definition def-trf-algebraic-space, which is already a base stmt_dep. All three are accepted as declared generic tool_uses. Live and side-live still show the item unsplit, so no other group has superseded it. No SGA is cited and no fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGlobalIdempotentClopen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.global_idempotent_clopen",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.structureSectionsCommRing",
+   "AlgebraicGeometry.AlgebraicSpace.global_idempotent_clopen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGlobalIdempotentClopen.lean",
+  "statement": "theorem global_idempotent_clopen {S : Scheme.{u}} (X : AlgebraicSpace S) : ∃ E : {e : RingCat.sectionsSubring X.structurePresheaf // IsIdempotentElem e} ≃ {U : OpenSubspace X // IsClosed (pointImage U.val.ι)}, (∀ U : {U : OpenSubspace X // IsClosed (pointImage U.val.ι)}, IsClopen (pointImage U.val.val.ι)) ∧ (∀ C : Set (Point X.obj.obj), IsClopen C → ∃! U : OpenSubspace X, pointImage U.val.ι = C) ∧ (∀ (e : {e : RingCat.sectionsSubring X.structurePresheaf // IsIdempotentElem e}) (B : CommRingCat.{u}) (p : Spec B ⟶ S) (a : yoneda.obj (Over.mk p) ⟶ X.obj.obj) (ha : IsEtale a), schemePointMap a ⁻¹' pointImage (E e).val.val.ι = (PrimeSpectrum.basicOpen ((Scheme.ΓSpecIso B).hom (e.val.val (op ⟨CostructuredArrow.mk a, ha⟩)))).carrier) ∧ (∀ (U : {U : OpenSubspace X // IsClosed (pointImage U.val.ι)}) (T : X.EtaleSite) (x : X.etaleForget.obj T), (schemePointMap T.obj.hom x ∈ pointImage U.val.val.ι → (X.etaleForget.obj T).presheaf.Γgerm x ((E.symm U).val.val (op T)) = 1) ∧ (schemePointMap T.obj.hom x ∉ pointImage U.val.val.ι → (X.etaleForget.obj T).presheaf.Γgerm x ((E.symm U).val.val (op T)) = 0)) ∧ (E 0).val.val = ⊥ ∧ (E 1).val.val = ⊤ ∧ (∀ e : {e : RingCat.sectionsSubring X.structurePresheaf // IsIdempotentElem e}, pointImage (E ⟨1 - e.val, e.property.one_sub⟩).val.val.ι = (pointImage (E e).val.val.ι)ᶜ) ∧ (∀ e f : {e : RingCat.sectionsSubring X.structurePresheaf // IsIdempotentElem e}, (E ⟨e.val * f.val, e.property.mul f.property⟩).val.val = (E e).val.val ⊓ (E f).val.val)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Global sections are Mathlib RingCat.sectionsSubring of the recorded structurePresheaf, with its pointwise commutative ring structure. The chart pullback is stated by its point inverse image; the existing unique open-subspace classification identifies this with the corresponding principal-open subspace. Complement equality is similarly expressed on point images; zero, one and product are literal subfunctor equalities."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6747d4460",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_dep records and the live Lean owners (EtaleSite, structurePresheaf, OpenSubspace, pointImage, schemePointMap), plus Stacks 0DMY proof (2) and 03BZ. A = RingCat.sectionsSubring of the recorded structurePresheaf (compatible families on the small étale site); the only new declaration is the CommRing instance (real data, not a duplicate of the small-model steinGlobalFunctions). The bijection target is open subspaces with closed point image; the clopen-image and ∃! open-subspace clauses match 03BZ. The chart formula covers all affine étale charts with no surjectivity and pins E; ΓSpecIso direction is correct. The inverse is given by germs 1/0 on every chart; U_0=⊥, U_1=⊤, complement on point images, U_ef=⊓. No extra hypotheses and a single universe u. Edge cases checked: empty X, zero B, e=0/1, k[ε], infinite/non-qs spaces. lean.statement is verbatim in the file, one sorry, non-lean node fields equal to live, docstrings carry source, blueprint tag and the 5-step proof, report sections present. No findings, no fixes, no compile run."
+ }
+}

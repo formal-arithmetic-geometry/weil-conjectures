@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-fixed-point-tangent-weights",
+ "kind": "definition",
+ "title": "Character weight subspaces at a fixed rational point of a scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field], $X$ an $F$-scheme [def-pc-scheme], and $a:\\mathbf G_m\\times_F X\\to X$ an action, with $\\mathbf G_m$ as in [def-sc-gm-ga]. For $p\\in X$, use the canonical residue-field vector space $T_{X/F,p}$ of dual-number tangent vectors [def-sc-scheme-tangent-space]. For $n\\in\\mathbb Z$, define $W_n(p)$ to be the $\\kappa(p)$-linear span of the vectors $v$ for which, for every $t\\in F^\\times$, the actual action of the constant dual-number point $t$ on $v$ equals the tangent point of $\\bar t^{\\,n}v$, where $\\bar t$ is the image under the structural map $F\\to\\kappa(p)$. Define $T_pX_{>0}=\\sum_{n>0}W_n(p)$. At a rational fixed point over an algebraically closed $F$, these are the character eigenspaces for $t\\mapsto t^n$ and their strictly positive sum; this uses character weights, not eigenvalues of the differentiated character. The auxiliary maps are the structural residue scalar map and the existing tangent vector viewed as a morphism over $F$ from its dual-number spectrum.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-gm-ga",
+  "def-sc-scheme-tangent-space"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Tangent character-weight convention immediately before Theorem 13.47, p.272; Corollary 13.48, p.273; the dual-number tangent convention is Stacks Tag 0B2C."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "character weight subspaces of the tangent space of a scheme at a multiplicative group fixed rational point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, and a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspac\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"LieModule.genWeightSpaceOf.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ χ_1 : R),\\n  χ = χ_1 → ∀ (x x_1 : L), x = x\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, if two scalars $\\\\chi, \\\\chi_1 \\\\in R$ are equal and two elements $x, x_1 \\\\in \\\\mathfrak{g}$ are equal, t\"}\n  {\"name\": \"LieModule.weightSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (χ χ_1 : L → R), χ = χ_1 → LieModule.weightSpace M χ = LieModule.weightSpace M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, if two Lie algebra homomorphisms $ \\\\chi, \\\\chi_1: \\\\mathfrak{g} \\\\to R $ are equal, then their corresponding weig\"}\n  {\"name\": \"LieModule.genWeightSpace_le_genWeightSpaceOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(x : L) (χ : L → R) : genWeightSpace M χ ≤ genWeightSpaceOf M (χ x) x\", \"doc\": \"For any element $ x $ in the Lie algebra $ \\\\mathfrak{g} $ and any weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $, the generalized weight space of the Lie module $ M $ associated with $ \\\\chi $ is contai\"}\n  {\"name\": \"LieModule.mem_genWeightSpaceOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : R) (x : L) (m : M) : m ∈ genWeightSpaceOf M χ x ↔ ∃ k : ℕ, ((toEnd R L M x - χ • ↑1) ^ k) m = 0\", \"doc\": \"An element $ m $ belongs to the generalized weight space of the Lie module $ M $ associated to scalar $ \\\\chi \\\\in R $ and Lie algebra element $ x \\\\in \\\\mathfrak{g} $ if and only if there exists a natura\"}\n  {\"name\": \"LieModule.Weight.genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : Weight R L M) (x : L) : genWeightSpaceOf M (χ x) x ≠ ⊥\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and for any weight $\\\\chi \\\\in M$ and element $x \\\\in \\\\mathfrak{g}$, the generalized weight space associ\"}\n  {\"name\": \"LieModule.mem_genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (m : M) : m ∈ genWeightSpace M χ ↔ ∀ x, ∃ k : ℕ, ((toEnd R L M x - χ x • ↑1) ^ k) m = 0\", \"doc\": \"An element $ m $ of the Lie module $ M $ belongs to the generalized weight space associated with the weight function $ \\\\chi: \\\\mathfrak{g} \\\\to R $ if and only if for every $ x \\\\in \\\\mathfrak{g} $, there\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Lie algebra weights, cotangent complexes or manifolds; no general scheme fixed-point tangent weight construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive integer character weight spaces in the dual number tangent space of a scheme with a multiplicative group action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type (max w v)\", \"doc\": \"The cotangent space of an algebra extension $ S $ over a base ring $ R $ is defined as the tensor product of $ S $ with the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ R $. This constructio\"}\n  {\"name\": \"Algebra.Generators.basisCotangentAway_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S] (x : Unit),\\n  (Algebra.Generators.basisCotangentAway S r) x = Algebra.Generators.cMulXSubOneCotangent S r\", \"doc\": \"Constructs a basis for the cotangent module of the localization $ S_r $ (localization of $ S $ at the powers of $ r $) over $ S $, using the submersive presentation structure. This basis arises from t\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S],\\n  Algebra.Generators.cMulXSubOneCotangent S r =\\n    Algebra.Extension.Cotangent.mk ⟨MvPolynomial.C r * MvPolynomial.X () - 1, ⋯⟩\", \"doc\": \"In the cotangent module of the algebra extension obtained by localizing at $ r $, the element represented by the polynomial $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial embedding of $ r $ \"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Lie algebra weights, cotangent complexes or manifolds; no general scheme fixed-point tangent weight construction"
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*[Ww]eight|[Ww]eight.*[Tt]angent|positiveSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Lie algebra weights, cotangent complexes or manifolds; no general scheme fixed-point tangent weight construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def.*weightSpace|def.*positiveSpace\" lean/Sheaf/AlgebraicGeometry lean/WeilConjectures/AlgebraicGeometry; blueprint_refs.py search \"tangent weight\"",
+   "results": "Project has GmRepresentation.weightSpace on a given vector-space coaction and TorusCharacterTangent.weightSpace/positiveRaySpace only for group schemes at the identity. No general-scheme construction. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-attracting-cells",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: Bialynicki--Birula input to Milne 21.70; the generic projective theorem rather than a restatement of Bruhat cells; tangent positive-character dimension d_x in the attracting-cell statement.",
+   "via": [
+    "lem-sfb-projective-attracting-cells",
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedPointTangentWeights",
+  "declaration": "AlgebraicGeometry.ProjectiveAttractingCells.positiveSpace",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveAttractingCells.residueScalars",
+   "AlgebraicGeometry.ProjectiveAttractingCells.tangentBase",
+   "AlgebraicGeometry.ProjectiveAttractingCells.tangentPoint",
+   "AlgebraicGeometry.ProjectiveAttractingCells.weightSpace",
+   "AlgebraicGeometry.ProjectiveAttractingCells.positiveSpace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedPointTangentWeights.lean",
+  "statement": "def positiveSpace {F : Type u} [Field F] {X : Over (Spec (.of F))} (a : ModObj (StandardGroupSchemes.multiplicative F) X) (p : X.left) : Submodule (X.left.residueField p) (schemeTangentSpace F X.left X.hom p)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a89d981b2",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a89d981b2",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read item node (8 steps incl. Q28 step-8 converse), new def node def-sfb-fixed-point-tangent-weights, both modules, deps DiagonalProjectiveAction/StandardGroupSchemes/SchemeTangentSpace/TorusCharacterTangentWeights on side-live. Statement verbatim; node diff vs live only stmt_deps(+2 used defs)+lean. Hypotheses match without strengthening: weight-basis IsDiagonal embedding with group iso e (any finite-dim G_m-rep diagonalizes), coproduct-of-Spec F fixed scheme representing the scheme-theoretic fixed functor. IsExtension (agrees with the orbit on G_m, value x at 0) is equivalent to equivariance for separated X (Milne 13.57). Conclusions cover cells smooth/reduced/immersed, all-algebra bijection both ways, ≅A^d with d=finrank positiveSpace, partition, alg-closed base-change compatibility, uniqueness up to unique iso over X, unique open dense cell iff positiveSpace=⊤, Spec F case. weightSpace is the character t^n eigenspace over infinite F; sign checked on P^1 (attracting cell has weight +1). No hollow defs, docstrings with source/blueprint, sorry only, no universe restriction; no file changed so no compile."
+ }
+}

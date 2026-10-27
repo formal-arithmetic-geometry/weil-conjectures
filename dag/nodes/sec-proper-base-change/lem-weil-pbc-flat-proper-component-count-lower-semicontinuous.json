@@ -34,128 +34,61 @@
  ],
  "proof": [
   {
-   "text": "Fix $s\\in S$ and replace $S$ by an affine open neighbourhood of $s$, pulling back $X$. This does not change any fibre at a point of that open. Properness is preserved by this base change. Flatness and local finite presentation restrict because the same stalk maps and affine presentation witnesses are used. Write $S=\\operatorname{Spec}A$. Take the canonical Stein factorization $X\\xrightarrow{q}T=\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)\\xrightarrow{\\pi}S$. The affine Stein theorem gives that $\\pi$ is integral and $q$ is proper with geometrically connected, hence nonempty, fibres. The Stein-fibre lemma gives finitely many points of $T$ over $s$, all with finite residue extensions.",
+   "text": "Each geometric fibre is proper over an algebraically closed field, hence locally of finite type over a Noetherian base and quasi-compact. It is therefore Noetherian and has finitely many connected components. Choose n(s) to be their Nat.card. An empty geometric fibre has empty component quotient, so n(s)=0.",
    "uses": [
     "lem-weil-pbc-proper-base-change",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-stein-finite-fibres-residue-fields"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-connected-components-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply integral-fibre etale splitting to $\\pi:T\\to S$ at $s$. Its two extra hypotheses are exactly the finiteness and residue-extension conclusions of step 1. Obtain an affine etale $g:U\\to S$, $u$ over $s$, and $T_U=T\\times_SU=\\coprod_{i=1}^m V_i$, with each $V_i$ open and closed and having a single point $v_i$ over $u$ with purely inseparable residue extension. Set $X_U=X\\times_SU$ and $X_i=q_U^{-1}(V_i)$, where $q_U:X_U\\to T_U$ is the base change of $q$. Preimages of open-and-closed subsets are open and closed; they form a finite disjoint partition of $X_U$.",
+   "text": "Use the pointed etale clopen partition of the proper family at s. Pull its clopens back to the marked geometric fibre. The equivalence ConnectedComponents.equivOfIsClopenOfIsConnected identifies this component quotient with Fin m. Base-change invariance identifies its Nat.card with n(s); the conversion from ENat.card is valid by the finiteness just proved.",
    "uses": [
-    "lem-weil-pbc-integral-fibre-etale-splitting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
-  },
-  {
-   "text": "For every $w\\in U$, base-change invariance gives $n_{X_U/U}(w)=n_{X/S}(g(w))$, in particular equality at $u$ and $s$. The morphism $X_U\\to U$ is flat by flat base-change stability, and locally of finite presentation by the finite-presentation permanence theorem. Consequently each open subscheme $X_i$ is flat and locally of finite presentation over $U$: its stalk maps are those of $X_U\\to U$, and if $\\operatorname{Spec}C$ is an affine presentation witness at a point of $X_i$, choose a principal open $D(h)$ containing that point and contained in $X_i$. If $C=R[x_1,\\ldots,x_a]/(r_1,\\ldots,r_b)$, then $C_h=R[x_1,\\ldots,x_a,z]/(r_1,\\ldots,r_b,zh-1)$ is again finitely presented over $R$.",
-   "uses": [
-    "lem-weil-pbc-geometric-component-count-base-change",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
-  },
-  {
-   "text": "Choose an algebraic closure $\\Omega$ of $\\kappa(u)$. The fibre $(V_i)_u\\to\\operatorname{Spec}\\kappa(u)$ is injective on points and has a purely inseparable residue extension at its only point, so it is radicial. The radicial/universally-injective equivalence implies that $(V_i)_{\\bar u}$ has at most one point. It has at least one: in positive characteristic send each $a\\in\\kappa(v_i)$, with $a^{p^r}=c\\in\\kappa(u)$, to the unique root of $Z^{p^r}-c$ in $\\Omega$. Uniqueness makes this independent of the exponent; choosing a common exponent for two elements and using $(a+b)^{p^r}=a^{p^r}+b^{p^r}$ shows that it preserves sums, and the corresponding product identity shows it preserves products. It fixes $\\kappa(u)$ and sends $1$ to $1$, so it is an injective field homomorphism. In characteristic zero the extension is trivial. Composing $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(v_i)$ with the residue-field point gives an $\\Omega$-point of $(V_i)_u$. Thus $(V_i)_{\\bar u}$ has exactly one point $z_i$. The fibre of $q_\\Omega$ at $z_i$ is a field extension of the fibre of $q$ at the image of $z_i$ in $T$: this follows by reassociating the fibre products. That fibre is connected and nonempty by the geometrically-connected-fibre clause of the affine Stein theorem and the definition of geometric connectedness. The fibre homeomorphism identifies its underlying space with $q_\\Omega^{-1}(z_i)$, which is the whole of $(X_i)_{\\bar u}$. Hence $(X_i)_{\\bar u}$ is connected and nonempty.",
-   "uses": [
-    "def-weil-radicial-morphism",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "lem-weil-pbc-stein-factorization-affine",
-    "def-pc-geometrically-irreducible",
-    "def-pc-scheme-fibre",
-    "def-weil-algebraic-closure",
-    "def-pc-field-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
-  },
-  {
-   "text": "The geometric fibre $(X_U)_{\\bar u}$ is partitioned into the $m$ pairwise disjoint open-and-closed connected nonempty subsets $(X_i)_{\\bar u}$. Each is a maximal connected subset: a connected subset cannot meet both an open-and-closed piece and its complement. Thus its component count is exactly $m$, and step 3 gives $n(s)=m<\\infty$. This argument works at every $s$, proving finiteness everywhere. For $m=0$ the partition is empty, the geometric fibre is empty and $n(s)=0$. In that case the required inequality is automatic on $S$ because all counts are nonnegative.",
-   "uses": [
-    "def-weil-connected-scheme",
+    "lem-weil-pbc-proper-geometric-fibre-clopen-partition",
     "lem-weil-pbc-geometric-component-count-base-change"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
+   "elementary": false
   },
   {
-   "text": "For $m>0$, each $X_i\\to U$ is flat and locally of finite presentation, so its image $W_i$ is open. It contains $u$ by step 4. Put $W=\\bigcap_{i=1}^m W_i$, an open neighbourhood of $u$. For $w\\in W$, every $(X_i)_w$ is nonempty. Its geometric base change is still nonempty: take a nonempty affine open $\\operatorname{Spec}D$ in $(X_i)_w$; the map $D\\to D\\otimes_{\\kappa(w)}\\overline{\\kappa(w)}$ is faithfully flat, so its spectrum surjects onto $\\operatorname{Spec}D$. The geometric fibre $(X_U)_{\\bar w}$ therefore has at least $m$ components, because it is partitioned into $m$ nonempty open-and-closed pieces and each connected component lies in a single piece.",
+   "text": "The base-changed source map p is flat and locally of finite presentation, hence open. Let W be the intersection of the finitely many open images p(V_i). It contains u since each marked geometric piece is nonempty. At every w in W, choose a point of each V_i above w. The existence of pullback points over a compatible pair, applied to the algebraic closure point, makes each geometric piece nonempty. The clopen partition equivalence identifies all components with a sum over Fin m of component quotients. Choosing one component in each nonempty summand gives an injection Fin m into the total component quotient, proving the cardinal inequality.",
    "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "def-weil-connected-scheme"
+    "def-pc-fibre-product",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-scheme-pullback-compatible-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The etale morphism $g$ is open, so $V=g(W)$ is an open neighbourhood of $s$ in the affine open chosen in step 1, hence also in the original $S$. Given $t\\in V$, choose $w\\in W$ with $g(w)=t$. Step 3 and step 6 give $n(t)=n_{X_U/U}(w)\\geq m=n(s)$. For an integer threshold $a$, every point with $n(s)>a$ has such an open neighbourhood lying in $\\{t:n(t)>a\\}$; hence all strict superlevel sets are open, which is lower semicontinuity.",
+   "text": "The etale map g is open, so g(W) is an open neighbourhood of s. For t in g(W), choose w in W above t. Base-change invariance identifies n(t) with the component count at w, which is at least m=n(s). Finite intersections and the injection also cover m=0 without a separate nonemptiness assumption.",
    "uses": [
     "lem-weil-pbc-etale-morphism-open-map",
     "lem-weil-pbc-geometric-component-count-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-field-extension",
-  "def-pc-geometrically-irreducible",
-  "def-pc-scheme-fibre",
-  "def-sbc-locally-finite-presentation",
-  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
   "def-weil-connected-scheme",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-radicial-morphism",
+  "lem-sfb-noetherian-connected-components-open",
   "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-flat-lfp-open",
   "lem-weil-pbc-flat-morphism-base-change",
   "lem-weil-pbc-geometric-component-count-base-change",
-  "lem-weil-pbc-integral-fibre-etale-splitting",
   "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-geometric-fibre-clopen-partition",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-stein-factorization-affine",
-  "lem-weil-pbc-stein-finite-fibres-residue-fields"
+  "lem-weil-pbc-scheme-pullback-compatible-point"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof; Lean reduction by S8: Noetherian finiteness and persistence from an etale clopen partition"
  },
  "mathlib_searches": [
   {
@@ -281,7 +214,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6716fe386 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements and sources, report, and chapter/unit route. All seven proof steps hold; Tags 0BUI, 055F, 0E0M, and 0BSR match the stated hypotheses and conclusions. Checked empty, separable, and nonreduced purely inseparable fibres; found no duplicate or restated split. Target morphisms and coefficient categories remain unchanged. Detailed checks and an inherited missing descendant are recorded in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
@@ -299,5 +243,15 @@
   "by": "NJ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T144038-L-1161962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

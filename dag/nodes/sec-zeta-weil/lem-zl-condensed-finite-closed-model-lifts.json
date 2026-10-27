@@ -1,0 +1,344 @@
+{
+ "id": "lem-zl-condensed-finite-closed-model-lifts",
+ "kind": "statement",
+ "title": "Henselian lifts of prescribed models on a finite closed covering",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and put $R=\\Gamma(*,\\Lambda)$. For a scheme $T$ [def-pc-scheme], let $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on its small pro-etale site [def-weil-pbc-proetale-site], and write $D(T,\\Lambda)=D(T_{\\mathrm{proet}},\\Lambda_T)$ for the ordinary unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Dualizable means admitting evaluation and coevaluation for derived tensor with unit $\\Lambda_T[0]$, satisfying both triangle identities. Put $L_T(P)=\\Lambda_T\\otimes^L_{\\underline R}\\underline P$ for the canonical scalar realization [def-zl-condensed-scalar-realization], where underlines are discrete constant sheaves. A perfect ring complex is isomorphic to a bounded complex of finitely generated projective modules [def-pc-perfect-ring-complex].\n\nLet $A$ be a commutative ring, $X=\\operatorname{Spec}A$, and let $I_a\\subseteq A$ be ideals indexed by a finite set, with $X_a=\\operatorname{Spec}(A/I_a)$ whose underlying closed subsets cover $X$. Let $K\\in D(X,\\Lambda)$ be dualizable. For each $a$, suppose given an affine faithfully flat ind-etale cover $W_a=\\operatorname{Spec}\\overline C_a\\to X_a$ with $W_a$ w-contractible [def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-ind-etale-algebra, sk-def-pe-wlocal], a perfect $P_a\\in D(R)$, and a derived isomorphism $\\alpha_a:K|_{W_a}\\simeq L_{W_a}(P_a)$.\n\nSet $C_a=H_A(\\overline C_a)$ using the small filtered-diagram colimit construction [def-exc-ind-etale-closed-lift], and put $V_a=\\operatorname{Spec}C_a$. Then $C_a$ is ind-etale over $A$, its specified reduction map $C_a/I_aC_a\\to\\overline C_a$ is an isomorphism, the pair $(C_a,I_aC_a)$ is henselian [def-weil-pbc-henselian-terminology], and $V_a$ is w-contractible. Under this identification of the closed fiber with $W_a$, there is a unique derived isomorphism $\\widetilde\\alpha_a:K|_{V_a}\\simeq L_{V_a}(P_a)$ restricting to $\\alpha_a$.\n\nEach $V_a\\to X$ is weakly etale and its image contains $|X_a|$. The finite affine disjoint union $\\coprod_a V_a\\to X$ is surjective, flat and quasi-compact, and the family $\\{V_a\\to X\\}_a$ is a pro-etale covering. The $P_a$ need not agree. The statement includes the empty index set when $X$ is empty; it does not assert that arbitrary closed subschemes of w-contractible schemes are w-contractible.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, finite-component paragraph refined by w-contractible covers; Corollary 4.4(2); Bhatt--Scholze Definition 2.2.10 and Lemmas 2.2.12, 6.1.1"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-zl-condensed-scalar-realization",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-exc-ind-etale-closed-lift",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Fix an index $a$ and abbreviate $I=I_a$, $\\overline C=\\overline C_a$, $C=H_A(\\overline C)$ and $J=IC$. The indexing category in [def-exc-ind-etale-closed-lift] is small, and is filtered by [lem-exc-closed-lift-filtered]. Its terms are finitely presented etale $A$-algebras, so its colimit $C$ is ind-etale by [def-weil-pbc-ind-etale-algebra]. The specified map $C/J\\to\\overline C$ is an isomorphism by [lem-exc-closed-lift-reduction], and $(C,J)$ is henselian by [lem-zl-henselian-indetale-closed-lift].",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "lem-exc-closed-lift-filtered",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-exc-closed-lift-reduction",
+    "lem-zl-henselian-indetale-closed-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 2.2.10, Lemma 2.2.12, and the henselian assertion in the proof of Lemma 6.1.2; Stacks Tag 097P (lemma-lift-ind-etale)"
+   }
+  },
+  {
+   "text": "Use the bijective specified reduction to form a ring equivalence C/J ≃ Cbar. Transport w-contractibility across this equivalence (the proved private RingHom.wContractible_of_ringEquiv helper in WeilConjectures.RingTheory.WContractibleGeometricCriterion). Apply [lem-zl-condensed-henselian-lisse-rigidity] to (C,J): C is w-contractible, and quotient pullback is fully faithful on dualizable objects. The specified fiber map is the quotient immersion preceded by the spectrum isomorphism of the reduction equivalence. Pullback along that isomorphism is an equivalence: derive upperStarComp and upperStarId to exhibit its inverse. Therefore the actual specified fiber pullback is fully faithful on dualizable objects.",
+   "uses": [
+    "lem-zl-condensed-henselian-lisse-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2)"
+   }
+  },
+  {
+   "text": "By [lem-zl-condensed-lisse-proetale-locality], inverse image along $V_a\\to X$ preserves dualizability, so $K|_{V_a}$ is dualizable. Since $P_a$ is perfect and $V_a$ is w-contractible affine, [lem-zl-condensed-wcontractible-projective-calculus] makes $L_{V_a}(P_a)$ dualizable. The same inverse-image lemma gives the canonical identification $i_a^*L_{V_a}(P_a)\\simeq L_{W_a}(P_a)$. Thus $\\alpha_a$ is an isomorphism between the restrictions of these two dualizable objects.",
+   "uses": [
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-wcontractible-projective-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 pullback paragraph; Lemma 4.1; Theorem 4.13, reverse implication and finite-component paragraph"
+   }
+  },
+  {
+   "text": "Let M be K pulled back to Spec C and N the prescribed scalar realization of P. Regard M and N as objects of the full subcategory of dualizable objects, using step 3. Compose the fully faithful quotient pullback of [lem-zl-condensed-henselian-lisse-rigidity] with the inclusion and the equivalence from the reduction isomorphism in step 2. Transport the given alpha by the inverse derived-composition comparison and inverse canonical scalar comparison. Mathlib Functor.FullyFaithful.isoEquiv gives its unique preimage isomorphism M ≅ N. Cancellation of those two specified comparisons proves that its restriction is exactly alpha. The same cancellation and injectivity prove uniqueness.",
+   "uses": [
+    "lem-zl-condensed-henselian-lisse-rigidity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(2); the unique extension in Theorem 4.13, finite-component paragraph"
+   }
+  },
+  {
+   "text": "The already proved source instance Algebra.IndEtale.weaklyEtale (WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale), specialized to ClosedLift, makes each structure morphism weakly etale and hence flat [def-weil-pbc-ind-etale-algebra, def-weil-weakly-etale-morphism]. The given faithfully flat map A/I_a → Cbar_a is surjective on spectra by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Composing its preimages with the retained fiber map proves the asserted range inclusion, since the retained map is an A-algebra homomorphism and the A-algebra structure on Cbar factors through A/I_a. The range of Spec(A/I_a) → Spec A is the zero locus of I_a. The covering hypothesis therefore gives joint surjectivity of the lifted family.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 2.2.10 and Lemma 6.1.1; Stacks Tag 00HQ (lemma-ff-rings)"
+   }
+  },
+  {
+   "text": "The finite coproduct of the affine schemes Spec C_a is affine by [lem-weil-pbc-affine-morphism-permanence]. Its map to Spec A is affine by [lem-weil-pbc-morphism-affine-schemes-affine], hence quasi-compact. Joint surjectivity from step 5 gives surjectivity of Sigma.desc. Flatness is local on the open summands: apply Mathlib IsZariskiLocalAtSource.sigmaDesc to their flat structure morphisms [def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SH (lemma-morphism-affines-affine), 01S7 (lemma-affine-separated), and 01U3 (definition-flat)"
+   }
+  },
+  {
+   "text": "Package the finite family as a PreZeroHypercover. Each structure map is quasi-compact because it is a morphism of affine schemes [lem-weil-pbc-morphism-affine-schemes-affine, lem-weil-pbc-affine-morphism-permanence]. For an affine open U, each member is spectral and the family is jointly surjective. Mathlib IsCompactOpenCovered.of_finite_of_isSpectralMap therefore gives the QuasiCompactCover condition. Together with joint surjectivity and weak etaleness this is precisely [def-weil-pbc-proetale-covering]. All APIs allow a finite index in a separate universe, including the empty index type. No step compares different P_a or assumes that arbitrary closed subschemes of w-contractible schemes are w-contractible.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0989 (definition-fpqc-covering); HRS Theorem 4.13, finite-component paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-ind-etale-closed-lift",
+  "lem-exc-closed-lift-filtered",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-closed-lift-reduction",
+  "lem-zl-henselian-indetale-closed-lift",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-condensed-wcontractible-projective-calculus",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13 finite-component paragraph, refined to prescribed w-contractible covers instead of assuming arbitrary closed subschemes are w-contractible; Corollary 4.4(2); Bhatt--Scholze Definition 2.2.10 and Lemmas 2.2.12, 6.1.1. Lean proof by M3, 2026-10-24: use the existing source ind-etale-to-weakly-etale instance instead of the broader stability package; transport the rigidity equivalence along the specified reduction ring isomorphism and apply FullyFaithful.isoEquiv, then the finite spectral covering API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given perfect scalar models of a dualizable condensed sheaf on weakly contractible covers of a finite closed covering, henselian ind etale lifts form a pro etale covering carrying those same models",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend isomorphisms of lisse condensed complexes from a weakly contractible closed fiber to its henselian ind etale lift and form a finite fpqc cover",
+   "results": "ComplexShape.Embedding.isIso_liftExtend_f_iff; HomologicalComplex.extendXIso; CondensedSet.LocallyConstant.iso; ComplexShape.Embedding.liftExtend_f; CategoryTheory.Localization.Lifting.ofIsos; CategoryTheory.GrothendieckTopology.OneHypercover.isoMk; ComplexShape.Embedding.liftExtend; ComplexShape.Embedding.liftExtend_homRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, IsHenselianRing",
+   "results": "loogle: unknown identifier 'IsHenselianRing'",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*(condensed|lisse)|condensed.*henselian|Hens.*indEtale",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, CategoryTheory.Functor.FullyFaithful",
+   "results": "CondensedMod.LocallyConstant.fullyFaithfulFunctor, Mathlib/Condensed/Discrete/Module.lean:146; read, concerns ordinary modules over a discrete ring only",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary locally constant fully faithful functor does not give henselian lifting of derived condensed coefficient models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For condensed coefficients extend a prescribed isomorphism between dualizable complexes uniquely along a henselian closed immersion of w-contractible affine schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine limit compatibility, cover universe changes, HenselianRing, and ordinary condensed category interfaces do not give prescribed derived lisse model lifts on henselian closed fibers or the resulting finite cover."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*(condensed|lisse)|condensed.*henselian|closedModelLift|closed_model_lift",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine limit compatibility, cover universe changes, HenselianRing, and ordinary condensed category interfaces do not give prescribed derived lisse model lifts on henselian closed fibers or the resulting finite cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian lifts of w contractible covers of finitely many closed subschemes uniquely extend perfect constant condensed sheaf models and form a pro etale cover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.ulift\", \"HenselianLocalRing.casesOn\", \"HenselianLocalRing.mk\", \"HenselianLocalRing\", \"LightCondensed\", \"LightCondensed.IsDiscrete\", \"Field.henselian\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine limit compatibility, cover universe changes, HenselianRing, and ordinary condensed category interfaces do not give prescribed derived lisse model lifts on henselian closed fibers or the resulting finite cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, HenselianRing",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine limit compatibility, cover universe changes, HenselianRing, and ordinary condensed category interfaces do not give prescribed derived lisse model lifts on henselian closed fibers or the resulting finite cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite covering of Spec A by closed subschemes admits affine ind etale henselian neighbourhood lifts of prescribed w contractible covers with uniquely lifted lisse sheaf isomorphisms",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine limit compatibility, cover universe changes, HenselianRing, and ordinary condensed category interfaces do not give prescribed derived lisse model lifts on henselian closed fibers or the resulting finite cover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-dualizable-local-perfect-models",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. Local perfect-model proof: Theorem 4.13, finite-component paragraph refined by w-contractible covers; Corollary 4.4(2); Bhatt--Scholze Definition 2.2.10 and Lemmas 2.2.12, 6.1.1",
+   "via": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-condensed-finite-closed-model-lifts",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven explicit steps reuse the existing closed-lift, henselian-rigidity, scalar dualizability and affine-cover tools. Lift both directions of each prescribed isomorphism and use faithfulness for inverse identities and uniqueness. Check all affine opens to prove the covering condition. No new nodes and no Lean attachment.",
+  "blueprint": "Realizes the inherited auxiliary local-perfect-model route supporting prop-zl-smooth-proper-relative-purity Step 3 via the adic Hom-tensor criterion and dualizable truncations. Specifically HRS Theorem 4.13 finite-component paragraph, using prescribed w-contractible closed-fiber covers; current main-20261015 purity unit and chapter route unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-exc-ind-etale-closed-lift",
+    "why": "Shared small colimit construction underlying the specified lift. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-exc-closed-lift-filtered",
+    "why": "Generic filteredness of the closed-lift diagram, needed for ind-etaleness. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-ind-etale-algebra",
+    "why": "Definition of ind-etale used to interpret this colimit. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-exc-closed-lift-reduction",
+    "why": "Specified reduction isomorphism, not a change of purity route. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic implication ind-etale implies weakly etale. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "def-weil-weakly-etale-morphism",
+    "why": "Flatness is a defining clause of weak etaleness. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic affine surjectivity tool for the given closed-fiber cover. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic finite affine union and affine-map quasi-compactness tools. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affine-preimage tool for maps between affine schemes. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "def-weil-flat-morphism",
+    "why": "Pointwise definition verifies flatness on the open summands. No node of the purity unit states this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-covering",
+    "why": "Definition of the covering condition. No node of the purity unit states this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exc-ind-etale-closed-lift",
+  "lem-exc-closed-lift-filtered",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-closed-lift-reduction",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-8dbc82de9",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8dbc82de9 (reviewer sub-agent of L); spot-checked: I read the whole split; I make no changes. The item's statement matches live byte for byte, and live still has the item unsplit with no repair note, so no re-split rule applies. The stmt_deps edit is fine: def-sfb-site-derived-constant-module-functor is dropped (its use already goes through def-zl-condensed-scalar-realization), and the weakly étale, flat, finite-type/quasi-compact and pro-étale-covering definitions the last paragraph uses are added. Source: I read HRS (arXiv 2305.18131) Cor 4.4(1)(2) and the finite-component paragraph of Thm 4.13 in the local PDF. The item swaps the BS 2.2.15 closed-subscheme shortcut for the given w-contractible covers W_a, and uses the ind-étale lift H_A instead of the henselization. Steps: 1 (filtered small diagram ⇒ ind-étale; reduction C/IC≅C̄; henselian pair) uses exactly what the cited statements say. 2: the rigidity node gives V_a w-contractible, since w-contractibility is an iso-invariant ring property and Spec(C/IC)≅W_a, and gives i^* fully faithful on dualizable objects. 3: locality says f^* keeps dualizables and commutes with L(P); the projective calculus makes L_V(P) dualizable without flatness. The equality W_a→V_a→X = W_a→X_a→X holds because ε is an A-algebra map. 4: lifting α and α⁻¹ and uniqueness are elementary. 5: ind-étale ⇒ weakly étale ⇒ flat; faithfully flat ⇒ surjective on spectra; with the factorisation this gives joint surjectivity. 6: permanence clauses (3),(4), morphisms of affines are affine, flatness on local rings. 7: definition of fpqc/pro-étale covering. Edge cases checked: empty index set (X=∅), I_a=A (C̄=0 is terminal, so C=0), I_a=0, distinct P_a, nonreduced A, non-f.g. ideals. No new nodes, no cycle, no SGA. Batch-5 flag: rigidity → wstrict-local-invariance → lem-trf-henselian-smooth-algebra-lifting, which is Stacks 0H74 (smooth algebra maps lift along henselian pairs). That is pure commutative algebra, given by neither the trace-formula leaf nor the Poincaré-duality leaf and not a step of either, so I accept it. I accept the split_report tool_uses (closed-lift construction and lemmas from sk-prop-sf-open-closed-triangle, plus generic pbc ind-étale, flat, affine and covering tools); for the maintainer: the worker wrote tool_uses themselves, against C8."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedFiniteClosedModelLifts",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_finite_closed_model_lifts",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedModelLiftMap",
+   "AlgebraicGeometry.ProEtale.closedModelFiberMap",
+   "AlgebraicGeometry.ProEtale.closedModelRestriction",
+   "AlgebraicGeometry.ProEtale.condensed_finite_closed_model_lifts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFiniteClosedModelLifts.lean",
+  "statement": "theorem condensed_finite_closed_model_lifts (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (A : Type u) [CommRing A] (ι : Type v) [Finite ι] (I : ι → Ideal A) (hcover : ∀ x : PrimeSpectrum A, ∃ a : ι, I a ≤ x.asIdeal) (Cbar : ι → Type u) [∀ a : ι, CommRing (Cbar a)] [∀ a : ι, Algebra A (Cbar a)] [∀ a : ι, Algebra (A ⧸ I a) (Cbar a)] [∀ a : ι, IsScalarTower A (A ⧸ I a) (Cbar a)] [∀ a : ι, Algebra.IndEtale (A ⧸ I a) (Cbar a)] [∀ a : ι, Module.FaithfullyFlat (A ⧸ I a) (Cbar a)] [∀ a : ι, IsWContractibleRing (Cbar a)] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of A))) Ab.{u + 1}) (condensedRingObj Λ.X (Spec (.of A))))) (hK : IsDualizable K) (P : ι → DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ.X))) (hP : ∀ a : ι, DerivedCategory.IsPerfectRingComplex (P a)) (α : ∀ a : ι, (CondensedRing.upperStar Λ.X (closedModelFiberMap A (Cbar a) ≫ closedModelLiftMap A (Cbar a))).mapDerivedCategory.obj K ≅ (condensedScalarRealization Λ.X (Spec (.of (Cbar a)))).obj (P a)) : (∀ a : ι, Algebra.IndEtale A (Algebra.ClosedLift A (Cbar a)) ∧ Function.Bijective (Algebra.ClosedLift.reduction A (Cbar a) (I a)) ∧ HenselianRing (Algebra.ClosedLift A (Cbar a)) ((I a).map (algebraMap A (Algebra.ClosedLift A (Cbar a)))) ∧ IsWContractibleRing (Algebra.ClosedLift A (Cbar a)) ∧ (∃! e : (CondensedRing.upperStar Λ.X (closedModelLiftMap A (Cbar a))).mapDerivedCategory.obj K ≅ (condensedScalarRealization Λ.X (Spec (.of (Algebra.ClosedLift A (Cbar a))))).obj (P a), closedModelRestriction Λ A (Cbar a) K (P a) e = α a) ∧ WeaklyEtale (closedModelLiftMap A (Cbar a)) ∧ Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I a)))) ⊆ Set.range (closedModelLiftMap A (Cbar a))) ∧ IsAffine (∐ fun a : ι ↦ Spec (.of (Algebra.ClosedLift A (Cbar a)))) ∧ Surjective (Sigma.desc (fun a : ι ↦ closedModelLiftMap A (Cbar a))) ∧ Flat (Sigma.desc (fun a : ι ↦ closedModelLiftMap A (Cbar a))) ∧ QuasiCompact (Sigma.desc (fun a : ι ↦ closedModelLiftMap A (Cbar a))) ∧ Presieve.ofArrows (fun a : ι ↦ Spec (.of (Algebra.ClosedLift A (Cbar a)))) (fun a : ι ↦ closedModelLiftMap A (Cbar a)) ∈ Scheme.proetalePrecoverage (Spec (.of A))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the actual small filtered-colimit Algebra.ClosedLift and its retained map. The input restriction to W_a is written along closedModelFiberMap followed by closedModelLiftMap, which is its given A-structure morphism because toAlgHom is an A-algebra map. closedModelRestriction uses the canonical derived composition and scalar-realization comparisons, so the unique isomorphism restricts to the prescribed alpha_a."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f48fc41e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Only the item lean field changed vs side-live (stmt_deps and all 17 dep records byte-identical, no new nodes or statement change); lean.statement verbatim in the file. Every hypothesis matches with nothing added: comm. condensed Λ, finite ι : Type v (empty allowed), closed-cover condition ∀x ∃a, I a ≤ x.asIdeal, IndEtale/FaithfullyFlat over A⧸I a + IsWContractibleRing Cbar, K IsDualizable, P perfect. α written along closedModelFiberMap ≫ closedModelLiftMap = Spec(algebraMap A Cbar) = W→X_a→X, so α is unrestricted. Conclusions: ClosedLift ind-étale over A; specified reduction bijective; HenselianRing on I·C; IsWContractibleRing C; ∃! e with closedModelRestriction e = α (canonical upperStarComp/mapDerivedCategoryCompIso/discreteScalarExtensionPullbackIso, directions checked); WeaklyEtale; image ⊇ |X_a|; ∐ affine, Sigma.desc surjective/flat/QC; ofArrows ∈ proetalePrecoverage. Edge cases ι=∅, I=A, I=0, zero Λ covered; universes match the deps. No hollow defs, only sorry, docstrings carry source/blueprint/7 steps, no name collisions. Advisory: discreteScalarExtensionPullbackIso is a plain def owned by theorem lem-zl-condensed-henselian-lisse-rigidity (proof_dep only, no cycle), and CondensedRing.upperStar/upperStarComp are owned by sk-def-sfb-module-pushforward-pullback; neither owner is in stmt_deps. ClosedLift.reduction is not listed in the closed-lift record but is in the imported upstream module. No compile run (no file changed); the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261023T231754-L-3642229",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

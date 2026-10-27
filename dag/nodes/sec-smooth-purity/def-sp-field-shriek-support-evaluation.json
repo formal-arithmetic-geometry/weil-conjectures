@@ -1,0 +1,124 @@
+{
+ "id": "def-sp-field-shriek-support-evaluation",
+ "kind": "definition",
+ "title": "Section-normalized finite compact-support evaluation",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a whole-system coefficient model family $D$ of [def-sp-field-shriek-system-models], $E$ in its coefficient-field index, and a compactification $X\\xrightarrow j Z\\xrightarrow hY$. Use the ring and support evaluation of [det-sp-tower-shriek-levels] at level $n+1$, and the finite compact-support functor of [det-sp-reduction-direct-image], as defined in [def-sp-reduction-direct-image-comparison]. A finite support coordinate datum is an ordinary natural isomorphism from the recorded constant-ring proper pushforward to the ringed-site direct image with its specified constant-ring comparison, whose maps are identity on every section. Define support evaluation as the composite of the recorded $Rf_!$ system evaluation isomorphism and the right-derived functor of this ordinary section-identity isomorphism, whiskered after the finite open extension. This is a normalization datum and a real construction, with no existence assertion.",
+ "stmt_deps": [
+  "def-sp-field-shriek-system-models",
+  "det-sp-tower-shriek-levels",
+  "det-sp-reduction-direct-image",
+  "def-sp-reduction-direct-image-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), identify finite evaluation of the compactification model with the specified finite compact-support operation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of extension of scalars on derived strict coefficient systems, normalized by restriction of scalars adjunction transpose",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, evalAt, toRestrictScalars_hom_apply, fromExtendScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, toRestriction_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Iso",
+   "results": "[loogle] OK 5 hit(s): CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply; homEquiv_ofNatIsoRight_apply; homEquiv_ofNatIsoLeft_symm_apply; homEquiv_ofNatIsoRight_symm_apply; restrictFullyFaithful_homEquiv_apply.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FieldShriekSystemEvaluation|field-shriek-system-evaluation dag/nodes lean/Sheaf lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib",
+   "results": "No hits. Related SystemEvaluationScalarRestrictionNormalization constructs singleton evaluation in a different strict-system coordinate model; its generic exact localization and adjunction mate operations are reused instead of redefining those.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep coefficient.*(shriek|compact)|shriek.*coefficient|semilinear.*system CategoryTheory",
+   "results": "[grep] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search scalar evaluation compact support",
+   "results": "12 broad blueprint nodes matched; none is the normalized finite evaluation interface of FieldShriekSystem.Models.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FieldShriekSupportEvaluation|field-shriek-support-evaluation dag/nodes lean/Sheaf lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib",
+   "results": "No matches (exit 1).",
+   "date": "2026-10-25",
+   "verdict": "No duplicate support-evaluation interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-shriek-system-comparison",
+  "date": "2026-10-25",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), identify finite evaluation of the compactification model with the specified finite compact-support operation",
+   "via": [
+    "lem-sp-field-shriek-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekSupportEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.FiniteCoordinates",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.FiniteCoordinates",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.supportEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekSupportEvaluation.lean",
+  "statement": "structure FiniteCoordinates (E : Index P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Section-normalized ordinary finite proper coordinate change and its actual right-derived whiskered support evaluation; no arbitrary derived comparison or bare existence choice."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "H3 repair checked: MixedLaw extends EvaluationLaw; quotientAfterComparison/comparisonAfterQuotient contain the actual comparison at n and m with systemReduction (transpose of SemilinearSections.derivedTransition, section-pinned QuotientRestriction); common word = reductionDirectImageComparison(R_n→S_m) then RΓc_{S_m}(assoc⁻¹ ≫ C_{a_m}(input reduction)), as in node step 8; HEq sources equal via coefficientSquare; system_square is the real transition square of b (follows from naturality, advisory). All other modules byte-identical to the accepted 8fa1 version: hypotheses, proper/open comparison, invertibility on N_A with ambient target, evaluation at every n, composition/identity on whole systems; ∃ Models follows the landed tower_shriek_levels pattern. Edge cases m=n, E=F, ramified, n=0, M=0/empty X, d=0, E⊂F⊂L. Gates OK (no hollow defs, only sorry is the theorem, docstrings, report sections). FIX (H12 field part): 7 new def nodes lacked stmt_deps on their def owners def-sp-coefficient-tower-shriek-interfaces (SpTowerCalculus.Coordinates/realization/quotient), def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison), det-sp-scalar-extension-functor (scalarExtensionFunctor/_composition); fixes/<id>.json add them to stmt_deps with bracketed cites in the statement; owners landed 10-16..10-20; no cycle. No Lean changed, so nothing compiled."
+ }
+}

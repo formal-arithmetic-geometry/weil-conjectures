@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-scalar-pullback-composition-coherence",
+ "kind": "statement",
+ "title": "The normalized scalar/pullback comparison respects geometric composition",
+ "statement": "Let A,B be finite commutative rings, φ:A→B, and X --j→ Z --r→ Y arbitrary scheme morphisms. Use arbitrary normalized models m of [def-sp-open-scalar-tensor-data]. Write S_T for scalar extension, P_R for geometric inverse image, λ for its scalar comparison, and κ_R:P_R(j)P_R(r)≅P_R(j;r) for the canonical compositor [pur713-def-pullback-comparison]. For every L in D(Y,A), S_X(κ_A(L));λ_(j;r)^(-1)(L) = λ_j^(-1)(P_A(r)L);P_B(j)(λ_r^(-1)(L));κ_B(S_Y L). No openness, boundedness, or coefficient flatness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; geometric composition clause of lem-sfb-kflat-scalar-comparison-normalization; parent proper/open proof step 5"
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data",
+  "pur713-def-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The section-normalized ordinary direct-image compositor is unique. The canonical ordinary inverse-image compositor and StrictTower.moduleGComp are its adjunction conjugates under the same unit-normalized adjunctions, hence agree.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence",
+    "lem-sp-canonical-derived-pullback-normalization",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction/pullback comparisons respect ordinary composition. Localize this square using derived_composition_square, with the preceding identification of the canonical derived compositor.",
+   "uses": [
+    "lem-fix-ordinary-restriction-pullback-square",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the composition formula for adjunction mates under the three scalar adjunctions and cancel the target compositor inverse. This gives the published scalar/pullback composition formula. Expand lambda, cancel the intermediate scalarIso changes, and move the outer changes through κ by naturality.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-sp-open-scalar-tensor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-pullback-coherence",
+  "lem-sp-canonical-derived-pullback-normalization",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-fix-ordinary-restriction-pullback-square",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sp-open-scalar-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; geometric composition clause of lem-sfb-kflat-scalar-comparison-normalization; parent proper/open proof step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates commute with projection formula tensor comparison and coefficient extension",
+   "results": "['CategoryTheory.coev_expComparison', 'CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ', 'CategoryTheory.frobeniusMorphism_mate', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc', 'ModuleCat.homEquiv_extendScalarsComp', 'LightCondensed.ihomPoints_symm_comp', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "['CategoryTheory.mateEquiv_counit']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_mate_coherence|lambda_tensor|tensorPullback.*(comp|unit)",
+   "results": "[]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback.*[Tt]ensor|[Tt]ensor.*[Pp]ullback.*[Cc]oherence",
+   "results": "[]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension pullback comparison is monoidal and compatible with tensor products in derived categories",
+   "results": "[\"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", 'PresheafOfModules.pullbackComp', 'CategoryTheory.Functor.mapExactFunctor_smul', 'CategoryTheory.Tor_map', 'CategoryTheory.Tor', \"CategoryTheory.Tor'\"]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PfReductionProperOpenIdentities",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-pf-reduction-proper-open-identities",
+   "place": "Tag 0D6D (derived pullback composition); parent proof step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarPullbackCompositionCoherence",
+  "file": "lean/Sheaf/SixFunctors/ScalarPullbackCompositionCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarPullbackCompositionCoherence",
+  "statement": "theorem scalarPullbackCompositionCoherence (m : Models.{u})\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z Y : Scheme.{u}} (j : X ⟶ Z) (r : Z ⟶ Y)\n    (L : proEtaleDerivedCategory Y A) :\n    (scalar m φ X).map ((proEtaleConstantRingPullbackComposition j r A).hom.app L) ≫\n        (lambda m φ (j ≫ r)).inv.app L =\n      (lambda m φ j).inv.app ((constantPullback (A := A) r).obj L) ≫\n        (constantPullback (A := B) j).map ((lambda m φ r).inv.app L) ≫\n        (proEtaleConstantRingPullbackComposition j r B).hom.app ((scalar m φ Y).obj L)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T122510-L-1777958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T122510-L-1777958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

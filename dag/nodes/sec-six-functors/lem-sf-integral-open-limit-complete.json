@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-integral-open-limit-complete",
+ "kind": "statement",
+ "title": "Completeness of a normalized limit after open extension",
+ "statement": "For a prime l, finite coefficient field E, Operations o and a quasi-compact open immersion j:U->V, if N is Good on U and shriek(j)(N) is Good on V, then ringedOpen(j)(coefficientSequenceLimit(N)) is intrinsically complete.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; completeness transport paragraph."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-expression-domain",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-sf-integral-open-extension-complete"
+ ],
+ "proof": [
+  {
+   "text": "Apply purNormalizedReconstructionOfScheme to the specified source calculus and the normalization component hN.1 of Good. Its first clause proves completeness of the actual coefficientSequenceLimit(N); no invertibility of l on U is needed.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence; completeness transport paragraph."
+   }
+  },
+  {
+   "text": "Use the proved dvrOpenModel_exists helper of OpenQuotientKoszulCompleteness to obtain a projection-normalized OpenDvrOpenModel O. The proved dvrOpen_complete helper of OpenDvrIntrinsicOpenTransport carries source completeness through O.jShriek using exactness, countable products and the actual uniformizer scalar. These helpers impose no characteristic hypothesis, unlike the older assembly theorem.",
+   "uses": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-open-dvr-intrinsic-open-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence; completeness transport paragraph."
+   }
+  },
+  {
+   "text": "Apply openDvr_ringed_identification to O to identify its derived extension naturally with the specified ringedOpen. Choose a prime p different from l. The complete_iff_local helper converts quotient completeness to local principal completeness, integralLocallyComplete_iso transports that condition through the component of the natural isomorphism, and complete_iff_local converts back. The auxiliary prime exists independently of the schemes. The output Good hypothesis and the operations parameter are retained in the signature but are not needed by this argument.",
+   "uses": [
+    "lem-sf-open-dvr-ringed-identification",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-pur-completed-direct-image-preserves-completeness",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence; completeness transport paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-pur-completed-direct-image-preserves-completeness",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sf-open-dvr-intrinsic-open-transport",
+  "lem-sf-open-dvr-ringed-identification",
+  "lem-sf-open-quotient-koszul-completeness"
+ ],
+ "proof_origin": {
+  "by": "Y9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Integral open-factor completeness: reuse proved DVR model construction, principal-completion preservation, and ringed identification; no new statements."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenLimitComplete",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenLimitComplete.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralOpenLimitComplete",
+  "statement": "theorem integralOpenLimitComplete (o : Operations l E) {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] [QuasiCompact j] (N : System l E U) (hN : Good l E U N) (hJ : Good l E V ((Operations.shriek l E o j).obj N)) : IntegralOnSlice.IsComplete l E V none ((ringedOpen l E j).obj ((coefficientSequenceLimit l E U).obj N))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenReductionNormalizedLimit",
+  "date": "2026-10-27",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Completeness transport paragraph.",
+   "via": [
+    "lem-sf-integral-open-reduction-normalized-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "open extension completeness normalized coefficient limit",
+   "results": "No exact Mathlib declaration; project-specific transport required.",
+   "date": "2026-10-27",
+   "verdict": "No matching Mathlib theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (F.map f)",
+   "results": "Generic IsIso transport lemmas only; no project-specific open reduction result.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient limit open extension complete",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T012845-L-2340453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T034815-L-3688530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

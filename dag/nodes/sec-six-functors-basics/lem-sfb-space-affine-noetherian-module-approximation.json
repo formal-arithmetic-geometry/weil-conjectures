@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-space-affine-noetherian-module-approximation",
+ "kind": "statement",
+ "title": "Finite-presentation approximation on a space affine over a Noetherian space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Assume $f$ is affine: for every affine scheme $V\\to Y$, the fibre sheaf $X\\times_Y V$ is represented by an affine scheme. Assume $Y$ is Noetherian: its underlying point space is quasi-compact, its absolute diagonal is quasi-compact on affine scheme tests, and it admits a surjective etale map from a locally Noetherian scheme [pqf-def-locnoeth] (some etale scheme atlas is locally Noetherian). The point topology is [def-a1-space-point-topology]. Work with module sheaves on the small etale ringed sites and quasi-coherence of [def-trf-space-quasi-coherent-module]. An $\\mathcal O_X$-module is finitely presented if etale locally it has an exact sequence $\\mathcal O_X^m\\to\\mathcal O_X^n\\to\\mathcal F\\to0$ with finite $m,n$. For every quasi-coherent $\\mathcal O_X$-module $\\mathcal M$, there exist a small filtered category $J$, a diagram of finitely presented quasi-coherent modules $\\mathcal F_j$, and compatible maps $\\mathcal F_j\\to\\mathcal M$ which exhibit $\\mathcal M$ as their colimit in all $\\mathcal O_X$-module sheaves [def-weil-pbc-category-colimit]. No finite-type hypothesis on $f$ and no Noetherian hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UW (lemma-direct-colimit-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-locnoeth",
+  "def-a1-space-point-topology",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Since $|Y|$ is quasi-compact, [lem-sfb-qc-space-affine-etale-atlas] gives an affine scheme $V=\\operatorname{Spec}A$ with a representable surjective etale map $V\\to Y$. As $V$ is quasi-compact, $Y$ is quasi-compact in the chart sense of [lem-sfb-space-affine-locality], and its absolute diagonal is quasi-compact on affine scheme tests by hypothesis. By [lem-sfb-space-affine-locality], $X$ is quasi-compact and quasi-separated, since $f$ is affine. Moreover $|X|$ is quasi-compact, as step 6 needs: $U=X\\times_YV$ is an affine scheme by the affineness hypothesis, $U\\to X$ is representable surjective etale by [lem-trf-space-fibre-products-etale-covers], so $|U|\\to|X|$ is surjective, and it is continuous by the definition of the topology [def-a1-space-point-topology]; the image of the quasi-compact space $|U|$ is $|X|$. Use the small site models fixed by the size convention. The category of module sheaves is abelian and has small colimits by [lem-pur-ringed-site-grothendieck-abelian]. For any quasi-coherent module $T$ on $X$, [lem-sfb-space-affine-module-base-change] says that $f_*T$ is quasi-coherent. No finite-type assumption on $f$ or Noetherian assumption on $X$ has entered.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "The Noetherian hypothesis of [lem-sfb-space-coherent-filtered-union] holds for $Y$: quasi-compactness and quasi-separatedness are checked in step 1. Let $W\\to Y$ be any etale scheme chart and $V'\\to Y$ the given surjective etale map from a locally Noetherian scheme. Then $W'=W\\times_YV'$ is a scheme, etale over $V'$ and surjective etale over $W$ [lem-trf-space-fibre-products-etale-covers]. As $W'\\to V'$ is locally of finite presentation [def-weil-etale-morphism], $W'$ is covered by affine opens of finite type over Noetherian affine opens of $V'$, which are Noetherian [lem-weil-pbc-finite-type-over-noetherian]. So $W'$, hence $W$ [lem-trf-etale-local-noetherian-descent], is locally Noetherian. Apply [lem-sfb-space-coherent-filtered-union] to $f_*T$. Let $I_T$ be its nonempty directed set of coherent submodules $H_i$; their canonical colimit in all module sheaves is $f_*T$. Each $H_i$ is finitely presented. Indeed its restriction to an etale scheme chart is the etale realization of a coherent Zariski module, by the meaning of coherent in the cited statement. On that scheme [lem-weil-pbc-coherent-local-finite-presentation] gives a finite free presentation locally. The forward equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] is tensor pullback, hence a left adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction]; it carries this cokernel presentation to the same finite free presentation on the etale site. Finite presentation on a covering chart suffices by [lem-sfb-space-qcoh-affine-chart-calculus].",
+   "uses": [
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "Put $P_i=f^*H_i$. Pullback is the tensor-formula left adjoint of [lem-weil-pbc-ringed-topoi-module-adjunction]. Consequently it preserves colimits and finite free modules, so $P:=\\varinjlim_i P_i\\simeq f^*f_*T$. To check finite presentation of $P_i$, pull a local finite free presentation of $H_i$ back along $f$: the inverse image of its covering is a covering, and right exactness gives $\\mathcal O_X^m\\to\\mathcal O_X^n\\to P_i\\to0$ there. The etale-local identifications with restriction and the compatibility of the two paths of pullback are given by [lem-trf-space-etale-module-pushforward-restriction]. Also $P_i$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-module-pullback-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "The counit $e_T:P\\simeq f^*f_*T\\to T$ is surjective. Choose an affine surjective etale chart $V=\\operatorname{Spec}A\\to Y$ by [lem-sfb-qc-space-affine-etale-atlas]. By affineness, $U=X\\times_YV=\\operatorname{Spec}B$ is affine, and $U\\to X$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. The comparisons of [lem-trf-space-etale-module-pushforward-restriction] identify the restricted counit with the counit for $U\\to V$. For $N=T(U)$, affine chart calculus [lem-sfb-space-qcoh-affine-chart-calculus] identifies this with the sheaf associated to $B\\otimes_A N\\to N$. The tensor adjunction realization [lem-trf-space-chart-adjunction-tensor-realization] identifies the arrow itself with $b\\otimes n\\mapsto bn$. It is onto since $n$ is the image of $1\\otimes n$. Surjectivity of a sheaf map is local on a cover, so $e_T$ is onto on $X$. Thus steps 1--4 give, for every quasi-coherent $T$, a surjection from a small directed colimit of finitely presented quasi-coherent modules.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "Apply this construction to $T=\\mathcal M$, writing $P=\\varinjlim_{i\\in I}P_i$ and $e:P\\twoheadrightarrow\\mathcal M$. By [lem-sfb-space-qcoh-kernels-colimits], $P$ and $N=\\ker(e)$ are quasi-coherent. Apply the very same construction of steps 1--4 to $T=N$: it gives $Q=\\varinjlim_{j\\in J}Q_j\\twoheadrightarrow N$, with $J$ small nonempty directed and each $Q_j$ finitely presented and quasi-coherent. Let $d:Q\\to N\\hookrightarrow P$. Its image is exactly $N$, hence $\\mathcal M$ is the cokernel of $d$ in the abelian module category.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "Write $p_i:P_i\\to P$, $q_j:Q_j\\to Q$, and denote the transition maps by $P_{ii'}$ and $Q_{jj'}$. Let $K$ be the set of triples $(i,j,a)$ with $a:Q_j\\to P_i$ and $p_i a=dq_j$. Order these by $(i,j,a)\\le(i',j',a')$ when $i\\le i'$, $j\\le j'$, and $P_{ii'}a=a'Q_{jj'}$. This is a partially ordered set. All its hom sets and indices lie in the chosen bound, so it is small. By [lem-sfb-space-fp-module-hom-colimit], every $dq_j$ factors through some $P_i$: $|X|$ is quasi-compact and $X$ is quasi-separated by step 1, and $Q_j$ is finitely presented. Thus $K$ is nonempty, and for each $j$ there is a triple having that second index.",
+   "uses": [
+    "lem-sfb-space-fp-module-hom-colimit",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "To give a common upper bound for $(i,j,a)$ and $(i',j',a')$, choose $j_0\\ge j,j'$. Factor $dq_{j_0}$ through some $P_h$ using [lem-sfb-space-fp-module-hom-colimit], then enlarge $h$ to dominate $i,i'$. The two maps from $Q_j$ to $P_h$, one obtained from $a$, the other from $Q_j\\to Q_{j_0}\\to P_h$, become equal in $P$. The eventual-equality assertion of the same cited node gives a later index where they agree. Do the same for $Q_{j'}$ and pass to a common later index $h_1$. The resulting factorization $Q_{j_0}\\to P_{h_1}$ defines a triple above both given triples. Hence $K$ is directed. Notice that eventual equality is needed here; factorization alone would not prove directedness.",
+   "uses": [
+    "lem-sfb-space-fp-module-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "For $k=(i,j,a)$ put $C_k=\\operatorname{coker}(a)$. It is quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]. It is finitely presented by the following local presentation argument. Locally choose $\\mathcal O^r\\to\\mathcal O^n\\to P_i\\to0$ and finitely many generators of $Q_j$. After a further covering, lift the images of these finitely many generators to $\\mathcal O^n$. Adding these finitely many lifts to the $r$ existing relations presents $C_k$ as a cokernel $\\mathcal O^{r+m}\\to\\mathcal O^n\\to C_k\\to0$. This argument works on any ringed site and uses no Noetherianity. Every ordered pair of triples gives a commuting square of arrows $a$, hence a canonical map of cokernels. These compose uniquely by the cokernel universal property. Since $ed=0$, each $C_k$ has a compatible map to $\\mathcal M$.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "The two projection diagrams over $K$ still have colimits $P$ and $Q$. For the first projection, every $i\\in I$ is below the first index of some triple: start with any triple and enlarge its first index to dominate $i$, composing its arrow with the transition. For the second projection, every $j\\in J$ occurs by step 6. Directedness then makes the triples above any fixed index nonempty and directed. Explicitly, a compatible family of maps $P_{i(k)}\\to L$ therefore extends uniquely to all $P_i$: choose a triple with first index at least $i$ and restrict its map; a common upper bound proves independence of the choice and compatibility. The identical argument applies to $Q_j$. Now compatible maps $C_k\\to L$ are precisely compatible maps $P_{i(k)}\\to L$ killing each $a_k$. By these projection identifications they are precisely maps $P\\to L$ killing $d$, since the maps $Q_{j(k)}\\to Q$ are jointly colimiting. They are therefore precisely maps $\\mathcal M=\\operatorname{coker}(d)\\to L$. This is the colimit universal property in all module sheaves [def-weil-pbc-category-colimit]. Thus $\\mathcal M\\simeq\\varinjlim_{k\\in K}C_k$, with the compatible maps of step 8. The small directed poset $K$, regarded as a category, is the required small filtered category.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-locality",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-sfb-space-coherent-filtered-union",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-fp-module-hom-colimit",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-etale-local-noetherian-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UW (lemma-direct-colimit-finite-presentation), full proof, with its final directedness and colimit argument expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Nn]oetherian.*[Cc]olimit|[Cc]olimit.*[Nn]oetherian",
+   "results": "{\"t\": \"2026-10-23T13:57:18Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Nn]oetherian.*[Cc]olimit|[Cc]olimit.*[Nn]oetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphism to a Noetherian algebraic space every quasicoherent module is a filtered colimit of finitely presented module sheaves",
+   "results": "{\"t\": \"2026-10-23T13:57:18Z\", \"tool\": \"leansearch\", \"query\": \"Affine morphism to a Noetherian algebraic space every quasicoherent module is a filtered colimit of finitely presented module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.isColimit\", \"AlgebraicGeometry.affineAnd\", \"ModuleCat.FilteredColimits.M\", \"SheafOfModules.IsFinitePresentation.mk\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"112e8af3e28b8de3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules on affine algebraic spaces over Noetherian spaces admit approximation by finite presentations",
+   "results": "{\"t\": \"2026-10-23T13:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"Modules on affine algebraic spaces over Noetherian spaces admit approximation by finite presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\"], \"digest\": \"8bb35b8692c42749\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on a space affine over a Noetherian algebraic space is a filtered colimit of finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T13:57:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent module on a space affine over a Noetherian algebraic space is a filtered colimit of finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\"], \"digest\": \"6f12ae49fe81faee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"IsQuasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T14:23:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherian\\\", \\\"IsQuasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; local sheaf presentations, colimit existence, and scheme morphism properties do not assert filtered finite-presentation approximation for algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:233-285; these only define local presentations and deduce quasi-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on an algebraic space affine over a Noetherian algebraic space is a filtered colimit of finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T16:14:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent module on an algebraic space affine over a Noetherian algebraic space is a filtered colimit of finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\"], \"digest\": \"ff50d835fb7c698b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations define local finite presentation, deduce quasi-coherence, or give a single presentation as a cokernel; none asserts filtered finite-presentation approximation on algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:123 and 233-285."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"IsQuasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T16:14:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinitePresentation\\\", \\\"IsQuasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"0767b60e21425786\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations define local finite presentation, deduce quasi-coherence, or give a single presentation as a cokernel; none asserts filtered finite-presentation approximation on algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:123 and 233-285."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Noetherian.*[Cc]olimit|[Cc]olimit.*Noetherian",
+   "results": "{\"t\": \"2026-10-23T16:15:23Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Noetherian.*[Cc]olimit|[Cc]olimit.*Noetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations define local finite presentation, deduce quasi-coherence, or give a single presentation as a cokernel; none asserts filtered finite-presentation approximation on algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:123 and 233-285."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine morphism of algebraic spaces to a Noetherian base every quasi coherent sheaf is a filtered colimit of finitely presented sheaves",
+   "results": "{\"t\": \"2026-10-23T16:15:23Z\", \"tool\": \"leansearch\", \"query\": \"For an affine morphism of algebraic spaces to a Noetherian base every quasi coherent sheaf is a filtered colimit of finitely presented sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"f78b53f828dcf6dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations define local finite presentation, deduce quasi-coherence, or give a single presentation as a cokernel; none asserts filtered finite-presentation approximation on algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:123 and 233-285."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicoherent sheaves on relative Spec over a Noetherian base admit approximation by finite presentations",
+   "results": "{\"t\": \"2026-10-23T16:15:53Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicoherent sheaves on relative Spec over a Noetherian base admit approximation by finite presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\"], \"digest\": \"4aeefe0b85a445fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations define local finite presentation, deduce quasi-coherence, or give a single presentation as a cokernel; none asserts filtered finite-presentation approximation on algebraic spaces. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:123 and 233-285."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-module-fp-directed-approximation",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Integral quasi-coherent algebras on qcqs spaces admit finite finitely presented directed approximations. Supporting input: Tag 07V9 (lemma-colimit-finitely-presented). Proof of Tag 07V9, final sentence: apply Tag 07UW to the affine projection to one Noetherian stage.",
+   "via": [
+    "lem-sfb-space-module-fp-directed-approximation",
+    "lem-sfb-space-integral-algebra-fp-colimit",
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-noetherian-module-approximation",
+  "worker": "stage1",
+  "summary": "Followed Tag 07UW using existing DAG inputs only. Proved the affine counit surjective by the multiplication formula, built both generators and relations as directed colimits, and expanded compactness, directedness, finite cokernel presentations and the ambient colimit universal property. No new nodes; statement unchanged.",
+  "blueprint": "The inherited from.place identifies this as the Tag 07UW prerequisite of Tag 07V9, below the existing det-thm-sf-ctf-stability-direct-images proof (3) ancestry. The latest blueprint paragraph (3) assembles direct images through compactification; no chapter or unit route is changed. The ancestor tool returns null for this inherited ancestry, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic ringed-site adjunction, chart comparison, finite-presentation or abelian-category infrastructure used as stated in the proof; no statement of this unit supplies the same input, and no trace-formula or duality result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-8714e291a",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-8714e291a (reviewer sub-agent of L); spot-checked: I read the whole item (no new nodes, statement unchanged) against Stacks 07UW, statement and full proof. The source's 'j in I' is an index typo for J. Steps 1-9 use the 07UV, 01BW, 03DX, 03D7, 03LX, 02X2, 07U8, 03M1 and 07U7 nodes for exactly what their statements say. 07U7's eventual-equality clause gives a real directedness proof. The cokernel and cofinality arguments are elementary and correct. Small cases checked: M=0, X empty, the identity of Y, and Spec k[x1,x2,...] over k. There is no duplicate (only the parent 07V9 cites 07UW) and no cycle. Every batch-5 flag reaches only the def-trf-algebraic-space definition and generic space, descent, chart or module foundations. None of them is trace-formula or Poincare-duality content, so all are accepted; this is detailed per citation in review.md. The worker's split_report tool_uses are accepted. Three repairs, in the item file only: (1) B4: the TeX in steps 3-9 was corrupt (\\to became a tab, \\varinjlim a vertical tab, \\le, \\mathcal, \\operatorname and others had lost their backslashes); all restored. (2) E1, step 1: the qc convention differed between the item (|Y| quasi-compact) and affine-locality (chart from a qc scheme). Fixed by citing lem-sfb-qc-space-affine-etale-atlas, and by showing |X| quasi-compact for step 6 through U=X x_Y V, lem-trf-space-fibre-products-etale-covers and def-a1-space-point-topology. (3) E1, step 2: coherent-filtered-union needs every etale scheme chart of Y to be locally Noetherian, but the item assumes only one Noetherian atlas. Fixed via 02X2, def-weil-etale-morphism, lem-weil-pbc-finite-type-over-noetherian and lem-trf-etale-local-noetherian-descent (a generic batch-5 citation whose closure is clean). proof_deps updated accordingly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineNoetherianModuleApproximation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finitePresentation_filtered_colimit_of_affine_noetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineNoetherianModuleApproximation.lean",
+  "statement": "theorem exists_finitePresentation_filtered_colimit_of_affine_noetherian {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (ha : MapIsAffine f) (hqc : CompactSpace (Point Y.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated Y) (hln : ∃ (V : Over S) (a : yoneda.obj V ⟶ Y.obj.obj), IsEtale a ∧ IsSurjective a ∧ IsLocallyNoetherian V.left) (M : X.Modules) [M.IsQuasicoherent] : ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (D : J ⥤ X.Modules), (∀ j : J, (D.obj j).IsFinitePresentation ∧ (D.obj j).IsQuasicoherent) ∧ ∃ ι : D ⟶ (Functor.const J).obj M, Nonempty (IsColimit (Cocone.mk M ι))",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed affine-test and absolute-quasi-separated predicates; their definition nodes are added to stmt_deps. The target is Noetherian via a locally Noetherian surjective etale atlas, quasi-compact point space and quasi-compact absolute diagonal. The colimit cocone lives in all small-etale module sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdae765dc",
+  "group": "Q148",
+  "result": "pass",
+  "note": "The Lean statement matches the node and Stacks 07UW (spaces-cohomology.tex:2681) clause by clause: MapIsAffine f; Y Noetherian via CompactSpace (Point Y), IsAbsolutelyQuasiSeparated and one existential locally Noetherian surjective etale atlas; quasi-coherent M; nonempty small filtered J : Type u (same as the landed consumer exists_finitePresentation_filtered_colimit); finitely presented and quasi-coherent terms; IsColimit with vertex M in all X.Modules; no finite-type or Noetherian-X binders. Edge cases (empty spaces, M=0, universes) are fine. Diffing dag/ against side-live shows only the item record changed (lean added, plus stmt_deps on the two existing landed def nodes the statement uses); no dependency record changed and no new node. The lean.statement is verbatim. One sorried theorem, docstrings carry the source place, blueprint id and the 9-step proof, all imports exist, no hollow defs, no pro-etale substitute. No changes, so no compile."
+ }
+}

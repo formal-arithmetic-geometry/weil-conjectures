@@ -1,0 +1,240 @@
+{
+ "id": "lem-per-finite-algebra-hom-scalar-extension",
+ "kind": "statement",
+ "title": "Hom for finite-dimensional algebra modules commutes with extension of fields",
+ "statement": "Let $K$ and $L$ be fields [def-weil-field] and let $\\iota:K\\to L$ be a unital field homomorphism. Let $A$ be a finite-dimensional unital associative $K$-algebra, meaning a unital associative ring with a homomorphism $K\\to Z(A)$. Let $V,W$ be finite-dimensional $K$-vector spaces with unital left $A$-module structures compatible with their $K$-actions. Write $\\operatorname{Hom}_A(V,W)$ for the $K$-vector space of additive maps $f$ satisfying $f(av)=af(v)$. Form $A_L=L\\otimes_K A$, with $(x\\otimes a)(y\\otimes b)=xy\\otimes ab$, and $V_L=L\\otimes_K V$, $W_L=L\\otimes_K W$ [def-weil-pbc-module-tensor-product], with $(x\\otimes a)(y\\otimes v)=xy\\otimes av$. Then the canonical $L$-linear map $$L\\otimes_K\\operatorname{Hom}_A(V,W)\\longrightarrow\\operatorname{Hom}_{A_L}(V_L,W_L),\\qquad x\\otimes f\\longmapsto\\bigl(y\\otimes v\\mapsto xy\\otimes f(v)\\bigr)$$ is bijective. For $W=V$ it preserves multiplication by composition and the identity, hence is an $L$-algebra isomorphism on endomorphism algebras.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 087R, lemma-pseudo-coherence-and-base-change-ext (1), is the commutative-ring analogue only. This finite-dimensional, possibly noncommutative algebra version is an agent auxiliary lemma for ILO X Proposition 1.2, p.138, before (5); coefficient-extraction argument recorded in report.md, not attributed to 087R."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Every $A$-linear additive map $f$ is $K$-linear: $f(cv)=f((c1_A)v)=(c1_A)f(v)=cf(v)$. For $x\\in L$ set $T_{x,f}(y\\otimes v)=xy\\otimes f(v)$. The tensor universal property [def-weil-pbc-module-tensor-product] makes this a well-defined $L$-linear map. It is $A_L$-linear, since on generators both $T_{x,f}((z\\otimes a)(y\\otimes v))$ and $(z\\otimes a)T_{x,f}(y\\otimes v)$ equal $xyz\\otimes af(v)$. The assignment $(x,f)\\mapsto T_{x,f}$ is additive in both variables and $K$-balanced, as $\\iota(c)xy\\otimes f(v)=xy\\otimes cf(v)$. It therefore induces the displayed map $\\Phi$, which is $L$-linear by the same formula.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (tensor universal property); agent coefficient-matrix argument, construction of the canonical intertwiner map"
+   }
+  },
+  {
+   "text": "The unital map $\\iota$ is injective: for $c\\ne0$, $\\iota(c)\\iota(c^{-1})=1$. Identify $K$ with its image in $L$. Choose finite spanning lists for $V,W$ [def-weil-finite-dimensional-subspace] and discard any vector in the span of its predecessors; the surviving lists are finite bases $(v_j)_{j=1}^n,(w_i)_{i=1}^m$. By [def-weil-vector-space-scalar-extension], after flipping the tensor factors, $(1\\otimes v_j)$ and $(1\\otimes w_i)$ are $L$-bases of $V_L,W_L$. Thus a linear map is determined by its $m\\times n$ coefficient array in these bases. Choose a $K$-basis $(b_s)_{s\\in I}$ of the vector space $L$ using [lem-weil-pbc-vector-space-basis-through-vector]. Given any $F\\in\\operatorname{Hom}_{A_L}(V_L,W_L)$, each of its finitely many entries has a finite expansion in this basis. Taking the union of these supports gives a finite $S\\subseteq I$ and arrays $F_s\\in K^{m\\times n}$ with $[F]=\\sum_{s\\in S}b_sF_s$. Define $f_s:V\\to W$ by $f_s(v_j)=\\sum_i(F_s)_{ij}w_i$ and extend $K$-linearly.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (tensor universal property); agent coefficient-matrix argument, finite matrix coordinates and independent scalar coefficients"
+   }
+  },
+  {
+   "text": "For each $a\\in A$, let $P_a,Q_a$ be the coefficient arrays of its actions on $V,W$. They have entries in $K$, since those actions are $K$-linear by the assumed compatibility. $A_L$-linearity of $F$ implies $[F]P_a=Q_a[F]$, by applying $F$ to $(1\\otimes a)(1\\otimes v_j)$. Substitution gives $\\sum_{s\\in S}b_s(F_sP_a-Q_aF_s)=0$. Entry by entry the coefficients in parentheses lie in $K$; independence of the $b_s$ forces $F_sP_a=Q_aF_s$ for every $s,a$. Evaluating this identity on each $v_j$ and then taking $K$-linear combinations gives $f_s(av)=af_s(v)$ for every $a,v$. Hence $f_s\\in\\operatorname{Hom}_A(V,W)$. The tensor $\\sum_{s\\in S}b_s\\otimes f_s$ maps under $\\Phi$ to a map with array $[F]$, so it maps to $F$. This proves surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (tensor universal property); agent coefficient-matrix argument, coefficient extraction from every intertwining equation"
+   }
+  },
+  {
+   "text": "Let $t$ lie in the kernel of $\\Phi$. By [def-weil-pbc-module-tensor-product], write $t=\\sum_{i=1}^r x_i\\otimes g_i$ with $g_i\\in\\operatorname{Hom}_A(V,W)$. From the finite list $(g_i)$ discard a vector whenever it lies in the span of its predecessors. The surviving maps $h_1,\\ldots,h_k$ are $K$-linearly independent and span all $g_i$, so tensor bilinearity rewrites $t=\\sum_{j=1}^k\\lambda_j\\otimes h_j$. Their coefficient arrays $H_j\\in K^{m\\times n}$ are $K$-linearly independent: a zero linear combination of arrays is a map zero on all the $v_i$, hence the zero map. Flatten these arrays into vectors in $K^{mn}$. Apply [lem-weil-linear-independence-field-extension] with the given $K\\to L$: the arrays remain $L$-linearly independent. Since $\\Phi(t)=0$, its array $\\sum_j\\lambda_jH_j$ vanishes, and thus every $\\lambda_j=0$. Therefore $t=0$ and $\\Phi$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-linear-independence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (tensor universal property); agent coefficient-matrix argument, injectivity via independence of the coefficient arrays after field extension"
+   }
+  },
+  {
+   "text": "For $W=V$, equip $L\\otimes_K\\operatorname{End}_A(V)$ with $(x\\otimes f)(z\\otimes g)=xz\\otimes(f\\circ g)$. On $y\\otimes v$, both $\\Phi(x\\otimes f)\\circ\\Phi(z\\otimes g)$ and $\\Phi(xz\\otimes(f\\circ g))$ take the value $xzy\\otimes f(g(v))$. Pure tensors generate all the tensor products [def-weil-pbc-module-tensor-product], so additivity gives multiplicativity for arbitrary elements. Also $\\Phi(1\\otimes\\operatorname{id}_V)(y\\otimes v)=y\\otimes v$, giving the identity. Together with $L$-linearity and the proved bijectivity, this is the claimed $L$-algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (tensor universal property); agent coefficient-matrix argument, composition and unit on pure tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-linear-independence-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 087R, lemma-pseudo-coherence-and-base-change-ext (1), is only the commutative analogue; the proof here is the explicit independent-coefficient argument for a possibly noncommutative acting algebra. Context: ILO Expose X Proposition 1.2, printed p.138, before (5)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional algebra A over K and finite dimensional A modules V W and a field extension L K the canonical map L tensor Hom A V W to Hom L tensor A L tensor V L tensor W is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T01:10:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite dimensional algebra A over K and finite dimensional A modules V W and a field extension L K the canonical map L tensor Hom A V W to Hom L tensor A L tensor V L tensor W is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensorHomEquivHomLTensor_apply\", \"lTensorHomEquivHomLTensor_toLinearMap\", \"lTensorHomEquivHomLTensor\", \"homTensorHomEquiv_toLinearMap\", \"IsBaseChange.tensorEquiv\", \"homTensorHomEquiv_apply\", \"homTensorHomEquiv\", \"Algebra.TensorProduct.liftEquiv\"], \"digest\": \"1742baa0f2885a5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: baseChangeHom and IsBaseChange.linearMapLeftRight concern linear maps over the commutative coefficient ring. The extra intertwining equations for the possibly noncommutative acting algebra A require a separate kernel/coefficient-extraction argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom of finite dimensional modules over a noncommutative algebra commutes with field scalar extension",
+   "results": "{\"t\": \"2026-10-24T01:13:14Z\", \"tool\": \"leansearch\", \"query\": \"Hom of finite dimensional modules over a noncommutative algebra commutes with field scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"FGModuleCat.instFiniteHom\", \"LinearMap.ltoFun\", \"LinearMap.instSMulCommClass\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendScalars.map'\", \"SemimoduleCat.Hom.instModule\", \"AlgHom.extendScalars\"], \"digest\": \"9fd7e27b707e4849\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: baseChangeHom and IsBaseChange.linearMapLeftRight concern linear maps over the commutative coefficient ring. The extra intertwining equations for the possibly noncommutative acting algebra A require a separate kernel/coefficient-extraction argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intertwiner spaces of finite dimensional representations of a finite dimensional associative algebra commute with any extension of coefficient fields",
+   "results": "{\"t\": \"2026-10-24T01:13:17Z\", \"tool\": \"leanfinder\", \"query\": \"Intertwiner spaces of finite dimensional representations of a finite dimensional associative algebra commute with any extension of coefficient fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.instFiniteDimensionalHom\", \"FDRep.finrank_hom_simple_simple\", \"FDRep.instFiniteDimensionalCarrierVFGModuleCat\", \"Representation.linHom.invariantsEquivFDRepHom\", \"FDRep.simple_iff_end_is_rank_one\", \"FDRep.endRingEquiv_comp_ρ\", \"FDRep.instLinear\", \"TannakaDuality.FiniteGroup.ofRightFDRep\"], \"digest\": \"92de021381a8b7a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: baseChangeHom and IsBaseChange.linearMapLeftRight concern linear maps over the commutative coefficient ring. The extra intertwining equations for the possibly noncommutative acting algebra A require a separate kernel/coefficient-extraction argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChangeHom",
+   "results": "{\"t\": \"2026-10-24T01:13:18Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.baseChangeHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"LinearMap.baseChangeHom\", \"LinearMap.baseChangeHom_apply\", \"LinearMap.tensorProductEnd_apply\", \"LinearMap.tensorProduct_apply\", \"LinearMap.baseChangeHom_injective\", \"Module.FinitePresentation.isBaseChange_map\", \"Module.isBaseChange_map_of_finite_free\"], \"digest\": \"8c1f864d58d21f2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: baseChangeHom and IsBaseChange.linearMapLeftRight concern linear maps over the commutative coefficient ring. The extra intertwining equations for the possibly noncommutative acting algebra A require a separate kernel/coefficient-extraction argument."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHom|linearMapLeftRight|lTensorHomEquivHomLTensor",
+   "results": "{\"t\": \"2026-10-24T01:13:18Z\", \"tool\": \"grep\", \"query\": \"baseChangeHom|linearMapLeftRight|lTensorHomEquivHomLTensor\", \"sub\": \"RingTheory/TensorProduct\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\"], \"digest\": \"ef7a76696e6a19b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: baseChangeHom and IsBaseChange.linearMapLeftRight concern linear maps over the commutative coefficient ring. The extra intertwining equations for the possibly noncommutative acting algebra A require a separate kernel/coefficient-extraction argument."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|extendScalars",
+   "results": "{\"t\": \"2026-10-24T01:18:57Z\", \"tool\": \"grep\", \"query\": \"baseChange|extendScalars\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no baseChange or extendScalars declaration found in RepresentationTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of intertwining maps for modules over finite dimensional associative algebras commutes with Hom",
+   "results": "{\"t\": \"2026-10-24T01:58:20Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension of intertwining maps for modules over finite dimensional associative algebras commutes with Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.map'\", \"LinearMap.ltoFun\", \"LinearMap.instSMulCommClass\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"AlgHom.extendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"ad8c0be5ea37f9b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a possibly noncommutative finite dimensional K algebra A and finite dimensional A modules V W, extension of fields L tensor Hom A V W is Hom L tensor A of L tensor V and L tensor W",
+   "results": "{\"t\": \"2026-10-24T01:58:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a possibly noncommutative finite dimensional K algebra A and finite dimensional A modules V W, extension of fields L tensor Hom A V W is Hom L tensor A of L tensor V and L tensor W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensorHomEquivHomLTensor_toLinearMap\", \"Module.endTensorEndAlgHom\", \"LinearMap.liftBaseChangeEquiv\", \"homTensorHomEquiv_toLinearMap\", \"Module.endTensorEndAlgHom_apply\", \"IsBaseChange.endHom\", \"rTensorHomEquivHomRTensor_toLinearMap\", \"IsBaseChange.linearMapRightBaseChangeEquiv\"], \"digest\": \"3c0826609db7ca5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom spaces of representations of an associative algebra are preserved under extension of scalars because intertwiner equations are linear",
+   "results": "{\"t\": \"2026-10-24T01:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Hom spaces of representations of an associative algebra are preserved under extension of scalars because intertwiner equations are linear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ihom_obj_V_isModule\", \"Representation.IntertwiningMap.instModule\", \"Rep.ihom_map_hom\", \"Representation.smul_ofModule_asModule\", \"Representation.linHom\", \"Representation.linHom_apply\", \"Representation.ofModule_asModule_act\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\"], \"digest\": \"56628869425a228e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "intertwin.*(baseChange|tensor)|((baseChange|tensor).*[iI]ntertw)",
+   "results": "{\"t\": \"2026-10-24T01:59:42Z\", \"tool\": \"grep\", \"query\": \"intertwin.*(baseChange|tensor)|((baseChange|tensor).*[iI]ntertw)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Action.lean\", \"Mathlib/RepresentationTheory/Action.lean\", \"Mathlib/RepresentationTheory/Action.lean\", \"Mathlib/RepresentationTheory/Intertwining.lean\", \"Mathlib/RepresentationTheory/Intertwining.lean\", \"Mathlib/RepresentationTheory/Intertwining.lean\", \"Mathlib/RepresentationTheory/Intertwining.lean\", \"Mathlib/RepresentationTheory/Intertwining.lean\"], \"digest\": \"a5af5046b7e254aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a basis b of a vector space M, the tensor product M tensor N is linearly isomorphic to finitely supported functions from the basis index to N",
+   "results": "{\"t\": \"2026-10-24T02:00:13Z\", \"tool\": \"leanfinder\", \"query\": \"Given a basis b of a vector space M, the tensor product M tensor N is linearly isomorphic to finitely supported functions from the basis index to N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.basisAux\", \"Module.Basis.tensorProduct\", \"Algebra.TensorProduct.basis_repr_symm_apply\", \"Module.Basis.tensorProduct_apply\", \"Module.Basis.tensorProduct_apply'\", \"Algebra.TensorProduct.basisAux_tmul\", \"Module.Basis.tensorProduct_repr_tmul_apply\", \"Algebra.TensorProduct.basis_repr_tmul\"], \"digest\": \"b07c8adf3c5f8c5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "equivFinsupp|[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T02:00:13Z\", \"tool\": \"grep\", \"query\": \"equivFinsupp|[Bb]asis\", \"sub\": \"LinearAlgebra/TensorProduct/Basis\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "equivFinsupp|def tensorProduct|tensorProduct_apply",
+   "results": "{\"t\": \"2026-10-24T02:00:32Z\", \"tool\": \"grep\", \"query\": \"equivFinsupp|def tensorProduct|tensorProduct_apply\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Defs.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Matrix.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Matrix.lean\"], \"digest\": \"7d7d584d7168e8a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply ordinary tensor/Hom, basis, or representation operations, but do not assert the full comparison with a possibly noncommutative acting algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "linearIndependent_algebraMap_comp_iff",
+   "results": "{\"t\": \"2026-10-24T02:02:50Z\", \"tool\": \"loogle\", \"query\": \"linearIndependent_algebraMap_comp_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"linearIndependent_algebraMap_comp_iff\"], \"digest\": \"a6868a6c88f6ff19\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a dependency only: existing Mathlib leaf lem-weil-linear-independence-field-extension, not a match for the item."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent_algebraMap_comp_iff",
+   "results": "{\"t\": \"2026-10-24T02:02:51Z\", \"tool\": \"grep\", \"query\": \"linearIndependent_algebraMap_comp_iff\", \"sub\": \"LinearAlgebra/LinearIndependent\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\"], \"digest\": \"3fa9209bcd70352b\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a dependency only: existing Mathlib leaf lem-weil-linear-independence-field-extension, not a match for the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-semisimple-scalar-extension-kzero-criterion",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, second assertion and its proof, printed p.138, equations (4)--(5), followed by the localization of Lambda in 1.3, printed pp.139--140. Specifically: Gabber preparation second assertion: integral representation lifting before equation (5). Auxiliary field-splitting input: Agent auxiliary algebra lemma for the characteristic-zero field-splitting input; proof rationale in report.md. The passage cites Serre but does not state this criterion. WANTED: Serre, Linear Representations of Finite Groups, Part III, fields of definition and Schur indices. No Stacks tag for this exact criterion was found. Supporting algebra input: Hom scalar-extension comparison needed after the representation-class argument preceding ILO X Proposition 1.2, equation (5).",
+   "via": [
+    "lem-per-semisimple-scalar-extension-kzero-criterion",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-algebra-hom-scalar-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the possibly noncommutative Hom comparison by finite matrix coefficient extraction, with injectivity from the existing field-extension independence leaf. Reused all necessary basis and tensor facts already in the DAG; no new nodes. Checked zero modules, the zero algebra, inseparable and infinite field extensions, and the order of composition.",
+  "blueprint": "The inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality/purity branch), is realized through the existing ILO X Proposition 1.2 regular-chart chain: this item supplies the Hom comparison in step 5 of lem-per-semisimple-scalar-extension-kzero-criterion, for the integral representation lifting passage before ILO X (5), p.138. Its five steps provide construction, coordinates, coefficient descent, injectivity and the endomorphism clause."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-3650ca742",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-3650ca742 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. The statement is byte-identical to live; live and side-live still have it unsplit; no repair note, so this is a first split of Q56's auxiliary node. The statement is true (Hom_A is a kernel inside Hom_K, and L⊗_K is exact) and its hypotheses fit the parent's step-5 use: K→Ω and V=W=S_i. Source checks: Stacks 087R (more-algebra.tex:16709) is correctly called only the commutative analogue, with proof_origin agent. Tag 00CV is the algebra tensor-product section. ILO X Prop 1.2 (PDF p.144) cites Serre just before (5) and does not state this lemma. All six cited nodes are Mathlib leaves (field, tensor product, finite dimension, scalar-extension basis clause, basis existence, independence over K iff over L), so there is no route issue and no tool_uses. proof_deps equals the union of the step uses. I recomputed every step. Step 1: K-bilinearity, the A_L-linearity on generators, and the balancing. Step 2: ι is injective, the bases, and finite b_s support with no finiteness of L/K assumed. Step 3: [F]P_a=Q_a[F] from (1⊗a)(1⊗v_j), using only K-independence of the b_s, and the array of Φ(x⊗f) is x[f]. Step 4: the reduction to K-independent h_j and the cited leaf on the flattened arrays. Step 5: composition order f∘g (not the opposite algebra) and the identity. Edge cases hold: V=0, W=0, L=K, A=M_2(K), infinite or inseparable L/K, the zero algebra. No duplicate in the DAG (the flat Hom base-change node is over a commutative R only). No new nodes and no SGA. Advisory only: a v_i/v_j index slip in step 4, and step 3 uses centrality without saying so."
+ }
+}

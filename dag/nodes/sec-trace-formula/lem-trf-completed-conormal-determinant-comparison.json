@@ -19,186 +19,73 @@
   "def-weil-pbc-kahler-differentials",
   "def-pc-derived-category",
   "def-weil-module-base-change",
-  "lem-trf-two-term-perfect-determinant"
+  "lem-trf-two-term-perfect-determinant",
+  "def-trf-completed-differential-extension",
+  "def-trf-formal-local-presentation",
+  "def-trf-completed-jacobian-presentation"
  ],
  "proof": [
   {
-   "text": "The finite-type Noetherian theorem applied over the field k, followed by Noetherianity of localization and completion, makes S,A,R Noetherian. The local completion map A→R is faithfully flat. Put N=Ω¹_{A/k} and M_R=N⊗_A R. The regular-sequence conormal-basis theorem gives I/I²≃A^{m-d} and J/J²≃R^c, with the stated equation classes as bases. Polynomial differentials followed by localization give Ω¹_{P/k}⊗_P A≃A^m on du_i. Thus both displayed complexes have finite free terms. N is finitely generated: its generators are the images of du_i.",
+   "text": "Apply [lem-trf-completed-conormal-resolutions] to the chosen algebraic and formal presentations. Its hypotheses are exactly those here; it gives finite free models and augmentations $q_P,q_T$ to the same $M_R=\\Omega^1_{A/k}\\otimes_A R$, both quasi-isomorphisms. The specified degree-zero maps give the asserted cokernel identifications, also on the allowed generic field fibres.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-local-completion-faithfully-flat",
-    "lem-weil-pbc-regular-sequence-conormal-free",
-    "lem-weil-pbc-kahler-differentials-polynomial-extension",
-    "lem-weil-pbc-kahler-differentials-localization"
+    "lem-trf-completed-conormal-resolutions"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00LN (lemma-regular-quasi-regular), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00MC (lemma-completion-faithfully-flat); basic Noetherian localization and completion."
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Reassembly of returned proof: Steps 1--5 and 9, via the common-resolution subnode."
    }
   },
   {
-   "text": "The cokernel of the algebraic conormal map is N: a P-linear map Ω¹_{P/k}→V for an A-module V factors through that cokernel exactly when the corresponding k-derivation of P vanishes on I, exactly when it descends to A. This is precisely the universal property of N. Tensor right exactness identifies the cokernel after tensoring with R with M_R, with du_i↦d(u_i mod I)⊗1. Apply the completed-Jacobian theorem to the given formal presentation, with residue field F=k and section the structural k→R: F/k is finite separable, the map is continuous and surjective, and all g_j lie in (z). It supplies the unique continuous extension d̂:R→M_R and the cokernel isomorphism for C_T, sending e_i to d̂(z_i). Denote the two augmentation maps to M_R[0] by q_P,q_T.",
+   "text": "By [lem-trf-continuous-conormal-lift-augmentation], local lifts exist and their stated formulas define chain maps $f_\\alpha$ with $q_Tf_\\alpha=q_P$. In the derived category invert the two augmentations: $f_\\alpha=q_T^{-1}q_P$. Hence every lift is a quasi-isomorphism and all have the same derived class.",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-trf-completed-jacobian-differentials",
-    "lem-trf-completion-kahler-differential-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C52 (lemma-complete-local-ring-structure-as-algebra), with the completed-Jacobian auxiliary comparison; algebra.tex Tag 00RU (lemma-differential-seq), whose cokernel argument is written here."
-   }
-  },
-  {
-   "text": "The finite-type algebra S is finitely presented over the Noetherian field k. For each field extension k'/k, the perfect-field reduced-tensor theorem makes S⊗_k k' reduced, so Spec S is geometrically reduced. The dense-smooth-open theorem applies and puts every generic point in the smooth locus: an open dense subset meets each component away from the other finitely many components and therefore contains its generic point. Pure dimension d and the equidimensional-open dimension theorem give local topological dimension d on Spec S. The smooth-differentials rank theorem and localization of differentials now give dim_{A_a}(N⊗_A A_a)=d for each minimal prime a of A. Here A_a is the generic field of the corresponding reduced component. By Step 2 the algebraic conormal map over that field has cokernel of dimension d. Its domain and codomain have dimensions m-d and m, so rank-nullity makes it injective.",
-   "uses": [
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-perfect-reduced-tensor",
-    "lem-pur-geometrically-reduced-dense-smooth-open",
-    "lem-sbc-equidimensional-open-local-dimension",
-    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 056V and 0A21: dense smooth locus and local dimension on a pure-dimensional finite-type scheme; algebra.tex Tags 00I4, 00FP; morphisms.tex Tag 02G1, rank of smooth differentials."
-   }
-  },
-  {
-   "text": "Let p be a minimal prime of R. Flat going-down for A→R shows that its contraction a to A is minimal: otherwise a strictly smaller prime of A would lift to a prime strictly below p. Since A is reduced (a localization of S), A_a is a field by the minimal-prime localization theorem; the same theorem makes F_p=R_p a field because R is reduced. The local map A_a→F_p is an extension of fields. The algebraic exact vector-space sequence of Step 3 therefore remains exact over F_p, and dim_{F_p}(M_R⊗_R F_p)=d. Tensor right exactness applied to Step 2 identifies both base-changed cokernels with this vector space.",
-   "uses": [
-    "lem-sc-flat-going-down",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00HS (lemma-flat-going-down), 00EU (lemma-minimal-prime-reduced-ring)."
-   }
-  },
-  {
-   "text": "Over each F_p the formal differential has domain dimension c, codomain dimension n and cokernel dimension d=n-c; rank-nullity gives zero kernel. The algebraic differential also has zero kernel over F_p by Step 4. The total-fractions theorem gives Q(R)≃∏_p R_p. The map R→Q(R) is injective: if a/1=0, some nonzerodivisor s satisfies sa=0, hence a=0. Coordinatewise, the same is true for every finite free R-module. Therefore a vector in the kernel of either differential, zero in every F_p by the preceding calculations, is zero in its free source over R. Both q_P and q_T are now quasi-isomorphisms: the only remaining cohomology is their already identified degree-zero cokernel M_R.",
-   "uses": [
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points) and 00EW (lemma-reduced-ring-sub-product-fields); the free-module kernel argument is written out."
-   }
-  },
-  {
-   "text": "To construct a local lift α:P→T, lift each u_i mod I to an element of T; its residue is the prescribed k-value of u_i. Every polynomial outside the rational maximal ideal q then evaluates to a power series with nonzero constant term, which is a unit (its inverse is its constant inverse times a geometric series). Thus evaluation extends to P. Reducing to the residue field proves α is local, and its composite with T→R is the given P→R. Because α(I)⊆J and α(I²)⊆J², [h]↦[α(h)] defines the degree -1 map; the differential formula defines degree zero. Formal differentiation is a derivation, and differentiating polynomials and inverses proves the chain rule, hence f_α:C_P⊗R→C_T is a chain map.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C52, choosing coordinate lifts; polynomial localization and termwise power-series differentiation, written out."
-   }
-  },
-  {
-   "text": "The finite-module tensor/completion theorem identifies M_R with the adic completion of N, and module-completion completeness makes it separated; the image of (z) is the maximal ideal of R, so these are also the (z)-adic powers. For any series h∈T, truncate modulo (z)^b. Termwise derivatives of the tail lie in (z)^{b-1}; both the universal continuous derivation on R and the formal derivative expression therefore converge to the same element of M_R, since they agree on polynomials. This gives d̂(h mod J)=∑_i (∂h/∂z_i mod J)d̂(z_i). In particular q_T f_α=q_P on each du_i and hence on the complex. In D(R), where the augmentations of Step 5 are invertible, f_α=q_T^{-1}q_P. It is a quasi-isomorphism and its derived class is independent of α.",
-   "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-module-completion-complete",
-    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-continuous-conormal-lift-augmentation",
     "def-pc-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00MA and 05GG (finite module completion and tensor); varieties.tex 0C52 continuous differential comparison. The chain rule and localization equality are written out."
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Reassembly of returned proof: Steps 6--7, via the lift subnode."
    }
   },
   {
-   "text": "The adjunction-line theorem identifies K_A in the chosen algebraic chart with (Λ^{m-d}(I/I²))^∨⊗Λ^m(Ω¹_{P/k}⊗_P A). Applying the two-term determinant functor to the isomorphism f_α=q_T^{-1}q_P and its scalar-extension comparison gives Φ_T:K_A⊗_A R≃(Λ^c(J/J²))^∨⊗Λ^n R^n=λ_T. This uses completion of the algebraic modules and the actual conormal map, rather than any claim that completion is a change of the base scheme. Lift-independence follows immediately from Step 7 and functoriality of the determinant.",
+   "text": "The adjunction theorem identifies $K_A$ with the algebraic conormal determinant. Apply the two-term determinant functor and scalar-extension comparison to $q_T^{-1}q_P$, obtaining $\\Phi_T$. For every allowed $R\\to L$, Step 1 supplies short exact sequences of vector spaces with common cokernel $M$. Apply [lem-trf-two-term-augmentation-determinant-normalization]: its relation-first formula is exactly the displayed $\\delta_T$, and $\\det(q_T\\otimes L)=\\delta_T^{-1}$. Its algebraic smooth interpretation gives $\\det(q_P\\otimes L)=\\gamma_A$. Functoriality yields $\\delta_T^{-1}(\\Phi_T\\otimes L)=\\gamma_A$.",
    "uses": [
     "lem-trf-flat-lci-canonical-adjunction",
-    "lem-trf-two-term-perfect-determinant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6V local adjunction computation; perfect.tex Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det)."
-   }
-  },
-  {
-   "text": "Let θ:R→L satisfy the stated generic-smooth hypothesis. Smooth differentials have rank the local fibre dimension, here d; localization identifies their fibre with Ω¹_{A/k}⊗_A κ(a) at the specified generic point a. Its further extension to L consequently has dimension d. Tensor right exactness makes this vector space M the cokernel of both C_P⊗L and C_T⊗L. For the algebraic map the source and target dimensions are m-d,m; for the formal map they are c,n with n-c=d. Rank-nullity makes both left maps injective. Thus both sequences are short exact even though R→L need not be flat. The two augmentations after tensoring with L are quasi-isomorphisms, and the equality (q_T⊗L)(f_α⊗L)=q_P⊗L is the tensor of the chain-map equality from Step 7.",
-   "uses": [
-    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02G1; algebra.tex Tags 00RT, 00DF, followed by vector-space rank-nullity. No flatness of R→L is used."
-   }
-  },
-  {
-   "text": "For the short exact sequence of Step 9 choose its relation basis a_j=[g_j] and any lifts ṽ_i of a basis v_i of M. The vectors d̂g_1,…,d̂g_c,ṽ_1,…,ṽ_d form a basis of L^n. Changing a lift by a relation vector adds a wedge with c+1 relation vectors, hence zero; changing the relation basis multiplies its dual top wedge and its image top wedge by inverse determinants. The resulting δ_T is therefore precisely the displayed well-defined determinant isomorphism. In this split basis the augmentation is the projection [L^c→L^c⊕M]→M[0]. The determinant construction cancels the identical relation factors by evaluation, so det(q_T⊗L)=δ_T^{-1}. The same calculation for P gives det(q_P⊗L)=γ_A, by the adjunction theorem's smooth-locus identification (relations precede quotient lifts in both formulas). Functoriality and scalar-extension compatibility now yield δ_T^{-1}(Φ_T⊗L)=γ_A.",
-   "uses": [
     "lem-trf-two-term-perfect-determinant",
-    "lem-trf-flat-lci-canonical-adjunction"
+    "lem-trf-two-term-augmentation-determinant-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E9Y (lemma-determinant), its explicit ordered wedge formula, and Tag 0E9Z (lemma-fundamental-class-lci); more-algebra.tex Section 0FJI, determinant of a degreewise surjective quasi-isomorphism, applied to the split augmentation."
+    "place": "Reassembly of returned proof: Steps 8--10, using Tags 0E9Y/0E9Z and 0FJX/0FJY."
    }
   },
   {
-   "text": "For a continuous map between two regular formal presentations inducing 1_R, apply the series chain rule of Step 7 to its coordinate images. Its conormal chain map h satisfies q_{T'}h=q_T, hence h=q_{T'}^{-1}q_T in D(R). Thus for three such presentations the comparisons compose by cancellation; determinant functoriality gives det(h)Φ_T=Φ_{T'}. Algebraic presentation changes likewise commute with the differential augmentations. To compare their source identifications with the fixed K_A, use Step 10 at every L=R_p, p minimal: Step 4 ensures these are allowed generic-smooth fields. The canonical algebraic adjunction transitions agree with γ_A there, so the two candidate line maps agree at every R_p. Their difference is zero: after trivializing the lines on the local ring R it is a scalar, detected by the injection R→∏_p R_p established in Step 5. Hence the comparisons respect all algebraic presentation changes as well, and their cocycle law holds over R. This also proves the normalization for every choice of presentations.",
+   "text": "For a continuous formal presentation map, the lift lemma gives $q_{T'}h=q_T$, so $h=q_{T'}^{-1}q_T$ and $\\det(h)\\Phi_T=\\Phi_{T'}$; threefold comparisons compose by cancellation. For algebraic presentation changes, compare the resulting line maps at each minimal prime $\\mathfrak p$ of $R$: [lem-trf-generic-completed-differential-rank] makes $R_{\\mathfrak p}$ an allowed generic-smooth field. Step 3 identifies both maps there with the canonical smooth identification of the fixed adjunction line. By the total-fractions theorem $R\\hookrightarrow\\prod_{\\mathfrak p}R_{\\mathfrak p}$: localization at nonzerodivisors is injective since $sr=0$ implies $r=0$. Thus the difference of the two line maps is zero, checked on local trivializations. This proves algebraic compatibility and its cocycle law; the generic normalization holds for every presentation by Step 3.",
    "uses": [
+    "lem-trf-continuous-conormal-lift-augmentation",
+    "lem-trf-generic-completed-differential-rank",
     "lem-trf-two-term-perfect-determinant",
     "lem-trf-flat-lci-canonical-adjunction",
     "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0FJY functoriality; duality.tex Tags 0E9Y/0E9Z; algebra.tex Tags 00EW/02LX for equality detection over the reduced completion."
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Reassembly of returned proof: Step 11, using Tag 0FJY and algebra.tex Tags 00EW/02LX."
    }
   }
  ],
  "proof_deps": [
   "def-pc-derived-category",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-multivariate-power-series",
-  "lem-pur-geometrically-reduced-dense-smooth-open",
-  "lem-sbc-equidimensional-open-local-dimension",
-  "lem-sc-flat-going-down",
-  "lem-trf-completed-jacobian-differentials",
-  "lem-trf-completion-kahler-differential-comparison",
+  "lem-trf-completed-conormal-resolutions",
+  "lem-trf-continuous-conormal-lift-augmentation",
   "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-generic-completed-differential-rank",
+  "lem-trf-two-term-augmentation-determinant-normalization",
   "lem-trf-two-term-perfect-determinant",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "lem-weil-pbc-kahler-differentials-polynomial-extension",
-  "lem-weil-pbc-local-completion-faithfully-flat",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field",
-  "lem-weil-pbc-module-completion-complete",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-perfect-reduced-tensor",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "lem-weil-pbc-regular-sequence-conormal-free",
-  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
  ],
  "proof_origin": {
   "by": "agent",
@@ -330,11 +217,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-completed-conormal-determinant-comparison",
   "worker": "stage1",
-  "summary": "Proved the formal and completed algebraic complexes are finite free resolutions of the same completed differential module. Injectivity is proved explicitly at minimal primes and detected over the reduced completion; all lift maps therefore equal q_T^{-1}q_P. Applied the existing determinant construction and computed its generic normalization in split bases, then checked formal and algebraic presentation coherence. Statement unchanged; zero new nodes.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue.",
+  "summary": "Repair of the 8096-character proof: four independent statement-only subnodes carry generic differential ranks, common conormal resolutions, continuous lift/augmentation maps, and ordered-wedge determinant normalization. The unchanged statement is assembled in four short steps. Original argument text and the precise work allocation are retained in report.md. Rebased after the side/live landing refusal: current statement, definition owners and maintainer records retained; every current cited statement and verbatim citation rechecked; the report records the current-DAG comparison and preserved successful receipts. Current-DAG retry 2026-10-23: reread the new same-tag residue-basis and residual-generic-component nodes; neither duplicates the retained completed-resolution or generic-differential-rank task. Added both distinctions and the renewed citation/source audit to report.md.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue. The four components realize old Steps 3--4, 1--2/5/9, 6--7/11, and 8/10 respectively; old Step 11 descent is assembled here.",
   "tool_uses": [
    {
     "node": "lem-pur-geometrically-reduced-dense-smooth-open",
@@ -436,12 +323,76 @@
   "lem-weil-pbc-tensor-right-exact"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q29-44314af68",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q14-a29d75ee7",
+  "group": "Q14",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-44314af68 (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, cited node statements, unit/chapter route, and cited Stacks sources. The completed conormal comparison is mathematically coherent: hypotheses, generic-rank injectivity, completion/chain-rule argument, determinant normalization, and presentation cocycle all check. No duplicate or missing node, route violation, coefficient-category error, or repair is needed. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-a29d75ee7 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and Stacks duality 0E9Y/0E9Z. Re-split check: the base proof (11 steps, 8096 characters) is preserved verbatim in the report, and every old argument is now in a self-contained new node. Generic-rank node: old Steps 3-4 and the rank part of 9. Resolutions node: old Steps 1-2, 5 and the field-fibre exactness of 9. Lift node: old Steps 6-7 and the presentation-map chain rule of 11. Normalization node: old Step 10. The item is a 4-step, 2147-character assembly: derived inversion f=q_T^{-1}q_P; Phi_T from the adjunction line and determinant functoriality; the normalization from det(q)=delta^{-1}; and the minimal-prime detection R into prod R_p, written out. The statement and stmt_deps are unchanged. Math checks: generic points are smooth via perfect k plus reduced, R_p is a field and the contraction is minimal by going-down; injectivity over R comes from rank-nullity at each R_p plus reducedness, and on field fibres from right exactness plus dimension, with no flatness assumed; the lift extends to P because f not in q gives a unit; the chain rule holds via truncation and separatedness of M_R; delta matches 0E9Y relation-first; det(q)=delta^{-1} is the c'=0 case of the existing lem-sfb-two-term-cofactor-naturality convention. Edge cases d=0, c=0 and xy=0 (r(y,x)=0 forces r in (x)∩(y)=0) all hold. Duplicate search over 0E9Y/0E9Z/0C52/056V/0A21/00LN/0FJX/0FJI and completed-Jacobian/conormal nodes found ingredients only, no duplicate. B1 statement-only, blueprint.from/via, searches, existing citations and no SGA all check. The node files are identical to heads 220889a2/48f80355/8b39ffdf except split_report (promotion-loop re-delivery). Advisories: the normalization node's affine-open algebraic clause needs a routine spreading out of P=k[u]_q, as old Step 10 did; the 19 tool_uses entries from the old proof are now cited only implicitly by future child proofs."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompletedConormalDeterminantComparison",
+  "declaration": "AlgebraicGeometry.exists_completedConormalDeterminantComparison",
+  "declarations": [
+   "AlgebraicGeometry.CompletedConormalAlgebraicPresentation",
+   "AlgebraicGeometry.CompletedConormalAlgebraicPresentation.extension",
+   "AlgebraicGeometry.CompletedConormalFormalPresentation",
+   "AlgebraicGeometry.CompletedConormalFormalPresentation.extension",
+   "AlgebraicGeometry.CompletedConormalModel",
+   "AlgebraicGeometry.CompletedConormalAlgebraicPresentation.model",
+   "AlgebraicGeometry.CompletedConormalFormalPresentation.model",
+   "AlgebraicGeometry.CompletedConormalModel.complex",
+   "AlgebraicGeometry.CompletedConormalModel.sheafComplex",
+   "AlgebraicGeometry.CompletedConormalModel.line",
+   "AlgebraicGeometry.completedConormalSection",
+   "AlgebraicGeometry.CompletedConormalMap",
+   "AlgebraicGeometry.CompletedConormalMap.sheafMap",
+   "AlgebraicGeometry.CompletedConormalMap.derivedIso",
+   "AlgebraicGeometry.CompletedConormalMap.IsDeterminant",
+   "AlgebraicGeometry.IsCompletedConormalLift",
+   "AlgebraicGeometry.IsCompletedConormalLiftMap",
+   "AlgebraicGeometry.completedConormalAdjunctionSections",
+   "AlgebraicGeometry.IsCompletedConormalGeneric",
+   "AlgebraicGeometry.IsCompletedConormalSmoothComparison",
+   "AlgebraicGeometry.CompletedConormalFormalData",
+   "AlgebraicGeometry.CompletedConormalAlgebraicPresentation.augmentation",
+   "AlgebraicGeometry.CompletedConormalFormalMap",
+   "AlgebraicGeometry.IsCompletedConormalFormalMap",
+   "AlgebraicGeometry.CompletedConormalFormalData.genericAugmentation",
+   "AlgebraicGeometry.CompletedConormalFormalPresentation.genericJacobian",
+   "AlgebraicGeometry.IsCompletedConormalGenericDeterminant",
+   "AlgebraicGeometry.completedConormalSource",
+   "AlgebraicGeometry.IsCompletedConormalAlgebraicMap",
+   "AlgebraicGeometry.CompletedConormalDeterminantComparison",
+   "AlgebraicGeometry.CompletedConormalDeterminantComparison.formalComparison",
+   "AlgebraicGeometry.exists_completedConormalDeterminantComparison"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CompletedConormalDeterminantComparison.lean",
+  "statement": "theorem exists_completedConormalDeterminantComparison {k S : Type u} [Field k] [PerfectField k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] [_root_.IsReduced S] [∀ X : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (d : ℕ) (hpure : (Spec (CommRingCat.of S)).IsPureDimension d) (hlci : Algebra.IsLocalCompleteIntersection k S) (p : Ideal S) [p.IsMaximal] (hresidue : Nonempty ((S ⧸ p) ≃ₐ[k] k)) [_root_.IsReduced (Algebra.LocalCompletion (Localization.AtPrime p))] (J : FlatLCIAdjunctionSystem (Spec.map (CommRingCat.ofHom (algebraMap k S))) d) (hJ : J.IsNormalized) : Nonempty (CompletedConormalDeterminantComparison (A := Localization.AtPrime p) J)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem provides the entire normalized comparison system. All auxiliary declarations formalize data and conditions explicitly introduced by this node; conormal quotients, scalar extension, associated quasi-coherent complexes, adjunction line, and determinant normalization reuse the recorded interfaces. The determinant predicate uses the Q131 sign repair of the adjunction dependency, delivered under section 1(B); the continuous-extension predicate and the completion/differential abbreviations have explicit owning definition-node dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d440c054b",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery after the 457b81a4 RETURN. The item Lean differs only by genSizeOf/genSizeOfSpec/genInjectivity options; the record adds 3 definition-node stmt_deps. F1 repaired: the dependency's IsFlatLCIDeterminantComparison gains exactly (-1)^(a*(b+1)) plus its docstring; the module is unmoved in live, side-live and the repo, and the dependency record changes only in lean (statement verbatim, note added). An exact-rational script check gives functoriality and identity = 1 in 500/500 random trials (c=0 and d=0 included), with 135 failures without the sign. The augmentation determinant is the relation-first delta inverse, consistent with IsSmoothComparison and the generic clause; the T versus T+(w,w) contradiction is gone. Importers do not use the predicate directly. F2 repaired: def-trf-completed-differential-extension is existing:true on the unchanged Q150 module, signature verbatim, statement matches the body, definition stmt_deps only; the LocalCompletion/CompletedDifferentials owners are cited. Gates pass: one sorry per module, no hollow definitions, docstrings and 11 steps present, report sections present. Advisories: plain FlatLCI definitions sit in a theorem module with no owning definition node; L : Type u; downstream sign conventions (e.g. the NE cofactor) need re-checking. No file changed, so no compile; worker reports clean compiles (33.5 s / 35.1 s) and a dry run OK."
+ }
 }

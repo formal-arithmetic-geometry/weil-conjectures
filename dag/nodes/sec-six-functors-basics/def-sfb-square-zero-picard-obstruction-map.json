@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-square-zero-picard-obstruction-map",
+ "kind": "definition",
+ "title": "Canonical square-zero Picard obstruction map",
+ "status": "split",
+ "statement": "Let $j:Z\\to X$ be a morphism of schemes [def-pc-scheme] that is a first order thickening [def-sbc-first-order-thickening], and let $I=j.\\ker$ be its quasi-coherent defining ideal, viewed as an $\\mathcal O_X$-module [def-sbc-closed-immersion-ideal-sheaf]. Write $I_Z=j^*I$ for the tensor pullback [def-pc-module-pullback]; since $I^2=0$, this is $I/I^2$, canonically the ideal with its quotient $\\mathcal O_Z$-action. Let $u_j$ be restriction of units [def-sc-zariski-units-restriction]. Use the short exact units sequence $S_j$, its kernel $K$, its unique isomorphism $e:I_{\\rm ab}\\simeq K$ normalized by $a\\mapsto1+a$, and its cohomological boundary [def-sfb-square-zero-units-boundary]. Define the canonical additive-group homomorphism $\\delta_j:\\operatorname{Pic}(Z)\\to H^2(Z,I_Z)$ [def-sc-picard-group] [pqf-def-cohomology] by composing: the Hilbert-90 isomorphism $\\operatorname{Pic}(Z)\\to H^1(Z,\\mathcal O_Z^\\times)$ [thm-sc-hilbert-90]; the inverse of the canonical closed-immersion comparison $c_j^1$ [lem-sc-closed-immersion-units-cohomology-comparison-bijective]; the boundary $H^1(X,j_*\\mathcal O_Z^\\times)\\to H^2(X,K)$ of $S_j$ in abelian-sheaf cohomology [def-sc-topological-abelian-cohomology]; $H^2(e^{-1})$; the inverse resolution-normalized module/abelian cohomology comparison [def-pc-module-cohomology-ext-resolution-equiv]; and the ordinary module-cohomology map of the section-normalized tensor-pullback unit $I\\to j_*j^*I$ [def-weil-pbc-module-cohomology-fmap]. The underlying composite function preserves zero and addition; bundle it with these properties as the indicated group homomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-picard-group",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sc-zariski-units-restriction",
+  "def-sc-topological-abelian-cohomology",
+  "thm-sc-hilbert-90",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-cohomology-ext-resolution-equiv",
+  "lem-sc-closed-immersion-units-cohomology-comparison-bijective",
+  "def-sfb-square-zero-units-boundary"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0C6R, lemma-picard-group-first-order-thickening, proof and middle and final rows; Tag 03FD for the module/abelian comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical connecting homomorphism Picard group square zero ideal second sheaf cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.δ₀_apply\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \"(z : X.X₃.ρ.invariants) (y : X.X₂)\\n  (hy : X.g.hom y = z)\\n    -- Let `x` be a 1-cochain for `X₁` such that `f ∘ x = d(y)`.\\n    \\n  (x : G → X.X₁) (hx : X.f.hom ∘ x = d₀₁ X.X₂ y) :\\n  -- Then `x` is a 1-cocycle and `δ z = x` in `H¹(X₁)`.\\n  δ hX 0 1 rfl ((H0Iso X.X₃).inv z) = H1π X.X₁ ⟨x, mem_cocycles₁_\", \"doc\": \"Given a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of $ G $-representations, an invariant element $ z \\\\in X_3^G $, and elements $ y \\\\in X_2 $, $ x: G \\\\to X_1 $ satisfying $ X.g(y) = z $ \"}\n  {\"name\": \"groupCohomology.δ\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \"(i j : ℕ) (hij : i + 1 = j) : groupCohomology X.X₃ i ⟶ groupCohomology X.X₁ j\", \"doc\": \"For a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of representations of a group $ G $ over a commutative ring $ k $, this morphism $ \\\\delta_{i,j} $ maps the $ i $-th group cohomology of $\"}\n  {\"name\": \"groupCohomology.isIso_δ_of_isZero\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \"(n : ℕ) (h : IsZero (groupCohomology X.X₂ n)) (hs : IsZero (groupCohomology X.X₂ (n + 1))) : IsIso (δ hX n (n + 1) rfl)\", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of $G$-modules over a commutative ring $k$, if the group cohomology modules $H^n(X_2)$ and $H^{n+1}(X_2)$ are zero, then the connecting h\"}\n  {\"name\": \"groupHomology.δ₀_apply\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LongExactSequence\", \"type\": \"(z : cycles₁ X.X₃) (y : G →₀ X.X₂)\\n  (hy : mapRange.linearMap X.g.hom.hom y = z.1)\\n    -- Let `x : X₁` be such that `f(x) = d(y)`.\\n    \\n  (x : X.X₁) (hx : X.f.hom x = d₁₀ X.X₂ y) :\\n  -- Then `δ z = x` in `H₀(X₁)`.\\n  δ hX 1 0 rfl (H1π X.X₃ z) = H0π X.X₁ x\", \"doc\": \"For a short exact sequence $ X $ in the category of representations, if $ z $ is a 1-cycle in $ X_3 $, $ y $ is a finite support function in $ X_2 $ such that $ X.g(y) = z $, and $ x $ is an element o\"}\n  {\"name\": \"groupCohomology.δ.congr_simp\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  (i j : ℕ) (hij : i + 1 = j), groupCohomology.δ hX i j hij = groupCohomology.δ hX i j hij\", \"doc\": \"For a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of representations of a group $ G $ over a commutative ring $ k $, the connecting homomorphism $ \\\\delta_{i,j} $ maps the $ i $-th group c\"}\n  {\"name\": \"groupCohomology.mono_δ_of_isZero\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \"(n : ℕ) (h : IsZero (groupCohomology X.X₂ n)) : Mono (δ hX n (n + 1) rfl)\", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of representations of a group $G$ over a commutative ring $k$, if the $n$-th group cohomology of $X_2$ is trivial (zero), then the connec\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.homology_exact₁\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \": (ShortComplex.mk _ _ (δ_comp hS i j hij)).Exact\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, for a short exact sequence $S$ of homological complexes and indices $i,j$ with a relation $i \\\\to j$ in the complex shape, the composition of the connecting homomo\"}\n  {\"name\": \"groupHomology.isIso_δ_of_isZero\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LongExactSequence\", \"type\": \"(n : ℕ) (hs : IsZero (groupHomology X.X₂ (n + 1))) (h : IsZero (groupHomology X.X₂ n)) : IsIso (δ hX (n + 1) n rfl)\", \"doc\": \"For a short exact sequence $ X $ in the category of representations, the connecting homomorphism $ \\\\delta $ maps the group homology of the third term $ X_3 $ at degree $ i $ to the group homology of t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern cotangent or group cohomology or affine ring Picard groups, not the geometric units boundary for arbitrary square-zero thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Picard obstruction map is the connecting homomorphism of the sequence of units under the identification a maps to one plus a for a square zero ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  (S : Type u₂) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u₃) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] → [IsScalarTower R S T] → Algebra.H1C\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern cotangent or group cohomology or affine ring Picard groups, not the geometric units boundary for arbitrary square-zero thickenings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \" (R : Type u) (A : Type u_4) [CommSemiring R] [CommSemiring A] [Algebra R A] [FaithfulSMul R A] : Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"Exactness of the sequence `1 → Rˣ → Aˣ → (Submodule R A)ˣ → Pic R → Pic A` at `Pic R`.\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \" (R : Type u) (A : Type u_4) [CommSemiring R] [Semiring A] [Algebra R A] [FaithfulSMul R A] : Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"Exactness of the sequence `1 → Rˣ → Aˣ → (Submodule R A)ˣ → Pic R → Pic A`\\nat `(Submodule R A)ˣ`.\"}\n  {\"name\": \"Path.Homotopic.Quotient.exact\", \"module\": \"Mathlib.Topology.Homotopy.Path\", \"type\": \" {X : Type u} [TopologicalSpace X] {x₀ x₁ : X} {p q : Path x₀ x₁} (h : Path.Homotopic.Quotient.mk p = Path.Homotopic.Quotient.mk q) : p.Homotopic q\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern cotangent or group cohomology or affine ring Picard groups, not the geometric units boundary for arbitrary square-zero thickenings"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]icard.*[Tt]hicken|[Pp]icard.*[Oo]bstruction|[Tt]hicken.*[Pp]icard",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern cotangent or group cohomology or affine ring Picard groups, not the geometric units boundary for arbitrary square-zero thickenings"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*[Oo]bstruction|Picard.*[Tt]hicken|squareZeroPicardObstruction in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search Picard obstruction",
+   "results": "Only WeilConjectures/AlgebraicGeometry/Picard/DualNumbers.lean (a split dual-number special case) and the assigned theorem node; 0 blueprint nodes match Picard obstruction. No existing canonical obstruction map definition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-picard-obstruction",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Stacks Tag 0C6R, proof: construct the normalized units boundary and transport its target to ordinary module cohomology. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Smoothness part: obstruction to lifting the prescribed line bundle after the base thickening is pulled back.",
+   "via": [
+    "lem-sfb-square-zero-picard-obstruction",
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroPicardObstructionMap",
+  "declaration": "AlgebraicGeometry.Scheme.squareZeroPicardObstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroPicardObstructionMap.lean",
+  "statement": "def squareZeroPicardObstruction {Z X : Scheme.{u}} (j : Z ⟶ X) (hj : IsFirstOrderThickening j) : Additive Z.Pic →+ (RingedSpace.moduleCohomology Z.toRingedSpace 2).obj ((Modules.tensorPullback j).obj j.ker.toModules)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.squareZeroIdealModuleCohomology",
+   "AlgebraicGeometry.Scheme.squareZeroIdealCohomologyPullback",
+   "AlgebraicGeometry.Scheme.squareZeroPicardObstructionFun",
+   "AlgebraicGeometry.Scheme.squareZeroPicardObstructionFun_additive",
+   "AlgebraicGeometry.Scheme.squareZeroPicardObstruction"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd119f89e",
+  "group": "Q37",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd119f89e",
+  "group": "Q37",
+  "result": "fix",
+  "note": "Item exact_picard_squareZeroPicardObstruction matches Stacks 0C6R and the node clause by clause: arbitrary Scheme.{u}, IsFirstOrderThickening (closed immersion with ker^2 = bot), coefficient j*I = I/I^2 = I, ordinary moduleCohomology H^2, Pic.map restriction, Function.Exact at Pic(Z), no extra hypotheses. delta is a real canonical composite: Hilbert-90 AddEquiv, surjInv of the proved-bijective closed-immersion comparison, Yoneda delta-Succ of the kernel units sequence, H^2(e^-1) with e pinned by a genuine exists-unique (a -> 1+a), resolution-normalized module/abelian comparison inverse, module-cohomology map of the section-normalized tensor unit. Additivity is a named sorry theorem. The new node def-sfb-square-zero-units-boundary (absent from the snapshot, read from the commit) follows the new-node field rules and duplicates nothing (existing square-zero units-kernel nodes are etale Nonempty statements). FIX: the new node def-sfb-square-zero-picard-obstruction-map cited theorem new-module-cohomology-ext-resolution-naturality for the plain def moduleCohomologyExtResolutionEquiv, which is owned by def-pc-module-cohomology-ext-resolution-equiv (on the base); fixes/def-sfb-square-zero-picard-obstruction-map.json swaps the stmt_dep and the bracket citation (2-line diff). No Lean change, so no compile; the worker reports clean compiles. Advisory: the thm-sc-hilbert-90 citation is genuine (its map_add' is Pic.toH1Units_mul); Pic and delta-Succ owners are reached transitively."
+ }
+}

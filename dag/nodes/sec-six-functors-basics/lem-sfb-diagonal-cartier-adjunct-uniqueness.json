@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-diagonal-cartier-adjunct-uniqueness",
+ "kind": "statement",
+ "title": "The diagonal Cartier class from its full Kummer adjunct",
+ "statement": "Let $\\ell$ be prime and invertible on $Y$. Put $W=\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$ and let $i:\\mathbf P^1_Y\\hookrightarrow W$ be the diagonal [def-sfb-diagonal-system-interface]. For $n\\geq0$ let $R=\\mathbf Z/\\ell^{n+1}$, let $Q=i_*R$, and let $P=R(1)$. Let $g$ be the supported integral generator, $\\delta$ the positive integral diagonal boundary, and $\\kappa$ the positive Kummer unit preceded by the units comparison, named kummerComparedUnit [lem-sfb-kummer-strict-target-transport]. For any $e\\in\\operatorname{Ext}^2_R(Q,P)$ [def-sfb-cartier-reduction-data], if the scalar adjunct of $e$ along $g$ equals $-\\delta\\kappa$, then $e$ is the canonical residue Cartier class cartierResidueReducedPro. Any proof that $\\ell$ is a unit on $W$ may be used in $\\kappa$; it is supplied by pullback from $Y$. There is no derived reduction presentation or strict-system datum in this statement. The real family definition diagonalResidueClasses specializes the existing unique Cartier classes with the named coefficient structures, without choosing any new witness.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data",
+  "lem-sfb-kummer-strict-target-transport",
+  "lem-sfb-canonical-sheaf-ext"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4): cancellation of the two signs and the scalar-adjunct characterization of the full finite Cartier class."
+ },
+ "proof": [
+  {
+   "text": "Unfold the real kummerScalarAdjunct, negativeExtProduct and kummerComparedUnit expressions. Expand the integral boundary as the negative transported pole boundary; Ext bilinearity cancels both negative signs. Associativity gives exactly the positive full Cartier scalar-adjunct equation.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "def-sfb-cartier-reduction-data",
+    "lem-sfb-kummer-strict-target-transport",
+    "lem-sfb-canonical-sheaf-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The resulting equation is precisely the full scalar-adjunct equation in the canonical Cartier API. The positive prime-power residue ring is finite. Apply canonical_cartier_class_of_adjunct and identify its explicit family with diagonalResidueClasses.",
+   "uses": [
+    "lem-sfb-cartier-canonical-adjunct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data",
+  "lem-sfb-kummer-strict-target-transport",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-cartier-canonical-adjunct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4): cancellation of the two signs and the scalar-adjunct characterization of the full finite Cartier class."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniquely characterized residue Cartier extension class agrees with any class having the same full scalar adjunct and the two Kummer boundary signs cancel",
+   "results": "8 hits: Algebra.Extension.h1Cotangentι_ext; Algebra.Extension.h1Cotangentι_ext_iff; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; Ideal.ResidueField.algHom_ext_iff; Ideal.ResidueField.algHom_ext; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.Extension.Cotangent.ext_iff; Ideal.ResidueField.ringHom_ext_iff. These concern other extension or residue-field equalities.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use the existing project Cartier uniqueness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.neg_comp\"",
+   "results": "1 hit: CategoryTheory.Abelian.Ext.neg_comp in Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic: (-a).comp b h = -(a.comp b h).",
+   "date": "2026-10-26",
+   "verdict": "Use this bilinearity law, neg_neg and Ext.comp_assoc."
+  },
+  {
+   "tool": "grep",
+   "query": "CartierProReductionSpec|cartierReduction_existsUnique|cartierResidueReducedPro",
+   "results": "0 hits from msearch; direct project rg finds all three in Sheaf.AlgebraicGeometry.CartierReductionData.",
+   "date": "2026-10-26",
+   "verdict": "Reuse these declarations; prove only the sign and specialization glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, the full Ext class is uniquely determined by its scalar adjunct; use this before exact restriction of scalars and combine the normalized source and Kummer target",
+   "results": "8 hits: SheafOfModules.restrictScalars, Ext.instModule, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.PullbackConstruction.adjunction, Ext.smul_eq_comp_mk₀. These give scalar adjunctions and Ext structure, not this project-specific Cartier uniqueness or Kummer assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual full Cartier characterization and exact-functor image already in the project; prove the formal sign and assembly implications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (4): cancellation of the two signs and the scalar-adjunct characterization of the full finite Cartier class.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCartierAdjunctUniqueness",
+  "file": "lean/Sheaf/Paper/DiagonalCartierAdjunctUniqueness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_cartier_class_of_adjunct",
+  "statement": "theorem diagonal_cartier_class_of_adjunct (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})\n    (hY : IsUnit (ℓ : Γ(Y, ⊤)))\n    (hW : IsUnit (ℓ : Γ(diagonalSurface Y, ⊤))) (n : ℕ)\n    (e : Ext.{u + 1}\n      ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n))\n        (diagonalImmersion Y)).obj\n          (geoCartierConstant (diagonalResidue.{u} ℓ n) (ProjectiveLine Y)))\n      (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n        (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y)) 2)\n    (he : kummerScalarAdjunct (A := DiagonalAb (diagonalSurface Y))\n      (cartierForget (diagonalResidue.{u} ℓ n) (diagonalSurface Y))\n      (cartierProIntegralGenerator (diagonalResidue.{u} ℓ n) (diagonalImmersion Y)) e =\n      negativeExtProduct (diagonalIntegralBoundary Y)\n        (kummerComparedUnit ℓ (diagonalSurface Y) hW n)) :\n    e = diagonalResidueClasses ℓ Y hY n",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalResidueClasses",
+   "AlgebraicGeometry.ProEtale.diagonal_cartier_class_of_adjunct"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

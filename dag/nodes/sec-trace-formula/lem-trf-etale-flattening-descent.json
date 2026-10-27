@@ -20,111 +20,52 @@
  ],
  "proof": [
   {
-   "text": "First refine every $S_i$ by all members of a finite affine open cover, and replace $X_i$ by its inverse images. Indeed $S_i$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2), and a finite affine cover exists by [lem-weil-pbc-qcqs-finite-affine-open-cover]. Retaining every member preserves both jointly surjective families. Affine schemes are qcqs by [lem-weil-pbc-affine-scheme-qcqs], and each new map to the quasi-separated scheme $S$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). The open restrictions and their composites are etale by [lem-weil-pbc-etale-composition-cancellation], hence flat by [def-weil-etale-morphism]. The blowups restrict by [thm-nagata-blowup-flat-base-change], and their module transforms restrict by [lem-trf-module-strict-transform-flat-pullback]. Thus the original hypotheses hold for the refined diagrams. In particular all $S_i$ may now be assumed affine, so the qcqs hypothesis of the module blowup calculus is available when it is used on $S_i$.",
+   "text": "Replace the diagrams by their finite affine refinement (first clause), relabelling $W_r,Y_r$ as $S_i,X_i$; now all $S_i$ are qcqs. Choose a finite-type quasi-coherent ideal $\\mathcal K$ with $V(\\mathcal K)=S\\setminus U$ and blow it up. Principalization makes its extension an effective Cartier ideal. The calculus preserves qcqs and quasi-coherence; the stability lemma preserves all local-flatification hypotheses. Choose finitely many affine opens $V_\\alpha$ trivializing the Cartier ideal: on each, $U=D(a_\\alpha)$ with $a_\\alpha$ a nonzerodivisor. A finite subcover exists by quasi-compactness. Write $S_1$ for this base, $X_1=X\\times_SS_1$, and $\\mathcal F_1$ for its transform on $X_1$.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-weil-etale-morphism",
-    "thm-nagata-blowup-flat-base-change",
-    "lem-trf-module-strict-transform-flat-pullback",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-trf-etale-flatification-affine-refinement",
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "thm-nagata-blowup-principalizes-center",
+    "def-nagata-effective-cartier-ideal",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-trf-etale-flatification-blowup-stability",
+    "def-nagata-admissible-blowup"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1; preliminary affine refinement before using the qcqs form of the existing calculus."
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof; assembly step 1"
    }
   },
   {
-   "text": "First check stability of the hypotheses under any $U$-admissible blowup $b:S_1\\to S$ with centre ideal $\\mathcal I$. Put $T_i=S_i\\times_SS_1$ and $Y_i=X_i\\times_SS_1$. The two families $T_i\\to S_1$ and $Y_i\\to X\\times_SS_1$ remain jointly surjective and etale by [lem-weil-pbc-etale-covering-base-change]; the former maps remain quasi-compact by [lem-pc-quasi-compact-base-change]. Etale maps are flat by [def-weil-etale-morphism]. Thus [thm-nagata-blowup-flat-base-change], with its comparison [def-nagata-blowup-flat-base-change-map], identifies $T_i$ with the blowup of $S_i$ in $\\mathcal I\\mathcal O_{S_i}$. By [lem-trf-module-strict-transform-flat-pullback], the pullback of $\\mathcal F^b$ to $Y_i$ is the strict transform of $j_i^*\\mathcal F$ under this blowup. The ideals are pulled back as ideals, and remain the unit ideal over the inverse image of $U$.",
+   "text": "Restrict the diagrams to $V_\\alpha$. The inclusions of the inverse images of $V_\\alpha$ are open immersions, hence etale and so flat. Etale covering base change preserves both covering families; qc base change preserves quasi-compactness of the base maps, and flat pullback of strict transforms preserves the given local flatifications. Apply the affine-refinement lemma (second clause) over $V_\\alpha=\\operatorname{Spec}A_\\alpha$. It gives finite affine charts $W_r$, still covering both targets, with centres $\\mathcal J_r$ and base ideals $I_r$ satisfying $I_r\\mathcal O_{W_r}=\\mathcal J_r\\mathcal J'_r$ and $V(I_r)\\subset V(a_\\alpha)$.",
    "uses": [
     "lem-weil-pbc-etale-covering-base-change",
     "lem-pc-quasi-compact-base-change",
-    "def-weil-etale-morphism",
-    "thm-nagata-blowup-flat-base-change",
-    "def-nagata-blowup-flat-base-change-map",
-    "lem-trf-module-strict-transform-flat-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1, base changes of the diagrams"
-   }
-  },
-  {
-   "text": "Write $\\mathcal J_i$ for the given centre on $S_i$. Blow up $T_i$ in the extension of $\\mathcal J_i$. By [thm-nagata-blowup-product-ideal] and the specified comparison [def-nagata-blowup-product-comparison], this is the blowup of $S_i$ in $(\\mathcal I\\mathcal O_{S_i})\\mathcal J_i$; reversing the factors gives a blowup over $S_i^*$. Along either order the composite centre has zero set $V(\\mathcal I\\mathcal O_{S_i})\\cup V(\\mathcal J_i)$. Apply [lem-trf-module-admissible-blowup-calculus](1) to compare successive module strict transforms. Its chosen composite ideal and the product ideal have this same zero set, so [def-trf-module-strict-transform] identifies their quotients on the same final fibre product. Along the order starting with $S_i^*$ the first transform is flat by hypothesis; its further transform is its flat ordinary pullback by clause (2) of the calculus. Along the other order it is the strict transform of the pullback in Step 2. This proves the required local-flatification hypothesis for $\\mathcal F^b$.",
-   "uses": [
-    "thm-nagata-blowup-product-ideal",
-    "def-nagata-blowup-product-comparison",
-    "lem-trf-module-admissible-blowup-calculus",
-    "def-trf-module-strict-transform"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1, the two orders of blowing up and strict-transform comparison"
-   }
-  },
-  {
-   "text": "Choose a finite-type quasi-coherent ideal $\\mathcal K$ with $V(\\mathcal K)=S\\setminus U$ by [lemma-nagata-qc-open-complement-ideal-exists]. Blow it up. By [thm-nagata-blowup-principalizes-center] its extension is an effective Cartier ideal, whose support is exactly the complement of the inverse image of $U$. The new base is qcqs and the new module quasi-coherent by [lem-trf-module-admissible-blowup-calculus]. Steps 2 and 3 preserve the local-flatification hypotheses. By [def-nagata-effective-cartier-ideal], cover this base by affine opens on which this ideal is generated by a nonzerodivisor; quasi-compactness gives a finite subcover. We will solve the problem over each such affine and then combine the solutions. A solution after this preliminary blowup gives a solution over the original base by clause (1) of the calculus.",
-   "uses": [
-    "lemma-nagata-qc-open-complement-ideal-exists",
-    "thm-nagata-blowup-principalizes-center",
-    "lem-trf-module-admissible-blowup-calculus",
-    "def-nagata-effective-cartier-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1, reduction to a Cartier boundary and affine charts"
-   }
-  },
-  {
-   "text": "Work now over one affine $S=\\operatorname{Spec}A$ with $U=D(a)$, where $a$ is a nonzerodivisor. Cover each quasi-compact $S_i$ by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Restrict $X_i$ to the inverse images of these opens, retaining all the opens, so the source charts still cover $X$. These restrictions and their composites remain etale by [lem-weil-pbc-etale-composition-cancellation]. The original local blowup restricts to the blowup of the restricted ideal by [thm-nagata-blowup-flat-base-change]; module strict transforms restrict by [lem-trf-module-strict-transform-flat-pullback]. Write each affine base chart as $\\operatorname{Spec}B$. Its map $A\\to B$ is etale by [lem-weil-pbc-etale-ring-map-iff-etale-affine]. Its centre is a finitely generated ideal $J\\subset B$ with $V(J)\\subset V(aB)$. For every prime of $B$, [lem-trf-etale-ideal-local-factor] supplies a principal neighbourhood $D(g)$ and a finitely generated ideal $I\\subset A$ with $V(I)\\subset V(a)$ and $IB_g=(JB_g)J'$. Choose finitely many of these neighbourhoods covering each affine base chart, and again restrict the corresponding $X_i$ by inverse images. Thus all source and base points remain covered.",
-   "uses": [
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "thm-nagata-blowup-flat-base-change",
     "lem-trf-module-strict-transform-flat-pullback",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-trf-etale-ideal-local-factor",
+    "def-weil-etale-morphism",
+    "lem-trf-etale-flatification-affine-refinement",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2, affine refinement and application of 0813"
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof; assembly step 2"
    }
   },
   {
-   "text": "Reindex the finite refined diagrams by $r$. Their centres $\\mathcal J_r$ and base ideals $I_r\\subset A$ satisfy $I_r\\mathcal O_{S_r}=\\mathcal J_r\\mathcal J'_r$. Set $I=\\prod_r I_r$, with the empty product equal to $A$. The ideal is finitely generated by the products of chosen generators, and $V(I)=\\bigcup_rV(I_r)\\subset S\\setminus U$; hence $S^b=\\operatorname{Bl}_I S$ is $U$-admissible by [def-nagata-admissible-blowup]. By [thm-nagata-blowup-flat-base-change], its pullback to $S_r$ is the blowup in $\\mathcal J_r\\bigl(\\mathcal J'_r\\prod_{t\\ne r}I_t\\mathcal O_{S_r}\\bigr)$. By [thm-nagata-blowup-product-ideal] with the comparison [def-nagata-blowup-product-comparison], this factors as the given $\\mathcal J_r$-blowup followed by the blowup of the other factor. The two centres in this factorization have union of images equal to $V(I\\mathcal O_{S_r})$.",
+   "text": "Apply product-centre domination to the ideals $I_r$ on this affine chart. The maps from Step 2 are flat because they are etale. It gives a $(U\\cap V_\\alpha)$-admissible product blowup $B_\\alpha\\to V_\\alpha$ whose transform of $\\mathcal F_1$ pulls back on each $Y_r\\times_{V_\\alpha}B_\\alpha$ to a module flat over $W_r\\times_{V_\\alpha}B_\\alpha$.",
    "uses": [
-    "def-nagata-admissible-blowup",
-    "thm-nagata-blowup-flat-base-change",
-    "thm-nagata-blowup-product-ideal",
-    "def-nagata-blowup-product-comparison"
+    "lem-trf-factorized-centres-product-transform",
+    "def-weil-etale-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2, product of the base ideals"
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof; assembly step 3"
    }
   },
   {
-   "text": "On the pullback to $S_r\\times_SS^b$, use the factorization in Step 6. Its first module transform is the given flat module on the local blowup; its further transform is flat by [lem-trf-module-admissible-blowup-calculus](2). Clause (1) identifies this successive transform with the transform for the product centre, using the support equality of Step 6; replacing a centre by another with the same zero set leaves the quotient unchanged by [def-trf-module-strict-transform]. By [lem-trf-module-strict-transform-flat-pullback], this module is the pullback of the global $\\mathcal F^b$ along $X_r\\times_SS^b\\to X\\times_SS^b$. Thus each of these pulled-back modules is flat over $S_r\\times_SS^b$.",
-   "uses": [
-    "lem-trf-module-admissible-blowup-calculus",
-    "def-trf-module-strict-transform",
-    "lem-trf-module-strict-transform-flat-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2, flatness after dominating all local blowups"
-   }
-  },
-  {
-   "text": "The maps $S_r\\times_SS^b\\to S^b$ and $X_r\\times_SS^b\\to X\\times_SS^b$ are etale and remain covering families by [lem-weil-pbc-etale-covering-base-change]. In particular they are flat by [def-weil-etale-morphism]. At every point of $X_r\\times_SS^b$, the module of Step 7 is flat over the local ring of $S_r\\times_SS^b$, which is itself flat over the corresponding local ring of $S^b$ by [def-weil-flat-morphism]. By [lem-pc-module-flat-transitive] it is flat over $S^b$. The stalk characterization in [def-pc-scheme-module-flat-over] applies without finiteness assumptions. The family of source maps is jointly surjective and flat, so [lem-trf-relative-flatness-source-cover] gives flatness of $\\mathcal F^b$ over $S^b$. This proves the assertion on each affine Cartier chart of Step 4.",
+   "text": "Write $Z=X_1\\times_{S_1}B_\\alpha$ and $Z_r=Y_r\\times_{V_\\alpha}B_\\alpha$. Etale-cover base change makes $Z_r\\to Z$ a jointly surjective flat family and $W_r\\times_{V_\\alpha}B_\\alpha\\to B_\\alpha$ flat. At $z_r\\in Z_r$, write $t_r$ and $b$ for its images in these two bases. Step 3 gives flatness of the pulled-back module stalk over $\\mathcal O_{W_r\\times_{V_\\alpha}B_\\alpha,t_r}$. This ring is flat over $\\mathcal O_{B_\\alpha,b}$; module-flatness transitivity therefore gives flatness over the latter ring. The stalkwise definition and relative-flatness source descent now give flatness of the transform on $Z$ over $B_\\alpha$.",
    "uses": [
     "lem-weil-pbc-etale-covering-base-change",
     "def-weil-etale-morphism",
@@ -136,68 +77,41 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof final two sentences, passage from the etale bases and descent on the source"
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof; assembly step 4"
    }
   },
   {
-   "text": "Return to the qcqs base with Cartier boundary from Step 4, and its finite affine open cover $V_\\alpha$. Extend each solution over $V_\\alpha$ to an admissible blowup of the whole base using [def-nagata-extended-admissible-blowup] and [lemma-nagata-extend-admissible-blowup]; the preserved open is $U$, so the local admissibility is relative to $U\\cap V_\\alpha$. Let $\\mathcal L_\\alpha$ be the extended finite-type centre ideals and blow up their product. By [thm-nagata-blowup-product-ideal] and [def-nagata-blowup-product-comparison], the product blowup factors over each extended blowup as a further admissible blowup. Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation], hence flat by [def-weil-etale-morphism]. Restricting to $V_\\alpha$ is compatible with these constructions by [thm-nagata-blowup-flat-base-change] and [lem-trf-module-strict-transform-flat-pullback]. Over $V_\\alpha$ the first transform is the flat solution already constructed. The final transform is its further transform by [lem-trf-module-admissible-blowup-calculus](1), since the product centre has the union support of the successive centres; clause (2) keeps it flat. The inverse images of the $V_\\alpha$ cover the final base, and the stalk definition of [def-pc-scheme-module-flat-over] therefore gives flatness everywhere.",
+   "text": "Apply finite Zariski gluing to the flatifications $B_\\alpha\\to V_\\alpha$: it extends their centres and blows up their product on $S_1$, obtaining a flat transform everywhere. Compose with $S_1\\to S$ using calculus (1). This is $U$-admissible and its transform is the successive flat transform, as required. Empty schemes give vacuous flatness and unit empty products; if $U=S$, admissible centres are unit ideals and Step 4 gives flatness without modification.",
    "uses": [
-    "def-nagata-extended-admissible-blowup",
-    "lemma-nagata-extend-admissible-blowup",
-    "thm-nagata-blowup-product-ideal",
-    "def-nagata-blowup-product-comparison",
-    "thm-nagata-blowup-flat-base-change",
-    "lem-trf-module-strict-transform-flat-pullback",
-    "lem-trf-module-admissible-blowup-calculus",
-    "def-pc-scheme-module-flat-over",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 1, successive-blowups locality argument of Tag 080Y expanded"
-   }
-  },
-  {
-   "text": "Compose this final blowup with the preliminary boundary blowup. By [lem-trf-module-admissible-blowup-calculus](1) their composite is a $U$-admissible blowup and its module transform is the successive transform proved flat in Step 9. This is the required $S^b\\to S$. If the scheme is empty the construction is empty and the flatness assertion is vacuous; finite products use the unit ideal when there are no charts. If $U=S$, all admissible centres are the unit ideal and the same source-descent argument gives flatness already on $S$, as required.",
-   "uses": [
+    "lem-trf-module-flatification-zariski-gluing",
     "lem-trf-module-admissible-blowup-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0814, lemma-flatten-module-etale-localize, conclusion, composition back to the original base"
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof; assembly step 5"
    }
   }
  ],
  "proof_deps": [
   "def-nagata-admissible-blowup",
-  "def-nagata-blowup-flat-base-change-map",
-  "def-nagata-blowup-product-comparison",
   "def-nagata-effective-cartier-ideal",
-  "def-nagata-extended-admissible-blowup",
   "def-pc-scheme-module-flat-over",
-  "def-trf-module-strict-transform",
   "def-weil-etale-morphism",
   "def-weil-flat-morphism",
   "lem-pc-module-flat-transitive",
   "lem-pc-quasi-compact-base-change",
-  "lem-trf-etale-ideal-local-factor",
+  "lem-trf-etale-flatification-affine-refinement",
+  "lem-trf-etale-flatification-blowup-stability",
+  "lem-trf-factorized-centres-product-transform",
   "lem-trf-module-admissible-blowup-calculus",
+  "lem-trf-module-flatification-zariski-gluing",
   "lem-trf-module-strict-transform-flat-pullback",
   "lem-trf-relative-flatness-source-cover",
-  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lemma-nagata-extend-admissible-blowup",
   "lemma-nagata-qc-open-complement-ideal-exists",
-  "thm-nagata-blowup-flat-base-change",
-  "thm-nagata-blowup-principalizes-center",
-  "thm-nagata-blowup-product-ideal"
+  "thm-nagata-blowup-principalizes-center"
  ],
  "proof_origin": {
   "by": "document",
@@ -306,63 +220,31 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-etale-flattening-descent",
   "worker": "stage1",
-  "summary": "Split Stacks 0814 into stability under admissible blowup, Cartier-boundary reduction, affine etale ideal factorization, product-centre domination, relative flatness descent, and gluing the finite affine solutions. Reused existing blowup calculus and etale-cover base-change nodes. Created only the three missing generic interfaces (0813, flat pullback of strict transform, and 02JZ). Replaced the smooth-dimension-zero definition citation by the existing equivalent etale definition; no mathematical hypotheses or conclusions changed. Removed unused finite-presentation statement dependency.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. This split expands its cited 0814 etale-locality input along the proof of that tag, below the unit route.",
+  "summary": "Rebased the retained four-child split after the repeated side-completion landing refusal; the initial dry run passed at 6aaa2530700. Re-read all current citation interfaces and retained searches: the existing statements, statuses and sources are unchanged. Corrected the assembly to define X_1=X times_S S_1 and use X_1, rather than the original X, in the fibre product over S_1; explicitly identified the module transformed on each chart as F_1. The item statement, statement dependencies, child statements, original argument provenance and all 22 verbatim citations are retained.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. This split expands its cited 0814 etale-locality input along the proof of that tag, below the unit route. Re-split only this existing 0814 input; the four new nodes realize its finite refinement, blowup stability, product domination, and Zariski gluing arguments.",
   "tool_uses": [
    {
     "node": "lem-pc-module-flat-transitive",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
+    "why": "Existing generic qc-base-change, boundary-principalization or module-flatness tool in the retained Stacks 0814 assembly, below the unchanged unit route."
    },
    {
     "node": "lem-pc-quasi-compact-base-change",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
+    "why": "Existing generic qc-base-change, boundary-principalization or module-flatness tool in the retained Stacks 0814 assembly, below the unchanged unit route."
    },
    {
     "node": "lem-weil-pbc-etale-covering-base-change",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "lemma-nagata-extend-admissible-blowup",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
+    "why": "Existing generic qc-base-change, boundary-principalization or module-flatness tool in the retained Stacks 0814 assembly, below the unchanged unit route."
    },
    {
     "node": "lemma-nagata-qc-open-complement-ideal-exists",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "thm-nagata-blowup-flat-base-change",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
+    "why": "Existing generic qc-base-change, boundary-principalization or module-flatness tool in the retained Stacks 0814 assembly, below the unchanged unit route."
    },
    {
     "node": "thm-nagata-blowup-principalizes-center",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "thm-nagata-blowup-product-ideal",
-    "why": "Generic scheme/module or admissible-blowup tool used in the Stacks 0814 argument, with exactly the statement quoted in citations.json; the trace-formula unit does not supply this foundational interface."
-   },
-   {
-    "node": "lem-weil-pbc-affine-scheme-qcqs",
-    "why": "Generic affine-cover and qcqs permanence tool ensuring that the bases in the application of module blowup calculus are qcqs; it does not replace the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Generic affine-cover and qcqs permanence tool ensuring that the bases in the application of module blowup calculus are qcqs; it does not replace the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-composition-cancellation",
-    "why": "The existing generic open-immersion and etale-composition result justifies all affine restrictions of the diagrams and flatness of the open maps in strict-transform comparisons."
+    "why": "Existing generic qc-base-change, boundary-principalization or module-flatness tool in the retained Stacks 0814 assembly, below the unchanged unit route."
    }
   ]
  },
@@ -382,12 +264,12 @@
   "lem-weil-pbc-etale-composition-cancellation"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q42-62e24f838",
-  "group": "Q42",
+  "reviewer": "NT-cc-Q25-724540f43",
+  "group": "Q25",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-62e24f838 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, every cited node's statement (including the main-20261015 blueprint_update texts), and the Stacks sources at the cited places. These were flat.tex 080Y/0813/0814, divisors.tex 0805/080A/080B/080D/080F/080I/080M/080N and morphisms.tex 02JZ. The item matches 0814 hypothesis by hypothesis and nothing is weakened. Steps 1-10 follow the 0814 proof with 080Y written out. Step 1's affine refinement is needed, because the calculus node requires a qcqs base and the S_i are not assumed quasi-separated. In Steps 3 and 7 I checked that Z∪b(Z_1)=V(J)∪V(IO), using that the blowup is an isomorphism off its centre, and that the 080D quotient depends only on the support. In Steps 6 and 7 I checked that V(J'_r)⊂V(a), so the second blowup is admissible as calculus (1) requires. Step 8 replaces Stacks' 05B9 citation by stalkwise Module.Flat.trans plus the new 02JZ node, applied to the flat, jointly surjective base change of the j_r. Step 9 works with both forms of lemma-nagata-extend-admissible-blowup. New nodes: lem-trf-etale-ideal-local-factor is a faithful transcription of 0813, tested on B=A, B=A_a and B=0. lem-trf-relative-flatness-source-cover is verbatim 02JZ plus the family form. lem-trf-module-strict-transform-flat-pullback is true by an argument on affine charts: the kernel is ker(N→N_a), which flat extension preserves. Flatness of j is necessary (k[t]⊕k[t]/(t) at the origin). None of the three is a duplicate (searched dag/nodes by tag and keywords, and the blueprint via blueprint_refs search) or a restated clause of the item. B1-B9 hold. The declared tool_uses (the nagata blowup theorems and the generic pbc/pc facts) are accepted. One fix: the flat-pullback node said 'identify T^b≅T×_S S^b by flat base change' without a citation. It now cites [def-nagata-blowup-flat-base-change-map] (bc_e) and [thm-nagata-blowup-flat-base-change], with both added to stmt_deps; the mathematics is unchanged (fixes/dag/nodes/sec-trace-formula/lem-trf-module-strict-transform-flat-pullback.json). For maintenance: the calculus node's source.place labels 080B as 080K. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-724540f43 (reviewer sub-agent of L); spot-checked: Read in full: the item, the four new unsplit nodes (byte-identical to heads 9a81/7c1a/056c), every cited statement including the main-20261015 blueprint_update texts, and Stacks flat.tex 0813 and 0814 with their proofs. The item statement is unchanged and matches 0814 hypothesis by hypothesis. Re-split note: old steps 1+5 become affine-refinement, 2+3 become blowup-stability, 6+7 become factorized-centres-product-transform and 9 becomes zariski-gluing. Old steps 4, 8 and 10 are item steps 1, 4 and 5, each written out in full. Nothing is dropped, and no new node restates the item. Each child is true: the refinement uses 0813 on étale A->B with J unit on D(a), so V(J) is inside V(aB); stability uses flat base change and the two-ideal blowup, and the strict transform depends only on the support; the product node's support identity V(J K)=V(J) ∪ c(V(KO)) holds because c is an isomorphism off V(J), even when c is not surjective; gluing extends the ideal glued over U ∪ V_alpha to the qcqs base. Cases tested: B=A, a a unit, B=0, empty R, U=S, singleton cover. I checked every hypothesis at each item step: qcqs is supplied by the relabelled affine refinement before stability, a_alpha is a nonzerodivisor before the 0813 clause, the étale maps are flat, the stalk transitivity uses the same structure map, and the composite is U-admissible by calculus (1). rg found no duplicate node, and no SGA is cited. FIX (C1): step 2 used the flat-pullback node along the inclusions of the inverse images of V_alpha without citing their flatness. I re-applied the earlier fix, which was lost again on this head: the sentence that the open immersions are étale and so flat, with lem-weil-pbc-etale-composition-cancellation added to step-2 uses and proof_deps. The rest is unchanged, including the new X_1/F_1 notation. Maintainer: this fix has been lost on three re-deliveries after promotion refusals.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.EtaleFlatteningDescent",
@@ -407,5 +289,16 @@
   "result": "pass",
   "note": "Statement matches Tag 0814 and the recorded Lean signature exactly; dependencies, projections, docstrings, edge cases, route-pivot constraints, and scompile evidence checked."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

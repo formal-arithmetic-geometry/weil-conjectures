@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-holomorphic-weierstrass-division",
+ "kind": "statement",
+ "title": "Analytic Weierstrass division after linear regularization",
+ "statement": "For an integer $d\\geq0$, let $G_d$ be the commutative $\\mathbf C$-algebra of germs at $0\\in\\mathbf C^d$ of holomorphic complex-valued functions: representatives are functions on open neighbourhoods of $0$, and two representatives agree when they agree on some smaller open neighbourhood. Holomorphic means locally representable by a convergent complex power series; operations and scalar multiplication are pointwise [lem-sfb-complex-analytic-function-operations]. For every $d\\geq1$ and nonzero $f\\in G_d$ there exist an invertible complex-linear map $L:\\mathbf C^d\\to\\mathbf C^d$ and an integer $k\\geq0$ such that, writing $h=f\\circ L$, $z=(z_1,\\ldots,z_{d-1})$ and $w=z_d$, one has $h(0,w)=w^k u(w)$ for a holomorphic one-variable germ $u$ with $u(0)\\ne0$. For these choices, every $g\\in G_d$ has a unique expression\n$$g=q h+\\sum_{j=0}^{k-1}a_j(z)w^j,\\qquad q\\in G_d,\\quad a_j\\in G_{d-1}.$$\nThe germs $a_j$ are regarded in $G_d$ by composition with the coordinate projection $\\mathbf C^d\\to\\mathbf C^{d-1}$. For $k=0$ the remainder sum is empty; for $d=1$ its coefficients belong to $G_0=\\mathbf C$.",
+ "source": {
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "WANTED locally. J. Frenkel, Preliminaires a l etude de l anneau des fonctions analytiques a l origine, Seminaire H. Cartan 1951-52, exp.10, Proposition 4 (printed p.5, linear regularization), Theorem 1 (p.2, uniqueness) and Theorem 1 bis (pp.7-9, convergence of quotient and remainder), read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf. Linear regularization for convergent series is also stated by F. Bruhat, same seminar exp.11, section 2, printed p.2, https://www.numdam.org/item/SHC_1951-1952__4__A11_0.pdf."
+ },
+ "stmt_deps": [
+  "lem-sfb-complex-analytic-function-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-weighted-taylor-banach-model] to represent $f$ by coefficients $c_\\alpha$; injectivity and $f\\ne0$ give a least $k$ with a nonzero degree-$k$ homogeneous part $H_k(X)=\\sum_{|\\alpha|=k}c_\\alpha X^\\alpha$. Applying [lem-sfb-mvpolynomial-infinite-evaluation] over the infinite integral domain $\\mathbf C$ to $H_k$ and the zero polynomial gives $a\\in\\mathbf C^d$ with $H_k(a)\\ne0$. If $a\\ne0$ put $v=a$. If $a=0$, then $k=0$, because a homogeneous polynomial of positive degree vanishes at $0$; so $H_0=c_0\\ne0$ is constant and $v=e_1$ satisfies $H_k(v)\\ne0$ (here $d\\geq1$). Thus $v\\ne0$ and $H_k(v)\\ne0$. Pick $i$ with $v_i\\ne0$. Let the first $d-1$ columns of $L$ be the coordinate vectors $e_j$ for $j\\ne i$, and its last column be $v$. This is invertible: for a target vector $y$, the last input coordinate is $y_i/v_i$ and the other input coordinates are $y_j-v_jy_i/v_i$. The composition $h=f\\circ L$ is holomorphic by [lem-sfb-complex-analytic-function-operations]. Substituting $L(0,w)=wv$ in the absolutely convergent series gives $h(0,w)=\\sum_{m\\ge k}H_m(v)w^m=w^ku(w)$. The shifted one-variable series for $u$ converges on a smaller disc (its absolute majorant is that of the original series divided by a fixed positive radius to the power $k$), and $u(0)=H_k(v)\\ne0$.",
+   "uses": [
+    "lem-sfb-weighted-taylor-banach-model",
+    "lem-sfb-mvpolynomial-infinite-evaluation",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Proposition 4, printed p.5; section 4, pp.6-7; agent weighted-norm version; online source as in proof_origin."
+   }
+  },
+  {
+   "text": "Fix any $L,k,u$ satisfying the asserted axis identity, so the remainder argument applies to every such choice. If $k=0$, $h(0)=u(0)\\ne0$; [lem-sfb-complex-analytic-function-operations] gives $h^{-1}$, and the unique quotient is $q=gh^{-1}$ with empty remainder. Now assume $k\\ge1$. Pull back the unit $u(w)$ along the last-coordinate projection and form $B=h/u(w)=w^k+c(z,w)$. The same analytic-operations node gives that $B,c$ and $1/u$ are holomorphic germs, and the axis identity gives $c(0,w)=0$. For a quotient $Q$ and remainder $R$ in a division by $B$, the equation $g=BQ+R$ is exactly $g=h(Q/u)+R$; thus it suffices to construct $Q$ uniquely.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Theorem 1, p.2 (unit normalization), and Theorem 1 bis, pp.7-9; agent weighted-norm version; online source as in proof_origin."
+   }
+  },
+  {
+   "text": "Fix $g$. By [lem-sfb-weighted-taylor-banach-model], choose common positive radii $(r^0,t)$ for the coefficient representatives of $g$ and $c$, decreasing finitely many initial radii componentwise. Write $n=d-1$ and use $r^0$ for the transverse radii and $t$ for the last radius. Since $c(0,w)=0$, restriction compatibility and injectivity in dimension one say that every coefficient $c_{0,j}$ is zero. For $n>0$ and $r=\\lambda r^0$ with $0<\\lambda\\le1$, every remaining monomial has transverse degree at least one, so termwise comparison of absolute majorants gives\n$$\\|c\\|_{r,t}\\le\\lambda\\|c\\|_{r^0,t}.$$\nChoose $\\lambda$ small enough that this is less than $t^k$ (if the original norm is zero any $\\lambda$ works). The representative of $g$ stays in $A_{r,t}$ by the radius-decrease clause. When $n=0$, the axis is the entire space and $c=0$, so the same strict bound holds with no transverse radii. Set $A=A_{r,t}$.",
+   "uses": [
+    "lem-sfb-weighted-taylor-banach-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Section 4, coefficient majorants, pp.6-7; section 5, shrinking transverse radii, p.8; agent weighted-norm version; online source as in proof_origin."
+   }
+  },
+  {
+   "text": "For a coefficient series $F=\\sum_{\\alpha,j}F_{\\alpha,j}z^\\alpha w^j$ in $A$, define\n$$S_kF=\\sum_{\\alpha,j\\ge k}F_{\\alpha,j}z^\\alpha w^{j-k},\\qquad R_kF=\\sum_{\\alpha,j<k}F_{\\alpha,j}z^\\alpha w^j.$$\nTheir absolute majorants show $\\|S_kF\\|\\le t^{-k}\\|F\\|$ and $\\|R_kF\\|\\le\\|F\\|$, and coefficientwise $F=w^kS_kF+R_kF$. Multiplication by $c$ is bounded with norm at most $\\|c\\|$ by [lem-sfb-weighted-taylor-banach-model]. Hence $T(F)=S_k(cF)$ is bounded complex-linear and $\\|T\\|\\le t^{-k}\\|c\\|<1$. Also $S_k(w^kF)=F$, and $S_kF=0$ holds exactly when all coefficients of $w$-degree at least $k$ vanish. These assertions follow directly by shifting or deleting the indicated summands; they invoke no division theorem.",
+   "uses": [
+    "lem-sfb-weighted-taylor-banach-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Theorem 1 proof, pp.2-3 (coefficient-tail recurrence); section 5, pp.8-9 (majorants); agent weighted-norm version; online source as in proof_origin."
+   }
+  },
+  {
+   "text": "The space $A$ is complete by [lem-sfb-weighted-taylor-banach-model], so [lem-sfb-banach-small-operator-invertible] makes $I+T$ bijective. Set $Q=(I+T)^{-1}(S_kg)$ and $R=g-BQ$. Then\n$$S_kR=S_kg-Q-S_k(cQ)=S_kg-(I+T)Q=0.$$\nThus $R=\\sum_{j<k}a_j(z)w^j$. For each $j<k$, the coefficient slice has weighted transverse norm at most $t^{-j}\\|R\\|_{r,t}$, so it defines $a_j\\in G_{d-1}$ by the weighted Taylor model. The same model sends $Q,R$ to holomorphic germs and respects multiplication. Taking $q=Q/u$ gives the required equation. If $d=1$, its dimension-zero clause identifies each $a_j$ with a complex number.",
+   "uses": [
+    "lem-sfb-weighted-taylor-banach-model",
+    "lem-sfb-banach-small-operator-invertible",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Theorem 1 bis, pp.7-9; agent Neumann-series implementation of its majorant recurrence; agent weighted-norm version; online source as in proof_origin."
+   }
+  },
+  {
+   "text": "Suppose $g=hq'+R'$ is another asserted division, with $R'=\\sum_{j<k}a'_j(z)w^j$, and put $Q'=uq'$. Choose smaller positive radii on which the coefficient representatives of $g,c,Q,Q',R,R'$ all belong to a common weighted algebra; this is possible for this finite list by [lem-sfb-weighted-taylor-banach-model]. Repeat the transverse shrinking of step 3 at its new last radius, so that again $\\|S_k\\circ M_c\\|<1$. Injectivity of the germ map makes both division equations coefficient identities in that algebra. Subtract and apply $S_k$, which kills $R-R'$, obtaining $(I+T)(Q-Q')=0$. By [lem-sfb-banach-small-operator-invertible], $Q=Q'$, hence $q=q'$ since $u$ is a unit, and then $R=R'$. Equality of coefficients gives $a_j=a'_j$ as germs in dimension $d-1$. This rechoice of radii proves uniqueness among all germ quotients, without assuming a common original convergence disc for a competing solution.",
+   "uses": [
+    "lem-sfb-weighted-taylor-banach-model",
+    "lem-sfb-banach-small-operator-invertible",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "Theorem 1, p.3 (uniqueness), with section 5, pp.7-9 (convergence); agent norm proof; agent weighted-norm version; online source as in proof_origin."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-weighted-taylor-banach-model",
+  "lem-sfb-mvpolynomial-infinite-evaluation",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-banach-small-operator-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "Frenkel, Cartan seminar 1951-52 exp.10, Proposition 4 p.5 and Theorem 1 bis pp.7-9; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf (WANTED locally). Agent recasts the coefficient-majorant proof as a small bounded-operator inversion; the formal adic division theorem is not used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weierstrass division for convergent holomorphic power series after a linear change of variables every nonzero germ is regular in the last variable",
+   "results": "8 hits: PowerSeries.IsWeierstrassDivision, PowerSeries.exists_isWeierstrassDivision, PowerSeries.weierstrassDiv, PowerSeries.IsWeierstrassDivisionAt, PowerSeries.IsWeierstrassDivisor.of_map_ne_zero, PowerSeries.IsWeierstrassDivisor, PowerSeries.IsWeierstrassDivisorAt, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod. Source read: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85 is formal adic-complete division, not convergent analytic division.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Weierstrass division is for formal series over an adic-complete coefficient ring; it does not give holomorphic quotient/remainder germs or analytic linear regularization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a convergent complex power series regular in the last variable analytic Weierstrass division has convergent quotient and polynomial remainder",
+   "results": "8 hits: PowerSeries.exists_isWeierstrassDivision, PowerSeries.term_/ʷ_, PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.weierstrassDiv, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod, PowerSeries.isWeierstrassDivisionAt_iff, PowerSeries.IsWeierstrassDivisionAt.mk, PowerSeries.IsWeierstrassDivision. Source read: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85 is formal adic-complete division, not convergent analytic division.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Weierstrass division is for formal series over an adic-complete coefficient ring; it does not give holomorphic quotient/remainder germs or analytic linear regularization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeierstrassDivision\"",
+   "results": "12 hits: PowerSeries.IsWeierstrassDivision, PowerSeries.IsWeierstrassDivisionAt, PowerSeries.isWeierstrassDivisionAt_zero, PowerSeries.IsWeierstrassDivisionAt.eq_mul_add, PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.IsWeierstrassDivisionAt.add, PowerSeries.IsWeierstrassDivisionAt.smul, PowerSeries.exists_isWeierstrassDivision. Source read: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85 is formal adic-complete division, not convergent analytic division.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Weierstrass division is for formal series over an adic-complete coefficient ring; it does not give holomorphic quotient/remainder germs or analytic linear regularization"
+  },
+  {
+   "tool": "grep",
+   "query": "Weierstrass|convergent.*division",
+   "results": "5 hits: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean. Source read: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85 is formal adic-complete division, not convergent analytic division.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Weierstrass division is for formal series over an adic-complete coefficient ring; it does not give holomorphic quotient/remainder germs or analytic linear regularization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytic Weierstrass division for holomorphic germs gives a unique holomorphic quotient and polynomial remainder after a linear coordinate change",
+   "results": "[OK] 8 hits: PowerSeries.IsWeierstrassDivision.unique, PowerSeries.IsWeierstrassDivision, PowerSeries.exists_isWeierstrassDivision, PowerSeries.IsWeierstrassDivision.elim, PowerSeries.IsWeierstrassDivisionAt, PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision, PowerSeries.weierstrassDiv, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod.  Read Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85; grep restricted to RingTheory/PowerSeries supplies the relevant source hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the Weierstrass hits are formal adic-complete power-series division, without convergence of holomorphic quotient/remainder germs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeierstrassDivision\"",
+   "results": "[OK] 12 hits: PowerSeries.IsWeierstrassDivision, PowerSeries.IsWeierstrassDivisionAt, PowerSeries.isWeierstrassDivisionAt_zero, PowerSeries.IsWeierstrassDivisionAt.eq_mul_add, PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.IsWeierstrassDivisionAt.add, PowerSeries.IsWeierstrassDivisionAt.smul, PowerSeries.exists_isWeierstrassDivision.  Read Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85; grep restricted to RingTheory/PowerSeries supplies the relevant source hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the Weierstrass hits are formal adic-complete power-series division, without convergence of holomorphic quotient/remainder germs."
+  },
+  {
+   "tool": "grep",
+   "query": "Weierstrass|convergent.*division",
+   "results": "[OK] 25 hits: Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean, Mathlib/NumberTheory/Height/EllipticCurve.lean.  Read Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85; grep restricted to RingTheory/PowerSeries supplies the relevant source hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the Weierstrass hits are formal adic-complete power-series division, without convergence of holomorphic quotient/remainder germs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convergent power series regular in one variable admit analytic Weierstrass division",
+   "results": "[OK] 8 hits: PowerSeries.exists_isWeierstrassDivision, PowerSeries.weierstrassDiv, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod, PowerSeries.isWeierstrassDivisionAt_iff, PowerSeries.term_/ʷ_, PowerSeries.IsWeierstrassDivisionAt.mk, PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization.  Read Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85; grep restricted to RingTheory/PowerSeries supplies the relevant source hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the Weierstrass hits are formal adic-complete power-series division, without convergence of holomorphic quotient/remainder germs."
+  },
+  {
+   "tool": "grep",
+   "query": "Weierstrass|convergent.*division",
+   "results": "[OK] 5 hits: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean.  Subdirectory: RingTheory/PowerSeries. Read Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16-85; grep restricted to RingTheory/PowerSeries supplies the relevant source hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the Weierstrass hits are formal adic-complete power-series division, without convergence of holomorphic quotient/remainder germs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-local-completion-comparison",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Analytic local-coordinate input: Analytic Weierstrass division after linear regularization.",
+   "via": [
+    "lem-sfb-analytic-local-completion-comparison",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-holomorphic-weierstrass-division",
+  "worker": "stage1",
+  "summary": "NU checked the unchanged analytic germ statement against Frenkel Proposition 4 and Theorem 1 bis; supplied explicit linear regularization, unit normalization, transverse majorant shrinking, coefficient-tail operators, small-operator inversion and uniqueness after rechoosing convergence radii. Added the weighted Taylor Banach model as an unsplit analytic lemma and bounded-operator inversion as a Mathlib leaf; reused the existing same-unit infinite-domain polynomial evaluation leaf (review fix: replaces a sec-trace-formula citation outside the batch-5 assumptions) and analytic operations. No project declaration states the item.",
+  "blueprint": "The nearest blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor. Retain its inherited place: det-thm-sf-ctf-stability-direct-images proof (3), supporting analytic local-ring input to GAGA in the Kodaira/Kempf prerequisite chain. Read the current latest direct-images node and proof. Steps 1-6 supply the analytic Weierstrass prerequisite; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-10da9d7e9",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-10da9d7e9 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The mathematics is correct. The weighted ℓ¹ Taylor model is true: it is complete via the isometry with ℓ¹(ℕ^d), the norm is submultiplicative, the germ map is injective, every germ lies in some image, and the radius-decrease, coordinate-restriction and d=0 clauses hold. It is statement-only and is not a duplicate of germ-taylor-jets or coordinate-division. The small-operator Mathlib leaf matches isUnit_one_sub_of_norm_lt_one (SpecificLimits/Normed.lean:350) plus ContinuousLinearMap.isUnit_iff_bijective (Operator/Banach.lean:460). Steps 1-6 check out: the regularization matrix L and its inverse, the unit normalization B=w^k+c, the transverse shrink ‖c‖≤λ‖c‖<t^k, ‖S_k∘M_c‖≤t^{-k}‖c‖<1, existence through (I+T)^{-1}, and uniqueness after re-choosing the radii. Edge cases checked: d=1, k=0, g=0, constant f, h=w^k+z_1. Batch-5 fix: step 1 cited lem-trf-infinite-field-top-form-direction, whose source is Varshavsky §3.2.4, a step of the trace-formula proof. I replaced it with the same-unit Mathlib leaf lem-sfb-mvpolynomial-infinite-evaluation and added the a=0 case (k=0, v=e_1). Step 1 uses, proof_deps and the split_report wording are updated in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-holomorphic-weierstrass-division.json. The Frenkel source is WANTED locally (online only); proof_origin=agent is recorded correctly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.HolomorphicWeierstrassDivision",
+  "declaration": "Complex.exists_holomorphic_weierstrass_division",
+  "declarations": [
+   "Complex.IsAnalyticAtZeroGerm",
+   "Complex.linearPullbackAtZeroGerm",
+   "Complex.exists_holomorphic_weierstrass_division"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/HolomorphicWeierstrassDivision.lean",
+  "statement": "theorem exists_holomorphic_weierstrass_division (n : ℕ) (f : Germ (𝓝 (0 : Fin (n + 1) → ℂ)) ℂ) (hf : IsAnalyticAtZeroGerm f) (hfn : f ≠ 0) : ∃ (L : (Fin (n + 1) → ℂ) ≃L[ℂ] (Fin (n + 1) → ℂ)) (k : ℕ) (u : Germ (𝓝 (0 : ℂ)) ℂ), IsAnalyticAtZeroGerm u ∧ u.value ≠ 0 ∧ linearPullbackAtZeroGerm (ContinuousLinearMap.pi fun i : Fin (n + 1) ↦ if i = Fin.last n then ContinuousLinearMap.id ℂ ℂ else 0) (linearPullbackAtZeroGerm L.toContinuousLinearMap f) = Germ.ofFun (fun w : ℂ ↦ w) ^ k * u ∧ ∀ g : Germ (𝓝 (0 : Fin (n + 1) → ℂ)) ℂ, IsAnalyticAtZeroGerm g → ∃! qa : Germ (𝓝 (0 : Fin (n + 1) → ℂ)) ℂ × (Fin k → Germ (𝓝 (0 : Fin n → ℂ)) ℂ), IsAnalyticAtZeroGerm qa.1 ∧ (∀ j : Fin k, IsAnalyticAtZeroGerm (qa.2 j)) ∧ g = qa.1 * linearPullbackAtZeroGerm L.toContinuousLinearMap f + ∑ j : Fin k, linearPullbackAtZeroGerm (ContinuousLinearMap.pi fun i : Fin n ↦ ContinuousLinearMap.proj (R := ℂ) i.castSucc) (qa.2 j) * Germ.ofFun (fun x : Fin (n + 1) → ℂ ↦ x (Fin.last n)) ^ (j : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Holomorphic germs are represented as the subset IsAnalyticAtZeroGerm of Mathlib Filter.Germ; arithmetic and equality use its existing ring, with analytic membership required for every quantified germ. The two helpers implement notions introduced explicitly by this node, with real definitions and no extra theorem. Dimension d is parametrized as n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e77afcb5",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the item node (only the lean record is added; diffed against side-live), stmt_dep lem-sfb-complex-analytic-function-operations, the module and report.md (both required sections present), and the Mathlib Germ.compTendsto/Germ.value APIs. IsAnalyticAtZeroGerm (exists a representative analytic at 0) is G_d. L : ≃L, h = compTendsto L, the axis map w↦(0,..,0,w), h(0,w)=w^k u with u analytic and u.value≠0, and the ∃! pair (q, Fin k → G_{d-1}) with analytic memberships and g = q·h + Σ (a_j∘castSucc-projection)·x_last^j all match the node. Edge cases k=0 (empty Fin), d=1 (Fin 0 point space gives constants), g=0, positive k: OK. Statement verbatim, one sorry, source and blueprint docstrings and 6-step proof plan present, no duplicate germ notion in lean/Sheaf or WeilConjectures, Mathlib Weierstrass division is formal only. Non-blocking: the division clause is for the produced (L,k,u), not uniform over all admissible choices; this matches the node's literal text and the only citer (local-completion step 4). Per the instructions I did not reproduce the compile; no files changed."
+ }
+}

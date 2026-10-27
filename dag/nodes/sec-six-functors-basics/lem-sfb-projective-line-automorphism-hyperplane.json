@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-projective-line-automorphism-hyperplane",
+ "kind": "statement",
+ "title": "Relative projective-line automorphisms preserve the hyperplane class modulo base lines",
+ "statement": "Let S be any scheme and q:P=ProjectiveLine S -> S its standard projective line [def-nagata-projective-space-base-change]. For an isomorphism a:P≅P with a.hom followed by q equal to q, there exists B in Pic(S) [def-sc-picard-group] such that a* [O_P(1)] = q* B times [O_P(1)] in Pic(P) with the tensor group law [lem-sc-pic-group], with O_P(1) the actual standard projective twist [def-pc-projective-space-twist] and Picard pullback as in [lem-pc-pic-presheaf-functorial]. No hypotheses of nonemptiness, reducedness, connectedness, or Noetherianity are imposed.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, degree one and tautological line under a projective-bundle isomorphism. Arbitrary-base extension by projective-bundle Picard classification using Stacks Tag 0B8W; field degree normalization by the monomial cohomology formula. Also the generic change-of-model step of lem-sfb-diagonal-trace-diagonal-pic."
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-sc-picard-group",
+  "def-pc-projective-space-twist",
+  "lem-pc-pic-presheaf-functorial",
+  "lem-sc-pic-group"
+ ],
+ "proof": [
+  {
+   "text": "For any base map g:T→S, use the standard projective-space pullback square to lift a and its inverse to maps of ProjectiveLine T over T. Their compositions are identities by the two pullback projections, so they form an automorphism b; its square with a and the projective-space base-change map commutes.",
+   "uses": [
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put H=[O(1)]. For every s:S apply the preceding construction to the canonical map Spec kappa(s)→S. The projective twist base-change isomorphism identifies the restriction of H with the actual fibre O(1). The field automorphism theorem shows that the fibre automorphism fixes this class. Functoriality of Picard pullback and its group law show that a*H times H inverse restricts to 1 on every residue-field fibre.",
+   "uses": [
+    "lem-sfb-projective-line-automorphism-over-field",
+    "def-pc-projective-space-twist",
+    "lem-pc-pic-presheaf-functorial",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fibrewise trivial descent lemma to L=a*H times H inverse, obtaining B with q*B=L. Multiply by H and cancel H inverse times H to obtain a*H=q*B times H, the original conclusion unchanged.",
+   "uses": [
+    "lem-sfb-projective-line-fibrewise-trivial-descent",
+    "lem-sc-pic-group"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "lem-sfb-projective-line-automorphism-over-field",
+  "def-pc-projective-space-twist",
+  "lem-pc-pic-presheaf-functorial",
+  "lem-sc-pic-group",
+  "lem-sfb-projective-line-fibrewise-trivial-descent"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75. M4 formal reduction through the fibrewise trivial ratio. Field degree is determined directly by h0, without the intermediate ±1 group-automorphism argument. The remaining generic degree-zero descent is stated separately.",
+  "by": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"map\"",
+   "results": "12 hits: AddSubmonoid.LocalizationMap.epic_of_localizationMap, Submonoid.LocalizationMap.epic_of_localizationMap, CategoryTheory.Limits.map_lift_piComparison, CategoryTheory.Limits.piConst_obj_map, CategoryTheory.Limits.map_lift_piComparison_assoc, CategoryTheory.Limits.piConst_map_app, CategoryTheory.Limits.inv_piComparison_comp_map_π, CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc",
+   "date": "2026-10-27",
+   "verdict": "No relative projective-space hyperplane automorphism theorem. Local search found the abstract projective-bundle Picard classification, but no specialization or automorphism degree-one bridge for the concrete ProjectiveLine construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of O(1) along an automorphism of the projective line over any scheme differs from O(1) by a line bundle from the base",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right",
+   "date": "2026-10-27",
+   "verdict": "No relative projective-space hyperplane automorphism theorem. Local search found the abstract projective-bundle Picard classification, but no specialization or automorphism degree-one bridge for the concrete ProjectiveLine construction."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*Pic|Pic.*projective|map.*twist",
+   "results": "3 hits: Mathlib/Probability/ProductMeasure.lean, Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "No relative projective-space hyperplane automorphism theorem. Local search found the abstract projective-bundle Picard classification, but no specialization or automorphism degree-one bridge for the concrete ProjectiveLine construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceDiagonalPic",
+  "date": "2026-10-27",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-diagonal-pic",
+   "place": "Proof step 2: change from the canonical projection model to an arbitrary projective-line model. Only the generic automorphism hyperplane clause remains.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineAutomorphismHyperplane",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineAutomorphismHyperplane.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.automorphism_hyperplane",
+  "statement": "theorem automorphism_hyperplane (S : Scheme.{u})\n    (a : ProjectiveLine S ≅ ProjectiveLine S)\n    (ha : a.hom ≫ (ProjectiveLine S ↘ S) = (ProjectiveLine S ↘ S)) :\n    ∃ B : S.Pic,\n      Scheme.Pic.map a.hom\n          (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)) =\n        Scheme.Pic.map (ProjectiveLine S ↘ S) B *\n          Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T050652-L-251999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T053008-L-504335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

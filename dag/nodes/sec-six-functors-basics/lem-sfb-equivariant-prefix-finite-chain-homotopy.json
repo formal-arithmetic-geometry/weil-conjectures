@@ -1,0 +1,470 @@
+{
+ "id": "lem-sfb-equivariant-prefix-finite-chain-homotopy",
+ "kind": "statement",
+ "title": "Equivariant prefix homotopy with finite integral evaluations",
+ "statement": "Let $G$ be a topological group, $H\\subseteq G$ a subgroup, and $n\\geq0$. For $q\\geq0$ put $B_q(G)=\\mathbf Z[G^{q+1}]$, the free abelian group on ordered tuples with repetitions [def-weil-pbc-free-module], and put $B_{-1}(G)=\\mathbf Z[\\{()\\}]\\cong\\mathbf Z$, free on the single empty tuple $[\\varnothing]$. Put $B_q(G)=0$ for $q<-1$, with zero boundary and zero prefix maps out of these groups. Give these groups the alternating-deletion boundary $\\partial$, including $\\partial[x]=[\\varnothing]$ and $\\partial[\\varnothing]=0$. Left translation acts on every coordinate and fixes the empty tuple. Suppose homomorphisms $A_q:B_q(G)\\to B_q(G)$ are given for $-1\\leq q\\leq n$, with $A_{-1}=1$, $\\partial A_q=A_{q-1}\\partial$ for $0\\leq q\\leq n$, and $A_q(hz)=hA_q(z)$ for $h\\in H$. Suppose for every $q\\geq0$ in this range there are a finite index set $I_q$, integers $k_{qj}$ and continuous maps $b_{qj}:G^{q+1}\\to G^{q+1}$ such that\n$$A_q[x]=\\sum_{j\\in I_q}k_{qj}[b_{qj}(x)].$$\nFor $b\\in G$, let $C_b:B_q(G)\\to B_{q+1}(G)$ prefix $b$ to every basis tuple, with $C_b[\\varnothing]=[b]$. Set $Q_{-1}=0$ and define $Q_q:B_q(G)\\to B_{q+1}(G)$ on basis tuples and then by linear extension, for $0\\leq q\\leq n$, by\n$$Z_q(x)=[x]-A_q[x]-Q_{q-1}(\\partial[x]),\\qquad Q_q[x]=C_{x_0}Z_q(x).$$\nThen $\\partial^2=0$, $\\partial C_b+C_b\\partial=1$ in every degree $q\\geq-1$, and $hC_bz=C_{hb}(hz)$. The recursively defined maps satisfy $\\partial Z_q(x)=0$ and\n$$1-A_q=\\partial Q_q+Q_{q-1}\\partial\\quad(0\\leq q\\leq n),\\qquad Q_q(hz)=hQ_q(z)\\quad(h\\in H).$$\nFor each $0\\leq q\\leq n$ there are a fixed finite list of integers $t_{qj}$ and continuous maps $v_{qj}:G^{q+1}\\to G^{q+2}$ such that $Q_q[x]=\\sum_jt_{qj}[v_{qj}(x)]$. The formulas can be chosen using only subtuple selection, the given maps $b_{pj}$ and prefixing an input coordinate; coefficient lists require no equality tests on input values. If every coordinate of every $b_{pj}(y)$ is either $y_k$ or $\\rho(y_k)a_i$, for fixed continuous $\\rho:G\\to H$ and fixed $a_i\\in G$, the same coordinate description holds for every $v_{qj}(x)$. These formulas are integral and independent of any eventual coefficient group or coefficient topology.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: prefix-cone comparison for augmented tuple chains, equivariance and fixed finite integral expansion; retained item proof steps 3 and 7–9. Agent-formulated, not asserted in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "In the specified free abelian groups [def-weil-pbc-free-module], a basis assignment $[x]\\mapsto w_x$ extends uniquely by $\\sum_xm_x[x]\\mapsto\\sum_xm_xw_x$; this is additive because each chain has a unique finite coefficient expansion. Consequently each $Q_q$ is a well-defined homomorphism once $Q_{q-1}$ has been defined. The prefix point $x_0$ is chosen separately on each basis tuple, before this extension; it is not a choice of a first coordinate for an arbitrary chain.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-power-set-complex-contractible] to $A=\\mathbf Z$, $S=G$, identifying its augmentation target $\\mathbf Z$ with $B_{-1}(G)$ by $1\\mapsto[\\varnothing]$. Its boundary and prefix maps are exactly the displayed ones on every basis tuple. Its statement gives $\\partial^2=0$ and the contracting identity $\\partial C_b+C_b\\partial=1$ for every $b\\in G$, including the augmentation degree. Explicitly, $\\partial[b,y_0,\\ldots,y_q]=[y_0,\\ldots,y_q]-C_b\\partial[y_0,\\ldots,y_q]$, while $\\partial C_b[\\varnothing]=\\partial[b]=[\\varnothing]$ and $C_b\\partial[\\varnothing]=0$.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AT, lemma-homology-complex, last paragraph of the proof: augmented free tuple complex and insertion homotopy."
+   }
+  },
+  {
+   "text": "Coordinate deletion commutes with diagonal left translation, so $\\partial(hz)=h\\partial z$. Also $h[b,y_0,\\ldots,y_q]=[hb,hy_0,\\ldots,hy_q]$, giving $hC_bz=C_{hb}(hz)$ by linear extension. In degree $-1$ this reads $h[b]=[hb]$, since translation fixes $[\\varnothing]$; all maps out of degree $-2$ are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "Put $D_q=1-A_q$ for $-1\\leq q\\leq n$. Then $D_{-1}=0$ and $\\partial D_q=D_{q-1}\\partial$ for $0\\leq q\\leq n$. We induct on $q$ to prove both $\\partial Z_q(x)=0$ for every basis tuple and $D_q=\\partial Q_q+Q_{q-1}\\partial$ on all chains. For $q=0$, $Q_{-1}=0$ implies $Z_0(x)=D_0[x]$, hence $\\partial Z_0(x)=D_{-1}\\partial[x]=0$. By step 2, $\\partial Q_0[x]=\\partial C_{x_0}Z_0(x)=Z_0(x)$, proving the homomorphism identity in degree zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "For $1\\leq q\\leq n$ assume the identity in degree $q-1$. Applying it to $\\partial[x]$ and using step 2 gives\n$$\\partial Z_q(x)=D_{q-1}\\partial[x]-\\partial Q_{q-1}\\partial[x]=(D_{q-1}-\\partial Q_{q-1})\\partial[x]=Q_{q-2}\\partial^2[x]=0.$$\nFor $q=1$ the last term uses $Q_{-1}=0$, not an undefined $Q_{-2}$. Thus the recursive correction is a cycle in every required degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "Using that cycle, step 2 gives\n$$\\partial Q_q[x]=\\partial C_{x_0}Z_q(x)=Z_q(x)-C_{x_0}\\partial Z_q(x)=[x]-A_q[x]-Q_{q-1}\\partial[x].$$\nAll maps in this identity are homomorphisms, so checking basis elements proves $1-A_q=\\partial Q_q+Q_{q-1}\\partial$ on every chain. This completes the induction. No map $A_{n+1}$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "For equivariance induct from the equivariant zero map $Q_{-1}$. If $Q_{q-1}$ is $H$-equivariant, then the hypothesis on $A_q$ and step 3 imply $Z_q(hx)=hZ_q(x)$, since the boundary of the translated basis tuple is the translate of its boundary. The first coordinate of $hx$ is $hx_0$. Therefore step 3 gives $Q_q[hx]=C_{hx_0}(hZ_q(x))=hC_{x_0}Z_q(x)=hQ_q[x]$. Linear extension proves this for every $z\\in B_q(G)$ and $h\\in H$, including degree zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "Construct finite lists by induction, retaining repetitions. For $q=0$, the list for $Q_0[x_0]$ consists of $[x_0,x_0]$ with coefficient $1$ and $[x_0,b_{0j}(x_0)]$ with coefficients $-k_{0j}$; prefixing a tuple here means concatenating its entries. This evaluates to $C_{x_0}([x_0]-A_0[x_0])$, the required basis value. There is no contribution from $Q_{-1}$. Its list length and coefficients are fixed before $x_0$ is supplied.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "For $q\\geq1$, let $\\delta_s:G^{q+1}\\to G^q$ delete position $s$, $0\\leq s\\leq q$. If the list for $Q_{q-1}[y]$ is $\\sum_jt_{q-1,j}[v_{q-1,j}(y)]$, define the list for $Q_q[x]$ by concatenating: the tuple $(x_0,x)$ with coefficient $1$; the tuples $(x_0,b_{qj}(x))$ with coefficients $-k_{qj}$; and, for each $s,j$, the tuples $(x_0,v_{q-1,j}(\\delta_s x))$ with coefficients $-(-1)^s t_{q-1,j}$. Expanding the boundary and the definition of $Q_q$ gives precisely this equality in $B_{q+1}(G)$. This finite concatenation establishes the induction and uses only subtuple selection, the given $b_{pj}$, and prefixing input coordinates. Coefficients are multiplied only by $1$ or $-1$ at this step; equal evaluated tuples are never identified to define a list.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "All maps in these lists are continuous. A coordinate projection is continuous for the product topology, so each deletion $\\delta_s$ is continuous. The base-case maps $x_0\\mapsto(x_0,x_0)$ and $x_0\\mapsto(x_0,b_{0j}(x_0))$ have continuous coordinates. Inductively, $v_{q-1,j}\\circ\\delta_s$ is continuous as a composition, and adjoining the continuous coordinate $x_0$ preserves continuity: inverse images of basic product opens are finite intersections of open inverse images of the coordinates. The same argument applies to $(x_0,b_{qj}(x))$. This proves the asserted continuity with no topology placed on the free abelian groups.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  },
+  {
+   "text": "For the additional coordinate assertion, induct on these same uncollected lists. Their base coordinates are $x_0$ and the given coordinates of $b_{0j}$, of the stated forms. Under deletion $\\delta_s$, the input coordinate $y_k$ becomes $x_{\\iota_s(k)}$, where $\\iota_s(k)=k$ for $k<s$ and $k+1$ otherwise. Thus $y_k$ and $\\rho(y_k)a_i$ become respectively $x_{\\iota_s(k)}$ and $\\rho(x_{\\iota_s(k)})a_i$. Prefixing adds only $x_0$; the given $b_{qj}$ already satisfy the condition. This proves the coordinate assertion. All lists and their coefficients were constructed over $\\mathbf Z$ from the fixed lists for $A$; no coefficient group or coefficient topology enters any step, proving the final independence clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent auxiliary expansion below scalar tame-kernel descent: explicit prefix-recursion calculation (not asserted in the blueprint text)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary prefix comparison; elementary recursion and finite-list proof supplied by Q46, using the tuple contraction of Stacks Tag 03AT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant chain endomorphism of augmented free tuple chains admits an explicit prefix cone chain homotopy with continuous finite integer evaluations",
+   "results": {
+    "t": "2026-10-22T06:04:02Z",
+    "tool": "leanfinder",
+    "query": "An equivariant chain endomorphism of augmented free tuple chains admits an explicit prefix cone chain homotopy with continuous finite integer evaluations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "Homotopy.mkInductiveAux₂",
+     "Homotopy.mkInductiveAux₁",
+     "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant",
+     "Homotopy.mkInductive",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "Homotopy.mkInductiveAux₃"
+    ],
+    "digest": "f3f7702f8a10e8b1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires homotopy components and compatibility proofs as inputs; it supplies neither the prefix-cone construction nor its continuous finite evaluation and equivariance properties. Homotopy.lean inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given an augmented tuple chain endomorphism lifting identity use prefixing by the first input vertex to construct an equivariant finite evaluation chain homotopy",
+   "results": {
+    "t": "2026-10-22T06:04:37Z",
+    "tool": "leansearch",
+    "query": "Given an augmented tuple chain endomorphism lifting identity use prefixing by the first input vertex to construct an equivariant finite evaluation chain homotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mk.congr_simp",
+     "Homotopy.comm",
+     "Homotopy.noConfusionType",
+     "Homotopy.mkInductive",
+     "Homotopy.compLeftId",
+     "CategoryTheory.ProjectiveResolution.liftIdHomotopy",
+     "Homotopy.mkInductiveAux₂.congr_simp",
+     "Homotopy"
+    ],
+    "digest": "9db71b5453a747f2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires homotopy components and compatibility proofs as inputs; it supplies neither the prefix-cone construction nor its continuous finite evaluation and equivariance properties. Homotopy.lean inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"FreeAbelianGroup\"",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"FreeAbelianGroup\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Loogle is currently under load, please try again later.",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy.mkInductive\"",
+   "results": {
+    "t": "2026-10-22T06:04:56Z",
+    "tool": "loogle",
+    "query": "\"Homotopy.mkInductive\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Homotopy.mkInductive",
+     "Homotopy.mkInductiveAux₂",
+     "Homotopy.mkInductiveAux₁",
+     "Homotopy.mkInductiveAux₂_zero",
+     "Homotopy.mkInductiveAux₃",
+     "Homotopy.mkInductiveAux₂_add_one"
+    ],
+    "digest": "9470ad55b4a5ed8a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires homotopy components and compatibility proofs as inputs; it supplies neither the prefix-cone construction nor its continuous finite evaluation and equivariance properties. Homotopy.lean inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(prefix|cone).*(homotopy|chain)|(homotopy|chain).*(prefix|cone)",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "grep",
+    "query": "(prefix|cone).*(homotopy|chain)|(homotopy|chain).*(prefix|cone)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires homotopy components and compatibility proofs as inputs; it supplies neither the prefix-cone construction nor its continuous finite evaluation and equivariance properties. Homotopy.lean inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(prefix|cone).*(homotopy|chain)|(homotopy|chain).*(prefix|cone)",
+   "results": {
+    "t": "2026-10-23T04:11:45Z",
+    "tool": "grep",
+    "query": "(prefix|cone).*(homotopy|chain)|(homotopy|chain).*(prefix|cone)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: RepresentationTheory has no prefix/cone chain-homotopy hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a chain homotopy from an augmentation preserving chain map of homogeneous bar chains to identity using the first input vertex as cone point",
+   "results": {
+    "t": "2026-10-23T04:11:46Z",
+    "tool": "leansearch",
+    "query": "Construct a chain homotopy from an augmentation preserving chain map of homogeneous bar chains to identity using the first input vertex as cone point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mk.congr_simp",
+     "Homotopy.mk",
+     "Homotopy.mkInductive",
+     "Homotopy.noConfusionType",
+     "Homotopy.mkInductiveAux₂",
+     "Homotopy.ofEq.congr_simp",
+     "Homotopy",
+     "Homotopy.ofEq"
+    ],
+    "digest": "31ed986b4280c308"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive construction and its identities as inputs; DoldKan.homotopyPToId and homotopyPInftyToId apply to specific normalization projections, not arbitrary A. Their source files were read; neither supplies the finite continuous formulas or equivariance asserted here. Resolution comparison hits assert a homotopy for chosen projective resolutions, with no such formula or continuity clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"FreeAbelianGroup\"",
+   "results": {
+    "t": "2026-10-23T04:11:46Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"FreeAbelianGroup\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no declarations returned for the two named concepts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant endomorphism of augmented free abelian tuple chains is chain homotopic to identity by a first vertex prefix recursion with finite continuous tuple formulas",
+   "results": {
+    "t": "2026-10-23T04:11:50Z",
+    "tool": "leanfinder",
+    "query": "An equivariant endomorphism of augmented free abelian tuple chains is chain homotopic to identity by a first vertex prefix recursion with finite continuous tuple formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant",
+     "Homotopy.mkInductiveAux₃",
+     "Homotopy.mkInductiveAux₁",
+     "Homotopy.mkInductiveAux₂",
+     "AlgebraicTopology.DoldKan.homotopyQToZero"
+    ],
+    "digest": "475dcd3c38c8d09a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive construction and its identities as inputs; DoldKan.homotopyPToId and homotopyPInftyToId apply to specific normalization projections, not arbitrary A. Their source files were read; neither supplies the finite continuous formulas or equivariance asserted here. Resolution comparison hits assert a homotopy for chosen projective resolutions, with no such formula or continuity clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "mkInductive|homotopyPToId|homotopyPInftyToId",
+   "results": {
+    "t": "2026-10-23T04:12:20Z",
+    "tool": "grep",
+    "query": "mkInductive|homotopyPToId|homotopyPInftyToId",
+    "sub": "Algebra",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean"
+    ],
+    "digest": "85184ac5ba52eb97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy.mkInductive in Mathlib/Algebra/Homology/Homotopy.lean:449-553 takes the component construction and homotopy identities as input; it does not supply the present recursive maps, equivariance or finite continuous evaluations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inductive comparison homotopy on a free resolution defined on generators by coning a cycle, continuous finite integral evaluation formulas",
+   "results": {
+    "t": "2026-10-23T04:12:23Z",
+    "tool": "leanfinder",
+    "query": "Inductive comparison homotopy on a free resolution defined on generators by coning a cycle, continuous finite integral evaluation formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "instQFactorsThroughHomotopyDown",
+     "CategoryTheory.ProjectiveResolution.liftCompHomotopy",
+     "CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc",
+     "CategoryTheory.ProjectiveResolution.liftHomotopy",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc"
+    ],
+    "digest": "0f4cca40931c2daa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive construction and its identities as inputs; DoldKan.homotopyPToId and homotopyPInftyToId apply to specific normalization projections, not arbitrary A. Their source files were read; neither supplies the finite continuous formulas or equivariance asserted here. Resolution comparison hits assert a homotopy for chosen projective resolutions, with no such formula or continuity clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: prefix-cone comparison for augmented tuple chains, equivariance and fixed finite integral expansion; retained item proof steps 3 and 7–9. Agent-formulated, not asserted in the blueprint.",
+   "via": [
+    "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-prefix-finite-chain-homotopy",
+  "worker": "stage1",
+  "summary": "Q46: reuse the existing closed tuple-contraction node; give the augmented recursion, equivariance and fixed finite continuous-list construction explicitly. No new nodes. Clarify the empty-tuple augmentation and the range of chain-map equations; preserve all hypotheses and conclusions. Mathlib searches in two semantic phrasings do not match the full item.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md is the provenance for the scalar tame-kernel auxiliary branch. The blueprint does not assert this arithmetic lemma; steps 1-11 supply its explicit agent proof. The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor prints None), so blueprint.from.node remains null and the inherited via list is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-set-complex-contractible",
+    "why": "The generic closed free-tuple contraction supplies the alternating-boundary identities; it is a tool applied with A=Z, S=G, not a replacement of a unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-a761aceb5",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-a761aceb5 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and 11 steps), both cited statements (def-weil-pbc-free-module; lem-weil-pbc-power-set-complex-contractible, whose contracting homotopy for any chosen s includes the augmentation degree), Stacks 03AT lemma-homology-complex (sites-cohomology.tex 1124-1146, extended complex with prefix homotopy) and blueprint main-20261015 direct-images paragraph (3). The item is correctly marked agent-formulated with blueprint ancestor null (inherited). Live and side-live have the item unsplit, there is no repair note, and there are no new nodes. The statement correction (B_{-1} free on the empty tuple, maps out of q<-1 zero, translation fixes the empty tuple, chain-map equation for 0<=q<=n, list clause for 0<=q<=n) only clarifies: it adds no hypothesis and drops no conclusion. The only citer, rectangle-replacement step 2 via the ordered-coset projection (A_{-1}=1, chain map for 0..n, rho(x_j)a_i coordinates), still holds. I re-derived each step: base case; cycle property using Q_{-1}=0 for q=1; homotopy identity; equivariance via hC_b=C_{hb}h; and the list recursion with coefficients +1, -k_{qj}, -(-1)^s t (expanded and matches). Continuity and coordinate-form inductions are correct. A Python check on G=Z/3 with right-translation A, n=3, confirms 1-A=dQ+Qd and H-equivariance in all degrees. proof_deps equals the union of uses, there is no SGA, and the TeX is single-escaped. Accepted tool_use: the closed generic contraction node from sk-thm-p1. Duplicate search: lem-sfb-homogeneous-tuple-prefix-homotopy is a parallel B(H)->B(G) version without topology or rho; neither specializes the other, so it is not a duplicate. Maintainer note: the two lemmas could be unified later; the report wrongly claims a statement_change field (absent, and not required in stage 1)."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.EquivariantPrefixFiniteChainHomotopy",
+  "declaration": "Algebra.equivariant_prefix_finite_chain_homotopy",
+  "declarations": [
+   "Algebra.prefixChains",
+   "Algebra.prefixBoundary",
+   "Algebra.prefixCone",
+   "Algebra.prefixTranslate",
+   "Algebra.prefixRecursiveQ",
+   "Algebra.prefixFormulaList",
+   "Algebra.HasPrefixCoordinates",
+   "Algebra.equivariant_prefix_finite_chain_homotopy"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/EquivariantPrefixFiniteChainHomotopy.lean",
+  "statement": "theorem equivariant_prefix_finite_chain_homotopy (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (H : Subgroup G) (n : ℕ) (A : ∀ p : Fin (n + 2), prefixChains G p.val →ₗ[ℤ] prefixChains G p.val) (haug : A 0 = LinearMap.id) (hchain : ∀ p : Fin (n + 1), (prefixBoundary G p.val).comp (A ⟨p.val + 1, Nat.succ_lt_succ p.isLt⟩) = (A p.castSucc).comp (prefixBoundary G p.val)) (hequiv : ∀ (p : Fin (n + 2)) (h : H) (z : prefixChains G p.val), A p (prefixTranslate G h p.val z) = prefixTranslate G h p.val (A p z)) (b : ∀ p : Fin (n + 1), List (ℤ × ((Fin (p.val + 1) → G) → (Fin (p.val + 1) → G)))) (hb : ∀ (p : Fin (n + 1)) (e : ℤ × ((Fin (p.val + 1) → G) → (Fin (p.val + 1) → G))), e ∈ b p → Continuous e.2) (hA : ∀ (p : Fin (n + 1)) (x : Fin (p.val + 1) → G), A ⟨p.val + 1, Nat.succ_lt_succ p.isLt⟩ (Finsupp.single x (1 : ℤ)) = ((b p).map (fun e ↦ e.1 • Finsupp.single (e.2 x) (1 : ℤ))).sum) : (∀ r : ℕ, (prefixBoundary G r).comp (prefixBoundary G (r + 1)) = 0) ∧ (∀ c : G, (prefixBoundary G 0).comp (prefixCone G c 0) = LinearMap.id) ∧ (∀ (c : G) (r : ℕ), (prefixBoundary G (r + 1)).comp (prefixCone G c (r + 1)) + (prefixCone G c r).comp (prefixBoundary G r) = LinearMap.id) ∧ (∀ (h c : G) (r : ℕ) (z : prefixChains G r), prefixTranslate G h (r + 1) (prefixCone G c r z) = prefixCone G (h * c) r (prefixTranslate G h r z)) ∧ ∀ p : Fin (n + 1), (∀ x : Fin (p.val + 1) → G, prefixBoundary G p.val (Finsupp.single x (1 : ℤ) - A ⟨p.val + 1, Nat.succ_lt_succ p.isLt⟩ (Finsupp.single x (1 : ℤ)) - prefixRecursiveQ G p.val (fun j ↦ A ⟨j.val, by omega⟩) (prefixBoundary G p.val (Finsupp.single x (1 : ℤ)))) = 0) ∧ (LinearMap.id - A ⟨p.val + 1, Nat.succ_lt_succ p.isLt⟩ = (prefixBoundary G (p.val + 1)).comp (prefixRecursiveQ G (p.val + 1) (fun j ↦ A ⟨j.val, by omega⟩)) + (prefixRecursiveQ G p.val (fun j ↦ A ⟨j.val, by omega⟩)).comp (prefixBoundary G p.val)) ∧ (∀ (h : H) (z : prefixChains G (p.val + 1)), prefixRecursiveQ G (p.val + 1) (fun j ↦ A ⟨j.val, by omega⟩) (prefixTranslate G h (p.val + 1) z) = prefixTranslate G h (p.val + 2) (prefixRecursiveQ G (p.val + 1) (fun j ↦ A ⟨j.val, by omega⟩) z)) ∧ (∀ x : Fin (p.val + 1) → G, prefixRecursiveQ G (p.val + 1) (fun j ↦ A ⟨j.val, by omega⟩) (Finsupp.single x (1 : ℤ)) = ((prefixFormulaList G (p.val + 1) (fun j ↦ b ⟨j.val, by omega⟩)).map (fun e ↦ e.1 • Finsupp.single (e.2 x) (1 : ℤ))).sum) ∧ (∀ e ∈ prefixFormulaList G (p.val + 1) (fun j ↦ b ⟨j.val, by omega⟩), Continuous e.2) ∧ ∀ (ι : Type v) (ρ : G → H) (a : ι → G), Continuous ρ → (∀ (j : Fin (p.val + 1)) (e : ℤ × ((Fin (j.val + 1) → G) → (Fin (j.val + 1) → G))), e ∈ b ⟨j.val, by omega⟩ → HasPrefixCoordinates H ρ a e.2) → ∀ e ∈ prefixFormulaList G (p.val + 1) (fun j ↦ b ⟨j.val, by omega⟩), HasPrefixCoordinates H ρ a e.2",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Tuple-length indexing r=q+1 includes the empty tuple at r=0. The augmented complex is implicitly extended by zero below degree -1. Helpers in this owning module construct the recursion and uncollected lists explicitly. Existing power-set boundary and insertion maps are reused, with their augmentation target identified with free chains on the empty tuple."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5279f7bc0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the item, stmt_dep def-weil-pbc-free-module, the upstream PowerSetComplexContractible defs, the delivered module and the report. prefixBoundary/prefixCone are the existing power-set differential, prefix homotopy and augmentation, with B_{-1} = chains on the empty tuple; signs and deletion match. Hypotheses: A over degrees -1..n, A_{-1}=1, chain equations for 0..n, H-equivariance, continuous finite lists; nothing extra assumed. prefixRecursiveQ is the node's recursion with Q_{-1}=0 and the prefix point from each basis tuple; real data. prefixFormulaList re-expanded: coefficients 1, -k, -(-1)^i t, matching the boundary sign convention. All conclusions present (d^2=0, contracting identities incl. augmentation, h C_b = C_{hb} h for all h in G, cycle Z, homotopy as linear-map identity, H-equivariance of Q, list evaluation, continuity, coordinate-form transfer with arbitrary family a and continuous rho). Edge cases n=0, empty tuple, empty lists, empty family covered. lean.statement verbatim; only the lean field changed; docstrings with source, blueprint tag and 11 steps; sorry-only; universes bound; no name clash or existing duplicate; citer rectangle-replacement unaffected. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080944-L-1726643",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.equivariant_prefix_finite_chain_homotopy"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sp-shriek-normalized-transition-comparison",
+ "kind": "statement",
+ "title": "Actual coefficient-transition formula for tower compact support",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, separated finite-type $k$-schemes $X,\\bar X,Y$, and a compactification $f=pj:X\\xrightarrow{j}\\bar X\\xrightarrow{p}Y$, with $j$ open and $p$ proper [sk-def-sfb-dc-setting, def-weil-compactifications-refinements]. Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$, put $A_n=O/\\ell^n$, and use the constant ring sheaves $A_{n,T}$ and the derived category of semilinear coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Let $C\\in D^+(\\operatorname{Tow}(X,O))$ have constructible finite-Tor levels $C_n$ [sk-def-sfb-constructible], and denote its actual transition-adjoints by $\\rho_{n,m}:C_n\\otimes^L_{A_{n,X}}A_{m,X}\\to C_m$ for $m\\le n$. Let $F=Rp_{*,\\bullet}j_{!,\\bullet}$ be the tower functor, with evaluations $(FC)_n\\cong Rf_{!,A_n}C_n$ [det-sp-tower-shriek-levels].\n\nUnder these canonical evaluation identifications, the actual transition-adjoint of $FC$ is\n$$ (Rf_{!,A_n}C_n)\\otimes^L_{A_{n,Y}}A_{m,Y}\\xrightarrow{b_{A_n,A_m}(C_n)}Rf_{!,A_m}(C_n\\otimes^L_{A_{n,X}}A_{m,X})\\xrightarrow{Rf_{!,A_m}(\\rho_{n,m})}Rf_{!,A_m}C_m. $$\nHere $b$ is precisely the proper counit transpose followed by the extension-by-zero tensor comparison specified in [det-sp-reduction-direct-image]. This identification is natural in $C$, and for $r\\le m\\le n$ its two successive transition words equal the direct $n$-to-$r$ word, with the canonical scalar associators. The equality is an equality of the specified maps on the derived system model [lem-coef-semilinear-derived-sections], including the proper counit and open-extension comparison; it is not an inference from faithfulness of evaluations. No flatness or finite projective dimension of $A_m$ over $A_n$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-compactifications-refinements",
+  "sk-def-sfb-constructible",
+  "det-sp-tower-shriek-levels",
+  "det-sp-reduction-direct-image",
+  "lem-coef-semilinear-derived-sections",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Put $J_a=j_!^{A_a}$, $G_a=Rp_{*,A_a}$, $F_a=G_aJ_a$, and $T_T^{n,m}=(-)\\otimes^L_{A_{n,T}}A_{m,T}$. Write $e^{n,m}:T_{\\bar X}^{n,m}J_n\\simeq J_mT_X^{n,m}$ and $\\gamma^{n,m}:T_Y^{n,m}G_n\\to G_mT_{\\bar X}^{n,m}$ for the specified comparisons. By [def-sp-reduction-direct-image-comparison], $\\gamma$ is the transpose of the scalar-extended proper counit and $b^{n,m}(K)=G_m(e^{n,m}_K)\\gamma^{n,m}_{J_nK}$. These are defined on the ambient derived categories, so using them does not assume the quotient map flat.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument; assembly step 1"
+   }
+  },
+  {
+   "text": "Exact termwise extension by zero and its restriction-of-scalars compatibility [lem-cbc-proetale-extension-zero] send the semilinear transition of $C$ to its extension by zero. Its scalar-adjoint is $\\sigma_{n,m}=J_m(\\rho_{n,m})e^{n,m}_{C_n}$. To check the normalization, apply $j_m^*$: [lem-sf-open-tensor-normalization] identifies the open units and the tensor comparison with the identity on restricted sections, so the proposed map becomes $\\rho_{n,m}$, the scalar-adjoint of the original transition. Full faithfulness of $J_m$, also stated there, gives equality before restriction. The comparison $e$ of step 1 is the unique composite-left-adjoint comparison with these same units. This argument takes place on the derived system model of [lem-coef-semilinear-derived-sections], where open extension is exact and its level adjunctions are the ordinary ones.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-sf-open-tensor-normalization",
+    "def-sp-reduction-direct-image-comparison",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument; assembly step 2"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-semilinear-derived-sections] with $u=p$ and $N=j_{!,\\bullet}C$. Its direct-image transition formula is $G_m(\\sigma_{n,m})\\gamma^{n,m}_{J_nC_n}$: the mate there has transpose $T_{\\bar X}^{n,m}(\\varepsilon^{A_n})$ under the balanced tensor/pullback identification, exactly $\\gamma$ of step 1. The model's evaluations preserve these counits and the actual transitions. The evaluation isomorphisms are those of [det-sp-tower-shriek-levels], since both use exact termwise $j_!$ followed by the canonical derived direct image. Substituting step 2 gives\n$$G_mJ_m(\\rho_{n,m})G_m(e^{n,m}_{C_n})\\gamma^{n,m}_{J_nC_n}=F_m(\\rho_{n,m})b^{n,m}(C_n).$$\nThis proves the required equality of specified maps; it uses no detection of equality by evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-reduction-direct-image-comparison",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument; assembly step 3"
+   }
+  },
+  {
+   "text": "The transition maps of $C$ and the comparisons $e,\\gamma,b$ are natural by [det-sp-coefficient-towers-abelian] and [def-sp-reduction-direct-image-comparison]. Applying these naturality squares to the two factors $F_m(\\rho_{n,m})b^{n,m}(C_n)$ proves naturality in $C$. In particular the formula holds for arbitrary, possibly noninvertible, input reductions; no normalization of $C$ has been used.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument; assembly step 4"
+   }
+  },
+  {
+   "text": "Write $T^{m,r}$ for scalar extension and $\\delta_{n,m}=F_m(\\rho_{n,m})b^{n,m}(C_n)$. Suppress associators only in the next display. Naturality of $b^{m,r}$ at $\\rho_{n,m}$ gives\n$$\\delta_{m,r}T^{m,r}(\\delta_{n,m})=F_r(\\rho_{m,r}T^{m,r}\\rho_{n,m})\\,b^{m,r}(T^{n,m}C_n)T^{m,r}(b^{n,m}(C_n)).$$\nThe input cocycle of [det-sp-coefficient-towers-abelian] says $\\rho_{m,r}T^{m,r}\\rho_{n,m}=\\rho_{n,r}\\alpha_{X,C_n}$. The coefficient cocycle of [det-sp-reduction-direct-image] says\n$$F_r(\\alpha_{X,C_n})b^{m,r}(T^{n,m}C_n)T^{m,r}(b^{n,m}(C_n))=b^{n,r}(C_n)\\alpha_{Y,F_nC_n}.$$\nThus the displayed composite equals $\\delta_{n,r}\\alpha_{Y,F_nC_n}$, as required. The rings $A_a$ are finite commutative $\\ell$-primary rings; $C_n$ is bounded constructible of finite Tor amplitude by hypothesis, so the cited coefficient cocycle applies. Its naturality is the ambient naturality of step 1. The associators and their naturality are those of [det-sp-scalar-extension-functor]. Equal indices give the tensor unit identifications and the original transition. Every equality is in the specified derived system calculus already used in step 3.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "det-sp-reduction-direct-image",
+    "det-sp-scalar-extension-functor",
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument; assembly step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-reduction-direct-image-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-tower-shriek-levels",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-direct-image",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported direct image of a normalized tower of finite coefficient sheaves has reduction transitions given by coefficient adjunction mates and uniform Tor bounds",
+   "subdirectory": "",
+   "results": "; 8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTower|lowerShriek|semilinear.*transition",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image of a normalized tower of finite coefficient sheaves has reduction transitions given by coefficient adjunction mates and uniform Tor bounds",
+   "subdirectory": "",
+   "results": "; 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, stalkSkyscraperSheafAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived shriek pushforward of an adic cartesian coefficient system preserves cartesian transitions with cocycle and finite Tor bounds",
+   "subdirectory": "",
+   "results": "; 8 hits: localCohomology.diagram, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardComp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*transition|transition.*[Ss]hriek|[Ss]hriek.*transition",
+   "subdirectory": "",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module/sheaf pushforward and scalar adjunctions, or unrelated compactly supported maps; no actual derived semilinear compact-support transition formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of a system of sheaves with varying coefficient rings has transition maps given by extension of scalars and the adjunction counit",
+   "subdirectory": "",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.Counit.map, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, ModuleCat.ExtendRestrictScalarsAdj.counit_app, SheafOfModules.pushforwardPushforwardAdj, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module/sheaf pushforward and scalar adjunctions, or unrelated compactly supported maps; no actual derived semilinear compact-support transition formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"tensor\"",
+   "subdirectory": "",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module/sheaf pushforward and scalar adjunctions, or unrelated compactly supported maps; no actual derived semilinear compact-support transition formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a derived semilinear coefficient tower, the transition of compact support pushforward is the scalar counit mate followed by pushforward of the input transition",
+   "subdirectory": "",
+   "results": "8 hits: PresheafOfModules.pushforwardComp, CompactlySupportedContinuousMap.compLinearMap, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module/sheaf pushforward and scalar adjunctions, or unrelated compactly supported maps; no actual derived semilinear compact-support transition formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural coefficient change comparison for derived proper pushforward and extension by zero, compatible with two successive changes of rings",
+   "subdirectory": "",
+   "results": "8 hits: PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardNatTrans_app_val_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module/sheaf pushforward and scalar adjunctions, or unrelated compactly supported maps; no actual derived semilinear compact-support transition formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-direct-image-tower",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (1), reduction maps are composites of b with Rf_! of input reductions; old step 2 coherence argument",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-shriek-normalized-transition-comparison",
+  "worker": "stage1",
+  "summary": "No new nodes: reused the simultaneous semilinear derived-system direct-image formula, exact open extension, open-unit tensor normalization, and the existing finite coefficient cocycle. Wrote the actual proper/open factorization and an explicit naturality/cocycle paste. Repaired the malformed p-ne-ell TeX escape and listed the two already cited tower notions in stmt_deps.",
+  "blueprint": "det-sp-integral-direct-image-tower proof paragraph (1): reduction maps are composites of b with Rf_! of input reductions; supplied proper/open normalizations and the composition argument.",
+  "tool_uses": [
+   {
+    "node": "def-sp-reduction-direct-image-comparison",
+    "why": "Specifies the ambient proper-counit and open-unit comparison word b; this integral unit uses rather than redefines finite coefficient maps."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Exact extension by zero and restriction of coefficients give the strict open transition."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-unit normalized tensor comparison and full faithfulness identify the open scalar-adjoint."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic simultaneous derived-system operations identify actual transitions and counits, rather than equality detection by evaluations."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Canonical bounded-below compactification evaluations identify the functor in the statement."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Naturality and scalar-adjoint cocycle for the actual input system."
+   },
+   {
+    "node": "det-sp-reduction-direct-image",
+    "why": "Finite coefficient comparison cocycle used to paste two transition words."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Canonical tensor associators and naturality for the coefficient chain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sp-reduction-direct-image-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-tower-shriek-levels",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-direct-image",
+  "det-sp-scalar-extension-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-6dcdf2e97",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-6dcdf2e97 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, 0 new nodes. Statement is unchanged apart from the repaired p\\ne\\ell escape. stmt_deps gains the two tower nodes already bracket-cited in the statement; proof_deps equals the union of uses. Route: blueprint main-20261015 sk-prop-sp-integral-adjunction-direct-image.proof.md paragraph (1), 'reduction maps are composites of b with Rf_! of the reduction maps'. The proof keeps all of the parent's old step 2 and expands it. Step 1 matches the definitions of gamma, e and b in def-sp-reduction-direct-image-comparison. Step 2: exact j_! (lem-cbc-proetale-extension-zero) and lem-sf-open-tensor-normalization (unit normalization, j^*gamma = id, full faithfulness, arbitrary B_X) give sigma = J_m(rho)e. Step 3: the transition formula G_n(t)∘b of lem-coef-semilinear-derived-sections; its mate is gamma_p. The evaluation iso agrees with det-sp-tower-shriek-levels(1), whose proof uses the canonical det-sp-tower-injective-components comparison. Step 4 is genuinely elementary naturality. Step 5: I recomputed the paste with naturality of b, the input cocycle and the det-sp-reduction-direct-image cocycle; it gives delta_{n,r}alpha_Y. Dctf hypotheses hold: finite Tor amplitude bounds cohomology, sk-def-sfb-constructible agrees with intrinsic constructibility for finite rings, and det-sp-scalar-extension-functor(2) covers the scalar extension. Edge cases n=m, C=0, X empty, j=id, p=id and the non-flat Z/l^2->F_l all check. All 8 declared tool_uses are accepted as generic black boxes. Batch-5: def-sp-reduction-direct-image-comparison and det-sp-scalar-extension-functor are general definitions. Their closure reaches lem-trf-site-functorial-flat-resolution, which is generic: module sheaves on an essentially small site have functorial flat resolutions. It is not part of the trace formula or Poincare duality or their proofs, and it was already in the base closure via det-sp-reduction-direct-image. Not a duplicate. Maintainer note: lem-sp-tower-transition-compatibility (sk-prop-sp-tower-geometric) states the same formula for a narrower interface (indexing O/l^{n+1}, coordinate data, no naturality or cocycle clause), so a later merge could be considered."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ShriekNormalizedTransitionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.SpShriekTransition.shriek_normalized_transition_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.quotientMap",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.coefficientMap_eq",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.scalarCoordinates",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.rho",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.alpha",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.word",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.actual",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.shriek_normalized_transition_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ShriekNormalizedTransitionComparison.lean",
+  "statement": "theorem shriek_normalized_transition_comparison (pchar : ℕ) (hp : 0 < pchar) (hpl : pchar ≠ l) (k : Type u) [Field k] [CharP k pchar] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [f.IsOver (Spec (.of k))] [LocallyOfFiniteType (c.Z ↘ Spec (.of k))] [QuasiCompact (c.Z ↘ Spec (.of k))] [IsSeparated (c.Z ↘ Spec (.of k))] (C : DerivedCategory.Plus (SpTowerShriek.S l E X)) (hC : ∀ n : ℕ, SpTowerShriek.GoodLevel l E b X n C.obj) : (∀ {m n : ℕ} (h : m ≤ n), actual l E b o c h C.obj = word l E b c h C.obj) ∧ (∀ (C' : DerivedCategory.Plus (SpTowerShriek.S l E X)) (_hC' : ∀ n : ℕ, SpTowerShriek.GoodLevel l E b X n C'.obj) (v : C.obj ⟶ C'.obj) {m n : ℕ} (h : m ≤ n), (scalarExtensionFunctor (quotientMap l E h) Y).map ((SpTowerShriek.finiteF l E b c n).map ((SpTowerShriek.Ev l E X n).map v)) ≫ word l E b c h C'.obj = word l E b c h C.obj ≫ (SpTowerShriek.finiteF l E b c m).map ((SpTowerShriek.Ev l E X m).map v)) ∧ (∀ {r m n : ℕ} (h : r ≤ m) (k : m ≤ n), (scalarExtensionFunctor (quotientMap l E h) Y).map (word l E b c k C.obj) ≫ word l E b c h C.obj = (alpha l E b Y h k).hom.app ((SpTowerShriek.finiteF l E b c n).obj ((SpTowerShriek.Ev l E X n).obj C.obj)) ≫ word l E b c (h.trans k) C.obj)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual strict-system reductions are transported by the uniquely normalized scalar adjunction comparison and conjugated by the published Fcomparison. The specified word uses reductionDirectImageComparison literally. Naturality and the scalar-associator cocycle are separate conjuncts; no faithfulness of evaluations or invertibility of input transitions is assumed. Helpers are real constructions belonging to this transition notion; coefficientMap_eq is its coefficient-coordinate identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3812db271",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read item, 8 stmt_deps, the module and the live dependency sources (SpTowerShriek Base/Operations/F/finiteF/Fcomparison/GoodLevel, reductionDirectImageComparison, scalarExtensionFunctor(_composition), SemilinearSections.Data). H3 OK: char p>0 with p≠l, separated finite-type X/Y over k with redundant c.Z instances, Compactification gives proper g and open i, D+ system model, GoodLevel finite-Tor constructible levels; actual = Fcomparison-conjugated rho of F C equals word = reductionDirectImageComparison followed by finiteF(rho); naturality square and alpha cocycle as separate conjuncts in the right order; no flatness or faithfulness assumed. Edge cases n=m, n=0, zero, empty, identity compactifications, ramified, non-flat OK; universes unchanged. Non-lean fields byte-identical to live; lean.statement verbatim; real data; two named sorried theorems (main statement, coefficientMap_eq); docstrings with source, blueprint id and 5 proof steps. No compile (no file changed). Advisories: owners of scalarExtensionFunctor and reductionDirectImageComparison and the SemilinearSections defs uncited but reachable via det-sp-reduction-direct-image and lem-coef-semilinear-derived-sections; proEtaleConstantRingMap and proEtaleRingDerivedExtensionAdjunction owners unreachable, used only in coordinate helpers; quotientMap duplicates SpTowerCalculus.quotient; alpha is the Data associator transported, equal to scalarExtensionFunctor_composition by conjugate uniqueness (stage 3 needs this); narrower overlap with lem-sp-tower-transition-compatibility."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T162222-L-371560",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.coefficientMap_eq",
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.shriek_normalized_transition_comparison"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.SpShriekTransition.shriek_normalized_transition_comparison"
+  ]
+ }
+}

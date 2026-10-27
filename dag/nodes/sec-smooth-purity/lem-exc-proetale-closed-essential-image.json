@@ -197,7 +197,18 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-closed-unit",
  "split_report": {
@@ -256,5 +267,25 @@
   "landing": "20261018T145117-L-3645885",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a closed immersion $i:Z\\hookrightarrow X$ with quasi-compact open\ncomplement $j$, a pro-etale module sheaf $F$ lies in the image of $i_*$ if\nand only if $j^*F=0$. For such a sheaf the canonical unit $F\\to i_*i^*F$ is\nan isomorphism.",
+  "proof": [
+   {
+    "text": "Evaluation on an object of the open complement gives $j^*i_*G=0$, by\n[lem-exc-closed-localization], since its closed fibre is empty. Conversely\nsuppose $j^*F=0$ and consider the unit $\\eta:F\\to i_*i^*F$ of the pro-etale\noperations. Its closed inverse image is an isomorphism: the triangle\nidentity says that $i^*\\eta$, followed by the counit, is the identity, and\nthe counit is an isomorphism by [lem-exc-proetale-closed-fully-faithful].\nIts open inverse image is the map between two zero sheaves. Both inverse\nimages are exact by the exactness of the pro-etale module inverse image\n([det-prop-sfb-module-pullback-exact-main]), so the kernel and cokernel of $\\eta$ have zero open and closed\ninverse images. [lem-exc-open-closed-detection] makes them zero. This proves\nthe unit isomorphism and the essential-image assertion.",
+    "uses": [
+     "lem-exc-closed-localization",
+     "lem-exc-proetale-closed-fully-faithful",
+     "lem-exc-open-closed-detection"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

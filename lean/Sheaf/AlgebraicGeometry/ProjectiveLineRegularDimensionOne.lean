@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.IsRegularScheme
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-!
 # Regularity, Noetherianity and dimension of the projective line
@@ -54,6 +54,22 @@ theorem noetherian_regular_dim_one (k : Type u) [Field k] :
     CompactSpace X ∧ IsLocallyNoetherian X ∧
       (∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧ IsRegularRing Γ(X, U)) ∧
       X.dim = 1 := by
-  sorry
+  let X := ProjectiveLine (Spec (.of k))
+  let f := X ↘ Spec (.of k)
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular X := IsRegular.of_smooth f
+  refine ⟨QuasiCompact.compactSpace_of_compactSpace f, inferInstance, ?_, ?_⟩
+  · intro x
+    obtain ⟨U, hU, hxU, -⟩ :=
+      exists_isAffineOpen_mem_and_subset (show x ∈ (⊤ : X.Opens) from trivial)
+    refine ⟨⟨U, hU⟩, hxU, ?_⟩
+    have : IsNoetherianRing Γ(X, U) :=
+      IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+    rw [isRegularRing_iff]
+    exact hU.isRegularLocalRing_localization
+      (fun y _ ↦ IsRegular.isRegularLocalRing_stalk y)
+  · rw [Scheme.dim_eq_topologicalKrullDim]
+    exact topologicalKrullDim_eq_of_smoothOfRelativeDimension f 1
 
 end AlgebraicGeometry.ProjectiveLine

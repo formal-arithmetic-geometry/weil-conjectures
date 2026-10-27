@@ -1,0 +1,296 @@
+{
+ "id": "lem-per-tame-fixed-ring-generic-components",
+ "kind": "statement",
+ "title": "Tame fixed rings of reduced complete equidimensional local rings and their generic components",
+ "statement": "Let $(C,\\mathfrak m)$ be a nonzero reduced complete Noetherian local ring of characteristic $p>0$ [def-weil-pbc-noetherian-ring] [def-weil-pbc-adically-complete-ring]. Suppose that $C$ is equidimensional of finite dimension $e\\geq1$, meaning $\\dim(C/\\mathfrak q)=e$ for every minimal prime $\\mathfrak q$ [def-weil-pbc-krull-dimension-ring]. Reduced means that no nonzero element is nilpotent. Let a finite group $H$ act by local ring automorphisms on $C$, with $|H|$ invertible in $k=C/\\mathfrak m$. Put $B=C^H=\\{c\\in C:h(c)=c\\text{ for all }h\\in H\\}$, $\\mathfrak n=B\\cap\\mathfrak m$, and $\\lambda=k^H$. Then $B$ is a reduced Noetherian local ring with maximal ideal $\\mathfrak n$, complete for its $\\mathfrak n$-adic topology, and $B/\\mathfrak n\\to k$ identifies its residue field with $\\lambda$. The inclusion $B\\hookrightarrow C$ is module-finite [def-weil-finitely-generated-module]. The extension $k/\\lambda$ is finite separable [def-pc-field-extension] [def-weil-pbc-separable-algebraic-extension]. Contraction maps minimal primes of $C$ onto the minimal primes of $B$. For every minimal prime $\\mathfrak q$ of $C$, with $\\mathfrak r=\\mathfrak q\\cap B$, the induced extension $\\operatorname{Frac}(C/\\mathfrak q)/\\operatorname{Frac}(B/\\mathfrak r)$ is finite separable and $\\dim(B/\\mathfrak r)=\\dim(C/\\mathfrak q)=e$. In particular $B$ is equidimensional of dimension $e$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV Proposition 2.2.3 (i)(a)–(c), (ii)(a)–(b) and its proof, printed pp.53–54; paragraph 2.2.4 (dimension equality). Completeness of the local invariant ring follows from the Reynolds equality J C ∩ B = J and equivalence of the maximal-ideal topologies for the finite local extension. Component dimensions follow by integral dimension equality; the generic component extensions are the finite étale factors in (ii)(b)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $d=|H|$. Since $d$ has nonzero image in the residue field of the local ring $C$, it is a unit of $C$. Its inverse $u=d^{-1}$ is fixed by every automorphism, so $u\\in B$ and $\\sum_{h\\in H}h(u)=du=1$. Apply [lem-per-trace-one-noetherian-invariant-finiteness] with $R=C$, $G=H$, and trace-one element $u$. It gives precisely that $B$ is Noetherian and that $C$ is a finitely generated $B$-module. No faithful-action hypothesis is needed.",
+   "uses": [
+    "lem-per-trace-one-noetherian-invariant-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV Proposition 2.2.3(i)(a), (ii)(a), printed pp.53–54; trace-one generalization already in the DAG."
+   }
+  },
+  {
+   "text": "Define $E:C\\to B$ by $E(c)=u\\sum_{h\\in H}h(c)$. Reindexing the sum shows that its values are invariant; it is $B$-linear and $E(b)=b$ for $b\\in B$. For every ideal $J\\subseteq B$, this gives $E(JC)\\subseteq J$ and hence $JC\\cap B=J$. A nilpotent element of $B$ is nilpotent in $C$ and therefore zero. If $b\\in B\\setminus\\mathfrak n$, its inverse in $C$ is fixed because $h(b^{-1})=h(b)^{-1}=b^{-1}$; thus it is a unit of $B$. Conversely no element of $\\mathfrak n=B\\cap\\mathfrak m$ is a unit, so $B$ is local with maximal ideal $\\mathfrak n$. Reduction gives an injection $B/\\mathfrak n\\hookrightarrow k$ with invariant image. For $a\\in k^H$, lift $a$ to $c\\in C$; then $E(c)$ reduces to $d^{-1}\\sum_h h(a)=a$. Thus the image is exactly $\\lambda=k^H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV Proposition 2.2.3(i)(b),(c) and Reynolds calculation, printed p.53."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak nC$ is finitely generated, since $C$ is Noetherian, and is contained in $\\mathfrak m$. Apply [lem-sfb-adic-complete-subideal] with $A=C$, $L=\\mathfrak nC$, $K=\\mathfrak m$: $C$ is complete for the $\\mathfrak nC$-adic topology. Now let $(\\bar b_t)_t\\in\\varprojlim_t B/\\mathfrak n^t$. Choose representatives $b_t\\in B$. Their images form a compatible system modulo $(\\mathfrak nC)^t=\\mathfrak n^tC$, so completeness gives $c\\in C$ with $c-b_t\\in\\mathfrak n^tC$ for every $t$. The $B$-linearity of $E$ gives $E(c)-b_t\\in\\mathfrak n^t$, so $E(c)\\in B$ lifts the system. If $b\\in\\bigcap_t\\mathfrak n^t$, then $b\\in\\bigcap_t(\\mathfrak nC)^t=0$. The canonical map $B\\to\\varprojlim_t B/\\mathfrak n^t$ is therefore bijective, which is exactly [def-weil-pbc-adically-complete-ring].",
+   "uses": [
+    "lem-sfb-adic-complete-subideal",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090T, lemma-complete-by-sub; Tag 0317, definition-complete; Reynolds retraction of ILO IV 2.2.3."
+   }
+  },
+  {
+   "text": "Let $\\overline H$ be the image of $H\\to\\operatorname{Aut}(k)$. This is a finite group acting faithfully on $k$, and $k^{\\overline H}=k^H=\\lambda$. Apply [lem-wf-finite-field-action-fixed-degree] to $L=k$ and $G=\\overline H$. It gives that $k/\\lambda$ is finite Galois, in particular finite separable. Passing to the image is necessary because the given action of $H$ on $k$ may have a kernel.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3, lemma-galois-over-fixed-field; residue field from ILO IV 2.2.3(i)(c)."
+   }
+  },
+  {
+   "text": "By [lem-dl-a1-finite-invariant-prime-orbits-residues], $B\\subseteq C$ is integral and $H$ is transitive on primes with any fixed contraction. Fix a minimal prime $\\mathfrak q$ of $C$, and set $\\mathfrak r=\\mathfrak q\\cap B$. Choose a minimal prime $\\mathfrak r_0\\subseteq\\mathfrak r$ using [lem-weil-pbc-prime-contains-minimal-prime]. Lying over [lem-weil-pbc-integral-injective-lying-over] gives $\\mathfrak q_0$ over $\\mathfrak r_0$; going up [pqf-lem-going-up] gives $\\mathfrak q_1\\supseteq\\mathfrak q_0$ over $\\mathfrak r$. Transitivity makes $\\mathfrak q_1$ an $H$-translate of $\\mathfrak q$, hence minimal. Thus $\\mathfrak q_0=\\mathfrak q_1$ and $\\mathfrak r_0=\\mathfrak r$. Conversely, for any minimal prime $\\mathfrak r$ of $B$, lying over gives a prime of $C$ over it. Choose a minimal prime contained in that prime by the same minimal-prime lemma; its contraction is contained in $\\mathfrak r$ and hence equals $\\mathfrak r$. This proves exactly the asserted surjection on minimal primes.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "pqf-lem-going-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV Proposition 2.2.3(ii)(a), reduced-case proof, printed p.54; Stacks Tags 0BRI, 00E0, 00GQ, 00GU."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q,\\mathfrak r$ as in Step 5. Put $K=\\operatorname{Frac}(B/\\mathfrak r)$ and $S=B\\setminus\\mathfrak r$. Since $B$ is reduced and $\\mathfrak r$ minimal, [lem-weil-pbc-minimal-prime-reduced-localization-field] identifies $B_{\\mathfrak r}$ with $K$: its maximal ideal is zero and all nonzero elements of $B/\\mathfrak r$ are inverted. By [lem-weil-pbc-localization-base-change], $A=K\\otimes_B C=S^{-1}C$. This localization is reduced: if $(c/s)^n=0$, some $t\\in S$ satisfies $tc^n=0$; then $(tc)^n=0$ in $C$, so $tc=0$ and $c/s=0$. The images of any finite $B$-generating family of $C$ span $A$ over $K$. Apply [lem-weil-pbc-finite-dim-algebra-artinian] and then [lem-sfb-reduced-artinian-residue-product] to obtain the canonical finite product of fields $A=\\prod_j L_j$. The prime $\\mathfrak q$ is disjoint from $S$; [lem-weil-pbc-localization-spectrum-embedding] supplies its corresponding prime $S^{-1}\\mathfrak q$ of $A$. In a finite product of fields a prime is a projection kernel (the coordinate idempotents show that exactly one factor survives). Its quotient is thus one field factor $L_i$. The same quotient is $S^{-1}(C/\\mathfrak q)$ by the fraction formulas, so, being a field containing $C/\\mathfrak q$, it equals $L_i=\\operatorname{Frac}(C/\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV Proposition 2.2.3(ii), reduction to a product of fields, printed p.54; Stacks Tags 00EU, 00DK, 00J6, 00JB, 00E3."
+   }
+  },
+  {
+   "text": "Apply [lem-per-tame-invariants-arbitrary-base-change] to the $B$-algebra $C$ and scalar algebra $K$. Its hypotheses hold because $H$ acts $B$-linearly and $d^{-1}\\in B$. It gives $A^H=K\\otimes_B C^H=K$, with the canonical scalar inclusion. In particular $K\\hookrightarrow A$; the algebra is nonzero since Step 6 gives its field factor. Every prime of $A$ contracts to $(0)$ in $K$, so [lem-dl-a1-finite-invariant-prime-orbits-residues], applied to $A$ and its full invariant subring $K$, shows that $H$ permutes the field factors transitively. Let $D\\subseteq H$ stabilize the factor $L_i$. Projection gives $A^H\\simeq L_i^D$: an invariant tuple is determined by its $i$-coordinate, and for $x\\in L_i^D$ its inverse tuple has coordinate $h(x)$ at the factor $h(i)$. This is well-defined because $h(i)=h'(i)$ implies $h'^{-1}h\\in D$, and it is invariant because $g(h(x))=(gh)(x)$. The identification takes the scalar copy of $K$ to its given image in $L_i$. Pass to the finite image $\\overline D\\subseteq\\operatorname{Aut}(L_i)$; it acts faithfully and $L_i^{\\overline D}=L_i^D=K$. Now [lem-wf-finite-field-action-fixed-degree] shows that $L_i/K$ is finite separable. These are precisely the component fraction fields asserted in the item.",
+   "uses": [
+    "lem-per-tame-invariants-arbitrary-base-change",
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV Proposition 2.2.3(ii)(b), last paragraph, printed p.54; Stacks Tags 0BRI and 09I3, Reynolds base change as in 0H36."
+   }
+  },
+  {
+   "text": "The map $B/\\mathfrak r\\hookrightarrow C/\\mathfrak q$ is injective by the definition of contraction. It is integral: for $c\\in C$, the polynomial $\\prod_{h\\in H}(T-h(c))$ is monic with coefficients in $B$ and vanishes at $c$; reducing modulo $\\mathfrak q$ gives a monic relation over $B/\\mathfrak r$ for every element of $C/\\mathfrak q$. Therefore [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim(B/\\mathfrak r)=\\dim(C/\\mathfrak q)=e$. By Step 5 every minimal prime of $B$ occurs this way, so all its component dimensions are $e$. Finally every finite chain of prime ideals of $B$ lies over a minimal prime contained in its first member, by [lem-weil-pbc-prime-contains-minimal-prime], and is a chain in that component quotient. Its length is at most $e$. Conversely chains in any component quotient are chains in $B$, giving $\\dim B\\ge e$. Thus $\\dim B=e$ and $B$ is equidimensional, as required.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OK, lemma-integral-sub-dim-equal; Tag 00E0, lemma-Zariski-topology; ILO IV 2.2.4, printed p.54."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-trace-one-noetherian-invariant-finiteness",
+  "lem-sfb-adic-complete-subideal",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-dl-a1-finite-invariant-prime-orbits-residues",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "pqf-lem-going-up",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-per-tame-invariants-arbitrary-base-change",
+  "lem-weil-pbc-integral-injective-dimension-equal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV Proposition 2.2.3 and paragraph 2.2.4, printed pp.53–54, with explicit completeness argument using Stacks 090T and explicit transitive-product invariant calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subring of a reduced complete Noetherian equidimensional local ring under a finite group of invertible order is complete Noetherian local and the quotient map is finite generically separable",
+   "results": "Read 8 returned hits; top results: IsArithFrobAt.arithFrobAt, Ideal.Quotient.finite_of_isInvariant, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, AlgHom.IsArithFrobAt.finite_quotient, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal, Algebra.instFiniteResidueFieldOfFormallyUnramified. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvariant\", \"IsNoetherianRing\"",
+   "results": "Read 0 returned hits; top results: . These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(noetherian|complete)|isNoetherian.*[Ii]nvariant|[Rr]eynolds",
+   "results": "Read 3 returned hits; top results: Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed rings under finite tame group actions on complete reduced local rings are finite generically etale quotients",
+   "results": "Read 8 returned hits; top results: FixedPoints.subring, Algebra.IsInvariant.isIntegral, FixedPoints.isIntegral, RingHom.QuasiFinite.of_finite, FixedPoints.finrank_eq_card, RingHom.QuasiFinite, IsGalois.of_fixed_field, instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian.*[Ff]ixed|[Ff]ixed.*isNoetherian|[Ff]ixed.*[Ii]sAdicComplete|[Ff]ixed.*equidim|[Ii]nvariant.*[Ff]inite",
+   "results": "Read 11 returned hits; top results: Mathlib/RingTheory/Frobenius.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Galois.lean. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Averaging over a finite group with invertible order makes the ring of invariants a complete local Noetherian ring and its total fraction ring extension is separable",
+   "results": "Read 8 returned hits; top results: IsGaloisGroup.to_isFractionRing, FixedPoints.isSeparable, IsGaloisGroup.iff_isFractionRing, Ideal.Quotient.finite_of_isInvariant, Algebra.IsInvariant.isIntegral, IsGaloisGroup.toFractionRing, IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.arithFrobAt. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(complete|noetherian)|fixed.*(IsAdicComplete|IsNoetherian)|Reynolds",
+   "results": "{\"t\": \"2026-10-24T08:44:25Z\", \"tool\": \"grep\", \"query\": \"invariant.*(complete|noetherian)|fixed.*(IsAdicComplete|IsNoetherian)|Reynolds\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\"], \"digest\": \"69915c90e4db3b23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant integrality, fixed-field Galois theory, or etale criteria, but not completeness and all component assertions of this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FixedPoints\", \"IsAdicComplete\"",
+   "results": "{\"t\": \"2026-10-24T08:44:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"FixedPoints\\\", \\\"IsAdicComplete\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant integrality, fixed-field Galois theory, or etale criteria, but not completeness and all component assertions of this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete Noetherian reduced local ring with a finite group action of invertible order has a complete Noetherian finite invariant subring with separable component fraction fields",
+   "results": "{\"t\": \"2026-10-24T08:44:27Z\", \"tool\": \"leanfinder\", \"query\": \"A complete Noetherian reduced local ring with a finite group action of invertible order has a complete Noetherian finite invariant subring with separable component fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"Ideal.Quotient.finite_of_isInvariant\", \"IsGaloisGroup.iff_isFractionRing\", \"arithFrobAt\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"Ring.instFiniteNormalClosure_1\", \"Algebra.IsInvariant.isIntegral_of_profinite\"], \"digest\": \"2423d9957e29da4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant integrality, fixed-field Galois theory, or etale criteria, but not completeness and all component assertions of this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant subrings of complete local Noetherian rings under finite groups of invertible order are complete local Noetherian rings finite with separable generic residue fields",
+   "results": "{\"t\": \"2026-10-24T08:45:10Z\", \"tool\": \"leansearch\", \"query\": \"Invariant subrings of complete local Noetherian rings under finite groups of invertible order are complete local Noetherian rings finite with separable generic residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsInvariantSubring.mk\", \"Algebra.IsInvariant.isIntegral\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"IsInvariantSubring\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"IsGalois.of_fixed_field\"], \"digest\": \"1b68116e240acbde\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant integrality, fixed-field Galois theory, or etale criteria, but not completeness and all component assertions of this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reynolds averaging makes the fixed ring complete for the maximal ideal topology and a finite reduced invariant ring extension generically etale",
+   "results": "{\"t\": \"2026-10-24T08:45:14Z\", \"tool\": \"leanfinder\", \"query\": \"Reynolds averaging makes the fixed ring complete for the maximal ideal topology and a finite reduced invariant ring extension generically etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePresentation\", \"Algebra.etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsStandardEtale\", \"Algebra.instIsStandardEtaleRing\"], \"digest\": \"2b49dbb0d4744ebb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant integrality, fixed-field Galois theory, or etale criteria, but not completeness and all component assertions of this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-tame-equivariant-cohen-gabber",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve: Gabber finiteness input, expanded via ILO V 3.2.1 and IV 4.3.5; tame positive-characteristic formal presentation, IV 2.2.3–2.2.6. Fixed-ring structural input, Proposition IV 2.2.3.",
+   "via": [
+    "lem-per-tame-equivariant-cohen-gabber",
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tame-fixed-ring-generic-components",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight steps reuse existing trace-one finiteness, Reynolds base change, subideal completeness, prime-orbit and integral-dimension results. Completeness is proved on compatible quotient classes, and component separability by reduced Artinian generic fibres and faithful images of stabilizers. No new nodes. No exact finished project declaration or Mathlib match was found.",
+  "blueprint": "Realizes the existing from.place: fixed-ring structural input ILO IV 2.2.3–2.2.4 for the tame positive-characteristic presentation in the chain below lem-per-artin-gabber-affine-curve. Retains the ancestor and via chain and does not change the chapter/unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-adic-complete-subideal",
+    "why": "Generic adic-completeness lemma (Stacks 090T) used with nC contained in m; the item unit has no such general completion statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative algebra dimension theorem (Stacks 00OK) applied to the injective integral component quotient maps; no unit-specific argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-adic-complete-subideal",
+  "lem-weil-pbc-integral-injective-dimension-equal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-d04b844a0",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-d04b844a0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 15 cited statements, ILO IV 2.2.2–2.2.4 (printed pp.53–54) and Stacks 090T. The delivery has no new nodes and leaves the statement unchanged; proof_deps equals the union of the steps' uses, and nothing cited depends on the item, so there is no cycle. Steps: 1 uses trace-one finiteness with u=1/|H| invariant. 2 is the Reynolds operator: JC∩B=J, local ring, residue field λ. 3 applies 090T with L=nC⊆m, which is finitely generated because C is Noetherian; the operator E maps a lift in C back into B and separatedness passes down, so B is n-adically complete. 4 passes to the faithful image of H on k, then 09I3 gives k/λ finite Galois. 5 shows minimal primes contract onto minimal primes, in both directions, using minimal-prime existence, lying over, going up and transitivity on fibres. 6 identifies the generic algebra S^{-1}C as a reduced finite K-algebra, hence a product of fields with Frac(C/q) as one factor. 7 uses base change of invariants to get A^H=K, transitivity on factors, the projection A^H≅L_i^D (checked) and the faithful image of the stabilizer, so the extension is finite separable. 8 gives dimension equality by 00OK and the chain argument for dim B=e. Edge cases checked: trivial H, non-faithful actions, F_p[[x,y]]/(xy) with the branch swap, F_p[[x]] with x↦-x. No duplicate node: lem-dl-a1-transitive-product-inertia-component does not apply because it assumes purely inseparable residue fields. Accepted tool_uses: lem-sfb-adic-complete-subideal (090T) and lem-weil-pbc-integral-injective-dimension-equal (00OK); both are generic lemmas. Batch-5 check: the trace-formula-chapter node reached is the Mathlib leaf lem-trf-noetherian-submodule-finitely-presented (submodules of finitely generated modules over a Noetherian ring), which is not part of either assumption or of their proofs, so accepted. Artin–Gabber route check: the current lem-per-artin-gabber-affine-curve uses only the finite-coefficient route, and neither the item nor the two 2026-10-19 nodes it cites is in that node's closure. The item and both nodes are reached from the targets through the live lem-sfb Gabber-alteration chain (via lem-per-tame-equivariant-cohen-gabber), and the item is not that node or one of its three children. The from.via field is stale provenance, so this is not a reason to return. Whether that sfb chain stays is a maintainer question."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TameFixedRingGenericComponents",
+  "declaration": "FixedPoints.tame_fixed_ring_generic_components",
+  "file": "lean/Sheaf/RingTheory/TameFixedRingGenericComponents.lean",
+  "statement": "theorem tame_fixed_ring_generic_components (C : Type u) [CommRing C] [IsReduced C] [IsNoetherianRing C] [IsLocalRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] (p : ℕ) [CharP C p] (hp : 0 < p) (e : ℕ) (he : 1 ≤ e) (hdim : ringKrullDim C = e) (hequidim : ∀ q : Ideal C, q ∈ minimalPrimes C → ringKrullDim (C ⧸ q) = e) (H : Type v) [Group H] [Finite H] [MulSemiringAction H C] (htame : IsUnit (Nat.card H : IsLocalRing.ResidueField C)) (B : Subring C) (hB : B = FixedPoints.subring C H) : IsReduced B ∧ IsNoetherianRing B ∧ Module.Finite B C ∧ (∃ _ : IsLocalRing B, IsLocalRing.maximalIdeal B = (IsLocalRing.maximalIdeal C).comap B.subtype ∧ IsAdicComplete (IsLocalRing.maximalIdeal B) B ∧ ∃ f : IsLocalRing.ResidueField B ≃+* FixedPoints.subfield H (IsLocalRing.ResidueField C), ∀ b : B, (f (IsLocalRing.residue B b) : IsLocalRing.ResidueField C) = IsLocalRing.residue C (b : C)) ∧ Module.Finite (FixedPoints.subfield H (IsLocalRing.ResidueField C)) (IsLocalRing.ResidueField C) ∧ Algebra.IsSeparable (FixedPoints.subfield H (IsLocalRing.ResidueField C)) (IsLocalRing.ResidueField C) ∧ (∀ q : Ideal C, q ∈ minimalPrimes C → q.comap B.subtype ∈ minimalPrimes B) ∧ (∀ r : Ideal B, r ∈ minimalPrimes B → ∃ q : Ideal C, q ∈ minimalPrimes C ∧ q.comap B.subtype = r) ∧ (∀ q : PrimeSpectrum C, q.asIdeal ∈ minimalPrimes C → ringKrullDim (B ⧸ q.asIdeal.comap B.subtype) = e ∧ ∃ a : Algebra (q.asIdeal.comap B.subtype).ResidueField q.asIdeal.ResidueField, algebraMap (q.asIdeal.comap B.subtype).ResidueField q.asIdeal.ResidueField = Ideal.ResidueField.map (q.asIdeal.comap B.subtype) q.asIdeal B.subtype rfl ∧ Module.Finite (q.asIdeal.comap B.subtype).ResidueField q.asIdeal.ResidueField ∧ Algebra.IsSeparable (q.asIdeal.comap B.subtype).ResidueField q.asIdeal.ResidueField) ∧ ringKrullDim B = e ∧ (∀ r : Ideal B, r ∈ minimalPrimes B → ringKrullDim (B ⧸ r) = e)",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30c34c16f",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Clause-by-clause match of FixedPoints.tame_fixed_ring_generic_components against the node / ILO IV 2.2.3–2.2.4. All hypotheses match: hdim is redundant (implied by hequidim); CharP+0<p forces p prime for reduced local C; tameness is imposed in k; H in its own universe; B pinned to FixedPoints.subring. Every conclusion clause is present: reduced, Noetherian, finite, local with m∩B, adic-complete, residue iso pinned by residue formula onto k^H (Mathlib's induced action), k/λ finite separable, minimal primes contract onto minimal primes, component dims e, Frac(C/q)/Frac(B/r) finite separable with algebra pinned to Ideal.ResidueField.map, dim B=e, equidimensional. Statement verbatim; only the node's lean field changed; no new defs, sorry only, docstrings with source/blueprint/steps; no duplicate found in side-live or Mathlib. Not recompiled (no file changed). Maintainer note: proof dep lem-per-tame-invariants-arbitrary-base-change's lean record points to a withdrawn module (proof-only)."
+ }
+}

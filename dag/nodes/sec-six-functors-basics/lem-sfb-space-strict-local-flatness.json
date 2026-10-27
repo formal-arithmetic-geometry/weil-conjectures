@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-space-strict-local-flatness",
+ "kind": "statement",
+ "title": "Etale local rings on charts and flat morphisms of algebraic spaces",
+ "statement": "Let $S$ be a scheme and $X,Y$ algebraic spaces over $S$ [def-trf-algebraic-space]. For a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ (where $\\Omega$ is algebraically closed), write $\\mathcal O_{X,\\bar x}$ for the stalk of the structure sheaf of the small etale site. If $e:T\\to X$ is an etale map from a scheme and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ lifts $\\bar x$, with image $t\\in T$, there are canonical isomorphisms $\\mathcal O_{X,\\bar x}\\cong\\mathcal O_{T,\\bar t}\\cong\\mathcal O_{T,t}^{\\mathrm{sh}}$. The last ring is the strict henselization of the local ring at $t$, for the residue-field embedding furnished by $\\bar t$ [lem-weil-pbc-strict-henselization-triples]. For a morphism $g:X\\to Y$, put $\\bar y=g\\bar x$. The induced map $\\mathcal O_{Y,\\bar y}\\to\\mathcal O_{X,\\bar x}$ is a local ring homomorphism, and it is flat if and only if $g$ is flat at the image $x\\in|X|$ [def-weil-pbc-flat-ring-map], [def-weil-flat-morphism]. Here $g$ is flat at $x$ when there are etale maps $U\\to X$, $V\\to Y$ from schemes, a morphism $h:U\\to V$ compatible with $g$, and a point $u\\in U$ over $x$ at which $h$ is flat [def-weil-flat-morphism]; this does not depend on the choices. Etaleness means [def-weil-etale-morphism] on scheme charts; a local homomorphism maps the maximal ideal into the maximal ideal.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 04KG (definition-etale-local-rings), 04KF (lemma-describe-etale-local-ring), and 04NG (lemma-flat-at-point-etale-local-rings). Locality follows from spaces-properties.tex Tag 04KJ (lemma-morphism-locally-ringed), on the locally ringed sites of Tag 04KH (lemma-etale-site-locally-ringed)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-flat-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-space-flat-at-point",
+  "def-sfb-space-geometric-stalk-models",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "For strictLocalChartComparison apply lem-sfb-space-chart-germ-cocone to the existing ring cocone of stalkModel s x. It supplies a natural transformation γ on the actual affine pointed scheme-neighbourhood diagram, its germ formula, and a compatible small refinement for every neighbourhood. By lem-sfb-space-chart-germ-cocone-is-colimit this cocone is colimiting. IsColimit.coconePointUniqueUpToIso compares it with the existing scheme colimit; precompose with smallStrictHenselizationColimitIso to get the ring equivalence from strictHenselizationRing. Its coprojection identity is exactly the requested germ formula after the inverse comparison in strictLocalSchemeGerm cancels. For uniqueness, for each affine N choose the supplied compatible M,a. The two candidate equivalences have equal composites with the N-germ by their stipulated formulas. Cancel the small comparison isomorphism and apply colimit hom-ext to deduce equality of the ring homomorphisms and hence of the ring equivalences. This proves both existence and uniqueness without using either strict-henselization presentations or flatness.",
+   "uses": [
+    "lem-sfb-space-chart-germ-cocone",
+    "lem-sfb-space-chart-germ-cocone-is-colimit",
+    "def-sfb-space-geometric-stalk-models",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04KF, lemma-describe-etale-local-ring, first equality; Tag 04K2, lemma-stalk-pullback (4), direct proof on pointed neighbourhoods."
+   }
+  },
+  {
+   "text": "For any scheme $T$ and geometric point $\\bar t$ centered at $t$, restrict the stalk colimit to affine pointed neighbourhoods by [lemma-weil-pbc-affine-neighbourhood-cofinal]. Choose an affine open $\\operatorname{Spec}D\\subset T$ containing $t$, with prime $\\mathfrak p$ and separable residue closure $K\\subset\\Omega$. By [lem-weil-pbc-etale-local-ring-triples] the resulting ring colimit is canonically the colimit of etale residue triples over $(D,\\mathfrak p,K)$, preserving its section maps. By [lem-weil-pbc-strict-henselization-triples] this colimit $C$ is local and evaluation $\\psi:C\\to K$ is surjective with kernel $\\mathfrak m_C$. Clause (c) of [lem-weil-pbc-affine-open-stalk-localization] identifies $D_{\\mathfrak p}$ with $\\mathcal O_{T,t}$ through the germ map. Applying [lem-sbc-etale-triples-localized-strict-henselization] to the cocone of triples over $(D,\\mathfrak p,K)$ with $b:D\\to C$ the leg of $\\operatorname{Spec}D$, the ring $C$ is a strict henselization of $D_{\\mathfrak p}=\\mathcal O_{T,t}$ in the sense of [def-sc-ring-strict-henselization], with $D\\to D_{\\mathfrak p}\\to C$ equal to $b$; since $D\\to D_{\\mathfrak p}$ is a localization, the map $\\mathcal O_{T,t}\\to C$ is the germ map. By [lem-sc-etale-triples-colimit-is-strict-henselization] for the local ring $\\mathcal O_{T,t}$ at its maximal ideal, the triples colimit over $\\mathcal O_{T,t}$ is also such a strict henselization; two vertices of universal colimit cocones of the same diagram are isomorphic as $\\mathcal O_{T,t}$-algebras, so $C\\cong\\mathcal O_{T,t}^{\\mathrm{sh}}$ as in the statement. This proves the second claimed isomorphism with the prescribed residue embedding. In particular the evaluation $\\mathcal O_{T,\\bar t}\\to\\Omega$ has kernel its unique maximal ideal. Together with step 1 this gives the same assertion for $\\mathcal O_{X,\\bar x}$.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-etale-triples-localized-strict-henselization",
+    "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), via Tags 03PQ and 04GW; the residue evaluation is Tag 04GP, as stated in the triples node."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $b:V\\to Y$ [def-trf-algebraic-space] and then $a:U\\to X$, $h:U\\to V$ with $bh=ga$, $a$ surjective etale, by the unconditional presentation-existence clause of [lem-sfb-unramified-etale-compatible-charts]. Since $a$ is surjective, the scheme $U\\times_{X,\\bar x}\\operatorname{Spec}\\Omega$ is nonempty; the image in $U$ of one of its points is a point $u$ over $x$. The lemma [lem-sfb-etale-geometric-point-specified-lift] lifts the fixed $\\bar x$ to $\\bar u:\\operatorname{Spec}\\Omega\\to U$ centered at this $u$; put $\\bar v=h\\bar u$ and $v=h(u)$. More generally the same lifting applies to any compatible chart and any of its points over $x$. Write $A=\\mathcal O_{V,v}$, $B=\\mathcal O_{U,u}$, $A^{\\mathrm{sh}}=\\mathcal O_{Y,\\bar y}$ and $B^{\\mathrm{sh}}=\\mathcal O_{X,\\bar x}$ by steps 1 and 2. The induced square $A\\to A^{\\mathrm{sh}}$, $B\\to B^{\\mathrm{sh}}$, with vertical arrows induced by $h$ and $g$, commutes: the map $A^{\\mathrm{sh}}\\to B^{\\mathrm{sh}}$ sends the germ of a regular function $s$ on a pointed etale $V$-neighbourhood $(W,\\bar w)$ of $\\bar v$ to the germ of $\\mathrm{pr}_1^*s$ on the pointed etale $U$-neighbourhood $(W\\times_VU,(\\bar w,\\bar u))$, which is pointed because $\\bar w$ and $\\bar u$ both map to $\\bar v$; this respects transition maps, and via step 1 it is the map induced by $g$ on algebraic-space stalks, since $bh=ga$. Thus both composites send every representing germ to the same pulled-back germ.",
+   "uses": [
+    "lem-sfb-unramified-etale-compatible-charts",
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex; literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04NG (lemma-flat-at-point-etale-local-rings), chosen presentation and local-ring square; Tag 05VN for the specified lift, and spaces.tex Tag 02X1 for presentations."
+   }
+  },
+  {
+   "text": "The induced homomorphism $A^{\\mathrm{sh}}\\to B^{\\mathrm{sh}}$ is local. Indeed the evaluations $\\epsilon_Y:A^{\\mathrm{sh}}\\to\\Omega$ and $\\epsilon_X:B^{\\mathrm{sh}}\\to\\Omega$ have the maximal ideals as their kernels by step 2. On a regular-function representative, pulling back along $h$ and then evaluating at $\\bar u$ is evaluation at $h\\bar u=\\bar v$. Hence $\\epsilon_X\\circ g^\\sharp=\\epsilon_Y$. It follows that $(g^\\sharp)^{-1}(\\mathfrak m_{B^{\\mathrm{sh}}})=\\mathfrak m_{A^{\\mathrm{sh}}}$; in particular $g^\\sharp$ sends the maximal ideal into the maximal ideal, as required. The chart-stalk maps used here preserve evaluation by step 1, so this calculation is for the stipulated map on algebraic-space stalks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04KJ (lemma-morphism-locally-ringed), localness on geometric stalks; the evaluation-kernel proof uses the already established chart identifications."
+   }
+  },
+  {
+   "text": "By step 2, $A^{\\mathrm{sh}}$ and $B^{\\mathrm{sh}}$ are, as $A$- and $B$-algebras, the triples colimits over the local rings $A$ and $B$ at their maximal ideals, and strict henselizations in the sense of [def-sc-ring-strict-henselization]. Apply [lem-sc-strict-henselization-faithfully-flat] to the local rings $A$ and $B$. In particular $B\\to B^{\\mathrm{sh}}$ is faithfully flat. If $B$ is flat over $A$, transitivity [lem-pc-module-flat-transitive] makes $B^{\\mathrm{sh}}$ flat over $A$. Conversely, if $B^{\\mathrm{sh}}$ is flat over $A$, [lem-weil-pbc-flat-algebra-faithfully-flat-descent] applied to $A\\to B\\to B^{\\mathrm{sh}}$ makes $B$ flat over $A$. Finally [lem-sfb-strict-henselization-module-flatness], applied to the $A^{\\mathrm{sh}}$-module $B^{\\mathrm{sh}}$ in the commutative square of step 3, gives flatness over $A$ if and only if flatness over $A^{\\mathrm{sh}}$. Therefore $h$ is flat at $u$ exactly when the stipulated map $\\mathcal O_{Y,\\bar y}\\to\\mathcal O_{X,\\bar x}$ is flat, by [def-weil-flat-morphism]. This holds for every compatible chart and every $u$ over $x$, while step 3 supplies at least one. It follows that the existential chart definition is equivalent to flatness of the stipulated stalk map, proving geometricStalk_flat_iff. The separate declaration flatAt_iff_chart_stalk is proved directly in steps 6-8 below.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "lem-sfb-strict-henselization-module-flatness",
+    "def-weil-flat-morphism",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 04NG (lemma-flat-at-point-etale-local-rings), final paragraph, using 07QM, algebra.tex 039V and flat.tex 05VL."
+   }
+  },
+  {
+   "text": "For flatAt_iff_chart_stalk use a direct refinement argument, independent of the three preceding strict-local assertions. First prove that PointRepresentative.Rel [def-a1-algebraic-space-point-classes] is an equivalence: reflexivity and symmetry use identity and exchanged maps. For transitivity, two common fields over the middle representative have a nonempty scheme fibre product over its field spectrum; a residue field at a point of this fibre product gives a common extension, and the presheaf composition law transports the two equalities. Existence of the point is Scheme.exists_preimage_of_isPullback from the fibre-product point description [lem-weil-pbc-fibre-product-points]. Thus Quot.eqvGen_exact and Equivalence.eqvGen_iff turn equality of two scheme image classes into an actual common-field agreement. Evaluate the represented presheaf pullback on that field: Types.exists_of_isPullback lifts the compatible maps, and the unique points of the field spectra map to the two prescribed scheme points.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BU, common-field equivalence of points; Tag 03H4, lemma-points-cartesian; Tag 01JT, points of a fibre product."
+   }
+  },
+  {
+   "text": "In a commutative square of scheme maps a h = k b with a and b etale, compare the flatness of the two horizontal stalk maps at w and a(w). Precomposition with a does not change flatness: its stalk map is flat and local, hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat], so [lem-weil-pbc-flat-algebra-faithfully-flat-descent] proves descent, and composition of flat ring maps proves ascent. Postcomposition with b does not change flatness by [lem-trf-etale-local-ring-flatness], applied to the source stalk as a module over the intermediate stalk. Scheme.Hom.stalkMap_comp expresses both comparisons; rewriting along the square equality gives the horizontal equivalence.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "lem-trf-etale-local-ring-flatness",
+    "lem-pc-module-flat-transitive",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex; literature/stacks-project/flat.tex",
+    "place": "Descent lemma-flat-at-point; Flat Modules Tag 05BA, lemma-etale-flat-up-down-local-ring."
+   }
+  },
+  {
+   "text": "Unpack the existential chart witness U′ -> V′ of MapIsFlatAt [def-sfb-space-flat-at-point]. Scheme-test etaleness [def-trf-algebraic-space] represents W = U times_X U′ and Z = V times_Y V′. Both projections of each square are etale: comparing a given representing square with the one supplied by the opposite etale chart gives a unique Yoneda isomorphism, and scheme etaleness respects that isomorphism. The preceding common-field argument gives w in W over the two prescribed points. The two original chart equations induce k : W -> Z by the pullback universal property. Its two projection equations give commutative etale source-and-target squares with both original chart maps. Apply the preceding scheme stalk equivalence to each square and compose the equivalences to transfer flatness from the witness to the specified chart. Conversely the specified chart and its assumed flat stalk map are directly a witness for MapIsFlatAt. No surjectivity of the charts or finiteness of the spaces is used.",
+   "uses": [
+    "def-sfb-space-flat-at-point",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "lemma-local-source-target-at-point, proof by common etale chart refinements, specialized to the flatness definition preceding Tag 04NG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-chart-germ-cocone",
+  "lem-sfb-space-chart-germ-cocone-is-colimit",
+  "def-sfb-space-geometric-stalk-models",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-category-colimit",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "def-sc-ring-strict-henselization",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "def-trf-algebraic-space",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-sfb-strict-henselization-module-flatness",
+  "def-weil-flat-morphism",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-trf-etale-local-ring-flatness",
+  "def-sfb-space-flat-at-point",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 04KF, 04KJ and 04NG; scheme comparison 04HX and module comparison 05VL. The germ maps and evaluation calculation are written out explicitly. The first three Lean theorems retain the original plan. E6 proves flatAt_iff_chart_stalk directly by common field and etale scheme chart refinements, as in spaces-morphisms lemma-local-source-target-at-point and descent lemma-flat-at-point; target-stalk scalar restriction is Tag 05BA. S5 decomposes the first chart comparison into extension of the germ cocone and its universality; the final colimit isomorphism, germ identity and uniqueness are fully formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of algebraic spaces induces flat local maps on etale strict local rings, which are strict henselizations of local rings in etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of maps on geometric stalks of the structure sheaf of algebraic spaces and strict henselizations on etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.?henseli|etale.?local.?ring|algebraic.?space",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism of algebraic spaces induces flat local maps on etale strict local rings, which are strict henselizations of local rings in etale scheme charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat morphisms of algebraic spaces are detected by flat homomorphisms on geometric etale local rings identified with strict henselizations on etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of the structure sheaf on algebraic spaces and pointwise flatness on scheme presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.?henseli|algebraic.?space|etale.?local.?ring",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of algebraic spaces detected on strict local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ (P : Ideal S) [P.IsMaximal], Flat R (Mₚ P)) : Module.Flat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationSpanTarget Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or standard-etale presentation results do not state this assertion for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-fibre-regular-slice-flat",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation. Supporting input: Etale local rings on charts and flat morphisms of algebraic spaces.",
+   "via": [
+    "lem-sfb-stack-fibre-regular-slice-flat",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-strict-local-flatness",
+  "worker": "stage1",
+  "summary": "Unchanged statement split into five steps: explicit inverse chart germ maps, affine residue triples and localization, compatible pointed presentations, evaluation-kernel locality, and faithful flatness plus scalar-restriction flatness. Two genuine supporting nodes, 05VN and 05VL, remain statement-only; no ring-chart clause is moved to a new node. Maintainer-reader FIX: step 2 cites the localized-triples and local-triples strict-henselization comparisons; step 3 names the atlas, the point u and the pullback germ map explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation. Supporting input: Etale local rings on charts and flat morphisms of algebraic spaces. The current latest blueprint direct-images proof (3) is retained as ancestor context; this split supplies the strict-local calculation already requested by the live stable-curve/slice branch. The existing created.item chain has no surviving blueprint_kind ancestor, so the computed null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products give the scheme charts needed to write the two inverse germ maps. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic affine cofinality for scheme geometric stalks, used only to compute a chart structure-sheaf stalk. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic pointed-neighbourhood to residue-triples comparison on a scheme chart. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic algebraic strict-henselization and residue-kernel calculation. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic scheme stalk/localization identification, through its canonical germ map. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic local-algebra faithful flatness of the structural map to the strict henselization. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "why": "Generic flatness descent for A to B to Bsh, rather than a replacement of a unit-level argument. No node of this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-sbc-etale-triples-localized-strict-henselization",
+    "why": "Generic identification of the triples colimit over an affine chart ring at a prime with the strict henselization of the localization; used in step 2 to identify the chart stalk with the strict henselization of the scheme local ring. No node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "why": "Generic comparison of the triples colimit over a local ring with the pairs-colimit strict henselization, so that the faithful-flatness node and the new 05VL node apply to the same rings. No node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-sc-etale-triples-colimit-is-strict-henselization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-e0ad19649",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-e0ad19649 (reviewer sub-agent of L); spot-checked: I read Stacks 04KF, 04NG, 05VN and 05VL (statements and proofs). The item's statement and stmt_deps are unchanged and it is not a re-split. Steps 1, 4 and 5 follow 04KF and 04NG; I checked the inverse germ maps on representatives and the kernels of evaluation into Omega. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-strict-local-flatness.json. (1) C4, step 2: it claimed the colimit of triples over (D,p) is (D_p)^sh, citing only a parenthetical remark in lem-weil-pbc-strict-henselization-triples. Nothing cited linked that colimit to the strict henselization of the local ring O_{T,t}, which the faithful-flatness node (triples over a local ring) and the new 05VL node (def-sc pairs) both need. Step 2 now cites lem-sbc-etale-triples-localized-strict-henselization (with b the Spec D leg), lem-sc-etale-triples-colimit-is-strict-henselization at p=m, and def-sc-ring-strict-henselization. Step 5 recalls these identifications. (2) E5, step 3: the source of the atlas b, the existence of u over x and the pullback germ map were left vague. Step 3 now cites def-trf-algebraic-space for b, gets u from the nonempty U x_X Spec Omega, and writes the map as s on (W,w) going to pr1*s on (W x_V U,(w,u)). proof_deps is recomputed and two tool_uses entries are added. New nodes: lem-sfb-etale-geometric-point-specified-lift is 05VN for representable etale maps; it is true, self-contained and statement-only (tested on empty U, the identity, and a split fibre). lem-sfb-strict-henselization-module-flatness is 05VL (1)<=>(3) with S=Spec R; it is true and adds no Noetherian hypothesis (tested on fields, M=0 and non-Noetherian R). Neither duplicates an existing node or restates the item. Batch-5 flags: def-trf-algebraic-space is a definition. lem-trf-space-fibre-products-etale-covers is generic algebraic-space foundations. The closure of lem-sfb-stack-chartwise-smooth-etale-calculus reaches sec-trace-formula and sec-poincare-duality only through 41 foundational sk-i-curve-zero, sk-i-additivity and sk-lem-finite nodes (spaces, Proj, projective bundles, module local constancy), with no step of either assumption's proof. All three are accepted. The two added nodes reach neither chapter.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceStrictLocalFlatness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.geometricStalk_flat_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceStrictLocalFlatness.lean",
+  "statement": "theorem geometricStalk_flat_iff {S : Scheme.{u}} {X Y : AlgebraicSpace S} (g : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj) : ∃ (_ : IsLocalRing (stalkRing s x)) (_ : IsLocalRing (stalkRing s (x ≫ g.hom.hom))), IsLocalHom (stalkMap g s x) ∧ ((stalkMap g s x).Flat ↔ MapIsFlatAt g (Quot.mk _ ⟨Ω, s, yonedaEquiv x⟩))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.strictLocalSchemeGerm",
+   "AlgebraicGeometry.AlgebraicSpace.schemeStrictLocal_presentation",
+   "AlgebraicGeometry.AlgebraicSpace.strictLocalChartComparison",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStalk_flat_iff",
+   "AlgebraicGeometry.AlgebraicSpace.flatAt_iff_chart_stalk"
+  ],
+  "note": "The four theorems jointly state every clause: the scheme stalk has a germ- and residue-normalized strict-henselization presentation; the chart comparison is the unique germ-preserving ring isomorphism; the canonical existing space stalk map is local and detects flatness at the underlying point; and the existential chart definition agrees with every chart and point over that class. strictLocalSchemeGerm is the existing affine colimit leg transported by the upstream canonical comparison. No proofs are supplied. Repair N4 (2026-10-24): strictLocalSchemeGerm takes the leg of strictHenselizationDiagram on the actual affine pointed neighbourhood, then composes with smallStrictHenselizationColimitIso.inv into strictHenselizationRing. This restores the quarantined attachment after the upstream diagram rename."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-042203b52",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Item changed only in lean and stmt_deps (+ new def-sfb-space-flat-at-point, + three landed nodes); dependency records identical to side-live; lean.statement verbatim. Clause check: both stalks local and stalk map local (IsLocalHom); flat iff MapIsFlatAt at the actual image point class; first iso is the unique germ-preserving ring equivalence (strictLocalChartComparison, existence and uniqueness checked via colimit legs and affine refinement); second iso is a StrictHenselizationPresentationIn.{u,u} with algebra map pinned on germs and K/eta pinned by the residue-embedding and evaluation equations; flatAt_iff_chart_stalk gives independence of charts and points. MapIsFlatAt has real content and matches Stacks 03ML(2)/04NC/04NG and the field rule; no existing pointwise space flatness (MapIsFlat global, ModuleIsFlatOver module, moduleFlatAt schemes only). strictLocalSchemeGerm is the upstream colimit leg moved across the canonical final-functor iso. No extra hypotheses, universes bound, sorry-only, docstrings with source and blueprint. Advisory: point-classes node reached only through the new stmt_dep; two proof prerequisites have no Lean record yet. No compile run (no change made)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T092604-L-3445471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-marked-nodal-infinitesimal-fields",
+ "kind": "statement",
+ "title": "Infinitesimal marked automorphisms and normalized vector fields",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $C$ be a proper connected reduced $\\Omega$-scheme of pure dimension one with only nodes [def-weil-proper-morphism, def-weil-connected-scheme, def-pc-reduced-scheme, def-kun-topological-krull-dimension]; a node has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $p_1,\\ldots,p_n$ be distinct smooth $\\Omega$-points [def-sbc-smooth-morphisms], possibly none. Let $\\nu:\\widetilde C\\to C$ be the normalization [def-weil-pbc-reduced-normalization], and write $\\widetilde C=\\coprod_a C_a$ for its smooth projective connected components. Put $E_a\\subset C_a(\\Omega)$ equal to the inverse images of the nodes together with the inverse images of the $p_i$. Let $A$ be the group of automorphisms of $C_{\\Omega[\\epsilon]/(\\epsilon^2)}$ over the dual numbers [def-sc-dual-numbers] that reduce to the identity on $C$ and fix each constant marked section. There is a canonical additive identification $A\\cong\\bigoplus_a\\operatorname{Der}_\\Omega(\\mathcal O_{C_a},\\mathcal O_{C_a};E_a)$. A derivation here is an $\\Omega$-linear map of sheaves satisfying the Leibniz rule, and the suffix $E_a$ means that it preserves the ideal sheaf of each point of $E_a$. On a smooth proper connected curve of genus $g$ [def-pc-genus], a nonzero derivation has no such fixed point if $g=1$, has at most two if $g=0$, and cannot exist if $g\\ge2$. Consequently $A$ is trivial if $2g(C_a)-2+\\#E_a>0$ for every $a$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0E67 (lemma-smooth-vector-fields), 0E68 (lemma-nodal-vector-fields); the infinitesimal identification uses more-morphisms.tex Tag 02H5 (lemma-action-by-derivations). Marked-point restriction is the ideal-preservation condition in the introduction to section-vector-fields."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-dual-numbers",
+  "def-pc-genus",
+  "def-sfb-curve-vector-fields-fixing-points",
+  "def-sfb-marked-infinitesimal-automorphisms",
+  "def-weil-pure-dimension",
+  "def-sfb-stable-pointed-curve"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=\\Omega$ and $R=k[\\epsilon]/(\\epsilon^2)$. On $\\mathcal O_C\\oplus\\epsilon\\mathcal O_C$, an $R$-automorphism reducing to the identity is uniquely $a+\\epsilon b\\mapsto a+\\epsilon(b+D(a))$. Multiplicativity is the Leibniz rule and fixing $R$ is $k$-linearity. Conversely this formula glues and has inverse $-D$; it defines local maps since reduction is the identity. Composition adds derivations. Fixing the constant section at $p_i$ says $D(a)(p_i)=0$ for every $a$, equivalently $D(\\mathcal I_{p_i})\\subseteq\\mathcal I_{p_i}$ since $D$ kills $k$. Thus $A$ is the additive group of derivations on $C$ fixing the marked ideals.",
+   "uses": [
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H5 (lemma-action-by-derivations), direct verification for the split dual-number thickening; curves.tex section-vector-fields, definition of fixes"
+   }
+  },
+  {
+   "text": "If $C$ is empty the identification is trivial. Otherwise apply the completed normalization model: there are finitely many smooth projective components, the node set is finite, normalization is an isomorphism off it, and at each node its semilocal normalization ring and completion satisfy exactly the hypotheses of the local descent lemma. All sets $E_a$ are finite.",
+   "uses": [
+    "lem-sfb-nodal-completed-normalization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), normalization setup; varieties.tex Tag 0C3V (lemma-normalization-same-after-completion); completed replacement of the uncompleted stalk assertion"
+   }
+  },
+  {
+   "text": "Apply local derivation descent at every node to extend a derivation of $C$ uniquely to its normalization, fixing both branch points; conversely descend a derivation fixing those branch points. Off nodes use the normalization isomorphism. These local maps glue: in rational-function rings their restrictions are the unique quotient-rule extension, so they agree on overlaps. They are inverse and additive by the same uniqueness. At each smooth marking the isomorphism identifies the two point ideals. Finally a sheaf derivation on a finite disjoint union is a tuple of derivations; the finite product of additive groups equals their direct sum. Together with step 1 this gives the asserted canonical identification.",
+   "uses": [
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-sfb-nodal-derivation-local-descent",
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), globalization; section-vector-fields, fixed-point definition; more-algebra.tex Tag 07PE for restriction uniqueness"
+   }
+  },
+  {
+   "text": "For a smooth proper connected curve, apply the tangent zero-divisor lemma. For every nonzero derivation its fixed points are exactly the support of an effective divisor with degree $2-2g$, each contributing at least one. For $g\\ge2$ the negative degree is impossible; for $g=1$ degree zero leaves no fixed point; for $g=0$ degree two permits at most two. This proves all three bounds.",
+   "uses": [
+    "lem-sfb-smooth-derivation-zero-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E67 (lemma-smooth-vector-fields), degree argument; Tag 0BS6 (lemma-rr); divisors.tex Tags 02SF and 0BE6, divisor of a rational section"
+   }
+  },
+  {
+   "text": "The inequality $2g(C_a)-2+\\#E_a>0$ requires at least three special points in genus zero and at least one in genus one. The bounds of step 4 therefore kill every summand in step 3, including all genera at least two, and $A$ is trivial. If there are no markings only branch points enter $E_a$; if there are no nodes normalization is an isomorphism, so the construction also covers these cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E67 and Tag 0E68, arithmetic consequence for marked curves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-dual-numbers",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-sfb-nodal-derivation-local-descent",
+  "lem-sfb-smooth-derivation-zero-divisor",
+  "lem-weil-pbc-derivation-extends"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0E67 and 0E68, with direct split dual-number calculation (02H5) and correction of the uncompleted branch-stalk argument in 0E68 using 0C3V and 07PE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal automorphisms of a marked nodal curve are vector fields on its normalization vanishing at special points",
+   "results": "{\"t\": \"2026-10-22T03:45:05Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal automorphisms of a marked nodal curve are vector fields on its normalization vanishing at special points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.Extension.homInfinitesimal\", \"StandardEtalePair.instFormallyEtaleRing\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"97fe26aaa8379d41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract ring derivations, normalization maps, formally unramified morphisms, manifold tangent bundles or Weierstrass equations; none identifies nodal curve infinitesimal automorphisms or bounds vector-field zeros."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation\"",
+   "results": "{\"t\": \"2026-10-22T03:45:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.PolyDerivation\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.input\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.p\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.normEq0\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.step\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.denoteExpr\", \"Derivation\", \"Derivation.instAdd\"], \"digest\": \"2aa0a850a6b9bcbe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract ring derivations, normalization maps, formally unramified morphisms, manifold tangent bundles or Weierstrass equations; none identifies nodal curve infinitesimal automorphisms or bounds vector-field zeros."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|vector.field|infinitesimal.*automorphism",
+   "results": "{\"t\": \"2026-10-22T03:45:03Z\", \"tool\": \"grep\", \"query\": \"nodal|vector.field|infinitesimal.*automorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract ring derivations, normalization maps, formally unramified morphisms, manifold tangent bundles or Weierstrass equations; none identifies nodal curve infinitesimal automorphisms or bounds vector-field zeros."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable marked nodal curves have no infinitesimal automorphisms because tangent line bundles have negative degree",
+   "results": "{\"t\": \"2026-10-22T03:45:03Z\", \"tool\": \"leansearch\", \"query\": \"Stable marked nodal curves have no infinitesimal automorphisms because tangent line bundles have negative degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified\", \"instContMDiffVectorBundleSomeENatTopTangentSpaceOfIsManifold\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"WeierstrassCurve.c₄_of_isShortNF\", \"WeierstrassCurve.IsCharTwoJNeZeroNF.a₄\", \"instContMDiffVectorBundleOfNatWithTopENatTangentSpaceOfIsManifold\"], \"digest\": \"e50891c5baabd8be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract ring derivations, normalization maps, formally unramified morphisms, manifold tangent bundles or Weierstrass equations; none identifies nodal curve infinitesimal automorphisms or bounds vector-field zeros."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derivations of a proper nodal curve lift to the normalization and vanish at the two branches of every node",
+   "results": "{\"t\": \"2026-10-22T03:45:08Z\", \"tool\": \"leanfinder\", \"query\": \"Derivations of a proper nodal curve lift to the normalization and vanish at the two branches of every node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"aeval_derivative_mem_differentIdeal\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"816eb12128743296\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract ring derivations, normalization maps, formally unramified morphisms, manifold tangent bundles or Weierstrass equations; none identifies nodal curve infinitesimal automorphisms or bounds vector-field zeros."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|vector.field|infinitesimal.*automorphism",
+   "results": "{\"t\": \"2026-10-22T04:03:32Z\", \"tool\": \"grep\", \"query\": \"nodal|vector.field|infinitesimal.*automorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonzero vector fields on smooth proper curves have at most two zeros in genus zero and no zeros in genus one",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"leansearch\", \"query\": \"Nonzero vector fields on smooth proper curves have at most two zeros in genus zero and no zeros in genus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorField.mpullback_zero\", \"VectorField.mpullbackWithin_zero\", \"isIntegralCurve_const\", \"apply_eq_zero_of_analyticOrderNatAt_ne_zero\", \"VectorField.lieBracket_eq_zero_of_eq_zero\", \"VectorField.lieBracket_zero_left\", \"RayVector\", \"VectorField.mlieBracket_zero_left\"], \"digest\": \"76c2e9f784efdcdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation\"",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.PolyDerivation\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.input\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.p\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.normEq0\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.step\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.denoteExpr\", \"Derivation\", \"Derivation.instAdd\"], \"digest\": \"2aa0a850a6b9bcbe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derivations on a proper smooth curve vanish if the tangent bundle has negative degree",
+   "results": "{\"t\": \"2026-10-22T04:03:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derivations on a proper smooth curve vanish if the tangent bundle has negative degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"SmoothBumpCovering.embeddingPiTangent_ker_mfderiv\", \"WeierstrassCurve.Affine.derivative_addPolynomial_slope\", \"WeierstrassCurve.Affine.Nonsingular\", \"Differential.logDeriv_eq_zero\"], \"digest\": \"ba2e08d1cef152fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked infinitesimal automorphisms of a nodal curve are derivations of its normalization preserving branch and marked point ideals",
+   "results": "{\"t\": \"2026-10-22T04:03:39Z\", \"tool\": \"leanfinder\", \"query\": \"Marked infinitesimal automorphisms of a nodal curve are derivations of its normalization preserving branch and marked point ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero_mk_apply'\", \"derivationToSquareZeroEquivLift\", \"Algebra.Extension.toInfinitesimal\", \"Algebra.Extension.homInfinitesimal\", \"liftOfDerivationToSquareZero_mk_apply\", \"derivationToSquareZeroOfLift\", \"Algebra.Extension.infinitesimal\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"8694bd08853aaba8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroEquivLift|def Derivation",
+   "results": "{\"t\": \"2026-10-22T04:03:48Z\", \"tool\": \"grep\", \"query\": \"derivationToSquareZeroEquivLift|def Derivation\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\"], \"digest\": \"aa723e818a764bc4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero ring lifts, abstract derivations, Weierstrass equations and differential-geometric vector fields do not prove the marked nodal scheme identification and all genus bounds; the square-zero formula is proved directly in step 1"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-marked-nodal-infinitesimal-fields",
+  "worker": "stage1",
+  "summary": "Repair of the 2026-10-22 human re-split return. Statement unchanged. Three comparable statement-only jobs carry old steps 2--3, 4--6 and 8--9; all original arguments are preserved verbatim in report.md with their assignment and cited prerequisites. The short parent assembles dual numbers, local descent and gluing, zero counting and stability. No Lean changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derivation-extends",
+    "why": "Generic uniqueness and quotient rule for localization make the local maps agree on overlaps; this retains the existing marked-curve rigidity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-uniformizer-differential-basis",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-canonical-degree",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-line-bundle-rational-section",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-trf-curve-normalization-completion",
+  "lem-trf-ordinary-point-delta-branches",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-power-series-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-completion-dimension",
+  "lem-kun-closed-point-field",
+  "lem-sc-proper-dim-one-projective",
+  "lem-trf-normalization-singular-skyscraper"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-d2693ea01",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-d2693ea01 (reviewer sub-agent of L); spot-checked: The re-split meets the 2026-10-21 note. The base proof's 10 steps (landed N0 text) are copied verbatim into the report and reallocated: old steps 2-3 go to lem-sfb-nodal-completed-normalization-model, 4-6 to lem-sfb-nodal-derivation-local-descent, and 8-9 to lem-sfb-smooth-derivation-zero-divisor. These are three separate lemmas of comparable size (about 2.9k, 3.0k and 2.2k old characters); none restates the item or one of its clauses. The parent is a 2485-character assembly. It keeps old step 1 (the elementary dual-number verification, same content), old step 7 (gluing, markings, direct sum, every clause kept) and old step 10. The item statement is unchanged. The item is not dropped and not superseded. No SGA source is used. I checked the sources against Stacks curves 0E67/0E68/0C1E, varieties 0C3V, more-algebra 07PE and algebra 00MC/05CK/0BI0. Model node: the completed node is the equal-constant pairs in k[[u]]xk[[v]], Q(Â)=k((u))xk((v)), B⊗Â=P, B is semilocal with two k-points, and the residue maps are the constant terms. It avoids 0E68's false uncompleted-product claim (an irreducible node has a domain as local ring). Tested on the axes, the nodal cubic, and characteristic 2. Local descent: the forward direction is correct (uD(v)+vD(u)=0 gives D(u)∈(u) in P, then membership descent). So is the reverse (idempotents are killed in every characteristic, and ideal preservation sends equal-constant pairs into Â). Uniqueness comes from Q(A)=S^{-1}B. Zero divisor: Der=H^0(T), deg T=2-2g, dt is a basis at a uniformizer, so D fixes q exactly when s_D(q)=0, and div(s_D) is effective. Tested on P1 (3-dimensional, at most 2 zeros), genus 1 (nowhere vanishing) and g≥2 (vacuous). The item's def-pc-genus and the node's def-sc-genus are both dim H^1(O). Every hypothesis the parent steps use is supplied by a cited statement. Searches of all three kinds are recorded. There are no duplicates: the existing trf/sc/sfb nodes give only ingredients. I accept the tool_use lem-weil-pbc-derivation-extends (generic quotient-rule uniqueness). One fault fixed, B4: the statement of lem-sfb-smooth-derivation-zero-divisor had a corrupted '\\sum_{q\\ {' + newline + 'm closed}}' (the \\r of \\rm was read as a JSON escape). I replaced it with \\sum_{q\\ \\mathrm{closed}} in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-derivation-zero-divisor.json; nothing else changed. Note: blueprint.from.node is null, inherited from the item's ancestry; this is a base-node fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedNodalInfinitesimalFields",
+  "declaration": "AlgebraicGeometry.marked_nodal_infinitesimal_fields",
+  "declarations": [
+   "AlgebraicGeometry.markedNodalSpecialPoints",
+   "AlgebraicGeometry.IsMarkedInfinitesimalNormalizationIdentification",
+   "AlgebraicGeometry.marked_nodal_infinitesimal_fields",
+   "AlgebraicGeometry.smooth_proper_curve_vector_field_bounds",
+   "AlgebraicGeometry.marked_nodal_infinitesimal_automorphisms_subsingleton"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedNodalInfinitesimalFields.lean",
+  "statement": "theorem marked_nodal_infinitesimal_fields {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {C : Scheme.{u}} (f : C ⟶ Spec (.of Ω)) [IsProper f] [ConnectedSpace C] [IsReduced C] (hpure : C.IsPureDimension 1) (hnodal : ∀ x : C, x ∉ f.smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) {n : ℕ} (p : Fin n → (Spec (.of Ω) ⟶ C)) (hp : ∀ i : Fin n, p i ≫ f = 𝟙 (Spec (.of Ω))) (hdistinct : Pairwise (fun i j : Fin n ↦ Disjoint (Set.range (p i)) (Set.range (p j)))) (hsmooth : ∀ i : Fin n, Set.range (p i) ⊆ (f.smoothLocus : Set C)) : ∃! e : Additive (markedInfinitesimalAutomorphisms f p) ≃+ ⨁ (Z : irreducibleComponents C), curveVectorFieldsFixingPoints (C.normalizedComponentMap Z ≫ f) (markedNodalSpecialPoints f p Z), IsMarkedInfinitesimalNormalizationIdentification f p e",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30c8f5c3b",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read the item module, both new def modules (CurveVectorFieldsFixingPoints, MarkedInfinitesimalAutomorphisms), dep decls (Scheme.dualNumbers/ι/Hom.dualNumbers, normalizedComponentMap/Genus, IsPureDimension, arithmeticGenus, relativeDifferentials) and Stacks curves.tex section-vector-fields/0E67/0E68. Every hypothesis/clause matches: proper connected reduced pure-dim-1, nodes via completed-ring ring iso, distinct smooth sections with n=0 allowed, E_a = ν_Z preimage of nonsmooth ∪ marks, A = comap of stabilizers (s≫α) of ι and p_i[ε] in Aut over Spec Ω[ε], Der(;E) = D(I_x)⊂I_x for U∋x. ∃! identification pinned by the ε-coefficient and normalization-extension equations, not hollow; genus bounds per 0E67 with encard; stability in ℤ. Statements verbatim; stmt_deps only gain the two new defs and landed pure-dimension/stable-curve, no cycle, no repair note, not dropped, no duplicate notion. Proofs sorry with steps 1-10 in docstrings. Advisory: Scheme.dualNumbers owner sk-d-tangent and relativeDifferentials owner not direct stmt_deps; ncard vs encard in hstable (equivalent since E_a finite). No recompile (no change)."
+ }
+}

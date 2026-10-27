@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-sequence-constant-ring-factorization",
+ "kind": "statement",
+ "title": "Constant-ring factorization of the ordinary quotient projection",
+ "statement": "For every prime l, finite extension E of Q_l and scheme W, let O be any ordinary quotient sequence adjoints as in [def-pur-sequence-adjoint-resolution-data], on the actual categories of [def-coef-ringed-sequence-site]. Then PurSequenceRingedFactorization l E W O is inhabited. Thus the first geometric inverse image is the identity, its structural map consists of the completed-ring quotient projections and its module direct image is exact scalar restriction; the second geometric inverse image is constant, its structural map is the identity and its module direct image is inverse limit of the actual constant-ring tower. The factorization retains every section, horizontal transition and composition comparison specified by that structure.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940, section-derived-limits, constant-ring factorization; sites-modules.tex, Tag 03D7, change of rings."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "The completed-ring projections form a natural transformation from the constant completed-ring system to the quotient system. Uncurrying gives the structural ring map on the sequence site. On sheaves of sets take identity inverse and direct images; on modules take restriction along this map. Ring operations and module linearity follow sectionwise from the ring homomorphisms.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-sequence-site-completion-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the second morphism take the explicit constant/limit sheaf adjunction and identity structural ring map. Compose the constant-ring strict-system equivalence with inverse limit for its module direct image. The limit-preservation comparison for underlying sheaves identifies its underlying direct image. Projection to each level and linearity of the limit projections prove its module-linearity field.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "def-coef-constant-sequence-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit equivalence retains sections and horizontal maps. After scalar restriction its tower satisfies the defining uniqueness property of coefficientSequenceRestriction, giving equality with that functor. Lift O.constant through the fully faithful sheaf-to-presheaf functor to obtain the inverse-image comparison. Uniqueness of right adjoints gives the direct-image comparison. O.quotient proves the structural-map composition equation on every section, and O.limit combined with the restriction-tower equality gives the module composition comparison.",
+   "uses": [
+    "def-pur-sequence-adjoint-resolution-data",
+    "def-coef-ringed-sequence-site",
+    "def-coef-constant-sequence-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing exact scalar-restriction theorem to the sequence ring map. Its two conclusions supply preservation of finite limits and finite colimits; no flatness or surjectivity is used.",
+   "uses": [
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-pur-sequence-site-completion-projection",
+  "def-coef-constant-sequence-equivalence",
+  "def-pur-sequence-adjoint-resolution-data",
+  "lem-pur-system-scalar-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940, section-derived-limits, constant-ring factorization; sites-modules.tex, Tag 03D7, change of rings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Factorization of a ringed geometric morphism from a sequence topos through the constant coefficient ring with exact scalar restriction",
+   "results": "Read eight results concerning GammaSpec and locally ringed spaces; none constructs this ringed sequence-site factorization with its prescribed tower section comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "Read SheafOfModules.restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val and restrictScalars_map_val in Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings. These provide the scalar-restriction functor, not the geometric factorization or its constant-tower comparisons.",
+   "date": "2026-10-26",
+   "verdict": "partial match: scalar-restriction API used"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphismOfUniverses|independentConstantSequenceEquivalence",
+   "results": "No Mathlib results. The project declarations in SequenceSiteCompletionProjection and ConstantSequenceModuleEquivalenceOfUniverses supply the geometric and tower constructions used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceOrdinaryFactorization",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient-comparison transport in the reduction/total-limit adjunction, made precise by the constant-ring factorization in the ordinary sequence projection; original ordinary-factorization proof steps 3–4.",
+   "via": [
+    "lem-pur-sequence-ordinary-factorization",
+    "lem-pur-sequence-projection-hom-normalization",
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurSequenceConstantRingFactorization",
+  "file": "lean/Sheaf/Paper/PurSequenceConstantRingFactorization.lean",
+  "declaration": "WeilConjectures.purSequenceConstantRingFactorization",
+  "statement": "theorem purSequenceConstantRingFactorization (O : PurSequenceOrdinaryAdjoints l E W) :\n    Nonempty (PurSequenceRingedFactorization l E W O)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T181035-L-3429166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T181035-L-3429166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

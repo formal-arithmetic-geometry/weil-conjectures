@@ -1,315 +1,250 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q49
+Authors: SHEAF groups Q49, J3
 -/
 module
 
-public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.StrictRoosModel
-import Sheaf.CategoryTheory.StrictRoosHomotopyFunctor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Localization.Predicate
+public import Sheaf.Paper.ScalarPullbackStrictConeData
+import Sheaf.Paper.ScalarPullbackStrictTowerConstruction
+import Sheaf.Paper.FiniteFreeScalarCochainProperties
+import Sheaf.Paper.ScalarPullbackStrictCoherence
+import Sheaf.Paper.ScalarPullbackUniqueDerivedDescent
+import all Sheaf.Paper.ScalarRoosComparison
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
-/-! # Strict scalar pullback cone naturality
-
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 6.5.9(4);
-Stacks Tags 03EK, 014E, 06YT and 04VG. The strict construction is agent formulated.
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality).
-
-Levels n denote positive exponents n+1. All tensors, inverse images, tower transitions
-and Roos cones below are the recorded constructions, before localization.
--/
+/-! # Assembly and derived descent of the normalized strict scalar pullback map -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option genInjectivity false
-set_option genSizeOfSpec false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
+
+attribute [local irreducible] HasDerivedCategory.standard
+attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
+  integralOperationsPullbackComplexFunctor integralOperationsGoodLocalization
+  integralOperationsPullbackOnGood
+  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  completedOrdinaryScalarComplex scalarPullbackSourceTower scalarPullbackRoosEnd
+attribute [local instance 5000] integralTowerHasDerivedCategory
+
+private local instance (W : AlgebraicGeometry.Scheme.{t}) :
+    EssentiallySmall.{max u (t + 1)} W.ProEt :=
+  essentiallySmallSelf.{u, t, t + 1} _
+
+private local instance (W : AlgebraicGeometry.Scheme.{t}) :
+    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} W
+
+private local instance (W : AlgebraicGeometry.Scheme.{t}) :
+    (AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} W
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The source tower D_E(P) with termwise ordinary scalar extension.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackSourceTower {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) :=
-  integralOperationsPullbackTowerFunctor l E g ⋙
-    (Functor.whiskeringRight _ _ _).obj (completedOrdinaryScalarComplex l E L ι X)
+section ProductComparison
+universe a b c d e f
+open CochainComplex
+variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
+  [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]
 
-/-- The target tower D_L(P tensor S), with its recorded quotient transitions.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackTargetTower {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) :=
-  completedOrdinaryScalarComplex l E L ι Y ⋙ integralOperationsPullbackTowerFunctor l L g
+private noncomputable def coconeCoordinates {K L : CochainComplex A ℤ}
+    (φ : K ⟶ L) (i : ℤ) :
+    (mappingCocone φ).X i ≅ K.X i ⊞ L.X (i - 1) where
+  hom := biprod.lift ((mappingCocone.fst φ).f i)
+    ((mappingCocone.snd φ).v i (i - 1) (by omega))
+  inv := biprod.desc ((mappingCocone.inl φ).v i i (by omega))
+    ((mappingCocone.inr φ).1.v (i - 1) i (by omega))
+  hom_inv_id := by simpa using mappingCocone.id_X φ i (i - 1) (by omega)
+  inv_hom_id := by
+    apply biprod.hom_ext' <;> apply biprod.hom_ext <;> simp
 
-/-- The local inverse-image tensor generator, including its finite scalar b.
-Source: Stacks 03D2, 03EK
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackGenerator {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)
-    (V : Y.ProEt) (p : (P.X i).val.obj (op V))
-    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))
-    (b : (integralCoefficientCommRingSheaf l E X n).obj.obj
-      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V))) :
-    ((((integralOperationsPullbackLevel l E g n).obj P).X i).val.obj
-      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V))) :=
-  b • (@id
-    (((integralOperationsLevelPullback l E g n).obj
-      (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i)).val.obj
-        (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)))
-    (integralOperationsPullbackGenerator l E g n
-      (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V
-        (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) a p)))
+private theorem product_roos_isIso (F : A ⥤ B) [F.Additive]
+    [PreservesLimitsOfShape (Discrete ℕ) F]
+    (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) : IsIso (scalarRoosMap F C) := by
+  let G := F.mapHomologicalComplex (.up ℤ)
+  let pc := piComparison G (fun n : ℕ ↦ C.obj (op n))
+  have hpc : IsIso pc := by dsimp only [pc]; infer_instance
+  obtain ⟨hf, hs⟩ := scalarRoosCoordinates F C
+  let : PreservesBinaryBiproducts F :=
+    preservesBinaryBiproducts_of_preservesBiproducts F
+  have hpcf (i : ℤ) : IsIso (pc.f i) := inferInstance
+  have hi (i : ℤ) : IsIso ((scalarRoosMap F C).f i) := by
+    let f : F.obj ((mappingCocone (scalarRoosBoundary C)).X i) ⟶
+        (mappingCocone (scalarRoosBoundary (C ⋙ G))).X i := (scalarRoosMap F C).f i
+    let : IsIso (pc.f i) := hpcf i
+    let : IsIso (pc.f (i - 1)) := hpcf (i - 1)
+    let eY := coconeCoordinates (scalarRoosBoundary C) i
+    let eX := coconeCoordinates (scalarRoosBoundary (C ⋙ G)) i
+    have he : F.map eY.hom ≫
+        (F.mapBiprod ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X i)
+          ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X (i - 1))).hom =
+        biprod.lift (F.map ((mappingCocone.fst (scalarRoosBoundary C)).f i))
+          (F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
+            i (i - 1) (by omega))) :=
+      biprod.map_lift_mapBiprod F _ _ _ _
+    have hm : f ≫ eX.hom =
+        F.map eY.hom ≫ (F.mapBiprod ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X i)
+            ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X (i - 1))).hom ≫
+          biprod.map (pc.f i) (pc.f (i - 1)) := by
+      rw [← Category.assoc, he]
+      apply biprod.hom_ext
+      · dsimp only [eX, coconeCoordinates]
+        simp only [Category.assoc]
+        erw [biprod.lift_fst, biprod.map_fst, biprod.lift_fst_assoc]
+        simpa only [f, HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+          using congrArg (fun z ↦ z.f i) hf
+      · dsimp only [eX, coconeCoordinates]
+        simp only [Category.assoc]
+        erw [biprod.lift_snd, biprod.map_snd, biprod.lift_snd_assoc]
+        exact hs i
+    have : IsIso (f ≫ eX.hom) := by
+      rw [hm]
+      change IsIso (((F.mapIso eY) ≪≫
+        F.mapBiprod ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X i)
+          ((∏ᶜ fun n : ℕ ↦ C.obj (op n)).X (i - 1)) ≪≫
+        biprod.mapIso (@asIso _ _ _ _ (pc.f i) (hpcf i))
+          (@asIso _ _ _ _ (pc.f (i - 1)) (hpcf (i - 1)))).hom)
+      infer_instance
+    change IsIso f
+    let : IsIso eX.hom := eX.isIso_hom
+    exact IsIso.of_isIso_comp_right f eX.hom
+  exact HomologicalComplex.Hom.isIso_of_components _
 
-/-- The canonical tensor/product comparison, defined by the tensor of each projection.
-No basis occurs in this definition.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackProductMap (X : AlgebraicGeometry.Scheme.{t})
-    (K : ℕ → CochainComplex (integralTowerModules l E X) ℤ) :
-    (completedOrdinaryScalarComplex l E L ι X).obj (∏ᶜ K) ⟶
-      ∏ᶜ fun n ↦ (completedOrdinaryScalarComplex l E L ι X).obj (K n) :=
-  Pi.lift fun n ↦ (completedOrdinaryScalarComplex l E L ι X).map (Pi.π K n)
+private def ProductRoosCoordinates {C : Type e} [Category.{f} C]
+    (F : A ⥤ B) [F.Additive] (T : C ⥤ (ℕᵒᵖ ⥤ CochainComplex A ℤ))
+    (κ : (T ⋙ integralOperationsRoosFunctor) ⋙ F.mapHomologicalComplex (.up ℤ) ≅
+      (T ⋙ (Functor.whiskeringRight _ _ _).obj (F.mapHomologicalComplex (.up ℤ))) ⋙
+        integralOperationsRoosFunctor) : Prop :=
+  ∀ (P : C) (i : ℤ),
+    ((κ.hom.app P).f i ≫ (mappingCocone.fst
+        (scalarRoosBoundary (T.obj P ⋙ F.mapHomologicalComplex (.up ℤ)))).f i =
+      F.map ((mappingCocone.fst (scalarRoosBoundary (T.obj P))).f i) ≫
+        (piComparison (F.mapHomologicalComplex (.up ℤ))
+          (fun n : ℕ ↦ (T.obj P).obj (op n))).f i) ∧
+    ((κ.hom.app P).f i ≫ (mappingCocone.snd
+        (scalarRoosBoundary (T.obj P ⋙ F.mapHomologicalComplex (.up ℤ)))).v
+          i (i - 1) (by omega) =
+      F.map ((mappingCocone.snd (scalarRoosBoundary (T.obj P))).v
+          i (i - 1) (by omega)) ≫
+        (piComparison (F.mapHomologicalComplex (.up ℤ))
+          (fun n : ℕ ↦ (T.obj P).obj (op n))).f (i - 1))
 
-/-- The endomorphism 1-s of a strict tower, used to expose both Roos coordinates.
-Source: Stacks 08TC (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackRoosEnd (X : AlgebraicGeometry.Scheme.{t})
-    (T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E X) ℤ) :=
-  towerTransitionEndomorphism (K := fun n ↦ T.obj (op n)) (integralOperationsTowerStep T)
+private theorem productRoosComparison_existsUnique {C : Type e} [Category.{f} C]
+    (F : A ⥤ B) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F]
+    (T : C ⥤ (ℕᵒᵖ ⥤ CochainComplex A ℤ)) :
+    ∃! κ : (T ⋙ integralOperationsRoosFunctor) ⋙ F.mapHomologicalComplex (.up ℤ) ≅
+        (T ⋙ (Functor.whiskeringRight _ _ _).obj (F.mapHomologicalComplex (.up ℤ))) ⋙
+          integralOperationsRoosFunctor,
+      ProductRoosCoordinates F T κ := by
+  let G := F.mapHomologicalComplex (.up ℤ)
+  let κ : (T ⋙ integralOperationsRoosFunctor) ⋙ G ≅
+      (T ⋙ (Functor.whiskeringRight _ _ _).obj G) ⋙ integralOperationsRoosFunctor :=
+    NatIso.ofComponents (fun P ↦ by
+      let := product_roos_isIso F (T.obj P)
+      exact asIso (scalarRoosMap F (T.obj P))) (by
+        intro P P' f
+        exact scalarRoosNaturality F (T.map f))
+  have hκ : ProductRoosCoordinates F T κ := by
+    intro P i
+    obtain ⟨hf, hs⟩ := scalarRoosCoordinates F (T.obj P)
+    constructor
+    · change (scalarRoosMap F (T.obj P)).f i ≫ _ = _
+      simpa only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+        using congrArg (fun f ↦ f.f i) hf
+    · exact hs i
+  refine ⟨κ, hκ, ?_⟩
+  intro κ' hκ'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext P
+  apply HomologicalComplex.hom_ext
+  intro i
+  have hf := (hκ' P i).1.trans (hκ P i).1.symm
+  have hs := (hκ' P i).2.trans (hκ P i).2.symm
+  let φ := scalarRoosBoundary (T.obj P ⋙ G)
+  let α : F.obj ((mappingCocone (scalarRoosBoundary (T.obj P))).X i) ⟶
+      (mappingCocone φ).X i := (κ'.hom.app P).f i
+  let β : F.obj ((mappingCocone (scalarRoosBoundary (T.obj P))).X i) ⟶
+      (mappingCocone φ).X i := (κ.hom.app P).f i
+  change α ≫ (mappingCocone.fst φ).f i = β ≫ (mappingCocone.fst φ).f i at hf
+  change α ≫ (mappingCocone.snd φ).v i (i - 1) _ =
+    β ≫ (mappingCocone.snd φ).v i (i - 1) _ at hs
+  have hid := mappingCocone.id_X φ i (i - 1) (by omega)
+  have h₁ := congrArg (fun z ↦ α ≫ z) hid
+  have h₂ := congrArg (fun z ↦ β ≫ z) hid
+  simp only [Preadditive.comp_add, ← Category.assoc, Category.comp_id] at h₁ h₂
+  rw [hf, hs] at h₁
+  exact h₁.symm.trans h₂
+end ProductComparison
 
-/-- The exact local generator condition on a natural strict tower map. A tower morphism
-already includes every quotient-transition and cochain-differential square.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackGeneratorFormula {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (d : scalarPullbackSourceTower l E L ι g ⟶ scalarPullbackTargetTower l E L ι g) : Prop :=
-  ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ)
-    (V : Y.ProEt) (p : (P.X i).val.obj (op V))
-    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))
-    (b : (integralCoefficientCommRingSheaf l E X n).obj.obj
-      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)))
-    (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj
-      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V))),
-    (((d.app P).app (op n)).f i).val.app
-        (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V))
-      (completedScalarTensorSection l E L ι X
-        (((integralOperationsPullbackLevel l E g n).obj P).X i)
-        (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)) s
-        (scalarPullbackGenerator l E g n P i V p a b)) =
-      scalarPullbackGenerator l L g n
-        ((completedOrdinaryScalarComplex l E L ι Y).obj P) i V
-        (completedScalarTensorSection l E L ι Y (P.X i) (op V) 1 p)
-        ((integralScalarQuotientSheafMap l E L ι Y n).hom.app (op V) a)
-        (((integralScalarQuotientSheafMap l E L ι X n).hom.app
-          (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)) b) *
-          (completedIntegralCommRingProjectionUnrestricted l L X n).hom.app
-            (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)) s)
-
-/-- The two-coordinate normalization of tensor/Roos comparison. The first coordinate
-has degree i and the shifted coordinate degree i-1 in the mapping-cocone convention.
-Source: Stacks 014E, 08TC
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackConeFormula {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (κ : integralOperationsPullbackComplexFunctor l E g ⋙
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+  WeilConjectures.integralOperationsAbSheafify
+  WeilConjectures.integralOperationsAbLocallyBijective
+  WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.integralOperationsCommHasDerivedCategory in
+private theorem scalarPullbackCone_existsUnique
+    {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
+    [PreservesLimitsOfShape (Discrete ℕ) (completedOrdinaryScalarExtension l E L ι X)] :
+    ∃! κ : integralOperationsPullbackComplexFunctor l E g ⋙
         completedOrdinaryScalarComplex l E L ι X ≅
-      scalarPullbackSourceTower l E L ι g ⋙ integralOperationsRoosFunctor) : Prop :=
-  ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ),
-    ((κ.hom.app P).f i ≫ (CochainComplex.mappingCocone.fst
-      (scalarPullbackRoosEnd l L X
-        ((scalarPullbackSourceTower l E L ι g).obj P))).f i =
-      (completedOrdinaryScalarExtension l E L ι X).map
-        ((CochainComplex.mappingCocone.fst (scalarPullbackRoosEnd l E X
-          ((integralOperationsPullbackTowerFunctor l E g).obj P))).f i) ≫
-        (scalarPullbackProductMap l E L ι X
-          (fun n ↦ ((integralOperationsPullbackTowerFunctor l E g).obj P).obj (op n))).f i) ∧
-    ((κ.hom.app P).f i ≫ (CochainComplex.mappingCocone.snd
-      (scalarPullbackRoosEnd l L X
-        ((scalarPullbackSourceTower l E L ι g).obj P))).v i (i - 1) (by omega) =
-      (completedOrdinaryScalarExtension l E L ι X).map
-        ((CochainComplex.mappingCocone.snd (scalarPullbackRoosEnd l E X
-          ((integralOperationsPullbackTowerFunctor l E g).obj P))).v i (i - 1) (by omega)) ≫
-        (scalarPullbackProductMap l E L ι X
-          (fun n ↦ ((integralOperationsPullbackTowerFunctor l E g).obj P).obj (op n))).f
-            (i - 1))
-
-/-- The induced chain map, using the fixed tensor/Roos comparison and the strict
-map on both cone coordinates.
-Source: Stacks 014E, 08TC
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def scalarPullbackConeMap {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (d : scalarPullbackSourceTower l E L ι g ⟶ scalarPullbackTargetTower l E L ι g)
-    (κ : integralOperationsPullbackComplexFunctor l E g ⋙
-        completedOrdinaryScalarComplex l E L ι X ≅
-      scalarPullbackSourceTower l E L ι g ⋙ integralOperationsRoosFunctor) :
-    integralOperationsPullbackComplexFunctor l E g ⋙
-        completedOrdinaryScalarComplex l E L ι X ⟶
-      completedOrdinaryScalarComplex l E L ι Y ⋙
-        integralOperationsPullbackComplexFunctor l L g :=
-  κ.hom ≫ Functor.whiskerRight d integralOperationsRoosFunctor
-
-/-- The normalized representative equation for the derived transformation. The
-universal scalar counit on A_E(P) is used even though that cone need not be K-flat.
-Source: Stacks 06YT, 04VG
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackDescentFormula {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (δ : integralOperationsPullbackComplexFunctor l E g ⋙
-        completedOrdinaryScalarComplex l E L ι X ⟶
-      completedOrdinaryScalarComplex l E L ι Y ⋙
-        integralOperationsPullbackComplexFunctor l L g)
-    (τ : integralDerivedPullback l E g ⋙ completedDerivedScalarExtension l E L ι X ⟶
-      completedDerivedScalarExtension l E L ι Y ⋙ integralDerivedPullback l L g) : Prop :=
-  ∀ (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-    (hQ : integralOperationsGoodComplex l L Y
-      ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj)),
-    τ.app (DerivedCategory.Q.obj P.obj) ≫
-        (integralDerivedPullback l L g).map (completedScalarCounit l E L ι Y P.obj) ≫
-        (integralDerivedPullbackComparison l L g).hom.app
-          ⟨(completedOrdinaryScalarComplex l E L ι Y).obj P.obj, hQ⟩ =
-      (completedDerivedScalarExtension l E L ι X).map
-        ((integralDerivedPullbackComparison l E g).hom.app P) ≫
-        completedScalarCounit l E L ι X
-          ((integralOperationsPullbackComplexFunctor l E g).obj P.obj) ≫
-        DerivedCategory.Q.map (δ.app P.obj)
-
-/-- The strict and derived maps together with their full normalization conditions.
-This bundles the witnesses of the single theorem; it assumes no comparison maps.
-Source: Bhatt--Scholze 3.4.10, 3.5.1, 6.5.9(4); Stacks 03EK, 014E, 04VG
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-structure ScalarPullbackStrictConeData {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) where
-  /-- A chain-natural map of strict towers. -/
-  level : scalarPullbackSourceTower l E L ι g ⟶ scalarPullbackTargetTower l E L ι g
-  /-- Its balanced local generator formula, including both coefficient scalars. -/
-  generator : ScalarPullbackGeneratorFormula l E L ι g level
-  /-- The basis-independent tensor/Roos comparison. -/
-  cone : integralOperationsPullbackComplexFunctor l E g ⋙
+      scalarPullbackSourceTower l E L ι g ⋙ integralOperationsRoosFunctor,
+      ScalarPullbackConeFormula l E L ι g κ := by
+  let F := completedOrdinaryScalarExtension l E L ι X
+  let T := integralOperationsPullbackTowerFunctor l E g
+  obtain ⟨κ, hκ, hκu⟩ := productRoosComparison_existsUnique F T
+  have hformula (κ' : integralOperationsPullbackComplexFunctor l E g ⋙
       completedOrdinaryScalarComplex l E L ι X ≅
-    scalarPullbackSourceTower l E L ι g ⋙ integralOperationsRoosFunctor
-  /-- Both cone coordinates are the canonical tensor/product map. -/
-  coordinates : ScalarPullbackConeFormula l E L ι g cone
-  /-- The transformation on the entire derived category. -/
-  derived : integralDerivedPullback l E g ⋙ completedDerivedScalarExtension l E L ι X ⟶
-    completedDerivedScalarExtension l E L ι Y ⋙ integralDerivedPullback l L g
-  /-- Its representative is exactly the diagonal strict cone map. -/
-  descends : ScalarPullbackDescentFormula l E L ι g
-    (scalarPullbackConeMap l E L ι g level cone) derived
+      scalarPullbackSourceTower l E L ι g ⋙ integralOperationsRoosFunctor) :
+      ScalarPullbackConeFormula l E L ι g κ' ↔ ProductRoosCoordinates F T κ' := by
+    constructor <;> intro h P i <;> exact h P i
+  refine ⟨κ, (hformula κ).2 hκ, ?_⟩
+  intro κ' hκ'
+  exact hκu κ' ((hformula κ').1 hκ')
 
-/-- Normalization of ordinary tensor association by multiplication of its scalar factors.
-This condition specifies the canonical associator, without choosing a basis or resolution.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackAssociationFormula
-    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{t})
-    (α : completedOrdinaryScalarComplex l E L ι W ⋙
-        completedOrdinaryScalarComplex l L F j W ≅
-      completedOrdinaryScalarComplex l E F (j.comp ι) W) : Prop :=
-  ∀ (P : CochainComplex (integralTowerModules l E W) ℤ) (i : ℤ) (U : W.ProEtᵒᵖ)
-    (s : (completedIntegralCommRingSheafUnrestricted l L W).obj.obj U)
-    (z : (completedIntegralCommRingSheafUnrestricted l F W).obj.obj U)
-    (p : (P.X i).val.obj U),
-    ((α.hom.app P).f i).val.app U
-      (completedScalarTensorSection l L F j W _ U z
-        (completedScalarTensorSection l E L ι W (P.X i) U s p)) =
-      completedScalarTensorSection l E F (j.comp ι) W (P.X i) U
-        ((completedCoefficientMap l L F j W).hom.app U s * z) p
-
-/-- Composition of the specified level and cone maps after the canonical tensor
-associators. Existence with the scalar multiplication normalization is included;
-there is no unspecified comparison map in this condition.
-Source: Stacks 03EK, 014E
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackCompositionFormula {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (D : ScalarPullbackStrictConeData l E L ι g) : Prop :=
-  ∀ (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F)
-    (D' : ScalarPullbackStrictConeData l L F j g)
-    (D'' : ScalarPullbackStrictConeData l E F (j.comp ι) g),
-    ∃ (αX : completedOrdinaryScalarComplex l E L ι X ⋙
-          completedOrdinaryScalarComplex l L F j X ≅
-        completedOrdinaryScalarComplex l E F (j.comp ι) X)
-      (αY : completedOrdinaryScalarComplex l E L ι Y ⋙
-          completedOrdinaryScalarComplex l L F j Y ≅
-        completedOrdinaryScalarComplex l E F (j.comp ι) Y),
-      ScalarPullbackAssociationFormula l E L ι F j X αX ∧
-      ScalarPullbackAssociationFormula l E L ι F j Y αY ∧
-      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ),
-        (completedOrdinaryScalarComplex l L F j X).map ((D.level.app P).app (op n)) ≫
-          (D'.level.app ((completedOrdinaryScalarComplex l E L ι Y).obj P)).app (op n) ≫
-          (integralOperationsPullbackLevel l F g n).map (αY.hom.app P) =
-        αX.hom.app ((integralOperationsPullbackLevel l E g n).obj P) ≫
-          (D''.level.app P).app (op n)) ∧
-      (∀ P : CochainComplex (integralTowerModules l E Y) ℤ,
-        (completedOrdinaryScalarComplex l L F j X).map
-            ((scalarPullbackConeMap l E L ι g D.level D.cone).app P) ≫
-          (scalarPullbackConeMap l L F j g D'.level D'.cone).app
-            ((completedOrdinaryScalarComplex l E L ι Y).obj P) ≫
-          (integralOperationsPullbackComplexFunctor l F g).map (αY.hom.app P) =
-        αX.hom.app ((integralOperationsPullbackComplexFunctor l E g).obj P) ≫
-          (scalarPullbackConeMap l E F (j.comp ι) g D''.level D''.cone).app P)
-
-/-- The identity extension gives the identity on each level and on the entire cone,
-under the published tensor multiplication unitors on source and target.
-Source: Stacks 03EK, 014E
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
-def ScalarPullbackUnitFormula {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
-    (D : ScalarPullbackStrictConeData l E E (AlgHom.id ℚ_[l] E) g) : Prop :=
-  (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ),
-    (D.level.app P).app (op n) ≫ (integralOperationsPullbackLevel l E g n).map
-        ((completedScalarIdentityMultiplication l E Y).hom.app P) =
-      (completedScalarIdentityMultiplication l E X).hom.app
-        ((integralOperationsPullbackLevel l E g n).obj P)) ∧
-  (∀ P : CochainComplex (integralTowerModules l E Y) ℤ,
-    (scalarPullbackConeMap l E E (AlgHom.id ℚ_[l] E) g D.level D.cone).app P ≫
-        (integralOperationsPullbackComplexFunctor l E g).map
-          ((completedScalarIdentityMultiplication l E Y).hom.app P) =
-      (completedScalarIdentityMultiplication l E X).hom.app
-        ((integralOperationsPullbackComplexFunctor l E g).obj P))
-
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+  WeilConjectures.integralOperationsAbSheafify
+  WeilConjectures.integralOperationsAbLocallyBijective
+  WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.integralOperationsCommHasDerivedCategory in
 /-- Strict scalar/pullback cone naturality, with unique normalized witnesses.
 Source: Bhatt--Scholze 3.4.10, 3.5.1 and 6.5.9(4); Stacks 03EK, 014E, 06YS,
 06YT, 0G7E and 04VG
 (blueprint: lem-weil-scalar-pullback-strict-cone-naturality).
 Proof:
-1. The coefficient limit map has the prescribed residues. The inverse-image coefficient
-square commutes because both adjoints send constants to the same constants.
-2. Check the inner tensor balance, the inverse-image coefficient balance, and the
-outer completed-scalar balance. Sheafification gives the unique generator map.
-3. Applying a differential, a chain map, or a quotient transition gives the same
-formula on each local generator. Thus these maps form a natural strict tower map.
-4. A finite free basis of S over R gives the inverse to the canonical product map
-by a finite sum of coordinate products. Its forward map uses only projections,
-so the isomorphism is independent of the basis, natural, and valid unboundedly.
-5. The product comparison commutes with 1-s. Tensor preserves the binary sums
-and shifts of the cone, so it gives the specified cone isomorphism. The strict
-map is diagonal on its two coordinates, commuting with (-dy-(1-s)x,dx).
-6. Resolve a complex representing K by a flat-term K-flat P. Change of rings
-makes Q flat-term K-flat, and the recorded integral comparisons compute pullback.
-7. Finite freeness makes ordinary tensor exact on every complex, including A_E(P),
-so its universal derived counit is invertible there without assuming that cone K-flat.
-8. Strict Roos homotopy functoriality gives homotopy naturality; both functors invert
-quasi-isomorphisms on the resolving class by the integral invariance theorem.
-9. Localize flat-term K-flat representatives, then use fully faithful localization
-precomposition to descend this natural transformation. The displayed counit equation
-fixes its components uniquely, proves resolution independence, and gives naturality
-also for inverse quasi-isomorphisms and therefore every derived morphism.
-10. For a tower E,L,F, the quotient inclusions compose; the two successive generator
-formulas multiply the scalar factors exactly as the tensor associator does. Products
-respect that associator by their projections, hence so do both cone coordinates.
-The identity inclusion gives multiplication, namely the tensor unit identification.
-11. The canonical derived associators are localizations of these ordinary associators
-on K-flat models. Faithfulness of the resolving localization extends coherence and
-the unit identity to all derived objects. -/
+1. The balanced strict-tower construction gives the unique level map with its
+prescribed local generator equation, including both coefficient scalars.
+2. Finite freeness gives countable-product preservation and exact ordinary scalar
+extension. The universal derived scalar counit is therefore invertible on every
+complex, including the pullback Roos complex without a K-flatness assumption on it.
+3. Independent-universe change of rings preserves K-flatness and flat terms,
+so ordinary scalar extension preserves the good representative subcategory.
+4. Apply the additive Roos map to the pullback tower. In degree i its two cone
+coordinates are the product comparison in degrees i and i-1. Both are invertible;
+the binary-biproduct coordinate calculation makes the Roos map invertible.
+Naturality assembles these maps into the normalized cone isomorphism.
+5. The two coordinates jointly determine a cone map by mappingCocone.id_X.
+Consequently the normalized cone isomorphism is unique.
+6. Good complexes localize to the derived category. Compose the E-pullback
+comparison, the X scalar counit and the localized strict cone map to obtain a.
+The invertible Y scalar counit and L-pullback comparison form an isomorphism b.
+Fully faithful precomposition with this localization descends a followed by b
+inverse uniquely. Its component equation is exactly the asserted descent formula.
+7. Assemble the level, cone and derived maps. Their three uniqueness properties,
+together with proof irrelevance for the normalization fields, make the data a
+subsingleton.
+8. The strict tensor association and unit calculation on supplied normalized data
+gives the final two assertions. It uses their generator and both cone-coordinate
+formulas, with no additional choice of comparison maps. -/
 theorem scalarPullbackStrictConeNaturality
     {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.residueField x))
@@ -328,6 +263,37 @@ theorem scalarPullbackStrictConeNaturality
       ScalarPullbackCompositionFormula l E L ι g D) ∧
     (∀ D : ScalarPullbackStrictConeData l E E (AlgHom.id ℚ_[l] E) g,
       ScalarPullbackUnitFormula l E g D) := by
-  sorry
+  obtain ⟨hprod, _hgoodX, hεX⟩ := finiteFreeScalarCochainProperties l E L ι X
+  obtain ⟨_, hgood, hεY⟩ := finiteFreeScalarCochainProperties l E L ι Y
+  let := hprod
+  obtain ⟨d, hd, hdu⟩ := scalarPullbackStrictTower_existsUnique l E L ι g
+  obtain ⟨κ, hκ, hκu⟩ := scalarPullbackCone_existsUnique l E L ι g
+  obtain ⟨τ, hτ, _hτu⟩ := scalarPullbackDescent_existsUnique l E L ι g hgood hεY
+    (scalarPullbackConeMap l E L ι g d κ)
+  let D : ScalarPullbackStrictConeData l E L ι g :=
+    ⟨d, hd, κ, hκ, τ, hτ⟩
+  have hsub : Subsingleton (ScalarPullbackStrictConeData l E L ι g) := by
+    refine ⟨?_⟩
+    intro A B
+    have h₁ : A.level = B.level := (hdu _ A.generator).trans (hdu _ B.generator).symm
+    have h₂ : A.cone = B.cone := (hκu _ A.coordinates).trans (hκu _ B.coordinates).symm
+    cases A with
+    | mk da hda ca hca ta hta =>
+      cases B with
+      | mk db hdb cb hcb tb htb =>
+        dsimp only at h₁ h₂
+        subst db
+        subst cb
+        have ht := scalarPullbackDescent_existsUnique l E L ι g hgood hεY
+          (scalarPullbackConeMap l E L ι g da ca)
+        have h₃ : ta = tb := ht.unique hta htb
+        subst tb
+        rfl
+  obtain ⟨hcomp, hunit⟩ := scalarPullbackStrictCoherence l E L ι g
+  refine ⟨?_, hgood, fun P ↦ hεX _, ⟨D⟩, hsub, hcomp, hunit⟩
+  intro K
+  change IsIso (piComparison
+    ((completedOrdinaryScalarExtension l E L ι X).mapHomologicalComplex (.up ℤ)) K)
+  infer_instance
 
 end WeilConjectures

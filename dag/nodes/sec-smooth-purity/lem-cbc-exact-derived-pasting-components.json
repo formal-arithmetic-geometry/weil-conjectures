@@ -1,0 +1,121 @@
+{
+ "id": "lem-cbc-exact-derived-pasting-components",
+ "kind": "statement",
+ "title": "Congruence of finite exact-derived pasting expressions",
+ "statement": "Let $I$ be any indexing type and let $C_i$ be abelian categories with chosen ordinary unbounded derived categories. Use exact-functor words, their ordinary and derived interpretations, and finite transformation expressions as in [lem-sp-exact-derived-transformation-pasting]. For words $P,R$ with the same endpoints and expressions $e,f:P\\Rightarrow R$, if $e$ and $f$ have equal ordinary interpretations, their derived interpretations are equal. There is no finiteness assumption on $I$: the words and expressions themselves are finite.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 04VG; natural-transformation localization and finite expression factorization"
+ },
+ "stmt_deps": [
+  "lem-sp-exact-derived-transformation-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the two derived transformations along the quasi-isomorphism localization Q. For each complex K, expression_factors identifies each restricted component followed by the target word comparison with the source word comparison followed by Q of the ordinary complex component.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed equality of ordinary expressions gives equality of the right sides. Cancel the invertible target comparison. The natural-transformation restriction functor along Q is fully faithful, so the derived transformations agree. Only the individual expression trees are finite; no finiteness of the entire indexing type is used. Private component lemmas implement whiskering, compositor and associator evaluations and the vertical, horizontal and cube pasting trees used by the parent.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting",
+    "def-cbc-strict-tower-ordinary-proper-open-arrows"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-derived-transformation-pasting",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "E8: reuse of the existing expression_factors proof; explicit finite expression trees and termwise component calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic proper open alpha natural transformation commutes with vertical horizontal pasting and base change by restriction to the open",
+   "results": "8 hits including PresheafedSpace.GlueData.opensImagePreimageMap_app and Scheme.Hom.appLE_map; none concerns intrinsic clopen alpha.",
+   "date": "2026-10-27",
+   "verdict": "No match for this module-sheaf identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mapHomologicalComplex",
+   "results": "12 hits including mapHomologicalComplex_comp and mapDerivedCategory_app_Q_obj.",
+   "date": "2026-10-27",
+   "verdict": "Useful functorial transport, but none proves the underlying alpha identity."
+  },
+  {
+   "tool": "grep",
+   "query": "singleAlpha|alpha_vertical|alphaHorizontal|ClopenProjectorDescent",
+   "results": "msearch: 0 hits; local rg: ProperOpenAlphaPasting has the open parent holes, and StrictTowerProperOpenCalculus derives its identities from those holes.",
+   "date": "2026-10-27",
+   "verdict": "No independently proved identity available; using the calculus would create an import cycle."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenAlphaPasting",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Parent proper/open alpha pasting step 7: transport finite ordinary diagrams through exact localization; component implementation of the already stated exact-derived-pasting tool.",
+   "via": [
+    "lem-cbc-proper-open-alpha-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactDerivedPastingComponents",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedPastingComponents.lean",
+  "declaration": "CategoryTheory.ExactDerivedPasting.exactPasting_congr",
+  "statement": "theorem exactPasting_congr {X Y : I}\n    {P R : Word (C) X Y}\n    (e f : Expression (C) P R) (h : e.ordinary = f.ordinary) :\n    e.derived = f.derived",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "reason": "Uses its already proved expression factorization as a localization tool, preserving the parent approved exact-derived-pasting route. The individual expressions are finite even when their indexing type is not."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261027T064444-L-2180476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261027T064444-L-2180476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

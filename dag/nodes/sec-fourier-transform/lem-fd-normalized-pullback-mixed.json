@@ -1,0 +1,122 @@
+{
+ "id": "lem-fd-normalized-pullback-mixed",
+ "kind": "statement",
+ "title": "Compatibility of the selected normalized finite pullbacks with scalar stage transitions",
+ "statement": "An allowed scheme $W$ is noetherian, satisfies $\\dim(W)\\leq n$ for some $n\\in\\mathbf N$, and has $\\ell$ a unit in every structure-sheaf stalk, as in [lem-weil-pbc-integral-stratified-perfect-characterization]. Fix l prime, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, allowed schemes U,T, coefficient comparison data CU,CT, a scheme isomorphism $h:U\\xrightarrow{\\sim}T$, and one IntegralComparisonSystem R. Suppose finite_E is a specified FdPullbackComparison for every finite coefficient field and satisfies FdPullbackRoosMatching with R. Let F be a framework stage-system morphism whose finite functors and scalar beta maps are HEq to the actual rational pullback and commonStagePullbackComparison. Then there is a StageSystem.Morphism.Hom from CT.family.comp(pbcQbarPullFamily h) to F.comp CU.family with tau_E HEq to finite_E.rational.hom for every E. Thus it keeps the originally selected finite comparisons, rather than selecting unrelated witnesses for each coefficient pair. Definitions are those of [def-fd-coefficient-comparison-datum], [def-fd-pullback-comparison-datum], [def-fd-finite-pullback-comparison-datum], [lem-fd-pullback-augmentation-counit-matching], [lem-trf-integral-pullback-comparison-realization] and [def-fd-integral-pullback-shift-coordinates].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Whole-tower argument, steps 9--10: normalize and assemble the same rational finite components into a compatible scalar transformation. Auxiliary proof extracted from lem-fd-whole-tower-integral-pullback-comparison."
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-pullback-comparison-datum",
+  "def-fd-finite-pullback-comparison-datum",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-fd-integral-pullback-shift-coordinates",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof": [
+  {
+   "text": "the normalized Roos matching and finite chain normalization identify each\ninverse ambient component with the common strict-tower comparison: both carry\nthe quotient/zero-coordinate augmentation to the actual PBC unit. Cancel the\ninvertible framework augmentation on complete inputs. Fullness identifies their\nintegral restrictions. Raw localization then identifies every rational component\nby FdPullbackComparison.rationalization. Apply\nfdScalarRoosComparisonIntertwining at E <= L and substitute these identifications.\nIts rational equation is the mixed scalar square for these fixed components.\nThe supplied framework beta and the coefficient finite_functor equations insert\nonly their recorded presentation transports. Rearranging the square by its\ninvertible beta factors is precisely StageSystem.Morphism.Hom.comm. Define tau\nby the finite rational homs transported through sfFinite and finite_functor;\nthe preceding equation gives comm and its construction gives components below.\nEquality of fields uses the actual multiplication/completeness unit, so does not\nneed strict identity transitions. The same argument applies to zero objects,\nidentity scheme maps and ramified coefficient inclusions; no individual quotient\nmap is inverted and no Karoubi envelope is used.",
+   "uses": [
+    "lem-fd-pullback-common-strict-tower-models",
+    "lem-fd-pullback-augmentation-counit-matching",
+    "lem-fd-scalar-roos-comparison-intertwining"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-pullback-common-strict-tower-models",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-fd-scalar-roos-comparison-intertwining"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Whole-tower argument, steps 9--10: normalize and assemble the same rational finite components into a compatible scalar transformation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison completed pullback strict quotient tower Roos derived limit unit composition scalar coherence",
+   "results": "8 results, including Adjunction.derivedε_fac_app, derivedη_fac_app and ChosenPullbacksAlong.unit_pullbackComp_hom; these are generic derived-adjunction identities, not normalized completed-sheaf comparison statements.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized comparison of completed derived inverse image functors preserves scalar extension and signed shifts and descends to the common coefficient stage",
+   "results": "8 results, including PresheafOfModules.pullback, pullbackPushforwardAdjunction, Equivalence.commShiftInverse and the exact-functor complex shift instance. No strict-tower or selected-component compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component equations are constructors; they require the naturality/coherence at issue and do not supply it.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "FdPullbackSystem|FdPullbackRoosMatching|fdCompletedCompositorNormalization",
+   "results": "msearch Mathlib grep: 0 hits. Shared-library rg finds the existing normalization and scalar statements; they choose models rather than directly identify the fixed finite components. blueprint_refs.py search normalized pullback: 0 matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; this states a missing transfer to selected normalized finite data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WholeTowerIntegralPullbackComparison",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Whole-tower argument, steps 9--10: normalize and assemble the same rational finite components into a compatible scalar transformation.",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdNormalizedPullbackMixed",
+  "file": "lean/Sheaf/Paper/FdNormalizedPullbackMixed.lean",
+  "declaration": "WeilConjectures.fdNormalizedPullbackMixed",
+  "statement": "theorem fdNormalizedPullbackMixed (R : IntegralComparisonSystem.{u} l)\n    {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]\n    [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n    [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n    [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (CU : FdCoefficientComparison l Ω U) (CT : FdCoefficientComparison l Ω T)\n    (h : U ≅ T) (finite : ∀ E, FdPullbackComparison l Ω CU CT h E)\n    (_matching : ∀ E, FdPullbackRoosMatching l Ω CU CT h E R (finite E))\n    (F : StageSystem.Morphism\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω U))\n    (_sfFinite : ∀ E, HEq (F.Φ E)\n      (rationalDerivedPullback l (pbcFiniteField.{u} l Ω E) h.hom))\n    (_sfBeta : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (e : E ≤ L)\n      (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n      HEq ((F.β e).hom.app K)\n        (commonStagePullbackComparison l Ω h.hom ⟨E, K⟩ L e).hom) :\n    ∃ mixed : StageSystem.Morphism.Hom\n      (CT.family.comp (pbcQbarPullFamily l Ω h.hom)) (F.comp CU.family),\n      ∀ E, HEq (mixed.τ E) (finite E).rational.hom",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T094451-L-230892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T094451-L-230892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

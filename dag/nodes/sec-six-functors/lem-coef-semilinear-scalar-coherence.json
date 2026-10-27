@@ -1,0 +1,148 @@
+{
+ "id": "lem-coef-semilinear-scalar-coherence",
+ "kind": "statement",
+ "title": "Scalar adjunctions and reduction coherence for a ring-sheaf tower",
+ "statement": "For an essentially small site with site-object universe c, site-arrow universe v and coefficient universe max(c,v,r), and any inverse sequence B of commutative ring sheaves, there is SystemScalarCoherence as defined in the attached Lean module. For every n ≤ m it gives the actual K-flat derived extension adjoint to exact restriction, normalized on ordinary pure-tensor units and on K-flat representatives. For n ≤ m ≤ l it gives the left-adjoint composition comparison of the identity-on-sections restriction comparison, its Hom-transpose equation, and the cocycle of the actual system reduction maps. No tensor structure on systems or internal-Hom comparison is asserted.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Stacks 06YY and 07A6; scalar part of steps 4-6 of lem-coef-semilinear-system-existence."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply semilinearScalarData to the constant source and target towers of each composite coefficient map, with identity transitions. Its level-zero conclusion gives ScalarData with the existing normalized ordinary and derived adjunctions. Choose this adjunction-compatible universal data for each n ≤ m.",
+   "uses": [
+    "lem-coef-semilinear-scalar-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Adjunction.leftAdjointCompIso for the scalar adjunctions and the specified restrictionComposition. The conjugation unit equation, naturality of the inverse restriction comparison, and comp_homEquiv prove exactly scalarComposition_transpose. This is the usual conjugate-isomorphism comparison, with no independently chosen reassociation.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The chosen ordinary transition is its prescribed horizontal restriction on each section, and the chosen ordinary restriction-composition isomorphism is the identity on each section. Thus two transitions followed by this isomorphism equal the composite transition, by PresheafOfModules.map_comp_apply. This includes equal indices.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove in Lean that localization preserves this triangular composition equation for arbitrary exact functors: compare both natural transformations after precomposing with Q, then postcompose with the invertible exact-functor factors. The composition-isomorphism and natural-isomorphism factor equations and factor naturality reduce the result to Q of the degreewise ordinary equation. Specialize to the actual evaluations, scalar restrictions and transitions; postcompose with the inverse restriction-composition isomorphism to get the derived transition cocycle.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply successively the two scalar adjunction Hom equivalences to the desired reduction cocycle. Naturality and the definition of reduction turn the left side into the composite derived transitions. The transpose equation for leftAdjointCompIso turns the right side into the composite-index transition followed by the inverse restriction comparison. Apply the derived transition cocycle and injectivity of both equivalences. Package the scalar data, composition comparison and two proved equations in SystemScalarCoherence.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-coef-semilinear-scalar-data",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "M9 stage 3",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Stacks 06YY and 07A6; scalar part of steps 4-6 of lem-coef-semilinear-system-existence. Reuse of the existing normalized scalar-data theorem; explicit sectionwise cocycle, exact-localization calculation and adjunction conjugation in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived category of inverse systems of sheaves of modules varying ring tensor internal Hom evaluation adjunction",
+   "results": "{\"t\": \"2026-10-26T03:36:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived category of inverse systems of sheaves of modules varying ring tensor internal Hom evaluation adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.ihomPoints\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"efcb0a4204fb273a\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  },
+  {
+   "tool": "grep",
+   "query": "SemilinearSystemData|HomReductionFormula|reduction_cocycle",
+   "results": "{\"t\": \"2026-10-26T03:36:37Z\", \"tool\": \"grep\", \"query\": \"SemilinearSystemData|HomReductionFormula|reduction_cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product sheaves of modules evaluation commutes with internal Hom for cartesian systems",
+   "results": "{\"t\": \"2026-10-26T03:40:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor product sheaves of modules evaluation commutes with internal Hom for cartesian systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Types.tensorProductAdjunction\", \"CategoryTheory.CartesianMonoidalCategory.fullSubcategory_tensorHom_hom\", \"CategoryTheory.exp.ev\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"SheafOfModules.evaluation\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.Pi.closedCounit\"], \"digest\": \"102a4753a2013610\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearSystemsExistence",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraphs 1-2: actual ordinary derived coefficient systems and their canonical scalar/tensor/Hom operations before the inverse limit; Construction 4.1, printed p. 21; Stacks 06YY and 07A6; scalar part of steps 4-6 of lem-coef-semilinear-system-existence.",
+   "via": [
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearScalarCoherence",
+  "file": "lean/Sheaf/Paper/SemilinearScalarCoherence.lean",
+  "declaration": "WeilConjectures.SemilinearSections.systemScalarCoherence_nonempty",
+  "statement": "theorem systemScalarCoherence_nonempty :\n    Nonempty (SystemScalarCoherence.{c, v, r} J B τ)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T070536-L-3606604",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261026T092106-L-3401013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

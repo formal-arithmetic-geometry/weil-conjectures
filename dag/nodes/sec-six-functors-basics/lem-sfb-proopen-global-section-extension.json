@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-proopen-global-section-extension",
+ "kind": "statement",
+ "title": "Extending functions from a quasi-compact flat monomorphism",
+ "statement": "Let $j:Z\\to Y$ be a quasi-compact flat monomorphism of schemes [def-pc-scheme] [def-weil-flat-morphism] [def-weil-pbc-scheme-conventions], with $Z$ quasi-compact and $Y$ quasi-separated. Quasi-compact means that every open cover has a finite subcover; for a morphism it means that inverse images of affine opens are quasi-compact. Quasi-separated means that intersections of affine opens are quasi-compact. Monomorphism means that postcomposition by $j$ is injective on $\\operatorname{Hom}(W,Z)$ for every scheme $W$. Put $E=j(|Z|)$. Then $E$ is stable under generalization: if $e\\in E$ and $e\\in\\overline{\\{y\\}}$, then $y\\in E$. For every $s\\in\\Gamma(Z,\\mathcal O_Z)$ there are a quasi-compact open subscheme $V\\subseteq Y$ containing $E$ [def-weil-open-immersion] and $t\\in\\Gamma(V,\\mathcal O_V)$ such that $j_V^*(t)=s$, where $j_V:Z\\to V$ is the factorization of $j$ through this open. No finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Propositions 1.1 and 1.2(i), printed pp.1–2; Proposition 2.3(i), printed pp.4–5, applied to the induced ringed subspace E and its whole quasi-compact open. Online primary scan read; local archive WANTED.",
+  "url": "https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ringed-image theorem to $j$: with $i:E\\hookrightarrow |Y|$, it identifies $Z$ canonically with $(E,i^{-1}\\mathcal O_Y)$ over $Y$, and states that $E$ is stable under generalization and retrocompact. This proves the first assertion. The space $E$ is quasi-compact, since it is homeomorphic to the quasi-compact space $Z$. Write $\\sigma\\in\\Gamma(E,i^{-1}\\mathcal O_Y)$ for the section corresponding to $s$. If $E=\\varnothing$, take $V=\\varnothing$ and its unique section, so henceforth suppose $E\\ne\\varnothing$.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-ringed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Propositions 1.1 and 1.2(i), printed pp.1–2; reduction before Proposition 2.3(i)."
+   }
+  },
+  {
+   "text": "For each $e\\in E$, the inverse-image stalk theorem gives a neighbourhood $N_e\\subseteq Y$ and $a_e\\in\\Gamma(N_e,\\mathcal O_Y)$ whose image has germ $\\sigma_e$. By the germ-equality description of stalks, the induced section and $\\sigma$ agree on an open neighbourhood of $e$ in $E\\cap N_e$. Write that neighbourhood as the trace of an open of $Y$ and choose an affine open $U_e$ inside it containing $e$, using the affine-open basis. Set $s_e=a_e|_{U_e}$. Thus $s_e$ induces $\\sigma$ on $E\\cap U_e$. Quasi-compactness of $E$ selects finitely many of these affine opens $U_1,\\ldots,U_n$ covering $E$, with sections $s_1,\\ldots,s_n$. Put $U_0=\\bigcup_{a=1}^nU_a$; it is quasi-compact, being a finite union of affine opens, each quasi-compact by the affine-scheme theorem. Its affine-open intersections are those in $Y$, so $U_0$ is quasi-separated. The qcqs-scheme theorem therefore makes $|U_0|$ spectral.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Proposition 2.3(i), printed pp.4–5, finite local representatives and gluing; primary Numdam scan read online, local archive WANTED."
+   }
+  },
+  {
+   "text": "For each pair $a,b$, let $A_{ab}=U_a\\cap U_b$, which is quasi-compact by the quasi-separated-intersection theorem. Retrocompactness of $E$ makes $E\\cap A_{ab}$ quasi-compact. At every $e\\in E\\cap A_{ab}$ the two induced sections equal $\\sigma$, so their germs in $(i^{-1}\\mathcal O_Y)_e$ agree. Injectivity of the inverse-image stalk isomorphism implies $(s_a)_e=(s_b)_e$ in $\\mathcal O_{Y,e}$. The stalk definition gives a neighbourhood in $A_{ab}$ on which $s_a=s_b$; refine it to an affine open. Select finitely many such affine neighbourhoods covering $E\\cap A_{ab}$ and let $W_{ab}$ be their union. Then $W_{ab}\\subseteq A_{ab}$ is quasi-compact open, contains $E\\cap A_{ab}$, and $s_a|_{W_{ab}}=s_b|_{W_{ab}}$ by locality of the structure sheaf. If $E\\cap A_{ab}=\\varnothing$, use $W_{ab}=\\varnothing$.",
+   "uses": [
+    "pqf-lem-qs-intersection-qc",
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Proposition 2.3(i), printed pp.4–5, finite local representatives and gluing; primary Numdam scan read online, local archive WANTED."
+   }
+  },
+  {
+   "text": "Work in the spectral space $|U_0|$. Both $A_{ab}$ and $W_{ab}$ are quasi-compact opens and hence retrocompact there. Consequently $F_{ab}=A_{ab}\\setminus W_{ab}$ is constructible: it is one of the defining differences of retrocompact opens. The finite union $F=\\bigcup_{a,b}F_{ab}$ is constructible by the Boolean-algebra clause of the constructible-subset definition, and $F\\cap E=\\varnothing$ by the choice of $W_{ab}$.",
+   "uses": [
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Proposition 2.3(i), printed pp.4–5, finite local representatives and gluing; primary Numdam scan read online, local archive WANTED."
+   }
+  },
+  {
+   "text": "Let $\\overline F$ denote closure in $U_0$. If $e\\in E\\cap\\overline F$, apply the spectral proconstructible-closure theorem to the singleton family with member $F$: there is $f\\in F$ with $e\\in\\overline{\\{f\\}}$. The generalization stability of $E$ then forces $f\\in E$, contradicting $F\\cap E=\\varnothing$. Thus $O=U_0\\setminus\\overline F$ is open in $Y$ and contains $E$. For each $e\\in E$, choose an affine open of $Y$ containing $e$ inside $O$. A finite subcover of $E$ exists; let $V$ be its union. Then $V$ is quasi-compact open, $E\\subseteq V\\subseteq O$, and $V\\cap F_{ab}=\\varnothing$ for every pair.",
+   "uses": [
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Proposition 2.3(i), proof using Lemma 2.2; the constructible-avoidance inference is expanded using Stacks Tag 0903, topology.tex, lemma-constructible-stable-specialization-closed (1)."
+   }
+  },
+  {
+   "text": "The opens $V\\cap U_a$ cover $V$. On an overlap, $V\\cap U_a\\cap U_b\\subseteq W_{ab}$ because $V$ misses $F_{ab}$. Hence the sections $s_a|_{V\\cap U_a}$ agree on every overlap. The sheaf axiom for $\\mathcal O_Y$ glues them uniquely to $t\\in\\Gamma(V,\\mathcal O_V)$. Since $j(|Z|)\\subseteq V$, the open-factorization theorem gives $j_V:Z\\to V$. On $j^{-1}(U_a)$, its pullback of $t$ equals the pullback of $s_a$, which is $s$ by the ringed-image identification and the construction in step 2. These opens cover $Z$, so the sheaf uniqueness axiom gives $j_V^*(t)=s$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Proposition 2.3(i), printed pp.4–5, finite local representatives and gluing; primary Numdam scan read online, local archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk",
+  "lem-sfb-qc-flat-monomorphism-ringed-image",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "pqf-lem-qs-intersection-qc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0903, lemma-constructible-stable-specialization-closed (1), combined with the finite local gluing argument of Raynaud Proposition 2.3(i), read in the primary online scan; local Raynaud archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A global regular function on a quasi-compact flat monomorphism into a quasi-separated scheme extends to a quasi-compact open neighbourhood of its image",
+   "results": "{\"t\": \"2026-10-24T14:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"A global regular function on a quasi-compact flat monomorphism into a quasi-separated scheme extends to a quasi-compact open neighbourhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\"], \"digest\": \"53ca8b99f7770bab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.generalizingMap supplies only generization stability; localization and spreading-out hits do not extend functions from arbitrary quasi-compact flat monomorphisms. FlatMono.lean requires local finite presentation for its open immersion conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-24T14:35:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Order.Array.monotone_flatMapM\", \"FreeAddMonoid.ofList_flatten\", \"FreeMonoid.ofList_flatten\", \"Module.Flat.instLocalizationAlgebraMapSubmonoid\", \"CommRingCat.isRegularMono_of_faithfullyFlat\", \"CommRingCat.regularMonoOfFaithfullyFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"c4193d4f75efc7ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.generalizingMap supplies only generization stability; localization and spreading-out hits do not extend functions from arbitrary quasi-compact flat monomorphisms. FlatMono.lean requires local finite presentation for its open immersion conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "(flat.*mono|mono.*flat|pro.?open|section.*neigh|neigh.*section)",
+   "results": "{\"t\": \"2026-10-24T14:35:19Z\", \"tool\": \"grep\", \"query\": \"(flat.*mono|mono.*flat|pro.?open|section.*neigh|neigh.*section)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"4efc9d2fac3134e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.generalizingMap supplies only generization stability; localization and spreading-out hits do not extend functions from arbitrary quasi-compact flat monomorphisms. FlatMono.lean requires local finite presentation for its open immersion conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a quasi-compact pro-open subscheme are the direct limit of sections on open neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T14:35:20Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of a quasi-compact pro-open subscheme are the direct limit of sections on open neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\"], \"digest\": \"d0f696df7efe97f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.generalizingMap supplies only generization stability; localization and spreading-out hits do not extend functions from arbitrary quasi-compact flat monomorphisms. FlatMono.lean requires local finite presentation for its open immersion conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-compact flat monomorphism image is stable under generalization and every regular function extends to an open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T14:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi-compact flat monomorphism image is stable under generalization and every regular function extends to an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\"], \"digest\": \"ae63a1ca40a5ba0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.generalizingMap supplies only generization stability; localization and spreading-out hits do not extend functions from arbitrary quasi-compact flat monomorphisms. FlatMono.lean requires local finite presentation for its open immersion conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global regular function on a quasi-compact flat monomorphism extends to a quasi-compact open neighbourhood of its image in a quasi-separated scheme",
+   "results": "{\"t\": \"2026-10-24T15:06:34Z\", \"tool\": \"leanfinder\", \"query\": \"A global regular function on a quasi-compact flat monomorphism extends to a quasi-compact open neighbourhood of its image in a quasi-separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.instQuasiSeparatedMorphismRestrict\"], \"digest\": \"e7f2383a597ead63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: localization on a principal open, finite-presentation flat monomorphisms, and sections of affine limits do not give the stated extension for an arbitrary quasi-compact flat monomorphism; candidate declarations read."
+  },
+  {
+   "tool": "grep",
+   "query": "(flat.*mono|mono.*flat|pro.?open|section.*neigh|neigh.*section)",
+   "results": "{\"t\": \"2026-10-24T15:07:47Z\", \"tool\": \"grep\", \"query\": \"(flat.*mono|mono.*flat|pro.?open|section.*neigh|neigh.*section)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"06aa872045194c0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: localization on a principal open, finite-presentation flat monomorphisms, and sections of affine limits do not give the stated extension for an arbitrary quasi-compact flat monomorphism; candidate declarations read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-24T15:07:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Order.Array.monotone_flatMapM\", \"FreeAddMonoid.ofList_flatten\", \"FreeMonoid.ofList_flatten\", \"Module.Flat.instLocalizationAlgebraMapSubmonoid\", \"CommRingCat.isRegularMono_of_faithfullyFlat\", \"CommRingCat.regularMonoOfFaithfullyFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"c4193d4f75efc7ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: localization on a principal open, finite-presentation flat monomorphisms, and sections of affine limits do not give the stated extension for an arbitrary quasi-compact flat monomorphism; candidate declarations read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a quasi-compact pro-open subscheme are the direct limit of sections on open neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T15:08:46Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of a quasi-compact pro-open subscheme are the direct limit of sections on open neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\"], \"digest\": \"d0f696df7efe97f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: localization on a principal open, finite-presentation flat monomorphisms, and sections of affine limits do not give the stated extension for an arbitrary quasi-compact flat monomorphism; candidate declarations read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an inverse image sheaf on a quasi-compact generalization-stable retrocompact subset of a scheme extend to an open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T15:08:48Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of an inverse image sheaf on a quasi-compact generalization-stable retrocompact subset of a scheme extend to an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\"], \"digest\": \"bfd1f5e5dd6cdf09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: localization on a principal open, finite-presentation flat monomorphisms, and sections of affine limits do not give the stated extension for an arbitrary quasi-compact flat monomorphism; candidate declarations read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the Anantharaman 4.2.2 / 4.1.3 finite-set affine-neighbourhood branch; §3, Proposition 3.4 (heading OCR 3.5), printed pp.14–15, proved using the following two lemmas. Its quasi-affine convention is quasi-compact open in an affine scheme. Primary scan: https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf . Local archive WANTED. Supporting prerequisite: Raynaud Proposition 3.4 (heading OCR 3.5), proof on pp.14–15, extension of the chosen function using Proposition 2.3(i), with generization stability from Proposition 1.1. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proopen-global-section-extension",
+  "worker": "stage1",
+  "summary": "Reused the existing ringed-image theorem and generic stalk, affine-basis and spectral-topology nodes. Wrote out local representatives, finite overlap agreement neighbourhoods, constructible disagreement avoidance and sheaf gluing. No new nodes and no change of statement. No finite presentation, Noetherian or separatedness hypothesis is introduced.",
+  "blueprint": "Serves the inherited direct-image/trait-group descent branch of det-thm-sf-ctf-stability-direct-images, proof (3), and Raynaud Proposition 3.4 (heading OCR 3.5), pp.14–15, extension of a chosen function by Proposition 2.3(i). The ancestor tool returns None: this prerequisite has no imported blueprint ancestor; latest blueprint and whole imported DAG searches find no synonymous blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Canonical stalk isomorphism for ordinary topological inverse image, including its unit/germ formula; generic tool for the induced ringed subspace, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine refinement of neighbourhoods and finite quasi-compact neighbourhood selection; generic scheme topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Spectrality of the finite union of affine opens, needed to apply the constructible closure theorem."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Quasi-compactness of overlaps under the actual quasi-separated hypothesis; no affine-overlap assumption."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "why": "Quasi-compact opens of the spectral neighbourhood are retrocompact, making the finite bad sets constructible."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Generic spectral closure theorem: closure points of a constructible bad set specialize from that set; it supplies precisely Raynaud Lemma 2.2 avoidance."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Factor the original morphism through the constructed open V; generic open-subscheme universal property."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine neighbourhoods are quasi-compact; finite unions used for U_0, W_ab and V are therefore quasi-compact. This generic scheme fact is not a route change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-f2f749d95",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-f2f749d95 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and all 14 cited node statements in full. The statement is kept: a quasi-compact flat monomorphism j:Z→Y with Z quasi-compact and Y quasi-separated; E=j(Z) is generalization-stable, and every global section extends to a quasi-compact open V containing E. It holds on test cases: the localization S^-1A, Spec O_{Y,y}, two minimal primes of k[x,y]/(xy) with section (1,0) extending on Y minus the origin, E empty, j surjective. Step 1: lem-sfb-qc-flat-monomorphism-ringed-image (same unit, unsplit, no cycle) gives the identification with the ringed subspace, generalization stability and retrocompactness. Steps 2–3: the inverse-image stalk representative, germ equality, the affine basis and the 'quasi-separated implies quasi-compact intersection' node (no overlap is assumed affine, so E1 is avoided) give finitely many charts U_a and agreement opens W_ab. Retrocompactness makes E∩A_ab quasi-compact. Step 4 (elementary): F_ab=A_ab minus W_ab is constructible in the spectral space U_0 by the retrocompact-iff-quasi-compact node and the definition. Step 5: the closure node with a singleton family (Stacks 0903(1), topology.tex l.4461, checked) plus generalization stability shows the closure of F misses E; the specialization direction is correct. Step 6: gluing on V∩U_a, the open-subscheme factorization, and pullback compared on j^-1(U_a). No new nodes. No duplicate found among spectral-limit-sheaf-sections, h0-spectral-closed-restriction, generalizing-subset-affine-envelope and spectral-generalizations-of-quasi-compact. The parent quasiaffine-neighbourhood uses exactly these two clauses. The 8 tool_uses are generic tools and accepted. Raynaud, Séminaire Samuel exp. 5, is not in literature/, so it is WANTED and proof_origin is agent; I did not read it. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProopenGlobalSectionExtension",
+  "declaration": "AlgebraicGeometry.proopen_global_section_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProopenGlobalSectionExtension.lean",
+  "statement": "theorem proopen_global_section_extension {Z Y : Scheme.{u}} (j : Z ⟶ Y) [QuasiCompact j] [Flat j] [Mono j] [CompactSpace Z] [QuasiSeparatedSpace Y] : StableUnderGeneralization (Set.range j) ∧ ∀ s : Γ(Z, ⊤), ∃ V : Y.Opens, IsCompact (V : Set Y) ∧ Set.range j ⊆ (V : Set Y) ∧ ∃ (jV : Z ⟶ V.toScheme) (t : Γ(V.toScheme, ⊤)), jV ≫ V.ι = j ∧ jV.appTop t = s",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da2dae27e",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Lean signature matches node clause-by-clause: Scheme.{u} Z Y, j with [QuasiCompact][Flat][Mono], [CompactSpace Z], [QuasiSeparatedSpace Y]; StableUnderGeneralization (Set.range j) with correct direction (y ⤳ e ↔ e ∈ closure{y}); ∀ s, ∃ compact open V ⊇ range j, jV with jV ≫ V.ι = j (unique, V.ι mono) and t with jV.appTop t = s. No extra hypotheses, not stronger (no uniform V, no uniqueness). Empty Z/Y, non-qc Y, non-fp monos covered. Only node field changed is lean; lean.statement verbatim equal to file. Stmt_dep records usable; proof-only imports exist on side-live. No defs, one sorry, docstrings with source place, blueprint tag and six proof steps; report sections present; no existing Mathlib match. Not recompiled (no change)."
+ }
+}

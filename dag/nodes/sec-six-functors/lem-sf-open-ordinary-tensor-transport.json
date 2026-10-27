@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-open-ordinary-tensor-transport",
+ "kind": "statement",
+ "title": "Transport of the normalized ordinary open tensor formula",
+ "statement": "In the setting of [def-sf-open-semilinear-tensor-model-data], let o be supplied Operations for an open immersion j:U→X and assume IsIso o.completedMap. There exists an ordinary tensor comparison μ, natural in both module variables, whose value on every extension summand [x] tensor restrictedSection(y) is the original extension summand [x tensor y]. The restricted section uses the actual equivalence counit in the interface. No ordinary reduction, strict scalar comparison or existence of coefficient operations is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete slice equivalence to obtain cocontinuity of sliceSite.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized abstract ringed coefficient tensor transport to the actual completed rings, completedMap, integral equivalence and eqToIso integralFunctor. The recorded ordinary tensor and tensor maps are the native monoidal tensor. The actual extensionSection is the original ringed slice summand after η.inverse; restrictedSection is precisely its actual integral counit. These identifications give OrdinaryNaturality and OrdinaryGenerators without unfolding the completed coefficient limit inside the generic tensor construction.",
+   "uses": [
+    "lem-sf-open-ringed-coefficient-tensor-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sf-open-ringed-coefficient-tensor-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula. Substep of lem-sf-open-semilinear-ordinary-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with scalar extension for sheaves of modules, with tensor generators",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapGenerators, SheafOfModules.mapFree, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.SMulCandidate.x",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*[Ss]calar|ringedSlice",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on a ringed slice site satisfies the tensor projection formula on original summands",
+   "results": "8 hits: Function.ExtendByZero.linearMap, Function.ExtendByZero.hom, AlgebraicGeometry.RingedSpace.res_zero, PiTensorProduct.zero_tprodCoeff', Function.ExtendByZero.hom_apply, TrivSqZeroExt.fst_zero, Function.ExtendByZero.linearMap_apply, PiTensorProduct.zero_tprodCoeff",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-semilinear-ordinary-comparison",
+   "place": "Ordinary open comparison: Transport of the normalized ordinary open tensor formula.",
+   "via": [
+    "lem-sf-open-semilinear-ordinary-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenOrdinaryTensorTransport",
+  "file": "lean/Sheaf/SixFunctors/OpenOrdinaryTensorTransport.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openOrdinaryTensorTransport",
+  "statement": "theorem openOrdinaryTensorTransport (o : Operations l E j) (hmap : IsIso o.completedMap) :\n    ∃ μ : OrdinaryTensorComparison l E j o,\n      OrdinaryNaturality l E j o μ ∧ OrdinaryGenerators l E j o μ",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

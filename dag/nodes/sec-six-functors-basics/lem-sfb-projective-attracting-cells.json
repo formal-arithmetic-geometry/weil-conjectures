@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-projective-attracting-cells",
+ "kind": "statement",
+ "title": "Affine attracting strata for an isolated-fixed-point projective action",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $X$ be a nonempty smooth connected projective $F$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism], endowed with a $\\mathbf G_m$-action, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Suppose an equivariant closed immersion into $\\mathbf P(E)$ for a finite-dimensional linear $\\mathbf G_m$-representation is given. Assume the fixed subscheme $X^{\\mathbf G_m}$ is a finite disjoint union of reduced $F$-points. For each such point $x$, there is a unique smooth locally closed reduced subscheme $X_x^+\\subseteq X$ whose $K$-points, for every algebraically closed extension $K/F$, are the points $y$ such that the orbit map $t\\mapsto ty$ extends to $\\mathbf A^1_K$ with value $x_K$ at zero. For every commutative $F$-algebra $A$, an $A$-point of $X_x^+$ is equivalently a $\\mathbf G_{m,A}$-equivariant map $\\mathbf A^1_A\\to X_A$ with value $x_A$ at zero, by evaluation at $1$; here $\\mathbf G_m$ acts on $\\mathbf A^1$ by multiplication. These subschemes constitute a finite disjoint stratification, compatible with algebraically closed field extension. The scheme $X_x^+$ is isomorphic to $\\mathbf A_F^{d_x}$, where $d_x$ is the dimension of the sum of the strictly positive character-weight spaces in $T_xX$. Here the weight $a\\in\\mathbf Z$ denotes the character $t\\mapsto t^a$, and tangent space means the dual of $\\mathfrak m_x/\\mathfrak m_x^2$. Exactly one stratum is open dense, and it is the stratum at a fixed point whose entire tangent space has strictly positive weights. If $X=\\operatorname{Spec}F$, its sole stratum is $\\mathbf A^0_F$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.47 and Corollaries 13.48--13.49, printed pp.272--274; projective linear-action application in the paragraph after Lemma 13.51, p.275. Projectivity is retained to ensure every orbit has a limit."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-sc-gm-ga",
+  "def-sbc-affine-space",
+  "def-sfb-diagonal-projective-action",
+  "def-sfb-fixed-point-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-gm-representation-weight-basis], choose homogeneous coordinates $z_i$ on $\\mathbf P(E)$ such that $t[z_i]=[t^{a_i}z_i]$. The standard chart $D_+(z_i)$ is affine by [lemma-nagata-relative-affine-space-open-immersion] (relabel its distinguished coordinate), with ratios $u_j=z_j/z_i$ of weights $a_j-a_i$. These charts are invariant. Their intersections $U_i$ with $X$ are affine by [def-weil-closed-immersion], and smooth by [lem-pc-open-immersion-smooth-composition]. Fix a fixed point $x$, choose $i$ with $z_i(x)\\ne0$, and put $w=a_i$, $c_j=u_j(x)$. Since the line $x$ is fixed, $c_j=0$ if $a_j\\ne w$. In this chart define $C_x$ by $u_j=0$ for $a_j<w$ and $u_j=c_j$ for $a_j=w$. Thus $C_x$ is an affine space on the remaining coordinates, all of strictly positive weights. Set $Y_x=X\\cap C_x$ as a closed subscheme of $U_i$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.46, p.272, and the affine concentrator equations of Definition 13.21/Proposition 13.24, pp.260--262."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $A$, within $U_i$ the orbit of $y$ extends with value $x_A$ exactly when $u_j(y)=0$ for $a_j<w$ and $u_j(y)=c_j$ for $a_j=w$: its ratios are $t^{a_j-w}u_j(y)$. These identities hold even for nilpotent coefficients, since $A[t]\\hookrightarrow A[t,t^{-1}]$ is injective. Hence $Y_x$ is the affine concentrator $U_i(\\{x\\})$ and is smooth of finite type by [lem-sfb-smooth-affine-concentrator]. Its immersion in $X$ is locally closed. Conversely, any equivariant $\\phi:\\mathbf A^1_A\\to X_A$ with $\\phi(0)=x_A$ factors through $(U_i)_A$: after every geometric base change, the inverse image of the invariant closed complement of $U_i$ is closed and invariant in $\\mathbf A^1$ and misses zero. If it contained a nonzero point it would contain its whole $\\mathbf G_m$-orbit and its closure, including zero, a contradiction. It is therefore empty on every fibre and hence empty. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to factor $\\phi$ through $U_i$, where the preceding polynomial equations apply. Conversely those equations give the equivariant extension by the same ratio formula; its defining equations for $X$ vanish in $A[t]$ because they vanish after inverting $t$. Thus evaluation at $1$ identifies $Y_x(A)$ with exactly the functor in the statement. Uniqueness inside the chart is part of the concentrator assertion. This also proves independence of the chosen chart by the identical functor.",
+   "uses": [
+    "lem-sfb-smooth-affine-concentrator",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.24 and Remark 13.57, pp.262,277; Proposition 13.58 and its proof, pp.277--278. The invariant-chart factorization is written out over arbitrary test algebras."
+   }
+  },
+  {
+   "text": "Write $B=\\mathcal O(Y_x)$. It is a quotient of the polynomial algebra on the strictly positive-weight coordinates of $C_x$. The action makes its defining ideal homogeneous: comparing coefficients in $F[t,t^{-1}]$ in the coaction of an invariant ideal places each homogeneous component in the ideal. Consequently $B=\\bigoplus_{a\\geq0}B_a$, $B_0=F$ (evaluation at $x$ preserves constants), and $\\mathfrak m_x=\\bigoplus_{a>0}B_a$. Smoothness from Step 2 and [lem-weil-pbc-smooth-scheme-over-field-regular] give regularity at this maximal ideal. Apply [lem-sfb-positive-graded-regular-polynomial] to homogeneous lifts of a basis of $\\mathfrak m_x/\\mathfrak m_x^2$. It gives $Y_x\\cong\\operatorname{Spec}F[T_1,\\ldots,T_d]=\\mathbf A^d_F$ by [def-sbc-affine-space]. In particular $Y_x$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sfb-positive-graded-regular-polynomial",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.44, pp.271--272, in the fixed-point case; Lemma 13.39, pp.268--269."
+   }
+  },
+  {
+   "text": "The tangent calculation is scheme-theoretic: substitute $u_j=c_j+\\epsilon v_j$ over $F[\\epsilon]/(\\epsilon^2)$. The equations of $C_x$ set $v_j=0$ exactly in the nonpositive-weight directions. The closed immersion $X\\hookrightarrow\\mathbf P(E)$ identifies $T_xX$ with the subspace satisfying the linear terms of its defining equations. Therefore\n$$T_xY_x=T_xX\\cap T_xC_x=(T_xX)_{>0}.$$\nIndeed an invariant subspace of a diagonal representation is the direct sum of its weight intersections, by [lem-sfb-gm-representation-weight-basis]. The differential acts on $v_j$ by $t^{a_j-w}$; this is the stated tangent convention, with positive, not negative, weights. The tangent space of the polynomial algebra from Step 3 has basis dual to the classes of $T_i$, so its dimension is $d$. Thus $d=d_x$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 13.48--13.49(a), p.273, and the coordinate convention of Example 13.37, p.268."
+   }
+  },
+  {
+   "text": "For an algebraically closed extension $K/F$ and $y=[v]\\in X(K)$, decompose $v=\\sum_a v_a$ by weights and take $w$ to be the smallest weight with $v_w\\ne0$. The expression\n$$t\\longmapsto[\\sum_{a\\geq w}t^{a-w}v_a]$$\nis regular on $\\mathbf A^1_K$: at least one weight-$w$ coordinate is a nonzero constant, so it lies in a standard chart. It lies in $X_K$, since every equation of the closed subscheme $X$ vanishes for $t\\ne0$ and $K[t]\\hookrightarrow K[t,t^{-1}]$ is injective. Its value at zero is $[v_w]$, a fixed point, hence one of the finitely many $x_K$ by the assumed fixed-subscheme description. Step 2 places $y$ in $Y_x(K)$. The minimum-weight formula determines this $x$ uniquely. Every point of $X$ lifts to a point over an algebraic closure of its residue field, so these descriptions prove exhaustion and pairwise disjointness of the underlying loci. They form the claimed finite partition by locally closed subschemes. All equations and the functor in Step 2 persist after algebraically closed scalar extension, giving the stated compatibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.20, pp.259--260; Theorem 13.47(c) and the appended erratum at p.273 requiring properness. Here the given projective embedding yields the limit explicitly."
+   }
+  },
+  {
+   "text": "If another locally closed reduced subscheme has the prescribed points over every algebraically closed extension, it has the same support as $Y_x$: test each scheme point in an algebraic closure of its residue field. A locally closed reduced subscheme is the reduced induced structure on its support, by [lem-weil-pbc-reduced-induced-closed-subscheme] applied on opens where the support is closed. These opens cover the common support, so uniqueness there identifies the subschemes over $X$. Thus $X_x^+:=Y_x$ has the claimed uniqueness as well as the arbitrary-algebra description already proved.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.47(a), p.272; uniqueness as in Proposition 13.23, p.261."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-smooth-scheme-over-field-regular] and [lem-sc-regular-connected-integral], the nonempty smooth connected $X$ is integral, hence its underlying space is irreducible. The closures of the finitely many strata cover $X$. An irreducible space cannot be a finite union of proper closed subsets, so some stratum is dense. A dense locally closed subset is open: if it is $V\\cap Z$ with $V$ open and $Z$ closed, density forces $Z=X$. Two such strata cannot exist since two nonempty opens in an irreducible space intersect. The reduced locally closed structure on this open is the open subscheme structure, by [lem-weil-pbc-reduced-induced-closed-subscheme]; $X$ is reduced. At its fixed point $x$, its tangent space is therefore $T_xX$, and Step 4 gives $T_xX=(T_xX)_{>0}$. This is the claimed attracting point and unique open dense stratum. Finally, for $X=\\operatorname{Spec}F$, the action is trivial, the only tangent space is zero, and the construction has coordinate algebra $F$ and sole cell $\\mathbf A^0_F$ by [def-sbc-affine-space].",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.49(c) and proof, pp.273--274; dimension-zero case by the affine-space definition."
+   }
+  },
+  {
+   "text": "Conversely, let $x'$ be any fixed point whose tangent weights are all strictly positive; we show that $X_{x'}^+$ is the open dense stratum $S$ of Step 7, so the fixed point named in the statement is unique. In the chart $U_i=\\operatorname{Spec}A$ of $x'$ from Step 1, $Y_{x'}$ is cut out by the finitely many chart equations $g_1,\\ldots,g_r\\in A$ of $C_{x'}$. Let $\\mathfrak p$ be the prime of $x'$, put $R=\\mathcal O_{X,x'}=A_{\\mathfrak p}$ with maximal ideal $\\mathfrak m$, and let $I\\subseteq\\mathfrak m$ be the ideal generated by the $g_k$, so $\\mathcal O_{Y_{x'},x'}=R/I$ with maximal ideal $\\bar{\\mathfrak m}$. Both $X$ and $Y_{x'}$ are smooth over $F$ (Step 2), so $R$ and $R/I$ are regular local rings by [lem-weil-pbc-smooth-scheme-over-field-regular]. By Step 4, $T_{x'}Y_{x'}=(T_{x'}X)_{>0}=T_{x'}X$. Dually the surjection $\\mathfrak m/\\mathfrak m^2\\to\\bar{\\mathfrak m}/\\bar{\\mathfrak m}^2$ is an isomorphism, so every element of $I$ has zero image in $\\mathfrak m/\\mathfrak m^2$. By [lem-weil-pbc-regular-local-quotient-independent-generators], $I$ is generated by a finite set whose images in $\\mathfrak m/\\mathfrak m^2$ are linearly independent; such a set contains no element of zero image, so it is empty and $I=0$. Hence each $g_k$ is killed by some $s_k\\in A\\setminus\\mathfrak p$, and on the open $D(s_1\\cdots s_r)\\ni x'$ of $U_i$ all equations of $Y_{x'}$ vanish: this nonempty open subscheme of $X$ lies in $X_{x'}^+$. It meets the open dense $S$ because $X$ is irreducible (Step 7), and distinct strata are disjoint (Step 5). Therefore $X_{x'}^+=S$ and $x'$ is its fixed point.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.49(c), pp.273--274 (uniqueness of the attracting point); Corollary 13.49(a) tangent-space identification, p.273."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gm-representation-weight-basis",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-smooth-affine-concentrator",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-positive-graded-regular-polynomial",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 13.46, Theorem 13.44 and Section 13g proof of Theorem 13.47, pp.271--278; Corollary 13.49 and the appended properness erratum. Invariant projective charts make the gluing/functor argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bialynicki Birula decomposition of a smooth connected projective scheme with isolated multiplicative group fixed points into affine attracting cells",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (elements with zero zeroth homogeneous component) is contained in the ideal generated by a set of hom\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a multiplicative group action on a smooth projective variety with finitely many fixed points the attracting loci are locally closed affine spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ProperSMul\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"(G : Type u_1) →\\n  (X : Type u_2) → [TopologicalSpace G] → [TopologicalSpace X] → [inst : Group G] → [MulAction G X] → Prop\", \"doc\": \"The action of the topological group $G$ on the topological space $X$ is proper, meaning that the map $(g, x) \\\\mapsto (g \\\\cdot x, x)$ from $G \\\\times X$ to $X \\\\times X$ is a proper map (the preimage of \"}\n  {\"name\": \"ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : SMul Γ T] [ProperlyDiscontinuousSMul Γ T]\\n  [T2Space T] [LocallyCompactSpace T] [ContinuousConstSMul Γ T] (x : T),\\n  ∃ U ∈ nhds x, ∀ (γ : Γ), ((fun x => γ • x) '' U ∩ U).Nonempty → γ • x = x\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, every point $x \\\\in T$ has a neighborhood $U$ such that if the image of $U$ under $\\\\gamma$ intersects $U$, t\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : SMul Γ T] [ProperlyDiscontinuousSMul Γ T] (x : T),\\n  {γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"ProperlyDiscontinuousSMul\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"(Γ : Type u_4) → (T : Type u_5) → [TopologicalSpace T] → [SMul Γ T] → Prop\", \"doc\": \"A group action of a discrete group $\\\\Gamma$ on a topological space $T$ is properly discontinuous if for every point $x \\\\in T$, there exists an open neighborhood $U$ of $x$ such that for all $\\\\gamma \\\\i\"}\n  {\"name\": \"isMinimal_iff_isClosed_smul_invariant\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α],\\n  MulAction.IsMinimal M α ↔ ∀ (s : Set α), IsClosed s → (∀ (c : M), c • s ⊆ s) → s = ∅ ∨ s = Set.univ\", \"doc\": \"A monoid action $ M $ on a topological space $ \\\\alpha $ is minimal if and only if every closed subset $ s \\\\subseteq \\\\alpha $ invariant under the action (i.e., $ c \\\\cdot s \\\\subseteq s $ for all $ c \\\\in\"}\n  {\"name\": \"isClosedMap_smul\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {α : Type u_2} {G : Type u_4} [inst : TopologicalSpace α] [inst_1 : Group G] [inst_2 : MulAction G α]\\n  [ContinuousConstSMul G α] (c : G), IsClosedMap fun x => c • x\", \"doc\": \"For any group $ G $ acting continuously on a topological space $ \\\\alpha $, the scalar multiplication map $ x \\\\mapsto c \\\\cdot x $ by each element $ c \\\\in G $ is a closed map, meaning the image of every\"}\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.exists_nhds_image_vadd_eq_self\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T]\\n  [T2Space T] [LocallyCompactSpace T] [ContinuousConstVAdd Γ T] (x : T),\\n  ∃ U ∈ nhds x, ∀ (γ : Γ), ((fun x => γ +ᵥ x) '' U ∩ U).Nonempty → γ +ᵥ x = x\", \"doc\": \"For a properly discontinuous additive action of a group $\\\\Gamma$ on a Hausdorff, locally compact topological space $T$, every point $x \\\\in T$ has a neighborhood $U$ such that if $\\\\gamma \\\\in \\\\Gamma$ sa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialynicki\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Bialynicki|Birula|attracting.*(cell|scheme)|fixed.*point.*stratification",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bialynicki Birula theorem smooth projective scheme with isolated fixed points has affine attracting cells",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Subsingleton ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is a subsingleton (i.e., contains at most one point), then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.iff_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsAffine X ↔ IsAffine Y\", \"doc\": \"If $ f : X \\to Y $ is an isomorphism of schemes, then $ X $ is affine if and only if $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bialynicki Birula decomposition of a smooth projective scheme with isolated fixed points into affine attracting cells",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (elements with zero zeroth homogeneous component) is contained in the ideal generated by a set of hom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine/projective scheme constructions and abstract fixed-point sets do not state the attracting-cell theorem for group-scheme actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a linear multiplicative group action on a smooth projective variety the attracting loci of isolated fixed points are affine spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Proj.basicOpen 𝒜 f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is an affine open subset, meaning it is \"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic.smul_eq_self_iff\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K},\\n  g.IsParabolic → ∀ [NeZero 2] {c : OnePoint K}, g • c = c ↔ c = g.parabolicFixedPoint\", \"doc\": \"For a parabolic element $ g $ in the general linear group $ \\\\mathrm{GL}(2,K) $ over a field $ K $, and given that $ 2 \\\\neq 0 $ in $ K $, a point $ c $ in the one-point compactification $ \\\\text{OnePoin\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine/projective scheme constructions and abstract fixed-point sets do not state the attracting-cell theorem for group-scheme actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialynicki\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: affine/projective scheme constructions and abstract fixed-point sets do not state the attracting-cell theorem for group-scheme actions"
+  },
+  {
+   "tool": "grep",
+   "query": "Bialynicki|Birula|attracting.*(cell|scheme)|concentrator",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: affine/projective scheme constructions and abstract fixed-point sets do not state the attracting-cell theorem for group-scheme actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth projective varieties with finitely many multiplicative group fixed points have affine attracting strata",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddAction.fixedBy_subset_fixedBy_zsmul\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixedPoints\", \"type\": \"∀ (α : Type u_1) {G : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α] (g : G) (j : ℤ),\\n  AddAction.fixedBy α g ⊆ AddAction.fixedBy α (j • g)\", \"doc\": \"For any additive group $G$ acting on a type $\\\\alpha$, and for any $g \\\\in G$ and integer $j$, the set of elements fixed by $g$ (i.e., $\\\\{x \\\\in \\\\alpha \\\\mid g \\\\cdot x = x\\\\}$) is a subset of the set of el\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixedPoints\", \"type\": \"∀ {α : Type u_1} {G : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α] {a : α} {g : G},\\n  g +ᵥ a ∈ AddAction.fixedBy α g ↔ a ∈ AddAction.fixedBy α g\", \"doc\": \"For any additive group $G$ acting on a type $\\\\alpha$, and for all $g \\\\in G$ and $a \\\\in \\\\alpha$, it holds that $g \\\\cdot a \\\\in \\\\{x \\\\in \\\\alpha \\\\mid g \\\\cdot x = x\\\\}$ if and only if $a \\\\in \\\\{x \\\\in \\\\alpha \\\\\"}\n  {\"name\": \"AddAction.fixedPoints_of_subsingleton\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α] [Subsingleton α],\\n  AddAction.fixedPoints G α = Set.univ\", \"doc\": \"If $\\\\alpha$ is a subsingleton (i.e., a type with at most one element), then the set of fixed points of any additive group action on $\\\\alpha$ coincides with the universal set of $\\\\alpha$ (which contain\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AddAction.fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(M : Type u_1) → (α : Type u_3) → [inst : AddMonoid M] → [AddAction M α] → Set α\", \"doc\": \"Given an additive monoid $M$ acting on a type $\\\\alpha$, this defines the set of elements $x \\\\in \\\\alpha$ satisfying $m \\\\cdot x = x$ for all $m \\\\in M$, i.e., the elements fixed by the entire additive mo\"}\n  {\"name\": \"MulAction.fixedPoints_of_subsingleton\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"[Subsingleton α] : fixedPoints G α = .univ\", \"doc\": \"If $\\\\alpha$ is a subsingleton type (i.e., a type with at most one element), then the set of fixed points of any group action on $\\\\alpha$ is equal to the universal set of $\\\\alpha$.\"}\n  {\"name\": \"MulAction.fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Set α\", \"doc\": \"The set of elements $ a \\\\in \\\\alpha $ satisfying $ m \\\\cdot a = a $ for all $ m \\\\in M $, where $ M $ is a monoid acting on $ \\\\alpha $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine/projective scheme constructions and abstract fixed-point sets do not state the attracting-cell theorem for group-scheme actions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bruhat-longest-cell-charts",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: Bialynicki--Birula input to Milne 21.70; the generic projective theorem rather than a restatement of Bruhat cells",
+   "via": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-attracting-cells",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused smooth affine concentrators, constructed cells in invariant projective charts over arbitrary algebras, extracted one local-regular graded polynomial-algebra prerequisite, computed positive tangent weights and exhausted X by explicit minimum-weight limits. Read Milne including properness erratum; no SGA route.",
+  "blueprint": "Realizes the inherited exact from.place Bialynicki--Birula prerequisite to Milne 21.70. blueprint_refs.py ancestor returns None; inherited from.node and via are retained. Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and direct-image proof read; only the subordinate geometric prerequisite is split, with no change to unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Standard projective-coordinate chart, used only to identify the invariant affine charts; not a change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smooth-over-field implies regular, used for the graded coordinate ring and irreducibility; no algebraic-group assertion or alternative unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Uniqueness of reduced induced subschemes, used to identify locally closed strata from all geometric points."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Connected regular schemes are integral, used solely for the unique dense member of the finite locally closed partition."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "why": "Regular local quotient with equal cotangent space has zero kernel; added by the reviewer to prove the converse clause (a fixed point with all tangent weights positive has the open stratum). Pure commutative algebra, not a change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-df28be847",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-df28be847 (reviewer sub-agent of L); spot-checked: Read in full against Milne (2017) Thm 13.44, Lemma 13.39, Thm 13.47, Cors 13.48-13.49 and the §13g proof (pp.268-278), plus the properness erratum: the item's projectivity hypothesis matches the corrected theorem. No SGA source is used. All seven steps check out against the statements they cite: invariant weight charts; concentrator hypotheses, with factorization through U_i via geometric fibres and nilpotents handled by A[t]→A[t,t^-1]; homogeneous ideal giving B_0=F and B_m regular; tangent weights a_j-w, positive in the attracting direction; lowest-weight limits giving exhaustion; reduced-induced uniqueness; and a unique open dense stratum by irreducibility. New node lem-sfb-positive-graded-regular-polynomial: true (graded Nakayama, then the localized kernel vanishes because both sides are regular of dimension d, then homogeneity), tested on F, F[u] and F[u,v] with weights, while F[u,v]/(uv) and F[u]/(u^2) are excluded. It is self-contained, statement-only and strictly smaller than the item, with no duplicate in the DAG. Gap fixed: the statement also says the converse, that a fixed point with all tangent weights positive has the open stratum (Milne 13.49(c), unique attracting point), and lem-sfb-bruhat-longest-cell-charts step 2 relies on it, but Step 7 only proved the forward direction. The FIX adds Step 8: T_x'Y=T_x'X, so the stalk ideal I has zero image in m/m^2; lem-weil-pbc-regular-local-quotient-independent-generators (Stacks 00NR) then gives I=0, so an open neighbourhood lies in the stratum, which therefore equals the open stratum. proof_deps and tool_uses updated; statement unchanged. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-projective-attracting-cells.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveAttractingCells",
+  "declaration": "AlgebraicGeometry.ProjectiveAttractingCells.exists_projective_attracting_cells",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveAttractingCells.linePoint",
+   "AlgebraicGeometry.ProjectiveAttractingCells.IsExtension",
+   "AlgebraicGeometry.ProjectiveAttractingCells.Attracts",
+   "AlgebraicGeometry.ProjectiveAttractingCells.exists_projective_attracting_cells"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveAttractingCells.lean",
+  "statement": "theorem exists_projective_attracting_cells (F : Type u) [Field F] [IsAlgClosed F] (X : Over (Spec (.of F))) [Smooth X.hom] [IsProjective X.hom] [Nonempty X.left] [ConnectedSpace X.left] (a : ModObj (StandardGroupSchemes.multiplicative F) X) (hlinear : ∃ (n : ℕ) (w : ULift.{u} (Fin (n + 1)) → Fin 1 → ℤ) (b : ModObj (DiagonalProjectiveAction.torus F 1).X (DiagonalProjectiveAction.space F n)) (e : Grp.mk (StandardGroupSchemes.multiplicative F) ≅ DiagonalProjectiveAction.torus F 1) (j : X ⟶ DiagonalProjectiveAction.space F n), DiagonalProjectiveAction.IsDiagonal F 1 n w b ∧ IsClosedImmersion j.left ∧ a.smul ≫ j = (e.hom.hom.hom ⊗ₘ j) ≫ b.smul) (m : ℕ) (Z : Over (Spec (.of F))) (z : Fin m → (𝟙_ (Over (Spec (.of F))) ⟶ Z)) (hz : IsColimit (Cofan.mk Z z)) (jZ : Z ⟶ X) [IsClosedImmersion jZ.left] (hfixed : ∀ (T : Over (Spec (.of F))) (y : T ⟶ X), (∃ s : T ⟶ Z, s ≫ jZ = y) ↔ ∀ (W : Over (Spec (.of F))) (f : W ⟶ T) (t : W ⟶ StandardGroupSchemes.multiplicative F), lift t (f ≫ y) ≫ a.smul = f ≫ y) : ∃ (C : Fin m → Over (Spec (.of F))) (i : ∀ r : Fin m, C r ⟶ X) (d : Fin m → ℕ), (∀ r : Fin m, IsImmersion (i r).left ∧ Smooth (C r).hom ∧ IsReduced (C r).left) ∧ (∀ (r : Fin m) (A : CommAlgCat.{u} F) (y : StandardGroupSchemes.affine F A ⟶ X), (∃ p, p ≫ i r = y) ↔ Attracts a (z r ≫ jZ) A y) ∧ (∀ (r : Fin m) (A : CommAlgCat.{u} F) (q : StandardGroupSchemes.affine F A ⊗ StandardGroupSchemes.additive F ⟶ X), IsExtension a (z r ≫ jZ) A q → ∃! p : StandardGroupSchemes.affine F A ⟶ C r, p ≫ i r = lift (𝟙 _) (toUnit _ ≫ linePoint 1) ≫ q) ∧ (∀ (r : Fin m) (A : CommAlgCat.{u} F) (p : StandardGroupSchemes.affine F A ⟶ C r), ∃! q : StandardGroupSchemes.affine F A ⊗ StandardGroupSchemes.additive F ⟶ X, IsExtension a (z r ≫ jZ) A q ∧ lift (𝟙 _) (toUnit _ ≫ linePoint 1) ≫ q = p ≫ i r) ∧ (∀ r : Fin m, Nonempty (C r ≅ Over.mk (AffineSpace (ULift.{u} (Fin (d r))) (Spec (.of F)) ↘ Spec (.of F))) ∧ d r = Module.finrank (X.left.residueField ((z r ≫ jZ).left (IsLocalRing.closedPoint F))) (positiveSpace a ((z r ≫ jZ).left (IsLocalRing.closedPoint F)))) ∧ (∀ p : X.left, ∃! r : Fin m, p ∈ Set.range (i r).left) ∧ (∀ (r : Fin m) (K : Type u) [Field K] [IsAlgClosed K] [Algebra F K] (y : StandardGroupSchemes.affine F K ⟶ X), (∃ p, p ≫ i r = y) ↔ Attracts a (z r ≫ jZ) (.of F K) y) ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] [Algebra F K] (p : ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F K)))).obj X).left), ∃! r : Fin m, p ∈ Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F K)))).map (i r)).left)) ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] [Algebra F K] (r : Fin m), Nonempty (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F K)))).obj (C r)) ≅ Over.mk (AffineSpace (ULift.{u} (Fin (d r))) (Spec (.of K)) ↘ Spec (.of K)))) ∧ (∀ (r : Fin m) (Y : Over (Spec (.of F))) (jY : Y ⟶ X) [IsImmersion jY.left] [IsReduced Y.left] [Smooth Y.hom], (∀ (K : Type u) [Field K] [IsAlgClosed K] [Algebra F K] (y : StandardGroupSchemes.affine F K ⟶ X), (∃ p, p ≫ jY = y) ↔ Attracts a (z r ≫ jZ) (.of F K) y) → ∃! e : Y ≅ C r, e.hom ≫ i r = jY) ∧ (∃! r : Fin m, IsOpenImmersion (i r).left ∧ DenseRange (i r).left) ∧ (∀ r : Fin m, (IsOpenImmersion (i r).left ∧ DenseRange (i r).left) ↔ positiveSpace a ((z r ≫ jZ).left (IsLocalRing.closedPoint F)) = ⊤) ∧ (IsIso X.hom → Nonempty (Unique (Fin m)) ∧ ∀ r : Fin m, d r = 0)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a89d981b2",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read item node (8 steps incl. Q28 step-8 converse), new def node def-sfb-fixed-point-tangent-weights, both modules, deps DiagonalProjectiveAction/StandardGroupSchemes/SchemeTangentSpace/TorusCharacterTangentWeights on side-live. Statement verbatim; node diff vs live only stmt_deps(+2 used defs)+lean. Hypotheses match without strengthening: weight-basis IsDiagonal embedding with group iso e (any finite-dim G_m-rep diagonalizes), coproduct-of-Spec F fixed scheme representing the scheme-theoretic fixed functor. IsExtension (agrees with the orbit on G_m, value x at 0) is equivalent to equivariance for separated X (Milne 13.57). Conclusions cover cells smooth/reduced/immersed, all-algebra bijection both ways, ≅A^d with d=finrank positiveSpace, partition, alg-closed base-change compatibility, uniqueness up to unique iso over X, unique open dense cell iff positiveSpace=⊤, Spec F case. weightSpace is the character t^n eigenspace over infinite F; sign checked on P^1 (attracting cell has weight +1). No hollow defs, docstrings with source/blueprint, sorry only, no universe restriction; no file changed so no compile."
+ }
+}

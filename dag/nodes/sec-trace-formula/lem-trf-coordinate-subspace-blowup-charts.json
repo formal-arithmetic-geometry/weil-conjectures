@@ -1,0 +1,296 @@
+{
+ "id": "lem-trf-coordinate-subspace-blowup-charts",
+ "kind": "statement",
+ "title": "Polynomial charts of a coordinate-subspace blowup and smooth etale sources",
+ "statement": "Let $R$ be any commutative ring, $S=\\operatorname{Spec}R$, $a,b\\geq0$, $A=R[x_1,\\ldots,x_a,y_1,\\ldots,y_b]$ and $J=(y_1,\\ldots,y_b)$ [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring]. Let $M=\\operatorname{Bl}_J(\\operatorname{Spec}A)$ with its structural map to $S$ [def-nagata-global-blowup]. If $b>0$, the standard affine blowup charts $M_i=\\operatorname{Spec}(A[J/y_i])$, $1\\leq i\\leq b$, cover $M$, and for each $i$ the $R$-algebra homomorphism\n$$R[x_1,\\ldots,x_a,z,t_j\\ (1\\leq j\\leq b,\\ j\\ne i)]\\longrightarrow A[J/y_i],\\qquad x_r\\longmapsto x_r,\\quad z\\longmapsto y_i,\\quad t_j\\longmapsto y_j/y_i$$\nis an isomorphism [def-nagata-blowup-chart-ring]. Thus each $M_i$ is isomorphic over $S$ to $\\mathbf A^{a+b}_S$ [def-sbc-affine-space]. If $b=0$, then $J=0$ and $M=\\varnothing$. In all cases, for every scheme $W$ and etale morphism $e:W\\to M$, the composite $W\\to M\\to S$ is smooth [def-weil-etale-morphism, def-sbc-smooth-morphisms]. No reducedness, Noetherian, nonzero-ring or characteristic hypothesis on $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0H1H, remark-relative-blowup, affine chart calculation; divisors.tex Tag 0804, lemma-blowing-up-affine. Include the zero-coordinate case and smoothness of arbitrary etale maps to the model."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-nagata-global-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-sbc-affine-space",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Assume $b>0$. Apply [prop-nagata-affine-blowup-chart-cover] to $J=(y_1,\\ldots,y_b)$. It gives precisely the open cover $M_i=\\operatorname{Spec}(A[J/y_i])$, indexed by $1\\leq i\\leq b$.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; finite generating family version"
+   }
+  },
+  {
+   "text": "Fix $i$ and put $P_i=R[x_1,\\ldots,x_a,z,t_j\\ (j\\ne i)]$. By the polynomial universal property [def-weil-pbc-mv-polynomial-ring] the displayed assignments define an $R$-algebra map $\\phi_i:P_i\\to A[J/y_i]$. The chart definition [def-nagata-blowup-chart-ring] realizes its target inside $A_{y_i}$. Its image contains the image of $A$: besides $x_r$ and $y_i$, it contains every $y_j=y_i(y_j/y_i)=\\phi_i(zt_j)$ for $j\\ne i$. Every $h\\in J$ is $\\sum_j a_jy_j$, so $h/y_i=a_i+\\sum_{j\\ne i}a_j(y_j/y_i)$ is also in the image. Thus the image contains all the algebra generators in the chart definition, proving surjectivity.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H1H, remark-relative-blowup, final polynomial chart identification; explicit generator calculation"
+   }
+  },
+  {
+   "text": "For injectivity expand $F\\in P_i$ as $\\sum_{\\alpha,m,\\beta}c_{\\alpha,m,\\beta}x^\\alpha z^m t^\\beta$ using [def-weil-pbc-mv-polynomial-ring], with $\\beta$ indexed by $j\\ne i$. Choose $N\\geq\\sum_{j\\ne i}\\beta_j$ for every term. In $A_{y_i}$, the element $y_i^N\\phi_i(F)$ is the image of $G=\\sum c_{\\alpha,m,\\beta}x^\\alpha y_i^{N+m-\\sum_j\\beta_j}\\prod_{j\\ne i}y_j^{\\beta_j}\\in A$. If $\\phi_i(F)=0$, the fraction equality in [def-weil-ring-localization-away] gives $y_i^KG=0$ in $A$ for some $K\\geq0$. Distinct triples $(\\alpha,m,\\beta)$ give distinct monomials in $y_i^KG$: their exponents on $x_r$ and $y_j$ ($j\\ne i$) recover $\\alpha,\\beta$, and the exponent on $y_i$ then recovers $m$. Polynomial coefficient uniqueness therefore gives every $c_{\\alpha,m,\\beta}=0$. Hence $F=0$. This argument uses no cancellation in $R$ and works also when $R=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H1H, remark-relative-blowup, final polynomial chart identification; explicit coefficient argument filling the omitted calculation"
+   }
+  },
+  {
+   "text": "The preceding bijective $R$-algebra map is an isomorphism. By [prop-nagata-affine-blowup-chart] the chart $M_i$ of step 1 is identified with $\\operatorname{Spec}(A[J/y_i])$ over $\\operatorname{Spec}A$, so its structural map to $S$ is $\\operatorname{Spec}$ of the composite $R\\to A\\to A[J/y_i]$. Contravariant functoriality of affine spectra [def-weil-affine-spectrum] gives $M_i\\simeq\\operatorname{Spec}P_i$ over $S$, because the algebra isomorphism commutes with the inclusions of $R$. There are $a+1+(b-1)=a+b$ variables. The affine-base description of [def-sbc-affine-space] identifies $\\operatorname{Spec}P_i$ with $\\mathbf A^{a+b}_S$.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart",
+    "def-weil-affine-spectrum",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H1H, remark-relative-blowup, last identification of D_+(T_i)"
+   }
+  },
+  {
+   "text": "If $b=0$, the ideal $J=0$ has the one-element generating family $(0)$. By [prop-nagata-affine-blowup-chart-cover], $M$ is covered by the single chart $\\operatorname{Spec}(A[0/0])$. The localization $A_0$ is the zero ring: its inverted element $0$ is a unit, so $0=1$ [def-weil-ring-localization-away]. Its chart subalgebra [def-nagata-blowup-chart-ring] is consequently the zero ring. Its spectrum has no prime ideals [def-weil-affine-spectrum]; thus the covering chart and $M$ are empty.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-weil-ring-localization-away",
+    "def-nagata-blowup-chart-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine, specialized to the zero ideal and its generator 0"
+   }
+  },
+  {
+   "text": "For $b>0$, [sbc-lem-affine-space-smooth] makes $\\mathbf A^{a+b}_S\\to S$ smooth. The isomorphisms over $S$ from step 4 and isomorphism invariance in [lem-weil-pbc-smooth-restrict-open-subschemes](c) make every $M_i\\to S$ smooth. Apply [lem-weil-pbc-smooth-local-on-source] to the cover in step 1 to obtain smoothness of $M\\to S$. For $b=0$, apply the same lemma to the empty open cover of $M=\\varnothing$; its hypotheses are vacuous. Now let $e:W\\to M$ be any etale morphism. It is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and [lem-trf-smooth-composition] makes $W\\to M\\to S$ smooth. None of these statements requires a finiteness or reducedness assumption on $R$, or any quasi-compactness assumption on $e$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H1H, remark-relative-blowup, smoothness from polynomial charts; morphisms.tex Tags 01V6 (lemma-smooth-characterize), 01VA (lemma-composition-smooth), and Tag 02GK (lemma-etale-smooth-unramified)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-ring-localization-away",
+  "prop-nagata-affine-blowup-chart",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0H1H, remark-relative-blowup, chart calculation, supplied explicitly by coefficient comparison; divisors.tex Tag 0804 for atlas and zero ideal; morphisms.tex Tags 01V6 and 01VA for smoothness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing.?up",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"grep\", \"query\": \"blow.?up|blowing.?up\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero AlgebraicGeometry hits; the broader search found only unrelated uses of the word blowup and ReesAlgebra.lean:17 mentioning future blowups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a coordinate subspace of affine space has polynomial chart rings smooth over the field",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"leansearch\", \"query\": \"Blowing up a coordinate subspace of affine space has polynomial chart rings smooth over the field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineBlowup\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineBlowup\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits for the queried blowup names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coordinate-subspace-blowup-charts: polynomial coordinate ideal blowup charts are affine spaces and their etale pullbacks are smooth",
+   "results": "{\"t\": \"2026-10-22T06:47:58Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coordinate-subspace-blowup-charts: polynomial coordinate ideal blowup charts are affine spaces and their etale pullbacks are smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"6216d19d9f663ca9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only generic smoothness and affine-space declarations; no blowup local-model or polynomial blowup-chart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]low.?[Uu]p|blowing.?up",
+   "results": "{\"t\": \"2026-10-22T06:48:39Z\", \"tool\": \"grep\", \"query\": \"[Bb]low.?[Uu]p|blowing.?up\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Tactic/ITauto.lean\", \"Mathlib/Tactic/ITauto.lean\", \"Mathlib/Tactic/ITauto.lean\", \"Mathlib/Tactic/GRewrite/Core.lean\", \"Mathlib/Tactic/Simproc/FinsetInterval.lean\", \"Mathlib/Tactic/Linarith/Frontend.lean\", \"Mathlib/Combinatorics/SimpleGraph/Regularity/Bound.lean\", \"Mathlib/Algebra/HierarchyDesign.lean\"], \"digest\": \"94a3c185e11513d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero AlgebraicGeometry hits; the broader search found only unrelated uses of the word blowup and ReesAlgebra.lean:17 mentioning future blowups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coordinate-subspace-blowup-charts: blowing up a polynomial algebra along an ideal generated by a subset of variables has polynomial affine charts over any commutative ring",
+   "results": "{\"t\": \"2026-10-22T06:48:51Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coordinate-subspace-blowup-charts: blowing up a polynomial algebra along an ideal generated by a subset of variables has polynomial affine charts over any commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.map_SpecMap\"], \"digest\": \"d47a5c7dd1689bfe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only generic smoothness and affine-space declarations; no blowup local-model or polynomial blowup-chart theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup of affine space along an ideal generated by coordinate variables has polynomial affine charts over any commutative ring",
+   "results": "{\"t\": \"2026-10-23T10:58:27Z\", \"tool\": \"leanfinder\", \"query\": \"Blowup of affine space along an ideal generated by coordinate variables has polynomial affine charts over any commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\"], \"digest\": \"b69432a01fd3f7d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply affine-space, Proj, algebra-generator or localization facts, not the coordinate-subspace blowup chart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]low.?[Uu]p|blowing.?up",
+   "results": "{\"t\": \"2026-10-23T10:58:58Z\", \"tool\": \"grep\", \"query\": \"[Bb]low.?[Uu]p|blowing.?up\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no blowup declarations in AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine charts for the blowup of a polynomial ring along the ideal of coordinate variables",
+   "results": "{\"t\": \"2026-10-23T10:58:58Z\", \"tool\": \"leansearch\", \"query\": \"Affine charts for the blowup of a polynomial ring along the ideal of coordinate variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Scheme.AffineCover.X\"], \"digest\": \"0e11b0b7937f0641\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply affine-space, Proj, algebra-generator or localization facts, not the coordinate-subspace blowup chart theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ReesAlgebra\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T10:58:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"ReesAlgebra\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine blowup algebra of the ideal generated by polynomial variables at one of these variables is freely generated by that variable and the ratios of the others",
+   "results": "{\"t\": \"2026-10-23T10:59:46Z\", \"tool\": \"leanfinder\", \"query\": \"The affine blowup algebra of the ideal generated by polynomial variables at one of these variables is freely generated by that variable and the ratios of the others\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.naive_val\", \"Algebra.Generators.naive\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"Algebra.Generators.self_σ\", \"Algebra.PreSubmersivePresentation.naive\", \"Algebra.Generators.localizationAway_σ\", \"IsLocalization.Away.mvPolynomialQuotientEquiv_apply\", \"IsLocalization.Away.mvPolynomialQuotientEquiv\"], \"digest\": \"fe0030e5c3955511\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply affine-space, Proj, algebra-generator or localization facts, not the coordinate-subspace blowup chart theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-center-blowup-geometry",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-center blowups and reduced strict transforms. Re-split of lem-trf-smooth-center-blowup-geometry: old steps 3--4: explicit chart-ring isomorphisms, the zero-ideal case, and smoothness on the pulled-back charts",
+   "via": [
+    "lem-trf-smooth-center-blowup-geometry",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coordinate-subspace-blowup-charts",
+  "worker": "stage1",
+  "summary": "Wrote the coordinate chart proof explicitly: generators prove surjectivity and denominator clearing followed by polynomial coefficient uniqueness proves injectivity over any commutative ring. Reused the existing blowup atlas, affine-space smoothness, source locality, isomorphism invariance, etale smoothness and composition nodes. Handled b=0 by the chart at generator 0 and the empty-cover form of source locality. Statement unchanged; no new nodes. Searches found no exact upstream attachment or Mathlib theorem.",
+  "blueprint": "Historical geometric branch of lem-trf-local-term-locality, through lem-trf-smooth-center-blowup-geometry: retained old steps 3--4 (polynomial charts, empty zero-center blowup, smooth etale sources). Latest blueprint now proves locality by contracting correspondences; this item is an existing auxiliary geometric node, not a change to that unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic finite affine atlas for a blowup; the trace-formula unit provides no alternative construction of that scheme."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of affine-space projections over arbitrary schemes, used after the explicit chart computation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic implication etale implies smooth for schemes, used only to compose the arbitrary etale source with the smooth blowup model."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart",
+    "why": "Generic statement that the affine blowup chart Spec(A[I/a]) maps isomorphically onto its open of the blowup over Spec A; used only to identify the chart's structural map, no node of the trace-formula unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "prop-nagata-affine-blowup-chart"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-07cf089ae",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-07cf089ae (reviewer sub-agent of L); spot-checked: I read the item in full; it has 6 steps and no new nodes, and its statement is unchanged against the base. Sources: Stacks more-morphisms 0H1H remark-relative-blowup (any ring R, polynomial charts, the Rees step is 'details omitted') and divisors 0804 lemma-blowing-up-affine. Steps 2-3 fill the omitted details correctly through the subalgebra A[J/y_i] inside A_{y_i}. Surjectivity: the image contains A and every h/y_i. Injectivity: clearing denominators gives y_i^N phi(F)=G/1, then y_i^K G=0, and the monomials are distinct, so all coefficients vanish with no cancellation in R. I tested R=Z/4, R=0 and a=0,b=2. Step 5 is right for b=0: J=(0), A_0=0, so the blowup is empty. Step 6 checks out: lem-weil-pbc-smooth-local-on-source allows an empty cover, etale implies smooth with no quasi-compactness needed, and composition finishes it. FIX (C3/C4): step 4 claimed M_i is isomorphic to Spec P_i over S, but the cover proposition says nothing about the charts' maps to Spec A. Step 4 now cites prop-nagata-affine-blowup-chart (chi_a is an isomorphism over Spec A) and is marked non-elementary. I recomputed proof_deps and added a tool_uses entry for it. Batch-5: lem-trf-smooth-composition is the Mathlib leaf smooth_comp (Stacks 01VA), a general fact outside the trace-formula and Poincare-duality assumptions, so I accepted it. No duplicates: I checked lem-trf-parameter-blowup-coordinate-quotients, lem-trf-smooth-pair-blowup-local-models and the Nagata chart lemmas. The two citers (lem-sfb-smooth-coordinate-blowup-charts step 5, lem-trf-smooth-center-blowup-geometry step 1) use only what the statement gives. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoordinateSubspaceBlowupCharts",
+  "declaration": "AlgebraicGeometry.CoordinateSubspaceBlowup.coordinate_subspace_blowup_charts",
+  "declarations": [
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.PolynomialRing",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.centerIdeal",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.centerGenerator",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.center",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.ChartRing",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.ChartVariables",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.chartι",
+   "AlgebraicGeometry.CoordinateSubspaceBlowup.coordinate_subspace_blowup_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoordinateSubspaceBlowupCharts.lean",
+  "statement": "theorem coordinate_subspace_blowup_charts (R : Type u) [CommRing R] (a b : ℕ) : (0 < b → ∃ E : AffineBlowup (centerIdeal R a b) ≅ (center R a b).blowup, E.hom ≫ (center R a b).blowupMap = AffineBlowup.toSpec (centerIdeal R a b) ∧ (⨆ i : Fin b, (chartι R a b i ≫ E.hom).opensRange) = ⊤ ∧ (∀ i : Fin b, ∃ φ : MvPolynomial (ChartVariables a b i) R ≃ₐ[R] ChartRing R a b i, (∀ r : Fin a, (φ (MvPolynomial.X (Sum.inl r)) : Localization.Away (centerGenerator R a b i).val) = algebraMap (PolynomialRing R a b) _ (MvPolynomial.X (Sum.inl r))) ∧ (φ (MvPolynomial.X (Sum.inr (Sum.inl ()))) : Localization.Away (centerGenerator R a b i).val) = algebraMap (PolynomialRing R a b) _ (centerGenerator R a b i).val ∧ (∀ j : {j : Fin b // j ≠ i}, (φ (MvPolynomial.X (Sum.inr (Sum.inr j))) : Localization.Away (centerGenerator R a b i).val) = AffineBlowup.chartFraction (centerGenerator R a b i).val 1 (MvPolynomial.X (Sum.inr j.val))) ∧ (∃ c : Spec (.of (ChartRing R a b i)) ≅ AffineSpace (ULift.{u} (Fin (a + b))) (Spec (.of R)), c.hom ≫ (AffineSpace.over (ULift.{u} (Fin (a + b))) (Spec (.of R))).hom = Spec.map (CommRingCat.ofHom (algebraMap R (ChartRing R a b i)))))) ∧ (b = 0 → centerIdeal R a b = ⊥ ∧ IsEmpty (center R a b).blowup) ∧ (∀ (W : Scheme.{u}) (e : W ⟶ (center R a b).blowup), Etale e → Smooth (e ≫ (center R a b).blowupMap ≫ Spec.map (CommRingCat.ofHom (algebraMap R (PolynomialRing R a b)))))",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2416a2231",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Snapshot node differs from live only by the new lean record; lean.statement matches the file verbatim. Every node clause has a matching Lean clause: any CommRing R and one universe u; A = MvPolynomial (Fin a ⊕ Fin b) R; J = span of the y-variables; M = (ofIdealTop J).blowup with map blowupMap ≫ Spec.map(R→A); for b>0, ∃ E : AffineBlowup J ≅ blowup over Spec A, cover ⨆ (chartRingι i ≫ E.hom).opensRange = ⊤, R-algebra iso φ from MvPolynomial(Fin a ⊕ Unit ⊕ {j≠i}) to chartRing with x, z, t generator values fixed in Localization.Away y_i, and an iso to AffineSpace (ULift (Fin (a+b))) over Spec R; for b=0, J=⊥ and the blowup is empty; for all W and étale e, the composite to Spec R is smooth. E is pinned over Spec A and every clause holds for any such E; the same pattern landed in lem-pur-dnc-affine-blowup-complement. Edge cases b=0, b=1, a=0, R=0, non-reduced R, empty or non-quasi-compact W all covered. Upstream declarations read: Gluing blowup/blowupMap, ChartAlgebra chartRing/chartFraction, StrictTransformChartModel chartRingι, Mathlib ofIdealTop and AffineSpace. No hollow defs, only sorry, docstrings with source and blueprint tag, no name clash, no duplicate theorem; Stacks 0H1H source read. Advisories: center could reuse PermissibleCoordinateChart.centerSheaf; AffineBlowup is used through the indirect dependency def-nagata-global-blowup. Report has both required sections. Not compiled, no changes made."
+ }
+}

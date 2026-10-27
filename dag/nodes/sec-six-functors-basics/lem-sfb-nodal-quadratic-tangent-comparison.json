@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-nodal-quadratic-tangent-comparison",
+ "kind": "statement",
+ "title": "The local tangent comparison for a nondegenerate quadratic completion",
+ "statement": "Let k be a field and A a reduced Noetherian local k-algebra essentially of finite type and of Krull dimension one. Suppose its completion is ring-isomorphic to F[[X,Y]]/(aX²+bXY+cY²), where F=A/m and b²−4ac≠0. For the canonical tangent grading [lem-sfb-nodal-tangent-canonical-grading] there is a normalized isomorphism Proj(gr_m A)≅Spec(B/mB) [def-sfb-nodal-tangent-comparison-data], natural under local-ring isomorphisms, and an f∈m regular in B, generating mB, whose degree-one basic open covers Proj. Its residue algebra is either F×F or a separable quadratic field over F. This is solely the ring-theoretic comparison: no scheme-normalization fibre or geometric completed branch data is asserted.",
+ "stmt_deps": [
+  "def-sfb-nodal-tangent-comparison-data",
+  "lem-sfb-nodal-tangent-canonical-grading",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT (constructions (2) and (3)), 0CBU and 0CBW; the explicit comparison calculations below."
+ },
+ "proof": [
+  {
+   "text": "Choose coordinates with nonzero X² coefficient: one of q(1,0), q(0,1), q(1,1)\nworks, also in characteristic two. Normalization/completion for the reduced algebraic\ncurve and the quadratic-series integral-closure calculation identify the completed\nnormalization with L[[t]], where L = F[Z]/(aZ²+bZ+c), X = zt, Y = t, and the completed\nlocal ring is F+tL[[t]]. The nth positive power of its maximal ideal is t^n L[[t]].\nCompletion modulo powers preserves the original quotients, hence the associated graded\nring is F in degree zero and L t^n in each positive degree. Lift t in degree one to f\nin the original maximal ideal. Its completed image is t(1+th). Every homogeneous prime\ncontaining t contains the irrelevant ideal, since products of two positive homogeneous\nelements belong to (t). Thus the whole Proj is D_+(in(f)), with chart ring L.\nFaithful flatness of completion, applied to B and B/fB, descends regularity of f and\nmB=fB from the completed normalization. For every allowed denominator g define the\nchart map in_n(a)/in(g)^n ↦ a/g^n modulo mB. Regularity gives uniqueness of the division;\nchanging a by m^(n+1) or changing a representative of a homogeneous fraction does not\nchange the residue. Common denominators prove the ring identities. Tensor reduction\nidentifies B/mB with L, and the map is the identity in the displayed chart, so it is\nan isomorphism over F. Two allowed denominators differ by a unit of B, so the chart\nformulas agree; they also prove uniqueness and compatibility with pointed local-ring\nisomorphisms, including the formulas on graded classes and on integral closures.\nThe separable quadratic L has basis 1,z. A root gives two distinct roots and interpolation\nidentifies L with F×F; with no root the quadratic is irreducible and L is a separable\nfield of degree two. This proves the final alternative without assuming a split node.",
+   "uses": [
+    "lem-sfb-nodal-completed-graded-model",
+    "lem-sfb-nodal-completed-residue-denominators",
+    "lem-sfb-graded-normalization-fraction-map",
+    "lem-sfb-quadratic-coefficient-proj-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-completed-graded-model",
+  "lem-sfb-nodal-completed-residue-denominators",
+  "lem-sfb-graded-normalization-fraction-map",
+  "lem-sfb-quadratic-coefficient-proj-branches"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit argument filling the omitted equivalence (2)=(3) of Tag 0CBT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projective spectrum of the tangent cone of a local ring with nondegenerate quadratic completion equals its normalization residue spectrum",
+   "results": "{\"t\": \"2026-10-23T11:42:40Z\", \"tool\": \"leansearch\", \"query\": \"The projective spectrum of the tangent cone of a local ring with nondegenerate quadratic completion equals its normalization residue spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.mk\", \"ProjectiveSpectrum.ext_iff\", \"ProjectiveSpectrum\", \"ProjectiveSpectrum.mk.congr_simp\", \"ProjectiveSpectrum.noConfusionType\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\"], \"digest\": \"11b71166b5696fa9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general Proj and normalization constructions do not contain this intrinsic quadratic-completion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projectivized tangent cone of a nodal local ring is its normalization fibre",
+   "results": "{\"t\": \"2026-10-23T10:14:23Z\", \"tool\": \"leanfinder\", \"query\": \"The projectivized tangent cone of a nodal local ring is its normalization fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"a8cbc6219cca88eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general Proj and normalization constructions do not contain this intrinsic quadratic-completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*[Nn]ormali|[Nn]ormali.*tangent",
+   "results": "{\"t\": \"2026-10-23T10:14:21Z\", \"tool\": \"grep\", \"query\": \"tangent.*[Nn]ormali|[Nn]ormali.*tangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general Proj and normalization constructions do not contain this intrinsic quadratic-completion comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "date": "2026-10-23",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.; The local tangent comparison for a nondegenerate quadratic completion",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NodalLocalAlgebraComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLocalAlgebraComparison.lean",
+  "declaration": "AlgebraicGeometry.NodalLocal.quadratic_tangent_comparison",
+  "statement": "theorem quadratic_tangent_comparison (k A : Type u) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [_root_.IsReduced A] [IsNoetherianRing A] [Algebra.EssFiniteType k A] (hdim : ringKrullDim A = (1 : WithBot ℕ∞)) (hquad : ∃ a b c : IsLocalRing.ResidueField A, b ^ 2 - 4 * a * c ≠ 0 ∧ Nonempty (AdicCompletion (IsLocalRing.maximalIdeal A) A ≃+* QuadraticSeries.CurveRing a b c)) : letI := canonicalGrading A ∃ i : Proj (tangentGrading A) ≅ Spec (.of (ResidueAlgebra A)), IsNormalized A i ∧ (∃ (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A), initialForm A 1 ⟨f, by simpa using hf⟩ ∈ tangentGrading A 1 ∧ algebraMap A (Normalization A) f ∈ nonZeroDivisors (Normalization A) ∧ normalizationIdeal A = Ideal.span {algebraMap A (Normalization A) f} ∧ Proj.basicOpen (tangentGrading A) (initialForm A 1 ⟨f, by simpa using hf⟩) = ⊤) ∧ (Nonempty (ResidueAlgebra A ≃ₐ[IsLocalRing.ResidueField A] (IsLocalRing.ResidueField A × IsLocalRing.ResidueField A)) ∨ (IsField (ResidueAlgebra A) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField A) (ResidueAlgebra A) ∧ Module.finrank (IsLocalRing.ResidueField A) (ResidueAlgebra A) = 2)) ∧ IsNaturalIso A i",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

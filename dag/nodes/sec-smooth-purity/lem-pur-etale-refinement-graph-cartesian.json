@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-etale-refinement-graph-cartesian",
+ "kind": "statement",
+ "title": "Cartesian neighborhood squares of the proper refinement graph",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $s,r$ compactifications, and $\\rho:r\\to s$ a refinement. Construct $T=r.Z\\times_Y s.Z$, $z=(1,\\rho):r.Z\\to T$, the neighborhoods $O_1=T\\times_{s.Z}X$, $O_2=T\\times_{r.Z}X$, and the literal lifts $s_1,s_2$ as in [def-pur-etale-refinement-graph-transport]. Then $z,s_1,s_2$ are proper, their common map to $T$ is $r.i;z$, and $zp=r.g$. The square $(s_2,r.i,b_2,z)$ is Cartesian. If the supplied refinement square $(r.i,1_X,\\rho,s.i)$ is Cartesian, so is $(s_1,r.i,b_1,z)$. The equality $((1_X;r.i);r.g)=s.i;s.g$ used in these lifts follows from the compactification equations.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7E (remark-going-around); parent refinement-normalization proof steps 2--4."
+ },
+ "stmt_deps": [
+  "def-pur-etale-refinement-graph-transport"
+ ],
+ "proof": [
+  {
+   "text": "The composites of z, s1 and s2 with the appropriate product or neighborhood projection are identities. These projections are proper, hence separated, so proper-to-separated cancellation proves that the three sections are proper. Compare the two projections to T to show graph_fac, using rho.i_hom; the first projection also gives zp=r.g. For square1 paste with the canonical neighborhood pullback: the outer square is exactly the supplied Cartesian refinement square, since z pr2=rho and s1 q1=1. Cancel the lower canonical pullback and flip. For square2 the same outer square is the identity square on r.i, since z pr1=1 and s2 q2=1; apply the same cancellation. The displayed equation follows from r.comm and s.comm. These arguments apply to identity refinements and empty opens unchanged.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-to-separated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-to-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Refinement projection grids in Tags 0F7C--0F7E; proper-to-separated cancellation is Mathlib IsProper.of_comp, Stacks Tag 01W6(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper refinement graph in the fiber product is proper and pulling back its two supporting open subschemes gives Cartesian squares",
+   "results": "{\"t\": \"2026-10-26T00:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"A proper refinement graph in the fiber product is proper and pulling back its two supporting open subschemes gives Cartesian squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight_f\", \"AlgebraicGeometry.Scheme.isPullback_of_openCover\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f\"], \"digest\": \"02b30d2c882571db\"}",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib IsProper.of_comp and IsPullback.of_bot with the product projection equations. No single result states the complete pair of graph-square identifications for these specified lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.of_comp|IsPullback.of_bot",
+   "results": "{\"t\": \"2026-10-26T00:36:01Z\", \"tool\": \"grep\", \"query\": \"IsProper.of_comp|IsPullback.of_bot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\"], \"digest\": \"f9b487d13d5ff20b\"}",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib IsProper.of_comp and IsPullback.of_bot with the product projection equations. No single result states the complete pair of graph-square identifications for these specified lifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graph section of a separated proper projection is proper and pullback cancellation identifies its inverse image of an open immersion",
+   "results": "{\"t\": \"2026-10-26T00:36:01Z\", \"tool\": \"leansearch\", \"query\": \"A graph section of a separated proper projection is proper and pullback cancellation identifies its inverse image of an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.IsOpenImmersion.opensRange_pullback_fst_of_right\", \"AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"AlgebraicGeometry.Scheme.Hom.appIso_inv_app_apply\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.isProper_eq\"], \"digest\": \"6ada1ab07a35ec4d\"}",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib IsProper.of_comp and IsPullback.of_bot with the product projection equations. No single result states the complete pair of graph-square identifications for these specified lifts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphRefinementNormalization",
+  "date": "2026-10-26",
+  "group": "C9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-pur-etale-graph-refinement-normalization, steps 2--4: proper graph geometry, intersection transport, and the two side projection boundaries. Inherited blueprint ancestor is null (blueprint_refs.py ancestor).",
+   "via": [
+    "lem-pur-etale-graph-refinement-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRefinementGraphTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRefinementGraphTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.EtaleRefinementGraph.square₁",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.equation",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.z_proper",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.s₁_proper",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.s₂_proper",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.graph_fac",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.square₁",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.square₂",
+   "AlgebraicGeometry.Etale.EtaleRefinementGraph.z_p"
+  ],
+  "statement": "theorem square₁ (hs : IsPullback r.i (𝟙 X) rs.hom s.i) :\n    IsPullback (s₁ s r) r.i (b₁ s r) (z s r rs)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T023012-L-512381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T023012-L-512381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

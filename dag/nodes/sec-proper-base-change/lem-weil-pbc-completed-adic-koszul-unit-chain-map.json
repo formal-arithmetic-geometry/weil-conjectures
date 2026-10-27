@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+ "kind": "statement",
+ "title": "The completed-coefficient Koszul unit is a chain map",
+ "statement": "Let T be a scheme, A a commutative ring, and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. For r generators a_j and m>=0, extend the constant Koszul complex on a_j^(m+1) [def-weil-pbc-koszul-complex] along the residue-normalized scalar map to the completed coefficient sheaf A_T. Its degree-zero unit is the sheafification of 1 tensor 1. For any cochain complex C of A_T-modules, tensor these units with C using the total tensor complex [def-pc-tensor-complex-sheaves]. The resulting maps into B(C)=product_m(C tensor Q_m) are compatible with the Koszul transitions, so their composite with one minus shift is zero. The componentwise map c -> (u_C(c),0) into the prescribed shifted mapping cone is a chain map, with exactly the shifted-cone signs of completedAdicKoszulFibre. No boundedness hypothesis on C is required.",
+ "source": {
+  "document": "dag/nodes/sec-proper-base-change/def-weil-pbc-intrinsic-completion.json",
+  "place": "Prescribed completion unit and proof step 1: its degree-zero Koszul inclusions, compatible tensor units and explicit mapping-fiber differential."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-koszul-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The compatible residue scalar map is the sheafification-adjunction transpose of the cone of finite scalar maps; uniqueness follows from sheafification and the limit projections. Form the sheafified section 1 tensor 1 in Koszul degree zero. Restrictions preserve both units. Transfer it through the normalized scalar-extension object equality and apply the unit-module/sections equivalence to obtain the unique degree-zero unit morphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the stated constant Koszul reindexing and transition construction from [def-weil-pbc-intrinsic-koszul-completion]. The degree-zero Koszul differential to degree one is zero because the complex is extended from nonnegative chain degrees. The total-tensor summand differential formula and naturality of the right unitor show that tensoring a closed degree-zero unit defines a chain map.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exterior transition fixes the zeroth exterior power. Apply constant-module functoriality and naturality of normalized scalar pure tensors to prove compatibility of the completed degree-zero units. Tensor functoriality gives compatibility of the tensor units. Each product projection of their composite with one minus shift is therefore zero, so the composite itself is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute the differential of the shifted mapping-cone left inclusion using homotopyCofiber.inlX_d and the shift sign (-1)^(-1)=-1. The extra term is the component of the just-proved zero composite. The remaining term is the tensor unit chain-map identity, proving the displayed component equation for every pair of related degrees.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-koszul-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-proper-base-change/def-weil-pbc-intrinsic-completion.json",
+  "place": "Prescribed completion unit and proof step 1: its degree-zero Koszul inclusions, compatible tensor units and explicit mapping-fiber differential."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of Koszul tensor units defines a chain map into the shifted mapping cone of one minus the tower shift",
+   "results": "8 hits: generic mapping-cone inclusion, lift and factorization APIs, including mappingCone.liftCochain and mappingCone.inl; no completed-coefficient Koszul unit theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic cone APIs are used; the explicit Koszul compatibility and shifted differential are proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homotopyCofiber.inlX",
+   "results": "12 hits, including inlX_d, inlX_fstX and inlX_sndX; these supply the differential API but not the Koszul transition relation.",
+   "date": "2026-10-27",
+   "verdict": "use the generic inlX differential formula in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "shiftedConeUnit_comm|koszulCompletionUnit_comm|completedAdicKoszulUnitF_comm",
+   "results": "0 Mathlib hits. The existing source-tree intrinsic completion proof has a private abstract shifted-cone helper, which is reproved locally.",
+   "date": "2026-10-27",
+   "verdict": "no public theorem with the assigned completed-coefficient construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAdicIntrinsicCompletion",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-intrinsic-completion",
+   "place": "Proof step 1 and the explicit chain-level completion unit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAdicKoszulConstruction",
+  "file": "lean/Sheaf/Paper/CompletedAdicKoszulConstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdicKoszulUnitF_comm",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedAdicScalar_exists",
+   "AlgebraicGeometry.Scheme.completedAdicScalar",
+   "AlgebraicGeometry.Scheme.completedAdicScalarExtensionData",
+   "AlgebraicGeometry.Scheme.completedAdicScalarExtension",
+   "AlgebraicGeometry.Scheme.completedAdicScalarTensor",
+   "AlgebraicGeometry.Scheme.completedAdicKoszul",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulStep",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulUnitZero_exists",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulUnitZero",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulTensor",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulTensorStep",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulTensorUnitF",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulTensorUnitF_comm",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulTensorUnit",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulProduct",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulOneSubShift",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulFibre",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulProductUnit",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulUnitF_comm",
+   "AlgebraicGeometry.Scheme.completedAdicKoszulUnitComplex",
+   "AlgebraicGeometry.Scheme.completedAdicIntrinsicCompletion",
+   "AlgebraicGeometry.Scheme.completedAdicIntrinsicUnit",
+   "AlgebraicGeometry.Scheme.IsCompletedAdicDerivedComplete"
+  ],
+  "statement": "theorem completedAdicKoszulUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ)\n    (p q : ℤ) (_hpq : (ComplexShape.up ℤ).Rel p q) :\n    ((completedAdicKoszulProductUnit T d r a C).f p ≫\n      HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r a C)\n        p (p + (-1)) (by change p + (-1) + 1 = p; omega)) ≫\n        (completedAdicKoszulFibre T d r a C).d p q =\n      C.d p q ≫ (completedAdicKoszulProductUnit T d r a C).f q ≫\n        HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r a C)\n          q (q + (-1)) (by change q + (-1) + 1 = q; omega)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "note": "No new Lean statement or sorry is introduced by this node. It records the self-contained construction segment relocated verbatim in its public signatures and definitions from CompletedAdicIntrinsicCompletion, after profiling and explicit-type optimizations; only the original theorem proofs are completed. The original module publicly imports this module and continues to export the same API. The representative-independence comparison remains in the assigned module.",
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5b4f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T222717-L-685418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5b4f",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T222717-L-685418",
+  "kind": "interface",
+  "note": "independent cc review: the delivered CompletedAdicKoszulConstruction + item, compared declaration by declaration with the clone's original item (24 moved declarations identical, only the 4 former holes differ); node diffs against the clone; 5 direct importers compiled in a sandbox against the delivered files"
+ }
+}

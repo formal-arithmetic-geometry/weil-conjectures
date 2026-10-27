@@ -1,0 +1,245 @@
+{
+ "id": "lem-trf-dualizable-braided-canonical-bidual",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Biduality clause of lem-trf-perfect-complex-derived-biduality for the equipped (arbitrary) braiding recorded by its 2026-10-18 statement correction.",
+   "via": [
+    "lem-trf-perfect-complex-derived-biduality",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Canonical bidual of a dualizable object in a braided closed monoidal category",
+ "statement": "Let $\\mathcal C$ be a monoidal category [def-sfb-monoidal-category] with tensor $\\otimes$, unit $\\mathbf1$, associator $\\alpha$ and unitors $\\lambda,\\rho$. Let $\\sigma_{X,Y}:X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$ be any braiding: a family of isomorphisms natural in $X$ and $Y$ satisfying both hexagon identities\n$$\\alpha_{Y,Z,X}\\circ\\sigma_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes\\sigma_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(\\sigma_{X,Y}\\otimes1_Z),$$\n$$\\alpha^{-1}_{Z,X,Y}\\circ\\sigma_{X\\otimes Y,Z}\\circ\\alpha^{-1}_{X,Y,Z}=(\\sigma_{X,Z}\\otimes1_Y)\\circ\\alpha^{-1}_{X,Z,Y}\\circ(1_X\\otimes\\sigma_{Y,Z});$$\nno symmetry $\\sigma_{Y,X}\\sigma_{X,Y}=1$ is assumed. Assume $\\mathcal C$ is closed on the right: for every object $L$ the functor $-\\otimes L$ has a right adjoint $[L,-]$, with counit $\\mathrm{ev}_{L,M}:[L,M]\\otimes L\\to M$, so that every $f:K\\otimes L\\to M$ has a unique transpose $f^\\flat:K\\to[L,M]$ with $\\mathrm{ev}_{L,M}\\circ(f^\\flat\\otimes1_L)=f$. Let $X$ be an object with a dual: an object $Y$ and morphisms $\\eta:\\mathbf1\\to X\\otimes Y$, $\\epsilon:Y\\otimes X\\to\\mathbf1$ with\n$$\\rho_X\\circ(1_X\\otimes\\epsilon)\\circ\\alpha_{X,Y,X}\\circ(\\eta\\otimes1_X)\\circ\\lambda_X^{-1}=1_X,\\qquad \\lambda_Y\\circ(\\epsilon\\otimes1_Y)\\circ\\alpha^{-1}_{Y,X,Y}\\circ(1_Y\\otimes\\eta)\\circ\\rho_Y^{-1}=1_Y.$$\nPut $X^\\vee=[X,\\mathbf1]$ and let $b^\\sigma_X:X\\to[X^\\vee,\\mathbf1]$ be the transpose of $\\mathrm{ev}_{X,\\mathbf1}\\circ\\sigma_{X,X^\\vee}:X\\otimes X^\\vee\\to X^\\vee\\otimes X\\to\\mathbf1$. Then $b^\\sigma_X$ is an isomorphism, for every such braiding $\\sigma$ and every such $X$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FFP, definition-dual, and Tag 0FFQ, lemma-left-dual (Mor(Z'⊗X,Z)=Mor(Z',Z⊗Y) for a left dual Y of X), with Tag 0FFR, remark-left-dual-adjoint; the braided exchange of the two duality sides is the standard swap of an exact pairing."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=[X,\\mathbf1]$ and $v=\\mathrm{ev}_{X,\\mathbf1}$. For every $K$, the dual-pair formulas give inverse maps between $\\operatorname{Hom}(K,Y)$ and $\\operatorname{Hom}(K\\otimes X,\\mathbf1)$: send $f$ to $\\epsilon(f\\otimes1_X)$, and send $g$ to $(g\\otimes1_Y)(1_K\\otimes\\eta)$, inserting the unitors and associators of [def-sfb-monoidal-category]. Indeed, applying the second after the first gives $(\\epsilon\\otimes1_Y)(1_Y\\otimes\\eta)f=f$ by the $Y$ triangle and bifunctoriality; applying the first after the second gives $g(1_K\\otimes((1_X\\otimes\\epsilon)(\\eta\\otimes1_X)))=g$ by the $X$ triangle. These are direct substitutions into the two assumed identities.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFQ, lemma-left-dual, explicit mutually inverse Hom maps; Tag 0FFP, definition-dual. The right-closed chosen-evaluation identifications below are written out by the worker."
+   }
+  },
+  {
+   "text": "Let $t:Y\\to D$ be the transpose of $\\epsilon$, so $v(t\\otimes1_X)=\\epsilon$. Set $s:D\\to Y$ to $(v\\otimes1_Y)(1_D\\otimes\\eta)$ with the same constraints. Step 1 gives $st=1_Y$. For $ts$, the transpose of $v$ is $1_D$, and the first inverse identity of step 1 gives $\\epsilon(s\\otimes1_X)=v$. Therefore the transpose of $v(ts\\otimes1_X)$ is $ts$, and its value equals the transpose of $v$, namely $1_D$. Thus $ts=1_D$, and $t$ is an isomorphism. Transport the original exact pairing along $1_X$ and $t^{-1}:D\\to Y$, using [lem-trf-exact-pairing-iso-transport]. The transported coevaluation is $a=(1_X\\otimes t)\\eta:\\mathbf1\\to X\\otimes D$, and its evaluation is $\\epsilon(t^{-1}\\otimes1_X)=v$. Hence $(X,D,a,v)$ satisfies both triangles.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-trf-exact-pairing-iso-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFQ, lemma-left-dual, explicit mutually inverse Hom maps; Tag 0FFP, definition-dual. The right-closed chosen-evaluation identifications below are written out by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-exact-pairing-braided-swap] to the exact pairing $(X,D,a,v)$. It gives an exact pairing $(D,X)$ whose coevaluation is $c=\\sigma_{D,X}^{-1}a:\\mathbf1\\to D\\otimes X$ and whose evaluation is $w=v\\sigma_{X,D}:X\\otimes D\\to\\mathbf1$. In particular $(1_D\\otimes w)(c\\otimes1_D)=1_D$ and $(w\\otimes1_X)(1_X\\otimes c)=1_X$, with constraints inserted. These are the two identities used below; no inverse braiding is replaced by a forward braiding.",
+   "uses": [
+    "lem-trf-exact-pairing-braided-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean",
+    "place": "exactPairing_swap, lines 81–85"
+   }
+  },
+  {
+   "text": "Put $E=[D,\\mathbf1]$ and $u=\\mathrm{ev}_{D,\\mathbf1}:E\\otimes D\\to\\mathbf1$. By its definition in the statement, $b=b_X^\\sigma:X\\to E$ satisfies $u(b\\otimes1_D)=w$. Define $k:E\\to X$ by $(u\\otimes1_X)(1_E\\otimes c)$, inserting associators and unitors. Bifunctoriality gives $kb=(w\\otimes1_X)(1_X\\otimes c)=1_X$, by the $X$ triangle from step 3. Similarly, substituting the formula for $k$ and moving the disjoint tensor factors gives $w(k\\otimes1_D)=u(1_E\\otimes((1_D\\otimes w)(c\\otimes1_D)))=u$, by the $D$ triangle. Consequently $u((bk)\\otimes1_D)=w(k\\otimes1_D)=u$. Uniqueness of the transpose for $-\\otimes D\\dashv[D,-]$ yields $bk=1_E$. Thus $k$ is a two-sided inverse to the specified $b_X^\\sigma$, proving the assertion.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFQ, lemma-left-dual, explicit mutually inverse Hom maps; Tag 0FFP, definition-dual. The right-closed chosen-evaluation identifications below are written out by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "lem-trf-exact-pairing-iso-transport",
+  "lem-trf-exact-pairing-braided-swap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0FFP–0FFR supply the dual-pair formulas; arbitrary braided reversal is the cited Mathlib leaf. Explicit right-closure comparison and inverse calculations by Q14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l 'ExactPairing' Mathlib/CategoryTheory",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Rigid/Braided.lean, Rigid/OfEquivalence.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: exact pairings, duals and their adjunctions only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'toIhomIhom|ihomIhom|isIso.*ihom.*unit|bidual' Mathlib/CategoryTheory",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exactPairing_swap|hasLeftDualOfHasRightDual|monoidalClosedOfLeftRigidCategory' Mathlib/CategoryTheory",
+   "results": "BraidedCategory.exactPairing_swap and hasLeftDualOfHasRightDual (Monoidal/Rigid/Braided.lean:81,89), monoidalClosedOfLeftRigidCategory (Monoidal/Rigid/Basic.lean:739)",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredients only (swap of an exact pairing, closed structure of a rigid category); no statement that the braided double-dual transpose into an internal Hom is invertible"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical map from a dualizable object to its double internal dual in a braided monoidal closed category is an isomorphism",
+   "results": "not run: the review machine blocks network access",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing, CategoryTheory.ihom",
+   "results": "not run: the review machine blocks network access",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|toIhomIhom|exactPairing_swap|tensorRightHomEquiv",
+   "results": "{\"t\": \"2026-10-23T12:30:02Z\", \"tool\": \"grep\", \"query\": \"bidual|doubleDual|toIhomIhom|exactPairing_swap|tensorRightHomEquiv\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\"], \"digest\": \"ba0dbd860c5761b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing, CategoryTheory.ihom",
+   "results": "{\"t\": \"2026-10-23T12:30:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ExactPairing, CategoryTheory.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a braided monoidal closed category a dualizable object is canonically isomorphic to its double internal dual via the transpose of evaluation composed with braiding",
+   "results": "{\"t\": \"2026-10-23T12:30:04Z\", \"tool\": \"leanfinder\", \"query\": \"In a braided monoidal closed category a dualizable object is canonically isomorphic to its double internal dual via the transpose of evaluation composed with braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.ihom.coev_ev\", \"CategoryTheory.exp.coev_ev_assoc\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.exp.coev_ev\", \"CategoryTheory.exp.ev_coev\"], \"digest\": \"531f514eebf5fceb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical double dual map for a dualizable object in a braided closed monoidal category is invertible",
+   "results": "{\"t\": \"2026-10-23T12:30:26Z\", \"tool\": \"leansearch\", \"query\": \"The canonical double dual map for a dualizable object in a braided closed monoidal category is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DomAddAct.mk\", \"Lat.dualEquiv_inverse\", \"OrderIso.dualDual_symm_apply\", \"AddChar.doubleDualEmb_doubleDualEquiv_symm_apply\", \"CategoryTheory.leftDual_rightDual\", \"CategoryTheory.rightDual_leftDual\", \"BoolAlg.dualEquiv\", \"CategoryTheory.BraidedCategory.hasLeftDualOfHasRightDual\"], \"digest\": \"248d8c696be10113\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.exactPairing_swap",
+   "results": "{\"t\": \"2026-10-23T12:30:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.BraidedCategory.exactPairing_swap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\"], \"digest\": \"fff8e860baf66d74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A braiding reverses an exact pairing with evaluation composed with the braiding and coevaluation composed with the inverse braiding",
+   "results": "{\"t\": \"2026-10-23T12:30:27Z\", \"tool\": \"leanfinder\", \"query\": \"A braiding reverses an exact pairing with evaluation composed with the braiding and coevaluation composed with the inverse braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"CategoryTheory.ExactPairing.coevaluation_evaluation_assoc\", \"CategoryTheory.ExactPairing.evaluation_coevaluation_assoc\"], \"digest\": \"29a0e03268df45a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "grep",
+   "query": "def exactPairing_swap|coevaluation.*β_|evaluation.*β_",
+   "results": "{\"t\": \"2026-10-23T12:37:59Z\", \"tool\": \"grep\", \"query\": \"def exactPairing_swap|coevaluation.*β_|evaluation.*β_\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\"], \"digest\": \"2b22ccd0fc2b67d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact dual pairing in a braided monoidal category can be swapped using inverse braiding for coevaluation and forward braiding for evaluation",
+   "results": "{\"t\": \"2026-10-23T12:40:31Z\", \"tool\": \"leansearch\", \"query\": \"An exact dual pairing in a braided monoidal category can be swapped using inverse braiding for coevaluation and forward braiding for evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.ExactPairing.evaluation'\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.evaluation\", \"CategoryTheory.BraidedCategory.hasLeftDualOfHasRightDual\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.coevaluation'\", \"CategoryTheory.HasRightDual.exact\"], \"digest\": \"08b3048f13712ce5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dual pair X Y in a braided closed tensor category the transpose X to internal Hom of internal Hom X unit into unit is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:40:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a dual pair X Y in a braided closed tensor category the transpose X to internal Hom of internal Hom X unit into unit is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.coev_ev\", \"CategoryTheory.exp.coev_ev\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.leftDualIso\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.exp.ev_coev\"], \"digest\": \"c25ebf769367d449\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full right-closed canonical biduality statement: hits are exact-pairing or adjunction ingredients, or unrelated double duals; two semantic phrasings checked"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-trf-perfect-complex-derived-biduality",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-dualizable-braided-canonical-bidual",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit comparison of the chosen right internal dual with the supplied dual, transport and arbitrary braided reversal, and explicit two-sided inverse to the specified transpose. One new generic Mathlib leaf, not a restatement of biduality. Left-closure project theorems do not directly attach to this right-closure statement.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Biduality clause of lem-trf-perfect-complex-derived-biduality for the equipped (arbitrary) braiding recorded by its 2026-10-18 statement correction."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-69e3aa7ad",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-69e3aa7ad (reviewer sub-agent of L); spot-checked: PASS: first split, no faults found, no fixes written. Checked against the live and side-live clones: the item is still unsplit there with the same statement and stmt_deps, and there is no repair note, so this is not a re-split. Proof deps are def-sfb-monoidal-category and two Mathlib leaves, so there is no cycle. No SGA source is cited. Stacks categories.tex 0FFP/0FFQ/0FFR read: the item's dual-pair convention and orientation match 0FFP. Step 1 is 0FFQ with Z=1, calculation written out, and elementary is justified. Step 2: t = transpose of eps and s = (v⊗1)(1⊗eta), with st=1 and ts=1 checked. The orientation of lem-trf-exact-pairing-iso-transport (w=1, z=s=t^-1) gives a=(1⊗t)eta and evaluation v. Step 3: new leaf applied with P=X, Q=D gives c=sigma_{D,X}^-1 a and w=v sigma_{X,D}. Step 4: k=(u⊗1)(1⊗c), kb=1 by the X triangle, and w(k⊗1)=u by interchange plus the D triangle. Uniqueness of the transpose then gives bk=1 for the specified b, with the forward braiding as in the statement. New node lem-trf-exact-pairing-braided-swap matches Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:81-85 exactly: coevaluation η≫(β_YX).inv, evaluation (β_XY).hom≫ε, and only BraidedCategory is assumed. It is self-contained and searched by loogle, leanfinder, grep and leansearch. It does not restate a clause of the item. It is not a duplicate of lem-sf-exact-pairing-symmetric-swap (symmetric, forward braiding in the coevaluation). My own test, Z-graded spaces with braiding 2^{mn}·flip on degrees ±1: the new node's formulas give triangle scalar 1, while the symmetric formula gives 1/4. The project Lean isIso_toIhomIhomUnit uses the left-closed convention (ev X⊗[X,1]→1), so not attaching it is correct. Duplicate search over dag/nodes for ExactPairing, bidual and braid found no generic arbitrary-braiding biduality node. Route: unit sk-i-curve-zero, the only off-unit cites are Mathlib leaves (tools), and the chapter route is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Monoidal.Closed.BraidedCanonicalBidual",
+  "declaration": "CategoryTheory.isIso_braided_rightClosed_bidual",
+  "file": "lean/Sheaf/CategoryTheory/Monoidal/Closed/BraidedCanonicalBidual.lean",
+  "statement": "theorem isIso_braided_rightClosed_bidual {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C] (H : C → C ⥤ C) (adj : ∀ L : C, tensorRight L ⊣ H L) (X Y : C) [ExactPairing X Y] : IsIso ((adj ((H X).obj (𝟙_ C))).homEquiv X (𝟙_ C) ((β_ X ((H X).obj (𝟙_ C))).hom ≫ (adj X).counit.app (𝟙_ C)))",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a26bacc8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Clause-by-clause match: MonoidalCategory = def-sfb-monoidal-category; BraidedCategory hexagon_forward/reverse = node hexagons, no symmetry; right closure = adj : ∀ L, tensorRight L ⊣ H L with ev = counit and homEquiv = unique transpose; ExactPairing triangles = node triangles; b = homEquiv of β_{X,X∨} ≫ ev_{X,1}; IsIso of the specified map. Universes u,v independent and bound; no extra hypotheses. lean.statement verbatim in file. Upstream MonoidalClosed.isIso_toIhomIhomUnit is left-closed with β_{[X,1],X}, so different given data and existing:true would be wrong; no right-closure node or duplicate found. No defs, sorry only, source and blueprint docstrings with the 4 proof steps; Worker report and Second reading by Q32 present. Only the lean field changed vs live; item unlanded. Not recompiled per policy. Advisory: parent theorem is left-closed, so a stage-3 use must supply right-closure data via the braiding."
+ }
+}

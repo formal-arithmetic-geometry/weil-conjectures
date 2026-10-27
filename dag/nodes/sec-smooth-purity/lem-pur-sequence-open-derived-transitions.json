@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-sequence-open-derived-transitions",
+ "kind": "statement",
+ "title": "Descent of ordinary open-extension transitions",
+ "statement": "Let C have object universe c and morphism universe v, let k=max(c,v,r), suppose C is essentially small in k, let J be a Grothendieck topology on C, let U be an object, and let B_n be a tower of commutative ring sheaves with adjacent maps τ_n:B_(n+1)→B_n. Use the actual systems, coefficient maps, evaluations and scalar restrictions of [def-coef-semilinear-system-models]. For any ordinary open datum O [def-pur-sequence-site-open-data] satisfying its actual ordinary Transitions equation, O satisfies DerivedTransitions [def-pur-sequence-open-derived-data]. This is the equation on every object of the ordinary unbounded derived system category with the termwise localized level and coefficient comparisons and the localized composite coefficient-restriction factor.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category), localization at quasi-isomorphisms; original proof step 7."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-site-open-data",
+  "def-pur-sequence-open-derived-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary equation degreewise to complexes. Retain the standard exact-derived composition factors in the level and coefficient square isomorphisms. Their factorization formulas follow from [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Form the two natural transformations on the derived category and apply localization extensionality [lem-weil-pbc-localization-universal-property]. After postcomposition with the invertible evaluation, extension and restriction factors, naturality reduces both sides to Q of the original chain identity. The extra coefficientRestriction isomorphism descends by its own natural-isomorphism factorization. Cancel factors and take components.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category), localization at quasi-isomorphisms; original proof step 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open localization of a category of semilinear inverse systems of sheaves of modules has exact extension by zero calculated levelwise, with coherent coefficient comparison",
+   "results": "8 hits: SheafOfModules.instAbelian, SheafOfModules.hasLimit, localization linear instances. No comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "Use project direct-sum adjunction and localization infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficient rings commutes coherently with extension by zero on sheaves of modules, preserves scalar endomorphisms, and descends transition equations to derived categories",
+   "results": "8 hits: SheafOfModules.restrictScalars and its object/map/additive formulas; PresheafOfModules.restrictScalars. No normalized open-extension package.",
+   "date": "2026-10-24",
+   "verdict": "The sectionwise formulas support the construction; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, SheafOfModules",
+   "results": "8 hits: sheafificationAdjunction, overMapPushforwardAdj, overPushforwardOverAdj, pushforwardPushforwardAdj and pullbackPushforwardAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "These are component adjunctions; use them via the existing project normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|liftNatTrans|mapDerivedCategorySquareIso",
+   "results": "25 hits including Localization.liftNatTrans_app, comp_liftNatTrans, localization of adjunctions. No complete open sequence comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use localization naturality and its standard factorization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SequenceSiteOpenExtension",
+  "date": "2026-10-24",
+  "group": "C6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-representative-independence",
+   "place": "First proof sentence: the open-extension factor of the coherent strict compact-support reduction tower. Tag 015F and localization at quasi-isomorphisms: original proof step 7.",
+   "via": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-pur-sequence-site-open-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SequenceOpenDerivedTransitions",
+  "file": "lean/Sheaf/Paper/SequenceOpenDerivedTransitions.lean",
+  "declaration": "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.derivedTransitions",
+  "statement": "theorem SequenceOpenOrdinary.derivedTransitions {C : Type c} [Category.{v} C]\n    [EssentiallySmall.{max c v r} C] (J : GrothendieckTopology C) (U : C)\n    (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) (ht : O.Transitions) :\n    O.DerivedTransitions",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "independent cc review: delivered SequenceSiteOpenData vs clone's SequenceSiteOpenExtension (verbatim move, only blueprint anchors and gen* options differ); item theorem statement vs clone (identical); new node lean records vs delivered modules; 3 direct importers compiled against the delivered modules in a sandbox (all OK); #print axioms: three new theorems axiom-clean, item theorem sorryAx only via sequenceOpenOrdinary"
+ }
+}

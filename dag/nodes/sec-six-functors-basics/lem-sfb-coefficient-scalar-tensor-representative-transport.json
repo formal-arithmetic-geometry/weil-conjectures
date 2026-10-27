@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-representative-transport",
+ "kind": "lemma",
+ "title": "Transport of signed scalar tensor representatives",
+ "statement": "If the fixed equation holds on all reconstructed internal complexes, it holds for arbitrary section complexes satisfying the same K-flat and flat-term hypotheses.",
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-realization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, normalized signed total-complex representative argument."
+ },
+ "proof": [
+  {
+   "text": "Lift each section complex through the termwise section equivalence and use its counit isomorphism. K-flatness is invariant under isomorphism because tensoring is functorial and acyclicity is invariant under isomorphism. Termwise flatness is invariant because the corresponding tensor-right functors are naturally isomorphic.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the natural transformation epsilon from the scalar derived counit, and the signed total tensor comparison delta from mapBifunctorComparison_naturality. Package each side of the fixed equation as a natural transformation by composition and whiskering.",
+   "uses": [
+    "def-sfb-coefficient-scalar-tensor-representative-equation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the supplied internal-equation hypothesis to the inverse images with the transported resolving hypotheses. Naturality of the two composites along the pair of counit isomorphisms, followed by cancellation of their common source isomorphism, gives the equation at the original section complexes.",
+   "uses": [
+    "def-sfb-coefficient-scalar-tensor-representative-equation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-coefficient-scalar-tensor-representative-equation",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, bifunctoriality of the total-complex representative; formal equivalence transport written by M4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar tensor representative comparison",
+   "results": "No direct existing theorem; this is the declared substep.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory tensor comparison representative",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "signed total scalar tensor comparison",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentative",
+  "date": "2026-10-27",
+  "group": "X2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative",
+   "place": "strict substep"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarTensorRepresentativeTransport",
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorRepresentativeTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRepresentative_transport",
+  "statement": "theorem coefficientScalarTensorRepresentative_transport (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z) (hinternal : ∀ (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ), CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj P) → CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj Q) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) ((ModuleRingedComparison.equivalence R Z).functor.obj (P.X n))) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) ((ModuleRingedComparison.equivalence R Z).functor.obj (Q.X n))) → coefficientScalarTensorRepresentativeEquation a Z d (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj P) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj Q)) : ∀ (P Q : CochainComplex (ModuleRingedComparison.modules R Z) ℤ), CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) P → CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) Q → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (P.X n)) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (Q.X n)) → coefficientScalarTensorRepresentativeEquation a Z d P Q",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T203101-L-3502890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T222740-L-690084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

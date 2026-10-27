@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-sl2-lattice-integration",
+ "kind": "statement",
+ "title": "Integral integration of a divided-power sl2 module",
+ "statement": "Let $L$ be a free abelian group of finite rank [def-weil-pbc-free-module], $W=L\\otimes_{\\mathbf Z}\\mathbf Q$, and $E,F,H\\in\\operatorname{End}_{\\mathbf Q}(W)$ satisfy $[H,E]=2E$, $[H,F]=-2F$, and $[E,F]=H$, where $[A,B]=AB-BA$. Suppose $E,F$ are nilpotent, $H$ is diagonalizable with integer eigenvalues, $L=\\bigoplus_{j\\in\\mathbf Z}(L\\cap W_j)$ for $W_j=\\ker(H-j)$, and $E^m/m!$ and $F^m/m!$ preserve $L$ for every integer $m\\geq0$. Put $X_+(a)=\\sum_m(E^m/m!)a^m$, $X_-(a)=\\sum_m(F^m/m!)a^m$ and let $D(s)$ act by $s^j$ on $(L\\cap W_j)\\otimes A$. These finite polynomial formulas define, for every commutative ring $A$, automorphisms of $L\\otimes A$. There is a unique homomorphism of affine group schemes over $\\mathbf Z$,\n$$v:\\operatorname{SL}_{2,\\mathbf Z}\\longrightarrow\\operatorname{GL}(L),\\qquad v(I+aE_{12})=X_+(a),\\quad v(I+aE_{21})=X_-(a),\\quad v(\\operatorname{diag}(s,s^{-1}))=D(s).$$\nHere $\\operatorname{SL}_{2,\\mathbf Z}=\\operatorname{Spec}\\mathbf Z[a,b,c,d]/(ad-bc-1)$ with matrix multiplication, and $\\operatorname{GL}(L)(A)=\\operatorname{Aut}_A(L\\otimes A)$; $E_{ij}$ denotes the matrix unit. A homomorphism of these affine group schemes is a natural family of group homomorphisms represented by a map of their coordinate rings. The formulas and uniqueness hold after every base change from $\\mathbf Z$, including nonreduced rings. Rank zero and the trivial representation are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-integral-sl2-lattice-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-sl2-rational-polynomial-model] to $W,E,F,H$. On each $P_n$ let $g=\\left(\\begin{smallmatrix}a&b\\\\ c&d\\end{smallmatrix}\\right)$ act by $P(X,Y)\\mapsto P(aX+cY,bX+dY)$. Substitution gives $S_gS_h=S_{gh}$ and inverse $S_{g^{-1}}$; its matrix entries are homogeneous polynomials in $a,b,c,d$. Conjugate their direct sum by $T$ to obtain a morphism $\\rho_{\\mathbf Q}:\\operatorname{SL}_{2,\\mathbf Q}\\to\\operatorname{GL}(W)$. For $x_+(t)=I+tE_{12}$, substitution is $P(X,Y+tX)=\\sum_m t^m e_n^mP/m!$; for $x_-(t)$ it is $P(X+tY,Y)=\\sum_m t^m f_n^mP/m!$. The diagonal acts on $X^{n-i}Y^i$ by $s^{n-2i}$. The intertwining identities therefore identify these restrictions of $\\rho_{\\mathbf Q}$ with exactly $X_+(t),X_-(t),D(s)$ on $W$. This constructs the rational action without assuming an integral action.",
+   "uses": [
+    "lem-sfb-sl2-rational-polynomial-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70, pp.507-508, and Example 22.33, p.472; agent construction of the rational action from the explicit polynomial models."
+   }
+  },
+  {
+   "text": "Fix any finite basis of $L$. The divided powers have integral matrices by hypothesis and vanish for sufficiently large $m$. Expanding in commuting variables gives $X_\\pm(t)X_\\pm(u)=X_\\pm(t+u)$: the coefficient identity is $(E^r/r!)(E^q/q!)=\\binom{r+q}{r}E^{r+q}/(r+q)!$, and likewise for $F$. These are identities of integral matrices, since they hold in the containing rational matrix algebra. Thus $X_\\pm(t)^{-1}=X_\\pm(-t)$ over every ring. The finitely many weight projections $p_j:L\\to L\\cap W_j\\hookrightarrow L$ supplied by the assumed direct sum satisfy $\\sum_jp_j=1$ and $p_jp_k=\\delta_{jk}p_j$. Hence $D(s)=\\sum_js^jp_j$ is an integral Laurent polynomial matrix and $D(s)D(s^{-1})=1$. No choice of bases of the weight summands is needed. Set $N=X_+(1)X_-(-1)X_+(1)$, an integral invertible matrix.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Equation (153), p.510; agent binomial and weight-projection verification over the universal polynomial rings."
+   }
+  },
+  {
+   "text": "Put $G=\\operatorname{Spec}R$ with $R=\\mathbf Z[a,b,c,d]/(ad-bc-1)$. The opens $U_a=D(a)$ and $U_c=D(c)$ cover $G$, since $ad-bc=1$. Their rings are $R_a=\\mathbf Z[a,a^{-1},b,c]$ (eliminate $d$) and $R_c=\\mathbf Z[c,c^{-1},a,d]$ (eliminate $b$). For the universal matrix $g$ on these opens, direct multiplication gives\n$$g=x_-(c/a)\\operatorname{diag}(a,a^{-1})x_+(b/a)\\quad\\text{on }U_a,$$\n$$g=w\\,x_-(-a/c)\\operatorname{diag}(-c,(-c)^{-1})x_+(d/c)\\quad\\text{on }U_c,$$\nwhere $w=\\left(\\begin{smallmatrix}0&1\\\\-1&0\\end{smallmatrix}\\right)=x_+(1)x_-(-1)x_+(1)$. Define morphisms into $\\operatorname{GL}(L)$ on these charts by\n$$V_a=X_-(c/a)D(a)X_+(b/a),\\qquad V_c=N X_-(-a/c)D(-c)X_+(d/c).$$\nAll factors and their inverses are matrices over the displayed chart rings by step 2, so these are actual morphisms, not just maps on field-valued points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent two-chart construction supplementing equation (153), pp.509-510; all factorizations are explicit 2 by 2 matrix identities."
+   }
+  },
+  {
+   "text": "Over $\\mathbf Q$, both $V_a$ and $V_c$ equal the restriction of the action from step 1, by its root and torus formulas and the factorizations in step 3. On $U_a\\cap U_c$ the coordinate ring is $\\mathbf Z[a,a^{-1},b,c,c^{-1}]$. Its map into its rationalization is injective: expand any Laurent polynomial in its distinct monomials, whose integer coefficients embed in $\\mathbf Q$. Consequently every entry of $V_a-V_c$ is zero already over this integral overlap ring. Apply [lem-weil-pbc-scheme-morphism-gluing] to the two open charts to obtain a unique morphism $v:G\\to\\operatorname{GL}(L)$ restricting to them; its rational base change is $\\rho_{\\mathbf Q}$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent gluing of the integral formulas; the gluing theorem cited in the DAG is Stacks Tags 01JA, 01JJ, 04TN and 00AN (mapping-property-glue)."
+   }
+  },
+  {
+   "text": "Compare the morphisms $v\\circ m$ and $m_{\\operatorname{GL}}\\circ(v\\times v)$ on $G\\times_{\\mathbf Z}G$. The four products $U_\\epsilon\\times U_\\eta$, $\\epsilon,\\eta\\in\\{a,c\\}$, form an open cover. Each coordinate ring is a Laurent polynomial ring over $\\mathbf Z$ in two independent triples of chart coordinates, so injects into its rationalization by the same coefficient argument. The difference of the two matrix entries becomes zero there because $\\rho_{\\mathbf Q}$ is a homomorphism; hence every difference was zero integrally. The uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] gives the multiplication identity globally. At the identity the $U_a$ formula is $X_-(0)D(1)X_+(0)=1$. These two identities make $v$ a group-scheme homomorphism (and force preservation of inverses).",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent verification of the group law over the four universal integral product charts; comparison with Theorem 23.70 on their rationalizations."
+   }
+  },
+  {
+   "text": "The upper root subgroup and diagonal torus lie in $U_a$ with coordinates $(a,b,c)=(1,t,0)$ and $(s,0,0)$, respectively; the lower root subgroup also lies in $U_a$, with $(a,b,c)=(1,0,t)$. Thus the $V_a$ formula gives all three prescribed restrictions. After any base change $\\mathbf Z\\to B$, the same two opens cover $G_B$, and the two factorizations still hold over their universal coordinate rings. Any $B$-group-scheme homomorphism with the prescribed restrictions must send $w=x_+(1)x_-(-1)x_+(1)$ to $N_B$, so those factorizations force its chart formulas to be $(V_a)_B$ and $(V_c)_B$. Uniqueness in [lem-weil-pbc-scheme-morphism-gluing] proves it equals $v_B$. The construction uses integral coordinate identities, hence applies to every commutative $B$-algebra, including nonreduced ones. For rank zero the matrices are the unique automorphism of the zero module; trivial summands give identity matrices throughout.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent restriction and universal-base-change uniqueness argument, completing the integral rank-one input to equation (153)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sl2-rational-polynomial-model",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70, Example 22.33 and equation (153) motivate the rational action; the two integral charts, gluing, multiplication descent and uniqueness are supplied explicitly by Q61."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral weight decomposed sl2 representation stable under divided powers integrates to a representation of the group scheme SL2 over the integers",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"leanfinder\", \"query\": \"An integral weight decomposed sl2 representation stable under divided powers integrates to a representation of the group scheme SL2 over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.coeHom_apply\", \"ModularGroup.T\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"ModularGroup.coeHom\", \"ModularForm.SLAction\", \"ModularGroup.S\", \"ModularForm.SL_slash\", \"IsSl2Triple.HasPrimitiveVectorWith\"], \"digest\": \"de10934ba3c39b91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple and its primitive-vector lemmas concern Lie modules, not an integral group-scheme representation; ModularGroup is an abstract group of integer points. Basis/Basic.lean:13--39 explicitly leaves Chevalley bases as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exponentials of an sl2 triple with stable integral divided powers extend to a morphism SL2 over Z by gluing the two big cell charts",
+   "results": "{\"t\": \"2026-10-23T22:20:25Z\", \"tool\": \"leanfinder\", \"query\": \"Exponentials of an sl2 triple with stable integral divided powers extend to a morphism SL2 over Z by gluing the two big cell charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.coeHom\", \"RootPairing.GeckConstruction.isSl2Triple\", \"ModularGroup.g_eq_of_c_eq_one\", \"OnePoint.exists_mem_SL2\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"SpecialLinearGroup.SL2Z_generators\", \"Matrix.GeneralLinearGroup.upperRightHom\", \"ModularGroup.exists_eq_T_zpow_of_c_eq_zero\"], \"digest\": \"9e93848da593df9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple and its primitive-vector lemmas concern Lie modules, not an integral group-scheme representation; ModularGroup is an abstract group of integer points. Basis/Basic.lean:13--39 explicitly leaves Chevalley bases as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSl2Triple",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"loogle\", \"query\": \"IsSl2Triple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSl2Triple\", \"IsSl2Triple.toLieSubalgebra\", \"IsSl2Triple.lie_e_f\", \"IsSl2Triple.e_ne_zero\", \"IsSl2Triple.f_ne_zero\", \"IsSl2Triple.h_ne_zero\", \"IsSl2Triple.symm\", \"IsSl2Triple.symm_iff\"], \"digest\": \"e6dffecd0bdae38f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple and its primitive-vector lemmas concern Lie modules, not an integral group-scheme representation; ModularGroup is an abstract group of integer points. Basis/Basic.lean:13--39 explicitly leaves Chevalley bases as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.power|integrat.*SL|Chevalley.basis|admissible.lattice",
+   "results": "{\"t\": \"2026-10-23T22:15:26Z\", \"tool\": \"grep\", \"query\": \"divided.power|integrat.*SL|Chevalley.basis|admissible.lattice\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Vertex/VertexOperator.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\"], \"digest\": \"179760e80005df52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple and its primitive-vector lemmas concern Lie modules, not an integral group-scheme representation; ModularGroup is an abstract group of integer points. Basis/Basic.lean:13--39 explicitly leaves Chevalley bases as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrate finite dimensional rational representations of sl2 preserving a lattice to SL2 group schemes",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"leansearch\", \"query\": \"Integrate finite dimensional rational representations of sl2 preserving a lattice to SL2 group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.instGroup\", \"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.toLin'\", \"CongruenceSubgroup.isArithmetic_conj_SL2Z\", \"ModularGroup.SL_to_GL_tower\", \"IsSl2Triple.toLieSubalgebra\", \"MatrixGroups.term𝒮ℒ\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\"], \"digest\": \"8fa9623ee03a6ab5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple and its primitive-vector lemmas concern Lie modules, not an integral group-scheme representation; ModularGroup is an abstract group of integer points. Basis/Basic.lean:13--39 explicitly leaves Chevalley bases as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral weight decomposed sl2 representation stable under divided powers integrates to a representation of the group scheme SL2 over the integers",
+   "results": "{\"t\": \"2026-10-23T23:35:50Z\", \"tool\": \"leanfinder\", \"query\": \"An integral weight decomposed sl2 representation stable under divided powers integrates to a representation of the group scheme SL2 over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.coeHom_apply\", \"ModularGroup.T\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"ModularGroup.coeHom\", \"ModularForm.SLAction\", \"ModularGroup.S\", \"ModularForm.SL_slash\", \"IsSl2Triple.HasPrimitiveVectorWith\"], \"digest\": \"de10934ba3c39b91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ModularGroup describes abstract integer points, and the primitive-vector lemmas give no integral group-scheme action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-integral-rank-one",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne.",
+   "via": [
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-lattice-integration",
+  "worker": "stage1",
+  "summary": "Retained the full integral and arbitrary-base-change statement. Constructed the rational action from one new polynomial-model input, then wrote both SL2 chart formulas, integral overlap comparison, universal product-chart group law and base-change uniqueness. Reused the existing Mathlib gluing leaf; no SGA route, Lean writing or compilation.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the already recorded alteration/moduli/reductivity route to Milne Section 23h: steps 1-2 supply the rational polynomial and integral root formulas, steps 3-6 fill the omitted integral rank-one verification. blueprint_refs ancestor returns null for this already broken inherited created.item chain; retain that value and extend its recorded via list in the new node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-801a0f90b",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-801a0f90b (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 23.70 with its proof (Weyl), pp.509-511 (admissible lattice, (152), (153), Thm 23.72 'details omitted') and Ex. 22.33. The item's statement and stmt_deps are identical to live. The item is still unsplit live, so this delivery is not superseded. No SGA source is cited. Step 1: the convention P((X,Y)g) is a left action. Taylor's formula gives x_+ -> X∂_Y and x_- -> Y∂_X, and the diagonal acts by s^{n-2i}. The model operators satisfy [h,e]=2e, [h,f]=-2f, [e,f]=h, so conjugating by T gives exactly X_±(t) and D(s). Step 2: the binomial identity holds over Z, and D(s)=Σ s^j p_j comes from the assumed direct sum. Step 3: I multiplied out both factorizations: x_-(c/a)diag(a,1/a)x_+(b/a)=g on D(a), and w x_-(-a/c)diag(-c,-1/c)x_+(d/c)=g on D(c). I also checked w=x_+(1)x_-(-1)x_+(1)=[[0,1],[-1,0]] and that D(a), D(c) cover since 1∈(a,c). Steps 4-5: the overlap and product-chart rings are torsion-free Laurent polynomial rings, so the rational equalities descend, and lem-weil-pbc-scheme-morphism-gluing (Mathlib leaf, statement read) glues the charts and gives uniqueness. Step 6: the three restrictions lie in U_a. For uniqueness over any B, a homomorphism must send w to N, so the factorizations force both chart formulas. No reducedness or torsion-freeness of B is used, so characteristic 2 is covered (P_2 divided square). New node lem-sfb-sl2-rational-polynomial-model: true (Weyl, V(n)≅P_n). I tested W=0, the trivial module and P_1. It is not a clause of the item or of its parent. It is not a duplicate of char-zero-complete-reducibility, rational-highest-weight-modules, sl2-divided-straightening, sl2-highest-orbit-polynomial or integrable-sl2-reflection. B3 fault: ∂/∂X and ∂/∂Y had no definition citation although def-weil-pbc-polynomial-partial-derivative defines them. FIX: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-sl2-rational-polynomial-model.json adds that citation in the statement and in stmt_deps. No tool_uses needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.Sl2LatticeIntegration",
+  "declaration": "RepresentationTheory.existsUnique_sl2_lattice_integration",
+  "declarations": [
+   "RepresentationTheory.sl2LatticeWeight",
+   "RepresentationTheory.existsUnique_sl2_lattice_integration"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/Sl2LatticeIntegration.lean",
+  "statement": "theorem existsUnique_sl2_lattice_integration (L : Type u) [AddCommGroup L] [Module ℤ L] [Module.Free ℤ L] [Module.Finite ℤ L] (E F H : Module.End ℚ (ℚ ⊗[ℤ] L)) (hHE : H * E - E * H = (2 : ℚ) • E) (hHF : H * F - F * H = (-2 : ℚ) • F) (hEF : E * F - F * E = H) (hE : IsNilpotent E) (hF : IsNilpotent F) (hH : ∃ (d : ℕ) (b : Module.Basis (Fin d) ℚ (ℚ ⊗[ℤ] L)) (weight : Fin d → ℤ), ∀ i : Fin d, H (b i) = (weight i : ℚ) • b i) (hL : DirectSum.IsInternal (sl2LatticeWeight L H)) (hdivE : ∀ m : ℕ, ∃ D : Module.End ℤ L, D.baseChange ℚ = ((m.factorial : ℚ)⁻¹) • E ^ m) (hdivF : ∀ m : ℕ, ∃ D : Module.End ℤ L, D.baseChange ℚ = ((m.factorial : ℚ)⁻¹) • F ^ m) (B : Type v) [CommRing B] : ∃! ρ : IntegralSl2LatticeHom B L, (∀ (N : ℕ) (dE dF : ℕ → Module.End ℤ L), E ^ N = 0 → F ^ N = 0 → (∀ m : ℕ, (dE m).baseChange ℚ = ((m.factorial : ℚ)⁻¹) • E ^ m) → (∀ m : ℕ, (dF m).baseChange ℚ = ((m.factorial : ℚ)⁻¹) • F ^ m) → ∀ (A : CommAlgCat.{max u v} B) (a : A), (ρ.app A (Matrix.SpecialLinearGroup.transvection (zero_ne_one : (0 : Fin 2) ≠ 1) a)).toLinearMap = ∑ m ∈ Finset.range N, a ^ m • (dE m).baseChange A ∧ (ρ.app A (Matrix.SpecialLinearGroup.transvection (one_ne_zero : (1 : Fin 2) ≠ 0) a)).toLinearMap = ∑ m ∈ Finset.range N, a ^ m • (dF m).baseChange A) ∧ (∀ (A : CommAlgCat.{max u v} B) (s : Aˣ) (j : ℤ) (l : sl2LatticeWeight L H j) (a : A), ρ.app A (integralSl2Diagonal s) (a ⊗ₜ[ℤ] (l : L)) = (↑(s ^ j) : A) • (a ⊗ₜ[ℤ] (l : L)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8899d3163",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node diff vs live: only lean record + stmt_dep def-sfb-integral-sl2-lattice-hom. All clauses match: Module.Free/Finite lattice, Q⊗L, three commutators, nilpotence, integer eigenbasis (implied by hL, harmless), hL IsInternal of kernel weight spaces = L∩W_j, divided-power preservation as unique integral lifts, X± finite sums over every nilpotence bound/lift family (nonempty domain), D(s) on pure weight tensors with unit zpow, integralSl2Diagonal = w(s)w(1)^-1 = diag(s,s^-1) checked by hand, ∃! over every CommRing B with A in universe max u v. New IntegralSl2LatticeHom (natural group-hom family + polynomial-entry Prop) is equivalent to an affine group-scheme hom, not hollow; no ring-general duplicate (RankOneRoots.SL2Hom and LinearGroupSchemes.specialLinear are field-only; RingGroupSchemes only Gm/torus). Uniqueness true via D(a)/D(c) factorizations + naturality. Records verbatim, imports per brief, docstrings with source/blueprint/six steps, sorry only. No changes, no compile."
+ }
+}

@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-scheme-m-pseudocoherent-summands",
+ "kind": "statement",
+ "title": "Absolute m-pseudo-coherence on schemes is closed under binary summands",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $m\\in\\mathbf Z$, and let $A,B\\in D(\\mathcal O_Y)$ [def-pc-derived-category]. If $A\\oplus B$ is $m$-pseudo-coherent [def-sfb-m-pseudo-coherent-complex], then $A$ and $B$ are $m$-pseudo-coherent for that same integer $m$. No quasi-coherence, Noetherian hypothesis, or global cohomological boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CE, lemma-summands-pseudo-coherent, fixed-m assertion, specialized to the ringed space of a scheme; definition Tag 08CB, definition-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Work locally on a member $U$ of a covering carrying a strictly perfect approximation $P\\to E|_U$, where $E=A\\oplus B$. For the open immersion $j:U\\to Y$ the ring map $j^{-1}\\mathcal O_Y\\to\\mathcal O_U$ is the identity, so the derived pullback $Lj^*$ of the definition is the termwise restriction followed by the identity change of rings, i.e. the termwise restriction. Restriction is exact and its derived functor is computed termwise and is triangulated, so $E|_U=A|_U\\oplus B|_U$; write these restrictions again as $E,A,B$. Exactness also preserves the approximation after any further restriction. Choose $N\\ge m$ above every nonzero degree of $P$. Then $H^i(E)=0$ for $i>N$. The inclusion and projection of each summand compose to its identity; applying $H^i$ makes each $H^i(A)$ and $H^i(B)$ a retract of zero for $i>N$, hence zero. This bound is chosen separately on each $U$. On the site of opens of $U$, module sheaves and their restrictions are precisely the usual ones. The ringed-site approximation condition agrees with the scheme condition: restrict a covering of $U$ to any open $V$ by intersections, and conversely take the site object $U$. Thus the cited ringed-site triangle theorem applies to this scheme definition.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-derived-pullback",
+    "def-pc-perfect-complex",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Two elementary consequences of the approximation definition will be used. If $T$ is $a$-pseudo-coherent and $b\\ge a$, the same approximation is an isomorphism above $b$ and a surjection at $b$ (at $b>a$ it is even an isomorphism), so $T$ is $b$-pseudo-coherent. For any integer $r$, shift an approximation by $r$: its cohomology in degree $i$ is the old cohomology in degree $i+r$, since the shifted differential is $(-1)^r d$. The shifted complex remains strictly perfect. Consequently $T[r]$ is $a$-pseudo-coherent exactly when $T$ is $(a+r)$-pseudo-coherent. Composing an approximation with an isomorphism also preserves its properties.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Take the identity distinguished triangle $A\\xrightarrow{1}A\\to0\\to A[1]$. The zero chain map on a representative of $B$ has cone $B\\oplus B[1]$ with differential $\\operatorname{diag}(d_B,-d_B)$, so its cone triangle is $B\\xrightarrow{0}B\\to B\\oplus B[1]\\to B[1]$. The finite-sum triangle theorem, for the two-element index set, gives a distinguished triangle $E\\xrightarrow{1_A\\oplus0}E\\to C\\to E[1]$, where $C=B\\oplus B[1]$ and the zero summand in its third vertex has been removed by the canonical isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-finite-sums-distinguished-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "The first $E$ is $(m+1)$-pseudo-coherent by step 2 and the second is $m$-pseudo-coherent by hypothesis. Apply clause (1) of the ringed-site triangle theorem to step 3: $C=B\\oplus B[1]$ is $m$-pseudo-coherent. For every integer $t\\ge0$, step 2 makes $C$ $(m+t)$-pseudo-coherent, hence $C[t]=B[t]\\oplus B[t+1]$ is $m$-pseudo-coherent. The displayed biproduct identification holds because shift is additive.",
+   "uses": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Choose an integer $n\\ge1$ with $m+n>N$, using the local bound from step 1. For every $i\\ge m$, $H^i(B[n])=H^{i+n}(B)=0$. The unique map from the zero strictly perfect complex to $B[n]$ is therefore an isomorphism above $m$ and surjective at $m$. It witnesses that $B[n]$ is $m$-pseudo-coherent, starting a finite downward induction.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Suppose $1\\le j\\le n$ and $B[j]$ is $m$-pseudo-coherent. The split-triangle lemma gives the distinguished triangle $B[j]\\to B[j]\\oplus B[j-1]\\to B[j-1]\\to B[j+1]$. Its first term is $(m+1)$-pseudo-coherent by step 2. Its middle term is isomorphic, by exchanging the summands, to $C[j-1]$, which is $m$-pseudo-coherent by step 4 since $j-1\\ge0$. Clause (1) of the ringed-site triangle theorem therefore makes $B[j-1]$ $m$-pseudo-coherent. Starting at $j=n$ and successively taking $j=n-1,\\ldots,1$ proves the assertion for $B=B[0]$.",
+   "uses": [
+    "lem-sbc-biproduct-triangle-distinguished",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Interchange $A$ and $B$ in steps 3--6, using $B\\oplus A\\cong E$ and the bound for $A$ from step 1, to obtain $m$-pseudo-coherence of $A$ on $U$ as well. Do this on every member $U$ of the initial covering. For each summand, the local approximation coverings on the $U$ together form an open covering of $Y$, with the same integer $m$; these approximations are exactly the witnesses in the definition on $Y$. This proves both conclusions. If $Y$ is empty the empty covering already witnesses both, and zero summands are included by the zero approximation.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sbc-biproduct-triangle-distinguished",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "lem-weil-finite-sums-distinguished-triangles",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CE, lemma-summands-pseudo-coherent, proof; fixed-m shift-and-downward-induction argument, with the cone, shifts, base case and induction indices expanded. Tag 08CD is supplied by existing general ringed-site Tag 08FV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At a fixed integer m, direct summands of an m pseudo coherent complex of sheaves on a scheme are m pseudo coherent, and the relative version follows after closed embeddings into affine space",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every integer m, the summands of an m pseudo coherent complex on a ringed space are m pseudo coherent",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A retract in the unbounded derived category of sheaves of modules inherits a finite strictly perfect approximation in all cohomological degrees above m and a surjection at m",
+   "results": "OK: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.cm5b",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a derived direct sum of two complexes on a scheme has local strictly perfect approximations in degrees at least m then both complexes have such approximations for the same m",
+   "results": "OK: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly.?perfect|pseudo.?coherent|MPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite presentation of single sheaves, fractions, support bounds, or abstract retract and quasi-isomorphism results do not state fixed-degree strictly-perfect approximation stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A retract in the derived category of sheaves preserves strictly perfect approximation above a fixed degree m",
+   "results": "OK: 8 hits; CategoryTheory.ShortComplex.quasiIso_of_retract, CategoryTheory.Retract.hasProjectiveDimensionLT, CategoryTheory.Retract.hasInjectiveDimensionLT, HomologicalComplex.instIsStableUnderRetractsQuasiIso, CategoryTheory.Retract.ctorIdx, CategoryTheory.Retract.map, CategoryTheory.Retract.projectiveDimension_le, CategoryTheory.ShortComplex.Splitting.map_r",
+   "date": "2026-10-24",
+   "verdict": "no match: finite presentation of single sheaves, fractions, support bounds, or abstract retract and quasi-isomorphism results do not state fixed-degree strictly-perfect approximation stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite presentation of single sheaves, fractions, support bounds, or abstract retract and quasi-isomorphism results do not state fixed-degree strictly-perfect approximation stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct summands of an m pseudo coherent complex of sheaves of modules are m pseudo coherent for the same integer m",
+   "results": "OK: 8 hits; SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFiniteType, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-24",
+   "verdict": "no match: finite presentation of single sheaves, fractions, support bounds, or abstract retract and quasi-isomorphism results do not state fixed-degree strictly-perfect approximation stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex admitting locally a strictly perfect approximation inducing isomorphisms above degree m and a surjection in degree m passes this property to both terms of a binary direct sum",
+   "results": "OK: 8 hits; CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, HomologicalComplex.IsStrictlySupported, DerivedCategory.left_fac_of_isStrictlyGE, HomologicalComplex.IsStrictlySupportedOutside",
+   "date": "2026-10-24",
+   "verdict": "no match: finite presentation of single sheaves, fractions, support bounds, or abstract retract and quasi-isomorphism results do not state fixed-degree strictly-perfect approximation stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-m-pseudocoherent-summands",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, final sentence: lemma-summands-relative-pseudo-coherent at the same fixed integer m. Supporting input: Tag 09UN proof invokes Cohomology Tag 08CE, lemma-summands-pseudo-coherent, at the same integer m on each affine-space ambient scheme.",
+   "via": [
+    "lem-sfb-relative-m-pseudocoherent-summands",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-m-pseudocoherent-summands",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Tag 08CE at the fixed integer m, using existing general ringed-site triangle stability and two existing triangle Mathlib leaves. No new nodes. All local bounds, shifts, and downward induction hypotheses are explicit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, final sentence: lemma-summands-relative-pseudo-coherent at the same fixed integer m. Supporting input: Tag 09UN proof invokes Cohomology Tag 08CE, lemma-summands-pseudo-coherent, at the same integer m on each affine-space ambient scheme. The current latest sk-thm-sf-ctf-stability unit states six-functor preservation; this inherited supporting input serves its direct-image clause through the recorded via chain. No exact fixed-m summand blueprint node was found by searches for pseudo-coherent, summands and 08CE. The inherited null ancestor is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact module restriction to opens, used only to pass from local approximation witnesses to the Zariski site; generic infrastructure for the inherited direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-27c488cdf",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-27c488cdf (reviewer sub-agent of L); spot-checked: Read Stacks cohomology.tex 08CE (statement and proof), 08FV clause (1) and 05QS/05QT(3), plus every cited node statement. Steps 1-7 carry out the 08CE proof correctly at fixed m on a scheme, with no new nodes and the statement unchanged. Step 1: local bound N (H^i of each summand is a retract, so it vanishes above N), and the ringed-site and scheme approximation notions agree via intersections. Step 2: monotonicity and shift (T[r] a-pc iff T (a+r)-pc), direction checked. Step 3: cone of 0 is B⊕B[1] with diag(d,-d); the finite-sum triangle gives E->E->C. Step 4: 08FV(1) gives C m-pc, hence C[t] for t>=0. Step 5: base case n>=1 with m+n>N, which gives the surjection at m. Step 6: downward induction via the 05QT triangle and C[j-1]. Step 7: symmetry and gluing. Edge cases checked: empty Y, zero summands, m=d/m>d, unbounded local cutoffs. No duplicate: lem-pc-pseudo-coherent-summand is full pc; the ring nodes are ring-only. No cycle. The declared tool use lem-pur-site-restriction-module-adjunction-exact is generic and Lean-closed, so accepted. FIX: the definition restricts via Lj^* but step 1 used termwise restriction without linking the two. Step 1 now notes that j^{-1}O_Y=O_U with identity ring map, so Lj^* = termwise restriction, and cites def-pc-derived-pullback (also added to proof_deps).; 1 file(s) fixed by the reviewer"
+ }
+}

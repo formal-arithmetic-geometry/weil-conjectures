@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-space-coherator-distinguished-square-triangle",
+ "kind": "statement",
+ "title": "Derived coherator triangle on an elementary distinguished square",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$, their small etale structure sheaves [def-trf-algebraic-space], the equivalent small ringed models [def-sfb-space-small-ringed-model], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category]. Let $(U\\subset W,p:V\\to W)$ be an elementary distinguished square in the sense spelled out in [lem-sfb-space-qcqs-distinguished-square-induction]: $U$ is open in $W$, $p$ is representable etale, and $V\\times_WZ\\to Z$ is an isomorphism for the reduced closed complement $Z=W\\setminus U$. Put $T=U\\times_W V$ and suppose $W,U,V,T$ are quasi-compact and quasi-separated. Here quasi-compactness means admitting a quasi-compact scheme etale atlas, and quasi-separatedness means having quasi-compact absolute diagonal. Write $j_A:A\\to W$ for $A=U,V,T$, and $E_A=j_A^*E$ for exact etale restriction of $E\\in D(\\mathcal O_W)$ [lem-sfb-space-derived-etale-chart-calculus]. Let $D_{\\mathrm{QCoh}}$ denote objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module], and let $DQ_A$ and $DQ_W$ be the right adjoints of their full inclusions [lem-sfb-space-derived-coherator-adjunction]. Let $Rj_{A,*}$ derive canonical module direct image [def-trf-space-etale-module-functors], computed by K-injective resolutions [def-pur-kinjective-complex]. There is a distinguished triangle in $D(\\mathcal O_W)$, natural in $E$,\n$$DQ_W E\\longrightarrow Rj_{U,*}DQ_U(E_U)\\oplus Rj_{V,*}DQ_V(E_V)\\longrightarrow Rj_{T,*}DQ_T(E_T)\\longrightarrow (DQ_W E)[1].$$\nThe displayed $DQ$ objects are viewed in the ambient derived categories by the full inclusions. No boundedness or quasi-coherence of $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CR6 (remark-explain-consequence), using Tag 08GW (lemma-exact-sequence-j-star) and Tag 0CR5 (lemma-pushforward-better-coherator)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "def-pur-kinjective-complex",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-trf-space-etale-module-functors",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For each $A=U,V,T$, the quasi-compact atlas in the hypotheses implies quasi-compactness of $|A|$ by the continuous-surjection assertion of [lem-a1-space-finite-affine-subatlas]; likewise for $W$. Thus [lem-sfb-space-qcqs-permanence] applies to $j_A:A\\to W$ and makes it quasi-compact and quasi-separated. By [lem-sfb-space-derived-coherator-adjunction] all four inclusions $I_A,I_W$ have triangulated right adjoints $DQ_A,DQ_W$. Write $Q_Z=D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ and suppress full inclusions when viewing objects in the ambient categories.",
+   "uses": [
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-derived-coherator-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR6 (remark-explain-consequence), existence of the four coherators via Tag 0CR4; spaces-morphisms.tex Tag 073B (lemma-quasi-compact-quasi-separated-permanence)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-mv-exchange-triangles] with $f=\\mathrm{id}_W$ and $K=E$. The unital derived-image comparison of [lem-sfb-space-derived-etale-chart-calculus] identifies $R(\\mathrm{id}_W)_*$ with the identity. This gives the natural distinguished triangle $E\\xrightarrow{a}B\\xrightarrow{b}C\\xrightarrow{\\delta}E[1]$, where $B=Rj_{U,*}E_U\\oplus Rj_{V,*}E_V$ and $C=Rj_{T,*}E_T$. Its first map has the two restriction components and its second is the difference of restrictions. This application is to the unbounded module derived categories, and requires no quasi-coherence of $E$.",
+   "uses": [
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GW (lemma-exact-sequence-j-star), part (2), equivalently Tag 08JK (lemma-unbounded-relative-mayer-vietoris) for the identity morphism."
+   }
+  },
+  {
+   "text": "Apply the triangulated functor $DQ_W$ of [lem-sfb-space-derived-coherator-adjunction] to this triangle, and then the inclusion of the full triangulated subcategory $Q_W$. By [def-weil-triangulated-category] the result is distinguished in $D(\\mathcal O_W)$. Denote its last arrow by $d=\\sigma_E\\circ DQ_W(\\delta)$, where $\\sigma_E:DQ_W(E[1])\\simeq(DQ_WE)[1]$ is the exact shift comparison. Additivity gives the canonical biproduct identification $DQ_WB\\simeq DQ_WRj_{U,*}E_U\\oplus DQ_WRj_{V,*}E_V$: the images of the inclusions and projections still satisfy the biproduct identities $p_i i_j=\\delta_{ij}$ and $i_1p_1+i_2p_2=1$.",
+   "uses": [
+    "lem-sfb-space-derived-coherator-adjunction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR6 (remark-explain-consequence), apply the exact functor DQ; Tag 0CR4 (lemma-better-coherator)."
+   }
+  },
+  {
+   "text": "Fix $j=j_A$ and write $Rj_*^q:Q_A\\to Q_W$ for the restriction of $Rj_*$, which exists by [lem-sfb-space-derived-pushforward-coproducts] and step 1. Exact etale restriction $j^*$ preserves quasi-coherent cohomology and is left adjoint to $Rj_*$ by [lem-sfb-space-derived-etale-chart-calculus]. For $P\\in Q_W$ and $L\\in D(\\mathcal O_A)$ the two coherator adjunctions give the natural chain $$\\operatorname{Hom}_{Q_W}(P,DQ_WRj_*L)\\cong\\operatorname{Hom}_{D(\\mathcal O_W)}(I_WP,Rj_*L)\\cong\\operatorname{Hom}_{D(\\mathcal O_A)}(j^*I_WP,L)\\cong\\operatorname{Hom}_{Q_A}(j^*P,DQ_AL)\\cong\\operatorname{Hom}_{Q_W}(P,Rj_*^qDQ_AL).$$ Here the last bijection uses fullness and the same pullback/direct-image adjunction on quasi-coherent objects. Consequently both $DQ_WRj_*$ and $Rj_*^qDQ_A$ are right adjoint to $j^*I_W:Q_W\\to D(\\mathcal O_A)$. The uniqueness theorem [det-sp-unique-right-adjoint] supplies their natural counit-compatible isomorphism $\\theta_A:DQ_WRj_*\\simeq Rj_*^qDQ_A$. This is just composition of the cited Hom bijections, not an additional geometric base-change assertion.",
+   "uses": [
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-derived-coherator-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR5 (lemma-pushforward-better-coherator), proof: both composites are right adjoint to the same restricted derived pullback."
+   }
+  },
+  {
+   "text": "Let $B^q=Rj_{U,*}DQ_UE_U\\oplus Rj_{V,*}DQ_VE_V$ and $C^q=Rj_{T,*}DQ_TE_T$. Combine the biproduct identification of step 3 with $\\theta_U(E_U)\\oplus\\theta_V(E_V)$ to obtain $u:DQ_WB\\simeq B^q$, and put $v=\\theta_T(E_T):DQ_WC\\simeq C^q$. Give the displayed triangle the arrows $u\\circ DQ_W(a)$, $v\\circ DQ_W(b)\\circ u^{-1}$, and $d\\circ v^{-1}$. The maps $(1,u,v)$ then form an isomorphism from the distinguished triangle of step 3 to this triangle: all three squares commute by cancellation of the inverse isomorphisms. It is distinguished by (TR1) of [def-weil-triangulated-category]. These arrows are natural in $E$: the original triangle, the functor $DQ_W$, its biproduct comparison, its shift comparison and the three $\\theta_A$ are all natural. This proves the asserted triangle for arbitrary unbounded $E$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR6 (remark-explain-consequence), use Tag 0CR5 three times and identify the resulting distinguished triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "lem-sfb-space-relative-mv-exchange-triangles",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-weil-triangulated-category",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CR6 (remark-explain-consequence), using Tags 08GW/08JK, 0CR4 and the Hom-adjunction argument of 0CR5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris distinguished triangle for derived quasi coherator on an elementary distinguished square of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) → [CategoryTheory.HasWeakSheafify J (Type v)] → Type (max u v)\", \"doc\": \"A commutative square in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, satisfying the Mayer-Vietoris property that ensures compatibility with sheaf gluing conditions under $J$.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        (sq : CategoryTheory.Square C) →\\n          [CategoryTheory.Mono sq.f₁₃] →\\n            (∀ (F : CategoryTheory.Sheaf J (Ty\", \"doc\": \"Given a commutative square in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, this constructor forms a Mayer-Vietoris square by requiring: (1) the morphism $f_{13}: X_1 \\\\to X_3$ is\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] → J.MayerVietorisSquare → CategoryTheory.Square C\", \"doc\": \"The function mapping a Mayer-Vietoris square (satisfying the sheaf gluing property under a Grothendieck topology $J$) to its underlying commutative square diagram in the category $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quasi coherator commutes with derived direct image giving Nisnevich descent triangle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the composition of the quotient functor from the category of chain com\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {H : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} H] →\\n            {D₁ : Type u₄} →\\n              {D₂ : Type u₅} →\\n                \", \"doc\": \"A natural transformation comparing the right derived functor $ RF_1 $ with the composition of the localized functor $ \\\\Phi_{\\\\text{localized}} $ and $ F_2 $, constructed using the universal property of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MayerVietoris\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasWeakSheafify J (Type v)] : Type (max u v)\", \"doc\": \"A Mayer-Vietoris square in a category `C` equipped with a Grothendieck\\ntopology consists of a commutative square `f₁₂ ≫ f₂₄ = f₁₃ ≫ f₃₄` in `C`\\nsuch that `f₁₃` is a monomorphism and that the square be\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (self : J.MayerVietorisSquare) : CategoryTheory.Square C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (S : J.MayerVietorisSquare) {A : Type u'} [CategoryTheory.Category.{v', u'} A] (P : CategoryTheory.Functor Cᵒᵖ A) : Prop\", \"doc\": \"The condition that a Mayer-Vietoris square becomes a pullback square\\nwhen we evaluate a presheaf on it.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (self : J.MayerVietorisSquare) : CategoryTheory.Mono self.f₁₃\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (S : J.MayerVietorisSquare) {A : Type u'} [CategoryTheory.Category.{v, u'} A] (F : CategoryTheory.Sheaf J A) : S.SheafCondition F.obj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (S : J.MayerVietorisSquare) {A : Type u'} [CategoryTheory.Category.{v', u'} A] (P : CategoryTheory.Functor Cᵒᵖ A) : S.SheafCondition P ↔ ∀ (X : Aᵒᵖ), S.SheafCondit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (sq : CategoryTheory.Square C) [CategoryTheory.Mono sq.f₁₃] (H : ∀ (F : CategoryTheory.Sheaf J (Type v)), (sq.op.map F.obj).IsPullback) : J.MayerVietorisSquare\", \"doc\": \"Constructor for Mayer-Vietoris squares taking as an input\\na square `sq` such that `sq.f₁₃` is a mono and that for every\\nsheaf of types `F`, the square `sq.op.map F.val` is a pullback square.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] [CategoryTheory.HasSheafify J AddCommGrpCat] (S : J.MayerVietorisSquare) : CategoryTheory.ShortComplex (CategoryTheory.Sheaf J AddCommGrpCat)\", \"doc\": \"The short complex of abelian sheaves\\n`ℤ[S.X₁] ⟶ ℤ[S.X₂] ⊞ ℤ[S.X₃] ⟶ ℤ[S.X₄]`\\nwhere the left map is a difference and the right map a sum.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'_toSquare\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (sq : CategoryTheory.Square C) [CategoryTheory.Mono sq.f₁₃] (H : ∀ (F : CategoryTheory.Sheaf J (Type v)), (sq.op.map F.obj).IsPullback) : (CategoryTheory.Grothendi\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] [CategoryTheory.HasSheafify J AddCommGrpCat] (S : J.MayerVietorisSquare) : S.shortComplex.Exact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] [CategoryTheory.HasSheafify J AddCommGrpCat] (S : J.MayerVietorisSquare) : S.shortComplex.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasWeakSheafify J (Type v)] (sq : CategoryTheory.Square C) [CategoryTheory.Mono sq.f₂₄] [CategoryTheory.Mono sq.f₃₄] (h₁ : sq.IsPullback) (h₂ : CategoryTheory.Sieve.ofTwoArrows sq.f₂₄ sq.f₃₄ \", \"doc\": \"Constructor for Mayer-Vietoris squares taking as an input\\na pullback square `sq` such that `sq.f₂₄` and `sq.f₃₄` are two monomorphisms\\nwhich form a covering of `S.X₄`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|[Mm]ayer[Vv]ietoris|[Nn]isnevich",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"17\", \"text\": \"Let `S : J.MayerVietorisSquare` be a Mayer-Vietoris square for `J`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"38\", \"text\": \"namespace GrothendieckTopology.MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"40\", \"text\": \"variable (S : J.MayerVietorisSquare) (F : Sheaf J AddCommGrpCat.{v})\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"119\", \"text\": \"for a Mayer-Vietoris square `S : J.MayerVietorisSquare`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"30\", \"text\": \"`GrothendieckTopology.MayerVietorisSquare` which extends `Square C`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"88\", \"text\": \"structure MayerVietorisSquare [HasWeakSheafify J (Type v)] extends Square C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"93\", \"text\": \"namespace MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"38\", \"text\": \"noncomputable def mayerVietorisSquare' (sq : Square (Opens T))\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"40\", \"text\": \"    (Opens.grothendieckTopology T).MayerVietorisSquare :=\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"41\", \"text\": \"  GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"line\": \"59\", \"text\": \"noncomputable def mayerVietorisSquare (U V : Opens T) :\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherator of a complex has an elementary distinguished square Mayer Vietoris triangle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Opens.mayerVietorisSquare\", \"module\": \"Mathlib.Topology.Sheaves.MayerVietoris\", \"type\": \"(U V : Opens T) : (Opens.grothendieckTopology T).MayerVietorisSquare\", \"doc\": \"For any two open sets $U$ and $V$ in a topological space $T$, the commutative diagram of inclusions\\n$$\\n\\\\begin{CD}\\nU \\\\cap V @>>> U \\\\\\\\\\n@VVV @VVV \\\\\\\\\\nV @>>> U \\\\cup V\\n\\\\end{CD}\\n$$\\nis a Mayer-Vietoris square\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u} →\\n    {inst : CategoryTheory.Category.{v, u} C} →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {inst_1 : CategoryTheory.HasWeakSheafify J (Type v)} →\\n          {t : J.MayerVietorisSquare} →\\n            {C' : Type u} →\\n              {inst' : CategoryTheo\", \"doc\": \"A commutative square in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, satisfying the Mayer-Vietoris property that ensures compatibility with sheaf gluing conditions under $J$.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] → J.MayerVietorisSquare → CategoryTheory.Square C\", \"doc\": \"The function mapping a Mayer-Vietoris square (satisfying the sheaf gluing property under a Grothendieck topology $J$) to its underlying commutative square diagram in the category $\\\\mathcal{C}$.\"}\n  {\"name\": \"Opens.mayerVietorisSquare'\", \"module\": \"Mathlib.Topology.Sheaves.MayerVietoris\", \"type\": \"(sq : Square (Opens T)) (h₄ : sq.X₄ = sq.X₂ ⊔ sq.X₃) (h₁ : sq.X₁ = sq.X₂ ⊓ sq.X₃) :\\n  (Opens.grothendieckTopology T).MayerVietorisSquare\", \"doc\": \"Given a commutative square of open subsets in a topological space $ T $, where $ X_4 $ is the union of $ X_2 $ and $ X_3 $, and $ X_1 $ is their intersection, this constructs a Mayer-Vietoris square f\"}\n  {\"name\": \"HomotopyCategory.Pretriangulated.distinguishedTriangles\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \": Set (Triangle (HomotopyCategory C (ComplexShape.up ℤ)))\", \"doc\": \"The set of distinguished triangles in the homotopy category of cochain complexes with integer indices consists of those triangles isomorphic to the homotopy exact triangle associated with a morphism b\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] (self : J.MayerVietorisSquare),\\n  (self.map (CategoryTheory.yoneda.comp (CategoryTheory.presheafToSheaf J (Type v)))).IsPushout\", \"doc\": \"For a category $\\\\mathcal{C}$ with Grothendieck topology $J$, any Mayer-Vietoris square $S$ satisfies the property that the image of $S$ under the composition of the Yoneda embedding and the sheafifica\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \": S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \": S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|MayerVietoris|Nisnevich",
+   "results": "10 hits; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf Mayer–Vietoris, general derived triangles and underived sheaf adjoints do not state the derived quasi-coherator triangle for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint to inclusion of complexes with quasi coherent cohomology has a distinguished square descent triangle",
+   "results": "8 hits; CategoryTheory.ShortComplex.ShortExact.singleTriangle, HomotopyCategory.Pretriangulated.distinguishedTriangles, HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit, DerivedCategory.triangleOfSES, DerivedCategory.mem_distTriang_iff, CochainComplex.mappingConeCompTriangleh, CategoryTheory.isRightAdjoint_square_lift, CochainComplex.mappingCone.triangle",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf Mayer–Vietoris, general derived triangles and underived sheaf adjoints do not state the derived quasi-coherator triangle for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.Functor.IsTriangulated",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf Mayer–Vietoris, general derived triangles and underived sheaf adjoints do not state the derived quasi-coherator triangle for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quasi coherator commutes with direct image and yields a Mayer Vietoris distinguished triangle on algebraic spaces",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf Mayer–Vietoris, general derived triangles and underived sheaf adjoints do not state the derived quasi-coherator triangle for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoints to full inclusions in derived categories commute with quasi compact quasi separated pushforward",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf Mayer–Vietoris, general derived triangles and underived sheaf adjoints do not state the derived quasi-coherator triangle for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-coherator-bound",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited coherent-family/Quot effectivity prerequisite in proof (3) of det-thm-sf-ctf-stability-direct-images; Tag 0CSS (lemma-boundedness-better-coherator), last paragraph: distinguished triangle of Remark 0CR6.",
+   "via": [
+    "lem-sfb-space-derived-coherator-bound",
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-coherator-distinguished-square-triangle",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0CR6 against 08GW/08JK, 0CR4 and 0CR5. Reused existing nodes for the unbounded module Mayer–Vietoris triangle, the triangulated coherator and qcqs quasi-coherent derived pushforward; wrote the short Hom-adjunction comparison and explicit triangle transport. No statement change and no new nodes.",
+  "blueprint": "Inherited prerequisite in det-thm-sf-ctf-stability-direct-images, proof (3), through the derived-coherator-bound ancestry; realizes the triangle invoked in the final paragraph of Stacks Tag 0CSS. No blueprint node states the coherator assertion (whole-blueprint searches: coherator, Mayer, quasi-coherent).",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Its continuous-surjection assertion turns the item's quasi-compact scheme atlas into quasi-compactness of the target point space, as needed by qcqs permanence; no node of this unit supplies that conversion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-af1a94389",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-af1a94389 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a split with 5 steps, no new nodes and an unchanged statement, and it follows Stacks spaces-perfect.tex 0CR6 (lines 4552-4567). Step 1 gets qcqs for each j_A: lem-a1-space-finite-affine-subatlas turns the qc atlas into a quasi-compact point space, then lem-sfb-space-qcqs-permanence applies. The qs form needed by lem-sfb-space-derived-coherator-adjunction (U x_X V quasi-compact for affine charts) follows directly from a quasi-compact absolute diagonal; the step leaves this implicit, which is not a fault. Step 2 applies lem-sfb-space-relative-mv-exchange-triangles with f=id; it allows unbounded K and has the right components, and R(id)_* = id comes from the unital comparison in the chart calculus. Step 3 applies the triangulated DQ_W and keeps the biproduct. Step 4 is the 0CR5 Hom-adjunction argument; I checked each bijection, including that j^* preserves D_QCoh, and det-sp-unique-right-adjoint then gives theta_A. Step 5 transports the triangle along the isomorphism (1,u,v) by TR1. Edge cases U empty and E=0 are fine. No duplicate: the DAG's other Mayer-Vietoris/coherator nodes are scheme-level pc- nodes. Batch-5: the four flagged cites reach sec-trace-formula only through the general definition def-trf-algebraic-space; they are general Stacks lemmas (03E4/073B/08JK/08FA), not trace-formula or Poincare steps, so I accept them. I accept the tool_use of the a1 subatlas node (continuous-surjection clause only). No SGA citations, and proof_deps equal the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoheratorDistinguishedSquareTriangle",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_coherator_distinguishedSquare_triangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoheratorDistinguishedSquareTriangle.lean",
+  "statement": "theorem exists_coherator_distinguishedSquare_triangle {S : Scheme.{u}} (W U V T : AlgebraicSpace S) (j : U ⟶ W) (p : V ⟶ W) (a : T ⟶ U) (b : T ⟶ V) (hsq : IsPullback a b j p) (hj : ∃ A : OpenSubspace W, ∃ e : U.obj.obj ≅ A.val.toFunctor, e.hom ≫ A.val.ι = j.hom.hom) (hp : IsEtale p.hom.hom) (Z : ClosedSubspace W) (hZ : IsReduced (Z.val : AlgebraicSpace S)) (hZsupport : pointImage Z.val.arrow.hom.hom = (pointImage j.hom.hom)ᶜ) (hcomplement : IsIso (Limits.pullback.snd p.hom Z.val.arrow.hom)) (hqcqs : ∀ A : AlgebraicSpace S, A = W ∨ A = U ∨ A = V ∨ A = T → (∃ (B : Over S) (q : yoneda.obj B ⟶ A.obj.obj), CompactSpace B.left ∧ IsEtale q ∧ IsSurjective q) ∧ IsAbsolutelyQuasiSeparated A) [HasDerivedCategory.{w} W.SmallModules] [HasDerivedCategory.{w} U.SmallModules] [HasDerivedCategory.{w} V.SmallModules] [HasDerivedCategory.{w} T.SmallModules] (DQW : W.DerivedModules ⥤ W.DerivedQCoh) (DQU : U.DerivedModules ⥤ U.DerivedQCoh) (DQV : V.DerivedModules ⥤ V.DerivedQCoh) (DQT : T.DerivedModules ⥤ T.DerivedQCoh) (adjW : W.derivedQCohProperty.ι ⊣ DQW) (adjU : U.derivedQCohProperty.ι ⊣ DQU) (adjV : V.derivedQCohProperty.ι ⊣ DQV) (adjT : T.derivedQCohProperty.ι ⊣ DQT) : ∃ (αU : DQW ⋙ W.derivedQCohProperty.ι ⟶ spaceDerivedPullback j ⋙ DQU ⋙ U.derivedQCohProperty.ι ⋙ derivedDirectImage j) (αV : DQW ⋙ W.derivedQCohProperty.ι ⟶ spaceDerivedPullback p ⋙ DQV ⋙ V.derivedQCohProperty.ι ⋙ derivedDirectImage p) (βU : spaceDerivedPullback j ⋙ DQU ⋙ U.derivedQCohProperty.ι ⋙ derivedDirectImage j ⟶ spaceDerivedPullback (a ≫ j) ⋙ DQT ⋙ T.derivedQCohProperty.ι ⋙ derivedDirectImage (a ≫ j)) (βV : spaceDerivedPullback p ⋙ DQV ⋙ V.derivedQCohProperty.ι ⋙ derivedDirectImage p ⟶ spaceDerivedPullback (a ≫ j) ⋙ DQT ⋙ T.derivedQCohProperty.ι ⋙ derivedDirectImage (a ≫ j)) (δ : spaceDerivedPullback (a ≫ j) ⋙ DQT ⋙ T.derivedQCohProperty.ι ⋙ derivedDirectImage (a ≫ j) ⟶ DQW ⋙ W.derivedQCohProperty.ι ⋙ shiftFunctor W.DerivedModules (1 : ℤ)), ∀ E : W.DerivedModules, Triangle.mk (biprod.lift (αU.app E) (αV.app E)) (biprod.desc (βU.app E) (βV.app E)) (δ.app E) ∈ distTriang W.DerivedModules",
+  "branch": "sheaf-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Natural transformations give both first-arrow components, both signed second-arrow components, and the boundary; their components form the displayed ambient distinguished triangle for every unbounded E. The coherators are arbitrary specified right adjoints of the existing full inclusions. Canonical derived pullback along the three etale maps agrees with exact restriction by the recorded chart calculus."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-644265dcf",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read item, module, report (Worker report + Second reading present), deps coherator-adjunction, qcqs-induction, chart-calculus and live defs (DerivedQCoh, derivedDirectImage = K-injective rightDerivedFunctor, spaceDerivedPullback = canonical derivedTensorPullback, IsAbsolutelyQuasiSeparated). Square hypotheses identical to the induction-lemma interface; qcqs only for W,U,V,T (qc scheme atlas + absolute qs); DQ are arbitrary right adjoints of the full inclusions; E_A via canonical derived pullback, uniquely identified with etale restriction by the chart calculus. Conclusion: exists natural alphaU/alphaV/betaU/betaV/delta, chosen before E, with biprod triangle distinguished for every unbounded E; node fixes no map formulas and the only citer (derived-coherator-bound) uses only the LES, so existence is the right strength and is not vacuous. Edge cases fine; universes u,w as in the deps. Item changed only in lean; statement verbatim; sorry-only theorem; docstrings with source/blueprint/5 steps; lines <=100; absent imports for 3 proof deps without lean records correct. Not recompiled (no change)."
+ }
+}

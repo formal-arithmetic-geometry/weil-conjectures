@@ -1,0 +1,116 @@
+{
+ "id": "def-trf-module-hom-precomposition",
+ "kind": "definition",
+ "title": "Precomposition on module-valued total Hom complexes",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring and $P,R,T$ integer-indexed cochain complexes of $A$-modules, with a chain map $f:P\\to R$ [def-weil-abstract-derived-category]. For the $A$-module-valued total Hom complexes [def-sc-module-total-hom-complex], define the precomposition chain map $f^*:\\operatorname{Hom}_A^\\bullet(R,T)\\to\\operatorname{Hom}_A^\\bullet(P,T)$ as follows. Its degree-$j$ component is the $A$-linear map sending a homogeneous cochain $\\varphi=(\\varphi^p)_p$ to $(\\varphi^p\\circ f^p)_p$. These components commute with the total Hom differential $D\\varphi=d_T\\varphi-(-1)^j\\varphi d$, so they specify a morphism of cochain complexes. No boundedness or injectivity hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A8H, section-hom-complexes: the total Hom construction and its first-variable functoriality; degree-zero precomposition with a chain map."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Precomposition by a cochain map defines a chain map on module valued total Hom complexes",
+   "results": "8 hits; top=['groupCohomology.cochainsMap', 'CochainComplex.HomComplex.Cochain.toSingleMk_precomp', 'CochainComplex.HomComplex.Cochain.fromSingleMk_precomp', 'HomologicalComplex.mapBifunctorMap', 'CochainComplex.HomComplex.Cocycle.precomp_coe', 'CochainComplex.HomComplex.Cocycle.toSingleMk_precomp', 'CochainComplex.HomComplex.Cocycle.homOf', 'CochainComplex.HomComplex.Cochain.map_comp']; subdirectory=; note=; digest=6bd1599914ed2a1f",
+   "date": "2026-10-22",
+   "verdict": "Mathlib supplies homogeneous-cochain composition and its differential compatibility. The exact A-module-valued chain map is already defined in Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy and is reused here. Searches of dag/nodes, the blueprint, lean/WeilConjectures and lean/Sheaf found no definition node owning this notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain.ofHom, CochainComplex.HomComplex.Cochain.comp",
+   "results": "12 hits; top=['CochainComplex.HomComplex.Cochain.comp_id', 'CochainComplex.HomComplex.Cochain.id_comp', 'CochainComplex.HomComplex.δ_comp_ofHom', 'CochainComplex.HomComplex.δ_ofHom_comp', 'CochainComplex.HomComplex.Cochain.ofHom_comp', 'CochainComplex.HomComplex.Cocycle.postcomp_coe', 'CochainComplex.HomComplex.Cocycle.precomp_coe', 'CochainComplex.mappingCone.inr_descCochain']; subdirectory=; note=; digest=db98f4e930d81418",
+   "date": "2026-10-22",
+   "verdict": "Mathlib supplies homogeneous-cochain composition and its differential compatibility. The exact A-module-valued chain map is already defined in Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy and is reused here. Searches of dag/nodes, the blueprint, lean/WeilConjectures and lean/Sheaf found no definition node owning this notion."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleHomPrecomp|δ_ofHom_comp",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean']; subdirectory=Algebra/Homology; note=; digest=592bcfe8b555aac8",
+   "date": "2026-10-22",
+   "verdict": "Mathlib supplies homogeneous-cochain composition and its differential compatibility. The exact A-module-valued chain map is already defined in Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy and is reused here. Searches of dag/nodes, the blueprint, lean/WeilConjectures and lean/Sheaf found no definition node owning this notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-injective-rhom-model-support",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Re-split of this auxiliary input: Old Steps 1 and 3: K-injective bounded target, the module-valued derived comparison natural in the source, and vanishing of each Hom factor when source and target supports do not meet. Definition input for the naturality square in Step 3 of the bounded-injective RHom model: precomposition by an arbitrary source chain map.",
+   "via": [
+    "lem-trf-bounded-injective-rhom-model-support",
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy",
+  "declaration": "CochainComplex.moduleHomPrecomp",
+  "declarations": [
+   "CochainComplex.moduleHomPrecompComponent",
+   "CochainComplex.moduleHomPrecomp_comm",
+   "CochainComplex.moduleHomPrecomp"
+  ],
+  "statement": "noncomputable def moduleHomPrecomp\n    (T : CochainComplex (ModuleCat.{u} A) ℤ) (f : P ⟶ R) :\n    moduleHomComplex R T ⟶ moduleHomComplex P T",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing actual linear components and chain-map construction in the unchanged landed module, lines 45–77. The differential-compatibility theorem is proved there. No homotopy-preservation conclusion is used; this definition node supplies the missing DAG owner requested in the independent return of head b7c03a46cb3d."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03fa95f9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03fa95f9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery of the b7c03a46 H2 RETURN. The theorem stmt_dep lem-trf-hom-dual-preserves-homotopies is replaced by the new definition node def-trf-module-hom-precomposition: existing:true on the unchanged ModuleHomPrecompHomotopy (moduleHomPrecompComponent / moduleHomPrecomp_comm / moduleHomPrecomp), statement matches Stacks 0A8H (more-algebra l.17851) and the Lean (Cochain.ofHom f comp φ, δ_ofHom_comp); check_new_node and check_record return [], check_existing has only a `noncomputable` note. All 9 stmt_deps are definition nodes, and def-pur-hom-complex was added per the earlier advisory. Item statement and proof are byte-identical to the stage-1 review; the Lean differs from the returned head only by one already-transitive public import. Re-checked: θ unique via the Localization.fac normalization through the K-injective unit; e pinned by ringHomEvaluate; naturality direction for f:M'→M; strict r>b−n with both IsZero conclusions; edge cases A=0, I=0, M=0, a=b, negative bounds; universes u and w independent; lean.statement verbatim; one sorry; docstrings carry source and blueprint tags. Every dependency copy equals live. Advisory: onePointRingSheaf and kInjectiveResolutionFunctor are owned only by theorem nodes but reach the item through cited definition interfaces (base-era use). No compile (no fix)."
+ }
+}

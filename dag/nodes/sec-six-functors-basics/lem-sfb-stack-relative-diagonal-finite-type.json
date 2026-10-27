@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-stack-relative-diagonal-finite-type",
+ "kind": "statement",
+ "title": "Relative diagonals of algebraic stack morphisms are representable and locally of finite type",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Use algebraic stacks [def-sfb-algebraic-moduli-stack], algebraic spaces [def-trf-algebraic-space], and fibred groupoids, morphisms, representability and 2-fibre products [def-sfb-stable-pointed-moduli-groupoids]. Let $f:\\mathcal X\\to\\mathcal Y$ be any morphism of algebraic stacks over $S$. Its relative diagonal $\\Delta_f:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$, $x\\mapsto(x,x,\\mathrm{id}_{f(x)})$, is representable by algebraic spaces and locally of finite type. Explicitly, for every $S$-scheme $T$ and morphism $t:T\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$, the 2-fibre product $T\\times_{t,\\mathcal X\\times_{\\mathcal Y}\\mathcal X,\\Delta_f}\\mathcal X$ is equivalent over $T$ to an algebraic space locally of finite type over $T$. Local finite type on algebraic spaces is tested on etale scheme charts using [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 04XS (lemma-properties-diagonal), parts (1) and (2), including the scheme-test formulation in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-type-morphism",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t:T\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$. The fibre-product convention gives $t=(x,x',\\alpha)$ with $x,x'\\in\\mathcal X(T)$ and $\\alpha:f(x)\\xrightarrow{\\sim}f(x')$. Put $I=\\operatorname{Isom}_{\\mathcal X,T}(x,x')$ and $J=\\operatorname{Isom}_{\\mathcal Y,T}(f(x),f(x'))$. By [lem-sfb-stack-isom-space-locally-finite-type], both are algebraic spaces over $T$, and $I\\to T$ is locally of finite type. Applying $f$ to arrows gives a $T$-map $q:I\\to J$, and $\\alpha$ gives a section $a:T\\to J$. These are natural transformations because $f$ commutes with pullback.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-isom-space-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), proof and equation-diagonal (Tag 04XT)."
+   }
+  },
+  {
+   "text": "Let $P=T\\times_{a,J,q}I$, an algebraic space by [lem-trf-space-fibre-products-etale-covers]. We identify $P$ with the 2-pullback $E=T\\times_{\\mathcal X\\times_{\\mathcal Y}\\mathcal X}\\mathcal X$. For a scheme $H\\to T$, an object of $E(H)$ is $(z,u:z\\xrightarrow{\\sim}x_H,v:z\\xrightarrow{\\sim}x'_H)$ with $f(v)=\\alpha_H f(u)$. Send it to $\\beta=vu^{-1}$, so $f(\\beta)=\\alpha_H$; these are precisely the elements of $P(H)$. Conversely send such a $\\beta$ to $(x_H,1,\\beta)$. An arrow between triples is $h:z\\to z'$ satisfying $u'h=u$ and $v'h=v$. It exists exactly when $vu^{-1}=v'(u')^{-1}$ and then equals $(u')^{-1}u$. Hence each fibre over $\\beta$ is equivalent to the singleton groupoid. The two constructions commute with restriction in $H$, and $u$ supplies their natural inverse isomorphism on triples. They therefore give an equivalence $E\\simeq P$ over $T$, with the projection identified with $P\\to T$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), proof and equation-diagonal (Tag 04XT)."
+   }
+  },
+  {
+   "text": "The composite $I\\xrightarrow{q}J\\to T$ is the structure morphism $I\\to T$, already locally of finite type. Apply [lem-sfb-space-lft-cancellation] to these three algebraic spaces (regarding $T$ as its represented algebraic space). It follows that $q$ is locally of finite type. This cancellation requires no separatedness or finite-type hypothesis on $J\\to T$.",
+   "uses": [
+    "lem-sfb-space-lft-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0462 (lemma-permanence-finite-type), applied as in Tag 04XS."
+   }
+  },
+  {
+   "text": "The map $P\\to T$ is the base change of $q$ along $a$. The algebraic-space case of [lem-sfb-stack-finite-type-calculus] preserves local finite type under arbitrary base change and identifies that notion with the ordinary etale-chart notion for algebraic spaces. Thus $P\\to T$ is locally of finite type. Step 2 now proves the explicit scheme-test assertion for every $T,t$. The definition of representability by algebraic spaces therefore gives representability of $\\Delta_f$, and the same scheme tests give its local finite type, with exactly the chart convention in the statement.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XH (lemma-base-change-finite-type); stacks-morphisms.tex Tag 04XS, final sentence, and the compatibility paragraph before definition-locally-finite-type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-isom-space-locally-finite-type",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-stack-finite-type-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 04XS (lemma-properties-diagonal), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|diagonal.*LocallyOfFiniteType|LocallyOfFiniteType.*diagonal",
+   "results": "OK 1 hits: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative diagonal of a morphism of algebraic stacks is representable and locally of finite type",
+   "results": "OK 8 hits: CategoryTheory.Functor.relativelyRepresentable.diag_iff, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, CategoryTheory.Functor.relativelyRepresentable.of_diag, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"diagonal\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of any morphism of algebraic stacks is representable by algebraic spaces and locally of finite type",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.universallyInjective_eq_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic stacks every pullback of the relative diagonal by a scheme is an algebraic space locally of finite type over that scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|diagonal.*LocallyOfFiniteType|LocallyOfFiniteType.*diagonal",
+   "results": "OK 1 hits: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ordinary categorical representability, not the relative diagonal of algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any morphism of algebraic stacks its diagonal is representable and locally of finite type",
+   "results": "OK 8 hits: AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, CategoryTheory.Functor.relativelyRepresentable.diag_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ordinary categorical representability, not the relative diagonal of algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"diagonal\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ordinary categorical representability, not the relative diagonal of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative diagonal of a morphism of algebraic stacks is representable by algebraic spaces and locally of finite type",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ordinary categorical representability, not the relative diagonal of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For objects x and y in an algebraic stack, the fibre over an isomorphism f x to f y of the map of Isom algebraic spaces is locally of finite type",
+   "results": "OK 8 hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ordinary categorical representability, not the relative diagonal of algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-universal-injectivity-criteria",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric points of a universal homeomorphism from a stack. Supporting input: the universal-injectivity criterion, before comparing isomorphism classes of geometric objects. Relative-diagonal representability and local finite type in the proof of the universal-injectivity criterion (Stacks 0CPN, final implication).",
+   "via": [
+    "lem-sfb-stack-universal-injectivity-criteria",
+    "lem-sfb-stack-universal-homeomorphism-geometric-points",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-relative-diagonal-finite-type",
+  "worker": "stage1",
+  "summary": "Q22 checked Stacks 04XS against the unchanged statement; explicitly constructed the scheme-test equivalence with a fibre of the Isom map, then applied existing Isom local-finite-type, algebraic-space cancellation and arbitrary-base-change nodes. No new nodes. Rechecked source attachments, Mathlib and duplicate searches; recorded verbatim citation witnesses.",
+  "blueprint": "The inherited ancestry identifies det-thm-sf-ctf-stability-direct-images, proof (3), through the marked-plurinodal/Keel--Mori prerequisites. This split realizes the relative-diagonal prerequisite of the universal-injectivity criterion in that chain. The latest direct-images proof was read; no chapter or unit route is changed. The inherited blueprint.from.node is null (also returned by blueprint_refs.py ancestor) and its specific from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 2 takes only its first clause, that the sheaf fibre product T x_J I of algebraic spaces is an algebraic space (Stacks 02X2); a generic foundational fact on algebraic spaces that no node of sk-thm-sf-ctf-stability or its cited units states, and no step of the trace formula or Poincare duality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-ddf38bc0f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ddf38bc0f (reviewer sub-agent of L); spot-checked: Read the item's statement, all 4 steps, each cited node's statement, Stacks 04XS and its proof (04XT fibre square, 04XR, 0462, 03XH), and the unit route. The statement is unchanged and agrees with 04XS (1)+(2). There are 0 new nodes and the item is not superseded (live and side-live are still unsplit). Step 1: 04XR node applied to X and to Y gives the Isom spaces, with the T-map q and the section a. Step 2: I rederived the 2-fibre-product orientation: an arrow t_H→Δz satisfies f(w1)α=f(v1), so f(v)=αf(u) and β=vu^{-1} has f(β)=α. The arrows h=(u')^{-1}u are unique, so E is equivalent to the discrete fibre P (02X2 first clause). Step 3: lft cancellation for arbitrary spaces with X=I, Y=J, Z=T; every hypothesis holds. Step 4: base change via finite-type-calculus; algebraic spaces are DM in the groupoid-def convention, and the representable-test clause gives the same result. Edge cases f=id (P=T) and an α with no lift (P empty) are fine, and lft is never upgraded to finite type. No cycle, no duplicate: relative-inertia-second-diagonal cites this item, and the four-property descent node covers ft, not lft. Batch 5: three sfb nodes reach trf only via def-trf-algebraic-space, which is a general definition, and lem-trf-space-fibre-products-etale-covers (02X2) is a generic foundation outside both assumptions; all four accepted. FIX: the off-route use of lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero, not reached by sk-thm-sf-ctf-stability) was undeclared. I added it to split_report.tool_uses in the corrected item file and accept it as a tool use; the same tool use is already recorded on the three cited same-unit nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackRelativeDiagonalFiniteType",
+  "declaration": "CategoryTheory.moduliRelativeDiagonal_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackRelativeDiagonalFiniteType.lean",
+  "statement": "theorem moduliRelativeDiagonal_locallyOfFiniteType {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor X Y) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) : ModuliSpaceTest @LocallyOfFiniteType (moduliRelativeDiagonal f)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca7a1258c",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read Stacks 04XS(1)+(2)/04XT against the delivered theorem. ModuliSpaceTest (DmStackMorphismProperties:90) = for every scheme test T, t into X×_Y X: an algebraic space Z with an equivalence onto moduliTwoFiberProduct t Δ (04XT orientation) keeping the projection to T (HasSpaceBaseChange), plus LocallyOfFiniteType on every étale chart over T. Its first conjunct is IsRepresentableByAlgebraicSpaces, so part (1) is included. moduliRelativeDiagonal is the canonical x↦(x,x,𝟙). f is arbitrary; hX/hY are only IsAlgebraicModuliStack (no DM/qc/separatedness); universes independent and bound. Edge cases (f=id, α with no lift → empty Z, empty S/X/T, non-DM stacks, any characteristic) covered. The item node differs from live only by the lean record and the added stmt_dep def-sfb-dm-stack-morphism-properties (landed, reviewed, owns both declarations used; no cycle). Dependency records identical to live; statement verbatim; no name or module clash; no defs, only sorry; docstrings carry source, blueprint and the 4 proof steps; report sections present. Advisory: the private AlgebraicSpaceFibreProductsEtaleCovers import is unused by the statement. No compile (no file changed); worker reports scompile clean."
+ }
+}

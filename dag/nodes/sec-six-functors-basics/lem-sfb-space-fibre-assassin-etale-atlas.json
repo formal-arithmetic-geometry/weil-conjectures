@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-space-fibre-assassin-etale-atlas",
+ "kind": "statement",
+ "title": "Fibre associated points are detected on a surjective etale scheme atlas",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$, with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Let $f:X\\to Y$ have scheme base $Y$, be of finite type and quasi-separated (its diagonal is quasi-compact), with finite type as in [def-sfb-space-morphism-properties]. Let $M$ be a finite type quasi-coherent $\\mathcal O_X$-module [def-trf-space-quasi-coherent-module], meaning locally finitely generated on etale scheme charts. Let $p:T\\to X$ be a representable surjective etale morphism with $T$ a scheme, and let $N=p^*M$ [def-trf-space-etale-module-functors]. On each scheme chart regard quasi-coherent etale modules as Zariski modules via [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. For $y\\in Y$ form $p_y:T_y\\to X_y$ by sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Use the topology on space points [def-a1-space-point-topology] and the chartwise relative assassin [def-sfb-space-universal-relative-purity], with scheme associated points [def-trf-relative-assassin]. Then for every $t\\in T_y$ one has $t\\in\\operatorname{Ass}_{T_y}(N_y)$ if and only if $p_y(t)\\in\\operatorname{Ass}_{X_y}(M_y)$, and $p_y(\\operatorname{Ass}_{T_y}(N_y))=\\operatorname{Ass}_{X_y}(M_y)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 0CUZ (lemma-relative-assassin), equivalence of conditions (3), (4), (6) and final associated-point clause, and 0CUY (lemma-locally-finite-type-locally-Noetherian-fibres); the exact image assertion is used in the proof of 0CVV (lemma-relative-assassin-constructible)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-universal-relative-purity",
+  "def-trf-relative-assassin",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$. Choose a surjective etale scheme atlas $C\\to X$. The chart test for finite type, with the identity chart of the scheme $Y$, makes $C\\to Y$ locally of finite type. Its scheme fibre $C_y$ is locally of finite type over $\\kappa(y)$ by scheme base change. A field is Noetherian (its ideals are zero and the unit ideal), so $C_y$ is locally Noetherian. Base change makes $C_y\\to X_y$ surjective etale. For any etale scheme chart $a:U\\to X_y$, the common refinement $D=C_y\\times_{X_y}U$ is a scheme; $D\\to C_y$ is etale and $D\\to U$ is surjective etale. An etale scheme map is locally of finite presentation, hence locally of finite type: the finitely many polynomial variables in its affine presentation generate the algebra. Thus $D$ is locally Noetherian over $C_y$, and etale-cover descent makes $U$ locally Noetherian. This applies in particular to $T_y$ and to every scheme chart used below; no Noetherian assumption on $Y$ is required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CUY (lemma-locally-finite-type-locally-Noetherian-fibres); its chartwise proof using Morphisms 01T4 and 01T6, with descent for arbitrary fibre charts."
+   }
+  },
+  {
+   "text": "All tensor pullbacks of $M$ used here are quasi-coherent. The scheme etale--Zariski equivalence therefore gives ordinary quasi-coherent modules on $T_y$, on any chart $U\\to X_y$, and on their common refinements; its pullback comparison identifies the corresponding scheme pullbacks. The pullbacks along the two composites in a commuting square agree canonically: the tensor-composition isomorphism $P_kP_f\\simeq P_{fk}$ of the specified pullbacks [lem-trf-space-chart-adjunction-tensor-realization] has local formula $b\\otimes(c\\otimes m)\\mapsto b\\,k^\\sharp(c)\\otimes m$, with inverse $e\\otimes m\\mapsto e\\otimes(1\\otimes m)$, and commutes with chart restrictions, so it gives the sheaf comparison for both composites of the square. In particular $N_y=p_y^*M_y$, and for $W=U\\times_{X_y}T_y$ with projections $q:W\\to U$, $r:W\\to T_y$, one has $q^*(a^*M_y)\\simeq r^*N_y$. All associated-point tests below consequently use the same Zariski module after pullback.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/descent.tex",
+    "place": "Tag 0CUZ (lemma-relative-assassin), pullback notation; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), pullback comparison."
+   }
+  },
+  {
+   "text": "If $t\\in\\operatorname{Ass}_{T_y}(N_y)$, its image belongs to $\\operatorname{Ass}_{X_y}(M_y)$: $p_y$ is an etale scheme chart by base change, and this chart and $t$ are witnesses in the union-of-chart-images definition of the assassin. The same observation gives the inclusion of the displayed image in the assassin downstairs. Here $B=\\operatorname{Spec}\\kappa(y)$ in the purity definition, and for a chart $U\\to X_y$ the scheme relative assassin $\\operatorname{Ass}_{U/B}$ is the absolute assassin $\\operatorname{Ass}_U$, since the fibre of $U\\to B$ over the unique point of $B$ is $U$ itself; step 2 identifies the module on the chart $p_y$ with $N_y$.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CV0 (definition-relative-weak-assassin), chart formulation; forward direction of 0CUZ(3)--(4)."
+   }
+  },
+  {
+   "text": "Conversely suppose $x=p_y(t)\\in\\operatorname{Ass}_{X_y}(M_y)$. By the chartwise definition, choose an etale scheme chart $a:U\\to X_y$ and $u\\in\\operatorname{Ass}_U(a^*M_y)$ with $a(u)=x$. Form $W=U\\times_{X_y}T_y$. The scheme-test lemma makes $W$ a scheme and both projections $q:W\\to U$, $r:W\\to T_y$ etale scheme morphisms. Since $a(u)=p_y(t)$, surjectivity of the map from fibre-product points to compatible point pairs supplies $w\\in W$ with $q(w)=u$ and $r(w)=t$. The schemes $U,T_y,W$ are locally Noetherian by step 1 (for $W$, compose either etale projection with its chart). Apply the scheme invariance lemma to $q$ and the quasi-coherent module $a^*M_y$: association of $u$ gives association of $w$ in $q^*a^*M_y$. Step 2 identifies this with $r^*N_y$. Apply the same lemma to $r$ and $N_y$ to deduce $t\\in\\operatorname{Ass}_{T_y}(N_y)$. This proves the reverse implication for every lift $t$, not merely existence of an associated lift.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-scheme-etale-assassin-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CUZ (lemma-relative-assassin), equivalence of chart conditions (3),(4), with the common-refinement argument written out; flat.tex Tag 05FP and divisors.tex Tag 05AR."
+   }
+  },
+  {
+   "text": "For $x\\in\\operatorname{Ass}_{X_y}(M_y)$, surjectivity of $p_y$ on points supplies $t$ with $p_y(t)=x$. The reverse implication just proved makes this lift associated. Hence every such $x$ lies in $p_y(\\operatorname{Ass}_{T_y}(N_y))$. Together with step 3 this proves the image equality. If the fibre or module is empty or zero, the same membership arguments give equality of empty sets.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CVV (lemma-relative-assassin-constructible), image equality from the chosen surjective etale chart."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-sfb-space-universal-relative-purity",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-scheme-etale-assassin-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/flat.tex; literature/stacks-project/divisors.tex",
+  "place": "Tags 0CUY, 0CUZ(3),(4) and 0CVV; the common-refinement scheme argument expands the atlas comparison for the chartwise assassin definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of the fibre of a finite type algebraic space are exactly the images of associated points on a surjective etale scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Chevalley images, constructible-set topology or etale morphism properties, not the stated associated-point assertion; none specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback detects relative associated points of a finite type quasi coherent module on an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Chevalley images, constructible-set topology or etale morphism properties, not the stated associated-point assertion; none specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points are invariant under etale pullback on locally Noetherian algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"Algebra.Etale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] (e : A ≃ₐ[R] B) : Etale R B\", \"doc\": \"If $ A $ and $ B $ are algebras over a commutative ring $ R $, and there exists an $ R $-algebra equivalence $ A ≃ₐ[R] B $, then $ A $ being étale over $ R $ implies $ B $ is also étale over $ R $. Th\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] (e : A ≃ₐ[R] B) : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $ and there exists an algebra equivalence $ e : A \\\\simeq_R B $, then $ B $ is also formally étale over $ R $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Chevalley images, constructible-set topology or etale morphism properties, not the stated associated-point assertion; none specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Chevalley images, constructible-set topology or etale morphism properties, not the stated associated-point assertion; none specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associatedPoints|associatedPrimes.*[Ee]tale|[Ee]tale.*associatedPrimes",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Chevalley images, constructible-set topology or etale morphism properties, not the stated associated-point assertion; none specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of the fibre of a finite type algebraic space are exactly the images of associated points on a surjective etale scheme atlas",
+   "results": "{\"t\": \"2026-10-23T22:50:53Z\", \"tool\": \"leanfinder\", \"query\": \"Associated points of the fibre of a finite type algebraic space are exactly the images of associated points on a surjective etale scheme atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\"], \"digest\": \"b08786944b79c252\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Etale, locally Noetherian",
+   "results": "{\"t\": \"2026-10-23T22:50:53Z\", \"tool\": \"loogle\", \"query\": \"associatedPrimes, Etale, locally Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Etale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization; Loogle identifier error: loogle: unknown identifier 'Etale'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points are invariant under etale pullback on locally Noetherian schemes and algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:50:54Z\", \"tool\": \"leansearch\", \"query\": \"Associated points are invariant under etale pullback on locally Noetherian schemes and algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"AlgebraicGeometry.IsEtale\", \"Algebra.FormallyEtale.iff_of_equiv\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.of_equiv\"], \"digest\": \"d58db29a7f3264df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback preserves associated points of quasi coherent modules on locally Noetherian schemes",
+   "results": "{\"t\": \"2026-10-23T22:50:57Z\", \"tool\": \"leanfinder\", \"query\": \"Etale pullback preserves associated points of quasi coherent modules on locally Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.etaleLocus\"], \"digest\": \"f5296b53d6235870\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeakAss, Etale",
+   "results": "{\"t\": \"2026-10-23T22:50:57Z\", \"tool\": \"loogle\", \"query\": \"WeakAss, Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeakAss'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization; Loogle identifier error: loogle: unknown identifier 'WeakAss'"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associatedPoints|associatedPrimes.*[Ee]tale|[Ee]tale.*associatedPrimes",
+   "results": "{\"t\": \"2026-10-23T22:59:31Z\", \"tool\": \"grep\", \"query\": \"assassin|associatedPoints|associatedPrimes.*[Ee]tale|[Ee]tale.*associatedPrimes\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|associatedPoints|WeakAss|weakly.*assassin",
+   "results": "{\"t\": \"2026-10-23T22:59:31Z\", \"tool\": \"grep\", \"query\": \"associatedPrimes|associatedPoints|WeakAss|weakly.*assassin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\"], \"digest\": \"13b67e5b441edc1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*associated|associated.*Etale|WeakAss",
+   "results": "{\"t\": \"2026-10-23T22:59:31Z\", \"tool\": \"grep\", \"query\": \"Etale.*associated|associated.*Etale|WeakAss\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"a3bca94c95898366\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\"",
+   "results": "{\"t\": \"2026-10-23T22:59:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"associatedPrimes\", \"Submodule.associatedPrimes\", \"associatedPrimes.nonempty\", \"associatedPrimes.eq_empty_of_subsingleton\", \"AssociatedPrimes.mem_iff\", \"instIsPrimeValIdealMemSetAssociatedPrimes\", \"Submodule.instIsPrimeValIdealMemSetAssociatedPrimes\", \"associatedPrimes.prod\"], \"digest\": \"24a8bd47759a02f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of locally Noetherian schemes the associated points of a quasi coherent module pullback are exactly the points over associated points",
+   "results": "{\"t\": \"2026-10-23T23:01:56Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism of locally Noetherian schemes the associated points of a quasi coherent module pullback are exactly the points over associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"e8fe0af45b80f088\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale weakly associated points up down",
+   "results": "{\"t\": \"2026-10-23T23:01:57Z\", \"tool\": \"leansearch\", \"query\": \"Etale weakly associated points up down\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"b2e3f6a02e091ea6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly associated points under etale morphisms of schemes",
+   "results": "{\"t\": \"2026-10-23T23:01:58Z\", \"tool\": \"leanfinder\", \"query\": \"Weakly associated points under etale morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus\"], \"digest\": \"34e372717caad881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T23:01:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "WeakAss|associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T23:01:59Z\", \"tool\": \"grep\", \"query\": \"WeakAss|associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-assassin-containment-constructible",
+  "date": "2026-10-24",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: sentence identifying the fibre assassin with its image from the chosen affine etale cover.",
+   "via": [
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fibre-assassin-etale-atlas",
+  "worker": "stage1",
+  "summary": "Kept the statement and its dependencies unchanged. Established local Noetherianity on every fibre chart from a total-space atlas and etale descent, recorded tensor/Zariski comparisons, and proved both pointwise directions via a common etale scheme refinement before deducing the image equality by surjectivity. Created one statement-only generic scheme etale associated-point lemma, strictly below the space-atlas assertion; read Stacks 05FP and 05AR and searched the whole DAG, blueprint and Lean source.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: sentence identifying the fibre assassin with its image from the chosen affine etale cover. The five proof steps realize precisely the 0CVV fibre-image assertion through the local-Noetherian and chart comparison arguments of 0CUY/0CUZ. Inherited null blueprint ancestor retained, as computed by blueprint_refs.py; no equivalent imported blueprint statement found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme representability and etale base-change/composition calculus needed for common charts; not a trace-formula step."
+   },
+   {
+    "node": "lem-trf-etale-local-noetherian-descent",
+    "why": "Generic scheme local-Noetherian descent needed for arbitrary charts of a fibre; the unit provides no alternative descent lemma."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of quasi-coherent modules and their tensor pullbacks between the etale and Zariski sites; not a trace-formula argument."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic lifting of compatible point pairs to fibre products and the point-surjectivity criterion; not a real-sheaf or trace-formula proof step."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic composition isomorphism of the specified etale tensor pullbacks of algebraic spaces (local formula a⊗(b⊗m)↦a k^♯(b)⊗m), needed to identify the fibre and chart pullbacks; not a trace-formula step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-3832ca24d",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-3832ca24d (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement, and checked the sources: Stacks spaces-divisors 0CUY l.588, 0CUZ l.601 and 0CVV l.857 (its proof states the atlas image equality the item proves), flat 05FP l.353 and divisors 05AR l.701. The new node lem-sfb-scheme-etale-assassin-invariance (etale h, locally Noetherian, any quasi-coherent G: v in Ass(h^*G) iff h(v) in Ass(G)) is exactly 05FP plus 05AR. It is true, statement-only and self-contained, with 6 logged searches. It is not a duplicate: lem-trf-etale-weakass-invariance is the ring/WeakAss form, and lem-trf-flat-pullback-associated-points would also need a fact about etale fibres. It is not a clause of the item. Steps 1, 3, 4 and 5 are correct. Step 1 checks local Noetherianity on every fibre chart through the atlas C_y and the refinement D; step 4 lifts the point pair (u,t) and applies the new node to both projections q and r; step 5 uses point surjectivity. Edge cases checked: empty fibre, zero module, embedded point, non-surjective h. One repairable fault (C1/C2): step 2 derived the composition isomorphism of the adjoint-defined etale tensor pullbacks inline, but it is the content of lem-trf-space-chart-adjunction-tensor-realization, which states that formula. Fix: cite it in step 2 and proof_deps and declare it in tool_uses; also add a sentence to step 3 that Ass_{U/Spec k(y)} = Ass_U. Batch 5: def-trf-relative-assassin, lem-trf-space-representable-etale-scheme-tests, lem-trf-etale-local-noetherian-descent, lem-sfb-space-module-pullback-quasicoherent, lem-a1-space-point-open-calculus and the added realization lemma are general algebraic-space and scheme foundations. Their closures reach no trace-formula or Poincare-duality proof node, so all are accepted. No SGA is used and no statement was weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFibreAssassinEtaleAtlas",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_fibre_assassin_etale_atlas",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.assassinPointBase",
+   "AlgebraicGeometry.AlgebraicSpace.assassinPointBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.assassinSchemeFibre",
+   "AlgebraicGeometry.AlgebraicSpace.assassinSchemeFibreToPoint",
+   "AlgebraicGeometry.AlgebraicSpace.space_fibre_assassin_etale_atlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFibreAssassinEtaleAtlas.lean",
+  "statement": "theorem space_fibre_assassin_etale_atlas {X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (_hf : MapIsFiniteType f) (_hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.QCoh) (_hM : SheafOfModules.IsFiniteType M.obj) (T : X.EtaleSite) (_hp : IsSurjective T.obj.hom) (y : Y.left) (Ty : (assassinSchemeFibre Y f y).EtaleSite) (i : Ty.obj.left ⟶ T.obj.left) (_hcart : IsPullback Ty.obj.hom (yoneda.map i) (Limits.pullback.fst f.hom (assassinPointBaseMap Y y).hom).hom T.obj.hom) : (∀ t : Ty.obj.left.left, t ∈ Scheme.Modules.associatedPoints ((Scheme.Modules.tensorPullback i.left).obj ((X.schemeRestriction T).obj M.obj)) ↔ schemePointMap Ty.obj.hom t ∈ relativeAssassin (assassinPointBase Y y) (assassinSchemeFibreToPoint Y f y) ((moduleTensorPullback (enlargedFibreProductFst f (assassinPointBaseMap Y y))).obj M.obj)) ∧ (schemePointMap Ty.obj.hom) '' Scheme.Modules.associatedPoints ((Scheme.Modules.tensorPullback i.left).obj ((X.schemeRestriction T).obj M.obj)) = relativeAssassin (assassinPointBase Y y) (assassinSchemeFibreToPoint Y f y) ((moduleTensorPullback (enlargedFibreProductFst f (assassinPointBaseMap Y y))).obj M.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fibre and its residue-field projection abbreviate the existing sheaf fibre-product construction. The base-changed atlas is given by its representing pullback square, so every choice of the scheme fibre product is covered. The module upstairs is the ordinary fibre pullback of the canonical Zariski restriction of M to the original atlas; downstairs it is the specified tensor pullback to X_y. Both pointwise detection and exact image equality are stated. Added the three landed definition-owner dependencies used directly by these signatures: def-trf-space-module-scheme-restriction, def-trf-scheme-algebraic-space and def-sfb-space-sheaf-fibre-product. The enlarged-etale-ringed-site theorem itself is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a9b07ef",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery of 773ed5af (RETURN H2). Diff of the snapshots: the Lean module is byte-identical; stmt_deps swap the theorem lem-trf-space-enlarged-etale-ringed-site-model for def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct/Fst), and keep def-trf-space-module-scheme-restriction, exactly as requested. Both new dep records are identical to live existing:true definition records on EnlargedEtaleRingedSite (plain defs l.79/230/236, imported publicly). The item is not yet landed in live. Re-checked the maths independently against Stacks 0CUY/0CUZ(3,4,6)/0CVV: Spec ULift Z base, MapIsFiniteType, quasi-compact diagonal, QCoh+IsFiniteType, surjective EtaleSite atlas, cartesian square corners, N_y=tensorPullback i.left of schemeRestriction, M_y=moduleTensorPullback Fst, relativeAssassin over Spec k(y) = chartwise absolute Ass, forall-t iff plus image equality; edge cases empty fibre, zero module, embedded points, non-Noetherian Y. Helpers carry real data, the only proof is sorry, docstrings have source and blueprint, lean.statement is verbatim, and the report has Worker report and Second reading by Q25. No recompile (no file changed). Advisory: the MapIsQuasiCompact owner def-sfb-proper-curve-moduli is uncited."
+ }
+}

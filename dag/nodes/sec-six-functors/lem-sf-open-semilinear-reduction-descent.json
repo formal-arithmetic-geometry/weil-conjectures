@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-open-semilinear-reduction-descent",
+ "kind": "statement",
+ "title": "Descent of ordinary strict open scalar comparison",
+ "statement": "Fix the actual open operations o for j:U→X, coherent derived reduction calculi SX and SU, ordinary reductions AX and AU, and a natural isomorphism ordinary:extension⋙AX≅AU⋙systemExtension, in the interfaces of [def-sf-open-semilinear-tensor-model-data]. Assume extension preserves K-flat good complexes and their flat terms. Then there exists a natural derived isomorphism r:shriek⋙SX.reduction≅SU.reduction⋙J satisfying RepresentativeSquare with ordinary and the given K-flat witness. The computation witnesses in that square have the strict scalar-unit augmentation normalization. This is descent in the whole strict-system derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, deriving the open tensor comparison through flat-term K-flat models; localization universal property and augmented computation."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose the natural augmented computation isomorphisms for AU and AX on good models. K-flat and flat-term preservation define the extension functor between their full subcategories.",
+   "uses": [
+    "lem-sf-ordinary-reduction-augmented-computation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinary degreewise to complexes. Whisker the two computation isomorphisms and the exact-extension localization comparisons to obtain an isomorphism after precomposition with the localization of good complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "That functor is a localization at quasi-isomorphisms [lem-pur-integral-operations-well-defined]. Lift the natural isomorphism by the localization universal property. Its component formula and inverse-hom cancellation give exactly RepresentativeSquare, with the augmented computations already chosen.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ordinary-reduction-augmented-computation",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, deriving the open tensor comparison through flat-term K-flat models; localization universal property and augmented computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived coefficient reduction as a natural strict semilinear system with K flat models",
+   "results": "8 hits: IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd, Module.Baer.ExtensionOfMaxAdjoin.snd",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSlice|semilinear.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between derived reduction of a flat K-flat complex and simultaneous ordinary quotient tensor, normalized by the strict scalar-unit augmentation",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.tfae_equational_criterion, Module.Flat.lTensor_exact, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.rTensor_exact_iff_exact",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearTensorModel",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, returned lem-sf-integral-open-reduction-comparison arguments 5-6",
+   "via": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSemilinearReductionDescent",
+  "file": "lean/Sheaf/SixFunctors/OpenSemilinearReductionDescent.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openSemilinearReductionDescent",
+  "statement": "theorem openSemilinearReductionDescent\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (SU : CoefficientDerivedSystemCalculus l E U)\n    (cX : CoefficientDerivedSystemCoherence l E X SX)\n    (cU : CoefficientDerivedSystemCoherence l E U SU)\n    (o : Operations l E j) (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)\n    (ordinary : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅\n      AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o)\n    (hk : KFlatPreservation l E j o)\n    (hf : ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients\n        (R := completedIntegralCommRingSheafUnrestricted l E U) Q →\n      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology U)\n        (completedIntegralCommRingSheafUnrestricted l E U) Q →\n      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology X)\n        (completedIntegralCommRingSheafUnrestricted l E X) ((extensionComplex l E j o).obj Q)) :\n    ∃ r : IntegralOpenReduction.shriek l E j o ⋙ SX.reduction ≅\n      SU.reduction ⋙ IntegralOpenReduction.J l E j o,\n      RepresentativeSquare l E j o SX SU AX AU r ordinary hk",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-421b5",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T043154-L-1688691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-421b5",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T043154-L-1688691",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature byte-identical to clone; Data module = verbatim extraction of the 21 interface decls (diff); new sorry statements read against nodes and IntegralOpenReduction/CoefDerivedSystem definitions; 4 direct importers compiled against sandbox build of the 5 delivered modules; #print axioms on descent and item"
+ }
+}

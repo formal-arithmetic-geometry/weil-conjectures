@@ -1,0 +1,125 @@
+{
+ "id": "lem-diagonal-scalar-compatibility-triangle",
+ "kind": "statement",
+ "title": "Compose and cancel a common scalar compatibility",
+ "statement": "Let Λ0, Λ1, Λ2 be commutative condensed ring objects, and let a:Λ0→Λ1, b:Λ1→Λ2, c:Λ0→Λ2 be ring-object maps with a b=c. Let Y be any scheme and let d0,d1,d2 be Diagrams of [def-sfb-diagonal-coefficient-category] for lines L0,L1,L2. Let m01,m12,m02 be the underlying sheaf line maps with m01 m12=m02 on every scheme. Assume the two m12 maps at ProjectiveLine Y and diagonalSurface Y have Semilinear structures along b as in [def-sfb-diagonal-coefficient-endpoints]. Given ScalarCompatibility along a from d0 to d1 [def-sfb-diagonal-coefficient-scalars], existence of ScalarCompatibility along c from d0 to d2 is equivalent to existence of ScalarCompatibility along b from d1 to d2. No flatness, Noetherian, finiteness, coefficient-colimit, trace-construction or integration-construction assertion is included.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), scalar associativity and compatibility of finite and colimit legs"
+ },
+ "proof": [
+  {
+   "text": "Use normalized scalar endpoint composition. Construct regular semilinear maps, and identify supported map compositions on underlying sheaves. Cancel the first endpoint isomorphism to construct the second normalized endpoint, or compose the first two to construct the composite endpoint. The normalization determines both unshifted and shifted arrows.",
+   "uses": [
+    "lem-diagonal-scalar-endpoint-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q and both projections obtain second-leg and composite normalized restriction squares and the scalar mate composition law. Combine it with shifted endpoint composition and mate naturality to derive the composition equation for the complete trace-domain arrow.",
+   "uses": [
+    "lem-diagonal-scalar-restriction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associator naturality and the first trace equation reduce each composite trace equation to the second one by cancellation of the invertible first complete trace-domain arrow. Two-out-of-three proves equivalence of mate invertibility on the shifted line. Apply the same cancellation to the supported-source and shifted-line arrows for delta. Assemble every field of ScalarCompatibility in both directions.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-scalar-endpoint-composition",
+  "lem-diagonal-scalar-restriction-composition",
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), scalar associativity and compatibility of coefficient routes",
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-27",
+  "note": "Explicit endpoint, mate, trace and diagonal cancellation; statement unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a tower of adjunctions, scalar extension compatibility of a diagram cancels along the first scalar extension",
+   "results": "Eight results including ModuleCat.homEquiv_extendScalarsComp and ModuleCat.extendScalarsComp. These normalize ordinary module scalar composition; none concerns the full-unit-normalized derived direct-image squares and supported diagonal endpoints.",
+   "date": "2026-10-27",
+   "verdict": "No complete match. Use uniqueness of the scalar/restriction adjunctions for the formal coherence step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits, including leftAdjointUniq, unit_leftAdjointUniq_hom_app and leftAdjointUniq_trans. They provide the normalized associator, not a compatibility theorem for the geometric Diagram record.",
+   "date": "2026-10-27",
+   "verdict": "General adjunction uniqueness is available; the diagram-specific comparison remains a separate step."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|ScalarFrame|scalarCompatibility_triangle|diagonalClosure_scalarFrame",
+   "results": "Search service returned zero hits. Local rg found the scalar compatibility definition, the private scalarFrame_diagram construction in DiagonalCoefficientUniformizerReduction, regularEndpoint and endpoint_hom_unique in DiagonalUniformizerScalarFrame, and diagonal_supported_scalar_source. No common-source cancellation or closure-line comparison was found.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the scalar-frame assembly and supported-source theorem; isolate only scalar triangle coherence and the bounded closure-line comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientFiniteClosure",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), scalar associativity and compatibility of finite and colimit legs",
+   "via": [
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarCompatibilityTriangle",
+  "file": "lean/Sheaf/Paper/DiagonalScalarCompatibilityTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarCompatibility_triangle",
+  "statement": "theorem scalarCompatibility_triangle\n    {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]\n    [MonObj Λ₂] [IsCommMonObj Λ₂]\n    (a : Λ₀ ⟶ Λ₁) (b : Λ₁ ⟶ Λ₂) (c : Λ₀ ⟶ Λ₂)\n    [IsMonHom a] [IsMonHom b] [IsMonHom c] (Y : Scheme.{u})\n    (L₀ : ∀ X : Scheme.{u}, Modules Λ₀ X)\n    (L₁ : ∀ X : Scheme.{u}, Modules Λ₁ X)\n    (L₂ : ∀ X : Scheme.{u}, Modules Λ₂ X)\n    (m₀₁ : ∀ X : Scheme.{u}, (L₀ X).X ⟶ (L₁ X).X)\n    (m₁₂ : ∀ X : Scheme.{u}, (L₁ X).X ⟶ (L₂ X).X)\n    (m₀₂ : ∀ X : Scheme.{u}, (L₀ X).X ⟶ (L₂ X).X)\n    (d₀ : Diagram Λ₀ Y L₀) (d₁ : Diagram Λ₁ Y L₁) (d₂ : Diagram Λ₂ Y L₂)\n    (hcoeff : a ≫ b = c) (hline : ∀ X, m₀₁ X ≫ m₁₂ X = m₀₂ X)\n    (h₀₁ : ScalarCompatibility a Y L₀ L₁ m₀₁ d₀ d₁)\n    (sP : Semilinear b (L₁ (ProjectiveLine Y)) (L₂ (ProjectiveLine Y))\n      (m₁₂ (ProjectiveLine Y)))\n    (sW : Semilinear b (L₁ (diagonalSurface Y)) (L₂ (diagonalSurface Y))\n      (m₁₂ (diagonalSurface Y))) :\n    Nonempty (ScalarCompatibility c Y L₀ L₂ m₀₂ d₀ d₂) ↔\n      Nonempty (ScalarCompatibility b Y L₁ L₂ m₁₂ d₁ d₂)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T235928-L-1470691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T012811-L-2332843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

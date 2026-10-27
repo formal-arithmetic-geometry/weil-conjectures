@@ -1,0 +1,456 @@
+{
+ "id": "lem-sp-tower-p1-etale-origin-comparisons",
+ "kind": "statement",
+ "title": "Canonical projective-line tower maps on etale-origin domains",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a scheme $S$ on which $\\ell$ is invertible. Put $B_n=\\mathcal O_E/\\ell^n$ and $A_T=((B_n)_T)_n$, with quotient transitions, for schemes $T$ over $S$. Use the coefficient towers [sk-def-sp-coefficient-towers] and their ordinary derived categories [det-sp-coefficient-towers-abelian]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be comparison, and let $\\mathscr C^+(T)$ be the full subcategory of $D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ whose every level has an etale-origin witness [def-weil-pbc-etale-origin-witness], meaning it is isomorphic to $\\nu_T^*L_n$ for some $L_n\\in D^+(T_{\\mathrm{et}},B_n)$. Put $P=\\mathbf P^1_S$, $W=P\\times_SP$, $q:P\\to S$, $p_1,p_2:W\\to P$, and let $\\Delta:P\\hookrightarrow W$ be the diagonal [def-nagata-projective-space-base-change]. Use the Tate twist, supported diagonal map $\\delta_\\bullet:\\Delta_*A_P\\to A_W(1)[2]$, and splitting traces $t_q,t_1,t_2$ of [det-sp-tower-classes]; here $t_i$ is the trace for $p_i$. Write $F=Rq_{*,\\bullet}$ and $G=q_\\bullet^*(-)(1)[2]$.\nThe functors $F:\\mathscr C^+(P)\\to\\mathscr C^+(S)$ and $G:\\mathscr C^+(S)\\to\\mathscr C^+(P)$ are well-defined. Each of $q,p_1,p_2,\\Delta$ is proper and quasi-compact and quasi-separated; the complementary open of the Cartier divisor $\\Delta$ is quasi-compact, and $\\Delta_{*,\\bullet}$ is exact, so $R\\Delta_{*,\\bullet}=\\Delta_{*,\\bullet}$.\nFor $K\\in\\mathscr C^+(S)$, $M\\in\\mathscr C^+(P)$ and $i=1,2$, the canonical projection comparisons\n$$K\\otimes^LRq_{*,\\bullet}(A_P(1)[2])\\longrightarrow FGK,$$\n$$\\Delta_*A_P\\otimes^Lp_i^*M\\longrightarrow R\\Delta_{*,\\bullet}M,$$\n$$M\\otimes^LRp_{i*,\\bullet}(A_W(1)[2])\\longrightarrow Rp_{i*,\\bullet}(p_i^*M(1)[2])$$\nand the proper exchange $q_\\bullet^*FM\\to Rp_{2*,\\bullet}p_1^*M$ (also with the two projections exchanged) are isomorphisms. All their source and target objects are bounded below. The section-model tensor, direct-image composition and comparison maps [lem-coef-semilinear-derived-sections] identify their level-$n$ evaluations with the corresponding ordinary etale maps after $\\nu^*$ and the canonical direct-image mate comparison [lem-weil-pbc-comparison-direct-image-canonical-mate]. This asserts compatibility of the specified maps, not just existence of isomorphic objects.\nWrite $\\eta_M$ for the composite\n$$M\\simeq Rp_{2*,\\bullet}\\Delta_*M\\simeq Rp_{2*,\\bullet}(\\Delta_*A_P\\otimes^Lp_1^*M)\\xrightarrow{Rp_{2*,\\bullet}(\\delta_\\bullet\\otimes1)}Rp_{2*,\\bullet}(p_1^*M)(1)[2]\\simeq GFM,$$\nand $\\varepsilon_K$ for\n$$FGK\\simeq K\\otimes^LRq_{*,\\bullet}(A_P(1)[2])\\xrightarrow{1\\otimes t_q}K,$$\nwhere composition, projection and exchange are the canonical mate maps on the ringed topos of towers [lem-coef-semilinear-derived-sections].\nThese formulas define natural transformations $\\eta:1\\to GF$ and $\\varepsilon:FG\\to1$ on the displayed domains. Their level-$n$ evaluations are exactly the diagonal-defined and splitting-trace-defined finite formulas with coefficient ring $B_n$, transported by $\\nu^*$. This compatibility includes the composition source identification for $p_i\\Delta=1_P$, twists and shifts. No finite-Tor assumption on $K$ or $M$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Construction (old steps 1-3 and the unit/counit portion of step 4); Levels, first paragraph (old step 10)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-sp-p1-tensor-ordinary-coordinates",
+  "def-sp-p1-fixed-total-tensor",
+  "def-sp-p1-tensor-chain-coordinates",
+  "def-sp-p1-tensor-derived-coordinates",
+  "def-sp-p1-etale-operations",
+  "def-sp-p1-etale-diagonal-word",
+  "def-sp-p1-etale-word-invertibility",
+  "def-sp-p1-etale-epsilon-word",
+  "def-sp-p1-etale-eta-word",
+  "def-sp-p1-ordinary-push-coordinates",
+  "def-sp-p1-derived-push-coordinates",
+  "def-sp-p1-geometric-coordinates",
+  "def-sp-p1-level-words",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-p1-projective-coordinates",
+  "def-sp-p1-projection-level-comparisons",
+  "def-sp-p1-formula-level-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "The projective-space properness theorem makes $q$ proper; $p_1,p_2$ are its base changes, hence proper. Proper means separated and finite type; finite type includes quasi-compactness, and a separated morphism is quasi-separated. The diagonal of the separated map $q$ is closed, so $\\Delta$ is proper too and has the same qcqs consequences. Its Cartier property is supplied by the diagonal-ideal lemma. To check the complementary open is quasi-compact as an immersion, work over an affine base open and use the four standard affine product charts. The diagonal equations are $t-u$, $tv-1$, $su-1$, $s-v$ on the finite/finite, finite/infinite, infinite/finite, infinite/infinite charts. The complement on each chart is the corresponding principal open. Each is affine, hence quasi-compact; this is a cover-local check on the target, requiring no quasi-compactness of $S$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-amb-p1-diagonal-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Construction: geometry of the two projections and the diagonal; four-chart verification of the quasi-compact complementary open"
+   }
+  },
+  {
+   "text": "Apply exactness of pro-etale closed direct image with quasi-compact complementary open to $\\Delta$, separately with each constant finite ring $B_n$. Kernels and cokernels in the varying-ring tower category are componentwise, so $\\Delta_{*,\\bullet}$ is exact. Its termwise complex functor therefore computes its derived functor on bounded-below complexes: an exact functor takes acyclic complexes to acyclic complexes, so its localization agrees with its right derived functor. Thus $R\\Delta_{*,\\bullet}=\\Delta_{*,\\bullet}$ canonically, and it preserves every lower bound.",
+   "uses": [
+    "lem-exc-proetale-closed-exact",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A9, lemma-closed-immersion-complement-retrocompact-exact; passage to towers by componentwise exactness"
+   }
+  },
+  {
+   "text": "Use the simultaneous section-model operations to form the tensor, projection transposes, exchange and composition maps in the ordinary unbounded tower derived categories. Evaluation preserves these specified words, including their units and counits. The compatible-root cover trivializes the Tate line tower simultaneously at all levels. Tensor by this line is exact, since it becomes tensor by the ring on that cover, and is invertible with inverse the negative twist. The line is locally free of rank one as a module in the inverse-system topos, hence perfect there. The perfect ringed-site projection theorem, applied with this line on the target of $q$ or $p_i$, gives the canonical isomorphisms $Rh_*(C(1)[2])\\simeq(Rh_*C)(1)[2]$. This also fixes the twist identifications in the trace and in the displayed formulas.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "det-def-sp-tate-twist-locally-free",
+    "lem-sbc-ringed-site-perfect-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Construction and Levels: ordinary tower operations and twists; perfect coefficient line projection (Stacks 0944)"
+   }
+  },
+  {
+   "text": "For $h=q,p_1,p_2$, use the splitting of the tower classes lemma over the base of $h$, then the twist identification of Step 3. It gives $Rh_{*,\\bullet}(A(1)[2])\\simeq A(1)[2]\\oplus A$. If $K$ or $M$ has cohomology zero below $a$, its tensor with this object has zero cohomology below $a-2$: tensor distributes over the two summands and tensor by either line is exact. Exact inverse images, closed direct image, and twists preserve lower bounds, the shift $[2]$ lowers them by two, and right derived direct image preserves lower bounds. The latter assertion follows by taking the bounded-below injective resolution of a complex zero below that bound. Consequently all the projection sources involving $q$ or $p_i$, their targets, and the exchange sources and targets have uniform lower bounds. The remaining supported projection source is checked in Step 7.",
+   "uses": [
+    "det-sp-tower-classes",
+    "lem-coef-semilinear-derived-sections",
+    "sk-lem-sp-tower-levels"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Construction: splitting traces and domains of the projection maps"
+   }
+  },
+  {
+   "text": "Fix a level $n$ and retain an origin witness $\\nu_P^*L_n\\simeq M_n$. The tower direct-image evaluation followed by the canonical direct-image mate gives $(FM)_n\\simeq Rq_{p,*}\\nu_P^*L_n\\simeq\\nu_S^*Rq_{e,*}L_n$, a bounded-below etale origin. For a witness $\\nu_S^*H_n\\simeq K_n$, exact pullback comparison, the monoidal comparison $\\nu_P^*(U\\otimes^LV)\\simeq\\nu_P^*U\\otimes^L\\nu_P^*V$ of the comparison morphism with constant rings, and the root-site isomorphism $\\sigma:\\nu_P^*B_{n,P}(1)_{\\mathrm{et}}\\simeq B_{n,P}(1)$ give $(GK)_n\\simeq\\nu_P^*(q_e^{-1}H_n(1)[2])$. The pro-etale twist here is the root tower of the tower classes, whose level $n$ is the pro-etale root tensor $D_{\\ell^n,P}$ of the root-site comparison. Steps 3-4 give the uniform tower bounds, so these witnesses prove that $F$ and $G$ restrict to the displayed full subcategories. The same argument applies to $p_i$ and $\\Delta$ whenever used below. There is no need to choose the $L_n$ or $H_n$ compatibly with tower transitions.",
+   "uses": [
+    "sk-lem-sp-tower-levels",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels: direct-image and inverse-image comparison on bounded-below origin witnesses"
+   }
+  },
+  {
+   "text": "For a qcqs map $h:U\\to V$ apply the ringed exchange/tensor coherence theorem to the commutative square with vertical maps $h_e,h_p$ and horizontal comparison maps $\\nu_U,\\nu_V$. This is a square of ringed topoi with the constant rings $B_n$; cartesianness is not needed. Its exchange is exactly $b_h:\\nu_V^*Rh_{e,*}\\to Rh_{p,*}\\nu_U^*$, because both are the transpose of the pullback comparison followed by the etale counit. The theorem therefore identifies the specified projection maps, under the monoidal tensor and pullback comparisons, by\n$$b_{h,E\\otimes h_e^*Q}\\,\\nu_V^*(\\pi^e_{h,E,Q})=\\pi^p_{h,\\nu_U^*E,\\nu_V^*Q}(b_{h,E}\\otimes1).$$\nHere the target also uses $\\nu_U^*h_e^*Q\\simeq h_p^*\\nu_V^*Q$. The comparisons $b$ are used only for bounded-below $E$ and $E\\otimes h_e^*Q$, as verified in Step 7. Naturality carries the equality through any specified origin witnesses, without asserting that a tower of witnesses exists.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, applied to etale/pro-etale comparison; Tag 07A4 tensor comparison"
+   }
+  },
+  {
+   "text": "At level $n$ apply the finite-ring ordinary-etale proper projection theorem to $(h,E,Q)=(q,B_{n,P}(1)[2],H_n)$, to $(p_i,B_{n,W}(1)[2],L_n)$, and to $(\\Delta,B_{n,P},p_{i,e}^*L_n)$. All three maps are isomorphisms without a Tor hypothesis. In the first two cases $E\\otimes h_e^*Q$ is a shifted line twist of an exact inverse image, so is bounded below. In the third it is $L_n$, using $p_i\\Delta=1_P$, so again is bounded below. Step 6 transports these particular maps to the pro-etale site; Step 3 identifies them with the evaluations of the actual tower maps. Joint conservativity of derived evaluations makes each tower projection invertible. Moreover the supported source $\\Delta_*A_P\\otimes^Lp_i^*M$ has the same lower bound as $\\Delta_*M$: the evaluated isomorphisms identify their cohomology, and exact componentwise evaluations detect vanishing of each cohomology tower. This completes the boundedness assertion without using finite Tor amplitude of $K$ or $M$.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite-objectwise",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; specialize to the three displayed proper maps"
+   }
+  },
+  {
+   "text": "The square with $q,q$ and $p_1,p_2$ is Cartesian. At level $n$, the exchange-transport theorem identifies its specified ordinary-etale exchange with its specified pro-etale mate under the canonical direct-image and pullback comparisons. Ordinary-etale proper base change over the torsion ring $B_n$ makes this exchange invertible on $L_n$. Evaluation of the tower exchange is precisely this mate by the section-model theorem. Joint conservativity therefore makes $q_\\bullet^*FM\\to Rp_{2*,\\bullet}p_1^*M$ invertible. Swapping the two factors gives the other exchange; the same proof applies with $p_1$ and $p_2$ interchanged.",
+   "uses": [
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Construction: Cartesian projective-line square; Tag 0DDE, lemma-proper-base-change-mod-n"
+   }
+  },
+  {
+   "text": "Use the canonical direct-image compositor for $p_i\\Delta=1_P$ to identify $M$ with $Rp_{i*,\\bullet}\\Delta_*M$, using Step 2. This identification evaluates to the finite compositor. It also agrees with transport by $\\nu^*$: the pullback comparisons $a$ respect identities and composites, so the pullback square for $p_i\\Delta$ is the pasting of those for $\\Delta$ and $p_i$; the two direct-image comparisons are the mates of this pasted pullback square, so the mate-pasting identity identifies their composite with the comparison for the composite map. The identity clause makes the comparison for $1_P$ the identity. The monoidal and adjunction-compatible composition theorem gives the corresponding compatibility with tensor, symmetry and the identity pullback. The shift comparisons in the ringed projection theorem fix the integer shifts as well. Hence these are the specified composition source, twist and shift identifications used in $\\eta$, not independently chosen isomorphisms of their objects.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels: source composition identification for the diagonal unit; Tags 0D6E and 0B65 for composition and mates"
+   }
+  },
+  {
+   "text": "Now compose the inverse projection and exchange isomorphisms proved in Steps 7-8 with $Rp_{2*,\\bullet}(\\delta_\\bullet\\otimes1)$, as written in the statement, to define $\\eta_M$. Compose the inverse $q$-projection with $1\\otimes t_q$ to define $\\varepsilon_K$. The comparisons are natural, and inversion of a natural isomorphism is natural (multiply its naturality square by its two inverses), so the composites are natural transformations. Evaluation sends $\\delta_\\bullet$ and $t_q$ to the finite supported diagonal class and splitting trace by the tower classes lemma. The supported Cartier comparison identifies that class, including its source and positive Kummer sign, with the ordinary-etale class after $\\nu^*$. For the trace, the evaluated $t_q$ is $\\operatorname{pr}_2$ of the inverse of the finite unit/Chern splitting whose Chern component is the pulled-back etale Kummer class of $\\mathcal O_P(1)$, with the pro-etale root twist. The counit normalization of the direct-image comparison $b_q$, transposed, shows that $b_q\\circ\\nu_S^*$ carries the etale unit to the pro-etale unit and the etale adjoint of the Chern class to the pro-etale adjoint of its pullback; with $\\sigma$ on the twist, $b_q$ therefore carries $\\nu_S^*$ of the etale splitting to the evaluated tower splitting, hence $\\nu_S^*$ of the etale trace to the evaluated $t_q$. The same holds for $t_1,t_2$ over $P$. Steps 6, 8 and 9 identify every remaining projection, exchange and composition arrow, including inverse arrows. Thus the evaluated composites are exactly the asserted ordinary-etale diagonal and splitting-trace formulas after comparison. The verification concerns these composites of specified maps, and imposes no finite-Tor or normalization condition.",
+   "uses": [
+    "det-sp-tower-classes",
+    "lem-sp-cartier-reduction-site-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Construction of the unit and counit; Levels, finite classes and all specified comparison maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-amb-p1-diagonal-cartier",
+  "lem-exc-proetale-closed-exact",
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "det-sp-tower-classes",
+  "sk-lem-sp-tower-levels",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-etale-proper-projection-formula-finite-objectwise",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sp-cartier-reduction-site-comparison",
+  "lem-amb-finite-root-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Construction of diagonal and trace maps and Levels; the current proof abbreviates these through det-sp-tower-shriek-levels. Expanded here on the item's bounded-below etale-origin domain using Stacks 0F0G, 0DDE, 0E48 and existing section-model/mate nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula and proper base change for projective line varying coefficient towers with bounded below etale origin levels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"Given a locally bijective morphism `α : R₀ ⟶ R.val` where `R₀` is a presheaf of rings\\nand `R` a sheaf of rings, this is the adjunction\\n`sheafification.{v} α ⊣ SheafOfModules.forget R ⋙ restrictScalars\"}\n  {\"name\": \"SheafOfModules.overMapPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.Limits.HasPullbacks C] {X Y : C} (f : X ⟶ Y) : SheafOfModules.overMap R f ⊣ SheafOfModules.overPullback R f\", \"doc\": \"The adjunction between pushforward along `Over.map` and pushforward along `Over.pullback`.\"}\n  {\"name\": \"SheafOfModules.overPushforwardOverAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} (x : C) : SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id (R.over x)) ⊣ SheafOfModules.pushforward (SheafOfMod\", \"doc\": \"The adjunction between restriction to `Over x` and pushforward along `Over.star x`.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"If `F ⊣ G`, then the pushforwards along `F` and `G` are also adjoint.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Construction of a left adjoint to the functor `pushforward.{v} φ` by using the\\npullback of presheaves of modules and the sheafification.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLine|ProjectiveLine|TateTwist|tateTwist",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor projection and proper exchange maps in the derived category of inverse systems of sheaves preserve classical torsion inputs",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"(n : ℕ) : C ⥤ C ⥤ C\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"(n : ℕ) : C ⥤ C ⥤ C\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"TensorProduct.toDirectLimit\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": DirectLimit G f ⊗[R] M →ₗ[R] DirectLimit (G · ⊗[R] M) (f ▷ M)\", \"doc\": \"The canonical $ R $-linear map from the tensor product of the direct limit $ \\\\varinjlim G_i $ with an $ R $-module $ M $ to the direct limit of the tensor products $ G_i \\\\otimes_R M $, induced by the \"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"TensorProduct.directLimitRight_symm_of_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \"{i : ι} (m : M) (g : G i) : (directLimitRight f M).symm (of _ _ _ _ _ (m ⊗ₜ g)) = m ⊗ₜ of _ _ _ f _ g\", \"doc\": \"The inverse of the natural isomorphism between $ M \\\\otimes_R \\\\varinjlim G_i $ and $ \\\\varinjlim (M \\\\otimes_R G_i) $ maps the tensor product of $ m \\\\in M $ and the image of $ g \\\\in G_i $ in the direct l\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor projection and proper exchange maps in the derived category of inverse systems of sheaves preserve classical torsion inputs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|tower.*projection|projection.*tower",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived sheaf operations, inverse systems of types, or etale algebras, not this specified tower construction.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"projection\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived sheaf operations, inverse systems of types, or etale algebras, not this specified tower construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line derived pushforward with finite torsion coefficients commutes with tensor for arbitrary bounded below complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, PresheafOfModules.pushforward₀_obj, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp, Projectivization.map_comp, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, TensorProduct.AlgebraTensorModule.rTensor_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived sheaf operations, inverse systems of types, or etale algebras, not this specified tower construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line coefficient towers diagonal class and trace define natural maps that evaluate to ordinary etale unit and counit formulas",
+   "results": "8 hits: StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation.toPresentation_val, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, StandardEtalePresentation.toSubmersivePresentation_map, StandardEtalePair.lift_X_left, StandardEtalePresentation.toPresentation_algebra_algebraMap_apply, StandardEtalePair.homEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived sheaf operations, inverse systems of types, or etale algebras, not this specified tower construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projection and exchange maps for bounded below etale origin complexes in inverse systems with varying finite coefficient rings",
+   "results": "8 hits: InverseSystem.globalEquiv, InverseSystem.pEquivOnSucc, InverseSystem.globalEquiv_compatibility, StandardEtalePair.hasMap_X, StandardEtalePair.homEquiv_symm_apply, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation.toSubmersivePresentation_map, StandardEtalePresentation.P",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived sheaf operations, inverse systems of types, or etale algebras, not this specified tower construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-p1-adjunction",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Diagonal/trace formulas of det-sp-tower-p1-adjunction; Reduction of the triangle identities, proper exchange and projection comparisons; Levels, evaluation of the same operations.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-p1-etale-origin-comparisons",
+  "worker": "stage1",
+  "summary": "Q91 checked the current blueprint and wrote ten steps using existing nodes only: qcqs geometry, exact closed image, uniform lower bounds from the tower splitting, origin preservation, canonical projection transport by the ringed-topos coherence square, proper projection and exchange, and assembly of the specified maps. No new nodes or Mathlib leaves. No finite-Tor assertion is imported from the narrower compact-support tower theorem.",
+  "blueprint": "det-sp-tower-p1-adjunction: the diagonal/trace formulas in its statement, Reduction of the triangle identities (only the projection and exchange comparisons), and Levels. This item proves construction and comparison of maps, not the triangle identities.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-amb-p1-diagonal-cartier",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "sk-lem-sp-tower-levels",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic non-Cartesian ringed-topos square coherence; identifies the actual site-comparison projection maps without geometric restrictions."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite-objectwise",
+    "why": "Ordinary-etale proper projection for finite rings and arbitrary inputs; the tower compact-support node only supplies a narrower finite-Tor formula."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Ordinary-etale proper exchange for a torsion ring; applied only to the projective-line Cartesian square."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic geometric, derived ringed-topos, coefficient-line or etale/pro-etale comparison tool with the exact domain stated here; realizes the tower unit route rather than a different purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-amb-p1-diagonal-cartier",
+  "lem-exc-proetale-closed-exact",
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "sk-lem-sp-tower-levels",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-etale-proper-projection-formula-finite-objectwise",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-454083d61",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-454083d61 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged from the Q12 e152604f creation snapshot, 10 steps, no new nodes. I also read the statement of each of the 35 cited nodes, the blueprint p1 proof (Reduction, Levelwise check, Levels), and Stacks 0F0G (unbounded, torsion ring), 0DDE, 0E48 (non-cartesian ringed square) and the proetale closed-immersion exactness lemma. The report wrongly calls that lemma tag 09A9; the slip is only in the report.\n\nThe mathematics checks out:\n- Step 1: I recomputed the diagonal equations on the four charts (t-u, tv-1, su-1, s-v); the complement is quasi-compact.\n- Step 6: with theta = a^{-1}, the exchange Ex of the coherence node equals b_h exactly.\n- Step 7: the substitutions into 0F0G are correct and the b-arguments are bounded below.\n- Step 8: the Kun exchange is the same mate as E_L.\n- Step 10: tower-classes (3) and cartier-reduction use the same sign convention for delta.\n- Small cases hold (S empty, n=1, ramified E, non-quasi-compact S, infinite Tor dimension). The finite-Tor clause det-sp-tower-shriek-levels 2(a) was correctly avoided.\n\nThree faults, repaired in fixes/dag/nodes/sec-smooth-purity/lem-sp-tower-p1-etale-origin-comparisons.json:\n- C4, step 5: comparing nu^* of the etale twist with the pro-etale twist needed the root comparison under nu and monoidality of nu^*. The cited lem-asd-etale-finite-twist-pullback covers only scheme pullbacks. Added lem-amb-finite-root-site-comparison (unit sk-prop-an, on the route) and lem-sfb-ringed-derived-monoidal-comparisons.\n- C1, step 9: the pasted-square argument needs the composite-compatibility of the pullback comparisons a. Added lem-weil-pbc-comparison-pullback.\n- E5, step 10: the step never showed that the evaluated trace t_q is nu^* of the etale trace under b_q. Added the argument from the counit normalization of b_q, citing the canonical-mate node and the root-site comparison.\n\nproof_deps is now the union of uses. The new citation creates no cycle.\n\nBatch-5 flags, all accepted:\n- lem-etale-proper-projection-formula-finite-objectwise and lem-kun-proper-base-change-torsion-ring reach the generic lem-pod-lisse-module-sheaves-as-module-objects only through the proper-base-change chain. Finite proper projection and proper base change are not steps of the trace formula or of Poincare duality.\n- lem-sp-cartier-reduction-site-comparison reaches only the generic stalk-tensor lemma lem-pod-etale-stalk-tensor-scalar.\n\nNo duplicate found: the candidate tower projection nodes need uniform Tor or a base field. No SGA source is used. The declared tool_uses are generic tools and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerP1ComparisonsWithLine",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1EtaleOriginComparisonsWithLine",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.EtaleOriginComparisonsWithLine",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1EtaleOriginComparisonsWithLine"
+  ],
+  "file": "lean/Sheaf/Paper/TowerP1ComparisonsWithLine.lean",
+  "statement": "theorem towerP1EtaleOriginComparisonsWithLine (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤))) : ∀ p : Presentation l E S hS, ∃ d : Maps l E p, EtaleOriginComparisonsWithLine l E p d",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B): retain the entire recorded EtaleOriginComparisons interface, Maps, and level-normalized eta/epsilon. Expose the omitted membership of the shifted Tate line in C+, needed to instantiate the recorded exchange comparisons on that line. The line is degree zero shifted by 2, with the canonical finite etale root origins. The existence theorem retains forall Presentation, exists Maps and all old conclusions. No new assumption on schemes or inputs and no replacement of canonical arrows."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69ac3560d",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Lean exact: conjuncts 1-2 give eps_{FM}∘Fη_M = F(1⊗c1) and Gε_K∘η_{GK} = 1⊗c2 via scalarContraction (unitors); c_i = sourceUnitAt(α_i) ≫ p_i*δ ≫ t_i; conjuncts 3-6 give the expanded p1 word, the p2 word on GK and the first-arrow factors 1⊗Rp_i*δ with α_i source; they are consistent with 1-2 (outside projection cancels its inverse). No c_i=1 and no F⊣G. Maps has one data field, pinned by projectionQ_eq; h is the cited comparisons theorem's conclusion. t_i = q^*t_q∘exchangeSwap⁻¹ / exchange⁻¹ (base change along the cartesian square; TowerClasses has no P¹_P splitting) accepted: canonical, disclosed, matches the parent's step 2 and the sibling node. §1(B) dependency module TowerP1ComparisonsWithLine extends EtaleOriginComparisons by line_domain (A_P(1)[2] ∈ C⁺, implied by the node via G(A_S)); dependency node changes only in lean, with a note; statements verbatim; edge cases, docstrings, line lengths and helper-name duplicates checked; not recompiled per the instructions, no .lean changed. Sole finding H11: the delivered 'Second reading by Q13' is the author's self-check → fixes/lem-sp-tower-p1-triangle-factorization.report.md (worker report verbatim + reviewer reading). Advisories: A1 the kernel-scalar-normalization Lean must not make trace base change true by definition; A2 sourceUnitAt/exchangeSwap owned by uncited def-sp-p1-projective-coordinates, and the parent's defs are reachable only via the comparisons node; A3 the comparisons record now lists only the new declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T144215-L-1207370",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1EtaleOriginComparisonsWithLine"
+  ],
+  "sorry_after": []
+ }
+}

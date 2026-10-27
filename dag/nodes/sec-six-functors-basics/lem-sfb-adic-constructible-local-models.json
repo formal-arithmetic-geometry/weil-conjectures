@@ -17,26 +17,22 @@
  ],
  "proof": [
   {
-   "text": "For the finitely many nonzero residue cohomology sheaves intersect their constructible stratifications using actual scheme fibre products. Pull back the finite locally constant presentations to each common stratum. Every stratum is Noetherian by the immersion affine calculation and quasi-compactness of subspaces of Noetherian spaces.",
+   "text": "Intersect the constructible stratifications for the finitely many cohomology degrees in [a,b] by Finset induction. Use the actual refinement inverse-image theorem on both intersection projections. Outside the interval exact inverse image takes zero cohomology to zero. Each stratum is locally Noetherian by locally finite type immersion and is quasi-compact as a subspace of a Noetherian space.",
    "uses": [
     "lem-weil-pbc-constructible-stratification-intersection",
-    "lem-sfb-adic-finite-stratification-pullback",
-    "lem-sc-affine-noetherian-underlying-space",
     "lem-sfb-noetherian-space-compact-subsets"
    ],
    "elementary": false
   },
   {
-   "text": "Transport to the equivalent small sites. Restriction of completion units gives completeness on each stratum. Comparison pullback identifies its residue with the restricted etale complex; field-valued tensor gives finite Tor amplitude on that stratum.",
+   "text": "Apply the immersion lifting-input transport theorem on each stratum to obtain a complete small-site object, a bounded lisse etale residue with field tensor bounds, its actual reduction comparison and slice equivalences.",
    "uses": [
-    "lem-sfb-adic-stratum-completion-unit",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sfb-etale-field-tensor-bounds"
+    "lem-sfb-adic-immersion-lifting-input"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the existing lisse-residue perfect-lifting theorem on each Noetherian stratum, obtaining covering sieves and bounded finite-projective coefficient complexes. Transfer the sieve along the site equivalence. Compose the constant-coefficient and inverse-image comparisons to identify its isomorphism with sfbLocalRestriction of sfbCompletedModel. This gives exactly the asserted witnesses; empty schemes use the empty covering sieve.",
+   "text": "Apply the existing lisse-residue perfect-lifting theorem. Pull its covering sieve back along AsSmall.up using cocontinuity. For each cover member compose the supplied slice isomorphism, the equivalence applied to the lifting isomorphism, and the completed constant comparison. Retain its actual bounded finite-projective complex.",
    "uses": [
     "lem-sfb-adic-residue-lisse-perfect-lift"
    ],
@@ -44,19 +40,15 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-adic-finite-stratification-pullback",
+  "lem-sfb-adic-immersion-lifting-input",
   "lem-sfb-adic-residue-lisse-perfect-lift",
-  "lem-sfb-adic-stratum-completion-unit",
-  "lem-sfb-etale-field-tensor-bounds",
   "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-constructible-stratification-intersection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, forward implication, using Lemma 6.6.8; the proof records the exact coefficient and quotient-functor transports used in Lean."
+  "place": "Proposition 6.6.11 forward, using proved refinement and lisse-residue lifting; explicit restriction/site/coefficient normalization isolated as one strictly smaller intermediate statement."
  },
  "mathlib_searches": [
   {
@@ -131,13 +123,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-b5163",
-  "group": "U2",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261021T144006-L-34028",
+  "landing": "20261025T161944-L-160506",
   "kind": "interface",
-  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-normal-symmetric-cubical-extension",
+ "kind": "statement",
+ "title": "Symmetric cubical lines extend over a normal semiabelian base",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Here a commutative group scheme has addition, inverse and identity $e$ satisfying the commutative group identities, and separated means that its diagonal is a closed immersion. Suppose every geometric fibre is semiabelian: over an algebraically closed residue-field extension $k$, it is an extension, exact as fppf sheaves, $1\\to(\\mathbf G_{m,k})^r\\to G_k\\to A_k\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication, and $A_k$ is a proper smooth geometrically connected $k$-group scheme. Let $U\\subseteq S$ be a dense open subscheme [def-weil-open-immersion]. Restriction from cubical rigidified lines on $G$ to cubical rigidified lines on $G_U$ [def-sfb-cubical-rigidified-line] is fully faithful: for any two such lines on $G$, each cubical rigidification-preserving isomorphism between their restrictions extends uniquely to such an isomorphism on $G$. Moreover, if $(N,r,\\tau)$ is a cubical rigidified line on $G_U$ and its underlying invertible module is symmetric, meaning $[-1]^*N\\simeq N$ with tensor inverse image [def-pc-module-pullback], then it extends to a cubical rigidified line $(B,r_B,\\tau_B)$ on $G$, with a cubical rigidification-preserving isomorphism $B|_{G_U}\\simeq N$. No positivity hypothesis on $N$ is imposed, and no ampleness conclusion on $B$ is asserted.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II 3.2.1--3.2.3 (full faithfulness) and II 3.3 (symmetric essential image). Local original WANTED. Online cross-check: Lan, revised thesis, Proposition 3.3.2.2(1) and Theorem 3.3.2.3(2), printed p.70."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-pc-module-pullback",
+  "def-sfb-cubical-rigidified-line"
+ ],
+ "proof": [
+  {
+   "text": "First prove full faithfulness for rigidified lines. For two lines $L,M$ on $G$ and a rigidification-preserving isomorphism $a_U:L_U\\simeq M_U$, view $a_U$ as a nonzero rational section of $M\\otimes L^{-1}$. By [lem-sfb-normal-group-vertical-cartier-descent], $G$ is normal integral, $G_U$ is dense, and its divisor $D$ satisfies $D=p^*e^*D$. Along $e_U$ the section is the isomorphism determined by the two given rigidifications. This extends along $e$ as that same isomorphism, so $e^*D=0$. Thus $D=0$ and the rational section is an everywhere invertible regular section. It gives an extension $a:L\\simeq M$ preserving rigidifications; uniqueness follows because the rational section is determined on the dense open. By [lem-sfb-semiabelian-cubical-rigidification](b), every such isomorphism preserves the given cube sections. This proves the first clause. The argument applies after replacing $S$ by any nonempty open of it.",
+   "uses": [
+    "lem-sfb-normal-group-vertical-cartier-descent",
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.2.1--3.2.3; I 2.6 for preservation of cube sections."
+   }
+  },
+  {
+   "text": "For existence, apply [lem-sfb-rigidified-line-big-open-extension] to $(N,r)$, obtaining $V\\supseteq U$ and $(N_V,r_V)$ with $\\dim\\mathcal O_{S,s}\\geq2$ outside $V$. Give $N_V$ its unique cube section by [lem-sfb-semiabelian-cubical-rigidification](b); its identification over $U$ respects cube sections by the same node. Normalize the given underlying symmetry by multiplying it by the inverse of its value along $e_U$, so that it preserves $r$. It is then cubical by that node. Apply step 1 over $V$ to extend this isomorphism to $[-1]^*N_V\\simeq N_V$, preserving rigidification and cube. Normality, smoothness, finite presentation and semiabelian geometric fibres persist on these open restrictions.",
+   "uses": [
+    "lem-sfb-rigidified-line-big-open-extension",
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.2.2--3.2.3 and II 3.3.3, reduction to a complement of codimension at least two."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-symmetric-line-power-prolongation] and work on one nonempty member $W$ of its affine base covering. Replace $S,U,V,G$ by their restrictions to $W$ for steps 3--7. We have $d\\geq1$, a line $P$ on $G$, and an isomorphism $P_U\\simeq N^{\\otimes d}$. Put $Q=P^{\\otimes d}\\otimes p^*(e^*P)^{\\otimes(-d)}$. Tensor inverse, tensor product and pullback of lines are lines by [lem-weil-pbc-invertible-pullback-tensor]. The cancellation at $e$ canonically rigidifies $Q$, and the given isomorphism and $r$ identify $Q_U$ with $N^{\\otimes d^2}$ as rigidified lines. Give $Q$ its unique cube section by [lem-sfb-semiabelian-cubical-rigidification](b). By [lem-sfb-cubical-symmetric-multiplication-square], $[d]^*N_V\\simeq N_V^{\\otimes d^2}$ as cubical rigidified lines. Step 1 over $V$ extends the given isomorphism on $U$ to an isomorphism $b:Q|_{G_V}\\simeq[d]^*N_V$. It preserves rigidifications and cube sections.",
+   "uses": [
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-cubical-symmetric-multiplication-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3, power prolongation and the I 5.5 multiplication formula."
+   }
+  },
+  {
+   "text": "Put $q=[d]:G\\to G$. By [lem-sfb-semiabelian-multiplication-fppf], $q$ is an fpqc cover and its double and triple relation schemes $R_2,R_3$ are flat, of finite presentation over $S$ and locally Noetherian. On $R_2|_V$, use $b$ and the equality $q\\operatorname{pr}_1=q\\operatorname{pr}_2$ to define $\\alpha_V:\\operatorname{pr}_1^*Q\\simeq\\operatorname{pr}_2^*Q$: explicitly $\\alpha_V=(\\operatorname{pr}_2^*b)^{-1}\\operatorname{pr}_1^*b$, with the two pullbacks of $N_V$ canonically identified. Cancellation gives $\\alpha_{23,V}\\alpha_{12,V}=\\alpha_{13,V}$ on $R_3|_V$. We use the flat relation schemes themselves; their kernels need not be reduced, and the multiplication map need not be finite.",
+   "uses": [
+    "lem-sfb-semiabelian-multiplication-fppf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3, descent along multiplication; explicit descent isomorphism."
+   }
+  },
+  {
+   "text": "At a point $y$ of $R_2$ or $R_3$ lying above $s\\in S\\setminus V$, the local ring map $\\mathcal O_{S,s}\\to\\mathcal O_{R_a,y}$ is flat between Noetherian local rings by step 4. By [lem-weil-pbc-serre-criterion-normal] and the definition [def-weil-pbc-serre-conditions-rk-sk], $\\operatorname{depth}\\mathcal O_{S,s}\\geq2$. The formula [lem-weil-pbc-flat-local-depth-formula] gives $\\operatorname{depth}\\mathcal O_{R_a,y}\\geq2$. Any line at $y$ is a free module of rank one and has this same depth. Thus [lem-sbc-depth-two-hartogs-restriction] applies to every Hom line between the indicated pullbacks of $Q$ on $R_2$ and $R_3$. In particular their sections restrict bijectively to the corresponding restrictions over $V$. This is a direct application of the three depth statements, with no regularity, reducedness or invertibility-of-$d$ assumption on the relation schemes.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-normal",
+    "def-weil-pbc-serre-conditions-rk-sk",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Stacks algebra.tex Tag 031S (lemma-criterion-normal) and Tag 0337 (lemma-apply-grothendieck); divisors.tex Tag 0E9I (lemma-depth-2-hartog)."
+   }
+  },
+  {
+   "text": "Use the section bijections of step 5 on $R_2$ to extend both $\\alpha_V$ and its inverse. Their composites equal the identity because this is true over $V$ and restriction is injective for the endomorphism lines. The extension is therefore an isomorphism $\\alpha:\\operatorname{pr}_1^*Q\\simeq\\operatorname{pr}_2^*Q$. On $R_3$, the two sections $\\alpha_{23}\\alpha_{12}$ and $\\alpha_{13}$ agree over $V$, so the same injectivity proves their equality globally. Consequently $(Q,\\alpha)$ is an fpqc descent datum for $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3; extension of the descent datum by the Hartogs bijections established in step 5."
+   }
+  },
+  {
+   "text": "By [lem-pc-fpqc-descent](1),(3), this datum descends to an invertible module $B$ on the target $G$, with a compatible identification $c:q^*B\\simeq Q$. Over $V$, the map $b\\circ c$ is compatible with the canonical descent data on $q_V^*B_V$ and $q_V^*N_V$. The full faithfulness in that same node descends it to an isomorphism $B|_{G_V}\\simeq N_V$. Since $q\\circ e=e$, pulling $c$ back along the identity and using the rigidification of $Q$ gives $r_B:e^*B\\simeq\\mathcal O_S$; the isomorphism over $V$ respects it because $b$ does. Apply [lem-sfb-semiabelian-cubical-rigidification](b) to $(B,r_B)$. Its unique cube structure makes the isomorphism over $V$, and hence the prescribed one over $U$, cubical. This finishes the construction on $W$.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3, effective descent; Stacks Tag 023T (proposition-fpqc-descent-quasi-coherent); I 2.6."
+   }
+  },
+  {
+   "text": "Restore the covering $S=\\bigcup W_i$. Over $W_i\\cap W_j$, the two constructed cubical rigidified lines have the specified identification over the dense open $U\\cap W_i\\cap W_j$. Step 1 extends it uniquely. On triple overlaps these identifications satisfy the cocycle condition because they do so over $U$ and extension is unique. Apply [lem-pc-fpqc-descent](3) to this Zariski covering of $G$ and its compatible line-module isomorphisms, obtaining a global line $B$. Full faithfulness for module maps in the same node glues its rigidifications; [lem-sfb-semiabelian-cubical-rigidification](b) supplies the unique global cube structure and makes its identification with $N$ over $U$ cubical. Thus $B$ is the required extension. Every construction used symmetry but no positivity of $N$, so it yields exactly the stated existence conclusion.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3, Zariski assembly after the local descent construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-group-vertical-cartier-descent",
+  "lem-sfb-semiabelian-cubical-rigidification",
+  "lem-sfb-rigidified-line-big-open-extension",
+  "lem-sfb-symmetric-line-power-prolongation",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-cubical-symmetric-multiplication-square",
+  "lem-sfb-semiabelian-multiplication-fppf",
+  "lem-weil-pbc-serre-criterion-normal",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II 3.2 and II 3.3.3; reconstructed power-and-fpqc-descent argument. Original locally WANTED; statement cross-checked online against Lan revision, Proposition 3.3.2.2(1) and Theorem 3.3.2.3(2), printed p.194."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of cubical line bundles on a semiabelian scheme over a normal base to a dense open is fully faithful and symmetric cubical line bundles extend",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.LocallyConstant.fullyFaithfulFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → (LightCondMod.LocallyConstant.functor R).FullyFaithful\", \"doc\": \"The functor mapping $ R $-modules to light condensed $ R $-modules via locally constant functions is fully faithful. This follows from the adjunction between the locally constant module functor and th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).FullyFaithful\", \"doc\": \"The forgetful functor that maps sheaves of modules over the structure sheaf of a scheme $X$ to their underlying presheaves of modules is fully faithful. This means that for any two sheaves of modules \"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {D : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {K : CategoryTheory.GrothendieckTopology D} →\\n          {A : Type u_4} →\\n            [inst_2 : CategoryTheory.Category.{v_4, u_4} A] →\\n             \", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, there is a natural equivalence between the hom-set of natural transforma\"}\n  {\"name\": \"CondensedMod.LocallyConstant.fullyFaithfulFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → (CondensedMod.LocallyConstant.functor R).FullyFaithful\", \"doc\": \"The composition of the locally constant module functor (assigning to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions) and the underlying object functor is fully faithf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  X.restrictFunctor.op.comp ((CategoryTheory.Over.forget X).op.comp AlgebraicGeometry.Scheme.Γ) ≅ X.presheaf\", \"doc\": \"The composition of the opposite restriction functor from open subsets of a scheme $X$ to the over category $\\\\mathcal{T}/X$, followed by the opposite forgetful functor to topological spaces and the glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).Full\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $X$ to the category of presheaves of modules over $X$ is full. This means that every morphism between the underlying preshea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D} {A : Type u_4}\\n  [inst_2 : CategoryTheory.Category.{v_4, u_4} A] {G : CategoryTheory.Functor C D} [inst_3 : G.IsCoverDense K]\\n  \", \"doc\": \"For a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, and a natural transformation $ \\\\alpha : G^{\\\\text{op}} \\\\circ \\\\mathcal{F} \\\\R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Moret Bailly symmetric cubist line bundle extends over a normal scheme from a dense open subset",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (domain : X.Opens) → Dense ↑domain → (↑domain ⟶ Y) → X.PartialMap Y\", \"doc\": \"Given schemes $X$ and $Y$, an open subset $U$ of $X$ that is dense, and a morphism of schemes from $U$ to $Y$, this constructor produces a partial map from $X$ to $Y$ defined on the dense open subset \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": (toOpensFunctor X).IsCoverDense (Opens.grothendieckTopology X)\", \"doc\": \"For any scheme $X$, the canonical inclusion functor from the affine Zariski site of $X$ to the category of open subsets of $X$ is cover-dense with respect to the Grothendieck topology on the open subs\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U V : X.Opens} (hU : Dense (X := X) U) (hU' : U ≤ V) : IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|[Ss]ymmetric.*[Ee]xten|[Ee]xten.*[Ss]ymmetric",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Computability/TuringMachine/Tape.lean\", \"line\": \"78\", \"text\": \"/-- `BlankRel` is the symmetric closure of `BlankExtends`, turning it into an equivalence\"}\n  {\"file\": \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"line\": \"57\", \"text\": \"structure SymmetricRelation {R X : C} (p₁ p₂ : R ⟶ X) extends JointlyMono₂ p₁ p₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"line\": \"21\", \"text\": \"We make `BraidedCategory` another typeclass, but then have `SymmetricCategory` extend this.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"line\": \"368\", \"text\": \"class SymmetricCategory (C : Type u) [Category.{v} C] [MonoidalCategory.{v} C] extends\"}\n  {\"file\": \"Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean\", \"line\": \"53\", \"text\": \"    extends SymmetricCategory C where\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Defs.lean\", \"line\": \"169\", \"text\": \"It is a symmetric bilinear form and is nondegenerate if the extension is separable. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric cubical invertible sheaves on a semiabelian scheme over a normal base extend from a dense open",
+   "results": "{\"t\": \"2026-10-23T18:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"Symmetric cubical invertible sheaves on a semiabelian scheme over a normal base extend from a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"CategoryTheory.Sheaf.symmetricCategory\", \"CategoryTheory.Functor.IsCoverDense.sheafIso_inv_val\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\"], \"digest\": \"152d3e4a59d1ee18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names and types read; no cubical semiabelian extension statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|[Ss]ymmetric.*[Ll]ine|[Ll]ine.*[Ss]ymmetric",
+   "results": "{\"t\": \"2026-10-23T18:29:48Z\", \"tool\": \"grep\", \"query\": \"cubical|cubist|[Ss]ymmetric.*[Ll]ine|[Ll]ine.*[Ss]ymmetric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/DiscreteConvolution.lean\", \"Mathlib/Analysis/Matrix/Spectrum.lean\", \"Mathlib/Analysis/Matrix/Spectrum.lean\", \"Mathlib/Analysis/Matrix/Spectrum.lean\"], \"digest\": \"e29864131a16142b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names and types read; no cubical semiabelian extension statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubist line bundle extension theorem for semiabelian schemes over normal base",
+   "results": "{\"t\": \"2026-10-23T18:29:48Z\", \"tool\": \"leansearch\", \"query\": \"Cubist line bundle extension theorem for semiabelian schemes over normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffVectorBundle.of_le\", \"Trivialization.domExtend_source\", \"Trivialization.domExtend_baseSet\", \"Trivialization.codExtend_source\", \"Pretrivialization.codExtend\", \"Trivialization.codExtend'_baseSet\", \"LieAlgebra.Extension.IsExtension\", \"VectorBundle.recOn\"], \"digest\": \"759858059bfad1bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names and types read; no cubical semiabelian extension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T18:29:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Invertible\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names and types read; no cubical semiabelian extension statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-ample-power-extension",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity",
+   "via": [
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-symmetric-cubical-extension",
+  "worker": "stage1",
+  "summary": "Q14: checked no Lean attachment, retained the imported statement, separated the divisor, codimension-one, power, quadratic and multiplication inputs, and wrote the remaining assembly with explicit depth and descent checks. Five statement-only new nodes, all genuinely searched with two semantic phrasings. No ampleness or invertibility hypothesis introduced.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting normal-base semiabelian line-extension input on the existing alteration/Picard route. The ancestor helper reports None, so the imported null from.node and its via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor/pullback calculus for the corrected power line; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-normal",
+    "why": "Generic normal-ring depth tool for the multiplication relation schemes."
+   },
+   {
+    "node": "def-weil-pbc-serre-conditions-rk-sk",
+    "why": "Definition spelling out S2 in the depth check."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Generic depth tool, applied to flat local rings on the relation schemes."
+   },
+   {
+    "node": "lem-sbc-depth-two-hartogs-restriction",
+    "why": "Generic coherent-section extension across depth-two loci, needed even when the torsion kernel is nonreduced."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic effective descent of line modules and their morphisms, along multiplication and along an open cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-serre-criterion-normal",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-746b17b5f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-746b17b5f (reviewer sub-agent of L); spot-checked: I read the item and all five new nodes in full. Moret-Bailly is not in literature/ (WANTED, proof_origin agent is correct), so I checked the item against Lan's revised thesis, printed p.194: Prop 3.3.2.2(1), full faithfulness over a normal base, and Thm 3.3.2.3(2), symmetric underlying torsor lies in the essential image with no ampleness and no requirement that G_U be abelian. The 8 steps are MB II 3.3.3's actual argument. 1: the vertical-Cartier divisor D=p*e*D, with e*D=0 from the rigidifications, gives full faithfulness; cubes come from semiabelian-cubical-rigidification(b). 2: big-open extension plus the symmetry normalized at e. 3: Q=P^d⊗p*(e*P)^{-d}, the [d]*N=N^{d²} formula, and step 1 over V give b. 4: α_V=(pr2*b)^{-1}pr1*b on the flat relation schemes. 5: S2 from Serre's criterion, the flat local depth formula, and the Hartogs depth-two node. 6: the datum and its inverse extend elementarily. 7: fpqc descent and its full faithfulness descend along [d], r_B comes from q∘e=e, and (b) gives the cube. 8: Zariski gluing through step-1 uniqueness. I checked every hypothesis of the cited nodes (the depth formula needs flatness, Hartogs needs finite stalks of depth ≥2, the fpqc cover is [d] of finite presentation). The new nodes are all true and none is a duplicate. Vertical-Cartier: smooth over normal gives G normal integral, the prime divisors off G_U are p^{-1}(Z), and the orders compare at the DVR of each Z. Big-open: extend at each DVR point, spread out, glue by full faithfulness. Power-prolongation: the symmetry hypothesis is needed (the cone-over-E Poincaré counterexample rules out the non-symmetric case); it holds with d=2 via Δ*Λ(N)≅N² and biextension extension (MB II 3.6 / Lan 3.3.2.6), and it is strictly smaller than the item, whose real work is removing the power. Multiplication-square: MB I 5.5 over any base. Multiplication-fppf: fibrewise isogeny plus the fibrewise flatness criterion. None of them duplicates lem-sfb-smooth-integral-fibre-vertical-divisors, lem-sfb-regular-group-rigidified-line-extension, lem-sc-mult-n-pullback, lem-sfb-semiabelian-invertible-multiplication or lem-sc-mult-n-finite-flat. Edge cases checked: d=1, [p] on G_m in characteristic p (nonreduced kernel), U=S, a trait, non-ample lines. No SGA is cited. The off-unit tool_uses are generic and accepted. Advisory: whoever splits the power node later should use the biextension route and must not go through lem-sfb-symmetric-ample-power-extension, which now cites this item. No changes made."
+ }
+}

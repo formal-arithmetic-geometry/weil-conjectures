@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-canonical-sheaf-ext",
+ "kind": "statement",
+ "title": "Small Ext with canonical sheaf abelian structures",
+ "statement": "For every scheme W and commutative ring R in the sheaf universe, abelian sheaves and R-module-valued pro-etale sheaves on W have small Ext groups with the named canonical abelian structures of [def-sfb-diagonal-system-interface]. The existing smallness witnesses [def-sfb-geo-cartier-interface] apply because the named structures have the same operations. Record the results as proved theorems with those canonical structures in their types, so later proofs can share the checked coefficient types.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Canonical coefficient structures in the diagonal tower proof and the existing Cartier coefficient smallness witnesses."
+ },
+ "proof": [
+  {
+   "text": "Use the named canonical module-sheaf and abelian-sheaf structures of the diagonal interface; they have the same operations as the underlying sheaf abelian structures.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply geoCartierModuleExt and geoCartierIntegralExt respectively. Definitional equality of the canonical operations identifies their propositions with the required small-Ext propositions. These are proved theorem constants, not reducible aliases or additional category structures.",
+   "uses": [
+    "def-sfb-geo-cartier-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Canonical coefficient structures in the diagonal tower proof and the existing Cartier coefficient smallness witnesses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Module valued sheaves form an abelian category with small Ext groups and additive coefficient forgetting",
+   "results": "8 hits: SheafOfModules.instAbelian; Scheme.Modules.instAbelian; instAbelianCondensedMod; instAbelianLightCondMod; PresheafOfModules.instAbelian; CategoryTheory.Sheaf.H; instHasExtModuleCatOfSmall; CategoryTheory.Sheaf.instIsGrothendieckAbelian. These supply general abelianness and smallness context rather than the named interface transport.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the already proved Cartier witnesses and transport them to the named canonical structures."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasExt",
+   "results": "0 hits; unknown identifier 'HasExt'.",
+   "date": "2026-10-26",
+   "verdict": "Use the local project witnesses; no new smallness argument is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "cartierProModuleHasExt|diagonalModuleSheafAbelian|cartierForgetAdditive",
+   "results": "0 msearch hits. Direct source inspection supplies the old Cartier witnesses and the canonical diagonal abelian structures.",
+   "date": "2026-10-26",
+   "verdict": "The equality transport and reuse of additivity prove the required canonical witnesses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small Ext groups of sheaves of modules and abelian sheaves, with fixed abelian structures and finite coefficient objects",
+   "results": "8 hits: Ext, Ext.mk₀, Sheaf.cohomologyPresheafFunctor, hasExt_iff_small_ext, ShortComplex.ShortExact.extClass, ProjectiveResolution.extMk.congr_simp, Ext.instModule and Sheaf.H. The basic Ext type and smallness characterization are available; these do not replace the actual coefficient predicate types.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project small-Ext witnesses with their canonical abelian structures and preserve the literal function types of the predicates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Canonical coefficient structures in the diagonal tower proof and the existing Cartier coefficient smallness witnesses.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalSheafExt",
+  "file": "lean/Sheaf/Paper/CanonicalSheafExt.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummerModuleHasExt",
+  "statement": "theorem kummerModuleHasExt (R : Type (u + 1)) [CommRing R] (W : Scheme.{u}) :\n    HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} R))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.kummerModuleHasExt",
+   "AlgebraicGeometry.ProEtale.kummerAbHasExt"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

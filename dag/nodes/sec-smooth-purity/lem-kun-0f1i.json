@@ -181,7 +181,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
@@ -219,7 +230,11 @@
   "note": "Repair of immutable-head file-only compilation: use the published def-kun-torsion-invertible declaration AlgebraicGeometry.Etale.IsTorsionOfInvertibleOrder from Sheaf.AlgebraicGeometry.InvertibleTorsionOrders. The K-scheme argument is Over.mk of the recorded structure map. No dependency declaration is duplicated."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $K$ be a field and let $X$ be a scheme of finite type over\n$K$. For any commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&T\n\\end{array}\n$$\n\nof schemes over $K$ with $X'=X\\times_{\\Spec(K)}S'$ and\n$Y=X'\\times_{S'}T$ and with $g:T\\to S'$ quasi-compact and quasi-separated, and for every abelian sheaf $F$ on $T_{\\Et}$ whose\nstalks are torsion of orders invertible in $K$, the exchange\nmorphism\n\n$$\n(f')^{-1}Rg_*F\\longrightarrow Rh_*e^{-1}F\n$$\n\nis an isomorphism.",
   "proof": [
    {
@@ -261,9 +276,9 @@
     "elementary": false
    },
    {
-    "text": "*Conclusion by contraposition.* Suppose for contradiction\nthat the derived exchange morphism is not an isomorphism for some\n$F$ as above. By the spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] (and\n[lem-kun-bc-base-change] together with\n[lem-kun-bc-map-on-cohomology], which identify the induced maps on\n$\\mathcal H^q$ with the maps of\n[def-kun-bc-property]), there is a minimal $q\\ge1$ such that\n$BC(f',n,q)$ fails while $BC(f',n,q-1)$ holds. At this point we\nmay apply [lem-kun-0f1d] to see that it suffices to prove:\ngiven a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&\\Spec(L)\n\\end{array}\n$$\n\nwith both squares cartesian, where $S'$ is affine, integral, and\nnormal with algebraically closed function field $L$, then\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$ and\n$d\\mid n$. (Indeed, if some $BC(f',n,q)$ failed,\n[lem-kun-0f1d] would produce such a diagram with\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$; note that\n$X''=X'\\times_{S'}S''=X\\times_KS''$ since\n$X'=X\\times_KS'$.) But this vanishing is exactly\n[lem-kun-0f1i-normal], which is already proved. This\ncontradiction shows that the derived exchange morphism is an\nisomorphism for every $F$, as desired.",
+    "text": "*Conclusion by contraposition.* Suppose for contradiction\nthat the derived exchange morphism is not an isomorphism for some\n$F$ as above. By the spectral sequences of\n[thm-sp-truncation-e2] (and\n[lem-kun-bc-base-change] together with\n[lem-kun-bc-map-on-cohomology], which identify the induced maps on\n$\\mathcal H^q$ with the maps of\n[def-kun-bc-property]), there is a minimal $q\\ge1$ such that\n$BC(f',n,q)$ fails while $BC(f',n,q-1)$ holds. At this point we\nmay apply [lem-kun-0f1d] to see that it suffices to prove:\ngiven a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\longleftarrow&X'&\\longleftarrow&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle h}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\longleftarrow&\\Spec(L)\n\\end{array}\n$$\n\nwith both squares cartesian, where $S'$ is affine, integral, and\nnormal with algebraically closed function field $L$, then\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$ and\n$d\\mid n$. (Indeed, if some $BC(f',n,q)$ failed,\n[lem-kun-0f1d] would produce such a diagram with\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\\ne0$; note that\n$X''=X'\\times_{S'}S''=X\\times_KS''$ since\n$X'=X\\times_KS'$.) But this vanishing is exactly\n[lem-kun-0f1i-normal], which is already proved. This\ncontradiction shows that the derived exchange morphism is an\nisomorphism for every $F$, as desired.",
     "uses": [
-     "def-weil-pbc-hypercohomology-filtrations",
+     "thm-sp-truncation-e2",
      "lem-kun-bc-base-change",
      "lem-kun-bc-map-on-cohomology",
      "def-kun-bc-property",
@@ -273,7 +288,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
   "date": "2026-10-20",

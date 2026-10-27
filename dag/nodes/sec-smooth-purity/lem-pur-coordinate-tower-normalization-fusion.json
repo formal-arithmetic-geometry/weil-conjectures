@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-coordinate-tower-normalization-fusion",
+ "kind": "statement",
+ "title": "Local successor contraction for the fixed ordered comparisons",
+ "statement": "Fix $P,n,B$ as in [def-pur-coordinate-tower-normalization-data], and $r\\geq0$. Assume the actual affine-line comparisons are invertible and natural on finite-Tor etale-origin inputs through stage $r$. Write $b_j:Rz_j^!W_j\\to A_B$ for the actual ordered normalization [def-pur-affine-space-comparison], $v_r:W_{r+1}\\to Rq_r^!W_r$ for its ordered line input, $d_r^{-1}$ for the fixed closed composition arrow, and $e_{q_r}$ for the section-projection contraction. Then the equality of actual morphisms from $Rz_r^!Rs_r^!W_{r+1}$ to $A_B$ is $$b_{r+1}d_r^{-1}=b_r\\,Rz_r^!(e_{q_r}Rs_r^!(v_r)).$$ This is independent of every supplied orientation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "stmt_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "def-pur-affine-space-comparison",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "expand normalization at the positive stage and the four-arrow recursion\nfor gamma. Naturality of the affine-line comparison moves gamma_r across the\nline comparison, with W_r and the recorded stageEtale antecedent as its two\nfinite-Tor inputs. The stepSource factors cancel the targetSourceIso factors.\nNaturality moves the closed inverse compositor across the resulting map.\nApply associativity of originComposition to z_r,s_r,q_r,p_r, use s_r q_r=id\nand z_r p_r=id, and conjugate the equality through the pasted adjunctions.\nThis identifies contracting the outer composite with first contracting s_r q_r\nand then z_r p_r. Naturality of the first contraction at gamma_r gives exactly\nthe displayed formula. The zero-stage normalizationRaw and identityCompositeMap\nsupply the same identity-unit factors, so r=0 is included. No orientation, its\ninvertibility, induction hypothesis, or terminal normalization is assumed.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "def-pur-affine-space-comparison",
+    "thm-sf-comp-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "def-pur-affine-space-comparison",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent composition comparisons of adjoint functors imply that two contractions of a section projection tower agree",
+   "results": "CategoryTheory.mateEquiv_square, mateEquiv, Adjunction.comp; generic pasting.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and associativity of adjunction mates give equality of zero section normalization contractions in an affine coordinate tower",
+   "results": "Unrelated scheme normalization lemmas; no match.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|comp_counit_app|mateEquiv_hcomp",
+   "results": "Generic mate-pasting and composite-counit formulas; no tower contraction.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateTowerNormalizationInduction",
+  "group": "K6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8.",
+   "via": [
+    "lem-pur-coordinate-tower-normalization-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateTowerNormalizationFusion",
+  "file": "lean/Sheaf/Paper/CoordinateTowerNormalizationFusion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateTowerNormalization.normalization_fusion",
+  "statement": "theorem normalization_fusion\n    (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})\n    (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB]\n    (r : ℕ) (hline : LineLaw P n B aB (r + 1)) :\n    closedCompositionInverse P n B aB r ≫ normalization P n B aB (r + 1) =\n      (rightDerivedUpperShriek (ModuleCat.{u + 1} (setting P n).Coefficient)\n        (zero B r)).map\n          ((rightDerivedUpperShriek (ModuleCat.{u + 1} (setting P n).Coefficient)\n            (lastSection B r)).map (targetLineGamma P n B aB r) ≫\n              lineCollapse P n B aB r) ≫ normalization P n B aB r",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/node files vs reviewed head 728195 (byte-identical) and clone 509a6c5b (item untouched since af5def4); Data module vs published item (verbatim move); item theorem signature (identical); importer CoordinateSectionArrows compiled against published and against the delivery (same 4 pre-existing errors)"
+ }
+}

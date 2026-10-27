@@ -17,26 +17,12 @@
  ],
  "proof": [
   {
-   "text": "Fix one original quasi-compact open $U_0$ containing $E$. Any two quasi-compact opens $P,Q$ of $Y$ have quasi-compact intersection: $P\\cup Q$ is quasi-compact, hence quasi-affine by hypothesis; its canonical open immersion into an affine scheme is supplied by [lem-trf-quasi-affine-canonical-affine-embedding]. The images of $P,Q$ are quasi-compact opens of that affine scheme, so their intersection is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Replace the given family by its finite intersections that include $U_0$, ordered by reverse inclusion, removing repetitions. This is a small nonempty directed poset, with intersection $E$; denote its opens by $U_i$. Each $U_i$ is quasi-affine, hence qcqs by the first cited node, so its space is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Inclusions $U_k\\subseteq U_i$ are spectral maps: the inverse image of a quasi-compact open $Q\\subseteq U_i$ is $Q\\cap U_k$, which is quasi-compact by the same intersection argument. Finally $E=\\varprojlim_i|U_i|$ in topological spaces: a compatible tuple consists of the same point in every open, and the subspace topology is already induced from $U_0$; this checks the universal property directly.",
+   "text": "For quasi-compact opens P,Q, their union is quasi-affine. Its canonical affine open embedding [lem-trf-quasi-affine-canonical-affine-embedding] reduces compactness of P intersection Q to [lem-weil-pbc-affine-scheme-qcqs]. Thus [lem-weil-pbc-quasi-separated-affine-cover-criterion] makes Y quasi-separated. Index ALL quasi-compact open neighborhoods of E, ordered by reverse inclusion. This is a Type u family even when the original family has a larger index universe. It is nonempty, directed by intersection, and its intersection is E because it includes the original opens. Apply [lem-a1-sections-intersection-structure-colimit], reindex its distinct-open diagram, and use each chart top-section isomorphism to identify its cocone with global-section pullback along E to the chart.",
    "uses": [
     "lem-trf-quasi-affine-canonical-affine-embedding",
     "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-scheme-spectral"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Tag 0API, lemma-sits-in-functions, proof"
-   }
-  },
-  {
-   "text": "Put $A_i=\\Gamma(U_i,\\mathcal O_{U_i})$ with the restriction maps. Apply [lem-weil-pbc-spectral-limit-pullback-sections] to the spectral system from step 1, to the sheaf of sets underlying $\\mathcal O_{U_0}$, and to the quasi-compact open $U_0$ of itself. Its hypotheses are precisely spectrality of the stages and transitions and the topological limit already checked. Open restriction gives $\\mathcal O_{U_i}$; composition of inverse images is the canonical one in [lem-weil-pbc-sets-inverse-image-composition]. The ring inverse-image sheaf has this same underlying sheaf of sets: the presheaf inverse image is the neighbourhood colimit, the filtered neighbourhood colimit has exactly the same representatives and eventual-equality relation as its underlying set colimit by [lem-pc-filtered-colimit-commrings-elementwise], and its ring sheafification has the underlying set sheafification by [def-weil-pbc-topological-inverse-image] and [lem-weil-pbc-ring-sheafification-space-underlying-abelian]. We obtain that each element of $C$ comes from some $A_i$, and two representatives become equal after restriction to some common later $U_k$. Consequently $C=\\varinjlim_i A_i$ as rings: a compatible family of ring homomorphisms out of the $A_i$ sends a represented section to its represented image, independently of the representative, and addition and multiplication can both be checked at a common stage.",
-   "uses": [
-    "lem-weil-pbc-spectral-limit-pullback-sections",
-    "lem-weil-pbc-sets-inverse-image-composition",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-a1-sections-intersection-structure-colimit"
    ],
    "elementary": false,
    "source": {
@@ -45,10 +31,9 @@
    }
   },
   {
-   "text": "For the inclusion $a:E\\hookrightarrow Y$, [lem-weil-pbc-topological-inverse-image-stalk] identifies $(a^{-1}\\mathcal O_Y)_e$ with $\\mathcal O_{Y,e}$. These rings are local, so the restricted ringed space is locally ringed by [def-weil-locally-ringed-space-morphism]. Apply [lem-a1-locally-ringed-space-affine-adjunction] to $\\mathrm{id}_C$ to obtain the unique $j_E$. Applied to the restriction $E\\hookrightarrow U_i$, naturality of that bijection gives $p_i\\circ j_E=j_i|_E$, where $p_i=\\operatorname{Spec}(A_i\\to C)$ and $j_i:U_i\\to\\operatorname{Spec}A_i$ is canonical. The same bijection shows that $j_E|_L$ corresponds to $C\\to\\Gamma(L,\\mathcal O_Y)$ for each open $L\\subseteq E$.",
+   "text": "By [lem-weil-pbc-topological-inverse-image-stalk], the restricted sheaf has local stalks $\\mathcal O_{Y,e}$. The affine adjunction [lem-a1-locally-ringed-space-affine-adjunction] gives the unique normalized $j_E$. Its naturality gives $p_i j_E=j_i|_E$ and the claimed restriction formula on every ambient open $L\\subseteq E$. Here $j_i$ is the canonical map of $U_i$ and $p_i=\\operatorname{Spec}(A_i\\to C)$.",
    "uses": [
     "lem-weil-pbc-topological-inverse-image-stalk",
-    "def-weil-locally-ringed-space-morphism",
     "lem-a1-locally-ringed-space-affine-adjunction"
    ],
    "elementary": false,
@@ -58,10 +43,9 @@
    }
   },
   {
-   "text": "By [lem-trf-quasi-affine-canonical-affine-embedding], each $j_i$ is an open immersion with quasi-compact image $Q_i$. By [lem-a1-filtered-spectrum-topological-limit] and step 2, $\\operatorname{Spec}C$ is the topological limit of the $\\operatorname{Spec}A_i$. Set $F=\\bigcap_i p_i^{-1}(Q_i)$. A point of $F$ gives compatible points in the $Q_i$, hence unique compatible points in the $U_i$, and thus a unique point of $E$ by step 1. Conversely every point of $E$ gives such a tuple. The equality $p_i j_E=j_i|_E$ identifies this bijection with $j_E:E\\to F$. It is a homeomorphism: on both sides the topology is the coarsest topology induced by the maps to $U_i\\cong Q_i$ (subspaces of the coordinate spectra). Each $p_i^{-1}(Q_i)$ is quasi-compact open by the final assertion of the topological-limit node. Therefore $F$ has the required form.",
+   "text": "Apply [lem-a1-quasi-affine-chart-limit-topology] to this directed family and colimit. The displayed compatibility identifies its unique continuous map with $j_E$, hence $j_E:E\\to F=\\bigcap_i p_i^{-1}(j_i(U_i))$ is a homeomorphism and the intersected opens are quasi-compact.",
    "uses": [
-    "lem-trf-quasi-affine-canonical-affine-embedding",
-    "lem-a1-filtered-spectrum-topological-limit"
+    "lem-a1-quasi-affine-chart-limit-topology"
    ],
    "elementary": false,
    "source": {
@@ -70,24 +54,12 @@
    }
   },
   {
-   "text": "Fix $e\\in E$ and put $\\mathfrak q=j_E(e)$ and $\\mathfrak p_i=j_i(e)$. By [lem-weil-pbc-spec-domain-stalks-function-field](1) and the open immersion $j_i$ from [lem-trf-quasi-affine-canonical-affine-embedding], the germ map identifies $(A_i)_{\\mathfrak p_i}$ with $\\mathcal O_{Y,e}$. The stalk map of $j_E$ is a homomorphism $C_{\\mathfrak q}\\to\\mathcal O_{Y,e}$ compatible with these maps, by the identity on sections in step 3. This map is surjective because already $(A_0)_{\\mathfrak p_0}\\to\\mathcal O_{Y,e}$ is surjective. It is injective as follows. Represent a fraction in $C_{\\mathfrak q}$ by $a/b$, $b\\notin\\mathfrak q$; step 2 puts both $a$ and $b$ in a common $A_i$. If its germ is zero, the germ of $a$ is zero, so $a/1=0$ in $(A_i)_{\\mathfrak p_i}$. The fraction equality of [def-weil-pbc-localization-at-prime] supplies $t\\in A_i\\setminus\\mathfrak p_i$ with $ta=0$. Since $p_i(\\mathfrak q)=\\mathfrak p_i$, the image of $t$ is outside $\\mathfrak q$, and hence $a/b=0$ in $C_{\\mathfrak q}$. The stalk map is therefore an isomorphism.",
+   "text": "For $e\\in E$ and $\\mathfrak p_i=j_i(e)$, the open immersion $j_i$ [lem-trf-quasi-affine-canonical-affine-embedding] and the spectrum stalk formula [lem-weil-pbc-spec-domain-stalks-function-field](1) identify $(A_i)_{\\mathfrak p_i}$ with $\\mathcal O_{Y,e}=\\mathcal O_{E,e}$. These are the germ maps by step 2 and the inverse-image stalk identification. Apply [lem-a1-affinization-localization-stalk-criterion] to $Z=E$: it identifies $j_E$ with an isomorphism onto the inverse-image ringed subspace on $F$.",
    "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
     "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-trf-quasi-affine-canonical-affine-embedding",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Tag 0API, lemma-sits-in-functions, proof"
-   }
-  },
-  {
-   "text": "Use the homeomorphism of step 4 to regard $j_E$ as a morphism from $E$ to the restricted ringed space $(F,\\mathcal O_{\\operatorname{Spec}C}|_F)$. By [lem-weil-pbc-topological-inverse-image-stalk], its map of structure sheaves has at $e$ exactly the stalk map computed in step 5. It is an isomorphism by [lem-weil-pbc-sets-sheaf-iso-on-stalks] on the underlying set sheaves: their stalk elements and equality are the same germs as in the ring stalks by [lem-pc-filtered-colimit-commrings-elementwise] applied to the filtered neighbourhood systems. Its inverse is a morphism of rings sectionwise, since the inverse of a bijective ring homomorphism preserves the ring operations. Thus this is an isomorphism of locally ringed spaces, not merely a homeomorphism of their underlying spaces.",
-   "uses": [
     "lem-weil-pbc-topological-inverse-image-stalk",
-    "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-a1-affinization-localization-stalk-criterion"
    ],
    "elementary": false,
    "source": {
@@ -96,10 +68,9 @@
    }
   },
   {
-   "text": "Let $W\\subseteq Y$ be open and contained in $E$; it need not be quasi-compact. Fix a stage $i$. For every $k\\geq i$, apply [lem-a1-quasi-affine-open-affinization-square] to $U_k\\subseteq U_i$ and restrict the cartesian square over the open $W\\subseteq U_k$. It says that the inverse image of $j_i(W)$ in $\\operatorname{Spec}A_k$ is exactly $j_k(W)$, mapping isomorphically to $W$. By [lem-a1-filtered-spectrum-topological-limit], a point $z\\in\\operatorname{Spec}C$ over $j_i(W)$ has at every $k\\ge i$ a unique coordinate $j_k(w)$, with the same $w\\in W$ determined by its $i$th coordinate. Its remaining coordinates are determined by any common upper bound with $i$. Thus $z=j_E(w)$; conversely $j_E(w)$ lies over $j_i(W)$. Hence $j_E(W)=p_i^{-1}(j_i(W))$, which is open in $\\operatorname{Spec}C$. Step 6 identifies the restricted sheaves, so [def-weil-open-immersion] makes $j_E|_W$ an open immersion.",
+   "text": "For an ambient open W contained in E, lift its inclusion to the locally ringed subspace using the inverse-image adjunction. The chart-limit lemma [lem-a1-quasi-affine-chart-limit-topology] says that j_E(W) is open. The lift is an embedding, and its stalk maps are isomorphisms because both ambient inclusions have that property. Together with the stalk isomorphisms of j_E, [def-weil-open-immersion] gives the required open immersion. Naturality of the affine adjunction gives its stated restriction formula.",
    "uses": [
-    "lem-a1-quasi-affine-open-affinization-square",
-    "lem-a1-filtered-spectrum-topological-limit",
+    "lem-a1-quasi-affine-chart-limit-topology",
     "def-weil-open-immersion"
    ],
    "elementary": false,
@@ -123,26 +94,19 @@
  "proof_deps": [
   "lem-trf-quasi-affine-canonical-affine-embedding",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-limit-pullback-sections",
-  "lem-weil-pbc-sets-inverse-image-composition",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-a1-sections-intersection-structure-colimit",
   "lem-weil-pbc-topological-inverse-image-stalk",
-  "def-weil-locally-ringed-space-morphism",
   "lem-a1-locally-ringed-space-affine-adjunction",
-  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-a1-quasi-affine-chart-limit-topology",
   "lem-weil-pbc-spec-domain-stalks-function-field",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-  "lem-a1-quasi-affine-open-affinization-square",
+  "lem-a1-affinization-localization-stalk-criterion",
   "def-weil-open-immersion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-groupoids.tex",
-  "place": "Tag 0API, lemma-sits-in-functions, full proof including final assertion; preceding equation-sections-of-intersection via Sheaves Tag 0A32"
+  "place": "Tag 0API, lemma-sits-in-functions, full proof including final assertion; preceding equation-sections-of-intersection via Sheaves Tag 0A32; Lean assembly by C9 uses all compact open neighborhoods of E to avoid resizing the original index universe"
  },
  "mathlib_searches": [
   {
@@ -243,68 +207,32 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-intersection-canonical-affine-embedding",
   "worker": "stage1",
-  "summary": "Expanded Tag 0API into eight proof steps: spectral restriction colimit, canonical LRS adjunction, intersection image, explicit local-fraction injectivity/surjectivity, sheaf comparison, arbitrary-open image via the correct 0ARY square, and naturality. Reused existing spectral and affine-spectrum nodes. Three new generic supporting nodes, one a Mathlib leaf. Statement unchanged in meaning; added two definition citations only.",
+  "summary": "Repair of the 7413-character re-split return: two independent statement-only nodes carry chart-limit topology/open images and filtered-localization stalk/sheaf comparison. Reused the existing complete intersection-sections colimit node rather than duplicating it. Kept the statement and every original argument; report maps all eight old steps and preserves their text. Parent is a short assembly.",
   "blueprint": "Realizes the Gabber fpqc-descent input of the existing from.place ancestry below lem-a1-affine-hc0: canonical embedding of an invariant intersection and open image of W, as used in Tag 0APK. No change to the Rankin–Selberg unit route.",
   "tool_uses": [
    {
-    "node": "lem-trf-quasi-affine-canonical-affine-embedding",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-affine-scheme-qcqs",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-scheme-spectral",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-spectral-limit-pullback-sections",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-sets-inverse-image-composition",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-topological-inverse-image-stalk",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-    "why": "Generic sheaf, spectral-space, quasi-affine or commutative-algebra tool used in the specified Tag 0API infrastructure argument; this unit contains no replacement statement."
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic scheme quasi-separatedness criterion applied to the explicitly proved quasi-compact intersection property; it does not replace the unit route."
    }
   ]
  },
  "tool_uses": [
   "lem-trf-quasi-affine-canonical-affine-embedding",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-limit-pullback-sections",
-  "lem-weil-pbc-sets-inverse-image-composition",
-  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
   "lem-weil-pbc-topological-inverse-image-stalk",
   "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NR-fe2aea3e5",
-  "group": "NR",
+  "reviewer": "NT-cc-Q52-1ed27366d",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-fe2aea3e5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0API (more-groupoids.tex, lemma-sits-in-functions), including the paragraph before it with equation-sections-of-intersection. I also read 0ARY (properties.tex), 0CUE/0CUF (limits.tex), 01I1, and every cited node's statement. Batch-5 flag: lem-trf-quasi-affine-canonical-affine-embedding, cited in steps 1 and 4, is genuinely outside both assumptions. It is the generic quasi-affine fact of Stacks 01P9 (quasi-compact, separated, open immersion into Spec Γ). It is a Mathlib leaf with empty proof_deps, and I checked the match at QuasiAffine.lean lines 34, 41, 46 and 54. Neither the trace formula nor Poincaré duality states it, and its closure reaches no proof node of either. It is a tool, not a step of the trace-formula proof. Steps: (1) the qc intersection property is proved from ind-quasi-affineness, not from an assumed quasi-separatedness; the system is directed and spectral, and E is its topological limit. (2) the spectral pullback-sections node applies with all hypotheses checked; the ring and set colimit and sheafification are matched through the elementwise and underlying-set nodes. (3) the LRS adjunction is needed because E may not be a scheme; naturality gives p_i∘j_E = j_i|_E. (4) I checked the bijection E→F by hand, the topologies match, and p_i^{-1}(Q_i) is quasi-compact. (5) the stalk isomorphism uses Spec-stalks clause (1) without the domain hypothesis; the injectivity argument with t∉p_i is correct. (6) the stalk criterion is applied to the set sheaves. (7) 0ARY is applied to U_k⊆U_i; I verified j_E(W)=p_i^{-1}(j_i(W)) coordinatewise, including indices not ≥ i, so it holds for W that is not quasi-compact. (8) naturality is elementary. New nodes: the LRS adjunction is an exact Mathlib leaf (GammaSpecAdjunction.lean locallyRingedSpaceAdjunction, lines 332-342, homEquiv at 370-380). The 0ARY square is correct; I tested it on D(x)⊂A², A² minus the origin in A², U=V and U=∅. Mathlib's isPullback_toSpecΓ_toSpecΓ needs an affine morphism, so it is correctly not used as a leaf. The spectrum-limit node with its extra quasi-compactness clause is correct; I tested a constant system and a zero colimit. I found no duplicates by grepping tags, labels and concepts across dag/nodes, and no restated clauses or cycles. The nine declared tool_uses are generic infrastructure and I accept them. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-1ed27366d (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (repair note released 2026-10-22, 8 steps, 7413 chars). The item is not in route-pivot-dropped and live still has the 8-step item, so the delivery is not superseded. Statement, stmt_deps, lean and tool_uses are unchanged from live; the parent proof is a 6-step assembly of 2692 chars. Old-step mapping: (a) old 1–2 → existing lem-a1-sections-intersection-structure-colimit (same unit, own 8-step proof, no cycle). This is dedup, not shortening. Parent step 1 meets its hypotheses: Y quasi-separated via the qc-intersection argument (trf canonical embedding + affine qcqs) and quasi-separated-affine-cover-criterion(2); finite intersections with U_0 form a nonempty directed qc family. (b) Old 3 → step 2, same content. (c) Old 4+7 → new lem-a1-quasi-affine-chart-limit-topology (1305 chars). (d) Old 5+6 → new lem-a1-affinization-localization-stalk-criterion (1650 chars). (e) Old 8 → step 6, verbatim. The two new nodes have comparable workloads (1744 vs 1827 old chars), are independent and restate no clause of the item. Proved both by hand against Stacks 0API (more-groupoids.tex lemma-sits-in-functions, incl. the equation-sections-of-intersection paragraph and the W paragraph), 0ARY square node and filtered-spectrum-limit node. Chart node: t is unique via compatible primes; F-bijection via injectivity of j_i and common upper bounds; t(W)=p_i^{-1}(j_i(W)) for any open W. Criterion: surjective from one stage; injective via lifting a,b to a common stage and t'a'=0; no domain or injective-transition assumption; sheaf iso on stalks. Edge cases tested: E or Z empty, constant system, generic point of A^1, punctured A^2 (non-affine inclusion). Form B1–B9 OK: statement-only, single TeX escaping, all cited ids exist and none merged, 4–6 logged searches of all three kinds, blueprint from/via correct, created.item correct. rg -L duplicate search found no duplicate. Accepted tool use: lem-weil-pbc-quasi-separated-affine-cover-criterion (Mathlib leaf, generic). Note: the snapshot's tools/review_split.py does not follow the chapter symlinks and reports every id missing; citations were checked by hand. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -327,5 +255,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T123412-L-1183635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

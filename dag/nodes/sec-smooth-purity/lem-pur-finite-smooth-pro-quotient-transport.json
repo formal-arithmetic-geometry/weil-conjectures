@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-finite-smooth-pro-quotient-transport",
+ "kind": "statement",
+ "title": "Site transport of ordinary finite smooth quotient cocycles",
+ "statement": "Let $\\ell$ be prime and $f:X\\to Y$ compactifiable, separated and quasi-compact, smooth of relative dimension $d$ and locally of finite type between Noetherian schemes, with $\\ell$ invertible on $Y$. Use the actual maps and intrinsic Ctf domain of [def-pur-finite-smooth-canonical-maps] and [def-pur-finite-smooth-coefficient-arrows], and a normalized root-line comparison for every positive quotient. Assume the ordinary compact-support, twist, pullback, purity-source and exceptional-mate quotient cocycles (the last on bounded constructible finite-Tor inputs). Then the transported pro-etale twist, pullback, compact-support, exceptional and purity-source maps satisfy their five quotient cocycles, with the actual pro-etale scalar associators, on precisely their specified intrinsic Ctf domains. The ordinary hypotheses concern only ordinary maps; no pro-etale cocycle is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (2), scalar mate pasting, and sk-thm-purity-transport Step 1, transport through finite coefficient site comparison."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing comparisonScalarComp equation for the actual quotient ring maps and cancel its inverse site comparisons. This gives siteScalarComp with exactly the displayed ordinary and pro-etale scalar associators, including repeated quotient indices. Transpose the definition of originReductionMap through the site-comparison adjunction. Counit naturality, its defining transpose equation, and comparisonScalarComp prove originReductionComp.",
+   "uses": [
+    "lem-weil-pbc-normalized-origin-comparison-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the categorical originTransport_cocycle calculation: expand the transported arrows, use naturality of the middle site comparison and ordinary coefficient arrow, substitute the origin associativity equation and the supplied ordinary cocycle, then apply siteScalarComp. The conjugateCocycle calculation transports this result to the actual pro-etale functors by cancelling the middle endpoint comparison and using naturality at the source scalar associator. For twist maps only siteScalarComp and the supplied ordinary twist equation are needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For exceptional maps, apply the categorical calculation directly to rightDerivedUpperShriek and its ordinary coefficient mate. Naturality is the naturality of the specified mate transformation. The ordinary input origin belongs to bounded constructible finite-Tor by actualOriginCtf, which supplies the hypothesis of hexception. For pullback and purity-source maps, use the actual pullbackFromOrigin and sourceFromOrigin endpoints. Their inverse origin counits cancel on scalar-extended intrinsic Ctf inputs by quotientIntrinsicCtf followed by intrinsicOriginCounit, and their naturality follows from sitePullbackIso, sourceNatIso, and the actual comparison counit. Apply hpull and hsource, respectively, with the latter domain supplied by actualOriginCtf.",
+   "uses": [
+    "lem-pur-exceptional-coefficient-comparison",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-quotient-intrinsic-ctf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define compactFromOrigin by the actual compactSiteInverse followed by compact support of the origin counit, and compactToOrigin by compact support of originInverse followed by compactSiteMap. The intrinsic origin is bounded below, so these endpoints cancel and are natural on Ctf. Naturality of compactSiteInverse and the defining transpose identity for originReductionMap rewrite the specified proCompactCoefficientMap as their conjugate of transportedCoefficient. QuotientIntrinsicCtf supplies the intermediate, successive, and direct scalar-extended Ctf domains. Apply originTransport_cocycle to the supplied ordinary compact-support cocycle, then conjugateCocycle. Assemble the five equations.",
+   "uses": [
+    "lem-pur-finite-pro-coefficient-counit-transport",
+    "lem-pur-quotient-intrinsic-ctf",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-exceptional-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normalized-origin-comparison-coherence",
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-finite-smooth-level-of-orientation",
+  "lem-pur-finite-pro-coefficient-counit-transport",
+  "lem-pur-quotient-intrinsic-ctf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (2), scalar mate pasting, and sk-thm-purity-transport Step 1, transport through finite coefficient site comparison.",
+  "note": "J1: direct categorical transport proof using the already published comparison coherence and intrinsic-domain lemmas; no new sorry statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition coherence of derived extension of scalars with pullback tensor products and adjunction mates",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, Bicategory.mateEquiv_square, Adjunction.isMonoidal_comp and pullback unit/counit composition. They provide generic mate pasting, not the root-normalized finite smooth or pro-etale-origin equations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse generic mate pasting and existing source-library coefficient chains; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived scalar extension composition with pullback and tensor product",
+   "results": "ModuleCat.extendScalarsComp and extendScalars_assoc normalize ordinary module tensors. They do not state the displayed derived small-site or transported cocycles.",
+   "date": "2026-10-27",
+   "verdict": "Reuse scalar normalization; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Adjoint-uniqueness composition and unit/counit lemmas exist; they supply categorical normalization, not the full finite smooth cocycle.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction pasting rather than arbitrary comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback_chain|CompactSupportCocycle|tensorIso.*comp",
+   "results": "Remote Mathlib grep returned Mathlib/CategoryTheory/Monoidal/Functor.lean, not this geometric cocycle. Additional local rg reads of FiniteSmoothCoefficientArrows, ExceptionalCoefficientComparison, FiniteCoefficientDirectImage, EtaleCompactScalarCoherence, FiniteReductionSystemCoherence, CompactSupportQuotientCocycle and OpenScalarCoefficientCoherence found no theorem directly supplying this step. The blueprint_refs search for reduction compatibilities found det-sp-reduction-compatibilities, whose proof supplies the argument.",
+   "date": "2026-10-27",
+   "verdict": "A missing proper subargument of the existing plan, with canonical definitions retained."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothQuotientCoherence",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Part (2), scalar mate pasting, and sk-thm-purity-transport Step 1, transport through finite coefficient site comparison.",
+   "via": [
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothProQuotientTransport",
+  "file": "lean/Sheaf/Paper/FiniteSmoothProQuotientTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothProQuotientTransport",
+  "statement": "theorem finiteSmoothProQuotientTransport\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (twists : ∀ (r m : ℕ) (_hm : 1 ≤ m) (hmr : m ≤ r),\n      CoefficientLineComparison (FiniteReduction.quotient ell hmr) (ell ^ r) (ell ^ m)\n        (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X)\n    (hcompact : ExceptionalCoefficients.CompactSupportCocycle ell f)\n    (htwist : (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r),\n    (ordinaryScalar (FiniteReduction.quotient ell hnm) X).map\n        ((twists r m (hn.trans hnm) hmr).tensorPower d).hom ≫\n      ((twists m n hn hnm).tensorPower d).hom =\n    (ordinaryAssociator X ell hmr hnm).hom.app\n        (line (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) X d) ≫\n      ((twists r n hn (hnm.trans hmr)).tensorPower d).hom))\n    (hpull : (∀ (r m n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : DerivedCategoryModule (coefficient ell r) Y),\n    QuotientCocycle\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) X)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) X)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (ordinaryAssociator Y ell hmr hnm)\n      (ordinaryAssociator X ell hmr hnm)\n      ((ordinaryFinitePullback (coefficient ell r) f))\n      ((ordinaryFinitePullback (coefficient ell m) f))\n      ((ordinaryFinitePullback (coefficient ell n) f))\n      (ordinaryPullbackMap (FiniteReduction.quotient ell hmr) f)\n      (ordinaryPullbackMap (FiniteReduction.quotient ell hnm) f)\n      (ordinaryPullbackMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K))\n    (hsource : (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : DerivedCategoryModule (coefficient ell r) Y),\n    DerivedCategory.boundedConstructibleFiniteTor (coefficient ell r) Y K →\n    QuotientCocycle\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) X)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) X)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (ordinaryAssociator Y ell hmr hnm)\n      (ordinaryAssociator X ell hmr hnm)\n      (finiteSource ell r f d)\n      (finiteSource ell m f d)\n      (finiteSource ell n f d)\n      (finiteLambda ell hmr f d (twists r m (hn.trans hnm) hmr))\n      (finiteLambda ell hnm f d (twists m n hn hnm))\n      (finiteLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K))\n    (hexception : (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : DerivedCategoryModule (coefficient ell r) Y),\n    DerivedCategory.boundedConstructibleFiniteTor (coefficient ell r) Y K →\n    QuotientCocycle\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (ordinaryScalar (FiniteReduction.quotient ell hmr) X)\n      (ordinaryScalar (FiniteReduction.quotient ell hnm) X)\n      (ordinaryScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (ordinaryAssociator Y ell hmr hnm)\n      (ordinaryAssociator X ell hmr hnm)\n      (rightDerivedUpperShriek (ModuleCat.{u + 1} (coefficient ell r)) f)\n      (rightDerivedUpperShriek (ModuleCat.{u + 1} (coefficient ell m)) f)\n      (rightDerivedUpperShriek (ModuleCat.{u + 1} (coefficient ell n)) f)\n      (ExceptionalCoefficients.mateMap (FiniteReduction.quotient ell hmr) f)\n      (ExceptionalCoefficients.mateMap (FiniteReduction.quotient ell hnm) f)\n      (ExceptionalCoefficients.mateMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K)) :\n  let proAssociator (T : Scheme.{u}) (ell : ℕ) {r m n : ℕ}\n      (hmr : m ≤ r) (hnm : n ≤ m) :\n      proScalar (FiniteReduction.quotient ell hmr) T ⋙\n        proScalar (FiniteReduction.quotient ell hnm) T ≅\n          proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) T :=\n    @ProEtale.pbcFixedScalarExtensionComp.{u} T.ProEt inferInstance\n      (essentiallySmallSelf.{0, u, u + 1} T.ProEt) (Scheme.ProEt.topology T)\n      (coefficient ell r) (coefficient ell m) (coefficient ell n)\n      inferInstance inferInstance inferInstance\n      (FiniteReduction.quotient.{u} ell hmr) (FiniteReduction.quotient ell hnm)\n      (FiniteReduction.quotient ell (hnm.trans hmr))\n      (RingHom.ext (fun x ↦\n        congrArg (fun y : ZMod (ell ^ n) ↦ (⟨⟨y⟩⟩ : coefficient.{u} ell n))\n          (DFunLike.congr_fun\n            (Subsingleton.elim\n              (ZMod.castHom (pow_dvd_pow ell (hnm.trans hmr)) (ZMod (ell ^ n)))\n              ((ZMod.castHom (pow_dvd_pow ell hnm) (ZMod (ell ^ n))).comp\n                (ZMod.castHom (pow_dvd_pow ell hmr) (ZMod (ell ^ m))))) x.down.down)));\n  (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r),\n    (proScalar (FiniteReduction.quotient ell hnm) X).map\n        (proTwistMap d (twists r m (hn.trans hnm) hmr)) ≫\n      proTwistMap d (twists m n hn hnm) =\n    (proAssociator X ell hmr hnm).hom.app\n        ((comparison (coefficient ell r) X).obj\n          (line (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) X d)) ≫\n      proTwistMap d (twists r n hn (hnm.trans hmr))) ∧\n  (∀ (r m n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : proCategory (coefficient ell r) Y),\n    IsCtf (coefficient ell r) Y K →\n    QuotientCocycle\n      (proScalar (FiniteReduction.quotient ell hmr) Y)\n      (proScalar (FiniteReduction.quotient ell hnm) Y)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (proScalar (FiniteReduction.quotient ell hmr) X)\n      (proScalar (FiniteReduction.quotient ell hnm) X)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (proAssociator Y ell hmr hnm)\n      (proAssociator X ell hmr hnm)\n      ((proPullback (coefficient ell r) f))\n      ((proPullback (coefficient ell m) f))\n      ((proPullback (coefficient ell n) f))\n      (proPullbackMap (FiniteReduction.quotient ell hmr) f)\n      (proPullbackMap (FiniteReduction.quotient ell hnm) f)\n      (proPullbackMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K) ∧\n  (∀ (r m n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : proCategory (coefficient ell r) X),\n    IsCtf (coefficient ell r) X K →\n    QuotientCocycle\n      (proScalar (FiniteReduction.quotient ell hmr) X)\n      (proScalar (FiniteReduction.quotient ell hnm) X)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (proScalar (FiniteReduction.quotient ell hmr) Y)\n      (proScalar (FiniteReduction.quotient ell hnm) Y)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (proAssociator X ell hmr hnm)\n      (proAssociator Y ell hmr hnm)\n      (proCompact (coefficient ell r) f)\n      (proCompact (coefficient ell m) f)\n      (proCompact (coefficient ell n) f)\n      (proCompactCoefficientMap (FiniteReduction.quotient ell hmr) f)\n      (proCompactCoefficientMap (FiniteReduction.quotient ell hnm) f)\n      (proCompactCoefficientMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K) ∧\n  (∀ (r m n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : proCategory (coefficient ell r) Y),\n    IsCtf (coefficient ell r) Y K →\n    QuotientCocycle\n      (proScalar (FiniteReduction.quotient ell hmr) Y)\n      (proScalar (FiniteReduction.quotient ell hnm) Y)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (proScalar (FiniteReduction.quotient ell hmr) X)\n      (proScalar (FiniteReduction.quotient ell hnm) X)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (proAssociator Y ell hmr hnm)\n      (proAssociator X ell hmr hnm)\n      (exceptional (coefficient ell r) f)\n      (exceptional (coefficient ell m) f)\n      (exceptional (coefficient ell n) f)\n      (proCoefficientMap (FiniteReduction.quotient ell hmr) f)\n      (proCoefficientMap (FiniteReduction.quotient ell hnm) f)\n      (proCoefficientMap (FiniteReduction.quotient ell (hnm.trans hmr)) f) K) ∧\n  (∀ (r m n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m) (hmr : m ≤ r)\n    (K : proCategory (coefficient ell r) Y),\n    IsCtf (coefficient ell r) Y K →\n    QuotientCocycle\n      (proScalar (FiniteReduction.quotient ell hmr) Y)\n      (proScalar (FiniteReduction.quotient ell hnm) Y)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) Y)\n      (proScalar (FiniteReduction.quotient ell hmr) X)\n      (proScalar (FiniteReduction.quotient ell hnm) X)\n      (proScalar (FiniteReduction.quotient ell (hnm.trans hmr)) X)\n      (proAssociator Y ell hmr hnm)\n      (proAssociator X ell hmr hnm)\n      (finiteProSource ell r f d)\n      (finiteProSource ell m f d)\n      (finiteProSource ell n f d)\n      (finiteProLambda ell hmr f d (twists r m (hn.trans hnm) hmr))\n      (finiteProLambda ell hnm f d (twists m n hn hnm))\n      (finiteProLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T094430-L-225251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T112356-L-1576875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

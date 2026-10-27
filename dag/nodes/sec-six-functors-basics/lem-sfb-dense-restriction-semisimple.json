@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-dense-restriction-semisimple",
+ "kind": "statement",
+ "title": "Semisimple rational modules restricted to a dense abstract subgroup",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure], let $G$ be a smooth affine finite-type $k$-group scheme [def-sc-group-scheme] [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism], and let $\\Gamma\\subseteq G(k)$ be a Zariski dense abstract subgroup. A rational representation on a finite-dimensional $k$-vector space $M$ is a group-scheme homomorphism $\\rho:G\\to\\operatorname{GL}(M)$, where $\\operatorname{GL}(M)(R)=\\operatorname{Aut}_R(M\\otimes_k R)$ for a commutative $k$-algebra $R$. A rational subrepresentation is a $k$-subspace preserved after every such extension; simple means nonzero with no nonzero proper rational subrepresentation. For an abstract $\\Gamma$-representation, a subrepresentation is a $k$-subspace preserved by each $\\gamma\\in\\Gamma$, and simple has the analogous meaning. If $M$ is a finite direct sum of simple rational $G$-subrepresentations, then its restriction to $\\Gamma$ is a finite direct sum of simple abstract $\\Gamma$-subrepresentations. Moreover every $\\Gamma$-invariant subspace $N\\subseteq M$ has a $\\Gamma$-invariant complement $C$, so that $M=N\\oplus C$. In particular, every surjective $\\Gamma$-equivariant $k$-linear map $q:M\\twoheadrightarrow V$ to an abstract $\\Gamma$-representation has a $\\Gamma$-equivariant $k$-linear section $s:V\\to M$ with $q\\circ s=\\mathrm{id}_V$. Zero spaces and disconnected groups are allowed; no characteristic-zero or finiteness hypothesis on $\\Gamma$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.10, printed pp.9--10; Proposition 4.3 and Corollary 4.4, printed p.85 (schematically dense subgroup detects rational subspaces); Proposition 4.17, printed p.90 (complements in a sum of simple representations); proof of Lemma 13.6, printed p.256, invoking 4.4 and choosing stable sections."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For any $\\Gamma$-stable $k$-subspace $W\\subseteq M$, the stabilizer $\\operatorname{Stab}_{\\operatorname{GL}(M)}(W)$ is Zariski closed by [lem-wf-stabilizer-density] (only its first assertion is used). Its inverse image under $\\rho$ is a closed subset of $G$ containing every point of $\\Gamma$. Density makes that closed subset all of $G$. Consequently every $g\\in G(k)$ preserves $W$. The action is invertible and $g^{-1}$ also preserves $W$, so $\\rho_k(g)W=W$. If $M=0$, the unique subspace is already preserved and the conclusion of this argument is immediate.",
+   "uses": [
+    "lem-wf-stabilizer-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.3 and Corollary 4.4, printed p.85: closed stabilizer and dense-subset argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-group-rational-point-subspace-test] to $G$, $M$, and $W$. Its condition (i) was proved in step 1, and its hypotheses hold because $k$ is algebraically closed and $G$ is smooth, affine and finite type. Its condition (ii) says exactly that $W$ is a rational subrepresentation, including preservation over nonreduced $k$-algebras. Conversely a rational subrepresentation is $\\Gamma$-stable by evaluating at $k$ and restricting to $\\Gamma$. Thus the rational $G$-subspaces and abstract $\\Gamma$-subspaces of $M$ coincide.",
+   "uses": [
+    "lem-sfb-smooth-group-rational-point-subspace-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 4.4--4.5, printed p.85; the existing rational-point test supplies the all-algebra conclusion."
+   }
+  },
+  {
+   "text": "Write the given decomposition $M=\\bigoplus_{i=1}^r S_i$ into nonzero simple rational subrepresentations. Each $S_i$ is $\\Gamma$-stable. A $\\Gamma$-stable subspace $T\\subseteq S_i$ is also a $\\Gamma$-stable subspace of $M$, hence rationally $G$-stable by steps 1--2. Viewed inside $S_i$, it is a rational subrepresentation: tensor inclusions over the field are injective, and the action on $S_i$ is the restriction of that on $M$. Rational simplicity gives $T=0$ or $T=S_i$. Thus each restricted $S_i$ is simple, and the same finite direct sum proves the first assertion. For $M=0$ use the empty sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 4.4, printed p.85, applied as in the proof of Lemma 13.6, printed p.256."
+   }
+  },
+  {
+   "text": "Use the ring $R=k[\\Gamma]$ of finite formal sums $\\sum_\\gamma a_\\gamma[\\gamma]$, with $[\\gamma][\\delta]=[\\gamma\\delta]$, acting on $M$ by $\\left(\\sum a_\\gamma[\\gamma]\\right)m=\\sum a_\\gamma\\rho_k(\\gamma)m$. Its submodules are exactly the $\\Gamma$-stable $k$-subspaces: one direction uses the elements $a[1]$ and $[\\gamma]$, and the other follows by closure under finite sums. The same correspondence holds in each $S_i$, so step 3 makes each $S_i$ a simple $R$-submodule. Every element of $M$ is a finite sum of elements of these simple submodules. Apply [lem-sfb-module-socle-complements] to this unital ring and module. For each $\\Gamma$-stable $N$ it gives an $R$-submodule $C$ with $M=N\\oplus C$. By the displayed correspondence, $C$ is a $\\Gamma$-stable $k$-subspace, as required.",
+   "uses": [
+    "lem-sfb-module-socle-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.17, printed p.90; its general ring-module form is the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "For a surjective equivariant $k$-linear map $q:M\\to V$, put $N=\\ker q$. It is $\\Gamma$-stable since $q(\\gamma n)=\\gamma q(n)=0$. Choose $C$ by step 4. The restriction $q|_C:C\\to V$ is injective because $C\\cap\\ker q=0$, and surjective because if $q(m)=v$ and $m=n+c$, then $q(c)=v$. Let $s$ be its inverse followed by $C\\hookrightarrow M$. Uniqueness of the preimage in $C$ gives $s(av+bw)=as(v)+bs(w)$ and $s(\\gamma v)=\\gamma s(v)$, since $C$ is stable. Hence $s$ is $k$-linear and equivariant, and $q\\circ s=\\mathrm{id}_V$. If $M=0$, surjectivity forces $V=0$ and the same construction gives the unique section.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.17, printed p.90, and the stable isomorphic lifts used in the proof of Lemma 13.6, printed p.256; explicit kernel-complement argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-stabilizer-density",
+  "lem-sfb-smooth-group-rational-point-subspace-test",
+  "lem-sfb-module-socle-complements"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 4.4 (p.85), Proposition 4.17 (p.90), and the simplicity and stable-lifting argument in Lemma 13.6 (p.256)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional completely reducible rational representation of a smooth algebraic group remains semisimple on a Zariski dense subgroup",
+   "results": "{\"t\": \"2026-10-23T22:31:08Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional completely reducible rational representation of a smooth algebraic group remains semisimple on a Zariski dense subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.isFinitelySemisimple_iff_isSemisimple\", \"FDRep.simple_iff_end_is_rank_one\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"Module.End.isFinitelySemisimple_iff'\", \"instIsSemisimpleModuleSubtypeMemSubmoduleValSetIsotypicComponents\"], \"digest\": \"78197694a6b113f3\"} Read returned signatures: Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Semisimple.lean:37--41) identifies two abstract notions; it supplies no comparison with rational group-scheme invariant subspaces on a Zariski dense subgroup. Maschke assumes a finite group of invertible order. Neither covers this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a semisimple algebraic group representation to a dense abstract subgroup is semisimple and equivariant surjections split",
+   "results": "{\"t\": \"2026-10-23T22:31:05Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a semisimple algebraic group representation to a dense abstract subgroup is semisimple and equivariant surjections split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsFinitelySemisimple.restrict\", \"Representation.subrepresentation_apply\", \"Module.End.IsSemisimple.restrict\", \"Module.End.isSemisimple_restrict_iff\", \"Subrepresentation.toRepresentation\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Rep.instPreservesProjectiveObjectsActionModuleCatSubtypeMemSubgroupResSubtype\", \"Rep.resIndAdjunction\"], \"digest\": \"c674149bf0abecfe\"} Read returned signatures: Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Semisimple.lean:37--41) identifies two abstract notions; it supplies no comparison with rational group-scheme invariant subspaces on a Zariski dense subgroup. Maschke assumes a finite group of invertible order. Neither covers this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemisimpleModule, Representation",
+   "results": "{\"t\": \"2026-10-23T22:31:06Z\", \"tool\": \"loogle\", \"query\": \"IsSemisimpleModule, Representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\"], \"digest\": \"327c1deaa2a04050\"} Read returned signatures: Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Semisimple.lean:37--41) identifies two abstract notions; it supplies no comparison with rational group-scheme invariant subspaces on a Zariski dense subgroup. Maschke assumes a finite group of invertible order. Neither covers this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple|[Cc]ompletely[Rr]educible",
+   "results": "{\"t\": \"2026-10-23T22:31:05Z\", \"tool\": \"grep\", \"query\": \"[Ss]emisimple|[Cc]ompletely[Rr]educible\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"35494d805ff0322e\"} Read returned signatures: Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Semisimple.lean:37--41) identifies two abstract notions; it supplies no comparison with rational group-scheme invariant subspaces on a Zariski dense subgroup. Maschke assumes a finite group of invertible order. Neither covers this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski dense subgroups have the same invariant subspaces as an algebraic group and preserve complete reducibility of rational modules",
+   "results": "{\"t\": \"2026-10-23T22:31:10Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski dense subgroups have the same invariant subspaces as an algebraic group and preserve complete reducibility of rational modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invtSubmodule.coe_top\", \"Rep.toInvariants\", \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\", \"Representation.le_comap_invariants\", \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\", \"Representation.mem_invariants_iff_of_forall_mem_zpowers\", \"Representation.invtSubmodule.top_mem\", \"Representation.toInvariants\"], \"digest\": \"b9df8a31633e25f5\"} Read returned signatures: Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Semisimple.lean:37--41) identifies two abstract notions; it supplies no comparison with rational group-scheme invariant subspaces on a Zariski dense subgroup. Maschke assumes a finite group of invertible order. Neither covers this statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple|[Cc]ompletely[Rr]educible",
+   "results": "{\"t\": \"2026-10-23T22:58:55Z\", \"tool\": \"grep\", \"query\": \"[Ss]emisimple|[Cc]ompletely[Rr]educible\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"dbd89681e8a046ae\"} Read hits: abstract invariant submodules, semisimple endomorphisms, and finite-group Maschke results do not compare dense abstract subgroups with rational group-scheme subspaces. Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Mathlib/RepresentationTheory/Semisimple.lean:37--41) identifies two abstract notions only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Zariski dense subgroup has the same invariant subspaces as a smooth algebraic group and equivariant surjections from a semisimple representation split",
+   "results": "{\"t\": \"2026-10-23T22:58:55Z\", \"tool\": \"leansearch\", \"query\": \"A Zariski dense subgroup has the same invariant subspaces as a smooth algebraic group and equivariant surjections from a semisimple representation split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.le_comap_invariants\", \"Representation.invariants\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"Subgroup.dense_of_not_isolated_one\", \"Representation.invariants_eq_inter\", \"Subgroup.dense_iff_ne_zpowers\", \"Rep.instInjective\", \"Representation.mem_invtSubmodule\"], \"digest\": \"b23e15c98e768513\"} Read hits: abstract invariant submodules, semisimple endomorphisms, and finite-group Maschke results do not compare dense abstract subgroups with rational group-scheme subspaces. Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Mathlib/RepresentationTheory/Semisimple.lean:37--41) identifies two abstract notions only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemisimpleModule, Representation",
+   "results": "{\"t\": \"2026-10-23T22:58:55Z\", \"tool\": \"loogle\", \"query\": \"IsSemisimpleModule, Representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\"], \"digest\": \"327c1deaa2a04050\"} Read hits: abstract invariant submodules, semisimple endomorphisms, and finite-group Maschke results do not compare dense abstract subgroups with rational group-scheme subspaces. Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Mathlib/RepresentationTheory/Semisimple.lean:37--41) identifies two abstract notions only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple rational representation of a smooth affine algebraic group restricts semisimply to a Zariski dense subgroup",
+   "results": "{\"t\": \"2026-10-23T22:58:57Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple rational representation of a smooth affine algebraic group restricts semisimply to a Zariski dense subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.restrict\", \"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"IsSemisimpleModule.exists_end_algEquiv\", \"FDRep.simple_iff_end_is_rank_one\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"Module.End.isSemisimple_sub_algebraMap_iff\"], \"digest\": \"a95f1a7e34a74b49\"} Read hits: abstract invariant submodules, semisimple endomorphisms, and finite-group Maschke results do not compare dense abstract subgroups with rational group-scheme subspaces. Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Mathlib/RepresentationTheory/Semisimple.lean:37--41) identifies two abstract notions only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant subspaces of a rational algebraic group representation are detected by Zariski dense rational points",
+   "results": "{\"t\": \"2026-10-23T22:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant subspaces of a rational algebraic group representation are detected by Zariski dense rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isInvariant_iff\", \"Algebra.IsInvariant.isInvariant\", \"Representation.mem_invariants_iff_of_forall_mem_zpowers\", \"Representation.mem_invariants\", \"Representation.invariants_eq_inter\", \"Representation.invariants\", \"Algebra.IsInvariant.isIntegral\", \"Algebra.IsInvariant.isIntegral_of_profinite\"], \"digest\": \"0ecbd1f0fada66d8\"} Read hits: abstract invariant submodules, semisimple endomorphisms, and finite-group Maschke results do not compare dense abstract subgroups with rational group-scheme subspaces. Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule (Mathlib/RepresentationTheory/Semisimple.lean:37--41) identifies two abstract notions only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-linearly-reductive-dense-fixed-smooth",
+  "date": "2026-10-24",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme. Supporting input: Lemma 13.6 and Theorem 13.7, printed p.256, specialized to an algebraically closed field, an affine smooth scheme and a dense abstract subgroup. The local proof does not require connectedness or irreducibility of X. Supporting input: Milne Lemma 13.6, middle two paragraphs: restriction of simple modules to the dense subgroup (Corollary 4.4) and stable sections of finite-jet surjections (Proposition 4.17).",
+   "via": [
+    "lem-sfb-linearly-reductive-dense-fixed-smooth",
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dense-restriction-semisimple",
+  "worker": "stage1",
+  "summary": "Q153 follows Milne through the closed stabilizer, the existing all-algebra rational-point subspace test, restriction of the simple summands, the existing module-socle Mathlib leaf, and an explicit inverse on a kernel complement. Five steps, no new nodes, no statement change. All characteristics, disconnected groups, zero spaces and infinite dense subgroups retained.",
+  "blueprint": "The inherited blueprint.from.place records the ILO alteration supporting chain down to Milne Lemma 13.6, middle paragraphs: Corollary 4.4 supplies simplicity on the dense subgroup and Proposition 4.17 supplies stable sections. Steps 1--3 realize the first input and steps 4--5 the second. blueprint_refs.py ancestor returns None because the inherited supporting chain has no imported ancestor; its existing from field is retained. Searches of the whole blueprint for dense, stabilizer and semisimple found no exact duplicate of the complete item.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-stabilizer-density",
+    "why": "Only the universally stated closed-stabilizer assertion is used as a generic geometric tool; its specialized monodromy consequence is not used. The unit has no replacement for the closed stabilizer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-stabilizer-density"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-fb4a972a0",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-fb4a972a0 (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources and found no faults; nothing was changed. It has one commit (the item plus the report with a Q153 review) and no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit; there is no repair or re-split note and no SGA citation. Source checked: Milne iAG2017 Prop 4.3 and Cor 4.4-4.5 (p.85), Prop 4.17 (p.90) and Lemma 13.6 (p.256, simplicity via 4.4 and G-stable lifts); the item states exactly these inputs. Step 1: lem-wf-stabilizer-density, first clause only: the stabilizer is closed, its preimage under rho is closed and contains the dense Gamma, so every k-point preserves W; equality comes from g^-1. The node's V is implicit in its statement, but it is Lean-closed with generic declarations over any field k (HopfIdeal.lean:599-621), so black-box use is fine. Step 2: lem-sfb-smooth-group-rational-point-subspace-test; all its hypotheses hold and its (i)<->(ii) is exactly 'Gamma-stable iff stable over every algebra'. Step 3 (elementary): a Gamma-stable subspace of S_i is rational inside S_i, so each S_i stays simple. Step 4: Gamma-stable subspaces are exactly the k[Gamma]-submodules; applies the Mathlib leaf lem-sfb-module-socle-complements (IsSemisimpleModule.of_sSup_simples_eq_top, any unital ring). Step 5 (elementary): q restricted to the complement is bijective and its inverse is linear and equivariant. Edge cases: G_m with t not a root of unity, t a root of unity (not dense, extra stable lines, so density is needed), non-semisimple Z/p regular representation excluded by hypothesis, disconnected G, M=0, N=0 or M. Duplicate search (dense subgroup, closed stabilizer) found only non-duplicates (dense-fixed-local-ideal-jets, ag-closure-semisimple, ag-cartier-reduced). Batch-5 flag (lem-wf-stabilizer-density reaching def-pod-lisse-l-adic-sheaves through monodromy definitions): genuinely outside both assumptions; the path is only definitions and the lemma is generic linear algebra, not a step of the trace-formula or Poincare-duality proof, so the citation is accepted. tool_uses lem-wf-stabilizer-density accepted (Lean-closed, generic, no node in unit sk-thm-sf-ctf-stability gives it)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DenseRestrictionSemisimple",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.dense_restriction_semisimple",
+  "file": "lean/Sheaf/AlgebraicGeometry/DenseRestrictionSemisimple.lean",
+  "statement": "theorem dense_restriction_semisimple {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] {m : Type u} [Fintype m] [DecidableEq m] (ρ : RationalHom G m) [IsMonHom ρ] (Γ : Subgroup (AlgebraicGeometry.points G k)) (hdense : DenseRange fun γ : Γ ↦ γ.val.left (IsLocalRing.closedPoint k)) (hM : ∃ (n : ℕ) (S : Fin n → Submodule k (m → k)), iSupIndep S ∧ (⨆ i, S i) = ⊤ ∧ ∀ i, S i ≠ ⊥ ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (g : AlgebraicGeometry.points G A), Submodule.span A ((fun w : m → k ↦ fun j ↦ algebraMap k A (w j)) '' (S i : Set _)) ≤ (Submodule.span A ((fun w : m → k ↦ fun j ↦ algebraMap k A (w j)) '' (S i : Set _))).comap (Matrix.toLin' (ρ.points A g))) ∧ ∀ T : Submodule k (m → k), T ≤ S i → (∀ (A : Type u) [CommRing A] [Algebra k A] (g : AlgebraicGeometry.points G A), Submodule.span A ((fun w : m → k ↦ fun j ↦ algebraMap k A (w j)) '' (T : Set _)) ≤ (Submodule.span A ((fun w : m → k ↦ fun j ↦ algebraMap k A (w j)) '' (T : Set _))).comap (Matrix.toLin' (ρ.points A g))) → T = ⊥ ∨ T = S i) : (∃ (n : ℕ) (S : Fin n → Subrepresentation (ρ.representation.comp Γ.subtype)), (∀ i, (S i).toRepresentation.IsIrreducible) ∧ iSupIndep (fun i ↦ (S i).toSubmodule) ∧ (⨆ i, (S i).toSubmodule) = ⊤) ∧ (∀ N : Subrepresentation (ρ.representation.comp Γ.subtype), ∃ C : Subrepresentation (ρ.representation.comp Γ.subtype), IsCompl N.toSubmodule C.toSubmodule) ∧ (∀ (V : Type v) [AddCommGroup V] [Module k V] (σ : Representation k Γ V) (q : Representation.IntertwiningMap (ρ.representation.comp Γ.subtype) σ), Function.Surjective q → ∃ s : Representation.IntertwiningMap σ (ρ.representation.comp Γ.subtype), q.toLinearMap.comp s.toLinearMap = LinearMap.id)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a8430fbe",
+  "group": "NS",
+  "result": "pass",
+  "note": "First stage-2 delivery; the node differs from live only by lean, and live has no other group's Lean record. Clause-by-clause match: algebraically closed field; GrpObj with IsAffine, Smooth, LocallyOfFiniteType+QuasiCompact; Subgroup of points G k with topological density of the closed-point images (enough because smooth G is reduced); RationalHom with IsMonHom on m→k; rational stability written out over every A : Type u as span_A(S) ≤ comap(toLin' ρ(g)); hM gives an independent finite family with sup ⊤, each summand nonzero, rationally stable and simple; conclusions give irreducible Subrepresentations of ρ.representation.comp Γ.subtype, IsCompl complements, and IntertwiningMap sections for arbitrary V : Type v. No CharZero, connectedness, Nontrivial or finiteness binders; edge cases m empty, n=0, N=⊥/⊤, char p, zero test algebra checked. The CharZero-only upstream IsSimple/IsSemisimple are correctly avoided; no existing all-algebra stability predicate (H4). lean.statement identical to the file; docstrings carry the source place, blueprint tag and 5-step proof; plain imports are proof_dep modules. Not recompiled (no file changed); worker reports a clean compile. Advisory: RationalHom/points/representation owners (def-wf-algebraic-representations, def-sc-general-linear-group) are not in stmt_deps, which are unchanged from stage 1."
+ }
+}

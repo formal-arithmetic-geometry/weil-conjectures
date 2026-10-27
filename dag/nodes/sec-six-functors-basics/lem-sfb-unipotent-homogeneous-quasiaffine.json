@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-unipotent-homogeneous-quasiaffine",
+ "kind": "statement",
+ "title": "Quotients by smooth unipotent subgroups embed into affine space",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $U\\subseteq G$ be a smooth closed subgroup scheme [def-sc-group-scheme-subgroup]. Assume that $U$ is unipotent in this explicit sense: for some $m\\geq1$ there is a homomorphism $\\rho:U\\to\\operatorname{GL}_{m,k}$ [def-sc-general-linear-group] that is a closed immersion [def-weil-closed-immersion], and every $u\\in U(k)$ satisfies $(\\rho(u)-I_m)^N=0$ for some $N\\geq1$. Let $G/U$ be the separated finite-type scheme representing the fppf coset sheaf of [lem-sfb-homogeneous-orbit-quotient-geometry]. Then there exist $n\\geq0$ and a $k$-morphism $j:G/U\\to\\mathbf A^n_k$, where $\\mathbf A^n_k=\\operatorname{Spec}k[x_1,\\ldots,x_n]$ [def-weil-affine-spectrum], that is an immersion: $j$ factors as a closed immersion into an open subscheme of $\\mathbf A^n_k$ [def-weil-open-immersion, def-weil-closed-immersion]. No normality or connectedness assumption on $U$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.26, printed p.286 (PDF p.298); Corollaries 14.6 and 14.12, printed pp.282--283, identify unipotence with the stated faithful matrix condition for smooth groups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-closed-immersion] and the supplied closed immersion $\\rho$, $U$ is affine and its coordinate ring is a quotient of $k[x_{ij},D^{-1}]$, the coordinate ring of $\\operatorname{GL}_{m,k}$ in [def-sc-general-linear-group]. The images of the finitely many $x_{ij}$ and $D^{-1}$ generate that quotient, so the one affine chart of $U$ makes $U$ finite type over $k$ by [def-weil-finite-type-morphism]. The surjective coordinate map of $\\rho$ also makes $\\rho(A)$ injective for every commutative $k$-algebra $A$: two algebra maps out of a quotient agreeing on the original ring agree on every residue class.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-general-linear-group",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.26, printed p.286; explicit verification of its affine finite-type subgroup input."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-geometric-unipotence-unitriangular-embedding] to $U$ and $\\rho$. Smoothness is assumed, affineness, finite type and faithfulness were verified in Step 1, and we can take $\\bar k=k$ because $k$ is algebraically closed. The given nilpotence condition is therefore exactly its geometric-point hypothesis. Obtain a closed embedding of $U$ into an upper unitriangular group. Thus $U$ satisfies the unipotence convention of [lem-sfb-unipotent-to-multiplicative-trivial].",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 14.6 and 14.12, printed pp.282--283; Proposition 14.26, p.286."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] with $H=U$. It gives a nonzero finite-dimensional rational $G$-representation $V$ and a line $L$ whose stabilizer on every algebra is $U$. Restriction to $L$ defines a character $\\chi:U\\to\\mathbf G_m$: in a basis starting with a generator of $L$, the first column of the restricted matrix is $(a,0,\\ldots,0)$; its inverse gives $a\\in A^\\times$, and multiplication multiplies these scalars. The coefficient $a$ is regular on $U$, so this is a group-scheme homomorphism. By [def-sc-gm-ga], $\\mathbf G_m$ is itself a one-fold product of multiplicative groups, hence is of multiplicative type. By [lem-sfb-unipotent-to-multiplicative-trivial], $\\chi_A(u)=1$ for every $A$ and $u\\in U(A)$. Consequently $U$ fixes $L$ pointwise after every algebra extension. This proves $L\\subseteq V^U$; the stronger equality printed in Proposition 14.26 is unnecessary.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "def-sc-gm-ga",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Remark 4.30, printed pp.94--96; Corollary 14.18(a), p.284; Proposition 14.26, p.286 (only inclusion of the line in the fixed space is needed)."
+   }
+  },
+  {
+   "text": "Choose $0\\ne x\\in L$. For any commutative $k$-algebra $A$, $x_A$ is a basis of the free rank-one summand $L_A$. If $g\\in G(A)$ fixes $x_A$, then it preserves $L_A$, so the all-algebra stabilizer equality of [lem-sfb-chevalley-scheme-line-stabilizer] gives $g\\in U(A)$. Conversely each $u\\in U(A)$ fixes $x_A$ by Step 3. This includes the zero algebra, where all point sets are singletons. These equalities are natural in $A$, and hence identify the scheme-theoretic vector stabilizer $G_x$ with $U$.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.26, printed p.286, last sentence; Remark 4.30, printed p.96, for stabilizers on every algebra."
+   }
+  },
+  {
+   "text": "Choose a basis of $V$, put $n=\\dim_k V\\geq1$, and let $X=\\operatorname{Spec}k[t_1,\\ldots,t_n]$. The representation gives a scheme action on $X$: if $(r_{ij})$ is its matrix of regular functions on $G$, the coordinate pullback of the action sends $t_i$ to $\\sum_j r_{ij}\\otimes t_j$. The matrix multiplication and identity equations give the two action equations. The $t_i$ generate the coordinate algebra, so $X$ is finite type by [def-weil-finite-type-morphism]; $X\\to\\operatorname{Spec}k$ is separated by [lem-weil-pbc-affine-source-morphism-separated]. Thus $X$ satisfies the target hypotheses of the orbit statements below, with $x$ as a $k$-point.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.26, printed p.286: regard the representation as an action on the affine space underlying V, with its coordinate action made explicit."
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-group-orbit-geometry], the reduced orbit $O_x$ is a locally closed subscheme of $X$. Here $k$ is algebraically closed and $G$ is smooth, connected, affine and finite type, exactly as required. By [lem-sfb-homogeneous-orbit-quotient-geometry], the map $gG_x\\mapsto gx$ is an isomorphism $G/G_x\\simeq O_x$. Step 4 gives $G_x=U$, so it identifies the specified fppf quotient $G/U$ with $O_x$. Compose this isomorphism with the locally closed inclusion $O_x\\hookrightarrow X=\\mathbf A^n_k$. A locally closed subscheme is a closed subscheme of an open subscheme, which is precisely the immersion convention of [def-weil-closed-immersion]. This gives the required $j$ and $n\\geq0$.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.26, printed p.286; Propositions 7.11--7.12 and 7.17, printed pp.141--143."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-weil-pbc-affine-source-morphism-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.26, printed p.286, expanded using Theorem 4.27, Remark 4.30, Corollaries 14.12 and 14.18(a), and Propositions 7.11--7.17. Only L contained in V^U is used, correcting the unnecessary equality printed in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of an affine algebraic group by a unipotent subgroup embeds into affine space",
+   "results": "{\"t\": \"2026-10-23T22:54:22Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of an affine algebraic group by a unipotent subgroup embeds into affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotientSubgroupOfEmbeddingOfLE_apply_mk\", \"Representation.quotientToInvariants\", \"AddSubgroup.quotientiInfAddSubgroupOfEmbedding_apply\", \"AddSubgroup.quotientiInfAddSubgroupOfEmbedding\", \"nilpotent_quotient_of_nilpotent\", \"Rep.quotientToInvariants\", \"AddSubgroup.quotientiInfEmbedding_apply_mk\", \"Subgroup.quotientSubgroupOfEmbeddingOfLE\"], \"digest\": \"d0f73cc7d2c70e81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotients and quotient representations are different objects; QuasiAffine.lean:34--57 (read) defines quasi-affineness and its permanence under an immersion but does not construct an immersion of a homogeneous quotient. The second semantic phrasing returned affine-space instances, not the unipotent quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T22:54:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"unipotent\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotients and quotient representations are different objects; QuasiAffine.lean:34--57 (read) defines quasi-affineness and its permanence under an immersion but does not construct an immersion of a homogeneous quotient. The second semantic phrasing returned affine-space instances, not the unipotent quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a unipotent closed subgroup U of a linear algebraic group G over an algebraically closed field the homogeneous quotient G/U is quasi affine",
+   "results": "{\"t\": \"2026-10-23T22:54:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a unipotent closed subgroup U of a linear algebraic group G over an algebraically closed field the homogeneous quotient G/U is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\"], \"digest\": \"9eb8be7ad080e7d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotients and quotient representations are different objects; QuasiAffine.lean:34--57 (read) defines quasi-affineness and its permanence under an immersion but does not construct an immersion of a homogeneous quotient. The second semantic phrasing returned affine-space instances, not the unipotent quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(quotient|quasi.?affine)|(quotient|quasi.?affine).*unipotent",
+   "results": "{\"t\": \"2026-10-23T22:54:25Z\", \"tool\": \"grep\", \"query\": \"unipotent.*(quotient|quasi.?affine)|(quotient|quasi.?affine).*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotients and quotient representations are different objects; QuasiAffine.lean:34--57 (read) defines quasi-affineness and its permanence under an immersion but does not construct an immersion of a homogeneous quotient. The second semantic phrasing returned affine-space instances, not the unipotent quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unipotent subgroup of an affine algebraic group is observable: the fppf homogeneous space is isomorphic to a locally closed subscheme of affine space",
+   "results": "{\"t\": \"2026-10-23T23:02:44Z\", \"tool\": \"leanfinder\", \"query\": \"A unipotent subgroup of an affine algebraic group is observable: the fppf homogeneous space is isomorphic to a locally closed subscheme of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\"], \"digest\": \"132a326e766f3574\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotients and quotient representations are different objects; QuasiAffine.lean:34--57 (read) defines quasi-affineness and its permanence under an immersion but does not construct an immersion of a homogeneous quotient. The second semantic phrasing returned affine-space instances, not the unipotent quotient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-no-torus-unipotent",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof. Supporting input for the proof of Corollary 17.29: Proposition 17.23, implication (d) to (a) to (b) to (c), printed p.359, as used in Proposition 17.28, printed p.360; nilpotent groups are solvable by their central series. Quotient argument for the central-maximal-torus input: after killing the maximal torus, apply Proposition 16.60 to H/S, before the unitriangular central-series calculation. Proposition 16.60, penultimate sentence: the quotient by the unipotent reduced identity stabilizer embeds into affine space by Proposition 14.26.",
+   "via": [
+    "lem-sfb-no-torus-unipotent",
+    "lem-sfb-central-maximal-torus-nilpotent",
+    "lem-sfb-maximal-torus-centralizer-borel",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-homogeneous-quasiaffine",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 14.26 and the supporting Chevalley, unipotent-character and orbit results. Six steps prove the unchanged statement using existing nodes only. Verified scheme-theoretic stabilizers on every algebra, the geometric-unipotence hypothesis, and affine target finiteness/separation. Corrected only the source proof's unnecessary assertion V^U=L to L contained in V^U; reported a counterexample. Five actual Mathlib searches are logged; no attachment, new node, or Mathlib leaf.",
+  "blueprint": "The current latest det-thm-sf-ctf-stability-direct-images.proof.md (3) is the direct-image finiteness route. This supporting item realizes the inherited Proposition 14.26 input to Proposition 16.60: unitriangular unipotence, Chevalley line stabilizer, trivial scalar character, vector stabilizer equality, then the locally closed affine orbit identified with G/U. Whole-blueprint searches unipotent, homogeneous quotient, and 14.26 found no same statement. blueprint_refs ancestor reports None; preserved the inherited null ancestor and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-2559024d4",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-2559024d4 (reviewer sub-agent of L); spot-checked: PASS, no fixes. No new nodes; the item statement is unchanged and is a special case of Milne iAG2017 Prop. 14.26 (PDF p.298), which I read. Checks: Step 1 (closed immersion into GL_m gives affine, finite type and faithful on all algebras) is elementary and correct. Step 2: every hypothesis of lem-sfb-geometric-unipotence-unitriangular-embedding holds with k̄=k, and its output is the unipotence definition of lem-sfb-unipotent-to-multiplicative-trivial. Step 3: the Chevalley stabilizer of L on all algebras gives a regular character χ:U→G_m by Yoneda; G_m is of multiplicative type with r=1, so χ=1, which proves only L⊆V^U and that is enough. Step 4: G_x=U as subfunctors, an elementary step. Step 5: the linear action on A^n is of finite type and separated by the Mathlib leaf affine source⇒separated. Step 6: the hypotheses of the orbit-geometry and orbit-quotient nodes match exactly, both define G_x by the same formula, and a locally closed subscheme gives the immersion of def-weil-closed-immersion. Edge cases U=1, U=G, unipotent U⊂SL_2 (not closed) and disconnected Z/p are all fine. The report's counterexample to V^U=L is correct, but pdftotext shows Milne's glyph only as 'D', so I could not confirm he prints equality; this does not affect the statement. The only near duplicate, kostant-rosenlicht closed orbits, states something different. Batch 5: the trf nodes reached, vector-subspace-complement and flat-tensor-preserves-injection, are generic linear-algebra Mathlib leaves, not trace formula or Poincaré duality, so they are accepted. No SGA citation; tool_uses not needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentHomogeneousQuasiaffine",
+  "declaration": "AlgebraicGeometry.exists_unipotent_homogeneous_quotient_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentHomogeneousQuasiaffine.lean",
+  "statement": "theorem exists_unipotent_homogeneous_quotient_immersion {k : Type u} [Field k] [IsAlgClosed k] (G U : Over (Spec (.of k))) [GrpObj G] [GrpObj U] [IsAffine G.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : U ⟶ G) [IsClosedSubgroupScheme i] [Smooth U.hom] (m : ℕ) (hm : 1 ≤ m) (ρ : U ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} m) k) [IsMonHom ρ] [IsClosedImmersion ρ.left] (hρ : ∀ a : (Spec (.of k)).asOver (Spec (.of k)) ⟶ U, ∃ N : ℕ, 1 ≤ N ∧ ((GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} m) k k (a ≫ ρ) : Matrix (LinearGroupSchemes.Index.{u} m) (LinearGroupSchemes.Index.{u} m) k) - 1) ^ N = 0) (Q : Over (Spec (.of k))) (q : G ⟶ Q) [IsSeparated Q.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (hQ : Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of k))) (yoneda.obj Q)) (ηq : coequalizer (yoneda.map (fst G U)) (yoneda.map (lift (fst G U) (snd G U ≫ i) ≫ μ[G])) ⟶ yoneda.obj Q) (hηq : coequalizer.π _ _ ≫ ηq = yoneda.map q) (hquot : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηq ≫ f)) : ∃ (n : ℕ) (j : Q ⟶ (Spec (.of (MvPolynomial (Fin n) k))).asOver (Spec (.of k))), IsImmersion j.left",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing GL scheme and homMulEquiv, and exactly the fppf coset sheafification interface recorded by lem-sfb-homogeneous-orbit-quotient-geometry. The target is literally Spec of the polynomial k-algebra in Fin n. IsImmersion is equivalent to closed-then-open factorization; no normality or connectedness of U is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92411fc3f",
+  "group": "NN",
+  "result": "pass",
+  "note": "All node clauses rendered: alg. closed k; G smooth connected affine finite type; U smooth closed subgroup via IsClosedSubgroupScheme+Smooth; m≥1, ρ IsMonHom+closed immersion into GeneralLinearGroup (Index m) k; nilpotence on k-points via homMulEquiv k k with N≥1; G/U pinned by verbatim coequalizer/fppf-sheaf universal property of exists_homogeneous_fppf_quotient (unique up to iso, existence by dependency); conclusion ∃ n, j : Q ⟶ Spec k[Fin n] over k with IsImmersion j.left (= closed into open). No extra hypotheses, single universe u, edge cases U=1/U=G/disconnected U/all characteristics fine. lean.statement verbatim; only lean field changed; 12 dep records identical to live; sorry only, docstrings with source+blueprint+6-step proof; no duplicate found. Not recompiled per instruction; worker compile clean."
+ }
+}

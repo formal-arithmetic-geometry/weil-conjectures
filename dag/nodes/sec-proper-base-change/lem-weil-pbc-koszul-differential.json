@@ -156,7 +156,32 @@
   "item": "def-weil-pbc-koszul-complex",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "ExteriorAlgebra.koszul_differential"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "ExteriorAlgebra.koszul_differential",
+     "module": "WeilConjectures.AlgebraicGeometry.KoszulDifferential",
+     "lines": [
+      142,
+      246
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -198,5 +223,47 @@
    "ExteriorAlgebra.koszul_differential"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring, $E$ an $R$-module, $\\varphi:E\\to R$ an $R$-linear map, and $\\wedge(E)=\\bigoplus_{n\\ge0}\\wedge^n_R(E)$ the exterior algebra. (i) There is a unique $R$-linear map $D=D_\\varphi:\\wedge(E)\\to\\wedge(E)$ with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)\\,x-v\\wedge D(x)$ for all $v\\in E$, $x\\in\\wedge(E)$. (ii) $D(v)=\\varphi(v)\\cdot1$ for $v\\in E$, and $D(\\wedge^n_R(E))\\subset\\wedge^{n-1}_R(E)$ for all $n\\ge0$ (with $\\wedge^{-1}_R(E)=0$). (iii) For $n\\ge1$ and $v_1,\\dots,v_n\\in E$, $$D(v_1\\wedge\\dots\\wedge v_n)=\\sum_{i=1}^n(-1)^{i+1}\\varphi(v_i)\\,v_1\\wedge\\dots\\wedge\\widehat{v_i}\\wedge\\dots\\wedge v_n.$$ (iv) $D$ is a derivation of degree $-1$: $D(x\\wedge y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$ for $x\\in\\wedge^m_R(E)$, $y\\in\\wedge(E)$; and $D$ is the unique $R$-linear map $\\wedge(E)\\to\\wedge(E)$ with this property and $D(v)=\\varphi(v)$ for $v\\in E$.",
+  "proof": [
+   {
+    "text": "Existence in (i). Left contraction by $\\varphi$ gives an $R$-linear map $D:\\wedge(E)\\to\\wedge(E)$ with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)x-v\\wedge D(x)$ for $v\\in E$, $x\\in\\wedge(E)$. (Equivalently, as in Stacks, it is obtained from the map on the tensor algebra given by the explicit formula, which kills $e\\otimes e$ and so descends.) Fix this $D$ for the rest of the proof.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Uniqueness in (i). Let $D'$ be a second $R$-linear map with $D'(1)=0$ and $D'(v\\wedge x)=\\varphi(v)x-v\\wedge D'(x)$. Then $\\Delta=D-D'$ is $R$-linear with $\\Delta(1)=0$ and $\\Delta(v\\wedge x)=-v\\wedge\\Delta(x)$. By induction on $n\\ge0$, $\\Delta(v_1\\wedge\\dots\\wedge v_n)=0$ for all $v_i\\in E$: for $n=0$ the product is $1$; for $n\\ge1$, $\\Delta(v_1\\wedge(v_2\\wedge\\dots\\wedge v_n))=-v_1\\wedge\\Delta(v_2\\wedge\\dots\\wedge v_n)=0$ by associativity and the induction hypothesis. Since $\\wedge(E)=\\bigoplus_n\\wedge^n_R(E)$ and each $\\wedge^n_R(E)$ is spanned over $R$ by such products ($\\wedge^0_R(E)=R\\cdot1$), we get $\\Delta=0$ by linearity, i.e. $D'=D$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(ii). For $v\\in E$: $D(v)=D(v\\wedge1)=\\varphi(v)\\cdot1-v\\wedge D(1)=\\varphi(v)\\cdot1$. Degree: we show $D(\\wedge^n_R(E))\\subset\\wedge^{n-1}_R(E)$ by induction on $n$. For $n=0$, $\\wedge^0_R(E)=R\\cdot1$ and $D(r\\cdot1)=rD(1)=0\\in\\wedge^{-1}_R(E)=0$. For $n\\ge1$, $\\wedge^n_R(E)$ is spanned by products $v\\wedge y$ with $v\\in E$ and $y=v_2\\wedge\\dots\\wedge v_n\\in\\wedge^{n-1}_R(E)$; then $D(v\\wedge y)=\\varphi(v)y-v\\wedge D(y)$, where $\\varphi(v)y\\in\\wedge^{n-1}_R(E)$ and, by the induction hypothesis, $D(y)\\in\\wedge^{n-2}_R(E)$, so $v\\wedge D(y)\\in\\wedge^1_R(E)\\wedge\\wedge^{n-2}_R(E)\\subset\\wedge^{n-1}_R(E)$ (for $n=1$, $D(y)=0$). By $R$-linearity of $D$ the inclusion follows.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(iii). Induction on $n\\ge1$. For $n=1$ this is $D(v_1)=\\varphi(v_1)$, step (ii). For $n\\ge2$ put $w=v_2\\wedge\\dots\\wedge v_n$; in $w$ the factor $v_j$ ($2\\le j\\le n$) sits at position $j-1$, so the induction hypothesis gives $D(w)=\\sum_{j=2}^n(-1)^{j}\\varphi(v_j)\\,v_2\\wedge\\dots\\wedge\\widehat{v_j}\\wedge\\dots\\wedge v_n$. Hence $D(v_1\\wedge w)=\\varphi(v_1)w-v_1\\wedge D(w)=\\varphi(v_1)\\,v_2\\wedge\\dots\\wedge v_n+\\sum_{j=2}^n(-1)^{j+1}\\varphi(v_j)\\,v_1\\wedge\\dots\\wedge\\widehat{v_j}\\wedge\\dots\\wedge v_n$, and the first term is the summand $i=1$ (sign $(-1)^{2}=1$) of the formula.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(iv), derivation property. Fix $y\\in\\wedge(E)$; we prove $D(x\\wedge y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$ for $x\\in\\wedge^m_R(E)$ by induction on $m$. Both sides are $R$-linear in $x$, and $\\wedge^m_R(E)$ is spanned by products of $m$ elements of $E$, so it suffices to take $x$ a product of $m$ elements of $E$. For $m=0$, $x=r\\cdot1$: $D(ry)=rD(y)=D(r\\cdot1)\\wedge y+r\\cdot1\\wedge D(y)$ since $D(1)=0$. For $m\\ge1$ write $x=v\\wedge x'$ with $v\\in E$, $x'\\in\\wedge^{m-1}_R(E)$ a product of $m-1$ elements. By associativity, the defining identity of $D$ and the induction hypothesis for $x'$: $D(x\\wedge y)=D(v\\wedge(x'\\wedge y))=\\varphi(v)\\,x'\\wedge y-v\\wedge D(x'\\wedge y)=\\varphi(v)\\,x'\\wedge y-v\\wedge D(x')\\wedge y-(-1)^{m-1}v\\wedge x'\\wedge D(y)=(\\varphi(v)x'-v\\wedge D(x'))\\wedge y+(-1)^m(v\\wedge x')\\wedge D(y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$. Together with (ii), $D$ is a derivation of degree $-1$ with $D(v)=\\varphi(v)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(iv), uniqueness. Let $D'$ be $R$-linear with $D'(x\\wedge y)=D'(x)\\wedge y+(-1)^mx\\wedge D'(y)$ for $x\\in\\wedge^m_R(E)$, $y\\in\\wedge(E)$, and $D'(v)=\\varphi(v)\\cdot1$ for $v\\in E$. Taking $m=0$, $x=y=1$: $D'(1)=D'(1)\\wedge1+1\\wedge D'(1)=2D'(1)$, so $D'(1)=0$. Taking $m=1$, $x=v\\in E=\\wedge^1_R(E)$: $D'(v\\wedge y)=\\varphi(v)y-v\\wedge D'(y)$. So $D'$ satisfies the two conditions of (i), and $D'=D$ by the uniqueness of step 2.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

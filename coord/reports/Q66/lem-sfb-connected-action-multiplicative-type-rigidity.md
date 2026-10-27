@@ -1,0 +1,35 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-connected-action-multiplicative-type-rigidity.json` (item, statement, split; no exact Mathlib match), `citations.json`, and this report. The sandbox contains no new nodes and no Mathlib leaves. Search records are in `searches.jsonl`.
+
+Attachments: none. Searches for the blueprint tag and for multiplicative type, diagonalizable/diagonalisable, group-like, and connected actions in `lean/WeilConjectures/` found no project declaration stating this item. The hits on connected torsors or diagonal comparison are unrelated.
+
+WANTED: none.
+
+The statement is unchanged and agrees with Milne Corollary 12.37, printed p.244. Its smoothness hypothesis on the acting group is stronger than Milne needs, but it is retained. The proof is an explicit coordinate alternative to the finite-torsion argument of Theorem 12.36: Milne's Lemma 12.4 (printed p.232) already computes precisely the required orthogonal idempotents. Over the parameter ring these become trivial by connectedness and Stacks 00EE. I mark this assembly as agent-written rather than pretending that Milne prints this exact argument.
+
+Nothing remains unfinished for this stage-1 split. No Lean was written or compiled, and no repository file was changed.
+
+## Not duplicates
+
+No new nodes. I searched the whole DAG for group-like elements, multiplicative type, diagonalizable groups, and connected actions; opened the existing torus-rigidity, finite-torsion-Hom-parameter, affine-group-Hopf, group-algebra-group-like-basis and diagonalizable-geometric-criteria nodes. The torus result excludes the nonreduced groups covered here, the finite-torsion Hom parameter only has target a torus, and the group-like basis node assumes a field. None can be cited as the missing assertion over the connected ring B. Instead the elementary coefficient comparison is written into the item, and the existing clopen-idempotent node supplies the only non-elementary connected-ring input.
+
+Whole-blueprint searches using `tools/blueprint_refs.py search` for `diagonalizable`, `multiplicative type`, `rigidity`, and `idempotent` found no identical statement. The nearest-ancestor command reports `blueprint.from.node = None`; the inherited ancestry and precise place are retained. I read the current `literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md` and `sk-thm-sf-ctf-stability/_section.md` as well as the DAG chapter and unit records. This is an auxiliary input on the inherited central-cover / alteration route, with no change to the unit or chapter.
+
+## Review by Q66
+
+I read Milne pp.230--232 for D(M), the tensor basis formula and Lemma 12.4, and pp.243--244 for Lemma 12.35, Theorem 12.36 and Corollary 12.37. I also opened Stacks `algebra.tex`, `lemma-disjoint-decomposition`, and checked its tag 00EE in `tags/tags`. The item retains all its original hypotheses and the claim for every algebra-valued point, including nonreduced D.
+
+Step 1 uses the spectrum definition's full correspondence between ring maps and affine morphisms; the affine-product node gives precisely the tensor coordinate ring and its projections; and the algebra-tensor node gives multiplication on pure tensors. I read all three statements and included their verbatim text in citations.json. The displayed inverse finite-sum map proves the group-algebra base-change identification directly. Conjugating by the given group-scheme isomorphism changes neither the action law nor the desired projection equality.
+
+Step 2 uses the same affine correspondence and tensor-product construction, with the group-homomorphism hypothesis of the item itself. Its two universal test algebras are explicitly specified. The tensor product here is over B, not over F: both D points share the same universal G point. Evaluation on that point proves equality as functions and does not infer a scheme identity from geometric points. The identity test gives the counit equation. These are elementary substitutions in the stated hypothesis, not an invocation of an uncited representability theorem.
+
+Step 3 compares coefficients of the explicit basis; the inverse coefficient maps are specified to justify independence over an arbitrary ring. Expanding the two sides gives diagonal coefficients b_v and b_v squared, and off-diagonal coefficients zero and b_v b_w. The counit supplies their sum. This is the two-line coefficient argument of Lemma 12.4, written out, not a separate unsplit lemma or a use of the field-only existing group-like node.
+
+Step 4 uses exactly the complete statement of `lem-weil-pbc-spec-clopen-idempotent` (including uniqueness), which I opened, and the actual nonempty connectedness definition `def-weil-connected-scheme`. They imply each idempotent is 0 or 1, because its clopen is empty or the whole spectrum. The identity point gives B -> F and guarantees B is nonzero, so the finite sum equal to 1 has exactly one nonzero term. No domain assumption on B is made. This is the only step marked non-elementary: the substantive cited result is the idempotent--clopen correspondence. It is a Mathlib leaf, so no off-unit route permission is needed.
+
+Step 5 applies the action identity at the group identity. The structural algebra map B -> F sends the sole coefficient 1 to 1; independence over F fixes its index to m. Linearity gives equality of pullbacks on every function. The spectrum correspondence and the affine-product node identify that map with the second projection, exactly as their statements assert. The concluding assertion for all test algebras is evaluation of equal morphisms.
+
+I checked B with nilpotents and connected spectrum (for example dual numbers), M=0, the trivial acting group, M=Z, and M=Z/pZ in characteristic p. The latter is mu_p: its nilpotent coordinate ring still has the group-algebra basis, and the proof never tests only its single geometric point. If the parameter ring were disconnected, e e_v+(1-e)e_w for a nontrivial idempotent e would be group-like without being one monomial; this confirms why connectedness is used at precisely Step 4. The finite-support sum cannot be empty because B is nonzero and its counit is 1.
+
+Against delivery-errors B--E: no statement-only child node, duplicate, or clause-restatement was created; all notions introduced for the coordinate argument are explicitly defined; all non-elementary inputs occur as node citations and all their statements were opened; no cited proof is used in place of its statement; and no smoothness, reducedness or field-point density assumption on D is introduced. I corrected the tempting but invalid shortcut of applying the field-only group-like Mathlib theorem directly to B: the actual declaration at Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:232--248 requires IsDomain. The recorded Loogle, semantic and grep searches were actually run and their hits inspected; the second semantic phrasing specifically tested the connected-ring generalization. All five steps are under 2000 characters, and the coefficient and universal-point details are explicit.

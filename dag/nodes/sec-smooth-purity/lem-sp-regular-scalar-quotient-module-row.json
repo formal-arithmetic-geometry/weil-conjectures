@@ -1,0 +1,209 @@
+{
+ "id": "lem-sp-regular-scalar-quotient-module-row",
+ "kind": "statement",
+ "title": "Exact four-term row of regular power quotient module sheaves",
+ "statement": "Let $(C,J)$ be a site essentially small in the coefficient universe, let $R$ be a commutative ring sheaf and $t$ a global section injective by multiplication on each $R(U)$. Use the canonical power quotients and scalar maps of [def-sp-regular-scalar-quotient-notation]. For natural $m\\leq n$ there are a ring reduction $r:B_n\\to B_m$ with $p_n r=p_m$ and a $B_n$-linear map $a:r_*B_m\\to B_n$ satisfying $a(p_m(x))=p_n(t^{n-m}x)$ on every section. The row $0\\to r_*B_m\\xrightarrow{a}B_n\\xrightarrow{t^{m+1}}B_n\\xrightarrow{r}r_*B_m\\to0$ is exact. The image subobject of $a$ is the image of multiplication by $t^{n-m}$. When $n=m$, $r$ and $a$ are identities under the canonical equality transports and multiplication by $t^{m+1}$ on $B_n$ is zero. No complexes, augmentations or K-flatness are asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First proof paragraph: the displayed coefficient tensor and its two cohomology objects."
+ },
+ "stmt_deps": [
+  "def-sp-regular-scalar-quotient-notation"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q_k(U)=R(U)/t^kR(U)$. For $A=R(U)$ and $d=n-m\\geq0$, define $Q_m(U)\\to Q_n(U)$ by $[x]\\mapsto[t^dx]$. Replacing $x$ by $x+t^my$ changes its image by $t^{d+m}y=t^ny$, so it is well-defined. It is $A/t^nA$-linear because $[t^d(rx)]=[r]\\,[t^dx]$, with $A/t^nA$ acting on $A/t^mA$ by reduction. If $t^dx=t^ny$, cancel $t^d$ to obtain $x=t^my$; cancellation for $d=0$ is the identity. Thus this map is injective. All formulas commute with restrictions, since $t$ is global.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph, coefficient tensor H^{-1}; explicit agent quotient-map and cancellation calculation"
+   }
+  },
+  {
+   "text": "In the same ring $A$, if $t^m[x]=0$ in $A/t^nA$, write $t^mx=t^ny=t^m t^{n-m}y$ and cancel $t^m$: then $x=t^{n-m}y$. Conversely every such $x$ is killed by $t^m$. Hence the first image is precisely the kernel of the middle map and is $t^{n-m}(A/t^nA)$. Also $[x]$ reduces to zero in $A/t^mA$ exactly when $x=t^my$ for some $y\\in A$, which is precisely the image of the middle map. Reduction is surjective, by lifting $[x]$ to $[x]$ modulo $t^n$. Together with step 4 this proves the whole presheaf row is sectionwise exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph, coefficient tensor H^{-1} and H^0; explicit agent kernel-image calculation"
+   }
+  },
+  {
+   "text": "Sheafify the presheaf row of steps 4–5 as presheaves of $R$-modules using [lem-weil-pbc-ringed-site-module-sheafification-exact]. The resulting terms are exactly $B_m,B_n,B_n,B_m$, and the universal property [def-weil-presheaf-modules-sheafification] gives the maps $a_{n,m}$, $t^m$ and reduction, uniquely with their stated local formulas. For the $B_n$-module structures, $Q_n$ is a presheaf of commutative rings whose ring sheafification [def-weil-pbc-sheafification] is the quotient ring sheaf $B_n$, and $Q_m,Q_n$ are presheaves of $Q_n$-modules, with the three maps $Q_n$-linear by step 4. Apply [lem-pc-sites-module-sheafification-interface] with $\\mathcal O=Q_n$: the abelian sheafifications $B_m,B_n$ of $Q_m,Q_n$ receive unique compatible $B_n$-module structures, and the three maps, being the unique factorizations of $Q_n$-linear presheaf maps, are $B_n$-linear. For $\\mathcal P=Q_n$, the factorization $\\mathcal P^\\#\\to B_n$ of the ring unit $Q_n\\to B_n$ is $B_n$-linear and, on underlying sets, is the comparison of two sheafifications of $|Q_n|$ [lem-pc-sites-sheafification-underlying-sets]; so it is bijective and the module $B_n$ is the regular module. Kernels and sheafified cokernels in [def-weil-sheaf-of-modules-category], for the sheaf of rings $B_n$, are those of the underlying abelian sheaves, so the exact row is exact as $B_n$-modules. Its first image is $t^{n-m}B_n$: both are the sheafification of the presheaf image calculated in step 5. If $n=m$, the exponent $n-m$ is zero, so $a_{m,m}=1$, reduction is $1$, and $t^m=0$ on $B_m$; the row becomes $0\\to B_m\\xrightarrow{1}B_m\\xrightarrow{0}B_m\\xrightarrow{1}B_m\\to0$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, lemma-sheafification-exact; Tag 03CY, lemma-sheafification-presheaf-modules; agent assembly of the coefficient row"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First proof paragraph: the displayed coefficient tensor and its two cohomology objects. Expanded from the parent node proof steps 4–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex of a regular scalar in a sheaf of rings resolves its quotient and is K flat",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Algebra.Smooth.flat",
+     "Module.flat_of_isLocalized_span",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized quotient-sheaf module and chain maps. Cone augmentation and bounded flatness APIs are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "descShortComplex|isKFlat.*cone|kFlat.*single",
+   "results": {
+    "count": 17,
+    "hits": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized quotient-sheaf module and chain maps. Cone augmentation and bounded flatness APIs are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"QuasiIso\"",
+   "results": {
+    "count": 1,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized quotient-sheaf module and chain maps. Cone augmentation and bounded flatness APIs are used in the parent proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex of a regular scalar in a sheaf of rings resolves its quotient and is K flat",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Algebra.Smooth.flat",
+     "Module.flat_of_isLocalized_span",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized quotient-sheaf module and chain maps. Cone augmentation and bounded flatness APIs are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a sheaf of rings by a regular scalar power has its module short exact presentation and exact four term row between power quotients, and tensoring its Koszul complex identifies the two scalar cone coordinates",
+   "results": {
+    "count": 8,
+    "hits": [
+     "IsSMulRegular.smulShortComplex_shortExact",
+     "QuotSMulTop",
+     "ModuleCat.smulShortComplex_exact",
+     "ModuleCat.smulShortComplex",
+     "ModuleCat.smulShortComplex_g",
+     "Ideal.qoutMapEquivTensorQout",
+     "SheafOfModules.presentationOfIsCokernelFree",
+     "TensorProduct.tensorQuotEquivQuotSMul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized quotient-sheaf module and chain maps. Cone augmentation and bounded flatness APIs are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RegularScalarQuotientExactRow",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "First proof paragraph: the displayed coefficient tensor and its two cohomology objects.",
+   "via": [
+    "lem-sp-regular-scalar-quotient-exact-row",
+    "lem-sp-ell-coefficient-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RegularScalarQuotientModuleRow",
+  "file": "lean/Sheaf/Algebra/Homology/RegularScalarQuotientModuleRow.lean",
+  "declaration": "CategoryTheory.RegularScalarQuotient.regularScalarQuotient_moduleRow",
+  "statement": "theorem regularScalarQuotient_moduleRow\n    (hregular : ∀ U : Cᵒᵖ, Function.Injective\n      (fun x : R.obj.obj U ↦ (@id (R.obj.obj U) (t.val U)) * x)) (n m : ℕ) (hm : m ≤ n) :\n    ∃ red : B R t n ⟶ B R t m,\n      projection R t n ≫ red = projection R t m ∧\n      ∃ (a : (res red).obj (unit (B R t m)) ⟶ unit (B R t n)),\n        (∀ (U : Cᵒᵖ) (x : R.obj.obj U),\n          a.val.app U ((projection R t m).hom.app U x) =\n            (projection R t n).hom.app U ((@id (R.obj.obj U) (t.val U)) ^ (n - m) * x)) ∧\n        Mono a ∧ Epi (ringMap red) ∧\n        (∃ ha : a ≫ mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) = 0,\n          (ShortComplex.mk a (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1)) ha).Exact) ∧\n        (∃ hb : mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) ≫ ringMap red = 0,\n          (ShortComplex.mk (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1)) (ringMap red) hb).Exact) ∧\n        imageSubobject a = imageSubobject\n          (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (n - m)) ∧\n        (∀ h : n = m,\n          red = eqToHom (congrArg (B R t) h) ∧\n          (∀ (U : Cᵒᵖ) (x : (B R t m).obj.obj U),\n            a.val.app U x = (eqToHom (congrArg (B R t) h.symm)).hom.app U x) ∧\n          mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) = 0)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5fcaf",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T164638-L-1046783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5fcaf",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T164638-L-1046783",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Notation/Presentation/ModuleRow/TensorComparison modules and 5 node files against clone sheaf-dag item module and node, change record and cited dep nodes (lem-pc-cone-short-exact-quasi-iso=Mathlib quasiIso_descShortComplex, lem-weil-pbc-independent-bounded-flat-kflat)"
+ }
+}

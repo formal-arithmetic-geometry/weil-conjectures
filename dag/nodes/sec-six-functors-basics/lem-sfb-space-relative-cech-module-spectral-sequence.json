@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-space-relative-cech-module-spectral-sequence",
+ "kind": "statement",
+ "title": "Relative Cech spectral sequence for small-etale structure-sheaf modules",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $u:U\\to X$ be a representable surjective etale morphism from a scheme. Form $U_p=U\\times_X\\cdots\\times_XU$ with $p+1$ factors, $p\\geq0$, with augmentation $u_p:U_p\\to X$ [lem-trf-space-fibre-products-etale-covers]; the face maps omit a factor. Use the canonical small etale ringed topoi, their localization identifications [lem-trf-space-enlarged-etale-ringed-site-model], and module direct images and tensor pullbacks [def-trf-space-etale-module-functors]. Let $M$ be any $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category]. There is a natural first-quadrant cohomological spectral sequence [def-sp-spectral-sequence] in $\\operatorname{Mod}(\\mathcal O_Y)$\n$$E_1^{p,q}=R^q(f\\circ u_p)_*(M|_{U_p})\\quad\\Longrightarrow\\quad R^{p+q}f_*M.$$\nHere $M|_{U_p}=u_p^*M$ is etale restriction, and all right derived functors are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. The first differential is the alternating sum of the face restriction maps. For each $n\\geq0$ the abutment has a finite decreasing filtration $R^nf_*M=F^0\\supseteq\\cdots\\supseteq F^{n+1}=0$ with $F^p/F^{p+1}\\cong E_\\infty^{p,n-p}$, and each entry stabilizes to $E_\\infty^{p,q}$ for sufficiently large page. No quasi-coherence, quasi-compactness, separation, flatness of $f$, or Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 072E, lemma-cech-to-cohomology-relative-modules and its double-complex proof; small-etale localization version, as suggested in spaces-cohomology.tex immediately before Tag 0720 (lemma-higher-direct-image). The localization identifications are spaces-properties.tex, Tags 03G1 and 03LX."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-spectral-sequence",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the enlarged etale ringed sites $\\mathcal C_X,\\mathcal C_Y$. The equivalences with the small etale module categories preserve injectives and exact sequences: an equivalence and its inverse preserve kernels, cokernels and the extension property defining injectivity. For an etale scheme $V\\to Y$ put $W=X\\times_YV$ and $W_p=U_p\\times_YV$. Etale permanence gives all $u_p$ and face maps etale. Base change of the atlas is the singleton covering $W_0\\to W$ in $\\mathcal C_X$, and $W_p=W_0\\times_W\\cdots\\times_WW_0$. The fibre-product lemma gives these objects and covering stability; representability of $u$ makes each $U_p$ a scheme. The enlarged-site model identifies each $\\mathcal C_{U_p}$ with $\\mathcal C_X/U_p$ and its structure sheaf with the restricted ring. The chart-limit identification identifies the specified module direct images with the enlarged ringed direct images, including their restrictions and scalar actions. Thus all subsequent computations compute the functors in the statement, rather than a different choice of direct image.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-chart-limit-enlarged-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G1 (lemma-compare-etale-sites), 04LY (equation-localize), 04LZ (equation-localize-ringed); spaces-morphisms.tex Tag 03M8 (lemma-compute-pushforward)."
+   }
+  },
+  {
+   "text": "The specified module direct images are additive right adjoints: their adjunctions identify maps into the direct image of a kernel with maps killed by the corresponding image morphism, proving preservation of kernels; linearity gives additivity. The module category on $\\mathcal C_X$ is Grothendieck abelian by the arbitrary-ring-sheaf theorem, hence has enough injectives. Choose a resolution $M\\to I^\\bullet$ with $I^q=0$ for $q<0$ by the nonnegative-resolution existence lemma. For every $p$, the localization functor $u_p^*$ is exact and has an exact additive left adjoint $u_{p!}$ by the ringed-slice adjunction. Apply the exact-left-adjoint criterion to $u_{p!}\\dashv u_p^*$: every $u_p^*I^q$ is injective. Exactness of $u_p^*$ preserves the augmented exact resolution, so $u_p^*I^\\bullet$ is an injective resolution of $u_p^*M$. This argument uses the localization $u_p$, and imposes no exactness assumption on tensor pullback along $f$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), injective-resolution proof; sites-modules.tex Tag 04IE (lemma-localize-ringed-topos) and lemma-extension-by-zero-exact; injectives.tex Tag 079H (theorem-injective-embedding-grothendieck)."
+   }
+  },
+  {
+   "text": "Set $B^{p,q}=(fu_p)_*(u_p^*I^q)$ for $p,q\\geq0$. Define $d_h=\\sum_{i=0}^{p+1}(-1)^i\\delta_i^*$ by face restrictions and $d_v=(fu_p)_*u_p^*(d_I)$. On a test $V\\to Y$, the chart-limit identification gives $B^{p,q}(V)=\\widetilde I^q(W_p)$, with face maps the actual restrictions along the projections $W_{p+1}\\to W_p$. Every restriction is $\\mathcal O_Y(V)$-linear because both scalar actions are pulled back from $V$, and the identifications commute with maps of tests. The identities between two factor-deletion maps cancel the terms of $d_h^2$ in pairs. Naturality of $d_I$ under restriction gives $d_hd_v=d_vd_h$, and $d_v^2=0$. These equations on tests give a first-quadrant double complex of module sheaves. Use its finite-diagonal total complex with differential $d_h+(-1)^p d_v$.",
+   "uses": [
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), double-complex construction; homology.tex section-double-complex and definition-associated-simple-complex."
+   }
+  },
+  {
+   "text": "Fix $q$ and an etale scheme $V\\to Y$. Apply injective-module Cech acyclicity to the injective $\\widetilde I^q$ on $\\mathcal C_X$ and the singleton covering $W_0\\to W$. The chosen small-site convention allows the site objects, module values, ring values and singleton covering index to be placed in one common larger universe, as required by that node. The positive cohomology of $\\widetilde I^q(W_\\bullet)$ vanishes. In degree zero the sheaf equalizer axiom identifies its kernel with $\\widetilde I^q(W)$, by restriction along $W_0\\to W$. The chart-limit identification therefore makes\n$$0\\longrightarrow (f_*I^q)(V)\\longrightarrow B^{0,q}(V)\\longrightarrow B^{1,q}(V)\\longrightarrow\\cdots$$\nexact for every $V$. This is exactness as $\\mathcal O_Y(V)$-modules since all arrows are linear. Kernels of module sheaves are sectionwise and cokernels are sheafified sectionwise cokernels, so this sectionwise exact augmented complex is exact as module sheaves. In particular $f_*I^q\\simeq\\ker(d_h:B^{0,q}\\to B^{1,q})$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-size-convention",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC (lemma-injective-module-trivial-cech); stacks-sheaves.tex Tag 072E, augmented injective-row calculation."
+   }
+  },
+  {
+   "text": "The restriction maps $a^q:f_*I^q\\to B^{0,q}$ commute with $d_I$, and $d_ha^q=0$ by the equalizer calculation. Hence $b:f_*I^\\bullet\\to\\operatorname{Tot}B$, whose component is $a^q$ followed by inclusion in bidegree $(0,q)$, is a chain map: on that summand the vertical total sign is $+1$, and the horizontal term vanishes. For every fixed $q$, Step 4 says exactly that the map from $f_*I^q$ in horizontal degree zero to the row $B^{\\bullet,q}$ is a quasi-isomorphism. Apply the first-quadrant column-augmentation lemma with $K=B$ and $A=f_*I^\\bullet$ (its hypothesis is on the columns of $K.\\mathrm{flip}$). It proves that this specified $b$ is a quasi-isomorphism. Thus\n$$H^n(\\operatorname{Tot}B)\\simeq H^n(f_*I^\\bullet)=R^nf_*M,$$\nwhere the last equality is the definition of right derived functors on injective resolutions.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-sp-double-complex-total",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), second-variable variant; stacks-sheaves.tex Tag 072E, total augmentation."
+   }
+  },
+  {
+   "text": "Apply the first spectral sequence of the first-quadrant double-complex theorem to $B$ in $\\operatorname{Mod}(\\mathcal O_Y)$. Its first page is $H^q(B^{p,\\bullet})$. By Step 2 and the definition of right derived functors this equals $R^q(fu_p)_*(u_p^*M)$, and the theorem identifies $d_1$ with the map on vertical cohomology induced by $d_h$, namely the alternating sum of face restriction maps. Its abutment is the object identified in Step 5. Transport the theorem's image filtration on total cohomology across that identification to obtain\n$$R^nf_*M=F^0\\supseteq\\cdots\\supseteq F^{n+1}=0,\\qquad F^p/F^{p+1}\\simeq E_\\infty^{p,n-p}.$$\nThe same theorem gives entrywise stabilization (in particular for $r>\\max(p,q+1)$). Only $0\\leq p\\leq n$ occur in total degree $n$, so these assertions require no finiteness of the atlas or geometric finiteness condition on $f$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex) and 0132 (lemma-first-quadrant-ss); stacks-sheaves.tex Tag 072E."
+   }
+  },
+  {
+   "text": "For a module morphism $h:M\\to N$, choose nonnegative injective resolutions $I,J$. The resolution-lift lemma gives $t:I\\to J$ over $h$. Restriction and direct image give a double-complex map $B(t)$, hence spectral-sequence maps and a compatible filtered abutment map by functoriality of the double-complex theorem. Any two lifts are homotopic by the uniqueness-up-to-homotopy theorem, applied to $M[0]\\to I$ and the bounded-below injective target $J$. If $s$ is such a homotopy, its image in each fixed column is a vertical homotopy, so the two maps agree on $E_1$: their difference on a vertical cycle is a vertical boundary. On total complexes the signed homotopy in bidegree $(p,q)$ is $(-1)^p(fu_p)_*u_p^*(s^q)$. Substitution in $dH+Hd$ cancels the horizontal cross terms and gives the difference of the two total maps. It preserves the first filtration, and therefore satisfies the filtration-shift hypothesis of the filtered-homotopy theorem; this gives agreement on all later pages and on the filtered abutment. The augmentation commutes with $t$ by naturality of restriction. Apply this construction to the identity between any two resolutions; the reverse comparison and the uniqueness result give inverse page and filtered-abutment isomorphisms. Identity and composition follow by comparing the composite lifts. Thus the spectral sequence is natural in $M$ and independent of the resolution from $E_1$ onwards.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-filtered-homotopy-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P (lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy); homology.tex Tag 012O (lemma-spectral-sequence-filtered-complex-functorial); signed total homotopy calculated here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-trf-space-etale-module-functors",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-first-quadrant-column-augmentation",
+  "def-sp-left-exact-additive",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sp-filtered-homotopy-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 072E, lemma-cech-to-cohomology-relative-modules, double-complex proof adapted via enlarged small-etale ringed localization; homology.tex Tags 0130, 0132, 0133."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed etale topoi and a surjective etale algebraic space atlas the relative Cech spectral sequence has E1 terms higher direct images from the iterated fibre products and abuts to higher direct image of a module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₃ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"The third object $X_3$ in the Mayer-Vietoris short complex associated to a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$ is given by sheafifying the Yoneda embed\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.f =\\n    CategoryTheory.Limits.biprod.lift\\n\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the differential $ f $ of the associated short complex in the category of sheaves with values in addit\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no relative Cech spectral sequence for ringed algebraic-space direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Cech to derived pushforward spectral sequence for structure sheaf modules on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no relative Cech spectral sequence for ringed algebraic-space direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no relative Cech spectral sequence for ringed algebraic-space direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech|[Ss]pectralSequence",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no relative Cech spectral sequence for ringed algebraic-space direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Cech spectral sequence for higher direct images of module sheaves on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) : toOpen M U ≫ (tildeInModuleCat M).map i.op = toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"ModuleCat.Tilde.res_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) (s : (tildeInModuleCat M).obj (op U)) (x : V) :\\n  ((tildeInModuleCat M).map i.op s).1 x = (s.1 (i x) :)\", \"doc\": \"For open sets $U,V$ in $\\\\operatorname{Spec}(R)$ with inclusion $i:V\\\\to U$, the restriction map $\\\\widetilde{M}(U)\\\\to \\\\widetilde{M}(V)$ satisfies $(\\\\rho_{U\\\\supset V}(s))(x) = s(i(x))$ for all sections $\"}\n  {\"name\": \"ModuleCat.tildeInModuleCat\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \": TopCat.Presheaf (ModuleCat R) (PrimeSpectrum.Top R)\", \"doc\": \"The sheaf $\\\\widetilde{M}$ associated to an $R$-module $M$ over $\\\\operatorname{Spec}(R)$, constructed by localizing $M$ in the Zariski topology and restricting scalars via the global sections of the st\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \"[HasLimits C] {X Y : SheafedSpace C} (f g : X ⟶ Y) : Epi (coequalizer.π f g).hom.base\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and its opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion f] [IsOpenImmersion g] : restrictFunctor (f ≫ g) ≅ restrictFunctor g ⋙ restrictFunctor f\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no relative Cech spectral sequence for ringed algebraic-space direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|spectralSequence",
+   "results": "{\"t\": \"2026-10-23T16:20:08Z\", \"tool\": \"grep\", \"query\": \"cech|spectralSequence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\"], \"digest\": \"3b2ba30e4b844841\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Cech spectral sequence for higher direct images of module sheaves over a ringed site",
+   "results": "{\"t\": \"2026-10-23T16:20:09Z\", \"tool\": \"leansearch\", \"query\": \"Relative Cech spectral sequence for higher direct images of module sheaves over a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.noConfusionType\", \"SheafOfModules\", \"SheafOfModules.mk\", \"SheafOfModules.isSheaf\", \"SheafOfModules.hasLimit\", \"SheafOfModules.rec\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"e887e5825e80e094\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-23T16:20:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Cech spectral sequence of higher direct images of structure sheaf modules on algebraic spaces for a surjective etale atlas",
+   "results": "{\"t\": \"2026-10-23T16:20:10Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Cech spectral sequence of higher direct images of structure sheaf modules on algebraic spaces for a surjective etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor\"], \"digest\": \"08cc2c88653256f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.?sequence|cechTo|cech.*derived",
+   "results": "{\"t\": \"2026-10-23T16:20:52Z\", \"tool\": \"grep\", \"query\": \"spectral.?sequence|cechTo|cech.*derived\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean\", \"Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean\"], \"digest\": \"753d7ac3a423fd39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A covering object of a ringed topos yields a first quadrant descent spectral sequence from derived pushforwards on its Cech nerve, constructed using injective modules and a double complex",
+   "results": "{\"t\": \"2026-10-23T16:20:54Z\", \"tool\": \"leanfinder\", \"query\": \"A covering object of a ringed topos yields a first quadrant descent spectral sequence from derived pushforwards on its Cech nerve, constructed using injective modules and a double complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\"], \"digest\": \"9395cf0de46f2221\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give Cech complexes, spectral-object infrastructure, schemes, or Mayer-Vietoris, not the relative module-valued spectral sequence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Higher direct images of quasi-coherent modules on qcqs algebraic spaces. Relative Cech proof explicitly suggested immediately before Stacks 0720; the atlas nerve and its derived-image spectral sequence. Split realizes the relative Cech argument via injective localized columns, evaluated augmented rows, and the two finite-diagonal filtrations; current blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting ordinary structure-sheaf cohomology input.",
+   "via": [
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-cech-module-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Split the unchanged relative small-etale module spectral sequence into seven steps using existing DAG tools only. Checked Stacks 072E against ringed localization; avoided a stronger existing Cech theorem whose exact-f-pullback hypothesis is unavailable. Identified all direct images via the chart-limit comparison, proved evaluated injective rows exact, applied the total augmentation criterion and first-quadrant spectral-sequence theorem, and checked naturality by signed homotopies. Corrected the source-place localization tags; no statement change and no new nodes.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting ordinary structure-sheaf cohomology input through the recorded higher-image ancestry; realizes the relative Cech route suggested immediately before Stacks 0720. The inherited blueprint.from.node is null, as blueprint_refs.py ancestor reports; this split does not invent a blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical small-etale ringed-site equivalence and localization, a generic algebraic-space site tool. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Atlas nerves and base-changed covers, a generic geometric input. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Etale composition and base change for the iterated atlas nerve, a generic geometric tool. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Identifies the specified direct images with enlarged-site section evaluation for arbitrary f. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Grothendieck module-sheaf categories, for arbitrary structure sheaves rather than constant coefficients. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Exact slice restriction with an exact left adjoint, independent of f. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "why": "Positive Cech vanishing for an injective on any small ringed site. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Abstract total quasi-isomorphism criterion for the augmented rows. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The two abstract first-quadrant spectral sequences, their differentials, finite filtrations and stabilization. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Resolution comparison uniqueness for naturality. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sp-filtered-homotopy-spectral-sequence",
+    "why": "Equality of the induced later-page and filtered-abutment maps for the signed total homotopy. No statement of the item unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sp-filtered-homotopy-spectral-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-6162076c8",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-6162076c8 (reviewer sub-agent of L); spot-checked: I read the item in full; the split is correct. The statement and stmt_deps are byte-identical to live, there are no new nodes, live is still unsplit and there is no repair note. Each of the 7 steps checks against Stacks 072E (and the relative abelian proof it refers to). Step 2: u_p^*I is an injective resolution via u_{p!} -| u_p^* and right-adjoint-preserves-injectives. Step 4: injective-module Cech acyclicity for the singleton cover W_0->W in C_X, plus the equalizer axiom in degree 0, gives sectionwise and hence sheaf row exactness. Step 5: the column-augmentation hypotheses on K.X 0 and K.flip rows hold and the p=0 sign is +1. Step 6: the first double-complex spectral sequence gives E1 = R^q(fu_p)_*(u_p^*M), d1 = alternating face maps, finite filtrations and stabilization. Step 7: I recomputed the signed total homotopy (-1)^p S; dH+Hd = d_vS+Sd_v and it preserves the filtration. Edge cases M=0, U=X (row I->I->I with differential 0, id) and the empty atlas hold. No flatness, quasi-compactness or quasi-separatedness is used. lem-sfb-cech-injective-image-augmentation and lem-sfb-derived-cech-image-totalization need an exact module inverse image, so they rightly do not apply; the trf site-augmentation nodes are abelian or constant-Lambda. No duplicate found. Batch-5: lem-trf-space-chartwise-etale-permanence and lem-trf-space-chart-limit-enlarged-sections are generic algebraic-space and site foundations. Their closures (295 and 333 nodes) contain no trace-formula, Poincare, nt-assume or trace-transport node; neither assumption gives them and neither is a step of those proofs, so I accept them. The 11 declared tool_uses are generic and accepted. No SGA citations. FIX (sources only, mathematics unchanged): the item source.place still cited 03LX (pushforward-etale-base-change-modules), although the report claims it was corrected; it now cites 03G1, 04LY and 04LZ. The step-2 source cited 079Q (remark-existence-D) and now cites 079H only. Corrected whole item in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ }
+}

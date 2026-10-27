@@ -15,19 +15,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.RingTheory.StrictHenselizationPresentationIn
-import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
-import WeilConjectures.RingTheory.Etale.LocalDimension
-import Sheaf.AlgebraicGeometry.DimensionExtension
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import Sheaf.Paper.TorsionCdTopologicalSerreTransfer
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Mathlib.RingTheory.KrullDimension.Zero
+import Mathlib.RingTheory.Localization.AtPrime.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStalkFormula
+import WeilConjectures.AlgebraicGeometry.Sites.AffineCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
-import Sheaf.AlgebraicGeometry.ExactGlobalSectionsLeray
 
 /-! # An affine cohomology bound over a profinite geometric base
 
@@ -48,6 +50,121 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
+namespace AlgebraicGeometry.Scheme
+
+private theorem field_strictLocalization_of_zeroDimensional
+    (C : Scheme.{u}) [IsAffine C] [IsReduced C]
+    (hCdim : ∀ p : PrimeSpectrum Γ(C, ⊤), p.asIdeal.IsMaximal)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ C) :
+    IsField (strictHenselization s) := by
+  have hdimC : topologicalKrullDim C ≤ 0 := by
+    rw [C.isoSpec.hom.homeomorph.isHomeomorph.topologicalKrullDim_eq]
+    change topologicalKrullDim (PrimeSpectrum Γ(C, ⊤)) ≤ 0
+    rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+    exact (Ring.krullDimLE_zero_iff.mpr (fun p hp ↦ hCdim ⟨p, hp⟩)).1
+  rw [IsLocalRing.isField_iff_maximalIdeal_eq, eq_bot_iff]
+  intro a ha
+  have ha' : strictHenselizationEval s a = 0 :=
+    (mem_maximalIdeal_strictHenselization_iff a).mp ha
+  obtain ⟨N, hN⟩ := exists_specPointedEtaleNeighborhood_forall_mem_range 1 (fun _ ↦ a)
+  obtain ⟨c, rfl⟩ := hN 0
+  rw [SpecPointedEtaleNeighborhood.strictHenselizationEval_ι] at ha'
+  let : AlgebraicGeometry.Etale N.hom := N.etale
+  have : IsReduced (Spec N.R) := isReduced_of_etale N.hom
+  have : _root_.IsReduced N.R := by
+    exact (affine_isReduced_iff N.R).mp inferInstance
+  have : Ring.KrullDimLE 0 N.R := by
+    constructor
+    change ringKrullDim N.R ≤ 0
+    rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+    exact N.hom.topologicalKrullDim_le_of_etale.trans hdimC
+  let q : Ideal N.R := RingHom.ker N.pt.hom
+  let : q.IsPrime := RingHom.ker_isPrime _
+  have : Ring.KrullDimLE 0 (Localization.AtPrime q) :=
+    Ring.KrullDimLE.of_isLocalization q (Ideal.mem_minimalPrimes_iff_isPrime.mpr
+      (inferInstance : q.IsPrime)) _
+  have hf := Ring.KrullDimLE.isField_of_isReduced (R := Localization.AtPrime q)
+  have hz : algebraMap N.R (Localization.AtPrime q) c = 0 := by
+    have hc : algebraMap N.R (Localization.AtPrime q) c ∈
+        IsLocalRing.maximalIdeal (Localization.AtPrime q) :=
+      (IsLocalization.AtPrime.to_map_mem_maximal_iff _ q c).mpr ha'
+    rwa [(IsLocalRing.isField_iff_maximalIdeal_eq.mp hf), Ideal.mem_bot] at hc
+  obtain ⟨⟨t, ht⟩, htc⟩ :=
+    (IsLocalization.map_eq_zero_iff q.primeCompl (Localization.AtPrime q) c).mp hz
+  have hu : IsUnit (N.ι t) := isUnit_of_strictHenselizationEval_ne_zero (by
+    rw [SpecPointedEtaleNeighborhood.strictHenselizationEval_ι]
+    exact ht)
+  exact hu.mul_right_eq_zero.mp (by rw [← map_mul, htc, map_zero])
+
+private theorem torsionCd_of_affine_zeroDimensional
+    {C V : Scheme.{u}} [IsAffine C] [IsReduced C] [IsAffine V]
+    (hCdim : ∀ p : PrimeSpectrum Γ(C, ⊤), p.asIdeal.IsMaximal)
+    (hCres : ∀ c : C, IsSepClosed (C.residueField c))
+    (f : V ⟶ C) [LocallyOfFiniteType f] (e : ℕ)
+    (he : ∀ (K : Type u) [Field K] [IsAlgClosed K]
+      (c : Spec (.of K) ⟶ C),
+      topologicalKrullDim (pullback f c : Scheme.{u}) ≤ (e : WithBot ℕ∞)) :
+    V.HasTorsionEtaleCohomologicalDimensionLE e := by
+  have hclosed : ∀ c : C, IsClosed ({c} : Set C) := by
+    intro c
+    let E := C.isoSpec.hom.homeomorph
+    have hc := (PrimeSpectrum.isClosed_singleton_iff_isMaximal (E c)).mpr (hCdim (E c))
+    simpa only [Set.image_singleton, E.symm_apply_apply] using E.symm.isClosedMap _ hc
+  intro F hF n hn
+  obtain ⟨E⟩ := nonempty_sheafH_extDerivedIso V n
+  have hH : Subsingleton (Sheaf.H F n) := by
+    apply Etale.subsingleton_H_of_rightDerived_lowerStar f F (c := 0) (e := e) ?_
+      (fun p q hp ↦ subsingleton_H_of_affine_closed_isSepClosed C hclosed hCres _ p hp)
+      n (by simpa using hn)
+    intro q hq
+    let G := (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj F)
+    have hstalk (c : C) :
+        IsZero ((pointSmallEtale (C.algClosurePoint c)).sheafFiber.obj G) := by
+      let s := C.algClosurePoint c
+      let H := ↑(strictHenselization s)
+      let : Field H := (field_strictLocalization_of_zeroDimensional C hCdim s).toField
+      have : IsSepClosed H := IsSepClosed.of_ringEquiv
+        (RingEquiv.ofBijective (IsLocalRing.residue H)
+          ⟨RingHom.injective _, IsLocalRing.residue_surjective⟩).symm
+      let t := strictLocalizationToBase s
+      let a := pullback.snd f t
+      let k := AlgebraicClosure H
+      let b := Spec.map (CommRingCat.ofHom (algebraMap H k))
+      have hd : topologicalKrullDim (pullback f t : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
+        rw [← topologicalKrullDim_pullback_eq_of_field a b]
+        rw [IsHomeomorph.topologicalKrullDim_eq _
+          (pullbackLeftPullbackSndIso f t b).hom.homeomorph.isHomeomorph]
+        exact he k (b ≫ t)
+      let F' := (Etale.upperStar AddCommGrpCat.{u + 1} (pullback.fst f t)).obj F
+      have hF' : F'.IsTorsion := Etale.isTorsion_upperStar _ hF
+      have hzH : Subsingleton (Sheaf.H F' q) :=
+        subsingleton_H_of_lt_of_isAffine_of_isSepClosed e a hd F' hF' q hq
+      obtain ⟨eq⟩ := nonempty_sheafH_extDerivedIso (pullback f t) q
+      have hz : IsZero ((Etale.cohomology AddCommGrpCat.{u + 1}
+          (pullback f t) q).obj ((DerivedCategory.singleFunctor _ 0).obj F')) := by
+        apply AddCommGrpCat.isZero_iff_subsingleton.mpr
+        have : Subsingleton ((Sheaf.functorH _ q).obj F') := hzH
+        exact (eq.app F').addCommGroupIsoToAddEquiv.symm.injective.subsingleton
+      obtain ⟨r, _, hr⟩ := (Etale.strictHenselizationStalkFormula f s F hF q).1
+      have := hr
+      have hzPlus := hz.of_iso ((Etale.cohomology AddCommGrpCat.{u + 1}
+        (pullback f t) q).mapIso ((DerivedCategory.Plus.singleFunctorιIso _ 0).app F'))
+      have hz' := hzPlus.of_iso
+        (asIso (r ≫ Etale.strictHenselizationCohomologyComparison s f F q))
+      exact hz'.of_iso ((pointSmallEtale s).sheafFiber.mapIso
+        (Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso
+          (Etale.lowerStar AddCommGrpCat.{u + 1} f) F q)).symm
+    have : IsZero G := by
+      apply (IsZero.iff_id_eq_zero G).mpr
+      apply sheafHom_ext_of_sheafFiber_map_algClosurePoint
+      intro c
+      exact (hstalk c).eq_of_src _ _
+    exact this
+  have : Subsingleton ((Sheaf.functorH _ n).obj F) := hH
+  exact (E.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
+
+end AlgebraicGeometry.Scheme
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Affine finite-type families over reduced zero-dimensional w-contractible bases
@@ -60,35 +177,33 @@ obligation, motivated on the torsion branch by Stacks Tag 0F0V. An exact referen
 the full topological-coefficient transfer remains wanted
 (blueprint: lem-sfb-affine-profinite-family-serre-cd).
 
-Proof plan (the six steps of the DAG node):
-1. Write R = Gamma(C, O_C). Each R_c is reduced with its maximal ideal as its only prime,
-so this ideal is zero and R_c is the separably closed field kappa(c). The pointed-etale
-colimit defining its strict henselization is the field itself: use the selected factor
-of each pointed etale algebra, by lem-exc-etale-field-gsets and def-sc-ring-strict-henselization.
-The affine strict-local comparison lem-exc-affine-strict-local-ring-comparison identifies
-C_(c-bar) with Spec kappa(c), without identifying the latter with an algebraic closure.
-2. For every affine etale V -> U, its coordinate map is finite type by
-lem-weil-pbc-etale-ring-map-quasi-finite. Thus V -> C is finite type. By etale base change
-and lem-sc-etale-local-dimension, each geometric fibre has dimension at most e.
-Affineness makes V -> C quasi-compact and separated, hence quasi-separated.
-3. By lem-kun-dimension-extension, the ordinary fibre V_c has dimension at most e.
-Its separably closed base field has torsion dimension zero by
-lem-sf-separably-closed-torsion-cd. Apply thm-sc-affine-torsion-cd to obtain vanishing
-above e for every torsion abelian etale sheaf on V_c, including the empty fibre.
-4. For a torsion etale sheaf F on V, apply prop-weil-pbc-strict-henselization-stalk-formula
-to V -> C. Step 1 identifies its strict-local fibre with V_c; Step 3 kills the stalks
-of every higher direct image above e. Apply lemma-weil-pbc-geometric-stalk-conservative
-to conclude that those higher direct images vanish.
-5. Every point of C is closed and its residue field is separably closed. By
-lem-cbc-affine-sepclosed-etale-acyclic, global sections on its etale site are exact.
-The identification def-weil-pbc-exact-global-sections-leray now gives zero cohomology
-above e on every affine etale V -> U for every torsion abelian etale sheaf.
-6. Apply lem-sfb-torsion-cd-topological-serre-transfer with X = U and d = e to precisely
-the uniform torsion hypothesis just proved. Its coefficient choices, all-continuous-map
-norm topology on Omega, ordinary internal modules, constant-model generators and
-weak Serre coproduct closure are the same as here. It yields the cutoff e + 2.
-This is an independent coefficient theorem, not an application of torsion vanishing
-to non-torsion coefficients. The transfer includes the empty scheme and zero ring.
+Proof:
+1. The affine spectrum of C has dimension at most zero. For any geometric point s,
+   every affine pointed etale neighborhood has reduced coordinate ring of dimension
+   at most zero. Its localization at the pointing kernel is a field. An element
+   evaluating to zero is therefore killed by an element outside that kernel, which
+   becomes a unit in the strict henselization. Thus the strict henselization is a
+   field. Its residue field is separably closed, so the field itself is separably
+   closed. This avoids choosing or identifying an algebraic strict henselization.
+2. For an affine etale v : V -> U, put f = v followed by g. Etale morphisms do not
+   increase topological dimension, including after base change. Pullback pasting
+   therefore gives the same geometric fibre bound e for f.
+3. Base change the strict-local fibre of f to an algebraic closure of its field.
+   Invariance of dimension under field extension and pullback pasting bound its
+   dimension by e. The affine Artin theorem over a separably closed field gives
+   vanishing above e for every torsion sheaf on this strict-local fibre.
+4. Inverse image preserves torsion. The strict-henselization stalk formula and the
+   degree-zero derived-functor comparison identify all geometric stalks of R^q f_*F
+   with the zero groups from step 3. Geometric stalk conservativity gives R^q f_*F = 0.
+5. The affine spectrum hypothesis says every point of C is closed. Together with
+   the residue-field hypothesis, affine etale acyclicity kills all positive-degree
+   cohomology on C. Leray vanishing with base bound zero gives the uniform torsion
+   bound e on V. All arguments include empty schemes and empty fibres.
+6. Apply torsionCd_topological_serreHeart_cohomology_vanishes to this uniform bound.
+   Its coefficient choices, norm topology, uncompleted module category, generators
+   and weak Serre coproduct closure are exactly those in this statement. This last
+   transfer remains an independent coefficient theorem with an explicitly wanted
+   reference; torsion vanishing is never applied directly to a non-torsion module.
 -/
 theorem affine_profinite_family_serreHeart_cohomology_vanishes
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -104,8 +219,7 @@ theorem affine_profinite_family_serreHeart_cohomology_vanishes
         Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨
       Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
       (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
-        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ))))
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))))
     {C U : Scheme.{u}} [IsAffine C] [IsReduced C] [IsAffine U]
     [IsWContractibleRing Γ(C, ⊤)]
     (hCdim : ∀ p : PrimeSpectrum Γ(C, ⊤), p.asIdeal.IsMaximal)
@@ -121,6 +235,12 @@ theorem affine_profinite_family_serreHeart_cohomology_vanishes
     IsZero ((DerivedCategory.homologyFunctor _ r).obj
       ((condensedModuleSections Λ U).rightDerivedFunctor.obj
         ((DerivedCategory.singleFunctor _ 0).obj N))) := by
-  sorry
+  apply torsionCd_topological_serreHeart_cohomology_vanishes ℓ Λ hΛ U e ?_ N hN r hr
+  intro V v _ _
+  apply Scheme.torsionCd_of_affine_zeroDimensional hCdim hCres (v ≫ g) e
+  intro K _ _ c
+  rw [← IsHomeomorph.topologicalKrullDim_eq _
+    (pullbackRightPullbackFstIso g c v).hom.homeomorph.isHomeomorph]
+  exact (pullback.snd v (pullback.fst g c)).topologicalKrullDim_le_of_etale.trans (he K c)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

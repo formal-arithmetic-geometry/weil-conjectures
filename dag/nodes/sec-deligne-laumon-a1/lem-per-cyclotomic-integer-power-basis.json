@@ -1,0 +1,109 @@
+{
+ "id": "lem-per-cyclotomic-integer-power-basis",
+ "kind": "statement",
+ "title": "A cyclotomic ring of integers has an integral power basis",
+ "statement": "For each integer $N\\geq1$ there exists a primitive $N$th root of unity $\\zeta\\in\\mathbf C$, meaning $\\zeta^N=1$ and $\\zeta^j\\neq1$ for $0<j<N$. For any such $\\zeta$, let $K=\\mathbf Q(\\zeta)\\subset\\mathbf C$ be the smallest subfield containing $\\mathbf Q$ and $\\zeta$, and let $A=\\{a\\in K:a\\text{ satisfies a monic polynomial in }\\mathbf Z[T]\\}$ be its ring of integers. Then $K$ is a number field (a finite-dimensional extension of $\\mathbf Q$), and $A$ is a free $\\mathbf Z$-module with basis $1,\\zeta,\\ldots,\\zeta^{d-1}$, where $d=\\varphi(N)\\geq1$ and $\\varphi(N)$ is the number of integers $1\\leq j\\leq N$ coprime to $N$. Field generation has the meaning of [def-weil-simple-field-extension], the ring of integers is the integral closure of $\\mathbf Z$ in $K$ [def-weil-pbc-integral-closure], and a free module and its basis have the meaning of [def-weil-pbc-free-module]. Finite-dimensional means spanned by a finite family [def-weil-finite-dimensional-subspace].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, cyclotomic coefficient context. Exact Mathlib input: Complex.isPrimitiveRoot_exp, RootsOfUnity/Complex.lean:92; IsPrimitiveRoot.integralPowerBasis, integralPowerBasis_gen, integralPowerBasis_dim, NumberField/Cyclotomic/Basic.lean:853,858,865. No Stacks tag for this cyclotomic integral basis theorem."
+ },
+ "stmt_deps": [
+  "def-weil-simple-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-free-module",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a primitive root of unity zeta the ring Z zeta is free over Z with basis powers starting with one and has an integer linear retraction sending one to one",
+   "results": "{\"t\": \"2026-10-24T02:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a primitive root of unity zeta the ring Z zeta is free over Z with basis powers starting with one and has an integer linear retraction sending one to one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.integralPowerBasis'_gen\", \"IsPrimitiveRoot.integralPowerBasis\", \"IsPrimitiveRoot.integralPowerBasis_gen\", \"IsPrimitiveRoot.subOneIntegralPowerBasis\", \"IsPrimitiveRoot.integralPowerBasis'\", \"IsPrimitiveRoot.integralPowerBasisOfPrimePow_gen\", \"IsPrimitiveRoot.subOneIntegralPowerBasisOfPrimePow\", \"IsPrimitiveRoot.adjoinEquivRingOfIntegers_apply\"], \"digest\": \"00a2410914a81289\"}",
+   "date": "2026-10-24",
+   "verdict": "match: integralPowerBasis gives exactly the integer basis of the cyclotomic ring of integers, with its generator and dimension; Complex.isPrimitiveRoot_exp supplies the existence clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot, \"powerBasis\"",
+   "results": "{\"t\": \"2026-10-24T02:10:23Z\", \"tool\": \"loogle\", \"query\": \"IsPrimitiveRoot, \\\"powerBasis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.powerBasis\", \"IsPrimitiveRoot.subOnePowerBasis\", \"IsPrimitiveRoot.powerBasis_gen\", \"IsPrimitiveRoot.powerBasis_dim\", \"IsPrimitiveRoot.subOnePowerBasis_gen\", \"IsPrimitiveRoot.subOnePowerBasis_dim\", \"IsPrimitiveRoot.powerBasis_gen_mem_adjoin_zeta_sub_one\", \"IsPrimitiveRoot.integralPowerBasis\"], \"digest\": \"113b71c6d2748452\"}",
+   "date": "2026-10-24",
+   "verdict": "match: integralPowerBasis gives exactly the integer basis of the cyclotomic ring of integers, with its generator and dimension; Complex.isPrimitiveRoot_exp supplies the existence clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cyclotomic integer power basis Z adjoin primitive root unity free module",
+   "results": "{\"t\": \"2026-10-24T02:10:23Z\", \"tool\": \"leansearch\", \"query\": \"cyclotomic integer power basis Z adjoin primitive root unity free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.subOneIntegralPowerBasis\", \"IsPrimitiveRoot.subOneIntegralPowerBasisOfPrimePow\", \"IsPrimitiveRoot.subOneIntegralPowerBasis'\", \"IsPrimitiveRoot.powerBasis\", \"IsPrimitiveRoot.integralPowerBasis\", \"IsPrimitiveRoot.subOneIntegralPowerBasis_gen\", \"IsPrimitiveRoot.integralPowerBasis'\", \"IsPrimitiveRoot.subOneIntegralPowerBasisOfPrimePow.congr_simp\"], \"digest\": \"00fa1e540ee6872c\"}",
+   "date": "2026-10-24",
+   "verdict": "match: integralPowerBasis gives exactly the integer basis of the cyclotomic ring of integers, with its generator and dimension; Complex.isPrimitiveRoot_exp supplies the existence clause."
+  },
+  {
+   "tool": "grep",
+   "query": "^noncomputable def integralPowerBasis |^theorem integralPowerBasis_(gen|dim)",
+   "results": "{\"t\": \"2026-10-24T02:13:21Z\", \"tool\": \"grep\", \"query\": \"^noncomputable def integralPowerBasis |^theorem integralPowerBasis_(gen|dim)\", \"sub\": \"NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"853\", \"858\", \"865\"], \"digest\": \"a4834b9a935dd679\"}",
+   "date": "2026-10-24",
+   "verdict": "match: integralPowerBasis gives exactly the integer basis of the cyclotomic ring of integers, with its generator and dimension; Complex.isPrimitiveRoot_exp supplies the existence clause."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem isPrimitiveRoot_exp ",
+   "results": "{\"t\": \"2026-10-24T02:13:21Z\", \"tool\": \"grep\", \"query\": \"^theorem isPrimitiveRoot_exp \", \"sub\": \"RingTheory/RootsOfUnity/Complex.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"92\"], \"digest\": \"51732aafd8412f22\"}",
+   "date": "2026-10-24",
+   "verdict": "match: integralPowerBasis gives exactly the integer basis of the cyclotomic ring of integers, with its generator and dimension; Complex.isPrimitiveRoot_exp supplies the existence clause."
+  },
+  {
+   "tool": "grep",
+   "query": "intermediateField_adjoin_isCyclotomicExtension|theorem numberField|instance.*numberField",
+   "results": "{\"t\": \"2026-10-24T02:18:38Z\", \"tool\": \"grep\", \"query\": \"intermediateField_adjoin_isCyclotomicExtension|theorem numberField|instance.*numberField\", \"sub\": \"NumberTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\"], \"digest\": \"60252403bb2482cc\"}",
+   "date": "2026-10-24",
+   "verdict": "match: standard cyclotomic extension and number-field instances used for the integral power-basis specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "numberField|intermediateField_adjoin_isCyclotomicExtension|adjoin_isCyclotomicExtension",
+   "results": "{\"t\": \"2026-10-24T02:25:30Z\", \"tool\": \"grep\", \"query\": \"numberField|intermediateField_adjoin_isCyclotomicExtension|adjoin_isCyclotomicExtension\", \"sub\": \"NumberTheory/Cyclotomic/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"9\", \"43\", \"56\", \"410\", \"469\"], \"digest\": \"75958709b436e0a1\"}",
+   "date": "2026-10-24",
+   "verdict": "match: standard cyclotomic extension and number-field instances used for the integral power-basis specialization."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsPrimitiveRoot.integralPowerBasis",
+  "file": "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean",
+  "line": 853,
+  "how": "One declaration per clause: Complex.isPrimitiveRoot_exp (Mathlib/RingTheory/RootsOfUnity/Complex.lean:92-94) gives a primitive root for N nonzero. IsPrimitiveRoot.adjoin_isCyclotomicExtension (Mathlib/NumberTheory/Cyclotomic/Basic.lean:469) supplies the cyclotomic-extension instance on the algebraic simple adjunction, which is the field Q(zeta); IsCyclotomicExtension.numberField (:410) supplies NumberField K. These are the standard algebraic-adjunction and cyclotomic instances for this specialization, not a claim that C is algebraic over Q. IsPrimitiveRoot.integralPowerBasis (Basic.lean:853-855), integralPowerBasis_gen (:858-862) and integralPowerBasis_dim (:865-867) give the integral power basis with generator zeta and dimension phi(N). PowerBasis.basis_eq_pow (Mathlib/RingTheory/PowerBasis.lean:60-64) reads it as the displayed basis. This is the integral basis of O_K, not merely the rational basis of K."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-elementary-unit-character",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary representation input under lem-per-artin-gabber-affine-curve, Proof Step 3, via lem-per-brauer-monomial-induction; Expose X Proposition 1.2, printed p.138, before (5). The latest blueprint does not prove this auxiliary input. Specifically: A cyclotomic ring of integers has an integral power basis.",
+   "via": [
+    "lem-per-brauer-elementary-unit-character",
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -20,52 +20,20 @@
  ],
  "proof": [
   {
-   "text": "Because $g:W\\to T$ is of finite type, every affine open of $T$ has inverse image covered by finitely many affine opens of $W$; quasi-compactness of $T$ therefore gives a finite affine open cover $W=\\bigcup_{i=1}^r W_i$. Flatness and local finite presentation are local on the source, so it is enough to construct, for each $W_i$, a $U$-admissible blowup on which the strict transform of $W_i$ is flat and of finite presentation. The hypotheses used here are exactly the conventions that “of finite type” means quasi-compact and locally of finite type, and that $g$ is quasi-separated.",
+   "text": "Apply [lem-trf-flattening-ambient-module-preparation] to $g$ and $U$. It supplies a finite affine cover $W=\\bigcup_i W_i$, closed immersions $j_i:W_i\\hookrightarrow V_i$ with $V_i\\to T$ quasi-compact and locally of finite presentation, and finite-type quasi-coherent modules $\\mathcal F_i=(j_i)_*\\mathcal O_{W_i}$ whose restrictions over $U$ are finitely presented and flat over $U$.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-finite-type-morphism",
-    "def-weil-quasi-separated-morphism"
+    "lem-trf-flattening-ambient-module-preparation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, proof: finite affine covering and locality of flatness and finite presentation"
+    "place": "Tag 081R, lemma-flat-after-blowing-up, affine module preparation"
    }
   },
   {
-   "text": "Fix an affine piece $W_i$. Its morphism to $T$ is locally of finite type, so [lemma-nagata-quasi-affine-immersion-affine-space-exists] gives an immersion into $\\mathbb A_T^{n_i}$. Choose a quasi-compact open neighbourhood $V_i$ of its image on which it is a closed immersion $j_i:W_i\\hookrightarrow V_i$. Such a neighbourhood exists by the definition of immersion and quasi-compactness of $W_i$. On every affine open $\\operatorname{Spec}B\\subseteq V_i$, the inverse image is $\\operatorname{Spec}(B/J)$ [def-weil-closed-immersion]; thus $\\mathcal F_i=(j_i)_*\\mathcal O_{W_i}$ is locally $\\widetilde{B/J}$, a cyclic module, hence quasi-coherent and of finite type [pqf-def-coherent]. The scheme $V_i$ is quasi-compact and locally of finite presentation over $T$, since it is open in a finite-dimensional relative affine space.",
+   "text": "For each $i$, apply [lem-trf-flattening-module-by-admissible-blowup] to $V_i\\to T$, $\\mathcal F_i$ and $U$. The base is qcqs, $U$ is quasi-compact, and step 1 supplies all four ambient and module hypotheses. Obtain a finite-type quasi-coherent centre $\\mathcal I_i$, equal to the unit ideal on $U$, with blowup $b_i:T_i\\to T$ such that $\\mathcal F_i^{b_i}$ is flat over $T_i$ and finitely presented over $V_i\\times_T T_i$.",
    "uses": [
-    "lemma-nagata-quasi-affine-immersion-affine-space-exists",
-    "def-weil-closed-immersion",
-    "pqf-def-coherent",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, affine immersion and choice of V"
-   }
-  },
-  {
-   "text": "Check finite presentation of $\\mathcal F_i$ over $U$. On affine charts over $\\operatorname{Spec}R\\subseteq U$, write $\\operatorname{Spec}B\\subseteq V_{i,U}$ and $j_i^{-1}(\\operatorname{Spec}B)=\\operatorname{Spec}A$, with $A=B/J$. Here $B$ is of finite type over $R$ and $A$ is of finite presentation over $R$, because $W_U\\to U$ is locally of finite presentation. By [lem-weil-pbc-finite-presentation-over-finite-type-algebra], $A$ is finitely presented over $B$ (the affine argument for Morphisms 02FV). Apply [lem-weil-pbc-finite-presentation-surjection-kernel-fg] with coefficient ring $B$ and zero polynomial variables: $J=(a_1,\\ldots,a_s)$. The exact sequence $B^s\\xrightarrow{(a_1,\\ldots,a_s)}B\\to B/J\\to0$, sheafified on this chart, is a finite module presentation [def-weil-pbc-module-finite-type-presentation]. This explicitly proves the required finite-presentation pushforward assertion in this closed-immersion case. At image points the stalk of $\\mathcal F_i$ equals the stalk of $\\mathcal O_{W_i}$; outside the closed image it is zero. The hypothesis of flatness over $U$ therefore says exactly that these stalks are flat over the corresponding local rings of $U$.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
-    "def-weil-pbc-module-finite-type-presentation",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-flat-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, hypotheses for theorem-flatten-module; morphisms.tex Tag 02FV and algebra.tex Tag 00F4 (4), Tag 00R2"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-flattening-module-by-admissible-blowup] to $V_i\\to T$, $\\mathcal F_i$, and $U$. The base is qcqs, $V_i$ is quasi-compact and locally of finite presentation, $\\mathcal F_i$ is finite type, and its restriction over $U$ is finitely presented and flat by the preceding steps. This gives a $U$-admissible blowup $b_i:T_i\\to T$ with the module strict transform $\\mathcal F_i^b$ [def-trf-module-strict-transform] flat over $T_i$ and finitely presented over $V_i\\times_TT_i$.",
-   "uses": [
-    "lem-trf-flattening-module-by-admissible-blowup",
-    "def-trf-module-strict-transform"
+    "lem-trf-flattening-module-by-admissible-blowup"
    ],
    "elementary": false,
    "source": {
@@ -74,116 +42,33 @@
    }
   },
   {
-   "text": "Apply [lem-trf-strict-transform-affine-pushforward] to the affine morphism $j_i$ and $\\mathcal O_{W_i}$. By [def-trf-module-strict-transform], the strict transform of $\\mathcal O_{W_i}$ is the structure sheaf of the scheme strict transform $W_i^b$, pushed forward into $W_i\\times_TT_i$: both are the quotient of the structure sheaf by sections supported on the exceptional inverse image. Indeed, the ideal of the scheme-theoretic closure is the kernel of restriction to the complementary open, precisely those supported sections [def-nagata-strict-transform]. Consequently the affine-pushforward comparison identifies $\\mathcal F_i^b$ with $(j_i^b)_*\\mathcal O_{W_i^b}$, where $j_i^b:W_i^b\\hookrightarrow V_i\\times_TT_i$ is a closed immersion. We use this comparison of modules, rather than the ambient-closed comparison of schemes.",
+   "text": "Apply [lem-trf-flattening-closed-immersion-transfer] to $p:V_i\\to T$, $j_i$ and $\\mathcal I_i$. Its comparison identifies $\\mathcal F_i^{b_i}$ with the pushed structure sheaf of the scheme strict transform $W_i^{(i)}$, for the complement of $V(\\mathcal I_i)$. The flatness and finite presentation obtained in step 2 therefore give flatness and local finite presentation of $W_i^{(i)}\\to T_i$.",
    "uses": [
-    "lem-trf-strict-transform-affine-pushforward",
-    "def-trf-module-strict-transform",
-    "def-nagata-strict-transform"
+    "lem-trf-flattening-closed-immersion-transfer"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, last paragraph; divisors.tex Tags 080D (1),(2), 080G"
+    "place": "Tag 081R, lemma-flat-after-blowing-up, last paragraph"
    }
   },
   {
-   "text": "Flatness of the identified module means, on the closed image, flatness of the identical stalks of $\\mathcal O_{W_i^b}$ over $T_i$, hence $W_i^b\\to T_i$ is flat. Apply [lem-weil-pbc-finite-presentation-kernel-surjection-finite-type] to the surjection $\\mathcal O_{V_i\\times_TT_i}\\to(j_i^b)_*\\mathcal O_{W_i^b}$. Its kernel is locally generated by finitely many sections. Thus locally $W_i^b$ is cut out by finitely many equations in $V_i\\times_TT_i$, which is locally of finite presentation over $T_i$. On affine charts, a finitely presented base algebra followed by a quotient by finitely many equations is finitely presented, by [lem-weil-pbc-finite-presentation-base-change-composition]. Therefore $W_i^b\\to T_i$ is locally of finite presentation.",
+   "text": "Apply [lem-trf-flattening-finite-cover-common-blowup] to this finite affine cover and the ideals $\\mathcal I_i$. Its hypothesis on each individual strict transform is step 3, and $g$ is quasi-compact and quasi-separated by the assumptions. It gives the product centre $\\mathcal I=\\prod_i\\mathcal I_i$, a $U$-admissible blowup $T^b\\to T$, and flatness, local finite presentation, quasi-compactness and quasi-separatedness of the strict transform of $W$ for that centre. These are exactly the claimed flatness and finite presentation, with the strict transform taken over $T\\setminus V(\\mathcal I)$.",
    "uses": [
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "def-sbc-locally-finite-presentation"
+    "lem-trf-flattening-finite-cover-common-blowup"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, last sentence; modules.tex Tag 01BP (1)"
-   }
-  },
-  {
-   "text": "Choose the finite-type centre ideals $\\mathcal I_i$ of $b_i$ and put $\\mathcal I=\\prod_i\\mathcal I_i$, $T^b=\\operatorname{Bl}_{\\mathcal I}(T)$. The product is finite type and restricts to the unit ideal on $U$, so this is $U$-admissible [def-nagata-admissible-blowup]. For fixed $i$, put $\\mathcal J_i=\\prod_{k\\ne i}\\mathcal I_k$. The product-blowup theorem [thm-nagata-blowup-product-ideal], with the iterated blowup of [def-nagata-blowup-product-comparison], identifies $T^b\\to T_i$ with the blowup of the extended ideal $\\mathcal J_i\\mathcal O_{T_i}$. In particular it is a $U$-admissible blowup, not merely a morphism dominating $T_i$. The support condition for composition is also satisfied: off $V(\\mathcal I_i)$ the map $b_i$ is an isomorphism (apply the cited open-complement lemma with preserved open $T\\setminus V(\\mathcal I_i)$), so the image of $V(\\mathcal J_i\\mathcal O_{T_i})$ there is $V(\\mathcal J_i)\\setminus V(\\mathcal I_i)$; over $V(\\mathcal I_i)$ it adds nothing to the union. Hence $V(\\mathcal I)=V(\\mathcal I_i)\\cup b_i(V(\\mathcal J_i\\mathcal O_{T_i}))$.",
-   "uses": [
-    "def-nagata-admissible-blowup",
-    "thm-nagata-blowup-product-ideal",
-    "def-nagata-blowup-product-comparison",
-    "lemma-nagata-admissible-blowup-over-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, finite affine-cover reduction; divisors.tex Tags 080A, 080N"
-   }
-  },
-  {
-   "text": "For each $i$, apply [lem-trf-strict-transform-composition] with $S=T$, $S_1=T_i$, $S_2=T^b$, $Z=V(\\mathcal I_i)$, $Z_1=V(\\mathcal J_i\\mathcal O_{T_i})$, and $Y=V(\\mathcal I)$. The previous step supplies both the blowup factorization and its support equality. It follows that the strict transform of $W_i$ for the single centre $\\mathcal I$ agrees with the strict transform of $W_i^b\\to T_i$ for the centre $\\mathcal J_i\\mathcal O_{T_i}$.",
-   "uses": [
-    "lem-trf-strict-transform-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, reduction using remark-successive-blowups; divisors.tex Tag 080I (2)"
-   }
-  },
-  {
-   "text": "Since $W_i^b\\to T_i$ is flat, its strict transform for the further blowup equals its base change to $T^b$: [thm-nagata-strict-transform-is-blowup] identifies that strict transform with the blowup of $W_i^b$ in the extended centre, and [thm-nagata-blowup-flat-base-change] identifies the latter with $W_i^b\\times_{T_i}T^b$ by the comparison of [def-nagata-blowup-flat-base-change-map]. Flatness of this base change follows from [lem-weil-pbc-flat-morphism-base-change]; local finite presentation follows chartwise from the base-change clause of [lem-weil-pbc-finite-presentation-base-change-composition]. Thus every strict transform of $W_i$ on $T^b$ is flat and locally of finite presentation. This proves the persistence assertion using flatness at all points; it does not assume that the original open $U$ was dense in $T$.",
-   "uses": [
-    "thm-nagata-strict-transform-is-blowup",
-    "thm-nagata-blowup-flat-base-change",
-    "def-nagata-blowup-flat-base-change-map",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-finite-presentation-base-change-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R and remark-successive-blowups; divisors.tex Tags 080E and flat-base-change comparison (equivalently 080F (1))"
-   }
-  },
-  {
-   "text": "The strict transform $W'$ of $W$ is covered by the strict transforms of the finite affine opens $W_i$. Flatness and local finite presentation are local on the source, hence $W'\\to T'$ has both properties. Since $W\\to T$ is quasi-compact and quasi-separated, its base change $W\\times_TT'\\to T'$ is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]; the closed immersion $W'\\hookrightarrow W\\times_TT'$ is affine, hence quasi-compact and separated, and composing gives that $W'\\to T'$ is quasi-compact and quasi-separated. Consequently $W'\\to T'$ is of finite presentation, completing the construction of the required $U$-admissible blowup.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-quasi-separated-morphism",
-    "def-sbc-locally-finite-presentation",
-    "def-nagata-strict-transform",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, conclusion of lemma-flat-after-blowing-up"
+    "place": "Tag 081R, lemma-flat-after-blowing-up, finite-cover reduction in paragraph 1"
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-admissible-blowup",
-  "def-nagata-blowup-flat-base-change-map",
-  "def-nagata-blowup-product-comparison",
-  "def-nagata-strict-transform",
-  "def-sbc-locally-finite-presentation",
-  "def-trf-module-strict-transform",
-  "def-weil-closed-immersion",
-  "def-weil-finite-type-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-quasi-separated-morphism",
-  "lem-trf-flattening-module-by-admissible-blowup",
-  "lem-trf-strict-transform-affine-pushforward",
-  "lem-trf-strict-transform-composition",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lemma-nagata-admissible-blowup-over-open",
-  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
-  "pqf-def-coherent",
-  "thm-nagata-blowup-flat-base-change",
-  "thm-nagata-blowup-product-ideal",
-  "thm-nagata-strict-transform-is-blowup"
+  "lem-trf-flattening-ambient-module-preparation",
+  "lem-trf-flattening-closed-immersion-transfer",
+  "lem-trf-flattening-finite-cover-common-blowup",
+  "lem-trf-flattening-module-by-admissible-blowup"
  ],
  "proof_origin": {
   "by": "document",
@@ -255,28 +140,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flattening-by-admissible-blowup",
   "worker": "stage1",
-  "summary": "Repair of all four return points: added module strict-transform definition, affine-pushforward comparison, and reused the newly landed successive-transform lemma; proved finite-presentation pushforward by explicit ideal generators using existing algebra nodes; made the common refinement a product-ideal blowup and justified persistence by existing flat base-change and blowup comparisons.",
-  "blueprint": "The steps realize the semistable-alteration flattening input cited in the ancestor lem-trf-local-term-locality proof (ILO Exposé X, Theorem 3.4, Step 2).",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-    "why": "Generic algebra or blowup comparison used in the Stacks 081R proof; this trace-formula unit has no alternative node giving that comparison."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 return: three independent statement-only nodes carry ambient preparation (old steps 1-3), closed-immersion transfer (5-6), and common-product-blowup persistence with source-cover gluing (7-10). Old step 4 remains the application of the existing module flattening theorem. The statement is unchanged and the assembly has fewer than 3000 characters. Full prior arguments, sources, citations and search records are retained in report.md for the next workers. Landing-refusal repair: compared retained head 0cabfd662cd with current DAG; re-read the unchanged module-flattening citation and all statement definitions, checked the five new tag-sharing pairs, and refreshed report.md for a new delivery on the current base. Resumed landing-refusal repair: verified retained head 46d7544d9a1 fingerprints, re-read current module-flattening and all statement dependencies, and distinguished newly present lem-a1-map-over-base-finite-presentation (02FV) after the initial dry-run diagnostic; retained statements and searches unchanged. Current returned-head repair (8aff328e000): re-read the current module theorem and every statement definition; statements and quotes remain unchanged. Audited twelve newly reported tag-sharing pairs, added precise nonduplicate distinctions, and retained all proofs and logged search results for rebase onto the current server DAG. Audited the four further pairs added between successful dry run 6f90a96a162 and its push: successive quotient/support and structure-algebra nodes do not supersede the workloads.",
+  "blueprint": "Same ILO Expose X Theorem 3.4 Step 2 flattening input in the proof of ancestor lem-trf-local-term-locality; subdivides the Stacks 081R argument without changing the unit route.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q71-1a3fa6caa",
-  "group": "Q71",
+  "reviewer": "NT-cc-Q85-02afe509e",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-1a3fa6caa (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited statement (including blueprint_update text) and the sources: Stacks flat.tex 0815 and 081R (statement and proof) and remark-successive-blowups; divisors.tex 080D, 080E, 080F, 080G, 080I and 080N. The item matches 081R hypothesis by hypothesis, is unchanged from the base and is not weakened. No SGA source is used. It is not a target node, so no base-change morphism or coefficient category is involved. All ten steps check out. Step 3: J is finitely generated by the finite-type/finite-presentation algebra lemma plus the kernel lemma with n=0, which gives B^s->B->B/J->0. Step 4: every hypothesis of 0815 holds. Step 5: the module strict transform of O_W equals the structure sheaf of the scheme strict transform because the exceptional divisor is locally principal. Step 7: the product-ideal blowup gives T^b->T_i as the blowup of J_i O_{T_i}, and V(I_i) ∪ b_i(V(J_i O)) = V(I). Step 8: the 080I(2) hypotheses are met. Step 9: the flat base change and strict-transform-is-blowup comparisons give 080F(1). Edge cases r=0 and r=1 work. The three new nodes are def-trf-module-strict-transform (080D(1)), lem-trf-flattening-module-by-admissible-blowup (0815: all five hypotheses and both conclusions) and lem-trf-strict-transform-affine-pushforward (080G). They are self-contained and statement-only, with correct blueprint ancestry and all three search kinds. They are not duplicates (I grepped the DAG for 080D/080G/0815 and module strict transforms) and none restates a clause of the item. I tested U=S, U empty, unit ideal, zero ideal and zero module. Accepted tool use: lem-weil-pbc-finite-presentation-kernel-surjection-finite-type (Modules 01BP, a generic module lemma). The other off-unit nodes are Lean-closed or Mathlib leaves. FIX (one C1 citation): step 10 now cites the Mathlib leaf lem-weil-pbc-qcqs-morphism-permanence (3), base-change stability of quasi-compact and quasi-separated, and derives qcqs of W'->T' from the base change composed with the closed immersion. The id is added to uses and proof_deps. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-02afe509e (reviewer sub-agent of L); spot-checked: Fourth delivery of the same re-split. The three new nodes are byte-identical to the earlier PASSed heads 23d0b9de, a81cf1d4 and 7f86c2c4. The item differs from 7f86 only in split_report.summary, and the report gained a repair section and more not-duplicate pairs. Each earlier return was the landing tool's systemic refusal 'completed in this project's DAG but not in the live DAG' (svc.log 105921, 119540, 128380), not a fault of the delivery. The live and side-live clones still hold the old 10-step item and none of the new ids, so the delivery is not superseded. I re-read everything independently. Stacks flat.tex 081R, read in full, matches the item hypothesis by hypothesis; the statement is unchanged, not weakened, not a target, and cites no SGA. morphisms.tex lemma-quasi-affine-finite-type-over-S needs no hypothesis on S. Re-split coverage: all 10 base steps appear verbatim in the report. Old steps 1-3 (2586 chars) are now ambient-module-preparation. Old step 4 stays as item step 2, the application of the existing module-flattening node; I checked all its hypotheses, and def-nagata-admissible-blowup gives the finite-type centre equal to O_U on U. Old steps 5-6 (1581 chars) are now closed-immersion-transfer, and old steps 7-10 (3017 chars) are now finite-cover-common-blowup. The workloads are comparable, none restates the item, and the assembly is 4 steps and 1794 chars. Truth checks: preparation uses the quasi-affine immersion, a quasi-compact V_i inside the open, quasi-compactness of V_i->T over a quasi-separated T, 02FV for finite presentation over U, and stalks for flatness. Transfer uses the exceptional set being locally principal, so its complement is quasi-compact and the closure ideal is the sheaf of sections supported on E (080D, 080G); 01BP plus composition give local finite presentation. Common blowup uses 080A, the support identity V(I_i) ∪ b_i(V(J_i O)) = V(I) (checked even though b_i need not be surjective), 080I(2), 080F(1), the open-source gluing and qcqs of a closed subscheme of the base change. Edge cases checked: r=0, r=1, I=0, I the unit ideal, U empty, U=T, U not dense. Duplicate scan: rg -L found 167 strict-transform files; I read the recent 10-22 factorized-centres-product-transform and etale-flatification-affine-refinement plus the module calculus, composition, sheaf-kernel, affine-pushforward, universal-exact and generic-free nodes, and none is a duplicate. Maintainer note: the maintainer-owned item field tool_uses still lists the 01BP node, which the assembly no longer cites; I left it unchanged. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup",
@@ -296,5 +176,16 @@
   "result": "fix",
   "note": "Statement checked clause by clause against the node and Stacks 081R (flat.tex 9122-9143) with strict transform as in 080D: [CompactSpace T][QuasiSeparatedSpace T], U : T.Opens with IsCompact, [LocallyOfFiniteType g][QuasiCompact g][QuasiSeparated g], [Flat (g ∣_ U)][LocallyOfFinitePresentation (g ∣_ U)] ⊢ ∃ B : IsAdmissible T U with Flat, LFP, QC and QS of strictTransformMap g B.I.blowupMap B.I.support.compl. Uses the recorded IsAdmissible (I, ofFiniteType, disjoint_support = unit on U), IdealSheafData.blowupMap, strictTransform (Hom.image of the open over V(I)ᶜ, by definition IdealSheafData.strictTransform), so no duplicate notion. Nothing stronger assumed, no clause dropped, one universe forced by the morphism, edge cases U=∅, U=T and empty schemes fine. Node changed only in lean; statement verbatim; docstrings carry 081R/080D, the blueprint id and all ten proof steps; proof sorry; imports are statement modules plus proof-dependency modules; no line over 100 chars. nt_compile.py --json: exit 0, no messages, 6.3 s. Only fault: H11/H1, the 'Second reading by Q18' section said no reading was done. fixes/lem-trf-flattening-by-admissible-blowup.report.md keeps the Worker report and replaces that section with a real clause-by-clause reading, labelled as written by the maintainer reviewer. Lean module and node record need no change."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

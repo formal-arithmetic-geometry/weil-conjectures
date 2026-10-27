@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-profinite-constant-model-relation-hull",
+ "kind": "statement",
+ "title": "Continuous relation kernels on profinite bases in the finite-model derived hull",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nLet $P$ be an extremally disconnected profinite space: $P$ is compact Hausdorff and totally disconnected and the closure of every open subset is open. Give $\\operatorname{Prof}/P$ the site of profinite spaces over $P$ with finite jointly surjective covering families, and let $q_P$ be its slice projection to the condensed topos [lem-zl-component-relative-profinite-site]. Put $R=q_P^*\\Lambda$ and use ordinary internal $R$-modules and their ordinary uncompleted derived category [sk-def-sfb-module-objects, def-weil-abstract-derived-category]. For a finitely presented scalar $\\Lambda$-module $B$, meaning a cokernel of a map of finite free scalar modules, put $B_R=R\\otimes_{\\underline\\Lambda}\\underline B$, with discrete constant underlines. A finite scalar local model on this site means an $R$-module which on a covering family has this form, with the scalar module allowed to vary [sk-def-sfb-constructible].\n\nLet $\\mathcal H_P$ be the intersection of all full replete classes in $D(\\operatorname{Mod}_R)$ which contain $F[0]$ for every finite scalar local model $F$ on $\\operatorname{Prof}/P$, and satisfy the following conditions. They contain zero and are closed under isomorphisms, all integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract of $K$ is given by maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=1_K$. They are closed under all small products in the ordinary derived category [def-weil-category-product]. If $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of module-sheaf complexes with a common termwise lower bound, and all $Q(C_i^\\bullet)$ belong to the class, then $Q(\\varinjlim_i C_i^\\bullet)$ belongs to the class. Here the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category].\n\nFor all finitely presented scalar modules $B,C$ and every actual $R$-module-sheaf morphism $v:B_R\\to C_R$, the abelian sheaf kernel satisfies\n$$ (\\ker v)[0]\\in\\mathcal H_P. $$\nThe morphism need not come from a scalar map $B\\to C$; for free $B,C$ its entries may be arbitrary continuous $\\Lambda$-valued functions on $P$. No constant-rank, locally constant elementary-divisor, completeness, finite-field-valuedness, or finite-scalar-model assertion about the kernel is made. The empty space, zero scalar modules, zero rings, zero maps and identity maps are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent-formulated relation-kernel generation obligation on an extremally disconnected profinite base. HRS Example 3.1, Examples 3.6 and 4.2 and Section 4.1 specify the continuous-function coefficient category and the obstruction to replacing this assertion by finite-model kernel closure. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "First take finite $\\Lambda=A$. Choose finite scalar generators of $B$. Their images under $v$ are continuous maps $P\\to C$, hence locally constant, since $B,C$ are finite discrete. A common finite clopen partition makes all images constant. Scalar linearity and the generators then make $v$ the same scalar linear map on each part, on every profinite test. Its kernel there is the constant model of a finite $A$-module, hence finitely presented (choose finitely many generators and relations in a finite module over a finite ring). Consequently $\\ker v$ itself is a finite scalar local model and its degree-zero complex is a generator. This also treats the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly; Example 3.1, Remark 3.2 and proof of Theorem 6.12(2)."
+   }
+  },
+  {
+   "text": "Now let $\\Lambda=O=\\mathcal O_E$; $\\mathbf Z_\\ell$ is the case $E=\\mathbf Q_\\ell$. Apply integral scalar realization to $B,C,v$. Write $v_k$ for its maps on $B/\\pi^kB,C/\\pi^kC$ and $N_k=\\ker v_k$. The entries of these finite maps are locally constant. Partition $P$ into finitely many clopens on which $v_k$ is a fixed finite scalar map. On each part $N_k$ is a finite scalar $O$-module killed by $\\pi^k$; integral realization identifies its continuous-section sheaf with its scalar model. Thus $N_k$ is a finite scalar local model and $N_k[0]\\in\\mathcal H_P$. The actual quotient transitions give a strict tower $N_{k+1}\\to N_k$. Integral realization identifies $\\ker v=\\varprojlim_kN_k$ as sheaves, without any claim that these transitions are surjective or uniformly stabilize.",
+   "uses": [
+    "lem-sfb-profinite-integral-scalar-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly; Example 3.1, Remark 3.2 and proof of Theorem 6.12(2)."
+   }
+  },
+  {
+   "text": "Apply finite-bundle Roos exactness to this tower, using $T=O$. Its hypotheses hold because every $N_k$ is the finite locally constant kernel bundle just constructed and every transition is induced by coefficient reduction. The distinguished triangle has first term $(\\ker v)[0]$ and the other two terms $\\prod_k^DN_k[0]$. Product closure, shifts and triangle extension closure put its first term in $\\mathcal H_P$. This uses compact finite solution bundles, not a uniform stabilization of reduction images.",
+   "uses": [
+    "lem-sfb-relative-finite-bundle-roos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly; Example 3.1, Remark 3.2 and proof of Theorem 6.12(2)."
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$ (including $\\mathbf Q_\\ell$), finite scalar presentations give finite-dimensional scalar spaces. Choose bases $B\\cong E^m,C\\cong E^n$. Scalar extension carries these bases to free sheaf bases; the free-matrix correspondence expresses the actual sheaf map $v$ by one matrix $F$ with entries in $R(P)=C(P,E)$. These are the images of the basis sections at the terminal object, so the same matrix acts after every profinite base change. In particular the matrix is not replaced by a locally constant one.",
+   "uses": [
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly; Example 3.1, Remark 3.2 and proof of Theorem 6.12(2)."
+   }
+  },
+  {
+   "text": "Apply Stonean continuous diagonalization to $F$, and write $D=LFU$ with diagonal entries $d_i$. The invertible continuous matrices give inverse sheaf isomorphisms by the same free-matrix correspondence. Multiplication by $U$ identifies $\\ker D$ with $\\ker F$. Sectionwise the diagonal equations are independent, so $\\ker D\\cong\\bigoplus_{i=1}^{\\min(m,n)}K_{d_i}\\oplus R^{m-\\min(m,n)}$. The rank-one annihilator lemma applies to each $d_i$ and $\\mathcal J=\\mathcal H_P$, since all its generators and all its closure conditions are exactly among those defining $\\mathcal H_P$. Each $K_{d_i}[0]$ therefore belongs to $\\mathcal H_P$. The free remaining term is a generator. Finite sums are split-triangle extensions, so the displayed decomposition and repleteness prove the field case. All five permitted coefficients are covered. Empty bases and zero modules give empty matrices and empty sums; zero and identity maps give respectively the source generator and zero.",
+   "uses": [
+    "lem-sfb-stonean-continuous-field-diagonalization",
+    "lem-sfb-profinite-field-scalar-annihilator-hull",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly; Example 3.1, Remark 3.2 and proof of Theorem 6.12(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-integral-scalar-realization",
+  "lem-sfb-relative-finite-bundle-roos",
+  "lem-sfb-ringed-site-free-matrix-scalar-extension",
+  "lem-sfb-stonean-continuous-field-diagonalization",
+  "lem-sfb-profinite-field-scalar-annihilator-hull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent assembly of finite clopen kernel, integral finite-bundle Roos reconstruction, and continuous field diagonalization followed by rank-one annihilator generation. No non-clopen recollement is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(profinite|condensed).*(kernel|relation).*(generat|closure)|(kernel|relation).*(generat|closure).*(profinite|condensed)",
+   "results": "{\"t\": \"2026-10-24T09:30:50Z\", \"tool\": \"grep\", \"query\": \"(profinite|condensed).*(kernel|relation).*(generat|closure)|(kernel|relation).*(generat|closure).*(profinite|condensed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned names give condensed-module constructors, abelian structure, solidity as a definition, and profinite limits; none proves continuous relation-kernel generation in the specified ordinary derived hull"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generate a continuous matrix relation kernel over a profinite space from finite scalar model sheaves using triangles products retracts and bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-24T09:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Generate a continuous matrix relation kernel over a profinite space from finite scalar model sheaves using triangles products retracts and bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.lim\", \"Condensed.ofSheafProfinite\", \"Profinite.hasColimits\", \"Profinite.hasLimits\", \"Profinite.asLimit\", \"Condensed.lanSheafProfinite\", \"CondensedMod.ofSheafProfinite\", \"Profinite.isoAsLimitConeLift\"], \"digest\": \"cf5217d998c120ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned names give condensed-module constructors, abelian structure, solidity as a definition, and profinite limits; none proves continuous relation-kernel generation in the specified ordinary derived hull"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-24T09:30:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned names give condensed-module constructors, abelian structure, solidity as a definition, and profinite limits; none proves continuous relation-kernel generation in the specified ordinary derived hull"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite space P the kernel sheaf of an arbitrary continuous map between constant finitely presented scalar modules belongs to the derived closure of finite scalar local models under products and bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-24T09:30:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a profinite space P the kernel sheaf of an arbitrary continuous map between constant finitely presented scalar modules belongs to the derived closure of finite scalar local models under products and bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.ofSheafProfinite\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafCompHaus\", \"instAbelianCondensedMod\", \"CondensedMod.IsSolid\"], \"digest\": \"191a570cf7fb4478\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned names give condensed-module constructors, abelian structure, solidity as a definition, and profinite limits; none proves continuous relation-kernel generation in the specified ordinary derived hull"
+  },
+  {
+   "tool": "grep",
+   "query": "(profinite|condensed).*(kernel|generat)|(kernel|generat).*(profinite|condensed)",
+   "results": "{\"t\": \"2026-10-25T10:09:38Z\", \"tool\": \"grep\", \"query\": \"(profinite|condensed).*(kernel|generat)|(kernel|generat).*(profinite|condensed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"02bc236a5d24fe05\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no theorem states the specified finite-model derived hull membership"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A kernel of a morphism between finite free condensed p-adic modules on a profinite slice is generated by finite constant modules under derived products and colimits",
+   "results": "{\"t\": \"2026-10-25T10:09:38Z\", \"tool\": \"leansearch\", \"query\": \"A kernel of a morphism between finite free condensed p-adic modules on a profinite slice is generated by finite constant modules under derived products and colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.kerRepr\", \"ModuleCat.kernelIsLimit\", \"CategoryTheory.Limits.kerIsKernel\", \"instHasColimitsCondensedMod\", \"CategoryTheory.Limits.kernelIsKernel\", \"Condensed.instAB4StarCondensedMod\", \"TopModuleCat.ker\", \"instHasLimitsOfSizeCondensedMod\"], \"digest\": \"86722b4118a35e26\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no theorem states the specified finite-model derived hull membership"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-25T10:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no theorem states the specified finite-model derived hull membership"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a continuous matrix on a profinite space belongs to the derived category generated by constant finite modules using products and filtered colimits",
+   "results": "{\"t\": \"2026-10-25T10:09:39Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of a continuous matrix on a profinite space belongs to the derived category generated by constant finite modules using products and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"CondensedMod.ofSheafProfinite\", \"Condensed.instAB4CondensedMod\", \"instAbelianCondensedMod\", \"Condensed.instAB4StarCondensedMod\"], \"digest\": \"0a151eeeb01a84c0\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no theorem states the specified finite-model derived hull membership"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary sheaf morphism between two constant finitely presented p-adic scalar models over an extremally disconnected profinite space has kernel generated by the finite scalar models using products triangles retracts and bounded filtered colimits",
+   "results": "{\"t\": \"2026-10-25T10:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary sheaf morphism between two constant finitely presented p-adic scalar models over an extremally disconnected profinite space has kernel generated by the finite scalar models using products triangles retracts and bounded filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid\", \"LightCondAb.ofSheafLightProfinite\"], \"digest\": \"8aa7b6ed680f1211\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no theorem states the specified finite-model derived hull membership"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-image-bounded-derived-generation",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction.",
+   "via": [
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps, also for $\\Omega$. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nLet $P$ be an extremally disconnected profinite space: $P$ is compact Hausdorff and totally disconnected and the closure of every open subset is open. Give $\\operatorname{Prof}/P$ the site of profinite spaces over $P$ with finite jointly surjective covering families, and let $q_P$ be its slice projection to the condensed topos [lem-zl-component-relative-profinite-site]. Put $R=q_P^*\\Lambda$ and use ordinary internal $R$-modules and their ordinary uncompleted derived category [sk-def-sfb-module-objects, def-weil-abstract-derived-category]. For a finitely presented scalar $\\Lambda$-module $B$, meaning a cokernel of a map of finite free scalar modules, put $B_R=R\\otimes_{\\underline\\Lambda}\\underline B$, with discrete constant underlines. A finite scalar local model on this site means an $R$-module which on a covering family has this form, with the scalar module allowed to vary [sk-def-sfb-constructible].\n\nLet $\\mathcal H_P$ be the intersection of all full replete classes in $D(\\operatorname{Mod}_R)$ which contain $F[0]$ for every finite scalar local model $F$ on $\\operatorname{Prof}/P$, and satisfy the following conditions. They contain zero and are closed under isomorphisms, all integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract of $K$ is given by maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=1_K$. They are closed under all small products in the ordinary derived category [def-weil-category-product]. If $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of module-sheaf complexes with a common termwise lower bound, and all $Q(C_i^\\bullet)$ belong to the class, then $Q(\\varinjlim_i C_i^\\bullet)$ belongs to the class. Here the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category].\n\nFor all finitely presented scalar modules $B,C$ and every actual $R$-module-sheaf morphism $v:B_R\\to C_R$, the abelian sheaf kernel satisfies\n$$ (\\ker v)[0]\\in\\mathcal H_P. $$\nThe morphism need not come from a scalar map $B\\to C$; for free $B,C$ its entries may be arbitrary continuous $\\Lambda$-valued functions on $P$. No constant-rank, locally constant elementary-divisor, completeness, finite-field-valuedness, or finite-scalar-model assertion about the kernel is made. The empty space, zero scalar modules, zero rings, zero maps and identity maps are included.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-supported-image-bounded-derived-generation",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-profinite-constant-model-relation-hull",
+  "worker": "stage1",
+  "summary": "Preserved the corrected five-coefficient statement and prior searches; replaced the empty proof by finite clopen kernels, compact integral finite-bundle Roos reconstruction and field matrix diagonalization to rank-one annihilators. Four strictly smaller auxiliary nodes are stated only. The repair note non-clopen recollement argument is disputed explicitly in report.md; HRS Example 4.2 is retained as a test, not bypassed by global-section kernels.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms paragraph via det-sf-comp-coherence-refinement (2), first paragraph: the continuous relation-kernel generation input for the descendant closed-fibre heart comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "why": "Generic internal finite-free Hom/matrix and basis scalar-extension identities; not a replacement for a unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-site-free-matrix-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NC-a048be34b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-a048be34b (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the cited free-matrix, coefficient-extension, component-site and constructible nodes, the citer supported-image-bounded-derived-generation, and the sources: HRS Example 3.1, Remark 3.2, Lemma 4.1, Example 4.2 and Remark 6.4, Lemma 6.10 and Theorem 6.12; RTW Lemma 1.2.7 and Remark 2.3.5. The base proof was empty, so this is not a re-split order. Steps: step 1 (finite A, clopen-constant kernel) is elementary and correct. Step 2: integral realization is true (C(Q,O) tensor B = C(Q,B), Hom from B_R = Hom_O(B, C(P,C)) because P is final, ker v = lim ker v_k). Step 3: finite-bundle Roos is true for any profinite P (products exact via the Stonean basis; the solution space is a profinite cover with nonempty fibres by compactness, matching RTW 1.2.7); rotation, product and extension closure give ker v in H_P. Step 4: the free-matrix tool gives R^m to R^n as matrices over C(P,E); tool_use accepted. Step 5: Stonean diagonalization is true. I re-proved it: the max-pivot loci are open, their closures clopen, the bounded quotients extend by graph closure and Stonean projectivity, then induction on clopen pieces. The kernel decomposes as the sum of K_{d_i} plus R^{m-min}. Edge cases (m or n = 0, empty P, zero and identity maps) checked. No duplicates: local-smith needs locally constant type, field elimination needs constant rank, integers-profinite-tower covers only the ring. The rank-one field annihilator node is equivalent to the item's 1x1 field case and is reached by a genuine reduction, so D1/D2 do not apply. Its truth is OPEN: on HRS beta-N, K = H^0(fib(R -> prod e_n R)), and K in H_P is equivalent to the bounded-families module, and to coker(R -> R[1/f]), lying in H_P. I found neither a proof nor an obstruction (global sections kill K; the counit invariant used in the NN 8712600d and NY 03d9ef94 refutations is not known to survive products). Flag for L/human: this is the open core of the item, which already asserted it with reference WANTED. FIX (B2/B3): lem-sfb-relative-finite-bundle-roos now defines finite locally constant bundle inline, cites def-weil-category-product, and drops the unused def-weil-l-adic-coefficient-extension from stmt_deps. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-finite-bundle-roos.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProfiniteConstantModelRelationHull",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.profinite_constant_model_relation_mem_hull",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IsProfiniteModelGenerationClass",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profiniteModelGenerationHull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.profinite_constant_model_relation_mem_hull"
+  ],
+  "file": "lean/Sheaf/Paper/ProfiniteConstantModelRelationHull.lean",
+  "statement": "theorem profinite_constant_model_relation_mem_hull (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (P : Profinite.{u}) [ExtremallyDisconnected P] (B C : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) (hB : Mod.IsFinitelyPresented Λ B) (hC : Mod.IsFinitelyPresented Λ C) (v : (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} P).mapMod Λ).obj B ⟶ (((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} P).mapMod Λ).obj C) : profiniteModelGenerationHull Λ P ((DerivedCategory.singleFunctor _ 0).obj (kernel v))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Finite scalar presentations use the existing Mod.IsFinitelyPresented on the condensed point, as in HasFiniteConstantLocalModel. These are precisely cokernels of scalar matrices, before slice pullback. The actual map v is arbitrary on the slice. The class and hull helpers spell out the intersection in this node; no completion or localizing replacement is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c99fcd48",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node (corrected 5-coefficient statement), report (Worker report + Second reading by NI present), both delivered modules and dependency interfaces. hΛ = IsLocalizingAdmissibleCoefficient minus padicAlgClRingObj, matching {A,Z_l,O_E,Q_l,E}; P extremally disconnected, no nonemptiness; site coherentTopology.over P, R = overPullback Λ = profiniteCoefficient; B,C via Mod.IsFinitelyPresented on the condensed point = scalar-matrix cokernels (End(Λ)=Λ(pt)); v arbitrary module-sheaf morphism; HasFiniteConstantProfiniteLocalModel = covering sieve on final object with varying point presentations; hull = literal intersection with IsTriangulated, iso, retract (i≫p=𝟙), Type(u+1) products, generators, strict bounded-below filtered colimits then Q, same shape as consumer supportedImageGenerationHull; conclusion singleFunctor 0 (kernel v). lean.statement verbatim for item and sk-def-sfb-constructible §1(B) companion record (public import retains all prior declarations; no existing profinite-slice predicate found). No hollow defs, only sorry, docstrings with source/blueprint and 5-step plan. Edge cases: empty P, zero ring, zero modules/maps, empty products. Advisory: unused private import of free-matrix proof dep; rank-one annihilator input mathematically open per NC stage-1 review (stage-3 matter). No compile (no file changed)."
+ }
+}

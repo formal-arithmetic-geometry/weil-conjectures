@@ -1,0 +1,470 @@
+{
+ "id": "lem-trf-tate-variable-roots-separable-compositum",
+ "kind": "statement",
+ "title": "Variable-root base enlargement makes a finite Tate fraction-field extension separable",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $d\\ge0$, $T=K\\langle X_1,\\ldots,X_d\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], and $F=\\operatorname{Frac}(T)$. Let $L/F$ be a finite field extension [def-pc-field-extension], and choose an algebraic closure $\\Omega$ of $L$. There is a positive integer $q$, equal to $1$ in characteristic zero and to $p^e$ for some $e\\ge0$ in characteristic $p>0$, with the following properties. Set $T_q=K\\langle Y_1,\\ldots,Y_d\\rangle$ and let $\\iota_q:T\\to T_q$ send $\\sum a_\\nu X^\\nu$ to $\\sum a_\\nu Y^{q\\nu}$. This map is injective and $T_q$ is a free $T$-module with basis $\\{Y^\\alpha:0\\le\\alpha_j<q\\text{ for all }j\\}$. There is an embedding $F_q=\\operatorname{Frac}(T_q)\\hookrightarrow\\Omega$ extending $F\\hookrightarrow L\\hookrightarrow\\Omega$ through $\\iota_q$. For this embedding the compositum $LF_q\\subseteq\\Omega$, the smallest subfield containing $L$ and $F_q$, is a finite separable extension of $F_q$ [def-weil-pbc-separable-algebraic-extension]. For $d=0$ the basis is $\\{1\\}$. No assertion that $F$ itself is perfect is made.",
+ "source": {
+  "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+  "place": "Theorem 4 proof, PDF p.2, purely inseparable variable-root enlargement in part (a), made precise for a general finite fraction-field extension before its Galois normal closure. Agent formulation: coefficientwise q-th roots identify Frac(T_q) with F^(1/q), and finitely many minimal polynomials have a uniform inseparability exponent. This strengthened preparation is not stated verbatim in the handout. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "By lem-weil-pbc-power-series-domain, $K[[X_1,\\ldots,X_d]]$ is a domain; its restricted-series subring $T$, and likewise every $T_q$, is a domain, since the same zero-product implication holds in a subring and $1\\ne0$. Choose a finite $F$-basis $a_1,\\ldots,a_r$ of $L$. It also generates $L$ as a field, since its $F$-linear span is all of $L$. Each $a_i$ is algebraic: $1,a_i,\\ldots,a_i^{r}$ are linearly dependent. Let $f_i\\in F[Z]$ be its monic irreducible minimal polynomial, as specified in def-weil-pbc-separable-algebraic-extension.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4 proof, PDF p.2, part (a), variable-root enlargement; agent supplies the general finite-extension preparation and coefficient calculations (archival copy WANTED)."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}K=0$, each $f_i$ has positive degree and nonzero derivative (its leading derivative coefficient is $\\deg(f_i)\\ne0$), hence is separable by lem-trf-irreducible-separable-derivative. Set $q=1$. If $\\operatorname{char}K=p>0$, apply lem-trf-irreducible-separable-contraction over $F$ to obtain $m_i\\ge0$ and separable $g_i$ with $f_i(Z)=g_i(Z^{p^{m_i}})$. Take $e=\\max_i m_i$, with maximum $0$ for an empty family, and set $q=p^e$. The characteristic of $F$ agrees with that of $K$ because constants embed in $T$ and then in its fraction field. Thus every exponent $p^{m_i}$ divides $q$.",
+   "uses": [
+    "lem-trf-irreducible-separable-derivative",
+    "lem-trf-irreducible-separable-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09H0 (fields-lemma-irreducible-polynomials), 09H1 (fields-definition-separable), 09HC (fields-lemma-separable-elements); coefficient-root argument supplied by agent."
+   }
+  },
+  {
+   "text": "For any positive integer $q$, expansion $\\iota_q$ is a ring map: the finite convolution formula for each coefficient respects the injective additive reindexing $\\nu\\mapsto q\\nu$; the remaining coefficients are zero. Expansion preserves restrictedness and is injective, since the coefficient at $q\\nu$ recovers the original coefficient. For $b=\\sum_\\nu b_\\nu Y^\\nu$, define $b_\\alpha(X)=\\sum_\\mu b_{q\\mu+\\alpha}X^\\mu$ for $0\\le\\alpha_j<q$. Each is restricted: coefficients above a fixed positive bound are a subset of those of $b$. Euclidean division of every exponent gives $b=\\sum_\\alpha Y^\\alpha\\iota_q(b_\\alpha)$, uniquely by comparing the disjoint residue classes of exponents. This proves exactly the asserted free basis. For $d=0$ there is one empty multi-index and its monomial is $1$.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4 proof, PDF p.2, part (a), variable-root enlargement; agent supplies the general finite-extension preparation and coefficient calculations (archival copy WANTED)."
+   }
+  },
+  {
+   "text": "In characteristic zero $q=1$ gives the renaming isomorphism $T=T_q$, so use the given embedding $F\\subset\\Omega$ and proceed to step 7. Otherwise $q=p^e$. The coefficient map $\\theta:T_q\\to T$, $\\sum b_\\nu Y^\\nu\\mapsto\\sum b_\\nu^qX^\\nu$, is a ring map by the finite convolution formula and Frobenius. Each $c\\in K$ has a unique $q$-th root in $K$, since $K$ is algebraically closed and Frobenius is injective on a field. Moreover $|c^{1/q}|=|c|^{1/q}$, so taking these roots preserves restrictedness: $|c^{1/q}|\\ge\\epsilon$ iff $|c|\\ge\\epsilon^q$. Taking powers also preserves restrictedness by the reverse threshold calculation. Thus $\\theta$ is a ring isomorphism. Iterating lem-weil-pbc-power-series-frobenius-coefficientwise $e$ times gives $b^q=\\iota_q(\\theta(b))$: the initial exponent is $1$ and each iteration multiplies every exponent and raises every coefficient by $p$. Extend $\\theta$ to a field isomorphism $\\theta:F_q\\to F$ by $u/v\\mapsto\\theta(u)/\\theta(v)$; this is well-defined by cross multiplication and preserves nonzero denominators. It satisfies $\\theta(\\iota_q(x))=x^q$ for every $x\\in F$.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-power-series-frobenius-coefficientwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4 proof, PDF p.2, part (a), variable-root enlargement; agent supplies the general finite-extension preparation and coefficient calculations (archival copy WANTED)."
+   }
+  },
+  {
+   "text": "In positive characteristic define $j(z)$, for $z\\in F_q$, as the unique $q$-th root in $\\Omega$ of $\\theta(z)\\in F$. Existence follows from algebraic closedness; uniqueness follows from $(u-v)^q=u^q-v^q$ in a field. The same identity and $(uv)^q=u^qv^q$ show $j(z+w)=j(z)+j(w)$, $j(zw)=j(z)j(w)$ and $j(1)=1$. It is injective since $j(z)=0$ implies $\\theta(z)=0$. The preceding identity $\\theta(\\iota_q(x))=x^q$ gives $j(\\iota_q(x))=x$, so it extends the required $F$-embedding. Put $E=j(F_q)$. Since $\\theta$ is onto $F$, $E=\\{u\\in\\Omega:u^q\\in F\\}$. In particular, for every $m\\le e$, each $c\\in F$ has its unique $p^m$-th root in $E$: take its $q$-th root and raise it to $p^{e-m}$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4 proof, PDF p.2, part (a), variable-root enlargement; agent supplies the general finite-extension preparation and coefficient calculations (archival copy WANTED)."
+   }
+  },
+  {
+   "text": "For each $i$ in positive characteristic put $q_i=p^{m_i}$. The unique-root map $\\sigma_i:F\\to E$, $c\\mapsto c^{1/q_i}$, is an injective ring map, by the same sum and product identities. Apply it coefficientwise to $g_i$, obtaining $h_i\\in E[Z]$. A Bezout identity $A g_i+B g_i'=1$ maps to $\\sigma_i(A)h_i+\\sigma_i(B)h_i'=1$, since coefficient maps commute with formal differentiation. Thus $h_i$ is separable. Also $h_i(a_i)^{q_i}=g_i(a_i^{q_i})=f_i(a_i)=0$, hence $h_i(a_i)=0$. The minimal polynomial $M_i$ over $E$ divides $h_i$, say $h_i=M_iR_i$. Its Bezout identity becomes $1=(\\sigma_i(A)R_i+\\sigma_i(B)R_i')M_i+(\\sigma_i(B)R_i)M_i'$, proving $M_i$ separable. Here divisibility is precisely the kernel-generator property of the minimal polynomial. Consequently every $a_i$ is separable algebraic over $E$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09H0 (fields-lemma-irreducible-polynomials), 09H1 (fields-definition-separable), 09HC (fields-lemma-separable-elements); coefficient-root argument supplied by agent."
+   }
+  },
+  {
+   "text": "In characteristic zero set $E=F$; step 2 already proves every $a_i$ separable over $E$. In either characteristic $LF_q$ means the compositum inside $\\Omega$ for the embedding just constructed; it is $E(a_1,\\ldots,a_r)$, since $L=F(a_1,\\ldots,a_r)$ and $F\\subset E$. Apply the final clause of lem-sfb-separable-generated-scalar-extension with both its base fields equal to $E$ and with $U=\\{a_1,\\ldots,a_r\\}$. It proves this generated field separable algebraic over $E$, hence over the identified $F_q$.",
+   "uses": [
+    "lem-sfb-separable-generated-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09H0 (fields-lemma-irreducible-polynomials), 09H1 (fields-definition-separable), 09HC (fields-lemma-separable-elements); coefficient-root argument supplied by agent."
+   }
+  },
+  {
+   "text": "For finiteness, let $S$ be the $E$-linear span of the original $F$-basis $a_1,\\ldots,a_r$ in $\\Omega$. It contains $1$ and $L$, and is closed under multiplication: each $a_ia_j$ is an $F$-linear combination of the same basis and $F\\subset E$. Thus $S$ is a domain containing $E$ and finite as an $E$-module. By lem-trf-finite-domain-fraction-degree, $\\operatorname{Frac}(S)/E$ is finite. Its fraction field equals $EL$: it is contained in $EL$, whereas any field containing $S$ contains both $E$ and $L$. Together with step 7 this proves the finite separable conclusion. If $d=0$, $T=K$ and the basis calculation in step 3 still gives $\\{1\\}$; no excluded-variable case or perfectness of $F$ was used.",
+   "uses": [
+    "lem-trf-finite-domain-fraction-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+    "place": "Theorem 4 proof, PDF p.2, part (a), variable-root enlargement; agent supplies the general finite-extension preparation and coefficient calculations (archival copy WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-domain",
+  "def-trf-restricted-series-presentation",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-trf-irreducible-separable-contraction",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-algebraic-closure",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-power-series-frobenius-coefficientwise",
+  "def-pc-separable-polynomial",
+  "lem-sfb-separable-generated-scalar-extension",
+  "lem-trf-finite-domain-fraction-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kskedlaya.org/18.727/spectra2.pdf",
+  "place": "Theorem 4 proof, PDF p.2, part (a), variable-root strategy, generalized here to arbitrary finite extensions using Stacks Tag 09H0. This detailed preparation is agent-written; archival handout copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect complete nonarchimedean field of characteristic p, adjoining sufficiently large p power roots of all Tate variables makes a finite fraction field extension separable",
+   "results": {
+    "t": "2026-10-24T09:31:53Z",
+    "tool": "leanfinder",
+    "query": "Over a perfect complete nonarchimedean field of characteristic p, adjoining sufficiently large p power roots of all Tate variables makes a finite fraction field extension separable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+     "Field.Emb.Cardinal.instIsSeparableSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet",
+     "Tilt",
+     "Tilt.instField",
+     "Algebra.FormallySmooth.of_perfectField",
+     "Algebra.IsAlgebraic.isSeparable_of_perfectField",
+     "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable"
+    ],
+    "digest": "f36ea19447822528"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of Frac K restricted power series becomes separable after purely inseparable base extension adjoining p power roots of all coordinates",
+   "results": {
+    "t": "2026-10-24T09:36:02Z",
+    "tool": "leanfinder",
+    "query": "A finite extension of Frac K restricted power series becomes separable after purely inseparable base extension adjoining p power roots of all coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyUnramified.isSeparable",
+     "separableClosure.isPurelyInseparable",
+     "Algebra.IsAlgebraic.isSeparable_of_perfectField",
+     "perfectClosure.isPurelyInseparable",
+     "IsPurelyInseparable.inseparable",
+     "IsPurelyInseparable.inseparable'",
+     "Algebra.FormallySmooth.of_perfectField",
+     "separableClosure_le"
+    ],
+    "digest": "efbd2e3fc9be52fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of the fraction field of a Tate algebra becomes separable after adjoining p power roots of the variables over a perfect field",
+   "results": {
+    "t": "2026-10-24T09:39:36Z",
+    "tool": "leansearch",
+    "query": "A finite extension of the fraction field of a Tate algebra becomes separable after adjoining p power roots of the variables over a perfect field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.isSeparable_adjoin_iff_isSeparable",
+     "IsPurelyInseparable.instOfHasExponent",
+     "Algebra.IsAlgebraic.isSeparable_of_perfectField",
+     "IsPurelyInseparable",
+     "IntermediateField.isSeparable_adjoin_pair_of_isSeparable",
+     "separableClosure",
+     "IsCyclotomicExtension.isSeparable",
+     "IsGalois.to_isSeparable"
+    ],
+    "digest": "4b3c9b0e37a0208d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurelyInseparable\", \"IsSeparable\"",
+   "results": {
+    "t": "2026-10-24T09:36:00Z",
+    "tool": "loogle",
+    "query": "\"IsPurelyInseparable\", \"IsSeparable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsPurelyInseparable.surjective_algebraMap_of_isSeparable",
+     "IsPurelyInseparable.bijective_algebraMap_of_isSeparable",
+     "Subalgebra.eq_bot_of_isPurelyInseparable_of_isSeparable",
+     "IntermediateField.eq_bot_of_isPurelyInseparable_of_isSeparable",
+     "Field.sepDegree_eq_of_isPurelyInseparable_of_isSeparable",
+     "minpoly.map_eq_of_isSeparable_of_isPurelyInseparable",
+     "LinearIndependent.map_of_isPurelyInseparable_of_isSeparable",
+     "IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable"
+    ],
+    "digest": "aa4500ad2862971d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|Restricted|perfectClosure|IsSeparable",
+   "results": {
+    "t": "2026-10-24T09:40:18Z",
+    "tool": "grep",
+    "query": "Tate|Restricted|perfectClosure|IsSeparable",
+    "sub": "FieldTheory/PurelyInseparable",
+    "ok": true,
+    "n_hits": 18,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean"
+    ],
+    "digest": "f1168ef413474a03"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+   "results": {
+    "t": "2026-10-24T09:36:00Z",
+    "tool": "grep",
+    "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean"
+    ],
+    "digest": "d9971d9d4126cfac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: separableClosure.isPurelyInseparable and perfectClosure describe abstract field extensions; none identifies bounded Frobenius roots of restricted series with a finite Tate-variable extension or gives this compositum assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of the fraction field of a Tate algebra becomes separable after adjoining p power roots of the variables",
+   "results": {
+    "t": "2026-10-24T13:53:37Z",
+    "tool": "leanfinder",
+    "query": "finite extension of the fraction field of a Tate algebra becomes separable after adjoining p power roots of the variables",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'",
+     "Tilt",
+     "Tilt.instField",
+     "Algebra.FormallyUnramified.isSeparable",
+     "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable"
+    ],
+    "digest": "c526ac8e1cd811ed"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract separability/adjoin criteria, perfection, or restricted-series definitions, not the variable-root enlargement with its free basis and specified compositum. Two formulations checked; only the separate formal Frobenius and polynomial contraction ingredients are leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite field extension becomes separable over the field of all p power roots of bounded exponent of the base field",
+   "results": {
+    "t": "2026-10-24T13:53:38Z",
+    "tool": "leanfinder",
+    "query": "finite field extension becomes separable over the field of all p power roots of bounded exponent of the base field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_pow_of_isSeparable",
+     "Algebra.IsAlgebraic.isSeparable_of_perfectField",
+     "IntermediateField.isSeparable_tower_top",
+     "IntermediateField.adjoin_eq_adjoin_pow_expChar_pow_of_isSeparable",
+     "IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_pow_of_isSeparable'",
+     "IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_of_isSeparable",
+     "IntermediateField.isSeparable_tower_bot",
+     "perfectClosure.isPurelyInseparable"
+    ],
+    "digest": "fecc8b5119d2738e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract separability/adjoin criteria, perfection, or restricted-series definitions, not the variable-root enlargement with its free basis and specified compositum. Two formulations checked; only the separate formal Frobenius and polynomial contraction ingredients are leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra adjoining roots of variables finite extension separable compositum",
+   "results": {
+    "t": "2026-10-24T14:00:05Z",
+    "tool": "leansearch",
+    "query": "Tate algebra adjoining roots of variables finite extension separable compositum",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.isSeparable_adjoin_iff_isSeparable",
+     "IsAdjoinRootMonic.toIsAdjoinRoot",
+     "IsAdjoinRootMonic.noConfusion",
+     "IsAdjoinRoot.noConfusionType",
+     "IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_of_isSeparable'",
+     "IsCyclotomicExtension.isSeparable",
+     "IntermediateField.isSeparable_adjoin_pair_of_isSeparable",
+     "separableClosure.adjoin_eq_of_isAlgebraic"
+    ],
+    "digest": "fb685c494d02e25d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract separability/adjoin criteria, perfection, or restricted-series definitions, not the variable-root enlargement with its free basis and specified compositum. Two formulations checked; only the separate formal Frobenius and polynomial contraction ingredients are leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|Restricted.*[Ss]eries|[Ss]eparable.*[Cc]ompositum",
+   "results": {
+    "t": "2026-10-24T14:00:05Z",
+    "tool": "grep",
+    "query": "TateAlgebra|Restricted.*[Ss]eries|[Ss]eparable.*[Cc]ompositum",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean"
+    ],
+    "digest": "d9971d9d4126cfac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give abstract separability/adjoin criteria, perfection, or restricted-series definitions, not the variable-root enlargement with its free basis and specified compositum. Two formulations checked; only the separate formal Frobenius and polynomial contraction ingredients are leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-finite-galois-envelope",
+  "date": "2026-10-24",
+  "group": "Q64"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: Finite Galois envelopes after Tate normalization. Supporting input in characteristic p: absorb the bounded inseparable part by roots of Tate variables before taking the separable normal closure.",
+   "via": [
+    "lem-trf-affinoid-finite-galois-envelope",
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-variable-roots-separable-compositum",
+  "worker": "stage1",
+  "summary": "Kept the statement and constructed its proof in eight steps: finite free residue-class decomposition, bounded inseparability exponents, coefficient Frobenius isomorphism and the compatible algebraic-closure embedding, explicit polynomial untwisting, separability of generated fields and finite-span fraction degree. Added one exact Mathlib leaf; reused the existing coefficientwise Frobenius leaf (iterated e times) and reused the existing power-series domain, separability-generation and fraction-degree nodes. Added the omitted algebraic-closure notion dependency.",
+  "blueprint": "Historical analytic supporting branch recorded in blueprint.from.place: variable-root enlargement before the Galois envelope, as in Kedlaya Theorem 4(a). Steps 1–3 choose the exponent and finite free extension; steps 4–6 justify all Frobenius roots and separability; steps 7–8 assemble the finite separable compositum. No replacement of the current contracting-correspondence argument of the latest lem-trf-local-term-locality or sk-i-curve-zero."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a6d798621",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a6d798621 (reviewer sub-agent of L); spot-checked: Ordinary one-level split: live is still unsplit with a byte-identical statement and there is no repair note. I read all 8 steps against the full statements of every cited node. Steps 1-2: minimal polynomials; derivative criterion in char 0; the new Mathlib leaf gives f_i=g_i(Z^{p^m_i}) in char p, with e=max m_i. Step 3: iota_q is an injective ring map, and the residue-class decomposition gives the free basis; the restrictedness of b_alpha holds because its coefficients are a sub-family of b's. Step 4: theta is coefficientwise Frobenius^e, bijective because K is perfect, and preserves restrictedness because |c^{1/q}|=|c|^{1/q}. Iterating the Frobenius-coefficientwise leaf gives b^q=iota_q(theta b). The identity theta(iota_q x)=x^q is given without its one-line derivation; it is elementary. Step 5: j = unique q-th root of theta in Omega; it extends F into Omega and E=j(F_q)={u: u^q in F}. Step 6: the Bezout identity is transported by sigma_i; h_i(a_i)^{q_i}=f_i(a_i)=0, and the displayed identity for M_i dividing h_i is correct. Step 7: lem-sfb-separable-generated-scalar-extension with K=M=E. Step 8: the E-span of the basis is a finite domain, so lem-trf-finite-domain-fraction-degree applies, and Frac(S)=EL. New node lem-trf-irreducible-separable-contraction: an exact Mathlib leaf, Polynomial.exists_separable_of_irreducible (Separable.lean:354-355), read with its proof. Separability is the Bezout convention of def-pc-separable-polynomial = Polynomial.Separable. Stacks 09H0 was read at fields.tex ~1129-1160. B1-B9 are met, with all three kinds of search recorded and blueprint from/via correct. An rg -L over the snapshot and live DAG finds no duplicate contraction node, and the new node does not restate the item. Every cited lemma is a Mathlib leaf, so the sk-i-curve-zero route is untouched and no tool_uses are needed. The added stmt_dep def-weil-algebraic-closure is justified. Small cases checked: d=0; L=F(X^{1/p}) with q=p; separable L with e=0. The parent lem-trf-affinoid-finite-galois-envelope uses the item exactly as stated. The Kedlaya handout is WANTED, and proof_origin is agent. coord/dag-sync.md is absent from the snapshot. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.TateVariableRootsSeparableCompositum",
+  "declaration": "RestrictedSeries.exists_tate_variable_roots_separable_compositum",
+  "file": "lean/Sheaf/FieldTheory/TateVariableRootsSeparableCompositum.lean",
+  "statement": "theorem exists_tate_variable_roots_separable_compositum (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (d : ℕ) (L : Type v) [Field L] [Algebra (FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))) L] [FiniteDimensional (FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))) L] (Ω : Type w) [Field Ω] [Algebra L Ω] [IsAlgClosure L Ω] : ∃ (q : ℕ) (hq : q ≠ 0), 0 < q ∧ (ringChar K = 0 → q = 1) ∧ (∀ p : ℕ, p.Prime → ringChar K = p → ∃ e : ℕ, q = p ^ e) ∧ ∃ iota : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) →+* (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))), (∀ s, (iota s).val = MvPowerSeries.expand q hq s.val) ∧ Function.Injective iota ∧ (∃ b : @Module.Basis (Fin d → Fin q) (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) _ _ iota.toAlgebra.toModule, ∀ α, (b α).val = MvPowerSeries.monomial (Finsupp.equivFunOnFinite.symm (fun i : Fin d ↦ (α i).val)) (1 : K)) ∧ ∃ j : FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) →+* Ω, (∀ s, j (algebraMap _ _ (iota s)) = algebraMap L Ω (algebraMap _ L (algebraMap _ (FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))) s))) ∧ ∃ (E : IntermediateField L Ω) (k : FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) →+* E), E.toSubfield = (algebraMap L Ω).fieldRange ⊔ j.fieldRange ∧ E.val.toRingHom.comp k = j ∧ @FiniteDimensional _ E _ _ k.toAlgebra.toModule ∧ @Algebra.IsSeparable _ E _ _ k.toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be0726f19",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_deps, the side-live RestrictedSeriesPresentation (T = IsRestricted.subring with radius 1), Mathlib Restricted.lean and Expand.lean (expand p hp: exponents ×p, coefficients unchanged). Only the node's lean field changed; lean.statement matches the file signature verbatim. Hypotheses: NontriviallyNormedField + IsUltrametricDist + CompleteSpace + IsAlgClosed K; FractionRing T; finite L/F; any IsAlgClosure L Ω, universes u,v,w independent. Nothing stronger is assumed. Conclusions: q>0, q=1 in char 0, q=p^e in char p; iota pinned to expand q and injective; Basis (Fin d→Fin q) over iota.toAlgebra pinned to monomials Y^α; j: F_q→+*Ω agrees with F→L→Ω on iota(T), which fixes it on F_q; E = range L ⊔ j.fieldRange, with FiniteDimensional and IsSeparable stated over the explicit k. Not vacuous: q=1 fails in char p, e.g. L=F(X_1^{1/p}). Edge cases d=0 (basis {1}), char 0, e=0, purely inseparable L and L=F all covered. No new definitions, only sorry, source and blueprint docstrings present, 8-step proof plan, imports exist, nothing pro-etale, my own search found no existing declaration. Report has both sections; NP's second reading is a disclosed self-read. Not recompiled because no file was changed."
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-affine-reflection-dominant-descent",
+ "kind": "statement",
+ "title": "Dominant representatives of affine-reflection error weights descend",
+ "statement": "Let $F$ be an algebraically closed field of characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure], and let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme], with these terms as defined in [lem-sfb-rho-section-modules]. Fix a split maximal torus $T\\subseteq B\\subseteq S$, with $B$ a Borel subgroup, and use $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and their pairing from [lem-sfb-reductive-borel-pair-structure]. Let $B^-$ be the Borel opposite to $B$ relative to $T$, so its roots are $-\\Phi^+$. Put $\\rho=\\frac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$, $Q=\\mathbf Z\\Phi$, and $W=N_S(T)(F)/T(F)$, acting on $X$ by normalizer conjugation. Set $w\\mathbin\\cdot x=w(x+\\rho)-\\rho$, let $w_0\\Phi^+=-\\Phi^+$, and put $N=|\\Phi^+|$. A rational module for any group here is an $F$-vector space with a coassociative counital coaction into its tensor product with that group's coordinate algebra; a submodule is a coaction-stable subspace. For $x\\in X$, let $F_x$ be the one-dimensional $B^-$-module on which $T$ acts by $x$ and the unipotent radical acts trivially. For a finite-dimensional rational $B^-$-module $M$, let $\\mathcal L(M)$ be the sheaf of sections of $S\\times^{B^-}M$ on $S/B^-$: over $V\\subseteq S/B^-$ its sections are regular maps $f:\\pi^{-1}(V)\\to M$ with $f(gb)=b^{-1}f(g)$, where $\\pi:S\\to S/B^-$ is the quotient. Write $H^i(M)=H^i(S/B^-,\\mathcal L(M))$ for Zariski sheaf cohomology, with its natural left $S$-action, and $H^i(x)=H^i(F_x)$; set $H^i=0$ for $i<0$. Equivariance means a coaction identity, hence holds after every commutative $F$-algebra extension. A simple module is nonzero with no proper nonzero rational submodule, and a simple constituent means a simple subquotient. Set $D=\\{x\\in X:\\langle x+\\rho,\\alpha^\\vee\\rangle\\ge0\\text{ for every }\\alpha\\in\\Delta\\}$. Write $y\\le x$ when $x-y$ is an integral nonnegative sum of simple roots, and $y<x$ when also $y\\ne x$. Define $y\\uparrow x$ to mean there is a finite chain $y=x_0,x_1,\\ldots,x_m=x$ where each step has $x_{j-1}=s_{\\beta_j}\\mathbin\\cdot x_j+n_jp\\beta_j\\le x_j$ for some $\\beta_j\\in\\Phi^+$ and integer $n_j\\ge0$. Each finite dot orbit has a unique representative $d(y)\\in D$, and $<$ is well founded on $D$. The finite Weyl group has the Coxeter length $\\ell$ for its simple reflections, with $\\ell(w_0)=N$. If $x\\in D$, $\\alpha\\in\\Delta$, $w\\in W$ and $y=w\\mathbin\\cdot x$ satisfy $\\ell(s_\\alpha w)=\\ell(w)+1$, then $r=\\langle y+\\rho,\\alpha^\\vee\\rangle\\ge0$. For every integer $k$ with $0<kp<r$, put $z=s_\\alpha\\mathbin\\cdot y+kp\\alpha$. Then\n$$d(z)<x\\qquad\\text{and}\\qquad d(z)\\uparrow x.$$\nThese assertions hold for reducible and empty finite root systems and all positive primes.",
+ "source": {
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Definition 1, Proposition 1 and Lemma 1, pp.54--55 (dominant-chamber reduction for strong linkage); reduced-word positive roots on p.57; Lemma 5 and its proof on p.58 (strict decrease and strong linkage for all intermediate error weights). Lemma 1 cites Jantzen 1977, Satz 9. This is root-system geometry, not representation-theoretic linkage."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-semisimple-roots-span], the roots span $E=X\\otimes\\mathbf Q$. By [lem-sfb-weyl-reflection-realization], $W$ is finite and acts on $E$ as the root-reflection group. The simple reflections generate it by [lem-sfb-simple-root-reflection-generation]. On $V=E\\otimes\\mathbf R$ choose a positive definite form $b_0$ in any basis and put $b(u,v)=\\sum_{a\\in W}b_0(au,av)$. Reindexing gives $W$-invariance, and the identity summand makes $b$ positive definite. Since $s_\\beta\\beta=-\\beta$, invariance and the root-datum reflection formula give\n$$2b(v,\\beta)=\\langle v,\\beta^\\vee\\rangle b(\\beta,\\beta).$$\nA simple reflection permutes $\\Phi^+\\setminus\\{\\alpha\\}$: any other positive root has a positive coefficient at another simple root, unchanged by subtracting a multiple of $\\alpha$; reducedness excludes a distinct positive root supported only at $\\alpha$. Thus the hypotheses of [lem-sfb-root-sign-word-deletion] hold on $V$, with the simple roots and this form.",
+   "uses": [
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-simple-root-reflection-generation",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Milne Appendix C.10--C.11 and C.19--C.22; Andersen p.54, finite-root-system preliminaries."
+   }
+  },
+  {
+   "text": "For a reduced word $a=s_{\\alpha_1}\\cdots s_{\\alpha_m}$, every root $\\gamma_j=s_{\\alpha_1}\\cdots s_{\\alpha_{j-1}}\\alpha_j$ is positive. Otherwise apply [lem-sfb-root-sign-word-deletion] to the prefix and the positive root $\\alpha_j$: appending $s_{\\alpha_j}$ deletes a letter, contradicting minimality of this prefix of the reduced word. The empty prefix sends $\\alpha_1$ to itself. If $u\\in D$ and $v=u+\\rho$, telescoping the successive prefixes gives\n$$v-av=\\sum_{j=1}^m\\langle v,\\alpha_j^\\vee\\rangle\\gamma_j.$$\nEach coefficient is a nonnegative integer, and each $\\gamma_j$ is an integral nonnegative sum of simple roots. Therefore $a\\mathbin\\cdot u\\le u$. This derives the orbit bound directly; it does not cite full faithfulness or merely the definition of a chamber as a substitute for a closed-chamber theorem.",
+   "uses": [
+    "lem-sfb-root-sign-word-deletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen p.54, fundamental-domain observation; p.58, Lemma 5, the finite-Weyl orbit bound. Explicit reduced-word derivation from exchange."
+   }
+  },
+  {
+   "text": "Every finite dot orbit has a maximal element for $\\le$: the simple-root coordinates make this a partial order, and the orbit is finite by step 1. If a maximal element $u$ has $\\langle u+\\rho,\\alpha^\\vee\\rangle<0$, then $s_\\alpha\\mathbin\\cdot u=u-\\langle u+\\rho,\\alpha^\\vee\\rangle\\alpha>u$, a contradiction. Thus it lies in $D$. If two elements $u,v\\in D$ are in the same orbit, step 2 gives both $u\\le v$ and $v\\le u$, hence $u=v$. This proves the asserted existence and uniqueness of $d$. Moreover, successive folds $f_\\alpha$ can take any weight to its $d$: a nontrivial fold strictly increases the weight in this finite orbit, so a sequence that always folds a negative simple pairing must terminate, and its terminal weight lies in $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen p.54, Proposition 1 preliminary chamber representative; explicit finite-poset construction, also for singular weights."
+   }
+  },
+  {
+   "text": "The half-sum node [lem-sfb-rho-regular-weyl-orbit] gives $\\langle\\rho,\\alpha^\\vee\\rangle=1$ for every simple $\\alpha$, so $b(\\alpha,\\rho)=b(\\alpha,\\alpha)/2>0$. For $u\\in D$, the reflection identity of step 1 gives $b(u+\\rho,\\alpha)\\ge0$ for simple roots; expanding positive roots then gives\n$$b(u+\\rho,\\rho)=\\tfrac12\\sum_{\\beta\\in\\Phi^+}b(u+\\rho,\\beta)\\ge0.$$\nFix $x\\in D$. For $u\\in D$, $u\\le x$, write uniquely $x-u=\\sum_\\alpha n_\\alpha\\alpha$, with integral $n_\\alpha\\ge0$. The preceding inequality bounds $\\sum_\\alpha n_\\alpha b(\\alpha,\\rho)\\le b(x+\\rho,\\rho)$. Each coefficient is therefore bounded, so there are only finitely many such $u$. Consequently every nonempty subset of $D$ has a $<$-minimal element: choose $x$ in it and a minimal element in its finite intersection with $\\{u:u\\le x\\}$. Any smaller element of the subset would belong to that intersection. This proves well-foundedness.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen p.57, dominance induction; explicit positive functional and finite-lower-interval justification. Milne 21.72 for rho."
+   }
+  },
+  {
+   "text": "Let $\\ell(s_\\alpha w)=\\ell(w)+1$. If $w^{-1}\\alpha$ were negative, put $\\beta=-w^{-1}\\alpha\\in\\Phi^+$. Then $w\\beta=-\\alpha$ and [lem-sfb-root-sign-word-deletion] applied to a reduced word for $w$ gives a word for $ws_\\beta$ with $\\ell(w)-1$ letters. Conjugating the orthogonal reflection formula gives $ws_\\beta w^{-1}=s_{w\\beta}=s_\\alpha$; faithfulness from step 1 makes this an equality in $W$. Thus $s_\\alpha w=ws_\\beta$ contradicts the length hypothesis. Hence $w^{-1}\\alpha$ is positive. Since $x\\in D$, step 1 and its positive simple-root expansion give $b(x+\\rho,w^{-1}\\alpha)\\ge0$. By invariance this is $b(y+\\rho,\\alpha)$; the reflection identity implies $r=\\langle y+\\rho,\\alpha^\\vee\\rangle\\ge0$.",
+   "uses": [
+    "lem-sfb-root-sign-word-deletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen p.57, positive roots of a reduced word; explicit exchange proof for the length-increasing case."
+   }
+  },
+  {
+   "text": "Fix $0<kp<r$. The identity $z=y-(r-kp)\\alpha$ gives one affine lowering edge, so $z\\uparrow y$. Apply [lem-sfb-simple-chamber-fold-affine-step] to every edge of a chain: concatenating its at-most-two-edge replacements proves $f_\\delta(u)\\uparrow f_\\delta(v)$ whenever $u\\uparrow v$. Its lattice, root, coroot and base hypotheses are the root-datum hypotheses here, and $p>0$, $\\rho\\in X$. Choose the finite sequence of folds taking $y$ to $d(y)=x$ supplied in step 3. Fold both ends of the chain simultaneously at each stage. The lower endpoint becomes some $z'$ in the finite dot orbit of $z$, and $z'\\uparrow x$. Now choose folds taking $z'$ to $d(z')=d(z)$. Each fold fixes $x$, since all its shifted simple pairings are nonnegative, so the same edge-replacement argument keeps the upper endpoint equal to $x$. The final chain gives $d(z)\\uparrow x$. Summing its simple-root differences gives $d(z)\\le x$.",
+   "uses": [
+    "lem-sfb-simple-chamber-fold-affine-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen Lemma 1, pp.54--55, chamber reduction, expanded by local edge rewriting; application in Lemma 5, p.58."
+   }
+  },
+  {
+   "text": "Put $v=y+\\rho$ and $t=r-kp$. Both $t$ and $kp$ are strictly positive, and $z+\\rho=v-t\\alpha$. The reflection identity of step 1 gives\n$$b(v,v)-b(z+\\rho,z+\\rho)=t(r-t)b(\\alpha,\\alpha)=(r-kp)kp\\,b(\\alpha,\\alpha)>0.$$\nIf $d(z)=x$, then $z+\\rho$ and $y+\\rho$ would belong to the same finite $W$-orbit as $x+\\rho$, and invariance of $b$ would make their squared norms equal, a contradiction. Combining this with step 6 gives $d(z)<x$. All calculations take place in the real character space, so are unaffected by the characteristic of $F$; the integer $p$ need only be positive. No irreducibility is used. For the empty root system step 1 gives $V=0$ and $W=\\{1\\}$, hence $D=\\{0\\}$, and there is no simple root or allowed error weight; the representative and well-foundedness assertions still hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen Lemma 5, p.58, strict descent; explicit invariant squared-norm calculation, including the rank-zero case."
+   }
+  },
+  {
+   "text": "Finally $\\ell(w_0)=N$, where $w_0$ is the unique element with $w_0\\Phi^+=-\\Phi^+$ given by [lem-sfb-rho-regular-weyl-orbit]. For $w\\in W$ put $n(w)=|\\{\\beta\\in\\Phi^+:w\\beta\\in-\\Phi^+\\}|$. Since $s_\\alpha$ permutes $\\Phi^+\\setminus\\{\\alpha\\}$ and negates $\\alpha$ (step 1), $n(ws_\\alpha)\\le n(w)+1$; induction on a word gives $n(w)\\le\\ell(w)$, so $N=n(w_0)\\le\\ell(w_0)$. Conversely let $w_0=s_{\\alpha_1}\\cdots s_{\\alpha_m}$ be reduced, $a_k=s_{\\alpha_1}\\cdots s_{\\alpha_k}$, and $\\gamma_j=a_{j-1}\\alpha_j$, positive by step 2. They are distinct: if $\\gamma_i=\\gamma_j$ with $i<j$, the invariance of $b$ and faithfulness from step 1 give $s_{\\gamma_j}=a_{j-1}s_{\\alpha_j}a_{j-1}^{-1}$ and $s_{\\gamma_i}=a_{i-1}s_{\\alpha_i}a_{i-1}^{-1}$ in $W$, so $$a_j=s_{\\gamma_j}a_{j-1}=s_{\\gamma_i}a_{j-1}=s_{\\alpha_1}\\cdots s_{\\alpha_{i-1}}s_{\\alpha_{i+1}}\\cdots s_{\\alpha_{j-1}}$$ has a word of $j-2$ letters, contradicting reducedness of the prefix $a_j$. Hence $m\\le|\\Phi^+|=N$, and $\\ell(w_0)=N$. For $\\Phi=\\varnothing$ both sides are $0$.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Andersen p.57, reduced words and the longest element; standard inversion count, written out by the reviewer (the item statement asserts l(w_0)=N, used by lem-sfb-induced-composition-linkage step 11)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-simple-root-reflection-generation",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-root-sign-word-deletion",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-simple-chamber-fold-affine-step"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Definition 1 and Lemma 1, pp.54--55; Lemma 5, p.58. Agent-written chamber-folding and invariant-form expansion; see report.md for the online scan and missing local document."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine root reflection lowering a weight strictly decreases the dominant representative of its finite Weyl dot orbit",
+   "results": "8 hits: LieAlgebra.IsKilling.reflectRoot, RootPairing.Base.IsPos.reflectionPerm, RootPairing.chainBotIdx, RootPairing.Base.IsPos.induction_on_reflect, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_left, RootPairing.chainBotCoeff_reflectionPerm_left. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dot dominant representative of a weight strictly between a simple reflection and the weight is lower in strong affine linkage order",
+   "results": "8 hits: LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top, RootPairing.chainCoeff_chainTopIdx_aux, RootPairing.one_le_chainBotCoeff_of_root_add_mem, RootPairing.chainBotIdx, RootPairing.chainTopIdx, RootPairing.chainBotCoeff_add_chainTopCoeff_le_three, LieAlgebra.IsKilling.chainBotCoeff_le_chainLength, LieAlgebra.IsKilling.chainTopCoeff_le_chainLength. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong linkage order dominant representative of a lower affine reflection in a root system",
+   "results": "8 hits: RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root, RootPairing.root_reflectionPerm, RootPairing.RootPositiveForm.rootLength_reflectionPerm_self, RootPairing.reflection, RootPairing.reflection_apply_self, RootPairing.reflectionPerm_root, RootPairing.weylGroup.induction, RootPairing.reflection_mem_weylGroup. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"reflection\"",
+   "results": "12 hits: RootPairing.reflectionPerm, RootPairing.reflectionPerm_involutive, RootPairing.reflectionPerm_symm, RootPairing.reflectionPerm_inv, RootPairing.flip_reflectionPerm, RootPairing.coreflection, RootPairing.reflection, RootPairing.reflectionPerm_self. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strongLinkage|dotAction|dominant.*reflect|reflect.*dominant|affineWeyl",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite root system the dominant dot representative of a weight strictly between its affine reflection endpoints is strictly lower and strongly linked to the dominant endpoint",
+   "results": "Read 8 hits: RootPairing.chainTopIdx, RootPairing.one_le_chainBotCoeff_of_root_add_mem, RootPairing.one_le_chainTopCoeff_of_root_add_mem, RootPairing.Base.IsPos.reflectionPerm, RootPairing.RootPositiveForm.rootLength_lt_of_pairingIn_notMem, RootPairing.Iic_chainBotCoeff_eq, RootPairing.Iic_chainTopCoeff_eq, RootPairing.setOf_root_add_zsmul_mem_eq_Icc; digest 97ea91b2431a74d1. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "grep",
+   "query": "strongLinkage|dotAction|dominant.*reflect|reflect.*dominant|affineWeyl",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant chamber representative of a strictly lower affine root reflection is strongly linked and lower in root dominance order",
+   "results": "Read 8 hits: RootPairing.reflection, LieAlgebra.IsKilling.reflectRoot, RootPairing.root_reflectionPerm, RootPairing.bijOn_reflection_root, RootPairing.RootPositiveForm.rootLength_reflectionPerm_self, RootPairing.reflection_apply_self, RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root, RootPairing.Base.IsPos.induction_on_reflect; digest 1498507a03d22b85. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"dominant\"",
+   "results": "Read 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dominant representative of an interior point on a root reflection segment lies strictly below the dominant endpoint in the root order",
+   "results": "Read 8 hits: Affine.Simplex.mem_interior_iff_sbtw, Sbtw.left_mem_image_Ioi, RootPairing.setOf_root_sub_zsmul_mem_eq_Icc, RootPairing.setOf_root_add_zsmul_mem_eq_Icc, RootPairing.setOf_root_add_zsmul_eq_Icc_of_linearIndependent, Affine.Simplex.mem_interior_face_iff_sbtw, Affine.Simplex.mem_closedInterior_iff_wbtw, right_lt_lineMap_iff_lt; digest 0c0cf229bf5fa354. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  },
+  {
+   "tool": "grep",
+   "query": "reflectionPerm|theorem reflection|def reflection",
+   "results": "Read 5 hits: 94, 95, 96, 97, 98; digest 0f6145c803ac4d25. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary root strings, reflection automorphisms and point-reflection geometry do not state monotonicity of simple chamber folding for affine lowering edges."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-induced-composition-linkage",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Dominant representatives of affine-reflection error weights descend.",
+   "via": [
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-reflection-dominant-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the ancillary chamber and well-foundedness assertions, the length sign, and both descent conclusions. Reused finite Weyl realization, semisimple root spanning, simple-reflection generation, exchange, Borel root datum and rho pairing. One new statement-only local edge-folding lemma; its rank-one and sign-case argument is recorded in report.md. All required searches were run through msearch.py; no Lean is written or compiled.",
+  "blueprint": "blueprint_refs.py ancestor returns null: the inherited created.item chain has no imported ancestor. Retained that null and via chain, and the exact inherited place below det-thm-sf-ctf-stability-direct-images proof (3). Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. This local root-system input serves the representation-theoretic branch already attached to that proof; neither the chapter nor unit route is changed. Whole-blueprint searches linkage, Weyl, folding and affine reflection found no duplicate. Steps 1--5 justify the chamber preliminaries, step 6 realizes the chamber-reduction input, and step 7 proves strict descent."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-b7b078c4b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-b7b078c4b (reviewer sub-agent of L); spot-checked: Verdict FIX: one asserted clause of the item had no proof. The item states 'the Coxeter length ℓ … with ℓ(w_0)=N', and the citer lem-sfb-induced-composition-linkage step 11 uses a reduced path of length N to w_0, but none of the delivered steps 1-7 proves it. I added step 8 to the item (whole JSON under fixes/dag/nodes/sec-six-functors-basics/), using lem-sfb-rho-regular-weyl-orbit (already a proof_dep) for existence and uniqueness of w_0. Lower bound: n(w)=#{β>0: wβ<0} changes by at most 1 per simple reflection, so N≤ℓ(w_0). Upper bound: the prefix roots of a reduced word are positive (step 2) and distinct, since γ_i=γ_j would give a_j=s_{γ_i}a_{j-1} with j-2 letters, so ℓ(w_0)≤N. Statement, proof_deps and the other steps are unchanged. Delivery: one commit; first split of an item O2 created on 2026-10-24 with no prior proof, so the re-split rule does not apply; item statement unchanged. Steps 1-7 checked against the full cited statements: averaged W-invariant form with 2b(v,β)=<v,β∨>b(β,β); s_α permutes Φ+∖{α}, which gives the hypotheses of root-sign-word-deletion; prefix-root positivity and the telescoping orbit bound with nonnegative integer coefficients from the original v; maximal orbit element in D and uniqueness; finite lower intervals via b(α,ρ)=b(α,α)/2>0 using <ρ,α∨>=1, hence well-foundedness; length-increasing case via ws_βw^{-1}=s_α and faithfulness, giving r≥0; edge-by-edge folding with the new node gives d(z)↑x and d(z)≤x; norm difference (r-kp)kp·b(α,α)>0 gives strictness; empty root system covered. ρ∈X comes from the stmt_dep lem-sfb-rho-section-modules. New node lem-sfb-simple-chamber-fold-affine-step is unsplit, self-contained and true. I proved all sign cases by hand: the conjugated edge via c_{s_αβ}=c_β∘s_α keeps the same n; n=0 bridging edges handle the crossing cases; the β=α crossing uses two edges at levels hp and (h-n)p with h=⌊a/p⌋≥2n. Checked on small A1 cases (p=1, a=5, n=2 and p=3, a=7, n=1). It does not restate the item and duplicates no node (searched dag/ and the recorded Mathlib searches). Andersen 1980 is absent from local literature, so I could not read it; the argument is standard and agent-written (proof_origin by=agent). No SGA source is cited. Batch-5 finding: semisimple-roots-span, weyl-reflection-realization and rho-regular-weyl-orbit reach lem-trf-fppf-covering-base-change only through reductive-borel-pair-structure → homogeneous-orbit-quotient-geometry, which is the generic fppf fact used for G/B. These are root-system and reductive-group structure results, neither a step of the trace formula nor of Poincaré duality, so they are outside both assumptions and no RETURN follows. No tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineReflectionDominantDescent",
+  "declaration": "AlgebraicGeometry.affine_reflection_dominant_descent",
+  "declarations": [
+   "AlgebraicGeometry.affine_reflection_dominant_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineReflectionDominantDescent.lean",
+  "statement": "theorem affine_reflection_dominant_descent {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (S T B : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (hTB : IsRhoBorelPair iT iB j) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aS : ModObj T.X S.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) [P.IsReduced] (hconjS : aS.smul = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (hconjB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T S aS χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (ρ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hρ : (2 : ℤ) • ρ = ∑ β ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), P.root β) : Finite (RankOneRoots.Weyl iT) ∧ ∃ (act : RankOneRoots.Weyl iT →* Aut T), (∀ (n : RankOneRoots.normalizer iT) (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n.val)⁻¹) ∧ ∃ (M : CoxeterMatrix b.support) (cs : CoxeterSystem M (RankOneRoots.Weyl iT)), (∀ (α : b.support) (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), AffineWeight.characterAction iT act (cs.simple α) χ = P.reflection α.val χ) ∧ (∃ w₀ : RankOneRoots.Weyl iT, Set.image (fun β : Φ ↦ AffineWeight.characterAction iT act w₀ β.val) {β : Φ | b.IsPos β} = Set.image (fun β : Φ ↦ -β.val) {β : Φ | b.IsPos β} ∧ cs.length w₀ = (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ).card) ∧ WellFounded (fun (y x : {x // AffineWeight.Dominant P b ρ x}) ↦ AffineWeight.LT P b y.val x.val) ∧ ∃ d : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) → Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (∀ y, AffineWeight.Dominant P b ρ (d y) ∧ (∃ w : RankOneRoots.Weyl iT, d y = AffineWeight.dot (AffineWeight.characterAction iT act) ρ w y) ∧ ∀ z, AffineWeight.Dominant P b ρ z → (∃ w : RankOneRoots.Weyl iT, z = AffineWeight.dot (AffineWeight.characterAction iT act) ρ w y) → z = d y) ∧ ∀ (x : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), AffineWeight.Dominant P b ρ x → ∀ (α : b.support) (w : RankOneRoots.Weyl iT), cs.length (cs.simple α * w) = cs.length w + 1 → 0 ≤ P.toLinearMap (AffineWeight.dot (AffineWeight.characterAction iT act) ρ w x + ρ) (P.coroot α.val) ∧ ∀ k : ℤ, 0 < k * (p : ℤ) → k * (p : ℤ) < P.toLinearMap (AffineWeight.dot (AffineWeight.characterAction iT act) ρ w x + ρ) (P.coroot α.val) → ∀ z : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), z = AffineWeight.reflectionDot P ρ α.val (AffineWeight.dot (AffineWeight.characterAction iT act) ρ w x) + (k * (p : ℤ)) • P.root α.val → AffineWeight.LT P b (d z) x ∧ AffineWeight.Linked P b ρ p (d z) x",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair for lem-sfb-induced-composition-linkage: the old module owned plain affine-weight definitions without a definition node, forcing statement consumers to cite a theorem they do not use. Those eight definitions move verbatim (only their blueprint docstrings change) to Sheaf.AlgebraicGeometry.GroupScheme.AffineWeightOrderAction, owned by def-sfb-affine-weight-order-action. This module publicly imports that interface and retains the exact theorem signature and its existing sorry proof; no landed proof is erased and no declaration is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1257597d2",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Repair of 31cd H2 RETURN. Item module only imports changed vs 31cd; RationalCompositionSeries identical; item node only stmt_deps (theorem node -> new def-sfb-affine-weight-order-action). Statement re-checked against node (alg. closed F, any prime p, sc semisimple S, pinned T/B/U/root datum/W action, integral rho, every composition series: exists-unique eta factor, others dominant mu<eta with mu+rho=w(eta+rho)+p*gamma, gamma in rootSpan Z); rank 0/reducible/p=2 included. New def node statement matches the 8 verbatim-moved AffineWeight defs (Andersen 1980 Def.1; Milne 21.1-21.2). Mechanical: nt_parallel2 Preparation never drops names a delivered module removes, so the move would be refused under import_prune check 3. FIX in the Q97 shape: fixes/AffineReflectionDominantDescent.lean = live text (cmp identical); fixes/AffineWeightOrderAction.lean = public re-export + abbrev AffineWeight.normalizerCharacterAction with docstrings; fixes/def-sfb-affine-weight-order-action.json lean primary = alias, declarations = alias + 8 re-exported names (check_lean_text []); report with Reviewer fix section. nt_compile --json: AffineWeightOrderAction 15.7 s, RationalCompositionSeries 16.1 s, InducedCompositionLinkage 19.1 s, no errors. Land with --revert-nodes lem-sfb-affine-reflection-dominant-descent to keep the live dep record."
+ }
+}

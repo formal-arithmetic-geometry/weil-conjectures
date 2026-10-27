@@ -76,7 +76,18 @@
   "def-weil-pbc-etale-cohomology"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -154,5 +165,25 @@
   "landing": "20261019T002539-L-2151146",
   "kind": "proof",
   "note": "independent cc review: isIso_finiteComparisonGlobalSections proof (axioms propext/choice/Quot.sound only) against node lem-weil-pbc-comparison-global-cohomology, src node vs LowerStarAcyclic.lean:214 verbatim, unit sk-thm-properbasechange realized list vs removed imports (ProEtaleSiteComparison still reached via FiniteLevel public import), 11 direct importers compiled against the delivered module"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For a ring $\\Lambda$ and $K\\in\\Dplus(T_{\\Et},\\Lambda)$, the derived unit\ninduces a natural isomorphism\n\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\n\nBoth functors are ordinary derived sections.",
+  "proof": [
+   {
+    "text": "Since $\\nu_T^*$ is exact by\n[prop-weil-pbc-site-comparison-finite-level], its right adjoint $\\nu_{T,*}$\nin [def-weil-pbc-site-comparison-morphism] preserves injectives. For an\ninjective pro-etale resolution $J^\\bullet$ of a bounded-below complex,\n$\\nu_{T,*}J^\\bullet$ therefore computes its derived direct image and the\nsubsequent derived sections. Underived evaluation on the final object gives\n$\\Gamma(T_{\\Et},\\nu_{T,*}J^r)=\\Gamma(T_{\\Proet},J^r)$. Thus\n$R\\Gamma_{\\Et}R\\nu_{T,*}=R\\Gamma_{\\Proet}$. Apply this identity to the\nderived unit, which is an isomorphism by [thm-weil-pbc-site-comparison].",
+    "uses": [
+     "prop-weil-pbc-site-comparison-finite-level",
+     "def-weil-pbc-site-comparison-morphism",
+     "thm-weil-pbc-site-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

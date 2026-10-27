@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-closed-immersion-unbounded-projection-formula",
+ "kind": "statement",
+ "title": "Unbounded projection formula for a closed immersion",
+ "statement": "Let $i:Z\\hookrightarrow P$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Use the unbounded structure-module derived categories [def-pc-derived-category], derived pullback [def-pc-derived-pullback], derived direct image [def-pc-derived-direct-image], and derived tensor [def-pc-scheme-derived-tensor-structure]. The functor $i_*$ on all structure-module sheaves is exact, so $Ri_*$ is computed by applying $i_*$ termwise to any representative complex. For every $E\\in D(\\mathcal O_Z)$ and $Q\\in D(\\mathcal O_P)$ the canonical projection-formula morphism is an isomorphism in $D(\\mathcal O_P)$:\n$$Ri_*E\\otimes^{\\mathbf L}_{\\mathcal O_P}Q\\xrightarrow{\\sim}Ri_*(E\\otimes^{\\mathbf L}_{\\mathcal O_Z}Li^*Q).$$\nNo quasi-coherence, cohomological boundedness or Tor-dimension assumption on $E$ or $Q$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0B55, lemma-projection-formula-closed-immersion, including the exactness assertion in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "The underlying map of $i$ identifies $Z$ homeomorphically with a closed subset of $P$. The underlying abelian-sheaf pushforward is exact by [lem-sc-closed-immersion-pushforward-exact]. Forgetting module structure is faithful and preserves kernels and cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful], so it reflects exactness: the homology module of a pushed-forward short exact sequence has zero underlying abelian sheaf and is zero. Thus $i_*$ is exact on all structure-module sheaves. Apply [lem-weil-pbc-exact-functor-derived-functor]: every complex computes $Ri_*$, with the canonical comparison $i_*A^\\bullet\\to Ri_*(A^\\bullet)$ an isomorphism.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, first two sentences; Modules Tag 01AX; Sites Modules Tag 03DA; Derived Categories Tag 015F"
+   }
+  },
+  {
+   "text": "Choose a complex $A^\\bullet$ representing $E$, and a K-flat resolution $K^\\bullet\\to Q_0^\\bullet$ of any complex representing $Q$, using [lem-pc-kflat-resolution] on the site of opens of $P$. By [def-pc-derived-pullback] and [lem-pc-kflat-pullback-preservation], $i^*K^\\bullet$ represents $Li^*Q$ and is K-flat over $\\mathcal O_Z$. Hence, by [def-pc-scheme-derived-tensor-structure] and step 1, the source and target of the required map are represented respectively by\n$$L^\\bullet=\\operatorname{Tot}(i_*A^\\bullet\\otimes_{\\mathcal O_P}K^\\bullet),\\qquad R^\\bullet=i_*\\operatorname{Tot}(A^\\bullet\\otimes_{\\mathcal O_Z}i^*K^\\bullet).$$\nFor the target, $A^\\bullet$ need not be K-flat: choose a K-flat resolution $c:A'^\\bullet\\to A^\\bullet$ [lem-pc-kflat-resolution]; the cone of $\\operatorname{Tot}(c\\otimes1):\\operatorname{Tot}(A'^\\bullet\\otimes i^*K^\\bullet)\\to\\operatorname{Tot}(A^\\bullet\\otimes i^*K^\\bullet)$ is $\\operatorname{Tot}(\\operatorname{Cone}(c)\\otimes i^*K^\\bullet)$, acyclic because $\\operatorname{Cone}(c)$ is acyclic and $i^*K^\\bullet$ is K-flat [def-pc-kflat-complex]. So the derived tensor of the K-flat pair $(A'^\\bullet,i^*K^\\bullet)$ is represented by $\\operatorname{Tot}(A^\\bullet\\otimes i^*K^\\bullet)$ through this quasi-isomorphism; the source is treated by the same cone argument in step 6. These are direct-sum total complexes; no boundedness or quasi-coherence has been used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+   }
+  },
+  {
+   "text": "For module sheaves $M$ on $Z$ and $N$ on $P$, form the ordinary projection morphism $m_{M,N}:i_*M\\otimes_{\\mathcal O_P}N\\to i_*(M\\otimes_{\\mathcal O_Z}i^*N)$. On sections it sends $s\\otimes t$ to $s\\otimes i^*t$. This is balanced over $\\mathcal O_P$, commutes with restriction, and therefore gives a map from the sheafified tensor presheaf [def-pur-sheaf-tensor-product]. Equivalently it is the transpose under [lem-pc-module-pullback-adjunction] of the tensor pullback map followed by the ordinary counit. At $p\\notin i(Z)$ both stalks vanish by [lem-weil-pbc-closed-pushforward-stalks] and [lem-weil-pbc-module-stalk-tensor]. At $p=i(z)$, these nodes and [lem-weil-pbc-module-stalk-pullback] identify its stalk with\n$$M_z\\otimes_{\\mathcal O_{P,p}}N_p\\longrightarrow M_z\\otimes_{\\mathcal O_{Z,z}}(N_p\\otimes_{\\mathcal O_{P,p}}\\mathcal O_{Z,z}),\\qquad u\\otimes v\\longmapsto u\\otimes(v\\otimes1).$$\nThe inverse sends $u\\otimes(v\\otimes b)$ to $bu\\otimes v$. The tensor balancing relations make it well defined and the two composites are the identity. The same section formula proves naturality separately in $M$ and $N$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-tensor",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+   }
+  },
+  {
+   "text": "A module-sheaf map whose stalks are bijective is an isomorphism: apply [lem-sc-abelian-sheaf-mono-iff-stalk-mono] and [lem-sc-abelian-sheaf-epi-iff-stalk-epi] after forgetting modules, and use [lem-weil-pbc-module-sheaves-colimits-forgetful] to detect zero kernel and cokernel. Thus every $m_{M,N}$ in step 3 is invertible. Also $i_*$ commutes with arbitrary set-indexed direct sums of module sheaves. Indeed, consider the canonical comparison $\\bigoplus_a i_*M_a\\to i_*(\\bigoplus_aM_a)$. By [lem-pc-stalk-direct-sums] and [lem-weil-pbc-closed-pushforward-stalks], on an image stalk it is the identity on $\\bigoplus_a(M_a)_z$; off the image both sides are zero. The same stalk detection makes the comparison invertible. This includes the empty family.",
+   "uses": [
+    "lem-sc-abelian-sheaf-mono-iff-stalk-mono",
+    "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-stalk-direct-sums",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, direct-sum and stalk argument; Sheaves Tags 007S, 00AE and Section 009E(5); Modules Tag 01AZ"
+   }
+  },
+  {
+   "text": "In total degree $n$, apply $m_{A^p,K^q}$ on every summand with $p+q=n$, and then the inverse of the direct-sum comparison from step 4. This gives a degreewise isomorphism $m^\\bullet:L^\\bullet\\to R^\\bullet$. Naturality of $m$ in its first variable makes it commute with $d_A\\otimes1$, and naturality in its second variable makes it commute with $1\\otimes d_K$. On the summand $(p,q)$ the latter differential carries the same factor $(-1)^p$ on both sides, by [def-pc-tensor-complex-sheaves]. Therefore $m^\\bullet$ is a chain isomorphism. This proves the required isomorphism on the representative complexes once its canonical-map identification is checked.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+   }
+  },
+  {
+   "text": "To check that identification, choose a K-flat resolution $a:B^\\bullet\\to i_*A^\\bullet$ on $P$ [lem-pc-kflat-resolution]. Since $K^\\bullet$ is K-flat, $\\operatorname{Tot}(a\\otimes1)$ is a quasi-isomorphism: its cone is $\\operatorname{Tot}(\\operatorname{Cone}(a)\\otimes K^\\bullet)$, acyclic by [def-pc-kflat-complex]. Also $\\operatorname{Tot}(B^\\bullet\\otimes K^\\bullet)$ is K-flat by [lem-pc-kflat-tensor-product]. First, the isomorphism $e(P)$ of [lem-pc-kflat-pullback-adjunction-comparison] is inverse to the left-derived counit $\\epsilon_i(P)$ used in [def-pc-derived-pullback-tensor-comparison], for every K-flat $P$: apply that lemma to $I=i^*P$ and to the termwise unit $\\eta_P:P\\to i_*i^*P$ of [lem-pc-module-pullback-adjunction], whose ordinary transpose is the identity; this gives $e(P)^{-1}=\\mathrm{homEquiv}^{-1}(Q(\\eta_P)\\circ\\text{direct-image comparison})$, which is $\\epsilon_i(P)$ because the derived adjunction of [def-pc-relative-mv-maps] is pinned to the left-derived counit and the right-derived unit. Write $\\widetilde a:i^*B^\\bullet\\to A^\\bullet$ for the ordinary adjoint of $a$. By [lem-pc-kflat-pullback-adjunction-comparison], its localization is the derived adjoint of the localization of $a$, followed by the canonical direct-image comparison; under $B^\\bullet\\simeq Ri_*E$ it is the derived counit at $E$. The defining K-flat equation of [def-pc-derived-pullback-tensor-comparison] says that the pullback tensor comparison on $(B^\\bullet,K^\\bullet)$ is represented by $i^*\\operatorname{Tot}(B^\\bullet\\otimes K^\\bullet)\\cong\\operatorname{Tot}(i^*B^\\bullet\\otimes i^*K^\\bullet)$. Consequently the adjoint defining the projection map is represented by this chain isomorphism followed by $\\operatorname{Tot}(\\widetilde a\\otimes1)$. Applying the same adjunction comparison to the K-flat source $\\operatorname{Tot}(B^\\bullet\\otimes K^\\bullet)$ identifies its derived transpose with the ordinary transpose. On each pure tensor of sections, that transpose is exactly $m^\\bullet\\circ\\operatorname{Tot}(a\\otimes1)$: both send $b\\otimes k$ to $a(b)\\otimes i^*k$. Thus the canonical projection morphism is the localization of $m^\\bullet$, after inverting $\\operatorname{Tot}(a\\otimes1)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-tensor-product",
+    "lem-pc-kflat-pullback-adjunction-comparison",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+   }
+  },
+  {
+   "text": "By step 5 the localized map $m^\\bullet$ is invertible, and step 6 identifies it with the canonical projection-formula morphism. Together with step 1 this proves both assertions of the item for every $E$ and $Q$, including unbounded complexes and non-quasi-coherent cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback",
+  "lem-pc-kflat-pullback-preservation",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sc-abelian-sheaf-mono-iff-stalk-mono",
+  "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+  "lem-pc-stalk-direct-sums",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-kflat-pullback-adjunction-comparison",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0B55, lemma-projection-formula-closed-immersion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived projection formula for a closed immersion of ringed spaces without quasi coherent hypotheses",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrict",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion i the canonical morphism Ri E tensor K to Ri of E tensor Li K is an isomorphism for arbitrary complexes",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|projectionFormula",
+   "results": "OK: 3 hits; Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the unbounded derived projection formula holds for arbitrary sheaves of structure modules",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|projectionFormula",
+   "results": "OK: 3 hits; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed embedding of ringed spaces satisfies the projection formula for arbitrary unbounded complexes of modules",
+   "results": "OK: 8 hits; Topology.IsClosedEmbedding.mk, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, PrimeSpectrum.isClosedEmbedding_comap_fst, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact direct image along a closed embedding commutes with total tensor using K flat resolutions",
+   "results": "OK: 8 hits; Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|derivedTensor|rightDerived.*pushforward",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned closed-immersion geometry, open restrictions, or ordinary flat-module exactness; none is the unbounded structure-module projection formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherent-pullback",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, first paragraph and converse refinement paragraph, invoking lemma-pull-relative-pseudo-coherent. Supporting input in Tag 09US: Tag 0B55, lemma-projection-formula-closed-immersion, including the exactness assertion in its proof.",
+   "via": [
+    "lem-sfb-relative-pseudocoherent-pullback",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-immersion-unbounded-projection-formula",
+  "worker": "stage1",
+  "summary": "Proved Stacks 0B55 using existing DAG inputs only: exact closed pushforward, a K-flat model for the second factor, the explicit ordinary stalk calculation, arbitrary direct sums, signed totalization, and a K-flat roof identifying the isomorphism with the canonical adjunction mate. No new nodes; no coefficient-site or quasi-coherence restriction.",
+  "blueprint": "Supporting structure-module tool in the inherited det-thm-sf-ctf-stability-direct-images proof-(3) dependency chain: Tag 09US uses the closed projection formula 0B55. The current blueprint direct-images proof (3) is read in literature/blueprint/latest; this split refines the already seeded supporting input, without changing the chapter/unit route. The ancestor command currently returns None for this inherited chain; its existing from.node=null and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-immersion-pushforward-exact",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 1; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 1; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 2, 6; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-pc-kflat-pullback-preservation",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 2; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-pc-stalk-direct-sums",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 4; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-pc-kflat-tensor-product",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 6; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   },
+   {
+    "node": "lem-pc-kflat-pullback-adjunction-comparison",
+    "why": "Generic structure-module, stalk, K-flat, or localization input used in steps 6; the current six-functors unit supplies no structure-sheaf substitute for this supporting Stacks 0B55 argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-stalk-direct-sums",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-kflat-pullback-adjunction-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-80f6c4ebb",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-80f6c4ebb (reviewer sub-agent of L); spot-checked: I read Stacks 0B55 (cohomology.tex, lemma-projection-formula-closed-immersion, with equation-projection-formula-map) and checked the full statement of every cited node. The item's statement matches 0B55 for a closed immersion of schemes and is unchanged. There are no new nodes and no other node with source 0B55; the qcqs/QCoh projection nodes and the closed-structure (i_*O_Z) nodes are only special cases. Steps 1, 3, 4, 5 and 7 are correct. In step 3 the stalk inverse u⊗(v⊗b)↦bu⊗v is balanced and needs no surjectivity. In step 4 the stalk argument correctly replaces 0B55's citation of 01AZ for direct sums. Two small gaps are repaired in fixes/dag/nodes/sec-six-functors-basics/<item>.json. (1) Step 2 said the target is represented by Tot(A⊗i^*K) with A not K-flat but gave no reason; I added a K-flat resolution A'→A and the acyclic cone Tot(Cone⊗i^*K) via def-pc-kflat-complex. (2) Step 6 identified the canonical morphism but silently assumed that the e(P) of lem-pc-kflat-pullback-adjunction-comparison, which that lemma only asserts to exist, is the inverse of the counit ε_i(P) used in def-pc-derived-pullback-tensor-comparison. I added the derivation: apply the lemma to I=i^*P and α=η_P, then use the counit pinning of def-pc-relative-mv-maps. Both added citations are in uses and proof_deps, and they create no cycle. The seven declared tool_uses are accepted as generic structure-module K-flat and stalk tools; five more off-unit nodes are slopmaster2-closed tools. Edge cases checked: Z empty, identity, Spec Z/2→Spec Z, unbounded complexes. There is no SGA. Maintainer note: blueprint.from.node is null and inherited from the parent chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnboundedProjectionFormula",
+  "declaration": "AlgebraicGeometry.closedImmersion_unbounded_projection_formula",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnboundedProjectionFormula.lean",
+  "statement": "theorem closedImmersion_unbounded_projection_formula [∀ X : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] {Z P : Scheme.{u}} (i : Z ⟶ P) [IsClosedImmersion i] : PreservesFiniteLimits (RingedSpace.moduleDirectImage i.toLRSHom.toShHom) ∧ PreservesFiniteColimits (RingedSpace.moduleDirectImage i.toLRSHom.toShHom) ∧ (∀ A : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ, IsIso ((RingedSpace.moduleDirectImage i.toLRSHom.toShHom).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj A))) ∧ (∀ (E : schemeDerivedCategory Z) (Q : schemeDerivedCategory P), IsIso ((relativeMVAdj i).homEquiv ((schemeDerivedDirectImage i).obj E ⊗ Q) (E ⊗ (derivedPullback i).obj Q) ((Classical.choose (exists_canonicalPullbackTensorComparison i)) ((schemeDerivedDirectImage i).obj E) Q ≫ ((relativeMVAdj i).counit.app E ⊗ₘ 𝟙 ((derivedPullback i).obj Q)))))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The conjunction states exactness on all structure-module sheaves, invertibility of the canonical right-derived unit at every complex, and isomorphy of the projection map formed from the pinned relativeMVAdj and the unique canonical K-flat tensor comparison. Two already landed definition nodes, already proof dependencies, are added to stmt_deps to name these canonical constructions; the mathematical statement and accepted proof split are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48b45fce7",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Stage-2 Q91 lem-sfb-closed-immersion-unbounded-projection-formula @48b45fce: item unchanged vs live except lean + two landed def nodes added to stmt_deps (pullback-tensor-comparison, relative-mv-maps; already proof_deps; allowed by brief-stage2 l.177); lean.statement verbatim. Clauses match node/Stacks 0B55: exactness = PreservesFiniteLimits∧PreservesFiniteColimits of moduleDirectImage (the functor whose rightDerivedFunctor is schemeDerivedDirectImage); IsIso rightDerivedFunctorUnit at every complex (canonical termwise computation); projection map = relativeMVAdj.homEquiv of τ(Ri_*E,Q)≫(counit⊗𝟙), direction/order checked (τ: Li^*(A⊗B)→Li^*A⊗Li^*B). τ = choose of exists_canonicalPullbackTensorComparison, owned by the def node's record and unique (IsCanonicalPullbackTensorComparison.unique) → canonical; relativeMVAdj pinned to shared unit/counit. No extra hypotheses, universes explicit, no defs, sorry only, docstrings with source+blueprint+7 steps, imports = proof_dep modules. Edge cases: empty Z/P, identity, Spec F2→Spec Z, zero objects, unbounded complexes. Not recompiled per instruction; worker reports clean compile. Advisory only: dep docstring prefers a bound (τ,hτ) over Classical.choose; equivalent by uniqueness."
+ }
+}

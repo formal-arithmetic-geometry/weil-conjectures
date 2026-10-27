@@ -272,6 +272,35 @@ noncomputable def sfRationalScalarExtension :
     sfRationalConstructibleCategory l E Y ⥤ sfRationalConstructibleCategory l L Y :=
   (sfRationalScalarExtension_existsUnique l E Y p hl L ι).exists.choose
 
+/-- The object equation for rational scalar extension.
+Source: def-weil-rationalization-karoubi
+(blueprint: def-weil-rationalization-karoubi).
+Proof: the uniquely specified extension has the prescribed integral object. -/
+theorem sfRationalScalarExtension_obj (K : sfRationalConstructibleCategory l E Y) :
+    (sfRationalScalarExtension l E Y p hl L ι).obj K =
+      ⟨(sfConstructibleIntegralScalarExtension p l hl E L ι Y).obj K.obj⟩ := by
+  exact (sfRationalScalarExtension_existsUnique l E Y p hl L ι).exists.choose_spec.2.1 K
+
+/-- The pure-tensor map equation for rational scalar extension.
+Source: def-weil-rationalization-karoubi
+(blueprint: def-weil-rationalization-karoubi).
+Proof: this is the defining map equation of the uniquely specified extension. -/
+theorem sfRationalScalarExtension_map_tmul
+    (K K' : sfIntegralConstructibleCategory l E Y)
+    (f : K ⟶ K') (a : Localization.Away (Padic.coefficientExtensionUniformizer l E)) :
+    HEq ((sfRationalScalarExtension l E Y p hl L ι).map
+      (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f :
+          (sfRationalConstructibleLocalization l E Y).obj K ⟶
+            (sfRationalConstructibleLocalization l E Y).obj K'))
+          ((sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E a))
+            ⊗ₜ[Padic.coefficientExtensionIntegers l L]
+              (sfConstructibleIntegralScalarExtension p l hl E L ι Y).map f :
+                (sfRationalConstructibleLocalization l L Y).obj
+                  ((sfConstructibleIntegralScalarExtension p l hl E L ι Y).obj K) ⟶
+                (sfRationalConstructibleLocalization l L Y).obj
+                  ((sfConstructibleIntegralScalarExtension p l hl E L ι Y).obj K')) := by
+  exact (sfRationalScalarExtension_existsUnique l E Y p hl L ι).exists.choose_spec.2.2 K K' f a
+
 /-- Additivity of the specified rational scalar transition.
 Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
 noncomputable instance sfRationalScalarExtension_additive :

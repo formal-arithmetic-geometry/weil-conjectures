@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "In the full small site $s_{\\mathrm{proet}}$ take $X=T=s=\\operatorname{Spec}k$, with structural map the identity. Apply the affine weak-contractibility theorem to the retractions from step 2. For every epimorphism $F\\to G$ of sheaves of sets on this very site, $F(s)\\to G(s)$ is surjective. Thus its affine final object $s$ is weakly contractible. The cited statement is explicitly on the small site, so no restriction of an arbitrary small-site sheaf to or from the big site is being presumed.",
+   "text": "In the full small site $s_{\\mathrm{proet}}$ take $X=T=s=\\operatorname{Spec}k$, with structural map the identity. Apply the affine weak-contractibility theorem to the retractions from step 2. For every epimorphism $F\\to G$ of sheaves of sets on this very site, $F(s)\\to G(s)$ is surjective. Thus its affine final object $s$ is weakly contractible. The cited statement is explicitly on the small site, so no restriction of an arbitrary small-site sheaf to or from the big site is being presumed. The existing Lean theorem permits set-valued sheaves in Type (max u (t+1)) independently of the scheme universe t; apply it with these universe parameters.",
    "uses": [
     "lem-weil-pbc-wcontractible-affine-weakly-contractible"
    ],
@@ -63,14 +63,18 @@
    }
   },
   {
-   "text": "For any sheaf of commutative rings $\\mathcal A$ on $s_{\\mathrm{proet}}$, apply exact evaluation at an affine weakly contractible object with $X=W=s$ and $R=\\mathcal A$. Its hypotheses hold by step 3 and the affineness of $s$. It gives the additive exact functor $\\Gamma(s,-):\\operatorname{Mod}(\\mathcal A)\\to\\operatorname{Mod}(\\mathcal A(s))$, with its ordinary sectionwise module action. In particular this conclusion applies to nonconstant ring sheaves and imposes no torsion or finiteness condition.",
+   "text": "For any commutative ring sheaf A with values in universe max u (t+1), let R be its underlying ring sheaf and ev the actual module-evaluation functor at the final object. Forgetting module structure preserves finite colimits, hence epimorphisms, by the source-library instance SheafOfModules.preservesFiniteColimits_toSheaf (the exactness clause of lem-weil-pbc-module-sheaves-colimits-forgetful). An epic module-sheaf map therefore gives an epic abelian-sheaf map. The general-site abelian epimorphism criterion makes it locally surjective. Forgetting to sets preserves the local lifts and hence gives an epimorphism of set sheaves. Step 3 makes its component at the final object surjective, which is precisely the underlying function of ev.map f. ModuleCat.epi_iff_surjective proves that ev preserves epimorphisms. Evaluation preserves kernels sectionwise; Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels then gives preservation of homology, and consequently of finite limits and finite colimits. No coproduct or arbitrary-colimit assertion is needed, nor any bound on the coefficient universe beyond containing the site.",
    "uses": [
-    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-exact-functor-preserves-homology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0946, lemma-w-contractible, (1), and sites-modules.tex Tag 03DA, lemma-abelian; use only the exactness clause of the cited evaluation theorem."
+    "place": "Tag 0946 (1), exactness from weak contractibility, together with sites-modules.tex Tags 03DA and 03DB for the exact forgetful functor. Lean follows the proof of weaklyContractible_evaluation_preservesHomology with independent coefficient universes."
    }
   },
   {
@@ -119,19 +123,19 @@
   "def-weil-pbc-henselian-terminology",
   "lem-weil-pbc-wcontractible-geometric-criterion",
   "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-sheaf-of-modules-category",
   "lem-sp-exact-functor-preserves-homology",
   "def-weil-derived-cohomology-sheaves",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-proetale-site"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 0982 and 098H, specialized to Spec k and combined with sites-cohomology.tex Tag 0946, homology.tex Tag 010N and derived.tex Tags 015F and 014X. Stage-3 implementation J9 uses sites-modules.tex Tag 03CN and sites.tex Tag 00WN directly for the abelian clause, replacing the constant-integer-sheaf argument."
+  "place": "Tags 0982 and 098H, specialized to Spec k and combined with sites-cohomology.tex Tag 0946, homology.tex Tag 010N and derived.tex Tags 015F and 014X. Stage-3 implementation J9 uses sites-modules.tex Tag 03CN and sites.tex Tag 00WN directly for the abelian clause, replacing the constant-integer-sheaf argument. W8 (2026-10-22): keep independent coefficient universes using the existing universe-polymorphic affine lifting theorem. Prove module exactness directly from exact forgetting, epic-to-locally-surjective criteria and sectionwise kernels, as in ProEtaleWeaklyContractibleEvaluationExact. Reuse the standard exact-functor derived API and its homology comparison. No new theorem or sorry."
  },
  "mathlib_searches": [
   {
@@ -179,7 +183,18 @@
   "item": "def-weil-finite-coefficient-point",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-admissible",
  "split_report": {
@@ -205,8 +220,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-wcontractible-geometric-criterion",
-  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -217,34 +231,35 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-bbb650ffb (reviewer sub-agent of L); spot-checked: Read the full mathematics, all cited statements, sources, and route. All seven steps pass, including full small-site evaluation, arbitrary ring-sheaf coefficients, and unbounded derived consequences. Corrected step 5’s definition tag from 03CV to 03CW in fixes/dag/nodes/sec-smooth-purity/lem-weil-point-proetale-sections-exact.json. Accepted the three proposed generic tool_uses. No new nodes, cycles, or target weakening. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.PointProEtaleSectionsExact",
-  "declaration": "AlgebraicGeometry.ProEtale.point_proEtale_sections_exact",
-  "statement": "theorem point_proEtale_sections_exact (k : Type u) [Field k] [IsAlgClosed k] : (∀ (F G : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1}) (f : F ⟶ G), Epi f → Function.Surjective ((((sheafSections (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1}).obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))).map f).hom)) ∧ (∀ A : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}, PreservesFiniteLimits (pointModuleSections k A) ∧ PreservesFiniteColimits (pointModuleSections k A) ∧ (∀ (K L : CochainComplex (ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) ℤ) (f : K ⟶ L), QuasiIso f → QuasiIso (((pointModuleSections k A).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ [HasDerivedCategory.{w} (ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A))] [HasDerivedCategory.{w'} (ModuleCat.{u + 1} (((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))))] [PreservesFiniteLimits (pointModuleSections k A)] [PreservesFiniteColimits (pointModuleSections k A)], Nonempty (Functor.CommShift (pointModuleSections k A).mapDerivedCategory ℤ) ∧ Functor.IsTriangulated (pointModuleSections k A).mapDerivedCategory ∧ Nonempty (DerivedCategory.Q ⋙ (pointModuleSections k A).mapDerivedCategory ≅ (pointModuleSections k A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) ∧ ∀ i : ℤ, Nonempty ((pointModuleSections k A).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ i ≅ DerivedCategory.homologyFunctor _ i ⋙ pointModuleSections k A)))",
-  "by": "NB",
-  "date": "2026-10-16",
-  "existing": false,
-  "file": "lean/Sheaf/Paper/PointProEtaleSectionsExact.lean",
-  "branch": "newtargets-dag",
+  "module": "Sheaf.Paper.PointProEtaleSectionsExactOfUniverses",
+  "declaration": "AlgebraicGeometry.ProEtale.point_proEtale_sections_exact_of_universes",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.pointModuleSections",
-   "AlgebraicGeometry.ProEtale.point_proEtale_sections_exact"
-  ]
+   "AlgebraicGeometry.ProEtale.pointModuleSectionsOfUniverses",
+   "AlgebraicGeometry.ProEtale.point_proEtale_sections_exact_of_universes"
+  ],
+  "file": "lean/Sheaf/Paper/PointProEtaleSectionsExactOfUniverses.lean",
+  "statement": "theorem point_proEtale_sections_exact_of_universes (k : Type t) [Field k] [IsAlgClosed k] : (∀ (F G : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{max u (t + 1)}) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))) ∧ (∀ A : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{max u (t + 1)}, PreservesFiniteLimits (pointModuleSectionsOfUniverses.{t, u} k A) ∧ PreservesFiniteColimits (pointModuleSectionsOfUniverses.{t, u} k A) ∧ (∀ (K L : CochainComplex (ringedSiteModules.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A)) ℤ) (f : K ⟶ L), QuasiIso f → QuasiIso (((pointModuleSectionsOfUniverses.{t, u} k A).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A))] [HasDerivedCategory.{w'} (ModuleCat.{max u (t + 1)} (((sheafCompose (Scheme.ProEt.topology (Spec (.of k))) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))))] [PreservesFiniteLimits (pointModuleSectionsOfUniverses.{t, u} k A)] [PreservesFiniteColimits (pointModuleSectionsOfUniverses.{t, u} k A)], Nonempty (Functor.CommShift (pointModuleSectionsOfUniverses.{t, u} k A).mapDerivedCategory ℤ) ∧ Functor.IsTriangulated (pointModuleSectionsOfUniverses.{t, u} k A).mapDerivedCategory ∧ Nonempty (DerivedCategory.Q ⋙ (pointModuleSectionsOfUniverses.{t, u} k A).mapDerivedCategory ≅ (pointModuleSectionsOfUniverses.{t, u} k A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) ∧ ∀ i : ℤ, Nonempty ((pointModuleSectionsOfUniverses.{t, u} k A).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ i ≅ DerivedCategory.homologyFunctor _ i ⋙ pointModuleSectionsOfUniverses.{t, u} k A)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "§1(B): the recorded evaluation and exactness declaration fixes coefficient/module size to t+1. The consumer has independent field/site universe t and coefficient-extension universe u; max u (t+1) cannot be forced to t+1. This module reexports the original declaration and states the same exact final-object evaluation, quasi-isomorphism preservation, canonical derived comparison, triangulatedness and homology comparison in the containing coefficient universe, with independent localization universes. Evaluation is the existing Mathlib forget/evaluation composite; no new module category or arbitrary comparison is chosen."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-03efb0908",
-  "group": "NB",
+  "reviewer": "NT-stage2-cc-7bb3b1e3c",
+  "group": "Q23",
   "result": "pass",
-  "note": "Statement, dependencies, source route, universes, edge cases, docstrings, report sections, and compiler evidence all checked; no substantive or mechanical findings."
+  "note": "Clause-by-clause match of pointPullbackRepresentativeDiagram to the node: canonical scalarMap/sections, recorded pullback tower/transitions/Roos/integralDerivedPullback(Comparison), c pinned by ∃! on both product coordinates with strict naturality, quasi-iso preservation and descent with e.app = representative, v = c∘Γ(ȷ) type-checked, square (Q u≫q'=q≫h), roof formula and roof existence, IsDerivedLimit on the actual section tower; no extra hypotheses, universes t,u independent. §1(B) PointProEtaleSectionsExactOfUniverses is a faithful superset generalization (max u (t+1)) of the landed theorem with re-export; records verbatim; only lean fields changed. .choose uses are canonical (∃!, counit invertibility choice-independent, Prop instance). Advisory: conjunct 1 renders 'tower computes finite derived pullbacks and quotient maps' only as reduction-counit invertibility + exact level pullback instances (unused by the 3 citers; the finite pullback is recorded at a single universe); public moduleHasDerived instance; second reading by same worker. No compile (no file changed)."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J9",
+  "group": "W8",
   "result": "pass",
-  "landing": "20261018T140716-L-3104273",
+  "landing": "20261022T144445-L-1725705",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

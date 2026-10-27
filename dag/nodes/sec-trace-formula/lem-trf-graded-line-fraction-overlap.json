@@ -1,0 +1,218 @@
+{
+ "id": "lem-trf-graded-line-fraction-overlap",
+ "kind": "statement",
+ "title": "Overlap equality for framed graded line fractions",
+ "statement": "Let $S,T$ be schemes, $h:T\\to S$ a morphism, $A$ affine-basis quasi-coherent graded $\\mathcal O_S$-algebra data, $L$ an $\\mathcal O_T$-module, and $\\psi$ a relative graded line map from $A$ to the tensor powers of $L$ over $h$ [def-trf-relative-graded-line-map]. For every open $W\\subset T$, section $l\\in\\Gamma(W,L)$, and integer $n\\ge0$, supply $P(l,n)\\in\\Gamma(W,L^{\\otimes n})$ with $P(l,0)=1$ and $P(l,n+1)=l\\otimes P(l,n)$. Let $c$ be a coefficient family such that $c_{U,W,l}(a)P(l,n)=\\psi_U(a)|_W$ whenever $l$ is a free generator. Use the chart indices, source maps $s_i$, and maps $t_i$ of [def-trf-graded-line-fraction-chart]. Suppose each ring map $\\rho_i$ satisfies the fraction formula there. Then for every two indices $i,j$ the maps $t_i,t_j$ agree on $X_i\\times_T X_j$: $t_i\\circ\\mathrm{pr}_1=t_j\\circ\\mathrm{pr}_2$. No generation hypothesis, invertibility of $L$ outside the displayed framed opens, domain hypothesis on rings, or separation hypothesis on schemes is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+ },
+ "stmt_deps": [
+  "def-trf-graded-line-fraction-chart",
+  "def-trf-relative-graded-line-map"
+ ],
+ "proof": [
+  {
+   "text": "On the pullback of the two source charts, its common map to S lies in both affine base opens. At each point choose an affine V contained in their intersection. Each source map lies over its own affine base by the framed-open inclusion.",
+   "uses": [
+    "def-pc-scheme",
+    "def-trf-graded-line-fraction-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+   }
+  },
+  {
+   "text": "Apply the local base-refinement theorem separately to the two chart projections and V. It supplies restricted charts with precisely the same base V, original restricted frames and denominators, plus comparison morphisms on neighborhoods. Intersect the inverse images of these neighborhoods in the original source pullback.",
+   "uses": [
+    "lem-trf-graded-line-fraction-base-refinement",
+    "def-trf-graded-line-fraction-chart",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+   }
+  },
+  {
+   "text": "The two new comparison morphisms have the same composite to T, by their source equations and the original pullback condition. Use pullback.lift to map their common neighborhood into the pullback of the two restricted charts. Their bases are equal by construction, so apply the same-base overlap theorem and pull back its equality. The target comparison equations identify this equality with the restriction of the required equality.",
+   "uses": [
+    "lem-trf-graded-line-fraction-same-base",
+    "def-trf-graded-line-fraction-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+   }
+  },
+  {
+   "text": "The neighborhoods cover the original pullback, so hom_ext_of_forall gives equality of its two morphisms to relative Proj.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sc-local-free-generator",
+  "def-trf-graded-line-fraction-chart",
+  "lem-trf-graded-line-fraction-base-refinement",
+  "lem-trf-graded-line-fraction-same-base",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK, lemma-invertible-map-into-proj, uniqueness and local existence; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing.",
+  "note": "Same affine-refinement route. The Lean assembly makes the common-base choice, pullback lifts, composition equations and final locality explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous localization fraction maps from different local frames of an invertible module agree on overlapping scheme opens",
+   "results": {
+    "t": "2026-10-27T10:53:50Z",
+    "tool": "leansearch",
+    "query": "Homogeneous localization fraction maps from different local frames of an invertible module agree on overlapping scheme opens",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.openToLocalization",
+     "IsLocalizedModule.mapExtendScalars",
+     "HomogeneousLocalization.val",
+     "HomogeneousLocalization.mk",
+     "HomogeneousLocalization.awayMapₐ",
+     "HomogeneousLocalization.awayMap",
+     "AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection"
+    ],
+    "digest": "361e357e595df779"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: absolute Proj and localization tools only; no affine-basis graded line fraction chart interface or comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism specified by homogeneous fraction maps agrees with Proj fromOfGlobalSections after trivializing a line bundle",
+   "results": {
+    "t": "2026-10-27T10:53:52Z",
+    "tool": "leanfinder",
+    "query": "A scheme morphism specified by homogeneous fraction maps agrees with Proj fromOfGlobalSections after trivializing a line bundle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection_assoc",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ"
+    ],
+    "digest": "40dc7dbc04bc9009"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: absolute Proj and localization tools only; no affine-basis graded line fraction chart interface or comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|awayMap_awayToSection|toBasicOpenOfGlobalSections",
+   "results": {
+    "t": "2026-10-27T10:54:53Z",
+    "tool": "grep",
+    "query": "fromOfGlobalSections|awayMap_awayToSection|toBasicOpenOfGlobalSections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean"
+    ],
+    "digest": "113c8ee66fa54e4a"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: absolute Proj and localization tools only; no affine-basis graded line fraction chart interface or comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedLineHomogeneousFractionAtlas",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 4--6. The present node supplies the general affine-basis homogeneous-fraction construction used in steps 4, 6 and 7 of the line-quotient argument. This node isolates the overlap equality of step 2.",
+   "via": [
+    "lem-trf-graded-line-homogeneous-fraction-atlas",
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.GradedLineFractionOverlap",
+  "file": "lean/Sheaf/TraceFormula/GradedLineFractionOverlap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.gradedLineFraction_overlap",
+  "statement": "theorem gradedLineFraction_overlap\n    {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}\n    (ψ : RelativeGradedLineMap h A L)\n    (P : ∀ {W : T.Opens}, Γ(L, W) → (n : ℕ) → Γ(L.tensorPow n, W))\n    (hP0 : ∀ (W : T.Opens) (l : Γ(L, W)), P l 0 = unitSectionsEquiv W 1)\n    (hPs : ∀ (W : T.Opens) (l : Γ(L, W)) (n : ℕ),\n      P l (n + 1) = tmulSection l (P l n))\n    (c : GradedLineFractionCoefficients h A L)\n    (hc : ∀ (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1)\n      (l : Γ(L, W.1)), IsFreeGenerator l → ∀ (n : ℕ) (a : A.grading U n),\n      c U W hWU l n a • P l n =\n        (L.tensorPow n).val.map (homOfLE hWU).op (ψ.component U n a))\n    (ρ : ∀ i : GradedLineFractionChart h A L,\n      HomogeneousLocalization.Away (A.grading i.U) i.e.val →+*\n        Localization.Away (i.coefficient c))\n    (hρ : GradedLineFractionChart.FractionFormula c ρ) :\n    ∀ i j : GradedLineFractionChart h A L,\n      pullback.fst (i.source c) (j.source c) ≫ i.target c ρ =\n        pullback.snd (i.source c) (j.source c) ≫ j.target c ρ",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T112429-L-1582927",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T123546-L-2320136",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

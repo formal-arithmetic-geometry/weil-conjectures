@@ -18,90 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Put $Y=X\\times_S S'$ with projections $p:Y\\to X$ and $q:Y\\to S'$, let $E=b^{-1}(Z)\\subseteq S'$ (cut out by $\\mathcal I\\mathcal O_{S'}$, $\\mathcal I$ the ideal of $Z$), and let $D=q^{-1}(E)=(f\\circ p)^{-1}(Z)$. By [thm-nagata-blowup-principalizes-center], every point of $S'$ has an affine neighbourhood $V$ with $E\\cap V=V(a)$ for one $a\\in\\mathcal O_{S'}(V)$; hence on an open of $Y$ mapping into $V$ the set $D$ is the zero set of the image of $a$. Let $W\\subseteq Y$ be an affine open. Each point of $W$ has a principal open $D(g)\\subseteq W$ mapping into such a $V$ ([lem-weil-pbc-affine-opens-basis] and the basic-open basis of [lem-weil-pbc-spec-localization-away-basic-open](i)), and on it $D=V(a_g)$; finitely many of them cover $W$ by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Thus $W\\setminus D=\\bigcup_g D(g)\\cap D(a_g)$ is a finite union of principal opens, each quasi-compact as the homeomorphic image of the spectrum of a localization [lem-weil-pbc-spec-localization-away-basic-open](ii), [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). So the open immersion $j:Y\\setminus D\\hookrightarrow Y$ is quasi-compact; it is quasi-separated because, being a monomorphism, its diagonal is an isomorphism, hence quasi-compact [def-weil-quasi-separated-morphism].",
+   "text": "Put $Y=X\\times_SS'$ with projections $p,q$, $E=b^{-1}Z$, $D=q^{-1}E$ and $V=Y\\setminus D$. The identity $b\\circ q=f\\circ p$ from [def-pc-fibre-product] gives $D=(f\\circ p)^{-1}Z$. By [thm-nagata-blowup-principalizes-center], $E$ is locally principal. The pullback $H=p^*\\mathcal F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply [lem-trf-locally-principal-supported-kernel] to $q,E,H$: the open inclusion $j:V\\hookrightarrow Y$ is qcqs, and its restriction kernel $K\\subseteq H$ is quasi-coherent and consists exactly of sections supported on $D$.",
    "uses": [
+    "def-pc-fibre-product",
     "thm-nagata-blowup-principalizes-center",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "def-weil-quasi-separated-morphism"
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-locally-principal-supported-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Paragraph preceding Tag 080D: the exceptional divisor is effective Cartier, its inverse image is locally principal, and its complement is retrocompact."
+    "place": "Tag 07ZT, lemma-complement-locally-principal-closed-subscheme; lemma-pullback-locally-principal; paragraph preceding Tag 080D, definition-strict-transform. Quasi-coherence and sectionwise kernel: properties.tex Tag 07ZP, lemma-sections-supported-on-closed-subset, especially proof of (3)."
    }
   },
   {
-   "text": "The pullback $H=p^*\\mathcal F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Let $K\\subseteq H$ be the subsheaf of sections restricting to zero on $Y\\setminus D$; a section has support in $D$ exactly when its germs vanish off $D$, i.e. (sheaf axiom) when it restricts to zero on the complement, so $K$ is the subsheaf of sections supported on $D$. It is the sectionwise kernel of $H\\to j_*(H|_{Y\\setminus D})$, since $(j_*(H|_{Y\\setminus D}))(W)=H(W\\setminus D)$. The restriction $H|_{Y\\setminus D}$ is the module pullback $j^*H$ (because $j^{-1}\\mathcal O_Y=\\mathcal O_{Y\\setminus D}$), hence quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent] applied to $j$, and $j_*$ preserves quasi-coherence by [pqf-lem-pushforward-qcoh] because $j$ is quasi-compact and quasi-separated by Step 1. Therefore $K$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Apply [lem-weil-pbc-quasi-coherent-module-cokernel-image] to the inclusion $K\\hookrightarrow H$: its cokernel $H/K$ is quasi-coherent by (2), the quotient map $\\pi:H\\to H/K$ is an epimorphism by (1), and its sectionwise kernel is $\\operatorname{Im}(K\\hookrightarrow H)$, which is $K$ itself because a section of $H$ that is locally in the sheaf $K$ lies in $K$. By [def-trf-module-strict-transform], $H/K$ is exactly $\\mathcal F^{\\mathrm{st}}$. So $\\pi:p^*\\mathcal F\\twoheadrightarrow\\mathcal F^{\\mathrm{st}}$ is surjective with kernel $K$, the quasi-coherent subsheaf of sections supported on $D=(f\\circ p)^{-1}(Z)$.",
+   "text": "Apply [lem-trf-supported-quotient-saturation] to $Y,V,H,K$. It gives a quasi-coherent quotient $Q$, an epimorphism $H\\to Q$ with sectionwise kernel $K$, an isomorphism after restriction to $V$, and no nonzero local sections of $Q$ supported on $D$. By [def-trf-module-strict-transform], $Q=\\mathcal F^{\\mathrm{st}}$ with its canonical quotient map. By the sheaf axiom a local section of $Q$ (or of $H$) is supported on $D$ exactly when it restricts to zero on its intersection with $V$, so the last conclusion says that $\\mathcal F^{\\mathrm{st}}$ has no nonzero local section supported on $D$. Since $D=(f\\circ p)^{-1}Z$ by Step 1, these are all the module assertions.",
    "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "pqf-lem-pushforward-qcoh",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-trf-supported-quotient-saturation",
     "def-trf-module-strict-transform"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D, paragraph preceding definition-strict-transform and clauses (1)--(2); Properties Tag 07ZP for quasi-coherence of supported sections."
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset, exact restriction-kernel sequence in the proof of (3); quotient consequence used in divisors.tex Tag 080D (1), definition-strict-transform. Residual-support vanishing is the affine-lifting argument of the returned item step 3, not a separately stated clause of Tag 07ZP."
    }
   },
   {
-   "text": "Over $Y\\setminus D$ the subsheaf $K$ restricts to zero (a section of $K$ over an open $O\\subseteq Y\\setminus D$ restricts to zero on $O$ itself), so $\\pi|_{Y\\setminus D}$ is an epimorphism with zero kernel in the abelian category of $\\mathcal O_{Y\\setminus D}$-modules, hence an isomorphism. For the absence of supported sections, let $O\\subseteq Y$ be open and $t\\in\\mathcal F^{\\mathrm{st}}(O)$ with $t|_{O\\setminus D}=0$. Cover $O$ by affine opens $W\\subseteq O$ [lem-weil-pbc-affine-opens-basis]. By [lem-weil-pbc-quasi-coherent-module-cokernel-image](3) on the affine $W$, $t|_W=\\pi_W(m)$ for some $m\\in H(W)$. Then $\\pi_{W\\setminus D}(m|_{W\\setminus D})=t|_{W\\setminus D}=0$, so by part (1) of the same lemma (kernel of $\\pi$ is $K$ on every open, Step 2) $m|_{W\\setminus D}\\in K(W\\setminus D)=0$. Hence $m$ restricts to zero off $D$, i.e. $m\\in K(W)$, and $t|_W=\\pi_W(m)=0$. By the sheaf axiom $t=0$. This holds on every open $O$, so $\\mathcal F^{\\mathrm{st}}$ has no nonzero local section supported on $D$. (Algebraically, on $W=\\operatorname{Spec}A$ with $D\\cap W=V(I)$, $I$ finitely generated, this is the fact that $M/\\Gamma_I(M)$ has no $I$-power torsion, the Tag 07ZP description; the argument above does not need that description.)",
+   "text": "For $\\mathcal F=\\mathcal O_X$, put $U=S\\setminus Z$ and let $j:\\Omega=Y\\times_SU\\hookrightarrow Y$ be the preimage of $U$ under $f\\circ p=b\\circ q$. Since $b^{-1}U=S'\\setminus E$, $\\Omega=q^{-1}(S'\\setminus E)=V$, and by the universal property [def-pc-fibre-product] the preserved open $(X\\times_SU)\\times_U(S'\\times_SU)$ is canonically $V$, mapping to $Y$ by $j$, which is qcqs by Step 1. On an affine chart $\\operatorname{Spec}A$ of $S$ where the ideal of $Z$ is $I=(a_1,\\ldots,a_n)$, the $A$-algebra $A/I$ is presented with no generators and the relations $a_1,\\ldots,a_n$, so $Z\\hookrightarrow S$ is a finite-presentation centre and by [def-nagata-strict-transform] and [def-nagata-scheme-theoretic-closure] $i:X'\\hookrightarrow Y$ is the scheme-theoretic image $\\operatorname{SIm}(j)$. Apply [lem-trf-finite-center-open-closure-kernel-data] to $f\\circ p:Y\\to S$ and the ideal of $Z$: $J=\\ker(\\mathcal O_Y\\to j_*\\mathcal O_V)$ is quasi-coherent and $i_*\\mathcal O_{X'}=\\mathcal O_Y/J$ as quotients of $\\mathcal O_Y$, so $J$ is the ideal sheaf of $i$ [def-sbc-closed-immersion-ideal-sheaf]; sectionwise $J(W)=\\ker(\\mathcal O_Y(W)\\to\\mathcal O_Y(W\\cap V))$. The canonical map $\\epsilon:p^*\\mathcal O_X\\to\\mathcal O_Y$ is an isomorphism of $\\mathcal O_Y$-modules [lem-weil-pbc-module-pullback-structure-sheaf]; it commutes with restriction, so it carries the restriction kernel $K$ of Step 1 onto $J$. Hence $\\epsilon$ induces $\\mathcal O_X^{\\mathrm{st}}=p^*\\mathcal O_X/K\\cong\\mathcal O_Y/J=i_*\\mathcal O_{X'}$, compatible with the quotient maps from $p^*\\mathcal O_X\\cong\\mathcal O_Y$, and the kernel of $\\mathcal O_Y\\twoheadrightarrow\\mathcal O_X^{\\mathrm{st}}$ is the ideal sheaf of $X'$.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D definition (1); the vanishing of supported sections of the quotient is not stated there and is written out here from the affine cokernel description (compare Properties Tag 07ZP(2), properties.tex lemma-sections-supported-on-closed-subset, and the charts in the proof of Tag 080E)."
-   }
-  },
-  {
-   "text": "For $\\mathcal F=\\mathcal O_X$, the pullback $p^*\\mathcal O_X$ identifies canonically with $\\mathcal O_Y$ by [lem-weil-pbc-module-pullback-structure-sheaf]; under it $K$ becomes the subsheaf $\\mathcal K_0\\subseteq\\mathcal O_Y$ of functions restricting to zero on $Y\\setminus D$, a quasi-coherent ideal by Step 2. Put $U=S\\setminus Z$; the closed immersion $Z\\to S$ has finite-type quasi-coherent ideal, so $Z$ is a finite-presentation centre as [def-nagata-strict-transform] requires. Since $b^{-1}(U)=S'\\setminus E$, the universal property of fibre products [def-pc-fibre-product] identifies $(X\\times_SU)\\times_U(S'\\times_SU)$ with $X\\times_S b^{-1}(U)=q^{-1}(S'\\setminus E)=Y\\setminus D$, an open subscheme of $Y$, the map to $Y=X\\times_SS'$ being the open immersion $j$, which is quasi-compact and quasi-separated by Step 1. By [def-nagata-strict-transform] and [def-nagata-scheme-theoretic-closure], $X'$ is the scheme-theoretic image of $j$, which by [def-nagata-scheme-theoretic-image] is the closed subscheme defined by $\\ker(\\mathcal O_Y\\to j_*\\mathcal O_{Y\\setminus D})$; on an open $W$ this map is the restriction $\\mathcal O_Y(W)\\to\\mathcal O_Y(W\\setminus D)$, so the kernel is $\\mathcal K_0$. Thus $i:X'\\hookrightarrow Y$ is the closed immersion cut out by the quasi-coherent ideal $\\mathcal K_0$ [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], whose ideal sheaf $\\ker(\\mathcal O_Y\\to i_*\\mathcal O_{X'})$ [def-sbc-closed-immersion-ideal-sheaf] is $\\mathcal K_0$, and $\\mathcal O_Y\\to i_*\\mathcal O_{X'}$ is surjective [def-weil-closed-immersion]. An epimorphism with kernel $\\mathcal K_0$ is a cokernel of $\\mathcal K_0\\hookrightarrow\\mathcal O_Y$, so $\\mathcal O_X^{\\mathrm{st}}=\\mathcal O_Y/\\mathcal K_0\\cong i_*\\mathcal O_{X'}$ compatibly with the two quotient maps from $\\mathcal O_Y$.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-pc-fibre-product",
     "def-nagata-strict-transform",
     "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-trf-finite-center-open-closure-kernel-data",
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-closed-immersion"
+    "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D clause (2) and the paragraph preceding it; the DAG's closure form of the strict transform is matched with clause (2) through Morphisms Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image)."
+    "place": "Tag 080D (2), definition-strict-transform, compared with the closure definition using morphisms.tex Tag 01R8, lemma-quasi-compact-scheme-theoretic-image (1)-(2)."
    }
   }
  ],
  "proof_deps": [
   "def-nagata-scheme-theoretic-closure",
-  "def-nagata-scheme-theoretic-image",
   "def-nagata-strict-transform",
   "def-pc-fibre-product",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-trf-module-strict-transform",
-  "def-weil-closed-immersion",
-  "def-weil-quasi-separated-morphism",
-  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-finite-center-open-closure-kernel-data",
+  "lem-trf-locally-principal-supported-kernel",
+  "lem-trf-supported-quotient-saturation",
   "lem-weil-pbc-module-pullback-quasi-coherent",
   "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "pqf-lem-pushforward-qcoh",
   "thm-nagata-blowup-principalizes-center"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 080D, definition-strict-transform and preceding paragraph; the no-residual-support assertion is written out from the affine cokernel description (cf. Properties Tag 07ZP)."
+  "place": "Assembly of the two extracted arguments and the existing finite-centre closure-kernel node, following Tag 080D (1)-(2) and the preceding paragraph; properties.tex Tag 07ZP and morphisms.tex Tag 01R8."
  },
  "mathlib_searches": [
   {
@@ -161,27 +136,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-strict-transform-sheaf-kernel",
   "worker": "stage1",
-  "summary": "Audited the imported statement against Stacks Tag 080D and split its proof into the exceptional-complement topology, quasi-coherence and quotient kernel, residual-support vanishing via Tag 07ZP and the power-torsion quotient lemma, and the structure-sheaf clause. The statement is unchanged except that its explicit fibre-product notation is now recorded in stmt_deps. Maintainer-reader FIX (Q37 review, 2026-10-18): step 3 no longer quotes Tag 07ZP without a node and no longer uses the off-route nagata power-torsion lemma; it argues from the cokernel/image lemma (1),(3) and the affine basis. Step 4 now matches the closure-based definition of [def-nagata-strict-transform] through the scheme-theoretic-image definitions instead of asserting Tag 080D(2). Step 2 cites module-pullback quasi-coherence for the restriction to the complement.",
-  "blueprint": "Realizes the strict-transform kernel/support argument in the ancestor blueprint's cited Tag 080I composition passage: the surjection p^*F -> F^st, its kernel supported on (f o p)^(-1)Z, quasi-coherence, and the O_X scheme-transform quotient.",
+  "summary": "Q20 repair of the human-requested re-split: unchanged statement; two new statement-only unsplit nodes distribute the returned proof into (i) locally principal inverse-image topology and supported-kernel quasi-coherence (old step 1 and the kernel half of step 2) and (ii) quotient exactness/quasi-coherence and residual-support saturation (quotient half of step 2 and step 3). Old step 4 (closure ideal and structure quotient) is carried by the existing same-unit node lem-trf-finite-center-open-closure-kernel-data together with lem-weil-pbc-module-pullback-structure-sheaf; a delivered general preserved-open quotient node duplicated it and was dropped by the reviewer. Re-deliveries after landing refusals (heads 4426da95, a5ce9a31, 8675c278): the reviewer FIX of fdafc9a7 was lost three times and is re-applied on 8675c278, keeping its explicit fibre-product citation in step 1 and the finite-presentation check of step 3.",
+  "blueprint": "Realizes the strict-transform kernel/support argument in the ancestor blueprint's cited Tag 080I composition passage: the surjection p^*F -> F^st, its kernel supported on (f o p)^(-1)Z, quasi-coherence, and the O_X scheme-transform quotient. Re-split preserves this route through the same Stacks 080D/07ZP/01R8 arguments.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-module-pullback-quasi-coherent",
     "why": "Generic quasi-coherence of pullback modules is needed for p^*F and is not a trace-formula-specific statement."
-   },
-   {
-    "node": "pqf-lem-pushforward-qcoh",
-    "why": "Generic qcqs pushforward preserves quasi-coherence for the complement open j, which no trace-formula node states."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
-    "why": "Generic quasi-coherent kernel closure is used for the supported-section kernel."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "why": "Generic quasi-coherent cokernel closure is used for the strict-transform quotient."
    },
    {
     "node": "thm-nagata-blowup-principalizes-center",
@@ -197,12 +160,12 @@
   "thm-nagata-blowup-principalizes-center"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q37-762c97fe0",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q20-8675c2782",
+  "group": "Q20",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-762c97fe0 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all four steps, every cited node's statement, Stacks divisors.tex Section strict-transform (paragraph before 080D, 080D (1)(2), 080E proof), properties.tex 07ZP, and unit sk-i-curve-zero. The statement agrees with 080D. Its extra clauses are true. Edge cases checked: Z empty, Z=S (Bl empty), F=0, affine chart. No duplicate statement exists, and no new nodes were added. I repaired three faults in fixes/dag/nodes/sec-trace-formula/lem-trf-strict-transform-sheaf-kernel.json. (1) C1/C8, step 3: it quoted Tag 07ZP with no node (no DAG node states it) and used lemma-nagata-power-torsion-quotient-torsionfree, which is off-route, not Lean-closed and not declared in tool_uses. I rewrote step 3 as a direct sheaf argument from cokernel-image (1),(3) and the affine basis, and dropped that dependency. (2) C4/E4, step 4: it claimed the kernel equals the ideal of X' 'exactly by 080D(2)', but def-nagata-strict-transform is the scheme-theoretic closure. The new step 4 identifies (X x_S U) x_U (S' x_S U) with the qcqs open Y minus D, then uses def-nagata-scheme-theoretic-closure/-image to get ker(O_Y -> j_*O) = K_0, and lem-weil-pbc-quasi-coherent-ideal-closed-subscheme with def-sbc-closed-immersion-ideal-sheaf and def-weil-closed-immersion to get O^st ≅ i_*O_{X'}. The step is now marked non-elementary. (3) C1 minor, step 2: quasi-coherence of the restriction to Y minus D had no citation; it now cites module-pullback quasi-coherence applied to j. Step 1 is correct (the 07ZT retrocompactness argument); I only made its prose precise. I accept the five declared tool_uses as generic tools. The graph is still acyclic, and uses equal the bracketed citations. Statement, stmt_deps, blueprint and tool_uses are unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-8675c2782 (reviewer sub-agent of L); spot-checked: This is the fourth head of this delivery, after fdafc9a7, 4426da95 and a5ce9a31. Each of those three got a FIX that dropped the duplicate node. Each FIX was lost when landing refused with 'completed in this project's DAG but not in the live DAG' (svc.log LAND 1 lines on 10-22 and 10-23). That refusal is about promotion, not about the verdict. Compared with a5ce9a31 by sha256 and field diff, new nodes A, B and C are byte-identical, and so is the base node Q24 lem-trf-finite-center-open-closure-kernel-data. In the item only step 3 changed: it now proves K = ε⁻¹K₀ from ε-naturality and injectivity. That is correct but still goes through C. I re-read the sources myself: Stacks divisors 080D (1)-(2) and the paragraph before it, 07ZT, properties 07ZP (proof of (3)) and morphisms 01R8. I also read the cited statements def-nagata-strict-transform, def-nagata-scheme-theoretic-closure (SIm of a qcqs immersion), def-trf-module-strict-transform, thm-nagata-blowup-principalizes-center and lem-weil-pbc-module-pullback-structure-sheaf. The item statement is unchanged and agrees with 080D. A, lem-trf-locally-principal-supported-kernel, is true: D is locally principal, j is quasi-compact via basic opens D(hg), quasi-separated as a monomorphism, and K = ker(H→j_*j^*H) is quasi-coherent. B, lem-trf-supported-quotient-saturation, is true: the cokernel is quasi-coherent, π_W(s)=0 iff s∈K, sections lift on affines since H¹(W,K)=0, π|_V is an isomorphism, and the affine-lift argument gives saturation. I tested A and B with E empty, a pulled-back equation equal to 0 (V empty), V = Y, and Spec k[t] with H = k[t]⊕k[t]/(t). C5/D1: C, lem-trf-preserved-open-structure-quotient, is a same-day generalization of the landed same-unit Q24 node. Q24 applied to f∘p and the finite-type ideal of Z gives J quasi-coherent and i_*O_X' = O_Y/J. C adds only the transport along ε, which is lem-weil-pbc-module-pullback-structure-sheaf, and C does not cite it. I re-applied the a5ce9a31 fixes unchanged. Item step 3 now cites Q24, the ε lemma, the closure and strict-transform definitions, the fibre product and the closed-immersion ideal sheaf. It keeps the A/(a1..an) finite-presentation check, and its 'ε commutes with restriction' is this head's naturality argument. Step 2 gains the sheaf-axiom reading of 'supported'. B3 on node A: D = Y×_T E, with def-pc-fibre-product and def-pc-module-pullback added to stmt_deps. The proof is 2935 characters (steps of 574, 668 and 1693). Each step's uses equal its citations, proof_deps is their union, and no SGA is cited. The re-split note is met by A and B, which carry old steps 1-3; old step 4 is carried by the existing Q24 node. split_report.tool_uses keeps the two generic tools accepted before. Maintainer note: the refusal is structural (the item has had a stage-2 Lean PASS since 10-18), and this FIX has now been lost three times. The loop will repeat until promotion is fixed.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -228,5 +191,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

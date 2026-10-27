@@ -1,0 +1,266 @@
+{
+ "id": "lem-trf-galois-graded-wild-kernel",
+ "kind": "statement",
+ "title": "Wild kernel of the action on initial forms of a Galois valued extension",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial nonarchimedean real absolute value: $|x|=0$ iff $x=0$, $|xy|=|x||y|$, $|1|=1$, $|x+y|\\le\\max(|x|,|y|)$, and $|a|\\notin\\{0,1\\}$ for some $a$. All finite extensions carry an extending absolute value. For each such field $F$ set $F^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], $\\mathfrak m_F=\\{x:|x|<1\\}$, $\\widetilde F=F^\\circ/\\mathfrak m_F$ and $\\Gamma_F=|F^\\times|$. Write $e(F/E)=[\\Gamma_F:\\Gamma_E]$, $f(F/E)=[\\widetilde F:\\widetilde E]$, and let $p=\\operatorname{char}(\\widetilde K)$. A finite field extension is separable when every minimal polynomial has distinct roots. Every finite separable extension $L/K$ is contained in a finite Galois extension $N/K$, i.e. separable and normal, where normal means that the minimal polynomial over $K$ of every element of $N$ splits into linear factors in $N[T]$. For any finite Galois $N/K$, put $G=\\operatorname{Aut}_K(N)$ and\n$$P=\\{\\sigma\\in G: |\\sigma(x)-x|<|x|\\text{ for every }x\\in N^\\times\\},\\qquad T=N^P=\\{x\\in N:\\forall\\sigma\\in P,\\ \\sigma(x)=x\\}.$$\nThen $P$ is normal in $G$. If $p>0$, its order is a power of $p$; if $p=0$, it is trivial. The field $T$ has separable residue extension over $K$, $e(T/K)$ is prime to $p$ when $p>0$, and $[T:K]=e(T/K)f(T/K)$. Moreover $N/T$ has purely inseparable residue extension, meaning every residue element has a $p$-power in $\\widetilde T$ when $p>0$ and the residue fields are equal when $p=0$; $e(N/T)$ and $f(N/T)$ are powers of $p$ when $p>0$ and both are one when $p=0$. No discreteness or perfection of the residue field is assumed.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin section 2.1, Lemma 2.1.5, proof: the maximal tame field and its pro-p complement. Structural input: Gabber--Ramero, Almost Ring Theory (sixth release), 6.2.8--6.2.18, especially Proposition 6.2.12 and Corollary 6.2.14, printed pp.159--162; descend from strict henselization. Online primary sources read; local archival copies WANTED.",
+  "url": "https://arxiv.org/html/0707.3953v3#S2.SS2"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-trf-valuation-comap-residue"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-Galois-envelope node to the one extension $L/K$; its embedding is injective, so identify $L$ with its image in $N$. The extending absolute value on $N$ is available by hypothesis. For every $\\sigma\\in G$, $x\\mapsto|\\sigma(x)|$ is another extending absolute value, hence equals $|x|$ by uniqueness. The finite-Galois fixed-field node makes $G$ finite. The defining inequalities show directly that $P$ is a subgroup: $(\\sigma\\tau)x-x=\\sigma(\\tau x-x)+(\\sigma x-x)$; for inverses apply the inequality to $\\sigma^{-1}x$. For $g\\in G$, $|(g\\sigma g^{-1})x-x|=|\\sigma(g^{-1}x)-g^{-1}x|<|g^{-1}x|=|x|$. Thus $P$ is normal.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "If $q$ is prime and $q\\ne p$ (any prime if $p=0$), then $|q|=1$: the image of $q$ in the residue field is nonzero. Suppose $\\sigma\\in P$ has order $q$. Put $A(y)=\\sum_{i=0}^{q-1}\\sigma^i(y)$. For nonzero $y$, each $\\sigma^i(y)-y$ has norm less than $|y|$, so $|A(y)-qy|<|y|=|qy|$ and therefore $|A(y)|=|y|$. Hence $A$ is injective. But $A(z-\\sigma z)=z-\\sigma^qz=0$, forcing $\\sigma z=z$ for every $z$, a contradiction. Cauchy's theorem, applied to the finite subgroup $P$ of $K$-automorphisms of $N$, now excludes every prime divisor of $|P|$ except $p$. By prime factorization $m:=|P|$ is $p^a$ for some $a\\ge0$ if $p>0$. If $p=0$, it has no prime divisor, so $m=1$ and $P=1$.",
+   "uses": [
+    "lem-exc-finite-group-cauchy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "For $x\\in N^\\times$ define $b(x)=\\prod_{\\rho\\in P}\\rho(x)$. The factors are permuted by $P$, so $b(x)\\in T^\\times$. Write each factor as $x(1+\\epsilon_\\rho)$ with $|\\epsilon_\\rho|<1$. Expanding the finite product gives\n$$|b(x)-x^m|<|x|^m,\\qquad |b(x)|=|x|^m.$$\nThis is just a finite product of terms congruent to $1$ modulo the maximal ideal. For a unit $x$ it also gives $\\overline{b(x)}=\\bar x^m$. Zero residue elements satisfy the same power-membership assertion trivially.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "The degree bound for $N/T$ makes $\\Gamma_N/\\Gamma_T$ finite and $\\widetilde N/\\widetilde T$ finite. Since $|b(x)|=|x|^m$, every element of the value-group quotient has $m$-th power $1$. For $p>0$, $m=p^a$, so the finite-group prime-power cardinality leaf gives $e(N/T)=p^c$. Every nonzero residue element of $N$ has a unit representative, and the preceding product gives its $p^a$-th power in $\\widetilde T$; hence the residue extension is purely inseparable. The purely inseparable root-tower node gives a tower of degree-$p$ steps, so $f(N/T)$ is also a power of $p$ (the empty tower has degree one). For $p=0$, step 2 gives $P=1$, hence $T=N$; the upper value groups and residue fields are equal.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound",
+    "lem-trf-finite-group-prime-power-cardinality",
+    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "The normal-fixed-quotient node applied to $P\\triangleleft G$ shows that $T/K$ is finite Galois and that restriction identifies $G/P$ with $H:=\\operatorname{Aut}_K(T)$. Thus every $\\tau\\in H$ lifts to a $\\sigma\\in G$. The finite-Galois fixed-field node, now applied to $T/K$, gives $|H|=[T:K]$. Every element of $H$ is an isometry, since it is a restriction of such a $\\sigma$.",
+   "uses": [
+    "lem-per-finite-galois-normal-fixed-quotient",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "Let $\\tau\\in H$ act trivially on all initial forms of $T$, that is $|\\tau(t)-t|<|t|$ for every $t\\ne0$ in $T$, and lift it to $\\sigma\\in G$ using the restriction isomorphism. For $x\\in N^\\times$ the inequalities of step 3, their images under the isometry $\\sigma$, and $|\\sigma(b(x))-b(x)|<|b(x)|$ give\n$$|(\\sigma x)^m-x^m|<|x|^m.$$\nThe unit $u=\\sigma x/x$ therefore satisfies $\\bar u^m=1$ in $\\widetilde N$. If $p>0$, then $m=p^a$ and $(\\bar u-1)^{p^a}=\\bar u^{p^a}-1=0$, so $\\bar u=1$ since a field has no nonzero nilpotent. If $p=0$, $m=1$ gives the same conclusion directly. Thus $|\\sigma x-x|<|x|$ for all $x\\ne0$, so $\\sigma\\in P$. Its restriction to $T$ is the identity. This proves that the initial-form kernel of $H$ is trivial.",
+   "uses": [
+    "lem-per-finite-galois-normal-fixed-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  },
+  {
+   "text": "Apply the initial-form automorphism bound with $E=T,F=K$ and $H=\\operatorname{Aut}_K(T)$. Its finiteness hypotheses on $e,f$ follow from the valued-extension degree bound. Its kernel is trivial by step 6. Write $e=e(T/K)$, $f=f(T/K)$ and use $e',s$ as in that bound. Combining it with the degree bound and step 5 yields\n$$ef\\le[T:K]=|H|\\le e's\\le ef.$$\nSince $e,f,e',s$ are positive integers with $e'\\le e$ and $s\\le f$, equality forces $e'=e$ and $s=f$. The bound's separability criterion now makes $\\widetilde T/\\widetilde K$ separable, $e'=e$ makes $e$ prime to $p$ when $p>0$, and equality gives $[T:K]=ef$. For $p=0$ the convention $e'=e$ imposes no index restriction, as required.",
+   "uses": [
+    "lem-trf-valued-initial-form-automorphism-bound",
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-exc-finite-group-cauchy",
+  "lem-trf-valued-extension-degree-bound",
+  "lem-trf-finite-group-prime-power-cardinality",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-per-finite-galois-normal-fixed-quotient",
+  "lem-trf-valued-initial-form-automorphism-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+  "place": "Agent assembly from the inertia pairing and averaging argument of Gabber–Ramero §6.2.8 and Proposition 6.2.12, with the explicit orbit-product argument; Temkin §2.1, Lemma 2.1.5. Local source copies WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois extensions of complete nonarchimedean fields have wild inertia a p group and tame fixed field described by graded residue characters",
+   "results": "{\"t\": \"2026-10-24T09:24:08Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Galois extensions of complete nonarchimedean fields have wild inertia a p group and tame fixed field described by graded residue characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"Field.absoluteGaloisGroupAbelianization\", \"galBasis\", \"fixedByFinite\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"Ideal.inertiaDegIn_ne_zero\", \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"Ideal.inertiaDeg_eq_of_isGalois\"], \"digest\": \"a6134f176ec2c8a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois valued extension inertia acts through residue field and value group characters with wild p kernel",
+   "results": "{\"t\": \"2026-10-24T09:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Galois valued extension inertia acts through residue field and value group characters with wild p kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"Ideal.inertiaDegIn_ne_zero\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"Ideal.inertiaDeg_eq_of_isGalois\", \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"Ideal.card_inertia_eq_ramificationIdxIn\"], \"digest\": \"ad2d2284163e9525\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois ramification filtration for rank one henselian valued fields without discrete valuation",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"leansearch\", \"query\": \"Galois ramification filtration for rank one henselian valued fields without discrete valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Valuation.RankOne.recOn\", \"Field.Emb.Cardinal.filtration\", \"Field.Emb.Cardinal.filtration_apply\", \"Valuation.IsRankOneDiscrete.generator_mem_range\", \"Valuation.IsRankOneDiscrete.rec\", \"galBasis\", \"Valuation.IsRankOneDiscrete.generator_lt_one\"], \"digest\": \"8e9601e02961455f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, IsGalois",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"loogle\", \"query\": \"Valuation, IsGalois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "wildInertia|wild_inertia|graded.*[Vv]aluation|ramificationGroup",
+   "results": "{\"t\": \"2026-10-24T09:24:00Z\", \"tool\": \"grep\", \"query\": \"wildInertia|wild_inertia|graded.*[Vv]aluation|ramificationGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "inertiaSubgroup|ramification|tame",
+   "results": "{\"t\": \"2026-10-24T09:25:34Z\", \"tool\": \"grep\", \"query\": \"inertiaSubgroup|ramification|tame\", \"sub\": \"RingTheory/Valuation/RamificationGroup.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"12\", \"16\", \"50\"], \"digest\": \"8aae6cc6d199203d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois complete valued field wild inertia p group tame fixed field defectless",
+   "results": "{\"t\": \"2026-10-24T13:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Galois complete valued field wild inertia p group tame fixed field defectless\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDegIn_ne_zero\", \"ValuationSubring.inertiaSubgroup\", \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"Ideal.inertiaDeg_eq_of_isGalois\", \"Field.absoluteGaloisGroupAbelianization\", \"fixedByFinite\", \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\"], \"digest\": \"786a67f2140cc66d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only valuation inertia definitions and Dedekind ramification formulas; no complete non-discrete valued-field wild-kernel theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, IsGalois",
+   "results": "{\"t\": \"2026-10-24T13:28:42Z\", \"tool\": \"loogle\", \"query\": \"Valuation, IsGalois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only valuation inertia definitions and Dedekind ramification formulas; no complete non-discrete valued-field wild-kernel theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "wildInertia|wild_inertia|graded.*valuation|ramificationGroup",
+   "results": "{\"t\": \"2026-10-24T13:28:42Z\", \"tool\": \"grep\", \"query\": \"wildInertia|wild_inertia|graded.*valuation|ramificationGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only valuation inertia definitions and Dedekind ramification formulas; no complete non-discrete valued-field wild-kernel theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-finite-ramification-calculus",
+  "date": "2026-10-24",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, printed pp. 8–9, ramification discussion and Lemma 2.1.5; §6.2 opening, p. 41 (invariants unchanged by finite extension); immediate/tame base-change consequence of the same ramification calculus. Supporting structural input: Temkin section 2.1, Lemma 2.1.5, proof: the maximal tame field and its pro-p complement. Structural input: Gabber--Ramero, Almost Ring Theory (sixth release), 6.2.8--6.2.18, especially Proposition 6.2.12 and Corollary 6.2.14, printed pp.159--162; descend from strict henselization. Online primary sources read; local archival copies WANTED.",
+   "via": [
+    "lem-trf-valued-finite-ramification-calculus",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-galois-graded-wild-kernel",
+  "worker": "stage1",
+  "summary": "Proved normality and the prime-power assertion by isometry uniqueness and the averaging argument. Orbit products give the upper purely inseparable/p-primary invariants and faithfulness on initial forms of the fixed field. A general initial-form automorphism bound and the fundamental inequality force tame numerical equality. Reused existing Cauchy and normal-fixed-quotient leaves; two new nodes, one a Mathlib leaf. Statement unchanged; source page reference corrected.",
+  "blueprint": "Auxiliary Temkin ramification input in the historical semistable-alteration branch of lem-trf-local-term-locality proof (1)–(2), exactly the ancestry in blueprint.from.place. Latest blueprint now proves contracting locality directly; neither the chapter nor unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic finite separable Galois envelope for the explicit first clause; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Generic field-Galois finiteness and automorphism count, used for N/K and T/K."
+   },
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic purely inseparable field-degree tool converts residue power membership to a prime-power residue degree."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-21605f858",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-21605f858 (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged; only the source page was corrected to printed pp.207–209) and both new nodes in full, plus every cited statement. All 7 steps check. Step 1: the Galois-envelope, uniqueness and fixed-field nodes give that every element of G is an isometry; normality of P follows from the ultrametric inequality. Step 2: the averaging map A is injective because |q|=1 for primes q≠p; Cauchy, applied to the finite automorphism subgroup P, gives |P|=p^a, and P=1 when p=0. Step 3: orbit products. Step 4: the degree bound, the new IsPGroup.iff_card leaf (Mathlib PGroup.lean 25–27 and 102–104, lines verified) and the root-tower node give the p-power e and f and the purely inseparable residue extension for N/T. Step 5: the normal-fixed-quotient node, whose restriction isomorphism is stated explicitly. Step 6: a lift σ satisfies ū^{p^a}=1, so σ∈P and the initial-form kernel is trivial. Step 7: the chain ef≤[T:K]=|H|≤e's≤ef forces e'=e and s=f. I checked the new automorphism-bound node independently via the residue action, the character map I/Q↪Hom(Γ_E/Γ_F,k_E^×) (at most e' elements) and the embedding count s, and tested it on Q_2(√2), Q_3(√3) and unramified cases. It is strictly smaller than the item, not a restatement (D1). Duplicate candidates (sfb matrix p-group node, sylow-subgroup-cardinality) are not the abstract statement. There is no cycle; blueprint fields are present; there is no SGA. Temkin and Gabber–Ramero are absent locally: the report records WANTED lines and proof_origin.by=agent, and I checked the argument from first principles. The tool_uses (pbc Galois envelope, fixed field, root tower) are accepted as generic field theory."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GaloisGradedWildKernel",
+  "declaration": "ValuationSubring.galois_graded_wild_kernel",
+  "file": "lean/Sheaf/FieldTheory/GaloisGradedWildKernel.lean",
+  "statement": "theorem galois_graded_wild_kernel (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (hext : ∀ (F : Type (max u v w)) [Field F] [Algebra K F] [FiniteDimensional K F], ∃ a : AbsoluteValue F ℝ, ∀ x : K, a (algebraMap K F x) = ‖x‖) : (∀ (L : Type v) [Field L] [Algebra K L] [FiniteDimensional K L] [Algebra.IsSeparable K L], ∃ (M : Type (max u v)) (_ : Field M) (_ : Algebra K M), FiniteDimensional K M ∧ IsGalois K M ∧ Nonempty (L →ₐ[K] M)) ∧ (∀ (N : Type w) [NormedField N] [IsUltrametricDist N] [Algebra K N] [FiniteDimensional K N] [IsGalois K N], (∀ x : K, ‖algebraMap K N x‖ = ‖x‖) → ∃ (P : Subgroup (N ≃ₐ[K] N)) (T : IntermediateField K N) (O : ValuationSubring N) (B : ValuationSubring T) (p e f e₁ f₁ : ℕ), O = (NormedField.valuation (K := N)).valuationSubring ∧ B = O.comap (algebraMap T N) ∧ T = IntermediateField.fixedField P ∧ (∀ σ : N ≃ₐ[K] N, σ ∈ P ↔ ∀ x : N, x ≠ 0 → ‖σ x - x‖ < ‖x‖) ∧ P.Normal ∧ p = ringChar (IsLocalRing.ResidueField (O.comap (algebraMap K N))) ∧ e = ((QuotientGroup.mk' B.unitGroup).comp (Units.map (algebraMap K T).toMonoidHom)).range.index ∧ f = @Module.finrank (IsLocalRing.ResidueField (B.comap (algebraMap K T))) (IsLocalRing.ResidueField B) _ _ (B.comapResidueAlgebra (algebraMap K T)).toModule ∧ e₁ = ((QuotientGroup.mk' O.unitGroup).comp (Units.map (algebraMap T N).toMonoidHom)).range.index ∧ f₁ = @Module.finrank (IsLocalRing.ResidueField (O.comap (algebraMap T N))) (IsLocalRing.ResidueField O) _ _ (O.comapResidueAlgebra (algebraMap T N)).toModule ∧ @Algebra.IsSeparable (IsLocalRing.ResidueField (B.comap (algebraMap K T))) (IsLocalRing.ResidueField B) _ _ (B.comapResidueAlgebra (algebraMap K T)) ∧ Module.finrank K T = e * f ∧ (0 < p → (∃ a : ℕ, Nat.card P = p ^ a) ∧ Nat.Coprime e p ∧ (∀ z : IsLocalRing.ResidueField O, ∃ a : ℕ, z ^ (p ^ a) ∈ Set.range (O.comapResidueFieldMap (algebraMap T N))) ∧ (∃ a : ℕ, e₁ = p ^ a) ∧ ∃ a : ℕ, f₁ = p ^ a) ∧ (p = 0 → P = ⊥ ∧ Function.Surjective (O.comapResidueFieldMap (algebraMap T N)) ∧ e₁ = 1 ∧ f₁ = 1))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3299b74bd",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Node diff vs base: only lean record + stmt_dep def-trf-valuation-comap-residue (existing def node); lean.statement verbatim. All clauses match: K complete nontrivial ultrametric normed field; hext true (spectral norm) so no strengthening; Galois-envelope conjunct; N normed ultrametric with norm restriction (ultrametricity automatic by uniqueness); O, B, T=fixedField P, P via iff ‖σx−x‖<‖x‖ for x≠0, p=ringChar of K residue field, e/e₁ value-group indices, f/f₁ finrank via canonical comapResidueAlgebra, all pinned by equalities; P normal, p>0: |P|=p^a, e coprime p, residue purely inseparable (incl. z=0), e₁,f₁ p-powers; p=0: P=⊥, surjective residue map, e₁=f₁=1; residue separability and [T:K]=ef unconditional. Edge cases N=K, char 0, mixed char, imperfect residue, non-discrete fine; universes independent. No duplicate (only DVR-specific modules); no e/f def nodes. Gates: single sorry theorem, source+blueprint docstrings, 7-step proof plan, both report sections. Advisory: direct comapResidueFieldMap use is the ī of cited def-trf-valuation-comap-residue (recorded reuse; landed precedent), not a fault. No file changed, no compile run."
+ }
+}

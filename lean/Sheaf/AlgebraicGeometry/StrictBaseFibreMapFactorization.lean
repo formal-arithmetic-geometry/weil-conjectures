@@ -6,12 +6,8 @@ Authors: SHEAF group D6
 module
 
 public import Sheaf.AlgebraicGeometry.SpecializationCospecializationArrows
-import WeilConjectures.AlgebraicGeometry.DerivedGlobalGermExchange
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
-import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.DerivedSpecializationRestriction
+import Sheaf.AlgebraicGeometry.ClosedLiftStalkSpecialization
 
 /-! # Fibre maps factor through restriction on the strict-local base
 
@@ -65,6 +61,54 @@ theorem strictBaseSheafFiberMap_factorization
       a ≫ etaleDerivedRestriction (strictBaseFiberInclusion f s
           (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) _ =
         closedStrictBaseSheafFiberMap f G s := by
-  sorry
+  let a := strictLocalSheafComparison f G s
+  have ht (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω']
+      (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) :
+      (derivedEtaleStalkSpecialization s t).app
+          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj G)) ≫
+          strictBaseSheafFiberMap f G s t =
+        a ≫ etaleDerivedRestriction (strictBaseFiberInclusion f s t) _ := by
+    let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj G
+    let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+    let h := strictBaseFiberInclusion f s t
+    let H := (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus
+    let e := (Functor.mapDerivedCategoryPlusSingleFunctor
+      (upperStar AddCommGrpCat.{u + 1} p) 0).hom.app G
+    have hb := derivedFiberMap_restriction f (strictBaseChangeMap f s)
+      (Scheme.strictHenselizationStructuralMap s) p
+      (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)) t K
+    rw [derivedEtaleStalkSpecialization_restriction]
+    unfold strictBaseSheafFiberMap strictBaseDerivedFiberMap
+    simp only [Category.assoc]
+    erw [reassoc_of% hb]
+    change _ = a ≫ etaleDerivedRestriction h _
+    have hn : etaleDerivedRestriction h
+          ((upperStar AddCommGrpCat.{u + 1} p).mapDerivedCategoryPlus.obj K) ≫
+        (Sheaf.Γ (pullback (strictBaseChangeMap f s) t).smallEtaleTopology
+          AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.map
+          ((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus.map e) =
+        H.map e ≫ etaleDerivedRestriction h _ := by
+      unfold etaleDerivedRestriction
+      have hu := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h).derivedPlus.unit.naturality
+        e
+      have hl := (etaleLerayPlus h).hom.naturality
+        ((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus.map e)
+      simp only [Functor.comp_map, Functor.id_map] at hu hl
+      simp only [Category.assoc]
+      erw [← hl]
+      change H.map _ ≫ H.map _ ≫ _ = H.map e ≫ H.map _ ≫ _
+      rw [← H.map_comp_assoc]
+      erw [← hu]
+      simp only [Functor.map_comp, Category.assoc]
+    dsimp only [a, strictLocalSheafComparison]
+    simp only [Category.assoc]
+    erw [hn]
+  refine ⟨a, ht Ω' t, ?_⟩
+  have hs := ht Ω
+    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+  rw [derivedEtaleStalkSpecialization_closed] at hs
+  exact hs.symm
 
 end AlgebraicGeometry.Etale

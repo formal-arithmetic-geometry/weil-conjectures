@@ -13,6 +13,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Analysis.Normed.Module.Basic
 import Sheaf.CategoryTheory.CondensedProductActionInflation
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Acyclicity of polynomial translation modules
 

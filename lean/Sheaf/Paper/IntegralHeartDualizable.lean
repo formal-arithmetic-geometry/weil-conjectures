@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

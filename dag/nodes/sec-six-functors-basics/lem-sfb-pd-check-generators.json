@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-pd-check-generators",
+ "kind": "statement",
+ "title": "Checking divided-power multiplication and iteration on ideal generators",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, and $S\\subseteq I$ a set generating $I$ as an ideal. Let $g_n:I\\to I$ be maps for $n\\geq1$, and put $g_0(x)=1\\in A$. Suppose that $g_1(x)=x$, $g_n(ax)=a^ng_n(x)$, and $g_n(x+y)=\\sum_{i=0}^n g_i(x)g_{n-i}(y)$ for all $a\\in A$, $x,y\\in I$, and $n\\geq1$. Suppose further that for every $s\\in S$ and positive $n,m$, $g_n(s)g_m(s)=\\binom{n+m}{n}g_{n+m}(s)$ and $g_n(g_m(s))=\\frac{(nm)!}{n!(m!)^n}g_{nm}(s)$. The factorial quotient denotes the integer coefficient acting in $A$, not division in $A$. Then the maps $g_n$ form an ordinary divided-power structure on $I$ [def-sfb-ordinary-divided-power-structure].",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), conditions (a), (b) and conclusion."
+ },
+ "stmt_deps": [
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "Write $B(n,m)=(nm)!/(n!(m!)^n)$, an integer coefficient, and let $P(z)$ mean both missing identities hold at $z$ for every positive $n,m$. Homogeneity with scalar $0$ gives $g_k(0)=0$ for $k>0$, hence $P(0)$. If $P(z)$ holds, then the product identity at $cz$ is the one at $z$ multiplied by $c^{n+m}$. For iteration,\n$$g_n(g_m(cz))=g_n(c^m g_m(z))=c^{mn}g_n(g_m(z))=B(n,m)c^{mn}g_{nm}(z)=B(n,m)g_{nm}(cz).$$\nHere $g_m(z)\\in I$, so the second use of homogeneity is legitimate. Thus $P(cz)$ holds for every $c\\in A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), first paragraph; Tag 07GL scalar axiom."
+   }
+  },
+  {
+   "text": "Suppose $P(x),P(y)$. Fix positive $n,m$. Expanding both factors by the assumed addition formula and using the product identity at $x$ and $y$ gives\n$$g_n(x+y)g_m(x+y)=\\sum_{i+j=n,\\ k+l=m}\\binom{i+k}{i}\\binom{j+l}{j}g_{i+k}(x)g_{j+l}(y).$$\nThe product identities with a zero index hold directly from $g_0=1$, so all summands are covered. For fixed $a+b=n+m$, the coefficient of $g_a(x)g_b(y)$ is $\\sum_{i+j=n}\\binom ai\\binom bj$ (out-of-range choices contribute zero). This is $\\binom{a+b}{n}$: count an $n$-element subset of the disjoint union of sets of sizes $a,b$ by its intersections with them. Regrouping the finite sum now gives $\\binom{n+m}{n}g_{n+m}(x+y)$ by the addition formula. This is a universal coefficient calculation, not a claim that the elements $g_a(x)g_b(y)$ are linearly independent in $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, proof of (2) for x+y, four-index sum and coefficient comparison."
+   }
+  },
+  {
+   "text": "Continue with $P(x),P(y)$ and fix positive $n,m$. Put $t_i=g_i(x)g_{m-i}(y)$ for $0\\leq i\\leq m$. Each $t_i\\in I$: for $i>0$ its first factor lies in $I$, while $t_0=g_m(y)\\in I$. Repeated application of the assumed addition formula, with induction on the number of summands, gives\n$$g_n(g_m(x+y))=g_n\\left(\\sum_{i=0}^m t_i\\right)=\\sum_{\\sum r_i=n}\\prod_{i=0}^m g_{r_i}(t_i).$$\nFor that finite-sum induction the one-summand case is tautological; adjoining a summand uses $g_n(u+v)=\\sum_{k=0}^n g_k(u)g_{n-k}(v)$ and appends its index to the tuple. Only elements of $I$ occur as inputs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, proof of (5) for x+y, first two sentences."
+   }
+  },
+  {
+   "text": "For $k>0$ and $0<i<m$, put $j=m-i$. Homogeneity and $P(x)$ give\n$$g_k(t_i)=g_j(y)^k g_k(g_i(x))=B(k,i)g_j(y)^k g_{ki}(x).$$\nInduction on $k$ using the product identity at $y$ gives $g_j(y)^k=((kj)!/(j!)^k)g_{kj}(y)$: the step multiplies by $g_j(y)$ and uses $\\binom{(k+1)j}{kj}$. Thus the coefficient of $g_{ki}(x)g_{kj}(y)$ in this expression is\n$$\\frac{(ki)!(kj)!}{k!(i!)^k(j!)^k}.$$\nFor $i=0$ use $g_k(t_0)=g_k(g_m(y))=B(k,m)g_{km}(y)$, and for $i=m$ use the corresponding identity at $x$; both agree with the same displayed coefficient. For $k=0$ the factor is simply $1$. No operation is applied to $g_0(x)=1$ as an element of $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, proof of (5) for x+y, three-line calculation and its i=0 endpoint."
+   }
+  },
+  {
+   "text": "For any finite sequence $e_1,\\ldots,e_q\\geq0$ of sum $E$, repeated use of the product identity at $x$ gives $\\prod_h g_{e_h}(x)=(E!/\\prod_h e_h!)g_E(x)$: the empty case is $1=g_0(x)$, and adjoining $e$ multiplies the coefficient by $\\binom{E+e}{E}$. The same holds at $y$. Consequently the summand indexed by $r$ in step 3, after the substitutions of step 4, is\n$$C_{a,b}(r)g_a(x)g_b(y),\\qquad a=\\sum i r_i,\\quad b=\\sum(m-i)r_i,$$\nwhere $C_{a,b}(r)$ is exactly the factorial quotient in [lem-sfb-pd-colour-profile-coefficients]. Indeed the factorials $(ir_i)!$ and $((m-i)r_i)!$ in step 4 cancel the denominators of the two finite-product coefficients, leaving $a!b!/\\prod r_i!(i!)^{r_i}((m-i)!)^{r_i}$. This cancellation compares integer coefficients inside $\\mathbb Q$; it cancels no element of $A$. The cited arithmetic statement guarantees the quotient is an integer.",
+   "uses": [
+    "lem-sfb-pd-colour-profile-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, proof of (5) for x+y, collecting factors with axioms other than (5)."
+   }
+  },
+  {
+   "text": "Regroup the finite sum in step 3 by $a+b=nm$. For fixed $a,b$, its scalar coefficient is $\\sum_{r\\in R_{n,m,a}}C_{a,b}(r)$. The hypotheses of [lem-sfb-pd-colour-profile-coefficients] apply: $m\\geq1$, $n\\geq1$ and $a,b\\geq0$ with $a+b=nm$. That node gives this coefficient as $B(n,m)$, independently of $a$. Hence\n$$g_n(g_m(x+y))=B(n,m)\\sum_{a+b=nm}g_a(x)g_b(y)=B(n,m)g_{nm}(x+y).$$\nThis proves the iteration identity, and together with step 2 proves $P(x+y)$. All coefficient equalities used here are integral equalities mapped to $A$, so rings with torsion are included.",
+   "uses": [
+    "lem-sfb-pd-colour-profile-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, proof of (5) for x+y, final coefficient comparison."
+   }
+  },
+  {
+   "text": "Every element of the ideal generated by $S$ is a finite sum $\\sum_{h=1}^q c_hs_h$ with $c_h\\in A$, $s_h\\in S$. The base $q=0$ has $P(0)$ by step 1. The hypothesis gives $P(s_h)$; step 1 gives $P(c_hs_h)$, and steps 2–6 give the induction step under addition. Thus $P(z)$ for every $z\\in I$, even for an infinite generating set (each particular expression is finite), and also when $S$ is empty and $I=0$. The three assumed axioms and the two just proved are precisely the five axioms of [def-sfb-ordinary-divided-power-structure]; therefore $g$ is an ordinary divided-power structure on $I$.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP, first paragraph and conclusion; Tag 07GL (definition-divided-powers)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pd-colour-profile-coefficients",
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), full proof; universal coefficient comparison made explicit with the arithmetic profile node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generat|ofAxiom|of_axiom|check|dpow_comp",
+   "results": {
+    "t": "2026-10-24T01:08:13Z",
+    "tool": "grep",
+    "query": "generat|ofAxiom|of_axiom|check|dpow_comp",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean"
+    ],
+    "digest": "d48a5065128b96c9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk requires all axioms everywhere (Basic.lean:78-92); dpow_eq_from_gens (DPMorphism.lean:245) compares two already existing structures and does not construct one from partial axioms. The RatAlgebra constructions assume factorial invertibility or rational coefficients. No generator-check constructor was found in the searched directory or either semantic phrasing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divided power multiplication and composition identities need only be checked on a generating set of the ideal",
+   "results": {
+    "t": "2026-10-24T01:08:13Z",
+    "tool": "leansearch",
+    "query": "Divided power multiplication and composition identities need only be checked on a generating set of the ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.mul_dpow",
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.rec",
+     "DividedPowers.casesOn",
+     "DividedPowers.IsDPMorphism.on_span",
+     "DividedPowers.recOn"
+    ],
+    "digest": "087bc9cf50350693"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk requires all axioms everywhere (Basic.lean:78-92); dpow_eq_from_gens (DPMorphism.lean:245) compares two already existing structures and does not construct one from partial axioms. The RatAlgebra constructions assume factorial invertibility or rational coefficients. No generator-check constructor was found in the searched directory or either semantic phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"generat\"",
+   "results": {
+    "t": "2026-10-24T01:08:13Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"generat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk requires all axioms everywhere (Basic.lean:78-92); dpow_eq_from_gens (DPMorphism.lean:245) compares two already existing structures and does not construct one from partial axioms. The RatAlgebra constructions assume factorial invertibility or rational coefficients. No generator-check constructor was found in the searched directory or either semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Check divided power axioms on ideal generators assuming addition and scalar homogeneity for all elements",
+   "results": {
+    "t": "2026-10-24T01:08:14Z",
+    "tool": "leanfinder",
+    "query": "Check divided power axioms on ideal generators assuming addition and scalar homogeneity for all elements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.dpow",
+     "DividedPowers.IsSubDPIdeal.self",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.OfInvertibleFactorial.dividedPowers"
+    ],
+    "digest": "7e3e7c62b5391c62"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk requires all axioms everywhere (Basic.lean:78-92); dpow_eq_from_gens (DPMorphism.lean:245) compares two already existing structures and does not construct one from partial axioms. The RatAlgebra constructions assume factorial invertibility or rational coefficients. No generator-check constructor was found in the searched directory or either semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of operations satisfying divided power addition homogeneity identity is a divided power structure if product and iteration hold on ideal generators",
+   "results": {
+    "t": "2026-10-24T01:08:30Z",
+    "tool": "leanfinder",
+    "query": "A family of operations satisfying divided power addition homogeneity identity is a divided power structure if product and iteration hold on ideal generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.mk.inj",
+     "DividedPowers.OfInvertibleFactorial.dividedPowers",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.RatAlgebra.dpow"
+    ],
+    "digest": "06c94d2871d0dd66"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk requires all axioms everywhere (Basic.lean:78-92); dpow_eq_from_gens (DPMorphism.lean:245) compares two already existing structures and does not construct one from partial axioms. The RatAlgebra constructions assume factorial invertibility or rational coefficients. No generator-check constructor was found in the searched directory or either semantic phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow_eq_from_gens|def fromGens|theorem on_span",
+   "results": {
+    "t": "2026-10-24T01:10:10Z",
+    "tool": "grep",
+    "query": "dpow_eq_from_gens|def fromGens|theorem on_span",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean"
+    ],
+    "digest": "0113a6702dd20875"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read DPMorphism.lean:235-255; dpow_eq_from_gens at 245 requires two already supplied ordinary divided-power structures. fromGens at 164 and on_span at 197 concern morphisms between existing structures, not verification of partially assumed axioms."
+  },
+  {
+   "tool": "grep",
+   "query": "generat|ofAxiom|check|dpow_eq_from_gens",
+   "results": {
+    "t": "2026-10-24T01:31:44Z",
+    "tool": "grep",
+    "query": "generat|ofAxiom|check|dpow_eq_from_gens",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean"
+    ],
+    "digest": "53d0f15789724ebe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all axioms everywhere; DPMorphism.lean:245 dpow_eq_from_gens and on_span assume existing structures. These do not construct a structure from partial axioms on generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct divided powers on an ideal from multiplication and composition checked only on a spanning set",
+   "results": {
+    "t": "2026-10-24T01:31:44Z",
+    "tool": "leansearch",
+    "query": "Construct divided powers on an ideal from multiplication and composition checked only on a spanning set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.mk",
+     "DividedPowers.SubDPIdeal.mk'",
+     "DividedPowers",
+     "DividedPowers.SubDPIdeal.mk",
+     "DividedPowers.rec",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.ctorIdx",
+     "DividedPowers.dpow_eq_from_gens"
+    ],
+    "digest": "aa168cba44c927b8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all axioms everywhere; DPMorphism.lean:245 dpow_eq_from_gens and on_span assume existing structures. These do not construct a structure from partial axioms on generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"generat\"",
+   "results": {
+    "t": "2026-10-24T01:31:44Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"generat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all axioms everywhere; DPMorphism.lean:245 dpow_eq_from_gens and on_span assume existing structures. These do not construct a structure from partial axioms on generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power multiplication and iteration axioms can be checked on ideal generators assuming addition and homogeneity",
+   "results": {
+    "t": "2026-10-24T01:31:45Z",
+    "tool": "leanfinder",
+    "query": "Divided power multiplication and iteration axioms can be checked on ideal generators assuming addition and homogeneity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.mk.inj",
+     "DividedPowers.dpow",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.IsDPMorphism.on_span",
+     "DividedPowers.IsSubDPIdeal.dividedPowers"
+    ],
+    "digest": "57f1670672b57501"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all axioms everywhere; DPMorphism.lean:245 dpow_eq_from_gens and on_span assume existing structures. These do not construct a structure from partial axioms on generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pd-glue-ideals",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3). Supporting argument: Tag 07H5 (lemma-divided-power-polynomial-algebra), existence, uniqueness and universal property; the algebra and augmentation ideal are the explicit construction in section-divided-power-polynomial-ring. Supporting input to Tag 07H5: Tag 07GQ (lemma-two-ideals), both assertions and the displayed gluing formula in the proof. Immediate supporting input: Tag 07GQ proof, after the addition calculation: apply Tag 07GP (lemma-check-on-generators) to the generating set U union V.",
+   "via": [
+    "lem-sfb-pd-glue-ideals",
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pd-check-generators",
+  "worker": "stage1",
+  "summary": "Checked the complete proof of Stacks 07GP and expanded scalar closure, product closure by subset counting, the full iteration expansion including zero-index endpoints, and induction on a finite ideal expression. One genuinely arithmetic coefficient identity is isolated as a statement-only node. Found the pre-existing equivalent lem-sfb-pd-generator-criterion and report it for maintainer deduplication, without using it circularly.",
+  "blueprint": "Supports the etale-chart comparison under direct-image branch (3) of det-thm-sf-ctf-stability-direct-images by the inherited 07GQ/07H5 chain. Realizes precisely the scalar/sum generator check in 07GP. The ancestor command returns None for the inherited chain; retain inherited from.node=null and its via. No chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-c57b3d98f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-c57b3d98f (reviewer sub-agent of L); spot-checked: PASS, no fixes written; review.md has the details. I read dpa.tex Tag 07GP (lemma-check-on-generators) in full, with definition 07GL. The item statement matches 07GP: axioms (1), (3), (4) on all of I and (2), (5) on a generating set S. It concludes the five axioms of def-sfb-ordinary-divided-power-structure and is not weakened. I checked all 7 steps line by line. Step 1: scalar closure, including g_k(0)=0, and the second homogeneity use is legitimate because g_m(z) is in I. Step 2: product identity for x+y, including zero indices, with the coefficient Σ_{i+j=n} C(a,i)C(b,j) = C(a+b,n) proved by subset counting. Step 3: multi-sum addition formula with every t_i in I (t_0 = g_m(y), m ≥ 1). Step 4: g_k(t_i) = (ki)!(kj)!/(k!(i!)^k(j!)^k) g_{ki}(x) g_{kj}(y), checked via the induction g_j(y)^k = ((kj)!/(j!)^k) g_{kj}(y) and the endpoints i=0, i=m, k=0. Step 5: I recomputed that the multinomials cancel to C_{a,b}(r), an equality of integer coefficients that holds in any characteristic. Step 6: the new node's sum gives B(n,m). Step 7: induction on finite expressions Σ c_h s_h, covering infinite S and S empty. New node lem-sfb-pd-colour-profile-coefficients is correct: the generating function ((X+Y)^m/m!)^n/n! gives the sum, block-partition counting gives integrality, n=0 gives 1, and an exact check of 917 profiles (n ≤ 5, m ≤ 5) found every C an integer and every sum equal to (nm)!/(n!(m!)^n). It is statement-only, self-contained and strictly arithmetic, so not a restated clause of the item (D1). Its blueprint fields are the inherited null/via with a precise place. Nit: it cites def-weil-field for ℚ, which is harmless. A grep of the whole DAG for (nm)!, m!)^n, 07GP and check-on-generators found no duplicate of the profile identity. No SGA is used, there is no cycle, tool_uses is empty, and every cited node is in the same unit or is a definition. Maintainer note: the base node lem-sfb-pd-generator-criterion (Q10, cited by lem-sfb-pd-flat-extension) states the same 07GP criterion as this item. That duplication predates the delivery, and the delivery correctly does not cite it; consolidate by repointing lem-sfb-pd-flat-extension to this now-split item."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DividedPowersCheckGenerators",
+  "declaration": "DividedPowers.exists_of_axioms_on_generators",
+  "file": "lean/Sheaf/RingTheory/DividedPowersCheckGenerators.lean",
+  "statement": "theorem exists_of_axioms_on_generators {A : Type u} [CommRing A] (I : Ideal A) (S : Set A) (hS : I = Ideal.span S) (g : ℕ → A → A) (g_null : ∀ (n : ℕ) (x : A), x ∉ I → g n x = 0) (g_zero : ∀ (x : A), x ∈ I → g 0 x = 1) (g_mem : ∀ (n : ℕ), 0 < n → ∀ (x : A), x ∈ I → g n x ∈ I) (g_one : ∀ (x : A), x ∈ I → g 1 x = x) (g_mul : ∀ (n : ℕ), 0 < n → ∀ (a x : A), x ∈ I → g n (a * x) = a ^ n * g n x) (g_add : ∀ (n : ℕ), 0 < n → ∀ (x y : A), x ∈ I → y ∈ I → g n (x + y) = ∑ i ∈ Finset.range (n + 1), g i x * g (n - i) y) (g_mul_gens : ∀ (s : A), s ∈ S → ∀ (n m : ℕ), 0 < n → 0 < m → g n s * g m s = ((n + m).choose n : A) * g (n + m) s) (g_comp_gens : ∀ (s : A), s ∈ S → ∀ (n m : ℕ), 0 < n → 0 < m → g n (g m s) = (Nat.uniformBell n m : A) * g (n * m) s) : ∃ γ : DividedPowers I, γ.dpow = g",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79c86e4de",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Stmt matches Stacks 07GP/node clause by clause. Total-map representation (g_null/g_zero/g_mem) is the one the dep node def-sfb-ordinary-divided-power-structure (Mathlib DividedPowers) prescribes. uniformBell n m = (nm)!/(n!(m!)^n) with correct index order, as an integer cast. Conclusion ∃ γ, γ.dpow = g pins γ to g. Index-0 Mathlib fields follow from g_zero/g_mem. Edge cases checked: S empty, infinite S, zero ring, torsion, n or m = 1, I = ⊤. No Mathlib/project duplicate found (DPMorphism from_gens lemmas presuppose a structure; FactorialCriterion/FlatExtension are 07GM/07H1). Statement verbatim; stmt_deps complete; only the lean field differs from live; docstrings give source + blueprint + 7 steps; sorry only; report sections present. Not compiled (no change). Maintainer note: pre-existing duplicate node lem-sfb-pd-generator-criterion (lean null) should be merged with this item."
+ }
+}

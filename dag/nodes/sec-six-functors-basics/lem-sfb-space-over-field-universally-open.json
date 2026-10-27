@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-space-over-field-universally-open",
+ "kind": "statement",
+ "title": "Algebraic spaces over fields are universally open",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X$ and $Y$ be algebraic spaces over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum]. Give their point sets the atlas topology [def-a1-space-point-topology], and form sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Then the projection $|X\\times_kY|\\to|Y|$ is open: it sends every open subset to an open subset. Equivalently, the structure morphism $X\\to\\operatorname{Spec}k$ is universally open, meaning open on point spaces after every algebraic-space base change. No nonemptiness, quasi-compactness, quasi-separatedness or finite-type hypothesis on $X$ or $Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06DN, lemma-space-over-field-universally-open, with universal openness interpreted as openness after arbitrary algebraic-space base change."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:U\\to X$ by [def-trf-algebraic-space]. Fix any scheme $V$ over $k$ and put $T=X\\times_kV$. The map $a:U\\times_kV\\to T$ is the base change of $p$, hence representable surjective etale by [lem-trf-space-fibre-products-etale-covers]. Here $U\\times_kV$ is the usual scheme fibre product, also representing its sheaf fibre product. Its point map is surjective and continuous by [lem-a1-space-point-open-calculus]. No finiteness assumption on either scheme is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06DN, lemma-space-over-field-universally-open, proof; its scheme-test-to-space-test argument is expanded using spaces-properties.tex Tags 03H4 and 03BX."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq|T|$ be open. Continuity of $|a|$ makes $|a|^{-1}(W)$ open in $|U\\times_kV|$. The scheme projection $r:U\\times_kV\\to V$ is open by [lem-sc-scheme-over-field-universally-open], applied to the $k$-schemes $U,V$. Writing $t:T\\to V$, the equality $r=t\\circ a$ and surjectivity of $|a|$ give $|t|(W)=|r|(|a|^{-1}(W))$: lift each point of $W$ along $|a|$ for the nontrivial inclusion. Thus $|t|(W)$ is open. This proves openness when the base-change space is a scheme.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06DN, lemma-space-over-field-universally-open, proof; its scheme-test-to-space-test argument is expanded using spaces-properties.tex Tags 03H4 and 03BX."
+   }
+  },
+  {
+   "text": "Now let $Y$ be any algebraic space over $k$, put $P=X\\times_kY$, and write $f:P\\to Y$. For open $O\\subseteq|P|$, test $|f|(O)$ on any representable etale scheme map $v:V\\to Y$. The pullback square has upper-left space $P\\times_YV\\cong X\\times_kV$, by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]; write $b:X\\times_kV\\to P$ and $t:X\\times_kV\\to V$. By [lem-a1-space-point-open-calculus], $|b|^{-1}(O)$ is open and the square is surjective onto the fibre product of point sets. Consequently $|v|^{-1}(|f|(O))=|t|(|b|^{-1}(O))$: for a point on the left choose its witness in $O$ and lift the resulting pair of points through that surjection; the other inclusion is commutativity. The right side is open by step 2. Since this holds for every such $v$, [def-a1-space-point-topology] says $|f|(O)$ is open. This applies to every $Y\\to\\operatorname{Spec}k$, which is exactly the asserted universal openness.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06DN, lemma-space-over-field-universally-open, proof; its scheme-test-to-space-test argument is expanded using spaces-properties.tex Tags 03H4 and 03BX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-sc-scheme-over-field-universally-open",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06DN, lemma-space-over-field-universally-open, proof; its scheme-test-to-space-test argument is expanded using spaces-properties.tex Tags 03H4 and 03BX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over any field is universally open over that field",
+   "results": "{\"t\": \"2026-10-23T19:52:55Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space over any field is universally open over that field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\"], \"digest\": \"c1eca34f2bda7078\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\"",
+   "results": "{\"t\": \"2026-10-23T19:52:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionSchemeTopologicallyIsOpenMap\", \"AlgebraicGeometry.UniversallyOpen\"], \"digest\": \"db0b4ff20dd81fac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic space over a field is universally open",
+   "results": "{\"t\": \"2026-10-23T19:52:54Z\", \"tool\": \"leansearch\", \"query\": \"Every algebraic space over a field is universally open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.mk\", \"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\"], \"digest\": \"93f8c93a40d7485c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "universallyOpen|UniversallyOpen|isOpenMap",
+   "results": "{\"t\": \"2026-10-23T19:52:54Z\", \"tool\": \"grep\", \"query\": \"universallyOpen|UniversallyOpen|isOpenMap\", \"sub\": \"AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"42\", \"43\", \"46\", \"48\", \"49\"], \"digest\": \"968dfcf3c7447daf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of any algebraic space over Spec of a field is an open map without finite presentation assumptions",
+   "results": "{\"t\": \"2026-10-23T19:53:21Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of any algebraic space over Spec of a field is an open map without finite presentation assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\"], \"digest\": \"c7bd87ba56afd692\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "{\"t\": \"2026-10-23T19:56:18Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned universal-openness declarations concern schemes; none states universal openness for arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "{\"t\": \"2026-10-23T20:58:45Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits and UniversallyOpen class are for schemes, not arbitrary algebraic spaces; grep finds no algebraic-space infrastructure in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic space over a field is universally open after arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T20:58:46Z\", \"tool\": \"leansearch\", \"query\": \"Every algebraic space over a field is universally open after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.UniversallyOpen.mk\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.UniversallyOpen.out\"], \"digest\": \"3a6ac86b9da21533\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits and UniversallyOpen class are for schemes, not arbitrary algebraic spaces; grep finds no algebraic-space infrastructure in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\"",
+   "results": "{\"t\": \"2026-10-23T20:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionSchemeTopologicallyIsOpenMap\", \"AlgebraicGeometry.UniversallyOpen\"], \"digest\": \"db0b4ff20dd81fac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits and UniversallyOpen class are for schemes, not arbitrary algebraic spaces; grep finds no algebraic-space infrastructure in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary algebraic space over a field is universally open",
+   "results": "{\"t\": \"2026-10-23T20:58:46Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary algebraic space over a field is universally open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.universallyOpen_iff\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme\"], \"digest\": \"db2a48ba77ff9cc3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits and UniversallyOpen class are for schemes, not arbitrary algebraic spaces; grep finds no algebraic-space infrastructure in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection from a fibre product of algebraic spaces over a field is an open map",
+   "results": "{\"t\": \"2026-10-23T20:58:48Z\", \"tool\": \"leanfinder\", \"query\": \"The projection from a fibre product of algebraic spaces over a field is an open map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.snd\", \"AlgebraicGeometry.UniversallyOpen.fst\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.IsOpenImmersion.instSndScheme\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.IsOpenImmersion.instFstScheme\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\"], \"digest\": \"fbd691b4341445a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits and UniversallyOpen class are for schemes, not arbitrary algebraic spaces; grep finds no algebraic-space infrastructure in Mathlib/AlgebraicGeometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-sepclosed-components-base-change",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Field-extension prerequisite for applying the henselian proper-part theorem to the specified geometric component: descend that component to the separably closed residue field of the strict localization. Supporting input: Algebraic spaces over fields are universally open.",
+   "via": [
+    "lem-sfb-space-sepclosed-components-base-change",
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-over-field-universally-open",
+  "worker": "stage1",
+  "summary": "Q44 read Tag 06DN and expanded the reduction from scheme tests to arbitrary algebraic-space tests using point lifting and the atlas final topology. All prerequisites already have DAG nodes; no new nodes, no statement change. The scheme theorem is the existing Mathlib leaf. Logged searches find only scheme results.",
+  "blueprint": "Supporting input for the field-extension component descent in the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain; realizes exactly the final inherited place: Algebraic spaces over fields are universally open. The latest direct-images proof (3) was read; it does not itself state this auxiliary. The ancestor command returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General existence, representability and base-change stability of etale covers of algebraic spaces, used in the source atlas argument; no node of this unit supplies these categorical foundations."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General continuity, surjectivity of atlas point maps and surjectivity onto the fibre product of point sets, used to expand Tag 06DN for arbitrary space tests; this unit has no replacement for these topology foundations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-816068a2e",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-816068a2e (reviewer sub-agent of L); spot-checked: I read Stacks spaces-morphisms.tex Tag 06DN (lines 860-882): its proof uses an étale atlas, the scheme case 0383, surjectivity after base change and locality. The item statement matches 06DN, with arbitrary field, arbitrary X and arbitrary algebraic-space base change, and is unchanged with no new nodes. Step 1 uses the atlas from def-trf-algebraic-space, base change of a jointly surjective étale family (lem-trf-space-fibre-products-etale-covers), and continuity of point maps plus surjectivity on schemes iff on points (lem-a1-space-point-open-calculus); each cited statement says what is used. Step 2 applies the Mathlib leaf lem-sc-scheme-over-field-universally-open to the k-schemes U and V, and I checked both inclusions of |t|(W)=|r|(|a|^-1 W). The identification of the atlas topology with the Zariski topology for a scheme is implicit but elementary. Step 3 writes out Stacks' locality lemma: P×_Y V≅X×_k V, surjectivity onto the fibre product of point sets lifts (o,y), and openness follows from the final-topology definition def-a1-space-point-topology, which tests exactly étale scheme charts. Edge cases checked: empty X, Y or V, non-quasi-separated X, and points with different residue fields. Duplicate search found only the scheme node, which is cited here, and space openness nodes with stronger flat/lfp hypotheses. Batch-5 flag on lem-a1-space-point-open-calculus: it reaches sec-trace-formula only through the general definition def-trf-algebraic-space, which is already in the item's stmt_deps. That definition is neither a step of the trace formula or Poincaré duality nor assumed by them, so I accept it. I accept the off-unit tool uses (a1 point calculus, trf fibre products) as general foundations. No SGA is cited. Live and side-live still have the item unsplit, so it is not superseded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceOverFieldUniversallyOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isOpenMap_prod_snd_overField",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceOverFieldUniversallyOpen.lean",
+  "statement": "theorem isOpenMap_prod_snd_overField (k : Type u) [Field k] (X Y : AlgebraicSpace (Spec (CommRingCat.of k))) : IsOpenMap (mapPoint (Limits.prod.snd (X := X.obj) (Y := Y.obj)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The sheaf product on schemes over Spec k is X ×_k Y, so its second projection states every algebraic-space base change. The added landed statement dependency owns the existing canonical mapPoint helper."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34e2e71d1",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_deps and their Lean (AlgebraicSpace, pointTopologicalSpace = final topology of étale charts, fibreProduct_isAlgebraicSpace, mapPoint from the landed def-sfb-proper-curve-moduli), Stacks 06DN (spaces-morphisms.tex 860-882), the module and the report. The theorem isOpenMap_prod_snd_overField (k : Type u) [Field k] (X Y : AlgebraicSpace (Spec k)) : IsOpenMap (mapPoint prod.snd.hom) states the node exactly: the sheaf product over Spec k is X ×_k Y, Y arbitrary gives universal openness, no qc/qs/finite-type/nonempty hypotheses, universe forced by the site, statement verbatim. The node diff is only lean plus a landed stmt_dep (allowed). Edge cases: empty X/Y, X = Spec k, any characteristic. No H4 duplicate: the landed MapIsUniversallyOpen (def-sfb-space-morphism-properties) is the equivalent pullback-over-terminal form and the item defines no notion; maintainer note: a corollary can bridge it if a citer needs it. Gates OK: sorry only, docstring with source, blueprint id and proof steps, public/plain imports correct, Worker report and Second reading sections present. No compile (no FIX)."
+ }
+}

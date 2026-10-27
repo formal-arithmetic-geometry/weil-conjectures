@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-normalized-integral-tensor-tower",
+ "kind": "lemma",
+ "title": "Existence of a normalized integral tensor tower comparison",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme W, with independent site and coefficient universes. Let R_W be the completed integral coefficient sheaf, S_n its (n+1)st finite quotient, and reduction and total tensor be the recorded constructions of def-pur-integral-derived-operations. There exists a natural isomorphism from the strict global reduction tower of Tot(P tensor_R Q) to the strict tower Res_n Tot(P_n tensor_(S_n) Q_n), natural in unbounded complexes P,Q. On each (p,q) summand over V, its nth component sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), for every finite coefficient section s. This asserts existence; uniqueness among normalized ambient-module tower comparisons is established separately.",
+ "stmt_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-integral-operations-well-defined",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, balanced tensor scalar extension; sites-cohomology.tex Tag 07A4; Bhatt–Scholze Definition 3.4.10, compatible quotient towers."
+ },
+ "proof": [
+  {
+   "text": "Use the normalized finite total-tensor comparisons of lem-pur-integral-tensor-reduction-tower-comparison. Their maps and inverses commute with differentials and both input chain maps. A pure summand with coefficient one maps to the tensor of the two reduced unit-coefficient summands.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each consecutive coefficient quotient, lem-pur-integral-tensor-transition-compatibility identifies the two composites. Apply NatTrans.ofOpSequence to the finite comparisons, then componentwise invertibility and naturality assemble a natural isomorphism of the strict unrestricted towers. The nth component is the restriction of the nth finite comparison.",
+   "uses": [
+    "lem-pur-integral-tensor-transition-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the global slice reduction tower with the unrestricted tower by the recorded scalar-extension object and map equations from def-pur-integral-derived-operations. Its components are identities and preserve all scalar generators. Whisker this comparison by total tensor.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite comparison is linear over the finite coefficient sheaf. Write s tensor z as s times (1 tensor z), apply finite linearity, and use bilinearity in the first finite tensor factor. This extends unit-coefficient normalization to arbitrary finite s before restriction of scalars. Substituting the explicit components of the assembled comparison gives the claimed formula.",
+   "uses": [
+    "lem-pur-integral-tensor-transition-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-integral-tensor-transition-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, balanced tensor scalar extension; sites-cohomology.tex Tag 07A4; Bhatt–Scholze Definition 3.4.10, compatible quotient towers.",
+  "note": "Normalized existence part of the tensor clause; normalization is proved at finite coefficients before restriction of scalars."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "date": "2026-10-24",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-ambient-operation-models",
+   "place": "Tensor construction in proof Step 3; finite-comparison existence, before generator-extensionality uniqueness."
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralTensorTower",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralTensorTower.lean",
+  "declaration": "WeilConjectures.normalizedIntegralTensorTower",
+  "statement": "theorem normalizedIntegralTensorTower (W : Scheme.{t}) :\n    ∃ d : (coefficientTotalTensor.{u, t + 1, t} (ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W) ⋙\n        IntegralOnSlice.tower l E W none) ≅ integralOperationsTensorTowerFunctor l E W,\n      ∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q : ℤ)\n        (V : W.ProEtᵒᵖ) (s : (integralCoefficientCommRingSheaf l E W n).obj.obj V)\n        (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),\n        (((d.hom.app (P, Q)).app (op n)).f (p + q)).val.app V\n          (IntegralOnSlice.generator l E W none n _ V s\n            (coefficientTensorGenerator.{u, t + 1, t} (Scheme.ProEt.topology W)\n              (completedIntegralCommRingSheafUnrestricted l E W) P Q p q (p + q) rfl V x y)) =\n          integralOperationsTotalTensorSection l E W n P Q p q V\n            (unrestrictedIntegralTensorSection l E W n (P.X p) V s x)\n            (unrestrictedIntegralTensorSection l E W n (Q.X q) V 1 y)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizedIntegralTensorTower|integralTensorReductionTowerComparison",
+   "date": "2026-10-24",
+   "results": "0 hits; ",
+   "verdict": "No normalized strict sheaf-tensor tower result; use existing project finite comparison and transition declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.ofOpSequence",
+   "date": "2026-10-24",
+   "results": "0 hits; ",
+   "verdict": "No normalized strict sheaf-tensor tower result; use existing project finite comparison and transition declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension tensor product strict tower natural isomorphism normalized on pure tensors",
+   "date": "2026-10-24",
+   "results": "8 hits; ModuleCat.extendScalarsComp_hom_app_one_tmul, IsBaseChange.tensorEquiv, Algebra.TensorProduct.cancelBaseChange_tmul, isBaseChange_tensorProduct_map, Algebra.TensorProduct.cancelBaseChange, IsBaseChange.of_equiv, TensorProduct.AlgebraTensorModule.cancelBaseChange, Algebra.TensorProduct.cancelBaseChange_symm_tmul",
+   "verdict": "No normalized strict sheaf-tensor tower result; use existing project finite comparison and transition declarations."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-0925f",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261024T210831-L-42281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261024T224907-L-1822317",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.normalizedIntegralTensorTower"
+  ],
+  "sorry_after": []
+ }
+}

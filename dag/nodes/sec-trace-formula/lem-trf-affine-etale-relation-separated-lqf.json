@@ -17,35 +17,9 @@
  ],
  "proof": [
   {
-   "text": "Write $V=U\\times_SU$ and $P=U\\times_{\\operatorname{Spec}\\mathbf Z}U$. If $U\\cong\\operatorname{Spec}A$, the affine fibre-product formula gives $P\\cong\\operatorname{Spec}(A\\otimes_{\\mathbf Z}A)$, so $P$ is affine. Let $k:V\\to P$ be the morphism with the same two projections to $U$ as $V$. It is a monomorphism: for any two morphisms $a,b:T\\to V$, equality $ka=kb$ gives equality of both projections of $a,b$ to $U$, and hence $a=b$ by the defining universal property of $V$. Therefore $q=k\\circ j:R\\to P$ is a monomorphism too: $qa=qb$ first implies $ja=jb$ by cancellation of $k$, and then $a=b$ by cancellation of $j$.",
+   "text": "Apply [lem-trf-affine-square-monomorphism-absolute-separated] to the given monomorphism $j:R\\to U\\times_SU$ and an affine presentation of $U$. It gives the absolute separatedness of $R$, without any separatedness hypothesis on $S$. Writing $a_U:U\\to\\operatorname{Spec}\\mathbf Z$ and $a_R:R\\to\\operatorname{Spec}\\mathbf Z$ for structure maps, we have $a_U\\circ s=a_R=a_U\\circ t$. Clause (b) of [lem-weil-pbc-separated-cancellation] applied to these factorizations makes both $s$ and $t$ separated.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 0265, lemma-presentation-quasi-compact, first proof paragraph; affine product formula: Schemes Tag 01I4, lemma-fibre-product-affine-schemes"
-   }
-  },
-  {
-   "text": "For $f=j:R\\to V$ and for $f=q:R\\to P$, write $p_1,p_2:R\\times_{\\operatorname{target}(f)}R\\to R$. Since $f$ is a monomorphism, $fp_1=fp_2$ implies $p_1=p_2$. The diagonal $\\Delta_f$ is inverse to $p_1$: $p_1\\Delta_f=1_R$, and both projections of $\\Delta_fp_1$ agree with those of the identity, so $\\Delta_fp_1=1$ by the fibre-product universal property. Thus both diagonals are isomorphisms. An isomorphism identifies the source with the whole target, a closed and open subset, and induces isomorphisms on structure sheaves; by the definitions it is both a closed and an open immersion. Consequently $j,q$ are separated and $\\Delta_j$ is an open immersion. This proves the elementary monomorphism-diagonal argument of Schemes Tags 01L3 and 01L4 explicitly.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01L3, lemma-monomorphism, and 01L4, lemma-monomorphism-separated; applied in the first paragraph of the proof of Spaces Tag 0265"
-   }
-  },
-  {
-   "text": "Apply the separated-over-affine lemma to $q:R\\to P$: step 1 gives that $P$ is affine, and step 2 gives that $q$ is separated. It follows that the absolute structure morphism $a_R:R\\to\\operatorname{Spec}\\mathbf Z$ is separated. Write $a_U:U\\to\\operatorname{Spec}\\mathbf Z$ for the absolute structure morphism. Since $a_U\\circ s=a_R=a_U\\circ t$, separated cancellation, clause (b), applied to these two factorizations shows that $s$ and $t$ are separated. Together with step 2 this gives separatedness of all three requested morphisms. The argument uses the affine scheme $P$, and makes no assumption on the diagonal of $S$.",
-   "uses": [
-    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-trf-affine-square-monomorphism-absolute-separated",
     "lem-weil-pbc-separated-cancellation"
    ],
    "elementary": false,
@@ -55,7 +29,7 @@
    }
   },
   {
-   "text": "By the definition of etale, each of $s,t$ is unramified. Apply the unramified-to-locally-quasi-finite theorem to each morphism to obtain that $s,t$ are locally quasi-finite, in the pointwise sense of the statement. The definition of unramified also gives that $s$ is locally of finite type. This deduction requires no quasi-compactness or separatedness hypothesis on an unramified morphism.",
+   "text": "By [def-weil-etale-morphism], both $s$ and $t$ are unramified. The definition [def-weil-unramified-morphism] also gives that $s$ is locally of finite type. Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to each projection: both are locally quasi-finite in the pointwise sense of the statement. Thus the projections have both required properties.",
    "uses": [
     "def-weil-etale-morphism",
     "def-weil-unramified-morphism",
@@ -68,11 +42,10 @@
    }
   },
   {
-   "text": "Let $\\pi_1:V\\to U$ be the first projection. The equality $\\pi_1\\circ j=s$ and the local finite type of $s$ from step 4 allow clause (f) of the permanence lemma to be applied to $j$ followed by $\\pi_1$; it yields that $j$ is locally of finite type. Step 2 already gives that $\\Delta_j$ is an open immersion. These are exactly the two conditions in the definition of an unramified morphism, so $j$ is unramified. Apply the unramified-to-locally-quasi-finite theorem once more to get that $j$ is locally quasi-finite. This supplies the local quasi-finiteness required in the second paragraph of the source, using its monomorphism hypothesis through the explicitly computed diagonal. Combining steps 2--5 proves every clause. Nothing in these steps assumes quasi-compactness of $R$.",
+   "text": "Put $V=U\\times_SU$ and let $\\pi_1:V\\to U$ be its first projection. By the defining projections of the fibre product [def-pc-fibre-product], $\\pi_1\\circ j=s$, which is locally of finite type by step 2. Apply [lem-trf-monomorphism-finite-type-composite-lqf] with $f=j$ and $g=\\pi_1$. Its monomorphism hypothesis is given, and its composite hypothesis has just been verified. It gives that $j$ is separated and locally quasi-finite in the required pointwise sense. Together with steps 1 and 2 these are all six conclusions; no step uses quasi-compactness of $R$.",
    "uses": [
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-unramified-morphism",
-    "lem-weil-pbc-unramified-quasi-finite-at-points"
+    "def-pc-fibre-product",
+    "lem-trf-monomorphism-finite-type-composite-lqf"
    ],
    "elementary": false,
    "source": {
@@ -82,17 +55,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-pc-fibre-product",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-weil-proper-morphism",
-  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-trf-affine-square-monomorphism-absolute-separated",
   "lem-weil-pbc-separated-cancellation",
   "def-weil-etale-morphism",
   "def-weil-unramified-morphism",
   "lem-weil-pbc-unramified-quasi-finite-at-points",
-  "lem-weil-pbc-proper-fp-permanence"
+  "def-pc-fibre-product",
+  "lem-trf-monomorphism-finite-type-composite-lqf"
  ],
  "proof_origin": {
   "by": "document",
@@ -204,11 +173,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-affine-etale-relation-separated-lqf",
   "worker": "stage1",
-  "summary": "Statement unchanged and checked against Stacks 0265. Five proof steps use existing nodes only: affine absolute product and the monomorphism into it; the explicit diagonal inverse for monomorphisms; absolute separatedness and cancellation for the projections; unramified local quasi-finiteness for the projections; finite-type cancellation and the open diagonal for j, followed by the same unramified theorem. No new nodes or attachment claims. No separatedness of S or quasi-compactness of R used.",
-  "blueprint": "Supports the inherited geometric quotient-presentation branch of lem-trf-local-term-locality, through lem-trf-etale-affine-quotient-representable: the opening two paragraphs and the separated locally quasi-finite models in the first and third representability steps of Stacks 0265. No unit or chapter route changes. The blueprint ancestor has no separate equivalent statement (searches for 0265, affine etale, affine étale, etale relation, equivalence relation, and separated locally quasi-finite).",
+  "summary": "Repair of the human re-split return: statement unchanged. Extracted two independent statement-only arguments: the relative-to-absolute affine-square embedding and absolute separatedness; and the general monomorphism/local-finite-type-composite diagonal and pointwise local quasi-finiteness argument. The three-step assembly retains separated cancellation and the etale-to-unramified deductions. All five returned proof steps are preserved verbatim in report.md with their allocation to the two new nodes or assembly steps. No Lean edited or compiler invoked.",
+  "blueprint": "Supports the inherited geometric quotient-presentation branch of lem-trf-local-term-locality, through lem-trf-etale-affine-quotient-representable: the opening two paragraphs and the separated locally quasi-finite models in the first and third representability steps of Stacks 0265. No unit or chapter route changes. The blueprint ancestor has no separate equivalent statement (searches for 0265, affine etale, affine étale, etale relation, equivalence relation, and separated locally quasi-finite). Repair refines only its geometric quotient-presentation support into two independent nodes; the inherited unit and chapter route are unchanged.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
@@ -220,12 +189,12 @@
   "lem-weil-pbc-unramified-quasi-finite-at-points"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N8-4bc397561",
-  "group": "N8",
+  "reviewer": "NT-cc-NP-473b8bbea",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-4bc397561 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, Stacks sources, and unit route in full. All five steps are valid for arbitrary S without quasi-compactness of R. No duplicates, cycles, long-step violations, forbidden dependencies, or repairs found. Accepted the declared unramified-to-locally-quasi-finite tool use. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-473b8bbea (reviewer sub-agent of L); spot-checked: Re-split note (human decision, released 2026-10-22, batch5) was answered properly. Every argument of the 5-step base proof (3164 characters) is accounted for, and the item's statement is unchanged. Node 1, lem-trf-affine-square-monomorphism-absolute-separated, takes base step 1, step 2 for q and the first half of step 3: P=U×_Z U≅Spec(A⊗A), k and q=k∘j are monomorphisms, q is separated, and R→Spec Z is separated. Node 2, lem-trf-monomorphism-finite-type-composite-lqf, takes base step 2 for j and step 5: for a monomorphism f with g∘f locally of finite type, f is locally of finite type (01T8), Δ_f is an isomorphism (01L3), and f is separated, unramified (02GE(2)) and quasi-finite at every point (02V5). The two nodes are of comparable size, statement-only, true and self-contained. Neither restates the item or one of its clauses: node 1 has no étaleness, and node 2 is a strict generalisation of the j clause that carries the real argument. The item's proof is a 3-step assembly. Step 1 applies node 1, uses a_U∘s=a_R=a_U∘t, and cancels with lem-weil-pbc-separated-cancellation (b). Step 2 goes étale ⇒ unramified ⇒ quasi-finite at points, citing the existing nodes as in the base. Step 3 uses π₁∘j=s, which is locally of finite type, and applies node 2. I read Stacks 0265 (spaces.tex lines 1466-1491, first two paragraphs) and Schemes 01L3/01L4. I also read Morphisms 01T8, 02GE and 02V5; all tags and labels match. Small cases I checked: the empty and zero-ring cases, a non-separated S (affine line with doubled origin), a closed point into A¹_k, and the generic point (which shows the locally-finite-type hypothesis is needed). Searching the DAG with rg -L for monomorphism, 01L3/01L4 and unramified/locally quasi-finite found no duplicates; the nearest nodes are finite, flat-lfp and proper monomorphism lemmas. The item is not on the dropped list, and the live node is still the base version, so no other group superseded it. No SGA source is used. I accept the inherited tool_use lem-weil-pbc-unramified-quasi-finite-at-points. No fixes were needed."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -245,5 +214,30 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261023T132454-L-2282694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.affine_etale_relation_separated_locally_quasi_finite"
+  ],
+  "sorry_after": []
+ }
 }

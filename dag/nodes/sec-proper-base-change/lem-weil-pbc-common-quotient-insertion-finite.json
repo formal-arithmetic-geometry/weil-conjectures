@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-common-quotient-insertion-finite",
+ "kind": "statement",
+ "title": "Invertibility of common-quotient reduced insertion",
+ "statement": "Let g:J→K preserve finite limits, R→B and g(R)→Bprime be flat, a:g(B)→Bprime compatible, nY,nX normalized scalar extensions, Q a common quotient tower for R→B, and b:Bprime→g(Q.S) a compatible tower of common quotient projections. For any normalized scalar insertion i and every n, whiskering i.derived by derived scalar extension along g(Q.projection n) is invertible in the actual quotient-module derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-quotient-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary scalar insertion becomes invertible after extension to the common quotient, without any flatness assumption.",
+   "uses": [
+    "lem-weil-pbc-common-quotient-ordinary-insertion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat B-complex resolving the derived object. Flat restriction and inverse image make the source K-flat with flat terms; ringed pullback and flat restriction do the same for the target.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized counits compute both derived reductions by ordinary scalar extension. Apply the quotient derived functor to the insertion representative square and paste with naturality of its counit. The ordinary reduction is a degreewise chain isomorphism by the first step. Thus reduced insertion becomes an isomorphism after composition with invertible computation maps; cancel those maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Essential surjectivity of flat-term K-flat localization and naturality along its representative isomorphisms transfer invertibility to every derived object.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-common-quotient-ordinary-insertion",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-coefficient-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL.",
+  "note": "Explicit normalization and localization argument, with source formulas as written in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar insertion of derived ringed topos pullback becomes invertible after reduction to a common quotient of flat coefficient ring extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"Ideal.Quotient.isScalarTower\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Operations\", \"type\": \"[SMul R₁ R₂] [IsScalarTower R₁ R₂ A] (I : Ideal A) : IsScalarTower R₁ R₂ (A ⧸ I)\", \"doc\": \"For any ring $ A $, ideal $ I $, and scalar towers $ R₁ \\\\to R₂ \\\\to A $, the quotient ring $ A/I $ inherits the scalar tower compatibility. Specifically, the actions of $ R₁ $ and $ R₂ $ on $ A/I $ sat\"}\n  {\"name\": \"Ideal.Quotient.isScalarTower_right\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Basic\", \"type\": \"{α} [SMul α R] [IsScalarTower α R R] : IsScalarTower α (R ⧸ I) (R ⧸ I)\", \"doc\": \"If a type $\\\\alpha$ has a scalar multiplication on a ring $R$ and the scalar actions of $\\\\alpha$ and $R$ are compatible (i.e., $\\\\alpha$ acts on $R$ in a way that is compatible with the ring multiplicat\"}\n  {\"name\": \"RingCon.comapQuotientEquivOfSurj\", \"module\": \"Mathlib.RingTheory.Congruence.Hom\", \"type\": \"(c : RingCon M) (f : N →+* M) (hf : Function.Surjective f) {d : RingCon N} (hcd : d = c.comap f) :\\n  d.Quotient ≃+* c.Quotient\", \"doc\": \"Given a surjective ring homomorphism $ f : N → M $ and a congruence relation $ c $ on $ M $, if $ d $ is the pullback congruence on $ N $ defined by $ d = c $.comap $ f $, then the quotient rings $ N/\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar insertion of derived ringed topos pullback becomes invertible after reduction to a common quotient of flat coefficient ring extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures and scalar tower $ R \\\\to S \\\\to T $, if $ T $ is the localization of $ S $ at an element $ g $, then the composition of \"}\n  {\"name\": \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, if $ T $ is the localization of $ S $ at an element $ g $, then the inverse of the cotangent module equivalence applie\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, when $ T $ is the localization of $ S $ at element $ g $, the composition of the inverse cotangent equivalence $ (\\\\tex\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "commonQuotient|common_quotient|IsPushout.*restrictScalars",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/IsTensorProduct.lean\", \"line\": \"708\", \"text\": \"    ((Algebra.IsPushout.equiv R S R' S').symm.toAlgHom.restrictScalars R)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCommonQuotientPullbackComparison",
+  "date": "2026-10-22",
+  "group": "D3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current blueprint order 1329, equality with the finite-level pullback tower and comparison from ordinary pullback; original item steps 4 and 5. Invertibility of common-quotient reduced insertion.",
+   "via": [
+    "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonQuotientInsertionFinite",
+  "file": "lean/Sheaf/Paper/CommonQuotientInsertionFinite.lean",
+  "declaration": "SheafOfModules.CommonQuotientPullback.insertion_finite_isIso",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-22",
+  "statement": "theorem insertion_finite_isIso [PreservesFiniteLimits uInv]\n    (hflat : IsFlatOnSite (J := J) (R := R)\n      ((restriction φ).obj (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))))\n    (hflat' : IsFlatOnSite (J := K) (R := g.rings.obj R)\n      ((restriction (g.rings.map φ ≫ a)).obj\n        (unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B'))))\n    (hquotient : ∀ n : ℕ, IsPushout (g.rings.map φ ≫ a)\n      (quotient g φ Q n) (b.app (op n)) (𝟙 _))\n    (hcompatible : ∀ n : ℕ, a ≫ b.app (op n) = g.rings.map (Q.extensionProjection n))\n    (i : Insertion g nY nX φ a) (n : ℕ) :\n    IsIso (Functor.whiskerRight i.derived (pX (quotient g φ Q n)).derived)"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonQuotientPullbackData.lean vs live item module (verbatim apart from blueprint tags/imports); item signature vs live; sandbox build of all 6 modules + #print axioms + import-deletion variants; unit sk-thm-properbasechange realized vs dropped FlatCommonQuotientReductionTower; node proof fields vs Lean"
+ }
+}

@@ -1,0 +1,357 @@
+{
+ "id": "lem-sf-immersion-residue-tor-intervals",
+ "kind": "statement",
+ "title": "Residue tensor intervals under finite-coefficient immersion operations",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and the coefficient categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], for $T=X,Z,U$.\nFix $n\\ge1$, set $A=A_n$ and $\\kappa=A/(\\varpi)$, and use ordinary derived tensor on constant-$A$ module sheaves [def-weil-derived-tensor]. For integers $a\\le b$, let Tor amplitude mean vanishing of $\\mathcal H^r(C\\otimes_A^L M)$ outside $[a,b]$ for every degree-zero module sheaf $M$ [def-weil-finite-tor-amplitude]. The finite operations $i^*,j^*,i_*$ [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image] preserve bounded constructibility and Tor intervals unchanged. More precisely, for $P\\in D^b_c(Z,A)$ the canonical projection map is an isomorphism in the unbounded derived category $D(X_{\\rm proet},A)$:\n$$i_*P\\otimes_A^L\\kappa_X\\xrightarrow{\\sim}i_*(P\\otimes_A^L\\kappa_Z).$$\nFor every $K\\in D^b_c(X,A)$ and each immersion pullback $u=i,j$, its derived monoidal comparison identifies $u^*(K\\otimes_A^L\\kappa_X)$ with $u^*K\\otimes_A^L\\kappa_{\\operatorname{dom}u}$ and preserves the cohomological interval of this tensor. For $T=X,Z,U$ and every bounded constructible etale $C'$, the comparison pullback $\\nu_T^*$ preserves and reflects the interval of $C'\\otimes_A^L\\kappa$ and therefore preserves and reflects its Tor interval [def-weil-pbc-site-comparison-morphism]. No perfectness assumption on the residue module $\\kappa$ is imposed; when $n>1$ it need not be perfect.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Residue criterion and (3 prime) for immersion operations; returned steps 14–15"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0$ and $k$, and its spectrum is a singleton). Hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sf-closed-partition-module-test] to the one-stratum partition of $Z$: the complementary open $j$ is quasi-compact. Now [lem-sf-finite-immersion-constructibility-interval] gives bounded constructibility for $i^*,j^*,i_*$. Its hypotheses are Noetherian $X$ and invertibility of $\\ell$; its auxiliary global finite-field datum imposes no field-of-definition condition on $X$, so it applies to the present $k$. No integral-stage assertion is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-closed-partition-module-test",
+    "lem-sf-finite-immersion-constructibility-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite stage and (3 prime): bounded constructibility"
+   }
+  },
+  {
+   "text": "On the ambient unbounded categories the immersion inverse images are exact, using [lem-weil-pbc-proetale-immersion-limit-preservation] and the constant coefficient identifications [prop-weil-pbc-proetale-constant-ring-map]. Closed direct image is exact by [lem-weil-pbc-proetale-ringed-open-closed]. Thus $Ri_*=i_*$ termwise by [lem-weil-pbc-exact-functor-derived-functor]. For all these exact functors $F$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^r(FC)=F\\mathcal H^r(C)$ for arbitrary complexes, including complexes unbounded below. In particular they preserve every cohomological interval. The same assertion for $\\nu_T^*$, together with its constant coefficient identification, is [lem-sf-comparison-pullback-exact].",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Residue criterion: exactness on arbitrary complexes"
+   }
+  },
+  {
+   "text": "Apply the unbounded monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $i,j$, and to $\\nu_T$. The coefficient identifications of step 2 apply both to $A$ and to the finite ring $\\kappa$; their maps preserve constant sections and therefore the quotient action $A\\to\\kappa$. Consequently $u^*\\kappa=\\kappa$, as an $A$-module sheaf, and the canonical comparison gives $u^*(C\\otimes_A^L\\kappa)\\cong u^*C\\otimes_A^L\\kappa$. Step 2 proves preservation of its cohomological interval for $u=i,j,\\nu_T$. These comparisons are valid without a lower bound on $C\\otimes_A^L\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Residue criterion: monoidal comparison with the residue sheaf"
+   }
+  },
+  {
+   "text": "We check the specified projection map, for arbitrary $M\\in D(X_{\\rm proet},A)$, rather than only $M=\\kappa_X$. Write $S=i_*P\\otimes_A^LM$ and let $\\eta,\\varepsilon$ be the unit and counit of $i^*\\dashv i_*$. By [lem-weil-proetale-closed-tensor-projection], $S$ is isomorphic to an object in the image of $i_*$. The counit is invertible on the unbounded categories by [prop-weil-open-closed-recollement-adjunctions]. The triangle identity gives $i_*\\varepsilon_D\\circ\\eta_{i_*D}=1$, so $\\eta_{i_*D}$ is invertible; naturality then makes $\\eta_S$ invertible. The canonical projection map is precisely the composite $S\\xrightarrow{\\eta_S}i_*i^*S\\xrightarrow{i_*\\mu}i_*(i^*i_*P\\otimes_A^Li^*M)\\xrightarrow{i_*(\\varepsilon_P\\otimes1)}i_*(P\\otimes_A^Li^*M)$: its adjoint is $(\\varepsilon_P\\otimes1)\\mu$. Here $\\mu$ is the monoidal comparison of step 3, so every factor is invertible. This proves the asserted canonical isomorphism on taking $M=\\kappa_X$.",
+   "uses": [
+    "lem-weil-proetale-closed-tensor-projection",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "(3 prime) for closed pushforward: canonical unbounded projection map"
+   }
+  },
+  {
+   "text": "If $K\\in D^b_c(X,A)$ has Tor amplitude $[a,b]$, the criterion [lem-sf-proetale-residue-tor-test] gives that $K\\otimes_A^L\\kappa_X$ has cohomology in $[a,b]$. Its hypothesis is that the scheme has $\\ell$ invertible; the auxiliary global finite-field datum only fixes the coefficient ring and imposes no field-of-definition condition on that scheme. By steps 2 and 3, $u^*K\\otimes_A^L\\kappa\\cong u^*(K\\otimes_A^L\\kappa_X)$ has cohomology in $[a,b]$ for $u=i,j$. By step 1 the object $u^*K$ is bounded constructible. Applying the converse direction of the same residue criterion on $Z$ or $U$ proves Tor amplitude $[a,b]$.",
+   "uses": [
+    "lem-sf-proetale-residue-tor-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "(3 prime) for the two inverse images: unchanged Tor interval"
+   }
+  },
+  {
+   "text": "Let $P\\in D^b_c(Z,A)$ have Tor amplitude $[a,b]$ and let $M$ be any degree-zero $A_X$-module sheaf. In step 4 its pullback $i^*M$ is again a degree-zero module sheaf by step 2. Therefore $P\\otimes_A^Li^*M$ has cohomology in $[a,b]$, by the definition of Tor amplitude. The projection isomorphism of step 4 and $\\mathcal H^r(i_*D)=i_*\\mathcal H^r(D)$ from step 2 show that $i_*P\\otimes_A^LM$ has cohomology in $[a,b]$. This holds for every $M$, so $i_*P$ has that Tor interval. Together with step 1 it gives the closed direct-image preservation asserted in the item.",
+   "uses": [
+    "lem-weil-proetale-closed-tensor-projection",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "(3 prime) for closed pushforward: test against every module sheaf"
+   }
+  },
+  {
+   "text": "Finally put $B=C'\\otimes_A^L\\kappa$ on $T_{\\rm et}$; it need not be bounded below. For every integer $r$, exactness gives $\\mathcal H^r(\\nu_T^*B)\\cong\\nu_T^*\\mathcal H^r(B)$ by [lem-sf-comparison-pullback-exact]. If this is zero, apply [thm-weil-pbc-site-comparison] to the degree-zero object $\\mathcal H^r(B)[0]$, which is bounded below regardless of $B$: the isomorphism $\\mathcal H^r(B)[0]\\cong R\\nu_{T,*}\\nu_T^*(\\mathcal H^r(B)[0])$ forces $\\mathcal H^r(B)=0$. This proves reflection of the interval degree by degree; preservation was step 3. For the Tor interval of bounded constructible $C'$, apply [lem-exc-comparison-tor-interval] directly to $C'\\in D^+$, which tests against all module sheaves on each site. No comparison theorem on unbounded-below $B$ and no perfectness of $\\kappa$ has been used.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "thm-weil-pbc-site-comparison",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Residue criterion: interval reflection without a bounded-below residue tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-closed-partition-module-test",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-finite-immersion-constructibility-interval",
+  "lem-sf-proetale-residue-tor-test",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-closed-tensor-projection",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Residue criterion and (3 prime): assembly from existing exactness, unbounded projection and comparison nodes; canonical-map normalization supplied explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite local coefficient constructible pro etale closed pushforward preserves Tor intervals residue tensor cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"PrimeSpectrum.mem_image_comap_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A)\\n  (x : PrimeSpectrum R),\\n  x ∈ PrimeSpectrum.comap (algebraMap R A) '' ↑(PrimeSpectrum.basicOpen f) ↔\\n    ¬IsNilpotent ((algebraMap A (TensorProduct R A x.asIdeal.ResidueField)) f)\", \"doc\": \"An element $ x $ is in the image of the preimage of the basic open set $ D(f) $ under the algebra map $ R \\to A $ if and only if $ f $ is not nilpotent in the residue field of the ideal generated by $ \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.Exact",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Functor.Exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(residue|TorAmplitude|torAmplitude).*(sheaf|[iI]mage)|[iI]mage.*TorAmplitude",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"line\": \"147\", \"text\": \"      IsLocalRing.residue, Set.mem_image, true_implies]\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"line\": \"46\", \"text\": \"  CommRingCat.of <| IsLocalRing.ResidueField (X.presheaf.stalk x)\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"line\": \"49\", \"text\": \"  inferInstanceAs <| Field (IsLocalRing.ResidueField (X.presheaf.stalk x))\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"line\": \"52\", \"text\": \"def residue (X : LocallyRingedSpace.{u}) (x : X) : X.presheaf.stalk x ⟶ X.residueField x :=\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"line\": \"53\", \"text\": \"  CommRingCat.ofHom (IsLocalRing.residue (X.presheaf.stalk x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"118\", \"text\": \"  let stalk_y_to_residue_x' : Y.presheaf.stalk y ⟶ X.residueField x' :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"46\", \"text\": \"  CommRingCat.of <| IsLocalRing.ResidueField (X.presheaf.stalk x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"49\", \"text\": \"  inferInstanceAs <| Field (IsLocalRing.ResidueField (X.presheaf.stalk x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"54\", \"text\": \"def residue (X : Scheme.{u}) (x) : X.presheaf.stalk x ⟶ X.residueField x :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"55\", \"text\": \"  CommRingCat.ofHom (IsLocalRing.residue (X.presheaf.stalk x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"67\", \"text\": \"    Spec.map (X.residue x) s = closedPoint (X.presheaf.stalk x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"166\", \"text\": \"      (IsLocalRing.ResidueField <| Y.presheaf.stalk (f x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"167\", \"text\": \"      (IsLocalRing.ResidueField <| X.presheaf.stalk x) by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"226\", \"text\": \"    simpa using (X.fromSpecResidueField x).closePoints_subset_preimage_closedPoints\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"line\": \"15\", \"text\": \"to be the degree of the residue field of `q` over the residue field of its preimage `p` in `R`.\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"line\": \"38\", \"text\": \"to be the degree of the residue field of `q` over the residue field of its preimage `p` in `R`.\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"line\": \"501\", \"text\": \"the image of `g` in the residue field is not zero. Let `n` be the order of the image of `g` in the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion pushforward residue derived tensor cohomology equal pushforward residue tensor etale proetale comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"For any closed immersion $ f: X \\\\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsClosedImmersion f → Sort u} →\\n      (t : AlgebraicGeometry.IsClosedImmersion f) →\\n        ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n            (isClosedEmbedding : Topology.IsClosedEmbeddin\", \"doc\": \"Given a property $ P $ of closed immersions $ f: X \\to Y $, if $ P $ holds for any closed immersion constructed from a closed embedding of topological spaces and surjective maps on stalks, then $ P $ h\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsClosedImmersion f → Sort u} →\\n      (t : AlgebraicGeometry.IsClosedImmersion f) →\\n        ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n            (isClosedEmbedding : Topology.IsClosedEmbeddin\", \"doc\": \"Given a property $ P $ of closed immersions $ f: X \\to Y $, if $ P $ holds for any closed immersion constructed from a closed embedding of topological spaces and surjective maps on stalks, then $ P $ h\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} {f : X ⟶ Y} : IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"[IsImmersion f] : IsClosedImmersion f.liftCoborder\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and closed direct image preserve finite Tor amplitude using local ring residue criterion for constructible sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived projection isomorphism for closed immersion pushforward tensor residue constant module on pro etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → Y.residueField T.y ⟶ T.tensor\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this is the morphism from the residue field of $Y$ at point $T.y$ to the pushout object $T.tensor$ in the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → X.residueField T.x ⟶ T.tensor\", \"doc\": \"Given a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this morphism maps the residue field $\\\\kappa(T.x)$ at the $X$-component of the triplet to the pushout ob\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (t : ↥(CategoryTheory.Limits.pullback f g)) →\\n        (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor ⟶\\n          (CategoryTheory.Limits.pullback f g).residueField t\", \"doc\": \"For any morphisms $f : X \\to S$ and $g : Y \\to S$ of schemes and any point $t$ in the fiber product $X \\times_S Y$, this constructs the canonical morphism from the pushout of residue field maps induced b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ with morphisms $f: X \\to S$ and $g: Y \\to S$ in the category of schemes, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.snd f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInr) (Y.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product to the pullback scheme with the second projection to $Y$ equals the composition of the morphism induced by the right tensor incl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product ring $\\\\operatorname{Spec}(T.tensor)$ to the pullback scheme and the first projection morphism $\\\\operatorname{pullback.fst}(f,g)$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*projection|projection.*closed",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean\", \"line\": \"87\", \"text\": \"initialize_simps_projections ClosedSubmodule (carrier → coe, as_prefix coe)\"}\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"22\", \"text\": \"We prove that semilinear sets are closed under union, projection, set addition and additive closure.\"}\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"36\", \"text\": \"- `IsSemilinearSet` is closed under union, projection, set addition and additive closure.\"}\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"211\", \"text\": \"/-- Semilinear sets are closed under projection (from `ι ⊕ κ → M` to `ι → M` by taking `Sum.inl` on\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Complement.lean\", \"line\": \"321\", \"text\": \"    rw [← (isQuotientMap_projectionOntoL h).isClosed_preimage]\"}\n  {\"file\": \"Mathlib/ModelTheory/Definability.lean\", \"line\": \"34\", \"text\": \"- `Set.Definable.image_comp` shows that definability is closed under projections in finite\"}\n  {\"file\": \"Mathlib/ModelTheory/Definability.lean\", \"line\": \"226\", \"text\": \"/-- Shows that definability is closed under finite projections. -/\"}\n  {\"file\": \"Mathlib/ModelTheory/Definability.lean\", \"line\": \"241\", \"text\": \"/-- Shows that definability is closed under finite projections. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Instances/Icc.lean\", \"line\": \"137\", \"text\": \"/-- The projection from `ℝ` to a closed segment is smooth on the segment, in the manifold sense. -/\"}\n  {\"file\": \"Mathlib/Topology/Sets/Closeds.lean\", \"line\": \"59\", \"text\": \"initialize_simps_projections Closeds (carrier → coe, as_prefix coe)\"}\n  {\"file\": \"Mathlib/Topology/Sets/Closeds.lean\", \"line\": \"417\", \"text\": \"initialize_simps_projections IrreducibleCloseds (carrier → coe, as_prefix coe)\"}\n  {\"file\": \"Mathlib/Order/Closure.lean\", \"line\": \"81\", \"text\": \"initialize_simps_projections ClosureOperator (toFun → apply, IsClosed → isClosed)\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/ProjIcc.lean\", \"line\": \"12\", \"text\": \"# Projection of a line onto a closed interval\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/ProjIcc.lean\", \"line\": \"41\", \"text\": \"/-- Projection of `α` to the closed interval `[a, ∞)`. -/\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/ProjIcc.lean\", \"line\": \"44\", \"text\": \"/-- Projection of `α` to the closed interval `(-∞, b]`. -/\"}\n  {\"file\": \"Mathlib/Order/Interval/Set/ProjIcc.lean\", \"line\": \"47\", \"text\": \"/-- Projection of `α` to the closed interval `[a, b]`. -/\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"27\", \"text\": \"theorem isStarProjection_iff_mem_extremePoints_setOfPred_nonneg_inter_unitClosedBall\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"29\", \"text\": \"    IsStarProjection e ↔ e ∈ extremePoints ℝ ({x : A | 0 ≤ x} ∩ closedBall 0 1) := by\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"34\", \"text\": \"  · /- Suppose `e` is a star projection, and `a` and `b` are in the nonnegative closed unit ball\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"88\", \"text\": \"alias isStarProjection_iff_mem_extremePoints_setOf_nonneg_inter_unitClosedBall :=\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"89\", \"text\": \"  isStarProjection_iff_mem_extremePoints_setOfPred_nonneg_inter_unitClosedBall\"}\n  {\"file\": \"Mathlib/Topology/Order/ProjIcc.lean\", \"line\": \"12\", \"text\": \"# Projection onto a closed interval\"}\n  {\"file\": \"Mathlib/Computability/Primrec/Basic.lean\", \"line\": \"16\", \"text\": \"`ℕ → ℕ` which are closed under projections (using the `pair`\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Complemented.lean\", \"line\": \"16\", \"text\": \"(`Submodule.ClosedComplemented`) if there exists a continuous linear projection `f : E →ₗ[R] p`,\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Complemented.lean\", \"line\": \"104\", \"text\": \"/-- Projection to a closed submodule along a closed complement. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion pro etale pushforward commutes with unbounded derived residue tensor and preserves Tor amplitude intervals",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.FormallyEtale.instTensorProduct; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits concern scheme morphisms, scheme fibre residue tensors, underived module adjunctions or condensed closed monoidal structures; none states the full derived immersion/residue interval claim"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|[Tt]or[Aa]mplitude|torAmplitude|residue.*tensor)",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits concern scheme morphisms, scheme fibre residue tensors, underived module adjunctions or condensed closed monoidal structures; none states the full derived immersion/residue interval claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image on sheaves commutes with derived tensor and closed immersion direct image preserves Tor amplitude",
+   "results": "8 hits; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply; AlgebraicGeometry.Scheme.Hom.appIso_inv_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict; CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits concern scheme morphisms, scheme fibre residue tensors, underived module adjunctions or condensed closed monoidal structures; none states the full derived immersion/residue interval claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"pullback\"",
+   "results": "12 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensor; AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr; AlgebraicGeometry.Scheme.Pullback.ofPointTensor; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits concern scheme morphisms, scheme fibre residue tensors, underived module adjunctions or condensed closed monoidal structures; none states the full derived immersion/residue interval claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf derived closed embedding projection formula without perfect tensor factor",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.ihomPoints_symm_comp; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed hits concern scheme morphisms, scheme fibre residue tensors, underived module adjunctions or condensed closed monoidal structures; none states the full derived immersion/residue interval claim"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Residue criterion and (3 prime) for immersion operations; returned steps 14–15",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-immersion-residue-tor-intervals",
+  "worker": "stage1",
+  "summary": "Split using existing DAG nodes only. Established bounded constructibility and ambient exactness, normalized the canonical unbounded closed projection, used the residue criterion for immersion Tor intervals and arbitrary module tests for closed pushforward, and reflected residue intervals on individual cohomology sheaves. No statement change, no new nodes, no Lean writing or compilation.",
+  "blueprint": "prop-sf-localization-all-stages.proof.md: Residue criterion and (3 prime) for i*, j*, i_*; repairs the bounded-below misuse for residue tensors in the imported argument.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Comparison detects Tor amplitude against arbitrary module sheaves."
+   },
+   {
+    "node": "lem-sf-closed-partition-module-test",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-sf-finite-immersion-constructibility-interval",
+    "why": "Previously established bounded constructibility for the same finite coefficient immersion operations."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-closed-tensor-projection",
+    "why": "Unbounded closed tensor comparison places the source of the canonical projection in the closed essential image, even for nonperfect residue coefficients."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic coefficient, exact-functor, ringed-topos or comparison tool supplying the precise assertion named in the proof; the localization unit does not replace this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-closed-partition-module-test",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-finite-immersion-constructibility-interval",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-closed-tensor-projection",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-24d6bf27a",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-24d6bf27a (reviewer sub-agent of L); spot-checked: PASS with no changes. The item is a split of the unsplit Q35 node; it has no new nodes, the statement is unchanged, proof_deps equals the union of uses, there is no SGA citation, and the snapshot has no repair note. Source checked: main-20261015 prop-sf-localization-all-stages.proof.md lines 84-107 (residue criterion and (3') for i^*, j^*, i_*). Steps 1-3: X is Noetherian because it is of finite type over Spec k; every open of a Noetherian X is quasi-compact, so j is quasi-compact (lem-sf-closed-partition-module-test), which the open-closed and projection lemmas require. Constructibility comes from lem-sf-finite-immersion-constructibility-interval, whose global finite-field datum puts no condition on X. Exactness and monoidal comparison for u = i, j, nu_T hold on unbounded complexes, and u^*kappa = kappa compatibly with A -> kappa. Step 4 proves that the canonical projection map is an isomorphism, not just some isomorphism: S lies in the image of i_*, the counit is invertible, and the triangle identity makes eta invertible; the composite is checked to be adjoint to (eps(x)1)mu. Step 5 uses the residue test in both directions; it needs only that ell is invertible on Z and U. Step 6 gets the Tor amplitude of i_*P directly from the definition, testing against every module M via the projection isomorphism and exact i_*. Step 7 correctly repairs the blueprint's bounded-below misuse: for A = Z/4 and kappa = F_2, kappa(x)^L kappa is unbounded below, so reflection is done one degree at a time with thm-weil-pbc-site-comparison applied to H^r(B)[0]; the Tor interval of C' follows from lem-exc-comparison-tor-interval. Edge cases checked: Z or U empty, n = 1, a = b. No duplicate found (checked prop-exc-closed-tor, lem-sf-supported-tor-reduction-propagation and lem-sp-supported-scalar-tor-interval). The 14 generic tool uses are accepted, since the unit's single Hom/adjunction step supplies none of them; their 'why' texts are boilerplate, which is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ImmersionResidueTorIntervals",
+  "declaration": "AlgebraicGeometry.ProEtale.immersion_residue_tor_intervals",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.immersionResidueConstantPullbackIso",
+   "AlgebraicGeometry.ProEtale.immersionResidueTensorPullbackIso",
+   "AlgebraicGeometry.ProEtale.immersionResidueProjectionMap",
+   "AlgebraicGeometry.ProEtale.immersionResidueSiteComparisonIso",
+   "AlgebraicGeometry.ProEtale.ImmersionResiduePullbackAssertion",
+   "AlgebraicGeometry.ProEtale.ImmersionResidueTorAssertion",
+   "AlgebraicGeometry.ProEtale.immersionResidueFiniteAssertion",
+   "AlgebraicGeometry.ProEtale.immersion_residue_tor_intervals"
+  ],
+  "file": "lean/Sheaf/Paper/ImmersionResidueTorIntervals.lean",
+  "statement": "theorem immersion_residue_tor_intervals (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Z U : Scheme.{u}} (s : X ⟶ Spec (.of k)) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hij : Set.range j.base = (Set.range i.base)ᶜ) : @immersionResidueFiniteAssertion (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) (Padic.coefficientExtensionResidueModule l E n) X Z U i j",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1e064c7c",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clauses match node and source (main-20261015 prop-sf-localization-all-stages.proof.md l.84-107): field k, ℓ prime invertible, finite E, n≥1, separated finite type X, closed i and complementary open j via range equation. i^*/j^* preserve D^b_c, Tor [a,b] and the interval of K⊗κ; i_* preserves D^b_c and Tor intervals, with IsIso of the actual projection mate (rightDerivedLowerStarProjectionMap then Ri_* of the canonical Li^*κ_X≅κ_Z); ν_T^* preserves and reflects (iff) the residue-tensor interval and Tor interval for T=X,Z,U. torAmplitudeIn tests every degree-zero sheaf; boundedConstructible is the recorded étale-origin finite notion; κ is the actual quotient with no perfectness assumption. Helpers are real composites with no sorry; Finite comes from the recorded theorem; docstrings have source, blueprint tag and 7 steps; lean.statement verbatim; node unchanged apart from lean; no new nodes. Advisories: E:Type(u+1) vs citer E:Type u (forced by the residue API, same as landed sf_directImage_torAmplitude; ULift transport needed at stage 3); fixed-ModuleCat upperStar/lowerStar are not in the dependency records (same notion, consistent with the derived-tensor and finite-tor-amplitude §1(B) repairs); two helper isos unreferenced. No compile run (none needed, no FIX)."
+ }
+}

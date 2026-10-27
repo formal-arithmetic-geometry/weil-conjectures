@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-two-term-determinant-encoding",
+ "kind": "definition",
+ "title": "Two-term determinant and kernel data in the arrow category of modules",
+ "statement": "Let $R$ be a commutative ring. Encode a cochain complex of $R$-modules concentrated in degrees $-1,0$ [def-weil-abstract-derived-category] by an arrow $d_P:P^{-1}\\to P^0$ in the category of $R$-modules, and a chain map $a:P\\to Q$ by a commuting square $a^0d_P=d_Qa^{-1}$. Such a map is degreewise surjective when both components are surjective. Its map on degree-minus-one cohomology is the restriction $\\ker d_P\\to\\ker d_Q$ of $a^{-1}$, and it is a quasi-isomorphism when this restriction and the induced map $P^0/\\operatorname{im}d_P\\to Q^0/\\operatorname{im}d_Q$ are bijective. Write $\\det_R(V)$ for the exterior-socle determinant module [def-trf-projective-determinant-module]. Using tensor products [def-weil-pbc-module-tensor-product] and $V^\\vee=\\operatorname{Hom}_R(V,R)$, put $D(P)=\\det_R(P^0)\\otimes_R\\det_R(P^{-1})^\\vee$. Define $d_N:\\ker a^{-1}\\to\\ker a^0$ by restriction of $d_P$, and put $D(N)=\\det_R(\\ker a^0)\\otimes_R\\det_R(\\ker a^{-1})^\\vee$. These definitions do not require any finite projectivity or quasi-isomorphism hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJI, section-determinants-complexes, two-term complexes and their kernel before Tag 0FJJ."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-trf-projective-determinant-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two term cochain complex as an arrow of modules with commuting square morphisms kernel differential determinant line",
+   "results": "{\"t\": \"2026-10-24T02:26:31Z\", \"tool\": \"leansearch\", \"query\": \"Two term cochain complex as an arrow of modules with commuting square morphisms kernel differential determinant line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Hom.sqFrom\", \"CochainComplex.mkHom\", \"CochainComplex.mk_d_1_0\", \"CochainComplex.of\", \"HomologicalComplex.Hom.sqTo\", \"CochainComplex.ofHom\", \"groupCohomology.shortComplexH1\", \"CochainComplex.HomComplex.Cochain.d_comp_ofHom_v\"], \"digest\": \"52db04584f775f9e\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Arrow and commutative squares, reused directly; no standalone two-term kernel determinant interface found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow, ModuleCat",
+   "results": "{\"t\": \"2026-10-24T02:26:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Arrow, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"groupCohomology.dArrowIso₀₁\", \"groupCohomology.dArrowIso₀₁_hom_left\", \"groupCohomology.dArrowIso₀₁_inv_left\", \"groupCohomology.dArrowIso₀₁_hom_right\", \"groupCohomology.dArrowIso₀₁_inv_right\", \"groupHomology.d₁₀ArrowIso\", \"groupHomology.d₁₀ArrowIso_hom_right\", \"groupHomology.d₁₀ArrowIso_inv_right\"], \"digest\": \"c74358754a696763\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Arrow and commutative squares, reused directly; no standalone two-term kernel determinant interface found."
+  },
+  {
+   "tool": "grep",
+   "query": "TwoTermComplex|twoTermDeterminant|kernelDifferential",
+   "results": "{\"t\": \"2026-10-24T02:26:32Z\", \"tool\": \"grep\", \"query\": \"TwoTermComplex|twoTermDeterminant|kernelDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Arrow and commutative squares, reused directly; no standalone two-term kernel determinant interface found."
+  },
+  {
+   "tool": "grep",
+   "query": "rg TwoTermComplex|TwoTermMap|twoTermDeterminant|kernelDifferential in dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search two-term",
+   "results": "Only Module.TwoTermComplex and its helpers in Sheaf.SecTraceFormula.SurjectiveTwoTermDeterminantCalculus encode exactly these module complexes; owned by the parent theorem, whose proof depends on this item, with no definition-node owner. Other two-term determinant nodes encode scheme/derived determinant data. The new interface reuses Mathlib Arrow rather than duplicating those structures, and does not import the parent theorem.",
+   "date": "2026-10-24",
+   "verdict": "no usable independent definition node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-two-term-kernel-normalization",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Construction of the kernel-normalized determinant isomorphism. Independent encoding of the two-term module complexes, cohomology maps, kernel differential and determinant modules.",
+   "via": [
+    "lem-trf-two-term-kernel-normalization",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.TwoTermDeterminantEncoding",
+  "declaration": "Module.TwoTerm.determinant",
+  "declarations": [
+   "Module.TwoTerm.DegreewiseSurjective",
+   "Module.TwoTerm.kernelNeg",
+   "Module.TwoTerm.QuasiIso",
+   "Module.TwoTerm.determinant",
+   "Module.TwoTerm.kernelDifferential",
+   "Module.TwoTerm.kernelDeterminant"
+  ],
+  "file": "lean/Sheaf/SecTraceFormula/TwoTermDeterminantEncoding.lean",
+  "statement": "abbrev determinant {R : Type u} [CommRing R] (P : Arrow (ModuleCat.{v} R)) : Type _",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7c6820fd",
+  "group": "Q73",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7c6820fd",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery repairs both faults of the 83f730d2 return. (1) Cycle: new def node def-trf-two-term-determinant-encoding on Mathlib Arrow(ModuleCat R); neither module imports the parent SurjectiveTwoTermDeterminantCalculus. (2) Γ/δ pinned: a shared γneg/γzero pair with IsDeterminantExactSequenceMap for (ker.subtype, a.left/right), each unique by existsUnique_determinantExactSequence; Γ on pure tensors = γzero(n0⊗q0) ⊗ (φn⊗φq)∘γneg⁻¹ (inverse dual, no sign); δ by contraction = ⋀d_N on socles, which pins det(d_N) since ⋀d_N maps socle onto socle and M⊗L^∨→Hom(L,M) is injective for finite projective L; so ∃! T is genuine. All clauses (QuasiIso as H^-1 kernel bijection plus H^0 mod-range inj/surj, splitting, finite projective kernels, d_N bijective, span{δ}=⊤, inverse triangle) match the node and Stacks 0FJI. Edge cases: rank 0 gives δ=1, zero ring, char 2, independent universes u,v. The five existing stmt_dep records are identical to side-live; the item changes only lean plus the added stmt_dep; lean.statement fields verbatim. Advisory: the parent's parallel TwoTermComplex encoding remains (moving it would affect 4 importers, importing it would recreate the cycle; bridge via Arrow.mk at stage 3); redundant inner uniqueness clause; proof-plan plain imports (H9). No compile run (no fix)."
+ }
+}

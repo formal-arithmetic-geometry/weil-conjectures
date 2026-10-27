@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-adjunction-generator-defect-criterion",
+ "kind": "statement",
+ "title": "Adjunction-unit defect criterion on finite triangulated generators",
+ "statement": "Let $\\mathcal T,\\mathcal U$ be triangulated categories with integer shifts, and let $F:\\mathcal T\\to\\mathcal U$ and $U:\\mathcal U\\to\\mathcal T$ be exact functors [def-weil-triangulated-category]. Give an adjunction $F\\dashv U$, meaning natural bijections $\\operatorname{Hom}_{\\mathcal U}(FP,Y)\\cong\\operatorname{Hom}_{\\mathcal T}(P,UY)$, and write $\\eta:\\mathrm{id}\\to UF$ for its unit (the adjuncts of the identity morphisms). Assume these bijections and the unit commute with the specified shift comparisons. Let $\\mathcal G$ be any class of objects of $\\mathcal T$ and let $\\mathcal T_0$ be its finite triangulated closure: objects obtained up to isomorphism from zero and finitely many elements of $\\mathcal G$ by finitely many integer shifts and distinguished-triangle extensions [def-weil-triangulated-subcategory].\n\nSuppose that for all $G,H\\in\\mathcal G$, every distinguished triangle\n$$H\\xrightarrow{\\eta_H}UFH\\longrightarrow Q_H\\longrightarrow H[1]$$\nsatisfies $\\operatorname{Hom}_{\\mathcal T}(G,Q_H[n])=0$ for all $n\\in\\mathbf Z$. Then for all $P,Q\\in\\mathcal T_0$ and $n\\in\\mathbf Z$ the map induced by the specified functor\n$$\\operatorname{Hom}_{\\mathcal T}(P,Q[n])\\xrightarrow{F}\\operatorname{Hom}_{\\mathcal U}(FP,FQ[n])$$\nis bijective. Under the adjunction this map is exactly $f\\mapsto\\eta_{Q[n]}\\circ f$, with the specified shift comparisons. In particular $F|_{\\mathcal T_0}$ is fully faithful, and its replete essential image is a full triangulated subcategory of $\\mathcal U$. More explicitly, every morphism between image objects lifts to a source morphism and every distinguished cone triangle on that morphism is isomorphic to the image of a distinguished source triangle. If $\\mathcal U_0\\subseteq\\mathcal U$ is any full replete triangulated subcategory and this restricted functor has essential image $\\mathcal U_0$, its equivalence onto $\\mathcal U_0$ has an exact quasi-inverse. The statement includes $\\mathcal G=\\varnothing$ and zero generators; it requires no closure under infinite sums or direct summands.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 5, 6, 9. Agent extraction; exact norm-topology reference remains WANTED. Abstract Hom-exactness and cone comparison: Stacks derived.tex, lemma-representable-homological (0149) and lemma-third-isomorphism-triangle (014A)."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Write $b_{P,Q,n}$ for the displayed map, including $F(Q[n])\\cong(FQ)[n]$. By naturality of the adjunction bijection in its first variable, the adjunct of $F(f):FP\\to F(Q[n])$ is the adjunct of $1_{F(Q[n])}$ precomposed with $f$, namely $\\eta_{Q[n]}\\circ f$. This proves the claimed identification for every $P,Q,n$, independently of the vanishing hypothesis. The assumed shift compatibility identifies the shifted unit $\\eta_H[n]$ with $\\eta_{H[n]}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent adjunction calculation; definition of the unit and naturality of the given Hom bijections"
+   }
+  },
+  {
+   "text": "Fix $G,H\\in\\mathcal G$ and choose a distinguished cone triangle of $\\eta_H$, which exists by TR1 in [def-weil-triangulated-category]. Apply [lem-weil-pbc-hom-into-triangle-exact] to its shifts and rotations. The resulting exact segment is\n$$\\operatorname{Hom}(G,Q_H[n-1])\\longrightarrow\\operatorname{Hom}(G,H[n])\\xrightarrow{\\eta_H[n]\\circ-}\\operatorname{Hom}(G,(UFH)[n])\\longrightarrow\\operatorname{Hom}(G,Q_H[n]).$$\nBoth end groups vanish by hypothesis, so the middle arrow is bijective: exactness gives surjectivity at its target and zero kernel at its source. By Step 1 and the adjunction bijection, $b_{G,H,n}$ is bijective for every integer $n$. No claim that $Q_H$ lies in $\\mathcal T_0$, or that $\\eta_H$ is an isomorphism in the ambient category, is used. Lean shifts of triangles multiply their arrows by (-1)^n. In the injectivity argument use exactness of the inverse rotation and vanishing into Q_H[n-1]; in the surjectivity argument apply exactness to (-1)^n times the desired arrow and cancel this unit. Transport across the composite functor shift isomorphism using Adjunction.unit_app_shift_commShiftIso_inv_app, then cancel the adjunction Hom equivalence.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149, lemma-representable-homological; TR1 and shifts of the unit triangle"
+   }
+  },
+  {
+   "text": "Fix $G\\in\\mathcal G$. Let $\\mathcal S_G$ be the class of objects $Q$ for which every $b_{G,Q,n}$ is bijective. It contains zero since $F$ is additive, and it is replete and closed under shifts by the specified shift comparisons and reindexing $n$. If $A\\to B\\to C\\to A[1]$ is distinguished with $A,C\\in\\mathcal S_G$, [lem-weil-pbc-hom-into-triangle-exact] applied to shifts and rotations gives the exact five-term row\n$$\\operatorname{Hom}(G,C[n-1])\\to\\operatorname{Hom}(G,A[n])\\to\\operatorname{Hom}(G,B[n])\\to\\operatorname{Hom}(G,C[n])\\to\\operatorname{Hom}(G,A[n+1]).$$\nExactness of $F$ gives the analogous target row. Functoriality and the natural shift comparisons give a commuting diagram whose vertical arrows are the five maps $b$. Four are bijective by the hypothesis on $A,C$, so [lem-weil-pbc-five-lemma] in abelian groups makes $b_{G,B,n}$ bijective. Thus $\\mathcal S_G$ is a full triangulated class as in [def-weil-triangulated-subcategory]. Step 2 puts every generator in it. Induction on the finite construction of an object of $\\mathcal T_0$ therefore gives $\\mathcal T_0\\subseteq\\mathcal S_G$. Lean realization: use the already proved covariant and contravariant Hom diagram chases in WeilConjectures.CategoryTheory.Triangulated.FullyFaithfulGenerator, specifically Functor.homBijectiveShiftsRight and Functor.homBijectiveShiftsLeft and their IsTriangulated and IsClosedUnderIsomorphisms instances. These prove the five-lemma conclusion directly from representable exactness without invoking an abelian-category five-lemma theorem. Apply the stated least-subcategory universal property in each variable; no assumption that a single object generates is made.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149, lemma-representable-homological, and Tag 05QB, homology.tex lemma-five-lemma; first finite induction"
+   }
+  },
+  {
+   "text": "Now fix $Q\\in\\mathcal T_0$. Let $\\mathcal R_Q$ consist of $P$ for which every $b_{P,Q,n}$ is bijective. As above zero, isomorphisms and shifts preserve this condition, using $\\operatorname{Hom}(P[r],Q[n])\\cong\\operatorname{Hom}(P,Q[n+(-r)])$. For a distinguished $A\\to B\\to C\\to A[1]$, [lem-weil-pbc-hom-out-of-triangle-exact] and rotations give the exact row\n$$\\operatorname{Hom}(A[1],Q[n])\\to\\operatorname{Hom}(C,Q[n])\\to\\operatorname{Hom}(B,Q[n])\\to\\operatorname{Hom}(A,Q[n])\\to\\operatorname{Hom}(C[-1],Q[n]).$$\nApplying $F$ gives the target row; the diagram commutes because $F$ preserves composition and the shift comparison is natural. If $A,C\\in\\mathcal R_Q$, the outer four maps are bijective, hence so is the middle one by [lem-weil-pbc-five-lemma]. Thus $\\mathcal R_Q$ is triangulated [def-weil-triangulated-subcategory]. Step 3 puts all $G\\in\\mathcal G$ in it, so a second induction on finite constructions puts all of $\\mathcal T_0$ in it. This proves every claimed $b_{P,Q,n}$ is bijective, and at $n=0$ proves full faithfulness of the specified restriction. Lean realization: use the already proved covariant and contravariant Hom diagram chases in WeilConjectures.CategoryTheory.Triangulated.FullyFaithfulGenerator, specifically Functor.homBijectiveShiftsRight and Functor.homBijectiveShiftsLeft and their IsTriangulated and IsClosedUnderIsomorphisms instances. These prove the five-lemma conclusion directly from representable exactness without invoking an abelian-category five-lemma theorem. Apply the stated least-subcategory universal property in each variable; no assumption that a single object generates is made.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149, lemma-representable-homological, and Tag 05QB, homology.tex lemma-five-lemma; second finite induction"
+   }
+  },
+  {
+   "text": "Let $a:FP\\to FQ$ with $P,Q\\in\\mathcal T_0$. Step 4 uniquely lifts $a$ to $f:P\\to Q$. Choose a distinguished source cone triangle $P\\xrightarrow f Q\\to R\\to P[1]$ by TR1; its third vertex lies in $\\mathcal T_0$ by rotations and the closure of [def-weil-triangulated-subcategory]. Applying exact $F$ gives a distinguished cone triangle on $a$. Given any other distinguished cone triangle on $a$, TR3 in [def-weil-triangulated-category] extends the identities on $FP,FQ$ to a triangle morphism from the image triangle. Its third component is an isomorphism by [lem-sf-triangle-morphism-iso], so this is an isomorphism of triangles. For objects merely isomorphic to $FP,FQ$, first conjugate the arrow by those isomorphisms and use isomorphism invariance of distinguished triangles. This proves the explicit lifting and cone assertion, without uniqueness of the cone isomorphism. In Lean, isoTriangleOfIso₁₂ packages TR3 and Tag 014A after lifting the conjugated arrow and choosing its distinguished cone.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "TR1, TR3; Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be the replete essential image of $F|_{\\mathcal T_0}$. It contains zero and is closed under every integer shift by exactness and the shift comparison. Step 5 makes it closed under cones of morphisms between its objects. If $A\\to B\\to C\\to A[1]$ is distinguished with $A,C\\in\\mathcal I$, rotate it to $C[-1]\\to A\\to B\\to C$. Its first two vertices belong to $\\mathcal I$, and Step 5 then puts $B$ in $\\mathcal I$. Hence $\\mathcal I$, as a full replete subcategory, is triangulated by [def-weil-triangulated-subcategory]. These arguments also show that the finite closure $\\mathcal T_0$ carries its inherited triangulation. The standard Mathlib instance Functor.essImage.IsTriangulated applies to the full exact restriction T₀.ι ⋙ F.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "TR2 and definition of a full triangulated subcategory, Tag 05QM"
+   }
+  },
+  {
+   "text": "If $\\mathcal I=\\mathcal U_0$, corestrict to the full subcategory $\\mathcal U_0$. The resulting functor $F_0:\\mathcal T_0\\to\\mathcal U_0$ is exact, fully faithful by Step 4, and essentially surjective by this equality. Apply [lem-trf-fully-faithful-ess-surj-equivalence] to obtain a quasi-inverse $V$ with natural isomorphisms $F_0V\\cong\\mathrm{id}$ and $VF_0\\cong\\mathrm{id}$. Categories can be viewed in a common larger universe for this application; no set-sized generating class or infinite categorical limit is required. Use ObjectProperty.lift for the corestriction, lift the essential-image witnesses with ObjectProperty.isoMk, and apply Functor.asEquivalence.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, categories.tex lemma-equivalence-categories and lemma-construct-quasi-inverse"
+   }
+  },
+  {
+   "text": "Here are the exactness details for $V$. Write $e:F_0V\\cong\\mathrm{id}$. Lift, by full faithfulness, the shift isomorphism whose image is\n$$F_0(V(Y[1]))\\xrightarrow{e_{Y[1]}}Y[1]\\xrightarrow{e_Y^{-1}[1]}F_0(VY)[1]\\cong F_0((VY)[1]).$$\nIts inverse lifts too. Naturality and integer-shift coherence follow by applying faithful $F_0$, where they are precisely the naturality of $e$ and the given shift coherence. Additivity follows similarly. For a distinguished triangle $T$ of $\\mathcal U_0$, the triangle $F_0V(T)$ with this comparison is isomorphic via $e$ to $T$. Complete the first arrow of $V(T)$ to a distinguished source triangle $S$ by TR1. TR3 compares $F_0S$ with $F_0V(T)$ by identities on their first two vertices; [lem-sf-triangle-morphism-iso] makes the third component invertible. Lift that component and its inverse using full faithfulness; faithfulness verifies the triangle equations and the inverse equations. Thus $S\\cong V(T)$, so TR1 makes $V(T)$ distinguished. Therefore $V$ is exact. Finally, with no generators (or only zero generators) the finite constructions give only zero objects up to isomorphism; the two inductions still start at zero and all image and inverse arguments still apply. No sum or retract closure has entered any step. Mathlib implements these constructions by Equivalence.commShiftInverse and Equivalence.commShift_of_functor; Adjunction.isTriangulated_rightAdjoint proves exactness of the inverse. The comparison with the specified restriction is ObjectProperty.liftCompιIso, with its canonical NatTrans.CommShift instance.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A and TR1/TR3; explicit reflection argument of lemma-exact-equivalence and lifted inverse shift comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sf-triangle-morphism-iso",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted categorical comparison obligation; two finite Hom inductions and explicit cone/quasi-inverse arguments, using Stacks Tags 0149, 014A, 05QB and 02C3. Lean proof by T6, 2026-10-23: same finite-generator route, reusing the proved Hom-closure classes of WeilConjectures.CategoryTheory.Triangulated.FullyFaithfulGenerator and the Mathlib exact-equivalence APIs. The general abelian five lemma is replaced by the source library direct Hom diagram chases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact triangulated left adjoint is fully faithful on the finite triangulated closure of generators if the cones of its adjunction units are orthogonal to every shifted generator",
+   "results": {
+    "t": "2026-10-22T06:03:10Z",
+    "tool": "leanfinder",
+    "query": "An exact triangulated left adjoint is fully faithful on the finite triangulated closure of generators if the cones of its adjunction units are orthogonal to every shifted generator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'"
+    ],
+    "digest": "93cf37578b94cf00"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: triangulated adjunction and localization orthogonality results do not supply the two-variable finite-generator unit-cone criterion or its whole conclusion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful triangulated functor criterion from Hom isomorphisms on pairs of generators and closure of its essential image under cones",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "leanfinder",
+    "query": "Fully faithful triangulated functor criterion from Hom isomorphisms on pairs of generators and closure of its essential image under cones",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instFullTriangleMapTriangleOfFaithful",
+     "CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor",
+     "CategoryTheory.Functor.essImageDistTriang",
+     "CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism",
+     "CategoryTheory.Functor.distTriang_iff",
+     "CategoryTheory.Functor.essImageDistTriang_mem_of_iso",
+     "CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two"
+    ],
+    "digest": "54399b2fa4950a55"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: triangulated adjunction and localization orthogonality results do not supply the two-variable finite-generator unit-cone criterion or its whole conclusion in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"fullyFaithful\", \"triangulated\"",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "loogle",
+    "query": "\"Functor\", \"fullyFaithful\", \"triangulated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: triangulated adjunction and localization orthogonality results do not supply the two-variable finite-generator unit-cone criterion or its whole conclusion in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(fullyFaithful|fully_faithful|Faithful).*(generat|orthogonal)|(generat|orthogonal).*(fullyFaithful|fully_faithful|Faithful)",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "grep",
+    "query": "(fullyFaithful|fully_faithful|Faithful).*(generat|orthogonal)|(generat|orthogonal).*(fullyFaithful|fully_faithful|Faithful)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 23,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean",
+     "Mathlib/Algebra/Azumaya/Defs.lean",
+     "Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean",
+     "Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean",
+     "Mathlib/Topology/Convenient/Category.lean",
+     "Mathlib/Topology/Convenient/Category.lean",
+     "Mathlib/Topology/Convenient/Category.lean",
+     "Mathlib/Topology/Convenient/Category.lean"
+    ],
+    "digest": "a251d86c71d8b3ad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: triangulated adjunction and localization orthogonality results do not supply the two-variable finite-generator unit-cone criterion or its whole conclusion in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated adjunction is fully faithful on generators when Hom into each unit cone vanishes in every shift",
+   "results": {
+    "t": "2026-10-22T06:03:22Z",
+    "tool": "leansearch",
+    "query": "A triangulated adjunction is fully faithful on generators when Hom into each unit cone vanishes in every shift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Functor.map_distinguished_iff",
+     "CategoryTheory.Adjunction.IsTriangulated.recOn",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated"
+    ],
+    "digest": "75ba196bbb6fd555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: triangulated adjunction and localization orthogonality results do not supply the two-variable finite-generator unit-cone criterion or its whole conclusion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories is fully faithful on the finite triangulated closure of generators if the cone of the adjunction unit on each generator is orthogonal to all shifted generators",
+   "results": {
+    "t": "2026-10-22T07:13:21Z",
+    "tool": "leanfinder",
+    "query": "An exact functor between triangulated categories is fully faithful on the finite triangulated closure of generators if the cone of the adjunction unit on each generator is orthogonal to all shifted generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor",
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Functor.distTriang_iff",
+     "CategoryTheory.Functor.map_distinguished_exact",
+     "CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism",
+     "CategoryTheory.Functor.IsHomological.exact"
+    ],
+    "digest": "6c3c50218c91394c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(generat.*(fullyFaithful|fully_faithful))|((fullyFaithful|fully_faithful).*generat)|map_bijective|essImageDistTriang",
+   "results": {
+    "t": "2026-10-22T07:13:46Z",
+    "tool": "grep",
+    "query": "(generat.*(fullyFaithful|fully_faithful))|((fullyFaithful|fully_faithful).*generat)|map_bijective|essImageDistTriang",
+    "sub": "CategoryTheory/Triangulated",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean"
+    ],
+    "digest": "118c80053efbab4c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjoint functor is fully faithful on a triangulated subcategory generated by objects whose unit cones are right orthogonal to the generators",
+   "results": {
+    "t": "2026-10-22T07:13:46Z",
+    "tool": "leansearch",
+    "query": "An exact adjoint functor is fully faithful on a triangulated subcategory generated by objects whose unit cones are right orthogonal to the generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId",
+     "CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit",
+     "CategoryTheory.ExactFunctor.of",
+     "CategoryTheory.Functor.fullyFaithfulOfCoreflective",
+     "CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful",
+     "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit"
+    ],
+    "digest": "cacd31300ebc509e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.FullyFaithful",
+   "results": {
+    "t": "2026-10-22T07:13:46Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.FullyFaithful",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijective maps on Hom groups between generators extend to their triangulated envelope by the five lemma in each variable",
+   "results": {
+    "t": "2026-10-22T07:13:57Z",
+    "tool": "leanfinder",
+    "query": "Bijective maps on Hom groups between generators extend to their triangulated envelope by the five lemma in each variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+     "CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism",
+     "CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two",
+     "CategoryTheory.Triangulated.TStructure.triangle_map_ext",
+     "CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism",
+     "CategoryTheory.Triangulated.TStructure.triangle_map_exists"
+    ],
+    "digest": "cad5a082345c3028"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "map_distinguished_iff|isTriangulated_inverse|isTriangulated_leftAdjoint|rightOrthogonal.map_bijective_of_isTriangulated",
+   "results": {
+    "t": "2026-10-22T07:15:04Z",
+    "tool": "grep",
+    "query": "map_distinguished_iff|isTriangulated_inverse|isTriangulated_leftAdjoint|rightOrthogonal.map_bijective_of_isTriangulated",
+    "sub": "CategoryTheory/Triangulated",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+     "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+     "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean"
+    ],
+    "digest": "b8a27f349d2c78a0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates; orthogonal map bijectivity requires a localization not assumed here; exact-equivalence/adjunction results cover only subsidiary clauses, not the generator criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-algcl-topology-comparison",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 5, 6, 9.",
+   "via": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-adjunction-generator-defect-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No exact project attachment or one-line Mathlib match. Reused existing Hom-exactness, five-lemma, triangle-isomorphism and equivalence leaves. Wrote the adjunction normalization, both finite inductions, cone comparison, triangulated essential image and exact quasi-inverse explicitly; checked empty and zero generators. No new nodes.",
+  "blueprint": "Paragraph (3) of the main-20261015 direct-image stability proof: the agent-extracted topology-comparison obligation (old steps 5, 6, 9), specifically both generator inductions, cone lifting and exact inverse. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports; retained its existing provenance chain."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-b4ab040e9",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-b4ab040e9 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full; there are no new nodes. The statement is unchanged from side-live (only proof, proof_deps, proof_origin, searches, split_report and status changed). The item is still unsplit live, so it is not superseded, and there is no repair note. Steps: (1) naturality in the first variable makes the adjunct of F(f) equal to η_{Q[n]}∘f, with the unit's shift compatibility taken from the hypothesis. (2) The rotated unit-cone row Hom(G,Q_H[n−1])→Hom(G,H[n])→Hom(G,UFH[n])→Hom(G,Q_H[n]) has vanishing outer terms, so the middle map and hence b_{G,H,n} are bijective. (3) and (4) are two five-lemma inductions. For the covariant row C[n−1],A[n],B[n],C[n],A[n+1] I checked interior exactness through rotation and inverse rotation. For the contravariant row A[1],C,B,A,C[−1] I checked the hom-out clauses (i) and (ii). Shift closure is reindexed over all n, and Step 3 feeds the generators into R_Q. (5) The cone of the lift lies in T0 by extension closure, and TR3 plus lem-sf-triangle-morphism-iso (Stacks 014A, derived.tex:414) gives an isomorphism of triangles. (6) Extension closure of the image follows from the inverse rotation C[−1]→A→B. (7) The trf equivalence leaf's hypotheses are exactly Step 4 and I=U0. (8) The exact quasi-inverse comes from a lifted shift comparison and a TR1/TR3 lift argument, which is valid. Edge cases checked: empty or zero generators, identity functors, and F=0 with a nonzero G (hypothesis fails). No idempotent completeness, sums or retracts are used, and there is no SGA. Duplicate search: lem-sfb-fully-faithful-thick-image is different (it assumes F fully faithful and uses thick closures), and lem-trf-exact-equivalence-inverse covers only the Step 8 sub-fact. Batch-5 flag: lem-trf-fully-faithful-ess-surj-equivalence is a status-mathlib leaf for general category theory (fully faithful and essentially surjective ⇒ equivalence). It has no proof_deps and belongs to neither the trace-formula nor the Poincaré-duality assumption, so it is accepted. Advisory: the report mentions a citations.json that is not in the commit. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionGeneratorDefectCriterion",
+  "declaration": "CategoryTheory.Adjunction.generator_defect_criterion",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionGeneratorDefectCriterion.lean",
+  "statement": "theorem Adjunction.generator_defect_criterion {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [HasZeroObject C] [HasZeroObject D] [Preadditive C] [Preadditive D] [HasShift C ℤ] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated C] [Pretriangulated D] [CategoryTheory.IsTriangulated C] [CategoryTheory.IsTriangulated D] (F : C ⥤ D) (U : D ⥤ C) [F.CommShift ℤ] [U.CommShift ℤ] [F.IsTriangulated] [U.IsTriangulated] (adj : F ⊣ U) [adj.CommShift ℤ] (G T₀ : ObjectProperty C) [T₀.IsTriangulated] [T₀.IsClosedUnderIsomorphisms] (hG : G ≤ T₀) (hT₀ : ∀ (S : ObjectProperty C) [S.IsTriangulated] [S.IsClosedUnderIsomorphisms], G ≤ S → T₀ ≤ S) (hdefect : ∀ (G₁ G₂ : C), G G₁ → G G₂ → ∀ (R : C) (g : U.obj (F.obj G₂) ⟶ R) (h : R ⟶ G₂⟦(1 : ℤ)⟧), Triangle.mk (adj.unit.app G₂) g h ∈ distTriang C → ∀ n : ℤ, Subsingleton (G₁ ⟶ R⟦n⟧)) : (∀ (P Q : C), T₀ P → T₀ Q → ∀ n : ℤ, Function.Bijective (fun f : P ⟶ Q⟦n⟧ ↦ F.map f ≫ (F.commShiftIso n).hom.app Q)) ∧ (∀ (P Q : C) (n : ℤ) (f : P ⟶ Q⟦n⟧), adj.homEquiv P (F.obj (Q⟦n⟧)) ((F.map f ≫ (F.commShiftIso n).hom.app Q) ≫ (F.commShiftIso n).inv.app Q) = f ≫ adj.unit.app (Q⟦n⟧)) ∧ Nonempty (T₀.ι ⋙ F).FullyFaithful ∧ (T₀.ι ⋙ F).essImage.IsTriangulated ∧ (∀ (P Q : C), T₀ P → T₀ Q → ∀ (A B Z : D) (eP : F.obj P ≅ A) (eQ : F.obj Q ≅ B) (a : A ⟶ B) (b : B ⟶ Z) (c : Z ⟶ A⟦(1 : ℤ)⟧), Triangle.mk a b c ∈ distTriang D → ∃ (f : P ⟶ Q) (R : C) (g : Q ⟶ R) (h : R ⟶ P⟦(1 : ℤ)⟧), T₀ R ∧ F.map f ≫ eQ.hom = eP.hom ≫ a ∧ Triangle.mk f g h ∈ distTriang C ∧ Nonempty (F.mapTriangle.obj (Triangle.mk f g h) ≅ Triangle.mk a b c)) ∧ (∀ (U₀ : ObjectProperty D) [U₀.IsTriangulated] [U₀.IsClosedUnderIsomorphisms], (T₀.ι ⋙ F).essImage = U₀ → ∃ (E : T₀.FullSubcategory ≌ U₀.FullSubcategory) (_ : E.functor.CommShift ℤ) (_ : E.inverse.CommShift ℤ), E.CommShift ℤ ∧ E.functor.IsTriangulated ∧ E.inverse.IsTriangulated ∧ ∃ e : E.functor ⋙ U₀.ι ≅ T₀.ι ⋙ F, NatTrans.CommShift e.hom ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The finite closure is specified by its least-replete-triangulated-subcategory universal property (hG, hT₀ and the two T₀ instances). These finitary operations give exactly the stated finite constructions; no sums or retracts are assumed. All conclusions, including replete-image cone lifting and a shift-compatible exact quasi-inverse, are in the one theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56ef23352",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node: hypotheses (triangulated C/D, exact F/U, adj.CommShift = unit shift compatibility), T₀ as least replete triangulated class containing G (= finite closure, no retracts or sums), hdefect over all distinguished unit-cone triangles, and six conclusions (bijectivity, unit formula, full faithfulness, triangulated essImage, cone lifting with arbitrary isos and R in T₀, shift-pinned equivalence with exact inverse) all match the node and are true. Empty or zero generators and n=0 or negative n covered. No extra assumptions; universes independent. Single sorry theorem, docstrings with source, blueprint tag and 8 proof steps; statement verbatim; imports per rule 7; lines at most 100 chars; node changes only lean vs side-live; no name collision or parallel delivery. Advisory: second reading by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261023T124444-L-1403649",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

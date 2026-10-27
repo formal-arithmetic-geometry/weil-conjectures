@@ -100,6 +100,75 @@ noncomputable def exactEtaleSumExchangeSquare
     (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :=
   TwoSquare.mk _ _ _ _ (exactEtaleSumExchange A f g).hom
 
+section HomotopyNormalization
+attribute [local instance 2000] Abelian.toPreadditive
+
+/-- The natural transformation underlying the homotopy comparison, assembled from
+exact-functor factors and the right-derived unit. No new objects are chosen.
+Source: Stacks Project Tag 015F (blueprint: def-asd-compact-support-graph-comparison). -/
+noncomputable def normalizationHomotopyTransformation
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions D]
+    (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E)
+    [S.Additive] [O.Additive] [R.Additive]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    (a : S ⟶ O ⋙ R) :
+    DerivedCategory.Qh ⋙ S.mapDerivedCategory ⟶
+      DerivedCategory.Qh ⋙ (O.mapDerivedCategory ⋙ R.rightDerivedFunctor) :=
+  S.mapDerivedCategoryFactorsh.hom ≫
+    Functor.whiskerRight (a.mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh ≫
+    Functor.whiskerRight
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ R)) (.up ℤ)).inv
+      DerivedCategory.Qh ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (O.mapHomotopyCategory (.up ℤ)) R.rightDerivedFunctorUnit ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight O.mapDerivedCategoryFactorsh.inv R.rightDerivedFunctor ≫
+    (Functor.associator _ _ _).hom
+
+/-- The homotopy formula for an exact source and open factor followed by a right derived
+functor. This is the explicit five-factor composite, with no choices of new objects.
+Source: Stacks Project Tag 015F (blueprint: def-asd-compact-support-graph-comparison). -/
+noncomputable def normalizationHomotopyComponent
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions D]
+    (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E)
+    [S.Additive] [O.Additive] [R.Additive]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    (a : S ⟶ O ⋙ R) (K : HomotopyCategory C (.up ℤ)) :
+    S.mapDerivedCategory.obj (DerivedCategory.Qh.obj K) ⟶
+      R.rightDerivedFunctor.obj (O.mapDerivedCategory.obj (DerivedCategory.Qh.obj K)) :=
+  S.mapDerivedCategoryFactorsh.hom.app K ≫
+    DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).app K) ≫
+    DerivedCategory.Qh.map
+      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ R)) (.up ℤ)).inv.app K) ≫
+    R.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K) ≫
+    R.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.inv.app K)
+
+/-- The generic natural transformation has the specified five-factor component.
+Source: Stacks Project Tag 015F (blueprint: def-asd-compact-support-graph-comparison). -/
+theorem normalizationHomotopyTransformation_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions D]
+    (S : C ⥤ E) (O : C ⥤ D) (R : D ⥤ E)
+    [S.Additive] [O.Additive] [R.Additive]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    [PreservesFiniteLimits O] [PreservesFiniteColimits O]
+    (a : S ⟶ O ⋙ R) (K : HomotopyCategory C (.up ℤ)) :
+    (normalizationHomotopyTransformation S O R a).app K =
+      normalizationHomotopyComponent S O R a K := by
+  simp only [normalizationHomotopyTransformation, normalizationHomotopyComponent,
+    NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp, Category.comp_id]
+
 /-- A termwise sheaf comparison followed by the total-right-derived comparison.
 This is a map on homotopy representatives, with no boundedness condition.
 Source: SGA 4 XVII 6.2.11
@@ -116,15 +185,10 @@ noncomputable def compactSupportComparisonOnHomotopy
         (DerivedCategory.Qh.obj K) ⟶
       (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
         (DerivedCategory.Qh.obj K) :=
-  (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategoryFactorsh.hom.app K ≫
-    DerivedCategory.Qh.map ((a.mapHomotopyCategory (ComplexShape.up ℤ)).app K) ≫
-    DerivedCategory.Qh.map
-      ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (ComplexShape.up ℤ)).inv.app K) ≫
-    (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorUnit.app
-      (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapHomotopyCategory
-        (ComplexShape.up ℤ)).obj K) ≫
-    (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map
-      ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryFactorsh.inv.app K)
+  normalizationHomotopyComponent
+    (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance)
+    (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)
+    (lowerStar (ModuleCat.{u + 1} A) c.g) a K
 
 /-- Descend a natural transformation through a localization without choosing any data.
 Source: Stacks Project Tag 04VG
@@ -166,21 +230,10 @@ noncomputable def compactSupportDerivedComparison
       (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (ComplexShape.up ℤ))
     (F := (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory)
     (G := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
-    ((etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategoryFactorsh.hom ≫
-      Functor.whiskerRight (a.mapHomotopyCategory (ComplexShape.up ℤ)) DerivedCategory.Qh ≫
-      Functor.whiskerRight
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (ComplexShape.up ℤ)).inv
-        DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapHomotopyCategory
-          (ComplexShape.up ℤ))
-        (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorUnit ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight
-        (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryFactorsh.inv
-        (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor ≫
-      (Functor.associator _ _ _).hom)
+    (normalizationHomotopyTransformation
+      (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance)
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)
+      (lowerStar (ModuleCat.{u + 1} A) c.g) a)
 
 /-- The derived comparison has the prescribed value on every homotopy representative.
 Source: Stacks Project Tag 04VG
@@ -196,9 +249,9 @@ theorem compactSupportDerivedComparison_app
     (compactSupportDerivedComparison A f c a).app (DerivedCategory.Qh.obj K) =
       compactSupportComparisonOnHomotopy A f c a K := by
   rw [compactSupportDerivedComparison, normalizationLocalizationDesc_app]
-  simp only [NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.id_comp, Category.comp_id, compactSupportComparisonOnHomotopy]
+  exact normalizationHomotopyTransformation_app _ _ _ _ _
+
+end HomotopyNormalization
 
 /-- Regard a proper refinement as a compactification of the coarser open immersion.
 Source: SGA 4 XVII 6.2.11
@@ -212,6 +265,9 @@ def refinementOpenCompactification
   comm := r.i_hom.symm
   isProper := inferInstance
   isOpenImmersion := inferInstance
+
+section IdentityNormalization
+attribute [local instance 2000] Abelian.toPreadditive
 
 /-- Identity normalization: remove the exact derived direct image of the identity.
 Source: SGA 4 XVII 6.2.11
@@ -228,6 +284,8 @@ noncomputable def identityEtaleCompactSupportComparison
         Functor.mapDerivedCategoryIdIso _) ≪≫
     Functor.rightUnitor _
 
+
+end IdentityNormalization
 
 /-- Core comparison data: the geometric and degreewise normalization maps.
 Source: SGA 4 XVII 5.2.2 and 6.2.11 (blueprint: def-asd-compact-support-graph-comparison). -/

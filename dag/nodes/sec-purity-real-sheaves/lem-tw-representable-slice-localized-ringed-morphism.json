@@ -1,0 +1,309 @@
+{
+ "id": "lem-tw-representable-slice-localized-ringed-morphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Returned ordinary-model proof step 5 (representable chart comparison): identification of the element-site slice morphism at a representable with the localized site morphism, used in step 3 of lem-tw-ordinary-immersion-chart-comparison.",
+   "via": [
+    "lem-tw-ordinary-immersion-chart-comparison",
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Representable slice morphism equals the localized ringed-site morphism",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to the sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], each having finite limits and subcanonical: every $h_W=\\operatorname{Hom}(-,W)$ is a sheaf of sets. Let $u:\\mathcal C\\to\\mathcal D$ preserve finite limits and coverings, with geometric inverse image $L\\dashv u^s$, $(u^sF)(W)=F(uW)$ [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Let $R$ on $\\mathcal C$ and $S$ on $\\mathcal D$ be sheaves of commutative rings and $c:LR\\to S$ a ring map, so that $f=(L\\dashv u^s,c):(\\operatorname{Sh}(\\mathcal D),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$ is a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Fix $V\\in\\mathcal C$, and let $c_V:Lh_V\\xrightarrow{\\sim}h_{uV}$ be the isomorphism adjunct to $\\beta_V:h_V\\to u^sh_{uV}$, $\\beta_V(W)(a)=u(a)$ [lem-pur-site-representable-algebraic-pullback].\n\nTwo ringed morphisms are attached to $V$. (a) The slice morphism $f_{h_V}:(\\operatorname{Sh}(\\mathcal D)/Lh_V,S_{Lh_V})\\to(\\operatorname{Sh}(\\mathcal C)/h_V,R_{h_V})$, with the slices and restricted rings of [lem-weil-pbc-ringed-sheaf-slice-adjunction], whose inverse image sends $(H\\xrightarrow{\\varphi}h_V)$ to $(LH\\xrightarrow{L\\varphi}Lh_V)$ and whose structural ring map is the restriction of $c$ to the slice over $Lh_V$. (b) The localized ringed-site morphism $f_V:(\\operatorname{Sh}(\\mathcal D/uV),S|_{uV})\\to(\\operatorname{Sh}(\\mathcal C/V),R|_V)$ defined by $u_V:(W\\to V)\\mapsto(uW\\to uV)$, with structural map $(f_V)^{-1}(R|_V)\\cong(LR)|_{uV}\\xrightarrow{c|_{uV}}S|_{uV}$ and restriction comparison $(f_V)^{-1}j_V^{-1}\\cong j_{uV}^{-1}L$ [lem-weil-pbc-localize-ringed-site-morphism, def-pur-localized-ringed-site].\n\nIdentify $\\operatorname{Sh}(\\mathcal C/V)\\simeq\\operatorname{Sh}(\\mathcal C)/h_V$ and $\\operatorname{Sh}(\\mathcal D/uV)\\simeq\\operatorname{Sh}(\\mathcal D)/h_{uV}$ by the equivalences of [lem-weil-pbc-localized-sheaves-over-representable] (the representables are already sheaves), and $\\operatorname{Sh}(\\mathcal D)/Lh_V\\simeq\\operatorname{Sh}(\\mathcal D)/h_{uV}$ by composing structure maps with $c_V$. Under these identifications there is a canonical isomorphism\n$$(f_V)^{-1}(H\\xrightarrow{\\varphi}h_V)\\cong(LH\\xrightarrow{c_V\\circ L\\varphi}h_{uV}),$$\nnatural in $(H,\\varphi)$; on the restriction $(G\\times h_V\\to h_V)$ of a sheaf $G$ on $\\mathcal C$ it is the comparison $(f_V)^{-1}j_V^{-1}G\\cong j_{uV}^{-1}LG$ followed by the finite-limit comparison $L(G\\times h_V)\\cong LG\\times Lh_V$ and $c_V$. Under it the restricted rings $R|_V,S|_{uV}$ correspond to $R_{h_V},S_{Lh_V}$, and the structural ring map of $f_V$ corresponds to that of $f_{h_V}$. Hence $f_V$ and $f_{h_V}$ are identified as morphisms of ringed topoi, not only of topoi: their module pullbacks correspond, compatibly with the two restriction comparisons with $f^*$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-site-representable-algebraic-pullback",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-localized-sheaves-over-representable"
+ ],
+ "proof": [
+  {
+   "text": "The chart is a category equivalence: full faithfulness is the commuting-triangle equation and essential surjectivity is Yoneda. Its topology agrees with the element topology via the projection. Use element_site_descent for that topology identity. Mathlib sheafCongr and pushforwardPushforwardEquivalence give the set and module chart equivalences; the module coefficient map is identity. The source-library uliftYonedaCompHom identifies the global unit on a represented arrow with its image under U. This gives the natural chart square.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  },
+  {
+   "text": "Transport continuity and representable flatness through the chart square. Mathlib Over.post preserves finite limits, and a representably flat continuous functor has left-exact sheaf pullback. Construct the ringed topos morphism using the continuous ringed-topos construction at the unit-induced element functor and the componentwise coefficient map. Its fixed data fields determine it uniquely by proof irrelevance.",
+   "uses": [
+    "lem-weil-pbc-over-post-continuous-general",
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  },
+  {
+   "text": "Use Mathlib Over.postAdjunctionLeft for the adjunction on sheaf slices. Identify its right adjoint on each element fibre by projecting the pullback onto the pushed-forward sheaf; sectionsPullbackEquiv supplies the inverse. Conjugate through the recorded fibre equivalences and take the inverse mate. Equivalent vertical functors make this mate invertible. The mate unit equation and the first projection of the slice unit give the displayed global-unit normalization; injectivity of the adjunction and fibre isomorphisms proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-slice-set-pullback-isIso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  },
+  {
+   "text": "Finite-product preservation gives the unique product comparison in Over. The naturality of fibre_iso, the first product projection, and naturality of the global unit identify the fibre comparison on product restrictions with the fixed set restriction inverse mate. Transpose the coefficient map and apply the same unit equation to identify the structural map with restriction of its global transpose.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  },
+  {
+   "text": "The chart direct-image squares are sectionwise identity. For modules use pushforwardComp, pushforwardNatIso along the chart square, and pushforwardCongr for the coefficient identity; the underlying map is restriction along an element-site arrow whose projection is identity. The HEq section normalization determines each chart isomorphism uniquely.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  },
+  {
+   "text": "Paste the direct-image restriction square with the chart square. Their composite is the original localized direct-image square on every section. The Mathlib mateEquiv_vcomp identity identifies the inverse mate with the composite of the two fixed inverse mates, yielding the set and module equations. The chart equivalences make their inverse mates invertible; cancellation with sliceSetPullbackMap_isIso and sliceModulePullbackMap_isIso and reflection through the target chart gives invertibility of the restriction maps. Finally the localization-adjunction mate followed by its inverse cancels, so the named module restriction mate equals the fixed inverse mate.",
+   "uses": [
+    "lem-weil-pbc-slice-set-pullback-isIso",
+    "lem-weil-pbc-slice-module-pullback-isIso",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism: the description (f')^{-1}(H -> h_V) = (f^{-1}H -> h_U) and its proof computing j_{U!}(f')^{-1}H = f^{-1}j_{V!}H; Tag 04D3, lemma-pullback-representable-sheaf; ring maps: sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites, compared with Tag 04IF, lemma-localize-morphism-ringed-topoi."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-over-post-continuous-general",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-slice-module-pullback-isIso",
+  "lem-weil-pbc-slice-set-pullback-isIso"
+ ],
+ "proof_origin": "Worker S3: direct chart construction, Mathlib slice adjunctions and mates; sectionwise normalized chart comparisons, generic mate pasting, and reflection of isomorphisms through the chart equivalence.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of localized morphism of sites equals slice of inverse image over representable sheaf",
+   "results": "8 hits. CategoryTheory.Presheaf.localPreimage, CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber, CategoryTheory.Presheaf.app_localPreimage, CategoryTheory.Presieve.FamilyOfElements.localPreimage, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.Functor.IsCoverDense.isoOver_inv_app, CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquivalence|overMap|overPullback|sheafPullback.*[Oo]ver",
+   "results": "18 hits. Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Over.lean The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of localized morphism of sites equals slice of inverse image over representable sheaf",
+   "results": "8 hits. CategoryTheory.Presheaf.localPreimage, CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.instIsDenseSubsiteOverLeftDiscretePUnitOverInverseIteratedSliceEquiv, CategoryTheory.Localization.SmallHom.mkInv The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.post, Functor.sheafPullback",
+   "results": "0 hits. . loogle: unknown identifier 'Functor.sheafPullback'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.post",
+   "results": "12 hits. CategoryTheory.Over.post, CategoryTheory.Over.instFaithfulObjPost, CategoryTheory.Over.instIsEquivalenceObjPost, CategoryTheory.Over.isRightAdjoint_post, CategoryTheory.Functor.FullyFaithful.over, CategoryTheory.Limits.Cone.overPost, CategoryTheory.Over.instEssSurjObjPostOfFull, CategoryTheory.Over.instFullObjPostOfFaithful The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism induced by a continuous functor of sites localizes over a representable; the localized inverse image sends a sheaf H over h V to L H over h u V",
+   "results": "8 hits. CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.RanIsSheafOfIsCocontinuous.fac The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def post |def sheafAdjunctionContinuous|def sheafPullback|def sheafEquiv",
+   "results": "12 hits. Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Basic.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean The over-site declarations concern restriction or changes of a base object, and the general sheaf adjunction declarations do not identify the representable slice with the localized site or its ringed map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-immersion-chart-comparison",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-representable-slice-localized-ringed-morphism",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit slice right adjoint and unit-normalized comparison replace the empty proof. Existing nodes cover all non-elementary inputs; no new nodes. Actual logged searches replace inherited unavailable/unrun search records. Ring and module compatibility is checked after the product normalization.",
+  "blueprint": "lem-tw-dual-negation proof, first sentence 'the dual representation': representable-chart comparison required by its ordinary pullback realization; the six steps discharge the representable slice/localized ringed morphism identification in the inherited from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-representable-algebraic-pullback",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-slice-set-pullback-isIso",
+    "why": "General site/slice or adjunction tool used to identify the representable chart with the localized ringed-site morphism; the linear-algebra unit has no site comparison theorem. This supplies its existing chart realization without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-slice-set-pullback-isIso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-3dd7ef72b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-3dd7ef72b (reviewer sub-agent of L); spot-checked: Read in full: the item, all 13 cited node statements, and Stacks sites.tex 03CF/04D3/00Y1/04IU and sites-modules.tex 04J7 (with the referenced 04J0/04IF). The delivery is one commit with 0 new nodes. Against the Q27-run snapshot, where the item is unsplit with an empty proof, statement, stmt_deps and blueprint are unchanged. proof_deps equals the union of uses, all three search kinds are present and nothing cites SGA. Hypotheses: u preserves finite limits and coverings and C has finite limits, so u is continuous (00WV(b)); L is left exact, so u defines a morphism of sites, as lem-weil-pbc-localize-ringed-site-morphism requires; subcanonicity gives h^#=h with eta=id. Step 2: I checked P(q)t♭=P(c_V)P(Lφ)η_H=P(c_V)η_Aφ=β_Vφ, so T=A×_{PB}PK is right adjoint to F. Step 3: the fibre of T at (W,a) is {k∈K(uW): q(k)=u(a)}, which is (f_V)_*E_{uV}^{-1}(K,q) with the same restrictions; uniqueness of left adjoints with units (conjugate-iso Mathlib leaf) gives the displayed formula. This replaces Stacks' j_!/u_p computation by the right-adjoint identification and fills the 'details omitted' of 04IU/04J7. Step 4: the slice unit is g↦(η_G g, u(a)), so the comparison is the specified mate of lem-weil-pbc-slice-set-pullback-isIso. Steps 5-6: the restricted rings and structural maps agree fibrewise (c×1 vs j^{-1}c); the module pullbacks agree as left adjoints of a common module direct image, and the restriction compatibility holds via mates. Small cases checked: u=id, V terminal, non-faithful u, empty sheaf, zero ring. Duplicate search: unit-normalized-slice-inverse-image, sfb-left-exact-left-adjoint-slices, pbc-slice-site-localization, stage3-slice-sheaf-inverse-image-equivalence, sbc-ringed-sheaf-slice-ordinary-square (element site of f^{-1}A, not D/uV), trf-topos-localization-site-presentation and pur-ringed-site-pullback-localization-universes; none states the item. The citer lem-tw-ordinary-immersion-chart-comparison step 3 uses exactly this statement. The 7 declared tool uses are generic site/adjunction nodes of sk-thm-properbasechange and sk-prop-an, used as black boxes outside a linear-algebra unit: accepted. Maintainer note: localize-ringed-site-morphism leaves its restriction comparison 'canonical'; step 4 reads it as the mate of the identity direct-image comparison, and stage 2 should bind it to the same declaration as slice-set-pullback-isIso. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RepresentableSliceLocalizedRingedMorphism",
+  "declaration": "CategoryTheory.representable_slice_localized_ringed_morphism",
+  "declarations": [
+   "CategoryTheory.representableRingedSliceChart",
+   "CategoryTheory.representableRingedSliceImageIso",
+   "CategoryTheory.representableRingedSliceChart_properties",
+   "CategoryTheory.representableRingedSliceChartContinuous",
+   "CategoryTheory.representableSlicePostContinuous",
+   "CategoryTheory.representableRingedSliceCoefficientMap",
+   "CategoryTheory.representableRingedSliceRestrictionIso",
+   "CategoryTheory.representableRingedSliceModuleRestrictionIso",
+   "CategoryTheory.representableRingedSliceSets",
+   "CategoryTheory.representableRingedSliceModules",
+   "CategoryTheory.representableSliceElementFunctor",
+   "CategoryTheory.representableSliceElementFunctor_continuous",
+   "CategoryTheory.representableSliceElementFunctorContinuous",
+   "CategoryTheory.representableSliceElementFunctor_leftExact",
+   "CategoryTheory.representableSliceCommRing",
+   "CategoryTheory.representableSliceElementCoefficientMap",
+   "CategoryTheory.representableSliceInverse",
+   "CategoryTheory.representableSliceRingMap",
+   "CategoryTheory.representableSliceModulePullback",
+   "CategoryTheory.representableSliceSetPushforwardIso",
+   "CategoryTheory.representableSliceSetPullbackMap",
+   "CategoryTheory.representableSliceModulePushforwardIso",
+   "CategoryTheory.representableSliceModulePullbackMap",
+   "CategoryTheory.representableSliceUnderlyingCoefficientMap",
+   "CategoryTheory.representableSliceStructuralMap",
+   "CategoryTheory.representableSliceRingedMorphism_unique",
+   "CategoryTheory.representableSliceRingedMorphism",
+   "CategoryTheory.representableSliceModuleChartPushforward_unique",
+   "CategoryTheory.representableSliceModuleChartPushforwardIso",
+   "CategoryTheory.representableSliceModuleChartPullbackMap",
+   "CategoryTheory.representableSliceSetChartPushforward_unique",
+   "CategoryTheory.representableSliceSetChartPushforwardIso",
+   "CategoryTheory.representableSliceSetChartPullbackMap",
+   "CategoryTheory.representableSliceFibreComparison_unique",
+   "CategoryTheory.representableSliceFibreComparison",
+   "CategoryTheory.representableSliceProduct",
+   "CategoryTheory.representableSliceProductFibreIso",
+   "CategoryTheory.representableSliceProductComparison_unique",
+   "CategoryTheory.representableSliceProductComparison",
+   "CategoryTheory.representableSliceRestrictionFibreIso",
+   "CategoryTheory.representableSliceLocalizationAdjunction",
+   "CategoryTheory.representableSliceModuleLocalizationSquare",
+   "CategoryTheory.representableSliceModuleRestrictionMate",
+   "CategoryTheory.representable_slice_localized_ringed_morphism",
+   "CategoryTheory.representableSliceModuleAdjunction",
+   "CategoryTheory.representableSliceGlobalModuleAdjunction",
+   "CategoryTheory.representableSliceLocalizedModuleAdjunction",
+   "CategoryTheory.representableSlice_composeRing",
+   "CategoryTheory.representableSlice_composeCommSets",
+   "CategoryTheory.representableSlice_composeRingSets",
+   "CategoryTheory.representableSlice_composeAddSets",
+   "CategoryTheory.representableSlice_setRightAdjoint",
+   "CategoryTheory.representableSlice_moduleRightAdjoint"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/RepresentableSliceLocalizedRingedMorphism.lean",
+  "statement": "theorem representable_slice_localized_ringed_morphism [PreservesFiniteLimits (U.sheafPullback (Type u) J K)] (sourceSlices : RingedSheafSliceAdjunctionData ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (J.uliftYoneda.{u}.obj V)) (targetSlices : RingedSheafSliceAdjunctionData ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) ((U.sheafPullback (Type u) J K).obj (J.uliftYoneda.{u}.obj V))) : (representableRingedSliceModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V (Iso.refl (J.uliftYoneda.{u}.obj V))).IsEquivalence ∧ (representableRingedSliceModules ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) (U.obj V) (representableRingedSliceImageIso (J := J) (K := K) U V)).IsEquivalence ∧ IsIso (representableSliceSetPullbackMap (J := J) (K := K) U V) ∧ IsIso (representableSliceSetChartPullbackMap (J := J) (K := K) U V) ∧ IsIso (representableSliceModuleRestrictionMate U a V sourceSlices targetSlices) ∧ IsIso (representableSliceModuleChartPullbackMap U a V) ∧ (∀ G : Sheaf J (Type u), (representableSliceInverse (J := J) (K := K) U V).map (representableSliceRestrictionFibreIso sourceSlices G).hom ≫ (representableSliceSetPullbackMap (J := J) (K := K) U V).app G = (representableSliceFibreComparison U V sourceSlices targetSlices).hom.app (representableSliceProduct (J.uliftYoneda.{u}.obj V) G) ≫ targetSlices.fibreEquivalence.inverse.map (representableSliceProductComparison (J := J) (K := K) U V G).hom ≫ (representableSliceRestrictionFibreIso targetSlices ((U.sheafPullback (Type u) J K).obj G)).hom) ∧ (representableSliceStructuralMap U a V = (representableSliceSetPullbackMap (J := J) (K := K) U V).app ((sheafCompose J (forget CommRingCat)).obj R) ≫ (elementSheafPullback ((U.sheafPullback (Type u) J K).obj (J.uliftYoneda.{u}.obj V))).map (((U.sheafAdjunctionContinuous (Type u) J K).homEquiv ((sheafCompose J (forget CommRingCat)).obj R) ((sheafCompose K (forget CommRingCat)).obj S)).symm (ObjectProperty.homMk (Functor.whiskerRight a.hom (forget CommRingCat))))) ∧ (∀ G : Sheaf J (Type u), (representableSliceSetChartPullbackMap (J := J) (K := K) U V).app ((elementSheafPullback (J.uliftYoneda.{u}.obj V)).obj G) ≫ (representableRingedSliceSets (U.obj V) (representableRingedSliceImageIso (J := J) (K := K) U V)).map ((representableSliceSetPullbackMap (J := J) (K := K) U V).app G) ≫ (representableRingedSliceRestrictionIso (U.obj V) (representableRingedSliceImageIso (J := J) (K := K) U V)).hom.app ((U.sheafPullback (Type u) J K).obj G) = ((Over.post (X := V) U).sheafPullback (Type u) _ _).map ((representableRingedSliceRestrictionIso V (Iso.refl (J.uliftYoneda.{u}.obj V))).hom.app G) ≫ (sliceSetPullbackMap (K := J) (J := K) U V).app G) ∧ (∀ M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), (representableSliceModuleChartPullbackMap U a V).app ((elementModulePullback ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (J.uliftYoneda.{u}.obj V)).obj M) ≫ (representableRingedSliceModules ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) (U.obj V) (representableRingedSliceImageIso (J := J) (K := K) U V)).map ((representableSliceModuleRestrictionMate U a V sourceSlices targetSlices).app M) ≫ (representableRingedSliceModuleRestrictionIso ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) (U.obj V) (representableRingedSliceImageIso (J := J) (K := K) U V)).hom.app ((SheafOfModules.pullback.{u} (F := U) (J := J) (K := K) (S := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (R := (sheafCompose K (forget₂ CommRingCat RingCat)).obj S) (SheafOfModules.ringedSiteModuleMap U a)).obj M) = (SheafOfModules.pullback.{u} (F := Over.post (X := V) U) (J := J.over V) (K := K.over (U.obj V)) (S := ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V) (R := ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).over (U.obj V)) (SheafOfModules.sliceModuleRingMap U (SheafOfModules.ringedSiteModuleMap U a) V)).map ((representableRingedSliceModuleRestrictionIso ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V (Iso.refl (J.uliftYoneda.{u}.obj V))).hom.app M) ≫ (SheafOfModules.sliceModulePullbackMap U (SheafOfModules.ringedSiteModuleMap U a) V).app M)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H3 repair: unit-induced element functor and coefficient map give concrete slice inverse/module images and structural transpose; unique ringed structure fixes all data fields, including adjunction and underlying module identification. Named fibre theta has a global-unit normalization. Set q-inverse, chart alpha, module lambda and mu-inverse are specified mates; beta is uniquely sectionwise identity. The finite-product normalization and final squares compare these fixed maps. Dependency pullback_eq makes the localization_modules mate explicit. No natural-language node statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976787c11",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Item correct; the three H3 points of the dea2 RETURN are resolved. (1) The set restriction map is the inverse mate of an explicit identity on sections, and the product clause uses theta, both fibre_iso and the Mathlib prodComparison. (2) The slice RingedToposMorphism is the unique structure with every data field pinned to the unit-induced element functor, the coefficient map a_W, the transposed structural map, the pushforward modules and the identity underlying iso. Theta is pinned by the global unit. (3) beta is the identity on sections via HEq, lambda is its mate, and mu^-1 equals the inverse mate of the identity-on-sections square (the localization-adjunction detour cancels). Fault fixed: the §1(B) dependency module RingedSheafSliceAdjunction (NF, stage-3 proved) added pullback_eq and replaced the published ringed_sheaf_slice_adjunction proof with sorry. fixes/RingedSheafSliceAdjunction.lean = live text + `pullback_eq : pullback = elementModulePullback R A := by rfl`; the proof body is byte-identical to live and the module has no sorry. No other live module builds the structure literal. nt_compile --json of the fixed dependency (7.7 s) and the unchanged item (34.8 s): the tool printed only timings, no errors or warnings. Advisories: the dependency record's lean.note still says the proof is postponed (the maintainer may correct it); sliceSetPullbackMap/sliceModulePullbackMap are owned by slice-*-pullback-isIso theorem nodes outside stmt_deps; the PreservesFiniteLimits L hypothesis is redundant; the slice arguments of mu are vacuous."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261024T191008-L-206118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

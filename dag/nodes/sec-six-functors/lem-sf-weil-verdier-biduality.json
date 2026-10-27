@@ -1,0 +1,211 @@
+{
+ "id": "lem-sf-weil-verdier-biduality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: evaluation and biduality descend, giving a natural isomorphism $K\\cong D_{X}D_{X}K$ (thm-coef-qbar-verdier)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Verdier biduality for Weil complexes",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $X$ put $\\bar X=X\\times_{k_0}k$ and let $g_{\\bar X}$ be geometric Frobenius [def-weil-frobenius-detailed]. On the small pro-etale site of $\\bar X$, let $R_{\\bar X}$ be the coefficient sheaf whose sections on a quasi-compact object $V$ are continuous functions $|V|\\to\\Omega$ with values in one finite intermediate extension of $\\mathbf Q_\\ell$; on general objects impose this condition locally [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal A_{\\bar X}=\\operatorname{Mod}(R_{\\bar X})$ for its module sheaves [def-weil-sheaf-of-modules-category] and $\\mathcal B_{\\bar X}$ for pairs $(F,\\theta:g_{\\bar X}^*F\\xrightarrow{\\sim}F)$ in $\\mathcal A_{\\bar X}$, with intertwining morphisms [def-weil-endofunctor-fixed-pair-category]. Derived categories mean localization of complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\mathrm{WC}(X)\\subset D(\\mathcal B_{\\bar X})$ be the full subcategory with bounded cohomology whose underlying cohomology sheaves admit a finite locally closed stratification with pro-etale locally finite free restrictions over $R_{\\bar X}$. This is the native category `AlgebraicGeometry.WeilComplex`, not the category of fixed pairs in $D(\\mathcal A_{\\bar X})$.\n\nLet $a_0:X\\to\\operatorname{Spec}k_0$ be the structure morphism and let $Ra_{0!}^{\\mathrm W}:\\mathrm{WC}(X)\\to\\mathrm{WC}(\\operatorname{Spec}k_0)$ be the native compact-support functor `AlgebraicGeometry.WeilComplex.derivedLowerShriek`, formed from equivariant open extension by zero and proper direct image along a compactification [def-compact-support-direct-image-detailed]. Assume that $Ra_{0!}^{\\mathrm W}$ has a right adjoint $Ra_0^{!,\\mathrm W}$ on $\\mathrm{WC}$, as in `WeilComplex.HasUpperShriek`. Put $\\omega_X=Ra_0^{!,\\mathrm W}\\Omega^{\\mathrm W}$, where $\\Omega^{\\mathrm W}$ is $R_s[0]$ with its canonical Frobenius pullback isomorphism at $s=\\operatorname{Spec}k$. For $K,L\\in D(\\mathcal B_{\\bar X})$ let $R\\mathcal Hom_{\\mathcal B_{\\bar X}}(K,L)$ be the native derived internal Hom `ProEtaleWeilSheaf.derivedHom`: choose a K-injective resolution $L\\to I$ in complexes over $\\mathcal B_{\\bar X}$ [def-pur-kinjective-complex] and take the product total complex $\\prod_p\\mathcal Hom_{R_{\\bar X}}(K^p,I^{p+n})$ of internal Hom sheaves of $R_{\\bar X}$-modules, each with the contragredient Weil structure $\\theta_I\\circ(-)\\circ\\theta_K^{-1}$ (through the canonical isomorphism $g^*\\mathcal Hom(A,B)\\cong\\mathcal Hom(g^*A,g^*B)$ for the automorphism $g=g_{\\bar X}$). Then:\n\n1. for every $K\\in\\mathrm{WC}(X)$ the object $R\\mathcal Hom_{\\mathcal B_{\\bar X}}(K,\\omega_X)$ lies in $\\mathrm{WC}(X)$, so that\n$$D_X=R\\mathcal Hom_{\\mathcal B_{\\bar X}}(-,\\omega_X):\\mathrm{WC}(X)^{\\mathrm{op}}\\to\\mathrm{WC}(X)$$\nis a functor (Lean `WeilComplex.verdierDual`, the lift through `objectProperty_derivedHom_dualizingComplex`);\n2. the identity functor of $\\mathrm{WC}(X)$ is naturally isomorphic to $D_X\\circ D_X^{\\mathrm{op}}$: there is a natural isomorphism $K\\xrightarrow{\\sim}D_XD_XK$. Clause 2 is precisely `AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual`. The category [def-weil-weil-sheaf-complex] supplies the blueprint's Frobenius-pair model; it is not used as a definition of this native derived category.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
+  "place": "thm-coef-qbar-verdier: evaluation and biduality descend, giving a natural isomorphism $K\\cong D_{X}D_{X}K$; Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual (module WeilConjectures.WeilSheaf.VerdierDual, lines 141-143, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-weil-sheaf-complex",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite-field datum for k0 and its algebraic closure. Obtain the normalized realization family, native exceptional-forgetting package and native section-closed comparison. Supply the actual upperShriek and its actual adjunction as the right-adjoint part of the native comparison datum. The already proved preservation theorem and the nativeModel isomorphism show that its internal Hom into the native dualizing object restricts to WeilComplex.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "def-sf-weil-dual-realization-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing bidual-evaluation realization theorem to that datum and closure proof. It gives a natural native delta and the exact equation j_K followed by U(delta_K) followed by b_K equals rho(commonBidual(M_K)). Apply the structural common-stage evaluation-invertibility lemma to M_K. The right side is invertible, and j_K and b_K are isomorphisms, hence U(delta_K) is invertible.",
+   "uses": [
+    "lem-sf-weil-bidual-evaluation-realization",
+    "lem-sf-structural-evaluation-bidual-invertible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forgetting on the native derived category reflects isomorphisms by native_closed_forgetful. Closure transport is direct image along an isomorphism and its right derivation is an equivalence; the exact section-module presentation is an equivalence as well. Their composite U therefore reflects isomorphisms. Thus every delta_K is invertible and asIso delta is a natural isomorphism. Cancel the fully faithful inclusion on the nativeModel isomorphism to identify the restricted closed Hom with the source verdierDual; whisker this comparison and its opposite to identify their double-dual functors. Compose with asIso delta.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-native-exceptional-forgetful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-weil-dual-realization-comparison-data",
+  "lem-sf-weil-bidual-evaluation-realization",
+  "lem-sf-structural-evaluation-bidual-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native assembly from the existing evaluation-realization theorem; coefficient invertibility is separated from native conservativity and natural-isomorphism assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality dualizing complex exceptional inverse image right adjoint of compactly supported direct image etale",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsRightAdjointPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), Equivalence.isRightAdjoint_inverse, Functor.IsLeftAdjoint.op: generic adjunctions only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" and \"dualizingComplex\" (name substrings)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'verdier|dualizingComplex|dualizing complex ; upperShriek|lowerShriek|LowerShriek|exceptional inverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only CategoryTheory/Triangulated/* (Verdier's triangulated categories, not Verdier duality); no exceptional functors",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier biduality for bounded constructible complexes of pro etale Weil sheaves",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, Condensed.lanSheafProfinite, LightCondAb.ofSheafLightProfinite, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.ofSheafForgetProfinite; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|WeilComplex",
+   "results": "0 hits: ; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "double derived internal Hom into a dualizing complex is naturally the identity",
+   "results": "8 hits: Lat.dualEquiv_inverse, SupHom.dual_id, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, Lat.dualEquiv, DistLat.dualEquiv_functor, LinearMap.dualMap_id, CompleteLatticeHom.symm_dual_id, DomAddAct.toEquiv_mkHomeomorph; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      139,
+      143
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "statement": "theorem nonempty_iso_verdierDual_rightOp_comp_verdierDual :\n    Nonempty (𝟭 (WeilComplex k₀ l X) ≅ (verdierDual k₀ l X).rightOp ⋙ verdierDual k₀ l X) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-verdier-biduality",
+  "worker": "stage1",
+  "summary": "Q64 repair of the human re-split return: statement unchanged. Returned steps 1-3 are the new dual-realization comparison obligation; steps 4-5 are the new evaluation-transpose realization obligation. Both are statement-only and comparably sized. The parent proves constructible membership from cohomology and retains conservative reflection and the explicit naturality argument for inverses. The report preserves all seven old arguments verbatim and allocates them to these obligations.",
+  "blueprint": "Native biduality required by lem-a1-local-boundary-duality; coefficient-duality, evaluation and biduality sentence of thm-coef-qbar-verdier and transposition sentence of cor-coef-verdier-weil-equivariance. Same route; no statement or unit change.",
+  "tool_uses": [
+   {
+    "node": "thm-coef-qbar-verdier",
+    "why": "Generic coefficient realization, equivariant derived comparison, or common-stage biduality used to realize the existing unit route on the actual native derived category; the unit has no other native comparison statement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-1d58d89b0",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-1d58d89b0 (reviewer sub-agent of L); spot-checked: Re-split is faithful. Base steps 1-3 become lem-sf-weil-dual-realization-comparison (h, c_K, evaluation normalization, D_Y M_K in C_Y, UH_XK bounded constructible). Base steps 4-5 become lem-sf-weil-bidual-evaluation-realization (native transpose δ^X and b_K∘Uδ^X_K∘j_K = ρ_Y δ^Y_{M_K}, assuming preservation, no invertibility). Steps 6-7 stay in the parent, which is 2100 characters with every step under 2000. The two nodes are of comparable size, neither restates clause 1 or 2, and nothing is circular. Statement byte-identical to live; not superseded (live and side-live still hold the Q10 7-step proof). I checked the directions of h, c_K, j_K and b_K, and tested empty X, the point, the Jordan block, shifts and rescaling of h. Parent step 4 uses conservativity, not faithfulness; route is thm-coef-qbar-verdier.proof.md (descent of evaluation and δ); no SGA. Two B3/C4 citation faults fixed in fixes/dag/nodes/sec-six-functors/. (1) dual-realization-comparison asserted h without citing lem-sf-weil-native-exceptional-forgetful; h is now that node's isomorphism for a_0, and the node is added to stmt_deps, so both new nodes share one h. (2) bidual-evaluation-realization applied ρ_Y to D_Y M_K and D_Y D_Y M_K and used δ^Y in C_Y, but def-weil-derived-pullback-tensor-hom explicitly excludes constructibility preservation; it now cites thm-coef-qbar-verdier (same unit, already in the item's proof_deps) for D_Y preserving C_Y. Batch-5: all three flagged citations reach sec-poincare-duality only through lem-pod-derived-automorphism-hom-evaluation, the generic compatibility of pullback along a scheme isomorphism with Hom and evaluation. It is neither a trace-formula or Poincaré-duality statement nor a step of their proofs, and both cited nodes were already proof_deps of the base item, so all three are accepted. Maintainer note: existing lem-sf-weil-verdier-dual-preserves-weil-complexes (same unit, reviewed) states clause 1 exactly. That duplication is inherited from the base, and node A is still needed as the comparison input for node B, so A is not dropped. The tool_uses entry for thm-coef-qbar-verdier is same-unit, redundant but harmless.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

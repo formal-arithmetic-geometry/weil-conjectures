@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-completion-unit-ordinary-adjunction",
+ "kind": "statement",
+ "title": "The ordinary completed-coefficient quotient tensor is adjoint to inverse limit",
+ "statement": "Fix a prime l, a finite extension E of Q_l and any scheme W, with independent site and coefficient universes. With the fixed scalarReductionExtension, coefficientOrdinaryQuotient and coefficientSequenceRestriction of [def-trf-completion-unit-models], there is an OrdinaryModel l E W: an additive simultaneous tensor functor, natural level scalar-extension isomorphisms commuting with every strict quotient transition, an adjunction to ordinaryLimit with sectionwise unit x mapped to 1 tensor x, and a termwise-complex limit comparison whose degreewise projections are the actual inverse-limit projections. No derived coefficient calculus, derived adjunction comparison or Roos comparison is asserted.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03D7, lemma-adjoint-pullback-pushforward-modules, and sites-cohomology.tex 0941; coefficient specialization of canonical-model step 1."
+ },
+ "proof": [
+  {
+   "text": "Use purSequenceOrdinaryFactorization to obtain its ordinary quotient projection O. Take its additive pullback as the tensor, its finite scalar-extension comparisons as the evaluation isomorphisms, and its recorded tensor_transition equations as the strict quotient compatibility. The extra constant-ring factorization data is not needed here.",
+   "uses": [
+    "lem-pur-sequence-ordinary-factorization",
+    "def-pur-sequence-adjoint-resolution-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport O.adjunction through O.limit to obtain an adjunction to ordinaryLimit. Apply O.transpose to O.adjunction.unit.app M. The inverse Hom correspondence sends this unit to the identity. Expanding the finite Hom correspondence and cancelling the inverse and forward tensor comparisons identifies the projected transported unit with the finite scalar adjunction unit. The fixed finite-unit normalization gives unrestrictedIntegralTensorSection 1 x; the unrestricted and scalar-reduction existence witnesses are definitionally the same construction.",
+   "uses": [
+    "def-pur-sequence-adjoint-resolution-data",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the cone of inverse-limit projections on each cochain complex of towers. Evaluation in each integer degree identifies this cone with the ordinary limit cone. HomologicalComplex.isLimitOfEval gives its universal property. The unique comparison with the chosen complex limit is natural, by equality after each projection, and has the required degreewise projection formula. Whisker this comparison with the coefficient restriction tower and assemble OrdinaryModel. No boundedness, flatness or nonzero-object hypothesis is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-ordinary-factorization",
+  "def-pur-sequence-adjoint-resolution-data",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K9",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary sequence-site construction in Tag 0940, reused via lem-pur-sequence-ordinary-factorization; scalar-unit normalization from sites-modules.tex Tag 03D7; degreewise limits of complexes for Tag 0941."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordinary tensor adjunction to inverse limit of scalar restrictions for sheaves of modules on a sequence site",
+   "results": "Search returned generic scalar-extension adjunctions, sheaf pullback adjunctions and derived adjunction APIs. None states the fixed coefficient normalization.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use generic APIs in the stated proof plan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor functor left adjoint to the inverse limit of restrictions of scalars in a sequence of sheaf module categories",
+   "results": "The query returned LightCondensed monoidal and tensor-adjunction declarations, none about the fixed coefficient sequence site. An earlier tensor-reduction-system query returned ModuleCat scalar extension/restriction formulas, also insufficient for the sequence-site transport.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "OrdinaryModel|systemLimitUnit|derivedAdjunctionComparison|leftAdjointUniq|derived.*homEquiv",
+   "results": "Read CompletionUnitModels, SequenceProjectionDerivedAdjunction, SequencePushforwardLimitProjections, ResolvingDerivedAdjunction and Mathlib Adjunction/Unique. No matching specialized theorem. Whole-blueprint search for ordinary tensor adjunction and derived adjunction normalization returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "The generic sequence theorems require the fixed-site and scalar-comparison transport recorded here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletionUnitCanonicalModels",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "03D7, lemma-adjoint-pullback-pushforward-modules, and sites-cohomology.tex 0941; coefficient specialization of canonical-model step 1.",
+   "via": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompletionUnitOrdinaryAdjunction",
+  "file": "lean/Sheaf/Paper/CompletionUnitOrdinaryAdjunction.lean",
+  "declaration": "WeilConjectures.CompletionUnit.ordinaryModel_exists",
+  "statement": "theorem ordinaryModel_exists : Nonempty (OrdinaryModel l E W)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T023704-L-594737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261026T082436-L-2177718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

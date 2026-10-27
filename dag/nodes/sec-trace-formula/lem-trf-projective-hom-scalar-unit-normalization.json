@@ -1,0 +1,304 @@
+{
+ "id": "lem-trf-projective-hom-scalar-unit-normalization",
+ "kind": "statement",
+ "title": "Projective Hom scalar comparison represents the canonical unit transpose",
+ "statement": "Let $R\\to S$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map], $F=S\\otimes_R-$ on modules and termwise on cochain complexes, $U$ restriction of scalars, $Q_R,Q_S$ the derived localizations [def-weil-abstract-derived-category], and $LF=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings]. Identify ordinary modules with the one-object bottom-topology module-sheaf categories [lem-weil-pbc-singleton-site-module-comparison]. Let $P$ be any bounded-above complex of projective $R$-modules [def-weil-pbc-projective-module] and $N$ any $R$-complex. Use the product Hom complexes [def-sc-module-total-hom-complex], equivalently [def-pur-hom-complex], and their canonical projective-source model comparisons with derived internal Hom [def-pur-derived-internal-hom]. Let\n$$\\chi:F\\operatorname{Hom}_R^\\bullet(P,N)\\longrightarrow\\operatorname{Hom}_S^\\bullet(FP,FN)$$\nbe the normalized chain map of [lem-pc-normalized-ring-hom-extension], specified by $(\\chi(s\\otimes f))_p(t\\otimes x)=st\\otimes f_p(x)$ for every homogeneous family $f$.\n\nFor arbitrary $E,L\\in D(R)$ let $\\beta_{E,L}:LF(R\\operatorname{Hom}_R(E,L))\\to R\\operatorname{Hom}_S(LFE,LFL)$ be the scalar-adjunction transpose of $R\\operatorname{Hom}_R(E,\\eta_L)$ followed by the inverse of the evaluation-normalized internal-Hom scalar adjunction [lem-sfb-dc-hom-scalar-adjunction], where $\\eta:\\mathrm{id}\\to ULF$ is the unit of $LF\\dashv U$. Under the canonical flat scalar-extension and projective-Hom model comparisons, $Q_S\\chi$ equals $\\beta_{Q_RP,Q_RN}$ in $D(S)$. Its internal-Hom scalar adjunction is represented by the chain isomorphism\n$$U\\operatorname{Hom}_S^\\bullet(FP,FN)\\cong\\operatorname{Hom}_R^\\bullet(P,U(FN)),\\qquad g_p\\longmapsto(x\\mapsto g_p(1\\otimes x)),$$\nwith inverse $h_p\\mapsto(t\\otimes x\\mapsto t h_p(x))$. In these models Hom applied to $\\eta_N$ is $f_p\\mapsto(x\\mapsto1\\otimes f_p(x))$, and its scalar adjoint is exactly $s\\otimes f_p\\mapsto(t\\otimes x\\mapsto st\\otimes f_p(x))$. The family $\\beta$ is natural in arbitrary derived morphisms of $E,L$, including inverses of quasi-isomorphisms; the displayed equality respects changes of projective representatives and arbitrary target quasi-isomorphisms. No finite-generation, perfectness, or boundedness hypothesis on $N$ is imposed, and no invertibility of $\\chi$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof, and Equation 0E1X (equation-base-change-RHom): projective-source chain representative and unit normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-weil-pbc-projective-module",
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-normalized-ring-hom-extension",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Work in ordinary modules using [lem-weil-pbc-singleton-site-module-comparison]; tensor symmetry identifies the right-tensor convention with $F=S\\otimes_R-$ and sends $x\\otimes1$ to $1\\otimes x$. Put $H=\\operatorname{Hom}_R^\\bullet(P,N)$, $J=\\operatorname{Hom}_S^\\bullet(FP,FN)$, and $T=\\operatorname{Hom}_R^\\bullet(P,U(FN))$. By [lem-trf-flat-projective-hom-models], $FP$ is bounded above and termwise projective, $F$ preserves every quasi-isomorphism, and there are canonical comparisons $e:Q_RH\\simeq R\\operatorname{Hom}_R(Q_RP,Q_RN)$, $c_C:LF(Q_RC)\\simeq Q_SFC$, $b:Q_SJ\\simeq R\\operatorname{Hom}_S(LFQ_RP,LFQ_RN)$, and the corresponding comparison for $Q_RT$. The unit and counit in these models are $x\\mapsto1\\otimes x$ and $s\\otimes y\\mapsto sy$. These assertions apply to $C=H$ even when $H,N$ are unbounded.",
+   "uses": [
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-trf-flat-projective-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66 (lemma-RHom-out-of-projective); Tag 0GMT (lemma-tensor-hom-adjoint); Tag 0E1W, choice of models."
+   }
+  },
+  {
+   "text": "Define $a:UJ\\to T$ in degree $n$ coordinatewise by $a(g)_p(x)=g_p(1\\otimes x)$, and define $v:T\\to UJ$ by $v(h)_p(t\\otimes x)=t h_p(x)$. The latter is balanced since $h_p(rx)=\\varphi(r)h_p(x)$, and it is $S$-linear in the input. The equalities $a(v(h))_p(x)=h_p(x)$ and $v(a(g))_p(t\\otimes x)=t g_p(1\\otimes x)=g_p(t\\otimes x)$ prove that these maps are inverse $R$-linear maps on the full products. With the differential of [def-sc-module-total-hom-complex], evaluation of either $a(dg)$ or $d(a(g))$ at $x\\in P^p$ is $d_{FN}g_p(1\\otimes x)-(-1)^n g_{p+1}(1\\otimes d_Px)$. Thus $a$ is a chain isomorphism (and its inverse is a chain map). This argument uses each product projection separately, with no interchange of tensor and an infinite product.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof; Equation 0E1X (equation-base-change-RHom)."
+   }
+  },
+  {
+   "text": "The localization of $a$ has the evaluation normalization that characterizes the isomorphism $\\alpha:U R\\operatorname{Hom}_S(LFQ_RP,LFQ_RN)\\simeq R\\operatorname{Hom}_R(Q_RP,ULFQ_RN)$ in [lem-sfb-dc-hom-scalar-adjunction]. Indeed [lem-pod-projective-hom-evaluation-model], applied over $R$ to $(P,U(FN))$ and over $S$ to $(FP,FN)$, represents both derived evaluations by their ordinary tensor evaluations. For $x\\in P^p$ and $g\\in J^n$, evaluation after $a$ is $(-1)^{pn}a(g)_p(x)=(-1)^{pn}g_p(1\\otimes x)$. Precomposing the restricted $S$-evaluation by the scalar unit gives the same expression. The restricted evaluation uses the lax tensor map $\\lambda:UA\\otimes_R^{\\mathbf L}UB\\to U(A\\otimes_S^{\\mathbf L}B)$ of restriction, the mate $U(\\varepsilon\\otimes\\varepsilon)\\circ U\\mu_{UA,UB}\\circ\\eta$ of the derived scalar tensor comparison $\\mu$ of the scalar data [def-sfb-scalar-hom-comparison-data] used by [lem-sfb-dc-hom-scalar-adjunction]. That data represents $\\mu$ on K-flat complexes by the pure-generator chain isomorphism $s\\otimes(y\\otimes z)\\mapsto(s\\otimes y)\\otimes(1\\otimes z)$. Take $A=Q_SFP$, $B=Q_SJ$: $U(FP)$ and $P$ are bounded above with flat $R$-terms, so they are K-flat and tensors with them compute derived tensors. For a K-flat resolution $w:Y\\to UJ$, the maps $P\\otimes w$, $U(FP)\\otimes w$ and $F(U(FP)\\otimes w)$ are quasi-isomorphisms ($S$ is flat), so naturality of $\\mu$ in $w$ transports its pure-generator formula from $Y$ to $UJ$. With the unit $x\\mapsto1\\otimes x$ and counit $s\\otimes y\\mapsto sy$ of [lem-trf-flat-projective-hom-models], the scalar unit followed by $\\lambda$ is therefore represented by the chain map $P\\otimes_R UJ\\to U(FP\\otimes_S J)$ taking $x\\otimes g\\mapsto1\\otimes((1\\otimes x)\\otimes g)\\mapsto(1\\otimes(1\\otimes x))\\otimes(1\\otimes g)\\mapsto(1\\otimes x)\\otimes g$. This balanced map has inverse $(t\\otimes x)\\otimes g\\mapsto x\\otimes tg$. These inverse maps commute with differentials since $t$ has degree zero; restriction does not change their values. The comparisons of [lem-trf-flat-projective-hom-models] identify this scalar unit with the derived unit and the two Hom models with the indicated derived objects. Thus the displayed equality is an equality of the representing evaluation maps, not just of maps on cohomology. Uniqueness in [lem-sfb-dc-hom-scalar-adjunction] identifies $Q_Ra$ with $\\alpha$ under these comparisons.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-flat-projective-hom-models",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W, degreewise precomposition by the unit; Tag 0A66 and Tag 0GWQ (remark-internal-hom), evaluation normalization."
+   }
+  },
+  {
+   "text": "Under the comparisons of [lem-trf-flat-projective-hom-models], $R\\operatorname{Hom}_R(Q_RP,\\eta_{Q_RN})$ is represented by $k:H\\to T$, $k(f)_p(x)=1\\otimes f_p(x)$: apply the target map $\\eta_N$ in each product coordinate. It commutes with the Hom differential because $d_{FN}(1\\otimes y)=1\\otimes d_Ny$ [def-sc-module-total-hom-complex]. Consequently $\\alpha^{-1}R\\operatorname{Hom}_R(Q_RP,\\eta_{Q_RN})$ is represented by $vk:H\\to UJ$, with $(vk(f))_p(t\\otimes x)=t\\otimes f_p(x)$.",
+   "uses": [
+    "lem-trf-flat-projective-hom-models",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof; Equation 0E1X (equation-base-change-RHom)."
+   }
+  },
+  {
+   "text": "Take the scalar adjoint of the last map. By [lem-trf-flat-projective-hom-models] the derived scalar adjunction is represented by the ordinary unit and counit. Its adjoint on complexes is therefore $F H\\xrightarrow{F(vk)}FUJ\\xrightarrow{\\varepsilon_J}J$, and on tensors its value is $(s\\otimes f)_p(t\\otimes x)\\mapsto s(t\\otimes f_p(x))=st\\otimes f_p(x)$. This is exactly the normalization of $\\chi$ supplied by [lem-pc-normalized-ring-hom-extension]. Tensor generators in $F H^n$, product projections of $J^n$, and tensor generators in $FP^p$ determine the degree maps, so the chain maps agree. Localizing gives, with the notation of step 1, $\\beta_{Q_RP,Q_RN}=b\\circ Q_S\\chi\\circ c_H\\circ LF(e^{-1})$, the required equality under the canonical model comparisons.",
+   "uses": [
+    "lem-trf-flat-projective-hom-models",
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof; Equation 0E1X (equation-base-change-RHom)."
+   }
+  },
+  {
+   "text": "For arbitrary $E,L$, put $A(E,L)=LF(R\\operatorname{Hom}_R(E,L))$ and $B(E,L)=R\\operatorname{Hom}_S(LFE,LFL)$. The map $R\\operatorname{Hom}_R(E,\\eta_L)$ is natural by bifunctoriality [def-pur-derived-internal-hom] and naturality of the adjunction unit. Composing with the natural $\\alpha^{-1}$ of [lem-sfb-dc-hom-scalar-adjunction] and taking the scalar adjoint preserves this naturality: the transpose is $\\varepsilon\\circ LF(-)$, and both $LF$ and $\\varepsilon$ are natural. Hence for any morphism $z$ of $D(R)^{\\mathrm{op}}\\times D(R)$, $B(z)\\beta=\\beta A(z)$. If $z$ is invertible, multiplying this square by $A(z)^{-1}$ and $B(z)^{-1}$ gives the square for $z^{-1}$. The canonical model comparisons in [lem-trf-flat-projective-hom-models] commute with localization, so the equality of step 5 respects changes of projective representatives and arbitrary target quasi-isomorphisms, including their inverses. No boundedness or finiteness of $N$ was used, and equality of these morphisms asserts no invertibility of $\\chi$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-trf-flat-projective-hom-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof; Equation 0E1X (equation-base-change-RHom)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-trf-flat-projective-hom-models",
+  "def-sc-module-total-hom-complex",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pc-normalized-ring-hom-extension",
+  "def-pur-derived-internal-hom",
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1W (lemma-upgrade-adjoint-tensor-RHom), proof; Equation 0E1X (equation-base-change-RHom).",
+  "note": "Explicit projective-model specialization of the Stacks construction, including the evaluation and sign calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived Hom base change map defined by extension restriction adjunction and its unit is represented by tensoring homogeneous linear maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.endHom\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {S : Type u_2} →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          {M : Type u_3} →\\n            [inst_3 : AddCommMonoid M] →\\n              [inst_4 : Module R M] →\\n                {P : Type u_5} →\\n                  [inst_5 : \", \"doc\": \"Given an $ R $-linear map $ \\\\alpha: M \\\\to P $ and a base change structure $ j $ witnessing that $ \\\\alpha $ satisfies the tensor product universal property, this constructs a linear map from the $ R $-\"}\n  {\"name\": \"IsBaseChange.linearMapLeftRightHom\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {S : Type u_2} →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          {M : Type u_3} →\\n            [inst_3 : AddCommMonoid M] →\\n              [inst_4 : Module R M] →\\n                {N : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"Given an $ R $-linear map $ \\\\alpha: M \\\\to P $ and an $ R $-linear map $ \\\\beta: N \\\\to Q $, this constructs an $ R $-linear map from $ \\\\text{Hom}_R(M,N) $ to $ \\\\text{Hom}_S(P \\\\otimes_R S, Q) $ by compos\"}\n  {\"name\": \"IsBaseChange.linearMapRightBaseChangeHom\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Type u_2) →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          (M : Type u_3) →\\n            [inst_3 : AddCommMonoid M] →\\n              [inst_4 : Module R M] →\\n                {N : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"Given an $ R $-linear map $ \\\\varepsilon: N \\\\to P $, this defines an $ S $-linear map from the tensor product $ S \\\\otimes_R \\\\text{Hom}_R(M, N) $ to $ \\\\text{Hom}_R(M, P) $. The construction uses the uni\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"LinearMap.baseChangeHom\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Tower\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    (M : Type u_4) →\\n      (N : Type u_5) →\\n        [inst : CommSemiring R] →\\n          [inst_1 : Semiring A] →\\n            [inst_2 : Algebra R A] →\\n              [inst_3 : AddCommMonoid M] →\\n                [inst_4 : AddCommMonoid N] →\\n                  [inst_5 :\", \"doc\": \"The linear map sending each $ R $-linear map $ f : M → N $ to its base change $ A ⊗_R M → A ⊗_R N $, defined by $ a ⊗ m ↦ a ⊗ f(m) $, and extended linearly. This constructs a homomorphism between the \"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {M : ModuleCat R}\\n  {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m =\\n    (CategoryTheory.\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the adjunction between the extension of scalars functor and the restriction of scalars functor establishes a natural bijec\"}\n  {\"name\": \"isBaseChange_tensorProduct_map\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] {P : Type u_2\", \"doc\": \"The tensor product $ M \\\\otimes_R N $ of modules over a commutative semiring $ R $ is equipped with a module structure over $ R $, where scalar multiplication is defined by acting on the left component\"}\n Read: Ordinary module scalar adjunction and LinearMap.baseChangeHom do not identify localization of a Hom-complex map with the specified derived internal-Hom unit transpose.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the chain map s tensor f maps t tensor x to st tensor f x equals the scalar adjoint of derived Hom applied to the unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalizedModule.map_lTensor\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (A : Type u_2) [inst_1 : CommSemiring A] [inst_2 : Algebra R A] {M : Type u_3}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] {M' : Type u_4} [inst_5 : AddCommMonoid M'] [inst_6 : Module R M']\\n  [inst_7 : Module A M'] [inst_8 : IsScalarTower R A M'] (S : \", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, an $ A $-module $ M $ with scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, A, M) $, a localization map $ g: M \\\\to M' $ at a submonoid\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensorHom_id\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  (W : CategoryTheory.MorphismProperty C) [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : W.IsMonoidal]\\n  [inst_4 : L.IsLocalization\", \"doc\": \"In a localized monoidal category, for any morphism $ f : X_1 \\\\to X_2 $ and object $ Y $, the tensor product of $ f $ with the identity morphism on $ Y $ is equal to the right whiskering of $ f $ by $ \"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.tensorHom\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given morphisms $f: K_1 \\\\to L_1$ and $g: K_2 \\\\to L_2$ between homological complexes in a monoidal category, this constructs the induced morphism $K_1 \\\\otimes K_2 \\\\to L_1 \\\\otimes L_2$ between their ten\"}\n  {\"name\": \"IsLocalization.moduleTensorEquiv\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Submonoid R) →\\n      (A : Type u_2) →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [IsLocalization S A] →\\n              (M₁ : Type u_5) →\\n                (M₂ : Type u_6) →\\n                  [inst_4 : AddCommM\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and $ R $-modules $ M_1 $ and $ M_2 $ equipped with compatible $ A $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorP\"}\n  {\"name\": \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) {M : Type u_3} [inst_1 : AddCommMonoid M]\\n  [inst_2 : Module R M] {M' : Type u_4} [inst_3 : AddCommMonoid M'] [inst_4 : Module R M'] (f : M →ₗ[R] M')\\n  (N : Type u_5) (N' : Type u_6) [inst_5 : AddCommMonoid N] [inst_6 : Module R N] [inst_7 :\", \"doc\": \"Let $R$ be a commutative semiring, $S$ a submonoid of $R$, and $M, N$ be $R$-modules. This statement asserts that localization of modules at $S$ commutes with the tensor product. Specifically, if $f: \"}\n  {\"name\": \"IsLocalizedModule.rTensor\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (A : Type u_2) [inst_1 : CommSemiring A] [inst_2 : Algebra R A] {M : Type u_3}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] {M' : Type u_4} [inst_5 : AddCommMonoid M'] [inst_6 : Module R M']\\n  [inst_7 : Module A M'] [inst_8 : IsScalarTower R A M'] (S : \", \"doc\": \"If $ M' $ is the localization of $ M $ at a submonoid $ S $ via an $ A $-linear map $ g $, then the tensor product of $ g $ with the identity map on an $ R $-module $ N $ results in a localization of \"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n Read: Ordinary module scalar adjunction and LinearMap.baseChangeHom do not identify localization of a Hom-complex map with the specified derived internal-Hom unit transpose.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"Adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n Read: Ordinary module scalar adjunction and LinearMap.baseChangeHom do not identify localization of a Hom-complex map with the specified derived internal-Hom unit transpose.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|[Hh]om[Cc]omplex.*(adjunction|unit|scalar)|scalar.*[Hh]om[Cc]omplex",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Character.lean\", \"line\": \"100\", \"text\": \"  rw [← char_iso (Equiv.dualTensorHom ρ σ), char_tensor, Pi.mul_apply, char_dual]\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinduced.lean\", \"line\": \"169\", \"text\": \"  { toFun f := (resFunctor φ).map ((leftRegularHomEquiv (leftRegular k H)).symm.toLinearMap\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"815\", \"text\": \"/-- dualTensorHom as an equivalence of representations. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"816\", \"text\": \"@[simps!] noncomputable def dualTensorHom : Equiv (tprod ρ.dual σ) (linHom ρ σ) where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"817\", \"text\": \"  toLinearEquiv := dualTensorHomEquiv (R := k) (M := V) (N := W)\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean\", \"line\": \"163\", \"text\": \"    hard to spot; it's `map_star` coming from `WeakDual.Complex.instStarHomClass`, which is a\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/PositiveLinearMap.lean\", \"line\": \"112\", \"text\": \"instance {F : Type*} [FunLike F A₁ A₂] [LinearMapClass F ℂ A₁ A₂] [OrderHomClass F A₁ A₂] :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"line\": \"202\", \"text\": \"    ⟨leftRegularHom _ 1, (leftRegularHomEquiv _).injective <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"92\", \"text\": \"    refine pullback.congrHom ?_ ?_ ≪≫ pullbackSpecIso (𝒜 0) (Away 𝒜 (i.2 : A)) (Away 𝒜 (j.2 : A))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"109\", \"text\": \"  · simp only [Iso.trans_hom, congrHom_hom, Category.assoc, Iso.hom_inv_id, Category.comp_id,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"118\", \"text\": \"  · simp only [Iso.trans_hom, congrHom_hom, Category.assoc, Iso.hom_inv_id, Category.comp_id,\"}\n  {\"file\": \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"line\": \"80\", \"text\": \"      rw [MonoidalCategory.tensorHom_comp_tensorHom]\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"264\", \"text\": \"variable [FunLike F A B] [NonUnitalAlgHomClass F ℂ A B] [StarHomClass F A B]\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"302\", \"text\": \"variable [NonUnitalAlgEquivClass F ℂ A B] [StarHomClass F A B]\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"326\", \"text\": \"/-- This instance is provided instead of `StarHomClass` to avoid type class inference loops.\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"328\", \"text\": \"noncomputable instance (priority := 100) Complex.instStarHomClass : StarHomClass F A ℂ where\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"338\", \"text\": \"`WeakDual.Complex.instStarHomClass`. -/\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean\", \"line\": \"124\", \"text\": \"        simpa using OrderHomClass.mono f this\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"91\", \"text\": \"    { hom := ↾fun x => x ∘ f.unop.toOrderHom\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"384\", \"text\": \"        MonoidalCategory.tensorIso_inv, Representation.linearizeTrivialIso, hom_tensorHom,\"}\n  {\"file\": \"Mathlib/Lean/Meta/Basic.lean\", \"line\": \"81\", \"text\": \"Example: `reassocExprHom` operates by applying simp lemmas that assume a `Category` instance.\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean\", \"line\": \"409\", \"text\": \"  [StarHomClass F A B]\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean\", \"line\": \"460\", \"text\": \"  [StarHomClass F A B]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"146\", \"text\": \"    rw [((f ≫ g).fiberHomeo s).nonempty_congr, Set.nonempty_coe_sort]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"132\", \"text\": \"      ← cancel_epi (pullback.congrHom rfl pullback.condition.symm).hom]\"}\n Read: Ordinary module scalar adjunction and LinearMap.baseChangeHom do not identify localization of a Hom-complex map with the specified derived internal-Hom unit transpose.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of derived scalar extension gives the normalized tensor Hom chain comparison for a bounded above projective source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat.{max v u₂} R) (m : M) :\\n  (extendRestrictScalarsAdj f).unit.app M m = (1 : S) ⊗ₜ[R,f] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": 𝟭 (ModuleCat S) ⟶ restrictScalars f ⋙ coextendScalars f\", \"doc\": \"The natural transformation from the identity functor on the category of $ S $-modules to the composition of the restriction-of-scalars functor $ \\\\text{restrict}_f $ followed by the coextension-of-scal\"}\n  {\"name\": \"HomologicalComplex.tensorUnit\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": HomologicalComplex C c\", \"doc\": \"The homological complex constructed by placing the unit object $\\\\mathbf{1}_C$ of the monoidal category $C$ at index $0$ and zero objects elsewhere, with all differentials being zero morphisms. This is\"}\n  {\"name\": \"HomologicalComplex.rightUnitor'\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": (tensorObj K (tensorUnit C c)).X ≅ K.X\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (placing the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself, given\"}\n  {\"name\": \"AlgHom.extendScalars\", \"module\": \"Mathlib.RingTheory.AlgebraTower\", \"type\": \": @AlgHom B C D _ _ _ _ (f.restrictDomain B).toRingHom.toAlgebra\", \"doc\": \"Given an algebra homomorphism $ f : C \\to D $ over a commutative semiring $ A $, and a scalar tower $ A \\to B \\to C $, this constructs the extended algebra homomorphism over $ B $ by composing $ f $ with\"}\n Read: Ordinary module scalar adjunction and LinearMap.baseChangeHom do not identify localization of a Hom-complex map with the specified derived internal-Hom unit transpose.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]om[Cc]omplex.*(adjunction|unit|scalar)|scalar.*[Hh]om[Cc]omplex",
+   "results": "{\"t\": \"2026-10-22T07:43:10Z\", \"tool\": \"grep\", \"query\": \"[Hh]om[Cc]omplex.*(adjunction|unit|scalar)|scalar.*[Hh]om[Cc]omplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Precise scoped grep returned zero hits; the broad grep also matched unrelated names ending in rHom.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective source Hom complex scalar extension map is the derived extension restriction adjoint of Hom applied to the unit",
+   "results": "Actual search: 8 hits; CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.ProjectiveResolution.Hom.hom', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.ProjectiveResolution.π'. Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|[Hh]om[Cc]omplex.*(adjunction|unit|scalar)|scalar.*[Hh]om[Cc]omplex",
+   "results": "Actual search: 25 hits; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean. Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"Adjunction\"",
+   "results": "Actual search: 0 hits; . Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived Hom base change morphism is the adjoint of the derived Hom morphism induced by the extension restriction unit",
+   "results": "Actual search: 8 hits; CategoryTheory.Adjunction.derived_unit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, CategoryTheory.Adjunction.derivedη.congr_simp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, IsBaseChange.dual, CategoryTheory.Adjunction.derivedε, IsBaseChange.linearMapLeftRightHom. Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|baseChangeHom|extendRestrictScalarsAdj_homEquiv_apply",
+   "results": "Actual search: 11 hits; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/CartanCriterion.lean. Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat scalar extension the map s tensor f sending t tensor x to st tensor f x represents the canonical morphism between derived internal Hom objects",
+   "results": "Actual search: 8 hits; ModuleCat.monoidalClosed_uncurry, ModuleCat.monoidalClosedHomEquiv, ModuleCat.monoidalClosed_curry, ModuleCat.instMonoidalClosed, ModuleCat.ihom_ev_app, ModuleCat.monoidalClosed_pre_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ihom_coev_app. Read ordinary scalar-adjunction formulas in ModuleCat/ChangeOfRings.lean and baseChangeHom in TensorProduct/Tower.lean: these concern ordinary modules; derived_unit concerns abstract adjunction units. None states the projective internal-Hom comparison with its evaluation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Technical input for the algebraic calculus: bounded-below flat scalar extension of derived Hom, before applying polynomial models. Re-split component: chain-map construction and canonical adjunction/unit identification (returned steps 5 and 7)",
+   "via": [
+    "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-hom-scalar-unit-normalization",
+  "worker": "stage1",
+  "summary": "Proved the normalized comparison using existing flat projective-Hom models and the evaluation-normalized scalar adjunction. Wrote the inverse chain isomorphisms, differential and Koszul evaluation checks, the unit/counit computation, and naturality for arbitrary derived morphisms. No new nodes or statement change.",
+  "blueprint": "Auxiliary ring-theoretic normalization in the inherited nearby-cycle/relative-duality branch of lem-trf-local-term-locality, proof (1)--(2); realizes the projective chain-map/unit-identification component of lem-trf-pseudocoherent-rhom-flat-base-change. Latest blueprint ancestor and unit read; no change of their geometric route.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic module-derived evaluation model, including its Koszul sign, needed to check the scalar-adjunction normalization; the local-term unit has no such algebraic evaluation statement."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic evaluation-normalized derived internal-Hom scalar adjunction; used as specified in the item, not as an alternative proof of local-term vanishing."
+   },
+   {
+    "node": "lem-pc-normalized-ring-hom-extension",
+    "why": "Generic normalized chain map on the singleton ring site, whose pure-tensor formula identifies the computed mate."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Generic equivalence of ordinary modules with singleton-site sheaves, including scalar-extension units."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pc-normalized-ring-hom-extension",
+  "lem-weil-pbc-singleton-site-module-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-0f0a4c535",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-0f0a4c535 (reviewer sub-agent of L); spot-checked: Read the item, all 9 cited nodes and Stacks 0E1W/0E1X. 0E1W's proof map is precomposition with the unit, which is step 2's map a when the target is U(FN); 0E1X's base change map is the β of the statement. No new nodes and no duplicate found: def-pc-perfect-rhom-base-change-map, lem-pc-base-change-rhom-perfect and lem-trf-half-bounded-hom-scalar-isomorphism do not state this identification. The statement is unchanged and true; edge cases checked: P=0, N=0, S=0, R=S, degree-0 modules. Step 2: balancedness, both inverse composites and the differential check out. Step 3: the Koszul sign (-1)^{pn} matches on both evaluation sides. Steps 4 and 5: vk(f)_p(t⊗x)=t⊗f_p(x), and its adjoint ε∘F(vk) gives st⊗f_p(x), which is exactly χ. Step 6: naturality and inverses are fine. One fault (C4/E5) in step 3: the evaluation normalization of lem-sfb-dc-hom-scalar-adjunction goes through restriction's derived lax tensor map, the mate of the scalar tensor comparison μ, and the step asserted its chain representative x⊗g↦(1⊗x)⊗g with no cited node. No cited statement represents μ, and UJ is not K-flat. FIX: step 3 now cites def-sfb-scalar-hom-comparison-data (its scalar tensor comparison has the pure-generator chain isomorphism and the K-flat representative square). It writes λ=U(ε⊗ε)∘Uμ∘η, transports the formula to UJ along a K-flat resolution (P and U(FP) are bounded above with flat terms, and S is flat), and computes the representative explicitly. proof_deps updated. Tool uses (lem-pod-projective-hom-evaluation-model, lem-sfb-dc-hom-scalar-adjunction, lem-pc-normalized-ring-hom-extension, lem-weil-pbc-singleton-site-module-comparison) accepted as generic algebra.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ProjectiveHomScalarUnitNormalization",
+  "declaration": "CochainComplex.projective_hom_scalar_unit_normalization",
+  "declarations": [
+   "CochainComplex.projectiveHomScalarComplex",
+   "CochainComplex.projectiveHomRestrictionComplex",
+   "CochainComplex.projectiveHomRestrictionComparison",
+   "CochainComplex.projectiveHomScalarAdjunctionSource",
+   "CochainComplex.projectiveHomScalarAdjunctionTarget",
+   "CochainComplex.projectiveHomRestrictionTensor",
+   "CochainComplex.projectiveHomScalarSource",
+   "CochainComplex.projectiveHomScalarTarget",
+   "CochainComplex.projectiveHomScalarBeta",
+   "CochainComplex.projective_hom_scalar_unit_normalization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ProjectiveHomScalarUnitNormalization.lean",
+  "statement": "theorem projective_hom_scalar_unit_normalization {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : φ.Flat) : ∃ (c : DerivedCategory.Q ⋙ ModuleCat.ordinaryDerivedExtendScalars φ ≅ projectiveHomScalarComplex φ ⋙ DerivedCategory.Q) (adj : ModuleCat.ordinaryDerivedExtendScalars φ ⊣ ModuleCat.derivedRestrictScalars φ), (∀ C : CochainComplex (ModuleCat.{u} R) ℤ, c.hom.app C = (ModuleCat.ordinaryDerivedChangeOfRings φ).counit.app C) ∧ (∀ C : CochainComplex (ModuleCat.{u} R) ℤ, adj.unit.app (DerivedCategory.Q.obj C) ≫ (ModuleCat.derivedRestrictScalars φ).map (c.hom.app C) ≫ (projectiveHomRestrictionComparison φ).hom.app ((projectiveHomScalarComplex φ).obj C) = DerivedCategory.Q.map (((ModuleCat.extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).unit.app C)) ∧ (∀ D : CochainComplex (ModuleCat.{u} S) ℤ, (ModuleCat.ordinaryDerivedExtendScalars φ).map ((projectiveHomRestrictionComparison φ).hom.app D) ≫ c.hom.app ((projectiveHomRestrictionComplex φ).obj D) ≫ DerivedCategory.Q.map (((ModuleCat.extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).counit.app D) = adj.counit.app (DerivedCategory.Q.obj D)) ∧ ∃ α : projectiveHomScalarAdjunctionSource φ ≅ projectiveHomScalarAdjunctionTarget φ, (∀ (E : DerivedCategory (ModuleCat.{u} R)) (D : DerivedCategory (ModuleCat.{u} S)), E ◁ α.hom.app (op E, D) ≫ (ihom.ev E).app ((ModuleCat.derivedRestrictScalars φ).obj D) = adj.unit.app E ▷ _ ≫ projectiveHomRestrictionTensor φ adj _ _ ≫ (ModuleCat.derivedRestrictScalars φ).map ((ihom.ev ((ModuleCat.ordinaryDerivedExtendScalars φ).obj E)).app D)) ∧ ∃ β : projectiveHomScalarSource φ ⟶ projectiveHomScalarTarget φ, (∀ E L : DerivedCategory (ModuleCat.{u} R), β.app (op E, L) = projectiveHomScalarBeta φ adj α E L) ∧ ∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective R (P.X i)) (N : CochainComplex (ModuleCat.{u} R) ℤ), ∃ (hbS : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (((projectiveHomScalarComplex φ).obj P).X i)) (hpS : ∀ i : ℤ, Module.Projective S (((projectiveHomScalarComplex φ).obj P).X i)) (evH : P ⊗ moduleHomComplex P N ⟶ N) (evT : P ⊗ moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N)) ⟶ (projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N)) (evS : (projectiveHomScalarComplex φ).obj P ⊗ moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N) ⟶ (projectiveHomScalarComplex φ).obj N) (eH : DerivedCategory.Q.obj (moduleHomComplex P N) ≅ (ordinaryModuleDerivedInternalHom R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj N)) (eT : DerivedCategory.Q.obj (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))) ≅ (ordinaryModuleDerivedInternalHom R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N)))) (eS : DerivedCategory.Q.obj (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) ≅ (ordinaryModuleDerivedInternalHom S).obj (op (DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj P)), DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj N))) (χ : (projectiveHomScalarComplex φ).obj (moduleHomComplex P N) ⟶ moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) (a : (projectiveHomRestrictionComplex φ).obj (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) ≅ moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))) (k : moduleHomComplex P N ⟶ moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))), (∀ (p q : ℤ) (x : P.X p) (f : (moduleHomComplex P N).X q), (evH.f (p + q)) ((HomologicalComplex.ιTensorObj P (moduleHomComplex P N) p q (p + q) rfl) (x ⊗ₜ[R] f)) = (p * q).negOnePow • (f.v p (p + q) rfl) x) ∧ (∀ (p q : ℤ) (x : P.X p) (f : (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))).X q), (evT.f (p + q)) ((HomologicalComplex.ιTensorObj P (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))) p q (p + q) rfl) (x ⊗ₜ[R] f)) = (p * q).negOnePow • (f.v p (p + q) rfl) x) ∧ (∀ (p q : ℤ) (x : ((projectiveHomScalarComplex φ).obj P).X p) (f : (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)).X q), (evS.f (p + q)) ((HomologicalComplex.ιTensorObj ((projectiveHomScalarComplex φ).obj P) (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) p q (p + q) rfl) (x ⊗ₜ[S] f)) = (p * q).negOnePow • (f.v p (p + q) rfl) x) ∧ (IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P N)) ∧ Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P N) ≫ DerivedCategory.Q.map evH = DerivedCategory.Q.obj P ◁ eH.hom ≫ (ihom.ev (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)) ∧ (IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N)))) ∧ Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))) ≫ DerivedCategory.Q.map evT = DerivedCategory.Q.obj P ◁ eT.hom ≫ (ihom.ev (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N)))) ∧ (IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q ((projectiveHomScalarComplex φ).obj P) (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N))) ∧ Functor.LaxMonoidal.μ DerivedCategory.Q ((projectiveHomScalarComplex φ).obj P) (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) ≫ DerivedCategory.Q.map evS = DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj P) ◁ eS.hom ≫ (ihom.ev (DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj P))).app (DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj N))) ∧ (∀ (n p : ℤ) (s t : S) (f : (moduleHomComplex P N).X n) (x : P.X p), (((χ.f n) (s ⊗ₜ[R,φ] f)).v p (p + n) rfl) (t ⊗ₜ[R,φ] x) = (s * t) ⊗ₜ[R,φ] ((f.v p (p + n) rfl) x)) ∧ (∀ (n p : ℤ) (g : (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)).X n) (x : P.X p), (((a.hom.f n) g).v p (p + n) rfl) x = (g.v p (p + n) rfl) ((1 : S) ⊗ₜ[R,φ] x)) ∧ (∀ (n p : ℤ) (t : S) (h : (moduleHomComplex P ((projectiveHomRestrictionComplex φ).obj ((projectiveHomScalarComplex φ).obj N))).X n) (x : P.X p), (((a.inv.f n) h).v p (p + n) rfl) (t ⊗ₜ[R,φ] x) = t • (@id (((projectiveHomScalarComplex φ).obj N).X (p + n)) ((h.v p (p + n) rfl) x))) ∧ (∀ (n p : ℤ) (f : (moduleHomComplex P N).X n) (x : P.X p), (((k.f n) f).v p (p + n) rfl) x = (1 : S) ⊗ₜ[R,φ] ((f.v p (p + n) rfl) x)) ∧ χ = ((((ModuleCat.extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).homEquiv _ _).symm (k ≫ a.inv)) ∧ (projectiveHomRestrictionComparison φ).hom.app (moduleHomComplex ((projectiveHomScalarComplex φ).obj P) ((projectiveHomScalarComplex φ).obj N)) ≫ DerivedCategory.Q.map a.hom ≫ eT.hom = (ModuleCat.derivedRestrictScalars φ).map (eS.hom ≫ (ordinaryModuleDerivedInternalHom S).map (Prod.mkHom (c.hom.app P).op (𝟙 _))) ≫ α.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj ((projectiveHomScalarComplex φ).obj N)) ≫ (ordinaryModuleDerivedInternalHom R).map (Prod.mkHom (𝟙 _) ((projectiveHomRestrictionComparison φ).hom.app ((projectiveHomScalarComplex φ).obj N))) ∧ DerivedCategory.Q.map k ≫ eT.hom = eH.hom ≫ (ordinaryModuleDerivedInternalHom R).map (Prod.mkHom (𝟙 _) (adj.unit.app (DerivedCategory.Q.obj N) ≫ (ModuleCat.derivedRestrictScalars φ).map (c.hom.app N) ≫ (projectiveHomRestrictionComparison φ).hom.app ((projectiveHomScalarComplex φ).obj N))) ∧ β.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj N) = (ModuleCat.ordinaryDerivedExtendScalars φ).map eH.inv ≫ c.hom.app (moduleHomComplex P N) ≫ DerivedCategory.Q.map χ ≫ eS.hom ≫ (ordinaryModuleDerivedInternalHom S).map (Prod.mkHom (c.hom.app P).op (c.inv.app N))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Ordinary-module presentation using the recorded universal derived scalar pair and ordinary derived internal Hom. The three projective-source Hom comparisons (over R for (P,N) and (P,U(FN)), over S for (FP,FN)) are stated inline as conclusions, each pinned by its chain evaluation (generator formula with sign (-1)^(pq)) and the derived evaluation square, as in lem-pod-projective-hom-evaluation-model (a proof dependency only; reviewer FIX removed the uncited .choose helper projectiveHomModelIso). All chain maps are normalized at every product coordinate; the restriction tensor in the derived evaluation square is the explicit counit mate of the existing normalized strong scalar tensor. Naturality is asserted as a natural transformation on the full derived product category.",
+  "fixed_by": "NT-stage2-cc-205b3793b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-205b3793b",
+  "group": "Q63",
+  "result": "fix",
+  "note": "All node clauses rendered faithfully (c pinned to the universal counit; adj pinned by unit square; α pinned by the evaluation equation via the counit mate of the normalized strong tensor; β = adj.homEquiv.symm(RHom(id,η)≫α⁻¹) as a natural transformation; χ, a/a⁻¹, k formulas; χ = homEquiv.symm(k≫a.inv); the a and k squares; final Q_Sχ = β transport with correct variances); edge cases P=0, N=0, S=0, φ=id, all degrees OK; no extra hypotheses. Fault (H2/H4): helper projectiveHomModelIso was .choose of projective_hom_evaluation_model (theorem node lem-pod-projective-hom-evaluation-model, not in stmt_deps; def-pur-derived-internal-hom has no projective-source comparison). FIX: helper removed; e_H, e_T, e_S and chain evaluations stated inline as existentials, each pinned by the generator formula (-1)^(pq) and IsIso μ ∧ μ≫Q.map ev = QP◁e.hom≫ihom.ev; module docstring updated; lean-record override (statement verbatim, declarations, note) checked with refit_record (no notes or refusals). Fixed file compiled clean via nt_compile --json (13.8 s, then 10.9 s after a docstring-only edit)."
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-native-geometric-hom-comparison",
+ "kind": "statement",
+ "title": "Native geometric realization preserves ambient derived internal Hom",
+ "statement": "Let $k_0$ be a finite field, let $\\ell\\ne\\mathrm{char}(k_0)$ be prime, and let $X$ be a separated finite-type $k_0$-scheme. Write $Y=X\\times_{k_0}\\overline{k_0}$. Use the native abelian Weil sheaf category $\\mathcal W_X$, its ordinary derived category, and its actual product-total derived Hom from [def-sf-derived-weil-category-and-operations]. Put $\\Omega=\\overline{\\mathbf Q}_\\ell$ and let $R_Y=p_Y^*\\underline\\Omega$ be the pulled-back finite-subextension-valued condensed coefficient ring, canonically isomorphic to the native continuous coefficient sheaf by [lem-sf-locally-finite-coefficient-ring-realization]. Let $U:D(\\mathcal W_X)\\to D(\\mathrm{Mod}(R_Y))$ be the exact functor forgetting Frobenius and scalar linearity, then restricting along nativeModuleCoefficientIso, namely nativeGeometricForget from [lem-sf-weil-geometric-hom-constructibility]. For arbitrary, possibly unbounded, $K,L\\in D(\\mathcal W_X)$ there exists an isomorphism $U(R\\mathcal Hom_{\\mathcal W_X}(K,L))\\cong R\\mathcal Hom_{R_Y}(UK,UL)$. The right side is the existing CondensedRing.derivedHom in the ordinary geometric derived category. No boundedness, constructibility, dualizing-object, or reflexivity assertion is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+ },
+ "stmt_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-weil-geometric-hom-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "Extract C and its ordinary closed tensor-Hom adjunction from [lem-sf-weil-native-closed-forgetful]. The component of C.homModels.nativeModel identifies the recorded native derivedHom with C.homModels.weilHom. Compose its inverse with C.homComparison to identify the forgotten native Hom with C.homModels.ordinaryHom on the two forgotten inputs.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+   }
+  },
+  {
+   "text": "Let F be AdicSheaf.forgetAb followed by comap along nativeModuleCoefficientIso. The first factor is an equivalence by [lem-sf-native-scalar-forgetting-equivalence], and the second is restriction along a ring isomorphism from [lem-sf-weil-verdier-module-constructibility-comparison]. Therefore F and its termwise derived functor are equivalences. For each fixed ordinary source P, apply [lem-sf-native-coefficient-tensor-comparison] to C.ordinaryTensorModels to obtain tensorRight(P) followed by F is naturally isomorphic to F followed by condensed tensorLeft(FP).",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-equivalence",
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sf-native-coefficient-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+   }
+  },
+  {
+   "text": "The ordinary adjunction from C and the condensed tensor-Hom adjunction of [sk-def-sfb-derived-tensor-hom] have isomorphic left adjoints after composing with the coefficient equivalence. Mathlib conjugateIsoEquiv gives an isomorphism of the composed right adjoints. Evaluate at FQ, apply F, and cancel the unit and counit of the equivalence. Explicitly compose F(H(unit_Q)), F of the conjugate comparison at FQ, and counit at condensed Hom(FP,FQ). This identifies F of ordinary Hom(P,Q) with condensed Hom(FP,FQ). Whisker the isomorphism of step 1 by F and compose. By definition the composite forgetting functor is nativeGeometricForget.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "lem-sf-native-coefficient-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; coefficient tensor comparison followed by Mathlib conjugateIsoEquiv for the two composite adjunctions (K2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting an invertible Frobenius structure commutes with the derived internal Hom of sheaves",
+   "results": "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.forget_map, sheafForget and pushforward-comp-forget comparisons. None compares these native and condensed derived Hom constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of module sheaves preserves derived internal Hom; forgetting a Weil structure commutes with internal Hom",
+   "results": "LightCondensed monoidal-closed instances and ihomPoints. They do not concern the native Weil derived category or this coefficient realization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nativeGeometricForget.*Hom|derivedHomComparison|bifunctorRHom.*mapDerivedCategory",
+   "results": "msearch grep: OK, zero Mathlib hits. Local rg: NativeDerivedHomComparison is pullback/direct-image Hom transposition; NativeClosedForgetful stops before coefficient transport; NativeGeometricTensorComparison is only the tensor analogue. blueprint_refs.py search for forgetting internal Hom gives no result; the broader internal Hom search finds no exact native coefficient-comparison statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-26",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The maintainer-seeded parent has no imported ancestor in its created.item chain (blueprint_refs.py ancestor returns None). Conceptual source: the opening use of Verdier duality in lem-a1-local-boundary-duality and the internal-Hom paragraph of lem-fix-weil-operations; specifically the forgotten internal-Hom comparison in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes.",
+   "via": [
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeGeometricHomComparison",
+  "file": "lean/Sheaf/Paper/NativeGeometricHomComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeGeometricForget_derivedHomComparison",
+  "statement": "theorem nativeGeometricForget_derivedHomComparison\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    (K L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :\n    Nonempty ((nativeGeometricForget k₀ l X).obj\n        ((derivedHom k₀ l X L).obj (op K)) ≅\n      ((ProEtale.CondensedRing.derivedHom (Profinite.padicAlgClRingObj l)\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj\n        (op ((nativeGeometricForget k₀ l X).obj K))).obj\n        ((nativeGeometricForget k₀ l X).obj L))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261026T003203-L-152084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T023424-L-564452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

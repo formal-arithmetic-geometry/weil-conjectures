@@ -1,0 +1,353 @@
+{
+ "id": "lem-fd-pbc-completed-compositor-normalization",
+ "kind": "statement",
+ "title": "Normalization of the actual PBC completed pullback compositor",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All schemes $W$ below are noetherian and finite dimensional with $\\ell$ invertible, with the meaning and the common full integral constructible categories of [lem-weil-pbc-integral-stratified-perfect-characterization]. For finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $R_{E,W}=\\lim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site, and use framework and PBC completed pullbacks $F^s_{h,E},F^p_{h,E}$ of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback]. Write $I_{W,E}$ for restriction along the quotient-normalized coefficient identity, giving the integral identity equivalence. All equalities below use these fixed identity transports; we suppress $I$ when source and target already have the same module presentation. For a scheme isomorphism $h:U\\simeq T$, let $G_{h,E}$ be ordinary derived module pullback on the completed rings. For a flat-term K-flat representative $P$ over $R_{E,T}$ set\n$$Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_{E,T}}(A_{E,n})_T),\\qquad H(Q)=\\operatorname{Cone}(1-s_Q)[-1],$$\nwith the actual quotient transitions and $s_Q((x_n)_n)=(t_nx_{n+1})_n$ [def-pur-integral-derived-operations].\nFor each such tower, use the normalized derived comparison of [lem-weil-strict-roos-comparison],\n$$\\rho_Q=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}R\\lim Q,$$\nwhere $q:Q\\to I_\\bullet$ is a K-injective tower resolution with injective terms and $\\iota_I:\\lim I_\\bullet\\to H(I_\\bullet)$ has coordinates $z\\mapsto(0,z)$. Write $b^{\\rm amb}_{h,E}:IF^s_{h,E}\\to F^p_{h,E}I$ for this comparison with the defining realization identifications, and $b^{\\rm int}_{h,E}$ for its restriction to the full integral constructible categories.\nLet $\\kappa^s_{h,E}:G_{h,E}\\to F^s_{h,E}$ be the specified quotient/zero-shifted-coordinate augmentation [def-weil-inverse-image-pullback-comparison], and let $\\kappa^p_{h,E}:G_{h,E}\\to F^p_{h,E}$ be the actual PBC completion unit in this presentation. These satisfy $\\kappa^p=b\\kappa^s$. For composable isomorphisms $h:U\\simeq V$, $k:V\\simeq T$, write $c^G:G_{kh,E}\\to G_{h,E}G_{k,E}$ for ordinary pullback composition. Let $c^s:F^s_{kh,E}\\to F^s_{h,E}F^s_{k,E}$ be the specified whole-tower counit-normalized comparison [lem-trf-integral-pullback-comparison-realization], and let $c^p:F^p_{kh,E}\\to F^p_{h,E}F^p_{k,E}$ be the actual PBC comparison, namely the adjunction conjugate of direct-image composition for the completion-induced adjunction [def-weil-pbc-adjunction-conjugate, lem-sp-completed-pullback-adjunction], transported from constant to completed coefficient sheaves [lem-weil-pbc-constant-completion-equivalence]. Then\n$$c^p\\kappa^p_{kh}=(F^p_h\\kappa^p_k)(\\kappa^p_hG_k)c^G,\\qquad\nc^s\\kappa^s_{kh}=(F^s_h\\kappa^s_k)(\\kappa^s_hG_k)c^G.$$\nThe first equation uses the actual adjunction units and counits, and its ordinary map is represented by the finite termwise $c_{h,k,n}$. On complete objects each specified $\\kappa^s_h$ and $\\kappa^p_h$ is invertible. The analogous actual identity maps $u^s:F^s_1\\to1$ and $u^p:F^p_1\\to1$ satisfy $u^s\\kappa^s_1=u^G=u^p\\kappa^p_1$, where $u^G:G_1\\to1$ is ordinary identity pullback. In the unsuppressed presentations these normalizations give\n$$u^p I\\circ b^{\\rm int}_1=Iu^s,$$\n$$c^p I\\circ b^{\\rm int}_{kh}=(F^p_h b^{\\rm int}_k)\\circ(b^{\\rm int}_hF^s_k)\\circ(Ic^s).$$\nNo cancellation of an ambient completion unit on an incomplete object is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-written extraction of returned lem-fd-whole-tower-integral-pullback-comparison proof steps 6, 7. Exact arguments retained in report.md. Supporting Stacks sources: Tag 099N, proetale.tex, lemma-pushforward-Noetherian-case; Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-fd-finite-pullback-comparison-datum",
+  "def-fd-coefficient-comparison-datum",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "def-sfb-integral-pullback-strict-roos-data",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Identify the coefficient rings only by their finite projections. Restriction from completed to constant coefficients identifies the finite-reduction towers, their transitions, total derived limits and completion units by [lem-weil-pbc-constant-completion-equivalence]. Exact countable products on these pro-etale module categories allow [lem-weil-strict-roos-comparison] to apply to every Q in the statement. Its specified comparison is precisely [iota_I]^{-1}[H(q)]. The quotient augmentation has coordinates (0,(theta_n)_n), so that lemma sends it to the derived strict-augmentation map, not merely a map with the same finite projections. Consequently the realization identifications defining b carry the specified framework augmentation to the actual quotient-tower completion unit: kappa^p_h=b_h kappa^s_h. This proves this equality for arbitrary ambient inputs; it uses neither inversion nor cancellation of the augmentation.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  },
+  {
+   "text": "For a scheme isomorphism h, its inverse image is an exact equivalence and preserves inverse limits; its completed coefficient isomorphism is fixed by all finite projections [lem-weil-proetale-isomorphism-inverse-image]. Thus ordinary module pullback G_h is this same equivalence, with the scalar action transported through that isomorphism. The whole-cone normalization [lem-weil-isomorphism-derived-pullback-comparison-normalization] identifies the specified kappa^s_h with inverse image of the actual completion unit, followed by its specified cone identification, and asserts its invertibility on derived-complete inputs. Hence kappa^p_h=b_h kappa^s_h is invertible on those inputs as well. The reindexing identifications of [lem-pod-reindexing-completion-unit-tensor] preserve the actual reduction/limit unit and show that G_h carries complete objects to complete objects (equivalently, the site equivalence of [lem-weil-proetale-isomorphism-inverse-image] (1), (2) transports the local completeness condition on every object and every section of the ideal). On the common full integral category all intermediate pullbacks remain constructible: apply [lem-weil-isomorphism-derived-pullback] and the common-category characterization [lem-weil-pbc-integral-stratified-perfect-characterization].",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-pod-reindexing-completion-unit-tensor",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  },
+  {
+   "text": "Apply [lem-per-quotient-completed-compositor-unit] with its g=k, h=h, B_W=R_{E,W}, P_h=G_h, gamma_h=kappa^p_h. Its hypotheses are exactly the noetherian finite-dimensional scheme and coefficient hypotheses here. It identifies the actual strict-tower pullback, its unit and its induced adjunction with completion followed by ordinary pullback, including constant-coefficient transport. In its notation a=(c^G)^{-1} and hat a=(c^p)^{-1}; its conjugate is for the same direct-image composition and the same induced Hom bijections, not an arbitrarily chosen compositor. Its displayed equation therefore gives\n(c^p)^{-1} kappa^p_h(F^p_k K) G_h(kappa^p_k(K))=kappa^p_{kh}(K)(c^G)^{-1}.\nCompose on the left with c^p and on the right with c^G. Naturality of kappa^p_h at kappa^p_k(K) gives\nc^p kappa^p_{kh}=(F^p_h kappa^p_k)(kappa^p_h G_k)c^G.\nIts identity equation gives u^p kappa^p_1=u^G at once. No completion unit was cancelled in deriving either equality.",
+   "uses": [
+    "lem-per-quotient-completed-compositor-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  },
+  {
+   "text": "The ordinary c^G just used has the required finite representative. Indeed [lem-weil-proetale-isomorphism-inverse-image] identifies all coefficient maps with the maps induced by constant sections and quotient projections, including their compatibility with ring homomorphisms. Apply [lem-weil-pbc-proetale-derived-pullback-composition] to the completed coefficient sheaves and to each finite quotient. It computes composition on one flat-term K-flat complex by the termwise module-pullback compositor. Reducing that compositor sends the same tensor generator (h^{-1}k^{-1}p) tensor 1 to the twice-pulled generator with scalar 1. It is therefore c_{h,k,n} at every n and commutes with the actual quotient transitions. The ordinary composition a of [lem-per-quotient-completed-compositor-unit] is the canonical comparison of [lem-sfb-ringed-derived-monoidal-comparisons] (inverted), which that statement computes by the same termwise module-pullback composition on K-flat complexes with flat terms; both are classes of one chain map on one representative, so a=(c^G)^{-1}. This identifies the ordinary map used in step 3, without postulating a different ordinary comparison.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof on flat-term K-flat complexes"
+   }
+  },
+  {
+   "text": "For the framework equation, retain the entire-system counit in the specified eta of [lem-trf-integral-pullback-comparison-realization]. Write R for simultaneous reduction, L for realization and e:R L -> 1 for its specified counit. The adjunction of [lem-coef-derived-system-evaluation-calculus] gives the identity e_{R K} R(u_K)=1_{R K} in the derived system category. For Q_k=U_k R K, compose the arrow R F^s_k K -> Q_k used to define eta with the reduction of kappa^s_k. Under the reindexing identifications of [lem-pod-reindexing-completion-unit-tensor], this is U_k(e_{R K} R(u_K))=1_{Q_k}. In particular this is an equality of entire derived quotient diagrams. Apply U_h and L: by the defining counit construction of eta this says\neta_{h,k} (F^s_h kappa^s_k)(kappa^s_h G_k)=L(d_{h,k}) a_{h,k},\nwhere a_{h,k}:G_hG_k K -> L(R(G_hG_k K)) is the quotient augmentation and d_{h,k}:R(G_hG_k K) -> Q_{h,k} is the projection-normalized reduction identification. Both coordinates of its Roos presentation are fixed: the shifted coordinate is zero and the nth unshifted coordinate is twice-pulled quotient reduction. The termwise equality from step 4 gives L(c_{h,k,bullet}) kappa^s_{kh}=L(d_{h,k}) a_{h,k} c^G. Substitute c^s=eta_{h,k}^{-1} L(c_{h,k,bullet}) to obtain the required framework equation. This uses the adjunction triangle on whole systems, not faithfulness of finite evaluations.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pod-reindexing-completion-unit-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  },
+  {
+   "text": "For the identity isomorphism the same system triangle reads e_{R K} R(u_K)=1_{R K}, with no reindexing and with the coefficient action unitor. The analogous identity construction in [lem-trf-integral-pullback-comparison-realization] therefore carries the quotient augmentation to the ordinary identity map: u^s kappa^s_1=u^G. Its Roos map is again (0,quotient), as fixed by [def-weil-inverse-image-pullback-comparison]. Together with step 3 this proves both identity normalizations for the specified maps.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  },
+  {
+   "text": "Work now on a complete integral object K and suppress the identity coefficient transports. Precompose the desired compositor equality with the invertible kappa^s_{kh}(K) from step 2. Its left side becomes c^p kappa^p_{kh}. By step 3 this equals F^p_h(kappa^p_k) kappa^p_h(G_k K)c^G. On its right side, step 5 and naturality of b_h give\nF^p_h(b_k) b_h(F^s_k K) F^s_h(kappa^s_k) kappa^s_h(G_k K)c^G\n=F^p_h(b_k) F^p_h(kappa^s_k) b_h(G_k K) kappa^s_h(G_k K)c^G\n=F^p_h(kappa^p_k) kappa^p_h(G_k K)c^G.\nHere b is natural because rho and the defining realization identifications are natural [lem-weil-strict-roos-comparison]. Cancellation of kappa^s_{kh}(K) proves the compositor equality. Likewise precomposing u^p b_1=u^s with invertible kappa^s_1 reduces it to the two identity normalizations. Restoring I gives exactly the two unsuppressed equations in the statement. Fullness of the common integral subcategories lets these ambient equalities restrict to b^{int}; no equality or cancellation on an incomplete object was used.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case; agent assembly with the specified normalized whole-tower comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pod-reindexing-completion-unit-tensor",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-per-quotient-completed-compositor-unit",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case, combined with Tag 0D6D and the DAG statements specifying the actual quotient units and whole-system counits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The actual adjunction-defined completed pullback compositor is normalized by ordinary pullback composition through invertible completion units, and intertwines two completed pullbacks",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Over.pullbackComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.ChosenPullbacksAlong.comp, CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed pullback composition is determined by an invertible completion unit",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.MonoOver.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|leftAdjointCompIso",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction conjugation of completed module pullback composition agrees with the ordinary composition map after precomposing completion units",
+   "results": "8 hits: AdicCompletion.map_comp_apply, AdicCompletion.map_comp, IsAdicComplete.of_comp_lift, AdicCompletion.map_of, IsAdicComplete.mkQ_comp_lift, Hausdorffification.lift_comp_of, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction-defined compositor of completed pullbacks is normalized by the ordinary pullback compositor and the completion units",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Over.pullbackComp, CategoryTheory.ChosenPullbacksAlong.comp, PresheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, sheaf-module and categorical pullback results do not assert the specified completed pro-etale comparisons or their normalized whole-tower equality"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|leftAdjointCompIso",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean (directory CategoryTheory/Adjunction)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, sheaf-module and categorical pullback results do not assert the specified completed pro-etale comparisons or their normalized whole-tower equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed pullback composition agrees with ordinary pullback composition through completion units",
+   "results": "8 hits: CategoryTheory.Limits.pullback.map_comp, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.Subobject.pullback_comp, CategoryTheory.ChosenPullbacksAlong.pullbackMap_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, sheaf-module and categorical pullback results do not assert the specified completed pro-etale comparisons or their normalized whole-tower equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, sheaf-module and categorical pullback results do not assert the specified completed pro-etale comparisons or their normalized whole-tower equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived complete pro-etale sheaves the quotient tower pullback composition is the conjugate of direct image composition under the completion-induced adjunction",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, sheaf-module and categorical pullback results do not assert the specified completed pro-etale comparisons or their normalized whole-tower equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 6, 7",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-pbc-completed-compositor-normalization",
+  "worker": "stage1",
+  "summary": "Reused the more general existing quotient-compositor/unit theorem, normalized Roos comparison and reindexing results. Proved framework augmentation compatibility using the reduction/realization triangle in the entire system category, then calculated both b coherence equations by cancellation only on complete inputs. No new nodes and no change to the statement.",
+  "blueprint": "def-fd-trace-function final sentence: comparisons for the PBC coefficient category used in local Frobenius. Realizes the actual completed-compositor and identity normalization extracted from the whole-tower comparison, preserving both Roos coordinates.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-pod-reindexing-completion-unit-tensor",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-per-quotient-completed-compositor-unit",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic coefficient, completion, reindexing or whole-system comparison tool used with its stated hypotheses; the trace-function unit contains no construction of these tools."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos derived pullback compositor, used only for its stated K-flat termwise description to identify the ordinary composition of lem-per-quotient-completed-compositor-unit with c^G; the trace-function unit contains no construction of it (added by the Codex maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pod-reindexing-completion-unit-tensor",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-per-quotient-completed-compositor-unit",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-f28cbf13e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-f28cbf13e (reviewer sub-agent of L); spot-checked: S1 first split of a statement-only node; no new nodes and the statement is unchanged. I read all 7 steps against every cited statement. Step 1: the Roos lemma's zero-shifted augmentation normalization plus def-weil-inverse-image (b) θ̃=(0,θ) and the def-weil-pbc-completed-pullback unit give κ^p=bκ^s with no cancellation. Step 2: lem-weil-isomorphism-normalization (θκ=G(u), κ invertible on complete inputs) and the constructibility of isomorphism pullback check out. Step 3: lem-per-quotient-completed-compositor-unit with g=k, h=h, γ=κ^p, â=(c^p)^{-1} via (τ^{-1})^c=(τ^c)^{-1}; I recomputed the naturality step. Step 5: the e_{RK}R(u_K)=1 triangle is a whole-system identity; η·F_h(κ_k)·κ_h(G_k)=L(d)a, and both sides of the step-4 equation are zero-shifted augmentations, so the Roos lemma equates them. Step 7: I recomputed the naturality chain; cancellation is only on complete K. Edge cases checked: identities, the zero object, incomplete K. FIX (one fault, C3/C4-type): step 3 asserted a=(c^G)^{-1}, but lem-per's a is the compositor of lem-sfb-ringed-derived-monoidal-comparisons, which was not cited. Step 4 now cites lem-sfb (whose statement computes that compositor by termwise K-flat pullback composition) and states the identification; lem-sfb was added to proof_deps and tool_uses (no cycle). Step 2 also gained a parenthetical: completeness is preserved via the site equivalence of lem-weil-proetale-isomorphism-inverse-image (1),(2). Batch 5: lem-weil-isomorphism-derived-pullback-comparison-normalization (sk-thm-trace-transport) and lem-pod-reindexing-completion-unit-tensor (sk-def-weil) are generic coefficient comparisons for scheme isomorphisms; their closures reach no trace-formula or Poincaré-duality theorem and no nt-assume leaf, so I accepted both as tools. Maintainer note: overlaps with lem-pur-framework-pbc-pullback-scalar-bridge (1) (its c^pbc is unpinned, so not a duplicate) and with sibling lem-fd-pullback-augmentation-counit-matching (≈ step 1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdCompletedCompositorNormalization",
+  "declaration": "WeilConjectures.fdCompletedCompositorNormalization",
+  "declarations": [
+   "WeilConjectures.FdCompletedRoosNormalization",
+   "WeilConjectures.fdCompletedConeProduct",
+   "WeilConjectures.FdCompletedPullbackNormalization",
+   "WeilConjectures.fdCompletedPull",
+   "WeilConjectures.fdCompletedDirect",
+   "WeilConjectures.FdCompletedAdjunction",
+   "WeilConjectures.FdCompletedConjugate",
+   "WeilConjectures.fdCompletedCompositorNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/FdCompletedCompositorNormalization.lean",
+  "statement": "theorem fdCompletedCompositorNormalization (Omega : Type w) [Field Omega] [Algebra ℚ_[l] Omega] [IsAlgClosure ℚ_[l] Omega] (E0 : Padic.FiniteCoefficientFields l Omega) (D : IntegralComparisonSystem.{u} l) {U V T : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] [IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)] [Fact (∃ n : ℕ, topologicalKrullDim V ≤ n)] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [iU : Fact (∀ x : U, IsUnit (l : U.presheaf.stalk x))] [iV : Fact (∀ x : V, IsUnit (l : V.presheaf.stalk x))] [iT : Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))] (h : U ⟶ V) (k : V ⟶ T) [IsIso h] [IsIso k] : ∃ (rU : FdCompletedRoosNormalization l (pbcFiniteField.{u} l Omega E0) U) (rV : FdCompletedRoosNormalization l (pbcFiniteField.{u} l Omega E0) V) (rT : FdCompletedRoosNormalization l (pbcFiniteField.{u} l Omega E0) T) (bh : FdCompletedPullbackNormalization l (pbcFiniteField.{u} l Omega E0) h iU.out iV.out rU) (bk : FdCompletedPullbackNormalization l (pbcFiniteField.{u} l Omega E0) k iV.out iT.out rV) (bhk : FdCompletedPullbackNormalization l (pbcFiniteField.{u} l Omega E0) (h ≫ k) iU.out iT.out rU) (b1 : FdCompletedPullbackNormalization l (pbcFiniteField.{u} l Omega E0) (𝟙 T) iT.out iT.out rT) (ah : FdCompletedAdjunction l (pbcFiniteField.{u} l Omega E0) h) (ak : FdCompletedAdjunction l (pbcFiniteField.{u} l Omega E0) k) (ahk : FdCompletedAdjunction l (pbcFiniteField.{u} l Omega E0) (h ≫ k)), FdCompletedConjugate l (pbcFiniteField.{u} l Omega E0) h k ah ak ahk ∧ ∀ K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Omega E0) T, ∃ hK : PbcIsIntrinsicallyComplete T (pbcStageDatum.{u} l Omega E0) ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj), (integralDetailedTransport U l (pbcFiniteField.{u} l Omega E0)).map ((integralInverseImageDerivedComposition l (pbcFiniteField.{u} l Omega E0) h k).inv.app K.obj) ≫ bh.ordinary.hom.app ((inverseImageIntegralDerived l (pbcFiniteField.{u} l Omega E0) k).obj K.obj) ≫ (pbcActualDerivedPull h (pbcStageDatum.{u} l Omega E0)).map (bk.ordinary.hom.app K.obj) = bhk.ordinary.hom.app K.obj ≫ (pbcActualDerivedPullCompIso h k (pbcStageDatum.{u} l Omega E0)).hom.app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ∧ HEq ((integralDetailedTransport U l (pbcFiniteField.{u} l Omega E0)).map (inverseImagePullbackComparisonDerived l (pbcFiniteField.{u} l Omega E0) (h ≫ k) iU.out iT.out K.obj ≫ (integralComparisonComposition l (pbcFiniteField.{u} l Omega E0) D h k K).hom)) ((integralDetailedTransport U l (pbcFiniteField.{u} l Omega E0)).map ((integralInverseImageDerivedComposition l (pbcFiniteField.{u} l Omega E0) h k).inv.app K.obj ≫ inverseImagePullbackComparisonDerived l (pbcFiniteField.{u} l Omega E0) h iU.out iV.out ((inverseImageIntegralDerived l (pbcFiniteField.{u} l Omega E0) k).obj K.obj) ≫ (integralDerivedPullback l (pbcFiniteField.{u} l Omega E0) h).map (inverseImagePullbackComparisonDerived l (pbcFiniteField.{u} l Omega E0) k iV.out iT.out K.obj))) ∧ (pbcActualCompletedPullUnit (h ≫ k) (pbcStageDatum.{u} l Omega E0)).app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ≫ (pbcActualCompletedPullCompIso h k (pbcStageDatum.{u} l Omega E0)).inv.app ⟨_, hK⟩ = (pbcActualDerivedPullCompIso h k (pbcStageDatum.{u} l Omega E0)).hom.app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ≫ (pbcActualCompletedPullUnit h (pbcStageDatum.{u} l Omega E0)).app ((pbcActualDerivedPull k (pbcStageDatum.{u} l Omega E0)).obj ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj)) ≫ (pbcActualCompletedPull h (pbcStageDatum.{u} l Omega E0)).map ((pbcActualCompletedPullUnit k (pbcStageDatum.{u} l Omega E0)).app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj)) ∧ bhk.comparison.hom.app K.obj ≫ (pbcActualCompletedPullCompIso h k (pbcStageDatum.{u} l Omega E0)).inv.app ⟨_, hK⟩ = (integralDetailedTransport U l (pbcFiniteField.{u} l Omega E0)).map (integralComparisonComposition l (pbcFiniteField.{u} l Omega E0) D h k K).hom ≫ bh.comparison.hom.app ((integralDerivedPullback l (pbcFiniteField.{u} l Omega E0) k).obj K.obj) ≫ (pbcActualCompletedPull h (pbcStageDatum.{u} l Omega E0)).map (bk.comparison.hom.app K.obj) ∧ (integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).map (inverseImagePullbackComparisonDerived l (pbcFiniteField.{u} l Omega E0) (𝟙 T) iT.out iT.out K.obj ≫ (integralComparisonUnit l (pbcFiniteField.{u} l Omega E0) D T K).hom) = b1.ordinary.hom.app K.obj ≫ (pbcActualDerivedPullIdIso (pbcStageDatum.{u} l Omega E0) T).hom.app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ∧ (pbcActualCompletedPullUnit (𝟙 T) (pbcStageDatum.{u} l Omega E0)).app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ≫ (pbcActualCompletedPullIdIso (pbcStageDatum.{u} l Omega E0) T).hom.app ⟨_, hK⟩ = (pbcActualDerivedPullIdIso (pbcStageDatum.{u} l Omega E0) T).hom.app ((integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).obj K.obj) ∧ b1.comparison.hom.app K.obj ≫ (pbcActualCompletedPullIdIso (pbcStageDatum.{u} l Omega E0) T).hom.app ⟨_, hK⟩ = (integralDetailedTransport T l (pbcFiniteField.{u} l Omega E0)).map (integralComparisonUnit l (pbcFiniteField.{u} l Omega E0) D T K).hom",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0045e9b73",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 75788871c907 (H2). Item Lean byte-identical (sha256 acab5fbc…); item node changes only stmt_deps: theorem lem-sfb-integral-pullback-strict-roos-normalization replaced by new definition node def-sfb-integral-pullback-strict-roos-data (existing:true on unchanged Sheaf.Paper.IntegralPullbackStrictRoosNormalization). All 14 listed declarations exist live as plain abbrev/def/instance, none a .choose of the theorem; lean.statement verbatim = IsUnitNormalized signature l.397-399; node statement matches bodies (biprod.lift 0 limitProduct, κ∘Q(j)=limitComplexUnit, towerCounit composite, n means n+1, u+1/u site); its 7 stmt_deps are live definition nodes; no live definition node already owns these names. Mechanical finding: lem-trf-integral-inverse-image-comparison-composition PASS, since integralInverseImageDerivedComposition is built from the .choose of integralInverseImageComposition_existsUnique (l.203-210). Substance from the earlier full review still applies (no Lean or statement change). Advisory: limitComplexUnit is owned by theorem node lem-weil-pbc-ordered-exchange-coefficient-comparison (base-era); module docstrings name the theorem's blueprint id. No compile, no file changed."
+ }
+}

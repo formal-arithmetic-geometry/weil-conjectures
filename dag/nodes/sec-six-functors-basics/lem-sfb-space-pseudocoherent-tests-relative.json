@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-space-pseudocoherent-tests-relative",
+ "kind": "statement",
+ "title": "Pseudo-coherent tensor tests detect relative pseudo-coherence on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived tensor uses K-flat resolutions and $R\\Gamma$ uses K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology]. A perfect object is etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Pseudo-coherent on a space means that etale locally on affine scheme charts the object is represented by a bounded-above complex of finite free structure modules; pseudo-coherent in $D(A)$ means quasi-isomorphic to a bounded-above finite-free $A$-complex [def-pc-ring-pseudo-coherent-complex]. For a locally finite type morphism $g:Z\\to T$ of algebraic spaces, an object $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ is pseudo-coherent relative to $T$ if for every integer $m$ and every commutative square $U\\to V$, $U\\to Z$, $V\\to T$ with $U,V$ schemes and the vertical maps etale, $L|_U$ is $m$-pseudo-coherent relative to $V$. Here on scheme charts use [def-sfb-relative-pseudo-coherent-complex]: locally factor $U\\to V$ as a closed immersion into finite-dimensional affine space over $V$; its derived pushforward admits locally a strictly perfect approximation inducing cohomology isomorphisms above $m$ and a surjection in degree $m$. The affine covers, factorizations and approximations may depend on $m$. Let $A$ be a commutative ring, $f:X\\to\\operatorname{Spec}A$ a separated morphism of finite presentation, and $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Separated means its diagonal is a closed immersion; finite presentation means quasi-compact, quasi-separated and locally of finite presentation on etale scheme charts. Suppose $R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ is pseudo-coherent in $D(A)$ for every pseudo-coherent $E\\in D(\\mathcal O_X)$. Then $K$ is pseudo-coherent relative to $\\operatorname{Spec}A$. Flatness, properness and Noetherian hypotheses are not required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTT, lemma-characterize-pseudo-coherent."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-sfb-space-relative-pseudo-coherent-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in|X|$. Choose $n,Z,z,V,E$ from the algebraic-space derived Chow lemma. Put $P=\\mathbf P^n_A$, $T=X\\times_A P$, and write $p:T\\to X$, $q:T\\to P$, $W=c^{-1}(V)$, $b_W:W\\to X$ and $j:W\\hookrightarrow V$ for its maps. Thus $z\\in W$ maps to $x$, $b_W$ is etale, $j$ is a finitely presented closed immersion, and $E$ is pseudo-coherent with the stated graph-kernel restriction. We do not assert that $b_W$ is an open immersion or an isomorphism onto an open of $X$.",
+   "uses": [
+    "lem-sfb-space-derived-chow-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, second paragraph (choice of derived Chow data)"
+   }
+  },
+  {
+   "text": "For $d\\in\\mathbf Z$ put $F_d=E\\otimes^{\\mathbf L}Lq^*\\mathcal O_P(d)$. The twist is locally free of rank one. On the inverse images of its trivializing opens, tensor by its pullback is tensor by the structure module, so $F_d$ is locally isomorphic to $E$. Consequently $F_d$ is pseudo-coherent, directly from the local finite-free characterization. The projective-projection clause of the flat proper direct-image lemma gives the pseudo-coherent object $G_d=Rp_*F_d$ on $X$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-sfb-space-flat-proper-pseudocoherent-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, third paragraph, pseudo-coherence of the test object on X by 0CTN"
+   }
+  },
+  {
+   "text": "The pseudo-coherent $E$ and $F_d$ have quasi-coherent cohomology: on each etale affine chart their finite-free models are pseudo-coherent on the scheme, hence have quasi-coherent cohomology by the scheme lemma; etale/Zariski comparison and the chart definition of quasi-coherence give the assertion on $T$. Thus $Lp^*K\\otimes^{\\mathbf L}E$ has quasi-coherent cohomology by pullback and tensor preservation. Set $M=Rq_*(Lp^*K\\otimes^{\\mathbf L}E)$. Both $T$ and $P$ are qcqs (products of the separated finitely presented $X$ and projective $P$), so the qcqs direct-image theorem gives $M\\in D_{\\mathrm{QCoh}}(\\mathcal O_P)$.",
+   "uses": [
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-etale-pseudocoherence-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, third paragraph, quasi-coherent domains of the two projection formulas and projective twist test"
+   }
+  },
+  {
+   "text": "Apply the projection formula first to $q$ and $\\mathcal O_P(d)$, then to $p$ with $F_d$ and $K$. Using symmetry/associativity of derived tensor and composition of derived direct images gives isomorphisms in $D(A)$: $$R\\Gamma(P,M\\otimes^{\\mathbf L}\\mathcal O_P(d))\\simeq R\\Gamma(T,Lp^*K\\otimes^{\\mathbf L}F_d)\\simeq R\\Gamma(X,K\\otimes^{\\mathbf L}G_d).$$ The maps $p,q$ are qcqs; no flatness of $q$ is used. The hypothesis of the item applies to $G_d$ by step 2, and therefore the displayed object is pseudo-coherent over $A$ for every $d$.",
+   "uses": [
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, displayed pair of equalities and the following application of the hypothesis"
+   }
+  },
+  {
+   "text": "Apply the etale/Zariski derived equivalence on $P$. It intertwines derived tensor (on flat tensor representatives) and derived global sections, and the twists are the pullbacks of the same Zariski line modules. The Zariski object corresponding to $M$ therefore satisfies the twist tests for $d=0,\\ldots,n$. The projective-space twist criterion makes that object pseudo-coherent. Etale pseudo-coherence descent identifies this with pseudo-coherence of $M$ on the small etale site. Restriction to the open $V$ preserves its local finite-free presentations.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-etale-pseudocoherence-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, third paragraph, projective-space criterion (0CSG), then restriction to V"
+   }
+  },
+  {
+   "text": "The transform-restriction lemma now identifies $M|_V\\simeq Rj_*(b_W^*K)$ in $D(\\mathcal O_V)$. Here the kernel restriction and etaleness required by that lemma are exactly the properties selected in step 1; $K$ satisfies its quasi-coherence hypothesis. Thus $Rj_*(b_W^*K)$ is pseudo-coherent.",
+   "uses": [
+    "lem-sfb-space-derived-chow-transform-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, last displayed formula, with restriction to V (correcting the source display subscript)"
+   }
+  },
+  {
+   "text": "Transport $b_W^*K$ and $Rj_*(b_W^*K)$ to the Zariski derived categories of the schemes $W,V$. The comparison theorem intertwines the closed-immersion direct image (j is qcqs), and pseudo-coherence descent shows that the Zariski direct image is pseudo-coherent. Since $j:W\\hookrightarrow V$ is a closed immersion and $V\\to\\operatorname{Spec}A$ is flat and locally finitely presented (locally its coordinate rings are localizations of polynomial rings), the flat-ambient criterion implies that the scheme object $b_W^*K$ is pseudo-coherent relative to $A$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-flat-ambient-relative-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, last sentence: 09UU on the closed immersion W into V"
+   }
+  },
+  {
+   "text": "For every $x$ the preceding construction gives an etale scheme neighbourhood $b_W:W\\to X$ whose image contains $x$, on which $K$ is pseudo-coherent relative to $A$. Choose one such neighbourhood for each point; these form a set-indexed jointly surjective etale family. Apply relative pseudo-coherence locality for each integer $m$, taking every target chart to be $\\operatorname{Spec}A$ with its identity map. It follows that $K$ is $m$-pseudo-coherent relative to $A$ for every $m$, hence pseudo-coherent relative to $A$ with exactly the definition in the item. If $X$ is empty the same conclusion holds by the empty covering case.",
+   "uses": [
+    "lem-sfb-space-relative-pseudocoherence-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, first paragraph and final local-to-global conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-derived-chow-neighbourhood",
+  "def-pc-projective-space-twist",
+  "def-sfb-space-pseudocoherent-complex",
+  "lem-sfb-space-flat-proper-pseudocoherent-direct-image",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "lem-sfb-space-derived-chow-transform-restriction",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "lem-sfb-space-relative-pseudocoherence-etale-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, complete proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a separated finitely presented algebraic space over a ring pseudo coherent global tensor tests imply relative pseudo coherence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherence of a quasi coherent derived object detected by tensoring with all pseudo coherent objects and taking global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent tensor test criterion for relative pseudo coherence of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[EssFiniteType R S] :\\n  FormallyUnramified R S ↔\\n    ∃ t : S ⊗[R] S, (∀ s, ((1 : S) ⊗ₜ[R] s - s ⊗ₜ[R] (1 : S)) * t = 0) ∧ TensorProduct.lmul' R t = 1\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be a finitely generated $R$-algebra. Let $\\\\mu: S \\\\otimes_R S \\\\to S$ be the multiplication map defined by $\\\\mu(s_1 \\\\otimes s_2) = s_1 s_2$. The algebra $S$ is \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] : FormallySmooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Type*) [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [FormallySmooth R P] [Module.Free P Ω[P⁄R]]\\n  [Module.Finite P Ω[P⁄R]] (h₁ : Function.Surjective (algebraMap P S)) (h₂ : (RingHom.ker (algebraMap P S)).FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (cotangentComplex\", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo_coherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo.?coher|pseudo.?coher.*relative",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finitely presented algebraic space with pseudo coherent global tensor tests is relatively pseudo coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect relative pseudo coherence using derived global sections of tensor products with pseudo coherent objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated finitely presented algebraic space with pseudo coherent global tensor tests is relatively pseudo coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-tests-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent.",
+   "via": [
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CTT via the algebraic-space derived Chow neighbourhood, two projection formulas, flat proper preservation, the existing projective-space twist test and flat-ambient criterion, then etale relative-pseudo-coherence descent. Kept the statement. Five new statement-only lemmas; scheme-only Chow nodes cannot replace their algebraic-space variants. Reused the already existing 08HE comparison instead of creating a duplicate.",
+  "blueprint": "Inherited ancestor is null, confirmed by blueprint_refs.py ancestor; retained that value and the precise inherited chain to det-thm-sf-ctf-stability-direct-images proof (3). Read current latest sk-thm-sf-ctf-stability-direct-images.proof.md clause (3). This is the supporting coherent-duality input of the inherited stable-curve route, proved locally by 0CTT, not a replacement for the unit route. Whole blueprint search found no equivalent criterion or new input.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Used on affine scheme charts to turn a local finite-free pseudo-coherent model into quasi-coherent cohomology; this is an absolute scheme tool, not a replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Used only for composition of derived direct images/global sections in the two projection-formula comparisons; the unit has no separate composition theorem for ringed-topos module functors."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-11e3195cb",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-11e3195cb (reviewer sub-agent of L); spot-checked: Read the full source in spaces-more-morphisms.tex (0CTR, 0CTS, 0CTT, 0CSX, 0CSY) and spaces-perfect.tex (08IN, 0CTN). The item statement is unchanged from live and agrees with 0CTT hypothesis by hypothesis. This is a first split: there is no repair note, so the re-split rule does not apply. The eight steps follow 0CTT. Step 1 is the space Chow lemma. Step 2 twists E and applies 0CTN to the base change of P^n_A to get G_d pseudo-coherent. Step 3 shows quasi-coherent cohomology through charts and the qcqs pushforward node, since T and P are qcqs. Step 4 applies 08IN twice, to q with O(d) and to p with K; q need not be flat. Step 5 transports M to the Zariski site, applies the 0CSG twist test for d=0..n and returns with 08HE. Step 6 applies 0CTS on V. Step 7 transports to Zariski on W and V, applies 08HE, then 09UU (V is open in P^n_A, so flat and locally of finite presentation). Step 8 applies the 0CSX family lemma with the identity chart Spec A for each m; the empty X is covered. The five new nodes are true Stacks lemmas for algebraic spaces, and I tested each on n=0, X=Spec A or g=id. The scheme versions (0CSJ, 0CSK, 0CSD, 09UJ) and the existing 08IN citers carry scheme-only, flatness, Noetherian or boundedness hypotheses, so none can replace them. No new node restates the item or one of its clauses. The reported source error (the final 0CTT display restricts to X x_A V instead of V) is genuine. The two tool uses, lem-sc-pseudo-coherent-qcoh and the ringed-topoi pushforward composition, are generic and accepted. Batch 5: the def-trf and def-sfb citations are general definitions, and the cited sfb lemmas are foundational derived-category facts that reach sec-trace-formula only through definitions and generic lemmas, not through any step of the trace formula or of Poincare duality. No SGA source. Maintainer note: blueprint.from.node is null, inherited from the broken chain of the base item (Q130); repair it on the base node. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePseudoCoherentTestsRelative",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherentRelativeTo_of_pseudoCoherent_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePseudoCoherentTestsRelative.lean",
+  "statement": "theorem isPseudoCoherentRelativeTo_of_pseudoCoherent_tensor_tests (A : CommRingCat.{u}) (X : AlgebraicSpace (Spec A)) [HasDerivedCategory.{w} X.SmallModules] [∀ T : Scheme.{u}, HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec A)))) (_hsep : MapIsSeparated f) (_hfp : MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom) ∧ MapIsLocallyOfFinitePresentation f) (K : X.DerivedQCoh) (_htests : ∀ E : X.DerivedModules, X.IsPseudoCoherent E → DerivedCategory.IsPseudoCoherent ((affineDerivedSections A (Over.mk (𝟙 (Spec A))) (Iso.refl _) X f).obj (X.derivedDualityModel.closed.tensor.obj (E, K.obj)))) : IsPseudoCoherentRelativeTo f K",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-115dbf33d",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Item matches Stacks 0CTT clause by clause. Separated = diagonal is a closed immersion; fp = qc + qs (diagonal qc) + chartwise lfp; K in DerivedQCoh; test over all pseudo-coherent E; A-linear RΓ of E⊗K pseudo-coherent in D(A); conclusion is the new space predicate. New def-sfb-space-relative-pseudo-coherent-complex renders 0CSY/0CSX(1): all étale chart squares, scheme IsMPseudoCoherentRelativeTo of derivedSchemeRestriction, ∀ m. Its LFT witness is automatic from MapIsLocally LFP. No duplicate found in Lean, DAG or runs. statement unchanged; stmt_deps additions are owner nodes; lean.statement verbatim; universes w/wZ independent; sorry only; docstrings and 8 proof steps present; proof-dep imports exist. Notes: qs inlined (defeq to MapIsQuasiSeparated, item does not cite def-sfb-stack-qcqs-morphism); MapIsQuasiCompact owner def-sfb-proper-curve-moduli reached via def-sfb-space-morphism-properties, as in landed siblings. No files changed, no compile."
+ }
+}

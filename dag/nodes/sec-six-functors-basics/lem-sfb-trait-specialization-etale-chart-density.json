@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-trait-specialization-etale-chart-density",
+ "kind": "statement",
+ "title": "Lifting smoothing traits to etale charts and detecting density",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal F$ be a Deligne--Mumford stack on $k$-schemes, and let $\\mathcal U\\subset\\mathcal F$ be an open full substack. Stack, scheme atlas, 2-fibre product and geometric point have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-weil-geometric-point]; open means that pullback along every scheme-valued object is represented by an open subscheme. Suppose that for every algebraically closed extension $\\Omega/k$ [def-weil-algebraic-closure] and every object $x\\in\\mathcal F(\\Omega)$ there is an object $\\xi\\in\\mathcal F(\\operatorname{Spec}\\Omega[[t]])$, with an isomorphism $\\xi|_{t=0}\\simeq x$ and with $\\xi|_{\\operatorname{Spec}\\Omega((t))}$ in $\\mathcal U$. The rings are the one-variable formal power-series ring [def-weil-pbc-multivariate-power-series] and its localization obtained by inverting $t$. For any representable etale morphism $a:V\\to\\mathcal F$ from a $k$-scheme [def-pc-scheme, def-weil-etale-morphism], any geometric point $v:\\operatorname{Spec}\\Omega\\to V$, and any such $\\xi$ equipped with $\\xi|_{t=0}\\simeq a(v)$, there is a morphism $\\widetilde v:\\operatorname{Spec}\\Omega[[t]]\\to V$ restricting to $v$, together with a 2-isomorphism $a\\widetilde v\\simeq\\xi$ restricting to that prescribed isomorphism. Consequently the open subscheme $V\\times_{\\mathcal F}\\mathcal U$ is dense in $V$ (its closure in the underlying topological space is all of $V$). No surjectivity of $a$, smoothness of $\\mathcal F/k$, or finite-type hypothesis on $V/k$ is required.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E86 (lemma-smooth-dense) and 0E87 (lemma-smooth-dense-in-stable), trait-specialization argument; agent expansion to individual etale charts and prescribed special lifts, using the strict henselian section argument for the etale algebraic-space 2-fibre product."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\Omega[[t]]$, $T=\\operatorname{Spec}R$, and let $i:\\operatorname{Spec}\\Omega\\to T$ be constant-coefficient reduction. The power-series local-ring and quotient lemmas identify the maximal ideal with $(t)$ and the residue map with $R\\twoheadrightarrow\\Omega$. The variables-completeness lemma makes $R$ $(t)$-adically complete; the complete-pair lemma therefore makes $(R,(t))$ henselian. Thus $R$ is a henselian local ring with the specified residue map. This uses no property of the stack.",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-variables-complete",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ALJ (lemma-complete-henselian); power-series inputs in algebra.tex, Remark 032C (remark-Noetherian-complete-local-ring-universally-catenary), specialized to one variable over a field."
+   }
+  },
+  {
+   "text": "Form $E=T\\times_{\\mathcal F}V$. Representability of $a$ makes this an algebraic space and etale base change makes $p:E\\to T$ etale. The prescribed special-fibre isomorphism defines a point $e:\\operatorname{Spec}\\Omega\\to E$ over $i$: its components are $i$, $v$, and that isomorphism (inverted if the 2-fibre-product convention requires it). Choose an etale surjective scheme atlas $w:W\\to E$. Its pullback $P=W\\times_E\\operatorname{Spec}\\Omega$ is a scheme etale and surjective over $\\operatorname{Spec}\\Omega$, hence nonempty. Etale implies weakly etale, so the algebraically-closed-field section lemma gives $\\operatorname{Spec}\\Omega\\to P$. Its projection is a lift $z:\\operatorname{Spec}\\Omega\\to W$ of the actual point $e$. Composition in the chartwise etale calculus makes $q=pw:W\\to T$ etale.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "det-pe-morphisms-etale-comparison",
+    "lem-fix-weakly-etale-algclosed-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0CIN (lemma-base-change-etale), 0CIM (lemma-composition-etale), compatibility paragraph before 0CIM; spaces.tex 025Y (definition-algebraic-space); proetale.tex 0F6C (lemma-geometric-lift-to-cover), section-existence argument."
+   }
+  },
+  {
+   "text": "Apply affine pointed-neighbourhood shrinking to the etale scheme map $q$ and $z$, with the whole of $W$ as the open neighbourhood. Obtain $j:\\operatorname{Spec}B\\hookrightarrow W$ and $z_0:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}B$ with $jz_0=z$ and $qj$ etale. Write $\\alpha:R\\to B$ for $qj$ and $\\theta:B\\to\\Omega$ for $z_0$. The equation $qjz_0=i$ is $\\theta\\alpha=\\epsilon$, where $\\epsilon:R\\twoheadrightarrow\\Omega$ is constant coefficient. Apply the henselian ring lifting lemma with base ring $R$, target henselian local ring $S=R$, base map $\\beta=1_R$, field $K=\\Omega$, and this $\\epsilon,\\theta$. It yields $f:B\\to R$ with $f\\alpha=1_R$ and $\\epsilon f=\\theta$. Hence $s=j\\operatorname{Spec}f:T\\to W$ satisfies $qs=1_T$ and $si=z$, as equalities of scheme morphisms.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-sc-etale-henselian-ring-lift",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ (lemma-map-into-henselian), with S=R; affine shrinking: etale-cohomology.tex 04HX (lemma-describe-etale-local-ring), affine-neighbourhood paragraph."
+   }
+  },
+  {
+   "text": "The section $ws:T\\to E$ over $T$, composed with $E\\to V$, gives $\\widetilde v$. Unwinding the 2-fibre product gives a 2-isomorphism $a\\widetilde v\\simeq\\xi$. Because $wsi=wz=e$, its restriction at $i$ is the originally prescribed triple, not merely a point with the same image. More explicitly, the equivalence between $E$ and the discrete fibred groupoid of its representing algebraic space supplies an isomorphism between this restricted triple and $(i,v,\\phi)$. Since schemes as fibred groupoids have only identity arrows, its two scheme components are identities; the compatibility equation for an arrow of the 2-fibre product is exactly equality of the restricted 2-isomorphism with $\\phi$. Thus $\\widetilde v i=v$ and the required framing is preserved.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E86 (lemma-smooth-dense), trait argument expanded by the explicit 2-fibre-product convention in def-sfb-stable-pointed-moduli-groupoids."
+   }
+  },
+  {
+   "text": "The power-series domain lemma gives that $(0)$ is prime in $R$. It is contained in $(t)$, so the point $(t)$ lies in the closure of the singleton $(0)$: every basic open $D(h)$ containing $(t)$ has $h\\notin(t)$, hence $h\\ne0$, and contains $(0)$. Moreover every nonzero series is $t^n u$ for a unit $u$: take its least nonzero coefficient and use the unit criterion of the power-series local-ring lemma. Consequently $R[1/t]=\\Omega((t))$ is a field and its spectrum maps to $(0)$. Under the continuous scheme map $\\widetilde v$, the image of this generic point therefore specializes to the image of $v$. The 2-isomorphism just constructed and fullness of the open substack show that this generic point maps into $V\\times_{\\mathcal F}\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-local-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E86 (lemma-smooth-dense), final sentences: the generic point specializes to the closed point."
+   }
+  },
+  {
+   "text": "For every underlying point $y\\in V$, choose an algebraic closure $\\Omega$ of $\\kappa(y)$ and the corresponding geometric point $v:\\operatorname{Spec}\\Omega\\to V$. The residue-field description of geometric points shows its image is $y$; the structural field maps make $\\Omega$ an extension of $k$. Apply the assumed trait existence to $a(v)$ and then steps 1--5 to its prescribed special identification. They put $y$ in the closure of $V\\times_{\\mathcal F}\\mathcal U$. This holds for every $y$, so that closure is all of $V$. Its openness is precisely the stipulated scheme-test definition of the open substack. When $V$ is empty the same conclusion holds vacuously. Neither this argument nor the lifting construction uses surjectivity of $a$, smoothness of $\\mathcal F$, or finite type over $k$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E86 (lemma-smooth-dense) and 0E87 (lemma-smooth-dense-in-stable), final density deduction; scheme geometric points: etale-cohomology.tex 03PO (definition-geometric-point)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "det-pe-morphisms-etale-comparison",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-sc-etale-henselian-ring-lift",
+  "def-weil-affine-spectrum",
+  "def-trf-scheme-algebraic-space",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "0E86 (lemma-smooth-dense), trait specialization argument, and 0E87 (lemma-smooth-dense-in-stable); agent expansion to prescribed lifts on arbitrary etale charts by 08HQ and algebraic-space scheme atlases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smoothing of a stable curve lifts through an etale chart of its moduli stack over the complete trait Omega[[t]]",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.lift_X; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: Dense.preimage only pulls back an already known topological density along an open map; it does not lift traits in a 2-fibre product or establish atlas density from stack-valued traits. Scheme etale charts and standard-etale polynomial lifting do not state the stack criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open substack is dense on every etale chart if every geometric point admits a trait with generic point in the open",
+   "results": "exists_open_dense_of_open_dense_subtype; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc; AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι; AlgebraicGeometry.Scheme.Opens; AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE; AlgebraicGeometry.Scheme.PartialMap.dense_domain; AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor; Algebra.isOpen_etaleLocus",
+   "date": "2026-10-22",
+   "verdict": "no match: Dense.preimage only pulls back an already known topological density along an open map; it does not lift traits in a 2-fibre product or establish atlas density from stack-valued traits. Scheme etale charts and standard-etale polynomial lifting do not state the stack criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Dense, IsOpenMap",
+   "results": "Dense.preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: Dense.preimage only pulls back an already known topological density along an open map; it does not lift traits in a 2-fibre product or establish atlas density from stack-valued traits. Scheme etale charts and standard-etale polynomial lifting do not state the stack criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.?stack|coarse.?moduli|trait.*dense|dense.*trait|etale.*atlas",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: Dense.preimage only pulls back an already known topological density along an open map; it does not lift traits in a 2-fibre product or establish atlas density from stack-valued traits. Scheme etale charts and standard-etale polynomial lifting do not state the stack criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A trait specialization criterion for density in an etale atlas of a Deligne Mumford stack",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define scheme etale morphisms, their sites and etale loci, not stack-valued trait lifting or density on charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Deligne Mumford stack with an open substack, power series trait smoothings of every geometric point lift through any etale scheme chart and make the pulled back open dense",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.instIsSmoothOfIsOpenImmersion; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "AlgebraicGeometry.Etale.etale_isStableUnderBaseChange; AlgebraicGeometry.Etale.instIsMultiplicativeScheme; AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Etale; AlgebraicGeometry.Etale.instHasRingHomPropertyEtale; AlgebraicGeometry.Scheme.Etale.mk; AlgebraicGeometry.Etale.instFormallyUnramified; AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*comp|Etale.*baseChange|inst.*Etale.*(Comp|Pullback)|etale.*henselian|henselian.*etale",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale scheme morphisms are stable under composition and base change and open immersions are etale",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A trait over a henselian power series ring lifts through etale charts of a Deligne Mumford stack",
+   "results": "ChartedSpace.LiftPropOn; HenselianLocalRing.TFAE; Algebra.Etale.formallyEtale; RingHom.Etale; Algebra.FormallyEtale; RingHom.FormallyEtale; AlgebraicGeometry.Scheme.Etale; HenselianLocalRing.toIsLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "instance|theorem|lemma",
+   "results": "56; 63; 69; 74; 78",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|trait.*dens|dens.*trait|stack.*henselian",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open substack is dense on every etale chart when each algebraically closed field point is the special fibre of a formal disc whose puncture lies in the open",
+   "results": "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι; AlgebraicGeometry.Scheme.PartialMap.dense_domain; Algebra.isOpen_etaleLocus; AlgebraicGeometry.Scheme.RationalMap.dense_domain; AlgebraicGeometry.Scheme.Hom.denseRange; AlgebraicGeometry.dominant_eq_topologically; AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE; AlgebraicGeometry.IsDominant.denseRange",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme etale, henselian-ring, manifold or already-assumed density statements do not give the framed stack-valued trait lift and chart-density criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Old item step 3 only: after the existing framed smoothing, lift the trait through an etale chart and deduce density.",
+   "via": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-trait-specialization-etale-chart-density",
+  "worker": "stage1",
+  "summary": "Expanded the unsplit trait/chart criterion into a henselian-ring preparation, an algebraic-space atlas with a prescribed rational lift, affine henselian lifting, recovery of the framed 2-isomorphism, and pointwise specialization density. Reused existing DAG statements throughout; no new nodes or Lean attachments. The full statement is unchanged, including arbitrary etale charts and no finite-type hypothesis.",
+  "blueprint": "Realizes inherited from.place, old parent step 3: lift the supplied framed smoothing to an etale chart, then deduce density. The ancestor command returns None; preserve inherited from.node=null and via. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md clause (3), and searched the whole blueprint for trait specialization, henselian sections, etale atlas and smooth density; no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-local-ring",
+    "why": "Unit criterion and maximal ideal of the one-variable power-series ring; generic commutative algebra. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Identifies the prescribed constant-coefficient residue map and its kernel; generic commutative algebra. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-variables-complete",
+    "why": "Completeness at the variable ideal; generic commutative algebra. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Completeness implies the henselian lifting hypothesis; generic commutative algebra. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Pullback of a scheme atlas remains a surjective etale scheme cover; algebraic-space tool with no curve-estimate input. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Composition and scheme compatibility for the etale atlas; algebraic-space calculus. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Only the generic implication etale implies weakly etale, to apply the existing section lemma. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-fix-weakly-etale-algclosed-section",
+    "why": "Gives a rational point in the nonempty atlas fibre over Omega; generic field-scheme tool. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-etale-henselian-ring-lift",
+    "why": "Lifts the actual residue map to a retraction over the complete trait, retaining its closed point. No statement of the item unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-domain",
+    "why": "Provides the zero prime for the elementary specialization calculation. No statement of the item unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "det-pe-morphisms-etale-comparison",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-sc-etale-henselian-ring-lift",
+  "lem-weil-pbc-power-series-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-09144c795",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-09144c795 (reviewer sub-agent of L); spot-checked: Q131 lem-sfb-trait-specialization-etale-chart-density @09144c79: one commit containing the item and the report; no new nodes, no fixes. The statement and stmt_deps are byte-identical to the unsplit node Q102 created (snapshots 24d9/de3a/5298). The only citer is lem-sfb-unpointed-stable-coarse-projective step 3, so there is no cycle. This is a first split, not a 2026-10-21 re-split. Sources read: moduli-curves 0E86 (closed point to ξ, generic point into the open, specialization) and 0E87; algebra 08HQ; more-algebra 0ALJ. Step 1: power-series local-ring(b) and quotient give max ideal = ker ε = (t); variables-complete and 0ALJ give (R,(t)) henselian, which is henselian local. Step 2: E = T×_F V → T is etale (def-sfb convention, dm-etale-atlas base change); e = (i,v,φ); the atlas fibre P over Spec Ω is etale surjective hence nonempty; det-pe(1) and the alg-closed section lemma give z with wz = e, with no field extension; q = pw is etale (chartwise/scheme-chart convention). Step 3: affine shrink gives j, z0 and an etale α; θα = ε; 08HQ with S = R, β = 1, K = Ω gives f with fα = 1 and εf = θ; algebra checked: qs = 1, si = z. Step 4: the arrow equation of the 2-fibre product with identity scheme components recovers φ, so the framing is preserved; elementary. Step 5: R is a domain, nonzero series are t^n·unit so Ω((t)) maps to (0), and (t) lies in the closure of (0); continuity and the 2-iso put the image in the open V×_F U. Step 6: Ω = κ(y)^alg covers every y, including non-closed y with transcendental residue field; V empty is vacuous; no surjectivity, smoothness or finite type is used. Isomorphism-invariance of the open comes from the 2-fibre product, so 'full' suffices. Duplicate search (0E86, Ω[[t]], smooth-dense, strict-henselian section): none; the unpointed lem-sbc section node is rightly not cited. Batch-5: def-trf-algebraic-space, def-trf-scheme-algebraic-space, lem-trf-space-fibre-products-etale-covers (02X2/041F), lem-trf-space-chartwise-etale-permanence (03FT/03FU) and lem-sfb-dm-etale-atlas-calculus (whose closure reaches sec-trace-formula only through that definition) are generic algebraic-space definitions and calculus, not part of the trace formula or Poincare duality: accepted. tool_uses accepted: power-series nodes, complete-pair-henselian, space calculus, det-pe(1), the weakly-etale section lemma and the 08HQ lift are generic black boxes. No SGA. Advisory: step 2 could say explicitly that q is etale by the scheme-chart convention when a is representable only by algebraic spaces."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSpecializationEtaleChartDensity",
+  "declaration": "CategoryTheory.trait_specialization_etale_chart_density",
+  "declarations": [
+   "CategoryTheory.moduliTraitClosed",
+   "CategoryTheory.moduliTraitGeneric",
+   "CategoryTheory.trait_specialization_etale_chart_density"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSpecializationEtaleChartDensity.lean",
+  "statement": "theorem trait_specialization_etale_chart_density (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsDeligneMumfordModuliStack F) (U : OpenModuliSubstack F) (htraits : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra k Ω] (x : BasedFunctor (discreteModuli (yoneda.obj ((algSpec (.of k)).obj (op (CommAlgCat.of k Ω))))) F), ∃ ξ : BasedFunctor (discreteModuli (yoneda.obj ((algSpec (.of k)).obj (op (CommAlgCat.of k (PowerSeries Ω)))))) F, Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map (moduliTraitClosed k Ω))).comp ξ) x) ∧ ∀ z : (discreteModuli (yoneda.obj ((algSpec (.of k)).obj (op (CommAlgCat.of k (Localization.Away (PowerSeries.X : PowerSeries Ω))))))).obj, U.property (ξ.obj ((discreteModuliMap (yoneda.map (moduliTraitGeneric k Ω))).obj z))) : ∀ (V : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj V)) F), IsEtaleModuliMap a → (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra k Ω] (v₀ : (algSpec (.of k)).obj (op (CommAlgCat.of k Ω)) ⟶ V) (ξ : BasedFunctor (discreteModuli (yoneda.obj ((algSpec (.of k)).obj (op (CommAlgCat.of k (PowerSeries Ω)))))) F) (φ : ModuliTwoIso ((discreteModuliMap (yoneda.map (moduliTraitClosed k Ω))).comp ξ) ((discreteModuliMap (yoneda.map v₀)).comp a)), (∀ z : (discreteModuli (yoneda.obj ((algSpec (.of k)).obj (op (CommAlgCat.of k (Localization.Away (PowerSeries.X : PowerSeries Ω))))))).obj, U.property (ξ.obj ((discreteModuliMap (yoneda.map (moduliTraitGeneric k Ω))).obj z))) → ∃ (v₁ : (algSpec (.of k)).obj (op (CommAlgCat.of k (PowerSeries Ω))) ⟶ V), moduliTraitClosed k Ω ≫ v₁ = v₀ ∧ ∃ e : ModuliTwoIso ξ ((discreteModuliMap (yoneda.map v₁)).comp a), HEq (Functor.whiskerLeft (discreteModuliMap (yoneda.map (moduliTraitClosed k Ω))).toFunctor e.val.hom) φ.val.hom) ∧ ∃ (W : Over (Spec (.of k))) (j : W ⟶ V) (c : BasedFunctor (discreteModuli (yoneda.obj W)) (moduliTwoFiberProduct a (fullModuliInclusion F U.property))), IsSchemeModuliBaseChange c j ∧ IsOpenImmersion j.left ∧ DenseRange j.left",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bafeb102c",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node, Stacks 0E86, the item module and the dependency declarations (ModuliTwoIso, moduliTwoFiberProduct, discreteModuli/discreteModuliMap, IsDeligneMumfordModuliStack, OpenModuliSubstack, IsEtaleModuliMap, IsSchemeModuliBaseChange). Every hypothesis and conclusion clause matches: arbitrary algebraically closed Omega with Algebra k Omega (transcendental allowed); the trait is a real stack map from Spec Omega[[t]] with Nonempty 2-iso at the closed point and generic restriction in U tested on all objects; arbitrary chart a with only IsEtaleModuliMap (no surjectivity, finite type or smoothness); the lift satisfies closed ≫ v1 = v0 exactly; the restricted 2-iso is HEq to phi.hom, well-typed because CostructuredArrow.map is strictly functorial, so the prescribed iso is preserved; density is stated on the actual 2-fibre product with fullModuliInclusion as an open immersion with DenseRange. Helpers moduliTraitClosed/moduliTraitGeneric are genuine Spec maps (constantCoeff, localization); no existing copy found. lean.statement is verbatim the signature; the statement text is unchanged; added stmt_deps def-sfb-open-moduli-substack and def-sfb-moduli-chart-normalization were landed 2026-10-22, before the delivery (allowed by brief-stage2 §5). Docstrings carry source and blueprint references and the proof steps; the only proof is sorry; imports exist. Edge cases checked: empty V/F, char p, non-closed points, empty or non-surjective chart, automorphisms; universes consistent. Advisory only: the lifting clause also assumes the generic fibre is in U, which matches the node's 'any such xi' and the sole citer. No file changed, so no compile run."
+ }
+}

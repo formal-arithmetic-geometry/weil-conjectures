@@ -17,35 +17,32 @@
  ],
  "proof": [
   {
-   "text": "Construct the finite-stage and apex derived equivalences, both object comparison families, and the actual transition pullbacks and their fixed comparison to perfectLimitMap. These constructions use cartesian projection equations, the exact nested-open restriction comparison, the supplied local isomorphisms and the derived open-site equivalence.",
-   "uses": [
-    "def-pc-perfect-overlap-stage-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the remaining coherent diagram theorem for all this fixed data, obtaining comparison data and a natural comparison with the specified object equation.",
+   "text": "Apply the proved perfect_overlap_object_realization_core_data theorem. Unfold the adopted source core proposition. The core already contains the fixed stage and apex equivalences, object isomorphisms, transition functors, their pinned base comparisons, natural comparison and object equations; no separate geometric construction is needed in this module.",
    "uses": [
     "lem-pc-perfect-overlap-object-realization-core-data"
    ],
    "elementary": false
   },
   {
-   "text": "For any stage morphism, multiply by the target component of chi, substitute the target object equation, and apply naturality of eta. Substitute the inverse form of the source object equation and cancel the isomorphism components. This is pinned_conjugation in Lean; after expanding the functor maps of psi and Iso.homCongr it gives hom_pin by the proved overlapLimitTransition_pin. Assemble the unchanged PerfectHomObjectRealization structure and the dependent pair with the comparison data.",
+   "text": "Prove pinned_conjugation by cancelling the source and target object isomorphisms and using naturality of the functor comparison. Apply it to the core object equations. Expand Iso.homCongr and functor maps of psi, and use core.transition_pin to obtain exactly the required perfectLimitMap equation. This is the complete private theorem perfect_overlap_object_realization_hom_pin.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Map the nonempty dependent pair under Nonempty.map. For its core, construct PerfectHomObjectRealization fieldwise using completePerfectHomObjectRealization and the proved Hom pin, then pair it with the same comparison-data family. Delta-reduce only the target proposition, retaining its local definitions. This preserves every supplied local identification and every stage, apex and object comparison without repeatedly substituting the full geometric expressions.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-overlap-stage-equivalence",
   "lem-pc-perfect-overlap-object-realization-core-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "W4",
-  "date": "2026-10-15",
+  "agent": "E3",
+  "date": "2026-10-23",
   "document": "https://stacks.math.columbia.edu/tag/09RE",
-  "note": "Restriction and cartesian composition in Tags 09RE, 08DW and 0D5S; categorical Hom assembly proved in Lean."
+  "note": "Repair the returned packet against the currently restored A2 source; retain its public transport import, specialize the proved core.transition_pin at the two fixed objects in the Hom-pin proof, and map the nonempty core with its typed assembly helper. Delta-reduce the target only and unfold the adopted source core statement explicitly to avoid expensive rewriting of the geometric expressions. Correct the stale direct stage-equivalence dependency and proof docstring. No new statement, mathematical object or hole."
  },
  "mathlib_searches": [
   {
@@ -134,7 +131,8 @@
   ],
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "Restored from the current quarantine source with only the obsolete PerfectHomTransport public import redirected to the adopted source API. All public declarations, signatures, definitions and proofs are preserved. The restored caller uses the landed canonical-family CoreData theorem."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -147,14 +145,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261014T193107-L-1087936",
-  "kind": "interface",
+  "landing": "20261023T102637-L-2941107",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

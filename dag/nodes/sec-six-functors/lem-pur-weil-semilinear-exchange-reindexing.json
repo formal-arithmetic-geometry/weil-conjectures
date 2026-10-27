@@ -14,251 +14,79 @@
   "def-exchange-projection",
   "lem-weil-proetale-isomorphism-inverse-image",
   "def-cbc-completed-exchange-map",
-  "fix-lem-exchanges"
+  "fix-lem-exchanges",
+  "def-pur-semilinear-exchange-reindexing-data"
  ],
  "proof": [
   {
-   "text": "Work over $S=Y$: the structure maps are $f:X\\to Y$ and $g:Y'\\to Y$. Both are separated finite type, and $\\ell$ is invertible on $Y$. Thus the formulas of [def-exchange-projection] apply without making $g$ a $k$-morphism. Put $G_T=u^{-1}$ for each of the isomorphisms $u=g,g',\\bar g$. By [lem-weil-proetale-isomorphism-inverse-image], these functors relabel site objects, are exact equivalences, and carry the constant coefficient ring to the same constant ring. Therefore their module pullbacks are precisely $G_T$, including on complexes by [def-weil-pbc-proetale-operations].",
+   "text": "Over $S=Y$, apply [lem-pur-isomorphism-finite-mate-normalization] to the chosen compactification and its isomorphism pullback. It identifies the specified proper mate with $r$ and the specified open factor with $\\beta$. Hence $\\operatorname{Ex}_!^c=Rp'_*(\\beta)r_{j_!-}$ is exactly the displayed natural reindexing isomorphism at finite coefficients, including the normalization of its first factor.",
    "uses": [
-    "def-exchange-projection",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-pbc-proetale-operations"
+    "lem-pur-isomorphism-finite-mate-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; setup of semilinear reindexing over the target scheme"
+    "place": "Constituent-compatibility assembly paragraph; short assembly of the auxiliary argument for original reviewed steps 1,2,3,4,5."
    }
   },
   {
-   "text": "First compare underived direct images. For a sheaf $F$ on $\\overline X$ and an object $V\\to Y'$ of its small pro-etale site, [def-weil-proetale-inverse-image] gives\n$$(g^{-1}p_*F)(V)=F(\\overline X\\times_Y V),\\qquad (p'_*\\bar g^{-1}F)(V)=F(\\overline X'\\times_{Y'}V\\to\\overline X).$$\nThe canonical fibre-product identification identifies these two section modules and their restriction maps. Denote the resulting natural isomorphism by $r_F$. Its transpose under $p'^*\\dashv p'_*$ is $\\bar g^{-1}\\varepsilon_p\\circ\\theta_{p_*F}$: both maps take a section on $\\overline X\\times_Y V$ to its restriction along the same map into that fibre product. The mate characterization of [def-weil-pbc-adjunction-mate] therefore identifies $r$ with the specified underived unit--square--counit composite.",
+   "text": "Apply [lem-pur-isomorphism-finite-exchange-coherence] to these finite maps: its identity and horizontal equations give identity and successive base changes; its vertical-interchange equation gives compatibility with compactifiable composition, inserting the canonical compositors. Its quotient-coefficient square gives the claimed finite coefficient compatibility on constructible finite-Tor inputs.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; section formula and transpose of the proper factor"
-   }
-  },
-  {
-   "text": "Take a K-injective representative $F\\to I$. The equivalence $\\bar g^{-1}$ preserves K-injectives: it is a right adjoint to its exact inverse equivalence, so [lem-weil-pbc-right-adjoint-preserves-kinjective] applies. Thus $g^{-1}p_*I$ and $p'_*\\bar g^{-1}I$ compute the two derived direct images. Step 2 applied to $I$ defines their reindexing isomorphism $r_F:g^{-1}Rp_*F\\simeq Rp'_*\\bar g^{-1}F$. The fraction characterization of the canonical derived adjunction in [lem-pc-pre-derived-adjoint-functors-general] carries its underived transpose to $\\bar g^{-1}\\varepsilon_p\\circ\\theta_{Rp_*F}$. Hence, by the mate characterization in [def-weil-pbc-adjunction-mate], this $r_F$ is exactly $\\operatorname{Ex}_{*,p}(F)$ of [def-exchange-projection], with its specified derived unit and counit.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-pbc-adjunction-mate",
-    "def-exchange-projection"
+    "lem-pur-isomorphism-finite-exchange-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; derive the section comparison with the actual adjunction normalization"
+    "place": "Constituent-compatibility assembly paragraph; short assembly of the auxiliary argument for original reviewed steps 6,7,8."
    }
   },
   {
-   "text": "For the open factor use the canonical isomorphism $\\beta:\\bar g^{-1}j_!\\simeq j'_!g'^{-1}$ of [lem-cbc-proetale-extension-zero-base-change]. Its reindexing normalization is fixed by the open adjunction: its inverse is the transpose of $g'^{-1}K\\to g'^{-1}j^{-1}j_!K\\cong j'^{-1}\\bar g^{-1}j_!K$. This is explicitly the normalization of $\\beta$ in [lem-cbc-strict-tower-proper-open-calculus]; applying it to constant towers and evaluating gives the finite comparison. Relabeling an open slice preserves this unit map, so the reindexing identification of the two left adjoints has precisely this transpose. Uniqueness under the open adjunction identifies that reindexing map with $\\beta$.",
+   "text": "Apply [lem-pur-completed-reindexing-lifted-coefficients], which specializes the coefficient-independent module, limit and mate argument to pbcIntegralDatum. The coefficient prime is a unit on every k-scheme. The pointwise clause gives completed reindexing, and the square clause gives the specified ordinary and strict mates on each supplied chosen Cartesian square.",
    "uses": [
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "lem-pur-completed-reindexing-lifted-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; normalize open extension by zero"
+    "place": "Constituent-compatibility assembly paragraph; short assembly of the auxiliary argument for original reviewed steps 9,10,11."
    }
   },
   {
-   "text": "By definition, $\\operatorname{Ex}_!^c=Rp'_*(\\beta)\\circ\\operatorname{Ex}_{*,p}(j_!-)$. Substituting Steps 3 and 4 gives exactly the two displayed factors in the statement. Each is invertible and natural in the input, so their ordered composite is the claimed natural isomorphism. This identifies the proper factor itself as the specified mate.",
+   "text": "Apply [lem-pur-isomorphism-strict-integral-exchange-normalization] to $M=j_!K$ on the supplied integral domain. Its strict equality $v_\\bullet=r_\\bullet$ identifies the actual chosen lift before $R\\lim$. Its reconstruction identity then gives the same ordered proper/open reindexing composite for the completed exchange. Its strict pasting and reduction equations give the integral identity, horizontal and vertical composition, and integral reduction claims. For invertibility of the completed exchange, the proper normalization makes the source completion unit invertible, and the open normalization makes the target completion unit invertible. The ordinary reindexing exchange is the composite of the invertible proper mate and direct image of the open comparison. Its normalized total identity therefore makes the completed exchange invertible by cancellation of the source unit.",
    "uses": [
-    "def-exchange-projection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; multiply the two identified factors"
-   }
-  },
-  {
-   "text": "For identity and successive isomorphisms, the pullback square maps are identity and pasted relabelings, respectively. Clauses (4) and (1) of [lem-weil-pbc-mate-pasting] identify their direct-image mates with identity and horizontal composite. The open comparisons satisfy the identical identity and successive-base-change equations by [lem-cbc-strict-tower-proper-open-calculus]. Inserting these equations into $Rp'_*(\\beta)r$ gives\n$$e_{gh}=(e_h\\,g'^{-1})\\circ(h^{-1}e_g),\\qquad e_1=1,$$\nwith the canonical pullback and direct-image compositors. These equations concern the named transformations, since Steps 3--5 identified each factor.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "lem-pur-isomorphism-strict-integral-exchange-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; identity and horizontal isomorphism-pasting"
+    "place": "Constituent-compatibility assembly paragraph; short assembly of the auxiliary argument for original reviewed steps 12,13,14."
    }
   },
   {
-   "text": "To check vertical composition, expand the compact-support comparison on a compatible compactification tower as a proper/open interchange followed by direct-image and open-extension compositors. The interchange in [lem-cbc-strict-tower-proper-open-calculus] is the mate of its explicitly specified pullback/open map $\\alpha_Q$; its base-change equation applies to any scheme base change, including the present isomorphism. The direct-image pieces paste by clause (2) of [lem-weil-pbc-mate-pasting], and the open pieces by the open-composition clause of the same proper/open calculus. Consequently the expanded composite satisfies\n$$e_{hf}(G_ZD)=(D'G_X)(F_h'e_f)(e_hF_f),$$\nwhere $F$ denotes the chosen compact-support composites and $D:F_hF_f\\to F_{hf}$ is the tower composition comparison. The equality holds for the constituent maps even before restricting to inputs on which $D$ is invertible. On witnessed inputs this is exactly the comparison and equation of [lem-cbc-complete-proetale-composition-pasting-coherence]. Finite-level equalities follow by using constant strict towers and evaluation.",
+   "text": "The hypotheses of [lem-pur-isomorphism-exchange-scalar-refinement-descent] are precisely the finite identifications and equations from Steps 1--2 and the completed identifications and strict equations from Steps 3--4. Its scalar conclusions give rationalization and common-stage coefficient extension with the same ordered identity. Its refinement equation inserts the canonical compactification comparisons on the stated field-base domains and intertwines the canonical composition comparisons there. Its six outputs are the predicates of [def-pur-semilinear-exchange-descent-data].",
    "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-pbc-mate-pasting",
-    "lem-cbc-complete-proetale-composition-pasting-coherence"
+    "lem-pur-isomorphism-exchange-scalar-refinement-descent",
+    "def-pur-semilinear-exchange-descent-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; proper/open interchange in vertical compact-support composition"
-   }
-  },
-  {
-   "text": "For a finite quotient $A_{E,n}\\to A_{E,m}$, the pullback and compact-support coefficient comparisons on finite constructible finite-Tor inputs are supplied by [lem-fix-operation-reduction]. For the proper factor, use the canonical projection-formula comparison with the coefficient object $B=A_{E,m}$; it need not separately be invertible. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] with $Q=B$: its two equal composites say exactly that the proper mate commutes with this tensor-coefficient comparison. Pullback identifies the constant sheaf $B$ with the same $B$ by reindexing; on a flat tensor representative both orders send $x\\otimes b$ to the same relabeled section tensored with $b$. For the open factor, the comparison is characterized by its open unit as in Step 4, which coefficient extension preserves by [lem-fix-operation-reduction]. The composite of these proper and open coefficient comparisons is the compact-support comparison in that lemma. Composing the two commuting squares proves the finite quotient assertion, without assuming finite quotient extension commutes invertibly with arbitrary ordinary direct images.",
-   "uses": [
-    "lem-fix-operation-reduction",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; finite quotient-coefficient extension, with the finite-Tor hypothesis retained"
-   }
-  },
-  {
-   "text": "At the integral stage put $P_n=\\mathcal O_E/\\varpi_E^n$ and $A_T=\\varprojlim_n(P_n)_T$. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] identify $g^{-1}A_Y$ with $A_{Y'}$, respecting every quotient projection and transition. Relabeling therefore defines an exact equivalence also on these completed-ring module categories and on their strict diagram categories: the inverse is the reverse relabeling with the inverse ring identification. Applying both equivalences termwise preserves quasi-isomorphisms, giving the derived equivalences. The same section and K-injective argument of Steps 2--3 applies to these ringed and diagram sites.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; completed coefficient rings and diagram-site reindexing"
-   }
-  },
-  {
-   "text": "These exact equivalences commute canonically with $R\\lim$ on strict towers. Indeed they commute with ordinary limits and preserve K-injective towers by the exact-inverse argument of Step 3; applying the definition of $R\\lim$ on a K-injective tower gives the comparison, induced by its projections. For complete $K$, [prop-weil-pbc-koszul-reconstruction] identifies the canonical quotient-tower map $K\\to R\\lim K_\\bullet$ as an isomorphism. Hence\n$$Lg^*_{\\mathrm{comp}}K=R\\lim(g^{-1}K_\\bullet)\\cong g^{-1}R\\lim K_\\bullet\\cong g^{-1}K.$$\nBy [def-weil-pbc-completed-pullback], its comparison from ordinary pullback is exactly the map induced by those quotient projections. Thus this identifies completed pullback with reindexing using the specified completion unit.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "prop-weil-pbc-koszul-reconstruction",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; completed pullback, including its canonical unit"
-   }
-  },
-  {
-   "text": "Use the strict notation of [def-cbc-completed-exchange-map]: $\\mathcal R_T(F)=\\Delta F\\otimes^LQ_{T,\\bullet}$ and $v_\\bullet=H'\\mathcal R_{Y'}(e_M)H^{-1}$. The reduction/relabeling comparison $t_{g,F}$ is a map on diagram sites, not merely on evaluations. On a flat tensor representative its component sends a relabeled $x\\otimes a$ to that same $x\\otimes a$. For a transition $P_{n+1}\\to P_n$, both composites send it to $x\\otimes\\bar a$. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] ensure this equality respects the completed module actions. Thus $t$ identifies the actual strict reduction diagram with its reindexing; the derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies its derived isomorphism.",
-   "uses": [
-    "def-cbc-completed-exchange-map",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; strict reduction objects and their transition maps"
-   }
-  },
-  {
-   "text": "Let $r_\\bullet:B_\\bullet\\to D_\\bullet$ be direct-image reindexing on the diagram sites of Step 9. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] on those sites to the coefficient object $Q_{Y,\\bullet}$. Its two paths are, in the notation of [def-cbc-completed-exchange-map], exactly $r_\\bullet H$ and $H'\\mathcal R_{Y'}(e_M)$: $H$ is the projection mate followed by $t_g$, $H'$ is the projection mate followed by $t_{\\bar g}$, and Step 9 identifies the exchange mates with reindexing. Therefore\n$$r_\\bullet H=H'\\mathcal R_{Y'}(e_M),\\qquad r_\\bullet=H'\\mathcal R_{Y'}(e_M)H^{-1}=v_\\bullet.$$\nThis is equality in the derived strict-tower category. It does not infer equality from the individual evaluations. The projection comparisons used here are invertible on these reduction diagrams as specified in [def-cbc-completed-exchange-map].",
-   "uses": [
-    "def-cbc-completed-exchange-map",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; identify the actual specified strict proper exchange before taking the limit"
-   }
-  },
-  {
-   "text": "Now take $R\\lim$ of the equality in Step 12. In [def-cbc-completed-exchange-map] the proper factor is $c_{p',T}^{-1}R\\lim(v_\\bullet)s$. The direct-image/limit comparison $c_{p',T}$ is the canonical one of [prop-weil-pbc-direct-image-limits], and $s$ uses precisely the quotient-tower pullback comparison of Step 10 and the projection mate of Step 12. Thus these source and target identifications turn this composite into $g^{-1}Rp_*M\\simeq Rp'_*\\bar g^{-1}M$. The completed open factor is induced by the finite open maps and the strict-tower limit comparison, as [lem-cbc-completed-extension-zero-comparison] specifies. By Steps 4, 10 and 11 it becomes exactly $\\bar g^{-1}j_!\\simeq j'_!g'^{-1}$. The integral $e$ is consequently the same ordered reindexing composite as at finite level.",
-   "uses": [
-    "def-cbc-completed-exchange-map",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-cbc-completed-extension-zero-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; reconstruct the two integral factors with their specified comparisons"
-   }
-  },
-  {
-   "text": "All integral coherence equations hold before $R\\lim$. For identity and successive isomorphisms use the mate-pasting equations and the strict open equations of [lem-cbc-strict-tower-proper-open-calculus] on the diagram sites of Step 9. For vertical composition use its base-change equation for the normalized proper/open interchange, exactly as in Step 7. For coefficient reduction use the tensor/exchange equation on the quotient diagram of Step 12, and the open-unit equation of Step 4. These are equalities of strict-tower transformations, identified with the chosen integral lift in Step 12. Functorial $R\\lim$ and the canonical direct-image/limit comparison of [prop-weil-pbc-direct-image-limits] preserve each equality. This proves identity, horizontal and vertical pasting and reduction compatibility of the integral maps with their strict normalization.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; strict integral coherence, before reconstruction"
-   }
-  },
-  {
-   "text": "On the supplied higher-coefficient domains, [def-exchange-projection] specifies that rational maps are scalar localizations of integral maps and common-stage maps are represented over one finite field with coherent scalar comparisons. Applying scalar localization to the equalities of Steps 13--14 preserves compositions, identity maps and isomorphisms. The scalar comparisons in [lem-fix-operation-reduction] preserve the units, counits and tensor comparisons, so coefficient extension carries the same ordered two-factor map to the one over the extended field. By [def-weil-algebraically-closed-coefficients], two such maps represent the same common-stage morphism after passage to a common finite extension. This gives all the rational and algebraically closed comparisons and equations, with no reduction operation on rational coefficients.",
-   "uses": [
-    "def-exchange-projection",
-    "lem-fix-operation-reduction",
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; scalar localization and common-stage transport"
-   }
-  },
-  {
-   "text": "Finally, on the compactification-independent domains named in [fix-lem-exchanges], its clause (4) supplies the canonical refinement/compactification and composition comparisons. Their normalized proper/open maps commute with scheme-isomorphism base change by the base-change equation of [lem-cbc-strict-tower-proper-open-calculus]; this applies also to refinement squares, where its $\\alpha_Q$ is the clopen-section projection. Hence replacing a compactification conjugates the two-factor identity of Step 5 or 13 by precisely those comparisons. For compositions, use the refinement-invariance and vertical equation of [lem-cbc-complete-proetale-composition-pasting-coherence], then Steps 14--15 at higher stages. The conclusion is the displayed identity with canonical compactification comparisons inserted. Only these supplied comparisons are taken from [fix-lem-exchanges]; its exchange-pasting theorem for $k$-morphisms is never applied to a semilinear arrow.",
-   "uses": [
-    "fix-lem-exchanges",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-cbc-complete-proetale-composition-pasting-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-    "place": "Constituent compact-support compatibility in the assembly paragraph; insert compactification comparisons on their stated field-base domains"
+    "place": "Constituent-compatibility assembly paragraph; short assembly of the auxiliary argument for original reviewed steps 15,16."
    }
   }
  ],
  "proof_deps": [
-  "def-cbc-completed-exchange-map",
-  "def-exchange-projection",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-proetale-inverse-image",
-  "def-weil-rationalization-karoubi",
-  "fix-lem-exchanges",
-  "lem-cbc-complete-proetale-composition-pasting-coherence",
-  "lem-cbc-completed-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-fix-operation-reduction",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction"
+  "lem-pur-isomorphism-finite-mate-normalization",
+  "lem-pur-isomorphism-finite-exchange-coherence",
+  "lem-pur-completed-reindexing-lifted-coefficients",
+  "lem-pur-isomorphism-strict-integral-exchange-normalization",
+  "lem-pur-isomorphism-exchange-scalar-refinement-descent",
+  "def-pur-semilinear-exchange-descent-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
-  "place": "Constituent-compatibility assembly paragraph; explicit site-reindexing and strict-tower mate calculation by Q15"
+  "place": "The five existing assembly steps, with the coefficient-independent helper specialization in step 3 explicit; Lean assembly by U2, 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -352,20 +180,66 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-weil-semilinear-exchange-reindexing",
   "worker": "stage1",
-  "summary": "Preserved the statement. Expanded semilinear exchange into section reindexing, derived adjunction normalization, canonical open comparison, mate pasting, quotient coefficients, strict integral normalization v=H' R(e) H^-1, reconstruction and scalar transport. Reused existing DAG facts throughout; no new nodes and no Lean work.",
-  "blueprint": "prop-pur-weil-equivariance-compatibilities proof assembly paragraph: constituent coefficient transport and geometric-Frobenius identification; this item supplies the actual semilinear compact-support exchange comparison and its pasting normalization, as called in that node's current Steps 3 and 7.",
+  "summary": "Repair of the 2026-10-22 re-split return: preserve the complete item statement and distribute all 16 original proof steps into five statement-only unsplit auxiliary nodes of comparable argument size. Parent is now a short five-step assembly; original argument, citations and allocation are retained verbatim in report.md. All new nodes searched with logged msearch queries. No Lean written or compiled.",
+  "blueprint": "prop-pur-weil-equivariance-compatibilities constituent-compatibility assembly paragraph: semilinear compact-support reindexing, finite coherence, actual strict integral comparison, scalar transport and compactification descent. Original steps 1--5, 6--8, 9--11, 12--14 and 15--16 are respectively assigned to the five cited auxiliary nodes.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q15-704f9e82d",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q156-16664af03",
+  "group": "Q156",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-704f9e82d (reviewer sub-agent of L); spot-checked: Read the item, all 16 proof steps, every cited node statement, unit/chapter route, blueprint source, and Stacks Tag 0A07. Hypotheses, semilinear base-change typing, coefficient categories, strict-tower normalization, mate/pasting equations, finite-Tor restrictions, and edge cases check out. No missing citations, cycles, duplicate nodes, SGA violations, or repairs; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-16664af03 (reviewer sub-agent of L); spot-checked: This is the re-split the human decided on 2026-10-21; the live repair note asks for at least 4 nodes, a parent assembly of at most 3000 characters and no dropped argument. The delivery is not superseded: the live item is still the 16-step version and is not on the dropped list. The item statement is byte-identical to live. All 16 old step texts are in the report verbatim, each under the node that now owns it. The 5 new nodes are unsplit, statement-only, between 2.3k and 3.5k characters, and their stmt_deps match the ids cited in their statements. The parent is a 5-step assembly of 2170 characters, each step citing one node. The blueprint source, prop-pur-weil-equivariance-compatibilities.proof.md (main-20261015), is a one-paragraph assembly, so the item and nodes are agent extractions and their source places say so; no SGA is used. I read every cited statement. finite-mate-normalization (old 1-5): the section formula F(Xbar x_Y V) = F(Xbar' x_Y' V), the transpose G(eps_p) o theta from def-exchange-projection, and the beta inverse as the open-unit transpose are all true. finite-exchange-coherence (old 6-8): the horizontal and vertical equations type-check factor by factor; the vertical one is lem-cbc-complete-proetale-composition-pasting-coherence evaluated on constant towers (advisory); the quotient square keeps the finite-Tor domain of lem-fix-operation-reduction. completed-reduction-reindexing (old 9-11): c_u is an isomorphism, so Lu*_Tow = G_u; with comp_K invertible (koszul-reconstruction), the map of def-weil-pbc-completed-pullback is exactly the inverse of the displayed composite (directions checked); t has the direction used in def-cbc-completed-exchange-map. strict-integral (old 12-14): r.H and H'R(e_M) have the same source and target, and with v = r the reconstruction gives r_M and beta. scalar-refinement (old 15-16): a conditional on the specified maps whose hypotheses are supplied by steps 1-4; the refinement equation e^{c1}(G_g C_a) = (C_{a'} G_{g'}) e^{c2} type-checks with C going from F_{c2} to F_{c1}. Small cases (identity maps, j = id, K = 0, m = n, identity refinements) are consistent. No duplicates: lem-pur-weil-basechange-semilinear-pasting and the def/lem-sf/coef semilinear-system nodes state different things; lem-pur-semilinear-scalar-localization partly overlaps node 5's scalar clause (advisory: the worker should cite it). This is not the pattern of new nodes bundling existing nodes: each node owns a real old argument. FIX, one fault (B2/B3) in lem-pur-isomorphism-strict-integral-exchange-normalization. Its statement used the identification Lu*_comp = G_u and the reindexing maps r_bullet and r_M, which only its sibling completed-reduction-reindexing establishes, without citing it. It also left the vertical-composition data (h_0, Z, u, tower) and the normalization of the completed beta undefined. The corrected file is in fixes/dag/nodes/sec-six-functors/: it cites the sibling (no cycle), introduces h_0:Y->Z, u:Z'->Z and the tower via lem-cbc-compactifiable-compatible-tower, and writes beta^{-1} as the open-unit transpose; the two ids are added to stmt_deps. No tool_uses; no nodes dropped.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SemilinearExchangeReindexing",
+  "declaration": "WeilConjectures.semilinearExchangeReindexing",
+  "declarations": [
+   "WeilConjectures.PurSemilinearCompletedReindexing",
+   "WeilConjectures.PurSemilinearFiniteAgreement",
+   "WeilConjectures.PurSemilinearIntegralIsomorphism",
+   "WeilConjectures.semilinearExchangeReindexing"
+  ],
+  "file": "lean/Sheaf/Paper/SemilinearExchangeReindexing.lean",
+  "statement": "theorem semilinearExchangeReindexing (P : PurityFiniteSetting.{u}) : PurSemilinearFiniteNormalization P ∧ PurSemilinearFiniteAgreement P ∧ PurSemilinearFiniteIdentity P ∧ PurSemilinearFiniteHorizontal P ∧ PurSemilinearFiniteVertical P ∧ PurSemilinearFiniteCompositionIsIso P ∧ PurSemilinearFiniteCoefficient P ∧ PurReindexing.PurStrictIntegralGeometricNormalization P ∧ PurReindexing.PurIntegralStrictMapNormalization (pbcIntegralDatum P.coefficients.l P.extension) (Spec (.of P.field.k)) ∧ PurReindexing.PurIntegralStrictHorizontal (pbcIntegralDatum P.coefficients.l P.extension) (Spec (.of P.field.k)) ∧ PurReindexing.PurIntegralStrictVertical (pbcIntegralDatum P.coefficients.l P.extension) (Spec (.of P.field.k)) ∧ PurReindexing.PurIntegralStrictReduction (pbcIntegralDatum P.coefficients.l P.extension) (Spec (.of P.field.k)) ∧ PurReindexing.PurIntegralCompletedCoherence (pbcIntegralDatum P.coefficients.l P.extension) (Spec (.of P.field.k)) ∧ PurSemilinearCompletedReindexing P ∧ PurSemilinearIntegralIsomorphism P ∧ PurSemilinearScalar P ∧ PurSemilinearRefinement P ∧ PurSemilinearFiniteCompactComparison P ∧ PurSemilinearRational P ∧ PurSemilinearRationalCoherence P ∧ PurSemilinearCommonStage P",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2 on 69fc83df8eb1. Plain canonical constructions and clause predicates are used through the transparent exports owned by def-pur-semilinear-exchange-reindexing-data. That definition node replaces the four theorem nodes in stmt_deps; all four remain unchanged in proof_deps. The exports preserve every original argument and universe, and no theorem statement or mathematical clause is changed. The one postponed proof is the final assembly theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4219180f5",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Repair of H2 on 69fc83df. Item JSON differs from live only in lean and stmt_deps: the 4 theorem stmt_deps are replaced by the new def node def-pur-semilinear-exchange-reindexing-data, theorems kept in proof_deps, TeX statement/proof unchanged. New node: kind definition, 11 stmt_deps all live definition nodes, no theorem cited, statement asserts no equation. Its module public-imports the 4 theorem modules and gives 21 abbrev @Orig.{u} re-exports. Every target in side-live is a def/Prop predicate with a single universe u/t, so no universe restriction and nothing hollow (accepted re-export owner pattern, NB 7c76 / Q14 735d). The six PurSemilinearFinite* predicates moved from the never-landed item module into the def module. A whitespace- and prefix-normalized diff against the 69fc snapshot shows all 15 clause predicates and the theorem identical, so the earlier clause reading holds (bare scheme isos without IsOver, separated finite-type over Spec k, pinned mate/open factors, finite-Tor quotient square, strict towers before Rlim, normalized scalar/rational/common-stage comparisons, no Cartesian-refinement assumption). check_lean_text reports no failures for either record. No PurReindexing/PurSemilinearFinite name clash in live lean. Only sorry is the final theorem. No compile run (no file changed). Advisory: NF/Q05 parallel deliveries of the same item exist, so a later lander must rebind; the scalar-refinement-descent proof dependency has no Lean record (stage 3)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-75909",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261026T024112-L-638917",
+  "kind": "interface",
+  "note": "independent cc review: SemilinearExchangeReindexing assembly + 4 modules vs clone: theorem stmt byte-identical; 6 moved predicates = originals mod zeta(let d) by script; FiniteCompositionLaw field = compositionIsIso type; scalar-descent import swap forced (cycle); reader-gate sandbox (5 delivered + 2 unchanged importers + probe) compiled exit 0; sorryAx only via upstream sorried leaves/scalar-descent"
+ }
 }

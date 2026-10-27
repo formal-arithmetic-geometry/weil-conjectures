@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-etale-system-restriction-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the inverse compact-support restriction comparison",
+ "statement": "Let f:X→Y be a scheme morphism, c a compactification, l a natural number and t:Theory(c,l) a normalized ordinary system presentation [def-pur-etale-system-projection-data]. Let B,C be finite l-power-torsion coefficient sequences, a:B→C a compatible coefficient map, and n a level. Let d be any natural isomorphism from single-ring compact support with C_n coefficients followed by restriction to B_n to restriction on X followed by B_n compact support, whose forward map is the specified singleRestriction(a_n,c). For every derived strict C-system N on X, evaluating the inverse system restriction comparison and transporting via the support/evaluation and restriction/evaluation isomorphisms gives the inverse of d. Precisely, the three-factor word supportEvaluation(B,n)^{-1} at Res_a N, then evaluation of RestrictionSupport(a)^{-1} at N, then ScalarEvaluationY(a,n).restriction at F_C N equals F_{B_n} applied to ScalarEvaluationX(a,n).restriction at N, then d^{-1} at e_n N, then single-ring restriction applied to supportEvaluation(C,n)^{-1} at N. This assertion involves restriction alone, with no scalar extension projection, scalar unit or compactScalarMap.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Construction 4.1 and Lemma 5.16; restriction-evaluation portion of lem-pur-etale-system-projection-evaluation."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "At the middle scheme c.Z construct the ordinary scalar restriction/evaluation isomorphism by the identity on underlying section groups. Naturality of the constant-ring map proves linearity; the identical section map is its inverse. Exact localization provides its derived comparison, without choosing a scalar extension at c.Z. The given ordinary restriction/direct-image and restriction/evaluation comparisons are identity on every section. Extensionality of module-sheaf morphisms therefore proves the ordinary cube. Take geometric inverse-image mates: uniqueness under the ordinary adjunction Hom bijections gives the inverse-image cube. Use the actual ordinary scalar restriction comparison, not an arbitrary isomorphism between endpoints.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact-functor localization to the inverse-image cube, using the termwise normalization fields of RestrictionImage, ImageEvaluation and ScalarEvaluation. Take right geometric mates. The cube-of-mates identity identifies the proper face with scalarRestrictionDirectImageMap, including transport from exact derived inverse image to the published left-derived inverse image. This uses the canonical upperStar comparison and its adjunction-unit normalization.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "lem-fix-site-open-exchange-localization",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open factor take the open-adjunction mate of the ordinary inverse-image cube, then localize the exact functors. The mate-unit equation identifies the single-ring face with derivedRestrictScalarsCompOpenImmersionLowerShriekIso. Naturality of the proper comparison pastes the proper and open cubes; their single-ring composite is singleRestriction by definition. Substitute hd and cancel the invertible evaluation, restriction and d components to get the stated inverse cube on every N. These are equalities of localized transformations; no inference from jointly faithful derived evaluation is used.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "lem-fix-site-open-exchange-localization",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-system-projection-data",
+  "def-weil-pbc-adjunction-mate",
+  "lem-fix-site-open-exchange-localization",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Construction 4.1 and Lemma 5.16; restriction-evaluation portion of lem-pur-etale-system-projection-evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation functor preserves adjunction mates under normalized scalar restriction and geometric direct image",
+   "results": "['SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app', 'SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction', 'CategoryTheory.ExponentiableMorphism.ev_naturality']; 8 hits; search log digest b2a9b0c02751c47c",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the generic categorical mate and localization identities do not specialize in one line to the normalized proper/open system restriction cube."
+  },
+  {
+   "tool": "grep",
+   "query": "mate_cube|evaluation_mate|mateEquiv_hcomp",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean']; 7 hits; search log digest 26fbba5fcd9aea48",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the generic categorical mate and localization identities do not specialize in one line to the normalized proper/open system restriction cube."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; 12 hits; search log digest b8ac30fd6644aa85",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the generic categorical mate and localization identities do not specialize in one line to the normalized proper/open system restriction cube."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of restriction of scalars commutes with compact support direct image on derived systems",
+   "results": "['PresheafOfModules.restrictScalarsObj', 'AlgHom.restrictScalars', 'ModuleCat.restrictScalars', 'PresheafOfModules.restrictScalars', 'RestrictScalars', 'SheafOfModules.restrictScalars', 'LinearMap.restrictScalarsₗ', \"ModuleCat.RestrictScalars.obj'\"]; 8 hits; search log digest 853ae459a5334757",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the generic categorical mate and localization identities do not specialize in one line to the normalized proper/open system restriction cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization preserves commutative cubes and evaluation of geometric direct image scalar restriction comparisons",
+   "results": "['CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure', 'CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure', 'exact_of_isLocalized_span', \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", 'IsLocalizedModule.map_exact', \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", 'ModuleCat.localizedModule_functor_map_exact']; 8 hits; search log digest d583a9a76037bcd6",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the generic categorical mate and localization identities do not specialize in one line to the normalized proper/open system restriction cube."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemProjectionEvaluation",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor. Original item proof steps 3-4: scalar and geometric transpose calculation, then level evaluation. Restriction-evaluation portion before scalar-adjunction transposition.",
+   "via": [
+    "lem-pur-etale-system-projection-evaluation",
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSystemRestrictionEvaluation",
+  "file": "lean/Sheaf/Paper/EtaleSystemRestrictionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemRestriction_evaluation",
+  "statement": "theorem etaleSystemRestriction_evaluation\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)\n    (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)\n    (d : rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} (C.rings.obj (op n))) c ⋙\n        Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom ≅\n      Sheaf.derivedRestrictScalars X.smallEtaleTopology (a.app (op n)).hom ⋙\n        rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} (B.rings.obj (op n))) c)\n    (hd : d.hom = singleRestriction (a.app (op n)) c)\n    (N : Derived X C.rings) :\n    (t.supportEvaluation B n).iso.inv.app ((restriction X a).obj N) ≫\n        (t.evaluationY B n).E.map ((t.restriction a).iso.inv.app N) ≫\n        (t.scalarEvaluationY a n).restriction.hom.app ((t.support C).F.obj N) =\n      (rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} (B.rings.obj (op n))) c).map\n          ((t.scalarEvaluationX a n).restriction.hom.app N) ≫\n        d.inv.app ((t.evaluationX C n).E.obj N) ≫\n        (Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom).map\n          ((t.supportEvaluation C n).iso.inv.app N)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T112337-L-1573362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T112337-L-1573362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.Paper.BoundedExchangeAmbient
+public import Sheaf.Paper.ResidueExchangeAmbient
 import Sheaf.CategoryTheory.Adjunction.CoefficientExchange
 
 /-! # Adjunction algebra for reduction of the exchange arrow

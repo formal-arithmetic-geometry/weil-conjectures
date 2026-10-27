@@ -1,0 +1,358 @@
+{
+ "id": "lem-per-log-regular-pair-regular-pullback",
+ "kind": "statement",
+ "title": "Regular pullback of a divisorial log regular pair",
+ "statement": "Let $g:Y\\to X$ be a regular morphism of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth], meaning flat with geometrically regular fibres (each fibre remains regular after every finite extension of its residue field). Let $B\\subset X$ be a nowhere dense closed subset for which $(X,B)$ is a divisorial fine saturated log regular pair [def-trf-log-regular-pair]. Then $g^{-1}B$ is nowhere dense and $(Y,g^{-1}B)$ is a divisorial fine saturated log regular pair. More precisely, the inverse-image log structure $g^*M_X$ is log regular, its triviality locus is $g^{-1}(X\\setminus B)$, and its structural map identifies it with $\\mathcal O_Y\\cap j_*\\mathcal O_{Y\\setminus g^{-1}B}^{\\times}$, where $j:Y\\setminus g^{-1}B\\hookrightarrow Y$ is the open inclusion. Here the inverse-image log structure is the log structure associated to the prelog monoid sheaf $g^{-1}M_X\\to\\mathcal O_Y$; equivalently it adjoins the units of $\\mathcal O_Y$ to that prelog monoid and identifies its already invertible elements with these units. Empty boundary and empty source are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.2--1.4, printed p.69, and the regular-completion pullback in VII 3.2, printed p.82, with the log-regular version obtained from the stratum definition. Local algebra: Stacks algebra.tex Tag 031E (lemma-flat-over-regular-with-regular-fibre) and Tag 00ON (lemma-dimension-base-fibre-equals-total). The flat local dimension formulas for the chart ideal and its quotient give the same characteristic rank; VI 1.4 identifies the resulting log structure with the divisorial one."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-log-regular-pair",
+  "def-weil-flat-morphism",
+  "def-weil-regular-scheme",
+  "def-trf-fs-log-blowup",
+  "def-per-strict-log-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=g^{-1}M_X$, with its prelog map $a:H\\to\\mathcal O_Y$ (a natural monoid homomorphism of sheaves on the small etale site of the locally Noetherian scheme $Y$). For etale $V\\to Y$ put $B_V=\\Gamma(V,\\mathcal O_V)$, $E_V=a_V^{-1}(B_V^\\times)$, and let $P(V)=H(V)\\oplus_{E_V}B_V^\\times$ be the presheaf pushout with $[m,u]\\mapsto a_V(m)u$. Working in a universe containing the site data, let $\\eta:P\\to N=P^\\#$ be its commutative-monoid sheafification [lem-trf-commutative-monoid-sheafification]. By [lem-trf-prelog-pushout-log-axiom], $N$ with the induced structural map is a log structure [def-trf-fs-log-blowup], with natural maps $i:H\\to N$, $j:\\mathcal O_Y^\\times\\to N$ satisfying $\\eta_V([m,u])=i_V(m)j_V(u)$. By [lem-trf-prelog-pushout-hom-extension], composition with $i$ is a bijection from log-structure maps $N\\to K$ to compatible maps $H\\to K$, for every log structure $K$ on $Y$. Thus this explicit $N$ is exactly the associated log structure $g^*M_X$ of the statement, not an arbitrarily chosen structure.",
+   "uses": [
+    "lem-trf-commutative-monoid-sheafification",
+    "lem-trf-prelog-pushout-log-axiom",
+    "lem-trf-prelog-pushout-hom-extension",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 (associated-log convention); explicit pushout construction and its elementary universal-property verification"
+   }
+  },
+  {
+   "text": "Fix $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, put $\\bar x=g\\bar y$, and write $A=\\mathcal O_{X,\\bar x}$ and $C=\\mathcal O_{Y,\\bar y}$. By [lem-per-regular-geometric-stalk-map] the canonical $h:A\\to C$ is local and flat between Noetherian local rings and $F=C/\\mathfrak m_A C$ is regular local. The inverse-image stalk formula [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] identifies $H_{\\bar y}$ with $(M_X)_{\\bar x}$. The underlying-set clause of monoid sheafification and [lem-weil-pbc-sets-sheafification-geometric-stalk] identify the stalk of $N$ with the stalk of the presheaf pushout. Explicitly a pair of germs, an inverse witnessing invertibility, and any finite chain of defining congruence relations are all represented on one common pointed neighbourhood; hence taking these filtered germs commutes with this pushout. Since a local ring map reflects units, $a(m)$ is invertible in $C$ exactly when its image in $A$ is invertible. The log axiom on $M_X$ therefore gives the canonical formula $N_{\\bar y}=(M_X)_{\\bar x}\\oplus_{A^\\times}C^\\times$, compatibly with structure maps.",
+   "uses": [
+    "lem-per-regular-geometric-stalk-map",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-trf-commutative-monoid-sheafification",
+    "lem-weil-pbc-sets-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Geometric-stalk construction and inverse-image formula, Tags 03PT and 04HX; strict-local algebra as isolated in the cited new node"
+   }
+  },
+  {
+   "text": "An fs chart $Q\\to M_X|_W$ on an etale neighbourhood $W\\to X$ pulls back to a map $Q\\to N|_T$ on $T=Y\\times_XW$, which is etale over $Y$ by [lem-weil-pbc-etale-base-change-finite-limits]. For every geometric point of $T$, write $A,C$ for the corresponding geometric local rings of $W,T$ and $E_Q=\\beta^{-1}(A^\\times)\\subset Q$. The chart formula in [def-trf-fs-log-blowup] and step 2 give $(Q\\oplus_{E_Q}A^\\times)\\oplus_{A^\\times}C^\\times=Q\\oplus_{E_Q}C^\\times$: the maps send $[[q,a],c]$ to $[q,h(a)c]$ and $[q,c]$ to $[[q,1],c]$. They respect the defining relations and are inverse. Locality gives $E_Q=(h\\beta)^{-1}(C^\\times)$. Thus $Q\\to N|_T$ is a chart by the stalkwise chart definition. Every $\\bar y$ has such a pointed neighbourhood by choosing a chart at $g\\bar y$ and taking the lifted pair $(\\bar y,\\bar w)$ in the fibre product. Hence $N$ is fs. This argument uses only the stalk formula (valid for any scheme morphism with local stalk maps), not an assertion that this etale chart map is regular.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1: fs charts; elementary associativity of the displayed pushouts"
+   }
+  },
+  {
+   "text": "At the fixed $\\bar x$, choose the sharp chart $P=\\overline M_{X,\\bar x}$ supplied by [lem-trf-log-regular-sharp-chart]. In this chart the elements mapping to $A^\\times$ are precisely $0\\in P$: their classes in the identified characteristic are zero, and $P$ is sharp. The chart definition therefore gives $(M_X)_{\\bar x}=P\\oplus A^\\times$, and step 2 gives $N_{\\bar y}=P\\oplus C^\\times$. Their quotients by the unit groups are both $P$, so their group-completion ranks agree, say $r$. Write $a(p)\\in A$ for the chart functions and $I=(a(p):p\\ne0)\\subset A$. Locality of $h$ shows each $h(a(p))$ remains a nonunit, and multiplication by arbitrary units does not change the ideal generated by these elements. Thus the ideal of nonunits of $N_{\\bar y}$ is exactly $J=IC$. By the log-regular-pair hypothesis and [def-trf-log-regular-pair], $A/I$ is regular local and $\\dim A=\\dim(A/I)+r$.",
+   "uses": [
+    "lem-trf-log-regular-sharp-chart",
+    "def-trf-fs-log-blowup",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2 (log regularity on the strict-local stratum) and VI 1.6 (sharp chart)"
+   }
+  },
+  {
+   "text": "The quotient map $A/I\\to C/J$ is flat by [lem-weil-pbc-flat-module-quotient-flat], applied to the flat $A$-module $C$ and $J=IC$. Both quotients are Noetherian local rings, with maximal ideals $\\mathfrak m_A/I$ and $\\mathfrak m_C/J$, and the map is local. Here $I\\subset\\mathfrak m_A$, $J\\subset\\mathfrak m_C$, since the chart generators are nonunits. Its closed fibre is $(C/J)/(\\mathfrak m_A/I)(C/J)=C/\\mathfrak m_A C=F$. The base $A/I$ is regular by step 4 and $F$ is regular by step 2. Consequently [lem-weil-pbc-flat-over-regular-with-regular-fibre] implies that $C/J$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (flat quotient base change) and 031E (flat over regular with regular closed fibre)"
+   }
+  },
+  {
+   "text": "Apply the local dimension formula [lem-weil-pbc-flat-height-formula] to $A\\to C$ and to $A/I\\to C/J$ at their maximal ideals; all four rings are Noetherian, both maps are flat and local, and both closed fibres are the same $F$ by steps 2 and 5. It gives $\\dim C=\\dim A+\\dim F$ and $\\dim(C/J)=\\dim(A/I)+\\dim F$. Substituting $\\dim A=\\dim(A/I)+r$ from step 4 and commuting the two summands yields $\\dim C=\\dim(C/J)+r$. Together with step 5 and the characteristic identification of step 4, these are precisely the log-regularity conditions at $\\bar y$ in [def-trf-fs-log-blowup]. Since $\\bar y$ was arbitrary, $(Y,N)$ is log regular.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, local dimension formula; ILO VI 1.2 for the log-regularity criterion"
+   }
+  },
+  {
+   "text": "The characteristic calculation in step 4 shows that the triviality locus of $N$ is $V=g^{-1}(X\\setminus B)$, because the divisorial pair in [def-trf-log-regular-pair] has triviality locus exactly $X\\setminus B$. Apply [lem-trf-log-regular-divisorial-structure] to the locally Noetherian fs log regular scheme $(Y,N)$ obtained above: $V$ is open dense and the structural map identifies $N$ with $\\mathcal O_Y\\cap j_*\\mathcal O_V^\\times$. Its complement is the closed subset $g^{-1}B$; being the complement of an open dense subset it has empty interior and is nowhere dense. This is the divisorial fs log regular pair required by [def-trf-log-regular-pair], with the specified structural identification. If $Y$ is empty, all stalk conditions are vacuous and the empty open is dense. If $B$ is empty, every $P$ is zero and the same argument gives $N=\\mathcal O_Y^\\times$ and regularity of $Y$; no positive rank or nonempty boundary was used.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "lem-trf-log-regular-divisorial-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4, printed p.69: dense triviality locus and divisorial identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-commutative-monoid-sheafification",
+  "lem-trf-prelog-pushout-hom-extension",
+  "lem-trf-prelog-pushout-log-axiom",
+  "def-trf-fs-log-blowup",
+  "lem-per-regular-geometric-stalk-map",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-log-regular-sharp-chart",
+  "def-trf-log-regular-pair",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-trf-log-regular-divisorial-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1--1.6 and VII 3.2, with Stacks 031E and 00ON: explicit chart/stratum argument assembled here, not a claimed verbatim arbitrary-regular-pullback theorem in ILO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-log-regular-pair-regular-pullback: The inverse image of a divisorial fine saturated log regular pair under a regular morphism of locally Noetherian schemes is again a divisorial log regular pair",
+   "results": "Actual logged hits: AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?[Rr]egular|[Ll]og[Ss]cheme",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-log-regular-pair-regular-pullback: A regular morphism preserves log regularity and the divisorial log structure pulled back from the boundary",
+   "results": "Actual logged hits: CategoryTheory.MorphismProperty.pullback_map, CategoryTheory.regularOfIsPullbackFstOfRegular, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, CategoryTheory.regularOfIsPullbackSndOfRegular, CategoryTheory.Regular.regularEpiIsStableUnderBaseChange, CategoryTheory.MorphismProperty.pullbacks_le, CategoryTheory.regularEpiOfKernelPair, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lteration|[Uu]niformi[sz]ation|[Ll]ogRegular",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-log-regular-pair-regular-pullback: Flat geometrically regular morphisms preserve fine saturated divisorial logarithmic regularity and the complement of the trivial log structure",
+   "results": "Actual logged hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a fine saturated log regular structure by a regular morphism is divisorial log regular",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.isSmooth_iff\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally\", \"AlgebraicGeometry.HasRingHomProperty.of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme flatness/smoothness and regular monomorphisms or regular sequences do not state divisorial fs logarithmic regularity. No log-regular declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "log.?regular|divisorial.?log|pullback.?log",
+   "results": "{\"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme flatness/smoothness and regular monomorphisms or regular sequences do not state divisorial fs logarithmic regularity. No log-regular declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular morphism preserves logarithmic regularity of the inverse image fine saturated log structure",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"IsRegular.op\", \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"isRegular_op\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"Submonoid.LocalizationMap.map_isRegular\", \"CategoryTheory.regularOfIsPullbackFstOfRegular\", \"CategoryTheory.MorphismProperty.regularMono\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme flatness/smoothness and regular monomorphisms or regular sequences do not state divisorial fs logarithmic regularity. No log-regular declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme flatness/smoothness and regular monomorphisms or regular sequences do not state divisorial fs logarithmic regularity. No log-regular declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat geometrically regular base change of divisorial logarithmic structures preserves characteristic ranks and regular strata",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme flatness/smoothness and regular monomorphisms or regular sequences do not state divisorial fs logarithmic regularity. No log-regular declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-local-nodal-dimension-reduction",
+  "date": "2026-10-24",
+  "group": "Q99"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Newest blueprint ancestor lem-per-artin-gabber-affine-curve.proof.md, Step 3 (Verdier-duality branch), through the inherited regular-neighbourhood/ordinary weak-uniformization input. ILO VII 3.1--4.2 is the local geometric subargument, stopping before VII 4.3. Expose VI 1.2--1.4, printed p.69, and the regular-completion pullback in VII 3.2, printed p.82, with the log-regular version obtained from the stratum definition. Local algebra: Stacks algebra.tex Tag 031E (lemma-flat-over-regular-with-regular-fibre) and Tag 00ON (lemma-dimension-base-fibre-equals-total). The flat local dimension formulas for the chart ideal and its quotient give the same characteristic rank; VI 1.4 identifies the resulting log structure with the divisorial one.",
+   "via": [
+    "lem-per-complete-local-nodal-dimension-reduction",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-log-regular-pair-regular-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the inverse-image chart and characteristic identification explicitly, and reduced log regularity to regularity and dimensions of two flat local maps. Added one statement-only strict-local algebra input without excellence; reused all existing quotient, regular-ascent, dimension and divisorial-identification nodes. Searched upstream Lean, whole DAG, newest blueprint and Mathlib; no attachment or Mathlib match. Full citation and hypothesis audit is in report.md.",
+  "blueprint": "Newest lem-per-artin-gabber-affine-curve.proof.md Step 3, inherited regular-neighbourhood/ordinary weak-uniformization input through ILO VII 3.2; log-stratum verification uses ILO VI 1.2--1.4. No SGA route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-commutative-monoid-sheafification",
+    "why": "Existence and universal property of monoid sheafification for the explicit inverse-image construction. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-trf-prelog-pushout-log-axiom",
+    "why": "Log axiom and canonical maps for the sheafified prelog pushout g^{-1}M_X oplus_E O_Y^x; generic log-structure construction, not a step of the trace formula. Cited by the reviewer instead of the inline re-derivation."
+   },
+   {
+    "node": "lem-trf-prelog-pushout-hom-extension",
+    "why": "Universal property identifying the sheafified prelog pushout with the associated (inverse-image) log structure; generic. Cited by the reviewer instead of the inline re-derivation."
+   },
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "Generic log structure, chart, characteristic and log-regularity definitions. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Inverse-image sheaf stalk at the specified same-field geometric point. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "why": "Underlying set sheafification preserves geometric stalks. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Base change of an etale chart is etale and admits the chosen pair of geometric lifts. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-trf-log-regular-sharp-chart",
+    "why": "Sharp chart equal to the source characteristic at the chosen geometric point. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "def-trf-log-regular-pair",
+    "why": "The hypothesis and conclusion use this existing divisorial-pair definition. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-quotient-flat",
+    "why": "Flatness of the quotient stratum map under extension of its defining ideal. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Regularity ascent along the flat local stratum map. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "The two Noetherian flat-local dimension equations. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Dense triviality locus and structural divisorial identification after log regularity is established. This is a generic tool not supplied by the perverse-sheaf unit and does not replace its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-commutative-monoid-sheafification",
+  "lem-trf-prelog-pushout-log-axiom",
+  "lem-trf-prelog-pushout-hom-extension",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-log-regular-sharp-chart",
+  "def-trf-log-regular-pair",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-trf-log-regular-divisorial-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-e82d9f5d1",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-e82d9f5d1 (reviewer sub-agent of L); spot-checked: Read all seven steps of the item and the new unsplit node lem-per-regular-geometric-stalk-map in full, with the cited statements and ILO VI 1.1-1.4 (printed p.69). The definitions and the pair definition agree with def-trf-log-regular-pair and def-trf-fs-log-blowup. The proof is correct. Step 2: the stalk formula N_y = M_x (+)_{A^x} C^x uses locality and the log axiom. Step 3: the fs chart pullback has explicit inverse pushout maps. Step 4: sharpness of the sharp chart gives I and J=IC. Step 5: flat A/I -> C/J with closed fibre F, then 031E. Step 6: two applications of 00ON at the maximal ideals give dim C = dim C/J + r. Step 7: VI 1.4 via lem-trf-log-regular-divisorial-structure. Edge cases checked: empty Y; empty B (Y regular); B=V(t) under A^2 -> A^1. The new node is true without excellence: C is flat over R, hence flat over A = R^sh by sfb-module-flatness; m_A = m_R A; C/m_R C is (S/m_R S)^sh, regular. It is not a duplicate: lem-trf-smooth-geometric-stalk-algebra needs smoothness, lem-per-regular-strict-local-model needs excellence. It has no log content and is not a restatement of the item. Batch-5: the transitive closures of def-trf-fs-log-blowup, lem-trf-commutative-monoid-sheafification, lem-trf-log-regular-sharp-chart and lem-trf-log-regular-divisorial-structure (and of the two nodes I added) reach no nt-assume leaf, no trace-formula or Poincare-duality theorem and no sec-poincare-duality node; they contain only lem-trf/def-trf log-algebra nodes. These are general log-geometry definitions and lemmas that neither assumption provides, so they are accepted as generic tools. No cycle. FIX (C5): step 1 re-derived the existing lem-trf-prelog-pushout-log-axiom and lem-trf-prelog-pushout-hom-extension (same presheaf-pushout congruence on a locally Noetherian scheme). Step 1 now cites both; they are added to proof_deps and split_report.tool_uses. Statement unchanged; nothing dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularPairRegularPullback",
+  "declaration": "AlgebraicGeometry.logRegularPair_regularPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogRegularPairRegularPullback.lean",
+  "statement": "theorem logRegularPair_regularPullback {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (g : Y ⟶ X) [Flat g] (hg : ∀ (x : X) (K : Type u) [Field K] [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K], IsRegularScheme (pullback (g.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K))))) (U : X.Opens) (hU : DenseRange U.ι) (hpair : IsDivisorialFineSaturatedLogRegularPair X U.toScheme U.ι hU) : ∃ hV : DenseRange (g ⁻¹ᵁ U).ι, IsDivisorialFineSaturatedLogRegularPair Y (g ⁻¹ᵁ U).toScheme (g ⁻¹ᵁ U).ι hV ∧ ∃ (MX : EtaleLogStructure X) (MY : EtaleLogStructure Y) (fsX : MX.IsFineSaturated) (fsY : MY.IsFineSaturated) (eX : MX.monoidSheaf.obj ≅ divisorialLogPresheaf U.ι) (eY : MY.monoidSheaf.obj ≅ divisorialLogPresheaf (g ⁻¹ᵁ U).ι) (f : EtaleLogHom ⟨Y, inferInstance, MY, fsY⟩ ⟨X, inferInstance, MX, fsX⟩), eX.hom ≫ divisorialStructuralMap U.ι = MX.alpha ∧ eY.hom ≫ divisorialStructuralMap (g ⁻¹ᵁ U).ι = MY.alpha ∧ f.base = g ∧ f.IsStrict ∧ (FineSaturatedLogScheme.mk Y inferInstance MY fsY).IsLogRegular ∧ MY.trivialityLocus = (g ⁻¹ᵁ U : Set Y)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The closed boundary is encoded by the complement of the open U. DenseRange of the inverse-image open inclusion is exactly nowhere density of the pulled-back closed boundary. The existential log structures are identified with the prescribed divisorial presheaves via isomorphisms commuting with alpha. The log morphism has base g and the recorded graph-normalized IsStrict property, which identifies MY with the associated inverse-image of MX, including its canonical map. No arbitrary log pullback or stronger regularity hypothesis is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a16e0cea2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Clause by clause, the theorem says what the node says. Flat g; every fibre regular after every finite extension of the residue field (including the trivial one), which is exactly geometric regularity. The boundary is the complement of a dense open U, and hpair is the recorded pair predicate. The conclusion gives density of the inverse-image open, the pair predicate on Y, both log structures with isomorphisms to the divisorial sheaves that respect the structural maps, a log morphism over g that is strict in the recorded sense (characteristic stalks compared through the morphism itself), log regularity of the log structure on Y and its exact triviality locus. Because the divisorial structural map is injective, the morphism's section maps are forced, so the log structure on Y is canonically the inverse image of the one on X. Edge cases covered: empty Y, empty boundary, empty X. No stronger assumptions; single universe u. The only record change besides the lean record is the added statement dependency def-per-strict-log-morphism, an already landed definition node; the dependency records are unchanged from live. The recorded statement matches the file verbatim, the proof is sorry only, and the docstrings carry the source place, blueprint tag and seven proof steps. Proof-only imports exist live with no cycle. Not recompiled, as instructed; the worker reports clean compiles. No findings."
+ }
+}

@@ -28,10 +28,45 @@ Source: coefficient-twist blueprint, order 1505, proof step 6.
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-universe u v w
+universe t u v w
 open CategoryTheory Opposite AlgebraicGeometry
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
+
+/-- Continuous-function fpqc descent, restricted to the pro-etale site.
+Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12. -/
+private theorem coefficientContinuousPresheaf_isSheaf (X : Scheme.{u}) (T : Type v)
+    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
+    Presheaf.IsSheaf (Scheme.ProEt.topology X)
+      (ProEtale.lisseContinuousCommRingPresheafUniverses X T) := by
+  let : CategoryTheory.Limits.HasLimitsOfSize.{u, u + 1}
+      CommRingCat.{max (u + 1) v} :=
+    CategoryTheory.Limits.hasLimitsOfSizeShrink.{u, u + 1, max (u + 1) v,
+      max (u + 1) v} _
+  rw [Presheaf.isSheaf_iff_isSheaf_comp (Scheme.ProEt.topology X)
+    (ProEtale.lisseContinuousCommRingPresheafUniverses X T)
+      (CategoryTheory.forget CommRingCat.{max (u + 1) v})]
+  let e : ProEtale.lisseContinuousCommRingPresheafUniverses X T ⋙
+      CategoryTheory.forget CommRingCat.{max (u + 1) v} ≅
+      (Scheme.ProEt.forget X ⋙ Over.forget X).op ⋙
+        continuousMapPresheaf T ⋙ uliftFunctor.{u + 1} :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  rw [Presheaf.isSheaf_of_iso_iff e]
+  refine Functor.op_comp_isSheaf_of_isSheaf
+    (F := Scheme.ProEt.forget X ⋙ Over.forget X)
+    (J := Scheme.ProEt.topology X) (K := Scheme.proetaleTopology) _ ?_
+  rw [isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff,
+    ← isSheaf_iff_isSheaf_of_type]
+  exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
+    Scheme.proetaleTopology_le_fpqcTopology
+
+/-- The existing continuous-function presheaf with its proved sheaf condition.
+Source: Bhatt--Scholze, Definition 6.8.1. -/
+private noncomputable def coefficientContinuousSheaf (X : Scheme.{t})
+    (T : Type (max u (t + 1))) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
+    Sheaf (Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)} :=
+  ⟨ProEtale.lisseContinuousCommRingPresheafUniverses X T,
+    coefficientContinuousPresheaf_isSheaf X T⟩
 
 /-- The coefficient valuation ring is the finite integral closure of the base DVR.
 This is the arithmetic finite-basis step in the proof below. -/
@@ -88,45 +123,45 @@ private theorem integral_basis (l : ℕ) [Fact l.Prime]
 
 /-- The finite integral basis gives bases on the actual constant coefficient
 section rings, including sections which are only locally constant. -/
-private theorem coefficient_section_basis (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+private theorem coefficient_section_basis (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ∃ (n : ℕ) (b : ∀ U : S.ProEtᵒᵖ,
-      @Module.Basis (Fin n) ((purTwistZlConstant S l).obj.obj U)
+      @Module.Basis (Fin n) ((purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U)
         ((purTwistIntegralConstant S l E).obj.obj U) _ _
         (Module.compHom _ ((purTwistConstantIntegersMap S l E).hom.app U).hom)),
       ∀ (U V : S.ProEtᵒᵖ) (f : U ⟶ V)
         (s : (purTwistIntegralConstant S l E).obj.obj U) (i : Fin n),
-        letI : Module ((purTwistZlConstant S l).obj.obj U)
+        letI : Module ((purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U)
             ((purTwistIntegralConstant S l E).obj.obj U) :=
           Module.compHom _ ((purTwistConstantIntegersMap S l E).hom.app U).hom
-        letI : Module ((purTwistZlConstant S l).obj.obj V)
+        letI : Module ((purTwistZlConstantOfUniverses.{t, u} S l).obj.obj V)
             ((purTwistIntegralConstant S l E).obj.obj V) :=
           Module.compHom _ ((purTwistConstantIntegersMap S l E).hom.app V).hom
         (b V).equivFun ((purTwistIntegralConstant S l E).obj.map f s) i =
-          (purTwistZlConstant S l).obj.map f ((b U).equivFun s i) := by
-  let := WeilConjectures.integralCoefficientRingSheafify.{u, u} S
-  let := WeilConjectures.integralCoefficientAbSheafify.{u, u} S
+          (purTwistZlConstantOfUniverses.{t, u} S l).obj.map f ((b U).equivFun s i) := by
+  let := WeilConjectures.integralCoefficientRingSheafify.{t, u} S
+  let := WeilConjectures.integralCoefficientAbSheafify.{t, u} S
   obtain ⟨k, ⟨b⟩⟩ := integral_basis l E
   let O := Padic.coefficientExtensionIntegers l E
   let : Module ℤ_[l] O := Module.compHom O (purTwistIntegersMap l E)
-  let φ : ULift.{u + 1} ℤ_[l] →+* ULift.{u + 1} O :=
+  let φ : ULift.{max u (t + 1)} ℤ_[l] →+* ULift.{t + 1} O :=
     ULift.ringEquiv.symm.toRingHom.comp
       ((purTwistIntegersMap l E).comp ULift.ringEquiv.toRingHom)
-  let : Algebra (ULift.{u + 1} ℤ_[l]) (ULift.{u + 1} O) := φ.toAlgebra
-  let b' : Module.Basis (Fin k) (ULift.{u + 1} ℤ_[l]) (ULift.{u + 1} O) :=
+  let : Algebra (ULift.{max u (t + 1)} ℤ_[l]) (ULift.{t + 1} O) := φ.toAlgebra
+  let b' : Module.Basis (Fin k) (ULift.{max u (t + 1)} ℤ_[l]) (ULift.{t + 1} O) :=
     (b.map ULift.moduleEquiv.symm).mapCoeffs ULift.ringEquiv.symm (fun _ _ ↦ rfl)
-  have : Module.Free (ULift.{u + 1} ℤ_[l]) (ULift.{u + 1} O) :=
+  have : Module.Free (ULift.{max u (t + 1)} ℤ_[l]) (ULift.{t + 1} O) :=
     Module.Free.of_basis b'
-  have : Module.Finite (ULift.{u + 1} ℤ_[l]) (ULift.{u + 1} O) :=
+  have : Module.Finite (ULift.{max u (t + 1)} ℤ_[l]) (ULift.{t + 1} O) :=
     Module.Finite.of_basis b'
-  exact @CategoryTheory.constantFiniteFree_sectionBasis.{u + 1, u, 0}
+  exact @CategoryTheory.constantFiniteFree_sectionBasis.{t + 1, t, u}
     S.ProEt inferInstance (ProEt.topology S)
-    (WeilConjectures.integralCoefficientRingSheafify.{u, u} S)
+    (WeilConjectures.integralCoefficientRingSheafify.{t, u} S)
     (inferInstanceAs ((ProEt.topology S).HasSheafCompose
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})))
-    (WeilConjectures.integralCoefficientAbSheafify.{u, u} S)
-    (purTwistAbLocallyBijective S)
-    (CommRingCat.of (ULift.{u + 1} ℤ_[l])) (CommRingCat.of (ULift.{u + 1} O))
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})))
+    (WeilConjectures.integralCoefficientAbSheafify.{t, u} S)
+    (WeilConjectures.integralCoefficientAbLocallyBijective.{t, u} S)
+    (CommRingCat.of (ULift.{max u (t + 1)} ℤ_[l])) (CommRingCat.of (ULift.{t + 1} O))
     inferInstance inferInstance inferInstance
 
 /-- Finite freeness suffices for the tensor/completion map over any ring,
@@ -251,10 +286,10 @@ private theorem cofinal_power_subsequence (e : ℕ) (he : 0 < e)
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private noncomputable def continuousCoefficientConstants (S : Scheme.{u})
-    (R : Type (u + 1)) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R] :
+private noncomputable def continuousCoefficientConstants (S : Scheme.{t})
+    (R : Type (max u (t + 1))) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R] :
     (Functor.const S.ProEtᵒᵖ).obj (CommRingCat.of R) ⟶
-      (ProEtale.lisseContinuousCommRingSheafSized S R).obj where
+      (coefficientContinuousSheaf S R).obj where
   app _ := CommRingCat.ofHom
     { toFun := fun r ↦ ULift.up (ContinuousMap.const _ r)
       map_one' := rfl
@@ -269,18 +304,21 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Sheafified constants are discrete-valued continuous functions. Open fibres give
 local surjectivity; an empty object supplies local equality of distinct constants.
 This is the pro-etale ring version of the constant-sheaf argument in Stacks 03P5. -/
-private theorem discreteCoefficientComparison (S : Scheme.{u})
-    (R : Type (u + 1)) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+private theorem discreteCoefficientComparisonOfUniverses (S : Scheme.{t})
+    (R : Type (max u (t + 1))) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [DiscreteTopology R] :
-    letI := WeilConjectures.integralCoefficientRingSheafify.{u, u} S
-    ∃ e : (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj (CommRingCat.of R) ≅
-        ProEtale.lisseContinuousCommRingSheafSized S R,
+    letI := WeilConjectures.integralCoefficientRingSheafify.{t, u} S
+    ∃ e : (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj (CommRingCat.of R) ≅
+        coefficientContinuousSheaf S R,
       toSheafify (ProEt.topology S) ((Functor.const S.ProEtᵒᵖ).obj
         (CommRingCat.of R)) ≫ e.hom.hom = continuousCoefficientConstants S R := by
   classical
-  let := WeilConjectures.integralCoefficientRingSheafify.{u, u} S
+  let := WeilConjectures.integralCoefficientRingSheafify.{t, u} S
+  let : EssentiallySmall.{max u (t + 1)} S.ProEt := essentiallySmallSelf _
+  let : (ProEt.topology S).WEqualsLocallyBijective CommRingCat.{max u (t + 1)} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
   let P := (Functor.const S.ProEtᵒᵖ).obj (CommRingCat.of R)
-  let H := ProEtale.lisseContinuousCommRingSheafSized S R
+  let H := coefficientContinuousSheaf S R
   let c := continuousCoefficientConstants S R
   have hinj : Presheaf.IsLocallyInjective (ProEt.topology S) c := by
     constructor
@@ -291,7 +329,7 @@ private theorem discreteCoefficientComparison (S : Scheme.{u})
         ((ProEt.topology S).top_mem _)
     · have hempty : IsEmpty W.unop.left := ⟨fun x ↦ h (by
         exact congrArg (fun z ↦ z.down x) hab)⟩
-      let j : ∀ i : PEmpty.{u + 1}, (i.elim : Scheme.{u}) ⟶ W.unop.left :=
+      let j : ∀ i : PEmpty.{t + 1}, (i.elim : Scheme.{t}) ⟶ W.unop.left :=
         fun i ↦ i.elim
       let : ∀ i, IsOpenImmersion (j i) := fun i ↦ i.elim
       apply ProEt.mem_topology_of_openImmersion _ j
@@ -314,7 +352,8 @@ private theorem discreteCoefficientComparison (S : Scheme.{u})
       apply ContinuousMap.ext
       intro y
       exact y.property.symm
-  let φ : (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj (CommRingCat.of R) ⟶ H :=
+  let φ : (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
+      (CommRingCat.of R) ⟶ H :=
     ⟨sheafifyLift (ProEt.topology S) c H.property⟩
   have hφ : toSheafify (ProEt.topology S) P ≫ φ.hom = c :=
     toSheafify_sheafifyLift (ProEt.topology S) c H.property
@@ -331,15 +370,27 @@ private theorem discreteCoefficientComparison (S : Scheme.{u})
       exact hsurj
   exact ⟨asIso φ, hφ⟩
 
+/-- The comparison of sheafified discrete constants at the tied universes, as used by
+`import all` importers. Source: Stacks 03P5. -/
+private theorem discreteCoefficientComparison (S : Scheme.{t})
+    (R : Type (t + 1)) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [DiscreteTopology R] :
+    letI := WeilConjectures.integralCoefficientRingSheafify.{t, t} S
+    ∃ e : (constantSheaf (ProEt.topology S) CommRingCat.{t + 1}).obj (CommRingCat.of R) ≅
+        coefficientContinuousSheaf.{t, t} S R,
+      toSheafify (ProEt.topology S) ((Functor.const S.ProEtᵒᵖ).obj
+        (CommRingCat.of R)) ≫ e.hom.hom = continuousCoefficientConstants.{t, t} S R :=
+  discreteCoefficientComparisonOfUniverses.{t, t} S R
+
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private noncomputable def continuousCoefficientMap (S : Scheme.{u})
-    {R T : Type (u + 1)} [CommRing R] [CommRing T]
+private noncomputable def continuousCoefficientMap (S : Scheme.{t})
+    {R T : Type (max u (t + 1))} [CommRing R] [CommRing T]
     [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
     (f : R →+* T) (hf : Continuous f) :
-    ProEtale.lisseContinuousCommRingSheafSized S R ⟶
-      ProEtale.lisseContinuousCommRingSheafSized S T :=
+    coefficientContinuousSheaf S R ⟶
+      coefficientContinuousSheaf S T :=
   ⟨{ app := fun U ↦ CommRingCat.ofHom
         (ULift.ringEquiv.symm.toRingHom.comp
           ((f.compLeftContinuous U.unop.left hf).comp ULift.ringEquiv.toRingHom))
@@ -348,23 +399,25 @@ private noncomputable def continuousCoefficientMap (S : Scheme.{u})
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem discreteComparison_naturality (S : Scheme.{u})
-    {R T : Type (u + 1)} [CommRing R] [CommRing T]
+private theorem discreteComparison_naturality (S : Scheme.{t})
+    {R T : Type (max u (t + 1))} [CommRing R] [CommRing T]
     [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
     [DiscreteTopology R] [DiscreteTopology T] (f : R →+* T)
-    (eR : (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj
-        (CommRingCat.of R) ≅ ProEtale.lisseContinuousCommRingSheafSized S R)
-    (eT : (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj
-        (CommRingCat.of T) ≅ ProEtale.lisseContinuousCommRingSheafSized S T)
+    (eR : (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
+        (CommRingCat.of R) ≅ coefficientContinuousSheaf S R)
+    (eT : (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
+        (CommRingCat.of T) ≅ coefficientContinuousSheaf S T)
     (hR : toSheafify (ProEt.topology S) ((Functor.const S.ProEtᵒᵖ).obj
       (CommRingCat.of R)) ≫ eR.hom.hom = continuousCoefficientConstants S R)
     (hT : toSheafify (ProEt.topology S) ((Functor.const S.ProEtᵒᵖ).obj
       (CommRingCat.of T)) ≫ eT.hom.hom = continuousCoefficientConstants S T) :
-    (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map
+    (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
         (CommRingCat.ofHom f) ≫ eT.hom =
       eR.hom ≫ continuousCoefficientMap S f continuous_of_discreteTopology := by
+  let := WeilConjectures.integralCoefficientRingSheafify.{t, u} S
   apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _ (ProEtale.lisseContinuousCommRingSheafSized S T).property
+  apply sheafify_hom_ext (D := CommRingCat.{max u (t + 1)})
+    (ProEt.topology S) _ _ (coefficientContinuousSheaf S T).property
   change toSheafify _ _ ≫ (_ ≫ eT.hom.hom) = toSheafify _ _ ≫ (eR.hom.hom ≫ _)
   rw [← Category.assoc, ← Category.assoc, hR]
   change (toSheafify _ _ ≫ sheafifyMap (ProEt.topology S)
@@ -419,26 +472,26 @@ private theorem continuous_principal_quotient {X R T : Type*} [TopologicalSpace 
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem constantSection_principal_quotient (S : Scheme.{u})
-    {R T : Type (u + 1)} [CommRing R] [CommRing T]
+private theorem constantSection_principal_quotientOfUniverses (S : Scheme.{t})
+    {R T : Type (max u (t + 1))} [CommRing R] [CommRing T]
     [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
     [DiscreteTopology R] [DiscreteTopology T]
     (f : R →+* T) (a : R) (hs : Function.Surjective f)
     (hk : RingHom.ker f = Ideal.span {a}) (U : S.ProEtᵒᵖ) :
-    let F := constantSheaf (ProEt.topology S) CommRingCat.{u + 1}
+    let F := constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}
     let q := ((F.map (CommRingCat.ofHom f)).hom.app U).hom
     let c := (toSheafify (ProEt.topology S)
       ((Functor.const S.ProEtᵒᵖ).obj (CommRingCat.of R))).app U a
     Function.Surjective q ∧ ∀ s, q s = 0 ↔ ∃ t, c * t = s := by
-  let := WeilConjectures.integralCoefficientRingSheafify.{u, u} S
+  let := WeilConjectures.integralCoefficientRingSheafify.{t, u} S
   dsimp only
-  obtain ⟨eR, hR⟩ := discreteCoefficientComparison S R
-  obtain ⟨eT, hT⟩ := discreteCoefficientComparison S T
-  let er := (((sheafToPresheaf _ CommRingCat.{u + 1}) ⋙
+  obtain ⟨eR, hR⟩ := discreteCoefficientComparisonOfUniverses S R
+  obtain ⟨eT, hT⟩ := discreteCoefficientComparisonOfUniverses S T
+  let er := (((sheafToPresheaf _ CommRingCat.{max u (t + 1)}) ⋙
     (CategoryTheory.evaluation _ _).obj U).mapIso eR).commRingCatIsoToRingEquiv
-  let et := (((sheafToPresheaf _ CommRingCat.{u + 1}) ⋙
+  let et := (((sheafToPresheaf _ CommRingCat.{max u (t + 1)}) ⋙
     (CategoryTheory.evaluation _ _).obj U).mapIso eT).commRingCatIsoToRingEquiv
-  let q := (((constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map
+  let q := (((constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
     (CommRingCat.ofHom f)).hom.app U).hom
   let c := (toSheafify (ProEt.topology S)
     ((Functor.const S.ProEtᵒᵖ).obj (CommRingCat.of R))).app U a
@@ -470,6 +523,21 @@ private theorem constantSection_principal_quotient (S : Scheme.{u})
       apply ULift.ext
       rw [hn, map_zero, map_mul, hc]
       exact (hqk _).mpr ⟨(er t).down, rfl⟩
+
+/-- The principal-quotient section formula at the tied universes, as used by
+`import all` importers. Source: Stacks 03P5. -/
+private theorem constantSection_principal_quotient (S : Scheme.{t})
+    {R T : Type (t + 1)} [CommRing R] [CommRing T]
+    [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
+    [DiscreteTopology R] [DiscreteTopology T]
+    (f : R →+* T) (a : R) (hs : Function.Surjective f)
+    (hk : RingHom.ker f = Ideal.span {a}) (U : S.ProEtᵒᵖ) :
+    let F := constantSheaf (ProEt.topology S) CommRingCat.{t + 1}
+    let q := ((F.map (CommRingCat.ofHom f)).hom.app U).hom
+    let c := (toSheafify (ProEt.topology S)
+      ((Functor.const S.ProEtᵒᵖ).obj (CommRingCat.of R))).app U a
+    Function.Surjective q ∧ ∀ s, q s = 0 ↔ ∃ t, c * t = s :=
+  constantSection_principal_quotientOfUniverses.{t, t} S f a hs hk U
 
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -611,11 +679,11 @@ private theorem completion_positive_cone {A : Type v} [CommRing A]
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem constantSection_power_kernel (S : Scheme.{u})
-    {R T : Type (u + 1)} [CommRing R] [CommRing T]
+private theorem constantSection_power_kernel (S : Scheme.{t})
+    {R T : Type (max u (t + 1))} [CommRing R] [CommRing T]
     (f : R →+* T) (l n : ℕ) (hs : Function.Surjective f)
     (hk : RingHom.ker f = Ideal.span {(l : R) ^ n}) (U : S.ProEtᵒᵖ) :
-    let F := constantSheaf (ProEt.topology S) CommRingCat.{u + 1}
+    let F := constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}
     let q := ((F.map (CommRingCat.ofHom f)).hom.app U).hom
     Function.Surjective q ∧
       RingHom.ker q = (Ideal.span {(l : (F.obj (CommRingCat.of R)).obj.obj U)}) ^ n := by
@@ -623,7 +691,7 @@ private theorem constantSection_power_kernel (S : Scheme.{u})
   let : TopologicalSpace T := ⊥
   let : DiscreteTopology R := ⟨rfl⟩
   let : DiscreteTopology T := ⟨rfl⟩
-  obtain ⟨hs', hk'⟩ := constantSection_principal_quotient S f ((l : R) ^ n) hs hk U
+  obtain ⟨hs', hk'⟩ := constantSection_principal_quotientOfUniverses S f ((l : R) ^ n) hs hk U
   refine ⟨hs', ?_⟩
   ext s
   rw [RingHom.mem_ker, hk', Ideal.span_singleton_pow, Ideal.mem_span_singleton]
@@ -701,39 +769,40 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Quotients commute with sections of constant rings, so the recorded sheaf limit
 is the algebraic completion of its actual constant-section ring. -/
-private theorem zl_section_completion (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+private theorem zl_section_completion (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (U : S.ProEtᵒᵖ) :
-    let A := (purTwistZlConstant S l).obj.obj U
+    let A := (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U
     let I : Ideal A := Ideal.span {(l : A)}
-    ∃ e : AdicCompletion I A ≃+* (purTwistZlCompletion S l).obj.obj U,
+    ∃ e : AdicCompletion I A ≃+* (purTwistZlCompletionOfUniverses.{t, u} S l).obj.obj U,
       (∀ a : A, e (AdicCompletion.of I A a) =
-        (purTwistZlCompletionMap S l).hom.app U a) ∧
-      ∀ n : ℕ, ∃ r : A ⧸ I ^ (n + 1) ≃+* (purTwistFiniteRing S l n).obj.obj U,
-        (∀ a : A, r (Ideal.Quotient.mk _ a) = (purTwistZlReduction S l n).hom.app U a) ∧
-        ∀ x, (purTwistZlProjection S l n).hom.app U (e x) =
+        (purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U a) ∧
+      ∀ n : ℕ, ∃ r : A ⧸ I ^ (n + 1) ≃+* (purTwistFiniteRingOfUniverses.{t, u} S l n).obj.obj U,
+        (∀ a : A, r (Ideal.Quotient.mk _ a) =
+          (purTwistZlReductionOfUniverses.{t, u} S l n).hom.app U a) ∧
+        ∀ x, (purTwistZlProjectionOfUniverses.{t, u} S l n).hom.app U (e x) =
           r (AdicCompletion.evalₐ I (n + 1) x) := by
-  let A := (purTwistZlConstant S l).obj.obj U
+  let A := (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U
   let I : Ideal A := Ideal.span {(l : A)}
-  let ev := sheafToPresheaf (ProEt.topology S) CommRingCat.{u + 1} ⋙
+  let ev := sheafToPresheaf (ProEt.topology S) CommRingCat.{max u (t + 1)} ⋙
     (CategoryTheory.evaluation _ _).obj U ⋙ forget₂ CommRingCat RingCat
-  let D := purTwistZlTower S l ⋙ ev
-  let c := ev.mapCone (CategoryTheory.Limits.limit.cone (purTwistZlTower S l))
+  let D := purTwistZlTowerOfUniverses.{t, u} S l ⋙ ev
+  let c := ev.mapCone (CategoryTheory.Limits.limit.cone (purTwistZlTowerOfUniverses.{t, u} S l))
   have hc : CategoryTheory.Limits.IsLimit c :=
     CategoryTheory.Limits.isLimitOfPreserves ev (CategoryTheory.Limits.limit.isLimit _)
   let q : (Functor.const ℕᵒᵖ).obj (RingCat.of A) ⟶ D :=
-    (Functor.const ℕᵒᵖ).map (ev.map (purTwistZlCompletionMap S l)) ≫ c.π
+    (Functor.const ℕᵒᵖ).map (ev.map (purTwistZlCompletionMapOfUniverses.{t, u} S l)) ≫ c.π
   have hq (n : ℕ) : (q.app (op n)).hom =
-      ((purTwistZlReduction S l n).hom.app U).hom := by
+      ((purTwistZlReductionOfUniverses.{t, u} S l n).hom.app U).hom := by
     exact congrArg (fun g ↦ (g.hom.app U).hom)
-      ((purTwistZlCompletionMap_existsUnique S l).exists.choose_spec n)
+      ((purTwistZlCompletionMap_existsUniqueOfUniverses.{t, u} S l).exists.choose_spec n)
   have hdata (n : ℕ) : Function.Surjective (q.app (op n)) ∧
       RingHom.ker (q.app (op n)).hom = I ^ (n + 1) := by
     change Function.Surjective (q.app (op n)).hom ∧ _
     rw [hq]
-    obtain ⟨hs, hk⟩ := lifted_power_kernel.{0, u + 1}
+    obtain ⟨hs, hk⟩ := lifted_power_kernel.{0, max u (t + 1)}
       (PadicInt.toZModPow (p := l) (n + 1)) l (n + 1)
       (ZMod.ringHom_surjective _) (PadicInt.ker_toZModPow (n + 1))
-    exact constantSection_power_kernel S _ l (n + 1) hs hk U
+    exact constantSection_power_kernel.{t, u} S _ l (n + 1) hs hk U
   obtain ⟨e, he⟩ := completion_positive_iso_normalized I D c hc q
     (fun n ↦ (hdata n).1) (fun n ↦ (hdata n).2)
   refine ⟨e, ?_, ?_⟩
@@ -742,7 +811,7 @@ private theorem zl_section_completion (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     intro n
     obtain ⟨r, hr, hp⟩ := he n.unop
     change c.π.app n (e (AdicCompletion.of I A a)) =
-      c.π.app n ((purTwistZlCompletionMap S l).hom.app U a)
+      c.π.app n ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U a)
     rw [hp, AdicCompletion.evalₐ_of, hr]
     rfl
   · intro n
@@ -757,7 +826,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- On the cofinal exponents e(n+1), uniformizer quotients are l-power quotients.
 Evaluate the recorded limit and identify it with the completion of constant sections. -/
-private theorem integral_section_completion (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+private theorem integral_section_completion (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (e : ℕ) (he : 0 < e)
     (hpow : ∀ r : ℕ, Padic.coefficientExtensionIdeal l E (e * r) =
@@ -789,9 +858,9 @@ private theorem integral_section_completion (S : Scheme.{u}) (l : ℕ) [Fact l.P
       change n ≤ e * (n + 1) - 1
       have h := Nat.le_mul_of_pos_left (n + 1) he
       omega⟩
-  let ev := sheafToPresheaf (ProEt.topology S) RingCat.{u + 1} ⋙
+  let ev := sheafToPresheaf (ProEt.topology S) RingCat.{max u (t + 1)} ⋙
     (CategoryTheory.evaluation _ _).obj U
-  let evc := sheafToPresheaf (ProEt.topology S) CommRingCat.{u + 1} ⋙
+  let evc := sheafToPresheaf (ProEt.topology S) CommRingCat.{max u (t + 1)} ⋙
     (CategoryTheory.evaluation _ _).obj U ⋙ forget₂ CommRingCat RingCat
   let D0 := WeilConjectures.integralCoefficientSheafSystem l E S ⋙ ev
   let c0 := ev.mapCone (limit.cone (WeilConjectures.integralCoefficientSheafSystem l E S))
@@ -818,9 +887,9 @@ private theorem integral_section_completion (S : Scheme.{u}) (l : ℕ) [Fact l.P
       rw [hker]
       dsimp only [K]
       rw [hf, hpow, Ideal.span_singleton_pow]
-    obtain ⟨hs, hk⟩ := lifted_power_kernel.{u, u + 1}
+    obtain ⟨hs, hk⟩ := lifted_power_kernel.{u, t + 1}
       (Ideal.Quotient.mk K) l (n + 1) Ideal.Quotient.mk_surjective hK
-    exact constantSection_power_kernel S _ l (n + 1) hs hk U
+    exact constantSection_power_kernel.{t, u} S _ l (n + 1) hs hk U
   obtain ⟨i, hi⟩ := completion_positive_iso_normalized J D c hc q
     (fun n ↦ (hdata n).1) (fun n ↦ (hdata n).2)
   refine ⟨i, ?_, ?_⟩
@@ -1015,15 +1084,16 @@ private theorem tensor_completion_comparison
 /-- The canonical balanced coefficient map, constructed from the two actual scalar
 inclusions. Its pure-tensor formula is definitional.
 Source: Stacks 03EK (blueprint: lem-pur-twist-coefficient-tensor). -/
-noncomputable def purTwistCoefficientTensorMap (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :
     letI := ((purTwistConstantIntegersMap S l E).hom.app U).hom.toAlgebra
-    letI := ((purTwistZlCompletionMap S l).hom.app U).hom.toAlgebra
+    letI := ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U).hom.toAlgebra
     ((purTwistIntegralConstant S l E).obj.obj U ⊗[
-        (purTwistZlConstant S l).obj.obj U] (purTwistZlCompletion S l).obj.obj U) →+*
+        (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U]
+          (purTwistZlCompletionOfUniverses.{t, u} S l).obj.obj U) →+*
         (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S).obj.obj U :=
-  let a := ((purTwistZlCompletionMap S l).hom.app U).hom
+  let a := ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U).hom
   let b := ((purTwistConstantIntegersMap S l E).hom.app U).hom
   let c := ((purTwistCompletedScalarMap S l E).hom.app U).hom
   let d := ((purTwistIntegralCompletionMap S l E).hom.app U).hom
@@ -1031,13 +1101,13 @@ noncomputable def purTwistCoefficientTensorMap (S : Scheme.{u}) (l : ℕ) [Fact 
   letI := a.toAlgebra
   letI := (c.comp a).toAlgebra
   let f : (purTwistIntegralConstant S l E).obj.obj U →ₐ[
-      (purTwistZlConstant S l).obj.obj U]
+      (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U]
       (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S).obj.obj U :=
     { __ := d
       commutes' := fun z ↦ (ConcreteCategory.congr_hom
         (congrArg (fun t ↦ t.hom.app U) (purTwistCoefficientSquare S l E)) z).symm }
-  let g : (purTwistZlCompletion S l).obj.obj U →ₐ[
-      (purTwistZlConstant S l).obj.obj U]
+  let g : (purTwistZlCompletionOfUniverses.{t, u} S l).obj.obj U →ₐ[
+      (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U]
       (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S).obj.obj U :=
     { __ := c
       commutes' := fun _ ↦ rfl }
@@ -1071,18 +1141,18 @@ with restrictions. Rank zero and the zero section ring cause no exception: their
 tensors and both limits are zero. No hypothesis on the characteristic of the
 base scheme is used in this coefficient calculation.
 -/
-theorem purTwistCoefficientTensor (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+theorem purTwistCoefficientTensor (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :
     letI := ((purTwistConstantIntegersMap S l E).hom.app U).hom.toAlgebra
-    letI := ((purTwistZlCompletionMap S l).hom.app U).hom.toAlgebra
+    letI := ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U).hom.toAlgebra
     Function.Bijective (purTwistCoefficientTensorMap S l E U) := by
   classical
-  let A := (purTwistZlConstant S l).obj.obj U
+  let A := (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U
   let B := (purTwistIntegralConstant S l E).obj.obj U
-  let R := (purTwistZlCompletion S l).obj.obj U
+  let R := (purTwistZlCompletionOfUniverses.{t, u} S l).obj.obj U
   let T := (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S).obj.obj U
-  let a : A →+* R := ((purTwistZlCompletionMap S l).hom.app U).hom
+  let a : A →+* R := ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U).hom
   let b : A →+* B := ((purTwistConstantIntegersMap S l E).hom.app U).hom
   let c : R →+* T := ((purTwistCompletedScalarMap S l E).hom.app U).hom
   let d : B →+* T := ((purTwistIntegralCompletionMap S l E).hom.app U).hom
@@ -1108,10 +1178,11 @@ theorem purTwistCoefficientTensor (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   rw [hJ] at hB
   obtain ⟨eB, heB, hB⟩ := hB
   choose rB hrB hpB using hB
-  let Q (n : ℕ) : CommRingCat.{u + 1} := (purTwistFiniteRing S l n).obj.obj U
-  let P (n : ℕ) : CommRingCat.{u + 1} :=
+  let Q (n : ℕ) : CommRingCat.{max u (t + 1)} :=
+    (purTwistFiniteRingOfUniverses.{t, u} S l n).obj.obj U
+  let P (n : ℕ) : CommRingCat.{max u (t + 1)} :=
     (WeilConjectures.integralCoefficientCommRingSheaf l E S (e * (n + 1) - 1)).obj.obj U
-  let pA (n : ℕ) : R →+* Q n := ((purTwistZlProjection S l n).hom.app U).hom
+  let pA (n : ℕ) : R →+* Q n := ((purTwistZlProjectionOfUniverses.{t, u} S l n).hom.app U).hom
   let pB (n : ℕ) : T →+* P n :=
     ((WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E S
       (e * (n + 1) - 1)).hom.app U).hom
@@ -1138,7 +1209,7 @@ theorem purTwistCoefficientTensor (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     change IsPurTwistCompletedScalarMap S l E (purTwistCompletedScalarMap S l E) at hscalar
     obtain ⟨k, q, _, hq⟩ := hscalar (e * (n + 1) - 1)
     let qU : Q k →+* P n :=
-      (((constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map
+      (((constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
         (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
           (q.comp ULift.ringEquiv.toRingHom)))).hom.app U).hom
     refine ⟨k, qU, ?_⟩

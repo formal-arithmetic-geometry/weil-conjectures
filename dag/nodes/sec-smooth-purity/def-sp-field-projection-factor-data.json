@@ -1,0 +1,122 @@
+{
+ "id": "def-sp-field-projection-factor-data",
+ "kind": "definition",
+ "title": "Canonical field-system tensor data and proper/open projection factors",
+ "statement": "Fix a purity finite setting P [def-pur-conventions] and simultaneous field-system models D [def-sp-field-shriek-system-models]. A ProjectionTensorComparisons datum consists of the natural signed tensor symmetry on each scheme and field, normalized on every homogeneous K-flat tensor generator by (-1)^(ab), and a strong scalar tensor comparison for each field inclusion, with its ScalarTensorComparisonModel pure-tensor and K-flat normalization [def-coef-semilinear-system-models, def-coef-ringed-tensor-hom-model]. The left compact-support projection and its scalar target comparison are the original leftProjection and projectionTarget. ProjectionSystemSquare and InvertedProjectionSystemSquare are the original equality predicates. For a scheme morphism g, leftProper is the counit-defined proper projection conjugated by source and target symmetry. For a compactification c=(j,p), leftOpen is inverse source symmetry, the specified open tensor comparison, the pullback compositor j^*p^* to f^*, and extension of target symmetry. Thus the compact-support left projection factors as leftProper followed by proper image of leftOpen. These are explicit words, with no existence or coherence law postulated.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-field-shriek-system-comparison",
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-sp-field-shriek-system-models",
+  "def-coef-semilinear-system-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension has a canonical tensor comparison and Koszul symmetry on K flat complexes",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, its congr_simp, LinearMap.tensorKerEquiv, Module.Flat.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, comonadicExtendScalars, KaehlerDifferential.tensorKaehlerEquiv, LinearMap.tensorEqLocusEquiv. None supplies the normalized derived sheaf tensor data.",
+   "date": "2026-10-26",
+   "verdict": "No match; ordinary module base change is only an ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension has a canonical tensor comparison and Koszul symmetry on K flat complexes",
+   "results": "8 hits on Algebra.Extension.tensorH1Cotangent and flat module tensor exactness, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat. No whole-system normalized derived tensor comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor|tensorModelIso|braiding",
+   "results": "25 initial hits, starting with Mathlib/Probability/Kernel/Category/Stoch.lean and braided monoidal category files. Repository search found the generic prescribed scalar comparison and semilinear model interfaces, but no construction for the fixed field-system models or their two projection factors.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldProjectionSystemSquare",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square",
+   "via": [
+    "lem-sp-field-projection-system-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionSystemData",
+  "file": "lean/Sheaf/Paper/FieldProjectionSystemData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.ProjectionTensorComparisons",
+  "statement": "structure ProjectionTensorComparisons",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.ProjectionTensorComparisons",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.leftProjection",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.projectionTarget",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.ProjectionSystemSquare",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.InvertedProjectionSystemSquare",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.leftProper",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.leftOpen"
+  ]
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square",
+  "note": "The original tensor data and four projection declarations are relocated verbatim; the two new factors are explicit composites. Their factorization is proved in the item module."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature and relocated five data declarations vs clone (identical, public re-export); three new sorried squares/constructions vs Models/Geometry/Operations pinning fields (open_unit, openTensor_mate, tensorPullback_eq, PullComparison.representative)"
+ }
+}

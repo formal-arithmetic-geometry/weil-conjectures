@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-section-proj-model",
+ "kind": "definition",
+ "title": "Normalized affine presentation of a section algebra",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ a presheaf of sets on schemes over $S$, $T$ a scheme over $S$, $f:F\\to h_T$ a map and $L$ a cartesian test-line family [def-trf-cartesian-line-presentation]. A section-Proj model consists of a normalized section algebra $A$ [lem-trf-space-section-algebra-etale-base-change], affine graded algebra data $C$ [def-nagata-relative-proj], and linear equivalences $\\Gamma(V,A_n)\\simeq C(V)_n$ on every affine base open. These equivalences preserve homogeneous products, the base-ring unit and all affine restrictions. Its graded line map [def-trf-space-line-module-proj-input] evaluates every homogeneous element corresponding to $s$ as $A$ evaluates $s$ on every scheme test over its domain. This is the existing SectionProjModel structure moved verbatim out of the parent module; it adds no geometric hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LH; spaces-descent.tex Tag 0D3C and spaces-divisors.tex Tag 0D2Z."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-cartesian-line-presentation",
+  "lem-trf-space-section-algebra-etale-base-change",
+  "def-nagata-relative-proj",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of the canonical open immersion into relative Proj of a section algebra along an etale covering",
+   "results": "8 hits, including Proj.fromOfGlobalSections, Proj.pullbackAwayιIso, Proj.instIsOpenImmersionAwayι. No section-algebra presentation or space descent theorem.",
+   "verdict": "No exact match; use the project section-algebra and canonical-map interfaces.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent graded algebra sheaf has affine homogeneous section presentations and evaluation maps compatible with etale base change",
+   "results": "8 hits on SheafOfModules.IsQuasicoherent and QuasicoherentData presentations; none treats the requested graded section-algebra adapters.",
+   "verdict": "No exact match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.isSheaf_iff",
+   "results": "CategoryTheory.Subfunctor.isSheaf_iff in Mathlib.CategoryTheory.Sites.Subsheaf: membership of a subsheaf is local.",
+   "verdict": "Used for the proved generation-locus descent. No graded adapter or open-map descent match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "SectionProjModel|section_proj_etale_embedding|IsOpenImmersion.*etale|sectionGrade_internal|tensorOpenSectionIso",
+   "results": "Project: SectionProjModel only in the item; no exact comparison or restriction theorem. Existing ingredients: RelativeProjAlgebra.affineData, sectionGrade_internal, tensorOpenSectionIso, isOpenImmersion_of_etale_cover; Mathlib etale instance for open immersions.",
+   "verdict": "Ingredients found; no duplicate of a new statement.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SectionProjEtaleEmbedding",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-proj-etale-embedding",
+   "place": "Proof Steps 1-5, separated into independently reusable adapter and geometric steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.SectionProjModel",
+  "file": "lean/Sheaf/TraceFormula/SectionProjModel.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SectionProjModel",
+  "statement": "structure SectionProjModel {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S}\n    (f : F ⟶ yoneda.obj T) (L : TestLineFamily F)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "independent cc review: item signature byte-identical to clone; relocated SectionProjModel byte-identical with change record, 0 importers; 4 new sorry statements read against SpaceSectionAlgebra/GradedAlgebraData/PullbackData/EtaleLinePresentation defs (true); #print axioms on item and descent theorem (sorryAx only via new holes/upstream)"
+ }
+}

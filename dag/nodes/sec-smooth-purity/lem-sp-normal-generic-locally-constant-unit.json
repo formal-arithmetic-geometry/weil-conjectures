@@ -1,0 +1,119 @@
+{
+ "id": "lem-sp-normal-generic-locally-constant-unit",
+ "kind": "statement",
+ "title": "Generic-point unit on locally constant module sheaves",
+ "statement": "Let V be a normal integral scheme [def-pc-scheme, def-sbc-normal-dominant-galois], g:Spec κ(η) -> V its generic-point stalk morphism, Λ any commutative ring, and G a locally constant sheaf of Λ-modules on the small etale site. The actual adjunction unit G -> g_*g^*G is an isomorphism. Locally constant means etale locally a constant module sheaf; the values need not be finite. The unit is that of the etale inverse-image/direct-image adjunction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Refinement of lem-sp-normalized-tate-line-comparison, proof step 3"
+ },
+ "proof": [
+  {
+   "text": "The normal generic constant theorem, in its proved module-valued form isIso_unit_constantSheaf_fromSpecStalk_genericPoint, gives invertibility of the generic-point unit on every constant Λ-module sheaf.",
+   "uses": [
+    "lem-weil-pbc-normal-constant-generic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any etale map w:W -> V, form its pullback square with g. Etale base change is an isomorphism. Its unit equation map_unit_baseChangeMap_app shows that the pulled-back unit is invertible exactly when the unit for the base-changed morphism is invertible on w^*G. For constant G the former follows from the previous step; w^* preserves constant values, so the latter holds for every constant module sheaf on W.",
+   "uses": [
+    "lem-weil-pbc-etale-underived-exchange-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an etale cover trivializing G. Naturality of the local unit transports its invertibility from constant values to each w^*G. The same unit/base-change equation gives invertibility of w^* of the original unit. Use upperStarIsoLocalizationRestriction and the jointly surjective localizationRestriction isomorphism detector to conclude. This avoids any identification of the generic fibre of W and also covers empty members of the trivializing cover.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-etale-underived-exchange-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Source-plan refinement; proved by Y8 using the adopted-source declarations named in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic point pullback is fully faithful on locally constant module sheaves on a normal integral scheme",
+   "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondMod.LocallyConstant.instFullModuleCatFunctor, CondensedMod.LocallyConstant.instFullModuleCatFunctor, LightCondSet.LocallyConstant.instFullFunctor, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|TateTwist|normalGeneric.*unit",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/FLT/Three.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*locallyConstant|locallyConstant.*generic|normalized_zero_tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.NormalizedTateLineComparison",
+  "date": "2026-10-26",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Generic-point unit on locally constant module sheaves",
+   "via": [
+    "lem-normalized-projective-line-adjunction",
+    "lem-sp-normalized-tate-line-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.NormalGenericLocallyConstantUnit",
+  "file": "lean/Sheaf/SmoothPurity/NormalGenericLocallyConstantUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_normalGeneric_locallyConstant_unit",
+  "statement": "theorem isIso_normalGeneric_locallyConstant_unit\n    (Λ : Type (u + 1)) [CommRing Λ] (V : Scheme.{u})\n    [IsIntegral V] (hV : IsNormalScheme V)\n    (G : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf G] :\n    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)\n      (V.fromSpecStalk (genericPoint V))).unit.app G)",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203847-L-2863491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203847-L-2863491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

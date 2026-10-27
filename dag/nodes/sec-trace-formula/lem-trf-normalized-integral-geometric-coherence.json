@@ -1,0 +1,129 @@
+{
+ "id": "lem-trf-normalized-integral-geometric-coherence",
+ "kind": "statement",
+ "title": "NormalizedIntegralGeometricCoherence",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "The counit-normalized pullback comparisons obey geometric composition laws. For every fixed ambient normalized system D, with exactly the hypotheses and conclusions in the Lean attachment.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralGeometricCoherence"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate ordinary quotient-system associativity and the two unit transformations from integralQuotientMixedCoherence at N. Naturality of b, the counit transformation and the system compositor makes the eta transformation natural. Postcomposition with its invertible component proves naturality of the displayed integral compositor.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the adjunction Hom equivalence to the defining compositor square. Naturality of that equivalence gives R(c_hk) followed by delta_h and U_h(delta_k) equal to delta_hk followed by the whole-system compositor. Applying the same equivalence to the displayed completed unit square and using the adjunction triangle gives R(u_X)=delta_id followed by the system unitor. Here delta is exactly integralComparisonPullbackCounit, not a separately chosen comparison.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived completeness makes the supplied adjunction unit invertible at constructible objects. Unit naturality therefore reflects equality through reduction. For associativity postcompose the reductions of both routes with delta_j, U_j(delta_h), and U_j U_h(delta_k); these are invertible by the supplied effectivity. Paste the mate squares, move delta_k through the system compositor by naturality, transport delta across the actual equality of scheme composites, and apply derived quotient-system associativity. Cancel the common coordinates and reflect equality through reduction.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each unit equation postcompose its reduction with the invertible delta_f. Substitute the mate formula for the completed unit, commute the system unitor or delta_f by naturality, and use the compositor mate square. Derived system source and target unit laws identify the resulting map with transport along id_comp or comp_id. Reflect the equality using the complete target unit.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-quotient-system-mixed-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok) and Tag 0D6D; R8 direct adjunction-mate transfer of geometric associativity and units, without the word calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and units of completed pullback comparisons transported by normalized whole-system derived limit counits",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "1 hits: CategoryTheory.Adjunction.left_triangle_components",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(assoc|coher)|scalar.*pullback.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/CatCommSq.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SimultaneousIntegralPullbackComparisons",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralGeometricCoherence",
+   "via": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralGeometricCoherence",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralGeometricCoherence.lean",
+  "declaration": "WeilConjectures.normalizedIntegralGeometricCoherence",
+  "statement": "theorem normalizedIntegralGeometricCoherence\n    (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    IntegralComparisonCompositionLaws l E D",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T084449-L-3683880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

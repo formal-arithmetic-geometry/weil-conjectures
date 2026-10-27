@@ -1,0 +1,97 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: support and resolution subarguments for the coefficient transport comparisons.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarProofs",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProofs.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.inverse_mate_isIso_of_support",
+  "statement": "theorem inverse_mate_isIso_of_support\n    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]\n    {L : A ⥤ B} {R : B ⥤ A} {l : D ⥤ E} {r : E ⥤ D}\n    (a : L ⊣ R) (b : l ⊣ r) (F : A ⥤ D) (G : B ⥤ E)\n    (e : R ⋙ F ≅ G ⋙ r) [IsIso a.unit]\n    (hc : ∀ M, IsIso (b.counit.app (G.obj (L.obj M)))) :\n    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "id": "lem-pur-inverse-mate-supported-counit",
+ "kind": "statement",
+ "title": "Invertibility of an inverse mate on supported objects",
+ "statement": "Let a : L ⊣ R and b : l ⊣ r be adjunctions between arbitrary categories. Let F,G be connecting functors and e : R ⋙ F ≅ G ⋙ r. If a.unit is invertible and b.counit at G(L(M)) is invertible for every M, then the inverse mate of e.hom is invertible.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0D6E; already proved generic subargument of blueprint sk-thm-purity-transport Step 10, moved from the assigned module for compile performance."
+ },
+ "proof": [
+  {
+   "text": "Expand the component of the inverse mate as identities, images of the source unit, the isomorphism e, and the target counit. All factors are invertible by the hypotheses. Invertibility of every component makes the natural transformation invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "K3 proved this argument as a private helper; K1 isolates the unchanged proof with a public supporting statement. No new proof assumption or sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertibility of derived adjunction mates from injective resolutions and preservation of quasi isomorphisms by ringed direct image; scalar restriction preserves open extension essential image",
+   "results": "Eight hits for restriction/coextension, injective presentations, right-derived-zero on injectives, and scheme module adjunctions. No exact unbounded coefficient-system statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement for this existing proved helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve hits for equivalence criteria and fully faithful adjoints. These underlie the helper, but none supplies its exact mate or derived support conclusion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse standard adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate.*[iI]sIso|continuous_scalar_resolution|scalarRestriction_openSupported|inverse_mate_isIso_of_support",
+   "results": "Zero Mathlib hits. The shared library has these proved private helpers in the assigned module; they are transferred, not reproved or replaced by holes. Imported blueprint searches found no exact statement.",
+   "date": "2026-10-27",
+   "verdict": "Isolate the existing proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

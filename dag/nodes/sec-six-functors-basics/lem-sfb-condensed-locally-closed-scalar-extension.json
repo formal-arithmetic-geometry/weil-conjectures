@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-condensed-locally-closed-scalar-extension",
+ "kind": "statement",
+ "title": "Ordinary scalar change through canonical locally closed extension",
+ "statement": "Let c:A -> B be a morphism of commutative condensed ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-change-of-scalars]. For any immersion a:S -> X into a Noetherian scheme [def-weil-closed-immersion], and any internal A_S-module M [sk-def-sfb-module-objects], the canonical locally closed extension of its ordinary scalar extension B_S tensor_A_S M is isomorphic, as a B_X-module, to the ordinary scalar extension of the canonical extension of M [def-sfb-locally-closed-coefficient-extension]. All coefficient rings and maps are the pulled-back ones [sk-def-sfb-pulled-back-coefficients]. No flatness or local freeness of M or c is assumed; empty schemes and zero modules are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+  "place": "Proof (1), Ordinary scalar change through canonical locally closed extension"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-locally-closed-coefficient-extension",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the open-immersion scalar adjunction comparison supplied by [sk-def-sfb-coefficient-change]. For the closed factor take its scalar/direct-image mate. Its pullback to the closed source is invertible by the closed counit and the scalar/pullback comparison, and its pullback to the complementary open has zero source and target. Scalar extension preserves zero and commutes with pullback, so this holds without flatness.",
+   "uses": [
+    "def-sfb-open-immersion-shriek-iso",
+    "def-sfb-push-hom",
+    "def-sfb-pull-iso",
+    "def-sfb-comap-lower-star-iso",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), Ordinary scalar change through canonical locally closed extension"
+   }
+  },
+  {
+   "text": "Open/closed joint reflection of isomorphisms now makes the ordinary closed mate invertible. The complementary open is quasi-compact since X is Noetherian. Compose this closed isomorphism with the open scalar isomorphism for the canonical image factorization of a. Unfold the canonical closure-factorization functor once and take the inverse orientation to match the displayed objects. Zero and empty cases follow by the same zero restrictions.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "def-sfb-locally-closed-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), Ordinary scalar change through canonical locally closed extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-immersion-shriek-iso",
+  "def-sfb-push-hom",
+  "def-sfb-pull-iso",
+  "def-sfb-comap-lower-star-iso",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "def-sfb-locally-closed-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+  "place": "Proof (1), separated step of the lattice filtration argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along locally closed immersions commutes with extension of scalars and composition, and integral lattices exist on ordered strata",
+   "results": "ContinuousLinearMap.extend_zero, IsImmersion.comp and IsClosedImmersion.comp; no sheaf scalar comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary scalar extension of sheaves of modules commutes with extension by zero along a locally closed immersion",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom and presheaf pushforward formulas; no internal-module support comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*filtrat|lisse.*filtrat|cokernelOfLEMkIso; Mathlib/CategoryTheory/Subobject and AlgebraicGeometry/Modules",
+   "results": "No lattice filtration result; category subobject and scheme module operations do not state the condensed module comparison. Also searched both source roots for the same concepts.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"comp\"",
+   "results": "12 hits: PresheafOfModules.sectionsMap_comp, PresheafOfModules.comp_app, PresheafOfModules.instModuleCarrierObjOppositeCommRingCatCarrierCarrierRingCatCompForget₂RingHomObj, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.map_comp_apply, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; no condensed scalar extension by zero comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSubquotientFiltration",
+  "date": "2026-10-25",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-generators",
+   "place": "Proof (1), Ordinary scalar change through canonical locally closed extension",
+   "via": [
+    "lem-sfb-lattice-subquotient-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocallyClosedScalarExtension",
+  "file": "lean/Sheaf/Paper/CondensedLocallyClosedScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedLocallyClosedExtension_scalar",
+  "statement": "theorem condensedLocallyClosedExtension_scalar\n    (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]\n    (c : A ⟶ B) [IsMonHom c]\n    {S X : Scheme.{u}} [IsNoetherian X] (a : S ⟶ X) [IsImmersion a]\n    (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj A S)) :\n    Nonempty ((coefficientHeartLocallyClosedExtension B a inferInstance).obj\n      ((Mod.extendScalars ((upperStarFromPoint S).map c)).obj M) ≅\n        (Mod.extendScalars ((upperStarFromPoint X).map c)).obj\n          ((coefficientHeartLocallyClosedExtension A a inferInstance).obj M))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4848",
+  "group": "R9",
+  "result": "fix",
+  "landing": "20261025T164228-L-975356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4848",
+  "group": "R9",
+  "result": "fix",
+  "landing": "20261025T164228-L-975356",
+  "kind": "interface",
+  "note": "independent cc review: item LatticeSubquotientFiltration + 4 new modules/nodes against packet, clone sheaf-dag, unit sk-lem-integral-models uses, StratifiedLattice/CoefficientHeartLocallyClosedExtension statements; compiled delivered set, both direct importers, axioms"
+ }
+}

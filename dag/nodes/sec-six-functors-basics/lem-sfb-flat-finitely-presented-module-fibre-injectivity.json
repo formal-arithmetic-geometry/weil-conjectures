@@ -1,0 +1,454 @@
+{
+ "id": "lem-sfb-flat-finitely-presented-module-fibre-injectivity",
+ "kind": "statement",
+ "title": "Fibrewise injectivity criterion for a flat finitely presented module",
+ "statement": "Let $A\\to B$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra], let $\\Sigma\\subseteq B$ be a multiplicative subset (containing $1$ and closed under multiplication), and put $C=\\Sigma^{-1}B$, the ring of fractions $b/s$ with the usual localization equivalence. Let $N$ be a finitely presented $C$-module, meaning the cokernel of a map $C^r\\to C^q$ with $r,q$ finite, and suppose $N$ is flat over $A$ [def-weil-pbc-flat-ring-map]. Let $M$ be any flat $A$-module and let $u:N\\to M$ be $A$-linear; no $B$-module structure on $M$ is required. If $u\\otimes_A\\mathrm{id}_{\\kappa(\\mathfrak p)}$ is injective for every prime ideal $\\mathfrak p\\subset A$, then $u\\otimes_A\\mathrm{id}_Q:N\\otimes_AQ\\to M\\otimes_AQ$ is injective for every $A$-module $Q$ [def-weil-pbc-module-tensor-product]. Here $\\kappa(\\mathfrak p)$ is the fraction field of $A/\\mathfrak p$; $A,B,N,M$ need not be Noetherian or finite as $A$-modules.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0AT9, lemma-universally-injective-if-flat, with its situation equation-star"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-flat-target-ideal-quotient-injectivity-test], it suffices to prove injectivity modulo each finitely generated ideal $J\\subseteq A$. Fix $J$ and replace $(A,B,C,N,M,u)$ by $(A/J,B/JB,C/JC,N/JN,M/JM,\\bar u)$. These objects again satisfy all hypotheses: substitute the images of the coefficients in the finite algebra presentation and module presentation, and use $(\\Sigma^{-1}B)\\otimes_AA/J\\cong\\bar\\Sigma^{-1}(B/JB)$. This identification sends $(b/s)\\otimes\\bar a$ to $\\bar a\\bar b/\\bar s$, with inverse $\\bar b/\\bar s\\mapsto(b/s)\\otimes1$. Both modules are flat over $A/J$ by [lem-weil-pbc-flat-module-base-change]. A prime of $A/J$ is a prime of $A$ containing $J$, with the same residue field, so its fibre map is precisely the original fibre map. Thus it suffices to prove ordinary injectivity for arbitrary data satisfying the original hypotheses; the remaining steps prove this assertion without assuming any of the quotient maps injective.",
+   "uses": [
+    "lem-sfb-flat-target-ideal-quotient-injectivity-test",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, first paragraph; equation-star base change paragraph"
+   }
+  },
+  {
+   "text": "Suppose $0\\ne x\\in\\ker u$. The ideal $H=\\operatorname{Ann}_A(x)=\\{a:ax=0\\}$ is proper. By [lem-weil-pbc-minimal-prime-over-proper-ideal] choose a prime $\\mathfrak p$ minimal over $H$. In the cyclic module $Ax$ it is weakly associated, in the explicit sense of clause (1) of [lem-sc-weakass-localization]. Clause (3) supplies a nonzero element $y\\in(Ax)_{\\mathfrak p}$ whose annihilator has radical $\\mathfrak pA_{\\mathfrak p}$. View it inside $N_{\\mathfrak p}$: localization preserves the inclusion, directly because a fraction is zero exactly when some denominator kills its numerator. Also $u_{\\mathfrak p}(y)=0$. Replace the data by their base changes to $A_{\\mathfrak p}$ and rename this local ring $(A,\\mathfrak m)$. Finite presentations and the residue-field hypothesis persist by the same substitutions as in step 1, and flatness persists by [lem-weil-pbc-flat-module-base-change]. We now have $0\\ne y\\in\\ker u$ and $\\sqrt{\\operatorname{Ann}_A(y)}=\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-sc-weakass-localization",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, second paragraph, weakly associated prime localization (Tags 0588 and 0566)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-finite-presentation-pure-spreadout] to this local base, obtaining $I\\subseteq\\mathfrak m$, $P$ projective over $R=A/I$, and a universally injective localization map $j:P\\to\\bar N=N/IN$. Put $\\bar M=M/IM$, flat over $R$ by [lem-weil-pbc-flat-module-base-change]. For each $s\\in\\Sigma$, consider $v_s:P\\xrightarrow{j}\\bar N\\xrightarrow{1/s}\\bar N\\xrightarrow{\\bar u}\\bar M$. Reduction modulo the maximal ideal $\\mathfrak m/I$ is injective: $j$ remains injective by its universal injectivity, $1/s$ is an automorphism, and the reduction of $\\bar u$ is the assumed fibre injection at $\\mathfrak m$. The local projective-source criterion [lem-trf-local-universal-injective-residue] therefore makes every $v_s$ universally injective over $R$.",
+   "uses": [
+    "lem-sfb-local-finite-presentation-pure-spreadout",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-trf-local-universal-injective-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, choice of I; Tag 0AT7, lemma-properties-pure-spreadout part (2), projective-source argument"
+   }
+  },
+  {
+   "text": "For every $R$-module $T$, each element $z\\in\\bar N\\otimes_RT$ is the image of some $w\\in P\\otimes_RT$ under $(1/s)j\\otimes1_T$ for a single $s\\in\\Sigma$. Indeed write $z$ as a finite sum of pure tensors, express each first factor as $j(p_i)/s_i$, and take the product of the denominators; multiplying $p_i$ by the other denominators puts every summand over that product. This uses the localization isomorphism provided by [lem-sfb-local-finite-presentation-pure-spreadout] and tensor generation and bilinearity from [def-weil-pbc-module-tensor-product]. If $(\\bar u\\otimes1_T)(z)=0$, then $(v_s\\otimes1_T)(w)=0$, so step 3 gives $w=0$ and $z=0$. Thus $\\bar u$ is universally injective over $R$. Equivalently $u\\otimes1_T$ is injective for every $A$-module $T$ annihilated by $I$: the tensor relations over $A$ and over $A/I$ coincide after killing $IN$ and $IM$.",
+   "uses": [
+    "lem-sfb-local-finite-presentation-pure-spreadout",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT7, part (2), final filtered-localization argument, with denominators written out"
+   }
+  },
+  {
+   "text": "Choose generators $a_1,\\ldots,a_r$ of $I$. Since each belongs to $\\sqrt{\\operatorname{Ann}(y)}$, choose positive integers $e_i$ with $a_i^{e_i}y=0$. Every monomial of degree $n=1+\\sum_i(e_i-1)$ in the generators contains such a power, so $I^ny=0$. If $r=0$, use $n=1$. Let $K=\\operatorname{Ann}_A(I^n)$. This ideal has the finite filtration $K\\supseteq IK\\supseteq\\cdots\\supseteq I^nK=0$, each successive quotient annihilated by $I$. Step 4 gives injectivity after tensoring $u$ with each quotient. Apply [lem-weil-pbc-flat-tensor-exact] to both $N$ and $M$ and each short exact sequence $0\\to I^{j+1}K\\to I^jK\\to I^jK/I^{j+1}K\\to0$. Descending induction on $j$, starting with $j=n$, proves that $u\\otimes1_K$ is injective: a kernel element has zero image in the quotient tensor, hence lifts to the preceding submodule tensor, where injectivity and the injective inclusion into the target tensor force it to vanish.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, last paragraph, ideal-power reduction made explicit"
+   }
+  },
+  {
+   "text": "The ideal $I^n$ is finitely generated; list its degree-$n$ monomial generators $b_1,\\ldots,b_t$. The sequence $0\\to K\\to A\\xrightarrow{a\\mapsto(b_1a,\\ldots,b_ta)}A^t$ is exact. Tensor with the flat module $N$ using [lem-weil-pbc-flat-tensor-exact]. Under the bilinear identifications $N\\otimes_AA=N$ and $N\\otimes_AA^t=N^t$, this identifies $N\\otimes_AK$ with the submodule of elements killed by every $b_i$, namely $\\operatorname{Ann}_N(I^n)$. Consequently $y$ lifts to a nonzero $z\\in N\\otimes_AK$. Tensoring $K\\hookrightarrow A$ with $M$ is injective by the same cited lemma. The natural square for $u$ commutes, since both paths send $n\\otimes k$ to $ku(n)$. As $u(y)=0$, it follows that $(u\\otimes1_K)(z)=0$, contradicting step 5. Thus $u$ is injective. Step 1 applies this ordinary-injectivity argument over every $A/J$, and the quotient test then proves the required injectivity for every $Q$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, annihilator display and concluding contradiction; correcting Ann_M to Ann_N and the tensor base R to A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sc-weakass-localization",
+  "lem-sfb-flat-target-ideal-quotient-injectivity-test",
+  "lem-sfb-local-finite-presentation-pure-spreadout",
+  "lem-trf-local-universal-injective-residue",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0AT9, lemma-universally-injective-if-flat; Tag 0AT7 denominator argument, with explicit ideal-power filtration and annihilator calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map from a flat finitely presented algebra to a flat module injective on every residue field is universally injective",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.toAlgebra_injective",
+     "Module.Invertible.embAlgebra_injective",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "Module.FaithfullyFlat.of_specComap_surjective",
+     "TensorProduct.toIntegralClosure_injective_of_flat",
+     "Module.FaithfullyFlat.of_comap_surjective"
+    ],
+    "digest": "102bc19fcaa24f9f",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity on fibres of a map from a finitely presented flat module over a finitely presented algebra to a flat base module implies universal injectivity",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.toAlgebra_injective",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "Module.Invertible.embAlgebra_injective",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "TensorProduct.toIntegralClosure_injective_of_flat",
+     "Module.FaithfullyFlat.tensorProduct_mk_injective",
+     "Module.Flat.iff_rTensor_injective",
+     "Module.Flat.iff_lTensor_injective"
+    ],
+    "digest": "24156a6abbdabff5",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal injectivity can be tested on residue fields for a flat finitely presented module over a finitely presented algebra",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "TensorProduct.toIntegralClosure_injective_of_flat",
+     "AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "Module.FaithfullyFlat.injective_of_tensorProduct"
+    ],
+    "digest": "8db00fc3549a486a",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective, TensorProduct",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left",
+     "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right",
+     "TensorProduct.nontrivial_of_linearMap_injective_of_flat_left",
+     "TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+     "Algebra.TensorProduct.includeRight_injective",
+     "Algebra.TensorProduct.includeLeft_injective",
+     "Module.Flat.lTensor_preserves_injective_linearMap",
+     "Module.Flat.rTensor_preserves_injective_linearMap"
+    ],
+    "digest": "2763b631069c4c4f",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*[Ii]nject|[Ii]nject.*residue|[Ii]nject.*[Ff]iber",
+   "results": {
+    "ok": true,
+    "n_hits": 21,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Fiber.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean"
+    ],
+    "digest": "2c50c81bb158b53c",
+    "sub": "RingTheory"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise injectivity of a flat finitely presented algebra module into a flat module implies universal injectivity",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "Algebra.TensorProduct.includeLeft_injective",
+     "Module.Flat.tensorProduct_mapIncl_injective_of_right",
+     "Module.Flat.rTensor_preserves_injective_linearMap",
+     "Module.Flat.mk",
+     "Module.FaithfullyFlat.lTensor_injective_iff_injective",
+     "IsTensorProduct.map_injective_of_flat_right_left",
+     "Module.Flat.toAlgebra_injective"
+    ],
+    "digest": "39d0bc95fdb06f48",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensor preservation assumes injectivity already; faithfully flat descent and the finite-free local residue-field test do not give this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of flat modules finitely presented over a localized finitely presented algebra that is injective on all residue fields is universally injective",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "Module.FaithfullyFlat.of_flat_of_isLocalHom",
+     "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "TensorProduct.toIntegralClosure_injective_of_flat",
+     "RingHom.Flat.propertyIsLocal",
+     "Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+     "Module.FaithfullyFlat.of_specComap_surjective"
+    ],
+    "digest": "d21804d07d730237",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness tests, faithfully flat descent or finite free targets; none has the general localized finite-presentation source and arbitrary flat target of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity on every residue field implies purity for a map from a flat finite presentation localized algebra module to an arbitrary flat base module",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.flat_of_isLocalized_span",
+     "Module.flat_of_isLocalized_maximal",
+     "Module.FinitePresentation.exists_notMem_bijective",
+     "Module.IsLocalRing.linearCombination_bijective_of_flat",
+     "Module.Flat.toAlgebra_injective",
+     "Algebra.HasGoingDown.of_flat",
+     "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway",
+     "Module.flat_of_localized_maximal"
+    ],
+    "digest": "e7704b33b8a43515",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness tests, faithfully flat descent or finite free targets; none has the general localized finite-presentation source and arbitrary flat target of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective, TensorProduct",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left",
+     "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right",
+     "TensorProduct.nontrivial_of_linearMap_injective_of_flat_left",
+     "TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+     "Algebra.TensorProduct.includeRight_injective",
+     "Algebra.TensorProduct.includeLeft_injective",
+     "Module.Flat.lTensor_preserves_injective_linearMap",
+     "Module.Flat.rTensor_preserves_injective_linearMap"
+    ],
+    "digest": "2763b631069c4c4f",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness tests, faithfully flat descent or finite free targets; none has the general localized finite-presentation source and arbitrary flat target of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*inject|inject.*residue|pure.*spread",
+   "results": {
+    "ok": true,
+    "n_hits": 20,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/QuasiFinite/Polynomial.lean",
+     "Mathlib/RingTheory/QuasiFinite/Weakly.lean"
+    ],
+    "digest": "b57c1e7f88ebcbee",
+    "sub": "RingTheory"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness tests, faithfully flat descent or finite free targets; none has the general localized finite-presentation source and arbitrary flat target of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise injective map between flat modules finite presentation over a localized algebra is universally injective",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyInjective.mk",
+     "AlgebraicGeometry.universallyInjective_eq",
+     "IsLocalizedModule.map_injective_iff_localizedModuleMap_injective",
+     "Module.Flat.iff_lTensor_injective'",
+     "injective_of_localized_span",
+     "Module.Flat.mk",
+     "LocalizedModule.map_injective",
+     "Module.Flat.toAlgebra_injective"
+    ],
+    "digest": "ca6c493c4c9f9f2b",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness tests, faithfully flat descent or finite free targets; none has the general localized finite-presentation source and arbitrary flat target of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 2.5, preliminaries on S-density and Lemma 1(b), printed pp.55-56 (PDF pp.61-62), applied also after base change; Tag 0AT9, lemma-universally-injective-if-flat, with its situation equation-star",
+   "via": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lem-sfb-birational-law-strictification",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-finitely-presented-module-fibre-injectivity",
+  "worker": "stage1",
+  "summary": "Checked Tag 0AT9 and equation-star. Retained the full non-Noetherian and non-B-linear statement. Reused existing weak-association, flat tensor exactness, flat base change and projective local injectivity nodes; added only Tag 0AS5 quotient test and Tag 0AT8 pure-spreadout existence. Wrote out the localization denominators, finite ideal-power filtration and annihilator kernel argument, correcting source notation typos.",
+  "blueprint": "This auxiliary algebra node has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). It serves the inherited BLR S-density/base-change route through lem-sfb-smooth-fibrewise-dense-open-base-change. Its six steps realize Tags 0AT9 and 0AT7 in that route. The newest blueprint sketch sk-thm-sf-ctf-stability was read; its six-functor route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-weakass-localization",
+    "why": "Generic localization characterization for an arbitrary module over a non-Noetherian base; the current unit supplies no such commutative algebra criterion."
+   },
+   {
+    "node": "lem-trf-local-universal-injective-residue",
+    "why": "Generic projective-source local residue-field criterion applied to the pure spreadout; used only as a tool within the Tag 0AT7 argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-weakass-localization",
+  "lem-trf-local-universal-injective-residue"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-16ea374fe",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-16ea374fe (reviewer sub-agent of L); spot-checked: I read Stacks flat.tex 0AT6-0AT9 and algebra.tex 0AS5 in full. The item statement matches 0AT9 hypothesis by hypothesis and nothing is weakened. Step 1: the new 0AS5 node gives the reduction to finitely generated J, and the hypotheses survive the quotient by A/J. Step 2: the minimal prime over Ann(x) is clause (1) of lem-sc-weakass-localization, and clause (3) gives y in N_p with sqrt Ann = m. Step 3: the new spreadout node gives I in m, a projective P and a universally injective j; v_s = u(1/s)j is injective mod m; lem-trf-local-universal-injective-residue (05FQ: local ring, projective source, flat target) applies. Step 4: the explicit common-denominator argument gives universal injectivity of u over A/I. Step 5: the pigeonhole bound gives I^n y = 0, and the I^jK filtration with flat-tensor-exact and a four-lemma chase gives injectivity of u tensored with K. Step 6: 0->K->A->A^t identifies N tensor K with Ann_N(I^n), which gives the contradiction. The source typo Ann_M -> Ann_N is noted in the report. New nodes: the 0AS5 test is a faithful statement, tested at M=0, J=0 and L=0. The 0AT8 spreadout on the principal open B_s is exactly what the source proof builds (N'/IN' free via A_0); tested on a field and on N=0. Neither node restates the item. Duplicate search with rg -L over 0AS5/0AT7/0AT8/0AT9, pure spreadout, and the 176 universally-injective nodes (05CL, 05DF, 05FT and the model nodes read) found nothing. Batch-5: lem-trf-local-universal-injective-residue has a 50-node closure of pure commutative algebra (Kaplansky, Lazard, finite-free retractions, Mathlib leaves). It has no cohomology, trace or Poincare content, so it is outside the assumed statements; accepted as a generic tool, as is lem-sc-weakass-localization (0566). A-F: no faults. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatFinitelyPresentedModuleFibreInjectivity",
+  "declaration": "Module.flat_finitePresentation_universallyInjective_of_fibres",
+  "file": "lean/Sheaf/RingTheory/FlatFinitelyPresentedModuleFibreInjectivity.lean",
+  "statement": "theorem flat_finitePresentation_universallyInjective_of_fibres {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] [Algebra.FinitePresentation A B] (S : Submonoid B) {N : Type w} [AddCommGroup N] [Module (Localization S) N] [Module A N] [IsScalarTower A (Localization S) N] [Module.FinitePresentation (Localization S) N] [Module.Flat A N] {M : Type x} [AddCommGroup M] [Module A M] [Module.Flat A M] (f : N →ₗ[A] M) (hfib : ∀ (p : Ideal A) [p.IsPrime], Function.Injective (f.rTensor p.ResidueField)) : ∀ (Q : Type (max u v w x y)) [AddCommGroup Q] [Module A Q], Function.Injective (f.rTensor Q)",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18763c986",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0AT9 under equation-star clause by clause: Algebra.FinitePresentation A B, S : Submonoid B, N finitely presented over Localization S with IsScalarTower A (Localization S) N, Module.Flat A N, arbitrary flat M, A-linear f, hfib for every prime via Ideal.ResidueField (= Frac(A/p)), conclusion for every A-module Q : Type (max u v w x y) with y fresh (no universe restriction, same convention as universallyInjective_of_residueField_injective). No extra hypotheses. lean.statement verbatim in file; only the lean field added vs live (no prior record); stmt_deps match the declarations used; private proof-only imports exist. Not a duplicate of the local closed-fibre lemma (local rings, B-linear). One sorry, no defs, source and blueprint docstrings, six-step proof docstring; report sections present. No recompile (unchanged)."
+ }
+}

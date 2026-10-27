@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-relative-diagonalizable-group",
+ "kind": "definition",
+ "title": "Diagonalizable group over an arbitrary scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $M$ an additive abelian group. Define the $S$-group scheme $D_S(M)$ by base change [def-pc-base-change] of $D_{\\mathbf Z}(M)=\\operatorname{Spec}\\mathbf Z[M]$ with its Hopf operations [def-sfb-ring-diagonalizable-group] along the unique morphism $S\\to\\operatorname{Spec}\\mathbf Z$. Equivalently it is obtained by gluing $\\operatorname{Spec}A[M]$ over affine opens $\\operatorname{Spec}A\\subseteq S$, with coproduct $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$ and antipode $e_m\\mapsto e_{-m}$. No finite-generation, nonempty-base or field hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Appendix B.1, printed p.280, diagonalizable group D_S(M); integral model and affine group-algebra base-change construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Diagonalizable group scheme over an arbitrary scheme base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.diagonal\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → ℕ → Rep k G\", \"doc\": \"For a commutative ring $ k $, a monoid $ G $, and a natural number $ n $, this constructs the diagonal representation in the category $ \\\\text{Rep}(k, G) $. It is defined by the component-wise action o\"}\n  {\"name\": \"Representation.diagonal\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(n : ℕ)\", \"doc\": \"For a natural number $n$, the diagonal representation is constructed by applying the monoid action component-wise on the product space $G^n$, where each element of the monoid $G$ acts diagonally on ea\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of D_S(M) over an arbitrary scheme base among the returned results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the integral group algebra defines a diagonalizable group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.diagonal\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → ℕ → Rep k G\", \"doc\": \"For a commutative ring $ k $, a monoid $ G $, and a natural number $ n $, this constructs the diagonal representation in the category $ \\\\text{Rep}(k, G) $. It is defined by the component-wise action o\"}\n  {\"name\": \"Rep.diagonalHomEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} {A : Rep k G} (f : Rep.diagonal k G (n + 1) ⟶ A)\\n  (x : Fin n → G),\\n  (Rep.diagonalHomEquiv n A) f x = (CategoryTheory.ConcreteCategory.hom f.hom) (Finsupp.single (Fin.partialProd x) 1)\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"Representation.diagonal\", \"module\": \"Mathlib/RepresentationTheory/Basic\", \"type\": \"(k : Type u_1) →\\n  [inst : CommSemiring k] → (G : Type u_2) → [inst_1 : Monoid G] → (n : ℕ) → Representation k G ((Fin n → G) →₀ k)\", \"doc\": \"For a natural number $n$, the diagonal representation is constructed by applying the monoid action component-wise on the product space $G^n$, where each element of the monoid $G$ acts diagonally on ea\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → (n : ℕ) → Rep.diagonal k G (n + 1) ≅ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, there exists a canonical isomorphism in the category $ \\\\text{Rep}(k,G) $ between the diagonal representation $ \\\\text{Rep.diagonal}(\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree_hom_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} (f : Fin (n + 1) → G) (a : k),\\n  (CategoryTheory.ConcreteCategory.hom (Rep.diagonalSuccIsoFree k G n).hom.hom) (Finsupp.single f a) =\\n    Finsupp.single (fun i => (f i.castSucc)⁻¹ * f i.succ) (Finsupp.single (f 0) a)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, the canonical isomorphism between the $(n+1)$-fold diagonal representation and the free representation in $ \\\\text{Rep}(k,G) $ maps \"}\n  {\"name\": \"Rep.diagonalOneIsoLeftRegular_hom_hom\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  (Rep.diagonalOneIsoLeftRegular k G).hom.hom = ModuleCat.ofHom ↑(Finsupp.domLCongr (Equiv.funUnique (Fin 1) G))\", \"doc\": \"The underlying linear map of the isomorphism between the diagonal representation $\\\\text{Rep}(k,G)$ with $n=1$ and the left regular representation is given by the linear equivalence induced by the cano\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree_inv_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} (g : G →₀ k) (f : Fin n → G),\\n  (CategoryTheory.ConcreteCategory.hom (Rep.diagonalSuccIsoFree k G n).inv.hom) (Finsupp.single f g) =\\n    ((Finsupp.lift ((Fin (n + 1) → G) →₀ k) k G) fun a => Finsupp.single (a • Fin.partialProd f) 1) g\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, applying the inverse homomorphism of the canonical isomorphism between the $(n+1)$-fold diagonal representation and the free repres\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of D_S(M) over an arbitrary scheme base among the returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDiagonalizableGroup|schemeDiagonalizable|diagonali[sz]able",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of D_S(M) over an arbitrary scheme base among the returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "rg relativeDiagonalizable|schemeDiagonalizable|ringDiagonalizableGroup in lean/Sheaf and lean/WeilConjectures; search definition nodes for diagonaliz; tools/blueprint_refs.py search diagonalizable",
+   "results": "No upstream match; Sheaf has ringDiagonalizableGroup over Spec R and field-only diagonalizableGroup. No definition node constructs D_S(M) for arbitrary schemes. Blueprint search: 0 blueprint nodes match diagonalizable.",
+   "date": "2026-10-24",
+   "verdict": "Missing arbitrary-base diagonalizable group construction; reuses the recorded affine construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-type-etale-splitting",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Construction of D_U(M) in the hypothesis and conclusion of the etale splitting lemma, before its proof step 1.",
+   "via": [
+    "lem-sfb-multiplicative-type-etale-splitting",
+    "lem-sfb-nilpotent-flat-multiplicative-deformation",
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDiagonalizableGroup",
+  "declaration": "AlgebraicGeometry.relativeDiagonalizableGroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDiagonalizableGroup.lean",
+  "statement": "def relativeDiagonalizableGroup (S : Scheme.{u}) (M : Type u) [AddCommGroup M] : Grp (Over S)",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-015f22508",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-015f22508",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Item statement unchanged; only lean + stmt_deps (+def-sfb-relative-diagonalizable-group) differ from live. All clauses match: H : Grp (Over U); V : U.Cover.{u} fppfPrecoverage (jointly surjective flat+lfp); M FG per index; hsplit Nonempty iso in Grp (Over V_i) via Over.pullback.mapGrp; conclusion ∃ etalePrecoverage cover with affine members, FG N_j, group isos. No extra hypotheses; single universe u. Edge cases checked: empty U, M=0, p-torsion in char p, varying M, nonreduced/non-Noetherian. New def relativeDiagonalizableGroup = pullback along specULiftZIsTerminal.from S of ringDiagonalizableGroup (ULift ℤ) M; real data, correct direction, matches Conrad B.1; no duplicate in live (only field diagonalizableGroup, affine ringDiagonalizableGroup, relativeSplitTorus ℤ^r) and no parallel node. lean.statement fields verbatim in files; docstrings with source/blueprint and 8 proof steps; sorry only; imports exist. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-point-identity-exchange-recipe",
+ "kind": "statement",
+ "title": "Identity structural exchange and the sigma-kappa point recipe",
+ "statement": "Fix a finite-field datum D, prime l distinct from D.p, and finite E/Q_l. Use the canonical operations and coordinate definitions of [def-pur-point-normalization-coordinates]. For each finite level n and every derived object N, pullback of the canonical identity direct-image identification equals the specified identity-square exchange followed by that identification on pullback N. On every complex K, finiteOrdinary at Q(K) is finite sigma followed by derived sections of the specified kappa(K). For every completed integral constructible N, the same identity direct-image exchange equation and sigma-then-kappa recipe hold for integralOrdinary. The integral equality is an equality of whole derived morphisms formed before finite evaluation. No multiplication inverse, cancellation equation or compatibility with a chosen Weil isomorphism v is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "stmt_deps": [
+  "def-pur-point-normalization-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The identity pullback compositors agree after their identity-operation comparisons: evaluate both on tensor-unit generators, then use generation and sheafification. Expand the finite mate and cancel the adjunction triangles with rightAdjointUniq. Perform the same calculation on the whole strict-system category and then apply total derived limit; the realization comparisons and reconstruction units cancel by their adjunction triangles on the complete constructible domain. This yields the finite and integral identity-exchange equations.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-coef-semilinear-derived-sections",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the ordinary point transport. Naturality along the canonical identity-direct-image isomorphism cancels its identifications, using the preceding exchange equations. By definition the remaining point arrow is sigma followed by sections of kappa. Cancel the exact-functor localization comparisons and use the defining representative/resolution independence, obtaining both recipe equations.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-operation-reduction",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A pullback of a sheaf of modules along a ring isomorphism is scalar restriction along its inverse, and the mate of an identity square is identity",
+   "results": "8 hits including SheafOfModules.pullback_id_comp, pullback_comp_id, pullbackPushforwardAdjunction, and restrictScalars; generic ordinary APIs only.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified pro-etale comparison or derived identity exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a module sheaf along a ring isomorphism is inverse to multiplication; identity square adjunction mate is identity",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackId_hom, pullback_id_comp, pullback_comp_id and pullbackIso.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified point-comparison coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_id_comp|pullback_comp_id|conjugateEquiv_pullbackId_hom|IsIso.*scalarExtension",
+   "results": "14 hits, including Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean lines 144, 204, 209; generic ordinary identities.",
+   "date": "2026-10-25",
+   "verdict": "no match for these named derived coefficient comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFrobeniusTransportNormalization",
+  "date": "2026-10-25",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Natural Weil isomorphism; point normalization steps 3--4",
+   "via": [
+    "lem-pur-point-frobenius-transport-normalization",
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointIdentityExchangeRecipe",
+  "file": "lean/Sheaf/Paper/PointIdentityExchangeRecipe.lean",
+  "declaration": "WeilConjectures.PointFrobeniusNormalization.pointIdentityExchangeRecipe",
+  "declarations": [
+   "WeilConjectures.PointFrobeniusNormalization.pointIdentityExchangeRecipe"
+  ],
+  "statement": "theorem pointIdentityExchangeRecipe : (∀ (n : ℕ) (N : proEtaleDerivedCategory (Spec (.of D.k)) (Padic.coefficientExtensionRing l E (n + 1))), (finiteDerivedPullback l E n (frobeniusPointIso D).hom).map ((finiteDirectId D l E n).hom.app N) = (FrobeniusExchange.finiteExchange (Padic.coefficientExtensionRing l E (n + 1)) (𝟙 (Spec (.of D.k))) (𝟙 (Spec (.of D.k))) (frobeniusPointIso D).hom (frobeniusPointIso D).hom ((Category.comp_id _).trans (Category.id_comp _).symm)).app N ≫ (finiteDirectId D l E n).hom.app ((finiteDerivedPullback l E n (frobeniusPointIso D).hom).obj N) ) ∧ (∀ (n : ℕ) (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ), finiteOrdinary D l hl E n (DerivedCategory.Q.obj K) = frobeniusPointFiniteSigmaDerived D l E n (DerivedCategory.Q.obj K) ≫ ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.{u + 2, u + 1}).map (finiteKappa D l hl E n K)) ∧ (∀ N : sfIntegralConstructibleCategory l E (Spec (.of D.k)), (integralDerivedPullback l E (frobeniusPointIso D).hom).map (integralDirectId D l E N.obj) = integralExchange D l hl E N ≫ integralDirectId D l E ((integralDerivedPullback l E (frobeniusPointIso D).hom).obj N.obj) ∧ integralOrdinary D l hl E N = frobeniusPointIntegralSigmaDerived D l E N.obj ≫ (pointFibreIntegralAmbient D l E).map (inverseImagePullbackComparisonDerived l E (frobeniusPointIso D).hom (frobeniusPointPrimeUnit D l hl) (frobeniusPointPrimeUnit D l hl) N.obj))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone original (26 defs verbatim, theorem signature identical); pointIdentityExchangeRecipe clauses vs FiniteNormalization/IntegralNormalization fields; item node vs base node"
+ }
+}

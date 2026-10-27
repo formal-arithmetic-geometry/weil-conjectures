@@ -960,11 +960,14 @@ def selectedTensorPresentation : TensorPresentation
 
 attribute [local irreducible] selectedTensorPresentation
 
-/-- The published derived tensor, curried using its shared descent presentation.
+/-- The published derived tensor, curried directly from the published bifunctor.
+The shared presentation has this same field. Naming the bifunctor directly avoids
+unfolding that large record when consumers compare the tensor with its published form.
 Source: Stacks, Tag 06YU
 (blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
 def derivedTensor : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R) ⥤
-    DerivedCategory (Modules R) := Functor.curry.obj (selectedTensorPresentation R).derivedTensor
+    DerivedCategory (Modules R) := Functor.curry.obj
+      (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R)
 
 attribute [local irreducible] derivedTensor
 
@@ -974,8 +977,10 @@ Source: Stacks, Tag 06YU
 (blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
 theorem derivedTensor_eq_published : derivedTensor R = Functor.curry.obj
     (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R) := by
-  unfold derivedTensor selectedTensorPresentation
+  unfold derivedTensor
   rfl
+
+attribute [local semireducible] selectedTensorPresentation
 
 /-- The actual resolving comparison selected by the published descent theorem.
 It is oriented from the localized total tensor to the derived tensor. Its arguments

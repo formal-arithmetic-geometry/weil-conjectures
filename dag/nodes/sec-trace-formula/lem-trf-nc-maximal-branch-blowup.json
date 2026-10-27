@@ -19,55 +19,46 @@
  ],
  "proof": [
   {
-   "text": "Choose pointed affine etale normal-crossings neighborhoods on which $D$ is a product of a selected subset of the coordinate factors for $B$, and discard factors which are units at the chosen point by shrinking the neighborhood. The local branch-count lemma [lem-trf-nc-coordinate-max-stratum] identifies the geometric branch function on each neighborhood, makes it independent of the coordinates, and writes each locus $b_D\\geq k$ as a finite union of closed coordinate intersections. Etale maps are flat and locally of finite presentation by [def-weil-etale-morphism], hence open by [lem-weil-pbc-flat-lfp-open]. Their open images cover the quasi-compact scheme $X$, so finitely many of these charts cover $X$ by their images. The finitely many numbers of factors bound every $b_D$, and nonempty $D$ supplies a positive value; thus a largest attained value $m\\geq1$ exists. For any $k$, the complement of $\\{b_D\\geq k\\}$ is the union of the open images of its open inverse images in these charts, so $\\{b_D\\geq k\\}$ is closed. Consequently the nonempty locus $T=\\{b_D=m\\}$ is closed, and $b_D<m$ outside $T$.",
+   "text": "By [lem-trf-nc-subboundary-branch-atlas], the branch numbers are bounded and all upper level sets are closed. Nonempty $D$ supplies a positive branch value, so choose the largest attained value $m\\ge1$. Then $T=\\{b_D\\ge m\\}=\\{b_D=m\\}$ is nonempty and closed; outside $T$ the count is less than $m$. A pointed chart of that lemma at $x\\in T$ has exactly $m$ factors for $D$, with $D_W=V(t_1\\cdots t_m)$ and $B_W=V(t_1\\cdots t_r)$.",
    "uses": [
-    "lem-trf-nc-coordinate-max-stratum",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-lfp-open"
+    "lem-trf-nc-subboundary-branch-atlas"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.6 and 4.1.8, printed p. 118: multiplicity stratification and deepest closed stratum."
+    "place": "VIII 4.1.6 and 4.1.8, printed p. 118."
    }
   },
   {
-   "text": "Give $T$ its reduced induced closed structure $M$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. At any geometric point of $T$, choose the chart in Step 1 centered at that point; its equation for $D$ has exactly $m$ nonunit factors. In that chart the inverse image of $T$ is $V(t_1,\\ldots,t_m)$, regular and reduced by [lem-trf-nc-coordinate-max-stratum]. By the reduced-pullback assertion of [lem-trf-etale-reduced-cartier-descent], the pullback of $M$ is exactly this reduced coordinate intersection; this proves equality as closed subschemes, not merely as sets. The map from this pullback to $M$ is etale by [lem-weil-pbc-etale-scheme-base-change], hence induces flat local maps by [def-weil-etale-morphism, def-weil-flat-morphism]. Both local rings are Noetherian, since $M$ is closed in locally Noetherian $X$ and its etale charts are locally Noetherian. Apply [lem-weil-pbc-flat-under-regular] to deduce that the local ring of $M$ at the chosen point is regular. This proves regularity of $M$ and the asserted simultaneous local equations for $B$, $D$ and $M$.",
+   "text": "In these charts [lem-trf-nc-coordinate-max-stratum] identifies $e^{-1}(T)$ with $V(t_1,\\ldots,t_m)$, regular and reduced. These regular reduced models exist above every point of $T$. Apply [lem-trf-etale-reduced-regular-center] to $T$: its reduced closed structure $M$ is regular and pulls back to exactly that coordinate intersection, as a closed subscheme. Its quasi-coherent defining ideal is of finite type, since $X$ is locally Noetherian. This proves all claimed equations for $B,D,M$.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-trf-nc-coordinate-max-stratum",
-    "lem-trf-etale-reduced-cartier-descent",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "def-weil-etale-morphism",
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-flat-under-regular"
+    "lem-trf-etale-reduced-regular-center"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.8, printed p. 118; reduced coordinate center and regularity descent (Stacks 00OF)."
+    "place": "VIII 4.1.8, printed p. 118: the reduced coordinate center."
    }
   },
   {
-   "text": "Let $v:U\\to X$ be one of the etale charts at a point of $M$. It is flat by [def-weil-etale-morphism], so the comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change] and identifies the blowup along $M\\times_XU$ with $U\\times_XX^+$. We also identify strict transforms scheme-theoretically, as follows. Put $P=D\\times_XX^+$, $S=D^+\\subset P$, and $\\Omega=D\\setminus M$, viewed as the preserved open in $P$. By [lemma-nagata-strict-transform-closure-characterization], $S$ is the scheme-theoretic closure of $\\Omega$. The open immersion $\\Omega\\to S$ is quasi-compact: the pulled-back finite-type center ideal has finitely many generators on any affine open, and its complement is the finite union of their principal opens. It is quasi-separated since it is an open immersion. Its scheme-theoretic image is $S$ by the closure definition [def-nagata-scheme-theoretic-closure]. The projection $S\\times_XU\\to S$ is flat by [lem-weil-pbc-flat-morphism-base-change]. Thus [lemma-nagata-dense-flat-pullback] makes $\\Omega\\times_XU$ scheme-theoretically dense in $S\\times_XU$. The latter is closed in $P\\times_XU$ by [lem-pc-closed-imm-base-change]; it is exactly the closure of that open: any closed subscheme containing the open has zero defining ideal after restriction to $S\\times_XU$, by density. This is the strict transform of $D\\times_XU$ by the same closure characterization. The identification respects the inclusions into $U\\times_XX^+$.",
+   "text": "Each etale chart $e:W\\to X$ is flat [def-weil-etale-morphism], so $p:D\\times_XW\\to D$ is flat [lem-weil-pbc-flat-morphism-base-change]. A point is component-generic iff it has no proper generalization, by [lem-sc-irreducible-components-cover, lem-sc-scheme-sober] and maximality of components. If $z$ is component-generic and $d$ generalizes $p(z)$, [lem-weil-pbc-flat-generalizations-lift] gives a generalization $z'$ of $z$ with $p(z')=d$; so $z'=z$ and $d=p(z)$. This is the generic-point hypothesis of [lem-trf-strict-transform-flat-etale-base-change]; apply it to the finite-type ideal of $M$: $W\\times_XX^+\\cong\\operatorname{Bl}_{M_W}(W)$ canonically, carrying the pulled-back $D^+$ to the strict transform of $D_W$ scheme-theoretically.",
    "uses": [
     "def-weil-etale-morphism",
-    "thm-nagata-blowup-flat-base-change",
-    "lemma-nagata-strict-transform-closure-characterization",
-    "def-nagata-scheme-theoretic-closure",
     "lem-weil-pbc-flat-morphism-base-change",
-    "lemma-nagata-dense-flat-pullback",
-    "lem-pc-closed-imm-base-change",
-    "def-nagata-blowup-flat-base-change-map"
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-trf-strict-transform-flat-etale-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.8, printed p. 118 (etale localization); Stacks 0805 and 081I for the blowup and the preserved-open closure."
+    "place": "VIII 4.1.8, etale localization; strict-transform closure comparison as in Stacks 081I."
    }
   },
   {
-   "text": "Over $M$, Step 2 supplies pointed affine etale charts with $D_U=V(t_1\\cdots t_m)$ and $M_U=V(t_1,\\ldots,t_m)$. Apply [lem-trf-nc-coordinate-blowup-branch-drop] to these charts, using Step 3 to identify their blowups and strict transforms with the pullbacks from $X^+$. At each chosen point $y$ of the $i$-th blowup chart its equation is $\\prod_{j\\ne i}t_j'=0$; exactly the factors vanishing at $y$ are members of a regular system of parameters of the local ring there, and the remaining factors are units. This proves normal crossings pointwise and gives at most $m-1$ geometric branches. For $m=1$ the product is $1$, so the strict transform is empty on these charts. By [lem-weil-pbc-etale-scheme-base-change], the charts give etale neighborhoods of every geometric point of $X^+$ lying over $M$, which is precisely the local criterion for the asserted normal-crossings condition and branch bound.",
+   "text": "Each affine chart $W$ of steps 1--2 is regular Noetherian, and at every point its vanishing $t_j$ are distinct regular parameters. Thus [lem-trf-nc-coordinate-blowup-branch-drop] applies with exactly the center ideal $(t_1,\\ldots,t_m)$. Using step 3, the strict transform on its $i$-th blowup chart has equation $\\prod_{j\\ne i}t_j^{\\prime}=0$, is empty or normal crossings, and has at most $m-1$ branches; for $m=1$ it is empty. By [lem-weil-pbc-etale-scheme-base-change] these give etale neighborhoods covering the points over $M$.",
    "uses": [
     "lem-trf-nc-coordinate-blowup-branch-drop",
     "lem-weil-pbc-etale-scheme-base-change"
@@ -75,40 +66,40 @@
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.8 and Lemma 4.2.9, printed pp. 118 and 121: the standard charts, interpreted at each local ring."
+    "place": "VIII 4.1.8 and Lemma 4.2.9, printed pp. 118,121."
    }
   },
   {
-   "text": "Over $X\\setminus M$, [thm-nagata-global-blowup-complement] identifies the blowup with $X\\setminus M$, and [lemma-nagata-strict-transform-over-complement] identifies $D^+$ with $D$ there. Hence $D^+$ is normal crossings there and Step 1 gives $b_{D^+}=b_D<m$, or equivalently $b_{D^+}\\leq m-1$. Together with Step 4 this covers every geometric point of $X^+$.",
+   "text": "Over $X\\setminus M$, [thm-nagata-global-blowup-complement] and [lemma-nagata-strict-transform-over-complement] identify $X^+$ with $X$ and $D^+$ with $D$; the charts of [lem-trf-nc-subboundary-branch-atlas] restricted over $X\\setminus M$ give the local equations, and step 1 gives $b_{D^+}=b_D<m$, so $b_{D^+}\\le m-1$. $D^+$ is reduced, as scheme-theoretic closure of the reduced open $D\\setminus M$ [lem-trf-reduced-scheme-image]. On the jointly surjective etale family formed by the step 4 charts $W\\times_XX^+$ and these restricted atlas charts, the pullback of $D^+$ is empty or cut out by a product of regular parameters, a non-zero-divisor in the regular local rings, so $D^+$ is effective Cartier by [lem-trf-etale-reduced-cartier-descent]. With step 4 this covers every geometric point of $X^+$.",
    "uses": [
     "thm-nagata-global-blowup-complement",
-    "lemma-nagata-strict-transform-over-complement"
+    "lemma-nagata-strict-transform-over-complement",
+    "lem-trf-nc-subboundary-branch-atlas",
+    "lem-trf-reduced-scheme-image",
+    "lem-trf-etale-reduced-cartier-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.8, printed p. 118, and the blowup-complement and strict-transform-over-complement statements."
+    "place": "VIII 4.1.8, printed p. 118: complement case."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-blowup-flat-base-change-map",
-  "def-nagata-scheme-theoretic-closure",
   "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "lem-pc-closed-imm-base-change",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
   "lem-trf-etale-reduced-cartier-descent",
+  "lem-trf-etale-reduced-regular-center",
   "lem-trf-nc-coordinate-blowup-branch-drop",
   "lem-trf-nc-coordinate-max-stratum",
+  "lem-trf-nc-subboundary-branch-atlas",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-strict-transform-flat-etale-base-change",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-generalizations-lift",
   "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-flat-under-regular",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lemma-nagata-dense-flat-pullback",
-  "lemma-nagata-strict-transform-closure-characterization",
   "lemma-nagata-strict-transform-over-complement",
-  "thm-nagata-blowup-flat-base-change",
   "thm-nagata-global-blowup-complement"
  ],
  "proof_origin": {
@@ -173,33 +164,40 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-nc-maximal-branch-blowup",
   "worker": "stage1",
-  "summary": "Repaired the returned local-parameter error pointwise on regular affine etale charts; chart rings need not be local. Corrected the coordinate maximum lemma for charts missing the deepest stratum. Removed both redundant descent/base-change helpers in favor of existing reduced-pullback, flat-under-regular and dense-flat-pullback statements. The five steps prove boundedness and closedness, regularity of the reduced center, strict-transform etale base change, the local chart branch drop, and the complement case. Requested NI provenance is set in the sandbox; report.md records that deliver.py preserves the base created field and cannot package this requested metadata correction.",
-  "blueprint": "Realizes ILO VIII 4.1.6 (multiplicity stratification and deepest closed stratum) and 4.1.8 with Lemma 4.2.9 (etale-local standard blowup charts and strict-transform depth decrease).",
+  "summary": "Re-split the returned 4935-character proof into two independently queued, statement-only arguments: simultaneous subboundary branch charts/closed strata/boundedness, and scheme-theoretic reduced-center identification/regularity descent. Reused the existing strict-transform flat-base-change lemma, verifying its generic-point hypothesis by flat generalization lifting (reviewer fix: the flat maximal-dominance node is on the 2026-10-19 drop list); step 5 justifies that the strict transform is reduced effective Cartier (reviewer fix). Reused the existing coordinate blowup branch-drop lemma. The unchanged statement is assembled in five short steps; report.md preserves every old argument and its handoff. Rebased after the side-completion landing return: compared returned head f9ea48e61b0 with the current DAG and re-read the three changed cited nodes. Their statements are unchanged; the finite-type ideal and pointwise chart hypotheses are now explicitly checked in assembly steps 2 and 4. The current subsidiary proof decompositions and reviewer fixes are recorded in the repair report. Current-base continuation rechecked all eleven citation quotations and all three changed cited proofs/reviews, and made the covering hypothesis for reduced-center descent explicit in step 2.",
+  "blueprint": "The recorded ancestor lem-trf-local-term-locality proof (1)--(2), via the nodal-pair modification and ILO VIII 4.1.6--4.1.8. New atlas node carries returned step 1; new descent node carries returned step 2; existing strict-transform flat-base-change carries returned step 3; existing coordinate blowup lemma carries returned step 4; the complement is retained in step 5.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-flat-under-regular",
-    "why": "Descent of regularity along the flat local maps from the coordinate center charts; this unit has no general flat-local regularity descent statement."
+    "node": "lem-weil-pbc-flat-generalizations-lift",
+    "why": "Generic flat generalization lifting (Stacks 03HV) shows that the flat projection D times_X W to D sends component-generic points to component-generic points, the extra hypothesis of the strict-transform comparison (reviewer fix; replaces a citation of a node on the 2026-10-19 drop list)."
    },
    {
-    "node": "lem-pc-closed-imm-base-change",
-    "why": "The pullback of the closed strict transform remains closed, with its ordinary extended defining ideal, in the closure comparison of Step 3."
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic: every point lies in an irreducible component; used for the no-proper-generalization criterion of component-generic points in step 3."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic scheme sobriety: unique generic point of an irreducible component; used for the same criterion in step 3."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-flat-under-regular",
-  "lem-pc-closed-imm-base-change"
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-NI-e25ae2176",
-  "group": "NI",
+  "reviewer": "NT-cc-Q111-6593050aa",
+  "group": "Q111",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e25ae2176 (reviewer sub-agent of L); spot-checked: Read the required instructions, item, both new nodes, unit/chapter route, all cited node statements, and ILO VIII 4.1.6, 4.1.8, Proposition 4.2.8, and Lemma 4.2.9. The five-step proof and coordinate lemmas are mathematically sound, source-aligned, non-duplicative, route-compliant, and cover hypotheses and edge cases. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-6593050aa (reviewer sub-agent of L); spot-checked: Fourth push of this re-split, after f9ea48e6, 170b80b3 and 49b057b3. All three earlier heads got a FIX, and each fix was lost when its landing was refused. Live still holds the old 5-step proof, and the released re-split note still applies. Both new nodes are byte-identical (sha256) to the earlier heads. The item statement is unchanged. Against 49b0, the proof changes only by one sentence in step 2 ('regular reduced models exist above every point of T'), which is correct. Steps 3 and 5 are again unfixed. I read the item, both new nodes, every cited statement, ILO VIII 4.1-4.1.8 (printed pp.117-118), and Stacks 0CBS/0BIA, 034E, 01J3 and 00OF. Re-split: old step 1 becomes the atlas node and old step 2 becomes the center-descent node. Old steps 3 and 4 are the existing strict-transform-flat-etale-base-change and coordinate-blowup-branch-drop. Step 5 is kept. Nothing was summarised away; the two new nodes are of comparable size and neither restates the item. Edge cases checked: D empty, D=B, self-intersecting components, T empty, c=0, m=1, m=2. Duplicate search: lem-sfb-relative-nc-maximal-branch-strictification cites the item and is not a duplicate. FIX (only proof steps 3 and 5, proof_deps and split_report changed): (1) Mechanical finding: step 3 cited lem-per-flat-maximal-dominance-base-change, which is on the 2026-10-19 drop list. It was used only for the generic fact that flat maps send component-generic points to component-generic points, with no forbidden-route input. The step now proves that fact inline from lem-weil-pbc-flat-generalizations-lift, lem-sc-irreducible-components-cover and lem-sc-scheme-sober. The dropped id is removed from uses, proof_deps and tool_uses. (2) Step 5 did not show that D^+ is a reduced effective Cartier divisor, which the item's normal-crossings notion requires. It now cites lem-trf-reduced-scheme-image and lem-trf-etale-reduced-cartier-descent. Fixed proof: 2998 characters. Closure: no cycle, no dropped node. Batch 5: the three flagged trf citations (atlas, reduced-regular-center, strict-transform base change) are generic geometry. Their closures contain no Poincare-duality, trace-transport or batch-4 node, so they are accepted. No SGA source is used. Maintainer note (inherited, not this delivery's fault): def-trf-normal-crossings-divisor imposes the parameter condition only at the chart point, but the atlas, like old step 1 and the coordinate lemmas, uses it at every chart point. Spreading it needs J-2 or Nagata (Stacks 0CBS), or the chart-wide reading of ILO VIII 4.1.2. Carry fixes/ when promoting.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -223,5 +221,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

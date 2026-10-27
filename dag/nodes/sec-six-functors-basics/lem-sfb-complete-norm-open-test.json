@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-complete-norm-open-test",
+ "kind": "statement",
+ "title": "Complete norm coefficients preserve torsion-acyclic principal-open restriction",
+ "statement": "Let $\\ell$ be a prime and let $B$ be a complete nonarchimedean normed field extending $\\mathbf Q_\\ell$ isometrically [def-weil-l-adic-numbers]; completeness means completeness for $d(x,y)=|x-y|$. Put $O=\\{b\\in B:|b|\\leq1\\}$ and $O_n=O/\\ell^nO$ for $n\\geq1$, with each $O_n$ discrete. Let $V$ be an affine scheme [def-weil-affine-spectrum] whose terminal object on its small pro-etale site is weakly contractible [def-weil-pbc-proetale-site, sk-def-pe-weak-contractible], let $f\\in\\Gamma(V,\\mathcal O_V)$, and put $T=V[1/f]$. Assume that for every $n\\geq1$ and abelian group $M$ killed by $\\ell^n$, the actual restriction $R\\Gamma(V,\\underline M_V[0])\\to R\\Gamma(T,\\underline M_T[0])$ is an isomorphism in $D(\\mathbf{Ab})$, where $\\underline M_Z$ is the constant sheaf [def-weil-pbc-constant-sheaf].\n\nFor $Z=V,T$ write $C_{B,Z}=p_Z^*C_B$, with $C_B(P)=C(P,B)$ for every profinite set $P$, using all continuous maps [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Let $L_Z=p_Z^*C_O$, with $C_O(P)=C(P,O)$ for the subspace topology of $O\\subset B$ [def-sfb-continuous-map-condensed-ring]; since $p_Z^*$ is exact and $C_O\\to C_B$ (postcomposition with the inclusion) is a monomorphism, $L_Z$ is a subsheaf of $C_{B,Z}$ (the subsheaf of $O$-valued functions). There are canonical sheaf identifications\n$$L_Z\\cong\\varprojlim_{n\\geq1}\\underline{O_n}_Z,\\qquad C_{B,Z}\\cong\\varinjlim_{m\\geq0}(L_Z\\xrightarrow{\\ell}L_Z\\xrightarrow{\\ell}\\cdots),$$\nwith quotient projections in the first and stage-$m$ insertion $x\\mapsto\\ell^{-m}x$ in the second [def-pur-sheaf-inverse-limit, def-weil-pbc-category-colimit]. The transition maps $\\underline{O_{n+1}}_Z\\to\\underline{O_n}_Z$ are epimorphisms, and the canonical map\n$$L_Z[0]\\longrightarrow R\\varprojlim_n\\underline{O_n}_Z[0]$$\nis an isomorphism in the ordinary derived category of abelian sheaves [def-weil-derived-limit, def-weil-abstract-derived-category]. Derived sections mean K-injective derived sections of underlying abelian sheaves [def-pur-ringed-site-zeroth-hypercohomology]. The actual restriction maps for both $L$ and $C_B$ are isomorphisms in $D(\\mathbf{Ab})$; in particular\n$$R\\Gamma(V,C_{B,V}[0])\\longrightarrow R\\Gamma(T,C_{B,T}[0])$$\nis an isomorphism and $H^q(T,C_{B,T})=0$ for $q>0$. All identifications commute with restriction and the displayed quotient and multiplication maps. No local compactness of $B$, finiteness of $O_n$, or finite-subfield descent is assumed. Empty $V,T$ and the identity open are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 4-5: unit-ball quotient construction for complete B, epimorphic derived limit, and rationalization by multiplication by ell. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-sheaf-inverse-limit",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-affine-spectrum",
+  "def-weil-derived-limit",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-weak-contractible",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-totally-disconnected-coefficient-realization] for $B$, its unit ball $O$, and the discrete rings $O_n$: nonarchimedean balls are clopen, so these spaces are Hausdorff and totally disconnected. Naturality and compatibility with finite products identify the additive and multiplicative operations as well as all quotient and inclusion maps. Thus on every pro-etale object $U$ the three coefficient sheaves have sections $C(|U|,B)$, $C(|U|,O)$ and $C(|U|,O_n)$; the last is the constant sheaf. The pointwise inclusion makes $L_Z$ a subsheaf of $C_{B,Z}$. This also verifies that their restrictions to the open $T$ use the prescribed coefficient maps.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "The additive metric group $O$ is complete because it is closed in $B$. Put $U_n=\\ell^nO$. Multiplicativity of the norm and $|\\ell|=\\ell^{-1}$ give $U_n=\\{x\\in B:|x|\\leq\\ell^{-n}\\}$. These are open additive subgroups: a sufficiently small open ball about each member stays in $U_n$ by the ultrametric inequality. They decrease and their diameters tend to zero. Apply [lem-sfb-complete-metric-group-quotients] to this group and these subgroups. It identifies $C(|U|,O)$ with the compatible families of $C(|U|,O_n)$ for every object $U$, by exactly the quotient projections. Together with step 1 this is the asserted sheaf isomorphism $L_Z\\cong\\varprojlim_n\\underline{O_n}_Z$, natural in restriction.",
+   "uses": [
+    "lem-sfb-complete-metric-group-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "Each map $\\underline{O_{n+1}}_Z\\to\\underline{O_n}_Z$ is an epimorphism. Indeed a section is a continuous $O_n$-valued function by step 1; its inverse images of points form an open cover, and on each piece the function is constant and lifts to any representative in $O_{n+1}$. This proves local surjectivity, hence epimorphy by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]. Apply [det-pe-continuous-cohomology-limit] on each of the schemes $Z=V,T$ to obtain both the canonical isomorphism $L_Z[0]\\to R\\varprojlim_n\\underline{O_n}_Z[0]$ and $R\\Gamma(Z,L_Z[0])\\cong R\\varprojlim_nR\\Gamma(Z,\\underline{O_n}_Z[0])$.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "det-pe-continuous-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "Every additive group $O_n$ is killed by $\\ell^n$, regardless of its cardinality. The hypothesis therefore makes the restriction map on each $R\\Gamma(-,\\underline{O_n}[0])$ an isomorphism. These maps commute with transitions because they are actual restrictions. Applying the derived inverse-limit functor to this isomorphism of towers and using step 3 proves that the actual restriction $R\\Gamma(V,L_V[0])\\to R\\Gamma(T,L_T[0])$ is an isomorphism. Naturality of the canonical comparison in [det-pe-continuous-cohomology-limit] identifies the resulting map with restriction, rather than an unspecified isomorphism.",
+   "uses": [
+    "det-pe-continuous-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "For an affine object $U$ of $Z_{\\mathrm{proet}}$, any continuous $b:|U|\\to B$ has bounded norm. Indeed the increasing open sets $\\{x:|b(x)|<\\ell^m\\}$ cover $|U|$, and quasi-compactness gives one bound. Consequently $\\ell^m b$ takes values in $O$ for some $m\\geq0$. The inclusions $x\\mapsto\\ell^{-m}x$ are injective and satisfy $\\ell^{-(m+1)}(\\ell x)=\\ell^{-m}x$. Hence their union on $U$ is all $C(|U|,B)$. For the small filtered index $\\mathbf N$, [det-pe-bounded-continuity-sections] in degree zero, applied to the complexes $L_Z[0]$, says evaluation of their sheaf colimit on this affine $U$ is that union. The canonical colimit map to $C_{B,Z}$ is therefore bijective on affine objects; cover any object by affines and glue to conclude it is a sheaf isomorphism. This proves the prescribed rationalization formula with its actual stage insertions.",
+   "uses": [
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "Both $V$ and its principal open $T$ are affine, hence quasi-compact and quasi-separated. Apply [det-pe-bounded-continuity-sections] in every degree to the multiplication-by-$\\ell$ sequence $L_Z[0]$, uniformly concentrated in degrees at least zero. By step 5 it gives $H^q(Z,C_{B,Z})\\cong\\varinjlim_m H^q(Z,L_Z)$ for every integer $q$. The identifications commute with the restriction from $V$ to $T$ and with the multiplication maps, since they are induced by the colimit cocones. Step 4 makes every stage restriction an isomorphism; their colimit is thus an isomorphism in each degree. This proves that the actual derived restriction for $C_B$ is an isomorphism in $D(\\mathbf{Ab})$.",
+   "uses": [
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  },
+  {
+   "text": "The weak contractibility assumed for the terminal object of $V_{\\mathrm{proet}}$ makes evaluation at $V$ exact: limits of sheaves are computed sectionwise, and an epimorphism of abelian sheaves is locally surjective by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], hence is an epimorphism on underlying set sheaves by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]; [sk-def-pe-weak-contractible] then gives surjectivity on sections. By [lem-weil-pbc-exact-functor-derived-functor], evaluation on $C_{B,V}[0]$ computes its K-injective derived sections and is concentrated in degree zero. Step 6 therefore gives $H^q(T,C_{B,T})=0$ for $q>0$. All constructions used quotient maps, precomposition and the displayed stage insertions, proving the requested compatibility. Empty schemes have zero abelian sections; for the identity open all restriction maps used above are identities. Neither argument excludes these cases.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "sk-def-pe-weak-contractible",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-bounded-continuity-sections",
+  "det-pe-continuous-cohomology-limit",
+  "lem-sfb-complete-metric-group-quotients",
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-weak-contractible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a complete nonarchimedean normed extension B of Q ell continuous coefficient sheaves are inverse limits of discrete unit ball quotients and localization by ell preserves acyclic open restriction",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondMod.ofSheafLightProfinite; digest 347034d5dfc1f2be",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of condensed limits, profinite inverse-limit presentations and field completions do not state unit-ball quotient reconstruction together with derived principal-open restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions with values in a complete nonarchimedean field are the localization of the inverse limit of discrete unit ball quotients as pro etale sheaves",
+   "results": "8 hits: Profinite.lim', Profinite.lim, Profinite.asLimit, Profinite.asLimitConeIso, IsNonarchimedeanLocalField.instCompleteSpace, Profinite.isoAsLimitConeLift, Profinite.asLimitCone, Profinite.asLimit'; digest 6c174051340fa00c",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of condensed limits, profinite inverse-limit presentations and field completions do not state unit-ball quotient reconstruction together with derived principal-open restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"limit\"",
+   "results": "12 hits: instHasLimitsCondensedSet, instHasLimitsOfSizeCondensedSet, instHasFiniteLimitsCondensed, instHasLimitsOfShapeCondensed, instHasColimitsCondensedMod, instHasLimitsCondensedMod, instHasLimitsOfSizeCondensedMod, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; digest e94d14aa637b445b",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of condensed limits, profinite inverse-limit presentations and field completions do not state unit-ball quotient reconstruction together with derived principal-open restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|continuous).*(inverseLimit|invLimit|adic|unitBall)|(inverseLimit|invLimit|adic|unitBall).*(Condensed|continuous)",
+   "results": "23 hits: Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean; digest 2b84974a024ded47",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of condensed limits, profinite inverse-limit presentations and field completions do not state unit-ball quotient reconstruction together with derived principal-open restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete nonarchimedean field unit ball is the inverse limit of its quotients modulo powers of a topologically nilpotent unit and continuous functions commute with this limit",
+   "results": "8 hits: IsAdicComplete.of_liftRingHom, instNonarchimedeanRingCompletion, AdicCompletion.factorₐ_evalₐ_one, IsAdicComplete.liftRingHom, AdicCompletion.factor_evalₐ_eq_eval, AdicCompletion.evalₐ_mk, IsAdicComplete.StrictMono.liftRingHom, AdicCompletion.evalₐ_mkₐ; digest 97275a7588eaee90",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|continuous).*(inverseLimit|invLimit|adic|unitBall)|(inverseLimit|invLimit|adic|unitBall).*(Condensed|continuous)",
+   "results": "23 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean; digest ceb3180df7ce404a",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions with values in a complete nonarchimedean field are the localization of the inverse limit of discrete unit ball quotients as pro etale sheaves",
+   "results": "8 hits: Profinite.lim', Profinite.lim, Profinite.asLimit, Profinite.asLimitConeIso, IsNonarchimedeanLocalField.instCompleteSpace, Profinite.isoAsLimitConeLift, Profinite.asLimitCone, Profinite.asLimit'; digest 6c174051340fa00c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"limit\"",
+   "results": "12 hits: instHasLimitsCondensedSet, instHasLimitsOfSizeCondensedSet, instHasFiniteLimitsCondensed, instHasLimitsOfShapeCondensed, instHasColimitsCondensedMod, instHasLimitsCondensedMod, instHasLimitsOfSizeCondensedMod, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; digest e94d14aa637b445b",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete metric abelian group with a decreasing basis of open subgroups is homeomorphic to the inverse limit of its discrete quotient groups",
+   "results": "8 hits: ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, ProfiniteGrp.toLimit_fun, QuotientGroup.completeSpace', ProfiniteGrp.toLimit, InfiniteGalois.continuousMulEquivToLimit, AddCircle.isLocalHomeomorph_coe, UniformSpace.Completion.completionSeparationQuotientEquiv; digest 6141c38f739366e4",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(complete|Complete|[Ll]imit).*(openSubgroup|OpenSubgroup|OpenAddSubgroup)|(openSubgroup|OpenSubgroup|OpenAddSubgroup).*([Ll]imit|complete|Complete)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete metric abelian group is the inverse limit of quotients by decreasing open subgroups whose diameters tend to zero",
+   "results": "8 hits: QuotientGroup.completeSpace', ProfiniteGrp.isIso_toLimit, QuotientAddGroup.completeSpace', AdicCompletion, QuotientGroup.completeSpace, Profinite.lim, QuotientAddGroup.completeSpace, Profinite.asLimit; digest b2da9ed9768cff1e",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientAddGroup\", \"limit\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(ProfiniteGrp.isIso_toLimit|def AdicCompletion|completeSpace)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete metric additive commutative group with translation invariant metric and shrinking open subgroups the canonical quotient map to their inverse limit is a homeomorphism",
+   "results": "8 hits: AddCircle.isLocalHomeomorph_coe, UniformSpace.sepQuotHomeomorphRingQuot, QuotientGroup.completeSpace', AddCircle.homeomorphAddCircle, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, AddCircle.partialHomeomorphCoe, QuotientAddGroup.completeSpace', UniformSpace.Completion.completionSeparationQuotientEquiv; digest 37b8ff2a8b4e3472",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torsion-acyclic-norm-coefficient-test",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof steps 4-5: unit-ball quotient construction for complete B, epimorphic derived limit, and rationalization by multiplication by ell.",
+   "via": [
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-complete-norm-open-test",
+  "worker": "stage1",
+  "summary": "Separated general complete metric-group reconstruction from the coefficient argument, reused continuous-function realization and existing epimorphic-limit/filtered-cohomology nodes, and proved the actual restriction isomorphisms and compatibility without finite-quotient or local-compactness assumptions.",
+  "blueprint": "Paragraph (3), complete norm-coefficient test: unit-ball quotients, epimorphic derived inverse limit, and multiplication-by-ell rationalization. Agent elaboration of Bhatt--Scholze Lemmas 4.2.12 and 6.8.2; not a theorem stated by the blueprint.",
+  "tool_uses": [
+   {
+    "node": "det-pe-continuous-cohomology-limit",
+    "why": "Generic replete pro-etale epimorphic tower and derived-sections comparison; the unit supplies no replacement for this formal limit input."
+   },
+   {
+    "node": "det-pe-bounded-continuity-sections",
+    "why": "Generic uniformly bounded-below filtered cohomology on qcqs pro-etale objects, used for rationalization; no finiteness of coefficients is needed."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic local lifting criterion for abelian sheaf epimorphisms, needed for the quotient tower and exact terminal evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic set-sheaf epimorphism criterion to apply categorical weak contractibility to abelian epimorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derived comparison, used only after exactness of terminal evaluation is proved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-continuous-cohomology-limit",
+  "det-pe-bounded-continuity-sections",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-073354883",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-073354883 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-complete-metric-group-quotients, every cited statement, BS 4.2.12 and 6.8.2 with its proof, and blueprint main-20261015 direct-images paragraph (3). The item statement is identical to the one landed by Q67's FIX; only the proof fields changed. No repair note exists, so this is an ordinary first split. All of the old parent steps 4-5 are still carried: the completeness argument is now the new node, step 3 has the epimorphic tower and the derived limit (det-pe-continuous-cohomology-limit, which covers the old Milnor and kun derived-limit inputs), step 4 has the restriction on infinite ℓ^n-torsion O_n, step 5 has rationalization by bounding a continuous function on a quasi-compact |U|, step 6 has filtered continuity of cohomology, and step 7 has exact evaluation at a weakly contractible V. Checks on step 2: O is closed in B and hence complete, ℓ^nO={|x|≤ℓ^-n} is open and shrinks to 0, and nothing assumes compactness. Checks on step 3: the fibres of a section form a Zariski cover with any number of members, and the lifts are constant. Step 4 maps to the actual restriction by naturality of restriction on the product triangle; the cited node writes this as ≃, which I accept. Step 1 identifies the abelian and set-valued pullbacks from the point through the product and naturality clauses; the base proof made the same identification. The new node is a true, self-contained, statement-only general lemma and not a clause of the item. Small cases checked: G=0, discrete G with U_n=0, and Z with 2^nZ (excluded because shrinking fails). No duplicate: lem-sfb-integers-profinite-tower assumes finite quotients and concludes compactness; the Tannakian, matrix-group and normed-realization nodes are different. The Mathlib candidates (profinite reconstruction, which needs compactness, and AdicCompletion) do not match. No SGA anywhere. The declared tool uses (continuous-cohomology limit, bounded continuity of cohomology, two epimorphism criteria, exact-functor derived functor) are generic and match the base route's inputs. blueprint.from.node is null, inherited from the agent-created chain (a base-node fault). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteNormOpenTest",
+  "declaration": "AlgebraicGeometry.ProEtale.completeNorm_open_test",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normOpenFunctions",
+   "AlgebraicGeometry.ProEtale.normOpenFunctionMap",
+   "AlgebraicGeometry.ProEtale.normOpenSheafify",
+   "AlgebraicGeometry.ProEtale.normOpenConstantSheaf",
+   "AlgebraicGeometry.ProEtale.normOpenConstants",
+   "AlgebraicGeometry.ProEtale.normOpenComplexRestriction",
+   "AlgebraicGeometry.ProEtale.NormOpenRestrictionIso",
+   "AlgebraicGeometry.ProEtale.normOpenQuotient",
+   "AlgebraicGeometry.ProEtale.normOpenQuotientStep",
+   "AlgebraicGeometry.ProEtale.normOpenQuotientTower",
+   "AlgebraicGeometry.ProEtale.normOpenQuotientProjection",
+   "AlgebraicGeometry.ProEtale.normOpenRationalSequence",
+   "AlgebraicGeometry.ProEtale.normOpenRationalInsertion",
+   "AlgebraicGeometry.ProEtale.normOpenPointDirectImage",
+   "AlgebraicGeometry.ProEtale.normOpenRealizationApp",
+   "AlgebraicGeometry.ProEtale.normOpenRealizationApp_naturality",
+   "AlgebraicGeometry.ProEtale.normOpenRealization",
+   "AlgebraicGeometry.ProEtale.normOpenCondensedMap",
+   "AlgebraicGeometry.ProEtale.normOpenRealization_natural",
+   "AlgebraicGeometry.ProEtale.normOpenDirectApp",
+   "AlgebraicGeometry.ProEtale.normOpenDirectApp_naturality",
+   "AlgebraicGeometry.ProEtale.normOpenPullback",
+   "AlgebraicGeometry.ProEtale.normOpenRealization_restriction",
+   "AlgebraicGeometry.ProEtale.normOpenSectionsComplex",
+   "AlgebraicGeometry.ProEtale.completeNorm_open_test"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteNormOpenTest.lean",
+  "statement": "theorem completeNorm_open_test (ℓ : ℕ) [Fact ℓ.Prime] (B : Type u) [NormedField B] [IsUltrametricDist B] [CompleteSpace B] [Algebra ℚ_[ℓ] B] (hB : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] B x‖ = ‖x‖) (V : Scheme.{u}) [IsAffine V] (f : Γ(V, ⊤)) (hV : (Scheme.ProEt.topology V).IsWeaklyContractible.{u + 1} (Scheme.ProEt.mk (𝟙 V))) (htorsion : ∀ (n : ℕ), 1 ≤ n → ∀ M : AddCommGrpCat.{u + 1}, (∀ x : M, ℓ ^ n • x = 0) → NormOpenRestrictionIso V f ((normOpenConstantSheaf V).obj M)) : (∀ n : ℕ, DiscreteTopology (normOpenQuotient ℓ B n)) ∧ (∀ (Z : Scheme.{u}), Z = V ∨ Z = (V.basicOpen f).toScheme → IsIso (normOpenRealization Z B) ∧ IsIso (normOpenRealization Z (NormedField.valuation (K := B)).integer) ∧ Mono (normOpenRationalInsertion ℓ B Z 0) ∧ (∀ n : ℕ, IsIso (normOpenConstants Z (normOpenQuotient ℓ B n)) ∧ Epi (normOpenQuotientStep ℓ B Z n)) ∧ (∃ π : (Functor.const ℕᵒᵖ).obj (normOpenFunctions Z (NormedField.valuation (K := B)).integer) ⟶ normOpenQuotientTower ℓ B Z, (∀ n : ℕ, π.app (op n) = normOpenQuotientProjection ℓ B Z n) ∧ Nonempty (IsLimit (Cone.mk _ π)) ∧ QuasiIso ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).map (limit.lift (normOpenQuotientTower ℓ B Z) (Cone.mk _ π)) ≫ milnorLimitComparison (normOpenQuotientTower ℓ B Z))) ∧ (∃ κ : normOpenRationalSequence ℓ B Z ⟶ (Functor.const ℕ).obj (normOpenFunctions Z B), (∀ m : ℕ, κ.app m = normOpenRationalInsertion ℓ B Z m) ∧ Nonempty (IsColimit (Cocone.mk _ κ)))) ∧ NormOpenRestrictionIso V f (normOpenFunctions V (NormedField.valuation (K := B)).integer) ∧ NormOpenRestrictionIso V f (normOpenFunctions V B) ∧ (∀ q : ℤ, 0 < q → IsZero ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℤ) q).obj (normOpenSectionsComplex V (Scheme.ProEt.mk (V.basicOpen f).ι) (normOpenFunctions V B))))",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical continuous-function realization identifies the existing point-pulled coefficients with the existing sectionwise function sheaves. The displayed quotient tower, cone projections and multiplication cocone are constructed from the actual coefficient maps. Actual derived restriction is QuasiIso of ambient-site evaluation on the functorial K-injective replacement; localization at the principal-open object computes the small site of T. Quotient level n encodes the positive level n+1. Helpers state the normalization and coefficient-map compatibility of this same construction, with no alternative coefficient or derived category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5beb6a226",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the 11 dep records are byte-identical to live; lean.statement is verbatim in the file and the 25 declarations match the module. Clause-by-clause the Lean matches the node: B is NormedField+IsUltrametricDist+CompleteSpace with an isometric ℚ_ℓ-algebra structure (hB); O is the valuation integer ring; O_n = O/(ℓ)^(n+1) (Lean index shift, no level lost), with DiscreteTopology concluded and true; V is affine with IsWeaklyContractible.{u+1} terminal object; htorsion covers every ℓ^n-torsion AddCommGrpCat M; actual restriction is QuasiIso on the functorial K-injective resolution, computed on the ambient site (Q48 precedent). The realization p_Z^*C_R → C(−,R) is defined from the adjunction and the test formula, with IsIso claimed for B and O; the limit cone is pinned to the quotient projections with IsLimit; the derived limit is QuasiIso into the canonical Roos comparison; the cocone is pinned to the ℓ^(-m) insertions with IsColimit; restriction is a quasi-isomorphism for L and C_B; H^q(T,C_B)=0 for q>0; compatibilities are stated by named helper theorems. Edge cases (empty schemes, f=0 or invertible, M=0, non-discrete value group, B=ℚ_ℓ, universes) are covered; B : Type u is forced by the recorded p_X^* interface. Gates: no hollow def (naturality fields are named sorry theorems), no proofs, docstrings carry source, blueprint tag and all 7 steps, no lines over 100 characters. Advisories: milnorLimitComparison and profiniteTestProjection have theorem owners outside stmt_deps; normOpenRealization for B equals condensedFieldContinuousMapIso (fields only, so not a duplicate); the additive postcomposition and pull-back helpers have only ring-valued or other-framework counterparts; lem-sfb-complete-metric-group-quotients has no Lean record yet, so stage 3 must import it; the RGammaDerivedLimit public import may be redundant (untested). No compile run because no file was changed."
+ }
+}

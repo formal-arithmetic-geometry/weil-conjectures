@@ -22,88 +22,97 @@
  ],
  "proof": [
   {
-   "text": "Fix a regular Noetherian $W$ as in the statement and a point $w$. Set $R=\\mathcal O_{W,w}$ and $d=\\dim R$. By [lem-per-punctual-strict-completion-test], it suffices to prove closed-point purity for $T=\\operatorname{Spec}B$, where $B=\\widehat{R^{\\mathrm{sh}}}$ is complete strictly henselian Noetherian regular local of dimension $d$. The cited test applies without excellence of $R$, so no excellence assumption on $W$ has been introduced.",
+   "text": "Fix $w\\in W$ and put $R=\\mathcal O_{W,w}$. This is regular local by [def-weil-regular-scheme]. By [lem-per-trait-test-strict-completion-input], it is enough to prove the closed-point Kummer map for $B=\\widehat{R^{\\mathrm{sh}}}$ is an isomorphism. That input supplies regularity, Noetherianity, completeness, strict henselianity, unchanged dimension, separably closed residue field and invertibility of $\\ell$. By [lem-sc-regular-local-domain], $B$ is a domain. If $B$ has positive characteristic it contains its prime field $\\mathbf F_p$. If its residue characteristic is zero then every nonzero integer is a unit, so it contains $\\mathbf Q$. In both cases [lem-per-trait-test-prime-field-local-input] proves its closed-point map is an isomorphism. It remains to handle mixed characteristic $(0,p)$ with $p\\ne\\ell$.",
    "uses": [
-    "lem-per-punctual-strict-completion-test"
+    "def-weil-regular-scheme",
+    "lem-per-trait-test-strict-completion-input",
+    "lem-sc-regular-local-domain",
+    "lem-per-trait-test-prime-field-local-input"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.2.1 and Proposition 3.2.4, p.244"
+    "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
    }
   },
   {
-   "text": "If $B$ contains a prime field, apply [lem-per-prime-field-punctual-purity] to $T$ to obtain the required purity at its closed point. Otherwise $B$ is mixed characteristic $(0,p)$: its residue field has prime characteristic $p$, and the injective map $\\mathbf Z\\to B$ does not extend to $\\mathbf Q$ because $p$ is not a unit. Indeed [lem-sc-regular-local-domain] makes $B$ a domain; if it has positive characteristic it already contains $\\mathbf F_p$, and if its residue field has characteristic zero then all nonzero integers are units, giving $\\mathbf Q$. In the remaining case $\\ell\\neq p$ because $\\ell$ is a unit.",
+   "text": "Put $d=\\dim B$. In mixed characteristic $d\\ge1$: a dimension-zero regular local ring has zero maximal ideal and is a field, so cannot have different ring and residue characteristics. Choose $d$ generators of the maximal ideal by [def-weil-regular-scheme]; [lem-weil-pbc-regular-local-generators-regular-sequence] makes them a regular sequence. Apply [lem-per-trait-test-mixed-regular-pair-models] to these parameters. It provides $Z_a\\hookrightarrow V_a$ over a complete strictly henselian mixed-characteristic trait $S$, with $V_a$ integral regular affine, flat, finite type and quasi-projective over $S$, regular characteristic-$p$ quotients $Z_a$, compatible regular equations of length $d$, and limiting pair $\\operatorname{Spec}k\\hookrightarrow\\operatorname{Spec}B$.",
    "uses": [
-    "lem-per-prime-field-punctual-purity",
-    "lem-sc-regular-local-domain"
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-per-trait-test-mixed-regular-pair-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Proposition 3.2.5 and section 3.7 first paragraph"
+    "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
    }
   },
   {
-   "text": "In this remaining case choose a regular system of parameters of $B$. Apply [lem-per-complete-mixed-regular-pair-approximation] to obtain a small directed inverse system $Z_i\\hookrightarrow V_i$ over a complete strictly henselian mixed-characteristic trait $S$, with limiting pair $\\operatorname{Spec}k\\hookrightarrow T$. The cited statement supplies integral regular affine $V_i$, flat and finite type over $S$, regular $\\mathbf F_p$-schemes $Z_i$, and compatible regular sequences of length $d$. Each $V_i$ is quasi-projective as stated there, so the testing hypothesis of the item applies to every $V_i$. It follows that every $V_i$ is punctually pure.",
+   "text": "The assumed trait test applies to every $V_a$ supplied in Step 2, so $V_a$ is punctually pure. Each $V_a$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the approximation also states Noetherianity for $Z_a$. At every $z\\in Z_a$, its local ring is regular and is an $\\mathbf F_p$-algebra with $\\ell$ invertible. Apply [lem-per-trait-test-prime-field-local-input] at that local ring. Thus $Z_a$ is punctually pure by [def-per-punctual-purity]. The compatible length-$d$ equations give constant codimension $d$ by [def-per-regular-closed-immersion-codimension], exactly as stated by the approximation. Conditions (b) and (c) of [lem-per-punctual-purity-two-of-three] therefore imply (a): the canonical map $A_{Z_a}\\to i_a^!A_{V_a}(d)[2d]$ is an isomorphism.",
    "uses": [
-    "lem-per-complete-mixed-regular-pair-approximation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent expansion of XVI section 3.7 complete-trait reduction using I 2.9, I 10.3(i), IV 4.1.8"
-   }
-  },
-  {
-   "text": "Every $Z_i$ is punctually pure by [lem-per-prime-field-punctual-purity], since it is regular Noetherian over $\\mathbf F_p$ with $\\ell\\neq p$. Apply conditions (b) and (c) of [lem-per-punctual-purity-two-of-three] to $Z_i\\hookrightarrow V_i$: condition (b) is this purity of $Z_i$, and condition (c) follows from purity of all of $V_i$ in Step 3. Both schemes are regular Noetherian, and their immersion has constant codimension $d$ by the regular sequence provided in Step 3. Thus the supported Kummer-class map $A_{Z_i}\\to i_i^!A_{V_i}(d)[2d]$ is an isomorphism for every $i$.",
-   "uses": [
-    "lem-per-prime-field-punctual-purity",
+    "lem-per-trait-test-mixed-regular-pair-models",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-regular-scheme",
+    "lem-per-trait-test-prime-field-local-input",
+    "def-per-punctual-purity",
+    "def-per-regular-closed-immersion-codimension",
     "lem-per-punctual-purity-two-of-three"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Proposition 3.2.3, p.244, and Proposition 3.2.5, p.245"
+    "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
    }
   },
   {
-   "text": "Apply [lem-per-transverse-gysin-limit] to the inverse system from Step 3. Its index is small directed, its schemes and transitions are affine, and its fixed length-$d$ regular sequences are preserved and remain regular at the limit; the limit schemes are $T$ and its closed point. In every degree $q$, the isomorphisms of Step 4 induce compatible isomorphisms\n$$H^q(Z_i,A)\\longrightarrow H^{q+2d}_{Z_i}(V_i,A(d)).$$\nTaking their colimit and using the cited continuity and Kummer-map identification gives\n$$H^q(\\operatorname{Spec}k,A)\\xrightarrow{\\sim}H^{q+2d}_{\\{t\\}}(T,A(d)).$$\nThis is the map induced by the actual closed-point Kummer class, not merely an abstract isomorphism between the two groups.",
+   "text": "By the adjunction [def-per-closed-support-plus-adjunction] and derived supported-Hom formula [lem-amb-closed-support-hom], derived global sections of the Step 3 map identify with $\\gamma_a:R\\Gamma(Z_a,A)\\to R\\Gamma_{Z_a}(V_a,A(d))[2d]$. Each $\\gamma_a$ is an isomorphism. Apply [lem-per-trait-test-supported-kummer-continuity] with $c=d$: all stages and limits are affine regular Noetherian, the indexing set is small directed, $\\ell$ is invertible, and the regular equations are preserved by Step 2. Its derived comparison square identifies the colimit arrow with the specified limiting Kummer arrow $\\gamma$, hence $\\gamma$ is an isomorphism. For the separably closed residue field $k$, [lem-exc-etale-sheaves-gsets-point] identifies its small etale topos with sets (the Galois group is trivial). Module objects are consequently ordinary $A$-modules and sections are exact and conservative. The same adjunction and supported-Hom formula therefore identify $\\gamma$ with derived sections of $A_k\\to j_B^!A_B(d)[2d]$, and sections detect its isomorphism: its cohomology maps are detected by this exact equivalence, and [lem-weil-pbc-unbounded-derived-iso-cohomology] then applies.",
    "uses": [
-    "lem-per-transverse-gysin-limit"
+    "def-per-closed-support-plus-adjunction",
+    "lem-amb-closed-support-hom",
+    "lem-per-trait-test-supported-kummer-continuity",
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent supported-continuity expansion of XVI section 3.7; XVI 2.1, 2.3.1; Stacks 03Q6"
+    "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
    }
   },
   {
-   "text": "The residue field $k$ is separably closed. By [lem-exc-etale-sheaves-gsets-point], its small-etale topos is equivalent to sets with an action of its trivial absolute Galois group, hence to sets; therefore global sections on $k$ identify sheaves of $A$-modules with $A$-modules and detect quasi-isomorphisms. Consequently the isomorphisms in every degree from Step 5 say precisely that $A_k\\to j_t^!A_T(d)[2d]$ is an isomorphism. The strict-completion test of Step 1 now implies punctual purity of $W$ at $w$. Since $w$ was arbitrary, $W$ is punctually pure.",
+   "text": "The descent implication of Step 1 proves the canonical closed-point map for $R$ is an isomorphism. Since $w$ was arbitrary, [def-per-punctual-purity] gives punctual purity of $W$. The empty scheme satisfies this pointwise statement vacuously.",
    "uses": [
-    "lem-exc-etale-sheaves-gsets-point",
-    "lem-per-punctual-strict-completion-test"
+    "def-per-punctual-purity"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QT, theorem-equivalence-sheaves-point; application of ILO XVI Proposition 3.2.4 at the end."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
    }
   }
  ],
  "proof_deps": [
-  "lem-per-punctual-strict-completion-test",
-  "lem-per-prime-field-punctual-purity",
+  "def-weil-regular-scheme",
+  "lem-per-trait-test-strict-completion-input",
   "lem-sc-regular-local-domain",
-  "lem-per-complete-mixed-regular-pair-approximation",
+  "lem-per-trait-test-prime-field-local-input",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-per-trait-test-mixed-regular-pair-models",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-per-punctual-purity",
+  "def-per-regular-closed-immersion-codimension",
   "lem-per-punctual-purity-two-of-three",
-  "lem-per-transverse-gysin-limit",
-  "lem-exc-etale-sheaves-gsets-point"
+  "def-per-closed-support-plus-adjunction",
+  "lem-amb-closed-support-hom",
+  "lem-per-trait-test-supported-kummer-continuity",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "XVI section 3.7 first paragraph, with XVI 3.2.1--3.2.5; complete-base and supported-limit argument expanded using the four explicit inputs."
+  "place": "Expose XVI Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, pp.244--245; section 3.7 first paragraph, p.254. Fresh one-level assembly by Q08 after the exclusion return; simultaneous approximation and derived supported continuity are separate unsplit inputs."
  },
  "mathlib_searches": [
   {
@@ -140,6 +149,41 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"EqualCharZero.to_not_mixedCharZero\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"(h : ∀ I : Ideal R, I ≠ ⊤ → CharZero (R ⧸ I)) : ∀ p > 0, ¬MixedCharZero R p\", \"doc\": \"If every proper quotient of a commutative ring $ R $ has characteristic zero, then $ R $ does not have mixed characteristic $ p $ for any prime $ p > 0 $.\"}\n  {\"name\": \"Tactic.ReduceModChar.TypeToCharPResult\", \"module\": \"Mathlib.Tactic.ReduceModChar\", \"type\": \"(α : Q(Type u))\", \"doc\": \"An inductive type representing the result of reducing a type $\\\\alpha$ modulo a prime characteristic $p$.\"}\n  {\"name\": \"MixedCharZero\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"(R : Type u_1) → [CommRing R] → ℕ → Prop\", \"doc\": \"The proposition that a commutative ring $ R $ has mixed characteristic zero with respect to a natural number $ n $, meaning that $ R $ has characteristic zero and there exists a maximal ideal $ \\\\mathf\"}\n  {\"name\": \"MixedCharZero.mk\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {p : ℕ} [toCharZero : CharZero R],\\n  (∃ I, I ≠ ⊤ ∧ CharP (R ⧸ I) p) → MixedCharZero R p\", \"doc\": \"If $ R $ is a commutative ring with characteristic zero and there exists a proper ideal $ I $ (i.e., $ I \\neq R $) such that the quotient ring $ R/I $ has characteristic $ p $, then $ R $ satisfies the\"}\n  {\"name\": \"EqualCharZero.iff_not_mixedCharZero\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"[CharZero R] : (∀ I : Ideal R, I ≠ ⊤ → CharZero (R ⧸ I)) ↔ ∀ p > 0, ¬MixedCharZero R p\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, the following are equivalent: (1) Every proper ideal $ I $ of $ R $ satisfies that the quotient ring $ R/I $ has characteristic zero; (2) For all\"}\n  {\"name\": \"split_by_characteristic_localRing\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"[IsLocalRing R] (h_pos : ∀ p : ℕ, IsPrimePow p → CharP R p → P) (h_equal : Algebra ℚ R → P)\\n  (h_mixed : ∀ p : ℕ, Nat.Prime p → MixedCharZero R p → P) : P\", \"doc\": \"For a local ring $ R $, if $ P $ holds in three cases: (1) for every prime power $ p $ such that $ R $ has characteristic $ p $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and (3)\"}\n  {\"name\": \"split_equalCharZero_mixedCharZero\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"[CharZero R] (h_equal : Algebra ℚ R → P) (h_mixed : ∀ p : ℕ, Nat.Prime p → MixedCharZero R p → P) : P\", \"doc\": \"For a ring $ R $ with characteristic zero, if a proposition $ P $ holds whenever $ R $ is an algebra over $ \\\\mathbb{Q} $ (equal characteristic case) and also holds for every prime $ p $ when $ R $ has\"}\n  {\"name\": \"Tactic.ReduceModChar.TypeToCharPResult.ctorElimType\", \"module\": \"Mathlib.Tactic.ReduceModChar\", \"type\": \"{u : Lean.Level} → {α : Q(Type u)} → {motive : Tactic.ReduceModChar.TypeToCharPResult α → Sort u} → ℕ → Sort (max 1 u)\", \"doc\": \"An eliminator for the inductive type representing reduction of a type $\\\\alpha$ modulo a prime characteristic $p$, allowing case analysis on whether the reduction fails or results in an integer-like st\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: inspected signatures concern general derived-category exact triangles, scheme morphisms, local algebra, or unrelated names; none supplies the stated etale Gysin, punctual-purity, or logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute cohomological purity for regular Noetherian schemes reduces to regular flat schemes over complete strictly henselian mixed characteristic discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T03:31:18Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute cohomological purity for regular Noetherian schemes reduces to regular flat schemes over complete strictly henselian mixed characteristic discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\"], \"digest\": \"fb0c74fe2cdd08fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures are smoothness, etale-algebra or mixed-characteristic predicates, not the cohomological-purity trait-testing implication"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|cohomological.*purity|Fujiwara",
+   "results": "{\"t\": \"2026-10-24T03:31:50Z\", \"tool\": \"grep\", \"query\": \"punctual.*pur|cohomological.*purity|Fujiwara\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures are smoothness, etale-algebra or mixed-characteristic predicates, not the cohomological-purity trait-testing implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of absolute etale cohomological purity to regular schemes over complete mixed characteristic traits",
+   "results": "{\"t\": \"2026-10-24T03:31:50Z\", \"tool\": \"leansearch\", \"query\": \"Reduction of absolute etale cohomological purity to regular schemes over complete mixed characteristic traits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MixedCharZero.reduce_to_p_prime\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.formallyEtale_iff\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"4310c176f83f13ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures are smoothness, etale-algebra or mixed-characteristic predicates, not the cohomological-purity trait-testing implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"HenselianRing\"",
+   "results": "{\"t\": \"2026-10-24T03:31:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"HenselianRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures are smoothness, etale-algebra or mixed-characteristic predicates, not the cohomological-purity trait-testing implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Testing absolute etale purity on complete regular local rings by approximation over Cohen discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T03:31:51Z\", \"tool\": \"leanfinder\", \"query\": \"Testing absolute etale purity on complete regular local rings by approximation over Cohen discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsStandardEtale\", \"Algebra.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.mem_etaleLocus_iff\", \"StandardEtalePresentation\", \"Algebra.etaleLocus\"], \"digest\": \"2a2f66da6501a8b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures are smoothness, etale-algebra or mixed-characteristic predicates, not the cohomological-purity trait-testing implication"
   }
  ],
  "mathlib_match": null,
@@ -168,56 +212,31 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-punctual-purity-trait-test",
   "worker": "stage1",
-  "summary": "Split the complete-trait test into strict completion, the prime-field case, simultaneous algebraic approximation, two-of-three purity for the finite-stage pairs, and supported Kummer continuity. Preserved the original no-excellence statement and made the complete-base approximation input explicit.",
-  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3: regular finite-torsion local-model purity input, through the recorded ancestry.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-regular-local-domain",
-    "why": "The local algebra domain fact supplies the characteristic case distinction; no node of this unit states it."
-   },
-   {
-    "node": "lem-exc-etale-sheaves-gsets-point",
-    "why": "The small-etale sheaf equivalence over a field detects the final class over a separably closed residue field; no node of this unit gives this topos equivalence."
-   }
-  ]
+  "summary": "Repair of the Q08 return: all five excluded proof inputs are removed. Four fresh statement-only obligations give strict-completion descent, prime-field local purity, mixed-characteristic regular-pair models, and derived supported Kummer continuity. Codimension uses the live regular-sequence definition directly. No obsolete proof graph or excluded ind-etale comparison is restored. Item statement, source, statement dependencies, searches and blueprint provenance are retained; no worker tool_uses field is written.",
+  "blueprint": "lem-per-artin-gabber-affine-curve Proof Step 3, the regular finite-torsion local purity input, and ILO XVI section 3.7 first paragraph: local strict completion and characteristic split (Step 1), marked mixed-characteristic pair models (Step 2), trait hypothesis plus two-of-three (Step 3), derived continuity of the canonical Kummer map (Step 4), and descent to every point (Step 5)."
  },
- "tool_uses": [
-  "lem-sc-regular-local-domain",
-  "lem-exc-etale-sheaves-gsets-point"
- ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q45-4236f86ad",
-  "group": "Q45",
+  "reviewer": "NT-cc-Q08-ce9cc357e",
+  "group": "Q08",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-4236f86ad (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement against ILO XVI 3.2.1-3.2.5, 3.7 p.254, 2.2.3.1 and 2.3.1, I 2.9, I 10.3 and IV 4.1.8, XVIII-A 2.1 (formal comparison without excellence), and Stacks 03Q6 and 03QT. The item statement is unchanged; testing only over complete traits makes it stronger, not weaker. Step 1: the strict-completion iff (3.2.1 remark + 3.2.4) is true without excellence. Step 2: the case split on characteristic is correct, and the prime-field case is 3.2.5. Step 3: the approximation node is true pure algebra. It uses a Cohen presentation and Popescu on C[x]_(p,x)->C[[x]], not on C->B, which can fail when B is ramified or k imperfect. Cotangent independence gives regular V_i and Z_i; V_i is flat because it is torsion-free; Z_i is an F_p-scheme because p=sum a_j t_j descends. Step 4: two-of-three (b)+(c) gives (a) in codimension d. Step 5: the supported-limit node is true via continuity on the ambient scheme and the complement, plus 2.2.3.1 base change of the Kummer class under a preserved regular sequence. No flatness is needed, so it does not duplicate class-calculus. Step 6: over a separably closed field, RΓ(k,-) is an equivalence, so isomorphisms on every H^q detect the isomorphism. The new nodes are statement-only, sourced, cite no SGA and form no cycle. They do not duplicate completion-supported-constant-comparison (that one assumes excellence), the log-smooth/monomial trait nodes, or the PBC Cohen/Popescu nodes. Tool uses lem-sc-regular-local-domain and lem-exc-etale-sheaves-gsets-point are accepted. Batch 5: all three flagged citations name the Kummer class of lem-per-regular-immersion-class-calculus only in their statements. The item already had that stmt_dep on the base, so the closure is unchanged. The path ends at lem-trf-bounded-below-derived-adjunction, a generic D^+ adjunction lemma that is outside both assumed statements (precedent NW 45bd4f27), so it is accepted. No fixes."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PunctualPurityTraitTest",
-  "declaration": "AlgebraicGeometry.Etale.punctual_purity_of_complete_mixed_trait_test",
-  "declarations": [
-   "AlgebraicGeometry.Etale.punctual_purity_of_complete_mixed_trait_test"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/PunctualPurityTraitTest.lean",
-  "statement": "theorem punctual_purity_of_complete_mixed_trait_test (ℓ : ℕ) (hℓ : ℓ.Prime) (htest : ∀ (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [CharZero R], (∃ p : ℕ, p.Prime ∧ CharP (IsLocalRing.ResidueField R) p) → IsUnit (ℓ : R) → ∀ (V : Scheme.{u}) [IsNoetherian V] [IsIntegral V] (f : V ⟶ Spec (.of R)), IsRegularScheme V → Flat f → LocallyOfFiniteType f → QuasiCompact f → (∃ (N : ℕ) (i : V ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))), IsImmersion i ∧ i ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R)) ↘ Spec (.of R) = f) → IsPunctuallyPure ℓ hℓ V) : ∀ (W : Scheme.{u}) [IsNoetherian W], IsRegularScheme W → IsUnit (ℓ : Γ(W, ⊤)) → IsPunctuallyPure ℓ hℓ W",
-  "branch": "newtargets-dag",
-  "by": "Q43",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.PunctualPurityTraitTest deleted (dead: no target reaches it); this node is not reached either."
- },
- "reviewed_lean": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-1da2c9717",
-  "group": "Q43",
-  "result": "pass",
-  "note": "Re-delivery after H4/H12 RETURN 069ea282 makes exactly the requested correction: stmt_deps +def-per-punctual-purity (record byte-identical to side), public import of PunctualPurity, four local defs deleted, IsPunctuallyPure used in htest and in the conclusion, redundant imports dropped, lean.declarations = theorem only; statement/proof/proof_deps unchanged. The landed IsPunctuallyPureAt (∃ d = ringKrullDim plus witnesses, IsIso of the transposed level-1 class-calculus Kummer map) matches the item's introductory definition; its witnesses are automatic, so no extra assumption, and it takes no instance args. Re-verified the trait clauses (DVR, adic complete, strictly henselian, CharZero, residue char p, ℓ unit), the test schemes (integral, regular, Flat, LOFT+QC, immersion into P^N_S over S), and the conclusion for every Noetherian regular W with no excellence; one universe u. Edge cases ok. lean.statement verbatim; only sorry; no cycle. nt_compile --json: rc 0, 5.3 s, no warnings. No fixes."
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-ce9cc357e (reviewer sub-agent of L); spot-checked: This re-delivery repairs the 25725a1a RETURN. Steps 1-4 no longer cite any of the five route-pivot-dropped nodes, and the split_report.tool_uses field (C8) is gone. A BFS from the item and the 4 new nodes reaches 10441 nodes; none is in side-live route-pivot-dropped.txt, and ind-etale-closed-support-base-change is not reached. No SGA is cited. The item statement, stmt_deps, source and blueprint are unchanged, and the item is still unsplit live, so it is not superseded. Steps checked: (1) the characteristic split of B (a domain, so its characteristic is 0 or a prime) is exhaustive, and in mixed characteristic p≠ℓ because ℓ is a unit; (2) d≥1, and the parameters form a regular sequence; (3) every V_a meets each hypothesis of the trait test. The local rings of Z_a are F_p-algebras, so the prime-field input applies pointwise. The length-d equations give constant codimension, so two-of-three (b)+(c)⇒(a) applies. (4) The adjunction and closed-support-hom identify RΓ with γ_a; continuity applies with c=d, and its limits Spec B ⊃ Spec k agree with the models node. Γ over separably closed k is exact and conservative, and unbounded-derived-iso-cohomology applies; (5) one-way descent. New nodes: strict-completion = ILO XVI p.244 paragraph after Def 3.2.1 + Prop 3.2.4. Prime-field-local = ILO XVI Prop 3.2.5 at the closed point. Mixed-regular-pair-models has no verbatim source but is provable. Proof sketch: Cohen surjection C[[T]]→B with kernel (g), g≡u·p mod T; Popescu on C[T]_(p,T)→C[[T]]; B_a=P_a/(g_a), so B_a/J_a is smooth over k; localize to get B_a regular, integral and flat. Small cases: unramified d=1 gives the constant system C; ramified d=1 gives C[T]/(T²−p). Supported-kummer-continuity follows from Stacks 03Q6 (tag file checked) on V, Z and V∖Z = lim(V_a∖Z_a), plus base-change compatibility of the class (ILO XVI Prop 2.2.3.1, Def 2.3.1). The cited ILO I 2.9, I 10.3(i) and IV 4.1.8 were checked. Duplicate search over punctual purity, Popescu, Cohen, R̂^sh, supported Kummer and Fujiwara: every equivalent statement found is a dropped Q45/NG node, and the live hits differ. Maintainer note: the 4 new obligations resemble excluded statements, so their future splits must not reuse the withdrawn proof graphs. No fixes."
+ }
 }

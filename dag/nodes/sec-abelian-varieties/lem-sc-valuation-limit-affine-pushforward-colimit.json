@@ -32,70 +32,51 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the cofinal directed tail. Put A_i equal to the affine pushforward of the structure sheaf. The quasi-coherent algebra colimit node constructs A as their colimit on affine sections. For an affine open U of S_0, the inverse images U_i in S_i and U in S are affine by the relative-spectrum statement, and the affine-limit statement identifies U with the limit of the U_i. The rings of the U_i have colimit A(U) by the algebra-colimit statement, so the Spec-colimit-limit statement identifies U with Spec A(U), compatibly on overlaps. These local identifications glue to identify S over S_0 with the relative spectrum of A; the relative-spectrum statement then identifies g_* O_S with A.",
+   "text": "Restrict to the cofinal nonempty directed tail above i₀. Mathlib isAffineHom_π_app makes the supplied limit projection affine. Form the tail diagram in affine schemes over the fixed stage and its limiting cone (the full inclusion and Over.forget reflect limits). The relative-spectrum anti-equivalence takes its opposite cone to an algebra colimit. The quasi-coherent-algebra colimit theorem makes inclusion of quasi-coherent algebras preserve this colimit. Its object and sectionwise map formulas identify that diagram with the supplied A; uniqueness of colimits gives α, and the same formulas prove its specified leg equation. Affineness and the ring-sheaf isomorphism give the affine-chart IsIso assertion.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
     "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-quasi-coherent-algebra-colimit",
-    "lem-weil-pbc-spec-colimit-limit"
+    "lem-weil-pbc-quasi-coherent-algebra-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX proof (relative spectrum of the colimit algebra), with 01YW and 01Z0"
-   }
+   "elementary": false
   },
   {
-   "text": "For an affine open U of S_0, write A for its ring, B_i for the sections of A_i, and B for the sections of A over U; by (1) and the relative-spectrum statement, B_i and B are the rings of the affine inverse images of U in S_i and S. The affine pullback sections node gives natural isomorphisms from F_0(U) tensor_A B_i to the sections of the pulled-back F_0 over the inverse image of U in S_i, i.e. to ((g_i)_* g_i^* F_0)(U), and likewise from F_0(U) tensor_A B to (g_* g^* F_0)(U). By the quasi-coherent tensor-sections node, F_0(U) tensor_A B_i and F_0(U) tensor_A B are the sections over U of F_0 tensor A_i and F_0 tensor A. These isomorphisms on the affine opens are compatible with restriction between affine opens and with the transition maps by the naturality in the pullback-sections node, so they define isomorphisms of sheaves (a compatible family of isomorphisms on a basis of opens), giving the asserted pushforward-tensor isomorphisms compatible with transition maps.",
+   "text": "Construct the projection morphism F tensor f_*O_X → f_*f^*F by sheafifying the bilinear section map (t,a) ↦ a • η(t); linearity and compatibility with restriction follow from the unit being a module morphism. For an affine base open, its affine inverse image and the module-pullback affine-section theorem identify this map on pure tensors with a bijective tensor comparison. The quasi-coherent tensor-section theorem identifies its source sections with the section tensor product. The affine-basis criterion gives an isomorphism, with its formula on every open from the construction. Transport along the algebra isomorphism α, or hA for a stage.",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec",
     "lem-weil-pbc-module-pullback-affine-sections",
     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, first paragraph (affine projection formula)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let (C, c_i) be the colimit of the directed system (F_0 tensor A_i) in O_{S_0}-modules; by the quasi-coherent module colimit node, C is quasi-coherent and C(U) is the directed colimit of the sections (F_0 tensor A_i)(U) for every affine open U. The maps F_0 tensor A_i -> F_0 tensor A induced by A_i -> A induce a map C -> F_0 tensor A. On an affine U, by the tensor-sections node it is the canonical map from the colimit of F_0(U) tensor_A B_i to F_0(U) tensor_A B, where B is the directed colimit of the B_i by the quasi-coherent algebra colimit node; this map is bijective because tensoring the fixed A-module F_0(U) commutes with directed colimits (tensor-colimit node). A map of sheaves bijective on every affine open is an isomorphism, so F_0 tensor A with the maps induced by A_i -> A is the colimit in O_{S_0}-modules. (Applied with F_0 = O_{S_0}, the same argument shows the underlying module of A is the colimit of the A_i in O_{S_0}-modules.)",
+   "text": "The general directed sheaf-algebra colimit theorem constructs a cocone whose underlying module cocone is colimiting. This proves preservation of the given directed colimit by the underlying-module functor. The section hypotheses hBm and hbm identify the supplied B and b with that underlying diagram and cocone, giving IsColimit b. The algebra isomorphism α identifies c.pt.toModule with the affine pushforward of the structure sheaf, which is quasi-coherent by the relative-spectrum theorem. Transport quasi-coherence across the underlying module isomorphism. TensorLeft F preserves this colimit because the existing sheaf tensor–Hom adjunction exhibits it as a left adjoint.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-algebra-colimit",
-    "lem-weil-pbc-tensor-commutes-with-colimits",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+    "lem-weil-pbc-sheaf-algebras-directed-colimit",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-affine-morphism-relative-spec"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DD; Limits, Lemma 01Z0 displayed colimit calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Substituting the identifications of Step 2 into Step 3 gives the canonical colimit assertion and completes all three clauses.",
+   "text": "For a transition or colimit leg, cancel the inverse of the source projection isomorphism against its hom on the input pure tensor. WhiskerLeft_app_tmulSection computes tensoring with the underlying module map. Substitute hBm or hbm and the target projection formula. This gives exactly the two compatibility equations in the conclusion. Assemble with the preceding quasi-coherence, affineness, algebra comparison and colimit statements.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, first paragraph and displayed equalities"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherent-algebra-colimit",
-  "lem-weil-pbc-spec-colimit-limit",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-tensor-commutes-with-colimits",
   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+  "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R5",
+  "date": "2026-10-24",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma 01Z0 proof, with 01YX/01YW"
+  "place": "Lemmas 01YX and 01Z0: relative-spectrum equivalence and categorical tensor-colimit preservation; projection map constructed by sheafification and tested on affine sections."
  },
  "mathlib_searches": [
   {
@@ -222,18 +203,13 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherent-algebra-colimit",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-tensor-commutes-with-colimits",
   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherent-algebra-colimit",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-tensor-commutes-with-colimits"
+  "lem-weil-pbc-module-pullback-affine-sections"
  ],
  "reviewed": {
   "date": "2026-10-11",
@@ -262,21 +238,26 @@
   "result": "fix",
   "note": "I:Type u Preorder+IsDirected fixed i0; D:Iop=>Scheme.{u} cone+IsLimit; CompactSpace/QuasiSeparatedSpace stages; IsAffineHom transitions; F qcoh; A pinned to (g_i)_*O by hA/hAm; c IsColimit; B,b pinned sectionwise; (1) alpha + coprojection compat + toSpecGamma IsIso on affines; (2) e_i,e via s(x)a -> a.eta(s) with exists_tensorPullbackAdjunction unit; (3) IsColimit b and tensorLeft F mapCocone b; FIX: 9 show-from (have) replaced by ascriptions/@id"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "R5",
   "result": "pass",
-  "landing": "20261020T150653-L-2565839",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.affine_pushforward_colimit"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.affine_pushforward_colimit"
-  ]
+  "landing": "20261024T190830-L-102293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

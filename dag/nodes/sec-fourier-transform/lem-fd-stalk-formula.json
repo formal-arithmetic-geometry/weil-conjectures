@@ -234,7 +234,24 @@
   "AlgebraicGeometry.Etale.fourierTransformStalkIso"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+    "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+    "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk"
+   ]
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-prop-stalk",
  "lean": {
@@ -322,5 +339,33 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-cffcc098e (reviewer sub-agent of L); spot-checked: FIX after a full read: the item, every cited node statement, all 9 proof steps of thm-cbc-finite-extension, the main-20261015 blueprint item, proof and unit, and Laumon (1.2.1.1) on p.141. Statement: making the adic transform explicit and replacing H_c^*[r] by RΓ_c[r] plus H^i=H_c^{i+r} is faithful and weakens nothing (g arbitrary, Ω any algebraically closed field, r>=0, K any object). Tested on r=0, K=0, δ_0 (gives E[1]), the constant sheaf (gives δ_0(-1)[-1]) and a generic geometric point. Fault 1 (C4/E6): the delivered statement fixed the framework operations, i.e. the pullback of def-weil-derived-pullback-tensor-hom and the compact support of def-weil-integral-rational-qbar-compact-support. Step 3 applied thm-cbc-finite-extension, which is stated for a different pullback (def-weil-pbc-completed-pullback) and for completed Rp_*j_!. No DAG node compares the two compact-support functors over an arbitrary field Ω. Repair: the statement's compact support is now RP_*j_! (def-weil-pbc-projection-compactification), exact by lem-cbc-integral-compact-support-uniform-restriction (on route, sk-prop-sf-cbc) and rationalized by prop-weil-pbc-rational-transport, with a fixed Nagata compactification and its base change. Step 3 converts the pullbacks with γ_g and γ_h^{-1} of lem-a1-integral-pullback-completed-comparison, added as a tool use. Step 6 now cites the same lemma for the matching shift comparisons. Fault 2 (minor): Step 2 took the kernel lattice as the realization on W, while the statement defines K_ψ=Lb^*L_ψ. It now takes L_{ψ,0} on A^1_k from def-fd-adic-fourier-realization and Lb^* by clause (1) of lem-pur-integral-operations-preserve-constructible. Steps 1, 4, 5 and 7 were checked and are correct. There are no new nodes, no cycle (closures checked) and no SGA. review_split passes on the patched copy. Maintainer note: the reviewed sibling lem-fd-base-change mixes the two pullbacks in the same way.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be a separated finite-type $k_0$-scheme, $V\\to S$ a vector bundle of rank $r$ with dual $V^\\vee$, let $\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ be a geometric point of $V^\\vee$ with $\\Omega$ algebraically closed, lying over the geometric point $\\bar s$ of $S$, and let $K\\in D^b_c(V,\\Lambda)$ for $\\Lambda=E$ or $\\Lambda=\\overline{\\mathbf Q}_\\ell$, the bounded constructible subcategory of $D(V_{\\mathrm{proét}},\\Lambda)$ ([det-def-sfb-bounded-constructible]). Write $V_{\\bar\\xi}=(V\\times_SV^\\vee)\\times_{p_2,V^\\vee}\\bar\\xi=V\\times_S\\operatorname{Spec}\\Omega$ for the fibre of $p_2$ over $\\bar\\xi$, an affine $r$-space over $\\Omega$ (for $S=\\operatorname{Spec}k$ and $V\\cong\\mathbf A^r_k$ it is $V_{\\bar k}$ when $\\bar\\xi$ is a $\\bar k$-point of $V^\\vee$, and the affine $r$-space over $\\Omega\\supset\\kappa(\\bar\\xi)$ otherwise). Then\n\n$$\n(\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\cong H^*_c\\bigl(V_{\\bar\\xi},\\,K|_{V_{\\bar\\xi}}\\otimes^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr)[r],\n$$\n\nwhere $\\langle x,\\xi\\rangle:V_{\\bar\\xi}\\to\\mathbf A^1$ is the pairing with the point $\\xi$, a linear form on $V_{\\bar\\xi}$.",
+  "proof": [
+   {
+    "text": "Form the cartesian square with $g=\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ and $p_2:V\\times_SV^\\vee\\to V^\\vee$. Its base change $p_2':V_{\\bar\\xi}\\to\\operatorname{Spec}\\Omega$ is the structure morphism of $V_{\\bar\\xi}\\cong\\mathbf A^r_\\Omega$, and $g':V_{\\bar\\xi}\\to V\\times_SV^\\vee$ is $(\\mathrm{pr}_V,\\bar\\xi)$. The stalk at $\\bar\\xi$ of a complex on $V^\\vee$ is its inverse image along $g$, so the compact-support base change on bounded constructible complexes ([sk-thm-sfb-shriek-base-change] for $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$; see also [sk-prop-sf-cbc]), applied to this square and to $p_1^*K\\otimes^L\\mathcal K_\\psi\\in D^b_c(V\\times_SV^\\vee,\\Lambda)$ ([thm-fd-transform-well-defined]), gives\n\n$$\n\\bigl(Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr)_{\\bar\\xi}\n=Lg^*Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\n\\cong Rp'_{2!}\\,Lg'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\n=R\\Gamma_c\\bigl(V_{\\bar\\xi},\\,g'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr).\n$$",
+    "uses": [
+     "sk-thm-sfb-shriek-base-change",
+     "thm-fd-transform-well-defined"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Here $g'^*p_1^*K=K|_{V_{\\bar\\xi}}$, and $g'^*\\mathcal K_\\psi=g'^*b^*\\mathcal L_\\psi$ is the Artin–Schreier sheaf of the function $b\\circ g'=\\langle x,\\xi\\rangle$ on $V_{\\bar\\xi}$, because the base change of the twist is the twist by the base-changed function ([def-fd-kernel]): the inverse image of $\\mathcal L_{\\psi,f}$ along a morphism $h$ is $\\mathcal L_{\\psi,f\\circ h}$, the Artin–Schreier covering being compatible with base change. With the shift $[r]$ of [def-fd-transform], this is the displayed formula. (The base change used is the proper, compact-support one along $\\bar\\xi\\to V^\\vee$, not smooth base change. If one passes instead through the strict henselization $\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$, the kernel on $V\\times_S\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$ is $\\mathcal L_{\\psi(\\langle x,\\xi_{\\mathrm{univ}}\\rangle)}$ for the tautological point $\\xi_{\\mathrm{univ}}$, not the pullback of $\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}$ from $V_{\\bar\\xi}$, and the passage to the closed fibre is again this compact-support base change.)",
+    "uses": [
+     "def-fd-kernel",
+     "def-fd-transform"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

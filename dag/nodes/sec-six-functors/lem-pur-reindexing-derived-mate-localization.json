@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-reindexing-derived-mate-localization",
+ "kind": "statement",
+ "title": "Localizing the ordinary isomorphism-square mate, including strict diagrams",
+ "statement": "For d and a chosen scheme square as in lem-pur-reindexing-ordinary-mate-sections, assume the ordinary purReindexingModuleMate is invertible. Then the specified ambient derived mate and specified strict-diagram derived mate are invertible. On every K-injective completed-module complex I, respectively every K-injective strict tower complex I, each derived mate satisfies the equation obtained by inserting its source right-derived unit, the ordinary mate applied degreewise and localized, and its target right-derived unit, with the canonical exact-pullback localization factors on both sides. The two equations are the literal final two clauses of PurCompletedReindexingSquare; no section formula or construction of a Cartesian witness is asserted. The coefficient datum and the concrete canonical maps are those of [def-weil-pbc-adic-coefficient-datum] and [def-pur-completed-reindexing-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 08BJ, 0FND and 07A7; extracted argument steps 7 and 8"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-cartesian-square",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "The inverse module reindexing is exact, so its right adjoint reindexing preserves K-injective complexes. The ordinary mate on such a complex computes the two derived direct images. Localize its transpose. The canonical pullback-composition representative formula and the pre-derived-adjunction fraction formula show that this is the transpose defining the specified ambient exchange. The unit-normalized representative equation follows; localizing the inverse ordinary mate proves invertibility.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the ordinary mate over the strict index category. Naturality ensures that it commutes with every transition, giving a single invertible transformation of actual strict diagrams. On the small diagram site its transpose is the same square map followed by the diagram counit. Exact reverse reindexing preserves diagram K-injectives. Apply the same fraction formula there to identify the localized transformation with exchangeTowerMate, including its representative unit equation and inverse.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-module-section-reindexing",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "agent-written specialization of the cited Stacks argument and extracted parent proof; preserves actual canonical normalization maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "For an isomorphism of schemes, completed coefficient module pullback agrees with section reindexing and preserves derived inverse limits, quotient augmentation and adjunction base change mates",
+   "results": "Eight results give ordinary scheme module pullback and generic sheaf pullback constructions; none concerns the project completed pro-etale coefficient operations or their specified normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Inverse image of module sheaves under a site equivalence, preservation of derived inverse limit and compatibility of base change mates with derived functors",
+   "results": "ExactFunctor derived descent APIs are available; no theorem identifies these published completed-ring operations and their specified normalization maps in one specialization.",
+   "date": "2026-10-25",
+   "verdict": "not a one-line Mathlib specialization"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "General equivalence infrastructure does not state the completed coefficient section and derived-unit normalization equations.",
+   "date": "2026-10-25",
+   "verdict": "not in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*mate|pushforwardPushforwardEquivalence|limit\\.post",
+   "results": "Sheaf.PushforwardContinuous supplies the action-transport equivalence, and limit.post supplies the ordinary limit map. Neither states the comparison with the project tensor pullback, completed quotient augmentation or specified derived mates.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurCompletedReductionReindexing",
+  "group": "W2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Stacks Tags 08BJ, 0FND and 07A7; extracted argument steps 7 and 8; constituent scheme-isomorphism normalization",
+   "via": [
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurReindexingDerivedMates",
+  "file": "lean/Sheaf/Paper/PurReindexingDerivedMates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purReindexingDerivedMates",
+  "statement": "theorem purReindexingDerivedMates {X' X Y' Y : Scheme.{t}} {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y} [IsIso v] [IsIso g] (sq : ChosenCartesianSquare v p' p g) [IsIso (purReindexingModuleMate d sq)] : PurCompletedReindexingSquareDerived d sq ∧ PurCompletedReindexingSquareDerivedTowers d sq ∧ PurCompletedReindexingSquareDerivedUnits d sq ∧ PurCompletedReindexingSquareDerivedTowerUnits d sq",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 split statements + relocated Data defs against the clone's old item module, the CompletedPullback/CompletedPullbackInterface definitions, the node JSONs and the 3 direct importers (all compiled against the delivered modules)"
+ }
+}

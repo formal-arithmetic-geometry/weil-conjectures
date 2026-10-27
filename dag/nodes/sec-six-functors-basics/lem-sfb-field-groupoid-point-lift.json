@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-field-groupoid-point-lift",
+ "kind": "statement",
+ "title": "Lift a field-groupoid point with both residue-field maps invertible",
+ "statement": "Let $k$ be a field [def-weil-field], $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and $(V,R,s,t,e,i,c)$ an absolute groupoid scheme [def-a1-groupoid-scheme]. For every point $r\\in|R|$ there exist a field extension $K/k$ [def-pc-field-extension] with $K$ algebraically closed (every nonconstant polynomial over $K$ has a root in $K$), and a point $r_K\\in|R_K|$, where $R_K=\\operatorname{Spec}K\\times_{V,t}R\\times_{s,V}\\operatorname{Spec}K$ [def-pc-fibre-product], with its induced groupoid operations, such that the middle projection $p:R_K\\to R$ sends $r_K$ to $r$ and both source and target induce field isomorphisms $K\\to\\kappa(r_K)$ [def-weil-residue-field]. No finite-type or perfectness assumption on $k$ or $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), both enumerated conclusions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\kappa(r)$ and write $a=s^*:k\\hookrightarrow E$, $b=t^*:k\\hookrightarrow E$ for the residue-field embeddings [def-weil-residue-field]. Apply [lem-sfb-large-algclosed-field-extension] to $E$ to choose an embedding $\\sigma:E\\hookrightarrow K$ into an algebraically closed field with $\\max(\\aleph_0,|E|)<\\operatorname{trdeg}_P K$. Define $\\iota=\\sigma a$ and give $K$ its $k$-extension structure through $\\iota$.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-sfb-large-algclosed-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, constructions (1)-(2): choose the overfield and its residue-field embedding."
+   }
+  },
+  {
+   "text": "The two embeddings $\\iota,\\sigma b:k\\hookrightarrow K$ need not agree. Since $a:k\\hookrightarrow E$ is injective, $|k|\\leq |E|$, whence $\\max(\\aleph_0,|k|)<\\operatorname{trdeg}_P K$. Therefore [lem-sfb-small-field-embeddings-conjugate], applied with $F=k$ and these two prescribed embeddings, supplies an automorphism $\\tau:K\\xrightarrow{\\sim}K$ satisfying $\\tau\\iota=\\sigma b$. This gives the precise commuting field diagram needed for the two changed object factors.",
+   "uses": [
+    "lem-sfb-small-field-embeddings-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (3): conjugate the two k-embeddings."
+   }
+  },
+  {
+   "text": "Let $j_r:\\operatorname{Spec}E\\to R$ be the canonical point morphism and put $h=j_r\\circ\\operatorname{Spec}\\sigma$. The field-point bijection [lem-weil-pbc-morphism-from-spec-field] gives image $r$. Naturality [lem-weil-pbc-residue-field-point-naturality], and contravariant functoriality of Spec [def-weil-affine-spectrum], give $sh=\\operatorname{Spec}(\\sigma a)=\\operatorname{Spec}\\iota$ and $th=\\operatorname{Spec}(\\sigma b)=\\operatorname{Spec}\\iota\\circ\\operatorname{Spec}\\tau$. Thus the triple $(\\operatorname{Spec}\\tau,h,\\mathrm{id}_{\\operatorname{Spec}K})$ defines $f:\\operatorname{Spec}K\\to\\operatorname{Spec}K\\times_{V,t}R\\times_{s,V}\\operatorname{Spec}K=R_K$ by the two fibre-product universal properties [def-pc-fibre-product]. It satisfies $pf=h$, $s_Kf=\\mathrm{id}$ and $t_Kf=\\operatorname{Spec}\\tau$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, translation of the displayed field diagram into the restricted groupoid."
+   }
+  },
+  {
+   "text": "Let $r_K$ be the image of the unique point under $f$. Then $p(r_K)=r$. Write $\\rho:\\kappa(r_K)\\hookrightarrow K$ for its field-point map [lem-weil-pbc-morphism-from-spec-field], and $\\alpha_s,\\alpha_t:K\\to\\kappa(r_K)$ for the residue maps of the two projections. Apply residue-field naturality to these projections and compare the factorizations of $s_Kf$ and $t_Kf$ through their canonical point morphisms. Uniqueness in the field-point bijection gives $\\rho\\alpha_s=\\mathrm{id}_K$ and $\\rho\\alpha_t=\\tau$, using the residue-field identification of the one-point scheme $\\operatorname{Spec}K$ [def-weil-affine-spectrum]. Since $\\rho$ is injective, the first equality also implies $\\alpha_s\\rho=\\mathrm{id}_{\\kappa(r_K)}$. Hence $\\alpha_s=\\rho^{-1}$ and $\\alpha_t=\\rho^{-1}\\tau$ are both isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, verification of both residue-field isomorphisms from the field diagram."
+   }
+  },
+  {
+   "text": "The restricted groupoid operations are induced by the original ones. Explicitly, an $H$-point is a triple $(u_t,g,u_s)$ with $t(g)=q\\circ u_t$ and $s(g)=q\\circ u_s$, where $q=\\operatorname{Spec}\\iota$. Its identity, inverse, and composition are $(u,e(qu),u)$, $(u_s,i(g),u_t)$, and $(u_2,c(g_2,g_1),u_0)$ on composable triples $(u_2,g_2,u_1),(u_1,g_1,u_0)$. These define scheme morphisms by [def-pc-fibre-product]; their laws follow componentwise from [def-a1-groupoid-scheme]. Thus the operations required in the statement exist, and the field and point above have all the asserted properties.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), statement: restriction of the groupoid; its operations by the fibre-product universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "lem-sfb-large-algclosed-field-extension",
+  "lem-sfb-small-field-embeddings-conjugate",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof; geometric translation and restriction operations written out from the cited definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A point in a groupoid scheme on a field lifts after field extension so both source and target induce residue field isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x = y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.residueFieldCongr h).hom) X\", \"doc\": \"For a scheme $X$ and points $x,y \\\\in X$, if $x = y$, the isomorphism between the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ induced by the equality of points is compatible with the scheme structure of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {X : AlgebraicGeometry.Scheme} →\\n      {x : ↥X} →\\n        (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing }) →\\n          [IsLocalHom (CommRingCat.Hom.hom f)] →\\n            X.residueField x ⟶ { carrier := K, commRing := \", \"doc\": \"Let $X$ be a scheme, $x$ a point in $X$, and $K$ a field. Given a local ring homomorphism $f \\\\colon \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$, this function constructs the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (K : Type u) [inst : Field K] (X : AlgebraicGeometry.Scheme)\\n  (f : AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map\\n        (AlgebraicGeometry.Scheme.descResidueField (AlgebraicGeom\", \"doc\": \"For a field $ K $, a scheme $ X $, and a morphism $ f : \\\\operatorname{Spec}(K) \\\\to X $, the composition of the morphism induced by the residue field at the closed point of $ \\\\operatorname{Spec}(K) $ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend two embeddings of a field into a residue field to an automorphism of a large algebraically closed extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.embEquivOfIsAlgClosed\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          (K : Type w) →\\n            [inst_3 : Field K] →\\n              [inst_4 : Algebra F K] → [Algebra.IsAlgebraic F E] → [IsAlgClosed K] → Field.Emb F E ≃ (E →ₐ[F] K)\", \"doc\": \"Given an algebraic field extension $ E $ of $ F $ and an algebraically closed field $ K $ containing $ F $, there is a bijection between the set of $ F $-embeddings from $ E $ to $ K $ and the set of \"}\n  {\"name\": \"Field.embProdEmbOfIsAlgebraic\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          (K : Type w) →\\n            [inst_3 : Field K] →\\n              [inst_4 : Algebra F K] →\\n                [inst_5 : Algebra E K] →\\n                  [IsScalarTower F E K] → [Alge\", \"doc\": \"Under the scalar tower condition where $ E $ is an algebraic extension of $ F $ and $ K $ is an algebraic extension of $ E $, there is a bijection between the set of pairs consisting of an $ F $-embed\"}\n  {\"name\": \"IsAlgClosed.lift_def\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {M : Type u_1} [inst : Field M] [inst_1 : IsAlgClosed M] {R : Type u_2} [inst_2 : CommRing R] [inst_3 : IsDomain R]\\n  {S : Type u_3} [inst_4 : CommRing S] [inst_5 : IsDomain S] [inst_6 : Algebra R S] [inst_7 : Algebra R M]\\n  [inst_8 : Module.IsTorsionFree R S] [inst_9 : Module.IsTorsionFree R M] [\", \"doc\": \"Given an algebraically closed field $ M $ and an algebraic extension $ S $ of a commutative domain $ R $, there exists an $ R $-algebra homomorphism from $ S $ to $ M $. This construction relies on $ \"}\n  {\"name\": \"Field.Emb.Cardinal.succEquiv\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"{F : Type u} →\\n  {E : Type v} →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] →\\n            [inst_3 : Algebra.IsAlgebraic F E] →\\n              (i : (Module.rank F E).ord.ToType) →\\n                (↥(\", \"doc\": \"For a field extension $ E $ over $ F $ and its algebraic closure $ \\\\overline{E} $, the equivalence between $ F $-algebra homomorphisms from the successor ordinal-indexed subfield $ E_{<i^+} $ to $ \\\\ov\"}\n  {\"name\": \"galLiftEquiv\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"galLiftEquiv_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"Field.embEquivOfAdjoinSplits\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          (K : Type w) →\\n            [inst_3 : Field K] →\\n              [inst_4 : Algebra F K] →\\n                {S : Set E} →\\n                  IntermediateField.adjoin F S = ⊤ →\\n     \", \"doc\": \"If the intermediate field $ E $ is generated by a subset $ S $ over $ F $, every element of $ S $ is integral over $ F $, and the minimal polynomial of each element of $ S $ splits in $ K $, then ther\"}\n  {\"name\": \"NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings\", \"type\": \"∀ (K : Type u_1) [inst : Field K] (A : Type u_2) [inst_1 : Field A] [CharZero A] [inst_3 : CharZero K]\\n  [Algebra.IsAlgebraic ℚ K] [IsAlgClosed A], Nonempty (K →+* A)\", \"doc\": \"Every algebraic extension $ K $ of the rational numbers $ \\\\mathbb{Q} $ with characteristic zero admits a ring homomorphism (field embedding) into any algebraically closed field $ A $. This asserts tha\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Field\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*field|field.*groupoid|groupoid.*point",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Groupoid scheme points become rational for both source and target after field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (S : AlgebraicGeometry.Scheme) → [X.Over S] → [Y.Over S] → X.RationalMap Y → Prop\", \"doc\": \"A rational map between schemes $X$ and $Y$ is over a scheme $S$ if it is compatible with the morphisms from $X$ and $Y$ to $S$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.Hom Y) : X ⤏ Y\", \"doc\": \"Given a morphism $ f : X \\\\to Y $ of schemes, this function constructs the corresponding rational map $ X \\\\dashrightarrow Y $ by first converting $ f $ into a partial map defined on the entire topologi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"{K : Type*} [Field K] {X : Scheme} {f₁ f₂ : Σ x : X.carrier, X.residueField x ⟶ .of K} :\\n  f₁ = f₂ ↔ ∃ e : f₁.1 = f₂.1, f₁.2 = (X.residueFieldCongr e).hom ≫ f₂.2\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(K : Type u) [Field K] (X : Scheme.{u}) : (Spec (.of K) ⟶ X) ≃ Σ x, X.residueField x ⟶ .of K\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IsIntegral X] [LocallyOfFiniteType sY] (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) : X ⤏ Y\", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.K\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"The fraction field component in the valuative criterion commutative square for a morphism of schemes, representing the field of fractions of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IrreducibleSpace X] (f : X.PartialMap Y) : f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of a scheme groupoid over Spec k lifts after field extension with both source and target residue maps isomorphisms",
+   "results": "{\"t\": \"2026-10-23T21:33:05Z\", \"tool\": \"leanfinder\", \"query\": \"A point of a scheme groupoid over Spec k lifts after field extension with both source and target residue maps isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr\", \"AlgebraicGeometry.Scheme.fromSpecResidueField.hcongr_2\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\"], \"digest\": \"dd5b89f4e0188f22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: scheme residue-field point parametrizations are partial inputs; the grep hits concern manifold or ordinary categorical groupoids, not scheme groupoids on a field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Field\"",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Field\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: scheme residue-field point parametrizations are partial inputs; the grep hits concern manifold or ordinary categorical groupoids, not scheme groupoids on a field."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*field|field.*groupoid|groupoid.*point",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"grep\", \"query\": \"groupoid.*field|field.*groupoid|groupoid.*point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/CategoryTheory/Groupoid/VertexGroup.lean\"], \"digest\": \"6dc19df5aa9653cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: scheme residue-field point parametrizations are partial inputs; the grep hits concern manifold or ordinary categorical groupoids, not scheme groupoids on a field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme groupoid on a field lift point source target residue field isomorphisms",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"leansearch\", \"query\": \"Scheme groupoid on a field lift point source target residue field isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residueFieldCongr\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.residueFieldCongr.congr_simp\", \"AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr\"], \"digest\": \"20b1d7332cc6439b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: scheme residue-field point parametrizations are partial inputs; the grep hits concern manifold or ordinary categorical groupoids, not scheme groupoids on a field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-open-image-closed",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: choose a field extension and a lifted point adapted to the groupoid and the chosen boundary point.",
+   "via": [
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-groupoid-point-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Extracted large algebraically closed overfield existence and conjugacy of small-field embeddings as two statement-only field-theory inputs. Constructed the actual restricted-groupoid point by its two universal properties, then proved both residue maps invertible from rho alpha_s = id and rho alpha_t = tau. Used existing Mathlib leaves for field-valued points and residue naturality. Verified restriction operations directly on triples.",
+  "blueprint": "The inherited support chain for det-thm-sf-ctf-stability-direct-images, proof (3), ends at Tag 04Q6, first proof paragraph, invoking 04LR. This split realizes that supporting lift by the three field-construction clauses of 04LR and the geometric diagram. blueprint_refs.py ancestor returns None; the inherited null ancestor and full via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-0a3beb81e",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-0a3beb81e (reviewer sub-agent of L); spot-checked: I read the source in full: Stacks 04LR (more-groupoids.tex, lemma-groupoid-on-field-explain-points), statement and proof. The item statement matches both of its conclusions, and the restriction R_K = Spec K x_{t} R x_{s} Spec K matches Stacks' R'. No hypothesis was added. The field diagram sigma*a = iota, tau*iota = sigma*b is Stacks' sigma∘s = i, tau∘i = sigma∘t. The delivery avoids the source's typo in (2) by choosing K over kappa(r) directly. Steps checked against the cited statements. Step 1: residue maps, then the large-overfield node. Step 2: |k| <= |E| through the injective map a, then the conjugacy node, giving tau with the correct direction. Step 3: field-point bijection plus naturality, and j_pt = id because kappa(pt) = k. Contravariance gives th = q∘Spec tau, and both fibre-product compatibilities hold for (Spec tau, h, id). Step 4: rho*alpha_s = id and rho*alpha_t = tau by uniqueness in the field-point bijection; rho is bijective, so both residue maps are isomorphisms. Step 5: the triple operations match def-a1's convention (c(a,b) with s(a) = t(b)). Both new statement-only nodes are true. The overfield is the algebraic closure of E(T_i) with |I| > max(aleph0, |E|). The conjugacy follows from relative algebraic closures of trdeg <= |F| < lambda, the tower law, and matched bases. Tested with F finite, with a = b, and with F transcendental and imperfect; the shift counterexample shows the bound is needed. B1-B7 hold. Neither node restates an item clause. I grepped the whole DAG for trdeg/aleph/automorphism and 04LR and found no duplicate. Mathlib Classification.lean lines 61 and 193 give only unspecified isomorphisms. No SGA source is cited, no tool_uses are needed, and no changes were made."
+ }
+}

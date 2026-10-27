@@ -1,0 +1,397 @@
+{
+ "id": "lem-sfb-smooth-trait-birational-immersion",
+ "kind": "statement",
+ "title": "Codimension-one criterion for open immersions between smooth trait models",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $F=\\operatorname{Frac}(R)$, $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $X$ and $Z$ be smooth separated finite-type $T$-schemes [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Fibres are scheme-theoretic base changes [def-pc-base-change]. Let $U\\subseteq X$ be open, containing $X_F$, and dense in both fibres of $X\\to T$. Then $U$ contains every $x\\in X$ with $\\dim\\mathcal O_{X,x}\\leq1$; here dimension is the supremum of lengths of chains of prime ideals in the local ring. If $f:X\\to Z$ is a $T$-morphism such that $f_F:X_F\\to Z_F$ is an isomorphism and $f|_U:U\\to Z$ is an open immersion, then $f$ is an open immersion [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.1 Theorem 5, proof of the no-shrinking assertion, printed p.114 (PDF p.120): codimension-one domain, differential determinant, and Zariski Main Theorem; the same argument applies to any morphism between smooth trait models; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix a uniformizer $\\pi$ of $R$. Every ideal of $R$ is principal, hence finitely generated, so $R$ is Noetherian; $T$ is Noetherian by the affine definition. The finite-type hypothesis makes $X$ Noetherian. A DVR has dimension one; since it is a local domain, its only primes are $(0)$ and $(\\pi)$ (any intervening prime would give a chain of length two). Thus every nonempty open of $T$ contains its generic point $\\eta$. Smoothness of $X\\to T$ implies flatness and local finite presentation, and hence openness. For every nonempty open $W\\subseteq X$, its image in $T$ is nonempty open and contains $\\eta$, so $W\\cap X_F\\ne\\varnothing$. In particular $X_F$ is dense in $X$, even when some fibres are empty.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-dvr-dimension-one",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (finite type over a Noetherian base), 01VF/01VE (smooth implies flat and lfp), 01UA (flat lfp open); algebra.tex Tag 00PD (DVR dimension). Density is the displayed elementary open-image argument."
+   }
+  },
+  {
+   "text": "Let $x\\in X$ with $\\dim\\mathcal O_{X,x}\\le1$. If $x$ lies over $\\eta$, then $x\\in X_F\\subseteq U$. Otherwise $x$ lies over $(\\pi)$. Apply the flat height formula to the Noetherian local rings $R\\to A=\\mathcal O_{X,x}$, at the maximal prime of $A$: it gives $\\dim A=1+\\dim(A/\\pi A)$. Thus $\\dim(A/\\pi A)=0$. This is the local ring of the special fibre at $x$. On an affine neighbourhood in that fibre, the prime corresponding to $x$ has no strictly smaller prime, by the localization correspondence and dimension zero. It is therefore a minimal prime, so $x$ is an irreducible-component generic point of the special fibre. The cited dense-fibre-open statement applies to the flat locally finitely presented morphism $X\\to T$ and its dense open $U\\cap X_s$, and puts $x$ in $U$. This proves the first assertion, including dimension-zero points.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sbc-flat-fibre-dimension-strata-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (dimension of flat base plus fibre), with morphisms.tex Tag 054U as in the dense-fibre-open node."
+   }
+  },
+  {
+   "text": "Assume now that $f$ has the asserted properties. The universal derivations give $c:f^*\\Omega^1_{Z/T}\\to\\Omega^1_{X/T}$, $a\\otimes db\\mapsto a\\,d(f^\\sharp b)$. Both modules are finite locally free: the differential sheaves are so by smoothness, and pulling back a local basis gives a local basis by the formula for module pullback. On $U$, the map $f$ identifies $U$ with an open subscheme of $Z$. Restriction of the affine differential construction to this open subscheme identifies the two differential modules and makes $c|_U$ an isomorphism. At any $x\\in X$, choose an open neighbourhood $W$ on which both modules are free of finite constant ranks $r$ and $s$. If $W$ is nonempty, step 1 gives a point in $W\\cap X_F\\subseteq U$; tensoring the isomorphism there with its residue field shows $r=s$. Thus on $W$, $c$ is represented by a square matrix.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-pc-module-pullback",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UM (relative differential sheaf), 02G1 (smooth differentials finite locally free); equality of local ranks is finite-dimensional linear algebra at a point of U."
+   }
+  },
+  {
+   "text": "Shrink $W$ to an affine neighbourhood of $x$ carrying these bases, and let $h$ be the determinant of the matrix. Its principal ideal defines a locally principal quasi-coherent ideal sheaf on $W$ (localize the principal ideal on basic affine opens). A matrix over a local ring is invertible precisely when its determinant is a unit, by the adjugate identity. Suppose $h$ is not a unit at $x$. Then $x$ lies in $V(h)$ and outside $U$, because $c|_U$ is invertible. By step 2 its stalk has dimension greater than one, in particular positive. The locally principal support lemma, applied on the locally Noetherian scheme $W$, gives a generalization $y\\in V(h)\\subseteq W$ with $\\dim\\mathcal O_{W,y}=1$. Open restriction identifies this local ring with $\\mathcal O_{X,y}$. Step 2 gives $y\\in U$, where $c$ and its determinant are invertible, contradicting $y\\in V(h)$. Hence $h$ is a unit at every point, and $c$ is an isomorphism on every stalk. Rank zero causes no exception: the empty determinant is 1.",
+   "uses": [
+    "lem-sbc-locally-principal-support-dimension-one",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BJG (lemma-find-point-codim-1), in its locally principal support form; determinant calculation is elementary."
+   }
+  },
+  {
+   "text": "The new differential criterion applies with base $T$, source $X$, target $Z$, and the given $T$-morphism $f$: both structure maps are smooth, and step 4 proves the required stalk isomorphism at every point. It gives an open neighbourhood of every point on which $f$ is etale. Etaleness is local on the source, so $f$ is etale. In particular $f$ is smooth, hence flat and locally of finite presentation.",
+   "uses": [
+    "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU (Jacobian criterion); BLR 2.2 Corollary 10 is the precise relative differential criterion; Tags 02GJ (etale local on source), 02GK (etale implies smooth)."
+   }
+  },
+  {
+   "text": "Put $P=X\\times_ZX$ and let $p_1:P\\to X$ be the first projection. This is etale, being a base change of $f$. The diagonal $\\Delta_f:X\\to P$ is closed: its square with $\\Delta_{X/T}:X\\to X\\times_TX$ and the natural map $P\\to X\\times_TX$ is Cartesian. Indeed, imposing equality of the two X-coordinates in P gives exactly X. Since $X\\to T$ is separated, $\\Delta_{X/T}$ is closed, and closed immersions remain closed under base change. Thus $f$ is separated by the diagonal definition. Separatedness is stable under base change, so $p_1$ is separated. Now $\\Delta_f$ is a section of the etale separated morphism $p_1$. The section lemma identifies $X$ with an open and closed subscheme of $P$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JY/01QR (closed immersion base change), 01KU (separated base change), 01KT (section of separated morphism); etale.tex Tag 024T (section of unramified morphism)."
+   }
+  },
+  {
+   "text": "The generic fibre $P_F$ is dense in $P$. In fact, for every nonempty open $V\\subseteq P$, the etale open-map property makes $p_1(V)$ a nonempty open of $X$. It meets $X_F$ by step 1, and a point in this intersection lifts to a point of $V\\cap P_F$. The equality $P_F=(X_F)\\times_{Z_F}(X_F)$ follows directly from the fibre-product universal property. Since $f_F$ is an isomorphism, the base change of $\\Delta_f$ is an isomorphism onto $P_F$. Hence the open and closed image of $\\Delta_f$ contains the dense subset $P_F$, so equals all of $P$. An open immersion onto the entire target is an isomorphism by its identification with an open subscheme. Consequently $\\Delta_f$ is an isomorphism. This makes $f$ a monomorphism: any $a,b:H\\to X$ with $fa=fb$ give $(a,b):H\\to P$, which factors through the diagonal, implying $a=b$. Finally step 5 supplies flatness and local finite presentation, so the flat-lfp-monomorphism criterion makes $f$ an open immersion.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-pe-flat-lfp-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G (flat locally finitely presented monomorphism is open immersion); morphisms.tex Tag 03WT (etale open map). Dense clopen diagonal argument replaces the final Zariski Main Theorem sentence of BLR 5.1 Theorem 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-dvr-dimension-one",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-flat-fibre-dimension-strata-cover",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sbc-locally-principal-support-dimension-one",
+  "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-pe-flat-lfp-monomorphism-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BJG plus the cited flat height, smooth differential, etale-section and flat-monomorphism statements; agent-written determinant and dense-diagonal proof of the no-shrinking assertion in BLR 5.1 Theorem 5 (local BLR copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of smooth separated schemes over a discrete valuation ring which is an isomorphism on the generic fibre and an open immersion on a fibrewise dense open is an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it is both an open immersion and a surjective morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    ∀ [∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)],\\n      AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If $ f: X \\to Y $ is a morphism of schemes that is a topological open embedding and induces isomorphisms on all stalks, then $ f $ is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    ∀ [∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)],\\n      AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If the underlying continuous map of a morphism between schemes is a topological open embedding and the induced maps on all stalks are isomorphisms, then the morphism is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A birational morphism between smooth models over a DVR is an open immersion if it is an isomorphism in codimension one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} : IsOpenImmersion f ↔ IsOpenEmbedding f ∧ ∀ x, IsIso (f.stalkMap x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an open immersion if and only if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the induced stalk map $f_x^\\\\#:\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an open immersion if and only if its underlying map of topological spaces is an open embedding, and for every point $x \\\\in X$, the induced map on stalks $f_x^\\\\#: \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(x : X) : IsIso (f.stalkMap x)\", \"doc\": \"A morphism $ f: X \\to Y $ between locally ringed spaces is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism restricts to isomorphisms on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenEmbedding\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenEmbedding f\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism yields isomorphisms of local rings on sta\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} {f : X ⟶ Y}\\n  (base_open : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)),\\n  (∀ (U : TopologicalSpace.Opens ↑↑X), CategoryTheory.IsIso (f.c.app (Opposite.op (⋯.functor.obj U)\", \"doc\": \"A morphism between presheafed spaces is an open immersion if its underlying continuous map is an open embedding and, for every open subset $ U $ of the domain space, the induced morphism between the p\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an open immersion if and only if the underlying continuous map is an open embedding and, for every point $ x \\\\in X $, the induced map on stalks at $ x $ is an i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsEtale\", \"IsBirational\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*[ée]tale|[ée]tale.*birational|codimension.*open.*immersion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian determinant purity for morphisms between smooth schemes over a trait open immersion in codimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between smooth schemes over a discrete valuation ring that is an open immersion on a fibrewise dense open and an isomorphism on the generic fibre is an open immersion",
+   "results": "{\"t\": \"2026-10-24T08:11:41Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between smooth schemes over a discrete valuation ring that is an open immersion on a fibrewise dense open and an isomorphism on the generic fibre is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\"], \"digest\": \"60896361e96bc42f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions and generic isomorphism facts do not state the codimension-one conclusion; of_flat_of_mono is an existing DAG tool used after the proof of etaleness and monomorphism, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism in codimension one between smooth models over a trait is an open immersion",
+   "results": "{\"t\": \"2026-10-24T08:13:46Z\", \"tool\": \"leansearch\", \"query\": \"An isomorphism in codimension one between smooth models over a trait is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.IsOpenImmersion.to_iso\", \"AlgebraicGeometry.IsOpenImmersion.isIso\"], \"digest\": \"01b601f907e67bf1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions and generic isomorphism facts do not state the codimension-one conclusion; of_flat_of_mono is an existing DAG tool used after the proof of etaleness and monomorphism, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T08:13:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions and generic isomorphism facts do not state the codimension-one conclusion; of_flat_of_mono is an existing DAG tool used after the proof of etaleness and monomorphism, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*[Eeé]tale|codimension.*open.*immersion",
+   "results": "{\"t\": \"2026-10-24T08:13:47Z\", \"tool\": \"grep\", \"query\": \"birational.*[Eeé]tale|codimension.*open.*immersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: open-immersion definitions and generic isomorphism facts do not state the codimension-one conclusion; of_flat_of_mono is an existing DAG tool used after the proof of etaleness and monomorphism, not a one-line specialization proving this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-birational-group-envelope",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.1 Theorem 5, proof of the no-shrinking assertion, printed p.114 (PDF p.120): codimension-one domain, differential determinant, and Zariski Main Theorem; the same argument applies to any morphism between smooth trait models",
+   "via": [
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-trait-birational-immersion",
+  "worker": "stage1",
+  "summary": "Proved the codimension-one clause using the flat local height formula, then the no-shrinking claim using a square differential matrix and the existing principal-support dimension-one lemma. Added only the arbitrary-base smooth cotangent criterion. An explicit dense clopen diagonal argument supplies the final etale birational open-immersion inference. Read all cited statements, checked edge cases and Mathlib search signatures; no exact finished project declaration found.",
+  "blueprint": "Inherited BLR no-shrinking support of the admissible-direct-image alteration chain in the current ctf-stability direct-image route. The item has no imported blueprint ancestor (ancestor command returns None); preserve its from.node=null and via chain. All-blueprint searches found no equivalent statement for the item or the new differential criterion.",
+  "tool_uses": [
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "General-purpose Discrete valuation rings and uniformizers used exactly in proof step(s) 1; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "General-purpose Locally Noetherian schemes used exactly in proof step(s) 1,4; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General-purpose A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used exactly in proof step(s) 1; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "General-purpose A discrete valuation ring has dimension one used exactly in proof step(s) 1; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "General-purpose Smooth morphisms are flat used exactly in proof step(s) 1,5; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "General-purpose Flat finite-presentation morphisms are open used exactly in proof step(s) 1; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "General-purpose Height formula for flat ring maps of Noetherian rings used exactly in proof step(s) 2; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-dimension-strata-cover",
+    "why": "General-purpose Dense fibre opens contain component generic points used exactly in proof step(s) 2; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "def-sc-relative-differential-sheaf",
+    "why": "General-purpose Sheaf of relative Kahler differentials used exactly in proof step(s) 3; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "General-purpose Pullback of a sheaf of modules along a morphism of schemes used exactly in proof step(s) 3; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "General-purpose Smooth relative differentials are finite locally free without constant rank used exactly in proof step(s) 3; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "def-sc-finite-locally-free-sheaf",
+    "why": "General-purpose Finite locally free sheaves with rank allowed to vary used exactly in proof step(s) 3; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-sbc-locally-principal-support-dimension-one",
+    "why": "General-purpose Dimension one generalization in locally principal support used exactly in proof step(s) 4; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-on-source",
+    "why": "General-purpose Etaleness is local on the source used exactly in proof step(s) 5; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "General-purpose An etale morphism is smooth with zero-dimensional fibres used exactly in proof step(s) 5; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "General-purpose The base-change functor between small etale sites commutes with finite limits used exactly in proof step(s) 6; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "General-purpose Base change of a closed immersion is a closed immersion used exactly in proof step(s) 6; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "General-purpose Separated morphisms are stable under base change (Stacks 01KU (3)) used exactly in proof step(s) 6; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "General-purpose A section of a separated etale morphism is an open and closed immersion used exactly in proof step(s) 6; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "General-purpose Etale morphisms are open used exactly in proof step(s) 7; the item unit has no replacement for this generic scheme/ring/module fact."
+   },
+   {
+    "node": "lem-pe-flat-lfp-monomorphism-open",
+    "why": "General-purpose Flat monomorphisms locally of finite presentation are open immersions used exactly in proof step(s) 7; the item unit has no replacement for this generic scheme/ring/module fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-dvr-dimension-one",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-flat-fibre-dimension-strata-cover",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sbc-locally-principal-support-dimension-one",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-pe-flat-lfp-monomorphism-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-6936b77b3",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-6936b77b3 (reviewer sub-agent of L); spot-checked: PASS: I read the item and the one new node in full, plus every cited statement. All 7 steps are correct and every hypothesis is in force. (1) Spec R is Noetherian and has two points; smooth implies flat+lfp, so the map is open and X_F is dense in X. (2) The flat height formula (Stacks 00ON, read) gives dim A = 1 + dim A/πA. So a special-fibre point with dim ≤ 1 is a generic point of a component of the special fibre, and flat-fibre-dimension-strata-cover puts it in U. A dim-0 special-fibre point cannot exist. (3) c is an isomorphism on U, and the ranks are equal on a constant-rank neighbourhood because X_F is dense and lies in U. (4) A non-unit determinant at x forces dim O_x ≥ 2; locally-principal-support (Stacks pione 0BJG, read at pione.tex:4990) then gives a dim-1 generalization in V(h), which lies in U: contradiction. (5) The new criterion makes f étale, hence flat+lfp. (6) Δ_f is the base change of Δ_{X/T}, so f and p_1 are separated, and the section lemma makes Δ_f clopen. (7) P_F is dense because p_1 is open, so Δ_f is surjective and an isomorphism; f is a monomorphism, and flat-lfp-mono makes it an open immersion. The new node lem-sfb-smooth-morphism-cotangent-isomorphism-etale is true (BLR 2.2 Cor. 10 / EGA IV 17.11.2; checked on Frobenius, open immersions and mismatched ranks). It is statement-only and self-contained, it is not a clause of the item, and a DAG search found no duplicate (it differs from smooth-zero-differentials-affine-open-etale, pur-etale-at-point-from-differentials, a1-nonzero-differential-generically-etale, etale-localization-relative-differentials and trf-cotangent-isomorphism-coordinate-lift). I accepted the generic tool_uses. No SGA source is used. Notes: the BLR copy is not local (WANTED), so I could not check the page; blueprint from.node null is inherited from the base node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTraitBirationalImmersion",
+  "declaration": "AlgebraicGeometry.smooth_trait_birational_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTraitBirationalImmersion.lean",
+  "statement": "theorem smooth_trait_birational_immersion (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (X Z : Over (Spec (CommRingCat.of R))) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (U : X.left.Opens) (hgeneric : Set.range (pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) ⊆ (U : Set X.left)) (hdense : ∀ t : Spec (CommRingCat.of R), Dense ((X.hom.fiberι t) ⁻¹' (U : Set X.left))) : (∀ x : X.left, ringKrullDim (X.left.presheaf.stalk x) ≤ 1 → x ∈ U) ∧ (∀ f : X ⟶ Z, IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))).map f).left → IsOpenImmersion (U.ι ≫ f.left) → IsOpenImmersion f.left)",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b2a59a43",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Only the node's lean field differs from side-live; there is one module with one sorried theorem and no definitions. The lean.statement appears verbatim in the file. Clause check matches the node: DVR with canonical FractionRing; Spec R; X, Z in Over with Smooth, IsSeparated, LFT and QC (dep-record conventions); generic fibre as pullback.fst along Spec F→T, contained in U; density via Scheme.Hom.fiberι on all t, which for a DVR means exactly both fibres; first conjunct ringKrullDim of the stalk ≤ 1 → x ∈ U, stated before f; f : X ⟶ Z over T; IsIso of (Over.pullback _).map f; IsOpenImmersion (U.ι ≫ f.left) → IsOpenImmersion f.left. The mathematics is true by the BLR 5.1 Thm 5 argument. Edge cases (empty X or fibres, U equal to X, relative dimension 0, single universe u) are fine. Docstrings carry the source place, blueprint tag and all 7 steps. Proof-dependency imports exist. No hollow definitions or local proofs. No recompile, since no file was changed."
+ }
+}

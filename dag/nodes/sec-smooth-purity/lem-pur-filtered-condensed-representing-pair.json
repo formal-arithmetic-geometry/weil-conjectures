@@ -1,0 +1,197 @@
+{
+ "id": "lem-pur-filtered-condensed-representing-pair",
+ "kind": "statement",
+ "title": "Filtered descent of condensed representing pairs and their chosen-adjoint transpose",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a $k$-morphism $f:X\\to Y$ between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions]. Fix a finite extension $E/\\mathbf Q_\\ell$, valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Choose a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{g}Y)$, with $j$ open and $g$ proper [def-weil-compactifications-refinements]. Put $\\Omega=\\overline{\\mathbf Q}_\\ell$. For finite coefficient fields $H\\subset\\Omega$, let $\\mathcal C_H^c(T)$ be the bounded constructible condensed-module categories, with scalar extensions $T^T_{H,H'}$; let $\\mathcal C_\\Omega^c(T)$ use the finite-extension-valued condensed ring $\\underline\\Omega$, whose sections on a profinite set are continuous maps with image contained in one finite intermediate field. Use exactly the filtered two-colimit, morphism descent and eventual-equality comparisons of [prop-weil-pbc-qbar-condensed-two-colimit]. Let $P_H^c=Rg_{*,H}j_{!,H}$ and $P_\\Omega^c=Rg_{*,\\Omega}j_{!,\\Omega}$ with their specified scalar comparisons [lem-pur-compact-support-condensed-realization].\n\nFix $M_E^c\\in\\mathcal C_E^c(X)$ and $L_E^c\\in\\mathcal C_E^c(Y)$. For each finite $H\\supset E$, put $M_H^c=T^X_{E,H}M_E^c$, $L_H^c=T^Y_{E,H}L_E^c$. Suppose given bijections natural in $C\\in\\mathcal C_H^c(X)$,\n$$\\beta_{H,C}:\\operatorname{Hom}_H(C,M_H^c)\\xrightarrow{\\sim}\\operatorname{Hom}_H(P_H^c C,L_H^c),$$\ncompatible with every finite extension, with counits $t_H=\\beta_{H,M_H^c}(1)$ equal to the scalar extensions of $t_E$. Put $M_\\Omega^c=T^X_{E,\\Omega}M_E^c$ and $L_\\Omega^c=T^Y_{E,\\Omega}L_E^c$. There is a unique natural bijection\n$$\\beta_{\\Omega,C}:\\operatorname{Hom}_\\Omega(C,M_\\Omega^c)\\xrightarrow{\\sim}\\operatorname{Hom}_\\Omega(P_\\Omega^c C,L_\\Omega^c)$$\ninduced by the filtered colimits of the $\\beta_{H,C_H}$. It is independent of a finite-field model $C_H$ and of its morphism representatives, and has counit $t_\\Omega$ the extension of $t_E$. It is natural in maps of the two represented objects and compatible families of the finite representing maps.\n\nFor any specified adjunction $P_\\Omega^c\\dashv J$ with counit $\\epsilon^J$, the transpose $c:M_\\Omega^c\\to J(L_\\Omega^c)$ of $t_\\Omega$ is invertible and satisfies $\\epsilon^J\\circ P_\\Omega^c(c)=t_\\Omega$. It is natural for those data maps and depends on the specified counit. This assertion assumes finite-field representing bijections, with no integral objects or exceptional towers in its hypotheses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered-colimit Hom display, descent of morphisms and eventual equality; sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md for the final transpose. Agent generalization to supplied representing pairs, returned item proof Steps 11–12."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-condensed-e-module-category",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the canonical scalar comparisons using lem-pur-filtered-condensed-canonical-comparisons. For each supplied compatible pair define B_C by Equiv.ofBijective from the explicit extended-counit map, using lem-pur-filtered-condensed-counit-bijective. The counit is a real scalar-extended morphism, with no object chosen from a mere existence theorem.",
+   "uses": [
+    "lem-pur-filtered-condensed-canonical-comparisons",
+    "lem-pur-filtered-condensed-counit-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-stage value formula is lem-pur-filtered-condensed-counit-finite-formula. Functoriality proves naturality and the identity value. For uniqueness, at H=E the induced formula fixes B on the invertible transitivity map e from T_E,Omega(T_E,E M) to T_E,Omega M. Naturality and cancellation of P(e) fix B_M(1), and then fix B_C(u) for all C,u. This avoids extra morphism descent for uniqueness.",
+   "uses": [
+    "lem-pur-filtered-condensed-counit-finite-formula"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality transports the induced formula through any model isomorphism, proving the complete model-independence clause. For a pair map at its common field H, apply the two induced formulas to a and to the identity. Finite pair-map compatibility and the tensor transitivity inverse identities yield the square at e. Cancel P(e) and use naturality to obtain it at every C,u.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a specified adjunction P adjoint J, postcomposition with the transpose of the extended counit is the composite B_C followed by adj.homEquiv. Both are bijections, so Mathlib isIso_of_yoneda_map_bijective makes the transpose invertible. adj.homEquiv.symm_apply_apply gives the counit equation and injectivity gives uniqueness. Replace the second bijection in a pair-map square by its unique explicit counit formula; apply left and right naturality of adj.homEquiv to the counit square. This proves transpose naturality. The IsDescent conjunction and uniqueness give the original exists-unique statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-filtered-condensed-canonical-comparisons",
+  "lem-pur-filtered-condensed-counit-finite-formula",
+  "lem-pur-filtered-condensed-counit-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4.; final transpose from sk-prop-sp-unique-adjoint-categorical, Transposes/Naturality/Uniqueness. Uniqueness and pair-map calculations formalized directly by D2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible representing Hom bijections over finite l-adic fields descend through a filtered two colimit to condensed algebraic closure coefficients and a chosen right adjoint",
+   "results": "[{\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}, {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}, {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}, {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}, {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}, {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}, {\"name\": \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type (u + 1)) →\\n  (S : Profinite) → CategoryTheory.Limits.IsColimit ((Condensed.locallyConstantPresheaf X).mapCocone S.asLimitCone.op)\", \"doc\": \"For a profinite space $ S $, the locally constant presheaf on the opposite category of profinite spaces satisfies the colimit condition with respect to the diagram formed by the discrete quotients of \"}, {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : Type u) (S : LightProfinite)\\n  (s : CategoryTheory.Limits.Cocone (S.diagram.rightOp.comp (LightCondensed.locallyConstantPresheaf X))) (n : ℕ)\\n  (f : LocallyConstant (↑(S.diagram.obj (Opposite.op n)).toTop) X),\\n  (LightCondensed.isColimitLocallyConstantPresheafDiagram X S).desc s\\n      (Locall\", \"doc\": \"For a light profinite space $ S $ and a cocone $ s $ over the diagram $ S.\\\\text{diagram}.\\\\text{rightOp} \\\\circ \\\\text{locallyConstantPresheaf}(X) $, the colimit condition holds such that for any natural\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: colimits of representable functors and finitely presentable object Hom lemmas do not provide descent through these coefficient two-colimit categories with arbitrary test objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability at a fixed object and its counit descend through the filtered colimit of constructible coefficient categories",
+   "results": "[{\"name\": \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor D C} →\\n          {J : Type u_1} →\\n            [inst_2 : CategoryTheory.Category.{v_1, u_1} J] →\\n              {R : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{J}, \\\\mathcal{C}, \\\\mathcal{D}$, a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ with a partial left adjoint, and a diagram $R: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ where $F$ admits a part\"}, {\"name\": \"preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"For any commutative ring $ R $ and an object $ S = (T, f: R \\to T) $ in the under category of $ R $, if the ring homomorphism $ f $ is finitely presented, then the coyoneda functor applied to the oppos\"}, {\"name\": \"CommRingCat.preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an object in the under category $ R/\\\\mathsf{CommRing} $. If the ring homomorphism $ S.\\\\mathsf{hom} : R \\\\to S $ is finitely presented, then the Coyoneda embedd\"}, {\"name\": \"preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"Let $\\\\mathcal{J}$ be a filtered category, $R$ a commutative ring, and $S$ an object in the under category $R/\\\\mathcal{C}$ of commutative rings. If the ring homomorphism $\\\\text{Hom}(S)$ is finitely pre\"}, {\"name\": \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Ind\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} [inst_1 : CategoryTheory.SmallCategory J]\\n  [CategoryTheory.IsFiltered J] {D : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone D}\\n  (hc : CategoryTheory.Limits.IsColimit c) {X A : C} {p : X ⟶ A},\\n  CategoryTheory.Mor\", \"doc\": \"Let $\\\\mathcal{J}$ be a small filtered category and $\\\\mathcal{C}$ a category. Given a diagram $D: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with a colimit cocone $c$ having apex $N$, objects $X,A \\\\in \\\\mathcal{C}$, \"}, {\"name\": \"CommRingCat.preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"In the category of commutative rings, if an object $ S $ in the under category of $ R $ is finitely presented over $ R $, then the coyoneda functor associated to $ S $ preserves colimits of diagrams $\"}, {\"name\": \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"module\": \"Mathlib/CategoryTheory/Presentable/ColimitPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} {I : J → Type w}\\n  [inst_1 : CategoryTheory.SmallCategory J] [inst_2 : (j : J) → CategoryTheory.SmallCategory (I j)]\\n  {D : CategoryTheory.Functor J C} {P : (j : J) → CategoryTheory.Limits.ColimitPresentation (I j) (D.obj j)} {j j\", \"doc\": \"For a total colimit presentation constructed from a family of colimit presentations, given indices $j,j'\\\\in J$, an object $i\\\\in I_j$, and a morphism $u:j\\\\to j'$ in the base category $J$, if the indexi\"}, {\"name\": \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"module\": \"Mathlib/CategoryTheory/Presentable/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} [inst_1 : CategoryTheory.SmallCategory J]\\n  [CategoryTheory.IsFiltered J] {D : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone D}\\n  (hc : CategoryTheory.Limits.IsColimit c) {X A : C} (p : X ⟶ A) (s : (CategoryTheory.\", \"doc\": \"Let $\\\\mathcal{J}$ be a small filtered category, $D: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ a diagram with colimit cocone $c$, and $X$ a finitely presentable object in $\\\\mathcal{C}$. Given morphisms $p: X \\\\to A$\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: colimits of representable functors and finitely presentable object Hom lemmas do not provide descent through these coefficient two-colimit categories with arbitrary test objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiltered\", \"representable\"",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "No match: colimits of representable functors and finitely presentable object Hom lemmas do not provide descent through these coefficient two-colimit categories with arbitrary test objects."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*represent|represent.*colimit|colimit.*adjunction",
+   "results": "[{\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"78\", \"text\": \"attribute [instance] RepresentablyFlat.cofiltered RepresentablyCoflat.filtered\"}, {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"271\", \"text\": \"/-- Representably coflat functors preserve finite colimits. -/\"}, {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"287\", \"text\": \"    RepresentablyCoflat F ↔ PreservesFiniteColimits F :=\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"128\", \"text\": \"    simp [Cofork.IsColimit.homIso, Adjunction.homEquiv_unit]\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"line\": \"323\", \"text\": \"    apply (Adjunction.leftAdjoint_preservesColimits (monadicAdjunction R)).1\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"line\": \"607\", \"text\": \"    HasColimit ((F ⋙ Comonad.comparison (comonadicAdjunction R)) ⋙ Comonad.forget _) := by\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"line\": \"611\", \"text\": \"    [HasColimit (F ⋙ R)] : HasColimit (F ⋙ Comonad.comparison (comonadicAdjunction R)) :=\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"line\": \"612\", \"text\": \"  Comonad.hasColimit_of_comp_forget_hasColimit (F ⋙ Comonad.comparison (comonadicAdjunction R))\"}, {\"file\": \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"line\": \"618\", \"text\": \"  createsColimitsOfNatIso (Comonad.comparisonForget (comonadicAdjunction R))\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"line\": \"134\", \"text\": \"    -- Our goal is now an equation between equivalence classes of representatives of a colimit,\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"line\": \"178\", \"text\": \"    -- and we record that these representatives, when mapped back into the relevant colimits,\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"line\": \"195\", \"text\": \"    -- `(f, g j)` and `(𝟙 j', g j')`, both represent the same element in the colimit.\"}, {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"line\": \"145\", \"text\": \"    haveI : HasColimitsOfShape J D := Adjunction.hasColimitsOfShape_of_equivalence e.inverse\"}, {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"line\": \"147\", \"text\": \"  have : HasColimitsOfShape J D := Adjunction.hasColimitsOfShape_of_equivalence e.inverse\"}, {\"file\": \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"line\": \"12\", \"text\": \"# Pulling back filteredness along representably flat functors\"}, {\"file\": \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"line\": \"15\", \"text\": \"filteredness of `D` implies filteredness of `C`. Dually, if `F` is representably flat,\"}, {\"file\": \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"line\": \"18\", \"text\": \"Transferring (co)filteredness *along* representably (co)flat functors is given by\"}, {\"file\": \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"line\": \"19\", \"text\": \"`IsFiltered.of_final` and its dual, since every representably flat functor is final and every\"}, {\"file\": \"Mathlib/CategoryTheory/Filtered/Flat.lean\", \"line\": \"35\", \"text\": \"lemma isFiltered_of_representablyCoflat [IsFiltered D] [RepresentablyCoflat F] : IsFiltered C :=\"}, {\"file\": \"Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean\", \"line\": \"12\", \"text\": \"# Preservation of colimits and reflective adjunctions\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"94\", \"text\": \"/-- `HasColimit F` represents the mere existence of a colimit for `F`. -/\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"728\", \"text\": \"  HasColimit.mk ⟨_, IsColimit.ofCorepresentableBy ((colimit.isColimit F).corepresentableBy.ofIso h)⟩\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"277\", \"text\": \"  toFun P := IsColimit.ofIsoColimit (IsColimit.ofLeftAdjoint h.symm.toAdjunction P)\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"279\", \"text\": \"  invFun := IsColimit.ofLeftAdjoint h.toAdjunction\"}, {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"391\", \"text\": \"  IsColimit.ofLeftAdjoint (Cocone.whiskeringEquivalence e).toAdjunction P\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: colimits of representable functors and finitely presentable object Hom lemmas do not provide descent through these coefficient two-colimit categories with arbitrary test objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible representing Hom bijections over finite l-adic fields descend through a filtered two colimit to condensed algebraic closure coefficients and a chosen right adjoint",
+   "results": "[{\"name\": \"AddCommGrpCat.Colimits.isColimit_of_bijective_desc\", \"module\": \"Mathlib.Algebra.Category.Grp.Colimits\", \"type\": \"[DecidableEq J] (h : Function.Bijective (Quot.desc F c)) : IsColimit c\", \"doc\": \"In the category of additive commutative groups, a cocone is a colimit if the canonical additive homomorphism from the colimit quotient to its apex is bijective. This bijectivity ensures the universal \"}, {\"name\": \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mkₐ R (I ^ n)).comp (liftAlgHom I f hf) = f n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\\\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, there exists an $ R $-algebra homomorphism $ A → S $ ob\"}, {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}, {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \": functor R ⊣ underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}, {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib.Condensed.Module\", \"type\": \": free R ⊣ forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}, {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib.Condensed.Light.InternallyProjective\", \"type\": \"(A B : LightCondMod.{u} R) (S : LightProfinite) :\\n  (A ⟶[LightCondMod R] B).val.obj ⟨S⟩ ≃ ((A ⊗ ((free R).obj S.toCondensed)) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}, {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}, {\"name\": \"LightCondensed.lanPresheafNatIso_hom_app\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(hF : ∀ S : LightProfinite, IsColimit <| F.mapCocone (coconeRightOpOfCone S.asLimitCone)) (S : LightProfiniteᵒᵖ) :\\n  (lanPresheafNatIso hF).hom.app S = colimit.desc _ (LightProfinite.Extend.cocone _ _)\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ satisfying the colimit condition $ hF $, for any object $ S $ in the opposite category $ \\\\text{LightProfinite}^{\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: colimits of representable functors and finitely presentable object Hom lemmas do not provide descent through these coefficient two-colimit categories with arbitrary test objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "12 hits: CategoryTheory.Adjunction.CoreHomEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit; CategoryTheory.Adjunction.mkOfHomEquiv; CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.homEquiv'; CategoryTheory.Adjunction.CoreHomEquiv.homEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit",
+   "date": "2026-10-22",
+   "verdict": "No match: general Hom/adjunction or ordinary filtered-colimit facts do not state the coefficient two-colimit representing-pair descent. Adjunction.homEquiv and RepresentableBy.homEquiv_eq cover elementary formulas only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible natural representing Hom bijections descend along a filtered two colimit of categories and determine the counit normalized isomorphism to a chosen right adjoint",
+   "results": "8 hits: CategoryTheory.Limits.colimConstAdj; CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv; CategoryTheory.ObjectProperty.isColocal_adj_counit_app; CategoryTheory.Limits.IsColimit.ofLeftAdjoint; CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit; CategoryTheory.LiftLeftAdjoint.constructLeftAdjoint; CategoryTheory.Functor.leftAdjointObjIsDefined_colimit; CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal",
+   "date": "2026-10-22",
+   "verdict": "No match: general Hom/adjunction or ordinary filtered-colimit facts do not state the coefficient two-colimit representing-pair descent. Adjunction.homEquiv and RepresentableBy.homEquiv_eq cover elementary formulas only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural representing Hom bijections descend from finite coefficient fields through a filtered two colimit of categories",
+   "results": "8 hits: ModuleCat.FilteredColimits.colimitCocone; CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits; AddGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommGrpCat.isColimit_iff_bijective_desc; FGModuleCat.instFiniteHom; RingCat.FilteredColimits.colimitCocone; CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Limits.ColimitPresentation.Total.Hom",
+   "date": "2026-10-22",
+   "verdict": "No match: general Hom/adjunction or ordinary filtered-colimit facts do not state the coefficient two-colimit representing-pair descent. Adjunction.homEquiv and RepresentableBy.homEquiv_eq cover elementary formulas only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural equivalence of representable Hom functors identifies the representing objects by the counit and filtered category descent preserves the equivalence",
+   "results": "8 hits: CategoryTheory.Functor.RepresentableBy.isRepresentedBy; CategoryTheory.Functor.representableByEquiv; CategoryTheory.Functor.IsRepresentedBy.iff_exists_representableBy; CategoryTheory.Functor.RepresentableBy.homEquiv_eq; CategoryTheory.Functor.RepresentableBy.homEquiv; CategoryTheory.Functor.IsRepresentedBy.representableBy_homEquiv_apply; CategoryTheory.Functor.reprW; CategoryTheory.Functor.RepresentableBy.toIso",
+   "date": "2026-10-22",
+   "verdict": "No match: general Hom/adjunction or ordinary filtered-colimit facts do not state the coefficient two-colimit representing-pair descent. Adjunction.homEquiv and RepresentableBy.homEquiv_eq cover elementary formulas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-exceptional-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 3, algebraic-closure coefficient transport; sk-thm-sp-qbar proof, filtered-colimit Hom display and last paragraph on model independence; unique-adjoint categorical proof, Transposes/Inverse/Naturality, applied at the supplied represented object.",
+   "via": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-filtered-condensed-representing-pair",
+  "worker": "stage1",
+  "summary": "Constructed the descended bijection by its globally defined extended counit; proved bijectivity from finite-stage surjectivity and eventual equality, and checked model, morphism and data-map independence. Proved invertibility and naturality of the transpose with explicit inverse calculations at the single represented object. No new nodes and no assumption of a global finite-stage right adjoint. Statement and inherited searches retained.",
+  "blueprint": "Realizes sk-thm-purity-transport Step 3 and the filtered Hom-colimit/model-independence paragraphs of sk-thm-sp-qbar; the final fixed-object counit transpose follows the Transposes, Inverse and Naturality paragraphs of sk-prop-sp-unique-adjoint-categorical.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
+    "why": "The supplied condensed-category two-colimit comparison is used as a black box for object/morphism descent and eventual equality. Raw rationalized coefficient categories do not give this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-552203042",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-552203042 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item has 8 steps and there are no new nodes. The statement and stmt_deps are byte-identical to side-live, where the node is still unsplit, so nothing supersedes this delivery. No repair note for the item. Neither the item, its parent nor any node it cites is on route-pivot-dropped.txt, and there is no SGA. Sources read: main-20261015 sk-thm-sp-qbar.proof.md (Hom-colimit display and the model-independence paragraph) and sk-prop-sp-unique-adjoint-categorical.proof.md (Transposes, Inverse, Naturality); the latter matches Steps 7–8 at one represented object. Cited statements checked: (1) prop-weil-pbc-qbar-condensed-two-colimit: Noetherian hypothesis met via finite-type and lem-wf-affine-noetherian-components chart stabilization; object descent, morphism descent and eventual equality used on the correct ambient X or Y; same Ω-ring and categories as the statement. (2) lem-pur-compact-support-condensed-realization: preservation of the bounded constructible categories and the projection comparison λ for any finite H and for Ω, with tower coherence. The direction of λ is correct, so t_Ω = T(t_E)∘λ^{-1}. I recomputed Steps 3, 4, 6, 7 and 8. Step 3: B_D(T u_H) = T(β_H u_H)∘λ^{-1} from λ naturality plus tower coherence. Step 4: injectivity via eventual equality on Y, compatibility of β and finite injectivity. Step 7: dc = 1 and cd = 1 by injectivity of B and A. Step 8: c'a and J(b)c have the same transpose. The elementary marks are justified. Edge cases tested: zero objects, empty X, H not containing E, JL modeled only over a larger field, unrelated models. Accepted tool use: prop-weil-pbc-qbar-condensed-two-colimit, a generic descent comparison already in stmt_deps. Duplicate scan: lem-pur-transport-qbar-common-stage-counit is smooth/purity-specific on ordinary D_ctf; lem-sbc-coherent-pair-functor-descent and lem-sf-framework-common-stage-descent descend functors; det-sp-unique-right-adjoint needs global adjoints. None is a duplicate. Advisory only: the worker rewrote the inherited specific blueprint.from.place to another accurate place; via is unchanged. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FilteredCondensedRepresentingPair",
+  "declaration": "WeilConjectures.FilteredCondensedRepresentingPair.filtered_condensed_representing_pair",
+  "declarations": [
+   "WeilConjectures.FilteredCondensedRepresentingPair.filtered_condensed_representing_pair"
+  ],
+  "file": "lean/Sheaf/Paper/FilteredCondensedRepresentingPair.lean",
+  "statement": "theorem filtered_condensed_representing_pair : ∃ s : ScalarComparisons l k c, s.IsCanonical l k c ∧ ∀ (E : PadicAlgCl.FiniteIntermediateField l) (d : Pair l k c s E), d.IsCompatible l k c → ∃! B : d.OmegaBijections l k c, d.IsDescent l k c B",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19706b840",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read the item node, the delivered module and report, and the stmt_dep declarations (TwoColimit, BoundedConstructible, CondensedCompactSupportProjection, CompactSupportCondensedRealization). Only the new item module and the node's lean field changed. Every hypothesis matches the node with nothing stronger. The scalar comparisons are under an existential but pinned uniquely to condensedProjection by IsCanonical. IsCompatible's counit formula is equivalent to naturality plus the counit condition. ∃! B is genuine because the global formula fixes the bijections. The model/representative clause, data-map naturality, and the adjunction-transpose clauses (invertible, counit equation, uniqueness, naturality, explicit dependence on the counit) all match the node. Edge cases and universes are fine. Docstrings and the 8-step plan are present, the proof is sorry only, and the statement is verbatim. Advisory only: condensedProjection and the bounded-constructible compact-support functor are owned by nodes outside stmt_deps but reach the item through the realization stmt_dep; proof-only Mathlib imports stand in for lem-wf-affine-noetherian-components; the report cites blueprint/latest paths. No recompile: no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6d2d5",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100852-L-3631318",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone item file (verbatim move, tags only); item theorem statement vs original; 3 sorried split lemmas vs item's IsDescent/IsCanonical clauses (each implied, none a restatement); 5 direct importers compiled against delivered modules"
+ }
+}

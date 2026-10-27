@@ -98,7 +98,32 @@
   "def-pc-picard-presheaf"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.RationalPoint",
+     "lines": [
+      144,
+      192
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-pic-split",
  "split_report": {
@@ -140,5 +165,25 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $X$ a proper scheme over $k$ (for instance a\nsmooth projective curve over\n$k$) with $H^0(X,\\mathcal{O}_X)=k$, and $T$ a scheme over $k$. Then the\ncanonical map $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism, where\n$f_T:X_T\\to T$ is the structure morphism of the base change.",
+  "proof": [
+   {
+    "text": "Since $X$ is proper over $k$, $f_T$ is proper, hence quasi-compact and\nquasi-separated, so $f_{T,*}\\mathcal{O}_{X_T}$ is quasi-coherent\n([lem-pc-finite-support-hi](1)). To identify it with $\\mathcal{O}_T$ it\nsuffices to show that its sections over every affine open\n$V=\\operatorname{Spec}(A)\\subseteq T$ equal $A$ compatibly with localization: by\n[lem-pc-flat-base-change-cohom] applied to $X$ proper over $k$,\nthe flat $k$-algebra $A$ and $\\mathcal{F}=\\mathcal{O}_X$,\n\n$$\n\\Gamma(X_V,\\mathcal{O}_{X_V})=H^0(X_V,\\mathcal{O}_{X_V})\\cong H^0(X,\\mathcal{O}_X)\\otimes_kA\n=k\\otimes_kA=A ,\n$$\n\nand these identifications are compatible with the localization maps of\nthe structure sheaf of $T$ (the corresponding identification holds for\nevery localizing $A\\to A_f$). Hence the canonical map $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$, which on\nsections over $V$ is the map $A\\to\\Gamma(X_V,\\mathcal{O}_{X_V})$ just computed, is an\nisomorphism.",
+    "uses": [
+     "lem-pc-finite-support-hi",
+     "lem-pc-flat-base-change-cohom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

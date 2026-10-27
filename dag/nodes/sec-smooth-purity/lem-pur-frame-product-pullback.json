@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-frame-product-pullback",
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-frame-independence",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback of concrete supported boundary products",
+ "statement": "For any Cartesian square of closed supports, any tuple on the ambient scheme, and specified identifications of its zero scheme and its pulled-back zero scheme with those supports, the pullback of the transported concrete product equals the transported product of the pulled-back tuple.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Restriction, elementary invariance, and final descent paragraphs"
+ },
+ "stmt_deps": [
+  "def-pur-frame-class",
+  "lem-pur-frame-product-support",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Induct over the ordered fold. The unit-normalized exchanges identify the empty product. Kummer naturality and localization boundary compatibility identify each principal boundary. The cup pullback law appends the next factor; the normalized positive tensor multiplication is the actual frameTensorNext. Uniqueness of support exchanges and monicity of the support immersion identify the specified support transports.",
+   "uses": [
+    "def-pur-frame-class",
+    "lem-pur-frame-product-support",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-frame-class",
+  "lem-pur-frame-product-support",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "The indicated argument, with the concrete supported-Hom identifications spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "concrete supported Kummer product naturality and Zariski separation in the bottom supported degree",
+   "results": "No theorem with the concrete frame product and chosen support comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, cupProduct",
+   "results": "No matching concrete frame comparison; use the recorded project supported cup and Hom declarations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frameBoundaryProduct.*(pullback|restrict|nat)|framePrincipalBoundary.*(pullback|restrict|nat)",
+   "results": "No existing direct declaration in the project; read supportedCupFunctoriality, supportedHom_pullback and relative_support_bottom_descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFrameIndependence",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrameProductPullback",
+  "file": "lean/Sheaf/Paper/FrameProductPullback.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameProductOnSupport_pullback",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frameProductOnSupport_pullback"
+  ],
+  "statement": "theorem frameProductOnSupport_pullback (P : PurityFiniteSetting.{u})\n    {Z X D Y : Scheme.{u}} (i : Z ⟶ X) (j : D ⟶ Y)\n    [IsClosedImmersion i] [IsClosedImmersion j] (q : Y ⟶ X) (t : D ⟶ Z)\n    (sq : ChosenCartesianSquare t j i q) (a : X ⟶ Spec (.of P.field.k))\n    (c : ℕ) (f : Fin c → Γ(X, ⊤))\n    (e : X.zeroLocusSubscheme (Set.range f) ≅ Z)\n    (he : e.hom ≫ i = X.zeroLocusSubschemeι (Set.range f))\n    (d : Y.zeroLocusSubscheme (Set.range (fun k ↦ q.appTop (f k))) ≅ D)\n    (hd : d.hom ≫ j = Y.zeroLocusSubschemeι (Set.range (fun k ↦ q.appTop (f k)))) :\n    P.functorialCupPullback true i j q t sq a (2 * (c : ℤ)) c\n      (P.frameProductOnSupport i a c f e he) =\n    P.frameProductOnSupport j (q ≫ a) c (fun k ↦ q.appTop (f k)) d hd",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

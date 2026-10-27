@@ -12,9 +12,107 @@
   "def-kun-separably-closed",
   "def-trf-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=\\widehat K$. By [lem-sfb-normed-field-completion], $F$ is a complete normed field and $K\\to F$ is an isometric field homomorphism. Identify $K$ with its image. Density is part of the meaning of metric completion: each $x\\in F$ is a limit of a Cauchy sequence from $K$. The extended norm is nontrivial, since it preserves $|t|\\ne0,1$ for a witness $t\\in K$. It is nonarchimedean: for sequences $x_n\\to x$, $y_n\\to y$ from $K$, take limits in $|x_n+y_n|\\le\\max(|x_n|,|y_n|)$. Here continuity follows from $||u|-|v||\\le|u-v|$ and $|(x_n+y_n)-(x+y)|\\le|x_n-x|+|y_n-y|$.",
+   "uses": [
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "Fix a monic $f\\in F[T]$ of degree $d\\ge1$. By [lem-pc-algebraic-closure-exists-unique], choose an algebraic closure $L/F$; choose $a\\in L$ with $f(a)=0$, using the root property in [def-weil-algebraic-closure]. By [lem-trf-spectral-norm-algebraic-extension], equip $L$ with a multiplicative nonarchimedean real norm extending that of $F$. Its hypotheses hold: $F$ is complete and nontrivially nonarchimedean normed by step 1, and $L/F$ is algebraic. Neither $L$ nor $K$ is assumed complete.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-algebraic-closure",
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "For every $\\eta>0$, apply [lem-sfb-monic-dense-approximation] to $K\\subset F$ to obtain monic $h\\in K[T]$ of degree $d$ with $|h_i-f_i|<\\eta$. Apply [lem-trf-separable-monic-approximation] over the original field $K$ to $h$ and $\\eta$, obtaining monic separable $g\\in K[T]$ of degree $d$ with $|g_i-h_i|<\\eta$ for $i<d$. The ultrametric inequality gives $|g_i-f_i|<\\eta$ for $i<d$; the leading coefficients agree and all higher coefficients vanish. The two approximation lemmas require no perfection or characteristic restriction. By [lem-trf-separable-polynomial-linear-factorization], $g(T)=\\prod_{j=1}^d(T-b_j)$ with $b_j\\in K$; there are exactly $d$ factors because degrees add for monic products over a field.",
+   "uses": [
+    "lem-sfb-monic-dense-approximation",
+    "lem-trf-separable-monic-approximation",
+    "lem-trf-separable-polynomial-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "Given $\\epsilon>0$, let $M=\\max(1,|a|)^{d-1}>0$ and choose the preceding $g$ with $\\eta=\\epsilon^d/(2M)$. Evaluating its coefficient difference from $f$ and using $f(a)=0$ gives $|g(a)|=|\\sum_{i<d}(g_i-f_i)a^i|\\le\\max_{i<d}(|g_i-f_i||a|^i)<\\eta M<\\epsilon^d$. Multiplicativity and the displayed linear factorization give $|g(a)|=\\prod_{j=1}^d|a-b_j|$. If all factors were at least $\\epsilon$, this product would be at least $\\epsilon^d$. Hence some $b\\in K$ satisfies $|a-b|<\\epsilon$. This is a finite-sum bound and a finite-product inequality; it uses no root-continuity or separability theorem beyond step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "For $n\\ge1$ choose $b_n\\in K$ with $|a-b_n|<1/n$. Then $|b_n-b_m|\\le\\max(1/n,1/m)$, so $(b_n)$ is Cauchy in $F$ and has a limit $b\\in F$ by step 1. The extended norm on $L$ restricts to that of $F$, and therefore $|a-b|\\le\\max(|a-b_n|,|b_n-b|)$ tends to zero. Thus $a=b$ in $L$, and injectivity of $F\\hookrightarrow L$ gives $f(b)=0$ in $F$. Every nonconstant polynomial over $F$ becomes monic of the same positive degree after division by its nonzero leading coefficient, without changing its roots. Consequently $F$ is algebraically closed. No completeness of $L$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "For $E=K$ or $F$, put $\\mathcal O_E=\\{x:|x|\\le1\\}$ and $\\mathfrak m_E=\\{x:|x|<1\\}$. The ultrametric and multiplicativity make $\\mathcal O_E$ a subring and $\\mathfrak m_E$ an ideal. An element of $\\mathcal O_E$ outside $\\mathfrak m_E$ has norm $1$, so its inverse also belongs to $\\mathcal O_E$; elements of $\\mathfrak m_E$ cannot be units. Thus $\\mathfrak m_E$ is the unique maximal ideal. For $x\\ne0$, either $|x|\\le1$ or $|x^{-1}|<1$, giving the valuation-ring condition of [def-trf-valuation-ring]. The fraction field is $E$, since an element outside $\\mathcal O_E$ is $1/x^{-1}$. These descriptions also show $\\mathfrak m_F\\cap\\mathcal O_K=\\mathfrak m_K$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "The isometric inclusion therefore induces an injective ring map $\\mathcal O_K/\\mathfrak m_K\\to\\mathcal O_F/\\mathfrak m_F$. It is surjective: for $x\\in\\mathcal O_F$, density supplies $b\\in K$ with $|x-b|<1$. Then $|b|\\le\\max(|x|,|b-x|)\\le1$, so $b\\in\\mathcal O_K$, and $x-b\\in\\mathfrak m_F$ means their residue classes agree. This proves the asserted canonical residue-field isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  },
+  {
+   "text": "To prove algebraic closedness of the residue field of $F$, take any monic polynomial $\\bar P$ of positive degree $e$ over $\\mathcal O_F/\\mathfrak m_F$. Lift its lower coefficients to $c_i\\in\\mathcal O_F$ and set $P(T)=T^e+\\sum_{i<e}c_iT^i$. Step 5 gives a root $z\\in F$. If $|z|>1$, then $|z|^e>|c_i z^i|$ for every $i<e$, while $P(z)=0$ would imply $|z|^e=|\\sum_{i<e}c_i z^i|\\le\\max_{i<e}|c_i z^i|$, a contradiction. Hence $z\\in\\mathcal O_F$; reduction gives $\\bar P(\\bar z)=0$. Normalize an arbitrary nonconstant residue polynomial by its leading coefficient. Thus every such polynomial has a root, and step 7 transfers this property to the common residue field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+    "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-algebraic-closure",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-monic-dense-approximation",
+  "lem-trf-separable-monic-approximation",
+  "lem-trf-separable-polynomial-linear-factorization",
+  "def-trf-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Field/Dense.lean",
+  "place": "Agent-supplied arbitrary-characteristic argument for the separably-closed upgrade listed in TODO (lines 23–30); context: Temkin, proof of Theorem 2.1.8, printed p. 13. This proof replaces the characteristic-zero Krasner argument in Dense.lean, not a quotation of it."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +148,108 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsSepClosure.isAlgClosure_of_perfectField_top\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ (k : Type u) [inst : Field k] (K : Type v) [inst_1 : Field K] [inst_2 : Algebra k K] [IsSepClosure k K]\\n  [PerfectField K], IsAlgClosure k K\", \"doc\": \"If $ K $ is a separable closure of a field $ k $ and $ K $ is a perfect field, then $ K $ is an algebraic closure of $ k $. This follows because in a perfect field, all algebraic extensions are separa\"}\n  {\"name\": \"IsSepClosure.isAlgClosure_of_perfectField\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ (k : Type u) [inst : Field k] (K : Type v) [inst_1 : Field K] [inst_2 : Algebra k K] [IsSepClosure k K]\\n  [PerfectField k], IsAlgClosure k K\", \"doc\": \"If $ K $ is a separable closure of a perfect field $ k $, then $ K $ is an algebraic closure of $ k $. This means that when $ k $ is a perfect field (every element has a $ p $-th root in characteristi\"}\n  {\"name\": \"IsSepClosed.isAlgClosed_of_perfectField\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ (k : Type u) [inst : Field k] [IsSepClosed k] [PerfectField k], IsAlgClosed k\", \"doc\": \"A field that is both separably closed and perfect is algebraically closed. This means that if a field has no nontrivial finite separable extensions (separably closed) and satisfies the condition that \"}\n  {\"name\": \"Valued.completable\", \"module\": \"Mathlib/Topology/Algebra/Valued/ValuedField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {Γ₀ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ₀] [hv : Valued K Γ₀],\\n  CompletableTopField K\", \"doc\": \"A valued field $ K $ is completable with respect to its uniform structure induced by the valuation to a linearly ordered commutative group with zero.\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib/NumberTheory/LocalField/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : ValuativeRel K] [inst_2 : UniformSpace K] [IsUniformAddGroup K]\\n  [IsNonarchimedeanLocalField K], CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"IsSepClosed.of_isAlgClosed\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ (k : Type u) [inst : Field k] [IsAlgClosed k], IsSepClosed k\", \"doc\": \"Any algebraically closed field $ k $ is also separably closed, meaning it has no nontrivial finite separable field extensions.\"}\n  {\"name\": \"FirstOrder.Field.ACF_isComplete\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ {p : ℕ}, Nat.Prime p ∨ p = 0 → (FirstOrder.Language.Theory.ACF p).IsComplete\", \"doc\": \"For any prime number $ p $ or $ p = 0 $, the first-order theory of algebraically closed fields of characteristic $ p $ is complete. This means that for every sentence in the language of rings, the the\"}\n  {\"name\": \"IsSepClosure.of_isAlgClosure_of_perfectField\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ (k : Type u) [inst : Field k] (K : Type v) [inst_1 : Field K] [inst_2 : Algebra k K] [IsAlgClosure k K]\\n  [PerfectField k], IsSepClosure k K\", \"doc\": \"If $ k $ is a perfect field and $ K $ is an algebraic closure of $ k $, then $ K $ is a separable closure of $ k $. This means that $ K $ is an algebraic extension of $ k $ that is separably closed (e\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The metric completion of a separably closed nonarchimedean field is algebraically closed in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-24T07:55:30Z\", \"tool\": \"leanfinder\", \"query\": \"The metric completion of a separably closed nonarchimedean field is algebraically closed in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.completable\", \"FirstOrder.Field.ACF_isComplete\", \"IsNonarchimedeanLocalField.instCompleteSpace\", \"IsSepClosure.isAlgClosure_of_perfectField_top\", \"IsSepClosed.isAlgClosed_of_perfectField\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"NumberField.InfinitePlace.Completion.instAlgebra\", \"FirstOrder.Field.isAlgClosed_of_model_ACF\"], \"digest\": \"2e6e6a69e2c8246a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed.of_denseRange|IsSepClosed.*[Cc]ompletion|[Cc]ompletion.*IsSepClosed",
+   "results": "{\"t\": \"2026-10-24T07:56:26Z\", \"tool\": \"grep\", \"query\": \"IsAlgClosed.of_denseRange|IsSepClosed.*[Cc]ompletion|[Cc]ompletion.*IsSepClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Approximation.lean\"], \"digest\": \"e7cecf66b93a7667\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete nonarchimedean field with a dense separably closed subfield is algebraically closed",
+   "results": "{\"t\": \"2026-10-24T07:56:26Z\", \"tool\": \"leansearch\", \"query\": \"A complete nonarchimedean field with a dense separably closed subfield is algebraically closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.of_isAlgClosed\", \"IsSepClosed.isAlgClosed_of_perfectField\", \"IsAlgClosed\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"IsAlgClosure.isAlgClosed\", \"IsSepClosed.casesOn\", \"separableClosure\", \"IsSepClosure.recOn\"], \"digest\": \"e963cd40f3df0d01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, UniformSpace.Completion",
+   "results": "{\"t\": \"2026-10-24T07:56:26Z\", \"tool\": \"loogle\", \"query\": \"IsSepClosed, UniformSpace.Completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsUltrametricDist|normedField|denseRange_coe|isometry_coe",
+   "results": "{\"t\": \"2026-10-24T07:57:10Z\", \"tool\": \"grep\", \"query\": \"instIsUltrametricDist|normedField|denseRange_coe|isometry_coe\", \"sub\": \"Analysis/Normed/Field\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/TransferInstance.lean\", \"Mathlib/Analysis/Normed/Field/TransferInstance.lean\", \"Mathlib/Analysis/Normed/Field/Lemmas.lean\"], \"digest\": \"48d855344defe4a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Nn]ormedField|isometry_coe|denseRange_coe|isUltrametricDist|norm_coe",
+   "results": "{\"t\": \"2026-10-24T07:57:56Z\", \"tool\": \"grep\", \"query\": \"instance.*[Nn]ormedField|isometry_coe|denseRange_coe|isUltrametricDist|norm_coe\", \"sub\": \"Analysis/Normed/Module/Completion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"36\", \"50\", \"81\", \"87\", \"91\"], \"digest\": \"119b9f9693b78f56\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isUltrametricDist|NormedField|NontriviallyNormedField",
+   "results": "{\"t\": \"2026-10-24T07:57:56Z\", \"tool\": \"grep\", \"query\": \"isUltrametricDist|NormedField|NontriviallyNormedField\", \"sub\": \"Topology/MetricSpace/Completion.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "instNormedField|NormedField \\(UniformSpace.Completion|norm_coe|denseRange_coe|completeSpace|coeRingHom|isometry_coe",
+   "results": "{\"t\": \"2026-10-24T07:59:06Z\", \"tool\": \"grep\", \"query\": \"instNormedField|NormedField \\\\(UniformSpace.Completion|norm_coe|denseRange_coe|completeSpace|coeRingHom|isometry_coe\", \"sub\": \"Analysis/Normed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Exponential.lean\", \"Mathlib/Analysis/Normed/Algebra/Exponential.lean\", \"Mathlib/Analysis/Normed/Algebra/Exponential.lean\"], \"digest\": \"84dfa680e3c04d1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a normed field is a complete normed field and the natural embedding is isometric and dense",
+   "results": "{\"t\": \"2026-10-24T07:59:07Z\", \"tool\": \"leansearch\", \"query\": \"The completion of a normed field is a complete normed field and the natural embedding is isometric and dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AbsoluteValue.Completion\", \"NormedField.instCompletableTopField\", \"UniformSpace.Completion.cPkg\", \"AbsoluteValue.Completion.instCoe\", \"UniformSpace.Completion.isDenseEmbedding_coe\", \"SemiNormedGrp.completion_completeSpace\", \"UniformSpace.Completion.nnnorm_coe\", \"UniformSpace.Completion.instNormedSpace\"], \"digest\": \"a19d7e4082f9e597\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "NormedField, UniformSpace.Completion",
+   "results": "{\"t\": \"2026-10-24T07:59:07Z\", \"tool\": \"loogle\", \"query\": \"NormedField, UniformSpace.Completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"UniformSpace.Completion.instNormedSpace\", \"UniformSpace.Completion.instNormedFieldOfCompletableTopField\", \"UniformSpace.Completion.instNormedAlgebra\"], \"digest\": \"fa278901b616141f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The metric completion of a normed field is a complete normed field with a dense isometric field embedding",
+   "results": "{\"t\": \"2026-10-24T07:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"The metric completion of a normed field is a complete normed field with a dense isometric field embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniformSpace.Completion.instNormedFieldOfCompletableTopField\", \"NormedField.instCompletableTopField\", \"NumberField.InfinitePlace.Completion.instNormedField\", \"RCLike.toCompleteSpace\", \"completeSpace_of_cauSeq_isComplete\", \"UniformSpace.Completion.instField\", \"DenselyNormedField.toNormedField\", \"AbsoluteValue.Completion.extensionEmbedding_of_comp\"], \"digest\": \"90acb60b9be65f4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem denseRange_coe|instance.*CompleteSpace|theorem isDenseEmbedding_coe",
+   "results": "{\"t\": \"2026-10-24T07:59:28Z\", \"tool\": \"grep\", \"query\": \"theorem denseRange_coe|instance.*CompleteSpace|theorem isDenseEmbedding_coe\", \"sub\": \"Topology/UniformSpace\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Topology/UniformSpace/Path.lean\", \"Mathlib/Topology/UniformSpace/CompactConvergence.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Closeds.lean\", \"Mathlib/Topology/UniformSpace/Closeds.lean\", \"Mathlib/Topology/UniformSpace/Real.lean\"], \"digest\": \"be00ff9b626a808c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "NormedField \\(UniformSpace.Completion|theorem norm_coe",
+   "results": "{\"t\": \"2026-10-24T07:59:28Z\", \"tool\": \"grep\", \"query\": \"NormedField \\\\(UniformSpace.Completion|theorem norm_coe\", \"sub\": \"Analysis/Normed\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Ring/Int.lean\", \"Mathlib/Analysis/Normed/Module/Completion.lean\", \"Mathlib/Analysis/Normed/Group/AddCircle.lean\", \"Mathlib/Analysis/Normed/Group/AddCircle.lean\", \"Mathlib/Analysis/Normed/Group/Subgroup.lean\", \"Mathlib/Analysis/Normed/Group/Completion.lean\", \"Mathlib/Analysis/Normed/Group/Submodule.lean\"], \"digest\": \"41ed54a27a7093ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "def coeRingHom|coeRingHom",
+   "results": "{\"t\": \"2026-10-24T07:59:28Z\", \"tool\": \"grep\", \"query\": \"def coeRingHom|coeRingHom\", \"sub\": \"Topology/Algebra/UniformRing.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"115\", \"122\", \"156\", \"203\"], \"digest\": \"b8f9e48bf44677cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; completion structure and approximation hits are supporting results, not the arbitrary-characteristic algebraic-closedness and residue clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -83,5 +279,31 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-sepclosed-rank-one-completion",
+  "worker": "stage1",
+  "summary": "Proved arbitrary-characteristic algebraic closedness by two coefficient approximations, finite product estimates and completeness, then proved the residue isomorphism and algebraic closedness by explicit norm calculations. Reused all analytic and algebraic ingredients already in the DAG; no new nodes. The characteristic-zero Mathlib completion theorem is insufficient.",
+  "blueprint": "Historical Temkin supporting branch of lem-trf-local-term-locality, proof (1)--(2), via the recorded alteration chain and Temkin proof of Theorem 2.1.8, printed p. 13. Latest blueprint instead states the contracting-correspondence route; this item is a retained lower supporting fact and does not alter that unit route. Steps 1–5 expand the completion assertion, steps 6–8 expand its residue-field consequence."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d45c2514b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d45c2514b (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, together with every cited statement and Mathlib match, unit sk-i-curve-zero and Mathlib Dense.lean. The statement and stmt_deps are unchanged and true in every characteristic. I checked them on K=(F_p((t)))^sep, which is imperfect, with residue field \\bar F_p; on degree 1; on a=0; and on inseparable f. Temkin Thm 2.1.8, p.13 asserts the fact without proof; the PDF is absent and is recorded as WANTED, so proof_origin=agent. Step 1: normed-field completion. Density is taken as part of the meaning of the metric completion (Mathlib Completion.denseRange_coe:325); I accept this as definitional, since no node states it. Step 2: algebraic closure plus spectral norm. Its hypotheses hold: F is complete and nontrivially ultrametric, and L/F is algebraic. Step 3: dense monic approximation, then separable approximation over K (needs only d>=1 and a nontrivial ultrametric absolute value), then the separably-closed factorization into exactly d factors. Steps 4-5: the bound |g(a)|<eta*M<eps^d is correct, including terms with |a|^i=0. The approximating roots are Cauchy in F and their limit equals a, without using completeness of L. Steps 6-8: valuation rings, m_F∩O_K=m_K, surjectivity from a radius-1 approximation, and the dominant-leading-term integrality argument are all correct. Route: the off-unit citations are Mathlib leaves or definitions, so no tool_uses are needed. Duplicate search: lem-trf-valuation-rank-one-formal-comparison proves the same fact only inside one of its proof steps, within a larger statement, so it is not a duplicate node. There are no new nodes, no SGA, and no changes."
+ }
 }

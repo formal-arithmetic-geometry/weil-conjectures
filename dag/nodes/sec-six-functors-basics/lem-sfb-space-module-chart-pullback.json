@@ -1,0 +1,191 @@
+{
+ "id": "lem-sfb-space-module-chart-pullback",
+ "kind": "statement",
+ "title": "Tensor pullback on commuting scheme-chart triangles",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with structure rings and module categories [def-weil-sheaf-of-modules-category]. Let $V\\to Y$ be an etale scheme chart and $q=(U\\to X,U\\to V)$ a commuting chart triangle in $\\mathcal A(f,V)$ [def-trf-space-etale-module-functors]. On both localized sites $Y_{\\mathrm{et}}/V$ and $X_{\\mathrm{et}}/U$ [def-pur-localized-ringed-site], additive sheafification exists in the original section universe and preserves finite limits. There exists a functor $F_q:\\operatorname{Mod}(\\mathcal O_Y|_V)\\to\\operatorname{Mod}(\\mathcal O_X|_U)$ that is left adjoint, an isomorphism $\\mathcal O_X|_U\\simeq F_q(\\mathcal O_Y|_V)$, and a natural isomorphism $F_q(M|_V)\\simeq(f^*M)|_U$ for every module sheaf $M$ on $Y$. Here restriction is the canonical slice restriction, and $f^*$ is exactly the left adjoint of the specified chart-limit direct image [def-trf-space-etale-module-functors]. No quasi-coherence of $M$, flatness of $f$, or covering property of $U$ or $V$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites), 04J1 (lemma-relocalize-morphism-ringed-sites), 03D7 (lemma-adjoint-pullback-pushforward-modules), and 03DF (lemma-global-pullback); spaces-properties.tex Tag 03G8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "The localized small etale site over a scheme chart V is the small etale site of V: retain the scheme map to V, or compose it with V to Y. These inverse equivalences preserve coverings and the regular-function ring. The affine etale basis has a small skeleton in the section universe, so the usual left exact additive sheafification on the scheme small etale site transports to the slice. Apply the same argument to U. This is the stronger sheafification fact constructed internally in the existing small-site slice proof.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites); spaces-properties.tex Tags 03G1, 03ED. The scheme sheafification instance is Mathlib.AlgebraicGeometry.Sites.AffineEtale, lines 105-114."
+   }
+  },
+  {
+   "text": "Pass to enlarged etale ringed sites. Localize the base-change morphism at V, and then restrict along the enlarged arrow U to X times_Y V supplied by q. The base-change functor preserves finite limits and covers; its slice functor is continuous. The module adjunction supplies tensor pullback on the localized ringed sites. Compose this pullback with the etale source restriction and transport through the ringed scheme-object equivalences to get F_q. All factors are left adjoints.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04J0, 04J1 and 03D7."
+   }
+  },
+  {
+   "text": "Tensor pullback sends the source structure module A to the target structure module B. The maps b tensor a to b times the image of a and b to b tensor 1 are mutually inverse, by the balancing relation. These are compatible with restriction, so sheafification gives the same inverse maps. The ringed equivalences and etale restriction preserve the structure rings. Their composite is the asserted structure-module isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DF (lemma-global-pullback), proof, and Tag 03D7."
+   }
+  },
+  {
+   "text": "The localization comparison identifies F_q applied to the restriction of M with the restriction of enlarged tensor pullback. The chart-limit/enlarged-sections comparison identifies the direct image of this global tensor pullback with the specified moduleDirectImage f. Uniqueness of left adjoints then identifies this tensor pullback with moduleTensorPullback f. Compose the two comparisons to obtain the required natural isomorphism for every M.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04J0, 04J1, 03D7; spaces-properties.tex Tag 03G8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-chart-limit-enlarged-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites), 04J1 (lemma-relocalize-morphism-ringed-sites), 03D7 (lemma-adjoint-pullback-pushforward-modules), and 03DF (lemma-global-pullback); spaces-properties.tex Tag 03G8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pullback functor of sheaves of modules commutes with restriction to a slice and sends the structure module to the structure module",
+   "results": "8 hits: SheafOfModules.pullback, pullbackPushforwardAdjunction, instIsLeftAdjointPullback; scheme pullback; GrothendieckTopology.overPullback and overMapPullback.",
+   "date": "2026-10-26",
+   "verdict": "no match: general module pullback does not identify the chart-limit left adjoint or the small-site chart slices"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree: pullbackObjFreeIso and its naturality/component lemmas. Read PullbackFree.lean:106-128.",
+   "date": "2026-10-26",
+   "verdict": "no match: supplies the free-module calculation once the localized functor and its comparison with the specified space pullback have been built"
+  },
+  {
+   "tool": "grep",
+   "query": "localLeftIso|pullbackObjFreeIso",
+   "results": "5 Mathlib hits in Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:27,118,125,126,128. The project localLeftIso is read in Sheaf/Algebra/Category/ModuleCat/Sheaf/PullbackLocalizationOfUniverses.lean:106-117.",
+   "date": "2026-10-26",
+   "verdict": "no match: localLeftIso is an ingredient on enlarged sites, not a direct statement on arbitrary small scheme-chart triangles"
+  },
+  {
+   "tool": "grep",
+   "query": "HasSheafify.*Etale|HasSheafify.*smallEtale",
+   "results": "2 hits in Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:105,112, giving sheafification on affine and ordinary small etale sites of schemes.",
+   "date": "2026-10-26",
+   "verdict": "ingredient: transport the scheme instance through the slice site equivalences; the existing public space instance only states weak sheafification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModulePullbackQuasiCoherent",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3Q (lemma-thickening-over-thickening-space-quasi-coherent), with the preceding setup; its derived-coherator hypothesis is expressed by the equivalent universal derived-Hom test. Supporting input: Tag 0D3Q, last sentence: reflection of equality of induced base-ideal maps, by testing with f-star J.; chart pullback step of the local-presentation argument for Stacks 03GA",
+   "via": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-square-zero-extension-transfer",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleChartPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleChartPullback.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullback_chart_functor",
+  "statement": "theorem moduleTensorPullback_chart_functor {S : Scheme.{u}}\n    {X Y : AlgebraicSpace S} (f : X ⟶ Y) (V : Y.EtaleSite)\n    (q : ModuleChart f V) :\n    HasSheafify (Y.etaleTopology.over V) AddCommGrpCat.{u} ∧\n      HasSheafify (X.etaleTopology.over q.left) AddCommGrpCat.{u} ∧\n      ∃ F : SheafOfModules.{u} (Y.structureSheaf.over V) ⥤\n        SheafOfModules.{u} (X.structureSheaf.over q.left),\n      F.IsLeftAdjoint ∧\n      Nonempty (SheafOfModules.unit (X.structureSheaf.over q.left) ≅\n        F.obj (SheafOfModules.unit (Y.structureSheaf.over V))) ∧\n      Nonempty (SheafOfModules.overFunctor Y.structureSheaf V ⋙ F ≅\n        moduleTensorPullback f ⋙ SheafOfModules.overFunctor X.structureSheaf q.left)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083410-L-2342444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083410-L-2342444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

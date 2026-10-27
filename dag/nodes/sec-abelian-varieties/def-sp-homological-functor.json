@@ -89,7 +89,18 @@
  "blueprint_uses": [
   "def-sp-abelian"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -110,5 +121,15 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhf2021 (reviewer sub-agent of L); spot-checked: Read IsHomological (HomologicalFunctor.lean:82), Additive instance (153), homologySequence_exact₂ (218), rot_of_distTriang (Pretriangulated.lean:104); no duplicate definition among dag nodes mentioning 'homological functor' (class b clear); consistent with lem-sp-long-exact-of-triangle. FIX more, RETURN less: (1) E7 statement repair: imported second clause 'F(K_3)->F(K_1[1]) exact at the middle spots' is a single arrow with no middle spot, corrected to F(K_2)->F(K_3)->F(K_1[1]) (missed by the second reading); (2) B8 mathlib_match.how rewritten: first clause is the class field, second clause is the field on the rotated triangle (rot_of_distTriang), additivity the inferred instance.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dhf2021): E7: statement's second clause corrected from the ill-formed single arrow F(K_3)->F(K_1[1]) to F(K_2)->F(K_3)->F(K_1[1]); follows from IsHomological via rot_of_distTriang."
+ "lead_note": "2026-10-10 L (R-dhf2021): E7: statement's second clause corrected from the ill-formed single arrow F(K_3)->F(K_1[1]) to F(K_2)->F(K_3)->F(K_1[1]); follows from IsHomological via rot_of_distTriang.",
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal C$ be a pretriangulated category (with shift $[1]$,\ndistinguished triangles and rotation), and let $\\mathcal A$ be abelian\n[def-sp-abelian]. An additive functor $F:\\mathcal C\\to\\mathcal A$ is\n*homological* if for every distinguished triangle $K_1\\to K_2\\to K_3\\to\nK_1[1]$ the sequence $F(K_1)\\to F(K_2)\\to F(K_3)$ is exact at $F(K_2)$.\nSince rotations of distinguished triangles are distinguished, the sequences\n$F(K_2)\\to F(K_3)\\to F(K_1[1])$ and $F(K_3)\\to F(K_1[1])\\to F(K_2[1])$ are\nthen exact as well.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ }
 }

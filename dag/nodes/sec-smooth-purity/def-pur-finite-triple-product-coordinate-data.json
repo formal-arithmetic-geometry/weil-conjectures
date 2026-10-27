@@ -1,0 +1,142 @@
+{
+ "id": "def-pur-finite-triple-product-coordinate-data",
+ "kind": "definition",
+ "title": "Explicit bracketed finite triple-product coordinate maps",
+ "statement": "Fix a finite commutative coefficient ring A as in [def-pur-conventions]. On each scheme X, let D_A(X) be the ordinary unbounded derived category of constant-A module sheaves on the small pro-etale site, with K-flat tensor, derived inverse image Lf*, ordinary direct image Rf*, and exact open extension j! [def-weil-derived-pullback-tensor-hom, def-weil-pbc-proetale-operations]. An origin condition means the existing bounded-below etale-origin predicate, and retained witnesses mean the witnesses of [def-weil-pbc-etale-origin-witness]. For a compactification c=(j,a) of f, write F_c=Ra* j! [def-weil-compactifications-refinements]. Write C(c,d)_M for the component at M of the normalized candidate comparison of [def-sf-origin-candidate-comparison].\n\nGiven a binary product geometry G with projections p,q on its open product and r,t on its ambient product [def-pc-fibre-product, def-pur-finite-product-compactification-data], define external_G(M,N)=Lp*M tensor Lq*N and externalMap(r,t;m,n)=(tensor.map(Lr*m)).app(Lt*N);(tensor.obj(Lr*M')).map(Lt*n). Use the specified binary open comparison e_G and chosen forward word xi_G, including exactly the projection/exchange maps of [def-exchange-projection], from [def-pur-finite-product-compactification-data], and the ordinary word Omega_G from [def-pur-finite-ordinary-product]. For an open j, let adj_j be the exact open-extension adjunction transported to the specified left-derived inverse image. For maps s:M→Lj*H and t:N→Lk*J in a binary geometry, define restrictPair_G(s,t) by externalMap(p,q;s,t), followed in each tensor variable by the inverse inverse-image compositor and the inverse commuting-triangle comparison, then by the inverse tensor comparison for the product open u [lem-pur-derived-pullback-tensor-iso]. Thus its target is Lu*(Lr*H tensor Lt*J); every compositor is the canonical one, with the two projection equalities supplied by G.\n\nGiven f_i:X_i→B and displayed compactifications c_i, define G12=geometry(c1,c2), G23=geometry(c2,c3), GL=geometry(compactification(G12),c3), and GR=geometry(c1,compactification(G23)). Define D12=external_G12(M1,M2), D23=external_G23(M2,M3), DL=external_GL(D12,M3), and DR=external_GR(M1,D23). Set H_i=j_i!M_i, E12=external ambient_G12(H1,H2) and E23=external ambient_G23(H2,H3). Define eL=externalMap(GL.r,GL.t;e_G12,id);e_GL and eR=externalMap(GR.r,GR.t;id,e_G23);e_GR. The binary restriction maps use restrictPair on the two open units. The left triple restriction uses restrictPair_GL on the binary restriction12 and the third unit, with ambient inputs E12,H3; the right one uses restrictPair_GR on the first unit and restriction23, with ambient inputs H1,E23.\n\nFor independent original compactifications o1,o2,o3,o12,o23,oL,oR, thetaL is (xi_G12 tensor id);xi_GL;C(oL,compactification(GL)) and thetaR is (id tensor xi_G23);xi_GR;C(oR,compactification(GR)), on their respective bracketed products. sourceL and sourceR are the corresponding bracketed tensor composites of C(oi,ci). ordinaryL is (Omega_G12 tensor id);Omega_GL;R(GL.t;c3.g)*(eL), and ordinaryR is (id tensor Omega_G23);Omega_GR;R(GR.t;compactification(G23).g)*(eR). Equations is the conjunction IsIso(eL), IsIso(eR), restrictionL;LuL*(eL)=unit_DL, restrictionR;LuR*(eR)=unit_DR, thetaL=sourceL;ordinaryL, thetaR=sourceR;ordinaryR. FiniteTripleProductNormalForms universally quantifies these choices with exactly the separated finite-type scheme hypotheses over the fixed field [def-weil-scheme-morphism-properties], the three retained D+ origin witnesses, the two source tensor-origin hypotheses, and all four six-object binary tensor-domain predicates from [def-pur-finite-product-compactification-data]. This is a definition of the assertion, not a proof of any of its clauses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-fibre-product",
+  "def-exchange-projection",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-compactifications-refinements",
+  "def-sf-origin-candidate-comparison",
+  "def-pur-finite-product-compactification-data",
+  "def-pur-finite-ordinary-product",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Iterated external tensor products of compactly supported derived sheaves agree with proper product compactifications",
+   "results": "Eight hits on light condensed monoidal categories and sheaf tensor; none gives either the specified binary open-unit equation or the ordinary product word naturality.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naturality of the ordinary derived sheaf product and the unit normalization of a binary extension by zero tensor comparison",
+   "results": "Eight hits: CartesianMonoidalCategory product comparisons, toSheafify naturality, mapDerivedCategorySingleFunctor and toRightDerivedZero; none states the specified binary equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteProductOrdinary.*natural|finiteProductOpenTensor|restrictionL",
+   "results": "Mathlib search finds only transfinite restriction names. Local source search finds the binary constructions in FiniteProductCompactification and the recursive restriction in FiniteTripleProductNormalForms, without either claimed compatibility theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTripleProductNormalForms",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, finite triple-product coordinate reduction.",
+   "via": [
+    "lem-pur-finite-triple-product-normal-forms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTripleProductDefinitions",
+  "file": "lean/Sheaf/Paper/FiniteTripleProductDefinitions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteTripleProductNormalForms",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.D",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.tensor",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.extend",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.support",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.origin",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.external",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.externalMap",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.xi",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.compare",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.g12",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.g23",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.gL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.gR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.d12",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.d23",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.dL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.dR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.e12Source",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.e23Source",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.eLSource",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.eRSource",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.eL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.eR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.openAdj",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restrictPair",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restriction12",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restriction23",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restrictionL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restrictionR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.thetaL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.thetaR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.sourceL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.sourceR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.ordinaryL",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.ordinaryR",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProduct.Equations",
+   "AlgebraicGeometry.ProEtale.FiniteTripleProductNormalForms"
+  ],
+  "statement": "def FiniteTripleProductNormalForms (C : WeilConjectures.PurityFiniteSetting.{u})\n    {B X₁ X₂ X₃ : Scheme.{u}}\n    [B.Over (Spec (.of C.field.k))] [X₁.Over (Spec (.of C.field.k))]\n    [X₂.Over (Spec (.of C.field.k))] [X₃.Over (Spec (.of C.field.k))]\n    [IsSeparated (B ↘ Spec (.of C.field.k))]\n    [IsSeparated (X₁ ↘ Spec (.of C.field.k))]\n    [IsSeparated (X₂ ↘ Spec (.of C.field.k))]\n    [IsSeparated (X₃ ↘ Spec (.of C.field.k))]\n    [LocallyOfFiniteType (B ↘ Spec (.of C.field.k))]\n    [LocallyOfFiniteType (X₁ ↘ Spec (.of C.field.k))]\n    [LocallyOfFiniteType (X₂ ↘ Spec (.of C.field.k))]\n    [LocallyOfFiniteType (X₃ ↘ Spec (.of C.field.k))]\n    [QuasiCompact (B ↘ Spec (.of C.field.k))]\n    [QuasiCompact (X₁ ↘ Spec (.of C.field.k))]\n    [QuasiCompact (X₂ ↘ Spec (.of C.field.k))]\n    [QuasiCompact (X₃ ↘ Spec (.of C.field.k))]\n    (f₁ : X₁ ⟶ B) (f₂ : X₂ ⟶ B) (f₃ : X₃ ⟶ B)\n    [f₁.IsOver (Spec (.of C.field.k))] [f₂.IsOver (Spec (.of C.field.k))]\n    [f₃.IsOver (Spec (.of C.field.k))]\n    [IsSeparated f₁] [LocallyOfFiniteType f₁] [QuasiCompact f₁]\n    [IsSeparated f₂] [LocallyOfFiniteType f₂] [QuasiCompact f₂]\n    [IsSeparated f₃] [LocallyOfFiniteType f₃] [QuasiCompact f₃]\n    (M₁ : _root_.DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X₁) (ModuleCat.{u + 1} C.Coefficient)))\n    (M₂ : _root_.DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X₂) (ModuleCat.{u + 1} C.Coefficient)))\n    (M₃ : _root_.DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X₃) (ModuleCat.{u + 1} C.Coefficient)))\n    (w₁ : Scheme.FixedEtaleOriginWitness X₁ C.Coefficient M₁)\n    (w₂ : Scheme.FixedEtaleOriginWitness X₂ C.Coefficient M₂)\n    (w₃ : Scheme.FixedEtaleOriginWitness X₃ C.Coefficient M₃) : Prop",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26",
+  "note": "Existing coordinate declarations moved verbatim from FiniteTripleProductNormalForms and publicly reexported there; only their owning module and DAG attachment change."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "independent cc review: item finiteTripleProduct_normalForms statement byte-identical to published; moved FiniteTripleProduct.* defs diffed verbatim against the clone; restrictPair_pasting read against finiteProductOpenTensor's definition and lem-sf-open-tensor-normalization; nodes checked against Lean signatures; unit sk-prop-an realized empty and CompactificationCoherence still in the public closure"
+ }
+}

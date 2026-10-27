@@ -49,7 +49,32 @@
   "lem-sc-line-bundle-rational-section"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_zero_of_degree_neg"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_zero_of_degree_neg",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1408,
+      1437
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lead_note": "2026-10-10 L: statement corrected: connectedness added. Without it the statement is false (reviewer of E1's Riemann-Roch delivery: on P^1 disjoint union P^1 the module O(1) on one copy and O(-2) on the other has negative total degree and a nonzero section). The citer lem-sc-line-bundle-rational-section assumes a smooth connected curve.",
@@ -63,5 +88,27 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $C$ a scheme which is smooth of relative dimension\n$1$ and proper over $k$ with $H^0(C,\\mathcal O_C)=k$, and $\\mathcal M$ a\nline bundle on $C$ with $\\deg\\mathcal M<0$ ([def-sc-pic0]). Then\n$H^0(C,\\mathcal M)=0$.",
+  "proof": [
+   {
+    "text": "The scheme $C$ is connected, since the field $H^0(C,\\mathcal O_C)=k$ has\nno nontrivial idempotents, and its local rings are regular\n([lem-sc-smooth-regular]), hence domains; so $C$ is integral. Suppose\n$s\\in H^0(C,\\mathcal M)$ is nonzero. Locally $s=f\\,e$ for a generator $e$\nof $\\mathcal M$ and a function $f$, which is nonzero on every nonempty open\n($C$ is integral), hence a non-zero-divisor. So the zero scheme $D$ of $s$,\nlocally $V(f)$, is an effective Cartier divisor\n([def-nagata-invertible-ideal]), and $s$ identifies\n$\\mathcal O_C(D)=\\mathcal I_D^\\vee$ ([def-pc-divisor-line-bundle]), locally\n$f^{-1}\\mathcal O_C$, with $\\mathcal M$ via $f^{-1}u\\mapsto u\\,e$. By\n[lem-pc-degree-base-change](2),\n$\\deg\\mathcal M=\\deg\\mathcal O_C(D)=\\dim_kH^0(D,\\mathcal O_D)\\ge0$, a\ncontradiction.",
+    "uses": [
+     "lem-sc-smooth-regular",
+     "def-nagata-invertible-ideal",
+     "def-pc-divisor-line-bundle",
+     "lem-pc-degree-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

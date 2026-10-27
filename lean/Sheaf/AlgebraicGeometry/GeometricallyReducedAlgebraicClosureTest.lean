@@ -9,9 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
-import Sheaf.TraceFormula.ReducednessTensorChosenAlgebraicClosure
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Geometric reducedness tested on a chosen algebraic closure
@@ -56,6 +54,39 @@ theorem geometricallyReduced_iff_isReduced_pullback_algebraicClosure
     GeometricallyReduced (X ↘ Spec (.of k)) ↔
       IsReduced (pullback (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) := by
-  sorry
+  constructor
+  · intro h
+    exact h.geometrically_isReduced _ _ _ (.of_hasPullback _ _)
+  · intro h
+    -- Use the perfect-field theorem over Ω, then descend from an algebraic closure of K.
+    have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed k
+    let f := X ↘ Spec (.of k)
+    let gΩ := Spec.map (CommRingCat.ofHom (algebraMap k Ω))
+    have : IsReduced (pullback f gΩ) := h
+    have : GeometricallyReduced (pullback.snd f gΩ) :=
+      GeometricallyReduced.of_perfectField _
+    refine ⟨geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms.mpr ?_⟩
+    intro K _ _
+    let M := AlgebraicClosure K
+    let ι : Ω →ₐ[k] M := IsAlgClosed.lift
+    algebraize [ι.toRingHom]
+    have : IsScalarTower k Ω M := .of_algHom ι
+    let gK := Spec.map (CommRingCat.ofHom (algebraMap k K))
+    let gMK := Spec.map (CommRingCat.ofHom (algebraMap K M))
+    let gMΩ := Spec.map (CommRingCat.ofHom (algebraMap Ω M))
+    have : IsReduced (pullback (pullback.snd f gΩ) gMΩ) :=
+      pullback_of_geometrically GeometricallyReduced.geometrically_isReduced M gMΩ
+    have heq : gMΩ ≫ gΩ = gMK ≫ gK := by
+      simp only [gMΩ, gΩ, gMK, gK, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+        ← IsScalarTower.algebraMap_eq]
+    let e := pullbackLeftPullbackSndIso f gΩ gMΩ ≪≫ pullback.congrHom rfl heq ≪≫
+      (pullbackLeftPullbackSndIso f gK gMK).symm
+    have : IsReduced (pullback (pullback.snd f gK) gMK) :=
+      isReduced_of_isOpenImmersion e.inv
+    have : Surjective gMK :=
+      ⟨fun x ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+    have : IsSchemeTheoreticallyDominant gMK :=
+      IsSchemeTheoreticallyDominant.of_isDominant gMK
+    exact IsSchemeTheoreticallyDominant.isReduced (pullback.fst (pullback.snd f gK) gMK)
 
 end AlgebraicGeometry

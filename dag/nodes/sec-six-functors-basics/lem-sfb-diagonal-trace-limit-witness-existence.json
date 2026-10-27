@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-diagonal-trace-limit-witness-existence",
+ "kind": "statement",
+ "title": "Existence of the degree-zero tower witness for a normalized diagonal source",
+ "statement": "theorem diagonalTrace_limitWitness_exists (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤))) [DiagonalTraceLocalizations l Y] [DiagonalTraceLocalizations l (ProjectiveLine Y)] [DiagonalTraceLocalizations l (diagonalSurface Y)] (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))) (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) (hδ : IsDiagonalLimit l Y hY D δ) (f : diagonalSurface Y ⟶ ProjectiveLine Y) (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨ f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) (t : Result l (ULift.{u} (Padic l)) f) (a : SupportedSource l Y f t.Rc) : ∃ s : SingleTowerLimitWitness (DiagonalMod l (ProjectiveLine Y)) ((diagonalCompletedUnderlying l (ProjectiveLine Y)).map (a.hom ≫ t.Rc.R.map δ ≫ t.trace)), s.tower = t.restrictionS.F.obj (SpTowerClasses.coefficient (ProjectiveLine Y) (SpTowerClasses.Arings l (ULift.{u} (Padic l)) (ProjectiveLine Y))) ∧ s.limitFunctor = t.LS.R",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), evaluation and limit steps"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-sources",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "lem-sfb-single-tower-limit-identity"
+ ],
+ "proof": [
+  {
+   "text": "Apply full faithfulness of the degree-zero single functor to write the completed integral as the image of a unique completed-coefficient sheaf endomorphism φ. Naturality of the exact scalar-restriction/single comparison transports the finite integral projection identity to U(φ) followed by the ordinary coefficient projection.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sfb-diagonal-trace-finite-integral-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each site object and section x, apply coefficient_projection to φ(x) and x. The transported equality and coefficientForget give equality after each actual projection of the completed ring sheaf. Evaluate its inverse-limit cone in commutative rings; Concrete.isLimit_ext proves φ(x)=x. Thus φ is the identity, hence so is the derived integral.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the identity endomorphism of the required coefficient tower in degree zero. Its comparison with the completed unit is asIso(unitMap) followed by LS.R.mapIso of the exact restriction/single comparison. Result.unit_limit makes this invertible. Functor.map_id supplies the evaluations, and the proved integral identity supplies the square. Both required data equalities are reflexivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-finite-integral-projection",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), degree-zero detection and finite integration; detect ordinary completed sheaf maps by the coefficient limit cone",
+  "by": "E3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of the normalized supported source for a diagonal projection",
+   "results": "No exact theorem; the available source and presentation records supply the interfaces only.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; retained as a split obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SupportedSource",
+   "results": "Only the structure and abbreviation are indexed; no existence theorem is present.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedSource|SingleTowerLimitWitness|integrationSystems",
+   "results": "The item is the only integration-systems existence theorem; source and witness are separate structures.",
+   "date": "2026-10-27",
+   "verdict": "No existing duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceIntegrationSystems",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), evaluation and limit steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceLimitWitnessExistence",
+  "file": "lean/Sheaf/Paper/DiagonalTraceLimitWitnessExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_limitWitness_exists",
+  "statement": "theorem diagonalTrace_limitWitness_exists (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤))) [DiagonalTraceLocalizations l Y] [DiagonalTraceLocalizations l (ProjectiveLine Y)] [DiagonalTraceLocalizations l (diagonalSurface Y)] (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))) (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) (hδ : IsDiagonalLimit l Y hY D δ) (f : diagonalSurface Y ⟶ ProjectiveLine Y) (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨ f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) (t : Result l (ULift.{u} (Padic l)) f) (a : SupportedSource l Y f t.Rc) : ∃ s : SingleTowerLimitWitness (DiagonalMod l (ProjectiveLine Y)) ((diagonalCompletedUnderlying l (ProjectiveLine Y)).map (a.hom ≫ t.Rc.R.map δ ≫ t.trace)), s.tower = t.restrictionS.F.obj (SpTowerClasses.coefficient (ProjectiveLine Y) (SpTowerClasses.Arings l (ULift.{u} (Padic l)) (ProjectiveLine Y))) ∧ s.limitFunctor = t.LS.R",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T201003-L-3355162",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T222624-L-674921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

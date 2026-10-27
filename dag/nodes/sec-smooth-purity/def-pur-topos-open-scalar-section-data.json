@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-topos-open-scalar-section-data",
+ "kind": "definition",
+ "title": "The open restriction, extension and tensor-section interface",
+ "statement": "On a small site (C,J), for a sheaf A of sets, commutative ring sheaves R,S and a:R→S, define a_A by precomposing a with the element projection. Define restriction L_R and extension I_R as the element-site module pullback and extension of [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Their normalized adjunction is the actual sheaf pullback/pushforward adjunction. For a prescribed scalar model E of [lem-pur-derived-change-of-rings], tensorSection(m,s) is the image of s tensor m under the module-sheafification unit and the prescribed equality of E with scalar extension. extensionSection(m) is the actual I_R ⊣ L_R unit evaluated at (U,f).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE, 0E8I; sites-cohomology.tex Tag 0GL1, coefficient-linear unit refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE and 0E8I; derived lift Tag 0GL1 and normalized adjunction mate argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with restriction to an open subtopos and preserves the extension by zero adjunction unit",
+   "results": "Scheme.Modules.restrictAdjunction, restrictAdjunction_unit_app_app; ordinary scheme restrictions only.",
+   "date": "2026-10-24",
+   "verdict": "no match: does not give arbitrary-topos derived extension or specified unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, unit_mateEquiv_symm, iterated_mateEquiv_conjugateEquiv_symm in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-24",
+   "verdict": "generic categorical ingredients only; no sheaf coefficient comparison or derived representative equations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|iterated_mateEquiv|derivedMate_comparison in Mathlib",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean: unit_mateEquiv (136), unit_mateEquiv_symm (151), iterated_mateEquiv_conjugateEquiv (464); no derived sheaf counterpart.",
+   "date": "2026-10-24",
+   "verdict": "no match for derived lift; basic section data are constructions using existing module sheafification."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ToposOpenScalarUnit",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Step 1 and Step 3, coefficient compatibility of the open constituent: normalization of scalar balancing by the actual open-adjunction unit, before taking an inverse-exchange adjunct.",
+   "via": [
+    "lem-pur-topos-open-scalar-unit",
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposOpenScalarBasic",
+  "file": "lean/Sheaf/CategoryTheory/ToposOpenScalarBasic.lean",
+  "declaration": "SheafOfModules.ToposOpenScalar.sliceMap",
+  "statement": "def sliceMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (A : Sheaf J (Type u)) {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :\n    presentationElementRing R A ⟶ presentationElementRing S A",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24",
+  "declarations": [
+   "SheafOfModules.ToposOpenScalar.sliceMap",
+   "SheafOfModules.ToposOpenScalar.restriction",
+   "SheafOfModules.ToposOpenScalar.extension",
+   "SheafOfModules.ToposOpenScalar.adjunction",
+   "SheafOfModules.ToposOpenScalar.normalizedAdjunction",
+   "SheafOfModules.ToposOpenScalar.tensorSection",
+   "SheafOfModules.ToposOpenScalar.extensionSection"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "independent cc review: the residual derived-from-ordinary statement against its node and the DerivedChangeOfRingsCochainModel structure, judged true; the moved section defs against the clone HEAD of ToposOpenScalarUnit, verbatim; the item node proof/proof_deps against the Lean assembly; importers of the item, none"
+ }
+}

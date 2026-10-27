@@ -19,7 +19,7 @@ can reuse them without importing either pro-étale inverse-image API.
 
 @[expose] public section
 
-namespace PadicAlgCl
+namespace FiniteIndexSplitting
 
 variable {κ : Type*} [DecidableEq κ]
 
@@ -34,4 +34,4 @@ lemma sumComplEquiv_symm_inl {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injec
     (sumComplEquiv ρ hρ).symm (Sum.inl a) = ρ a := by
   simp [sumComplEquiv]
 
-end PadicAlgCl
+end FiniteIndexSplitting

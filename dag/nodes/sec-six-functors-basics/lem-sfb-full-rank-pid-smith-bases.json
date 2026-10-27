@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-full-rank-pid-smith-bases",
+ "kind": "statement",
+ "title": "Compatible diagonal bases for a full-rank submodule over a PID",
+ "statement": "Let $R$ be a commutative principal ideal domain, let $M$ be an $R$-module with a basis indexed by a finite set $I$ [def-weil-pbc-free-module], and let $N$ be a submodule with $\\operatorname{finrank}_R N=\\operatorname{finrank}_R M$. There are bases $(e_i)_{i\\in I}$ of $M$, $(v_i)_{i\\in I}$ of $N$, and scalars $a_i\\in R$ such that the inclusion sends $v_i$ to $a_i e_i$. A principal ideal domain means a commutative ring with $1\\ne0$, no zero divisors and every ideal principal.",
+ "source": {
+  "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "place": "Submodule.exists_smith_normal_form_of_rank_eq, lines 581-591; named basis and coefficient extraction, lines 604-646."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib Submodule.exists_smith_normal_form_of_rank_eq to the given finite basis and equality of finranks. Its conclusion is exactly the claimed pair of bases and diagonal scalars, with the same index set.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "place": "Submodule.exists_smith_normal_form_of_rank_eq, lines 581-591."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A submodule of the same rank as a finite free module over a principal ideal domain has compatible bases with diagonal inclusion",
+   "results": "8 hits, led by Submodule.exists_smith_normal_form_of_rank_eq; also smithNormalFormTopBasis, smithNormalFormBotBasis and smithNormalFormBotBasis_def in Mathlib.LinearAlgebra.FreeModule.PID.",
+   "date": "2026-10-23",
+   "verdict": "match: exact theorem; source and all hypotheses checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.exists_smith_normal_form_of_rank_eq",
+   "results": "1 hit: Submodule.exists_smith_normal_form_of_rank_eq in Mathlib.LinearAlgebra.FreeModule.PID. Its full type has CommRing, IsDomain, IsPrincipalIdealRing, a finite basis and equality of finranks.",
+   "date": "2026-10-23",
+   "verdict": "match: exact theorem; source and all hypotheses checked"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smith_normal_form_of_rank_eq|smithNormalFormCoeffs_ne_zero",
+   "results": "6 hits, including theorem Submodule.exists_smith_normal_form_of_rank_eq in Mathlib/LinearAlgebra/FreeModule/PID.lean at line 581; source read through line 646, including top and bottom bases, their diagonal equation, and nonzero coefficients.",
+   "date": "2026-10-23",
+   "verdict": "match: exact theorem; source and all hypotheses checked"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.exists_smith_normal_form_of_rank_eq",
+  "file": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "line": 581,
+  "how": "exact; all scalar, finite-index and equal-rank assumptions and all conclusion clauses match. The named smithNormalFormTopBasis, smithNormalFormBotBasis, smithNormalFormCoeffs and smithNormalFormBotBasis_def extract this exact data; coefficients are nonzero by basis nonvanishing (smithNormalFormCoeffs_ne_zero)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.GroupTheory.DivisibleUnitLatticeExtension",
+  "date": "2026-10-23",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Smith normal form replacement of the cyclic-induction proof of lem-sfb-divisible-unit-lattice-extension, serving the unchanged infinitesimal log-smooth lifting input in its inherited ancestry. Both the ancestor command and inherited node have null ancestry; whole-blueprint search for Smith normal form found no statement node.",
+   "via": [
+    "lem-sfb-divisible-unit-lattice-extension",
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.LinearAlgebra.FreeModule.PID",
+  "declaration": "Submodule.exists_smith_normal_form_of_rank_eq",
+  "statement": "theorem Submodule.exists_smith_normal_form_of_rank_eq\n    {ι : Type*} {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]\n    [IsDomain R] [IsPrincipalIdealRing R] {N : Submodule R M} [Finite ι]\n    (b : Module.Basis ι R M) (h : Module.finrank R N = Module.finrank R M) :\n    ∃ (b' : Module.Basis ι R M) (a : ι → R) (ab' : Module.Basis ι R N),\n      ∀ i, (ab' i : M) = a i • b' i",
+  "branch": "mathlib",
+  "by": "Y2",
+  "date": "2026-10-23",
+  "note": "Existing exact Mathlib theorem, no duplicate Lean declaration or new module."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261023T132428-L-2270854",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261023T132428-L-2270854",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

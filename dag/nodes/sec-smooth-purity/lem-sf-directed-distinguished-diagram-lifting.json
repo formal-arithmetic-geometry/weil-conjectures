@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-directed-distinguished-diagram-lifting",
+ "kind": "statement",
+ "title": "Simultaneous lifting of finite distinguished diagrams in general directed stage pairs",
+ "statement": "Let $S$, $I$, the pretriangulated categories $C_i$, the pair category $P$, the supplied additive and integer-shift structures, the comparisons $\\beta,\\sigma,\\theta$, and the predicate $D_S$ be an exact-stage pair datum [def-sf-directed-common-stage-data]. No octahedral axiom for the $C_i$ and no pretriangulation on $P$ are assumed. Fix $m_0\\in I$.\n\nTake finitely many labeled objects $X_v=(i_v,x_v)$ of $P$, finitely many arrows between finitely many occurrences of their integer shifts, and finitely many true, well-typed equations formed using those arrows, identities, composition, zero, sums, negatives and integer shifts. Iterated shifts are interpreted through the fixed shift-add and shift-zero comparisons. Select finitely many triangle rows among these expressions [def-weil-pbc-triangles-with-shift] and suppose each satisfies $D_S$. All occurrences of a labeled vertex are shared.\n\nThere exist $m\\ge m_0,i_v$ and representatives of the arrows in $C_m$ on the objects $X_{v,m}=T_{i_vm}x_v$ and their shifts such that all the equations hold in $C_m$ and every selected row is distinguished there. They recover the original data under $j_m$ and the isomorphisms\n$$d_{v,n}:X_v[n]\\xrightarrow{\\delta_{X_v,m}[n]}(j_mX_{v,m})[n]\\xrightarrow{\\beta_{m,n,X_{v,m}}^{-1}}j_m(X_{v,m}[n]).$$\nExplicitly an arrow $f:X_v[n]\\to X_w[r]$ is recovered as $f=d_{w,r}^{-1}\\circ j_m(f_m)\\circ d_{v,n}$. The unshifted version uses $\\delta_{X_v,m}$. A selected row $X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hX[1]$ gives a distinguished row $X_m\\xrightarrow{f_m}Y_m\\xrightarrow{g_m}Z_m\\xrightarrow{h_m}X_m[1]$ whose triangle image is isomorphic to the specified row using these vertex isomorphisms. Shifts of arrows, and composites of the expressions, are recovered using the same comparisons, rather than unrelated lifts of their occurrences.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Current pair-model proof, first two paragraphs (common-stage representatives and eventual equality); extracted finite-diagram enhancement with distinguished-row witnesses from the explicit proof plan of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-48. Agent statement. The general pair-representative and eventual-equality APIs are read in lean/WeilConjectures/CategoryTheory/StageSystem/Basic.lean lines 257-277, 365-383 and 478-495; shift compatibility is precisely the supplied theta equation, not a strictification assumption."
+ },
+ "stmt_deps": [
+  "def-sf-directed-common-stage-data",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [
+  {
+   "text": "Expand the finite input before choosing any stage. For every selected row V, choose its D_S witness: a distinguished triangle U in C_i and a triangle isomorphism phi:V→j_i^triangle U. Add fresh auxiliary labels (i,x),(i,y),(i,z) for its three vertices, the three components of phi and its inverse psi, their triangle-morphism equations and the component equations psi phi=1 and phi psi=1. Retain the original shared labels. Auxiliary labels allow different witnesses to have different vertices even when their images in P coincide. Include the finitely many subexpressions and shifts in all these equations. This is a finite extension of the original data; it uses the stated D_S predicate and the componentwise definition of triangle isomorphisms.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "For each primitive arrow f:X_v[n]→X_w[r], including the chosen isomorphism components, set $\\bar f=\\beta_{i_w,r,x_w}^{-1}\\circ f\\circ\\beta_{i_v,n,x_v}$. Its endpoints are literally j_{i_v}(x_v[n]) and j_{i_w}(x_w[r]). Choose a pair representative of each bar f, then choose one base stage b above m_0, all vertex and witness stages and all these representative stages. Transport each representative to b by the specified associator formula. Put $B_v=T_{i_vb}x_v$ and, if u represents bar f at b, put $f_b=\\sigma_{i_wb,r,x_w}\\circ u\\circ\\sigma_{i_vb,n,x_v}^{-1}:B_v[n]\\to B_w[r]$. Only at this fixed base stage do we use the comparisons sigma_{i_vb}. Subsequent stage arrows will be obtained by one transition applied to these f_b, not rebuilt from fresh sigma_{i_vN}.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "Write $d^b_{v,n}=\\beta_{b,n,B_v}^{-1}\\circ\\delta_{X_v,b}[n]$. Expanding the representatives of theta and using the associator cocycle gives $[b,u]=\\theta_{i_wb,x_w[r]}\\circ j_b(u)\\circ\\theta_{i_vb,x_v[n]}^{-1}$. The supplied theta--beta--sigma equation at the two endpoints therefore gives the typed recovery computation\n$$ (d^b_{w,r})^{-1}j_b(f_b)d^b_{v,n}=\\beta_{i_w,r,x_w}\\theta_{i_wb,x_w[r]}j_b(u)\\theta_{i_vb,x_v[n]}^{-1}\\beta_{i_v,n,x_v}^{-1}=\\beta_{i_w,r,x_w}\\bar f\\beta_{i_v,n,x_v}^{-1}=f.$$\nProducts here mean right-to-left composition. This also proves recovery for unshifted arrows with d=delta after applying the fixed shift-zero comparisons.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "For a witness $U=(x\\xrightarrow{s}y\\xrightarrow{t}z\\xrightarrow{h}x[1])$ in C_i, use the actual distinguished triangle $W_b=T_{ib}^{\\triangle}U$ on its auxiliary stage vertices. Its arrows are T_{ib}(s), T_{ib}(t), and $q_b=\\sigma_{ib,1,x}T_{ib}(h)$. Do not replace these three maps by arbitrary lifts. Naturality of theta gives $\\theta_{ib,y}j_b(T_{ib}s)=j_i(s)\\theta_{ib,x}$ and the corresponding equation for t and h. For the third map use explicitly\n$$\\theta_{ib,x}[1]\\beta_{b,1,T_{ib}x}j_b(\\sigma_{ib,1,x})j_b(T_{ib}h)=\\beta_{i,1,x}\\theta_{ib,x[1]}j_b(T_{ib}h)=\\beta_{i,1,x}j_i(h)\\theta_{ib,z}.$$\nThus these exact maps have the recovery identities of Step 3 for all three arrows of j_i^triangle U. The triangle W_b is distinguished by exactness of T_{ib}. The lifted components phi_b,psi_b consequently satisfy their triangle and inverse equations after applying j_b; they need not yet satisfy them in C_b.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-pbc-triangles-with-shift",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "Evaluate every expression at the fixed stage b from the primitive f_b and the witness maps of Step 4. An induction proves the recovery identity $e=(d^b_{w,r})^{-1}j_b(e_b)d^b_{v,n}$. Identities and zero follow from functoriality and additivity of j_b; sums and negatives from its additivity; for composition cancel the common d^b. For the shift of $e_b:B_v[n]\\to B_w[r]$, naturality of beta reads\n$$\\beta_{b,k,B_w[r]}j_b(e_b[k])=j_b(e_b)[k]\\beta_{b,k,B_v[n]}.$$\nLet $\\mu_{B,n,k}:B[n][k]\\to B[n+k]$ be the chosen shift-add comparison. Shift-add coherence gives the explicit endpoint identity $d^b_{v,n+k}\\mu_{X_v,n,k}=j_b(\\mu_{B_v,n,k})\\beta_{b,k,B_v[n]}^{-1}d^b_{v,n}[k]$. Substituting gives recovery for the stage shift $\\mu_{B_w,r,k}e_b[k]\\mu_{B_v,n,k}^{-1}$. Shift-zero coherence treats k=0 and the zero-shift identifications. Hence every original equation, every triangle-morphism equation, and each inverse equation becomes an equality j_b(p_b)=j_b(q_b) between two fixed maps of C_b.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "For fixed $p,q:A\\to B$ in C_b one has $j_b(p)=j_b(q)$ if and only if $T_{bN}(p)=T_{bN}(q)$ for some N≥b. Indeed j_b(p) has representative (b,T_{bb}(p)), and the quotient criterion gives equality of its transported representative with that for q. Naturality of $a_{bbN}:T_{bN}T_{bb}\\to T_{bN}$ rewrites the transported map $a_{bbN,B}T_{bN}(T_{bb}p)a_{bbN,A}^{-1}$ as T_{bN}(p). This proves the criterion without T_{bb}=1. Apply it to all the finitely many fixed equalities from Step 5 and take a common upper bound N of their witness stages. Functoriality and the associators carry each equality to this one N. Thus, writing H=T_{bN}, all the equalities H(p_b)=H(q_b) hold simultaneously. From now on b and this one H are fixed; no fresh-sigma recipe is used.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "Set $A_v=a_{i_vbN,x_v}:H(B_v)\\to B_{v,N}=T_{i_vN}x_v$ and $\\kappa_{v,n}=A_v[n]\\circ\\sigma_{bN,n,B_v}$. For every fixed base-stage map e:B_v[n]→B_w[r] define $Q(e)=\\kappa_{w,r}H(e)\\kappa_{v,n}^{-1}$. Functoriality, additivity of H, and cancellation of the middle kappa prove preservation of identities, zero, sums, negatives and composition. Here is the shift calculation. Shift-add coherence for sigma_{bN} and naturality of the shift-add comparison with A_v give\n$$\\kappa_{v,n+k}H(\\mu_{B_v,n,k})=\\mu_{B_{v,N},n,k}\\kappa_{v,n}[k]\\sigma_{bN,k,B_v[n]}.$$\nNaturality of sigma_{bN,k} gives $\\sigma_{bN,k,B_w[r]}H(e[k])=H(e)[k]\\sigma_{bN,k,B_v[n]}$. Substitute these identities and their inverses to obtain\n$$Q(\\mu_{B_w,r,k}e[k]\\mu_{B_v,n,k}^{-1})=\\mu_{B_{w,N},r,k}Q(e)[k]\\mu_{B_{v,N},n,k}^{-1}.$$\nThe zero-shift identity follows from sigma's shift-zero coherence. Thus Q preserves precisely the expression constructors in the input, using the CommShift data of H alone. Applying Q to the fixed equalities of Step 6 proves all the final-stage equations.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "We verify recovery for these Q-arrows, rather than for the rejected fresh-sigma construction. Put $d^N_{v,n}=\\beta_{N,n,B_{v,N}}^{-1}\\delta_{X_v,N}[n]$. The theta cocycle, expanded directly from its representatives, is\n$$\\delta_{X_v,N}=j_N(A_v)\\theta_{bN,B_v}^{-1}\\delta_{X_v,b}.$$\nThe theta--beta--sigma equation for (b,N) says\n$$j_N(\\sigma_{bN,n,B_v})\\theta_{bN,B_v[n]}^{-1}=\\beta_{N,n,H(B_v)}^{-1}\\theta_{bN,B_v}^{-1}[n]\\beta_{b,n,B_v}.$$\nMultiplying by j_N(A_v[n]), using beta_N naturality for A_v, and substituting the cocycle yields $j_N(\\kappa_{v,n})\\theta_{bN,B_v[n]}^{-1}d^b_{v,n}=d^N_{v,n}$. For e:B_v[n]→B_w[r], theta naturality gives $j_N(H(e))=\\theta_{bN,B_w[r]}^{-1}j_b(e)\\theta_{bN,B_v[n]}$. Consequently\n$$(d^N_{w,r})^{-1}j_N(Q(e))d^N_{v,n}=(d^b_{w,r})^{-1}j_b(e)d^b_{v,n}.$$\nBy Step 5 this is exactly the original expression. These equations prove the required recovery even when sigma_{i_vN} fails to agree with the associators in C_N.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  },
+  {
+   "text": "For each witness W_b of Step 4, H^triangle(W_b) is distinguished by exactness of H. Its transport by the three component isomorphisms A_v is exactly the row Q(W_b): for the connecting map the formula is $A_x[1]\\sigma_{bN,1,B_x}H(q_b)A_z^{-1}$. Thus TR1 isomorphism closure makes Q(W_b) distinguished in C_N. Step 6 and the constructor identities of Step 7 give inverse component maps Q(phi_b), Q(psi_b) between the selected final row and Q(W_b). In particular the shifted equation is $Q(\\phi_{b,1})[1]Q(h_b)=Q(q_b)Q(\\phi_{b,3})$, since Q respects the shift constructor; the other two squares and both inverse equations hold as well. These are an isomorphism of triangles in C_N, so the selected row is distinguished by TR1. Step 8 recovers all arrows and expressions. For a row, its first two recovery squares use delta (or the appropriate d for shifted vertices); the last square uses $\\beta_{N,1}d_{X,1}=\\delta_X[1]$. Hence its triangle image has exactly the claimed isomorphism to the specified row in P. Taking m=N proves the statement, including shared labels and empty finite lists.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-pbc-triangles-with-shift",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-directed-common-stage-data",
+  "def-weil-pbc-triangles-with-shift",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Agent finite-diagram enhancement of the pair-model representative and eventual-equality calculations; exact and shift data are those of the live StageSystemVerdier.lean plan. Composition throughout is right to left."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of distinguished triangles and commuting equations in a directed pair category lift simultaneously to one stage",
+   "results": "CategoryTheory.Triangulated.TStructure.triangle_map_exists; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₂; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism; CategoryTheory.Pretriangulated.productTriangle.lift; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁; CategoryTheory.Pretriangulated.completeDistinguishedTriangleMorphism; CategoryTheory.IsFiltered.tulip; CategoryTheory.IsTriangulated.mk'. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangle, CategoryTheory.Functor",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.Triangle'. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|exists_common_stage|mapTriangle.*[Ii]so|mkHom_eq",
+   "results": "Mathlib/CategoryTheory/Products/Basic.lean; Mathlib/CategoryTheory/Filtered/Basic.lean; Mathlib/CategoryTheory/Filtered/Basic.lean; Mathlib/CategoryTheory/Filtered/Basic.lean; Mathlib/CategoryTheory/Filtered/Basic.lean; Mathlib/CategoryTheory/Filtered/Basic.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Limits/Lattice.lean. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite diagram of triangles lifts to a finite stage of filtered colimit categories",
+   "results": "CategoryTheory.IsFiltered.of_hasFiniteColimits; CategoryTheory.Limits.HasFilteredColimits; CategoryTheory.Limits.filtered_colim_preservesFiniteLimits; CategoryTheory.Limits.HasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup; CategoryTheory.Limits.hasColimitsOfShape_of_has_filtered_colimits; CategoryTheory.Limits.hasColimitsOfShape_of_hasFiniteColimits; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous eventual equality and distinguishedness for a finite list of triangles in a filtered two colimit of pretriangulated categories",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.TStructure.triangle_map_exists; CategoryTheory.Triangulated.TStructure.triangle_iso_exists; CategoryTheory.ObjectProperty.trW; CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Pretriangulated.distinguished_cocone_triangle₁; CategoryTheory.ObjectProperty.trW_iff. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapTriangleRotateIso\"",
+   "results": "CategoryTheory.Functor.mapTriangleRotateIso; CategoryTheory.Functor.mapTriangleRotateIso_hom_app_hom₁; CategoryTheory.Functor.mapTriangleRotateIso_hom_app_hom₂; CategoryTheory.Functor.mapTriangleRotateIso_inv_app_hom₁; CategoryTheory.Functor.mapTriangleRotateIso_inv_app_hom₂; CategoryTheory.Functor.mapTriangleRotateIso_hom_app_hom₃; CategoryTheory.Functor.mapTriangleRotateIso_inv_app_hom₃. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(stage|lift)|filtered|colimit",
+   "results": "No hits. The hits supply axioms in an already pretriangulated category, rotation of a triangle image, or localization of a single category. None lifts simultaneous distinguished witnesses and equations in a general directed pair system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-common-stage-verdier-exists-unique",
+  "date": "2026-10-27",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Owning coefficient-category construction: composition and distinguished triangles are represented over a common finite extension; generic commonStage_verdier_existsUnique, its finite-diagram and eventual-equation argument.",
+   "via": [
+    "lem-route-common-stage-verdier-exists-unique"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-directed-distinguished-diagram-lifting",
+  "worker": "stage1",
+  "summary": "Repair of the third returned delivery: fixed-base construction replaces all fresh-sigma final-stage formulas. Lift all input and witness data at one base stage b, evaluate every expression there, descend fixed j_b-equalities by the unnormalized eventual-equality criterion, then apply one H=T_bN conjugated by kappa=a[n] sigma_bN. The proof explicitly derives constructor preservation from H CommShift and final recovery from theta cocycle, theta-beta-sigma compatibility and beta naturality. Triangle witnesses and inverses are transported by that same Q. Statement unchanged, no new nodes.",
+  "blueprint": "Pair-model representatives and eventual equality, enhanced to finite equations and distinguished witnesses in the attached StageSystemVerdier plan. No associator CommShift hypothesis is introduced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-081861de6",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-081861de6 (reviewer sub-agent of L); spot-checked: This delivery has no new nodes: the statement is unchanged against the base and only the proof was rewritten, in 9 steps. proof_deps are the three definitions the steps use (def-sf-directed-common-stage-data, def-weil-pbc-triangles-with-shift, def-weil-triangulated-category), so the route check has nothing to flag. I recomputed every display. Step 3: theta∘j_b(u)∘theta^-1 is represented at b by the transport u_b (associator cocycle), and the theta–beta–sigma equation then recovers f. Step 4: for the third witness arrow, theta[1]·beta_b·j_b(sigma)·j_b(Th) = beta_{i,1}·j_i(h)·theta_z, which is the third arrow of j_i^triangle U. Step 5: the endpoint identity reduces to the shift-add coherence of beta. Step 6: a_bbN·T_bN(T_bb p)·a^-1 = T_bN p by naturality, so T_bb=1 is not needed. Step 7: kappa_{n+k}·H(mu) = mu·kappa_n[k]·sigma_k, which gives Q(mu e[k] mu^-1) = mu Q(e)[k] mu^-1. Step 8: I rechecked the delta cocycle at stage N via the a-cocycle at (i,b,N,N); it matches the comparison-functor paragraph of det-def-sfb-filtered-two-colimit-model.proof.md (latest = main-20261026). The (b,N) theta–beta–sigma rearrangement is correct, and theta naturality reduces recovery at N to recovery at b. Step 9: (A_x,A_y,A_z) is a triangle iso from H^triangle(W_b) to Q(W_b), Q(phi)/Q(psi) give an iso from the selected row, and TR1 makes it distinguished in C_N. Exactness includes additivity by definition. Edge cases checked: empty lists (N=b), shared labels and fresh witness labels, T_bb≠1, negative and zero shifts, the shifted square, and sigma_{i_vN} not agreeing with the associators (never used). No SGA. No fixes. Administrative: the split_report calls this the repair of the third returned delivery; if this is a fourth push, applying G4 is for the maintainer. On content, the returned points (fresh-sigma family, ill-typed shifted equation) are repaired correctly."
+ }
+}

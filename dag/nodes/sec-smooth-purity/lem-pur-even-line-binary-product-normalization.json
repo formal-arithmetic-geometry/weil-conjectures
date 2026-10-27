@@ -1,0 +1,176 @@
+{
+ "id": "lem-pur-even-line-binary-product-normalization",
+ "kind": "statement",
+ "title": "Binary normalization for concrete even-line products",
+ "statement": "Fix the finite purity setting P, a separated finite-type k-scheme Y with structure map aY, and the concrete maps of [def-pur-even-line-product-maps]. Write U=integral P Y 0. Assume U is isomorphic to the tensor unit, every integral P Y r is constructible of finite Tor amplitude, and every forward P Y aY r 0 is invertible. For arbitrary a,b>=0, the composite (kappa_a inverse tensor kappa_b inverse) followed by forward a b equals appendPower U a b followed by kappa_(a+b+1) inverse. All kappa are the displayed recursively specified inverses, and appendPower is the canonical left tensor-power associator.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 3--4; concrete finite-product expansion in lem-pur-even-line-product-integration-symmetry"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-even-line-product-maps"
+ ],
+ "proof": [
+  {
+   "text": "the finite shifted Tate external powers and all intermediate tensors have\nbounded etale origin: Tate factors are shifted flat lines, and the compact-support\nfactors are ctf by hV. Apply the finite triple normal-form theorem in the product\ncompactification. The two proper words coincide because the ordinary triple\ntranspose identifies both with the tensor of the three counits. Their open\nnormalizations coincide by full faithfulness of extension by zero, since both\nrestrict to the identity. Transport through the canonical compactification and\npullback/tensor comparisons to obtain associativity of forward on coordinate\nblocks. Induct on b. For b=0 the equation is the defining inverse equation of\nbinaryInverse and the recursion for kappa. For b+1 apply that associativity to\nblocks of lengths a+1, b+1 and 1, apply the induction hypothesis, and cancel the\nspecified last binary product. The associator introduced by this step is exactly\nthe recursive appendPower. All inverses used here are the supplied hprod inverses;\nno invertibility of forward a b is assumed.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-pur-relative-external-power-regrouping",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-ctf-stability",
+    "thm-sf-comp-composition",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-pur-finite-triple-product-normal-forms",
+    "lem-pur-ordinary-triple-product-transpose",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+    "place": "Steps 3--4; concrete finite-product expansion in lem-pur-even-line-product-integration-symmetry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "lem-pur-relative-external-power-regrouping",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ctf-stability",
+  "thm-sf-comp-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-finite-triple-product-normal-forms",
+  "lem-pur-ordinary-triple-product-transpose",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 3--4; concrete finite-product expansion in lem-pur-even-line-product-integration-symmetry"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category a tensor power of a morphism to the unit is invariant under permutations of equal factors",
+   "results": "CategoryTheory.SymmetricCategory.symmetry_assoc, CategoryTheory.GradedObject.Monoidal.symmetry_assoc, CategoryTheory.SymmetricCategory.symmetry, CategoryTheory.GradedObject.symmetricCategory, CategoryTheory.SymmetricCategory, CategoryTheory.Pi.symmetricCategory, CategoryTheory.GradedObject.Monoidal.symmetry, CategoryTheory.MonObj.mul_braiding. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical braiding of an even shifted locally free rank one sheaf with itself is the identity",
+   "results": "CategoryTheory.BraidedCategory.braiding, CategoryTheory.Center.braiding, CategoryTheory.Limits.biprod.braiding', CategoryTheory.Limits.prod.braiding, CategoryTheory.GradedObject.Monoidal.braiding, CategoryTheory.Limits.biprod.symmetry, SemimoduleCat.braiding, CategoryTheory.Limits.biprod.braiding. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_tensorUnit|tensorHom_comp_tensorHom|neg_one_pow_mul",
+   "results": "Mathlib/Algebra/Ring/Commute.lean, Mathlib/RingTheory/Polynomial/ShiftedLegendre.lean, Mathlib/RingTheory/Polynomial/ShiftedLegendre.lean, Mathlib/RingTheory/Polynomial/Bernstein.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of compact support Kunneth maps normalizes binary affine line products",
+   "results": "CompactlySupportedContinuousMap.comp_assoc, AffineEquiv.prodAssoc, ContinuousAffineMap.prodMap_toAffineMap, AffineEquiv.linear_prodAssoc, AffineEquiv.prodAssoc_apply, LinearEquiv.prodProdProdComm, MeasureTheory.Measure.compProd_assoc, AffineMap.prod. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of compact support projection formula under a coordinate automorphism over the identity base",
+   "results": "HasCompactSupport.comp_homeomorph, HasCompactMulSupport.comp_homeomorph, Trivialization.coordChange_same, ContDiffMapSupportedIn.toFun_eq_coe, TestFunction.coe_ofSupportedIn, FiberBundleCore.coordChange_self, Trivialization.coordChange_same_apply, TestFunction.coe_ofSupportedInCLM. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braiding_naturality\"",
+   "results": "CategoryTheory.BraidedCategory.braiding_naturality_left, CategoryTheory.BraidedCategory.braiding_naturality_right, CategoryTheory.BraidedCategory.braiding_naturality, CategoryTheory.BraidedCategory.braiding_naturality_left_assoc, CategoryTheory.BraidedCategory.braiding_naturality_right_assoc, CategoryTheory.BraidedCategory.braiding_naturality_assoc, SemimoduleCat.MonoidalCategory.braiding_naturality_left, SemimoduleCat.MonoidalCategory.braiding_naturality_right. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associator_naturality\"",
+   "results": "CategoryTheory.Bicategory.associator_naturality_left, CategoryTheory.Bicategory.associator_naturality_right, CategoryTheory.Bicategory.associator_naturality_middle, CategoryTheory.Bicategory.associator_naturality_left_assoc, CategoryTheory.Bicategory.associator_naturality_right_assoc, CategoryTheory.Bicategory.associator_naturality_middle_assoc, CategoryTheory.Limits.coprod.associator_naturality, CategoryTheory.Limits.prod.associator_naturality. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support product of affine Tate coefficients agrees with concatenation of tensor powers under the canonical iterated Kunneth isomorphism",
+   "results": "TensorPower.tprod_mul_tprod, TensorPower.gMul_eq_coe_linearMap, TensorAlgebra.ofDirectSum_of_tprod, TensorAlgebra.toDirectSum_tensorPower_tprod, TensorPower.toTensorAlgebra_gMul, PiTensorProduct.constantBaseRingEquiv_tprod, MvPolynomial.universalFactorizationMapPresentation_σ', AdicCompletion.ofTensorProductEquivOfPiFintype. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate permutation action on affine space compact support intertwines the Kunneth isomorphism and signed derived tensor permutations",
+   "results": "AlternatingMap.domCoprod.summand, AlternatingMap.domCoprod.summand_mk'', AlternatingMap.domCoprod.summand_add_swap_smul_eq_zero, AlternatingMap.domCoprod.summand_eq_zero_of_smul_invariant, AlternatingMap.domCoprod, exteriorPower.toTensorPower_apply_ιMulti, PiTensorProduct.map_reindex_symm, Equiv.vanishesTrivially_comp. Generic categorical or ordinary tensor facts only; no statement about the specified compact-support coordinate maps or even shifted Tate line.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use generic monoidal lemmas for assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EvenLineProductIntegrationSymmetry",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4; concrete finite-product expansion in lem-pur-even-line-product-integration-symmetry",
+   "via": [
+    "lem-pur-even-line-product-integration-symmetry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EvenLineBinaryProductNormalization",
+  "file": "lean/Sheaf/Paper/EvenLineBinaryProductNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.EvenLineProduct.binaryProductNormalization",
+  "statement": "theorem binaryProductNormalization\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    [IsSeparated aY]\n    (hU : Nonempty (integral P Y 0 ≅ 𝟙_ (D P Y)))\n    (hV : ∀ r : ℕ, DerivedCategory.constructibleFiniteTor\n      (ModuleCat.{u + 1} (Ring P)) Y (integral P Y r))\n    (hprod : ∀ r : ℕ, IsIso (forward P Y aY r 0))\n    (a b : ℕ) :\n    tensorHom (kappa P Y aY hprod a).inv (kappa P Y aY hprod b).inv ≫\n        forward P Y aY a b =\n      (appendPower (integral P Y 0) a b).hom ≫\n        (kappa P Y aY hprod (a + b + 1)).inv",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T202257-L-2701954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T202257-L-2701954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

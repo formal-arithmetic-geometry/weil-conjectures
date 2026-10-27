@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-punctured-neighborhood-coefficient-presentation",
+ "kind": "statement",
+ "title": "Coefficient presentation for punctured-neighborhood cohomology",
+ "statement": "Let $T$ be spectral, $Z\\subseteq T$ closed, $A$ an abelian sheaf and $q\\in\\mathbb N$. Use $I,S_i,f_{ij},S,p_i$ from [lem-weil-pbc-punctured-neighborhood-spectral-system] and the diagram D and cocone C from [def-weil-pbc-punctured-neighborhood-cohomology-diagram]. There exist sheaves $F_i$ on $S_i$, f-maps $\\alpha_{ij}:F_i\\to(f_{ij})_*F_j$ with identity and composition laws, a diagram P of abelian sheaves on S, and isomorphisms $eP_i:P_i\\simeq p_i^{-1}F_i$ compatible with transition units, $eH_i:D_i\\simeq H^q(S_i,F_i)$ and $eL:C_*\\simeq H^q(S,\\operatorname{colim}P)$. The sheaf-unit compatibility is the sectionwise HEq formula in the Lean statement. Under eH the maps of D are exactly m(f_ij,alpha_ij,q); under eH and eL the legs of C are exactly m(p_i,beta_i,q), where beta_i is adjoint to the coefficient coprojection composed with eP_i inverse, and m is [def-weil-pbc-spectral-limit-cohomology-map] using [def-weil-pbc-topological-object-cohomology-pullback]. This asserts only identifications of coefficients and maps, not continuity or any generation/zero-detection assertion. No compactness hypothesis on the complement of Z is needed. The coefficient data and these laws are bundled as PuncturedNeighborhoodCoefficients; the theorem asserts its nonemptiness. Its fields are exactly the objects, isomorphisms and equations specified above.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0A37 and 0A3D (2); topological setup from Topology Tags 0A31, 0902, 0AP0"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-punctured-neighborhood-spectral-system",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-spectral-limit-cohomology-map",
+  "def-weil-pbc-topological-object-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Let j_i be the open inclusion of S_i in T and k the inclusion of S. Set F_i=j_i inverse image A. Define alpha_ij as the adjoint of the unit-compatible inverse-image composition isomorphism f_ij inverse image F_i ≅ F_j. Direct images compose sectionwise, so adjunction proves the identity and associativity equations and hence the sectionwise alpha laws.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take P constant with value k inverse image A and eP the inverses of the composition isomorphisms. Unit compatibility and associativity prove the sectionwise transition equation. The index is nonempty and directed, so the constant cocone is a colimit. Its comparison identifies colimit P with k inverse image A.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-spectral-system",
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For open subspaces the inverse image is ordinary restriction. Restrict an injective resolution, using the exact left adjoint extension by zero to preserve injectives, and identify its section complexes. The object-localization comparison gives eH; the preceding coefficient-colimit identification gives eL.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization-addEquiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero the two map equations are the section restriction and adjunction-unit equations. The comparisons commute with connecting maps. Uniqueness and composition of normalized cohomology pullback extend the equations to all degrees, including the final restriction to the terminal open in the specified cocone leg.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback-composite",
+    "lem-weil-pbc-site-cohomology-pullback-unique",
+    "def-weil-pbc-topological-object-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-punctured-neighborhood-spectral-system",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-cohomology-over-object-localization-addEquiv",
+  "lem-weil-pbc-site-cohomology-pullback-composite",
+  "lem-weil-pbc-site-cohomology-pullback-unique",
+  "def-weil-pbc-topological-object-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0A37 and 0A3D (2); topological setup from Topology Tags 0A31, 0902, 0AP0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of an abelian sheaf restricted to an open subspace agrees with cohomology over that open, naturally in further restrictions",
+   "results": "Scheme module restriction and sheaf section restriction lemmas, no cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an abelian sheaf to open subspaces identifies ambient object cohomology with subspace cohomology compatibly with inverse image composition",
+   "results": "Global-sections restriction naturality and scheme restriction formulas; no comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"Iso\"",
+   "results": "IsOpenEmbedding.sheafPullbackIso identifies sheaf-level restriction; no cohomology map equations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|pullback)|pullback.*[Cc]omp",
+   "results": "Sheaf pullback composition infrastructure exists; no general topological cohomology restriction comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyEventualZero",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "The punctured-neighborhood continuity input below the top-degree restriction argument; Coefficient presentation for punctured-neighborhood cohomology.",
+   "via": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-eventual-zero",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodCoefficientPresentation",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodCoefficientPresentation.lean",
+  "declaration": "TopCat.puncturedNeighborhood_coefficient_presentation",
+  "declarations": [
+   "TopCat.PuncturedNeighborhoodCoefficients",
+   "TopCat.puncturedNeighborhood_coefficient_presentation"
+  ],
+  "statement": "theorem puncturedNeighborhood_coefficient_presentation {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) : Nonempty (PuncturedNeighborhoodCoefficients Z hZ A q)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T123233-L-1845227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T123233-L-1845227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

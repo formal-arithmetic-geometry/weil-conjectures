@@ -1,0 +1,147 @@
+{
+ "id": "def-sp-kflat-scalar-tower-constructions",
+ "kind": "definition",
+ "title": "Canonical scalar-tower endofunctors, transitions and computation morphisms",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $C$ be an essentially small site and use its module-sheaf categories $\\operatorname{Mod}(R)$ for commutative ring sheaves $R$ [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Fix presentations $p_a$ for every ring map $a:R\\to S$ and normalized successive-extension data $N$ [def-weil-pbc-successive-derived-quotient-data]. Write $E_a=p_a.\\mathrm{ordinary}$, $L_a=p_a.\\mathrm{derived}$, $\\operatorname{Res}_a$ for the recorded ordinary restriction, and $r_a=N.\\mathrm{right}(a)$ for derived restriction. Define $O_a=\\operatorname{Res}_a\\circ E_a$ (ordinaryEnd), $D_a=r_a\\circ L_a$ (derivedEnd), and $q_R=Q_{h,R}\\circ\\pi_R$ (localize), where $\\pi_R$ is the homotopy quotient.\n\nFor ring maps $a:R\\to S$, $b:S\\to T$, $a':R\\to T$ and an equality $h:b\\circ a=a'$, define ordinaryStep $O_a\\to O_{a'}$ by inserting the ordinary adjunction unit for $b$ after $E_a$, then the normalized ordinary composition isomorphism $E_bE_a\\cong E_{a'}$, restricting along $b$ and $a$, and finally using the normalized restriction compositor $\\operatorname{Res}_a\\operatorname{Res}_b\\cong\\operatorname{Res}_{a'}$ (transported by $h$). Define derivedStep $D_a\\to D_{a'}$ by the identical composite with $L$, $r$, the derived adjunction unit, the derived scalar compositor and the derived restriction compositor from $N$.\n\nFor every cochain complex $P$ of $R$-modules, define computation $D_a(q_RP)\\to q_R(O_aP)$ as the composite of $r_a$ applied to the universal derived counit of $p_a$ at $\\pi_RP$, the factorization $r_a\\circ Q_{h,S}\\cong Q_{h,R}\\circ(\\operatorname{Res}_a)_h$ from $N$, and $Q_{h,R}$ applied to the canonical comparison between passage to homotopy categories and composition of $E_a$ with $\\operatorname{Res}_a$. Here $O_aP$ is the termwise ordinary functor on the complex. For $K\\in D(R)$ and an isomorphism $e:q_RP\\xrightarrow{\\sim}K$, define $\\epsilon(a,P,K,e)=\\mathrm{computation}(a,P)\\circ D_a(e^{-1}):D_aK\\to q_R(O_aP)$. These are definitions of canonical morphisms for arbitrary $P$; they assert neither K-flatness nor invertibility of computation or $\\epsilon$, and impose no flatness, surjectivity or boundedness condition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-successive-derived-quotient-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change) and 0D6D (lemma-derived-pullback-composition); canonical computation and restriction composites used in the reduction-as-cone and completeness paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlatScalarTower|ordinaryEnd|derivedEnd|ordinaryStep|derivedStep",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "Algebra"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction. Reuse the existing seven definitions in Sheaf.Algebra.Homology.KFlatScalarTowerRealization, attaching them to this definition node; the realization theorem is a separate proof dependency."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordinary and derived scalar extension restriction endofunctors and K-flat computation comparison for sheaves of modules",
+   "results": {
+    "count": 8,
+    "hits": [
+     "ModuleCat.restrictScalars",
+     "ModuleCat.RestrictScalars.obj'",
+     "PresheafOfModules.restrictScalarsObj",
+     "SheafOfModules.restrictScalars",
+     "PresheafOfModules.restrictScalars",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "PresheafOfModules.instAdditiveRestrictScalars"
+    ],
+    "digest": "fb9c4bed980791a0",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction. Reuse the existing seven definitions in Sheaf.Algebra.Homology.KFlatScalarTowerRealization, attaching them to this definition node; the realization theorem is a separate proof dependency."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension restriction transitions and counit computation on a cochain representative",
+   "results": {
+    "count": 8,
+    "hits": [
+     "ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit",
+     "ModuleCat.RestrictionCoextensionAdj.counit'_app",
+     "CochainComplex.ConnectData.restrictionLEIso_hom_f",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+     "CochainComplex.ConnectData.restrictionGEIso_hom_f"
+    ],
+    "digest": "fa77c5b6c7b0ad64",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction. Reuse the existing seven definitions in Sheaf.Algebra.Homology.KFlatScalarTowerRealization, attaching them to this definition node; the realization theorem is a separate proof dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n KFlatScalarTower|ordinaryEnd|derivedEnd lean/WeilConjectures lean/Sheaf; rg -l SheafOfModules.KFlatScalarTower.epsilon dag/nodes; blueprint_refs.py search \"scalar tower\"",
+   "results": "No WeilConjectures definition; Sheaf defines all seven constructions in KFlatScalarTowerRealization. Only lem-pe-kflat-scalar-tower-realization records these names, as helpers of its theorem; no definition node owns them. Blueprint search: 0 matching nodes.",
+   "date": "2026-10-24",
+   "verdict": "Attach existing definitions, with existing:true, rather than duplicate data or use a theorem as their definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-koszul-quotient-strict-resolution-bridge",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Reduction-as-cone and completeness paragraph: canonical restricted scalar extensions, transitions and representative computation maps.",
+   "via": [
+    "lem-sp-koszul-quotient-strict-resolution-bridge",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatScalarTowerRealization",
+  "declaration": "SheafOfModules.KFlatScalarTower.epsilon",
+  "declarations": [
+   "SheafOfModules.KFlatScalarTower.ordinaryEnd",
+   "SheafOfModules.KFlatScalarTower.derivedEnd",
+   "SheafOfModules.KFlatScalarTower.localize",
+   "SheafOfModules.KFlatScalarTower.ordinaryStep",
+   "SheafOfModules.KFlatScalarTower.derivedStep",
+   "SheafOfModules.KFlatScalarTower.computation",
+   "SheafOfModules.KFlatScalarTower.epsilon"
+  ],
+  "statement": "noncomputable def epsilon {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)\n    (P : CochainComplex (Modules R) ℤ) (K : DerivedCategory (Modules R))\n    (e : (localize R).obj P ≅ K) :\n    (derivedEnd p N a).obj K ⟶\n      (localize R).obj (((ordinaryEnd p a).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of returned delivery 73aad002b2ef: this definition node records the seven existing construction declarations at lines 44-108; no declaration or data is copied or changed. Their definitions do not choose the realization theorem. That theorem remains a proof dependency of the bridge, rather than a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e69ce765e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e69ce765e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at head 73aad002 fixes exactly the returned point. The Lean is identical to the 73aad version, whose mathematics was checked in full with no other fault. The only change to the item JSON: stmt_deps replaces theorem lem-pe-kflat-scalar-tower-realization with new def node def-sp-kflat-scalar-tower-constructions; the theorem stays in proof_deps; lean.note appended. New node: existing:true on the 7 KFlatScalarTower defs (ordinaryEnd, derivedEnd, localize, ordinaryStep, derivedStep, computation, epsilon) in Sheaf.Algebra.Homology.KFlatScalarTowerRealization, read against side-live lines 44-108. Its TeX matches the composites, epsilon's statement matches the file exactly, the data are real (no .choose of the theorem), its stmt_deps are adequate, it has the required fields (status split, import_flags []), and no other def node owns these declarations in side-live or live. Edge cases as before. No compile needed (no changed file)."
+ }
+}

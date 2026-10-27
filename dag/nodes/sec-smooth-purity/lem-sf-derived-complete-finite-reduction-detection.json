@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-derived-complete-finite-reduction-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma map-into-Rlim; the Milnor part of the assigned torsion-input detection argument; additional proved part of torsion-input detection; inherited source ancestor: def-weil-integral-rational-qbar-compact-support",
+   "via": [
+    "lem-qcqs-compact-support-torsion-input-detection",
+    "lem-qcqs-compact-support-reduction-rigidity",
+    "lem-qcqs-compact-support-normalized-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Detection by finite scalar reduction for complete objects with finite shifted Hom",
+ "statement": "Let l be a prime, E a finite extension of Q_l, and X any scheme. Let P,Q be derived objects over the completed integral coefficient sheaf on X. Assume Q is derived complete and Hom(P[1], Res_n Red_n Q) is finite for every n >= 0. If two morphisms P -> Q have equal images under every derived scalar extension Red_n, they are equal. The reductions use exponent n+1. No constructibility or geometric base-field hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma map-into-Rlim; the Milnor part of the assigned torsion-input detection argument",
+  "note": "Proved partial result of the assigned detection argument; no new sorry."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the defining completeness Roos triangle. The product for the restricted reductions is also a product for the corresponding tower objects. Match the product maps and transitions to exhibit the canonical reduction cone as a homotopy limit.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Milnor bijection using the given finite shifted Hom groups. The scalar-adjunction units are natural, so equality of the reductions gives equality of both composites with every cone leg. Injectivity of the Milnor map gives equality of the original morphisms.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma map-into-Rlim; the Milnor part of the assigned torsion-input detection argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations on derived complete integral constructible sheaves determined by torsion inputs",
+   "results": "Only general sheaf and natural-transformation extensionality; no geometric detection theorem. Local adopted source has the finite shifted-Hom Milnor theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the adopted source Milnor argument with its precise hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite (_ ⟶ _)",
+   "results": "FintypeCat, SimplexCategory and connected objects in a Galois category only.",
+   "date": "2026-10-27",
+   "verdict": "No derived geometric Hom finiteness result in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_milnorMap|integralReduction_shiftedHom_finite_qcqs",
+   "results": "The Mathlib search has no hit. Local rg found the source IsHomotopyLimit.bijective_milnorMap and the project finite-field shifted-Hom proof. The private etale_hom_finite used by that proof quantifies over any algebraically closed field.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the source Milnor theorem and the existing generic finite-coefficient Hom proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between bounded constructible derived etale complexes with finite coefficients over an algebraically closed field are finite",
+   "results": "Eight results about finite scheme morphisms, not finiteness of derived Hom groups.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generic private finite-coefficient Hom proof in the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportTorsionInputDetection",
+  "date": "2026-10-27",
+  "group": "H2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedCompleteFiniteReductionDetection",
+  "file": "lean/Sheaf/Paper/DerivedCompleteFiniteReductionDetection.lean",
+  "declaration": "WeilConjectures.derivedComplete_finiteReduction_ext",
+  "statement": "theorem derivedComplete_finiteReduction_ext\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (W : Scheme.{u}) {P Q : DerivedCategory (scalarReductionSource.{u, u} l E W)}\n    (hQ : IsSfDerivedComplete l E W Q)\n    (hfin : ∀ n : ℕ, Finite\n      (P⟦(1 : ℤ)⟧ ⟶ (sfDerivedReductionRestricted l E W n).obj Q))\n    (a b : P ⟶ Q)\n    (h : ∀ n : ℕ, (scalarReductionDerivedExtension.{u, u} l E W n).map a =\n      (scalarReductionDerivedExtension.{u, u} l E W n).map b) : a = b",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T094415-L-223111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T094415-L-223111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

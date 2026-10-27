@@ -71,9 +71,9 @@ variable (X : Scheme.{u})
 
 namespace Etale.DerivedCategory
 
-/-- Blueprint `def-sf-pf`: the coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale
-sheaves, where `Λ_X` is the monoidal unit of `D(X_ét)`. The Verdier dual of the same blueprint
-definition is `AlgebraicGeometry.Etale.verdierDual`. -/
+/-- Blueprint `def-pod-coefficient-dual-on-x` (Coefficient dual on `X`) and `def-sf-pf`: the
+coefficient dual `K^∨ = RHom(K, Λ_X)` of a complex of étale sheaves, where `Λ_X` is the monoidal
+unit of `D(X_ét)`. The Verdier dual of `def-sf-pf` is `AlgebraicGeometry.Etale.verdierDual`. -/
 noncomputable def coefficientDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
@@ -81,7 +81,9 @@ noncomputable def coefficientDual :
 
 variable {A X}
 
-/-- The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
+/-- Blueprint `def-pod-coefficient-dual-on-x`: Coefficient dual on `X`, the evaluation.
+
+The *evaluation* `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X`: the counit at `Λ_X` of the adjunction
 `K ⊗ᴸ - ⊣ RHom(K, -)` (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
 noncomputable def coefficientEvaluation
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :

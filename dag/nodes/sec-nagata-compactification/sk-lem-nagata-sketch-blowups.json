@@ -71,7 +71,94 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap",
+     "module": "WeilConjectures.Blowup.Proper",
+     "lines": [
+      72,
+      78
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.strictTransform",
+     "module": "WeilConjectures.Compactification.StrictTransform",
+     "lines": [
+      82,
+      87
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsAdmissible.isSchemeTheoreticallyDominant_preimage_ι",
+     "module": "WeilConjectures.Blowup.Density",
+     "lines": [
+      116,
+      125
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.IsAdmissible.exists_extend"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap",
+     "module": "WeilConjectures.Blowup.Proper",
+     "lines": [
+      72,
+      78
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.strictTransform",
+     "module": "WeilConjectures.Compactification.StrictTransform",
+     "lines": [
+      143,
+      148
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsAdmissible.exists_extend",
+     "module": "WeilConjectures.Blowup.Extension",
+     "lines": [
+      262,
+      317
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsAdmissible.isSchemeTheoreticallyDominant_preimage_ι",
+     "module": "WeilConjectures.Blowup.Density",
+     "lines": [
+      133,
+      142
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Compactification.NagataSketchBlowups",
   "declaration": "AlgebraicGeometry.nagata_sketch_blowups",
@@ -89,5 +176,27 @@
   "group": "Q132",
   "result": "pass",
   "note": "Re-delivery of Q102's landed statement: the commit only changes lean.by Q102->Q132, adds one module-docstring sentence and a Q132 report (Worker report + Second reading by Q132 present). Statement re-checked independently. Node statement verbatim main-20261015 source. Lean nagata_sketch_blowups renders qcqs T, qc U and all three clauses in order with IsAdmissible (landed attachment of sk-def-nagata-admissible); single universe u, no extra assumptions. Clause 1 includes n=0; clause 2 equals upstream IsAdmissible.exists_comp repackaged; clause 3 equals IsAdmissible.exists_extend, IsPullback orientation checked. Docstrings carry source/blueprint and a proof plan; sorry only; lean.statement verbatim; no new definitions or duplicates. nt_compile --json: module 6.0/6.3 s, no errors; probe 21 s, no errors, proves clauses 2 and 3 from upstream and builds the unit-ideal IsAdmissible. Note: stale queue.tsv:295 stage-2 entry caused the reassignment; merging only re-attributes lean.by."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be qcqs and $U\\subseteq T$ an open, not necessarily quasi-compact.\nIf $\\mathcal I_1,\\mathcal I_2$ are centres of $U$-admissible blow-ups of $T$\n([sk-def-nagata-admissible]), so is $\\mathcal I_1\\mathcal I_2$, and\n$\\operatorname{Bl}_{\\mathcal I_1\\mathcal I_2}(T)$ is, over $T$, the blow-up\nof $\\operatorname{Bl}_{\\mathcal I_1}(T)$ along the pulled-back\n$\\mathcal I_2$; so two $U$-admissible blow-ups have a common $U$-admissible\nblow-up. A composite $T''\\to T'\\to T$ of a $U$-admissible blow-up $T'\\to T$\nand a blow-up of $T'$ admissible for the preimage of $U$ is isomorphic over\n$T$ to a $U$-admissible blow-up of $T$. A $U$-admissible blow-up on a\nquasi-compact open $V\\subseteq T$ containing $U$ extends to a\n$U$-admissible blow-up of $T$ whose restriction to $V$ is the given one.",
+  "proof": [
+   {
+    "text": "The product $\\mathcal I_1\\mathcal I_2$ is of finite type with\n$V(\\mathcal I_1\\mathcal I_2)=V(\\mathcal I_1)\\cup V(\\mathcal I_2)$, which\nmisses $U$. On the blow-up of $\\mathcal I_1$ followed by the blow-up of the\npulled-back $\\mathcal I_2$ the pullback of $\\mathcal I_1\\mathcal I_2$ is\ninvertible; conversely, on the blow-up of $\\mathcal I_1\\mathcal I_2$ both\nfactors become invertible. The universal property gives maps both ways, and\nuniqueness of lifts shows they are inverse (Stacks 080A). Exchanging the two\nfactors gives the domination of the blow-up of $\\mathcal I_2$. For a center\non the first blow-up which is not itself pulled back from $T$, the\ncomposition assertion is the finite-type ideal calculation in Stacks 080B: it\nproduces a finite-type ideal on $T$ whose support is $V(\\mathcal I_1)$\ntogether with the image of the second center, hence still disjoint from $U$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The extension assertion uses extension of finite-type quasi-coherent ideals\nfrom a quasi-compact open, with a center still outside $U$; multiplying by a\nfinite-type ideal cutting out $T\\setminus V$ keeps the restriction to $V$.\nThe precise admissible extension result is Stacks 080M. These results turn\nlocal constructions into one global modification preserving $U$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

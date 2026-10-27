@@ -1,0 +1,112 @@
+{
+ "id": "lem-pod-point-extension-tensor-comparison",
+ "kind": "statement",
+ "title": "Normalized total tensor comparison for point extension",
+ "statement": "For any field k, commutative scalar ring R, coefficient sheaf B and alpha:constant R to B, use the actual point extension constructions [def-pod-point-derived-hom-models]. Suppose L has the recorded extension objects and maps and is left adjoint to sections. For any cochain complexes P,Q of R-modules, there exists a chain isomorphism total(L(P) tensor_B L(Q)) to L(total(P tensor_R Q)) [def-pc-tensor-complex-sheaves]. On every degree-p,j local tensor generator it sends (b tensor x) tensor (c tensor y) to bc tensor (x tensor y).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized total tensor comparison for point extension"
+ },
+ "stmt_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "on module tensor generators send (b tensor x) tensor (c tensor y)\nto bc tensor (x tensor y). The inverse sends b tensor (x tensor y) to\n(b tensor x) tensor (1 tensor y). Scalar balancing makes both maps well-defined;\nthe tensor relations prove both composites are identities. First descend the\nconstant-module sheafification and then the coefficient tensor sheafification.\nTheir universal properties also give naturality in both module arguments.\nIn total degree n take the sum over p+j=n. L is a left adjoint and preserves\nthese coproducts. The comparison commutes with each differential because both\nroutes are dx tensor y plus (-1)^p times x tensor dy. The degree maps therefore\nform inverse chain maps with exactly the displayed generator formula.",
+   "uses": [
+    "def-pod-point-derived-hom-models",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized total tensor comparison for point extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pod-point-derived-hom-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "T1: explicit reduction of the indicated part of the point finite-projective argument, using the Stacks references in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of complexes commutes with total tensor and sends pure tensors to the product of coefficients",
+   "results": "8 hits; ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.map_tmul, TensorProduct.finsuppLeft_smul', LinearMap.smul_lTensor, LinearMap.lTensor_smul_action, ModuleCat.ExtendScalars.smul_tmul, Algebra.TensorProduct.lmul', PiTensorProduct.smulCommClass'; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite projective complex dual tensor scalar extension sheaves canonical adjunction unit isomorphism",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Tt]ensor|[Dd]ual.*[Pp]rojective|[Dd]erived[Cc]omplete",
+   "results": "17 hits; Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointProjectiveDualTensorModels",
+  "date": "2026-10-24",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph of thm-pod-identification-of-the-comparison.proof.md, actual adjunction/evaluation comparison: Normalized total tensor comparison for point extension",
+   "via": [
+    "lem-pod-point-projective-dual-tensor-models",
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointExtensionTensorComparison",
+  "file": "lean/Sheaf/Paper/PointExtensionTensorComparison.lean",
+  "declaration": "WeilConjectures.PointDerivedHom.point_extension_tensor_comparison",
+  "statement": "theorem point_extension_tensor_comparison\n    (hmap : ∀ {M N : ModuleCat.{u + 1} R} (f : M ⟶ N),\n      L.map f = eqToHom (hobj M) ≫ extensionMorphism.{u, u} k B α f ≫\n        eqToHom (hobj N).symm)\n    (P Q : CochainComplex (ModuleCat.{u + 1} R) ℤ) :\n    ∃ β : total.{u, u} k B ((extensionComplex.{u, u} k B α L adj).obj P)\n        ((extensionComplex.{u, u} k B α L adj).obj Q) ≅\n      (extensionComplex.{u, u} k B α L adj).obj (moduleTotal P Q),\n      ∀ (p j : ℤ) (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ)\n        (b c : B.obj.obj U) (x : P.X p) (y : Q.X j),\n        (β.hom.f (p + j)).val.app U\n          (totalElement.{u, u} k B ((extensionComplex.{u, u} k B α L adj).obj P)\n            ((extensionComplex.{u, u} k B α L adj).obj Q) p j U\n            (generator.{u, u} k B α L hobj (P.X p) U b x)\n            (generator.{u, u} k B α L hobj (Q.X j) U c y)) =\n          generator.{u, u} k B α L hobj ((moduleTotal P Q).X (p + j)) U (b * c)\n            (moduleTotalElement P Q p j x y)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "independent cc review: removed IntrinsicFiniteTorsionConstructibility import vs public closure (SfIntegralConstructible, FiniteTorAmplitude re-export it) and the item statement's finiteTorConstructibleIntegral→sfIntegralConstructible→intrinsicFiniteTorsionConstructible; 3 sorried statements vs node statements and HomComplex sign conventions; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only); item has 0 importers"
+ }
+}

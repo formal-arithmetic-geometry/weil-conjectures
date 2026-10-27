@@ -1,0 +1,207 @@
+{
+ "id": "lem-route-inverse-image-completed-coefficient-map-is-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "via": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "place": "Statement, the first transport arrow in the ordinary and compactly supported global geometric Frobenius composites; via point transport, the integral structure map used to compare inverse image with completed pullback. This item isolates invertibility of that actual coefficient limit lift."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The completed coefficient map is an isomorphism, without a completeness hypothesis on any module.",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite extension, with valuation ring $\\mathcal O_E$, chosen uniformizer $\\varpi_E$ and quotient rings $A_{E,m}=\\mathcal O_E/\\varpi_E^m\\mathcal O_E$ for $m\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of arbitrary schemes [def-weil-scheme-morphism-properties], with their small pro-etale sites [def-weil-pbc-proetale-site]. Write $\\Phi_g(U\\xrightarrow{u}X)=(U\\xrightarrow{g\\circ u}Y)$ and let $F_g$ be the sectionwise inverse-image functor on ring sheaves, $(F_g\\mathcal F)(U)=\\mathcal F(\\Phi_gU)$ [def-weil-proetale-iso-sectionwise-inverse-image]. Schemes and coefficients may have independent universes $t,u$; take ring sheaves valued in $\\operatorname{RingCat}_{\\max(u,t+1)}$, using $\\operatorname{ULift}^{t+1}A_{E,m}$ for the coefficient rings.\n\nFor $W=X,Y$ and $n\\in\\mathbf N$, let $R_{W,n}$ be the constant commutative ring sheaf with value $\\operatorname{ULift}^{t+1}A_{E,n+1}$, regarded as a sheaf of rings [def-weil-pbc-constant-sheaf]. Write $r_{W,n}:R_{W,n+1}\\to R_{W,n}$ for its quotient transition, and put $L_W=\\varprojlim_{n\\in\\mathbf N}R_{W,n}$, with projections $\\pi_{W,n}$ [def-pur-sheaf-inverse-limit]. Thus $R_{W,\\bullet}$ and $L_W$ are precisely `integralCoefficientSheafSystem` and `completedIntegralCoefficientSheafUnrestricted`.\n\nLet $c_n:F_gR_{Y,n}\\to R_{X,n}$ be the canonical comparison fixed by sending each constant section $a$ at $\\Phi_gU$ to the constant section $a$ at $U$, as in [lem-weil-proetale-isomorphism-inverse-image] (3). Let $q:F_gL_Y\\to L_X$ be the limit lift specified by\n$$\\pi_{X,n}\\circ q=c_n\\circ F_g(\\pi_{Y,n})\\qquad(n\\in\\mathbf N).$$\nThis is the recorded `inverseImageCompletedCoefficientMap l E g`. Then $q$ is an isomorphism of sheaves of rings. No module or completeness hypothesis on a module is part of this assertion.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "lem-weil-point-automorphism-restriction-natural: the Lean of this node (its declaration uses) reaches AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/ProEtale/InverseImagePullbackComparison.lean, declaration AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso (module Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison, lines 111-120, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The site equivalence of [lem-weil-proetale-isomorphism-inverse-image] gives the sheafification compatibility isomorphism. Its action on constant sections is the prescribed normalization. Uniqueness therefore identifies its underlying ring-sheaf map with each finite coefficient comparison, proving those comparisons invertible. The naturality square proved in the component-naturality argument assembles these comparisons into a natural transformation of coefficient diagrams. NatIso.isIso_of_isIso_app makes it a natural isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-iso-sectionwise-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  },
+  {
+   "text": "The same site-equivalence theorem implies that the sectionwise inverse-image functor preserves the coefficient limit. Compose preservesLimitIso with HasLimit.isoOfNatIso for the finite coefficient isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  },
+  {
+   "text": "The prescribed coefficient components form the cone by [lem-route-inverse-image-completed-coefficient-component-naturality]. Compose both the displayed limit lift and the composite isomorphism with each limit projection. The projection formulas for limit.lift, preservesLimitIso and HasLimit.isoOfNatIso agree definitionally. Limit extensionality identifies the lift with the isomorphism hom, proving it invertible.",
+   "uses": [
+    "lem-route-inverse-image-completed-coefficient-component-naturality",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-inverse-limit",
+  "lem-route-inverse-image-completed-coefficient-component-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+  "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'inverseImageCompletedCoefficientMap_isIso' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageCompletedCoefficientMap|isoOfNatIso|preservesLimitIso",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Comma/Arrow.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Final.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Final.lean, Mathlib/CategoryTheory/Functor/EpiMono.lean, Mathlib/CategoryTheory/Limits/HasLimits.lean, Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories commutes with inverse limits and an isomorphism of diagrams induces an isomorphism of their limits",
+   "results": "8 hits: CategoryTheory.Functor.createsLimitsOfIsEquivalence, CategoryTheory.Limits.hasLimit_equivalence_comp, CategoryTheory.Functor.reflectsLimits_of_isEquivalence, CategoryTheory.Limits.HasLimit.isoOfEquivalence, CategoryTheory.Limits.HasLimit.isoOfEquivalence_inv_π, CategoryTheory.Adjunction.isEquivalencePreservesLimits, CategoryTheory.createsLimitOfIsoDiagram, CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_inv",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.preservesLimitIso, CategoryTheory.Limits.HasLimit.isoOfNatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Limits.preservesLimitIso'",
+   "date": "2026-10-26",
+   "verdict": "no match: rejected pattern, unknown identifier CategoryTheory.Limits.preservesLimitIso; corrected in the subsequent Loogle search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image along a scheme isomorphism commutes with the inverse limit of constant finite coefficient ring sheaves and the canonical completed coefficient map is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.Scheme.inv_appTop",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Cc]oefficient|[Cc]oefficient.*[Cc]omplet|isoSectionwise",
+   "results": "3 hits: Mathlib/RingTheory/LaurentSeries.lean, Mathlib/Analysis/Fourier/AddCircleMulti.lean, Mathlib/Analysis/Fourier/AddCircle.lean",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The limit comparison for reindexing sheaves by an isomorphism of sites composed with constant ring sheaf isomorphisms is invertible",
+   "results": "8 hits: TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso, CategoryTheory.Sheaf.ΓNatIsoLim, CategoryTheory.GrothendieckTopology.diagramCompIso, TopCat.Presheaf.SheafConditionEqualizerProducts.fork.isoOfIso, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.isoOfIso, CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp, TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens.isoOfIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasLimit.isoOfNatIso",
+   "results": "12 hits: CategoryTheory.Limits.HasLimit.isoOfNatIso, CategoryTheory.Limits.HasLimit.isoOfNatIso_hom_π, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.Limits.HasLimit.lift_isoOfNatIso_hom, CategoryTheory.Limits.HasLimit.lift_isoOfNatIso_inv, CategoryTheory.Limits.HasLimit.isoOfNatIso_hom_π_assoc, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π_assoc, CategoryTheory.Limits.HasLimit.lift_isoOfNatIso_hom_assoc",
+   "date": "2026-10-26",
+   "verdict": "no match: these general facts do not supply the pro-etale sectionwise and normalized constant-ring comparisons needed for the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-weil-point-automorphism-restriction-natural",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/InverseImagePullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso"
+  ],
+  "statement": "@[instance] theorem inverseImageCompletedCoefficientMap_isIso :\n    IsIso (inverseImageCompletedCoefficientMap l E g) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-inverse-image-completed-coefficient-map-is-iso",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Replaced the provisional docstring/signature by the exact scheme-isomorphism assertion with independent coefficient universes, positive exponent n+1, the actual constant sheaf tower and prescribed limit lift. Reused existing site-equivalence/constant-map and sectionwise-limit nodes; proved invertibility by an explicit coordinate inverse, including transition and restriction checks. No new nodes, no Lean writes or compiles.",
+  "blueprint": "Current latest blueprint def-weil-global-geometric-frobenius, displayed first ordinary/compactly supported transport arrows; integral coefficient comparison below the point-transport construction. This coefficient-only lemma does not alter the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NF-bff0638fb",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-bff0638fb (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes. I read the four steps against every cited statement and against the Lean, read-only: InverseImagePullbackComparison.lean 44-120 and IsoSectionwiseInverseImage.lean 130-215. The statement is true and matches inverseImageCompletedCoefficientMap_isIso exactly: g is any scheme isomorphism, the universes t and u are independent, the exponent is n+1, the map is the limit lift of the constant-section-normalized maps, and nothing is added or dropped. I tested it on g=id, the empty scheme and n=0. The normalization in the statement is necessary, because a constant ring sheaf with value O_E/ϖ^m can have ring maps out of it other than the normalized one (for example Frobenius when E is unramified); the statement has it. One fault, C3/C4, in Step 1. The step cites part (3) of lem-weil-proetale-isomorphism-inverse-image for the invertibility and quotient-naturality of the sectionwise c_n. But that part's statement is about c^g_A for the adjoint inverse image g^{-1}, and part (1) gives the identification with the sectionwise functor F_g only as some unpinned natural isomorphism. The link to the normalized sectionwise map is in that lemma's proof (Steps 5-6) and its Lean, not its statement. FIX: Step 1 now proves existence, uniqueness, inverse and naturality of c_n directly. It uses part (1) of the lemma (Φ_g and Φ_h quasi-inverse and covering-preserving), F_g and F_h from def-weil-proetale-iso-sectionwise-inverse-image (identities on constant presheaves), and the universal property of sheafification from def-weil-pbc-sheafification and def-weil-pbc-constant-sheaf. Both nodes are added to uses and proof_deps. Steps 2-4 (the coordinate formula for q, the coordinatewise inverse with its transition and restriction squares, and the identities) are correct and unchanged. I removed the declared tool use: the unit sk-prop-sf-rf-shriek-preservation cites sk-def-sf-admissible, the lemma's own unit, so the citation is already on route and no tool use is accepted. Duplicate search over the DAG: the limit-scalar-chain node assumes the completed isomorphisms, and the derived-pullback-reduction-tower node is about adjoint g^{-1}, so neither is a duplicate. The unsplit provisional component-naturality node is a sibling that Step 1 now proves inline. There is no cycle, no SGA source, and the source was correctly changed from Weil II to the Stacks constructions marked agent-written. Searches of all three kinds are recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T065147-L-2725865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageFinitePullback_exact",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionProduct_lift_condition",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_compatible",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageResolution_isIso"
+  ],
+  "sorry_after": []
+ }
+}

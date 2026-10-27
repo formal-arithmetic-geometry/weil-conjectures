@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-global-section-localization-factor",
+ "kind": "statement",
+ "title": "Global scalar extension of one augmented localization factor",
+ "statement": "Let (C,J) be a small site, O a commutative ring sheaf, A its ring of global sections, F the actual scalar-extension functor [def-weil-pbc-global-section-scalar-extension], and s a global section of O. Write t for the corresponding constant section of the one-point A ring sheaf [lem-weil-pbc-ring-tensor-cech-coordinates]. There is an isomorphism from the actual two-term complex [O to O[1/s]] to F of [A to A[1/t]] [def-weil-pbc-ringed-extended-cech]. Composing its hom with the fixed scalar-extended augmentation equals the existing projection to O[0]. No regularity or nonvanishing hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996, localization factors; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-weil-pbc-ring-tensor-cech-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the fixed unit morphism through the sheafification and presheaf-pullback adjunctions. Its transpose evaluates global sections. Evaluation respects multiplication by s, so F(scalar_t) followed by this unit equals this unit followed by scalar_s. This calculation is proved directly from the definitions.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-weil-pbc-ringed-extended-cech",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized monoidal structure makes the fixed unit an isomorphism. Use it at every stage to identify the two scalar multiplication sequences after applying F. F preserves their colimits. The already proved localization module cocones in RingedKoszulFactorColimit therefore induce an isomorphism F(A[1/t]) to O[1/s]. The stage-zero leg has denominator s; precomposing with the scalar transition gives the localization unit by the successor-fraction and zero-fraction identities. Thus the induced isomorphism commutes with the specified localization-unit arrow, also for zero sections.",
+   "uses": [
+    "lem-weil-pbc-global-section-module-monoidal",
+    "lem-weil-pbc-ringed-koszul-factor-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved generic complexIso and factorArrow comparison from RingedLocalizationFactorRestriction to this square. The degree-zero component is the fixed unit, the degree-one component is the colimit isomorphism, and all other components identify zero objects. Reverse the resulting complex isomorphism. Its arrow commutativity equation and cancellation of the isomorphism give precisely the required augmentation equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-factor-restriction",
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-global-section-module-monoidal",
+  "lem-weil-pbc-ringed-koszul-factor-colimit",
+  "lem-weil-pbc-ringed-localization-factor-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B8",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996, localization factors; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul",
+  "note": "Module-level tensor comparison, existing complex lift, and localization-colimit argument for the assigned node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves tensor products of module sheaves and complexes",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, ModuleCat.ExtendScalars.map_tmul, ModuleCat.extendScalarsComp_hom_app_one_tmul, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj.*mapHomologicalComplex|mapHomologicalComplex.*tensorObj",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars from global sections is a monoidal functor on sheaves of modules",
+   "results": "ModuleCat.extendScalars, ModuleCat.ExtendScalars.map', ModuleCat.coextendScalars, PresheafOfModules.monoidalCategory, ModuleCat.ExtendScalars.obj', PresheafOfModules.monoidalCategoryStruct, CommRingCat.moduleCatExtendScalarsPseudofunctor, SheafOfModules.sectionsFunctor",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionTensorBaseChange",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-global-section-tensor-base-change, Tag 0996, localization factors; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul. Inherited blueprint ancestor is null; this is a strictly smaller step of its tensor base-change proof.",
+   "via": [
+    "lem-weil-pbc-global-section-tensor-base-change",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionLocalizationFactor",
+  "file": "lean/Sheaf/Paper/GlobalSectionLocalizationFactor.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_localization_factor",
+  "declarations": [
+   "CategoryTheory.ringFamilyGlobalExtension_localization_factor"
+  ],
+  "statement": "theorem ringFamilyGlobalExtension_localization_factor\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (s : (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : ringedLocalizationTwoTerm O s ≅ ringFamilyGlobalExtensionComplex O\n        (ringedLocalizationTwoTerm (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))\n          (ringTensorCechSection (ringFamilyGlobalRing O) s)),\n      e.hom ≫ ringFamilyGlobalExtensionAugmentation O\n        (ringedLocalizationTwoTermAugmentation\n          (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))\n          (ringTensorCechSection (ringFamilyGlobalRing O) s)) =\n        ringedLocalizationTwoTermAugmentation O s",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T100219-L-4150121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T100219-L-4150121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-set-generated-derived-orthogonal-triangle",
+ "kind": "statement",
+ "title": "Orthogonal localization triangle for a small family in a Grothendieck derived category",
+ "statement": "Fix a universe $U$ for Hom sets and small indexing sets [def-weil-size-convention]. Let $\\mathcal B$ be Grothendieck abelian relative to $U$ [def-sp-grothendieck-abelian], and let $D(\\mathcal B)$ be its ordinary unbounded derived category [def-weil-abstract-derived-category]. Let $I\\in U$ and let $P_i\\in D(\\mathcal B)$ for $i\\in I$. Define $\\mathcal L$ to be the smallest full replete triangulated subcategory [def-weil-triangulated-subcategory] containing all $P_i$ and closed under $U$-small coproducts computed in $D(\\mathcal B)$. For every $Y\\in D(\\mathcal B)$ there is a distinguished triangle $X\\to Y\\to Z\\to X[1]$ in $D(\\mathcal B)$ with $X\\in\\mathcal L$ and $\\operatorname{Hom}_{D(\\mathcal B)}(W,Z)=0$ for every $W\\in\\mathcal L$.",
+ "source": {
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Lemma A.1, proof: the localizing hull of a set in a well-generated ambient category is well generated, its inclusion has a right adjoint, and the orthogonal triangle exists; Remark A.2 specializes the ambient category to D(B) Hall--Neeman--Rydh, arXiv:1405.1888, Appendix A. No Stacks tag states this input; archive WANTED, online source read."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=D(\\mathcal B)$. The functorial K-injective resolution theorem applies to the Grothendieck category $\\mathcal B$; the derived local-smallness statement therefore gives $U$-small Hom groups in $T$. The derived coproduct theorem gives all $U$-small coproducts. Since $\\mathcal L$ is full, replete, triangulated and closed under those ambient coproducts, it inherits the triangulation and these same coproducts. In particular it has countable coproducts, so its idempotents split. These are precisely the size, triangulation, coproduct and idempotent hypotheses needed below.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-pc-derived-category-locally-small",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-triangulated-subcategory",
+    "lem-countable-coproducts-idempotent-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Lemma A.1 proof and Remark A.2; representing the restricted Hom functor gives the coreflection used there. Brown inputs supplied by existing solution-set nodes."
+   }
+  },
+  {
+   "text": "Fix $Y\\in T$ and define $H:\\mathcal L^{\\mathrm{op}}\\to\\operatorname{Ab}_U$ by $H(W)=\\operatorname{Hom}_T(W,Y)$, with $H(f)(a)=a\\circ f$. It is additive. The Hom-out-of-a-triangle exactness lemma, applied to all rotations and shifts of a distinguished triangle in $\\mathcal L$, gives its long exact cohomological sequence; consecutive maps compose to zero by the Hom-into-triangle lemma on those rotations. For a $U$-small family $(W_j)$, restriction to the coprojections identifies $H(\\coprod_jW_j)$ with $\\prod_jH(W_j)$: the inverse sends $(a_j)$ to the unique map from the coproduct restricting to every $a_j$. Hence $H$ carries these coproducts to products.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Lemma A.1 proof and Remark A.2; representing the restricted Hom functor gives the coreflection used there. Brown inputs supplied by existing solution-set nodes."
+   }
+  },
+  {
+   "text": "The family $(P_i)_{i\\in I}$ is $U$-small and $\\mathcal L$ is its minimal replete triangulated coproduct-closed hull. Apply the set-generated derived solution-set theorem to this family and to $H$ of step 2. It supplies a $U$-small family $(B_j,b_j\\in H(B_j))$ through which every element of every $H(W)$ pulls back. The cohomological solution-set representability theorem now applies to $\\mathcal L$, using step 1 for split idempotents and the common Hom universe and step 2 for cohomologicality and coproducts-to-products. Obtain $X\\in\\mathcal L$ and natural bijections $\\theta_W:\\operatorname{Hom}_{\\mathcal L}(W,X)\\longrightarrow\\operatorname{Hom}_T(W,Y)$.",
+   "uses": [
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-cohomological-solution-set-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Lemma A.1 proof and Remark A.2; representing the restricted Hom functor gives the coreflection used there. Brown inputs supplied by existing solution-set nodes."
+   }
+  },
+  {
+   "text": "Set $\\epsilon=\\theta_X(1_X):X\\to Y$. For every $W\\in\\mathcal L$ and $f:W\\to X$, naturality at $f$ gives $\\theta_W(f)=\\epsilon\\circ f$. Fullness of $\\mathcal L$ identifies its Hom groups with those of $T$, so postcomposition with $\\epsilon$ is bijective on $\\operatorname{Hom}_T(W,-)$. Since $W[-1]\\in\\mathcal L$, shifting the same bijection for $W[-1]$ gives a bijection $\\operatorname{Hom}_T(W,X[1])\\to\\operatorname{Hom}_T(W,Y[1])$ induced by $\\epsilon[1]$.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Lemma A.1 proof and Remark A.2; representing the restricted Hom functor gives the coreflection used there. Brown inputs supplied by existing solution-set nodes."
+   }
+  },
+  {
+   "text": "Complete $\\epsilon$ to a distinguished triangle $X\\xrightarrow{\\epsilon}Y\\xrightarrow{g}Z\\xrightarrow{d}X[1]$ by TR1. Fix $W\\in\\mathcal L$ and $a:W\\to Z$. Consecutive composites in the rotated triangles are zero, so $\\epsilon[1]\\circ d\\circ a=0$. Injectivity of postcomposition with $\\epsilon[1]$ from step 4 forces $d\\circ a=0$. Apply Hom exactness at $Z$ (clause (ii) for the rotated triangle) to write $a=g\\circ b$ for $b:W\\to Y$. By surjectivity in step 4 write $b=\\epsilon\\circ c$. Thus $a=g\\circ\\epsilon\\circ c=0$. This proves $\\operatorname{Hom}_T(W,Z)=0$ for every $W\\in\\mathcal L$; together with $X\\in\\mathcal L$ it is the required triangle.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Lemma A.1 proof and Remark A.2; representing the restricted Hom functor gives the coreflection used there. Brown inputs supplied by existing solution-set nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-pc-derived-category-locally-small",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-triangulated-subcategory",
+  "lem-countable-coproducts-idempotent-complete",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sfb-set-generated-derived-solution-set",
+  "lem-sfb-cohomological-solution-set-representability",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Brown step (3); restricted-Hom assembly of the orthogonal triangle in HNR Lemma A.1, using existing DAG solution-set inputs. HNR archive WANTED; online Appendix A read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A small set of objects in a Grothendieck derived category generates a localizing subcategory whose inclusion has a right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [F.Full] [F.Faithful],\\n  G.IsLocalization (CategoryTheory.ObjectProperty.isLocal fun x => \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adjunction $G \\\\dashv F$, if $F$ is fully faithful, the\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isLocalization_isColocal\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [G.Full] [G.Faithful],\\n  F.IsLocalization (CategoryTheory.ObjectProperty.isColocal fun x =\", \"doc\": \"The functor $ F $ is a localization with respect to the colocal morphism property defined by objects in the image of the object mapping of $ G $. Specifically, a morphism $ g $ satisfies this property\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLocalization_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁}\\n  [F.Full] [F.Faithful] (adj : F ⊣ G) (W : CategoryTheory.MorphismProperty C₁),\\n  W.IsInvertedBy G\", \"doc\": \"Let $F: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$ and $G: \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ be a pair of functors such that $F$ is left adjoint to $G$. Let $W$ be a class of morphisms in $\\\\mathcal{C}_2$. If the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general localization or reflection results assume an adjunction or presentability hypotheses; none constructs this triangle for an arbitrary small family in a Grothendieck derived category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck derived category every set generated localizing subcategory has a localization triangle with right orthogonal cone",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Localization.Triangulated\", \"type\": \"[Pretriangulated D] [L.IsTriangulated] [IsTriangulated C] : IsTriangulated D\", \"doc\": \"If $\\\\mathcal{C}$ is a triangulated category and $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated localization functor (i.e., $L$ commutes with the integer-parameterized shift operation, preserves t\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"module\": \"Mathlib.CategoryTheory.Localization.Triangulated\", \"type\": \"{X Y : D} (f : X ⟶ Y) : ∃ (Z : D) (g : Y ⟶ Z) (h : Z ⟶ X⟦(1 : ℤ)⟧), Triangle.mk f g h ∈ L.essImageDistTriang\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category $ \\\\mathcal{D} $, there exist an object $ Z $, a morphism $ g: Y \\to Z $, and a morphism $ h: Z \\to X[1] $ such that the triangle $ f \\to g \\to h \\to X[1] $ li\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isLocal_trW\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Orthogonal\", \"type\": \"[P.IsTriangulated] : P.trW.isLocal = P.rightOrthogonal\", \"doc\": \"If $ P $ is a triangulated subcategory of a pretriangulated category $ \\\\mathcal{C} $, then the objects local with respect to the morphism property $ \\\\text{tr}_W $ (defined by distinguished triangles w\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"module\": \"Mathlib.CategoryTheory.Localization.Triangulated\", \"type\": \"[IsTriangulated C] : IsTriangulated W.Localization'\", \"doc\": \"If $ \\\\mathcal{C} $ is a triangulated category and $ W $ is a morphism property compatible with the triangulation, then the localized category $ \\\\mathcal{C}[W^{-1}] $ inherits a canonical triangulated \"}\n  {\"name\": \"DerivedCategory.mem_distTriang_iff\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(T : Triangle (DerivedCategory C)) :\\n  (T ∈ distTriang (DerivedCategory C)) ↔\\n    ∃ (X Y : CochainComplex C ℤ) (f : X ⟶ Y), Nonempty (T ≅ Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f))\", \"doc\": \"For any triangle $ T $ in the derived category $ \\\\mathcal{D}(C) $ of an abelian category $ C $, $ T $ is a distinguished triangle if and only if there exist cochain complexes $ X $ and $ Y $ in $ C $,\"}\n  {\"name\": \"DerivedCategory.triangleOfSES_obj₃\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ShortExact\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {S : CategoryTheory.ShortComplex (CochainComplex C ℤ)} (hS : S.ShortExact),\\n  (DerivedCategory.triangleOfSES hS).obj₃ = DerivedCategory.Q.obj S.X₃\", \"doc\": \"For a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ in an abelian category $\\\\mathcal{C}$, the third object of the corresponding distinguished triangle in the derived category $\\\\mathcal{D}(\\\\ma\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \": Triangle (DerivedCategory C)\", \"doc\": \"The distinguished triangle in the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ associated to a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ in an abelian category $ \\\\mathcal{C} $. It is c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general localization or reflection results assume an adjunction or presentability hypotheses; none constructs this triangle for an arbitrary small family in a Grothendieck derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localizing\", \"rightAdjoint\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: general localization or reflection results assume an adjunction or presentability hypotheses; none constructs this triangle for an arbitrary small family in a Grothendieck derived category."
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|well.?generated",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"12\", \"text\": \"# Localizing subcategories\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"16\", \"text\": \"`IsVerdierRightLocalizing` and `IsVerdierLeftLocalizing`)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"17\", \"text\": \"saying that `A` is right `B`-localizing (or left `B`-localizing).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"40\", \"text\": \"right `B`-localizing if any morphism `X ⟶ Y` with `X` in `B` and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"43\", \"text\": \"see `isVerdierRightLocalizing_iff` for a characterization which\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general localization or reflection results assume an adjunction or presentability hypotheses; none constructs this triangle for an arbitrary small family in a Grothendieck derived category. Searched CategoryTheory/Triangulated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bousfield triangle for a set generated localizing subcategory of the derived category of a Grothendieck abelian category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category $ \\\\mathcal{D} $, there exist an object $ Z $, a morphism $ g: Y \\to Z $, and a morphism $ h: Z \\to X[1] $ such that the triangle $ f \\to g \\to h \\to X[1] $ li\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.mem_distTriang_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (T : CategoryTheory.Pretriangulated.Triangle (DerivedCategory C)),\\n  T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles ↔\\n    ∃ X Y f, Nonempty (T ≅ DerivedCategory.Q\", \"doc\": \"For any triangle $ T $ in the derived category $ \\\\mathcal{D}(C) $ of an abelian category $ C $, $ T $ is a distinguished triangle if and only if there exist cochain complexes $ X $ and $ Y $ in $ C $,\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general localization or reflection results assume an adjunction or presentability hypotheses; none constructs this triangle for an arbitrary small family in a Grothendieck derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "well generated triangulated category regular cardinal small perfect generating set Brown representability",
+   "results": "Hits: CategoryTheory.HasCardinalFilteredGenerators, CategoryTheory.AreCardinalFilteredGenerators, CategoryTheory.HasCardinalFilteredGenerator, CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator, CategoryTheory.IsCardinalPresentable, CategoryTheory.isCardinalPresentable, CategoryTheory.HasCardinalFilteredGenerator.exists_generator, CategoryTheory.HasCardinalFilteredGenerator.exists_small_generator. Search subdirectory: .",
+   "date": "2026-10-24",
+   "verdict": "no match: cardinal-filtered presentation, ambient localization, and orthogonal properties do not give the set-generated coreflection triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localizing subcategory generated by a small family in a Grothendieck derived category has a right orthogonal localization triangle",
+   "results": "Hits: CategoryTheory.ObjectProperty.isLocal_trW, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.ShortComplex.ShortExact.singleTriangle, HasDerivedCategory.standard, CategoryTheory.Triangulated.Localization.isTriangulated_functor. Search subdirectory: .",
+   "date": "2026-10-24",
+   "verdict": "no match: cardinal-filtered presentation, ambient localization, and orthogonal properties do not give the set-generated coreflection triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.rightOrthogonal, CategoryTheory.Adjunction",
+   "results": "Hits: . Search subdirectory: .",
+   "date": "2026-10-24",
+   "verdict": "no match: cardinal-filtered presentation, ambient localization, and orthogonal properties do not give the set-generated coreflection triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "well.?generated|brown|rightOrthogonal",
+   "results": "Hits: Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean. Search subdirectory: CategoryTheory/Triangulated.",
+   "date": "2026-10-24",
+   "verdict": "no match: cardinal-filtered presentation, ambient localization, and orthogonal properties do not give the set-generated coreflection triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability restricted Hom functor on set generated localizing subcategory of Grothendieck derived category",
+   "results": "Hits: HasDerivedCategory.standard, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt, DerivedCategory.right_fac, CategoryTheory.LocalizerMorphism.smallHomMap', CategoryTheory.LocalizerMorphism.smallHomMap, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instFullSingleFunctor, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh. Search subdirectory: .",
+   "date": "2026-10-24",
+   "verdict": "no match: cardinal-filtered presentation, ambient localization, and orthogonal properties do not give the set-generated coreflection triangle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-serre-derived-small-generators",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary Brown input for arbitrary schemes and noncartesian levelwise quasi-coherent total systems; independent of properness and adjoint locality. Input: Cohomological representability for a Grothendieck weak-Serre derived subcategory. Supporting input: a small family generating the weak-Serre derived subcategory under triangles and ambient coproducts, before Brown representability. Supporting prerequisite: Lemma A.1, proof: the localizing hull of a set in a well-generated ambient category is well generated, its inclusion has a right adjoint, and the orthogonal triangle exists; Remark A.2 specializes the ambient category to D(B)",
+   "via": [
+    "lem-sfb-weak-serre-derived-small-generators",
+    "lem-sfb-grothendieck-weak-serre-derived-representability",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-set-generated-derived-orthogonal-triangle",
+  "worker": "stage1",
+  "summary": "Represent restricted Hom using existing set-generated solution-set and representability statements. Establish all size and idempotent hypotheses, identify the representing map by naturality, and prove right orthogonality of its cone by explicit Hom exactness. No new nodes and no statement change.",
+  "blueprint": "Retains inherited null blueprint ancestor and its explicit lineage from det-thm-sf-ctf-stability-direct-images (3); supplies the abstract Brown coreflection prerequisite below weak-Serre set generation, without changing the unit route. Current latest existence proof (3) supplies the Brown assembly pattern.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-category-locally-small",
+    "why": "Generic derived Hom size theorem; apply using functorial K-injective existence, with no geometric hypotheses."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic ambient derived coproduct theorem needed before restricting coproducts to the hull."
+   },
+   {
+    "node": "lem-countable-coproducts-idempotent-complete",
+    "why": "Generic triangulated telescope theorem supplies split idempotents from inherited countable coproducts."
+   },
+   {
+    "node": "lem-sfb-set-generated-derived-solution-set",
+    "why": "Generic Brown solution-set input for an arbitrary small family in a Grothendieck derived category; no compactness of P_i is assumed."
+   },
+   {
+    "node": "lem-sfb-cohomological-solution-set-representability",
+    "why": "Generic solution-set-to-representation theorem, applied after checking its size, cohomologicality and idempotent hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-category-locally-small",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-countable-coproducts-idempotent-complete",
+  "lem-sfb-set-generated-derived-solution-set",
+  "lem-sfb-cohomological-solution-set-representability"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-6ae462b53",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-6ae462b53 (reviewer sub-agent of L); spot-checked: Read the item and all ten proof_deps' statements, including the solution-set and representability nodes' proofs. The statement is unchanged from live (live is still unsplit; no repair note). It is correct and needs no compactness. Small cases checked: I empty, Y=0, Y in L. Step 1: Homs are U-small by derived local smallness, whose Lean takes a general HasKInjectiveResolutions, supplied by functorial K-injective existence. Ambient coproducts restrict to L, and the countable-coproduct lemma applied to L gives split idempotents. Step 2: Hom(-,Y) is cohomological by hom-out (i) and hom-into (i), and sends coproducts to products by the universal property. Step 3: the solution-set node's hypotheses (small class, minimal replete triangulated coproduct-closed Q) match L exactly, and every hypothesis of the representability node is supplied; only the set-valued representation is used. Step 4: Yoneda gives theta_W = epsilon∘-, and shift closure gives the epsilon[1] bijection. Step 5: epsilon[1]∘d=0 on the rotation, so d∘a=0, so a=g∘b=g∘epsilon∘c=0; correct. No cycle (transitive closure checked). No duplicate in the DAG (rg -L for orthogonal, Bousfield, localizing, coreflection). No new nodes; no SGA. Accepted generic tool_uses: the solution-set and representability nodes (sk-cor-existence-ii), derived coproducts and countable-coproduct idempotent completeness; the local-smallness node is already on the route. Proof is agent-written; HNR 1405.1888 is WANTED. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctorsBasics.SetGeneratedDerivedOrthogonalTriangle",
+  "declaration": "CategoryTheory.setGeneratedDerived_existsOrthogonalTriangle",
+  "file": "lean/Sheaf/SixFunctorsBasics/SetGeneratedDerivedOrthogonalTriangle.lean",
+  "statement": "theorem setGeneratedDerived_existsOrthogonalTriangle (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] (I : Type v) (P : I → DerivedCategory A) (Q : ObjectProperty (DerivedCategory A)) [Q.IsClosedUnderIsomorphisms] [Q.IsTriangulated] [∀ J : Type v, Q.IsClosedUnderColimitsOfShape (Discrete J)] (hP : ∀ i : I, Q (P i)) (hminimal : ∀ R : ObjectProperty (DerivedCategory A), (∀ i : I, R (P i)) → R.IsClosedUnderIsomorphisms → R.IsTriangulated → (∀ J : Type v, R.IsClosedUnderColimitsOfShape (Discrete J)) → Q ≤ R) (Y : DerivedCategory A) : ∃ (X Z : DerivedCategory A) (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ X⟦(1 : ℤ)⟧), Triangle.mk f g h ∈ distTriang (DerivedCategory A) ∧ Q X ∧ ∀ (W : DerivedCategory A), Q W → ∀ a : W ⟶ Z, a = 0",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4d6e6044",
+  "group": "N6",
+  "result": "pass",
+  "note": "Clause-by-clause match: universe v for Homs, I and coproduct shapes; IsGrothendieckAbelian.{v} A; HasDerivedCategory.{v} (an instance exists via ofIsGrothendieckAbelian; same binders as sibling setGeneratedDerived_cohomological_solutionSet); Q replete (IsClosedUnderIsomorphisms), IsTriangulated, closed under ambient Discrete J colimits for J : Type v, hP plus hminimal pin the hull; conclusion: distinguished Triangle.mk f g h, Q X, all maps from Q-objects to Z zero. No added hypotheses. Edge cases I empty, Y=0, Y in L covered. lean.statement verbatim in file; 4 stmt_dep node files identical to side-live; item differs from live only in its lean field; no duplicate decl in side-live lean/Sheaf; imports are existing proof_dep modules; sorry only; source and blueprint docstrings with proof steps; report has both required sections. Not recompiled (no file changed). Advisory: possibly redundant Triangulated.Triangulated import; docstring calls P a property where Lean has a family."
+ }
+}

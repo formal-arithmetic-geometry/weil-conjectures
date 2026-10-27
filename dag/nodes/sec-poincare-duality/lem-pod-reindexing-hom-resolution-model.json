@@ -1,0 +1,389 @@
+{
+ "id": "lem-pod-reindexing-hom-resolution-model",
+ "kind": "statement",
+ "title": "Exact reindexing preserves completed module resolutions and unbounded derived sheaf Hom",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$, $R_W=\\lim_n B_{W,n}$ for a scheme $W$ [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Let $g:X\\xrightarrow{\\sim}Y$ be a scheme isomorphism, with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. Put $F=g^{-1}$, with the coefficient identifications induced by all quotient projections. Use the coefficient-stage derived operations of [def-weil-derived-pullback-tensor-hom].\n\nFor $T_Y=B_{Y,n}$ with any $n\\geq1$, or $T_Y=R_Y$, and corresponding $T_X$, reindexing is an exact equivalence $\\operatorname{Mod}(T_Y)\\simeq\\operatorname{Mod}(T_X)$, preserving all small limits and colimits, flat modules, K-flat complexes and K-injective complexes [def-pc-kflat-complex, def-pur-kinjective-complex]. Its inverse is reverse reindexing. The completed coefficient identification is the ring isomorphism $FR_Y\\cong R_X$ whose composite with each projection is the inverse image of $R_Y\\to B_{Y,n}$ followed by the canonical finite coefficient identification. Both composites with reverse reindexing are identities on these projections and on module actions. The tensor and sheaf-Hom comparisons send local sections $s\\otimes t$ to $Fs\\otimes Ft$ and $f$ to $Ff$ [lem-pur-isomorphism-inverse-image-tensor-hom].\n\nFor an arbitrary complex $K$ and K-injective complex $I$ of $T_Y$-modules, the componentwise comparison is an isomorphism of actual Hom complexes [def-pur-hom-complex]\n$$F\\mathcal Hom^\\bullet(K,I)\\xrightarrow{\\sim}\\mathcal Hom^\\bullet(FK,FI),\\qquad F\\prod_p\\mathcal Hom(K^p,I^{p+r})\\cong\\prod_p\\mathcal Hom(FK^p,FI^{p+r}).$$\nIt respects $d(f)=d_If-(-1)^rf d_K$ and the quasi-isomorphism invariance in both inputs. It therefore represents a natural isomorphism $c^0_{g;M,N}:FH_{T_Y}(M,N)\\xrightarrow{\\sim}H_{T_X}(FM,FN)$ for all $M,N$ in the ordinary unbounded derived category, independent of representatives, where $H_T=R\\mathcal Hom_T$ [def-pur-derived-internal-hom]. The induced derived equivalence has shift comparison identity in each degree, and termwise unit and counit. At finite coefficients it is the specified $Lg_n^*$; for $R_Y$ this assertion concerns ordinary completed-ring inverse image, prior to comparison with quotient-tower pullback.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1-2: derived automorphism Hom comparison, resolution and completed-ring enhancement; Stacks Tag 0GMX (sites-modules-remark-pullback-internal-hom) is the underived anchor only."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use clause 1 of [lem-weil-proetale-isomorphism-inverse-image]: write $\\Phi_g(U\\to X)=(U\\to X\\xrightarrow gY)$ and $\\Psi=\\Phi_{g^{-1}}$. Reindex a ring sheaf $T$ and a $T$-module by $F(T)(U)=T(\\Phi_gU)$, $F(M)(U)=M(\\Phi_gU)$, with $a\\cdot m$ the original action over $\\Phi_gU$ [def-weil-sheaf-of-modules-category]. Reverse reindexing $G$ uses $\\Psi$. The canonical $\\Phi_g\\Psi\\cong1$, $\\Psi\\Phi_g\\cong1$ give $GF\\cong1$, $FG\\cong1$ on rings, actions and module maps: their section maps are the original restriction identifications and hence are linear. This proves the module equivalence for every ring sheaf $T$, including a nonconstant completed one; it does not extend only the constant-module clause of the cited lemma without an argument.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 1, exact automorphism pullback; explicit lifting to arbitrary ring-sheaf modules"
+   }
+  },
+  {
+   "text": "For any small diagram $D$ of modules, a cone from $P$ to $FD$ corresponds, by the equivalence of step 1, to a cone from $GP$ to $D$. Thus $F(\\lim D)$ has the limit universal property. Applying the same Hom bijections to cocones proves preservation of colimits. Reindexing is additive since sectionwise addition is unchanged. Kernels and cokernels are the limits and colimits of the relevant two-arrow diagrams, so $F$ and $G$ are exact. In particular $H^r(FK)\\cong F(H^rK)$ from the kernel/image/quotient definition in [def-weil-abstract-derived-category]; both functors preserve acyclic complexes and quasi-isomorphisms. No exactness of infinite products is being asserted. In Lean the specified forward/inverse equivalence is supplied by podReindexing_roundTrip_shift. Its IsEquivalence instance gives preservation of limits and colimits in every requested universe; finite exactness is already supplied by isoSectionwiseModuleInverseImage_exact.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 1, consequences of the explicit reindexing equivalence"
+   }
+  },
+  {
+   "text": "By clause 3 of [lem-weil-proetale-isomorphism-inverse-image], $c_n:FB_{Y,n}\\cong B_{X,n}$ is compatible with every quotient map. By [def-weil-completed-integral-coefficients] and [def-pur-sheaf-inverse-limit], $R_W$ is the ring-sheaf limit of this tower. Consequently step 2 gives the unique ring isomorphism $c_R:FR_Y\\cong R_X$ with $\\pi_{X,n}c_R=c_nF(\\pi_{Y,n})$. Apply the same construction to $g^{-1}$. Each composite with reverse reindexing has projection $\\pi_{W,n}$, since both the constant coefficient identifications and their reductions are the canonical ones. Uniqueness of maps into the limit makes the composites identities, under the reindexing unit identifications. Transport a module action via $c_R^{-1}$; after the two transports its scalar map is the identity, so its action is the original action. The identical assertion at $B_{W,n}$ follows using $c_n$. In the Lean round-trip proof, equality at a finite stage is checked on the constant-presheaf sheafification unit, after cancelling the canonical reindexing/sheafification isomorphism. Naturality of that unit gives the site return restriction. The completed case then follows by projecting to every finite stage and applying limit.hom_ext.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1-2, projection-normalized completed coefficient identification"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-isomorphism-inverse-image-tensor-hom] with the ring sheaf $T_Y$ and then the coefficient isomorphism of step 3. This supplies the tensor and sheaf-Hom isomorphisms for $T_Y=B_{Y,n}$ or $R_Y$. They send the inverse images of $s\\otimes t$ and $f$ to $Fs\\otimes Ft$ and $Ff$, respectively, and are natural in both module inputs. If $P$ is flat, tensoring any exact sequence $A$ on $X$ with $FP$ identifies with $F(GA\\otimes P)$: $GA$ is exact by step 2 and $-\\otimes P$ is exact by [def-pc-flat-sheaf-modules]. Thus $FP$ is flat. Interchanging $F$ and $G$ proves the converse. The flatness preservation clause, together with Step 5, is isolated in [lem-pod-sectionwise-flat-kflat] for arbitrary commutative ring sheaves and invertible coefficient identifications.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pc-flat-sheaf-modules",
+    "lem-pod-sectionwise-flat-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; Tag 0GMX, remark-pullback-internal-hom; specialize existing site-isomorphism comparison"
+   }
+  },
+  {
+   "text": "For complexes $A,P$, the total tensor in [def-pc-tensor-complex-sheaves] is the direct sum of $A^p\\otimes P^q$ over $p+q=r$, with differential $d_A\\otimes1+(-1)^p1\\otimes d_P$. Steps 2 and 4 therefore identify $F\\operatorname{Tot}(A\\otimes P)$ with $\\operatorname{Tot}(FA\\otimes FP)$; both differential summands agree by tensor naturality and additivity. If $P$ is K-flat and $C$ is any acyclic complex on $X$, put $A=GC$. It is acyclic, hence $A\\otimes P$ is acyclic by [def-pc-kflat-complex], and the displayed identification gives $C\\otimes FP\\cong F(A\\otimes P)$ acyclic. Thus $FP$ is K-flat. Reverse the roles to get reflection. A K-flat resolution remains one because its augmentation remains a quasi-isomorphism by step 2. Apply [lem-pod-sectionwise-flat-kflat] to podReindexingCoefficient to obtain this clause at either coefficient stage.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-pod-sectionwise-flat-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 1, K-flat preservation for unbounded direct-sum tensor complexes"
+   }
+  },
+  {
+   "text": "Let $I$ be K-injective and let $a:C\\to FI$ be a map from an arbitrary acyclic complex on $X$. Under step 1 it corresponds to $b:GC\\to I$. Since $GC$ is acyclic, [def-pur-kinjective-complex] gives $h^p:(GC)^p\\to I^{p-1}$ with $b^p=d_I^{p-1}h^p+h^{p+1}d_{GC}^p$. Applying $F$ and conjugating by the degreewise equivalence identifications gives $a^p=d_{FI}^{p-1}(Fh)^p+(Fh)^{p+1}d_C^p$. Hence $FI$ is K-injective. The same calculation for $G$ proves reflection. Since quasi-isomorphisms are preserved, $N\\to I$ is carried to a K-injective resolution $FN\\to FI$. The Lean proof uses the adjunction from the reverse module equivalence: transpose a map from an acyclic complex, use the defining null homotopy, and transport it through the forward functor and adjunction unit. This is the direct proof of the K-injective clause; no new K-injective theorem is assumed. The Lean proof uses the already proved source-library theorem CochainComplex.isKInjective_map_of_adjunction with left adjoint e.inverse; its proof is exactly this transposition and null-homotopy argument.",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 1, K-injective preservation by transporting the defining null homotopy"
+   }
+  },
+  {
+   "text": "For each integer $r$, preserve the product over all $p\\in\\mathbf Z$ by step 2 and apply the sheaf-Hom comparison of step 4 to each factor. This gives $c^r:F\\prod_p\\mathcal Hom_{T_Y}(K^p,I^{p+r})\\cong\\prod_p\\mathcal Hom_{T_X}(FK^p,FI^{p+r})$, the terms of the Hom complexes defined in [def-pur-hom-complex]. Its $p$-th projection is the inverse image of the $p$-th Hom projection followed by the normalized comparison, so it sends a family $(f^p)_p$ to $(Ff^p)_p$. The product is countable in the fixed universe; neither input complex is assumed bounded.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; actual product complex, with Tag 0GMX normalization"
+   }
+  },
+  {
+   "text": "For a homogeneous family $f$ of degree $r$, naturality of the sheaf-Hom comparisons and additivity give, in the $p$-th factor, $F(d_I^{p+r}f^p-(-1)^rf^{p+1}d_K^p)=d_{FI}^{p+r}Ff^p-(-1)^rFf^{p+1}d_{FK}^p$. Product projections jointly determine maps. Thus $c^{r+1}F(d)=d c^r$, and the component isomorphisms of step 7 are an isomorphism of actual complexes, not merely isomorphisms of cohomology sheaves. For maps $a:K'\\to K$ and $b:I\\to I'$, the same projection calculation is $F(bfa)=Fb\\,Ff\\,Fa$, proving joint naturality.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: the differential and its functoriality"
+   }
+  },
+  {
+   "text": "If $t:K'\\to K$ and $s:I\\to I'$ are quasi-isomorphisms with $I,I'$ K-injective, [lem-pur-rhom-well-defined] makes $f\\mapsto sft$ a quasi-isomorphism of sheaf Hom complexes. Its inverse image remains a quasi-isomorphism by step 2; the Hom map after reindexing is one by the same cited lemma and step 6. Step 8 identifies these maps, which proves the asserted compatibility with quasi-isomorphism invariance in both inputs. Here the second-variable comparison is between K-injective resolutions; no claim is used that $\\mathcal Hom(K,-)$ preserves arbitrary quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined"
+   }
+  },
+  {
+   "text": "Choose $K$ representing $M$ and a resolution $N\\to I$ supplied by [prop-pur-kinjective-resolutions-exist]. By step 6, $FN\\to FI$ is an allowed resolution for $FN$. Therefore [def-pur-derived-internal-hom] identifies the two complexes of step 8 with $FH_{T_Y}(M,N)$ and $H_{T_X}(FM,FN)$. Localize the isomorphism to obtain $c^0_{g;M,N}$. Step 9 and the canonical independence of representatives and K-injective resolutions in the cited definition identify the result for every other choice. Naturality holds for complex maps by step 8 and for inverses of quasi-isomorphisms by step 9, hence for every derived morphism by the localization universal property [def-weil-abstract-derived-category]. This proves the required natural derived isomorphism for arbitrary unbounded inputs.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 079I (injectives-section-K-injective), 08J7 (section-internal-hom), 0A95 (lemma-RHom-well-defined); assembly in the localized category"
+   }
+  },
+  {
+   "text": "Apply $F,G$ termwise to complexes. Their unit and counit of step 1 are chain maps because they are natural for every differential; their triangle identities hold in each degree. They pass to the localization since step 2 preserves quasi-isomorphisms [def-weil-abstract-derived-category]. Also $(FK[1])^p=F(K^{p+1})=(F(K[1]))^p$, and both differentials are $-F(d_K)$, so the shift comparison is the identity in each degree, and likewise for every integer shift. At finite coefficients, [def-weil-derived-pullback-tensor-hom] specifies exactly the termwise inverse image with action along $c_n$, which is the functor just constructed. At $R_Y$, the construction was on all ordinary $R_Y$-module complexes; no identification with the quotient-tower completed pullback has been used. In Lean the inverse coefficient maps feed SheafOfModules.pushforwardPushforwardEquivalence, with the scalar triangle identities deduced from the ring round trips. Its unit and counit evaluate to the stated restrictions. Equivalence.mapDerivedCategory supplies the termwise derived equivalence. For the finite comparison use the section-normalized finiteSectionwiseAdjunction from [lem-weil-finite-comparison-complex-isomorphism]: uniqueness of left adjoints compares the normalized sectionwise module functor with sfIntrinsicPullback, and Functor.mapDerivedCategoryNatIso localizes that comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-finite-comparison-complex-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 1, ordinary derived equivalence, shift and coefficient-stage normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "def-pc-flat-sheaf-modules",
+  "lem-pod-sectionwise-flat-kflat",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-finite-comparison-complex-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 1, exact automorphism pullback; expanded tensor preservation argument of lem-pod-reindexing-hom-resolution-model, Steps 4--5. Stacks sites-modules.tex lemma-pullback-tensor-product (03EL), sites-cohomology.tex definition-K-flat (06YN). Resolution preservation assembled in Lean from the existing round-trip theorem, general exact equivalence APIs, a transported null homotopy, and the strictly smaller tensor-flatness lemma. C1 completes the coefficient/action round trips, module equivalence, identity shift components and finite derived comparison (Steps 1, 3 and 11), using sheafification-unit uniqueness, limit projections, the Mathlib ringed-site equivalence API, and uniqueness of the normalized finite left adjoint. The Hom-resolution comparison remains the original named theorem hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of pro etale sites preserves K injective and K flat complexes and gives a product Hom complex comparison for finite and completed coefficient sheaves",
+   "results": "8 hits: CochainComplex.isKInjective_iff_of_iso, CochainComplex.isKInjective_of_iso, HomotopyEquiv.isKInjective, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, HomotopyEquiv.isKProjective, HomologicalComplex₂.total.mapIso, CategoryTheory.Sheaf.isLocallyInjective_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(equiv|map)|KFlat.*(equiv|map)|homComplex.*(map|iso)",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.DerivedCategory",
+   "results": "0 hits:  | loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pro etale sites preserves K injective and K flat complexes and gives a product Hom complex comparison for finite and completed coefficient sheaves",
+   "results": "8 hits: RingHom.Etale.respectsIso, CategoryTheory.compatiblePreservingOfFlat, CondensedMod.IsSolid.isIso_solidification_map, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.pi_iff, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image equivalence of ringed sites commutes with unbounded derived internal Hom on K injective resolutions",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "12 hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Ee]quiv|[Ee]quiv.*[Kk]Injective|[Kk]Flat|ihomComparison",
+   "results": "4 hits in Mathlib/Algebra/Homology: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of ringed sites commutes with unbounded derived sheaf internal Hom via product Hom complexes",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Equivalence.sheafCongr, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.sheafificationCompPullback, CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "12 hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact reindexing of module sheaves under a site isomorphism preserves K injective and K flat complexes and the unbounded derived internal Hom",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CochainComplex.IsKInjective.Qh_map_bijective, Ext, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|mapDerivedCategory|IsKInjective",
+   "results": "10 hits in Mathlib/CategoryTheory/Sites: Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CochainComplex",
+   "results": "4 hits: ChainComplex.cochainComplexEquivalence, CochainComplex.opEquivalence, CochainComplex.Plus.fibrantObjectEquivalence, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal exact equivalence of sheaves of modules induces an equivalence on unbounded derived categories preserving derived internal Hom",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: source-read site equivalence, exact derived functor and K-injective invariance results do not give all ring-action, completed projection and unbounded internal-Hom comparison clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-derived-automorphism-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1-2: derived automorphism Hom comparison, resolution and completed-ring enhancement; Stacks Tag 0GMX (sites-modules-remark-pullback-internal-hom) is the underived anchor only. Carries original item proof steps 1, 2, 3.",
+   "via": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-reindexing-hom-resolution-model",
+  "worker": "stage1",
+  "summary": "Retained the entire statement and supplied eleven direct steps. Lifted site reindexing to arbitrary ring-sheaf modules, normalized the completed coefficient action by every quotient projection, proved flat/K-flat/K-injective preservation explicitly, formed the product Hom-complex isomorphism with its differential and descended it using existing resolution-independence nodes. No new nodes are necessary. Added only missing statement-notion dependencies.",
+  "blueprint": "prop-pod-dual-tate-data-compatibility proof Steps 1-2: exact automorphism pullback and the canonical derived internal Hom comparison, with ordinary completed-ring enhancement; no quotient-tower comparison asserted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site-isomorphism reindexing and quotient-compatible constant-ring maps; the Weil unit supplies no site theorem."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic normalized tensor and sheaf-Hom comparisons for arbitrary ring sheaves; used as underived tools for the Weil-unit derived comparison."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic quasi-isomorphism invariance of unbounded sheaf Hom into K-injectives; the Weil unit does not prove resolution independence."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of unbounded K-injective resolutions in a fixed small site; needed to instantiate the ordinary derived Hom model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-6c2610005",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6c2610005 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 11 steps, all 15 cited nodes, the blueprint proof prop-pod-dual-tate-data-compatibility Steps 1-2 (main-20261015) and Stacks 0GMX, 0A95, 03EL, 0A8X and 08J7 at their places. There are no new nodes. The statement is byte-identical to the base, where the live and side-live item is unsplit with an empty proof. The three added stmt_deps (module category, flat modules, abstract derived category) are notions the statement actually uses. The coefficients match: at finite level the delivered functor is the termwise f^{-1} along c^f_A, and prop-weil-pbc-proetale-constant-ring-map identifies that map with the c^g_A of clause 3 of lem-weil-proetale-isomorphism-inverse-image. At the completed level the statement concerns ordinary inverse image on R_Y-modules, not the tower pullback. Step checks: clause 1 is used for an arbitrary ring sheaf instead of extending the constant-ring clause 2 beyond what it says; c_R comes from the limit universal property through each projection; flatness and K-flatness go through sigma and G applied to the test complex; K-injectivity transports the defining null-homotopy; the Hom differential and the (-1)^r sign match def-pur-hom-complex; lem-pur-rhom-well-defined (Stacks 0A95) is applied with exactly its hypotheses; the small-site hypothesis holds because Y_proet is built in the universe V. The cycle check is clean and proof_deps equals the union of the steps' uses. I accept the four declared tool uses as generic black boxes: lem-weil-proetale-isomorphism-inverse-image, lem-pur-isomorphism-inverse-image-tensor-hom, lem-pur-rhom-well-defined and prop-pur-kinjective-resolutions-exist. One advisory only: step 3 cites step 2 for limits of ring sheaves, which actually follow from step 1 or clause 2 of the cited lemma. No SGA is used. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReindexingHomResolutionModel",
+  "declaration": "WeilConjectures.podReindexing_hom_resolution_model",
+  "declarations": [
+   "WeilConjectures.podReindexingRing",
+   "WeilConjectures.podReindexingModules",
+   "WeilConjectures.podReindexingCoefficient_existsUnique",
+   "WeilConjectures.podReindexingCoefficient",
+   "WeilConjectures.podReindexingFunctor",
+   "WeilConjectures.podReindexingDerived",
+   "WeilConjectures.podReindexingDerivedFunctor",
+   "WeilConjectures.podReindexingHom",
+   "WeilConjectures.podReindexingDerivedHom",
+   "WeilConjectures.podReindexing_resolution_preservation",
+   "WeilConjectures.podReindexingComplexFunctor",
+   "WeilConjectures.podReindexingTensor",
+   "WeilConjectures.podReindexingQ",
+   "WeilConjectures.podReindexingDerivedFactors",
+   "WeilConjectures.podReindexingHomModel",
+   "WeilConjectures.podReindexing_hom_resolution_model",
+   "WeilConjectures.podReindexingSiteRoundTrip",
+   "WeilConjectures.podReindexingLiftedEquivalence",
+   "WeilConjectures.podReindexing_roundTrip_shift"
+  ],
+  "file": "lean/Sheaf/Paper/PodReindexingHomResolutionModel.lean",
+  "statement": "theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [EssentiallySmall.{u+1} X.ProEt] [EssentiallySmall.{u+1} Y.ProEt] (s : Option ℕ) : ∃ σ : ∀ M N : podReindexingModules l E Y s, (podReindexingFunctor l E g s).obj (podReindexingTensor l E Y s M N) ≅ podReindexingTensor l E X s ((podReindexingFunctor l E g s).obj M) ((podReindexingFunctor l E g s).obj N), ∃ η : ∀ M N : podReindexingModules l E Y s, (podReindexingFunctor l E g s).obj (SheafOfModules.homObj (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅ SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s) ((podReindexingFunctor l E g s).obj M) ((podReindexingFunctor l E g s).obj N), ∃ χ : ∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective), (podReindexingComplexFunctor l E g s).obj (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≅ homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I), ∃ δ : podReindexingDerivedHom l E Y s ⋙ podReindexingDerivedFunctor l E g s ≅ ((podReindexingDerivedFunctor l E g s).op.prod (podReindexingDerivedFunctor l E g s)) ⋙ podReindexingDerivedHom l E X s, (∀ (M N : podReindexingModules l E Y s) (U : X.ProEt) (a : M.val.obj (op ((proEtaleIsoPostcompose g).obj U))) (b : N.val.obj (op ((proEtaleIsoPostcompose g).obj U))), (σ M N).hom.val.app (op U) (purTensorSection (podReindexingRing l E Y s) M N ((proEtaleIsoPostcompose g).obj U) a b) = purTensorSection (podReindexingRing l E X s) ((podReindexingFunctor l E g s).obj M) ((podReindexingFunctor l E g s).obj N) U a b) ∧ (∀ (M N : podReindexingModules l E Y s) (U V : X.ProEt) (a : V ⟶ U) (f : (SheafOfModules.homObj (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N).val.obj (op ((proEtaleIsoPostcompose g).obj U))) (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj V))), ((η M N).hom.val.app (op U) f).app (op (Over.mk a)) x = f.app (op (Over.mk ((proEtaleIsoPostcompose g).map a))) x) ∧ (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (r p : ℤ), (χ K I hI).hom.f r ≫ homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) r p (p+r) rfl = (podReindexingFunctor l E g s).map (homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I r p (p+r) rfl) ≫ (η (K.X p) (I.X (p+r))).hom) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), (podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b) ≫ (χ K' I' hI').hom = (χ K I hI).hom ≫ ((podReindexingHom l E X s).map ((podReindexingComplexFunctor l E g s).map a).op).app ((podReindexingComplexFunctor l E g s).obj I) ≫ ((podReindexingHom l E X s).obj (op ((podReindexingComplexFunctor l E g s).obj K'))).map ((podReindexingComplexFunctor l E g s).map b)) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective) (_hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), QuasiIso a → QuasiIso b → QuasiIso ((podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b))) ∧ (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective), ∃ hFI : CochainComplex.IsKInjective ((podReindexingComplexFunctor l E g s).obj I), δ.hom.app (op ((podReindexingQ l E Y s).obj K), (podReindexingQ l E Y s).obj I) = (podReindexingDerivedFunctor l E g s).map (@podReindexingHomModel l _ E _ _ _ Y s K I hI).hom ≫ (podReindexingDerivedFactors l E g s).hom.app (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≫ (podReindexingQ l E X s).map (χ K I hI).hom ≫ (@podReindexingHomModel l _ E _ _ _ X s ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) hFI).inv ≫ ((podReindexingDerivedHom l E X s).mapIso (((podReindexingDerivedFactors l E g s).app K).op.prod ((podReindexingDerivedFactors l E g s).app I).symm)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four theorem declarations collectively state the coefficient normalization, exact module/resolution equivalence, normalized actual Hom-complex and natural derived comparison, and round-trip/shift/finite-pullback clauses. Helper abbreviations reuse the recorded constructions. The completed coefficient family is selected only from an existence-and-uniqueness theorem; the Hom model is explicitly assembled from localization factorization and the invertible canonical K-injective replacement map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a205832d8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Only the node's lean field changed; the 13 dep records are identical to side-live (no H13); the statement field is verbatim. Every clause matches: unique coefficient family pinned on constants and all completed projections; exact equivalence with inverse reindexing, all limits/colimits, flat/K-flat/K-injective/quasi-iso preservation; sigma/eta pinned by pure tensors and evaluation; chi an actual Hom-complex iso pinned by projections, with naturality and the Step-9 quasi-iso clause; delta natural, pinned at (QK,QI) by an explicit Localization.fac + inv Q(Hom(K,I->I0 I)) model; coefficient and unit/counit round trips (HEq variance checked); identity shift components. Edge cases covered; EssentiallySmall binders hold by essentiallySmallSelf. No hollow defs, theorems sorry, docstrings present. Advisories: A1 the finite 'it is Lg_n^*' clause is a bare Nonempty iso, accepted because sigma/eta/chi/delta are pinned (stage 3 should use the section-normalized comparison); A2 isoSectionwise*/proEtaleIsoPostcompose used without citing their landed existing:true def nodes, no theorem stmt_dep added; A3 the parent lem-pod-derived-automorphism-hom-evaluation has parallel podCompletedRingMap/ModuleInverseImage/podKInjectiveHomModel, so the parent should reuse the item's at stage 3 (cycle prevents citing); A4 imports HasLimits and BifunctorShift unused; A5 the second reading is by the same worker, disclosed. No compile: nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T134954-L-3650727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

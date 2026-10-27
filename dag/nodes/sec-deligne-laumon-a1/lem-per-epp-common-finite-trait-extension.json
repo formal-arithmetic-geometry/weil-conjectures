@@ -246,20 +246,37 @@
   "module": "Sheaf.RingTheory.CommonFiniteTraitExtension",
   "declaration": "IsDiscreteValuationRing.exists_common_finite_trait_extension",
   "file": "lean/Sheaf/RingTheory/CommonFiniteTraitExtension.lean",
-  "statement": "theorem exists_common_finite_trait_extension (W₀ : Type u) [CommRing W₀] [IsDomain W₀] [IsDiscreteValuationRing W₀] [IsAdicComplete (maximalIdeal W₀) W₀] (K₀ : Type u₁) [Field K₀] [Algebra W₀ K₀] [IsFractionRing W₀ K₀] (I : Type w) [Finite I] (Wᵢ : I → Type v) (Kᵢ : I → Type v₁) [∀ i : I, CommRing (Wᵢ i)] [∀ i : I, IsDomain (Wᵢ i)] [∀ i : I, IsDiscreteValuationRing (Wᵢ i)] [∀ i : I, IsAdicComplete (maximalIdeal (Wᵢ i)) (Wᵢ i)] [∀ i : I, Algebra W₀ (Wᵢ i)] [∀ i : I, IsLocalHom (algebraMap W₀ (Wᵢ i))] (hinj : ∀ i : I, Function.Injective (algebraMap W₀ (Wᵢ i))) [∀ i : I, Field (Kᵢ i)] [∀ i : I, Algebra (Wᵢ i) (Kᵢ i)] [∀ i : I, IsFractionRing (Wᵢ i) (Kᵢ i)] [∀ i : I, Algebra K₀ (Kᵢ i)] [∀ i : I, Module.Finite K₀ (Kᵢ i)] (hK : ∀ i : I, (algebraMap (Wᵢ i) (Kᵢ i)).comp (algebraMap W₀ (Wᵢ i)) = (algebraMap K₀ (Kᵢ i)).comp (algebraMap W₀ K₀)) : ∃ (W : Type u) (_ : CommRing W) (_ : IsDomain W) (_ : IsDiscreteValuationRing W) (_ : IsAdicComplete (maximalIdeal W) W) (_ : Algebra W₀ W) (_ : IsLocalHom (algebraMap W₀ W)), Function.Injective (algebraMap W₀ W) ∧ Module.Finite W₀ W ∧ (∀ i : I, ∃ f : Wᵢ i →ₐ[W₀] W, Function.Injective f ∧ IsLocalHom f.toRingHom) ∧ (ResidueField.map (algebraMap W₀ W)).Finite ∧ (PerfectField (ResidueField W₀) → PerfectField (ResidueField W))",
-  "branch": "newtargets-dag",
-  "by": "Q152",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CommonFiniteTraitExtension deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem exists_common_finite_trait_extension (W0 : Type u) [CommRing W0] [IsDomain W0] [IsDiscreteValuationRing W0] [IsAdicComplete (IsLocalRing.maximalIdeal W0) W0] (K0 : Type v) [Field K0] [Algebra W0 K0] [IsFractionRing W0 K0] (I : Type t) [Finite I] (Wi : I → Type w) [∀ i : I, CommRing (Wi i)] [∀ i : I, IsDomain (Wi i)] [∀ i : I, IsDiscreteValuationRing (Wi i)] [∀ i : I, IsAdicComplete (IsLocalRing.maximalIdeal (Wi i)) (Wi i)] [∀ i : I, Algebra W0 (Wi i)] [∀ i : I, IsLocalHom (algebraMap W0 (Wi i))] (hinj : ∀ i : I, Function.Injective (algebraMap W0 (Wi i))) (Ki : I → Type x) [∀ i : I, Field (Ki i)] [∀ i : I, Algebra (Wi i) (Ki i)] [∀ i : I, IsFractionRing (Wi i) (Ki i)] [∀ i : I, Algebra K0 (Ki i)] [∀ i : I, Module.Finite K0 (Ki i)] (hK : ∀ (i : I) (a : W0), algebraMap (Wi i) (Ki i) (algebraMap W0 (Wi i) a) = algebraMap K0 (Ki i) (algebraMap W0 K0 a)) : ∃ (W : Type u) (_ : CommRing W) (_ : IsDomain W) (_ : IsDiscreteValuationRing W) (_ : Algebra W0 W) (_ : IsLocalHom (algebraMap W0 W)), IsAdicComplete (IsLocalRing.maximalIdeal W) W ∧ Function.Injective (algebraMap W0 W) ∧ Module.Finite W0 W ∧ (∀ i : I, ∃ f : Wi i →ₐ[W0] W, Function.Injective f ∧ IsLocalHom f.toRingHom) ∧ RingHom.Finite (IsLocalRing.ResidueField.map (algebraMap W0 W)) ∧ (PerfectField (IsLocalRing.ResidueField W0) → PerfectField (IsLocalRing.ResidueField W))",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9a7910d06",
-  "group": "Q152",
+  "reviewer": "NT-stage2-cc-f698dc39f",
+  "group": "Q57",
   "result": "pass",
-  "note": "Read item node, 6 stmt_deps records, report, module, live side node (only lean added; statement verbatim) and citer lem-per-epp-finite-family-traits. All clauses match: complete DVR W₀/K₀, Finite I (empty allowed), complete DVR Wᵢ with local injective W₀-algebra map (hinj is the node's own hypothesis, not implied by locality), Kᵢ finite over K₀ with hK compatibility; conclusion W complete DVR, local injective finite W₀ → W, injective local AlgHoms Wᵢ → W, RingHom.Finite of the residue map, PerfectField k₀ → PerfectField k. Universes independent; W : Type u is legitimate and matches the citer. No duplicate (side lean grep; recorded searches). Imports follow rule 7; sorry-only proof; docstrings carry source, blueprint and 5 steps; no line over 100 chars. nt_compile --json: 7.0 s, rc 0, no warnings. Advisory only: scheme residue-field record vs ResidueField of the local ring (same construction)."
+  "note": "Re-delivery of a statement whose module was deleted as dead (live lean null; earlier Q152 PASS of the same declaration). Node diff is lean only; statement verbatim in the module. Read all 6 stmt_deps, both citers and the ILO IV 4.2.3 place. Every hypothesis matches with none stronger: hinj is the node's own hypothesis (redundant given hK, harmless) and hK only pins the K0-structure the node implies. Every conclusion clause matches: complete DVR W:Type u, injective local finite W0→W, injective local W0-AlgHoms Wi→W, RingHom.Finite of the residue map, PerfectField implication. Edge cases covered: empty I, singleton, inseparable, all characteristics, imperfect k0. No duplicate in side-live; proof sorry only; docstrings carry source, blueprint and 5 steps; universes bound. No change, no compile."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/CommonFiniteTraitExtension.lean",
+  "module": "Sheaf.RingTheory.CommonFiniteTraitExtension",
+  "declaration": "IsDiscreteValuationRing.exists_common_finite_trait_extension",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

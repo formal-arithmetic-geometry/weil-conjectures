@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-principal-cone-small-site-criterion",
+ "kind": "statement",
+ "title": "Principal Cone Small Site Criterion",
+ "status": "split",
+ "statement": "On a small ringed site, assume the displayed derived categories globally, on slices and on strict countable towers, and exact countable products. For any compatible global section a and its scalar chain endomorphism μ on P, Q of the principal cone completion is principally locally complete for a. Moreover Q(P) is principally locally complete if and only if the specified principal cone completion unit becomes an isomorphism. Dependencies: [def-pur-principal-cone-tower], [def-pur-ringed-principal-local-tests].",
+ "stmt_deps": [
+  "def-pur-principal-cone-tower",
+  "def-pur-ringed-principal-local-tests"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "the image ideal of scalar multiplication has precisely the locally divisible sections. Apply the singleton Koszul completion reflector to this image ideal, whose one-element generating list follows from the image factorization. The comparison with the strict tensor Koszul Roos complex and then the principal cone Roos complex preserves the degree-zero unit. Transport output completeness across these comparisons. Their unit equality identifies the reflector's invertibility criterion with the stated one.",
+   "uses": [
+    "def-pur-principal-cone-tower",
+    "def-pur-ringed-principal-local-tests",
+    "lem-pur-principal-cone-koszul-roos-comparison",
+    "lem-pur-principal-ideal-local-test-criterion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-pur-unit-power-completeness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-cone-tower",
+  "def-pur-ringed-principal-local-tests",
+  "lem-pur-principal-cone-koszul-roos-comparison",
+  "lem-pur-principal-ideal-local-test-criterion",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-unit-power-completeness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a small ringed site, assume the displayed derived categories globally, on slices and on strict countable towers, and exact countable products. For any compatible global section a and its scalar chain endomorphism μ on P, Q of the principal cone completion is principally locally complete for a. Moreover Q(P) is principally locally complete if and only if the specified principal cone completion unit becomes an isomorphism.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLimitConeΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) : IsLimit F.coneΓ\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with a Grothendieck topology $ J $, the cone over the underlying presheaf $ F $ with apex given by the global sections $\\\\Gamma(F)$ is a limit cone. This m\"}\n  {\"name\": \"CategoryTheory.Sheaf.coneΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) : Cone F.val\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this constructs a cone over the underlying presheaf $ F $ with apex given by the global sections $\\\\Gamma(F)$ of $ F $. The c\"}\n  {\"name\": \"CategoryTheory.CountableAB4Star\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Limits.HasCountableProducts C] → Prop\", \"doc\": \"A category satisfies the countable AB4* axiom if it has countable products and the product of epimorphisms is an epimorphism.\"}\n  {\"name\": \"LightCondensed.instCountableAB4StarLightCondMod\", \"module\": \"Mathlib.Condensed.Light.AB\", \"type\": \": CountableAB4Star (LightCondMod.{u} R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules satisfies the countable AB4* axiom. This means the category has countable products and the product of a family of epimorphisms is itse\"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : IsIso (adjunction P hs).unit\", \"doc\": \"For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": IsColimit (coproductCofan F)\", \"doc\": \"For any small discrete category $\\\\mathcal{J}$ and diagram $F : \\\\mathcal{J} \\\\to \\\\mathrm{LocallyRingedSpace}$, the cocone constructed by taking the colimit of $F \\\\circ \\\\text{forget}$ in the category of \"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": LocallyRingedSpace.Γ.IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ from the category of locally ringed spaces to the opposite category of commutative rings is a right adjoint functor. This establishes an adjunction between the con\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Elab.CompletionInfo\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" : Type\", \"doc\": \"A completion is an item that appears in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense)\\nbox that appears as you type.\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.namespaceId\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.option\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.tactic\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.Info.ofCompletionInfo\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (i : Lean.Elab.CompletionInfo) : Lean.Elab.Info\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.errorName\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx partialId : Lean.Syntax) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.dot\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (termInfo : Lean.Elab.TermInfo) (expectedType? : Option Lean.Expr) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.dotId\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) (id : Lean.Name) (lctx : Lean.LocalContext) (expectedType? : Option Lean.Expr) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.fieldId\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) (id : Option Lean.Name) (lctx : Lean.LocalContext) (structName : Lean.Name) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.endSection\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) (id? : Option Lean.Name) (danglingDot : Bool) (scopeNames : List String) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.id\", \"module\": \"Lean.Elab.InfoTree.Types\", \"type\": \" (stx : Lean.Syntax) (id : Lean.Name) (danglingDot : Bool) (lctx : Lean.LocalContext) (expectedType? : Option Lean.Expr) : Lean.Elab.CompletionInfo\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.CompletionInfo.lctx\", \"module\": \"Lean.Elab.InfoTree.Basic\", \"type\": \" : Lean.Elab.CompletionInfo → Lean.LocalContext\", \"doc\": \"Obtains the `LocalContext` from this `CompletionInfo` if available and yields an empty context\\notherwise.\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (derived|Derived).*[cC]omplet Mathlib/ (local read-only Mathlib source)",
+   "results": "No matching Mathlib source line.",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalConeSmallSiteCriterion",
+  "file": "lean/Sheaf/Paper/PrincipalConeSmallSiteCriterion.lean",
+  "declaration": "CategoryTheory.principalConeSmallSiteCriterion",
+  "statement": "theorem principalConeSmallSiteCriterion\n    (a : (R.obj ⋙ forget CommRingCat).sections) (P : CochainComplex A ℤ) (μ : End P)\n    (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),\n      (μ.f q).val.app U x = @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :\n    principalLocallyComplete.{u, u, u, w} R a\n        ((DerivedCategory.Q.{w} (C := A)).obj (CochainComplex.PrincipalCone.completion μ)) ∧\n      (principalLocallyComplete.{u, u, u, w} R a ((DerivedCategory.Q.{w} (C := A)).obj P) ↔\n        IsIso ((DerivedCategory.Q.{w} (C := A)).map (CochainComplex.PrincipalCone.unit μ)))",
+  "declarations": [
+   "CategoryTheory.principalConeSmallSiteCriterion"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

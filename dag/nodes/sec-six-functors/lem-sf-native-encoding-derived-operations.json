@@ -1,0 +1,363 @@
+{
+ "id": "lem-sf-native-encoding-derived-operations",
+ "kind": "statement",
+ "title": "Native vector-module encoding and equivariant derived-operation comparison",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be separated of finite type between separated finite-type $k_0$-schemes, and put $T=T_0\\times_{k_0}k$ and $f=\\bar f_0$ for $T_0=X_0,Y_0$. Use the native rings $B_T$, categories $\\mathcal A_T$ of $B_T$-module objects in sheaves of $\\Omega$-vector spaces, geometric Frobenius $F_T$, and fixed-pair abelian categories $\\mathcal W_T=\\mathcal A_T^{F_T^*}$ of [def-sf-native-weil-derived-framework]. All sites have small representatives in one common larger module universe [def-weil-pbc-proetale-site]. Let $R_T=p_T^*\\underline\\Omega$ be the finite-subextension-valued condensed coefficient [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients], and let $\\theta_T:R_T\\xrightarrow{\\sim}B_T$ be the canonical ring isomorphism of [lem-sf-locally-finite-coefficient-ring-realization]. Write $\\mathcal M_T$ for internal $R_T$-modules in abelian sheaves [sk-def-sfb-module-objects].\n\nReinterpreting the native action as a sectionwise $B_T$-action, transporting it along $\\theta_T$, and taking its internal abelian-module encoding defines an exact equivalence $E_T:\\mathcal A_T\\simeq\\mathcal M_T$. It preserves the underlying abelian sheaf and all restrictions; its inverse obtains the $\\Omega$-vector-space action by restriction along constant functions $\\Omega\\to B_T$. It preserves and reflects K-injective complexes, induces an equivalence $D(E_T)$ of ordinary unbounded derived categories, and identifies the actual native ordinary direct image and module pullback with the $R$-module operations, the latter being $R_X\\otimes_{f^{-1}R_Y}f^{-1}(-)$. This pullback is exact. The comparisons also apply to Frobenius pullback and respect the precomposition coefficient maps.\n\nLet $U_T:\\mathcal W_T\\to\\mathcal A_T$ forget Frobenius and put $V_T=D(E_T)D(U_T)$. For the actual native termwise pullback $f^*$ and total right derived ordinary direct image $Rf_*$ of [def-sf-native-weil-derived-framework], there are natural isomorphisms of functors on the ambient derived categories\n$$V_X f^*\\cong f_R^* V_Y,\\qquad V_Y Rf_*\\cong Rf_{R*}V_X.$$\nHere $f_{R*}$ and $f_R^*$ are the module-object pushforward and pullback of [sk-def-sfb-module-pushforward-pullback] for the coefficient $R$; $Rf_{R*}$ is the derived pushforward $Rf_*$ of [sk-def-sfb-module-derived-pushpull], the ordinary total right derived functor computed by K-injective resolutions [def-sfb-right-derived-functor], and, $f_R^*$ being exact, the derived pullback $Lf^*$ of [sk-def-sfb-module-derived-pushpull] is computed termwise and is identified with $f_R^*$ applied degreewise; the comparison uses the underlying native resolutions and the given Frobenius transport isomorphisms. No constructibility hypothesis is imposed on the complexes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1 and 6.8.3 for coefficient modules; agent-formulated native comparison extracted from returned steps 3, 4 and 7. Native source: lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean:50-56; WeilSheaf/LowerStar.lean:79-85,116-142; CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean:62-97. The paper supplies the module model, not this native encoding theorem."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "sk-def-sfb-module-objects",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Use the native ordinary encoding core for the exact heart equivalence, unchanged underlying sheaves, ordinary pull/push comparisons, coefficient naturality, K-injectivity and unbounded derived comparison. The constant-function action in the remaining module is precisely the existing native AdicSheaf.algebraMap_sectionAct: its input constant function is the native unit applied to the scalar, by adicConstantSheaf_one_app.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For native Weil pullback, localize the actual fixed-pair forgetting square and then the ordinary encoding pullback square. Compose their localized isomorphisms with the associators; this is weilDerivedPullComparison. For direct image, use the source-library fixed-pair right-derived forgetting comparison, followed by the core derivedPushComparison, with the associators. The free Frobenius-pair adjunction is exact, so forgetting preserves K-injectives; encoding preserves them by its exact equivalence. Transport through the canonical complex-composition isomorphism to obtain weil_resolution_comparison.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize derivedPushComparison by the universal units. For each of its four factors, use respectively the unit equation of rightDerivedUnique for composition with an exact functor, the equation rightDerivedNatTrans_app, the unit equation of rightDerivedUnique for derived composition, and the exact-functor comparison unit equation. On complexes, quotientCompQhIso is the canonical identity and the homotopy exact-localization factor is the complex factor. Compose the four equations. Functoriality combines the last two mapped arrows, and the exact-functor unit equation turns their composite into the inverse exact-localization factor of encoding. This proves derivedPushComparison_unit; in fact its equation holds on every complex, so its existing K-injective hypothesis is not needed in this calculation.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The core ordinary comparison supplies exactness of the internal pullback. Its canonical leftDerivedFunctorIsoMapDerivedCategory gives the final displayed isomorphism. Pair this with weilDerivedPullComparison and weilDerivedPushComparison to prove native_encoding_derived_operations. These constructions use no boundedness or constructibility assumption.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean; Comp.lean; ShortExactPullback.lean; lean/WeilConjectures/SixFunctors/ProEtale/Adic/SectionAction.lean",
+  "place": "V1, 2026-10-27: retain the existing fixed-pair assembly; close native_constant_action using algebraMap_sectionAct and derivedPushComparison_unit by the unit identities of its four canonical factors. Eight proved private helpers express the quotient identities, those four unit equations and their generic square assembly. No new statement or definition and no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between sheaves of algebra modules in vector space sheaves and ring sheaf modules compatible with Frobenius and total derived pushforward",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"SheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J RingCat → Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $F$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $F$, where each module satisfies the sheaf c\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{M : SheafOfModules.{u} R} (f : unit R ⟶ M) :\\n  pushforwardSections φ (M.unitHomEquiv f) =\\n    ((pushforward φ).obj M).unitHomEquiv (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R} (f : (sheafification α).obj P ⟶ F) :\\n  (sheafificationAdjunction α).homEquiv P F f = sheafificationHomEquiv α f\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": SheafOfModules.{v} R ⥤ SheafOfModules.{v} S\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\", \"rightDerivedFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|ProEtaleWeilSheaf|finiteSpanModule",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Basic.lean\", \"line\": \"243\", \"text\": \"def algEquivIsoAlgebraIso {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius from native adic module objects commutes with ordinary total derived direct image and termwise pullback through the vector space module encoding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"LightCondensed.forget_obj_val_map\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (G : CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\\n  {X Y : LightProfiniteᵒᵖ} (f : X ⟶ Y) (a : (CategoryTheory.forget (ModuleCat R)).obj (G.val.obj X)),\\n  ((LightCondensed.forget R).obj G).val.map f a = (CategoryTheory.ConcreteCat\", \"doc\": \"For any ring $ R $, a sheaf $ G $ of $ R $-modules on light profinite spaces, and a morphism $ f: X \\to Y $ in the opposite category of light profinite spaces, the action of the forgetful functor from \"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.free R ⊣ Condensed.forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.*[Ee]quiv|[Ee]quiv.*Mod|KInjective.*[Ee]quiv",
+   "results": {
+    "t": "2026-10-22T12:04:58Z",
+    "tool": "grep",
+    "query": "Mod.*[Ee]quiv|[Ee]quiv.*Mod|KInjective.*[Ee]quiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean",
+     "Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean",
+     "Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+     "Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/Instances.lean"
+    ],
+    "digest": "2d6a874a022a341f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting Frobenius equivariance commutes with unbounded total right derived direct image of sheaves of modules",
+   "results": {
+    "t": "2026-10-22T12:04:58Z",
+    "tool": "leansearch",
+    "query": "Forgetting Frobenius equivariance commutes with unbounded total right derived direct image of sheaves of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "SheafOfModules.forgetToSheafModuleCat_map_val",
+     "SheafOfModules.forget",
+     "CategoryTheory.sheafForget",
+     "SheafOfModules.toSheaf",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.pushforwardCompToPresheaf"
+    ],
+    "digest": "3ad2d20748596972"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": {
+    "t": "2026-10-22T12:04:58Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"Equivalence\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardEquivalence",
+     "SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app"
+    ],
+    "digest": "571c2771101662dc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence between internal modules over an algebra in sheaves of vector spaces and sheaves of modules over its underlying ring compatible with derived pushforward",
+   "results": {
+    "t": "2026-10-22T12:05:08Z",
+    "tool": "leanfinder",
+    "query": "Exact equivalence between internal modules over an algebra in sheaves of vector spaces and sheaves of modules over its underlying ring compatible with derived pushforward",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pushforwardCongr",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.forgetToSheafModuleCat",
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction"
+    ],
+    "digest": "2f60f6ccd26f7a01"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence|Equivalence|equiv",
+   "results": {
+    "t": "2026-10-22T12:05:39Z",
+    "tool": "grep",
+    "query": "equivalence|Equivalence|equiv",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean"
+    ],
+    "digest": "938f9302936bcc06"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules over a sheaf of algebras in sheaves of vector spaces are equivalent to modules over the underlying sheaf of rings by restriction of scalars",
+   "results": {
+    "t": "2026-10-22T12:05:43Z",
+    "tool": "leanfinder",
+    "query": "Modules over a sheaf of algebras in sheaves of vector spaces are equivalent to modules over the underlying sheaf of rings by restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.forgetToSheafModuleCat",
+     "SheafOfModules.toSheaf_obj_val",
+     "SheafOfModules.forgetToSheafModuleCat_obj_val",
+     "SheafOfModules.forget",
+     "SheafOfModules.over",
+     "SheafOfModules.toSheafCompSheafToPresheafIso"
+    ],
+    "digest": "fd4293340ff44f6e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern sectionwise sheaves, scalar restriction, or site equivalences; none proves the native vector-module and equivariant unbounded comparison. SheafOfModules.pushforwardPushforwardEquivalence (PushforwardContinuous.lean:388) changes sites, not the internal vector-module encoding."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-pullback-star-preservation",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Definitions 6.8.1 and 6.8.3 for coefficient modules; agent-formulated native comparison extracted from returned steps 3, 4 and 7. Native source: lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean:50-56; WeilSheaf/LowerStar.lean:79-85,116-142; CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean:62-97. The paper supplies the module model, not this native encoding theorem. This audit seed has no imported ancestor; fix-lem-tensor-adjunction.proof.md Step 1 needs the native pullback and ordinary direct-image terms.",
+   "via": [
+    "lem-sf-native-weil-pullback-star-preservation",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-encoding-derived-operations",
+  "worker": "stage1",
+  "summary": "Explicit constant-scalar inverse for the native vector-module encoding; exact equivalence and K-injectivity checked directly, ordinary comparisons normalized by precomposition, and fixed-pair/derived exact-square theorems assembled. No new nodes, no statement change, no Lean written or compiled.",
+  "blueprint": "Audit seed has no imported blueprint ancestor (ancestor command returns None). The split serves the source-listed native-comparison clauses extracted from lem-sf-native-weil-pullback-star-preservation steps 3, 4 and 7; steps 1-4 establish the encoding/ordinary comparison and steps 5-7 the ambient derived comparisons. same_as remains empty after whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-finite-span-module-derived-comparison",
+    "why": "Generic coefficient-normalized internal/sectionwise operation comparison, for the same finite-subextension coefficient; no biduality or constructibility theorem is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-equivalence-injective-resolutions",
+    "why": "Generic additive-equivalence preservation of kernels, cokernels and exactness."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise descent of an exact functor to ordinary derived categories."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small-site Grothendieck infrastructure needed for the fixed-pair comparison."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Generic fixed-pair K-injective and total-derived forgetting comparison."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-exact-square-comparison",
+    "why": "Generic resolution-normalized comparison for an exact square; ensures naturality for all derived arrows."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic cartesian-coefficient exactness; supplies invertibility of the actual coefficient map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-fixed-pair-derived-forget-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-12100893e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-12100893e (reviewer sub-agent of L); spot-checked: Read in full: item lem-sf-native-encoding-derived-operations (7 steps, no new nodes). The statement and stmt_deps are identical to live and side-live. No re-split note applies, and live still has the item unsplit. Checked every cited statement: native framework, module-objects, def-pur-sheaf-tensor-product, finite-span comparison, ring-realization, cartesian-coefficients, pushforward-pullback, derived-pushpull, equivalence-injective-resolutions, exact-functor factorization, ring-sheaves-grothendieck, fixed-pair forget, kinjective exact-square and right-derived-functor. Sources: Stacks 03EK (sites-modules.tex l.3551, presheaf tensor then sheafification) and Bhatt–Scholze 6.8.1/6.8.3, which give only the module model, as the node says. No SGA. Steps 1-5 are correct. Step 1: the constant functions c_a lie in B_T, balancedness comes from commutativity, and the map extends through sheafification. Step 2: finite-span's c_Z is θ_Z, so R_Z = B_Z. Step 3: K-injectives are preserved and reflected by Hom_K(A,EI)≅Hom_K(GA,I). Step 5: the framework's Frobenius lift matches the fixed-pair L~ with e = c, so the native Rf_* is R L~. Fixes made: (C1) step 6 asserted Lf_R^* = degreewise f_R^* for exact f_R^* with no node, now cited to sk-def-sfb-derived-categories (exact-functor clause). (C1) step 7 used the exact-square lemma without justifying its hypothesis that K-injective resolutions exist in A_X and M_X: A_X is Grothendieck by step 5, M_X by equivalence, and Grothendieck gives K-injective resolutions by sk-def-sfb-derived-categories, now cited. (E5) step 7 replaced 'conjugate by the natural isomorphism' with the strict equality E_Y f_*^nat = f_{R*}E_X that the lemma requires: underlying sheaves are preserved identically and the comparison is the identity there, so the actions agree. Batch-5: the cited finite-span node reaches def-pd-section-module-operations-data, a definition of transparent aliases of section-module operations with no proof_deps. That is general infrastructure and not a step of the Poincaré-duality or trace-formula proof, so it is accepted. The added citation sk-def-sfb-derived-categories reaches no trace-formula or Poincaré-duality node. The seven tool_uses are accepted as generic. Maintainer note: the encoding clause partly overlaps the unsplit nodes lem-sf-weil-verdier-module-constructibility-comparison and lem-sf-native-weil-injective-adjunction-model. Neither is a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeEncodingDerivedOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeEncoding.native_encoding_derived_operations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NativeEncoding.realization",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.derivedPushComparison_unit",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.native_constant_action",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.weilDerivedPullComparison",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.weilDerivedPushComparison",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.weil_resolution_comparison",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.native_encoding_derived_operations"
+  ],
+  "file": "lean/Sheaf/Paper/NativeEncodingDerivedOperations.lean",
+  "statement": "theorem native_encoding_derived_operations (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] : Nonempty ((ProEtaleWeilSheaf.upperStar k₀ l f).mapDerivedCategory ⋙ realization k₀ l X ≅ realization k₀ l Y ⋙ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀))))).mapDerivedCategory) ∧ Nonempty ((ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor ⋙ realization k₀ l Y ≅ realization k₀ l X ⋙ CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀))))) ∧ Nonempty (CondensedRing.moduleObjectDerivedPullback (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))) ≅ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀))))).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Aggregate statement: explicit native encoding, its heart and derived equivalence, constant-scalar inverse rule, unchanged underlying sheaves, K-injective iff, identity-on-sections ordinary pushforward and its adjunction-mate pullback, coefficient naturality, and canonical ambient Weil derived comparisons. The derived isomorphisms are real composites of universal derived comparisons using the actual native Frobenius transport; derivedPushComparison_unit records the K-injective normalization. All named theorem proofs are sorry; all definitions have actual data. No node statement or dependency is changed. Ordinary native declarations are reexported unchanged from Sheaf.Paper.NativeAdicEncodingCore and attached to its extraction node; the remaining fixed-pair declarations stay here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccfc70bb8",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps, module, report, and the upstream framework (Adic/Module, AdicSheafForgetAb, WeilSheaf Category/LowerStar, CondensedModuleDerivedPushpull, ring-realization proof). Node unchanged except lean. Every hypothesis matched with nothing extra; geometric fibre per framework; universes u/u+1, no restriction. encoding = forgetAb ⋙ Mod.comap θ, with θ = coefficientIso, the dep's own witness. Components cover equivalence, exactness, underlying sheaf, constant-scalar inverse rule, K-injective iff, unbounded D(E) equivalence, and ordinary push/pull for every map (Frobenius incl.) with p pinned identity-on-sections, q its mate, exact upperStar and coefficient square. Displayed derived isos are canonical defs (weilDerivedPull/PushComparison, derivedPushComparison with K-injective unit normalization) using the actual Frobenius transports; main theorem's Nonempty suffices for both citers. 10 sorries = 10 theorems; no hollow defs; docstrings ok; no line >100; statement verbatim. No recompile per 2026-10-21 rule. Advisory only: globalCoefficientIso owner not in stmt_deps (definitionally the dep's θ); Lf^*≅D(f^*) clause existence-only (canonical upstream leftDerivedFunctorIsoMapDerivedCategory)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dd510",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T123545-L-2319934",
+  "kind": "proof",
+  "note": "independent cc review: delivered NativeEncodingDerivedOperations.lean and node lem-sf-native-encoding-derived-operations against the clone, unit sk-prop-sf-biduality-general (realized empty) and importer NativeForgetConstructibleCriterion (compiled OK against the delivery)"
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-quotient-map-cartesian-action-groupoid",
+ "kind": "statement",
+ "title": "The action-groupoid presentation of a quotient morphism after object base change",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic spaces mean [def-trf-algebraic-space], algebraic stacks mean [def-sfb-algebraic-moduli-stack], and stacks in groupoids, their morphisms and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. A groupoid in algebraic spaces has the operations and test-point laws of [def-a1-groupoid-scheme], with algebraic spaces in place of schemes. For any such groupoid $(U,R)$ write $[U/R]$ for the stackification of its test-point groupoid on the big fppf site [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Let $(f_0,f_1):(U,R,s,t,e,i,c)\\to(U',R',s',t',e',i',c')$ be a morphism of groupoids over $S$, meaning maps on objects and arrows commuting with all operations. It induces a morphism $[f]:[U/R]\\to[U'/R']$. Put $A=U\\times_{f_0,U',t'}R'$ and $B=R\\times_{f_0s,U',t'}R'$. Give $A$ its map to $U'$ by $(u,r')\\mapsto s'(r')$. On $B$ define source $(r,r')\\mapsto(s(r),r')$, target $(r,r')\\mapsto(t(r),c'(f_1(r),r'))$, unit $(u,r')\\mapsto(e(u),r')$, inverse $(r,r')\\mapsto(i(r),c'(f_1(r),r'))$, and composition $((r_1,r'_1),(r_2,r'_2))\\mapsto(c(r_1,r_2),r'_2)$ for composable arrows. These operations make $(A,B)$ a groupoid over $U'$, and its quotient has a canonical equivalence\n$$[A/B]\\simeq U'\\times_{[U'/R']}[U/R]$$\ncommuting with the maps to $U'$ and $[U/R]$. The comparison sends $(u,r')$ to $(s'(r'),u,r':s'(r')\\to f_0(u))$. No flatness or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), with the construction immediately preceding it."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-groupoid-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-space-fibre-products-etale-covers], the sheaf fibre products $A$ and $B$ are algebraic spaces. Write $P=[U/_{p}R]$ and $P'=[U'/_{p}R']$ for the fibred groupoids of test points before stackification. The maps $f_0,f_1$ define a functor $P\\to P'$, since they commute with all operations. Let $D$ be the discrete fibred groupoid of the sheaf $U'$, with the functor $D\\to P'$ sending $u'$ to the corresponding object. Form the fibrewise $2$-product $K=D\\times_{P'}P$, using [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), construction preceding the lemma and its proof."
+   }
+  },
+  {
+   "text": "An object of $K(T)$ is $(u',u,r')$ with $s'(r')=u'$ and $t'(r')=f_0(u)$. Forgetting $u'$ gives a bijection with $A(T)$, with inverse $(u,r')\\mapsto(s'(r'),u,r')$. An arrow from $(u'_2,u_2,r'_2)$ to $(u'_1,u_1,r'_1)$ has first component the identity (thus $u'_2=u'_1$) and second component $r:u_2\\to u_1$, satisfying $c'(f_1(r),r'_2)=r'_1$. It is therefore uniquely the pair $(r,r'_2)\\in B(T)$ with the source and target in the statement. Conversely any such pair supplies this arrow, since $s'(c'(f_1(r),r'_2))=s'(r'_2)$. This is exactly the arrow compatibility equation of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), construction preceding the lemma and its proof."
+   }
+  },
+  {
+   "text": "Under these bijections the identity is $(e(u),r')$. Inversion is $(i(r),c'(f_1(r),r'))$, because $c'(f_1(i(r)),c'(f_1(r),r'))=r'$. For composable pairs one has $s(r_1)=t(r_2)$ and $r'_1=c'(f_1(r_2),r'_2)$; their composite is $(c(r_1,r_2),r'_2)$, since $c'(f_1(r_1),r'_1)=c'(f_1(c(r_1,r_2)),r'_2)$. These are the unit, inverse and composition laws of [def-a1-groupoid-scheme]. The operations are natural in $T$ and hence are maps of the algebraic-space sheaves [def-trf-algebraic-space]. Their laws hold because these formulas identify them with the groupoid operations in $K(T)$. Both ends have the same $s'(r')$, so the groupoid is over $U'$. The bijections and their inverses commute with restrictions; thus the raw test-point groupoid of $(A,B)$ is isomorphic to $K$, preserving both projections and the comparison arrow $r'$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), construction preceding the lemma and its proof."
+   }
+  },
+  {
+   "text": "The discrete fibred groupoid $D$ is an fppf stack: the sheaf condition for $U'$ [def-trf-algebraic-space] glues its objects, and its only arrows are identities, so descent cocycles are precisely equality on overlaps. Apply [lem-sfb-stackification-two-fibre-products] on the big fppf site, retaining $D$ as its own stackification. The raw identification above gives\n$$[A/B]\\simeq a(K)\\simeq D\\times_{a(P')}a(P)=U'\\times_{[U'/R']}[U/R].$$\nHere the quotients are exactly the stackifications of [lem-sfb-groupoid-stackification-local-description]. The comparison in the cited theorem extends the raw triple functor, so on $(u,r')$ it is $(s'(r'),u,r')$; its projections are the map to $U'$ and the quotient morphism induced by $(A,B)\\to(U,R)$. The same compatibility identifies the right-hand map with $[f]$. This proves the stated $2$-commutativity and equivalence without assumptions on the source or target maps beyond the groupoid laws.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stackification-two-fibre-products",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), construction preceding the lemma and its proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-groupoid-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-stackification-two-fibre-products",
+  "lem-sfb-groupoid-stackification-local-description"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 04Y4 (lemma-cartesian-square-of-morphism), construction preceding the lemma and its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a morphism of quotient stacks by the object space is the quotient of the induced action groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D), F.relativelyRepresentable.IsStableUnderBaseChange\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"CategoryTheory.Grothendieck.transport_base\", \"module\": \"Mathlib/CategoryTheory/Grothendieck\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C CategoryTheory.Cat}\\n  (x : CategoryTheory.Grothendieck F) {c : C} (t : x.base ⟶ c), (x.transport t).base = c\", \"doc\": \"For any object $x$ in the Grothendieck category of a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$ and any morphism $t : x.\\\\text{base} \\\\to c$ in $\\\\mathcal{C}$, the base of the transported object $x.\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.baseChange_obj\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {S S' : C} (f : S' ⟶ S)\\n  [inst_1 : CategoryTheory.Limits.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] (X : CategoryTheory.Over S),\\n  P X.hom → P ((CategoryTheory.Over.pullback f).obj X).hom\", \"doc\": \"Given a morphism $ f : S' \\to S $ in a category $\\\\mathcal{C}$ with pullbacks along $f$, and a morphism property $P$ stable under base change along $f$, if an object $X$ in the over category $\\\\mathcal{C\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.baseChange_map\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C}\\n  [P.IsStableUnderBaseChange] {S S' : C} (f : S' ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullbacksAlong f]\\n  {X Y : CategoryTheory.Over S} (g : X ⟶ Y), P g.left → P ((CategoryTheory.Over.pullback f).map \", \"doc\": \"If a morphism property $ P $ is stable under base change, then for any morphism $ f : S' \\\\to S $ with existing pullbacks, and any morphism $ g $ in the over category $ \\\\mathcal{C}/S $ satisfying $ P $\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_map_base\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Grothendieck\", \"type\": \"∀ {𝒮 : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮]\\n  {F G : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮ᵒᵖ) CategoryTheory.Cat} (α : F ⟶ G)\\n  {a b : F.CoGrothendieck} (f : a ⟶ b), ((CategoryTheory.Pseudofunctor.CoGrothendieck.map α).map f).base = f.base\", \"doc\": \"For any natural transformation $\\\\alpha$ between pseudofunctors $F$ and $G$ from the locally discrete opposite category of $\\\\mathcal{S}$ to the 2-category of small categories, and for any morphism $f$ \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_obj_base\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Grothendieck\", \"type\": \"∀ {𝒮 : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮]\\n  {F G : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮ᵒᵖ) CategoryTheory.Cat} (α : F ⟶ G)\\n  (a : F.CoGrothendieck), ((CategoryTheory.Pseudofunctor.CoGrothendieck.map α).obj a).base = a.base\", \"doc\": \"Given a natural transformation $\\\\alpha: F \\\\Rightarrow G$ between pseudofunctors $F, G: (\\\\mathcal{S}^{\\\\text{op}})_{\\\\text{disc}} \\\\to \\\\mathsf{Cat}$, the functor $\\\\int^c F \\\\to \\\\int^c G$ induced by $\\\\alpha\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.Grothendieck.map_map_base\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Grothendieck\", \"type\": \"∀ {𝒮 : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮]\\n  {F G : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮) CategoryTheory.Cat} (α : F ⟶ G)\\n  {a b : F.Grothendieck} (f : a ⟶ b), ((CategoryTheory.Pseudofunctor.Grothendieck.map α).map f).base = f.base\", \"doc\": \"For any natural transformation $\\\\alpha: F \\\\Rightarrow G$ between pseudofunctors $F,G: \\\\mathcal{S} \\\\to \\\\mathsf{Cat}$, and for any morphism $f: a \\\\to b$ in the Grothendieck category $\\\\int F$, the base c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks and groupoid products do not provide stackification and the algebraic-space action-groupoid presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map of algebraic space groupoids U R to V Q the fibre product V times over V modulo Q with U modulo R is a quotient stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z), CategoryTheory.Limits.HasPullback f g\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (x : ι × ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology, given a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the gluing data's $ V(i,j) $ component is defined as the pul\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_V\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (x : 𝒰.I₀ × 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).V x =\\n    match x with\\n    | (i, j) => Al\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the $V$-component of the gluing data is defined as the pullback scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.v\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          𝒰.I₀ → 𝒰.I₀ → AlgebraicGeometry.Scheme\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs the pullback scheme of the composition $\\\\mathcal{U}.f(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks and groupoid products do not provide stackification and the algebraic-space action-groupoid presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian square of a morphism of groupoid quotient stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.BicartesianSq\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.BicartesianSq\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] → {W X Y Z : C} → (W ⟶ X) → (W ⟶ Y) → (X ⟶ Z) → (Y ⟶ Z) → Prop\", \"doc\": \"A square diagram in a category $\\\\mathcal{C}$ with objects $W, X, Y, Z$ and morphisms $W \\\\to X$, $W \\\\to Y$, $X \\\\to Z$, $Y \\\\to Z$ is bicartesian, meaning it is both a pullback and a pushout.\"}\n  {\"name\": \"CategoryTheory.groupoidProd\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{α : Type u} {β : Type v} [Groupoid.{u₂} α] [Groupoid.{v₂} β] : Groupoid.{max u₂ v₂} (α × β)\", \"doc\": \"Given two groupoids $\\\\mathcal{G}$ and $\\\\mathcal{H}$, their product category $\\\\mathcal{G} \\\\times \\\\mathcal{H}$ is also a groupoid. This is because every morphism $(f, g)$ in the product category has an \"}\n  {\"name\": \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Categorical.Basic\", \"type\": \"(S : CatCommSqOver F G X) : CatCommSq S.fst S.snd F G\", \"doc\": \"Given categories $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}$ with functors $F : \\\\mathcal{A} \\\\to \\\\mathcal{B}$ and $G : \\\\mathcal{C} \\\\to \\\\mathcal{B}$, and a category $\\\\mathcal{X}$ equipped with projection fu\"}\n  {\"name\": \"CategoryTheory.TwoSquare\", \"module\": \"Mathlib.CategoryTheory.Functor.TwoSquare\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {C₃ : Type u₃} →\\n      {C₄ : Type u₄} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v₃, u₃} C₃] →\\n              [inst_3 : CategoryTheory.Catego\", \"doc\": \"A natural transformation from the composition of functors $ T \\\\circ R $ to the composition $ B \\\\circ L $, forming a 2-dimensional square diagram in category theory.\"}\n  {\"name\": \"CategoryTheory.Square.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.Square\", \"type\": \"Sort u_1 →\\n  {C : Type u} →\\n    [inst : CategoryTheory.Category.{v, u} C] →\\n      CategoryTheory.Square C →\\n        {C' : Type u} → [inst' : CategoryTheory.Category.{v, u} C'] → CategoryTheory.Square C' → Sort u_1\", \"doc\": \"A commutative square in a category $\\\\mathcal{C}$ is defined by four objects $X_1,X_2,X_3,X_4$, four morphisms $f_{12}: X_1 \\\\to X_2$, $f_{13}: X_1 \\\\to X_3$, $f_{24}: X_2 \\\\to X_4$, $f_{34}: X_3 \\\\to X_4$\"}\n  {\"name\": \"CategoryTheory.CommSq\", \"module\": \"Mathlib.CategoryTheory.CommSq\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → {W X Y Z : C} → (W ⟶ X) → (W ⟶ Y) → (X ⟶ Z) → (Y ⟶ Z) → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ and objects $W, X, Y, Z$ in $\\\\mathcal{C}$, along with morphisms $f: W \\\\to X$, $g: W \\\\to Y$, $h: X \\\\to Z$, and $k: Y \\\\to Z$, the proposition that $h \\\\circ f = k \\\\circ g$.\"}\n  {\"name\": \"CategoryTheory.Square.IsPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Square\", \"type\": \": Prop\", \"doc\": \"The property that the square diagram formed by morphisms $f_{12}: X_1 \\\\to X_2$, $f_{13}: X_1 \\\\to X_3$, $f_{24}: X_2 \\\\to X_4$, and $f_{34}: X_3 \\\\to X_4$ satisfies the universal property of a pullback i\"}\n  {\"name\": \"CategoryTheory.Square.mk\", \"module\": \"Mathlib.CategoryTheory.Square\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X₁ X₂ X₃ X₄ : C} →\\n      (f₁₂ : X₁ ⟶ X₂) →\\n        (f₁₃ : X₁ ⟶ X₃) →\\n          (f₂₄ : X₂ ⟶ X₄) →\\n            (f₃₄ : X₃ ⟶ X₄) →\\n              CategoryTheory.CategoryStruct.comp f₁₂ f₂₄ = CategoryTheory.CategoryStruct.comp f₁₃ f₃₄ →\\n   \", \"doc\": \"Given four objects $X_1,X_2,X_3,X_4$ in a category $\\\\mathcal{C}$ and morphisms $f_{12}: X_1 \\\\to X_2$, $f_{13}: X_1 \\\\to X_3$, $f_{24}: X_2 \\\\to X_4$, $f_{34}: X_3 \\\\to X_4$ satisfying $f_{24} \\\\circ f_{12\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks and groupoid products do not provide stackification and the algebraic-space action-groupoid presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks and groupoid products do not provide stackification and the algebraic-space action-groupoid presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|stackification.*[Ff]iber|[Ff]ibre.*quotient",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Topology/ContinuousMap/Basic.lean\", \"line\": \"452\", \"text\": \"/-- Descend a continuous map, which is constant on the fibres, along a quotient map. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks and groupoid products do not provide stackification and the algebraic-space action-groupoid presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-open-subgroupoid-etale-quotient",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0DU2 (lemma-quasi-splitting-etale), second paragraph: identify the pullback by the object space using 04Y4; supporting the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain.",
+   "via": [
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quotient-map-cartesian-action-groupoid",
+  "worker": "stage1",
+  "summary": "Read 04Y4 including the preceding action-groupoid construction; wrote the exact raw object/arrow and operation identifications, and exposed stackification compatibility as the general 04Y2 node. Corrected only notation slips in the source proof, not the item statement. Searched the whole DAG, latest blueprint and project Lean; no exact project attachment or duplicate.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), latest sk-thm-sf-ctf-stability-direct-images.proof.md: the alteration/moduli prerequisite chain uses 04Y4 in 0DU2. The inherited ancestor search returns None; preserve the existing from record. Steps 1--3 realize the raw 2-product calculation of 04Y4; step 4 realizes its 04Y2 stackification passage.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of sheaf fibre products as algebraic spaces, needed to form A and B; the unit does not supply another such existence theorem."
+   },
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "The statement already fixes these test-point groupoid laws; step 3 checks the operations against them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-groupoid-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-0748e3c84",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-0748e3c84 (reviewer sub-agent of L); spot-checked: I read Stacks 04Y4 in full (spaces-groupoids.tex, the U''/R'' construction and the proof) and 04Y2/04Y1 in full (stacks.tex). The item statement is identical to live; live and side-live still have it unsplit. The only stmt_dep added is lem-trf-space-fibre-products-etale-covers, which the statement needs because A and B must be algebraic spaces. I recomputed the B operations: the source/target of the inverse, the target of the composite, unit membership, and invariance of the map to U'. Small cases agree: trivial (U',R'); f=id, where the quotient of R by left composition is U; one-object groupoids G→H give objects H and arrows G×H. Step 1 uses the 02X2 sentence on fibre products of algebraic spaces, applied twice. Step 2 rederives the arrow condition c'(f1 r, r'2)=r'1 from the 2-product convention in def-sfb-stable-pointed-moduli-groupoids, and is genuinely elementary. Step 3 transports the groupoid laws from K(T) and gets naturality from def-trf-algebraic-space. Step 4 uses D as an fppf stack (U' is a sheaf) together with the new 04Y2 node and the local-description stackification; transporting stackification along the raw isomorphism is implicit but immediate. The new node lem-sfb-stackification-two-fibre-products is a true, self-contained general 04Y2 statement; its comparison holds up to natural isomorphism and its stack-equals-own-stackification clause is correct. It is unsplit with no proof and does not restate the item. A grep over the DAG for 04Y1/04Y2/04Y4 and stackification with fibre products found no duplicate (04ZN, 0DTG and the presentation nodes checked); the report's source-notation corrections (S_U vs S_U', R vs R', R'' vs U'') match the tex. Batch-5 flags: lem-trf-space-fibre-products-etale-covers is foundational algebraic-space material, and lem-trf-sieve-set-sheafification-exists (reached via the local-description node, already a base stmt_dep) is generic sheafification; both lie outside the trace-formula and Poincaré assumptions, so neither is a RETURN. I accept the tool_uses (space fibre products, def-a1-groupoid-scheme). No SGA cited; no fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuotientMapCartesianActionGroupoid",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quotient_map_cartesian_action_groupoid",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.quotientCartesianComma",
+   "AlgebraicGeometry.AlgebraicSpace.quotient_map_cartesian_action_groupoid"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientMapCartesianActionGroupoid.lean",
+  "statement": "theorem quotient_map_cartesian_action_groupoid {S : Scheme.{u}} (U R U' R' : AlgebraicSpace S) (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (s' t' : R'.obj.obj ⟶ U'.obj.obj) (e' : U'.obj.obj ⟶ R'.obj.obj) (i' : R'.obj.obj ⟶ R'.obj.obj) (c' : Limits.pullback s' t' ⟶ R'.obj.obj) (f0 : U.obj.obj ⟶ U'.obj.obj) (f1 : R.obj.obj ⟶ R'.obj.obj) (hs : s ≫ f0 = f1 ≫ s') (ht : t ≫ f0 = f1 ≫ t') (he : e ≫ f1 = f0 ≫ e') (hi : i ≫ f1 = f1 ≫ i') (hc : ∀ z : Limits.pullback s t ⟶ Limits.pullback s' t', z ≫ Limits.pullback.fst s' t' = Limits.pullback.fst s t ≫ f1 → z ≫ Limits.pullback.snd s' t' = Limits.pullback.snd s t ≫ f1 → z ≫ c' = c ≫ f1) (X : BasedCategory.{v, w} (Over S)) (X' : BasedCategory.{v', w'} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) X) (a' : BasedFunctor (discreteModuli U'.obj.obj) X') (hX : SpaceGroupoidQuotientPresentation s t e i c X a) (hX' : SpaceGroupoidQuotientPresentation s' t' e' i' c' X' a') : ∃ (f : BasedFunctor X X') (α : ModuliTwoIso (a.comp f) ((discreteModuliMap f0).comp a')), (∀ (T : Over S) (r : yoneda.obj T ⟶ R.obj.obj) (r' : {r' : yoneda.obj T ⟶ R'.obj.obj // r' ≫ s' = (r ≫ s) ≫ f0 ∧ r' ≫ t' = (r ≫ t) ≫ f0}), r'.val = r ≫ f1 → f.map (spaceGroupoidPresentationArrow s t a hX.arrows (r ≫ s) (r ≫ t) ⟨r, rfl, rfl⟩) ≫ α.val.hom.app (CostructuredArrow.mk (r ≫ t)) = α.val.hom.app (CostructuredArrow.mk (r ≫ s)) ≫ spaceGroupoidPresentationArrow s' t' a' hX'.arrows ((r ≫ s) ≫ f0) ((r ≫ t) ≫ f0) r') ∧ ∃ (A B : AlgebraicSpace S) (p : A.obj.obj ⟶ U.obj.obj) (q : A.obj.obj ⟶ R'.obj.obj) (j : B.obj.obj ⟶ R.obj.obj) (k : B.obj.obj ⟶ R'.obj.obj), IsPullback p q f0 t' ∧ IsPullback j k (s ≫ f0) t' ∧ ∃ (sA tA : B.obj.obj ⟶ A.obj.obj) (eA : A.obj.obj ⟶ B.obj.obj) (iA : B.obj.obj ⟶ B.obj.obj) (cA : Limits.pullback sA tA ⟶ B.obj.obj) (d : B.obj.obj ⟶ Limits.pullback s' t') (m : Limits.pullback sA tA ⟶ Limits.pullback s t), d ≫ Limits.pullback.fst s' t' = j ≫ f1 ∧ d ≫ Limits.pullback.snd s' t' = k ∧ sA ≫ p = j ≫ s ∧ sA ≫ q = k ∧ tA ≫ p = j ≫ t ∧ tA ≫ q = d ≫ c' ∧ eA ≫ j = p ≫ e ∧ eA ≫ k = q ∧ iA ≫ j = j ≫ i ∧ iA ≫ k = d ≫ c' ∧ m ≫ Limits.pullback.fst s t = Limits.pullback.fst sA tA ≫ j ∧ m ≫ Limits.pullback.snd s t = Limits.pullback.snd sA tA ≫ j ∧ cA ≫ j = m ≫ c ∧ cA ≫ k = Limits.pullback.snd sA tA ≫ k ∧ IsPresheafGroupoid sA tA eA iA cA ∧ sA ≫ q ≫ s' = tA ≫ q ≫ s' ∧ ∃ b : BasedFunctor (discreteModuli A.obj.obj) (moduliTwoFiberProduct a' f), ∃ hB : SpaceGroupoidQuotientPresentation sA tA eA iA cA (moduliTwoFiberProduct a' f) b, b.toFunctor ⋙ quotientCartesianComma a' f ⋙ Comma.fst a'.toFunctor f.toFunctor = (discreteModuliMap (q ≫ s')).toFunctor ∧ b.toFunctor ⋙ quotientCartesianComma a' f ⋙ Comma.snd a'.toFunctor f.toFunctor = (discreteModuliMap p).toFunctor ⋙ a.toFunctor ∧ (∀ (T : Over S) (r : yoneda.obj T ⟶ B.obj.obj), ∃ (hl : (b.obj (CostructuredArrow.mk (r ≫ sA))).obj.right = a.obj (CostructuredArrow.mk ((r ≫ j) ≫ s))) (hr : (b.obj (CostructuredArrow.mk (r ≫ tA))).obj.right = a.obj (CostructuredArrow.mk ((r ≫ j) ≫ t))), ((quotientCartesianComma a' f).map (hB.arrows.val.hom.app (CostructuredArrow.mk r))).right = eqToHom hl ≫ spaceGroupoidPresentationArrow s t a hX.arrows ((r ≫ j) ≫ s) ((r ≫ j) ≫ t) ⟨r ≫ j, rfl, rfl⟩ ≫ eqToHom hr.symm) ∧ ∀ (T : Over S) (x : yoneda.obj T ⟶ A.obj.obj), ∃ (hl : (b.obj (CostructuredArrow.mk x)).obj.left = CostructuredArrow.mk (x ≫ q ≫ s')) (hr : (b.obj (CostructuredArrow.mk x)).obj.right = a.obj (CostructuredArrow.mk (x ≫ p))) (r' : {r' : yoneda.obj T ⟶ R'.obj.obj // r' ≫ s' = x ≫ q ≫ s' ∧ r' ≫ t' = (x ≫ p) ≫ f0}), r'.val = x ≫ q ∧ (b.obj (CostructuredArrow.mk x)).obj.hom = eqToHom (congrArg a'.obj hl) ≫ spaceGroupoidPresentationArrow s' t' a' hX'.arrows (x ≫ q ≫ s') ((x ≫ p) ≫ f0) r' ≫ α.val.inv.app (CostructuredArrow.mk (x ≫ p)) ≫ f.map (eqToHom hr.symm)",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed algebraic-space groupoid and quotient-presentation definitions. The conclusion presents the actual moduliTwoFiberProduct, specifying its object projections, its arrow projection to R, and its comparison arrow r′. A and B are characterized by their projection-preserving pullback squares, so no arbitrary replacement or quotient map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa2e1508e",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read the module against node 04Y4 clause by clause. Groupoid laws come from hX/hX'.groupoid; morphism hyps hs/ht/he/hi/hc are complete (hc non-vacuous). [f] is pinned by α and arrow compatibility (unique up to unique 2-iso, checked on BG→BH). A and B are given by IsPullback squares. Recomputed the B source/target/unit/inverse/composition (fst=later arrow, (c(r1,r2),r'2)) and the over-U' map q≫s'. The equivalence is an actual quotient presentation of moduliTwoFiberProduct a' f with both projections, the arrow projection arr(r≫j) and the comparison arr'(r')≫α⁻¹ pinned; full-faithfulness agrees with tA≫q=d≫c'. Edge cases (empty, f=id, one-object, trivial) and universes OK. Statement verbatim; only the item record changed (+2 landed def stmt_deps that the statement uses). Docstrings and proof steps present, sorry only, helper has real data. No compile run (no file changed)."
+ }
+}

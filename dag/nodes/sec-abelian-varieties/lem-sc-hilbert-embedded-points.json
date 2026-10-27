@@ -22,60 +22,89 @@
  ],
  "proof": [
   {
-   "text": "On an affine open $V=\\operatorname{Spec}(A)$, write $\\mathcal F|_V=\\widetilde M$ with $A$ Noetherian and $M$ finite. Apply the affine removal lemma to obtain a maximal submodule $N\\subseteq M$ with nowhere-dense support; its quotient has the same support, no embedded associated primes, and agrees with $M$ after localizing at an element lying in all embedded associated primes.",
+   "text": "Coherence is equivalent to quasi-coherence plus finite type on X. Every affine coordinate ring is Noetherian and the section module is finite. Apply the affine embedded-prime removal theorem separately on every affine open to choose maximal nowhere-dense submodules N(V), whose quotients have the original support and minimal associated primes.",
    "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "lem-sc-hilbert-embedded-points-affine-removal"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M6 (lemma-remove-embedded-primes)"
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
    }
   },
   {
-   "text": "The localization lemma identifies the quotient constructed on every principal affine localization with the construction from the localized module. Thus the affine submodules are compatible on overlaps; the gluing statement produces a coherent subsheaf $\\mathcal K\\subseteq\\mathcal F$ and the quotient sheaf $\\mathcal F'=\\mathcal F/\\mathcal K$.",
+   "text": "Apply the canonical affine-maxima gluing lemma to obtain a coherent subobject K with affine section ranges N(V). The finite-type support criterion identifies the stalk support on V with the module support under V = Spec Gamma(X,V). These homeomorphisms transfer nowhere density in both directions. Thus K has nowhere-dense support globally. A coherent subobject L containing K and with nowhere-dense support has affine section ranges containing N(V) and nowhere dense in the section support. Local maximality gives range equality. To conclude L <= K, compose its inclusion with the cokernel projection of K; this vanishes on affine sections and hence on all sections by sheaf separation. The kernel-of-cokernel property for a monomorphism factors L through K. This proves global maximality in Lean.",
    "uses": [
-    "lem-sc-hilbert-embedded-points-affine-localization",
-    "lem-sc-hilbert-embedded-points-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M7 (lemma-remove-embedded-primes-localize) and literature/stacks-project/divisors.tex, Tag 02OL"
-   }
-  },
-  {
-   "text": "The affine conclusions localize and therefore glue: maximality is preserved, the quotient has the same support and no embedded associated points, and the complement of the closure of the embedded associated points is a dense open $U$ on which the quotient and the original sheaf agree. This is exactly the three assertions in the statement.",
-   "uses": [
-    "lem-sc-hilbert-embedded-points-affine-removal",
-    "lem-sc-hilbert-embedded-points-affine-localization",
-    "lem-sc-hilbert-embedded-points-gluing"
+    "lem-sc-canonical-embedded-points-gluing",
+    "lem-weil-pbc-finite-type-module-support-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OL (lemma-remove-embedded-points), proof"
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
    }
   },
   {
-   "text": "Dimension. Let $d=\\dim\\operatorname{Supp}(\\mathcal F)$ be finite and positive; if $\\mathcal K=0$ there is nothing to show. Let $Z$ be an irreducible component of the closed set $\\operatorname{Supp}(\\mathcal K)\\subseteq\\operatorname{Supp}(\\mathcal F)$; it lies in an irreducible component $W$ of $\\operatorname{Supp}(\\mathcal F)$. Since $X$ is locally Noetherian, the irreducible components of $\\operatorname{Supp}(\\mathcal F)$ are locally finite (an affine Noetherian open has finitely many, Tag 0052), so the union of the components other than $W$ is closed and misses the generic point of $W$; its complement in $W$ is a nonempty open subset of $\\operatorname{Supp}(\\mathcal F)$. As $\\operatorname{Supp}(\\mathcal K)$ is nowhere dense in $\\operatorname{Supp}(\\mathcal F)$, $Z\\neq W$, so $Z\\subsetneq W$ and every chain of irreducible closed subsets of $Z$ extends by $W$: $\\dim Z+1\\le\\dim W\\le d$. Taking the supremum over the components $Z$ gives $\\dim\\operatorname{Supp}(\\mathcal K)\\le d-1<d$. Finiteness of $d$ is used for the strict inequality; positivity covers $\\mathcal K=0$ under any convention for $\\dim\\emptyset\\le0$.",
-   "uses": [],
-   "elementary": true,
+   "text": "The quotient Q = coker(K -> F) is coherent. The affine cokernel formula identifies Gamma(Q,V) linearly with Gamma(F,V)/N(V). Transport the affine support equality and associated-prime minimality through these equivalences. The affine support criterion gives equality of the global stalk supports.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-sc-hilbert-embedded-points-affine-removal",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0052 (Noetherian space has finitely many irreducible components); nowhere-dense argument as in J1's correction of lem-sc-hilbert-polynomial"
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  },
+  {
+   "text": "Take U to be the complement of the closed stalk support T of K. Injectivity on stalks puts T in Supp(F); its nowhere density there implies nowhere density in X. Hence U is dense in X and in Supp(F). K restricts to zero on U: every restricted section has zero germ everywhere, so is zero by the sheaf axiom. Restriction preserves cokernels, and the cokernel of the resulting zero map is F restricted to U. The restricted cokernel projection is an isomorphism, giving the asserted comparison.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  },
+  {
+   "text": "Realize the closed support S = Supp(F) as the underlying space of the reduced closed subscheme defined by its vanishing ideal. Its inclusion is a closed immersion, so this subscheme is locally Noetherian, and the inclusion gives a homeomorphism onto S (Mathlib IdealSheafData.subscheme, range_subschemeiota and coe_support_vanishingIdeal). Finite dimension d forces the subscheme nonempty, since empty has dimension bottom. Pull back the closed nowhere-dense subset T = Supp(K), apply the existing scheme dimension-drop theorem, and transfer its conclusion along the embeddings and homeomorphisms. Empty T and d = 0 are handled by the same argument; the public statement still assumes d > 0.",
+   "uses": [
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
    }
   }
  ],
  "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-sc-hilbert-embedded-points-affine-removal",
-  "lem-sc-hilbert-embedded-points-affine-localization",
-  "lem-sc-hilbert-embedded-points-gluing"
+  "lem-sc-canonical-embedded-points-gluing",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 02OL (Lemma 31.5.8)"
+  "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
  },
  "mathlib_searches": [
   {
@@ -143,5 +172,26 @@
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261023T131809-L-2152711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

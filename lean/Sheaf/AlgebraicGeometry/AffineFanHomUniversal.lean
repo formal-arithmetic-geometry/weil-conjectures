@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q64
 -/
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
 
 /-!
 # The universal property of a sharp affine monoid spectrum
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
 Source: ILO, Exposé VIII, Lemma 3.1.8(ii), printed p.99, and Definitions 3.1.3 and 3.1.6
 (blueprint: lem-trf-affine-fan-hom-universal).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

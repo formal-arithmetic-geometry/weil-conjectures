@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-adic-residue-strict-koszul-augmentation",
+ "kind": "statement",
+ "title": "Strict Koszul augmentation to the finite quotient tensor tower",
+ "statement": "On a completed coefficient slice R, let a be a finite generating family of the Noetherian ideal J and b its completed images. For a fixed flat-term K-flat complex P representing M, there exists a strict quotient tensor tower complex T and a strict map alpha from the negative Koszul tensor tower of P to T. The derived evaluation tower of T is isomorphic to the normalized adjoint tower G_n F_n M. Under this isomorphism the composite of the Koszul ordinary-limit unit, lim(alpha), and the nth projection is the nth scalar adjunction unit transported by P≅M. The cone of alpha has eventually zero transition maps in D(R). No derived inverse limit or invertibility of any finite reduction of it is asserted. The strict Koszul tower is [def-weil-pbc-ringed-koszul-system], the scalar tower is [lem-sfb-adic-residue-adjoint-tower], and the representative condition is [lem-pc-kflat-resolution].",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-sfb-adic-residue-adjoint-tower",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, strict Koszul/quotient augmentation; more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, Tag 0A0E."
+ },
+ "proof": [
+  {
+   "text": "Obtain the coefficient-only augmentation epsilon with its degree-zero normalization. Tensor its maps with the given P and transpose them using the proved adjacent-differential comparison, obtaining the explicitly constructed alpha and the actual quotient tensor complex T.",
+   "uses": [
+    "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+    "def-sfb-adic-residue-quotient-tensor-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain e from the quotient tensor model theorem. In each complex degree, naturality of limit projections and limit.lift_pi identify the composite of the Koszul limit unit, lim(alpha), and the nth projection with the tensor of the coefficient augmentation composed with the Koszul tensor unit. Tensor functoriality and the coefficient normalization make this exactly the insertion-of-one quotient tensor unit. Apply Q and use the unit equation for e.",
+   "uses": [
+    "lem-sfb-adic-residue-quotient-tensor-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Noetherian tensor cone theorem to this same supplied epsilon and its normalization. Its strict alpha is precisely the alpha constructed above, so its eventual zero cone transitions give the remaining conjunct.",
+   "uses": [
+    "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "lem-sfb-adic-residue-quotient-tensor-model",
+  "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V7",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M): coefficient augmentation, tensor cone calculation and normalized scalar comparison separately, then the ordinary-limit projection identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian coefficient ringed site the augmentation from the Koszul power tower tensored with a K-flat complex to the quotient tensor tower has pro-zero cone and its units are scalar adjunction units",
+   "results": "8 hits: ordinary AdicCompletion tensor and flatness results and formally smooth cotangent results; none concerns the strict Koszul augmentation on a ringed site.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. The existing project algebraic Noetherian Koszul augmentation theorem is a dependency; the ringed strict tensor and normalized scalar-adjunction identification are not its conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"IsAcyclicTensorKFlat\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. The existing project algebraic Noetherian Koszul augmentation theorem is a dependency; the ringed strict tensor and normalized scalar-adjunction identification are not its conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pro.?zero|[Kk]oszul.*augmentation",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. The existing project algebraic Noetherian Koszul augmentation theorem is a dependency; the ringed strict tensor and normalized scalar-adjunction identification are not its conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "S4",
+  "item": "Sheaf.Paper.AdicResidueQuotientFiniteProjection",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 099M strict Koszul/quotient comparison, before taking total derived inverse limit.",
+   "via": [
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueStrictKoszulAugmentation",
+  "file": "lean/Sheaf/Paper/AdicResidueStrictKoszulAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_strict_koszul_augmentation",
+  "statement": "theorem adicResidue_strict_koszul_augmentation\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = J)\n    (M : AdicResidueLocalDerived.{u, v} X J U)\n    (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))\n    (hP : P.IsAcyclicTensorKFlat) (hflat : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q))\n    (eP : (Q _).obj P ≅ M) :\n    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let b := fun i ↦ ringedKoszulSliceSection\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)\n      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)\n        (a i)) U\n    ∃ (T : CochainComplex (ℕᵒᵖ ⥤ Mod R) ℤ)\n      (α : ringedKoszulTensorTowerComplex R r b P ⟶ T)\n      (e : T.asFunctor ⋙ Q R ≅ adicResidueAdjointTower.{u, v} X J U M),\n      (∀ n : ℕ,\n        (Q R).map (ringedKoszulLimitUnit R r b P ≫ (ordinaryLimit R).map α ≫\n          (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app T) ≫\n          e.hom.app (op n) = eP.hom ≫\n            (adicResidueScalarAdjunction.{u, v} X J U n).unit.app M) ∧\n      (∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m),\n        (Q R).map ((CochainComplex.mappingCone α).asFunctor.map (homOfLE h).op) = 0)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T070959-L-3735227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

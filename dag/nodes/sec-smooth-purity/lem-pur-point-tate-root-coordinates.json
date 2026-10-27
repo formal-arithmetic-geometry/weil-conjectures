@@ -1,0 +1,261 @@
+{
+ "id": "lem-pur-point-tate-root-coordinates",
+ "kind": "statement",
+ "title": "Compatible primitive-root coordinates for signed point Tate lines",
+ "statement": "Let $k$ be an algebraic closure of a finite field $k_0$ of characteristic $p$, let $\\ell\\ne p$ be prime, let $s=\\operatorname{Spec}k$, and let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-finite-field-fiber]. On $s_{\\mathrm{proet}}$ use the roots sheaves [def-pur-roots-of-unity-sheaf], the sectionwise inverse limit [def-pur-sheaf-inverse-limit], and the signed twists [def-coefficient-twists-detailed]. There exists a sequence of primitive roots $\\zeta_r\\in k$ of order $\\ell^r$, $r\\ge1$, satisfying $\\zeta_{r+1}^{\\ell}=\\zeta_r$. For every such sequence the maps\n$$ (\\mathbf Z/\\ell^r\\mathbf Z)_s\\xrightarrow{\\sim}\\mu_{\\ell^r,s},\\qquad j\\longmapsto\\zeta_r^j $$\nare isomorphisms of sheaves, compatible with reduction of labels and the power transitions on roots, on every object of the pro-etale site. Their inverse limit sends $1$ to $e=(\\zeta_r)_r$ and identifies $\\widehat{\\mathbf Z}_{\\ell,s}$ with $\\mathbf Z_\\ell(1)_s$. Write $B_s=(A_{E,n})_s$ for $B=A_{E,n}$, and $B_s=\\widehat{\\mathcal O}_{E,s}$ for $B=\\mathcal O_E$ [def-weil-completed-integral-coefficients]. Put $e_B=e\\otimes1$, $e_{0,B}=1$, $e_{m,B}=e_B^{\\otimes m}$ for $m>0$, and let $e_{-r,B}$ be the functional with $e_{-r,B}(e_{r,B})=1$ for $r>0$. For every integer $m$ the map $B_s\\to B(m)_s$, $b\\mapsto b e_{m,B}$, is an isomorphism of sheaves of $B_s$-modules. The inverse for a positive tensor line takes $b e_{r,B}$ to $b$, and the inverse for its dual takes $\\varphi$ to $\\varphi(e_{r,B})$. Under these coordinates, $\\Gamma(s,B_s)=B$ and $\\Gamma(s,B(m)_s)=B e_{m,B}$.",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281, and (2.13), p. 283: root towers, tensor powers and duals; completed coefficient interpretation in def-coefficient-twists-detailed; returned item steps 1-2"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-coefficient-twists-detailed",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct the primitive l-th root using lem-sc-primitive-root in the algebraic closure. Recursively take l-th roots. The order criterion for a prime power proves that the nth chosen root has order l^(n+1), since raising it to l^n gives the initial nontrivial root. This is pointRootTower.",
+   "uses": [
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a prescribed compatible tower, transport the chosen roots through the affine global-sections isomorphism. Distinct powers have unit differences. Reuse the explicit constantRootsIso construction of lem-poincare-compatible-primitive-roots and the rawRootIso and moduleIsoOfAddIso constructions of lem-pur-twist-root-local-models. Naturality of the constant-sheaf comparison and sheafification units gives exactly the stated exponentiation formula, including empty and disconnected objects.",
+   "uses": [
+    "lem-poincare-compatible-primitive-roots",
+    "lem-pur-twist-root-local-models",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse rootsBasisIso and the actual/coefficient diagram comparisons to identify the full root and residue towers. Its components are the preceding finite coordinates. Naturality proves compatibility with transition maps. The completedBasis construction and its projection formula from lem-pur-twist-root-local-models identify the inverse limits, retaining the completed coefficient action. Restriction over the terminal object gives the global module isomorphism.",
+   "uses": [
+    "lem-poincare-compatible-primitive-roots",
+    "lem-pur-twist-root-local-models",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the completed root coordinates along the completed scalar map. The normalized scalarExtensionUnitIso of lem-sp-scalar-extension-binary-coherence and the integralExtensionReverse construction of lem-pur-twist-integral-local-models give integral coordinates sending 1 to the prescribed tensor. Extend once more along the finite completed projection and compose with integralFiniteIso. The units in the quotientTensorAdjunction and the ordinary tensor adjunction commute with their unique left-adjoint comparison; evaluating this equality on x proves that the finite comparison sends 1 tensor x to the ordinary discrete quotient tensor 1 tensor x.",
+   "uses": [
+    "lem-pur-twist-integral-local-models",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-inverse-image-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the identity in degree zero. Recursively tensor the positive coordinate isomorphisms, using the normalized tensor left unitor and the functoriality in both factors. Their pure-tensor formulas show that the next generator is the tensor of the preceding generator with the degree-one generator. Linearity and the two isomorphism identities give the prescribed scalar and positive-inverse formulas.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define the dual generator on each localized site by the inverse of the positive coordinate map on every object. A local functional is its scalar multiple by its value on the positive generator, by naturality and linearity. This gives an explicit linear bijection from the coefficient sheaf to internal Hom, whose inverse is evaluation at the identity object. The negative generator evaluates to 1.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the ring-isomorphism clause of lem-pur-connected-adic-integral-basis to the connected scheme Spec k and the identity extension E/E. Reuse its finiteConstantEquiv for the finite coefficient ring. These are normalized by the stated constant maps. Compose their underlying bijections with evaluation of each signed module-sheaf isomorphism at the terminal object.",
+   "uses": [
+    "lem-pur-connected-adic-integral-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-primitive-root",
+  "lem-poincare-compatible-primitive-roots",
+  "lem-pur-twist-root-local-models",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "lem-pur-twist-integral-local-models",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pur-inverse-image-scalar-comparison",
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "lem-pur-connected-adic-integral-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "Deligne (2.2), (2.13); explicit constructions reused from CompatiblePrimitiveRoots, PurTwistRootLocalModels, PurTwistIntegralLocalModels and the normalized scalar tensor API; J7, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible primitive roots trivialize the pro-etale roots of unity sheaves and their inverse limit Tate line over an algebraically closed field",
+   "results": "8 hits: StandardEtalePair.homEquiv_symm_apply, cyclotomicCharacter.spec, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.homEquiv, cyclotomicCharacter.toFun_spec, cyclotomicCharacter.toFun, cyclotomicCharacter.toFun_apply, autAdjoinRootXPowSubCEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible system of roots of unity gives bases for completed integral Tate twists and their tensor powers and duals",
+   "results": "8 hits: NumberField.Units.fun_eq_repr, NumberField.Units.basisModTorsion, NumberField.Units.fundSystem_mk, NumberField.Units.rootsOfUnity_eq_torsion, cyclotomicCharacter.toFun, cyclotomicCharacter.toFun_apply, NumberField.Units.fundSystem, NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_ne",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"orderOf\"",
+   "results": "1 hits: MulChar.apply_mem_rootsOfUnity_orderOf",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trivialize the inverse system of roots of unity sheaves on an algebraically closed point by compatible primitive roots",
+   "results": "8 hits: primitiveRoots, IsPrimitiveRoot.val_inv_toRootsOfUnity_coe, rootsOfUnityEquivOfPrimitiveRoots_symm_apply, IsPrimitiveRoot.inv_iff, rootsOfUnityEquivOfPrimitiveRoots, IsPrimitiveRoot.toRootsOfUnity, rootsOfUnityEquivOfPrimitiveRoots.congr_simp, IsCyclotomicExtension.algEquiv_eq_of_apply_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|rootsOfUnity.*[Ss]heaf|[Ss]heaf.*rootsOfUnity",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the pro-etale completed signed point Tate-coordinate construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible primitive roots trivialize roots of unity sheaves, their inverse limit and all signed completed Tate twists over an algebraically closed point",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun_apply, modularCyclotomicCharacter.spec, modularCyclotomicCharacter', IsPrimitiveRoot.autToPow_eq_modularCyclotomicCharacter, modularCyclotomicCharacter, cyclotomicCharacter",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the pro-etale completed signed point Tate-coordinate construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible system of primitive roots gives a basis of the inverse limit Tate module and its tensor powers and duals",
+   "results": "8 hits: TensorProduct.directLimitLeft_symm_of_tmul, InverseSystem.limit, IsPrimitiveRoot.powerBasis, PiTensorProduct.dualDistribEquivOfBasis_symm_apply, InverseSystem.isNatEquiv_piEquivLim, Basis.piTensorProduct, InverseSystem.invLimEquiv_symm_apply_coe, TensorProduct.directLimitRight_symm_of_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the pro-etale completed signed point Tate-coordinate construction"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|rootsOfUnity.*[Ss]heaf|[Ss]heaf.*rootsOfUnity",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the pro-etale completed signed point Tate-coordinate construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivializations of finite roots of unity sheaves induce bases of completed integral Tate lines and their signed tensor powers",
+   "results": "8 hits: NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_eq, NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_ne, NumberField.mixedEmbedding.fundamentalCone.completeBasis, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne, Profinite.NobelingProof.GoodProducts.Basis, NumberField.Units.basisModTorsion, NumberField.Units.fundSystem, Algebra.SubmersivePresentation.basisKaehlerOfIsCompl",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the pro-etale completed signed point Tate-coordinate construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-frobenius-scalar",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Geometric-point coefficient twist construction in def-weil-frobenius-coefficient-twists: compatible root-tower coordinates used before the Frobenius scalar calculation (Deligne (2.2), (2.13)); parent lem-pur-twist-frobenius-scalar, returned steps 1-2",
+   "via": [
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-point-tate-root-coordinates",
+  "worker": "stage1",
+  "summary": "Checked Deligne (2.2), (2.13), Bhatt-Scholze Lemma 4.2.12 and Stacks tensor/Hom definitions. Retained the statement. Wrote the compatible tower recursion, explicit finite split-polynomial inverse on every site object, transition identity, sectionwise limit, completed coefficient extension, positive tensor induction, negative evaluation inverse, and global-section coordinates. Reused existing nodes throughout; no new node or Mathlib leaf is needed.",
+  "blueprint": "def-weil-frobenius-coefficient-twists, geometric-point Tate construction preceding the scalar Frobenius computation: root tower, completed integral/finite coordinates, tensor powers and duals; via lem-pur-twist-frobenius-scalar.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Only existence of a primitive root in an algebraically closed field; the unit has no field-theoretic primitive-root lemma."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Section-normalized continuous-function description of a finite constant sheaf on every site object; needed for labels and point values."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Only clause 3: completed coefficient scalar extension and ordinary finite reduction of the specified first twist; no purity argument is replaced."
+   },
+   {
+    "node": "lem-pur-connected-adic-integral-basis",
+    "why": "Only its completed coefficient global-section ring isomorphism at the connected point, specialized to the identity coefficient extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "lem-pur-connected-adic-integral-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-e667f0fcf",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e667f0fcf (reviewer sub-agent of L); spot-checked: Read the item in full; there are 0 new nodes. Sources checked: Deligne Weil I (2.2) pp.280-281 (Z/ℓ^n(1)=roots of unity of k, transitions x↦x^ℓ, inverse limit, tensor powers, duals) and (2.13) p.283 (μ_{ℓ^n} sheaf); Bhatt–Scholze Lemma 4.2.12; Stacks 03EK/04TT. No SGA. Statement: ℓ≠p makes ℓ invertible on s. Coefficient objects match def-coefficient-twists-detailed: discrete (A_{E,n})_s for finite B, completed Ô_{E,s} for O_E, O_E(1) tensored over the discrete (Z_ℓ)_s. Signed twists are tensor powers and sheaf-Hom duals. Step checks: step 1 primitive-root recursion is correct (lem-sc-primitive-root with n=ℓ). Step 2 split-polynomial inverse is correct, including non-reduced, empty and disconnected objects; the D_j are clopen and labels locally constant. Step 3 transition identity is right and the limit is sectionwise, with no confusion between the discrete and completed Z_ℓ. Steps 5-6: tensor induction and evaluation-dual inverse are correct. Step 7: lem-pur-connected-adic-integral-basis applies with X=s, L=E. FIX: step 4's finite case went from clause 3's abstract isomorphism to 'Consequently B_s≅B(1)_s' (E5). A(1)=O_E(1)⊗ over the discrete (O_E)_s, so the step needed to show that b↦b e_B is an isomorphism. The step text now proves it: the canonical surjection between locally free rank-one A_s-modules satisfies xc=1 locally, so it is an isomorphism. Statement, uses and deps are unchanged. Duplicate search: the sec-poincare-duality compatible-root and local-basis nodes are condensed local trivializations; the sibling signed-cyclotomic and fiber-comparison nodes presuppose these coordinates; lem-wf-tate-twist-frobenius is a different twist. No duplicate. No cycle. Accepted tool uses: lem-sc-primitive-root, lem-pur-proetale-finite-constant-sections, lem-pur-twist-sheaf-locally-free (clause 3), lem-pur-connected-adic-integral-basis. The unit's route is only sk-def-sf-operations, and each is used as a generic black box. Advisory: Ẑ_{ℓ,s} is only defined implicitly in the statement, as the limit of the displayed source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTateRootCoordinates",
+  "declaration": "WeilConjectures.point_tate_root_coordinates",
+  "declarations": [
+   "WeilConjectures.purPointConstant",
+   "WeilConjectures.IsPurPointSignedCoordinates",
+   "WeilConjectures.HasPurPointRootCoordinates",
+   "WeilConjectures.point_tate_root_coordinates"
+  ],
+  "file": "lean/Sheaf/Paper/PointTateRootCoordinates.lean",
+  "statement": "theorem point_tate_root_coordinates (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∃ ζ : ℕ → D.k, (∀ n : ℕ, IsPrimitiveRoot (ζ n) (l ^ (n + 1))) ∧ (∀ n : ℕ, ζ (n + 1) ^ l = ζ n)) ∧ ∀ ζ : ℕ → D.k, (∀ n : ℕ, IsPrimitiveRoot (ζ n) (l ^ (n + 1))) → (∀ n : ℕ, ζ (n + 1) ^ l = ζ n) → HasPurPointRootCoordinates D l E ζ",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three real helper definitions spell out constant labels and the complete normalized finite, completed and signed coordinate conclusion. All Tate lines, tensor powers, duals and coefficient sheaves are the existing dependency constructions; no new mathematical notion or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e3ce6be9",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, Deligne (2.2)/(2.13) place, the module and every used declaration in side-live (PurTwistCoefficientRings, PurTwistSheaves, ProEtaleRootsOfUnitySheaf, CoefficientTwistsDetailed coefficientTwistLine/scalarTensorPower/integralTwistLine, CompletedIntegralCoefficients, integralScalarConstant, scalarExtensionSection, siteSheafTensorTmul, homObj). All clauses rendered and pinned by ζ: finite j↦ζ^j on constant labels on every U, transitions, limit g with projections (completed Z_l source), e_B=1⊗e integral and 1⊗e_B finite (ordinary tensor over discrete O_E), c0=id, e_{r+2}=e_{r+1}⊗e_1, linearity, positive inverse, dual inverse = evaluation at Over.mk 𝟙, e_{-r}(e_r)=1, terminal-object ring iso normalized by integralScalarConstant/constant unit plus bijectivity. Indexing n↦exponent n+1 consistent across all deps; edge cases (n=0, l=2, all m signs, empty/disconnected U, connected terminal) fine; universe v for ZMod labels, E:Type u matches the recorded twist-line convention. Statement verbatim; dep records unchanged; only lean field added; only main theorem sorry; docstrings with source/blueprint and steps 1-7; report has both sections. No duplicate (point_signed_cyclotomic_action presupposes e). Advisories: decls from non-stmt_dep owners (def-pur-twist-sheaves, def-pur-twist-coefficient-rings, def-pur-sheaf-tensor-product, def-pur-sheaf-hom, def-sp-scalar-tensor-comparison-data, def-sf-completed-integral-scalar-action) public via def-coefficient-twists-detailed; linearity/bijectivity clauses automatic but harmless. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T060857-L-2381299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

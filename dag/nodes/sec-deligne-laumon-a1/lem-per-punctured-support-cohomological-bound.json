@@ -180,16 +180,14 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-2396d27ff (reviewer sub-agent of L); spot-checked: I checked the item statement against ILO XVII Prop. 3.2.1 (printed p. 268): every hypothesis matches. The closure is taken in X, coefficients are Z/ℓ, the bound is q≥2s, and there is no constructibility or normality hypothesis. Step 1 is correct: the Noetherian local finite Krull dimension Mathlib leaf (KrullsHeightTheorem.lean:276) plus the dim R = dim Spec R clause of def-weil-pbc-krull-dimension-ring supply the 'finite dimension d' hypothesis of the cited node. Step 2 is a literal specialization of the first assertion of the existing same-unit node lem-per-strict-local-etale-dimension-bounds (Q22, Z/ℓ^n). I checked the substitution S=X, s=x, n=1, d=dim X, e=s against its statement. There is no cycle, since the cited node is unsplit and its stmt_deps are definitions only. There are no new nodes, so this is not a D1 restatement: it proves a special case from the general node, which removes the duplication. Edge cases agree with ILO: s=0 forces F=0, dim X=0 gives U empty, and on a trait with s=1 vanishing starts at degree 2. No SGA is used. I accept the tool_use, which is the Mathlib leaf. Maintainer note: the future split of lem-per-strict-local-etale-dimension-bounds must not cite this item for its F_ℓ base case, or it creates a cycle. Minor: the report mentions a citations.json that is not among the branch files."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/PuncturedSupportCohomologicalBound.lean",
   "module": "Sheaf.AlgebraicGeometry.PuncturedSupportCohomologicalBound",
   "declaration": "AlgebraicGeometry.Etale.isZero_cohomology_punctured_of_support_dimension_le",
-  "file": "lean/Sheaf/AlgebraicGeometry/PuncturedSupportCohomologicalBound.lean",
-  "statement": "theorem isZero_cohomology_punctured_of_support_dimension_le (R : CommRingCat.{u}) [IsNoetherianRing R] [IsStrictlyHenselianLocalRing R] (hR : IsExcellent R) (ℓ : ℕ) (hℓ : ℓ.Prime) (hunit : IsUnit (ℓ : R)) (U : (Spec R).Opens) (hU : (U : Set (Spec R)) = ({IsLocalRing.closedPoint R} : Set (Spec R))ᶜ) (F : Sheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} (ZMod ℓ))) (s : ℕ) (hs : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ U.toScheme), ¬ IsZero (pointedEtaleStalk F t) → topologicalKrullDim (closure ({U.ι (t (IsLocalRing.closedPoint Ω))} : Set (Spec R))) ≤ (s : WithBot ℕ∞)) (p : ℤ) (hp : (2 * s : ℤ) ≤ p) : IsZero ((cohomology AddCommGrpCat.{u + 1} U.toScheme p).obj ((DerivedCategory.singleFunctor (Sheaf U.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((sheafCompose U.toScheme.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ZMod ℓ)) AddCommGrpCat.{u + 1})).obj F)))",
-  "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The local scheme is presented as Spec R, the spectrum of its Noetherian strictly henselian local ring; every local scheme has this presentation. The open U is specified by equality with the complement of its closed point. Coefficients are ModuleCat (ZMod ℓ); cohomology is computed after forgetting to abelian sheaves, as required by the node. 2026-10-20 (U): module Sheaf.AlgebraicGeometry.PuncturedSupportCohomologicalBound deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "The local scheme is presented as Spec R, the spectrum of its Noetherian strictly henselian local ring; every local scheme has this presentation. The open U is specified by equality with the complement of its closed point. Coefficients are ModuleCat (ZMod ℓ); cohomology is computed after forgetting to abelian sheaves, as required by the node. 2026-10-20 (U): module Sheaf.AlgebraicGeometry.PuncturedSupportCohomologicalBound deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -199,5 +197,16 @@
   "result": "pass",
   "note": "Statement matches node and ILO XVII 3.2.1 clause by clause: Spec R Noetherian, excellent, strictly henselian local; ℓ unit; U = complement of the closed point as an open with carrier equality; F a ModuleCat (ZMod ℓ) etale sheaf; support hypothesis over geometric points with nonzero pointedEtaleStalk, closure taken in Spec R, topologicalKrullDim ≤ s; conclusion Etale.cohomology AddCommGrpCat.{u+1} vanishing for integer p ≥ 2s on the forget₂ underlying abelian sheaf, as in the recorded spelling. No extra hypotheses; Type u geometric points equivalent. Edge cases s=0, dim 0, trait s=1 match the source. Only the lean field changed vs live; statement verbatim. No existing declaration; proof dep lem-per-strict-local-etale-dimension-bounds has lean null. Compiles cleanly via nt_compile --json (2.5 s). Docstrings carry source place, blueprint id and proof steps. Advisories: three possibly redundant imports; thin second-reading section; the future split of the dimension-bounds node must not cite this item (cycle)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Algebraic.Defs
 public import WeilConjectures.ZetaSeries
+import WeilConjectures.PointCount
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedImageCriterion
 
@@ -59,6 +61,17 @@ theorem GeometricallyConnected.of_connectedSpace_of_isAlgebraic_residueField
           ((X ↘ Spec (.of k)).residueFieldAlgebraMap x).toAlgebra a →
         ∃ b : k, (X ↘ Spec (.of k)).residueFieldAlgebraMap x b = a) :
     GeometricallyConnected (X ↘ Spec (.of k)) := by
-  sorry
+  let := ((X ↘ Spec (.of k)).residueFieldAlgebraMap x).toAlgebra
+  have hirr := geometricallyIrreducible_of_isAlgebraic_mem h
+  have hconn := GeometricallyIrreducible.geometricallyConnected
+    (Spec.map (CommRingCat.ofHom (algebraMap k (X.residueField x))))
+  let : (Spec (X.residueField x)).Over (Spec (.of k)) :=
+    ⟨X.fromSpecResidueField x ≫ (X ↘ Spec (.of k))⟩
+  have : GeometricallyConnected (Spec (X.residueField x) ↘ Spec (.of k)) := by
+    change GeometricallyConnected (X.fromSpecResidueField x ≫ (X ↘ Spec (.of k)))
+    rwa [← (X ↘ Spec (.of k)).specMap_residueFieldAlgebraMap x]
+  have : (X.fromSpecResidueField x).IsOver (Spec (.of k)) := ⟨rfl⟩
+  exact GeometricallyConnected.of_connectedSpace_of_geometricallyConnected
+    (X.fromSpecResidueField x)
 
 end AlgebraicGeometry

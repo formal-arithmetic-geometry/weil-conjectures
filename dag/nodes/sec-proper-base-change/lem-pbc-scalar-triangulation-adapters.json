@@ -1,0 +1,128 @@
+{
+ "id": "lem-pbc-scalar-triangulation-adapters",
+ "kind": "statement",
+ "title": "Canonical rational triangulation adapters",
+ "statement": "Let l be prime. Coefficient fields are finite extensions of Q_l with specified Q_l-algebra embeddings. Use the actual completed coefficient sheaves and raw rationalizations of [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-rational-category]. Schemes supporting a constructible rational category are assumed noetherian, finite-dimensional, with l invertible; ambient operation comparisons are for arbitrary scheme morphisms g : X → Y in the actual ambient derived categories. The completed integral constructible category and its raw rationalization carry the zero objects, integer shifts, additive shifts, triangulation, isomorphism closure and field-linear structures specified by the existing uniform-complete and rational-transport witnesses. All adapters select those identical witnesses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Order 1307; existing scalar-extension component, relocated without changing signatures or proofs."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-rational-category",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Project the zero object, shift functors, additive shifts, localization shift comparison, pretriangulation and TR4 from the single existing rational-triangulation witness. These are exactly the same successive projections, so the propositional class arguments agree by proof irrelevance.",
+   "uses": [
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project isomorphism closure from the uniform complete integral triangulation, and retain the existing field-linear action on the same raw rationalization.",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-pbc-uniform-complete-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Compilation partition of the already stated and partially proved scalar-extension package; unchanged mathematical argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarExtension",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Existing companion declarations; compilation partition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarTriangulation",
+  "file": "lean/Sheaf/Paper/PbcScalarTriangulation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcScalarRationalIsTriangulated",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcScalarRationalZero",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalHasShift",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalShiftAdditive",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalLocalizationShift",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalPretriangulated",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalIsTriangulated",
+   "AlgebraicGeometry.Scheme.pbcScalarIntegralIsoClosure",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalLinear"
+  ],
+  "statement": "theorem pbcScalarRationalIsTriangulated (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) [IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] : IsTriangulated (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Existing declarations moved verbatim from PbcScalarExtension, with local reducibility scope and import changes only. No new mathematical statement or proof hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "independent cc review: The 152 declarations of the clone's original PbcScalarExtension (2c77716690b) against the 12 delivered modules: identical text, and identical public types, hints and def values in the compiled environment (only generated proof-lemma names differ); all 60 direct importers compiled against the delivered modules (57 OK; 2 slow but just as slow against the published version)"
+ }
+}

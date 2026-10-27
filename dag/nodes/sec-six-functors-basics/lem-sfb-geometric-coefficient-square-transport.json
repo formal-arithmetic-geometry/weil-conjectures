@@ -1,0 +1,524 @@
+{
+ "id": "lem-sfb-geometric-coefficient-square-transport",
+ "kind": "statement",
+ "title": "Scalar-unit coefficient square for derived direct image",
+ "statement": "Let $f:\\mathscr X\\to\\mathscr Y$ be a morphism of topoi presented by small sites [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $A\\xrightarrow{a}R\\xrightarrow{c}S$ be maps of sheaves of commutative rings on $\\mathscr Y$, and on $\\mathscr X$ use their inverse images $A_X,R_X,S_X$ with the induced maps. Use ordinary unbounded derived module categories, K-flat derived scalar extension and K-injective right derived direct image [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, lem-pur-derived-change-of-rings]. Write $G_D=Rf_{*,D}$ for $D=A,R,S$, with the canonical derived adjunctions [lem-weil-pbc-ringed-projection-mate-exact]. For $V\\in D(A_X)$ put $V_R=R_X\\otimes_{A_X}^LV$ and $V_S=S_X\\otimes_{A_X}^LV$.\n\nLet $\\beta_R:R\\otimes_A^LG_AV\\to G_RV_R$ be the transpose under derived extension/restriction of the composite of $G_A$ applied to the scalar unit $V\\to\\operatorname{Res}_aV_R$ with the canonical derived comparison with exact restriction; define $\\beta_S$ similarly for $ca$. Define $m:V_R\\to\\operatorname{Res}_{c_X}V_S$ and $\\gamma:R\\otimes_A^LG_AV\\to\\operatorname{Res}_c(S\\otimes_A^LG_AV)$ by $z\\otimes v\\mapsto c(z)\\otimes v$ on K-flat models. Let $\\kappa:G_RV_R\\to\\operatorname{Res}_cG_SV_S$ be $G_R(m)$ followed by the canonical comparison with exact restriction. Then\n$$\\operatorname{Res}_c(\\beta_S)\\circ\\gamma=\\kappa\\circ\\beta_R$$\nin $D(R)$. The equality and all these transformations are natural in $V$ and commute with the canonical integer shifts. The equality remains true after restriction to $A$, and is carried to the same specified maps by any exact equivalences compatible with these scalar adjunction units, counits, restriction comparisons and shifts. No invertibility of a projection, flatness of a coefficient map, or boundedness of $V$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent refinement of returned steps 6-7; scalar-unit form of coefficient projection cocycle; Stacks Tags 0B56 and 0DV0"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-ringed-coefficient-projection-data",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Write $U_a,U_c,U_{ca}$ for derived restriction on $\\mathscr Y$ and $U_{a,X},U_{c,X},U_{ca,X}$ on $\\mathscr X$. Restriction is exact by the sheaf-ring coefficient-adjunction theorem. Regard each coefficient map as the identity-topos ringed morphism, whose right derived direct image is therefore this termwise restriction. The two ringed factorizations from $(\\mathscr X,R_X)$ to $(\\mathscr Y,A)$ have identical geometric morphism and structural map. The ringed composition and two-isomorphism comparisons give the specified natural isomorphism $\\theta_a:G_AU_{a,X}\\cong U_aG_R$; similarly obtain $\\theta_c,\\theta_{ca}$. Their normalizations are those of the canonical comparisons in the statement, by the K-injective-normalized direct-image composition theorem. For the three-ring diagram these satisfy\n$$\\theta_{ca}=U_a(\\theta_c)\\circ\\theta_aU_{c,X}.$$\nIndeed take adjunction mates. Each path on left adjoints is ordinary pullback and tensor reassociation on flat-term K-flat representatives; both send $s\\otimes r\\otimes x$ to $s c(r)\\otimes x$. These maps agree before localization, so the normalized left comparisons agree. Composite adjunction Hom bijections are composites of bijections, hence their corresponding right comparisons agree as well. This proves the equation for the specified comparisons; it does not assume that restriction preserves K-injectives.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  },
+  {
+   "text": "For any $Q\\in D(A)$ write $\\eta_a(Q):Q\\to U_a(R\\otimes_A^LQ)$ and $\\eta_{ca}(Q):Q\\to U_{ca}(S\\otimes_A^LQ)$ for scalar units. The normalized coefficient adjunction computes them by $x\\mapsto1\\otimes x$ on one flat-term K-flat representative $P$ of $Q$. The maps $\\gamma_Q$ and $m$ are induced on this same representative by $r\\otimes x\\mapsto c(r)\\otimes x$. Thus\n$$U_a(\\gamma_Q)\\eta_a(Q)=\\eta_{ca}(Q),\\qquad U_{a,X}(m)\\eta_a(V)=\\eta_{ca}(V).$$\nEach equality is the chain-map equality $x\\mapsto1\\otimes x$, since $c(1)=1$. K-flat computation and the normalized unit formulas carry it to the derived category. The same formulas commute with maps of representatives and hence define natural transformations. No tensoring of an arbitrary quasi-isomorphism by a nonflat ring is used.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  },
+  {
+   "text": "Put $Q=G_AV$. By definition of transpose, the $a$-adjunct of $\\beta_R$ is $t_R=\\theta_aG_A(\\eta_a(V))$, and the $ca$-adjunct of $\\beta_S$ is $t_S=\\theta_{ca}G_A(\\eta_{ca}(V))$. Take the $a$-adjunct of the left side of the desired equality, whose target is $U_cG_SV_S$. It is\n$$U_{ca}(\\beta_S)\\,U_a(\\gamma_Q)\\,\\eta_a(Q)\n=U_{ca}(\\beta_S)\\eta_{ca}(Q)=t_S.$$\nThe first equality is Step 2, the second is the defining adjunct identity for $\\beta_S$. The formula for an adjunct is restriction followed by precomposition with the unit, so this computation occurs in $D(A)$, without asserting that restriction alone is faithful on derived morphisms.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  },
+  {
+   "text": "The $a$-adjunct of the right side is\n$$U_a(\\theta_c)\\,U_aG_R(m)\\,t_R\n=U_a(\\theta_c)\\,\\theta_a(U_{c,X}V_S)\\,G_A(U_{a,X}(m))\\,G_A(\\eta_a(V))\n=\\theta_{ca}G_A(\\eta_{ca}(V))=t_S.$$\nHere the first equality uses naturality of $\\theta_a$ for the morphism $m:V_R\\to U_{c,X}V_S$; the second uses the comparison equation of Step 1, the scalar-unit equation of Step 2, and functoriality of $G_A$. Both sides therefore have the same adjunct by Step 3. Injectivity of the scalar-adjunction Hom bijection proves the requested equality in $D(R)$, which is stronger than merely proving its restriction.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  },
+  {
+   "text": "Naturality in $V$ follows from naturality of scalar units, the $\\theta$ comparisons, and the adjunction Hom bijections: the adjunct of the naturality square for $\\beta_R$ is the naturality square for $\\theta_aG_A\\eta_a$, and likewise for $S$. For shifts, the canonical ringed derived adjunction theorem says that units and counits commute with every integer shift. This applies also to identity-topos coefficient morphisms, identifying their units with the normalized scalar units. The maps $m,\\gamma$ commute with shift on complexes: $c(r)\\otimes x$ has the same degree as $r\\otimes x$, and both differentials gain the same $(-1)^n$. The $\\theta$ comparisons commute with shift as well: shift the K-injective representatives and the resolution maps in their normalized composition formulas. They remain such representatives and resolutions by K-injective shift stability, and ordinary direct image and restriction commute termwise with shift. Naturality of the resolution identifications gives the canonical comparison at the shifted input. Finally, transpose the shift square for $\\beta_R$. Unit-shift compatibility identifies its two adjuncts with the shift square for $\\theta_aG_A\\eta_a$, already proved; injectivity proves the square for $\\beta_R$, and identically for $\\beta_S$. Thus every specified map and the equality respect the canonical integer shifts.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  },
+  {
+   "text": "Apply the functor $U_a$ to the equality in $D(R)$ to obtain its asserted restriction to $A$. For the equivalence clause, denote the supplied comparison isomorphisms at the source and target of any arrow $h$ by $e_0,e_1$. Its transported arrow is $e_1E(h)e_0^{-1}$. For composable $h,k$ the transported composite is\n$$e_2E(kh)e_0^{-1}=(e_2E(k)e_1^{-1})(e_1E(h)e_0^{-1}),$$\nby functoriality and $e_1^{-1}e_1=1$. Unit and restriction compatibility identify the transported $m,\\gamma$ with their specified maps: their scalar adjuncts are the specified units of Step 2, which determine them uniquely. Compatibility with adjunction units and counits identifies the transported adjunct of $\\beta_R$ with $\\theta_aG_A\\eta_a$, so uniqueness of adjuncts identifies the transported $\\beta_R$ with the specified one; likewise for $S$. Restriction-comparison compatibility identifies $\\kappa$ with $G_R(m)$ followed by the specified comparison. Applying the displayed composite formula now gives exactly the specified square after transport. The assumed shift compatibility carries all the shift squares of Step 5 with it.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); scalar-unit calculation refining blueprint direct-images proof paragraph (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(projection.*(cocycle|restrictScalars)|restrictScalars.*projection)",
+   "results": {
+    "t": "2026-10-22T06:02:44Z",
+    "tool": "grep",
+    "query": "(projection.*(cocycle|restrictScalars)|restrictScalars.*projection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "ee08749a8d97e2cd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived direct image coefficient projection square under successive scalar extension and restriction commutes without flatness",
+   "results": {
+    "t": "2026-10-22T06:02:44Z",
+    "tool": "leansearch",
+    "query": "Canonical derived direct image coefficient projection square under successive scalar extension and restriction commutes without flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "PresheafOfModules.pushforward",
+     "PresheafOfModules.pushforward_obj_map_apply'",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.restrictCoextendScalarsAdj"
+    ],
+    "digest": "292418cda51f091f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"restrictScalars\"",
+   "results": {
+    "t": "2026-10-22T06:02:45Z",
+    "tool": "loogle",
+    "query": "\"Adjunction\", \"restrictScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of coefficient rings in ringed topoi projection morphisms commute with scalar restriction for two successive ring homomorphisms with normalized adjunction units",
+   "results": {
+    "t": "2026-10-22T06:02:55Z",
+    "tool": "leanfinder",
+    "query": "Derived change of coefficient rings in ringed topoi projection morphisms commute with scalar restriction for two successive ring homomorphisms with normalized adjunction units",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.map_comp",
+     "PresheafOfModules.restrictScalarsCompToPresheaf",
+     "ModuleCat.restrictScalarsComp'App_hom_naturality",
+     "CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp",
+     "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "SheafOfModules.restrictScalars_map_val",
+     "ModuleCat.restrictScalarsComp'App_hom_naturality_assoc"
+    ],
+    "digest": "72c351a759330ee3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(coefficient.*(projection|cocycle)|projection.*coefficient)",
+   "results": {
+    "t": "2026-10-22T06:05:28Z",
+    "tool": "grep",
+    "query": "(coefficient.*(projection|cocycle)|projection.*coefficient)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": {
+    "t": "2026-10-22T06:05:29Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"restrictScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat",
+     "PresheafOfModules.restrictScalarsObj",
+     "PresheafOfModules.restrictScalars",
+     "PresheafOfModules.instFaithfulRestrictScalars",
+     "PresheafOfModules.instAdditiveRestrictScalars",
+     "PresheafOfModules.restrictScalars_obj"
+    ],
+    "digest": "a41e5e369182a35c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit adjoint projection for rings A to R to S is compatible with coefficient units R tensor V to S tensor V as an equality in the R derived category",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "leanfinder",
+    "query": "Counit adjoint projection for rings A to R to S is compatible with coefficient units R tensor V to S tensor V as an equality in the R derived category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.counit_def",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+     "TensorProduct.counit_tmul",
+     "ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+     "CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_left",
+     "CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_right",
+     "CoalgCat.MonoidalCategoryAux.counit_tensorObj",
+     "Coalgebra.sum_counit_tmul_eq"
+    ],
+    "digest": "563d33c1960480cd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image coefficient scalar unit square commutes for successive homomorphisms of sheaves of rings",
+   "results": {
+    "t": "2026-10-23T04:13:40Z",
+    "tool": "leansearch",
+    "query": "Derived direct image coefficient scalar unit square commutes for successive homomorphisms of sheaves of rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Spec.sheafedSpaceMap_comp",
+     "SheafOfModules.pushforward",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc",
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "CochainComplex.HomComplex.δ_units_smul",
+     "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap",
+     "AlgebraicGeometry.stalkMap_toStalk"
+    ],
+    "digest": "2d11e16d7fec0517"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived.*[Rr]estrictScalars|[Rr]estrictScalars.*derived)",
+   "results": {
+    "t": "2026-10-23T04:15:08Z",
+    "tool": "grep",
+    "query": "(derived.*[Rr]estrictScalars|[Rr]estrictScalars.*derived)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"unit\"",
+   "results": {
+    "t": "2026-10-23T04:15:09Z",
+    "tool": "loogle",
+    "query": "\"Adjunction\", \"unit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit",
+     "CategoryTheory.Adjunction.CoreUnitCounit",
+     "CategoryTheory.Adjunction.mkOfUnitCounit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv",
+     "CategoryTheory.Adjunction.counit",
+     "CategoryTheory.Adjunction.unit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit"
+    ],
+    "digest": "9ed601796edaafd8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive changes of sheaf rings commute with derived direct image by the extension restriction adjunction unit",
+   "results": {
+    "t": "2026-10-23T04:15:16Z",
+    "tool": "leanfinder",
+    "query": "Successive changes of sheaf rings commute with derived direct image by the extension restriction adjunction unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit"
+    ],
+    "digest": "d30196bc90b6a41d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "(unit.*naturality|homEquiv.*naturality)",
+   "results": {
+    "t": "2026-10-23T04:16:10Z",
+    "tool": "grep",
+    "query": "(unit.*naturality|homEquiv.*naturality)",
+    "sub": "CategoryTheory/Adjunction",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "digest": "18c8d7e2ebe01633"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction transpose of scalar extension unit under a further coefficient ring map in derived sheaf module categories",
+   "results": {
+    "t": "2026-10-23T04:16:14Z",
+    "tool": "leanfinder",
+    "query": "Naturality of adjunction transpose of scalar extension unit under a further coefficient ring map in derived sheaf module categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit_app",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.unitToPushforwardObjUnit"
+    ],
+    "digest": "da7970e4e9793c63"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general adjunction identities or underived module/sheaf scalar functors only; no assertion of this normalized unbounded derived direct-image scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-condensed-finite-scalar-model",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric finite-E cohomology and coefficient projection before arithmetic descent; returned proof steps 6-7, scalar unit square and shift normalization",
+   "via": [
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-coefficient-square-transport",
+  "worker": "stage1",
+  "summary": "Proved the scalar-unit square by comparing the two adjuncts, with explicit unit identities on K-flat representatives and normalized restriction-comparison composition. Reused existing general ringed-topos and scalar-adjunction nodes; no new nodes. Included naturality, all integer shifts, restriction and transport of the specified maps. Statement unchanged.",
+  "blueprint": "Refines paragraph (3) of the main-20261015 direct-images proof: geometric coefficient comparison before arithmetic descent, in the returned scalar-unit square steps. The inherited from.node is null because the created.item chain reaches a module name; retained the maintainer-owned ancestry unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "General normalized unbounded scalar adjunction and exact restriction; the unit has no replacement for this coefficient-ring tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of the derived scalar extension on arbitrary sheaf rings, used to check the elementary coefficient-unit identity."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General ringed-topos composition and two-isomorphism comparisons identify the exact-restriction square; this is a formal tool, not a replacement of the direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "K-injective normalization of canonical direct-image comparisons, independent of coefficient flatness."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Canonical shift compatibility of the derived adjunction, also for identity-topos coefficient maps."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Shifted K-injective resolutions compute the canonical comparison at shifted inputs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-96d9c395a",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-96d9c395a (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item's whole proof and all eight cited statements. Shape: one commit; statement, stmt_deps, source and blueprint are unchanged against side-live; the item is still unsplit live, has no repair note and has no new nodes. proof_deps equals the union of the step uses, and there is no cycle (a 446-node closure walk never reaches the item). I accept the declared tool_uses (pur coefficient adjunction and change of rings, ringed monoidal comparisons, pushforward composition, adjunction-shift, kinjective-shift) as generic black boxes; paragraph (3) of the main-20261015 direct-images proof was read and has no step at this level, and proof_origin=agent is right. Steps: (1) Each coefficient map is the identity-topos ringed morphism, and its derived direct image is termwise restriction since restriction is exact. Both factorizations have morphism f and structure map f^{-1}(a), so the composition isos give theta_a, and the cocycle theta_ca=U_a(theta_c)theta_a U_{c,X} type-checks and follows by taking mates of ordinary reassociation. (2) The unit identities hold on flat-term K-flat models because c(1)=1. (3)-(4) Both sides have a-adjunct t_S=theta_ca G_A eta_ca(V), using naturality of theta_a, step 1, step 2 on X and injectivity of the hom bijection. (5) Termwise tensor commutes with shift with no sign, and theta commutes with shift by the normalization. The units match the normalized scalar units by a two-line argument (cf. Stacks 0FPI). (6) Restriction and transport are formal. Cases checked: f=id; the point topos with Z->Z/4->Z/2 for V=Z and V=Z/2 (Tor kept); V=0; unbounded V. Nearby nodes (sbc restrict-scalars identities, pe normalized restriction squares, scalar-unit equality detection, equivalence mate coherence) are not duplicates. 13 three-kind searches are recorded. Stacks tags 07A6/0D6D/0D6E/0FPI/0B56/0DV0 match their labels; no SGA. Advisory: the identification of the identity-topos adjunction with the scalar adjunction is not separately cited; blueprint.from.node is null (maintainer-owned)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeometricCoefficientSquareTransport",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.GeometricSquare.geometricCoefficientSquareTransport",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.unitArrow",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.AdjunctTransport",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.theta",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.beta",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.gamma",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.m",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.kappa",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.Shifts",
+   "SheafOfModules.RingedCoefficientProjection.GeometricSquare.geometricCoefficientSquareTransport"
+  ],
+  "file": "lean/Sheaf/SixFunctors/GeometricCoefficientSquareTransport.lean",
+  "statement": "theorem geometricCoefficientSquareTransport [PreservesFiniteLimits uInv] : Nonempty (Shifts g nY nX e) ∧ (∀ {A R : Sheaf J CommRingCat.{r}} (a : A ⟶ R), AdjunctTransport (nY.adjunction a) ∧ AdjunctTransport (nX.adjunction (g.rings.map a)) ∧ AdjunctTransport (g.adjunction A)) ∧ ∀ {A R S : Sheaf J CommRingCat.{r}} (a : A ⟶ R) (c : R ⟶ S) (V : D K (g.rings.obj A)), (gamma nY a c).app ((g.right A).obj V) ≫ (nY.right c).map ((beta g nY nX e (a ≫ c)).app V) = (beta g nY nX e a).app V ≫ (kappa g nY nX e a c).app V ∧ (nY.right a).map ((gamma nY a c).app ((g.right A).obj V) ≫ (nY.right c).map ((beta g nY nX e (a ≫ c)).app V)) = (nY.right a).map ((beta g nY nX e a).app V ≫ (kappa g nY nX e a c).app V) ∧ ∀ (T : Type t) [Category.{h} T] [HasShift T ℤ] [Preadditive T] [HasZeroObject T] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] (E : D J R ≌ T) [E.functor.CommShift ℤ] [E.functor.IsTriangulated] (W₀ W₁ W₂ W₃ : T) (i₀ : E.functor.obj ((pY a).derived.obj ((g.right A).obj V)) ≅ W₀) (i₁ : E.functor.obj ((nY.right c).obj ((pY (a ≫ c)).derived.obj ((g.right A).obj V))) ≅ W₁) (i₂ : E.functor.obj ((g.right R).obj ((pX (g.rings.map a)).derived.obj V)) ≅ W₂) (i₃ : E.functor.obj ((nY.right c).obj ((g.right S).obj ((pX (g.rings.map (a ≫ c))).derived.obj V))) ≅ W₃), (i₀.inv ≫ E.functor.map ((gamma nY a c).app ((g.right A).obj V)) ≫ i₁.hom) ≫ (i₁.inv ≫ E.functor.map ((nY.right c).map ((beta g nY nX e (a ≫ c)).app V)) ≫ i₃.hom) = (i₀.inv ≫ E.functor.map ((beta g nY nX e a).app V) ≫ i₂.hom) ≫ (i₂.inv ≫ E.functor.map ((kappa g nY nX e a c).app V) ≫ i₃.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9b5c4240",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Q128 lem-sfb-geometric-coefficient-square-transport c9b5c424: first delivery; TeX/proof/source unchanged vs side-live; 3 added stmt_deps are landed def records used by the statement (RingedCoefficientProjectionData Geometry/Scalars/Comparisons/targetAssociator, SuccessiveDerivedQuotient Normalization/Presentation, SemilinearSections Mod/D); dep files identical to side-live; lean.statement verbatim; declarations complete; no theorem-owned defs in statement. Square checked corner by corner: theta = conjugateIsoEquiv of the pinned e.derived (mate of the pullback/tensor comparison, node step 1); beta = whiskered scalar-adjunction transpose of G_A(unit) then theta; gamma/m = c-unit + normalized associator (r⊗x↦c(r)⊗x); kappa = G_R(m) then theta_c; restriction to A, naturality, Shifts pinned by counits/right_factors/canonical K-injective shift. No flatness/boundedness/invertibility. No duplicate found (rg side-live Sheaf). Advisory: AdjunctTransport is a general adjunction law and the E/i0..i3 clause follows formally from the equality; accepted since the node's transport clause is formal (step 6) and the main square is not definitional. No compile (no file changed)."
+ }
+}

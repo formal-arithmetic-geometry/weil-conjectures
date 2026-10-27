@@ -1,0 +1,136 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-perfect-chart-complete",
+ "kind": "statement",
+ "title": "Intrinsic completeness on a single perfect integral chart",
+ "statement": "Let T be a Noetherian scheme and S a scheme, g:S→T an immersion, U an object of S_proet, E/Q_l a finite extension, and d its actual lifted integral coefficient datum. Let K belong to D(d.completedRing T). Suppose the restriction of K to the proetale slice over U after g is isomorphic to the restriction of integralConstantDerived T d(P), for a perfect complex P over the lifted valuation ring. Then the ordinary datum pullback of K to U.left is intrinsically derived complete, for every finite generating family of d.ideal and every representative complex with its realization isomorphism. This is a local assertion; it chooses no stratification, proves no constructibility and asserts no reduction bounds. Use the models of [def-weil-pbc-integral-stratified-perfect-models] and the completion predicate of [def-weil-pbc-intrinsic-completion].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pc-perfect-ring-complex",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply cechPerfectModel_intrinsicComplete to the constant model on T. The coefficient datum supplies Noetherianity of its scalar ring. This uses the proved finite-projective completeness calculation with the unit-normalized intrinsic coefficient comparison.",
+   "uses": [
+    "lem-weil-pbc-cech-perfect-model-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  },
+  {
+   "text": "Normalize the given slice isomorphism by scalar restriction along the inverse-image coefficient isomorphism. The pro-etale slice equivalence is fully faithful on derived categories. Apply its inverse on isomorphisms and the datum pullback compositor to obtain an isomorphism between the two ordinary datum pullbacks to U.left. This comparison needs no pullback compatibility of constant realization.",
+   "uses": [
+    "lem-weil-pbc-integral-chart-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  },
+  {
+   "text": "The morphism U.hom followed by g is a weakly etale morphism followed by an immersion. Preserve completeness of the constant model along it using stratumIntrinsicComplete_preserved. Use eC followed by the ordinary pullback isomorphism as target realization. The resulting intrinsic unit differs from the requested one by an invertible prefix, which can be cancelled.",
+   "uses": [
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cech-perfect-model-completeness",
+  "lem-weil-pbc-integral-chart-pullback-comparison",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible pro etale complexes over a complete discrete valuation ring admit stratified perfect constant models",
+   "results": "Hits inspected: BDeRhamPlus, BDeRham, AlgebraicGeometry.Scheme.Etale, StandardEtalePresentation, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "Hits inspected: IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Cc]omplete|[Cc]omplete.*[Pp]erfect|residue.*[Ll]isse.*[Ll]ift",
+   "results": "Hits inspected: Mathlib/Probability/Distributions/Geometric.lean, Mathlib/Probability/Distributions/Geometric.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Martingale/Basic.lean, Mathlib/Probability/Kernel/CondDistrib.lean, Mathlib/Probability/Kernel/CondDistrib.lean",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompletedLocalPerfectCriterion",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-completed-local-perfect-criterion",
+   "place": "The single-chart comparison in the proof of Proposition 6.6.11.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPerfectChartComplete",
+  "file": "lean/Sheaf/Paper/IntegralPerfectChartComplete.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralPerfectChart_complete",
+  "statement": "theorem integralPerfectChart_complete\n    (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {S : Scheme.{u}} (g : S ⟶ T) [IsImmersion g] (U : S.ProEt)\n    (K : PbcCompletedDerived T (pbcIntegralDatum l E))\n    (P : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))\n    (hP : @DerivedCategory.IsPerfectRingComplex (PbcIntegralRing l E) _\n      (HasDerivedCategory.standard _) P)\n    (e : Nonempty (integralLocalDerived g (pbcAdicCompletion T (pbcIntegralDatum l E)) U K ≅\n      integralLocalDerived g (pbcAdicCompletion T (pbcIntegralDatum l E)) U\n        ((integralConstantDerived T (pbcIntegralDatum l E)).obj P)))\n    (r : ℕ) (a : Fin r → PbcIntegralRing l E)\n    (ha : Ideal.span (Set.range a) = (pbcIntegralDatum l E).ideal)\n    (C : CochainComplex (pbcModules U.left\n      (pbcAdicCompletion U.left (pbcIntegralDatum l E))) ℤ)\n    (eC : DerivedCategory.Q.obj C ≅ ((pbcIntegralDatum l E).pull (U.hom ≫ g)).obj K) :\n    IsDerivedCompleteIntrinsic U.left (pbcIntegralDatum l E) r a ha\n      (((pbcIntegralDatum l E).pull (U.hom ≫ g)).obj K) C eC",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4f63c",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T222652-L-680402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

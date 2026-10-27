@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-clopen-geometric-categorical-quotient",
+ "kind": "statement",
+ "title": "Clopen restriction of a supplied finite geometric categorical quotient",
+ "statement": "Let $H$ be a finite group [def-sfb-finite-infinite-set] acting by automorphisms on a scheme $V$ [def-pc-scheme], and let $q:V\\to X$ be an invariant finite surjective morphism of schemes [def-weil-finite-integral-morphism] [def-weil-surjective-morphism]. Assume that for every algebraically closed field $\\Omega$ the map $V(\\Omega)\\to X(\\Omega)$ is onto with fibres the $H$-orbits, that for every open $W\\subseteq X$ the canonical map identifies $\\mathcal O_X(W)$ with the $H$-invariant sections of $\\mathcal O_V(q^{-1}W)$, and that every invariant morphism from $V$ to any scheme $T$ factors uniquely through $q$. Let $U\\subseteq X$ be open and closed, with its open subscheme structure [def-weil-open-immersion]. Put $V_U=q^{-1}(U)$. Then $V_U$ is an open and closed $H$-invariant subscheme, with the induced action, and $q_U:V_U\\to U$ is finite and surjective. For every algebraically closed field $\\Omega$, the map $V_U(\\Omega)\\to U(\\Omega)$ is onto with fibres precisely the $H$-orbits. For every open $W\\subseteq U$, the canonical map identifies $\\mathcal O_U(W)$ with $\\mathcal O_{V_U}(q_U^{-1}W)^H$. Every invariant morphism $V_U\\to T$ to any scheme factors uniquely through $q_U$. If $q$ is an admissible finite scheme quotient [def-per-admissible-finite-scheme-quotient], then so is $q_U$. No field of definition, separatedness, finite-type, Noetherian or normality hypothesis is imposed on $V$ or $X$. The cases $U=\\varnothing$ and $U=X$ are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose X 2.3 Step 2, printed p.151, restriction to the selected clopen components of diagram (2.c); the quotient terminology is used in Expose IX 1.4, printed pp.132--133. Agent-formulated general clopen restriction lemma extracted from returned item step 13; categorical restriction is established by extension to a disjoint-union target, not an assertion about arbitrary base change."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-per-admissible-finite-scheme-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=X\\setminus U$ and $D=q^{-1}(C)$, all subsets carrying their open subscheme structures. Continuity makes $V_U$ and $D$ complementary clopen subsets of $V$. Since $q\\circ h=q$ for every $h\\in H$, each action automorphism preserves both subsets. Restrict each automorphism using the unique factorization through an open subscheme; uniqueness preserves the identity, product and inverse laws. Similarly obtain $q_U$ and $q_C:D\\to C$. The square with sides $V_U\\to V$ and $U\\to X$ is cartesian: any compatible pair of maps into $V$ and $U$ factors uniquely into $V_U$ by the open-factorization lemma. Finite base change (a) therefore makes $q_U$ finite. Every point of $U$ has a preimage under $q$, and that preimage lies in $V_U$, so $q_U$ is surjective.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HI (lemma-restrict-map-to-opens), 01IK (lemma-open-subspace-scheme); Morphisms Tag 01WL (lemma-base-change-finite); direct restriction of the action"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $\\Omega$. Composition with the open inclusions identifies $U(\\Omega)$ with the $\\Omega$-points of $X$ landing in $U$, and $V_U(\\Omega)$ with the $\\Omega$-points of $V$ landing in $q^{-1}U$, by unique open factorization. A lift in $V(\\Omega)$ of a point in $U(\\Omega)$ necessarily lands in $q^{-1}U$, hence lifts to $V_U(\\Omega)$. Two such lifts are in the same fibre exactly when their composites into $V$ are in the same fibre over $X$; the assumed orbit description supplies an $h\\in H$ taking one to the other. Restriction of the action and uniqueness of open factorization give the same equality in $V_U(\\Omega)$. Conversely invariance gives equality of their images.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HI (lemma-restrict-map-to-opens), applied to field-valued points; orbit-fibre hypothesis of the item"
+   }
+  },
+  {
+   "text": "An open $W\\subseteq U$ is open in $X$, since $U$ is open. By the definition of the open subscheme structure, $\\mathcal O_U(W)=\\mathcal O_X(W)$ and $\\mathcal O_{V_U}(q_U^{-1}W)=\\mathcal O_V(q^{-1}W)$. Under these identifications the canonical ring map is the one assumed for $q$, and every action pullback is the same restriction of the original action pullback. The invariant subrings therefore agree as well. The assumed invariant-section identification for $q$ is exactly the required identification for $q_U$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HE and 01IO: structure sheaf of an open subscheme is the restricted sheaf"
+   }
+  },
+  {
+   "text": "Let $a:V_U\\to T$ be any invariant morphism to any scheme $T$. Form $Y=T\\amalg C$, with open coprojections $i_T,i_C$ having disjoint images covering $Y$. Glue $i_T\\circ a$ on $V_U$ and $i_C\\circ q_C$ on $D$ to a morphism $A:V\\to Y$; their overlap is empty, so the compatibility condition is vacuous. For each $h\\in H$, the maps $A\\circ h$ and $A$ agree on $V_U$ by invariance of $a$ and on $D$ by invariance of $q_C$, so gluing uniqueness makes $A$ invariant. The supplied categorical quotient property of $q$ gives a unique $b:X\\to Y$ with $b\\circ q=A$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue, first mapping property) and 01JC (lemma-glue-schemes), for the two-piece disjoint union and gluing on complementary opens"
+   }
+  },
+  {
+   "text": "For each $u\\in U$, choose $v\\in V$ with $q(v)=u$. Then $v\\in V_U$ and $b(u)=A(v)\\in i_T(T)$. Consequently $b|_U$ factors uniquely through the open immersion $i_T$, giving $\\bar a:U\\to T$. Its composite with $q_U$ equals $a$: after composition with $i_T$ both morphisms are $A|_{V_U}$, and uniqueness of open factorization cancels $i_T$. This proves existence of the descent to $U$ without any assumption on $T$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HI (lemma-restrict-map-to-opens); surjectivity hypothesis of the item"
+   }
+  },
+  {
+   "text": "If $a_1,a_2:U\\to T$ satisfy $a_j\\circ q_U=a$, glue $i_T\\circ a_j$ on $U$ with $i_C\\circ\\mathrm{id}_C$ on $C$ to maps $b_j:X\\to Y$. Each composite $b_j\\circ q$ agrees with $A$ on $V_U$ and on $D$, hence equals $A$ by gluing uniqueness. Uniqueness in the supplied categorical quotient property gives $b_1=b_2$. Restriction to $U$ and uniqueness of factorization through $i_T$ give $a_1=a_2$. Thus every invariant $a$ descends uniquely.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue, mapping property) and 01HI (lemma-restrict-map-to-opens); categorical quotient hypothesis of the item"
+   }
+  },
+  {
+   "text": "Assume additionally that $q$ is admissible in the stated definition. Its underlying fibres are $H$-orbits, so the same holds for $q_U$ because $V_U$ is invariant. For a subset $E\\subseteq U$, if $q_U^{-1}E$ is open in $V_U$, it is open in $V$ and equals $q^{-1}E$. The quotient-map property of $q$ makes $E$ open in $X$, hence in $U$; the converse follows by continuity. Thus $q_U$ is a topological quotient. For an orbit in $V_U$, let $u\\in U$ be its image and choose an affine open $W\\subseteq U$ containing $u$ using the affine-open basis. Then $q_U^{-1}W$ is an affine open containing the whole orbit: the map to $W$ is finite by finite base change (a) and its source is affine by (b). Together with finiteness, invariance and the invariant-section formula already proved, these are every clause of admissibility. All arguments allow $U=\\varnothing$, $U=X$, and empty $V$ or $X$: gluing on empty overlaps is valid, and the pointwise assertions are vacuous when the relevant set is empty.",
+   "uses": [
+    "def-per-admissible-finite-scheme-quotient",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed pp.132--133 (admissibility); Stacks Tags 01IT (lemma-basis-affine-opens), 01WL (lemma-base-change-finite); direct restriction of a quotient topology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-per-admissible-finite-scheme-quotient",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent proof of the general clopen restriction lemma extracted from Expose X 2.3 Step 2, diagram (2.c), printed p.151; uses Stacks open factorization and gluing (01HI, 01JB, 01JC) and finite base change (01WL)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restricting a finite geometric categorical quotient to an open and closed subset of the quotient preserves the quotient universal property and invariant structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.LocallyQuasiFinite f],\\n  AlgebraicGeometry.LocallyQuasiFinite (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"Let $f: X \\\\to Y$ be a locally quasi-finite morphism of schemes. For any open subscheme $U$ of $X$ and any open subscheme $V$ of $Y$ such that the image of $U$ under $f$ is contained in $V$, the restri\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyQuasiFinite f],\\n  AlgebraicGeometry.LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.IsFinite f],\\n  AlgebraicGeometry.IsFinite (f ∣_ V)\", \"doc\": \"For any finite morphism $ f : X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If a morphism of schemes $f: X \\\\to Y$ is locally of finite type, then its restriction to any open subschemes $V \\\\subseteq X$ and $U \\\\subseteq Y$ (where the image of $V$ under $f$ is contained in $U$) \"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-separated morphism of schemes. Let $U$ be an open subscheme of $X$ and $V$ be an open subscheme of $Y$ such that $f(U) \\\\subseteq V$. Then the restriction of $f$ to a morphi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀), (𝒰.restrict U).f x = 𝒰.f x ∣_ U\", \"doc\": \"For any scheme $X$, open cover $\\\\mathcal{U}$ of $X$, open subset $U \\\\subseteq X$, and index $x \\\\in \\\\mathcal{U}.I_0$, the morphism $f_x$ in the restricted open cover $\\\\mathcal{U}|_U$ is equal to the re\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀),\\n  (𝒰.restrict U).X x = ↑((TopologicalSpace.Opens.map (𝒰.f x).base).obj U)\", \"doc\": \"Given a scheme $X$, an open cover $\\\\mathcal{U}$ of $X$, and an open subset $U \\\\subseteq X$, the object mapping of the restricted open cover $\\\\mathcal{U}|_U$ at each index $x \\\\in I_0$ corresponds to th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.Hom.resLE",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*restrict|restrict.*quotient|categorical.*quotient|invariant.*section",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a clopen subscheme of a finite group quotient is again a geometric categorical quotient including invariant sections and orbit fibres",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical quotient restricted to a clopen target descends invariant maps by extending to a disjoint union target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DiscreteQuotient.comp_finsetClopens\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ (X : Type u_2) [inst : TopologicalSpace X] [inst_1 : CompactSpace X],\\n  ((Set.image fun t => t.carrier) ∘ SetLike.coe) ∘ DiscreteQuotient.finsetClopens X = fun x =>\\n    match x with\\n    | { toSetoid := f, isOpen_setOf_rel := isOpen_setOf_rel } => f.classes\", \"doc\": \"For a compact topological space $X$ with discrete quotient $S$, the image of the finite set of clopen subsets of $X$ (each being the preimage of a singleton in $S$ under the quotient map $\\\\pi: X \\\\to S\"}\n  {\"name\": \"DiscreteQuotient.ofIsClopen\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"{X : Type u_2} → [inst : TopologicalSpace X] → {A : Set X} → IsClopen A → DiscreteQuotient X\", \"doc\": \"Given a clopen subset $A$ of a topological space $X$, this constructs the discrete quotient of $X$ by the equivalence relation where two points are equivalent if they share the same membership status \"}\n  {\"name\": \"CompHausLike.LocallyConstant.sigmaIncl\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"{P : TopCat → Prop} →\\n  [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    {Q : CompHausLike P} →\\n      {Z : Type (max u w)} →\\n        (r : LocallyConstant (↑Q.toTop) Z) → (a : Function.Fiber ⇑r) → CompHausLike.LocallyConstant.fiber r a ⟶ Q\", \"doc\": \"The continuous inclusion map from the fiber of $ r $ at $ a $ (equipped with the subspace topology) into the compact Hausdorff-like space $ Q $, defined by sending each element of the fiber to itself \"}\n  {\"name\": \"DiscreteQuotient.finsetClopens\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"(X : Type u_2) →\\n  [inst : TopologicalSpace X] → [CompactSpace X] → DiscreteQuotient X → Finset (TopologicalSpace.Clopens X)\", \"doc\": \"Given a compact topological space $X$ and its discrete quotient $S$, this function constructs the finite set of clopen subsets of $X$ obtained as preimages of singleton sets $\\\\{x\\\\} \\\\subseteq S$ under \"}\n  {\"name\": \"LocallyConstant.lift\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"{α : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace X] → (f : LocallyConstant X α) → LocallyConstant (Quotient f.discreteQuotient.toSetoid) α\", \"doc\": \"The function constructs a locally constant map from the discrete quotient space of $X$ to $\\\\alpha$ by lifting a given locally constant function $f : X \\\\to \\\\alpha$. This is achieved by defining the lif\"}\n  {\"name\": \"DiscreteQuotient.isClopen_preimage\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] (S : DiscreteQuotient X) (A : Set (Quotient S.toSetoid)),\\n  IsClopen (S.proj ⁻¹' A)\", \"doc\": \"For any subset $A$ of the discrete quotient space $S$, the preimage of $A$ under the canonical projection map $\\\\pi: X \\\\to S$ is a clopen set in the original topological space $X$. This follows because\"}\n  {\"name\": \"DiscreteQuotient.exists_of_compat\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] [CompactSpace X] (Qs : (Q : DiscreteQuotient X) → Quotient Q.toSetoid),\\n  (∀ (A B : DiscreteQuotient X) (h : A ≤ B), DiscreteQuotient.ofLE h (Qs A) = Qs B) →\\n    ∃ x, ∀ (Q : DiscreteQuotient X), Q.proj x = Qs Q\", \"doc\": \"In a compact topological space $X$, given a compatible family of elements $\\\\{Q_s(\\\\mathcal{Q})\\\\}$ indexed by discrete quotients $\\\\mathcal{Q}$ of $X$ (where compatibility means that refining the quotien\"}\n  {\"name\": \"LocallyConstant.lift_comp_proj\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ {α : Type u_1} {X : Type u_2} [inst : TopologicalSpace X] (f : LocallyConstant X α),\\n  ⇑f.lift ∘ f.discreteQuotient.proj = ⇑f\", \"doc\": \"For any locally constant function $f : X \\\\to \\\\alpha$, the composition of the lift of $f$ to the discrete quotient space of $X$ and the canonical projection map from $X$ to its discrete quotient equals\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen restriction of a finite geometric categorical quotient by a finite group preserves invariant sections and the categorical quotient universal property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {inst_1 : CategoryTheory.PreGaloisCategory C}\\n  {F : CategoryTheory.Functor C FintypeCat} [self : CategoryTheory.PreGaloisCategory.FiberFunctor F] (G : Type u₂)\\n  [inst_2 : Group G] [Finite G], CategoryTheory.Limits.PreservesColimitsOfShape\", \"doc\": \"For any finite group $G$, a fiber functor $F$ from a pre-Galois category $\\\\mathcal{C}$ to the category of finite types preserves colimits of shape $\\\\mathcal{J} = \\\\text{SingleObj}(G)$, where $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} [self : CategoryTheory.PreGaloisCategory C] (G : Type u₂)\\n  [inst_1 : Group G] [Finite G], CategoryTheory.Limits.HasColimitsOfShape (CategoryTheory.SingleObj G) C\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, for every finite group $G$, the category $\\\\mathcal{C}$ admits all colimits of diagrams shaped like the single-object category associated to $G$. This means that\"}\n  {\"name\": \"DiscreteQuotient.finsetClopens\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"(X : Type u_2) →\\n  [inst : TopologicalSpace X] → [CompactSpace X] → DiscreteQuotient X → Finset (TopologicalSpace.Clopens X)\", \"doc\": \"Given a compact topological space $X$ and its discrete quotient $S$, this function constructs the finite set of clopen subsets of $X$ obtained as preimages of singleton sets $\\\\{x\\\\} \\\\subseteq S$ under \"}\n  {\"name\": \"DiscreteQuotient.comp_finsetClopens\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ (X : Type u_2) [inst : TopologicalSpace X] [inst_1 : CompactSpace X],\\n  ((Set.image fun t => t.carrier) ∘ SetLike.coe) ∘ DiscreteQuotient.finsetClopens X = fun x =>\\n    match x with\\n    | { toSetoid := f, isOpen_setOf_rel := isOpen_setOf_rel } => f.classes\", \"doc\": \"For a compact topological space $X$ with discrete quotient $S$, the image of the finite set of clopen subsets of $X$ (each being the preimage of a singleton in $S$ under the quotient map $\\\\pi: X \\\\to S\"}\n  {\"name\": \"DiscreteQuotient.ofIsClopen\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"{X : Type u_2} → [inst : TopologicalSpace X] → {A : Set X} → IsClopen A → DiscreteQuotient X\", \"doc\": \"Given a clopen subset $A$ of a topological space $X$, this constructs the discrete quotient of $X$ by the equivalence relation where two points are equivalent if they share the same membership status \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"IsQuotientCoveringMap\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    [TopologicalSpace E] → [TopologicalSpace X] → (E → X) → (G : Type u_3) → [inst : Group G] → [MulAction G E] → Prop\", \"doc\": \"Given topological spaces $E$ and $X$, a continuous map $f : E \\to X$, a group $G$ acting on $E$, this proposition asserts that $f$ is a quotient covering map, meaning it is both a quotient map for the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give restriction, gluing, finite base change, or Galois-category quotients; none states this scheme quotient lemma or specializes to all its clauses in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is finite if\\nthe preimage of any affine open subset of `Y` is affine and the induced ring\\nhom is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give restriction, gluing, finite base change, or Galois-category quotients; none states this scheme quotient lemma or specializes to all its clauses in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.*quotient|geometric.*quotient|quotient.*restrict|restrict.*quotient",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give restriction, gluing, finite base change, or Galois-category quotients; none states this scheme quotient lemma or specializes to all its clauses in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant maps descend uniquely along the restriction of a scheme categorical quotient to a clopen subscheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.resLE\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(f : Hom X Y) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) : V.toScheme ⟶ U.toScheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$, an open subset $U$ of $Y$, and an open subset $V$ of $X$ such that $V$ is a subset of the preimage $f^{-1}(U)$, this function defines the restriction of $f$ t\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : U) : U.toScheme.presheaf.stalk x ≅ X.presheaf.stalk x.1\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X ≅ Z.restrict f.isOpenEmbedding\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between schemes, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding $ f_{\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X.restrict h ⟶ X\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\\\to X$, this constructs the morphism from the restricted scheme $X|_U$ to $X$. The morphism has \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give restriction, gluing, finite base change, or Galois-category quotients; none states this scheme quotient lemma or specializes to all its clauses in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a coequalizer of a group action on schemes to open and closed target using a disjoint union target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData), CategoryTheory.Limits.HasMulticoequalizer D.diagram\", \"doc\": \"For any gluing data $ D $ of schemes, the associated multispan diagram constructed from open subsets $ U(i) $ and intersection isomorphisms $ V(i,j) $ admits a multicoequalizer. This colimit encodes t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) → D.U i ⟶ D.glued\", \"doc\": \"For each object $ i $ in the indexing category $ J $, this morphism maps $ U(i) $ to the glued scheme $ D.\\\\text{glued} $, constructed as the canonical projection from the object diagram to the colimit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).glued ⟶ X\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, this is the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to the original scheme $X$. It is \"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g],\\n  IsCompl (AlgebraicGeometry.Scheme.Hom.opensRange f) (AlgebraicGeometry.Scheme.Hom.opensRange g) →\\n    Nonempty (CategoryTheory.Limits.IsColimi\", \"doc\": \"Given schemes $X$, $Y$, and $S$ with open immersions $f : X \\to S$ and $g : Y \\to S$, if the images of $f$ and $g$ form complementary open subsets of $S$ (i.e., their union is $S$ and their intersection\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (j : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).ι j =\\n    CategoryTheory.Limits.Multicoequalizer.π\", \"doc\": \"For each index $ j $ in the open cover $ \\\\mathcal{U} $, the inclusion morphism $ \\\\iota_j $ mapping the pullback $ U(j) $ to the glued scheme is equal to the canonical projection morphism from the diag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    {Y : AlgebraicGeometry.Scheme} →\\n      (f : (x : 𝒰.I₀) → 𝒰.X x ⟶ Y) →\\n        (∀ (x y : 𝒰.I₀),\\n            CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f y)) (f x) =\\n              CategoryTheory.CategoryS\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$ and a family of morphisms $f_i: U_i \\\\to Y$ from each open set $U_i$ in the cover to a scheme $Y$ that satisfy compatibility conditions on pairwise int\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (U : (X ⨿ Y).Opens) →\\n    (X ⨿ Y).presheaf.obj (Opposite.op U) ≅\\n      X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits.coprod.inl.base).obj U)) ⨯\\n        Y.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits\", \"doc\": \"For any two schemes $X$ and $Y$, and for any open subset $U$ of their coproduct (disjoint union) $X \\\\amalg Y$, the ring of sections of the structure sheaf of $X \\\\amalg Y$ over $U$ is isomorphic to the\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_cofanMk_of\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {σ : Type v} [Small.{u, v} σ] {X : σ → AlgebraicGeometry.Scheme} {S : AlgebraicGeometry.Scheme}\\n  (f : (i : σ) → X i ⟶ S) [inst : ∀ (i : σ), AlgebraicGeometry.IsOpenImmersion (f i)],\\n  ⨆ i, AlgebraicGeometry.Scheme.Hom.opensRange (f i) = ⊤ →\\n    Pairwise (Function.onFun Disjoint fun x => Algebraic\", \"doc\": \"Let $\\\\{X_i\\\\}$ be a family of schemes with open immersions $f_i: X_i \\\\to S$ such that the images of the $f_i$ are pairwise disjoint and their union equals the entire scheme $S$. Then the colimit of the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give restriction, gluing, finite base change, or Galois-category quotients; none states this scheme quotient lemma or specializes to all its clauses in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Re-split input: ILO Expose X 2.3 Step 2, printed p.151, restriction to the selected clopen components of diagram (2.c); the quotient terminology is used in Expose IX 1.4, printed pp.132--133. Agent-formulated general clopen restriction lemma extracted from returned item step 13; categorical restriction is established by extension to a disjoint-union target, not an assertion about arbitrary base change.",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-clopen-geometric-categorical-quotient",
+  "worker": "stage1",
+  "summary": "Seven steps prove all clauses with existing DAG nodes only. The categorical argument extends an invariant map to T coproduct (X minus U), descends it using the supplied universal property, then factors its restriction through the open T summand. Uniqueness is proved by gluing two extensions. Admissibility uses inverse images of affine neighbourhoods to avoid an unjustified claim about affine intersections. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited blueprint.from chain has no imported ancestor (blueprint_refs ancestor reports None). This item supplies the clopen-component restriction in lem-sfb-semilinear-sylow-good-components, itself in the alteration reduction of det-thm-sf-ctf-stability-direct-images proof (3); source is ILO X 2.3 Step 2, diagram (2.c). Steps 1--3 restrict the supplied finite geometric quotient, 4--6 prove its categorical property, 7 restricts admissibility."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-bf108a7f6",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-bf108a7f6 (reviewer sub-agent of L); spot-checked: Read the item and its 7 steps, and every cited statement in full: open immersion, fibre product, surjective, finite, and the Mathlib-leaf nodes for open factorization, finite permanence (a)/(b), coproduct, gluing and affine basis. Also read def-per-admissible-finite-scheme-quotient. Stacks tags 01HI/01IK/01JB/01JC/01IT/01HE/01IO and morphisms 01WL all exist in tags/tags; ILO X 2.3 Step 2 (p.151, diagram 2.c) was read. The statement is unchanged and true. There are no new nodes, no repair note for the item, and no SGA. Step 1: the clopen V_U is H-stable via q∘h=q; the square with U is cartesian by open factorization, so q_U is finite by (a); surjectivity is pointwise. Steps 2 and 3 are elementary restrictions of Ω-points and sections. Step 4 extends a to A:V→T⊔C by gluing i_T∘a with i_C∘q_C, so the given quotient property yields b. Step 5 factors b|_U through i_T by surjectivity and cancels the open lift. Step 6 proves uniqueness from two glued extensions. Step 7 gets every admissibility clause; for the affine-orbit clause it uses q⁻¹ of an affine W⊆U (finite by (a), affine by (b)), not affine intersections. Edge cases U=∅, U=X, T=∅, trivial H and nonseparated V all check out. Citers (semilinear-sylow-good-components, snc-resolution) use exactly the stated clauses. Closest existing node: lem-per-admissible-quotient-affine-integral-charts, whose invariant-open restriction clause is for the quotient it constructs, so it is not a duplicate. Cosmetic only: step 1's source document is schemes.tex while it also names Morphisms 01WL. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenGeometricCategoricalQuotient",
+  "declaration": "AlgebraicGeometry.clopen_geometric_categorical_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenGeometricCategoricalQuotient.lean",
+  "statement": "theorem clopen_geometric_categorical_quotient {H : Type v} [Group H] [Finite H] {V X : Scheme.{u}} (a : H →* Aut V) (q : V ⟶ X) [IsFinite q] [Surjective q] (hinv : ∀ h : H, (a h).hom ≫ q = q) (hpoints : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun x : Spec (.of Ω) ⟶ V ↦ x ≫ q) ∧ ∀ x y : Spec (.of Ω) ⟶ V, x ≫ q = y ≫ q ↔ ∃ h : H, x ≫ (a h).hom = y) (hsections : ∀ W : X.Opens, Function.Injective (q.app W).hom ∧ ∀ s : Γ(V, q ⁻¹ᵁ W), (s ∈ Set.range (q.app W).hom ↔ ∀ (h : H) (O : V.Opens) (hO : O ≤ q ⁻¹ᵁ W) (hOh : O ≤ (a h).hom ⁻¹ᵁ (q ⁻¹ᵁ W)), ((a h).hom.appLE (q ⁻¹ᵁ W) O hOh).hom s = (V.presheaf.map (homOfLE hO).op).hom s)) (hcategorical : ∀ (T : Scheme.{u}) (f : V ⟶ T), (∀ h : H, (a h).hom ≫ f = f) → ∃! g : X ⟶ T, q ≫ g = f) (U : X.Opens) (hU : IsClopen (U : Set X)) : IsClopen (q ⁻¹ᵁ U : Set V) ∧ ∃ aU : H →* Aut (q ⁻¹ᵁ U).toScheme, (∀ h : H, (aU h).hom ≫ (q ⁻¹ᵁ U).ι = (q ⁻¹ᵁ U).ι ≫ (a h).hom) ∧ IsFinite (morphismRestrict q U) ∧ Surjective (morphismRestrict q U) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun x : Spec (.of Ω) ⟶ (q ⁻¹ᵁ U).toScheme ↦ x ≫ morphismRestrict q U) ∧ ∀ x y : Spec (.of Ω) ⟶ (q ⁻¹ᵁ U).toScheme, x ≫ morphismRestrict q U = y ≫ morphismRestrict q U ↔ ∃ h : H, x ≫ (aU h).hom = y) ∧ (∀ W : U.toScheme.Opens, Function.Injective ((morphismRestrict q U).app W).hom ∧ ∀ s : Γ((q ⁻¹ᵁ U).toScheme, morphismRestrict q U ⁻¹ᵁ W), (s ∈ Set.range ((morphismRestrict q U).app W).hom ↔ ∀ (h : H) (O : (q ⁻¹ᵁ U).toScheme.Opens) (hO : O ≤ morphismRestrict q U ⁻¹ᵁ W) (hOh : O ≤ (aU h).hom ⁻¹ᵁ (morphismRestrict q U ⁻¹ᵁ W)), ((aU h).hom.appLE (morphismRestrict q U ⁻¹ᵁ W) O hOh).hom s = ((q ⁻¹ᵁ U).toScheme.presheaf.map (homOfLE hO).op).hom s)) ∧ (∀ (T : Scheme.{u}) (f : (q ⁻¹ᵁ U).toScheme ⟶ T), (∀ h : H, (aU h).hom ≫ f = f) → ∃! g : U.toScheme ⟶ T, morphismRestrict q U ≫ g = f) ∧ (IsAdmissibleFiniteSchemeQuotient a q → IsAdmissibleFiniteSchemeQuotient aU (morphismRestrict q U))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Both invariant-section clauses are inline membership iff formulas using appLE on common subopens, exactly as in the last clause of IsAdmissibleFiniteSchemeQuotient. No dependency on the quotient-existence theorem or its section-subring helper. The restricted action is specified by equivariance of the actual inverse-image open inclusion; q_U is morphismRestrict."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91988a6e6",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery of d11b5dce (RETURN H2). Diff vs prior snapshot: only the AdmissibleFiniteTypeFieldQuotient import removed and both invariant-section clauses rewritten inline (injective app + range iff appLE/restriction equality on common subopens), identical in form to the last clause of live IsAdmissibleFiniteSchemeQuotient, with aU/morphismRestrict in the conclusion. Node differs from side-live only in lean; stmt_deps = 6 def nodes, theorem dep gone; lean.statement verbatim in file. All clauses re-read against node (finite H:Type v, invariant finite surjective q, Ω-point orbit fibres, sections, categorical over Scheme.{u}, clopen U, clopen preimage, aU pinned by mono ι, q_U finite/surjective, restricted clauses, admissibility implication); no extra hypotheses; U=∅/U=X/empty schemes covered; sorry only; docstrings with source+blueprint+7 steps; report sections present. No compile (no file changed)."
+ }
+}

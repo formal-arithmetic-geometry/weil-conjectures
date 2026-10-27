@@ -1,0 +1,566 @@
+{
+ "id": "lem-sfb-normed-point-derived-scalar-sections",
+ "kind": "statement",
+ "title": "Normalized terminal sections and derived scalar change at a normed point",
+ "statement": "Work in compatible small-site and coefficient universes. Let $F$ be a normed field with totally disconnected metric topology, put $C_F(P)=C(P,F)$ for profinite $P$ [def-sfb-continuous-map-condensed-ring], and put $F_T=p_T^*C_F$ for every scheme $T$ [sk-def-sfb-pulled-back-coefficients]. Modules mean internal $F_T$-modules [sk-def-sfb-module-objects], with module inverse images as in [sk-def-sfb-module-pushforward-pullback]. Let $k$ be algebraically closed and put $s=\\operatorname{Spec}k$. Let $F\\hookrightarrow F'$ be a continuous field inclusion into another totally disconnected normed field, inducing $F_s\\to F'_s$ by postcomposition on continuous functions [def-sfb-continuous-map-condensed-ring-map]. Write $E_F(N)=\\Gamma(s,N)$ as an abstract $F$-vector space using the constant-section identification $\\Gamma(s,F_s)=F$, and similarly define $E_{F'}$. Restriction $\\operatorname{Res}_{F'_s/F_s}$ is exact [def-sfb-modobj-restriction], and there is a natural identification\n$$E_F(\\operatorname{Res}_{F'_s/F_s}N)=\\operatorname{Res}_{F'/F}E_{F'}(N)$$\nwith identity underlying additive map. The ordinary balanced maps give natural isomorphisms\n$$F'\\otimes_F E_F(M)\\xrightarrow{\\sim}E_{F'}(F'_s\\otimes_{F_s}M),\\qquad a\\otimes m\\longmapsto a\\otimes m,$$\nfor the relative sheaf tensor [def-sfb-modobj-relative-tensor, def-pur-sheaf-tensor-product]. All these identifications respect $m\\mapsto1\\otimes m$. Write $E_F^D,E_{F'}^D$ for the exact termwise sections functors on ordinary unbounded derived categories [sk-def-sfb-derived-categories]. For every $K\\in D(\\operatorname{Mod}_{F_s})$ there is a natural isomorphism in $D(\\operatorname{Vect}_{F'})$\n$$F'\\otimes_F^{\\mathbf L}E_F^D(K)\\xrightarrow{\\sim}E_{F'}^D(F'_s\\otimes_{F_s}^{\\mathbf L}K).$$\nOn every K-flat resolution $P\\to K$ [def-pc-kflat-complex] this isomorphism is represented by the displayed degreewise balanced map. It commutes with replacement maps and differentials and takes the scalar-adjunction insertion-of-one unit to the insertion-of-one unit. Restriction also commutes with termwise sections on these derived categories. There is no boundedness, constructibility, completeness, or flatness hypothesis on $F_s\\to F'_s$.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 (coefficient adjunction) and Lemma 4.1(1); agent ordinary unbounded terminal-point coefficient-change argument (old steps 9-11)."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-modobj-restriction",
+  "def-sfb-modobj-relative-tensor",
+  "def-pur-sheaf-tensor-product",
+  "sk-def-sfb-derived-categories",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-section-scalar-map-data",
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-upper-star-from-point",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=F_s$, $S=F'_s$, $a:R\\to S$, $E=E_F$ and $E'=E_{F'}$. By [lem-sfb-normed-point-exact-monoidal], applied with $Z=s$ and $x=\\mathrm{id}_s$, both section functors are exact and their constant-section coefficient maps are isomorphisms. Postcomposition with the continuous inclusion sends a constant function with value $r$ to the constant function with value its image in $F'$ [def-sfb-continuous-map-condensed-ring-map]. Thus the induced section-ring map is the given $F\\to F'$. The sheaf tensor with any object preserves colimits by closedness [sk-def-sfb-sheaf-tensor]. Hence [lem-sfb-modobj-restriction-finite-exact] applies to $a$ and makes internal scalar restriction exact. By its definition [def-sfb-modobj-restriction], restriction leaves every section and every additive map unchanged; its action is $r n=a(r)n$. Evaluating this action proves $E\\operatorname{Res}_a=\\operatorname{Res}_{F'/F}E'$ with identity underlying additive map.",
+   "uses": [
+    "lem-sfb-normed-point-exact-monoidal",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-restriction-finite-exact",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Section 3, printed p.6; Lemma 4.1(1), printed p.8. Internal restriction exactness expanded using the finite universal-property lemma."
+   }
+  },
+  {
+   "text": "Let $N=\\operatorname{Res}_a S$. By [lem-sfb-restricted-extension-relative-tensor], restriction of ordinary extension is canonically $N\\otimes_R M$, with the comparison fixed by the same coequalizer projection. The tensorator of [lem-sfb-normed-point-exact-monoidal], applied to $N,M$, therefore gives\n$$F'\\otimes_F E(M)=E(N)\\otimes_F E(M)\\xrightarrow{\\sim}E'(S\\otimes_R M).$$\nThe underlying formula is $b_M(t\\otimes m)=[t\\otimes m]$. This is $F'$-linear: for $u,t\\in F'$, both the image of $(ut)\\otimes m$ and multiplication by $u$ after the map are $[(ut)\\otimes m]$. The balancing relation is $[ta(r)\\otimes m]=[t\\otimes rm]$. Naturality follows by applying a module map to $m$ on either path. On $1\\otimes m$ the result is $[1\\otimes m]$, proving the ordinary insertion-of-one normalization. These checks use the specified generators, not arbitrary choices of isomorphisms.",
+   "uses": [
+    "lem-sfb-restricted-extension-relative-tensor",
+    "lem-sfb-normed-point-exact-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 coefficient adjunction and Lemma 4.1(1), ordinary balanced calculation at the terminal point."
+   }
+  },
+  {
+   "text": "Write $t(V)=F'\\otimes_F V$. The $F$-module $F'$ is flat by [lem-weil-pbc-module-over-field-flat]; [lem-weil-pbc-flat-tensor-exact] shows that $t$ is exact. Consequently [lem-weil-pbc-exact-functor-derived-factorization] gives exact termwise functors $D(t),E^D,E'^D,D(\\operatorname{Res}_a)$ and the ordinary field restriction, all preserving quasi-isomorphisms. Field restriction and its exactness can also be read on the singleton site via [lem-weil-pbc-singleton-site-module-comparison] and [lem-pur-sheaf-ring-coefficient-ordinary-adjunction]. The identity section comparison of step 1 is an identity in every complex degree; its localization is the derived restriction/sections comparison, by [lem-weil-pbc-localization-universal-property]. The same property identifies composites of these exact termwise functors with the termwise composite, retaining the identity underlying maps.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Ordinary unbounded interpretation of Section 3; Stacks derived.tex Tag 015F; sites-modules.tex Tags 03DA, 03D7; categories.tex Tag 04VG."
+   }
+  },
+  {
+   "text": "Use the exact internal/sectionwise scalar comparison [lem-sfb-internal-section-scalar-adjunction] to work with the reconstructed ring sheaves $R,S$. By [lem-pe-internal-section-tensor-comparison], this operation preserves all K-flat complexes and total tensors, with the same pure tensors. The K-flat scalar extension $T=S\\otimes_R^{\\mathbf L}-$ has, on every K-flat complex $P$, the canonical natural isomorphism\n$$c_P:T(QP)\\xrightarrow{\\sim}Q(S\\otimes_R P)$$\nby [lem-pur-derived-change-of-rings]; exchanging the scalar factor to the first position sends $p\\otimes t$ to $t\\otimes p$. Resolutions with flat terms exist for every unbounded complex by [lem-pc-kflat-resolution]. On the singleton site [lem-weil-pbc-singleton-site-module-comparison], the same derived-change-of-rings theorem computes $F'\\otimes_F^{\\mathbf L}-$; since $t$ is exact, its comparison with $D(t)$ is canonical by [def-sfb-left-derived-exact]. Thus $D(t)$ computes the left-hand scalar tensor even when the evaluated complex has not been shown K-flat.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "def-sfb-left-derived-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3; Stacks sites-cohomology.tex Tags 06YS, 06YT, 06YU, 06YY; exact-functor comparison dual to derived.tex Tag 015F."
+   }
+  },
+  {
+   "text": "On the homotopy category of $R$-complexes put $A(P)=D(t)E^D(QP)$ and $B(P)=E'^D T(QP)$. Both functors invert every quasi-isomorphism, since they factor through $Q$. For K-flat $P$ define\n$$\\alpha_P=(E'^D(c_P))^{-1}\\circ Q(b_P):A(P)\\xrightarrow{\\sim}B(P),$$\nwith the canonical exact-section factorizations understood. Here $b_P$ has component $b_{P^n}$ in degree $n$; it is a chain isomorphism, because both composites with the differential send $t\\otimes p$ to $[t\\otimes d_Pp]$. Naturality of the scalar counit and of $b$ proves naturality of $\\alpha$ on all maps between K-flat complexes. Apply [lem-sc-nattrans-from-resolving-class] to the full class of K-flat complexes: the required right calculus is [lem-pc-quasi-isomorphisms-multiplicative-system], and existence of resolving maps is [lem-pc-kflat-resolution] together with the internal comparison in step 4. This gives $\\beta:A\\to B$ on the homotopy category. For a resolution $v:P\\to C$, naturality says $B(v)\\alpha_P=\\beta_C A(v)$. All three other maps are invertible, so $\\beta_C=B(v)\\alpha_P A(v)^{-1}$ is invertible. By [lem-weil-pbc-localization-universal-property], $\\beta$ descends to a natural isomorphism on the entire derived category. This is the required comparison after step 4's identification $D(t)=F'\\otimes_F^{\\mathbf L}-$; in particular its naturality includes every derived morphism.",
+   "uses": [
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent resolving-class expansion of Section 3 and Lemma 4.1(1); Stacks derived.tex Tag 05RT and sites-cohomology.tex Tags 06YS, 06YT, 06YY."
+   }
+  },
+  {
+   "text": "For any K-flat resolution $P\\to C$, the comparison of step 5 restricts to $\\alpha_P$, and $c_P$ is the K-flat computation map [lem-pur-derived-change-of-rings]. Thus it is represented by precisely the degreewise balanced $b_P$, also when the terms of $P$ are not flat. The formula $b_{P^{n+1}}(t\\otimes d_Pp)=d[b_{P^n}(t\\otimes p)]$ proves differential compatibility; the scalar has degree zero so there is no additional sign. For a replacement map $u:P\\to P'$ the equation is\n$$E'^D(c_{P'})\\beta_{QP'}D(t)E^D(Qu)=Q(b_{P'})D(t)E^D(Qu)=Q(S\\otimes_Ru)Q(b_P).$$\nNaturality of $c$ and $b$ proves this equality. Inverting a replacement quasi-isomorphism gives the same equality for its inverse. For any roof $C\\xleftarrow{v}H\\xrightarrow{f}J$, naturality of the descended comparison gives $B(f)B(v)^{-1}\\beta_C=\\beta_J A(f)A(v)^{-1}$. This also proves independence of all resolutions; the full faithfulness assertion of [lem-weil-pbc-localization-universal-property] makes the transformation uniquely determined by its resolving components.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Stacks sites-cohomology.tex Tags 06YT, 06YU, 06YY, canonical resolution comparison; categories.tex Tag 04VG, localization of transformations."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution $P\\to C$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], the scalar-adjunction unit on $QP$ is represented by $p\\mapsto p\\otimes1$, or $p\\mapsto1\\otimes p$ with our factor order. The internal comparison [lem-sfb-internal-section-scalar-adjunction] preserves this adjunction and its unit. On the field side the identical assertion follows by applying the same derived-adjunction theorem to the singleton site [lem-weil-pbc-singleton-site-module-comparison]. By step 2, $b_P$ carries $1\\otimes p$ to $[1\\otimes p]$ in each degree. Under the restriction identity of step 3, this proves the unit square on $QP$. Naturality transports the equality across the resolution isomorphism $QP\\cong QC$, and every derived object has such a representative. Hence the square holds everywhere. The comparison therefore preserves the specified insertion-of-one units and the derived restriction comparison. All resolutions and localizations used are unbounded; no exactness of $S\\otimes_R-$ or flatness of $R\\to S$ has been assumed.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 coefficient adjunction; Stacks sites-cohomology.tex Tag 07A6 and derived.tex Tags 09T5, 0FND; normalized unit calculation on resolving representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-point-exact-monoidal",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-restriction-finite-exact",
+  "def-sfb-modobj-restriction",
+  "lem-sfb-restricted-extension-relative-tensor",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "def-sfb-left-derived-exact",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 and Lemma 4.1(1), with explicit ordinary unbounded resolving-class descent and scalar-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Terminal sections on the pro etale site of an algebraically closed field commute with derived extension and exact restriction of continuous normed field coefficients on all unbounded complexes",
+   "results": {
+    "t": "2026-10-22T06:03:56Z",
+    "tool": "leanfinder",
+    "query": "Terminal sections on the pro etale site of an algebraically closed field commute with derived extension and exact restriction of continuous normed field coefficients on all unbounded complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.of_restrictScalars",
+     "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+     "Algebra.FormallyEtale.comp",
+     "RingHom.formallyEtale_algebraMap",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "StandardEtalePair.homEquiv",
+     "Algebra.etaleLocus_eq_compl_support"
+    ],
+    "digest": "8c99bc589ea8f702"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract scalar extension, categorical tensor coherence and evaluation definitions do not give exact point sections with this K-flat-normalized continuous coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections over an algebraically closed pro etale point commute with derived tensor extension of continuous field coefficients using K flat resolutions and preserve scalar insertion units",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "leansearch",
+    "query": "Global sections over an algebraically closed pro etale point commute with derived tensor extension of continuous field coefficients using K flat resolutions and preserve scalar insertion units",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extendScalars\"",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"extendScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract scalar extension, categorical tensor coherence and evaluation definitions do not give exact point sections with this K-flat-normalized continuous coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]ections|evaluation).*(tensor|[Ss]calar)|([Ss]calar|tensor).*([Ss]ections|evaluation)",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "grep",
+    "query": "([Ss]ections|evaluation).*(tensor|[Ss]calar)|([Ss]calar|tensor).*([Ss]ections|evaluation)",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean",
+     "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean"
+    ],
+    "digest": "4a7326025c5656b6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract scalar extension, categorical tensor coherence and evaluation definitions do not give exact point sections with this K-flat-normalized continuous coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact evaluation of continuous coefficient module sheaves at a geometric point intertwines field scalar extension on K flat representatives without condensed flatness",
+   "results": {
+    "t": "2026-10-22T06:04:06Z",
+    "tool": "leanfinder",
+    "query": "Exact evaluation of continuous coefficient module sheaves at a geometric point intertwines field scalar extension on K flat representatives without condensed flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "smoothSheafCommRing.ι_evalHom",
+     "ModuleCat.Tilde.res_const",
+     "smoothSheafCommRing.ι_evalHom_apply",
+     "smoothSheaf.ι_evalHom",
+     "SheafOfModules.evaluation",
+     "smoothSheaf.ι_evalHom_apply",
+     "Module.isLocallyConstant_rankAtStalk",
+     "ModuleCat.Tilde.res_apply"
+    ],
+    "digest": "7992e44b1342f0d4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract scalar extension, categorical tensor coherence and evaluation definitions do not give exact point sections with this K-flat-normalized continuous coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact restriction of modules along a ring homomorphism, tensor scalar extension of sections",
+   "results": {
+    "t": "2026-10-22T12:05:56Z",
+    "tool": "leanfinder",
+    "query": "exact restriction of modules along a ring homomorphism, tensor scalar extension of sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.exact_mapBaseChange_map",
+     "rTensor_exact",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.iff_rTensor_exact",
+     "Module.Flat.rTensor_exact",
+     "Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+     "lTensor_exact",
+     "Module.FaithfullyFlat.rTensor_reflects_exact"
+    ],
+    "digest": "28016e6789028c97"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.Res restrictScalars exact functor",
+   "results": {
+    "t": "2026-10-22T12:05:57Z",
+    "tool": "loogle",
+    "query": "ModuleCat.Res restrictScalars exact functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Unknown constant `ModuleCat.Res`",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: Unknown constant `ModuleCat.Res`; retried with the recorded SheafOfModules/tensor query."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*Exact|preserves.*KFlat",
+   "results": {
+    "t": "2026-10-22T12:05:57Z",
+    "tool": "grep",
+    "query": "restrictScalars.*Exact|preserves.*KFlat",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of continuous coefficient module sheaves on an algebraically closed pro etale point commute with unbounded derived extension of field scalars",
+   "results": {
+    "t": "2026-10-22T12:16:53Z",
+    "tool": "leanfinder",
+    "query": "Global sections of continuous coefficient module sheaves on an algebraically closed pro etale point commute with unbounded derived extension of field scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "smoothSheafCommRing.ι_evalHom",
+     "ModuleCat.Tilde.res_apply",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "ModuleCat.Tilde.res_const",
+     "ModuleCat.Tilde.toOpen_res",
+     "Algebra.FormallyEtale.of_restrictScalars",
+     "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale"
+    ],
+    "digest": "f409714e890fc28a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections on a contractible site commute with derived change of coefficient fields",
+   "results": {
+    "t": "2026-10-22T12:16:54Z",
+    "tool": "leansearch",
+    "query": "Global sections on a contractible site commute with derived change of coefficient fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.Γ",
+     "CategoryTheory.HasGlobalSectionsFunctor",
+     "AlgebraicGeometry.PresheafedSpace.Γ",
+     "AlgebraicGeometry.Scheme.Γ",
+     "AlgebraicGeometry.SheafedSpace.Γ",
+     "CategoryTheory.Sheaf.ΓRes_naturality",
+     "AlgebraicGeometry.Scheme.Γ_def",
+     "CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape"
+    ],
+    "digest": "a68a5906452ad8ce"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": {
+    "t": "2026-10-22T12:16:54Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app"
+    ],
+    "digest": "81c0a719217fb4bb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  },
+  {
+   "tool": "grep",
+   "query": "(Sections|sections|evaluation).*(tensor|Scalar)|(tensor|Scalar).*(Sections|sections|evaluation)",
+   "results": {
+    "t": "2026-10-22T12:16:54Z",
+    "tool": "grep",
+    "query": "(Sections|sections|evaluation).*(tensor|Scalar)|(tensor|Scalar).*(Sections|sections|evaluation)",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean"
+    ],
+    "digest": "153608260d7d6787"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: point-section scalar comparison is not a presheaf tensor definition, manifold evaluation, scheme structural sections or algebraic etaleness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric norm-coefficient projection: terminal-point scalar comparison in old steps 9–11 of lem-sfb-constructible-normed-geometric-fibres; exact restriction, ordinary balancing and ordinary unbounded K-flat descent.",
+   "via": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-point-derived-scalar-sections",
+  "worker": "stage1",
+  "summary": "Seven-step split using existing nodes only. Checked Hemo–Richarz–Scholbach Example 3.1, Section 3 and Lemma 4.1(1), exact internal restriction, normalized ordinary balancing and all-K-flat scalar computation. Derived naturality is proved by resolving-class descent, and the scalar units on flat-term resolutions determine the unit square everywhere. No statement correction or new nodes.",
+  "blueprint": "Realizes the inherited geometric norm-coefficient projection subargument, old terminal-point steps 9–11 of lem-sfb-constructible-normed-geometric-fibres. Ancestor tool returns None for the inherited chain; retain the existing null ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-restricted-extension-relative-tensor",
+    "why": "Generic coequalizer identification of restricted scalar extension with tensor by the restricted regular algebra; no point-section or field assertion."
+   },
+   {
+    "node": "lem-sfb-modobj-restriction-finite-exact",
+    "why": "Generic finite exactness of internal restriction, needed because the restriction definition alone does not assert exactness."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic internal/ringed-site scalar equivalence with the same generators and derived units; not a different geometric route."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor equivalence preserves every K-flat complex, used to apply ringed-site scalar theorems."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ordinary unbounded scalar extension computed on every K-flat complex, without flat-term or coefficient flatness assumptions."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded flat-term K-flat resolution existence on the small ringed site."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic scalar-adjunction normalization on flat-term K-flat representatives; proves the actual insertion-of-one equation."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Generic exact singleton-site realization of ordinary module categories, their tensor and scalar adjunctions."
+   },
+   {
+    "node": "def-sfb-left-derived-exact",
+    "why": "Generic exact scalar-functor comparison identifies ordinary field tensor with its derived tensor."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic resolving-class descent of a comparison natural on K-flat complexes to all complexes; no geometric assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-restricted-extension-relative-tensor",
+  "lem-sfb-modobj-restriction-finite-exact",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-sfb-left-derived-exact",
+  "lem-sc-nattrans-from-resolving-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-628383063",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-628383063 (reviewer sub-agent of L); spot-checked: I read all seven steps, the statement of every cited node, and HRS Example 3.1 (p.6) and Lemma 4.1(1) with its proof (p.8). The statement matches the use in step 6 of the parent lem-sfb-constructible-normed-geometric-fibres. It works over F_s=p_s^*C_F with F_s→F'_s induced by postcomposition and has no added hypotheses. Edge cases checked: F'=F, the zero module, infinite-dimensional F'/F, trivially normed fields and unbounded complexes. Step 1: exactness of restriction uses lem-sfb-modobj-restriction-finite-exact, whose hypotheses hold because the sheaf tensor is closed. Step 2: the balancing isomorphism combines the restricted-extension κ with the exact-monoidal tensorator and holds for arbitrary modules. Step 3: the functors are exact termwise. Step 4: c_P is given on every K-flat complex via lem-pur-derived-change-of-rings and the internal comparisons, and D(t)=LF on the field side. Step 5: the resolving-class descent hypotheses are met (right calculus, K-flat resolutions, A and B invert quasi-isomorphisms), and invertibility follows from β_C=B(v)α_P A(v)^{-1}. Step 6: the representative and roof equations follow from naturality. Step 7: the units come from lem-pur-sheaf-ring-derived-coefficient-adjunction(1), transported through the internal comparison and the singleton site. Mechanical checks: proof_deps equals the union of the uses, every [ref] is cited, and there is no SGA. I accept the declared tool_uses. There are no new nodes. lem-zl-contractible-derived-sections-tensor and lem-weil-point-derived-sections-tensor-descent are not duplicates. Maintainer notes: the null blueprint.from.node and the missing lean_audit were already on the item from Q33's creation, and the step-3 citation of the ordinary adjunction is superfluous."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormedPointDerivedScalarSections",
+  "declaration": "AlgebraicGeometry.ProEtale.normed_point_derived_scalar_sections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normedScalarCondensed",
+   "AlgebraicGeometry.ProEtale.normedScalarRing",
+   "AlgebraicGeometry.ProEtale.normedScalarModules",
+   "AlgebraicGeometry.ProEtale.normedScalarRing_toMon_comm",
+   "AlgebraicGeometry.ProEtale.normedScalarMap",
+   "AlgebraicGeometry.ProEtale.normedScalarHom",
+   "AlgebraicGeometry.ProEtale.normedScalarHom_isMonHom",
+   "AlgebraicGeometry.ProEtale.normedScalarFieldAdjunction",
+   "AlgebraicGeometry.ProEtale.normedScalarSectionRing",
+   "AlgebraicGeometry.ProEtale.normedScalarSections",
+   "AlgebraicGeometry.ProEtale.normedScalarToTop",
+   "AlgebraicGeometry.ProEtale.NormedScalarConstants",
+   "AlgebraicGeometry.ProEtale.NormedScalarKFlat",
+   "AlgebraicGeometry.ProEtale.NormedScalarDerivedComparison",
+   "AlgebraicGeometry.ProEtale.normed_point_derived_scalar_sections"
+  ],
+  "file": "lean/Sheaf/Paper/NormedPointDerivedScalarSections.lean",
+  "statement": "theorem normed_point_derived_scalar_sections (k : Type u) [Field k] [IsAlgClosed k] (F G : Type u) [NormedField F] [NormedField G] [TotallyDisconnectedSpace F] [TotallyDisconnectedSpace G] (ι : F →+* G) (hι : Continuous ι) : ∃ (cF : F ≃+* normedScalarSectionRing (Spec (.of k)) F) (cG : G ≃+* normedScalarSectionRing (Spec (.of k)) G), NormedScalarConstants (Spec (.of k)) F cF ∧ NormedScalarConstants (Spec (.of k)) G cG ∧ ∃ (_ : HasDerivedCategory.{u + 1} (normedScalarModules (Spec (.of k)) F)) (_ : HasDerivedCategory.{u + 1} (normedScalarModules (Spec (.of k)) G)) (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} F)) (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} G)) (_ : (normedScalarSections (Spec (.of k)) F cF.toRingHom).Additive) (_ : (normedScalarSections (Spec (.of k)) G cG.toRingHom).Additive) (_ : PreservesFiniteLimits (normedScalarSections (Spec (.of k)) F cF.toRingHom)) (_ : PreservesFiniteColimits (normedScalarSections (Spec (.of k)) F cF.toRingHom)) (_ : PreservesFiniteLimits (normedScalarSections (Spec (.of k)) G cG.toRingHom)) (_ : PreservesFiniteColimits (normedScalarSections (Spec (.of k)) G cG.toRingHom)) (_ : (ModuleCat.extendScalars.{u, u, u + 1} ι).Additive) (_ : PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u + 1} ι)) (_ : PreservesFiniteColimits (ModuleCat.extendScalars.{u, u, u + 1} ι)) (_ : PreservesFiniteLimits (ModuleCat.restrictScalars.{u + 1} ι)) (_ : PreservesFiniteColimits (ModuleCat.restrictScalars.{u + 1} ι)), exactFunctor (normedScalarModules (Spec (.of k)) G) (normedScalarModules (Spec (.of k)) F) (Mod.comap (normedScalarHom (Spec (.of k)) ι hι)) ∧ ∃ r : Mod.comap (normedScalarHom (Spec (.of k)) ι hι) ⋙ normedScalarSections (Spec (.of k)) F cF.toRingHom ≅ normedScalarSections (Spec (.of k)) G cG.toRingHom ⋙ ModuleCat.restrictScalars.{u + 1} ι, (∀ (N : normedScalarModules (Spec (.of k)) G) (x : N.X.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))), (r.hom.app N) x = x) ∧ ∃ b : normedScalarSections (Spec (.of k)) F cF.toRingHom ⋙ ModuleCat.extendScalars.{u, u, u + 1} ι ≅ Mod.extendScalars (normedScalarHom (Spec (.of k)) ι hι) ⋙ normedScalarSections (Spec (.of k)) G cG.toRingHom, (∀ (M : normedScalarModules (Spec (.of k)) F) (a : G) (m : M.X.obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))), (b.hom.app M) (a ⊗ₜ[F, ι] m) = InternalAbelianSheafModule.internalScalarGenerator (Scheme.ProEt.topology (Spec (.of k))) (normedScalarHom (Spec (.of k)) ι hι) M (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))) (cG a) m) ∧ (∀ M : normedScalarModules (Spec (.of k)) F, (normedScalarSections (Spec (.of k)) F cF.toRingHom).map ((Mod.extendRestrictAdjunction (normedScalarHom (Spec (.of k)) ι hι)).unit.app M) ≫ r.hom.app ((Mod.extendScalars (normedScalarHom (Spec (.of k)) ι hι)).obj M) = (normedScalarFieldAdjunction ι).unit.app ((normedScalarSections (Spec (.of k)) F cF.toRingHom).obj M) ≫ (ModuleCat.restrictScalars.{u + 1} ι).map (b.hom.app M)) ∧ NormedScalarDerivedComparison (Spec (.of k)) ι hι cF cG r b",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full aggregate statement with identity restriction, balanced ordinary extension, exact termwise sections, universal unbounded derived scalar extension, every-K-flat representative square, localized restriction and separately normalized derived adjunction units. Auxiliary definitions only specialize existing constructions and package the clauses of this node; constants are fixed by the actual pullback-adjunction unit. No statement correction or flatness assumption. The statement dependencies cite the landed section-reconstruction and section-scalar-map-data definition nodes for the reused section functor and generator, and the owning definition nodes for internal extension, its adjunction, upperStarFromPoint and profiniteToProEtOf. The internal section-scalar adjunction theorem remains a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-189bdcad2",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 1fcb345c: Lean module byte-identical (math previously accepted, re-read clause by clause: constants pinned by point adjunction unit, identity restriction r, balanced b via internalScalarGenerator, unit square, D(t) IsLeftDerivedFunctor, d pinned on every K-flat P, rd = localized r, aS/aM pinned units; no extra hypotheses, universes k F G : Type u with site u+1/u). R1 done (theorem stmt_dep replaced by def-sfb-section-scalar-map-data, theorem kept in proof_deps); R2 done (def-sfb-modobj-extension, -extend-restrict-adjunction, -upper-star-from-point, -profinite-test-objects, plus def-weil-pbc-internal-abelian-sheaf-module-equivalence). Only stmt_deps/lean differ from live; statement verbatim. Advisory: pointUpperStarLowerStarAdjunction (mathlib node def-sfb-point-adjunction) and upperStarLowerStarAdjunction (def-sfb-finite-upper-lower-star-adjunction) used in NormedScalarConstants are uncited; maintainer may add. No file changed, no compile."
+ }
+}

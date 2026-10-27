@@ -1,0 +1,153 @@
+{
+ "id": "lem-per-closed-direct-image-plus-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "sites-cohomology Tag 0E47; original ind-etale closed support proof step 10.",
+   "via": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-codimension-one-costalk-reduction",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pasting and identity for termwise closed direct-image exchange",
+ "statement": "Let A be a commutative ring. For a Cartesian square h:Z′→Z, i′:Z′→T′, i:Z→T, g:T′→T with i,i′ closed immersions, let c be the canonical isomorphism D+(i_*)⋙D+(g*) ≅ D+(h*)⋙D+(i′_*) obtained by termwise localization of the ordinary finite exchange [lemma-weil-pbc-finite-exchange], with the exact-localization compositors [lem-weil-pbc-exact-functor-derived-factorization]. For two successive such squares, the inverse square c_composite^{-1} equals the horizontal composite of the two inverse squares whiskered on top by upperStarCompDerivedPlus(h₂,h).hom and on bottom by upperStarCompDerivedPlus(g₂,g).inv. For an identity horizontal square, its inverse exchange is the unitor square whiskered on top by upperStarIdDerivedPlus(Z).hom and on bottom by upperStarIdDerivedPlus(T).inv. These identities hold for arbitrary base changes, independently of any support adjunction or ind-etale assumption.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "sites-cohomology Tag 0E47; original ind-etale closed support proof step 10."
+ },
+ "stmt_deps": [
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary finite exchange is the mate of the inverse-image square. Inverse-image composition coherence and mate pasting give baseChangeMap_paste_horiz_app; the unitor square gives baseChangeMap_id.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology Tag 0E47 and the proof in WeilConjectures.SixFunctors.BaseChange.Pasting"
+   }
+  },
+  {
+   "text": "All inverse images and closed direct images are exact. Apply each functor and each natural transformation termwise to bounded below complexes and localize. Localization preserves the two ordinary equations. Identify its compositors with mapDerivedCategoryPlusCompIso and its image of an ordinary isomorphism with mapDerivedCategoryPlusNatIso. The induced inverse-image compositors are exactly upperStarCompDerivedPlus and upperStarIdDerivedPlus.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47; original item step 10"
+   }
+  },
+  {
+   "text": "Invert the exchange isomorphisms and cancel the composition or identity isomorphisms. Componentwise this reverses the order of the factors and yields precisely the two stated TwoSquare identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Original item step 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "sites-cohomology Tag 0E47; original ind-etale closed support proof step 10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact functor localization preserves horizontal base change square pasting and identity on bounded below derived category",
+   "results": "No matching etale D+ theorem. Results included CategoryTheory.Adjunction.derived and AlgebraicGeometry.Scheme.Modules.restrictAdjunction.",
+   "date": "2026-10-26",
+   "verdict": "No specialization gives this statement with the specified bounded below support functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below supported kernel adjunction counit localization triangle complementary open orthogonality",
+   "results": "CategoryTheory.ObjectProperty.isLocal_trW, isColocal_trW and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no etale support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlus|mateEquiv_vcomp|localization.*triangle (Mathlib); module and theorem names in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates.mateEquiv_vcomp is the abstract pasting tool; exactFunctor localization exists but no specific geometric comparison. The upstream private generic shift proofs are reusable.",
+   "date": "2026-10-26",
+   "verdict": "Use existing abstract tools; the stated remaining geometric/normalization step has no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
+  "date": "2026-10-26",
+  "group": "A8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedDirectImagePlusCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedDirectImagePlusCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.closedDirectImagePlus_coherence",
+  "statement": "theorem closedDirectImagePlus_coherence (A : Type (u + 1)) [CommRing A] :\n    let c := fun {Z Z' T T' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' ⟶ T')\n      [IsClosedImmersion i] [IsClosedImmersion i']\n      (h : Z' ⟶ Z) (g : T' ⟶ T) (sq : IsPullback h i' i g) =>\n      have := isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} A) sq\n      (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫\n        Functor.mapDerivedCategoryPlusNatIso (asIso (baseChangeMap (ModuleCat.{u + 1} A)\n          sq.toCommSq)) ≪≫ Functor.mapDerivedCategoryPlusCompIso _ _\n    (∀ {Z Z' Z'' T T' T'' : Scheme.{u}}\n      (i : Z ⟶ T) (i' : Z' ⟶ T') (i'' : Z'' ⟶ T'')\n      [IsClosedImmersion i] [IsClosedImmersion i'] [IsClosedImmersion i'']\n      (h : Z' ⟶ Z) (g : T' ⟶ T) (h₂ : Z'' ⟶ Z') (g₂ : T'' ⟶ T')\n      (sq : IsPullback h i' i g) (sq₂ : IsPullback h₂ i'' i' g₂),\n      TwoSquare.mk _ _ _ _ (c i i'' (h₂ ≫ h) (g₂ ≫ g) (sq₂.paste_horiz sq)).inv =\n        (((TwoSquare.mk _ _ _ _ (c i i' h g sq).inv ≫ₕ\n          TwoSquare.mk _ _ _ _ (c i' i'' h₂ g₂ sq₂).inv).whiskerTop\n          (upperStarCompDerivedPlus (ModuleCat.{u + 1} A) h₂ h).hom).whiskerBottom\n          (upperStarCompDerivedPlus (ModuleCat.{u + 1} A) g₂ g).inv)) ∧\n    (∀ {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i],\n      TwoSquare.mk _ _ _ _ (c i i (𝟙 Z) (𝟙 T) (IsPullback.id_horiz i)).inv =\n        ((TwoSquare.mk _ _ _ _\n          ((Functor.leftUnitor (lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategoryPlus).hom ≫\n            (Functor.rightUnitor _).inv)).whiskerTop\n            (upperStarIdDerivedPlus (ModuleCat.{u + 1} A) Z).hom).whiskerBottom\n            (upperStarIdDerivedPlus (ModuleCat.{u + 1} A) T).inv)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

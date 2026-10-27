@@ -1,0 +1,346 @@
+{
+ "id": "lem-pur-relative-product-geometric-factors",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Apply [lem-pur-relative-external-power-regrouping] with $r=2$, $(X_1,K_1)=(P,K)$ and $(X_2,K_2)=(Q,L)$. Its $P_2$ is $W$, its $a_1,b_1$ are $a,b$, its $h_2$ is $h$, and its $T_2$ is exactly $H$. It gives that $P,W$ and these morphisms have the asserted geometric properties, and that $H\\in D^b_{ctf}(W,A)$. Applying the same statement with $r=1$ and $(X_1,K_1)=(Q,L)$ gives that $Q$ is separated of finite type over $k$. Thus every scheme and morphism used below lies in its required finite-type field-base domain.",
+   "uses": [
+    "lem-pur-relative-external-power-regrouping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Relative-product steps (1),(3): geometric and coefficient domains"
+   }
+  },
+  {
+   "text": "The inputs $K$ and $H$ are bounded constructible: this is part of membership in $D^b_{ctf}$. Clause (ii) of [lem-sf-proetale-constructible-origin] gives bounded constructible etale representatives and comparison isomorphisms for both. These are witnesses in the sense of [def-weil-pbc-etale-origin-witness]. Fix any witnesses $(K_0,e_K)$ and $(H_0,e_H)$; all subsequent assertions are on the bounded-below etale-origin domain, rather than on an exceptional-adjoint domain.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Relative-product steps (1),(3): etale-origin presentation"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-comp-composition] to $b:W\\to Q$, $g:Q\\to B$ and the chosen witness of $H$. Step 1 checks its separated finite-type morphism and finite-type scheme hypotheses. It says that $Rb_!$ preserves the bounded-below etale-origin class, so the iterated expression is defined, and gives its component $\\alpha_{g,b,H}:Rg_!Rb_!H\\xrightarrow{\\sim}R(gb)_!H=Rh_!H$. It is a natural isomorphism for any witness and is independent of compactifications under its canonical comparisons.",
+   "uses": [
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Relative-product step (1): composition component"
+   }
+  },
+  {
+   "text": "By the nonemptiness assertion of [prop-compactification-refinement], applied to $f:P\\to B$ between the finite-type $k$-schemes of Step 1, choose a compactification $c=(j,p)$ to compute $Rf_!$ in [def-compact-support-direct-image-detailed], and its base change $c'=(j',p')$ of [def-cbc-compact-support-square]. Thus $p,p'$ are proper. By [def-weil-proper-morphism] and [def-weil-finite-type-morphism] they are separated and quasi-compact; [lem-pc-separated-quasi-separated] makes them quasi-separated. Degreewise etale extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], so $j_!K_0$ is bounded below (use a bounded-below representative of $K_0$). Apply [lem-weil-pbc-transport-identifies-exchange] to the proper square with vertical arrows $p,p'$ and input $j_!K_0$. Its specified comparison equality identifies the actual ambient ringed proper exchange in [def-exchange-projection] with the etale proper exchange after conjugation by the canonical pullback and counit-mate direct-image comparisons. This checks the proper factor, including its normalization; an arbitrary isomorphism between the endpoints would not suffice.",
+   "uses": [
+    "prop-compactification-refinement",
+    "def-compact-support-direct-image-detailed",
+    "def-cbc-compact-support-square",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Etale-origin comparison of the proper factor"
+   }
+  },
+  {
+   "text": "For the upper open square $(j,j',a,\\bar g')$, apply [lem-fix-site-open-exchange] to $K_0$. Its hypotheses require only open immersions, a Cartesian square, a finite commutative coefficient ring and a bounded-below input; all hold here, with finiteness of $A_{E,n}$ stated in [def-weil-l-adic-coefficient-extension]. Its displayed equality identifies the canonical pro-etale open-base-change factor with the etale one under the specified open-extension and pullback comparisons. Now substitute this equality and Step 4's proper-factor equality into the two-arrow formula of [def-exchange-projection]. Write $C_s$ and $C_t$ for the source and target comparisons built from these proper/open and pullback comparisons. Substitution cancels the comparison at the intermediate object with its inverse and gives $\\operatorname{Ex}^{c,p}_!(\\nu_P^*K_0)C_s=C_t\\nu_Q^*(\\operatorname{Ex}^{c,e}_!(K_0))$. Here the two $\\operatorname{Ex}^{c,e}_!$ factors are exactly the proper exchange and $Rp'_*(\\beta)$ of [def-cbc-exchange-map]. This is the required transport identity. Naturality of the two composites then conjugates their equal maps by $e_K:\\nu_P^*K_0\\cong K$, proving the same identification for the chosen witness of $K$.",
+   "uses": [
+    "lem-fix-site-open-exchange",
+    "def-weil-l-adic-coefficient-extension",
+    "def-exchange-projection",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; Tag 09AF, proetale.tex lemma-jshriek-comparison; normalized site compatibility and its substitution into the blueprint relative-product step (3)"
+   }
+  },
+  {
+   "text": "Apply [thm-cbc-finite-level-proetale] with $X=P$, $Y=B$, $Y'=Q$, $X'=W$, $g'=a$, $f'=b$, coefficient ring $A$ and witness $(K_0,e_K)$. Use its supplied-compactification alternative with the $c$ already chosen; no additional qcqs hypothesis is needed. The theorem makes the transported exchange invertible and independent of both the witness and compactification under the transported canonical comparisons. Step 5 identifies that very transported arrow with the concrete $\\operatorname{Ex}_{!,K}$ of the statement. Consequently the concrete exchange has all these properties. The theorem applies to every bounded-below witness, so the initial arbitrary choices impose no additional condition.",
+   "uses": [
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Relative-product step (3): invertibility and independence of the identified exchange"
+   }
+  },
+  {
+   "text": "Finally let $E=\\operatorname{Ex}_{!,K}$ and $J=E^{-1}\\otimes1_L$. Tensoring the inverse identities for $E$ with $1_L$ shows that $J^{-1}=E\\otimes1_L$. The compactification formula [def-compact-support-direct-image-detailed] is a functor on the ambient derived category, hence $Rg_!(J)$ has inverse $Rg_!(J^{-1})$: apply the functor to the two inverse identities. These are exactly the displayed $Rg_!(\\operatorname{Ex}_{!,K}^{-1}\\otimes1_L)$ and its inverse. Step 3 likewise gives $\\alpha_{g,b,H}^{-1}$ with inverse $\\alpha_{g,b,H}$. All maps used are compact-support, pullback, tensor or comparison maps; the argument invokes no exceptional adjunction or duality assertion.",
+   "uses": [
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "Relative-product steps (1),(3): inverses and functor images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-relative-external-power-regrouping",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-sf-comp-composition",
+  "prop-compactification-refinement",
+  "def-compact-support-direct-image-detailed",
+  "def-cbc-compact-support-square",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "def-exchange-projection",
+  "lem-fix-site-open-exchange",
+  "def-weil-l-adic-coefficient-extension",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "Relative-product proof (1),(3), expanded using the existing finite-coefficient site-comparison interfaces"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-space-product-domain",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "title": "Etale-origin composition and exchange factors for a relative product",
+ "statement": "Use the concrete finite-coefficient operations of [def-pur-conventions], with $A=A_{E,n}$. Let $B$ be a separated finite-type $k$-scheme, let $f:P\\to B$ and $g:Q\\to B$ be separated finite-type morphisms, and let $K\\in D^b_{ctf}(P,A)$ and $L\\in D^b_{ctf}(Q,A)$ [def-weil-finite-tor-amplitude]. Let $W=P\\times_BQ$ have projections $a:W\\to P$, $b:W\\to Q$ [def-pc-fibre-product], and put $h=fa=gb$ and $H=La^*K\\otimes_A^L Lb^*L$. The schemes $P,Q,W$ are separated of finite type over $k$, and $a,b,h$ are separated of finite type. The complexes $K$ and $H$ are bounded constructible and admit étale-origin witnesses [def-weil-pbc-etale-origin-witness]. For any such witnesses, the compact-support composition component of [thm-sf-comp-composition]\n$$\\alpha_{g,b,H}:Rg_!Rb_!H\\xrightarrow{\\sim}Rh_!H$$\nis defined and invertible. The component of the concrete compact-support exchange of [def-exchange-projection] for the Cartesian square $(a,b,f,g)$,\n$$\\operatorname{Ex}_{!,K}:Lg^*Rf_!K\\longrightarrow Rb_!La^*K,$$\nis the compactification exchange of [def-cbc-exchange-map] transported from the small étale site through the witness of $K$, and is an isomorphism independent of that witness and of compactification under the canonical comparisons. In particular, $Rg_!(\\operatorname{Ex}_{!,K}^{-1}\\otimes1_L)$ and $\\alpha_{g,b,H}^{-1}$ are defined isomorphisms. These assertions concern the composition and exchange factors only, on the concrete étale-origin finite-coefficient domains; they assume no Verdier-duality axiom or unrestricted ambient pro-étale exceptional adjoint.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "Relative-product proof (1) and (3), at finite coefficients: composition and exchange factors; concrete domain expansion in lem-pur-affine-space-product-domain former Step 3(a),(c)"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-sf-comp-composition",
+  "def-exchange-projection",
+  "def-cbc-exchange-map",
+  "def-pur-compact-exchange-witness-transport",
+  "def-pur-origin-compactification-comparison"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|LowerShriek|projectionFormula|ProjectionFormula|etale.*tensor",
+   "results": "Mathlib/Dynamics/FixedPoints/Support.lean; Mathlib/Geometry/Manifold/BumpFunction.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/MeasureTheory/Function/ContinuousMapDense.lean. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compact support Kunneth comparison for two finite Tor constructible complexes over a scheme is a composite of invertible composition base change and projection formula maps",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"Iso\"",
+   "results": "Submodule.isSymmetricProjection_projection_of_isOrtho; Submodule.IsCompl.projection_isSymmetricProjection_of_isOrtho; Submodule.HasOrthogonalProjection.map_linearIsometryEquiv; Submodule.IsOrtho.starProjection_comp_starProjection; Submodule.HasOrthogonalProjection.map_linearIsometryEquiv'; LinearIsometry.map_starProjection; LinearIsometry.map_starProjection'; Submodule.IsOrtho.orthogonalProjectionOnto_comp_subtypeL. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two separated finite type morphisms of schemes, the concrete compact support relative product comparison is invertible using composition, etale origin base change and the two finite Tor projection formulas without Verdier duality",
+   "results": "AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.pullbackSpecIso_hom_base; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.exists_map_preimage_eq_map_preimage. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|proetale|ProEtale|etaleOrigin",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; subdirectory AlgebraicGeometry. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a cartesian square of finite type schemes the compactly supported base change map on etale origin proetale complexes is invertible and agrees with the compactification exchange map",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.Scheme.hom_base_inv_base; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.iso_hom_base_inv_base. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Iso\"",
+   "results": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.respectsIso; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.respectsIso; IsBaseChange.finrank_eq_of_le_nonZeroDivisors; IsBaseChange.rank_eq_of_le_nonZeroDivisors; IsBaseChange.lift_rank_eq_of_le_nonZeroDivisors; CategoryTheory.Precoverage.instRespectsIsoOfIsStableUnderBaseChange. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale origin witnesses for a bounded constructible external product make compact support composition and the relative base change exchange isomorphisms on the small proetale site",
+   "results": "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. Read the returned signatures: The returned facts about scheme morphisms, categorical base change and light condensed modules do not identify or invert compact-support composition and exchange on etale-origin pro-etale complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support composition and base change exchange are isomorphisms on bounded constructible etale origin complexes for a relative fibre product",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Iso\"",
+   "results": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.respectsIso; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.respectsIso; IsBaseChange.finrank_eq_of_le_nonZeroDivisors; IsBaseChange.rank_eq_of_le_nonZeroDivisors; IsBaseChange.lift_rank_eq_of_le_nonZeroDivisors; CategoryTheory.Precoverage.instRespectsIsoOfIsStableUnderBaseChange No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|etaleOrigin|compactSupport",
+   "results": "No hits. Subdirectory AlgebraicGeometry. No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support base change is an isomorphism for bounded below complexes coming from the etale site",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Etale.baseChange; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp; RingHom.Etale.isStableUnderBaseChange; KaehlerDifferential.isBaseChange_of_formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; HomologicalComplex.isStrictlySupported_of_iso No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(exchange|composition)|compact.*support|pullbackComp",
+   "results": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean. Subdirectory AlgebraicGeometry. No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition isomorphism for compactly supported derived direct images and the compactification base change map agree with their etale to proetale transports",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; TopCat.Sheaf.pushforwardForgetIso; PresheafOfModules.pushforwardCompToPresheaf; AlgebraicGeometry.Scheme.Modules.pushforwardComp; lightProfiniteToLightCondSetIsoTopCatToLightCondSet No compact-support etale-origin composition/exchange theorem; returned scheme-module comparisons concern structure sheaves, and algebraic etaleness results concern scheme morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4; relative-product composition and base-change factors of lem-pur-affine-space-product-domain, former Step 3(a),(c)",
+   "via": [
+    "lem-pur-affine-space-product-domain"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-product-geometric-factors",
+  "worker": "stage1",
+  "summary": "Assembled the geometric, etale-origin, composition and exchange assertions from existing nodes, explicitly identifying both normalized factors of the concrete proper/open exchange. No new nodes or statement changes.",
+  "blueprint": "prop-pur-affine-space-composition-law Proof Steps 3--4, through lem-pur-affine-space-product-domain former Step 3(a),(c); relative-product source proof (1),(3).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Step 2 uses its bounded constructible site equivalence to obtain witnesses; the affine-space unit does not prove the comparison of sites."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Step 3 uses compact-support composition on the etale-origin domain; this is the generic composition factor in the prescribed relative-product route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Step 4 uses separated implies quasi-separated for the proper square; this is a geometric prerequisite for the site-comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Step 4 uses exact etale extension by zero to keep the representative bounded below."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Step 4 identifies the specified ringed proper exchange with the etale mate, including normalization; the affine-space unit supplies no such comparison."
+   },
+   {
+    "node": "lem-fix-site-open-exchange",
+    "why": "Step 5 uses the normalized open-exchange comparison equality, which supplies the open factor missing from the proper comparison."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Step 6 uses finite-level compact-support exchange invertibility and independence on the etale-origin domain, the base-change factor of the prescribed route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-fix-site-open-exchange",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-0ca09e133",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-0ca09e133 (reviewer sub-agent of L); spot-checked: Read the item, all 17 cited statements, the main-20261015 sk-thm-sf-kunneth-relative proof (arrows (1) and (3)) and the unit sk-prop-an. One commit with the item and report only: no new nodes, no statement change, no repair note, no SGA (Stacks 03S6/09AF checked in tags). Step 1: the regrouping lemma with r=2 matches exactly (P_2=W, a_1=a, b_1=b, T_2=H); r=1 gives Q of finite type over k. Step 2: D^b_ctf sits inside the intrinsic D^b_c of constructible-origin (ii), and the bounded étale representatives are D^+ witnesses. Step 3: comp-composition hypotheses hold on finite-type k-schemes with H witnessed. Step 4: the compactification exists (closed refinement node) and p,p' are proper, hence qcqs (separated implies quasi-separated), so the transport lemma's T∘ν(E)=Ex^R∘S applies at j_!K_0 ∈ D^+, and its Ex^R is exactly Ex_{*,p} of def-exchange-projection. Step 5: I wrote out the substitution. The β maps of def-exchange-projection and def-cbc-exchange-map are the e^proet and e^et of fix-site-open-exchange, ρ_ḡ' = a_ḡ'^{-1} cancels inside T, and naturality of b_p' and c_j gives Ex^{c,p}C_s = C_tν(Ex^{c,e}). A_{E,n} is finite. Step 6: thm-cbc-finite-level-proetale applies with square typing (P,B,Q,W,a,b) and the supplied c. Step 7 is genuinely elementary. Overlaps but no duplicate: relative-product-input-domains covers Steps 1-2 only; lem-sf-bc-compact-support-domain (unsplit) covers the exchange clause only; fix-lem-exchanges leaves the identification to its proof. Edge cases tested: empty schemes, g=id, n=1, non-regular A. Tool uses accepted; declaring thm-cbc there was redundant but harmless. The theorem stmt_dep thm-sf-comp-composition is inherited from the item's creation; flagged for stage 2."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeProductGeometricFactors",
+  "declaration": "WeilConjectures.RelativeProduct.relative_product_geometric_factors",
+  "declarations": [
+   "WeilConjectures.RelativeProduct.finiteRing",
+   "WeilConjectures.RelativeProduct.finiteCoefficient",
+   "WeilConjectures.RelativeProduct.D",
+   "WeilConjectures.RelativeProduct.ctf",
+   "WeilConjectures.RelativeProduct.boundedConstructible",
+   "WeilConjectures.RelativeProduct.external",
+   "WeilConjectures.RelativeProduct.origin",
+   "WeilConjectures.RelativeProduct.pullbackOrigin",
+   "WeilConjectures.RelativeProduct.sourceComparison",
+   "WeilConjectures.RelativeProduct.targetComparison",
+   "WeilConjectures.RelativeProduct.composition",
+   "WeilConjectures.RelativeProduct.relative_product_geometric_factors",
+   "WeilConjectures.RelativeProduct.relative_product_composition_exchange",
+   "WeilConjectures.RelativeProduct.exchange"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeProductGeometricFactors.lean",
+  "statement": "theorem relative_product_geometric_factors (P : PurityFiniteSetting.{u}) (B X Y : Scheme.{u}) (s : B ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (f : X ⟶ B) (g : Y ⟶ B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (K : D P X) (L : D P Y) (_hK : ctf P X K) (_hL : ctf P Y L) : (IsSeparated (f ≫ s) ∧ LocallyOfFiniteType (f ≫ s) ∧ QuasiCompact (f ≫ s)) ∧ (IsSeparated (g ≫ s) ∧ LocallyOfFiniteType (g ≫ s) ∧ QuasiCompact (g ≫ s)) ∧ (IsSeparated (pullback.fst f g ≫ f ≫ s) ∧ LocallyOfFiniteType (pullback.fst f g ≫ f ≫ s) ∧ QuasiCompact (pullback.fst f g ≫ f ≫ s)) ∧ (IsSeparated (pullback.fst f g) ∧ LocallyOfFiniteType (pullback.fst f g) ∧ QuasiCompact (pullback.fst f g)) ∧ (IsSeparated (pullback.snd f g) ∧ LocallyOfFiniteType (pullback.snd f g) ∧ QuasiCompact (pullback.snd f g)) ∧ (IsSeparated (pullback.fst f g ≫ f) ∧ LocallyOfFiniteType (pullback.fst f g ≫ f) ∧ QuasiCompact (pullback.fst f g ≫ f)) ∧ boundedConstructible P X K ∧ boundedConstructible P (pullback f g) (external P f g K L) ∧ (∃ Kp : _root_.DerivedCategory.Plus (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)), Kp.obj = K ∧ Nonempty (FixedEtaleOriginWitness X P.Coefficient Kp)) ∧ (∃ Hp : _root_.DerivedCategory.Plus (Sheaf (ProEt.topology (pullback f g)) (ModuleCat.{u + 1} P.Coefficient)), Hp.obj = external P f g K L ∧ Nonempty (FixedEtaleOriginWitness (pullback f g) P.Coefficient Hp))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair L at 4edd7db3bcab: preserve the Q14 def-exchange-projection record and use its recorded compactificationExchangeFromData with actual finite operations. Cite existing definition nodes for the transport paths, witnessed exchange, and canonical compactification comparison. The mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66cf91300",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 4edd7db3bcab; both findings repaired. (1) H13: def-exchange-projection and the other 6 original stmt_deps are byte-identical to live; E = recorded SuppliedExchangeProjection.compactificationExchangeFromData with actual j_!, Lp^*/Rp_* adjunctions, Lg^*/Lg'^*/Lq^*, theta = leftDerivedUpperStarSquareIso of the proper square, beta = leftDerivedOpenImmersionLowerShriekBaseChangeIso.symm, no supplied map. (2) New existing:true def nodes def-pur-compact-exchange-witness-transport (compactExchangeTransport Comparison/Source/Target/AtWitness; statement matches Lean, Ex = def-cbc-exchange-map record, no invertibility) and def-pur-origin-compactification-comparison (common-refinement EtaleOriginIso, previously unowned) are cited in stmt_deps; their deps exist live and statements are verbatim. All item clauses re-verified (geometry, bounded constructibility, witnesses, normalized exchange identity, witness/compactification independence with correct directions, inverse tensor maps, originComposition alpha); item statement verbatim; sorry-only; docstrings OK; edge cases and universes OK. No compile (no file changed); worker compiled clean in 38.1 s and the dry run was OK. Advisory: uncited owners of intrinsicFiniteTorsionConstructible, sfIntrinsicDerivedEquivalence and fixed-scalar rightDerivedLowerShriekOfCompactification; IsIso of alpha components is automatic."
+ }
+}

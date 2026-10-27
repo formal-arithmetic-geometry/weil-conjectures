@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-finite-open-presentation-coefficients",
+ "kind": "statement",
+ "title": "Finite open presentation compatible with adjacent coefficient restriction",
+ "statement": "Fix a prime l, a finite extension E/Q_l, an open immersion j:X→Z and section-normalized operations o [lem-sf-integral-open-reduction-comparison]. Let e be any ordinary open coefficient comparison whose extension summands preserve sections [lem-sf-compact-support-proper-image-tower]. There exists a family of natural isomorphisms ι_n from the ordinary slice finite extension to intrinsic extension by zero [def-weil-extension-by-zero]. They commute with e.ordinary and the specified sfOpenRestriction coefficient square [lem-sf-compact-support-restriction-of-scalars], after the canonical equality of normalizedDVRModuleRes at n≤n+1 with sfCompactSupportFiniteRestriction. The commuting equation is SfFiniteOpenPresentationCompatible. This is an underived statement on all module sheaves, with no completed complex, proper map or tower isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, with Stacks Project, sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI, 03DJ), and sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E); coefficient reductions use Definition 3.5.2 and Stacks 06YY."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportTowerPresentation",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite coefficient presentation and specified quotient transitions; Finite open presentation compatible with adjacent coefficient restriction.",
+   "via": [
+    "lem-sf-compact-support-slice-intrinsic-towers",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero for sheaves of modules commutes with scalar restriction and comparison of equivalent sites",
+   "results": "8 hits. ContinuousLinearMap.restrictScalars_zero, PresheafOfModules.restrictScalarsObj, LinearMap.restrictScalars_zero, AlgebraicGeometry.RingedSpace.res_zero, AlgebraicGeometry.Scheme.Modules.map_smul, PresheafOfModules.restrictScalars, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, SheafOfModules.restrictScalars",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "12 hits. CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image commutes with coefficient restriction and composition; naturality of the normalized K-injective comparison",
+   "results": "8 hits. CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteExtension.*(Iso|intrinsic)|sfCompactSupportTower.*presentation|towerIsoOfSteps",
+   "results": "0 hits. ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-compact-support-proper-image-tower",
+  "def-weil-extension-by-zero",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-integral-compact-support-tower"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient use the section-normalized right restriction comparison. Compose the slice adjunction with the finite transport adjunction, transport its right adjoint along the chosen comparison, and apply left-adjoint uniqueness. This explicitly constructs the family of left comparisons.",
+   "uses": [
+    "lem-sf-finite-open-restriction-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove finiteExtension_hom_ext: the module sheafification adjunction reduces equality of maps from finite extension to equality from the direct-sum presheaf. The equality of the concrete forward transport gives an isomorphism on every section; its inverse shows that the finiteExtensionSection generators cover all direct-sum summands. DirectSum.induction_on completes presheaf equality.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the desired adjacent square on a generator. sfFiniteOpenCoefficient_generator computes its intrinsic side. The equation e.sections identifies the ordinary side with the lower generator; scalar restriction does not change the underlying section map. Apply finiteExtension_hom_ext at each module, then natural-transformation and isomorphism extensionality. This is a full Lean assembly from the two finer obligations.",
+   "uses": [
+    "lem-sf-finite-open-coefficient-generators",
+    "lem-sf-compact-support-proper-image-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-open-restriction-presentation",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-finite-open-coefficient-generators",
+  "lem-sf-compact-support-proper-image-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma extension-by-zero (03DI), its direct-sum construction and adjunction unit; extension-by-zero-exact (03DJ). Localization and constant coefficients: Stacks 098K and 00YV. F7: adjunction uniqueness, direct-sum/sheafification extensionality and the normalized coefficient generator calculation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfFiniteOpenPresentation",
+  "file": "lean/Sheaf/Paper/SfFiniteOpenPresentation.lean",
+  "declaration": "WeilConjectures.sfFiniteOpenPresentation",
+  "declarations": [
+   "WeilConjectures.SfFiniteOpenPresentationCompatible",
+   "WeilConjectures.sfFiniteOpenPresentation"
+  ],
+  "statement": "theorem sfFiniteOpenPresentation\n    (e : CompactSupportProperImageTower.OpenData l E j o) :\n    ∃ ι : ∀ n : ℕ, IntegralOpenReduction.finiteExtension l E j o n ≅\n        sfIntrinsicExtensionByZero j (Padic.coefficientExtensionRing l E (n + 1)),\n      SfFiniteOpenPresentationCompatible l E j o e ι",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T222755-L-694270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5c0c0",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261027T021322-L-2756951",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly and two new sorry statements against nodes lem-sf-finite-open-{presentation-coefficients,restriction-presentation,coefficient-generators}; moved restriction decls vs clone; direct importer SfSupportTransitionPresentation compiled against delivered set"
+ }
+}

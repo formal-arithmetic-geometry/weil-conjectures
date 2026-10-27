@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-graph-proper-precomposition-unit",
+ "kind": "statement",
+ "title": "Proper-first compact-support tower normalized in one compactification",
+ "statement": "Let A be a finite commutative ring, q:W to V proper and v:V to Y separated quasi-compact etale, between Noetherian schemes. Let f=q followed by v, with compactifications of v and f, and let c be any compactification of f [def-weil-compactifications-refinements]. Suppose tau:q_* followed by sum extension v_! [def-weil-pbc-etale-sum-extension] to c.i_! followed by c.g_* is a natural transformation whose composite with the compactification inclusion into f_* equals the canonical v_! to v_* map [def-weil-pbc-etale-shriek-to-star-map] on q_* followed by the ordinary direct-image compositor. Then the chosen proper-first compact-support compositor, transported by the chosen proper and graph comparisons [def-pur-graph-chosen-proper-comparison, def-pur-graph-chosen-etale-comparison] and then from the chosen compactification to c [lem-amb-unbounded-compact-support-comparisons, lem-asd-compact-support-graph-derived-isomorphism], satisfies the canonical right-derived unit equation: the source unit followed by that word equals Qh of degreewise tau followed by the unit for D(c.i_!) followed by R(c.g_*). There is only one proper/etale pair and one comparison compactification; no second factorization or Cartesian square is assumed. The exact unit factors are the recorded Lean statement [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, construction in the first paragraph of the proof; Tags 0F7I and 0F7J, transport between compactifications and proper/open tower. Graph extension: etale-cohomology.tex Tag 0F4L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [
+  {
+   "text": "Expand the proper-first compositor by its every-tower equation, using a compactification d of v and a compactification e of q followed by d.i. Expand the inverse graph comparison for v by its homotopy normalization. On a K-injective J, q_*J is K-injective, so these expansions identify the proper/open resolution map of Tag 0F7B.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "def-pur-graph-chosen-proper-comparison",
+    "def-pur-graph-chosen-etale-comparison",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section-preserving sheaf composition identifies this map with the common proper-support subsheaf. The stated normalization of tau and monicity of the compactification inclusion identify its sheaf map with tau. Transport the calculation to c by the graph refinement equation, normalized refinement equation and common-refinement cocycle.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-asd-compact-support-graph-coherence",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of right-derived units identifies the resulting map on K-injectives with degreewise tau followed by the unit for c.g. Map an arbitrary complex to a K-injective resolution. Naturality of the two transformations gives equality after the target map of that resolution, which is invertible since the target factors through Qh. Cancel it. Identity factors and zero objects use the same equations.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-pur-graph-proper-precomposition-unit-component"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-weil-pbc-derived-categories",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-coherence",
+  "def-weil-compactifications-refinements",
+  "lem-pur-graph-proper-precomposition-unit-component"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I, 0F7J; proper-first half of lem-pur-graph-proper-support-unit.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor composition with exact functors determined by unit on injective complexes",
+   "results": "Eight hits, including mapDerivedCategoryFactorsh and generic derived natural transformations. No proper-first compactification normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing unit APIs; no geometric replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor",
+   "results": "No hit; the endpoint does not know this project declaration. Local source reads find the canonical right-derived unit and composition APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use local project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport.*composition|rightDerivedFunctor.*unit",
+   "results": "Seven Mathlib hits for general right-derived units. Local project searches found properSupportSheafComposition, graph normalization, proper postcomposition and exactCompactificationUnit_tower; the last requires both sheaf functors exact, which does not cover q_*.",
+   "date": "2026-10-27",
+   "verdict": "Proper-first normalization with nonexact q_* remains a separate geometric step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperSupportUnit",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-graph-proper-support-unit",
+   "place": "Steps 2 and 3, restricted to the proper-first path and a single compactification of its composite."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperPrecompositionUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_proper_precomposition_unit",
+  "statement": "theorem graph_proper_precomposition_unit\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {W V Y : Scheme.{u}}\n    [IsNoetherian W] [IsNoetherian V] [IsNoetherian Y]\n    (q : W ⟶ V) [IsProper q]\n    (v : V ⟶ Y) [Etale v] [IsSeparated v] [QuasiCompact v]\n    [HasCompactification v] [HasCompactification (q ≫ v)]\n    {f : W ⟶ Y} (hf : f = q ≫ v) [HasCompactification f]\n    (c : Compactification f)\n    (τ : lowerStar (ModuleCat.{u + 1} A) q ⋙\n        etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (hτ : ∀ F : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A),\n      τ.app F ≫ (compactificationSheafToDirectImage A c).app F =\n        etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) v\n            ((lowerStar (ModuleCat.{u + 1} A) q).obj F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) q v f hf).hom.app F) :\n    Functor.rightDerivedFunctorCompMapDerivedCategoryUnit\n        (lowerStar (ModuleCat.{u + 1} A) q)\n        (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance) ≫\n      Functor.whiskerLeft DerivedCategory.Qh\n        (Functor.isoWhiskerRight (graphChosenProperComparison A q).symm\n            (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≪≫\n          Functor.isoWhiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q)\n            (graphChosenEtaleComparison A v).symm ≪≫\n          unboundedEtaleLowerShriekCompIso A q v ≪≫\n          unboundedEtaleLowerShriekCongr A hf.symm ≪≫\n          (rightDerivedLowerShriekIso A c).symm).hom =\n      Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (.up ℤ)) DerivedCategory.Qh ≫\n        Functor.mapDerivedCategoryCompRightDerivedFunctorUnit\n          (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)\n          (lowerStar (ModuleCat.{u + 1} A) c.g)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094341-L-217201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T123543-L-2319658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-diagonal-etale-cartesian-centre-span",
+ "kind": "statement",
+ "title": "A Cartesian-centre span for an etale diagonal map",
+ "statement": "For separated quasi-compact finite-type smooth g:X→Y and h:U→Y of dimension d over a Noetherian U, and etale e:U→X with e≫g=h, the self-product diagonal pair of h and the base change along e of the diagonal pair of g admit a common etale section neighbourhood. Both centre squares are Cartesian and the right ambient map equals the left ambient map followed by the explicitly defined sourceLift. The pairs and the sourceLift are the actual scheme constructions, not chosen comparison data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone comparison commutes with etale maps of smooth diagonals",
+   "results": "Eight generic etale hits, including IsEtale.of_comp; no endpoint comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the project section restriction and actual Rees constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of smooth section invariants under etale restriction and the zero fibre of deformation to the normal cone",
+   "results": "Eight unrelated smooth manifold section hits; no algebraic section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use project section restriction coherence and Rees maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id_assoc",
+   "results": "The Mathlib categorical cancellation lemma is available.",
+   "date": "2026-10-27",
+   "verdict": "Use categorical cancellation to combine the endpoint squares."
+  },
+  {
+   "tool": "grep",
+   "query": "dncInvariance",
+   "results": "No Mathlib hits. Project rg finds SectionRestriction.coherence, the ordinary restriction composition law, and Rees composition.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these declarations; no exact endpoint identification exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalEtaleInverseDeformation",
+  "date": "2026-10-27",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3",
+   "via": [
+    "lem-pur-diagonal-etale-inverse-deformation-square",
+    "lem-pur-diagonal-etale-dnc-dualizing-square",
+    "lem-pur-diagonal-dnc-etale-naturality-twist-square",
+    "lem-pur-diagonal-dnc-etale-naturality",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "stmt_deps": [
+  "def-pur-diagonal-etale-source-transport",
+  "def-pur-section-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Remove the off-diagonal sheets by chartGeometry. The diagonal factors through the resulting open and the centre square for the composite to the target self-product is Cartesian.",
+   "uses": [
+    "lem-pur-chart-normal-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put the smooth projection and section on this open. Noetherianity makes its inclusion quasi-compact. Cancel the Cartesian base-change centre square to obtain the right centre square; the sourceLift equations give the remaining fields.",
+   "uses": [
+    "def-pur-diagonal-etale-source-transport",
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-chart-normal-differential",
+  "def-pur-diagonal-etale-source-transport",
+  "def-pur-section-restriction-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalEtaleFactorization",
+  "file": "lean/Sheaf/Paper/DiagonalEtaleFactorization.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.centreSpan_nonempty",
+  "statement": "theorem centreSpan_nonempty {U X Y : Scheme.{u}} [IsNoetherian U]\n    (d : ℕ) (g : X ⟶ Y) [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    [SmoothOfRelativeDimension d g]\n    (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [SmoothOfRelativeDimension d h] (e : U ⟶ X) [Etale e] (w : e ≫ g = h) :\n    Nonempty (CentreSpan d g h e w)",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.diagonalPair",
+   "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.basePair",
+   "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.baseSquare",
+   "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.CentreSpan",
+   "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.centreSpan_nonempty"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T034804-L-3686799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T034804-L-3686799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

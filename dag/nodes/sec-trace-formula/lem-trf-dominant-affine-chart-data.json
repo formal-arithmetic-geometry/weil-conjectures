@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-dominant-affine-chart-data",
+ "kind": "statement",
+ "title": "Dominant finite-type affine charts with compatible function-field maps",
+ "statement": "Let $f:X\\to S$ be a morphism of integral schemes [def-pc-integral-scheme], dominant in the sense that $f(X)$ is dense in $S$, and locally of finite type [def-weil-finite-type-morphism]. Suppose $S$ is locally Noetherian [pqf-def-locnoeth]. For every $x\\in X$, with $s=f(x)$, there exist nonempty affine open neighbourhoods $s\\in U\\subseteq S$ and $x\\in V\\subseteq X$ with $f(V)\\subseteq U$ [def-weil-affine-spectrum], such that $A=\\Gamma(U,\\mathcal O_S)$ is a Noetherian domain [def-weil-pbc-noetherian-ring], $B=\\Gamma(V,\\mathcal O_X)$ is a domain and a finite type $A$-algebra [def-weil-pbc-finite-type-algebra], and the ring map $\\varphi:A\\to B$ induced by $f$ is injective. One can choose $U$ from any prescribed affine covering of $S$ by Noetherian coordinate rings, and then choose $V$ inside $f^{-1}(U)$.\n\nWrite $\\eta_S,\\eta_X$ for the generic points [def-sc-generic-point] and $R(S)=\\mathcal O_{S,\\eta_S}$, $R(X)=\\mathcal O_{X,\\eta_X}$ [def-weil-pbc-module-stalk]. Then $\\eta_S\\in U$, $\\eta_X\\in V$, their primes in $A,B$ are $(0)$, and $f(\\eta_X)=\\eta_S$. The generic germ maps $g_S:A\\to R(S)$ and $g_X:B\\to R(X)$ identify $R(S)$ and $R(X)$ with the fraction fields $\\operatorname{Frac}(A)$ and $\\operatorname{Frac}(B)$, namely fields of fractions with nonzero denominators. If $f_\\eta^\\sharp:R(S)\\to R(X)$ is the map on generic stalks, these identifications satisfy\n$$f_\\eta^\\sharp(g_S(a)/g_S(b))=g_X(\\varphi(a))/g_X(\\varphi(b))\\quad(a,b\\in A,\\ b\\ne0).$$\nIn particular $f_\\eta^\\sharp$ is the fraction-field embedding extending $\\varphi$, rather than an unspecified field embedding.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JU (lemma-dimension-formula), affine reduction: the chart-selection and generic-point argument in the former step 1 of lem-trf-local-dimension-formula; Tag 0CC1 (lemma-dominant-between-integral), (1), (2), (4) and proof. Blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Choose a member $U$ of the prescribed affine covering of $S$ containing $s$. Such a covering exists by [pqf-def-locnoeth]; its coordinate ring $A$ is Noetherian by the condition on the prescribed covering. For this particular affine $U$, the definition [def-weil-finite-type-morphism] gives an affine open covering of $f^{-1}(U)$ by spectra of finite type $A$-algebras. Choose a member $V$ containing $x$ and put $B=\\Gamma(V,\\mathcal O_X)$. Both opens are nonempty because they contain the specified points. The definition [def-pc-integral-scheme] makes $A$ and $B$ domains. The structural map of the chosen $A$-algebra $B$ is precisely the restriction of the section pullback of $f$, denoted $\\varphi$. This proves the chart-selection clauses without changing the prescribed covering.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (lemma-locally-finite-type-characterize), (1)--(4), applied over the chosen affine; Tag 02JU (lemma-dimension-formula), affine reduction"
+   }
+  },
+  {
+   "text": "For either pair $(T,W)=(S,U)$ or $(X,V)$, integrality implies irreducibility by [def-pc-integral-scheme]. By [def-weil-irreducible-components], the nonempty open $W$ is dense: otherwise the two proper closed sets $\\overline W$ and $T\\setminus W$ would cover $T$. By [lem-weil-pbc-spec-domain-stalks-function-field] (2), the point $(0)$ is generic in the affine domain spectrum $W$. Its closure in $T$ therefore contains $W$ and hence all of $T$, so it is a generic point as defined in [def-sc-generic-point]. Every generic point of $T$ belongs to $W$, since otherwise its closure would lie in the proper closed set $T\\setminus W$. Its prime $\\mathfrak p$ in $W$ must be zero: the closure $V(\\mathfrak p)$ is all of $\\operatorname{Spec}\\Gamma(W,\\mathcal O_T)$, so it contains the prime $(0)$ and $\\mathfrak p\\subseteq(0)$. Thus the generic point is unique and the points $\\eta_S,\\eta_X$ belong to $U,V$ with primes $(0)$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1 (lemma-dominant-between-integral), proof: generic points correspond to zero primes; Properties Tag 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "For an open $W\\subseteq T$ and $t\\in W$, restriction identifies $\\mathcal O_{T,t}$ with $\\mathcal O_{W,t}$ and preserves germs of sections on $W$. Indeed, in the germ description of [def-weil-pbc-module-stalk], replace a representative $(N,a)$ by $(N\\cap W,a|_{N\\cap W})$. Conversely a neighbourhood in $W$ is open in $T$, so its representative already defines a germ on $T$. The equality criterion for germs makes these maps inverse and shows that they preserve addition and multiplication. To check the morphism comparison, let $f(V)\\subseteq U$, $t\\in V$, and represent an input germ by $a\\in\\mathcal O_S(N)$ with $f(t)\\in N\\subseteq U$. The original stalk map sends it to the germ of $f^\\sharp_N(a)$ on $f^{-1}(N)$. Restricting this section to $V\\cap f^{-1}(N)$ gives exactly the pullback under $f|_V:V\\to U$, by the restriction compatibility in [def-weil-locally-ringed-space-morphism]. Thus the restricted and original stalk maps agree under the open-stalk identifications, on every germ.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IJ (definition-scheme), open subschemes; stalks as germs in Sheaves Tag 0078"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-domain-stalks-function-field] (2) to the domains $A$ and $B$ and their zero primes from Step 2. Its fraction-field identifications use the germ maps from global sections. Step 3 consequently identifies $R(S)=\\mathcal O_{S,\\eta_S}$ and $R(X)=\\mathcal O_{X,\\eta_X}$, with exactly the maps $g_S$ and $g_X$ in the statement, as fields of fractions of $A$ and $B$. In particular the germ maps are injective, all nonzero denominators become invertible, and each element of either generic stalk is a quotient of two such germs.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), (1), (6), at the zero prime; Morphisms Tag 01RV (lemma-integral-scheme-rational-functions), integral case"
+   }
+  },
+  {
+   "text": "Continuity of $f$ gives $f(X)\\subseteq\\overline{\\{f(\\eta_X)\\}}$: the inverse image of any closed set containing $f(\\eta_X)$ is closed and contains $\\eta_X$, hence contains $X$. Dominance then gives $S=\\overline{f(X)}\\subseteq\\overline{\\{f(\\eta_X)\\}}$. Thus $f(\\eta_X)$ is generic in $S$ in the sense of [def-sc-generic-point], and uniqueness proved in Step 2 gives $f(\\eta_X)=\\eta_S$. Here continuity is part of the underlying map of a scheme morphism [def-weil-locally-ringed-space-morphism]; no openness or surjectivity of $f$ is used.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1 (lemma-dominant-between-integral), (1) implies (2), with the elementary closure argument written out"
+   }
+  },
+  {
+   "text": "The affine restriction $V\\to U$ is $\\operatorname{Spec}\\varphi$ by [def-weil-affine-spectrum]. For $Q=(0)\\subset B$, [lem-weil-pbc-spec-map-stalk-localization] says that its image prime is $\\varphi^{-1}(Q)$. By Steps 2 and 5 this image is $(0)\\subset A$. Hence $\\ker\\varphi=\\varphi^{-1}((0))=(0)$ and $\\varphi$ is injective. The same cited statement gives the map $\\varphi_0:A_{(0)}\\to B_{(0)}$, $a/b\\mapsto\\varphi(a)/\\varphi(b)$, as the actual affine stalk map, with its commuting germ square. Let $i_A:A_{(0)}\\xrightarrow{\\sim}R(S)$ and $i_B:B_{(0)}\\xrightarrow{\\sim}R(X)$ be the identifications of Steps 3 and 4, so $i_A(a/1)=g_S(a)$ and $i_B(c/1)=g_X(c)$. The representative calculation of Step 3 identifies the original stalk map with the affine one, giving $f_\\eta^\\sharp\\circ i_A=i_B\\circ\\varphi_0$. Evaluating at $a/1$ proves $f_\\eta^\\sharp(g_S(a))=g_X(\\varphi(a))$ for every $a\\in A$. Thus the germ square remains the square for the original morphism after both open-stalk identifications.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1 (lemma-dominant-between-integral), (2) implies (4) and proof; Schemes Tags 01HY (lemma-morphism-into-affine-where-point-goes), 01I1 (lemma-morphism-into-affine)"
+   }
+  },
+  {
+   "text": "For clarity, the commuting germ square of Step 6 reads $f_\\eta^\\sharp(g_S(a))=g_X(\\varphi(a))$ for every $a\\in A$. If $b\\ne0$, injectivity of $\\varphi$ and $g_X$ gives $g_X(\\varphi(b))\\ne0$. Since $f_\\eta^\\sharp$ is a unital ring map between the fields of Step 4, applying it to the equation $g_S(b)g_S(b)^{-1}=1$ shows that it preserves this inverse. Therefore $f_\\eta^\\sharp(g_S(a)/g_S(b))=g_X(\\varphi(a))/g_X(\\varphi(b))$. Every element of $R(S)$ has this form by Step 4, so this formula uniquely determines the map extending $\\varphi$. It is an embedding: if a nonzero field element mapped to zero, multiplying by the image of its inverse would give $1=0$ in the field $R(X)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), localization construction; elementary field calculation after the germ square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0CC1 (lemma-dominant-between-integral), proof of (1)--(4), with chart selection from 01T2 and the explicit germ/localization construction of Schemes 01HV, 01HY and 01I1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "injective.*(app|algebraMap)|[Ii]sDominant|functionFieldMap",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"grep\", \"query\": \"injective.*(app|algebraMap)|[Ii]sDominant|functionFieldMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"6e82e45c55817801\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dominant morphism integral schemes affine coordinate rings injective fraction fields",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"leansearch\", \"query\": \"dominant morphism integral schemes affine coordinate rings injective fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\"], \"digest\": \"4879c05f8c0c876d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\"], \"digest\": \"c58ff7f8198a0afa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dominant morphism of integral schemes, any nonempty affine chart over an affine open gives an injective coordinate ring map, with compatible maps of fraction fields and generic stalks",
+   "results": "{\"t\": \"2026-10-22T05:56:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a dominant morphism of integral schemes, any nonempty affine chart over an affine open gives an injective coordinate ring map, with compatible maps of fraction fields and generic stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.specTargetImageFactorization_app_injective\"], \"digest\": \"d6f9eedb3527d930\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dominant.*inject|inject.*dominant|genericPoint.*[Dd]ominant|[Dd]ominant.*genericPoint|germToFunctionField.*(app|natur)",
+   "results": "{\"t\": \"2026-10-22T05:56:41Z\", \"tool\": \"grep\", \"query\": \"dominant.*inject|inject.*dominant|genericPoint.*[Dd]ominant|[Dd]ominant.*genericPoint|germToFunctionField.*(app|natur)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\"], \"digest\": \"d93c4e04f6c072c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dominance sends the generic point to the generic point and identifies the induced function field embedding with fractions of the map on arbitrary affine neighbourhoods",
+   "results": "{\"t\": \"2026-10-22T05:57:00Z\", \"tool\": \"leanfinder\", \"query\": \"Dominance sends the generic point to the generic point and identifies the induced function field embedding with fractions of the map on arbitrary affine neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.instFieldCarrierFunctionField\"], \"digest\": \"b25df62d928560d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isDominant|germToFunctionField|isFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:43:51Z\", \"tool\": \"grep\", \"query\": \"isDominant|germToFunctionField|isFractionRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\"], \"digest\": \"c53e8decce7af764\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant morphisms integral schemes finite type affine neighbourhoods function field map compatible with fraction fields",
+   "results": "{\"t\": \"2026-10-22T06:43:51Z\", \"tool\": \"leansearch\", \"query\": \"Dominant morphisms integral schemes finite type affine neighbourhoods function field map compatible with fraction fields\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsDominant",
+   "results": "{\"t\": \"2026-10-22T06:43:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsDominant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant locally finite type morphism of integral schemes admits affine neighbourhoods at every point with Noetherian domain base and injective finite type coordinate algebra map, and generic stalk maps equal the induced fraction field maps",
+   "results": "{\"t\": \"2026-10-22T06:44:03Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant locally finite type morphism of integral schemes admits affine neighbourhoods at every point with Noetherian domain base and injective finite type coordinate algebra map, and generic stalk maps equal the induced fraction field maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\"], \"digest\": \"b8b445c47688c3b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoint|stalkMap|FractionRing",
+   "results": "{\"t\": \"2026-10-22T06:44:15Z\", \"tool\": \"grep\", \"query\": \"genericPoint|stalkMap|FractionRing\", \"sub\": \"AlgebraicGeometry/Morphisms/FiniteType.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"102\", \"103\", \"104\"], \"digest\": \"9bbe1ceb580d9749\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral schemes a dominant morphism sends the generic point to the generic point, and its map of generic stalks is the extension of the injective ring map on finite type affine charts to fraction fields",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"leanfinder\", \"query\": \"For integral schemes a dominant morphism sends the generic point to the generic point, and its map of generic stalks is the extension of the injective ring map on finite type affine charts to fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"9e7f5c404ca17fa6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-dimension-formula",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 02JU (lemma-dimension-formula), affine reduction: the chart-selection and generic-point argument in the former step 1 of lem-trf-local-dimension-formula; Tag 0CC1 (lemma-dominant-between-integral), (1), (2), (4) and proof. Blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound.",
+   "via": [
+    "lem-trf-local-dimension-formula",
+    "lem-trf-closed-dominant-dimension",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-dominant-affine-chart-data",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied seven proof steps using existing DAG nodes only. Chose finite type affine charts over the prescribed Noetherian affine covering, constructed and identified zero-prime generic points, wrote the restriction-on-germs comparison, proved the dominant generic-point image by closure, and applied the existing Spec stalk-localization theorem to obtain injectivity and the actual fraction formula. Searched the full DAG, blueprint and project Lean; no exact full attachment or full Mathlib match was found. Repair of the returned head 7eaa58d0d69: compared the retained split with the current unsplit DAG item, re-read every cited statement, and made the open-restriction/stalk-map comparison explicit on section representatives in Step 3. The delivery tool rebuilds the commit on the current DAG baseline; the statement and cited nodes are unchanged. Rechecked against the latest returned head 1e45b8620b3 (2026-10-22 11:42 UTC) and the current unsplit item: all fourteen citation quotes remain valid. Step 6 now specifies the two localization-to-global-stalk identifications and their commuting equation, explicitly deriving the global germ square after restriction. No statement, dependency, route or search question changed.",
+  "blueprint": "Realizes the chart-selection and generic-point part of the affine dimension reduction under lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound, through lem-trf-local-dimension-formula. No unit route or unit record changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-ae4bd5705",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-ae4bd5705 (reviewer sub-agent of L); spot-checked: This is the third delivery. Heads 7eaa58d0d69e and 1e45b8620b3c were both PASSed and then refused at landing because the side completion had not been promoted to the live DAG. clones/live and side-live still have the item unsplit with an empty proof, and there is no repair note. Against 1e45b862 the statement, stmt_deps, proof_deps, source and blueprint are byte-identical; only Step 6 and split_report changed. The new Step 6 is a correct expansion: it names i_A and i_B, states f_eta^sharp∘i_A = i_B∘φ_0 and evaluates it at a/1. There are 0 new nodes. I read all seven steps and every cited statement, and the proof_deps equal the union of the step uses. Step 1: the chart choice uses pqf-def-locnoeth (prescribed Noetherian cover) and def-weil-finite-type-morphism (a cover of f^{-1}(U) for every affine U), with no quasi-compactness. Step 2: a nonempty open of an irreducible space is dense, (0) is generic by spec-domain lemma (2), and the generic point is unique. Step 3: the open-stalk identification is checked on germ representatives. Step 4: the R-algebra fraction-field identification. Step 5: continuity plus density gives f(η_X)=η_S. Step 6: spec-map-stalk-localization at Q=(0) gives φ^{-1}(0)=(0), so φ is injective, and the germ square transports to f_η^sharp through Step 3. Step 7: elementary field algebra. The source matches Stacks 0CC1 (morphisms.tex l.1408 and its proof). Small cases checked: a map of field spectra, an open immersion Spec A_g → Spec A, and the non-dominant closed point Spec k → Spec k[t], where φ fails to be injective. Duplicate search for 0CC1 and dominant/generic/injective finds only narrower nodes: the curve-specific a1 nodes and the finite-morphism pushforward-stalk node. There is no SGA citation. Maintainer note: this is a repeated promotion-refusal loop; the item is mathematically ready and needs promotion, not re-delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DominantAffineChartData",
+  "declaration": "AlgebraicGeometry.dominant_affine_chart_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/DominantAffineChartData.lean",
+  "statement": "theorem dominant_affine_chart_data {X S : Scheme.{u}} [IsIntegral X] [IsIntegral S] (f : X ⟶ S) (hf : DenseRange f) [LocallyOfFiniteType f] [IsLocallyNoetherian S] {I : Type v} (U : I → S.Opens) (hU : ∀ i : I, IsAffineOpen (U i)) (hN : ∀ i : I, IsNoetherianRing Γ(S, U i)) (hcover : iSup U = ⊤) (x : X) : ∃ (i : I) (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U i), f x ∈ U i ∧ x ∈ V ∧ Set.Nonempty (U i : Set S) ∧ Set.Nonempty (V : Set X) ∧ IsNoetherianRing Γ(S, U i) ∧ IsDomain Γ(S, U i) ∧ IsDomain Γ(X, V) ∧ (f.appLE (U i) V e).hom.FiniteType ∧ Function.Injective (f.appLE (U i) V e) ∧ ∃ (hηS : genericPoint S ∈ U i) (hηX : genericPoint X ∈ V) (hη : f (genericPoint X) = genericPoint S), ((hU i).primeIdealOf ⟨genericPoint S, hηS⟩).asIdeal = ⊥ ∧ (hV.primeIdealOf ⟨genericPoint X, hηX⟩).asIdeal = ⊥ ∧ @IsFractionRing Γ(S, U i) _ S.functionField _ (S.presheaf.germ (U i) (genericPoint S) hηS).hom.toAlgebra ∧ @IsFractionRing Γ(X, V) _ X.functionField _ (X.presheaf.germ V (genericPoint X) hηX).hom.toAlgebra ∧ (∀ (a b : Γ(S, U i)), b ≠ 0 → ((S.presheaf.stalkCongr (.of_eq hη)).inv ≫ f.stalkMap (genericPoint X)) (S.presheaf.germ (U i) (genericPoint S) hηS a / S.presheaf.germ (U i) (genericPoint S) hηS b) = X.presheaf.germ V (genericPoint X) hηX (f.appLE (U i) V e a) / X.presheaf.germ V (genericPoint X) hηX (f.appLE (U i) V e b)) ∧ Function.Injective ((S.presheaf.stalkCongr (.of_eq hη)).inv ≫ f.stalkMap (genericPoint X)) ∧ (∀ ψ : S.functionField →+* X.functionField, (∀ a : Γ(S, U i), ψ (S.presheaf.germ (U i) (genericPoint S) hηS a) = X.presheaf.germ V (genericPoint X) hηX (f.appLE (U i) V e a)) → ψ = ((S.presheaf.stalkCongr (.of_eq hη)).inv ≫ f.stalkMap (genericPoint X)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-824e0fd25",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Single theorem AlgebraicGeometry.dominant_affine_chart_data with one sorry; node change is the lean field only (diffed against side-live; Q16 S1 split landed and promoted c7cb12cd); lean.statement verbatim in file. Hypotheses: IsIntegral X,S; DenseRange f (= IsDominant content); LocallyOfFiniteType f; IsLocallyNoetherian S; arbitrary prescribed affine Noetherian cover (I : Type v, iSup U = ⊤). Conclusions cover all node clauses: chart with f x ∈ U i, x ∈ V, V ≤ f⁻¹U, nonempty; Noetherian domain A, domain B; the same f.appLE is finite type, injective and used in the quotient formula; η_S ∈ U, η_X ∈ V, primeIdealOf = ⊥, f η_X = η_S; IsFractionRing with explicitly pinned germ algebras; stalkCongr.inv ≫ stalkMap direction checked (Stalks.lean:408); b≠0 quotient formula; injectivity; uniqueness among ring homs extending φ. Edge cases (empty scheme/index, non-surjective dominant, non-dominant counterexample, Frobenius) fine. No hollow definitions, docstrings with Stacks tags, blueprint tag and 7 proof steps; deps all recorded and untouched; Worker report and Second reading by Q31 sections present. No compile run (no file changed). No findings."
+ }
+}

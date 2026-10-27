@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-sheaf-product-fixed-adjunction",
+ "kind": "statement",
+ "title": "Fixed-subsheaf adjunctions and their normalized product comparison",
+ "statement": "Fix compatible universes [def-weil-size-convention]. Let $(C,J)$ be a small site with finite limits [def-weil-pbc-sites-and-cohomology], let $R$ be a sheaf of commutative unital rings, and let $K,L$ be sheaves of groups on $C$, with values in the coefficient universe. For a group sheaf $P$, write $\\mathcal E_P(R)$ for sheaves of $R$-modules [def-weil-sheaf-of-modules-category] with restriction-natural operations $P(U)\\times M(U)\\to M(U)$ satisfying the group-action laws and linearity in $M(U)$, and equivariant linear maps, with sectionwise addition. Thus $\\mathcal E_1(R)=\\operatorname{Mod}(R)$. Inflation along a group-sheaf homomorphism means precomposition of actions, with the same modules and maps.\n\nFor $P=K,L,K\\times L$, the submodules\n$$M^P(U)=\\{m\\in M(U):\\ \\forall f:V\\to U,\\ \\forall p\\in P(V),\\ p\\cdot f^*m=f^*m\\}$$\nform an $R$-module subsheaf, naturally in $M$. For $M\\in\\mathcal E_{K\\times L}(R)$ define $M^L$ by the same condition with $p=(1,l)$. It is a subsheaf carrying the restriction-natural residual $K$-action $k\\cdot m=(k,1)\\cdot m$. Restricting equivariant maps to these subsheaves defines additive functors $\\Gamma_P:\\mathcal E_P(R)\\to\\operatorname{Mod}(R)$ and $\\Gamma_L^K:\\mathcal E_{K\\times L}(R)\\to\\mathcal E_K(R)$, with their sectionwise injective inclusions $i_P$ and $j_L$ into the underlying modules.\n\nLet $T_P:\\operatorname{Mod}(R)\\to\\mathcal E_P(R)$ give the trivial action and let $I:\\mathcal E_K(R)\\to\\mathcal E_{K\\times L}(R)$ inflate along the first projection. There are natural additive adjunctions $T_P\\dashv\\Gamma_P$ and $I\\dashv\\Gamma_L^K$ whose forward transposes keep every section map and restrict its codomain to the displayed invariant submodule, and whose inverse transposes compose with $i_P$, respectively $j_L$. In particular the adjunction for $I$ is $K$-equivariant for the specified residual action.\n\nThere is the identity comparison $T_{K\\times L}=I\\circ T_K$ of the trivial-action functors. Under the preceding normalized adjunctions, its conjugate right-adjoint comparison\n$$c_M:M^{K\\times L}\\xrightarrow{\\sim}(M^L)^K$$\nis the identity on the underlying sections and is natural in $M$. Precisely, if $i_K:(M^L)^K\\hookrightarrow M^L$ and $j_L:M^L\\hookrightarrow M$ are the invariant inclusions, then $j_L\\circ i_K\\circ c_M=i_{K\\times L}$ on every object of $C$; both sides include the same fixed section into $M$. All these statements hold when either group sheaf is trivial and when $R$ is the zero ring sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 5–7: fixed-subsheaf gluing, residual action, normalized adjunction bijections and the product mate identity. Exact external reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-equivariant-module-sheaves",
+  "def-sfb-internal-action-inflation"
+ ],
+ "proof": [
+  {
+   "text": "For any group sheaf $P$ acting on $M$, denote the displayed subset by $F_P(U)$. It contains zero and is closed under addition, negatives and multiplication by $a\\in R(U)$: for example, for $f:V\\to U$ and $p\\in P(V)$, $p\\cdot f^*(am)=f^*a\\,(p\\cdot f^*m)=f^*a\\,f^*m$. Here the first equality uses semilinearity of restrictions and linearity of the action. If $m\\in F_P(U)$ and $g:W\\to U$, then for every $h:V\\to W$ the required equality for $g^*m$ is exactly the equality for $m$ along $gh$. Thus these submodules and the restrictions of $M$ form a module subpresheaf. Apply this also to the restricted $L$-action $(1,l)$ on a product-action module.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV, definition-sheaf-modules; direct verification for the invariant-section formula in the item"
+   }
+  },
+  {
+   "text": "Construct the family of fixed submodules as a module subpresheaf, and view it as a subfunctor of the underlying type-valued module presheaf. Apply Mathlib Subfunctor.isSheaf_iff: it suffices that locally fixed sections are fixed. For a locally fixed section m over U, a test arrow f:V→U and p∈P(V), pull back the covering sieve on which m is fixed. Along every arrow g:W→V in that pullback, the restriction of m is fixed. Naturality of the action and the fixedness condition tested at the identity of W show that g restricts p·f*m and f*m to the same section. Separatedness of M gives their equality. This works for arbitrary Grothendieck topologies, including empty covering sieves, without choosing fibre products or using sheafness of P.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VH, definition-site (pullback of coverings); Tag 00VM, definition-sheaf-sets and its empty-covering remark; direct application to invariant sections"
+   }
+  },
+  {
+   "text": "For $m\\in M^L(U)$ and $k\\in K(U)$, take $f:V\\to U$ and $l\\in L(V)$. The two product factors commute, so\n$$(1,l)\\cdot f^*((k,1)\\cdot m)=(1,l)\\cdot((f^*k,1)\\cdot f^*m)=(f^*k,1)\\cdot((1,l)\\cdot f^*m)=(f^*k,1)\\cdot f^*m.$$\nThus $(k,1)\\cdot m$ lies in $M^L(U)$. Its restriction-naturality, linearity, unit law and multiplication law are restrictions of those in $M$. The inclusion $j_L$ is $K$-equivariant by this formula. For an equivariant module map $a:M\\to N$ and any fixed section $m$, one has $p\\cdot f^*a(m)=a(p\\cdot f^*m)=a(f^*m)$; hence $a$ restricts to the invariant subsheaves. Restricting identities and composites gives identities and composites; restricting $a+b$ gives the sum of the restrictions. This constructs the asserted additive functors $\\Gamma_P$ and $\\Gamma_L^K$, the latter with residual $K$-equivariant maps, and proves naturality of their inclusions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent-formulated categorical input to paragraph (3): direct commuting-factor and section-map calculations"
+   }
+  },
+  {
+   "text": "Let $A\\in\\operatorname{Mod}(R)$ and $M\\in\\mathcal E_P(R)$. For an equivariant $a:T_PA\\to M$ define $\\Phi(a)_U(x)=a_U(x)$ with codomain $M^P(U)$. It lands there because for every $f:V\\to U$ and $p\\in P(V)$,\n$$p\\cdot f^*a_U(x)=p\\cdot a_V(f^*x)=a_V(p\\cdot f^*x)=a_V(f^*x).$$\nThe last equality uses the trivial action on $A$. The resulting component maps are linear and commute with restrictions because $a$ does. Conversely $b:A\\to M^P$ gives $i_Pb:T_PA\\to M$: equivariance follows by taking the identity restriction in the defining fixed-section condition. These operations are inverse, since neither changes any section value. For maps $u:A'\\to A$ and equivariant $v:M\\to M'$, both $\\Phi(aT_Pu)=\\Phi(a)u$ and $\\Phi(va)=\\Gamma_P(v)\\Phi(a)$ hold on each section. They are additive, since $\\Phi(a+a')$ and $\\Phi(a)+\\Phi(a')$ have section value $a_U(x)+a'_U(x)$. The natural-bijection adjunction theorem therefore gives the specified additive adjunction $T_P\\dashv\\Gamma_P$, whose counit is precisely $i_P$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit formulas; direct construction of its Hom bijections for the item"
+   }
+  },
+  {
+   "text": "For $A\\in\\mathcal E_K(R)$ and $M\\in\\mathcal E_{K\\times L}(R)$, an equivariant $a:IA\\to M$ has image in $M^L$: for $x\\in A(U)$, $f:V\\to U$ and $l\\in L(V)$, $(1,l)\\cdot f^*a(x)=a((1,l)\\cdot f^*x)=a(f^*x)$. Define $\\Psi(a)$ by restricting its codomain. It is $K$-equivariant since $a((k,1)\\cdot x)=(k,1)\\cdot a(x)$ and the source action is $k\\cdot x$. Conversely a $K$-equivariant $b:A\\to M^L$ gives $j_Lb:IA\\to M$. For $(k,l)\\in(K\\times L)(U)$ its equivariance is the equality\n$$(k,l)\\cdot b(x)=(k,1)\\cdot((1,l)\\cdot b(x))=(k,1)\\cdot b(x)=b(k\\cdot x).$$\nThe maps are inverse on every section. Precomposition, postcomposition and sums preserve their formulas exactly as for $\\Phi$ in step 4. The natural-bijection adjunction theorem gives $I\\dashv\\Gamma_L^K$ with counit $j_L$ and the required additive Hom bijections. Trivial action and inflation are themselves additive functors: on maps they keep each component linear map, its identities, composites and sums.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint; direct residual-action Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "The direct trivial-action functor and first-projection inflation after trivial action are definitionally equal on objects, morphisms and actions. Use reflexivity for their equality. The separate construction of an isomorphism from direct to successive invariant subsheaves is unnecessary: the actual conjugate isomorphism supplied by conjugateIsoEquiv already has its desired normalization by the next step.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent-formulated categorical input to paragraph (3): identity inflation and the factorization $(k,l)=(k,1)(1,l)$"
+   }
+  },
+  {
+   "text": "Instantiate Mathlib conjugateEquiv_counit with the direct fixed adjunction, the composite of the K-fixed and second-factor fixed adjunctions, and eqToIso of the inverse equality of trivial-action functors. Evaluate this equivariant morphism equality on each section x. By the explicit Hom-equivalence constructions, the direct counit is the direct invariant inclusion and the composite counit is the successive invariant inclusions. The equality comparison is an identity and both trivial action and inflation retain all underlying maps. The evaluated equation is definitionally the required section formula for conjugateIsoEquiv. Thus the displayed actual conjugate includes every section as its original value; no additional comparison or arbitrary witness is used. Trivial groups, zero coefficient rings and empty covers require no extra assumptions.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; Mathlib CategoryTheory/Adjunction/Mates.lean, conjugateEquiv; direct evaluation of the normalized composite unit and direct counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex; Mathlib/CategoryTheory/Sites/Subsheaf.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "Stacks 00VM and 0037; Subfunctor.isSheaf_iff, Adjunction.mkOfHomEquiv, conjugateEquiv_counit. X9 constructs actual fixed submodules and both normalized adjunctions, then evaluates the conjugate-counit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|conjugateIsoEquiv|invariantsFunctor",
+   "results": "{\"t\": \"2026-10-22T06:01:36Z\", \"tool\": \"grep\", \"query\": \"invariantsAdjunction|conjugateIsoEquiv|invariantsFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Small.lean\", \"Mathlib/Condensed/Light/Small.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"9d124ffea08b72c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal group invariants of module sheaves are right adjoint to trivial action and product invariants agree with iterated invariants",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leansearch\", \"query\": \"Internal group invariants of module sheaves are right adjoint to trivial action and product invariants agree with iterated invariants\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariantsAdjunction\"",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariantsAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_counit_app\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction_homEquiv_symm_apply_hom\", \"Rep.invariantsAdjunction_unit_app\", \"Rep.coinvariantsAdjunction\", \"Rep.coinvariantsAdjunction_counit_app\", \"Rep.coinvariantsAdjunction_homEquiv_symm_apply_hom\"], \"digest\": \"a227f5952fa1e750\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of groups G and H acting linearly on a module sheaf, sections fixed after every base change form a sheaf, right adjoint to trivial inflation, with normalized identity between product and successive invariants",
+   "results": "{\"t\": \"2026-10-22T06:01:51Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of groups G and H acting linearly on a module sheaf, sections fixed after every base change form a sheaf, right adjoint to trivial inflation, with normalized identity between product and successive invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafCompHaus\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instAbelian\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.ofSheafLightProfinite\", \"Rep.instIsRightAdjointModuleCatInvariantsFunctor\"], \"digest\": \"9add5edf9634ff69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|def invariantsFunctor",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"grep\", \"query\": \"invariantsAdjunction|def invariantsFunctor\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\"], \"digest\": \"549a4f283e528822\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.conjugateIsoEquiv\"",
+   "results": "{\"t\": \"2026-10-22T06:02:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.conjugateIsoEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\"], \"digest\": \"0c85ee07eb89de61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves, the adjunction from trivial group action to fixed subsheaf uses codomain restriction, and its conjugate for a product of group sheaves is the identity on sections",
+   "results": "{\"t\": \"2026-10-22T06:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"For module sheaves, the adjunction from trivial group action to fixed subsheaf uses codomain restriction, and its conjugate for a product of group sheaves is the identity on sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_unit_app\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction_homEquiv_symm_apply_hom\", \"Rep.indResAdjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"Rep.instIsRightAdjointModuleCatInvariantsFunctor\"], \"digest\": \"010a2d859ffa2894\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.invariantsAdjunction is for an abstract group over one ordinary ring; conjugateIsoEquiv supplies the general mate operation, not the base-change fixed subsheaf or its normalized product comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|fixedSubsheaf|invariantSubsheaf",
+   "results": "{\"t\": \"2026-10-22T06:56:38Z\", \"tool\": \"grep\", \"query\": \"invariantsAdjunction|fixedSubsheaf|invariantSubsheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\"], \"digest\": \"a641dfb3d1f422ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group representations, topological-module invariants and ringed-site pullback adjunctions do not state internal group-sheaf fixed sections or the normalized product comparison; Rep.invariantsAdjunction inspected at Invariants.lean:276–290"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariants of a sheaf of modules under an internal group sheaf action are right adjoint to the trivial action functor",
+   "results": "{\"t\": \"2026-10-22T06:56:38Z\", \"tool\": \"leansearch\", \"query\": \"Invariants of a sheaf of modules under an internal group sheaf action are right adjoint to the trivial action functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instIsRightAdjointModuleCatInvariantsFunctor\", \"Rep.invariantsFunctor\", \"Rep.invariantsAdjunction\", \"Rep.coinvariantsAdjunction\", \"ContinuousCohomology.invariants\", \"Rep.invariantsAdjunction_unit_app\", \"SheafOfModules.PullbackConstruction.adjunction\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\"], \"digest\": \"8ba017773d023156\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group representations, topological-module invariants and ringed-site pullback adjunctions do not state internal group-sheaf fixed sections or the normalized product comparison; Rep.invariantsAdjunction inspected at Invariants.lean:276–290"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariantsAdjunction\"",
+   "results": "{\"t\": \"2026-10-22T06:56:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariantsAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_counit_app\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction_homEquiv_symm_apply_hom\", \"Rep.invariantsAdjunction_unit_app\", \"Rep.coinvariantsAdjunction\", \"Rep.coinvariantsAdjunction_counit_app\", \"Rep.coinvariantsAdjunction_homEquiv_symm_apply_hom\"], \"digest\": \"a227f5952fa1e750\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group representations, topological-module invariants and ringed-site pullback adjunctions do not state internal group-sheaf fixed sections or the normalized product comparison; Rep.invariantsAdjunction inspected at Invariants.lean:276–290"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules with an internal group sheaf action have fixed subsheaves right adjoint to trivial action; product fixed points are iterated fixed points",
+   "results": "{\"t\": \"2026-10-22T06:56:49Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of modules with an internal group sheaf action have fixed subsheaves right adjoint to trivial action; product fixed points are iterated fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instIsRightAdjointModuleCatInvariantsFunctor\", \"Rep.invariantsAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"LightCondensed.freeForgetAdjunction\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"0e7361c14e48ad68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group representations, topological-module invariants and ringed-site pullback adjunctions do not state internal group-sheaf fixed sections or the normalized product comparison; Rep.invariantsAdjunction inspected at Invariants.lean:276–290"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant|fixed",
+   "results": "{\"t\": \"2026-10-22T06:56:58Z\", \"tool\": \"grep\", \"query\": \"invariant|fixed\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no invariant or fixed-subsheaf declaration in sheaf-of-modules directory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ringed sites, taking internal fixed sections after arbitrary pullback is right adjoint to inflation of equivariant sheaves, compatibly with product groups and composite adjunctions",
+   "results": "{\"t\": \"2026-10-22T06:57:10Z\", \"tool\": \"leanfinder\", \"query\": \"For ringed sites, taking internal fixed sections after arbitrary pullback is right adjoint to inflation of equivariant sheaves, compatibly with product groups and composite adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.instIsRightAdjointSheafΓ\", \"SheafOfModules.instIsRightAdjointPushforward\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\"], \"digest\": \"b0484417f8309b24\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group representations, topological-module invariants and ringed-site pullback adjunctions do not state internal group-sheaf fixed sections or the normalized product comparison; Rep.invariantsAdjunction inspected at Invariants.lean:276–290"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-product-action-inflation",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Returned proof steps 5–7: fixed-subsheaf gluing, residual action, normalized adjunction bijections and the product mate identity.",
+   "via": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-sheaf-product-fixed-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the fixed subsheaves by pullback-cover gluing, proved residual K-actions and additive functoriality, constructed both normalized Hom bijections, and evaluated the composite-adjunction conjugate on sections. Preserved the statement and all upstream metadata. No new nodes: the only categorical existence, composition and conjugation facts used are existing Mathlib leaves.",
+  "blueprint": "The item has blueprint.from.node=null in the live DAG; its preserved via chain leads to the direct-images paragraph (3). Steps 1–3 realize the fixed-subsheaf and residual-action input, steps 4–5 the normalized adjunctions, steps 6–7 the product mate identity requested in its source place."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-cabbd367f",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-cabbd367f (reviewer sub-agent of L); spot-checked: I read the whole delivery and it is sound: a first split in 7 steps with no new nodes, and the statement, stmt_deps, source, blueprint and created fields are unchanged from live. The live and side-live item is unsplit, there is no repair note, and the item is not on the drop list. It was created by Q53's re-split of lem-sfb-condensed-product-action-inflation, so the 3000-character rule does not apply. All five cited statements were read: the sites node (1)(iii) gives the pulled-back coverings and the equalizer condition; SheafOfModules; mkOfHomEquiv with counit Psi^-1(id); Adjunction.comp with counit eps2∘H(eps1); conjugateEquiv. Stacks 00VH, 00VM, 0037 and 0DV0 are correct (0DV0 read at categories.tex 3576). Step 2 handles arbitrary f:V→U and p in P(V) through the pulled-back covering, and separatedness gives invariance; empty coverings are fine. Steps 3, 5 and 6 rely on (1,l) and (k,1) commuting and on (k,l)=(k,1)(1,l), and step 5 really uses the residual action. Steps 4 and 5 have counits i_P and j_L. Step 7 runs in the right direction, tau=id: I T_K → T_{K×L} giving R_1=Γ_{K×L} → R_2=Γ_KΓ_L^K, its value is the identity on sections, and it equals d by injectivity. Tested on K or L trivial, a one-object site, the zero ring and empty coverings. Overlap with lem-sfb-condensed-action-injective-infrastructure, an unsplit special case, is not a duplicate. Maintainer note: the proof is 6269 characters with no new nodes, so a later batch-5 sweep might issue a re-split note for it; step 1 calls 03CV 'definition-sheaf-modules' but 03CV is a section label (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafProductFixedAdjunction",
+  "declaration": "CategoryTheory.InternalActionSite.sheaf_product_fixed_adjunction",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.productGroup_laws",
+   "CategoryTheory.InternalActionSite.productGroup",
+   "CategoryTheory.InternalActionSite.inflateFirst",
+   "CategoryTheory.InternalActionSite.FixedSection",
+   "CategoryTheory.InternalActionSite.SheafFixedAdjunction",
+   "CategoryTheory.InternalActionSite.SheafProductFixedAdjunction",
+   "CategoryTheory.InternalActionSite.sheaf_product_fixed_adjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafProductFixedAdjunction.lean",
+  "statement": "theorem sheaf_product_fixed_adjunction [HasFiniteLimits C] (J₀ : Precoverage C) (hJ : J₀.IsSiteForCoverings) (S : Sheaf J₀.toGrothendieck CommRingCat.{u}) (K L : Sheaf J₀.toGrothendieck GrpCat.{u}) : ∃ (dK : SheafFixedAdjunction (baseRing J₀.toGrothendieck S) K.obj) (dL : SheafFixedAdjunction (baseRing J₀.toGrothendieck S) L.obj) (dKL : SheafFixedAdjunction (baseRing J₀.toGrothendieck S) (productGroup K.obj L.obj)) (dLK : SheafProductFixedAdjunction (baseRing J₀.toGrothendieck S) K.obj L.obj) (h : trivialSheafAction (baseRing J₀.toGrothendieck S) (productGroup K.obj L.obj) = trivialSheafAction (baseRing J₀.toGrothendieck S) K.obj ⋙ inflateFirst (baseRing J₀.toGrothendieck S) K.obj L.obj), ∀ (M : EquivariantSheaf (K := productGroup K.obj L.obj) J₀.toGrothendieck (baseRing J₀.toGrothendieck S)) (X : Cᵒᵖ) (x : (dKL.functor.obj M).val.obj X), ((dK.inclusion.app (dLK.functor.obj M) ≫ dLK.inclusion.app M).val.app X) (((((conjugateIsoEquiv dKL.adjunction (dK.adjunction.comp dLK.adjunction)) (eqToIso h.symm)).hom.app M).val.app X) x) = (dKL.inclusion.app M).val.app X x",
+  "branch": "sheaf-dag",
+  "by": "Q107",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing InternalActionSite equivariant categories and underlying module sheaves. Fixed-subsheaf and residual-action specifications contain injective inclusions, exact fixed-section images, additive normalized Hom bijections and the sectionwise identity for the actual conjugateIsoEquiv. No object is chosen from the existence statement. productGroup_laws is the named postponed proof of the actual pair-valued presheaf functor laws. Repair of dd75aeabcbd4: the action-category definitions are now owned by def-sfb-equivariant-module-sheaves through an existing:true record; stmt_deps cites that definition rather than the unrelated presentation theorem. Maintenance extraction (2026-10-24): the action definitions are owned by def-sfb-internal-action-inflation in InternalActionInflation, publicly re-exported here. All remaining declaration signatures and bodies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57c132ea5",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery repairs both findings of the dd75aeab RETURN. (H2) The new definition node def-sfb-equivariant-module-sheaves (existing:true, Sheaf.CategoryTheory.InternalActionSitePresentation) owns LinearAction, EquivariantPresheaf, Equivariant, homGroup, the category, preadditive and forget instances, EquivariantSheaf, inclusion, forgetSheaf and baseRing. All were read in the side-live source (lines 185-318) as real data, the node statement matches them, the EquivariantSheaf signature is verbatim, and every declaration the item uses is listed. No other node owns them. The item's stmt_deps cite this node instead of the presentation theorem, and ringedSiteModules is covered by def-weil-sheaf-of-modules-category. (H11) The Second reading by Q107 section is a real 12-point reading. The item Lean is byte-identical to the returned delivery except for the module docstring. The node's statement, source and proof are unchanged from side-live, and lean.statement is verbatim. The item was re-checked: FixedSection after every restriction, pinned injective inclusion and exact image, normalized transposes, residual (k,1) action, functor equality h, and conjugate orientation j_L∘i_K∘c=i_{K×L}; trivial-group, zero-ring and empty-cover cases are covered. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261023T132416-L-2267717",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

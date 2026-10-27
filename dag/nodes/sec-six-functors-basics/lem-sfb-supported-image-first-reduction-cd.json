@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-supported-image-first-reduction-cd",
+ "kind": "statement",
+ "title": "First derived coefficient reduction of a supported integral image",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let X be an affine scheme and ell a prime. Use the small etale and pro-etale sites in the common indexing universe [def-pc-scheme,def-weil-pbc-etale-site,def-weil-pbc-proetale-site,def-weil-size-convention]. Let d be a natural number and assume every affine etale V -> X has torsion etale cohomological dimension at most d for all locally torsion abelian sheaves [def-sc-etale-torsion-cd,def-weil-etale-morphism]. Let a finite qcqs open-closed tree on X and a path from S to X encode a support chain [def-sfb-qcqs-open-closed-tree]. Its functor J is the successive open extensions by zero and closed direct images [def-sfb-module-open-lower-shriek,def-sfb-module-lower-star], with identity for an empty path. Let v:U -> X be pro-affine-etale [sk-def-pe-morphisms]. Fix any finite extension E/Q_ell and its norm-topological ring of integers B with uniformizer pi [def-weil-l-adic-coefficient-extension]. For the pulled-back internal B-module sheaves [sk-def-sfb-pulled-back-coefficients,sk-def-sfb-module-objects], let f:L -> M be any morphism between modules which separately have finite constant scalar local models [sk-def-sfb-constructible]. Set N=v^*J(image f), using the actual abelian image and the module inverse image [def-sfb-module-upper-star]. Form K_1=Res((N[0]) tensor^L B_U/pi) with the ordinary uncompleted derived reduction and scalar restriction [sk-def-pe-derived-completion,def-weil-abstract-derived-category]. Then H^q R(condensedModuleSections B U)(K_1)=0 for every integer q>d [def-sfb-condensed-module-sections]. This asserts only the first coefficient power. It makes no Noetherian, completeness, classicality, nonempty or nonzero assumption.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8, condition (8.1), proof of Lemma 8.6, torsion paragraph; Bhatt--Scholze Corollary 5.1.6 and Stacks Tag 099W, proetale.tex lemma-compare-cohomology, for classical inputs only. Agent torsion-reduction obligation; the arbitrary supported image reduction assertion without a classicality hypothesis is WANTED, not asserted to follow from that comparison alone. This node isolates only the first coefficient power; it retains the parent global obligation rather than asserting the refuted unrestricted relative-comparison lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-weil-etale-morphism",
+  "def-sc-etale-torsion-cd",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-pe-morphisms",
+  "def-sfb-module-upper-star",
+  "def-weil-abstract-derived-category",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-condensed-module-sections",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "The principal coefficient resolution computes the actual first derived reduction as [N -- pi --> N] in degrees -1,0. The internal/section-module equivalence and scalar-forgetting Leray comparison identify the requested derived sections with ordinary abelian pro-etale hypercohomology of this literal complex. No image after reduction is substituted.",
+   "uses": [
+    "lem-pe-principal-reduction-cone-calculus",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-ringed-site-unbounded-leray-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The small affine etale presentation of U and the assumed bounds on its stages give torsion etale cohomological dimension at most d on U by the affine-limit bound. This part does not require descent of f to a stage.",
+   "uses": [
+    "sk-def-pe-morphisms",
+    "lem-sc-cd-affine-limit",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "UNRESOLVED GEOMETRIC STEP: show the global bound above d for this first-power two-term complex. The former route asserted R nu_* C in D^{<=0}, then used the torsion annihilator and truncation spectral sequence. The available local comparison theorem instead assumes quasi-compact locally Noetherian S; those hypotheses are absent here, and its old unrestricted form was refuted by Q09. Thus the old route is not a proof, even at the first power. This node retains only that first-power global obligation for re-review; it asserts no unrestricted relative nonpositivity and claims no counterexample to global vanishing.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The empty path uses identity support. For zero image or an empty scheme the complex and all section groups are zero. The coefficient ring is the given valuation ring, no arbitrary witness is chosen, and d=0 and E=Q_ell remain included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-torsion-cd",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-sc-cd-affine-limit",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-ringed-site-unbounded-leray-sections",
+  "sk-def-pe-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "First-power specialization of the existing global obligation. The local-to-global route remains unresolved after Q09; only the coefficient-power induction is implemented by this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived reduction of supported images of integral lisse sheaves vanishes above torsion etale cohomological dimension",
+   "results": "{\"t\": \"2026-10-25T14:48:20Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of derived reduction of supported images of integral lisse sheaves vanishes above torsion etale cohomological dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"CochainComplex.isZero_of_isGE\", \"CochainComplex.isZero_of_isLE\"], \"digest\": \"abea11a15ec84a5b\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching supported-integral-image estimate. Generic derived homology and t-structure lemmas do not give this first-power geometric bound."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*cohomological|cohomological.*torsion|isZero.*rightDerived",
+   "results": "{\"t\": \"2026-10-25T14:50:50Z\", \"tool\": \"grep\", \"query\": \"torsion.*cohomological|cohomological.*torsion|isZero.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"40e4f45cebbc571e\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching supported-integral-image estimate. Generic derived homology and t-structure lemmas do not give this first-power geometric bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": "{\"t\": \"2026-10-25T14:50:51Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"5b7ac447ee679c9d\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching supported-integral-image estimate. Generic derived homology and t-structure lemmas do not give this first-power geometric bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageTorsionReductionsCd",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: direct-sum preservation; the descendant affine heart-bound obligation. Repair of the scalar coefficient subargument: Torsion bound for supported finite images and actual integral image reductions. This estimate is not stated in the blueprint paragraph. First-power coefficient case of the descendant bound.",
+   "via": [
+    "lem-sfb-supported-image-torsion-reductions-cd",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedImageFirstReductionCd",
+  "file": "lean/Sheaf/Paper/SupportedImageFirstReductionCd.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_image_first_reduction_cohomology_vanishes",
+  "statement": "theorem supported_image_first_reduction_cohomology_vanishes\n    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsAffine X] (d : ℕ)\n    (_hcd : ∀ (V : Scheme.{u}) (v : V ⟶ X) [IsAffine V] [Etale v],\n      V.HasTorsionEtaleCohomologicalDimensionLE d)\n    {S : Scheme.{u}} (tree : QcqsOpenClosedTree X) (p : tree.Path S)\n    (U : Scheme.{u}) (v : U ⟶ X) (_hv : proAffineEtale v) :\n    ∀ (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n        (L M : AdicCompletion.Modules ℓ E S) (f : L ⟶ M),\n      HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S L →\n      HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S M →\n      ∀ (q : ℤ), (d : ℤ) < q →\n        IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj\n          ((condensedModuleSections (DerivedNakayama.integerRing ℓ E) U).rightDerivedFunctor.obj\n            ((AdicCompletion.restrict ℓ E U 0).obj\n              ((AdicCompletion.derivedReduction ℓ E U 0).obj\n                ((DerivedCategory.singleFunctor _ 0).obj\n                  ((CondensedRing.upperStar (DerivedNakayama.integerRing ℓ E) v).obj\n                    ((p.extension (DerivedNakayama.integerRing ℓ E)).obj (image f))))))))",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T164852-L-1115822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T164852-L-1115822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "lem-zl-sheet-return-exact-functor",
+ "kind": "statement",
+ "title": "Exact sheet-return equivalence with the specified Weil structure",
+ "statement": "Fix a finite-field datum D [def-weil-finite-field-fiber], an integer m≥1, a separated finite-type k₀-scheme X₀, a prime ℓ≠p and an algebraic closure Ω of Q_ℓ with the common-stage coefficients of [def-weil-algebraically-closed-coefficients]. In the actual common-stage constructible Weil hearts [def-weil-constructible-heart], [def-weil-weil-sheaf-complex], there exists a functor R from Weil sheaves on X₀×k₀ k_m regarded over k₀ to Weil sheaves on the same scheme over k_m, which is an equivalence and satisfies ConstantExtensionSheetSpec [def-zl-constant-extension-sheet-pullback-data]: its carrier is distinguished-sheet pullback and its Weil structure is exactly the ordered m-fold iterate with the specified compositors. No weight or local-operator assertion is part of this lemma.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-constant-extension-sheet-pullback-data",
+  "def-dl-a1-constant-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "The constructible-heart statement identifies the underlying category as abelian. Use the sheet-coordinate equivalence on constructible hearts, with $A_i=(H^ij_0)^*N$ and arrows $a_i$ as in the cited coordinate statement. Apply the cited cyclic-return equivalence with $\\mathcal C=\\operatorname{Sh}_c(X,\\Qlb)$ and the exact autoequivalence $P=Lg_X^*$. Its return is $(A_0,a_0\\cdots a_{m-1})$, precisely $(j_0^*N,\\phi)$ with the specified pullback compositors. On morphisms it is $u_0=j_0^*u$. Thus $R$ is a functor and an exact equivalence; in particular it identifies subobjects, quotients and finite filtrations in both directions. This uses the two cited statements, not the parent constant-extension equivalence (which depends on the present item).",
+   "uses": [
+    "lem-zl-constant-extension-sheet-heart-coordinates",
+    "lem-zl-cyclic-return-exact-equivalence",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "lem-zl-constant-extension-sheet-heart-coordinates",
+  "lem-zl-cyclic-return-exact-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence identifies subobjects and cokernels and transports finite filtrations with the same quotient properties",
+   "results": "CategoryTheory.IsFiltered.of_equivalence; CategoryTheory.CostructuredArrow.quotientEquiv; CategoryTheory.HasExactLimitsOfShape.of_codomain_equivalence; CategoryTheory.abelianOfEquivalence; CategoryTheory.HasExactColimitsOfShape.of_codomain_equivalence; CategoryTheory.Subobject.mapIso; CategoryTheory.Subobject.lowerEquivalence; CategoryTheory.IsFilteredOrEmpty.of_equivalence",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The return functor from cyclic tuples with isomorphic transitions to objects with an automorphism is an exact equivalence given by the ordered transition product",
+   "results": "instIsEquivalenceLightDiagram'LightDiagramToLightFunctor; SimplexCategory.SkeletalFunctor.isEquivalence; CategoryTheory.decomposedEquiv_functor; FintypeCat.uSwitchEquivalence; instIsEquivalenceLightProfiniteLightDiagramLightProfiniteToLightDiagram; AlgebraicTopology.DoldKan.Compatibility.τ₁; CategoryTheory.ComposableArrows.mkOfObjOfMapSucc_exists; CategoryTheory.ShortComplex.functorEquivalence_functor",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclic.*(return|tuple)|return.*(Weil|sheaf)",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionReturnLocalOperators",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: constant-extension interpretation of Weil filtrations; Exact sheet-return equivalence with the specified Weil structure",
+   "via": [
+    "lem-zl-constant-extension-return-local-operators",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionReturnExactFunctor",
+  "file": "lean/Sheaf/Paper/ConstantExtensionReturnExactFunctor.lean",
+  "declaration": "WeilConjectures.sheetReturnExactFunctor",
+  "declarations": [
+   "WeilConjectures.sheetReturnExactFunctor"
+  ],
+  "statement": "theorem sheetReturnExactFunctor : ∃ R : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω ⥤ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω, ConstantExtensionSheetSpec D m hm X₀ l hl Ω R ∧ R.IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 17 moved decls diffed verbatim vs clone item block (only blueprint tags + Prop proof); 3 new sorry statements read against item conjuncts/Deligne 1.1.10; new-node stmt_deps vs owners of Lean statement decls"
+ }
+}

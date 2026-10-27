@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-ringed-forget-tensor-coherence",
+ "kind": "lemma",
+ "title": "Structural coherence of a normalized ringed tensor comparison",
+ "statement": "Let two small ringed sites with independent universes, their module-sheaf categories, and their derived categories be as in [def-weil-size-convention, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let U be additive exact, preserving the products and K-injective complexes required to form its derived functor. Give U the coherent underived tensor and Hom comparisons of [def-sf-ringed-forget-tensor-transposition-data]. Fix closed tensor presentations, K-flat tensor representative models, and their signed structural coherence on both derived categories as in [def-coef-ringed-tensor-hom-model, lem-sf-ringed-derived-closed-symmetric-monoidal]. Suppose termwise U preserves flat-term K-flat complexes. GIVE a natural total-tensor chain isomorphism whose value on every coproduct summand is the specified underived tensor isomorphism, and GIVE a derived tensor natural isomorphism satisfying the representative square on every flat-term K-flat pair. Then this given derived isomorphism has unit, associator and symmetry coherence; its unit comparison is normalized by the image of the source unit-model isomorphism, the exact-functor localization factor, the single-complex comparison and the degree-zero image of the underived unit comparison, followed by the inverse target unit-model isomorphism. No existence or uniqueness of either given tensor isomorphism is asserted.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), with Tags 06YS, 06YU and 0G7D; structural coherence step 4 of lem-sf-ringed-forget-tensor-descent."
+ },
+ "proof": [
+  {
+   "text": "Construct ringedForgetTensorUnitIso as a composite of the image of the source unit model, the exact-functor factor, the single-complex comparison, the image of the underived unit isomorphism, and the inverse target unit model. All factors are actual isomorphisms. Cancellation of the last factor proves precisely the required unit-normalization equality.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-unit-representatives",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the three representative lemmas: associativity at triples of flat-term K-flat complexes, both unit squares at a single such complex for the constructed unit, and symmetry at a pair. These are separate local constraints; no representative lemma asserts coherence on arbitrary derived objects.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-associator-representatives",
+    "lem-sf-ringed-forget-tensor-unit-representatives",
+    "lem-sf-ringed-forget-tensor-symmetry-representatives"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every derived object X, resolve a complex preimage by a flat-term K-flat complex P and compose the localized resolving quasi-isomorphism with the localization preimage isomorphism. This gives Q(P) isomorphic to X. The given resolutions construct these representatives; no arbitrary data are chosen from an unproved existence statement.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport each of the four equations along the resolving isomorphisms. For associativity, form the two natural transformations from F applied to the left-associated tensor to the right-associated tensor of the F-images. Their naturality conjugates equality along the triple product of the resolving isomorphisms; cancel its image. For the unit equations cancel F applied to 1 tensor e or e tensor 1, and use naturality of mu and the unitors. For symmetry cancel F applied to e tensor e', and use naturality of mu and both braidings. Package the resulting equations and explicit unit in TensorCoherence.",
+   "uses": [
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT with 06YU; explicit unit construction and transport of the four independently stated representative constraints by naturality and K-flat resolutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison represented on flat K flat complexes preserves derived associators unitors and Koszul symmetry",
+   "results": "Eight hits, including HomologicalComplex.associator, HomologicalComplex.monoidalCategoryStruct, HomologicalComplex.leftUnitor'_inv_comm and HomologicalComplex.rightUnitor; no theorem transporting all fixed independent-universe derived model constraints.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"Iso\"",
+   "results": "Twelve graded-object comparison isomorphism hits, including CategoryTheory.GradedObject.mapBifunctorMapMapIso; none proves the derived coherence assertion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving coproducts commutes with total tensor complexes and induces a monoidal functor on derived categories",
+   "results": "Eight hits including Functor.mapDerivedCategoryFactors and HomologicalComplex.Monoidal.inducingFunctorData. The existing source mapBifunctorComparison API constructs the chain comparison but does not give coherence for the arbitrary fixed derived tensor models here.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Mm]onoidal|[Tt]ensor.*[Cc]oherence|[Mm]onoidal.*[Ss]quare",
+   "results": "Three hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:42 (open namespaces), and two MonoidalCoherence tensor_right tactic instances in Mathlib/Tactic/CategoryTheory/MonoidalComp.lean. None is the representative-normalized derived comparison theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorDescent",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Structural coherence step of the coherent tensor comparison by flat-term K-flat descent, in the internal-Hom/evaluation/transposition paragraph.",
+   "via": [
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedForgetTensorCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTensorCoherence.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_tensor_coherence",
+  "statement": "theorem ringed_forget_tensor_coherence\n    (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,\n      P.IsKFlatIndependentCoefficients →\n      (∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}\n        (R := R) (P.X p)) →\n      CochainComplex.IsKFlatIndependentCoefficients (R := R')\n        ((U.mapHomologicalComplex (.up ℤ)).obj P) ∧\n      ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{d, vd, max d vd s, max d vd s}\n        (R := R') (U.obj (P.X p)))\n    (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{s, d, vd} J' R')\n    (summand : ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n      (p q n : ℤ) (hpq : p + q = n),\n      U.map (tensorSummand.{c, v, r} J R P Q p q n hpq) ≫ (chain.hom.app (P, Q)).f n =\n        u.tensor.hom.app (P.X p, Q.X q) ≫\n          tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq)\n    (μ : SB.tensor ⋙ U.mapDerivedCategory ≅\n      (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor)\n    (hμ : RepresentativeModel.{c, v, r, d, vd, s, wb, wa}\n      J R J' R' U SB TB SA TA chain μ.hom) :\n    ∃ c : TensorCoherence SB.monoidal SA.monoidal βB βA U.mapDerivedCategory μ,\n      c.unit.hom ≫ cA.unitIso.hom =\n        U.mapDerivedCategory.map cB.unitIso.hom ≫\n          U.mapDerivedCategoryFactors.hom.app (ringedTensorUnitComplex.{c, v, r} J R) ≫\n          DerivedCategory.Q.map\n            ((HomologicalComplex.singleMapHomologicalComplex U (.up ℤ) 0).hom.app\n              (SheafOfModules.unit ((sheafCompose J\n                (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))) ≫\n          DerivedCategory.Q.map\n            ((HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).map (u.coherence.unit).hom)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "proof_deps": [
+  "lem-sf-ringed-forget-tensor-unit-representatives",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-ringed-forget-tensor-associator-representatives",
+  "lem-sf-ringed-forget-tensor-symmetry-representatives",
+  "lem-pc-kflat-resolution",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T195442-L-2956744",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T094340-L-217072",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

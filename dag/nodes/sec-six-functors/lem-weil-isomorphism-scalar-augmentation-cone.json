@@ -25,44 +25,59 @@
  ],
  "proof": [
   {
-   "text": "Fix a degree $i$. By the section formula for inverse image along an isomorphism in [lem-weil-proetale-isomorphism-inverse-image](1), sections of $G_EP^i$ can be written $y=g^{-1}p$ on the corresponding site object. The ring isomorphism $c_L$ of [def-weil-inverse-image-pullback-comparison] likewise writes a section of $S_X$ as $s=c_L(g^{-1}s_0)$. By the definition of sheaf tensor product as the sheafification of the sectionwise tensor product, it suffices to compare the two maps on these local pure tensors $y\\otimes s$: sectionwise tensors are finite sums of pure tensors, and equality of their sheafified maps follows from the universal property of sheafification. Use these notations in the following calculations, for every $m\\geq1$.",
+   "text": "For ordinary completed scalar extension, pure tensors generate after sheafification. Prove s tensor x = s times (1 tensor x) by linearity of sheafification and the canonical object transport. Naturality of the sheafification unit and canonical object transport shows that 1 tensor x commutes with restriction to any site object. Thus equality of completed-linear maps can be checked on the unit tensors.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-completed-tensor-section-properties"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK (section-tensor-product), sheafified sectionwise tensor product; agent reduction using lem-weil-proetale-isomorphism-inverse-image(1)."
+    "place": "Section 03EK (section-tensor-product); agent calculation of the normalized comparison."
    }
   },
   {
-   "text": "The shifted-product coordinate of $a^E_P$ is zero by its specified definition (b). After tensoring with $S_X$ this coordinate remains zero. The map $\\delta_P$ of [lem-weil-specified-pullback-comparison-alpha] applies $\\prod_m d_m$ separately to the two coordinates, so its shifted coordinate is still zero. The shifted coordinate of $a^L_Q\\circ b_P$ is also zero, since $a^L_Q$ has zero shifted coordinate on every input. This compares the entire shifted-product component, not just its projections in the derived category.",
+   "text": "For each level n, compare completed tensor(theta_E,n) followed by the normalized tower map with b followed by theta_L,n. On 1 tensor x, the defining theta formula is restriction of the finite pullback generator at the canonical comma arrow. Naturality moves the tower map through this restriction. CompletedFormula for b at scalar 1 and ScalarPullbackGeneratorFormula at a=b=s=1 give identical finite generators, since all coefficient ring maps preserve 1. Linearity and tensor generation from Step 1 give equality of these chain maps.",
    "uses": [
     "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-specified-pullback-comparison-alpha"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC (definition-derived-limit), fixed cone representative specified in def-weil-inverse-image-pullback-comparison(b); agent coordinate calculation."
-   }
-  },
-  {
-   "text": "For the left composite, the $m$-th unshifted coordinate of $(a^E_P\\otimes S_X)(y\\otimes s)$ is $((g^{-1}(p\\otimes1))\\otimes1)\\otimes s$. Substitute $\\bar a=1$ and $b=1$ in the stated formula for $d_m$. Since $\\iota_m$ preserves the unit, its image is exactly $$(g^{-1}(p\\otimes1))\\otimes\\pi^L_{X,m}(s)\\in D^L_m(Q).$$ Here the $p\\otimes1$ on the output is in $P\\otimes_{R_Y}B_{L,Y,m}$, identified with $Q\\otimes_{S_Y}B_{L,Y,m}$ by the identification explicitly stated in [lem-weil-specified-pullback-comparison-alpha]. The canonical tensor/product map is the map whose $m$-th projection tensors the $m$-th projection, so this is the $m$-th coordinate of the actual left cone map.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-specified-pullback-comparison-alpha"
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-scalar-pullback-strict-cone-naturality"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D6 (definition-pushforward), pullback tensor formula; Section 03EK (section-tensor-product); agent substitution in the specified d_m."
+    "place": "Section 03EK (section-tensor-product); agent calculation of the normalized comparison."
    }
   },
   {
-   "text": "For the right composite, the formula of [lem-weil-isomorphism-scalar-tensor-kflat-model] gives $b_P(y\\otimes s)=g^{-1}(p\\otimes s_0)$. The $m$-th unshifted coordinate after $a^L_Q$ is therefore $$(g^{-1}((p\\otimes s_0)\\otimes1))\\otimes1.$$ In $Q\\otimes_{S_Y}B_{L,Y,m}$ the tensor balancing relation sends $(p\\otimes s_0)\\otimes1$ to $p\\otimes\\pi^L_{Y,m}(s_0)$. Balancing in the finite module pullback then gives $$(g^{-1}(p\\otimes1))\\otimes c^g_{A_{L,m}}(g^{-1}(\\pi^L_{Y,m}(s_0)))=(g^{-1}(p\\otimes1))\\otimes\\pi^L_{X,m}(s).$$ The last equality is precisely $c^g_{A_{L,m}}g^{-1}(\\pi^L_{Y,m})=\\pi^L_{X,m}c_L$ from the structure-isomorphism clause of [def-weil-inverse-image-pullback-comparison]. Thus the right coordinate equals the left coordinate calculated above.",
+   "text": "The augmentation has nth first projection theta_n and zero second projection by mappingCocone.lift. The normalized cone isomorphism has the canonical tensor/product map in both coordinates; the strict tower map induces the diagonal product map on the Roos cone. Composing its first coordinate with the nth product projection therefore tensors the old nth projection and then applies the nth tower map. Its second coordinate is the tensor of the old second coordinate followed by the two product maps. These formulas follow by associativity, the stated cone-coordinate equations, and Pi.lift_π and Pi.map_π.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-scalar-pullback-strict-cone-naturality",
+    "def-sf-additive-roos-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); elementary coordinate computation in the fixed mapping cocone."
+   }
+  },
+  {
+   "text": "Compare the two composites degreewise. After each first product projection, Step 3 reduces the left composite to completed tensor(theta_E,n) followed by the nth tower map, and reduces the right composite to b followed by theta_L,n. They agree by Step 2. Both second coordinates vanish by Step 3, additivity of ordinary tensor, and zero_comp. Termwise product extensionality and mappingCocone.id_X determine each degree map from these two coordinates. HomologicalComplex.Hom.ext gives the strict chain-map equality.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); elementary product and mapping-cocone extensionality before localization."
+   }
+  },
+  {
+   "text": "For the displayed common section formula, first project the right composite: the augmentation projection is theta_L,n. Write its input as c_L(s0) times the unit tensor using Step 1. Completed-linearity of b and theta moves this scalar outside the composite. CompletedFormula at s0=1 identifies b of the unit tensor with the unit tensor over Y, giving exactly the displayed expression. The completed scalar action on the restricted finite pullback is already through its quotient projection, so no additional balancing or coefficient-square theorem is necessary.",
    "uses": [
     "lem-weil-isomorphism-scalar-tensor-kflat-model",
     "def-weil-inverse-image-pullback-comparison",
@@ -71,35 +86,25 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D6 (definition-pushforward), module pullback; Section 03EK (section-tensor-product), balancing and associativity; agent calculation using the specified coefficient-square identity."
-   }
-  },
-  {
-   "text": "The coordinate calculations hold for every local pure tensor in every degree, hence for all sections of $Z^i$ by additivity and sheafification as in Step 1. Maps into a product are determined by their component maps, and a map into the two-summand cone term is determined by both projections. Steps 2--4 therefore give equality of the degree-$i$ module maps into $A_L(Q)^i$ for every $i$. The maps in question are already chain maps by the stated constructions, and a morphism of complexes is its family of degree maps [def-weil-abstract-derived-category]. Consequently $\\delta_P\\circ(a^E_P\\otimes_{R_X}S_X)=a^L_Q\\circ b_P$ as actual chain maps, with the claimed common coordinates. No passage to localization is involved in this equality.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC (definition-derived-limit), product model; elementary product and direct-sum extensionality in the specified cone, before localization."
+    "place": "Section 03EK (section-tensor-product); agent calculation of the normalized comparison."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-inverse-image-pullback-comparison",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-specified-pullback-comparison-alpha",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
   "lem-weil-isomorphism-scalar-tensor-kflat-model",
-  "def-weil-abstract-derived-category"
+  "lem-weil-scalar-pullback-strict-cone-naturality",
+  "def-sf-additive-roos-map",
+  "def-weil-abstract-derived-category",
+  "lem-weil-completed-tensor-section-properties"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-  "place": "First cohomology-transport arrows; strict coefficient-compatibility calculation for the specified augmentations, using the explicit statements of the cited comparison nodes. Bhatt–Scholze 6.5.9(4) supplies context for completed pullback, not this identity."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and derived.tex Tag 08TC; R6 formal calculation using unit tensors, the specified strict cone data, and completed linearity. The statement, definitions, and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -227,5 +232,27 @@
   "group": "Q23",
   "result": "pass",
   "note": "Re-delivery after the H13 RETURN of 8d92b975fba3. Snapshot vs side-live: only the item node differs, in its lean field (live null). The alpha node's record is untouched and SpecifiedPullbackConeModel is removed. specifiedPullbackConeData/specifiedPullbackConeChain moved verbatim into the item module, with item source/blueprint docstrings, listed in lean.declarations, no name collision. They are the Classical.choice of the Nonempty data of scalarPullbackStrictConeNaturality, whose Subsingleton conjunct makes it unique; generator and coordinates fields pin d_m and both cone coordinates, so the choice is canonical and not hollow. Theorem statement byte-identical to the previous delivery (substance correct) and verbatim in the file; stmt_deps unchanged. Hypotheses no stronger than the node; conclusions: strict chain equality, zero shifted coordinate in every degree, n-th unshifted coordinate formula with m=n+1. Edge cases g=id, E=L, ramified, m=1, zero complex, empty scheme all covered. Advisory: delta is the strict-cone-naturality map in the completedOrdinaryScalarComplex model, not alpha's integralOrdinaryScalar scalarPullbackChain (same normalization); its owner node is not a stmt_dep; the alpha import may be unused. No compile per brief; no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261027T094507-L-234824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

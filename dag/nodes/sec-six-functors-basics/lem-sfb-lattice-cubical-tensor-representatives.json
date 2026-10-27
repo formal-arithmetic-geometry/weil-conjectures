@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-lattice-cubical-tensor-representatives",
+ "kind": "statement",
+ "title": "Cubical augmentation denominators and tensor representatives",
+ "statement": "Let $R$ be a commutative condensed ring on the coherent profinite site, $r\\geq0$, $J$ a normalized comparison between generalized-section and discrete $\\mathbf Z^r$ actions, $C$ a cubical model with the cell coproducts, boundary, translation and contraction of [lem-sfb-lattice-cubical-augmentation-evaluation], $K$ a finite subset-coordinate Koszul model [lem-sfb-discrete-lattice-koszul-resolution], and $B$ an equivariant unital $R$-algebra [lem-sfb-lattice-flat-twisted-chain-pairing]. Work in ordinary signed cochain tensors and derived localization [def-weil-abstract-derived-category]. Put $L=J(C.L)$, $X=tK(B)$ and $Z=B[0]$. Assume $B$ commutative and $B\\otimes_R-$ exact. For every normalized roof datum $F$ of [def-sfb-lattice-cubical-multiplication-data], the comparison satisfies $\\delta;b=a$, both $a$ and $b$ are quasi-isomorphisms, and its tensor-representative predicate holds. Thus the three ordinary tensor words are K-flat representatives and the canonical localization tensor comparison is invertible on all their pairs. Neither multiplication of the evaluation maps, nor equality of localized evaluation roofs, nor low-rank coefficient identities is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof."
+ },
+ "stmt_deps": [
+  "def-sfb-lattice-cubical-multiplication-data",
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "lem-sfb-lattice-cubical-augmentation-evaluation",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=tK_B\\otimes_R tK_B$, $Z=X\\otimes_R L$, $Y=(tK_B\\otimes_R L)\\otimes_R(tK_B\\otimes_R L)$ and $\\delta=\\tau(1\\otimes\\Delta):Z\\to Y$. The denominators are $a=1_X\\otimes\\varepsilon:Z\\to X$ and $b=(1\\otimes\\varepsilon)\\otimes(1\\otimes\\varepsilon):Y\\to X$, using unit identifications. The counit identity in step 1 gives $b\\delta=a$. The evaluation theorem gives that $a$ is a quasi-isomorphism. To check $b$, forget the action and write $e=s\\varepsilon$ and $dh+hd=1-e$ as supplied there, with $|h|=-1$ and $\\varepsilon s=1$. On $L\\otimes L$ put\n$$H(l\\otimes l')=h(l)\\otimes l'+(-1)^{|l|}e(l)\\otimes h(l').$$\nThe tensor differential gives $dH+Hd=(1-e)\\otimes1+e\\otimes(1-e)=1-e\\otimes e$. On $X\\otimes L\\otimes L$ use $\\widetilde H(x\\otimes w)=(-1)^{|x|}x\\otimes H(w)$; the same identity becomes $d\\widetilde H+\\widetilde Hd=1-1_X\\otimes(e\\otimes e)$. Thus $1_X\\otimes(\\varepsilon\\otimes\\varepsilon)$ has homotopy inverse $1_X\\otimes(s\\otimes s)$ after forgetting. Let $\\rho:X\\otimes L\\otimes L\\xrightarrow{\\sim}Y$ be the signed middle interchange used in $\\delta$. Then $b\\rho=1_X\\otimes(\\varepsilon\\otimes\\varepsilon)$: on surviving degree-zero cube components its interchange sign is $1$, and all other components are killed by augmentation. Hence $b$ has homotopy inverse $\\rho(1_X\\otimes s\\otimes s)$ after forgetting. Homotopic maps induce equal cohomology maps because their difference on a cycle is a boundary. Forgetting the action is exact and detects exactness by the restriction-calculus theorem, so $b$ is an equivariant quasi-isomorphism; no equivariance of $h,s$ is asserted.",
+   "uses": [
+    "lem-sfb-lattice-cubical-augmentation-evaluation",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion: returned step 14; explicit common denominator and its quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "They use ordinary representatives for derived tensors: the pairing theorem says $tK_B$ is K-flat; the evaluation theorem says $L$ is K-flat. Any tensor product of these is K-flat, since applying its tensor functor to an acyclic complex is a succession of the given acyclicity-preserving tensor functors. Hence $X,Z,Y$ are K-flat and their ordinary total tensors compute the specified derived tensors. This proves the roof equality with its actual denominators, without invoking a separate comparison of derived cup products.",
+   "uses": [
+    "lem-sfb-lattice-flat-twisted-chain-pairing",
+    "lem-sfb-lattice-cubical-augmentation-evaluation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lattice-cubical-augmentation-evaluation",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cSign|cubical.*multiplication|Koszul.*roof",
+   "results": "{\"t\": \"2026-10-26T06:55:45Z\", \"tool\": \"grep\", \"query\": \"cSign|cubical.*multiplication|Koszul.*roof\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Iso\", \"hom_inv_id_assoc\"",
+   "results": "{\"t\": \"2026-10-26T06:55:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Iso\\\", \\\"hom_inv_id_assoc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.hom_inv_id_assoc\", \"CategoryTheory.IsIso.hom_inv_id_assoc\", \"CategoryTheory.Iso.map_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.cyclesIsoX₂_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.cyclesIsoLeftHomology_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.opcyclesIsoX₂_hom_inv_id_assoc\", \"CategoryTheory.ShortComplex.opcyclesIsoRightHomology_hom_inv_id_assoc\", \"HomologicalComplex.pOpcyclesIso_hom_inv_id_assoc\"], \"digest\": \"748d5bf6ff16b3ab\"}",
+   "date": "2026-10-26",
+   "verdict": "Useful for the elementary localization cancellation only; it does not construct or compare cubical maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cubical lattice diagonal intertwines twisted Koszul cup product and evaluation with common augmentation roof denominators",
+   "results": "{\"t\": \"2026-10-26T06:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Cubical lattice diagonal intertwines twisted Koszul cup product and evaluation with common augmentation roof denominators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"HomologicalComplex.tensor_unit_d₂\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.σ_comp_PInfty\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\"], \"digest\": \"377864c0f3f8c270\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubical chain augmentation and signed evaluation are compatible with twisted Koszul multiplication in the ordinary derived category",
+   "results": "{\"t\": \"2026-10-26T06:56:23Z\", \"tool\": \"leansearch\", \"query\": \"Cubical chain augmentation and signed evaluation are compatible with twisted Koszul multiplication in the ordinary derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.augment_d_succ_succ\", \"CochainComplex.HomComplex.Cochain.smul_v\", \"CochainComplex.augmentTruncate\", \"ChainComplex.augmentTruncate\", \"CochainComplex.HomComplex.Cochain.comp_units_smul\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"CochainComplex.HomComplex.Cochain.comp_smul\"], \"digest\": \"24e72a46e0189399\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the returned augmentation, total differential, simplicial homotopy and abstract chain-map results do not give the internal cubical/Koszul comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LatticeCubicalMultiplicationRoof",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; descendant lattice expansion, cubical multiplication proof steps 1–6. The current blueprint supplies the route; the structural cubical calculation is the agent-written DAG proof of lem-sfb-lattice-cubical-multiplication-roof.",
+   "via": [
+    "lem-sfb-lattice-cubical-multiplication-roof",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCubicalTensorRepresentatives",
+  "file": "lean/Sheaf/CategoryTheory/LatticeCubicalTensorRepresentatives.lean",
+  "declaration": "Profinite.DiscreteLattice.CubicalMultiplication.normalized_roof_tensor_representatives",
+  "declarations": [
+   "Profinite.DiscreteLattice.CubicalMultiplication.normalized_roof_tensor_representatives"
+  ],
+  "statement": "theorem normalized_roof_tensor_representatives [IsCommMonObj B.X] (hflat : exactFunctor (Modules R.toMon) (Modules R.toMon) (tensorLeft B.X.V)) (F : Roof (koszul R r K B) (lattice R r J C) (algebra R r B)) (hF : Normalized R r J C K B F) : F.comparison ≫ F.b = F.a ∧ QuasiIso F.a ∧ QuasiIso F.b ∧ TensorRepresentatives R r J C K B",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-10630",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T082044-L-2126363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-10630",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T082044-L-2126363",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; relocated defs diffed verbatim vs published item; three split sorry statements matched against the original conjuncts and CubicalModel coproduct pinning; item node proof_deps vs Lean uses"
+ }
+}

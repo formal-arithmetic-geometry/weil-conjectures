@@ -1,0 +1,202 @@
+{
+ "id": "lem-per-rational-module-localization-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First paragraph of lem-per-smooth-pullback-t-exact: cohomology of the continuous rational realization before the degree-zero pullback calculation. Refines item proof Step 2, transporting generic derived localization to its fixed completed coefficient and raw rationalization presentations.",
+   "via": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived localization and fraction descent in the completed coefficient presentation",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$ and $\\varpi$ its fixed uniformizer [def-weil-l-adic-coefficient-extension]. Let $X$ be noetherian, finite dimensional, with $\\ell$ invertible, and let $B_X$ be the completed quotient coefficient ring [def-weil-pbc-adic-coefficient-datum]. Suppose $i:B_X\\simeq C(-,A)$ is a ring-sheaf isomorphism whose composite with the completed constant scalar map is the constant continuous-function map. Put $\\alpha:B_X\\to C(-,E)$ equal to $i$ followed by the actual coefficient inclusion. There exists an $E$-linear structure on rational module sheaves whose action on every module map is multiplication by the constant function with that scalar value. Equip the derived category with the induced action. Ordinary extension $T=\\alpha_!$ preserves finite limits and finite colimits. The prescribed derived extension $F=\\alpha_!^L$ [lem-pur-derived-change-of-rings] admits a shift comparison making it triangulated, and for each integer $r$ there is a natural isomorphism $\\mathcal H^r\\circ F\\simeq T\\circ\\mathcal H^r$. For the completed bounded constructible integral category $\\mathcal C_X$ [def-weil-pbc-bounded-constructible-complete] and its fixed raw rationalization $Q:\\mathcal C_X\\to\\mathcal R_X$ [def-weil-pbc-rational-category], there is an additive $E$-linear triangulated functor $J:\\mathcal R_X\\to D(C(-,E))$ whose object function is literally $J(QK)=F(K)$ and whose fraction formula is $J(f/\\varpi^n)=\\varpi^{-n}F(f)$, conjugated by these object equalities. No constructibility of the output and no ordinary finite-module model formula are asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-linear-functor",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Give module-map groups the restricted scalar action along the ring homomorphism E to global rational sections sending a to the constant function a. This defines the returned linear structure and its normalization. Identify localization of B_X with continuous rational functions using i, its scalar square and normalized continuous-coefficient localization. Change of coefficient ring by i is an equivalence; scalar extension across a composite is canonically the composite of the extensions. Thus transport the localized sheaf extension and its right adjoint to the specified extension along alpha, retaining the adjunction unit and counit. Transport the ULift presentation of the integer ring by ULift.ringEquiv; its fixed uniformizer is the lift of the generic uniformizer, so the generic coefficient theorem has exactly its specified unlifted coefficient action.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "Apply the exact derived localization theorem to B_X with its completed scalar map. Its specified cochain derived model and the transported universal derived pair have the same counit on K-flat resolutions, hence the unique comparison with pbcDerivedExtend respects that counit. Transfer finite exactness, integer shift comparison, triangulation and every natural cohomology comparison across this isomorphism. The scalar square identifies the transferred action with the constant-section E-action.",
+   "uses": [
+    "lem-per-rational-continuous-coefficient-derived-localization",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "The completed bounded constructible category is the full integral stratified-perfect subcategory, closed under shifts and cones. Apply fraction descent from the generic theorem to this subcategory. Its raw localized object function is unchanged and its scalar action factors through A[1/varpi]=E. Compare its localized shifts with the fixed raw shifts using the identity comparison on each integral object and linear naturality on fractions. The identity normalizations identify shift multiplication as well. The two distinguished-triangle structures have the same criterion: being isomorphic to an integral image. Transfer the functor through this identity comparison; triangulation and the displayed fraction equation follow. This argument does not use the local finite-module models or constructibility of the image.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-per-rational-continuous-coefficient-derived-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-continuous-coefficient-derived-localization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact localization of continuous coefficient sheaves commutes with derived cohomology and yields a linear triangulated functor on scalar fraction categories",
+   "results": "Eight generic results, including CategoryTheory.Triangulated.Localization.isTriangulated_functor, Functor.instLinearDerivedCategoryMapDerivedCategory, Functor.mapDerivedCategoryFactors, DerivedCategory.Q. These do not compare the completed scalar action, specified derived adjunction and fixed raw shift.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Twelve generic exact-derived-functor results, including mapDerivedCategoryFactors and its linear and triangulated instances; none transports the two coefficient presentations and the fixed fraction functor.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|localizedModule_functor_map_exact|scalar.*localiz",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean supplies mapDerivedCategory and its factorization/shift; ModuleCat/Localization.lean supplies ordinary module localization. No completed continuous coefficient or raw fraction transport statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalModuleRealizationFunctor",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalModuleLocalizationTransport",
+  "file": "lean/Sheaf/Paper/RationalModuleLocalizationTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalModuleLocalizationTransport",
+  "statement": "theorem rationalModuleLocalizationTransport (X : Scheme.{u}) [IsNoetherian X]\n    [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n    (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E)\n    (_hi : pbcCompletedScalar X (pbcIntegralDatum l E) ≫ i.hom =\n      (letI := coefficientExtensionNormedField l E\n       continuousCoefficientConstantComparison X (PbcIntegralRing l E))) :\n    ∃ κ : Linear E (pbcModules X (rationalCoefficientSheaf l X E)),\n    letI := κ\n    letI : Linear E (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E))) :=\n      inferInstance\n    let α : pbcAdicCompletion X (pbcIntegralDatum l E) ⟶\n        rationalCoefficientSheaf l X E := i.hom ≫ integralRationalCoefficientMap l E X\n    (∀ (M N : pbcModules X (rationalCoefficientSheaf l X E))\n      (f : M ⟶ N) (a : E) (U : X.ProEtᵒᵖ) (x : M.val.obj U),\n      (a • f).val.app U x =\n        (letI := coefficientExtensionNormedField l E\n         (show (rationalCoefficientSheaf l X E).obj.obj U from\n           ContinuousMap.const _ (ULift.up.{u + 1, u} a))) • f.val.app U x) ∧\n    (PreservesFiniteLimits (pbcExtend.{u} α) ∧ PreservesFiniteColimits (pbcExtend.{u} α)) ∧\n    (∃ (_ : (pbcDerivedExtend.{u} α).CommShift ℤ), (pbcDerivedExtend.{u} α).IsTriangulated) ∧\n    (∀ r : ℤ, Nonempty (pbcDerivedExtend.{u} α ⋙\n      DerivedCategory.homologyFunctor (pbcModules X (rationalCoefficientSheaf l X E)) r ≅\n      DerivedCategory.homologyFunctor\n        (pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) r ⋙ pbcExtend.{u} α)) ∧\n    ∃ J : PbcRationalCategory X (pbcIntegralDatum l E) (pbcUniformizer l E) ⥤\n        DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)),\n      ∃ (_ha : J.Additive) (_hl : J.Linear E) (hs : J.CommShift ℤ),\n        letI := hs\n        J.IsTriangulated ∧\n        ∃ hobj : ∀ K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E),\n            J.obj ((pbcRationalization X (pbcIntegralDatum l E)\n              (pbcUniformizer l E)).obj K) = (pbcDerivedExtend.{u} α).obj K.obj,\n          ∀ (K L : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E))\n            (f : K ⟶ L) (n : ℕ),\n            J.map (((pbcRationalCoefficientEquiv l E).symm\n              (((pbcUniformizer l E).down.val ^ n)⁻¹)) •\n                (pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) =\n              eqToHom (hobj K) ≫\n                (((pbcUniformizer l E).down.val ^ n)⁻¹ •\n                  (pbcDerivedExtend.{u} α).map f.hom) ≫ eqToHom (hobj L).symm",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-per-rational-module-localization-transport",
+  "worker": "stage3",
+  "summary": "Transport step separated from the coefficient-normalized realization assembly. Existing generic theorems remain the inputs; no target or existing declaration is changed.",
+  "blueprint": "First paragraph of lem-per-smooth-pullback-t-exact: cohomology of the continuous rational realization before the degree-zero pullback calculation. Refines item proof Step 2, transporting generic derived localization to its fixed completed coefficient and raw rationalization presentations.",
+  "tool_uses": [
+   {
+    "node": "lem-per-rational-continuous-coefficient-derived-localization",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T235845-L-1461581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T235845-L-1461581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

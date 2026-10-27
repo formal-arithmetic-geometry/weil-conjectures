@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-scalar-pullback-square-data",
+ "kind": "definition",
+ "title": "Canonical geometric pullback compositor and square with the scalar functor interface exposed",
+ "statement": "For a commutative condensed coefficient ring R, define scalarPullbackComposition R h k : L R (h ≫ k) ≅ L R k ⋙ L R h to be leftDerivedUpperStarComp R h k with the typed alias L of [def-sfb-internal-derived-scalar-comparisons]. For a chosen Cartesian square (a,f,c,f′) [def-weil-pbc-cartesian-square], define scalarPullbackSquare R sq : L R c ⋙ L R f′ ≅ L R f ⋙ L R a by composing the inverse (f′,c) compositor, the equality transport from the square, and the (a,f) compositor. Unfolding L gives exactly condensedAmbientPullbackComparison R sq of [def-weil-pbc-ambient-ringed-exchange]. These definitions make no comparison choice.",
+ "stmt_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D, 07A7 and 0E47; scalar exchange rectangle proof steps 2"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7; transparent typed presentation of the existing condensed ambient pullback comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change mates for a coherent change of coefficients between pullback adjunctions",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(mate|conjugate).*(cube|rectangle|past)",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived scalar extension comparisons can be chosen simultaneously under equivalence between internal modules and section modules",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv; IsLocalizedModule.mapExtendScalars.congr_simp; LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply; LinearEquiv.extendScalarsOfIsLocalization.congr_simp; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalization; Module.Baer.ExtensionOf.dExt_iff; RestrictScalars.addEquiv",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived extension of scalars commutes with a square of geometric pullback composition isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; KaehlerDifferential.moduleBaseChange'",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarGeometricExchangeRectangle",
+  "date": "2026-10-23",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2): typed compositors used in scalar rectangle step 2.",
+   "via": [
+    "lem-sfb-scalar-geometric-exchange-rectangle",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullbackSquareCoherence",
+  "file": "lean/Sheaf/Paper/ScalarPullbackSquareCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullbackSquare",
+  "statement": "def scalarPullbackSquare\n    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj R] [IsCommMonObj R]\n    {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}\n    {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c) :\n    L R c ⋙ L R f' ≅ L R f ⋙ L R a",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullbackComposition",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullbackSquare",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullbackSquare_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261024T015051-L-2318376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261024T231258-L-2200899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalar_pullback_square_coherence"
+  ],
+  "sorry_after": []
+ }
+}

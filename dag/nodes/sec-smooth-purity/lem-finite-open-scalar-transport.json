@@ -1,0 +1,134 @@
+{
+ "id": "lem-finite-open-scalar-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5 (exactness and reduction): compatibility with the comparison maps in the compactification formula; open factor of lem-finite-compact-support-scalar-transport, proof Step 3",
+   "via": [
+    "lem-finite-compact-support-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The open scalar mate respects site comparison and intrinsic realization",
+ "statement": "Let A and B be finite commutative rings, phi:A -> B a ring homomorphism, and j:X -> Z an open immersion of schemes. Let G and GB be unbounded etale complexes over A and B, and e:LS_phi(G) isomorphic to GB. Let C_T be the canonical intrinsic site comparison, S_T intrinsic derived scalar extension, I_A and I_B intrinsic extension by zero, and a_A:J_A C_Z -> C_X I_A and a_B:J_B C_Z -> C_X I_B the site/open comparisons, each obtained from the exact site/open mate and the realization equivalence unit. Let delta_T:C_T S_T -> LS_phi C_T be the site/scalar comparison. If alpha_j:S_Z I_A -> I_B S_X is the scalar-adjunction transpose of I_A(eta_X) followed by sfOpenRestriction, then alpha_j at C_X G followed by I_B(delta_X followed by C_X(e)) equals S_Z(a_A inverse) followed by delta_Z, C_Z(openScalarIso followed by J_B(e)), and a_B at GB. All named comparisons are the actual maps in FiniteCompactSupportScalarTransportData and FiniteCompactScalarCoordinates. The displayed equation includes no proper image or compactification.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5 (exactness and reduction); Stacks 03DI, 09AF and 00YV"
+ },
+ "stmt_deps": [
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-finite-compact-scalar-transport-data",
+  "def-finite-compact-scalar-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Factor both site/scalar and open/site comparisons through fixed-coefficient pro-etale realization. Naturality of the intrinsic open scalar transpose transports the intrinsic site-functor factor.",
+   "uses": [
+    "def-finite-compact-scalar-coordinates",
+    "def-finite-compact-scalar-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the intrinsic realization face, then naturality of the inverse open realization comparison. Apply the fixed-coefficient site face, and cancel the realization and site inverse factors. Naturality of the realization/scalar and intrinsic site comparisons gives equality for the canonical scalar-extension output.",
+   "uses": [
+    "lem-finite-open-scalar-realization-transport",
+    "lem-finite-open-scalar-site-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the equality by extension by zero of the realization of eGB. Naturality of openSiteIso inserts eGB exactly as in the unchanged statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-finite-compact-scalar-coordinates",
+  "def-finite-compact-scalar-transport-data",
+  "lem-finite-open-scalar-realization-transport",
+  "lem-finite-open-scalar-site-transport"
+ ],
+ "proof_origin": {
+  "by": "agent Y3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5; separate fixed-site and intrinsic-realization faces, then naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero commutes with extension of scalars and comparison of sheaf sites preserving adjunction units",
+   "results": "Eight sheaf-of-modules pullback/pushforward and sheafification adjunction results; no open scalar/site normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, mateEquiv_vcomp, mateEquiv_hcomp, unit_mateEquiv and counit identities provide generic assembly, not the normalized site/realization square.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|sfIntrinsicDerivedDirectImageComparison|etaleProEtale_scalar_mate",
+   "results": "No Mathlib hits. Project rg found the normalized realization/direct-image interfaces and the proved etaleProEtale_scalar_mate; no open/proper intrinsic scalar transport equation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison of extension by zero, proper direct image and scalar extension of sheaves is compatible with derived adjunction units and an equivalence of module categories",
+   "results": "Eight generic sheaf pullback/pushforward unit and scalar adjunction results, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and ModuleCat.ExtendRestrictScalarsAdj.homEquiv. None constructs these scheme-specific normalized derived comparison coordinates.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse generic adjunction infrastructure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportScalarTransport",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteOpenScalarTransport",
+  "file": "lean/Sheaf/Paper/FiniteOpenScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.openScalar_transport",
+  "statement": "theorem openScalar_transport\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (G : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X)\n    (GB : Etale.DerivedCategoryModule (ULift.{u + 1, u} B) X)\n    (eGB : (Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj G ≅ GB) :\n    ((pbcDerivedScalarAdjunction (scalarRingMap φ Z)).homEquiv _ _).symm\n        ((sfIntrinsicExtensionByZero j A).mapDerivedCategory.map\n            ((pbcDerivedScalarAdjunction (scalarRingMap φ X)).unit.app\n              ((ProEtale.finiteCoefficientIntrinsicDerivedComparison X A).obj G)) ≫\n          (Functor.mapDerivedCategorySquareIso (sfOpenRestriction j φ)).hom.app\n            ((pbcDerivedExtend (scalarRingMap φ X)).obj\n              ((ProEtale.finiteCoefficientIntrinsicDerivedComparison X A).obj G))) ≫\n      (sfIntrinsicExtensionByZero j B).mapDerivedCategory.map\n        ((siteScalarIso φ X).hom.app G ≫\n          (ProEtale.finiteCoefficientIntrinsicDerivedComparison X B).map eGB.hom) =\n    (pbcDerivedExtend (scalarRingMap φ Z)).map ((openSiteIso A j).inv.app G) ≫\n      (siteScalarIso φ Z).hom.app\n        ((Etale.openImmersionLowerShriek\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj G) ≫\n      (ProEtale.finiteCoefficientIntrinsicDerivedComparison Z B).map\n        ((Etale.FiniteCompactScalar.openScalarIso\n          (RingHom.ulift.{u + 1, u + 1, u, u} φ) j).hom.app G ≫\n          (Etale.openImmersionLowerShriek\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).mapDerivedCategory.map eGB.hom) ≫\n      (openSiteIso B j).hom.app GB",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T034812-L-3688125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

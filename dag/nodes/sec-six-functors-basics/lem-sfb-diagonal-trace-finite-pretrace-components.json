@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-pretrace-components",
+ "kind": "statement",
+ "title": "Finite components of the normalized supported diagonal before trace",
+ "statement": "theorem diagonalTrace_finitePretrace_components\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : IsDiagonalLimit l Y hY D δ)\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let V := p.restrictionS.F.mapDerivedCategory\n    let ev := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    ∃ β : (diagonalCompletedUnderlying l (ProjectiveLine Y)).obj\n        (completedUnit l (ProjectiveLine Y)) ⟶\n      ev.obj (V.obj ((SpTowerClasses.line l E p.chernS)⟦(2 : ℤ)⟧)),\n      (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n          (a.hom ≫ p.Rc.R.map δ) ≫ p.sourceMap l E ≫\n          (p.LS.projection n).app _ ≫ ev.map (p.varying.inv.app _) =\n        β ≫ ev.map (V.map (p.model.twistedUnit l E)) +\n          (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n            ev.map (V.map (p.model.chernAdjoint l E))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite reduction before trace; finite supported diagonal component formula of det-sp-p1-trace, proof paragraph 3"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-sources",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Identify the finite pushed supported arrow with the projected unit followed by the evaluated restricted Chern adjunct of the actual diagonal divisor line.",
+   "uses": [
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive invertibility of l on the projection base and surface by pulling back hY. Apply the tower divisor-Chern component identity to the presentation model to obtain its base Chern arrow beta.",
+   "uses": [
+    "lem-sfb-diagonal-trace-divisor-chern-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restriction and evaluation to the component identity. Their additivity and functoriality, followed by composition with the projected coefficient unit q, give the desired witness q followed by evaluation of beta.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-finite-divisor-adjoint",
+  "lem-sfb-diagonal-trace-divisor-chern-adjoint"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite reduction before trace, factored through the actual divisor Chern adjunct and a scheme-theoretic Picard identity",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "supported diagonal Cartier class decomposes into a base class and positive relative hyperplane Chern class on a projective line",
+   "results": "8 results concerning diagonal immersions and morphism properties; none states a cohomological component formula.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective line trace of the diagonal Cartier class is the identity after finite coefficient projection",
+   "results": "8 hits: Proj.one_apply, Algebra.normalizedTrace_self, RootPairing.GeckConstruction.trace_h_eq_zero, LinearMap.IsProj.trace, Algebra.trace_self, trace_quotient_eq_trace_localization_quotient, RootPairing.GeckConstruction.trace_toEnd_eq_zero, Algebra.normalizedTrace_algebraMap_eq_id.",
+   "date": "2026-10-27",
+   "verdict": "No sheaf-theoretic finite comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits: mapDerivedCategorySingleFunctor and its derived identity, natural transformation, composition, inverse, and factors comparison lemmas. These supply generic single-object coherence, not the geometric pretrace comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic coherence is proved in the item; no exact match for the geometric finite pretrace comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Ii]ntegral|exactConeComparison",
+   "results": "0 hits from the remote grep service. A separate local rg search found geoP1_diagonal_comparison_components, diagonalTrace_twistedSplitting_components, and exactConeComparison.",
+   "date": "2026-10-27",
+   "verdict": "No remote match. Local source inspection finds the finite component formula but not the completed-to-finite comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteIntegralProjection",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), the finite supported-diagonal calculation before trace",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-integral-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFinitePretraceComponents.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finitePretrace_components",
+  "statement": "theorem diagonalTrace_finitePretrace_components\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : IsDiagonalLimit l Y hY D δ)\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let V := p.restrictionS.F.mapDerivedCategory\n    let ev := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    ∃ β : (diagonalCompletedUnderlying l (ProjectiveLine Y)).obj\n        (completedUnit l (ProjectiveLine Y)) ⟶\n      ev.obj (V.obj ((SpTowerClasses.line l E p.chernS)⟦(2 : ℤ)⟧)),\n      (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n          (a.hom ≫ p.Rc.R.map δ) ≫ p.sourceMap l E ≫\n          (p.LS.projection n).app _ ≫ ev.map (p.varying.inv.app _) =\n        β ≫ ev.map (V.map (p.model.twistedUnit l E)) +\n          (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n            ev.map (V.map (p.model.chernAdjoint l E))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T021355-L-2763028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

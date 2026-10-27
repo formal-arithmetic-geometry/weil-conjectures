@@ -51,6 +51,9 @@ theorem isRegular_iff_dimension_drop {R : Type u} [CommRing R] [IsNoetherianRing
     (hmem : ∀ x ∈ xs, x ∈ IsLocalRing.maximalIdeal R) :
     IsRegular R xs ↔
       ringKrullDim (R ⧸ Ideal.ofList xs) + (xs.length : WithBot ℕ∞) = (d : WithBot ℕ∞) := by
-  sorry
+  constructor
+  · intro hreg
+    exact (ringKrullDim_add_length_eq_ringKrullDim_of_isRegular xs hreg).trans hd
+  · exact isRegular_of_dimension_drop d hd hdepth xs hmem
 
 end RingTheory.Sequence

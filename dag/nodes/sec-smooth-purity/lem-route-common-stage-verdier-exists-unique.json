@@ -1,0 +1,223 @@
+{
+ "id": "lem-route-common-stage-verdier-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "via": [],
+   "place": "Owning coefficient-category construction: composition and distinguished triangles are represented over a common finite extension; generic commonStage_verdier_existsUnique, its finite-diagram and eventual-equation argument."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Common-stage triangles satisfy TR1--TR4; stage inclusions and transition identifications are exact.",
+ "statement": "Let $S$ be an exact-stage pair datum [def-sf-directed-common-stage-data] over a nonempty directed preorder $I$, with stage categories $C_i$, pair category $P=S.\\mathrm{PairCategory}$, additive inclusions $j_i$, exact transitions $T_{ij}$, and the supplied shift comparisons and shift-compatible identifications $\\theta_{ij}$. Suppose every pretriangulated category $C_i$ is triangulated, including TR4 [def-weil-triangulated-category]. Keep fixed the given preadditive structure, zero-object structure and additive integer shifts on $P$, as well as all these comparisons. Then there exists a unique pretriangulated structure $t$ on $P$ for which (i) a triangle $V$ is distinguished exactly when $D_S(V)$, (ii) $P$ with $t$ is triangulated, and (iii) every $j_i$, with its supplied shift comparison, is exact. In particular the given identifications $\\theta_{ij}:j_jT_{ij}\\cong j_i$ are exact natural isomorphisms: both functors are exact and these identifications commute with the specified shifts.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "def-weil-algebraically-closed-coefficients: the Lean of this node (its declaration uses) reaches CategoryTheory.StageSystem.commonStage_verdier_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/CategoryTheory/StageSystemVerdier.lean, declaration CategoryTheory.StageSystem.commonStage_verdier_existsUnique (module Sheaf.CategoryTheory.StageSystemVerdier, lines 36-58, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sf-directed-common-stage-data",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Define the distinguished set to be $D_S$. Its isomorphism closure follows by composing the witness triangle isomorphism. For $X=(i,x)$ use the distinguished identity triangle of $x$ in $C_i$. Its image has zero third object: additivity gives $1_{j_i0}=j_i(1_0)=j_i(0)=0$, so every arrow to or from $j_i0$ is zero and it is isomorphic to the chosen zero of $P$. This gives the identity triangle of $X$. For $f:X\\to Y$, apply finite-diagram lifting with no selected rows to get $f_m:X_m\\to Y_m$ and vertex isomorphisms $\\delta_X,\\delta_Y$. Choose a distinguished cone $X_m\\xrightarrow{f_m}Y_m\\xrightarrow gZ\\xrightarrow hX_m[1]$ by stage TR1. Conjugate its image by $\\delta_X,\\delta_Y$ and the identity of $j_mZ$. Its first map is exactly $f$; its other maps are $j_m(g)\\delta_Y$ and $\\delta_X[1]^{-1}\\beta_{m,1,X_m}j_m(h)$. It satisfies $D_S$ by construction. These verify TR1.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-sf-directed-distinguished-diagram-lifting",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  },
+  {
+   "text": "For any additive functor $F$ with its given shift comparison $\\beta$, the image of the signed rotation of $U$ is isomorphic to the signed rotation of its image: the three components are $1,1,\\beta_X$. The last triangle equation is the naturality identity $\\beta_Y F(f[1])=(Ff)[1]\\beta_X$, with negatives preserved by additivity. Inverse rotation has the analogous isomorphism using $\\beta^{-1}$ and the shift unit/counit. Now if $V\\cong j_i^\\triangle U$ with $U$ distinguished, stage TR2 and this explicit rotation isomorphism show $D_S(V^{\\mathrm{rot}})$. Conversely apply stage inverse rotation to a witness for $D_S(V^{\\mathrm{rot}})$ and cancel rotation with inverse rotation. This proves both directions of TR2 with the prescribed sign.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  },
+  {
+   "text": "For TR3 give the lifting lemma the two specified distinguished rows $V,V'$, the two specified maps $a:X\\to X'$, $b:Y\\to Y'$ and the true equation $bf=f'a$. It gives two distinguished rows in one $C_m$ with the shared lifted vertices and the same square equation. Stage TR3 supplies $c_m:Z_m\\to Z'_m$ with $c_mg_m=g'_mb_m$ and $a_m[1]h_m=h'_mc_m$. Put $c=\\delta_{Z'}^{-1}j_m(c_m)\\delta_Z$. Apply $j_m$ to the two stage equations, substitute the recovery formulas and cancel adjacent vertex isomorphisms. For the connecting equation use $d_{X,1}=\\beta_{m,1,X_m}^{-1}\\delta_X[1]$. The results are $cg=g'b$ and $a[1]h=h'c$. Thus the original maps, rather than replacement maps, complete to a triangle morphism.",
+   "uses": [
+    "lem-sf-directed-distinguished-diagram-lifting",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  },
+  {
+   "text": "For TR4 start with the three specified distinguished cone triangles of composable $f:X\\to Y$, $g:Y\\to Z$ and $gf$, sharing the same $X,Y,Z$. Lift all three rows, both maps and the equality defining $gf$ simultaneously. In $C_m$ apply TR4 to these actual three distinguished rows. It gives $a_m:Q_{1,m}\\to Q_{2,m}$, $b_m:Q_{2,m}\\to Q_{3,m}$, the two required triangle morphisms, and the distinguished row with last arrow $p_{1,m}[1]d_{3,m}$. Define $a,b$ by their $j_m$ images conjugated by the common vertex isomorphisms. Applying $j_m$ to each stage equation and cancelling those isomorphisms gives the required faces with the original maps. Naturality of $\\beta$ identifies the last arrow of the new image row with $p_1[1]d_3$: the comparison of the middle shifted object cancels between $p_{1,m}[1]$ and $d_{3,m}$. The remaining row therefore satisfies $D_S$. This is TR4 for the prescribed three cones, without any faithfulness assumption on a transition or inclusion.",
+   "uses": [
+    "lem-sf-directed-distinguished-diagram-lifting",
+    "def-sf-directed-common-stage-data",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  },
+  {
+   "text": "Steps 1--3 fill the pretriangulated axioms for the fixed zero, addition and shifts; step 4 supplies the octahedral axiom. For every distinguished $U$ in $C_i$, its image satisfies $D_S$ with witness $(i,U)$ and the identity triangle isomorphism. Thus every $j_i$ is exact for its supplied comparison. The transitions were already exact; hence their composites with these inclusions preserve distinguished triangles. The stipulated shift-compatibility equation for $\\theta_{ij}$ is unchanged, so these are exact natural isomorphisms. This establishes all existence clauses.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  },
+  {
+   "text": "If $t'$ also satisfies the displayed criterion, then for every triangle $V$ its membership in the distinguished set for $t'$ is equivalent to $D_S(V)$ and hence to membership for $t$. Extensionality gives equality of these two distinguished sets. For the fixed underlying structures a Pretriangulated record has only this set as data; its other fields are proofs of the axioms, equal by proof irrelevance. Therefore $t'=t$, proving uniqueness.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category (TR1--TR4), with Tag 0144, definition-triangle, and Tag 014V, definition-exact-functor-triangulated-categories; finite-stage implementation is the docstring of commonStage_verdier_existsUnique in lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 36-49."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-directed-common-stage-data",
+  "lem-sf-directed-distinguished-diagram-lifting",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Common-stage pair-model argument, applied to the finite-diagram docstring of the attached commonStage_verdier_existsUnique. The verification uses the axioms in Stacks Tag 0145 rather than a claimed Stacks filtered-triangulation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'commonStage_verdier_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of triangulated categories has a unique triangulation on its pair category whose distinguished triangles are images from a stage",
+   "results": "CategoryTheory.Functor.essImageDistTriang; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Triangulated.TStructure.triangle_map_exists; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.TStructure.triangle_iso_exists. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated",
+   "results": "CategoryTheory.Pretriangulated; CategoryTheory.Pretriangulated.instHasFiniteCoproducts; CategoryTheory.Pretriangulated.instHasFiniteProducts; CategoryTheory.Pretriangulated.instSplitEpiCategory; CategoryTheory.Pretriangulated.instSplitMonoCategory; CategoryTheory.Pretriangulated.distinguishedTriangles; CategoryTheory.Pretriangulated.instHasBinaryBiproducts; CategoryTheory.Pretriangulated.instHasFiniteBiproducts. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|commonStage_verdier|directed.*triangulat|triangulat.*colimit",
+   "results": "No hits. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of triangulated categories with exact transition functors",
+   "results": "CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'; CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone; CommMonCat.FilteredColimits.colimitCocone; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf; AddMonCat.FilteredColimits.colimitCoconeIsColimit; CommGrpCat.FilteredColimits.colimit; AddGrpCat.FilteredColimits.colimitCoconeIsColimit. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary category with morphisms represented in a directed union of exact categories inherits the Verdier axioms",
+   "results": "CategoryTheory.IsGrothendieckAbelian; CategoryTheory.Limits.isGrothendieckAbelian_ind; CategoryTheory.IsGrothendieckAbelian.ab4OfSize; CategoryTheory.CountableAB4.of_hasExactColimitsOfShape_nat; HomologicalComplex.hasExactColimitsOfShape; Condensed.hasExactColimitsOfShape; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; Condensed.instAB5CondensedMod. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pretriangulated\"",
+   "results": "CategoryTheory.Pretriangulated.Triangle; CategoryTheory.Pretriangulated.triangleCategory; CategoryTheory.Pretriangulated.Triangle.obj₁; CategoryTheory.Pretriangulated.Triangle.obj₂; CategoryTheory.Pretriangulated.Triangle.obj₃; CategoryTheory.Pretriangulated.TriangleMorphism; CategoryTheory.Pretriangulated.triangleMorphismId; CategoryTheory.Pretriangulated.contractibleTriangle. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]olimit|[Ff]iltered|[Ss]tage",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean. Localization results require one localization functor; the pair system has arbitrary directed stages and supplied shifts. Pretriangulated is the axiom record, not an existence or uniqueness theorem for this system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.CategoryTheory.StageSystemVerdier",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemVerdier.lean",
+  "declaration": "CategoryTheory.StageSystem.commonStage_verdier_existsUnique",
+  "declarations": [
+   "CategoryTheory.StageSystem.commonStage_verdier_existsUnique"
+  ],
+  "statement": "theorem commonStage_verdier_existsUnique :\n    ∃! t : Pretriangulated S.PairCategory,\n      (fun [triInst : Pretriangulated S.PairCategory] ↦\n        (∀ T : Triangle S.PairCategory,\n          T ∈ distTriang S.PairCategory ↔ S.CommonStageDistinguished T) ∧\n        IsTriangulated S.PairCategory ∧ ∀ i : I, (S.ι i).IsTriangulated)\n        (triInst := t)",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands; proof closed by P1 (stage 3), statement unchanged"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-common-stage-verdier-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced truncated machine statement by all and only the attached theorem hypotheses and clauses; fixed structures are explicit. General-stage data and finite distinguished-diagram lifting are separated from the TR1--TR4 verification. Existing coefficient-specific nodes have stronger geometric hypotheses and cannot justify this arbitrary-stage theorem. No Lean edited or compiled.",
+  "blueprint": "The owning coefficient-category statement uses common-stage composition and triangles; the generic attached theorem realizes that construction by TR1--TR4 and distinguished-set uniqueness. The current latest blueprint replaces that old node by filtered two-colimit and finite-descent nodes; only those current sources and the live Lean were read.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-3bb4eb2f1",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-3bb4eb2f1 (reviewer sub-agent of L); spot-checked: I read the delivery in full. I checked the item against the live Lean of Sheaf.CategoryTheory.StageSystemVerdier.commonStage_verdier_existsUnique (all variables), StageSystemCommonStageCones.CommonStageDistinguished and StageSystem/Basic.lean (StageSystem, tr, identity, ι, isoToStage, transIso). The hypotheses agree one by one. Stages are pretriangulated and triangulated. P carries a supplied preadditive structure, zero object and additive shift. ι_i is additive and CommShift. T is CommShift and IsTriangulated. The datum's θ equation is exactly NatTrans.CommShift of transIso.hom. j^△ is mapTriangle and D_S is CommonStageDistinguished. The conclusion matches the Lean ∃!; the extra 'in particular θ exact' sentence is only a consequence, and nothing is weakened. Upstream PairCategory.verdier_axioms needs NatTrans.CommShift of the associators and the canonical pair shift, so it is not an exact attachment. Steps: TR1 checked via the triangle iso (δ_X, δ_Y, 1) and additivity giving ι0 = 0. TR2 checked via components (1, 1, β) and β-naturality, with the converse through invRotate. TR3 checked: c = δ⁻¹ι(c_m)δ, and the connecting equation follows from the shifted recovery d_{X,1} = β⁻¹δ[1] in the lemma's statement. TR4 checked against Stacks 0145: (Q1, Q2, Q3, a, b, p1[1]∘d3) matches Mathlib Octahedron.mem w23≫v12⟦1⟧', and the middle β cancels. Uniqueness holds because Mathlib's Pretriangulated has only distinguishedTriangles as data. On my own check, the new lifting lemma is true under exactly these hypotheses. Arrows lift by exists_le_mkHom_eq and mkHom_eq_isoToStage. Equations descend by ι_map_eq_ι_map_iff. Distinguished witnesses transport by T exactness and θ-CommShift. Changing the stage stays consistent by the cocycle. It needs no associator–shift coherence and no stage TR4. I tested it on a singleton with T = Id, a singleton with T = 0 (zero P), an empty input list and repeated indices. It strictly generalizes lem-weil-pbc-distinguished-diagram-lifting (sk-prop-sf-cbc, ℓ-adic stages only) and does not restate the item. def-sf-directed-common-stage-data has no DAG duplicate: the pbc pair category, def-per shift structures, det-def-sfb-filtered-two-colimit-model, lem-pod and lem-per directed-pair nodes and def-a1 pair data are all normalized or coefficient-specific. Off-unit citations are only Mathlib-leaf definitions, so tool_uses [] is correct. proof_deps equals the union of the uses. Blueprint from and via are correct and there is no SGA source. No fixes were made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T065856-L-2485195",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

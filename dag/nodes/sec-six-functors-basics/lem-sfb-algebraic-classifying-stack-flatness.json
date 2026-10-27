@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-algebraic-classifying-stack-flatness",
+ "kind": "statement",
+ "title": "Algebraicity of a classifying stack forces flat finite-presentation groups",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $B$ be an algebraic space over $S$ [def-trf-algebraic-space]. Let $G$ be a group algebraic space over $B$: an algebraic space $G$ with a morphism $G\\to B$, multiplication $G\\times_B G\\to G$, identity $B\\to G$ and inverse $G\\to G$ satisfying the group laws on every test scheme. Form the groupoid in algebraic spaces with objects $B$, arrows $G$, both source and target equal to $G\\to B$, and composition equal to multiplication. Let $[B/G]$ denote the stackification of this groupoid on the big fppf site [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description], using the fibred-groupoid conventions of [def-sfb-stable-pointed-moduli-groupoids]. If $[B/G]$ is an algebraic stack [def-sfb-algebraic-moduli-stack], then $G\\to B$ is flat and locally of finite presentation, with these properties tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. No flatness, local finite type, smoothness, separation or quasi-compactness is assumed on $G\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06PL (lemma-BG-algebraic), converse implication."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algebraic-quotient-flat-refinement] to the groupoid $(B,G)$ in the statement. Obtain $g:B'\\to B$ such that $h:B'\\times_B G\\to B$ is sheaf-surjective and the two projections of $R'=B'\\times_B G\\times_B B'$ to $B'$ are flat and locally of finite presentation. Indeed both arrow endpoints are the structure map $G\\to B$, so the displayed fibre products are exactly the restricted arrows and the morphism $h$ of that criterion; no action-groupoid comparison is needed.",
+   "uses": [
+    "lem-sfb-algebraic-quotient-flat-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PL (lemma-BG-algebraic), converse: apply the general quotient criterion 06PJ (which also supplies the special case 06PK cited by the source)."
+   }
+  },
+  {
+   "text": "The sheaf fibre products below are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The morphism $g$ is itself sheaf-surjective: given $b\\in B(T)$, a local lift $(b',a)$ through $h$ has $g(b')=b$. Put $Y=G\\times_B B'$ and let $u:R'\\to Y$ forget the first $B'$ coordinate. This is sheaf-surjective as well: for $(a,b'_2)\\in Y(T)$, locally lift its common image in $B(T)$ through $g$ to $b'_1$ and use $(b'_1,a,b'_2)$. The composite $R'\\xrightarrow{u}Y\\xrightarrow{v}B'$, with $v(a,b'_2)=b'_2$, is the last projection of Step 1.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PL (lemma-BG-algebraic), converse: sheaf surjectivity of B-prime to B and of its indicated base change, with local lifts written out."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-sheaf-surjective-property-descent] to $R'\\xrightarrow{u}Y\\xrightarrow{v}B'$, once for flatness and once for local finite presentation. Step 1 gives each property for $vu$ and Step 2 gives sheaf-surjectivity of $u$. Thus $v:G\\times_B B'\\to B'$ is flat and locally of finite presentation. In particular this deduction has not assumed that $g$ is flat.",
+   "uses": [
+    "lem-sfb-space-sheaf-surjective-property-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PL (lemma-BG-algebraic), converse: the application of spaces-descent Tag 06NR."
+   }
+  },
+  {
+   "text": "We use [lem-sfb-stack-chartwise-smooth-etale-calculus] for maps of algebraic spaces. They are discrete algebraic stacks: their sheaf condition gives effective descent with identity isomorphisms, their diagonal is representable, and their etale scheme atlas is smooth [def-trf-algebraic-space, def-sfb-algebraic-moduli-stack, lem-sfb-fibred-groupoid-representable-smooth-calculus]. The last cited node also makes every map of spaces representable by algebraic spaces. Choose a surjective etale scheme chart $T\\to B$. Sheaf-surjectivity of $g$ gives an fppf scheme covering $\\{T_i\\to T\\}$ with maps $T_i\\to B'$ over $B$. Form $W=\\coprod_iT_i$ and its glued map to $B'$ using [lem-weil-pbc-scheme-coproduct-family]. The maps $T_i\\to T$ are flat and locally of finite presentation by [def-pc-fppf-site]. The calculus node checks these properties on the disjoint open cover of $W$, so $W\\to T$ has both; it is surjective because the covering is jointly surjective. The calculus node also base changes Step 3 along $W\\to B'$, giving flatness and local finite presentation of $G\\times_B W\\to W$. Its identification with $(G\\times_B B')\\times_{B'}W$ sends $((a,b'),w)$ to $(a,w)$, with inverse $(a,w)\\mapsto((a,b'(w)),w)$. All covering indices and coproducts are taken in the fixed universe.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PL (lemma-BG-algebraic), converse: choose the local lifts of B-prime over an etale scheme atlas and assemble the fppf cover; base change of the properties obtained by 06NR."
+   }
+  },
+  {
+   "text": "Apply the algebraic-space clause of [lem-sfb-representable-fppf-etale-open-descent] to $G\\times_B T\\to T$ and the surjective flat locally finitely presented scheme map $W\\to T$ of Step 4. Its base change is $G\\times_B W\\to W$: a test-section triple $((a,t),w)$ with $t$ the image of $w$ is precisely $(a,w)$. Hence $G\\times_B T\\to T$ is flat and locally of finite presentation, separately. Finally choose any surjective etale scheme chart $U\\to G\\times_B T$. The chart criterion [lem-sfb-space-local-properties-chart-test] with target $T$ first gives both properties for $U\\to T$, and with target chart $T\\to B$ gives both for $G\\to B$. No quasi-compactness of either cover was needed. If $B$ is empty, all spaces over it are empty and the same chart tests are vacuous.",
+   "uses": [
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PL (lemma-BG-algebraic), converse: fppf descent (041W and 041T), followed by the etale chart test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-quotient-flat-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-sheaf-surjective-property-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fppf-site",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-space-local-properties-chart-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06PL (lemma-BG-algebraic), converse proof; 06PJ used directly rather than its trivial-action specialization 06PK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "gerbe|Gerbe|ClassifyingStack|classifyingStack|BG_algebraic",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphisms of schemes or rings and ordinary representability, not algebraic stacks or group algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A classifying stack of a group algebraic space is algebraic only if the group is flat and locally of finite presentation",
+   "results": "8 hits; RingHom.Flat; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.casesOn; RingHom.Smooth; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; Algebra.Smooth.flat",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphisms of schemes or rings and ordinary representability, not algebraic stacks or group algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphisms of schemes or rings and ordinary representability, not algebraic stacks or group algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the quotient stack for the trivial action of a group algebraic space G over B is algebraic then G is flat and locally finitely presented over B",
+   "results": "8 hits; AlgebraicGeometry.Flat; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphisms of schemes or rings and ordinary representability, not algebraic stacks or group algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraicity of the stack of torsors under a group object in algebraic spaces forces that group to be flat and locally of finite presentation",
+   "results": "8 hits; AlgebraicGeometry.Flat; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphisms of schemes or rings and ordinary representability, not algebraic stacks or group algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraicity of the classifying stack of a group algebraic space implies flatness and local finite presentation of the group",
+   "results": "{\"t\": \"2026-10-23T18:51:43Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraicity of the classifying stack of a group algebraic space implies flatness and local finite presentation of the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"58cc1d5de16bb9d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|AlgebraicSpace|classifyingStack|gerbe",
+   "results": "{\"t\": \"2026-10-23T18:52:22Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|AlgebraicSpace|classifyingStack|gerbe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group algebraic space whose classifying stack is algebraic is flat and locally of finite presentation",
+   "results": "{\"t\": \"2026-10-23T18:52:23Z\", \"tool\": \"leansearch\", \"query\": \"A group algebraic space whose classifying stack is algebraic is flat and locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat\", \"RingHom.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"c236466063f381ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T18:52:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neutral-gerbe-section-fppf",
+  "date": "2026-10-23",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient.",
+   "via": [
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-classifying-stack-flatness",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06PL through the general restricted-groupoid criterion 06PJ, wrote both sheaf-local lift arguments, used 06NR separately for flatness and local finite presentation, and reused existing fppf descent and chart calculus. Two statement-only non-Mathlib inputs; unchanged statement and statement dependencies.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. The current latest direct-images proof (3) remains the inherited route; these five steps supply the neutral-gerbe supporting input. The ancestor command returns null for this inherited created-node chain; that value and its via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Set-indexed scheme coproduct assembles the fppf covering; a generic construction in the fixed universe, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of algebraic-space fibre products used for Y and the restricted arrows; generic foundation, not a trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-4d3b575c0",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-4d3b575c0 (reviewer sub-agent of L); spot-checked: FIX for one repairable fault. New node lem-sfb-algebraic-quotient-flat-refinement (06PJ) cited [def-pc-fppf-site], [lem-sfb-groupoid-stackification-local-description], [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation] in its statement without listing them in stmt_deps. The corrected node file under fixes/ adds the four, with no cycle; no other field changed. Everything else checks out. Item statement: unchanged from base, with the same stmt_deps on live and side-live, and it matches the converse of Stacks 06PL (criteria.tex lemma-BG-algebraic): trivial-action groupoid (B,G,s=t). New nodes: both match their sources hypothesis for hypothesis. 06PJ (lemma-quotient-algebraic, necessary direction) has the same h and the same restriction R'=U'x_{g,U,t}R x_{s,U,g}U'. 06NR (spaces-descent lemma-curiosity) has P one of flat/lft/lfp and only sheaf-surjectivity on u. Duplicates: neither node duplicates flat-groupoid-algebraic-quotient, fppf-groupoid-stack-presentations(2), representable-flat-lfp-fppf-descent, smooth-cover-flat-lfp-descent or representable-lft-fppf-source-descent, and neither restates an item clause. Steps, checked against the cited statements: Step 1 specialises 06PJ to U=B, R=G. Step 2 is a genuinely elementary local-lift argument: g and u are sheaf-surjective and vu=s'. Step 3 is 06NR applied twice and never assumes g flat. Step 4: algebraic spaces satisfy def-sfb-algebraic-moduli-stack via the fibred-groupoid calculus, W=coprod T_i -> T is flat, lfp and surjective by open-source locality, and base change gives G x_B W -> W. Step 5: the space clause of 04XD descent gives G x_B T -> T, then the chart test, with V=Y allowed, gives G -> B. Edge cases: empty B; G finite etale and alpha_p for 06PJ; u=id, X empty and the flat-cover special case for 06NR. Batch-5: lem-trf-space-fibre-products-etale-covers (02X2 fibre products) and def-trf-algebraic-space are a generic foundation and a definition. The other listed closures reach only definitions (def-trf-algebraic-space, def-trf-projective-bundle-morphism). None of these is a trace-formula or Poincare-duality step, so all are accepted. tool_uses accepted: lem-trf-space-fibre-products-etale-covers as a generic black box; lem-weil-pbc-scheme-coproduct-family is a Mathlib leaf. No SGA cited; no re-split note.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicClassifyingStackFlatness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.algebraic_classifying_stack_flatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicClassifyingStackFlatness.lean",
+  "statement": "theorem algebraic_classifying_stack_flatness {S : Scheme.{u}} {B G : AlgebraicSpace S} (p : G ⟶ B) (e : B.obj.obj ⟶ G.obj.obj) (i : G.obj.obj ⟶ G.obj.obj) (m : Limits.pullback p.hom.hom p.hom.hom ⟶ G.obj.obj) (F : BasedCategory.{max u v, max (u + 1) w} (Over S)) (a : BasedFunctor (discreteModuli B.obj.obj) F) (presentation : SpaceGroupoidQuotientPresentation p.hom.hom p.hom.hom e i m F a) (hF : IsAlgebraicModuliStack F) : MapIsFlat p ∧ MapIsLocallyOfFinitePresentation p",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The group operations and the fppf stackification are specified by the algebraic-space quotient presentation with identical endpoints. The conclusion uses the shared etale chart predicates; no finiteness, separation or flatness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25d6db84d",
+  "group": "NX",
+  "result": "pass",
+  "note": "Unchanged after the stopped background search (it found only the stage-1 Q43 run, no competing definition). Live and side-live contain only the scheme presentation from Q50. Item and new def node match the source and the records; sorry-only proof; no files changed or compiled."
+ }
+}

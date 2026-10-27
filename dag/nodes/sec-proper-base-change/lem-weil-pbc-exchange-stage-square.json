@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-exchange-stage-square",
+ "kind": "statement",
+ "title": "Scalar square for prescribed finite-stage exchange",
+ "statement": "Fix universes u and w, a prime natural number l, and an algebraic closure Ω : Type w of ℚ_[l], with its given field and algebra structures. Let X, Y, X', Y' be schemes in universe u, each Noetherian and of finite topological Krull dimension, with l invertible in every stalk. Write dT and iT for the respective dimension and invertibility witnesses for each scheme T. All preservation hypotheses, functors, comparisons and conclusions are quantified exactly as follows.\n\ntheorem pbcExchangeStageSquare\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)\n    (sq : ChosenCartesianSquare g' f' f g)\n    (presRf : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presRf' : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X' E),\n      PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presLg : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω Y E),\n      PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presLg' : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete X' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (Rf : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out))\n    (Rf' : StageSystem.Morphism (pbcScalarSystem l Ω X' dX'.out iX'.out)\n      (pbcScalarSystem l Ω Y' dY'.out iY'.out))\n    (Lg : StageSystem.Morphism (pbcScalarSystem l Ω Y dY.out iY.out)\n      (pbcScalarSystem l Ω Y' dY'.out iY'.out))\n    (Lg' : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω X' dX'.out iX'.out))\n    (hRf : ∀ E, Rf.Φ E = pbcDescentDirectImage l Ω f presRf E)\n    (hRf' : ∀ E, Rf'.Φ E = pbcDescentDirectImage l Ω f' presRf' E)\n    (hLg : ∀ E, Lg.Φ E = pbcDescentPullback l Ω g presLg E)\n    (hLg' : ∀ E, Lg'.Φ E = pbcDescentPullback l Ω g' presLg' E)\n    (bRf : PbcDirectImageBetaSpec l Ω f presRf Rf)\n    (bRf' : PbcDirectImageBetaSpec l Ω f' presRf' Rf')\n    (bLg : PbcPullbackBetaSpec l Ω g presLg Lg)\n    (bLg' : PbcPullbackBetaSpec l Ω g' presLg' Lg')\n    (τ : ∀ E : Padic.FiniteCoefficientFields l Ω,\n      (Rf.comp Lg).Φ E ⟶ (Lg'.comp Rf').Φ E)\n    (hτ : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n          (K : pbcIntegralStage l Ω X E),\n          HEq ((τ E).app (ScalarLocalization.mk K))\n            ((pbcStageLocalization l Ω Y' E).map\n              (ObjectProperty.homMk\n                (X := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                  (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj\n                    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                      (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))\n                (Y := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                  (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj\n                    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                      (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))\n                ((pbcActualCompletedExchange (pbcStageDatum.{u} l Ω E) sq).app\n                  K.obj)))) :\n    ∀ {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F)\n      (K : pbcStageCategory l Ω X E),\n      ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app K) ≫\n          ((Lg'.comp Rf').β h).hom.app K =\n        ((Rf.comp Lg).β h).hom.app K ≫\n          (τ F).app (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj K)\n\nAll stage systems and normalization predicates are those of [def-weil-pbc-descent-interfaces], [def-per-rational-direct-image-family], [def-weil-pbc-qbar-category] and [prop-weil-pbc-scalar-extension].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Final paragraph, scalar square for the exchange maps; Lean module Sheaf.Paper.PbcExchangeStageSquare, declaration AlgebraicGeometry.Scheme.pbcExchangeStageSquare"
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-descent-interfaces",
+  "def-per-rational-direct-image-family"
+ ],
+ "proof": [
+  {
+   "text": "fix E ≤ F and an integral representative K. Destruct the four family records and substitute the functor-family equalities obtained from hRf, hRf', hLg and hLg' by function extensionality. Thus every stage operation is the specified actual rational operation; proof irrelevance removes the remaining identity conjugations. Expanding Morphism.comp leaves the equation T.map (τ_E K) ≫ β_Rf' (Lg'_E K) ≫ Rf'_F.map (β_Lg' K) = β_Lg (Rf_E K) ≫ Lg_F.map (β_Rf K) ≫ τ_F (T_X K). Conjugate by the scalar/integral comparison isomorphisms at its source and target. The direct-image BetaSpec identities identify the two direct-image comparisons with their localized ambient mates. The pullback BetaSpec identities identify the inverses of the two pullback comparisons; multiply by their invertible components to obtain the required orientation. Use naturality of pbcScalarIntegralComparison on the integral exchange arrow to move scalar extension past its localized component. For the F-component use naturality of τ_F at the source comparison T_X(Q_X K) ⟶ Q_X(I_X K); this replaces evaluation at T_X(Q_X K) by evaluation at the localized integral scalar extension. Substitute hτ at K and at I_X K. Functoriality of localization combines adjacent factors and cancels the inverse scalar/integral comparisons. The remaining equality is the localization of pbcScalarCompletedExchange at K.obj. Every rational stage object is an integral representative, so this proves the square for all objects. Repeated coefficient fields obey the same equations and require no strict unit identification.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Finite-stage input extracted from the final operations/exchange paragraph, 2026-10-22."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar compatible direct image and completed pullback families descend from integral derived categories to rational coefficient stages, and their exchange is scalar compatible",
+   "results": "8 hits: IsScalarTower.rat, PresheafOfModules.pullback and pullbackPushforwardAdjunction, sheafificationCompPullback, scalar towers and scalar-localized modules. None provides the normalized derived coefficient family or its exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar compatible family of direct image or completed pullback functors on derived coefficient categories is coherent and exact after rational localization",
+   "results": "8 hits about linear derived functors, derived localization, and Ext; none supplies normalized coefficient-stage coherence or exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CommShift, identities, composition, ofIso_compatibility and ofComp_compatibility; useful local shift interfaces, no coefficient-family theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Ee]xchange|[Ee]xchange.*scalar",
+   "results": "No Mathlib hits. Project search finds the ambient pbcScalarCompletedExchange and rationalized equation, but no normalized StageSystem.Morphism.Hom construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcDescentFunctors",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-descent-functors",
+   "place": "Final paragraph, scalar square for exchange maps with prescribed localized components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcExchangeStageSquare",
+  "file": "lean/Sheaf/Paper/PbcExchangeStageSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcExchangeStageSquare",
+  "statement": "theorem pbcExchangeStageSquare\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)\n    (sq : ChosenCartesianSquare g' f' f g)\n    (presRf : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presRf' : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X' E),\n      PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presLg : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω Y E),\n      PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (presLg' : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete X' (pbcStageDatum.{u} l Ω E)\n        ((pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (Rf : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out))\n    (Rf' : StageSystem.Morphism (pbcScalarSystem l Ω X' dX'.out iX'.out)\n      (pbcScalarSystem l Ω Y' dY'.out iY'.out))\n    (Lg : StageSystem.Morphism (pbcScalarSystem l Ω Y dY.out iY.out)\n      (pbcScalarSystem l Ω Y' dY'.out iY'.out))\n    (Lg' : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω X' dX'.out iX'.out))\n    (hRf : ∀ E, Rf.Φ E = pbcDescentDirectImage l Ω f presRf E)\n    (hRf' : ∀ E, Rf'.Φ E = pbcDescentDirectImage l Ω f' presRf' E)\n    (hLg : ∀ E, Lg.Φ E = pbcDescentPullback l Ω g presLg E)\n    (hLg' : ∀ E, Lg'.Φ E = pbcDescentPullback l Ω g' presLg' E)\n    (bRf : PbcDirectImageBetaSpec l Ω f presRf Rf)\n    (bRf' : PbcDirectImageBetaSpec l Ω f' presRf' Rf')\n    (bLg : PbcPullbackBetaSpec l Ω g presLg Lg)\n    (bLg' : PbcPullbackBetaSpec l Ω g' presLg' Lg')\n    (τ : ∀ E : Padic.FiniteCoefficientFields l Ω,\n      (Rf.comp Lg).Φ E ⟶ (Lg'.comp Rf').Φ E)\n    (hτ : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n          (K : pbcIntegralStage l Ω X E),\n          HEq ((τ E).app (ScalarLocalization.mk K))\n            ((pbcStageLocalization l Ω Y' E).map\n              (ObjectProperty.homMk\n                (X := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                  (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj\n                    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                      (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))\n                (Y := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                  (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj\n                    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)\n                      (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))\n                ((pbcActualCompletedExchange (pbcStageDatum.{u} l Ω E) sq).app\n                  K.obj)))) :\n    ∀ {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F)\n      (K : pbcStageCategory l Ω X E),\n      ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app K) ≫\n          ((Lg'.comp Rf').β h).hom.app K =\n        ((Rf.comp Lg).β h).hom.app K ≫\n          (τ F).app (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj K)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-exchange-stage-square",
+  "worker": "stage3",
+  "summary": "Separate the scalar-square law for a given stage transformation from constructing that transformation by rationalization. It assumes natural stage maps with the prescribed integral components, and asserts only their scalar compatibility.",
+  "blueprint": "Serves the final operations/exchange sentence of prop-weil-pbc-descent-functors; the general descent and the unit route remain. Searches of the whole blueprint for scalar-compatible and exchange maps find the parent proposition and more specialized exchange nodes, but no separate equivalent statement.",
+  "edge_cases": "Identity morphisms, empty schemes, repeated coefficient fields, independently sized coefficient algebraic closures, and proof-irrelevant preservation witnesses keep the same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
+ }
+}

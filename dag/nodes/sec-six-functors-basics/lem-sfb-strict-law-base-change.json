@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-strict-law-base-change",
+ "kind": "statement",
+ "title": "Base change of fibrewise dense smooth charts and strict laws",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. An open $U\\subset Y$ in an $S$-scheme is $S$-dense if $U_s$ is dense in $Y_s$ for every $s\\in S$. An $S$-rational map is a morphism on an $S$-dense open, modulo agreement on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Smoothness and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A strict birational law on a smooth separated finite-type $S$-scheme $Y$ with nonempty fibres is an associative $S$-rational map $m:Y\\times_SY\\dashrightarrow Y$ for which there are opens $D,V,W\\subset Y\\times_SY$, each dense in every fibre of both projections to $Y$, such that $m$ is defined on $D$ and $(x,y)\\mapsto(x,m(x,y))$, $(x,y)\\mapsto(m(x,y),y)$ induce isomorphisms $D\\simeq V$ and $D\\simeq W$, respectively. If $f:Y\\to S$ is smooth and $U\\subset Y$ is $S$-dense, then for every $T\\to S$ the open $U_T\\subset Y_T$ is $T$-dense. If $Y$ is smooth, separated, of finite type and has nonempty fibres, these properties also hold for $Y_T\\to T$. If $m$ is a strict birational law on $Y$, its base change is a strict birational law on $Y_T$; the base changes $D_T,V_T,W_T$ witness strictness. These statements hold for arbitrary $T\\to S$, including the projections from iterated fibre products of a covering base.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.5 on S-dense opens and base change; 5.1 following Definition 1, printed p.113; 5.2 Definition 1, printed p.115; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-birational-law"
+ ],
+ "proof": [
+  {
+   "text": "First verify the density assertion in the slightly greater generality of any morphism $Z\\to B$ with a fibrewise dense open $H$. For $b'\\in B'$ over $b\\in B$, the fibre after base change is $Z_b\\times_{\\operatorname{Spec}\\kappa(b)}\\operatorname{Spec}\\kappa(b')$, and its open is the inverse image of $H_b$. Apply [lem-sc-scheme-over-field-universally-open] with field $\\kappa(b)$, scheme $\\operatorname{Spec}\\kappa(b')$, and base scheme $Z_b$: the projection $\\pi$ to $Z_b$ is open. If $O$ is any nonempty open in this new fibre, $\\pi(O)$ is a nonempty open of $Z_b$, hence meets $H_b$. A point in that intersection has a preimage in $O$, which therefore meets $\\pi^{-1}(H_b)$. This proves density. The fibre identifications follow by comparing projections in the universal property of [def-pc-fibre-product, def-pc-base-change]. In particular it proves the claimed assertion for $U\\subset Y$. No smoothness, finiteness, or irreducibility is needed for this topological argument.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0383, lemma-scheme-over-field-universally-open; the nonempty-open argument expands BLR 2.5, printed p.55"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pc-proper-base-change] to the smooth morphism $Y\\to S$; it gives smoothness of $Y_T\\to T$ without requiring properness. Apply [lem-weil-pbc-separated-base-change] and clause (2) of [lem-sfb-finite-type-composition-base-change] to obtain separatedness and finite type. Nonempty fibres say exactly that $Y\\to S$ is surjective. Thus [lem-weil-pbc-surjective-base-change] gives surjectivity of $Y_T\\to T$, hence nonempty fibres: a point $y'$ over $t$ gives $\\operatorname{Spec}\\kappa(y')\\to (Y_T)_t$ by the fibre-product universal property. This also covers $T=\\varnothing$, when the fibre assertion is vacuous.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth), 01T4 (lemma-base-change-finite-type), 01S1 (lemma-base-change-surjective); schemes.tex Tag 01KU, lemma-separated-permanence (3)"
+   }
+  },
+  {
+   "text": "An open immersion remains an open immersion by [lem-weil-pbc-open-immersion-base-change]. Base change of a representative $h:H\\to Z$ of an $S$-rational map is therefore a morphism $h_T:H_T\\to Z_T$ on an open domain, which is $T$-dense by step 1. If two representatives agree on an $S$-dense common open $E$, their base changes agree on $E_T$, again $T$-dense by step 1; thus the operation is independent of representatives. For an isomorphism of dense opens, base change of its inverse is an inverse, because their composites have the same projections as the identity. The same universal-property argument shows that base change preserves composition and the product projections. This constructs the base-changed rational map $m_T$ from $m:D\\to Y$ and identifies $(Y\\times_SY)_T$ with $Y_T\\times_TY_T$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5, printed p.55, definitions and base-change paragraph; expanded using Schemes Tag 01JY, lemma-base-change-immersion"
+   }
+  },
+  {
+   "text": "Put $P=Y\\times_SY$ and fix either projection $p_i:P\\to Y$. The projection $p_{i,T}:Y_T\\times_TY_T\\to Y_T$ is its base change along $Y_T\\to Y$: the identification $P\\times_{Y,p_i}Y_T\\simeq P\\times_ST$ is obtained by retaining the two $Y$-coordinates and the $T$-coordinate, with the inverse supplied by those same projections. Each of $D,V,W$ is fibrewise dense for $p_i$ by strictness. Apply the general density argument of step 1 with $B=Y$, $B'=Y_T$, and $H$ successively $D,V,W$. Their base changes are therefore dense in every fibre of $p_{i,T}$. Doing this for $i=1,2$ proves all six required fibrewise-density assertions, including fibres over points of $Y_T$ with arbitrary residue-field extensions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Definition 1, printed p.115; base-change preparation of BLR 2.5, printed p.55"
+   }
+  },
+  {
+   "text": "Let $\\Phi:D\\xrightarrow{\\sim}V$ and $\\Psi:D\\xrightarrow{\\sim}W$ be the strict-law charts. Base-change their maps and their inverses. The equations $\\Phi^{-1}\\Phi=\\mathrm{id}$ and $\\Phi\\Phi^{-1}=\\mathrm{id}$, and the corresponding equations for $\\Psi$, remain equations after base change by step 3. Hence $\\Phi_T:D_T\\simeq V_T$ and $\\Psi_T:D_T\\simeq W_T$. To identify them with the required translations, compare their two projections: $\\Phi_T$ has projections $p_{1,T}$ and $m_T|_{D_T}$, and $\\Psi_T$ has projections $m_T|_{D_T}$ and $p_{2,T}$. The universal property of the product gives exactly $(x,y)\\mapsto(x,m_T(x,y))$ and $(x,y)\\mapsto(m_T(x,y),y)$. Together with step 4 these are the strictness witnesses.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Definition 1, printed p.115, universal translations and their isomorphism charts"
+   }
+  },
+  {
+   "text": "Associativity of the given rational law provides an $S$-dense common open $A\\subset Y\\times_SY\\times_SY$ on which both iterated products are defined and equal. Under the canonical identification of its base change with $Y_T\\times_TY_T\\times_TY_T$, the open $A_T$ is $T$-dense by step 1. The two iterates of $m_T$ there are the base changes of the two original iterates, because product maps and composition commute with base change as checked in step 3. Pulling back their equality proves associativity as $T$-rational maps. For the BLR formulation that the two iterates agree wherever both are defined, use the chosen representative on $D$: its common domain is the intersection of the inverse images of $D$ specifying the two inner and two outer products. Finite intersections and these inverse images commute with base change by their fibre-product universal properties. Its two ordinary morphisms are equal by original associativity, so their base changes are equal on that entire common domain as well. Steps 2--5 now give every condition of a strict birational law on $Y_T$. Every step allowed arbitrary $T\\to S$, so it also applies to each projection from any iterated fibre product of a covering base.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.1 Definition 1(b), printed p.112, and base-change paragraph on p.113; BLR 5.2 Definition 1, printed p.115"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-over-field-universally-open",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5 printed p.55; 5.1 Definition 1 and following base-change paragraph, pp.112-113; 5.2 Definition 1, p.115. Primary scan read online; local PDF unavailable. Detailed elementary assembly using local Stacks Tags 0383, 01VB, 01T4, 01S1, 01KU, 01JY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict birational group laws on smooth schemes are preserved by arbitrary base change and fibrewise dense opens stay dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence.IsStableUnderBaseChange\", \"doc\": \"If a morphism of schemes satisfies the valuative criterion for existence, then any base change (pullback) of this morphism also satisfies the valuative criterion for existence. This means the property\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being a universally open morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally open morphism of schemes, then for any base change $ Y' \\to Y $, the\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ), RingHom.IsStableUnderBaseChange (@RingHom.IsStandardSmoothOfRelativeDimension n)\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is standard smooth of relative dimension $ n $, then the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits preserve smoothness and open immersions separately or assert density of a rational-map domain; none proves fibrewise density after arbitrary base change or base change of strict relative laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits preserve smoothness and open immersions separately or assert density of a rational-map domain; none proves fibrewise density after arbitrary base change or base change of strict relative laws."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*group.*law",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits preserve smoothness and open immersions separately or assert density of a rational-map domain; none proves fibrewise density after arbitrary base change or base change of strict relative laws."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise dense open subschemes of a smooth scheme remain fibrewise dense after base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsOpenImmersion\", \"doc\": \"The property of being an open immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is an open immersion and $ g: Z \\to Y $ is any morphism of schemes, then the base change $ f \\ti\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty @IsOpenImmersion\", \"doc\": \"If a morphism property of schemes is stable under base change, then composing a morphism with an open immersion preserves the property. Specifically, whenever a morphism $ f $ has the property and an \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits preserve smoothness and open immersions separately or assert density of a rational-map domain; none proves fibrewise density after arbitrary base change or base change of strict relative laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense open in a smooth variety stays dense after extension of the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits preserve smoothness and open immersions separately or assert density of a rational-map domain; none proves fibrewise density after arbitrary base change or base change of strict relative laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any field extension K k the projection X base change K to X is an open map and surjective",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.Polynomial.isOpenMap_comap_C, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.universallyOpen_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: auxiliary openness, surjectivity, smoothness and elliptic-curve point operations do not state preservation of a strict relative birational law and both fibrewise dense translation charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"pullback\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: auxiliary openness, surjectivity, smoothness and elliptic-curve point operations do not state preservation of a strict relative birational law and both fibrewise dense translation charts."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*group.*law",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: auxiliary openness, surjectivity, smoothness and elliptic-curve point operations do not state preservation of a strict relative birational law and both fibrewise dense translation charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict birational laws on smooth schemes are preserved by arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.IsStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: auxiliary openness, surjectivity, smoothness and elliptic-curve point operations do not state preservation of a strict relative birational law and both fibrewise dense translation charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An associative rational multiplication with isomorphic left and right translation charts stays a strict birational group law after changing the base scheme",
+   "results": "8 hits: WeierstrassCurve.VariableChange.instGroup, WeierstrassCurve.VariableChange.instMul, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.VariableChange.baseChange, WeierstrassCurve.VariableChange, WeierstrassCurve.Affine.Point.map_map, WeierstrassCurve.instMulActionVariableChange, WeierstrassCurve.instSMulVariableChange",
+   "date": "2026-10-24",
+   "verdict": "no match: auxiliary openness, surjectivity, smoothness and elliptic-curve point operations do not state preservation of a strict relative birational law and both fibrewise dense translation charts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-birational-law-realization",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; base-change preparation for 6.5 Corollary 2, including the double and triple overlap bases",
+   "via": [
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-law-base-change",
+  "worker": "stage1",
+  "summary": "Verified BLR relative density and strict-law definitions against the primary scan. Expanded universal-openness density, preservation of representatives, projection-relative density, translation inverses and formulas, and associativity under arbitrary base change. Reused existing DAG facts; no new nodes and no statement change. Local BLR PDF remains WANTED.",
+  "blueprint": "No imported blueprint ancestor is recorded: blueprint_refs.py ancestor prints None. This supporting node realizes the arbitrary-base-change preparation in the existing from.place for strict birational law realization, specifically BLR 2.5, 5.1 base-change paragraph and 5.2 Definition 1. Searched current blueprint for strict birational, birational law and fibrewise dense: no equivalent blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-681524253",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-681524253 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit containing the item and its report, with no new nodes. The statement is unchanged, and the item's definitions of S-density, S-rational maps and strict laws match BLR 2.5, 5.1 Def. 1 and 5.2 Def. 1 as I know them, since the BLR PDF is not in literature/ (WANTED; proof_origin agent). They also match the parent lem-sfb-strict-birational-law-realization. Step 1: I checked Stacks 0383 (morphisms.tex l.4505, cited as lem-sc-scheme-over-field-universally-open). The fibre after base change is Z_b ⊗_{κ(b)} κ(b'), its projection to Z_b is open, so a nonempty open has open image meeting H_b; density holds with no hypothesis on Z→B. Step 2: I read the statements of lem-pc-proper-base-change clause (2) (smooth f alone), the 01KU, 01T4 (2), 01S1 and 01JY nodes. Nonempty fibres is equivalent to surjective. Step 3 handles representatives, agreement loci, inverses and compositions through uniqueness in the fibre product. Step 4: P ×_{Y,p_i} Y_T ≅ P ×_S T, and applying step 1 with B=Y, B'=Y_T to D, V, W gives all six relative density statements. Step 5: the projections of Φ_T and Ψ_T give the two translations, with the base-changed inverses as inverses. Step 6: the T-dense agreement open pulls back, which gives associativity as rational maps and also on the common domain of the representatives on D. Edge cases checked: T empty, empty fibres, inseparable or transcendental residue-field extensions, nonreduced T, and Y a group scheme. Duplicates: lem-sfb-smooth-fibrewise-dense-open-base-change (unsplit) contains clause 1 plus schematic density. The item proves clause 1 directly from a Mathlib leaf instead and creates no duplicate. I found no other node on base change of strict laws. Off-unit citations: all are Mathlib leaves or definitions except lem-pc-proper-base-change. That node is Lean-closed (smoothness under base change), and I accept it as a generic tool. There is no cycle and no SGA. Non-blocking remark: if a user later needs associativity on the maximal common domain, it follows from schematic density (the existing unsplit node above) and separatedness. Searches of all three kinds are recorded. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLawBaseChange",
+  "declaration": "AlgebraicGeometry.strictBirationalLaw_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.fiberwiseDenseOpen_baseChange",
+   "AlgebraicGeometry.strictLawAmbient_baseChange",
+   "AlgebraicGeometry.relativeRationalChart_baseChange",
+   "AlgebraicGeometry.strictBirationalLaw_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLawBaseChange.lean",
+  "statement": "theorem strictBirationalLaw_baseChange {S T : Scheme.{u}} (Y : Over S) [Smooth Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [Surjective Y.hom] (m : RelativeRationalChart (Y ⨯ Y) Y) (hm : m.IsStrictLaw) (g : T ⟶ S) : (m.lawBaseChange g).IsStrictLaw ∧ (m.lawBaseChange g).leftTranslation = (Over.pullback g).map m.leftTranslation ≫ prodComparison (Over.pullback g) Y Y ∧ (m.lawBaseChange g).rightTranslation = (Over.pullback g).map m.rightTranslation ≫ prodComparison (Over.pullback g) Y Y",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff40f2aa",
+  "group": "Q08",
+  "result": "fix",
+  "note": "Read item, all stmt_deps, new def node def-sfb-relative-birational-law, both modules, report. Item JSON differs from live only in lean+stmt_deps (adds new def node); lean.statement verbatim. Clause match OK: IsFiberwiseDenseOpen via Mathlib fiberι; IsRational/Agrees/Quot RelativeRationalMap/IsBirational; translations prod.lift (i≫fst) m and (m, i≫snd); IsAssociative lifts (x,y),(y,z),(xy,z),(x,yz) checked; IsStrictLaw six projection densities + open-immersion translations; ambient Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact/Surjective(=nonempty fibres); three clauses as three theorems plus representative-independence; lawBaseChange domain D_T, translation identities via prodComparison verified true. Edge cases T/S empty, residue extensions, nonreduced T, g=id, group scheme OK; single universe u. No duplicate in Mathlib/project/DAG. No hollow defs, all theorems sorry, docstrings with BLR places and proof steps, no line >100. FIX (H12): new node used open immersions without citing def-weil-open-immersion -> fixes/def-sfb-relative-birational-law.json adds stmt_dep and [def-weil-open-immersion] citation in statement. No Lean change, no compile needed."
+ }
+}

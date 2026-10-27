@@ -1,0 +1,364 @@
+{
+ "id": "lem-pur-open-completed-restriction-identification",
+ "kind": "statement",
+ "title": "Canonical completed pullback equals open restriction on complete inputs",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $j:U\\hookrightarrow X$ be an open immersion of schemes on which $\\ell$ is invertible [def-weil-open-immersion]. Use small pro-etale sites [def-weil-pbc-proetale-site] and put $B_{n,W}=(A_n)_W$, $R_W=\\lim_nB_{n,W}$ for $W=X,U$ [def-weil-completed-integral-coefficients]. On module sheaves [def-weil-sheaf-of-modules-category], let $r$ be ordinary site restriction to $U$ followed by scalar transport from $R_X|_U$ to $R_U$ via the inverse of the canonical constant-section-preserving ring isomorphism. Let $r_n$ denote the analogous finite restriction. Apply these exact functors termwise to get $D(r),D(r_n)$ on ordinary unbounded derived categories [def-weil-abstract-derived-category].\n\nFor any $K\\in D(R_X)$, write $K_n=K\\otimes^L_{R_X}B_{n,X}$. Use the functorial strict quotient-tower definition of integral pullback [def-pur-integral-derived-operations], its finite pullbacks [def-weil-derived-pullback-tensor-hom], and restriction of scalars [def-pc-sheaf-restrict-scalars]. There is a natural isomorphism\n$$D(r)\\bigl(R\\lim_n\\operatorname{Res}_nK_n\\bigr)\\xrightarrow{\\sim}Lj^*_{\\mathcal O_E}K.$$\nIt is induced before localization by the product and shifted-Roos-cone comparisons on one flat-term K-flat representative [def-pc-kflat-complex], with level comparison the canonical finite inverse-image/restriction comparison. It identifies the actual projections, strict transitions, and augmentation maps from $D(r)K$. In particular the component to $\\operatorname{Res}_nLj_n^*K_n$ is $D(r)$ of the canonical reduction map, followed by the normalized finite coefficient comparison, and not an arbitrary lift of that reduction map to a cone.\n\nOn the full subcategory $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] the resulting canonical map\n$$\\kappa_K:D(r)K\\longrightarrow Lj^*_{\\mathcal O_E}K$$\nis an isomorphism, natural for all derived morphisms. It is the composite of the transported canonical quotient-tower completion unit with the displayed isomorphism. It identifies the reductions and their canonical maps at every positive level. After transport of coefficient rings, the comparison of $D(r)$ with termwise restriction commutes with $Q$, the localization functor. No equivalence of ambient unbounded categories is asserted for $j$ or for completed pullback.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "def-pur-section-invariant, finite-clopen expansion: comparison of actual completed pullback and ordinary component restriction in retained step 5, also reductions in steps 2-3; agent open-localization refinement. Stacks Tag 00XZ, sites-section-localize; Tag 08TC, derived-definition-derived-limit and derived-lemma-products; quotient-tower model of def-pur-integral-derived-operations."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-kflat-complex",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Use continuous cocontinuous precomposition along the actual open-site inclusion. Mathlib pushforwardContinuousSheafificationCompatibility constructs each finite coefficient isomorphism; its unit equation fixes constant sections. Naturality identifies the quotient transitions. Apply the canonical limit comparison to the ring-valued coefficient towers, and lift through the fully faithful forgetful functor from commutative rings. The limit projection equations fix the completed isomorphism. Sheafification extensionality and joint faithfulness of limit projections prove uniqueness. The pushforward is additive; pushforward_finiteLimits and the site-adjunction left-adjoint instance prove exactness.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ, section-localize; exact ringed localization and sectionwise inverse limits"
+   }
+  },
+  {
+   "text": "Construct the finite restriction/pullback comparison as uniqueness of left adjoints to the actual coefficient pushforward. Verify the two ring-map adjunction equations by their constant sections. The unit of the left-adjoint comparison and the site adjunction triangle identify its sections with the prescribed graph coprojections.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ, section-localize; graph-coprojection normalization on localized sites"
+   }
+  },
+  {
+   "text": "Use the completed projection square to compare ordinary restriction after finite scalar restriction with finite restriction followed by target scalar restriction. Apply this comparison and the finite adjoint comparison termwise to the actual finite quotient complexes. Conjugate the source transition and verify the pullback-generator equation; uniqueness of integralOperationsPullbackTransition identifies it with the prescribed target transition. Assemble the natural isomorphism of towers; the existing globalTower_eq identifies the source presentation, and the graph equation proves the required level section formula.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-integral-derived-operations",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M/099N, lemma-naive-completion and lemma-pushforward-Noetherian-case; actual quotient-tower model"
+   }
+  },
+  {
+   "text": "The underlying abelian-presheaf functor reflects limits. Precomposition preserves sectionwise products, so ordinary restriction preserves countable products. Compose its canonical product comparison with the product of the level isomorphisms. Check every projection and the transition square. Apply the explicit shifted-cone comparison cs of the exact-product Roos chain-map construction. Its first and second coordinate equations give the two required Roos equations. For naturality, check both coordinates and cancel using the mapping-cocone identity decomposition; this constructs the natural Roos isomorphism itself.",
+   "uses": [
+    "lem-cbc-exact-product-functor-roos-chain-maps",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; lemma-products; signed cone comparison normalized by Tag 0941"
+   }
+  },
+  {
+   "text": "Whisker completionComparison with exact derived restriction, then compose mapDerivedCategoryFactors, the localized natural Roos isomorphism, and the inverse integralDerivedPullbackComparison. Fully faithful whiskering along the good-complex localization descends this isomorphism to the unbounded derived categories. The inverse-equivalence equation of this fully faithful whiskering proves the displayed localization factorization. Package it with the constructed tower comparison.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization of representative-level natural transformations"
+   }
+  },
+  {
+   "text": "Choose a prime p larger than ell and use the algebraic closure of ZMod p to supply an auxiliary finite-field datum. sfDerivedComplete_iff_legacy turns the first clause of sfIntegralConstructible into unrestricted legacy completeness. The proved complete_unit_isIso in RoosIntrinsicUnitComparison then makes the actual IntegralOnSlice.completionUnit invertible. Exact derived restriction preserves this isomorphism; its composite with the descended comparison is exactly the recorded kappa component.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-a1-roos-intrinsic-unit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; canonical augmentation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-reduction-tower",
+  "lem-a1-roos-intrinsic-unit-comparison",
+  "lem-cbc-exact-product-functor-roos-chain-maps",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": "T4, 2026-10-25: coefficient exactness and complete-input invertibility proved; the concrete six-step comparison plan remains for the original open_completed_restriction hole. Comparison records use equivalent normalized product subtypes.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes the completed pro etale integral derived pullback of a derived complete complex is naturally isomorphic to ordinary restriction preserving the canonical reduction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictOpensRange\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y U : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : U ⟶ Y) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion g] →\\n        CategoryTheory.Arrow.mk (f ∣_ AlgebraicGeometry.Scheme.Hom.opensRange g) ≅\\n          CategoryTheory.Arrow.mk (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, U$ with morphisms $f : X \\to Y$ and an open immersion $g : U \\to Y$, there is an isomorphism in the arrow category of schemes between the restriction of $f$ to the image of $g$ and \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_cone_of_left_condition\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y Z : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Z)\\n  [hf : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] (g : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftFst f\", \"doc\": \"Given an open immersion $ f : X \\\\to Z $ between presheafed spaces and a morphism $ g : Y \\\\to Z $, the pullback cone constructed from $ f $ and $ g $ satisfies the condition that the composition of the\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftFst\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y Z : AlgebraicGeometry.PresheafedSpace C} →\\n      (f : X ⟶ Z) → [hf : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → (g : Y ⟶ Z) → Y.restrict ⋯ ⟶ X\", \"doc\": \"Given an open immersion $ f : X \\\\to Z $ between presheafed spaces and a morphism $ g : Y \\\\to Z $, this constructs the pullback cone in the category of presheafed spaces. The cone consists of the topol\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f g : X ⟶ Y} →\\n    f = g →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.restrictFunctor g\", \"doc\": \"Given two open immersions $ f, g : X \\to Y $ between schemes that are equal as morphisms, the restriction functors from the category of sheaves of modules over $ Y $ to the category of sheaves of modul\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y U : AlgebraicGeometry.Scheme} (f : Y ⟶ U) (g : U ⟶ X) (fg : Y ⟶ X)\\n  (H : fg = CategoryTheory.CategoryStruct.comp f g) [h : AlgebraicGeometry.IsOpenImmersion g] (V : U.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app f V =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.appIso \", \"doc\": \"Given schemes $X, Y, U$ and morphisms $f: Y \\\\to U$, $g: U \\\\to X$ with composition $fg: Y \\\\to X$, if $g$ is an open immersion, then for any open subset $V \\\\subseteq U$, the morphism $f_\\\\#(V)$ equals th\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).hom\\n      ((TopologicalSpace.Opens.map f.base).obj U).ι =\\n    CategoryTheory.Limits.pullback.fst f U.ι\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $U$ be an open subset of $Y$. Let $\\\\phi$ be the canonical isomorphism `pullbackRestrictIsoRestrict f U` which identifies the pullback $X \\\\times_Y Y|_U$ w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrict\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.restrictₛₗ\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) {X Y : Cᵒᵖ} (f : X ⟶ Y) : ↑(M.obj X) →ₛₗ[RingCat.Hom.hom (R.map f)] ↑(M.obj Y)\", \"doc\": \"The restriction map `M.map f` of a presheaf of modules `M`, bundled as a semilinear map\\nalong the ring map `R.map f`.\"}\n  {\"name\": \"PresheafOfModules.restriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) {X Y : Cᵒᵖ} (f : X ⟶ Y) : PresheafOfModules.evaluation R X ⟶ (PresheafOfModules.evaluation R Y).comp (ModuleCat.restrictScalars (RingCat.Hom.hom (R.map f)))\", \"doc\": \"The restriction natural transformation on presheaves of modules, considered as linear maps\\nto restriction of scalars.\"}\n  {\"name\": \"PresheafOfModules.restriction_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) {X Y : Cᵒᵖ} (f : X ⟶ Y) (M : PresheafOfModules R) : (PresheafOfModules.restriction R f).app M = M.map f\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictₛₗ_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) {X Y : Cᵒᵖ} (f : X ⟶ Y) (m : ↑(M.obj X)) : (M.restrictₛₗ f) m = (CategoryTheory.ConcreteCategory.hom (M.map f)) m\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y), CategoryTheory.Limits.PreservesColimit (F.comp (PresheafOfModules.evaluatio\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (PresheafOfModules.evaluation R X)).comp (CategoryTheory.fo\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : (PresheafOfModules.restrictScalars (CategoryTheory.CategoryStruct.id R)).Full\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (M' : PresheafOfModules R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"The restriction of scalars of presheaves of modules, on objects.\"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : CategoryTheory.Functor (PresheafOfModules R') (PresheafOfModules R)\", \"doc\": \"The restriction of scalars functor `PresheafOfModules R' ⥤ PresheafOfModules R`\\ninduced by a morphism of presheaves of rings `R ⟶ R'`.\"}\n  {\"name\": \"PresheafOfModules.instFaithfulRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : (PresheafOfModules.restrictScalars α).Faithful\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : (PresheafOfModules.restrictScalars α).Additive\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalars_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') (M' : PresheafOfModules R') : (PresheafOfModules.restrictScalars α).obj M' = M'.restrictScalarsObj α\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|proetale).*(complet|restrict)|(complet|restrict).*(pro[Ee]tale|proetale)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary restriction to an open subsite commutes with adic derived completion via the canonical unit and inverse limit of finite coefficient pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AdicCompletion.map_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) (x : M),\\n  (AdicCompletion.map I f) ((AdicCompletion.of I M) x) = (AdicCompletion.of I N) (f x)\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ and element $ x \\\\in M $, the image of $ x $ under the canonical linear map from $ M $ to its $ I $-adic completion, followed by the induced linear map between \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed inverse image along an open immersion on pro etale derived complete integral sheaves agrees with exact sectionwise restriction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] {U : Y.Opens} {V : X.Opens} (e : V ≤ f ⁻¹ᵁ U) :\\n  f.appLE U V e ≫ (f.appIso V).inv =\\n    Y.presheaf.map (homOfLE <| (f.image_mono e).trans (f.image_preimage_eq_opensRange_inf U ▸ inf_le_right)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $U$ be an open subset of $Y$ and $V$ be an open subset of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$. Let $\\\\phi: \\\\Gamma(U, \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens) {Z : CommRingCat}\\n  (h :\\n    Y.presheaf.obj\\n        (Opposite.op ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ((TopologicalSpace.Opens.map f.base).obj U))) ⟶\\n      Z),\\n  CategoryTheory.Catego\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\Gamma(V, \\\\mathcal{O}_S)$ denote the ring of sections of the structure sheaf of a scheme $S$ over an open s\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U\", \"doc\": \"Let $X$ and $Y$ be schemes, $f: X \\\\to Y$ be a morphism between them, and $U$ be an open subset of $Y$. Let $\\\\iota : U \\\\to Y$ be the canonical inclusion morphism of the corresponding open subscheme. Th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(U) : f.app U ≫ (f.appIso (f ⁻¹ᵁ U)).inv = Y.presheaf.map (homOfLE (Set.image_preimage_subset f U.1)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $f^\\\\#_U: \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U))$ be the map on sections induced by $f$. Since $f$ is \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(U : Opens X) :\\n  H.invApp _ U ≫ f.hom.c.app (op (opensFunctor f |>.obj U)) =\\n    X.presheaf.map (eqToHom (by simp [Opens.map, Set.preimage_image_eq _ H.base_open.injective]))\", \"doc\": \"For a sheafed space morphism $ f : X \\to Y $ that is an open immersion, and for any open subset $ U $ of $ X $, the composition of the inverse presheaf component isomorphism $ H.\\text{invApp} $ at $ U $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat) (x : CategoryTheory.ToType (X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (f.c.app (Opposite.op ((Alge\", \"doc\": \"For an open immersion $ f: X \\to Y $ of locally ringed spaces, the composition of the inverse of the presheaf isomorphism component at $ f(U) $ with the sheaf morphism induced by $ f $ equals the presh\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X \\to Y $ between presheafed spaces, the composition of the inverse of the isomorphism $ \\\\text{isoRestrict}(f) $ with $ f $ equals the canonical morphism $ Y.\\\\text{ofRestric\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completedPullback|completed_pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open pro etale subsite commutes with derived adic completion and preserves the canonical quotient augmentation",
+   "results": "8 hits: AdicCompletion, AlgebraicGeometry.PresheafedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Opens.toScheme, Rat.HeightOneSpectrum.adicCompletion.padicEquiv, AdicCompletion.of",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"overFunctor\"",
+   "results": "2 hits: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion restriction of pro etale completed integral coefficient complexes commutes with the strict quotient tower homotopy limit and its canonical completion unit",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving countable products commutes with derived completion of a quotient tower and its canonical augmentation",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-clopen-derived-decomposition",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "def-pur-section-invariant, finite-clopen expansion: comparison of actual completed pullback and ordinary component restriction in retained step 5, also reductions in steps 2-3; agent open-localization refinement. Stacks Tag 00XZ, sites-section-localize; Tag 08TC, derived-definition-derived-limit and derived-lemma-products; quotient-tower model of def-pur-integral-derived-operations.",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-open-completed-restriction-identification",
+  "worker": "stage1",
+  "summary": "Six-step assembly using existing slice localization, finite graph-coprojection comparison, strict quotient-tower operations, normalized exact-product Roos comparison, descent and canonical completed augmentation invertibility. No new nodes and no statement change. Removed an inapplicable finite-type-over-a-field comparison from the draft.",
+  "blueprint": "def-pur-section-invariant finite-clopen expansion retained step 5, with reductions in steps 2–3: steps 1–3 give open coefficient and augmented tower comparisons; steps 4–5 give the canonical Roos comparison and Q-normalized descent; step 6 gives the complete-input isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution existence used by the unit’s stipulated quotient-tower construction."
+   },
+   {
+    "node": "lem-pur-completed-reduction-augmentation-iso",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic inverse-image identification for an object of a small pro-etale site, including its graph-coprojection and constant-coefficient normalization; no alternate purity route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor factorization through Q, needed to specify the termwise normalization."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization descent for natural transformations, needed for all derived morphisms and roofs."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total inverse-limit existence for strict module towers used to instantiate the canonical augmentation theorem."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic ringed-site, scalar-transport or strict-tower tool used to implement the stipulated open-restriction quotient-tower route; it does not replace any purity step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-2cf7d3adc",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-2cf7d3adc (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md is in the run directory. It has no new nodes and leaves the item statement and stmt_deps unchanged. There is no repair note, so this is not a 2026-10-21 re-split. Steps 1-6 check out against the cited statements. Step 1: weakly-etale localization (1) and (2), with sectionwise limits, give α = lim β_n and π_{n,U}α = β_nπ_{n,X}|_U; restriction is exact and the ring-iso transport is an exact equivalence. Step 2: object inverse image clause (3), with the semilinear compatibility argued through the clause (1) coprojections. Step 3: Res_{n,U}T_{β_n}|_U = T_α|_U Res_{n,X} follows from the projection identity; the strict tower is the one of def-pur-integral-derived-operations. Step 4: every hypothesis of the exact-product strict-limit comparison holds (sectionwise exact products, r exact and product-preserving), and its augmentation clause plus the strict Roos normalization fix the augmentation. Step 5: well-definedness (2), the localization universal property and the exact-functor factorization. Step 6: every hypothesis of lem-pur-completed-reduction-augmentation-iso holds (any p≠ℓ, any scheme W, flat-term K-flat P, e = id, γ_n is the reduction augmentation, K derived complete). FIX (C3/B3): step 6 supplied the SiteLimitData and the actual reduction tower without citing their definition nodes. I added def-pur-completed-pushforward-models and def-weil-integral-reduction-tower to the step-6 text, its uses and proof_deps; there is no cycle. Edge cases checked: U empty, j = id, K = 0, K not complete. The off-unit tool_uses are generic and accepted, and there is no SGA. Batch-5: the flagged leaf lem-pod-completed-integral-scalar-regular only says that ϖ^m is injective on sections of the completed coefficient ring sheaf. It is a coefficient-ring fact that neither assumption gives and that is not a step of the trace formula or Poincaré duality, so the citation is accepted. Maintainer note: the existing lem-sf-immersion-completed-pullback-comparison (sk-prop-sf-localization, built on def-weil-pbc-completed-pullback) overlaps the item's complete-input claim in spirit. It is off route and not created by this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenCompletedRestrictionIdentification",
+  "declaration": "WeilConjectures.OpenCompletedRestriction.open_completed_restriction",
+  "declarations": [
+   "WeilConjectures.OpenCompletedRestriction.globalHasDerived",
+   "WeilConjectures.OpenCompletedRestriction.inclusion",
+   "WeilConjectures.OpenCompletedRestriction.inclusionContinuous",
+   "WeilConjectures.OpenCompletedRestriction.ringRestriction",
+   "WeilConjectures.OpenCompletedRestriction.Coefficients",
+   "WeilConjectures.OpenCompletedRestriction.restriction",
+   "WeilConjectures.OpenCompletedRestriction.finiteRestriction",
+   "WeilConjectures.OpenCompletedRestriction.coefficients_exact",
+   "WeilConjectures.OpenCompletedRestriction.coefficients",
+   "WeilConjectures.OpenCompletedRestriction.ordinary",
+   "WeilConjectures.OpenCompletedRestriction.ordinaryAdditive",
+   "WeilConjectures.OpenCompletedRestriction.ordinaryLimits",
+   "WeilConjectures.OpenCompletedRestriction.ordinaryColimits",
+   "WeilConjectures.OpenCompletedRestriction.complexRestriction",
+   "WeilConjectures.OpenCompletedRestriction.derivedRestriction",
+   "WeilConjectures.OpenCompletedRestriction.graphSection",
+   "WeilConjectures.OpenCompletedRestriction.sourceTower",
+   "WeilConjectures.OpenCompletedRestriction.targetTower",
+   "WeilConjectures.OpenCompletedRestriction.roosProjection",
+   "WeilConjectures.OpenCompletedRestriction.roosSecond",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison",
+   "WeilConjectures.OpenCompletedRestriction.Comparison",
+   "WeilConjectures.OpenCompletedRestriction.open_completed_restriction",
+   "WeilConjectures.OpenCompletedRestriction.kappa",
+   "WeilConjectures.OpenCompletedRestriction.open_completed_restriction_complete",
+   "WeilConjectures.OpenCompletedRestriction.FiniteSectionNormalization",
+   "WeilConjectures.OpenCompletedRestriction.LevelSectionNormalization",
+   "WeilConjectures.OpenCompletedRestriction.ProductNormalization",
+   "WeilConjectures.OpenCompletedRestriction.RoosFirstNormalization",
+   "WeilConjectures.OpenCompletedRestriction.RoosSecondNormalization",
+   "WeilConjectures.OpenCompletedRestriction.TowerNormalization",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.finite",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.levels",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.product",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.roos",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.finite_sections",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.level_sections",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.product_projections",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.roos_first",
+   "WeilConjectures.OpenCompletedRestriction.TowerComparison.roos_second",
+   "WeilConjectures.OpenCompletedRestriction.ComparisonLocalization",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.toTowerComparison",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.finite",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.levels",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.product",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.roos",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.derived",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.localization",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.finite_sections",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.level_sections",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.product_projections",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.roos_first",
+   "WeilConjectures.OpenCompletedRestriction.Comparison.roos_second"
+  ],
+  "file": "lean/Sheaf/Paper/OpenCompletedRestrictionIdentification.lean",
+  "statement": "theorem open_completed_restriction (_hlX : ∀ x : X, Invertible (l : X.residueField x)) (_hlU : ∀ x : U, Invertible (l : U.residueField x)) : Nonempty (Comparison l E j)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a959d5b74",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Item node changed only by the new lean field; 11 stmt_dep records identical to live; lean.statement verbatim. H3 checked clause by clause, every comparison fixed by an equation: finite coefficient isos by constant sections and the completed one by limit projections, so coefficients_exact ∃! is true; r = SheafOfModules.pushforward along Over.map with the inverse ring map R_U→R_X|_U; finite comparison by graph-coprojection sections; levels a natural iso of ℕᵒᵖ-towers (strict transitions) pinned on 1⊗x generators, HEq between definitionally equal carriers (restrictScalars), so provable; product by projections; roos by both mapping-cocone coordinates, which fixes the augmentation (roosUnit = lift(productAugmentation, 0)); derived iso by localization on Good objects via completionComparison, integralDerivedPullbackComparison and mapDerivedCategoryFactors. kappa = whiskerRight completionUnit ≫ derived.hom, natural. The D^b_c clause uses Scheme.{u}, forced by the recorded single-universe sfIntegralConstructible; the citers FiniteClopenDerivedDecomposition and AugmentedIntegralDescent are at the same u; the general comparison keeps t,u; accepted. Edge cases: U or X empty, j = id, K = 0, incomplete K (only derived, no invertibility claim). No new nodes, no dep repairs, only the 3 theorems are sorry, docstrings carry source, blueprint tag and the 6 proof steps. Advisories: integralOperations*/towerTransitionEndomorphism/unrestrictedIntegralTensorSection owners not in stmt_deps (precedents Q101, NS); local allowUnsafeReducibility for the none branch. Overlap with lem-sf-immersion-completed-pullback-comparison is off route, not H4. Nothing compiled because no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-94136",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261025T204922-L-3049725",
+  "kind": "interface",
+  "note": "independent cc review: delivered OpenCompletedRestrictionIdentification (subtype records, coefficients_exact + complete proofs) against clone original, change record, item node and def-pur-open-completed-restriction-data; axioms checked in-module; 8 direct importers compiled against the delivered module"
+ }
+}

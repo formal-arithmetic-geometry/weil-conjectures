@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-bruhat-longest-cell-charts",
+ "kind": "statement",
+ "title": "Bruhat cells and flag charts for a split reductive group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with trivial smooth connected normal unipotent radical. Fix a split maximal torus $T$ and a Borel subgroup $B\\supseteq T$, with unipotent radical $V$, roots $\\Phi$, positive roots $\\Phi^+$, and the right $B$-torsor $\\pi:G\\to Q=G/B$ as in [lem-sfb-reductive-borel-pair-structure]. Put $N=|\\Phi^+|$ and $W=N_G(T)(F)/T(F)$, with action $(w\\chi)(t)=\\chi(n_w^{-1}tn_w)$ on characters. The group $W$ is finite. There is a unique $w_0\\in W$ carrying $\\Phi^+$ to $-\\Phi^+$, and it is an involution. Representatives $n_w\\in N_G(T)(F)$ can be chosen for all $w\\in W$. For any representative $n_0$ of $w_0$, $B\\cap n_0Bn_0^{-1}=T$ as subgroup schemes. There are smooth locally closed subschemes $C_w\\subseteq G$, constituting a disjoint stratification of $G$ compatible with algebraically closed field extensions, and subschemes $V^w\\subseteq V$ for which multiplication $V^w\\times_F B\\to C_w$, $(u,b)\\mapsto u n_w b$, is an isomorphism. The longest stratum $C_{w_0}$ is open dense and $V^{w_0}=V$. The map $V\\to Q$, $u\\mapsto un_0B$, is an isomorphism onto an open dense subscheme $C\\subseteq Q$, and $V\\simeq\\mathbf A_F^N$. The scheme $Q$ has a finite Zariski open cover by translates of $C$, all isomorphic to $\\mathbf A_F^N$, on each of which $\\pi$ has a section and is a trivial right $B$-torsor. Both $G$ and $Q$ are geometrically integral, meaning nonempty, irreducible and reduced after every field extension of $F$ [def-pc-geometrically-irreducible]. All isomorphisms and subgroup equalities here are scheme-theoretic, not merely statements about $F$-points.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.70, Definition 21.72, Theorem 21.73 and Remark 21.74 (pp.446--447); Definition 21.76, Proposition 21.79 and Theorem 21.80 (pp.448--450); Theorem 21.84 and Summary 21.86 (pp.451--452). Geometric integrality and the trivial torsors are the scheme-chart consequences of these statements."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-pc-geometrically-irreducible",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-rank-one-reflections], $W$ is finite; each of its cosets has a representative $n_w$. By [lem-sfb-rho-regular-weyl-orbit] there is a unique $w_0$ reversing $\\Phi^+$ and $w_0^2=1$. Apply [lem-sfb-flag-torus-fixed-geometry] to obtain the smooth connected projective scheme $Q$, its equivariant projective embedding, the fixed points $e_w$, and a separating cocharacter $\\lambda$ positive on $\\Phi^+$. The inverse cocharacter makes $P(-\\lambda)$ a Borel with roots $-\\Phi^+$ by [lem-sfb-regular-cocharacter-borel-description]. The Borel $n_0Bn_0^{-1}$ has those same roots. Applying [lem-sfb-unipotent-root-intersection-products] to $B$ and $n_0Bn_0^{-1}$, whose common positive-root set is empty, gives their scheme intersection $T$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-flag-torus-fixed-geometry",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-unipotent-root-intersection-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.41,21.72,21.84; scheme intersection by 21.66--21.68."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-attracting-cells] to this projectively linear $\\lambda$-action. Its fixed subscheme is precisely the finite reduced set $\\{e_w\\}$ by the fixed-flag node. Write $Y_w$ for the resulting affine smooth locally closed strata. The tangent-weight list in [lem-sfb-flag-torus-fixed-geometry] gives\n$$\\dim Y_w=|\\Phi^+\\setminus w\\Phi^+|.$$\nThe theorem gives both exhaustion of $Q$ and compatibility with algebraically closed extensions. In particular, at $e_{w_0}$ every tangent weight is positive, so $Y_{w_0}$ is open dense.",
+   "uses": [
+    "lem-sfb-projective-attracting-cells",
+    "lem-sfb-flag-torus-fixed-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.70 and the tangent calculation of 21.73; 13.49."
+   }
+  },
+  {
+   "text": "Use the ordered product coordinates [lem-sfb-borel-root-product-coordinates] and the equivariance in [lem-sfb-reductive-root-subgroup-parametrizations]. Conjugation by $\\lambda(t)$ multiplies the coordinate of $U_\\alpha$ by $t^{\\langle\\alpha,\\lambda\\rangle}$, a strictly positive power. Thus this conjugation map extends to $t=0$ with constant value $1$. For $u\\in V$ and $y\\in Y_w$, the identity\n$$\\lambda(t)(uy)=(\\lambda(t)u\\lambda(t)^{-1})\\lambda(t)y$$\nshows the limit remains $e_w$. Hence $Y_w$ is $V$-invariant and contains the orbit $O_w=V e_w$. These statements are scheme-theoretic: the attracting-locus construction is defined by extending orbit maps; equivalently the displayed regular limit calculation is valid over every test algebra.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-projective-attracting-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.71, first inclusion; contraction from 21.68(a)."
+   }
+  },
+  {
+   "text": "The stabilizer of $e_w$ in $V$ is $H_w=V\\cap n_wBn_w^{-1}$: the torsor identity in [lem-sfb-reductive-borel-pair-structure] tests this equality on every algebra. By [lem-sfb-unipotent-root-intersection-products], $H_w$ is smooth with root factors $\\Phi^+\\cap w\\Phi^+$. The root factors of $V$ and $H_w$ are affine lines by [lem-sfb-reductive-root-subgroup-parametrizations], so [lem-sf-noetherian-polynomial-dimension] gives dimensions $|\\Phi^+|$ and $|\\Phi^+\\cap w\\Phi^+|$. The orbit-dimension formula of [lem-sfb-smooth-group-orbit-geometry] now gives $\\dim O_w=|\\Phi^+\\setminus w\\Phi^+|=\\dim Y_w$. The orbit is closed in the affine scheme $Y_w$ by [lem-sfb-kostant-rosenlicht-affine-orbits]. A proper closed subset of this affine space has smaller dimension by [lem-wf-affine-dimension-drop]. Thus $O_w=Y_w$; both have reduced induced structure. This supplies the missing equality in the printed proof of Milne 21.71 without using Bruhat exhaustion as an assumption.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-unipotent-root-intersection-products",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-kostant-rosenlicht-affine-orbits",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.71, corrected using 21.77, orbit dimension and 17.64; appended errata p.447."
+   }
+  },
+  {
+   "text": "Let $B^-=P(-\\lambda)$. Put $V^w=V\\cap n_wB^-n_w^{-1}$. The intersection node identifies its root factors as $\\Phi^+\\cap w(-\\Phi^+)$. They complement the root factors of $H_w$. Ordering first those of $V^w$ and then those of $H_w$ in [lem-sfb-borel-root-product-coordinates] proves multiplication $V^w\\times H_w\\simeq V$. Right $H_w$-multiplication changes just the second coordinate. The orbit quotient statement [lem-sfb-homogeneous-orbit-quotient-geometry], applied to $V$ acting on $Q$, therefore identifies $V^w\\simeq V/H_w\\simeq Y_w$, by $u\\mapsto un_wB$. Indeed on the fppf quotient the inverse sends the coset of the unique product $uh$ to $u$, independently of $h$. This is an inverse morphism since the coordinate projection is right $H_w$-invariant. For $w=w_0$ its root set is all of $\\Phi^+$, so $V^{w_0}=V$.",
+   "uses": [
+    "lem-sfb-unipotent-root-intersection-products",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.76--21.79; quotient inverse written explicitly."
+   }
+  },
+  {
+   "text": "Define $C_w=G\\times_QY_w$. The torsor identity gives the inverse of multiplication $V^w\\times B\\to C_w$: for $g$ over a test scheme let $u$ be the unique coordinate of $\\pi(g)$ in $Y_w\\simeq V^w$; then $b=(un_w)^{-1}g$ is the unique $B$-point given by that identity. Thus $g\\mapsto(u,b)$ and $(u,b)\\mapsto un_wb$ are inverse scheme morphisms. These are locally closed subschemes because they are inverse images of the $Y_w$, and form a disjoint stratification after every algebraically closed extension. They are smooth: $V^w$ and $B$ are smooth by the intersection and Borel-pair nodes, and products are smooth by base change [lem-pc-proper-base-change](2) and composition [lem-trf-smooth-composition]. For $w_0$, the stratum is the inverse image of the open dense $Y_{w_0}$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-unipotent-root-intersection-products",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.80(a),(b); explicit trivialization of the pulled-back torsor."
+   }
+  },
+  {
+   "text": "Root coordinates and the root parametrizations give $V\\simeq\\mathbf A_F^N$. The preceding quotient isomorphism identifies $C=Y_{w_0}$ with $V$, with section $u n_0$. Every $F$-point of $Q$ lifts to $G(F)$ by [lem-sfb-homogeneous-orbit-quotient-geometry]. Since $C$ contains $e_{w_0}$, its $G(F)$-translates cover all $F$-points of $Q$. Any nonempty complement of their union is closed and has a closed point by [lem-sc-lft-over-field-jacobson-space]; its residue field is $F$ by [lem-weil-pbc-closed-point-residue-field-base], a contradiction. Thus these translates cover $Q$. Properness of $Q$ in the Borel-pair node implies quasi-compactness, so finitely many suffice. On a translate $aC$ the section is $aun_0$, and the torsor isomorphism is $(u,b)\\mapsto aun_0b$.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.80(c), or finite translate cover via quasi-compactness; sections from 21.80(b)."
+   }
+  },
+  {
+   "text": "For every extension $K/F$, $G_K$ is smooth by [lem-pc-proper-base-change](2) and connected by [lem-sfb-solvable-normal-subgroup-products] (its smooth-connected base-extension clause does not require solvability). It is nonempty by its identity section. By [lem-weil-pbc-smooth-scheme-over-field-regular] and [lem-sc-regular-connected-integral], $G_K$ is integral. The quotient $Q_K$ is nonempty and irreducible because the torsor projection remains surjective; this follows directly from the finite trivializing cover just constructed, which base changes to $K$ and whose fibres contain $1\\in B$. It is reduced since it is covered by the translates of $C_K\\simeq\\mathbf A_K^N$, whose coordinate rings are polynomial domains: ordering monomials lexicographically, the largest monomial of a product of two nonzero polynomials has the product of the nonzero leading coefficients, so is nonzero. This includes zero variables. Hence $Q_K$ is integral as well. Finally $C_{w_0}$ is a nonempty open of the irreducible $G$, so is dense. This proves geometric integrality and the remaining density assertion, including $\\Phi=\\varnothing$, when $V=1$, $Q=\\operatorname{Spec}F$, and the single stratum is $G=B=T$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Scheme consequences of 21.80; Stacks 056S,0569,033N via existing nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-flag-torus-fixed-geometry",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-unipotent-root-intersection-products",
+  "lem-sfb-projective-attracting-cells",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-kostant-rosenlicht-affine-orbits",
+  "lem-wf-affine-dimension-drop",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "21.70--21.80, with the orbit equality repaired by the independent dimension and closed-orbit argument; explicit scheme quotient inverses and geometric-integrality consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive algebraic group the longest Bruhat cell is isomorphic to the product of its unipotent radical torus and unipotent radical and gives Zariski charts on the flag variety",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.h'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the element $ h'(i) $ is the matrix $ h(i) $ constructed from $ P $, which belongs to the Cartan subalg\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [P.IsIrreducible] (i : ι), Submodule.span R (MulAction.orbit (↥P.weylGroup) (P.ro\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M],\\n  IsComp\", \"doc\": \"In a Lie module $ M $ over a commutative ring with a nilpotent Lie algebra action, the generalized weight space associated with the zero weight function and the positive Fitting component form complem\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flag quotient of a connected reductive group is smooth geometrically integral with affine big cell and Zariski locally trivial Borel torsor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    (X : Action FintypeCat G) →\\n      [CategoryTheory.PreGaloisCategory.IsConnected X] →\\n        (x : X.V.carrier) →\\n          [inst_2 : Fintype (G ⧸ MulAction.stabilizer G x)] →\\n            X ≅ Action.FintypeCat.ofMulAction G { carrier := G ⧸ MulAction.stabilizer\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Bruhat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|BorelSubgroup|longest.*cell|flag.variety",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bruhat decomposition of a reductive group and open cell coordinates on the quotient by a Borel subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.RelCWComplex.openCell\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Basic\", \"type\": \"[RelCWComplex C D] (n : ℕ) (i : cell C n) : Set X\", \"doc\": \"For a relative CW complex structure on a topological space $X$ with subspace $A \\\\subseteq X$, and for each $n$-dimensional cell $i$, the open cell associated with $i$ is defined as the image of the op\"}\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}\n  {\"name\": \"CoxeterSystem.IsReduced\", \"module\": \"Mathlib.GroupTheory.Coxeter.Length\", \"type\": \"(ω : List B) : Prop\", \"doc\": \"For an element $w$ in a Coxeter group $W$, this function returns the minimal natural number $n$ such that $w$ can be expressed as a product of exactly $n$ generators from the generating set $B$. This \"}\n  {\"name\": \"CoxeterSystem.IsLeftDescent\", \"module\": \"Mathlib.GroupTheory.Coxeter.Length\", \"type\": \"(w : W) (i : B) : Prop\", \"doc\": \"For an element $ w $ in a Coxeter group $ W $ and a generator $ i $ in the generating set $ B $, the proposition that the length $ \\\\ell(s_i w) $ is less than $ \\\\ell(w) $, where $ s_i $ denotes the sim\"}\n  {\"name\": \"CoxeterSystem.exists_reduced_word'\", \"module\": \"Mathlib.GroupTheory.Coxeter.Length\", \"type\": \"(w : W) : ∃ ω : List B, cs.IsReduced ω ∧ w = π ω\", \"doc\": \"For any element $w$ in a Coxeter group $W$, there exists a reduced word $\\\\omega$ in the generating set $B$ such that the product of the simple reflections corresponding to $\\\\omega$ equals $w$. This me\"}\n  {\"name\": \"CoxeterMatrix.instGroupGroup\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Group M.Group\", \"doc\": \"The Coxeter group defined by a Coxeter matrix $M$, constructed as the quotient of the free group on generators by the normal closure of the braid relations $(s_i s_j)^{m_{i,j}} = 1$ specified by $M$, \"}\n  {\"name\": \"CoxeterMatrix.Group\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Type _\", \"doc\": \"The group defined by generators $s_i$ and relations $(s_i s_j)^{m_{i,j}} = 1$ for all $i,j$, where $m_{i,j}$ are the entries of the Coxeter matrix $M$. This is the quotient of the free group on the ge\"}\n  {\"name\": \"Topology.RelCWComplex.Subcomplex.openCell_eq\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Subcomplex\", \"type\": \"[T2Space X] [RelCWComplex C D] (E : Subcomplex C) (n : ℕ) (i : E.I n) :\\n  openCell (C := E) n i = openCell n (i : cell C n)\", \"doc\": \"In a Hausdorff topological space $X$ with a relative CW complex structure $C$ over subspace $D$, for any subcomplex $E$ containing $D$ and any $n$-dimensional cell $i$ in $E$, the open cell associated\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic Bruhat decomposition of a split reductive algebraic group with affine flag variety charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(R : CommRingCat) → (AlgebraicGeometry.Spec R).OpenCover\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (i : X.affineCover.I₀), X.affineOpenCover.f i = X.affineCover.f i\", \"doc\": \"For any scheme $ X $ and any index $ i $ in the zeroth component of its affine cover, the morphism from the affine open cover at $ i $ is equal to the morphism from the affine cover at $ i $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of unipotent root subgroups parametrizes Schubert cells and the longest cell is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isOpen_setOf_nat_le_rank\", \"module\": \"Mathlib/Analysis/Normed/Module/FiniteDimension\", \"type\": \"∀ {𝕜 : Type u} [inst : NontriviallyNormedField 𝕜] {E : Type v} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type w} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] [CompleteSpace 𝕜]\\n  (n : ℕ), IsOpen {f | ↑n ≤ (↑f).rank}\", \"doc\": \"For any natural number $ n $, the set $ \\\\{ f : E \\\\to_{\\\\mathcal{L}[\\\\mathbb{K}]} F \\\\mid \\\\text{rank}(f) \\\\geq n \\\\} $ is an open subset of the space of continuous linear maps $ E \\\\to_{\\\\mathcal{L}[\\\\mathbb{K\"}\n  {\"name\": \"IsOpen.iUnion_smul\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (G : Type u_2) {α : Type u_3} [inst : Group G] [inst_1 : TopologicalSpace α] [inst_2 : MulAction G α]\\n  [MulAction.IsMinimal G α] {U : Set α}, IsOpen U → U.Nonempty → ⋃ g, g • U = Set.univ\", \"doc\": \"If $ G $ is a group acting minimally on a topological space $ \\\\alpha $, then for any non-empty open set $ U \\\\subseteq \\\\alpha $, the indexed union $ \\\\bigcup_{g \\\\in G} g \\\\cdot U $ equals the universal s\"}\n  {\"name\": \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (L : FiniteGaloisIntermediateField k K), IsOpen (⇑(InfiniteGalois.mulEquivToLimit k K) '' ↑L.fixingSubgroup)\", \"doc\": \"In an infinite Galois extension $ K/k $, the image of the fixing subgroup of a finite Galois intermediate field $ L $ under the isomorphism to the inverse limit of profinite Galois groups is an open s\"}\n  {\"name\": \"IsOpen.iUnion_preimage_smul\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] {U : Set α}, IsOpen U → U.Nonempty → ⋃ c, (fun x => c • x) ⁻¹' U = Set.univ\", \"doc\": \"Let $ M $ be a monoid acting minimally on a topological space $ \\\\alpha $. For any nonempty open set $ U \\\\subseteq \\\\alpha $, the union of the preimages $ \\\\bigcup_{c \\\\in M} (c \\\\cdot -)^{-1}(U) $ equals \"}\n  {\"name\": \"IsOpen.rightCoset\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [ContinuousMul G] {U : Set G},\\n  IsOpen U → ∀ (x : G), IsOpen (MulOpposite.op x • U)\", \"doc\": \"In a topological group $G$, if a subset $U \\\\subseteq G$ is open, then its right coset $U \\\\cdot x = \\\\{u \\\\cdot x \\\\mid u \\\\in U\\\\}$ by any element $x \\\\in G$ is also an open set in $G$.\"}\n  {\"name\": \"IsOpen.exists_smul_mem\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] (x : α) {U : Set α}, IsOpen U → U.Nonempty → ∃ c, c • x ∈ U\", \"doc\": \"In a minimal monoid action of $ M $ on a topological space $ \\\\alpha $, for every point $ x \\\\in \\\\alpha $ and every non-empty open set $ U \\\\subseteq \\\\alpha $, there exists an element $ c \\\\in M $ such th\"}\n  {\"name\": \"isOpenMap_smul_of_sigmaCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/OpenMapping\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : TopologicalSpace G] [inst_1 : TopologicalSpace X] [inst_2 : Group G]\\n  [IsTopologicalGroup G] [inst_4 : MulAction G X] [SigmaCompactSpace G] [BaireSpace X] [T2Space X] [ContinuousSMul G X]\\n  [MulAction.IsPretransitive G X] (x : X), IsOpenMap fun g => g • x\", \"doc\": \"Let $G$ be a $\\\\sigma$-compact, Hausdorff topological group, and let $X$ be a Baire topological space. If $G$ acts on $X$ continuously and transitively, then for any $x \\\\in X$, the orbit map $g \\\\mapsto\"}\n  {\"name\": \"Topology.RelCWComplex.Subcomplex.openCell_eq\", \"module\": \"Mathlib/Topology/CWComplex/Classical/Subcomplex\", \"type\": \"∀ {X : Type u_1} [t : TopologicalSpace X] {C D : Set X} [inst : T2Space X] [inst_1 : Topology.RelCWComplex C D]\\n  (E : Topology.RelCWComplex.Subcomplex C) (n : ℕ) (i : ↑(E.I n)),\\n  Topology.RelCWComplex.openCell n i = Topology.RelCWComplex.openCell n ↑i\", \"doc\": \"In a Hausdorff topological space $X$ with a relative CW complex structure $C$ over subspace $D$, for any subcomplex $E$ containing $D$ and any $n$-dimensional cell $i$ in $E$, the open cell associated\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bruhat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|BorelSubgroup|SchubertCell|flag.variety",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive algebraic group has a Bruhat decomposition and its flag quotient is covered by affine spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientAddGroup.instCompactSpaceQuotientAddSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [CompactSpace G] (N : AddSubgroup G),\\n  CompactSpace (G ⧸ N)\", \"doc\": \"Let $ G $ be a compact topological additive group and $ N $ an additive subgroup of $ G $. Then the quotient group $ G/N $, endowed with the quotient topology, is compact.\"}\n  {\"name\": \"CoxeterMatrix.instGroupGroup\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Group M.Group\", \"doc\": \"The Coxeter group defined by a Coxeter matrix $M$, constructed as the quotient of the free group on generators by the normal closure of the braid relations $(s_i s_j)^{m_{i,j}} = 1$ specified by $M$, \"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib.CategoryTheory.Galois.EssSurj\", \"type\": \"(X : Action FintypeCat G) [TopologicalSpace X.V] [DiscreteTopology X.V] [ContinuousSMul G X.V] :\\n  ∃ (ι : Type) (_ : Finite ι) (f : ι → OpenSubgroup (G)), Nonempty ((∐ fun i ↦ G ⧸ₐ (f i).toSubgroup) ≅ X)\", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"instBracketAddGroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"The Lie bracket operation on the Lie algebra of an additive group modeled on a normed vector space, defined as the zero map since the additive group is abelian and its Lie algebra is abelian (all brac\"}\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] → (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $\\\\alpha$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit eq\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-double-flag-invariant-boundary",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group.",
+   "via": [
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bruhat-longest-cell-charts",
+  "worker": "stage1",
+  "summary": "Read Milne including appended errata; decompose via fixed flags, attracting loci, root intersections, closed orbits and explicit torsor coordinates. Reuse newly landed root-product and Kostant--Rosenlicht nodes. Preserve the item statement; verify all scheme assertions and arbitrary scalar extensions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Realizes Milne 21.70--21.80 in support of the inherited double-flag boundary input. The ancestor command returns None for this inherited chain; the place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic scheme geometry used in the Bruhat assembly: Proper closed subsets have strictly smaller dimension. No node of the present unit supplies this general input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry used in the Bruhat assembly: Proper and smooth morphisms are stable under base change. No node of the present unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme geometry used in the Bruhat assembly: A scheme smooth over a field is regular. No node of the present unit supplies this general input."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic scheme geometry used in the Bruhat assembly: A connected regular scheme is integral. No node of the present unit supplies this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-dimension-drop",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-9c0c83269",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-9c0c83269 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item and the three new statement-only nodes in full, plus every cited statement and the source: Milne iAG2017 13.47-13.51, 21.68, 21.70-21.80 and the appended errata. The item statement is unchanged against the live unsplit node, the dependency graph has no cycle, no live node conflicts and no parallel duplicate exists. The errata at p.447 confirm that the printed proof of 21.71 only gives the inclusion of the orbit in the cell. Step 4 repairs this soundly without using the Bruhat decomposition: the stabilizer is V∩n_wBn_w^-1 by the torsor identity, the orbit dimension equals |Φ+∖wΦ+| = dim Y_w, Kostant-Rosenlicht makes the orbit closed in the affine cell, and a proper closed subset of an affine space has smaller dimension. New nodes: (1) fixed flags: the tangent weights Φ∖wΦ+ follow from Ad(t) on g/Ad(n_w)b, the fixed points are reduced because no weight is 0, and the separating dominant λ follows from Milne 13.51; (2) projective Białynicki-Birula: Milne 13.47-13.49, with the functor and open-dense-stratum clauses checked and P^n tested; (3) intersection of two Borels containing T: true by 21.68(c) and 21.77/21.79(a), with V∩B'=V∩V' and B∩B'=(V∩V')⋊T, and the cases B'=B (gives B) and opposite B' (gives T) tested. None is a duplicate of chevalley-borel-intersection, borel-root-product-coordinates, luna-borel-attraction-charts or torus-normalizer-borel-transitivity, and none restates a clause of the item. Steps 3, 5, 6 and 7 give the V-invariance, the quotient inverse V^w≅V/H_w≅Y_w, the torsor inverse and the finite translate cover (via Jacobson and residue field F) correctly, and step 8 gives geometric integrality. I tested the trivial group, a torus and SL2/P1. I accept the four declared tool_uses: affine-dimension-drop, proper/smooth base change, smooth over a field implies regular, connected regular implies integral. Batch-5 flags: rank-one-reflections, root-subgroup-parametrizations, homogeneous-orbit-quotient, trf-smooth-composition (a Mathlib leaf), solvable-normal-products and borel-pair-structure are general algebraic-group or scheme facts. They reach trf nodes only through generic fppf/fpqc base-change and descent lemmas, so none is part of the trace formula or Poincaré duality."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BruhatLongestCellCharts",
+  "declaration": "AlgebraicGeometry.bruhat_longest_cell_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BruhatLongestCellCharts.lean",
+  "statement": "theorem bruhat_longest_cell_charts {F : Type u} [Field F] [IsAlgClosed F] (G T B V : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (iV : V ⟶ B) (hV : IsClosedSubgroupScheme iV.hom.hom ∧ IsNormalSubgroupScheme iV.hom.hom ∧ Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ SolvableGroupStructure.IsUnipotent V ∧ ∀ (U : Grp (Over (Spec (.of F)))) (iU : U ⟶ B), IsClosedSubgroupScheme iU.hom.hom → IsNormalSubgroupScheme iU.hom.hom → Smooth U.X.hom → ConnectedSpace U.X.left → SolvableGroupStructure.IsUnipotent U → ∃ f : U ⟶ V, f ≫ iV = iU) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπtorsor : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (aB : ModObj T.X B.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φplus : Finset (RankOneRoots.Character T)) (hΦplus : ∀ χ : RankOneRoots.Character T, χ ∈ Φplus ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥) : Finite (RankOneRoots.Weyl iT) ∧ ∃ (act : RankOneRoots.Weyl iT →* Aut T), (∀ (n : RankOneRoots.normalizer iT) (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n.val)⁻¹) ∧ ∃ (w₀ : RankOneRoots.Weyl iT), (Set.image (fun χ : RankOneRoots.Character T ↦ (act w₀).inv.hom.hom ≫ χ.hom.hom) (Φplus : Set _) = Set.image (fun χ : RankOneRoots.Character T ↦ χ.hom.hom⁻¹) (Φplus : Set _)) ∧ (∀ w : RankOneRoots.Weyl iT, Set.image (fun χ : RankOneRoots.Character T ↦ (act w).inv.hom.hom ≫ χ.hom.hom) (Φplus : Set _) = Set.image (fun χ : RankOneRoots.Character T ↦ χ.hom.hom⁻¹) (Φplus : Set _) → w = w₀) ∧ w₀ * w₀ = 1 ∧ ∃ (n : RankOneRoots.Weyl iT → RankOneRoots.normalizer iT), (∀ w, QuotientGroup.mk (n w) = w) ∧ ∃ (C Vw : RankOneRoots.Weyl iT → Over (Spec (.of F))) (c : ∀ w, C w ⟶ G.X) (v : ∀ w, Vw w ⟶ V.X) (e : ∀ w, Vw w ⊗ B.X ≅ C w), (∀ w, IsImmersion (c w).left ∧ Smooth (C w).hom ∧ IsImmersion (v w).left ∧ (e w).hom ≫ c w = (fst (Vw w) B.X ≫ v w ≫ iV.hom.hom ≫ iB.hom.hom) * (toUnit (Vw w ⊗ B.X) ≫ (n w).val) * (snd (Vw w) B.X ≫ iB.hom.hom)) ∧ (∀ x : G.X.left, ∃! w, x ∈ Set.range (c w).left) ∧ (∀ (K : Type u) [Field K] [Algebra F K] [IsAlgClosed K] (g : StandardGroupSchemes.affine F K ⟶ G.X), ∃! w, ∃ z : StandardGroupSchemes.affine F K ⟶ C w, z ≫ c w = g) ∧ IsOpenImmersion (c w₀).left ∧ DenseRange (c w₀).left ∧ IsIso (v w₀) ∧ Nonempty (V.X ≅ StandardGroupSchemes.affine F (MvPolynomial (Fin Φplus.card) F)) ∧ GeometricallyIntegral G.X.hom ∧ GeometricallyIntegral Q.hom ∧ ∀ n₀ : RankOneRoots.normalizer iT, QuotientGroup.mk n₀ = w₀ → (∀ A : Over (Spec (.of F)), {g : A ⟶ G.X | g ∈ RankOneRoots.pointImage iB A ∧ ∃ b : A ⟶ B.X, g = (toUnit A ≫ n₀.val) * (b ≫ iB.hom.hom) * (toUnit A ≫ n₀.val)⁻¹} = (RankOneRoots.pointImage iT A : Set _)) ∧ (∃ (D : Over (Spec (.of F))) (d : D ⟶ Q) (eD : V.X ≅ D), IsOpenImmersion d.left ∧ DenseRange d.left ∧ eD.hom ≫ d = ((iV.hom.hom ≫ iB.hom.hom) * (toUnit V.X ≫ n₀.val)) ≫ π) ∧ ∃ (m : ℕ) (a : Fin m → (𝟙_ (Over (Spec (.of F))) ⟶ G.X)) (D : Fin m → Over (Spec (.of F))) (d : ∀ k, D k ⟶ Q) (eD : ∀ k, V.X ≅ D k) (s : ∀ k, D k ⟶ G.X), (∀ k, IsOpenImmersion (d k).left ∧ (eD k).hom ≫ d k = ((toUnit V.X ≫ a k) * (iV.hom.hom ≫ iB.hom.hom) * (toUnit V.X ≫ n₀.val)) ≫ π ∧ s k ≫ π = d k ∧ IsPullback ((fst (D k) B.X ≫ s k) * (snd (D k) B.X ≫ iB.hom.hom)) (fst (D k) B.X) π (d k)) ∧ ∀ x : Q.left, ∃ k, x ∈ Set.range (d k).left",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed actual normalizer quotient and character interface (added to stmt_deps). IsIso of the inclusion Vw(w₀)→V expresses equality as subschemes. All multiplication and chart isomorphisms are over F; the subgroup intersection is equality on every test scheme, and right-torsor trivializations are IsPullback squares."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecb0e7f99",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Clause-by-clause match: F alg closed; IsReductive; split maximal T; Borel B with j; V pinned by the dependency's radical maximality; flat surjective invariant torsor π (no properness assumed, still true because G is Noetherian, so π is fpqc and Q≅G/B); Φplus = nontrivial weights on Lie(B) for the pinned conjugation action = dependency's Φ⁺; W = actual RankOneRoots.Weyl; action pinned on all test schemes, (act w).inv≫χ = χ(n⁻¹tn) given Aut mul = g.trans f; finite W, unique involutive w₀ reversing Φ⁺; representatives; B∩n₀Bn₀⁻¹=T on all A-points; immersed smooth C_w ≅ V^w×B via u n_w b, partition on points and alg-closed K-points (forces C_w = BwB); C_w₀ open dense, IsIso v w₀; V→Q open dense chart; V≅A^N over F; finite translate cover with sections and IsPullback trivializations; G and Q GeometricallyIntegral. Statement verbatim; item changed only in lean and stmt_deps (+landed def-sfb-rank-one-root-interfaces, no cycle); no Bruhat declaration in Mathlib, side-live or slopmaster2; docstrings with source, blueprint and 8 proof steps; lines ≤100; only sorry. Edge cases Φ=∅, SL2/P1, characteristic, universes OK. Advisory: borel-pair-owned decls used transitively. No compile run (no file changed); worker reports a clean compile."
+ }
+}

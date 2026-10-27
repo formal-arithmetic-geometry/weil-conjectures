@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-pseudo-coherent-tor-projective-window",
+ "kind": "statement",
+ "title": "Finite projective representatives in the specified Tor interval",
+ "statement": "Let $A$ be a commutative ring, let $a\\le b$ be integers, and let $C\\in D(A)$ [def-weil-abstract-derived-category]. Suppose $C$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex] and has Tor amplitude in $[a,b]$, meaning that $H^i(C\\otimes_A^{\\mathbf L}N)=0$ for every $A$-module $N$ and every integer $i<a$ or $b<i$. Here derived tensor is ordinary total tensor after replacing the first factor by a K-flat complex [def-pc-module-kflat-complex]. Then there exist a cochain complex $P^\\bullet$ of $A$-modules and an isomorphism $Q(P^\\bullet)\\cong C$ in $D(A)$ such that $P^i=0$ for $i\\notin[a,b]$ and each $P^i$ is a direct summand of a finite free $A$-module [def-weil-pbc-projective-module]. No Noetherian hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0658 (lemma-perfect), final assertion: representative supported in the given Tor interval."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Let $K$ be a K-flat complex [def-pc-module-kflat-complex] with $Q(K)\\cong C$, as in the stipulated computation of derived tensor. The total tensor of $K$ with $A[0]$ is $K$ itself, so $C\\otimes_A^{\\mathbf L}A$ is represented by $K$ and has the cohomology of $C$. Test the amplitude hypothesis with $N=A$: $H^i(C)=0$ for $i<a$ and for $i>b$.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-pseudo-coherent-bounded-finite-free-model] to the pseudo-coherent object $C$ and its cohomological upper bound $b$. Obtain a complex $F^\\bullet$ of finite free modules with $F^i=0$ for $i>b$ and an isomorphism $e:Q(F^\\bullet)\\cong C$. A finite free module is flat: tensoring with $A^r$ is the finite direct sum of $r$ copies of the identity, which preserves exactness coordinatewise.",
+   "uses": [
+    "lem-pc-pseudo-coherent-bounded-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+   }
+  },
+  {
+   "text": "By [lem-pc-module-bounded-flat-kflat], $F^\\bullet$ is K-flat. Its ordinary tensor with a module $N$ computes $C\\otimes_A^{\\mathbf L}N$, whichever K-flat replacement $K$ of $C$ the convention uses: [lem-pc-source-kflat-module-tensor-model], applied to $K$ and to $F^\\bullet$ with $L=N[0]$, gives $Q(\\operatorname{Tot}(K\\otimes_A N))\\cong Q(K)\\otimes^{\\mathbf L}Q(N[0])\\cong Q(F^\\bullet)\\otimes^{\\mathbf L}Q(N[0])\\cong Q(\\operatorname{Tot}(F^\\bullet\\otimes_A N))$, the middle isomorphism being the derived tensor bifunctor applied to $Q(K)\\cong C\\cong Q(F^\\bullet)$ (the latter is $e^{-1}$). Hence $H^i(F^\\bullet\\otimes_A N)\\cong H^i(C\\otimes_A^{\\mathbf L}N)$ for all $i$, and in particular $H^{a-1}(F^\\bullet\\otimes_A N)=0$. Apply [lem-pc-module-flat-opcycles-tor-criterion], with this same integer $a$, to conclude that $M=F^a/\\operatorname{im}d_F^{a-1}$ is flat. The exact sequence $F^{a-1}\\to F^a\\to M\\to0$, between finite free modules in the first two positions, is a finite presentation of $M$ [def-sc-finitely-presented-module].",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finitely-presented-flat-module-projective], $M$ is finitely generated and projective. Choose the finite free surjection $A^r\\twoheadrightarrow M$ from its presentation. Projectivity [def-weil-pbc-projective-module] lifts $\\mathrm{id}_M$ through this surjection, giving a section, so $M$ is a direct summand of $A^r$.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+   }
+  },
+  {
+   "text": "Define $P^i=0$ for $i<a$, $P^a=M$, and $P^i=F^i$ for $i>a$. Its differential out of $M$ is induced by $d_F^a$, which annihilates $\\operatorname{im}d_F^{a-1}$; the other differentials are zero or those of $F$. The quotient map $q:F\\to P$ is a chain map. For $i<a$, both cohomologies vanish. In degree $a$, $\\ker(M\\to F^{a+1})=\\ker d_F^a/\\operatorname{im}d_F^{a-1}=H^a(F)$. For $i>a$, cycles are unchanged and boundaries are unchanged, including $i=a+1$ since $F^a\\to M$ is surjective. Hence $q$ is a quasi-isomorphism and $Q(q)$ is invertible [def-weil-abstract-derived-category]. The isomorphism $e\\circ Q(q)^{-1}:Q(P)\\cong C$ is the required one. Since $a\\le b$, the terms above $b$ are still zero; below $a$ they are zero by construction. The degree-$a$ term is the finite free summand just proved, all higher terms are finite free, and zero terms are summands of $A^0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0658 (lemma-perfect), proof of the final assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex with Tor amplitude in a finite interval has a finite projective complex representative concentrated in the same interval",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex. The bounded-object representative theorem imposes no finite-projective condition on its terms; K-projectivity alone does not imply such a model. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pseudo coherent derived object with finite Tor interval is represented by finite projective modules in exactly that interval",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CochainComplex.IsKProjective, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.isKProjective_of_projective. The bounded-object representative theorem imposes no finite-projective condition on its terms; K-projectivity alone does not imply such a model. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex of modules of Tor amplitude in a b is isomorphic to a complex of finite projective modules zero outside a b",
+   "results": "8 hits: CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.isZero_Tor'_succ_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self, CochainComplex.isKProjective_of_iso, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.isKProjective_of_projective. The bounded-object representative theorem imposes no finite-projective condition on its terms; K-projectivity alone does not imply such a model. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"IsStrictlyLE\"",
+   "results": "0 hits: . The bounded-object representative theorem imposes no finite-projective condition on its terms; K-projectivity alone does not imply such a model. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|pseudoCoherent|PerfectComplex",
+   "results": "0 hits: . The bounded-object representative theorem imposes no finite-projective condition on its terms; K-projectivity alone does not imply such a model. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Projective\", \"CochainComplex\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|pseudoCoherent|PerfectComplex",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent derived object of Tor amplitude a b is isomorphic to a bounded finite projective complex in degrees a through b",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self. Read candidate signatures: bounded-object representatives impose no finite-projective condition; K-projectivity and projective resolutions do not give the specified finite model.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pseudo coherent complex with Tor amplitude in a b has a finite projective representative supported in the same interval",
+   "results": "8 hits: CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.isZero_Tor'_succ_of_projective. Read candidate signatures: bounded-object representatives impose no finite-projective condition; K-projectivity and projective resolutions do not give the specified finite model.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective cochain complex representative concentrated in its Tor amplitude interval",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CochainComplex.instIsKProjectiveObjIntShiftFunctor. Read candidate signatures: bounded-object representatives impose no finite-projective condition; K-projectivity and projective resolutions do not give the specified finite model.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-two-term-determinant",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine two-term determinant functors from good diagrams. Supporting argument: Tag 0658 (lemma-perfect), final assertion: representative supported in the given Tor interval.",
+   "via": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pseudo-coherent-tor-projective-window",
+  "worker": "stage1",
+  "group": "Q129",
+  "summary": "Followed Tag 0658 final-assertion proof: choose the finite-free model with upper bound b, prove the bottom opcycles finitely presented and flat, split their finite-free presentation, and calculate the cohomology of the explicit lower truncation. Reused all supporting statements; no new nodes. Exact prescribed interval retained, without Noetherianity.",
+  "blueprint": "Supports the auxiliary Tor-window assertion in the recorded chain from lem-trf-local-term-locality, proof (1)--(2), via lem-trf-affine-two-term-determinant. The current latest blueprint has no separate equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic algebraic model theorem supplies finite free terms with the specified upper bound; no node of the trace unit supplies this."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module K-flatness theorem justifies computing derived tensor on the chosen model."
+   },
+   {
+    "node": "lem-pc-module-flat-opcycles-tor-criterion",
+    "why": "Generic module flatness criterion supplies the flat degree-a cokernel from exactness after tensoring."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic module fact that any K-flat model computes the derived tensor; used to transfer the Tor-amplitude hypothesis to the chosen finite-free model (reviewer fix)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-da835a40c",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-da835a40c (reviewer sub-agent of L); spot-checked: I read Stacks 0658 (more-algebra.tex l.18889-18914) and every cited node. The statement is unchanged: the exact window [a,b], any commutative ring, no Noetherian hypothesis. It is not a re-split, and live and side-live still show the item unsplit. There are no new nodes and no dependency cycle. Steps 2, 4 and 5 are correct. Step 2 uses lem-pc-pseudo-coherent-bounded-finite-free-model (15.66.5) with the upper bound b from step 1. Step 4 uses 00NX plus the section from projectivity. Step 5 checks the truncation: H^a = ker d^a/im d^{a-1}, and boundaries in degree a+1 are kept because F^a maps onto M. Step 3's use of lem-pc-module-flat-opcycles-tor-criterion (0653) is sound; I checked that criterion myself through Tor_1(Q,N)=ker(B⊗N→P^a⊗N). One gap (C1/C3), now fixed. Step 3 applied the Tor-amplitude hypothesis to the chosen model F without justifying that the derived tensor does not depend on the K-flat replacement. It now cites the existing lem-pc-source-kflat-module-tensor-model (06YH) and compares Tot(K⊗N) with Tot(F⊗N) through Q(K)≅C≅Q(F). Step 1 also derived the base case from 'A[0] is K-flat', which is the wrong factor; it now reads Tot(K⊗A[0])=K. The fix adds that node to step 3's uses, to proof_deps and to tool_uses; the statement is not touched. Edge cases a=b, C=0, A=0 and the citer case M[0] with [-d,0] are consistent. Checked for duplicates: lem-pc-ring-pseudo-coherent-finite-tor-perfect (interval only existential), 0654 and the source flat-model nodes (flat terms only), and 08EB/08CQ (schemes). None states this result.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentTorProjectiveWindow",
+  "declaration": "DerivedCategory.exists_finiteProjective_model_of_torAmplitudeIn",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentTorProjectiveWindow.lean",
+  "statement": "theorem exists_finiteProjective_model_of_torAmplitudeIn {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (a b : ℤ) (hab : a ≤ b) (C : DerivedCategory (ModuleCat.{u} A)) (hC : IsPseudoCoherent C) (hTor : torAmplitudeIn (ModuleCat.{u} A) a b C) : ∃ P : CochainComplex (ModuleCat.{u} A) ℤ, (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ (∀ i : ℤ, Module.Finite A (P.X i) ∧ Module.Projective A (P.X i)) ∧ Nonempty (Q.obj P ≅ C)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1acde95d9",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Checked the statement clause by clause against the node and Stacks 0658 (more-algebra.tex l.18889-18914). Any CommRing, no Noetherian assumption. IsPseudoCoherent is the recorded def (bounded-above finite free model). torAmplitudeIn tests every module in degree 0 with the K-flat derived tensor; no DAG def node owns it, and other statement nodes use it the same way. Terms (not cohomology) vanish outside [a,b]. Each term is Module.Finite ∧ Module.Projective, equivalent to a summand of finite free. The isomorphism is in D(A). Universes u/w are free. Not a duplicate: isPerfect_of_pseudoCoherent_finiteTorAmplitude gives only an existential interval, and exists_bounded_finite_projective_model_of_torAmplitudeIn needs a Noetherian ring. No name clash. Node unchanged except the lean field; lean.statement is verbatim. Docstrings carry the source place, blueprint tag and 5 proof steps; proof is only sorry. Imports exist. Report sections present. Not recompiled per instructions; no changes; no findings."
+ }
+}

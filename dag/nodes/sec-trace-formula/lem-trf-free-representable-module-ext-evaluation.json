@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-free-representable-module-ext-evaluation",
+ "kind": "statement",
+ "title": "Free representable module Ext is derived object evaluation",
+ "statement": "Let $\\mathcal C$ be a small site with its objects, arrows, covering indices and coefficient values in one universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and let $R$ be a sheaf of commutative rings on $\\mathcal C$. Use sheaves of $R$-modules [def-weil-sheaf-of-modules-category]. For $U\\in\\mathcal C$ define $P_U(V)=\\bigoplus_{a:V\\to U}R(V)$, with restriction along $h:V'\\to V$ sending $r e_a$ to $R(h)(r)e_{ah}$, and let $E_U=P_U^\\#$ be module sheafification [def-weil-presheaf-modules-sheafification], with unit $\\eta:P_U\\to E_U$. The category $\\operatorname{Mod}(R)$ has enough injectives. There is a natural additive isomorphism\n$$\\theta_N:\\operatorname{Hom}_R(E_U,N)\\xrightarrow{\\sim}N(U),\\qquad \\theta_N(\\alpha)=(\\alpha\\eta)_U(e_{\\mathrm{id}_U}),$$\nwhose inverse sends $s$ to the unique sheaf map whose composite with $\\eta$ sends $r e_a$ to $rN(a)(s)$. For any module map $b:N\\to N'$ one has $\\theta_{N'}(b\\alpha)=b_U\\theta_N(\\alpha)$. For every $R$-module sheaf $M$ and $q\\geq0$ there are canonical additive isomorphisms\n$$\\operatorname{Ext}_R^q(E_U,M)\\cong R^q\\Gamma_{\\mathrm{Mod},U}(M)\\cong H^q(U,M_{\\mathrm{ab}}).$$\nHere $M_{\\mathrm{ab}}$ is the underlying abelian sheaf, $\\Gamma_{\\mathrm{Mod},U}(N)=N(U)$, and both module derived functors are computed by injective module resolutions [def-sp-injective-resolutions]: for any $M\\to J^\\bullet$, $\\operatorname{Ext}_R^q(E_U,M)=H^q\\operatorname{Hom}_R(E_U,J^\\bullet)$ and the first comparison is induced by $\\theta_{J^n}$ in every degree. The last term is right-derived evaluation in abelian sheaves [def-weil-pbc-sites-and-cohomology](2). The comparisons are natural in $M$ and in degree zero are $\\theta_M$ followed by the identity on $M(U)$. No injectivity of $M_{\\mathrm{ab}}$ or flatness of $R$ over $\\mathbf Z$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek, the displayed Ext/object-cohomology identification and its Hom evaluation justification; coefficient comparison via lemma-cohomology-modules-abelian-agree and lemma-cohomology-of-open."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-injective-resolutions",
+  "def-pc-ext",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the given small site and ring sheaf $R$ in the common universe. Thus $\\operatorname{Mod}(R)$ is Grothendieck abelian, so [lem-sp-grothendieck-enough-injectives] supplies enough injectives. The common universe contains all object and arrow sets, covering indices and coefficient values, exactly as required by the first result. We may therefore choose an injective module resolution $M\\to J^\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 01DU, theorem-sheaves-modules-injectives; Grothendieck argument of Tag 079Q, remark-existence-D"
+   }
+  },
+  {
+   "text": "By [def-weil-presheaf-modules-sheafification], precomposition with $\\eta$ is a bijection from sheaf maps $E_U\\to N$ to presheaf module maps $P_U\\to N$. Apply [lem-weil-pbc-free-yoneda-presheaf-module] to the latter maps: evaluation at $e_{\\mathrm{id}_U}$ is a bijection with $N(U)$, with inverse $s\\mapsto(r e_a\\mapsto rN(a)s)$. Their composite is precisely $\\theta_N$. It is additive since evaluation of $(\\alpha+\\beta)\\eta$ at that basis vector is the sum of the two evaluations; the inverse of an additive bijection is additive. Finally $(b\\alpha\\eta)_U(e_{\\mathrm{id}_U})=b_U((\\alpha\\eta)_U(e_{\\mathrm{id}_U}))$, proving the stated naturality. Thus these maps form an additive natural isomorphism $\\operatorname{Hom}_R(E_U,-)\\cong\\Gamma_{\\mathrm{Mod},U}$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03DI, equation-map-lower-shriek-OU-into-module"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-ext-right-derived-cocycle-comparison] with $\\mathcal A=\\operatorname{Mod}(R)$, $A=E_U$, $H=\\Gamma_{\\mathrm{Mod},U}$ and $e=\\theta$. The additive natural isomorphism just constructed verifies its represented-functor hypothesis, and step 1 gives its injective resolutions. Its hypothesis that Ext is computed in the Hom universe $v$ of $\\operatorname{Mod}(R)$ also holds: by [lem-weil-pbc-ext-via-injective-resolution], applied with an injective resolution $Y\\to I^\\bullet$ from step 1, $\\operatorname{Ext}^n_R(X,Y)\\cong H^n\\operatorname{Hom}_R(X,I^\\bullet)$, a subquotient of the $v$-small group $\\operatorname{Hom}_R(X,I^n)$. Its normalized comparison, inverted, gives $\\operatorname{Ext}_R^q(E_U,M)\\cong R^qH(M)$. Explicitly, naturality with $b=d_J^n$ gives $\\theta_{J^{n+1}}(d_J^n\\alpha)=(d_J^n)_U\\theta_{J^n}(\\alpha)$, so $\\theta$ identifies the Hom and evaluation complexes. The cited normalization sends every represented Ext cocycle to this evaluated cocycle class, giving exactly the asserted resolution formula. The cited natural isomorphisms also ensure independence of resolution and naturality in $M$. In degree zero, if $i:M\\hookrightarrow J^0$ is the augmentation, $\\theta_{J^0}(i\\alpha)=i_U\\theta_M(\\alpha)$; identifying the kernels with $M$ gives $\\theta_M$.",
+   "uses": [
+    "lem-sc-ext-right-derived-cocycle-comparison",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR, lemma-compute-ext-resolutions, part (1); applied to the Hom evaluation identification in sites-cohomology.tex, Tag 07AC"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] to $(\\mathcal C,R,M,U,q)$. Its universe and enough-injectives hypotheses were checked in step 1; it permits arbitrary ring sheaves. It supplies the second additive isomorphism $R^q\\Gamma_{\\mathrm{Mod},U}(M)\\cong H^q(U,M_{\\mathrm{ab}})$, natural in $M$ and the identity on $M(U)$ for $q=0$. Composing with step 3 gives all claimed comparisons and the degree-zero normalization. The cited statement expressly requires neither flatness over $\\mathbf Z$ nor injectivity of the underlying abelian sheaf.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, second displayed equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek, Ext/object-cohomology equality and following explanation; Tag 03FD, lemma-cohomology-modules-abelian-agree; Hom adjunction in sites-modules.tex, Tag 03DI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeYonedaEquiv|sheafificationHomEquiv|free.*[Rr]epresent.*[Ee]xt|[Ee]xt.*[Ee]valuation",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"grep\", \"query\": \"freeYonedaEquiv|sheafificationHomEquiv|free.*[Rr]epresent.*[Ee]xt|[Ee]xt.*[Ee]valuation\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"89ddd9c18f31ec6a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv and sheafificationHomEquiv give only ordinary presheaf/sheaf Hom bijections; Sheaf.H and cohomologyPresheafFunctor concern abelian sheaves. None gives Ext in variable-ring module sheaves compared with abelian object cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext from the sheafified free representable module computes object cohomology on a ringed site",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"leansearch\", \"query\": \"Ext from the sheafified free representable module computes object cohomology on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"PresheafOfModules.freeObj\", \"CategoryTheory.Abelian.Ext.instModule\", \"SheafOfModules.freeCofan\"], \"digest\": \"d966976fd7dbfd5f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv and sheafificationHomEquiv give only ordinary presheaf/sheaf Hom bijections; Sheaf.H and cohomologyPresheafFunctor concern abelian sheaves. None gives Ext in variable-ring module sheaves compared with abelian object cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Ext\"",
+   "results": "{\"t\": \"2026-10-22T06:48:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Hom.ext\", \"PresheafOfModules.Hom.ext_iff\", \"PresheafOfModules.hom_ext\", \"PresheafOfModules.hom_ext_iff\", \"PresheafOfModules.sections_ext\", \"PresheafOfModules.sections_ext_iff\", \"PresheafOfModules.free_hom_ext\", \"PresheafOfModulesOfCommRing.Derivation.ext\"], \"digest\": \"70b6f7132c8144b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv and sheafificationHomEquiv give only ordinary presheaf/sheaf Hom bijections; Sheaf.H and cohomologyPresheafFunctor concern abelian sheaves. None gives Ext in variable-ring module sheaves compared with abelian object cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings on a small site the sheafified free module on a representable represents evaluation and its Ext functors equal cohomology of the underlying abelian sheaf",
+   "results": "{\"t\": \"2026-10-22T06:48:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of rings on a small site the sheafified free module on a representable represents evaluation and its Ext functors equal cohomology of the underlying abelian sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\"], \"digest\": \"d43f32dc1b00dbf7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv and sheafificationHomEquiv give only ordinary presheaf/sheaf Hom bijections; Sheaf.H and cohomologyPresheafFunctor concern abelian sheaves. None gives Ext in variable-ring module sheaves compared with abelian object cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural additive Hom evaluation isomorphism for free representable sheaves of modules and right derived evaluation compared with abelian sheaf cohomology",
+   "results": "{\"t\": \"2026-10-22T06:48:12Z\", \"tool\": \"leanfinder\", \"query\": \"Natural additive Hom evaluation isomorphism for free representable sheaves of modules and right derived evaluation compared with abelian sheaf cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeHomEquiv\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"PresheafOfModules.freeHomEquiv\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"SheafOfModules.freeHomEquiv_freeMap\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.ιFree_mapFree_inv\"], \"digest\": \"a3d6c8556693547d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv and sheafificationHomEquiv give only ordinary presheaf/sheaf Hom bijections; Sheaf.H and cohomologyPresheafFunctor concern abelian sheaves. None gives Ext in variable-ring module sheaves compared with abelian object cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYonedaEquiv|sheafificationHomEquiv|extAddEquivCohomologyClass|enoughInjectives",
+   "results": "{\"t\": \"2026-10-23T14:40:36Z\", \"tool\": \"grep\", \"query\": \"freeYonedaEquiv|sheafificationHomEquiv|extAddEquivCohomologyClass|enoughInjectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/Grp/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/Grp/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/Grp/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/Grp/EnoughInjectives.lean\"], \"digest\": \"54a515576d9b85ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural additive isomorphism between Hom from a free representable sheaf of modules and evaluation, with derived Ext and sheaf cohomology",
+   "results": "{\"t\": \"2026-10-23T14:40:36Z\", \"tool\": \"leansearch\", \"query\": \"Natural additive isomorphism between Hom from a free representable sheaf of modules and evaluation, with derived Ext and sheaf cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.homAddEquiv_apply\", \"SheafOfModules.freeHomEquiv\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"PresheafOfModules.freeYonedaEquiv\", \"CategoryTheory.Sheaf.freeYonedaHomEquiv\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"CategoryTheory.Abelian.Ext.homAddEquiv\"], \"digest\": \"2f27f3a89ff39162\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Ext\"",
+   "results": "{\"t\": \"2026-10-23T14:40:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Hom.ext\", \"PresheafOfModules.Hom.ext_iff\", \"PresheafOfModules.hom_ext\", \"PresheafOfModules.hom_ext_iff\", \"PresheafOfModules.sections_ext\", \"PresheafOfModules.sections_ext_iff\", \"PresheafOfModules.free_hom_ext\", \"PresheafOfModulesOfCommRing.Derivation.ext\"], \"digest\": \"70b6f7132c8144b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from a sheafified free representable module on a ringed site equals evaluation cohomology of the underlying abelian sheaf",
+   "results": "{\"t\": \"2026-10-23T14:40:37Z\", \"tool\": \"leanfinder\", \"query\": \"Ext from a sheafified free representable module on a ringed site equals evaluation cohomology of the underlying abelian sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\"], \"digest\": \"ca9b43bbe0bcf87e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYonedaEquiv|sheafificationHomEquiv|cohomology|EnoughInjectives",
+   "results": "{\"t\": \"2026-10-23T14:42:32Z\", \"tool\": \"grep\", \"query\": \"freeYonedaEquiv|sheafificationHomEquiv|cohomology|EnoughInjectives\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\"], \"digest\": \"c2dde22b95428244\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functors of evaluation for sheaves of modules over a variable sheaf of rings agree with cohomology in abelian sheaves",
+   "results": "{\"t\": \"2026-10-23T14:42:33Z\", \"tool\": \"leanfinder\", \"query\": \"Derived functors of evaluation for sheaves of modules over a variable sheaf of rings agree with cohomology in abelian sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.IsQuasicoherent\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.Sheaf.instAddCommGroupH\"], \"digest\": \"65010dce3e81a254\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf free Yoneda, module sheafification and generic Ext resolution machinery cover ingredients only; abelian Sheaf.H does not compare variable-ring module Ext with abelian object cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-pullback-injective-section-acyclic",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The higher Ext vanishing for each free module generator against the inverse image of an injective, used in the bounded-above acyclicity test. Re-split of the supporting Ext-vanishing argument: Tag 07AC, lemma-existence-derived-lower-shriek, the displayed Ext/object-cohomology identification and its Hom evaluation justification; coefficient comparison via lemma-cohomology-modules-abelian-agree and lemma-cohomology-of-open.",
+   "via": [
+    "lem-trf-module-pullback-injective-section-acyclic",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-representable-module-ext-evaluation",
+  "worker": "stage1",
+  "summary": "Q07: retain the full statement; prove the additive evaluation adjunction explicitly, use existing Grothendieck and injective results, apply the normalized generic Ext comparison and the existing variable-ring module/abelian evaluation comparison. No new nodes and no Lean edits or compilation.",
+  "blueprint": "Supporting homological input to the inherited nearby-cycle branch of lem-trf-local-term-locality: the Ext/object-cohomology equality in Tag 07AC. The latest locality proof and its unit remain unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic arbitrary-ringed-site Grothendieck theorem; no statement of this unit supplies module-category injectives."
+   },
+   {
+    "node": "lem-sc-ext-right-derived-cocycle-comparison",
+    "why": "Generic represented additive functor/Ext comparison, used solely with the explicitly proved evaluation adjunction; no local-term theorem is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic ringed-site coefficient-forgetting comparison, including its hypotheses and degree-zero normalization; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-fefe2bf54",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-fefe2bf54 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, Stacks 07AC (lemma-existence-derived-lower-shriek, the Ext(j_{U!}O_U,H)=H^p(U,H) step in the proof of (2)) and 03FD. There are no new nodes, and the statement is identical to the base. Step 1: arbitrary-ring-sheaf Grothendieck node, then the Grothendieck⇒enough-injectives Mathlib leaf, which use the same def-sp-grothendieck-abelian notion and matching universes. Step 2: module sheafification gives unique factorization through η, and free-Yoneda gives O[h_U]=P_U with the same restriction rule, so the elementary step is justified. Step 3: lem-sc-ext-right-derived-cocycle-comparison has a HasExt^v hypothesis, and the step never checked it. FIX: one sentence citing the Mathlib leaf lem-weil-pbc-ext-via-injective-resolution (Ext^n≅H^n Hom(X,I^•), so Ext is v-small); it is also added to the step's uses and to proof_deps. The cocycle normalization together with naturality at d_J gives the resolution formula and the degree-0 identification. Step 4: the general ringed-site module/abelian evaluation comparison; its hypotheses (small site, any ring, common universe, enough injectives) are met, and it needs neither flatness nor abelian injectivity. No duplicate: the cocycle-equivalence node is R=Z only, sfb-free-representable is subcanonical/RHom, and the étale enough-injectives nodes are too narrow. No cycle. Accepted generic tool_uses: ring-sheaves-grothendieck, ext-right-derived-cocycle-comparison, ringed-site-module-abelian-evaluation-comparison. Edge cases checked: q=0, M=0, R=0, non-subcanonical site, and F_p on the point site (an injective F_p-module that is not Z-injective).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FreeRepresentableModuleExtEvaluation",
+  "declaration": "CategoryTheory.free_representable_module_ext_evaluation",
+  "file": "lean/Sheaf/CategoryTheory/Sites/FreeRepresentableModuleExtEvaluation.lean",
+  "statement": "theorem free_representable_module_ext_evaluation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u}) (_hcomm : ∀ (V : Cᵒᵖ) (a b : R.obj.obj V), a * b = b * a) (U : C) : ∃ (_hI : EnoughInjectives (ringedSiteModules.{u} R)) (_hExt : HasExt.{u} (ringedSiteModules.{u} R)), ∃ θ : (preadditiveCoyoneda.obj (op ((PresheafOfModules.sheafification (𝟙 R.obj)).obj ((PresheafOfModules.free R.obj).obj (yoneda.obj U))))) ≅ (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))), (∀ (N : ringedSiteModules.{u} R) (α : ((PresheafOfModules.sheafification (𝟙 R.obj)).obj ((PresheafOfModules.free R.obj).obj (yoneda.obj U))) ⟶ N), θ.hom.app N α = (PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) α).app (op U) (ModuleCat.freeMk (𝟙 U))) ∧ (∀ (N : ringedSiteModules.{u} R) (s : N.val.obj (op U)) (V : C) (a : V ⟶ U) (r : R.obj.obj (op V)), (PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) (θ.inv.app N s)).app (op V) (r • ModuleCat.freeMk a) = r • N.val.map a.op s) ∧ ∃ x : ∀ q : ℕ, (Abelian.extFunctor q).obj (op ((PresheafOfModules.sheafification (𝟙 R.obj)).obj ((PresheafOfModules.free R.obj).obj (yoneda.obj U)))) ≅ (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).rightDerived q, ∃ y : ∀ q : ℕ, (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).rightDerived q ≅ SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q, (∀ (M : ringedSiteModules.{u} R) (I : InjectiveResolution M) (q : ℕ) (s : ((PresheafOfModules.sheafification (𝟙 R.obj)).obj ((PresheafOfModules.free R.obj).obj (yoneda.obj U))) ⟶ I.cocomplex.X q) (hs : s ≫ I.cocomplex.d q (q + 1) = 0) (c : (((SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).cycles q) (_hc : (((SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).iCycles q c = θ.hom.app (I.cocomplex.X q) s), (I.isoRightDerivedObj (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))) q).hom ((x q).hom.app M (I.extMk s (q + 1) rfl hs)) = (((SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homologyπ q c) ∧ (∀ (M : ringedSiteModules.{u} R) (α : ((PresheafOfModules.sheafification (𝟙 R.obj)).obj ((PresheafOfModules.free R.obj).obj (yoneda.obj U))) ⟶ M), (x 0).hom.app M (Abelian.Ext.mk₀ α) = (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).toRightDerivedZero.app M (θ.hom.app M α)) ∧ ((SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).toRightDerivedZero ≫ (y 0).hom = Functor.whiskerLeft (SheafOfModules.toSheaf R) (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).toRightDerivedZero) ∧ ∀ (M : ringedSiteModules.{u} R) (I : InjectiveResolution M) (K : InjectiveResolution ((SheafOfModules.toSheaf R).obj M)) (φ : ((SheafOfModules.toSheaf R).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K.cocomplex) (_hφ : (SheafOfModules.toSheaf R).map (I.ι.f 0) ≫ φ.f 0 = K.ι.f 0) (q : ℕ), (y q).hom.app M ≫ (K.isoRightDerivedObj (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) q).hom = (I.isoRightDerivedObj (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))) q).hom ≫ HomologicalComplex.homologyMap ((sheafToPresheaf J AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (.up ℕ) |>.map φ) q",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the canonical Mathlib free Yoneda presheaf and module sheafification directly. Pointwise commutativity on the RingCat-valued sheaf is exactly a commutative ring sheaf. EnoughInjectives and the same-universe HasExt witness are conclusions, not added assumptions. The additive natural isomorphisms include explicit identity-generator, inverse-on-scalars, cocycle, degree-zero, and arbitrary-resolution-lift normalizations. The abelian cohomology term is right-derived evaluation, as in the recorded site/cohomology convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd51d6e04",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Only the item's lean record changed; the rest of the node is identical to live and lean.statement is verbatim in the file, proved by sorry; the report has Worker report and Second reading by Q60. Every node clause is rendered: theta as preadditiveCoyoneda ≅ toSheaf⋙sheafToPresheaf⋙eval_U with its identity-generator and inverse r•freeMk a formulas; EnoughInjectives and HasExt.{u} as conclusions; x fixed on every Ext class by the cocycle formula plus a degree-0 Ext.mk₀ clause; y with the degree-0 and arbitrary-lift clauses of module_abelian_evaluation_comparison_general; naturality via NatIsos. The ring is RingCat plus pointwise commutativity, equivalent to the node and matching ringedSiteModules and the citer. No extra hypotheses; one universe. E_U is the Mathlib free/sheafification construction as the node defines it; def-trf-free-module-sheaf-construction (free module on a sheaf of sets) is not a duplicate. Non-public imports are proof-only and cannot form a cycle. Edge cases checked: q=0, M=0, zero ring, non-subcanonical site, F_p on the point site. The derived-form rule does not apply (degreewise group statement). No compile run; no files changed."
+ }
+}

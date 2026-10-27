@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-double-fibre-null-cocycle-obstruction",
+ "kind": "statement",
+ "title": "Continuous null-sequence cocycle and closed-subgroup Baire obstruction",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $A$ be an abelian group with a norm $\\|\\cdot\\|:A\\to\\mathbf R_{\\geq0}$ such that $\\|x\\|=0$ exactly when $x=0$, $\\|-x\\|=\\|x\\|$, and $\\|x+y\\|\\leq\\max(\\|x\\|,\\|y\\|)$; give $A$ the metric topology $d(x,y)=\\|x-y\\|$, without assuming completeness. Let $T,V$ be nonempty compact Hausdorff totally disconnected spaces and $q:T\\to V$ a continuous surjection. Suppose there are distinct $v_k\\in V$ and points $t_k^-\\ne t_k^+$ of $T$, for $k\\geq0$, such that $q^{-1}(v_k)=\\{t_k^-,t_k^+\\}$ and all other fibres are singletons. In the subspace $R=\\{(x,y)\\in T^2:q(x)=q(y)\\}$, suppose both oriented singletons $\\{(t_k^-,t_k^+)\\}$ and $\\{(t_k^+,t_k^-)\\}$ are open and closed. Suppose also that every nonempty open $U\\subseteq T$ contains both $t_k^-,t_k^+$ for some $k\\geq N$, for every $N\\geq0$. Let $H_0\\subseteq H_1\\subseteq\\cdots\\subseteq A$ be additive subgroups (subsets containing zero and closed under differences), closed in $A$, with $A=\\bigcup_k H_k$. Let $a_k\\in A\\setminus H_k$ tend to zero. Define the actual function $f:R\\to A$ by\n$$f(x,x)=0,\\qquad f(t_k^-,t_k^+)=a_k,\\qquad f(t_k^+,t_k^-)=-a_k.$$\nThen $f$ is continuous, $f(y,z)-f(x,z)+f(x,y)=0$ whenever $q(x)=q(y)=q(z)$, and there is no continuous $g:T\\to A$ satisfying $g(y)-g(x)=f(x,y)$ on $R$. These are assertions about functions into $A$ itself, with no completion or closure of the subgroup of differences.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Topological analytic obstruction formerly in steps 4--6: finite clopen truncations, fibrewise cancellation, and Baire. Stacks Tag 0CQN (lemma-baire-category-locally-compact) supplies only the Baire input, not this constructed cocycle."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "The fibre classification makes the displayed function well-defined on all of $R$: a diagonal pair receives zero, and any other pair is precisely one of the two orientations of a unique double fibre. Distinct $v_k$ prevent competing indices, and $t_k^-\\ne t_k^+$ separates the two orientations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), motivating analytic auxiliary: agent proof of the null-sequence obstruction, not a claim stated in the blueprint."
+   }
+  },
+  {
+   "text": "At an off-diagonal point, its open singleton is a neighbourhood on which $f$ is constant, so $f$ is continuous there. At $(x,x)$, fix $\\epsilon>0$ and choose $N$ so that $\\|a_k\\|<\\epsilon$ for every $k\\ge N$. Remove from $R$ both oriented singletons for each $k<N$. Their finite union is closed and contains no diagonal point, so its complement is an open neighbourhood of $(x,x)$. On it, $f$ is either zero or $\\pm a_k$ with $k\\ge N$, hence $d(f(x,x),f(r))<\\epsilon$. This is continuity at every diagonal point, directly into $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), motivating analytic auxiliary: agent proof of the null-sequence obstruction, not a claim stated in the blueprint."
+   }
+  },
+  {
+   "text": "Fix a fibre. On a singleton set $u=0$; on the fibre $\\{t_k^-,t_k^+\\}$ set $u(t_k^-)=0$ and $u(t_k^+)=a_k$. Checking its four ordered pairs gives $f(s,t)=u(t)-u(s)$, including both diagonal values. Thus for a triple in this fibre the required expression is $(u(z)-u(y))-(u(z)-u(x))+(u(y)-u(x))=0$. These are separate finite calculations; no continuous or global potential is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), motivating analytic auxiliary: agent proof of the null-sequence obstruction, not a claim stated in the blueprint."
+   }
+  },
+  {
+   "text": "Suppose a continuous primitive $g$ exists. Set $E_n=g^{-1}(H_n)$. Each $E_n$ is closed: its complement is the inverse image of the open complement of $H_n$. For every $t\\in T$, the covering $A=\\bigcup_n H_n$ puts $g(t)$ in some $H_n$, so $T=\\bigcup_n E_n$. Apply [lem-sfb-baire-closed-cover-interior] with ambient space $X=T$, whole subspace $Y=T$, countable index set $I=\\mathbf N$, and $A_n=E_n$. The whole-subspace topology is the given topology on $T$. Nonemptiness and the Hausdorff property are hypotheses; every point has the compact neighbourhood $T$, giving local compactness. Obtain $j$ with $U=\\operatorname{int}_T(E_j)$ nonempty. By the definition of interior, $U$ is open in $T$ and $U\\subseteq E_j$.",
+   "uses": [
+    "lem-sfb-baire-closed-cover-interior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0CQN, lemma-baire-category-locally-compact, closed-cover consequence in lem-sfb-baire-closed-cover-interior."
+   }
+  },
+  {
+   "text": "Tail density with $N=j$ gives $k\\ge j$ and $t_k^-,t_k^+\\in U$. Both $g$-values belong to $H_j$, so their difference belongs to $H_j\\subseteq H_k$. The primitive equation on $(t_k^-,t_k^+)$ identifies that difference with $a_k$, contradicting $a_k\\notin H_k$. Therefore no continuous primitive exists, as an equality of actual $A$-valued functions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), motivating analytic auxiliary: agent proof of the null-sequence obstruction, not a claim stated in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-baire-closed-cover-interior"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) motivates the auxiliary but does not state it; direct diagonal-neighbourhood proof, fibrewise cancellation and the closed-cover consequence of Stacks Tag 0CQN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A null sequence defines a continuous cocycle on a compact relation with countably many clopen double fibers, with no continuous primitive by Baire and a closed subgroup exhaustion",
+   "results": {
+    "t": "2026-10-22T06:03:28Z",
+    "tool": "leanfinder",
+    "query": "A null sequence defines a continuous cocycle on a compact relation with countably many clopen double fibers, with no continuous primitive by Baire and a closed subgroup exhaustion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.liftCover'",
+     "LocallyConstant.piecewise",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "IsEvenlyCovered.of_openPartialHomeomorph"
+    ],
+    "digest": "2593fe710c39a974"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, continuous group cohomology and generic covering lemmas give neither this explicit null-sequence cocycle nor its closed-subgroup obstruction to a continuous primitive."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Baire category obstructs solving g y minus g x equals a prescribed cocycle when dense pairs escape an increasing countable closed subgroup cover",
+   "results": {
+    "t": "2026-10-22T06:03:40Z",
+    "tool": "leanfinder",
+    "query": "Baire category obstructs solving g y minus g x equals a prescribed cocycle when dense pairs escape an increasing countable closed subgroup cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsAddQuotientCoveringMap.disjoint",
+     "MeasureTheory.Measure.haar.index_elim",
+     "not_denseRange_zsmul",
+     "IsOpen.dense_iUnion_preimage_smul",
+     "MeasureTheory.Measure.haar.addIndex_elim",
+     "IsOpen.dense_iUnion_preimage_vadd",
+     "IsQuotientCoveringMap.disjoint",
+     "MeasureTheory.Measure.haar.index_defined"
+    ],
+    "digest": "45295c219c0150f4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, continuous group cohomology and generic covering lemmas give neither this explicit null-sequence cocycle nor its closed-subgroup obstruction to a continuous primitive."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BaireSpace\", \"AddSubgroup\"",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "loogle",
+    "query": "\"BaireSpace\", \"AddSubgroup\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, continuous group cohomology and generic covering lemmas give neither this explicit null-sequence cocycle nor its closed-subgroup obstruction to a continuous primitive."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous cocycle on a profinite double fiber relation from a null sequence not a continuous coboundary by Baire closed subgroup exhaustion",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "leansearch",
+    "query": "Continuous cocycle on a profinite double fiber relation from a null sequence not a continuous coboundary by Baire closed subgroup exhaustion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.coboundaries₂_le_cocycles₂",
+     "groupCohomology.coboundaries₁_le_cocycles₁",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "continuousAddSubgroup",
+     "UniformOnFun.isClosed_setOf_continuous"
+    ],
+    "digest": "b87cbae578a41750"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, continuous group cohomology and generic covering lemmas give neither this explicit null-sequence cocycle nor its closed-subgroup obstruction to a continuous primitive."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|cobound|[Cc]ech).*(Baire|double|clopen)|(Baire|double.fib).*(cocycle|cobound)",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "grep",
+    "query": "(cocycle|cobound|[Cc]ech).*(Baire|double|clopen)|(Baire|double.fib).*(cocycle|cobound)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, continuous group cohomology and generic covering lemmas give neither this explicit null-sequence cocycle nor its closed-subgroup obstruction to a continuous primitive."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|cobound|[Cc]ech).*(Baire|double|clopen)|(Baire|double.fib).*(cocycle|cobound)",
+   "results": {
+    "t": "2026-10-22T12:02:53Z",
+    "tool": "grep",
+    "query": "(cocycle|cobound|[Cc]ech).*(Baire|double|clopen)|(Baire|double.fib).*(cocycle|cobound)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved finite clopen approximation, group cohomology, dense subgroup and continuous-function facts do not state this conditional double-fibre cocycle construction and obstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous cocycle on a compact double fibre relation from a null sequence is not a continuous coboundary by Baire closed subgroup exhaustion",
+   "results": {
+    "t": "2026-10-22T12:02:53Z",
+    "tool": "leansearch",
+    "query": "A continuous cocycle on a compact double fibre relation from a null sequence is not a continuous coboundary by Baire closed subgroup exhaustion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.coboundaries₁_le_cocycles₁",
+     "groupCohomology.cocycles₁",
+     "groupCohomology.coboundaries₂_le_cocycles₂",
+     "continuousAddSubgroup",
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.cocycles₁.d₁₂_apply",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+     "ContinuousCohomology.MultiInd.d_comp_d"
+    ],
+    "digest": "3425ef0378f0fd40"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved finite clopen approximation, group cohomology, dense subgroup and continuous-function facts do not state this conditional double-fibre cocycle construction and obstruction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BaireSpace\", \"AddSubgroup\"",
+   "results": {
+    "t": "2026-10-22T12:02:53Z",
+    "tool": "loogle",
+    "query": "\"BaireSpace\", \"AddSubgroup\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved finite clopen approximation, group cohomology, dense subgroup and continuous-function facts do not state this conditional double-fibre cocycle construction and obstruction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A null sequence on clopen isolated double fibres defines a continuous relation cocycle with no continuous primitive by a countable closed subgroup exhaustion and Baire category",
+   "results": {
+    "t": "2026-10-22T12:03:04Z",
+    "tool": "leanfinder",
+    "query": "A null sequence on clopen isolated double fibres defines a continuous relation cocycle with no continuous primitive by a countable closed subgroup exhaustion and Baire category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "PiNat.exists_retraction_of_isClosed",
+     "PiNat.exists_retraction_subtype_of_isClosed",
+     "PiNat.exists_disjoint_cylinder",
+     "LocallyConstant.piecewise",
+     "IsLocallyConstant.isClopen_fiber",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective"
+    ],
+    "digest": "d9c590f7e008ae8d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved finite clopen approximation, group cohomology, dense subgroup and continuous-function facts do not state this conditional double-fibre cocycle construction and obstruction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Baire category obstructs a continuous function whose differences on dense isolated pairs escape an increasing countable closed additive subgroup cover",
+   "results": {
+    "t": "2026-10-22T12:07:10Z",
+    "tool": "leanfinder",
+    "query": "Baire category obstructs a continuous function whose differences on dense isolated pairs escape an increasing countable closed additive subgroup cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "tendsto_sub_comap_self",
+     "not_denseRange_zsmul",
+     "Set.Countable.dense_compl",
+     "controlled_sum_of_mem_closure",
+     "mapClusterPt_atTop_nsmul_iff_mem_topologicalClosure_zmultiples",
+     "controlled_sum_of_mem_closure_range",
+     "AddCircle.addWellApproximable_ae_empty_or_univ",
+     "denseRange_zsmul_iff_nsmul"
+    ],
+    "digest": "9cfdf775755f603d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved finite clopen approximation, group cohomology, dense subgroup and continuous-function facts do not state this conditional double-fibre cocycle construction and obstruction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-algcl-profinite-cech-exact",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Topological analytic obstruction formerly in steps 4--6: finite clopen truncations, fibrewise cancellation, and Baire. Stacks Tag 0CQN (lemma-baire-category-locally-compact) supplies only the Baire input, not this constructed cocycle.",
+   "via": [
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-double-fibre-null-cocycle-obstruction",
+  "worker": "stage1",
+  "summary": "Q123 retained the statement and all provenance. Proved well-definedness, continuity by finite clopen exclusions at diagonal points, the cocycle equation by finite fibrewise potentials, and nonexistence of a continuous primitive by the existing Baire closed-cover Mathlib leaf and tail density. No new nodes; no completeness or completion used. Searched project Lean, the whole DAG and blueprint, and Mathlib; no exact project attachment or Mathlib theorem for the item. Repair of the side-completion promotion refusal: compared the retained returned delivery with the current unsplit live item, re-read the current Baire leaf and size convention, and made the ambient space, whole-subspace topology, countable index, covering, and interior inclusion explicit in step 4. Retained the exact statement and search records; delivery is rebuilt on the current DAG by deliver.py.",
+  "blueprint": "The item is an agent-created analytic auxiliary motivated by paragraph (3), open direct image, of the main-20261015 direct-images proof; it realizes the former parent steps 4--6 (null-sequence continuity, fibrewise cancellation, Baire obstruction). The blueprint itself states no such analytic assertion. The ancestor tool returns None; inherited blueprint.from is retained and same_as remains empty after whole-blueprint searches."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-0b057b23e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-0b057b23e (reviewer sub-agent of L); spot-checked: This is a side-completion promotion re-push. Live and side-live still have the item as unsplit with no proof. Compared with the earlier head c190affbb677, only step 4 changed: it now names X=Y=T, I=N and A_n=E_n, writes out the pointwise covering argument and derives U open with U ⊆ E_j from the definition of interior. The split_report summary and date were also updated. Not an identical re-push (A6). The statement, stmt_deps, source, blueprint and created fields are identical to live. The delivery adds no new nodes and there is no repair note. Small case: A = ⊕F_p with norm 2^{-min supp}, H_k = span(e_1..e_k), a_k = e_{k+1}. The hypotheses can hold, so the statement is not vacuous. The only citer, lem-sfb-norm-algcl-profinite-cech-exact step 2, uses continuity, f(y,z)-f(x,z)+f(x,y)=0 and the absence of g with g(y)-g(x)=f(x,y), with matching signs. Step 1: distinct v_k and t^- ≠ t^+ make f a function. Step 2: oriented singletons are clopen. At a diagonal point, removing the finitely many singletons with k<N leaves values 0 or ±a_k with k≥N; the norm is symmetric and completeness is not used. Step 3: the fibrewise potential gives f(s,t)=u(t)-u(s) on all four ordered pairs, and the sum telescopes, including for repeated entries and in characteristic 2. Step 4: E_n = g^{-1}(H_n) is closed because H_n is closed, and the E_n cover T. The cited lem-sfb-baire-closed-cover-interior applies: T is nonempty, Hausdorff and compact, hence locally compact, and N is countable. That node is a Mathlib leaf in the same unit. I checked nonempty_interior_of_iUnion_of_closed at Baire/Lemmas.lean:257, BaireSpace.of_t2Space_locallyCompactSpace at LocallyCompactRegular.lean:23, and Stacks 0CQN at topology.tex:2044. Step 5: tail density with N=j gives a_k = g(t^+)-g(t^-) ∈ H_j ⊆ H_k, contradicting a_k ∉ H_k. Steps 1, 2, 3 and 5 are genuinely elementary. There is no SGA citation and no cycle. Compactness of V and total disconnectedness of T and V are unused, which is harmless. No fixes."
+ }
+}

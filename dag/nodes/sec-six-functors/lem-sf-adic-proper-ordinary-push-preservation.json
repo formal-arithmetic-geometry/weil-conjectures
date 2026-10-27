@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-adic-proper-ordinary-push-preservation",
+ "kind": "statement",
+ "title": "Proper ordinary native module direct image preserves bounded constructibility",
+ "statement": "Fix a finite-field datum D, a prime l unequal to D.p, and a normalized realization Family F [lem-sf-adic-qbar-constructible-realization]. For separated finite-type geometric spaces Z,T and a proper k-morphism p:Z→T, let O be any Operations for the realizations F.data Z.realization and F.data T.realization [def-sf-native-proper-coefficient-operations]. Then for every ordinary module derived object K satisfying boundedConstructible_Z(K), the object ContinuousRational.DirectImage.derivedPush(p,O.coefficient)(K) satisfies boundedConstructible_T. The coefficient map has O.functions precomposition normalization; neither an isomorphism a or b nor any adjunction-comparison equation is assumed or asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15 (pp. 61-62), with the proper finiteness of Lemma 6.7.2: finite-field continuous realization and its actual ambient operations. Common-stage, tensor-normalized adjunction comparison is an agent-formulated consequence, not a verbatim statement of the proposition.; proper-adjunction proof Step 5 only."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "def-sf-native-proper-coefficient-operations",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-realization-data",
+  "def-weil-finite-field-fiber",
+  "def-per-continuous-rational-realization-data",
+  "lem-a1-rational-direct-image-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-locally-finite-adic-compact-support-realization to $f=p$ with the compactification $(\\mathrm{id}_Z,p)$. It supplies the proper scalar-extension comparison on the stated full ordinary derived subcategories; for this compactification $D(\\mathrm{id}_!)$ is the identity (extension by zero across the entire scheme). In particular its final preservation clause says that the actual $Rp_{*,B}$ sends $\\mathcal D_Z$ into $\\mathcal D_Y$. The domain called $D^b_{ctf}(-,\\Omega)$ in that lemma is exactly the common-stage $D^b_c(-,\\Omega)$ by def-weil-finite-tor-amplitude, so no extra Tor hypothesis is being imposed on objects of $\\mathcal C_Z$. Step 1 identifies its realization $J$ with $\\rho$. We use this result here only to restrict the independently defined ordinary module direct image; its comparison need not be chosen as our $b_p$. Transport its native ordinary presentation through the section-module equivalence of the fixed Family. The precomposition property of Operations identifies the coefficient map, hence the ordinary pullback functor; uniqueness of right adjoints identifies the actual right-derived direct images. This identification transports boundedConstructible, independent of the auxiliary realization chosen by compact-support realization.",
+   "uses": [
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "def-weil-finite-tor-amplitude",
+    "def-sf-native-proper-coefficient-operations",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-native-proper-coefficient-operations",
+  "lem-sf-adic-qbar-constructible-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas",
+  "note": "Agent-formulated strict subargument of the proper-adjunction assembly, retaining the named source and its normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image preserves bounded constructible complexes of continuous ell adic modules",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforward, proper base-change/restriction instances, CondensedSet.LocallyConstant.functorFullyFaithful and other generic results; none asserts native derived constructible preservation",
+   "date": "2026-10-27",
+   "verdict": "No match: the project-specific normalized native derived statement is not in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between pullbacks of continuous adic realization and right adjoint mate",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp and other underived pullback comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified common-stage realization or constructible preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|adic_proper_adjunction_realization",
+   "results": "20 hits in Mathlib CategoryTheory.Adjunction.Mates and its applications; abstract mate formulas only. Local rg of Adic modules and six-functor DAG found no duplicate of either new statement.",
+   "date": "2026-10-27",
+   "verdict": "The categorical identities are available; the geometric comparison/preservation statements are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicProperAdjunctionRealization",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection: realize the proper factor of the compactification projection formula on native continuous-coefficient modules, including the counit. The seeded root has no blueprint ancestor (blueprint_refs.py ancestor returns None). Subargument: Proper ordinary native module direct image preserves bounded constructibility.",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicProperOrdinaryPushPreservation",
+  "file": "lean/Sheaf/Paper/AdicProperOrdinaryPushPreservation.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.Proper.adic_proper_ordinary_push_preservation",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.Proper.adic_proper_ordinary_push_preservation"
+  ],
+  "statement": "theorem adic_proper_ordinary_push_preservation (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (F : Family l D)\n    (Z T : GeometricSpace D) (p : Z.base ⟶ T.base)\n    (hp : IsProper p.left)\n    (O : Operations l p.left (F.data Z).realization (F.data T).realization) :\n    ∀ K, boundedConstructible l Z.base.left (F.data Z).realization K →\n      boundedConstructible l T.base.left (F.data T).realization\n        ((ContinuousRational.DirectImage.derivedPush p.left O.coefficient).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e55ba",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261027T094408-L-222429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e55ba",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261027T094408-L-222429",
+  "kind": "interface",
+  "note": "independent cc review: item proof (mate helper + Mathlib mate unit/counit) and two new sorry lemmas against Comparison fields, DAG nodes, unit sk-prop-sf-biduality-general (realized empty)"
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sf-recollement-reduction-boundary",
+ "kind": "statement",
+ "title": "Reduction of the recollement connecting map",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow X$ closed and $j:U\\hookrightarrow X$ its complementary open. Use the small pro-etale operation datum [def-fix-six-functor-datum]. Let $K\\in D^b_c(X,R)$ in the derived-complete integral category [def-weil-derived-complete-integral-detailed]. Put $K_n=r_nK$, where $r_n=-\\otimes^L_{\\widehat R_X}(A_n)_X$ [def-weil-integral-derived-reduction].\n\nLet $\\varepsilon_K:j_!j^*K\\to K$ be the counit of $j_!\\dashv j^*$ and $\\eta_K:K\\to i_*i^*K$ the unit of $i^*\\dashv i_*$ for the integral operations of the datum, and let $\\delta_K:i_*i^*K\\to j_!j^*K[1]$ be any morphism such that $\\Delta_K=(j_!j^*K\\xrightarrow{\\varepsilon_K}K\\xrightarrow{\\eta_K}i_*i^*K\\xrightarrow{\\delta_K}j_!j^*K[1])$ is a distinguished triangle in $D(X_{\\mathrm{proet}},R)$. Since $K_n\\in D^b_c(X,A_n)$, let $\\delta_{K_n}$ be any open--closed recollement triangle for $K_n$ in the sense of [def-weil-open-closed-recollement], and write $\\Delta_{K_n}$ for the resulting distinguished triangle with the finite counit $\\varepsilon_{K_n}$ and unit $\\eta_{K_n}$. Let $a_n:r_n(j_!j^*K)\\xrightarrow{\\sim}j_!j^*K_n$ and $b_n:r_n(i_*i^*K)\\xrightarrow{\\sim}i_*i^*K_n$ be the specified operation reduction comparisons [lem-fix-operation-reduction], and $s_n:r_n(M[1])\\xrightarrow{\\sim}(r_nM)[1]$ the derived-tensor shift comparison [lem-pur-derived-change-of-rings]. Then $(a_n,1_{K_n},b_n)$ is an isomorphism of distinguished triangles $r_n\\Delta_K\\xrightarrow{\\sim}\\Delta_{K_n}$ in the derived category. In particular its third square is the equality\n$$a_n[1]\\,s_n\\,r_n(\\delta_K)=\\delta_{K_n}\\,b_n.$$\nThis is natural in $K$ for the specified comparisons, and includes empty $U$ or $Z$.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3), image of open-closed recollement under exact compact support; comparison of the reduced integral connecting arrow with its finite counterpart before compact-support image",
+  "note": "Agent-written comparison implicit in the blueprint clause (3), using the all-stages recollement uniqueness statement and the operation-reduction comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-open-closed-recollement",
+  "lem-fix-operation-reduction",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Apply the counit-normalized derived scalar-extension shift theorem to the coefficient projection. Uniqueness of its degree-one comparison identifies it with PurCompactSupport.scalarCommShift. Transport this coherent shift and exactness along finiteReductionIso. Thus the actual reduced integral triangle, with exactly the shift structure in sfRecollementReducedTriangle, is distinguished.",
+   "uses": [
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; counit normalization of the exact derived coefficient functor"
+   }
+  },
+  {
+   "text": "Read the open counit and closed unit equations from the reduction comparison of the supplied operation datum. For the open equation, use openAdjunction_left and openAdjunction_right, then cancel the inverse open comparison. Apply the finite ambient inclusion and its composition law. The results are precisely the first and second squares with vertex maps a_n, identity, b_n.",
+   "uses": [
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (3), exact image of open-closed recollement, with the coefficient and adjunction comparisons specified by the operation datum"
+   }
+  },
+  {
+   "text": "The reduced input belongs to the finite constructible category by the definition of sixFunctorIntegralReduction. Apply the finite all-stages recollement theorem. Its shifted orthogonality concerns the canonical ordinary finite vertices. Identify the datum vertices with these vertices using finiteOpenExtension and finiteDirectImage followed by those functors applied to finitePullback. Transport the Hom subsingleton along these vertex isomorphisms, and then along a_n[1], to obtain Hom((r_n j!j*K)[1], i*i*K_n)=0. The coefficient prime is a unit in the closure field because its prime differs from the characteristic.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-fix-six-functor-datum",
+    "prop-sf-open-closed-triangle-all-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Hom vanishing paragraph, applied to the finite stage"
+   }
+  },
+  {
+   "text": "Apply triangle_morphism_extension, part (2), to the reduced integral and chosen finite distinguished triangles, with middle map identity and the prescribed outer maps a_n and b_n. The Hom subsingleton and the first two squares give the third square for these very maps. Triangle.isoMk packages their three component isomorphisms as an isomorphism of triangles. Its components are definitionally the prescribed maps. Unfold the third square and reassociate composition to obtain the displayed boundary equation. This avoids introducing a separate transported connecting arrow and then identifying it by uniqueness.",
+   "uses": [
+    "lem-weil-pbc-triangle-morphism-extension",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Corollaire 1.1.10(ii), as formalized by triangle_morphism_extension; the same vanishing and uniqueness argument as the node original steps 3--4"
+   }
+  },
+  {
+   "text": "For naturality, assemble each specified comparison into a natural isomorphism by whiskering its two factors with the operation functors and ambient inclusion. Their components are definitionally sfRecollementReductionOpenIso and sfRecollementReductionClosedIso. Apply the naturality equation of each composite. No step assumes a stratum nonempty, so the same argument includes empty U or Z.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (3), exact image of open-closed recollement, with the coefficient and adjunction comparisons specified by the operation datum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-triangles-with-shift",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "prop-sf-open-closed-triangle-all-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "R3 Lean assembly of clause (3): exact coefficient change with its normalized shift, adjunction squares, finite orthogonality, and BBD triangle-morphism extension; naturality from the specified natural isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction identifies the canonical open closed recollement triangle including its connecting morphism by uniqueness",
+   "results": "{\"t\": \"2026-10-22T07:28:17Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coefficient reduction identifies the canonical open closed recollement triangle including its connecting morphism by uniqueness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂\", \"DerivedCategory.triangleOfSESIso\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃\", \"DerivedCategory.triangleOfSES_mor₁\"], \"digest\": \"ba87bb8794e5b68e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modulo uniformizer powers the natural vertex identifications form an isomorphism of recollement triangles and intertwine their boundary arrows",
+   "results": "{\"t\": \"2026-10-22T07:31:06Z\", \"tool\": \"leanfinder\", \"query\": \"Modulo uniformizer powers the natural vertex identifications form an isomorphism of recollement triangles and intertwine their boundary arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃\", \"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃_hom_hom₁\", \"CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso\", \"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂\", \"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁\", \"CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso\", \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso\"], \"digest\": \"80eb108875dffdde\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient reduction preserves the boundary map of the open closed distinguished triangle of sheaves",
+   "results": "{\"t\": \"2026-10-22T07:28:06Z\", \"tool\": \"leansearch\", \"query\": \"Coefficient reduction preserves the boundary map of the open closed distinguished triangle of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeCompTriangleh\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"CochainComplex.mappingCone.triangleh\", \"CochainComplex.mappingCone.inr_descShortComplex\", \"CochainComplex.mappingCone.trianglehRotateIsoTrianglehOfDegreewiseSplit\", \"CochainComplex.triangleOfDegreewiseSplit_mor₃\", \"groupHomology.chains₁ToCoinvariantsKer\", \"CochainComplex.truncate_obj_d\"], \"digest\": \"8724cfe2d07e1b2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished",
+   "results": "{\"t\": \"2026-10-22T07:28:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_distinguished\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished\", \"CategoryTheory.Triangulated.Octahedron.map\", \"CategoryTheory.Triangulated.Octahedron.map_m₁\", \"CategoryTheory.Triangulated.Octahedron.map_m₃\"], \"digest\": \"6df1e49469c71a7b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|lowerShriek|lower_shriek|strictTower|homotopyLimit|homotopy_limit",
+   "results": "{\"t\": \"2026-10-22T07:28:06Z\", \"tool\": \"grep\", \"query\": \"recollement|lowerShriek|lower_shriek|strictTower|homotopyLimit|homotopy_limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ|map_distinguished",
+   "results": "{\"t\": \"2026-10-22T07:31:02Z\", \"tool\": \"grep\", \"query\": \"triangleOfSESδ|map_distinguished\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"4b455c63f3f02ca8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic triangulated/derived-category declarations do not state this specified pro-etale coefficient comparison or strict compact-support realization."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|lowerShriek|lower_shriek",
+   "results": "{\"t\": \"2026-10-22T12:00:28Z\", \"tool\": \"grep\", \"query\": \"recollement|lowerShriek|lower_shriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished",
+   "results": "{\"t\": \"2026-10-22T12:00:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_distinguished\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished\", \"CategoryTheory.Triangulated.Octahedron.map\", \"CategoryTheory.Triangulated.Octahedron.map_m₁\", \"CategoryTheory.Triangulated.Octahedron.map_m₃\"], \"digest\": \"6df1e49469c71a7b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction modulo a uniformizer preserves the connecting morphism in the open closed localization triangle of sheaves",
+   "results": "{\"t\": \"2026-10-22T12:00:28Z\", \"tool\": \"leansearch\", \"query\": \"Reduction modulo a uniformizer preserves the connecting morphism in the open closed localization triangle of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.openToLocalization\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.StructureSheaf.germ_comp_stalkToFiberRingHom\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"ModuleCat.Tilde.stalkIso_hom\"], \"digest\": \"116d6ffaef29d6c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor compatible with adjunction units and counits preserves the boundary arrow of an orthogonal localization triangle",
+   "results": "{\"t\": \"2026-10-22T12:00:39Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor compatible with adjunction units and counits preserves the boundary arrow of an orthogonal localization triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.map_distinguished\", \"CategoryTheory.Functor.IsTriangulated.map_distinguished\"], \"digest\": \"4545df449ce102c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction identifies open closed recollement connecting morphisms under natural operation comparisons",
+   "results": "{\"t\": \"2026-10-22T12:00:39Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coefficient reduction identifies open closed recollement connecting morphisms under natural operation comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.Adjunction.derivedε_fac_app\"], \"digest\": \"d9b80344071bcbf0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "map_distinguished",
+   "results": "{\"t\": \"2026-10-22T12:02:10Z\", \"tool\": \"grep\", \"query\": \"map_distinguished\", \"sub\": \"CategoryTheory/Triangulated/Functor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"187\", \"189\", \"191\", \"204\", \"233\"], \"digest\": \"95ef8963c7703413\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, spectral-object or derived-comparison results do not state the specified integral-to-finite pro-etale recollement comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-localization-projection-realization",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (3), image of open-closed recollement under exact compact support; comparison of the reduced integral connecting arrow with its finite counterpart before compact-support image",
+   "via": [
+    "lem-sf-package-localization-projection-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-recollement-reduction-boundary",
+  "worker": "stage1",
+  "summary": "Five-step assembly: exact coefficient change, explicit counit/unit squares, transport along the specified vertex isomorphisms, uniqueness of the finite recollement boundary, and naturality including empty strata. Reused existing statements throughout; no new nodes or statement changes.",
+  "blueprint": "prop-functor-package proof clause (3), image of open-closed recollement under an exact functor, with the integral-to-finite third-arrow compatibility made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site exact change of coefficients supplies the reduced distinguished triangle, with its shift comparison."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Uses the specified operation comparisons and their unit/counit compatibility; does not replace any geometric proof route."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Uses finite boundary uniqueness and all-stages functoriality as the recollement tool underlying package clause (3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-sf-open-closed-triangle-all-stages"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-1d92193f8",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-1d92193f8 (reviewer sub-agent of L); spot-checked: This is an ordinary stage-1 split (no repair note), with 5 steps, no new nodes and the statement unchanged. I read the item and every cited statement in full. Step 1: lem-pur-derived-change-of-rings(2) gives exact Lπ_n^* = r_n, whose shift structure is s_n; Stacks 06YY was checked at sites-cohomology.tex:3585. Step 2: lem-fix-operation-reduction covers O_E→A_n reduction for pullback, direct image and compact-support image on the bounded domains, and its last clause preserves the j_!⊣j^* counit and i^*⊣i_* unit; this gives r_n(ε)=ε_n a_n and b_n r_n(η)=η_n. Step 3: δ̃=a_n[1]d b_n^{-1} gives a triangle iso, distinguished by TR1; checked against def-weil-pbc-triangles-with-shift. Step 4: the finite-stage clause of prop-sf-open-closed-triangle-all-stages gives Hom(j_!j^*K_n[m],i_*i^*K_n)=0 and a unique third arrow, in the right direction (BBD 1.1.10(ii)); so δ̃=δ_{K_n}, and right-composing with b_n gives the displayed equality. Step 5: componentwise naturality. Empty X/U/Z and n=1 were checked. The integral-to-finite coefficient categories match the parent's use and are at least as general as it needs. Dep closures contain no cycle. Searching all recollement-plus-reduction nodes found no duplicate. Sources: main-20261015 prop-functor-package clause (3), no SGA. Accepted tool_uses: change-of-rings, operation reduction, all-stages recollement. Maintainer note: lem-sf-open-reduction-adjunction-transport gives the strict-system version of the counit square, but only under extra hypotheses; it is not needed here."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfRecollementReductionBoundary",
+  "declaration": "WeilConjectures.sfRecollementReductionBoundary",
+  "declarations": [
+   "WeilConjectures.sfReductionIntegralOpen",
+   "WeilConjectures.sfReductionIntegralClosed",
+   "WeilConjectures.sfReductionFiniteOpen",
+   "WeilConjectures.sfReductionFiniteClosed",
+   "WeilConjectures.sfRecollementReductionOpenIso",
+   "WeilConjectures.sfRecollementReductionClosedIso",
+   "WeilConjectures.sfReductionIntegralTriangle",
+   "WeilConjectures.sfReductionFiniteTriangle",
+   "WeilConjectures.sfRecollementReducedTriangle",
+   "WeilConjectures.sfRecollementReductionBoundary",
+   "WeilConjectures.sfRecollementReductionBoundary_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/SfRecollementReductionBoundary.lean",
+  "statement": "theorem sfRecollementReductionBoundary [IsSeparated X.obj.hom] [IsClosedImmersion i.hom.left] (_hij : Set.range j.hom.left.base = (Set.range i.hom.left.base)ᶜ) (m : ℕ) (K : sfIntegralConstructibleCategory C.l E X.obj.left) (δ : (sfReductionIntegralClosed S i).obj K ⟶ ((sfReductionIntegralOpen S j hj).obj K)⟦(1 : ℤ)⟧) (_hδ : sfReductionIntegralTriangle S i j hj K δ ∈ distTriang _) (δn : (sfReductionFiniteClosed S i m).obj K ⟶ ((sfReductionFiniteOpen S j hj m).obj K)⟦(1 : ℤ)⟧) (_hδn : sfReductionFiniteTriangle S i j hj m K δn ∈ distTriang _) : (∃ e : sfRecollementReducedTriangle (C := C) (E := E) (X := X) m (sfReductionIntegralTriangle S i j hj K δ) ≅ sfReductionFiniteTriangle S i j hj m K δn, e.hom.hom₁ = (sfRecollementReductionOpenIso S j hj m K).hom ∧ e.hom.hom₂ = 𝟙 _ ∧ e.hom.hom₃ = (sfRecollementReductionClosedIso S i m K).hom) ∧ (scalarReductionDerivedExtension C.l E X.obj.left m).map δ ≫ (Functor.commShiftIso (scalarReductionDerivedExtension C.l E X.obj.left m) (self := Functor.CommShift.ofIso (PurCompactSupport.finiteReductionIso C.l E X.obj.left m) ℤ) (1 : ℤ)).hom.app ((sfReductionIntegralOpen S j hj).obj K) ≫ (shiftFunctor _ (1 : ℤ)).map (sfRecollementReductionOpenIso S j hj m K).hom = (sfRecollementReductionClosedIso S i m K).hom ≫ δn",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem gives the prescribed triangle isomorphism and its boundary equation in the ambient derived category; the second theorem states its componentwise naturality. Helpers only compose the recorded operation functors, adjunction maps, ambient inclusions and reduction comparisons. All positive levels use exponent m+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ce554a92",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Checked item node vs Lean clause by clause through the dependency records and their live sources: S = SixFunctorOperationDatum; K in sfIntegralConstructibleCategory; r_n = scalarReductionDerivedExtension (sixFunctorIntegralReduction is its lift, so hom2 = identity typechecks); integral triangle = datum openAdjunction counit / pullDirectAdjunction unit / arbitrary distinguished delta. a_n and b_n are the datum's reduction comparisons (pinned to lem-fix-operation-reduction via pullProjection/openRealization); the ExchangeProjectionAdjunctionComparison counit and unit fields give r(eps) = a_n ≫ eps_n and r(eta) ≫ b_n = eta_n, so the statement is true. s_n = CommShift.ofIso finiteReductionIso (counit-normalized unique scalar shift), the same as the existing reductionShift. Conclusion: triangle iso with components (a_n, 1, b_n) plus the third square in the node's direction; naturality theorem for all f. Edge cases: empty U/Z/X, K = 0, m = 0 admitted; single universe u. Node copy differs from live only in lean; statement verbatim (script check); no hollow defs; docstrings carry source place and blueprint tag; both theorems sorry. Advisory: the finite triangle uses the datum's finite operations instead of FiniteOpenClosedRecollementTriangle; equivalent via finiteOpen/DirectAdjunctionNormalization. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261025T164209-L-970139",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

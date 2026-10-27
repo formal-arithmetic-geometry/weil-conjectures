@@ -1,0 +1,432 @@
+{
+ "id": "lem-sfb-field-ample-scheme-datum-effectivity",
+ "kind": "statement",
+ "title": "Field-extension descent for finite-type schemes carrying an ample module",
+ "statement": "Let $k\\subseteq L$ be an arbitrary extension of fields [def-weil-field, def-pc-field-extension], and let $X'$ be a finite-type $L$-scheme [def-pc-scheme, def-weil-finite-type-morphism]. Suppose $X'$ carries an ample invertible $\\mathcal O_{X'}$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Every descent datum on $X'$ relative to $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum, def-pd-descent-datum] is effective: there exist a $k$-scheme $X$ and an $L$-isomorphism $X\\times_kL\\simeq X'$ inducing the given datum [def-pc-base-change]. The ample module is not required to carry a descent datum. No algebraicity, separability or finite-degree assumption on $L/k$ is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 proof, first paragraph, printed p.160 (PDF p.166): limit reduction to a finite extension, radicial and finite Galois descent, and the affine-neighbourhood criterion; BLR 6.2 Example B. The argument only uses finite type and an ample module, not the group law. Local PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "We first check coverings that will occur below. For any nonzero $k$-algebra $A$, the field-algebra lemma makes $k\\to A$ faithfully flat. The ring-to-scheme flatness criterion and faithful-flat spectrum surjectivity make $\\operatorname{Spec}A\\to\\operatorname{Spec}k$ flat and surjective. Its source is affine, so the single affine open $\\operatorname{Spec}A$ verifies the affine-cover condition in the definition of an fpqc covering. This applies to $A=L$, to every $k$-subalgebra $C\\subseteq L$, and to every residue field of such a $C$.",
+   "uses": [
+    "lem-sfb-nonzero-field-algebra-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0 (lemma-refine-coverings-fully-faithful), covering hypotheses; algebra.tex Tag 04VV, field-algebra faithful flatness."
+   }
+  },
+  {
+   "text": "Prove first the finite-extension case, for an arbitrary finite field extension $E/k$ and an $E$-scheme $V$ with an ample invertible module and a descent datum. A finite $k$-basis of $E$ generates it as a module and also as an algebra. The affine-local-target criterion and the definition of a finite morphism therefore make $p:\\operatorname{Spec}E\\to\\operatorname{Spec}k$ finite. The field $k$ is Noetherian (its only ideals are $0,k$); the finite-type-algebra finite-presentation lemma makes $E$ finitely presented over $k$. Thus $p$ is locally of finite presentation by the affine definition. Step 1 supplies flatness and surjectivity. The ample finite-set lemma puts every finite subset of $V$ inside an affine open. Apply invariant-affine neighbourhoods to this datum and $p$: every point has a transport-invariant affine neighbourhood over an affine open of $\\operatorname{Spec}k$. The invariant-affine gluing theorem now makes the datum effective. This proves the finite-extension case without separability or a datum on the ample module.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-sc-ample-finite-set-affine",
+    "lem-pd-invariant-affine-neighbourhoods",
+    "lem-pd-invariant-affine-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0H8K (lemma-descend-along-finite-with-bound) and 03JE (lemma-find-invariant-affine); properties.tex Tag 01ZY; descent.tex Tags 0245 and 0AP4. Finite-locally-free invariant-affine version of the finite-extension argument in BLR 6.5, p.160."
+   }
+  },
+  {
+   "text": "Return to $X'/L$. A field is Noetherian since each ideal is either zero or the whole field, so $\\operatorname{Spec}L$ is Noetherian. Finite-type preservation of Noetherianness makes $X'$ Noetherian; locally Noetherian quasi-separatedness makes it quasi-separated. On a finite affine finite-type cover, the finite-type-algebra finite-presentation lemma gives finitely presented $L$-algebras. The structure morphism $X'\\to\\operatorname{Spec}L$ is quasi-compact by the definition of finite type, and quasi-separated by qcqs morphism permanence (1), because its source $X'$ is quasi-separated. Hence $X'\\to\\operatorname{Spec}L$ is locally of finite presentation, quasi-compact and quasi-separated, that is, of finite presentation. This checks the input to spreading out; finite type alone over a general base would not suffice.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), checking its finite-presentation hypothesis; morphisms.tex Tag 01T6."
+   }
+  },
+  {
+   "text": "Let $I$ be the inclusion-ordered set of finitely generated $k$-subalgebras $C\\subseteq L$. It is small in the universe of $L$, nonempty (it contains $k$), and directed: adjoining both finite sets of generators gives a common upper bound. Its union is $L$, since any element lies in the subalgebra it generates. The affine-limit theorem identifies $\\operatorname{Spec}L$ with $\\varprojlim_C\\operatorname{Spec}C$. All stages are affine and hence qcqs, and all transition maps are affine by the affine-local-target criterion. Apply clause (1) of spreading out to obtain a finitely presented $Y_0\\to\\operatorname{Spec}C_0$ and a specified $L$-isomorphism $(Y_0)_L\\simeq X'$. For $C\\supseteq C_0$ put $Y_C=(Y_0)_C$. These schemes are qcqs with affine transition maps, and have limit $X'$: the universal property of the fibre product identifies compatible maps to the $Y_C$ with a map to $Y_0$ and a compatible family of maps to the $\\operatorname{Spec}C$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "thm-pd-spreading-out",
+    "pqf-lem-affine-local-target",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW (lemma-affine), 01ZM (lemma-descend-finite-presentation), clause (1); BLR 6.5 proof, printed p.160, limit reduction."
+   }
+  },
+  {
+   "text": "Apply invertible-module limit descent to $X'=\\varprojlim_{C\\supseteq C_0}Y_C$ and the given ample module $M'$ to obtain an invertible module $M_{C_1}$ whose pullback is $M'$. Apply ample-module limit descent to this module on the same tail system. After increasing $C_1$ to $C_2$, its pullback $M_{C_2}$ is ample on $Y_{C_2}$. Any later enlargement still has an ample module, by relative ample base change: apply the relative-ample affine-cover criterion to the singleton cover of $\\operatorname{Spec}C_2$. Its quasi-compactness hypothesis holds because $Y_{C_2}$ is finitely presented over this base. Then apply relative ample base change and take the whole later affine base as its affine open. No datum on $M'$ or on any $M_C$ has been used or constructed.",
+   "uses": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-ample-affine-limit-descent",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0B8W (lemma-descend-invertible-modules), clause (2), and 09MT (lemma-limit-ample); morphisms.tex Tag 0893 (lemma-ample-base-change)."
+   }
+  },
+  {
+   "text": "We descend the scheme datum itself, retaining the ample model from step 5. For $n=2,3$, the rings $C^{\\otimes_k n}$ have colimit $L^{\\otimes_k n}$: maps out of these colimits are compatible $n$-tuples of $k$-algebra maps out of the $C$, equivalently $n$-tuples of maps out of $L$, which is the tensor-product universal property. Taking a tail $C\\supseteq C_2$ leaves the colimit unchanged. The affine-limit theorem supplies the corresponding inverse limits of spectra. Over $\\operatorname{Spec}(C^{\\otimes_k2})$, the two pullbacks of $Y_C$ are of finite presentation, being base changes of $Y_0$. Apply clause (2) of spreading out separately to the given datum isomorphism $\\varphi$ over $L\\otimes_kL$ and to its inverse. Directedness puts both descended maps $a,b$ over a common $C$. Their composites pull back to the identities; two applications of clause (3), followed by a common enlargement of $C$, make $ba=1$ and $ab=1$. Thus $a$ is an isomorphism with precisely the prescribed pullback $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "thm-pd-spreading-out",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clauses (2) and (3), applied over the double tensor base; descent.tex Tag 023V (definition-descent-datum)."
+   }
+  },
+  {
+   "text": "Over the triple tensor base $\\operatorname{Spec}(C^{\\otimes_k3})$, compare the two maps $a_{02}$ and $a_{12}a_{01}$. Their domains and codomains are pullbacks of $Y_C$, hence of finite presentation. Their pullbacks to $\\operatorname{Spec}(L^{\\otimes_k3})$ agree by the given cocycle. Clause (3) of spreading out gives a further $C$ on which $a_{02}=a_{12}a_{01}$. The inverse equations persist under base change. We now have a finitely presented scheme $Y_C/C$, an ample invertible module on it, and a genuine descent datum $D_C$ relative to $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ whose pullback to $L$ is the original datum. In particular the limit argument has descended the equations, not just the underlying isomorphism.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clause (3), over the triple tensor base; descent.tex Tag 023V."
+   }
+  },
+  {
+   "text": "Choose a maximal ideal $\\mathfrak m$ of the nonzero finitely generated $k$-algebra $C$, and put $E=C/\\mathfrak m$. Zariski's lemma says $E/k$ is finite. Pull back $Y_C,D_C$ along $h:\\operatorname{Spec}E\\to\\operatorname{Spec}C$. The singleton affine-cover criterion, followed by relative ample base change, gives an ample module on $Y_E$; $Y_C/C$ is finitely presented, so is quasi-compact as required by that criterion. The finite-extension case of step 2 makes $D_E$ effective. Both $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}E\\to\\operatorname{Spec}k$ are singleton fpqc covers by step 1, and their triangle with $h$ commutes. The square defining $Y_E$ is cartesian, and its datum is the pullback of $D_C$. Apply fpqc refinement reflection of effectivity to deduce that $D_C$ is effective. This theorem does not require $h$ itself to be flat. Let $X/k$ and $X_C\\simeq Y_C$ realize $D_C$. Base changing this isomorphism along $C\\subseteq L$ gives $X_L\\simeq X'$; its datum is the prescribed one because $D_C$ was descended together with $\\varphi$ and its cocycle. This is exactly effectivity as defined, for the original arbitrary extension $L/k$.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-galois-fpqc-refinement-reflects-effectivity",
+    "def-pd-descent-datum",
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0 (lemma-refine-coverings-fully-faithful), refinement reflection of effectivity; algebra.tex Tag 00FV (theorem-nullstellensatz), part (1); BLR 6.5 proof, printed p.160, specialization to a finite residue extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nonzero-field-algebra-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "pqf-lem-affine-local-target",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-ample-finite-set-affine",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-galois-fpqc-refinement-reflects-effectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Assembly of Tags 01ZM, 0B8W, 09MT with descent.tex Tag 02W0 and groupoids.tex Tags 0H8K, 03JE; follows the finite-type specialization sequence in BLR 6.5 proof, p.160, using finite locally free invariant-affine descent for the finite-field step. BLR local PDF WANTED; online primary scan inspected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every descent datum on a finite type scheme with an ample invertible sheaf along an arbitrary field extension is effective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"CategoryTheory.Functor.EffectivelyEnough.presentation\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {F : CategoryTheory.Functor C D} [self : F.EffectivelyEnough] (X : D),\\n  Nonempty (F.EffectivePresentation X)\", \"doc\": \"If a functor $ F : C \\\\to D $ is effectively enough, then every object $ X $ in category $ D $ admits an effective presentation via $ F $, meaning there exists data encoding $ X $ as an effective coequ\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent of quasi projective schemes and effective descent over any extension of fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(ample|projective)|(?:ample|projective).*descent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every descent datum on a finite type scheme with an ample invertible sheaf along an arbitrary field extension is effective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.EffectiveEpiFamily.desc\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{B W : C} {α : Type*} (X : α → C) (π : (a : α) → (X a ⟶ B)) [EffectiveEpiFamily X π] (e : (a : α) → (X a ⟶ W))\\n  (h : ∀ {Z : C} (a₁ a₂ : α) (g₁ : Z ⟶ X a₁) (g₂ : Z ⟶ X a₂), g₁ ≫ π _ = g₂ ≫ π _ → g₁ ≫ e _ = g₂ ≫ e _) : B ⟶ W\", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$ satisfying the condition that any two morphisms $g\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"[F.IsPrestack J] (hf : Sieve.ofArrows _ f ∈ J S) : (F.toDescentData f).FullyFaithful\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ satisfying the prestack condition, an object $S \\\\\"}\n  {\"name\": \"CategoryTheory.effectiveEpiStructIsColimitDescOfEffectiveEpiFamily\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Coproduct\", \"type\": \"{B : C} {α : Type*} (X : α → C) (c : Cofan X) (hc : IsColimit c) (π : (a : α) → (X a ⟶ B)) [EffectiveEpiFamily X π] :\\n  EffectiveEpiStruct (hc.desc (Cofan.mk B π))\", \"doc\": \"Given an object $ B $ in a category $ \\\\mathcal{C} $, a diagram $ X : \\\\alpha \\\\to \\\\mathcal{C} $, a colimit cocone $ c $ for $ X $, and an effective epimorphic family $ \\\\{X_\\\\alpha \\\\to B\\\\} $, this constru\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(ample|projective)|(ample|projective).*descent",
+   "results": "0 hits; top results: none. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; none states effectivity of a scheme datum over an arbitrary field extension; morphism-property descent and affine-transition map limits do not assert object effectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsAmple\"",
+   "results": "0 hits; top results: none. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; none states effectivity of a scheme datum over an arbitrary field extension; morphism-property descent and affine-transition map limits do not assert object effectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of quasi projective schemes along arbitrary extensions of fields",
+   "results": "8 hits; top results: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; none states effectivity of a scheme datum over an arbitrary field extension; morphism-property descent and affine-transition map limits do not assert object effectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every descent datum on a finite type scheme with an ample invertible sheaf along an arbitrary extension of fields is effective",
+   "results": "8 hits; top results: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; none states effectivity of a scheme datum over an arbitrary field extension; morphism-property descent and affine-transition map limits do not assert object effectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi projective schemes admit effective descent for arbitrary field extensions without a descent datum on the ample line bundle",
+   "results": "8 hits; top results: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; none states effectivity of a scheme datum over an arbitrary field extension; morphism-property descent and affine-transition map limits do not assert object effectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-field-trait-descent",
+  "date": "2026-10-24",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 6.5 Theorem 1 proof, first paragraph, printed p.160 (PDF p.166): limit reduction to a finite extension, radicial and finite Galois descent, and the affine-neighbourhood criterion; BLR 6.2 Example B. The argument only uses finite type and an ample module, not the group law. Local PDF WANTED; primary scan read online.",
+   "via": [
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-ample-scheme-datum-effectivity",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-field-extension statement and all its hypotheses. Proved finite-extension effectivity by existing finite-set affine, invariant-affine neighbourhood and gluing nodes, including inseparable extensions. Spread the finite-presentation scheme, the ample module, both datum maps, inverse equations and the triple cocycle to a finitely generated subalgebra; specialize to a finite residue extension and reflect effectivity through an fpqc refinement. No new nodes: each non-elementary input already has an adequate statement in the DAG.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor prints None). This realizes its inherited BLR 6.5 first-paragraph field effectivity input to lem-sfb-smooth-group-field-trait-descent; the parent unit route is unchanged. Whole-blueprint searches for descent ample, ample finite, finite presentation, descent datum and field extension found no exact arbitrary-field-extension statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "pqf-lem-affine-local-target",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-pd-invariant-affine-neighbourhoods",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-pd-invariant-affine-descent-gluing",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-trf-invertible-affine-limit-descent",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-trf-ample-affine-limit-descent",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-base-change",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-galois-fpqc-refinement-reflects-effectivity",
+    "why": "Generic scheme/algebra/limit descent tool used with the exact hypotheses checked in the proof; the inherited unit contains no replacement for this field-effectivity input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-limit or ampleness permanence tool; its precise hypotheses are checked in the proof, without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme-limit or ampleness permanence tool; its precise hypotheses are checked in the proof, without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-limit or ampleness permanence tool; its precise hypotheses are checked in the proof, without changing the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic scheme-limit or ampleness permanence tool; its precise hypotheses are checked in the proof, without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sc-ample-finite-set-affine",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-galois-fpqc-refinement-reflects-effectivity",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-712a80e12",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-712a80e12 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the statements of all 25 cited nodes, Stacks 0H8K/03JE (groupoids.tex, with proof), the tags 02W0/0B8W/09MT/01VJ/0893, and the parent lem-sfb-smooth-group-field-trait-descent. The statement is unchanged and true (edge cases: X' empty, L=k, purely inseparable, transcendental, finite k) and fits both uses in the parent. Steps 1–8 are correct. Step 1: singleton fpqc covers for nonzero k-algebras (04VV/01U5/00HQ). Step 2: finite case via 01ZY with the pd invariant-affine neighbourhood and gluing nodes, matching 0H8K with Y affine and no separability. Steps 4–7: spreading out by 01ZM clauses (1)–(3) over Spec C, C^{⊗2}, C^{⊗3}, with qcqs stages and affine transitions checked; ample module by 0B8W/09MT, then 01VJ+0893. Step 8: Zariski residue field and fpqc refinement reflection; h need not be flat; the datum recovers φ. FIX: step 3 asserted quasi-separatedness of X'→Spec L without a citation; I added lem-weil-pbc-qcqs-morphism-permanence (1) to its text and uses. No new nodes. No duplicate: thm-pd-effective-descent needs projective V, lem-trf-polarized-scheme-etale-descent needs a datum on L. Batch 5: the four trf citations (0B8W, 09MT, 0893, 01VJ) are generic limit/ampleness lemmas of unit sk-i-curve-zero; their full closures reach no trace-formula, Poincaré or nt-target node, so they are accepted. All declared tool_uses are accepted as generic tools. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldAmpleSchemeDatumEffectivity",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_field_extension_isAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldAmpleSchemeDatumEffectivity.lean",
+  "statement": "theorem isEffective_of_field_extension_isAmple (k L : Type u) [Field k] [Field L] [Algebra k L] (X : Over (Spec (CommRingCat.of L))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (M : X.left.Modules) [M.IsInvertible] (hM : Scheme.Modules.IsAmple X.left M) (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k L))) X) : D.IsEffective",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-739502404",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: arbitrary extension [Field k][Field L][Algebra k L]; X : Over (Spec L) with LocallyOfFiniteType+QuasiCompact (finite type); invertible M with IsAmple (real definition) and no datum on M; D : Over.DescentDatum over Spec.map(algebraMap k L); conclusion D.IsEffective (IsPullback + transport invariance = the L-iso inducing the datum). No extra assumptions; empty X', L=k, inseparable and transcendental cases covered; single universe u needed for Spec.map. Node changes only its lean record vs live; lean.statement verbatim; live lean null so no clash or rebind; sorry-only proof; docstrings carry source place, blueprint tag and all 8 steps; private imports exist. No duplicate (EffectiveDescent needs finite/projective, PolarizedSchemeEtaleDescent needs a datum on L). No fixes, no compile."
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-integral-closure-valuation-intersection",
+ "kind": "statement",
+ "title": "Integral closure in a field is the intersection of valuation overrings",
+ "statement": "Let $F$ be a field [def-weil-field] and $R\\subseteq F$ a subring. Let $B=\\{y\\in F:y\\text{ satisfies a monic polynomial over }R\\}$ be the integral closure [def-weil-pbc-integral-closure]. Then $B=\\bigcap_{R\\subseteq T\\subseteq F,\\ T\\text{ a valuation subring of }F}T$, where valuation subring means that for every $z\\in F^\\times$, either $z\\in T$ or $z^{-1}\\in T$ [def-trf-valuation-ring]. Equivalently, $y\\in F$ is integral over $R$ if and only if it belongs to every valuation subring of $F$ containing $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 090P (lemma-find-valuation-rings), intersection/separation by valuation rings; integral-closure form is stated exactly by Mathlib iInf_valuationSubring_superset, RingTheory/Valuation/LocalSubring.lean:218-227, whose proof reduces to Subring.eq_iInf_of_isIntegrallyClosedIn at :201-205. Tag 090P states the normal-domain version; the Mathlib declaration gives the displayed field-ambient integral-closure version without a fraction-field assumption."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-integral-closure",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iInf_valuationSubring_superset|eq_iInf_of_isIntegrallyClosedIn",
+   "results": "{\"t\": \"2026-10-24T09:27:25Z\", \"tool\": \"grep\", \"query\": \"iInf_valuationSubring_superset|eq_iInf_of_isIntegrallyClosedIn\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\"], \"digest\": \"d96c80131d62483b\"}",
+   "date": "2026-10-24",
+   "verdict": "match: iInf_valuationSubring_superset, read Mathlib/RingTheory/Valuation/LocalSubring.lean:218-227; specialize the subset to the carrier of the subring. LeanSearch gives only related results; the exact declaration is in the LeanFinder, Loogle and grep results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of a field is integral over a subring if and only if it belongs to every valuation subring containing it",
+   "results": "{\"t\": \"2026-10-24T09:27:25Z\", \"tool\": \"leansearch\", \"query\": \"An element of a field is integral over a subring if and only if it belongs to every valuation subring containing it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"ValuationSubring.mem_carrier\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.mem_toSubring\", \"Valuation.Integers.mem_of_integral\", \"ValuationSubring.valuation_le_one_iff\", \"Valuation.Integers.isIntegral_iff_v_le_one\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\"], \"digest\": \"a3468e664237dc1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match in these eight results; the exact statement was independently returned by LeanFinder, Loogle and grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iInf_valuationSubring_superset\"",
+   "results": "{\"t\": \"2026-10-24T09:27:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"iInf_valuationSubring_superset\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"iInf_valuationSubring_superset\"], \"digest\": \"5844aea8449c2f3d\"}",
+   "date": "2026-10-24",
+   "verdict": "match: iInf_valuationSubring_superset, read Mathlib/RingTheory/Valuation/LocalSubring.lean:218-227; specialize the subset to the carrier of the subring. LeanSearch gives only related results; the exact declaration is in the LeanFinder, Loogle and grep results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a subring in a field is the intersection of all valuation subrings containing that subring",
+   "results": "{\"t\": \"2026-10-24T09:27:27Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a subring in a field is the intersection of all valuation subrings containing that subring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iInf_valuationSubring_superset\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"Set.integer_eq\", \"instIsIntegrallyClosedSubtypeMemSubring\", \"Valuation.Integers.integrallyClosed\", \"Valuation.Integers.isIntegrallyClosed\", \"Subring.exists_le_valuationSubring_of_isIntegrallyClosedIn\", \"Valuation.Integers.isIntegrallyClosed_integers\"], \"digest\": \"9e02436be7fa925e\"}",
+   "date": "2026-10-24",
+   "verdict": "match: iInf_valuationSubring_superset, read Mathlib/RingTheory/Valuation/LocalSubring.lean:218-227; specialize the subset to the carrier of the subring. LeanSearch gives only related results; the exact declaration is in the LeanFinder, Loogle and grep results."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "iInf_valuationSubring_superset",
+  "file": "Mathlib/RingTheory/Valuation/LocalSubring.lean",
+  "line": 218,
+  "how": "specializes in one line: take s to be the underlying set of R in iInf_valuationSubring_superset (lines 218-227), and simplify Subring.closure of a subring carrier to R. The infimum is the intersection of the underlying valuation subrings containing R; integralClosure is exactly monic-polynomial integrality. Source and proof read at lines 198-227."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-normalization-localizations",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Proposition 2.2.1, proof, printed pp. 11--12: semilocal normalization, completed tensor-product decomposition, factors f_i and henselianity of the complete field. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2. Normalization/prolongation input of the semilocal normalization F° in the converse proof of Proposition 2.2.1, p. 11. Repair of normalization input: valuative test for integrality used for the two polynomial-tail expressions in step 5.",
+   "via": [
+    "lem-trf-valuation-normalization-localizations",
+    "lem-trf-separable-valued-completion-factors",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

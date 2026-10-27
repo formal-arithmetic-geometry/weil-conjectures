@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-space-qc-finite-affine-atlas-refinement",
+ "kind": "statement",
+ "title": "Finite affine refinement of an atlas of a quasi-compact algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact, meaning that it admits a representable surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme]. For every representable surjective etale map $w:W\\to X$ from a scheme $W$, there are an integer $n\\geq0$ and affine open subschemes $W_1,\\ldots,W_n\\subseteq W$ [def-weil-open-immersion] such that their composites $W_i\\to X$ are jointly surjective and the induced morphism $p:U=\\coprod_{i=1}^nW_i\\to X$ is representable surjective etale. The scheme $U$ is affine; if $W_i\\simeq\\operatorname{Spec}A_i$, then $U\\simeq\\operatorname{Spec}(\\prod_{i=1}^n A_i)$. The empty family is permitted when $X=\\varnothing$, with $U=\\operatorname{Spec}0$. In particular every quasi-compact algebraic space admits a representable surjective etale morphism from one affine scheme. No quasi-compactness of the specified atlas $W$ and no separatedness assumption are required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H6 (lemma-quasi-compact-affine-cover), proof by a finite affine subfamily; the refinement of a specified atlas uses Tag 03E4 (lemma-quasi-compact-space), proof choosing a quasi-compact open in any atlas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-space-finite-affine-image-selection] to obtain the finite affine opens, their field-extension joint surjectivity, and the empty-atlas cardinality condition. This is exactly the original compactness and finite-subcover portion of the argument.",
+   "uses": [
+    "lem-trf-space-finite-affine-image-selection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+   }
+  },
+  {
+   "text": "Let F_i be the selected open schemes. Form their scheme coproduct, put d=Sigma.desc of the inclusions into W, and give U its S-map d followed by the map W -> S. Lift the coprojections and d to Over S. Sigma.ι_desc proves the required triangles; the same triangles transfer joint surjectivity from Step 1. The coproduct colimit witness is Cofan.isColimitOfIsIsoSigmaDesc. The scheme map d is etale by IsZariskiLocalAtSource.sigmaDesc, because each summand inclusion is an open immersion. On a scheme test the Yoneda map of d is represented by the scheme pullback; stability of etaleness under base change makes it representably etale. Compose with w using isEtale_comp, whose proof pastes scheme-test pullback squares.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+   }
+  },
+  {
+   "text": "For any test t:h_T -> X, use [lem-a1-space-fibre-product-point] to obtain its scheme fibre product P with U. For x in T take its residue-field section. Joint surjectivity gives a field extension and a section into one selected summand, hence into U, agreeing with t after extension. The corresponding point of Spec L lies over x by fromSpecResidueField_apply. The final clause of the cited fibre-product theorem makes P -> T surjective. Its flipped square is the scheme-test witness of IsSurjective. This argument uses no further unproved point-surjectivity criterion.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H5, surjectivity by field-valued lifts; scheme-fibre-product point calculation of Tag 03H4."
+   }
+  },
+  {
+   "text": "Each selected affine open is an affine scheme. The finite scheme coproduct is affine by Mathlib. Given isomorphisms F_i ≅ Spec A_i, use Sigma.mapIso. Reindex the coproduct by ULift(Fin n), apply asIso(sigmaSpec R) from [lem-weil-pbc-finite-affine-coproduct-spectrum], and apply Spec to the product-ring reindexing isomorphism to return to the product over Fin n. If n=0 the coproduct is a colimit of an empty diagram; isColimitEquivIsInitialOfIsEmpty and specPUnitIsInitial identify it with Spec PUnit. Finally apply the refinement to Q -> X from the quasi-compactness hypothesis and retain its affine, etale and surjective conclusions.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-finite-affine-image-selection",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-a1-space-fibre-product-point",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03E4 and 03H6. Finite selection is isolated; remaining coproduct, scheme-test, spectrum and empty-case assembly is proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic space has a surjective etale cover by an affine scheme, refining any given scheme atlas by finitely many affine open subsets",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.QuasiCompactCover.inst\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsAffine\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*etale.*cover|exists.*affine.*[Cc]over",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi compact algebraic space admits an affine surjective etale atlas",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.compactSpace_iff_exists\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale presentation of a quasi compact algebraic space admits a finite refinement by affine open subschemes whose disjoint union is affine",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*atlas|finite.*[Aa]ffine.*[Cc]over",
+   "results": "{\"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme covers, schemes or ring etaleness, not finite affine refinement of an algebraic-space atlas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi compact algebraic space has an affine etale surjective cover refining a specified atlas",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme covers, schemes or ring etaleness, not finite affine refinement of an algebraic-space atlas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsAffine\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme covers, schemes or ring etaleness, not finite affine refinement of an algebraic-space atlas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic space admits finitely many affine open subsets of any etale atlas covering it",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme covers, schemes or ring etaleness, not finite affine refinement of an algebraic-space atlas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale presentation of a quasi compact algebraic space admits a finite refinement by affine open subschemes whose disjoint union is affine",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme covers, schemes or ring etaleness, not finite affine refinement of an algebraic-space atlas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original Steps 2-3 of the item, under the algebraic-space section-algebra input descending from lem-trf-local-term-locality: Tag 03M9 affine-target paragraph, choice of a single affine surjective etale atlas by finite refinement.",
+   "via": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "worker": "stage1",
+  "summary": "Expanded the specified-atlas finite affine refinement using compactness of the point space, open etale image maps, scheme coproducts, scheme-test etale locality and the existing finite affine coproduct spectrum leaf. No new nodes, no statement correction. Corrected the erroneous word finite in the last sentence of the Stacks proof in the proof text, retaining the etale conclusion of its statement.",
+  "blueprint": "Supports the existing ancestor chain from lem-trf-local-term-locality through polarized descent to the section-algebra input: the affine-target paragraph of Tag 03M9 in lem-trf-space-qc-separated-quasi-coherent-pushforward requires one affine atlas. The latest blueprint locality proof is the contracting-correspondence normal-cone argument; the geometric lemma here is a subordinate input to the existing descent branch, not a replacement of that unit route. Steps 1-2 realize the finite affine image selection of Tags 03E4/03H6; Steps 3-5 verify the atlas and affine coproduct conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic topology and surjectivity criteria for algebraic spaces; the trace-formula unit has no separate node for the continuous/open point maps and scheme-test surjectivity criterion."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-b35297d68",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-b35297d68 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Source checked: spaces-properties.tex Tag 03E4 (lemma-quasi-compact-space), whose proof takes a qc open of any atlas, and Tag 03H6 (lemma-quasi-compact-affine-cover). The worker's source-error note is correct: 03H6's last sentence says 'finite surjective', which should read étale surjective, and their D(t)⊔D(t−1)→A¹ counterexample checks out. The item statement is unchanged and true. Step 1: |q| is continuous (by the final topology, or by lem-a1-space-point-open-calculus) and surjective (by that lemma's surjectivity criterion), and the 04Z9 leaf then makes |X| qc. Step 2: V_a→X is representable étale by the open-immersion base-change leaf plus clauses (1)–(2) of etale-composition-cancellation; the point images are open by point-open-calculus and cover |X| through |w|, so a finite subcover exists; this is joint surjectivity exactly as def-trf-algebraic-space-jointly-surjective-family defines it. No intersection of affines is used. Step 3: the scheme coproduct leaf gives U; E=U×_W W_T represents h_U×_X h_T (the step writes out the universal-property calculation); E is covered by open E_i whose maps to T are étale; etale-local-on-source (arbitrary cover, empty cover included) gives E→T étale. Step 4: surjectivity follows from the point-image criterion, and U≅Spec∏A_i from the finite-affine-coproduct-spectrum leaf, which has no nonempty hypothesis. Step 5 (elementary) is the X=∅/Spec 0 case and W=Q. Edge cases checked: X empty, infinite non-qc W, doubled-origin W, n=1. Duplicate candidates are lem-a1-space-finite-affine-subatlas (needs an atlas already given as a disjoint union of affines), lem-sfb-qc-space-affine-etale-atlas (existence clause only) and lem-a1-space-etale-open-image; none states the prescribed-atlas refinement. Accepted tool_use: lem-a1-space-point-open-calculus (sk-p-real-rankin), a generic point-topology calculus; it does not reach the item, so there is no cycle. Batch-5 flags: def-trf-algebraic-space-jointly-surjective-family and def-a1-space-point-topology are general definitions. The trf closure of point-open-calculus is only the algebraic-space definition and the sheaf fibre-product/atlas-test foundations, none of which is a step of the trace formula or Poincaré duality, so all three are accepted. No SGA, searches recorded, blueprint fields filled. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteAffineAtlasRefinement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_atlas_refinement",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_atlas_refinement",
+   "AlgebraicGeometry.AlgebraicSpace.exists_affine_atlas_of_quasiCompact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteAffineAtlasRefinement.lean",
+  "statement": "theorem exists_finite_affine_atlas_refinement {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : ∃ (Q : Over S) (q : yoneda.obj Q ⟶ X.obj.obj), CompactSpace Q.left ∧ IsEtale q ∧ IsSurjective q) (W : Over S) (w : yoneda.obj W ⟶ X.obj.obj) (hw : IsEtale w) (hs : IsSurjective w) : ∃ (n : ℕ) (V : Fin n → W.left.Opens) (U : Over S) (j : ∀ i : Fin n, Over.mk ((V i).ι ≫ W.hom) ⟶ U) (a : U ⟶ W), (∀ i : Fin n, IsAffineOpen (V i)) ∧ Nonempty (IsColimit (Cofan.mk U.left (fun i : Fin n ↦ (j i).left))) ∧ (∀ i : Fin n, j i ≫ a = Over.homMk (V := W) (V i).ι rfl) ∧ IsJointlySurjective (fun i : Fin n ↦ yoneda.map (j i ≫ a) ≫ w) ∧ IsEtale (yoneda.map a ≫ w) ∧ IsSurjective (yoneda.map a ≫ w) ∧ IsAffine U.left ∧ (∀ (A : Fin n → CommRingCat.{u}), (∀ i : Fin n, Nonempty ((V i).toScheme ≅ Spec (A i))) → Nonempty (U.left ≅ Spec (.of (∀ i : Fin n, A i)))) ∧ (IsEmpty W.left → n = 0) ∧ (n = 0 → Nonempty (U.left ≅ Spec (.of PUnit.{u + 1})))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the specified-atlas finite affine refinement, its coproduct and spectrum formula, and its empty case. The second theorem states the final affine-atlas existence clause. The scheme coproduct is expressed by IsColimit and the induced map by its commuting triangles."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d7b38443",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node, Stacks 03E4/03H6 + definition-quasi-compact, all stmt_deps and the Lean defs IsRepresentableWith/IsEtale/IsSurjective/IsJointlySurjective. Lean matches every clause: inline qc atlas hqc as in Stacks; arbitrary W with no qc/separatedness and no disjointness of the affine opens in W; scheme coproduct via IsColimit Cofan; triangles fix a; joint surjectivity of the W_i -> X composites; p etale+surjective (representability included); IsAffine U; Spec ∏A_i formula (true by Mathlib sigmaSpec IsIso, finite index); empty case via IsEmpty W -> n=0 (equivalent to X empty for a surjective etale atlas) and n=0 -> U ≅ Spec PUnit (specPUnitIsInitial); the in-particular clause is a separate theorem. Edge cases empty X/W, n=1, infinite or non-separated W, empty S; all universe u. No duplicate (lem-a1-space-finite-affine-subatlas, lem-a1-space-affine-etale-cover, lem-a1-space-affine-atlas-open-cover and lem-sfb-qc-space-affine-etale-atlas differ or have no Lean; def-sfb-space-quasi-compact-presheaf-map is relative). lean.statement verbatim; only sorried theorems; source/blueprint docstrings with proof steps; real Worker report and Second reading sections; node differs from live only by the lean record. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T083111-L-2270813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-point-constant-equivalence",
+ "kind": "statement",
+ "title": "Constant module sheaves on a separably closed point",
+ "statement": "Let k be a separably closed field [def-pc-separably-closed] and Λ a ring. The constant-sheaf functor from Λ-modules to Λ-module sheaves on the small étale site of Spec k [def-weil-pbc-etale-sheaves, def-weil-pbc-constant-sheaf] is an equivalence.",
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, theorem-equivalence-sheaves-point, specialized to a separably closed field and lifted to module objects."
+ },
+ "proof": [
+  {
+   "text": "Every covering sieve of the terminal étale object contains the identity, since any nonempty étale scheme over a separably closed field has a rational point. Thus this is a local site and the constant-sheaf functor is fully faithful.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sections lift locally along epimorphisms; a covering of the terminal object contains its identity, so evaluation there is exact. A sheaf with zero global sections is zero, since each étale object is covered by copies of the point and the sheaf condition detects zero sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The adjunction unit is invertible by full faithfulness. The triangular identity makes evaluation of the counit invertible. Exactness and detection of zero objects show its kernel and cokernel vanish, so the counit is invertible. This gives the equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, theorem-equivalence-sheaves-point, specialized to a separably closed field and lifted to module objects."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"IsEquivalence\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf functor from modules to etale sheaves on the spectrum of a separably closed field is an equivalence",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.AffineScheme.ΓIsEquiv",
+     "LightCondMod.LocallyConstant.functorIsoDiscreteAux₁",
+     "CondensedMod.LocallyConstant.functorIsoDiscreteAux₁",
+     "LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "CondensedMod.LocallyConstant.functorIsoDiscreteAux₂",
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "LightCondMod.LocallyConstant.functorIsoDiscreteComponents"
+    ],
+    "digest": "487844d674007bdd"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*IsEquivalence|isEquivalence_constantSheaf|isEquivalence_right_of_isEquivalence_left",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean"
+    ],
+    "digest": "4a80dfd85e22a779"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a separably closed field the constant sheaf functor on etale module sheaves is an equivalence of categories",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.constantSheaf",
+     "CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+     "CategoryTheory.Sheaf.IsConstant.casesOn",
+     "CategoryTheory.Sheaf.mem_essImage_of_isConstant",
+     "CategoryTheory.Sheaf.isConstant_iff_of_equivalence",
+     "CategoryTheory.Sheaf.IsConstant.mem_essImage",
+     "CategoryTheory.Sheaf.isConstant_of_forget",
+     "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app"
+    ],
+    "digest": "e4005e362e57e9b4"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactPointSourceNormalization",
+  "date": "2026-10-23",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 2: identify the section-normalized compact source of the origin with A[0]",
+   "via": [
+    "lem-pur-compact-point-source-normalization",
+    "lem-pur-origin-class-projective-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.isEquivalence_constantSheaf_of_isSepClosed",
+  "statement": "instance isEquivalence_constantSheaf_of_isSepClosed :\n    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-23",
+  "note": "Existing proved source-library instance; no Lean declaration or proof hole is added."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020711-L-2648655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020711-L-2648655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

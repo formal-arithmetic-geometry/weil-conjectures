@@ -1,0 +1,139 @@
+{
+ "id": "def-a1-common-stage-pair-functor-data",
+ "kind": "definition",
+ "title": "Generic common-stage pair-category and coherent family data",
+ "status": "split",
+ "statement": "Fix a directed poset $I$ in the universe convention of [def-weil-size-convention]. A normalized additive transition diagram consists of categories $C_i$, additive transition functors $U_{i\\leq j}$, identity comparisons, associative transition comparisons, and their unit and pentagon equations. Its common-stage pair data consists of pair objects $(i,X)$; representatives over a common stage with source and target inequalities and an arrow between the transported objects; transport by the specified associator inverse on the source and associator on the target; eventual equality after a further common stage; and the quotient Hom type and representative class. A pair structure supplies the additive-group, identity, composition, and additive composition laws on this quotient, with its object carrier, representative map, category and preadditive instances, and an `IsCanonical` predicate requiring the representative formulas for equality, identities, composition, addition, zero, and negation. For two such diagrams, a family consists of additive stage functors and comparison isomorphisms between each transition after applying the source and target functor; `Family.Coherent` requires the normalized unit and tower equations. The family has its literal object and representative formulas. Finally, `IsDescent` for pair structures, a family, and a functor records the literal object formula, the representative map formula, and additivity. These are the generic common-stage notions used by the pair-functor descent theorem; no existence or uniqueness assertion is included.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/42_qbarl_triangulated_colimit.tex",
+  "place": "Definition def:pair-objects, common-stage representatives, and Proposition prop:pseudocone-functor interface; the generic data declarations are recorded in the existing CoherentPairFunctorDescent module."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A directed additive category diagram with common-stage quotient pair morphisms, coherent functor families, and descent data",
+   "results": "LeanSearch returned Pseudofunctor.DescentData declarations, but no common-stage quotient pair interface.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic common-stage pair category representatives quotient PairStructure Family IsDescent",
+   "results": "LeanFinder returned Pairwise and GlueData declarations, but no common-stage quotient or coherent pair-family interface.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommonStage.Diagram, CategoryTheory.CommonStage.PairStructure, CategoryTheory.CommonStage.Family, CategoryTheory.CommonStage.IsDescent",
+   "results": "Loogle reported unknown identifier for the project namespace and returned no matching declaration.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommonStage.*(Diagram|PairStructure|Family|IsDescent)",
+   "sub": "CategoryTheory",
+   "results": "No matching text in the Mathlib CategoryTheory source.",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-texact-pair-descent",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: the common-stage coefficient categories and the extracted abstract transport argument; this definition node records the generic data used by the item.",
+   "via": [
+    "lem-a1-texact-pair-descent",
+    "lem-a1-texact-coefficient-stage-descent",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentPairFunctorDescent",
+  "declaration": "CategoryTheory.CommonStage.Diagram",
+  "declarations": [
+   "CategoryTheory.CommonStage.Diagram",
+   "CategoryTheory.CommonStage.Pair",
+   "CategoryTheory.CommonStage.Rep",
+   "CategoryTheory.CommonStage.transport",
+   "CategoryTheory.CommonStage.EventuallyEqual",
+   "CategoryTheory.CommonStage.Hom",
+   "CategoryTheory.CommonStage.repr",
+   "CategoryTheory.CommonStage.PairStructure",
+   "CategoryTheory.CommonStage.PairStructure.Obj",
+   "CategoryTheory.CommonStage.PairStructure.repr",
+   "CategoryTheory.CommonStage.PairStructure.IsCanonical",
+   "CategoryTheory.CommonStage.pairCategory",
+   "CategoryTheory.CommonStage.pairPreadditive",
+   "CategoryTheory.CommonStage.Family",
+   "CategoryTheory.CommonStage.Family.Coherent",
+   "CategoryTheory.CommonStage.Family.obj",
+   "CategoryTheory.CommonStage.Family.rep",
+   "CategoryTheory.CommonStage.IsDescent"
+  ],
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Ownership repair requested by the returned delivery: these exact generic common-stage data declarations already live in the unchanged CoherentPairFunctorDescent module. They are the notions occurring in the item statement; the theorem coefficientPairFunctor remains a proof dependency and is not used as the statement owner.",
+  "statement": "structure Diagram (I : Type w) [PartialOrder I]"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71c2c0bcc",
+  "group": "NV",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71c2c0bcc",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery of 0ea0 (RETURN H2: theorem node lem-sbc-coherent-pair-functor-descent in stmt_deps for plain CommonStage defs). The Lean file is byte-identical. The item changes only stmt_deps: lem-sbc replaced by the new def-a1-common-stage-pair-functor-data (lem-sbc kept in proof_deps/Step 1). New node: existing:true on the unchanged CoherentPairFunctorDescent with 18 declarations (Diagram…IsDescent), all read in side-live; stage2_delivery.check_existing clean for each name, signature verbatim. No other node owns CommonStage.* and the PBC pair-category nodes are scheme-specific, so no duplicate. Fields consistent with def-a1-common-stage-coefficient-unit. Own clause-by-clause reading: stage-induced shift, J, j pinned; triangles and halves as iff with isomorphism closures; hShift = Step-2 square; conclusion has exactness and t-exactness for all n for F and every J, γ and κ pinned by HEq, literal J⋙F equality, extension clause via b. No faithfulness or associator-shift assumption; record statement verbatim. Advisories: def TeX says directed but Lean needs only a PartialOrder; source and target share universes via Family. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261023T103444-L-3141953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CommonStage.coherent_pair_functor_descent"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-lfp-space-scheme-limit-test",
+ "kind": "statement",
+ "title": "Maps from qcqs scheme limits to a locally finitely presented algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $Z$ be an algebraic space over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Assume that $Z\\to S$ is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. Let $I$ be a small nonempty directed set and $(U_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes over $S$ [def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism]. Let $U=\\varprojlim_iU_i$ [lem-weil-pbc-limit-affine-transition]. Then restriction induces a bijection of sets $$\\operatorname{colim}_{i\\in I}\\operatorname{Mor}_S(U_i,Z)\\;\\xrightarrow{\\sim}\\;\\operatorname{Mor}_S(U,Z).$$ The colimit is the filtered colimit of sets [def-weil-pbc-category-colimit]: any map from $U$ factors through a stage $U_i$, and two stage maps to $Z$ induce the same map from $U$ if and only if they agree at a sufficiently late common stage. No finite-presentation hypothesis on the $U_i\\to S$, and no quasi-compactness or quasi-separatedness hypothesis on $Z$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 04AK (proposition-characterize-locally-finite-presentation), and Tag 0CP4 (lemma-better-characterize-relative-limit-preserving), applied to Z -> S and to inverse systems of schemes, viewed as algebraic spaces over S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-local-properties-chart-test] with $P$ local finite presentation, the hypothesis on $Z\\to S$ gives that for every scheme $V$ with a surjective etale map $V\\to S$ and every scheme $W$ with a surjective etale map $W\\to Z\\times_SV$, the scheme morphism $W\\to V$ is locally of finite presentation; this is the chart condition of [lem-sfb-space-relative-affine-limit-criterion]. Apply [lem-sfb-space-relative-affine-limit-criterion] to $Z\\to S$, with $S$ the terminal algebraic space over itself. For each $S$-scheme $T$ the set $\\operatorname{Mor}_S(T,S)$ is a singleton. Its colimit over a nonempty directed set is again a singleton: all stage representatives become equal at a common upper bound. The fibre product in the criterion is therefore $\\operatorname{Mor}_S(T,Z)$. Thus for every directed affine system $T=\\varprojlim T_i$ the map $\\operatorname{colim}\\operatorname{Mor}_S(T_i,Z)\\to\\operatorname{Mor}_S(T,Z)$ is bijective. By [lem-weil-pbc-filtered-colimit-sets-elementwise], every map descends and equality of two stage maps is detected at a common later stage.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-relative-affine-limit-criterion",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 04AK and 06BC, applied with X=Z and Y=S"
+   }
+  },
+  {
+   "text": "Fix $i_0\\in I$. By [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] choose finitely many affine opens $A_{a,0}$ covering $U_{i_0}$, with quasi-compact pairwise intersections. For every pair choose a finite affine open cover $B_{ab,c,0}$ of $A_{a,0}\\cap A_{b,0}$ by [lem-pqf-finite-affine-cover-qc-open]. For $j\\ge i_0$ denote inverse images in $U_j$ by $A_{a,j}$ and $B_{ab,c,j}$, and inverse images in $U$ by $A_a$ and $B_{ab,c}$. They are affine by the definition [pqf-def-affine-morphism], since transitions and limit projections are affine. By [lem-weil-pbc-limit-affine-transition] each $A_a$ and $B_{ab,c}$ is the limit of the corresponding affine inverse-image system. Inverse images preserve unions and intersections, so these remain covers at every stage and at the limit. The tail is small, nonempty and directed. Restricting to it changes neither the limit nor the eventual-equality test: any index and $i_0$ have a common upper bound.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CP4 (lemma-better-characterize-relative-limit-preserving), scheme-source version of its two covering paragraphs"
+   }
+  },
+  {
+   "text": "Let $g:U\\to Z$. Step 1 applied to each affine system $A_{a,j}$ descends $g|_{A_a}$ to some $g_{a,j_a}:A_{a,j_a}\\to Z$. A common upper bound of the finitely many $j_a$ gives one stage $j$ and maps $g_{a,j}$. On each $B_{ab,c,j}$ the restrictions of $g_{a,j}$ and $g_{b,j}$ become equal on $B_{ab,c}$ because both are restrictions of $g$. The injectivity in step 1 and [lem-weil-pbc-filtered-colimit-sets-elementwise] give a later stage for each equality. There are only finitely many triples $(a,b,c)$, so choose one $k\\ge j$ where all these equalities hold. This uses affine tests on the selected $B$'s, and does not assume the whole overlap is affine.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CP4, finite descent of sections and compatibility in the equalizer argument"
+   }
+  },
+  {
+   "text": "The algebraic space $Z$ is a sheaf on the big fppf site by [def-trf-algebraic-space]. Every open cover used here is an fppf cover by [lem-pc-zariski-coverings-are-fppf]. The uniqueness part of the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] first shows that the two restrictions on $A_{a,k}\\cap A_{b,k}$ agree, since they agree on its covering $\\{B_{ab,c,k}\\}_c$. The existence part then glues the $g_{a,k}$ to a unique $g_k:U_k\\to Z$. Its restriction to $U$ equals $g$ by uniqueness on the cover $\\{A_a\\}_a$. All sections are evaluated on $S$-schemes, so the glued morphism is over $S$. This proves surjectivity.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CP4, sheaf equalizer description of morphisms from the covered source"
+   }
+  },
+  {
+   "text": "Suppose $h_i:U_i\\to Z$ and $h_j:U_j\\to Z$ have equal restrictions to $U$. Choose a common stage $l\\ge i,j$ and, by [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings], a finite affine open cover $\\{A_{a,l}\\}_a$ of $U_l$. For $m\\ge l$ the inverse images $A_{a,m}\\subseteq U_m$ and $A_a\\subseteq U$ are affine by [pqf-def-affine-morphism], since transitions and limit projections are affine, and $A_a=\\varprojlim_{m\\ge l}A_{a,m}$ by [lem-weil-pbc-limit-affine-transition]; they cover $U_m$ and $U$. On each affine inverse-image system, the injective affine test of step 1 gives equality of the two restricted maps at a later stage. Directedness gives one later stage for the finitely many affine opens. The uniqueness part of the sheaf condition then makes the two maps on that stage equal. Conversely, equality at a stage remains equality after restriction to $U$. The representative and equality clauses of [lem-weil-pbc-filtered-colimit-sets-elementwise] now prove injectivity of the canonical colimit map and its stated interpretation. The argument also covers empty sources: the empty covering has exactly one matching family, hence the sheaf has one section there.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-trf-algebraic-space",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CP4, injectivity in the equalizer argument and eventual equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-affine-limit-criterion",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-trf-algebraic-space",
+  "lem-pc-zariski-coverings-are-fppf",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-space-local-properties-chart-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0CP4 (lemma-better-characterize-relative-limit-preserving), using Tag 04AK and Tag 06BC; for scheme sources use finite affine open covers and finite affine covers of their quasi-compact overlaps instead of etale atlases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented algebraic space over S represents a functor whose morphisms from inverse limits of quasi compact quasi separated schemes with affine transition maps form a filtered colimit",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from inverse limits of schemes into an algebraic space locally of finite presentation descend uniquely eventually",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space.*limit|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented algebraic spaces preserve inverse limits of qcqs schemes in their functors of points",
+   "results": "[leansearch] OK 8 hit(s); hits: AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme, AlgebraicGeometry.AffineScheme.forgetToScheme_preservesLimits, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space.*limit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsLimit\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from an inverse limit of qcqs schemes to a locally finitely presented algebraic space descend to a finite stage and agree eventually",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.ExistsHomHomCompEqCompAux, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented algebraic space preserves morphisms from inverse limits of quasi compact quasi separated schemes with affine transition maps",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fp-space-limit-category",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case.",
+   "via": [
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lfp-space-scheme-limit-test",
+  "worker": "stage1",
+  "summary": "Proved the qcqs scheme-source extension of the affine limit criterion by finite affine covers and finite affine covers of their quasi-compact overlaps. Created only the general relative affine criterion (04AK + 06BC), left statement-only. Existing DAG nodes supply covers, affine limits, sheaf descent and filtered-colimit representatives. No statement change, Lean attachment or Mathlib leaf.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Steps 1-5 realize the affine input and nonaffine-overlap limit test needed by 07SK. The current latest blueprint direct-image proof (3) was read. Inherited null ancestor is preserved: the created.item chain terminates at a non-node module; blueprint_refs.py ancestor confirms None.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "why": "Finite affine covers with quasi-compact overlaps, a generic scheme foundation not supplied by this unit."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Open covers are fppf covers, allowing the defining sheaf condition of an algebraic space to glue sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-pc-zariski-coverings-are-fppf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-231442c26",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-231442c26 (reviewer sub-agent of L); spot-checked: Read 06BC, 04AK (with the set-theoretic remark), 0CP4 and 03XP in Stacks, and 0CMY's proof for the duplicate question. The item's statement is unchanged from base and correct: it is 0CP4(3) with X=Z, Y=S and qcqs scheme stages, with no fp/qcqs hypothesis on Z or the stages. The new node lem-sfb-space-relative-affine-limit-criterion is a correct, self-contained 04AK+06BC statement (statement-only, searches recorded). It is not a restatement: the item's qcqs gluing is in steps 2-5. It is not a duplicate: lem-sfb-stack-limit-preserving-lfp (0CMY) is downstream of the space criterion in Stacks, so citing it would point the wrong way and risk a cycle; the scheme-target, 07SK, 07WI and 0CXI nodes state other things. Step checks: covers come with quasi-compact overlaps, intersections are never taken to be affine, the limit-of-opens clause holds, and the sheaf-equalizer gluing order is right. Two faults fixed (C1/C4): step 1 used the new node's every-chart-pair lfp condition without bridging from the item's hypothesis, so it now cites lem-sfb-space-local-properties-chart-test; step 5 reused step 2's affine and limit facts for a new index l without citing them, so they are now written out with pqf-def-affine-morphism and lem-weil-pbc-limit-affine-transition. proof_deps updated to the union of uses. Route: sk-thm-p1, sk-def-picard-pic and sk-prop-nagata-sketch-zmt are in the unit's transitive route, so the two declared tool_uses are accepted though not needed. Batch-5 flag def-trf-algebraic-space: a general definition, not part of the trace-formula or Poincaré-duality proofs, and already a stmt_dep on base; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LfpSpaceSchemeLimitTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.lfp_space_scheme_limit_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/LfpSpaceSchemeLimitTest.lean",
+  "statement": "theorem lfp_space_scheme_limit_test {S : Scheme.{u}} (Z : AlgebraicSpace S) (hlfp : ∀ (V : Over S) (a : yoneda.obj V ⟶ Z.obj.obj), IsEtale a → LocallyOfFinitePresentation V.hom) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, CompactSpace (D.obj i).left] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i).left] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) : Function.Bijective (colimit.desc (D.rightOp ⋙ Z.obj.obj) (Z.obj.obj.mapCocone (coconeRightOpOfCone c))) ∧ (∀ g : Z.obj.obj.obj (op c.pt), ∃ (i : I) (a : Z.obj.obj.obj (op (D.obj (op i)))), Z.obj.obj.map (c.π.app (op i)).op a = g) ∧ (∀ (i j : I) (a : Z.obj.obj.obj (op (D.obj (op i)))) (b : Z.obj.obj.obj (op (D.obj (op j)))), Z.obj.obj.map (c.π.app (op i)).op a = Z.obj.obj.map (c.π.app (op j)).op b ↔ ∃ (k : I) (hi : i ≤ k) (hj : j ≤ k), Z.obj.obj.map (D.map (homOfLE hi).op).op a = Z.obj.obj.map (D.map (homOfLE hj).op).op b)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1203d237a",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Lean theorem lfp_space_scheme_limit_test matches the node and Stacks 0CP4(3) with X=Z, Y=S and scheme stages: Z : AlgebraicSpace S; hlfp = lfp on every étale chart, equivalent to Z→S lfp (atlas exists, lfp is étale-local on the source), same form as landed SpaceDerivedChowNeighbourhood, and the node cites the scheme notion so this is not an H4 duplicate of MapIsLocallyOfFinitePresentation; I:Type u nonempty directed preorder, as in exists_limit_affine_transition; absolute qcqs only on stages, IsAffineHom on transitions, IsLimit of the underlying scheme cone; conclusion: canonical colimit.desc bijective, factorization through a stage, eventual-equality iff with correct contravariant directions. Edge cases (empty stages/limit, singleton I, non-qc Z, non-separated stages) covered. Only the lean field changed, lean.statement verbatim, the 8 stmt_dep records read and consistent, no duplicate in side-live/Mathlib, no defs, sorry only, docstrings carry source+blueprint and the 5 proof steps, report has both sections. No changes made, so no compile; relied on the worker's compile and deliver2 dry run. No findings."
+ }
+}

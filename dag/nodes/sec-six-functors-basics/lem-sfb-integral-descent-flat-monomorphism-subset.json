@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-integral-descent-flat-monomorphism-subset",
+ "kind": "statement",
+ "title": "Integral descent of a subset represented by a quasi-compact flat monomorphism",
+ "statement": "Let $Z$ be a locally Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth], let $q:Y\\to Z$ be an integral surjective morphism [def-weil-finite-integral-morphism], and let $H\\subseteq|Z|$ be any subset. Suppose that $j\\prime:F\\prime\\to Y$ is a quasi-compact flat monomorphism with image $q^{-1}(H)$. Here flatness is stalkwise flatness [def-weil-flat-morphism], quasi-compactness means that inverse images of affine opens are quasi-compact [def-weil-pbc-scheme-conventions], and monomorphism means that $\\operatorname{Hom}(T,F\\prime)\\to\\operatorname{Hom}(T,Y)$ is injective for every scheme $T$. Then there exists a quasi-compact flat monomorphism $j:F\\to Z$ with image $H$, together with an isomorphism $F\\prime\\simeq Y\\times_Z F$ over $Y$ [def-pc-fibre-product]. In particular there is a morphism $p:F\\prime\\to F$ making the square with $j\\prime,j,q$ cartesian. No finiteness of the fibres of $q$, no flatness of $q$, and no Noetherian hypothesis on $Y$ are required.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "§3, Theorem 3.3 (heading OCR 3.4), printed pp.12–13, case (ii), together with §1 Proposition 1.2 and Corollary 1.3 for uniqueness and the cartesian identification. Primary scan: https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf . Local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $H'=q^{-1}(H)$. By [lem-sfb-qc-flat-monomorphism-ringed-image], $H'$ is generalization stable. If $z$ generalizes a point $h\\in H$, choose $y\\in Y$ over $z$. The closed subset $q(\\overline{\\{y\\}})$ contains $z$, hence $h$, because $q$ is closed by [pqf-lem-integral-univclosed]. Thus some specialization $y_h$ of $y$ lies over $h$. Since $y_h\\in H'$, generalization stability gives $y\\in H'$ and $z\\in H$. For any affine open $D\\subset Z$, $q^{-1}(D)$ is affine by the definition of integral morphism, so $(j')^{-1}(q^{-1}D)$ is quasi-compact. Its continuous image under $qj'$ is $H\\cap D$, which is therefore quasi-compact. This proves retrocompactness: a quasi-compact open is covered by finitely many affine opens, and its intersection with $H$ is their finite union.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "pqf-lem-integral-univclosed",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 1°, printed p.12; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "Regard $F'$ canonically as $Y|_{H'}$ by [lem-sfb-qc-flat-monomorphism-ringed-image]. By [lem-sfb-qc-flat-monomorphism-affine-neighbourhood], choose an open $U'\\subset Y$ containing $H'$ such that $F'\\to U'$ is affine. The subset $K=q(Y\\setminus U')$ is closed and disjoint from $H$: a point over $H$ belongs to $H'\\subset U'$. Thus $W=Z\\setminus K$ is an open neighbourhood of $H$ and $q^{-1}W\\subset U'$. Fix any affine open $D\\subset W$. Then $Y_D=q^{-1}D$ is affine since $q$ is integral, and $F'_D=(j')^{-1}(Y_D)$ is affine: the restriction $F'_D\\to Y_D$ is the base change of the affine arrow $F'\\to U'$, so [lem-weil-pbc-affine-morphism-permanence] applies.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+    "pqf-lem-integral-univclosed",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 2°, printed p.12; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $E_D=D|_{H\\cap D}$ with the actual inverse-image structure sheaf [def-a1-ringed-subspace]. Step 1 supplies both hypotheses of [lem-sfb-generalizing-subset-affine-envelope]. Write its affine envelope as $k:E_D\\to V$ and $h:V\\to D$, and put $B=h(|V|\\setminus k(H\\cap D))$. That node gives $h^{-1}(H\\cap D)=k(H\\cap D)$, hence $B\\cap H=\\varnothing$. We prove $B=\\varnothing$. If it were nonempty, [lem-sfb-subset-maximal-generalization], applied to the Noetherian affine scheme $D$, would give $b\\in B$ with no strict generalization in $B$. Here $D$ is Noetherian because $Z$ is locally Noetherian and $D$ is affine; no condition on $Y$ has been introduced.",
+   "uses": [
+    "def-a1-ringed-subspace",
+    "lem-sfb-generalizing-subset-affine-envelope",
+    "lem-sfb-subset-maximal-generalization",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 2° and 4°, printed pp.12–13; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "Make the canonical localization $c:T=\\operatorname{Spec}\\mathcal O_{D,b}\\to D$. By [lem-weil-pbc-spec-local-ring-canonical-morphism], its image consists precisely of the generalizations of $b$. By [lem-sfb-generalizing-subset-affine-envelope], the envelope of $E_T=T|_{c^{-1}(H)}$ is $V_T=V\\times_DT$, and its boundary image is $c^{-1}(B)$. Maximality of $b$ makes this image just the closed point $b_T$ of $T$. Since $b\\notin H$, this closed singleton is disjoint from $c^{-1}H$. Its closure is itself. The boundary criterion therefore shows that $E_T$ is a scheme, with a quasi-compact flat monomorphism $i_T:E_T\\to T$. This is a scheme conclusion obtained only after applying the boundary criterion; it is not assumed while forming the envelope.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-generalizing-subset-affine-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 4°, first half, printed p.13; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "Set $Y_T=Y_D\\times_DT$ and $P=F'_D\\times_DT$. The morphism $Y_T\\to T$ is integral by [lem-sbc-integral-morphism-base-change] and surjective by [lem-weil-pbc-surjective-base-change]. In particular $Y_T$ is affine. The arrow $P\\to Y_T$ is affine by [lem-weil-pbc-affine-morphism-permanence], and is a quasi-compact flat monomorphism by [lem-pc-quasi-compact-base-change] and [lem-weil-pbc-flat-morphism-base-change]; monicity follows directly by cancelling the $F'_D$ components in the pullback universal property [def-pc-fibre-product]. Its image is exactly the inverse image of $c^{-1}H$, since surjectivity of a base change gives a point above every point of the inverse-image subset. Thus $P$ is affine. The factorization characterization in [lem-sfb-qc-flat-monomorphism-ringed-image], applied to $P\\to Y_T$ and $E_T\\to T$, says for every test scheme $L$ that a map $L\\to Y_T$ lifts to $P$ exactly when its composite to $T$ has image in $c^{-1}H$, exactly when it lifts to $E_T$. All lifts are unique, so the resulting square is cartesian by the fibre-product universal property.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product",
+    "lem-sfb-qc-flat-monomorphism-ringed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 4°, cartesian identification and affine source, printed p.13; factorization supplied by §1 Proposition 1.2; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "Consequently $P\\to E_T$ is the base change of $Y_T\\to T$, hence integral and surjective by [lem-sbc-integral-morphism-base-change] and [lem-weil-pbc-surjective-base-change]. The integral case of [lem-weil-pbc-surjective-universally-closed-affine-target] applies because $P$ is affine, and proves that $E_T$ is affine. The final equivalence in [lem-sfb-generalizing-subset-affine-envelope] now makes $k_T:E_T\\to V_T$ an isomorphism. Its complement is empty, contradicting the boundary image $\\{b_T\\}$ obtained in Step 4. Therefore the original $B$ is empty. The same envelope equivalence shows that $E_D\\simeq V$ is an affine scheme, whose canonical arrow $E_D\\to D$ is a quasi-compact flat monomorphism.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-sfb-generalizing-subset-affine-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 4°, second half, printed p.13; its Proposition 3.1(ii) is supplied by the stronger existing Stacks 05YU node; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "The induced ringed space $F=Z|_H$ [def-a1-ringed-subspace] is now a scheme: the open subspaces $H\\cap D$, for affine opens $D\\subset W$, cover $H$, and Step 6 identifies their induced ringed spaces with affine schemes. This is precisely the local-affineness definition of scheme [def-pc-scheme], using the same sheaf on every overlap. The canonical arrow $j:F\\to Z$ has identity maps on local rings under the induced-sheaf stalk identifications, hence is flat by [def-weil-flat-morphism]. It is monic: any two maps into this ringed subspace equal after inclusion have equal continuous maps and equal sheaf maps by inverse-image adjunction [def-weil-pbc-topological-inverse-image]. Its image is $H$ and it is quasi-compact, since Step 1 proves $H\\cap D$ quasi-compact for every affine open $D\\subset Z$, and the topology on $F$ is the subspace topology. This avoids any quasi-compactness assumption on $Z$ or $Y$.",
+   "uses": [
+    "def-a1-ringed-subspace",
+    "def-pc-scheme",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 3.3, proof 2° (open-neighbourhood reduction reversed); §1 Proposition 1.2 and Definition 1.4; canonical ringed-space assembly; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  },
+  {
+   "text": "For any test scheme $L$, a morphism $a:L\\to Y$ lifts uniquely to $F'$ exactly when $a(|L|)\\subset q^{-1}H$, by [lem-sfb-qc-flat-monomorphism-ringed-image]. This is equivalent to $(q\\circ a)(|L|)\\subset H$, and hence to a unique lift of $q\\circ a$ to $F$, by the same node applied to $j$. In particular $qj'$ lifts to a morphism $p:F'\\to F$. The equivalence for arbitrary $L$ gives exactly the universal property of $Y\\times_ZF$ [def-pc-fibre-product], so the induced map $F'\\to Y\\times_ZF$ is an isomorphism over $Y$ and the square is cartesian. Neither this identification nor the preceding argument uses flatness of $q$, finite fibres, or Noetherianity of $Y$.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§1 Proposition 1.2 and Corollary 1.3, applied after Theorem 3.3(ii); primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-flat-monomorphism-ringed-image",
+  "pqf-lem-integral-univclosed",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-a1-ringed-subspace",
+  "lem-sfb-generalizing-subset-affine-envelope",
+  "lem-sfb-subset-maximal-generalization",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Theorem 3.3(ii) (scan heading 3.4), proof 1°,2°,4°, printed pp.12–13; §1 Propositions 1.2,1.5 and §2 Propositions 2.3,2.4, Corollary 2.5; source read online and in sandbox, archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "admissib|pro.?open|flat.*monomorph|monomorph.*flat",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"grep\", \"query\": \"admissib|pro.?open|flat.*monomorph|monomorph.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean\"], \"digest\": \"1a2e72b9deb7e53b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the inverse image of a subset under an integral surjective scheme morphism is represented by a quasi-compact flat monomorphism then so is the subset when target local rings are Noetherian",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"leansearch\", \"query\": \"If the inverse image of a subset under an integral surjective scheme morphism is represented by a quasi-compact flat monomorphism then so is the subset when target local rings are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.quasiCompact_iff\"], \"digest\": \"17bf6197d856ae63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral descent of pro-open immersions onto locally Noetherian schemes and the cartesian identification of the inverse-image pro-open subscheme",
+   "results": "{\"t\": \"2026-10-24T13:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"Integral descent of pro-open immersions onto locally Noetherian schemes and the cartesian identification of the inverse-image pro-open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"6bca3b35168a7528\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An admissible subset, the image of a quasi-compact flat monomorphism, descends along an integral surjective morphism to a scheme with Noetherian local rings",
+   "results": "{\"t\": \"2026-10-24T13:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"An admissible subset, the image of a quasi-compact flat monomorphism, descends along an integral surjective morphism to a scheme with Noetherian local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"e47f6c142c4c6de5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "grep",
+   "query": "universallyClosed|integral.*closed|closed.*integral",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"grep\", \"query\": \"universallyClosed|integral.*closed|closed.*integral\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\"], \"digest\": \"f46518f0cba962c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Flat\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"Flat\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral surjective morphisms descend quasi-compact flat monomorphisms with generalization-stable image when the target is locally Noetherian",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"leansearch\", \"query\": \"Integral surjective morphisms descend quasi-compact flat monomorphisms with generalization-stable image when the target is locally Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\"], \"digest\": \"f5301f12962b8086\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Corollary integral surjective descent admissible subset locally Noetherian scheme",
+   "results": "{\"t\": \"2026-10-24T13:42:53Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Corollary integral surjective descent admissible subset locally Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\"], \"digest\": \"fbfd0d7dc8c7d061\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat descent or flat monomorphisms locally of finite presentation; none descends an arbitrary admissible subset along a nonflat integral surjection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral surjective morphism descends the image of a quasi compact flat monomorphism to a locally Noetherian scheme",
+   "results": "{\"t\": \"2026-10-24T14:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"An integral surjective morphism descends the image of a quasi compact flat monomorphism to a locally Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"28f090ff2780ade2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require fpqc or local finite presentation, or only treat an already surjective flat monomorphism; none proves integral descent of an arbitrary subset."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-24T14:24:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require fpqc or local finite presentation, or only treat an already surjective flat monomorphism; none proves integral descent of an arbitrary subset."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?open|flat.*monomorph|monomorph.*flat",
+   "results": "{\"t\": \"2026-10-24T14:24:59Z\", \"tool\": \"grep\", \"query\": \"pro.?open|flat.*monomorph|monomorph.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"2839a4ec68d78e75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require fpqc or local finite presentation, or only treat an already surjective flat monomorphism; none proves integral descent of an arbitrary subset."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of admissible subsets along integral surjective morphisms of schemes",
+   "results": "{\"t\": \"2026-10-24T14:25:00Z\", \"tool\": \"leansearch\", \"query\": \"Descent of admissible subsets along integral surjective morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"f09514c00559e381\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require fpqc or local finite presentation, or only treat an already surjective flat monomorphism; none proves integral descent of an arbitrary subset."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the finite-set affine-neighbourhood branch, via Raynaud integral descent of admissible subsets.",
+   "via": [
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "worker": "stage1",
+  "summary": "Q30 reads Raynaud Theorem 3.3(ii), retains the statement, and gives the affine-envelope boundary contradiction. Three strictly supporting statement-only nodes expose the ringed-image, affine-locus, and affine-envelope inputs. The integral affineness theorem, maximal-generalization selection, and morphism permanence nodes already exist and are reused. No Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the finite-set affine-neighbourhood branch, via Raynaud integral descent of admissible subsets. Steps realize the integral descent input below that branch; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-integral-univclosed",
+    "why": "Closedness of the integral cover for the specialization and open-neighbourhood reduction; no own-unit node states this general permanence fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness survives restriction and base change and affine morphisms to affine schemes have affine source."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "The canonical local-spectrum morphism identifies its image with the generalizations of the chosen boundary point."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "why": "General integral-surjective affineness descent, used solely as the Proposition 3.1(ii) tool in Raynaud’s proof; no own-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-039088a22",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-039088a22 (reviewer sub-agent of L); spot-checked: Read in full the item, its 8 steps, the 3 new nodes and every cited node, against the Raynaud scan (Sém. Samuel 1967/68 exp.5, fetched from numdam): §1 Prop 1.1/1.2/1.5, §2 Prop 2.3/2.4 and Cor 2.5, §3 Prop 3.1(ii) and Thm 3.3 (printed heading 3.4) proof 1°–4°, pp.5-01–5-13. Item statement and stmt_deps are byte-identical to the live base, where the item is still unsplit; no parallel split or same-id node exists. New nodes are true and not duplicates. (1) qc-flat-monomorphism-ringed-image: Prop 1.2(i) and Cor 1.3; the factorization iff g(T)⊆E follows from O_{S|E}=i^{-1}O_S, and lem-per-flat-monomorphism-local-structure lacks it. (2) qc-flat-monomorphism-affine-neighbourhood: Prop 1.5(i); differs from the Prop 3.5 quasi-affine node. (3) generalizing-subset-affine-envelope: 2.3(ii)(iii), 2.4(A)(B), 2.5 for affine S. I checked h^{-1}(H)=k(H) by localizing at s∈H, the closure-boundary criterion in both directions via 1.5(iii), and boundary localization = c_s^{-1}(B). lem-a1-intersection-canonical-affine-embedding covers only the k part. None of the three restates the item. Steps match Raynaud 1°, 2° and 4°: retrocompactness uses surjectivity of q; W-shrinking uses closedness of q; maximal b comes from Tag 0G2R on Noetherian affine D; the local spectrum makes the boundary {b_T}, which is closed and outside H; P≅Y_T×_T E_T by the two factorization criteria. Stacks 05YU (no quasi-separatedness hypothesis) replaces Raynaud 3.1(ii) with 1.2(ii). Gluing, flatness, mono, quasi-compactness and the cartesian square are elementary. proof_deps equals the union of step uses; there are no cycles and no SGA; steps are under 1100 characters. Accepted tool_uses: pqf-lem-integral-univclosed, lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-spec-local-ring-canonical-morphism, lem-weil-pbc-surjective-universally-closed-affine-target. Edge cases checked: H empty, H=Z, non-flat q. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralDescentFlatMonomorphismSubset",
+  "declaration": "AlgebraicGeometry.integral_descent_flat_monomorphism_subset",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralDescentFlatMonomorphismSubset.lean",
+  "statement": "theorem integral_descent_flat_monomorphism_subset {Z Y F' : Scheme.{u}} [IsLocallyNoetherian Z] (q : Y ⟶ Z) [IsIntegralHom q] [Surjective q] (H : Set Z) (j' : F' ⟶ Y) [QuasiCompact j'] [Flat j'] [Mono j'] (himage : Set.range j' = q ⁻¹' H) : ∃ (F : Scheme.{u}) (j : F ⟶ Z), QuasiCompact j ∧ Flat j ∧ Mono j ∧ Set.range j = H ∧ ∃ (p : F' ⟶ F), IsPullback j' p q j ∧ ∃ (e : F' ≅ pullback q j), e.hom ≫ pullback.fst q j = j' ∧ e.hom ≫ pullback.snd q j = p",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2adbbc3e7",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Node copy differs from side-live only in lean; lean.statement verbatim in file. Clause check: IsLocallyNoetherian Z, IsIntegralHom+Surjective q (no flatness/finiteness of q, no Noetherian Y), H : Set Z, QuasiCompact/Flat/Mono j', range j' = q⁻¹'H; conclusion ∃ F j qc∧flat∧mono∧range=H ∧ ∃ p IsPullback j' p q j (orientation checked) ∧ iso F'≅pullback q j over Y with snd=p (implied, not stronger). Edge cases H=∅, H=Z, Z=∅ covered; single universe u standard. No new defs/helpers; Mathlib notions per dep records; sorry only; source/blueprint docstrings and 8-step proof docstring present; report has Worker report and Second reading. No findings."
+ }
+}

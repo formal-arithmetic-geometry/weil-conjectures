@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Basic
 
+import Mathlib.RingTheory.Jacobson.Ring
+import Mathlib.RingTheory.KrullDimension.Field
+
 /-!
 # Infinitely many maximal ideals in a positive-dimensional finite type domain
 
@@ -39,6 +42,22 @@ theorem infinite_setOf_isMaximal_of_ringKrullDim_pos
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [Algebra.FiniteType k A] [IsDomain A] (hdim : 0 < ringKrullDim A) :
     Set.Infinite {m : Ideal A | m.IsMaximal} := by
-  sorry
+  classical
+  by_contra h
+  have hfin : Set.Finite {m : Ideal A | m.IsMaximal} := Set.not_infinite.mp h
+  have hJ : IsJacobsonRing A := isJacobsonRing_of_finiteType (A := k)
+  have hinf : hfin.toFinset.inf (fun m ↦ m) = (⊥ : Ideal A) := by
+    calc
+      _ = sInf (↑hfin.toFinset : Set (Ideal A)) := Finset.inf_id_eq_sInf _
+      _ = (⊥ : Ideal A).jacobson := by
+        simp only [Set.Finite.coe_toFinset, Ideal.jacobson, bot_le, true_and]
+      _ = ⊥ := isJacobsonRing_iff_prime_eq.mp hJ _ Ideal.isPrime_bot
+  -- Primality of a finite intersection forces equality with one of its factors.
+  have hp : (hfin.toFinset.inf (fun m ↦ m)).IsPrime := hinf.symm ▸ Ideal.isPrime_bot
+  obtain ⟨m, hm, heq⟩ := Ideal.eq_inf_of_isPrime_inf hp
+  have hmmax : m.IsMaximal := hfin.mem_toFinset.mp hm
+  have hbot : (⊥ : Ideal A).IsMaximal := (heq.trans hinf) ▸ hmmax
+  have hfield : IsField A := Ring.isField_iff_maximal_bot.mpr hbot
+  exact (ne_of_gt hdim) (ringKrullDim_eq_zero_of_isField hfield)
 
 end Algebra.FiniteType

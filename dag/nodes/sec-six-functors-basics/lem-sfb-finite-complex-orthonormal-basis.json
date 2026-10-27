@@ -1,0 +1,99 @@
+{
+ "id": "lem-sfb-finite-complex-orthonormal-basis",
+ "kind": "statement",
+ "title": "Orthonormal basis of a finite-dimensional complex inner product space",
+ "statement": "Let $E$ be a finite-dimensional complex inner product space, of complex dimension $n\\geq0$ [def-weil-finite-dimensional-subspace], over the usual complex field $\\mathbf C$ [def-weil-field]. The inner product is conjugate-linear in its first argument and linear in its second, satisfies $\\langle v,u\\rangle=\\overline{\\langle u,v\\rangle}$, and is positive definite; the norm is the compatible norm $\\|v\\|^2=\\langle v,v\\rangle$. There exists a complex vector-space basis $(b_j)_{1\\leq j\\leq n}$ of $E$ with $\\langle b_j,b_k\\rangle=\\delta_{jk}$ for all $j,k$. For $n=0$ this is the empty basis.",
+ "source": {
+  "document": "Mathlib/Analysis/InnerProductSpace/PiL2.lean",
+  "place": "stdOrthonormalBasis, line 1076 (and exists_orthonormalBasis, line 1070); source read in the pinned Mathlib checkout."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def stdOrthonormalBasis|theorem.*stdOrthonormalBasis|def orthonormalBasis",
+   "results": "OK 10 hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/Analysis/InnerProductSpace/Laplacian.lean, Mathlib/Analysis/InnerProductSpace/Laplacian.lean, Mathlib/Analysis/InnerProductSpace/PiL2.lean, Mathlib/Analysis/InnerProductSpace/PiL2.lean, Mathlib/Analysis/InnerProductSpace/PiL2.lean, Mathlib/Analysis/InnerProductSpace/NormDet.lean. ",
+   "date": "2026-10-24",
+   "verdict": "match: stdOrthonormalBasis in Mathlib/Analysis/InnerProductSpace/PiL2.lean:1076 gives exactly this basis after specializing the scalar field to C; definition and hypotheses read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional complex inner product space admits an orthonormal basis",
+   "results": "OK 8 hits: stdOrthonormalBasis, exists_orthonormalBasis, InnerProductSpace.gramSchmidtOrthonormalBasis, maximal_orthonormal_iff_basis_of_finiteDimensional, HilbertBasis.orthonormal, basisOfOrthonormalOfCardEqFinrank, OrthonormalBasis, OrthonormalBasis.instInhabited. ",
+   "date": "2026-10-24",
+   "verdict": "match: stdOrthonormalBasis in Mathlib/Analysis/InnerProductSpace/PiL2.lean:1076 gives exactly this basis after specializing the scalar field to C; definition and hypotheses read."
+  },
+  {
+   "tool": "loogle",
+   "query": "stdOrthonormalBasis",
+   "results": "OK 6 hits: stdOrthonormalBasis, stdOrthonormalBasis_def, DirectSum.IsInternal.subordinateOrthonormalBasis_def, DirectSum.IsInternal.sigmaOrthonormalBasisIndexEquiv_def, InnerProductSpace.laplacian_eq_iteratedFDeriv_stdOrthonormalBasis, InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_stdOrthonormalBasis. ",
+   "date": "2026-10-24",
+   "verdict": "match: stdOrthonormalBasis in Mathlib/Analysis/InnerProductSpace/PiL2.lean:1076 gives exactly this basis after specializing the scalar field to C; definition and hypotheses read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional complex inner product space has an orthonormal basis indexed by Fin of its dimension",
+   "results": "OK 8 hits: stdOrthonormalBasis, stdOrthonormalBasis_def, exists_orthonormalBasis, OrthonormalBasis.instInhabited, OrthonormalBasis, basisOfOrthonormalOfCardEqFinrank, EuclideanSpace.basisFun, coe_basisOfOrthonormalOfCardEqFinrank. ",
+   "date": "2026-10-24",
+   "verdict": "match: stdOrthonormalBasis in Mathlib/Analysis/InnerProductSpace/PiL2.lean:1076 gives exactly this basis after specializing the scalar field to C; definition and hypotheses read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "stdOrthonormalBasis",
+  "file": "Mathlib/Analysis/InnerProductSpace/PiL2.lean",
+  "line": 1076,
+  "how": "specializes in one line: stdOrthonormalBasis ℂ E, at line 1076, with its OrthonormalBasis structure; Fin (finrank ℂ E) is the stated n-element index set up to the shift from 0-based to 1-based indexing. Zero dimension is included; no Nonempty index hypothesis. exists_orthonormalBasis is at line 1070."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kahler-normal-holomorphic-coordinates",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: operator identity used before deducing d-closedness by adjointness; supporting first-order input: Kong Proposition 6.12, the two commutators involving the dual Lefschetz operator, before the Laplacian comparison. Supporting input: Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §3.3, Definition 3.18 and Theorem 3.19, printed p.7 (PDF page 7): the metric first jet in normal holomorphic coordinates; linear normalization of the metric at the chosen point by an orthonormal basis, before the quadratic coordinate change.",
+   "via": [
+    "lem-sfb-kahler-normal-holomorphic-coordinates",
+    "lem-sfb-kahler-first-order-commutators",
+    "lem-sfb-kahler-laplacian-identity",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

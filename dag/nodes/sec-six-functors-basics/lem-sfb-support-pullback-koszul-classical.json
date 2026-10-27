@@ -1,0 +1,187 @@
+{
+ "id": "lem-sfb-support-pullback-koszul-classical",
+ "kind": "statement",
+ "title": "Preservation of classical Koszul cohomology under support and pullback",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its norm-topological valuation ring $B$, and the sectionwise uniformizer scalar $\\pi$ [def-weil-l-adic-coefficient-extension, det-pe-derived-nakayama-resolution]. Let $p$ be a path from a vertex $S$ to the root $X$ of a finite qcqs open-closed tree [def-sfb-qcqs-open-closed-tree]. Write $J$ for its actual module functor, using open extension by zero and closed direct image at each edge, and identity for the root [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. For an arbitrary internal $B_S$-module $I$ [sk-def-sfb-module-objects] and $n\\in\\mathbf N$ form $C_n(I)=[I\\xrightarrow{\\pi^n}I]$ in degrees $-1,0$. Suppose every abelian $H^q C_n(I)$ is in the essential image of $\\nu_S^*$ [def-weil-pbc-site-comparison-morphism]. Then for every scheme morphism $v:U\\to X$ [def-pc-scheme] and every integer $q$, $H^q C_n(v^*J(I))$ is in the essential image of $\\nu_U^*$, using the actual internal-module pullback [def-sfb-module-upper-star]. No Noetherian, constructibility, or finite-local-model hypothesis is imposed; this is a preservation statement with classicality as input. Empty paths and $n=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-jshriek-comparison (09AF), lemma-closed-immersion-complement-retrocompact-exact (09BM), lemma-open-immersion (09BN), lemma-morphism-comparison (09A6); original steps 3--4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-star",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-qcqs-open-closed-tree",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "proof": [
+  {
+   "text": "For each integer q choose an abelian etale antecedent F_q for the classical sheaf H^q C_n(I), using the hypothesis. Induct along the support path. The root is the identity. At an open branch, extension by zero is exact and commutes with comparison inverse image. At a closed branch, the immersion is qcqs: affine inverse images are quotient spectra, and its diagonal is an isomorphism. The degree-zero clause of direct-image comparison, applied to F_q[0], gives comparison compatibility for ordinary direct image. Its pro-etale direct image is exact because the complementary open immersion is quasi-compact, as required by the tree. Internal-module operations transport identifies these underlying abelian functors and their scalar actions. Thus induction gives a classical antecedent for J H^q C_n(I), in every degree. The argument is abelian-valued (equivalently uses discrete integer coefficients), and requires no finite quotient action on F_q.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN lemma-open-immersion; Tag 09BM lemma-closed-immersion-complement-retrocompact-exact; Tag 09A6 lemma-morphism-comparison and open-extension comparison."
+   }
+  },
+  {
+   "text": "Module pullback along v is exact and transports to the underlying sheaf inverse image with its pulled-back coefficient action. Its comparison square identifies v^* nu_X^* F with nu_U^* v_et^* F for every abelian etale sheaf F, without any qcqs assumption on v. Since all the support and pullback functors are additive and linear, they take multiplication by the specified resolution scalar to the same scalar. Exact-functor cohomology therefore identifies H^q C_n(v^* J I) with v^* J H^q C_n(I). The antecedents from the path induction and the inverse-image square prove the conclusion in each q. This includes n=0, root paths, zero objects and empty schemes.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 section-morphism, inverse-image comparison square; exactness and cohomology transported through the cited module equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-quasi-separated-morphism",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-jshriek-comparison (09AF), lemma-closed-immersion-complement-retrocompact-exact (09BM), lemma-open-immersion (09BN), lemma-morphism-comparison (09A6); original steps 3--4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image pro etale comparison nonpositive for a bounded classical complex",
+   "results": "{\"t\": \"2026-10-25T06:29:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image pro etale comparison nonpositive for a bounded classical complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"4f1e6e21c5e061b1\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.isZero_double_X",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.isZero_double_X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.isZero_double_X\"], \"digest\": \"3c0ed3379a4f29e8\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*HomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*HomologyFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with classical abelian cohomology has invertible pro etale comparison counit",
+   "results": "{\"t\": \"2026-10-25T06:55:00Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex with classical abelian cohomology has invertible pro etale comparison counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_inv\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"HomologicalComplex.opEquivalence_counitIso\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"adf832dd448ce5ea\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "classical.*(Koszul|koszul)|Koszul.*classical",
+   "results": "{\"t\": \"2026-10-25T06:55:46Z\", \"tool\": \"grep\", \"query\": \"classical.*(Koszul|koszul)|Koszul.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback",
+   "results": "{\"t\": \"2026-10-25T06:55:47Z\", \"tool\": \"leansearch\", \"query\": \"Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instQuasiIsoExtendMap\", \"HomologicalComplex.extend.instHasHomology\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"groupCohomology.instPreservesZeroMorphismsRepCochainComplexModuleCatNatCochainsFunctor\", \"CategoryTheory.ShortComplex.hasHomology_of_preserves\", \"CategoryTheory.ShortComplex.hasRightHomology_of_preserves\"], \"digest\": \"7bf8c6721c782e0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.essImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.EssSurj.mk\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"], \"digest\": \"a1dbd04fd41f719d\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.H1Cotangent\", \"Algebra.Extension.h1Cotangent\\u03b9_apply\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.Extension.H1Cotangent\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.Extension.H1Cotangent.map\"], \"digest\": \"10ecae7a40fb68db\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageKoszulComparisonNonpositive",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Proof of compactification coherence: local comparison prerequisite, transport through supports and pullback (original steps 3--4).",
+   "via": [
+    "lem-sfb-supported-image-koszul-comparison-nonpositive"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportPullbackKoszulClassical",
+  "file": "lean/Sheaf/Paper/SupportPullbackKoszulClassical.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.support_pullback_koszul_classical",
+  "statement": "theorem support_pullback_koszul_classical\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    {X S : Scheme.{u}} {tree : QcqsOpenClosedTree X} (p : tree.Path S)\n    (I : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n      (condensedRingObj (DerivedNakayama.integerRing ℓ E) S))\n    (n : ℕ)\n    (hI : ∀ q : ℤ, (comparisonUpperStar Ab.{u + 1} S).essImage\n      ((HomologicalComplex.double\n        (((DerivedNakayama.scalarOnModules ℓ E S\n          ((DerivedNakayama.derived_nakayama_resolution ℓ E).choose ^ n)).app\n            I).hom) (c := ComplexShape.up ℤ) (i₀ := -1) (i₁ := 0) (by decide)).homology q))\n    {U : Scheme.{u}} (v : U ⟶ X) :\n    ∀ q : ℤ, (comparisonUpperStar Ab.{u + 1} U).essImage\n      ((HomologicalComplex.double\n        (((DerivedNakayama.scalarOnModules ℓ E U\n          ((DerivedNakayama.derived_nakayama_resolution ℓ E).choose ^ n)).app\n            ((CondensedRing.upperStar (DerivedNakayama.integerRing ℓ E) v).obj\n              ((p.extension (DerivedNakayama.integerRing ℓ E)).obj I))).hom)\n        (c := ComplexShape.up ℤ) (i₀ := -1) (i₁ := 0)\n        (by decide)).homology q)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

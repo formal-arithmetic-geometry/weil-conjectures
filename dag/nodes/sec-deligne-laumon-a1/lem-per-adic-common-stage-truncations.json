@@ -25,26 +25,14 @@
  ],
  "proof": [
   {
-   "text": "The spectrum of the field $k$ has a single point and a finite affine cover by a Noetherian ring. Apply [lem-cbc-compactification-geometry-fibre-bound] to $X\\to\\operatorname{Spec}k$: $X$ is Noetherian and finite-dimensional, and $\\ell$ remains a unit. Thus the integral and localized bounded t-structures [prop-weil-pbc-integral-tstructure, prop-weil-localized-tstructure] apply at every finite coefficient field. Write $Q_E$ for localization and $C_{L/E}$ for integral change of completed coefficient rings. The construction of [prop-weil-pbc-scalar-extension] gives $T_{L/E}Q_E\\cong Q_LC_{L/E}$; these are raw rationalizations throughout.",
+   "text": "Apply [lem-cbc-compactification-geometry-fibre-bound] to $X\\to\\operatorname{Spec}k$: $X$ is Noetherian, finite-dimensional, with $\\ell$ invertible. For $R=B_{E,X}$ and $S=B_{L,X}$, [lem-weil-finite-free-completed-scalar-comparison] identifies completed extension with $K\\otimes_R^LS$ and makes $S$ finite free. By [lem-pur-derived-change-of-rings], a K-flat model from [lem-pc-kflat-resolution] computes this tensor; a basis identifies its restriction with $P^{\\oplus[L:E]}$. Componentwise kernels, images and quotients give $H^i(K)^{\\oplus[L:E]}$, so both bounds are preserved. Constructible membership follows from [lem-weil-pbc-finite-free-constructible-scalar-transport]; [prop-weil-pbc-integral-tstructure] identifies the integral halves with these ambient bounds.",
    "uses": [
     "lem-cbc-compactification-geometry-fibre-bound",
-    "prop-weil-pbc-integral-tstructure",
-    "prop-weil-localized-tstructure",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 6.8.11(3), 6.8.14(2); applicability to the completed finite-stage categories"
-   }
-  },
-  {
-   "text": "Put $R=B_{E,X}$ and $S=B_{L,X}$. By [lem-weil-finite-free-completed-scalar-comparison], $S$ is finite free as an $R$-module, and $C_{L/E}K=K\\otimes_R^LS$ is already derived complete. Choose an $R$-basis of $S$, of size $d=[L:E]$, only for this calculation. For a K-flat resolution $P\\to K$, restriction of $P\\otimes_RS$ is the complex $P^{\\oplus d}$, with componentwise differential. Kernels, images and quotients of this finite direct sum are the corresponding direct sums; hence $\\mathcal H^i(P\\otimes_RS)$, after restriction, is $\\mathcal H^i(K)^{\\oplus d}$. Restriction forgets scalar action and detects zero sheaves. Consequently $C_{L/E}$ preserves both ambient cohomological bounds. It preserves the constructible subcategories with their compatible etale-origin witnesses by [lem-weil-pbc-finite-free-constructible-scalar-transport]. By [prop-weil-pbc-integral-tstructure] it therefore preserves both integral halves. No levelwise truncation or Tor-compatibility assertion is used.",
-   "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-pur-derived-change-of-rings",
     "lem-weil-pbc-finite-free-constructible-scalar-transport",
-    "prop-weil-pbc-integral-tstructure"
+    "prop-weil-pbc-integral-tstructure",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -53,66 +41,26 @@
    }
   },
   {
-   "text": "Every object of a rational half is isomorphic to $Q_EK$ for an integral object $K$ in that half [prop-weil-localized-tstructure]. Apply step 2 and $T_{L/E}Q_E\\cong Q_LC_{L/E}$ [prop-weil-pbc-scalar-extension]. Its image lies in the same rational half; shifts give this for every cutoff. This proves t-exactness, rather than merely exactness as a triangulated functor. Apply [lem-pod-texact-truncation-comparison] to obtain $c^-_{L/E,r}:T_{L/E}\\tau_E^{\\le r}\\cong\\tau_L^{\\le r}T_{L/E}$ and $c^+_{L/E,r}:T_{L/E}\\tau_E^{\\ge r}\\cong\\tau_L^{\\ge r}T_{L/E}$, characterized respectively by $\\iota c^-=T(\\iota)$ and $c^+T(\\pi)=\\pi$. This also gives their naturality in $K$.",
+   "text": "By [prop-weil-localized-tstructure] each rational half is the isomorphism closure of its integral image. Since $T_{L/E}Q_E\\cong Q_LC_{L/E}$ [prop-weil-pbc-scalar-extension], step 1 proves rational t-exactness. Apply [lem-per-texact-system-triangle-coherence] to these exact scalar functors: the normalized truncation and cohomology comparisons satisfy the stated tower equations and preserve all three truncation arrows.",
    "uses": [
     "prop-weil-localized-tstructure",
     "prop-weil-pbc-scalar-extension",
-    "lem-pod-texact-truncation-comparison"
+    "lem-per-texact-system-triangle-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii), pp. 29–30; normalized comparison for a t-exact exact functor"
+    "place": "Proposition 1.3.3(i),(ii), Proposition 1.1.9 and Corollary 1.1.10(ii), and 1.3.6: agent extraction of the normalized system-coherence argument of old proof steps 4–5, not a separately numbered theorem in BBD"
    }
   },
   {
-   "text": "For $E\\subset L\\subset M$, let $a:T_{M/L}T_{L/E}\\cong T_{M/E}$ be the specified associator. The natural-transformation and composition clauses of [lem-pod-texact-truncation-comparison] give, for either truncation $\\tau$,\n$$c_{M/E,K}\\,a_{\\tau K}=\\tau(a_K)\\,c_{M/L,T_{L/E}K}\\,T_{M/L}(c_{L/E,K}).$$\nThe identity comparison is the identity since $T_{E/E}=\\operatorname{id}$. These equations use exactly the associator of [prop-weil-pbc-scalar-extension]. Define the cohomology comparison by composing the upper and lower comparisons for $(\\tau^{\\ge r}\\tau^{\\le r}K)[r]$, followed by the iterated scalar shift comparison. This is the degree-zero cohomology object $\\mathcal H^rK$ (the ambient sheaf when an integral representative is used) [def-weil-derived-cohomology-sheaves, prop-weil-localized-tstructure]. Substitution of the displayed equations and the associator/shift equations gives the identical identity and composition equations for $\\mathcal H^r$.",
+   "text": "The finite coefficient fields form a small nonempty directed set [def-weil-finite-subextension-directed-set]. Apply [lem-pod-directed-pair-bounded-tstructure] to the literal pair category [def-weil-pbc-finite-stage-pair-category]. Step 2 verifies t-exactness; the shift and triangles are its stage-image structures [def-weil-pbc-common-stage-cones, thm-weil-pbc-verdier-axioms]. This gives the bounded halves and both representative-independent conjugation formulas, canonical maps, cutoff equations and distinguished truncation triangles.",
    "uses": [
-    "lem-pod-texact-truncation-comparison",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-derived-cohomology-sheaves",
-    "prop-weil-localized-tstructure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3 and definition 1.3.16; uniqueness and composition of normalized comparisons"
-   }
-  },
-  {
-   "text": "The comparisons identify the complete truncation triangles, including the third arrow. Indeed, apply $T_{L/E}$ to the finite-stage triangle at cutoff $r$, using its specified shift comparison [prop-weil-pbc-scalar-extension]. Its first term has bound $\\le r$ and its third term bound $\\ge r+1$. The comparison equations in step 3 commute with the first two arrows to the standard truncation triangle of $T_{L/E}K$. For the first term $A$ of the source triangle and third term $B'$ of the target, $A[1]$ has bound $\\le r-1$, so $\\operatorname{Hom}(A[1],B')=0$ by [def-weil-t-structure]. Clause (2) of [lem-weil-pbc-triangle-morphism-extension] now says that these prescribed first and third components, with middle component the identity, form a morphism of triangles: the boundary square commutes as well. The same uniqueness applies to cutoff-map diagrams; their finite-stage equations follow from the characterizing truncation maps, and remain valid under scalar extension.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "prop-weil-localized-tstructure",
-    "def-weil-t-structure",
-    "lem-weil-pbc-triangle-morphism-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(ii), pp. 29–30; Proposition 1.1.9 and Corollary 1.1.10(ii), pp. 23–24"
-   }
-  },
-  {
-   "text": "In the pair category [def-weil-pbc-finite-stage-pair-category], set the halves at cutoff $r$ to be the isomorphism closures of $(E,K)$ with $K\\in D_E^{\\le r}$ or $D_E^{\\ge r}$, respectively. These classes have the required shift inclusions by their finite-stage counterparts and the pair shift [prop-weil-pbc-common-stage-calculus]. For orthogonality choose presentations of an upper object and a lower object with cutoffs $r$ and $r+1$. After conjugating by their chosen isomorphisms, any map is $[M,u]$ between their scalar extensions. Step 3 places its endpoints in the corresponding halves at $M$, so $u=0$ by finite-stage orthogonality [def-weil-t-structure, prop-weil-localized-tstructure]. Thus the original map is zero. Each $(E,K)$ has the image of its finite-stage truncation triangle, distinguished because $j_E$ is exact [thm-weil-pbc-verdier-axioms]. This supplies the triangle axiom. The two finite-stage bounds of $K$ give two bounds of $(E,K)$, proving boundedness. Thus these halves form the asserted bounded t-structure.",
-   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "lem-pod-directed-pair-bounded-tstructure",
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-common-stage-calculus",
-    "def-weil-t-structure",
-    "prop-weil-localized-tstructure",
+    "def-weil-pbc-common-stage-cones",
     "thm-weil-pbc-verdier-axioms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 6.8.11(3) and 6.8.14(1),(2); explicit common-stage verification of t-structure axioms"
-   }
-  },
-  {
-   "text": "Here is the actual descent formula; it does not apply an exact-functor descent assertion to truncation, which is generally not triangulated-exact. For either truncation put $\\tau(E,K)=(E,\\tau_EK)$. For $f=[M,u]:(E,K)\\to(F,L)$ define\n$$\\tau(f)=[M,c_{M/F,L}^{-1}\\,\\tau_M(u)\\,c_{M/E,K}].$$\nIf $M\\subset N$, the associator equation of step 4 and naturality of $c_{N/M}$ show that transporting the displayed representative to $N$ gives exactly\n$$c_{N/F,L}^{-1}\\,\\tau_N(a_{N,M,F,L}\\,T_{N/M}(u)\\,a_{N,M,E,K}^{-1})\\,c_{N/E,K}.$$\nThe expression inside $\\tau_N$ is $u_N$ by the pair-category definition. Thus two equivalent representatives give equivalent images. For composition, put both arrows at one stage [prop-weil-pbc-common-stage-calculus]; the adjacent factors $c_{M/F,L}$ and $c_{M/F,L}^{-1}$ cancel, and $\\tau_M(vu)=\\tau_M(v)\\tau_M(u)$. The identity formula follows from $c_{E/E}=1$. These calculations prove that both truncations are functors with the stated arrow formulas.",
-   "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-common-stage-calculus"
    ],
    "elementary": false,
    "source": {
@@ -121,55 +69,52 @@
    }
   },
   {
-   "text": "Represent the upper counit on $(E,K)$ by $[E,\\iota_{E,K}]$ and the lower unit by $[E,\\pi_{E,K}]$. Their naturality for $[M,u]$ follows by substituting step 7 and the two characterizing equations of step 3. All equations between truncation maps are checked at a common finite stage using [prop-weil-pbc-common-stage-calculus], where they are the ordinary finite-stage equations [prop-weil-localized-tstructure, def-weil-t-structure]. Step 5 handles the shifted third arrow of the distinguished truncation triangles, and [thm-weil-pbc-verdier-axioms] sends each such finite-stage triangle to a distinguished pair-category triangle. These are truncation triangles for the halves proved in step 6. Their uniqueness follows from [lem-weil-pbc-triangle-morphism-extension](2), since the same upper/lower orthogonality gives its vanishing hypothesis in the pair category. Consequently the constructed functors are the canonical truncations of that t-structure, including all their canonical maps. Applying their composition and the pair shift gives naturally $\\mathcal H^r(E,K)\\cong(E,\\mathcal H_E^rK)$.",
+   "text": "Each $j_E$ is exact [thm-weil-pbc-verdier-axioms] and preserves both halves by step 3. Apply [lem-per-texact-system-triangle-coherence] also to $j_E$ and the exact comparisons $j_LT_{L/E}\\cong j_E$. Composing the normalized truncations and shift gives naturally $\\mathcal H^r(E,K)\\cong(E,\\mathcal H_E^rK)$ with the same canonical maps.",
    "uses": [
-    "prop-weil-pbc-common-stage-calculus",
-    "prop-weil-localized-tstructure",
-    "def-weil-t-structure",
     "thm-weil-pbc-verdier-axioms",
-    "lem-weil-pbc-triangle-morphism-extension"
+    "lem-per-texact-system-triangle-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii), pp. 29–30; common-stage descent of the units, counits and full triangles"
+    "place": "Proposition 1.3.3(i),(ii), Proposition 1.1.9 and Corollary 1.1.10(ii), and 1.3.6: agent extraction of the normalized system-coherence argument of old proof steps 4–5, not a separately numbered theorem in BBD"
    }
   },
   {
-   "text": "It remains to identify the heart; the witnesses for its two halves need not initially be at the same stage. Let $Z=(E,K)$ lie in both halves. Choose isomorphisms from $Z$ to a pair $(F,A)$ in the upper half and to a pair $(G,B)$ in the lower half. Include their inverses and both inverse equations in one finite diagram. By [prop-weil-pbc-common-stage-calculus] there is a finite $N\\supset E,F,G$ where these are actual isomorphisms, so $T_{N/E}K\\cong T_{N/F}A$ and $T_{N/E}K\\cong T_{N/G}B$. Step 3 places the right-hand sides in the upper and lower finite-stage halves respectively. Hence $T_{N/E}K$ belongs to the finite-stage heart. Its two degree-zero truncation maps are isomorphisms, giving $T_{N/E}K\\cong\\mathcal H_N^0(T_{N/E}K)$ [def-weil-t-structure, prop-weil-localized-tstructure]. The canonical identification $j_NT_{N/E}\\cong j_E$ [thm-weil-pbc-verdier-axioms] now proves the required isomorphism for $Z$ after this one finite enlargement. Conversely every finite-stage heart object belongs to both pair halves. Therefore the pair heart is exactly the isomorphism closure of finite-stage hearts. No reflection of bounds by scalar extension or faithfulness of $j_E$ was assumed.",
+   "text": "Finite diagrams, including inverses and inverse equations, are realized at one stage [prop-weil-pbc-common-stage-calculus]. Apply [lem-per-directed-pair-simultaneous-bounds] to the two half witnesses from step 3: one enlargement puts the scalar extension in both finite halves and identifies it with its degree-zero cohomology object. The converse follows directly from the two half definitions. This proves the asserted heart description.",
    "uses": [
     "prop-weil-pbc-common-stage-calculus",
-    "def-weil-t-structure",
-    "prop-weil-localized-tstructure",
-    "thm-weil-pbc-verdier-axioms"
+    "lem-per-directed-pair-simultaneous-bounds"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 6.8.11(3), 6.8.14(1),(2); simultaneous realization of the two heart witnesses"
+    "place": "Proposition 6.8.14(1), finite-stage passage: agent extraction of the simultaneous heart-witness argument in old proof step 9; the abstract finite-bound version is not stated verbatim by Bhatt–Scholze"
    }
   }
  ],
  "proof_deps": [
   "lem-cbc-compactification-geometry-fibre-bound",
-  "prop-weil-pbc-integral-tstructure",
-  "prop-weil-localized-tstructure",
-  "prop-weil-pbc-scalar-extension",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-finite-free-constructible-scalar-transport",
-  "lem-pod-texact-truncation-comparison",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-t-structure",
-  "lem-weil-pbc-triangle-morphism-extension",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-pc-kflat-resolution",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-scalar-extension",
+  "lem-per-texact-system-triangle-coherence",
+  "def-weil-finite-subextension-directed-set",
+  "lem-pod-directed-pair-bounded-tstructure",
   "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-common-stage-cones",
+  "thm-weil-pbc-verdier-axioms",
   "prop-weil-pbc-common-stage-calculus",
-  "thm-weil-pbc-verdier-axioms"
+  "lem-per-directed-pair-simultaneous-bounds"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Propositions 6.8.11(3), 6.8.14; completed finite-stage categories and explicit coherent common-stage argument, using BBD Proposition 1.3.3 and existing DAG interfaces. The paper does not state all coherence equations for this raw pair presentation."
+  "place": "Reassembly of the retained 2026-10-21 argument: finite-free bounds, existing directed-pair t-structure lemma, new coherent full-triangle/cohomology comparisons and simultaneous-bound witness lemma. Bhatt–Scholze 6.8.11/6.8.14 and BBD 1.3.3, 1.1.9–1.1.10."
  },
  "mathlib_searches": [
   {
@@ -294,55 +239,55 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-per-adic-common-stage-truncations",
   "worker": "stage1",
-  "summary": "Proved t-exactness by finite freeness on the completed integral coefficient sheaves, then scalar localization. Reused existing normalized comparison and triangle-morphism lemmas. Wrote the associator equation and representative-refinement calculation, verified the bounded t-structure, and realized both heart witnesses at one finite enlargement. No new nodes and no statement change.",
-  "blueprint": "Supports the first proof paragraph of lem-per-smooth-pullback-t-exact in main-20261015: ordinary cohomology at finite and common coefficient stages; realizes the common-stage truncation allocation from lem-per-adic-heart-pullback-fibres. No change to the unit or chapter route.",
+  "summary": "Released stage-1 re-split order: two statement-only generic nodes for system triangle/cohomology coherence and simultaneous finite-stage bounds. Existing directed-pair t-structure lemma reused to avoid a duplicate; original nine-step proof preserved verbatim as handoff material in report.md. Statement and statement dependencies retained.",
+  "blueprint": "Same first-paragraph common-stage ordinary-cohomology allocation of lem-per-smooth-pullback-t-exact. Old steps 4–5 go to the coherence node; old step 9 to simultaneous bounds; old steps 6–8 reuse the existing generic directed-pair node. Old steps 1–3 remain the explicit finite-free applicability and localization assembly.",
   "tool_uses": [
    {
     "node": "lem-cbc-compactification-geometry-fibre-bound",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
-   },
-   {
-    "node": "prop-weil-pbc-integral-tstructure",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
-   },
-   {
-    "node": "prop-weil-localized-tstructure",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
     "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
     "node": "lem-weil-pbc-finite-free-constructible-scalar-transport",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
-    "node": "lem-pod-texact-truncation-comparison",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
-    "node": "lem-weil-pbc-triangle-morphism-extension",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
-    "node": "prop-weil-pbc-common-stage-calculus",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
+   },
+   {
+    "node": "lem-pod-directed-pair-bounded-tstructure",
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
    },
    {
     "node": "thm-weil-pbc-verdier-axioms",
-    "why": "Generic coefficient/category interface used as stated to establish the ordinary common-stage cohomology underlying this unit; no node of this unit supplies this general tool."
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Generic geometry, completed coefficient, or directed-category interface used as stated; it supplies ordinary cohomology below the fixed perverse unit and replaces none of the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of the K-flat sheaf-complex model used in the finite-free bound calculation; generic derived-category tool, not a change of perverse-unit route."
    }
   ]
  },
@@ -357,15 +302,17 @@
   "lem-pod-texact-truncation-comparison",
   "lem-weil-pbc-triangle-morphism-extension",
   "prop-weil-pbc-common-stage-calculus",
-  "thm-weil-pbc-verdier-axioms"
+  "thm-weil-pbc-verdier-axioms",
+  "lem-pod-directed-pair-bounded-tstructure",
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q76-7847f50c6",
-  "group": "Q76",
+  "reviewer": "NT-cc-NI-68e487018",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-7847f50c6 (reviewer sub-agent of L); spot-checked: Q76 lem-per-adic-common-stage-truncations, branch 7847f50c. I read the full mathematics: the item's 9 steps, every cited statement, BS 6.8.11/6.8.14 (PDF pp. 60-61) and BBD 1.3.3/1.1.9 (PDF pp. 24, 30). There are 0 new nodes, the statement and stmt_deps are unchanged, there is no SGA citation, and proof_origin is agent. Step 1: lem-cbc-compactification-geometry-fibre-bound applied to X->Spec k gives Noetherian, finite-dimensional, ell a unit, which is the T-hypothesis of the integral, localized and scalar-extension props. Step 2: finite freeness of S over R gives H^i(C K)|_R = H^i(K)^d, so C preserves the ambient bounds; the transport lemma gives constructible membership; no Tor hypothesis is used. Step 3: t-exactness via the definition of the localized halves and T Q = Q C; lem-pod-texact applies and its hypotheses hold. Step 4: I derived the associator equation c_{M/E} a = tau(a) c_{M/L} T(c_{L/E}) from lem-pod-texact's composition and transformation clauses. Step 5: Hom(A[1],B')=0 by the degree bounds, so clause (2) of triangle-morphism-extension gives the boundary square. Step 6: the pair t-structure axioms hold by stage-M orthogonality and exactness of j_E. Step 7: I re-derived the refinement calculation; it equals c^-1 tau_N(u_N) c, so the arrow formula is well defined. Step 8: naturality of the canonical maps and uniqueness of the truncation triangles check out. Step 9: both heart witnesses and their inverses are realized at one stage N. Small cases checked: X empty, E=L, X=Spec of an algebraically closed field (D^b of finite-dimensional Qbar-spaces), and heart witnesses at different fields. Batch-5 flags: lem-pod-texact-truncation-comparison has closure only def-weil-triangulated-category and def-weil-t-structure (pure t-structure category theory, not Poincare duality), so accepted. finite-free-constructible-scalar-transport reaches only lem-trf-geometric-inverse-image-exact (exactness of inverse image along a geometric morphism, a generic topos fact, not part of the trace formula), so accepted. Duplicates: prop-constructible-truncations covers only finite-field Frobenius data. Advisory: lem-a1-texact-coefficient-stage-descent (unsplit, Q112) assumes the pair t-structure and overlaps steps 3-4 only for F=T; its splitter may cite this item. Nit, not a fault: steps 2, 5 and 7 each leave one id in uses without bracketing it in the text. split_report.tool_uses (generic pbc/sbc/pur/pod/cbc interfaces) are accurate for the maintainer to record."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-68e487018 (reviewer sub-agent of L); spot-checked: I read the 2026-10-22 re-split note: at least 2 new nodes, an assembly of at most 3000 characters, keep_plan. The live item is still the 9-step Q76 version, so this delivery is not superseded. The statement and stmt_deps are byte-identical to the base. The assembly is 5 steps and 2502 characters. Old-step map: 1–2 go to step 1; 3 to step 2; 4–5 to the new lem-per-texact-system-triangle-coherence; 6–8 to the existing lem-pod-directed-pair-bounded-tstructure plus step 4 (H^r through the coherence node applied to j_E); 9 to the new lem-per-directed-pair-simultaneous-bounds. I checked the hypotheses of every cited statement. cbc fibre-bound applies to X→Spec k. S is finite free with C=K⊗^L_R S, so H^i is H^i(K)^{⊕d}. The constructible transport lemma covers the item's category with étale-origin witnesses. The rational halves are iso-closures of Q-images with TQ≅QC. The directed-pair node's hypotheses hold: the finite-subextension directed set, the transport formula of the pair category, the shift, stage-image triangles (common-stage cones plus Verdier axioms, exact j_E) and t-exactness. The common-stage calculus gives the finite-diagram hypothesis of the bounds node. In the coherence node I derived the associator equation from lem-pod-texact's composition and naturality clauses. I type-checked the third-square formula and proved it from Hom(A[1],C')=0 and triangle-morphism-extension(2). Edge cases checked: I a singleton, K=0, K already ≤r. In the bounds node I checked the empty list, witnesses at incomparable stages and conflicting bounds; the halves are strictly full and no faithfulness is assumed. Neither new node duplicates lem-pod-texact, lem-zl-texact-cohomology-boundary-comparison, lem-a1-texact-coefficient-stage-descent, lem-pod-fixed-pair or common-stage-calculus. Both are statement-only, cite every id they use in stmt_deps, record 5 searches each and are of comparable size. Sources read: BBD 1.3.3 and BS 6.8.14; proof_origin is agent. No SGA is cited. Batch-5 flags: lem-pod-directed-pair-bounded-tstructure has an unsplit, defs-only closure and is abstract directed-colimit t-structure theory, and lem-pod-texact-truncation-comparison's closure is def-weil-triangulated-category plus def-weil-t-structure. Neither is a step of PD or the trace formula, so I accepted both. Advisory: (1) old steps 1–2 stay in step 1, compressed but complete; lem-pod-completed-scalar-extension-texact rightly not cited, as it is stated on def-weil-derived-complete-integral-detailed. (2) The item's node-level tool_uses is stale. (3) The new nodes lack lean_audit."
  },
  "lean": {
   "module": "Sheaf.Paper.PerAdicCommonStageTruncations",
@@ -389,5 +336,17 @@
   "group": "NO",
   "result": "pass",
   "note": "Re-delivery after the d857 RETURN; both faults are repaired. The item module is sha256-identical to d857 (previously correct clause by clause). H13: def-weil-pbc-qbar-category is byte-identical to NM's live IntrinsicQbarCategory record. H2: the new definition node def-per-common-stage-shift-structures (existing:true, Sheaf.Paper.PbcVerdierAxioms) owns pbcRationalHasShift, pbcRationalizationCommShift, pbcScalarCommShift, pbcPairHasShift, pbcStageInclusionCommShift and pbcPairHasZeroObject (CommonStageCalculus 593/632/687/949/988/1046, publicly re-exported) and qbarPairPretriangulated (PbcVerdierAxioms:163, statement verbatim, .choose of an exists-unique that fixes distTriang as CommonStageDistinguished); it replaces prop-weil-pbc-common-stage-calculus in stmt_deps; its stmt_deps exist and its blueprint source exists. Mechanical finding: thm-weil-pbc-verdier-axioms is genuine, since the record needs IsTriangulated pair/stage instances = pbcVerdierAxioms.1 / qbarStageTriangulated; PASS on that point. Advisories: unowned sorry pbcQbarStandardT_existsUnique; common_cohomology is a bare Nonempty; second reading is a self-check; plain CommonStageCalculus import is redundant; the constructors are also listed in two theorem records. No file changed, nothing compiled."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin",
+ "kind": "statement",
+ "title": "Etale origin and constant-model transport of one finite quotient",
+ "statement": "Let X be Noetherian, g:Y→X an immersion, d an adic coefficient datum on A [def-weil-pbc-adic-coefficient-datum], n≥0, and K a derived module over the actual nth finite coefficient ring on X [def-weil-pbc-bounded-constructible-tower]. Suppose K is bounded and every cohomology of its inverse image along g, restricted by pbcLevelConstantComparison, is relatively finite lisse. For any etale V→Y there is L in D(V_et,C/J^(n+1)), where C is the I-adic completion of A and J=IC. Its cohomology is finite locally constant and H^q(K)=0 implies H^q(L)=0 for each q. For every etale Z→V and every algebraic E in D(C/J^(n+1)), a supplied isomorphism L|Z≅constant(E) induces an isomorphism from constantAdicQuotientRealization(W.hom≫g,d,n)(E) to the actual inverse image of K on every proetale W over Z [lem-weil-pbc-constant-adic-quotient-scalar-comparison]. The original restricted cohomology is relatively finite lisse on each proetale refinement W of V. There is no geometric point, no tower, no normalization, and no existence claim for a constant-model isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL, 09B1, and the individual etale origins in the proof of Tag 09C6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply exact inverse image and constant coefficient equivalences to K. Relative finite local models make its fixed-coefficient cohomology finite locally constant on Y. Since g is an immersion into a Noetherian scheme, Y is Noetherian and the one-stratum presentation is constructible. Transfer both separate cohomological bounds, and apply finite coefficient derived origin and fully faithful bounded-below comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect zero cohomology and finite local constancy through the exact faithful comparison. Restrict to V and transfer scalars along the inverse of constantAdicQuotientMap, whose inverse is completion evaluation. Restrict the descended comparison to a supplied constant E model on Z and then to W. Comparison-pullback coherence and the canonical finite-coefficient comparison identify the two sides with the specified realization and actual inverse image of K.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the original covering sieve of finite constant module models along W→Y. Exact inverse image and its composition and coefficient-restriction comparisons identify these with the displayed pulled-back cohomology. Pullback stability of the topology gives the covering; the finite algebraic modules remain unchanged.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL, 09B1, and the individual etale origins in the proof of Tag 09C6; expanded coefficient-universe transport by F8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complex of finite locally constant proetale module sheaves descends to etale modules; constant sheaf realization detects derived scalar extension on a nonempty scheme",
+   "results": "Eight condensed-module and ordinary sheaf hits per query. No etale-origin or normalized constant quotient diagram theorem in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"mapDerivedCategory\"; \"mapDerivedCategory\"",
+   "results": "No joint match. Exact functor localization, composition and identity isomorphisms for the second query; no coefficient-origin or consecutive quotient comparison.",
+   "date": "2026-10-27",
+   "verdict": "formal tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "constantAdicQuotient.*[Rr]eduction|[Ll]isse.*[Ee]tale.*[Oo]rigin; rg on finite coefficient origins, stalk reductions, and finite-ring local constancy",
+   "results": "No Mathlib match. Existing finiteCoefficient_constructibleDerived_origin_presentation supplies one-ring descent but not the inverse-image/completion-quotient transport. FinitePerfectAdicEtaleLevelData and finitePerfectAdic_constant_models_reduction use smaller original coefficients, perfect fibres and a different completed object; they cannot accept these separately bounded AdicTower levels.",
+   "date": "2026-10-27",
+   "verdict": "no matching existing statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerConnectedEtalePresentation",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-tower-connected-etale-presentation",
+   "place": "Tags 09AL, 09B1, and the individual etale origins in the proof of Tag 09C6"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteQuotientEtaleOrigin",
+  "file": "lean/Sheaf/Paper/LisseFiniteQuotientEtaleOrigin.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin",
+  "statement": "theorem lisse_finite_quotient_etale_origin\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (K : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K))\n    (hlisse : ∀ q : ℤ,\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))))\n    (V : Y.Etale) :\n    Nonempty (LisseFiniteQuotientEtaleOrigin X Y g d n K V)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LisseFiniteQuotientEtaleOrigin",
+   "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T112341-L-1574530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T112341-L-1574530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

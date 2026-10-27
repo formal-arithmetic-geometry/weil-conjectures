@@ -5,6 +5,7 @@ Authors: SHEAF group Q39
 -/
 module
 
+public import Sheaf.Paper.CompletedAdicKoszulConstruction
 public import Sheaf.Paper.CompletedAdicCoefficientDatum
 public import Sheaf.Paper.IntrinsicKoszulCompletion
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
@@ -13,15 +14,19 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-/-! # Intrinsic Koszul completion over the completed coefficient sheaf
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.CategoryTheory.ConstantModuleKFlat
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-intrinsic-completion; Stacks Tag 099M
-(blueprint: def-weil-pbc-intrinsic-completion).
+/-! # Independence of the completed Koszul complex representative
 
-Koszul complexes are obtained by scalar extension of the recorded exterior-algebra
-construction along the residue-normalized map from the constant ring to A_T. All tensor
-products, products and mapping fibres below are in modules over A_T.
+The Koszul construction is in `CompletedAdicKoszulConstruction`. Bounded flat factors,
+exact countable products and localization give its unit-compatible representative
+comparison. Source: blueprint def-weil-pbc-intrinsic-completion.
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +34,7 @@ products, products and mapping fibres below are in modules over A_T.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
-universe t
+universe t w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped ChangeOfRings
@@ -38,354 +43,382 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type t} [CommRing A]
 
-/-- The scalar map to the completed ring is uniquely fixed by all its residue sections.
-Source: blueprint, def-weil-pbc-intrinsic-completion, the action of the generators
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: for each positive quotient use the residue homomorphism followed by the constant
-sections of its continuous-functions presheaf and sheafification. These maps commute with
-quotient transitions. The limit property gives a unique map of ring sheaves, and it is
-commutative because both rings are commutative. Maps out of a constant sheaf are fixed by
-their constant presheaf sections, so the displayed equation characterizes it uniquely. -/
-theorem completedAdicScalar_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
-    ∃! α : adicConstantRing T A ⟶ completedAdicCommRing T d,
-      ∀ (n : ℕ) (U : T.ProEtᵒᵖ) (a : ULift.{t + 1} A),
-        (completedAdicProjection T d n).hom.app U
-          (((sheafCompose (ProEt.topology T)
-            (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map α).hom.app U
-            ((koszulConstantUnit T A).app U a)) =
-        (ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)).app U
-          (ULift.up (Ideal.Quotient.mk (d.ideal ^ (n + 1)) a.down)) := by
-  let J := ProEt.topology T
-  let F := (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{t + 1} A))
-  let D := completedAdicRingSystem T d
-  let E := sheafToPresheaf J RingCat.{t + 1}
-  let q (n : ℕ) : ULift.{t + 1} A →+* completedAdicQuotient d n :=
-    RingHom.ulift (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
-  let σ (n : ℕ) : F ⟶ (completedAdicFiniteRing T d n).obj :=
-    (Functor.const T.ProEtᵒᵖ).map (RingCat.ofHom (q n)) ≫
-      ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)
-  have hσ (n : ℕ) : σ (n + 1) ≫ (completedAdicFiniteStep T d n).hom = σ n := by
-    ext U a
-    have hs := congrArg
-      (fun k ↦ (k.app U).hom
-        ((ProEtale.finiteCoefficientConstants T
-          (completedAdicQuotient d (n + 1))).app U (q (n + 1) a)))
-      (toSheafify_naturality J (completedAdicFinitePresheafStep T d n))
-    have hc : (completedAdicFinitePresheafStep T d n).app U
-        ((ProEtale.finiteCoefficientConstants T
-          (completedAdicQuotient d (n + 1))).app U (q (n + 1) a)) =
-      (ProEtale.finiteCoefficientConstants T
-        (completedAdicQuotient d n)).app U (q n a) := by
-      apply ContinuousMap.ext
-      intro x
-      rfl
-    simp only [NatTrans.comp_app, RingCat.comp_apply] at hs
-    rw [hc] at hs
-    exact hs.symm
-  let c : Cone (D ⋙ E) :=
-    { pt := F
-      π := NatTrans.ofOpSequence σ (fun n ↦ by
-        dsimp only [Functor.const_obj_map, Functor.comp_map, D, E,
-          completedAdicRingSystem]
-        rw [Functor.ofOpSequence_map_homOfLE_succ]
-        change 𝟙 F ≫ σ n = σ (n + 1) ≫ (completedAdicFiniteStep T d n).hom
-        simpa only [Category.id_comp] using (hσ n).symm) }
-  let L := isLimitOfPreserves E (limit.isLimit D)
-  let β : F ⟶ (completedAdicRing T d).obj := L.lift c
-  let F' := (Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1} A))
-  let β' : F' ⟶ (completedAdicCommRing T d).obj :=
-    { app := fun U ↦
-        letI := completedAdicCommRingStructure T d U
-        CommRingCat.ofHom (β.app U).hom
-      naturality := fun U V f ↦ (forget₂ CommRingCat RingCat).map_injective
-        (β.naturality f) }
-  let α : adicConstantRing T A ⟶ completedAdicCommRing T d :=
-    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F'
-      (completedAdicCommRing T d)).symm β'
-  have hα : toSheafify J F' ≫ α.hom = β' :=
-    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F'
-      (completedAdicCommRing T d)).apply_symm_apply β'
-  have hnorm (n : ℕ) (U : T.ProEtᵒᵖ) (a : ULift.{t + 1} A) :
-      (completedAdicProjection T d n).hom.app U
-        (((sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map α).hom.app U
-          ((koszulConstantUnit T A).app U a)) =
-        (ProEtale.finiteCoefficientScalarMap T (completedAdicQuotient d n)).app U
-          (q n a) := by
-    have ha := congrArg (fun k : F' ⟶ (completedAdicCommRing T d).obj ↦
-      (k.app U).hom a) hα
-    change (α.hom.app U).hom ((toSheafify J F').app U a) = (β.app U).hom a at ha
-    change (completedAdicProjection T d n).hom.app U
-      ((α.hom.app U).hom ((toSheafify J F').app U a)) = _
-    rw [ha]
-    exact congrArg (fun k : F ⟶ (completedAdicFiniteRing T d n).obj ↦
-      (k.app U).hom a) (L.fac c (op n))
-  refine ⟨α, hnorm, ?_⟩
-  intro ψ hψ
-  have htest : toSheafify J F' ≫ ψ.hom = β' := by
-    apply ((Functor.whiskeringRight T.ProEtᵒᵖ CommRingCat RingCat).obj
-      (forget₂ CommRingCat RingCat)).map_injective
-    change Functor.whiskerRight (toSheafify J F' ≫ ψ.hom)
-      (forget₂ CommRingCat RingCat) = β
-    apply L.hom_ext
-    intro j
-    rw [L.fac c j]
-    ext U a
-    exact hψ j.unop U a
-  apply Sheaf.hom_ext
-  apply sheafify_hom_ext J _ _ (completedAdicCommRing T d).property
-  exact htest.trans hα.symm
+section AdicTensorNaturality
+variable {M : Type*} [Category* M] [Preadditive M] [MonoidalCategory M]
+  [MonoidalPreadditive M]
+  (C D K L : CochainComplex M ℤ)
+  [HomologicalComplex.HasMapBifunctor C K (curriedTensor M) (.up ℤ)]
+  [HomologicalComplex.HasMapBifunctor C L (curriedTensor M) (.up ℤ)]
+  [HomologicalComplex.HasMapBifunctor D K (curriedTensor M) (.up ℤ)]
 
-/-- The actual scalar map, with its unique residue normalization.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicScalar (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
-    adicConstantRing T A ⟶ completedAdicCommRing T d :=
-  (completedAdicScalar_exists T d).exists.choose
+private theorem adicTensorUnit_natural (u : 𝟙_ M ⟶ K.X 0) (α : C ⟶ D) (p : ℤ) :
+    α.f p ≫ (ρ_ (D.X p)).inv ≫ D.X p ◁ u ≫
+        HomologicalComplex.ιMapBifunctor D K (curriedTensor M) (.up ℤ) p 0 p (add_zero p) =
+      ((ρ_ (C.X p)).inv ≫ C.X p ◁ u ≫
+        HomologicalComplex.ιMapBifunctor C K (curriedTensor M) (.up ℤ) p 0 p (add_zero p)) ≫
+          (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor M) (.up ℤ)).f p := by
+  rw [Category.assoc, Category.assoc, HomologicalComplex.ι_mapBifunctorMap]
+  simp only [HomologicalComplex.id_f, curriedTensor_map_app, curriedTensor_obj_map,
+    whiskerLeft_id]
+  rw [whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
+  simp
 
-set_option linter.defProp false in
-/-- The scalar-extension witness with its object and morphism tensor formulas.
-Source: blueprint def-weil-pbc-intrinsic-completion; Stacks Tag 06YY
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
-  completedAdicChangeData T (completedAdicScalar T d)
+private theorem adicTensorMap_id :
+    HomologicalComplex.mapBifunctorMap (𝟙 C) (𝟙 K) (curriedTensor M) (.up ℤ) = 𝟙 _ := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp
 
-/-- Ordinary scalar extension of constant A-module sheaves to A_T-module sheaves.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicScalarExtension (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
-    SheafOfModules.{t + 1} (adicModuleRing T A) ⥤ CompletedAdicModules T d :=
-  completedAdicChange T (completedAdicScalar T d)
+private theorem adicTensorMap_comp (E : CochainComplex M ℤ)
+    [HomologicalComplex.HasMapBifunctor E K (curriedTensor M) (.up ℤ)]
+    (α : C ⟶ D) (β : D ⟶ E) :
+    HomologicalComplex.mapBifunctorMap (α ≫ β) (𝟙 K) (curriedTensor M) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor M) (.up ℤ) ≫
+        HomologicalComplex.mapBifunctorMap β (𝟙 K) (curriedTensor M) (.up ℤ) := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp [Category.assoc]
 
-/-- Scalar extension is additive, from the normalized change-of-rings witness.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-instance completedAdicScalarExtension_additive (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
-    (completedAdicScalarExtension T d).Additive :=
-  (completedAdicScalarExtensionData T d).choose_spec.choose_spec.choose_spec.choose
+private theorem adicTensorMap_exchange
+    [HomologicalComplex.HasMapBifunctor D L (curriedTensor M) (.up ℤ)]
+    (α : C ⟶ D) (τ : K ⟶ L) :
+    HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor M) (.up ℤ) ≫
+        HomologicalComplex.mapBifunctorMap (𝟙 D) τ (curriedTensor M) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap (𝟙 C) τ (curriedTensor M) (.up ℤ) ≫
+        HomologicalComplex.mapBifunctorMap α (𝟙 L) (curriedTensor M) (.up ℤ) := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp [whisker_exchange_assoc, whiskerLeft_id]
 
-/-- The sheafified tensor generator in scalar extension. The equality transport is the
-object formula of the scalar-extension witness, not a freely chosen identification.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicScalarTensor (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (M : SheafOfModules.{t + 1} (adicModuleRing T A)) (U : T.ProEtᵒᵖ)
-    (s : (completedAdicCommRing T d).obj.obj U) (x : M.val.obj U) :
-    ((completedAdicScalarExtension T d).obj M).val.obj U :=
-  (eqToHom ((completedAdicScalarExtensionData T d).choose_spec.choose M).symm).val.app U
-    ((toSheafify (ProEt.topology T)
-      (SheafOfModules.changeOfRingsPresheaf (completedAdicScalar T d) M).presheaf).app U
-        (s ⊗ₜ[(adicConstantRing T A).obj.obj U,
-          ((completedAdicScalar T d).hom.app U).hom] x))
+end AdicTensorNaturality
 
-/-- The Koszul complex of a_1^(m+1),...,a_r^(m+1) over A_T, in degrees [-r,0].
-It is the recorded constant exterior complex followed by actual extension of scalars.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszul (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (m : ℕ) : CochainComplex (CompletedAdicModules T d) ℤ :=
-  ((completedAdicScalarExtension T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-    (koszulPowerSheaf T A r a m)
+section AdicCompletionDescent
+attribute [local irreducible] completedAdicRing HasDerivedCategory.standard
+variable (T : Scheme.{t}) (d : AdicCoefficientDatum A)
 
-/-- The inverse Koszul transition: multiplication by a_j in degree -1 of each factor,
-identity in degree zero. Extension of scalars preserves the recorded exterior map.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (m : ℕ) :
-    completedAdicKoszul T d r a (m + 1) ⟶ completedAdicKoszul T d r a m :=
-  letI := koszulConstantFunctor_preservesZero T A
-  ((completedAdicScalarExtension T d).mapHomologicalComplex (ComplexShape.up ℤ)).map
-    (((koszulConstantFunctor T A).mapHomologicalComplex (ComplexShape.up ℤ)).map
-      (koszulPowerTransition A r a m))
+private local instance adicComparisonLocallyBijective :
+    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
 
-/-- The degree-zero unit is determined by the tensor of the two scalar units.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the displayed section is compatible with restrictions since both its factors are.
-The unit-module/global-section equivalence gives the unique module map with that value on
-one. In degree zero the constant Koszul unit identifies the rank-one module with degree
-zero, and extension of scalars preserves this identification. -/
-theorem completedAdicKoszulUnitZero_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (m : ℕ) :
-    ∃! u : SheafOfModules.unit (completedAdicRing T d) ⟶ (completedAdicKoszul T d r a m).X 0,
-      ∀ U : T.ProEtᵒᵖ, u.val.app U (1 : (completedAdicRing T d).obj.obj U) =
-        completedAdicScalarTensor T d _ U 1
-          ((koszulSheafUnitZero T A r a m).val.app U
-            (1 : (adicModuleRing T A).obj.obj U)) := by
-  sorry
+private local instance adicComparisonMonoidal : MonoidalCategory (CompletedAdicModules T d) :=
+  SheafOfModules.monoidalCategory.{t, t + 1, t + 1} (completedAdicCommRing T d)
+private local instance adicComparisonTensorZero :
+    (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+    (completedAdicCommRing T d)
+private local instance adicComparisonTensorObjZero (M : CompletedAdicModules T d) :
+    ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+    (completedAdicCommRing T d) M
+private local instance adicComparisonTensorAdditive :
+    MonoidalPreadditive (CompletedAdicModules T d) :=
+  SheafOfModules.tensorPreadditive.{t + 1, t, t + 1} (completedAdicCommRing T d)
 
-/-- The specified degree-zero inclusion A_T[0] to its Koszul complex.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulUnitZero (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (m : ℕ) :
-    SheafOfModules.unit (completedAdicRing T d) ⟶ (completedAdicKoszul T d r a m).X 0 :=
-  (completedAdicKoszulUnitZero_exists T d r a m).exists.choose
+private local instance adicComparisonCoproducts :
+    HasColimitsOfSize.{0, 0} (CompletedAdicModules T d) :=
+  @SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf.{
+    0, 0, t + 1, t, t + 1, t + 1} _ _ _ (completedAdicRing T d)
+    (inferInstance : HasWeakSheafify (ProEt.topology T) AddCommGrpCat.{t + 1})
+    (WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T)
+    (inferInstance : HasColimitsOfSize.{0, 0}
+      (_root_.PresheafOfModules.{t + 1} (completedAdicRing T d).obj))
 
-/-- The total tensor C tensor Q_(m+1) over the completed ring.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulTensor (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :=
-  letI := SheafOfModules.monoidalCategory (completedAdicCommRing T d)
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-      (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
-      ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-      (completedAdicCommRing T d) M
-  CochainComplex.mapBifunctor C (completedAdicKoszul T d r a m) (curriedTensor _)
+private theorem adicKoszulPower_flat (r : ℕ) (a : Fin r → A) (m : ℕ) (i : ℤ) :
+    Module.Flat (ULift.{t + 1} A) ((koszulPower A r a m).X i) := by
+  classical
+  have (n : ℕ) : CategoryTheory.Projective
+      ((ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r
+        (fun j ↦ ULift.up (a j ^ (m + 1)))).X n) := by
+    change CategoryTheory.Projective
+      (ModuleCat.of (ULift.{t + 1} A) (⋀[ULift.{t + 1} A]^n (Fin r →₀ ULift.{t + 1} A)))
+    infer_instance
+  have : CategoryTheory.Projective ((koszulPower A r a m).X i) := by
+    change CategoryTheory.Projective
+      (((ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r
+        (fun j ↦ ULift.up (a j ^ (m + 1)))).extend ComplexShape.embeddingDownNat).X i)
+    infer_instance
+  have : Module.Projective (ULift.{t + 1} A) ((koszulPower A r a m).X i) :=
+    ModuleCat.projective_of_module_projective _
+  infer_instance
 
-/-- The tensor transition 1_C tensor q_(m+2,m+1).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulTensorStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :
-    completedAdicKoszulTensor T d r a C (m + 1) ⟶ completedAdicKoszulTensor T d r a C m :=
-  letI := SheafOfModules.monoidalCategory (completedAdicCommRing T d)
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-      (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
-      ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-      (completedAdicCommRing T d) M
-  HomologicalComplex.mapBifunctorMap (𝟙 C) (completedAdicKoszulStep T d r a m)
-    (curriedTensor _) (ComplexShape.up ℤ)
+private theorem adicKoszulPower_bounded (r : ℕ) (a : Fin r → A) (m : ℕ) :
+    (koszulPower A r a m).IsStrictlyLE 0 := by
+  apply (CochainComplex.isStrictlyLE_iff _ 0).2
+  intro i hi
+  apply HomologicalComplex.isZero_extend_X
+  intro n
+  change -(n : ℤ) ≠ i
+  omega
 
-/-- In degree p the unit sends c to c tensor 1 in the (p,0) total summand.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulTensorUnitF (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) (p : ℤ) :
-    C.X p ⟶ (completedAdicKoszulTensor T d r a C m).X p :=
-  letI := SheafOfModules.monoidalCategory (completedAdicCommRing T d)
-  letI : (curriedTensor (CompletedAdicModules T d)).PreservesZeroMorphisms :=
-    SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
-      (completedAdicCommRing T d)
-  letI : ∀ M : CompletedAdicModules T d,
-      ((curriedTensor (CompletedAdicModules T d)).obj M).PreservesZeroMorphisms :=
-    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
-      (completedAdicCommRing T d) M
-  (ρ_ (C.X p)).inv ≫ (C.X p ◁ completedAdicKoszulUnitZero T d r a m) ≫
-    HomologicalComplex.ιMapBifunctor C (completedAdicKoszul T d r a m) (curriedTensor _)
-      (ComplexShape.up ℤ) p 0 p (add_zero p)
+private theorem adicKoszulPowerSheaf_kflat (r : ℕ) (a : Fin r → A) (m : ℕ) :
+    CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+      (J := ProEt.topology T)
+      (R := completedAdicCommRing T d) (completedAdicKoszul T d r a m) := by
+  let P := koszulPower A r a m
+  have : P.IsStrictlyLE 0 := adicKoszulPower_bounded r a m
+  have hf (i : ℤ) : Module.Flat (ULift.{t + 1} A) (P.X i) := adicKoszulPower_flat r a m i
+  have hb : (HomologicalComplex.quasiIso (ModuleCat.{t + 1} (ULift.{t + 1} A))
+      (.up ℤ)).kFlat P :=
+    CochainComplex.kFlat_of_isStrictlyLE_of_flat P 0
+      (fun i ↦ (ModuleCat.flat_iff_flat (P.X i)).2 (hf i))
+  have hk : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+      (J := ProEt.topology T) (R := adicConstantRing T A)
+      (koszulPowerSheaf T A r a m) :=
+    CategoryTheory.isKFlat_constantModule.{t + 1, t} (ProEt.topology T)
+      (ULift.{t + 1} A) P ⟨fun s hs ↦ hb.1 s hs, fun s hs ↦ hb.2 s hs⟩ hf
+  let hE : (completedAdicScalarExtension T d).Additive :=
+    completedAdicScalarExtension_additive T d
+  exact SheafOfModules.changeOfRings_isKFlat_independentCoefficients.{t + 1, t, t + 1}
+    (R := adicConstantRing T A) (S := completedAdicCommRing T d)
+    (completedAdicScalar T d)
+    (koszulPowerSheaf T A r a m) (completedAdicScalarExtension T d)
+    (completedAdicScalarExtensionData T d).choose_spec.choose
+    (fun g ↦ (completedAdicScalarExtensionData T d).choose_spec.choose_spec.choose g) hk
 
-/-- The tensor units are chain maps.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the differential of the Koszul degree-zero unit is zero, since the complex has no
-positive degrees. The total differential on c tensor 1 is therefore dc tensor 1; naturality
-of the right unit isomorphism gives the displayed chain-map identity. -/
-theorem completedAdicKoszulTensorUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ)
-    (m : ℕ) (p q : ℤ) (_hpq : (ComplexShape.up ℤ).Rel p q) :
-    completedAdicKoszulTensorUnitF T d r a C m p ≫
-        (completedAdicKoszulTensor T d r a C m).d p q =
-      C.d p q ≫ completedAdicKoszulTensorUnitF T d r a C m q := by
-  sorry
+private def adicCompletedTensorMap (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) (m : ℕ) :
+    completedAdicKoszulTensor T d r f C m ⟶ completedAdicKoszulTensor T d r f D m :=
+  HomologicalComplex.mapBifunctorMap
+    (C₁ := CompletedAdicModules T d) (C₂ := CompletedAdicModules T d)
+    (D := CompletedAdicModules T d) α (𝟙 (completedAdicKoszul T d r f m))
+    (curriedTensor (CompletedAdicModules T d)) (.up ℤ)
 
-/-- The actual chain map c ↦ c tensor 1 to each Koszul tensor complex.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulTensorUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :
-    C ⟶ completedAdicKoszulTensor T d r a C m where
-  f := completedAdicKoszulTensorUnitF T d r a C m
-  comm' := completedAdicKoszulTensorUnitF_comm T d r a C m
+private theorem adicCompletedTensorMap_id (r : ℕ) (f : Fin r → A)
+    (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :
+    adicCompletedTensorMap T d r f (𝟙 C) m = 𝟙 _ := by
+  exact adicTensorMap_id (M := CompletedAdicModules T d) C (completedAdicKoszul T d r f m)
 
-/-- The termwise product B(C) of the positive-power Koszul tensor complexes.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulProduct (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :=
-  ∏ᶜ (completedAdicKoszulTensor T d r a C)
+private theorem adicCompletedTensorMap_comp (r : ℕ) (f : Fin r → A)
+    {C D E : CochainComplex (CompletedAdicModules T d) ℤ}
+    (α : C ⟶ D) (β : D ⟶ E) (m : ℕ) :
+    adicCompletedTensorMap T d r f (α ≫ β) m =
+      adicCompletedTensorMap T d r f α m ≫ adicCompletedTensorMap T d r f β m := by
+  exact adicTensorMap_comp (M := CompletedAdicModules T d) C D (completedAdicKoszul T d r f m) E α β
 
-/-- The chain map 1-s with coordinates z_m - t_m(z_(m+1)).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulOneSubShift (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
-    completedAdicKoszulProduct T d r a C ⟶ completedAdicKoszulProduct T d r a C :=
-  𝟙 _ - Pi.lift (fun m ↦ Pi.π (completedAdicKoszulTensor T d r a C) (m + 1) ≫
-    completedAdicKoszulTensorStep T d r a C m)
+private def adicCompletedProductMap (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) :
+    completedAdicKoszulProduct T d r f C ⟶ completedAdicKoszulProduct T d r f D :=
+  Pi.lift (fun m ↦ Pi.π (completedAdicKoszulTensor T d r f C) m ≫
+    adicCompletedTensorMap T d r f α m)
 
-/-- The mapping fibre with degree i terms B^i and B^(i-1). Taking the cone of -(1-s)
-and shifting by -1 gives exactly the differential (dx,(1-s)x-dy), under the canonical
-index isomorphisms of the shift. Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulFibre (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
-    CochainComplex (CompletedAdicModules T d) ℤ :=
-  (CochainComplex.mappingCone (-completedAdicKoszulOneSubShift T d r a C))⟦(-1 : ℤ)⟧
+private theorem adicCompletedProductMap_id (r : ℕ) (f : Fin r → A)
+    (C : CochainComplex (CompletedAdicModules T d) ℤ) :
+    adicCompletedProductMap T d r f (𝟙 C) = 𝟙 _ := by
+  apply Pi.hom_ext
+  intro n
+  simp [adicCompletedProductMap, adicCompletedTensorMap_id]
 
-/-- The compatible tensor units form the map u_C to B(C).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulProductUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
-    C ⟶ completedAdicKoszulProduct T d r a C :=
-  Pi.lift (completedAdicKoszulTensorUnit T d r a C)
+private theorem adicCompletedProductMap_comp (r : ℕ) (f : Fin r → A)
+    {C D E : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) (β : D ⟶ E) :
+    adicCompletedProductMap T d r f (α ≫ β) =
+      adicCompletedProductMap T d r f α ≫ adicCompletedProductMap T d r f β := by
+  apply Pi.hom_ext
+  intro n
+  simp [adicCompletedProductMap, adicCompletedTensorMap_comp, Category.assoc]
 
-/-- The completion unit c ↦ (u_C(c),0) commutes with the fibre differential.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the transition on each degree-zero Koszul unit is identity, so (1-s)u_C=0.
-The first coordinate of the fibre differential is d_B u_C=u_C d_C and the second
-coordinate is zero. Thus inclusion in the first summand is a chain map. -/
-theorem completedAdicKoszulUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ)
-    (p q : ℤ) (_hpq : (ComplexShape.up ℤ).Rel p q) :
-    ((completedAdicKoszulProductUnit T d r a C).f p ≫
-      HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r a C)
-        p (p + (-1)) (by change p + (-1) + 1 = p; omega)) ≫
-        (completedAdicKoszulFibre T d r a C).d p q =
-      C.d p q ≫ (completedAdicKoszulProductUnit T d r a C).f q ≫
-        HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r a C)
-          q (q + (-1)) (by change q + (-1) + 1 = q; omega) := by
-  sorry
+private theorem adicCompletedTensor_transition_natural (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) (m : ℕ) :
+    adicCompletedTensorMap T d r f α (m + 1) ≫ completedAdicKoszulTensorStep T d r f D m =
+      completedAdicKoszulTensorStep T d r f C m ≫ adicCompletedTensorMap T d r f α m := by
+  exact adicTensorMap_exchange (M := CompletedAdicModules T d) C D
+    (completedAdicKoszul T d r f (m + 1))
+    (completedAdicKoszul T d r f m) α _
 
-/-- The specified chain-level completion unit into the explicit mapping fibre.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicKoszulUnitComplex (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
-    C ⟶ completedAdicKoszulFibre T d r a C where
-  f p := (completedAdicKoszulProductUnit T d r a C).f p ≫
-    HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r a C)
-      p (p + (-1)) (by change p + (-1) + 1 = p; omega)
-  comm' := completedAdicKoszulUnitF_comm T d r a C
+private theorem adicCompletedProduct_shift_natural (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) :
+    completedAdicKoszulOneSubShift T d r f C ≫ adicCompletedProductMap T d r f α =
+      adicCompletedProductMap T d r f α ≫ completedAdicKoszulOneSubShift T d r f D := by
+  dsimp only [completedAdicKoszulProduct]
+  apply Pi.hom_ext
+  intro n
+  simp only [completedAdicKoszulOneSubShift, adicCompletedProductMap, Preadditive.sub_comp,
+    Preadditive.comp_sub, Category.assoc, Pi.lift_π_assoc, Pi.lift_π,
+    Category.id_comp, Category.comp_id]
+  rw [adicCompletedTensor_transition_natural]
 
-/-- The Koszul completion of a derived object, using the localization's representative.
-No K-flatness or boundedness restriction on that representative is needed: the finite free
-Koszul factors preserve quasi-isomorphisms, and exact products compute derived products.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicIntrinsicCompletion (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (K : DerivedCategory (CompletedAdicModules T d)) :
-    DerivedCategory (CompletedAdicModules T d) :=
-  DerivedCategory.Q.obj
-    (completedAdicKoszulFibre T d r a (DerivedCategory.Q.objPreimage K))
+private abbrev adicCompletedArrowFunctor (r : ℕ) (f : Fin r → A) :
+    CochainComplex (CompletedAdicModules T d) ℤ ⥤
+      Arrow (CochainComplex (CompletedAdicModules T d) ℤ) where
+  obj C := Arrow.mk (-completedAdicKoszulOneSubShift T d r f C)
+  map α := Arrow.homMk (adicCompletedProductMap T d r f α) (adicCompletedProductMap T d r f α)
+    (by simpa only [Arrow.mk_hom, Preadditive.neg_comp, Preadditive.comp_neg] using
+      congrArg Neg.neg (adicCompletedProduct_shift_natural T d r f α).symm)
+  map_id C := by
+    apply Arrow.hom_ext <;> exact adicCompletedProductMap_id T d r f C
+  map_comp α β := by
+    apply Arrow.hom_ext <;> exact adicCompletedProductMap_comp T d r f α β
 
-/-- The image of c ↦ (u_C(c),0), transported along the localization representative iso.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def completedAdicIntrinsicUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (K : DerivedCategory (CompletedAdicModules T d)) :
-    K ⟶ completedAdicIntrinsicCompletion T d r a K :=
-  (DerivedCategory.Q.objObjPreimageIso K).inv ≫
-    DerivedCategory.Q.map
-      (completedAdicKoszulUnitComplex T d r a (DerivedCategory.Q.objPreimage K))
+private abbrev adicCompletedConeFunctor (M : Type*) [Category* M] [Abelian M] :
+    Arrow (CochainComplex M ℤ) ⥤ CochainComplex M ℤ where
+  obj a := CochainComplex.mappingCone a.hom
+  map α := CochainComplex.mappingCone.map _ _ α.left α.right α.w.symm
+  map_id a := CochainComplex.mappingCone.map_id a.hom
+  map_comp α β := CochainComplex.mappingCone.map_comp _ _ _ _ _ α.w.symm _ _ β.w.symm
 
-/-- Derived I-completeness is invertibility of the specified Koszul completion map.
-The generator equation is supplied when this predicate is used for the ideal of d.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def IsCompletedAdicDerivedComplete (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal)
-    (K : DerivedCategory (CompletedAdicModules T d)) : Prop :=
-  IsIso (completedAdicIntrinsicUnit T d r a K)
+private abbrev adicCompletedFiberFunctor (r : ℕ) (f : Fin r → A) :
+    CochainComplex (CompletedAdicModules T d) ℤ ⥤ CochainComplex (CompletedAdicModules T d) ℤ :=
+  adicCompletedArrowFunctor T d r f ⋙ adicCompletedConeFunctor (CompletedAdicModules T d) ⋙
+    shiftFunctor _ (-1 : ℤ)
+
+private theorem adicCompletedTensorUnit_natural (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) (m : ℕ) :
+    α ≫ completedAdicKoszulTensorUnit T d r f D m =
+      completedAdicKoszulTensorUnit T d r f C m ≫ adicCompletedTensorMap T d r f α m := by
+  apply HomologicalComplex.hom_ext
+  intro p
+  exact adicTensorUnit_natural (M := CompletedAdicModules T d) C D (completedAdicKoszul T d r f m)
+    (completedAdicKoszulUnitZero T d r f m) α p
+
+private theorem adicCompletedProductUnit_natural (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) :
+    α ≫ completedAdicKoszulProductUnit T d r f D =
+      completedAdicKoszulProductUnit T d r f C ≫ adicCompletedProductMap T d r f α := by
+  apply Pi.hom_ext
+  intro m
+  simp only [completedAdicKoszulProductUnit, adicCompletedProductMap, Category.assoc,
+    Pi.lift_π, Pi.lift_π_assoc]
+  exact adicCompletedTensorUnit_natural T d r f α m
+
+private theorem adicCompletedTensorMap_quasiIso (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D)
+    [QuasiIso α] (m : ℕ) : QuasiIso (adicCompletedTensorMap T d r f α m) := by
+  have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 inferInstance
+  have ht := adicKoszulPowerSheaf_kflat T d r f m
+    (CochainComplex.mappingCone α) hc
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+  intro i
+  exact (ht i).of_iso (CochainComplex.mapBifunctorMappingCone₁Iso α
+    (completedAdicKoszul T d r f m) (curriedTensor (CompletedAdicModules T d)))
+
+private theorem adicProductMap_quasiIso (M : Type*) [Category* M] [Abelian M]
+    [HasCountableProducts M]
+    (hprod : ∀ (F G : ℕ → M) (a : ∀ n, F n ⟶ G n),
+      (∀ n, Epi (a n)) → Epi (Limits.Pi.map a))
+    {C D : ℕ → CochainComplex M ℤ} (α : ∀ n, C n ⟶ D n)
+    [∀ n, QuasiIso (α n)] :
+    QuasiIso (Pi.lift (fun n ↦ Pi.π C n ≫ α n)) := by
+  have : (lim (J := Discrete ℕ) (C := M)).PreservesEpimorphisms :=
+    { preserves := by
+        intro F G a ha
+        have := hprod (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+          (fun n ↦ a.app ⟨n⟩) (fun n ↦ inferInstance)
+        have he : lim.map a = (Pi.isoLimit _).inv ≫
+            Limits.Pi.map (fun n ↦ a.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+          apply limit.hom_ext
+          intro ⟨n⟩
+          simp
+        rw [he]
+        infer_instance }
+  have := hasExactLimitsOfShape_of_preservesEpi M (Discrete ℕ)
+  let a : Discrete.functor C ⟶ Discrete.functor D :=
+    Discrete.natTrans (fun n ↦ α n.as)
+  have (n : Discrete ℕ) : QuasiIso (a.app n) := by
+    change QuasiIso (α n.as)
+    infer_instance
+  exact HomologicalComplex.quasiIso_limMap a
+
+private theorem adicCompletedProductMap_quasiIso (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D)
+    [QuasiIso α] : QuasiIso (adicCompletedProductMap T d r f α) := by
+  have (n : ℕ) : QuasiIso (adicCompletedTensorMap T d r f α n) :=
+    adicCompletedTensorMap_quasiIso T d r f α n
+  exact adicProductMap_quasiIso (CompletedAdicModules T d)
+    ((ProEt.countableProducts_exact.{t, t, 0} T (completedAdicCommRing T d)).2.2 ℕ)
+    (fun n ↦ adicCompletedTensorMap T d r f α n)
+
+private theorem adicCompletedConeMap_quasiIso (M : Type*) [Category* M] [Abelian M]
+    [HasDerivedCategory M] {a b : Arrow (CochainComplex M ℤ)} (α : a ⟶ b)
+    [QuasiIso α.left] [QuasiIso α.right] :
+    QuasiIso ((adicCompletedConeFunctor M).map α) := by
+  let τ := DerivedCategory.Q.mapTriangle.map
+    (CochainComplex.mappingCone.triangleMap a.hom b.hom α.left α.right α.w.symm)
+  have h₁ : IsIso τ.hom₁ :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso M α.left).2 inferInstance
+  have h₂ : IsIso τ.hom₂ :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso M α.right).2 inferInstance
+  have := Pretriangulated.isIso₃_of_isIso₁₂ τ
+    (DerivedCategory.mappingCone_triangle_distinguished a.hom)
+    (DerivedCategory.mappingCone_triangle_distinguished b.hom) h₁ h₂
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso M _).1 this
+
+private theorem adicCompletedFiberMap_quasiIso (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D)
+    [QuasiIso α] : QuasiIso ((adicCompletedFiberFunctor T d r f).map α) := by
+  have := adicCompletedProductMap_quasiIso T d r f α
+  have : QuasiIso (((adicCompletedArrowFunctor T d r f).map α).left) :=
+    adicCompletedProductMap_quasiIso T d r f α
+  have : QuasiIso (((adicCompletedArrowFunctor T d r f).map α).right) :=
+    adicCompletedProductMap_quasiIso T d r f α
+  have := adicCompletedConeMap_quasiIso (CompletedAdicModules T d)
+    ((adicCompletedArrowFunctor T d r f).map α)
+  exact (CochainComplex.quasiIso_shift_iff
+    ((adicCompletedConeFunctor _).map ((adicCompletedArrowFunctor T d r f).map α)) (-1)).2 this
+
+private theorem adicCompletedFiberUnit_natural (r : ℕ) (f : Fin r → A)
+    {C D : CochainComplex (CompletedAdicModules T d) ℤ} (α : C ⟶ D) :
+    α ≫ completedAdicKoszulUnitComplex T d r f D =
+      completedAdicKoszulUnitComplex T d r f C ≫ (adicCompletedFiberFunctor T d r f).map α := by
+  apply HomologicalComplex.hom_ext
+  intro p
+  have hi :
+      HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r f C)
+        p (p + (-1)) (by change p + (-1) + 1 = p; omega) ≫
+          ((adicCompletedFiberFunctor T d r f).map α).f p =
+      (adicCompletedProductMap T d r f α).f p ≫
+        HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r f D)
+          p (p + (-1)) (by change p + (-1) + 1 = p; omega) := by
+    change (CochainComplex.mappingCocone.inl
+      (-completedAdicKoszulOneSubShift T d r f C)).v p p (add_zero p) ≫ _ =
+      _ ≫ (CochainComplex.mappingCocone.inl
+        (-completedAdicKoszulOneSubShift T d r f D)).v p p (add_zero p)
+    simp [adicCompletedFiberFunctor, adicCompletedConeFunctor, adicCompletedArrowFunctor,
+      CochainComplex.mappingCocone.inl,
+      CochainComplex.HomComplex.Cochain.rightShift_v _ _ _ _ _ _ _ _ rfl,
+      CochainComplex.mappingCone.map]
+  change α.f p ≫ (completedAdicKoszulProductUnit T d r f D).f p ≫ _ =
+    ((completedAdicKoszulProductUnit T d r f C).f p ≫ _) ≫ _
+  rw [Category.assoc, hi, ← Category.assoc]
+  exact congrArg (fun z : C ⟶ completedAdicKoszulProduct T d r f D ↦ z.f p ≫
+    HomologicalComplex.homotopyCofiber.inlX (-completedAdicKoszulOneSubShift T d r f D)
+      p (p + (-1)) (by change p + (-1) + 1 = p; omega))
+    (adicCompletedProductUnit_natural T d r f α)
+
+private theorem adicCompletedLocalization (M : Type*) [Category* M] [Abelian M]
+    [HasDerivedCategory M] (G : CochainComplex M ℤ ⥤ CochainComplex M ℤ)
+    (τ : 𝟭 _ ⟶ G)
+    (hG : ∀ {C D : CochainComplex M ℤ} (α : C ⟶ D),
+      QuasiIso α → QuasiIso (G.map α)) :
+    ∃ (F : DerivedCategory M ⥤ DerivedCategory M) (η : 𝟭 _ ⟶ F),
+      ∀ C : CochainComplex M ℤ,
+        ∃ e : F.obj (DerivedCategory.Q.obj C) ≅ DerivedCategory.Q.obj (G.obj C),
+          η.app (DerivedCategory.Q.obj C) ≫ e.hom = DerivedCategory.Q.map (τ.app C) := by
+  let Q := DerivedCategory.Q (C := M)
+  let W := HomologicalComplex.quasiIso M (.up ℤ)
+  have h : W.IsInvertedBy (G ⋙ Q) := by
+    intro C D α hα
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso M (G.map α)).2 (hG α hα)
+  let F := Localization.lift (G ⋙ Q) h Q
+  let σ : Q ⟶ G ⋙ Q :=
+    { app := fun C ↦ Q.map (τ.app C)
+      naturality := by
+        intro C D α
+        simp only [Functor.comp_map, ← Q.map_comp]
+        exact congrArg Q.map (τ.naturality α) }
+  let : Localization.Lifting Q W Q (𝟭 _) := ⟨Functor.rightUnitor Q⟩
+  let η := Localization.liftNatTrans Q W Q (G ⋙ Q) (𝟭 _) F σ
+  refine ⟨F, η, fun C ↦ ⟨(Localization.fac (G ⋙ Q) h Q).app C, ?_⟩⟩
+  dsimp only [η]
+  rw [Localization.liftNatTrans_app]
+  change ((𝟙 _) ≫ σ.app C ≫ (Localization.fac (G ⋙ Q) h Q).inv.app C) ≫
+    (Localization.fac (G ⋙ Q) h Q).hom.app C = _
+  rw [Category.assoc, Category.assoc, Iso.inv_hom_id_app,
+    Category.comp_id, Category.id_comp]
 
 /-- The explicit completion and its unit are independent of the complex representative.
 Source: blueprint def-weil-pbc-intrinsic-completion
@@ -403,6 +436,30 @@ theorem completedAdicIntrinsicCompletion_comparison (T : Scheme.{t}) (d : AdicCo
         completedAdicIntrinsicCompletion T d r a K,
       DerivedCategory.Q.map (completedAdicKoszulUnitComplex T d r a C) ≫ j.hom =
         e.hom ≫ completedAdicIntrinsicUnit T d r a K := by
-  sorry
+  let G := adicCompletedFiberFunctor T d r a
+  let τ : 𝟭 _ ⟶ G :=
+    { app := completedAdicKoszulUnitComplex T d r a
+      naturality := fun _ _ α ↦ adicCompletedFiberUnit_natural T d r a α }
+  obtain ⟨F, η, hη⟩ := adicCompletedLocalization (CompletedAdicModules T d) G τ
+    (by
+      intro C D α hα
+      let := hα
+      exact adicCompletedFiberMap_quasiIso T d r a α)
+  let P := DerivedCategory.Q.objPreimage K
+  let eP := DerivedCategory.Q.objObjPreimageIso K
+  obtain ⟨jC, hjC⟩ := hη C
+  obtain ⟨jP, hjP⟩ := hη P
+  refine ⟨jC.symm ≪≫ F.mapIso e ≪≫ F.mapIso eP.symm ≪≫ jP, ?_⟩
+  have hC : DerivedCategory.Q.map (τ.app C) ≫ jC.inv = η.app (DerivedCategory.Q.obj C) := by
+    rw [← hjC, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  change DerivedCategory.Q.map (τ.app C) ≫
+    jC.inv ≫ F.map e.hom ≫ F.map eP.inv ≫ jP.hom =
+      e.hom ≫ eP.inv ≫ DerivedCategory.Q.map (τ.app P)
+  rw [← Category.assoc _ jC.inv, hC, ← F.map_comp_assoc,
+    ← η.naturality_assoc (e.hom ≫ eP.inv), hjP]
+  simp only [Functor.id_map, Category.assoc]
+
+end AdicCompletionDescent
+
 
 end AlgebraicGeometry.Scheme

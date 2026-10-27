@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-reductive-centre-root-quotient",
+ "kind": "statement",
+ "title": "Centre of a split reductive group from the root lattice",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $H$ be a reductive affine $F$-group scheme [def-sc-group-scheme], meaning smooth, connected and of finite type with no nontrivial smooth connected normal unipotent subgroup. Use the torus and root conventions of [lem-sfb-reductive-borel-pair-structure]. Fix a split maximal torus $T\\subset H$, put $X=X^*(T)$, let $\\Phi\\subset X$ be the roots, and put $L=\\sum_{\\alpha\\in\\Phi}\\mathbf Z\\alpha$. For a commutative $F$-algebra $A$, let $Z(H)(A)$ consist of those elements of $H(A)$ that commute with every element of $H(A')$ after every commutative $A$-algebra extension $A'$. Then $Z(H)$ is the closed subgroup scheme $\\bigcap_{\\alpha\\in\\Phi}\\ker(\\alpha:T\\to\\mathbf G_m)$ of $T$ and there is a group-scheme isomorphism $$Z(H)\\simeq D_F(X/L)=\\operatorname{Spec}F[X/L].$$ Here $F[M]$ is the group algebra with basis $e_m$ for $m\\in M$, multiplication $e_me_n=e_{m+n}$, coproduct $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$; its spectrum is as in [def-weil-affine-spectrum]. Under this isomorphism restriction of characters $X^*(T)\\to X^*(Z(H))$ is the quotient map $X\\to X/L$. The intersection and isomorphism are scheme-theoretic, including on nonreduced test algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-weil-affine-spectrum",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-affine-group-centre-base-change], the centre functor in the statement is a closed subgroup scheme $Z\\subseteq H$. Its points centralize $T$ after every scalar extension. Applying [lem-sfb-reductive-torus-self-centralizer] over the already algebraically closed field $F$ gives $Z\\subseteq T$ scheme-theoretically. Put $N=\\ker(\\operatorname{Ad}:H\\to\\operatorname{GL}(\\operatorname{Lie}H))$. For a central point $z\\in Z(A)$, conjugation by $z$ is the identity morphism of $H_A$, since it is the identity on points over every $A$-algebra. Its differential at the identity is therefore the identity, so $z\\in N(A)$. Thus $Z\\subseteq N\\cap T$.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.7, printed p.427, first two sentences of proof; explicit differentiation over each test algebra."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-reductive-rank-one-reflections] for the $T$-weight decomposition $\\operatorname{Lie}H=\\operatorname{Lie}T\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak h_\\alpha$, where each $\\mathfrak h_\\alpha$ is one-dimensional. For every $F$-algebra $A$ and $t\\in T(A)$, the operator $\\operatorname{Ad}(t)$ is the identity on $\\operatorname{Lie}T\\otimes_F A$ and multiplication by $\\alpha(t)$ on $\\mathfrak h_\\alpha\\otimes_F A$. Choosing a nonzero basis vector in each root space shows that this operator is the identity exactly when every $\\alpha(t)=1$; this remains true when $A$ has nilpotents. Hence $N\\cap T=K:=\\bigcap_{\\alpha\\in\\Phi}\\ker\\alpha$ as subgroup functors. It is closed: in the affine torus impose the finitely many equations $\\alpha-1=0$, using the affine quotient-ring description in [def-weil-closed-immersion]. Therefore the preceding step gives $Z\\subseteq K$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph 21.1, printed p.425, and Proposition 21.8, printed p.427, first displayed equality; weight scalars are characters, not differentials."
+   }
+  },
+  {
+   "text": "The closed subgroup $K$ of the split torus is isomorphic to $D_F(M)$ for some finitely generated abelian $M$, by [lem-sfb-split-torus-subgroups-diagonalizable]. Apply [lem-sfb-adjoint-kernel-central-quotient-unipotent] to the smooth connected affine finite-type group $H$, obtaining $q:N\\to U\\subseteq\\mathcal U_{n,F}$ with kernel $Z$. The composite $D_F(M)\\simeq K\\hookrightarrow N\\xrightarrow{q}U$ is trivial by [lem-sfb-diagonalizable-to-unipotent-trivial]. Thus every $K(A)$-point lies in $\\ker q(A)=Z(A)$, for every $F$-algebra $A$. Together with $Z\\subseteq K$, this proves $Z=K$ as closed subgroup schemes. Neither $K$ nor $U$ has been assumed smooth.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.7, printed p.427, last two sentences, using 14.23 and 14.18(b)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-multiplicative-character-antiduality], the split torus has its natural evaluation identification $T\\simeq D_F(X)$. A point of $D_F(X)$ over any $F$-algebra $A$ is an algebra map $F[X]\\to A$, equivalently a group homomorphism $h:X\\to A^\\times$: send $x$ to the image of $e_x$, which is a unit with inverse the image of $e_{-x}$; conversely extend $h$ $F$-linearly. This is the affine-spectrum correspondence of [def-weil-affine-spectrum]. Under evaluation, $h(x)=x(t)$ for $t\\in T(A)$. Such an $h$ belongs to $K(A)$ exactly when $h(\\alpha)=1$ for every root. Since $L$ consists of integral sums of roots, this is equivalent to $h(l)=1$ for every $l\\in L$. The quotient-group property then gives a unique homomorphism $\\bar h:X/L\\to A^\\times$ with $h=\\bar h\\circ(X\\to X/L)$. This bijection is natural in $A$ and respects multiplication. Explicitly its inclusion into $T$ is induced contravariantly by the Hopf map $F[X]\\to F[X/L]$, $e_x\\mapsto e_{[x]}$; it commutes with coproduct, counit and antipode on each basis element. The universal $K$-point over its coordinate algebra factors as just described and gives a map $K\\to D_F(X/L)$. Conversely the universal character $X/L\\to F[X/L]^\\times$, composed with $X\\to X/L$, gives $D_F(X/L)\\to K$. The two composites are identities because their homomorphisms on $X$, respectively $X/L$, are identities. Thus $K\\simeq D_F(X/L)$ as group schemes by the affine-spectrum correspondence.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.8, printed p.427; Theorem 12.9(a),(b), pp.233--234. Explicit functor-of-points version of the character quotient."
+   }
+  },
+  {
+   "text": "The quotient $X/L$ is finitely generated since $X$ is the character group of a split torus. The character identification $X^*(D_F(X/L))=X/L$ and its naturality in [lem-sfb-multiplicative-character-antiduality] identify pullback along the inclusion of the preceding step with $x\\mapsto[x]$: the character $x$ evaluates on $\\bar h$ as $\\bar h([x])$. Replacing $K$ by $Z$ proves the asserted restriction formula. All constructions and inverse maps above used arbitrary commutative $F$-algebras, so the assertion includes nonreduced algebras. If $\\Phi$ is empty, then $L=0$, $K=T$, and the same argument gives $Z(H)=T$; no root or positive-rank case was excluded.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.8, printed p.427, character quotient and its natural map; empty-root case included."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-reductive-rank-one-reflections",
+  "def-weil-closed-immersion",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "lem-sfb-multiplicative-character-antiduality",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 21.7--21.8, printed p.427, with the unipotent adjoint-kernel quotient of 14.23 and vanishing of 14.18(b); the character quotient is expanded on arbitrary algebra-valued points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rootDatum|RootDatum|reductive|Reductive",
+   "results": "{\"t\": \"2026-10-23T14:52:55Z\", \"tool\": \"grep\", \"query\": \"rootDatum|RootDatum|reductive|Reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup centre formulas are for a particular abstract group, not scheme-theoretic centres of arbitrary reductive groups; CharacterModule is the additive Q/Z dual, not an algebraic-group character lattice."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The character group of the centre of a split reductive group is the character lattice modulo the root lattice",
+   "results": "{\"t\": \"2026-10-23T14:52:55Z\", \"tool\": \"leansearch\", \"query\": \"The character group of the centre of a split reductive group is the character lattice modulo the root lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CharacterModule\", \"SpecialLinearGroup.centerEquivRootsOfUnity.congr_simp\", \"CharacterModule.int\", \"CharacterModule.dual_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"Subgroup.center\", \"CharacterModule.instAddCommGroup\", \"Subgroup.center.isMulCommutative\"], \"digest\": \"bf4d915b451ef743\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup centre formulas are for a particular abstract group, not scheme-theoretic centres of arbitrary reductive groups; CharacterModule is the additive Q/Z dual, not an algebraic-group character lattice."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"center\"",
+   "results": "{\"t\": \"2026-10-23T14:52:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"center\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup centre formulas are for a particular abstract group, not scheme-theoretic centres of arbitrary reductive groups; CharacterModule is the additive Q/Z dual, not an algebraic-group character lattice."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centre of a split reductive algebraic group is the diagonalizable subgroup of its maximal torus cut out by all roots",
+   "results": "{\"t\": \"2026-10-23T14:52:57Z\", \"tool\": \"leanfinder\", \"query\": \"The centre of a split reductive algebraic group is the diagonalizable subgroup of its maximal torus cut out by all roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"2246e4d7ff6adbd0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup centre formulas are for a particular abstract group, not scheme-theoretic centres of arbitrary reductive groups; CharacterModule is the additive Q/Z dual, not an algebraic-group character lattice."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive group with character lattice X the scheme theoretic centre has coordinate Hopf algebra k[X modulo the integral span of the roots]",
+   "results": "{\"t\": \"2026-10-23T14:55:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive group with character lattice X the scheme theoretic centre has coordinate Hopf algebra k[X modulo the integral span of the roots]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\"], \"digest\": \"a55e1138b7ec1750\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup centre formulas are for a particular abstract group, not scheme-theoretic centres of arbitrary reductive groups; CharacterModule is the additive Q/Z dual, not an algebraic-group character lattice."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic centre of a split reductive group is the diagonalizable subgroup of the maximal torus annihilating the roots",
+   "results": "{\"t\": \"2026-10-23T20:43:26Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme theoretic centre of a split reductive group is the diagonalizable subgroup of the maximal torus annihilating the roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\"], \"digest\": \"46fb883d7c4fe09c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: centre formulas are for the special linear group or abstract groups, and character-module and Lie-algebra results do not state this group-scheme root-lattice formula."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|Reductive|rootDatum|RootDatum",
+   "results": "{\"t\": \"2026-10-23T20:43:54Z\", \"tool\": \"grep\", \"query\": \"reductive|Reductive|rootDatum|RootDatum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: centre formulas are for the special linear group or abstract groups, and character-module and Lie-algebra results do not state this group-scheme root-lattice formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The centre of a reductive algebraic group has character group the torus character lattice modulo the root lattice",
+   "results": "{\"t\": \"2026-10-23T20:43:54Z\", \"tool\": \"leansearch\", \"query\": \"The centre of a reductive algebraic group has character group the torus character lattice modulo the root lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.center\", \"SpecialLinearGroup.centerEquivRootsOfUnity.congr_simp\", \"Subgroup.center.isMulCommutative\", \"CharacterModule.int\", \"Subgroup.instNormalCenter\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"CharacterModule\", \"AddSubgroup.centerCharacteristic\"], \"digest\": \"6591b50cf90f8eab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: centre formulas are for the special linear group or abstract groups, and character-module and Lie-algebra results do not state this group-scheme root-lattice formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"center\"",
+   "results": "{\"t\": \"2026-10-23T20:43:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"center\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: centre formulas are for the special linear group or abstract groups, and character-module and Lie-algebra results do not state this group-scheme root-lattice formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any reductive algebraic group the characters of the scheme theoretic centre are the maximal torus characters modulo the integral root lattice",
+   "results": "{\"t\": \"2026-10-23T20:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"For any reductive algebraic group the characters of the scheme theoretic centre are the maximal torus characters modulo the integral root lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"LieAlgebra.IsKilling.cartanEquivDual_symm_apply_mem_corootSpace\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieSubalgebra.root\", \"LieAlgebra.lieCharacterEquivLinearDual_apply\"], \"digest\": \"8944c5901fd9a2e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: centre formulas are for the special linear group or abstract groups, and character-module and Lie-algebra results do not state this group-scheme root-lattice formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-roots-span",
+  "date": "2026-10-23",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465. Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425.",
+   "via": [
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-centre-root-quotient",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause. Reused scheme-theoretic torus self-centralization, the root-weight decomposition, diagonalizable subgroups and character antiduality. Added only the general unipotent quotient of the adjoint kernel and vanishing from diagonalizable to unipotent groups. The five steps prove the two subgroup inclusions, construct the character quotient on all algebra-valued points, and compute restriction.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), the open-direct-image finiteness input; the inherited alteration/moduli/PGL/Steinberg/rho/integral-lattice prerequisite chain is retained in blueprint.from.place and via. This item supplies Milne 21.7--21.8 for the semisimple-root-span input below that chain. Steps 1--3 realize centre containment and the adjoint-kernel calculation; steps 4--5 realize the quotient character lattice. The ancestor tool reports from.node=None, inherited unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-3f5d23d6f",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3f5d23d6f (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, together with Milne iAG2017 21.7–21.8 (p.427), 14.16–14.18 (p.284) and 14.23 (p.285). The item's statement is identical to side-live and was unsplit there. There is no repair note and no cycle. Every cited statement is in unit sk-thm-sf-ctf-stability. The five steps follow Milne's own route: (1) the centre lies in C_H(T)=T and in ker Ad; (2) N∩T is the intersection of the root kernels, because each root space is one-dimensional and weights are characters; (3) K≅D_F(M), which maps to the unipotent target of the adjoint-kernel quotient and so is trivial there, giving K⊆Z; (4)–(5) an explicit functor-of-points identification K≅D(X/L), with restriction of characters x↦[x]. This is valid on nonreduced test algebras, so it gets SL_2 in char 2 (μ_2) right; I also checked GL_n, PGL_2 and the empty-root case. New node lem-sfb-adjoint-kernel-central-quotient-unipotent is Milne 14.23 plus the quotient and the embedding into U_n (14.5), specialized to smooth connected G over an algebraically closed field; it holds for tori and in char 0, where U=1. New node lem-sfb-diagonalizable-to-unipotent-trivial is Milne 14.18(b), the direction opposite to the existing 14.18(a) node; I checked μ_p→α_p. Neither node is a duplicate: lem-ag-lie-centre covers only char 0, and the blueprint has no other unipotent or ker-Ad statement. Both nodes are statement-only, with three kinds of search recorded. Batch-5 finding: the reached nodes lem-trf-split-lattice-torus-projection (Laurent torus smooth and reduced), lem-trf-smooth-fpqc-base-descent (descent of smoothness) and lem-trf-projective-exterior-scalar-comparisons (base change of exterior powers) are generic algebra, not steps of the trace formula or of Poincaré duality, so no RETURN. Maintainer notes: blueprint.from.node=null is inherited; tools/blueprint_refs.py search returns 0 hits on every query in the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveCentreRootQuotient",
+  "declaration": "AlgebraicGeometry.reductive_centre_root_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveCentreRootQuotient.lean",
+  "statement": "theorem reductive_centre_root_quotient {F : Type u} [Field F] [IsAlgClosed F] (H T : Grp (Over (Spec (.of F)))) (iT : T ⟶ H) (hH : ReductiveTorusCentralizer.IsReductive H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) : ∃ (_ : IsCommMonObj (StandardGroupSchemes.multiplicative F)) (aH : ModObj T.X H.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (L : AddSubgroup (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))), aH.smul = (iT.hom.hom ⊗ₘ 𝟙 H.X) ≫ CategoryTheory.GrpObj.conj H.X ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T H aH χ.toMul ≠ ⊥) ∧ L = AddSubgroup.closure (Φ : Set (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) ∧ ∃ (Z : Grp (Over (Spec (.of F)))) (j : Z ⟶ T), IsClosedSubgroupScheme j.hom.hom ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], ReductiveTorusCentralizer.centralizerPoints (𝟙 H) A = Set.range (fun z : StandardGroupSchemes.affine F A ⟶ Z.X ↦ z ≫ j.hom.hom ≫ iT.hom.hom)) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun z : StandardGroupSchemes.affine F A ⟶ Z.X ↦ z ≫ j.hom.hom) = {t : StandardGroupSchemes.affine F A ⟶ T.X | ∀ α ∈ Φ, t ≫ α.toMul.hom.hom = 1}) ∧ ∃ e : Z ≅ diagonalizableGroup F ((Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ⧸ L), ∃ c : Additive (Z ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ≃+ ((Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ⧸ L), (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), c (Additive.ofMul (j ≫ χ.toMul)) = QuotientAddGroup.mk' L χ) ∧ ∀ χ : Additive (Z ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (Scheme.ΓSpecIso (.of (AddMonoidAlgebra F ((Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ⧸ L)))).hom ((e.inv ≫ χ.toMul).hom.hom.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial F))).inv (LaurentPolynomial.T 1))) = AddMonoidAlgebra.single (c χ) 1",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc12578c",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, module, report and Milne 21.7–21.8 p.427. Hypotheses match the node: IsReductive (the Borel-pair predicate; IsUnipotent includes Smooth, so not stronger), closed split maximal torus (hsplit automatic over algebraically closed F, harmless). X = actual character group; aH pinned to conjugation; Φ = nonzero character weights (Borel-pair convention); L = AddSubgroup.closure Φ. Conclusion: centralizerPoints(𝟙 H) (full scheme-theoretic centre over all A-algebras) represented by Z with closed j : Z ⟶ T; range(j) = ∩ ker α on every F-algebra including nonreduced; e : Z ≅ diagonalizableGroup F (X⧸L) in Grp; c : X*(Z) ≃+ X/L with restriction = mk', and c tied to e by the Laurent-coordinate pullback clause. Universes all u, no restriction. Edge cases Φ=∅, SL2 char 2 (μ2), PGL2, GLn, zero algebra OK. Records: only lean and added landed stmt_dep def-sfb-diagonalizable-group differ from live; dep records byte-identical; statement verbatim; new name, no collision; sorry only, no defs; source/blueprint docstrings and 5-step plan; Worker report and Second reading sections present. Minor: report says the proof-only nodes have no Lean module, but AdjointKernelCentralQuotientUnipotent.lean now exists in live (proof imports optional). No compile run (no file changed)."
+ }
+}

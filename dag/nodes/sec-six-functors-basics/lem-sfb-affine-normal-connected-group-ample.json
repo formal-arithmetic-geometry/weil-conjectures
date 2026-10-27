@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-affine-normal-connected-group-ample",
+ "kind": "statement",
+ "title": "A smooth connected group scheme over an affine normal integral Noetherian base has an ample line bundle",
+ "statement": "Let $S$ be a normal integral affine Noetherian scheme [def-pc-scheme] [def-pc-integral-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring]. Let $H\\to S$ be a smooth separated group scheme of finite presentation with geometrically connected fibres [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation] [def-weil-pbc-scheme-conventions] [def-weil-connected-scheme]. Here a group scheme means a group object in $S$-schemes, given by multiplication $H\\times_SH\\to H$, inverse $H\\to H$ and unit $S\\to H$ satisfying the group identities [def-pc-fibre-product]; commutativity is not required. Then there exists an ample invertible $\\mathcal O_H$-module on all of $H$ [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module]. In particular the conclusion is global over the given affine integral base, not merely the existence of an open cover of $S$ on which ample modules exist.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Corollary 6.14, printed p.19, version March 31, 2026, especially its affine integral base conclusion, applied to the homogeneous scheme X=H for left translation. https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf . WANTED local copy."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-connected-scheme",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-normal-group-affine-fibre-transversal] to the given $H\\to S$. Its hypotheses are exactly the assumed normal integral affine Noetherian base and smooth separated finitely presented group with geometrically connected fibres. Obtain an affine open $V\\subseteq H$ with $V_s\\ne\\varnothing$ for every $s\\in S$. This is a global geometric input; choosing an affine chart near one unit point and shrinking the base would not give it.",
+   "uses": [
+    "lem-sfb-normal-group-affine-fibre-transversal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.14, affine integral base clause; global geometric input isolated as an unsplit prerequisite."
+   }
+  },
+  {
+   "text": "Finite presentation gives quasi-compactness and quasi-separatedness by [def-sbc-locally-finite-presentation]. Apply [lem-sbc-smooth-section-component-geometrically-irreducible] to $H\\to S$ and its unit section $e$. Its open $W\\subseteq H$ contains every point in the fibre connected component through $e(s)$. Each $H_s$ is connected and contains $e(s)$, so this component is the entire fibre. Therefore $W=H$ and every $H_s$ is geometrically irreducible, in particular irreducible. The nonempty open $V_s$ is dense: if a nonempty open missed it, the two disjoint nonempty opens would contradict irreducibility.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-sbc-smooth-section-component-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Fibrewise density for the boundary construction, as in Corollary 6.13; smooth section-component theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-normal-affine-boundary-cartier] with $T=S$, $X=H$, $U=V$. An affine Noetherian base is locally Noetherian, and its normal local-ring hypothesis is the one assumed here. Smoothness, separatedness and finite presentation are given; $V$ is affine by step 1 and dense in every fibre by step 2. Hence the reduced boundary $D=(H\\setminus V)_{\\mathrm{red}}$ is an effective Cartier divisor, with support exactly $H\\setminus V$. The lemma includes the empty boundary.",
+   "uses": [
+    "lem-sfb-smooth-normal-affine-boundary-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 3.3 and Theorem 6.8, boundary-divisor construction in the Noetherian specialization."
+   }
+  },
+  {
+   "text": "Write $\\mathcal I_D$ for the ideal of $D$. It is invertible by [lemma-nagata-effective-cartier-is-invertible]. Set $L=\\mathcal I_D^\\vee=\\mathcal O_H(D)$ as in [def-pc-divisor-line-bundle]; the dual of a local free rank-one module is again free of rank one [def-sc-invertible-module]. The inclusion $\\mathcal I_D\\hookrightarrow\\mathcal O_H$ is a global section $\\sigma$ of $L$. Locally, if $\\mathcal I_D=f\\mathcal O_H$, the dual frame taking $f$ to $1$ represents $\\sigma$ by $f$. Thus its residue value is nonzero exactly off $D$, so $H_\\sigma=V$, using the section-locus definition [def-weil-pbc-ample-invertible-module]. The local sections agree since they express the same inclusion.",
+   "uses": [
+    "lemma-nagata-effective-cartier-is-invertible",
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Theorem 6.8, step 3; local calculation of the canonical divisor section, written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-affine-section-ampleness] to $H\\to S$, $L$, $n=1$ and $\\sigma$. The base is affine normal locally Noetherian; the group is smooth separated finitely presented, and geometric connectedness implies connectedness of its fibres. Step 4 gives the affine section locus $H_\\sigma=V$, and step 1 says it meets every fibre. The criterion concludes that $L$ is ample in the absolute sense on all of $H$. No base restriction or commutativity hypothesis has entered.",
+   "uses": [
+    "lem-sfb-group-affine-section-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.9 and Corollary 6.6(ii), supplied-section criterion, yielding Corollary 6.14 for left translation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-group-affine-fibre-transversal",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-sfb-smooth-normal-affine-boundary-cartier",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-group-affine-section-ampleness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Corollary 6.14 affine integral base clause, assembled from the boundary construction of Proposition 3.3/Theorem 6.8 and the supplied-section criterion; the global affine-transversal reduction is explicitly left as a new unsplit node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated connected group scheme of finite presentation over an affine normal integral Noetherian scheme has an ample invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ample\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*(quasiProjective|quasi_projective|ample)|Raynaud|homogeneous.*ample",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth group schemes with connected fibres over affine normal integral bases are globally quasi projective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a single absolutely ample line bundle on a smooth connected group over the spectrum of a Noetherian normal domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u_7) [inst : CommRing R] [Finite (MaximalSpectrum R)], Subsingleton (CommRing.Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"CommRing.relPic_eq_top\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [Subsingleton (CommRing.Pic A)], CommRing.relPic R A = ⊤\", \"doc\": \"If the Picard group of $ A $ is a subsingleton (i.e., contains only the trivial invertible module), then the relative Picard subgroup $ \\\\mathrm{relPic}(R,A) $ of $ R $ with respect to $ A $ coincides \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any integral scheme $X$, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain. This follows from the property that an integral scheme is both irreducible and reduced, ensur\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: after constructing a scheme on the finite étale splitting cover, supply a global ample module on each integral base component, so finite subsets have affine neighbourhoods and finite flat scheme descent is effective.",
+   "via": [
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-normal-connected-group-ample",
+  "worker": "stage1",
+  "summary": "Preserved the global statement and all its hypotheses. Isolated a global affine fibre-transversal as the only new statement-only geometric prerequisite; used the existing smooth-section irreducibility, Cartier-boundary and supplied-section ampleness nodes. Wrote the canonical divisor-section calculation explicitly; no gluing of unrelated local ample lines. Read Guo online; local copy WANTED.",
+  "blueprint": "The inherited ancestry has from.node=null (confirmed by blueprint_refs.py ancestor); this is a tool branch for the relative torus-quotient/global ample-module input below admissible direct image and the ctf-stability direct-image route. The latest blueprint has no duplicate statement. Steps 1--5 realize the affine-integral group-ample input in that branch.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "why": "Generic smooth-section component theorem, used only to establish irreducibility of each connected group fibre; it does not replace a unit route."
+   },
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "Generic local principal non-zero-divisor ideal fact, used for the divisor line; no group-specific route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lemma-nagata-effective-cartier-is-invertible"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3d6ca3c96",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3d6ca3c96 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-normal-group-affine-fibre-transversal and every cited statement, plus Guo amplenew-1.pdf §6 (Cor 6.6, Lemma 6.7, Thm 6.8 Steps 0-4, Cor 6.9-6.14), fetched for reading because there is no local copy. Guo's Thm 6.8 makes O(D) S-ample once there is one S-quasi-affine U with G·U=X. Cor 6.14(ii) obtains U only 'by localization on S', so its global affine-integral clause rests exactly on the input the delivery isolates as the new node (D5 handled correctly; the report honestly says the node is agent-formulated). Item statement unchanged. Step 1 cites the new node with the same hypotheses. Step 2 uses the smooth-section-component node (qcqs from finite presentation, unit section): the open is all of H, so the fibres are irreducible and V_s is dense. Step 3 checks every hypothesis of the boundary-cartier node (affine normal locally Noetherian base; smooth, separated, finitely presented; V affine and fibrewise dense) and gets D=(H\\V)_red effective Cartier. Step 4 is elementary: L=I_D^dual, sigma the inclusion, coefficient f in the dual frame, H_sigma=V; same calculation as the reviewed local node. Step 5 checks every hypothesis of group-affine-section-ampleness (n=1, affine H_sigma meeting every fibre) and concludes absolute ampleness. The new node satisfies B1-B4/B7, its searches are recorded, and rg -L finds no duplicate (the local node only shrinks the base). It is not a restatement: it asserts no line bundle, ampleness needs the Ramanujam-Samuel and square-action nodes, and the converse needs hypersurface avoidance (Gabber-Liu-Lorenzini type, not in the DAG). Small cases hold: H=S (relative dimension 0), affine H (V=H), an elliptic curve over a Dedekind ring (V=E minus the zero section), constant proper H0×S; it is true whenever the item is. Maintainer note: the source gives no global construction, so whoever splits the node must supply one (Raynaud VI WANTED) and must not cite back to the item. Accepted tool_uses: lem-sbc-smooth-section-component-geometrically-irreducible and lemma-nagata-effective-cartier-is-invertible, both generic. Batch 5: lem-trf-normal-domain-principal-divisor-kernel, reached via ramanujam-samuel, is pure commutative algebra (div(x)=0 iff x is a unit, Stacks 00PD/031T/02RL), neither assumption nor part of their proofs, so the flag is generic and the boundary-cartier citation is acceptable. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineNormalConnectedGroupAmple",
+  "declaration": "AlgebraicGeometry.exists_isAmple_of_affine_normal_connected_group",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineNormalConnectedGroupAmple.lean",
+  "statement": "theorem exists_isAmple_of_affine_normal_connected_group (S : Scheme.{u}) [IsAffine S] [IsNoetherian S] (hS : IsNormalScheme S) (H : Over S) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFinitePresentation H.hom] [QuasiCompact H.hom] [QuasiSeparated H.hom] [GeometricallyConnected H.hom] : ∃ (L : H.left.Modules) (_ : L.IsInvertible), Scheme.Modules.IsAmple H.left L",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normal integral base is the existing IsNormalScheme predicate, which includes IsIntegral and integrally closed domain stalks. Added its already-landed owning definition node to stmt_deps under the standing permission to cite landed definitions. Finite presentation is the recorded conjunction of local finite presentation, quasi-compactness and quasi-separatedness. Group objects are not assumed commutative."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3508e7e7a",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node. Mapping: S : Scheme.{u}, IsAffine, IsNoetherian, IsNormalScheme (= IsIntegral plus integrally closed domain stalks), H : Over S with GrpObj (not CommGrpObj), Smooth, IsSeparated, finite presentation as LOFP+QC+QS, Mathlib GeometricallyConnected; conclusion ∃ invertible L with absolute IsAmple (Stacks 01PS) on H.left, no base cover. No extra hypotheses or universe restriction. Edge cases: empty base excluded by integrality; H nonempty via unit; trivial, affine and proper groups covered. lean.statement is verbatim the file signature. Node statement unchanged; only stmt_deps and lean differ from live, and live has no lean record. Added stmt_dep def-sbc-normal-dominant-galois is landed in the base and owns IsNormalScheme and GeometricallyConnected. Docstrings carry source and blueprint id; all 5 proof steps present; body is sorry only; no new defs. Report has both required sections. No duplicate found. No files changed, so no compile; worker's compile was clean."
+ }
+}

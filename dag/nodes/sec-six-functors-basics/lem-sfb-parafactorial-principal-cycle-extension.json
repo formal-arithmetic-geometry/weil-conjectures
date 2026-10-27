@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-parafactorial-principal-cycle-extension",
+ "kind": "statement",
+ "title": "Extension of principal cycles using punctured local line bundles",
+ "statement": "Let $X$ be a locally Noetherian normal scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring], and let $T\\subseteq|X|$ be any set of points. A codimension-one cycle $D$ means a locally finite formal sum $\\sum_i n_i[Z_i]$, with $n_i\\in\\mathbf Z$ and distinct nonempty irreducible closed subsets $Z_i$ whose generic points $\\xi_i$ satisfy $\\dim\\mathcal O_{X,\\xi_i}=1$ [def-weil-irreducible-components, def-sc-generic-point, def-weil-pbc-krull-dimension-ring]. Here locally finite means every point has an open neighbourhood meeting only finitely many $Z_i$. For $x\\in X$, put $R_x=\\mathcal O_{X,x}$ and $K_x=\\operatorname{Frac}(R_x)$. A prime $\\mathfrak q\\subset R_x$ of height one corresponds to a generization $z_{\\mathfrak q}$ of $x$ of local-ring dimension one. The localization $(R_x)_{\\mathfrak q}$ is a discrete valuation ring; let $v_{\\mathfrak q}:K_x^\\times\\to\\mathbf Z$ denote its normalized valuation [def-weil-pbc-localization-at-prime, def-sc-discrete-valuation-ring]. Set $n_D(z)=n_i$ when $z=\\xi_i$ and $n_D(z)=0$ otherwise. Say $D$ is principal at $x$ if there exists $a_x\\in K_x^\\times$ with $v_{\\mathfrak q}(a_x)=n_D(z_{\\mathfrak q})$ for every height-one $\\mathfrak q\\subset R_x$.\nAssume that for every $x\\in X$ with $\\dim R_x\\ge2$ and $\\overline{\\{x\\}}\\cap T=\\varnothing$, every invertible module [def-sc-invertible-module] on the punctured spectrum $\\operatorname{Spec}R_x\\setminus\\{\\mathfrak m_x\\}$ [def-weil-affine-spectrum, def-weil-open-immersion] is isomorphic to its structure sheaf, where $\\mathfrak m_x$ is the maximal ideal of $R_x$. Then every codimension-one cycle $D$ that is principal at each point of $T$ is principal at every point of $X$. No quasi-compactness, separatedness, integrality of $X$, or constructibility of $T$ is assumed.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4, Corollary 21.13.15, implication (b) implies (a), with parafactoriality expressed by trivial invertible modules on the punctured local spectrum; normal Noetherian local rings of dimension at least 2 already satisfy the required Hartogs condition. Local form of principality is EGA 21.6.10(i). Read online in the English EGA translation; local EGA IV4 WANTED. No Stacks tag states this arbitrary-subset parafactorial extension criterion.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sfb-locally-finite-principal-cycle"
+ ],
+ "proof": [
+  {
+   "text": "Work locally around an arbitrary point. Choose a Noetherian affine neighbourhood $W$ inside a neighbourhood meeting only finitely many of the $Z_i$; this is possible by the assumed local finiteness and [pqf-lem-affine-open-locnoeth]. Normality restricts to opens because their local rings are unchanged. By clause (2) of [rem-pc-regular-normal], the component of $W$ containing the point is an open normal integral scheme. Choose an affine neighbourhood $V=\\operatorname{Spec}A$ inside that component. Its coordinate ring is a domain by [def-pc-integral-scheme], and is Noetherian by [pqf-lem-affine-open-locnoeth]. The stalk identification in [lem-weil-pbc-spec-domain-stalks-function-field] identifies every $A_{\\mathfrak p}$ with a normal local ring of $X$; [lem-weil-pbc-normal-domain-of-local-normal] therefore makes $A$ a normal domain. These $V$ cover $X$, each meeting only finitely many terms of $D$. Restricting $D$ to $V$ retains precisely the codimension-one generic points lying in $V$; a nonempty open of an irreducible closed set contains its generic point. Thus it gives a finite height-one divisor $D_V$ of $A$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "rem-pc-regular-normal",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 01OW (properties-lemma-locally-Noetherian), 033M (properties-lemma-normal-Noetherian), 033L (properties-lemma-integral-normal), 030B (algebra-lemma-normality-is-local); affine refinement of EGA IV4 21.13.14."
+   }
+  },
+  {
+   "text": "On such a $V$, put $K=\\operatorname{Frac}(A)$ and $M=I_A(D_V)\\subset K$, using the explicit valuation inequalities of [lem-per-divisorial-fractional-module-lattices]. That node gives a nonzero finite module, its localization at any multiplicative set, its prescribed height-one lattices, and $B=\\bigcap_{\\operatorname{ht}\\mathfrak q=1}B_{\\mathfrak q}$ for every Noetherian normal domain $B$. At $x=\\mathfrak p\\in V$, set $B=A_{\\mathfrak p}$. It is Noetherian by [lem-weil-pbc-localization-noetherian] and normal with fraction field $K$ by [lem-weil-pbc-localization-normal-domain]. Prime correspondence and equality of iterated local rings in [lem-weil-pbc-localization-prime-residue-field-iso] identify its height-one primes and valuations with the codimension-one generizations in the definition of principality above. Consequently $D$ is principal at $x$ if and only if $M_{\\mathfrak p}=aB$ for some $a\\in K^\\times$: if $v_{\\mathfrak q}(a)=n_D(z_{\\mathfrak q})$, the inequalities defining $I_B(D_x)$ say $f/a\\in\\bigcap B_{\\mathfrak q}=B$; conversely localizing $aB$ at height one gives $aB_{\\mathfrak q}=\\pi_{\\mathfrak q}^{n_D(z_{\\mathfrak q})}B_{\\mathfrak q}$, hence the required valuation equality.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0EBM (divisors-lemma-normal-class-group, embedded fractional-module construction), 0AVB (more-algebra-lemma-reflexive-over-normal), and the localization clauses of the cited nodes."
+   }
+  },
+  {
+   "text": "The locus $P=\\{x:D\\text{ is principal at }x\\}$ is open. Indeed write $M=\\sum_{i=1}^r A m_i$ using the finite generation just cited. If $M_{\\mathfrak p}=aA_{\\mathfrak p}$, represent $a=m/s$ with $m\\in M$ and $s\\notin\\mathfrak p$. Then $M_{\\mathfrak p}=mA_{\\mathfrak p}$ and $m\\ne0$. For every $i$, the fraction $m_i/m\\in K$ belongs to $A_{\\mathfrak p}$, so choose $t_i\\notin\\mathfrak p$ with $t_i m_i/m\\in A$. For $t=\\prod_i t_i\\notin\\mathfrak p$ we have $M_t=mA_t$: every generator belongs to the right side, and the reverse inclusion follows from $m\\in M$. Thus $M_{\\mathfrak q}$ is principal for every $\\mathfrak q\\in D(t)$, and step 2 gives $D(t)\\subseteq P$. The charts cover $X$, so $P$ is globally open. Put $N=X\\setminus P$; this is a closed subset disjoint from $T$.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, finite embedded fractional-module construction; explicit finite-denominator proof of openness, the closed nonprincipal locus used in EGA IV4 21.13.14."
+   }
+  },
+  {
+   "text": "No point of $N$ has local-ring dimension at most one. The local ring is a Noetherian normal local domain: on the charts this follows from [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-localization-normal-domain]. In dimension zero its maximal ideal is $(0)$, since a nonzero maximal ideal would give the strict prime chain $(0)\\subsetneq\\mathfrak m$; therefore the ring is a field and there are no height-one primes. The element $1$ represents the empty divisor. In dimension one [lem-sc-normal-dim1-dvr] gives a DVR, whose sole height-one prime is its maximal ideal. A uniformizer to the integer power given by the coefficient of $D$ represents $D$ there, including negative coefficients. Hence every point of $N$ has dimension at least two.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (algebra-lemma-characterize-dvr); EGA IV4 21.13.14, observation that the nonprincipal locus has codimension at least two."
+   }
+  },
+  {
+   "text": "Suppose $N\\ne\\varnothing$, and choose one of the integral Noetherian affine charts $V$ meeting $N$. By [lem-sc-noetherian-closed-subset-finite-components], $N\\cap V$ is the union of finitely many irreducible components; choose one, $C$. It is closed in $V$ because $N\\cap V$ is closed. By [lem-weil-pbc-scheme-sober] it has a generic point $\\eta$. Every strict generization $z$ of $\\eta$ belongs to $V$ and lies outside $N$. To see this, if $z\\in N\\cap V$, its irreducible closure in $V$ is contained in $N\\cap V$ and contains $C=\\overline{\\{\\eta\\}}^{V}$; maximality of $C$ makes the closures equal, and uniqueness of the generic point forces $z=\\eta$. Furthermore global closedness of $N$ gives $\\overline{\\{\\eta\\}}^{X}\\subseteq N$, so this closure misses $T$, even if $T$ is not contained in $V$. Step 4 gives $\\dim\\mathcal O_{X,\\eta}\\ge2$. These are exactly the two conditions under which the assumed punctured-spectrum triviality applies at $\\eta$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0BA8 (properties-lemma-Noetherian-irreducible-components); scheme sobriety; generic-point form of the local obstruction argument behind EGA IV4 21.13.14--15."
+   }
+  },
+  {
+   "text": "Write $\\mathfrak p$ for $\\eta$ on $V=\\operatorname{Spec}A$, put $B=A_{\\mathfrak p}=\\mathcal O_{X,\\eta}$, and let $U=\\operatorname{Spec}B\\setminus\\{\\mathfrak pB\\}$. By [lem-weil-pbc-spec-local-ring-canonical-morphism], the points of $U$ map to strict generizations of $\\eta$ and their local rings are unchanged. Localize the module of step 2 to $J=M_{\\mathfrak p}=I_B(D_\\eta)\\subset K$. The localization assertion of [lem-per-divisorial-fractional-module-lattices] identifies its further localizations with the divisor modules at those generizations. They are cyclic by step 5 and step 2. Apply the explicit finite-denominator argument of step 3 over $B$ around each point of $U$: $\\widetilde J|_U$ is locally free of rank one. The basic-open formula in [lem-weil-pbc-spec-module-tilde-sections] gives quasi-coherence and the trivializations $\\widetilde J|_{D(t)}=m\\mathcal O_{D(t)}$ whenever $J_t=mB_t$. Thus $L=\\widetilde J|_U$ is an invertible module in the sense of [def-sc-invertible-module]. By the hypothesis at $\\eta$, choose an isomorphism $\\phi:\\mathcal O_U\\xrightarrow{\\sim}L$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0EBM, divisor fractional modules under localization; associated-module basic-open sections; the punctured invertible module in EGA IV4 21.13.14--15."
+   }
+  },
+  {
+   "text": "Let $\\sigma=\\phi(1)\\in\\Gamma(U,L)$. On every nonempty basic open $D(t)\\subseteq U$, the basic-open formula [lem-weil-pbc-spec-module-tilde-sections] embeds $L(D(t))=J_t$ in $K$, with restriction maps the inclusions in $K$. Every such basic open contains the generic point $(0)$, and the germ of $\\sigma$ there is one element $a\\in K^\\times$; it is nonzero because $J\\otimes_B K=K$ and $\\phi$ is an isomorphism. Hence on every one of these basic opens the section $\\sigma$ is this same $a$. For a height-one prime $\\mathfrak q$ of $B$, the inequality $\\dim B\\ge2$ ensures $\\mathfrak q\\ne\\mathfrak pB$, so $\\mathfrak q\\in U$. Taking germs (the union of basic-open localizations) gives $J_{\\mathfrak q}=aB_{\\mathfrak q}$, since $\\phi_{\\mathfrak q}$ is an isomorphism. The height-one lattice formula of [lem-per-divisorial-fractional-module-lattices] now reads $aB_{\\mathfrak q}=\\pi_{\\mathfrak q}^{n_D(z_{\\mathfrak q})}B_{\\mathfrak q}$. Thus $v_{\\mathfrak q}(a)=n_D(z_{\\mathfrak q})$ for every height-one prime. This is precisely principality at $\\eta$, contradicting $\\eta\\in N$. Therefore $N=\\varnothing$ and $D$ is principal at every point of $X$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-per-divisorial-fractional-module-lattices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, embedded fractional modules and their height-one lattices; explicit rational coefficient of the punctured trivialization, proving EGA IV4 21.13.15 (b) implies (a)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "rem-pc-regular-normal",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-sc-normal-dim1-dvr",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 21.13.14--15, (b) implies (a); local PDF WANTED. Online English translation read at https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html. The written generic-obstruction proof uses the existing Stacks fractional-module construction in place of the source’s pair-parafactorial formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Weil divisor on a normal locally Noetherian scheme is locally principal if it is principal on a set T and local rings outside generizations of T are parafactorial",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.StructureSheaf.isLocallyFraction; AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred; ModuleCat.Tilde.isLocallyFraction_pred; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.StructureSheaf.IsFraction; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero Read the hits. ClassGroup.isPrincipal_of_isUnit_coeIdeal and ClassGroup.isPrincipal_coeSubmodule_of_isUnit concern invertible fractional ideals with trivial class group, not extension across points with trivial punctured Picard group. The other results concern fractions, Dedekind rings or localization, not this criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ClassGroup\", \"IsPrincipal\"",
+   "results": "[loogle] OK 4 hit(s). instFintypeClassGroupOfIsPrincipalIdealRing; ClassGroup.isPrincipal_of_isUnit_coeIdeal; ClassGroup.isPrincipal_coeSubmodule_of_isUnit; ClassGroup.extendedHom_eq_one_of_forall_isPrincipal Read the hits. ClassGroup.isPrincipal_of_isUnit_coeIdeal and ClassGroup.isPrincipal_coeSubmodule_of_isUnit concern invertible fractional ideals with trivial class group, not extension across points with trivial punctured Picard group. The other results concern fractions, Dedekind rings or localization, not this criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|[Ww]eil.*[Cc]artier|[Cc]artier.*[Ww]eil",
+   "results": "[grep] OK 0 hit(s). No hits. Read the hits. ClassGroup.isPrincipal_of_isUnit_coeIdeal and ClassGroup.isPrincipal_coeSubmodule_of_isUnit concern invertible fractional ideals with trivial class group, not extension across points with trivial punctured Picard group. The other results concern fractions, Dedekind rings or localization, not this criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of locally principal codimension one cycles across parafactorial local rings on a normal Noetherian scheme",
+   "results": "[leansearch] OK 8 hit(s). IsDedekindDomain.isPrincipalIdealRing; Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing; isPrincipalIdealRing_of_isPrincipalIdealRing_isLocalization_maximal; Ideal.ramificationIdx_eq_one_of_map_localization; AlgebraicGeometry.StructureSheaf.localRingLocalizations; FractionalIdeal.extendedHomₐ_le_one_iff; FractionalIdeal.extended_le_one_of_le_one; IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime Read the hits. ClassGroup.isPrincipal_of_isUnit_coeIdeal and ClassGroup.isPrincipal_coeSubmodule_of_isUnit concern invertible fractional ideals with trivial class group, not extension across points with trivial punctured Picard group. The other results concern fractions, Dedekind rings or localization, not this criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisor Cartier locus and trivial Picard groups of punctured local spectra imply Cartier everywhere",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred; AlgebraicGeometry.StructureSheaf.IsFraction; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; ModuleCat.Tilde.isLocallyFraction_pred; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen Read the hits. ClassGroup.isPrincipal_of_isUnit_coeIdeal and ClassGroup.isPrincipal_coeSubmodule_of_isUnit concern invertible fractional ideals with trivial class group, not extension across points with trivial punctured Picard group. The other results concern fractions, Dedekind rings or localization, not this criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|Weil.*Cartier|Cartier.*Weil|punctured.*Picard",
+   "results": "0 hits: . Read the returned signatures: fraction representations, ring Picard groups, zero loci and Dedekind class groups do not assert the punctured-spectrum arbitrary-subset extension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier locus of a Weil divisor on a normal scheme and trivial line bundles on punctured local spectra",
+   "results": "8 hits: CommRing.Pic.instSubsingletonOfIsLocalRing, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.RingedSpace.zeroLocus, Algebra.unramifiedLocus, AlgebraicGeometry.Spec_zeroLocus, Algebra.etaleLocus, AlgebraicGeometry.Scheme.zeroLocus_def, LocalizedModule.subsingleton_iff_disjoint. Read the returned signatures: fraction representations, ring Picard groups, zero loci and Dedekind class groups do not assert the punctured-spectrum arbitrary-subset extension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ClassGroup\", \"IsPrincipal\"",
+   "results": "4 hits: instFintypeClassGroupOfIsPrincipalIdealRing, ClassGroup.isPrincipal_of_isUnit_coeIdeal, ClassGroup.isPrincipal_coeSubmodule_of_isUnit, ClassGroup.extendedHom_eq_one_of_forall_isPrincipal. Read the returned signatures: fraction representations, ring Picard groups, zero loci and Dedekind class groups do not assert the punctured-spectrum arbitrary-subset extension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal locally Noetherian scheme a Weil divisor is Cartier everywhere if it is Cartier on a subset and all complementary nongenerization local spectra have trivial punctured Picard group",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs. Read the returned signatures: fraction representations, ring Picard groups, zero loci and Dedekind class groups do not assert the punctured-spectrum arbitrary-subset extension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivial invertible sheaves on punctured spectra force a Weil divisor that is principal away from a closed set to be locally principal on a normal scheme",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.isLocallyFraction, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.IsFraction, AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen. Read the returned signatures: fraction representations, ring Picard groups, zero loci and Dedekind class groups do not assert the punctured-spectrum arbitrary-subset extension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ramanujam-samuel-prime-divisor",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), proof of the second assertion: apply Corollary 21.13.15 to the set consisting of the prime-cycle generic point and the generic points of fibres; lower input to the inherited affine-boundary construction.",
+   "via": [
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-parafactorial-principal-cycle-extension",
+  "worker": "stage1",
+  "summary": "No statement correction. Reused the existing divisorial fractional-module theorem and generic algebra/topology nodes. Proved the principal locus open by explicit finite denominators; a generic point of its closed complement has a punctured invertible divisor module, whose assumed trivialization gives a rational coefficient of exactly the prescribed valuations. No new nodes or Mathlib leaves.",
+  "blueprint": "The inherited EGA IV4 21.14.3(i) application of 21.13.15 in the Ramanujam--Samuel prime-cycle step, along the recorded via chain into the affine-boundary construction. The ancestor command returns null for this inherited chain, so its null from.node and existing via list are retained. Blueprint latest (main-20261024) and whole imported blueprint searches found no statement duplicate.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Clause (2) gives integral open components of a normal Noetherian affine neighbourhood; no abelian-variety hypothesis is used."
+   },
+   {
+    "node": "lem-per-divisorial-fractional-module-lattices",
+    "why": "Generic normal-domain fractional-module construction, finiteness, localization and height-one lattices; no perverse-sheaf or alteration argument is used."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic local algebra or topology input; no theorem from its ambient unit is substituted for the inherited EGA divisor route."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic one-dimensional normal local ring criterion, used only to exclude codimension-one obstructions."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic local algebra or topology input; no theorem from its ambient unit is substituted for the inherited EGA divisor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-08142f260",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-08142f260 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery adds no new nodes, and the statement, stmt_deps and source are identical to live. Live still has the item unsplit, so no other group has superseded it, and there is no re-split repair note. proof_deps equals the union of the steps' uses, and the item is not in the closure of anything it cites, so there is no cycle. EGA IV4 21.13.14-15 is not in the local literature (only IV1-IV3), so I could not read the source. The worker filed a WANTED request and marked the proof agent-written, which is the right handling, and I checked the proof against the cited node statements instead. The statement is the (b)⇒(a) direction of EGA 21.13.15 with an arbitrary set T and the closure taken in X. That matches how the parent lem-sfb-ramanujam-samuel-prime-divisor uses it in steps 1 and 3. Step by step: (1) the charts are correct: rem-pc-regular-normal clause (2) applies to a Noetherian affine W, A is a domain by def-pc-integral-scheme and normal by 030B with 01HV, and D restricted to V is finite. (2) The principal-iff-cyclic equivalence is right: localization 00FN/00GY, height-one primes kept under 00E3, and the intersection and lattice clauses of lem-per-divisorial applied to B. (3) The finite-denominator argument shows the principal locus P is open, so N is closed and misses T. (4) Dimension 0 gives a field and dimension 1 gives a DVR (lem-sc-normal-dim1-dvr), so every point of N has dimension at least 2. (5) A component of N∩V (0BA8) has a generic point η (01IS); maximality is checked, and closure_X(η) ⊆ N misses T. (6) J~ on the punctured spectrum is invertible: 01J6 for generizations, the 01HV basic-open formula, and D(t) cannot contain pB because J is not cyclic there. (7) The section σ is a single nonzero element a of K, nonzero because J spans K, and v_q(a)=n_D(z_q) at every height-one q, which contradicts η∈N. Edge cases checked: empty X, D=0, T=X, T=∅, negative coefficients, non-quasi-compact X, and the quadric cone as a negative test. Accepted tool_uses: rem-pc-regular-normal (clause 2 only), lem-per-divisorial-fractional-module-lattices, 00E3, lem-sc-normal-dim1-dvr and 01J6, all generic algebra or topology. Batch-5 flag: the lem-trf nodes reached through lem-per-divisorial are lem-trf-normal-domain-principal-divisor-kernel (the divisor map's kernel is the units in a Noetherian normal domain; Stacks 031T/02RP), a Noetherian finite-presentation lemma and a definition. These are pure commutative algebra, outside both assumed statements and not steps of their proofs, so they do not force a RETURN. No duplicates found: rg -L for parafactorial and punctured spectrum turns up only the parent and the sibling punctured-triviality node, which is a different statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ParafactorialPrincipalCycleExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicCycle.isPrincipalAt_of_punctured_triviality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ParafactorialPrincipalCycleExtension.lean",
+  "statement": "theorem isPrincipalAt_of_punctured_triviality {X : Scheme.{u}} [IsLocallyNoetherian X] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (T : Set X) (hpunctured : ∀ x : X, 2 ≤ ringKrullDim (X.presheaf.stalk x) → Disjoint (closure ({x} : Set X)) T → ∀ L : (puncturedSpectrum (X.presheaf.stalk x)).toScheme.Modules, L.IsInvertible → Nonempty (L ≅ SheafOfModules.unit _)) (D : AlgebraicCycle X ℤ) (hD : ∀ z : X, D z ≠ 0 → ringKrullDim (X.presheaf.stalk z) = 1) (hT : ∀ x : X, x ∈ T → D.IsPrincipalAt x (hX x).1 (hX x).2) : ∀ x : X, D.IsPrincipalAt x (hX x).1 (hX x).2",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b97827487"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b97827487",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Mathematics and hypotheses match EGA IV4 21.13.15 (b)⇒(a) and the node clause by clause (normal stalks, arbitrary T, closure in X, punctured-spectrum triviality via IsInvertible ≅ unit, weilFractionOrder at all WeilHeightOnePrime, fromSpecStalk images); edge cases checked. H4: the new structure LocallyFiniteWeilCycle duplicates Mathlib AlgebraicGeometry.AlgebraicCycle X ℤ (stacks 02QR, locally finite support, equivalent to local finiteness of the closures), already used by def-per-cartier-fraction-cover and lem-per-weil-divisor-strict-local-cartier-test. FIX: new-node module now defines only AlgebraicCycle.IsPrincipalAt on Mathlib's type; the item is AlgebraicCycle.isPrincipalAt_of_punctured_triviality with D : AlgebraicCycle X ℤ and the codim-one hypothesis hD; whole new-node JSON, item lean-record and report given in fixes/. Both modules compile through nt_compile.py (2.3 s, 3.8 s, no errors)."
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "def-fix-etale-origin-scalar-pullback-data",
+ "kind": "definition",
+ "title": "Ambient mates and pullback coordinates for intrinsic etale origins",
+ "statement": "For finite commutative coefficients A and a scheme morphism p:Z→Y, construct the ambient right mate b:R_e F_Y→F_Z P_A from the site counit mate and the specified intrinsic realization/direct-image comparisons [def-fix-proper-etale-origin-scalar-data]. Define a:F_Y L_A→L_e F_Z as the inverse mate of b. Its counit identity holds on every unbounded input; on bounded-below input for qcqs p, b is the specified properOriginMateIso. For φ:A→B construct the composite scalar pullback s from the restriction and extension pullback maps [lem-weil-pbc-ring-sheaf-change-adjunction], the etale constant-coefficient tensor pullback t, and the natural tensor comparison q whose components are properOriginTensorIso. These definitions use real composites, never arbitrary witnesses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 geometric adjunction; Tag 0B56 projection counit; proetale.tex Tag 09A6: the ambient mate and its included bounded-below component"
+ },
+ "stmt_deps": [
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the maps as the displayed functorial composites; inverse mates construct originPullback without any choice of data.",
+   "uses": [
+    "def-fix-proper-etale-origin-scalar-data",
+    "lem-sf-comparison-open-tensor-coherence",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 geometric adjunction; Tag 0B56 projection counit; proetale.tex Tag 09A6: the ambient mate and its included bounded-below component"
+   }
+  },
+  {
+   "text": "The fixed-coefficient inclusion formula identifies the bounded-below mate. The inverse-mates counit formula proves the ambient counit identity; associator components are identities, giving the tensor component formula.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 geometric adjunction; Tag 0B56 projection counit; proetale.tex Tag 09A6: the ambient mate and its included bounded-below component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sfb-projection-comparison-etale-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 geometric adjunction; Tag 0B56 projection counit; proetale.tex Tag 09A6: the ambient mate and its included bounded-below component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The restriction and extension of scalars comparisons under intrinsic realization commute with geometric pullback on derived categories of sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, free-module pullback identities, and Scheme.Modules.restrictFunctorIsoPullback. These concern ordinary module pullback or free modules, not the two specified derived realization cubes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Underived pullback composition provides background but does not identify these normalized derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerLeft\", \"naturality\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*pullback|pullback.*realization",
+   "results": "0 Mathlib hits. Local rg found etaleProEtale_scalar_pullback_cube and realizationRestriction_directImage_cube; neither states the combined intrinsic cube with properOriginRestrictionIso and originPullback.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; the proved etale scalar/tensor square is reused in the assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOriginScalarProjectionSquare",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Ambient mates and pullback coordinates for intrinsic etale origins; a face of the proper-factor coefficient comparison",
+   "via": [
+    "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "lem-fix-etale-origin-scalar-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOriginScalarPullbackData",
+  "file": "lean/Sheaf/Paper/EtaleOriginScalarPullbackData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.originRealizationPushIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.originRealizationPushIso",
+   "AlgebraicGeometry.ProEtale.originMate",
+   "AlgebraicGeometry.ProEtale.originPullback",
+   "AlgebraicGeometry.ProEtale.originMate_app",
+   "AlgebraicGeometry.ProEtale.originMate_counit",
+   "AlgebraicGeometry.ProEtale.originRestrictionPullback",
+   "AlgebraicGeometry.ProEtale.originScalarPullback",
+   "AlgebraicGeometry.ProEtale.originEtaleTensorPullback",
+   "AlgebraicGeometry.ProEtale.originTensorComparison",
+   "AlgebraicGeometry.ProEtale.originTensorComparison_hom_app"
+  ],
+  "statement": "def originRealizationPushIso (A : Type u) [CommRing A] [Finite A]\n    {Z Y : Scheme.{u}} (p : Z ⟶ Y) :\n    (Scheme.sfIntrinsicDerivedEquivalence Z A).functor ⋙ directImageConstantPush A p ≅\n      (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).rightDerivedFunctor ⋙\n        (Scheme.sfIntrinsicDerivedEquivalence Y A).functor",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T094420-L-223756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T094420-L-223756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

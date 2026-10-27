@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-pointed-etale-ambient-lift",
+ "kind": "statement",
+ "title": "Pointed ambient etale lifting compatible with a changed base",
+ "statement": "Let $f:X\\to S$ be a morphism of affine schemes [def-pc-scheme, def-weil-affine-spectrum], let $j:Z\\hookrightarrow X$ be a closed immersion of finite presentation [def-weil-closed-immersion, def-sbc-locally-finite-presentation], and let $Z,W,S_1$ be affine. Let $a:S_1\\to S$ and $b:W\\to Z$ be etale morphisms [def-weil-etale-morphism], and let $r:W\\to S_1$ satisfy $ar=fjb$. Choose $w\\in W$, set $z=b(w)$, $x=j(z)$, $s=f(x)$ and $s_1=r(w)$, and suppose the canonical residue-field maps $\\kappa(z)\\to\\kappa(w)$ and $\\kappa(s)\\to\\kappa(s_1)$ are isomorphisms [def-weil-residue-field]. Put $T=X\\times_SS_1$ and $D=Z\\times_SS_1$, with fibre products as in [def-pc-fibre-product]. Then the canonical $v=(b,r):W\\to D$ is etale, and $D\\hookrightarrow T$ is a closed immersion of finite presentation between affine schemes. There exist an affine scheme $X_1$, an etale $q:X_1\\to T$, and a closed immersion $i:W\\hookrightarrow X_1$ of finite presentation such that $W\\cong D\\times_TX_1\\cong Z\\times_XX_1$ compatibly with both projections. In particular, for $g=\\operatorname{pr}_Xq$ and $f_1=\\operatorname{pr}_{S_1}q$ one has $gi=jb$, $f_1i=r$, and $fg=af_1$, and the square with sides $i,b,g,j$ is cartesian. The map $g$ is etale and, writing $x_1=i(w)$, one has $g(x_1)=x$, $f_1(x_1)=s_1$, and the canonical map $\\kappa(x)\\to\\kappa(x_1)$ is an isomorphism. Finite presentation here means locally of finite presentation, quasi-compact and quasi-separated; an elementary etale pointed neighbourhood means etale with an isomorphism on residue fields at the marked points.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057S, lemma-elementary-devissage, proof: the diagram Z′ -> Z times_S S′ -> X times_S S′, lifting by lemma-lift-etale (Tag 057R), and the completed pointed diagram."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By the affine fibre-product formula, $T=X\\times_SS_1$ and $D=Z\\times_SS_1$ are affine. Write $p:D\\to Z$, $h:D\\to T$ and $t:T\\to X$ for the projections and the map induced by $j$. The universal property identifies $D$ with $Z\\times_XT$: a pair of maps into $Z$ and $T$ agreeing in $X$ is exactly a compatible pair into $Z$ and $S_1$. Thus $h$ is the base change of $j$, and is a closed immersion of finite presentation by the two cited base-change statements.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+   }
+  },
+  {
+   "text": "The equation $ar=fjb$ defines $v=(b,r):W\\to D$ with $pv=b$. The projection $p$ is etale, being the base change of $a$ along $fj:Z\\to S$. Since $b$ and $p$ are etale and $pv=b$, etale cancellation implies that $v$ is etale.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale) and 02GW (lemma-etale-permanence), as used in flat.tex Tag 057S."
+   }
+  },
+  {
+   "text": "Apply the affine etale lifting theorem to the closed immersion $h:D\\to T$ and the etale map $v:W\\to D$. Its hypotheses hold because $T$ and $W$ are affine. It gives an affine $X_1$, an etale $q:X_1\\to T$ and $i:W\\to X_1$ for which $(i,v,q,h)$ is a fibre product. Hence $i$ is a closed immersion, and is of finite presentation since it is the base change of $h$. This gives $W\\cong D\\times_TX_1$ with both projections.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-closed-immersion-lift",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+   }
+  },
+  {
+   "text": "Put $g=tq$ and $f_1=\\operatorname{pr}_{S_1}q$. For any test scheme $U$, a map $U\\to Z\\times_XX_1$ is a pair $(c:U\\to Z,d:U\\to X_1)$ with $jc=gd$. It uniquely gives $(c,f_1d):U\\to D$, since $fjc=fgd=af_1d$, and its image in $T$ is $qd$ (both its $X$ and $S_1$ projections agree). The pullback of step 3 then gives a unique map $U\\to W$ with composites $c$ under $b$ and $d$ under $i$. Conversely any such map has these composites. These inverse constructions prove $W\\cong Z\\times_XX_1$ compatibly with both projections. The defining projections also give $gi=jb$, $f_1i=r$ and $fg=af_1$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+   }
+  },
+  {
+   "text": "The projection $t:X\\times_SS_1\\to X$ is etale by base change of $a$. Its composite with the etale $q$ is etale, so $g$ is etale. For $x_1=i(w)$ the equalities of step 4 give $g(x_1)=j(b(w))=x$ and $f_1(x_1)=r(w)=s_1$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+   }
+  },
+  {
+   "text": "The closed immersions $j$ and $i$ induce isomorphisms $j^\\#: \\kappa(x)\\to\\kappa(z)$ and $i^\\#: \\kappa(x_1)\\to\\kappa(w)$. Taking residue fields in $gi=jb$ gives $i^\\#g^\\#=b^\\#j^\\#$. The hypothesis says $b^\\#$ is an isomorphism, so $g^\\#=(i^\\#)^{-1}b^\\#j^\\#$ is an isomorphism. Thus $(X_1,x_1)\\to(X,x)$ is elementary etale with the required compatible base point.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-etale-closed-immersion-lift",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057S, lemma-elementary-devissage, final paragraph; Tag 057R, lemma-lift-etale."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(?:[Ll]ift|exists).*(?:[Ee]tale|[Ee]tale.*[Cc]losed)|(?:[Ee]tale).*(?:[Ll]ift|[Cc]losedImmersion)",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsClosedImmersion\"",
+   "results": "0 hits: none; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale morphism to a closed affine subscheme lifts to an etale morphism of the ambient scheme after compatible base change with the same pointed residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale; Algebra.Etale.baseChange; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; Algebra.Etale.formallyEtale; AlgebraicGeometry.IsClosedImmersion.lift; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an elementary etale neighborhood of a finitely presented closed affine subscheme to an elementary etale neighborhood of the ambient scheme compatibly with an etale base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale; Algebra.isOpen_etaleLocus; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.IsEtale.of_comp; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.etaleLocus; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given affine schemes Z closed in X over S and affine W etale over Z mapping to S1 etale over S, construct affine X1 etale over X times S1 with W equal to Z times X1 and preserve residue fields",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instCategoryEtale; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ee]tale|[Ee]tale.*lift|exists.*[Ee]tale",
+   "results": "12 hits: Mathlib/RingTheory/Etale/QuasiFinite.lean; Mathlib/RingTheory/Etale/QuasiFinite.lean; Mathlib/RingTheory/Etale/QuasiFinite.lean; Mathlib/RingTheory/Etale/QuasiFinite.lean; Mathlib/RingTheory/Etale/QuasiFinite.lean; Mathlib/RingTheory/Etale/StandardEtale.lean; Mathlib/RingTheory/Etale/StandardEtale.lean; Mathlib/RingTheory/Etale/Locus.lean; read the saved complete responses in search-results/. The hits concern etale stability/cancellation, etale loci, geometric-point lifts, or quasi-finite decompositions, not an ambient lift of an arbitrary closed subscheme with the two compatible cartesian squares and pointed residue fields.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale scheme over a closed affine subscheme lifts to the ambient scheme compatibly with an etale changed base and pointed residue field isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.SpecToEquivOfLocalRing. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ee]tale|[Ee]tale.*lift|exists.*[Ee]tale",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift an affine etale neighborhood of a closed subscheme after an etale base change preserving the residue field at a chosen point",
+   "results": "8 hits: Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Etale, Ideal.ResidueField.liftₐ, IsLocalRing.ResidueField.lift_residue_apply, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, StandardEtalePair.lift. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsClosedImmersion\"",
+   "results": "0 hits: none. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a surjection of rings A to A/I and an etale algebra B over A/I, extend B to an etale A algebra C with C tensor A/I isomorphic to B",
+   "results": "8 hits: Algebra.IsStandardEtale.of_surjective, Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsEtaleAt.comp, RingHom.Etale.toAlgebra, Algebra.Etale.comp, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.of_restrictScalars. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_etale_isCompl_of_quasiFiniteAt|lemma exists_fac_of_etale_of_isSepClosed|instance.*IsStableUnderBaseChange|lemma of_comp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean. Read the actual search response. None states the compatible ambient lifting with both pullback squares and the marked residue-field isomorphism; etale base change/cancellation and field-valued point lifts alone do not construct it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-module-devissage",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 2: apply elementary devissage and replace the module by its finite pushforward on a smooth family. Elementary module devissage (Stacks 057S): base-changed ambient lifting and elementary residue fields, old steps 4--6.",
+   "via": [
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pointed-etale-ambient-lift",
+  "worker": "stage1",
+  "summary": "Read Stacks 057S and 057R. Reused the existing Lean-closed affine lifting node and existing permanence nodes; gave the pullback comparison explicitly and deduced the pointed field isomorphism through the two closed immersions. No new nodes and no change to the statement.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality now has a rewritten proof in latest (main-20261023-1620); it no longer mentions flattening or semistable alteration. This item retains its existing standalone Stacks 057S route from the created.item chain: elementary devissage, final paragraph, the diagram W -> Z times_S S1 -> X times_S S1. Steps 1-3 realize that diagram and lift, step 4 its displayed fibre-product equality, and steps 5-6 its elementary pointed conclusion. No replacement of the current ancestor/unit route is asserted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic scheme-theoretic residue-field fact for the two closed immersions j and i; the trace unit supplies no replacement. Used only to verify the elementary pointed conclusion of Stacks 057S."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-e95200ab3",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-e95200ab3 (reviewer sub-agent of L); spot-checked: PASS: read the item, all nine cited statements, and the final paragraph of Stacks 057S plus 057R in flat.tex; nothing needed fixing. First stage-1 split: one commit on base db4a3f4, item unsplit on both live and side-live with no reviewed record, no repair note, no new nodes. Statement and stmt_deps are unchanged and match 057S clause by clause; no SGA is cited. proof_deps equals the union of the step uses. Step 1: T and D are affine by lem-weil-pbc-fibre-product-affine-spectra; D=Z×_X T by the universal property; so h is a closed immersion of finite presentation by closed-immersion base change and qcqs permanence (3). Step 2: p is etale by etale-base-change (1), so v is etale by cancellation (3) from pv=b. Step 3: lem-weil-pbc-affine-etale-closed-immersion-lift (Lean-closed) applies because T and W are affine and it needs no finite presentation; i is a closed immersion of finite presentation by base change. Step 4 (elementary): I checked fjc=ftqd=af_1d, h(c,f_1d)=qd, and gi=jb, f_1i=r, fg=af_1. Step 5: g=tq is etale; g(x_1)=x and f_1(x_1)=s_1. Step 6: i^#g^#=b^#j^#, with i^# and j^# isomorphisms by the declared tool use lem-weil-pbc-closed-immersion-residue-field-iso, which I accept as a generic scheme fact. The hypothesis on kappa(s) is unused but kept, so nothing is weakened. Edge cases S_1=S, empty W, non-closed points and j an isomorphism are all consistent. Duplicate search over 057S/057R: the parent elementary-module-devissage cites this item in step 3, and localized-devissage-neighborhood-transfer and lem-sbc-pointed-etale-quotient-morphism-lift state different results. Advisory only: the statement's inline qc/qs definition, which this delivery did not change."
+ }
+}

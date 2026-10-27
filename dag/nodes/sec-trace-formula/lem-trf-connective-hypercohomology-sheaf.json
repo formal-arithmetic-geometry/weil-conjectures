@@ -1,0 +1,266 @@
+{
+ "id": "lem-trf-connective-hypercohomology-sheaf",
+ "kind": "statement",
+ "title": "Connective module-sheaf hypercohomology in nonpositive degrees",
+ "statement": "Let $(Y,\\mathcal O_Y)$ be a ringed space [def-weil-locally-ringed-space-morphism], with its site of opens and open coverings [def-weil-pbc-sites-and-cohomology] in a common universe containing the opens and module values [def-weil-size-convention]. Let $E\\in D(\\mathcal O_Y)$ be an object of the unbounded derived category of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], and suppose its cohomology sheaves [def-weil-derived-cohomology-sheaves] satisfy $\\mathcal H^i(E)=0$ for all integers $i<0$. Define $H^i(V,E)=H^i(R\\Gamma(V,E))$ for each open $V$, where $R\\Gamma(V,-)$ is unbounded derived evaluation at $V$, computed on K-injective representatives, followed by forgetting scalars [def-sfb-right-derived-functor, def-pur-kinjective-complex]. Then $H^i(V,E)=0$ for every open $V$ and every $i<0$. Moreover there is a canonical isomorphism of abelian presheaves\n$$\\bigl(V\\mapsto H^0(V,E)\\bigr)\\xrightarrow{\\sim}\\bigl(V\\mapsto\\Gamma(V,\\mathcal H^0(E))\\bigr),$$\nnatural in $E$ among objects satisfying the stated vanishing. For $W\\subseteq V$, this isomorphism intertwines the derived evaluation restriction with the section restriction of the cohomology sheaf. Thus the degree-zero hypercohomology presheaf is the underlying abelian sheaf of $\\mathcal H^0(E)$, including its value on the empty open. No upper cohomological bound, quasi-compactness, or scheme hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D66 (cohomology-lemma-vanishing-and-glueing), proof of (1), third and fourth sentences: connective derived sections"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-cohomology-sheaves",
+  "def-trf-ringed-space-hypercohomology-presheaf",
+  "def-pc-open-module-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\Mod(\\mathcal O_Y)$. It is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives], which applies to an arbitrary ringed space. The assumed vanishing places $E$ in the full subcategory $D^+(\\mathcal A)$ by [def-weil-pbc-bounded-derived-subcategories]. Apply [lem-weil-pbc-dplus-injective-representative], (1) with $n=0$, and (2): choose an integer-indexed complex $I$ of injective module sheaves, $I^r=0$ for $r<0$, and an isomorphism $\\alpha:QI\\xrightarrow{\\sim}E$; $I$ is K-injective. The full-subcategory convention views $\\alpha$ also in the unbounded derived category. This chooses a single complex on $Y$, before choosing any open.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), (2)-(3), and 070J (lemma-bounded-below-injectives-K-injective); injectives.tex Tag 01DI (lemma-sheaves-modules-space)"
+   }
+  },
+  {
+   "text": "For every open $V$, let $C_V^r=\\Gamma(V,I^r)$, as an abelian group, with differential $\\Gamma(V,d_I^r)$. The site of opens of $Y$ is small, so every complex of $\\mathcal O_Y$-modules has a K-injective resolution by [prop-pur-kinjective-resolutions-exist]; this is the standing hypothesis of [def-sfb-right-derived-functor] for $F=\\Gamma(V,-)$ followed by forgetting scalars, an additive functor $\\mathcal A\\to\\mathrm{Ab}$, so $R\\Gamma(V,-)$ is defined on all of $D(\\mathcal A)$. The K-injective evaluation rule of [def-sfb-right-derived-functor], followed by the given $\\alpha$, identifies $QC_V$ with $R\\Gamma(V,E)$. Each $C_V^r$ is zero for $r<0$: the zero module sheaf has zero section groups. Therefore the formula $H^i(C_V)=\\ker d_{C_V}^i/\\operatorname{im}d_{C_V}^{i-1}$ of [def-weil-abstract-derived-category] gives $H^i(V,E)=0$ for $i<0$. This uses evaluation of the global K-injective $I$ on each open; it does not assume that evaluation preserves injectives.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (lemma-vanishing-and-glueing), proof of (1), connective derived-section calculation"
+   }
+  },
+  {
+   "text": "Since $I^{-1}=0$, [def-weil-derived-cohomology-sheaves] identifies $\\mathcal H^0(QI)$ with $Z=\\ker(d_I^0:I^0\\to I^1)$. The kernel is sectionwise by [def-weil-sheaf-of-modules-category], so its sections are exactly $\\{s\\in I^0(V):d_I^0(s)=0\\}$. Since $C_V^{-1}=0$, these same cycles, without any quotient by nonzero boundaries, are $H^0(C_V)$. Thus define the desired isomorphism by\n$$H^0(V,E)\\cong H^0(C_V)\\cong Z(V)\\xrightarrow{\\Gamma(V,\\mathcal H^0(\\alpha))}\\Gamma(V,\\mathcal H^0(E)).$$\nFor $W\\subseteq V$, restriction sends a cycle $s$ to $s|_W$, still a cycle since $d_I$ is a sheaf morphism. Both kernel identifications send that cycle to that same section, and $\\mathcal H^0(\\alpha)$ is a sheaf morphism. Evaluation restriction on the K-injective model is precisely this chain map $C_V\\to C_W$, so the displayed isomorphisms commute with the specified derived restrictions. They form an isomorphism of abelian presheaves.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (lemma-vanishing-and-glueing), proof of (1); modules.tex Section 01AF (section-kernels), sectionwise kernel formula"
+   }
+  },
+  {
+   "text": "To check canonicity and naturality, choose such models $(I,\\alpha)$ and $(J,\\beta)$ for $E,E'$ and a derived map $f:E\\to E'$. By [lem-weil-pbc-kinjective-hom-derived], the map $\\beta^{-1}f\\alpha$ is represented by a chain map $a:I\\to J$, uniquely up to chain homotopy. The derived-functor comparison in [def-sfb-right-derived-functor] computes $R\\Gamma(V,f)$ by $\\Gamma(V,a)$, and [def-weil-derived-cohomology-sheaves] computes $\\mathcal H^0(f)$ by the induced map on the kernels. Both send a cycle $s$ to $a^0(s)$, proving the naturality square. Explicitly, if $a,b$ are homotopic then [def-pur-kinjective-complex] gives $a^0-b^0=d_J^{-1}h^0+h^1d_I^0$; this vanishes on $Z$ because $J^{-1}=0$ and $d_I^0|_Z=0$. The same equation holds on sections on every open. Taking $f=1_E$ and two choices of model proves choice independence; composition and identities follow from composition and identities of the representing chain maps. Finally the right-hand presheaf is the underlying abelian sheaf of $\\mathcal H^0(E)$ by [def-weil-sheaf-of-modules-category]. Transporting its unique-gluing property along the presheaf isomorphism proves the last assertion. On the empty open every module sheaf has the zero group of sections by the empty-cover sheaf axiom, so the same calculation includes that value.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "def-weil-derived-cohomology-sheaves",
+    "def-pur-kinjective-complex",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (3), and Definition 070H (definition-K-injective); cohomology.tex Tag 0D66, proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D66 (lemma-vanishing-and-glueing), proof of (1), connective-section calculation; expanded using Tags 01DI, 013K, 070J and 070I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isGE.*[Ss]ection|[Ss]ection.*isGE|nonnegative.*injective|injective.*nonnegative",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"grep\", \"query\": \"isGE.*[Ss]ection|[Ss]ection.*isGE|nonnegative.*injective|injective.*nonnegative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/MeasureTheory/Function/JacobianOneDim.lean\"], \"digest\": \"0db0bcc8f56f5859\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of a bounded below sheaf complex with no negative cohomology have no negative cohomology and zeroth cohomology is sections of H zero",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"leansearch\", \"query\": \"Derived sections of a bounded below sheaf complex with no negative cohomology have no negative cohomology and zeroth cohomology is sections of H zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isZero_of_isStrictlyGE\", \"CochainComplex.isZero_of_isGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.instHasZeroObject\", \"CochainComplex.isZero_of_isLE\", \"CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt\", \"CochainComplex.isZero_of_isStrictlyLE\"], \"digest\": \"ecabc038a6fd24d7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"isGE\"",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"isGE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connective derived complex of module sheaves on a ringed space one nonnegative K-injective complex computes sections on all opens and degree zero is sections of its zeroth cohomology sheaf",
+   "results": "{\"t\": \"2026-10-22T06:43:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a connective derived complex of module sheaves on a ringed space one nonnegative K-injective complex computes sections on all opens and degree zero is sections of its zeroth cohomology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\"], \"digest\": \"febd66783dd4a3a1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictlyGE|isGE|homology.*[Zz]ero|[Zz]ero.*homology",
+   "results": "{\"t\": \"2026-10-22T06:43:28Z\", \"tool\": \"grep\", \"query\": \"StrictlyGE|isGE|homology.*[Zz]ero|[Zz]ero.*homology\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth hypercohomology presheaf of a complex of module sheaves with cohomology in nonnegative degrees is the underlying sheaf of its zeroth cohomology, via a nonnegative injective representative",
+   "results": "{\"t\": \"2026-10-22T06:43:39Z\", \"tool\": \"leanfinder\", \"query\": \"The zeroth hypercohomology presheaf of a complex of module sheaves with cohomology in nonnegative degrees is the underlying sheaf of its zeroth cohomology, via a nonnegative injective representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"groupCohomology.cocyclesIso₀\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\", \"groupCohomology.cochainsIso₀\", \"CochainComplex.HomComplex.leftHomologyData_H_coe\"], \"digest\": \"2becd30f23a2d8b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary sheaf cohomology, ordinary module sections and general injective/t-structure facts; no connective hypercohomology presheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|isGE.*[Ss]ection|[Ss]ection.*isGE",
+   "results": "{\"t\": \"2026-10-23T12:23:18Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|isGE.*[Ss]ection|[Ss]ection.*isGE\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\"], \"digest\": \"a44b18f824d2e3c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary sheaf cohomology, evaluation, natural homology comparisons, exact functors, or right-derived functors on objects; none gives the connective unbounded module-sheaf hypercohomology presheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth derived evaluation of a nonnegative module sheaf complex is the sections of its zeroth homology sheaf",
+   "results": "{\"t\": \"2026-10-23T12:23:18Z\", \"tool\": \"leansearch\", \"query\": \"Zeroth derived evaluation of a nonnegative module sheaf complex is the sections of its zeroth homology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isoHomologyπ₀\", \"ChainComplex.alternatingConstHomologyZero\", \"SheafOfModules.evaluation\", \"groupHomology.H0\", \"ChainComplex.alternatingConstHomologyDataZero\", \"groupHomology.shortComplexH0\", \"HomologicalComplex.zero\", \"groupHomology.H0π\"], \"digest\": \"b9c2cced17ba7152\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary sheaf cohomology, evaluation, natural homology comparisons, exact functors, or right-derived functors on objects; none gives the connective unbounded module-sheaf hypercohomology presheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"isGE\"",
+   "results": "{\"t\": \"2026-10-23T12:23:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"isGE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary sheaf cohomology, evaluation, natural homology comparisons, exact functors, or right-derived functors on objects; none gives the connective unbounded module-sheaf hypercohomology presheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connective complex of sheaves of modules, derived sections vanish in negative degrees and zeroth hypercohomology is sections of the zeroth cohomology sheaf",
+   "results": "{\"t\": \"2026-10-23T12:23:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a connective complex of sheaves of modules, derived sections vanish in negative degrees and zeroth hypercohomology is sections of the zeroth cohomology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\", \"CochainComplex.cm5b.I_d\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.isZero_of_isGE\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero\"], \"digest\": \"65a8bdd4f604d4e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary sheaf cohomology, evaluation, natural homology comparisons, exact functors, or right-derived functors on objects; none gives the connective unbounded module-sheaf hypercohomology presheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor applied to a derived category object with no negative cohomology has zeroth derived cohomology naturally isomorphic to the functor applied to zeroth cohomology",
+   "results": "{\"t\": \"2026-10-23T12:23:44Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact functor applied to a derived category object with no negative cohomology has zeroth derived cohomology naturally isomorphic to the functor applied to zeroth cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\"], \"digest\": \"f7bd5ed8e5697734\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary sheaf cohomology, evaluation, natural homology comparisons, exact functors, or right-derived functors on objects; none gives the connective unbounded module-sheaf hypercohomology presheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-local-ext-sheaf",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting BBD descent component of lem-trf-local-term-locality: the connective derived-section calculation in the proof of Tag 0D66, part (1); returned item Steps 3 and 4.",
+   "via": [
+    "lem-trf-derived-basis-local-ext-sheaf",
+    "lem-trf-derived-basis-local-hom-glue",
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-connective-hypercohomology-sheaf",
+  "worker": "stage1",
+  "summary": "Expanded the connective derived-section calculation by a single nonnegative injective representative, the sectionwise kernel formula, and K-injective morphism comparison. Proved restriction compatibility, naturality and choice independence explicitly, including the empty open; reused existing DAG nodes and created none. Statement unchanged.",
+  "blueprint": "Supporting BBD descent component of lem-trf-local-term-locality through the existing via chain: makes explicit the connective-section calculation of Tag 0D66 used in lem-trf-derived-basis-local-ext-sheaf, returned Steps 3 and 4. The latest local-term-locality blueprint was read; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Enough injectives for arbitrary ringed spaces, a generic resolution input not supplied by the local-term unit."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Nonnegative injective model and its K-injectivity for any abelian category with enough injectives; generic homological algebra for the connective calculation."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Chain-map representatives unique up to homotopy for maps into K-injectives; generic tool needed to verify naturality and choice independence."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions of all complexes of module sheaves on a small site: the standing hypothesis of def-sfb-right-derived-functor for unbounded derived evaluation. Generic homological tool, added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-39357dd3b",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-39357dd3b (reviewer sub-agent of L); spot-checked: Read in full the item's statement and all 4 steps, against Stacks cohomology.tex Tag 0D66 (lemma-vanishing-and-glueing, l.11127), proof of (1). Also checked tags 013K, 070J, 070I, 01DI and 01AF in the tag table. The delivery has no new nodes, an unchanged statement and stmt_deps, no SGA, and no re-split note. Step 1: the enough-injectives node holds for any ringed space; vanishing below 0 puts E in the full subcategory D^+; dplus (1) with n=0 and (2) gives a nonnegative injective, K-injective I with QI≅E. Step 2: by def-sfb, eta_I is an iso on K-injectives, so RGamma(V,E)≅Q Gamma(V,I), which is zero in negative degrees. Step 3: I^{-1}=0 and kernels are sectionwise, so H^0(QI)(V)=Z(V)=H^0(C_V); the derived restriction from def-sfb's universal property is the chain restriction on a K-injective model. Step 4: kinjective-hom-derived gives a chain map a, unique up to homotopy; a^0-b^0=d^{-1}h^0+h^1d^0 vanishes on Z because J^{-1}=0, which gives naturality and choice independence. The sheaf property and the empty-open value are correct. Edge cases checked: Y empty, E=0, a sheaf in degree 0, G[-1], unbounded tails, zero ring. Duplicate search: unbounded-direct-image-section-presheaf, open-ext-hypercohomology-comparison and the pc left-edge nodes are all different results. One fault (C1/C4): def-sfb-right-derived-functor requires K-injective resolutions of every complex, which unbounded RGamma(V,-) on D(O_Y) needs, and no step supplied this. FIX: cite the existing node prop-pur-kinjective-resolutions-exist (small site) in step 2, proof_deps and tool_uses. Statement and stmt_deps are untouched. The three declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ConnectiveHypercohomologySheaf",
+  "declaration": "AlgebraicGeometry.RingedSpace.connective_hypercohomology_sheaf",
+  "file": "lean/Sheaf/Topology/ConnectiveHypercohomologySheaf.lean",
+  "statement": "theorem connective_hypercohomology_sheaf (X : RingedSpace.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{wAb} AddCommGrpCat.{u}] : (∀ (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (_ : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E)) (V : Opens X) (i : ℤ), i < 0 → IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj ((openModuleDerivedSections X V).obj E))) ∧ ∃ e : ∀ (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (_ : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E)), (ringedSpaceHypercohomologyPresheaf X 0).obj E ≅ (moduleAbelianPresheaf X).obj ((DerivedCategory.homologyFunctor _ 0).obj E), (∀ (E E' : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (hE : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E)) (hE' : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E')) (f : E ⟶ E'), (ringedSpaceHypercohomologyPresheaf X 0).map f ≫ (e E' hE').hom = (e E hE).hom ≫ (moduleAbelianPresheaf X).map ((DerivedCategory.homologyFunctor _ 0).map f)) ∧ (∀ (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (hE : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E)), Presheaf.IsSheaf (Opens.grothendieckTopology X) ((ringedSpaceHypercohomologyPresheaf X 0).obj E) ∧ IsZero (((ringedSpaceHypercohomologyPresheaf X 0).obj E).obj (op ⊥))) ∧ (∀ (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (hE : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor _ i).obj E)) (M : SheafOfModules.{u} (moduleRings X)) (f : (DerivedCategory.singleFunctor _ 0).obj M ⟶ E), hypercohomologyPresheafSingleUnit X M ≫ (ringedSpaceHypercohomologyPresheaf X 0).map f ≫ (e E hE).hom = (moduleAbelianPresheaf X).map ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).inv.app M ≫ (DerivedCategory.homologyFunctor _ 0).map f))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05bbb6e88",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and Tag 0D66(1). Arbitrary ringed space X:RingedSpace.{u} with free localization universes. Negative vanishing for all connective E, opens V and i<0 via the recorded openModuleDerivedSections. Degree-zero presheaf iso ringedSpaceHypercohomologyPresheaf X 0 ≅ moduleAbelianPresheaf(H^0 E), natural in derived maps, sheaf and zero at ⊥. Canonicity is pinned by the unit normalization on M[0]→E, which uniquely determines e via the truncation H^0(E)[0]→E, and holds for the cycle identification. New def node def-trf-ringed-space-hypercohomology-presheaf is non-hollow (def-sfb rightDerivedFunctorOfQuasiIsoResolutions on real K-injective resolutions, genuine transported unit); docstrings, searches and verbatim statements were checked by script. Edge cases: X=∅, E=0, M[0], E unbounded above, i=-1. Maintainer note: localHypercohomologyPresheaf/derivedLocalAbelianSections/localAbelianSections in theorem node lem-trf-unbounded-direct-image-section-presheaf duplicate the new defs and cannot be cited under H2; repoint them to the new def node after landing. No compile run (no changes)."
+ }
+}

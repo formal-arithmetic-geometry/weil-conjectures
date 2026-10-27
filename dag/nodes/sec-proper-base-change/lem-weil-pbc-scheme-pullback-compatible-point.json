@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-scheme-pullback-compatible-point",
+ "kind": "statement",
+ "title": "A compatible pair of scheme points lifts to the fibre product",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme]. If $x\\in X$ and $y\\in Y$ satisfy $f(x)=g(y)$, there exists $z\\in X\\times_S Y$ whose two projections are $x$ and $y$ [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JT, lemma-points-fibre-product; nonemptiness of the residue-field tensor product supplies a prime, giving the stated surjectivity consequence. Exact Mathlib declaration at Mathlib/AlgebraicGeometry/PullbackCarrier.lean:306-308."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback x y h. Its exact Mathlib statement, read at PullbackCarrier.lean:306-308, returns a point z of the scheme pullback together with both projection equalities. This is the whole assertion, with no additional hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JT, lemma-points-fibre-product; exact Mathlib specialization at PullbackCarrier.lean:306-308"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lemma exists_preimage_pullback",
+   "results": "1 hits: 306; exact theorem read in Mathlib/AlgebraicGeometry/PullbackCarrier.lean:299-308",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given points in two schemes with the same image in a base scheme there is a point in their fibre product projecting to both",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.mk, AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop, AlgebraicGeometry.Scheme.exists_preimage_of_isPullback, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.mk'_y, AlgebraicGeometry.IsProper.instSndScheme; exact theorem read in Mathlib/AlgebraicGeometry/PullbackCarrier.lean:299-308",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback; exact theorem read in Mathlib/AlgebraicGeometry/PullbackCarrier.lean:299-308",
+   "date": "2026-10-25",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback",
+  "file": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "line": 306,
+  "how": "exact statement: given x, y and h : f x = g y, the theorem returns z in pullback f g and both projection equalities; signature and proof read at lines 299-308."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 0BUI final paragraph: lifting a point in each ordinary fibre to a geometric fibre when showing each open image persists",
+   "via": [
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.PullbackCarrier",
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback",
+  "statement": "lemma exists_preimage_pullback {X Y S : Scheme} {f : X ⟶ S} {g : Y ⟶ S} (x : X) (y : Y) (h : f x = g y) : ∃ z : ↑(pullback f g), pullback.fst f g z = x ∧ pullback.snd f g z = y",
+  "branch": "mathlib",
+  "by": "S8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T144038-L-1161962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T144038-L-1161962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

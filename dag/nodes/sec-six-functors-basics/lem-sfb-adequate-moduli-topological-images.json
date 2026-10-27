@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-adequate-moduli-topological-images",
+ "kind": "statement",
+ "title": "Surjectivity and closed images for adequate moduli spaces",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $k$, let $Y$ be an algebraic space over $k$, and let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space]. Underlying spaces and 2-fibre products have the conventions of [lem-sfb-smooth-presentation-closed-subsets]. Then $|\\phi|$ is surjective. For every morphism of algebraic spaces $T\\to Y$, the continuous map $|\\mathcal X\\times_YT|\\to|T|$ is closed. For any two closed substacks $\\mathcal Z_1,\\mathcal Z_2\\subseteq\\mathcal X$, one has the equality of subsets of $|Y|$\n$$\\phi(|\\mathcal Z_1|)\\cap\\phi(|\\mathcal Z_2|)=\\phi(|\\mathcal Z_1\\times_{\\mathcal X}\\mathcal Z_2|).$$\nNo finite-type, reducedness, characteristic-zero, or finite-inertia hypothesis is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper, arXiv:1005.2398v3, Theorem 5.3.1(1),(2),(4), printed pp.29--30. Primary PDF read online at https://arxiv.org/pdf/1005.2398; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-smooth-presentation-closed-subsets"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-adequate-moduli-universal-closed-topology] for all scheme maps to $Y$. All 2-fibre products $\\mathcal X_T$, $\\mathcal X_W=\\mathcal X_T\\times_TW$ below are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products], so the topology statements of [lem-sfb-smooth-presentation-closed-subsets] apply to them. Choose a surjective etale scheme atlas $V\\to Y$. Its pullback map $|\\mathcal X_V|\\to|V|$ is surjective; lifting a point of $Y$ first to $V$ and then to $\\mathcal X_V$ proves surjectivity of $|\\phi|$. For any algebraic space $T\\to Y$, choose a surjective etale scheme atlas $W\\to T$. If $D\\subseteq|\\mathcal X_T|$ is closed, its inverse image $D_W$ is closed. The cited scheme assertion applied to $W\\to Y$ makes its image in $W$ closed. Write $D=|\\mathcal D|$ for the reduced closed substack given by [lem-sfb-smooth-presentation-closed-subsets]; by its point-surjectivity clause $|\\mathcal D\\times_TW|$ has image $D_W$ in $|\\mathcal X_W|$, and by the same lemma images commute with this base change, so that image equals the inverse image in $W$ of the image of $D$ in $T$. The topology of $T$ is the quotient topology of its atlas; hence the image of $D$ in $T$ is closed. This proves the first two clauses, without asserting that arbitrary base changes of $\\phi$ remain adequate.",
+   "uses": [
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(1),(2),(4), pp.29--30; disjoint-substack power-lifting argument giving (4). Read online https://arxiv.org/pdf/1005.2398; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Set $\\mathcal Z=\\mathcal Z_1\\times_{\\mathcal X}\\mathcal Z_2$ and $C=\\phi(|\\mathcal Z|)$. It is a closed subset by Step 1. The inclusion $C\\subseteq\\phi(|\\mathcal Z_1|)\\cap\\phi(|\\mathcal Z_2|)$ follows from the two projections. For the reverse inclusion, fix $y\\notin C$ and choose an affine etale neighbourhood $U=\\operatorname{Spec}A\\to Y$ of a lift $u$ of $y$, factoring through $Y\\setminus C$. Such charts are obtained by restricting an etale scheme atlas to the inverse image of this open and then taking an affine open containing a lift. By [lem-sfb-smooth-presentation-closed-subsets], the two closed substacks $\\mathcal Z_{1,U},\\mathcal Z_{2,U}$ of $\\mathcal X_U$ are disjoint on point spaces: a point in their intersection would lift to their 2-fibre product and hence map into $C$. Since $\\mathcal X_U$ is an algebraic stack over $k$ by [lem-sfb-algebraic-stack-fibre-products], apply [lem-sfb-disjoint-closed-substacks-algebra-quotient] on $\\mathcal X_U$: its canonical map $\\mathcal O_{\\mathcal X_U}\\twoheadrightarrow\\mathcal B_1\\times\\mathcal B_2$ is a surjection of quasi-coherent algebras.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(1),(2),(4), pp.29--30; disjoint-substack power-lifting argument giving (4). Read online https://arxiv.org/pdf/1005.2398; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply condition (2) of [def-sfb-adequate-moduli-space] on this affine etale chart to the section $(0,1)$ of the quotient algebra from Step 2. It supplies a positive integer $N$ and $f\\in\\Gamma(\\mathcal X_U,\\mathcal O)$ mapping to $(0,1)^N=(0,1)$. Condition (1), evaluated on $U$ with the direct-image convention of [def-sfb-stack-quasi-coherent-algebra], identifies $f$ with the pullback of $a\\in A$. Thus $a$ restricts to zero on $\\mathcal Z_{1,U}$ and to one on $\\mathcal Z_{2,U}$. If $y$ belonged to both original images, the base-change image assertion of [lem-sfb-smooth-presentation-closed-subsets] would put $u$ in both images over $U$. Choose field-valued representatives of points over $u$ in each substack. The residue homomorphisms $\\kappa(u)\\to L_1,L_2$ are injective; evaluation therefore gives both $a(u)=0$ and $a(u)=1$ in the field $\\kappa(u)$, a contradiction. Hence every point in both images lies in $C$, proving the equality.",
+   "uses": [
+    "def-sfb-adequate-moduli-space",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(1),(2),(4), pp.29--30; disjoint-substack power-lifting argument giving (4). Read online https://arxiv.org/pdf/1005.2398; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adequate-moduli-universal-closed-topology",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+  "def-sfb-adequate-moduli-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-algebraic-stack-fibre-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Theorem 5.3.1(1),(2),(4), pp.29--30; disjoint-substack power-lifting argument giving (4). Read online https://arxiv.org/pdf/1005.2398; local PDF WANTED. Agent writes out the disjoint-quotient separation argument and scheme-chart descent; no local copy of Alper is present."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adequate moduli space of an algebraic stack is surjective universally closed and images of two closed substacks intersect exactly in the image of their intersection",
+   "results": "Read actual hits: AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.IsProper, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.isProper_iff; 8 hits; digest a04f445d32653c77",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern morphisms of schemes assumed universally closed or proper, not adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alper adequate moduli map algebraic stack topological orbit closure equivalence closed images",
+   "results": "Read actual hits: AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.isClosedMap_iff_specializingMap, AlgebraicGeometry.isAffineHom_of_isInducing, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.isDominant_of_of_appTop_injective, AlgebraicGeometry.IsClosedImmersion; 8 hits; digest 07e8decfbce21128",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern morphisms of schemes assumed universally closed or proper, not adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"adequate\"",
+   "results": "Read actual hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern morphisms of schemes assumed universally closed or proper, not adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|geometricallyReductive|geometrically_reductive",
+   "results": "Read actual hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern morphisms of schemes assumed universally closed or proper, not adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli space of an algebraic stack is universally closed and surjective",
+   "results": "Read actual hits: AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyClosed.of_comp_surjective, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated; 8 hits; digest 33d3c78a3db08ff5",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern morphisms of schemes assumed universally closed or proper, not adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|geometrically.?reductive",
+   "results": "{\"t\": \"2026-10-23T10:07:43Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|geometrically.?reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties do not prove these assertions for adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"adequate\"",
+   "results": "{\"t\": \"2026-10-23T10:07:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties do not prove these assertions for adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adequate moduli space of an algebraic stack, a section of the sum of two quasi coherent ideals has a positive power in the sum of their global section ideals",
+   "results": "{\"t\": \"2026-10-23T10:07:46Z\", \"tool\": \"leanfinder\", \"query\": \"For an adequate moduli space of an algebraic stack, a section of the sum of two quasi coherent ideals has a positive power in the sum of their global section ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_of_isAffine\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_ofIdeals_le\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_of_iSup_eq_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\"], \"digest\": \"1f560d852d94fba2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties do not prove these assertions for adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adequate moduli space is surjective and universally closed and preserves intersections of images of closed substacks",
+   "results": "{\"t\": \"2026-10-23T10:19:02Z\", \"tool\": \"leanfinder\", \"query\": \"An adequate moduli space is surjective and universally closed and preserves intersections of images of closed substacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.SurjectiveOnStalks\"], \"digest\": \"1f73b30d1df9e4ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties do not prove these assertions for adequate moduli spaces of algebraic stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adequate moduli space of an algebraic stack is universally closed and surjective",
+   "results": "{\"t\": \"2026-10-23T10:26:46Z\", \"tool\": \"leansearch\", \"query\": \"An adequate moduli space of an algebraic stack is universally closed and surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_comp_surjective\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\"], \"digest\": \"dff2c5b2b70c6c41\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties do not prove these assertions for adequate moduli spaces of algebraic stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-quotient-orbit-topology",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Adequate quotient surjectivity, closed images and intersection of images used for the affine invariant quotient.",
+   "via": [
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-moduli-topological-images",
+  "worker": "stage1",
+  "summary": "Reuse the existing universal closed topology node; extend its scheme tests to algebraic-space tests using atlas quotient topology. Prove the intersection assertion by removing the closed intersection image and lifting (0,1) on disjoint closed substacks. One new generic stack quotient-algebra input, no new copy of a target clause.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Adequate quotient surjectivity, closed images and intersection of images used for the affine invariant quotient. These steps realize its adequate quotient topology prerequisite; current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the recorded ancestral route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-959a67f88",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-959a67f88 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. Source: I downloaded Alper arXiv:1005.2398v3 and read Thm 5.3.1 on p.30. The item states exactly clauses (1) surjective, (2) universally closed (base changes by algebraic spaces) and (4) im Z1∩im Z2=im(Z1∩Z2), with no added hypotheses. Alper derives (4) from Lemma 5.2.12(2). The worker's proof of (4) takes a different route that is still valid: remove the closed image C, then on an affine étale chart over Y∖C lift (0,1) by power lifting (condition (2)) to a regular function (condition (1)), which must take the values 0 and 1 at u. Step 1 uses the existing scheme-test node lem-sfb-adequate-moduli-universal-closed-topology plus quotient topology and base change of images, which I checked against the statements. The new node lem-sfb-disjoint-closed-substacks-algebra-quotient is true: B_a is the big-site sheaf of x^*i_*O, hence quasi-coherent, and disjointness on affine T gives I1+I2=R, so CRT makes O→B1×B2 surjective. I tested it with empty Z_a, empty X, nonreduced ideals and char p. It is statement-only, self-contained, and not a clause of the item. The only near-match in the DAG is the ring-level Mathlib CRT node lem-pc-crt-ideal-quotient-product, which is not a duplicate. No cycle. No SGA. Batch-5 flags: all four cited closures reach trf only through general definitions (def-trf-algebraic-space, def-trf-space-quasi-coherent-module), outside both assumptions, so I accepted them. FIX (C1/E1): Steps 1 and 2 apply the topology lemma and the new node to X_T, X_W, X_U without showing these are algebraic stacks. I added lem-sfb-algebraic-stack-fibre-products (same unit; its tool_use already recorded) to the steps and to proof_deps. Step 1 now also uses the reduced closed substack on D and its point surjectivity for the image of D_W. Only proof/proof_deps changed. Advisory: the existing universal-closed-topology node overlaps clauses 1–2 for scheme tests; its later split must not cite this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateModuliTopologicalImages",
+  "declaration": "CategoryTheory.adequate_moduli_topological_images",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateModuliTopologicalImages.lean",
+  "statement": "theorem adequate_moduli_topological_images (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (Y : AlgebraicSpace (Spec (.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) : Function.Surjective (moduliPointMap φ) ∧ (∀ (T : AlgebraicSpace (Spec (.of k))) (t : T ⟶ Y), @Continuous _ _ (moduliSmoothPointTopology (moduliTwoFiberProduct φ (discreteModuliMap t.hom.hom))) (moduliSmoothPointTopology (discreteModuli T.obj.obj)) (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap t.hom.hom))) ∧ @IsClosedMap _ _ (moduliSmoothPointTopology (moduliTwoFiberProduct φ (discreteModuliMap t.hom.hom))) (moduliSmoothPointTopology (discreteModuli T.obj.obj)) (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap t.hom.hom)))) ∧ (∀ Z₁ Z₂ : ClosedModuliSubstack F, (moduliPointMap φ '' Set.range (moduliPointMap Z₁.inclusion)) ∩ (moduliPointMap φ '' Set.range (moduliPointMap Z₂.inclusion)) = moduliPointMap φ '' Set.range (moduliPointMap ((moduliTwoFiberFst Z₁.inclusion Z₂.inclusion).comp Z₁.inclusion)))",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3b039245",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (Field, IsAdequateModuliSpace, smooth_presentation_closed_subsets/moduliSmoothPointTopology) and underlying side-live decls (discreteModuli(Map), moduliTwoFiberProduct/Fst/Snd, ModuliPoints, moduliPointMap, ClosedModuliSubstack, AlgebraicSpace). Clauses match Alper 5.3.1(1),(2),(4): surjective moduliPointMap φ; ∀ T→Y space, IsClosedMap of the actual 2-fibre snd with smooth-atlas topologies (extra Continuous conjunct is a consequence of the dep lemma, harmless); ∀ closed substacks Z1,Z2 image intersection = image of the actual 2-fibre product via fst∘inclusion. No extra hypotheses; universes bound, none equated; edge cases (empty X/Y/T, empty/equal/non-reduced Zi, any char) covered. Node differs from live only in lean (null live), statement verbatim, imports used, docstrings with source+blueprint+3 steps, sorry only, report sections present. No file changed, no compile."
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-normal-tower-overlap-descent",
+ "kind": "statement",
+ "title": "Effective descent for a specified finite etale overlap system",
+ "statement": "Let $V$ be a scheme, $A\\to V$ a scheme over it, $U\\subseteq V$ open, and $P\\to U$ finite etale. For a finite family indexed by $\\operatorname{Fin}(s)$, let $B_j\\to V$ be schemes, $W_j\\subseteq V$ opens, $q_j:A\\to B_j$ maps over $V$, and $Y_j\\to B_j\\times_VW_j$ finite etale covers. Fix specified identifications of their pullbacks to $B_j\\times_V(W_j\\cap U)$ with the pullback of $P$. Assume $\\bigcup_jW_j=V$ and fix an overlap system [def-sfb-normal-tower-cover-gluing-data]. This particular overlap system admits a realization in the sense of that definition. No normality, Noetherian, generic-point, or tower hypotheses are assumed: the coherent overlap isomorphisms are inputs, and the resulting global cover must induce exactly those inputs.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 proof, printed pp.133-134: locality and extension of graphs; the explicit finite-subcover/common-level and overlap descent arguments in returned proof steps 11-13. Supporting Stacks Tag 0BQM (fundamental group of a normal integral scheme, generic-point full faithfulness)."
+ },
+ "stmt_deps": [
+  "def-sfb-normal-tower-cover-gluing-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_U=A\\times_V U$ and use the canonical transports of [def-sfb-normal-tower-cover-gluing-data]. Write $H_j=A\\times_VW_j$ and $Z_j$ for the pullback of $Y_j$ along the chart map induced by $q_j$, with its transported identification $\\theta_j$ over $A_U$. Let $\\pi_i:Z_i\\to H_i$ and $O_{ij}=\\pi_i^{-1}(H_i\\cap H_j)\\subseteq Z_i$. Regard $\\alpha_{ij}$ as an isomorphism $O_{ij}\\to O_{ji}$. Because it lies over $H_i\\cap H_j$, it carries $O_{ij}\\cap O_{ik}$ exactly to $O_{ji}\\cap O_{jk}$; the input overlap system supplies the cocycle there. Apply [lem-weil-pbc-glue-schemes] to get $Z$ with open immersions $\\ell_i:Z_i\\to Z$ whose images cover, whose intersections are the prescribed $O_{ij}$, and with $\\ell_j\\alpha_{ij}=\\ell_i$ on $O_{ij}$. The maps $Z_i\\to H_i\\to A$ agree on these overlaps, so [lem-weil-pbc-scheme-morphism-gluing] gives $\\pi:Z\\to A$. Its inverse image of $H_j$ is exactly $\\ell_j(Z_j)$: a point in that inverse image is $\\ell_i(z)$ for some $i$, and its base lies in $H_j$, so $z\\in O_{ij}$ and $\\ell_i(z)=\\ell_j(\\alpha_{ij}(z))$; the reverse inclusion follows from $\\pi\\ell_j=\\pi_j$. Thus the open immersion $\\ell_j$ identifies $Z_j$ with the open subscheme $\\pi^{-1}(H_j)$, giving $Z|_{H_j}\\simeq Z_j$ and inducing the specified transition maps.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-sfb-normal-tower-cover-gluing-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue, open charts, intersections and compatibility) and 01JC (lemma-glue-schemes); glue the structural morphisms"
+   }
+  },
+  {
+   "text": "Under the identifications of the gluing construction, each restriction $Z|_{H_j}\\to H_j$ is the finite etale map $Z_j\\to H_j$ provided as inputs. Since the $H_j$ form an open cover of $A$, [lem-weil-pbc-closed-finite-etale-zariski-local](2),(3) shows that $Z\\to A$ is finite etale.",
+   "uses": [
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Finiteness and etaleness are Zariski local on the target; Mathlib IsZariskiLocalAtTarget.iff_of_openCover, with the IsFinite and Etale instances"
+   }
+  },
+  {
+   "text": "Set $P_A=P\\times_UA_U$. The maps $\\theta_i:Z|_{H_i\\cap A_U}\\to P_A|_{H_i\\cap A_U}\\to P_A$ agree on overlaps: the equality is precisely $\\theta_j\\alpha_{ij}=\\theta_i$ in the input overlap system. By [lem-weil-pbc-scheme-morphism-gluing] they glue to $\\theta:Z\\times_{A}A_U\\to P_A$. The maps $\\theta_i^{-1}$, followed by the chart inclusions into $Z\\times_{A}A_U$, agree too, since $\\alpha_{ij}=\\theta_j^{-1}\\theta_i$ and $\\ell_j\\alpha_{ij}=\\ell_i$. Glue them over the open cover of $P_A$ given by the inverse images of $H_i\\cap A_U$. The two composites restrict to identities on the respective open covers, so the uniqueness clause of the same gluing node makes them identities globally. Hence $\\theta$ is an isomorphism and restricts to every specified $\\theta_i$. If the index set is empty, the covering equation forces V and hence A to be empty; empty scheme gluing gives the required empty realization.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JB (lemma-glue, mapping property for morphisms); maps and inverses glue by equality on overlaps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-sfb-normal-tower-cover-gluing-data",
+  "lem-weil-pbc-closed-finite-etale-zariski-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Original common-level node steps 4-6, with X_n renamed A and coherent transitions supplied as inputs; Stacks 01JB and 01JC and Zariski locality of finite etale morphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Gluing finite etale schemes along overlap isomorphisms of an open covering yields a finite etale scheme over the base",
+   "results": "{\"t\": \"2026-10-26T06:41:25Z\", \"tool\": \"leansearch\", \"query\": \"Gluing finite etale schemes along overlap isomorphisms of an open covering yields a finite etale scheme over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Pullback.gluedIsLimit\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms.congr_simp\"], \"digest\": \"6599fd10d2d4e536\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: Scheme.GlueData.glued supplies general gluing, but its data must be constructed and finiteness, etaleness and the identification equations still proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective Zariski descent for finite etale covers with specified coherent overlap isomorphisms and a compatible identification over an open",
+   "results": "{\"t\": \"2026-10-26T06:41:24Z\", \"tool\": \"leanfinder\", \"query\": \"Effective Zariski descent for finite etale covers with specified coherent overlap isomorphisms and a compatible identification over an open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\"], \"digest\": \"a2a213cacc8b13c2\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern etale sites, general glue data, or limit descent with different inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "(RelativeGluingData|finiteEtale.*overlap|finiteEtale.*descent)",
+   "results": "{\"t\": \"2026-10-26T06:41:24Z\", \"tool\": \"grep\", \"query\": \"(RelativeGluingData|finiteEtale.*overlap|finiteEtale.*descent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\"], \"digest\": \"f15bc417cd4aaae5\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: relative gluing requires an equifibered functor over a locally directed cover, and does not express the specified chart identifications and overlap extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalTowerCommonLevelCoverGluing",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalTowerOverlapDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalTowerOverlapDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalTower_overlap_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.normalTower_overlap_descent"
+  ],
+  "statement": "theorem normalTower_overlap_descent {V : Scheme.{u}} (A : Over V) (U : V.Opens) (P : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ U.toScheme) {s : ℕ} (B : Fin s → Over V) (W : Fin s → V.Opens) (q : ∀ j : Fin s, A ⟶ B j) (Y : ∀ j : Fin s, (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (chart (B j) (W j))) (θlocal : ∀ j : Fin s, (MorphismProperty.Over.pullback _ ⊤ (chartInclusion (B j) (inf_le_left : W j ⊓ U ≤ W j))).obj (Y j) ≅ (MorphismProperty.Over.pullback _ ⊤ (chartToOpen (B j) (inf_le_right : W j ⊓ U ≤ U))).obj P) (hcover : (⨆ j : Fin s, W j) = ⊤) (d : Overlaps A U P B W q Y θlocal) : Nonempty (Realization A U P B W q Y θlocal d)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original common-level node steps 4-6, with X_n renamed A and coherent transitions supplied as inputs; Stacks 01JB and 01JC and Zariski locality of finite etale morphisms.",
+   "via": [
+    "lem-sfb-normal-tower-common-level-cover-gluing",
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-59159",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T082939-L-2243016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-59159",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T082939-L-2243016",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 split sorried statements (overlap_system, overlap_descent) against node lem-sfb-normal-tower-common-level-cover-gluing and the new nodes; moved defs/Gluing compared word for word with the removed item text; importers searched in the clone (none)"
+ }
+}

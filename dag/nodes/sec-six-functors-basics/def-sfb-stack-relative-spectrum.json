@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-stack-relative-spectrum",
+ "kind": "definition",
+ "title": "Relative spectrum of an algebra sheaf on a fibred groupoid",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $p:\\mathcal X\\to\\mathit{Sch}/S$ be a category fibred in groupoids, with based functors as in [def-sfb-stable-pointed-moduli-groupoids]. Let $\\mathcal A$ be a sheaf of commutative $\\mathcal O_{\\mathcal X}$-algebras [def-sfb-stack-quasi-coherent-algebra]. For an object $x$ of $\\mathcal X$, let $\\pi_x:\\mathcal X/x\\to\\mathcal X$ be the forgetful functor. An algebra point of $\\mathcal A$ over $x$ is a natural ring-sheaf map $a:\\pi_x^*\\mathcal A\\to\\pi_x^*\\mathcal O_{\\mathcal X}$ satisfying $a\\circ\\pi_x^*\\eta=\\mathrm{id}$, where $\\eta:\\mathcal O_{\\mathcal X}\\to\\mathcal A$ is the structure map and $\\pi_x^*$ here means precomposition on the whole slice. For $f:y\\to x$, restriction is precomposition with the functor $\\mathcal X/y\\to\\mathcal X/x$ sending $(z\\to y)$ to $(z\\to y\\to x)$. This defines a set-valued presheaf $P_{\\mathcal A}$ on $\\mathcal X$. Define $\\underline{\\operatorname{Spec}}_{\\mathcal X}\\mathcal A$ to be the category of pairs $(x,a)$, with an arrow $(y,b)\\to(x,a)$ an arrow $f:y\\to x$ such that $b=P_{\\mathcal A}(f)(a)$. Equivalently it is the opposite of the category of elements of $P_{\\mathcal A}$. The forgetful functor sends $(x,a)$ to $x$ and an arrow to $f$; composed with $p$ it makes the relative spectrum a category over $\\mathit{Sch}/S$. Its canonical based projection to $\\mathcal X$ is that same forgetful functor. This defines the functor-of-algebra-points relative spectrum without assuming quasi-coherence, algebraicity or finiteness; no representability or algebraicity is asserted here.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex; Alper arXiv:1005.2398v3",
+  "place": "section-spec, equation-spec; definition-relative-spec (Tag 01LW) and lemma-spec-properties (Tag 01LX), interpreted over stack objects as in Alper Lemma 5.2.11. This node defines the algebra-point category only, not the separate algebraicity theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative spectrum of an algebra sheaf on a category fibred in groupoids as the category of algebra homomorphisms to the structure sheaf",
+   "results": "{\"t\": \"2026-10-24T14:07:19Z\", \"tool\": \"leansearch\", \"query\": \"Relative spectrum of an algebra sheaf on a category fibred in groupoids as the category of algebra homomorphisms to the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec_sheaf\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf\", \"AlgebraicGeometry.Spec.toSheafedSpace\", \"AlgebraicGeometry.Spec.toLocallyRingedSpace\", \"AlgebraicGeometry.Spec.sheafedSpaceObj\", \"AlgebraicGeometry.toSpecΓ\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.AffineScheme.Spec\"], \"digest\": \"97d2f842156e9e91\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: returned scheme Spec and Gamma/Spec declarations do not define the relative-spectrum category of an algebra on a fibred groupoid."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum of an algebra on an algebraic stack, its functor of algebra points and the projection to the stack",
+   "results": "{\"t\": \"2026-10-24T14:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"Relative spectrum of an algebra on an algebraic stack, its functor of algebra points and the projection to the stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.map\", \"AlgebraicGeometry.Spec.preimage\", \"AlgebraicGeometry.Spec.toSheafedSpace\", \"AlgebraicGeometry.Scheme.Spec\", \"AlgebraicGeometry.Spec.toPresheafedSpace\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.Spec\", \"AlgebraicGeometry.Spec.toLocallyRingedSpace\"], \"digest\": \"49f33c3cc12c4560\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: returned scheme Spec and Gamma/Spec declarations do not define the relative-spectrum category of an algebra on a fibred groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "ModuliAlgebraPoint|moduliRelativeSpectrum|[Rr]elative[Ss]pec",
+   "results": "{\"t\": \"2026-10-24T14:07:19Z\", \"tool\": \"grep\", \"query\": \"ModuliAlgebraPoint|moduliRelativeSpectrum|[Rr]elative[Ss]pec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib declaration under AlgebraicGeometry. The project definitions are moved, not duplicated; their previous owner was a theorem node."
+  },
+  {
+   "tool": "grep",
+   "query": "rg --no-ignore -l \"ModuliAlgebraPoint|moduliAlgebraPointPresheaf|moduliRelativeSpectrumForget|moduliRelativeSpectrumProjection\" dag/nodes lean/Sheaf lean/WeilConjectures; rg -n \"ModuliAlgebraPoint|moduliRelativeSpectrum\" dag/lean_names_upstream.json lean/WeilConjectures; tools/blueprint_refs.py search \"relative spectrum\"",
+   "results": "Only lean/Sheaf/AlgebraicGeometry/AdequateRelativeSpectrum.lean and dag/nodes/sec-six-functors-basics/lem-sfb-adequate-relative-spectrum.json carry the five declarations. No source/upstream name match and no blueprint search match. The existing lem-sfb-stack-relative-spec-construction is an algebraicity/affineness theorem, not a definition node. The definition node is created to own the existing bodies, as explicitly requested by the maintainer.",
+   "date": "2026-10-24",
+   "verdict": "No definition node owns the stack algebra-point construction. Extract the existing five declarations verbatim instead of defining another relative spectrum."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-quasifinite-relative-normalization",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained. Definition owner for the relative spectrum in the integral Zariski-main factorization; the ancestor command returns None.",
+   "via": [
+    "lem-sfb-stack-quasifinite-relative-normalization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackRelativeSpectrum",
+  "declaration": "CategoryTheory.moduliRelativeSpectrum",
+  "declarations": [
+   "CategoryTheory.ModuliAlgebraPoint",
+   "CategoryTheory.moduliAlgebraPointPresheaf",
+   "CategoryTheory.moduliRelativeSpectrumForget",
+   "CategoryTheory.moduliRelativeSpectrum",
+   "CategoryTheory.moduliRelativeSpectrumProjection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackRelativeSpectrum.lean",
+  "statement": "def moduliRelativeSpectrum {S : AlgebraicGeometry.Scheme.{u}}\n    {F : BasedCategory.{v, w} (Over S)} {hF : IsFibredInGroupoids F}\n    (A : ModuliAlgebraSheaf F hF) : BasedCategory (Over S)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Owns the five existing general relative-spectrum definitions extracted from AdequateRelativeSpectrum. Bodies and signatures are unchanged; only their blueprint docstring markers change to this definition node. No theorem is introduced or used to choose construction data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maint-Q40-owner-1792863975",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Definition ownership extraction explicitly required by the return of 31e8e3ab4dd8. Read the pair/category-of-elements description against the five existing declarations; verified their signatures and bodies are verbatim after the move. No new mathematical assertion or proof is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maint-Q40-owner-1792863975",
+  "group": "Q40",
+  "result": "pass",
+  "note": "The five names moved verbatim from AdequateRelativeSpectrum (only blueprint ownership markers changed); the old module publicly re-exports them. tools/lean_file.sh checks passed separately in 9.0 s and 12.7 s with the 60 s limit. Data definitions contain no sorry; former-owner theorem and remaining helpers are unchanged."
+ }
+}

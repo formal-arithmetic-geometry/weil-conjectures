@@ -1,0 +1,429 @@
+# Projection purity coordinate declarations
+
+## Reason
+
+Extract the existing coordinate prefix into a prerequisite module so the unit orientation and
+tensor-integration lemmas can refer to the actual coordinates without importing their consumer.
+All existing public declarations, types, definition bodies, attributes and public prerequisites
+remain available unchanged through the original module. No consumer needs adaptation.
+
+## Old
+
+The following declarations were in `Sheaf.Paper.ProjectionPurityAgreement`:
+
+```lean
+/-- The standard projection is smooth of the indicated pure relative dimension.
+Source: polynomial charts; sbc-lem-affine-space-smooth
+(blueprint: lem-pur-projection-purity-agreement).
+Proof: the zero projection is the identity. Each successor adjoins one polynomial
+variable and is smooth of pure dimension one. Relative dimensions add under
+composition, giving dimension d, including the empty base. -/
+theorem projection_smooth (Y : Scheme.{u}) (d : ℕ) :
+    SmoothOfRelativeDimension d (iteratedAffineLineProj Y d) := by
+  induction d with
+  | zero => exact inferInstanceAs (SmoothOfRelativeDimension 0 (𝟙 Y))
+  | succ d ih =>
+    let := ih
+    change SmoothOfRelativeDimension (d + 1)
+      (lastProjection Y d ≫ iteratedAffineLineProj Y d)
+    have h : SmoothOfRelativeDimension (1 + d)
+        (lastProjection Y d ≫ iteratedAffineLineProj Y d) := by
+      have hline : SmoothOfRelativeDimension 1 (lastProjection Y d) := by
+        simpa using (inferInstance : SmoothOfRelativeDimension
+          (Nat.card PUnit.{u + 1}) (lastProjection Y d))
+      let := hline
+      infer_instance
+    simpa [Nat.add_comm] using h
+
+/-- The source of the smooth comparison in fixed-scalar coordinates.
+Source: the displayed Lp* K(d)[2d]
+(blueprint: lem-pur-projection-purity-agreement). -/
+def projectionSmoothSource (P : PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C P.Coefficient Y)
+    (d : ℕ) :=
+  (((smoothPurityTensor P.Coefficient (iteratedAffineLine Y d)).obj
+    ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K)).obj
+      ((P.diagonalTwist (iteratedAffineLine Y d) d)⟦-(2 * (d : ℤ))⟧))⟦2 * (d : ℤ)⟧
+
+attribute [local irreducible] projectionTensorActionIso projectionTensorActionGeneric
+  projectionTensorStep projectionLineIso projectionUnitRaw
+
+/-- The literal canonical source-coordinate map, retaining its computed endpoints.
+Source: tensor, shift, and identity normalization
+(blueprint: lem-pur-projection-purity-agreement). -/
+def projectionSourceRaw
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) :
+    (d : ℕ) → Σ M N : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient (iteratedAffineLine Y d), M ≅ N
+  | 0 => ⟨_, _,
+    (projectionSetting F C E n).smoothPurityReassociation Y 0
+      (((projectionSetting F C E n).smoothPurityPullback (𝟙 Y)).obj K) ≪≫
+    projectionTensorActionIso F C E n Y aY _ 0 ≪≫
+    (Functor.mapDerivedCategoryNatIso
+      (ProEtale.upperStarId
+        (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y) ≪≫
+        Functor.mapDerivedCategoryIdIso _).app K⟩
+  | d + 1 => ⟨_, _,
+    (projectionSetting F C E n).smoothPurityReassociation (iteratedAffineLine Y (d + 1))
+      (d + 1) (((projectionSetting F C E n).smoothPurityPullback
+        (iteratedAffineLineProj Y (d + 1))).obj K) ≪≫
+    projectionTensorActionIso F C E n (iteratedAffineLine Y (d + 1))
+      (towerBase aY (d + 1)) _ (d + 1) ≪≫
+    (action ((tensor (projectionSetting F C E n).Coefficient
+      (iteratedAffineLine Y (d + 1))).flip.obj
+        (shiftedLine (projectionSetting F C E n) (iteratedAffineLine Y (d + 1))))
+      (d + 1)).mapIso
+      (((ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient)
+          (iteratedAffineLineProj Y (d + 1))).app K).symm)⟩
+
+/-- The common source-coordinate isomorphism type.
+Source: purity source presentations (blueprint: lem-pur-projection-purity-agreement). -/
+def ProjectionSourceIsoType
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :=
+  projectionSmoothSource (projectionSetting F C E n) Y K d ≅
+    (orderedSource (projectionSetting F C E n) Y d).obj K
+
+/-- The raw composite has exactly the recorded smooth and ordered affine endpoints.
+The heterogeneous equality fixes its hom, so it cannot be chosen using a purity map.
+Source: source presentations (blueprint: lem-pur-projection-purity-agreement).
+Proof: unfold the two endpoints, the positive-level coefficient index, and orderedSource.
+At zero, exact identity pullback, the tensor unit and zero shift give K. At a successor,
+the exact/derived comparison followed by the ordered action gives orderedSource.
+Transport the raw isomorphism along these endpoint equalities. Its hom is the specified
+raw hom. Any two such isomorphisms have equal homs by transitivity of HEq, hence are equal. -/
+theorem projectionSourceIso_existsUnique
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :
+    ∃! e : ProjectionSourceIsoType F C E n Y K d,
+      HEq e (projectionSourceRaw F C E n Y aY K d).2.2 := by
+  cases d with
+  | zero =>
+    unfold ProjectionSourceIsoType orderedSource
+    refine ⟨(projectionSourceRaw F C E n Y aY K 0).2.2, HEq.refl _, ?_⟩
+    intro e he
+    exact eq_of_heq he
+  | succ d =>
+    unfold ProjectionSourceIsoType orderedSource twistAction
+    refine ⟨(projectionSourceRaw F C E n Y aY K (d + 1)).2.2, HEq.refl _, ?_⟩
+    intro e he
+    exact eq_of_heq he
+
+/-- The uniquely transported canonical source isomorphism, independent of either
+purity arrow. Source: source-coordinate normalization
+(blueprint: lem-pur-projection-purity-agreement). -/
+def projectionSourceIso
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :
+    ProjectionSourceIsoType F C E n Y K d :=
+  projectionChooseUnique (projectionSourceIso_existsUnique F C E n Y aY K d)
+
+/-- The recorded exceptional target of the smooth map.
+Source: finite exceptional conventions (blueprint: lem-pur-projection-purity-agreement). -/
+def projectionSmoothTarget (P : PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C P.Coefficient Y)
+    (d : ℕ) :=
+  letI := (projection_geometry Y d).1
+  (P.smoothPurityExceptionalOver (iteratedAffineLineProj Y d) aY).obj K
+
+/-- The literal exceptional-coordinate map. At a positive rank it is identity;
+at zero it is the ordinary exceptional identity comparison followed by the
+comparison-adjunction counit, restricted later to the etale-origin class.
+Source: exceptional identity normalization
+(blueprint: lem-pur-projection-purity-agreement). -/
+def projectionTargetRaw
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) :
+    (d : ℕ) → Σ M N : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient (iteratedAffineLine Y d), M ⟶ N
+  | 0 =>
+    ⟨_, _,
+      (ProEtale.VectorIntegrationSite.comparison (projectionSetting F C E n).Coefficient
+        Y).map
+          (((Etale.rightDerivedUpperShriekIsoOfIso
+            (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) (Iso.refl Y)) ≪≫
+              Etale.leftDerivedUpperStarId
+                (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y).hom.app
+                  ((ProEtale.comparisonLowerStar
+                    (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient)
+                      Y).rightDerivedFunctor.obj K)) ≫
+        (ProEtale.derivedComparisonAdjunction
+          (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y).counit.app K⟩
+  | d + 1 =>
+    letI := (projection_geometry Y (d + 1)).1
+    letI := (projection_geometry Y (d + 1)).2
+    ⟨_, _, 𝟙 (projectionSmoothTarget (projectionSetting F C E n) Y aY K (d + 1))⟩
+
+/-- The common exceptional-coordinate map type.
+Source: finite exceptional conventions (blueprint: lem-pur-projection-purity-agreement). -/
+def ProjectionTargetMapType
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :=
+  projectionSmoothTarget (projectionSetting F C E n) Y aY K d ⟶
+    (AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptional
+      (projectionSetting F C E n) Y d).obj K
+
+/-- The raw exceptional normalization has the required source and target.
+Source: the fixed finite exceptional functor and p_0=id
+(blueprint: lem-pur-projection-purity-agreement).
+Proof: at positive rank both definitions are nu* f^times Rnu_* at the same standing
+compactification. The left-adjoint instances are propositions. At zero unfold the
+identity exceptional functor; the raw comparison ends at K, the normalized target. -/
+theorem projectionTargetMap_existsUnique
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :
+    ∃! t : ProjectionTargetMapType F C E n Y aY K d,
+      HEq t (projectionTargetRaw F C E n Y aY K d).2.2 := by
+  cases d with
+  | zero =>
+    unfold ProjectionTargetMapType
+    unfold AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptional
+    refine ⟨(projectionTargetRaw F C E n Y aY K 0).2.2, HEq.refl _, ?_⟩
+    intro t ht
+    exact eq_of_heq ht
+  | succ d =>
+    unfold ProjectionTargetMapType
+    unfold AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptional
+    refine ⟨(projectionTargetRaw F C E n Y aY K (d + 1)).2.2, HEq.refl _, ?_⟩
+    intro t ht
+    exact eq_of_heq ht
+
+/-- The canonical exceptional-coordinate map, fixed independently of purity.
+Source: identity and positive-rank normalization
+(blueprint: lem-pur-projection-purity-agreement). -/
+def projectionTargetMap
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C
+      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :
+    ProjectionTargetMapType F C E n Y aY K d :=
+  projectionChooseUnique (projectionTargetMap_existsUnique F C E n Y aY K d)
+
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem projectionCounit_isIso
+    {B D : Type*} [Category B] [Category D] {L : B ⥤ D} {R : D ⥤ B}
+    (adj : L ⊣ R) (M : B) (N : D) (e : L.obj M ≅ N)
+    [IsIso (adj.unit.app M)] : IsIso (adj.counit.app N) := by
+  have htri : IsIso (L.map (adj.unit.app M) ≫ adj.counit.app (L.obj M)) := by
+    have hid : IsIso (𝟙 (L.obj M)) := inferInstance
+    exact (adj.left_triangle_components M).symm ▸ hid
+  have : IsIso (adj.counit.app (L.obj M)) :=
+    IsIso.of_isIso_comp_left (L.map (adj.unit.app M)) _
+  have hn : IsIso ((R ⋙ L).map e.hom ≫ adj.counit.app N) := by
+    rw [adj.counit.naturality]
+    infer_instance
+  exact IsIso.of_isIso_comp_left ((R ⋙ L).map e.hom) _
+
+attribute [local semireducible] AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptional
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- On the stated etale-origin class the target normalization is invertible.
+Source: bounded site comparison and exceptional identity
+(blueprint: lem-pur-projection-purity-agreement).
+Proof: at positive rank the raw map is identity. At zero the ordinary exceptional
+identity comparison is invertible. For bounded-below Ke the comparison unit is
+invertible; the adjunction triangle therefore makes the counit invertible at nu*Ke.
+Transport across eK gives invertibility at K, including zero and empty-scheme objects. -/
+theorem projectionTarget_isIso
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : Plus (AffineLinePurity.Ring (projectionSetting F C E n)) Y)
+    (Ke : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)
+    (hKe : etaleFiniteTor (projectionSetting F C E n).Coefficient Y Ke)
+    (eK : (ProEtale.VectorIntegrationSite.comparison
+      (projectionSetting F C E n).Coefficient Y).obj Ke ≅ K.obj) (d : ℕ) :
+    IsIso (projectionTargetMap F C E n Y aY K.obj d) := by
+  classical
+  have ht : HEq (projectionTargetMap F C E n Y aY K.obj d)
+      (projectionTargetRaw F C E n Y aY K.obj d).2.2 :=
+    (projectionTargetMap_existsUnique F C E n Y aY K.obj d).exists.choose_spec
+  cases d with
+  | zero =>
+    let hu := ProEtale.isIso_derivedComparisonAdjunction_unit_app
+      (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y Ke hKe.1.1.1
+    let hc := projectionCounit_isIso
+      (ProEtale.derivedComparisonAdjunction
+        (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y) Ke K.obj eK
+    have hraw : IsIso (projectionTargetRaw F C E n Y aY K.obj 0).2.2 := by
+      dsimp only [projectionTargetRaw]
+      let e := (Etale.rightDerivedUpperShriekIsoOfIso
+        (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) (Iso.refl Y) ≪≫
+        Etale.leftDerivedUpperStarId
+          (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y).app
+        ((ProEtale.comparisonLowerStar
+          (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient) Y).rightDerivedFunctor.obj
+            K.obj)
+      let hm := (ProEtale.VectorIntegrationSite.comparison
+        (projectionSetting F C E n).Coefficient Y).map_isIso e.hom
+      exact IsIso.comp_isIso
+    have he : projectionTargetMap F C E n Y aY K.obj 0 =
+        (projectionTargetRaw F C E n Y aY K.obj 0).2.2 := eq_of_heq ht
+    rw [he]
+    exact hraw
+  | succ d =>
+    have he : projectionTargetMap F C E n Y aY K.obj (d + 1) =
+        (projectionTargetRaw F C E n Y aY K.obj (d + 1)).2.2 := eq_of_heq ht
+    rw [he]
+    change IsIso (𝟙 _)
+    infer_instance
+
+/-- The existing ordered affine-line composite, in the smooth source and target
+coordinates. The source and target comparisons use no orientation map.
+Source: Gamma_(p_d,K) (blueprint: lem-pur-projection-purity-agreement). -/
+def projectionAffineInPresentation
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring (projectionSetting F C E n)) Y)
+    (Ke : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)
+    (hKe : etaleFiniteTor (projectionSetting F C E n).Coefficient Y Ke)
+    (eK : (ProEtale.VectorIntegrationSite.comparison
+      (projectionSetting F C E n).Coefficient Y).obj Ke ≅ K.obj) (d : ℕ) :
+    projectionSmoothSource (projectionSetting F C E n) Y K.obj d ⟶
+      projectionSmoothTarget (projectionSetting F C E n) Y aY K.obj d :=
+  letI : IsIso (projectionTargetMap F C E n Y aY K.obj d) :=
+    projectionTarget_isIso F C E n Y aY K Ke hKe eK d
+  (projectionSourceIso F C E n Y aY K.obj d).hom ≫
+    affineSpacePurityComparison (projectionSetting F C E n) Y aY K Ke hKe eK d ≫
+      inv (projectionTargetMap F C E n Y aY K.obj d)
+
+/-- The Hom type on the original intrinsic pro-etale object, with the specified
+smooth source and the transported exceptional target.
+Source: displayed Hom in the item (blueprint: lem-pur-projection-purity-agreement). -/
+def ProjectionIntrinsicHom (P : PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (K : Scheme.proEtaleDerivedCategory Y P.Ring) (d : ℕ) :=
+  (Scheme.sfIntrinsicDerivedEquivalence (iteratedAffineLine Y d) P.Ring).functor.obj
+    (projectionSmoothSource P Y
+      ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj K) d) ⟶
+  (Scheme.sfIntrinsicDerivedEquivalence (iteratedAffineLine Y d) P.Ring).functor.obj
+    (projectionSmoothTarget P Y aY
+      ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj K) d)
+
+```
+
+## New
+
+The same declarations, verbatim, are in `Sheaf.Paper.ProjectionPurityCoordinates`.
+`Sheaf.Paper.ProjectionPurityAgreement` publicly imports that prerequisite. The existing
+proof-only smooth-morphism import moves with its proof. The two new lemma modules import
+the coordinates, and the original theorem imports the tensor lemma privately.
+
+## Users
+
+| module | group holding it | effect |
+|---|---|---|
+| Sheaf.Paper.AdicExceptionalNormalizationMate | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicNormalizedPurityLift | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicPurityCanonicalSourceCoherence | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicPurityNormalizedComparisonConstruction | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicPurityScalarNaturality | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicPurityScalarNaturalityData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceConstruction | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceCounitReductions | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceProjectionAssembly | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceReductionData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceScalarData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceTargetNormalization | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceTensorCoordinates | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AdicUnitTraceTransposeReductions | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.AffineIntegrationExponentTransition | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDiagonalAssemblyData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDiagonalSourceMate | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDiagonalSourceSquare | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDncNaturality | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDncSquare | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDncVectorFactorData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartDncVectorFactors | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartEpsilonPasting | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartExceptionalCounitEquation | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartExceptionalMateCoherence | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartIntegrationAdjoints | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartNormalIntegrationSquare | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ChartTargetOpenDescent | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.CompositionModelOrientationDefinitions | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.CompositionModelOrientationDescent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.DiagonalDncAssemblyGlobal | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.DiagonalDncChartNormalization | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.DiagonalOrientationCharts | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.DiagonalOrientationChoiceIndependent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.EtaleOrientationLocality | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.FiniteDiagonalOrientationReduction | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.FiniteDiagonalReductionComparisons | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.FiniteReductionOfPurity | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.GeneralChartComparisons | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ModelAffineIntegrationOrientation | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ModelChartOrientationAssembly | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ModelOrientationChartDescent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ModelOrientationSourceNaturality | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.ModelOrientationTateDetection | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.NormalModelSectionOrientation | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.NormalizedIntegralPurityTrace | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.PurAdicReconstruction | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.PurityCompositionCompatibleDncCharts | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalExceptionalFinalEquations | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalPurityCoherenceDescent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalPurityComparisonDescent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalPurityScalarLocalization | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalPuritySourceLocalization | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalScalarComparisonData | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RationalScalarComparisonIdentification | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.RetaggingCoordinateOrientations | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.SectionDncIntegrationSquare | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackAdicAgreement | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackCanonicalShifts | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackPbcCoordinates | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackPbcPullback | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackPbcTwist | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackScalarFamilies | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackScalarShifts | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackShiftCoherence | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackSquareCoordinates | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackSquareMaps | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackSquareScalars | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.TwistedPullbackSquareShiftEquations | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorBundleFrameOrientationRestriction | claimed | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorIntegrationChartComparison | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorIntegrationChartCoordinates | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorIntegrationChartTranspose | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorIntegrationUnitTranspose | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+| Sheaf.Paper.VectorModelChartDescent | unclaimed in local snapshot | Unchanged public reexport; no adaptation or meaning change. |
+
+## Status
+
+landed 20261026T003152-L-150778 2026-10-26 (merge of deliver/X3/Sheaf.Paper.ProjectionPurityAgreement)

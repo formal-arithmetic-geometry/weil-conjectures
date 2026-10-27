@@ -1,0 +1,42 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-six-functors-basics/lem-sfb-space-partial-section-schematic-image.json`: statement, six proof steps, existing dependencies only; not in Mathlib.
+- `citations.json`: 15 verbatim statement excerpts, one for every step/node citation.
+- `searches.jsonl`: the five searches actually run in this attempt, in addition to the item's retained upstream search records.
+
+New nodes: 0. Mathlib leaves: 0. All required inputs already have nodes.
+
+Attachments: none. Searched `lean/WeilConjectures/` for the blueprint tag, partial sections, schematic images and schemeTheoreticImage. Read `Mathlib/AlgebraicGeometry/Pullbacks.lean` around partialSection and the kernel identity: those results have scheme objects, not arbitrary algebraic spaces. They do not attach to this statement. The item's live record has no project declaration giving the assertion.
+
+WANTED: none.
+
+The imported statement is correct. Its initially empty proof is replaced; its statement, statement dependencies, creation history, inherited blueprint provenance and earlier Mathlib searches are retained. The source's notation `fs=id_V` uses the identification of the open subspace with its inclusion; the item's equation `fs=a` is the precise typed equation. No statement dispute or correction is needed.
+
+The ancestor command returns `None`, as it does for the live inherited creation chain, so the existing null `blueprint.from.node` and all `via` entries are retained. Read the current `literature/blueprint/latest/` unit and its direct-image proof (3); the item is the inherited derived-Chow geometric prerequisite below that route. The blueprint has a scheme partial-section result, not an algebraic-space duplicate. Nothing in this delivery changes the unit or chapter route.
+
+Unfinished: none at stage 1. Existing statement nodes remain their own items; no Lean was written and no compiler was run.
+
+## Not duplicates
+
+No new nodes were created. The existing `lemma-nagata-scheme-image-partial-section` and its project Lean proofs concern schemes (and a projection from a scheme fibre product), whereas this item permits arbitrary algebraic spaces. `lem-sfb-space-qc-open-schematic-closure` concerns an open immersion into its target, while the partial section here is only locally closed over its open domain. `lem-sfb-space-proper-schematic-image` assumes properness absent here. `lem-sfb-stack-schematic-image-qc` gives a stronger general stack image theorem but does not itself identify the section over the open; the present split uses the more elementary kernel route already supplied by the space nodes.
+
+## Review by Q49
+
+I read Stacks `spaces-morphisms.tex` Tag 0CP3 (`lemma-scheme-theoretic-image-of-partial-section`) and its proof in full, plus 082X (`lemma-scheme-theoretic-image`), 082Z (`lemma-quasi-compact-scheme-theoretic-image`), 03KS (`lemma-quasi-compact-permanence`), 03KP (`lemma-section-immersion`), 03M9 (`lemma-pushforward`), and 03MB (`lemma-closed-immersion-ideals`) including its inverse-image paragraph. I also read `spaces-properties.tex` 03M1(3) and 03LX with the preceding 03LV/exact-restriction discussion. There are no new-node sources to check. The proof follows 0CP3; the image and its restriction are expanded rather than hidden in a new copy of the item's clauses.
+
+For Step 1 I opened `lem-sfb-space-qc-cancellation`: its statement really permits arbitrary spaces and assumes only that the composite is quasi-compact and the second arrow is quasi-separated. These are exactly `fs=a` and separatedness of `f`. The latter implies quasi-separatedness by its scheme-test closed diagonal and quasi-compactness of a closed subset of an affine spectrum. The two scheme immersion definition nodes provide the closed-test and open-inclusion meanings; cancellation of the open inclusion shows that `s` is a monomorphism, so its diagonal is an isomorphism. This supplies the separated hypothesis needed in Step 2, without supposing that any of the spaces themselves is quasi-compact or separated.
+
+For Step 2 I read `def-trf-space-quasi-coherent-module`, `lem-trf-space-qc-separated-quasi-coherent-pushforward`, `lem-sfb-space-qcoh-kernels-colimits`, and `lem-sfb-space-ideal-closed-subspace-correspondence`. Their statements give, respectively, the presentation predicate (the structure module has a one-generator presentation), direct-image quasi-coherence under exactly the qc and separated hypotheses proved in Step 1, closure of kernels in all module sheaves, and both construction of V(I) and factorization when I maps to zero in the direct image. The ideal is the actual kernel of the structural ring map. No arbitrary existence choice substitutes for the construction.
+
+For Step 3 the same ideal-correspondence node states both the zero-map factorization criterion and the inclusion-reversing bijection. I checked the direction: a competing ideal J is contained in I, so V(I) is contained in V(J). This is a short consequence of the cited statement, correctly marked elementary.
+
+For Step 4 I read `lem-trf-space-fibre-products-etale-covers` and the two scheme immersion definitions. The former supplies the algebraic-space sheaf fibre products and their categorical universal property; it is not used for a theorem about closed immersions. Instead the closed graph is the displayed pullback of the given closed diagonal, checked on test sections. Scheme tests then give closed immersions directly (equivalently surjective quotients remain quotients after ring base change). The open projection is tested in the same way. The source of the base change of s is exactly O because a is a monomorphism. This argument is short and elementary, not a separate graph lemma to add to the queue.
+
+For Step 5 I read the full statement of `lem-trf-space-etale-module-pushforward-restriction`. It supplies the canonical comparison, its compatible-section formula, and the identification of structure sheaves and module restriction. Here the restriction is to an open subspace: charts mapping into this open form the corresponding full subsite. Thus both sides of the ring map have the same sections over the same test fibre product, not merely an unspecified isomorphism of modules. The kernel consequently restricts to the graph ideal. The ideal-correspondence node explicitly states its arbitrary-base-change ideal formula and the etale restriction case, as well as that the ideal of a closed subspace is precisely the structure-map kernel. Hence its statement gives every part of the comparison used here. In particular I did not cite a definition of schematic image as though it implied commutation with restriction, nor assume a flat-base-change theorem for an arbitrary non-quasi-compact map.
+
+For Step 6 the fibre-product node gives the association isomorphism. Equality of the two closed subfunctors identifies O with C times_Y O, and the factorization it=s identifies that isomorphism with the precise map (t,id). The second projection composed with (t,id) is the identity by the universal property, so it is the inverse. This proves both inverse identities and the specified canonical inverse, not just the existence of some isomorphism.
+
+I checked empty O (I is the unit ideal and C is empty), empty target, O=Y (the section is already closed), f an identity (the ordinary schematic closure of a qc open), and a closed-and-open domain. On a nonreduced base with f=id and O=Y the image retains every nilpotent, since I=0, so no reduced closure is substituted. All construction and restriction arguments work without Noetherian, finite-type, properness or reducedness assumptions. Quasi-compactness is used exactly to apply cancellation and then the quasi-coherent direct-image theorem.
+
+Against delivery-errors B--E: no new unsplit node or disguised restatement is present; objects and meanings are explicit and TeX has single logical escapes. Each cited node's statement was read, each step/node pair has a verbatim quote, and the proof includes every non-elementary input as a node citation. Every step is below 2000 characters. The generic off-unit tools 03M9, 03LX and fibre-product existence (02X2) are declared in split_report.tool_uses; they supply elementary algebraic-space sheaf facts and do not replace a unit-level route. The kernel calculation writes out the actual restriction compatibility, and no hypothesis is imported from a proper-image, scheme-only, or stack theorem.

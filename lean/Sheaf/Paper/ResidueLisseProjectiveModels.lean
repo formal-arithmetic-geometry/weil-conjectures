@@ -15,23 +15,10 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import Mathlib.AlgebraicGeometry.Cover.Open
 
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
-import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
-import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
-import Sheaf.Paper.CompleteResidueCohomologyBounds
-import Sheaf.Paper.DerivedNakayamaFirstReduction
-import Sheaf.SixFunctors.ProEtale.DerivedCompletion
+import Sheaf.Paper.CompleteTopResidueCellCone
+import Sheaf.Paper.ResidueLisseClopenBases
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Projective models from lisse residue cohomology
@@ -48,15 +35,201 @@ differentials are unrestricted sheaf-linear maps.
 
 set_option autoImplicit false
 
-universe u
+universe u v w
 
-open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated AlgebraicGeometry
+open CochainComplex Opposite
 open AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
+-- This is the cone argument over an arbitrary abelian category; in particular it
+-- works on the original pro-etale site, whose object and morphism sizes differ.
+private theorem attachCell {A : Type v} [Category.{w} A] [Abelian A]
+    [HasDerivedCategory A] (a b : ℤ) (hab : a ≤ b) (P : A) (M : DerivedCategory A)
+    (K : CochainComplex A ℤ)
+    (hsupp : ∀ q : ℤ, q < a ∨ b - 1 < q → IsZero (K.X q))
+    (hproj : ∀ q : ℤ, Projective (K.X q))
+    (v₁ : DerivedCategory.Q.obj ((singleFunctor A b).obj P) ⟶ M)
+    (v₂ : M ⟶ DerivedCategory.Q.obj K)
+    (δ : DerivedCategory.Q.obj K ⟶
+      (DerivedCategory.Q.obj ((singleFunctor A b).obj P))⟦1⟧)
+    (htri : Triangle.mk v₁ v₂ δ ∈ distTriang (DerivedCategory A)) :
+    ∃ D : CochainComplex A ℤ, Nonempty (DerivedCategory.Q.obj D ≅ M) ∧
+      (∀ q : ℤ, q < a ∨ b < q → IsZero (D.X q)) ∧
+      (∀ q : ℤ, q ≠ b → Nonempty (D.X q ≅ K.X q)) ∧ Nonempty (D.X b ≅ P) := by
+  let T := (singleFunctor A (b - 1)).obj P
+  let s := (((singleFunctors A).postcomp DerivedCategory.Q).shiftIso
+    1 (b - 1) b (by omega)).app P
+  let : ∀ q : ℤ, Projective (K.X q) := hproj
+  let : K.IsStrictlyLE (b - 1) :=
+    (isStrictlyLE_iff _ _).2 (fun q hq ↦ hsupp q (Or.inr hq))
+  let : K.IsKProjective := isKProjective_of_projective K (b - 1)
+  obtain ⟨gh, hgh⟩ := (IsKProjective.Qh_map_bijective K
+    ((HomotopyCategory.quotient A (.up ℤ)).obj T)).surjective
+      ((DerivedCategory.quotientCompQhIso A).hom.app K ≫ δ ≫ s.hom ≫
+        (DerivedCategory.quotientCompQhIso A).inv.app T)
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient A (.up ℤ)).map_surjective gh
+  have hg : DerivedCategory.Q.map g ≫ s.inv = δ := by
+    have hh : DerivedCategory.Qh.map ((HomotopyCategory.quotient A (.up ℤ)).map g) ≫
+        (DerivedCategory.quotientCompQhIso A).hom.app T =
+        (DerivedCategory.quotientCompQhIso A).hom.app K ≫ DerivedCategory.Q.map g :=
+      DerivedCategory.quotientCompQhIso_hom_naturality g
+    apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app K)).mp
+    rw [← Category.assoc, ← hh, hgh]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id, Category.comp_id]
+  let D := (mappingCone g)⟦(-1 : ℤ)⟧
+  have hDM : Nonempty (DerivedCategory.Q.obj D ≅ M) := by
+    let Tc := DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle g)
+    let Tr := (Triangle.mk v₁ v₂ δ).rotate.rotate
+    let e := isoTriangleOfIso₁₂ Tc Tr (DerivedCategory.mappingCone_triangle_distinguished g)
+      (rot_of_distTriang _ (rot_of_distTriang _ htri)) (Iso.refl _) s.symm (by
+        change DerivedCategory.Q.map g ≫ s.inv = 𝟙 _ ≫ δ
+        simpa only [Category.id_comp] using hg)
+    exact ⟨(DerivedCategory.Q.commShiftIso (-1)).app (mappingCone g) ≪≫
+      (CategoryTheory.shiftFunctor _ (-1)).mapIso (Triangle.π₃.mapIso e) ≪≫
+      (shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app M⟩
+  refine ⟨D, hDM, ?_, ?_, ?_⟩
+  · intro q hq
+    apply (shiftFunctorObjXIso (mappingCone g) (-1) q (q - 1) rfl).isZero_iff.mpr
+    apply (mappingCone.isZero_X_iff g (q - 1)).2
+    constructor
+    · convert hsupp q (by omega) using 1
+      congr 1
+      omega
+    · exact HomologicalComplex.isZero_single_obj_X (.up ℤ) (b - 1) P (q - 1) (by omega)
+  · intro q hq
+    exact ⟨shiftFunctorObjXIso (mappingCone g) (-1) q (q - 1) rfl ≪≫
+      { hom := (mappingCone.fst g).1.v (q - 1) q (by omega)
+        inv := (mappingCone.inl g).v q (q - 1) (by omega)
+        hom_inv_id := by
+          apply mappingCone.ext_to g (q - 1) q (by omega)
+          · simp
+          · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ)
+              (b - 1) P (q - 1) (by omega)).eq_of_tgt _ _
+        inv_hom_id := by simp }⟩
+  · exact ⟨shiftFunctorObjXIso (mappingCone g) (-1) b (b - 1) rfl ≪≫
+      { hom := (mappingCone.snd g).v (b - 1) (b - 1) (add_zero _)
+        inv := (mappingCone.inr g).f (b - 1)
+        hom_inv_id := by
+          apply mappingCone.ext_to g (b - 1) b (by omega)
+          · exact (hsupp b (Or.inr (by omega))).eq_of_tgt _ _
+          · simp
+        inv_hom_id := by simp } ≪≫
+      HomologicalComplex.singleObjXSelf (.up ℤ) (b - 1) P⟩
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+private noncomputable def finiteFreeProductIso (X : Scheme.{u}) (n : ℕ) :
+    topCellIntegralFree.{u} l E X n ≅
+      ∏ᶜ fun _ : Fin n ↦ (SheafOfModules.unit
+        (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X) :
+          scalarReductionSource.{u, u} l E X) :=
+  by
+    let := integralCoefficientAbSheafify.{u, u} X
+    let := integralCoefficientAbLocallyBijective.{u, u} X
+    let F : Fin n → scalarReductionSource.{u, u} l E X := fun _ ↦
+      SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)
+    letI : HasBiproduct F := HasBiproduct.of_hasProduct F
+    change (∐ fun _ : ULift.{u + 1} (Fin n) ↦
+      SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)) ≅ _
+    exact Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (Fin n) ↦
+          SheafOfModules.unit
+            (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)) (g := F)
+        (Equiv.ulift : ULift.{u + 1} (Fin n) ≃ Fin n) (fun _ ↦ Iso.refl _) ≪≫
+      (biproduct.isoCoproduct F).symm ≪≫ biproduct.isoProduct F
+
+private theorem freeZero (X : Scheme.{u}) : IsZero (topCellIntegralFree.{u} l E X 0) := by
+  let := integralCoefficientAbSheafify.{u, u} X
+  let := integralCoefficientAbLocallyBijective.{u, u} X
+  apply (IsZero.iff_id_eq_zero
+    (C := scalarReductionSource.{u, u} l E X) (topCellIntegralFree.{u} l E X 0)).mpr
+  apply Cofan.IsColimit.hom_ext
+    (@SheafOfModules.isColimitFreeCofan X.ProEt inferInstance (ProEt.topology X)
+      (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)
+      (inferInstanceAs (HasWeakSheafify (ProEt.topology X) AddCommGrpCat.{u + 1}))
+      (integralCoefficientAbLocallyBijective.{u, u} X) (ULift.{u + 1} (Fin 0)))
+  intro i
+  exact Fin.elim0 i.down
+
+private theorem singleFree (X : Scheme.{u}) (b : ℤ) (r : ℕ) (q : ℤ) :
+    ∃ n : ℕ, Nonempty
+      (((CochainComplex.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj
+        (topCellIntegralFree.{u} l E X r)).X q ≅ topCellIntegralFree.{u} l E X n) := by
+  by_cases h : q = b
+  · subst q
+    exact ⟨r, ⟨HomologicalComplex.singleObjXSelf (.up ℤ) b _⟩⟩
+  · exact ⟨0, ⟨(HomologicalComplex.isZero_single_obj_X (.up ℤ) b _ q h).isoZero ≪≫
+      (freeZero l E X).isoZero.symm⟩⟩
+
+-- Induction takes place on one fixed component with fixed residue bases. No
+-- constructibility hypothesis is needed once this data has been supplied.
+private theorem localFreeModel (X : Scheme.{u}) [CompactSpace X]
+    (hweak : ∀ (F G : Sheaf (ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),
+      Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 X)))))
+    (hproj : ∀ n : ℕ, Projective (topCellIntegralFree.{u} l E X n))
+    (M : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (hcomplete : IsDerivedCompleteUnrestricted.{u, u} l E X M)
+    (a b : ℤ) (hab : a ≤ b) (r : ℤ → ℕ)
+    (theta : ∀ q : Set.Icc a b, topCellResidueFree.{u} l E X (r q.val) ≅
+      (DerivedCategory.homologyFunctor (scalarReductionTarget.{u, u} l E X 0) q.val).obj
+        ((scalarReductionDerivedExtension.{u, u} l E X 0).obj M))
+    (hTor : ∀ V : X.ProEt,
+      HasProEtaleTorAmplitude V.left (Padic.coefficientExtensionRing l E 1)
+        ((proEtaleRingDerivedPullback V.hom
+          (proEtaleConstantRing X (Padic.coefficientExtensionRing l E 1))
+          (proEtaleConstantRing V.left (Padic.coefficientExtensionRing l E 1))
+          (AlgebraicGeometry.ProEtale.StrictTower.constantRingIso
+            (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)) V.hom)).obj
+          ((scalarReductionDerivedExtension.{u, u} l E X 0).obj M)) a b) :
+    ∃ P : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ,
+      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+      (∀ q : ℤ, ∃ n : ℕ, Nonempty (P.X q ≅ topCellIntegralFree.{u} l E X n)) ∧
+      Nonempty (M ≅ DerivedCategory.Q.obj P) := by
+  classical
+  generalize hd : (b - a).toNat = d
+  induction d using Nat.strong_induction_on generalizing M b with
+  | h d ih =>
+    obtain ⟨e, f, L, g, delta, _he, htri, hL, _hf, _hsplit, _hcone,
+      _hcontract, _hhomotopy, _hresidue, hthetaL, hTorL, hbase, _hrank⟩ :=
+      complete_top_residue_cell_cone l E X hweak M hcomplete a b hab r theta hTor
+    by_cases heq : a = b
+    · have : IsIso f := (hbase heq).2.2
+      let P := (singleFunctor (scalarReductionSource.{u, u} l E X) b).obj
+        (topCellIntegralFree.{u} l E X (r b))
+      refine ⟨P, ?_, inferInstance, singleFree l E X b (r b), ⟨(asIso f).symm⟩⟩
+      simpa only [heq] using (inferInstance : P.IsStrictlyGE b)
+    · have hlt : a < b := lt_of_le_of_ne hab heq
+      obtain ⟨Q, hQge, hQle, hQfree, ⟨eQ⟩⟩ :=
+        ih (b - 1 - a).toNat (by omega) L hL (b - 1) (by omega)
+          (fun q ↦ Classical.choice (hthetaL q)) (hTorL hlt) rfl
+      have hQsupp : ∀ q : ℤ, q < a ∨ b - 1 < q → IsZero (Q.X q) := by
+        intro q hq
+        rcases hq with hq | hq
+        · exact (isStrictlyGE_iff Q a).mp hQge q hq
+        · exact (isStrictlyLE_iff Q (b - 1)).mp hQle q hq
+      have hQproj : ∀ q : ℤ, Projective (Q.X q) := by
+        intro q
+        obtain ⟨n, ⟨en⟩⟩ := hQfree q
+        exact Projective.of_iso en.symm (hproj n)
+      have htriQ : Triangle.mk f (g ≫ eQ.hom) (eQ.inv ≫ delta) ∈
+          distTriang (DerivedCategory (scalarReductionSource.{u, u} l E X)) := by
+        exact (distinguished_iff_of_iso
+          (Triangle.isoMk (Triangle.mk f g delta)
+            (Triangle.mk f (g ≫ eQ.hom) (eQ.inv ≫ delta))
+            (Iso.refl _) (Iso.refl _) eQ (by simp) (by simp) (by simp))).mp htri
+      obtain ⟨P, ⟨eP⟩, hsupp, hlow, ⟨htop⟩⟩ :=
+        attachCell a b hab (topCellIntegralFree.{u} l E X (r b)) M Q hQsupp hQproj
+          f (g ≫ eQ.hom) (eQ.inv ≫ delta) htriQ
+      refine ⟨P, (isStrictlyGE_iff P a).mpr (fun q hq ↦ hsupp q (Or.inl hq)),
+        (isStrictlyLE_iff P b).mpr (fun q hq ↦ hsupp q (Or.inr hq)), ?_, ⟨eP.symm⟩⟩
+      intro q
+      by_cases hq : q = b
+      · subst q
+        exact ⟨r b, ⟨htop⟩⟩
+      · obtain ⟨n, ⟨en⟩⟩ := hQfree q
+        exact ⟨n, ⟨(Classical.choice (hlow q hq)) ≪≫ en⟩⟩
 
 /- The finite family is indexed by `Fin n`; `n = 0` therefore covers the empty
 scheme, while the pairwise disjointness condition retains the stated clopen case. -/
@@ -68,55 +241,26 @@ Source: Stacks Project, proetale.tex, Tag 09C3, with Lambda = O_E and I = (varpi
 algebraization.tex, Tag 099I identifies the complete coefficient categories
 (blueprint: lem-fix-residue-lisse-projective-models).
 
-Proof plan, following the eight steps of the node:
-1. The extension-integers DVR theorem makes O_E Noetherian. Use
-   lem-weil-pbc-completed-constant-sheaf-reduction and
-   lem-weil-pbc-constant-module-section-properties to obtain the free two-term
-   quotient resolutions. They are K-flat by lem-pc-bounded-above-flat-kflat-site.
-   The quotient tower is its derived limit by
-   lem-weil-proetale-surjective-tower-derived-limit. Thus finite free sheaves and
-   their shifts are complete. Use det-prop-integral-criterion-constant-coefficients
-   and sk-def-pe-derived-completion to identify the completeness convention, and
-   det-pe-derived-nakayama-first-reduction for cones and residue detection.
-2. Trivialize the finitely many residue cohomology sheaves on a common pro-etale
-   cover, using det-pe-topos-functoriality-site. By def-weil-pbc-proetale-covering,
-   take finitely many affine covering members and their scheme coproduct using
-   lem-weil-pbc-scheme-coproduct-family. Weak etaleness follows from
-   sk-lem-pe-weakly-etale-stability, lem-weil-pbc-open-immersion-etale and
-   det-pe-morphisms-etale-comparison. By lem-weil-pbc-proetale-subcanonical this
-   cover gives an epimorphism of representables. Weak contractibility splits it.
-   Pull back the coproduct components along the section to get a finite clopen
-   partition on which every residue cohomology sheaf is constant finite-dimensional.
-3. By lem-weil-proetale-weakly-etale-localization, restriction to a clopen member
-   is site localization. The disjoint-complement product description of sheaves
-   preserves limits, reductions and their Roos triangles. It preserves completeness
-   and identifies the restricted completion with B_U. Extending by the terminal
-   sheaf on the complement proves weak contractibility on U. Evaluation is exact,
-   so Hom(B_U,F) = F(U) makes finite free B_U-sheaves projective.
-4. Induct on the residue interval length. Use lem-sf-complete-residue-cohomology-bounds
-   for integral cohomological bounds. Lift residue bases to cycles by exact
-   evaluation, obtaining a zero-differential finite free residue model.
-   By lem-pc-ring-derived-map-representative, bounded projective complexes compute
-   derived maps; in particular maps from shifted free sheaves are cohomology sections.
-5. The quotient resolution from step 1, computed using lem-pc-kflat-resolution and
-   lem-pc-bounded-above-flat-kflat-site, gives the uniformizer triangle. By
-   lem-sf-derived-homology-long-exact and the top bound, lift the top residue basis
-   to integral cohomology and then cycles, giving a map B_U^r[-b] to K. Its reduction
-   is the inclusion of the top summand in the split residue model of step 4.
-6. Its cone L is complete by det-pe-derived-nakayama-first-reduction. Reduction is
-   triangulated by lem-pur-derived-change-of-rings. The residue cone is the lower
-   degree split model plus a contractible identity complex, so its amplitude drops
-   to [a,b-1], using lem-pc-bounded-above-flat-kflat-site for the tensor computation.
-   If a=b, derived Nakayama makes L zero; the one-term free model suffices.
-7. Otherwise induction gives a bounded free model Q of L. Represent its connecting
-   map to B_U^r[-b+1] by lem-pc-ring-derived-map-representative. Its shifted cone
-   has terms Q below b and B_U^r in degree b, with the sheaf-linear last differential
-   satisfying the chain equation. Cone triangles in def-weil-abstract-derived-category
-   identify it with K on this member.
-8. Apply this construction on every partition member. The finite free terms split
-   off themselves, so give the asserted direct summands. Nothing makes the sheaf
-   differentials constant. For the empty scheme use the empty partition; for zero
-   residue use derived Nakayama and the zero complex. -/
+Proof, following the six steps of the node:
+1. lem-sf-residue-lisse-clopen-bases gives a finite disjoint open cover. On each member X
+   the completed pullback M of K is complete, X is compact and weakly contractible, the
+   completed finite free sheaves are projective, and one interval [a,b] with ranks r
+   identifies the residue cohomology with finite free residue sheaves; the residue Tor
+   interval [a,b] holds on every object of the pro-etale site of X.
+2. On X induct strongly on (b-a).toNat. lem-sf-complete-top-residue-cell-cone gives a
+   distinguished triangle F[-b] -> M -> L -> F[-b+1] with F = B_X^(r b), L complete,
+   and the shortened residue bases and Tor interval [a,b-1].
+3. If a = b the first map is an isomorphism, and the single complex F in degree b is
+   the model; its other terms are zero, the free sheaf on the empty basis.
+4. If a < b, induction gives a finite free model Q of L in [a,b-1]; its terms are
+   projective, and the triangle is transported along L = Q(Q).
+5. `attachCell`: Q is a bounded-above complex of projectives, hence K-projective, so
+   the connecting map is a chain map g : Q -> F[-b+1]; comparing the twice-rotated
+   triangle with the cone triangle of g gives Q(Cone(g)[-1]) = M, with terms Q^q for
+   q != b and F in degree b.
+6. A finite free sheaf is the finite product of copies of B_X through the finite
+   biproduct comparisons; the term isomorphisms give inclusion and retraction. The
+   empty cover handles the empty scheme; differentials stay arbitrary. -/
 theorem residue_lisse_projective_models
     (S : Scheme.{u}) (hS : IsAffine S)
     (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1}
@@ -153,6 +297,19 @@ theorem residue_lisse_projective_models
           Nonempty
             ((integralDerivedPullback l E (U i).ι).obj K ≅
               DerivedCategory.Q.obj P) := by
-  sorry
+  classical
+  obtain ⟨n, U, hcover, hdisjoint, hlocal⟩ :=
+    residue_lisse_clopen_bases l E S hS hweak K hcomplete hresidue hlisse hTor
+  refine ⟨n, U, hcover, hdisjoint, fun i ↦ ?_⟩
+  obtain ⟨hcompact, hweakU, hprojective, hcompleteU, a, b, r, hab, htheta, hTorU⟩ :=
+    hlocal i
+  let := hcompact
+  obtain ⟨P, hge, hle, hfree, hP⟩ := localFreeModel l E (U i).toScheme hweakU
+    hprojective _ hcompleteU a b hab r (fun q ↦ Classical.choice (htheta q)) hTorU
+  refine ⟨P, a, b, hab, hge, hle, ?_, hP⟩
+  intro q
+  obtain ⟨N, ⟨e⟩⟩ := hfree q
+  let e' := e ≪≫ finiteFreeProductIso l E (U i).toScheme N
+  exact ⟨N, e'.hom, e'.inv, e'.hom_inv_id⟩
 
 end WeilConjectures

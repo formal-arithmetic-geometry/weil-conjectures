@@ -24,6 +24,11 @@ import Mathlib.NumberTheory.Padics.PadicNumbers
 import Mathlib.Analysis.SpecificLimits.Normed
 import all Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Finite constant local models for condensed coefficients

@@ -10,15 +10,7 @@ public import Sheaf.Paper.SixFunctorOperationDatum
 public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.ExchangeFunctoriality
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.QcqsCompactSupportRealization
-import Sheaf.Paper.IsomorphismDerivedPullback
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.SfIntegralCompactSupportConstructible
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.FiniteCoefficientAdjointComparisons
+import Sheaf.Paper.ConstructibleMateCoherence
 
 /-! # Invertibility of compact-support exchange for geometric Frobenius
 
@@ -100,6 +92,7 @@ theorem compactSupportFrobeniusExchange_isIso
     (c₀ : Compactification f₀.left) :
     IsIso (frobeniusRational D l hl E f₀
       (frobeniusCompactModel D f₀ c₀)) := by
-  sorry
+  exact (PodConstructibleMate.frobenius_exchanges_isIso D l hl X₀ Y₀ f₀ c₀ E
+    (AlgebraicClosure (Padic l))).1
 
 end WeilConjectures.FrobeniusExchange

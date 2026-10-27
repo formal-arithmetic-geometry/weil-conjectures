@@ -131,8 +131,14 @@ def expired(r) -> bool:
 
 def create(m, who):
     fd = os.open(lock(m), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
-    with os.fdopen(fd, "w") as f:
-        f.write(json.dumps({"who": who, "t": time.time(), "since": time.strftime("%FT%TZ", time.gmtime())}))
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(json.dumps({"who": who, "t": time.time(), "since": time.strftime("%FT%TZ", time.gmtime())}))
+    except BaseException:
+        # 2026-10-24: a write that fails (the disk was full at 18:1x) left an empty lock that never expired and made
+        # the item unclaimable ("taken by ? since ?", 105 items)
+        lock(m).unlink(missing_ok=True)
+        raise
 
 
 def held_by(who):
@@ -246,16 +252,19 @@ def take(who, m, quiet=False, stage=None) -> bool:
     (~40-100 sessions an hour). Judged for the caller's stage, such a claim is refused."""
     claim_stage = str(stage or queue_stage(m) or
                       ("3" if "." in m or li.file_of(m).is_file() else "1"))
-    # the human, 2026-10-22: an item still on the list (coord/queue.tsv) that nobody holds is dispatched, whatever
-    # the checks below would say; they apply only to items the queue no longer lists
+    # Queue rows select work, but can outlive a DAG landing or refer to a provisional node.
+    # Recheck publication and completion for the requested DAG stage even while listed:
+    # a stale row must not reopen an accepted split. Released stage-1 repairs are
+    # already accounted for by node_finished / dag_queue.stage1_completed.
     listed = queue_stage(m) is not None
-    if not listed and claim_stage in ("1", "2") and not node_published(m):
+    if claim_stage in ("1", "2") and not node_published(m):
         if not quiet:
             print(f"{m} has no published DAG node in the live sources; nothing to claim")
         return False
-    if not listed and stage is not None and node_finished(m, stage) and repair_note(m).get('state') != 'released':
+    if claim_stage in ("1", "2") and node_finished(m, claim_stage) and (
+            claim_stage == "1" or repair_note(m).get('state') != 'released'):
         if not quiet:
-            print(f"{m} is already completed for stage {stage} (live node); nothing to claim for that stage")
+            print(f"{m} is already completed for stage {claim_stage} (live node); nothing to claim for that stage")
         return False
     if not listed and li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
             and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()) \
@@ -294,9 +303,13 @@ def take(who, m, quiet=False, stage=None) -> bool:
     with open(C / ".takeover", "w") as g:
         fcntl.flock(g, fcntl.LOCK_EX)
         r = read(m)
-        if expired(r):
+        try:   # an unreadable (empty or torn) lock older than a minute holds nothing
+            stale = r is None and time.time() - lock(m).stat().st_mtime > 60
+        except FileNotFoundError:
+            stale = False
+        if expired(r) or stale:
             lock(m).unlink(missing_ok=True)
-            log(f"{who} took over the expired claim of {r.get('who')} on {m}")
+            log(f"{who} took over the expired claim of {(r or {}).get("who", "(empty lock)")} on {m}")
             try:
                 create(m, who); handoff_return(who, m); print(m); return True
             except FileExistsError:

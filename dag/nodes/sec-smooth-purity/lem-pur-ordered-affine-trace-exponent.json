@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-ordered-affine-trace-exponent",
+ "kind": "statement",
+ "title": "Root transition preserves the ordinary ordered affine counit",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, n>=0, and A=finiteTateCoefficient ell E n. Let T be Noetherian with ell invertible. Let r<=s and suppose both positive prime powers annihilate A. Choose arbitrary normalized ordinary twist transports tr, ts and projective-line datum families Dr, Ds. For d>=0 let C_r and C_s be affineLinearCoefficientDescent, let p be affineTraceProjection(T,d), and let B be baseExponentComparison(T,r,s,d). Put z=C_s.hom followed by p^*(B.hom) followed by C_r.inv. Then affineTraceLeft(T,d).map(z) followed by affineTraceCounit at r equals affineTraceCounit at s. This is an equation for the ordered affine tower only, with no vector bundle, frame, global gluing or site comparison.",
+ "stmt_deps": [
+  "def-pur-finite-site-coordinates",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "def-asd-ordinary-finite-p1-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Affine-line restriction to the standard open and induction on the ordered tower; parent local-trace proof Steps 1 and 2; integration-exponent-transpose-transport Steps 6--9."
+ },
+ "proof": [
+  {
+   "text": "Form the morphism of Kummer sequences with the root-power map, power on the first units term, and identity on the second units term. Boundary naturality identifies scalar Chern classes at the two exponents; adjunction-unit naturality identifies the other decomposition component. Invert the resulting biproduct square and project to its constant summand to get the projective trace equation.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-amb-finite-tate-site-descent",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use projective counit normalization and projection naturality to obtain the counit equation for every input. Naturality of the open-extension counit then gives the affine-line counit equation.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-data",
+    "def-amb-affine-trace-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the coordinate tower with the explicit composite-counit formula, starting from the identity adjunction at zero. Apply the preceding left functor to the last line equation and combine with the induction hypothesis and counit naturality. The canonical coefficient descents identify the transition with z as displayed. These calculations depend only on the normalizations, so arbitrary datum families are allowed, including empty T and d=0.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-affine-linear-trace-action",
+    "def-pur-finite-site-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-linear-trace-action",
+  "def-amb-affine-trace-construction",
+  "def-amb-p1-trace",
+  "def-asd-ordinary-finite-p1-data",
+  "def-pur-finite-site-coordinates",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-finite-tate-site-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Affine-line restriction to the standard open and induction on the ordered tower; parent local-trace proof Steps 1 and 2; integration-exponent-transpose-transport Steps 6--9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an ordered tensor product of shifted finite Tate lines commutes with the power transition on roots of unity",
+   "results": "Eight scheme pullback carrier tensorCongr lemmas; none concerns derived finite Tate coefficients or normalized traces. A separate affine trace root-transition search returned eight cyclotomic-character and roots-of-unity lemmas, with no sheaf trace theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits headed by CategoryTheory.NatTrans.naturality, plus pullback/pushout and other generic naturality declarations. This supplies the exchange and compact-support comparison squares, not the geometric normalization equations.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "affineTraceCounit.*transition|baseExponentComparison; root transition; ordered affine",
+   "results": "The library has the baseExponentComparison construction and the finite-type affineTranspose_exponent_transition, whose conclusion is an adjunct on the pro-etale site and cannot apply on arbitrary Noetherian bases. IntegrationExponentTransposeTransport imports the parent VectorIntegrationSiteComparison and cannot be used here. No matching coefficient pullback or ordinary ordered counit theorem was found. Blueprint-reference searches found no node for these equations.",
+   "date": "2026-10-27",
+   "verdict": "No applicable existing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorLocalTraceExponent",
+  "date": "2026-10-27",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedAffineTraceExponent",
+  "file": "lean/Sheaf/Paper/OrderedAffineTraceExponent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.affineTraceCounit_exponentTransition",
+  "statement": "theorem affineTraceCounit_exponentTransition\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ)\n    (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤)))\n    (r s : ℕ) (hrs : r ≤ s)\n    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (tr : Etale.OrdinaryFiniteTwistTransport (Scheme.finiteTateCoefficient l E n)\n      (l ^ (r + 1)) hr)\n    (Dr : ∀ (Y : Scheme.{u}) [IsNoetherian Y]\n      (hY : IsUnit ((l ^ (r + 1) : ℕ) : Γ(Y, ⊤))),\n      Etale.OrdinaryFiniteP1Datum _ (l ^ (r + 1)) hr tr Y hY)\n    (ts : Etale.OrdinaryFiniteTwistTransport (Scheme.finiteTateCoefficient l E n)\n      (l ^ (s + 1)) hs)\n    (Ds : ∀ (Y : Scheme.{u}) [IsNoetherian Y]\n      (hY : IsUnit ((l ^ (s + 1) : ℕ) : Γ(Y, ⊤))),\n      Etale.OrdinaryFiniteP1Datum _ (l ^ (s + 1)) hs ts Y hY) (d : ℕ) :\n    (Etale.affineTraceLeft (Scheme.finiteTateCoefficient l E n) T d).map\n      ((Etale.affineLinearCoefficientDescent _ (l ^ (s + 1)) hs ts T\n          (by simpa only [Nat.cast_pow] using hT.pow (s + 1)) d).hom ≫\n        (Etale.ordinaryFinitePullback _ (affineTraceProjection T d)).map\n          (baseExponentComparison l E n T hT r s hrs hr hs d).hom ≫\n        (Etale.affineLinearCoefficientDescent _ (l ^ (r + 1)) hr tr T\n          (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) d).inv) ≫\n      Etale.affineTraceCounit _ (l ^ (r + 1)) hr tr Dr T\n        (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) d =\n    Etale.affineTraceCounit _ (l ^ (s + 1)) hs ts Ds T\n      (by simpa only [Nat.cast_pow] using hT.pow (s + 1)) d",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Affine-line restriction to the standard open and induction on the ordered tower; parent local-trace proof Steps 1 and 2; integration-exponent-transpose-transport Steps 6--9.",
+   "via": [
+    "lem-pur-vector-local-trace-exponent",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201513-L-3387922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201513-L-3387922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

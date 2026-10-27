@@ -209,7 +209,22 @@
   "def-wf-tate-twist"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_verdierDual_tensor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_verdierDual_tensor"
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
@@ -301,5 +316,36 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a0a1764e1 (reviewer sub-agent of L); spot-checked: Read the full item and its 7 steps against the base and main-20261015 proof, the unit sk-p-dl-a1-perverse, the statements of all 19 cited nodes, the pbc/sf category definitions and Stanford L19 p.3 Prop 1.1.9. The statement is verbatim and not weakened. The stmt_deps correctly name the adic common-stage category, the adic lisse definition, the coefficient operations and thm-coef-qbar-verdier; tate-twist and the finite-only constructible-complexes node are rightly dropped. The report's three base-proof faults are confirmed: fin2 lisse-trivialization is finite-ring only (an infinite-monodromy Z_l character of G_m is a counterexample); fix-lem-tensor-adjunction is the f_!/f^! adjunction, not currying; the second-variable interchange had no citation. The repaired route works: the component/Galois/stable-lattice construction gives a free lattice, the completed-system comparison gives N, the stratified characterization (ii) puts N in the integral category and makes it perfect, integral Verdier gives C_R, the completed tensor comparison applies on qcqs X, then currying with N outermost (exact-restriction), perfect evaluation (ringed-site-perfect-duality, arbitrary second argument), symmetry, and rational/Qbar Verdier plus the adic calculus give L^vee = N^* with no twist. Small cases checked: rank 0, X empty, constant L, a point, disconnected X with varying rank, infinite monodromy. No new nodes, no cycle, no SGA. All 12 declared tool_uses are accepted as generic coefficient or ringed-site black boxes. Two C1/C4 citation faults are fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-dual-lisse-tensor.json. (1) Step 1: K lies in def-weil-pbc-qbar-category, but the Verdier theorems are stated on the derived-complete/Karoubi-rationalization category; I added lem-weil-pbc-integral-stratified-perfect-characterization, whose last clause identifies the integral categories, so everything is formed at the single stage E. (2) Step 2: I added the Mathlib leaf lem-weil-pbc-noetherian-scheme-closed-subsets-minimal for the Noetherian-space hypothesis of the connected-components lemma. Batch-5 check: by closure diff the item adds only itself to the batch-5 closure, and the flagged cor-galois-lisse-representations, lem-pod-profinite-stable-lattice and def-pod-lisse-l-adic-sheaves are already in it without the item. They are a general definition, the lisse/representation equivalence and compact-group lattice theory, neither assumed statement nor a step of their proofs. The two same-unit lemmas are flagged only through def-pod-lisse. All accepted. Maintainer notes: (a) the service deleted state/dagsnap/967e9e9a mid-review, so the snapshot DAG vanished after all cited statements had been read; (b) a parallel Q60 delivery of the same item (97e88a90) is in review, so whichever lands second is superseded; (c) advisory: lem-a1-smooth-lisse-integral-lattice is an alternative lattice tool.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be\nsmooth of pure dimension\n$d$, let $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$\n([det-def-sfb-bounded-constructible]) and let $\\mathcal L$ be a lisse\n$\\overline{\\mathbf Q}_{\\ell,X}$-module ([sk-lem-coefficient-heart]), that is, locally free of\nfinite rank for the pro-étale topology. Then the Verdier dual satisfies\n\n$$\nD_X\\bigl(K\\otimes^L\\mathcal L\\bigr)\\;\\cong\\;\nD_XK\\otimes^L\\mathcal L^\\vee,\n$$\n\nthe linear dual $\\mathcal L^\\vee$ of $\\mathcal L$.",
+  "proof": [
+   {
+    "text": "By [def-trf-dualizing-complex] and the derived tensor–Hom adjunction\nof [fix-lem-tensor-adjunction] of the framework chapter,\n\n$$\nD_X\\bigl(K\\otimes^L\\mathcal L\\bigr)\n=R\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}\\bigl(K\\otimes^L\\mathcal L,\n\\omega_X\\bigr)\n\\cong R\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}\\bigl(K,\nR\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}(\\mathcal L,\\omega_X)\\bigr).\n$$",
+    "uses": [
+     "def-trf-dualizing-complex",
+     "fix-lem-tensor-adjunction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the lisse sheaf $\\mathcal L$, locally free of finite rank for the pro-étale\ntopology ([sk-lem-coefficient-heart]), the internal Hom into $\\omega_X$ is the tensor with the linear\ndual: on a pro-étale neighborhood where\n$\\mathcal L\\cong\\overline{\\mathbf Q}_\\ell^{\\,r}$ one has\n$R\\mathcal Hom(\\mathcal L,\\omega_X)\\cong\\omega_X^{\\,r} \\cong\\mathcal L^\\vee\\otimes\\omega_X$, and the identification is\ncanonical and local, hence assembled into the global isomorphism\n\n$$\nR\\mathcal Hom_{\\overline{\\mathbf Q}_\\ell}(\\mathcal L,\\omega_X)\n\\cong\\mathcal L^\\vee\\otimes\\omega_X.\n$$",
+    "uses": [
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Inserting this, and using once more that the internal Hom with a\nlisse sheaf commutes with the lisse tensor (the same pro-étale-local\nargument applied to the second variable, with the identification\n$R\\mathcal Hom(K,\\mathcal L^\\vee\\otimes\\omega_X)\\cong R\\mathcal Hom(K,\\omega_X)\\otimes^L\\mathcal L^\\vee$),\n\n$$\nD_X\\bigl(K\\otimes^L\\mathcal L\\bigr)\n\\cong R\\mathcal Hom\\bigl(K,\\omega_X\\bigr)\\otimes^L\\mathcal L^\\vee\n=D_XK\\otimes^L\\mathcal L^\\vee,\n$$\n\nwhich is the asserted isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -35,24 +35,24 @@
  ],
  "proof": [
   {
-   "text": "The profinite comparison supplies $f^{-1}A_Y\\cong A_X$ compatibly with quotient projections. Thus the operations and projection definitions use the ordinary ringed mate. For $F(P)=Rf_*K\\otimes^LP$ and $G(P)=Rf_*(K\\otimes^LLf^*P)$, its shift equation identifies the isomorphism locus with the all-shifts locus. Apply the shift-saturated locus theorem: it is thick triangulated.",
+   "text": "The profinite coefficient comparison gives the specified coefficient-ring identification. Apply native pro-etale projection-mate exactness to obtain the two exact functors and a shift-compatible natural transformation whose components are the actual projection maps. Its isomorphism locus is exactly locus. The existing NatTrans.isoLocus instances make that locus triangulated and stable under retracts.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-pbc-proetale-operations",
     "def-weil-pbc-projection-formula-map",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sc-shift-saturated-iso-locus"
+    "lem-weil-pbc-proetale-projection-mate-exact",
+    "lem-sf-generating-class-determination"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0944, lemma-projection-formula, thick closure"
    }
   },
   {
-   "text": "The mate lemma gives $\\pi_{A_Y}=1$. Additivity and naturality with finite-biproduct injections and projections make $\\pi_{A_Y^{\\oplus m}}$ the diagonal matrix of identities; it is invertible also for $m=0$. These statements apply on localized ringed topoi as well.",
+   "text": "The native exactness lemma gives invertibility at the degree-zero coefficient unit. Exactness of the two functors implies that the isomorphism locus is stable under finite products. Apply it to the limit cone of the finite discrete diagram of copies of the unit, preserved by the degree-zero single functor; this includes the empty product at rank zero.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-weil-pbc-proetale-projection-mate-exact"
    ],
    "elementary": true,
    "source": {
@@ -61,62 +61,60 @@
    }
   },
   {
-   "text": "Choose local bounded models for a site-perfect $P$. The restriction lemma identifies the restricted mates. Their terms are finite-free retracts, hence belong to the local thick loci of steps 1–2. Bounded-complex devissage puts each model there. Local detection then gives invertibility at $P$; bounds need not be uniform.",
+   "text": "Open the definition of site-perfectness. For every site object choose its covering sieve and the bounded finite-free-retract model B on each covering object U. Use the actual native slice presentation to identify restriction of the projection mate with a shift-compatible natural transformation between exact slice functors. Restriction of the coefficient unit is the slice coefficient unit, so cancellation of the presentation comparisons gives its invertibility there. Finite products and retract closure put each term of B in its isomorphism locus; bounded-complex triangulated devissage puts Q(B) there. Transport along the local quasi-isomorphism and the chosen global model, then cancel the source and target comparison isomorphisms. Local detection of derived isomorphisms proves invertibility globally. Bounds and ranks may vary with U.",
    "uses": [
     "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-pbc-ringed-projection-restriction",
-    "lem-weil-pbc-bounded-complex-triangulated-devissage"
+    "lem-weil-pbc-proetale-projection-mate-slice-presentation",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-bounded-complex-triangulated-devissage",
+    "lem-weil-pbc-ringed-restriction-local-iso"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0944, lemma-projection-formula, locality and stupid truncations"
    }
   },
   {
-   "text": "For $P_n$, the perfect-ring definition and completed-constant reduction give a bounded finite-free-retract $A_T$-model of $(P_n)_T$. Step 3 applies. The equation $\\pi_{X,n}c_f=c_{f,n}f^{-1}\\pi_{Y,n}$ makes $c_{f,n}$ coefficient-linear; the operations have exact identified-coefficient pullback. Thus $Lf^*(P_n)_Y\\cong(P_n)_X$, and the target is $Rf_*K_n$.",
+   "text": "For $P_n$, the perfect-ring definition and completed-constant reduction give a bounded finite-free-retract $A_T$-model of $(P_n)_T$. Step 3 applies. The equation $\\pi_{X,n}c_f=c_{f,n}f^{-1}\\pi_{Y,n}$ makes $c_{f,n}$ coefficient-linear; the operations have exact identified-coefficient pullback. Thus $Lf^*(P_n)_Y\\cong(P_n)_X$, and the target is $Rf_*K_n$. The ordinary quotient pullback uses the existing ring-restriction mate and adjunct equations, specialized only after a generic restricted-unit proof.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
     "def-pc-perfect-ring-complex",
     "lem-weil-pbc-completed-constant-sheaf-reduction",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-proetale-operations"
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0944, lemma-projection-formula, finite-perfect application"
    }
   },
   {
-   "text": "Compute the counit projection mate on mixed K-flat representatives by lem-weil-pbc-proetale-mixed-projection-mate. Naturality in K and the coefficient transports its equation along the chosen K-injective model, the quotient representative, and the canonical quotient pullback comparison. This identifies the forward reduction map with localization of the signed total mate. tensorAdjunctionTotal_isIso, using ordinaryUnit_coherence and the bounded degreewise finite-free retract package, proves its inverse identity. Uniqueness of inverses then identifies the specified total inverse with rho_n, independently of the chosen model or splittings.",
+   "text": "Apply the existing native SignedProjectionResolution.normalization theorem, using both its forward formula and its inverse identity. The proved normalization_with_coefficient_iso helper conjugates its target by the quotient-pullback tensor isomorphism over arbitrary coefficient sheaves, using only isomorphism cancellation. Specialize to the completed rings and the supplied representatives. Resolution.sourceModel and targetModel reuse the existing signed comparison constructors; Resolution.total and totalInverse reuse the existing signed chain maps. Their mathematical values are unchanged. The forward equation is the first conjunct. Since reductionMap is invertible by step 4, cancel it in the signed inverse identity to obtain the reverse equation. This proves resolution independence. The now-unused duplicate mixed, ordinary-unit, flatness, K-injectivity and push-model declarations of this item are pruned; the native theorems supplying them remain proved.",
    "uses": [
     "def-weil-pbc-projection-formula-arrows",
-    "def-weil-pbc-projection-formula-map",
-    "lemma-weil-pbc-projection-formula-totalization",
+    "lem-weil-pbc-signed-projection-resolution-normalization",
     "lem-weil-pbc-proetale-mixed-projection-mate"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
-    "place": "Second paragraph and third paragraph: signed totalization and uniqueness"
+    "place": "Second paragraph (signed totalization) and third paragraph (resolution independence); expanded normalization in lean/Sheaf/Paper/PerfectProjectionFormula.lean, Resolution.sourceModel, Resolution.targetModel and totalization_compatibility, lines 1244–1451. Stacks Tag 0B56, equation-projection-formula-map, is the counit-mate source."
    }
   },
   {
-   "text": "Mate naturality gives quotient and operator squares; profinite comparison identifies the pulled-back quotient maps. The base-change lemma supplies the forward exchange square. The new pullback-model lemma makes $Lg^*$ of the model in step 4 strict-perfect, with its mapped splittings. Totalization inverts its lower projection arrow. For base change the upper arrow is $Lg^*\\pi_n$, whose inverse is $Lg^*\\rho_n$ because functors preserve inverse equations. For any forward square $b\\pi=\\pi\\prime a$ with $\\rho,\\rho\\prime$ inverse to $\\pi,\\pi\\prime$, $\\rho\\prime b=\\rho\\prime b\\pi\\rho=\\rho\\prime\\pi\\prime a\\rho=a\\rho$. This gives every inverse square, without inverting exchange.",
+   "text": "Naturality of the derived tensor and quotient coefficient maps proves the tower and operator squares. Prove coefficientMap_comp by uniqueness of the completed finite-quotient cone. The ordinary adjunction unit characterizations and the existing constant-comparison composition theorem, transposed by the abstract adjunction-composition identity, prove quotientPullback_compositor, and a generic derived degree-zero compositor lemma proves quotientDerivedPullback_compositor. These give the coefficient square. Combine the existing projection base-change equation with tensor naturality and that coefficient square; reduction_square_algebra carries out the associativity calculation. Since both forward projection maps are invertible, cancel them to obtain the inverse square without inverting the exchange map.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-totalization"
+    "lemma-weil-pbc-projection-formula-base-change-naturality"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; remark-compatible-with-diagram after Tag 0944"
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; specialization to the section-normalized finite quotient objects in blueprint lemma-weil-pbc-perfect-projection-formula, third proof paragraph (base-change compatibility), and lean/Sheaf/Paper/PerfectProjectionFormula.lean, QuotientComposition and baseChange_compatibility, lines 1830–2150."
    }
   },
   {
@@ -135,25 +133,27 @@
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "def-weil-pbc-proetale-operations",
   "def-weil-pbc-projection-formula-map",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sc-shift-saturated-iso-locus",
+  "lem-weil-pbc-proetale-projection-mate-exact",
+  "lem-sf-generating-class-determination",
   "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-proetale-projection-mate-slice-presentation",
+  "def-weil-pbc-ringed-derived-restriction",
   "lem-weil-pbc-bounded-complex-triangulated-devissage",
+  "lem-weil-pbc-ringed-restriction-local-iso",
   "def-weil-pbc-adic-coefficient-datum",
   "def-pc-perfect-ring-complex",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-weil-pbc-projection-formula-arrows",
-  "lemma-weil-pbc-projection-formula-totalization",
+  "lem-weil-pbc-signed-projection-resolution-normalization",
+  "lem-weil-pbc-proetale-mixed-projection-mate",
   "lemma-weil-pbc-projection-formula-base-change-naturality",
-  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
-  "lemma-weil-pbc-projection-formula-identity-compactification",
-  "lem-weil-pbc-proetale-mixed-projection-mate"
+  "lemma-weil-pbc-projection-formula-identity-compactification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0B56 and 0944; mixed-representative normalization and uniqueness of inverses for proof step 5. Other proof steps are retained."
+  "place": "Tag 0944 lemma-projection-formula: native exact projection-mate data, actual slice presentation, finite-free retract devissage and local isomorphism detection. Reuse SignedProjectionResolution.normalization for the signed totalization equation. Preserve the completed-quotient, compositor, base-change and identity-compactification constructions and statements. Native pro-etale interfaces preserve the independent site universes."
  },
  "mathlib_searches": [
   {
@@ -261,34 +261,41 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lemma-weil-pbc-perfect-projection-formula",
   "worker": "stage1",
-  "summary": "Repair of the 2026-10-21 re-split return. Adds two independent statement-only tasks: bounded-complex triangulated devissage and the specified strict-perfect model for arbitrary ringed-topos derived pullback. Retains all old proof arguments in short assembly, including local bounds, completed coefficient models, coefficient-linear pullback, signed inverse identification, inverse-square cancellation and proper compatibility. Reuses the general all-shifts locus theorem instead of duplicating it. The item statement and Lean record are unchanged.",
-  "blueprint": "First paragraph: steps 1–4; finite induction is delegated to the new bounded devissage node. Second paragraph: step 5 with existing totalization. Third paragraph: steps 4–7; termwise derived base-change model and splittings are delegated to the new strict-perfect ringed-pullback node. Site-local bounds replace the previously corrected global-thick-generation assertion.",
+  "summary": "Q10 deliberate re-split: two independent statement-only nodes expose the signed representative normalization and the quotient-compositor normalization. All thick-locus, local-bounds, completed reduction, coefficient-linear pullback, signed inverse, tower/operator, base-change and proper-compatibility arguments are retained. Statement and Lean metadata are unchanged.",
+  "blueprint": "First paragraph is realized by steps 1–4, including the site-local perfectness correction already in the live statement. Second paragraph is realized by step 5 and the new signed-resolution node. Third paragraph is realized by steps 4–7; the new quotient-compositor node carries the ordinary constant-section and derived-composition normalization behind base change.",
   "tool_uses": [
    {
     "node": "lem-sc-shift-saturated-iso-locus",
-    "why": "Generic thick closure of the all-shifts invertibility locus; the ringed mate shift equation identifies it with this locus. This is a category-theoretic tool, not a replacement of the unit route."
+    "why": "Generic thick closure of the all-shifts invertibility locus, as already accepted on the live split; the canonical mate shift equation identifies that locus with this one."
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
-  "lem-sc-shift-saturated-iso-locus"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NE-449ea2a96",
-  "group": "NE",
+  "reviewer": "NT-cc-Q10-0545f99e5",
+  "group": "Q10",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-449ea2a96 (reviewer sub-agent of L); spot-checked: Re-split of the reviewed live item (the 8-step, 7625-char NH proof) into a 7-step assembly of 2290 chars, 2489 after the fix, plus two new statement-only nodes of comparable size. The statement and all non-stage-1 fields are byte-identical to live. Step-by-step comparison: the old stupid-truncation induction became lem-weil-pbc-bounded-complex-triangulated-devissage. This node is true: σ≥q triangles plus shift closure give it, and the empty and one-term cases hold. Its source is Stacks 0FCP, read in derived.tex. The old K-flat termwise model and pulled splittings in the base-change step became lem-weil-pbc-strict-perfect-ringed-pullback-model. This node is also true: summands of finite free are flat, so bounded flat is K-flat, and ε_P is an isomorphism by lem-weil-pbc-ringed-topoi-derived-pullback. I tested it on Z→Z/2 with [Z-2->Z]. Its source is Stacks 08H3, read. The old shift/triangle/retract argument is covered by the existing, more general lem-sc-shift-saturated-iso-locus; the mate's shift equation makes the iso locus equal the all-shifts locus. That node is off-route (sk-thm-picard-duality) but is a generic categorical tool, and I accept the split_report tool use. The remaining inline work is elementary assembly: the biproduct matrix, c_{f,n}-linearity and the inverse cancellation. I read every cited statement (profinite comparison, operations, map/arrows definitions, mate-exact, restriction with local detection, package definition, completed-constant reduction, totalization, base-change naturality, identity compactification) and they support their steps. Duplicate search of the DAG and Mathlib found nothing; the three kinds of search are recorded on both nodes. FIX (one dropped sentence): new step 6 had lost the old identification of the upper base-change inverse as Lg^*ρ_n, although the report claims it was kept, and its cancellation chain skipped the middle equality. I restored both in fixes/dag/nodes/sec-proper-base-change/lemma-weil-pbc-perfect-projection-formula.json. Maintainer note: the top-level tool_uses still lists lem-sf-triangle-morphism-iso and the degreewise-split triangle node, which the item no longer uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-0545f99e5 (reviewer sub-agent of L); spot-checked: Re-split of the live 7-step item. Compared with the live/side-live clone, only proof, proof_deps, proof_origin and split_report differ; the statement, deps, Lean and reviewed fields are unchanged. Steps 1-4 and 7 are kept verbatim. Base step 5 (mixed-mate computation, naturality transport, inverse identity behind uncited Lean names) is now new node lem-weil-pbc-signed-projection-resolution-normalization; the item keeps the quotient pullback and the uniqueness of inverses. Base step 6 (constant-section adjunct, sheafification composition, direct-image compositor, derived-compositor normalization, square transport) is now the three clauses of lem-weil-pbc-quotient-pullback-compositor-normalization; tower and operator squares, base-change postcomposition and cancellation stay in the item. Nothing was dropped; the two nodes are of comparable size and neither restates the item. Checks: S and T are well-typed. pi=T^-1 Q(t) S follows from mixed-mate plus naturality along alpha and beta (derivation written out). The inverse clause follows from s and t being degreewise inverse with matching sign. J is K-injective and F K-flat. The quotient node holds: constant sections go to constant sections, c_kh is the composite identification, and Stacks 0D6D gives the derived compositor. Its square follows from fg'=gf'. Edge cases: F=0, rank 0, f=id, h or k = id, Z_l with non-flat quotients, empty schemes. Sources read: blueprint main-20261015 proof (3 paragraphs), Stacks 0944, 0B56 and 0D6D. Not duplicates of mixed-mate, totalization, sp-canonical-derived-pullback-normalization, finite-reduction-pullback-coherence or cbc-derived-finite-quotient-coherence. Tool use lem-sc-shift-saturated-iso-locus accepted. FIX (3 faults): (1) B3/C4: the signed node used pi_{f,K,P} for arbitrary P with no defining node; now defined via lem-weil-pbc-ringed-projection-mate-exact, added to stmt_deps. (2) E4: the quotient node gave theta the opposite direction to def-weil-pbc-ambient-ringed-exchange; it now uses theta_square^-1 = c_{f',g} c_{g',f}^-1, and the equation is unchanged and true. (3) C2/E5: item step 6 used A and B without defining them; they are now defined, together with K', pi'_n and rho'_n and the coefficient square. Maintainer note: top-level tool_uses still lists the unused lem-sf-triangle-morphism-iso and lem-weil-pbc-degreewise-split-derived-triangle.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PerfectProjectionFormula",
@@ -321,23 +328,10 @@
    "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback_naturality",
    "AlgebraicGeometry.Scheme.PerfectProjection.tower_compatibility",
    "AlgebraicGeometry.Scheme.PerfectProjection.operator_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.mixed",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryRightUnit",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryTensorHom",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
    "AlgebraicGeometry.Scheme.PerfectProjection.Resolution",
    "AlgebraicGeometry.Scheme.PerfectProjection.resolution_exists",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPull",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPush",
    "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.total",
    "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.totalInverse",
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.flat",
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex",
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex_isKInjective",
-   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.pushModel",
    "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.sourceModel",
    "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetModel",
    "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility",
@@ -347,7 +341,9 @@
    "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeTarget",
    "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
    "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility",
-   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryRightUnit_eq"
+   "AlgebraicGeometry.Scheme.PerfectProjection.completedCommRingWeakSheafify",
+   "AlgebraicGeometry.Scheme.PerfectProjection.completedRingWeakSheafify",
+   "AlgebraicGeometry.Scheme.PerfectProjection.completedCommRingLimits"
   ],
   "statement": "theorem perfect_projection_formula : (locus d f aY aX K).IsTriangulated ∧ (locus d f aY aX K).IsStableUnderRetracts ∧ (∀ m : ℕ, locus d f aY aX K ((DerivedCategory.singleFunctor (modules d Y) 0).obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))))) ∧ (∀ P : derived d Y, SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) P → locus d f aY aX K P)",
   "branch": "newtargets-dag",
@@ -366,15 +362,20 @@
   "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For fixed $f$ and $K$, the full subcategory of objects $P$ for which\n$\\pi_{f,K,P}$ of [def-weil-pbc-projection-formula-map] is an isomorphism is a\nthick triangulated subcategory containing every finite free $A$-module. In\nparticular, it contains every perfect complex, and for every $n$ there is a\nnatural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and $f:X\\to Y$ a morphism. For\nfixed $K\\in D(X_{\\Proet},\\Lambda)$, the full subcategory of objects\n$P\\in D(Y_{\\Proet},\\Lambda)$ for which $\\pi_{f,K,P}$ of\n[def-weil-pbc-projection-formula-map] is an isomorphism is a thick\ntriangulated subcategory containing every finite free $\\Lambda_Y$-module. In\nparticular, it contains every perfect complex of $\\Lambda_Y$-modules.\n\nFor $\\Lambda=\\mathcal O_E$ and $n\\geq1$, the quotient\n$P_n=(\\mathcal O_E/\\pi_E^n)_Y$ has the two-term resolution\n$[\\mathcal O_{E,Y}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,Y}]$\n([det-pe-derived-nakayama-resolution]) and $Lf^*P_n=(\\mathcal O_E/\\pi_E^n)_X$.\nWriting $K_n=K\\otimes^L_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E^n)_X$, there is a\nnatural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_{\\mathcal O_{E,Y}}P_n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
   "proof": [
    {
-    "text": "For $P=A$ the map $\\pi_{f,K,A}$ of\n[def-weil-pbc-projection-formula-map] is the canonical tensor identity, an\nisomorphism; for a finite free $P=A^m$ it is the direct sum of finitely many\nof these, so every finite free $A$-module lies in the full subcategory. The\nsubcategory is triangulated-thick: it is closed under shifts ($Lf^*$, $Rf_*$\nand tensor are exact triangulated by\n[def-weil-pbc-proetale-operations] and commute with the shift comparisons),\nunder cones (applying $u:P_1\\to P_2$ to the projection-formula maps makes the\ncones of the $\\pi$'s fit into a distinguished triangle, and the\ntwo-out-of-three property gives the claim), and under direct summands (an\nidempotent splitting of $P$ gives one of the isomorphism). Hence it contains\nevery perfect complex, i.e. every object of the thick triangulated\nsubcategory generated by the finite free modules, and in particular every\n$P_n$'s finite free resolution in the sense of\n[def-weil-pbc-adic-coefficient-datum], giving the displayed isomorphism\n$(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*K_n$.",
+    "text": "For $P=\\Lambda_Y$ the map $\\pi_{f,K,\\Lambda_Y}$ of\n[def-weil-pbc-projection-formula-map] is the canonical tensor identity, an\nisomorphism; for a finite free $P=\\Lambda_Y^m$ it is the direct sum of finitely\nmany of these, so every finite free $\\Lambda_Y$-module lies in the full\nsubcategory. The\nsubcategory is triangulated-thick: it is closed under shifts ($Lf^*$, $Rf_*$\nand tensor are exact triangulated by\n[def-weil-pbc-proetale-operations] and commute with the shift comparisons),\nunder cones (applying $u:P_1\\to P_2$ to the projection-formula maps makes the\ncones of the $\\pi$'s fit into a distinguished triangle, and the\ntwo-out-of-three property gives the claim), and under direct summands (an\nidempotent splitting of $P$ gives one of the isomorphism). Hence it contains\nevery perfect complex, i.e. every object of the thick triangulated\nsubcategory generated by the finite free modules. For $\\Lambda=\\mathcal O_E$\nthis includes $P_n=(\\mathcal O_E/\\pi_E^n)_Y$, by its two-term finite free\nresolution ([det-pe-derived-nakayama-resolution]), giving the displayed\nisomorphism $(Rf_*K)\\otimes^LP_n\\xrightarrow{\\sim}Rf_*K_n$.",
     "uses": [
      "def-weil-pbc-projection-formula-map",
      "def-weil-pbc-proetale-operations",
-     "def-weil-pbc-adic-coefficient-datum"
+     "det-pe-derived-nakayama-resolution"
     ],
     "elementary": false
    },
@@ -384,21 +385,21 @@
     "elementary": null
    },
    {
-    "text": "Because $P_n$ is constant, $Lf^*P_n=P_n$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
+    "text": "Because $P_n$ is pulled back from the point, $Lf^*P_n=f^*p_Y^*(\\mathcal\nO_E/\\pi_E^n)=(\\mathcal O_E/\\pi_E^n)_X$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K9",
+  "reviewer": "C-58ea3",
+  "group": "U5",
   "result": "pass",
-  "landing": "20261021T233739-L-856534",
+  "landing": "20261024T191427-L-349376",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item lemma-weil-pbc-perfect-projection-formula (statement and stmt_deps unchanged) with its Lean proof via two new sorry nodes (mate-exact, slice-presentation); change records with the def changes (ring, Resolution.total/totalInverse/sourceModel/targetModel, 14 removals); all 10 direct importers compiled against the delivered item"
  }
 }

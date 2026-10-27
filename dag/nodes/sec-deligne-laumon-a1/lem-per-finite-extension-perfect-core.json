@@ -8,7 +8,8 @@
   "place": "Expose IV, Lemma 3.2.2 and Proposition 3.2.3(ii), p. 56: finite-extension perfect-core consequence, including the bounded purely inseparable part."
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-per-field-perfect-core"
  ],
  "proof": [
   {
@@ -144,5 +145,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-f09007173 (reviewer sub-agent of L); spot-checked: I read ILO Exposé IV §3.2 (pdf pp. 61–63, printed 55–56): Lemma 3.2.2 and its proof by minimal polynomials, and Prop. 3.2.3(i)/(ii), the reduction through the separable part and the bounded radicial part. The item is the Epp variant 'x ∈ L_perf is algebraic over K_perf' that the parent lem-per-epp-perfect-core-complete-local uses in Steps 5–6; its statement is unchanged. Step 1: L/K is algebraic by linear dependence of powers, and lem-weil-pbc-separable-first-purely-inseparable gives S/K separable algebraic and L/S purely inseparable. Step 2: L/S is finite because the K-spanning set also spans over S. The new leaf then gives a uniform e (Mathlib Exponent.lean: hasExponent_of_finiteDimensional at line 215 under [IsPurelyInseparable] at line 108, field has_exponent at line 55, ringExpChar = p). Roots z_n = y_n^{p^e} ∈ S with z_n^{p^n} = x put x in S_perf. IsSepClosed.lift (the embeds-separably-closed leaf) gives σ: S → K^sep over K, and σ(x) ∈ (K^sep)_perf. Step 3: the new node lem-per-separable-closure-perfect-core (exactly ILO Lemma 3.2.2) gives P ∈ K_perf[T], which pulls back by injectivity. I re-derived both inclusions of 3.2.2 (the norm-form coefficients satisfy c'^{p^n} = c) and tested it on perfect K and on F_p(t). I tested the item on L = K, separable, purely inseparable and finite-field cases. The perfect closure of F_p(t) over F_p(t) shows the finiteness hypothesis is essential. Both new nodes introduce their objects, cite their definition nodes, record searches with no Mathlib match for 3.2.2, and do not restate the item. Greps for Epp, 3.2.2/3.2.3, perfect-core intersections and HasExponent across dag/nodes and blueprint main-20261015 found no duplicate. The cited statements say what each step takes from them. There is no SGA citation. Off-unit citations are Mathlib leaves or definitions; the declared tool_use is accepted. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteExtensionPerfectCore",
+  "declaration": "Field.isAlgebraic_of_mem_perfectCore_of_finiteDimensional",
+  "file": "lean/Sheaf/FieldTheory/FiniteExtensionPerfectCore.lean",
+  "statement": "theorem isAlgebraic_of_mem_perfectCore_of_finiteDimensional (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] (p : ℕ) [Fact p.Prime] [CharP K p] [CharP L p] [FiniteDimensional K L] (x : L) (hx : x ∈ perfectCore L p) : ∃ P : Polynomial (perfectCore K p), P ≠ 0 ∧ P.eval₂ ((algebraMap K L).comp (perfectCore K p).subtype) x = 0",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73d959fd5",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item statement and proof unchanged; only change is the added stmt_dep on new def node def-per-field-perfect-core (§1(A)). Lean matches the node clause by clause: Fact p.Prime, Field K/L with Algebra K L, CharP on both (both are in the node), FiniteDimensional K L, independent universes u/v, explicit nonzero P over perfectCore K p with eval₂ through algebraMap ∘ subtype. Field.perfectCore = ⨅ n (iterateFrobenius K p n).fieldRange equals ILO IV §3.2.1's ∩ K^{p^i} (checked iterateFrobenius_def, coe_fieldRange, expChar_prime); real data, not hollow. No duplicate in Mathlib (perfectClosure/Perfection differ), project Lean, DAG def nodes or other run snapshots. lean.statement verbatim for both nodes; docstrings have source/blueprint and the proof steps; sorry only; proof-only import exists in live. Edge cases n=0, x=0, L=K, perfect/finite base, purely inseparable case checked. No recompile per instructions; no findings."
+ }
 }

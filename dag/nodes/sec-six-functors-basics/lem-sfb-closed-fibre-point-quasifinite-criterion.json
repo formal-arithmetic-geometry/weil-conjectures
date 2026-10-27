@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-closed-fibre-point-quasifinite-criterion",
+ "kind": "statement",
+ "title": "A closed fibre point with no other fibre generalization is quasi-finite",
+ "statement": "Let $g:Y\\to T$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism]. Let $y\\in Y$ and $t=g(y)$, and identify the underlying space of the fibre $Y_t$ with $g^{-1}(\\{t\\})$ [def-pc-scheme-fibre]. Suppose that $\\{y\\}$ is closed in $Y_t$ and that for every $y^{\\prime}\\in Y_t$, the condition $y\\in\\overline{\\{y^{\\prime}\\}}$ (closure in $Y_t$) implies $y^{\\prime}=y$. Then $g$ is quasi-finite at $y$ [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TH, morphisms-lemma-quasi-finite-at-point-characterize, implication (3) to (1), statement and proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $V=\\operatorname{Spec}R$ about $t$. By the affine-cover definition of locally finite type, choose an affine member $U=\\operatorname{Spec}A$ of the cover of $g^{-1}(V)$ containing $y$, with $A$ finitely generated over $R$. Write $\\mathfrak p\\subset R$ and $\\mathfrak q\\subset A$ for $t$ and $y$, and set $k=\\kappa(\\mathfrak p)$ and $B=A\\otimes_R k$. If $a_1,\\ldots,a_n$ generate $A$ over $R$, then $a_1\\otimes1,\\ldots,a_n\\otimes1$ generate $B$ over $k$: expand each first tensor factor as a polynomial and absorb its coefficients into the second factor.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, proof of (3) to (1), affine reduction; finite generation after tensoring written explicitly."
+   }
+  },
+  {
+   "text": "By the fibre homeomorphism, the subspace $U\\cap Y_t=g^{-1}(\\{t\\})\\cap U$ identifies with $\\operatorname{Spec}B$. Let $b$ be the prime corresponding to $y$. Closedness of $\\{y\\}$ restricts to this subspace, so $\\{b\\}$ is closed. If $b\\in\\overline{\\{b^{\\prime}\\}}$ in $\\operatorname{Spec}B$, the corresponding point $y^{\\prime}$ has $y\\in\\overline{\\{y^{\\prime}\\}}$ in $Y_t$: closure in a subspace is its intersection with ambient closure. The hypothesis gives $y^{\\prime}=y$, hence $b^{\\prime}=b$. Thus $\\{b\\}$ is stable under generalization.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-spec-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, proof of (3) to (1), passage to the affine fibre ring."
+   }
+  },
+  {
+   "text": "The spectrum of $k$ has one point, so it is Noetherian. Apply the finite-type Noetherian-spectrum theorem to $k\\to B$, using the generators of step 1, to obtain that $\\operatorname{Spec}B$ is Noetherian. The Noetherian-space clause of the constructible-subset node now says every finite union of locally closed subsets is constructible. In particular the closed singleton $\\{b\\}$ is constructible.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L, lemma-constructible-Noetherian-space; Noetherianity supplied by the cited finite-type-spectrum theorem."
+   }
+  },
+  {
+   "text": "Apply the constructible-generalization criterion to the commutative ring $B$ and $E=\\{b\\}$. Constructibility was proved in step 3 and stability under generalization in step 2; therefore $\\{b\\}$ is open in $\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-trf-spectrum-constructible-generalization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I0, lemma-constructible-stable-specialization-closed, part (2)."
+   }
+  },
+  {
+   "text": "The prime $b$ contracts to $\\mathfrak q$ under $A\\to B$, by the specified fibre homeomorphism. Its open singleton is exactly the affine definition of quasi-finiteness of $R\\to A$ at $\\mathfrak q$. Together with finite type from step 1 and the affine neighbourhoods $y\\in U$, $t\\in V$, $g(U)\\subseteq V$, this supplies the witnesses in the definition that $g$ is quasi-finite at $y$.",
+   "uses": [
+    "lem-weil-pbc-fibre-spec-homeomorphism",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, conclusion of (3) to (1); Tag 01TD and Algebra Tag 00PL, affine definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-spec-homeomorphism",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "def-weil-constructible-subset",
+  "lem-trf-spectrum-constructible-generalization-open",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, affine reduction for (3) to (1); isolation is proved via the existing finite-type Noetherian-spectrum theorem, Topology Tag 005L and Algebra Tag 00I0(2), instead of local-ring dimension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism is quasi finite at a closed point of its fibre if there is no distinct point in that fibre specializing to it",
+   "results": "{\"t\": \"2026-10-23T09:39:36Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism is quasi finite at a closed point of its fibre if there is no distinct point in that fibre specializing to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\"], \"digest\": \"c05876db1cff8343\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T09:39:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\"], \"digest\": \"d03761b9a2e45fff\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt|isOpen_singleton|StableUnderGeneralization",
+   "results": "{\"t\": \"2026-10-23T09:39:37Z\", \"tool\": \"grep\", \"query\": \"QuasiFiniteAt|isOpen_singleton|StableUnderGeneralization\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"339\", \"343\", \"344\", \"346\", \"358\"], \"digest\": \"392aec4ffdcd6774\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed point with no other generalization in its fibre is quasi finite for a locally finite type scheme morphism",
+   "results": "{\"t\": \"2026-10-23T09:39:37Z\", \"tool\": \"leansearch\", \"query\": \"Closed point with no other generalization in its fibre is quasi finite for a locally finite type scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"Algebra.QuasiFiniteAt\"], \"digest\": \"c54e600d3ea4d389\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism locally of finite type over a scheme a point is isolated in its fibre if closed and no other fibre point specializes to it",
+   "results": "{\"t\": \"2026-10-23T09:39:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism locally of finite type over a scheme a point is isolated in its fibre if closed and no other fibre point specializes to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"7a8ac512f1a70237\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt_iff_isOpen_singleton|isOpen_singleton_tfae|StableUnderGeneralization",
+   "results": "{\"t\": \"2026-10-23T09:48:16Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt_iff_isOpen_singleton|isOpen_singleton_tfae|StableUnderGeneralization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"c66566f91a06ea3c\"}; The quasiFiniteAt_iff_isOpen_singleton_asFiber theorem assumes isolation, while the node must derive isolation from fibre closedness and absence of other generalizations. The Jacobson/noetherian topology criteria and fibre Jacobson instance are ingredients, not an exact declaration or one-line specialization; the Stacks-to-Mathlib quasi-finite comparison is also a separate theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T11:45:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\"], \"digest\": \"d03761b9a2e45fff\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed point of a locally finite type scheme fibre with no proper generalization is quasi finite at that point",
+   "results": "{\"t\": \"2026-10-23T11:45:31Z\", \"tool\": \"leanfinder\", \"query\": \"A closed point of a locally finite type scheme fibre with no proper generalization is quasi finite at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"ef0c6d29a87f799c\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt_iff_isOpen_singleton|isOpen_singleton_tfae|StableUnderGeneralization",
+   "results": "{\"t\": \"2026-10-23T11:46:31Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt_iff_isOpen_singleton|isOpen_singleton_tfae|StableUnderGeneralization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"90096cb8b214065c\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed point of a scheme fibre with no proper generalization is isolated and quasi finite",
+   "results": "{\"t\": \"2026-10-23T11:46:31Z\", \"tool\": \"leansearch\", \"query\": \"A closed point of a scheme fibre with no proper generalization is isolated and quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closedPoints\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"IsLocalRing.closedPoint\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\"], \"digest\": \"dfae2e265915028f\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed singleton stable under generalization in a locally noetherian scheme is an open singleton",
+   "results": "{\"t\": \"2026-10-23T11:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"A closed singleton stable under generalization in a locally noetherian scheme is an open singleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyArtinian\", \"PrimeSpectrum.quasiSober\", \"IsLocalRing.closedPoint_mem_iff\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"IsLocalRing.closed_point_mem_iff\"], \"digest\": \"a579feb65cfa1ae7\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing",
+   "results": "{\"t\": \"2026-10-23T11:48:55Z\", \"tool\": \"grep\", \"query\": \"isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"sub\": \"RingTheory/Spectrum/Prime/Jacobson.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"80\"], \"digest\": \"34fc8987d4b6e15f\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type field algebra a singleton prime is open if and only if it is closed and stable under generalization",
+   "results": "{\"t\": \"2026-10-23T11:48:55Z\", \"tool\": \"leansearch\", \"query\": \"For a finite type field algebra a singleton prime is open if and only if it is closed and stable under generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"PrimeSpectrum.stableUnderGeneralization_singleton\", \"PrimeSpectrum.stableUnderSpecialization_singleton\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"PrimeSpectrum.isClosed_singleton_iff_isMaximal\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed\", \"IsLocalRing.isClosed_singleton_closedPoint\"], \"digest\": \"62d8eee1c7148493\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing",
+   "results": "{\"t\": \"2026-10-23T11:48:55Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\"], \"digest\": \"a0885ac41a3d045a\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated algebra over a field a prime is isolated exactly when its singleton is closed and stable under generalization",
+   "results": "{\"t\": \"2026-10-23T11:48:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated algebra over a field a prime is isolated exactly when its singleton is closed and stable under generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"PrimeSpectrum.stableUnderGeneralization_singleton\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"PrimeSpectrum.quasiSober\", \"PrimeSpectrum.stableUnderSpecialization_singleton\", \"PrimeSpectrum.isClosed_singleton_iff_isMaximal\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"IsLocalRing.specializes_closedPoint\"], \"digest\": \"20f6b20812ebd1a4\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing|isJacobsonRing_of_finiteType",
+   "results": "{\"t\": \"2026-10-23T11:51:18Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing|isJacobsonRing_of_finiteType\", \"sub\": \"RingTheory/Finiteness\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Cofinite.lean\", \"Mathlib/RingTheory/Finiteness/Cofinite.lean\", \"Mathlib/RingTheory/Finiteness/Cofinite.lean\", \"Mathlib/RingTheory/Finiteness/Cofinite.lean\"], \"digest\": \"84a15e759d9aa21b\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T11:51:18Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing\", \"sub\": \"RingTheory/FiniteType.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"187\", \"188\", \"191\", \"647\"], \"digest\": \"3e8f2403ee73287a\"}; Read the displayed hits and relevant source. The affine singleton criterion is a supporting fact, not the entire scheme criterion; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes the isolation to be established. No exact or one-line match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasi-section-nearby-open",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Trait selection meeting a prescribed generic open with finite fraction field. General geometric input: Tag 05GU, construction of Z as the reduced closure of the selected point z. Supporting input: Stacks 01TH (3) implies (1), applied after the punctured-spectrum prime selection.",
+   "via": [
+    "lem-sfb-quasi-section-nearby-open",
+    "lem-sfb-dense-generic-trait-selection",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-fibre-point-quasifinite-criterion",
+  "worker": "stage1",
+  "summary": "Retained the statement and its inherited searches. No project attachment or exact Mathlib match. Proved the affine fibre singleton constructible using existing finite-type Noetherian-spectrum and constructible-subset statements, applied the existing generalization-open Mathlib leaf, and unfolded the affine quasi-finite definitions. No new nodes.",
+  "blueprint": "Serves inherited det-thm-sf-ctf-stability-direct-images proof (3), the trait-selection/quasi-section prerequisite in the alteration route. Current latest blueprint proof (3) is the compactification/direct-image assembly. The creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returned None); retain the inherited null and via list without inventing an ancestor. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-noetherian-spectrum",
+    "why": "Generic topological Noetherianity under finite type, used only on the affine fibre over a field; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-spec-homeomorphism",
+    "why": "Generic affine fibre homeomorphism needed to express the fibre point as a prime of its tensor ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-weil-pbc-fibre-spec-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-d377ea1a9",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-d377ea1a9 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and made no fixes. The item is still unsplit in live and side-live, its statement is byte-identical to live with the same stmt_deps, and the delivery adds no new nodes. Against Stacks morphisms.tex 01TH (l.3664-3727), the statement is exactly (3)⇒(1) with the hypothesis 'locally of finite type'. Step 1: def-weil-finite-type-morphism covers every affine open V, so choosing V∋t and then a cover member U∋y is valid, and the generators of A⊗_R κ(p) are elementary. Step 2: the def-pc-scheme-fibre homeomorphism and lem-weil-pbc-fibre-spec-homeomorphism carry closedness and stability under generalization over to {b} in Spec B. Step 3: Spec k is one point, so it is Noetherian; lem-sfb-finite-type-noetherian-spectrum then makes Spec B Noetherian, and the 005L clause of def-weil-constructible-subset (checked against topology.tex l.2871) makes the closed singleton constructible. Step 4: checked against Mathlib ConstructibleSet.lean:168-172, which holds for any CommRing, so {b} is open. Step 5: b = q̄ by the uniqueness clause of def-weil-pbc-ring-map-quasi-finite-at-prime, which supplies every witness that pqf-def-quasifinite asks for. The proof avoids the Stacks dimension argument but is complete, and proof_origin=agent says so. There is no cycle and no duplicate: the other 01TH nodes are (1)⇒(2), (2)⇒(4), and a field corollary that cites this item. Tool uses accepted: lem-sfb-finite-type-noetherian-spectrum is a generic fact; the fibre homeomorphism is a Mathlib leaf. Batch 5: lem-trf-spectrum-constructible-generalization-open is a generic Mathlib leaf (Stacks 00I0) whose closure contains only definitions, and it is not part of the trace formula or Poincaré duality statements or proofs, so I accept it. No SGA is cited. Small cases checked: closed point and generic point of A^1_k (both fail the hypothesis), k[x]/(x^2) (holds), non-Noetherian base (no hypothesis needed)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedFibrePointQuasiFiniteCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isQuasiFiniteAtPoint_of_closed_fibre_no_other_generalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedFibrePointQuasiFiniteCriterion.lean",
+  "statement": "theorem isQuasiFiniteAtPoint_of_closed_fibre_no_other_generalization {Y T : AlgebraicGeometry.Scheme.{u}} (g : Y ⟶ T) [LocallyOfFiniteType g] (y : Y) (hclosed : IsClosed ({g.asFiber y} : Set (g.fiber (g y)))) (hgeneralization : ∀ y' : g.fiber (g y), g.asFiber y ∈ closure ({y'} : Set (g.fiber (g y))) → y' = g.asFiber y) : g.IsQuasiFiniteAtPoint y",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95586cf58",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Only the item lean record and a new module changed; the 4 stmt_dep records are byte-identical to side-live; first S2 delivery, no rebind. Clauses match Stacks 01TH (3)=>(1): LocallyOfFiniteType only; canonical g.fiber/asFiber (fiberHomeo.symm); IsClosed and closure in the fibre type; specialization direction right; conclusion is the 01TD IsQuasiFiniteAtPoint, not Mathlib QuasiFiniteAt; arbitrary Scheme.{u}. Edge cases (empty Y, closed and generic point of A^1) show both hypotheses substantive. No exact existing match (Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes isolation). Imports exist; docstrings carry 01TH + blueprint id + 5 proof steps; sorry only; statement verbatim; report sections present. No compile run since no file was changed; worker scompile and dry run OK."
+ }
+}

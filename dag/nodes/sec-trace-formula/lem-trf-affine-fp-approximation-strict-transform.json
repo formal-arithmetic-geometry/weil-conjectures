@@ -1,0 +1,213 @@
+{
+ "id": "lem-trf-affine-fp-approximation-strict-transform",
+ "kind": "statement",
+ "title": "Finitely presented approximation and invariance of exceptional torsion quotients",
+ "statement": "Let $B$ be a commutative ring, $h\\in B$, and $N$ a finitely generated $B$-module [def-weil-finitely-generated-module]. Suppose $N_h$ is finitely presented over $B_h$ [def-sc-finitely-presented-module, def-weil-pbc-module-localization]. There exist an integer $n\\geq0$, a surjection $v:B^{\\oplus n}\\twoheadrightarrow N$, and a finitely generated submodule $K\\subseteq\\ker v$ such that $K_h=\\ker(v_h)$. In particular $M=B^{\\oplus n}/K$ is finitely presented, and the induced surjection $u:M\\twoheadrightarrow N$ has $u_h$ an isomorphism. Moreover, for every commutative $B$-algebra $D$ and elements $a,c\\in D$ with $a=\\bar h c$, where $\\bar h$ is the image of $h$, the map induced by $u\\otimes_BD$ is an isomorphism\n$$ (M\\otimes_BD)/\\Gamma_{(a)}(M\\otimes_BD)\\ \\xrightarrow{\\ \\sim\\ }\\ (N\\otimes_BD)/\\Gamma_{(a)}(N\\otimes_BD). $$\nHere tensor products are scalar extensions [def-weil-module-base-change], and $\\Gamma_{(a)}(Q)=\\{x\\in Q\\mid a^n x=0\\text{ for some }n\\geq0\\}$ [def-nagata-power-torsion].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph: finite-presentation replacement and comparison of the two power-torsion quotients."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-module-base-change",
+  "def-nagata-power-torsion"
+ ],
+ "proof": [
+  {
+   "text": "Choose generators $z_1,\\ldots,z_n$ of $N$ and define $v:F=B^{\\oplus n}\\to N$ by $v(b_1,\\ldots,b_n)=\\sum_i b_i z_i$. This is surjective by the definition of finite generation. Its localization $v_h:F_h\\to N_h$ is surjective: a fraction $z/h^e$ lifts to $x/h^e$ after choosing $v(x)=z$. Coordinatewise localization identifies $F_h$ with $B_h^{\\oplus n}$: the inverse sends a tuple of fractions to the vector with a common denominator. In particular $F_h$ is finitely generated over $B_h$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  },
+  {
+   "text": "Put $J=\\ker v$. Apply exactness of localization to $J\\hookrightarrow F\\xrightarrow{v}N$: its localized first image is $\\ker(v_h)$. The map $J_h\\to F_h$ is injective as well, since a numerator in $J$ killed in $F_h$ is killed by a power of $h$ already in $J$. Thus $J_h=\\ker(v_h)$ as submodules of $F_h$. Apply the finite-kernel lemma over $B_h$ to the surjection $v_h$ from the finite module $F_h$ onto the finitely presented module $N_h$. It gives finitely many generators $q_1,\\ldots,q_m$ of $J_h$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization",
+    "lem-trf-finite-presentation-surjective-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  },
+  {
+   "text": "Write each $q_i$ as $j_i/h^{e_i}$ with $j_i\\in J$ and let $K=\\sum_i B j_i\\subseteq J$. Then $K$ is finitely generated. Each $q_i=h^{-e_i}(j_i/1)$ lies in the image of $K_h$; conversely that image lies in $J_h$. Hence $K_h=J_h=\\ker(v_h)$. Empty generating lists are allowed. This is the explicit finite-submodule choice suppressed in the first paragraph of Tag 0810.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  },
+  {
+   "text": "Set $M=F/K$. The map $B^{\\oplus m}\\to F$ sending the $i$th basis vector to $j_i$ has image $K$, so $B^{\\oplus m}\\to B^{\\oplus n}\\to M\\to0$ is a finite presentation. Since $K\\subseteq J$, define $u(x+K)=v(x)$; it is well defined and surjective. Localization exactness applied to $K\\to F\\to M\\to0$ says that $\\ker(F_h\\to M_h)$ is the image of $K_h$, equal to $\\ker v_h$. If a class in $M_h$ maps to zero in $N_h$, represent it by $x/h^e$ from $F_h$ (lift its numerator in $M$ to $F$); then $x/h^e\\in\\ker v_h$, so its class in $M_h$ is zero. Surjectivity follows by lifting numerators through $u$. Thus $u_h$ is an isomorphism.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  },
+  {
+   "text": "Write $T=\\ker u$. Since $u_h$ is injective, each $t\\in T$ satisfies $t/1=0$ in $M_h$, hence $h^e t=0$ for some $e$. Fix any $B$-algebra $D$ and $a=\\bar h c$ as in the statement. Tensor right exactness applied to $T\\to M\\xrightarrow{u}N\\to0$ gives a surjection $f=u\\otimes_BD$ with kernel equal to the image of $T\\otimes_BD$. An element of this image is a finite sum $\\sum_i t_i\\otimes d_i$; choose $e_i$ with $h^{e_i}t_i=0$ and put $E=\\max_i e_i$ (or $0$ for an empty sum). Then $\\bar h^E\\sum_i t_i\\otimes d_i=\\sum_i (h^Et_i)\\otimes d_i=0$. Therefore $a^E=c^E\\bar h^E$ kills it. Thus $\\ker f\\subseteq\\Gamma_{(a)}(M\\otimes_BD)$. No flatness of $D$ is used.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-module-base-change",
+    "def-nagata-power-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  },
+  {
+   "text": "For any $D$-module $Q$, the set $\\Gamma_{(a)}(Q)$ is a submodule: if $a^r x=0$ and $a^s y=0$, then $a^{r+s}(x+y)=0$, and $a^r(dx)=d(a^rx)=0$. Since $f$ is $D$-linear it sends power torsion to power torsion, and so induces the displayed quotient map. That map is surjective because $f$ is. If $f(x)$ is power torsion, choose $r$ with $a^r f(x)=0$. Then $a^r x\\in\\ker f$; by the previous step choose $s$ with $a^s(a^r x)=0$. Hence $x$ is power torsion, proving injectivity and the asserted isomorphism.",
+   "uses": [
+    "def-nagata-power-torsion",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-trf-finite-presentation-surjective-module-kernel",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-module-base-change",
+  "def-nagata-power-torsion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph; explicit finite-relation and torsion calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite module finitely presented after inverting h admits a finitely presented surjection inducing an isomorphism after localization and on exceptional power torsion quotients",
+   "results": "{\"t\": \"2026-10-22T06:45:15Z\", \"tool\": \"leansearch\", \"query\": \"A finite module finitely presented after inverting h admits a finitely presented surjection inducing an isomorphism after localization and on exceptional power torsion quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_free_of_surjective\", \"Module.Finite.of_isLocalizedModule\", \"Module.finitePresentation_of_finite\", \"RingHom.finitePresentation_holdsForLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"instFinitePresentationLocalizationLocalizedModule\", \"instFinitePresentationAway\", \"Module.FinitePresentation.mk\"], \"digest\": \"b7a27defce541b17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FinitePresentation.exists_fin describes an already finitely presented module. IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation assumes the localized target is finitely presented over the original ring, not just the localized ring. exists_notMem_bijective assumes a finitely presented target and spreads an existing map; it does not construct the approximation or compare power-torsion quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finitely generated module N with N localized at h finitely presented, construct a finitely presented module M surjecting onto N and equal after inverting h; compare base change modulo a power torsion when a is a multiple of h",
+   "results": "{\"t\": \"2026-10-22T06:45:29Z\", \"tool\": \"leanfinder\", \"query\": \"Given a finitely generated module N with N localized at h finitely presented, construct a finitely presented module M surjecting onto N and equal after inverting h; compare base change modulo a power torsion when a is a multiple of h\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation\", \"instFinitePresentationLocalizationLocalizedModule\", \"Module.FinitePresentation.exists_lift_of_isLocalizedModule\", \"instIsLocalizedModuleLinearMapIdLocalizationLocalizedModuleMapOfFinitePresentation\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Module.FinitePresentation.isLocalizedModule_map\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule\"], \"digest\": \"414e00bea6d60b48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FinitePresentation.exists_fin describes an already finitely presented module. IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation assumes the localized target is finitely presented over the original ring, not just the localized ring. exists_notMem_bijective assumes a finitely presented target and spreads an existing map; it does not construct the approximation or compare power-torsion quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation approximation of a finite module on a principal open, invariant strict transforms under a surjection with localized isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:45:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation approximation of a finite module on a principal open, invariant strict transforms under a surjection with localized isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.FinitePresentation.of_span_eq_top_target\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"RingHom.finitePresentation_ofLocalizationSpanTarget\"], \"digest\": \"bc1f1360f2610932\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FinitePresentation.exists_fin describes an already finitely presented module. IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation assumes the localized target is finitely presented over the original ring, not just the localized ring. exists_notMem_bijective assumes a finitely presented target and spreads an existing map; it does not construct the approximation or compare power-torsion quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.FinitePresentation\", \"instFinitePresentation\", \"instFiniteOfFinitePresentation\", \"Module.FinitePresentation.of_subsingleton\", \"instFinitePresentationForall\", \"Module.finitePresentation_of_finite\", \"Module.finitePresentation_iff_finite\", \"Module.finitePresentation_of_projective\"], \"digest\": \"3a6ddc9959b70f42\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FinitePresentation.exists_fin describes an already finitely presented module. IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation assumes the localized target is finitely presented over the original ring, not just the localized ring. exists_notMem_bijective assumes a finitely presented target and spreads an existing map; it does not construct the approximation or compare power-torsion quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*exists|powTorsion",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*exists|powTorsion\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/Presentation/Finite.lean\"], \"digest\": \"47770451e9ac9e76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FinitePresentation.exists_fin describes an already finitely presented module. IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation assumes the localized target is finitely presented over the original ring, not just the localized ring. exists_notMem_bijective assumes a finitely presented target and spreads an existing map; it does not construct the approximation or compare power-torsion quotients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-generic-rank-blowup",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0810 affine helper: the complete proof using the Fitting ideal of the finitely presented quotient, coefficient ideal in the base, principal Fitting argument on blowup charts, and lower-Fitting vanishing. Extraction of returned affine-helper proof steps 1, 10: Tag 0810, lemma-helper-blowup-affine-space, first proof paragraph: finite-presentation replacement and comparison of the two power-torsion quotients.",
+   "via": [
+    "lem-trf-affine-generic-rank-blowup",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-fp-approximation-strict-transform",
+  "worker": "stage1",
+  "summary": "Expand Tag 0810 first-paragraph replacement by finite relations; cite one new Mathlib kernel leaf and existing exact localization and tensor lemmas; prove torsion-quotient invariance by lifting torsion exponents without flat base change.",
+  "blueprint": "Serves lem-trf-local-term-locality through the recorded flattening/admissible-blowup chain: the finite-presentation replacement in Tag 0810 used by lem-trf-affine-generic-rank-blowup. Steps 1-4 construct the replacement; steps 5-6 justify its invariance on the exceptional chart."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-963208f67",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-963208f67 (reviewer sub-agent of L); spot-checked: I read the whole split and wrote no fixes. Source: Stacks Tag 0810 (flat-lemma-helper-blowup-affine-space), first proof paragraph. The item's abstraction (B=S, h=f, D=S⊗R', a=h̄c) is faithful to it. Instead of the source's R'_a=R_f plus nonzerodivisor argument, step 5 shows that every element of ker u is killed by a power of h and carries this through right exactness of the tensor product; this is valid for any D, flat or not. Steps 1 and 3 are elementary, using fractions and finite generation. Step 2 uses the localization-exactness Mathlib leaf and the new leaf over B_h; its hypotheses (F_h finite, v_h surjective, N_h finitely presented) were checked. In step 4, u_h is an isomorphism by lifting numerators and comparing ker v_h with the image of K_h. Step 5 uses lem-weil-pbc-tensor-right-exact and the scalar action from def-weil-module-base-change. Step 6 is the elementary power-torsion submodule and injectivity argument. proof_deps equals the union of the steps' uses. Every cited statement is a Mathlib leaf or a definition, so there are no route or tool_uses issues and no SGA. New node lem-trf-finite-presentation-surjective-module-kernel: its statement matches algebra.tex Tag 0519 part (5), and it is an exact match for Module.FinitePresentation.fg_ker (FinitePresentation.lean:191-193, read). It is statement-only, self-contained, with three kinds of search recorded and the blueprint fields filled. It does not restate a clause of the item. The duplicate search (rg -L fg_ker and 0519, and a scan of every 'finitely presented'+kernel statement) found only algebra, coherent-ring and sheaf variants that are not duplicates. Edge cases checked: n=0, N=0, h a unit, h nilpotent, a=0, D=0, B=0, nonflat D."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineFpApproximationStrictTransform",
+  "declaration": "Module.exists_affine_fp_approximation_strict_transform",
+  "file": "lean/Sheaf/RingTheory/AffineFpApproximationStrictTransform.lean",
+  "statement": "theorem exists_affine_fp_approximation_strict_transform (B : Type u) [CommRing B] (h : B) (N : Type v) [AddCommGroup N] [Module B N] [Module.Finite B N] [Module.FinitePresentation (Localization (Submonoid.powers h)) (LocalizedModule (Submonoid.powers h) N)] : ∃ (n : ℕ) (v : (Fin n → B) →ₗ[B] N) (K : Submodule B (Fin n → B)), Function.Surjective v ∧ K.FG ∧ K ≤ LinearMap.ker v ∧ (K.localized (Submonoid.powers h)).restrictScalars B = LinearMap.ker (IsLocalizedModule.map (Submonoid.powers h) (LocalizedModule.mkLinearMap (Submonoid.powers h) (Fin n → B)) (LocalizedModule.mkLinearMap (Submonoid.powers h) N) v) ∧ Module.FinitePresentation B ((Fin n → B) ⧸ K) ∧ ∃ u : ((Fin n → B) ⧸ K) →ₗ[B] N, u.comp K.mkQ = v ∧ Function.Surjective u ∧ Function.Bijective (IsLocalizedModule.map (Submonoid.powers h) (LocalizedModule.mkLinearMap (Submonoid.powers h) ((Fin n → B) ⧸ K)) (LocalizedModule.mkLinearMap (Submonoid.powers h) N) u) ∧ ∀ (D : Type w) [CommRing D] [Algebra B D] (a c : D), a = algebraMap B D h * c → Function.Bijective (Submodule.torsion'QuotientMap (Submonoid.powers a) (LinearMap.baseChange D u))",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Review FIX (2026-10-23): the scalar-extension algebra D ranges over an independent universe w (was Type (max u v w), which excluded algebras smaller than B or N, e.g. the citer lem-trf-affine-generic-rank-blowup's chart algebra B ⊗ R[I/a] : Type (max u v) with N : Type w).",
+  "fixed_by": "NT-stage2-cc-56f6aae36"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56f6aae36",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0810 first proof paragraph clause by clause (finite N, N_h f.p. over B_h; ∃ n, surjective v, f.g. K ≤ ker v with K_h = ker v_h; M=B^n/K f.p.; u pinned by u∘mkQ=v, surjective, u_h bijective; torsion'QuotientMap (powers a) (baseChange D u) bijective, torsion' powers a = powTorsion by definition). Edge cases n=0, N=0, h unit/nilpotent/0, a or c zero, non-flat D and zero rings covered. Finding H3: D : Type (max u v w) excluded algebras smaller than B or N, including the citer exists_affine_generic_rank_blowup's D = B ⊗ R[I/a] : Type (max u v) when N : Type w is larger. FIX: D : Type w (API universe-polymorphic), complete module + lean-record.json with verbatim statement; nt_compile --json clean (1.3 s, exit 0)."
+ }
+}

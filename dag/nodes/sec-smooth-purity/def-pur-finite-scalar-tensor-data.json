@@ -1,0 +1,126 @@
+{
+ "id": "def-pur-finite-scalar-tensor-data",
+ "kind": "definition",
+ "title": "Actual scalar tensor-counit diagram as typed data",
+ "status": "split",
+ "statement": "For commutative rings A,B, phi:A→B and a scheme T, form the actual diagram [def-pur-tensor-representative-data] for fixed derived scalar extension and cochain localization. Its target is QB(Fco(C) tensor Fco(D)); source is Q(mu_QA) followed by the scalar representative at C tensor D and QB(delta_scalar); tail is the tensor of scalar representatives followed by mu_QB. These are exactly the source and tail of the full cochain normalization square [def-pur-finite-tensor-comparison-equations], without changing any map. Include the three proved invertibility certificates for the K-flat predicate, using [lem-pur-cochain-localization-tensor-invertible], [lem-pur-finite-scalar-representative-invertible] on the tensor of the inputs, and [lem-pur-finite-scalar-cochain-comparison-invertible]. The proofs provide no object or map data.",
+ "stmt_deps": [
+  "def-pur-tensor-representative-data",
+  "def-pur-finite-tensor-reduction-data",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-finite-tensor-comparison-equations",
+  "lem-pur-finite-scalar-representative-invertible",
+  "lem-pur-cochain-localization-tensor-invertible",
+  "lem-pur-finite-scalar-cochain-comparison-invertible"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: finite reduction is derived scalar tensor and its compatibility with invertible twists follows from derived tensor associativity; Stacks Tags 07A4 and 0FPT."
+ },
+ "proof": [
+  {
+   "text": "Construct the record directly: tensor is the native cochain tensor; its K-flat predicate closure is ObjectProperty.prop_tensor; secondTarget is the scalar cochain functor object function; target is Fco(C) tensor Fco(D). First is the native localization tensorator, second is the single-input fixed-adjoint scalar representative, third is the actual cochain scalar oplax comparison, and tail is the original tensor of representatives followed by the target localization tensorator. Supply the three certificates from the named public proved native property APIs. The single-input second certificate is supplied directly, before evaluation at C tensor D. The generic source method performs that evaluation and composes the exact original factors. No proof or existence witness supplies any object or map. The first property API has a concrete sheaf signature, sealing the expensive specialization of the native monoidal localization instance before this constructor uses it.",
+   "uses": [
+    "def-pur-tensor-representative-data",
+    "def-pur-finite-tensor-reduction-data",
+    "def-sp-coefficient-scalar-representatives",
+    "def-pur-finite-tensor-comparison-equations",
+    "lem-pur-finite-scalar-representative-invertible",
+    "lem-pur-cochain-localization-tensor-invertible",
+    "lem-pur-finite-scalar-cochain-comparison-invertible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-tensor-representative-data",
+  "def-pur-finite-tensor-reduction-data",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-finite-tensor-comparison-equations",
+  "lem-pur-finite-scalar-representative-invertible",
+  "lem-pur-cochain-localization-tensor-invertible",
+  "lem-pur-finite-scalar-cochain-comparison-invertible"
+ ],
+ "proof_origin": "J2, 2026-10-26: a definition/API repair for the slow concrete cochain normalization. The actual diagram is constructed in a typed record; its K-flat source property is proved from existing APIs. This does not split a proof to evade the file limit.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor counit representative diagram source isomorphism K-flat localization scalar extension",
+   "results": "8 unrelated ordinary module flatness results; no diagram record or scalar cochain representative source theorem. Local source search finds the native derived localization counit isomorphism, cochain oplax tensor isomorphism, and exact-right-adjoint K-flat representative theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use proved native ingredients; add a typed diagram interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ, IsIso",
+   "results": "0 hits; service does not resolve the qualified identifier. Local Mathlib/source inspection supplies the monoidal localization structure.",
+   "date": "2026-10-26",
+   "verdict": "No exact interface."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorRepresentativeData|isIso_cochainTranspose_of_kFlat|isIso_μ_Qh_of_kFlat",
+   "results": "0 Mathlib service hits; repository source search finds the latter two native APIs, but no typed record sealing the scalar diagram.",
+   "date": "2026-10-26",
+   "verdict": "Use existing isomorphism ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison and scalar extension derived adjunction counit commute on cochain representatives; localization tensorators and scalar counits are isomorphisms on K-flat complexes.",
+   "results": "8 hits, including Adjunction.localization_counit_app and ordinary module extension/restriction counits; no exact fixed-derived-scalar representative tensor square or K-flat source certificate.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved native derived APIs and actual typed scalar diagram."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: derived scalar reduction and tensor/twist compatibility",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorData",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteScalarTensorData",
+  "statement": "def finiteScalarTensorData\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u}) :\n    TensorRepresentativeData\n      (ProEtale.SupportedEtaleTensorOrigin.proFixedScalar φ T)\n      _root_.DerivedCategory.Q.{u + 1, u + 1, u + 2}\n      _root_.DerivedCategory.Q.{u + 1, u + 1, u + 2}\n      ((HomologicalComplex.quasiIso _ (.up ℤ)).kFlat)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

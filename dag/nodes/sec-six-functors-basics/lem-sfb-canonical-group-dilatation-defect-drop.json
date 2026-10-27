@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-canonical-group-dilatation-defect-drop",
+ "kind": "statement",
+ "title": "Canonical liftable-point subgroup and decrease of the identity smoothness defect",
+ "statement": "All group schemes in this statement are schemes [def-pc-scheme] equipped with multiplication, identity and inverse over the indicated base, satisfying the group diagrams (the relative version of [def-sc-group-scheme]). Flatness, smoothness and local finite type have the meanings of [def-weil-flat-morphism, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A Dedekind domain is a Noetherian integrally closed domain of Krull dimension one. Let $S=\\operatorname{Spec}D$ for a Dedekind domain $D$, let $s$ be a closed point, and let $G$ be a flat separated $S$-group scheme locally of finite type with smooth generic fibre. Write $R=D_s$, a discrete valuation ring [lem-sc-dedekind-localization-dvr, def-sc-discrete-valuation-ring], $k=\\kappa(s)$ [def-weil-residue-field], and choose a strict henselization $R^{\\mathrm{sh}}$ with residue field $k^{\\mathrm{sep}}$ [def-sc-ring-strict-henselization]. The reduced closed subscheme (with radical defining ideals on affine charts) $F\\subset G_s$ whose underlying closed subset is the closure of the images of the reductions of all $R^{\\mathrm{sh}}$-valued points of $G_R$ is a smooth closed $k$-subgroup scheme. For every smooth $S$-scheme $X$ and $S$-morphism $f:X\\to G$, the fibre map $f_s$ factors scheme-theoretically through $F$. For the dilatation $d:G'\\to G$ of $F$ at $s$ [lem-sfb-group-dilatation-universal-property], define\n$$\\delta_s(G)=\\operatorname{length}_{R^{\\mathrm{sh}}}\\!\\left(\\operatorname{tors}_{R^{\\mathrm{sh}}}\\bigl(e^*\\Omega^1_{G_{R^{\\mathrm{sh}}}/R^{\\mathrm{sh}}}\\bigr)\\right).$$\nHere $e$ is the identity section, relative differentials and tensor pullback are [def-sc-relative-differential-sheaf, def-pc-module-pullback], $\\operatorname{tors}_R(V)=\\{v\\in V:av=0\\text{ for some }0\\ne a\\in R\\}$, and module length is [def-weil-pbc-module-length]. This is a finite nonnegative integer, and\n$$\\delta_s(G')\\leq\\max\\{0,\\delta_s(G)-1\\}.$$\nMoreover, $\\delta_s(G)=0$ if and only if $G\\to S$ is smooth at the identity point $e(s)$. These conclusions require only local finite type, even if $G_s$ has infinitely many connected components; no Néron mapping property is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.1 Lemma 4 and its proof, printed p.174, with 3.3 Lemma 1 (defect zero criterion), printed p.65; extension from finite type to locally finite type in 10.1 Proposition 4 proof, printed p.291. Local PDF WANTED; primary-source scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-sc-dedekind-localization-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-ring-strict-henselization",
+  "lem-sfb-group-dilatation-universal-property",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-length",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R^{\\mathrm{sh}}$ and let $T\\subset G_s(k^{\\mathrm{sep}})$ be the reductions of $G_R(A)$. It is a subgroup, since reduction commutes with multiplication and inverse. By [lem-wf-strict-henselian-fraction-inertia], every residue automorphism lifts to an $R$-automorphism of $A$ (the displayed $\\operatorname{Aut}_{R^{\\mathrm h}}(A)$ isomorphism); precomposing an $A$-point with that automorphism proves that $T$ is Galois stable. Apply [lem-sfb-separable-point-closure-universal-density] to $Z=G_s$: its reduced closure $F$ is geometrically reduced, $T$ is schematically dense after extension to $k^{\\mathrm{sep}}$, and $T^2$ is schematically dense in $(F_{k^{\\mathrm{sep}}})^2$.",
+   "uses": [
+    "lem-wf-strict-henselian-fraction-inertia",
+    "lem-sfb-separable-point-closure-universal-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.1 Lemma 4 proof, opening sentence; 2.3 Proposition 11(c); 3.3 Lemma 4."
+   }
+  },
+  {
+   "text": "The identity lies in $T$. On $F_{k^{\\mathrm{sep}}}\\times F_{k^{\\mathrm{sep}}}$ every local function pulled back from the ideal of $F$ under multiplication vanishes on $T^2$, because $T$ is a subgroup; the density in step 1 makes it zero. The same argument with $T$ and inverse gives the inverse map into $F_{k^{\\mathrm{sep}}}$. A $k$-linear map is zero if its scalar extension to $k^{\\mathrm{sep}}$ is zero (extend a nonzero vector to a basis), so the pulled-back ideal sheaves already vanish over $k$. Thus multiplication, inverse and identity factor through the closed subscheme $F$. Their group identities are inherited from $G_s$, since a closed immersion is a monomorphism. Therefore $F$ is a closed subgroup; [lem-sfb-geometrically-reduced-group-smooth] applies to its geometric reducedness and local finite type and proves that $F/k$ is smooth.",
+   "uses": [
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-sfb-separable-point-closure-universal-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.1 Lemma 4 proof: subgroup property and smoothness of the geometrically reduced group."
+   }
+  },
+  {
+   "text": "Let $f:X\\to G$ with $X/S$ smooth. By [lem-pc-proper-base-change](2), $X_k$ and $X_{k^{\\mathrm{sep}}}$ are smooth over their fields. Thus $X_k$ is geometrically reduced by [sbc-lem-smooth-geometrically-reduced], and [lem-pc-rational-points-dense] gives density of $X_k(k^{\\mathrm{sep}})$ in $X_{k^{\\mathrm{sep}}}$. Each such point lifts to $X(A)$: choose an affine open of $X_A$ containing that point; its coordinate algebra $B$ is smooth over $A$ by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], and [lem-trf-henselian-smooth-algebra-lifting] applied with base and target $A$ and ideal its maximal ideal lifts $B\\to k^{\\mathrm{sep}}$ to $B\\to A$. The image under $f$ of every lifted reduction is in $T\\subset F$. A regular function on a reduced affine scheme vanishing on a dense set is zero: its nonvanishing principal open is empty, so it lies in every prime and is nilpotent, hence zero. Apply this to the pullback of the ideal of $F$ on the reduced scheme $X_{k^{\\mathrm{sep}}}$, and descend its vanishing by faithful scalar extension as in step 2. This proves the scheme-theoretic factorization of $f_s$, including when $X$ is not quasi-compact.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-rational-points-dense",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.1 proof immediately before Theorem 5, printed pp.174-175; 2.3 Proposition 5 (lifting smooth points)."
+   }
+  },
+  {
+   "text": "Let $G_s$ be the fibre of $G_R$ over the closed point, a $k$-group scheme locally of finite type, with structure map $p_s$ and identity $e_s$. By [lem-trf-relative-differential-sheaf-base-change], applied to $G_R\\to\\operatorname{Spec}R$ and $\\operatorname{Spec}k\\to\\operatorname{Spec}R$, the restriction $\\Omega^1_{G_R/R}|_{G_s}$ (module pullback [def-pc-module-pullback]) is canonically $\\Omega^1_{G_s/k}$, a module of finite type. By [lem-sfb-group-scheme-differentials-from-identity], $\\Omega^1_{G_s/k}\\cong p_s^*e_s^*\\Omega^1_{G_s/k}$; here $e_s^*\\Omega^1_{G_s/k}$ is a finitely generated $k$-vector space, hence $\\cong k^{r}$, and $p_s^*(k^r)=\\mathcal O_{G_s}^{r}$. So $\\Omega^1_{G_R/R}|_{G_s}$ is finite free, and so is its pullback to $F$ (composition of pullbacks [def-pc-module-pullback]). The family $T$ is schematically dense in $F$: on an affine chart, vanishing on $T$ implies zero after scalar extension by step 1 and hence before extension. Thus $(G_R,F)$ has condition (N) of [lem-sfb-permissible-dilatation-section-estimate], with $U=F$; $F$ is smooth by step 2. All three hypotheses of the permissible-centre estimate are now established.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "def-pc-module-pullback",
+    "lem-sfb-group-scheme-differentials-from-identity",
+    "lem-sfb-separable-point-closure-universal-density",
+    "lem-sfb-permissible-dilatation-section-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.1 Lemma 4 proof, 4.2 Proposition 2 and the two permissible-centre conditions."
+   }
+  },
+  {
+   "text": "The dilatation of [lem-sfb-group-dilatation-universal-property] is flat and locally of finite type and is unchanged generically. Its identity $e'$ maps to $e$, whose closed point belongs to $T$. After localization at $s$ its chart is $B[I/\\pi]$, exactly the dilatation in [lem-sfb-permissible-dilatation-section-estimate]. Hence the $A$-identity $e'$ is the unique lift of the $A$-identity $e$. Apply that estimate with $a=e$, $a'=e'$ and $U=F$ to obtain $\\delta_{G_R'}(e')\\leq\\max\\{0,\\delta_{G_R}(e)-1\\}$.",
+   "uses": [
+    "lem-sfb-group-dilatation-universal-property",
+    "lem-sfb-permissible-dilatation-section-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.1 Lemma 4 inequality, applying 3.3 Proposition 5 to the identity section."
+   }
+  },
+  {
+   "text": "By [lem-trf-relative-differential-sheaf-base-change], pullback of $\\Omega^1_{G_R/R}$ to $G_A$ is canonically $\\Omega^1_{G_A/A}$; composition of module pullbacks [def-pc-module-pullback] identifies their further pullbacks along the identity. The same applies to $G_R'$. Therefore the two lengths in step 5 are exactly $\\delta_s(G)$ and $\\delta_s(G')$ in the statement. Apply [lem-sfb-trait-section-differential-defect-criterion] to $X=G_R$, $a=e$: it proves that this length is a finite nonnegative integer and that it vanishes exactly when $G_R/R$ is smooth at the identity over $s$. This is equivalent to smoothness of $G/S$ at $e(s)$ by [lem-sfb-scheme-flat-smooth-point-base-change], applied to the localization $\\operatorname{Spec}D_s\\to\\operatorname{Spec}D$; the local finite presentation hypothesis follows from [pqf-lem-lft-fp-locnoeth] over the Noetherian Dedekind base. All arguments used either affine neighbourhoods of the relevant points or sheafwise vanishing. In particular none required finitely many fibre components or a Néron mapping property.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "def-pc-module-pullback",
+    "lem-sfb-trait-section-differential-defect-criterion",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.3 opening definition and Lemma 1, printed p.65; 7.1 Lemma 4; locality noted in 10.1 Proposition 4 proof, printed p.291."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-strict-henselian-fraction-inertia",
+  "lem-sfb-separable-point-closure-universal-density",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-rational-points-dense",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "def-pc-module-pullback",
+  "lem-sfb-group-scheme-differentials-from-identity",
+  "lem-sfb-permissible-dilatation-section-estimate",
+  "lem-sfb-group-dilatation-universal-property",
+  "lem-sfb-trait-section-differential-defect-criterion",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.1 Lemma 4 and pre-Theorem 5 paragraph, 3.3 Lemma 1/Proposition 5 and 4.2 Proposition 2, read in primary-source scan; O4 supplies explicit closure factorization and lft locality. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "defect.*smooth|smooth.*defect|dilatation|NeronBlow",
+   "results": "{\"t\": \"2026-10-24T06:59:23Z\", \"tool\": \"grep\", \"query\": \"defect.*smooth|smooth.*defect|dilatation|NeronBlow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.length",
+   "results": "{\"t\": \"2026-10-24T06:59:23Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dilatation decreases the defect of smoothness at a section over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T06:59:23Z\", \"tool\": \"leansearch\", \"query\": \"Dilatation decreases the defect of smoothness at a section over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallySmooth.holdsForLocalizationAway\", \"IsDiscreteValuationRing.toIsLocalRing\", \"Dilation.lipschitz\", \"RingHom.Smooth.ofLocalizationSpanTarget\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"Dilation.diam_image\", \"RingHom.Smooth.holdsForLocalizationAway\", \"Algebra.smoothLocus\"], \"digest\": \"bc90a537117bf7fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The length of torsion in the identity pullback of Kahler differentials decreases after a canonical group dilatation over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T06:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"The length of torsion in the identity pullback of Kahler differentials decreases after a canonical group dilatation over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Ideal.inertiaDeg\", \"Ideal.rank_pow_quot_aux\"], \"digest\": \"a7581f6046bd88cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "dilatation|smoothening|tors.*Omega|defect",
+   "results": "{\"t\": \"2026-10-24T07:29:25Z\", \"tool\": \"grep\", \"query\": \"dilatation|smoothening|tors.*Omega|defect\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits, none states the canonical group-dilatation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, KaehlerDifferential, IsSmooth",
+   "results": "{\"t\": \"2026-10-24T07:29:26Z\", \"tool\": \"loogle\", \"query\": \"Module.length, KaehlerDifferential, IsSmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits, none states the canonical group-dilatation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smoothness defect torsion differentials group scheme dilatation",
+   "results": "{\"t\": \"2026-10-24T07:29:27Z\", \"tool\": \"leanfinder\", \"query\": \"smoothness defect torsion differentials group scheme dilatation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.smoothLocus\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Algebra.Smooth\", \"Algebra.Smooth.formallySmooth\", \"RingHom.smooth_def\", \"LeftInvariantDerivation\"], \"digest\": \"80eec83b7b2bb34f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits, none states the canonical group-dilatation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dilatation of smooth centre reduces torsion length of pulled back differentials at a section over a DVR",
+   "results": "{\"t\": \"2026-10-24T07:33:00Z\", \"tool\": \"leansearch\", \"query\": \"Dilatation of smooth centre reduces torsion length of pulled back differentials at a section over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"DilationEquiv.smulTorsor_ratio\", \"hfdifferential\", \"DilationEquiv.smulTorsor_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Smooth.baseChange\", \"Dilation.ediam_image\"], \"digest\": \"c98234f535fb33dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits, none states the canonical group-dilatation assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lft-closed-subgroup-group-smoothening",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 10.1 Proposition 4 proof, printed p.291: Canonical liftable-point subgroup and decrease of the identity smoothness defect, refining the successive subgroup blowups in the trait-extension input",
+   "via": [
+    "lem-sfb-lft-closed-subgroup-group-smoothening",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-canonical-group-dilatation-defect-drop",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved subgroup and smooth-test factorization explicitly; exposed universal separable-point density, the trait-section zero criterion and the general permissible-centre estimate as statement-only inputs; the free fibre cotangent module comes from the existing field node lem-sfb-group-scheme-differentials-from-identity (Stacks 047I) and differential base change (maintainer-reader FIX, duplicate new node dropped). Verified local finite type suffices and every citation against its statement.",
+  "blueprint": "Inherited from.node is null, as blueprint_refs.py ancestor reports. Realizes the recorded BLR 10.1 Proposition 4 trait-extension prerequisite: 7.1 Lemma 4 canonical centre and inequality, the paragraph before Theorem 5 for smooth tests, and 3.3 Lemma 1 for defect zero. Latest blueprint chapter/unit route retained.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-strict-henselian-fraction-inertia",
+    "why": "Residue automorphisms lift to strict-henselization automorphisms; a general trait Galois fact used solely to show stability of the reduction subgroup."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smooth-base-change clause is used for the smooth test scheme; no Picard argument is imported."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "General smooth-fibre reducedness makes dense-point vanishing scheme-theoretic."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "General field-valued point density on a smooth scheme; no Picard theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine smoothness comparison needed to apply henselian ring lifting on an affine chart."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic smooth algebra lifting across a henselian pair; no trace-formula route is used."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic differential base-change isomorphism identifies the exact modules whose torsion lengths occur."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic locally finite type to locally finite presentation conversion on a Noetherian base, to check the pointwise base-change criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-strict-henselian-fraction-inertia",
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-rational-points-dense",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-1273efbcf",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-1273efbcf (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full. BLR is not in literature/, so each new statement was checked mathematically and on small cases. Item steps 1-6 hold. Step 1: the inertia node gives Aut_H(R^sh)=Gal, so the reduction subgroup T is Galois-stable. The two strict-henselization definitions are uniquely isomorphic. Step 2: the group law on F comes from density of T^2 and descent from k^sep to k; the geometrically-reduced lft group node then gives smoothness, and its 'every L/k' is covered. Step 3: smooth tests via base change, density of k^sep-points, the affine smooth chart and henselian lifting (0H74). The reduced-dense vanishing argument and descent are correct without quasi-compactness. Step 5: the dilatation chart B[I/pi] matches, and the identity lifts uniquely to the identity. Step 6: Omega base change plus composition of pullbacks identify the modules; the trait criterion and flat-smooth-point base change apply, with lfp from pqf-lem-lft-fp-locnoeth. Three new nodes are true and none restates the item. The separable-point closure node: Galois-stable T is dense in Y_{k^sep}, and B into prod_T K survives tensoring with any L, which gives geometric reducedness and density of all products; T empty is allowed. The defect criterion is BLR 3.3/1; I proved both directions using equidimensionality of the flat integral component. The permissible estimate is general BLR 3.3/5; tested on xy=pi^2 at (pi,pi), where the defect goes from 1 to 0, and on smooth X. FIX (C5 duplicate): the new node lem-sfb-group-invariant-cotangent-trivialization restates Stacks 047I, which the existing same-unit node lem-sfb-group-scheme-differentials-from-identity states over a field. The item only needs Omega restricted to G_s to be finite free. I dropped the node and step 4 now cites lem-trf-relative-differential-sheaf-base-change, def-pc-module-pullback and the field node, with the finite-free argument written out; proof_deps is recomputed and there is no cycle. Batch-5 flags: I walked each flagged citation's own closure. Inertia reaches only the henselization definition and the 04GN/08HR/0A02 algebra lemmas; 0H74 lifting, 01V0 Omega base change and the 01V9/02H6 smooth-at-point nodes are generic. None is part of the trace-formula or Poincare-duality assumptions, so none is a RETURN. All eight declared tool_uses are generic black boxes and are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

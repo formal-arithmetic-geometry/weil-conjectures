@@ -1,0 +1,157 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-ordinary-direct-system-core",
+   "place": "The proof of the componentwise core: reassembly on the sequence site and the local two-component mate calculation.",
+   "via": [
+    "lem-coef-ordinary-direct-system-core"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "componentwise direct image on sequence-site strict systems with level adjunction",
+   "results": "no direct declaration; this is the project-specific sequence-site construction",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "strict system componentwise direct image mate adjunction",
+   "results": "no direct declaration",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictSystem.*direct|transition.*mate",
+   "results": "existing source helpers concern inverse systems or generic module pushforward, not this construction",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": null,
+ "id": "lem-coef-ordinary-direct-system-core-transition-mate",
+ "kind": "statement",
+ "title": "Local mate law for componentwise direct-image transitions",
+ "statement": "For a componentwise direct-image datum D from [lem-coef-ordinary-direct-system-core-components] whose horizontal maps are normalized to uPush of the original maps, and an ordinary inverse system as in [lem-coef-ordinary-inverse-system], assume the supplied set-sheaf and normalized module adjunctions of [lem-coef-normalized-module-adjunction]. The horizontal square of any two component maps of systems of [def-coef-semilinear-system-models] commutes if and only if the horizontal square of their levelwise adjunction transposes commutes.",
+ "stmt_deps": [
+  "lem-coef-ordinary-direct-system-core-components",
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-normalized-module-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, adjunction transpose calculation for a horizontal square."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, direct images of modules and the adjunction transpose, applied levelwise to strict sequence-site systems."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the two inverse-image component maps by P.component and I.moduleUnderlying. P.transition followed by P.restriction_underlying and naturality identifies the horizontal inverse-image edge with uInv of the source transition.",
+   "uses": [
+    "lem-coef-ordinary-inverse-system",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the two direct-image maps by D.component and eV. The explicit normalization of D identifies its horizontal edge with uPush of the target transition. The assumed normalized Hom equations identify the component transposes with the set-sheaf adjunction transposes. Naturality and injectivity of that Hom equivalence give equivalence of the two squares; faithfulness of the underlying functors reflects both equalities.",
+   "uses": [
+    "lem-coef-ordinary-direct-system-core-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-ordinary-inverse-system",
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-direct-system-core-components"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryDirectSystemMate",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryDirectSystemMate.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_transition_mate_exists",
+  "statement": "theorem ordinaryDirectSystem_core_transition_mate_exists [PreservesFiniteLimits uInv]\n    (_hI : ∀ n,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n))\n    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adjSet : uInv ⊣ uPush)\n    (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅\n      underlying.{c, v, r} J' (F n) ⋙ uPush)\n    (ha : ∀ n (M : Mod.{c, v, max c v r} J (B n))\n      (N : Mod.{c, v, max c v r} J' (F n)) (f : (I n).modules.obj M ⟶ N),\n      (underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N f) ≫ (eV n).hom.app N =\n        adjSet.homEquiv _ _ ((I n).moduleUnderlying.inv.app M ≫\n          (underlying.{c, v, r} J' (F n)).map f))\n    (D : OrdinaryDirectSystemCoreData.{c, v, r} (J := J) (B := B) (τ := τ)\n      (J' := J') (F := F) (σ := σ) (V := V))\n    (hD : OrdinaryDirectSystemCoreNormalized.{c, v, r} J B τ J' F σ V D uPush eV) :\n    OrdinaryDirectSystemCoreTransitionMate.{c, v, r} (J := J) (B := B) (τ := τ)\n      (J' := J') (F := F) (σ := σ) (I := I) (P := P) (V := V) (a := a) (D := D)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OrdinaryDirectSystemCoreTransitionMate",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_transition_mate_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T130350-L-3452344",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "independent cc review: delivered ed7db1fc913b Lean (4 modules) and 4 node files vs clone sheaf-dag nodes and change record; unchanged parent/target statements diffed; direct importer GeometricOrdinaryRealization compiled against delivered modules (exit 0, 17.8 s); #print axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "M2 stage 3",
+  "old_statement": "For any componentwise direct-image datum from `lem-coef-ordinary-direct-system-core-components`, the supplied coefficient compatibility, ordinary inverse-system transition equation, set-sheaf adjunction and normalized level adjunction imply the local mate equivalence: for every pair of systems, indices `n ≤ m`, and component maps at `m` and `n`, the source horizontal square commutes exactly when the square for their levelwise transposes commutes.",
+  "what": "STATEMENT-DISPUTED (former assertion): component data alone do not determine horizontal maps. On the one-object site with a constant nonzero ring and identity adjoints, the functor retaining levels and replacing every strict transition between distinct indices by zero has identity component isomorphisms. The two identity component maps of a constant tower satisfy the source square, while their transposes would require zero = identity. Add the actual horizontal normalization of D; its existence is proved in the components node.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03D7, adjunction transpose calculation for a horizontal square."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-ordinary-direct-system-core",
+    "holds": true,
+    "note": "The strengthened component existence supplies the added normalization, so the original core theorem remains unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the set-sheaf adjunction to both sides of the horizontal square. Use the inverse-system transition equation, coefficient compatibility and normalization to identify the resulting maps, then reflect equality through the underlying module functors.",
+    "uses": [
+     "lem-coef-ordinary-direct-system-core-components",
+     "def-coef-semilinear-system-models",
+     "lem-coef-ordinary-inverse-system",
+     "lem-coef-normalized-module-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-coef-ordinary-direct-system-core-components",
+   "def-coef-semilinear-system-models",
+   "lem-coef-ordinary-inverse-system",
+   "lem-coef-normalized-module-adjunction"
+  ]
+ }
+}

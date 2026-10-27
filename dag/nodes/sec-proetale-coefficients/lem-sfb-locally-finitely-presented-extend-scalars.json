@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-locally-finitely-presented-extend-scalars",
+ "kind": "statement",
+ "title": "Scalar extension preserves local finite presentation",
+ "statement": "Let X be a scheme and φ:R→S a morphism of ring objects in abelian sheaves on X_proet, with R commutative [sk-def-sfb-change-of-scalars]. If an internal R-module M is locally finitely presented on a pro-etale cover [def-sfb-locally-finitely-presented], then Ext_φ(M) is locally finitely presented as an S-module. No flatness or noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.5 and 6.8, finite-presentation scalar extension; the existing heart-level proof in BoundedConstructibleExtendScalars.lean"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-locally-finitely-presented"
+ ],
+ "proof": [
+  {
+   "text": "Scalar extension is additive and preserves colimits. The bimodule right unitor identifies the scalar extension of the regular R-module with the regular S-module. Mapping a finite free cokernel presentation and conjugating by the finite-biproduct isomorphisms therefore gives a finite free presentation after scalar extension.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each member of the original presentation cover, use the inverse-image scalar-extension comparison to identify the restriction of Ext_φ(M) with the extension of the given restricted finite presentation. Transport that finite presentation across the isomorphism. This includes zero ranks and empty covers.",
+   "uses": [
+    "lem-sfb-pullback-extend-scalars-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-finitely-presented-module",
+  "lem-sfb-pullback-extend-scalars-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.5 and 6.8, finite-presentation scalar extension; the existing heart-level proof in BoundedConstructibleExtendScalars.lean",
+  "note": "F4: complete Lean proof, no new sorry or axiom. The unit route through constructible heart closure and bounded constructible cohomology is retained. Repair of c51089c9b: relocate the existing fp_iff_of_iso, fp_map, fp_extend and lfp_extend declarations from BoundedConstructibleExtendScalars rather than duplicating their statements. The original module publicly reexports the three existing public names; lfp_extend is now public at the lower layer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars for internal module objects commutes with monoidal inverse image",
+   "results": "{\"t\": \"2026-10-22T04:51:18Z\", \"tool\": \"leanfinder\", \"query\": \"extension of scalars for internal module objects commutes with monoidal inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsId_inv_app_apply\", \"CategoryTheory.Mod_.comap_obj_mod\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\"], \"digest\": \"8fc1c48f83506588\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapMod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf\", \"PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf\", \"LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop\"], \"digest\": \"a5a913423bb068ad\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"grep\", \"query\": \"mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of internal modules preserves local finite presentation and commutes with inverse image",
+   "results": "{\"t\": \"2026-10-22T04:57:40Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension of internal modules preserves local finite presentation and commutes with inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"ModuleCat.ExtendScalars.obj'\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"LinearEquiv.extendScalarsOfIsLocalization\", \"LinearEquiv.extendScalarsOfSurjective_symm\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\"], \"digest\": \"acfa775ab17a0814\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+  "date": "2026-10-22",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-bounded-constructible",
+   "place": "The triangulatedness argument: closure in the heart followed by the bounded cohomology criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-bounded-constructible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFinitelyPresentedExtendScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.lfp_extend",
+  "statement": "lemma lfp_extend\n    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}\n    (h : IsLocallyFinitelyPresented R M) :\n    IsLocallyFinitelyPresented S ((Mod.extendScalars φ).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.fp_iff_of_iso",
+   "AlgebraicGeometry.ProEtale.fp_map",
+   "AlgebraicGeometry.ProEtale.fp_extend",
+   "AlgebraicGeometry.ProEtale.lfp_extend"
+  ]
+ }
+}

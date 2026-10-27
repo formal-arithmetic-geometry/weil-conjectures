@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-fibre-regular-localization-universal-injection",
+ "kind": "statement",
+ "title": "Localization at closed-fibre regular scalars is universally injective",
+ "statement": "Let $R\\to S$ be a local homomorphism of commutative local rings, with maximal ideals $\\mathfrak m_R,\\mathfrak m_S$, meaning that the inverse image of $\\mathfrak m_S$ is $\\mathfrak m_R$. Assume that $S=W^{-1}B$ as an $R$-algebra, where $B$ is a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra] and $W$ is a multiplicative subset [def-weil-pbc-module-localization]. Let $N$ be a finitely presented $S$-module [def-sc-finitely-presented-module] which is flat over $R$ [def-weil-pbc-flat-ring-map]. Put $\\overline N=N/\\mathfrak m_RN$ and $\\Sigma=\\{s\\in S:\\overline N\\xrightarrow{z\\mapsto sz}\\overline N\\text{ is injective}\\}$. This set contains $1$ and is closed under multiplication. For each $s\\in\\Sigma$, multiplication $N\\xrightarrow{s}N$ is universally injective over $R$: for every $R$-module $L$, multiplication by $s$ on $N\\otimes_R L$ is injective. Moreover the localization map $N\\to\\Sigma^{-1}N$, $n\\mapsto n/1$, is universally injective over $R$: for every $R$-module $L$ the induced map $N\\otimes_R L\\to(\\Sigma^{-1}N)\\otimes_R L$ is injective [def-weil-pbc-module-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DF (lemma-homothety-universally-injective), with its inherited assumptions from lemma-homothety-spectrum; the Noetherian finite closed-fibre assumptions follow from the displayed finite presentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-localization",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication by $1$ on $\\overline N$ is the identity. If $s,t\\in\\Sigma$ and $stz=0$, injectivity of multiplication by $s$ gives $tz=0$, and that of multiplication by $t$ gives $z=0$. Hence $1\\in\\Sigma$ and $st\\in\\Sigma$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DF, notation inherited from Tag 05DE: multiplicative set of closed-fibre regular elements"
+   }
+  },
+  {
+   "text": "Fix $s\\in\\Sigma$. Apply the general local closed-fibre injectivity criterion to $u:N\\to N$, $n\\mapsto sn$. This is $S$-linear since $S$ is commutative. The local map and presentation $S=W^{-1}B$ supply its local essentially finitely presented algebra; both modules are the given finitely presented $N$, its target is $R$-flat, and its reduction is injective by the definition of $\\Sigma$. Thus $u$ is injective and $Q=N/sN$ is $R$-flat. The quotient map gives $0\\to N\\xrightarrow{s}N\\to Q\\to0$.",
+   "uses": [
+    "lem-trf-valuation-general-mod-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DF, first proof sentence; Algebra Tag 046Y (lemma-mod-injective-general)"
+   }
+  },
+  {
+   "text": "Let $L$ be any $R$-module. Apply tensor injectivity for a short exact sequence with flat quotient to the sequence of Step 2. It gives injectivity of $1_L\\otimes u$ on $L\\otimes_RN$. The tensor universal property defines mutually inverse flips $n\\otimes x\\mapsto x\\otimes n$ and $x\\otimes n\\mapsto n\\otimes x$. On a pure tensor, flipping, applying $1_L\\otimes u$, and flipping back sends $n\\otimes x$ to $sn\\otimes x$. Pure tensors generate, so this composite is multiplication by $s$ on $N\\otimes_RL$. It is injective. This proves the first universal-injectivity assertion for every $s\\in\\Sigma$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DF, second proof sentence; Algebra Tag 00HL (lemma-flat-tor-zero); tensor symmetry expanded from its universal property"
+   }
+  },
+  {
+   "text": "Keep $L$ arbitrary and put $X=N\\otimes_RL$, with its $S$-action through $N$. Apply localization commuting with tensor over the base, with $A=S$, $T=\\Sigma$ and $M=N$. Step 1 supplies the multiplicative subset. This identifies $\\Sigma^{-1}X$ with $(\\Sigma^{-1}N)\\otimes_RL$ by $(n\\otimes x)/s\\mapsto(n/s)\\otimes x$, and identifies the tensor of $N\\to\\Sigma^{-1}N$ with $z\\mapsto z/1$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DF, final proof sentence, localization step expanded using Algebra Tags 00DK/00D2"
+   }
+  },
+  {
+   "text": "If $z\\in X$ maps to zero under the map of Step 4, then $z/1=0$ in $\\Sigma^{-1}X$. The fraction-zero criterion gives $s\\in\\Sigma$ with $sz=0$. Step 3 says multiplication by this $s$ on $X$ is injective, so $z=0$. The map is therefore injective for every $L$, proving the localization assertion.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DF, final proof sentence; fraction-zero argument from Algebra Tag 00CM (module localization definition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-general-mod-injective",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DF (lemma-homothety-universally-injective), proof; its final localization-colimit inference is expanded by localization/tensor compatibility and the fraction-zero criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism of local rings R to S essentially of finite presentation and a finitely presented S module N flat over R, localization of N at elements regular on the closed fibre is universally injective over R",
+   "results": "{\"t\": \"2026-10-24T03:35:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a local homomorphism of local rings R to S essentially of finite presentation and a finitely presented S module N flat over R, localization of N at elements regular on the closed fibre is universally injective over R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"9a12234e5df72ab0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits require scalar regularity before base change, flatness over S, or finite freeness over the base; none promotes closed-fibre regularity to universal R-injectivity for a relatively flat finitely presented S-module."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalHom, IsSMulRegular",
+   "results": "{\"t\": \"2026-10-24T03:35:55Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsLocalHom, IsSMulRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits require scalar regularity before base change, flatness over S, or finite freeness over the base; none promotes closed-fibre regularity to universal R-injectivity for a relatively flat finitely presented S-module."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*injective|IsSMulRegular.*Flat|Flat.*IsSMulRegular",
+   "results": "{\"t\": \"2026-10-24T03:36:27Z\", \"tool\": \"grep\", \"query\": \"universally.*injective|IsSMulRegular.*Flat|Flat.*IsSMulRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"9ae88e7068c9ebad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits require scalar regularity before base change, flatness over S, or finite freeness over the base; none promotes closed-fibre regularity to universal R-injectivity for a relatively flat finitely presented S-module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a local base ring a fibrewise nonzerodivisor on a relatively flat finitely presented module gives a pure injective multiplication map and pure localization",
+   "results": "{\"t\": \"2026-10-24T03:36:27Z\", \"tool\": \"leansearch\", \"query\": \"Over a local base ring a fibrewise nonzerodivisor on a relatively flat finitely presented module gives a pure injective multiplication map and pure localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"Module.Flat.of_isLocalizedModule\", \"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"LocalizedModule.map_injective\", \"Module.Flat.localizedModule\"], \"digest\": \"8bbcf390d94e3ed0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits require scalar regularity before base change, flatness over S, or finite freeness over the base; none promotes closed-fibre regularity to universal R-injectivity for a relatively flat finitely presented S-module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzerodivisor on the residue fibre of a finitely presented relatively flat module over a local algebra is universally regular and inverting all such scalars is a pure monomorphism",
+   "results": "{\"t\": \"2026-10-24T03:37:08Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzerodivisor on the residue fibre of a finitely presented relatively flat module over a local algebra is universally regular and inverting all such scalars is a pure monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"Module.flat_of_isLocalized_maximal\", \"IsSMulRegular.of_flat\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"Module.FaithfullyFlat\", \"Module.Flat.isSMulRegular_of_isRegular\", \"Module.free_of_lTensor_residueField_injective\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\"], \"digest\": \"124dedccf4767200\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits require scalar regularity before base change, flatness over S, or finite freeness over the base; none promotes closed-fibre regularity to universal R-injectivity for a relatively flat finitely presented S-module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism R to S essentially of finite presentation and a finitely presented S module N flat over R, elements regular on the closed fibre act universally injectively and localization at them is universally injective",
+   "results": "{\"t\": \"2026-10-24T04:07:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a local homomorphism R to S essentially of finite presentation and a finitely presented S module N flat over R, elements regular on the closed fibre act universally injectively and localization at them is universally injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"IsSMulRegular.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.propertyIsLocal\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"70891b8116d638b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat IsLocalHom IsSMulRegular",
+   "results": "{\"t\": \"2026-10-24T04:07:17Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat IsLocalHom IsSMulRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Application type mismatch: The argument\\n  IsLocalHom\\nhas type\\n  ?m.3 → Prop\\nbut is expected to have type\\n  Type ?u.2\\nin the application\\n  Module.Flat IsLocalHom\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: invalid Loogle application pattern; rerun with commas."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*injective|IsSMulRegular.*Flat|Flat.*IsSMulRegular",
+   "results": "{\"t\": \"2026-10-24T04:07:17Z\", \"tool\": \"grep\", \"query\": \"universally.*injective|IsSMulRegular.*Flat|Flat.*IsSMulRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"35029733c27937aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a local base ring a fibrewise nonzerodivisor on a relatively flat finitely presented module gives a pure injective multiplication map and pure localization",
+   "results": "{\"t\": \"2026-10-24T04:07:18Z\", \"tool\": \"leansearch\", \"query\": \"Over a local base ring a fibrewise nonzerodivisor on a relatively flat finitely presented module gives a pure injective multiplication map and pure localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"Module.Flat.of_isLocalizedModule\", \"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"LocalizedModule.map_injective\", \"Module.Flat.localizedModule\"], \"digest\": \"8bbcf390d94e3ed0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of finitely presented modules over a local essentially finitely presented algebra with flat target is universally injective if its reduction modulo the maximal ideal is injective",
+   "results": "{\"t\": \"2026-10-24T04:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of finitely presented modules over a local essentially finitely presented algebra with flat target is universally injective if its reduction modulo the maximal ideal is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"injective_of_localized_maximal\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"Algebra.FormallyUnramified.iff_comp_injective_of_small\", \"Module.FaithfullyFlat.injective_of_tensorProduct\"], \"digest\": \"d62117a5dd40a838\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalHom, IsSMulRegular",
+   "results": "{\"t\": \"2026-10-24T04:13:31Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsLocalHom, IsSMulRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*residueField|residueField.*injective|injective.*[Ff]lat.*[Ff]inite|[Ff]lat.*injective.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-24T04:13:48Z\", \"tool\": \"grep\", \"query\": \"injective.*residueField|residueField.*injective|injective.*[Ff]lat.*[Ff]inite|[Ff]lat.*injective.*[Ff]inite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"d3af2490e5b3f309\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: checked regularity/flat-base-change and local finite-free residue-field criteria; none promotes closed-fibre regularity for an S-finitely-presented, R-flat module under the stated relative hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-assassin-cover-universal-section-injection-local",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current latest sk-thm-sf-ctf-stability.proof.md, compactification/direct-image paragraph; inherited flatness/flattening prerequisite chain. In Stacks 05DG, final paragraph invokes 05DF to make the first vertical localization map universally injective.",
+   "via": [
+    "lem-sfb-assassin-cover-universal-section-injection-local",
+    "lem-sfb-assassin-cover-universal-section-injection",
+    "lem-sfb-affine-flat-fp-projectivity-purity",
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibre-regular-localization-universal-injection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split Stacks 05DF into multiplicative closure, application of the existing general 046Y criterion, tensor injectivity with flat quotient, and localization/tensor compatibility followed by the elementary fraction-zero argument. Reused all required nodes; no new nodes. Checked cited statements, hypotheses, source, edge cases and Mathlib candidates.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, direct-image/compactification paragraph, via the inherited flatness/flattening prerequisite chain. This node supplies precisely the 05DF localization injection used in the final paragraph of 05DG; no chapter or unit route is changed. The inherited nearest ancestor is null (as confirmed by blueprint_refs.py ancestor); preserved from.place and via. Whole-blueprint searches for the statement and 05DF found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-valuation-general-mod-injective",
+    "why": "Generic commutative algebra criterion Tag 046Y: injectivity and flat cokernel from injectivity on the closed fibre. It is exactly the lemma invoked by 05DF; no node of this unit supplies the general criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-valuation-general-mod-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-a422b6484",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-a422b6484 (reviewer sub-agent of L); spot-checked: Read the full item and Stacks flat.tex 05DE/05DF (lines 1778-1840). The statement and stmt_deps are identical to base, and live still has the item unsplit, so it is not superseded and the target is not weakened. Σ (injective multiplication on N̄) equals Stacks' non-zerodivisors. The omitted 05DE Noetherian assumptions are not used by the 05DF proof. Step 1 (multiplicative closure) is elementary. Step 2: every hypothesis of lem-trf-valuation-general-mod-injective (046Y) holds with M=N and u=s, and it gives u injective and N/sN flat. Step 3: 00HL leaf gives 1_L⊗u injective, and the flip via the tensor-definition node (pure tensors generate) turns this into multiplication by s on N⊗L. Step 4: localization-tensor-over-base with A=S, T=Σ gives Σ⁻¹(N⊗L)≅Σ⁻¹N⊗L. Step 5: the fraction-zero clause of def-weil-pbc-module-localization plus Step 3 gives injectivity, which correctly expands the colimit sentence of 05DF. Edge cases checked: N=0, L=0, unit s, 0∈Σ (forces N=0), field base. No new nodes. The own-unit alternative lem-sfb-finite-source-fibre-injective-flat-target has the item in its closure, so citing it would be a cycle; I accept the 046Y tool_use. Batch-5 flag on lem-trf-valuation-general-mod-injective: its 147-node closure is pure commutative algebra (trf local-approximation lemmas and generic defs), with no trace-formula, Poincaré or batch-4 node, so it lies outside both assumptions. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreRegularLocalizationUniversalInjection",
+  "declaration": "Algebra.fibre_regular_localization_universally_injective",
+  "file": "lean/Sheaf/RingTheory/FibreRegularLocalizationUniversalInjection.lean",
+  "statement": "theorem fibre_regular_localization_universally_injective {R : Type u} {S : Type v} {B : Type p} {N : Type w} [CommRing R] [CommRing S] [CommRing B] [IsLocalRing R] [IsLocalRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] [Algebra R B] [Algebra B S] [IsScalarTower R B S] [Algebra.FinitePresentation R B] (W : Submonoid B) [IsLocalization W S] [AddCommGroup N] [Module S N] [Module R N] [IsScalarTower R S N] [Module.FinitePresentation S N] [Module.Flat R N] : IsSMulRegular (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N))) (1 : S) ∧ (∀ s t : S, IsSMulRegular (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N))) s → IsSMulRegular (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N))) t → IsSMulRegular (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N))) (s * t)) ∧ (∀ s : S, IsSMulRegular (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N))) s → ∀ (L : Type (max u v p w t)) [AddCommGroup L] [Module R L], IsSMulRegular (N ⊗[R] L) s) ∧ (∀ (L : Type (max u v p w t)) [AddCommGroup L] [Module R L], Function.Injective (((LocalizedModule.mkLinearMap (nonZeroSMulDivisors S (N ⧸ ((IsLocalRing.maximalIdeal R).map (algebraMap R S) • (⊤ : Submodule S N)))) N).restrictScalars R).rTensor L))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02c45e3bf",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_dep records, Stacks flat.tex 05DE/05DF (lines 1781-1840), the delivered module and the report. The item record differs from live only in the new lean field, which is verbatim the file signature (checked by script). H3 clause by clause: local rings with IsLocalHom; S=W⁻¹B as Algebra B S + IsScalarTower R B S + FinitePresentation R B + IsLocalization W S (same encoding as the landed 046Y record); N FinitePresentation S, Flat R, IsScalarTower R S N; N̄ = N/(m_R S)N = N/m_R N; Σ via IsSMulRegular, with the 1 and multiplication clauses; universal injectivity of s on N⊗L; rTensor of the restrictScalars of mkLinearMap at nonZeroSMulDivisors (carrier = Σ, natural R-action via IsScalarTower R₀). L : Type (max u v p w t) with t free is not a restriction. No extra hypotheses; the 05DE Noetherian assumptions are implied by the finite presentations and unused by 05DF. Edge cases N=0, L=0, unit s, W={1}, R=S all fine. No defs; proof is sorry only; docstrings carry source, blueprint id and the 5 steps; plain imports are exactly the proof-dep modules (046Y Sheaf module exists in live; Flat.Equalizer, Localization.BaseChange). No name clash in side-live. Worker report present; no compile needed since nothing was changed. No findings."
+ }
+}

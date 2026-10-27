@@ -25,7 +25,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 set_option autoImplicit false
-attribute [local irreducible] Etale.sheafHDerivedEquiv Etale.sheafHToDerived
+attribute [local irreducible] RingedSpace.moduleCohomology
+  Etale.sheafHDerivedEquiv Etale.sheafHToDerived
   CategoryTheory.derivedExtEvaluation coherentEtaleRestrictionIso tensorPullback tensorPullbackObj
   Etale.rawRestrictedCohomologyComparison
   Etale.abelianHigherDirectImageClass
@@ -33,7 +34,7 @@ attribute [local instance] Etale.RawRestrictedComparison.etaleComposition
   Etale.RawRestrictedComparison.etaleIdentities Etale.RawRestrictedComparison.etalePullbacks
   Etale.RawRestrictedComparison.etaleBaseChange Etale.RawRestrictedComparison.sheafifyInstance
   Etale.RawRestrictedComparison.weakSheafifyInstance
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The coefficient on the actual fibre product, with the raw-comparison factor order.
@@ -53,47 +54,46 @@ abbrev affineRealizationHigherImage {X S : Scheme.{u}} (f : X ⟶ S)
     (R+((f)_*[AddCommGrpCat.{u + 1}]).obj
       ((DerivedCategory.Plus.singleFunctor _ 0).obj (liftedCoherentEtaleSheaf G)))
 
-/-- The actual raw evaluation, transported through canonical cohomology and coefficient
-identifications. No cohomology isomorphism is chosen arbitrarily.
-Source: Stacks Project, Tag 03Q8 and Tag 03P2
+/-- The constructed additive equivalence underlying raw evaluation.
+Source: Stacks Project, Tags 03Q8 and 03P2
+(blueprint: def-weil-pbc-coherent-higher-image-classes). -/
+def affineRealizationRawEquiv {X S : Scheme.{u}} (f : X ⟶ S)
+    (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale) :
+    (Etale.abelianHigherDirectImageRawPresheaf f q
+      (liftedCoherentEtaleSheaf G)).obj (op V) ≃+
+      Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q := by
+  let := Etale.isIso_rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V
+  exact (asIso (Etale.rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V)
+    |>.addCommGroupIsoToAddEquiv).trans
+    ((Etale.sheafHDerivedEquiv
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (pullback.snd V.hom f)).obj
+        (liftedCoherentEtaleSheaf G)) q).symm.trans
+      (((Sheaf.functorH _ q).mapIso
+        (coherentEtaleRestrictionIso (pullback.snd V.hom f) G)).addCommGroupIsoToAddEquiv))
+
+attribute [local irreducible] affineRealizationRawEquiv
+
+/-- The actual raw evaluation through the constructed additive equivalence.
+Source: Stacks Project, Tags 03Q8 and 03P2
 (blueprint: def-weil-pbc-coherent-higher-image-classes). -/
 def affineRealizationRawEvaluation {X S : Scheme.{u}} (f : X ⟶ S)
     (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale)
     (z : (Etale.abelianHigherDirectImageRawPresheaf f q
       (liftedCoherentEtaleSheaf G)).obj (op V)) :
     Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q :=
-  Sheaf.H.map (coherentEtaleRestrictionIso (Limits.pullback.snd V.hom f) G).hom q
-    ((Etale.sheafHDerivedEquiv
-      ((Etale.upperStar AddCommGrpCat.{u + 1} (Limits.pullback.snd V.hom f)).obj
-        (liftedCoherentEtaleSheaf G)) q).symm
-      (Etale.rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V z))
+  affineRealizationRawEquiv f G q V z
 
 attribute [local irreducible] affineRealizationRawEvaluation
 
-/-- The explicit raw evaluation is bijective, so that its inverse is determined.
+/-- The constructed raw evaluation is bijective.
 Source: Stacks Project, Tag 03Q8
 (blueprint: def-weil-pbc-coherent-higher-image-classes).
-
-Proof: the raw comparison is an isomorphism by the recorded raw comparison theorem.
-The derived/Ext transport is an additive equivalence. The coefficient restriction is
-an isomorphism of sheaves, and its cohomology map has inverse the cohomology map of
-its inverse. The displayed composite is therefore bijective, without any hypothesis
-on f, V, or q. -/
+Proof: it is the forward map of the constructed additive equivalence. -/
 theorem affineRealizationRawEvaluation_bijective {X S : Scheme.{u}} (f : X ⟶ S)
     (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale) :
     Function.Bijective (affineRealizationRawEvaluation f G q V) := by
-  let e := coherentEtaleRestrictionIso (Limits.pullback.snd V.hom f) G
-  have hc : Function.Bijective (Sheaf.H.map e.hom q) :=
-    ConcreteCategory.bijective_of_isIso ((Sheaf.functorH _ q).map e.hom)
-  let := Etale.isIso_rawRestrictedCohomologyComparison f q
-    (liftedCoherentEtaleSheaf G) V
   unfold affineRealizationRawEvaluation
-  exact hc.comp
-    ((Etale.sheafHDerivedEquiv
-      ((Etale.upperStar AddCommGrpCat.{u + 1} (Limits.pullback.snd V.hom f)).obj
-        (liftedCoherentEtaleSheaf G)) q).symm.bijective.comp
-      (ConcreteCategory.bijective_of_isIso
-        (Etale.rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V)))
+  exact (affineRealizationRawEquiv f G q V).bijective
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cohomology class in the abelian higher direct image. The inverse
@@ -105,10 +105,24 @@ def affineRealizationClass {X S : Scheme.{u}} (f : X ⟶ S)
     (x : Sheaf.H (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q) :
     (affineRealizationHigherImage f G q).obj.obj (op V) :=
   Etale.abelianHigherDirectImageClass f q (liftedCoherentEtaleSheaf G) V
-    ((Equiv.ofBijective (affineRealizationRawEvaluation f G q V)
-      (affineRealizationRawEvaluation_bijective f G q V)).symm x)
+    ((affineRealizationRawEquiv f G q V).symm x)
 
 attribute [local irreducible] affineRealizationClass
+
+
+/-- Evaluation followed by its canonical higher-image class gives the actual raw class.
+Source: Stacks Project, Tag 03Q8
+(blueprint: def-weil-pbc-coherent-higher-image-classes).
+Proof: the inverse of the constructed raw equivalence cancels its forward map. -/
+theorem affineRealizationClass_rawEvaluation {X S : Scheme.{u}} (f : X ⟶ S)
+    (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale)
+    (z : (Etale.abelianHigherDirectImageRawPresheaf f q
+      (liftedCoherentEtaleSheaf G)).obj (op V)) :
+    affineRealizationClass f G q V (affineRealizationRawEvaluation f G q V z) =
+      Etale.abelianHigherDirectImageClass f q (liftedCoherentEtaleSheaf G) V z := by
+  unfold affineRealizationClass affineRealizationRawEvaluation
+  exact congrArg (Etale.abelianHigherDirectImageClass f q (liftedCoherentEtaleSheaf G) V)
+    ((affineRealizationRawEquiv f G q V).symm_apply_apply z)
 
 
 end

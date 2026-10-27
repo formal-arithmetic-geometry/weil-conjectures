@@ -1,0 +1,274 @@
+{
+ "id": "lem-a1-space-atlas-open-refinement-pullback",
+ "kind": "statement",
+ "title": "Affine open refinement of a prescribed atlas and its scheme-test pullbacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $E$ an algebraic space over $S$ [def-trf-algebraic-space]. All schemes are over $S$ in the universes of [def-weil-size-convention]. Write $|E|$ for its field-valued point classes and $|t|:|T|\\to|E|$ for the map of a scheme-source morphism, as in [def-a1-algebraic-space-point-classes]. Let $p:h_V\\to E$ be representable surjective etale and let $(U_i\\subseteq V)_{i\\in I}$ be a set-indexed open covering [def-weil-open-immersion], without an affineness assumption. Form the scheme coproduct $W=\\coprod_iU_i$ with its disjoint open components [lem-weil-pbc-scheme-coproduct-family], let $r:W\\to V$ be induced by the inclusions, and let $w=p\\circ h_r$. For every scheme $T$ and $t:h_T\\to E$, put $P=T\\times_EV$ and $P_i=P\\times_VU_i$ (sheaf fibre products, represented by schemes). The canonical morphism $\\coprod_iP_i\\to T\\times_EW$ is an isomorphism of sheaves, so the right side is represented by this scheme coproduct. Each $P_i\\to P$ is an open immersion, the $P_i$ cover $P$, and the projection $\\coprod_iP_i\\to T$ is surjective etale [def-weil-etale-morphism]. Consequently $w$ is representable surjective etale and $|w|$ is surjective. These assertions include the empty covering of the empty atlas. Moreover, for every such prescribed atlas $p$, there exists such a family $(U_i)$ with each $U_i$ affine (isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]) and with an affine open $S_i\\subseteq S$ and a factorization $U_i\\to S_i\\to S$ of its structural morphism for every $i$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03FX (lemma-cover-by-union-affines), proof: the prescribed open covering, coproduct, and composite; expanded scheme-test pullback and residue-field point argument. The affine refinement and affine-base factorization are the first two sentences of the same proof, using the affine-open basis twice."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme test t:h_T→E, use [def-trf-algebraic-space] to choose a representing square h_P→h_V over h_T→E. The étale and surjective scheme-test hypotheses give alternative representing squares; their unique pullback isomorphisms, reflected by Yoneda to schemes over S, transport étaleness and surjectivity to the chosen projection q:P→T. Write a:P→V for the other projection, obtained by the fully faithful Yoneda embedding.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX, representable-transformation composition expanded by uniqueness of representing pullbacks."
+   }
+  },
+  {
+   "text": "Prove the coproduct comparison first entirely in schemes over S. Set W=∐U_i, r=Sigma.desc j, Q=P×_V W, and D_i=P×_V U_i using [def-pc-fibre-product]. Pullback pasting makes the canonical l_i:D_i→Q the base change of U_i→W. By [lem-weil-pbc-scheme-coproduct-family] these inclusions are open and disjoint, and by [lem-weil-pbc-open-immersion-base-change] so are the l_i. For x in Q, choose a component U_i containing its image in W, and lift the compatible pair of points to D_i by [lem-weil-pbc-scheme-pullback-compatible-point]. Thus the l_i cover Q. Mathlib nonempty_isColimit_cofanMk_of identifies this disjoint open cover as a scheme coproduct. The forgetful functor Over S→Scheme preserves coproducts and reflects isomorphisms, so the actual canonical map Sigma.desc l:∐D_i→Q is an isomorphism. This proves the square with projections Sigma.desc(pullback.snd≫Sigma.ι) and Sigma.desc(pullback.fst), and bottom maps r and a, is cartesian in Over S. Apply Yoneda and paste with the square of step 1. Coproduct uniqueness identifies the second projection after composition with q with exactly Sigma.desc(pullback.fst≫q), giving the prescribed presheaf pullback square. No section of E is glued.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-pullback-compatible-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX, scheme-test expansion of the coproduct refinement; Schemes Tags 01JY and 01JT for the pullback open immersions and point lifting."
+   }
+  },
+  {
+   "text": "The projections D_i→P are open immersions by [lem-weil-pbc-open-immersion-base-change]. Given x in P, choose y in some U_i with j_i(y)=a(x); [lem-weil-pbc-scheme-pullback-compatible-point] gives a point in D_i mapping to x. Thus these opens cover P. Their composites with q are étale by [lem-weil-pbc-etale-composition-cancellation]; [lem-weil-pbc-etale-local-on-source] makes their coproduct projection étale. For surjectivity, lift a point of T to P using q, then to D_i by the preceding covering argument, and then include it in ∐D_i. The squares of step 2 with these projection properties give all three refined scheme-test predicates in [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX, representable surjective étaleness verified on scheme tests; Morphisms Tags 02GP, 02GN and 02GJ."
+   }
+  },
+  {
+   "text": "For any presheaf F, any scheme-source morphism b:h_W→F which satisfies IsSurjective induces a surjection on point classes. Prove first that schemePointMap respects composition by a scheme morphism: the induced residue-field map and its naturality square give precisely the common-field relation of [def-a1-algebraic-space-point-classes], using [lem-weil-pbc-morphism-from-spec-field]. For a point class choose a representative e over Spec K, convert it to h_(Spec K)→F by Yoneda, and take its representing surjective test C→Spec K. The field spectrum has a point, so C has a point z. Its residue-field morphism gives a representative over κ(z); the cartesian equality identifies its image under b with the restriction of e. The common-extension relation therefore identifies the original point class with the image of z under C→W. Apply this to the refined atlas of step 3. No K-rational lift is assumed.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03BU and 03BV, together with Schemes Tag 01J9; the residue-field naturality argument for a surjective representable map."
+   }
+  },
+  {
+   "text": "For each point x of V use [lem-weil-pbc-affine-opens-basis] to choose an affine base open B_x containing its structural image. Apply the same basis theorem on V to choose an affine open A_x containing x inside the inverse image of B_x. Define U_x as the actual open subscheme A_x with structural morphism A_x→V→S, and define j_x to be its inclusion into V. The family covers V by the chosen memberships. The morphism V.hom.resLE gives U_x→B_x with composite equal to its structural map, as in [lem-weil-pbc-morphism-factors-through-open-subscheme]. The index is V itself, in the universe required by [def-weil-size-convention]. All preceding arguments quantify over arbitrary small index types and use covering points only when a point is given, so they also apply to empty atlases and empty coverings.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX, first two sentences of the proof; Schemes Tags 01IT and 01HI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-pullback-compatible-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03FX, with the scheme coproduct pullback comparison proved using disjoint open components, scheme pullback point lifting (01JT) and pullback pasting. Point classes use Tags 03BU and 03BV and Schemes 01J9; affine refinement uses 01IT and 01HI. Lean implementation by D8, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale atlas of an algebraic space remains representable surjective etale after replacing its source by the disjoint union of an open covering; pullbacks distribute over this coproduct",
+   "results": "{\"t\": \"2026-10-22T07:50:51Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective etale atlas of an algebraic space remains representable surjective etale after replacing its source by the disjoint union of an open covering; pullbacks distribute over this coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ\", \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.sigmaOpenCover\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.Scheme.Cover.instEpiTopCatBaseCommRingCatFromGlued\", \"AlgebraicGeometry.coprodOpenCover\", \"AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective\"], \"digest\": \"5b504ce06b1f9665\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*refin|refin.*atlas",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|atlas.*refin|refin.*atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/Tangent.lean\", \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\", \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\"], \"digest\": \"a00ee2a9bb2fc320\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refining an algebraic space surjective etale atlas by an open covering commutes with every scheme base change and preserves point surjectivity",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"leansearch\", \"query\": \"Refining an algebraic space surjective etale atlas by an open covering commutes with every scheme base change and preserves point surjectivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instOverPullbackCoverOver\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver'\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover\"], \"digest\": \"3f3c2ff0308cc0b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale scheme atlas replaced by the coproduct of an open cover has pullback the coproduct of the open pullbacks over any scheme test",
+   "results": "{\"t\": \"2026-10-22T07:52:02Z\", \"tool\": \"leanfinder\", \"query\": \"An etale scheme atlas replaced by the coproduct of an open cover has pullback the coproduct of the open pullbacks over any scheme test\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isPullback_of_openCover\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_X\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft_X\", \"AlgebraicGeometry.Scheme.Pullback.gluing_V\"], \"digest\": \"b22c7281bcfc9529\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed algebraic space etale atlas admits an affine open refinement over affine base opens whose coproduct remains a surjective etale atlas",
+   "results": "{\"t\": \"2026-10-22T07:57:07Z\", \"tool\": \"leansearch\", \"query\": \"A prescribed algebraic space etale atlas admits an affine open refinement over affine base opens whose coproduct remains a surjective etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\"], \"digest\": \"d2ac7cd22f44580f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme affine covers, affine refinements and coproduct surjectivity do not state the algebraic-space scheme-test and point-surjectivity conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a prescribed surjective etale scheme atlas of an algebraic space, refine its source by affine opens over affine opens of the base and take their coproduct; every scheme pullback is the coproduct of pulled back opens",
+   "results": "{\"t\": \"2026-10-22T07:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"Given a prescribed surjective etale scheme atlas of an algebraic space, refine its source by affine opens over affine opens of the base and take their coproduct; every scheme pullback is the coproduct of pulled back opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ\", \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"6dc0e7dd49ce151a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme affine covers, affine refinements and coproduct surjectivity do not state the algebraic-space scheme-test and point-surjectivity conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replacing an algebraic space etale atlas by an open covering coproduct commutes with scheme base change and gives a surjective etale atlas",
+   "results": "{\"t\": \"2026-10-23T04:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"Replacing an algebraic space etale atlas by an open covering coproduct commutes with scheme base change and gives a surjective etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sigmaOpenCover\", \"AlgebraicGeometry.coprodOpenCover\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.sigmaOpenCover_X\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"1c5a103580d57b3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme coproducts, scheme affine covers and scheme etale maps; none states the prescribed algebraic-space atlas refinement with arbitrary sheaf fibre products and point classes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T04:12:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme coproducts, scheme affine covers and scheme etale maps; none states the prescribed algebraic-space atlas refinement with arbitrary sheaf fibre products and point classes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*refin|refin.*atlas",
+   "results": "{\"t\": \"2026-10-23T04:12:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|atlas.*refin|refin.*atlas\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme coproducts, scheme affine covers and scheme etale maps; none states the prescribed algebraic-space atlas refinement with arbitrary sheaf fibre products and point classes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any algebraic space etale atlas refining by an affine open cover gives a surjective etale atlas and pullback is the disjoint union of open pullbacks",
+   "results": "{\"t\": \"2026-10-23T04:13:07Z\", \"tool\": \"leansearch\", \"query\": \"For any algebraic space etale atlas refining by an affine open cover gives a surjective etale atlas and pullback is the disjoint union of open pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\"], \"digest\": \"97767334d0324248\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme coproducts, scheme affine covers and scheme etale maps; none states the prescribed algebraic-space atlas refinement with arbitrary sheaf fibre products and point classes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a scheme coproduct to a sheaf has fibre product with any scheme equal to the coproduct of the fibre products of its summands",
+   "results": "{\"t\": \"2026-10-23T04:15:17Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a scheme coproduct to a sheaf has fibre product with any scheme equal to the coproduct of the fibre products of its summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc\"], \"digest\": \"4921143c69bd9897\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme coproducts, scheme affine covers and scheme etale maps; none states the prescribed algebraic-space atlas refinement with arbitrary sheaf fibre products and point classes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-affine-etale-cover",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent in the lissity/support argument of lem-a1-affine-hc0. Extraction of returned proof step 2 (open refinement and scheme-test coproduct).",
+   "via": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-atlas-open-refinement-pullback",
+  "worker": "stage1",
+  "summary": "Proved the prescribed-atlas refinement directly using existing DAG nodes only. The coproduct comparison is constructed on arbitrary scheme tests by clopen component decompositions, fibre-product uniqueness and morphism gluing; etaleness is source-local, and point surjectivity uses field extension and residue-field factorization. The affine-base refinement uses the affine-open basis twice. Statement and statement dependencies are unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the 03FX open-refinement input below lem-a1-affine-hc0 through the existing proetale-local-system representability and fpqc descent route. Retains the prescribed-atlas scheme-test construction extracted from parent lem-a1-space-affine-etale-cover, and its affine-base refinement, without invoking that parent.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Uses only the general definition of representable surjective etale maps by scheme tests, with no trace-formula hypotheses or alternate proof route."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Uses the generic inclusion of Zariski coverings in the big fppf topology to check equality of sections of E on the disjoint open components; the unit supplies no replacement for this topology tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-845d694be",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-845d694be (reviewer sub-agent of L); spot-checked: I read the item, its report, the statements of all 17 cited nodes, the parent and siblings, and Stacks spaces-properties 03FX (l.701-723). The delivery has one commit and no new nodes, and leaves the statement and stmt_deps unchanged. Its search record covers all three kinds. Steps: (1) open-fibre-product with base V, X=P and Y=V identifies P_i with q^{-1}(U_i), so the P_i cover P. The two composites C→E agree on C because E is an fppf sheaf and the Zariski cover by components is fppf. (2) The inverse is built on an arbitrary Z through the clopen partition b^{-1}(U_i), unique open factorization, fibre-product uniqueness and gluing over disjoint pieces; both inverse checks and naturality hold. (3) Open immersion → étale, composition, and source-locality for arbitrary covers (including infinite and empty) give C→T étale; surjectivity lifts through P and then into some P_i. (4) Points: Spec-field factorization gives agreement over the common field κ(z), compatibly over S, with no rational lift assumed. (5) The affine basis is applied twice and open factorization gives U_v→S_v→S, indexed by the points of V. I checked the empty atlas, the identity atlas, overlapping or repeated covers, non-affine tests and residue extensions. Every cited lemma is a Mathlib leaf or a definition, and def-a1-algebraic-space-point-classes is in the item's own unit, so the route is fine; I accept the declared tool_uses. There is no cycle: the parent lem-a1-space-affine-etale-cover and the sibling lem-a1-space-affine-atlas-open-cover cite the item, not the reverse. Duplicate search over 03FX and space coproducts (lem-trf-algebraic-space-coproduct, lem-trf-fppf-sheaf-coproduct-partition, lem-trf-space-finite-qc-atlas-assembly) found nothing that states this item. All step tags match tags/tags and no SGA is cited. Minor: the report lists citations.json and searches.jsonl, which are not in the commit; they are worker side files, not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAtlasOpenRefinementPullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_atlas_open_refinement_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAtlasOpenRefinementPullback.lean",
+  "statement": "theorem space_atlas_open_refinement_pullback {S : Scheme.{u}} (E : AlgebraicSpace S) (V : Over S) (p : yoneda.obj V ⟶ E.obj.obj) (hp : IsRepresentable p) (hpEt : IsEtale p) (hpSurj : IsSurjective p) : (∀ (I : Type v) [Small.{u} I] (U : I → Over S) (j : ∀ i : I, U i ⟶ V), (∀ i : I, IsOpenImmersion (j i).left) → (∀ x : V.left, ∃ (i : I) (y : (U i).left), (j i).left y = x) → (∀ (T : Over S) (t : yoneda.obj T ⟶ E.obj.obj), ∃ (P : Over S) (q : P ⟶ T) (a : P ⟶ V), IsPullback (yoneda.map a) (yoneda.map q) p t ∧ (∀ i : I, IsOpenImmersion (pullback.fst a (j i)).left) ∧ (∀ x : P.left, ∃ (i : I) (y : (Limits.pullback a (j i)).left), (pullback.fst a (j i)).left y = x) ∧ IsPullback (yoneda.map (Sigma.desc (fun i : I ↦ pullback.snd a (j i) ≫ Sigma.ι U i))) (yoneda.map (Sigma.desc (fun i : I ↦ pullback.fst a (j i) ≫ q))) (yoneda.map (Sigma.desc j) ≫ p) t ∧ Surjective (Sigma.desc (fun i : I ↦ pullback.fst a (j i) ≫ q)).left ∧ Etale (Sigma.desc (fun i : I ↦ pullback.fst a (j i) ≫ q)).left) ∧ IsRepresentable (yoneda.map (Sigma.desc j) ≫ p) ∧ IsSurjective (yoneda.map (Sigma.desc j) ≫ p) ∧ IsEtale (yoneda.map (Sigma.desc j) ≫ p) ∧ Function.Surjective (schemePointMap (yoneda.map (Sigma.desc j) ≫ p))) ∧ ∃ (I : Type u) (U : I → Over S) (j : ∀ i : I, U i ⟶ V), (∀ i : I, IsOpenImmersion (j i).left) ∧ (∀ x : V.left, ∃ (i : I) (y : (U i).left), (j i).left y = x) ∧ (∀ i : I, IsAffine (U i).left) ∧ (∀ i : I, ∃ (B : S.Opens) (_ : IsAffineOpen B) (b : (U i).left ⟶ B.toScheme), b ≫ B.ι = (U i).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45fc43d1e",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 03FX clause by clause. p uses the def-trf IsRepresentable/IsEtale/IsSurjective, nothing stronger. W, r and w are canonical (Sigma.desc/Sigma.ι in Over S). Both IsPullback squares are correctly oriented and the second uses the canonical coproduct projections. Surjective/Etale are stated on the coproduct projection to T. Point surjectivity uses the def-a1 schemePointMap. The affine existential is for the same V and p, with the factorization b ≫ B.ι = (U i).hom of the actual structural map. Empty index set covered (no Nonempty assumed). Index universe v generalizes with Small.{u}. lean.statement verbatim. Only the lean field changed; no new nodes or dependency repairs. Docstrings carry source, blueprint and the 5 proof steps. Plain imports are the proof_dep modules. No hollow defs, only sorry. Not recompiled since nothing changed; worker compile clean. Minor: second reading was by the same worker, content adequate."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261026T081528-L-1997005",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

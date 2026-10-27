@@ -26,53 +26,54 @@
  ],
  "proof": [
   {
-   "text": "The canonical Cartier pullback comparison identifies the dual ideal and canonical section with the dual pulled-back ideal and its section, including the complementary trivializations. The relative torsor class therefore pulls back to the primed relative class.",
+   "text": "Extract the extension witness of each SupportedKummerBoundary at the canonical complementary open. Its torsor, supported-one and zero-frame equations satisfy CartierPoleBoundarySpec. Uniqueness identifies its degree-one extClass with cartierPoleBoundary, so the given scalar adjunct is the Yoneda product of that integral class and the positive Kummer class.",
    "uses": [
-    "lem-asd-supported-kummer-cartier-pullback",
-    "lem-amb-relative-torsor-cohomology"
+    "lem-sp-cartier-pole-boundary-existence"
    ],
    "elementary": false
   },
   {
-   "text": "Kummer connecting morphisms commute with pullback of roots and units, giving equality of the abelian relative Kummer classes. The canonical module-to-abelian cohomology comparisons commute with inverse image and derived direct image on the scheme and its complementary open; hence they identify the module relative classes under pullback as well.",
+   "text": "The canonical module/abelian inverse-image mate commutes with closed exchange. Apply naturality of abelian exchange to the integral generator and use the constant-generator equation to identify its supported pullback. Roots normalization and pure-tensor normalization give a morphism of Kummer short exact sequences and identify its coefficient-line map. Ext-class naturality gives the Kummer-unit square.",
    "uses": [
+    "lem-weil-pbc-module-abelian-underived-exchange",
+    "lem-asd-supported-derived-unit-forget",
     "lem-amb-kummer-any-base",
-    "lem-amb-relative-torsor-cohomology",
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-weil-pbc-etale-module-pullback-forget-naturality",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+    "lemma-weil-pbc-finite-exchange"
    ],
    "elementary": false
   },
   {
-   "text": "Supported-Hom naturality transports this equality to Ext with the canonical closed exchange. Roots normalization determines the root comparison, and pure-tensor normalization determines its scalar-extended line comparison; it is exactly t.line. Exact inverse image and its monoidal and constant comparisons commute with scalar extension, giving the stated equation for arbitrary finite A. When N=1 all coefficient sheaves vanish, and the same equation holds.",
+   "text": "Transport the module Ext class by inverse closed exchange and the specified line map. The exact-functor Ext square expresses its scalar adjunct as the transported product. Reassociate Yoneda products, use Kummer-unit naturality, and apply the integral pole pullback theorem. This gives precisely the scalar adjunct of the specified primed class.",
    "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-asd-etale-finite-twist-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-inverse-image-monoidal",
-    "lem-kun-pullback-constant"
+    "lem-asd-cartier-pole-boundary-pullback",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supported integral generator has the unbounded derived unit property. Its degree-two Ext adjunct map is injective, so the transported class equals the primed class. Precompose by the closed exchange and cancel its inverse to obtain the asserted equation.",
+   "uses": [
+    "lem-sp-etale-supported-integral-derived-unit",
+    "lem-sp-scalar-unit-ext-bijective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-asd-supported-kummer-cartier-pullback",
-  "lem-amb-relative-torsor-cohomology",
+  "lem-sp-cartier-pole-boundary-existence",
+  "lem-weil-pbc-module-abelian-underived-exchange",
+  "lem-asd-supported-derived-unit-forget",
   "lem-amb-kummer-any-base",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-etale-module-pullback-forget-naturality",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-asd-supported-kummer-support-hom-naturality",
-  "lem-asd-etale-finite-twist-pullback",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-kun-inverse-image-monoidal",
-  "lem-kun-pullback-constant"
+  "lem-asd-cartier-pole-boundary-pullback",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "lem-sp-scalar-unit-ext-bijective",
+  "lemma-weil-pbc-finite-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-  "place": "Paragraph 4: all cone maps and Kummer boundaries commute with pullback of the pair and its trivialized line bundle"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Yoneda-extension proof of the pullback paragraph, separating the integral pole class from the Kummer and coefficient maps"
  },
  "mathlib_searches": [
   {
@@ -128,14 +129,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3bab2",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261021T134548-L-1367600",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T103500-L-1087496",
   "kind": "interface",
-  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

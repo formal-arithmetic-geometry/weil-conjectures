@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-condensed-injective-bar-rows",
+ "kind": "statement",
+ "title": "Exact injective rows of the internal condensed bar",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent site of profinite sets [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $G$ be a profinite group (compact Hausdorff and an inverse limit of finite discrete groups), with $\\underline G(S)=C(S,G)$. Write $\\mathcal M_A$ for internal $A$-modules [sk-def-sfb-module-objects] and $\\mathcal E_A$ for modules with $A$-linear $\\underline G$-action and equivariant maps [def-sfb-condensed-action-module]. Let $U:\\mathcal E_A\\to\\mathcal M_A$ forget the action and $\\Gamma_G$ take the invariant submodule, fixed after every profinite base change. For a profinite parameter $S$, $A[S]$ is the free internal module on its representable condensed set; $\\underline{\\operatorname{Hom}}_A$ is internal module Hom, right adjoint to tensor. Use the internal bar diagrams of [def-sfb-condensed-equivariant-bar-data]. Let $I$ be injective in $\\mathcal E_A$ [def-sp-injective-resolutions]. Put $P_p=A[\\underline G^{p+1}]$ with diagonal action, deletion differential and generator-sum augmentation to the trivial module $A$, as in [lem-sfb-condensed-internal-bar-resolution]. Then the internal equivariant Hom sheaves $\\mathcal H_G(P_p,I)$, characterized on each profinite $S$ by\n$$\\mathcal H_G(P_p,I)(S)=\\operatorname{Hom}_{\\mathcal E_A}(A[S]\\otimes_A P_p,I),$$\nwith trivial action on $A[S]$, form an exact augmented cochain complex\n$$0\\longrightarrow I^G\\longrightarrow\\mathcal H_G(P_0,I)\\longrightarrow\\mathcal H_G(P_1,I)\\longrightarrow\\cdots.$$\nThere are natural internal-module identifications $\\mathcal H_G(P_p,I)\\cong V_A^p(I):=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI)$. On parametrized generators an equivariant homogeneous map $f$ corresponds to $c$ by\n$$f[g_0,\\ldots,g_p]=g_0 c(g_0^{-1}g_1,g_1^{-1}g_2,\\ldots,g_{p-1}^{-1}g_p).$$\nUnder these identifications the cofaces are\n$$\\begin{aligned}\n(d^0c)(g_1,\\ldots,g_{p+1})&=g_1c(g_2,\\ldots,g_{p+1}),\\\\\n(d^ic)(g_1,\\ldots,g_{p+1})&=c(g_1,\\ldots,g_ig_{i+1},\\ldots,g_{p+1})\\quad(1\\le i\\le p),\\\\\n(d^{p+1}c)(g_1,\\ldots,g_{p+1})&=c(g_1,\\ldots,g_p),\n\\end{aligned}$$\nand the codegeneracies insert $1$. The cochain differential is $d_h=\\sum_i(-1)^id^i$. In degree zero it is $m\\mapsto(g\\mapsto gm-m)$, with kernel and augmentation the invariant inclusion. All identifications commute with profinite base change and equivariant maps of injectives; exactness holds on sections at every profinite $S$, as well as internally.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent expansion, old proof steps 3–4: sectionwise exact equivariant Hom and homogeneous-to-inhomogeneous faces. External internal-condensed reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-injective-resolutions",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized additive homogeneous Hom comparison of [lem-sfb-condensed-bar-hom-coordinates]. Its coordinate, restriction, coefficient naturality, differential and augmentation formulas supply those fields of InjectiveRows. This separates the coordinate construction from exactness rather than assuming exactness.",
+   "uses": [
+    "lem-sfb-condensed-bar-hom-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the abelian structure with the fixed addition supplied by [lem-sfb-condensed-group-algebra-exact-forgetful]. For a section cocycle x in positive degree, the comparison sends it to f with tensorBoundary composed with f equal to zero. Apply Mathlib ShortComplex.Exact.descToInjective to the exact tensored bar pair of [lem-sfb-condensed-internal-bar-resolution], using [def-sp-injective-resolutions]. Its comp_descToInjective identity and the inverse coordinate equivalence give a section coboundary. Conversely, successive tensored boundaries compose to zero. At degree zero use the exact pair ending in the tensored augmentation and the free invariants equivalence; the same descent and extension argument gives exactness there.",
+   "uses": [
+    "lem-sfb-condensed-group-algebra-exact-forgetful",
+    "lem-sfb-condensed-internal-bar-resolution",
+    "def-sp-injective-resolutions",
+    "lem-sfb-condensed-bar-hom-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tensored augmentation is epic by [lem-sfb-condensed-internal-bar-resolution]. The comparison augmentation square therefore makes the original augmentation injective on sections by cancellation and injectivity of the two additive equivalences [lem-sfb-condensed-bar-hom-coordinates]. Sectionwise injectivity implies it is monic by testing equality of internal-module maps on every section.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-condensed-bar-hom-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For degree zero, expand the alternating coface differential as delta_0 minus delta_1 and apply the two face formulas in [def-sfb-condensed-equivariant-bar-data]. Evaluation is additive, so this gives g*m-m. No Hom-coordinate assertion or injectivity is needed for this calculation.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each consecutive pair, sectionwise exactness gives exactness of its underlying abelian presheaf by evaluation and Mathlib JointlyReflectIsomorphisms.exact_iff. Exact abelian sheafification and its natural comparison isomorphism give exactness of the underlying sheaf. The exact faithful internal-module forgetful functor reflects exactness by ShortComplex.exact_map_iff_of_faithful. The augmentation is a complex because a is a cochain map. These statements yield the required internal short-complex exactness and ExactAt assertions.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-bar-hom-coordinates",
+  "lem-sfb-condensed-group-algebra-exact-forgetful",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "def-sp-injective-resolutions",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal bar expansion: coordinate comparison separated; injective extension, degree-zero faces, sectionwise-to-internal exactness proved in Lean by V4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an injective internal module with a profinite condensed group action the augmented internal equivariant Hom of the homogeneous bar resolution is exact and equals inhomogeneous internal cochains",
+   "results": "{\"t\": \"2026-10-22T06:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"For an injective internal module with a profinite condensed group action the augmented internal equivariant Hom of the homogeneous bar resolution is exact and equals inhomogeneous internal cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution.extIso\", \"groupCohomology.shortComplexH0_exact\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"Rep.barResolution\", \"Rep.standardResolution.extIso\", \"Rep.standardComplex.x_projective\", \"Rep.barResolution_complex\", \"Rep.standardResolution\"], \"digest\": \"03f2f4db83a8fc18\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"bar\"",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"bar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|inhomogeneous).*(injective|Condensed)|(injective|Condensed).*(bar|inhomogeneous)",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"grep\", \"query\": \"(bar|inhomogeneous).*(injective|Condensed)|(injective|Condensed).*(bar|inhomogeneous)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmented internal Hom group bar cochains into an equivariant injective sheaf are exact",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"leansearch\", \"query\": \"Augmented internal Hom group bar cochains into an equivariant injective sheaf are exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.exact_succ\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroSucc\"], \"digest\": \"b4dce40db6191e50\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact augmented inhomogeneous cochain sheaf of an injective object in internal group representations",
+   "results": "{\"t\": \"2026-10-22T06:05:36Z\", \"tool\": \"leanfinder\", \"query\": \"Exact augmented inhomogeneous cochain sheaf of an injective object in internal group representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.map_cochainsFunctor_shortExact\", \"CochainComplex.isKInjective_of_injective_aux\", \"groupCohomology.shortComplexH0_exact\", \"groupCohomology.mapShortComplex₁_exact\", \"groupCohomology.mapShortComplex₃_exact\", \"groupCohomology.mapShortComplex₂_exact\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\", \"groupCohomology.mono_δ_of_isZero\"], \"digest\": \"7f8381ba00686caf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|inhomogeneous).*(injective|Condensed)|(injective|Condensed).*(bar|inhomogeneous)",
+   "results": "{\"t\": \"2026-10-22T06:56:37Z\", \"tool\": \"grep\", \"query\": \"(bar|inhomogeneous).*(injective|Condensed)|(injective|Condensed).*(bar|inhomogeneous)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary representations, topological-module continuous cochains, or light condensed modules over an ordinary commutative ring; none states the internal profinite-action assertion over an arbitrary condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"bar\"",
+   "results": "{\"t\": \"2026-10-22T06:56:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"bar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary representations, topological-module continuous cochains, or light condensed modules over an ordinary commutative ring; none states the internal profinite-action assertion over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal equivariant Hom of a bar resolution into an injective condensed module is exact on all profinite sections",
+   "results": "{\"t\": \"2026-10-22T06:56:38Z\", \"tool\": \"leansearch\", \"query\": \"Internal equivariant Hom of a bar resolution into an injective condensed module is exact on all profinite sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"CategoryTheory.InjectiveResolution.Hom.mk.injEq\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.Hom.hom'_f\", \"Rep.barResolution.extIso\", \"LightCondensed.ihom_map_val_app\"], \"digest\": \"5baa6c9af041f41c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary representations, topological-module continuous cochains, or light condensed modules over an ordinary commutative ring; none states the internal profinite-action assertion over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective internal module with profinite condensed group action the homogeneous bar equivariant Hom complex is sectionwise exact and is naturally the inhomogeneous cochain sheaf",
+   "results": "{\"t\": \"2026-10-22T06:56:46Z\", \"tool\": \"leanfinder\", \"query\": \"For an injective internal module with profinite condensed group action the homogeneous bar equivariant Hom complex is sectionwise exact and is naturally the inhomogeneous cochain sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.homogeneousCochains\", \"Profinite.NobelingProof.succ_exact\", \"groupCohomology.shortComplexH0_exact\", \"Rep.barResolution\", \"Rep.barResolution.extIso\", \"groupCohomology.map_cochainsFunctor_shortExact\", \"Rep.standardComplex.x_projective\", \"groupCohomology.instMonoModuleCatFShortComplexH0\"], \"digest\": \"3c549dac7102d3c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary representations, topological-module continuous cochains, or light condensed modules over an ordinary commutative ring; none states the internal profinite-action assertion over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of the internal group cochain sheaf of an injective representation in modules over a condensed ring",
+   "results": "{\"t\": \"2026-10-22T06:57:13Z\", \"tool\": \"leanfinder\", \"query\": \"Exactness of the internal group cochain sheaf of an injective representation in modules over a condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.shortComplexH0_exact\", \"groupCohomology.H1InfRes_exact\", \"groupCohomology.map_cochainsFunctor_shortExact\", \"groupCohomology.mapShortComplex₁_exact\", \"groupCohomology.mapShortComplex₂_exact\", \"groupCohomology.mapShortComplex₃_exact\", \"groupHomology.H1CoresCoinfOfTrivial_exact\", \"Profinite.NobelingProof.succ_exact\"], \"digest\": \"cfbc6f083a5e89b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary representations, topological-module continuous cochains, or light condensed modules over an ordinary commutative ring; none states the internal profinite-action assertion over an arbitrary condensed ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-derived-invariant-bar",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent-formulated internal bar input, old proof steps 3–4: sectionwise exact equivariant Hom and homogeneous-to-inhomogeneous faces.",
+   "via": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-injective-bar-rows",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Proved exactness on every profinite parameter by tensor-exactness of the existing augmented bar and an explicit image factorization plus injective extension. Constructed both generalized-coordinate maps and computed every face, degeneracy, augmentation and naturality. No new nodes; reused the existing internal module and group-action infrastructure.",
+  "blueprint": "Agent expansion below sk-thm-sf-ctf-stability, direct-images proof paragraph (3): the open-direct-image internal bar input; the blueprint does not itself give this internal-condensed proof. Existing null blueprint ancestor retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-d56770575",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-d56770575 (reviewer sub-agent of L); spot-checked: Ordinary first split of a statement-only child from the 2026-10-22 re-split of lem-sfb-condensed-derived-invariant-bar; this item has no repair note of its own. It is still unsplit in live and side-live, so no other group has superseded it. The statement is byte-identical to live. The three added stmt_deps (free-module adjunction, relative tensor, internal Hom) are all used by the statement. The parent's old steps 3-4 (Q07/NI snapshots: exactness of Hom into an injective, homogeneous-to-inhomogeneous identification, coface formulas, degree-0 invariants) are all carried over in full as steps 1-8. Step checks: step 1 uses internal-bar-resolution's exactness after tensoring with any trivially acted-on T, applied with T=A[S], plus group-algebra-exact-forgetful for abelianness and for exactness being detected on underlying modules; no flatness or projectivity is used. Step 2: I recomputed both composites f<->c (cumulative products g_0^{-1}g_i, equivariance with u=g_0), with equivariance checked on generalized generators through free-linearization-tensor. Step 3: the bar-data definition gives sections of Hom_A(A[G^p],UI) at S as natural families. Steps 4-5: I recomputed d^0=b_1c(b_2,...), interior faces b_ib_{i+1} (order kept for noncommutative G), last face dropping b_{p+1}, codegeneracies inserting 1, and degree-0 gm-m. Step 6: standard image factorization in an abelian category plus extension from the definition of injective. Step 7: equivariant maps from A[S] with trivial action are exactly the fully fixed sections, i.e. the image of the normalized invariants in def-sfb-condensed-action-module. Step 8: sectionwise exactness at every S gives internal exactness. Small cases checked: p=0,1 (d^2=0), G=1, S empty. Route: all cited statements are in unit sk-thm-sf-ctf-stability, the rest are definitions, and there is no SGA citation; source is main-20261015 direct-images paragraph (3), proof by agent. Duplicate search: lem-sfb-homogeneous-bar-coordinate-normalization uses the same slice formulas but concerns invariants of a different total complex, and bar-total-augmentation assumes these rows rather than proving them; no duplicate. Ten Mathlib searches recorded, all hits in other coefficient categories, no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedInjectiveBarRows",
+  "declaration": "CategoryTheory.CondensedBar.nonempty_injectiveRows",
+  "declarations": [
+   "CategoryTheory.CondensedBar.parameterGenerator",
+   "CategoryTheory.CondensedBar.parameterPullback",
+   "CategoryTheory.CondensedBar.InjectiveRows",
+   "CategoryTheory.CondensedBar.nonempty_injectiveRows"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedInjectiveBarRows.lean",
+  "statement": "theorem nonempty_injectiveRows (F : InternalFunctions A) (B : BarDiagram (G := G) F) (V : Invariants A G) (a : Augmentation V B) (E : Resolution A.toMon G) : Nonempty (InjectiveRows F B V a E)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80b4930c7",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Only the lean field of the node changed; statement verbatim in file; report has Worker report and Second reading sections. Every clause maps to a field: homEquiv (sections of cochains B at S ≃+ Hom_E(P_n⊗A[S],I), trivial action on A[S] via tensor_action) is fully fixed by coordinates (f = g0·c(ratios) on pureTensor(basis g,[s])). Cofaces/codegeneracies come from the fixed BarDiagram face/degeneracy fields plus coordinates; differential = precomposition with tensorBoundary; degreeZero gm−m; augmentation = s^*(V.inclusion x); mono/mono_sections; exact_sections_zero/succ and exact_zero/exact_succ cover sectionwise and internal exactness in all degrees; restriction (base change) and naturality (equivariant maps of injectives). parameterGenerator = free-adjunction unit [s]; parameterPullback = precomposition with P_n◁A[k]; not hollow. Only sorry; docstrings carry source, blueprint tag and all 8 steps; no extra hypotheses (no flatness, projectivity or Nonempty S). Edge cases n=0, n=1, G=1, empty S/T, A=0, I=0 checked. No duplicate. Advisory only: basis/pureTensor/onSections/Resolution come from the theorem node lem-sfb-condensed-internal-bar-resolution, a genuine stage-1 stmt_dep, same use as landed lem-sfb-internal-bar-roof-adjunction. No recompile, per 2026-10-21 instruction; no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T083328-L-2325336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

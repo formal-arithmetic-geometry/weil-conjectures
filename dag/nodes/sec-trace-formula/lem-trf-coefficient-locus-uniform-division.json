@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-coefficient-locus-uniform-division",
+ "kind": "statement",
+ "title": "Finite open tests for uniform orders and homogeneous division",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field] and $N$ be a smooth affine finite-type $k$-scheme with etale coordinates $w$ and $a\\in N$ [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism] [def-weil-etale-morphism]. Fix regular functions $c_{i\\gamma}$ on this single $N$, for $1\\le i\\le s$ and $\\gamma\\in\\mathbf N^n$, and at $b\\in N$ put $L_b=\\kappa(b)$ and\n$$f_{i,b}(W,Z)=\\sum_\\gamma T_b(c_{i\\gamma})(W)Z^\\gamma\\in L_b[[W,Z]],$$\nwhere $T_b$ is the centered Taylor map on $N$ [def-weil-residue-field] [def-weil-pbc-multivariate-power-series]. Fix a monotone diagram $D$ with ordered minimal vertices $(0,\\alpha_i)$ and degrees $d_i=|\\alpha_i|$, and assume that at $a$ the first exponents of $f_{i,a}$ are these vertices with nonzero coefficients. First exponents use total-degree lexicographic order with $W$ before $Z$. For each prefix of degree blocks let $Z^\\ell$ be its essential variables, $D_\\ell$ its restricted diagram, and $\\Delta_i^\\ell$ its first-vertex supports [def-trf-supported-homogeneous-division]. Define\n$$S=\\{b\\in N:c_{i\\gamma,b}\\in\\mathfrak m_b^{d_i-|\\gamma|}\\text{ for all }|\\gamma|<d_i\\}.$$\nHere $c_{i\\gamma,b}$ is the germ and $\\mathfrak m_b$ the local maximal ideal; zero has infinite order. Assume $a\\in S$.\nThere is one neighbourhood $V$ of $a$ in $N$, obtained by inverting finitely many regular functions nonzero at $a$, on which the following hold for every $b\\in S\\cap V$: $\\operatorname{ord}f_{i,b}=d_i$; and for every degree prefix and every total degree $t$ the initial forms of the corresponding $f_{i,b}$ have unique homogeneous division, with first-vertex quotient supports and remainder outside the prefix diagram in all variables $(W,Z)$. The finite functions to invert may be chosen as one degree-$d_i$ Taylor-coefficient derivative per $i$ that is nonzero at $a$, together with the supported homogeneous-division determinants [def-weil-matrix] [def-weil-endomorphism-determinant] for each restricted $D_\\ell$ in degrees at most its finite stabilization bound $b(D_\\ell)$. In these restricted determinants all complementary variables are set to zero. Every matrix entry is $0$, $1$, or a regular derivative of some $c_{i\\gamma}$ divided by a factorial [def-trf-formal-power-series-partial-derivative]. Unique restricted division extends to all complementary variables, and no inversions indexed by unbounded degree or by all coefficients are needed. Prefixes with no essential variables and an empty vertex list are included. The assertion is compatible with residue-field extension.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 completion of Theorem 9.6, p.282, using Theorem 8.1 and Lemma 7.7. Returned steps 9--10. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-matrix",
+  "def-weil-endomorphism-determinant",
+  "def-trf-regular-hilbert-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply the essential-prefix clause of exists_finiteDivisionTest and choose the numerical bounds B(q). These are proof witnesses only; none of the concrete series or matrices is chosen from an existence theorem.",
+   "uses": [
+    "lem-trf-initial-diagram-stabilization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+   }
+  },
+  {
+   "text": "The constant Taylor coefficient identifies the coefficient of W^0 Z^gamma with evaluation of c_i,gamma. Nonzero first coefficients give the order witnesses; coefficient_first_exponent_determinants gives all the determinant tests. Thus every element of coefficientDivisionTests is nonzero at a. Evaluation of their product is nonzero, so a belongs to its principal open.",
+   "uses": [
+    "def-trf-coefficient-division-data",
+    "lem-trf-coefficient-first-exponent-determinants"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+   }
+  },
+  {
+   "text": "A restricted coefficient is c_i,gamma in its homogeneous degree, and zero otherwise. The monomial-shift coefficient formula shows that every matrix entry is zero, one, or such a coefficient. Membership in the finite tests follows from membership in the corresponding image or biUnion.",
+   "uses": [
+    "def-trf-coefficient-division-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+   }
+  },
+  {
+   "text": "At a point b on the principal open every test evaluates nonzero, by map_prod and prod_ne_zero_iff. Apply coefficient_restricted_finite_tests to obtain all restricted divisions and their scalar extensions. The coefficient order lower bound and the nonzero vertex coefficient give equality of orders.",
+   "uses": [
+    "lem-trf-coefficient-restricted-finite-tests",
+    "lem-trf-coefficient-order-locus-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+   }
+  },
+  {
+   "text": "Apply coefficient_restricted_to_full using the W-zero coefficient identities. For each residue extension j, injectivity and the coefficient formula imply order(map j f)=order(f); apply the same comparison over the extension field, and use injectivity to preserve every test nonvanishing.",
+   "uses": [
+    "lem-trf-coefficient-restricted-to-full"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-initial-diagram-stabilization",
+  "def-trf-coefficient-division-data",
+  "lem-trf-coefficient-first-exponent-determinants",
+  "lem-trf-coefficient-restricted-finite-tests",
+  "lem-trf-coefficient-order-locus-bound",
+  "lem-trf-coefficient-restricted-to-full"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coefficient-locus-uniform-division: Uniform order and homogeneous division for regular Taylor coefficient families along coefficient order loci using finite determinant tests and monotone diagram stabilization",
+   "results": "{\"t\": \"2026-10-22T06:41:52Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coefficient-locus-uniform-division: Uniform order and homogeneous division for regular Taylor coefficient families along coefficient order loci using finite determinant tests and monotone diagram stabilization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"FormalMultilinearSeries.taylorComp\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isBigO\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\"], \"digest\": \"4db25609fba50af8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Matrix.det",
+   "results": "{\"t\": \"2026-10-22T06:41:53Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertSamuel|[Ss]tandard[Bb]asis|initialDiagram|initialExponent",
+   "results": "{\"t\": \"2026-10-22T06:41:53Z\", \"tool\": \"grep\", \"query\": \"HilbertSamuel|[Ss]tandard[Bb]asis|initialDiagram|initialExponent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-coefficient-locus-uniform-division: Finite open neighborhood ensures every degree prefix has unique homogeneous division along the order locus of a regular coefficient family",
+   "results": "{\"t\": \"2026-10-22T06:41:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-coefficient-locus-uniform-division: Finite open neighborhood ensures every degree prefix has unique homogeneous division along the order locus of a regular coefficient family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.elim\", \"multipliableLocallyUniformly_of_of_forall_exists_nhds\", \"LaurentSeries.uniformContinuous_coeff\", \"MeromorphicAt.tendsto_nhds_meromorphicTrailingCoeffAt\", \"MvPolynomial.coeff_homogeneousComponent\", \"MvPowerSeries.WithPiTopology.uniformContinuous_coeff\", \"PowerSeries.coeff_divXPowOrder\", \"PowerSeries.WithPiTopology.uniformContinuous_coeff\"], \"digest\": \"648d7d5eb4f93c31\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Matrix.det",
+   "results": "{\"t\": \"2026-10-22T06:41:55Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coefficient-locus-uniform-division: Finite open neighborhood ensures every degree prefix has unique homogeneous division along the order locus of a regular coefficient family",
+   "results": "{\"t\": \"2026-10-22T06:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coefficient-locus-uniform-division: Finite open neighborhood ensures every degree prefix has unique homogeneous division along the order locus of a regular coefficient family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.div\", \"MonomialOrder.div_set\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"MonomialOrder.div_single\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\"], \"digest\": \"7ac1fa485827ac0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-coefficient-locus-uniform-division: regular families of multivariate power series uniform homogeneous division on an open neighborhood via finitely many determinant tests",
+   "results": "{\"t\": \"2026-10-23T11:41:33Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-coefficient-locus-uniform-division: regular families of multivariate power series uniform homogeneous division on an open neighborhood via finitely many determinant tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"MvPowerSeries.coeff\", \"MvPowerSeries.coeff_pow\", \"MvPowerSeries.coeff_prod\", \"PowerSeries.coeff_divXPowOrder\", \"MvPowerSeries.IsHomogeneous\", \"PowerSeries.IsWeierstrassDivision.elim\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\"], \"digest\": \"a11b9047d257ee19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: univariate Weierstrass division and coefficient identities do not give finite open tests for this multivariate regular family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coefficient-locus-uniform-division: finite principal open tests for uniform Taylor orders and supported homogeneous division along a coefficient order locus",
+   "results": "{\"t\": \"2026-10-23T11:41:35Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coefficient-locus-uniform-division: finite principal open tests for uniform Taylor orders and supported homogeneous division along a coefficient order locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\"], \"digest\": \"365f94337be1418f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: univariate Weierstrass division and coefficient identities do not give finite open tests for this multivariate regular family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-hilbert-coefficient-data",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 completion of Theorem 9.6, p.282, using Theorem 8.1 and Lemma 7.7. Returned steps 9--10.",
+   "via": [
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coefficient-locus-uniform-division",
+  "worker": "stage1",
+  "summary": "Explicit finite regular coefficient matrices and triangularity at the base point, one finite principal-open intersection, stabilization of each restricted prefix and a separately stated complementary-variable comparison. Corrected the literal matrix-entry clause to include the constant entries 0 and 1; clarified that k is a field.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, specialization/normal-cone route; retained inherited ILO VIII 2.3.11--2.3.13 desingularization subroute. The present six steps realize BM completion of Theorem 9.6 (p.282), namely the finite openness/stabilization argument for conditions (1) and (2).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-9d0da64f8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-9d0da64f8 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full; the details are in review.md. Source: ILO VIII 2.3.11-2.3.13 (PDF pp.99-100) points the route to Bierstone-Milman; BM is not in the local literature, so the item is correctly marked agent-origin. The item's statement changes are justified. The old clause 'every matrix entry is a derivative/factorial' is false: remainder columns have entries 0 and 1. I checked the counterexample N=Spec Q, c_{1,1}=2, degree-0 matrix (1). The only citer, regular-hilbert-coefficient-data, uses only conclusions (1) and (2). Saying 'k a field' only makes explicit what was implicit. No target is weakened. Steps: (1) the Taylor and derivation nodes give the factorial coefficient formula, valid since the characteristic is 0. (2) The order bound holds because the Taylor map sends m_b^k into (W)^k, with witness u_i=c_{i alpha_i}. (3) The bijection (i,beta)->alpha_i+beta makes the matrix square. Lex order restricted to V-monomials is multiplicative, so the matrix at a is lower triangular with diagonal u_i(a) or 1. (4) The set of tests is finite; a nonzero determinant gives a basis in each tested degree, and stabilization (which covers prefixes and the restriction to essential variables) gives all degrees. (5) Because the vertices are zero in U, the diagram is N^U x D_l with supports N^U x Delta_i^l, and the new lemma (i)=>(ii) applies. (6) Edge cases and field extension are fine. New node: (i)=>(ii) by block-triangularity in U-degree; (ii)=>(i) by setting U=0 plus the count bijection. I tested zero H_i, s=0, m=0, r=0, a degree-0 vertex, and H=V+U. It is pure algebra, not a restatement of the item and not a duplicate: I compared it against homogeneous-continuous-formal-division, supported-formal-division, initial-diagram-stabilization, generic-monotone-diagram, stratum-minors, exact-block-projection and blowup-division-generators. Fixes: (B4) the new node's statement had \\notin written with one JSON backslash three times, which reads as a newline plus 'otin'; I repaired all three. I also added inline citations [def-weil-field], [def-weil-matrix] and [def-weil-endomorphism-determinant] to the item statement to match its new stmt_deps. The only tool from another unit is the Mathlib leaf lem-weil-endomorphism-invertible-iff-det-nonzero. There is no SGA citation and no cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoefficientLocusUniformDivision",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.coefficient_locus_uniform_division",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_locus_uniform_division"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientLocusUniformDivision.lean",
+  "statement": "theorem coefficient_locus_uniform_division {k : Type u} [Field k] [CharZero k] (N : Scheme.{u}) [IsAffine N] {m n s : ℕ} (w : MvPolynomial (Fin m) k →+* Γ(N, ⊤)) (hsm : Smooth (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (w.comp MvPolynomial.C)))) (hft : LocallyOfFiniteType (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (w.comp MvPolynomial.C)))) (hqc : QuasiCompact (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (w.comp MvPolynomial.C)))) (hw : Etale (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom w))) (T : ∀ b : N, Γ(N, ⊤) →+* MvPowerSeries (Fin m) (N.residueField b)) (hT : ∀ b : N, isTaylorMap w (N.Γevaluation b).hom (T b)) (c : Fin s → (Fin n →₀ ℕ) → Γ(N, ⊤)) (a : N) (D : Set (Fin n →₀ ℕ)) (α : Fin s → Fin n →₀ ℕ) (hD : IsMonotone D) (hα : IsOrderedVertexFamily D α) (hfirst : ∀ i : Fin s, MvPowerSeries.coeff (fullVertex m (α i)) (coefficientFamilySeries (T a) c i) ≠ 0 ∧ ∀ e : (Fin m ⊕ Fin n) →₀ ℕ, Finsupp.DegLex (fun x y : Fin m ⊕ Fin n ↦ Sum.Lex (· < ·) (· < ·) x y) (· < ·) e (fullVertex m (α i)) → MvPowerSeries.coeff e (coefficientFamilySeries (T a) c i) = 0) (ha : a ∈ coefficientFamilyOrderLocus α c) : ∃ B : ℕ → ℕ, (∀ q : ℕ, ∀ (A : Type u) (_ : CommRing A), IsFiniteDivisionTest (generated (essentialVertices (prefixVertices α q))) (essentialVertices (prefixVertices α q)) A (B q)) ∧ (∀ g ∈ coefficientDivisionTests α c B, N.Γevaluation a g ≠ 0) ∧ a ∈ N.basicOpen (∏ g ∈ coefficientDivisionTests α c B, g) ∧ (∀ (q t : ℕ), q ≤ Finset.univ.sup (fun i : Fin s ↦ (α i).degree) → t ≤ B q → ∀ row col, coefficientDivisionMatrix (essentialVertices (prefixVertices α q)) (restrictedCoefficientForms α c q) t row col = 0 ∨ coefficientDivisionMatrix (essentialVertices (prefixVertices α q)) (restrictedCoefficientForms α c q) t row col = 1 ∨ ∃ (i : Fin s) (γ : Fin n →₀ ℕ), γ.degree = (α i).degree ∧ coefficientDivisionMatrix (essentialVertices (prefixVertices α q)) (restrictedCoefficientForms α c q) t row col = c i γ) ∧ ∀ b : N, b ∈ coefficientFamilyOrderLocus α c → b ∈ N.basicOpen (∏ g ∈ coefficientDivisionTests α c B, g) → (∀ i : Fin s, (coefficientFamilySeries (T b) c i).order = ((α i).degree : ℕ∞)) ∧ (∀ q t : ℕ, HasUniqueDivision (generated (essentialVertices (prefixVertices α q))) (essentialVertices (prefixVertices α q)) (fun i ↦ MvPolynomial.map (N.Γevaluation b).hom (restrictedCoefficientForms α c q i)) t) ∧ (∀ q t : ℕ, HasUniqueDivision (generated (prefixVertices (fun i ↦ fullVertex m (α i)) q)) (prefixVertices (fun i ↦ fullVertex m (α i)) q) (fun i ↦ MvPolynomial.homogeneousComponent (α i.val).degree (MvPowerSeries.truncTotal ((α i.val).degree + 1) (coefficientFamilySeries (T b) c i.val))) t) ∧ ∀ (K : Type v) [Field K] (j : N.residueField b →+* K), (∀ i : Fin s, (MvPowerSeries.map j (coefficientFamilySeries (T b) c i)).order = ((α i).degree : ℕ∞)) ∧ (∀ q t : ℕ, HasUniqueDivision (generated (prefixVertices (fun i ↦ fullVertex m (α i)) q)) (prefixVertices (fun i ↦ fullVertex m (α i)) q) (fun i ↦ MvPolynomial.homogeneousComponent (α i.val).degree (MvPowerSeries.truncTotal ((α i.val).degree + 1) (MvPowerSeries.map j (coefficientFamilySeries (T b) c i.val)))) t) ∧ (∀ g ∈ coefficientDivisionTests α c B, j (N.Γevaluation b g) ≠ 0) ∧ ∀ q t : ℕ, HasUniqueDivision (generated (essentialVertices (prefixVertices α q))) (essentialVertices (prefixVertices α q)) (fun i ↦ MvPolynomial.map (j.comp (N.Γevaluation b).hom) (restrictedCoefficientForms α c q i)) t",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The eight existing concrete definitions/instance are extracted unchanged to Sheaf.AlgebraicGeometry.CoefficientDivisionData to permit acyclic proof-helper imports; publicly reexported here. The theorem signature is unchanged. Proof uses the existing stabilization theorem and three strict algebraic subarguments; the order-locus bound is proved directly by affine localization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-576e816c0",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read item node, all 12 stmt_dep records, the landed SupportedHomogeneousDivision, RegularHilbertCoefficientDatum (isTaylorMap, fullVertex, expansion/first_coeff/center_order), exists_finiteDivisionTest (clause 4 matches the per-prefix bound), extra-variables lemma and its field-extension companion. Clause by clause: char-0 field; affine smooth finite-type N with étale w; T_b pinned by isTaylorMap (unique by formal étaleness, so canonical); f_{i,b} = coefficientFamilySeries, identical to the datum's expansion; IsMonotone/IsOrderedVertexFamily; first exponent under DegLex with Sum.Lex (W before Z), same as the datum; S via germs in m_b^{d_i-|γ|}; ∃B with IsFiniteDivisionTest; tests = {c_{iα_i}} ∪ restricted determinants for q ≤ max d_i and t ≤ B q, nonzero at a, V = basicOpen of their product; entries 0, 1 or c_{iγ} with |γ| = d_i (checked true); on S∩V: order = d_i, restricted and full (W,Z) unique division (homogeneousComponent d_i of truncTotal(d_i+1) = initial form), plus the residue-field-extension clause in universe v. Division matrix: column-to-assigned-monomial map is a bijection, so the choose is unique and the matrix is not hollow. Edge cases s=0, n=0, m=0, degree-0 vertex, empty and late prefixes, zero germs, larger B: all OK. Statement verbatim; single sorry; docstrings carry source, blueprint and the 6 steps; the only stmt_dep added is a landed def node that is actually used; report has both sections; no name clash. No compile (instruction). Advisory: RegularHilbertCoefficientDatum.orderLocus (theorem-node module, datum-bound) is the same set and cannot be cited here; the extra-variables lemma needs reindexing in stage 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-63a57",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261026T092819-L-3469853",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (statement identical); 8 moved defs vs change-record Old/New (verbatim); 3 sorry statements vs SupportedHomogeneousDivision/extra-variables/stabilization defs (true); new node stmt_deps vs declarations used in their Lean statements"
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "id": "lem-sf-p1-constant-unit-hom",
+ "kind": "statement",
+ "title": "The concrete constant-unit comparison is the native single-degree unit",
+ "statement": "For a finite commutative ring A and any scheme T, the hom of constantUnit A T from the ordinary finite constant coefficient complex to the derived tensor unit [def-sf-p1-integral-transport-data] equals the hom of singleFunctorObjUnitIso (ModuleCat A) T.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First-coordinate constant-object and unit comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "The oplax monoidal unit of constantSheaf is presheafToSheaf.map(identity) followed by identity, hence identity. Its inverse monoidal unit iso is this map. Apply preservation of identity by the single-degree functor and cancel the leading identity in constantUnit.",
+   "uses": [
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Proved constant-unit normalization used in the first-coordinate tail."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseTail",
+  "date": "2026-10-27",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-false",
+   "place": "The constant-object unit normalization in the first triangle.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail",
+    "lem-sf-p1-projection-trace-transport-false"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a constant sheaf at the monoidal unit agrees with the monoidal unit comparison",
+   "results": "Eight hits for sheaf-module pullback of units and cartesian-monoidal sheafToPresheaf. No equality for these concrete unbounded etale constant comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the source library and functor laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id",
+   "results": "Found CategoryTheory.Functor.map_id in Mathlib.CategoryTheory.Functor.Basic, plus unrelated monad and module-presheaf lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic identity preservation supplies the elementary normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*unit|unit.*constantSheaf",
+   "results": "Nine hits for constantSheafAdj counits and condensed discrete constants; no native derived single-degree comparison formula.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ConstantUnitHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ConstantUnitHom.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.constantUnit_hom",
+  "statement": "theorem constantUnit_hom\n    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :\n    (constantUnit A T).hom = (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-integral-scalar-mate-localization",
+ "kind": "statement",
+ "title": "Localization of one supplied integral scalar mate",
+ "statement": "Fix a prime $l$, an algebraic closure $\\Omega/\\mathbf Q_l$, schemes $X,Y$, finite coefficient stages $E,L$, and a $\\mathbf Q_l$-algebra embedding $i:E\\to L$. Let $A,B$ be exact integral Operations at $E,L$ [def-sf-constructible-exceptional-coefficient-construction-data], with both functors linear over their integral coefficient rings. Assume the integral constructible and finite-Tor predicates agree at both endpoints and both coefficient fields. Let $R,S$ be exact adjunction structures on their explicit raw rational tensor functors [lem-sf-integral-adjunction-raw-localization]. Suppose qA and qB are counit-normalized localization comparisons whose left and right components on every integral representative are identity. Let SX and SY be integral Scalar functors along the completed coefficient change for i. Assume that after ambient full inclusion these are literally the published integralScalarExtensionOfUniverses functors. Given a counit-normalized comparison d between A and B along SX,SY, there exists a counit-normalized rational comparison between the two fixed rational Operations, along the published rationalScalar functors. For every integral X-object K its left component at the raw rationalization of K is heterogeneously equal to rationalization at L of d.q.hom.app K. The heterogeneous equality transports only the underlying equal represented objects. This statement involves one coefficient embedding, with no compactification, compact-support realization, or identity/composition cocycle. Both endpoint scalar shift isomorphisms on every integral representative and every integer shift are prescribed as the localization of the supplied SX and SY shift isomorphisms. The supplied localization comparisons use the fixed canonical integralRationalizationShift on both endpoints.",
+ "stmt_deps": [
+  "lem-sf-integral-adjunction-raw-localization",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-rationalization-karoubi"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.1 and 6.2, integral-to-field localization; the raw-localization part of coefficient construction step 5"
+ },
+ "proof": [
+  {
+   "text": "Apply the ambient scalar equalities on objects and arrows. Fullness of the integral inclusions and proof irrelevance identify the given scalar maps with the completed scalar maps on the full integral categories.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Localize the components of the given q and b with the target localization functor. The published rational scalar functor has the semilinear tensor formula. Its coefficient map sends the source uniformizer to a unit in the target localization. The semilinear extension and transformation theorems extend the integral naturality and inverse equations to every tensor arrow, so these components form natural isomorphisms.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity q and b components of qA and qB identify the rational counits with the localized integral counits. Substitution in the proposed rational counit square reduces it to the target localization applied to d.counit. Functoriality gives the required equation. Every rational object has its integral representative by the supplied predicate equalities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the endpoint scalar shifts by the same semilinear construction. Localize d.qShift and d.bShift and use exact comparison localization to obtain the shift equations. The component formula of the construction gives the required normalization, including identity embeddings and zero Hom modules. The scalar endpoint shifts are normalized on every integral representative and every integer by localization of the given scalar shifts, which determines these structures uniquely.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.1 and 6.2, integral-to-field localization; the raw-localization part of coefficient construction step 5"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction between linear categories induces an adjunction on scalar localizations with identity comparison on integral objects",
+   "results": "Adjunction.derived, derived′, derived′_unit, derived′_counit, Adjunction.localization, localization_counit_app, ModuleCat.ExtendRestrictScalarsAdj.homEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction localization tools only; no complete normalized statement for the fixed raw functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a linear adjunction preserves its unit counit and shift compatibility",
+   "results": "Adjunction.localization, localization_unit_app, localization_counit_app, Shift.linear_of_localization, Localization.functor_linear_iff.",
+   "date": "2026-10-27",
+   "verdict": "Generic localization tools; none supplies the normalized exact adjunction on these explicit tensor functors and finite-Tor inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Localization.liftNatIso, liftNatIso_hom, liftNatIso_inv.",
+   "date": "2026-10-27",
+   "verdict": "A tool for extending a comparison, requiring localization and lifting instances; not the complete assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(adjunction|mate)|liftNatIso|ScalarLocalization",
+   "results": "Mathlib CategoryTheory.Localization.Adjunction and Localization.Predicate, with generic adjunction and natural-isomorphism localization. Local source search also found the private sfLocalizedAdjunction and sfRationalizedExact in SfRationalLocalizationOrthogonality, and SemilinearScalarLocalization. No exact match for the finite-Tor raw functors or the supplied scalar mate.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic tensor-localization tools in the proof plan; the remaining exact transport is stated separately."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRationalStageLocalization",
+  "date": "2026-10-27",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Complement, compatibility of the constructible exceptional adjunction with scalar extension and shifts; integral-to-rational part only",
+   "via": [
+    "lem-sf-rational-stage-localization",
+    "lem-sf-field-stage-completion",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalScalarMateLocalization",
+  "file": "lean/Sheaf/Paper/ExceptionalScalarMateLocalization.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_integral_scalar_mate_localization",
+  "statement": "theorem exists_integral_scalar_mate_localization\n    (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)\n    (A : Operation.{u, v} l Ω X Y (.integral E))\n    (B : Operation.{u, v} l Ω X Y (.integral L))\n    [A.F.Additive] [A.G.Additive] [B.F.Additive] [B.G.Additive]\n    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    [B.F.Linear (Padic.coefficientExtensionIntegers l L.carrier)]\n    [B.G.Linear (Padic.coefficientExtensionIntegers l L.carrier)]\n    {hEX hEY hLX hLY}\n    (R : RawLocalizedAdjunction l Ω E X Y A hEX hEY)\n    (S : RawLocalizedAdjunction l Ω L X Y B hLX hLY)\n    (qA : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E)\n      (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y))\n    (qB : CounitFieldComparison.{u, v} l Ω B (S.operation l Ω L)\n      (rationalization.{u, v} l Ω L X) (rationalization.{u, v} l Ω L Y))\n    (hqA : ∀ K, HEq (qA.q.hom.app K)\n      (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K))))\n    (hbA : ∀ M, HEq (qA.b.hom.app M)\n      (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M))))\n    (hqB : ∀ K, HEq (qB.q.hom.app K)\n      (𝟙 ((rationalization.{u, v} l Ω L Y).obj (B.F.obj K))))\n    (hbB : ∀ M, HEq (qB.b.hom.app M)\n      (𝟙 ((rationalization.{u, v} l Ω L X).obj (B.G.obj M))))\n    (hsAX : qA.shiftX = integralRationalizationShift l Ω E X)\n    (hsAY : qA.shiftY = integralRationalizationShift l Ω E Y)\n    (hsBX : qB.shiftX = integralRationalizationShift l Ω L X)\n    (hsBY : qB.shiftY = integralRationalizationShift l Ω L Y)\n    (SX : Scalar.{u, v} l Ω (s := .integral E) (t := .integral L)\n      (PurCompactSupport.completedChange l E.carrier L.carrier i) X)\n    (SY : Scalar.{u, v} l Ω (s := .integral E) (t := .integral L)\n      (PurCompactSupport.completedChange l E.carrier L.carrier i) Y)\n    (hSX : SX.functor ⋙ RingStage.inclusion.{u, v} l Ω X (.integral L) =\n      RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙\n        integralScalarExtensionOfUniverses l E.carrier L.carrier i X)\n    (hSY : SY.functor ⋙ RingStage.inclusion.{u, v} l Ω Y (.integral L) =\n      RingStage.inclusion.{u, v} l Ω Y (.integral E) ⋙\n        integralScalarExtensionOfUniverses l E.carrier L.carrier i Y)\n    (d : letI := SX.commShift\n      letI := SY.commShift\n      CounitComparison.{u, v} l Ω A B SX.functor SY.functor) :\n    letI := SX.commShift\n    letI := SY.commShift\n    ∃ e : CounitFieldComparison.{u, v} l Ω (R.operation l Ω E) (S.operation l Ω L)\n        (rationalScalar.{u, v} l Ω E L i X) (rationalScalar.{u, v} l Ω E L i Y),\n      (∀ K : C.{u, v} l Ω X (.integral E),\n        HEq (e.q.hom.app ((rationalization.{u, v} l Ω E X).obj K))\n          ((rationalization.{u, v} l Ω L Y).map (d.q.hom.app K))) ∧\n      scalarShiftLocalization l Ω E L i X SX e.shiftX ∧\n      scalarShiftLocalization l Ω E L i Y SY e.shiftY",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.scalarShiftLocalization",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_integral_scalar_mate_localization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T094448-L-230506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T094448-L-230506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

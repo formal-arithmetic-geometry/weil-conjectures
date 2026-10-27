@@ -10,11 +10,129 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-per-kummer-log-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-per-strict-log-morphism",
+  "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-cospan-compatible-fs-charts] and write $H_a=\\operatorname{Spec}A_a$, $S_a=Q_a\\amalg_{P_a}R_a$ and $\\beta_a:S_a\\to A_a$. For an fs test log scheme $T$ with an underlying map $v:T\\to H_a$, a pair of log maps to $X,Y$ over $Z$ is exactly a pair of maps $Q_a,R_a\\to\\Gamma(T,M_T)$ with the given structural images and agreeing on $P_a$. Indeed [lem-trf-associated-log-universal-stalks] says chart sections and the forced images of units uniquely determine each log map. The pushout relations therefore identify these pairs with maps $\\lambda:S_a\\to\\Gamma(T,M_T)$ satisfying $\\alpha_T\\lambda=v^\\sharp\\beta_a$.",
+   "uses": [
+    "lem-per-cospan-compatible-fs-charts",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of Theorem 3.5, Step 6, p.164: pushout chart of the ordinary logarithmic product."
+   }
+  },
+  {
+   "text": "The images of a finite generating set of $S_a$ generate $S_a^{\\rm int}$. Its group completion is $S_a^{\\rm gp}$, since the defining group relations are unchanged by taking this image. Apply [lem-trf-fine-monoid-finite-saturation] to $S_a^{\\rm int}$: its saturation $S_a^{\\rm fs}$ is fs and is a union of finitely many translates $u+S_a^{\\rm int}$. Consequently\n$$B_a=A_a\\otimes_{\\mathbf Z[S_a]}\\mathbf Z[S_a^{\\rm fs}]$$\nis generated over $A_a$ by the finitely many $1\\otimes z^u$: write each exponent as $u+s$ and use $1\\otimes z^{u+s}=\\beta_a(s)(1\\otimes z^u)$, choosing a lift $s\\in S_a$. By [lem-weil-pbc-finite-algebra-noetherian], $B_a$ is Noetherian. Thus [lem-per-prelog-chart-fs-universal] applies and makes $C_a=\\operatorname{Spec}B_a$ an fs log scheme representing exactly the pairs of Step 1. Its underlying map to $H_a$ is finite by [def-weil-finite-integral-morphism].",
+   "uses": [
+    "lem-trf-fine-monoid-finite-saturation",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-per-prelog-chart-fs-universal",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17 and 3.2.9 finiteness sentence; X proof of Theorem 3.5, Step 6, p.164: integral saturated chart and finite comparison."
+   }
+  },
+  {
+   "text": "Put $H=\\coprod_aH_a$ and $C_H=\\coprod_aC_a$. The cover $H\\to W$ is fpqc by [lem-per-cospan-compatible-fs-charts]. Over $H\\times_WH$, the two strict etale pullbacks of $C_H$ represent the same cone functor. Indeed, on an affine open $U$ of $H_a\\times_WH_b$, [lem-trf-associated-log-universal-stalks] identifies the restricted log structures of $Z,X,Y$ and of $C_a$ (resp. $C_b$) with those associated to the restricted charts, and the base change of $C_a$ is $\\operatorname{Spec}(\\mathcal O(U)\\otimes_{\\mathbf Z[S_a]}\\mathbf Z[S_a^{\\rm fs}])$; so Step 1 and [lem-per-prelog-chart-fs-universal] apply over $U$ to both, and the local identifications glue by their uniqueness. There is therefore a unique log isomorphism preserving both projections; the two composites of these isomorphisms on a triple overlap agree since both preserve the universal cone, and the composite with its reverse is the identity for the same reason. The underlying morphism $C_H\\to H$ is affine (finite on each open-and-closed $H_a$). Apply [lem-galois-fpqc-affine-descent-effective] to obtain a scheme $C\\to W$ with this descent datum. It is finite by [lem-weil-pbc-fpqc-descend-finite], and hence locally Noetherian by [lem-weil-pbc-finite-algebra-noetherian] on every affine open of $W$.",
+   "uses": [
+    "lem-per-cospan-compatible-fs-charts",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-per-prelog-chart-fs-universal",
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of Theorem 3.5, Step 6, p.164; etale descent expanded using Stacks Tags 0245 (descent-lemma-affine) and 02LA (descent-lemma-descending-property-finite)."
+   }
+  },
+  {
+   "text": "The fs log structures of $C_a$ and their log transition isomorphisms descend to $C$ by [lem-trf-fine-log-structure-etale-descent]. Their projections descend on underlying schemes by [lem-weil-pbc-fpqc-representable-descent] and on inverse-image monoid sheaves by the morphism clause of [lem-trf-fine-log-structure-etale-descent]. Given an fs $T$ and a cone to $X,Y$, its underlying map factors uniquely through $W$. Pull back $H\\to W$ to $T$; Step 2 gives unique local log lifts to $C_a$. On double overlaps the lifts agree by the same uniqueness, so these same two descent statements glue them to a unique log lift $T\\to C$. Thus $C=W^{\\rm fs}$, with canonical finite comparison compatible with both projections.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and VIII 3.3.8 final sentence, pp.107--108; X proof of Theorem 3.5, Step 6, p.164, universal-property and descent assembly; Stacks Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "Suppose $f$ is Kummer. For any geometric point of $W$, choose a lift to some $H_a$ and its algebraically closed field $\\Omega$. Evaluation gives $a:Q_a\\to\\Omega$, $b:R_a\\to\\Omega$ agreeing on $P_a$. Let $F,E$ be the preimages of the units of the strict local rings at the images in $Z_a,X_a$ under the chart structure maps of [def-trf-fs-log-blowup]; since an element of a local ring is a unit exactly when its value in $\\Omega$ is nonzero, these are the nonzero-evaluation faces of $ah$ and $a$. By [lem-trf-chart-face-localization-logification], the charts induce isomorphisms of $(P_a-F)/F^{\\rm gp}$ and $(Q_a-E)/E^{\\rm gp}$ with the characteristic monoids at these images, and by chart compatibility $h_a$ induces the characteristic map of $f$. Hence their induced map is injective and root-cofinal by [def-per-kummer-log-morphism]. Apply [lem-per-kummer-sharp-pushout-field-extension] to get $d:S_a^{\\rm fs}\\to\\Omega$. The formula $x\\otimes z^u\\mapsto x(\\bar w)d(u)$ defines a unital ring map $B_a\\to\\Omega$, since $d(s)=\\beta_a(s)(\\bar w)$. It gives a point of $C_a$ over the chosen point of $H_a$, hence a point of $C$ over the original point of $W$. Thus $c$ is surjective.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-chart-face-localization-logification",
+    "def-per-kummer-log-morphism",
+    "lem-per-kummer-sharp-pushout-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1, p.71; X 1.8, pp.146--147, Kummer fs-base-change input. Explicit geometric-fibre argument, supplied by agent; no log etaleness used."
+   }
+  },
+  {
+   "text": "If $f$ is strict [def-per-strict-log-morphism], the strict clause of [lem-per-cospan-compatible-fs-charts] gives a family of chart neighbourhoods as in Step 1 with $Q_a=P_a$ and $h_a$ the identity; Steps 1--4 apply to it, since $C$ is unique up to unique isomorphism. Then $S_a=Q_a\\amalg_{P_a}R_a\\simeq R_a$ is already fs, and $B_a=A_a$. The comparison is the identity on every such chart. Over any affine open $W_0\\subset W$ take a finite affine chart cover and its disjoint union $H_0\\to W_0$; it is flat, surjective and quasi-compact, and the pulled-back comparison is an isomorphism. [lem-weil-pbc-fpqc-descend-isomorphism] makes $c|_{W_0}$ an isomorphism, so $c$ is an isomorphism. Interchanging $X,Y$ proves the assertion when $g$ is strict.",
+   "uses": [
+    "def-per-strict-log-morphism",
+    "lem-per-cospan-compatible-fs-charts",
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and X proof of Theorem 3.5, Step 6, p.164: identity-chart special case; Stacks Tag 02L4 (descent-lemma-descending-property-isomorphism)."
+   }
+  },
+  {
+   "text": "Finally, if $f$ is finite, the projection $W\\to Y$ is finite by [lem-weil-pbc-finite-morphism-permanence]. On an affine open of the locally Noetherian $Y$, its inverse image has a finite coordinate algebra over a Noetherian ring, which is Noetherian by [lem-weil-pbc-finite-algebra-noetherian]. Thus the parenthetical sufficient condition for $W$ holds. The construction in Steps 1--4 uses only fs charts and this local Noetherian condition; the extra Kummer and strict assumptions occur only in Steps 5 and 6.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 locally Noetherian convention; Stacks Tag 01WL (morphisms-lemma-base-change-finite), and the Noetherian finite-algebra statement cited in lem-weil-pbc-finite-algebra-noetherian."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-cospan-compatible-fs-charts",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-fine-monoid-finite-saturation",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-per-prelog-chart-fs-universal",
+  "def-weil-finite-integral-morphism",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-trf-fine-log-structure-etale-descent",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-trf-fs-log-blowup",
+  "lem-trf-chart-face-localization-logification",
+  "def-per-kummer-log-morphism",
+  "lem-per-kummer-sharp-pushout-field-extension",
+  "def-per-strict-log-morphism",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X proof of Theorem 3.5, Step 6, printed p.164, with VIII 3.1.17, VIII 3.2.9 finiteness only, VI 1.1 and VI 2.1; expanded chart universal property, descent, Kummer field-point extension and strict case."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +168,38 @@
    "results": "{\"t\": \"2026-10-19T00:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"Finiteness of saturation of a finitely generated commutative monoid algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.finiteType_of_fg\", \"MonoidAlgebra.finiteType_iff_fg\", \"AddMonoidAlgebra.finiteType_of_fg\", \"AddMonoidAlgebra.finiteType_iff_fg\", \"MonoidAlgebra.fg_of_finiteType\", \"MonoidAlgebra.exists_finset_adjoin_eq_top\", \"AddMonoidAlgebra.exists_finset_adjoin_eq_top\", \"IsLocalization.finiteType_of_monoid_fg\"], \"digest\": \"00717a0cbc81dbec\"}; Read the returned types: ordinary scheme pullbacks, ordinary etale algebras, Kummer field extensions, manifold charts, or number-field logarithms do not state the logarithmic claim. No fs-log match.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic schemes fine saturated fiber product finite comparison Kummer surjective",
+   "results": "{\"t\": \"2026-10-24T00:29:02Z\", \"tool\": \"leansearch\", \"query\": \"Logarithmic schemes fine saturated fiber product finite comparison Kummer surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.mk\", \"AlgebraicGeometry.SurjectiveOnStalks.mk\", \"AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.SurjectiveOnStalks\", \"AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective\", \"AlgebraicGeometry.Surjective.instSndScheme\", \"AlgebraicGeometry.Scheme.Hom.fiber\"], \"digest\": \"995b5941238f0a93\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite saturated logarithmic fibre products are constructed by integralizing and saturating the pushout of monoid charts",
+   "results": "{\"t\": \"2026-10-24T00:29:03Z\", \"tool\": \"leanfinder\", \"query\": \"Finite saturated logarithmic fibre products are constructed by integralizing and saturating the pushout of monoid charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.IsFinite.instSndScheme\"], \"digest\": \"fa40a857c664f3a2\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogScheme|IsFineSaturatedMonoid|fsPullback|KummerMorphism",
+   "results": "{\"t\": \"2026-10-24T00:29:55Z\", \"tool\": \"grep\", \"query\": \"LogScheme|IsFineSaturatedMonoid|fsPullback|KummerMorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "{\"t\": \"2026-10-24T00:29:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kummer-g-cover-fs-base-change",
@@ -82,5 +228,75 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-fs-product-finite-comparison",
+  "worker": "stage1",
+  "summary": "Constructs the fs product from integral-saturated pushout charts, reuses finite saturation and exact scheme/log descent statements, proves Kummer surjectivity by a field-valued sharp-pushout lemma, and checks the strict case. Three new statement-only nodes; no Lean writing or compilation. Found explicit source X 3.5 proof Step 6, p.164; no statement change.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, inherited Step 3 regular-pair purity geometry through the recorded via chain: fs-cartesian diagram (1.a) of ILO X 1.8. Steps 1--4 realize the finite comparison input, Step 5 its Kummer nonemptiness input; Step 6 checks the strict specialization, Step 7 the locally Noetherian parenthetical.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "The associated-log chart universal property turns log maps into maps on generators, an auxiliary log-geometry tool not supplied by the curve-perverse unit."
+   },
+   {
+    "node": "lem-trf-fine-monoid-finite-saturation",
+    "why": "Finite saturation of a fine monoid, including torsion, is the toric algebra tool needed to make the chart comparison finite."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "Finite algebras over Noetherian rings supply the local Noetherian hypotheses for chart construction and descent."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Effective affine scheme descent glues the finite local comparison schemes; the unit has no substitute for scheme descent."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Finiteness is fpqc local on the target, needed after gluing the chart schemes."
+   },
+   {
+    "node": "lem-trf-fine-log-structure-etale-descent",
+    "why": "Etale descent of fs log structures and arbitrary inverse-image monoid-sheaf maps glues the local cone construction."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "The sheaf condition for scheme morphisms glues projections and test lifts."
+   },
+   {
+    "node": "lem-trf-chart-face-localization-logification",
+    "why": "Identifies the face-localized sharp quotient of a chart with the characteristic monoid at a geometric point; generic log-chart algebra (reviewer FIX, Step 5)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-fine-monoid-finite-saturation",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-trf-fine-log-structure-etale-descent",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-chart-face-localization-logification"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-aa794cad6",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-aa794cad6 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 3 new unsplit nodes and every cited statement. First split, statement unchanged; the two added stmt_deps (strict, finite) name notions the statement uses. Source: ILO X proof of Thm 3.5 Step 6, p.164, says the fs product is the saturation of the usual log product, with charts the saturated pushout P'+_P Q and a finite saturation map. That matches Steps 1-4. Kummer surjectivity and the strict case are stated honestly as agent-supplied. All three new nodes are true and not duplicates. prelog-chart-fs-universal: checked the bijection, using that sections of an fs log structure form an integral, saturated monoid. kummer-sharp-pushout-field-extension: proved via the rational-cone face L (the C->A map is injective Kummer, C->D is local), the unit character is well defined because p lies in F^gp, and it extends because Omega^x is divisible; tested on the x n Kummer maps in characteristic dividing n. cospan-compatible-fs-charts: Kato's chart lemma, the etale and fpqc claims hold. No stmt_dep or proof_dep is on the route-pivot-dropped list. Three repairs, in fixes/: (1) Step 5 (C4): the chart definition alone does not identify (Q-E)/E^gp with the characteristic monoid; it now cites lem-trf-chart-face-localization-logification and explains why the unit preimage is the nonzero-evaluation face. (2) Step 3: the prelog node is natural only for open subschemes, and H_a x_W H_b need not be affine; the step now works on affine opens, citing the etale-restriction clause of lem-trf-associated-log-universal-stalks. (3) Step 6: def-per-strict gives an identity chart square for f alone, not a family compatible with g; I added a true strict clause (Q_a=P_a, h_a=id) to lem-per-cospan-compatible-fs-charts and Step 6 now cites it. Batch-5 flags (def-trf-fs-log-blowup, associated-log-universal-stalks, fine-monoid-finite-saturation, fine-log-structure-etale-descent, def-per-strict via def-trf, plus my added chart-face-localization) are general log-geometry definitions and lemmas of unit sk-i-curve-zero; their closures reach no trace-formula or Poincare-duality theorem and no assumption leaf, so they are outside both assumptions. Maintainer note: the item is on route-pivot-dropped.txt (2026-10-19 artin-gabber section) but nt-target-zeta-rational reaches it again through lem-sfb-field-log-smooth-gabber-modification -> lem-per-gabber-abelian-stage-toric-chart -> lem-per-kummer-g-cover-fs-base-change; that revival is another group's re-attachment, not this delivery's fault.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-space-field-extension-dimension",
+ "kind": "statement",
+ "title": "Dimension of an algebraic space under a field extension",
+ "statement": "Let $k\\to K$ be a field extension [def-weil-field, def-pc-field-extension]. Let $Y$ be an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum], separated and of finite type: its diagonal is a closed immersion and it is quasi-compact and locally of finite type on etale scheme charts (using [def-weil-proper-morphism, def-weil-finite-type-morphism] for the scheme conventions). Then $Y_K=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [lem-trf-space-fibre-products-etale-covers], with the scheme convention [def-pc-fibre-product], has the same topological Krull dimension as $Y$ [def-kun-topological-krull-dimension]: $\\dim |Y_K|=\\dim |Y|$, where $|Y|$ and $|Y_K|$ carry the atlas topology on point classes [def-a1-space-point-topology]. Empty spaces are included, with dimension $-\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), part (1), specialized to a field extension; topological dimension agrees with etale-chart dimension for separated spaces by decent-spaces.tex, Tag 0A4J (lemma-dimension-decent-space) and Tag 088J (lemma-locally-separated-decent). The separated finite-type version is asserted here."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "The separatedness hypothesis implies that $Y\\to\\operatorname{Spec}k$ is quasi-separated. Indeed, after any scheme test the diagonal is a closed immersion [def-weil-closed-immersion]. Its inverse image over a quasi-compact open is homeomorphic to a closed subset of that open, which is quasi-compact. Thus the diagonal is quasi-compact on every scheme test, exactly the hypothesis in the atlas dimension comparison used below.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent); quasi-separatedness verified directly from the closed diagonal"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale atlas $a:U\\to Y$ with $U$ a scheme [def-trf-algebraic-space]. The chart criterion [lem-sfb-space-local-properties-chart-test], with target chart $\\operatorname{Spec}k\\to\\operatorname{Spec}k$ the identity, makes $U\\to\\operatorname{Spec}k$ locally of finite type. Put $U_K=U\\times_k\\operatorname{Spec}K$, a scheme [def-pc-fibre-product]. The algebraic-space fibre-product and covering theorem [lem-trf-space-fibre-products-etale-covers] makes $Y_K$ an algebraic space and supplies a surjective etale atlas $U\\times_Y Y_K\\to Y_K$. This source is $U_K$: a test point of either product is precisely a pair $(u,t)$ with the same image in $\\operatorname{Spec}k$, since the $Y$ coordinate is forced to be $a(u)$. The mutually inverse compatible-pair maps respect both projections. Now [lem-sfb-space-etale-atlas-topological-dimension] applied to the quasi-separated $Y\\to\\operatorname{Spec}k$, first with $T=\\operatorname{Spec}k$ and then with $T=\\operatorname{Spec}K$, gives $\\dim|Y|=\\dim U$ and $\\dim|Y_K|=\\dim U_K$. No assertion of quasi-compactness of the chosen atlas is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-pc-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-atlas-topological-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), atlas reduction in the proof; Tag 040Y (lemma-finite-type-local); decent-spaces.tex Tag 0A4J (lemma-dimension-decent-space)"
+   }
+  },
+  {
+   "text": "If $U$ is empty then $U_K$ is empty, since its projection has target $U$. Both scheme dimensions are $-\\infty$ by [def-kun-topological-krull-dimension], so Step 2 proves the desired equality. Otherwise apply [lem-pc-dim-base-change-affine-covers] to the locally finite type scheme $U$ and the given field extension. It states that $U_K$ is nonempty and provides matching affine open covers $U_i\\cong\\operatorname{Spec}A_i$ of $U$ and $V_i\\cong\\operatorname{Spec}(A_i\\otimes_kK)$ of $U_K$, with every $A_i$ finite type over $k$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-pc-dim-base-change-affine-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), reduction to scheme charts; schemes.tex Tags 01JR and 01JQ, and morphisms.tex Tag 01T0, for matching affine charts"
+   }
+  },
+  {
+   "text": "In the nonempty case, the first clause of [lem-pc-dim-base-change] applies to each finite type $k$-algebra $A_i$ and gives $\\dim(A_i\\otimes_kK)=\\dim A_i$ as ring dimensions. Apply [lem-pc-dimension-affine-open-cover] to each of the two nonempty schemes and the covers of Step 3. These formulas use the supremum of stalk ring dimensions; [lem-pc-scheme-dimension-local-rings] identifies that supremum with topological Krull dimension. Consequently $\\dim U_K=\\sup_i\\dim(A_i\\otimes_kK)=\\sup_i\\dim A_i=\\dim U$. Substitute the two atlas equalities of Step 2 to conclude $\\dim|Y_K|=\\dim|Y|$. The argument compares suprema term by term, so no purity, irreducibility, reducedness, algebraicity or separability assumption on the extension enters.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension); properties.tex Tag 04MU (lemma-dimension); decent-spaces.tex Tag 0A4J (lemma-dimension-decent-space)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), proof via scheme atlases, with decent-spaces.tex Tags 0A4J and 088J, algebra.tex Tag 00P3, and properties.tex Tag 04MU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a locally finite type algebraic space over a field is unchanged by extension of the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RatFunc.finrank_ratFunc_ratFunc\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ (k : Type u_3) (K : Type u_4) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [Algebra.IsAlgebraic k K],\\n  Module.finrank (RatFunc k) (RatFunc K) = Module.finrank k K\", \"doc\": \"For any field extension $ K $ of $ k $, the finite rank of the rational function field $ \\\\text{RatFunc}(K) $ as a module over $ \\\\text{RatFunc}(k) $ is equal to the finite rank of $ K $ as a module ove\"}\n  {\"name\": \"Algebra.IsAlgebraic.finrank_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (R' : Type u_4) (S : Type u) [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R R'] [IsFractionRing R R'] [FaithfulSMul R S] [Algebra.IsAlgebraic R S]\\n  [NoZeroDivisors S] (S' : Type v) [inst_9 : CommRing S'] [inst_10 : Alge\", \"doc\": \"If $ S $ is an algebraic algebra over a commutative ring $ R $, and $ R' $, $ S' $ are their respective fraction rings (localizations at non-zero divisors), then the finite rank of $ S' $ as an $ R' $\"}\n  {\"name\": \"Algebra.IsAlgebraic.rank_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (R' : Type u_4) (S : Type u) [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R R'] [IsFractionRing R R'] [FaithfulSMul R S] [Algebra.IsAlgebraic R S]\\n  [NoZeroDivisors S] (S' : Type u) [inst_9 : CommRing S'] [inst_10 : Alge\", \"doc\": \"If $ S' $ is the fraction ring of $ S $, and given compatible algebra structures and scalar tower conditions between $ R $, $ R' $, and $ S' $, then the rank of $ S' $ as an $ R' $-module equals the r\"}\n  {\"name\": \"Algebra.IsAlgebraic.lift_rank_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (R' : Type u_4) (S : Type u) [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R R'] [IsFractionRing R R'] [FaithfulSMul R S] [Algebra.IsAlgebraic R S]\\n  [NoZeroDivisors S] (S' : Type v) [inst_9 : CommRing S'] [inst_10 : Alge\", \"doc\": \"If $ S $ is the fraction ring of $ R $ and $ S' $ is the fraction ring of $ R' $, then the universe-lifted cardinal ranks of the modules $ S $ over $ R $ and $ S' $ over $ R' $ are equal, i.e., $\\\\text\"}\n  {\"name\": \"RatFunc.rank_ratFunc_ratFunc\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ (k : Type u_3) (K : Type u_4) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [Algebra.IsAlgebraic k K],\\n  Module.rank (RatFunc k) (RatFunc K) = Module.rank k K\", \"doc\": \"The rank of the rational function field $\\\\text{RatFunc}(K)$ as a module over $\\\\text{RatFunc}(k)$ is equal to the rank of $K$ as a module over $k$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"IntermediateField.relfinrank_eq_finrank_of_le\", \"module\": \"Mathlib/FieldTheory/Relrank\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {A B : IntermediateField F E}\\n  (h : A ≤ B), A.relfinrank B = Module.finrank ↥A ↥(IntermediateField.extendScalars h)\", \"doc\": \"If $ A $ is an intermediate field contained in another intermediate field $ B $, then the relative finite rank of $ A $ over $ B $, defined as the finite rank of their intersection $ A \\\\cap B $ as a m\"}\n  {\"name\": \"Algebra.IsAlgebraic.rank_fractionRing_polynomial\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [alg : Algebra.IsAlgebraic R S] [inst_3 : IsDomain S] [inst_4 : FaithfulSMul R S],\\n  Module.rank (FractionRing (Polynomial R)) (FractionRing (Polynomial S)) = Module.rank R S\", \"doc\": \"The rank of the fraction ring of $ S[X] $ over the fraction ring of $ R[X] $ is equal to the rank of $ S $ over $ R $, i.e., $\\\\operatorname{rank}_{\\\\operatorname{FractionRing}(R[X])}(\\\\operatorname{Frac\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme dimension or flatness results do not state dimension invariance for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric fibre dimension equals ordinary fibre dimension for a morphism of algebraic spaces locally of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.fiberι f ((CategoryTheory.ConcreteCategory.hom f.base) x)).base)\\n      (AlgebraicGeometry.Scheme.Hom.asFiber f x) =\\n    x\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any point $ x \\\\in X $, the composition of the inclusion map of the fiber $ f^{-1}(f(x)) $ into $ X $ with the fiber construction at $ x $ yields $ x $ i\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] (y : ↥Y),\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme dimension or flatness results do not state dimension invariance for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"dimension\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme dimension or flatness results do not state dimension invariance for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|dimension.*field.*extension",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"28\", \"text\": \"- `isLiouville_of_finiteDimensional`: all finite-dimensional field extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"line\": \"196\", \"text\": \"We lift `isLiouville_of_finiteDimensional_galois` to non-Galois field extensions by using it for the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme dimension or flatness results do not state dimension invariance for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a locally finite type algebraic space over a field is unchanged by extension of the ground field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.dimension_ofAlgEquiv\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \"(P : Presentation R S ι σ) {T : Type*} [CommRing T] [Algebra R T] (e : S ≃ₐ[R] T) :\\n  (P.ofAlgEquiv e).dimension = P.dimension\", \"doc\": \"If $ P $ is an algebra presentation of $ S $ over a commutative ring $ R $, and $ e : S \\\\simeq_{\\\\mathbb{A}[R]} T $ is an $ R $-algebra equivalence to another algebra $ T $, then the dimension of the i\"}\n  {\"name\": \"FiniteDimensional.finiteDimensional_subalgebra\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"[FiniteDimensional F E] (S : Subalgebra F E) : FiniteDimensional F S\", \"doc\": \"Any subalgebra of a finite-dimensional algebra over a field is itself finite-dimensional. Specifically, if $ E $ is a finite-dimensional vector space over a field $ F $ and $ S $ is a subalgebra of $ \"}\n  {\"name\": \"Algebra.Presentation.dimension_reindex\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \"(P : Presentation R S ι σ) {ι' σ' : Type*} (e : ι' ≃ ι) (f : σ' ≃ σ) : (P.reindex e f).dimension = P.dimension\", \"doc\": \"The dimension of an algebra presentation remains unchanged when reindexing its generating set $\\\\iota$ and relation set $\\\\sigma$ via equivalences (bijections) $\\\\iota' \\\\simeq \\\\iota$ and $\\\\sigma' \\\\simeq \"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.adjoin_rank_eq_rank_right_of_isAlgebraic_right\", \"module\": \"Mathlib.FieldTheory.LinearDisjoint\", \"type\": \"(H : A.LinearDisjoint L) [Algebra.IsAlgebraic F L] :\\n  Module.rank A (extendScalars (show A ≤ (adjoin L (A : Set E)).restrictScalars F from subset_adjoin L (A : Set E))) =\\n    Module.rank F L\", \"doc\": \"Let $ A $ be an intermediate field between $ K $ and $ L $, and suppose $ A $ and the image of $ F $ in $ L $ are linearly disjoint over $ E $. If $ L $ is algebraic over $ F $, then the rank of the m\"}\n  {\"name\": \"IntermediateField.rank_bot'\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \": Module.rank (⊥ : IntermediateField F E) E = Module.rank F E\", \"doc\": \"The rank of the base field $ F $ as a module over the extension field $ E $ is equal to the rank of $ F $ as a module over $ E $.\"}\n  {\"name\": \"PowerBasis.map_dim\", \"module\": \"Mathlib.RingTheory.PowerBasis\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S] {S' : Type u_7}\\n  [inst_3 : CommRing S'] [inst_4 : Algebra R S'] (pb : PowerBasis R S) (e : S ≃ₐ[R] S'), (pb.map e).dim = pb.dim\", \"doc\": \"Given a power basis $\\\\{1, \\\\alpha, \\\\alpha^2, \\\\dots, \\\\alpha^{n-1}\\\\}$ for an $R$-algebra $S$ with dimension $n$, and an $R$-algebra isomorphism $e:S\\\\xrightarrow{\\\\sim} S'$, the dimension of the power basi\"}\n  {\"name\": \"IntermediateField.relfinrank_comap\", \"module\": \"Mathlib.FieldTheory.Relrank\", \"type\": \"(f : L →ₐ[F] E) (B : IntermediateField F L) : relfinrank (A.comap f) B = relfinrank A (B.map f)\", \"doc\": \"For an algebra homomorphism $ f : L \\to E $ over $ F $ and an intermediate field $ B $ between $ F $ and $ L $, the relative finite rank of the preimage of an intermediate field $ A $ under $ f $ and $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme dimension or flatness results do not state dimension invariance for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The topological Krull dimension of a separated finite type algebraic space over a field is preserved after extension of the base field",
+   "results": "{\"t\": \"2026-10-23T09:38:40Z\", \"tool\": \"leanfinder\", \"query\": \"The topological Krull dimension of a separated finite type algebraic space over a field is preserved after extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"IsClosedEmbedding.topologicalKrullDim_le\", \"Algebra.IsAlgebraic.lift_rank_of_isFractionRing\", \"Field.finInsepDegree_top_le_finInsepDegree_of_isScalarTower\", \"Field.lift_sepDegree_mul_lift_sepDegree_of_isAlgebraic\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Field.lift_rank_mul_lift_sepDegree_of_isSeparable\", \"Algebra.IsAlgebraic.finrank_of_isFractionRing\"], \"digest\": \"ac46c252d10b1db0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field rank, presentation dimension, scheme Artinian and etale base-change results do not state dimension preservation for algebraic spaces; no AlgebraicSpace dimension hit"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace dimension field extension",
+   "results": "{\"t\": \"2026-10-23T09:38:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicSpace dimension field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `AlgebraicSpace`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern: Loogle reported Unknown identifier AlgebraicSpace; repeated with quoted AlgebraicSpace and dimension strings (0 hits)"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|topologicalKrullDim|dimension.*field",
+   "results": "{\"t\": \"2026-10-23T09:38:41Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|topologicalKrullDim|dimension.*field\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid directory argument: this msearch command expects AlgebraicGeometry, not Mathlib/AlgebraicGeometry; reran with AlgebraicGeometry and read its scheme-only hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension of algebraic space preserved under field extension",
+   "results": "{\"t\": \"2026-10-23T09:38:41Z\", \"tool\": \"leansearch\", \"query\": \"dimension of algebraic space preserved under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.relfinrank_map_map\", \"IntermediateField.LinearDisjoint.adjoin_rank_eq_rank_right_of_isAlgebraic_right\", \"Algebra.IsAlgebraic.finrank_of_isFractionRing\", \"Algebra.Presentation.dimension_reindex\", \"Algebra.Presentation.dimension_ofAlgEquiv\", \"FiniteDimensional.finiteDimensional_subalgebra\", \"Algebra.IsStandardSmooth.relativeDimension\", \"IntermediateField.LinearDisjoint.adjoin_rank_eq_rank_right_of_isAlgebraic\"], \"digest\": \"2c1f6e122f2b0403\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field rank, presentation dimension, scheme Artinian and etale base-change results do not state dimension preservation for algebraic spaces; no AlgebraicSpace dimension hit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the base change of an algebraic space to a larger field using an etale atlas",
+   "results": "{\"t\": \"2026-10-23T09:41:23Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of the base change of an algebraic space to a larger field using an etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"f9dd23ca9622a6ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field rank, presentation dimension, scheme Artinian and etale base-change results do not state dimension preservation for algebraic spaces; no AlgebraicSpace dimension hit"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|topologicalKrullDim|dimension.*field",
+   "results": "{\"t\": \"2026-10-23T09:46:57Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|topologicalKrullDim|dimension.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\"], \"digest\": \"07ebaee3d6a69cf2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field rank, presentation dimension, scheme Artinian and etale base-change results do not state dimension preservation for algebraic spaces; no AlgebraicSpace dimension hit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"dimension\"",
+   "results": "{\"t\": \"2026-10-23T09:46:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"dimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field rank, presentation dimension, scheme Artinian and etale base-change results do not state dimension preservation for algebraic spaces; no AlgebraicSpace dimension hit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-formal-effectivity",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0D58 proof, applying Tag 0E7R to the special fibre of a formal curve, and verifying relative dimension after algebraization.",
+   "via": [
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-field-extension-dimension",
+  "worker": "stage1",
+  "summary": "Mathematical statement unchanged; added the existing algebraic-space fibre-product theorem to its notion references, retaining the scheme fibre-product convention. Proved separated implies quasi-separated directly, used the existing base-changed atlas dimension comparison, reduced the nonempty scheme atlas to matching affine covers, applied field-extension invariance of ring dimension and compared suprema. Explicit empty case and conversion between stalk-ring and topological dimension. No new nodes. Read current Lean scheme results: they do not attach the algebraic-space statement.",
+  "blueprint": "Realizes the existing blueprint.from.place support of det-thm-sf-ctf-stability-direct-images proof (3), through the formal-effectivity proof of Stacks 0D58: dimension of special and generic geometric fibres after algebraization. The current latest blueprint direct-images proof is read; this is a supporting dimension calculation below its unit route, not a replacement of a unit step. No blueprint node states the algebraic-space version; same_as remains [].",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products and etale covering base change, needed to base-change the atlas; this unit supplies no competing foundational construction."
+   },
+   {
+    "node": "lem-pc-dim-base-change-affine-covers",
+    "why": "Matching affine covers and nonemptiness for a locally finite type scheme under field extension; generic scheme tool for the chosen atlas."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Uses only the finite type algebra ring-dimension clause, not the curve conclusion; the unit has no commutative algebra substitute."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Generic affine-cover formula for dimension as a supremum of ring dimensions, used only on scheme atlases."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies topological scheme dimension with the stalk-ring convention of the affine-cover formula; a generic dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-d13e858d4",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-d13e858d4 (reviewer sub-agent of L); spot-checked: Read the item and all 11 cited statements in full. This is the first split of the item; it is still unsplit in live and side-live, and there are no new nodes. Statement: the only change from base is that the fibre product Y_K now also cites lem-trf-space-fibre-products-etale-covers, the correct algebraic-space fibre-product reference; nothing is weakened. It is true by Stacks 04NS, 0A4J and 088J (decent/separated spaces) and 00P3 (algebra.tex l.28290). Edge cases tested: empty space, Spec k, k[x]/(x^2), a purely inseparable extension, a non-equidimensional union, a transcendental K. Step 1 (separated ⇒ quasi-separated via the closed-immersion homeomorphism) is genuinely elementary. Step 2: the chart test (V=Y=Spec k) makes U→Spec k locally of finite type. The fibre-product node gives Y_K and the base-changed cover, and the compatible-pair identity U×_Y Y_K ≅ U_K is written out. The atlas-dimension node (any T, quasi-separated f) then gives dim|Y|=dim U and dim|Y_K|=dim U_K. Advisory only: the cover is surjective in the |·| sense, while the atlas node asks for scheme-pullback surjectivity; the same compatible-pair identity T×_{Y_K}U_K=T×_Y U closes this. Step 3 handles the empty case and correctly uses the statement of lem-pc-dim-base-change-affine-covers (nonempty U_K, matching covers by finite-type A_i). Step 4 uses the 00P3 clause of lem-pc-dim-base-change, the affine-cover supremum and the stalk-to-topological conversion. proof_deps equals the union of uses. Duplicate search: checked lem-trf-field-extension-component-local-dimension, lem-sfb-space-fibre/relative-dimension-base-change, lem-sfb-quasiseparated-space-atlas-dimension, lem-sfb-space-topological-dimension-local-rings and lem-sc-fibre-dimension-after-base-change; none states this. The parent formal-effectivity steps 1 and 8 use the item within its hypotheses. Accepted the five declared generic tool uses. Batch 5: lem-trf-space-fibre-products-etale-covers (Stacks 02X2/04T9/041F) has a closure of foundational algebraic-space nodes only, with no trace-formula or Poincaré-duality content. The atlas-dimension node reaches sec-trace-formula only through the definition def-trf-algebraic-space. Both are outside the assumed statements. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFieldExtensionDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.topologicalKrullDim_field_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFieldExtensionDimension.lean",
+  "statement": "theorem topologicalKrullDim_field_extension (k K : Type u) [Field k] [Field K] [Algebra k K] (Y : AlgebraicSpace (Spec (.of k))) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) (hqc : MapIsQuasiCompact (terminal.from Y.obj.obj)) (hlft : ∀ (U : Over (Spec (.of k))) (a : yoneda.obj U ⟶ Y.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) : topologicalKrullDim (Point (Limits.pullback (terminal.from Y.obj.obj) (terminal.from (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))))) = topologicalKrullDim (Point Y.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing presheaf fibre product and point atlas topology. The base Spec k is represented by the terminal presheaf on Sch/Spec k; separatedness is its representable closed diagonal. Quasi-compactness reuses MapIsQuasiCompact from the added landed definition dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a09aac37",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary field extension via algebraMap; Y : AlgebraicSpace (Spec k); hsep = closed-immersion diagonal over Spec k (same convention as landed SeparatedSpaceDimensionOneScheme); hqc = landed MapIsQuasiCompact on the terminal map; hlft = LFT on every étale chart; Y_K = presheaf pullback over the terminal presheaf (= Spec k) along Spec.map algebraMap; conclusion is an equality of topologicalKrullDim of Point with the atlas topology. Empty space gives ⊥ with no Nonempty binder; K=k covered; single framework universe u. lean.statement is verbatim the file signature. Only lean plus the added landed stmt_dep def-sfb-proper-curve-moduli changed (allowed); dep records identical to side-live; no new nodes or definitions; no existing space-level duplicate in lean/Sheaf. Docstrings carry source and blueprint id and the 4 proof steps; proof is sorry only; no pro-étale substitute; Worker report and Second reading by NQ present (self-reading). Advisory: inline separated/finite-type instead of def-sfb-space-morphism-properties; equivalent and matches the node's wording. Nothing compiled because no file was changed."
+ }
+}

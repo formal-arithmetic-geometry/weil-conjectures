@@ -1,0 +1,321 @@
+{
+ "id": "lem-trf-affine-relative-tor-diagonal-finiteness",
+ "kind": "statement",
+ "title": "Relative affine Tor bounds and pseudo-coherent diagonal finiteness",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of commutative rings, with $R$ Noetherian [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra], [def-weil-pbc-noetherian-ring]. Put $U=\\operatorname{Spec}A$, $V=\\operatorname{Spec}R$, let $g:U\\to V$ be the induced morphism, and put $B=A\\otimes_R A$ [def-pc-scheme], [def-pc-fibre-product]. Let $E\\in D(\\mathcal O_U)$ be pseudo-coherent [def-pc-derived-category], [def-pur-pseudo-coherent-complex]. Assume that every point of $U$ has an open neighbourhood $T$ and integers $a_T\\le b_T$ such that $H^i(E|_T\\otimes^{\\mathbf L}_{(g^{-1}\\mathcal O_V)|_T}(g^{-1}\\mathcal G)|_T)=0$ for every $\\mathcal O_V$-module sheaf $\\mathcal G$ and every $i\\notin[a_T,b_T]$; derived tensors are computed by K-flat resolutions [def-pc-kflat-complex]. Then $E$ has quasi-coherent cohomology, and there exist $M\\in D(A)$, an isomorphism $\\widetilde M\\cong E$ under [lem-pc-affine-qcoh-derived-equivalence], and integers $a\\le b$ such that $M$ is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and $H^i(M\\otimes_R^{\\mathbf L}N)=0$ for every $R$-module $N$ and every $i\\notin[a,b]$. In particular $H^i(M)=0$ outside $[a,b]$. The ring $B$ is Noetherian, and the $B$-module $A$, with action through $\\mu:B\\to A$, $x\\otimes y\\mapsto xy$, has a bounded-above finite-free resolution, so $A[0]$ is pseudo-coherent in $D(B)$. Moreover $B$ is flat over $A$ through $p_1:a\\mapsto a\\otimes1$; for $M_1=M\\otimes^{\\mathbf L}_{A,p_1}B$ its degree-zero flat representative $B[0]$ computes this tensor and there are natural isomorphisms $H^i(M_1)\\cong H^i(M)\\otimes_{A,p_1}B$ for all $i$. Thus $H^i(M_1)=0$ for $i<a$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2U, lemma-relative-dualizing-complex-algebra, finiteness prerequisites for the affine internal-Hom comparison; perfect.tex lemma-pseudo-coherent-affine and lemma-tor-dimension-rel-affine; more-algebra.tex lemma-Noetherian-pseudo-coherent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-kflat-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-topological-inverse-image-module",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-pseudo-coherent-qcoh], the given pseudo-coherent $E$ has quasi-coherent cohomology. The equivalence [lem-pc-affine-qcoh-derived-equivalence] therefore supplies $M\\in D(A)$ and $\\widetilde M\\cong E$. Apply [lem-pc-affine-pseudo-coherent-criterion] to a complex representing $M$: it is quasi-isomorphic to a bounded-above complex of finite free $A$-modules. This is precisely pseudo-coherence of $M$ by [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 08E5 (lemma-pseudo-coherent), 06Z0 (lemma-affine-compare-bounded), 08E7 (lemma-pseudo-coherent-affine)."
+   }
+  },
+  {
+   "text": "The affine $U$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Choose finitely many of the hypothesized neighbourhoods $T_j$ covering $U$, and put $a=\\min_j a_{T_j}$ and $b=\\max_j b_{T_j}$. If $U$ is empty, choose $a=b=0$; every module sheaf there is zero. Fix any base module sheaf $\\mathcal G$. Compute $E\\otimes^{\\mathbf L}_{g^{-1}\\mathcal O_V}g^{-1}\\mathcal G$ using a K-flat resolution over the ringed space $(U,g^{-1}\\mathcal O_V)$, supplied by [lem-pc-kflat-resolution]. Its restriction to $T_j$ remains K-flat, and restriction is exact, by [lem-sfb-ringed-site-restriction-kflat]. The natural sheaf tensor restriction isomorphism of [lem-sfb-localized-site-tensor-restriction], applied in each degree against the degree-zero test sheaf, identifies the restricted tensor complex with the tensor computing the hypothesis on $T_j$. Thus its cohomology vanishes on every $T_j$ outside $[a,b]$. A sheaf zero on a covering is zero: any section restricts to zero on that cover and is zero by the separatedness axiom. Consequently the global inverse-image test holds in this single interval.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY (lemma-tor-dimension-rel-affine), last paragraph; sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 0E8K (lemma-restriction-K-flat); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "Apply the fixed-interval assertion and inverse-image-test equivalence of [lem-trf-affine-relative-tor-amplitude-criterion] to $R\\to A$, the affine model $M$ of Step 1 and the interval of Step 2. This gives $H^i(M\\otimes_R^{\\mathbf L}N)=0$ for every $R$-module $N$ and every $i\\notin[a,b]$. In particular take $N=R$. On the one-point ringed site, [lem-fd-ringed-flat-single-tensor-cohomology] with the free rank-one module $R$ computes $H^i(M\\otimes_R^{\\mathbf L}R)=H^i(M)\\otimes_R R\\cong H^i(M)$; the last map is $m\\otimes r\\mapsto rm$, inverse $m\\mapsto m\\otimes1$. Hence $H^i(M)=0$ outside $[a,b]$.",
+   "uses": [
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-fd-ringed-flat-single-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY (lemma-tor-dimension-rel-affine), part (1); sites-cohomology.tex Tag 06YU (definition-derived-tor), flat-single specialization."
+   }
+  },
+  {
+   "text": "Choose finite algebra generators $x_1,\\ldots,x_n$ of $A$ over $R$ from its finite presentation. Then $x_i\\otimes1$ and $1\\otimes x_i$ generate $B$ as an $R$-algebra: every pure tensor is the product $(x\\otimes1)(1\\otimes y)$ and pure tensors generate the tensor product additively. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $B$ Noetherian. The multiplication map $\\mu:B\\to A$ is surjective since $\\mu(x\\otimes1)=x$, and $1\\in A$ generates $A$ as a $B$-module: $x=(x\\otimes1)\\cdot1$. Apply [lem-weil-pbc-finite-free-resolution-noetherian] with ring $B$ and this cyclic module. Put its terms $B^{n_j}$ in degrees $-j$ and zero in positive degrees. Exactness of the augmented resolution gives a quasi-isomorphism to $A[0]$. This is a bounded-above finite-free model, so [def-pc-ring-pseudo-coherent-complex] says that $A[0]$ is pseudo-coherent in $D(B)$. No finite length for the resolution is asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00LP (lemma-resolution-by-finite-free), part (2); more-algebra.tex Tag 064P (definition-pseudo-coherent)."
+   }
+  },
+  {
+   "text": "The $R$-module $A$ is flat by hypothesis. Apply [lem-weil-pbc-flat-module-base-change] with $R'=A$ and $M=A$: $A\\otimes_R A$ is flat as an $A$-module through the first tensor factor, exactly the specified $p_1$. On the one-point ringed site with coefficient ring $A$, specialize [lem-fd-ringed-flat-single-tensor-cohomology] to the flat module $L=B$. It says $B[0]$ is K-flat, computes $M_1=M\\otimes^{\\mathbf L}_{A,p_1}B$ by termwise flat tensor, and supplies $H^i(M_1)\\cong H^i(M)\\otimes_{A,p_1}B$ for every $i$, naturally in $M$. These maps are also $B$-linear: naturality in endomorphisms of the flat module $B$, applied to multiplication by each $c\\in B$, intertwines the two $B$-actions. Thus these are the asserted scalar-extension cohomology isomorphisms. Step 3 and tensoring the zero module with $B$ now give $H^i(M_1)=0$ for $i<a$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-fd-ringed-flat-single-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change); sites-cohomology.tex Tag 06YU (definition-derived-tor), flat-single computation and its naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-flat-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra), affine finiteness prerequisites, using perfect.tex Tags 08E5, 06Z0, 08E7, 0DHY; algebra.tex Tags 00FN, 00LP, 00HI; sites-cohomology.tex Tags 06YS, 0E8K, 06YU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|relative.*[Tt]or|[Tt]or.*amplitude",
+   "results": "{\"t\": \"2026-10-22T06:45:34Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|relative.*[Tt]or|[Tt]or.*amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Order/BooleanAlgebra/Defs.lean\", \"Mathlib/Order/BooleanAlgebra/Defs.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"223700f47886b9d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom complexes or unrelated word matches only; no affine derived comparison with these finiteness and naturality conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex on an affine scheme with locally finite Tor dimension over its affine base has a uniform Tor amplitude over the base ring and bounded below flat base change",
+   "results": "{\"t\": \"2026-10-22T06:45:34Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo coherent complex on an affine scheme with locally finite Tor dimension over its affine base has a uniform Tor amplitude over the base ring and bounded below flat base change\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPseudoCoherent, Module.Flat",
+   "results": "{\"t\": \"2026-10-22T06:45:35Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsPseudoCoherent, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.IsPseudoCoherent'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: loogle: unknown identifier 'DerivedCategory.IsPseudoCoherent'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented algebra A over a Noetherian ring R, a pseudo coherent complex on Spec A locally of finite relative R Tor amplitude corresponds to a pseudo coherent A complex with a uniform R Tor bound; its first pullback to A tensor R A is bounded below and the diagonal module is pseudo coherent",
+   "results": "{\"t\": \"2026-10-22T06:45:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finitely presented algebra A over a Noetherian ring R, a pseudo coherent complex on Spec A locally of finite relative R Tor amplitude corresponds to a pseudo coherent A complex with a uniform R Tor bound; its first pullback to A tensor R A is bounded below and the diagonal module is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"38bdd6f891f6b8ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, finitely presented sheaves, sheafification adjunctions or derivations; none gives the asserted derived finiteness/comparison package"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|TorAmplitude|tor.amplitude|tor.dimension",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|TorAmplitude|tor.amplitude|tor.dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom complexes or unrelated word matches only; no affine derived comparison with these finiteness and naturality conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:45:56Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: loogle: unknown identifier 'Algebra.TensorProduct'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine pseudo coherent sheaf complex of finite relative Tor dimension has one uniform finite Tor interval and finite free models after passing to its derived module; flat tensor preserves its cohomology bounds",
+   "results": "{\"t\": \"2026-10-22T06:46:07Z\", \"tool\": \"leanfinder\", \"query\": \"An affine pseudo coherent sheaf complex of finite relative Tor dimension has one uniform finite Tor interval and finite free models after passing to its derived module; flat tensor preserves its cohomology bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"88fc3e86e2c0e5a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, finitely presented sheaves, sheafification adjunctions or derivations; none gives the asserted derived finiteness/comparison package"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat",
+   "results": "{\"t\": \"2026-10-22T06:46:53Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat\", \"Module.Flat.self\", \"Module.Flat.of_free\", \"Module.Flat.of_projective\", \"Module.Flat.of_ulift\", \"Module.Flat.ulift\", \"Module.Flat.of_shrink\", \"Module.Flat.shrink\"], \"digest\": \"0b175d8989706cee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary flat-module facts or presheaf Hom maps; no derived affine statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex on an affine scheme with locally finite relative Tor dimension over a Noetherian affine base corresponds to a pseudo coherent module complex of uniformly bounded relative Tor amplitude, and the tensor square diagonal is pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T04:18:21Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudo coherent complex on an affine scheme with locally finite relative Tor dimension over a Noetherian affine base corresponds to a pseudo coherent module complex of uniformly bounded relative Tor amplitude, and the tensor square diagonal is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"b9c968893903d970\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Modules.instAbelian; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_Q_obj_iff do not state the affine pseudo-coherent relative-Tor and diagonal-finiteness package."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T04:19:23Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsNoetherianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"d7e5d9b4105d3d42\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian; Algebra.Smooth.flat_of_isNoetherianRing; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing do not state the affine pseudo-coherent relative-Tor and diagonal-finiteness package."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|relative.*[Tt]or|[Tt]or.*amplitude",
+   "results": "{\"t\": \"2026-10-23T04:21:03Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|relative.*[Tt]or|[Tt]or.*amplitude\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"6d56b0db1d835756\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean do not state the affine pseudo-coherent relative-Tor and diagonal-finiteness package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pseudo coherent complexes with finite relative Tor dimension have uniform ring Tor amplitude and pseudo coherent diagonal module over a Noetherian tensor square",
+   "results": "{\"t\": \"2026-10-23T04:21:03Z\", \"tool\": \"leansearch\", \"query\": \"Affine pseudo coherent complexes with finite relative Tor dimension have uniform ring Tor amplitude and pseudo coherent diagonal module over a Noetherian tensor square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"Module.Flat.rTensor_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"e3d2b693e3008b7b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat do not state the affine pseudo-coherent relative-Tor and diagonal-finiteness package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence on Spec A is equivalent to a bounded above finite free module complex and flat derived scalar extension commutes with cohomology",
+   "results": "{\"t\": \"2026-10-23T04:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudo coherence on Spec A is equivalent to a bounded above finite free module complex and flat derived scalar extension commutes with cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"63487e6e10c96e75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; Algebra.Smooth.flat; AlgebraicGeometry.Flat; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; AlgebraicGeometry.flat_and_surjective_SpecMap_iff; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange do not state the affine pseudo-coherent relative-Tor and diagonal-finiteness package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-relative-dualizing-comparison",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Subargument: Returned proof steps 3--6, plus the Noetherian tensor-square computation from step 1: uniform relative Tor bounds, affine finite-free models, flat first pullback and pseudo-coherence of the diagonal module.",
+   "via": [
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-relative-tor-diagonal-finiteness",
+  "worker": "stage1",
+  "summary": "Assembled all clauses from existing DAG inputs: affine pseudo-coherent model, finite-cover uniformization of the stated inverse-image tests, relative affine Tor criterion, cyclic diagonal finite-free resolution over the Noetherian tensor square, and natural flat first-pullback cohomology. Statement unchanged; no new nodes, Lean writing or compilation.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and its marked-dualizing/affine-comparison subargument. Steps 1--3 realize the affine model and uniform relative Tor prerequisites; Step 4 the Noetherian diagonal module; Step 5 the bounded-below flat first pullback. Whole-blueprint searches found no blueprint node stating this combined package.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Quasi-coherent cohomology of any pseudo-coherent scheme complex is the generic prerequisite for the affine equivalence."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine derived equivalence provides the module model; it does not replace the curve-unit route."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine pseudo-coherence comparison transfers the given condition to the module model."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolutions are needed for the inverse-image coefficient ring, not just the structure sheaf."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic exact restriction and preservation of K-flatness justify the finite-cover argument over the inverse-image ring."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic tensor restriction for an arbitrary coefficient ring identifies the locally tested tensor complexes."
+   },
+   {
+    "node": "lem-fd-ringed-flat-single-tensor-cohomology",
+    "why": "Generic flat-single derived tensor and natural cohomology comparison, specialized to ordinary modules on the one-point site; no curve-unit node gives this unrestricted comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic finite-module resolution theorem constructs the diagonal module model; it is a tool rather than a change of geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-weil-pbc-finite-free-resolution-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-08aff581e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-08aff581e (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full; there are no new nodes. The statement and stmt_deps are byte-identical to base and live, where the item is still unsplit, so nothing supersedes it. The statement still supplies everything the parent lem-trf-affine-relative-dualizing-comparison takes from it. Source checks: duality.tex 0E2U proof (lines 7054-7100) and perfect.tex 0DHY. Stacks gets the diagonal module from more-relative-pseudo-coherent-is-moot; the delivery's Noetherian route through 00FN and 00LP is a valid specialisation because R is Noetherian. Step checks: S1 uses 08EE/08E5 quasi-coherence, then 06Z0, then 08E7, giving exactly 064P pseudo-coherence. S2 takes a finite subcover (quasi-compact affine; the empty cover at A=0 is handled), a K-flat resolution over g^{-1}O_V (06YS), K-flatness and exactness preserved by restriction (0E8K), and degreewise tensor restriction (03EL; the test sheaf is in degree 0, so no direct sums), then sheaf separatedness: the inverse-image tests hold in one interval [a,b]. S3 applies the same-unit 0DHY criterion through its f^{-1}G test clause; flat-single with L=R gives H^i(M)=0 outside [a,b]. S4: the generators x_i⊗1 and 1⊗x_i make B Noetherian (00FN); A is a cyclic B-module, so 00LP gives a bounded-above finite-free model, with no finite length claimed. S5: 00HI gives that p_1 is flat; flat-single with L=B gives γ^i, and naturality under multiplication by c gives B-linearity; H^i(M_1)=0 for i<a. Every hypothesis is used. Small cases tested: A=0, E=0, R=A, and k[x,y]/(xy), whose infinite resolution is allowed. The declared generic tool_uses are accepted. No SGA is cited. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelativeTorDiagonalFiniteness",
+  "declaration": "AlgebraicGeometry.affine_relative_tor_diagonal_finiteness",
+  "declarations": [
+   "AlgebraicGeometry.affineTorScalarRestriction",
+   "AlgebraicGeometry.affineDiagonalPullback",
+   "AlgebraicGeometry.affine_relative_tor_diagonal_finiteness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelativeTorDiagonalFiniteness.lean",
+  "statement": "theorem affine_relative_tor_diagonal_finiteness {R A : Type u} [CommRing R] [CommRing A] [Algebra R A] [IsNoetherianRing R] [Module.Flat R A] [Algebra.FinitePresentation R A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wB} (ModuleCat.{u} (A ⊗[R] A))] [HasDerivedCategory.{wU} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ T : (Spec (.of A)).Opens, HasDerivedCategory.{wU} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over T))] (E : schemeDerivedCategory (Spec (.of A))) (hE : Scheme.IsPseudoCoherent (Spec (.of A)) E) (hlocal : ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ, Nonempty (DerivedCategory.Q.obj K ≅ E) ∧ ∀ x : Spec (.of A), ∃ T : (Spec (.of A)).Opens, x ∈ T ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ (G : SheafOfModules.{u} (moduleRings (Spec (.of R)).toRingedSpace)) (i : ℤ), i < a ∨ b < i → CochainComplex.sheafDerivedTensorVanishes ((TopCat.Sheaf.inverseImageRing (Spec.map (CommRingCat.ofHom (algebraMap R A))).base (Spec (.of R)).sheaf).over T) (((SheafOfModules.overFunctor _ T).mapHomologicalComplex (.up ℤ)).obj (((affineTorScalarRestriction (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj K)) ((TopCat.Sheaf.inverseImageModule (Spec.map (CommRingCat.ofHom (algebraMap R A))).base (Spec (.of R)).sheaf G).over T) i) : schemeDerivedQCohProperty (Spec (.of A)) E ∧ ∃ C : CochainComplex (ModuleCat.{u} A) ℤ, Nonempty (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj C) ≅ E) ∧ ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj C) ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b (DerivedCategory.Q.obj (((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj C)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (C.homology i)) ∧ IsNoetherianRing (A ⊗[R] A) ∧ (∃ (n : ℕ → ℕ) (ε : (Fin (n 0) → A ⊗[R] A) →ₗ[A ⊗[R] A] ((ModuleCat.restrictScalars (Algebra.TensorProduct.lmul' R).toRingHom).obj (ModuleCat.of A A))) (d : ∀ j : ℕ, (Fin (n (j + 1)) → A ⊗[R] A) →ₗ[A ⊗[R] A] (Fin (n j) → A ⊗[R] A)), Function.Surjective ε ∧ LinearMap.ker ε = LinearMap.range (d 0) ∧ ∀ j : ℕ, LinearMap.ker (d j) = LinearMap.range (d (j + 1))) ∧ DerivedCategory.IsPseudoCoherent ((DerivedCategory.singleFunctor (ModuleCat.{u} (A ⊗[R] A)) 0).obj ((ModuleCat.restrictScalars (Algebra.TensorProduct.lmul' R).toRingHom).obj (ModuleCat.of A A))) ∧ ∃ hflat : (algebraMap A (A ⊗[R] A)).Flat, (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat ((CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj ((ModuleCat.restrictScalars (algebraMap A (A ⊗[R] A))).obj (ModuleCat.of (A ⊗[R] A) (A ⊗[R] A)))) ∧ Nonempty (DerivedCategory.Q ⋙ affineDiagonalPullback hflat ≅ (ModuleCat.extendScalars (algebraMap A (A ⊗[R] A))).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty (affineDiagonalPullback hflat ⋙ (ModuleCat.restrictScalars (algebraMap A (A ⊗[R] A))).mapDerivedCategory ≅ tensorRight ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj ((ModuleCat.restrictScalars (algebraMap A (A ⊗[R] A))).obj (ModuleCat.of (A ⊗[R] A) (A ⊗[R] A))))) ∧ (∀ i : ℤ, Nonempty (affineDiagonalPullback hflat ⋙ DerivedCategory.homologyFunctor (ModuleCat.{u} (A ⊗[R] A)) i ≅ DerivedCategory.homologyFunctor (ModuleCat.{u} A) i ⋙ ModuleCat.extendScalars (algebraMap A (A ⊗[R] A)))) ∧ ∀ i : ℤ, i < a → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (A ⊗[R] A)) i).obj ((affineDiagonalPullback hflat).obj (DerivedCategory.Q.obj C)))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "C is a cochain representative of M=Q(C); termwise tilde expresses the specified affine equivalence. affineTorScalarRestriction abbreviates the canonical restriction along the inverse-image structure map. affineDiagonalPullback specializes exact scalar extension to p1, with independent localization universes. The added landed dependencies supply the existing K-flat tensor-vanishing predicate, canonical inverse-image modules, and exact open restriction; no new mathematical notions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dc500ad1",
+  "group": "Q59",
+  "result": "pass",
+  "note": "All hypothesis/conclusion clauses match the node (flat f.p. R→A, R Noetherian; local K-flat inverse-image test over (g^-1 O_V)|_T for all O_V-modules G, with ∃K only presenting E; qcoh, tilde model C, pseudo-coherence, relative torAmplitudeIn over R, H^i(M) bounds, B Noetherian, bounded-above finite-free resolution of A via lmul', A[0] pseudo-coherent, p1 flat, B[0] K-flat, derived iso p1^*-restricted ≅ tensorRight B[0] plus natural per-degree H^i isos, H^i(M1)=0 for i<a). Edge cases A=0, E=0, R=A, xy-algebra, a=b checked; universes independent. Mechanical finding: the theorem stmt_dep lem-pur-site-restriction-module-adjunction-exact supplies only the Prop instance localizedSystemRestrictionAdditive (additivity of Mathlib overFunctor) needed to type mapHomologicalComplex; this is the theorem's conclusion, not a definition in its module, so PASS on that point. Added deps landed; helpers are thin canonical wrappers (restrictScalars along tensorPullbackRingMap; Mathlib mapDerivedCategory of extendScalars p1); no hollow defs; proof sorry; docstrings with source/blueprint/proof steps. No fixes, no compile needed."
+ }
+}

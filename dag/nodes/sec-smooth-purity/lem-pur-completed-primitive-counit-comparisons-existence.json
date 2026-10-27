@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-completed-primitive-counit-comparisons-existence",
+ "kind": "statement",
+ "title": "Existence of primitive counit comparison data for chosen realizations",
+ "statement": "theorem completedPrimitiveCounit_comparisons_exists (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{t}} (f : X ⟶ Y) (W : Scheme.{t}) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (S : CoefficientDerivedSystemReduction l E W) (V : CoefficientDerivedSystemReduction l E Y) (ρW : PrimitiveCounit.RoosRealization l E W) (ρX : PrimitiveCounit.RoosRealization l E X) : Nonempty (PrimitiveCounit.Comparisons l E f W S V ρW ρX)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and the finite evaluation/counit assembly described in the item proof; this stage-3 decomposition isolates the existence and uniqueness/assembly subarguments."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Choose independently the tensor and pullback realizations normalized on strict quotient models. These supply the two functor isomorphisms and their model predicates.",
+   "uses": [
+    "lem-pur-primitive-counit-tensor-realization",
+    "lem-pur-primitive-counit-pullback-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing full coefficient evaluation calculus. Normalized reconstruction makes its counit invertible at every normalized system. Left-adjoint uniqueness for the common right adjoint identifies the S and V counits with this counit after an isomorphism, so their actual counits are invertible.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pod-unrestricted-normalized-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the unit-normalized inverse-image evaluation isomorphism using exact-functor derived composition. Define each beta as the realization followed by the functor image of the counit. Invertibility follows by functoriality. Compose the realization isomorphism with the functor image of the supplied counit isomorphisms; its inverse is definitionally the displayed word. Naturality is naturality of the composite of whiskered natural transformations, in the tensor case using the product of the two counits. Counit naturality and projection naturality are the existing natural transformations. These data fill every field of Comparisons.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-evaluation-existence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-primitive-counit-tensor-realization",
+  "lem-pur-primitive-counit-pullback-realization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "lem-pur-completed-primitive-counit-evaluation-existence"
+ ],
+ "proof_origin": {
+  "by": "K2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stages 1--3 isolated as tensor and pullback realization lemmas; explicit categorical assembly of stages 4--6 in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit normalized natural isomorphism existence finite evaluation adjunction",
+   "results": "No direct declaration found; existing coefficient evaluation calculus is the closest interface.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit natural isomorphism uniqueness",
+   "results": "Generic adjunction hom-equivalence lemmas only; no project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseEvaluation completedPrimitiveCounit RoosRealization Comparisons",
+   "results": "Only the current item declarations; no duplicate lower statement.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-primitive-counit-comparison",
+   "place": "Stage-3 lower statement extracted from the parent proof.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "file": "lean/Sheaf/Paper/CompletedPrimitiveCounitComparison.lean",
+  "declaration": "WeilConjectures.completedPrimitiveCounit_comparisons_exists",
+  "statement": "theorem completedPrimitiveCounit_comparisons_exists (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{t}} (f : X ⟶ Y) (W : Scheme.{t}) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (S : CoefficientDerivedSystemReduction l E W) (V : CoefficientDerivedSystemReduction l E Y) (ρW : PrimitiveCounit.RoosRealization l E W) (ρX : PrimitiveCounit.RoosRealization l E X) : Nonempty (PrimitiveCounit.Comparisons l E f W S V ρW ρX)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T211947-L-4174483",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

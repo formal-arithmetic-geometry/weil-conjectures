@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-reduced-normalization-local-fibre",
+ "kind": "statement",
+ "title": "The fibre of componentwise normalization from local integral closure",
+ "statement": "For any locally Noetherian scheme C and point x, let A=O_C,x, B be the integral closure of A_red in Q(A_red), and E=B/mB [def-sfb-nodal-tangent-comparison-data]. There is a map Spec B→C^ν over the stalk map Spec A→C, such that the square with upper left Spec E, right C^ν, lower left Spec κ(x), and lower right C is cartesian. Its two upper arrows are induced by B→E followed by the displayed map and by κ(x)→E respectively. This uses the actual componentwise normalization [def-weil-pbc-reduced-normalization], even when C is non-reduced or non-quasi-compact.",
+ "stmt_deps": [
+  "def-sfb-nodal-tangent-comparison-data",
+  "def-weil-pbc-reduced-normalization",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P and 0CDV; algebra.tex Tag 0307."
+ },
+ "proof": [
+  {
+   "text": "Choose a Noetherian affine neighbourhood Spec S of x, corresponding to p, so the stalk\nis S_p. Its reduced ring has finitely many minimal primes p_i, and the components\nmeeting this neighbourhood are exactly Spec(S/p_i). On each component, the affine\nnormalization formula identifies the inverse image with Spec B_i, where B_i is the\nintegral closure in Frac(S/p_i). The finite disjoint union is Spec(product B_i).\nPulling back to Spec(S_p) localizes this product. Integral closure commutes with\nlocalization. Factors with p_i not contained in p become zero; the others give the\nintegral closures of the minimal-prime quotients of (S_p)_red. The total quotient ring\nof this reduced Noetherian ring is the product of their fraction fields. Integrality\nis componentwise: projecting a monic equation proves one implication, and multiplying\ncomponent monic equations proves the converse. The localized product is therefore the\nactual Normalization of the stalk. This gives its canonical map to C's reduced\nnormalization, over the stalk map. Pulling this cartesian square back to the residue\nfield gives Spec(B tensor_A kappa) = Spec(B/mB). The quotient and residue structural\nmaps are the projections, by the affine tensor-product formula. No nodal, purity,\nfinite-type, or coefficient-field hypothesis is used in this local calculation.",
+   "uses": [
+    "def-sc-normalization",
+    "def-weil-pbc-reduced-normalization",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-normalization",
+  "def-weil-pbc-reduced-normalization",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit argument filling the omitted equivalence (2)=(3) of Tag 0CBT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization fibre at a point of a locally Noetherian scheme is the spectrum of the integral closure of the reduced local ring modulo its maximal ideal",
+   "results": "{\"t\": \"2026-10-23T10:41:38Z\", \"tool\": \"leansearch\", \"query\": \"The normalization fibre at a point of a locally Noetherian scheme is the spectrum of the integral closure of the reduced local ring modulo its maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"IsLocalRing.closedPoint\"], \"digest\": \"af8de5c3ae56b7d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization APIs do not supply the componentwise normalization stalk square with these actual quotient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-23T10:14:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization APIs do not supply the componentwise normalization stalk square with these actual quotient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ff]ib[er]|[Ff]ib[er].*normalization",
+   "results": "{\"t\": \"2026-10-23T10:41:38Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Ff]ib[er]|[Ff]ib[er].*normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"0f10fd6983bea071\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization APIs do not supply the componentwise normalization stalk square with these actual quotient maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "date": "2026-10-23",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.; The fibre of componentwise normalization from local integral closure",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedNormalizationLocalFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedNormalizationLocalFiber.lean",
+  "declaration": "AlgebraicGeometry.NodalLocal.reduced_normalization_local_fibre",
+  "statement": "theorem reduced_normalization_local_fibre (C : Scheme.{u}) [IsLocallyNoetherian C] (x : C) : ∃ l : Spec (.of (Normalization (C.presheaf.stalk x))) ⟶ C.reducedNormalization, l ≫ C.fromReducedNormalization = Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk x) (Normalization (C.presheaf.stalk x)))) ≫ C.fromSpecStalk x ∧ IsPullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (normalizationIdeal (C.presheaf.stalk x)))) ≫ l) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) (ResidueAlgebra (C.presheaf.stalk x))))) C.fromReducedNormalization (C.fromSpecResidueField x)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

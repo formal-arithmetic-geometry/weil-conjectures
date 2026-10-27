@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-model-orientation-tate-detection",
+ "kind": "statement",
+ "title": "Degree-zero Tate powers and detection of automorphisms",
+ "statement": "Fix a finite purity datum P [def-pur-conventions], a finite-type k-scheme X with its specified structure morphism aX:X->Spec(k) and r in N. Let T_X be the actual comparison-origin finite Tate power Lambda_X(r)[2r], and L_X=T_X[-2r] [def-pur-composition-model-orientation-coordinates]. Then L_X has homology concentrated in degree zero, and H^0(L_X), realized as a module over the constant finite coefficient ring sheaf, is locally free of rank one. For every index type I and family of Zariski opens U_i of X with supremum top, the map Aut(T_X) -> product_i Aut(T_X|_(U_i)) given by the exact derived open restrictions is injective. This includes the empty covering of the empty scheme.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-pur-composition-model-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero sheaf $L=\\Lambda_X(d+e)$ is locally free of rank one: take a local basis of the finite Tate line and tensor it $d+e$ times, using $1\\otimes\\cdots\\otimes1\\mapsto1$ as basis, and the coefficient unit if $d+e=0$. On these trivializations tensor is the identity functor on module sheaves, so the ordinary tensor powers represent the derived powers. Thus $T_X=L[2d+2e]$. Shift removal sends an endomorphism of $T_X$ to an endomorphism of $L[0]$, and shifting back is its inverse; these operations commute with exact open restriction. Apply degree-zero derived-map gluing with $M=N=L[0]$ and the open covering of Step 6. Its concentration hypothesis holds since $L$ is a sheaf in degree zero. The injectivity part says two endomorphisms of $L[0]$ with equal restrictions coincide. Shifting back proves injectivity of the restriction on endomorphisms of $T_X$, hence on its automorphisms. This uses no gluing assertion for arbitrary derived complexes.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing affine orientations zero section multiplicativity and detection of automorphisms of shifted Tate lines",
+   "results": "Orientation.map; CharacterModule.dual_zero; FractionalIdeal.dual_zero; Module.Basis.orientation; DomAddAct.mk_zero; instMulZeroClassOrderDual; OrderDual.instMulActionWithZero; AffineMap.zero_linear. None concerns the specified sheaf orientations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientations respect composition and descend from affine charts",
+   "results": "inTangentCoordinates_eq; inTangentCoordinates; SmoothBumpCovering.comp_embeddingPiTangent_mfderiv; SingularManifold.comap_f; tangentCoordChange_comp; ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv; ContinuousLinearEquiv.toTransContinuousLinearEquiv; mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm'. These are manifold coordinate results, not etale sheaf comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*orientation|orientation.*descent|compositionSourceFixed",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2; Degree-zero Tate powers and detection of automorphisms",
+   "via": [
+    "lem-pur-composition-model-orientation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModelOrientationTateDetection",
+  "file": "lean/Sheaf/Paper/ModelOrientationTateDetection.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.model_orientation_tate_detection",
+  "statement": "theorem model_orientation_tate_detection (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (r : ℕ) : ModelOrientationDetection.{u, w} P X r",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

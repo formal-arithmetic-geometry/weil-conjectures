@@ -1,0 +1,171 @@
+{
+ "id": "lem-sf-open-closed-module-support-of-universes",
+ "kind": "statement",
+ "title": "Complementary module restrictions in independent coefficient universes",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Let X and Z be schemes in universe t [def-pc-scheme], i:Z -> X a closed immersion and U an object of the small pro-etale site of X whose structure map is a quasi-compact open immersion with image the complement of i(Z) [def-weil-pbc-proetale-site, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Set v=max(u,t+1), let R be any commutative ring sheaf with sections in v, and let A be its underlying ring sheaf. On v-sized A-module sheaves [def-weil-sheaf-of-modules-category], let L and J be the actual localized extension and slice restriction [lem-pur-site-restriction-module-adjunction-exact]. Let I be the forgetful functor to abelian sheaves followed by the constructed abelian inverse image along i [def-weil-proetale-inverse-image]. Then I(L(M)) is zero for every module sheaf M on the slice. Moreover, for every A-linear morphism f, if J(f) and I(f) are isomorphisms, f is an isomorphism. No assertion that L preserves products is assumed or concluded, and neither X nor Z is required to be quasi-compact or separated.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open), and 09BM (lemma-closed-immersion-complement-retrocompact-exact)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Forget the actual module extension to the abelian sheafification of its direct-sum presheaf P, using the definition of module sheafification. For any abelian sheaf H on Z, all maps P -> i_*H are zero: on a summand indexed by a map V -> U, disjointness makes V times_X Z empty and the empty-cover sheaf axiom makes H on this object zero. Direct-sum induction proves equality of any two presheaf maps, including the empty-index case. The inverse-image and sheafification Hom adjunctions then make I(L(M)) initial, hence zero in the category of abelian sheaves.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To detect isomorphisms, cover each test object by its affine opens and refine them by bounded faithfully flat weakly etale affine extensions with the ring-retraction property. On a resulting Spec B the complementary open is compact, so choose finitely many elements defining its closed complement set-theoretically. The basic opens of these elements and the localization at elements invertible modulo their ideal form a pro-etale cover. Basic opens map to U. The closed-localization ring retains the ring-retraction property, and each of its points specializes to the closed fibre. Compose these covers, keeping every scheme in t.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-wcontractible-closed-localization",
+    "lem-weil-pbc-affine-closed-specialization-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on the closed-localization piece carries every epimorphism of Type(max u (t+1))-valued sheaves to a surjection, by the ring-retraction evaluation theorem, which already permits an independent section universe. Apply the independent-universe abelian specialization theorem to the actual constructed abelian inverse-image adjunction. The closed units of the underlying abelian sheaves of M and N are bijective on this piece. Their naturality square and the assumed isomorphism I(f) show that f is bijective on its sections.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+    "lem-u9-proetale-abelian-specialization-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each piece with a map to U, evaluate the isomorphism given by the actual localizedSystemRestriction(f) at the corresponding slice object. Its section map is exactly f on that piece. On all covering pieces f is therefore bijective. The image and equalizer sieves contain the generated covering sieves, so the underlying abelian sheaf map is locally surjective and locally injective. Mathlib Sheaf.isLocallyBijective_iff_isIso makes it invertible, and SheafOfModules.toSheaf reflects isomorphisms. This also treats empty pieces and zero coefficients.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-u9-proetale-abelian-specialization-universes",
+  "lem-weil-pbc-affine-closed-specialization-localization",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+  "lem-weil-pbc-wcontractible-closed-localization",
+  "lem-weil-pbc-wcontractible-ring-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, affine basic-open/closed-localization covering argument; Tag 09AC, lemma-compute-i-star; Modules on Sites Tag 03DI, direct-sum/sheafification construction. V1 uses the adjunction Hom argument for vanishing and local bijectivity for detection, avoiding the module localization sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtale.*[Cc]losed.*[Pp]roduct|[Oo]pen[Cc]losed.*[Ss]upport",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": []
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso"
+    ]
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion inverse image of proetale abelian sheaves preserves countable products, and complementary open closed restrictions detect isomorphisms in arbitrary universes",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Condensed.instPreservesFiniteProductsOppositeProfiniteVal",
+     "Condensed.ofSheafForgetProfinite",
+     "CondensedSet.ofSheafProfinite",
+     "LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal",
+     "Condensed.ofSheafProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondensed.ofSheafLightProfinite",
+     "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology"
+    ]
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProductsOfUniverses",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor paragraph; independent-universe open extension products, proof steps 1 and 2.",
+   "via": [
+    "lem-sf-ringed-open-extension-products-of-universes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedModuleSupportOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenClosedModuleSupportOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleOpenClosedModuleSupportOfUniverses",
+  "statement": "theorem proEtaleOpenClosedModuleSupportOfUniverses\n    {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (hU : Set.range U.hom = (Set.range i)ᶜ)\n    (R : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}) :\n    let A := (sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R\n    let I := SheafOfModules.toSheaf.{max u (t + 1)} A ⋙\n      Functor.sheafPullbackConstruction.sheafPullback (proEtaleBaseChange i)\n        AddCommGrpCat.{max u (t + 1)} (ProEt.topology X) (ProEt.topology Z)\n    (∀ M, IsZero (I.obj ((SheafOfModules.localizedSystemExtension.{t + 1, t, u}\n      R U).obj M))) ∧\n    (∀ {M N : SheafOfModules.{max u (t + 1)} A} (f : M ⟶ N),\n      IsIso ((SheafOfModules.localizedSystemRestriction.{t + 1, t, u} R U).map f) →\n      IsIso (I.map f) → IsIso f)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T050555-L-239161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T052611-L-457335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

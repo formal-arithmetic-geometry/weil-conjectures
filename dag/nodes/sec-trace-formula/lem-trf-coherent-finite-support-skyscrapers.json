@@ -1,0 +1,326 @@
+{
+ "id": "lem-trf-coherent-finite-support-skyscrapers",
+ "kind": "statement",
+ "title": "Finite-support coherent modules decompose into finite-length skyscrapers",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Suppose $S=\\{x\\in X:F_x\\ne0\\}$ is a finite set of closed points. Write $A_x=\\mathcal O_{X,x}$ and $M_x=F_x$ for $x\\in S$. Each $M_x$ is a nonzero finite $A_x$-module whose localization at every prime of $A_x$ other than its maximal ideal is zero, and it has finite length: there are $r\\ge1$ and $A_x$-submodules\n$$0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M_x$$\nwhose successive quotients are nonzero and have no proper nonzero submodule. Define $\\mathscr S_x(M_x)$ to be the ringed module skyscraper [def-pc-ringed-module-skyscraper], with sections $M_x$ on opens containing $x$ and zero otherwise, restrictions the identity whenever both opens contain $x$, and scalar action through the germ $\\mathcal O_X(U)\\to A_x$. The morphisms sending a section to its germ at each $x\\in S$ assemble into a canonical isomorphism of $\\mathcal O_X$-modules\n$$F\\xrightarrow{\\sim}\\bigoplus_{x\\in S}\\mathscr S_x(M_x).$$\nAt a point $y\\in S$ its stalk map is the identity of $M_y$ under the canonical stalk identifications; outside $S$ it is the map $0\\to0$. If $S$ is empty this says $F=0$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), proof of parts (2) and (4): finite closed-support sheaf argument, in its general coherent-module form; sheaves.tex Tag 009C (lemma-stalk-skyscraper-adjoint); algebra.tex Tag 00L5 (lemma-support-point)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-pc-ringed-module-skyscraper"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in S$. Choose an affine open $U\\ni x$ from the Noetherian affine covering in [pqf-def-locnoeth], put $R=\\mathcal O_X(U)$ and let $\\mathfrak p$ be the prime representing $x$. By [lem-weil-pbc-affine-open-stalk-localization], the germ map identifies $A_x$ with the local ring $R_{\\mathfrak p}$. Since $R$ is Noetherian, [lem-weil-pbc-localization-noetherian] makes $A_x$ Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), localization clause; schemes.tex Tag 01HV (lemma-spec-sheaves), affine stalks"
+   }
+  },
+  {
+   "text": "By [pqf-lem-coherent-ft-locnoeth], $F$ is quasi-coherent of finite type. The hypotheses of [lem-weil-pbc-finite-type-module-stalk-finite] therefore hold and give that $M_x=F_x$ is finite over $A_x$. It is nonzero because $x\\in S$. Put $N=F(U)$. By [lem-sbc-affine-module-germ-localization], for every point $z\\in U$ corresponding to a prime $\\mathfrak r\\subset R$, the actual germ map identifies $F_z$ with $N_{\\mathfrak r}$; in particular $M_x=N_{\\mathfrak p}$, compatibly with the ring germ map of step 1.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-stalk-finite",
+    "lem-sbc-affine-module-germ-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian); schemes.tex Tag 01IB, affine quasi-coherent stalk localization; modules.tex Definition 01B5"
+   }
+  },
+  {
+   "text": "Let $Q\\subset A_x=R_{\\mathfrak p}$ be a prime different from the maximal ideal, and let $\\mathfrak q\\subset R$ be its contraction. Apply [lem-weil-pbc-localization-spectrum-embedding] to $R\\setminus\\mathfrak p$: it gives $\\mathfrak q\\subseteq\\mathfrak p$ and $\\mathfrak q\\ne\\mathfrak p$ (the maximal ideal contracts to $\\mathfrak p$, and contraction is injective). Let $y\\in U$ represent $\\mathfrak q$. If $y\\in S$, it is closed in $X$, hence also in $U=\\operatorname{Spec}R$; thus $\\mathfrak q$ is maximal, contradicting $\\mathfrak q\\subsetneq\\mathfrak p$. Consequently $F_y=0$, so step 2 gives $N_{\\mathfrak q}=0$. Explicit fraction maps identify $(N_{\\mathfrak p})_Q$ with $N_{\\mathfrak q}$: send $(n/s)/(a/t)$ to $tn/(sa)$ and $n/u$ to $(n/1)/(u/1)$. Here $s,t\\notin\\mathfrak p$, and $a/t\\notin Q$ exactly when $a\\notin\\mathfrak q$. The fraction equivalence relation in [def-weil-pbc-module-localization] shows that these maps are well defined and inverse, since clearing their denominators gives the same numerator. Thus $(M_x)_Q=0$.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization); Section 00CM and Definition 07JZ, fraction construction of module localization"
+   }
+  },
+  {
+   "text": "Steps 1--3 meet every hypothesis of [lem-sc-generic-stalk-finite-length]: $A_x$ is Noetherian local, $M_x$ is finite and nonzero, and its support is contained in the maximal ideal. Hence $M_x$ has positive finite length. To obtain exactly the filtration in the statement, use the bounded strict-chain definition in [def-weil-pbc-module-length]. The nonempty set of lengths of chains from $0$ to $M_x$ is bounded in $\\mathbf N$, so choose a chain of greatest length $r$. Since $M_x\\ne0$, $r\\ge1$. Any proper nonzero submodule of $M_i/M_{i-1}$ would have an inverse image strictly between $M_{i-1}$ and $M_i$, lengthening this chain. Each successive quotient is therefore nonzero and simple.",
+   "uses": [
+    "lem-sc-generic-stalk-finite-length",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L5 (lemma-support-point); Definition 02LY (definition-length)"
+   }
+  },
+  {
+   "text": "Write $T_x=\\mathscr S_x(M_x)$ as in [def-pc-ringed-module-skyscraper]. The finite product sheaf $T$ has $T(U)=\\prod_{x\\in S}T_x(U)$: compatible sections glue uniquely in each coordinate, so this is a sheaf. The coordinate inclusions and projections identify it with the finite direct sum: for maps $f_x:T_x\\to H$, the map out is $(t_x)\\mapsto\\sum_x f_x(t_x)$, and its uniqueness follows by writing each tuple as the sum of its coordinate tuples. Define $\\eta_U:F(U)\\to T(U)$ by the germ $s_x$ in coordinate $x$ if $x\\in U$, and zero otherwise. By [def-weil-pbc-module-stalk], germs commute with restriction and satisfy $(as)_x=a_xs_x$. Therefore $\\eta$ is a canonical morphism of $\\mathcal O_X$-modules.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition 009A (definition-skyscraper-sheaf), case (4); Lemma 009C (lemma-stalk-skyscraper-adjoint), explicit germ map"
+   }
+  },
+  {
+   "text": "For $y\\in S$, the open set $V=X\\setminus(S\\setminus\\{y\\})$ contains $y$, because all the finitely many excluded points are closed. Every neighbourhood of $y$ can be intersected with $V$, and on every resulting neighbourhood $W$ one has $T(W)=M_y$, with identity restriction maps. By the germ description in [def-weil-pbc-module-stalk], evaluation of the $y$-coordinate identifies $T_y$ with $M_y$: every germ is represented there, equal coordinates give equal germs on the intersection, and any $m\\in M_y$ is represented by the corresponding section on $V$. In these coordinates $\\eta_y$ sends $s_y$ to $s_y$, hence is the identity. If $y\\notin S$, the open neighbourhood $X\\setminus S$ has $T(W)=0$ on all its subopens, so $T_y=0$; by definition of $S$, also $F_y=0$. This proves all the claimed stalk identifications without invoking a commutation of stalks with an infinite product.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009B (lemma-skyscraper-stalks); direct neighbourhood calculation for finite closed support"
+   }
+  },
+  {
+   "text": "Every stalk map of $\\eta$ is bijective by step 6. Apply [lem-weil-pbc-module-iso-on-stalks] to conclude $F\\xrightarrow{\\sim}T=\\bigoplus_{x\\in S}\\mathscr S_x(M_x)$. For $S=\\varnothing$, step 5 defines $T$ to be the zero module sheaf and step 6 still gives bijectivity $0\\to0$ at every point, so the same criterion gives $F=0$.",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 007T (lemma-points-exactness), part (3), applied to underlying sheaves; modules.tex Tag 01AG (lemma-abelian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-pbc-module-localization",
+  "lem-sc-generic-stalk-finite-length",
+  "def-weil-pbc-module-length",
+  "def-pc-ringed-module-skyscraper",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (2),(4), expanded in the general finite-support coherent-module case using algebra.tex 00L5 and sheaves.tex 009A--009C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module sheaf on a locally Noetherian scheme supported at finitely many closed points is the direct sum of skyscrapers of its finite length stalks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R}\\n  {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBiject\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules equipped with local generators data\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {x : ↥X},\\n  IsNoetherianRing ↑(X.presheaf.stalk x)\", \"doc\": \"For any locally Noetherian scheme $ X $, the stalk of its structure sheaf at any point $ x $ is a Noetherian ring. This follows from the property that a scheme being locally Noetherian implies every p\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat}\\n  {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat}\\n  {inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$ with finitely generated sections $\\\\sigma$, the index set $\\\\s\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"} Read Mathlib/Topology/Sheaves/Skyscraper.lean:174-184,287-320. The hits give individual skyscraper stalks and the stalk adjunction, not the finite-support decomposition together with finite-length coherent stalks. Sheaf finite-presentation and local-generator APIs do not state the claimed decomposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf with finite closed support is canonically isomorphic to the finite sum of the skyscraper sheaves of its stalks and the stalk modules have finite length",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"skyscraperSheaf\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \": Sheaf C X\", \"doc\": \"The skyscraper sheaf at point $ p_0 $ in a topological space $ X $, with value $ A $ in a category $ \\\\mathcal{C} $ having a terminal object, is the sheaf defined by the skyscraper presheaf that assign\"}\n  {\"name\": \"stalkSkyscraperSheafAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \"[HasColimits C] : Sheaf.forget C X ⋙ Presheaf.stalkFunctor _ p₀ ⊣ skyscraperSheafFunctor p₀\", \"doc\": \"For a topological space $X$ with a fixed point $p_0$ and a category $\\\\mathcal{C}$ with colimits, the skyscraper sheaf functor at $p_0$ is left adjoint to the composition of the forgetful functor from \"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteCoproducts D] : HasFiniteCoproducts (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ has finite coproducts, then the category of sheaves on a site (with respect to a Grothendieck topology $J$) with values in $\\\\mathcal{D}$ also has finite coproducts.\"}\n  {\"name\": \"skyscraperPresheaf_isSheaf\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \": (skyscraperPresheaf p₀ A).IsSheaf\", \"doc\": \"The skyscraper presheaf at point $ p_0 $ in a topological space $ X $, taking values in a category $ \\\\mathcal{C} $ with a terminal object, satisfies the sheaf condition. Specifically, for any open set\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"} Read Mathlib/Topology/Sheaves/Skyscraper.lean:174-184,287-320. The hits give individual skyscraper stalks and the stalk adjunction, not the finite-support decomposition together with finite-length coherent stalks. Sheaf finite-presentation and local-generator APIs do not state the claimed decomposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"skyscraper\", \"stalk\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"skyscraperPresheafStalkAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] : TopCat.Presheaf.stalkFunctor C p₀ ⊣ skyscraperPresheafFunctor p₀\", \"doc\": \"`skyscraperPresheafFunctor` is the right adjoint of `Presheaf.stalkFunctor`\"}\n  {\"name\": \"skyscraperPresheafStalkOfNotSpecializesIsTerminal\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] (A : C) [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : ¬p₀ ⤳ y) : CategoryTheory.Limits.IsTerminal ((skyscraperPresheaf p₀ A).stal\", \"doc\": \"If `y ∉ closure {p₀}`, then the stalk of `skyscraperPresheaf p₀ A` at `y` is a terminal object\"}\n  {\"name\": \"skyscraperPresheafStalkOfSpecializes\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] (A : C) [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : p₀ ⤳ y) : (skyscraperPresheaf p₀ A).stalk y ≅ A\", \"doc\": \"If `y ∈ closure {p₀}`, then the stalk of `skyscraperPresheaf p₀ A` at `y` is `A`.\"}\n  {\"name\": \"skyscraperPresheafStalkOfNotSpecializes\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] (A : C) [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : ¬p₀ ⤳ y) : (skyscraperPresheaf p₀ A).stalk y ≅ ⊤_ C\", \"doc\": \"If `y ∉ closure {p₀}`, then the stalk of `skyscraperPresheaf p₀ A` at `y` is isomorphic to a\\nterminal object.\"}\n  {\"name\": \"stalkSkyscraperSheafAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] : (TopCat.Sheaf.forget C X).comp (TopCat.Presheaf.stalkFunctor C p₀) ⊣ skyscraperSheafFunctor p₀\", \"doc\": \"Taking stalks of a sheaf is the left adjoint functor to `skyscraperSheafFunctor`\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.fromStalk\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕 ⟶ skyscraperPresheaf p₀ c) : 𝓕.stalk p₀ ⟶ c\", \"doc\": \"If `f : 𝓕 ⟶ skyscraperPresheaf p₀ c` is a natural transformation, then there is a morphism\\n`𝓕.stalk p₀ ⟶ c` defined as the morphism from colimit to cocone at `c`.\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕.stalk p₀ ⟶ c) : 𝓕 ⟶ skyscraperPresheaf p₀ c\", \"doc\": \"If `f : 𝓕.stalk p₀ ⟶ c`, then a natural transformation `𝓕 ⟶ skyscraperPresheaf p₀ c` can be\\ndefined by: `𝓕.germ p₀ ≫ f : 𝓕(U) ⟶ c` if `p₀ ∈ U` and the unique morphism to a terminal object\\nif `p₀ ∉ U`.\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.counit\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] : (skyscraperPresheafFunctor p₀).comp (TopCat.Presheaf.stalkFunctor C p₀) ⟶ CategoryTheory.Functo\", \"doc\": \"The counit in `Presheaf.stalkFunctor ⊣ skyscraperPresheafFunctor`\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕.stalk p₀ ⟶ c) : StalkSkyscraperPresheafAdjunctionAuxs.fr\", \"doc\": \"\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.to_skyscraper_fromStalk\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕 ⟶ skyscraperPresheaf p₀ c) : StalkSkyscraperPresheafAdju\", \"doc\": \"\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.counit_app\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] (c : C) : (StalkSkyscraperPresheafAdjunctionAuxs.counit p₀).app c = (skyscraperPresheafStalkOfSpe\", \"doc\": \"\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.unit\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \" {X : TopCat} (p₀ : ↑X) [(U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v} [CategoryTheory.Category.{u, v} C] [CategoryTheory.Limits.HasTerminal C] [CategoryTheory.Limits.HasColimits C] : CategoryTheory.Functor.id (TopCat.Presheaf C X) ⟶ (TopCat.Presheaf.stalkFunctor C p₀).comp (sky\", \"doc\": \"The unit in `Presheaf.stalkFunctor ⊣ skyscraperPresheafFunctor`\"} Read Mathlib/Topology/Sheaves/Skyscraper.lean:174-184,287-320. The hits give individual skyscraper stalks and the stalk adjunction, not the finite-support decomposition together with finite-length coherent stalks. Sheaf finite-presentation and local-generator APIs do not state the claimed decomposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper|finiteLength|finite_length",
+   "results": "[grep] OK 0 hit(s) Read Mathlib/Topology/Sheaves/Skyscraper.lean:174-184,287-320. The hits give individual skyscraper stalks and the stalk adjunction, not the finite-support decomposition together with finite-length coherent stalks. Sheaf finite-presentation and local-generator APIs do not state the claimed decomposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The germ maps identify a sheaf supported on a finite set of closed points with the product of its stalk skyscraper sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕 ⟶ skyscraperPresh\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a point $p_0 \\\\in X$, and an object $c$ in a category $\\\\mathcal{C}$ with colimits, given a natural transformation $f: \\\\mathcal{F} \\\\to \\\\text{Skys\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕 ⟶ skyscraperPresh\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a point $p_0 \\\\in X$, and a natural transformation $f: \\\\mathcal{F} \\\\to \\\\text{Skyscraper}_{p_0}(c)$ to the skyscraper presheaf at $p_0$ with valu\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {𝓕 : TopCat.Presheaf C X} {c : C} (f : 𝓕.stalk p₀ ⟶ c)\\n  (\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$ with values in a category $\\\\mathcal{C}$ having a terminal object and colimits, a point $p_0 \\\\in X$, and a morphism $f: \\\\mathcal{F}_{p_0} \\\\to c$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"germ_skyscraperPresheafStalkOfSpecializes_hom\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] (A : C) [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : p₀ ⤳ y) (U : TopologicalSpace.Opens \", \"doc\": \"For a skyscraper presheaf $\\\\mathcal{F}_{p_0}$ at point $p_0$ with value $A$ on a topological space $X$, if $y$ specializes to $p_0$, then the composition of the germ map $\\\\mathcal{F}_{p_0}(U) \\\\to \\\\mat\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_germ_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U) (x_1 : CategoryTheory.ToType (ModuleCat.of R ↑M)),\\n  (CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.ger\", \"doc\": \"Let $R$ be a commutative ring, $M$ be an $R$-module, and $\\\\widetilde{M}$ be the sheaf of modules on the prime spectrum $\\\\operatorname{Spec}(R)$ associated to $M$. Let $U$ be an open subset of $\\\\operat\"}\n  {\"name\": \"germ_skyscraperPresheafStalkOfSpecializes_hom_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] (A : C) [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : p₀ ⤳ y) (U : TopologicalSpace.Opens \", \"doc\": \"For a skyscraper presheaf at point $ p_0 $ with value $ A $ in a category $ \\\\mathcal{C} $, if $ p_0 $ specializes to $ y $, then the composition of the germ map $ \\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_y $, t\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_germ\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.germ U x hx) =\\n    ModuleC\", \"doc\": \"For an open subset $ U $ of $\\\\operatorname{Spec}(R)$ containing a point $ x $, the composition of the restriction map $ M_U \\\\to \\\\widetilde{M}(U) $ followed by the germ map $ \\\\widetilde{M}(U) \\\\to \\\\wide\"} Read Mathlib/Topology/Sheaves/Skyscraper.lean:174-184,287-320. The hits give individual skyscraper stalks and the stalk adjunction, not the finite-support decomposition together with finite-length coherent stalks. Sheaf finite-presentation and local-generator APIs do not state the claimed decomposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper|finiteLength|finite_length",
+   "results": "25 actual hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean. Read Mathlib/Topology/Sheaves/Skyscraper.lean:174--184, 280--320: individual skyscraper stalks and adjunction only. No finite-support coherent-module decomposition with finite-length stalks. The other hits concern generators, finite presentation, flasqueness, and module length.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf supported on finitely many closed points is isomorphic by the germ maps to the sum of its stalk skyscraper sheaves",
+   "results": "8 actual hits: StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk, skyscraperSheaf, StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk_assoc, TopCat.Presheaf.Γgerm, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf, stalkSkyscraperSheafAdjunction, skyscraperPresheafStalkOfSpecializes, germ_skyscraperPresheafStalkOfSpecializes_hom. Read Mathlib/Topology/Sheaves/Skyscraper.lean:174--184, 280--320: individual skyscraper stalks and adjunction only. No finite-support coherent-module decomposition with finite-length stalks. The other hits concern generators, finite presentation, flasqueness, and module length.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"skyscraper\", \"stalk\"",
+   "results": "12 actual hits: skyscraperPresheafStalkAdjunction, skyscraperPresheafStalkOfNotSpecializesIsTerminal, skyscraperPresheafStalkOfSpecializes, skyscraperPresheafStalkOfNotSpecializes, stalkSkyscraperSheafAdjunction, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf, StalkSkyscraperPresheafAdjunctionAuxs.counit. Read Mathlib/Topology/Sheaves/Skyscraper.lean:174--184, 280--320: individual skyscraper stalks and adjunction only. No finite-support coherent-module decomposition with finite-length stalks. The other hits concern generators, finite presentation, flasqueness, and module length.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module sheaf with finite closed support is the direct sum of skyscrapers of its stalks, and those stalks have finite length",
+   "results": "8 actual hits: SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.Presentation.IsFinite, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.isFinitePresentation. Read Mathlib/Topology/Sheaves/Skyscraper.lean:174--184, 280--320: individual skyscraper stalks and adjunction only. No finite-support coherent-module decomposition with finite-length stalks. The other hits concern generators, finite presentation, flasqueness, and module length.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalization-singular-skyscraper",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normalization exact sequence in the numerical exceptional-fibre argument: local finite length and germ-map skyscraper decomposition (old steps 7--8).",
+   "via": [
+    "lem-trf-normalization-singular-skyscraper",
+    "lem-trf-nodal-normalization-quotient",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coherent-finite-support-skyscrapers",
+  "worker": "stage1",
+  "summary": "Expanded the general finite closed-support argument behind Stacks 0C1R into seven steps using existing DAG tools only. Verified Noetherian finite stalks, localized support by explicit fractions, composition series from bounded chain length, finite direct sum construction and actual germ-map stalk identities. No statement change and no new nodes.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, via the existing normalization-quotient chain: realizes the local finite-length and skyscraper decomposition inputs of the normalization exact sequence (the from.place inherited on this item). The latest blueprint has no separate coherent finite-support statement; its contracting-correspondence route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Its Noetherian affine-cover definition supplies the chosen chart; the unit contains no alternative notion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine-chart identification of structure stalks with prime localizations, needed for the local finite-length argument."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic commutative algebra tool making the structure stalk Noetherian; not a replacement for a unit step."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherent/quasi-coherent finite-type equivalence needed to use affine module stalk localization."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-stalk-finite",
+    "why": "Generic finite-type sheaf stalk-finiteness tool."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Generic affine quasi-coherent module germ-localization tool; the trace unit has no such affine identification."
+   },
+   {
+    "node": "lem-weil-pbc-localization-spectrum-embedding",
+    "why": "Generic prime-localization correspondence, used only for support of a stalk module."
+   },
+   {
+    "node": "def-weil-pbc-module-localization",
+    "why": "Fraction definition used to give the iterated-localization identification explicitly."
+   },
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Generic Noetherian local algebra criterion for finite length; this proves a local input, not the sheaf decomposition."
+   },
+   {
+    "node": "def-weil-pbc-module-length",
+    "why": "Bounded-chain meaning of finite length, used to extract a composition series."
+   },
+   {
+    "node": "def-pc-ringed-module-skyscraper",
+    "why": "Existing definition of the ringed module skyscraper, fixing scalar action and restriction maps."
+   },
+   {
+    "node": "def-weil-pbc-module-stalk",
+    "why": "Existing germ and equality-of-germs definition used for the map and finite-support stalk calculation."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Generic Zariski module-sheaf isomorphism detection, applied to the explicitly constructed germ map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-pbc-module-localization",
+  "lem-sc-generic-stalk-finite-length",
+  "def-weil-pbc-module-length",
+  "def-pc-ringed-module-skyscraper",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-36dfc123b",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-36dfc123b (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report, no new nodes. The statement, stmt_deps and source are byte-identical to the unsplit node that Q96 created; only the proof fields, status, split_report and searches changed. There is no repair note, so this is a first split. No Lean declaration exists for the item in slopmaster2. Sources read: varieties.tex:8819, Tag 0C1R. It covers only the normalization case, and the general form is marked as an agent proof. Also algebra.tex:14974, Tag 00L5, and the labels 009B/009C, checked against tags/tags. Statement tests: closedness is needed (the DVR with F=O has finite support {η,s} and the conclusion fails); k[t]/(t(t-1)) on A^1 decomposes as k_0⊕k_1; A/(t^2) has length 2; empty support gives F=0. Step 1: locnoeth chart plus affine-open-stalk-localization (c), which supplies hypotheses (a)-(c) of localization-noetherian. Step 2: coherent-ft-locnoeth, then finite-type stalk finiteness (the same finite-type notion as pqf-def-coherent), then affine-module-germ-localization, which needs quasi-coherence only. Step 3: spectrum-embedding gives q⊊p; a point of S would be closed, forcing q maximal, so F_y=0 and N_q=0. I checked the explicit fraction maps (N_p)_Q↔N_q by hand: well-definedness uses the same cross-multiplied expression killed by uw∉q. Step 4: generic-stalk-finite-length (00L5) gives finite length; a maximal chain under the bounded-chain definition has simple quotients. Steps 5-6 are elementary: finite product and coproduct, germ map, η O-linear by (as)_x=a_x s_x, stalks computed through the opens X∖(S∖{y}) and X∖S. Step 7: module-iso-on-stalks; S empty gives F=0. Duplicate search: lem-sfb-coherent-zero-dimensional-support, lem-pc-zero-support-finite-scheme, lem-pc-chi-zero-dim-support, lem-trf-curve-normalization-coherent-support, lem-pur-module-sheaf-coproduct-local-support and the other skyscraper hits; none is a duplicate. All 13 declared tool_uses are accepted as generic tools, and no unit step is replaced. No SGA source. The only citer, lem-trf-normalization-singular-skyscraper step 3, uses the delivered clauses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFiniteSupportSkyscrapers",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_finite_support_skyscrapers",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteSupportSkyscrapers.lean",
+  "statement": "theorem coherent_finite_support_skyscrapers (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (S : Finset X) (hS : ∀ x : X, x ∈ S ↔ ¬ Subsingleton (F.presheaf.stalk x)) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X)) : (∀ x ∈ S, Nontrivial (F.presheaf.stalk x) ∧ Module.Finite (X.presheaf.stalk x) (F.presheaf.stalk x) ∧ (∀ p : PrimeSpectrum (X.presheaf.stalk x), p.asIdeal ≠ IsLocalRing.maximalIdeal (X.presheaf.stalk x) → Subsingleton (LocalizedModule p.asIdeal.primeCompl (F.presheaf.stalk x))) ∧ ∃ c : CompositionSeries (Submodule (X.presheaf.stalk x) (F.presheaf.stalk x)), 0 < c.length ∧ c.head = ⊥ ∧ c.last = ⊤) ∧ (∃ b : Bicone (C := X.Modules) (fun x : {x : X // x ∈ S} ↦ SheafOfModules.ringedModuleSkyscraper X.toRingedSpace x.val ((RingedSpace.moduleStalkFunctor X.toRingedSpace x.val).obj F)), Nonempty b.IsBilimit ∧ ∃ e : F ≅ b.pt, (∀ (x : {x : X // x ∈ S}) (U : X.Opens) (hx : x.val ∈ U) (s : F.val.obj (op U)), ((e.hom ≫ b.π x).val.app (op U) s) ⟨hx⟩ = F.presheaf.germ U x.val hx s) ∧ (∀ y : {x : X // x ∈ S}, ∃ v : b.pt.presheaf.stalk y.val ≃ₗ[X.presheaf.stalk y.val] F.presheaf.stalk y.val, (∀ (U : X.Opens) (hy : y.val ∈ U) (t : b.pt.val.obj (op U)), v (b.pt.presheaf.germ U y.val hy t) = ((b.π y).val.app (op U) t) ⟨hy⟩) ∧ ∀ m : F.presheaf.stalk y.val, v (e.hom.stalkLinearMap y.val m) = m) ∧ (∀ y : X, y ∉ S → Subsingleton (F.presheaf.stalk y) ∧ Subsingleton (b.pt.presheaf.stalk y) ∧ e.hom.stalkLinearMap y = 0)) ∧ (S = ∅ → IsZero F)",
+  "branch": "sheaf-dag",
+  "by": "Q100",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The coherence hypothesis hF uses the upstream Stacks Tag 01BV notion AlgebraicGeometry.RingedSpace.IsCoherent from WeilConjectures.AlgebraicGeometry.Coherent, as the coherent clause of pqf-def-coherent states. On the locally Noetherian scheme X this is equivalent to the landed Q25 IsQuasiCoherentFiniteType notion. The landed pqf-def-coherent lean record is retained unchanged; this delivery does not rebind it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c874d8e8f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 548ce00bcd72: Lean module byte-identical to the previously reviewed one; the pqf-def-coherent, pqf-def-locnoeth and def-pc-ringed-module-skyscraper records equal live field for field (pqf-def-coherent no longer rebound); item node differs from live only in lean, with a lean.note documenting hF = upstream Stacks-01BV RingedSpace.IsCoherent (Coherent.lean:38-48, finite type and finite-type kernels; equivalent to the recorded qc+finite type on locally Noetherian X). lean.statement verbatim in the file. Clause check re-confirmed: exact closed support S, Nontrivial/Module.Finite stalks, LocalizedModule vanishing at nonmaximal primes, CompositionSeries 0<length head bot last top, recorded ringedModuleSkyscraper summands, Bicone+IsBilimit, e pinned by germs, v pinned on germs with v∘stalk(e)=id, zero off S, S=∅→IsZero F; single universe u; sorry only; docstrings with source and blueprint id; report has Worker report, Second reading and H13 repair sections. No compile (no file changed). Maintainer note: Q25's pqf-def-coherent record is weaker than the node's coherent clause; left untouched as required."
+ }
+}

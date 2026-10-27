@@ -17,9 +17,147 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any finite extension $W'/W_0$. It is the integral closure of $W_0$ in $K'$ by the uniqueness clause of [lem-per-complete-dvr-finite-normalization]. It is integral over $W_0$ by [lem-weil-pbc-finite-algebra-is-integral], and finite free by [lem-sc-dvr-fg-torsionfree-free]: it is a finite module embedded in the field $K'$, hence torsion-free. Put $H=F\\otimes_{K_0}K'$ and let $C$ be the integral closure of $T$ in $H_{\\mathrm{red}}$. By [lem-sfb-dvr-algebraic-normalization-structure], $H_{\\mathrm{red}}$ is a finite product of fields, $C$ is a finite product of integrally closed one-dimensional domains, and every maximal localization $C_q$ is a DVR with maximal contraction in $W'$. The image of $T\\otimes W'$ is integral over $T$: tensor its finite generating family and use the finite-algebra lemma. Thus [lem-weil-pbc-integral-transitive] shows its integral closure in each field factor equals the integral closure of $T$ there. Integral equations hold coordinatewise in a finite product (multiply the finitely many monic equations for the converse). Consequently $C=\\prod_E B_E$.",
+   "uses": [
+    "lem-per-complete-dvr-finite-normalization",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction (1)-(4),(7); ILO IV 3.1.1 normalization convention"
+   }
+  },
+  {
+   "text": "Choose a $W_0$-basis of $W'$. Then $T\\otimes_{W_0}W'$ is a finite direct sum of copies of $T$ as a $T$-module. Its map to $F\\otimes_{W_0}W'$ is injective, coordinate by coordinate, since $T\\hookrightarrow F$. Inverting a uniformizer of $W_0$ identifies the latter ring with $H$ by [lem-weil-pbc-localization-tensor] (the fraction field of a DVR is obtained by inverting its uniformizer, by [lem-weil-pbc-dvr-unit-times-uniformizer-power]). The extension $K'/K_0$ is finite separable: characteristic zero gives separability by [lem-weil-pbc-char-zero-field-extension-separable], whose definition on a finite algebraic extension has empty transcendence basis [def-weil-pbc-separable-field-extension]. Hence [lem-weil-pbc-finite-separable-tensor-field-reduced] makes $H$ reduced, so its subring $T\\otimes W'$ is reduced. This proves (2), and identifies $H=H_{\\mathrm{red}}$ with the product in Step 1.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO IV Remark 3.1.3: finite-free injection into the generic fibre, whose reducedness is separability"
+   }
+  },
+  {
+   "text": "For the rings $C,W'$ in Step 1, goodness is equivalent to $\\mathfrak m_{W'}C_q=qC_q$ for every maximal $q$ of $C$. Indeed the maximal contraction is $\\mathfrak m_{W'}$, and [lem-weil-pbc-dvr-unit-times-uniformizer-power] writes $\\pi'=ut^e$ in the DVR $C_q$, with $u$ a unit and $e\\geq1$. The quotient by $\\pi'$ is reduced exactly when $e=1$: for $e>1$ the nonzero class of $t$ is nilpotent, whereas for $e=1$ the quotient is a field. Reducedness can be tested at these maximal ideals: if a nonzero nilpotent class $x$ survived in $C/\\pi'C$, choose a maximal ideal containing its proper annihilator; $x$ remains nonzero there, since a denominator annihilating $x$ would belong to that ideal. Conversely a localization of a reduced ring is reduced (clear denominators in a nilpotence equation). Finally $C/\\pi'C=\\prod_E B_E/\\pi'B_E$, so reducedness is coordinatewise. Replacing $\\pi'$ by a unit multiple leaves its ideal unchanged.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction (3); ILO IV 3.1.2: reduced special fibre is ramification index one"
+   }
+  },
+  {
+   "text": "Every element of $\\kappa_{\\mathrm{perf}}$ is separable algebraic over $k_0$: for any algebraic element, its finite simple extension over the perfect field $k_0$ has an empty separating transcendence basis by [lem-weil-pbc-perfect-field-separating-basis]. Apply [lem-sfb-epp-strict-complete-reduction] to $W_0\\to T$. It gives a complete pair $A\\to B$, residue fields $k\\subset l$ with $k$ algebraically closed and $k=l_{\\mathrm{perf}}$, and descent of a finite weak solution to the original pair. Its fraction fields have characteristic zero because the maps are injective; thus the equal-characteristic restriction on descent does not apply. Apply [lem-sfb-epp-compatible-coefficient-dvrs] to $A\\to B$ to obtain a complete coefficient DVR $A_0$, a complete DVR $D$, maps $A_0\\to A$, $A_0\\to D\\to B$, residue fields $k,l$, ramification index one for $A_0\\to D$, and finite extension $\\operatorname{Frac}(B)/\\operatorname{Frac}(D)$.",
+   "uses": [
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-compatible-coefficient-dvrs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp: strict completion and coefficient-ring reductions; Tag 09ET, lemma-solution-after-strict-henselization"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-epp-finite-coefficient-triple] to $A_0\\to D\\to B$. Its completeness, algebraically closed lower residue field, perfect-core equality, index-one hypothesis, and finite upper fraction-field extension are exactly the outputs of Step 4. Obtain a finite weak solution $N/\\operatorname{Frac}(A_0)$. Write $K_A=\\operatorname{Frac}(A)$ and $M=\\operatorname{Frac}(B)$. By [lem-sfb-dvr-algebraic-normalization-structure] choose a field factor $P$ of $(K_A\\otimes_{\\operatorname{Frac}(A_0)}N)_{\\mathrm{red}}$; it is finite over $K_A$. Tensor associativity identifies the factors of $M\\otimes_{K_A}P$ with a subset of the factors of $M\\otimes_{\\operatorname{Frac}(A_0)}N$. These tensor algebras are reduced by characteristic-zero separability and [lem-weil-pbc-finite-separable-tensor-field-reduced], so no further reduction changes the identification.",
+   "uses": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09F8, lemma-special-case; 09F9, theorem-epp: coefficient DVR and passage to the original lower fraction field"
+   }
+  },
+  {
+   "text": "For an upper local branch $U$ of the tensor algebra in Step 5, the weak solution $N$ supplies a lower local DVR $S$ (the integral closure of $A_0$ in $N$ localized at the contraction) with $\\mathfrak m_SU=\\mathfrak m_U$. The normalization-structure theorem supplies the intermediate local DVR $R$ from the integral closure of $A$ in $P$. The maps $S\\to R\\to U$ exist because the monic equations defining each lower integral closure also hold over the next base; localization at contractions makes them local. With uniformizers $s,r,t$, write $s=ar^i$ and $r=bt^j$, with $a,b$ units and $i,j\\geq1$, by [lem-weil-pbc-dvr-unit-times-uniformizer-power]. Since $sU=\\mathfrak m_U$, $ij=1$, whence $j=1$. Thus $P$ is a weak solution for $A\\to B$. The descent clause of [lem-sfb-epp-strict-complete-reduction] supplies a finite weak solution $K'/K_0$ for $W_0\\to T$. Its integral closure $W'$ is a finite complete DVR by [lem-per-complete-dvr-finite-normalization]. Step 3 converts the weak-solution equalities into goodness and proves (1).",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-per-complete-dvr-finite-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp: intermediate-ramification-index argument and descent; Tag 09EM"
+   }
+  },
+  {
+   "text": "Now let $W'$ be any good extension and $W''$ as in (3). Its given map is injective: a nonzero kernel would contain a power of a uniformizer of $W'$, and hence a nonzero element of $W_0$, contradicting injectivity on $W_0$. By Step 1 and the finite residue-field clause of [lem-sfb-dvr-algebraic-normalization-structure], the residue field $k'$ of $W'$ is finite over $k_0$. It is perfect by [lem-per-algebraic-extension-perfect]. For every maximal $q$ of $C=\\prod B_E$, Step 3 gives $\\mathfrak m_{W'}C_q=qC_q$. Every finitely generated subextension of $\\kappa(q)/k'$ has a separating basis by [lem-weil-pbc-perfect-field-separating-basis], so this residue extension is separable in [def-weil-pbc-separable-field-extension]. Apply [lem-sfb-dvr-index-one-separable-base-change] to $W'\\to C_q$ and the finite extension $K''/K'$. Every resulting normalized local branch has ramification index one over $W''$: its lower normalization is $W''$ by [lem-per-complete-dvr-finite-normalization]. Only the unconditional local conclusions of the base-change lemma are used, with no extra Noetherian tensor hypothesis.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-per-algebraic-extension-perfect",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-sfb-dvr-index-one-separable-base-change",
+    "lem-per-complete-dvr-finite-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "ILO IV 4.2.3 stability sentence; Tag 09EQ, lemma-formally-smooth-goes-up; Tag 09E7, lemma-extension-dvrs-formally-smooth"
+   }
+  },
+  {
+   "text": "To identify all branches in Step 7, put $H''=F\\otimes_{K_0}K''=H\\otimes_{K'}K''$ and let $C''$ be the integral closure of $T$ in $H''$. A field factor $E''$ of $H''$ comes from a field factor $E$ of $H$, since tensoring its finite product decomposition gives the displayed equality. In $E''$, integral closure of $T$ equals integral closure of $B_E$: one inclusion follows from the same monic equation, the reverse from [lem-weil-pbc-integral-transitive], since $B_E/T$ is integral. Take any maximal $q''$ on this domain factor of $C''$. Its contraction $q$ in $B_E$ is maximal by [lem-weil-pbc-integral-maximal-contracts-maximal]. By [lem-weil-pbc-integral-closure-commutes-localization], localizing the base $B_E$ at $q$ and then the closure at $q''$ gives exactly $C''_{q''}$. Adjoining $W''$ does not alter these closures: $W''$ is integral over $W_0$, and transitivity gives both inclusions as in Step 1. Consequently $C''_{q''}$ is one of the normalized local branches of $C_q\\otimes_{W'}W''$ treated in Step 7. It has ramification index one. Step 3 applied to $W''$ now gives goodness for $W''$, proving (3).",
+   "uses": [
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "ILO IV 4.2.3 finite-base-change stability; Tag 09EQ; Algebra Tag 0307, integral-closure localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-sfb-epp-strict-complete-reduction",
+  "lem-sfb-epp-compatible-coefficient-dvrs",
+  "lem-sfb-epp-finite-coefficient-triple",
+  "def-weil-pbc-integral-closure",
+  "lem-per-algebraic-extension-perfect",
+  "lem-sfb-dvr-index-one-separable-base-change",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IV 3.1.2–3.1.3 and 4.2.3; proof of Epp expanded using Stacks Tags 09F9, 09F8, 09ET, 09EM, 09EQ and 09E7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +186,52 @@
    "results": "4 hits: Mathlib/RingTheory/Flat/Equalizer.lean:316,324,343; Mathlib/RingTheory/Smooth/Fiber.lean:93. Search log digest 16ee2dbe9a9d3f1a.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|eliminat.*ramification|normalized.*base.*change",
+   "results": "{\"t\": \"2026-10-24T07:58:37Z\", \"tool\": \"grep\", \"query\": \"Epp|eliminat.*ramification|normalized.*base.*change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/LSeries/ZMod.lean\", \"Mathlib/NumberTheory/Height/NumberField.lean\", \"Mathlib/Util/AtLocation.lean\", \"Mathlib/Util/AtLocation.lean\", \"Mathlib/Util/AtLocation.lean\", \"Mathlib/Util/AtLocation.lean\", \"Mathlib/Util/AtLocation.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Span.lean\"], \"digest\": \"c7eca532607bea1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsReduced",
+   "results": "{\"t\": \"2026-10-24T07:58:37Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of a complete mixed characteristic DVR eliminates ramification for a DVR whose residue perfect core is algebraic over the base residue field",
+   "results": "{\"t\": \"2026-10-24T07:58:37Z\", \"tool\": \"leansearch\", \"query\": \"A finite extension of a complete mixed characteristic DVR eliminates ramification for a DVR whose residue perfect core is algebraic over the base residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdxIn_eq_ramificationIdx\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"IsUnramifiedAtInfinitePlaces.bot\", \"Ideal.sum_ramification_inertia\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.Factors.finiteDimensional_quotient_pow\"], \"digest\": \"e7fb8e406e063850\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp elimination of ramification over a complete mixed characteristic discrete valuation ring with perfect residue field and algebraic perfect core gives reduced normalized special fibre stable under finite extensions",
+   "results": "{\"t\": \"2026-10-24T07:58:39Z\", \"tool\": \"leanfinder\", \"query\": \"Epp elimination of ramification over a complete mixed characteristic discrete valuation ring with perfect residue field and algebraic perfect core gives reduced normalized special fibre stable under finite extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsUnramifiedAt\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"dcc34f476f2ee82b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local map of discrete valuation rings ramification can be killed by finite extension of the base fraction field and stays killed after further extensions over perfect residue fields",
+   "results": "{\"t\": \"2026-10-24T07:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a local map of discrete valuation rings ramification can be killed by finite extension of the base fraction field and stays killed after further extensions over perfect residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdx_le_finrank\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"7dcd11cb23c50754\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|eliminat.*ramification|weakly.unramified",
+   "results": "{\"t\": \"2026-10-24T08:01:00Z\", \"tool\": \"grep\", \"query\": \"Epp|eliminat.*ramification|weakly.unramified\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"410a93be9a576780\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern existing unramifiedness or ramification indices, and do not produce an Epp extension or the three clauses here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-epp-finite-family-traits",
@@ -63,7 +243,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Simultaneous Epp base change for finitely many traits in ILO IV 4.2.3.",
+   "place": "Historical supporting input to the creation chain from lem-per-artin-gabber-affine-curve through finite-coefficient local duality, Cohen–Gabber presentations and lem-per-epp-finite-family-traits: the single-trait application and finite-base-change stability in ILO IV 4.2.3, using IV 3.1.2–3.1.3. The current latest ancestor proof does not itself mention Epp.",
    "via": [
     "lem-per-epp-finite-family-traits",
     "lem-per-mixed-reduced-special-fibre-cover",
@@ -78,5 +258,88 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-epp-single-trait-base-change",
+  "worker": "stage1",
+  "summary": "Split all three clauses in eight steps using existing Epp reductions and normalization/base-change tools; no new nodes. Wrote the index-one criterion, coefficient-to-original-base argument, and localization/transitivity comparison explicitly. Statement unchanged.",
+  "blueprint": "Historical supporting input to the existing creation chain from lem-per-artin-gabber-affine-curve (its current latest proof does not mention Epp); ILO IV 4.2.3 supporting the finite-coefficient local-duality/partial-algebraization route recorded in blueprint.from.place. Whole-blueprint searches Epp, ramification, separable tensor, discrete valuation, perfect core found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dvr-algebraic-normalization-structure",
+    "why": "Generic algebra/valuation tool used in steps 1,5,6,7; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "why": "Generic algebra/valuation tool used in steps 2,5; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   },
+   {
+    "node": "lem-sfb-epp-strict-complete-reduction",
+    "why": "Generic algebra/valuation tool used in steps 4,6; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   },
+   {
+    "node": "lem-sfb-epp-compatible-coefficient-dvrs",
+    "why": "Generic algebra/valuation tool used in steps 4; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   },
+   {
+    "node": "lem-sfb-epp-finite-coefficient-triple",
+    "why": "Generic algebra/valuation tool used in steps 5; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   },
+   {
+    "node": "lem-sfb-dvr-index-one-separable-base-change",
+    "why": "Generic algebra/valuation tool used in steps 7; the unit has no alternative for this auxiliary Epp calculation, and no unit-level argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-sfb-epp-strict-complete-reduction",
+  "lem-sfb-epp-compatible-coefficient-dvrs",
+  "lem-sfb-epp-finite-coefficient-triple",
+  "lem-sfb-dvr-index-one-separable-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-388d88d41",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-388d88d41 (reviewer sub-agent of L); spot-checked: I read the whole delivery: 8 steps, 0 new nodes, item statement unchanged. Sources checked: ILO IV Th. 3.1.2, Rem. 3.1.3 (mixed characteristic gives reducedness; only S need be complete) and the 4.2.3 sentence on stability under finite base change, plus Stacks 09F9 (theorem-epp proof), 09F8, 09EQ/09E7 and 0307. Every hypothesis of the statement matches the source; excellence of T is an extra hypothesis that is never used, and no target is weakened. Step 1: W' equals the integral closure of W0 in K' by the uniqueness clause; normalization-structure case (a) gives the structure of C, and C = ∏B_E by 00GK and transitivity. Step 2: T⊗W' ≅ T^n injects into F⊗K', which is reduced because K'/K0 is finitely generated and algebraic (empty transcendence basis) in characteristic 0, by the 030U node; this is clause (2). Step 3: since π' = u t^e, goodness holds iff e = 1 at every maximal q; the argument that reducedness is local is written in full. Steps 4–5: every hypothesis of strict-complete-reduction, compatible-coefficient-dvrs and finite-coefficient-triple checked (perfect core separable via 030Z, characteristic-0 descent, algebraically closed k = l_perf, m_{A0}D = m_D, B finite over D). Step 6: from s = a r^i, r = b t^j and sU = tU we get ij = 1, so P is a weak solution for A→B; descent then gives clause (1). Steps 7–8: W'→W'' is injective; k' is finite over k0 and perfect, so κ(q)/k' is separable; only the unconditional local clauses of index-one base change are used, and 0307 together with 00OI identifies every branch of C'' with a branch from Step 7; this is clause (3). Small cases tested: T = W0; T = W0[π^{1/2}] with W' = W0 (not good) and with W' = W0[π^{1/2}] (good). No cycle. The six declared tool_uses are accepted. Drop-list finding: the item (line 1509) and its citers are on the 10-19 drop list, but the item is still reached from nt-target-weil-conjectures via galois-epp-reduced-fibre-cover → prime-to-ell-* → complete-local-nodal-dimension-reduction (the Q99 revival) → the sfb Gabber chain. The cited dropped nodes lem-per-complete-dvr-finite-normalization and lem-per-algebraic-extension-perfect add 0 nodes to the closure: both are already cited by live sfb nodes (finite-coefficient-triple, raynaud-faltings, essentially-finite-type-traits). Both are generic DVR/field facts, not the excluded Qbar_l/adic/Gabber route, so I accepted them; the maintainer should note the stale drop entry. Batch-5 finding: the three flags reach only generic commutative algebra (lem-trf-irreducible-separable-derivative, lem-trf-finite-dimensional-short-exact-dimension, lem-trf-flat-tensor-preserves-injection), which is no part of the trace formula or Poincaré duality, so I accepted them."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppSingleTraitBaseChange",
+  "declaration": "IsDiscreteValuationRing.epp_single_trait_base_change",
+  "declarations": [
+   "IsDiscreteValuationRing.IsGoodSingleTraitExtension",
+   "IsDiscreteValuationRing.HasSingleTraitGenericStructure",
+   "IsDiscreteValuationRing.epp_single_trait_base_change"
+  ],
+  "file": "lean/Sheaf/RingTheory/EppSingleTraitBaseChange.lean",
+  "statement": "theorem epp_single_trait_base_change (p : ℕ) (hp : p.Prime) (W0 : Type u) [CommRing W0] [IsDomain W0] [IsDiscreteValuationRing W0] [IsAdicComplete (IsLocalRing.maximalIdeal W0) W0] [CharZero (FractionRing W0)] [CharP (IsLocalRing.ResidueField W0) p] (hperfect : Function.Surjective (fun a : IsLocalRing.ResidueField W0 => a ^ p)) (T : Type v) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T] [Algebra W0 T] [FaithfulSMul W0 T] [IsLocalHom (algebraMap W0 T)] (hexcellent : IsExcellent T) (hcore : ∀ a : IsLocalRing.ResidueField T, (∀ n : ℕ, ∃ b : IsLocalRing.ResidueField T, b ^ (p ^ n) = a) → IsAlgebraic (IsLocalRing.ResidueField W0) a) : (∃ (W' : Type u) (_ : CommRing W') (_ : IsDomain W') (_ : IsDiscreteValuationRing W') (_ : Algebra W0 W') (_ : FaithfulSMul W0 W') (_ : IsLocalHom (algebraMap W0 W')), IsAdicComplete (IsLocalRing.maximalIdeal W') W' ∧ Module.Finite W0 W' ∧ IsGoodSingleTraitExtension W0 T W') ∧ (∀ (W' : Type x) [CommRing W'] [IsDomain W'] [IsDiscreteValuationRing W'] [Algebra W0 W'] [FaithfulSMul W0 W'] [IsLocalHom (algebraMap W0 W')] [IsAdicComplete (IsLocalRing.maximalIdeal W') W'] [Module.Finite W0 W'], (IsReduced (T ⊗[W0] W') ∧ HasSingleTraitGenericStructure W0 T W')) ∧ (∀ (W' : Type x) [CommRing W'] [IsDomain W'] [IsDiscreteValuationRing W'] [Algebra W0 W'] [FaithfulSMul W0 W'] [IsLocalHom (algebraMap W0 W')] [IsAdicComplete (IsLocalRing.maximalIdeal W') W'] [Module.Finite W0 W'], IsGoodSingleTraitExtension W0 T W' → ∀ (W'' : Type y) [CommRing W''] [IsDomain W''] [IsDiscreteValuationRing W''] [Algebra W0 W''] [FaithfulSMul W0 W''] [IsLocalHom (algebraMap W0 W'')] [IsAdicComplete (IsLocalRing.maximalIdeal W'') W''] [Module.Finite W0 W''] (f : W' →ₐ[W0] W''), IsLocalHom f.toRingHom → IsGoodSingleTraitExtension W0 T W'')",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e47106fc4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "All clauses match the node and ILO IV 3.1.2/3.1.3/4.2.3. Hypotheses: complete mixed-char (0,p) DVR W0 with perfect residue field (Frobenius surjective); excellent DVR T with FaithfulSMul and IsLocalHom; hcore covers the whole perfect core including n=0. IsGoodSingleTraitExtension uses the canonical FractionRing.liftAlgebra tensor map and quantifies over all maximal q (field factors); B_E is integralClosure of the T⊗W' image and the ideal is generated by the image of 1⊗π', ∀ Irreducible π' (choice-independent). (1) ∃ W' in Type u (harmless, finite module); (2) reducedness plus the node's own asserted generic-structure fact (true, pure Prop); (3) local W0-algebra map, independent universes x,y. Statement verbatim; 3 declarations match; node unchanged except lean; no new nodes; imports exist live with no cycle (no EppEssentiallyFiniteTypeTraits or citer); no other definition of these names; the weak-solution def is a different formulation (equivalence = proof step 3); citers use the item in proofs only; docstrings carry source, blueprint and the 8 steps; only sorry is the main proof. No recompile, per instruction; worker reports a clean compile. hexcellent is unused but stated by the node."
+ }
 }

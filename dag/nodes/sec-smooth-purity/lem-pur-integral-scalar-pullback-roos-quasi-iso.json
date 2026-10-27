@@ -1,0 +1,185 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-roos-quasi-iso",
+ "kind": "statement",
+ "title": "Quasi-isomorphism of the normalized finite scalar pullback Roos map",
+ "statement": "Let ell be prime, E and L finite extensions of Q_ell, iota an embedding, f : X → Y any scheme morphism, and P a termwise-flat K-flat complex of completed E-coefficient module sheaves [lem-pur-integral-operations-well-defined]. Let alpha be a strict tower map from ordinary scalar extension [def-weil-integral-scalar-extension, lem-weil-scalar-extension-composition] of the finite pullback reduction tower of P to the finite pullback reduction tower of the ordinary scalar extension of P. Suppose every level sends 1 tensor f*(1 tensor x) to f*(1 tensor (1 tensor x)). Let kappa be a chain map from scalar extension of the source Roos complex to the Roos complex of its scalar-extended tower, whose unshifted and shifted product coordinates are the images under scalar extension of the corresponding source projections. Then kappa followed by Roos(alpha) is a quasi-isomorphism. This statement concerns the specified chain map on one good representative; it neither constructs nor assumes any comparison in a derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0941 (lemma-derived-limit-is-ok); derived.tex Tag 08TC defines the homotopy limit, and proetale.tex Tag 099N supplies the completion context.",
+  "note": "Agent-formulated generator-normalized specialization of the cofinal uniformizer-filtration argument in lem-pur-integral-operations-scalar-extension; not claimed as a literal statement of these tags."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "The finite-filtration lemma makes the cone of the normalized tower comparison eventually nullhomotopic, hence zero in the derived category, before taking Roos complexes.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-cone-pro-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completed integral finite freeness and the ordinary scalar functor formulas identify restriction of ordinary extension with the finite power functor. Finite powers preserve countable products. Restriction is conservative and preserves products, hence ordinary extension preserves countable products. In each degree the two Roos coordinates identify its diagonal comparison with the direct sum of the two invertible product comparisons. Joint monicity of these coordinates makes the specified kappa equal to this diagonal isomorphism.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "def-weil-integral-scalar-extension",
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-finite-power-complex",
+    "def-sf-additive-roos-map",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the general ringed strict-tower homotopy-limit theorem directly to the completed module sheaf category. Its evaluation isomorphism transports the cone transitions to zero, so it inverts the tower map. The explicit Roos derivation and the termwise limit comparison identify its derived functor with that homotopy-limit functor by uniqueness of right derived functors. Naturality transports invertibility back to the concrete shifted-cone map, and localization detects the required quasi-isomorphism. Countable exactness is the existing pro-etale exact-products result. Compose with the isomorphism kappa.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-pullback-cone-pro-zero",
+  "lem-weil-completed-integral-finite-free",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-finite-power-complex",
+  "def-sf-additive-roos-map",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-derivation",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0941 (lemma-derived-limit-is-ok); derived.tex Tag 08TC defines the homotopy limit, and proetale.tex Tag 099N supplies the completion context.",
+  "note": "Separate the finite-filtration cone-vanishing step from the fully proved finite-free product and derived Roos arguments. Use the general completed-ring module theorem directly, avoiding a forgetful comparison with constant-coefficient Roos cofinality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The generator-normalized scalar pullback map between strict Roos complexes of cofinal uniformizer filtrations is a quasi-isomorphism",
+   "results": "HomologicalComplex.instRespectsIsoQuasiIso; ShortComplex.QuasiIso.isIso; ShortComplex.quasiIso_of_retract; HomologicalComplex.instIsStableUnderRetractsQuasiIso; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; DerivedCategory.instIsIsoMapCochainComplexIntQ; ProjectiveResolution.instQuasiIsoIntπ'. All are generic quasi-isomorphism properties or resolution maps, not the specified scalar/reduction comparison.",
+   "date": "2026-10-26",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofinal change of uniformizer powers in the strict Roos tower of finite pullback reductions gives a quasi-isomorphism after finite free scalar extension",
+   "results": "No matching theorem. Results concern adic completion of finite modules, ramification quotient rings and unrelated smoothness base change. The project strict Roos cofinality and finite-free comparison declarations provide the planned proof.",
+   "date": "2026-10-26",
+   "verdict": "No specialized Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"mappingCone\"",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex concerns a short exact sequence, not a scalar-extended arithmetic reduction tower.",
+   "date": "2026-10-26",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain|scalarPullbackLevel_existsUnique|roosMap_coordinates",
+   "results": "The msearch grep found zero Mathlib hits. Local project rg found the owning normalized maps; downstream SpecifiedPullbackComparisonAlpha derives quasi-isomorphism using the very ordinary comparison being proved, so it is cyclic. IntegralAmbientOperationModels proves generic coordinate formulas; CompactSupportRoosCofinality supplies cofinality.",
+   "date": "2026-10-26",
+   "verdict": "No independent existing specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "H1",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph, sentence: \"Their compatibility with reduction modulo $\\pi_E^n$ and with extension of scalars is a theorem ([sk-prop-scalar-six]).\" This node supplies the cofinal-filtration quasi-isomorphism for the assigned legacy finite-reduction pullback comparison.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackRoosQuasiIso",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackRoosQuasiIso.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackRoosQuasiIso",
+  "statement": "theorem integralScalarPullbackRoosQuasiIso {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)\n    (hP : integralOperationsGoodComplex l E Y P)\n    (α : ((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙\n        (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ) ⟶\n      (integralOperationsPullbackTowerFunctor l L f).obj\n        (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P))\n    (hα :\n      ∀ (n : ℕ) (i : ℤ) (V : Y.ProEt)\n        (x : (P.X i).val.obj (op V)),\n        ((α.app (op n)).f i).val.app (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange f).obj V))\n          (integralOrdinaryTensorSection l E L ι X\n            (((integralOperationsPullbackLevel l E f n).obj P).X i)\n            (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange f).obj V)) 1\n            (integralOperationsPullbackGenerator l E f n\n              (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V\n              (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x))) =\n        integralOperationsPullbackGenerator l L f n\n          (((unrestrictedIntegralFiniteComplex l L Y n).obj\n            (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj P)).X i) V\n          (unrestrictedIntegralTensorSection l L Y n\n            ((integralOrdinaryScalar l E L ι Y).obj (P.X i)) (op V) 1\n            (integralOrdinaryTensorSection l E L ι Y (P.X i) (op V) 1 x)))\n    (κ : ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).obj\n        (integralOperationsRoos ((integralOperationsPullbackTowerFunctor l E f).obj P)) ⟶\n      integralOperationsRoos (((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙\n        (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)))\n    (hκ : let C := (integralOperationsPullbackTowerFunctor l E f).obj P\n      let G := (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)\n      (∀ n : ℕ, κ ≫ CochainComplex.mappingCocone.fst\n          ((towerTransitionEndomorphism (K := fun n ↦ G.obj (C.obj (op n)))\n            (integralOperationsTowerStep (C ⋙ G)))) ≫\n          Pi.π (fun n ↦ (G).obj (C.obj (op n))) n =\n        (G).map\n          (CochainComplex.mappingCocone.fst\n            ((towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))\n            (integralOperationsTowerStep C))) ≫\n            Pi.π (fun n ↦ C.obj (op n)) n)) ∧\n      (∀ (i j : ℤ) (h : i + -1 = j) (n : ℕ), κ.f i ≫\n          (CochainComplex.mappingCocone.snd\n            ((towerTransitionEndomorphism (K := fun n ↦ G.obj (C.obj (op n)))\n            (integralOperationsTowerStep (C ⋙ G))))).v i j h ≫\n          (Pi.π (fun n ↦ (G).obj\n            (C.obj (op n))) n).f j =\n        (integralOrdinaryScalar l E L ι X).map\n          ((CochainComplex.mappingCocone.snd\n            ((towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))\n            (integralOperationsTowerStep C)))).v i j h ≫\n          (Pi.π (fun n ↦ C.obj (op n)) n).f j))) :\n    QuasiIso (κ ≫ integralOperationsRoosMap α)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "worker": "stage3 H1",
+  "summary": "Extract only the normalized strict chain quasi-isomorphism on one good representative. Parent proves strict naturality and the normalized unique localization descent. Checked ramification index one, zero complexes, empty sites, and absence of any completeness assumption.",
+  "blueprint": "Final paragraph, sentence: \"Their compatibility with reduction modulo $\\pi_E^n$ and with extension of scalars is a theorem ([sk-prop-scalar-six]).\" This node supplies the cofinal-filtration quasi-isomorphism for the assigned legacy finite-reduction pullback comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Arithmetic DVR factorization of the source uniformizer, a generic tool identifying the cofinal arithmetic subsequence."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Generic quotient-ring identification needed to compare the two strict finite coefficient towers, independent of proper base change."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "The fixed finite and Roos models and their good-representative localization; these are precisely the operation models whose compatibility is being established."
+   },
+   {
+    "node": "lem-weil-completed-integral-finite-free",
+    "why": "Generic completed-coefficient finite freeness, used only to commute scalar extension with countable products."
+   },
+   {
+    "node": "lem-pur-compact-support-roos-cofinality",
+    "why": "Generic strict countable-tower cofinality, applied after the exact conservative forgetful functor to abelian sheaves, with no compact-support assertion used."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exactness of countable products on the pro-etale site, not a base-change theorem."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T034717-L-3678043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

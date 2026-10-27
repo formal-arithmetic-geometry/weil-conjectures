@@ -1,0 +1,296 @@
+{
+ "id": "def-sp-intrinsic-ctf-refinement-comparison",
+ "kind": "definition",
+ "title": "Intrinsic finite-Tor presentation of canonical refinement comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a finite commutative ring, $f:X\\to Y$ a quasi-compact morphism of schemes, and $c,d$ compactifications of $f$. Write $\\mathcal C_{X,R}=D^b_{ctf}(X_{proet},R)$ for the intrinsic constant-ring module full subcategory [sk-def-sp-normalized-towers], and $F_c=Rp_*j_!$ for its ambient compact-support candidate [def-sp-reduction-direct-image-comparison]. Let $V_T=E_{T,R}\\nu_T^*$ be the ordinary etale inverse image followed by the fixed-module-to-intrinsic realization, with support presentation $a_c$ [def-sp-et-proet-coefficient-transport]. This definition gives the intrinsic finite-Tor presentation of the canonical etale-origin compactification comparison [def-pur-origin-compactification-comparison]. For a bounded-below etale complex $E$, let $s_c(E):F_c V_X(E)\\simeq V_Y(F_{c,et}E)$ be $a_c$ followed by the specified proper-mate/open site comparison [def-sf-compact-support-site-comparison-construction], and set $r_{c,d}(E)=s_c(E)\\,V_Y(I^{et}_{c,d}(E))\\,s_d(E)^{-1}$ in left-to-right order, where $I^{et}_{c,d}$ is the specified etale common-refinement comparison [lem-amb-etale-compact-comparisons]. Say a natural isomorphism $\\rho:\\iota F_c\\simeq\\iota F_d$ is normalized when, for every $Q\\in\\mathcal C_{X,R}$, every bounded-below etale $E$, and every isomorphism $t:V_X(E)\\simeq\\iota Q$, its component is $\\rho_Q=F_c(t^{-1})\\,r_{c,d}(E)\\,F_d(t)$. There exists exactly one normalized natural isomorphism: every intrinsic bounded constructible object has an etale origin and comparison is fully faithful [lem-weil-pbc-finite-ring-constructible-derived-origin]. Define the intrinsic finite-Tor refinement comparison to be this unique normalized natural isomorphism. Thus no arbitrary isomorphism or etale-origin restriction on the input is supplied.",
+ "stmt_deps": [
+  "sk-def-sp-normalized-towers",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-et-proet-coefficient-transport",
+  "def-pur-origin-compactification-comparison",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md; literature/stacks-project/more-etale.tex; literature/stacks-project/proetale.tex",
+  "place": "Locality; Tags 0F7I and 0F7J (common-refinement comparison); Tag 099R (fully faithful bounded-below etale comparison)."
+ },
+ "proof": [
+  {
+   "text": "Restrict the exact fixed-module comparison to bounded-below etale complexes. The existing derived Hom bijection gives fullness there, and postcomposition with the intrinsic realization equivalence preserves fullness. Thus V = inclusion followed by site is full.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an intrinsic Dctf input Q, its constructible cohomology and boundedness put it in the essential image of the finite-ring constructible derived comparison. Its bounded etale antecedent lies in D-plus. The derived functor composition isomorphism identifies that comparison with site, giving an antecedent for V.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker and reassociate the support presentation and canonical compact-support site comparison to obtain natural supportSite isomorphisms on D-plus. Conjugate the specified etale common-refinement isomorphism by these. Its component is exactly refinementModel, by the component formulas for whiskering, associators and functorial images of isomorphisms.",
+   "uses": [
+    "def-sp-et-proet-coefficient-transport",
+    "def-sf-compact-support-site-comparison-construction",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an etale antecedent E_Q and identification t_Q for each intrinsic input Q. Define its component as F_c(t_Q inverse), followed by the origin comparison at E_Q, followed by F_d(t_Q). To prove naturality, lift t_Q composed with any ambient arrow composed with t_Qprime inverse through the full functor V, apply origin naturality, and cancel the identification isomorphisms. To prove normalization for any other antecedent E and s, lift s composed with t_Q inverse and apply the same naturality and cancellation. The components are isomorphisms, so they define the desired natural isomorphism. Any normalized isomorphism agrees at each chosen E_Q,t_Q, hence equals this one by natural-transformation and isomorphism extensionality. The definition refinement selects precisely the uniquely normalized isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-sp-et-proet-coefficient-transport",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M8",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md; literature/stacks-project/more-etale.tex; literature/stacks-project/proetale.tex",
+  "place": "The existing declaration docstring descent argument, formalized using the existing finite-ring origin and derived Hom-bijection theorems. The generic categorical descent and normalization glue is proved privately in the item module; no new proof obligation is introduced."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+   "results": {
+    "t": "2026-10-24T12:58:04Z",
+    "tool": "grep",
+    "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+   "results": {
+    "t": "2026-10-24T13:04:05Z",
+    "tool": "grep",
+    "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical change of compactification on intrinsic constructible finite Tor pro-etale complexes uniquely characterized by descent from bounded below etale origins",
+   "results": {
+    "t": "2026-10-24T13:04:06Z",
+    "tool": "leansearch",
+    "query": "Canonical change of compactification on intrinsic constructible finite Tor pro-etale complexes uniquely characterized by descent from bounded below etale origins",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.instTensorProduct",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "Algebra.Etale.baseChange",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+     "HomologicalComplex.ιTruncLE"
+    ],
+    "digest": "0fa2b77602b947c3"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique normalized compactification comparison on intrinsic finite Tor pro etale complexes transported from etale common refinements",
+   "results": {
+    "t": "2026-10-24T13:04:07Z",
+    "tool": "leanfinder",
+    "query": "Unique normalized compactification comparison on intrinsic finite Tor pro etale complexes transported from etale common refinements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePresentation.mk.inj",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "StandardEtalePair.hom_ext",
+     "StandardEtalePair.hom_ext_iff",
+     "StandardEtalePair.homEquiv",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation"
+    ],
+    "digest": "26ff4ad3098b24e9"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+   "results": {
+    "t": "2026-10-24T13:07:51Z",
+    "tool": "grep",
+    "query": "canonicalRefinement|IsCanonicalRefinement|refinementModel",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical change of compactification on intrinsic constructible finite Tor pro-etale complexes uniquely characterized by descent from bounded below etale origins",
+   "results": {
+    "t": "2026-10-24T13:07:51Z",
+    "tool": "leansearch",
+    "query": "Canonical change of compactification on intrinsic constructible finite Tor pro-etale complexes uniquely characterized by descent from bounded below etale origins",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.instTensorProduct",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "Algebra.Etale.baseChange",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+     "HomologicalComplex.ιTruncLE"
+    ],
+    "digest": "0fa2b77602b947c3"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique normalized compactification comparison on intrinsic finite Tor pro etale complexes transported from etale common refinements",
+   "results": {
+    "t": "2026-10-24T13:07:52Z",
+    "tool": "leanfinder",
+    "query": "Unique normalized compactification comparison on intrinsic finite Tor pro etale complexes transported from etale common refinements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePresentation.mk.inj",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "StandardEtalePair.hom_ext",
+     "StandardEtalePair.hom_ext_iff",
+     "StandardEtalePair.homEquiv",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation"
+    ],
+    "digest": "26ff4ad3098b24e9"
+   },
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib interface. The fixed-module etale-origin comparison exists upstream; this module supplies its specified intrinsic finite-Tor presentation using the recorded support/site comparisons. The report records DAG and source searches."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-open-scalar-inverse-transpose-factorization",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality: canonical support composition and comparison on arbitrary intrinsic finite-Tor input",
+   "via": [
+    "lem-sp-open-scalar-inverse-transpose-factorization",
+    "lem-sp-open-exceptional-scalar-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.IntrinsicCtfRefinementComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenInverseTranspose.refinement",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.site",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.supportSite",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.refinementModel",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.IsCanonicalRefinement",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.canonicalRefinement_existsUnique",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.refinement"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/IntrinsicCtfRefinementComparison.lean",
+  "statement": "def refinement (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c d : Compactification f) : (spFiniteConstructibleTor X R).ι ⋙ reductionCompactSupport R c.i c.g ≅ (spFiniteConstructibleTor X R).ι ⋙ reductionCompactSupport R d.i d.g",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Intrinsic presentation transport of the already recorded fixed-module etale-origin comparison, with every component uniquely determined by the published canonical site/support/etale comparisons. canonicalRefinement_existsUnique is explicitly part of the node statement and has the complete descent proof in its docstring; refinement takes data only from that uniqueness theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd815f7a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd815f7a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read item, 19 deps, both modules, report, live decls. All four conjuncts match the node (eq.1 composite counits ∀H for A,B; eq.2 coefficient-composition with both compositor boundaries; eq.3 inverse-naturality factorization, re-derived from eq.1/eq.2 + naturality of b_f at v). Hypotheses: only actual-functor D_ctf preservation and IsIso of b_f/b_g (true via reductionDirectImage_isIso), arbitrary right adjoints (unique). New node def-sp-intrinsic-ctf-refinement-comparison: refinementModel = siteRefinement conjugated by supportPresentation; ∃!-pinned (origin theorem proved for all X + D^+ full faithfulness), no intrinsic duplicate found (Clopen/fixedRefinement/refinementAtWitness are other functors/categories). Advisories: transitive owners (def-sp-finite-intrinsic-pullback, directImageConstantPush), coordinate bridge to landed parent OpenExceptionalScalarLocality needed in stage 3, def-pur-origin cite unused in Lean, _hN vacuous, H11 dispatcher wording."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261024T190348-L-4034859",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

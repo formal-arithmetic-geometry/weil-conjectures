@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-ordinary-proper-open-invertibility",
+ "kind": "statement",
+ "title": "Invertibility of the ordinary proper/open mate",
+ "statement": "For schemes U,V,W,Z, quasi-compact open immersions k:U→V and i:W→Z, proper morphisms r:U→W and p:V→Z, and an equality kp=ri, the prescribed clopen-projection proper/open mate [lem-sf-proper-open-projection-mate] is a natural isomorphism on the entire unbounded derived category of constant modules over every finite commutative ring A. No Cartesian, boundedness or constructibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7K; agent expansion of the blueprint composition/refinement calculation"
+ },
+ "stmt_deps": [
+  "lem-sf-proper-open-projection-mate"
+ ],
+ "proof": [
+  {
+   "text": "Factor k through the pullback of i along p. The lift is open by cancellation and proper by cancellation against the separated p; thus it is clopen. The canonical restriction comparison identifies i* Rp* k! with Rr* by Cartesian base change, the clopen equality of extension and direct image, and composition.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper/open support makes the open counit invertible on Rp* k!M. For sheaves use the Cartesian proper/open comparison; resolve bounded-below inputs by injectives and use open/proper acyclicity. For arbitrary inputs pass along the lower Postnikov tower, using exact countable products and product preservation, exactly as in the existing derived support proof.",
+   "uses": [
+    "lem-sp-proper-open-derived-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the prescribed clopen-projection mate under the open adjunction. The clopen unit-counit identity makes its transpose the inverse restriction comparison. The inverse Hom bijection therefore expresses the mate as open extension of that inverse followed by the supported open counit. Both factors are isomorphisms; conclude componentwise and then for the natural transformation.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-open-projection-mate",
+  "lem-sp-proper-open-derived-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Proper/open support and the composition/refinement counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of compact support direct image projection formula proper open counit",
+   "results": "CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitApp, CompactlySupportedContinuousMap.compLinearMap, CompHausLike.LocallyConstant.adjunction_left_triangle",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|compositionProjectionMate|gamma_isIso|isIso_gamma",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open direct image projection mate support unbounded derived composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.stableUnderComposition",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|mapDerivedCategoryCompIso|isIso_counit_app_of_iso",
+   "results": "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompositionProjectionMate",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence: Invertibility of the ordinary proper/open mate",
+   "via": [
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryProperOpenInvertibility",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryProperOpenInvertibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryProperOpenMateIsIso",
+  "statement": "theorem ordinaryProperOpenMateIsIso (A : Type (u + 1)) [CommRing A] [Finite A] {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : IsIso (properOpenMate A k r p i h)",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ordinaryProperOpenMateIsIso"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-78e02",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261025T144152-L-1203649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-78e02",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261025T144152-L-1203649",
+  "kind": "interface",
+  "note": "independent cc review: Item statement byte-identical to the clone; the 13 moved component declarations are verbatim in CompositionProjectionData (diff); ordinaryProperOpenMateIsIso checked against properOpenMate (Stacks 0F7B, non-Cartesian square, clopen lift); the contraction is the component conjunct of TriangleLaws; all 10 direct importers compile against the delivery; #print axioms has sorryAx only via the two new statements and existing upstream sorries"
+ }
+}

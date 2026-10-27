@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-abelian-degree-polynomial",
+ "kind": "statement",
+ "title": "Isogeny degree is polynomial on finite rational endomorphism spans",
+ "statement": "Let $k$ be a field [def-weil-field], and let $A/k$ be an abelian variety [def-sc-abelian-variety] of positive dimension $g$. Write $E=\\operatorname{End}_k(A)$ for its group-scheme endomorphisms [def-sc-group-scheme] with pointwise addition and $E^0=E\\otimes_{\\mathbf Z}\\mathbf Q$ [def-weil-pbc-module-tensor-product]. For $a\\in E$ define $d(a)$ to be the degree of $a$ if $a$ is an isogeny [def-sc-isogeny], and $0$ otherwise. There is a well-defined function $d^0:E^0\\to\\mathbf Q$ satisfying $d^0(a\\otimes 1)=d(a)$ and $d^0(v)=n^{-2g}d(a)$ whenever $n>0$ and $nv=a\\otimes1$. For every finite-dimensional rational subspace $V\\subseteq E^0$ [def-weil-finite-dimensional-subspace] and every ordered rational basis $e_1,\\ldots,e_r$ of $V$, there is a homogeneous polynomial $P_e\\in\\mathbf Q[X_1,\\ldots,X_r]$ of degree $2g$ [def-weil-pbc-mv-polynomial-ring], meaning that every nonzero monomial has total degree $2g$, and allowing the zero polynomial on a subspace, such that $d^0(\\sum_i x_i e_i)=P_e(x_1,\\ldots,x_r)$ for all $x_i\\in\\mathbf Q$. In particular $P_e(0)=0$, and for every isogeny $a\\in E$, $d^0(a\\otimes1)=d(a)$ is a positive integer.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-isogeny",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an ample invertible module $\\mathcal H$ by [lem-sc-abelian-variety-projective] and put $\\mathcal N=\\mathcal H\\otimes[-1]^*\\mathcal H$. By [lem-sc-ample-tensor] this is ample and symmetric. The scheme $A$ is geometrically integral by [lem-sc-abelian-variety-characterization]. Put $c=(\\mathcal N^g\\cdot A)$. This equals the Hilbert degree: if $p(t)=\\chi(A,\\mathcal N^t)$, the coefficient of $n_1\\cdots n_g$ in $p(n_1+\\cdots+n_g)$ is $g!$ times its degree-$g$ coefficient. Thus [lem-sc-positive-ample-hilbert-degree] gives $c>0$. For every $a\\in E$, [lem-sfb-equal-dimension-isogeny-criterion] and [lem-sfb-top-intersection-pullback] give\n$$((a^*\\mathcal N)^g\\cdot A)=c\\,d(a).$$\nIndeed a nonisogeny is nondominant, giving zero; for an isogeny [lem-sc-isogeny-degree] identifies its finite-morphism degree with its kernel-order degree.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "lem-sc-ample-tensor",
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-intersection-number",
+    "def-sc-hilbert-degree",
+    "lem-sc-positive-ample-hilbert-degree",
+    "lem-sfb-equal-dimension-isogeny-criterion",
+    "lem-sfb-top-intersection-pullback",
+    "lem-sc-isogeny-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.13 proof, first displayed intersection equality, printed p.48"
+   }
+  },
+  {
+   "text": "For $n\\geq1$, the homomorphism $na$ equals $[n]\\circ a$. By [lem-sc-mult-n-pullback], $(na)^*\\mathcal N\\cong(a^*\\mathcal N)^{\\otimes n^2}$. Multilinearity [lem-sfb-top-intersection-multilinear] and step 1 give $d(na)=n^{2g}d(a)$. Symmetry of $\\mathcal N$ gives $(-a)^*\\mathcal N\\cong a^*\\mathcal N$, hence $d(-a)=d(a)$. For $a=0$ the pullback is a trivial invertible module (it factors through the identity point); its top intersection is zero since $g>0$. Thus $d(0)=0$ and $d(na)=n^{2g}d(a)$ for every integer $n$.",
+   "uses": [
+    "lem-sc-mult-n-pullback",
+    "lem-sfb-top-intersection-multilinear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11, printed p.47; symmetric-module specialization of Proposition 10.13"
+   }
+  },
+  {
+   "text": "By [lem-sfb-rational-tensor-fractions], write $v=j(a)/n$ with $n>0$ and define $d^0(v)=n^{-2g}d(a)$. If also $v=j(b)/m$, then $j(ma)=j(nb)$; the same cited statement supplies $c>0$ with $cma=cnb$. Applying step 2 gives $(cm)^{2g}d(a)=(cn)^{2g}d(b)$, hence $n^{-2g}d(a)=m^{-2g}d(b)$. This proves independence without assuming finite generation or torsion-freeness of $E$. It also proves $d^0(j(a))=d(a)$ and, by choosing numerator and denominator for a rational scalar, $d^0(tv)=t^{2g}d^0(v)$ for $t\\in\\mathbf Q$, including $t=0$.",
+   "uses": [
+    "lem-sfb-rational-tensor-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11, printed p.47: extension and independence of denominator"
+   }
+  },
+  {
+   "text": "Fix $a,b\\in E$ and use additive notation for isomorphism classes of invertible modules, where addition is tensor product and negation is dual. Put $C_n=[(na+b)^*\\mathcal N]$ and $B=[(2a)^*\\mathcal N]-2[a^*\\mathcal N]$. Pull [thm-sc-theorem-of-cube] back along $(na+b,a,a):A\\to A^3$. Its seven terms give\n$$C_{n+2}-2C_{n+1}+C_n=B.$$\nThis holds for all $n\\in\\mathbf Z$. The sequence $\\binom n2B+nC_1-(n-1)C_0$ has the same values at $0,1$ and the same second difference. Induction forwards from $0,1$ and backwards from $1,0$ therefore proves\n$$C_n=\\binom n2B+nC_1-(n-1)C_0\\quad(n\\in\\mathbf Z).$$\nTensor inverses exist because the modules are invertible; the binomial coefficient is integral also for negative $n$.",
+   "uses": [
+    "thm-sc-theorem-of-cube",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Corollary 5.3, printed p.22; Proposition 10.13 recurrence and induction, printed p.48"
+   }
+  },
+  {
+   "text": "Use rational multilinearity [lem-sfb-top-intersection-multilinear] to expand the $g$-fold intersection of $\\binom T2B+TC_1-(T-1)C_0$ with itself, and divide by $c$. This is a polynomial $Q_{a,b}(T)\\in\\mathbf Q[T]$ of degree at most $2g$: every one of its $g$ factors contributes degree at most two. Steps 1 and 4 show $Q_{a,b}(n)=d(na+b)$ for all integers $n$. Fix $m>0$. At every integer $j$, step 2 gives $Q_{a,mb}(mj)=m^{2g}Q_{a,b}(j)$. Two univariate rational polynomials agreeing at infinitely many points are equal (a nonzero polynomial has at most its degree many roots). Hence $Q_{a,mb}(mT)=m^{2g}Q_{a,b}(T)$. At $t=p/m$, the definition of $d^0$ now gives\n$$d^0(tj(a)+j(b))=m^{-2g}Q_{a,mb}(p)=Q_{a,b}(t).$$\nFor arbitrary $v,w\\in E^0$, take a common positive denominator $h$ with $hv=j(a)$ and $hw=j(b)$ by [lem-sfb-rational-tensor-fractions]. It follows that $d^0(tv+w)=h^{-2g}Q_{a,b}(t)$ on all $\\mathbf Q$. The bound $2g$ is uniform in $v,w$.",
+   "uses": [
+    "lem-sfb-top-intersection-multilinear",
+    "lem-sfb-rational-tensor-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.13 proof, printed p.48: polynomial intersection expansion; Remark 10.11 denominator reduction made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-line-polynomial-interpolation] to $W=E^0$, $F=d^0$, $K=\\mathbf Q$, and $D=2g$, using step 5. For each ordered basis $e_1,\\ldots,e_r$ of $V$, obtain $P_e\\in\\mathbf Q[X_1,\\ldots,X_r]$ of total degree at most $2g$ with the required values. This includes $r=0$.",
+   "uses": [
+    "lem-sfb-bounded-line-polynomial-interpolation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Lemma 10.12 and Proposition 10.13, printed pp.47–48: bounded affine-line interpolation"
+   }
+  },
+  {
+   "text": "Write $P_e=\\sum_\\nu c_\\nu X^\\nu$. By step 3, $P_e(tx)=t^{2g}P_e(x)$ for all rational $t,x$. Polynomial determination by values in [lem-sfb-bounded-line-polynomial-interpolation], applied also to the extra variable $t$, gives this as a polynomial identity. Comparing the coefficient of $t^{|\\nu|}X^\\nu$ shows $c_\\nu=0$ unless $|\\nu|=2g$. Thus $P_e$ is homogeneous in exactly the stated convention, including the zero polynomial and the zero-dimensional subspace. Since $2g>0$, $P_e(0)=0$. Finally for an isogeny $a$, $d^0(j(a))=d(a)$ by step 3; [def-sc-isogeny] defines this as the order of its finite kernel, a positive integer (the identity gives a nonempty kernel and its finite coordinate algebra has nonzero unit).",
+   "uses": [
+    "lem-sfb-bounded-line-polynomial-interpolation",
+    "def-sc-isogeny"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11 and Proposition 10.13 homogeneity; degree convention before Theorem 10.9, printed pp.46–48"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-abelian-variety-characterization",
+  "def-sc-intersection-number",
+  "def-sc-hilbert-degree",
+  "lem-sc-positive-ample-hilbert-degree",
+  "lem-sfb-equal-dimension-isogeny-criterion",
+  "lem-sfb-top-intersection-pullback",
+  "lem-sc-isogeny-degree",
+  "lem-sc-mult-n-pullback",
+  "lem-sfb-top-intersection-multilinear",
+  "lem-sfb-rational-tensor-fractions",
+  "thm-sc-theorem-of-cube",
+  "def-sc-invertible-module",
+  "lem-sfb-bounded-line-polynomial-interpolation",
+  "def-sc-isogeny"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Remark 10.11 and Proposition 10.13, printed pp.47–48, with bounded interpolation and denominator details supplied"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree function on the rational endomorphism algebra of an abelian variety is a homogeneous polynomial of degree twice its dimension",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ₄_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous polynomials and elliptic division-polynomial degrees do not identify the isogeny degree function on rational endomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "degree.*endomorph|endomorph.*degree|homogeneous.*degree",
+   "results": "16 hits; searched AlgebraicGeometry; logged results: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous polynomials and elliptic division-polynomial degrees do not identify the isogeny degree function on rational endomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\", \"End\"",
+   "results": "0 hits; searched all Mathlib / remote service; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous polynomials and elliptic division-polynomial degrees do not identify the isogeny degree function on rational endomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of an abelian variety endomorphism is a homogeneous polynomial function on its rational endomorphism algebra",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: MvPolynomial.IsHomogeneous, LinearMap.polyCharpoly_coeff_isHomogeneous, MvPolynomial.homogeneousComponent_isHomogeneous, RatFunc.intDegree, MvPolynomial.IsHomogeneous.aeval, MvPolynomial.IsHomogeneous.pow, HomogeneousLocalization.deg, MvPolynomial.IsHomogeneous.totalDegree",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous polynomials and elliptic division-polynomial degrees do not identify the isogeny degree function on rational endomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isogeny degree on End A tensor Q restricts to a rational multivariable polynomial on every finite dimensional rational subspace",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: ChevalleyThm.MvPolynomialC.degBound, LinearMap.polyCharpolyAux_map_aeval, ChevalleyThm.MvPolynomialC.numBound, MvPolynomial.R, LinearMap.toMvPolynomial_totalDegree_le, PolynomialLaw.toFun_eq_rTensor_φ_toFun', MvPolynomial.map_restrict_dom_evalₗ, NoetherNormalization.T1",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous polynomials and elliptic division-polynomial degrees do not identify the isogeny degree function on rational endomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of an endomorphism of an abelian variety is a homogeneous polynomial function on rational endomorphisms",
+   "results": "8 hits; searched all Mathlib / remote service; WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.Affine.degree_polynomial, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ₄",
+   "date": "2026-10-23",
+   "verdict": "no match: division polynomials and linear-map characteristic polynomials do not state abelian-variety endomorphism degree polynomiality"
+  },
+  {
+   "tool": "grep",
+   "query": "degree.*endomorph|endomorph.*degree|degreePolynomial",
+   "results": "0 hits; searched AlgebraicGeometry; ",
+   "date": "2026-10-23",
+   "verdict": "no match: division polynomials and linear-map characteristic polynomials do not state abelian-variety endomorphism degree polynomiality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of an abelian variety endomorphism is polynomial on each finite rational endomorphism span",
+   "results": "8 hits; searched all Mathlib / remote service; Polynomial.exists_degree_le_of_mem_span_of_finite, Polynomial.span_le_degreeLE_of_finite, RatFunc.intDegree, Polynomial.degreeMonoidHom, Polynomial.aeval_endomorphism, Polynomial.degree, Polynomial.natDegree_restriction, LinearMap.charpoly_natDegree",
+   "date": "2026-10-23",
+   "verdict": "no match: division polynomials and linear-map characteristic polynomials do not state abelian-variety endomorphism degree polynomiality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"degree\"",
+   "results": "0 hits; searched all Mathlib / remote service; ",
+   "date": "2026-10-23",
+   "verdict": "no match: division polynomials and linear-map characteristic polynomials do not state abelian-variety endomorphism degree polynomiality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isogeny degree on End A tensor Q is a homogeneous multivariable rational polynomial",
+   "results": "8 hits; searched all Mathlib / remote service; WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, LinearMap.toMvPolynomial_isHomogeneous, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ, LinearMap.polyCharpoly_coeff_isHomogeneous, WeierstrassCurve.natDegree_preΨ₄_le",
+   "date": "2026-10-23",
+   "verdict": "no match: division polynomials and linear-map characteristic polynomials do not state abelian-variety endomorphism degree polynomiality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-hom-finite-free",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed.",
+   "via": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-degree-polynomial",
+  "worker": "stage1",
+  "summary": "Followed Milne Proposition 10.13 through the cube recurrence and top intersection pairing; made the nonisogeny-zero case, rational denominators, uniform degree bound and homogeneous coefficient comparison explicit. Five genuine supporting nodes, one a Mathlib leaf. Statement unchanged.",
+  "blueprint": "Current det-thm-sf-ctf-stability-direct-images proof (3) uses proper/open preservation. This inherited auxiliary chain serves its recorded alteration/moduli-level prerequisite, with Milne Proposition 10.13 as the local degree-polynomial argument; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-projective",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "lem-sc-ample-tensor",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "lem-sc-positive-ample-hilbert-degree",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "lem-sc-mult-n-pullback",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   },
+   {
+    "node": "thm-sc-theorem-of-cube",
+    "why": "Generic abelian-variety geometry or intersection-degree tool for Milne Proposition 10.13; the six-functors stability unit supplies no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-positive-ample-hilbert-degree",
+  "lem-sc-isogeny-degree",
+  "lem-sc-mult-n-pullback",
+  "thm-sc-theorem-of-cube"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-e713d3a13",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-e713d3a13 (reviewer sub-agent of L); spot-checked: I read the whole item and all five new nodes against Milne AV Remark 10.11, Lemma 10.12, Prop. 10.13 (pp.47–48) and Prop. 7.1 (p.32), Stacks 0BEP/0BER/0BET, and the Mathlib lines BaseChange.lean:98, LocalizedModule/Basic.lean:549/555 and FractionRing.lean:81. Step by step: step 1 gives c=(N^g·A) equal to the Hilbert degree via the coefficient of n_1…n_g in p(n_1+…+n_g), which is g!·a_g, and it is positive; an isogeny contributes its generic rank, equal to the kernel order by lem-sc-isogeny-degree, and a nonisogeny is not surjective, so its image has dim<g and the value is 0. Step 2 gives the factor n^{2g}, with symmetry handling negative n and a=0 giving 0. Step 3 shows d^0 is well defined using only the clause cma=cnb, with no torsion-free or finite-generation assumption, so there is no cycle with lem-sfb-abelian-hom-finite-free. Step 4: I checked the seven cube terms pulled back along (na+b,a,a), and the two-sided induction for the closed form is valid. Step 5 makes the denominator rescaling Q_{a,mb}(mT)=m^{2g}Q_{a,b}(T) explicit and gives a uniform bound 2g. Step 6 applies the bounded interpolation; Milne's Lemma 10.12 actually needs a uniform degree, and that is what the node assumes. Step 7 gets homogeneity by comparing coefficients, and positivity from kernel order ≥1. All five new nodes are true and not duplicates: multilinear = 0BER plus symmetry; pullback = 0BET with Z=X, including the 0 clause, unlike the finite-surjective-only lem-sc-deg-pullback-finite; the criterion = Milne 7.1 (a)⇔(b) over any field, unlike the k̄ finite-kernel node; interpolation checked for r=0 and D=0; the rational-fractions leaf is a valid one-line specialization. None of the new nodes restates the item. There is no cycle, no SGA citation, proof_deps equals the union of step uses, and the item is still unsplit on live with no repair note. The seven sc tool_uses are accepted as generic AV/intersection tools. Batch-5: every flagged chain ends at the general definition def-trf-schematically-dense-open, reached through Nagata/Chow coherent finiteness; the cited sc nodes are intersection theory and cube results that belong to neither the trace formula nor Poincaré duality, so they need no assumption-leaf citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.DegreePolynomial",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_degree_polynomial",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/DegreePolynomial.lean",
+  "statement": "theorem IsAbelianVariety.exists_degree_polynomial {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (hg : 0 < IsAbelianVariety.dim A) : ∃ (d : Additive (Grp.mk A ⟶ Grp.mk A) → ℚ) (d0 : ℚ ⊗[ℤ] Additive (Grp.mk A ⟶ Grp.mk A) → ℚ), (∀ a : Additive (Grp.mk A ⟶ Grp.mk A), (IsIsogeny a.toMul.hom.hom → d a = (isogenyDegree a.toMul.hom.hom : ℚ)) ∧ (¬ IsIsogeny a.toMul.hom.hom → d a = 0)) ∧ (∀ a : Additive (Grp.mk A ⟶ Grp.mk A), d0 (1 ⊗ₜ[ℤ] a) = d a) ∧ (∀ (v : ℚ ⊗[ℤ] Additive (Grp.mk A ⟶ Grp.mk A)) (n : ℕ), 0 < n → ∀ a : Additive (Grp.mk A ⟶ Grp.mk A), n • v = 1 ⊗ₜ[ℤ] a → d0 v = ((n : ℚ) ^ (2 * IsAbelianVariety.dim A))⁻¹ * d a) ∧ (∀ (V : Submodule ℚ (ℚ ⊗[ℤ] Additive (Grp.mk A ⟶ Grp.mk A))) [FiniteDimensional ℚ V] (r : ℕ) (e : Module.Basis (Fin r) ℚ V), ∃ P : MvPolynomial (Fin r) ℚ, P.IsHomogeneous (2 * IsAbelianVariety.dim A) ∧ (∀ x : Fin r → ℚ, d0 (V.subtype (∑ i : Fin r, x i • e i)) = MvPolynomial.eval x P) ∧ MvPolynomial.eval (0 : Fin r → ℚ) P = 0) ∧ (∀ a : Additive (Grp.mk A ⟶ Grp.mk A), IsIsogeny a.toMul.hom.hom → d0 (1 ⊗ₜ[ℤ] a) = (isogenyDegree a.toMul.hom.hom : ℚ) ∧ 0 < isogenyDegree a.toMul.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ed7c4fad",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Read the item node, all 7 stmt_deps, Milne AV pp.46-48 (Rem 10.11, Lem 10.12, Prop 10.13) and the single delivered module. Clause by clause: field k : Type u; A : Over (Spec k) with GrpObj and IsAbelianVariety (proper, smooth, connected); hg : 0 < IsAbelianVariety.dim (Krull dim); E = Additive (Grp.mk A ⟶ Grp.mk A), pointwise group law via Grp.Hom.hom_mul, commutativity from the proved IsAbelianVariety.isCommMonObj; E^0 = ℚ ⊗[ℤ] E, canonical comm; d pinned by IsIsogeny/isogenyDegree (kernel finrankΓ) and 0 otherwise; d0(1⊗a)=d a; denominator rule over all n>0 and all representations; ∀ V finite-dim, basis Fin r, ∃ P IsHomogeneous 2g (zero allowed) with the evaluation identity and eval 0 P = 0; isogeny positivity in ℕ. Quantifier order correct, no extra hypotheses, universes free. Edge cases r=0, n=1, a=0, inseparable isogenies ok. lean.statement verbatim; only the lean field changed vs live; item not landed or superseded on side-live; no existing degree-polynomial decl (grep Sheaf/WeilConjectures); all plain imports resolve to recorded proof_dep modules; docstrings carry source, blueprint id and 7 proof steps; only sorry; report sections present. No compile (no change). No findings."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-adic-perfect-tensor-quotient-naturality",
+ "kind": "statement",
+ "title": "Naturality of the tensor ideal-power quotient equivalence",
+ "statement": "Let A be a commutative ring, I an ideal, n a natural number, and f:M to N an A-linear map. The ordinary equivalences (A/I^n) tensor_A M = M/I^nM and (A/I^n) tensor_A N = N/I^nN commute with extension of scalars of f and the quotient map Q_n(f) from [def-sf-adic-module-quotient-data]. Thus for every tensor x, e_N((1 tensor f)(x)) = Q_n(f)(e_M(x)). No positivity, finiteness, or nontriviality assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, Tag 03EK, ordinary tensor functoriality used in the constant quotient comparison. The algebraic equivalence and generator formula are Mathlib LinearAlgebra/TensorProduct/Quotient.lean, quotTensorEquivQuotSMul and quotTensorEquivQuotSMul_mk_tmul."
+ },
+ "stmt_deps": [
+  "def-sf-adic-module-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply tensor induction. At zero and at sums, both sides agree by linearity. For a pure tensor, lift its quotient-ring scalar along A to A/I^n. The generator formula for quotTensorEquivQuotSMul gives the quotient classes of a times f(x) and f(a times x); these coincide by A-linearity of f. This includes n=0 and degenerate rings, ideals, and modules.",
+   "uses": [
+    "def-sf-adic-module-quotient-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-module-quotient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK ordinary tensor functoriality, specialized to an ideal-power quotient using the Mathlib tensor quotient generator formula. This is the naturality calculation in step 1 of lem-sfb-adic-perfect-quotient-section-comparison, fully proved by tensor induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor quotient equivalence is natural with respect to linear maps of modules",
+   "results": "Eight hits include TensorProduct.tensorQuotientEquiv, quotientTensorEquiv, quotientTensorQuotientEquiv, and tensorQuotEquivQuotSMul. These supply the algebraic equivalence but no naturality equation with AdicCohomology.quotient.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing equivalence and prove its naturality by tensor induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.quotTensorEquivQuotSMul",
+   "results": "Seven hits: quotTensorEquivQuotSMul and its mk_one_tmul, comp_mkQ_rTensor, mk_tmul, symm_mk, comp_mk, symm_comp_mkQ formulas. No packaged naturality theorem. LeanFinder on Naturality of the tensor quotient equivalence under a linear map of modules also returned constituent tensor/quotient formulas.",
+   "date": "2026-10-27",
+   "verdict": "Use quotTensorEquivQuotSMul_mk_tmul for the pure tensor case."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul.*natur|natur.*quotTensorEquivQuotSMul",
+   "results": "No Mathlib hits. Local inspection of Mathlib/LinearAlgebra/TensorProduct/Quotient.lean finds the equivalence and generator formulas, not this naturality equation. Project node searches find uses of the equivalence but no exact naturality node. blueprint_refs search tensor quotient returns 63 broad matches and no exact tensor-naturalness statement.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate statement found; this proved elementary step supplies the needed helper-module attachment."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectQuotientSectionComparison",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The ordinary tensor quotient calculation in the integral-model construction, specifically naturality in the module variable in step 1 of lem-sfb-adic-perfect-quotient-section-comparison. The inherited blueprint ancestry is retained because created.item on the recent module-level splits is a module name.",
+   "via": [
+    "lem-sfb-adic-perfect-quotient-section-comparison",
+    "lem-sfb-adic-perfect-quotient-section-adjunction",
+    "lem-sfb-adic-perfect-unit-hom",
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectQuotientSectionComparisonTensor",
+  "file": "lean/Sheaf/Paper/AdicPerfectQuotientSectionComparisonTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectTensorQuotient_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectTensorQuotient_naturality"
+  ],
+  "statement": "theorem adicPerfectTensorQuotient_naturality\n    {A : Type w} [CommRing A] (I : Ideal A) (n : ℕ)\n    {M N : ModuleCat.{w} A} (f : M ⟶ N)\n    (x : (ModuleCat.extendScalars (Ideal.Quotient.mk (I ^ n))).obj M) :\n    TensorProduct.quotTensorEquivQuotSMul N (I ^ n)\n        (((ModuleCat.extendScalars (Ideal.Quotient.mk (I ^ n))).map f).hom x) =\n      ((AdicCohomology.quotient I n).map f)\n        (TensorProduct.quotTensorEquivQuotSMul M (I ^ n) x)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222648-L-679743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222648-L-679743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

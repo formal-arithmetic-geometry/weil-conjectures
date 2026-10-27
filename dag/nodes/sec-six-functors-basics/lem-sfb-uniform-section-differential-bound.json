@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-uniform-section-differential-bound",
+ "kind": "statement",
+ "title": "Uniform bound on section differential defects over a trait",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring], and let $A=R^{\\mathrm{sh}}$ be a strict henselization relative to a separable closure of the residue field [def-sc-ring-strict-henselization]. Let $X\\to\\operatorname{Spec}R$ be a flat finite-type morphism of schemes with smooth generic fibre [def-pc-scheme, def-weil-affine-spectrum, def-weil-flat-morphism, def-weil-finite-type-morphism, def-pc-base-change, def-sbc-smooth-morphisms]. For each $a\\in X(A)=\\operatorname{Hom}_R(\\operatorname{Spec}A,X)$ put $V_a=\\Gamma(\\operatorname{Spec}A,a^*\\Omega^1_{X/R})$ [def-sc-relative-differential-sheaf, def-pc-module-pullback], and let $\\delta_X(a)$ be the length of its torsion submodule $\\{v\\in V_a:\\exists\\,0\\ne t\\in A,\\ tv=0\\}$ [def-weil-pbc-module-length]. There exists an integer $c\\geq0$ such that $\\delta_X(a)\\leq c$ for every $a\\in X(A)$. The bound may depend on $X/R$; no equidimensionality, properness, completeness or excellence is assumed. The empty set of sections is allowed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Proposition 3 and proof, printed pp.66-67, PDF pp.72-73; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-module-length",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "A DVR is a PID, so $R$ is Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Choose an algebraic closure $\\Omega$ of the specified separable residue closure and its closed geometric point on $\\operatorname{Spec}R$. By [lem-exc-affine-strict-local-ring-comparison], the geometric strict local ring there is $R$-isomorphic to the algebraic strict henselization $A$ in the statement (uniqueness of colimit vertices identifies the choices). Now [lem-sc-strict-henselization-dvr] applies: $A$ is a DVR and $R\\to A$ is injective. Fix a uniformizer $\\pi$ of $R$ and denote its nonzero image in $A$ by $t$. In particular $R[1/\\pi]=K$. We do not need to assert that $t$ is a uniformizer of $A$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP3 (lemma-henselization-dvr); etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring); algebra.tex Tag 00PD"
+   }
+  },
+  {
+   "text": "By [def-weil-finite-type-morphism] there is a finite affine cover $X=\\bigcup_i U_i$ with $U_i=\\operatorname{Spec}B_i$ and each $B_i$ a finite-type $R$-algebra. Every section $a$ factors through one of these opens: choose $U_i$ containing the image of the closed point of $\\operatorname{Spec}A$. Its inverse image is open and contains the closed point. Every prime of a local ring is contained in its maximal ideal, so every point generalizes the closed point and lies in this open. It suffices to bound the defects for sections factoring through each fixed $U_i$.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "BLR 3.3 Proposition 3, first sentence of proof (printed p.66, primary scan PDF p.72); elementary local-spectrum argument"
+   }
+  },
+  {
+   "text": "Fix such an affine $U=\\operatorname{Spec}B$ and put $M=\\Omega_{B/R}$. By [lem-trf-relative-differential-sheaf-base-change], this is the finite module of sections of the quasi-coherent relative differential sheaf on $U$. By [lem-weil-pbc-finite-type-algebra-noetherian], $B$ is Noetherian, since $R$ is Noetherian. Thus [lem-sc-noetherian-finite-module-finite-presentation] makes $M$ finitely presented. Choose generators $m_1,\\ldots,m_m$ and the surjection $q:B^m\\to M$ taking the standard vectors to these generators. Here $m=0$ is allowed.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT (lemma-differentials-affine), 01V2 (lemma-finite-type-differentials); algebra.tex Tags 00FN (lemma-Noetherian-permanence), 0517 (finite modules over a Noetherian ring)"
+   }
+  },
+  {
+   "text": "Write $C=B[1/\\pi]$ and $P=M[1/\\pi]$. The differential base-change theorem [lem-trf-relative-differential-sheaf-base-change] and [lem-weil-pbc-localization-tensor] identify $P$ with $\\Omega_{C/K}$. The generic open $U_K$ is smooth, so [lem-ag-smooth-relative-differentials-finite-locally-free] makes its differential sheaf finite locally free, with rank allowed to vary. Refine its trivializing opens to principal opens $D(f)$: Zariski opens are unions of the $D(f)$ by definition. On such an open, the affine pullback formula [lem-weil-pbc-module-pullback-affine-sections] and [lem-weil-pbc-localization-tensor] identify the sections with $P_f$, hence $P_f$ is finite free. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], take finitely many such $D(f_j)$ covering $\\operatorname{Spec}C$, and their $f_j$ generate the unit ideal. Therefore [lem-sc-affine-standard-cover-finite-projective] makes $P$ projective. This works with varying ranks and also $C=0$ (the zero module is projective).",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-localization-tensor",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sc-affine-standard-cover-finite-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), (7) implies (3); Tags 00E0/00E8 (principal covers and quasi-compactness); morphisms.tex 02G1, schemes.tex 01I9, algebra.tex 00DE"
+   }
+  },
+  {
+   "text": "The localization $q_\\pi:C^m\\to P$ is surjective: for $y/\\pi^e\\in P$, choose $x\\in B^m$ with $q(x)=y$ and use $x/\\pi^e$. By projectivity in [def-weil-pbc-projective-module], choose $s:P\\to C^m$ with $q_\\pi s=\\mathrm{id}_P$. By [lem-weil-pbc-localization-flat], $B\\to C$ is flat. Apply [lem-weil-pbc-flat-base-change-hom-finitely-presented] with source $M$ and target $B^m$, and [lem-weil-pbc-localization-tensor] to its Hom module. The resulting identification is\n$$\\operatorname{Hom}_B(M,B^m)[1/\\pi]\\simeq\\operatorname{Hom}_C(P,C^m),\\qquad h/\\pi^b\\longmapsto\\pi^{-b}h_\\pi.$$\nThus $s=h_\\pi/\\pi^b$ for a $B$-linear $h:M\\to B^m$ and $b\\geq0$. This fraction is legitimate even when Hom is not finite: each tensor element is a finite sum, and fractions combine by $\\sum_j h_j/\\pi^{b_j}=(\\sum_j\\pi^{b-b_j}h_j)/\\pi^b$ for $b=\\max_j b_j$. Consequently $(qh-\\pi^b\\mathrm{id}_M)_\\pi=0$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "lem-weil-pbc-localization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 087R (lemma-pseudo-coherence-and-base-change-ext), part (1); algebra.tex Tags 00HT, 00DE, and 0583 (lemma-hom-from-finitely-presented), with projective lifting as in 05CF"
+   }
+  },
+  {
+   "text": "For each chosen generator $m_j$, its image $(qh-\\pi^b\\mathrm{id})(m_j)$ is zero after inverting $\\pi$. By the fraction equality in [def-weil-pbc-module-localization-away], there is $d_j\\geq0$ killing this image by $\\pi^{d_j}$. Put $d=\\max(\\{0\\}\\cup\\{d_j\\})$, $u=\\pi^d h$ and $N=b+d$. Then $qu=\\pi^N\\mathrm{id}_M$: equality holds on every $m_j$, hence on all their $B$-linear combinations. All of $m,N,q,u$ were chosen on $U$ before any section was chosen.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition 07JZ (definition-localization-module), equality of fractions; explicit finite-generator denominator calculation"
+   }
+  },
+  {
+   "text": "For a section through $U$, let $\\varphi:B\\to A$ be its ring map. By [lem-weil-pbc-module-pullback-affine-sections], $V_a\\simeq M\\otimes_{B,\\varphi}A$. Base change of $u$ and $q$ gives\n$$V_a\\xrightarrow{u_A}A^m\\xrightarrow{q_A}V_a,\\qquad q_Au_A=t^N\\mathrm{id}_{V_a},$$\nby composition compatibility in [def-weil-module-base-change]. In coordinates $(B^m)\\otimes_B A\\simeq A^m$ sends $e_j\\otimes a$ to the vector with $a$ in position $j$; the two maps satisfy the displayed identity on every $v\\otimes a$. If $v\\in V_a$ is torsion, a nonzero $z\\in A$ kills $v$, so it kills $u_A(v)$. Since $A$ is a domain, $A^m$ has no torsion; hence $u_A(v)=0$ and $t^Nv=0$. Also $q_A$ is surjective: the $m_j\\otimes1$ generate $V_a$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9 (lemma-widetilde-pullback); elementary tensor evaluation of the factorization and torsion calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pid-submodule-smith-bases] over $A$ to $J=\\ker(q_A)\\subseteq O=A^m$. It gives bases $e_1,\\ldots,e_m$ of $A^m$, $v_1,\\ldots,v_r$ of $J$, $r\\leq m$, and nonzero $c_i\\in A$ with $v_i=c_i e_i$. (The size of any basis of $A^m$ is $m$, by extension to the fraction field and finite-dimensional linear algebra.) The explicit coordinate quotient therefore gives\n$$V_a\\simeq A^{m-r}\\oplus\\bigoplus_{i=1}^r A/(c_i).$$\nThe torsion submodule $T_a$ is exactly the second summand: its free coordinates must vanish, and the product of the nonzero $c_i$ kills its remaining coordinates. In particular $T_a$ is generated by at most $m$ elements. This includes $J=0$, $m=0$, and unit $c_i$.",
+   "uses": [
+    "lem-sfb-pid-submodule-smith-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+    "place": "Submodule.exists_smith_normal_form_of_le, lines 492-497; elementary coordinate quotient calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-pid-noetherian-normal] and [lem-sc-dvr-dimension-one], $A$ is Noetherian of dimension one. Since $t\\ne0$ and $A$ is a domain, $t^N$ is a nonzerodivisor, so [lem-weil-pbc-dim-le-one-principal-quotient-finite-length] gives the finite integer\n$$L_U=\\operatorname{length}_A(A/t^NA).$$\nBy Steps 7-8 the at most $m$ cyclic generators of $T_a$ are killed by $t^N$. Sending the standard generators to them gives a surjection $(A/t^NA)^r\\twoheadrightarrow T_a$, $r\\leq m$. Repeatedly applying [lem-weil-pbc-length-additive-short-exact] to split direct sums gives source length $rL_U$. Applying it to the kernel sequence of this surjection gives $\\operatorname{length}_A(T_a)\\leq rL_U\\leq mL_U$. The bound $c_U=mL_U$ depends on the affine chart and $A$, not on $a$. For $N=0$ the quotient is zero and so is $T_a$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 00PE (lemma-finite-length, first assertion), 00IV (lemma-length-additive)"
+   }
+  },
+  {
+   "text": "For the fixed finite affine cover in Step 2, perform the construction once on each chart and set $c=\\max(\\{0\\}\\cup\\{c_{U_i}\\})$. Each section factors through a chart, and the pullback computed there is the original $V_a$, so Step 9 gives $\\delta_X(a)\\leq c$. If there are no sections the assertion is vacuous; if $X$ is empty use the empty cover and $c=0$. Neither a constant generic dimension nor separatedness, properness, completeness or excellence entered the argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite-maximum assembly; BLR 3.3 Proposition 3, printed pp.66-67 (online primary scan PDF pp.72-73)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-type-morphism",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-localization-tensor",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change",
+  "lem-sfb-pid-submodule-smith-bases",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent module-theoretic proof of BLR 3.3 Proposition 3: replace its Jacobian-minor denominator estimate by a localized projective splitting (00NX), Hom localization (0583/087R), and Smith form. BLR primary scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme with smooth generic fibre over a discrete valuation ring, torsion lengths of differentials pulled back along all strict henselian sections have a uniform bound",
+   "results": "{\"t\": \"2026-10-24T09:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type scheme with smooth generic fibre over a discrete valuation ring, torsion lengths of differentials pulled back along all strict henselian sections have a uniform bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"1e6991c58eaa09e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent dimension, formal smoothness and elliptic-curve valuation results do not bound all section differential torsion lengths for an arbitrary model."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothness.*defect|defect.*smoothness|torsion.*length|length.*torsion",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"grep\", \"query\": \"smoothness.*defect|defect.*smoothness|torsion.*length|length.*torsion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent dimension, formal smoothness and elliptic-curve valuation results do not bound all section differential torsion lengths for an arbitrary model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound on torsion lengths of relative differentials at all strict henselian sections of a generically smooth finite type scheme over a DVR",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"leansearch\", \"query\": \"Uniform bound on torsion lengths of relative differentials at all strict henselian sections of a generically smooth finite type scheme over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.formallyUnramified_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.FormallyUnramified.one_tmul_sub_tmul_one_mul_elem\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"instHenselianRingMaximalIdeal\", \"RingHom.Smooth.holdsForLocalizationAway\"], \"digest\": \"c620e14f8f640d28\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent dimension, formal smoothness and elliptic-curve valuation results do not bound all section differential torsion lengths for an arbitrary model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"length\"",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"length\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent dimension, formal smoothness and elliptic-curve valuation results do not bound all section differential torsion lengths for an arbitrary model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron measure delta for integral points is bounded above by a power of the uniformizer in the Jacobian ideal",
+   "results": "{\"t\": \"2026-10-24T09:15:12Z\", \"tool\": \"leanfinder\", \"query\": \"Neron measure delta for integral points is bounded above by a power of the uniformizer in the Jacobian ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"Polynomial.gaussNorm_intAdicAbv_le_one\", \"NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv_natCast_le_one\", \"ClassGroup.normBound\", \"IsDedekindDomain.HeightOneSpectrum.intAdicAbv_le_one\", \"IsDedekindDomain.HeightOneSpectrum.adicAbv_coe_le_one\", \"NumberField.mixedEmbedding.exists_ne_zero_mem_ideal_lt\"], \"digest\": \"d0f5cfada2652b71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent dimension, formal smoothness and elliptic-curve valuation results do not bound all section differential torsion lengths for an arbitrary model."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron.*defect|defect.*smooth|torsion.*length|length.*torsion",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"grep\", \"query\": \"Neron.*defect|defect.*smooth|torsion.*length|length.*torsion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned valuation, formally smooth cotangent and elliptic-curve declarations do not give a uniform bound over all sections of an arbitrary finite-type model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"length\"",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"length\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned valuation, formally smooth cotangent and elliptic-curve declarations do not give a uniform bound over all sections of an arbitrary finite-type model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound on torsion length of differentials pulled back to all sections of a generically smooth finite type scheme over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"leansearch\", \"query\": \"Uniform bound on torsion length of differentials pulled back to all sections of a generically smooth finite type scheme over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuativeRel.uniformizer_lt_one\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"ValuativeRel.le_uniformizer_iff\", \"Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal\", \"Valuation.HasExtension.instIsTorsionFreeInteger\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Valuation.Uniformizer.ext\"], \"digest\": \"1903984bdfb4a3c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned valuation, formally smooth cotangent and elliptic-curve declarations do not give a uniform bound over all sections of an arbitrary finite-type model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron measure of the defect of smoothness is bounded over all integral points of a generically smooth model over a DVR",
+   "results": "{\"t\": \"2026-10-24T09:53:58Z\", \"tool\": \"leanfinder\", \"query\": \"Neron measure of the defect of smoothness is bounded over all integral points of a generically smooth model over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.isMinimal_iff\"], \"digest\": \"44e6e40bef25883c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned valuation, formally smooth cotangent and elliptic-curve declarations do not give a uniform bound over all sections of an arbitrary finite-type model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-smooth-model-smoothening",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 3.3 Proposition 3 and proof, printed pp.66-67, PDF pp.72-73; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED.",
+   "via": [
+    "lem-sfb-generic-smooth-model-smoothening",
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-uniform-section-differential-bound",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the uniform bound into a finite affine reduction, differential finiteness, projectivity on the generic fibre, explicit denominator clearing of a split surjection, annihilation of pulled-back torsion, Smith generators and the finite-length quotient estimate. Reused existing nodes throughout; no new nodes or Mathlib leaves. Read BLR 3.3 Proposition 3 online and wrote an agent algebraic proof with Stacks tools.",
+  "blueprint": "blueprint_refs.py ancestor returns None, as recorded by the inherited chain. No latest-blueprint node states the assertion. The proof realizes the boundedness input in BLR 3.3 Proposition 3 used by lem-sfb-generic-smooth-model-smoothening (its defect induction, Steps 2 and 8); no unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the specified algebraic strict henselization with the geometric strict local ring; generic algebraic-geometry tool needed for 0AP3. The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Injectivity and preservation of DVRs under strict henselization; generic local algebra, not a replacement of a constructibility argument. The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Uses only the general affine differential, finite-type and arbitrary-base-change assertions (01UT/01V0/01V2). The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Uses only smooth relative differentials being finite locally free, with variable rank (02G1). The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Ordinary quasi-coherent pullback is tensor product on affines (01I9), the generic tool identifying section modules. The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "The algebraic equivalence between a finite standard free cover and finite projectivity (00NX); no geometric finiteness theorem from the ambient unit is replaced. The inherited unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic DVR dimension-one fact, used to verify the finite-length quotient hypothesis. The inherited unit has no substitute for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-dvr",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-sc-dvr-dimension-one"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-cdf348986",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-cdf348986 (reviewer sub-agent of L); spot-checked: I read all ten steps in full against the statement of every cited node. The item statement is unchanged and the split adds no new nodes. BLR 3.3 Prop 3 is not in literature/; it is recorded as WANTED, and proof_origin=agent fits, because the proof is not BLR's: it is a module argument that I checked line by line. Step 1: the strict-local comparison (X=Spec R, L=R) together with the DVR lemma on strict henselizations (0AP3, read at more-algebra.tex:11223) makes A a DVR and R→A injective, so t≠0. Steps 3-4: Ω_{B/R} is finitely presented (B Noetherian), and P=M_π≅Ω_{C/K} is finite projective by the finite free principal-open cover criterion (00NX), with variable rank allowed and C=0 allowed. Steps 5-6: projective lifting plus Hom localization for a finitely presented source (0583, algebra.tex:1514) give s=h_π/π^b; the denominator is then cleared explicitly on generators to get qu=π^N id_M. Step 7: t^N kills torsion because A^m is torsion-free. Step 8: Smith form applied to ker q_A ⊆ A^m gives at most m cyclic torsion generators. Step 9: length(T_a) ≤ m·length(A/t^N) < ∞ by finite length and additivity. Step 10: maximum over finitely many charts. Small cases checked: smooth affine space, the nodal model xy=π² with section (π,π), charts with mixed generic dimensions, empty X or no sections, m=0, N=0. Duplicate search: the defect criterion, dilatation estimate and relation-minors nodes do not state the uniform bound. Batch-5 flag on lem-trf-relative-differential-sheaf-base-change: it is the general Stacks lemma on differentials (01UT/01V0/01V2). Its 190-node closure contains no sec-trace-formula or sec-poincare-duality node other than itself and no batch-4 target; neither assumption provides it and it is not a trace-formula step, so it is accepted. The seven worker-recorded tool_uses are all generic and accepted. Cosmetic only, not changed: the source.document of Steps 2 and 10 names algebra.tex while the place is BLR. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniformSectionDifferentialBound",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_uniform_section_differential_bound",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.sectionDifferentialModule",
+   "AlgebraicGeometry.Scheme.Hom.exists_uniform_section_differential_bound"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniformSectionDifferentialBound.lean",
+  "statement": "theorem exists_uniform_section_differential_bound (R K ksep A : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field ksep] [Algebra (IsLocalRing.ResidueField R) ksep] [IsSepClosure (IsLocalRing.ResidueField R) ksep] [Algebra R ksep] [IsScalarTower R (IsLocalRing.ResidueField R) ksep] [CommRing A] [Algebra R A] (P : Algebra.StrictHenselizationPresentationIn.{u, u} R ksep A) {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [Flat f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))))] : ∃ c : ℕ, ∀ (a : Spec (.of A) ⟶ X), a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) → Module.length A (Submodule.torsion A (f.sectionDifferentialModule a)) ≤ (c : ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6f2f430c",
+  "group": "NH",
+  "result": "pass",
+  "note": "Clause-by-clause match: DVR R, fraction field K, separable residue closure ksep with scalar tower, A via StrictHenselizationPresentationIn.{u,u} (no extra assumptions on A), Flat+LocallyOfFiniteType+QuasiCompact f, Smooth pullback.snd generic fibre without relative dimension, all R-sections via a ≫ f = Spec.map(algebraMap R A) (empty allowed). V_a = Γ(tensorPullback a of relativeDifferentials, ⊤) made an A-module through ΓSpecIso.inv (real data, no choice). Submodule.torsion equals the node's set because A is a domain (a consequence, not assumed); Module.length in ℕ∞; ∃ c : ℕ before ∀ a. One universe u, forced by the schemes; not a silent restriction. Statement field verbatim; only the lean field changed; source/blueprint docstrings and all 10 proof steps present; sorry only; no dependency-record changes. Edge cases: empty X or no sections, varying ranks, xy=π². Not compiled (no file changed); worker reports a clean server compile. Notes: parallel same-item NF 9f980915b also PASS, not landed yet, first lander owns; sibling NN/Q21/Q136 deliveries define similar section-differential helpers under other names (no clash, possible shared def node later); the second reading is the author's own and thin; the helper docstring cites p.65 against the item's pp.66-67 (cosmetic)."
+ }
+}

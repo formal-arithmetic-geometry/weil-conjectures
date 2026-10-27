@@ -355,7 +355,18 @@
   "lem-weil-scalar-extension-composition"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -438,5 +449,39 @@
   "group": "Q44",
   "result": "pass",
   "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be morphisms of schemes, and use the derived direct images of\n[def-weil-derived-direct-image]. There is a canonical isomorphism\n\n$$\n c_{g,f}:R(g\\circ f)_*\\xrightarrow{\\ \\sim\\ }Rg_*\\circ Rf_*\n$$\n\nas functors $D(X_{\\mathrm{proét}},\\Lambda)\\to D(Z_{\\mathrm{proét}},\\Lambda)$ of\nthe derived categories of $\\Lambda$-modules, for every commutative condensed\nring $\\Lambda$, and on the étale site. The cases used later are:\n\n1. at finite level $\\Lambda=A_{E,n}$;\n1. for $\\Lambda=\\mathcal O_E$;\n1. for $\\Lambda=E$;\n1. for $\\Lambda=\\Qlb$;\n1. on the small étale site, for any ring $A$ (more generally for sheaves with\nvalues in a Grothendieck abelian category), as functors\n$D(X_{\\mathrm{et}},A)\\to D(Z_{\\mathrm{et}},A)$ between the ordinary\nderived categories of étale sheaves of $A$-modules.\n\nIn cases (1)–(4) the isomorphism restricts to the bounded constructible\ncategories whenever $Rf_*$ and $Rg_*$ preserve them.\n\nThe isomorphism $c_{g,f}$ is natural in $K$, is the identity when $f$ or $g$\nis an identity, and is associative: for a further morphism $h:Z\\to W$ the\ntwo isomorphisms $R(hgf)_*\\cong Rh_*Rg_*Rf_*$ built from $c$ agree. In\nparticular it is compatible with transport of structure along automorphisms\nof $X,Y,Z$ commuting with $f$ and $g$ (such as Frobenius), since the direct\nimage along an automorphism $\\sigma$ is the inverse image along\n$\\sigma^{-1}$.",
+  "proof": [
+   {
+    "text": "*Condensed coefficients.* Let $\\Lambda$ be a commutative condensed ring. The\npushforward of module objects $f_*:\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$ has\nthe module pullback $f^*$ as left adjoint\n([def-sfb-module-upper-lower-adjunction]), and $f^*$ is exact\n([det-prop-sfb-module-pullback-exact-main]). Hence $f_*$ carries K-injective\ncomplexes [def-sp-kinjective-bridge] to K-injective complexes: for\nan acyclic $B$ one has $\\operatorname{Hom}(B,f_*I)=\\operatorname{Hom}(f^*B,I)$,\nand $f^*B$ is acyclic. This is the argument of\n[lem-weil-pbc-direct-image-preserves-injectives], applied to complexes of\n$\\Lambda$-modules on the pro-étale site. If $K\\to I$ is a K-injective\nresolution, then $f_*I$ is a K-injective complex computing $Rf_*K$, so\n\n$$\n Rg_*Rf_*K=g_*f_*I\\cong(gf)_*I=R(gf)_*K,\n$$\n\nthe middle isomorphism being the composition isomorphism of module\npushforwards ([def-sfb-module-lower-star-comp]). By the well-definedness and\nfunctoriality of K-injective resolutions ([lem-sp-kinjective-computes],\npart (1)), the resulting isomorphism does not depend on $I$ and is natural in\n$K$. Identity and associativity hold because the composition isomorphisms of\nthe module pushforwards satisfy them on the same representative $I$. The\nargument is the same for every $\\Lambda$, which gives items (1)–(4); for $\\Lambda=A_{E,n}$ the module\npullback is the classical $f^{-1}$ of\n[def-weil-derived-pullback-tensor-hom]. No completeness, reduction or\nextension of scalars is involved: for $\\mathcal O_E$, $E$ and $\\Qlb$ the\ncategories $D(-_{\\mathrm{proét}},\\Lambda)$ and the functors $Rf_*$ are defined\ndirectly over the condensed ring.",
+    "uses": [
+     "def-sfb-module-upper-lower-adjunction",
+     "def-sp-kinjective-bridge",
+     "lem-weil-pbc-direct-image-preserves-injectives",
+     "def-sfb-module-lower-star-comp",
+     "lem-sp-kinjective-computes",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Étale site.* The same argument applies verbatim on the small étale site with\nany coefficient ring (item (5)) and to sheaves of abelian groups.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Description by adjunction.* Equivalently, $c_{g,f}$ is the conjugate, under the\nadjunctions $Lf^*\\dashv Rf_*$, $Lg^*\\dashv Rg_*$ and $L(gf)^*\\dashv R(gf)_*$, of\nthe composition isomorphism $L(gf)^*\\cong Lf^*\\circ Lg^*$ of the derived inverse\nimages: both are characterised by their compatibility with the units. In this\nform unitality and associativity of $c$ follow from those of the composition\nisomorphisms of the derived inverse images, by uniqueness of conjugates. For\nthe bounded constructible categories the same conjugation, applied to the\nadjunctions between the derived inverse and direct images on bounded\nconstructible complexes, gives the restricted isomorphism.\n\nFinally, for an automorphism $\\sigma$ the direct image $R\\sigma_*$ is\ninverse to $R(\\sigma^{-1})_*$ by the identity and associativity properties.\nAn automorphism of the diagram $X\\to Y\\to Z$ therefore transports $c_{g,f}$\nto itself by associativity, which is the asserted compatibility with\ntransport of structure.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

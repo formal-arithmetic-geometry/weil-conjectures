@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03ER and 08FC, exact field tensor; Bhatt--Scholze Remark 6.3.2, finite Tor amplitude over a field; total with a degree-zero complex uses Stacks Tag 06YL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsComplete|mapHomologicalComplexHomologyIso",
+   "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/Combinatorics/SimpleGraph/Maps.lean",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived complete complexes of sheaves along a locally closed immersion and an equivalence of ringed sites, preserving residue and slice comparisons",
+   "results": "SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_hom_app_app, SheafOfModules.pushforwardNatIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantFiniteTypeModules|isFlat_constantFieldModule",
+   "results": "No indexed Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexHomologyIso\"",
+   "results": "No indexed Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a constant field sheaf every module sheaf is flat and tensor with a degree zero sheaf commutes with homology",
+   "results": "Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionLiftingInput",
+  "date": "2026-10-26",
+  "group": "W5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "id": "lem-sfb-constant-field-residue-tensor-bounds",
+ "title": "Tensor bounds for any representative over a constant field sheaf",
+ "statement": "On a small site [def-weil-size-convention], let k be a field [def-weil-field], R its associated constant commutative ring sheaf [def-weil-pbc-constant-sheaf], and C an object of the standard derived category of R-module sheaves [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category], with homology in [a,b]. For every complex P with Q(P) isomorphic to C and every R-module sheaf N, the signed total tensor P⊗N[0] [def-weil-pbc-ringed-koszul-system] has homology zero outside [a,b]. No K-flatness hypothesis on P is needed.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-field",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Every module sheaf over the associated constant field sheaf is flat. Compare the site sheaf tensor and the monoidal tensor to deduce exactness of tensorRight N.",
+   "uses": [
+    "lem-exc-constant-field-module-flat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard localization homology comparison and Q(P)≅C give bounds for P. The single-factor total comparison identifies P⊗N[0] with termwise tensorRight N. Exact tensor commutes with homology and takes zero to zero.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Immersion lifting input: explicit residue, field tensor, lisse transport, or completed restriction step"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof invoking the forward implication of the integral criterion, restriction and coefficient normalization before lisse residue lifting; Tensor bounds for any representative over a constant field sheaf",
+   "via": [
+    "lem-sfb-adic-immersion-lifting-input",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-adic-constructible-local-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantFieldResidueTensorBounds",
+  "file": "lean/Sheaf/Paper/ConstantFieldResidueTensorBounds.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantFieldResidueTensor_bounds",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantFieldResidueTensor_bounds"
+  ],
+  "statement": "theorem constantFieldResidueTensor_bounds\n    (C : ConstantCompletion.D (ConstantCompletion.constant J k))\n    (a b : ℤ)\n    (h : ∀ q : ℤ, (q < a ∨ b < q) → IsZero\n      ((adicResidueCohomology (ConstantCompletion.constant J k) q).obj C))\n    (P : ConstantCompletion.Cx (ConstantCompletion.constant J k))\n    (e : Nonempty ((ConstantCompletion.Q (ConstantCompletion.constant J k)).obj P ≅ C))\n    (N : ConstantCompletion.Mod (ConstantCompletion.constant J k))\n    (q : ℤ) (hq : q < a ∨ b < q) :\n    IsZero (adicResidueTensorCohomology (ConstantCompletion.constant J k) P N q)",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203641-L-2837290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203641-L-2837290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-smooth-group-invertible-multiplication",
+ "kind": "statement",
+ "title": "Invertible multiplication on a smooth commutative group space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $G$ be a smooth commutative group algebraic space over $S$ [def-trf-algebraic-space]. Thus $G$ is an algebraic space with multiplication, inverse and identity morphisms satisfying the commutative group identities; smoothness means smoothness on etale scheme charts. Let $n\\geq1$ be an integer invertible in every local ring of $S$. The multiplication morphism $[n]:G\\to G$, the sum of $n$ copies of the identity under the group law, is etale. Its kernel $G[n]=G\\times_{G,[n],e}S$ is an etale group algebraic space over $S$. Formation of this kernel commutes with arbitrary base change. No properness of $G$ or finiteness of $G[n]\\to S$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF5, lemma-group-scheme-addition-tangent-vectors, and the differential argument of Tag 0BFH, lemma-abelian-variety-multiplication-by-d-etale; agent generalization to smooth commutative group algebraic spaces by infinitesimal lifting, without properness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness of $G/S$ on scheme charts includes local finite presentation. The chart criterion transfers this to $G\\to S$; it is also locally of finite type, since a finitely presented algebra has finitely many generators. Apply relative local finite presentation to $X=Y=G$, $Z=S$, $f=[n]$ to see that $[n]$ is locally of finite presentation.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-relative-lfp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0410 (lemma-finite-presentation-local) and 05WT (lemma-finite-presentation-permanence)."
+   }
+  },
+  {
+   "text": "Fix an affine first order test $j:T_0\\hookrightarrow T=\\operatorname{Spec}A$ over $S$, with square-zero ideal $I$. The kernel $K=\\ker(G(T)\\to G(T_0))$ is an $A/I$-module whose addition is its group law, and $[n]|_K$ is multiplication by $n$. The section $n\\in\\mathcal O_S$ is a unit because it is a unit in every stalk; its local inverses are unique and glue. Its pullback to $T_0$ therefore has an inverse. Multiplication by $n$ on $K$ is bijective, with inverse multiplication by this inverse scalar.",
+   "uses": [
+    "lem-sfb-group-space-square-zero-kernel-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 04D0 (lemma-action-by-derivations); groupoids.tex Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), square-zero extension."
+   }
+  },
+  {
+   "text": "Given $x_0\\in G(T_0)$ and $y\\in G(T)$ with $[n]x_0=y|_{T_0}$, smooth affine lifting supplies $x\\in G(T)$ lifting $x_0$. In additive notation put $d=y-[n]x\\in K$. Step 2 gives a unique $k\\in K$ with $[n]k=d$. Then $x+k$ lifts $x_0$ and maps to $y$, since $G$ is commutative. If $z$ is a second such lift, $z-(x+k)\\in K$ and its $n$-multiple is zero, so it is zero by step 2. This proves unique lifting for $[n]$.",
+   "uses": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM (lemma-smooth-formally-smooth), affine lifting; correction by the square-zero kernel of step 2."
+   }
+  },
+  {
+   "text": "The map $[n]$ is locally of finite presentation by step 1 and satisfies the unique first order lifting condition by step 3. The infinitesimal criterion therefore makes $[n]:G\\to G$ etale.",
+   "uses": [
+    "lem-sfb-space-lfp-formally-etale-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0616 (lemma-etale-formally-etale), implication (2) to (1)."
+   }
+  },
+  {
+   "text": "By step 4 and the single-diagram test for etaleness, choose surjective representable etale atlases $a:U\\to G$, $b:V\\to G$ from schemes and $h:U\\to V$ with $bh=[n]a$; then $h$ is an etale scheme morphism. Every scheme base change of $h$ is etale, so $h$ is representable etale. Thus $h$ and $b$ are chartwise etale, hence so is $bh=[n]a$; as $U$ is a scheme, $[n]a$ is representable etale, and atlas detection (3) makes $[n]$ chartwise etale. The sheaf fibre product $G[n]=G\\times_{G,[n],e}S$ is an algebraic space, and $G[n]\\to S$ is chartwise etale as the base change of $[n]$ along $e$. For a surjective representable etale $a\\prime:U\\prime\\to G[n]$ from a scheme, $U\\prime\\to S$ is therefore representable etale, i.e. an etale scheme morphism; with $\\operatorname{id}_S$ as target chart this one diagram shows that $G[n]\\to S$ is etale on charts. For every $S$-scheme $T$, its points are exactly $\\{x\\in G(T):[n]x=0\\}$; this subset is closed under addition, inverse and zero. These operations are natural in $T$, hence define the commutative group-space structure. For $S\\prime\\to S$, both $G[n]\\times_SS\\prime$ and $G_{S\\prime}[n]$ represent the same functor $T\\mapsto\\{x\\in G(T):[n]x=0\\}$ on $S\\prime$-schemes, compatibly with their projections and group laws. The fibre-product universal property gives their canonical isomorphism.",
+   "uses": [
+    "lem-sfb-unramified-etale-compatible-charts",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-space-etale-source-atlas-detection",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FU (lemma-base-change-etale); spaces.tex Tag 02X2 (lemma-fibre-product-spaces); morphisms.tex Tag 02GO (lemma-base-change-etale) for scheme charts; universal property of the kernel fibre product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-sfb-group-space-square-zero-kernel-module",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "lem-sfb-space-lfp-formally-etale-criterion",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Square-zero correction argument using Tags 04AM, 0616, 0618, 04D0 and 05WT; extends the differential idea of groupoids.tex Tags 0BF5 and 0BFH without abelian-variety finiteness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by an invertible integer on a smooth commutative group algebraic space is etale and its kernel is etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.instIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], Algebra.IsStandardEtale R R\", \"doc\": \"The identity algebra structure on a commutative ring $ R $ is standard étale. This means $ R $, viewed as an $ R $-algebra via the identity map, satisfies the condition of being isomorphic to a locali\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth commutative group scheme G over S and n invertible on S the multiplication by n morphism is etale",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"[Algebra R S] [Algebra.IsStandardSmoothOfRelativeDimension n R S] : ∃ g : MvPolynomial (Fin n) R →ₐ[R] S, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"nsmul\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sEtale.*(nsmul|zsmul|[Pp]ow)|[Ee]tale.*multiplication|[Ee]tale.*[Gg]roup",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by an invertible integer on a smooth commutative group algebraic space over a scheme is etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring smoothness, abstract torsion subgroups, and scheme etaleness do not state multiplication etaleness for a group algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme has etale multiplication by n when n is a unit on the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring smoothness, abstract torsion subgroups, and scheme etaleness do not state multiplication etaleness for a group algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The n torsion kernel of a smooth commutative group algebraic space is etale for n invertible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddSubgroup.torsionBy\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \": AddSubgroup A\", \"doc\": \"The additive subgroup consisting of all elements $ a \\\\in A $ such that $ n \\\\cdot a = 0 $, where $ n $ is an integer. This is the subset of elements in the additive commutative group $ A $ annihilated \"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"AddSubgroup.torsionBy.nsmul\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \"(x : A[n]) : n • x = 0\", \"doc\": \"For any element $x$ in the torsion subgroup $A[n]$, it holds that $n \\\\cdot x = 0$, where $n \\\\cdot x$ denotes the scalar multiplication of $x$ by the natural number $n$.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Submodule.torsionBy\", \"module\": \"Mathlib.Algebra.Module.Torsion.Basic\", \"type\": \"(a : R) : Submodule R M\", \"doc\": \"The submodule consisting of all elements $ m \\\\in M $ such that $ a \\\\cdot m = 0 $, where $ a $ is an element of the commutative semiring $ R $. This is the kernel of the linear map induced by scalar mu\"}\n  {\"name\": \"CommGroup.torsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \": Subgroup G\", \"doc\": \"The torsion subgroup of a commutative group $G$ consists of all elements of finite order. For any element $x$ in this subgroup, there exists a positive integer $n$ such that $x^n = 1$, and the inverse\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring smoothness, abstract torsion subgroups, and scheme etaleness do not state multiplication etaleness for a group algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"npow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring smoothness, abstract torsion subgroups, and scheme etaleness do not state multiplication etaleness for a group algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|IsEtale).*(npow|nsmul|multiplication)|(npow|nsmul).*etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring smoothness, abstract torsion subgroups, and scheme etaleness do not state multiplication etaleness for a group algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space.",
+   "via": [
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-group-invertible-multiplication",
+  "worker": "stage1",
+  "summary": "No exact project attachment exists: etale_npow_id requires an abelian variety over a field. Preserve the arbitrary-base smooth commutative algebraic-space statement and prove unique infinitesimal lifting by correcting a smooth lift using the module-valued square-zero kernel. Reuse affine smooth lifting, chart detection, fibre products and etale base-change permanence; expose three strictly smaller statement-only inputs. All new nodes were searched twice semantically plus LeanSearch, Loogle and grep.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/Picard-level chain at its smooth relative Picard torsion input. The latest blueprint proof (3) was read; the item is a created auxiliary node and blueprint_refs ancestor returns None, retained exactly.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products, used to construct the kernel; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale base-change permanence on algebraic spaces; needed for the kernel projection, not a change to the unit route."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic atlas test (3) converting etaleness of [n] on compatible charts into chartwise etaleness, which the base-change permanence statement requires; no node of the unit gives this conversion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-5286e7cbd",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-5286e7cbd (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and Stacks 0BF5, 0BFH, 05WT, 0616, 04GC (with lemma-formally-etale), 0618 and 04D0 at their labels. The item statement is unchanged and true. Tested: n=1, empty S, G_a, G_m, an infinite constant group, and G_a in characteristic p with n=p (not étale, so the invertibility hypothesis is needed). Live and side-live still show the item unsplit, so no other delivery supersedes it. Steps 1-4 hold: lfp by the chart test plus the new 05WT node with X=Y=G, Z=S; n is a global unit of O_S, so multiplication by n on the A/I-module K is bijective; a smooth affine lift is corrected by k=n^{-1}(y-[n]x), which uses commutativity, and the lift is unique; the new 0616 criterion is applied in the right direction. Fixed one C4/C2 fault in step 5. It was marked elementary and applied the chartwise-etale base-change node to [n], which step 4 only shows étale in the chart sense. The step now writes out the conversion using lem-sfb-unramified-etale-compatible-charts, lem-weil-pbc-etale-scheme-base-change (02GO) and lem-trf-space-etale-source-atlas-detection (3), and converts back to chart-sense étaleness for G[n]->S. elementary is now false, proof_deps is updated, and the detection node is declared as a tool use. New nodes: the kernel-module node is true (0618/04D0 torsor trivialised by e_T, and the group law becomes the sum as in 0BF5). It overlaps lem-sfb-space-infinitesimal-lift-pseudotorsor only in the torsor bijection, so it is not a duplicate. The criterion node is 0616 (2)=>(1) and not a duplicate; advisory: it follows in a few lines from lem-sfb-formally-etale-space-chart-locality, lem-sfb-lfp-unique-infinitesimal-lifts-etale and the chart test. The 05WT node matches its source exactly, and none restates a clause of the item. Batch-5: def-trf-algebraic-space, the trf fibre-products node, the trf etale-permanence node and the added atlas-detection node are generic algebraic-space definitions and foundations, not steps of the trace formula or Poincaré duality; all accepted. No SGA citation, and nothing is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGroupInvertibleMultiplication",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smoothGroup_invertible_multiplication",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CommutativeSpaceGroup.restrictionHom",
+   "AlgebraicGeometry.AlgebraicSpace.CommutativeSpaceGroup.npow",
+   "AlgebraicGeometry.AlgebraicSpace.CommutativeSpaceGroup.torsionSpace",
+   "AlgebraicGeometry.AlgebraicSpace.CommutativeSpaceGroup.torsionInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.smoothGroup_invertible_multiplication"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGroupInvertibleMultiplication.lean",
+  "statement": "theorem smoothGroup_invertible_multiplication {S : Scheme.{u}} (G : AlgebraicSpace S) (H : CommutativeSpaceGroup G) (hsmooth : MapIsLocally (@Smooth) (groupSpaceProjection G)) (n : ℕ) (hn : 1 ≤ n) (hunit : ∀ s : S, IsUnit (n : S.presheaf.stalk s)) : MapIsLocally (@Etale) (H.npow n) ∧ MapIsLocally (@Etale) (groupSpaceProjection (H.torsionSpace n)) ∧ (∃ K : CommutativeSpaceGroup (H.torsionSpace n), (∀ T : (Over S)ᵒᵖ, (H.torsionInclusion n).hom.hom.app T (@One.one _ (K.group T).toOne) = @One.one _ (H.group T).toOne) ∧ ∀ (T : (Over S)ᵒᵖ) (x y : (H.torsionSpace n).obj.obj.obj T), (H.torsionInclusion n).hom.hom.app T (@Mul.mul _ (K.group T).toMul x y) = @Mul.mul _ (H.group T).toMul ((H.torsionInclusion n).hom.hom.app T x) ((H.torsionInclusion n).hom.hom.app T y)) ∧ ∀ B : Over S, IsPullback (Functor.whiskerLeft (Over.map B.hom).op (H.torsionInclusion n).hom.hom) (Functor.whiskerLeft (Over.map B.hom).op (Limits.pullback.snd (H.npow n).hom H.identity.hom).hom) (Functor.whiskerLeft (Over.map B.hom).op (H.npow n).hom.hom) (Functor.whiskerLeft (Over.map B.hom).op H.identity.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing CommutativeSpaceGroup and chart tests without the additional integral-fibre hypotheses of IsSmoothIntegralGroupSpace. The pointwise n-th power, actual sheaf kernel and its inclusion are constructed explicitly. Arbitrary base change is stated as preservation of the canonical kernel pullback square under restriction to S-prime schemes; its right-hand map is the n-th power on the restricted group. The actual sheaf pullback definitions are supplied by the existing def-sfb-space-sheaf-fibre-product node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-522de6da6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Re-delivery of 045ca7feb414 (RETURN H2). The diff against the returned head is exactly the prescribed repair: the stmt_dep lem-trf-space-enlarged-etale-ringed-site-model is replaced by def-sfb-space-sheaf-fibre-product (existing:true, owns enlargedFibreProduct/Fst, plain sheaf-pullback defs at EnlargedEtaleRingedSite.lean:230-238); the public import SpaceCotangentRingMap is replaced by EnlargedEtaleRingedSite; the note and report are updated; the Lean declarations and theorem signature are byte-identical. Against the side-live base only lean and stmt_deps differ, and the 5 added stmt_deps are landed def nodes that own the declarations used. Independent clause check: CommutativeSpaceGroup with no integral-fibre hypotheses; MapIsLocally Smooth/Etale chart convention; n≥1 a unit in every stalk; npow is pointwise x^n; the kernel is the fibre product of [n] and e, with an induced group K pinned by the mono inclusion; the base-change clause is IsPullback of the square restricted along Over.map B.hom for all B. Edge cases n=1, empty S, G_a with n=p in characteristic p, infinite constant groups and universes are all fine. Gates: no hollow defs, sorry only, docstrings present. Not compiled: no file changed, and the removed import supplied no name the file uses."
+ }
+}

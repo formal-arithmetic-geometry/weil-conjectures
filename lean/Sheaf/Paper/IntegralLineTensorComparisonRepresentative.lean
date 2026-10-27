@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralLineTensorComparisonDefinitions
+import all Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Algebra.Homology.LineUnboundedDerivedTensor
+import Sheaf.Algebra.Homology.KFlatTotalTensorModel
+import all Sheaf.Paper.IntegralTensorReductionTowerComparison
 
 
 /-! Integral line tensor comparison. -/
@@ -15,16 +19,55 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe t u
+universe t u c v r
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace WeilConjectures
 open IntegralOnSlice
 
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
+  HasDerivedCategory.standard reductionWitness
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : AlgebraicGeometry.Scheme.{t})
 
+private theorem generator_smul (n : ℕ) (M : Mod l E X none) (V : X.ProEtᵒᵖ)
+    (a : (finite l E X none n).obj.obj V) (x : M.val.obj V) :
+    generator l E X none n M V a x = a • generator l E X none n M V 1 x := by
+  let η := (PresheafOfModules.sheafificationAdjunction.{max u (t + 1)}
+    (𝟙 (SheafOfModules.derivedChangeRingIndependentCoefficients
+      (topology X none) (finite l E X none n)).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+          (projection l E X none n) M)
+  let g := (eqToHom (reduction_obj l E X none n M).symm).val.app V
+  change g (η.app V (a ⊗ₜ[(ring l E X none).obj.obj V,
+      ((projection l E X none n).hom.app V).hom] x)) =
+    a • g (η.app V ((1 : (finite l E X none n).obj.obj V) ⊗ₜ[
+      (ring l E X none).obj.obj V, ((projection l E X none n).hom.app V).hom] x))
+  rw [← g.hom.map_smul, ← (η.app V).hom.map_smul]
+  congr 2
+  symm
+  exact (ModuleCat.ExtendScalars.smul_tmul
+    (f := ((projection l E X none n).hom.app V).hom) a 1 x).trans (by rw [mul_one])
+
+private theorem tensorGenerator_smul
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{max c v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+    (R : Sheaf J CommRingCat.{max c v r})
+    (P Q : CochainComplex (SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
+        RingCat.{max c v r})).obj R)) ℤ)
+    (p q k : ℤ) (h : p + q = k) (V : Cᵒᵖ)
+    (a : R.obj.obj V) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :
+    coefficientTensorGenerator.{r, c, v} J R P Q p q k h V (a • x) y =
+      a • coefficientTensorGenerator.{r, c, v} J R P Q p q k h V x y := by
+  delta coefficientTotalTensor coefficientTensorGenerator
+  simp only [← TensorProduct.smul_tmul', map_smul]
+
+-- Retain the named witnesses in the original public signature.
+set_option linter.unusedVariables false in
 /-- A line has a K-flat single complex, its tensor with a good complex is good,
 and scalar extension commutes with that total tensor with the specified generators.
 Source: Stacks 06YQ, 06YY and 07A4
@@ -70,6 +113,45 @@ theorem integralLineTensorComparison_representative
                 ((integralLineFiniteComplex l E X n).obj ((integralLineSingle l E X).obj T))
                 p q k hpq V (generator l E X none n (P.obj.X p) V a x)
                 (generator l E X none n (((integralLineSingle l E X).obj T).X q) V 1 y)) := by
-  sorry
+  classical
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let : HasDerivedCategory
+      (SheafOfModules.LineUnbounded.Modules.{t, u} X (ring l E X none)) :=
+    HasDerivedCategory.standard _
+  obtain ⟨_, _, hT, _, hTf, _, _⟩ :=
+    SheafOfModules.LineUnbounded.line_unbounded_derived_tensor.{t, u} X
+      (ring l E X none) T
+  have htotal := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+    (ring l E X none) P.obj ((integralLineSingle l E X).obj T)
+    P.property.1 hT P.property.2 hTf
+  refine ⟨hT, ⟨htotal.1, htotal.2.1⟩, ?_⟩
+  intro n
+  obtain ⟨κ, hκ⟩ := scalarTensorTotal.{t + 1, t, u}
+    (projection l E X none n) (reduction l E X none n)
+    (reduction_obj l E X none n) (unrestrictedReduction_map l E X n)
+  refine ⟨κ.app (P.obj, (integralLineSingle l E X).obj T), ?_⟩
+  intro p q k hpq V a x y
+  subst k
+  have hh := hκ P.obj ((integralLineSingle l E X).obj T) p q (p + q) rfl V x y
+  change ((κ.hom.app (P.obj, (integralLineSingle l E X).obj T)).f (p + q)).val.app V
+      (generator l E X none n _ V 1
+        (coefficientTensorGenerator.{u, t + 1, t} (topology X none)
+          (ring l E X none) P.obj ((integralLineSingle l E X).obj T)
+          p q (p + q) rfl V x y)) =
+    coefficientTensorGenerator.{u, t + 1, t} (topology X none) (finite l E X none n)
+      ((integralLineFiniteComplex l E X n).obj P.obj)
+      ((integralLineFiniteComplex l E X n).obj ((integralLineSingle l E X).obj T))
+      p q (p + q) rfl V (generator l E X none n (P.obj.X p) V 1 x)
+      (generator l E X none n (((integralLineSingle l E X).obj T).X q) V 1 y) at hh
+  rw [generator_smul, map_smul]
+  trans a • coefficientTensorGenerator.{u, t + 1, t} (topology X none)
+    (finite l E X none n) ((integralLineFiniteComplex l E X n).obj P.obj)
+    ((integralLineFiniteComplex l E X n).obj ((integralLineSingle l E X).obj T))
+    p q (p + q) rfl V (generator l E X none n (P.obj.X p) V 1 x)
+    (generator l E X none n (((integralLineSingle l E X).obj T).X q) V 1 y)
+  · exact congrArg (fun z ↦ a • z) hh
+  rw [generator_smul l E X n (P.obj.X p) V a x]
+  exact (tensorGenerator_smul.{t + 1, t, u} (topology X none)
+    (finite l E X none n) _ _ p q (p + q) rfl V a _ _).symm
 
 end WeilConjectures

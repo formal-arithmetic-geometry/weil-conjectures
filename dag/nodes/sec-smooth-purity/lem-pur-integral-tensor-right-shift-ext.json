@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-integral-tensor-right-shift-ext",
+ "kind": "statement",
+ "title": "Normalized completed right tensor shifts are equal",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W and an integer r. Let sigma and tau be natural isomorphisms from completed tensor with only its second input shifted by r to the r-shift of completed tensor. If both satisfy integralCompletedTensorRightShiftProperty of [lem-sf-completed-tensor-shift-right], with the finite, product, cone and good-model equations imposed on every resolving pair, then sigma equals tau as a natural isomorphism. No invertibility of l on W is required.",
+ "stmt_deps": [
+  "lem-sf-completed-tensor-shift-right",
+  "def-pur-integral-tensor-shift-properties"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: integral transport; representative tensor-shift detail of def-pur-integral-operation-shift-data; Stacks Tags 011G, 012Z, 014E, 06YU, 0941."
+ },
+ "proof": [
+  {
+   "text": "for each good pair, the finite generator formula determines the tower\ncomparison, since the pure tensors generate the sheafified tensor and the\nsummands generate totalization. The two prescribed cone coordinates determine\nthe cone map, so the induced shifted Roos comparisons are equal. Cancel the\ninput quotient-shift map and the good-model comparison in the normalization\nequations. The components of the two natural isomorphisms are therefore equal\non every good pair. Every derived object is isomorphic to the localization of\na good complex. Naturality along these isomorphisms transports the component\nequality to every derived pair. Extensionality of natural transformations and\nof isomorphisms proves the asserted equality.",
+   "uses": [
+    "lem-sf-completed-tensor-shift-right",
+    "lem-pc-kflat-resolution",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: integral transport; representative tensor-shift detail of def-pur-integral-operation-shift-data; Stacks Tags 011G, 012Z, 014E, 06YU, 0941."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of natural isomorphisms for left and right shifts of derived tensor with K-flat and completed Roos normalization",
+   "results": "8 hits: Functor.leftDerivedUnique, rightDerivedUnique, leftDerivedNatIso and generic shift/adjunction isomorphisms. These do not state the coefficient-site generator or Roos normalizations.",
+   "date": "2026-10-25",
+   "verdict": "Generic tools only; no exact normalized slot theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural isomorphism commuting shifts of derived tensor products determined by K-flat representatives",
+   "results": "8 hits: induced mapDerivedCategory CommShift instances and factors, quotientCompQhIso CommShift, mapDerivedCategorySingleFunctor, Tor and Tor'. No normalized coefficient tensor uniqueness statement.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these representative-normalized slot comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Shift|Tensor.*Shift",
+   "results": "6 hits, including CochainComplex.mapBifunctorHomologicalComplexShift₁Iso and the BifunctorShift module documentation; read mapBifunctorShift₁Iso and mapBifunctorShift₂Iso generator formulas. They supply the cochain reindexings, not descent with the specified coefficient models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The cochain formulas are available in Mathlib.Algebra.Homology.BifunctorShift."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Adic Step 2: representative-normalized tensor shifts used in independent-slot shift coherence.",
+   "via": [
+    "def-pur-integral-operation-shift-data",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralTensorRightShiftExt",
+  "file": "lean/Sheaf/SixFunctors/IntegralTensorRightShiftExt.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralTensorRightShift_ext",
+  "statement": "theorem integralTensorRightShift_ext (W : Scheme.{u}) (r : ℤ) (σ τ : completedTensorShiftSecond (Integral l E W) r ⋙ integralCompletedTensor l E W ≅ integralCompletedTensor l E W ⋙ shiftFunctor (Integral l E W) r) (hσ : integralCompletedTensorRightShiftProperty l E W r σ) (hτ : integralCompletedTensorRightShiftProperty l E W r τ) : σ = τ",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-29cbf",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161932-L-154737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-29cbf",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161932-L-154737",
+  "kind": "interface",
+  "note": "independent cc review: IntegralOperationShiftData + 6 new modules and 7 node files against the live clone: moved defs byte-identical, the four slot ∃! statements equal the per-(W,r) components of the old ∃! TensorShifts, 13 direct importers compiled with the delivered modules (rc 0), axioms checked"
+ }
+}

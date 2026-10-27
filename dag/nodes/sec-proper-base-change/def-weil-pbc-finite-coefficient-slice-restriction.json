@@ -1,0 +1,132 @@
+{
+ "id": "def-weil-pbc-finite-coefficient-slice-restriction",
+ "kind": "definition",
+ "title": "Exact fixed-scalar restriction to an etale chart",
+ "statement": "Let X be any scheme, B any commutative ring in the scheme universe, R a commutative ring sheaf on X_proet and phi:constant(B)->R any map. For V in X_et define F_V from R-module sheaves on X_proet to fixed ULift(B)-module sheaves on V.left_proet by restricting scalars along phi, restricting to constant sections, and restricting sections along V.hom. Constant coefficients and module realizations are those of [def-weil-pbc-finite-perfect-quotient-model-data] and [lem-weil-pbc-proetale-constant-module-encoding]. This actual composite is additive and preserves finite limits and finite colimits. If the ringed-slice restriction of M at V is zero, F_V(M) is zero. No isomorphism hypothesis on phi, boundedness, finiteness or nonempty-chart assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R, 099Y and 09AL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-weil-pbc-proetale-constant-module-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Construct the composite scalar-restriction/constant-scalar-encoding/sectionwise-localization functor. Scalar restriction preserves the underlying additive sheaf; reflecting finite limits and colimits through the faithful exact underlying additive-sheaf functor proves its exactness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Constant-scalar encoding is an equivalence, so is exact and additive. Sectionwise localization is right adjoint to extension from the slice and left adjoint to direct image; it is additive on sections and hence exact. Compose these properties.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every chart-site object T gives a morphism from its composite with V.hom to V. Evaluate the zero restricted module at this slice object to see that all section modules of F_V(M) are subsingletons. Thus its identity morphism is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R, 099Y and 09AL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to constant scalars identifies sheaves of modules over a constant ring sheaf on an etale chart with fixed coefficient module sheaves and transports constant complexes",
+   "results": "8 hits, including SheafOfModules.restrictScalars, forgetToSheafModuleCat, evaluation and over. No etale/proetale slice descent or normalized complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and evaluation APIs; the project-specific slice comparisons need separate statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\"",
+   "results": "10 hits: sheaf and presheaf restriction of scalars and object/map formulas.",
+   "date": "2026-10-27",
+   "verdict": "These construct scalar restriction but do not supply etale origin or the normalized derived constant-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientSliceRestriction|finiteCoefficient_slice_heart_origin|plusEtaleOrigin_of_etaleOriginHomology|finiteCoefficient_slice_model_transport",
+   "results": "0 Mathlib hits. Project rg found the proved source-library plusEtaleOrigin_of_etaleOriginHomology API; it is used directly.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match; reuse the existing project bounded-origin theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of finite locally constant module sheaves and exact change of scalars on a localized scheme site",
+   "results": "8 hits, including Scheme.smallEtaleTopology, SheafOfModules.restrictScalars, Scheme.Etale, and unrelated condensed locally constant module APIs. No etale/proetale slice comparison or marked complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and site definitions already available; the project-specific slice coherence steps remain separate statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientEtaleSliceOrigin",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Exact fixed-scalar restriction to an etale chart; step of lem-weil-pbc-finite-coefficient-etale-slice-origin",
+   "via": [
+    "lem-weil-pbc-finite-coefficient-etale-slice-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSliceRestriction",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSliceRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction",
+  "statement": "def finiteCoefficientSliceRestriction (X : Scheme.{t}) (B : Type t) [CommRing B]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})\n    (φ : adicConstantRing X B ⟶ R) (V : X.Etale)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction",
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction_exact",
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction_additive",
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.finiteCoefficientSliceRestriction_isZero"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T084350-L-3673238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T084350-L-3673238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

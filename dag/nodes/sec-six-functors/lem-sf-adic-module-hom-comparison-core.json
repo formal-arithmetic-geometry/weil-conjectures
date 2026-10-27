@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor), restriction to further slices, and the native bidual transpose identity. Tensor comparison supplies the common tensor adjunction; full faithfulness and Yoneda prove invertibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural tensor comparison between a native balanced tensor and a sheaf of modules tensor",
+   "results": "Only generic tensor and sheafification APIs; no native adic comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso SheafOfModules.siteSheafTensorRight",
+   "results": "Generic site tensor declarations only; no normalized adic map.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "adicComparisonTmul|adicComparisonEval|comparisonModuleFunctor",
+   "results": "The explicit adic definitions and functor are in Sheaf.SixFunctors.AdicModuleSectionComparison and AdicSectionModuleEquivalence.",
+   "date": "2026-10-26",
+   "verdict": "Use the stated native constructions."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-module-tensor-hom-comparison",
+   "place": "Strict tensor/Hom components of the closed comparison record.",
+   "via": [
+    "lem-sf-adic-module-tensor-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleTensorHomComparison",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "id": "lem-sf-adic-module-hom-comparison-core",
+ "title": "Normalized Hom and bidual comparison for the explicit adic section equivalence",
+ "statement": "For each prime ℓ and scheme X, the explicitly constructed comparisonModuleFunctor identifies native internal Hom with slice-Hom naturally in both variables; native evaluation is evaluation on the identity slice, and the native bidual transpose has the stated restriction formula.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EO and 0E8H; slice-Hom currying, evaluation, and bidual transpose."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-section-module-equivalence",
+  "def-pur-sheaf-hom",
+  "lem-sf-adic-native-bidual"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized tensor comparison and the explicit section-module functor. Curry the inverse tensor comparison followed by the image of the native tensor-Hom counit, using the general-site tensor–slice-Hom equivalence. On every further slice this evaluates native evaluation on the restricted Hom section and the given module section.",
+   "uses": [
+    "lem-sf-adic-module-tensor-comparison-core",
+    "lem-sf-site-tensor-hom-equiv",
+    "lem-sf-adic-section-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each native module P, composition with this Hom comparison identifies with the composite of the native tensor-Hom bijection, full faithfulness of the section-module functor, precomposition by the tensor comparison isomorphism, and general-site currying. Thus these maps are bijective. Essential surjectivity supplies the same assertion for every section-module sheaf, and Yoneda implies that the comparison is invertible. The native evaluation naturality equations give naturality in both variables on every slice.",
+   "uses": [
+    "lem-sf-adic-module-tensor-comparison-core",
+    "lem-sf-site-tensor-hom-equiv",
+    "lem-sf-adic-section-module-equivalence",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on the identity slice removes the identity restriction and gives the required evaluation formula. Evaluate the proved native bidual transpose on a pure tensor; the lax braided sheaf-to-presheaf functor interchanges its factors. Naturality of the bidual with restriction and the comparison formula on each further slice then give the stated bidual section formula.",
+   "uses": [
+    "lem-sf-adic-native-bidual",
+    "lem-sf-site-tensor-hom-equiv"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-tensor-comparison-core",
+  "lem-sf-site-tensor-hom-equiv",
+  "lem-sf-adic-section-module-equivalence",
+  "def-pur-sheaf-hom",
+  "lem-sf-adic-native-bidual"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicModuleHomComparisonCore",
+  "file": "lean/Sheaf/SixFunctors/AdicModuleHomComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicModuleHomComparisonCore",
+  "statement": "theorem adicModuleHomComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :\n    Nonempty (AdicModuleHomComparisonCore l X)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182445-L-3560085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201629-L-3402398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

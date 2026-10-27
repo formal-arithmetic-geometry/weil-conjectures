@@ -19,156 +19,82 @@
  ],
  "proof": [
   {
-   "text": "Use the chartwise etale notion explicitly specified in the statement, as in [lem-trf-space-chartwise-etale-permanence]. That node supplies composition, arbitrary base change, cancellation between objects etale over the same base, and the etale-covering axioms. It also states agreement with representable etaleness when the source is a scheme. Consequently any scheme chart followed by a chartwise etale map is still a representable etale scheme map. This last observation is essential: it makes scheme charts into objects of $X_{\\mathrm{et}}$, without assuming that all etale maps between spaces are representable. The existence of a surjective representable etale scheme chart for every space is exactly part of [def-trf-algebraic-space].",
-   "uses": [
-    "lem-trf-space-chartwise-etale-permanence",
-    "def-trf-algebraic-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FR (definition-etale), Tags 03FT, 03FU, 03FV; the convention needed in Tag 03G0 (definition-spaces-etale-site)"
-   }
-  },
-  {
-   "text": "The terminal object of $\\mathcal C_X$ is $X/X$. Pullbacks are the space fibre products of [lem-trf-space-fibre-products-etale-covers]; their projections and structure maps are etale by step 1. Binary products are pullbacks over $X$ and equalizers are pullbacks of diagonals, so $\\mathcal C_X$ has finite limits. The identity, composite-cover and base-change-cover axioms are the etale-covering assertions of [lem-trf-space-chartwise-etale-permanence]. Thus this is a site as in [def-weil-pbc-sites-and-cohomology]. Choose the small representatives and covering families in [def-weil-size-convention], including scheme covers, and carry all identifications across these representatives. The scheme-object subcategory has the same coverings as $X_{\\mathrm{et}}$: a map between its objects is etale by step 1, and joint surjectivity is unchanged.",
-   "uses": [
-    "lem-trf-space-fibre-products-etale-covers",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-size-convention",
-    "lem-trf-space-chartwise-etale-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03G0 (definition-spaces-etale-site), and Tag 03G2 (lemma-functoriality-etale-site), proof of finite limits"
-   }
-  },
-  {
-   "text": "Let $i:X_{\\mathrm{et}}\\to\\mathcal C_X$ be the inclusion. It is fully faithful: the Yoneda bijection [lem-galois-yoneda-hom-bijection] identifies maps between the representing scheme sheaves with scheme maps, also in the over category. It preserves covers and covering pullbacks, hence is continuous. To check cocontinuity, start with a cover $\\{T_j\\to U\\}$ of a scheme object. Choose surjective etale scheme charts $W_j\\to T_j$ using [def-trf-algebraic-space]. Their composites $W_j\\to U$ form a scheme covering refining the given one, by step 1 and surjectivity. Local fullness and local faithfulness hold by full faithfulness, taking identity covers. Finally every $T\\in\\mathcal C_X$ has a surjective etale scheme chart $T_0\\to T$; its composite with $T\\to X$ is etale by step 1. These are all five conditions of [def-weil-pbc-special-cocontinuous-functor]. Apply [lem-weil-pbc-special-cocontinuous-sheaf-equivalence]. Its statement explicitly identifies the inverse image with precomposition by $i$, so the equivalence in question is restriction, with the required direction.",
-   "uses": [
-    "lem-galois-yoneda-hom-bijection",
-    "def-trf-algebraic-space",
-    "def-weil-pbc-special-cocontinuous-functor",
-    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03G1 (lemma-compare-etale-sites), using Sites Tag 03A0 (lemma-equivalence)"
-   }
-  },
-  {
-   "text": "Choose a quasi-inverse of restriction and its specified restriction isomorphism to define $\\widetilde F$. Full faithfulness of restriction gives the unique isomorphism between any two such extensions inducing the identity of $F$. Apply the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] to the singleton cover $T_0\\to T$. Its overlap $T_0\\times_TT_0$ is a scheme by [lem-trf-space-fibre-products-etale-covers], since $T_0\\to T$ is representable etale. The two terms therefore identify with $F(T_0)$ and $F(T_0\\times_TT_0)$, giving the asserted formula. For a map $T'\\to T$, pull this chart back and take a scheme chart of that pullback; the two equalizer maps then describe the restriction. A different chart gives the same restriction after their common refinement. The uniqueness part of the sheaf condition proves agreement and naturality in $T$; maps of sheaves induce maps of the same equalizers, proving naturality in $F$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-trf-space-fibre-products-etale-covers"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03H7 (remark-explain-equivalence)"
-   }
-  },
-  {
-   "text": "In particular extend the underlying set sheaf of $\\mathcal O_X$ from [def-trf-algebraic-space]. Restriction preserves products and the terminal sheaf, since these are computed sectionwise by [lem-weil-pbc-sheaf-algebraic-structures-objects]. Products of extensions are therefore extensions of products, uniquely by step 3. Lift $+,0,-,\\cdot,1$ along the fully faithful restriction equivalence. All ring identities hold because their restrictions hold and restriction is faithful. The cited algebraic-structures node identifies the resulting ring object with a sheaf of rings $\\widetilde{\\mathcal O}_X$. For a module $M$, lift its addition, zero, inverse and action $\\mathcal O_X\\times M\\to M$ in exactly the same fashion. The module identities and semilinearity are equalities of maps which hold after restriction, hence hold before restriction. By [def-weil-sheaf-of-modules-category] these are module sheaves. Maps lift uniquely and are linear because the action diagram can be tested after restriction. This constructs inverse equivalences on module categories; no exactness or derived assertion is needed.",
+   "text": "Implementation-level foundations and reductions for the published enlarged-site module: a representable scheme sheaf has representable diagonal by the Yoneda relative-representability criterion, and its identity is a surjective etale atlas. A scheme small-site object is chartwise etale by composition of representable etale maps. Chartwise etale composition follows directly by applying the two defining predicates successively. For base change of a chartwise etale object, pull a scheme atlas of its source back to the sheaf fibre product. Cancel pullback squares to identify its composite to the new base as the base change of the chartwise-etale atlas composite. Apply [lem-trf-space-etale-source-atlas-detection] to descend from this representable surjective etale cover. For an atlas self-overlap, apply its representable-etale scheme test along itself. The resulting etale scheme projection makes the overlap an object of the small site, using [lem-trf-space-representable-etale-scheme-tests]; Yoneda lifts the other projection and faithful limit reflection gives the pullback in the enlarged site. Extension existence and normalized uniqueness follow from the restriction equivalence: use its counit for existence, and lift e followed by the inverse of d through full faithfulness for uniqueness. Transport an enlarged geometric morphism through the two restriction equivalences by composing the three adjunctions; the inverse images remain left exact. These arguments discharge these implementation clauses without invoking the comparison packets below. The atlas is a singleton cover: each surjective scheme test has a point whose residue field defines a field-extension lift. Apply the singleton-cover sheaf gluing condition to the displayed pullback square and transport the compatible sections through the given restriction isomorphism; separatedness proves injectivity, and unique gluing proves surjectivity with the required restriction formula. Finally, postcomposition factors as the stated covering-preserving localization equivalence followed by the slice forgetful functor. Both factors are continuous, hence so is postcomposition. The site axioms and finite limits are now proved directly in the enlarged-site module: chartwise cancellation is proved by the scheme-test comparison and source-atlas detection; the actual sheaf pullbacks give enlarged pullbacks. Field-extension lifting proves covering identities, composition, and arbitrary covering pullback, including empty families. Scheme-point surjectivity agrees with field-extension lifting by residue-field tests and points of scheme pullbacks. Yoneda full faithfulness and preservation of these explicit scheme pullbacks then give continuity of scheme inclusion. These local proved subarguments reuse the source proofs of scheme density without importing its downstream module. Base change agrees with ambient slice pullback under a fully faithful finite-limit-preserving inclusion, hence preserves finite limits. Pullback of covering field-valued sections proves covering preservation, and the covering-equalizer criterion proves continuity. Flat left Kan extension followed by sheafification is the left exact left adjoint, proving enlargedDirectImage_geometric. For identity, construct the projection comparison X times_X V to V, and apply enlargedStructuralMap_existsUnique to the restriction map induced by this projection. On every commuting scheme triangle its composite with enlargedChartLift is exactly the scheme-inclusion map; naturality of the normalization and its inverse identity prove the prescribed ordinary pullback formula. No structural-map existence or restriction-equivalence hole is used to prove site axioms, continuity, or the geometric morphism.",
    "uses": [
     "def-trf-algebraic-space",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03H7 and paragraph after Tag 03G7 (definition-structure-sheaf); elementary transport of operations along the restriction equivalence"
-   }
-  },
-  {
-   "text": "For $f:X\\to Y$, form $v_f(V)=X\\times_YV$ using [lem-trf-space-fibre-products-etale-covers]. Its structure map is etale by step 1. It carries covers to covers by [lem-trf-space-chartwise-etale-permanence], which permits nonrepresentable etale covering arrows. It preserves terminal objects, since $X\\times_YY=X$, and preserves pullbacks by the universal property of fibre products; it consequently preserves the finite limits constructed in step 2. The smallness hypotheses are those fixed in [def-weil-size-convention]. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to obtain the geometric morphism with direct image $G\\mapsto G\\circ v_f$ and left exact inverse image. This also establishes continuity, either by its sheaf-precomposition conclusion or directly from preservation of covering pullbacks. Under step 3's equivalences this is exactly the small etale morphism of topoi constructed by the base-change site presentation in the source.",
-   "uses": [
-    "lem-trf-space-fibre-products-etale-covers",
-    "def-weil-size-convention",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-trf-space-chartwise-etale-permanence"
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection",
+    "def-trf-geometric-morphism",
+    "lem-trf-space-enlarged-ringed-composition-localization",
+    "lem-trf-presheaf-field-lift-family-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03G2 (lemma-functoriality-etale-site), clauses (1) and (3), using Sites Tag 00X6 (proposition-get-morphism)"
+    "place": "Tags 025Y, 03G1, 03FT, 03FU, 03H7 and 03G2(3). The base-change argument is the chart_base proof of chartwise_etale_permanence, reused at its construction site with its independent source-atlas detection input. The explicit equalizer is the sheaf condition of Tag 03H7; postcomposition continuity is Tag 03LP via Tag 04LY."
    }
   },
   {
-   "text": "We construct the structural map in adjoint form $\\widetilde{\\mathcal O}_Y\\to f_*\\widetilde{\\mathcal O}_X$. For a scheme object $V\\to Y$, take a scheme chart $U\\to X\\times_YV$. Pullback of regular functions along the scheme map $U\\to V$ sends $s\\in\\Gamma(V,\\mathcal O_V)$ to a section on $U$. Its two restrictions to $U\\times_{X\\times_YV}U$ agree, since the two composites to $V$ agree. Step 4 therefore gives a unique section on $X\\times_YV$, independent of the chart: on a common refinement the two constructions are the same scheme pullback. Ring identities and compatibility with maps $V'\\to V$ hold after this same chart test. Thus we have a ring-sheaf map on $Y_{\\mathrm{et}}$ from $\\mathcal O_Y$ to the restriction of $f_*\\widetilde{\\mathcal O}_X$. Full faithfulness in step 3 lifts it uniquely to the displayed map on $\\mathcal C_Y$; step 5 ensures it is a ring map. By the adjunction in [lem-weil-pbc-left-exact-site-inverse-image-tensor], this gives $f^{-1}\\widetilde{\\mathcal O}_Y\\to\\widetilde{\\mathcal O}_X$, a map of ring objects (the product and unit diagrams are the adjoints of the verified ring diagrams). By [def-weil-pbc-ringed-topos-morphism] this is a morphism of ringed topoi. On every pair of scheme charts it is pullback of regular functions, so it is the canonical structural map specified in the statement.",
+   "text": "The enlarged-site axioms, ambient sheaf pullbacks, finite limits, and continuity of scheme inclusion are proved by the direct subarguments of step 1. The remaining restriction-equivalence clause follows the scheme-density comparison conditions of [lem-trf-space-enlarged-site-scheme-density]. Its forward functor must remain literal precomposition by the published inclusion. The conjunction containing ring-valued restriction equivalence remains unproved in this partial delivery.",
    "uses": [
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-weil-pbc-ringed-topos-morphism"
+    "lem-trf-space-enlarged-site-scheme-density"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03G8 (lemma-morphism-ringed-topoi), construction in its proof; Tag 03H7 equalizer descent"
+    "place": "Tags 03G0 (definition-spaces-etale-site), 03G1 (lemma-compare-etale-sites); finite limits in Tag 03G2 (lemma-functoriality-etale-site), proof; chartwise convention Tag 03FR (definition-etale)."
    }
   },
   {
-   "text": "For $W\\xrightarrow{g}X\\xrightarrow{f}Y$, the universal property gives a natural isomorphism $W\\times_X(X\\times_YV)\\cong W\\times_YV$. It commutes with arrows in $V$ because both maps have the same projections. Hence the direct images compose under this isomorphism. The adjunction-compatible inverse-image composition isomorphism is provided by [lem-weil-pbc-site-morphism-composition]. The structural maps agree as well: on scheme charts both composites pull a regular function back along the composite scheme map; the identity $(a\\circ b)^\\sharp=b^\\sharp a^\\sharp$ is the definition of composition of scheme morphisms [def-pc-scheme]. Chartwise equality implies equality globally by the equalizers in step 4. The same check for identity maps gives identity functors and identity structural maps. For three maps all associativity comparisons commute: each is the unique fibre-product map with the given projections, and every ring comparison is the same pullback of a regular function. This proves compatibility with composition, including the ringed structure.",
+   "text": "Apply [lem-trf-space-enlarged-atlas-algebraic-extension] to any space $A$. Its normalized extension gives $\\widetilde F$, uniqueness, and the specified atlas equalizer naturally in $T$ and $F$. For each space under consideration, choose once its normalized ring extension at $R=\\mathcal O_A$; use these same extensions in steps 3 and 4. At $A=X$ this gives $\\widetilde{\\mathcal O}_X$ and the asserted module-category equivalence.",
    "uses": [
-    "lem-weil-pbc-site-morphism-composition",
-    "def-pc-scheme"
+    "lem-trf-space-enlarged-atlas-algebraic-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03G2, clause (2), and Tag 03G8, clause (1); expanded checks omitted in the latter proof"
+    "place": "Tag 03H7 (remark-explain-equivalence); paragraph after Tag 03G7 (definition-structure-sheaf). Transport of ring and module operations expands this comparison using the sectionwise sheaf definitions."
    }
   },
   {
-   "text": "Let $u:Z'\\to Z$ be etale. The functor from $\\mathcal C_{Z'}$ sends $T\\to Z'$ to $(T\\to Z,T\\to Z')$; it is well-defined by step 1's composition assertion. Conversely an object of $\\mathcal C_Z/Z'$ consists of $T\\to Z$ etale and a factorization through $Z'$. Step 1's cancellation assertion makes $T\\to Z'$ etale. These two functors are inverse on objects and arrows before taking small representatives, and they preserve exactly the covering families, since both use joint surjectivity of the same underlying arrows. This is the localized site of [def-pur-localized-ringed-site]. For every scheme $T\\to Z'$, the restricted extended ring $\\widetilde{\\mathcal O}_Z|_{Z'}$ and $\\mathcal O_{Z'}$ evaluate as $\\Gamma(T,\\mathcal O_T)$ by [def-trf-algebraic-space], with the same restrictions. The uniqueness of extension from step 3, now over $Z'$, identifies $\\widetilde{\\mathcal O}_Z|_{Z'}$ with $\\widetilde{\\mathcal O}_{Z'}$ as ring sheaves.",
+   "text": "For f:X to Y, the actual fibre-product functor is proved continuous and finite-limit-preserving by step 1. Flat left Kan extension and sheafification give enlargedDirectImage_geometric, and enlargedSmallDirectImage_geometric transports it along the published restriction equivalences. The remaining canonical structural-map existence and its regular-function normalization follow the normalized ring-extension and chart-descent argument of [lem-trf-space-enlarged-atlas-algebraic-extension] and [lem-trf-space-enlarged-chart-ringed-morphism]; those structural clauses are not discharged in this partial delivery.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "def-trf-algebraic-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tags 04LY (equation-localize) and 04LZ (equation-localize-ringed); elementary site identification in the proof of Tag 03LP"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-slice-subtopos-site-presentation] with $\\mathcal C=\\mathcal C_Z$ and object $Z'\\to Z$. The finite limits and size hypotheses were checked in step 2. Its localization direct image evaluates at $V\\to Z$ as $G(V\\times_ZZ'\\to Z')$. Under step 9 this is precisely precomposition by $v_u$, which is the direct image in step 6. The localization inverse image is restriction by the cited statement; uniqueness of the adjoint identifies it with the inverse image for $u$. Its structural ring map is the identification of step 9: on a scheme $T\\to Z'$ it is the identity of $\\Gamma(T,\\mathcal O_T)$, just as the structural map of step 7. Thus the two morphisms agree as ringed-topos morphisms, not merely as morphisms of underlying topoi.",
-   "uses": [
-    "lem-trf-slice-subtopos-site-presentation",
-    "def-pur-localized-ringed-site"
+    "lem-trf-space-enlarged-atlas-algebraic-extension",
+    "lem-trf-space-enlarged-chart-ringed-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03LP (lemma-etale-morphism-topoi), and Tags 04LY, 04LZ; Sites Tag 03CE (lemma-localize-given-products)"
+    "place": "Tag 03G2 (lemma-functoriality-etale-site), (1),(3), and Tag 03G8 (lemma-morphism-ringed-topoi), proof; chart descent Tag 03H7 (remark-explain-equivalence)."
+   }
+  },
+  {
+   "text": "For every composable pair, the direct-image formulas and chart-normalized structural maps obtained in step 3 satisfy the hypotheses of [lem-trf-space-enlarged-ringed-composition-localization]; its adjunction-compatible comparisons therefore give composition with the structural ring maps. Its projection-preserving identity comparisons satisfy the unit laws, and its three-map comparisons give associativity, including the structural ring maps. For etale $u:Z'\\to Z$, apply its postcomposition equivalence, which preserves exactly the coverings. Under this equivalence the normalized identification $\\widetilde{\\mathcal O}_Z|_{Z'}\\simeq\\widetilde{\\mathcal O}_{Z'}$ is the identity on scheme sections. The same cited statement identifies the inverse image with restriction, the direct image at $V$ with $G(V\\times_ZZ'\\to Z')$, and the structural map with this ring identification. Thus all three data of the ringed morphism agree with localization. The identity clause is now proved directly from the canonical structural-map uniqueness theorem by the projection and chart calculation in step 1; composition and localization remain the stated route and remain unproved here.",
+   "uses": [
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G2 (lemma-functoriality-etale-site), (2), and Tag 03G8 (lemma-morphism-ringed-topoi), (1); Tag 03LP (lemma-etale-morphism-topoi), proof; Tags 04LY (equation-localize), 04LZ (equation-localize-ringed)."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pur-localized-ringed-site",
   "def-trf-algebraic-space",
-  "def-weil-pbc-ringed-topos-morphism",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-size-convention",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-trf-slice-subtopos-site-presentation",
-  "lem-trf-space-chartwise-etale-permanence",
-  "lem-trf-space-fibre-products-etale-covers",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence"
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-etale-source-atlas-detection",
+  "def-trf-geometric-morphism",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-trf-presheaf-field-lift-family-calculus",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-enlarged-atlas-algebraic-extension",
+  "lem-trf-space-enlarged-chart-ringed-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tags 03G0, 03G1, 03H7, 03G2, 03G8, 03LP, 04LY, 04LZ; the omitted ring-map composition check is written out on charts."
+  "place": "Tags 03G0, 03G1, 03H7, 03G2, 03G8, 03LP, 04LY, 04LZ; the omitted ring-map composition check is written out on charts. Four-node assembly of the same route. The ordinary scheme CommRingCat.{u} adjunction is proved by restriction to the essentially u-small affine etale basis on Y, left Kan extension and sheafification on X, and cancellation of the basis equivalence; no algebraic-space existence theorem is used for that scheme clause."
  },
  "mathlib_searches": [
   {
@@ -283,33 +209,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-space-enlarged-etale-ringed-site-model",
   "worker": "stage1",
-  "summary": "Corrected the inherited representable-only reading of etale morphisms to the source's explicit chartwise convention. Added one statement-only geometric permanence input. Verified all comparison conditions, equalizer descent, algebraic-operation transport, the chartwise structural map, composition and ringed localization; reused the existing general site tools.",
+  "summary": "Repair of the 9743-character returned split: four statement-only parallel work packages preserve old steps 1–3, 4–5, 6–7 and 8–10, including every chart, operation, adjunction and coherence assertion. The parent statement is byte-for-byte unchanged; its proof is now a short assembly. Full old arguments and citation audit retained in report.md. Landing-return repair: compared the retained split with the current server DAG and re-read all its existing dependencies; none changed. Made the final assembly explicit on the two localization functors and the normalized structural ring map, preserving the statement and all four statement-only packages. Rechecked returned head 884bb858092 against server head d73b0bc8e7c21be4dfc082187b3bb7c16e5895b7: all twelve existing dependencies are identical; the four packages are still absent from live main. Assembly step 4 now explicitly applies the cited identity, unit-law and three-map associativity conclusions, including the structural maps. Current landing-return recheck: the twelve existing dependency statements still match the retained returned-head comparison, and no new prerequisite has appeared in the read snapshot. Steps 2 and 3 now fix one normalized structure-ring extension per space and reuse it for every morphism, making the hypotheses for composition and localization simultaneous rather than making independent choices for each map.",
   "blueprint": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained.",
-  "tool_uses": [
-   {
-    "node": "lem-galois-yoneda-hom-bijection",
-    "why": "Identifies maps of representable scheme sheaves with scheme morphisms; this is a generic Yoneda tool, not a change of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
-    "why": "The general five-condition comparison theorem supplies the sheaf equivalence after all conditions are proved for the chart inclusion."
-   },
-   {
-    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "why": "Identifies ring and abelian-group objects with sectionwise sheaves, for transport of the ring and module operations."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "General finite-limit site-functor criterion produces the morphism of topoi after finite-limit and covering preservation are checked."
-   },
-   {
-    "node": "lem-weil-pbc-site-morphism-composition",
-    "why": "General adjunction-compatible composition comparison for morphisms of sites; the source unit has no replacement for this categorical tool."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-galois-yoneda-hom-bijection",
@@ -319,16 +224,16 @@
   "lem-weil-pbc-site-morphism-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q82-dca0aa9a7",
-  "group": "Q82",
+  "reviewer": "NT-cc-Q09-1e8f5d640",
+  "group": "Q09",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-dca0aa9a7 (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, unit route, worker report, and Stacks sources. Verified chartwise étale hypotheses, enlarged-site sheaf/module equivalence, ringed morphism, composition, localization, edge cases, searches, route compliance, acyclicity, and absence of duplicates or long hidden lemmas. Wrote review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-1e8f5d640 (reviewer sub-agent of L); spot-checked: This is the 4th push of a re-split that passed review at 9ff40c15, 884bb858 and a321c180; it answers a landing return. I diffed it against the a321 snapshot. The four new nodes are byte-identical: site-scheme-density, atlas-algebraic-extension, chart-ringed-morphism and ringed-composition-localization. In the item, the statement and stmt_deps are unchanged and equal live. The only change is in steps 2-3: one normalized ring extension R_A=O_A is now fixed per space and reused for every morphism. The composition/localization node assumes exactly that, so the change is correct. proof_deps equals the union of step uses. Step lengths are 285, 429, 445 and 947 characters, 2106 in total. None of the four new ids is in clones/live or side-live, so no other group has superseded the split. From live I re-read chartwise-etale-permanence, fibre-products-etale-covers, def-trf-algebraic-space, def-trf-scheme-algebraic-space, the special-cocontinuous definition and its sheaf equivalence, localized-ringed-site, ringed-topos-morphism and geometric-morphism; the six also in the a321 snapshot are unchanged. I re-checked the mathematics of each node. Density: all five conditions (a)-(e), with restriction in the right direction. Extension: the equalizer over a scheme chart, whose overlap is a scheme. Chart-ringed morphism: v_f preserves finite limits and covers, and alpha_f is unique by chartwise pullback of regular functions. Composition/localization: (fg)^sharp = g^sharp o g^{-1}(f^sharp), C_{Z'} = C_Z/Z' via composition and cancellation, and direct image G(V x_Z Z'). These match Stacks spaces-properties 03G1 l.2500, 03H7 l.2523, 03G2 l.2609, 03LP l.2805, 03G8 l.3798 and 04LZ l.4499. Re-split rule: old steps 1-3, 4-5, 6-7 and 8-10 sit in four comparable statement-only nodes of 1.7k-2.4k characters; none restates the item and the parent is a short assembly. Edge cases checked: a scheme, an empty space, an identity map and a nonrepresentable etale u. No SGA source, no new duplicate. The Mathlib searches and the five inherited generic site tool_uses are accepted. Maintainer note: this is a repeated promotion re-push of a split already passed three times."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite",
-  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlargedRestriction_equivalence",
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleCotangentRingMap",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.etaleDifferentialRingMap",
   "declarations": [
    "AlgebraicGeometry.AlgebraicSpace.IsChartwiseEtale",
    "AlgebraicGeometry.AlgebraicSpace.EnlargedEtaleSite",
@@ -376,23 +281,70 @@
    "AlgebraicGeometry.AlgebraicSpace.enlargedSetEquivalence",
    "AlgebraicGeometry.AlgebraicSpace.enlargedSmallDirectImage",
    "AlgebraicGeometry.AlgebraicSpace.enlargedSmallDirectImage_geometric",
-   "AlgebraicGeometry.AlgebraicSpace.enlargedExtension_exists"
+   "AlgebraicGeometry.AlgebraicSpace.enlargedExtension_exists",
+   "AlgebraicGeometry.AlgebraicSpace.smallEnlargedModuleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.smallEnlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.smallEnlargedModuleEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedArrow_chartwise",
+   "AlgebraicGeometry.AlgebraicSpace.chartwiseEtaleMap_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedCommRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedCommEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedCotangentStructure",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedCotangentRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentChartSection",
+   "AlgebraicGeometry.AlgebraicSpace.IsCotangentStructuralMap",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentStructuralMap_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentRingDirect",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentRingDirect_rightAdjoint",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentRingAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentDirectRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentFullRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentSmallRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentSmallRestriction_isEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentSmallEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentRingInverse",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentRingMap",
+   "AlgebraicGeometry.Scheme.Hom.etaleDifferentialStructure",
+   "AlgebraicGeometry.Scheme.Hom.etaleDifferentialRingDirect_isRightAdjoint",
+   "AlgebraicGeometry.Scheme.Hom.etaleDifferentialRingInverse",
+   "AlgebraicGeometry.Scheme.Hom.etaleDifferentialRingMap"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/EnlargedEtaleRingedSite.lean",
-  "statement": "theorem enlargedRestriction_equivalence (X : AlgebraicSpace S) : (enlargedRestriction X (Type (max (u + 1) w))).IsEquivalence ∧ (enlargedRestriction X RingCat.{u}).IsEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleCotangentRingMap.lean",
+  "statement": "def etaleDifferentialRingMap {X Y : Scheme.{u}} (f : X ⟶ Y) : (etaleDifferentialRingInverse f).obj (etaleDifferentialStructure Y) ⟶ etaleDifferentialStructure X",
   "branch": "newtargets-dag",
-  "by": "Q132",
-  "date": "2026-10-18",
+  "by": "Q160",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "The recorded declarations jointly state the entire node: the actual chartwise-etale enlarged site and scheme inclusion; restriction equivalence, normalized extension uniqueness and equalizers; extended structure ring and module restriction equivalence; actual fibre-product base-change and its geometric morphism, unique chart-normalized structural map, projection-normalized composition and identity; and postcomposition identification with localization, preserving covers and the restricted structure ring. All definitions have real data. Choices are only inverses of proved-to-be equivalences or the uniquely chart-characterized structural map. The additional statement dependency is the already landed universe-polymorphic geometric-morphism datum."
+  "note": "Section 1(B) interface completion: SpaceCotangentRingMap gives the exact canonical ring map on algebraic-space small affine skeletons, but it does not expose the canonical ring inverse image and structural map on the ordinary scheme small etale site used by the recorded etaleTensorSectionsSheaf. The module publicly imports and preserves that entire space interface. It adds the scheme presentation: the unchanged regular-functions presheaf bundled using its existing sheaf theorem, the existence of the left adjoint to the actual base-change direct image in CommRingCat.{u}, and the structural map as the mate of the existing etaleStructurePresheafToPullback. This supplies the same canonical ringed-topos morphism without changing section-ring or module universes. The proof obligation is part of this nodes canonical inverse-image assertion, not an independent helper theorem."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-566d42b60",
-  "group": "Q132",
+  "reviewer": "NT-stage2-cc-038942c97",
+  "group": "Q160",
   "result": "pass",
-  "note": "Read node, 8 stmt_dep records and their Lean (AlgebraicSpace, JointSurjectivity, RingedSiteModules, GeometricMorphism, Mathlib IsContinuous/sheafPushforwardContinuous), report and all 47 declarations. All 13 clauses render the node: chartwise etale is verbatim the node's test (not strengthened to representable); actual Over-X full-subcategory site with chartwise-etale jointly-surjective coverings; literal precomposition restriction equivalence (sets in Type(max(u+1) w), per the node's size hypothesis, plus RingCat.{u}); normalized extension uniqueness and chart equalizer; extended structure sheaf and module equivalence; actual fibre-product base change, continuity, GeometricMorphism and small transport for arbitrary f; unique chart-normalized structural map; projection-normalized composition and identity; localization equivalence with Grothendieck-over coverings, ring identification fixed on charts, adjunction-unit equation. Node diff vs base: only lean plus one landed stmt_dep. Declarations list and statement verbatim; docstrings with Source and blueprint on all 47; only sorry proofs; no hollow defs. nt_compile --json on snapshot rc=0, no errors or warnings; axioms sorryAx plus standard. Remarks only: universe-u X.Modules not covered by the module equivalence (by the size convention); ring adjunction existential."
+  "note": "Item theorem matches node clause by clause. Any f : X ⟶ Y in Scheme.{u}, no extra hypotheses. Canonical ring map = mate of existing etaleStructurePresheafToPullback; left adjoint from the sorried theorem etaleDifferentialRingDirect_isRightAdjoint, which has a proof docstring. Omega^et = Mathlib sheafification of relativeDifferentials' with derivation' plus sheafification unit. F and F_et = recorded relativeDifferentials and etaleTensorSectionsSheaf. ∃! additive iso with scalar compatibility on every étale chart is a linear iso. Normalization relativeDifferentialsPullbackMap(e⁻¹(d_et a)) = d_{W/Y} a is exactly e∘d^a = d_et. Edge cases (empty schemes, f = id) and universes (site u+1/u, coefficients u) OK. Statements verbatim, docstrings complete, only sorried theorems, no name clash in live. Notes: (1) ∃ hF quasi-coherence repeats the existing instance TangentBundle.isQuasicoherent_relativeDifferentials; harmless. (2) §1(B) record of lem-trf-space-enlarged-etale-ringed-site-model is a superset of Q107's landed record (69 declarations kept, 4 added), but its headline now points to the scheme map etaleDifferentialRingMap. (3) Generic SheafDifferentials.omega needs EssentiallySmall and is owned by a theorem node, so it is not reusable; the item-local helper is justified."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T100342-L-4192194",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

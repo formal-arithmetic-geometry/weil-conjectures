@@ -1,0 +1,276 @@
+{
+ "id": "lem-a1-smooth-curve-cotangent-generic-isomorphism",
+ "kind": "statement",
+ "title": "Rank-one cotangent sheaves and generic invertibility on smooth integral curves",
+ "statement": "Let $k$ be a field, let $X,Y$ be smooth curves over $k$, meaning separated integral finite-type $k$-schemes of dimension one [def-pc-curve, def-sbc-smooth-morphisms], and let $h:X\\to Y$ be any $k$-morphism. Write $\\Omega_{Z/k}$ for the relative Kähler differential sheaf [def-sc-relative-differential-sheaf] and use module pullback [def-pc-module-pullback]. Every nonempty affine open of $X$ or $Y$ has dimension one, and their structure morphisms are smooth of relative dimension one. Both $h^*\\Omega_{Y/k}$ and $\\Omega_{X/k}$ are locally free of rank one, that is, Zariski-locally isomorphic to the structure sheaf [def-sc-invertible-module]. For every $\\mathcal O_X$-linear morphism $u:h^*\\Omega_{Y/k}\\to\\Omega_{X/k}$, the following are equivalent: $u\\ne0$; its stalk $u_\\eta$ [def-weil-pbc-module-stalk] at the generic point $\\eta$ of $X$ [def-sc-generic-point] is nonzero; there exists a nonempty affine open $V\\subseteq X$ on which $u|_V$ is an isomorphism. For every nonempty open $W\\subseteq X$ and every $x\\in W$, the stalk $(\\Omega_{X/k}|_W)_x$ is a nonzero free rank-one $\\mathcal O_{X,x}$-module.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C, lemma-generically-etale, first paragraph of proof; rank-one and generic-point argument; also Morphisms Tag 02G1"
+ },
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "For $Z=X,Y$, the curve hypotheses give an irreducible finite-type $k$-scheme of dimension $1$. Apply [lem-sc-dimension-locally-algebraic]: every nonempty open $U\\subseteq Z$, in particular every nonempty affine open, has dimension $1$, and $\\dim_z Z=1$ at every $z\\in Z$. The only fibre of $Z\\to\\operatorname{Spec}k$ is $Z$ itself. Consequently its fibre dimension at every point is $1$; together with the assumed smoothness this is smoothness of relative dimension one by [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-sc-dimension-locally-algebraic",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3); Morphisms Tag 02G2 (definition-smooth-relative-dimension)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-smooth-omega-finite-locally-free] with $d=1$ to the two structure morphisms from step 1. It gives $\\Omega_{X/k}$ and $\\Omega_{Y/k}$ locally free of rank one. Apply [lem-weil-pbc-invertible-pullback-invertible] to $h$ and $\\Omega_{Y/k}$ to obtain $L=h^*\\Omega_{Y/k}$ locally free of rank one as well. Put $M=\\Omega_{X/k}$. No smoothness, dominance or nonconstancy of $h$ is required for this pullback result.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (lemma-generically-etale), first paragraph; Morphisms Tag 02G1 (lemma-smooth-omega-finite-locally-free); Modules Tag 01C8 (lemma-pullback-locally-free)"
+   }
+  },
+  {
+   "text": "On any nonempty common trivializing open $T$ for $L,M$, fix generators $e_L,e_M$. There is a unique $a\\in\\mathcal O_X(T)$ with $u(e_L)=a e_M$. For every open $S\\subseteq T$ and $b\\in\\mathcal O_X(S)$, linearity and restriction compatibility give $u_S(b e_L)=b(a|_S)e_M$. Thus $u|_T$ is multiplication by $a$, and $u_\\eta$ is multiplication by $a_\\eta$. Such opens cover $X$ by local freeness. If $u_\\eta=0$, the injectivity $\\mathcal O_X(T)\\to\\mathcal O_{X,\\eta}$ from [lem-sc-integral-scheme-stalks-in-function-field] gives $a=0$ on every such $T$. The displayed formula and the uniqueness part of the sheaf gluing axiom then give $u=0$. Conversely $u=0$ gives $u_\\eta=0$. Hence $u\\ne0$ if and only if $u_\\eta\\ne0$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (lemma-generically-etale), generic-point assertion in the first paragraph of proof, expanded in local generators; Properties Tag 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "Assume $u_\\eta\\ne0$. Take a common trivializing open $T$ containing $\\eta$ and its coefficient $a$ from step 3. The field assertion of [lem-sc-integral-scheme-stalks-in-function-field] makes $a_\\eta\\ne0$ a unit. By [lem-weil-pbc-basic-open-function], $D_T(a)$ is an open neighbourhood of $\\eta$ and $a$ has an inverse there. Multiplication by that inverse, in these same generators, is a two-sided inverse of $u|_{D_T(a)}$. To get an affine open, choose an affine chart $C$ containing $\\eta$ (the local affine condition defining a scheme [def-pc-scheme]). Identifying the affine scheme $C$ with $\\operatorname{Spec}A$ for $A=\\mathcal O_X(C)$, the basic-open basis of [lem-weil-pbc-spec-localization-away-basic-open] supplies $f\\in A$ with $\\eta\\in D_C(f)\\subseteq C\\cap D_T(a)$. Under this identification $D_C(f)$ is the principal open $C_f$, and clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme] says $V=C_f$ is affine. It is nonempty since it contains $\\eta$; restricting the explicit inverse above proves $u|_V$ is an isomorphism.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-basic-open-function",
+    "def-pc-scheme",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HZ (lemma-f-open), Tag 01I3 (lemma-standard-open-affine), Tag 01IT (lemma-basis-affine-opens); Algebra Tags 00E0 (lemma-Zariski-topology) and 00E4 (lemma-standard-open); Curves Tag 0C1C local scalar argument"
+   }
+  },
+  {
+   "text": "Conversely suppose $u|_V$ is an isomorphism on a nonempty affine open $V$. By [lem-sc-integral-scheme-stalks-in-function-field], the generic point belongs to $V$ and $\\mathcal O_{X,\\eta}$ is a nonzero field. The restrictions of the two inverse identities to germs show that $u_\\eta$ is invertible. In the rank-one trivializations of step 2, a zero map cannot be invertible over a nonzero field, since its composite with any map is zero whereas the identity sends $1$ to $1\\ne0$. Thus $u_\\eta\\ne0$. Together with steps 3 and 4 this proves all three asserted equivalences.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (lemma-generically-etale), first paragraph of proof, reverse implication by taking the generic stalk"
+   }
+  },
+  {
+   "text": "Finally let $W\\subseteq X$ be nonempty open and $x\\in W$. A local trivialization of $M$ near $x$ from step 2 restricts to $W$ and then, on germs, identifies $(M|_W)_x$ with $\\mathcal O_{X,x}$ as a module over that same ring. Restricting neighbourhoods to $W$ does not change germs since $W$ is a neighbourhood of $x$. Thus this module is free on the element corresponding to $1$. By [lem-sc-integral-scheme-stalks-in-function-field], $\\mathcal O_{X,x}$ is a domain, in particular $1\\ne0$, so the module is nonzero. This includes $x=\\eta$; no closed-point or perfect-field hypothesis is used.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), rank-one consequence; Properties Tag 01ON (lemma-characterize-integral), nonzero stalk rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dimension-locally-algebraic",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "def-sc-invertible-module",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-basic-open-function",
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C (lemma-generically-etale), first paragraph, expanded by the local multiplication argument and the cited Stacks dimension and basic-open results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(nonzero|ne_zero).*(isIso|IsIso|invertible)|(isIso|IsIso).*(generic|Generic)|relativeDifferentials.*(locallyFree|LocallyFree)",
+   "results": "{\"t\": \"2026-10-22T07:57:50Z\", \"tool\": \"grep\", \"query\": \"(nonzero|ne_zero).*(isIso|IsIso|invertible)|(isIso|IsIso).*(generic|Generic)|relativeDifferentials.*(locallyFree|LocallyFree)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic standard-smooth freeness/projectivity does not give curve rank one, tensor pullback and generic invertibility for arbitrary sheaf morphisms; manifold bundle hits concern a different category"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.Free",
+   "results": "{\"t\": \"2026-10-22T07:57:51Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"instFreeMvPolynomialKaehlerDifferential\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\"], \"digest\": \"9fab821f5183f3ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic standard-smooth freeness/projectivity does not give curve rank one, tensor pullback and generic invertibility for arbitrary sheaf morphisms; manifold bundle hits concern a different category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero map of line bundles on an integral smooth curve is generically invertible and its differential sheaf has rank one",
+   "results": "{\"t\": \"2026-10-22T07:58:23Z\", \"tool\": \"leansearch\", \"query\": \"A nonzero map of line bundles on an integral smooth curve is generically invertible and its differential sheaf has rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"smoothSheafCommRing.nonunits_stalk\", \"smoothSheafCommRing.isUnit_stalk_iff\", \"Bundle.mdifferentiableOn_zeroSection\", \"Pretrivialization.symmₗ\", \"hfdifferential\", \"Bundle.mdifferentiableAt_zeroSection\", \"fdifferential\"], \"digest\": \"47cac984ab421978\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic standard-smooth freeness/projectivity does not give curve rank one, tensor pullback and generic invertibility for arbitrary sheaf morphisms; manifold bundle hits concern a different category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between locally free modules of rank one on an integral scheme is nonzero exactly when it is invertible on a dense open; smooth curve differentials have rank one",
+   "results": "{\"t\": \"2026-10-22T07:58:34Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism between locally free modules of rank one on an integral scheme is nonzero exactly when it is invertible on a dense open; smooth curve differentials have rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.isUnit_stalk_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"ModuleCat.Tilde.isUnit_toStalk\"], \"digest\": \"ae97c6d86e8e8157\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic standard-smooth freeness/projectivity does not give curve rank one, tensor pullback and generic invertibility for arbitrary sheaf morphisms; manifold bundle hits concern a different category"
+  },
+  {
+   "tool": "grep",
+   "query": "free_kaehlerDifferential|projective_kaehlerDifferential",
+   "results": "{\"t\": \"2026-10-22T07:59:53Z\", \"tool\": \"grep\", \"query\": \"free_kaehlerDifferential|projective_kaehlerDifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"a8283aebfdb2e273\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic standard-smooth freeness/projectivity does not give curve rank one, tensor pullback and generic invertibility for arbitrary sheaf morphisms; manifold bundle hits concern a different category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero homomorphism between invertible sheaves on an integral scheme is an isomorphism on a nonempty open subset",
+   "results": "{\"t\": \"2026-10-24T00:20:32Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero homomorphism between invertible sheaves on an integral scheme is an isomorphism on a nonempty open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso\", \"AlgebraicGeometry.Scheme.basicOpen_res_eq\"], \"digest\": \"1d31eb61a26b3233\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give only component tools (integral function-field restrictions, standard-smooth algebra differentials or sheaf isomorphisms), not this full curve statement"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*(Rank|rank)|(genericPoint|generic).*([Ii]so|[Ii]njective)|nonempty.*open.*[Dd]im",
+   "results": "{\"t\": \"2026-10-24T00:21:07Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials.*(Rank|rank)|(genericPoint|generic).*([Ii]so|[Ii]njective)|nonempty.*open.*[Dd]im\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\"], \"digest\": \"d578f651195077b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give only component tools (integral function-field restrictions, standard-smooth algebra differentials or sheaf isomorphisms), not this full curve statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.Free",
+   "results": "{\"t\": \"2026-10-24T00:24:00Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"instFreeMvPolynomialKaehlerDifferential\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\"], \"digest\": \"9fab821f5183f3ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give only component tools (integral function-field restrictions, standard-smooth algebra differentials or sheaf isomorphisms), not this full curve statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth integral curves over a field have invertible differential sheaves and nonzero maps of line bundles are generically isomorphisms",
+   "results": "{\"t\": \"2026-10-24T00:24:01Z\", \"tool\": \"leansearch\", \"query\": \"Smooth integral curves over a field have invertible differential sheaves and nonzero maps of line bundles are generically isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"IsMIntegralCurve\", \"IsMIntegralCurveAt\", \"isIntegralCurveAt_eventuallyEq_of_contMDiffAt_boundaryless\", \"IsIntegralCurve\", \"IsIntegralCurveAt\", \"AlgebraicGeometry.IsSmooth\", \"IsIntegralCurve.isIntegralCurveAt\"], \"digest\": \"3fe44d9c4e3ac52f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give only component tools (integral function-field restrictions, standard-smooth algebra differentials or sheaf isomorphisms), not this full curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cotangent sheaf of a smooth morphism of relative dimension one is locally free of rank one",
+   "results": "{\"t\": \"2026-10-24T00:24:30Z\", \"tool\": \"leanfinder\", \"query\": \"The cotangent sheaf of a smooth morphism of relative dimension one is locally free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\"], \"digest\": \"e79bc5c0f046f37a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give only component tools (integral function-field restrictions, standard-smooth algebra differentials or sheaf isomorphisms), not this full curve statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-nonzero-differential-generically-etale",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof, third paragraph: nonzero df implies generic etaleness; supporting criterion lem-a1-nonzero-differential-generically-etale, old step(s) 1 and 4 (rank-one and generic invertibility), with the nonzero-stalk fact in step 7",
+   "via": [
+    "lem-a1-nonzero-differential-generically-etale"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-smooth-curve-cotangent-generic-isomorphism",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused existing general dimension, smooth cotangent-rank, invertible-pullback, function-field injection and basic-open nodes. Wrote the scalar multiplication proof of the generic criterion and the nonzero-stalk argument explicitly. No new nodes or Lean files.",
+  "blueprint": "Realizes lem-a1-finite-map-curve.proof.md, third paragraph, the inference from nonzero df to generic etaleness, through the supporting criterion lem-a1-nonzero-differential-generically-etale: its rank-one, generic-invertibility and nonzero-stalk prerequisites.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Dimension of nonempty opens and dimension at every point of an irreducible locally finite type scheme; a generic geometric tool not supplied by the affine-line estimate unit."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Constant relative-dimension cotangent freeness for arbitrary smooth schemes; no affine-line unit result replaces this smoothness tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-invertible",
+    "why": "Pullback preserves rank-one local trivializations for any scheme morphism, including constant h."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Integral scheme functions inject into the generic field and stalks are nonzero domains; used for scalar detection, with no curve-specific replacement in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-basic-open-function",
+    "why": "The unit locus of a local section is open and the section is invertible there; supplies the explicit inverse on an open."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Basic opens refine any prescribed neighbourhood in an affine chart; used only for the requested affine shrinking."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Only clause (0) is used: a principal open of an affine open is affine; no ideal gluing or closed-subscheme conclusion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-d33a5b260",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d33a5b260 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the statement of every cited node, Stacks 0C1C (curves.tex lemma-generically-etale, proof paragraph 1) and blueprint main-20261015 lem-a1-finite-map-curve.proof.md paragraph 3. The statement is true for smooth curves over any field and any h, including constant h. Tested u=0, u=id, multiplication by t on A^1 and the Frobenius differential. Steps: 1 uses 0A21 (3) and the fibre X x_k k = X for relative dimension 1. 2 uses 02G1 with d=1; def-amb gives quasi-coherence, so the module is invertible, and the pullback-invertible node handles any h. 3 is the scalar coefficient on common trivializing opens, with injection into O_eta and sheaf uniqueness. 4 uses the unit locus D_T(a) and a basic-open refinement in an affine chart plus clause (0), with no affine-intersection assumption. 5 takes germs of the inverse identities. 6 uses a local trivialization and that O_{X,x} is a domain. proof_deps = union of uses; no cycle. No new nodes. The item does not restate its parent; nearby lem-sfb-smooth-curve-generic-differentials and lem-sfb-separable-curve-differential-nonzero state different things. Live item is still unsplit and there is no repair note. All 7 declared tool_uses are accepted as generic tools (4 are mathlib leaves). FIX: (B3) cited [def-sc-generic-point] and [def-weil-pbc-module-stalk] in the statement and stmt_deps, citations only; step 4 now makes A=O_X(C) and D_C(f)=C_f explicit to match clause (0) of lem-weil-pbc-affine-ideals-closed-subscheme.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SmoothCotangentGenericIsomorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.smooth_curve_cotangent_generic_isomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SmoothCotangentGenericIsomorphism.lean",
+  "statement": "theorem Scheme.Hom.smooth_curve_cotangent_generic_isomorphism {k : Type u} [Field k] {X Y : Scheme.{u}} (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) [IsIntegralCurve pX] [IsIntegralCurve pY] [Smooth pX] [Smooth pY] (h : X ⟶ Y) (_w : h ≫ pY = pX) : (∀ U : X.Opens, IsAffineOpen U → (U : Set X).Nonempty → topologicalKrullDim (U : Set X) = 1) ∧ (∀ U : Y.Opens, IsAffineOpen U → (U : Set Y).Nonempty → topologicalKrullDim (U : Set Y) = 1) ∧ SmoothOfRelativeDimension 1 pX ∧ SmoothOfRelativeDimension 1 pY ∧ ((Scheme.Modules.tensorPullback h).obj pY.relativeDifferentials).IsInvertible ∧ pX.relativeDifferentials.IsInvertible ∧ (∀ (a : (Scheme.Modules.tensorPullback h).obj pY.relativeDifferentials ⟶ pX.relativeDifferentials) (η : X), IsGenericPoint η Set.univ → (a ≠ 0 ↔ (PresheafOfModules.moduleStalkFunctor X.ringCatSheaf.obj η).map a.val ≠ 0) ∧ ((PresheafOfModules.moduleStalkFunctor X.ringCatSheaf.obj η).map a.val ≠ 0 ↔ ∃ V : X.Opens, (V : Set X).Nonempty ∧ IsAffineOpen V ∧ IsIso ((Scheme.Modules.restrictFunctor V.ι).map a))) ∧ (∀ W : X.Opens, (W : Set X).Nonempty → ∀ x : W, Nontrivial ((RingedSpace.moduleStalkFunctor W.toScheme.toRingedSpace x).obj (pX.relativeDifferentials.restrict W.ι)) ∧ Nonempty ((ModuleCat.restrictScalars (W.ι.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor W.toScheme.toRingedSpace x).obj (pX.relativeDifferentials.restrict W.ι)) ≅ ModuleCat.of (X.presheaf.stalk (W.ι x)) (X.presheaf.stalk (W.ι x))))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c089d3870",
+  "group": "Q83",
+  "result": "pass",
+  "note": "First S2 delivery; node identical to live apart from lean; lean.statement verbatim in the file. H3 clause by clause: IsIntegralCurve (integral, separated, LFT+QC, dim 1) + Smooth, h with h≫pY=pX, arbitrary h; nonempty affine opens topologicalKrullDim=1 for X and Y; SmoothOfRelativeDimension 1 as a conclusion; IsInvertible (Zariski-local ≅ unit) for tensorPullback h Ω_Y and Ω_X; ∀ a ∀ generic η: a≠0 ↔ PresheafOfModules stalk map ≠0 ↔ ∃ nonempty affine V with IsIso restrictFunctor; ∀ nonempty W, x: restricted stalk Nontrivial and ≅ O_{X,x} with scalars restricted along W.ι.stalkMap (direction checked). Matches Stacks 0C1C proof paragraph 1 and 02G1. Edge cases (empty, a=0, id, t on A1, Frobenius, constant h, x=η) fine; one universe forced by Spec. No helpers or new defs, proof sorry only, docstrings carry source, blueprint id and six steps, imports are proof_dep modules. No duplicate: the parent covers only df; isInvertible_relativeDifferentials covers one clause. Advisory: RingedSpace.moduleStalkFunctor (def-pc-module-stalk-functor) is not in stmt_deps (rfl-equal carrier); the second reading is the worker's own self-check. No file changed and no recompile; worker reports a clean compile in 2.0 s."
+ }
+}

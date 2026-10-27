@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-torus-vector-group-linearization",
+ "kind": "statement",
+ "title": "Linearization of split-torus actions on vector groups",
+ "statement": "Let $k$ be a field [def-weil-field]. Groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]; geometrically connected means connected after every field extension. Write $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ for every commutative $k$-algebra $R$ [def-sc-gm-ga]. A represented fppf quotient means a group scheme representing the sheafification of the right-coset functor for faithfully flat finitely presented coverings of commutative $k$-algebras. An action by group automorphisms is a $k$-morphism satisfying the action identities and preserving multiplication after every commutative $k$-algebra extension. Let $d,s\\geq0$, let $C$ be isomorphic as a $k$-group to $\\mathbf G_a^d$, and let $E=\\mathbf G_m^s$ act on $C$ by group automorphisms. There exist a $d$-dimensional $k$-vector space $W$, a group-scheme isomorphism $a:\\mathbb V(W)\\xrightarrow{\\sim}C$, and a homomorphism $\\rho:E\\to\\operatorname{GL}(W)$ such that $a_R(\\rho_R(e)w)=e\\cdot a_R(w)$ for every commutative $k$-algebra $R$, $e\\in E(R)$ and $w\\in W\\otimes_kR$. Here $\\mathbb V(W)(R)=(W\\otimes_kR,+)$, represented in a basis by affine $d$-space, and $\\operatorname{GL}(W)(R)=\\operatorname{Aut}_R(W\\otimes_kR)$. Equivalently the linear action is a $k$-linear coaction $c:W\\to W\\otimes_k k[t_1^{\\pm1},\\ldots,t_s^{\\pm1}]$ with $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\varepsilon)c=1_W$, where $\\Delta(t_j)=t_j\\otimes t_j$ and $\\varepsilon(t_j)=1$. Thus the assertion allows a change of additive polynomial coordinates on $C$, not only a change of basis for a previously chosen vector structure. It holds over every field and in every characteristic.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Conrad--Lichtenstein, Linear Algebraic Groups I, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, paragraph beginning Now we are in the case that U is a vector group: the positive-characteristic decomposition into a trivial-action factor and a vector factor with linear action, and the splitness of the first factor. Read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf. WANTED locally: the Conrad notes, Appendix D.3. No Stacks tag is asserted for this algebraic-group linearization theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Let $k[x_1,\\ldots,x_d]$ be the polynomial ring [def-weil-pbc-mv-polynomial-ring] and let $P_d$ be the $k$-subspace of those $f$ with $f(X+Y)=f(X)+f(Y)$ in $k[X_1,\\ldots,X_d,Y_1,\\ldots,Y_d]$, an identity of polynomials, not of functions on $k$-points. Write $f=\\sum_{n\\geq0}f^{(n)}$ with $f^{(n)}$ homogeneous of total degree $n$ [def-pc-standard-graded-algebra]. The substitutions $x\\mapsto X+Y$, $x\\mapsto X$, $x\\mapsto Y$ preserve total degree, so $f\\in P_d$ if and only if every $f^{(n)}\\in P_d$; for $n=0$ the identity reads $c=2c$, so $f^{(0)}=0$. Apply [lem-trf-additive-polynomial-monomial-classification] (with its $n$ our $d$ and its $d$ our $n$) to each nonzero $f^{(n)}$, $n>0$; its converse direction shows that the listed polynomials lie in $P_d$, and distinct monomials are linearly independent. Hence, with $\\operatorname{char}k$ as in [def-pc-field-characteristic]: if $\\operatorname{char}k=0$ then $P_d=\\bigoplus_{i=1}^dkx_i$; if $\\operatorname{char}k=p>0$ then $P_d=\\bigoplus_{i=1}^d\\bigoplus_{r\\geq0}kx_i^{p^r}$. In the latter case let $A=k_\\sigma[F]$ be the ring of finite sums $\\sum_rc_rF^r$ with coefficientwise addition and $(aF^r)(bF^t)=ab^{p^r}F^{r+t}$, and let it act on $P_d$ by $c\\cdot f=cf$ and $F\\cdot f=f^p$. Here $f^p\\in P_d$ because $g\\mapsto g^p$ is a ring endomorphism of $k[X,Y]$ [def-weil-ring-frobenius], and $(aF^r)\\cdot((bF^t)\\cdot f)=a(bf^{p^t})^{p^r}=ab^{p^r}f^{p^{r+t}}$ gives the module law. For $a_i=\\sum_rc_{ir}F^r$ one has $\\sum_ia_i\\cdot x_i=\\sum_{i,r}c_{ir}x_i^{p^r}$, so by the direct sum $(x_1,\\ldots,x_d)$ is a left $A$-basis of $P_d$, and $P_d\\cong A^d$. For $d=0$ all these spaces are $0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-standard-graded-algebra",
+    "lem-trf-additive-polynomial-monomial-classification",
+    "def-pc-field-characteristic",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40 and equation (97), printed pp.292--293 (one variable); several variables and the free $k_\\sigma[F]$-module structure by the homogeneous classification of the cited node, as in the vector-group paragraph of Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  },
+  {
+   "text": "Choose a group isomorphism $b_0:\\mathbf G_a^d\\to C$ and pull the action back along it. Let $P_d$ be the additive polynomial space of step 1. Write $H=k[t_1^{\\pm1},\\ldots,t_s^{\\pm1}]$ and $t^\\nu=\\prod t_i^{\\nu_i}$. The action morphism gives $\\gamma:k[x_1,\\ldots,x_d]\\to k[x_1,\\ldots,x_d]\\otimes H$. For $f\\in P_d$ write $\\gamma(f)=\\sum_\\nu f_\\nu\\otimes t^\\nu$. Since the action preserves addition, comparing Laurent coefficients in $\\gamma(f)(X+Y)=\\gamma(f)(X)+\\gamma(f)(Y)$ shows $f_\\nu\\in P_d$. Coassociativity gives $\\gamma(f_\\nu)=f_\\nu\\otimes t^\\nu$, and the counit gives $f=\\sum_\\nu f_\\nu$. Uniqueness of Laurent coefficients proves $P_d=\\bigoplus_\\nu(P_d)_\\nu$, where $(P_d)_\\nu=\\{f:\\gamma(f)=f\\otimes t^\\nu\\}$. This argument does not require finite-dimensionality of $P_d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=0$, step 1 says $P_d$ has basis $x_1,\\ldots,x_d$. Thus $\\gamma(x_i)=\\sum_j x_j\\otimes h_{ij}$ with $h_{ij}\\in H$: the action in the original coordinates is already linear over every $k$-algebra. Its matrices are invertible because acting by $e^{-1}$ is inverse to acting by $e$; the action identities give the matrix multiplication and identity laws. These Laurent-polynomial entries define a group-scheme homomorphism $\\rho:E\\to\\operatorname{GL}(k^d)$, with $W=k^d$ and $a=b_0$. This proves the claim in characteristic zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  },
+  {
+   "text": "Suppose $\\operatorname{char}k=p>0$. Give $P_d$ the left $A=k_\\sigma[F]$-action of step 1; step 1 identifies it with the free left module $A^d$ with basis $x_1,\\ldots,x_d$. Since $\\gamma$ preserves products, $\\gamma(f^p)=\\gamma(f)^p$; hence $F((P_d)_\\nu)\\subseteq(P_d)_{p\\nu}$. The lattice-weight decomposition in step 2 therefore satisfies precisely the hypotheses of [lem-sfb-torus-equivariant-frobenius-module-basis], over the original field $k$. Obtain a left $A$-basis $f_1,\\ldots,f_d$ with $\\gamma(f_j)=f_j\\otimes t^{\\nu_j}$.",
+   "uses": [
+    "lem-sfb-torus-equivariant-frobenius-module-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  },
+  {
+   "text": "Define $b:\\mathbf G_a^d\\to\\mathbf G_a^d$ by $b(x)=(f_1(x),\\ldots,f_d(x))$. It is a group homomorphism because each $f_j$ satisfies the polynomial additive identity. Both $(x_i)$ and $(f_j)$ are left $A$-bases of the same module, so write $x_i=\\sum_j B_{ij}(F)f_j$. Interpret $B_{ij}(F)=\\sum_r c_{ijr}F^r$ as the additive polynomial operator $z\\mapsto\\sum_r c_{ijr}z^{p^r}$ and define $v(z)_i=\\sum_j B_{ij}(F)z_j$. Then $v\\circ b=\\mathrm{id}$ by these expressions. Conversely, substitution of $v$ into the expressions of $f_j$ in the $x_i$ gives $b\\circ v=\\mathrm{id}$: the two basis-change matrices compose to the identity, and multiplication in $A$, $(cF^r)(bF^t)=cb^{p^r}F^{r+t}$, is exactly composition of these operators. Both equalities are polynomial identities, so $b$ is a group-scheme isomorphism, with polynomial inverse $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  },
+  {
+   "text": "Take $W=k^d$, let $\\rho_R(e)$ be the diagonal matrix with entries $e^{\\nu_j}$, and put $a=b_0\\circ v$. Each entry is a Laurent monomial and $e^{\\nu_j}$ is a unit, so these matrices define a group-scheme homomorphism $E\\to\\operatorname{GL}(W)$. The homogeneous identity gives $b(e\\cdot x)=\\rho_R(e)b(x)$ for every commutative $k$-algebra $R$; setting $x=v(w)$ proves $e\\cdot a_R(w)=a_R(\\rho_R(e)w)$. The corresponding coaction is $c(e_j)=e_j\\otimes t^{\\nu_j}$; its two identities follow from $\\Delta(t^{\\nu_j})=t^{\\nu_j}\\otimes t^{\\nu_j}$ and $\\epsilon(t^{\\nu_j})=1$. In characteristic zero the matrix identities in step 3 give the same coaction identities. Empty matrices and empty coordinate lists give the constructions for $d=0$; for $s=0$ every Laurent monomial is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "lem-trf-additive-polynomial-monomial-classification",
+  "def-pc-field-characteristic",
+  "def-weil-ring-frobenius",
+  "lem-sfb-torus-equivariant-frobenius-module-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 14.40, pp.292--293, and Proposition 14.50, p.296; agent coordinate/Frobenius-module proof of the vector-group paragraph in Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, p.86."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A torus action by group automorphisms on a vector group is linearizable over an arbitrary field",
+   "results": "{\"t\": \"2026-10-24T08:17:05Z\", \"tool\": \"leansearch\", \"query\": \"A torus action by group automorphisms on a vector group is linearizable over an arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.ρAut\", \"Rep.linearization\", \"Rep.coe_linearization_obj\", \"Rep.linearization_obj_ρ\", \"Rep.coe_linearization_obj_ρ\", \"AddAut.applyMulAction\", \"Rep.linearization_single\", \"Rep.linearizationOfMulActionIso\"], \"digest\": \"d769e4f847b5e635\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization forms a free module on an abstract set action; root-pairing automorphisms and DistribMulAction.toModuleAut start with linearity. None changes additive polynomial coordinates on a vector group to linearize an algebraic torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable|lineariz",
+   "results": "{\"t\": \"2026-10-24T08:18:22Z\", \"tool\": \"grep\", \"query\": \"torus|diagonalizable|lineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization forms a free module on an abstract set action; root-pairing automorphisms and DistribMulAction.toModuleAut start with linearity. None changes additive polynomial coordinates on a vector group to linearize an algebraic torus action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Additive\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Additive\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization forms a free module on an abstract set action; root-pairing automorphisms and DistribMulAction.toModuleAut start with linearity. None changes additive polynomial coordinates on a vector group to linearize an algebraic torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearization of algebraic torus automorphisms of an additive vector group in positive characteristic",
+   "results": "{\"t\": \"2026-10-24T08:18:26Z\", \"tool\": \"leanfinder\", \"query\": \"Linearization of algebraic torus automorphisms of an additive vector group in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Equiv.weightHom\", \"RootPairing.Equiv.weightHom_toLinearMap\", \"RootPairing.Equiv.toEndUnit\", \"RootPairing.Equiv.toEndUnit_val\", \"Rep.ofAlgebraAutOnUnits\", \"Rep.ofAlgebraAut\", \"RootPairing.Equiv.instDistribMulActionAut\", \"IsPrimitiveRoot.autToPow_eq_modularCyclotomicCharacter\"], \"digest\": \"24bf7b0aef6c57c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization forms a free module on an abstract set action; root-pairing automorphisms and DistribMulAction.toModuleAut start with linearity. None changes additive polynomial coordinates on a vector group to linearize an algebraic torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable|lineariz",
+   "results": "{\"t\": \"2026-10-24T08:56:18Z\", \"tool\": \"grep\", \"query\": \"torus|diagonalizable|lineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic and pattern hits concern already linear representations or abstract group actions, not linearization of group-scheme automorphisms of a vector group."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, AddMonoidHom",
+   "results": "{\"t\": \"2026-10-24T08:56:19Z\", \"tool\": \"loogle\", \"query\": \"Representation, AddMonoidHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Representation.IntertwiningMap.coeFnAddMonoidHom\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\"], \"digest\": \"99a3c9eb90985601\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic and pattern hits concern already linear representations or abstract group actions, not linearization of group-scheme automorphisms of a vector group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic action of a split torus on an additive vector group can be linearized by an additive polynomial change of coordinates",
+   "results": "{\"t\": \"2026-10-24T08:56:21Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic action of a split torus on an additive vector group can be linearized by an additive polynomial change of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Gal.galAction\", \"Polynomial.Gal.galActionAux\", \"LinearEquiv.ofAEval\", \"DistribMulAction.toModuleAut_apply\", \"RootPairing.Equiv.weightHom\", \"groupCohomology.Hilbert90.aux\", \"Polynomial.Gal.applyMulSemiringAction\", \"Representation.ofMulActionSelfAsModuleEquiv_apply\"], \"digest\": \"b5f3f7a81aad4045\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic and pattern hits concern already linear representations or abstract group actions, not linearization of group-scheme automorphisms of a vector group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group actions of a torus on affine additive space admit additive polynomial coordinates in which the action is linear",
+   "results": "{\"t\": \"2026-10-24T08:59:23Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic group actions of a torus on affine additive space admit additive polynomial coordinates in which the action is linear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AffineBasis.coord_smul\", \"AddAction.toPermHom\", \"AffineBasis.instMulAction\", \"AffineBasis.instIsScalarTower\", \"AddAut.applyMulAction\", \"AffineSubspace.pointwiseAddAction\", \"UnitAddTorus\", \"AffineBasis.instSMul\"], \"digest\": \"1a51ac682b5bc2da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic and pattern hits concern already linear representations or abstract group actions, not linearization of group-scheme automorphisms of a vector group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-torus-stable-series",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Linearization of split-torus actions on vector groups.",
+   "via": [
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-vector-group-linearization",
+  "worker": "stage1",
+  "summary": "Q113: original statement and statement dependencies preserved. Wrote the coaction coefficient argument and both characteristic cases. Step 1 derives the additive polynomial classification and the free $k_\\sigma[F]$-module structure from the existing homogeneous classification lem-trf-additive-polynomial-monomial-classification (reviewer FIX: the delivered separate additive-polynomial node was a few-line consequence of it and is dropped). One statement-only algebraic prerequisite isolates homogeneous bases of free Frobenius-skew modules. The explicit inverse additive-polynomial matrix proves scheme-level linearization over all algebra extensions, including imperfect fields and empty dimensions.",
+  "blueprint": "The inherited ancestry has from.node=null (blueprint_refs ancestor also prints None); retained it and the exact inherited from.place. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). This supporting torus-linearization input belongs to the existing alteration/moduli/reductivity ancestry; the current blueprint has no separate matching vector-group or graded Frobenius-module node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-c87315e78",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-c87315e78 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. Milne iAG2017 Example 14.40 / (95)-(97) (pp.292-293) and Prop 14.50 (p.296) were checked locally; the Conrad and CGP sources are WANTED and not local, and the agent proof was checked on its own. The item statement is unchanged, true in every characteristic, and is the form its citer lem-sfb-split-unipotent-torus-stable-series uses in step 1. All steps are correct: the coaction weight grading of P_d (comodule and counit identities, does not need finite dimension); the char-0 linear matrices; char p, where gamma(f^p)=gamma(f)^p gives F(P_nu) in P_{p nu}; the inverse v from the basis-change matrices (DB=I because f is a basis, and composing the operators is multiplication in A); and the assembly a=b_0∘v with diagonal rho. The new node lem-sfb-torus-equivariant-frobenius-module-basis is true: I checked the report's proof (M_0 plus N, the span of F(N), homogeneous lifts, recursion on the p-divisibility of nu, and independence through the injective linearization). It covers imperfect k, d=0, s=0 and weight 0, has no duplicate in the DAG and does not restate the item. One fault (C5/C1): the new node lem-sfb-vector-group-additive-polynomials is a few-line generalization of the existing landed node lem-trf-additive-polynomial-monomial-classification (the homogeneous classification over any field). Splitting into homogeneous components and noting the constant term is 0 gives P_d, and the A-basis follows at once; the report's duplicate search missed that node. FIX: I dropped the node and added a new item step 1 that derives the classification and the free k_sigma[F]-module structure from the trf node, citing def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra, def-pc-field-characteristic and def-weil-ring-frobenius. The old steps 1-5 become 2-6 and refer to step 1. proof_deps and the split_report summary are updated; the statement and stmt_deps are untouched. There is no cycle. Accepted tool_use for the maintainer to record: lem-trf-additive-polynomial-monomial-classification (sk-i-curve-zero, a generic polynomial-algebra lemma used as a black box).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusVectorGroupLinearization",
+  "declaration": "AlgebraicGeometry.torus_vectorGroup_linearization",
+  "declarations": [
+   "AlgebraicGeometry.additivePowerPointCoordinate",
+   "AlgebraicGeometry.torus_vectorGroup_linearization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusVectorGroupLinearization.lean",
+  "statement": "theorem torus_vectorGroup_linearization (k : Type u) [Field k] (d s : ℕ) (C : Grp (Over (Spec (.of k)))) [IsAffine C.X.left] [LocallyOfFiniteType C.X.hom] [QuasiCompact C.X.hom] (hC : Nonempty ((∏ᶜ fun _ : Fin d ↦ Grp.mk (StandardGroupSchemes.additive k)) ≅ C)) (action : ModObj (MultiplicativeType.splitTorus k s).X C.X) (hAut : ∀ (R : Type u) [CommRing R] [Algebra k R] (e : StandardGroupSchemes.affine k R ⟶ (MultiplicativeType.splitTorus k s).X) (x y : StandardGroupSchemes.affine k R ⟶ C.X), lift e (x * y) ≫ action.smul = (lift e x ≫ action.smul) * (lift e y ≫ action.smul)) : ∃ (a : (∏ᶜ fun _ : Fin d ↦ Grp.mk (StandardGroupSchemes.additive k)) ≅ C) (ρ : (MultiplicativeType.splitTorus k s).X ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) k), IsMonHom ρ ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (e : StandardGroupSchemes.affine k R ⟶ (MultiplicativeType.splitTorus k s).X) (x : StandardGroupSchemes.affine k R ⟶ C.X) (i : Fin d), additivePowerPointCoordinate k d ((lift e x ≫ action.smul) ≫ a.inv.hom.hom) i = ∑ j : Fin d, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) k R (e ≫ ρ)).val ⟨i⟩ ⟨j⟩ * additivePowerPointCoordinate k d (x ≫ a.inv.hom.hom) j",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Use W = k^d, whose vector group is the categorical product of d recorded additive groups. The existing splitTorus and GeneralLinearGroup provide E and GL(W). The formula after applying a inverse, in every coordinate over every test algebra, is exactly a(rho(e)w) = e.a(w). The helper evaluates the polynomial coordinate after the product projection; it adds no independent mathematical notion. The two added statement dependencies own the reused split-torus and general-linear constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4dbbc572",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Read node, source place, module, report (Worker report + Second reading by Q89 present), all 9 stmt_dep records and exact decls (StandardGroupSchemes.affine/additive, splitTorus, upstream GeneralLinearGroup + homMulEquiv MulEquiv, ModObj, IsMonHom). Clause match: Field k, no extra assumptions; d,s:ℕ allow 0; C affine finite type (implied by hC, not stronger); hC Grp iso to ∏ Fin d G_a; ModObj left action + hAut multiplicativity over every k-algebra R (node wording); W=k^d witness; a unrestricted Grp iso (allows additive-polynomial coordinate change); ρ IsMonHom into upstream GL; coordinate equation coord_i(a⁻¹(e·x)) = Σ_j ρ(e)_ij coord_j(a⁻¹x) is exactly a(ρ(e)w)=e·a(w) (coordinates separate points; left-action and matrix conventions consistent). Edge cases d=0, s=0, all characteristics, imperfect fields, zero/nonreduced R covered; single universe u. lean.statement verbatim, one sorry, real helper with docstring, proof steps in docstring; item changed only in lean + stmt_deps (added landed owners def-sfb-tori-multiplicative-type, def-sc-general-linear-group); other nodes identical to side-live. Parallel Q18 5497 delivery was LAND 'retired' (not landed): no conflict, only one should land. Advisory: TorusCharacterTangent.ActsByGroupAutomorphisms expresses the same condition as inline hAut. Not recompiled (no change)."
+ }
+}

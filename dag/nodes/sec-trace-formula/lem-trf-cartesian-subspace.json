@@ -1,0 +1,455 @@
+{
+ "id": "lem-trf-cartesian-subspace",
+ "kind": "statement",
+ "title": "Subspaces of finite cartesian ultrametric spaces are cartesian",
+ "statement": "Let $K$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value. Let $V$ be a $K$-vector space with a definite norm $N:V\\to\\mathbf R_{\\ge0}$ satisfying $N(-v)=N(v)$, $N(v+w)\\le\\max(N(v),N(w))$ and $N(av)=|a|N(v)$. Suppose $V$ has a finite basis $v_1,\\ldots,v_n$ with $$N\\left(\\sum_{i=1}^n a_i v_i\\right)=\\max_{1\\le i\\le n}|a_i|N(v_i).$$ Let $U\\subseteq V$ be a $K$-linear subspace, meaning a subset containing zero and closed under addition and scalar multiplication. Then $U$ has a finite basis $u_1,\\ldots,u_m$ with $$N\\left(\\sum_{j=1}^m a_j u_j\\right)=\\max_{1\\le j\\le m}|a_j|N(u_j).$$ An empty maximum is zero; $V=0$ and $U=0$ are allowed. No completeness or spherical completeness is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 2.3.3/4, subspace permanence for cartesian spaces; cited in Proposition 3.6.2/3, printed p.158 Local archival copy absent; WANTED in report.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the number $n$ of vectors in the given orthogonal basis, with the claim quantified over every such normed space and every subspace. If $n=0$, then $V=U=0$ and the empty basis works. At any induction stage $U=0$ also has the empty basis. Otherwise choose $0\\ne u\\in U$, write $u=\\sum_i c_i v_i$, and put $r_i=N(v_i)>0$. The assumed formula gives $N(u)=\\max_i|c_i|r_i>0$; since this maximum is finite, choose $j$ attaining it. Thus $c_j\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified. Step 1."
+   }
+  },
+  {
+   "text": "Let $H$ be the subspace of vectors whose $j$th coordinate in the given basis is zero. The family $(v_i)_{i\\ne j}$ is a basis of $H$: its expansions are exactly the expansions with $j$th coordinate zero, and uniqueness follows from uniqueness in the original basis. Its norm formula is the assumed one with the $j$th coefficient set to zero. Thus $H$, with the restricted norm, satisfies the induction hypothesis with $n-1$ basis vectors. This includes $H=0$ when $n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified. Step 2."
+   }
+  },
+  {
+   "text": "For $x=\\sum_i x_i v_i\\in U$, the field inverse of $c_j$ exists by [def-weil-field]. Set $a=x_j/c_j$ and $w=x-au$. Closure of $U$ gives $w\\in U$, and its $j$th coordinate is $x_j-ac_j=0$, so $w\\in U\\cap H$. This expresses every $x\\in U$ as $au+w$. The expression is unique: if $au+w=a'u+w'$ with $w,w'\\in H$, taking $j$th coordinates gives $(a-a')c_j=0$, hence $a=a'$ and $w=w'$.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified. Step 3."
+   }
+  },
+  {
+   "text": "For any $a\\in K$ and $w\\in H$, put $z=au+w$. Its $j$th coordinate is $ac_j$, so the original norm formula gives $N(z)\\ge|ac_j|r_j=|a|N(u)=N(au)$. Also $N(w)=N(z-au)\\le\\max(N(z),N(-au))\\le N(z)$, using $N(-au)=N(au)$. The reverse inequality $N(z)\\le\\max(N(au),N(w))$ is the given ultrametric inequality. Consequently $N(au+w)=\\max(|a|N(u),N(w))$. This is a direct coordinate calculation, also when $a=0$ or $w=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified. Step 4."
+   }
+  },
+  {
+   "text": "The intersection $U\\cap H$ is a subspace of $H$, since both membership conditions are preserved by zero, addition and scalar multiplication. Apply the induction hypothesis to obtain a finite orthogonal basis $w_1,\\ldots,w_t$ of $U\\cap H$. The unique expression in step 3 and the unique expansion in this basis show that $(u,w_1,\\ldots,w_t)$ is a basis of $U$. For arbitrary coefficients, step 4 yields $$N\\left(au+\\sum_k b_k w_k\\right)=\\max\\left(|a|N(u),\\max_k |b_k|N(w_k)\\right).$$ This is the required formula, including $t=0$ with empty maximum zero, and completes the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified. Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent coordinate-pivot proof of subspace permanence; archival BGR copy absent (WANTED). The original proposition numbering has not been verified.",
+  "reason": "The cited BGR volume is not present in literature/ and its online PDF could not be opened. This complete finite-coordinate induction was written independently; it assumes neither a nearest-point theorem nor completeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every linear subspace of a finite dimensional ultrametric normed vector space with an orthogonal basis has an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T15:57:26Z",
+    "tool": "leanfinder",
+    "query": "Every linear subspace of a finite dimensional ultrametric normed vector space with an orthogonal basis has an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "maximal_orthonormal_iff_basis_of_finiteDimensional",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "OrthonormalBasis.mkOfOrthogonalEqBot",
+     "OrthonormalBasis.mk"
+    ],
+    "digest": "83f7ed5c6134aef9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: real/complex inner-product orthonormal bases require RCLike, and finite-dimensional closed/complemented subspaces give no exact ultrametric orthogonal basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subspace of a weighted supremum norm space over a nonarchimedean field admits an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:09:00Z",
+    "tool": "leanfinder",
+    "query": "A subspace of a weighted supremum norm space over a nonarchimedean field admits an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis",
+     "Module.Basis.norm_isNonarchimedean",
+     "Module.Basis.ofZLatticeBasis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "HilbertBasis.instInhabitedSubtypePreLpMemAddSubgroupLpOfNatENNReal",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "NumberField.mixedEmbedding.stdBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate"
+    ],
+    "digest": "ab0e0e35c0cb9aab"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: real/complex inner-product orthonormal bases require RCLike, and finite-dimensional closed/complemented subspaces give no exact ultrametric orthogonal basis."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Module.Basis",
+   "results": {
+    "t": "2026-10-24T16:08:58Z",
+    "tool": "loogle",
+    "query": "IsUltrametricDist, Module.Basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: real/complex inner-product orthonormal bases require RCLike, and finite-dimensional closed/complemented subspaces give no exact ultrametric orthogonal basis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subspace of a cartesian nonarchimedean normed vector space is cartesian",
+   "results": {
+    "t": "2026-10-24T15:57:23Z",
+    "tool": "leansearch",
+    "query": "A subspace of a cartesian nonarchimedean normed vector space is cartesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Subspace",
+     "instLocallyConvexSpaceSubtypeMemSubmodule",
+     "AddSubgroup.normedAddGroup",
+     "AddSubgroup.normedAddCommGroup",
+     "AddSubgroupClass.normedAddCommGroup",
+     "Submodule.normedSpace",
+     "Subgroup.seminormedGroup",
+     "TopologicalSpace.MetrizableSpace.subtype"
+    ],
+    "digest": "87c944b378f4d7aa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: real/complex inner-product orthonormal bases require RCLike, and finite-dimensional closed/complemented subspaces give no exact ultrametric orthogonal basis."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|orthogonal.*basis|basis.*orthogonal",
+   "results": {
+    "t": "2026-10-24T16:08:58Z",
+    "tool": "grep",
+    "query": "cartesian|orthogonal.*basis|basis.*orthogonal",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean"
+    ],
+    "digest": "b8cb6ac42e7e5d34"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: real/complex inner-product orthonormal bases require RCLike, and finite-dimensional closed/complemented subspaces give no exact ultrametric orthogonal basis."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal.*basis|basis.*orthogonal|[Cc]artesian|IsUltrametricDist",
+   "results": {
+    "t": "2026-10-24T16:29:12Z",
+    "tool": "grep",
+    "query": "orthogonal.*basis|basis.*orthogonal|[Cc]artesian|IsUltrametricDist",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Algebra/Ultra.lean",
+     "Mathlib/Analysis/Normed/Field/Dense.lean",
+     "Mathlib/Analysis/Normed/Field/Krasner.lean",
+     "Mathlib/Analysis/Normed/Field/Krasner.lean"
+    ],
+    "digest": "b06a5151f3d507e2"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern ultrametric norm structures, biorthogonal Schauder coordinates, basis-induced norms or real/complex Gram-Schmidt. They do not provide an exact orthogonal basis for the restricted prescribed ultrametric norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear subspace of a finite dimensional cartesian nonarchimedean normed vector space admits an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:29:12Z",
+    "tool": "leansearch",
+    "query": "A linear subspace of a finite dimensional cartesian nonarchimedean normed vector space admits an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.gramSchmidtOrthonormalBasis",
+     "InnerProductSpace.gramSchmidtBasis",
+     "stdOrthonormalBasis",
+     "maximal_orthonormal_iff_basis_of_finiteDimensional",
+     "basisOfOrthonormalOfCardEqFinrank",
+     "OrthonormalBasis",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "OrthonormalBasis.mk"
+    ],
+    "digest": "acf69dc941054ed3"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: inner-product orthonormal/Gram-Schmidt results require RCLike and an inner product (GramSchmidtOrtho.lean:42); the hypotheses here supply neither. No exact ultrametric subspace-basis theorem returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Module.Basis",
+   "results": {
+    "t": "2026-10-24T16:29:12Z",
+    "tool": "loogle",
+    "query": "IsUltrametricDist, Module.Basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: inner-product orthonormal/Gram-Schmidt results require RCLike and an inner product (GramSchmidtOrtho.lean:42); the hypotheses here supply neither. No exact ultrametric subspace-basis theorem returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every linear subspace of a finite dimensional ultrametric normed vector space with a weighted orthogonal basis has an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:29:13Z",
+    "tool": "leanfinder",
+    "query": "Every linear subspace of a finite dimensional ultrametric normed vector space with a weighted orthogonal basis has an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "stdOrthonormalBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "maximal_orthonormal_iff_basis_of_finiteDimensional",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "OrthonormalBasis.mk"
+    ],
+    "digest": "7eecae81b73f53a1"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: inner-product orthonormal/Gram-Schmidt results require RCLike and an inner product (GramSchmidtOrtho.lean:42); the hypotheses here supply neither. No exact ultrametric subspace-basis theorem returned."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|[Cc]artesian|IsOrtho|norm_isNonarchimedean",
+   "results": {
+    "t": "2026-10-24T16:29:47Z",
+    "tool": "grep",
+    "query": "orthogonal|[Cc]artesian|IsOrtho|norm_isNonarchimedean",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean"
+    ],
+    "digest": "c2f91693be0f04e0"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern ultrametric norm structures, biorthogonal Schauder coordinates, basis-induced norms or real/complex Gram-Schmidt. They do not provide an exact orthogonal basis for the restricted prescribed ultrametric norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm_isNonarchimedean\"",
+   "results": {
+    "t": "2026-10-24T16:29:47Z",
+    "tool": "loogle",
+    "query": "\"norm_isNonarchimedean\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "1963a01e45080c8c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean (Analysis/Normed/Unbundled/FiniteExtension.lean:90) proves that the coordinate norm defined from an already given basis is nonarchimedean; it does not find a basis for a subspace with its prescribed norm. Other hits concern number fields, lattices or profinite functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear subspace of a weighted supremum norm vector space over a nonarchimedean valued field has a basis orthogonal for the maximum norm",
+   "results": {
+    "t": "2026-10-24T16:29:48Z",
+    "tool": "leanfinder",
+    "query": "A linear subspace of a weighted supremum norm vector space over a nonarchimedean valued field has a basis orthogonal for the maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean",
+     "Profinite.NobelingProof.GoodProducts.Basis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "Module.Basis.ofZLatticeBasis",
+     "NumberField.Units.basisOfIsMaxRank",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "NumberField.Units.basisOfIsMaxRank_fundSystem",
+     "NumberField.mixedEmbedding.stdBasis"
+    ],
+    "digest": "d6451c008fa6fa85"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Module.Basis.norm_isNonarchimedean (Analysis/Normed/Unbundled/FiniteExtension.lean:90) proves that the coordinate norm defined from an already given basis is nonarchimedean; it does not find a basis for a subspace with its prescribed norm. Other hits concern number fields, lattices or profinite functions."
+  },
+  {
+   "tool": "grep",
+   "query": "gramSchmidtBasis|gramSchmidtOrthonormalBasis",
+   "results": {
+    "t": "2026-10-24T16:31:19Z",
+    "tool": "grep",
+    "query": "gramSchmidtBasis|gramSchmidtOrthonormalBasis",
+    "sub": "Analysis/InnerProductSpace/GramSchmidtOrtho.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "28",
+     "32",
+     "232",
+     "236",
+     "319"
+    ],
+    "digest": "fada30f2d0cbb050"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern ultrametric norm structures, biorthogonal Schauder coordinates, basis-induced norms or real/complex Gram-Schmidt. They do not provide an exact orthogonal basis for the restricted prescribed ultrametric norm."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_isNonarchimedean|def norm",
+   "results": {
+    "t": "2026-10-24T16:31:19Z",
+    "tool": "grep",
+    "query": "norm_isNonarchimedean|def norm",
+    "sub": "Analysis/Normed/Unbundled/FiniteExtension.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "59",
+     "90",
+     "194"
+    ],
+    "digest": "0878153d400c2238"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern ultrametric norm structures, biorthogonal Schauder coordinates, basis-induced norms or real/complex Gram-Schmidt. They do not provide an exact orthogonal basis for the restricted prescribed ultrametric norm."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-stable-field-completion",
+  "date": "2026-10-25",
+  "group": "NR"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220). Completion ascent half of the BGR criterion. Supporting input to BGR 3.6.2/3: Proposition 2.3.3/4, subspace permanence for cartesian spaces; cited in Proposition 3.6.2/3, printed p.158",
+   "via": [
+    "lem-trf-stable-field-completion",
+    "lem-trf-dense-weak-stability-transfer",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-cartesian-subspace",
+  "worker": "stage1",
+  "group": "Q29",
+  "summary": "Statement unchanged. Proved subspace permanence by induction on the size of the given orthogonal basis, choosing a nonzero subspace vector and a coordinate attaining its norm. Wrote the coordinate-hyperplane basis, unique pivot decomposition and exact two-term norm identity explicitly. No new nodes, completeness, spherical completeness, compactness or nearest-point result. Read the field definition and recorded fresh Mathlib searches; BGR archival copy WANTED and proof marked agent-written.",
+  "blueprint": "Read latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md and .proof.md and current chapter/unit. This is a historical analytic auxiliary below the unchanged ancestor chain recorded in blueprint.from.place, not a replacement of the current contracting-correspondence proof. Steps 1–5 supply the subspace-permanence input of the existing historical BGR completion/stability branch. Whole-blueprint searches for orthogonal (three character-sum nodes only), ultrametric and cartesian found no matching blueprint node; same_as stays [].",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-4ef38dd79",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-4ef38dd79 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the item's five-step proof is correct. Shape: one commit containing only the item and the report, with a Q29 review section; statement and stmt_deps are unchanged and there are no new nodes. Steps: step 1 sets up an induction on n that covers every normed space and subspace, and picks a pivot coordinate j where the finite maximum is attained, so c_j is nonzero. Step 2 shows the hyperplane H (j-th coordinate zero) satisfies the induction hypothesis with n-1 basis vectors. Step 3 uses def-weil-field, whose statement gives exactly the inverse of c_j it needs, and splits U uniquely as Ku plus the part of U inside H. Step 4 proves N(au+w)=max(|a|N(u),N(w)) from the j-th coordinate and the ultrametric inequality, without assuming the terms cannot cancel. Step 5 combines these. Every step is genuinely elementary, nothing assumes completeness, and the only citation is def-weil-field, so there is no cycle. Small cases tested: n=0 and U=0; Q_p^2 with U spanned by (1,p) and by (p,1); Q with the trivial absolute value and two tied coordinates, where cancellation does no harm; unequal weights, where the pivot follows |c_i|r_i. Source: Bosch-Guentzer-Remmert, Non-Archimedean Analysis, is not in literature/ and I could not read it either; the proof is correctly marked as agent-written with the book listed as wanted, and the conflicting inherited proposition numbers (2.3.3/4 here, 2.4.1/5 in the scalar-tower node) are disclosed. Blueprint: I read the ancestor lem-trf-local-term-locality in the latest blueprint; no blueprint node states this lemma, so same_as=[] is right. Duplicates: clause (1) of lem-trf-cartesian-subspace-scalar-tower says the same thing for a nontrivial absolute value, and that node already cites this item in its proof_deps; no other duplicate found. The three kinds of Mathlib search are recorded with real results. No re-split note applies, no tool_uses, no fixes. coord/dag-sync.md is not in the snapshot."
+ }
+}

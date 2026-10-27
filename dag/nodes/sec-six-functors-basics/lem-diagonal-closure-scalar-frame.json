@@ -1,0 +1,118 @@
+{
+ "id": "lem-diagonal-closure-scalar-frame",
+ "kind": "statement",
+ "title": "Assemble a closure scalar frame without transporting arrows",
+ "statement": "Let ell be prime, Y, ProjectiveLine Y and diagonalSurface Y Noetherian, and ell invertible on Y. Let E be one finite subextension and d a rational Diagram [def-sfb-diagonal-coefficient-category] with its prescribed spRationalTwist. There exists a ScalarFrame [lem-diagonal-uniformizer-scalar-frame] for the actual E-to-closure coefficient inclusion and closureLineMap [def-sfb-diagonal-coefficient-maps]: regular endpoints on every scheme, the two line endpoints, one supported endpoint, three normalized restriction/direct-image squares with mates invertible on the shifted root lines, and two normalized supported sources satisfying their scalar equations. The target models are scalarRightDerived. No diagonal class, trace, integration equation or finite-field transition is constructed by this statement.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps",
+  "lem-diagonal-uniformizer-scalar-frame"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), regular endpoints and closed-supported source assembly"
+ },
+ "proof": [
+  {
+   "text": "Pull invertibility of ell from Y to P and W. Apply the single-line closure comparison to q,p1,p2 using the three canonical functor equalities and full-unit equations recorded in d. Retain the line endpoints at P and W and the three normalized squares and mate-isomorphism proofs.",
+   "uses": [
+    "lem-diagonal-closure-line-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the regular-module flat scalar endpoint transported by normalized scalar multiplication at every scheme. Apply the existing supported-source scalar theorem to both projections, with the common regular endpoint. Their supported endpoint homs agree by adjunction injectivity and faithfulness of the underlying module map. Rewrite the second source equation using this equality and assemble all ScalarFrame fields.",
+   "uses": [
+    "lem-diagonal-flat-scalar-endpoint",
+    "lem-sfb-regular-scalar-extension-multiplication",
+    "lem-diagonal-supported-scalar-source"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-closure-line-comparison",
+  "lem-diagonal-flat-scalar-endpoint",
+  "lem-sfb-regular-scalar-extension-multiplication",
+  "lem-diagonal-supported-scalar-source"
+ ],
+ "proof_origin": {
+  "by": "Q1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), regular endpoints and closed-supported source assembly; explicit scalar-frame and common-source argument written by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image for a quasi compact quasi separated morphism commutes with filtered colimits with a common cohomological lower bound",
+   "results": "Eight hits concerning mapDerivedCategoryFactors and ordinary sheaf pushforward composition. No bounded pro-etale scalar/direct-image comparison or normalized root-line endpoint.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project boundedContinuityDirectImage declaration, retaining its bounded hypotheses; no complete Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.post",
+   "results": "Ten hits, including colimit.post, colimit.ι_post, preservesColimit_of_isIso_post and instIsIsoPost_1. These express the canonical comparison and its legs but do not prove geometric direct-image continuity.",
+   "date": "2026-10-27",
+   "verdict": "The standard colimit comparison supplies the leg equations; bounded continuity is the geometric input."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedContinuityDirectImage|spQbarTwist|diagonal_supported_scalar_source",
+   "results": "The search service returned zero hits. Local rg located BoundedContinuityDirectImage, CompletedCondensedCoefficients, ProEtaleTateTwistConstructions, ProEtaleTateTwists, DiagonalFlatScalarEndpoint, DiagonalSupportedScalarSource and the private regularEndpoint and endpoint_hom_unique constructions in DiagonalUniformizerScalarFrame. No published closure root-line scalar endpoint and normalized mate was found.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing coefficient colimits, K-flat endpoints, normalized supported sources and scalar-frame definitions. The one-line closure comparison remains separate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientFiniteClosure",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), regular endpoints and closed-supported source assembly",
+   "via": [
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalClosureScalarFrame",
+  "file": "lean/Sheaf/Paper/DiagonalClosureScalarFrame.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalClosure_scalarFrame",
+  "statement": "theorem diagonalClosure_scalarFrame\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤))) (E : PadicAlgCl.FiniteIntermediateField l)\n    (d : Diagram (Profinite.continuousMapRingObj.{u} E.1) Y\n      (fun X ↦ spRationalTwist X l E)) :\n    Nonempty (ScalarFrame (Profinite.padicSubfieldRingObjToPadicAlgCl l E) Y\n      (fun X ↦ spRationalTwist X l E) (fun X ↦ spQbarTwist X l)\n      (closureLineMap l E) d)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T235928-L-1470691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T235928-L-1470691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

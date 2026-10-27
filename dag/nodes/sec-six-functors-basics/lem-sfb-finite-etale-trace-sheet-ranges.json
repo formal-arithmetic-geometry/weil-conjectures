@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-finite-etale-trace-sheet-ranges",
+ "kind": "statement",
+ "title": "Trace-image section ranges on a supplied split lattice chart",
+ "statement": "Fix prime l, a finite normed totally disconnected Q_l-extension E and A=continuousIntegers(l,E). Let p:U→X be finite etale, P any internal E_X-module, M any internal A_U-module and e:Ext(A_U→E_U)M≅p*P. Supply τ:p_*p*P→P satisfying the internal normalized finite-etale trace formula. Fix a weakly etale g:Y→X, a positive d, maps t_j:Y→U with pt_j=g giving a coproduct decomposition of U×_X Y, a rank r and full lattices L_j⊂E^r with integral bases also rational bases. Supply a continuous-function presentation c of Res(A_Y→E_Y)g*P with values in E^r, such that on every B in Y_proet the range of each actual sheet map in these coordinates is C(|B|,L_j) inside C(|B|,E^r). Then on every B the range of the encoded actual pulled-back trace-image inclusion, transported through c_B, is the supremum of the submodules range(C(|B|,L_j)→C(|B|,E^r)). This makes no local-freeness assumption and chooses no cover, splitting, lattice or coordinate presentation.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-sfb-finite-etale-lattice-sheet-maps",
+  "def-sfb-internal-finite-etale-trace-formula",
+  "def-sfb-continuous-function-module-presentation",
+  "lem-sfb-continuous-lattice-sum"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 1: the trace image is the sum of the embedded sheet lattices; paragraph 2: continuous functions preserve this finite lattice sum"
+ },
+ "proof": [
+  {
+   "text": "Use comapUpperStarIso_mate to compare the actual counits after coefficient restriction. Use comapUpperStarIso_comp for the composite of each sheet with p. Naturality of the composition comparison and of the counit then identifies the pullback of the pushed integral map, normalized by comapUpperStarIso, with the sum of the actual integral sheet embeddings composed with the canonical integral sheet projections. Apply the supplied trace formula to obtain exactly this equality of morphisms.",
+   "uses": [
+    "def-sfb-internal-finite-etale-trace-formula",
+    "new-comap-upper-star-iso-mate",
+    "new-comap-upper-star-iso-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The splitProEtaleModuleProductMap is invertible for the integral module M. Replace the product by its canonical finite biproduct. The inverse comparison followed by a biproduct injection inserts any sheet section into the source of the normalized trace sum. Hence its section range contains every sheet range. Conversely its formula as a finite sum puts each section in the supremum of those ranges. Encode and evaluate, then apply the supplied range equalities hc.",
+   "uses": [
+    "lem-weil-pbc-split-proetale-module-product-map",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply continuous_lattice_sum to identify the sectionwise supremum with continuous functions into the algebraic sum N of the lattices. In the target module define the submodule presheaf D by the condition that the supplied coordinates take values in N. The coordinate presentation gives a natural additive equivalence from D to continuous N-valued functions, so D is a sheaf. The normalized trace map factors through D on sections. Its categorical image factorization remains an epimorphism followed by an inclusion after pullback and encoding. In the abelian category of module sheaves, the cokernel of D inclusion kills the normalized trace map, and thus kills the image inclusion by cancellation of this epimorphism. The kernel property of D inclusion factors the image inclusion through D. This gives one range inclusion; the trace factorization gives the reverse. Transport back through the coordinates to obtain the claimed equality.",
+   "uses": [
+    "lem-sfb-continuous-lattice-sum",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-finite-etale-trace-formula",
+  "new-comap-upper-star-iso-mate",
+  "new-comap-upper-star-iso-composition",
+  "lem-weil-pbc-split-proetale-module-product-map",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-sfb-continuous-lattice-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 1: the trace image is the sum of the embedded sheet lattices; paragraph 2: continuous functions preserve this finite lattice sum",
+  "note": "Direct internal-module calculation using canonical coefficient mates, split products, and the universal property of the image; sectionwise sheaf descent is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of finite etale trace on split cover equals sum of embedded integral lattice sheaves",
+   "results": "trace_eq_sum_embeddings; trace_eq_sum_automorphisms; trace_eq_sum_embeddings_gen; Algebra.intTrace; FiniteField.algebraMap_trace_eq_sum_pow; Algebra.intTrace_eq_trace; Algebra.intTrace.congr_simp; IntermediateField.AdjoinSimple.trace_gen_eq_sum_roots",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale trace sheaf image equals sum of sheet submodules on split cover",
+   "results": "Algebra.etaleLocus_eq_compl_support; Algebra.trace_quotient_mk; Algebra.trace_quotient_eq_of_isDedekindDomain; trace_quotient_eq_trace_localization_quotient; Algebra.intTraceAux; LinearMap.trace_eq_sum_trace_restrict'; LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*sheet|sheet.*lattice|trace.*[Ii]mage in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites",
+   "results": "No matching declarations. Repository search found the existing lattice-class and trace-image results in different coefficient/module encodings, and no simultaneous normalized sheet-chart or internal trace-range transport theorem. Blueprint searches for sheet lattice, embedded lattices, lattice sheet, and trace image found no separate blueprint nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceImageCharts",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, paragraph 1: the trace image is the sum of the embedded sheet lattices; paragraph 2: continuous functions preserve this finite lattice sum",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleTraceSheetRanges",
+  "file": "lean/Sheaf/Paper/FiniteEtaleTraceSheetRanges.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTrace_sheet_ranges",
+  "statement": "theorem finiteEtaleTrace_sheet_ranges\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] {X U Y : Scheme.{u}}\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (p : U ⟶ X) [IsFinite p] [Etale p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P)\n    (τ : (lowerStar (Profinite.continuousMapRingObj E) p).obj\n      ((upperStar (Profinite.continuousMapRingObj E) p).obj P) ⟶ P)\n    (hτ : FiniteEtaleTraceFormula (Profinite.continuousMapRingObj E) p P τ)\n    (g : Y ⟶ X) [WeaklyEtale g] (r d : ℕ) (hd : 0 < d)\n    (t : Fin d → (Y ⟶ U)) (w : ∀ j, t j ≫ p = g)\n    (hs : Nonempty (IsColimit (Cofan.mk (pullback p g)\n      (fun j ↦ pullback.lift (t j) (𝟙 Y) (by simpa using w j)))))\n    (L : Fin d → Submodule (continuousIntegers l E) (Fin r → E))\n    (hL : ∀ j, ∃ b : Module.Basis (Fin r) (continuousIntegers l E) (L j),\n      ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i, (b i : Fin r → E) = c i)\n    (c : ContinuousFunctionPresentation Y (continuousIntegers l E) (Fin r → E)\n      ((Mod.comap (coefficientMap (integralScalarMap l E) Y)).obj\n        ((upperStar (Profinite.continuousMapRingObj E) g).obj P)))\n    (hc : ∀ (j : Fin d) (B : Y.ProEt),\n      Set.range (fun x ↦ c.sections B\n        (((continuousRingModuleEquivalence Y (continuousIntegers l E)).functor.map\n          (finiteEtaleLatticeSheetEmbedding (integralScalarMap l E) P p M e\n            g (t j) (w j))).val.app (op B) x)) =\n        Set.range (continuousLatticeInclusion (continuousIntegers l E) (L j) B.left)) :\n    ∀ B : Y.ProEt,\n      Set.range (fun x ↦ c.sections B\n        (((continuousRingModuleEquivalence Y (continuousIntegers l E)).functor.map\n          (finiteEtaleTraceImageEmbedding (integralScalarMap l E) P p M e τ g)).val.app\n            (op B) x)) =\n        ↑(⨆ j, (continuousLatticeInclusion (continuousIntegers l E) (L j) B.left).range)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071254-L-3908089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T111813-L-1736340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

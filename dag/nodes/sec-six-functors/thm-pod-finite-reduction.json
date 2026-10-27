@@ -21,107 +21,56 @@
  ],
  "proof": [
   {
-   "text": "Write $\\operatorname{red}_T(-)=(-)\\otimes^L_{A_n}A_m$ on $T=X,s$. In the conventions [def-pod-conventions], the input $K_n$ is a site-perfect bounded constructible finite-Tor complex. The reduction functor has target $D^b_{ctf}(T,A_m)$ as stated in [thm-pur-finite-reduction-of-purity]. Moreover $K_m=\\operatorname{red}_XK_n$ is site-perfect: on any cover giving the model of [def-weil-site-perfect-complex], tensor the bounded finite-projective model termwise with $A_m$. This computes the derived tensor: finite-projective terms are flat since their tensor functors are retracts of finite sums of the identity, and the bounded-above flat-complex lemma [lem-pc-bounded-above-flat-kflat-site] makes the model K-flat. Each term remains a direct summand of a finite free module, because tensoring the two splitting maps preserves their composite identity. The local condition of [def-weil-site-perfect-complex] at a finite stage is word for word the condition defining perfectness over $\\Lambda_X$ in [def-pod-perfect-complex-on-x] (a pro-etale cover on which the complex is quasi-isomorphic to a bounded complex of finite projective modules), and $K_n,K_m$ lie in $D^b_{ctf}$; so $K_n$ and $K_m$ are perfect over $A_{n,X}$ and $A_{m,X}$ respectively, which is the hypothesis of the duality and identification theorems used in steps 2 and 6. Thus the pairing and duality assertions for site-perfect inputs apply at both stages.",
+   "text": "Apply [lem-sf-pod-smooth-dual-reduction-data]. At both stages $K_i$ and $L_i=K_i^\\vee(d)[2d]$ are site-perfect bounded constructible finite-Tor complexes; $F_XL_n\\cong L_m$ preserves evaluation, orientation and the trace contractions $\\tau_i$. Write $F_T=\\operatorname{red}_T$, $C_i=R\\Gamma_c(X,K_i)$ and $D_i=R\\Gamma(X,L_i)$.",
    "uses": [
-    "def-pod-conventions",
-    "thm-pur-finite-reduction-of-purity",
-    "def-weil-site-perfect-complex",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pod-perfect-complex-on-x"
+    "lem-sf-pod-smooth-dual-reduction-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "Opening hypotheses; site-perfectness needed for the first and last sentences of the proof"
+    "place": "First paragraph: reduction models, dual, evaluation and trace."
    }
   },
   {
-   "text": "Use the coefficient dual and its evaluation of [def-pod-coefficient-dual-on-x]. The site-perfect internal-Hom and evaluation clauses of [lem-fix-operation-reduction] give $\\operatorname{red}_X(K_n^\\vee)\\cong K_m^\\vee$, carrying the reduction of $\\operatorname{ev}_{K_n}$ to $\\operatorname{ev}_{K_m}$. By [thm-sf-dual-perfect], the dual remains perfect and the orientation-induced identification $\\mathbb D_XK\\cong K^\\vee(d)[2d]$ is compatible with reduction, shifts and evaluation. Put $L_i=K_i^\\vee(d)[2d]$ for $i=n,m$; its indicated comparison identifies $\\operatorname{red}_XL_n$ with $L_m$. The smooth trace is the orientation followed by the exceptional counit, precisely the composite in [def-pur-smooth-trace]. The orientation and trace comparison squares commute by [thm-pur-finite-reduction-of-purity], applied to $a_X$ and the coefficient unit.",
+   "text": "Use [prop-sf-mixed-cup-coefficient-change] for $A_n\\to A_m$, $K_n,L_n$. Write its canonical compact-support comparison as $c:F_sC_n\\xrightarrow{\\sim}C_m$ and its ordinary comparison, followed by $R\\Gamma(X,F_XL_n\\cong L_m)$, as $r:F_sD_n\\to D_m$. Its square states $c_{K_n\\otimes L_n}F_s(\\smile_{c,n})=\\smile_{c,m}(c\\otimes r)$ with tensor comparisons understood. Only this equality is needed here. Compose it with the contraction comparison from step 1. The definition [def-pod-derived-poincare-pairing] is $\\beta_i=\\tau_i\\smile_{c,i}$, so $F_s(\\beta_n)=\\beta_m(c\\otimes r)$ under $F_sA_n\\cong A_m$.",
    "uses": [
-    "def-pod-coefficient-dual-on-x",
-    "lem-fix-operation-reduction",
-    "thm-sf-dual-perfect",
-    "def-pur-smooth-trace",
-    "thm-pur-finite-reduction-of-purity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "First paragraph, internal Hom, evaluation, normalized trace and smooth orientation"
-   }
-  },
-  {
-   "text": "Put $C_i=R\\Gamma_c(X,K_i)$ and $D_i=R\\Gamma(X,L_i)$. Here $L_i$ is bounded constructible finite-Tor by step 2 and the twist and shift conventions. Applying [thm-pod-point-perfectness] to $L_i$ shows that $D_i$ is a perfect point complex, hence lies in $D^b_{ctf}(s,A_i)$ as required by the projection transformation defining the cup product. The compact-support clause of [lem-fix-operation-reduction] gives the canonical isomorphism $c:\\operatorname{red}_sC_n\\xrightarrow{\\sim}C_m$. Keep the ordinary comparison $r:\\operatorname{red}_sD_n\\to D_m$ as a morphism at this point: under $La_{X,m}^*\\dashv Ra_{X*,m}$ of [fix-prop-adjunctions], it is the adjoint of\n$$La_{X,m}^*\\operatorname{red}_sRa_{X*,n}L_n\\cong\\operatorname{red}_XLa_{X,n}^*Ra_{X*,n}L_n\\xrightarrow{\\operatorname{red}_X(\\varepsilon_n)}\\operatorname{red}_XL_n\\cong L_m.$$\nHere the first comparison is the pullback comparison of [lem-fix-operation-reduction]. The mixed-support cup product of [def-pod-mixed-support-cup-product] is the projection transformation followed by this ordinary counit. The tensor and compact-support comparisons preserve the projection transformation because they preserve its defining adjunction maps, units and counits, as stated in [lem-fix-operation-reduction]; the counit square is exactly the defining transpose equation for $r$. Composing these two squares gives\n$$c_{K_n\\otimes L_n}\\circ\\operatorname{red}_s(\\smile_{c,n})=\\smile_{c,m}\\circ(c\\otimes r),$$\nwith the canonical tensor and $L_i$ comparisons understood. This uses no inverse of $r$.",
-   "uses": [
-    "lem-fix-operation-reduction",
-    "fix-prop-adjunctions",
-    "def-pod-mixed-support-cup-product",
-    "thm-pod-point-perfectness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "Second paragraph, composing the cup-product squares using only the canonical ordinary-global-section comparison"
-   }
-  },
-  {
-   "text": "The pairing in [def-pod-derived-poincare-pairing] is exactly cup product, followed by compactly supported evaluation, followed by the normalized trace. Compose the cup-product identity from step 3 with the evaluation and trace squares of step 2. Under the canonical tensor-unit identification $\\operatorname{red}_sA_n\\cong A_m$, this gives the equality of morphisms $\\operatorname{red}_sC_n\\otimes^L_{A_m}\\operatorname{red}_sD_n\\to A_m$,\n$$\\operatorname{red}_s(\\beta_{K_n})=\\beta_{K_m}\\circ(c\\otimes r).$$\nIt proves the asserted coefficient compatibility of the pairing itself.",
-   "uses": [
+    "prop-sf-mixed-cup-coefficient-change",
     "def-pod-derived-poincare-pairing"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "Second paragraph, the commuting square for the pairing"
+    "place": "Second paragraph: cup square composed with evaluation and trace."
    }
   },
   {
-   "text": "By [thm-pod-point-perfectness], $C_n$ and $C_m$ are perfect point complexes; the theorem applies to our separated finite-type $X_0$ without any properness hypothesis. The point case of [lem-fix-operation-reduction] therefore gives the evaluation-compatible isomorphism $h:\\operatorname{red}_s(C_n^\\vee)\\xrightarrow{\\sim}(\\operatorname{red}_sC_n)^\\vee$. Define\n$$\\ell=(c^{-1})^\\vee\\circ h:\\operatorname{red}_s(C_n^\\vee)\\xrightarrow{\\sim}C_m^\\vee.$$\nThis is the left vertical map in the statement. Its direction is forced by contravariance: dualize $c^{-1}:C_m\\to\\operatorname{red}_sC_n$, not $c$. It satisfies\n$$\\operatorname{ev}_{C_m}\\circ(c\\otimes\\ell)=\\operatorname{red}_s(\\operatorname{ev}_{C_n})$$\nunder the tensor comparisons, by evaluation compatibility of $h$ and naturality of evaluation for the inverse isomorphisms $c,c^{-1}$.",
+   "text": "By [thm-pod-point-perfectness], $C_n,C_m$ are perfect point complexes. Apply the point internal-Hom and evaluation clauses of [lem-fix-operation-reduction] to obtain the evaluation-compatible isomorphism $h:F_s(C_n^\\vee)\\xrightarrow{\\sim}(F_sC_n)^\\vee$. By [thm-pod-identification-of-the-comparison], the pairing adjoints $b_i:D_i\\xrightarrow{\\sim}C_i^\\vee$ are isomorphisms: step 1 supplies perfectness of both $K_i$. Apply [lem-sf-perfect-pairing-reduction-adjoints] to $F_s$, $\\beta_n,\\beta_m,c,r,h$ and the pairing identity of step 2. It gives $\\ell=(c^{-1})^\\vee h$, $b_mr=\\ell F_s(b_n)$, and $rF_s(b_n^{-1})=b_m^{-1}\\ell$, and proves $r$ invertible. The last identity is the stated square, with its canonical left comparison $\\ell$ and right comparison $r$. All reductions are derived; the perfectness invoked is that of $C_n$, not flatness of $A_m$ over $A_n$.",
    "uses": [
     "thm-pod-point-perfectness",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "Second paragraph, perfectness at the point and the left vertical isomorphism"
-   }
-  },
-  {
-   "text": "Let $b_i^\\sharp:D_i\\xrightarrow{\\sim}C_i^\\vee$ be the tensor–Hom adjoint of $\\beta_{K_i}$. These are isomorphisms by [thm-pod-identification-of-the-comparison] at $A_n$ and $A_m$, since step 1 verified site-perfectness at both stages. The uncurrying and evaluation formulas of [lem-pod-closed-uncurry-laws] identify the uncurrying of $b_m^\\sharp\\circ r$ with $\\beta_{K_m}\\circ(1_{C_m}\\otimes r)$. Precompose with $c\\otimes1$ and use step 4; the result is $\\operatorname{red}_s(\\beta_{K_n})$. For the other morphism, the evaluation formula gives the precomposed uncurrying explicitly as\n$$\\operatorname{ev}_{C_m}\\circ(c\\otimes\\ell)\\circ(1\\otimes\\operatorname{red}_s(b_n^\\sharp))\n=\\operatorname{red}_s(\\operatorname{ev}_{C_n})\\circ(1\\otimes\\operatorname{red}_s(b_n^\\sharp))\n=\\operatorname{red}_s(\\beta_{K_n}).$$\nThe first equality is step 5; the second is the adjoint evaluation identity and the tensor/evaluation compatibility of [lem-fix-operation-reduction]. Cancel the isomorphism $c\\otimes1$ and use injectivity of the adjunction bijection (equivalently the inverse curry/uncurry identities of [lem-pod-closed-uncurry-laws]). Thus\n$$b_m^\\sharp\\circ r=\\ell\\circ\\operatorname{red}_s(b_n^\\sharp).$$\nMultiplying by the two horizontal inverses yields\n$$r\\circ\\operatorname{red}_s((b_n^\\sharp)^{-1})=(b_m^\\sharp)^{-1}\\circ\\ell.$$\nIn particular $r=(b_m^\\sharp)^{-1}\\circ\\ell\\circ\\operatorname{red}_s(b_n^\\sharp)$ is an isomorphism: all three factors are isomorphisms. The last equality is exactly the displayed square, with its canonical right vertical comparison. Every tensor product used here is derived; the argument uses perfectness of $C_n$, not flatness of $A_m$ as an $A_n$-module.",
-   "uses": [
+    "lem-fix-operation-reduction",
     "thm-pod-identification-of-the-comparison",
-    "lem-pod-closed-uncurry-laws",
-    "lem-fix-operation-reduction"
+    "lem-sf-perfect-pairing-reduction-adjoints"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-    "place": "Second paragraph, taking adjoints, proving the right comparison invertible and taking horizontal inverses"
+    "place": "Second paragraph: point perfectness, inverse-adjoint square and invertibility of the ordinary comparison."
    }
   }
  ],
  "proof_deps": [
-  "def-pod-conventions",
-  "thm-pur-finite-reduction-of-purity",
-  "def-weil-site-perfect-complex",
-  "def-pod-perfect-complex-on-x",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "def-pod-coefficient-dual-on-x",
-  "lem-fix-operation-reduction",
-  "thm-sf-dual-perfect",
-  "def-pur-smooth-trace",
-  "fix-prop-adjunctions",
-  "def-pod-mixed-support-cup-product",
+  "lem-sf-pod-smooth-dual-reduction-data",
+  "prop-sf-mixed-cup-coefficient-change",
   "def-pod-derived-poincare-pairing",
   "thm-pod-point-perfectness",
+  "lem-fix-operation-reduction",
   "thm-pod-identification-of-the-comparison",
-  "lem-pod-closed-uncurry-laws"
+  "lem-sf-perfect-pairing-reduction-adjoints"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-finite-reduction.proof.md",
-  "place": "Complete proof; six explicit steps realizing the two paragraphs"
+  "place": "Three-step assembly of the two new lemmas and the existing mixed-cup coefficient-change theorem."
  },
  "mathlib_searches": [
   {
@@ -211,31 +160,62 @@
   "def-weil-site-perfect-complex"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-pod-finite-reduction",
   "worker": "stage1",
-  "summary": "Expanded the imported paragraph into six argument steps, constructed the ordinary comparison without assuming invertibility, spelled out the cup/evaluation/trace identity, the contravariant dual of compact-support comparison and the adjunction calculation giving the inverse square. Reused existing nodes including the monoidal-closed uncurrying leaf. Kept the statement, current blueprint route and all import metadata unchanged; no new nodes.",
-  "blueprint": "Current main-20261015 thm-pod-finite-reduction.proof.md: first paragraph realized by steps 1-2; cup and pairing comparisons in second paragraph by steps 3-4; point perfectness and inverse-adjoint square by steps 5-6. This is an auxiliary node, not the statement of sk-thm-sf-package, so the unit realized fields are not changed.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "The general ringed-site fact that bounded-above flat complexes are K-flat justifies computing reduction on a strict perfect local model. It is used as a homological-algebra tool, without changing the unit route."
-   }
-  ]
+  "summary": "Repair of the human-requested re-split: moved returned steps 1-2 into the smooth dual/reduction-data lemma and the formal content of steps 5-6 into the inverse-adjoint comparison lemma, both statement-only unsplit. Reused the existing general cup coefficient-change node for returned step 3; retained the cup/evaluation/trace composition in the parent. Kept the parent statement unchanged and preserved the complete returned argument and its assignment in report.md. No Lean written or compiled.",
+  "blueprint": "First paragraph realized by lem-sf-pod-smooth-dual-reduction-data; second paragraph cup square by prop-sf-mixed-cup-coefficient-change and assembly step 2; point perfectness by step 3 and inverse adjoints by lem-sf-perfect-pairing-reduction-adjoints. Unit statement and realized fields are unchanged."
  },
  "tool_uses": [
   "lem-pc-bounded-above-flat-kflat-site"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q119-c3d0e4905",
-  "group": "Q119",
+  "reviewer": "NT-cc-Q149-662e9f522",
+  "group": "Q149",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-c3d0e4905 (reviewer sub-agent of L); spot-checked: FIX with one repaired fault. I read the delivery in full: the item thm-pod-finite-reduction, its six steps, every cited node's statement, and the current blueprint statement and proof (main-20261015). There are no new nodes. The statement matches main-20261015 word for word and is not weakened. The coefficient categories are the finite pro-etale categories D^b_ctf with base change -⊗^L_{A_n}A_m, the same functor that thm-pur-finite-reduction-of-purity uses. Every cited unit is on the route of sk-thm-sf-package. There is no cycle, and proof_deps equals the union of the steps' uses. I accept the tool use lem-pc-bounded-above-flat-kflat-site: it is a generic K-flatness fact, and I read Stacks 06YQ, sites-cohomology.tex line 3120. Step checks. Step 1: a site-perfect local model, tensored termwise, computes the derived reduction. Step 2: lem-fix-operation-reduction is used only within its finite-stage, site-perfect internal-Hom clause, and thm-sf-dual-perfect and thm-pur-finite-reduction-of-purity give the orientation and trace squares. Step 3: thm-pod-point-perfectness puts D_i in D^b_ctf(s); r is built as the adjunction mate under fix-prop-adjunctions, and its inverse is never used. Step 4: elementary composition of the earlier squares. Step 5: ℓ=(c^{-1})^∨∘h, and I re-derived its evaluation identity from naturality of evaluation. Step 6: I re-derived b_m^♯ r = ℓ red(b_n^♯) from the uncurry laws (Mathlib lines 175, 180 and 194) and from thm-pod-identification-of-the-comparison at both stages; this proves r invertible and gives the displayed square. Edge cases checked: n=m, K=0, X=Spec k with d=0, n=2 and m=1 (A_1 not flat over A_2), and X not proper. The fault: steps 2 and 6 apply theorems that require K to be perfect over Λ_X (def-pod-perfect-complex-on-x), but the item only shows site-perfectness and never connects the two notions. They state the same local condition, so in the fixed item JSON I added one sentence to step 1 and cited def-pod-perfect-complex-on-x in step 1's uses and in proof_deps; nothing else changed. A source error in another node is reported, not fixed: lem-pc-bounded-above-flat-kflat-site gives Stacks tag 06YS in source.place, but the tag table shows the correct tag is 06YQ (06YS is lemma-K-flat-resolution).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-662e9f522 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all cited statements and the main-20261015 statement and proof. The statement is verbatim and not weakened; the coefficient category is D^b_ctf on the small pro-etale site, with base change -⊗^L A_m as in thm-pur-finite-reduction-of-purity. The re-split note is met: the 6918-character proof is now a 1793-character assembly of three steps. Old steps 1-2 and the trace part of step 4 became lem-sf-pod-smooth-dual-reduction-data (local models, v, λ, F_s(τ_n)=τ_m∘c). Old step 3 is the existing unsplit prop-sf-mixed-cup-coefficient-change, which explicitly includes A_{E,n}→A_{E,m} and has exactly the cup square. Old steps 5-6 became lem-sf-perfect-pairing-reduction-adjoints. The report keeps the old text verbatim; I checked this by string inclusion against the live node. The live item is still the 2026-10-17 split, so the delivery is not superseded. I re-derived node B myself: the ev identity for ℓ=(c^{-1})^∨h, then b'r=ℓF(b) by uncurrying, cancelling c⊗1 and using naturality of μ, then the inverse square and invertibility of r; edge cases F=id and r=0 were checked. Node A's clauses follow from lem-pur-derived-change-of-rings, lem-fix-site-perfect-scalar-hom, thm-sf-dual-perfect and thm-pur-finite-reduction-of-purity (smooth-trace clause, Y=s); edge cases n=m, m=1<n (non-flat), K=0 and d=0 were checked. In item step 3, thm-pod-point-perfectness gives C_i perfect without properness, the point clause of lem-fix-operation-reduction gives h, and thm-pod-identification gives b_i invertible. There is no cycle, the route is in-unit, no SGA source is used, and proof_deps equals the union of uses. Node A's LeanSearch is recorded as unavailable (rate limit), but its other searches ran. Maintainer notes: the cited prop asserts that u_o is an isomorphism, which the blueprint avoids needing; this is true and harmless, and its worker must prove it. The item's leftover tool_uses entry lem-pc-bounded-above-flat-kflat-site is no longer cited by the item and can be cleared."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Use the smooth Poincare setting, with\nthe admissible structure morphism and normalized smooth orientation.\nLet $n\\geq m\\geq1$, put $A_n=\\mathcal O_E/\\pi_E^n$ and\n$A_m=\\mathcal O_E/\\pi_E^m$, and let $K_n$ be a\nsite-perfect constructible\n$A_n$-complex. Put $K_m=K_n\\otimes^L_{A_n}A_m$.\nThe coefficient comparisons identify the reduction of the\nderived Poincare pairing\nfor $K_n$ with the pairing for $K_m$. In particular, writing\n$K_n^\\vee$ for its coefficient dual,\nthe canonical isomorphisms make the square\n\n$$\n\\begin{array}{ccc}\nR\\Gamma_c(X,K_n)^\\vee\\otimes^L_{A_n}A_m\n&\\xrightarrow{\\beta_{K_n}^{\\sharp,-1}\\otimes1}&\nR\\Gamma(X,K_n^\\vee(d))[2d]\\otimes^L_{A_n}A_m\\\\\n\\downarrow\\wr&&\\downarrow\\wr\\\\\nR\\Gamma_c(X,K_m)^\\vee\n&\\xrightarrow{\\beta_{K_m}^{\\sharp,-1}}&\nR\\Gamma(X,K_m^\\vee(d))[2d]\n\\end{array}\n$$\n\ncommute. Here $\\beta^{\\sharp,-1}$ denotes the inverse of the\ntensor–Hom adjoint of the pairing.",
+  "proof": [
+   {
+    "text": "The compact-support, tensor, site-perfect internal-Hom and evaluation\ncomparisons are [lem-fix-operation-reduction]. Thus the coefficient dual of\n[def-pod-coefficient-dual-on-x], the cup product and evaluation\nin [def-pod-derived-poincare-pairing], and their adjunction maps\nall reduce compatibly. The remaining geometric ingredient is the\nnormalized trace of [def-pur-smooth-trace]; its coefficient\ncompatibility, together with that of the smooth orientation, is\n[thm-pur-finite-reduction-of-purity].\nThe identification in [thm-sf-dual-perfect] uses\nthat orientation and the same internal-Hom operations.\nComposing these commuting squares gives the square for the pairing,\nusing the canonical coefficient comparison on ordinary global sections;\nno isomorphism assertion for that map is needed at this step.\nBy [thm-pod-point-perfectness] the compact-support complex is\nperfect, so its coefficient dual commutes with reduction and the left\nvertical map is an isomorphism. For each admissible coefficient ring,\n[thm-pod-identification-of-the-comparison] identifies the adjoint\nof the pairing with the duality isomorphism. Taking adjoints in the\ncommuting pairing square therefore proves that the ordinary-global-section\ncomparison on the right is an isomorphism too. Taking inverses of the\nhorizontal adjoints gives exactly the displayed square.\nNo flatness of $A_m$ over $A_n$ is asserted: every reduction is\nderived, and the coefficient-dual comparisons use the stated\nperfectness hypothesis.",
+    "uses": [
+     "lem-fix-operation-reduction",
+     "def-pod-coefficient-dual-on-x",
+     "def-pod-derived-poincare-pairing",
+     "def-pur-smooth-trace",
+     "thm-pur-finite-reduction-of-purity",
+     "thm-sf-dual-perfect",
+     "thm-pod-point-perfectness",
+     "thm-pod-identification-of-the-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

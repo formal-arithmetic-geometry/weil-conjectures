@@ -1,0 +1,251 @@
+{
+ "id": "lem-per-tate-triangular-distinguished-coordinate",
+ "kind": "statement",
+ "title": "Triangular coordinates make a restricted series distinguished",
+ "statement": "Let $F$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value. For $r\\geq1$ let $D_r=F\\langle x_1,\\ldots,x_r\\rangle$ be the ring of series $\\sum_{\\nu\\in\\mathbf N^r}c_\\nu x^\\nu$ such that for every $\\epsilon>0$ only finitely many $|c_\\nu|\\geq\\epsilon$, with coefficientwise addition, Cauchy multiplication and Gauss norm $\\|f\\|=\\sup_\\nu|c_\\nu|$; put $D_0=F$. For each nonzero $f\\in D_r$ there are positive integers $N_1,\\ldots,N_{r-1}$, an isometric $F$-algebra automorphism $\\sigma$ of $D_r$ with $\\sigma(x_i)=x_i+x_r^{N_i}$ for $i<r$ and $\\sigma(x_r)=x_r$, and a unit $v\\in D_{r-1}$ such that, writing $v\\sigma(f)=\\sum_{j\\geq0}a_jx_r^j$ with $a_j\\in D_{r-1}$, there is an integer $d\\geq0$ for which $a_d=1$, $\\|a_j\\|\\leq1$ for $j<d$, and $\\sup_{j>d}\\|a_j\\|<1$. For $r=1$ the list of integers is empty and $\\sigma$ is the identity.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Conrad, Several approaches to non-archimedean geometry, Theorem 1.1.5, PDF p.4: Weierstrass-preparation induction mentioned before the theorem. Agent-formulated coordinate-normalization input, also reconstructed explicitly in the existing DAG lem-trf-affinoid-polynomial-closed-point-comparison proof step 2. Archival copy WANTED; the coordinate argument is not printed in Conrad."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-restricted-series-gauss-completion] for the complete Gauss-norm rings $D_s$, their ultrametric and product inequalities, and their isometric last-variable regrouping. Scalar multiplication satisfies $\\|cf\\|=|c|\\|f\\|$ directly from the coefficient supremum. Choose a nonzero coefficient $u$ of $f$. The nonempty finite set of coefficients with $|c_\\nu|\\ge|u|$ contains one of greatest absolute value, say $\\lambda$; every coefficient outside it is smaller than $|u|$, so $|\\lambda|=\\|f\\|>0$. Set $g=\\lambda^{-1}f$. Its norm is one. Let $p$ be the finite polynomial consisting of exactly the coefficients of $g$ of absolute value one, and put $h=g-p$. There is a common bound $\\|h\\|\\le\\rho<1$: take $\\rho$ to be the maximum of $1/2$ and the finitely many absolute values strictly between $1/2$ and one. Thus $p\\ne0$, every nonzero coefficient of $p$ has absolute value one, and $\\|p\\|=1$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2 and Exercise 1.1.3(1), PDF p.3; Exercise 1.2.8(3), PDF p.7; Theorem 1.1.5 introductory paragraph, PDF p.4. Agent reconstruction of the coordinate argument, not a proof printed in Conrad."
+   }
+  },
+  {
+   "text": "If $p$ is nonconstant, apply [lem-trf-polynomial-shear-leading-coefficient] over the commutative ring $F$ with $n=r$. Obtain positive $N_i$, $d>0$ and a nonzero coefficient $c$ of $p$ such that its substituted polynomial has the form $c x_r^d+\\sum_{j<d}b_jx_r^j$. In particular $|c|=1$. If $p$ is constant, set $c=p$, $d=0$ and choose all $N_i=1$; its substitution is just $c$. These cases give the same scalar-leading-term formula with $d\\ge0$. For $r=1$ the lists are empty and both polynomial substitutions are the identity.",
+   "uses": [
+    "lem-trf-polynomial-shear-leading-coefficient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051N, lemma-helper-polynomial; constant-polynomial and r=1 cases handled explicitly."
+   }
+  },
+  {
+   "text": "In the complete normed $F$-algebra $D_r$ of [lem-trf-restricted-series-gauss-completion], the tuples $x_i+x_r^{N_i}$ and $x_i-x_r^{N_i}$ for $i<r$, with last entry $x_r$, have norms at most one. All other target-algebra hypotheses of [lem-per-tate-banach-substitution] hold: the scalar norm identity is coefficientwise, and completeness, nondegeneracy, $\\|1\\|=1$, ultrametricity and submultiplicativity are supplied by the Gauss-norm node. Apply substitution to get contractive continuous $F$-algebra maps $\\sigma,\\tau$. Each composite fixes every variable by the explicit calculation $(x_i+x_r^{N_i})-x_r^{N_i}=x_i$ and fixes constants. Uniqueness in the substitution node, applied to the tuple $(x_i)$, makes both composites the identity. Hence $\\|\\sigma(z)\\|\\le\\|z\\|=\\|\\tau\\sigma(z)\\|\\le\\|\\sigma(z)\\|$, proving that $\\sigma$ is an isometric automorphism. On polynomials it is exactly the substitution of Step 2 by finite addition and multiplication. For $r=1$, uniqueness gives $\\sigma=\\operatorname{id}$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-per-tate-banach-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2 and Exercise 1.1.3(1), PDF p.3; Exercise 1.2.8(3), PDF p.7; Theorem 1.1.5 introductory paragraph, PDF p.4. Agent reconstruction of the coordinate argument, not a proof printed in Conrad."
+   }
+  },
+  {
+   "text": "Regroup $\\sigma(g)=\\sum_{j\\ge0}A_jx_r^j$ using [lem-trf-restricted-series-gauss-completion]. Contractivity gives $\\|\\sigma(h)\\|\\le\\rho$ and $\\|\\sigma(p)\\|\\le1$. Its polynomial part has degree $d$ in $x_r$ and scalar leading coefficient $c$, so $A_d=c+e$ for some $e\\in D_{r-1}$ with $\\|e\\|\\le\\rho$, and every row with $j>d$ has norm at most $\\rho$. Every row, including $j<d$, has norm at most one since $\\|\\sigma(g)\\|=1$. These row bounds follow from the isometric regrouping: each row norm is bounded by the norm of the whole series. The strict uniform tail estimate is therefore $\\sup_{j>d}\\|A_j\\|\\le\\rho<1$, rather than merely a separate strict inequality at each index.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2 and Exercise 1.1.3(1), PDF p.3; Exercise 1.2.8(3), PDF p.7; Theorem 1.1.5 introductory paragraph, PDF p.4. Agent reconstruction of the coordinate argument, not a proof printed in Conrad."
+   }
+  },
+  {
+   "text": "Work in the complete ring $D_{r-1}$ from [lem-trf-restricted-series-gauss-completion], which includes $D_0=F$. Put $q=-c^{-1}e$, so $\\|q\\|\\le\\rho<1$ and $A_d=c(1-q)$. The finite sums $s_m=\\sum_{k=0}^m q^k$ are Cauchy: for $n>m$ the ultrametric and product bounds give $\\|s_n-s_m\\|\\le\\rho^{m+1}\\to0$. Let $s$ be their limit. Each $\\|s_m\\|\\le1$, hence $\\|s\\|\\le1$. The finite identity $(1-q)s_m=s_m(1-q)=1-q^{m+1}$ passes to the limit, since multiplication by a fixed element is continuous by the product bound; thus $s$ is a two-sided inverse of $1-q$. Consequently $w=c^{-1}s$ is a two-sided inverse of $A_d$ with $\\|w\\|\\le1$. In fact $\\|A_d\\|=1$: otherwise $1=\\|c\\|\\le\\max(\\|A_d\\|,\\|e\\|)<1$. Also $1=\\|A_dw\\|\\le\\|A_d\\|\\|w\\|$ gives $\\|w\\|=1$. This writes out the inverse and its estimate using only completeness and finite geometric sums.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2 and Exercise 1.1.3(1), PDF p.3; Exercise 1.2.8(3), PDF p.7; Theorem 1.1.5 introductory paragraph, PDF p.4. Agent reconstruction of the coordinate argument, not a proof printed in Conrad."
+   }
+  },
+  {
+   "text": "Set $v=\\lambda^{-1}w\\in D_{r-1}$, a unit with inverse $\\lambda A_d$. Since $f=\\lambda g$ and $\\sigma$ fixes $F$, we have $v\\sigma(f)=w\\sigma(g)$. Under the ring regrouping of [lem-trf-restricted-series-gauss-completion], its rows are $a_j=wA_j$. Therefore $a_d=1$, $\\|a_j\\|\\le\\|w\\|\\|A_j\\|\\le1$ for $j<d$, and $\\sup_{j>d}\\|a_j\\|\\le\\rho<1$. Multiplication by the fixed $w$ also preserves decay of the row norms. All required data have now been constructed. When $d=0$ the lower-row condition is empty; the inverse argument still applies. When $r=1$ we used no coordinate change, and $v\\in D_0=F$ as required.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2 and Exercise 1.1.3(1), PDF p.3; Exercise 1.2.8(3), PDF p.7; Theorem 1.1.5 introductory paragraph, PDF p.4. Agent reconstruction of the coordinate argument, not a proof printed in Conrad."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-polynomial-shear-leading-coefficient",
+  "lem-per-tate-banach-substitution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Coordinate-normalization argument supporting Theorem 1.1.5, reconstructed with the existing polynomial-shear node (Stacks 051N), Gauss completeness/regrouping and Banach substitution. Conrad supplies the analytic setting, not this omitted proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a Tate algebra by substituting Xi plus powers of the last variable makes a nonzero restricted power series distinguished in the last variable",
+   "results": "{\"t\": \"2026-10-24T07:38:03Z\", \"tool\": \"leanfinder\", \"query\": \"An automorphism of a Tate algebra by substituting Xi plus powers of the last variable makes a nonzero restricted power series distinguished in the last variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.isDistinguishedAt\", \"PowerSeries.weierstrassDistinguished_smul\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"c32fa9e98e2d4868\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series over adically complete local rings, not Gauss-convergent restricted series over a valued field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series over adically complete local rings, not Gauss-convergent restricted series over a valued field"
+  },
+  {
+   "tool": "grep",
+   "query": "distinguished|Weierstrass|TateAlgebra",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"grep\", \"query\": \"distinguished|Weierstrass|TateAlgebra\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\"], \"digest\": \"09e0f6156faee6e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series over adically complete local rings, not Gauss-convergent restricted series over a valued field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra nonzero series becomes distinguished after triangular change of variables",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"leansearch\", \"query\": \"Tate algebra nonzero series becomes distinguished after triangular change of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"PowerSeries.X_ne_zero\", \"PowerSeries.subst_X\", \"PowerSeries.instNontrivial\"], \"digest\": \"d3ff2e33e2f8603d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series over adically complete local rings, not Gauss-convergent restricted series over a valued field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted multivariate power series triangular coordinate change yields a monic distinguished series after multiplication by a unit",
+   "results": "{\"t\": \"2026-10-24T07:38:26Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted multivariate power series triangular coordinate change yields a monic distinguished series after multiplication by a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.isWeierstrassFactorizationAt_iff\", \"PowerSeries.weierstrassDistinguished_smul\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassFactorizationAt.isDistinguishedAt\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"aba8982637909c96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern formal power series over adically complete local rings, not Gauss-convergent restricted series over a valued field"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|triangular|distinguished",
+   "results": "{\"t\": \"2026-10-24T08:13:38Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|triangular|distinguished\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series search has no substitution/distinguished hit; semantic results are polynomial Taylor maps or formal adic Weierstrass preparation, which do not give the stated Gauss-norm coordinate automorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangular automorphisms of a Tate algebra put a nonzero element in distinguished form",
+   "results": "{\"t\": \"2026-10-24T08:13:39Z\", \"tool\": \"leansearch\", \"query\": \"Triangular automorphisms of a Tate algebra put a nonzero element in distinguished form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.taylorLinearEquiv\", \"Polynomial.algEquivAevalXAddC\", \"Polynomial.map_taylorEquiv_degreeLT\", \"LieModule.IsTriangularizable\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished\", \"Polynomial.taylorEquiv\", \"RatFunc.laurent_X\", \"LieModule.IsTriangularizable.mk\"], \"digest\": \"773e567b8f64e621\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series search has no substitution/distinguished hit; semantic results are polynomial Taylor maps or formal adic Weierstrass preparation, which do not give the stated Gauss-norm coordinate automorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"subst\"",
+   "results": "{\"t\": \"2026-10-24T08:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRestricted\\\", \\\"subst\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series search has no substitution/distinguished hit; semantic results are polynomial Taylor maps or formal adic Weierstrass preparation, which do not give the stated Gauss-norm coordinate automorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separate the coefficients of maximal Gauss norm in a Tate series by polynomial shears and invert its leading coefficient",
+   "results": "{\"t\": \"2026-10-24T08:13:40Z\", \"tool\": \"leanfinder\", \"query\": \"Separate the coefficients of maximal Gauss norm in a Tate series by polynomial shears and invert its leading coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.exists_eq_gaussNorm\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"Polynomial.gaussNorm_coe_powerSeries\"], \"digest\": \"d2f85bd776d792d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series search has no substitution/distinguished hit; semantic results are polynomial Taylor maps or formal adic Weierstrass preparation, which do not give the stated Gauss-norm coordinate automorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero restricted power series over a complete nonarchimedean field becomes distinguished after an isometric triangular variable substitution",
+   "results": "{\"t\": \"2026-10-24T08:13:41Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero restricted power series over a complete nonarchimedean field becomes distinguished after an isometric triangular variable substitution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassDistinguished_smul\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorizationAt.isDistinguishedAt\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDistinguished_mul\"], \"digest\": \"dc29bd6e2489a7e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series search has no substitution/distinguished hit; semantic results are polynomial Taylor maps or formal adic Weierstrass preparation, which do not give the stated Gauss-norm coordinate automorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-tate-maximal-residue-evaluation",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: finite residue field and bounded evaluation. Supporting input: Triangular coordinates make a restricted series distinguished.",
+   "via": [
+    "lem-per-tate-maximal-residue-evaluation",
+    "lem-per-affinoid-residual-conormal-injective",
+    "lem-per-geometric-affinoid-jacobian-unit",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tate-triangular-distinguished-coordinate",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the coordinate-normalization proof using existing Gauss completion, polynomial shear and bounded substitution nodes; explicitly separated a finite maximal-norm polynomial from a uniformly smaller tail, constructed inverse shears, and wrote the normalization inverse with its norm estimate. No new nodes and no attachment.",
+  "blueprint": "Retains the inherited formal-algebraization branch beneath lem-per-artin-gabber-affine-curve Step 3 via the recorded ancestry; realizes its coordinate-normalization prerequisite used by lem-per-tate-maximal-residue-evaluation. Latest ancestor Step 3 itself is duality, not an explicit Tate-algebra construction. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-restricted-series-gauss-completion",
+    "why": "Generic analytic completeness and isometric regrouping for exactly the restricted-series rings used here; this unit has no other such theorem."
+   },
+   {
+    "node": "lem-trf-polynomial-shear-leading-coefficient",
+    "why": "Generic finite-polynomial shear (Stacks 051N), applied only to the maximal-norm finite polynomial; no statement in this unit supplies that algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-polynomial-shear-leading-coefficient"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-c54b6b060",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-c54b6b060 (reviewer sub-agent of L); spot-checked: The statement is unchanged and there are no new nodes. All six steps are correct and use only what the cited statements say. Step 1: a maximal coefficient λ exists because the set of coefficients at least as large as a nonzero one is finite, and ρ=max(1/2, the finitely many |c| in (1/2,1)) gives a uniform bound below 1, even for a dense value group. Step 2: the polynomial shear (Stacks 051N, checked at algebra.tex lemma-helper-polynomial) is applied only when p is nonconstant; the constant case is handled with d=0. Step 3: σ and its minus-sign inverse come from lem-per-tate-banach-substitution, whose target hypotheses all hold on D_r, and uniqueness makes them an isometric automorphism. Steps 4-6: the rows are bounded through the isometric regrouping, the geometric-series inverse is written out in D_{r-1}, and v=λ^{-1}w gives a_d=1, ‖a_j‖≤1 for j<d and sup_{j>d}≤ρ<1. Tested: r=1, f=1+πx_1, x_1x_2 and x_2 in D_2, and positive characteristic. There is no duplicate: lem-trf-tate-weierstrass-norm-division assumes the distinguished form, and lem-trf-affinoid-polynomial-closed-point-comparison only reproves the same argument inside its step 2. The statement is exactly what the parent maximal-residue-evaluation step uses. Conrad's notes are not available locally, so the proof is correctly marked as agent-written; no SGA is used. Batch 5: the Gauss completion and polynomial shear are generic analytic and algebraic tools that neither assumption leaf provides and that are not steps of the trace-formula argument, and the Banach-substitution closure reaches the trace-formula chapter only through a general definition, so all three citations are accepted. The two declared tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateTriangularDistinguishedCoordinate",
+  "declaration": "RestrictedSeries.exists_tate_triangular_distinguished_coordinate",
+  "file": "lean/Sheaf/RingTheory/TateTriangularDistinguishedCoordinate.lean",
+  "statement": "theorem exists_tate_triangular_distinguished_coordinate (F : Type u) [NontriviallyNormedField F] [IsUltrametricDist F] [CompleteSpace F] (m : ℕ) (f : MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin (m + 1) ↦ (1 : ℝ))) (hf : f ≠ 0) : ∃ (N : Fin m → ℕ) (σ : (MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin (m + 1) ↦ (1 : ℝ))) ≃+* (MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin (m + 1) ↦ (1 : ℝ)))) (v : (MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin m ↦ (1 : ℝ)))ˣ) (a : ℕ → MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin m ↦ (1 : ℝ))) (d : ℕ), (∀ i, 0 < N i) ∧ (∀ c : F, σ (constants F (m + 1) c) = constants F (m + 1) c) ∧ (∀ g, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ ↦ 1) (σ g).val = MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ ↦ 1) g.val) ∧ (∀ i : Fin m, (σ ⟨MvPowerSeries.X i.castSucc, MvPowerSeries.isRestricted_monomial _ _ _⟩).val = MvPowerSeries.X i.castSucc + MvPowerSeries.X (Fin.last m) ^ N i) ∧ (σ ⟨MvPowerSeries.X (Fin.last m), MvPowerSeries.isRestricted_monomial _ _ _⟩).val = MvPowerSeries.X (Fin.last m) ∧ (∀ μ : Fin (m + 1) →₀ ℕ, MvPowerSeries.coeff μ (MvPowerSeries.rename Fin.castSucc (v.val).val * (σ f).val) = MvPowerSeries.coeff (Finsupp.equivFunOnFinite.symm (fun i : Fin m ↦ μ i.castSucc)) (a (μ (Fin.last m))).val) ∧ a d = 1 ∧ (∀ j : ℕ, j < d → MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ ↦ 1) (a j).val ≤ 1) ∧ (⨆ j : {j : ℕ // d < j}, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ ↦ 1) (a j.val).val) < 1 ∧ (m = 0 → ∀ g, σ g = g)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aca043d7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item node changed only in its lean record and an added stmt_dep on def-trf-restricted-series-presentation (owner of RestrictedSeries.constants, used in the statement); the statement text is unchanged. Clause by clause: NontriviallyNormedField + IsUltrametricDist + CompleteSpace matches the complete nontrivial nonarchimedean field exactly; r = m+1 covers r = 1 at m = 0; D_s = IsRestricted.subring at radius 1 with the Mathlib Gauss norm; σ is a ring isomorphism fixing constants (an F-algebra automorphism) that preserves the Gauss norm (isometric); σ(x_i) and σ(x_r) are pinned on the underlying series; v is a unit of D_m; the rows a_j are fixed by a coefficient identity through the canonical inclusion rename Fin.castSucc; a_d = 1; ‖a_j‖ ≤ 1 for j < d; the supremum over j > d is over a nonempty bounded family, so it is the true supremum and stays < 1; m = 0 gives σ = id. Edge cases checked: m=0, d=0, constant f, f=x_r, f=1+πx_r, positive characteristic, universes. No duplicate in side-live or Mathlib. Proof is sorry only; source and blueprint docstrings present with all six proof steps; lean.statement matches the file verbatim; report has both required sections. No compile run because no file was changed. No findings."
+ }
+}

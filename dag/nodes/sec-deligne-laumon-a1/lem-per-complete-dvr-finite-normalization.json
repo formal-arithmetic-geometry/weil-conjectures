@@ -255,5 +255,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-42dd55fac (reviewer sub-agent of L); spot-checked: Read the item's six steps in full, every cited statement, Stacks more-algebra 09F8 (lemma-special-case, line 35370, first paragraph of the proof) and 09EM (remark-construction, lines 33882-33957, (4) and (8)). The statement, stmt_deps, source and blueprint are identical to the Q132 creation record, so nothing was weakened. Its only citer, lem-per-epp-common-finite-trait-extension, is unaffected. There are no new nodes. Step 1: DVR -> PID -> Noetherian, then complete-local Nagata (032W) at the prime (0), then the N-2 definition gives module finiteness for any finite L/K, with no separability needed. Step 2: the finite-extension-normal leaf gives domain, Frac C = L and integral closedness. Step 3: the domain clause of finite-over-complete-local-product (0325) gives C local and complete for its own maximal ideal, and the finite-algebra-local-radical leaf gives the contraction to m_A. Step 4: dim A = 1, integral-injective dimension equality gives dim C = 1, and normal Noetherian local of dimension 1 gives a DVR (lem-sc-normal-dim1-dvr, used only after all its hypotheses are established). Step 5: V is a PID, hence normal, so C is contained in V. Step 6: write pi = u t^e with e >= 1. t is a nonunit in V because A -> V is local. If x = a/b had r < s, then t^{-1} = (u_a u_b^{-1})^{-1} x t^{q-1} would lie in V, so x lies in C; I checked the algebra. Edge cases tested: L = K, totally ramified t = s^e, purely inseparable extensions with imperfect residue field, unramified extensions, and nonlocal overrings, which are excluded by the locality hypothesis. The proof_deps closure (191 nodes) does not contain the item, so there is no cycle. There is no SGA citation and every step is under 2000 characters. I searched for duplicates with rg over 09F8, 09EM and 'complete discrete valuation'/'dominat': the sbc compositum nodes assume separability, the l-adic node covers only Q_l, and the Nagata domination nodes are generic. None states the item. I accepted the three recorded tool_uses (sk-thm-p1 Nagata, finite-over-complete product, integral dimension equality): each is genuine generic algebra that the unit sk-p-dl-a1-perverse lacks. The worker wrote tool_uses themselves; I took the list as the maintainer's record."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteDVRFiniteNormalization",
+  "declaration": "IsDiscreteValuationRing.complete_finite_normalization",
+  "file": "lean/Sheaf/RingTheory/CompleteDVRFiniteNormalization.lean",
+  "statement": "theorem complete_finite_normalization (A : Type u) (K : Type v) (L : Type w) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Module.Finite K L] : ∃ hC : IsDiscreteValuationRing (integralClosure A L), IsFractionRing (integralClosure A L) L ∧ Module.Finite A (integralClosure A L) ∧ IsAdicComplete (@IsLocalRing.maximalIdeal (integralClosure A L) _ hC.toIsLocalRing) (integralClosure A L) ∧ (@IsLocalRing.maximalIdeal (integralClosure A L) _ hC.toIsLocalRing).comap (algebraMap A (integralClosure A L)) = IsLocalRing.maximalIdeal A ∧ ∀ (V : Subalgebra A L) [IsDiscreteValuationRing V], IsFractionRing V L → (IsLocalRing.maximalIdeal V).comap (algebraMap A V) = IsLocalRing.maximalIdeal A → V = integralClosure A L",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-294967b20",
+  "group": "O3",
+  "result": "pass",
+  "note": "Single module Sheaf.RingTheory.CompleteDVRFiniteNormalization. Clause-by-clause match against the node: A is a complete DVR (IsAdicComplete maximalIdeal), K = Frac A, Module.Finite K L, C = integralClosure A L; conclusions DVR, IsFractionRing C L, Module.Finite A C, IsAdicComplete for m_C (via hC), comap m_C = m_A, uniqueness over every Subalgebra A L that is a DVR with Frac = L and local over A, giving equality inside L. No separability, perfect-residue or extra assumptions; universes u v w independent. Edge cases L=K, inseparable extensions, fields and non-local V checked. No duplicate: HenselianDVRExtension needs separable L and an algebraically closed residue field and gives only the DVR clause. Item node changed only in lean; record complete; statement verbatim; proof sorry only; docstrings carry source, blueprint id and the 6 steps; lines <=100; imports are proof-dep modules (all exist). Advisory: the second reading is brief and by the same worker (not H11)."
+ }
 }

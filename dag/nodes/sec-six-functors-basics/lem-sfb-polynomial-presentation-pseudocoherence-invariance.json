@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-polynomial-presentation-pseudocoherence-invariance",
+ "kind": "statement",
+ "title": "Pseudo-coherence is independent of the finite polynomial presentation",
+ "statement": "Let $R,A$ be commutative rings and let $r,s\\geq0$. Suppose $\\alpha:P=R[x_1,\\ldots,x_r]\\twoheadrightarrow A$ and $\\beta:Q=R[y_1,\\ldots,y_s]\\twoheadrightarrow A$ are surjective $R$-algebra homomorphisms [def-weil-pbc-mv-polynomial-ring]. For every $K\\in D(A)$ [def-weil-abstract-derived-category], its restriction of scalars $\\alpha_*K\\in D(P)$ is pseudo-coherent if and only if its restriction of scalars $\\beta_*K\\in D(Q)$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Here restriction of scalars keeps the additive groups and differentials of a representing complex, with scalar action through the displayed map; no boundedness, flatness, finite presentation or Noetherian hypothesis is imposed beyond the two finite polynomial surjections.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065H, lemma-relatively-pseudo-coherent, pseudo-coherent clause (some presentation if and only if every presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative ring $B$ and $b\\in B$, let $e_b:B[t]\\to B$ be evaluation at $b$. There is an exact sequence $0\\to B[t]\\xrightarrow{t-b}B[t]\\xrightarrow{e_b}B\\to0$. Indeed evaluation is surjective on constants; $p(t)-p(b)$ is divisible by $t-b$, since $t^i-b^i=(t-b)\\sum_{j=0}^{i-1}t^{i-1-j}b^j$ for $i>0$. Multiplication by $t-b$ is injective: for a nonzero polynomial its highest nonzero coefficient remains the highest coefficient after multiplication, in degree one higher. Thus the complex $[B[t]\\xrightarrow{t-b}B[t]]$ in degrees $-1,0$, augmented by $e_b$, is a bounded finite free resolution of $B[0]$. In particular $B[0]$ is pseudo-coherent over $B[t]$, including when $B$ is the zero ring.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 065G, lemma-add-variable-pseudo-coherent, first proof paragraph; translated from t to t-b by the displayed elementary calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pseudocoherent-algebra-scalar-restriction] to $e_b:B[t]\\to B$. Its sole algebra hypothesis is exactly the pseudo-coherence of $B[0]$ established in step 1. Consequently, for every $L\\in D(B)$, $L$ is pseudo-coherent over $B$ if and only if $(e_b)_*L$ is pseudo-coherent over $B[t]$. This assertion is uniform in $B,b,L$ and requires no cohomological bound on $L$.",
+   "uses": [
+    "lem-sfb-pseudocoherent-algebra-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, lemma-finite-push-pseudo-coherent, final assertion; Tag 065G, lemma-add-variable-pseudo-coherent"
+   }
+  },
+  {
+   "text": "Choose $f_j\\in P$ with $\\alpha(f_j)=\\beta(y_j)$ and $g_i\\in Q$ with $\\beta(g_i)=\\alpha(x_i)$, using the two surjections. Put $T=R[x_1,\\ldots,x_r,y_1,\\ldots,y_s]$. Evaluation gives $u:T\\to P$ fixing every $x_i$ and sending $y_j\\mapsto f_j$, and $v:T\\to Q$ fixing every $y_j$ and sending $x_i\\mapsto g_i$. The universal property of the polynomial ring gives $\\gamma:=\\alpha\\circ u=\\beta\\circ v$, since the two maps agree on $R$ and every variable. The same universal property identifies $T$ both with $P[y_1,\\ldots,y_s]$ and with $Q[x_1,\\ldots,x_r]$: the maps fixing each displayed variable are inverse. Restriction along a composite keeps the identical groups and differentials with the identical composite scalar action, so $u_*\\alpha_*K=\\gamma_*K=v_*\\beta_*K$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 065H, lemma-relatively-pseudo-coherent, choice of lifts and the common polynomial ring diagram"
+   }
+  },
+  {
+   "text": "For $0\\le j\\le s$ set $P_j=P[y_1,\\ldots,y_j]$ and give a representative of $\\alpha_*K$ the $P_j$-action $y_a\\mapsto f_a$ for $a\\le j$. The $j$th action is restriction of the $(j-1)$st along $P_{j-1}[y_j]\\to P_{j-1}$ evaluating $y_j$ at $f_j\\in P\\subset P_{j-1}$. Induct on $j$: at $j=0$ the complex is $\\alpha_*K$; each successor uses the uniform equivalence of step 2, hence preserves and reflects pseudo-coherence. At $j=s$ this gives $\\alpha_*K$ pseudo-coherent over $P$ if and only if $\\gamma_*K$ is pseudo-coherent over $T$. Likewise take $Q_i=Q[x_1,\\ldots,x_i]$, start at $\\beta_*K$, and evaluate $x_i$ at $g_i\\in Q\\subset Q_{i-1}$. Induction for $0\\le i\\le r$ gives $\\beta_*K$ pseudo-coherent over $Q$ if and only if the same $\\gamma_*K$ is pseudo-coherent over $T$. Combining the equivalences proves the assertion. If $s=0$ or $r=0$ the corresponding induction is the identity equivalence.",
+   "uses": [
+    "lem-sfb-pseudocoherent-algebra-scalar-restriction",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 065H, lemma-relatively-pseudo-coherent, induction on the number of variables using Tag 065G; arbitrary-value evaluation supplied by steps 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-pseudocoherent-algebra-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065H, lemma-relatively-pseudo-coherent; Tag 065G, lemma-add-variable-pseudo-coherent, first proof using Tag 064Z; explicit translated-variable resolution and finite induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of a complex over a finite type algebra is independent of the surjective polynomial presentation",
+   "results": "{\"t\": \"2026-10-23T14:50:10Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudo coherence of a complex over a finite type algebra is independent of the surjective polynomial presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.SubmersivePresentation\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.IsStandardSmooth.out\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.Presentation.exists_presentation_fin\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\"], \"digest\": \"9b35334167039b77\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra presentations, finite presentation and smoothness do not assert pseudo-coherence invariance; the Mathlib grep has no pseudo-coherence definition or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherence is invariant under changing finite polynomial generators of an algebra",
+   "results": "{\"t\": \"2026-10-23T14:50:12Z\", \"tool\": \"leanfinder\", \"query\": \"Relative pseudo coherence is invariant under changing finite polynomial generators of an algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.hcongr_5\", \"AlgHom.FinitePresentation\", \"Algebra.SubmersivePresentation\", \"Algebra.FinitePresentation.mvPolynomial_of_finitePresentation\", \"Algebra.Presentation.exists_presentation_fin\", \"Algebra.Presentation.ofFinitePresentationVars\", \"Algebra.FinitePresentation.polynomial\", \"Algebra.FinitePresentation\"], \"digest\": \"a0b84bf181402bff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra presentations, finite presentation and smoothness do not assert pseudo-coherence invariance; the Mathlib grep has no pseudo-coherence definition or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes over two polynomial rings presenting the same finite type algebra",
+   "results": "{\"t\": \"2026-10-23T14:50:10Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherent complexes over two polynomial rings presenting the same finite type algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.noConfusionType\", \"AlgHom.FinitePresentation\", \"Algebra.FinitePresentation.baseChange\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Algebra.FinitePresentation.iff\", \"RingHom.FinitePresentation\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\"], \"digest\": \"4b8b7b77d4c32520\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra presentations, finite presentation and smoothness do not assert pseudo-coherence invariance; the Mathlib grep has no pseudo-coherence definition or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T14:50:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra presentations, finite presentation and smoothness do not assert pseudo-coherence invariance; the Mathlib grep has no pseudo-coherence definition or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|pseudoCoherent|relatively.*coherent",
+   "results": "{\"t\": \"2026-10-23T14:50:47Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|pseudoCoherent|relatively.*coherent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra presentations, finite presentation and smoothness do not assert pseudo-coherence invariance; the Mathlib grep has no pseudo-coherence definition or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oher",
+   "results": "{\"t\": \"2026-10-23T18:12:05Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherence of a complex is equivalent over R and R[X] when X acts by zero",
+   "results": "{\"t\": \"2026-10-23T18:12:06Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherence of a complex is equivalent over R and R[X] when X acts by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.I\", \"CochainComplex.fromSingle₀Equiv\", \"CochainComplex.HomComplex.Cochain.d_comp_ofHoms_v\", \"CategoryTheory.ShortComplex.RightHomologyData.isIso_p\", \"PowerSeries.constantCoeff_X\", \"CategoryTheory.ShortComplex.opcyclesIsoX₂\", \"CochainComplex.HomComplex.Cochain.ext₀_iff\", \"CategoryTheory.ShortComplex.HomologyMapData.compatibilityOfZerosOfIsColimitCokernelCofork\"], \"digest\": \"ad34f38e839100d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", Polynomial",
+   "results": "{\"t\": \"2026-10-23T18:12:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex over a commutative ring is pseudo coherent if and only if it is pseudo coherent over the polynomial ring with the variable acting by zero",
+   "results": "{\"t\": \"2026-10-23T18:12:06Z\", \"tool\": \"leanfinder\", \"query\": \"A complex over a commutative ring is pseudo coherent if and only if it is pseudo coherent over the polynomial ring with the variable acting by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"CochainComplex.isLE_iff\", \"CochainComplex.isGE_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.exactAt_of_isGE\", \"CochainComplex.exactAt_of_isLE\"], \"digest\": \"bd181258abf02a1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along polynomial evaluation at zero preserves and reflects bounded above finite free resolutions of complexes",
+   "results": "{\"t\": \"2026-10-23T18:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along polynomial evaluation at zero preserves and reflects bounded above finite free resolutions of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instFinitePolynomialAEval'\", \"MvPolynomial.map_restrict_dom_evalₗ\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"Module.AEval.instFinitePolynomial\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"ModuleCat.projectiveResolution\", \"instFinitePresentation\", \"Module.free_of_lTensor_residueField_injective\"], \"digest\": \"6afe86923ed21fe7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes over two finite polynomial presentations of an algebra",
+   "results": "{\"t\": \"2026-10-23T18:12:39Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherent complexes over two finite polynomial presentations of an algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"Algebra.Presentation.ofFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Algebra.Presentation.comp\", \"RingHom.FinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\"], \"digest\": \"48469f1f5cc63830\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T18:12:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of a complex over a finite type algebra is independent of its surjective finite polynomial presentation",
+   "results": "{\"t\": \"2026-10-23T18:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudo coherence of a complex over a finite type algebra is independent of its surjective finite polynomial presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.SubmersivePresentation\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.IsStandardSmooth.out\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.Presentation.exists_presentation_fin\"], \"digest\": \"23e5526f52e15c09\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two polynomial presentations of the same algebra give equivalent pseudo coherent restriction of scalars complexes",
+   "results": "{\"t\": \"2026-10-23T18:12:41Z\", \"tool\": \"leanfinder\", \"query\": \"Two polynomial presentations of the same algebra give equivalent pseudo coherent restriction of scalars complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsEquiv\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs\", \"Algebra.PreSubmersivePresentation.ofAlgEquiv_toPresentation\", \"Algebra.SubmersivePresentation.ofAlgEquiv_toPreSubmersivePresentation\", \"Algebra.PreSubmersivePresentation.naive_toPresentation\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"Algebra.Presentation.comp\", \"Algebra.PreSubmersivePresentation.toPresentation_comp\"], \"digest\": \"b1f92eb62e4f1e66\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are cohomological support, ordinary module finiteness, polynomial evaluation, or algebra presentation results; none states pseudo-coherence invariance for derived complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-fp-polynomial-pseudocoherent",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Pseudo-coherence of the diagonal module needed to realize the algebraic class test as sheaf internal Hom. Supporting algebra input: Pseudo-coherence of both flat finitely presented algebras over a common finite polynomial presentation, underlying the use of 0E1T in the inherited diagonal-pseudo-coherence prerequisite. Polynomial-presentation independence when the descended flat model gives a presentation different from the prescribed one (Stacks 065H).",
+   "via": [
+    "lem-sfb-flat-fp-polynomial-pseudocoherent",
+    "lem-sfb-flat-fp-quotient-pseudocoherent",
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polynomial-presentation-pseudocoherence-invariance",
+  "worker": "stage1",
+  "summary": "Expanded 065H via the common polynomial ring, explicit evaluation maps and finite induction. Reused the existing 064Z scalar-restriction theorem; the two-term resolution needed for its algebra hypothesis is written out, so no new lemma node is warranted. Statement and statement dependencies unchanged. Read the actual statements of every cited node and checked their hypotheses and citation quotes. No new nodes, no Mathlib leaves, no Lean work.",
+  "blueprint": "Inherited lower-level algebra supporting det-thm-sf-ctf-stability-direct-images proof (3), through the flat-finitely-presented diagonal and relative dualizing prerequisites recorded in blueprint.from.place. Read the current latest sk-thm-sf-ctf-stability unit and direct-images proof (3). Steps 1-2 supply the evaluation input; steps 3-4 realize the presentation-independence prerequisite. The ancestor command returns None for the inherited chain; retain its null ancestor and existing via list. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-80906b10d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-80906b10d (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra 065H (lemma-relatively-pseudo-coherent), 065G (first proof via 0→R[x]→R[x]→R→0) and the final assertion of 064Z. The item's statement, stmt_deps and blueprint fields are unchanged from the base, where the item is unsplit in both live and side-live; there is no repair note and no parallel supersession. The statement matches 065H's pseudo-coherence clause exactly: two finite polynomial surjections are the same as finite-type presentations, and K∈D(A) is equivalent to a complex because restriction is exact. Step 1 is correctly marked elementary: ker e_b=(t−b) by the identity for t^i−b^i, multiplication by the monic t−b is injective, and B=0 and ℤ/4 with b=2 work. Step 2 cites lem-sfb-pseudocoherent-algebra-scalar-restriction (same unit, reviewed pass) with S=B[t], T=B; its only hypothesis is supplied by step 1, and the direction matches. Step 3 checks lifts f_j and g_i, α∘u=β∘v by the uniqueness clause of def-weil-pbc-mv-polynomial-ring, and T≅P[y]≅Q[x]. Step 4 writes out the induction: base case α_*K, each successor is step 2 with B=P_{j−1} and b=f_j, and both chains end at γ_*K with x_i↦α(x_i), y_j↦β(y_j). There is no cycle (the dependency closure of the scalar-restriction node has 31 nodes and excludes the item). There are no new nodes and no duplicate: lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance is the different scheme-level 09VC statement. No SGA source is cited, no tool_uses are needed and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPresentationPseudoCoherence",
+  "declaration": "DerivedCategory.isPseudoCoherent_restrictScalars_polynomial_presentation_iff",
+  "file": "lean/Sheaf/RingTheory/PolynomialPresentationPseudoCoherence.lean",
+  "statement": "theorem isPseudoCoherent_restrictScalars_polynomial_presentation_iff {R : Type uR} {A : Type uA} [CommRing R] [CommRing A] [Algebra R A] {r s : ℕ} (α : MvPolynomial (Fin r) R →ₐ[R] A) (β : MvPolynomial (Fin s) R →ₐ[R] A) (hα : Function.Surjective α) (hβ : Function.Surjective β) [HasDerivedCategory.{wA} (ModuleCat.{max uR uA v} A)] [HasDerivedCategory.{wP} (ModuleCat.{max uR uA v} (MvPolynomial (Fin r) R))] [HasDerivedCategory.{wQ} (ModuleCat.{max uR uA v} (MvPolynomial (Fin s) R))] (K : DerivedCategory (ModuleCat.{max uR uA v} A)) : IsPseudoCoherent ((ModuleCat.restrictScalars α.toRingHom).mapDerivedCategory.obj K) ↔ IsPseudoCoherent ((ModuleCat.restrictScalars β.toRingHom).mapDerivedCategory.obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-110eb1c1b",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Node matches Stacks 065H pseudo-coherence clause (more-algebra.tex:21291). Lean: CommRing R, A, [Algebra R A], α β : MvPolynomial (Fin r/s) R →ₐ[R] A surjective, arbitrary K : DerivedCategory (ModuleCat.{max uR uA v} A), restrictScalars(α.toRingHom).mapDerivedCategory (exact by ChangeOfRingsExact instances), recorded IsPseudoCoherent (RingPseudoCoherent.lean:40, finite-free strictly bounded-above representative) on both sides, ↔. No extra hypotheses; r=s=0, A=0, K=0 covered; universes independent. lean.statement verbatim; stmt_deps exact; docstrings carry source, blueprint and the 4 proof steps; sorry only; only change is the lean record; no duplicate found in side-live Sheaf/WeilConjectures; proof dep scalar-restriction has no lean record, so no import. No file change, no compile."
+ }
+}

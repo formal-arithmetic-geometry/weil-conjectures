@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-finite-locally-free-fppf-descent",
+ "kind": "statement",
+ "title": "Effective fppf descent for finite locally free covers of fixed degree",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $d\\geq0$ be an integer. For each $S$-scheme $T$, let $\\mathcal C_d(T)$ be the groupoid of schemes $Z$ with a finite locally free morphism $Z\\to T$ of degree $d$ [def-pc-finite-locally-free], whose arrows are $T$-isomorphisms. Pullback by scheme fibre product [def-pc-fibre-product] preserves these objects and arrows. For every fppf covering $\\{T_i\\to T\\}_{i\\in I}$ [def-pc-fppf-site], suppose $Z_i\\to T_i$ belong to $\\mathcal C_d(T_i)$ and there are isomorphisms $\\theta_{ij}:Z_i\\times_TT_j\\xrightarrow{\\sim}T_i\\times_TZ_j$ over $T_i\\times_TT_j$ satisfying $\\theta_{jk}\\circ\\theta_{ij}=\\theta_{ik}$ on triple overlaps. There exist $Z\\to T$ in $\\mathcal C_d(T)$ and isomorphisms $Z\\times_TT_i\\simeq Z_i$ inducing the $\\theta_{ij}$. For any two objects of $\\mathcal C_d(T)$, compatible isomorphisms between their pullbacks to all $T_i$ descend to a unique $T$-isomorphism. Thus $\\mathcal C_d$ is an fppf stack.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 0245 (lemma-affine), 02VO (lemma-descending-property-finite-locally-free), and 023Q (lemma-fpqc-universal-effective-epimorphisms), specialized to fppf covers; finite-cover pullback: morphisms.tex Tag 02KD (lemma-base-change-finite-locally-free)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-trf-scheme-cover-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "For $f:Z\\to T$ of degree $d$ and $g:T\\prime\\to T$, its pullback is finite, flat and locally of finite presentation by [lem-weil-pbc-finite-morphism-permanence], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence]. Its rank at $t\\prime$ is the rank of $f$ at $g(t\\prime)$ by clause (2) of [lem-weil-pbc-finite-flat-rank-iso], hence is $d$. Thus it belongs to $\\mathcal C_d(T\\prime)$ by [def-pc-finite-locally-free]. The universal property [def-pc-fibre-product] pulls back an isomorphism and its inverse. Identify both iterated pullbacks with the fibre product having the same $Z$ coordinate and ordered base coordinates; comparison maps preserve these coordinates. Their composites therefore agree by uniqueness, proving the pullback identity and composition coherences.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "def-pc-finite-locally-free",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VO, base-change direction; morphisms.tex Tags 02KD (lemma-base-change-finite-locally-free), 01WL, 01U9, 01TS; rank compatibility"
+   }
+  },
+  {
+   "text": "Given the datum in the statement, each $Z_i\\to T_i$ is finite by [def-pc-finite-locally-free], hence affine by [def-weil-finite-integral-morphism]. Apply [lem-trf-fppf-family-coproduct-descent-encoding]: it constructs $A=\\coprod_iT_i$, $V=\\coprod_iZ_i$, an fpqc singleton $A\\to T$, and the associated singleton descent datum on $V\\to A$; its effectiveness is equivalent, for the same realizing scheme, to effectiveness of the original family datum. The map $V\\to A$ is affine. Indeed choose affine open covers of each $T_i$; [lem-weil-pbc-scheme-coproduct-family] gives an affine open cover of $A$ by their images. The inverse image of such an open in $V$ is its inverse image in the matching $Z_i$, since the other summands are disjoint. This is affine by affineness of $Z_i\\to T_i$. The cover criterion [pqf-lem-affine-local-target] now proves the claim. This also handles infinite index sets.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 023X (lemma-family-is-one), 0245 (lemma-affine); morphisms.tex Tag 01S8 (lemma-characterize-affine)"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-affine-descent-effective] to the singleton $A\\to T$ and the affine morphism $V\\to A$ of Step 2. It gives a scheme $Z\\to T$ and an isomorphism $Z\\times_TA\\simeq V$ respecting the given singleton datum. The fixed-realization equivalence of [lem-trf-fppf-family-coproduct-descent-encoding] restricts this to isomorphisms $Z\\times_TT_i\\simeq Z_i$ inducing precisely the prescribed $\\theta_{ij}$. At this point $Z$ is a scheme with the required descent identifications; its finiteness and degree are established next.",
+   "uses": [
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-trf-fppf-family-coproduct-descent-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 0245 (lemma-affine), 023X (lemma-family-is-one)"
+   }
+  },
+  {
+   "text": "The original fppf family is fpqc by [lem-trf-fppf-covering-is-fpqc]. Under the isomorphisms of Step 3, all pullbacks of $Z\\to T$ are finite, flat and locally of finite presentation by [def-pc-finite-locally-free]. Apply [lem-weil-pbc-fpqc-descend-finite], [lem-weil-pbc-fpqc-descend-flat], and [lem-weil-pbc-fpqc-descend-locally-finite-presentation] separately to this same morphism and covering. Their conclusions give exactly finite local freeness of $Z\\to T$. No quasi-compactness assumption on $T$ or on the coproduct covering map is used.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VO (lemma-descending-property-finite-locally-free), proof citing Tags 02LA, 02L2 and 02KY; topologies.tex Tag 022C"
+   }
+  },
+  {
+   "text": "For any $t\\in T$, joint surjectivity in [def-pc-fppf-site] supplies $i$ and $t_i\\in T_i$ above $t$. Apply clause (2) of [lem-weil-pbc-finite-flat-rank-iso] to the finite locally free map of Step 4. Its rank at $t$ equals the rank of its pullback at $t_i$, which is $d$ by the isomorphism with $Z_i$ and [def-pc-finite-locally-free]. Rank is unchanged by this isomorphism: it identifies the fibre coordinate algebras linearly over $\\kappa(t_i)$. Hence $Z\\to T$ has degree $d$, giving effectivity in $\\mathcal C_d$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VO, proof, final sentence: the degree is read off on fibres"
+   }
+  },
+  {
+   "text": "Let $Z,W$ be two global objects and let $b_i:Z\\times_TT_i\\simeq W\\times_TT_i$ be compatible isomorphisms. The family $Z\\times_TT_i\\to Z$ is fpqc by [lem-trf-fppf-covering-is-fpqc] and [lem-galois-fpqc-covering-base-change]. Compose $b_i$ with projection to $W$. Compatibility says these morphisms agree on every pairwise overlap, identified with $Z\\times_TT_i\\times_TT_j$ by [def-pc-fibre-product]. Therefore [lem-weil-pbc-fpqc-representable-descent] gives a unique scheme map $b:Z\\to W$. Its composite to $T$ equals the structure map of $Z$: they agree after this cover, so uniqueness in the same lemma with target $T$ proves equality. Thus $b$ is over $T$. Its pullback is $b_i$, since projections to $W$ and $T_i$ agree and fibre-product uniqueness applies.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); topologies.tex Tags 022C and 022D"
+   }
+  },
+  {
+   "text": "The inverses $b_i^{-1}$ are compatible: invert the overlap commutation equations. Repeating Step 6 with $W,Z$ in place of $Z,W$ gives a $T$-map $c:W\\to Z$. The maps $cb$ and $bc$ pull back to the identity on the respective fpqc covers. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] makes $cb=1_Z$ and $bc=1_W$. Hence $b$ is the unique descended $T$-isomorphism. Together with Steps 1--5 this proves the stack assertion. For an empty covering, joint surjectivity forces $T$ empty; every scheme mapping to it is empty, so effectiveness and uniqueness still hold. Degree zero and empty covering members cause no exception: the rank equalities and all the cited descent results include zero and require no positive degree.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, uniqueness in the sheaf condition; categorical assembly from the preceding steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "pqf-lem-affine-local-target",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 0245, 02VO, 023Q, with family-to-singleton conversion Tag 023X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free degree d schemes and their isomorphisms satisfy effective descent for arbitrary fppf covering families",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {U V X : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : V ⟶ X) [AlgebraicGeometry.IsFinite f]\\n  [AlgebraicGeometry.IsFinite g], AlgebraicGeometry.IsFinite (CategoryTheory.Limits.coprod.desc f g)\", \"doc\": \"Given finite morphisms $ f: U \\to X $ and $ g: V \\to X $ of schemes, the induced morphism from the coproduct (disjoint union) of $ U $ and $ V $ to $ X $ is also finite. This follows because the coprodu\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of an existing morphism property or of modules does not give effectivity of finite-cover scheme objects with all descent isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of finite flat schemes of fixed rank is a stack for the faithfully flat topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of an existing morphism property or of modules does not give effectivity of finite-cover scheme objects with all descent isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free degree d schemes and their isomorphisms satisfy effective descent for arbitrary fppf covering families",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsIso 𝒰.fromGlued\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of an existing morphism property or of modules does not give effectivity of finite-cover scheme objects with all descent isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Descent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of an existing morphism property or of modules does not give effectivity of finite-cover scheme objects with all descent isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFree.*[Dd]escent|[Dd]escent.*finiteLocallyFree|IsFinite.*IsStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of an existing morphism property or of modules does not give effectivity of finite-cover scheme objects with all descent isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFree.*[Dd]escent|[Dd]escent.*finiteLocallyFree|IsFinite.*IsStack",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits descend properties of existing morphisms or discuss modules, not effective descent of finite locally free scheme objects with isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The groupoid of finite flat schemes of fixed rank is a stack for the fppf topology",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.IsFinite.toIsAffineHom, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.flat_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: hits descend properties of existing morphisms or discuss modules, not effective descent of finite locally free scheme objects with isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Descent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits descend properties of existing morphisms or discuss modules, not effective descent of finite locally free scheme objects with isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fppf descent for finite locally free schemes of fixed degree, including descent of isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: hits descend properties of existing morphisms or discuss modules, not effective descent of finite locally free scheme objects with isomorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-lci-open",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack). Proof input: 05WB descent for the finite locally free cover underlying a Hilbert object.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-lci-open",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-fppf-descent",
+  "worker": "stage1",
+  "summary": "Completed effective descent using existing affine singleton effectivity and family encoding, then separate descent of finite/flat/local finite presentation and rank. Proved descent of isomorphisms by gluing maps and inverses. No new nodes; statement unchanged.",
+  "blueprint": "Supports the recorded chain from det-thm-sf-ctf-stability-direct-images, proof (3), to the finite Hilbert groupoid stack in examples-stacks.tex Tag 05WB. Latest blueprint direct-images proof (3) and its unit were read; no unit route or statement was changed. The inherited blueprint.from.node is null because the creation chain has no imported ancestor; its existing detailed from.place is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-family-coproduct-descent-encoding",
+    "why": "Encodes arbitrary fppf family data as one fpqc singleton without changing the realizing scheme; no such family encoding is supplied by this unit."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic affine singleton effectivity, used to construct the underlying cover scheme; it does not replace the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-galois-fpqc-affine-descent-effective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-b39c14bdc",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-b39c14bdc (reviewer sub-agent of L); spot-checked: Statement is verbatim against live (unsplit before this). There are 0 new nodes, no re-split note, and no supersession. Source check: Stacks 02VO (descent.tex l.6225, finite+flat+lfp descend and the degree is read on fibres), 0245, 023Q, 023X and 02KD all match their tags. No SGA. Step 1 uses finite/flat/lfp base change and rank-iso (2) correctly. Step 2: V=∐Z_i→A is affine via the coproduct node and the affine-local-target criterion, and the encoding gives an fpqc singleton even for infinite I. Step 3: galois-fpqc-affine-descent-effective's hypotheses are met, and the encoding's iff clause turns its output into compatible isomorphisms Z×T_i≅Z_i (θ direction checked). Steps 4–5: fppf⇒fpqc, then fpqc-descend finite/flat/lfp separately; rank is read via rank-iso (2) at a lifted point t_i. Steps 6–7: representable descent over the fpqc cover Z×T_i→Z, with T-linearity from uniqueness, then inverses. Edge cases checked: empty cover/T, d=0, infinite I, empty members, non-quasi-compact T. Duplicate search found nothing: finite-etale-fppf-descent, finite-schemes-etale-stack-descent, finite-locally-free-degree-etale-descent, thm-pd-effective-descent and affine-flat-descent all state something different. Batch-5: lem-trf-fppf-family-coproduct-descent-encoding (023X) and lem-trf-fppf-covering-is-fpqc (022C, mathlib) are generic scheme descent results. Their closures contain no trace-formula or Poincaré-duality theorem node (only the general def-trf-scheme-cover-descent-datum), so they are accepted. The declared tool_uses (encoding and galois affine effectivity) are accepted. Note: blueprint.from.node is null, inherited from the O3 creating chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeFppfDescent",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_fppf_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeFppfDescent.lean",
+  "statement": "theorem finiteLocallyFree_fppf_descent (S : Scheme.{u}) (T : Over S) (d : ℕ) : (∀ (Z : Over T.left), Z.hom.IsFiniteLocallyFreeOfDegree d → ∀ (T' : Scheme.{u}) (g : T' ⟶ T.left), (pullback.snd Z.hom g).IsFiniteLocallyFreeOfDegree d) ∧ (∀ (I : Type (u + 1)) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T.left), Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T.left → (∀ (D : SchemeCoverDescentDatum f), (∀ i, (D.localScheme i).hom.IsFiniteLocallyFreeOfDegree d) → ∃ (Z : Over T.left) (q : ∀ i, (D.localScheme i).left ⟶ Z.left), Z.hom.IsFiniteLocallyFreeOfDegree d ∧ (∀ i, IsPullback (q i) (D.localScheme i).hom Z.hom (f i)) ∧ ∀ (B : Scheme.{u}) (p : B ⟶ T.left) (i j : I) (a : B ⟶ U i) (b : B ⟶ U j) (ha : a ≫ f i = p) (hb : b ≫ f j = p) (x : (D.data.obj i).obj.obj (op ((Over.map a).obj (Over.mk (𝟙 B))))), ((D.representation j).homEquiv.symm ((D.data.hom p a b ha hb).hom.app (op (Over.mk (𝟙 B))) x)).left ≫ q j = ((D.representation i).homEquiv.symm x).left ≫ q i) ∧ (∀ (Z W : Over T.left), Z.hom.IsFiniteLocallyFreeOfDegree d → W.hom.IsFiniteLocallyFreeOfDegree d → ∀ (e : ∀ i, (Over.pullback (f i)).obj Z ≅ (Over.pullback (f i)).obj W), (∀ i j, pullback.fst (pullback.fst Z.hom (f i)) (pullback.fst Z.hom (f j)) ≫ (e i).hom.left ≫ pullback.fst W.hom (f i) = pullback.snd (pullback.fst Z.hom (f i)) (pullback.fst Z.hom (f j)) ≫ (e j).hom.left ≫ pullback.fst W.hom (f j)) → ∃! b : Z ≅ W, ∀ i, (Over.pullback (f i)).mapIso b = e i))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three conjuncts state base-change stability, effectivity with a degree-d realizing object, and unique descent of compatible isomorphisms. Uses the landed covering-family datum, with its geometric effectivity formula expanded to retain the realizing object. Over.pullback supplies functoriality on isomorphisms and canonical pullback comparisons. Added only its existing definition node to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e204670b7",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: degree-d objects via IsFiniteLocallyFreeOfDegree (fiberDegree = d everywhere), base-change stability via pullback.snd, fppf family via Scheme.fppfPrecoverage with I : Type (u+1) and no Nonempty/finite/small hypothesis, effectivity = landed SchemeCoverDescentDatum.IsEffective body verbatim plus degree d on the same realizing Z, iso descent with W-component overlap compatibility (equivalent to full compatibility since e_i lie over U_i) and ∃! b : Z ≅ W with mapIso b = e i. Only node changes: lean record + stmt_dep def-trf-scheme-cover-descent-datum (landed). lean.statement verbatim; report sections present; docstrings carry source/blueprint and 7 proof steps; sorry only; edge cases d=0, empty I/T, empty members, infinite I, non-qc T covered. Stacks 02VO/0245/023Q checked in descent.tex. No compile needed (no change)."
+ }
+}

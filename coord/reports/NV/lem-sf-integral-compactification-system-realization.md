@@ -1,0 +1,127 @@
+# Repair of lem-sf-integral-compactification-system-realization
+
+1. Files written: the item (statement unchanged, short assembly), and three statement-only obligations:
+   - `lem-sf-integral-basic-realization`: statement, unsplit, no Mathlib match after two semantic phrasings, Loogle, LeanSearch and source grep.
+   - `lem-sf-integral-expression-recursion`: statement, unsplit, no Mathlib match after two semantic phrasings, Loogle, LeanSearch and source grep.
+   - `lem-sf-expression-contextual-intertwining`: statement, unsplit, no Mathlib match after two semantic phrasings, Loogle, LeanSearch and source grep.
+2. Attachments: none. The project's named realization declaration in `lean/Sheaf/SixFunctors/IntegralCompactificationSystemRealization.lean:893` ends in `sorry` at line 896. Upstream searches by the exact blueprint tag and by realization/normalized systems found no declaration giving all clauses without sorry.
+3. WANTED: none; this is explicitly agent-formulated coherence work expanding the obtained blueprint.
+4. The returned proof contained 11058 characters across seven steps. The human requests work distribution, not abbreviated prose: the statement and inherited metadata remain unchanged. Sandbox initially had only dispatcher dotfiles, no node, report or search log; the repository version supplies the returned proof. Initial required dry run exited because the report was missing. No existing sandbox proof or search was discarded.
+5. No outstanding mathematical correction or statement dispute. The three new obligations intentionally remain unsplit, with no proof steps or proof dependencies; future workers receive the full old arguments below.
+
+## Review by NV
+
+I read the chapter and unit records, GOAL.md, the three blueprint levels in SETUP.md, the stage-1 brief, and both complete B--E checklists in delivery-errors.md. I read fix-prop-coherence.proof.md in main-20261015 and Stacks sites-cohomology.tex, Tag 0941 (lemma-derived-limit-is-ok), including its K-injective/derived-product proof. The Stacks lemma identifies a strict diagram's total limit with the homotopy limit; it does not state any of the additional expression-coherence conclusions. Each new source therefore explicitly calls its statement an agent-formulated obligation expanding the blueprint's tensor/evaluation/unit-and-counit sentence. No forbidden SGA source is used.
+
+New primitive node: I matched completed pullback/tensor to def-pur-integral-derived-operations and lem-pur-integral-operations-well-defined, the Roos comparison to lem-weil-pbc-ringed-strict-tower-homotopy-limit, proper image to def-weil-derived-direct-image, open extension to lem-sf-integral-open-reduction-comparison, and compact support to its definition and restriction-of-scalars lemma. In particular the latter specifies composition for coefficient restrictions, so the m-to-n transitions are part of the new assertion. I do not promote a definition into a coherence theorem. The source of this new obligation is exactly old step 3; the full intended argument is retained below.
+
+New recursion node: I checked the types of a_A and a_tensor: inverse L A(e) goes from L A(M) to L A R L(M), and d_A then lands in A_int L(M). The recursive c_AV and binary formula consequently have the required endpoints. Coefficient r_AV first uses r_A at the integral child and then A(r_V). The base identity follows from e_RK R(u_K)=1. Naturality of e is the needed cancellation for the two constructor cases. The compact-support agreement is a separate assertion here, with the same r_j and proper-image tower; it is not inferred from evaluated equality. This node carries old step 4 and the coefficient-substitution paragraph of old step 5.
+
+New context node: I checked its categorical statement independently of sheaves. It assumes the actual adjoint equivalence and specified primitive d, the recursive c, and the equality defining r. Its nontrivial tasks are cancelling the adjunction factors in a coefficient square and inducting over every unary/binary context; it does not assume the context conclusion. Repeated inputs and both binary slots are covered. The integral transformation is supplied independently, so its equality with the transported system transformation is not a definition. It carries the final paragraph of old step 5 and the context/equality-transport argument of old step 6.
+
+Assembly citation audit: Step 1 uses actual-reconstruction-maps for the actual unit/counit isomorphisms (not just existence of some reconstruction), semilinear-derived-sections for simultaneous models, and coefficient-system-derived-comparison for evaluated adjunctions. Step 2 uses the full statement of semilinear-proper-open-mate-pasting, which includes lambda, Gamma as its open adjunct, scalar restriction, finite evaluation and all pasting equations, including noncartesian refinements. The rings are C_n=A_n, B=R; ell is invertible and the input levels are bounded-below etale-origin; the opens are quasi-compact. Step 3 uses the new primitive node and recursion node only for their stated d/c/r assertions, and generator-reduction-coherence for the stated primitive coefficient equation. Step 4 uses that same generator lemma for whole-system commuting squares, and the new context lemma for passage through L and all contexts. The projection/exchange definition specifies the composite words, and the ringed coherence statement supplies their actual tensor/square identifications. Step 5 uses the new context lemma's equality-transport clause and compatible-tower's explicit common-refinement assertion; the proper/open pasting facts are already established by step 2, so no new geometric theorem is hidden in the assembly. Step 6 uses only the displayed recursive formulas and the existing normalized identity/empty-open clauses. All these cited statements were read; citations.json quotes them verbatim.
+
+Edge cases: The empty expression context is the original generator square. A variable has c=u^{-1} and r=1. A unary node is well typed by the displayed a_A; a binary vertex uses two smaller children. The zero complex, tensor with zero, and empty open have the unique zero maps. An identity open and identity proper/open square give identities; m=n is an identity coefficient comparison. On Spec(k) a free module in degree zero, including rank zero, reduces to tensor reassociation and the inverse limit unit. No n=0 level is used. No uniform boundedness is inferred for arbitrary functors: all intermediate conditions stay express assumptions, including the hidden J_j stage of S_pJ_j.
+
+The old reconstruction argument is now cited through the more general existing actual-reconstruction node; creating a fourth node for it would duplicate it. Every other non-elementary old argument is assigned to a new or already existing node, and all original text appears below. I checked B (self-contained typed statement-only nodes, honest searches, blueprint ancestry), C (every assembly fact in a cited statement, no evaluated equality detection), D (three distinct subarguments, not a single renamed whole theorem), and E (geometric and coefficient hypotheses and boundary cases). The assembly is below 3000 characters. No new node has a proof step longer than 2000 characters because all are delivered statement-only.
+
+## Not duplicates
+
+lem-sf-integral-basic-realization vs lem-sf-integral-open-reduction-comparison: the existing node gives only the J_j comparison; the new node identifies primitive P, tensor, S and the specified S_pJ_j strict tower as well.
+
+lem-sf-integral-basic-realization vs lem-fix-compactification-completed-realization: the existing node compares ordinary completed-ring Rp_*j_! with compact support and projection, without a Tor bound; the new primitive node compares simultaneous varying-ring operations with their reduction-tower definitions, including standalone P, tensor and S.
+
+lem-sf-integral-basic-realization vs lem-pur-normalized-completed-operation-models: the existing construction is only for tensor and pullback models; the new node includes direct image, open extension and the exact compact-support quotient tower.
+
+lem-sf-integral-expression-recursion vs lem-pur-finite-expression-reduction-comparison: the existing grammar has only tensor, pullback and units; the new grammar has S_p and J_j and asserts agreement with the independently specified compact-support comparison.
+
+lem-sf-integral-expression-recursion vs lem-pur-expression-counit-substitution-coherence: the existing node treats tensor/pullback substitution; it supplies neither S_p/J_j recursion nor equality with the fixed compact-support quotient-tower comparison.
+
+lem-sf-integral-expression-recursion vs lem-sf-cbc-word-reconstruction-coherence: the existing node treats unary composable words with prescribed q_e; the new node has binary tensor trees, actual counit formula for a_A, whole-system coefficient identity, and the S_pJ_j comparison.
+
+lem-sf-expression-contextual-intertwining vs lem-sf-pf-coefficient-realization-transport: the existing node assumes the whiskered primitive comparisons already intertwine; the new node deduces all contexts from primitive coefficient squares and recursive counit comparisons, for arbitrary unary/binary signatures.
+
+lem-sf-expression-contextual-intertwining vs lem-pur-expression-counit-substitution-coherence: the existing node is for the specific pullback/tensor grammar and assumes an already intertwined structural map; the new abstract assertion starts with a coefficient square and performs adjunction cancellation before arbitrary unary/binary context closure.
+
+lem-sf-expression-contextual-intertwining vs lem-sf-generator-reduction-coherence: the existing node supplies geometric coefficient squares for words of length at most three; the new conditional categorical theorem transports such squares through L and arbitrary contexts, without constructing any geometric generator.
+
+Whole-DAG statement searches were made for expression/counit/whisker/realization, together with exact id and concept searches in Lean. Blueprint ancestor is fix-prop-coherence; blueprint searches for realization, expression tree, whiskering, total-limit, expression, counit and Roos found no exact statement of a proposed node. The new nodes are not imported blueprint restatements. The same blueprint source sentence motivates several independent obligations; it does not itself state any one of them.
+
+Mathlib hits include ordinary AdicCompletion, categorical units/counits, monoidal transport and mate/whisker equations. They are ingredients, not one-line specializations giving the specified semilinear towers, the expression induction with coefficient identity, or the full conditional context-transport theorem. Logged searches are copied exactly to each node, with a second semantic phrasing.
+
+## Preservation map and complete inherited arguments
+
+Old step 1: reuse lem-pur-normalized-actual-reconstruction-maps and the simultaneous/evaluated-operation nodes in assembly step 1. Old step 2: reuse lem-sf-semilinear-proper-open-mate-pasting in assembly step 2. Old step 3: new integral-basic-realization. Old step 4: new integral-expression-recursion. Old step 5: its first paragraph belongs to integral-expression-recursion, its basic squares to existing generator-reduction-coherence, and its adjunction cancellation to new expression-contextual-intertwining. Old step 6: context induction and equality transport belong to expression-contextual-intertwining; the geometric compatible-refinement argument remains in assembly step 5 with the existing compatible-tower and proper/open nodes. Old step 7: naturality is in recursion; the boundary checks remain in assembly step 6 and the review above. No old argument is discarded.
+
+### Inherited step 1 (verbatim)
+
+Use the simultaneous semilinear-section models of [lem-coef-semilinear-derived-sections] for the operations in the statement. In particular pullback, tensor, open extension, direct image, their adjunctions and coefficient comparisons are constructions on one derived system category, including their morphisms. The evaluated adjunctions are those of [lem-pur-coefficient-system-derived-comparison]. Write $u:1\to\mathcal L\mathcal R$ and $e:\mathcal R\mathcal L\to1$ for the actual unit and counit of [lem-coef-derived-system-evaluation-calculus]. If $N$ is normalized, [lem-coef-normalized-dvr-effectivity] identifies each $e_{N,n}$ with an isomorphism, the scalar-extension adjoint of the total-limit projection. Since derived evaluations detect isomorphisms, $e_N$ itself is an isomorphism of semilinear systems. This uses detection of isomorphisms only. The limit $\mathcal L N$ is derived complete, and its reductions have precisely the constructibility and common bounds of $N$, by the same counit isomorphisms and [def-weil-derived-complete-integral-detailed].
+
+For a derived-complete input $K$, [def-weil-derived-complete] gives an isomorphism $K\cong\mathcal L\mathcal R K$: its Roos triangle and the canonical total-limit Roos triangle are triangles of the same reduction tower. This existence statement alone does not identify that isomorphism with $u_K$. Instead, the adjunction identity $\mathcal L(e_N)\circ u_{\mathcal L N}=1$, with $e_N$ invertible, proves that $u_{\mathcal L N}$ is invertible. Take $N=\mathcal R K$, which is normalized by derived tensor reassociation, and use naturality of $u$ along the preceding isomorphism to conclude that the specified $u_K$ is invertible. Thus on the complete/normalized domains we have the specific inverse equivalence with unit $u$ and counit $e$. No arbitrary choice of a morphism between Roos triangles defines a comparison.
+
+Cited statements: lem-coef-semilinear-derived-sections, lem-pur-coefficient-system-derived-comparison, lem-coef-derived-system-evaluation-calculus, lem-coef-normalized-dvr-effectivity, def-weil-derived-complete, def-weil-derived-complete-integral-detailed, def-coef-normalized-dvr-tower, lem-pur-derived-change-of-rings
+
+### Inherited step 2 (verbatim)
+
+Apply [lem-sf-semilinear-proper-open-mate-pasting] to the inverse ring sequence $C_n=A_n$. Its intrinsic clopen projection gives $\alpha_Q$, its proper mate $\Gamma_Q$, and the specific open-restriction isomorphism $\lambda_Q$; thus $\lambda_QP_i\Gamma_Q=1$. The geometry, properness and quasi-compact open hypotheses are exactly those of the square under consideration. Its scalar-restriction clause, with $B=R$ and the quotient maps $R\to A_n$, identifies this mate with the normalized constant-$R$ tower map of [lem-cbc-strict-tower-proper-open-calculus]. The bounded constructible etale-origin levels satisfy that node's finite evaluation hypothesis. All quotient transitions are retained by these constructions.
+
+The same new lemma gives horizontal, vertical, base-change, identity and refinement pasting as identities inside $D(\mathscr S)$. In particular its assertion is stronger than merely observing these equations after scalar restriction. These are the proper/open generators and equations required below; the remaining projection and exchange maps are their specified composites with tensor comparisons, units and counits [def-exchange-projection].
+
+Cited statements: lem-sf-semilinear-proper-open-mate-pasting, lem-cbc-strict-tower-proper-open-calculus, def-exchange-projection
+
+### Inherited step 3 (verbatim)
+
+For a basic operation $A$, first specify $d_A(K):\mathcal L A\mathcal R K\xrightarrow{\sim}A_{\mathrm{int}}K$ (with two inputs for tensor). For $P_v$ and tensor these are the identifications with the strict reduction-tower formulas of [def-pur-integral-derived-operations, lem-pur-integral-operations-well-defined]: the total limit $\mathcal L_W$ of a strict tower and the cone model $\operatorname{Cone}(1-s)[-1]$ on termwise products are identified by the natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the termwise products representing the derived products; the simultaneous models ensure agreement on morphisms and transitions, not merely on evaluated objects. For $S_p$ use the proper direct-image reduction-tower formula of [def-weil-derived-direct-image]. For $S_pJ_j$, [lem-sf-compact-support-restriction-of-scalars] gives the transition from $m$ to $n$: apply $Rp_{*,m}j_!$ to $K_m\to\operatorname{Res}_{m,n}K_n$, then its coefficient-restriction isomorphism. These are exactly the transitions in [def-weil-integral-rational-qbar-compact-support]. The simultaneous system construction and its total limit therefore give $d_{S_pJ_j}$ to precisely that functor, including its maps.
+
+For standalone open extension apply [lem-sf-integral-open-reduction-comparison]. It supplies the actual strict map $r_j$, completeness, and $d_{J_j}=u_{j_!K}^{-1}\mathcal L(r_j)^{-1}$ with the localized ringed-site open adjunction. Its quasi-compactness hypothesis holds for these opens. The common bounds remain the expressly assumed bounds of every intermediate system.
+
+Cited statements: def-pur-integral-derived-operations, lem-pur-integral-operations-well-defined, def-weil-derived-direct-image, def-weil-integral-rational-qbar-compact-support, lem-sf-compact-support-restriction-of-scalars, lem-coef-semilinear-derived-sections, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-sf-integral-open-reduction-comparison
+
+### Inherited step 4 (verbatim)
+
+Define the comparisons by a genuine induction on expression trees. For a variable $K_i$ put $c_{K_i}=u_{K_i}^{-1}$. For a normalized system $M$ at the source of a unary operation $A$, set
+$$a_A(M)=d_A(\mathcal L M)\circ\bigl(\mathcal L A(e_M)\bigr)^{-1}:\mathcal L A M\longrightarrow A_{\mathrm{int}}\mathcal L M.$$
+For tensor use
+$$a_\otimes(M,N)=d_\otimes(\mathcal L M,\mathcal L N)\circ\bigl(\mathcal L(e_M\otimes^L e_N)\bigr)^{-1}.$$
+The inverses exist by step 1. If $M=V(\mathcal R K_1,\ldots,\mathcal R K_s)$, define $c_{AV}=A_{\mathrm{int}}(c_V)\circ a_A(M)$. If $M=V(\mathcal R K_i)$ and $N=T(\mathcal R K_i)$, define $c_{V\otimes T}=(c_V\widehat\otimes^Lc_T)\circ a_\otimes(M,N)$. These formulas cover every unary and binary node and decrease tree size at every invocation. Their sources and targets are the stated ones, and each factor is natural and invertible. The induction is legitimate because every intermediate system is assumed normalized, with compatible etale-origin witnesses and common finite cohomological and Tor intervals.
+
+The direct identification $d_{S_pJ_j}$ of step 3 agrees with the recursive composite for $S_p(J_j(-))$. Indeed $r_j$ identifies $\mathcal R(j_!K)$ with $J_j\mathcal R K$ on the very same quotient tower, and the recursion inserts $e_{J_j\mathcal R K}^{-1}$. In the composite the adjacent $\mathcal R\mathcal L$ insertion cancels by $e_{\mathcal R K}\circ\mathcal R(u_K)=1$ and naturality of $e$; the remaining tower is $S_pJ_j\mathcal R K$ with the transitions specified in step 3. The total-limit and resolution comparisons of [lem-coef-derived-system-evaluation-calculus, lem-coef-semilinear-derived-sections] make this an equality of the prescribed comparisons. In particular the recursion does not replace the compact-support definition by an unrelated isomorphic functor.
+
+Cited statements: lem-coef-derived-system-evaluation-calculus, lem-coef-normalized-dvr-effectivity, lem-coef-semilinear-derived-sections, def-weil-integral-rational-qbar-compact-support, lem-sf-compact-support-restriction-of-scalars
+
+### Inherited step 5 (verbatim)
+
+For each basic operation the actual coefficient map is
+$$r_A=e_{A\mathcal R K_i}\circ\mathcal R(d_A^{-1})$$
+by [lem-sf-generator-reduction-coherence]; the two-input formula holds for tensor. Its hypotheses hold because all inputs and intermediate systems are normalized and satisfy the stated origin and common bounds. Substitute these basic maps along a finite expression tree to define $r_V$. Induction on tree size using step 4, naturality of $e$ and $e_{\mathcal R K}\mathcal R(u_K)=1$ gives
+$$r_V=e_{V(\mathcal R K_i)}\circ\mathcal R(c_V^{-1}).$$
+The base case is $r_{K_i}=1$ by that triangle identity; for a unary node naturality moves the inner comparison past $e$, and for a tensor node the same substitution applies in both slots.
+
+For every basic generator $\tau:V\to T$, the same lemma supplies the system square
+$$\tau_{\mathcal R K_i}r_V=r_T\mathcal R(\tau_{\rm int}).$$
+It covers the normalized open maps and proper/open interchange as well as tensor, pullback and adjunction generators, before evaluation. Projection and exchange are the composites prescribed by [def-exchange-projection]; paste the squares for their factors. The tensor/square identifications in these composites are those of [lem-weil-pbc-ringed-exchange-tensor-coherence].
+
+Apply $\mathcal L$ to this square and substitute the displayed expression for $r_V,r_T$. Naturality of $u$ and $\mathcal L(e_N)u_{\mathcal LN}=1$ cancel the outer unit/counit factors, giving
+$$c_T\circ\mathcal L(\tau_{\mathcal R K_i})=\tau_{\rm int}\circ c_V.$$
+This establishes the generator intertwining equation. Extension to arbitrary outer expression contexts is the separate induction in step 6.
+
+Cited statements: lem-sf-generator-reduction-coherence, lem-coef-derived-system-evaluation-calculus, def-exchange-projection, lem-weil-pbc-ringed-exchange-tensor-coherence
+
+### Inherited step 6 (verbatim)
+
+The generator equation remains true under every allowed expression context. For a unary outer operation $A$, insert the two equations defining $c_{AV}$ and $c_{AT}$ from step 4 and use naturality of $a_A$ at $\tau:V\to T$; the middle square is precisely $A_{\mathrm{int}}$ of the equation in step 5. For tensor with a second expression use naturality of $a_\otimes$ in the chosen slot; if both slots change, factor the map into the two slot maps and use bifunctoriality. Induction on the number of outer nodes proves all the required whiskering equations. Composites of generators are covered because the intervening $c_V^{-1}c_V$ cancel.
+
+Apply this result to the proper/open equations proved inside the semilinear category in step 2. The total-limit functor preserves each equality of transformations. Conjugating by the $c_V$ of step 4 gives its integral identity, with the canonical compositors checked in step 5. In particular the comparison of two nested compactifications is the composite of their direct-image/open compositors and the intervening proper/open generator, so the same calculation proves its compatibility. When compatible composition towers are refined, [lem-cbc-compactifiable-compatible-tower] gives the commuting proper maps on the ambient and intermediate schemes; the corresponding proper/open squares need not be cartesian. Step 2 applies to precisely these general commutative squares, so its vertical and horizontal laws identify the two refined composites. Their common-refinement equalities then survive total limit with the comparisons just proved. This proves the required refinement and nested-composition compatibility; it does not infer an equality from finite evaluations or assert a canonical lift of unrelated finite-level arrows.
+
+Cited statements: lem-coef-derived-system-evaluation-calculus, lem-weil-pbc-mate-pasting, lem-cbc-strict-tower-proper-open-calculus, lem-cbc-compactifiable-compatible-tower, def-weil-compactifications-refinements, def-weil-integral-rational-qbar-compact-support
+
+### Inherited step 7 (verbatim)
+
+Naturality follows from the displayed recursion, since $u,e,d_A$ and all the adjunction transposes are natural. For the zero input each additive unary operation and tensor with zero is zero, and the maps into and out of the resulting zero object are its unique maps. For the identity open, its open unit is identity, so the formulas for $\beta,\gamma$ and $\Gamma$ give identity comparisons. For the empty open, $J_j=0$, so those formulas give the unique zero maps. For an identity square the clopen projection is identity and the mate triangle identities give the identity direct-image or open transformation. For an equal-index quotient $A_n\to A_n$, reduction is the identity coefficient map and its comparison is the tensor unit identification. A single compactification is exactly the $d_{S_pJ_j}$ checked in steps 3 and 4. For $W=\operatorname{Spec}k$ and a degree-zero free coefficient module the recursion is ordinary tensor reassociation and the inverse of its reduction-limit unit; rank zero is the preceding zero case. All indices are $n\geq1$; no use of an undefined $n=0$ level occurs. These checks impose no extra geometric or boundedness hypotheses.
+
+Cited statements: lem-coef-derived-system-evaluation-calculus, lem-sf-open-tensor-normalization, lem-cbc-strict-tower-proper-open-calculus
+
+
+## Final type audit
+
+I made explicit in the recursion hypothesis that R and L carry the respective full domains into each other; this is supplied by the existing actual-reconstruction theorem and the counit identifications, rather than silently applying d_A at an input outside its complete domain. The parent statement remains identical to the repository statement. The abstract context cancellation is valid even for a noninvertible generator: transpose the coefficient square under R adjoint L, then cancel the prescribed c maps. Naturality of a_A and a_B then supplies the unary and two binary-slot induction cases. Mathlib monoidal transport and mate-whiskering hits do not package this arbitrary mixed expression induction with its reduction-square hypothesis.

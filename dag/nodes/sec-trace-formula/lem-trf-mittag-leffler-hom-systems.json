@@ -13,67 +13,29 @@
  ],
  "proof": [
   {
-   "text": "Fix $i\\in I$ and write $u_s:M_s\\to M$ for the given colimit maps. Form the set $B=\\coprod_{a,b\\ge0}\\operatorname{Mat}_{b\\times a}(R)$ and, for $t\\in\\operatorname{Mat}_{b\\times a}(R)$, put $Q_t=R^b/\\operatorname{im}(t)$. Every $Q_t$ is finitely presented and every finitely presented $R$-module is isomorphic to some $Q_t$, directly from its finite presentation [def-sc-finitely-presented-module]. Consequently $A=\\{(t,z):t\\in B,\\ z\\in\\ker(u_i\\otimes\\mathrm{id}_{Q_t})\\}$ is a set. For $\\alpha=(t,z)$ put $Q_\\alpha=Q_t$ and $z_\\alpha=z$, and let $T=\\prod_{\\alpha\\in A}Q_\\alpha$, the module of all families. This explicitly supplies the set of test modules used by the source; no product over a proper class is taken.",
+   "text": "Fix $i\\in I$ and write $u_s:M_s\\to M$ for the colimit maps. Apply [lem-trf-universal-tensor-kernel-witness] to $P=M_i$, $f=u_i$ and the tensor-product Mittag-Leffler module $M$. The source $M_i$ is finitely presented by hypothesis. Obtain a set-sized $R$-module $T$ and $z\\in M_i\\otimes_RT$ with $(u_i\\otimes\\mathrm{id}_T)(z)=0$, such that each $x\\in\\ker(u_i\\otimes\\mathrm{id}_Q)$ for finitely presented $Q$ equals $(\\mathrm{id}_{M_i}\\otimes q)(z)$ for some $R$-linear $q:T\\to Q$.",
    "uses": [
-    "def-sc-finitely-presented-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), choice of the set B and pairs (Q,x)."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-finite-presentation-tensor-products] to $M_i$ and the family $(Q_\\alpha)$ to obtain $z\\in M_i\\otimes_RT$ whose image under the canonical comparison is $(z_\\alpha)_\\alpha$. Put $y=(u_i\\otimes\\mathrm{id}_T)(z)$. Its image under $\\theta_{M,(Q_\\alpha)}$ is zero: the $\\alpha$-coordinate is $(u_i\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$. The comparison square commutes because on a pure tensor $m\\otimes(q_\\alpha)_\\alpha$ both composites have $\\alpha$-coordinate $u_i(m)\\otimes q_\\alpha$; pure tensors generate [def-weil-pbc-module-tensor-product]. The tensor-product Mittag-Leffler hypothesis [def-trf-mittag-leffler-module] makes $\\theta_{M,(Q_\\alpha)}$ injective. Thus $y=0$.",
-   "uses": [
-    "lem-trf-finite-presentation-tensor-products",
-    "def-weil-pbc-module-tensor-product",
-    "def-trf-mittag-leffler-module"
+    "lem-trf-universal-tensor-kernel-witness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), the first commutative square and the kernel element x."
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1): finite-presentation representatives, product of all kernel pairs, and the first commutative square; tensor-product input Tag 059K (proposition-fp-tensor)."
    }
   },
   {
-   "text": "By [lem-weil-pbc-tensor-commutes-with-colimits], the maps $u_s\\otimes\\mathrm{id}_T$ exhibit $M\\otimes_RT$ as the colimit of $M_s\\otimes_RT$. Since the image of $z$ is zero, [lem-weil-pbc-filtered-colimit-modules-elementwise] gives $j\\ge i$ with $(f_{ij}\\otimes\\mathrm{id}_T)(z)=0$. Project to each $Q_\\alpha$. The resulting equality is $(f_{ij}\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$, by the same pure-tensor calculation as in step 2 [def-weil-pbc-module-tensor-product]. In particular, for every $t\\in B$ and every $v\\in\\ker(u_i\\otimes\\mathrm{id}_{Q_t})$, the coordinate $\\alpha=(t,v)$ gives $(f_{ij}\\otimes\\mathrm{id}_{Q_t})(v)=0$. For any finitely presented $Q$, choose an isomorphism $e:Q\\to Q_t$. The maps $1\\otimes e$ and $1\\otimes e^{-1}$ are inverse and intertwine all these maps: on $m\\otimes q$ the commutation identity sends it to $f(m)\\otimes e(q)$. Applying this identity and then the inverse transfers the kernel inclusion to $Q$. Therefore, for every finitely presented $Q$, $\\ker(u_i\\otimes\\mathrm{id}_Q)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_Q)$. The single index $j$ works for all these $Q$.",
+   "text": "Apply [lem-trf-tensor-witness-eventual-factorization] to the given small nonempty directed system, its colimit cocone, the index $i$, and the $T,z$ from step 1. Both the vanishing and the universal evaluation hypothesis are precisely the conclusions of step 1, and every stage is finitely presented. Obtain one $j\\ge i$ such that for every $k\\ge j$ some $R$-linear $h_k:M_k\\to M_j$ satisfies $f_{ij}=h_k\\circ f_{ik}$. The same $j$ will work for every target module $N$.",
    "uses": [
-    "lem-weil-pbc-tensor-commutes-with-colimits",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-module-tensor-product"
+    "lem-trf-tensor-witness-eventual-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), killing the universal kernel element; use the given finitely presented directed system directly, as in Tag 059L, lemma-kernel-tensored-fp."
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), death of the product-kernel element, implemented directly in the given colimit as in Tag 059L (lemma-kernel-tensored-fp); Tag 059E (proposition-ML-characterization), proof of (2) implies (3), using Tag 059D (lemma-domination) and Tag 059C (lemma-domination-fp)."
    }
   },
   {
-   "text": "Fix $k\\ge j$. Since $u_i=u_k\\circ f_{ik}$, functoriality of tensor [def-weil-pbc-module-tensor-product] and step 3 give $\\ker(f_{ik}\\otimes\\mathrm{id}_Q)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_Q)$ for every finitely presented $Q$. The cokernel of $f_{ik}$ is finitely presented, as the following finite presentation shows. Choose generators $p_1,\\ldots,p_c$ of $M_i$ and a presentation $M_k=R^b/\\operatorname{im}(D)$ with $D:R^a\\to R^b$, with all integers finite [def-sc-finitely-presented-module]. Choose lifts $v_r\\in R^b$ of $f_{ik}(p_r)$. Then $M_k/f_{ik}(M_i)$ is the quotient of $R^b$ by $\\operatorname{im}(D)+\\sum_{r=1}^cRv_r$, hence is the cokernel of the finite matrix $(D\\ v_1\\ \\cdots\\ v_c):R^{a+c}\\to R^b$. Indeed an element of $R^b$ maps to zero in this quotient exactly when its image in $M_k$ is a linear combination of the $f_{ik}(p_r)$, which is exactly membership in that displayed submodule.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-sc-finitely-presented-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059E, proposition-ML-characterization, proof of (2) implies (3), transitivity of domination and finite presentation of the transition cokernel."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-tensor-kernel-factorization] with $U=M_i$, $V=M_k$, $W=M_j$, $f=f_{ik}$ and $g=f_{ij}$. Both required hypotheses were verified in step 4: the cokernel of $f_{ik}$ is finitely presented and every finitely presented tensor test gives the stated kernel inclusion. Obtain an $R$-linear $h_k:M_k\\to M_j$ with $f_{ij}=h_k\\circ f_{ik}$. This applies to every $k\\ge j$, with the same $j$ chosen in step 3.",
-   "uses": [
-    "lem-trf-tensor-kernel-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 059E, proposition-ML-characterization, proof of (2) implies (3), application of Tag 059D."
-   }
-  },
-  {
-   "text": "Let $N$ be any $R$-module and $k\\ge j$. An element of the image of $\\operatorname{Hom}_R(M_j,N)\\to\\operatorname{Hom}_R(M_i,N)$ has the form $a\\circ f_{ij}$ for $a:M_j\\to N$. Step 5 rewrites it as $(a\\circ h_k)\\circ f_{ik}$, so it is in the image from $M_k$. Conversely, if $b:M_k\\to N$, then $b\\circ f_{ik}=(b\\circ f_{jk})\\circ f_{ij}$ by the directed-system identity $f_{ik}=f_{jk}\\circ f_{ij}$. Thus the two images are equal for every $k\\ge j$. This proves the required assertion for all $i$ and $N$, without countability or any finiteness condition on $N$.",
+   "text": "Let $N$ be any $R$-module and $k\\ge j$. An element of the image of $\\operatorname{Hom}_R(M_j,N)\\to\\operatorname{Hom}_R(M_i,N)$ has the form $a\\circ f_{ij}$ for $a:M_j\\to N$. Step 2 rewrites it as $(a\\circ h_k)\\circ f_{ik}$, so it is in the image from $M_k$. Conversely, if $b:M_k\\to N$, then $b\\circ f_{ik}=(b\\circ f_{jk})\\circ f_{ij}$ by the directed-system identity $f_{ik}=f_{jk}\\circ f_{ij}$. Thus the two images are equal for every $k\\ge j$. This proves the required assertion for all $i$ and $N$, without countability or any finiteness condition on $N$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -83,13 +45,8 @@
   }
  ],
  "proof_deps": [
-  "def-sc-finitely-presented-module",
-  "lem-trf-finite-presentation-tensor-products",
-  "def-weil-pbc-module-tensor-product",
-  "def-trf-mittag-leffler-module",
-  "lem-weil-pbc-tensor-commutes-with-colimits",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-trf-tensor-kernel-factorization"
+  "lem-trf-universal-tensor-kernel-witness",
+  "lem-trf-tensor-witness-eventual-factorization"
  ],
  "proof_origin": {
   "by": "document",
@@ -203,19 +160,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-mittag-leffler-hom-systems",
   "worker": "stage1",
-  "summary": "Read Stacks Tags 059M and 059E and the supporting Tags 059K, 059C and 059D. Retained the statement with arbitrary small directed index and arbitrary target N. Wrote the set of finite-matrix test modules, the universal product-kernel argument, its death at one later stage, the finite presentation of each transition cokernel, and both Hom image inclusions. Added only two supporting statement-only nodes (tensoring finite presentations with arbitrary products; tensor-kernel tests detecting factorization); reused the existing tensor-colimit and elementwise-colimit Mathlib leaves. No project Lean attachment was found.",
-  "blueprint": "Realizes the inherited ancestor proof supporting Tag 059X, lemma-countgen-projective, sentence that (Hom_R(M_i,N_1)) is Mittag-Leffler: steps 1-3 implement Tag 059M product-kernel argument, steps 4-5 implement Tag 059E (2) to (3), and step 6 implements (3) to (4). Historical blueprint ancestry and unit binding are retained."
+  "summary": "Repair of the 2026-10-22 human-requested re-split. Retained the exact statement and existing Lean attachment. Extracted two independent statement-only tasks of comparable proof size: construct one universal tensor-kernel witness for a map from a finite presentation into a Mittag-Leffler module, then turn any supplied witness into eventual transition factorizations. The parent only applies these results and proves both Hom image inclusions. All six old steps and their citations are preserved verbatim in report.md, with allocation and full arguments for the new interfaces. Both new nodes were searched in the entire DAG, blueprint, project Lean and Mathlib; no match or usable upstream attachment was found. Landing-return repair (2026-10-22): compared the retained returned head field-by-field with the current repository item (identical), re-read both cited witness statements and all reused source interfaces, and rebased via the authorized delivery tool onto current origin/sheaf-dag; report records the promotion failure and current-base review. Current-DAG repair continuation (2026-10-23): initial server dry run passed at 819e030c19d. Re-read the current source and all eight reused interfaces, confirmed the returned six-step base is byte-identical to the current item, retained both independently searched witness tasks and verbatim citations, and documented the current-base promotion-return response in report.md. Assembly remains 1508 characters; statement, route and Lean metadata are preserved.",
+  "blueprint": "Realizes the inherited ancestor proof supporting Tag 059X, lemma-countgen-projective, sentence that (Hom_R(M_i,N_1)) is Mittag-Leffler: steps 1-3 implement Tag 059M product-kernel argument, steps 4-5 implement Tag 059E (2) to (3), and step 6 implements (3) to (4). Historical blueprint ancestry and unit binding are retained. Re-split allocation: the universal-witness node carries old steps 1-2 and the isomorphism transport in step 3; the eventual-factorization node carries the remaining step 3 and steps 4-5. The Hom image assembly remains in the item; inherited chapter/unit/ancestor are unchanged."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q89-0b45ab9c9",
-  "group": "Q89",
+  "reviewer": "NT-cc-Q71-276364963",
+  "group": "Q71",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-0b45ab9c9 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and wrote review.md. Stacks 059M/059E support all six steps; 059K and 059C–059D support both new nodes with the stated hypotheses. Checked kernel directions, uniform index, edge cases, duplicates, and acyclic dependencies. No long steps, prohibited machinery, missing citations, or repairs found."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-276364963 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is a landing-promotion re-push. The item and both new nodes are identical to the head 6024fef2 once the JSON is normalized; only split_report.date and the summary changed. The same content was already PASSed at a52024cc, 24c06334 and 6024fef2. I re-read all of the mathematics on this base. Item: the statement is unchanged (Stacks 059E (3)=>(4), arbitrary directed I and N). Step 1 cites the universal witness with P=M_i and f=u_i; its hypotheses are exactly that M_i is finitely presented and M is Mittag-Leffler. Step 2 cites the eventual factorization with the T,z of step 1 and gives one j and, for every k>=j, h_k with f_ij=h_k∘f_ik. Step 3 proves both Hom-image inclusions by composition. lem-trf-universal-tensor-kernel-witness is true: T is the product of the Q_t over pairs (t,x) of a finite matrix t and a kernel element x. The 059K bijection theta_P gives z. theta_M∘(f⊗1)=∏(f⊗1)∘theta_P and theta_M is injective, so (f⊗1)z=0. q=e^-1∘pi_(t,x_t) evaluates z to x. This matches algebra.tex l.21443ff, 059M (2)=>(1). lem-trf-tensor-witness-eventual-factorization is true without the Mittag-Leffler hypothesis. Tensor commutes with colimits and the elementwise filtered criterion gives j with (f_ij⊗1_T)z=0. Then ker(u_i⊗Q)⊆ker(f_ij⊗Q), and ker(f_ik⊗Q)⊆ker(u_i⊗Q) for k>=j. The augmented matrix makes coker f_ik finitely presented, and lem-trf-tensor-kernel-factorization (059D/059C) gives h_k. Sources 059L, 059E and 059M have been checked by label. Edge cases P=0, f=0, R=0 and singleton I all hold. Re-split note: the six base steps are kept in the report. Old steps 1-2 and the transfer in step 3 go to node 1; the element death in step 3 and old steps 4-5 go to node 2; old step 6 is item step 3 verbatim. No argument is summarised or dropped, the two nodes are of comparable size, and the assembly is 1508 characters. Duplicates checked and excluded: domination-pushout-universal-injective, module-finitely-presented-directed-colimit, tensor-kernel-factorization, finite-presentation-tensor-products. eventual-domination cites the item, so citing it here would be circular. The new nodes have stmt_deps only on definitions, so there is no cycle, and no SGA source is used. Maintainer note: this needs L promotion, not another worker round."
  },
  "lean": {
   "module": "Sheaf.RingTheory.MittagLefflerHomSystems",
@@ -235,5 +192,16 @@
   "result": "fix",
   "note": "Mathematics, dependencies, universes, docstrings, exact signature, edge cases, and route constraints pass; scompile.py reproduced both checks cleanly. Repaired H11 with the complete replacement report in fixes/lem-trf-mittag-leffler-hom-systems.report.md. Full findings are in review.md; repository heads were unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

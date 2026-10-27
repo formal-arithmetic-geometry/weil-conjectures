@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-space-qc-open-boundary-ideal",
+ "kind": "statement",
+ "title": "Finite-type ideal defining the boundary of a quasi-compact open space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Open and closed immersions mean representable morphisms whose scheme base changes have the indicated property [def-weil-open-immersion, def-weil-closed-immersion]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme; it is quasi-separated if its absolute diagonal is quasi-compact on scheme tests. Morphism properties use [def-sfb-space-morphism-properties]. Let $T$ be a quasi-compact quasi-separated algebraic space and let $U\\subseteq T$ be a quasi-compact open subspace. Then there exists a finite-type quasi-coherent ideal $\\mathcal K\\subseteq\\mathcal O_T$ such that $|V(\\mathcal K)|=|T|\\setminus|U|$ and $\\mathcal K|_U=\\mathcal O_U$. Here $V(\\mathcal K)$ is the closed subspace defined by this ideal [lem-sfb-space-ideal-closed-subspace-correspondence], and point sets carry the atlas topology [def-a1-space-point-topology]. No Noetherian or reducedness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), implication (2) to (3); the unit restriction follows from the displayed equality of vanishing sets."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=|T|\\setminus|U|$. By [lem-a1-space-point-open-calculus] the open subspace $U$ has $|U|$ identified with an open subset of $|T|$, so $C$ is closed. By [lem-sfb-space-reduced-closed-support] choose the reduced closed subspace $Z\\hookrightarrow T$ with $|Z|=C$. The ideal correspondence [lem-sfb-space-ideal-closed-subspace-correspondence] gives its quasi-coherent ideal $\\mathcal J=\\ker(\\mathcal O_T\\to i_*\\mathcal O_Z)$. On $U$ the base-changed closed subspace is empty: its point space is the inverse image of $C$, which is empty. On each scheme test the closed immersion with empty point space has zero structure sheaf, so the quotient description in the correspondence gives $\\mathcal J|_U=\\mathcal O_U$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-module-fp-directed-approximation] to $\\mathcal J$ on $T$. The assumed quasi-compact scheme atlas of $T$ has continuous surjective point map by [lem-a1-space-point-open-calculus], so $|T|$ is quasi-compact. Absolute quasi-separatedness is the diagonal hypothesis of this item. We obtain a small filtered diagram of finitely presented quasi-coherent modules $\\mathcal F_a$ and maps $\\phi_a:\\mathcal F_a\\to\\mathcal J$ whose colimit in all module sheaves is $\\mathcal J$. We will take the image of a single $\\phi_a$, rather than require the approximating modules to embed.",
+   "uses": [
+    "lem-sfb-space-module-fp-directed-approximation",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855, finite-type approximation step; Tag 0829 (lemma-directed-colimit-finite-type), proof via Tag 07V9."
+   }
+  },
+  {
+   "text": "The assumed quasi-compact scheme atlas of $U$ has a continuous surjective point map by [lem-a1-space-point-open-calculus], so $|U|$ is quasi-compact. By [lem-sfb-qc-space-affine-etale-atlas] choose a representable surjective etale map $W=\\operatorname{Spec}A\\to U$. Its composite $W\\to T$ is representable etale: on a scheme test $B\\to T$, the fibre product $B_U$ is open in $B$, and $W\\times_TB\\to B$ is the composite of an etale map to $B_U$ with its open inclusion. Both the open-immersion and composition assertions are [lem-weil-pbc-etale-composition-cancellation]. Thus $W\\to T$ is an affine object of the small etale site.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-qcoh-affine-chart-calculus], evaluation on $W$ computes the filtered colimit of step 2, giving $\\varinjlim_a\\mathcal F_a(W)\\cong\\mathcal J(W)=A$. By the element-representation clause of [lem-weil-pbc-filtered-colimit-modules-elementwise], there are an index $a$ and $s\\in\\mathcal F_a(W)$ with $\\phi_a(s)=1\\in A$. Hence the image of $\\phi_a$ on $W$ is the whole module $A$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3)."
+   }
+  },
+  {
+   "text": "Set $\\mathcal K=\\operatorname{im}(\\mathcal F_a\\xrightarrow{\\phi_a}\\mathcal J\\hookrightarrow\\mathcal O_T)$. Images of quasi-coherent modules are quasi-coherent and computed on affine etale charts by [lem-sfb-space-qcoh-affine-chart-calculus]. On each such chart $V$, $\\mathcal F_a(V)$ is finitely presented, hence finitely generated; the images of a finite generating set generate $\\mathcal K(V)$. The same chart criterion proves that $\\mathcal K$ is of finite type. Its inclusion into $\\mathcal O_T$ makes it an ideal, with $\\mathcal K\\subseteq\\mathcal J$. On $W$ it is the unit ideal by step 4. The quotient $\\mathcal O_U/\\mathcal K|_U$ therefore restricts to zero on the surjective etale covering $W\\to U$; a sheaf locally zero is zero. Consequently $\\mathcal K|_U=\\mathcal O_U$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3)."
+   }
+  },
+  {
+   "text": "By the inclusion-reversing ideal correspondence [lem-sfb-space-ideal-closed-subspace-correspondence], $\\mathcal K\\subseteq\\mathcal J$ implies $Z=V(\\mathcal J)\\subseteq V(\\mathcal K)$, so $C\\subseteq|V(\\mathcal K)|$. Conversely the restriction of $V(\\mathcal K)$ over $U$ is defined by the unit ideal, hence is empty on every scheme test. If a point of $V(\\mathcal K)$ mapped into $U$, its field-valued representative would factor through the open subspace $U$ by [lem-a1-space-point-open-calculus], producing a point in that empty fibre product. Thus $|V(\\mathcal K)|\\cap|U|=\\varnothing$, and $|V(\\mathcal K)|=C$, as required.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-module-fp-directed-approximation",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0855 (lemma-quasi-coherent-finite-type-ideals), proof of (2) implies (3); its Tag 0829 approximation input expanded using the existing Tag 07V9 node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subset with quasi compact open complement in a quasi compact quasi separated algebraic space is cut out by a finite type quasi coherent ideal",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "3dabf4d687a69515"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.isCompact_isOpen_iff_ideal is the affine-scheme case; IdealSheafData support results neither give a finite-type global ideal nor descent to an arbitrary algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a finitely generated quasi coherent ideal sheaf defining the complement of a quasi compact open algebraic space",
+   "results": {
+    "hits": [
+     "PrimeSpectrum.isCompact_isOpen_iff_ideal",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.Presentation.IsFinite",
+     "AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+     "AlgebraicGeometry.IsAffineOpen.iSup_basicOpen_eq_self_iff",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a158c7f715bc0018"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.isCompact_isOpen_iff_ideal is the affine-scheme case; IdealSheafData support results neither give a finite-type global ideal nor descent to an arbitrary algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, \"support\"",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.supportSet",
+     "AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_radical",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_pow",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "c1f517365a0a3c69"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.isCompact_isOpen_iff_ideal is the affine-scheme case; IdealSheafData support results neither give a finite-type global ideal nor descent to an arbitrary algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Tt]ype.*[Ii]deal|[Ii]deal.*[Cc]omplement|[Ii]dealSheafData",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "6e85ec5af9fcf6e4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.isCompact_isOpen_iff_ideal is the affine-scheme case; IdealSheafData support results neither give a finite-type global ideal nor descent to an arbitrary algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraicSpace|[Ii]dealSheafData.*[Ff]inite|[Ee]xists.*[Ii]deal",
+   "results": {
+    "t": "2026-10-23T22:40:06Z",
+    "tool": "grep",
+    "query": "[Aa]lgebraicSpace|[Ii]dealSheafData.*[Ff]inite|[Ee]xists.*[Ii]deal",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean"
+    ],
+    "digest": "e49f8b61f9edaec9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or affine prime spectra, not global finite-type quasi-coherent ideals on arbitrary qcqs algebraic spaces. Read PrimeSpectrum.isCompact_isOpen_iff_ideal, Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1008, and IdealSheaf/Basic.lean support clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact open algebraic subspace has complement cut out by a finitely generated quasi coherent ideal",
+   "results": {
+    "t": "2026-10-23T22:40:06Z",
+    "tool": "leansearch",
+    "query": "A quasi compact open algebraic subspace has complement cut out by a finitely generated quasi coherent ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PrimeSpectrum.isCompact_isOpen_iff_ideal",
+     "PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+     "PrimeSpectrum.isCompact_isOpen_iff",
+     "AlgebraicGeometry.isCompact_iff_exists",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen"
+    ],
+    "digest": "ce8e3a0798024b72"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or affine prime spectra, not global finite-type quasi-coherent ideals on arbitrary qcqs algebraic spaces. Read PrimeSpectrum.isCompact_isOpen_iff_ideal, Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1008, and IdealSheaf/Basic.lean support clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, \"support\"",
+   "results": {
+    "t": "2026-10-23T22:40:07Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme.IdealSheafData, \"support\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.supportSet",
+     "AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_radical",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_pow",
+     "AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ"
+    ],
+    "digest": "c1f517365a0a3c69"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or affine prime spectra, not global finite-type quasi-coherent ideals on arbitrary qcqs algebraic spaces. Read PrimeSpectrum.isCompact_isOpen_iff_ideal, Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1008, and IdealSheaf/Basic.lean support clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact open subspace of a quasi compact quasi separated algebraic space is the complement of a finite type quasi coherent ideal",
+   "results": {
+    "t": "2026-10-23T22:40:07Z",
+    "tool": "leanfinder",
+    "query": "Every quasi compact open subspace of a quasi compact quasi separated algebraic space is the complement of a finite type quasi coherent ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.isLocalization_basicOpen_of_qcqs",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.isCompact_basicOpen",
+     "AlgebraicGeometry.isRetrocompact_basicOpen",
+     "PrimeSpectrum.isCompact_isOpen_iff_ideal"
+    ],
+    "digest": "90a35418184db53f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or affine prime spectra, not global finite-type quasi-coherent ideals on arbitrary qcqs algebraic spaces. Read PrimeSpectrum.isCompact_isOpen_iff_ideal, Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1008, and IdealSheaf/Basic.lean support clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent ideal contains a finite type subideal which is the unit ideal on a prescribed quasi compact open",
+   "results": {
+    "t": "2026-10-23T22:40:08Z",
+    "tool": "leanfinder",
+    "query": "A quasi coherent ideal contains a finite type subideal which is the unit ideal on a prescribed quasi compact open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.Scheme.IdealSheafData.le_of_iSup_eq_top",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_ofIdeals_le",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.isLocalization_basicOpen_of_qcqs"
+    ],
+    "digest": "9ae7f3c507302cd0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or affine prime spectra, not global finite-type quasi-coherent ideals on arbitrary qcqs algebraic spaces. Read PrimeSpectrum.isCompact_isOpen_iff_ideal, Mathlib/RingTheory/Spectrum/Prime/Topology.lean:1008, and IdealSheaf/Basic.lean support clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-blowup-embedding-extension",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 0855 (lemma-quasi-coherent-finite-type-ideals), implication (2) to (3); the unit restriction follows from the displayed equality of vanishing sets..",
+   "via": [
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qc-open-boundary-ideal",
+  "worker": "stage1",
+  "summary": "Verified Tag 0855 without Noetherian or reducedness hypotheses. Reused reduced closed support and the ideal correspondence; expanded finite-type approximation through the existing finitely-presented approximation and affine-chart calculus, lifting the unit on one affine etale atlas. No new nodes; all six proof steps are below 2000 characters.",
+  "blueprint": "Inherited support for the compactification/proper-support chain in sk-thm-sf-ctf-stability, direct-image proof (3); realizes the Tag 0855 boundary-ideal input cited in the parent blowup-embedding construction. Latest blueprint has no separate node stating this input.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-topology, surjectivity and open-subspace calculus used to check the atlas hypothesis and support; no boundary-ideal result is taken from another route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-ee86020c7",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-ee86020c7 (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full. The math is correct; one citation is repaired. Statement: unchanged from live and side-live, where the item is still unsplit. It matches Stacks spaces-limits.tex Tag 0855 (2)=>(3) (lemma-quasi-coherent-finite-type-ideals, line 3166): same hypotheses, plus a K|_U=O_U clause that the proof also gives. Steps checked: (2) the approximation node's hypotheses hold, since |T| is quasi-compact via a continuous surjective atlas point map and the item's diagonal condition implies def-sfb-space-absolute-quasi-separated; (3) W->T is etale on scheme tests by the leaf's clauses (1)+(2) through the open B_U; (4) J is a quasi-coherent colimit, sections on W compute it, J(W)=A, and clause (1) of the elementwise leaf lifts 1 from a single stage; (5) K is the image of phi_a, i.e. the generated ideal, quasi-coherent, of finite type on charts, and unit on the cover W of U; (6) the inclusion-reversing correspondence and the point-image identity give |V(K)|=C. Edge cases U empty (Spec 0, filtered index nonempty), U=T, nonreduced k[eps], non-Noetherian k[x_i]: all fine. Duplicates: only the scheme version lemma-nagata-qc-open-complement-ideal-exists (Tag 01PH) exists; no new nodes. Batch-5: all five flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which the item's own stmt_deps already use; none is part of the trace-formula or Poincare-duality proofs. Accepted. tool_uses: lem-a1-space-point-open-calculus is generic and already cited by 107 sfb nodes; accepted. FIX: step 1 applied reduced-closed-support to C=|T|\\|U| without justifying that C is closed. It now cites lem-a1-space-point-open-calculus (|U| is open in |T|), and that node is added to step 1's uses. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQcOpenBoundaryIdeal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finiteType_ideal_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQcOpenBoundaryIdeal.lean",
+  "statement": "theorem exists_finiteType_ideal_boundary {S : Scheme.{u}} (T U : AlgebraicSpace S) (j : U ⟶ T) (hTqc : ∃ (W : Over S) (a : yoneda.obj W ⟶ T.obj.obj), CompactSpace W.left ∧ IsEtale a ∧ IsSurjective a) (hTqs : IsAbsolutelyQuasiSeparated T) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (hUqc : ∃ (W : Over S) (a : yoneda.obj W ⟶ U.obj.obj), CompactSpace W.left ∧ IsEtale a ∧ IsSurjective a) : ∃ (K : QuasiCoherentIdeal T) (Z : ClosedSubspace T), SheafOfModules.IsFiniteType (K.val : T.Modules) ∧ K.val = kernelSubobject (moduleStructureMap Z.val.arrow) ∧ pointImage Z.val.arrow.hom.hom = (pointImage j.hom.hom)ᶜ ∧ IsIso (idealTensorMap j K)",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d8265dea",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_deps, Tag 0855 (2)=>(3), module, report (Worker report + Second reading by Q154 present). Item changed only in lean + added landed def-sfb-space-absolute-quasi-separated (allowed). Statement verbatim. Hypotheses: T/U qc via compact etale+surjective scheme atlas, absolute QS (0AHR affine test), j open immersion on scheme base changes; no extra assumptions. Conclusions: K QuasiCoherentIdeal of IsFiniteType (index universe fixed by site), Z = V(K) via the correspondence's kernel clause, pointImage Z = (pointImage j)^c, IsIso idealTensorMap j K (K|_U = O_U as embedded ideal). Edge cases U empty, U=T, T empty, nonreduced/non-Noetherian OK. No duplicate or parallel landing; docstrings with source+blueprint+6 steps; sorry only; lines <=100; imports used. Advisory: owner nodes of QuasiCoherentIdeal/ClosedSubspace/moduleStructureMap reached only via correspondence stmt_deps."
+ }
+}

@@ -1,0 +1,323 @@
+{
+ "id": "lem-pur-section-source-etale-exchange",
+ "kind": "lemma",
+ "title": "Etale section-source exchange",
+ "statement": "For every finite commutative coefficient ring A and any Cartesian base-change square for h with closed sections s and s′ and chosen section square, the prescribed etale source commutes with the actual etale compactification exchange and the supported constant exchange: g* a_c followed by C and F′(beta) equals the scalar-preserving constant pullback followed by a_c′. All maps are those of [def-pur-section-compact-source-maps]; no finiteness hypothesis on the new base is imposed.",
+ "stmt_deps": [
+  "def-pur-section-compact-source-maps",
+  "def-pur-supported-constant-base-change-maps",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3; Stacks Tags 0F7F, 0D6E and 099R"
+ },
+ "proof": [
+  {
+   "text": "Put $q=js:B\\to\\bar X$. Since $pq=hs=1_B$, $q$ is a section of the separated map $p$, hence closed by [lem-weil-pbc-section-separated-closed-immersion]. Both $s,q$ are proper by [lem-weil-pbc-closed-immersion-proper]. The same reasoning applies after arbitrary base change, since $p'$ is proper in the pulled-back compactification [def-cbc-compact-support-square]. In the etale category closed direct images are exact by [lem-cbc-open-closed-recollement], so $Rs_*A_B=s_*A_B$ and $Rq_*A_B=q_*A_B$, with their canonical exact-functor identifications. All these inputs are bounded below.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-cbc-compact-support-square",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open: proper/open square with left vertical s and right vertical q; schemes.tex Tag 01KT, lemma-section-immersion"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-proper-open-interchange-coherence] to the square with top $1_B:B\\to B$, bottom $j:X\\hookrightarrow\\bar X$, left $s$ and right $q$. It gives $e:j_!s_*A_B\\xrightarrow{\\sim}Rq_*A_B$. Its injective normalization is precisely the canonical proper/open arrow stipulated in the statement. Let $d_{p,q}:R(pq)_*\\to Rp_*Rq_*$ and $d_B:R(1_B)_*\\to\\mathrm{id}$ be [lem-cbc-etale-derived-direct-image-coherence]. Define\n$$r=d_B\\circ d_{p,q}^{-1}\\circ Rp_*(e):F_h^e s_*A_B\\xrightarrow{\\sim}A_B,\\qquad a_h^e=r^{-1}.$$\nEach factor is invertible. Apply the identical definition to the primed square to obtain $e',r',a_{h'}^e$; these two cited coherence statements hold on arbitrary schemes, so no finite-type hypothesis on $B'$ has entered.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-cbc-etale-derived-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, defining resolution map; sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Write $\\bar v:\\bar X'\\to\\bar X$. Let $E_s,E_q,E_p$ denote the respective canonical module direct-image exchanges. The exact closed comparison $\\beta^e$ is $E_s(A_B)$ under $Rs_*=s_*$: both are the adjunction mate with the same sheaf counit. Equivalently it is the restriction-preserving isomorphism of [lem-pur-etale-closed-constant-tensor]. The base-change equation of [lem-cbc-proper-open-interchange-coherence], for the square of Step 2 pulled back by $\\bar v$, says\n$$E_q\\circ\\bar v^{-1}e=e'\\circ j'_!(\\beta^e)\\circ\\beta_j,$$\nwhere $\\beta_j:\\bar v^{-1}j_!\\to j'_!v^{-1}$ is the specified open comparison. By [def-cbc-exchange-map], $C^e_{h,g}=Rp'_*(\\beta_j)\\circ E_p$. Naturality of $E_p$ on $e$, followed by this displayed equation, gives\n$$Rp'_*(e')F_{h'}^e(\\beta^e)C^e_{h,g}(s_*A_B)=Rp'_*(E_q)E_p(Rq_*A_B)g^{-1}(Rp_*e).$$",
+   "uses": [
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-cbc-proper-open-interchange-coherence",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change, commutative diagram; exchange formula of the item"
+   }
+  },
+  {
+   "text": "Apply the pasting-along-adjunctions law of [lem-weil-pbc-mate-pasting](2) to the $q$ and $p$ squares, with the constant-module adjunctions and canonical square mates of [lem-weil-pbc-exchange-forget-coefficients]. It identifies $Rp'_*(E_q)E_p$ with the exchange for $pq$, conjugated by $d_{p,q}$ and $d_{p',q'}$ of [lem-cbc-etale-derived-direct-image-coherence]. Here $pq=p'q'=1$, so the outer pullback square is the identity on $g$. Its mate is the identity on $g^{-1}$ under the identity-direct-image comparison: the unit/counit formula reduces to the triangle identity (equivalently the identity mate law (4)). Consequently the equation of Step 3, postcomposed with $d_{B'}d_{p',q'}^{-1}$, becomes\n$$r'F_{h'}^e(\\beta^e)C^e_{h,g}(s_*A_B)=g^{-1}r.$$\nCompose on the right with $g^{-1}(r^{-1})$, then on the left with $(r')^{-1}$. This is exactly the asserted etale equality. This argument uses the module mate law itself, without deducing equality of module maps just from a forgetful functor.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-cbc-etale-derived-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; remark-base-change and remark-compose-base-change (Tag 07A7), omitted verification supplied by the cited categorical mate law"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-cbc-open-closed-recollement",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-section-separated-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3 component extracted from lem-pur-section-compact-source-exchange"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(shriek|compactSupport|lowerShriek).*(section|comp)|(section).*(shriek|compactSupport)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no source occurrence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change and composition of compactly supported direct image on a closed section give the identity map on the base constant sheaf",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"comp\"",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "LinearMap.baseChange_comp",
+     "TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm",
+     "TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self",
+     "TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange",
+     "LinearMap.liftBaseChange_comp",
+     "IsBaseChange.comp_equiv",
+     "IsBaseChange.lift_comp",
+     "IsBaseChange.comp"
+    ],
+    "note": "",
+    "digest": "32db24d33863dd07",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compactifiable separated finite type morphism with a closed section, the compact support base change exchange on the constant sheaf supported on the section is the identity under normalized composition with the section",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "SheafOfModules.pullback_id_comp",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit"
+    ],
+    "note": "",
+    "digest": "de4fabaaf687a71b",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported direct image of a constant sheaf supported on a retraction section is canonically the constant sheaf on the base, compatibly with arbitrary base change and etale to proetale comparison",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "CategoryTheory.Sheaf.isConstant_of_forget",
+     "CategoryTheory.Sheaf.isConstant_iff_forget",
+     "CompHausLike.LocallyConstant.counit",
+     "CompHausLike.LocallyConstant.functorToPresheavesIso",
+     "CompHausLike.LocallyConstant.functorIso",
+     "CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+     "CategoryTheory.instIsConstantObjSheafSheafCompose"
+    ],
+    "note": "",
+    "digest": "2226d40bd217c3e6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed section of a compactifiable scheme morphism the compact support exchange identifies with identity on the constant sheaf under direct image composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.LocallyRingedSpace.Γ_Spec_left_triangle",
+     "AlgebraicGeometry.ΓSpec.left_triangle",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorId",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app",
+     "AlgebraicGeometry.Scheme.Opens.topIso_hom"
+    ],
+    "note": "",
+    "digest": "d88b9e5b7d39d8f6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "(compactSupport|lowerShriek|shriek).*(section|comp)|(section).*(compactSupport|lowerShriek|shriek)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported pushforward of a sheaf on a closed section is the constant sheaf compatibly with arbitrary base change",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.sheafPushforwardContinuous",
+     "TopCat.Sheaf.pushforward_sheaf_of_sheaf",
+     "TopCat.Sheaf.pushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+     "SheafOfModules.pushforwardSections",
+     "SheafOfModules.pushforward"
+    ],
+    "note": "",
+    "digest": "2681d30f8f229658",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\", \"comp\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity normalization of a composite proper pushforward and open extension by zero for a closed section on etale sheaves, commuting with change of base",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE",
+     "AlgebraicGeometry.Scheme.Hom.naturality_assoc",
+     "AlgebraicGeometry.Scheme.Hom.appLE_map",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE'"
+    ],
+    "note": "",
+    "digest": "ec85c642903a6616",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCompactSourceExchange",
+  "date": "2026-10-25",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 3, section-source exchange component",
+   "via": [
+    "lem-pur-section-compact-source-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.SectionSourceEtaleExchange",
+  "file": "lean/Sheaf/Paper/SectionSourceEtaleExchange.lean",
+  "declaration": "AlgebraicGeometry.SectionCompactSource.etale_section_exchange_component",
+  "statement": "theorem etale_section_exchange_component [Finite A]\n    {B X B' X' : Scheme.{u}} {h : X ⟶ B} {h' : X' ⟶ B'}\n    {v : X' ⟶ X} {g : B' ⟶ B} (sq : IsPullback v h' h g)\n    (c : Compactification h) (s : B ⟶ X) (s' : B' ⟶ X')\n    [IsClosedImmersion s] [IsClosedImmersion s']\n    (hs : s ≫ h = 𝟙 B) (hs' : s' ≫ h' = 𝟙 B')\n    (sqS : ChosenCartesianSquare g s' s v) :\n    (Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        (etaleSource A c s hs).hom ≫\n      (Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap A sq c).app\n        (etaleSupported A s) ≫\n      (Etale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map (etaleBeta A sqS) =\n    (constantPull A g).hom ≫ (etaleSource A (c.ofIsPullback sq) s' hs').hom",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e41a6",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261025T180738-L-4026443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e41a6",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261025T180738-L-4026443",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-section-compact-source-exchange and 4 new nodes vs the 6 delivered Lean modules (moved defs byte-identical to live SectionCompactSourceExchange); importers LineKummerFieldRealization/LineZeroClassExchange compiled against delivered modules (exit 0)"
+ }
+}

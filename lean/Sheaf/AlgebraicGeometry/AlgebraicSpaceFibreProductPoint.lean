@@ -6,9 +6,10 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Mathlib.CategoryTheory.MorphismProperty.Representable
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 
 /-!
 # Points of a scheme fibre product over an algebraic space
@@ -64,6 +65,37 @@ theorem exists_scheme_fibreProduct_point {S : Scheme.{u}} (E : AlgebraicSpace S)
           a.left t = x ∧ b.left t = y ∧
             c.app (op (Over.mk s)) a = f.app (op (Over.mk s)) b) →
         Surjective p.left) := by
-  sorry
+  classical
+  let : CategoryTheory.Limits.HasBinaryProducts (Over S) :=
+    CategoryTheory.Over.ConstructProducts.over_binaryProduct_of_pullback
+  have hd : yoneda.relativelyRepresentable
+      (CategoryTheory.Limits.diag E.obj.obj) := by
+    intro T a
+    obtain ⟨P, p, q, h, _⟩ := E.property.1 T a
+    exact ⟨P, p, q, h⟩
+  have hc := CategoryTheory.Functor.relativelyRepresentable.of_diag hd c
+  let P := hc.pullback f
+  let p : P ⟶ C := hc.fst' f
+  let q : P ⟶ U := hc.snd f
+  have hp : IsPullback (yoneda.map p) (yoneda.map q) c f := hc.isPullback' f
+  have hl : ∀ (x : C.left) (y : U.left),
+      (∃ (K : Type u) (_ : Field K) (s : Spec (CommRingCat.of K) ⟶ S)
+        (a : Over.mk s ⟶ C) (b : Over.mk s ⟶ U) (t : Spec (CommRingCat.of K)),
+        a.left t = x ∧ b.left t = y ∧
+          c.app (op (Over.mk s)) a = f.app (op (Over.mk s)) b) →
+      ∃ z : P.left, p.left z = x ∧ q.left z = y := by
+    rintro x y ⟨K, hK, s, a, b, t, ha, hb, hab⟩
+    obtain ⟨l, hlp, hlq⟩ := CategoryTheory.Limits.Types.exists_of_isPullback
+      (hp.app (op (Over.mk s))) a b hab
+    refine ⟨l.left t, ?_, ?_⟩
+    · exact (congrArg (fun r : Over.mk s ⟶ C ↦ r.left t) hlp).trans ha
+    · exact (congrArg (fun r : Over.mk s ⟶ U ↦ r.left t) hlq).trans hb
+  refine ⟨P, p, q, hp, hl, ?_⟩
+  intro h
+  constructor
+  intro x
+  obtain ⟨y, K, hK, s, a, b, t, ha, hb, hab⟩ := h x
+  obtain ⟨z, hz, _⟩ := hl x y ⟨K, hK, s, a, b, t, ha, hb, hab⟩
+  exact ⟨z, hz⟩
 
 end AlgebraicGeometry.AlgebraicSpace

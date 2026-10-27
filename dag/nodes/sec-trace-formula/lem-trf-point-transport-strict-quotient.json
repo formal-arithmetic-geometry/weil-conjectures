@@ -22,148 +22,61 @@
   "def-weil-inverse-system",
   "def-weil-abstract-derived-category",
   "def-weil-integral-reduction-tower",
-  "def-trf-point-reduction-units"
+  "def-trf-point-reduction-units",
+  "def-trf-point-transport-strict-quotient-models"
  ],
  "proof": [
   {
-   "text": "Put $S_n=(A_n)_s$ and $\\rho_n:S_{n+1}\\to S_n$. Use the same inverse-image functor on underlying abelian sheaves at every coefficient level. Apply [lem-weil-point-automorphism-restriction-natural] to $g=\\operatorname{Spec}(\\gamma)$ with $\\Lambda=\\mathcal O_E$, on $P$ and on each $P_n$ restricted along $\\pi_n:R\\to S_n$. It gives $\\mathcal O_E$-linear chain maps $\\sigma$ and strict naturality for $r_n,t_n$ and $f_n$. These are the specified restriction/colimit-insertion/sheafification maps, since their underlying construction does not change with the coefficient ring. In [def-weil-inverse-image-pullback-comparison](a), write $j_n=\\kappa_{P_n}$ for the actual sheafified tensor insertion. It is a chain map. It is $R$-linear with the transported integral action on its source: for a local section $a$ of $R$ and $x$ of $g^{-1}P_n$, the square $\\pi_nc_{\\mathcal O_E}=c_{A_n}g^{-1}(\\pi_n)$ gives\n$$j_n(c_{\\mathcal O_E}^{-1}(a)x)=x\\otimes\\pi_n(a)=a\\,j_n(x).$$\nConsequently $u_n=\\Gamma(j_n)\\sigma_{P_n}$ is an $\\mathcal O_E$-linear chain map. This uses no completeness or boundedness assumption on $P$.",
+   "text": "Use [lem-trf-point-transport-strict-quotient-identities] for the strict transition, augmentation and chain-map identities. The coefficient square is the projection equation for the defining limit lift. The two prescribed section formulas for theta and kappa at the pure quotient tensor give the theta clause.",
    "uses": [
-    "lem-weil-point-automorphism-restriction-natural",
+    "lem-trf-point-transport-strict-quotient-identities",
     "def-weil-inverse-image-pullback-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), simultaneous quotient transport; explicit restriction map and structure square of comparison (a),(b)"
+    "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
    }
   },
   {
-   "text": "The coefficient-defined map $v_n$ of [def-weil-inverse-image-pullback-comparison](b) is induced on the presheaf tensor by $x\\otimes b\\mapsto g^{-1}(t_n)(x)\\otimes\\rho_n(b)$. Its balancing relation is respected because $\\rho_n c_{A_{n+1}}=c_{A_n}g^{-1}(\\rho_n)$ by [lem-weil-proetale-isomorphism-inverse-image](3). Thus, on $x\\in g^{-1}P_{n+1}(U)$, both $v_nj_{n+1}$ and $j_ng^{-1}(t_n)$ send $x$ to $g^{-1}(t_n)(x)\\otimes1$. Their composites with the sheafification unit are equal, so\n$$v_nj_{n+1}=j_ng^{-1}(t_n).$$\nHere we used the actual tensor product of [def-pur-sheaf-tensor-product], not an identification between independently chosen derived reductions. The calculation is degreewise and respects every restriction map.",
+   "text": "Apply [lem-trf-point-transport-strict-quotient-finite-evaluation] to the underlying complex of the given good representative. Its stronger arbitrary-complex statement supplies the finite evaluation under the unchanged constructibility hypothesis.",
    "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product",
+    "lem-trf-point-transport-strict-quotient-finite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
+   }
+  },
+  {
+   "text": "Form the source and target functors to towers of complexes from the existing reduction and pullback tower functors, then use the equivalence between towers of complexes and complexes of towers. The strict transition identity constructs the natural map of towers; the chain-map identity makes it natural in the good complex. K-flat reduction preserves quasi-isomorphisms; finite pullback, coefficient restriction and point sections are exact. Evaluation detects quasi-isomorphisms in complexes of module towers, so both resulting functors preserve the designated quasi-isomorphisms. Use the existing localization theorem for flat-term K-flat good complexes and Mathlib Localization.lift, Localization.fac and Localization.liftNatTrans to obtain the two derived functors and transformation. Localization.liftNatTrans_app gives its equation on every representative, and Localization.natTrans_ext with cancellation of the factor isomorphism proves uniqueness.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-localization-universal-property",
     "lem-weil-proetale-isomorphism-inverse-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; Tag 03D6, definition-pushforward, pullback clause; coefficient-induced transition of comparison (b)"
-   }
-  },
-  {
-   "text": "Naturality of $\\sigma$ in [lem-weil-point-automorphism-restriction-natural], applied to the $R$-linear chain map $t_n:P_{n+1}\\to P_n$, gives $\\Gamma(g^{-1}t_n)\\sigma_{P_{n+1}}=\\sigma_{P_n}\\Gamma(t_n)$. Combining with Step 2 yields\n$$\\Gamma(v_n)u_{n+1}=\\Gamma(j_ng^{-1}t_n)\\sigma_{P_{n+1}}=\\Gamma(j_n)\\sigma_{P_n}\\Gamma(t_n)=u_n\\Gamma(t_n).$$\nBy [def-weil-inverse-system] these equations make $u(P)$ a strict map of towers, already in complexes over $\\mathcal O_E$.",
-   "uses": [
-    "lem-weil-point-automorphism-restriction-natural",
-    "def-weil-inverse-system"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), compatibility with all quotient transitions before localization"
-   }
-  },
-  {
-   "text": "By [def-weil-inverse-image-pullback-comparison](b), $\\theta_n=j_ng^{-1}(r_n)$. Apply the same strict naturality of [lem-weil-point-automorphism-restriction-natural] to $r_n:P\\to P_n$, regarded as an $R$-linear chain map. Then\n$$\\Gamma(\\theta_n)\\sigma_P=\\Gamma(j_n)\\Gamma(g^{-1}r_n)\\sigma_P=\\Gamma(j_n)\\sigma_{P_n}\\Gamma(r_n)=u_n\\Gamma(r_n).$$\nThe scalar action on this equation is the one verified in Step 1 by the structure square; no inverse of a quotient map is used.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-point-automorphism-restriction-natural"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), compatibility with the quotient augmentations in comparison (b)"
-   }
-  },
-  {
-   "text": "For a chain map $f:P\\to P'$, the maps $f_n=f\\otimes1$ commute with $t_n$ by the tensor formula, and their pullbacks commute with $v_n$ by the formula in Step 2. Tensor insertion satisfies the strict sheaf-map equality $(g_n^*f_n)j_n(P)=j_n(P')g^{-1}(f_n)$: on a section $x$ both sides are $g^{-1}(f_n)(x)\\otimes1$, followed by sheafification [def-pur-sheaf-tensor-product, def-weil-inverse-image-pullback-comparison]. Naturality of $\\sigma$ [lem-weil-point-automorphism-restriction-natural] now gives\n$$\\Gamma(g_n^*f_n)u_n(P)=\\Gamma(j_n(P'))\\Gamma(g^{-1}f_n)\\sigma_{P_n}=u_n(P')\\Gamma(f_n).$$\nFunctoriality of the termwise constructions and these two tower compatibilities make $D(P)$ and $B(P)$ functors on the flat-term K-flat complexes and $u$ a natural transformation between them.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-point-automorphism-restriction-natural"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), chain-map naturality of simultaneous quotient transport"
-   }
-  },
-  {
-   "text": "If $f:P\\to P'$ is a quasi-isomorphism between the indicated K-flat complexes, [lem-pur-derived-change-of-rings](1), applied to $R\\to S_n$, says $f_n$ is a quasi-isomorphism, even though $S_n$ need not be flat over $R$. At finite level the inverse image and module pullback in [def-weil-inverse-image-pullback-comparison](a) are exact for this scheme automorphism; hence $g_n^*f_n$ is a quasi-isomorphism. Restriction of scalars changes only the action [def-pc-sheaf-restrict-scalars], so kernels and cokernels have the same underlying abelian sheaves and quasi-isomorphisms remain quasi-isomorphisms. Exact sections [lem-weil-point-proetale-sections-exact] therefore send both maps to quasi-isomorphisms. Thus both strict tower functors take $f$ to a levelwise quasi-isomorphism.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06YY, lemma-derived-base-change; exact sections at the geometric point"
-   }
-  },
-  {
-   "text": "Take as target $\\mathcal T=D(\\operatorname{Fun}(\\mathbf Z_{\\ge1}^{\\mathrm{op}},\\operatorname{Mod}(\\mathcal O_E)))$: a strict tower of complexes is a complex of towers, and its quasi-isomorphisms are exactly the levelwise ones. The required abelian diagram category exists by [lem-weil-pbc-small-module-diagrams-grothendieck], applied to the one-object trivial site with ring $\\mathcal O_E$ and the small tower index. Kernels and cokernels are pointwise: take the kernels or cokernels at every level and use the commuting transition squares to induce their transitions; their universal properties are checked levelwise. Use the derived category of [def-weil-abstract-derived-category]. If $f-f'=dh+hd$, apply tensor, inverse image and sections termwise to $h$ as well. This produces homotopies $\\Gamma(h\\otimes1)$ for $D$ and $\\Gamma(g_n^*(h\\otimes1))$ for $B$. Their components commute with transitions by the same tensor formulas as in Step 5. Thus they are homotopies in complexes of towers, and the two functors in Step 5, after target localization, factor through the homotopy category of flat-term K-flat complexes. Their natural transformation does also.",
-   "uses": [
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05RR and 05RU, derived category; homotopies under additive termwise functors, with the explicit quotient transitions"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-site-derived-tensor-descent], the homotopy category of K-flat $R$-complexes with flat terms, localized at its quasi-isomorphisms, is equivalent to $D(R)$. The pro-etale site is taken in the small skeleton and containing universe fixed in the statement. Step 6 says the two functors of Step 7 invert these quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property](1),(2) to obtain the two functors $D(R)\\to\\mathcal T$ and their natural transformation; its uniqueness clause gives compatibility with the comparison for every other flat-term K-flat representative. Explicitly, naturality $B(a)u(Q)=u(P)D(a)$ for a quasi-isomorphism $a:Q\\to P$ implies\n$$B(a)^{-1}u(P)=u(Q)D(a)^{-1}.$$\nComposing this with $B(b)u(Q)=u(P')D(b)$ proves naturality for a roof $P\\xleftarrow{a}Q\\xrightarrow{b}P'$; the localization property ensures independence of roof presentation and of representative. The construction retains the strict quotient towers before localization, rather than choosing each level separately.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, lemma-K-flat-resolution, and 0G7D, lemma-factor-through-K-flat; resolving-class localization; natural-transformation universal property of localization"
-   }
-  },
-  {
-   "text": "The $n$-th source evaluation is $\\Gamma(P\\otimes_RS_n)$, representing sections of $N\\otimes_R^LS_n$ by [lem-pur-derived-change-of-rings](2). Its transitions and augmentations are exactly those of [def-weil-integral-reduction-tower]. By [def-weil-pbc-adic-coefficient-datum], applied with $A=\\mathcal O_E$, $I=(\\varpi)$, so that $A_s=R$ and $(A/I^n)_s=S_n$, the coherent reduction tower of $N$ is the class in $D(\\operatorname{Tow}_{\\mathcal O_E}(s))$ of the strict tower $F(P)_n=P\\otimes_RS_n$ with transitions $1\\otimes\\rho_n=t_n$, computed on the flat-term K-flat representative $P$ itself; applying the exact functor $\\Gamma$ levelwise gives the tower $D_\\bullet(P)$, so the descended source functor of Step 8 is sections of the coherent reduction tower. The target evaluation is sections of the corresponding finite module pullback of that same quotient complex, as specified in [def-weil-inverse-image-pullback-comparison](a),(b). If $N=[P]\\in D^b_c(s,\\mathcal O_E)$, [def-weil-derived-complete-integral-detailed] says $N_n=N\\otimes_R^LS_n$ is bounded constructible at finite coefficients. At that level [def-weil-frobenius-point-transport] defines $\\iota_{N_n}$ as the class of $\\Gamma(j_n)\\sigma_{P_n}$, which is exactly $u_n(P)$. Step 8 gives this equality independently of the representative. This proves the last clause and identifies the two descended tower functors as claimed.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-integral-reduction-tower",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-frobenius-point-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), evaluation at each finite quotient and its specified finite point transport"
+    "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-point-automorphism-restriction-natural",
+  "lem-trf-point-transport-strict-quotient-identities",
   "def-weil-inverse-image-pullback-comparison",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-inverse-system",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-sheaf-restrict-scalars",
+  "lem-trf-point-transport-strict-quotient-finite-evaluation",
+  "lem-pur-integral-operations-well-defined",
   "lem-weil-point-proetale-sections-exact",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property",
-  "def-weil-integral-reduction-tower",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-frobenius-point-transport",
-  "def-weil-pbc-adic-coefficient-datum"
+  "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "clause (3), simultaneous quotient transport, with the explicit tensor and localization argument; supporting Stacks Tags 03EK, 06YT, 06YS, 0G7D, 06YY"
+  "place": "clause (3), strict quotient transport and localization descent; E3 direct sectionwise calculation, exact-functor factors and good-complex localization"
  },
  "mathlib_searches": [
   {
@@ -266,35 +179,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-trf-point-transport-strict-quotient",
   "worker": "stage1",
-  "summary": "Proved strict coefficient transition, quotient augmentation, and chain-map identities on a single flat-term K-flat representative, then descended both strict tower functors and their natural transformation via the existing resolving-class localization. Statement unchanged; no new nodes.",
-  "blueprint": "prop-trf-rational-frobenius-integral-model, clause (3): simultaneous finite-quotient transport needed to realize the integral point map; steps 1-5 give the chain identities, steps 6-8 justify common-representative independence, step 9 identifies the finite evaluations.",
+  "summary": "Repair of the mandated re-split: two independent statement-only work items carry coefficient tensor-insertion compatibility and homotopical quotient-tower construction; the parent retains its exact statement and assembles them with restriction naturality and localization. Original nine-step argument retained verbatim and mapped in report.",
+  "blueprint": "prop-trf-rational-frobenius-integral-model clause (3): original steps 1-5 go to tensor insertion plus parent step 1; steps 5-7 and coherent-source part of 9 go to homotopical tower node; step 8 is parent step 2; finite evaluation in 9 is parent step 3.",
   "tool_uses": [
    {
     "node": "lem-weil-point-automorphism-restriction-natural",
     "why": "General unbounded restriction/colimit-insertion naturality for a point automorphism, used to calculate the strict quotient maps; no theorem of sk-d-weil states it."
    },
    {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "K-flat change of ring preserves quasi-isomorphisms and computes derived quotients, independent of Frobenius; no theorem of sk-d-weil supplies this homological tool."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Exact sections at the algebraically closed point preserve quasi-isomorphisms; an input already named in the item."
-   },
-   {
     "node": "lem-weil-pbc-site-derived-tensor-descent",
     "why": "Localization of the exact flat-term K-flat resolving class at quasi-isomorphisms; used as a generic descent tool without replacing the strict calculations."
-   },
-   {
-    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "why": "Generic existence of an abelian category of coefficient-module towers, used as the target of coherent tower descent."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "The coefficient-ring structure square for the finite quotient homomorphism; used as a generic site-isomorphism tool to check the actual tensor transition balancing relation."
    }
   ]
  },
@@ -307,25 +204,17 @@
   "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q131-6f81c5e2f",
-  "group": "Q131",
+  "reviewer": "NT-cc-Q135-d96dafa08",
+  "group": "Q135",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-6f81c5e2f (reviewer sub-agent of L); spot-checked: FIX for one missing citation. I read the whole item (9 steps, 0 new nodes, statement unchanged from base, base proof empty), the statement of every cited node, blueprint prop-trf-rational-frobenius-integral-model clauses (2)-(3), and Stacks 06YT (and the labels of 06YS, 0G7D, 06YY, 03EK and 03D6). Live and side-live still show the item unsplit, there is no re-split note, there is no SGA citation and there is no cycle. Steps 1-8 are correct. Step 1: c_{O_E} linearity of κ_{P_n} follows from the structure square π_n c = c_{A_n} g^{-1}π_n. Step 2: I recomputed the tensor balancing check with lem-weil-proetale-isomorphism-inverse-image(3) for ρ_n; it holds and the step is genuinely elementary. Steps 3-5: naturality of σ comes from lem-weil-point-automorphism-restriction-natural, valid for any automorphism and unbounded complexes. Step 6: lem-pur-derived-change-of-rings(1) needs only K-flatness of both complexes. Step 7: abelian tower target, homotopies compatible with transitions. Step 8: descent through W^{-1}P_R ≃ D(R) plus the localization universal property, roof computed. Step 9: ι_{N_n} = Γ(κ)σ on the representative P_n, by def-weil-frobenius-point-transport for A_{E,n}. Fault (C4): the statement says the descended source is sections of the coherent reduction tower, a notion defined in def-weil-pbc-adic-coefficient-datum, but step 9 cited only the levelwise def-weil-integral-reduction-tower. Fix: a sentence in step 9 applies the adic datum with A=O_E and I=(ϖ) (hypotheses checked: Noetherian, A/I^n finite and perfect), and the id is added to step 9 uses and to proof_deps. Accepted the six declared generic tool_uses. Edge cases checked: zero complex, g=id, n=1, acyclic and unbounded K-flat P.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-d96dafa08 (reviewer sub-agent of L); spot-checked: This delivery answers the released re-split note of 2026-10-22, which applies to the item; the item is not in the route-pivot dropped list. The statement and stmt_deps are byte-identical to live, and the parent proof is 2395 characters. All 9 old steps are archived verbatim in the report. Coverage of the old steps: tensor-insertion carries old steps 1, 2 and 5 (linearity of j_n by the square π_X,n c_R = c_n Gπ_Y,n, balancing via lem-weil-proetale-isomorphism-inverse-image(3), v_n j_{n+1} = j_n G w_n, naturality in f, and the θ clause). Tower-homotopy carries old steps 5-7 and the source half of step 9 (quasi-iso preservation through K-flat change of rings, exact g_n^*, restriction and exact Γ; homotopies Γ(h⊗1) commuting with transitions; the coherent tower via the adic datum with A=O_E, I=(ϖ), whose hypotheses hold). Parent step 1 writes out the σ-naturality composites of old steps 1 and 3-5. Step 2 is old step 8 (descent plus localization universal property (1),(2), with the roof formula). Step 3 is the finite evaluation ι_{N_n} = [Γ(κ)σ_{P_n}] from def-weil-frobenius-point-transport at A_{E,n}. Nothing was blurred or dropped. The two nodes are comparable in size, statement-only, and neither restates the item. Both statements were checked true on generators and tested on 0, g=id, n=1 and non-flat S_n. Searches are recorded, with LeanSearch honestly marked unavailable; blueprint from/via are correct; there is no SGA citation and no cycle. Duplicate checks: def-trf-integral-tower-inverse-image-unit is about the sequence-site g^*_seq, not the explicit levelwise C_n, and def-weil-inverse-image-pullback-comparison(b) covers only the θ part for M=P_m. The same-day lem-cbc-strict-coefficient-augmentation-homotopicality covers only the D-part before Γ, not the B-pullback part or the coherent-tower identification. Maintainer note: the proof workers should cite these existing nodes. Accepted tool_uses: restriction-natural and site-derived-tensor-descent."
  },
  "lean": {
   "module": "Sheaf.Paper.PointTransportStrictQuotient",
   "declaration": "WeilConjectures.pointTransport_strictQuotient",
   "declarations": [
-   "WeilConjectures.strictQuotientPointRestrictionAdditive",
-   "WeilConjectures.strictQuotientPointModuleHasDerived",
-   "WeilConjectures.strictQuotientPointRestrictionComplexIso",
-   "WeilConjectures.strictQuotientPointDerivedRestriction",
-   "WeilConjectures.strictQuotientPointMap",
-   "WeilConjectures.strictQuotientPointSectionsIso",
-   "WeilConjectures.strictQuotientPointTargetIso",
-   "WeilConjectures.strictQuotientPointTowersHasDerived",
    "WeilConjectures.pointTransport_strictQuotient"
   ],
   "file": "lean/Sheaf/Paper/PointTransportStrictQuotient.lean",
@@ -343,5 +232,27 @@
   "group": "Q15",
   "result": "pass",
   "note": "Read the item node, all 15 stmt_deps' declarations in side-live (FrobeniusPointTransport sigma/transportFinite, InverseImagePullbackComparison theta/kappa/coefficient map, IntegralOperationsWellDefined good complex/pullback levels/transitions/tower functor, PointReductionUnits identity-on-sections iso, AdicCoefficientDatum completedReductionTower) and the delivered module. Clause-by-clause match: u_n = sigma then Gamma(kappa) restricted via the pinned identity-on-sections iso; conjuncts 2-5 are the strict transition, augmentation, theta and chain-map naturality equalities on unbounded flat-term K-flat P; conjunct 6 is the finite evaluation under sfIntegralConstructible with canonical comparison isos (same intrinsic-pullback comparison as frobeniusPointTransportFiniteComplex); conjunct 7 gives complexes-of-towers functors with V pinned to u_n, quasi-iso preservation, and a unique tau on D(R) relative to the localization lifts. Records: only the item changed; statement verbatim; the added stmt_dep def-trf-point-reduction-units is a landed def node (allowed), no cycle; not dropped; H5/H6/H8/H9 OK; no existing duplicate (the parent's trfPoint* towers are theorem-owned, correctly inlined). Advisories: non-stmt_dep owner decls (integralOperations*, pointIntegralSections, finiteDerivedPullback, unrestricted*); conjunct 1 restates the dep's limit.lift definition; 'coherent reduction tower' rendered by K-flat characterization rather than linked to Scheme.completedReductionTower; strictQuotientPointModuleHasDerived duplicates the global ofIsGrothendieckAbelian instance. No file changed, so no compile run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4b71a",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261026T194957-L-2608907",
+  "kind": "interface",
+  "note": "independent cc review: pointTransport_strictQuotient statement byte-identical to clone; 8 moved defs verbatim vs clone (docstring tag only); item has 0 importers; axioms clean (propext/choice/Quot.sound) on /tmp compile of all 5 modules"
  }
 }

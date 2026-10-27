@@ -1,0 +1,124 @@
+{
+ "id": "lem-sp-field-shriek-system-cocycle",
+ "kind": "statement",
+ "title": "Proper/open coefficient cocycles on whole derived systems",
+ "statement": "For P and any normalized simultaneous Models P [def-sp-field-shriek-system-models], and any compactification c, the constructed proper/open comparison satisfies CoherenceLaw P D c [def-sp-field-shriek-system-coherence]: the canonical ring-system maps compose and are identities on identity extensions, and the comparison satisfies composition and identity under the adjunction-normalized scalar associators and unitors in the ordinary derived category of whole systems. No finite evaluation or invertibility assertion is included.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), proper/open comparison of coefficient systems"
+ },
+ "stmt_deps": [
+  "def-sp-field-shriek-system-models",
+  "def-sp-field-shriek-system-coherence"
+ ],
+ "proof": [
+  {
+   "text": "the residue-class formulas of Coefficients identify the composite and identity\nquotient maps, hence the whole ring-system maps. On simultaneous flat-term K-flat\nmodels both scalar/pullback paths send a nested tensor (x tensor s) tensor t to\nV(x) tensor image(s)t. The representative equations in PullComparison and the\nnormalized derived scalar associator identify this calculation with the specified\nwhole-system scalarAssoc. Mate pasting gives the proper-factor cocycle and identity.\nFor the open factors, the open-unit normalization identifies both paths with the\nsame open adjunction mate; equivalently the open tensor generator formula sends\n([x] tensor s) tensor t to [x tensor image(s)t]. Tensor unitors give the identity.\nIn the composite of two comparisons, naturality of the second proper mate moves\nthe first open map past it. Substitute the proper and open cocycles, and functoriality\ncombines the proper images of the open maps. The result is the displayed composition\nin CoherenceLaw, with scalarAssoc on source and target. The same calculation with\nthe two unitors proves its identity clause. No equality is inferred from finite\nevaluations.",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-ringed-slice-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "(2), proper/open comparison of coefficient systems"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-coherence",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-ringed-slice-tensor-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), proper/open comparison of coefficient systems"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous derived scalar and geometric adjunctions for inverse systems of sheaves with finite evaluation comparisons",
+   "results": "constantSheafAdj, Adjunction.derived, Adjunction.derived′, constantSheafΓAdj, pushforwardPushforwardAdj, restrictCoextendScalarsAdj, PullbackConstruction.adjunction, extendRestrictScalarsAdj. These are categorical ingredients or ordinary sheaf adjunctions, not the normalized system comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct specialization to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper image and extension by zero scalar comparison satisfies a coefficient composition cocycle on derived inverse systems",
+   "results": "InverseSystem.globalEquiv_compatibility, PEquivOn.compat, pEquivOnGlue, pEquivOnLim, globalEquiv_naturality, globalEquiv, and Profinite.NobelingProof.CC_comp_zero, CC_exact. None states a derived sheaf coefficient comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp in Mathlib.CategoryTheory.Adjunction.Mates. This is the generic pasting ingredient, not the normalized system realization, its scalar square, or its mixed transition law.",
+   "date": "2026-10-25",
+   "verdict": "Tool only; recorded in existing node lem-weil-pbc-mate-pasting."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(shriek|compact)|shriek.*coefficient|semilinear.*system",
+   "results": "Only Mathlib/Algebra/Ring/CompTypeclasses.lean introductory comment matched. Repository search found the existing FieldShriekSystem interfaces and generic semilinear/open tensor declarations, but no theorem supplying these missing clauses. Blueprint-reference searches for coefficient cocycle, mixed quotient and simultaneous models found no separate existing blueprint node.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate statement or Mathlib leaf found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldShriekSystemComparison",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2); lem-sp-field-shriek-system-cocycle",
+   "via": [
+    "lem-sp-field-shriek-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldShriekSystemCocycle",
+  "file": "lean/Sheaf/Paper/FieldShriekSystemCocycle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_shriek_system_cocycle",
+  "statement": "theorem field_shriek_system_cocycle (P : PurityFiniteSetting.{u}) (D : Models P)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :\n    Nonempty (CoherenceLaw P D c)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T164642-L-1047915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T164642-L-1047915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

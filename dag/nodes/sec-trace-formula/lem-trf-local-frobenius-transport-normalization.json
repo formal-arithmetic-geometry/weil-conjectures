@@ -25,172 +25,58 @@
  ],
  "proof": [
   {
-   "text": "Write $g=g_X$, $h=g_s^m$, $H=\\operatorname{Fr}^{(q^m)}_X$ and $r=\\operatorname{Fr}^{(q^m)}_s=h^{-1}$. The last equality follows from the arithmetic/geometric inverse convention in [def-weil-frobenius-detailed]. By [thm-trf-frobenius-fixed-points], the $k$-point $\\bar y$ obtained from the specified rational point satisfies $\\Phi^m\\bar y=\\bar y$. The factorization [prop-trf-frobenius-factorization] and the inverse convention give $\\Phi^m=g^mH$. Absolute Frobenius is natural: on affine rings this is the identity $f(a^{q^m})=f(a)^{q^m}$, so $H\\bar y=\\bar y r$. Therefore $g^m\\bar y r=\\bar y$, and composition with $h$ gives $g^m\\bar y=\\bar y h$. These are equalities of scheme maps; semilinear $g$ is not being treated as a $k$-morphism.",
+   "text": "Apply [lem-trf-finite-return-frobenius-cancellation] to the specified $y$ to obtain $\\Phi^m\\bar y=\\bar y$ and $g_X^m\\bar y=\\bar y g_s^m$, including the geometric/arithmetic inverse convention. Use $I^{(0)}=1$, $I^{(j+1)}_N=\\iota_{U_\\Lambda^jN}I^{(j)}_N$ and the return comparison $v_{\\Lambda,K}$ of [lem-trf-iterated-return-transport-scalar-calculus]. The definition of the requested map is $t_{y,m,K}=\\operatorname{Fib}_{s,\\Lambda}(v_{\\Lambda,K})I^{(m)}_{P_\\Lambda K}$; that lemma gives its naturality at finite, integral and raw rational stages.",
    "uses": [
-    "def-weil-frobenius-detailed",
-    "thm-trf-frobenius-fixed-points",
-    "prop-trf-frobenius-factorization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "Let $H_\\Lambda=Lg_{s,\\Lambda}^*$ and $P_\\Lambda=L\\bar y_\\Lambda^*$. Define $I^{(0)}_N=1$ and $I^{(j+1)}_N=\\iota_{H_\\Lambda^jN}\\,I^{(j)}_N$, so $I^{(m)}_N:\\operatorname{Fib}_sN\\to\\operatorname{Fib}_sH_\\Lambda^mN$. Each $\\iota$ is the specified map of [def-weil-frobenius-point-transport]. By [lem-weil-frobenius-point-transport-natural](2), induction gives $\\operatorname{Fib}_s(H_\\Lambda^m v)I^{(m)}_N=I^{(m)}_{N'}\\operatorname{Fib}_s(v)$ for every $v:N\\to N'$: apply the one-step naturality equation to $H_\\Lambda^jv$ and compose with the induction equation. The scheme equality in Step 1 gives a natural comparison $v_{\\Lambda,K}:H_\\Lambda^mP_\\Lambda K\\xrightarrow{\\sim}P_\\Lambda G_\\Lambda^mK$ using [lem-weil-pbc-proetale-derived-pullback-composition] at finite level, [lem-pod-integral-pullback-composition] integrally, and their rationalizations. Put $t_{y,m,K}=\\operatorname{Fib}_s(v_{\\Lambda,K})I^{(m)}_{P_\\Lambda K}$. Naturality of $v$ and the displayed induction equation give exactly $J_y(G_\\Lambda^mu)t_{y,m,K}=t_{y,m,L}J_y(u)$.",
-   "uses": [
-    "def-weil-frobenius-point-transport",
-    "lem-weil-frobenius-point-transport-natural",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pod-integral-pullback-composition"
+    "lem-trf-finite-return-frobenius-cancellation",
+    "lem-trf-iterated-return-transport-scalar-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
+    "place": "Last sentence; assembly from the four arguments of returned Steps 1–10 (Q128 repair)."
    }
   },
   {
-   "text": "At finite coefficients the point calculation can be made on a sheaf $N$, then degreewise on a complex. By [lem-weil-proetale-isomorphism-inverse-image](1), $(Lh^*N)(s)=N(s\\xrightarrow{h}s)$. Under this identification, restriction followed by colimit insertion in [def-weil-frobenius-point-transport] is $\\operatorname{res}_h:N(s,1)\\to N(s,h)$; composing $m$ such maps is restriction along $h=g_s^m$. Let $\\tau_s:Lr^*\\to1$ be the canonical absolute-Frobenius trivialization specified by [lem-pur-frobenius-trivialization-pullback], with exponent $am$. At the final object its value on a sheaf $M$ is $(\\operatorname{res}_r^M)^{-1}$: the relative-Frobenius identification in that statement, adjointed to inverse image and evaluated at the final object, is the inverse of restriction along the isomorphism $r:(s,r)\\to(s,1)$. For $M=Lh^*N$, this restriction identifies with $\\operatorname{res}_r:N(s,h)\\to N(s,1)$; its inverse is $\\operatorname{res}_h$. Thus under $Lr^*Lh^*N\\cong N$ one has $\\Gamma(s,\\tau_{s,Lh^*N})=I_N^{(m)}$. Exact constant-coefficient pullback [prop-weil-pbc-proetale-constant-exact] and exact point sections [lem-weil-point-proetale-sections-exact] make this a degreewise identity computing the derived maps. No scalar is inserted.",
+   "text": "The finite chain-map identity of [lem-trf-finite-return-frobenius-cancellation] is exactly $t_{y,m,K}=J_{y,\\Lambda}(\\kappa^{(m)}_K)\\rho_{y,m,K}$, with the specified absolute-Frobenius cancellation and no scalar rescaling. For an integral $K$, choose a flat-term K-flat resolution $Q\\to K$ by [lem-pc-kflat-resolution] and put $Q_n=Q\\otimes_{\\widehat{\\mathcal O}_{E,X}}(A_{E,n})_X$. By [lem-pur-kflat-change-of-rings] each $Q_n$ is a flat-term K-flat complex of $(A_{E,n})_X$-modules; since $Q$ is K-flat it represents the derived reduction $K\\otimes^L_{\\mathcal O_E}A_{E,n}$, which lies in $D^b_c(X,A_{E,n})$ by the definition [def-weil-derived-complete-integral-detailed]. Hence the finite identity of [lem-trf-finite-return-frobenius-cancellation] applies to every $Q_n$ as an equality of chain maps. Apply [lem-trf-local-normalization-strict-realization] to this simultaneous quotient system: its hypotheses are the two scheme equalities from Step 1 and these chain-map identities. It gives equality of the actual strict maps, compatibility with quotient transitions and derived coefficient comparisons, and identifies their integral realizations with the specified successive transport and normalized map. Its rationalization clause proves the equality at $E$. The reductions are only bounded constructible; no finite Tor-amplitude or perfectness condition is imposed.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-frobenius-point-transport",
-    "lem-pur-frobenius-trivialization-pullback",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; final-object calculation with the specified adjoint trivialization"
-   }
-  },
-  {
-   "text": "Expand the canonical comparison specified in the statement: with $\\tau_X:LH^*\\to1$, it is $\\kappa_K^{(m)}=(\\tau_X)_{L(g^m)^*K}\\circ c_{H,g^m,K}$, where $c_{H,g^m}:L\\Phi^{m*}\\to LH^*L(g^m)^*$ is the canonical composition map. This is the cancellation of absolute Frobenius in $\\Phi^m=g^mH$ from [prop-trf-scheme-galois-comparison], with its required canonical normalization. Apply the pullback-naturality equation of [lem-pur-frobenius-trivialization-pullback] to $u=\\bar y$ and exponent $am$. It identifies $P_\\Lambda(\\tau_X)$ with $\\tau_sP_\\Lambda$ under $H\\bar y=\\bar y r$. Use [lem-weil-pbc-proetale-derived-pullback-composition] to identify the successive pullbacks. After precomposition with the fixed-point identification $\\rho_{y,m,K}$, the resulting map is $\\Gamma(s,\\tau_{s,P_\\Lambda L(g^m)^*K})$ with source identified with $P_\\Lambda K$ through $Lr^*H_\\Lambda^m\\cong1$ and $v_{\\Lambda,K}$. Naturality of $\\tau_s$ with respect to $v_{\\Lambda,K}$ and Step 3 give\n$$J_{y,\\Lambda}(\\kappa_K^{(m)})\\rho_{y,m,K}=\\operatorname{Fib}_s(v_{\\Lambda,K})I^{(m)}_{P_\\Lambda K}=t_{y,m,K}.$$\nHere the canonical composition identifications on the two paths agree: on a pullback of a section both send it to the same section on the iterated fiber product, with its same projections. The termwise description in the cited composition statement computes those identifications.",
-   "uses": [
-    "prop-trf-scheme-galois-comparison",
-    "lem-pur-frobenius-trivialization-pullback",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "The equality of Step 4 holds before localizing complexes. For an integral object choose one flat-term K-flat resolution $Q\\to K$ by [lem-pc-kflat-resolution] and use the simultaneous quotients $Q_n=Q\\otimes(A_{E,n})_X$. They are K-flat with flat terms by [lem-pur-kflat-change-of-rings]. Every restriction used in Step 3, every colimit coprojection, and the relative-Frobenius isomorphisms specifying $\\tau$ is a natural map of module sheaves, hence commutes with $Q_{n+1}\\to Q_n$. The coefficient factors send a tensor $x\\otimes b$ to the restriction of $x$ tensored with $b$; reduction before or after this map therefore gives the same tensor. The termwise pullback-composition maps of [lem-weil-pbc-proetale-derived-pullback-composition] have the same property. Consequently Step 4 is an equality of maps of these strict quotient diagrams, including their transitions. For derived change of the finite coefficient ring, [lem-trf-scheme-galois-coefficient-change] gives the equation for the specified $\\kappa^{(m)}$, with no flatness or Tor-amplitude assumption; the point comparison [lem-trf-point-sections-finite-reduction] applies because every reduction of an integral constructible object is bounded by [def-weil-derived-complete-integral-detailed]; it does not require a perfect complex. Thus the maps used here are compatible with both the strict transitions and their canonical derived coefficient identifications.",
-   "uses": [
+    "lem-trf-finite-return-frobenius-cancellation",
+    "lem-trf-local-normalization-strict-realization",
     "lem-pc-kflat-resolution",
     "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-trf-scheme-galois-coefficient-change",
-    "lem-trf-point-sections-finite-reduction",
     "def-weil-derived-complete-integral-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
+    "place": "Last sentence; assembly from the four arguments of returned Steps 1–10 (Q128 repair)."
    }
   },
   {
-   "text": "For $N=P_{\\mathcal O_E}K$, [lem-trf-integral-point-transport-tower-realization] identifies each specified integral $\\iota_{H_{\\mathcal O_E}^jN}$ with realization of the actual point-transport morphism of its coherent quotient tower. The formulas for $c$ and $\\eta$ in [lem-trf-integral-pullback-comparison-realization] identify the integral composition map itself with realization of the strict termwise composition maps, including the comparison from the realized iterated tower to the iterated completed pullback. Apply those formulas to the square $g^m\\bar y=\\bar y h$ and to each splitting into successive pullbacks. The strict left-hand map of Step 5 is the composite of these termwise composition maps and the finite point transports. Its realization is therefore exactly $\\operatorname{Fib}_s(v_{\\mathcal O_E,K})I^{(m)}_{P_{\\mathcal O_E}K}$ of Step 2. The right-hand map realizes, by the same specified composition identifications, to the stipulated realization of $J_y(\\kappa^{(m)})\\rho$. Apply the functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to the equality of whole strict maps from Step 5. This proves the integral equality. No step infers an integral equality solely from equal individual reductions, and no finite Tor-amplitude assumption enters.",
+   "text": "For $E\\subset M$ use $a,d,\\delta,\\beta,v,I$ with the exact meanings in [lem-trf-iterated-return-transport-scalar-calculus]. By [lem-weil-point-sections-scalar-extension], $b_K=\\operatorname{Fib}_{s,M}(a_K)\\beta_{P_EK}$ and $\\beta$ is natural. Expanding $t$ and moving $\\beta$ across $v_E$ rewrites $J_{y,M}(d_K)b_{G_E^mK}(t_{y,m,K}\\otimes M)$ as\n$$\\operatorname{Fib}_{s,M}\\!\\left(P_M(d_K)a_{G_E^mK}T_s(v_{E,K})\\right)\\beta_{U_E^mP_EK}(I_{P_EK}^{(m)}\\otimes M).$$\nSubstitute the return-square equation and iterated point equation of that lemma. This becomes $\\operatorname{Fib}_{s,M}(v_{M,TK}U_M^m(a_K))I_{T_sP_EK}^{(m)}\\beta_{P_EK}$. Naturality of $I^{(m)}$ for $a_K$ makes it $t_{y,m,TK}\\operatorname{Fib}_{s,M}(a_K)\\beta_{P_EK}=t_{y,m,TK}b_K$. The cited equations respect the specified identity and coefficient-tower associators, so this substitution proves those compatibilities too.",
    "uses": [
-    "lem-trf-integral-point-transport-tower-realization",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "By [def-weil-rationalization-karoubi] the objects at $E$ are the integral objects and their morphisms are $\\operatorname{Hom}_{\\mathcal O_E}\\otimes E$. By [def-weil-frobenius-point-transport] the rational point transport is the scalar extension of the integral transport. Applying rationalization to Step 6 gives the required normalization at $E$. For rational naturality it suffices to take a morphism $f\\otimes\\lambda$: both sides of the naturality equation of Step 2 become $\\lambda$ times the rationalization of its integral equation for $f$, by the linear formulas for pullback in [def-weil-derived-pullback-tensor-hom] and for the point functor in [def-weil-finite-coefficient-point]. Additivity gives the equation for every morphism. Thus this argument covers morphisms in the raw framework rationalization and does not replace it by a larger category or invoke an idempotent completion.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-frobenius-point-transport",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-coefficient-point"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "Write $T_s$ for scalar extension on $s$, $a_K:T_sP_EK\\to P_MTK$ for the pullback comparison, and $\\delta_N:T_sH_E^mN\\to H_M^mT_sN$ for the iterated point pullback comparison. The comparisons are now specified by [lem-trf-integral-pullback-comparison-realization], not characterized by their individual reductions. Its composition/scalar equation, applied along the two equal scheme maps $g^m\\bar y=\\bar y g_s^m$, and then along every splitting of $g^m$ and $g_s^m$, gives\n$$v_{M,TK}H_M^m(a_K)\\delta_{P_EK}=P_M(d_K)a_{G_E^mK}T_s(v_{E,K}).$$\nIndeed its left path first uses the scalar comparisons for the successive point pullbacks and for $\\bar y$, and then the compositor defining $v_M$; its right path first uses $v_E$, then the scalar comparison for $\\bar y$ and the successive $g$ pullbacks. The lemma's equation interchanges a scalar comparison with each compositor, and its equality-of-scheme-maps and associativity clauses identify the two paths. These are equalities of the specified simultaneous quotient-diagram maps and hence their integral realizations; the rationalization clause gives the displayed equation. The identity and coefficient-tower clauses use the completion-normalized tensor associator, matching that in [lem-weil-point-sections-scalar-extension]. No assertion about the unaccepted proof of lem-pur-integral-operations-scalar-extension is used.",
-   "uses": [
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-weil-point-sections-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "Let $\\beta_N:\\operatorname{Fib}_{s,E}N\\otimes_E M\\to\\operatorname{Fib}_{s,M}T_sN$ be the inverse of the rational sections comparison of [lem-weil-point-sections-scalar-extension]. The scalar-compatibility clause of [lem-weil-frobenius-point-transport-natural](2) gives, for one step, $\\operatorname{Fib}_{s,M}(\\delta_N)\\beta_{H_EN}(\\iota_N\\otimes M)=\\iota_{T_sN}\\beta_N$. Apply that equation in turn to $N,H_EN,\\ldots,H_E^{m-1}N$; naturality of $\\iota$ moves each intermediate pullback comparison across the next transport. The adjacent comparison factors compose to the iterated $\\delta_N$, giving\n$$\\operatorname{Fib}_{s,M}(\\delta_N)\\beta_{H_E^mN}(I_N^{(m)}\\otimes M)=I_{T_sN}^{(m)}\\beta_N.$$\nThe point comparisons are exactly those of Step 8: the strict-system choices and their scalar associator are specified by [lem-trf-integral-pullback-comparison-realization]. For identity and successive field extensions the equations use the identity and associator clauses of [lem-weil-point-sections-scalar-extension] and [lem-pur-integral-operations-scalar-extension], so the same induction gives those compatibilities for every $m$.",
-   "uses": [
-    "lem-weil-point-sections-scalar-extension",
-    "lem-weil-frobenius-point-transport-natural",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-trf-integral-pullback-comparison-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
-   }
-  },
-  {
-   "text": "By its definition in the statement, $b_K=\\operatorname{Fib}_{s,M}(a_K)\\beta_{P_EK}$. Expand $t_{y,m,K}=\\operatorname{Fib}_{s,E}(v_{E,K})I^{(m)}_{P_EK}$ on the left-hand side of the desired coefficient equation. Naturality of $\\beta$ with respect to $v_{E,K}$ rewrites it as\n$$\\operatorname{Fib}_{s,M}\\!\\left(P_M(d_K)a_{G_E^mK}T_s(v_{E,K})\\right)\\beta_{H_E^mP_EK}(I^{(m)}_{P_EK}\\otimes M).$$\nSubstitute the square proved in Step 8 and the iterated point equation of Step 9. The result is\n$$\\operatorname{Fib}_{s,M}\\!\\left(v_{M,TK}H_M^m(a_K)\\right)I^{(m)}_{T_sP_EK}\\beta_{P_EK}.$$\nNaturality of $I^{(m)}$ for $a_K$, proved in Step 2, makes this $\\operatorname{Fib}_{s,M}(v_{M,TK})I^{(m)}_{P_MTK}\\operatorname{Fib}_{s,M}(a_K)\\beta_{P_EK}=t_{y,m,TK}b_K$. This proves the final displayed equation. The identity and tower identifications remain the specified ones because each substitution uses the same comparisons as Steps 8 and 9. The naturality of $\\beta$ used here is part of [lem-weil-point-sections-scalar-extension].",
-   "uses": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
     "lem-weil-point-sections-scalar-extension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Last sentence: transport of Frobenius endomorphisms; explicit local comparison"
+    "place": "Last sentence; assembly from the four arguments of returned Steps 1–10 (Q128 repair)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-frobenius-detailed",
-  "thm-trf-frobenius-fixed-points",
-  "prop-trf-frobenius-factorization",
-  "def-weil-frobenius-point-transport",
-  "lem-weil-frobenius-point-transport-natural",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pod-integral-pullback-composition",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-pur-frobenius-trivialization-pullback",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-point-proetale-sections-exact",
-  "prop-trf-scheme-galois-comparison",
+  "lem-trf-finite-return-frobenius-cancellation",
+  "lem-trf-iterated-return-transport-scalar-calculus",
+  "lem-trf-local-normalization-strict-realization",
+  "lem-weil-point-sections-scalar-extension",
   "lem-pc-kflat-resolution",
   "lem-pur-kflat-change-of-rings",
-  "lem-trf-scheme-galois-coefficient-change",
-  "lem-trf-point-sections-finite-reduction",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-trf-integral-point-transport-tower-realization",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-coefficient-point",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-pur-integral-operations-scalar-extension"
+  "def-weil-derived-complete-integral-detailed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-  "place": "Last sentence; explicit proof from the canonical point restriction maps and absolute-Frobenius trivialization (Stacks Tag 0F6W), with strict-system realization."
+  "place": "Last sentence; short assembly of extracted finite cancellation, strict-system realization and iterated scalar-calculus lemmas."
  },
  "mathlib_searches": [
   {
@@ -289,83 +175,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-trf-local-frobenius-transport-normalization",
   "worker": "stage1",
-  "summary": "Repair of C3/C4: extracted a shared comparison-realization theorem with specified quotient-cone maps, integral compositors and their scalar/composition equation. Step 6 now cites realization of the actual compositor; Step 8 cites completed coherence rather than uncompleted finite coefficient change or an unsplit proof. Clarified the statement to choose these canonical comparison families; preserved all hypotheses and conclusions. One new unsplit node, no Mathlib leaves.",
-  "blueprint": "Realizes the last sentence of prop-trf-karoubi-independence.proof.md (transport of Frobenius endomorphisms) for local rational-point transports, including the coefficient and strict-system comparisons missing there.",
+  "summary": "Q128 repair of the 11515-character proof: three independent statement-only subproblems preserve returned Steps 1,3,4; 5,6,7; and 2,8,9. Step 10 remains the parent assembly. Parent statement and all prior metadata retained. No Lean or compiler work.",
+  "blueprint": "Last sentence of prop-trf-karoubi-independence.proof.md: the local Frobenius normalization and its scalar coherence.",
   "tool_uses": [
    {
-    "node": "thm-trf-frobenius-fixed-points",
-    "why": "Step 1 takes the equality Phi^m ybar = ybar for the chosen rational point; the trace-transport unit does not itself state the fixed-point theorem."
-   },
-   {
-    "node": "prop-trf-frobenius-factorization",
-    "why": "Step 1 takes the factorization of scheme Frobenius into absolute and Galois Frobenius to prove g^m ybar = ybar g_s^m; no local factorization is supplied by this unit."
-   },
-   {
-    "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Steps 2 and 9 take naturality and the specified one-step scalar-compatibility equation for point transport; this unit only requires their transported iterates."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Steps 2, 4 and 5 take the canonical termwise finite module pullback compositor and its K-flat description; no such sheaf-functor construction belongs to the trace-transport unit."
-   },
-   {
-    "node": "lem-pod-integral-pullback-composition",
-    "why": "Step 2 takes existence and naturality of integral pullback composition, with its choice specified by the new realization node; the trace unit provides no integral pullback construction."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Step 3 takes clause (1), evaluation of inverse image under a scheme isomorphism, to identify restriction along h; this is a generic site tool absent from the trace unit."
-   },
-   {
-    "node": "lem-pur-frobenius-trivialization-pullback",
-    "why": "Steps 3 and 4 take the relative-Frobenius normalization and pullback-naturality of the canonical absolute-Frobenius trivialization; these finite site comparisons are not proved by the trace unit."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Step 3 takes exactness of constant-coefficient pullback, making the sheaf calculation compute derived maps; the trace unit supplies no exactness result for inverse image."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Step 3 takes exactness of sections at Spec of an algebraically closed field to pass the point restriction calculation to complexes; the trace unit does not prove this site fact."
-   },
-   {
-    "node": "prop-trf-scheme-galois-comparison",
-    "why": "Step 4 takes the specified canonical comparison kappa built by cancelling absolute Frobenius; the trace-transport unit uses rather than constructs this comparison."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Step 5 takes a flat-term K-flat resolution to form one simultaneous family of quotients; the trace unit provides no resolution existence theorem."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Step 5 takes preservation of flat-term K-flatness by coefficient change so all quotients compute derived reductions; the trace unit does not supply this resolution tool."
-   },
-   {
-    "node": "lem-trf-scheme-galois-coefficient-change",
-    "why": "Step 5 takes compatibility of the actual kappa with derived finite coefficient change without a Tor-amplitude restriction; the trace unit requires but does not prove this finite comparison."
-   },
-   {
-    "node": "lem-trf-point-sections-finite-reduction",
-    "why": "Step 5 takes point-sections compatibility with finite derived reduction for bounded-above complexes; the trace unit does not construct the point-reduction comparison."
-   },
-   {
-    "node": "lem-trf-integral-point-transport-tower-realization",
-    "why": "Step 6 takes realization of the specified integral point transport from its whole coherent quotient tower; the trace unit does not identify that chain-level map."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Step 6 takes functorial R lim on strict tower complexes, preserving the equality of actual tower maps; the trace unit supplies no construction of this derived functor."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Step 9 takes the identity and field-tower clauses for the pullback scalar comparison; its particular pullback family is specified by the new realization node, and the trace unit has no coefficient-operation comparison theorem."
-   },
-   {
     "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Steps 8, 9 and 10 take the specified sections comparison, its naturality and its completion-normalized field-tower associator; the trace unit requires these as generic coefficient tools."
+    "why": "The parent uses the natural point-sections comparison and its prescribed associator when assembling the final coefficient equation; this generic coefficient tool is not supplied by the trace unit."
    }
   ]
  },
@@ -390,12 +208,12 @@
   "lem-weil-point-sections-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q42-30ca40382",
-  "group": "Q42",
+  "reviewer": "NT-cc-Q128-7b5c11226",
+  "group": "Q128",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-30ca40382 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, all cited statements, cited Stacks/blueprint sources, unit route, and report. Verified Frobenius orientation, finite/integral/rational coefficient categories, strict-tower realization, c/a coherence, every proof step, hypotheses, tool uses, duplicate candidates, and edge cases. The recorded Step 6 and Step 8 repairs are mathematically effective; no remaining fault found."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-7b5c11226 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 3 new nodes, the statements of every cited node, the repair note (re-split by the human, 2026-10-21) and the base item (10 steps, 11515 characters, in side-live). Source: blueprint prop-trf-karoubi-independence.proof.md, last sentence; Stacks 0F6W for relative Frobenius; no SGA anywhere. Re-split check: all 10 old step texts appear verbatim in the report. Old steps 1/3/4 went to finite-return-frobenius-cancellation, 5/6/7 to local-normalization-strict-realization and 2/8/9 to iterated-return-transport-scalar-calculus. Old step 10 is now parent step 3. The three new nodes are of comparable size (about 3.1–3.7k characters). The parent statement is unchanged and its proof is a short assembly (2292 characters, 2805 after the fix). No new node restates the item: the finite node covers only the finite level, the strict node is conditional, and the scalar node gives only the intermediate equations. Maths checked: r=Fr_s^{(q^m)}=g_s^{-m}; Φ^m=g^m H gives g^m z=z g_s^m; res_{g_s^m} is the inverse of res_r. Small case X_0=Spec k_0, m=1: the identity reduces to Γ(τ_s)=ι. Rank-one constant sheaf: both sides are the identity. In parent step 3 every source, target and composition order matches (β-naturality, both scalar-node equations, I^{(m)} naturality). No duplicates: fixed-point-stalk-transport-cocycle, frobenius-stalk-trivialization-normalization and integral-point-transport-tower-powers are all different statements. Batch-5: the item is already cited directly by sec-zeta-weil batch-5 nodes on base. The three flagged citations are its own split children and carry generic local-Frobenius normalization and coherence, not steps of the trace-formula or Poincaré-duality proofs. Closure diff against base: no new trf/pd node besides the children themselves, and no assumption leaf reached; accepted. FIX (C1/C4): parent step 2 applied the finite node to the quotients Q_n without citing why they qualify, namely flat-term K-flatness (lem-pur-kflat-change-of-rings) and that their class is in D^b_c(X,A_{E,n}) (def-weil-derived-complete-integral-detailed). Old step 5 had cited both. Step 2 is rewritten with those citations plus lem-pc-kflat-resolution, and proof_deps is updated in fixes/dag/nodes/sec-trace-formula/lem-trf-local-frobenius-transport-normalization.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -465,5 +283,16 @@
   "existing": false,
   "note": "Successor indices cover every positive m and finite coefficient exponent. Normalization unfolds the finite, integral, rational, whole strict-system and scalar equations. Helper definitions give the prescribed canonical maps; chosen data are uniquely characterized, never arbitrary maps. Integral comparisons use IntegralComparisonSystem and its prescribed whole-system realization formulas. No Tor-amplitude hypothesis is introduced. Finite transport is recursively composed from frobeniusPointTransportFinite, the unit-normalized pointPowerPullbackModel and proEtaleConstantRingPullbackComposition; finiteOrdinary and StrictFormula use this same successive iterate. Compile-budget repair explicitly reuses the canonical point/scheme invertibility instances, with no extra hypotheses."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

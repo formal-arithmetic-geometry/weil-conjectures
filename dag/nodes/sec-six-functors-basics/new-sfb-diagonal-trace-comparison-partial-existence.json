@@ -1,0 +1,120 @@
+{
+ "id": "new-sfb-diagonal-trace-comparison-partial-existence",
+ "kind": "statement",
+ "title": "Existence of partial diagonal trace comparison data",
+ "statement": "Under the hypotheses of the diagonal trace comparison presentation, there exists a PartialPresentation whose projective-line model is the specified isomorphism m.",
+ "stmt_deps": [
+  "new-sfb-diagonal-trace-comparison-partial"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), construction before the Milnor comparison"
+ },
+ "proof": [
+  {
+   "text": "Pull the unit l on S to X using f.appTop. Apply the one-scheme normalized Chern/twist construction separately at S and X. With these data apply the geometric-model lemma, retaining the specified equality of its model with m.",
+   "uses": [
+    "lem-sfb-diagonal-trace-chern-twist-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The constant-coefficient inverse image is exact and left adjoint to direct image. Its tower functor is exact too, so tower direct image preserves K-injectives; direct image preserves limits as a right adjoint. Apply the general diagonalDirectImage_of_preservesKInjective argument of the derived-limit node, which does not use the finite-field restrictions of the public geometric specialization. This supplies LX,LS,Rf,Rt and the common-unit-normalized LimitSquare.",
+   "uses": [
+    "det-prop-diagonal-tower-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar-comparison lemma to the constructed geometry and Rf,Rt. On a K-injective P the canonical cochain unit of g.push is the inverse of rightDerivedFunctorObjQIso P. Multiply the full varying-square normalization by the image of its hom and cancel hom followed by inv. The resulting equation is precisely varying_normalization. Assemble every field of PartialPresentation and use the geometric-model equality for the final conclusion.",
+   "uses": [
+    "lem-sfb-diagonal-trace-scalar-comparisons",
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-chern-twist-existence",
+  "lem-sfb-diagonal-trace-geometric-model-existence",
+  "det-prop-diagonal-tower-limit",
+  "lem-sfb-diagonal-trace-scalar-comparisons",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "by": "U1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); explicit local Chern/model/scalar separation, derived-limit construction and unit cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of normalized projective line derived comparison data",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty derived projective line presentation",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_diagonalTraceComparisonPartial",
+   "results": "New declaration only.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate."
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceComparisonPresentation",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), construction before the Milnor comparison"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceComparisonPartial",
+  "file": "lean/Sheaf/Paper/DiagonalTraceComparisonPartial.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceComparisonPartial",
+  "statement": "theorem exists_diagonalTraceComparisonPartial (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] (f : X ⟶ S) (m : X ≅ ProjectiveLine S) (hm : m.hom ≫ (ProjectiveLine S ↘ S) = f) (hS : IsUnit (l : Γ(S, ⊤))) : ∃ p : PartialPresentation l (ULift.{u} (Padic l)) f, p.model.model = m",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222554-L-669355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T235941-L-1473108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

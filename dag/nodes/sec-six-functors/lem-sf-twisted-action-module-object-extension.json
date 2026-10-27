@@ -1,0 +1,152 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-twisted-action-module-object-extension",
+ "kind": "statement",
+ "title": "Extension of one fixed module pair to the twisted action site",
+ "statement": "Let (C,J) be a small site with pullbacks, s a continuous site autoequivalence with continuous inverse, R a commutative ring sheaf, a:(s inverse)*R ≅ R, and S:Site(J,s,R,a), using [def-sf-twisted-action-presentation-data]. Let U be degree-zero restriction with scalars restricted along coefficientRestriction inverse, and let sigma be the specified twisted module translation. Every fixed pair P=(M,theta:sigma(M)≅M) admits a coefficient module sheaf N on S and an R-linear sheaf isomorphism b:U(N)≅M such that b inverse at s inverse X equals the restriction of N along the minus-one generator composed with b inverse at X and theta at X. No functor, lifting of morphisms, or equivalence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent-formulated twisted variant of Tag 00W0 (proposition-sheaves-on-group), original step 4, object part; Stacks 03CV for module sheaves."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Forget the module operations of the fixed pair P to obtain its set-valued presheaf F and the natural isomorphism tau induced by pairIso P. Apply twistedPresheafExtension to obtain G and c, including its minus-one equation.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-twisted-action-presheaf-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate G(f) by the components of c to obtain H(f):M(Y) to M(X); conjugate the coefficient restriction by coefficientRestriction to obtain q(f):R(Y) to R(X). Both satisfy contravariant identity and composition laws. On base arrows they equal the old restrictions. On the minus-one generator H is pairIso(P).inv and q is a.inv, so H is additive and q-semilinear. These two properties are closed under composition. They are closed under inversion because H(f) and q(f) have the displayed inverses H(inv f) and q(inv f): apply the injective H(f) and cancel.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove generator induction for properties stable under composition and inversion. The minus-one generator is invertible because both composites with the degree-one counit arrow are images of base isomorphisms. Degree minus one factors as a base arrow and a generator. Degree one factors as an inverse generator and base arrows. A degree n+m arrow factors into degree n and degree m arrows, after inserting powerComp.inv. Integer induction now proves the semilinearity and additivity of H for every arrow. This is the proved generator argument of TwistedActionSetRestriction, reused privately without importing its sheaf equivalence.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an arbitrary copied object X use M(X.base), with scalars restricted along the coefficient map to the inclusion of X.base followed by coefficientRestriction. Conjugate each arrow by the object-copy isomorphisms and use H for its module map. The preceding additive and semilinear identities construct an actual PresheafOfModules. Its underlying sets are naturally isomorphic to G. The restriction of G is isomorphic to the underlying sheaf of M; twistedSheafOfRestriction gives descent for G, and reflection of the sheaf condition through forget Ab gives descent for the constructed module presheaf.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-twisted-action-sheaf-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underlying restriction isomorphism z is inclusion-whiskered comparison with G followed by c. Its inverse component is the old restriction along the base equality isomorphism (inclusion X).base to X, by naturality of c. Naturality of coefficientRestriction proves this component is linear with the constructed scalar action. Bundle these components as a module isomorphism b. Apply the comparison with G to the required generator equation. Its naturality reduces the equation to the given generator equation for G, and pairIso(P).hom_inv_id cancels the structure map.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-presheaf-extension",
+  "lem-sf-twisted-action-sheaf-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent twisted variant of Tag 00W0, step 4: module operations transported through the existing presheaf extension; existing descent criterion used. Generator induction follows the proved argument in TwistedActionSetRestriction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a sheaf of modules with an invertible semilinear structure to a sheaf on the integer semidirect action site by iterating the structure isomorphism",
+   "results": "8 hits: SheafOfModules.unit, SheafOfModules.QuasicoherentData.I, SheafOfModules.over, SheafOfModules.toSheaf, SheafOfModules.QuasicoherentData, ModuleCat.tilde, PresheafOfModules.Sheafify.smulCandidate, SheafOfModules. No normalized object extension theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic primitives only; no matching action-site extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, _ ⟶ _",
+   "results": "12 hits: SheafOfModules.pushforward, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardCongr_symm, SheafOfModules.pushforwardComp. No normalized object extension theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic primitives only; no matching action-site extension"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*Full|pushforward.*EssSurj|sheaf.*semidirect|semidirect.*sheaf",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/Sites/Small.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean, Mathlib/CategoryTheory/Sites/Sieves.lean. No normalized object extension theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic primitives only; no matching action-site extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a sheaf of modules with invertible semilinear automorphism to a sheaf on the semidirect product site",
+   "results": "8 hits: SheafOfModules.noConfusionType, AlgebraicGeometry.Scheme.Modules, ModuleCat.tildeInModuleCat, SheafOfModules.free, SheafOfModules.unit, SheafOfModules, SheafOfModules.ιFree, SheafOfModules.instCategory. Generic module-sheaf APIs only; no integer action-site object extension.",
+   "date": "2026-10-27",
+   "verdict": "no matching extension theorem"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionModuleRestriction",
+  "group": "Y9",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation. Supporting step: Module restriction on a specified twisted site. The ancestor tool returns null for the parent; blueprint_refs search twisted action site and semidirect found no corresponding blueprint node. Supporting step: Extension of one fixed module pair to the twisted action site.",
+   "via": [
+    "lem-sf-twisted-action-module-restriction",
+    "lem-sf-twisted-action-site-restriction",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionModuleObjectExtension",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionModuleObjectExtension.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.moduleObjectExtension",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.moduleObjectExtension"
+  ],
+  "statement": "theorem moduleObjectExtension [HasPullbacks C] (S : Site J s R a) :\n    letI := S.category\n    letI := S.inclusion_continuous\n    let U : Modules S.coefficient ⥤ Modules R := SheafOfModules.pushforward\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map S.coefficientRestriction.inv)\n    ∀ P : Pairs (sigma J s R a),\n      ∃ (N : Modules S.coefficient) (b : U.obj N ≅ P.obj.a),\n        ∀ (X : C) (x : ((sigma J s R a).obj P.obj.a).val.obj (op X)),\n          b.inv.val.app (op (s.inverse.obj X)) x =\n            N.val.map ((S.arrows (s.inverse.obj X) X).symm ⟨-1, 𝟙 _⟩).op\n              (b.inv.val.app (op X) (P.obj.str.val.app (op X) x))",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T084517-L-3687485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T094503-L-234123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

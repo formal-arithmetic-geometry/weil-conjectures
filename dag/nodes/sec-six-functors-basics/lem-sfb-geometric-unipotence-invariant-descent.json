@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-geometric-unipotence-invariant-descent",
+ "kind": "statement",
+ "title": "Geometric fixed vectors are scalar extensions of scheme invariants",
+ "statement": "Let $k$ be a field [def-weil-field], let $K$ be an algebraic closure of $k$ [def-weil-algebraic-closure], and let $G$ be a smooth [def-sbc-smooth-morphisms] affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$. Let $d\\geq0$ and let $W$ be a $d$-dimensional $k$-vector space with a rational $G$-action: for every commutative $k$-algebra $R$ there is an action of $G(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,G)$ by $R$-linear automorphisms of $W_R=R\\otimes_k W$, natural in $R$. Define\n$$W^G=\\{w\\in W:g(1\\otimes w)=1\\otimes w\\text{ in }W_R\\text{ for every commutative }k\\text{-algebra }R\\text{ and }g\\in G(R)\\}.$$\nThe scalar-extended inclusion $K\\otimes_k W^G\\longrightarrow K\\otimes_k W$ is injective and identifies its source with\n$$\\{z\\in K\\otimes_k W:g z=z\\text{ for every }g\\in G(K)\\}.$$\nIn particular, a nonzero vector fixed by all geometric points exists if and only if $W^G\\ne0$. No perfectness or connectedness assumption on $k$ or $G$ is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 4.31--4.33, printed p.96, and Corollary 4.34, printed p.97; geometric-point detection for a smooth group uses Propositions 1.10 and 1.17, printed pp.9--11, and 1.26(b), printed p.13. This is the invariant comparison used in Corollaries 14.9 and 14.12, printed pp.282--283."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-sfb-natural-rational-representation"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}A$, with its given $k$-algebra structure. The affine-pair characterization [lem-weil-pbc-lft-affine-pairs], applied to the whole source and $\\operatorname{Spec}k$, says that $A$ is a finitely generated $k$-algebra. By [def-weil-affine-spectrum], points of $G(R)$ are exactly $k$-algebra maps $A\\to R$. Let $u\\in G(A)$ correspond to $1_A$. Naturality of the given action therefore says, for $g:A\\to R$ and $w\\in W$, that $g(1\\otimes w)$ is obtained from $u(1\\otimes w)\\in A\\otimes_k W$ by applying $g\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.33, p.96, universal element; finite generation: Stacks Tag 01T2, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "Define the $k$-linear map $D:W\\to A\\otimes_k W$ by $D(w)=u(1\\otimes w)-1\\otimes w$. Then $\\ker D=W^G$: one inclusion follows by taking $R=A$, $g=u$ in the definition of $W^G$; the other follows by applying every $g\\otimes1$ to $D(w)=0$ and using step 1. For any commutative $k$-algebra $B$, put $D_B=1_B\\otimes D$ and identify its target with $(B\\otimes_k A)\\otimes_k W$ by rearranging pure tensors. If $z=\\sum_i b_i\\otimes w_i\\in B\\otimes_k W$ and $g:A\\to B$ is a point, the map $b\\otimes a\\mapsto b\\,g(a)$ sends $D_B(z)$ to $gz-z$. This follows term by term from step 1 and the $B$-linearity of the action. The multiplication map used here is the algebra tensor-product universal map of [lem-weil-pbc-algebra-tensor-pushout-universal-property].",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.33, p.96; expand the universal-element calculation on pure tensors"
+   }
+  },
+  {
+   "text": "The image of $K\\otimes_k W^G\\to K\\otimes_k W$ is exactly $\\ker D_K$. Indeed, express an arbitrary tensor as $z=\\sum_{i=1}^r b_i\\otimes w_i$ with the $b_i\\in K$ linearly independent over $k$, by collecting its finitely many coefficients in a basis of their span. If $D_K(z)=0$, apply a $k$-linear functional on $K$ taking $b_i$ to $1$ and the other $b_j$ to $0$ (extend the finite independent family to a basis). This gives $D(w_i)=0$, hence $w_i\\in W^G$ by step 2. Conversely $D_K$ kills each $b\\otimes w$ with $w\\in W^G$, and hence their sums. This proves the image equality directly, without assuming a tensor-exactness theorem or commuting an infinite intersection with tensor product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.31, p.96, coefficient-basis argument; Corollary 4.34, p.97"
+   }
+  },
+  {
+   "text": "Put $A_K=K\\otimes_k A$. By [lem-weil-pbc-fibre-product-affine-spectra], $G_K=G\\times_k\\operatorname{Spec}K$ is $\\operatorname{Spec}A_K$. Since $G\\to\\operatorname{Spec}k$ is smooth, [sbc-lem-smooth-geometrically-reduced] says its fibre over the unique point of $\\operatorname{Spec}k$ is geometrically reduced. That fibre is $G$ itself, so $G_K$ is reduced. The equivalence in [def-pc-reduced-scheme] then makes $A_K$ a reduced ring. If $a_1,\\ldots,a_n$ generate $A$ over $k$, the elements $1\\otimes a_j$ generate $A_K$ over $K$, by expanding polynomials and pure tensors. Thus $A_K$ is a reduced finitely generated $K$-algebra, precisely the hypotheses needed for the vanishing principle in the next step.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.10, 1.26(b), pp.9--13; Stacks Tag 056T, lemma-smooth-geometrically-normal; Tag 01I4, lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "Let $z\\in K\\otimes_k W$ be fixed by every $g\\in G(K)$. Choose a $k$-basis $e_1,\\ldots,e_d$ of $W$ and write $D_K(z)=\\sum_{j=1}^d f_j\\otimes e_j$ with $f_j\\in A_K$. Every $K$-algebra homomorphism $\\phi:A_K\\to K$ has the form $b\\otimes a\\mapsto b\\,g(a)$ for a unique $k$-algebra homomorphism $g:A\\to K$, by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Step 2 gives $\\sum_j\\phi(f_j)e_j=gz-z=0$. Linear independence of the $e_j$ over $K$ implies $\\phi(f_j)=0$ for every $\\phi$. Apply clause (2) of [lem-wf-affine-nullstellensatz-vanishing] to $A_K$ over the algebraically closed field $K$, using step 4: each $f_j=0$. Hence $D_K(z)=0$. Conversely, step 2 shows that $D_K(z)=0$ implies $gz=z$ for every $g\\in G(K)$. The geometric fixed vectors are therefore $\\ker D_K$, which is the image computed in step 3.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 4.32--4.33, p.96, with coefficient-function detection from Proposition 1.10, pp.9--10"
+   }
+  },
+  {
+   "text": "Finally, the inclusion $W^G\\hookrightarrow W$ has a $k$-linear retraction: extend a basis of $W^G$ to one of $W$ and kill the added basis vectors. Tensoring the inclusion and this retraction with $K$ gives maps whose composite is the identity (check on pure tensors); the scalar-extended inclusion is therefore injective. If $0\\ne w\\in W^G$, a $k$-linear functional $\\lambda:W\\to k$ with $\\lambda(w)=1$ gives $(1_K\\otimes\\lambda)(1\\otimes w)=1$, so its image is a nonzero geometric fixed vector. Conversely $W^G=0$ makes its tensor product and thus the fixed subspace zero by steps 3 and 5. The same proof allows $d=0$, the trivial group, and disconnected smooth groups. Smoothness was used only in step 4; no perfectness of $k$ or connectedness of $G$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 4.34, p.97, and its application in Corollary 14.12, p.283; elementary basis argument for injectivity and nonzero detection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 4.31--4.33 and Corollary 4.34, pp.96--97; Propositions 1.10, 1.26(b), pp.9--13. Coefficient calculations written explicitly; geometric inputs reused from existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "invariants.*(baseChange|base.change|tensor)|((baseChange|base.change|tensor).*invariants)",
+   "results": "OK 25 hit(s): Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\", \"baseChange\"",
+   "results": "OK 0 hit(s): ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine algebraic group, invariants of a rational representation commute with algebraic closure and equal the vectors fixed by every geometric point",
+   "results": "OK 8 hit(s): Rep.invariantsFunctor_obj_carrier, Algebra.IsInvariant.isInvariant, Algebra.isInvariant_iff, Rep.toInvariants, IsGaloisGroup.isInvariant, Representation.linHom.invariantsEquivFDRepHom, Representation.averageMap_invariant, Algebra.IsInvariant.isIntegral; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "grep",
+   "query": "invariants|fixedPoints|fixed.points|comodule",
+   "results": "OK 3 hit(s): Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth affine group scheme over k and a rational representation V, the vectors fixed by G over the algebraic closure are exactly the scalar extension of the scheme theoretic invariant subspace",
+   "results": "OK 8 hit(s): Representation.invariants, Representation.mem_invariants, Representation.invariants_eq_inter, Rep.invariantsAdjunction, Rep.invariantsFunctor_obj_carrier, Representation.invariants_eq_top, Rep.invariantsFunctor, Rep.quotientToInvariantsFunctor_obj_V; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants in a comodule over the coordinate Hopf algebra commute with field extension; for a reduced algebraic group over an algebraically closed field they are detected on rational points",
+   "results": "OK 8 hit(s): Algebra.isInvariant_iff, Algebra.IsInvariant.isInvariant, Algebra.isInvariant_of_isGalois, IsGaloisGroup.isInvariant, Algebra.isInvariant_of_isGalois', Algebra.IsInvariant.isIntegral, Algebra.IsInvariant.isIntegral_of_profinite, FixedPoints.toAlgHom_bijective; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group invariant definitions and invariant-ring/Galois theorems do not identify geometric-point invariants with scheme-theoretic invariants of a smooth affine group; no algebraic-group comodule comparison is present"
+  },
+  {
+   "tool": "grep",
+   "query": "invariants.*(baseChange|tensor)|comodule",
+   "results": "{\"t\": \"2026-10-23T14:49:24Z\", \"tool\": \"grep\", \"query\": \"invariants.*(baseChange|tensor)|comodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\"], \"digest\": \"32407061f7e44388\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract-group invariants, coinvariants or Galois invariant algebras; none states scheme-theoretic invariant comparison for rational group-scheme actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine group scheme a rational representation invariant subspace commutes with scalar extension and is detected by geometric points when the group is smooth",
+   "results": "{\"t\": \"2026-10-23T14:49:24Z\", \"tool\": \"leansearch\", \"query\": \"For an affine group scheme a rational representation invariant subspace commutes with scalar extension and is detected by geometric points when the group is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invariants\", \"Representation.mem_invtSubmodule\", \"Rep.invariantsFunctor_obj_carrier\", \"Representation.mem_invariants\", \"Representation.invariants_eq_inter\", \"Subrepresentation.mem_ofSubmodule'_iff\", \"Representation.invtSubmodule.top_mem\", \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\"], \"digest\": \"c9360b4abfafefb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract-group invariants, coinvariants or Galois invariant algebras; none states scheme-theoretic invariant comparison for rational group-scheme actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T14:49:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariants\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract-group invariants, coinvariants or Galois invariant algebras; none states scheme-theoretic invariant comparison for rational group-scheme actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of scheme theoretic invariants of a smooth affine algebraic group representation equals the vectors fixed by its algebraically closed field points",
+   "results": "{\"t\": \"2026-10-23T14:49:25Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of scheme theoretic invariants of a smooth affine algebraic group representation equals the vectors fixed by its algebraically closed field points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsFunctor_obj_carrier\", \"Algebra.isInvariant_iff\", \"Algebra.IsInvariant.isInvariant\", \"Algebra.isInvariant_of_isGalois\", \"FixedPoints.toAlgHom_bijective\", \"Representation.linHom.invariantsEquivFDRepHom\", \"Algebra.isInvariant_of_isGalois'\", \"IsGaloisGroup.isInvariant\"], \"digest\": \"7bbb07136eb17cf5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract-group invariants, coinvariants or Galois invariant algebras; none states scheme-theoretic invariant comparison for rational group-scheme actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant vector in a rational group scheme representation is the kernel of coaction minus the unit map; flat base change preserves this kernel",
+   "results": "{\"t\": \"2026-10-23T14:51:45Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant vector in a rational group scheme representation is the kernel of coaction minus the unit map; flat base change preserves this kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.ker\", \"Representation.Coinvariants.sub_mem_ker\", \"Rep.toCoinvariantsKer\", \"Rep.invariantsFunctor_obj_carrier\", \"Representation.Coinvariants.mem_ker_of_eq\", \"groupCohomology.d₀₁_ker_eq_invariants\", \"Representation.Coinvariants.mk_eq_zero\", \"Rep.invariantsAdjunction_unit_app\"], \"digest\": \"b4233043855a19c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract-group invariants, coinvariants or Galois invariant algebras; none states scheme-theoretic invariant comparison for rational group-scheme actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Smooth unipotent affine algebraic groups are solvable. Structural input to Milne 14.21: 14.12 and 14.5(b), embedding into upper unitriangular matrices over k before intersecting the standard series. Supporting input: Propositions 4.31--4.33, printed p.96, and Corollary 4.34, printed p.97; geometric-point detection for a smooth group uses Propositions 1.10 and 1.17, printed pp.9--11, and 1.26(b), printed p.13. This is the invariant comparison used in Corollaries 14.9 and 14.12, printed pp.282--283.",
+   "via": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-unipotence-invariant-descent",
+  "worker": "stage1",
+  "summary": "Retained the statement; proved invariance as a universal-element kernel, scalar descent by coefficient functionals, and geometric-point detection by the existing smooth-geometrically-reduced and affine Nullstellensatz nodes. No new nodes, no Lean, no builds. Added explicit tensor/spectrum statement dependencies.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through unipotent unitriangular embeddings. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). The ancestor tool returns None, matching the inherited null from.node; from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre geometric reducedness supplies reducedness after algebraic closure; the unit has no such algebraic-geometric criterion."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic regular-function detection on a reduced finite-type affine scheme over an algebraically closed field; this unit has no substitute for this vanishing principle."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine coordinate description of field base change."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine characterization gives finite generation of the coordinate algebra."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebra tensor universal property identifies point evaluation maps; this is not an alternative unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-798d9bb5c",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-798d9bb5c (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery is one commit (item plus report) with no new nodes and no repair note. The statement is unchanged; the added stmt_deps (module tensor product, affine spectrum) are used in the statement, and proof_deps equals the union of the step uses. Source checked: Milne 2017, printed p.96 Props 4.31-4.33 and p.97 Cor 4.34. The statement is 4.34 for k'=K together with geometric-point density. Step 1: 01T2 lft-affine-pairs applied with U=G, V=Spec k shows A is finitely generated; def-weil-affine-spectrum gives G(R)=Hom(A,R); naturality at the universal point u=id_A is correct. Step 2: ker D = W^G both ways; tensor-pushout clause (2) with f=id_B sends D_B(z) to gz-z. Step 3: the coefficient-functional argument of 4.31 is correct and elementary. Step 4: fibre-product-affine-spectra (01I4) and smooth-geometrically-reduced give G_K reduced, since its def (def-sbc-normal-dominant-galois) means reduced after separably closed extensions and K is algebraically closed; reduced-scheme and the generators 1⊗a_j give a reduced finitely generated A_K. Step 5: K-algebra maps A_K→K come from k-maps A→K by tensor-pushout clauses (2)-(3); Nullstellensatz-vanishing clause (2) gives D_K(z)=0. Step 6: the retraction and functional arguments are elementary. Edge cases: d=0; trivial G; mu_p in characteristic p, weight 1, where the statement fails without smoothness and smoothness is used exactly in step 4; imperfect k; disconnected G. No duplicate: the comodule dictionary is not needed, Galois subspace descent and the unipotent fixed-vector nodes state different things. No cycle; the only citer is the unitriangular-embedding parent. tool_uses accepted: smooth-geometrically-reduced and Nullstellensatz-vanishing are generic black-box tools; the other three entries are Mathlib leaves. No SGA. from.node null is inherited from the base, with its via chain left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricInvariantDescent",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.geometric_invariant_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricInvariantDescent.lean",
+  "statement": "theorem geometric_invariant_descent {k K : Type u} [Field k] [Field K] [Algebra k K] [IsAlgClosure k K] (G : Scheme.{u}) [G.Over (Spec (.of k))] [GrpObj (G.asOver (Spec (.of k)))] [IsAffine G] [Smooth (G ↘ Spec (.of k))] [LocallyOfFiniteType (G ↘ Spec (.of k))] [QuasiCompact (G ↘ Spec (.of k))] (W : Type u) [AddCommGroup W] [Module k W] [FiniteDimensional k W] (d : ℕ) (hd : Module.finrank k W = d) (r : NaturalRepresentation (k := k) G W) : ∃ U : Submodule k W, (∀ w : W, w ∈ U ↔ ∀ (R : Type u) [CommRing R] [Algebra k R] (g : points (G.asOver (Spec (.of k))) R), r.action R g ((1 : R) ⊗ₜ[k] w) = (1 : R) ⊗ₜ[k] w) ∧ Function.Injective (U.subtype.lTensor K) ∧ Set.range (U.subtype.lTensor K) = {z : K ⊗[k] W | ∀ g : points (G.asOver (Spec (.of k))) K, r.action K g z = z} ∧ ((∃ z : K ⊗[k] W, z ≠ 0 ∧ ∀ g : points (G.asOver (Spec (.of k))) K, r.action K g z = z) ↔ U ≠ ⊥)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential submodule is uniquely determined by the first conjunct, which is the node's definition of W^G. No subspace, action or tensor map is supplied as an extra hypothesis. The remaining conjuncts are injectivity of the actual scalar-extended inclusion, its exact geometric fixed-vector range, and the nonzero-vector equivalence. NaturalRepresentation is reused, not redeclared."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b78fcabf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records, the new existing:true node def-sfb-natural-rational-representation (-> landed NaturalRepresentation at RationalRepresentationComoduleDictionary:49; its fields match the node's natural-action definition), the delivered module and the report. H3: W^G is an ∃ Submodule fixed by an iff that copies the node's ∀R∀g definition (R : Type u contains the coordinate ring, so nothing is lost); conclusions are injectivity of U.subtype.lTensor K, exact range = K-point fixed set, and nonzero-fixed-vector ↔ U≠⊥. Hypotheses: IsAlgClosure, GrpObj over Spec k, IsAffine, Smooth, LFT∧QC (implied by smooth), FiniteDimensional with finrank=d; no perfect/connected/characteristic assumption. Edge cases d=0, trivial G, disconnected G, imperfect k OK; universe u forced by the interface and harmless. H4: no duplicate (searched DAG/blueprint index; related fixed-space nodes state different things); the new def node closes the ownership gap Q43 was returned for. Docstrings carry source place, blueprint tag and all 6 steps; only sorry; lean.statement verbatim. No fixes, no compile (unchanged files; worker compile clean)."
+ }
+}

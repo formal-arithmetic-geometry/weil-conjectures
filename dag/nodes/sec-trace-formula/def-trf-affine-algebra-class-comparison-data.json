@@ -1,0 +1,147 @@
+{
+ "id": "def-trf-affine-algebra-class-comparison-data",
+ "kind": "definition",
+ "title": "Representative-normalized affine algebra-class comparison data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For each commutative ring $B$, write $D(B)$ for its module derived category [def-weil-abstract-derived-category] and $D(\\mathcal O_{\\operatorname{Spec}B})$ for the sheaf derived category [def-pc-derived-category]. An affine realization comparison system consists of functors $F_B:D(B)\\to D(\\mathcal O_{\\operatorname{Spec}B})$ equipped with natural factorizations $QF_B\\cong\\widetilde{(-)}Q$ of the termwise associated-sheaf construction [lem-pc-affine-qcoh-derived-equivalence], natural tensor isomorphisms $\\alpha_{P,Q}:F_BP\\otimes^LF_BQ\\cong F_B(P\\otimes^LQ)$, and affine-open restriction isomorphisms $\\rho_\\varphi:j^*F_B\\cong F_D L_\\varphi$, where $L_\\varphi=D\\otimes_B^L-$ is the normalized ordinary derived scalar extension [lem-pur-derived-change-of-rings]. Tensor and restriction identifications are fixed on K-flat representatives [def-pc-kflat-complex]: the total-tensor comparison restricts on each degree summand to the ordinary pure-tensor tilde map [lem-weil-pbc-affine-tilde-tensor]; its derived tensor square uses the localization tensor map. The ordinary pullback comparison is the unit-normalized tilde/pullback map [lem-weil-pbc-tilde-pullback-base-change], and its derived square uses the original recorded pullback counit [lem-pc-recorded-pullback-composition]. Require compatibility of $\\rho$ with tensors using a normalized monoidal pullback model [def-pc-derived-pullback-monoidal-model]. Include composition isomorphisms $L_{\\psi\\varphi}\\cong L_\\psi L_\\varphi$, normalized by the scalar-extension counits and the ordinary tensor associator, and require the successive-$\\rho$ square using the recorded pullback composition. For such a system define $\\gamma_{E,T}:F_B R\\operatorname{Hom}_B(E,T)\\to R\\mathcal Hom(F_BE,F_BT)$ as the transpose of $\\alpha;F_B(\\mathrm{ev})$, using the recorded derived internal Hom [def-pur-derived-internal-hom] and the representative-normalized sheaf tensor-Hom bijection [def-pc-canonical-derived-tensor-hom-bijection]. Define $\\lambda_\\varphi:L_\\varphi R\\operatorname{Hom}_B(E,T)\\to R\\operatorname{Hom}_D(L_\\varphi E,L_\\varphi T)$ by transposing extended evaluation. Define the open-Hom comparison by transposing pulled-back evaluation. For a commutative $B$-algebra $C$, put $E=C[0]$ and construct $\\mu_C:E\\otimes^LE\\to E$ from ordinary multiplication and the localization tensor map, and multiplication by $c\\in C$ by localizing its degree-zero linear map. For any multiplication $\\mu:E\\otimes^LE\\to E$ and class $\\xi:E\\to T$, define $m_\\xi$ as the module transpose of $\\mu;\\xi$, and define its sheaf counterpart for $E=C[0]$ by transposing the actual multiplication of the sheaf algebra $\\widetilde C$ followed by the realized class. Construct this sheaf multiplication independently of the realization system: its ordinary degree-zero product is the inverse of the unique pure-tensor tilde isomorphism followed by $\\widetilde{\\operatorname{mul}_C}$; pass to the derived category using the localization tensor map. Identify $F_B(C[0])$ with $\\widetilde C[0]$ through the recorded factorization and the single-complex comparison, and transport this sheaf product along that identification. Finally define $L_\\varphi M[0]\\to(D\\otimes_B M)[0]$ using the scalar-extension counit and the ordinary single-complex comparison, and define the ordinary multiplication of $(D\\otimes_B C)[0]$. These definitions assert no invertibility of $\\gamma$, $\\lambda$, or the degree-zero scalar-extension arrow.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-pc-recorded-pullback-composition",
+  "def-pc-derived-pullback-monoidal-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0, 08DW, 08DX, 0A6H(3)(a); ordinary comparisons in schemes.tex Tags 01I8 and 01I9; sites-cohomology.tex Tag 08J9; multiplication classes in duality.tex Tag 0E2U."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "canonical affine realization system evaluation tensor K flat restriction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.lift_apply\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(f : M →ₗ[A] N →ₗ[R] P) (a : M ⊗[R] N) :\\n  AlgebraTensorModule.lift f a = TensorProduct.lift (LinearMap.restrictScalars R f) a\", \"doc\": \"For an $ A $-linear bilinear map $ f: M \\\\times N \\\\to P $ compatible with the scalar tower $ R \\\\to A $, evaluating the induced $ A $-linear map $ M \\\\otimes_R N \\\\to P $ at a tensor $ a \\\\in M \\\\otimes_R N\"}\n  {\"name\": \"AffineMap.restrict.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Restrict\", \"type\": \"∀ {k : Type u_1} {V₁ : Type u_2} {P₁ : Type u_3} {V₂ : Type u_4} {P₂ : Type u_5} [inst : Ring k]\\n  [inst_1 : AddCommGroup V₁] [inst_2 : AddCommGroup V₂] [inst_3 : Module k V₁] [inst_4 : Module k V₂]\\n  [inst_5 : AddTorsor V₁ P₁] [inst_6 : AddTorsor V₂ P₂] (φ φ_1 : P₁ →ᵃ[k] P₂) (e_φ : φ = φ_1) {E : Af\", \"doc\": \"Given an affine map $\\\\varphi : P_1 \\\\to P_2$ over a ring $k$ and affine subspaces $E \\\\subseteq P_1$, $F \\\\subseteq P_2$ with $\\\\varphi(E) \\\\subseteq F$, the restriction of $\\\\varphi$ to $E$ defines an affi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [Flat f] : Flat (f.resLE V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"contractLeft\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] M →ₗ[R] R\", \"doc\": \"The linear map that evaluates a dual module element on a module element, defined by contracting the tensor product of the dual module $ {M}^\\\\vee $ and the module $ M $ over the commutative semiring $ \"}\n  {\"name\": \"AffineMap.restrict\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Restrict\", \"type\": \"(φ : P₁ →ᵃ[k] P₂) {E : AffineSubspace k P₁} {F : AffineSubspace k P₂} [Nonempty E] [Nonempty F] (hEF : E.map φ ≤ F) :\\n  E →ᵃ[k] F\", \"doc\": \"Given an affine map $\\\\varphi : P_1 \\\\to P_2$ over a ring $k$ and affine subspaces $E \\\\subseteq P_1$, $F \\\\subseteq P_2$ with $\\\\varphi(E) \\\\subseteq F$, this constructs the restricted affine map $E \\\\to F$\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": FGModuleCatDual K V ⊗ V ⟶ 𝟙_ (FGModuleCat K)\", \"doc\": \"The morphism from the tensor product of the dual module $ \\\\text{Hom}_K(V, K) $ and the module $ V $ to the identity endofunctor on the category of finitely generated $ K $-modules, constructed via the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No affine evaluation/restriction system exists. Existing derived categories, curry and normalized scalar extension are reused."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : (CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) → (Y ⟶ A ⟹ X)\", \"doc\": \"Currying in a monoidal closed category.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_injective\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : Function.Injective CategoryTheory.MonoidalClosed.curry\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.uncurry_curry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A X ⟶ Y) : CategoryTheory.MonoidalClosed.uncurry (CategoryTheory.MonoidalClosed.curry f) = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_uncurry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : X ⟶ A ⟹ Y) : CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalClosed.uncurry f) = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.id_eq\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (x : C) [CategoryTheory.Closed x] : CategoryTheory.MonoidalClosed.id x = CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalCategoryStruct.rightUnitor x).hom\", \"doc\": \"Unfold the definition of `id`.\\nThis exists to streamline the proofs of `MonoidalClosed.id_comp` and `MonoidalClosed.comp_id`\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_eq_iff\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) (g : Y ⟶ A ⟹ X) : CategoryTheory.MonoidalClosed.curry f = g ↔ f = CategoryTheory.MonoidalClosed.uncurry g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.eq_curry_iff\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) (g : Y ⟶ A ⟹ X) : g = CategoryTheory.MonoidalClosed.curry f ↔ CategoryTheory.MonoidalClosed.uncurry g = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.comp_eq\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (x y z : C) [CategoryTheory.Closed x] [CategoryTheory.Closed y] : CategoryTheory.MonoidalClosed.comp x y z = CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalClosed.compTranspose x y z)\", \"doc\": \"Unfold the definition of `comp`.\\nThis exists to streamline the proof of `MonoidalClosed.assoc`\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_natural_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X X' Y : C} [CategoryTheory.Closed A] (f : X ⟶ X') (g : CategoryTheory.MonoidalCategoryStruct.tensorObj A X' ⟶ Y) : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.comp (CategoryTheory.Monoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_natural_right\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y Y' : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A X ⟶ Y) (g : Y ⟶ Y') : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.comp f g) = CategoryTheory.Cat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_id_eq_coev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A X : C) [CategoryTheory.Closed A] : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.id (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((CategoryTheory.Functor.id C).obj X))) = (CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A X : C) {Y : C} [CategoryTheory.Closed A] (g : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft A (CategoryTheory.Mon\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No affine evaluation/restriction system exists. Existing derived categories, curry and normalized scalar extension are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineClassComparison|ordinaryDerivedExtendScalars|realization system",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No affine evaluation/restriction system exists. Existing derived categories, curry and normalized scalar extension are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n AffineClassComparison lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json; blueprint_refs.py search affine.*(class|evaluation)|realization system; rg -l affine.*realization.*system|affine.*comparison.*data dag/nodes/sec-trace-formula",
+   "results": "No AffineClassComparison declarations in WeilConjectures, Sheaf, or the upstream name index. Blueprint search: 0 blueprint nodes match. DAG concept search finds the assigned theorem and surrounding relative dualizing nodes, but no definition node carrying the normalized general system. Existing relativeDualizingAffineTilde is the affine functor alone and lacks this tensor/restriction interface.",
+   "date": "2026-10-24",
+   "verdict": "The new node packages the missing specified comparison system and its evaluation-defined arrows, reusing the existing constituent constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-algebra-class-evaluation-comparison",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Subargument: Returned proof steps 7--9: finite-free/bounded-below affine Hom comparison normalized by evaluation, compatibility of algebra multiplication transposes, scalar action and affine-open localization. Canonical affine comparison system and evaluation-defined maps.",
+   "via": [
+    "lem-trf-affine-algebra-class-evaluation-comparison",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraClassComparisonData",
+  "declaration": "AlgebraicGeometry.AffineClassComparison.Realizations",
+  "declarations": [
+   "AlgebraicGeometry.AffineClassComparison.DMod",
+   "AlgebraicGeometry.AffineClassComparison.tildeComplex",
+   "AlgebraicGeometry.AffineClassComparison.zeroComplex",
+   "AlgebraicGeometry.AffineClassComparison.hom",
+   "AlgebraicGeometry.AffineClassComparison.evaluation",
+   "AlgebraicGeometry.AffineClassComparison.transpose",
+   "AlgebraicGeometry.AffineClassComparison.localization",
+   "AlgebraicGeometry.AffineClassComparison.sheafHom",
+   "AlgebraicGeometry.AffineClassComparison.ordinaryTensor",
+   "AlgebraicGeometry.AffineClassComparison.pullbackComplex",
+   "AlgebraicGeometry.AffineClassComparison.pullbackCounit",
+   "AlgebraicGeometry.AffineClassComparison.Realizations",
+   "AlgebraicGeometry.AffineClassComparison.Normalized",
+   "AlgebraicGeometry.AffineClassComparison.gamma",
+   "AlgebraicGeometry.AffineClassComparison.classMap",
+   "AlgebraicGeometry.AffineClassComparison.openHom",
+   "AlgebraicGeometry.AffineClassComparison.algebraMultiplication",
+   "AlgebraicGeometry.AffineClassComparison.zeroComparison",
+   "AlgebraicGeometry.AffineClassComparison.baseChangedMultiplication",
+   "AlgebraicGeometry.AffineClassComparison.algebraScalar"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraClassComparisonData.lean",
+  "statement": "structure Realizations",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-550b3612d",
+  "group": "Q61",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-550b3612d",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 6efd92ff (H3 tautological class_eq) repairs it correctly. sheafAlgebraMultiplication is built independently of s (pullbackTensorModelMap then the single/total comparison, then ordinaryTensorIso.inv and tilde(mul')). sheafClassMap transports it through zeroRealization (s.factor plus the single/tilde comparison) and follows with F xi. class_eq fixes E=C[0] and mu=algebraMultiplication, so after uncurrying it asserts tensor then F(mu_C) = (zr⊗zr), mu_C~, zr^-1: the content of step 5. The def node text is corrected. Checked against the node: the hypotheses (IsPseudoCoherent, ∃ t IsGE) are exact; gamma is the Phi-transpose of tensor then F ev, with evaluation_eq and invertible for C[0]; naturality holds for all derived maps; scalar_eq and algebraScalar_eq hold; rho is pinned by rho_normalized and pullbackTotal_normalized, with rho_tensor via IsDerivedPullbackMonoidalModel; localization is the evaluation transpose and invertible under the node's hypotheses; openHom is invertible for all K, L (08DL); restriction_eq directions are checked; localization_class, zero_invertible, algebra_multiplication and algebra_class use the actual D⊗C multiplication and xi_D; extensionComp_normalized, rho_comp and successive_localization hold. The successive gamma square follows from these, since gamma is invertible. ∃ s is acceptable: every datum is pinned (affine_tilde_tensor, exists_tensorPullback_tilde_iso and schemeDerivedTensorHomEquiv are unique). Edge cases B=0, empty open, T=0, xi=0, nonflat C and universes u, w independent are covered. No hollow defs; only the main theorem is sorry; docstrings and blueprint tags present; statement verbatim; report sections present; item stmt_deps add only the def node. Advisory: the helper defs are in the item module; the def node misses the direct stmt_deps def-pc-derived-pullback and def-pc-derived-pullback-tensor-comparison, which are covered transitively; it cites lem-pc-recorded-pullback-composition for the constructed composition iso. No compile (no file changed)."
+ }
+}

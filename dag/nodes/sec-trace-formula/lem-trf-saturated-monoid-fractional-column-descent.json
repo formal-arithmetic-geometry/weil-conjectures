@@ -1,0 +1,204 @@
+{
+ "id": "lem-trf-saturated-monoid-fractional-column-descent",
+ "kind": "statement",
+ "title": "Root saturation and fractional column replacement strictly lower a determinant",
+ "statement": "Let $r\\geq1$ and let $S\\subseteq\\mathbf Z^r$ be an additive submonoid, meaning $0\\in S$ and $s+t\\in S$ for $s,t\\in S$. Assume $S$ is root saturated in $\\mathbf Z^r$: for $n\\in\\mathbf N$, $n>0$, and $t\\in\\mathbf Z^r$, $nt\\in S$ implies $t\\in S$. Let $A$ be an integer $r\\times r$ matrix whose columns $v_i$ lie in $S$, with $\\det A\\ne0$ [def-weil-pbc-matrix-determinant]. Let $a\\in\\mathbf Q^r$ satisfy $0\\leq a_i<1$ for every $i$ and suppose $x=\\sum_i a_i v_i$ lies in $\\mathbf Z^r$. Then $x\\in S$. For every index $j$ with $a_j>0$, the integer matrix $A'$ obtained by replacing column $j$ of $A$ by $x$ has all columns in $S$ and satisfies, in $\\mathbf Q$,\n$$\\det A'=a_j\\det A,\\qquad 0<|\\det A'|=a_j|\\det A|<|\\det A|.$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0F0K (algebra-item-cauchy-binet, algebra.tex lines 282--288), square case; the one-column identity follows from the Leibniz formula. Root saturation is the convention of ILO VIII 3.1.17, printed p. 101. The denominator and strict-descent argument is agent-supplied. Extracts old proof step 6 of lem-trf-fs-chart-free-factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Set N equal to the finite product of the positive reduced denominators of the coefficients. For each i, its denominator divides N; write N = den(a_i) d_i and put b_i = d_i num(a_i).toNat. Nonnegativity of a_i implies that its numerator is nonnegative, so (N : Q) a_i = b_i. Multiply each coordinate equation by N, distribute the sum, and use injectivity of Z -> Q to obtain N • x = sum_i b_i • column_i(A) in the integer lattice. Additive-submonoid closure puts this sum in S; apply NSMulSaturated and N > 0 to conclude x in S.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, printed p. 101, saturation convention only; the common-denominator calculation is agent-supplied, as in the original node."
+   }
+  },
+  {
+   "text": "For a fixed j with a_j > 0, split on i = j to see that every column of updateCol j x belongs to S. Map A to Q. The given coordinate equations identify the replacement column with the rational linear combination of the original columns. Apply Mathlib Matrix.det_updateCol_sum, which already proves the multilinearity and repeated-column calculation. Int.cast_det identifies the mapped determinants with the casts of the integer determinants, yielding det(A.updateCol j x) = a_j det A.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, algebra-item-cauchy-binet, lines 282–288, determinant context only; the calculation uses Matrix.det_updateCol_sum in Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439, and the strict inequalities are elementary."
+   }
+  },
+  {
+   "text": "Injectivity of the integer cast makes det A nonzero in Q, hence D = |det A| > 0. The identity and abs_mul give |det(A.updateCol j x)| = a_j D since a_j > 0. Positivity of both factors gives a positive replacement determinant in absolute value, and multiplying a_j < 1 by D gives strict descent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, algebra-item-cauchy-binet, lines 282–288, determinant context only; the calculation uses Matrix.det_updateCol_sum in Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439, and the strict inequalities are elementary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-supplied common-denominator and strict-descent argument from the existing node, formalized by X9. Tag 0F0K supplies determinant context; ILO VIII 3.1.17 supplies the saturation convention. The determinant calculation is supplied by the proved Mathlib theorem Matrix.det_updateCol_sum, with Int.cast_det for scalar comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a root saturated additive submonoid of the integer lattice, a rational nonnegative column combination that is integral lies in the monoid and replacing a column by it multiplies the determinant by its coefficient",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"In a root saturated additive submonoid of the integer lattice, a rational nonnegative column combination that is integral lies in the monoid and replacing a column by it multiplies the determinant by its coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.root_sub_zsmul_mem_range_iff\", \"RootPairing.root_add_zsmul_mem_range_iff\", \"BoxIntegral.unitPartition.mem_smul_span_iff\", \"RootPairing.setOf_root_add_zsmul_eq_Icc_of_linearIndependent\", \"RootPairing.root_sub_nsmul_mem_range_iff_le_chainBotCoeff\", \"RootPairing.setOf_root_add_zsmul_mem_eq_Icc\", \"RootPairing.setOf_root_sub_zsmul_mem_eq_Icc\", \"RootPairing.root_add_nsmul_mem_range_iff_le_chainTopCoeff\"], \"digest\": \"1df008d10a0fe883\"}; No exact or one-line match. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435--439) gives the determinant identity only. AddSubmonoid.NSMulSaturated is the generated additive version of the definition read at Mathlib/GroupTheory/Subgroup/Saturated.lean:24--37; it is not a rational cone-membership theorem. The needed denominator construction and integrality-to-monoid-membership implication are additional work. FixedDetMatrices.reduce concerns 2-by-2 matrices and does not supply this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det_updateCol_sum",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"loogle\", \"query\": \"Matrix.det_updateCol_sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Matrix.det_updateCol_sum\"], \"digest\": \"4e85660d2f622932\"}; No exact or one-line match. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435--439) gives the determinant identity only. AddSubmonoid.NSMulSaturated is the generated additive version of the definition read at Mathlib/GroupTheory/Subgroup/Saturated.lean:24--37; it is not a rational cone-membership theorem. The needed denominator construction and integrality-to-monoid-membership implication are additional work. FixedDetMatrices.reduce concerns 2-by-2 matrices and does not supply this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_updateCol|updateCol.*det|[Rr]oot[Ss]aturat|PowSaturat",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"grep\", \"query\": \"det_updateCol|updateCol.*det|[Rr]oot[Ss]aturat|PowSaturat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\"], \"digest\": \"80631769b128b656\"}; No exact or one-line match. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435--439) gives the determinant identity only. AddSubmonoid.NSMulSaturated is the generated additive version of the definition read at Mathlib/GroupTheory/Subgroup/Saturated.lean:24--37; it is not a rational cone-membership theorem. The needed denominator construction and integrality-to-monoid-membership implication are additional work. FixedDetMatrices.reduce concerns 2-by-2 matrices and does not supply this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integer columns v_i in a saturated additive monoid and rational coefficients between zero and one, an integral fractional combination gives a smaller nonzero absolute determinant by one column replacement",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"leanfinder\", \"query\": \"For integer columns v_i in a saturated additive monoid and rational coefficients between zero and one, an integral fractional combination gives a smaller nonzero absolute determinant by one column replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedDetMatrices.reduce\", \"FixedDetMatrices.reps_entries_le_m'\", \"FixedDetMatrices.reduceStep\", \"Matrix.det_sum_smul_le\", \"FixedDetMatrices.reduce_of_not_pos\", \"FixedDetMatrices.reduce_of_pos\", \"Int.Matrix.exists_ne_zero_int_vec_norm_le\", \"NumberField.house.exists_ne_zero_int_vec_house_le\"], \"digest\": \"c8e40a78a29ff4b6\"}; No exact or one-line match. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435--439) gives the determinant identity only. AddSubmonoid.NSMulSaturated is the generated additive version of the definition read at Mathlib/GroupTheory/Subgroup/Saturated.lean:24--37; it is not a rational cone-membership theorem. The needed denominator construction and integrality-to-monoid-membership implication are additional work. FixedDetMatrices.reduce concerns 2-by-2 matrices and does not supply this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root saturated additive submonoid contains every integral rational nonnegative combination of its elements, and fractional column replacement decreases determinant",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"leansearch\", \"query\": \"Root saturated additive submonoid contains every integral rational nonnegative combination of its elements, and fractional column replacement decreases determinant\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Unavailable: rate-limited service; no absence verdict inferred.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "det_updateCol_sum",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"grep\", \"query\": \"det_updateCol_sum\", \"sub\": \"LinearAlgebra/Matrix/Determinant\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\"], \"digest\": \"38e2592641d6c9c6\"}; No exact or one-line match. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435--439) gives the determinant identity only. AddSubmonoid.NSMulSaturated is the generated additive version of the definition read at Mathlib/GroupTheory/Subgroup/Saturated.lean:24--37; it is not a rational cone-membership theorem. The needed denominator construction and integrality-to-monoid-membership implication are additional work. FixedDetMatrices.reduce concerns 2-by-2 matrices and does not supply this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_updateCol_sum|NSMulSaturated|PowSaturated",
+   "results": "{\"t\": \"2026-10-23T09:29:02Z\", \"tool\": \"grep\", \"query\": \"det_updateCol_sum|NSMulSaturated|PowSaturated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Subgroup/Saturated.lean\", \"Mathlib/GroupTheory/Subgroup/Saturated.lean\", \"Mathlib/GroupTheory/Subgroup/Saturated.lean\", \"Mathlib/GroupTheory/Subgroup/Saturated.lean\", \"Mathlib/GroupTheory/Subgroup/Saturated.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\"], \"digest\": \"6eebe2fc67fce7bc\"}; Read the hits. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439) gives only the determinant clause; AddSubmonoid.NSMulSaturated (generated by to_additive at GroupTheory/Subgroup/Saturated.lean:24–37) gives only the saturation hypothesis. The FixedDetMatrices hits concern 2-by-2 reduction, and the root-pairing, Archimedean and monoid-closure hits do not give integral rational cone membership. No exact or one-line match for the complete statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root saturated additive submonoid contains every integral rational nonnegative combination of its elements",
+   "results": "{\"t\": \"2026-10-23T09:29:02Z\", \"tool\": \"leansearch\", \"query\": \"Root saturated additive submonoid contains every integral rational nonnegative combination of its elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.Saturated\", \"Subalgebra.saturation\", \"AddSubmonoid.closure\", \"AddSubmonoid.multiples_le_zmultiples\", \"AddSubmonoid.multiples_eq_closure\", \"Int.addSubmonoid_closure_range_mul_self\", \"AddSubmonoid.multiples\", \"AddSubmonoid\"], \"digest\": \"a48236a44ed41770\"}; Read the hits. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439) gives only the determinant clause; AddSubmonoid.NSMulSaturated (generated by to_additive at GroupTheory/Subgroup/Saturated.lean:24–37) gives only the saturation hypothesis. The FixedDetMatrices hits concern 2-by-2 reduction, and the root-pairing, Archimedean and monoid-closure hits do not give integral rational cone membership. No exact or one-line match for the complete statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det_updateCol_sum",
+   "results": "{\"t\": \"2026-10-23T09:29:02Z\", \"tool\": \"loogle\", \"query\": \"Matrix.det_updateCol_sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Matrix.det_updateCol_sum\"], \"digest\": \"4e85660d2f622932\"}; Read the hits. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439) gives only the determinant clause; AddSubmonoid.NSMulSaturated (generated by to_additive at GroupTheory/Subgroup/Saturated.lean:24–37) gives only the saturation hypothesis. The FixedDetMatrices hits concern 2-by-2 reduction, and the root-pairing, Archimedean and monoid-closure hits do not give integral rational cone membership. No exact or one-line match for the complete statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral rational nonnegative linear combination of elements of a root saturated additive submonoid of the integer lattice belongs to the submonoid; replacing one matrix column multiplies its determinant by that coefficient",
+   "results": "{\"t\": \"2026-10-23T09:29:12Z\", \"tool\": \"leanfinder\", \"query\": \"An integral rational nonnegative linear combination of elements of a root saturated additive submonoid of the integer lattice belongs to the submonoid; replacing one matrix column multiplies its determinant by that coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedDetMatrices.reps_entries_le_m'\", \"FixedDetMatrices.reps\", \"RootPairing.root_sub_zsmul_mem_range_iff\", \"RootPairing.GeckConstruction.diagonal_elim_mem_span_h_iff\", \"RootPairing.root_add_zsmul_mem_range_iff\", \"FixedDetMatrices.reduce_mem_reps\", \"FixedDetMatrices.reduceStep\", \"RootPairing.GeckConstruction.apply_sum_inl_eq_zero_of_mem_span_h\"], \"digest\": \"0718aa0e4a634235\"}; Read the hits. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439) gives only the determinant clause; AddSubmonoid.NSMulSaturated (generated by to_additive at GroupTheory/Subgroup/Saturated.lean:24–37) gives only the saturation hypothesis. The FixedDetMatrices hits concern 2-by-2 reduction, and the root-pairing, Archimedean and monoid-closure hits do not give integral rational cone membership. No exact or one-line match for the complete statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated additive monoid in a lattice is the intersection of the lattice with its rational positive cone, proved by a common positive denominator",
+   "results": "{\"t\": \"2026-10-23T09:29:41Z\", \"tool\": \"leanfinder\", \"query\": \"A saturated additive monoid in a lattice is the intersection of the lattice with its rational positive cone, proved by a common positive denominator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubmonoidClass.instAddArchimedean\", \"Set.IsPWO.addSubmonoid_closure\", \"FiniteArchimedeanClass.addSubgroup\", \"Rat.addSubmonoid_closure_range_mul_self\", \"ArchimedeanClass.ball\", \"ArchimedeanClass.addSubgroup\", \"FiniteArchimedeanClass.closedBallAddSubgroup\", \"ArchimedeanClass.subsemigroup\"], \"digest\": \"5d2766a6d0240284\"}; Read the hits. Matrix.det_updateCol_sum (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:435–439) gives only the determinant clause; AddSubmonoid.NSMulSaturated (generated by to_additive at GroupTheory/Subgroup/Saturated.lean:24–37) gives only the saturation hypothesis. The FixedDetMatrices hits concern 2-by-2 reduction, and the root-pairing, Archimedean and monoid-closure hits do not give integral rational cone membership. No exact or one-line match for the complete statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fs-chart-free-factorization",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Auxiliary lattice argument: old chart-factorization proof step 6 (saturation after a common denominator and determinant decrease).",
+   "via": [
+    "lem-trf-fs-chart-free-factorization",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-saturated-monoid-fractional-column-descent",
+  "worker": "stage1",
+  "group": "O2",
+  "summary": "Retained the statement exactly. Supplied a positive common denominator explicitly, applied the assumed ambient-lattice root saturation, expanded the Leibniz formula over the rationals, reused the existing repeated-column Mathlib leaf, and checked the strict inequalities and vacuous case. No new nodes are needed: the remaining calculations are elementary steps. Re-read both cited statements and generated verbatim citations. Repeated semantic searches with two phrasings found no exact match for the complete item.",
+  "blueprint": "Realizes the historical auxiliary lattice descent extracted from old step 6 of lem-trf-fs-chart-free-factorization, at the place already recorded in blueprint.from. The latest lem-trf-local-term-locality proof (1)–(2) uses contracting correspondences and does not itself assert this lattice lemma; the historical ancestry is preserved without changing that unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-a2ce4b0d5",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-a2ce4b0d5 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery changes only the item's proof, proof_deps, proof_origin, split_report, status and searches; the statement, stmt_deps, source and blueprint are byte-identical to live, where the node is still unsplit. There is no repair note and no new node. The statement is true and is exactly what the parent lem-trf-fs-chart-free-factorization step 3 uses. Step 1 writes out the denominator argument (N=∏q_i, b_i=p_i∏_{k≠i}q_k, Nx=Σb_i v_i ∈ S by induction and closure). Step 2 applies the ambient root saturation to get x ∈ S, so the columns of A' lie in S. Step 3 expands the Leibniz formula from def-weil-pbc-matrix-determinant and gives Σ_i a_i det A^(i). Step 4 uses lem-weil-pbc-det-repeated-column-zero (Mathlib leaf Matrix.det_zero_of_column_eq, any commutative ring, k≠l) to kill the terms with i≠j. Step 5 shows 0<a_jD<D and notes the vacuous case. proof_deps equals the union of uses, both cited nodes are Mathlib leaves (no route issue), there is no cycle and no tool_uses. I read Stacks algebra.tex lines 280-288 (Tag 0F0K, Cauchy-Binet: context only) and ILO VIII 3.1.17 (saturation convention only); proof_origin=agent is correct, and no SGA source is used. The rg -L duplicate search (including root-saturation-torsion-cone and face-subgroup-saturated) found no duplicate. Small cases checked: [[1,1],[0,2]] with a=(1/2,1/2) gives determinant 1 for both replacements; A=(-2) over S=Z gives x=-1; S=<2,3> shows the ambient saturation hypothesis is needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SaturatedMonoidFractionalColumnDescent",
+  "declaration": "AddSubmonoid.saturated_fractional_column_descent",
+  "file": "lean/Sheaf/LinearAlgebra/SaturatedMonoidFractionalColumnDescent.lean",
+  "statement": "theorem saturated_fractional_column_descent {r : ℕ} (hr : 1 ≤ r) (S : AddSubmonoid (Fin r → ℤ)) (hS : S.NSMulSaturated) (A : Matrix (Fin r) (Fin r) ℤ) (hcols : ∀ i : Fin r, (fun k ↦ A k i) ∈ S) (hdet : A.det ≠ 0) (a : Fin r → ℚ) (ha : ∀ i : Fin r, 0 ≤ a i ∧ a i < 1) (x : Fin r → ℤ) (hx : ∀ k : Fin r, (x k : ℚ) = ∑ i : Fin r, a i * (A k i : ℚ)) : x ∈ S ∧ ∀ j : Fin r, 0 < a j → (∀ i : Fin r, (fun k ↦ (A.updateCol j x) k i) ∈ S) ∧ ((A.updateCol j x).det : ℚ) = a j * (A.det : ℚ) ∧ 0 < abs ((A.updateCol j x).det : ℚ) ∧ abs ((A.updateCol j x).det : ℚ) = a j * abs (A.det : ℚ) ∧ abs ((A.updateCol j x).det : ℚ) < abs (A.det : ℚ)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9af13890e",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Only the lean field is added and there is one new module with a single sorry theorem, no defs. Every hypothesis matches the node: r≥1, AddSubmonoid of Fin r→ℤ, NSMulSaturated (read in Mathlib Saturated.lean:31, ambient, equivalent to the node's root saturation), integer A with columns in S, det≠0, a with 0≤a_i<1, integral x via cast equality. All six conclusion clauses match: x∈S, and for each j with a_j>0 the columns of updateCol lie in S, the signed det identity in ℚ, 0<|det'|, |det'|=a_j|det|, |det'|<|det|. The mathematics is true. Edge cases checked: all a=0 (vacuous), negative det, r=0 excluded. lean.statement appears verbatim in the file. Docstrings carry the sources, the blueprint id and the proof steps. No duplicate, no universes. Both report sections are present. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261026T093038-L-3506634",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

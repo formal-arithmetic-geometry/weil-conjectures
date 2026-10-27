@@ -1,0 +1,168 @@
+{
+ "id": "lem-pur-diagonal-difference-centred-chart",
+ "kind": "statement",
+ "title": "The centred coordinate-difference Rees chart",
+ "statement": "Let k be a field, U,V affine schemes with finite-type structure maps aU,aV to Spec k, h:U→V a separated smooth morphism of pure relative dimension d with h≫aV=aU, and c:U→A^d_V an etale V-map. For every NormalFrame N for x_i=c^*t_i there exists a CentredChart [def-pur-diagonal-difference-frame-data]. This includes the open restriction model, etaleness, both pinned fibre endpoints, every affine formula, and the rank-zero isomorphisms; it does not assert restriction uniqueness or frame change.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+ },
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pur-diagonal-difference-frame-data",
+  "def-pur-dnc-section-family",
+  "def-pur-normal-bundle",
+  "def-pur-rees-cone-normalization",
+  "def-sbc-affine-space",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-rees-cone-normalized-existence"
+ ],
+ "proof": [
+  {
+   "text": "Base change the etale chart and translate by the negative first coordinates. Use the existing centred chart geometry to remove the extra clopen zero fibre. Its Cartesian square translates to the zero-section square by the affine-space coordinate universal property.",
+   "uses": [
+    "lem-pur-chart-normal-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+   }
+  },
+  {
+   "text": "The canonical coefficientwise Rees pair map for O→W is a pullback over the ambient open and hence gives the specified restriction-model isomorphism. Compose the Rees pair map of the difference square with the standard affine-space deformation isomorphism. The section Rees etale theorem proves etaleness and the parameter equation.",
+   "uses": [
+    "def-pur-section-rees-pair-map",
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+   }
+  },
+  {
+   "text": "On an arbitrary affine Rees chart, compatibility of pairMap gives t↦T and v_i↦C(f_i)T⁻¹. Multiplying the latter by t gives f_i, so its one endpoint is e. On the zero quotient, normalized degree-one comparison and the positive conormal sign give exactly q followed by N.normal. The fibre inclusions factor through the centred open by their ambient projections. In rank zero the zero section is an isomorphism, so both the centred square and the Rees pullback give isomorphisms.",
+   "uses": [
+    "def-pur-section-rees-pair-map",
+    "lem-pur-rees-cone-normalized-existence",
+    "lem-pur-diagonal-difference-frame-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-section-rees-pair-map",
+  "lem-pur-chart-normal-differential",
+  "lem-pur-diagonal-difference-frame-change",
+  "lem-pur-rees-cone-normalized-existence",
+  "lem-trf-section-rees-base-change-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivMvPolynomial|toMatrix_mul_toMatrix|tensorKaehlerEquivOfFormallyEtale",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.FormallyEtale",
+   "results": "7 hits: Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.FormallyEtale.mk, Algebra.formallyEtale_iff, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale coordinate chart gives an ordered basis of relative differentials, a polynomial normal cone, compatible deformation restrictions, and a matrix change of frame",
+   "results": "8 hits: StandardEtalePresentation, StandardEtalePresentation.P, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.x, StandardEtalePresentation.hasMap, StandardEtalePresentation.toSubmersivePresentation, Algebra.IsStandardEtale.nonempty_standardEtalePresentation. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale coordinates give a free basis of relative differentials, compatible normal cone and deformation charts, and an invertible change of normal frame",
+   "results": "8 hits: RingHom.Etale, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.formallyEtale_iff, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.iff_unramified_and_smooth, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat. Differential base-change results are used; no full chart/frame theorem.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalDifferenceReesFrame",
+  "date": "2026-10-25",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame",
+   "via": [
+    "lem-pur-diagonal-difference-rees-frame",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalDifferenceCentredChartConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalDifferenceCentredChartConstruction.lean",
+  "declaration": "AlgebraicGeometry.DiagonalDifferenceReesFrame.centred_chart_exists",
+  "statement": "theorem centred_chart_exists (k : Type u) [Field k]\n    {U V : Scheme.{u}} [IsAffine U] [IsAffine V]\n    (aU : U ⟶ Spec (.of k)) (aV : V ⟶ Spec (.of k))\n    [LocallyOfFiniteType aU] [LocallyOfFiniteType aV]\n    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]\n    (hk : h ≫ aV = aU)\n    (c : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale c]\n    (hc : c ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h)\n    (N : NormalFrame d h (fun i ↦ c.appTop (AffineSpace.coord V i))) :\n    Nonempty (CentredChart d h (fun i ↦ c.appTop (AffineSpace.coord V i)) N)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0b30f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164427-L-1012932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0b30f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164427-L-1012932",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical); moved NormalFrame/CentredChart/CentredChart.map vs live text (byte-identical, public imports kept in FrameData); new nodes' proof_deps vs module imports; 0 importers in live"
+ }
+}

@@ -1,0 +1,301 @@
+{
+ "id": "lem-pur-topos-scalar-inverse-exchange-mate",
+ "kind": "statement",
+ "title": "Scalar change and the normalized open adjunct of inverse exchange",
+ "statement": "Use Grothendieck topoi with fixed small-site presentations [def-weil-pbc-topos] and constant sheaves of commutative rings. A morphism of topoi $v:T\\to W$ means an adjunction $v^{-1}\\dashv v_*$ with $v^{-1}$ preserving finite limits. For a ring $R$, write $D_R(T)$ for the ordinary unbounded derived category of sheaves of $R$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $L_{v,R}=v^{-1}$ and $R_{v,R}=Rv_*$, with their derived adjunction and counit $\\varepsilon_{v,R}$. An open embedding means the inclusion of the slice topos of a subterminal object; its exact extension by zero $I_{j,R}$ is left adjoint to $L_{j,R}$, fully faithful, with unit $\\eta_{j,R}:1\\xrightarrow{\\sim}L_{j,R}I_{j,R}$. All equations below insert the canonical inverse-image and direct-image compositors. For a unital ring map $A\\to B$ put $S_T=-\\otimes_A^LB$ [lem-pur-derived-change-of-rings] and let $U_T:D_B(T)\\to D_A(T)$ be exact restriction of scalars. Use the canonical tensor/pullback comparison $\\lambda_v:L_{v,B}S_W\\xrightarrow{\\sim}S_TL_{v,A}$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $\\chi_v:S_WR_{v,A}\\to R_{v,B}S_T$ as the adjoint transpose of $S_T(\\varepsilon_{v,A})\\lambda_v$ [def-weil-pbc-adjunction-mate], and, for an open embedding $j:V\\hookrightarrow T$, $\\beta_j:S_TI_{j,A}\\xrightarrow{\\sim}I_{j,B}S_V$ as the balancing map induced by tensoring sections on the open and the zero map on its complement. Let $b:V\\hookrightarrow T$, $i:Y\\hookrightarrow Z$, $r:V\\to Y$, and $p:T\\to Z$ form a Cartesian square, $pb=ir$. For $R=A,B$ let\n$$E_R:L_{i,R}R_{p,R}\\longrightarrow R_{r,R}L_{b,R}$$\nbe the adjunction-mate exchange of the inverse-image square. Assume that $E_RI_{b,R}$ is invertible on the inputs in question. Put\n$$t_R=R_{r,R}(\\eta_{b,R}^{-1})\\,E_RI_{b,R}:L_{i,R}R_{p,R}I_{b,R}\\xrightarrow{\\sim}R_{r,R}$$\nand define $\\gamma_R:I_{i,R}R_{r,R}\\to R_{p,R}I_{b,R}$ as the $I_{i,R}\\dashv L_{i,R}$ adjunct of $t_R^{-1}$. Thus the normalization is $t_R L_{i,R}(\\gamma_R)\\eta_{i,R,R_{r,R}(-)}=1$.\nFor any $N\\in D_A(T)$ the specified maps satisfy\n$$\\chi_{r,L_{b,A}N}\\,S_Y(E_{A,N})\\,\\lambda_{i,R_{p,A}N}\n=R_{r,B}(\\lambda_{b,N})\\,E_{B,S_TN}\\,L_{i,B}(\\chi_{p,N}).$$\nFor any $M\\in D_A(V)$ on which both $t_A$ and $t_B$ are invertible, with the $B$-input $S_VM$, they satisfy the following equality of actual $B$-linear morphisms:\n$$R_{p,B}(\\beta_{b,M})\\,\\chi_{p,I_{b,A}M}\\,S_Z(\\gamma_{A,M})\n=\\gamma_{B,S_VM}\\,I_{i,B}(\\chi_{r,M})\\,\\beta_{i,R_{r,A}M}.$$\nThe source is $S_ZI_{i,A}R_{r,A}M$ and the target is $R_{p,B}I_{b,B}S_VM$. Both identities are natural. They require no invertibility of $\\chi_p$, $\\chi_r$ or $\\gamma_R$. When the categories are restricted to $D^+$, require all displayed inputs and their scalar extensions to belong to $D^+$. There is no properness, finite-ring or Noetherian hypothesis. In particular the statement concerns the normalization of the inverse-exchange adjunct, rather than an arbitrary isomorphism with the same endpoints.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "def-trf-geometric-morphism",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-pur-constant-coefficient-inverse-image-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove the ordinary coefficient/inverse-image cube directly from the specified ScalarPure and SquarePure equations. Scalar-extension maps are determined after precomposition with m ↦ 1 ⊗ m, by the sheafified tensor hom equivalence. The two geometric insertions for constant coefficients are isomorphisms: their ring maps are components of the constant-ring isomorphism, and scalar extension along a ring isomorphism is an equivalence. Thus equality can be tested on the iterated inverse-image insertion. Naturality moves the scalar comparison through the second geometric insertion. The two ScalarPure equations along each route, the two SquarePure equations, and naturality of the inverse-image square identify the results. Lift this equality degreewise to cochain maps. To prove the derived cube, use flat-term K-flat resolutions and localization natural-transformation extensionality. Postcompose with the invertible composite of the two exact pullback comparisons and scalar-extension comparison. Apply the given SquareResolving and ScalarResolving equations, and naturality of the cochain comparisons, along both routes. Pullback and scalar extension preserve the flat-term K-flat class, so every resolving equation applies. The remaining equality is Q applied to the ordinary cochain cube. Cancel the invertible computation map and descend from resolutions to all derived objects.",
+   "uses": [
+    "def-pur-constant-coefficient-inverse-image-data",
+    "def-sfb-constant-completion-coefficient-data",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0D6D (lemma-derived-pullback-composition); direct generator and resolving-class calculation is an agent argument."
+   }
+  },
+  {
+   "text": "The definitions of $\\chi_v$ and $E_R$, together with the counit-transpose identity [lem-weil-pbc-adjunct-counit-identity], give\n$$\\varepsilon_{v,B,S_TK}\\,L_{v,B}(\\chi_{v,K})=S_T(\\varepsilon_{v,A,K})\\,\\lambda_{v,R_{v,A}K},\\qquad\n\\varepsilon_{r,R,L_{b,R}N}\\,L_{r,R}(E_{R,N})=L_{b,R}(\\varepsilon_{p,R,N})\\,\\theta_{R,R_{p,R}N}.\\tag{2}$$\nThese are equations for the actual maps: [def-weil-pbc-adjunction-mate] specifies each mate by its counit transpose, including for the inverse-image square. In particular we can compare maps into $R_{r,B}$ by comparing their transposes under $L_{r,B}\\dashv R_{r,B}$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  },
+  {
+   "text": "Transpose the exchange/scalar identity under L_rB ⊣ R_rB. Use the counit equations for the actual chi and exchange mates. Naturality of lambda_r moves the A-exchange through lambda_r. On the other side, naturality of the B-counit moves lambda_b, and naturality of the B-square moves chi_p. Its counit equation and naturality of lambda_b leave the derived inverse-image scalar cube at R_pA N, followed by S_V L_bA of the A-counit. The cube identifies the transposes, and the adjunction bijection identifies the original morphisms. No scalar/direct-image comparison is inverted.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  },
+  {
+   "text": "Derive the open-unit equation directly from betaB_mate and betaI_mate. For either open adjunction apply Mathlib unit_mateEquiv to beta inverse and replace its mate by lambda inverse using the supplied equality. Postcompose with lambda to obtain unit_B ≫ L_B(beta inverse) ≫ lambda = S(unit_A). Precompose with L_B(beta), then cancel the invertible unit_B and use functoriality on unit_A and its inverse. This gives L_B(beta) ≫ inverse(unit_B) = lambda ≫ S(inverse(unit_A)). No separate open-subtopos scalar/unit theorem is needed.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  },
+  {
+   "text": "At N = I_bA M, expand the normalized maps t as exchange followed by R_r of the inverse open unit. Naturality of the B-exchange moves R_pB(betaB) through exchange. Apply the inverse-open-unit equation for b and the exchange/scalar identity already proved. Finally naturality of chi_r for the inverse A-open unit yields L_iB(chi_p followed by R_pB(betaB)) followed by t_B = lambda_i followed by S_Y(t_A) followed by chi_r.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  },
+  {
+   "text": "Precompose the claimed gamma/scalar identity with betaI inverse and transpose under I_iB ⊣ L_iB. Postcompose both transposes with t_B, which is invertible on the stated input. The t-compatibility equation, naturality of lambda_i for gamma_A, and the open-unit equation for i reduce the first transpose to chi_r, using the defining normalization of gamma_A. Naturality of the B-open unit and the defining normalization of gamma_B reduce the second to chi_r. Cancel t_B, apply the adjunction bijection, and cancel betaI inverse. Gamma normalization itself is the homEquiv right-inverse equation followed by cancellation of t and its inverse.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  },
+  {
+   "text": "Naturality of exchange and of the open unit gives the naturality square for t. On inputs where both components of t are invertible, multiply by their inverses to obtain the naturality square for inverse t. Transpose under the open adjunction to prove naturality of gamma. All equalities are actual morphism equalities in the coefficient-module derived categories. They restrict to the full bounded-below subcategories whenever all displayed objects belong there. No properness, coefficient finiteness, Noetherianity, or scalar flatness is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 4–6: inverse-image exchange, open units and normalized interchange"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-sfb-constant-completion-coefficient-data",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1 and 3; G8 Lean proof of the insertion cube, direct flat-term K-flat comparison descent, counit-mate exchange, unit-mate normalization, and naturality. Stacks 07A4, 0D6D, 07A7 and 0GL1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a square of topoi with fully faithful exact open left adjoints, scalar compatibility of inverse-image exchange implies compatibility of the inverse-exchange open adjunct including open units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"{C : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} C] →\\n    {D : Type u₃} →\\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type u₁) →\\n            [inst_2 : CategoryTheory.Category.{v₁, u₁} A] →\\n              (J : CategoryTheory\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and assuming the existence of weak sheafifications for $ K $, this constructs\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"{X Y : TopCat} →\\n  (A : Type u_1) →\\n    [inst : CategoryTheory.Category.{w, u_1} A] →\\n      {FA : A → A → Type u_2} →\\n        {CA : A → Type w} →\\n          [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] →\\n            [inst_2 : CategoryTheory.ConcreteCategory A FA] →\\n              [inst_3 : Ca\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} → (f : X ⟶ Y) → TopCat.Presheaf.pullback C f ⊣ TopCat.Presheaf.pushforward C f\", \"doc\": \"Given topological spaces $X$ and $Y$ with a continuous map $f: X \\to Y$, the pullback presheaf functor (defined via left Kan extension) is left adjoint to the pushforward presheaf functor. This establi\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/unit formulas give ingredients, but do not identify the tensor/pullback exchange square and the normalized inverse-exchange open adjunct on the stated module topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change commutes with the open adjunction mate of inverse base change after inserting the inverse of the open unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ β $ between functors involving these adjoints, applying the inverse of the mate equivalence to $ β $ yields a natural transfor\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, the inverse mate equivalence $ (\\\\text{mateEquiv})^{-1}(α) $ satisfies the ident\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, the inverse of the mate equivalence relates the counit of $ L₁ ⊣ R₁ $ with functorial\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the composition of the unit of the adjunction $F \\\\dashv G$ applied to $X \\\\otimes Y$ followed by the image under $G$ of the oplax monoidal coheren\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChangeAux_symm_tmul\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type v₃) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (A : Type u_8)\\n  (B : Type u_9) [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R \", \"doc\": \"Let $R, A, S, B$ be commutative semirings, where $A$ and $S$ are $R$-algebras, and $B$ is an $A$-algebra and an $S$-algebra that is the pushout of $A$ and $S$ over $R$. Let $M$ be an $A$-module. Let $\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} B] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.F\", \"doc\": \"For adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and a two-square diagram $ α $ between functors involving these adjoints, the inverse of the iterated mate equivalence $ (\\\\text{\"}\n  {\"name\": \"CategoryTheory.unit_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (α : R₁ ⟶ R₂) (c : C),\\n  CategoryTheory.CategoryStruct.comp (adj₁.un\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, for any natural transformation $ α : R₁ → R₂ $ and object $ c $ in category $ \\\\mathcal{C} $, the composition of the unit of $ L₁ ⊣ R₁ $ with $ α $ at $ c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/unit formulas give ingredients, but do not identify the tensor/pullback exchange square and the normalized inverse-exchange open adjunct on the stated module topoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.unit",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/unit formulas give ingredients, but do not identify the tensor/pullback exchange square and the normalized inverse-exchange open adjunct on the stated module topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(inv|unit)|inverseExchange|inverse_exchange|scalar.*interchange",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"123\", \"text\": \"theorem mateEquiv_counit (α : TwoSquare G L₁ L₂ H) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"124\", \"text\": \"    L₂.map ((mateEquiv adj₁ adj₂ α).app _) ≫ adj₂.counit.app _ =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"128\", \"text\": \"theorem mateEquiv_counit_symm (α : TwoSquare R₁ H G R₂) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"130\", \"text\": \"      ((mateEquiv adj₁ adj₂).symm α).app _ ≫ H.map (adj₁.counit.app d) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"131\", \"text\": \"  conv_lhs => rw [← (mateEquiv adj₁ adj₂).right_inv α]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"82\", \"text\": \"  mateEquiv (ihom.adjunction A) (ihom.adjunction (F.obj A)) (prodComparisonNatIso F A).inv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"88\", \"text\": \"  convert! mateEquiv_counit _ _ (prodComparisonNatIso F A).inv B using 2\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"97\", \"text\": \"  convert! unit_mateEquiv _ _ (prodComparisonNatIso F A).inv B using 3\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"180\", \"text\": \"      mateEquiv adj₁ adj₂ (f ◁ (λ_ l₂).inv ≫ φ) ≫ (ρ_ _).inv ≫ (α_ _ _ _).hom := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"189\", \"text\": \"      mateEquiv adj₁ adj₂ ((ρ_ _).inv ≫ (α_ _ _ _).hom ≫ φ) ≫ g ◁ (λ_ r₂).inv := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"404\", \"text\": \"      (ρ_ r₁).inv ≫ mateEquiv adj₁ adj₂ ((λ_ l₂).hom ≫ α ≫ (ρ_ l₁).inv) ≫ (λ_ r₂).hom :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"416\", \"text\": \"      (λ_ l₂).inv ≫ (mateEquiv adj₁ adj₂).symm ((ρ_ r₁).hom ≫ α ≫ (λ_ r₂).inv) ≫ (ρ_ l₁).hom :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"455\", \"text\": \"lemma mateEquiv_leftUnitor_hom_rightUnitor_inv\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/unit formulas give ingredients, but do not identify the tensor/pullback exchange square and the normalized inverse-exchange open adjunct on the stated module topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scalar comparison square for exchange transforms into the inverse exchange open adjunction square with unit normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CommSq.left_adjoint\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Adjunction\", \"type\": \"(sq : CommSq u i (F.map p) v) (adj : G ⊣ F) :\\n  CommSq ((adj.homEquiv _ _).symm u) (G.map i) p ((adj.homEquiv _ _).symm v)\", \"doc\": \"Given a commutative square in category $\\\\mathcal{D}$ involving morphisms from functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and an adjunction $G \\\\dashv F$, applying the inverse of the adjunction's hom-equ\"}\n  {\"name\": \"CategoryTheory.Functor.adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(E : C ⥤ D) [IsEquivalence E] : E ⊣ E.inv\", \"doc\": \"Given an equivalence of categories $ E : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs the adjunction $ E \\\\dashv E^{-1} $ where $ E^{-1} $ is the inverse functor of the equivalence. The adjunction is\"}\n  {\"name\": \"CategoryTheory.CommSq.left_adjoint_hasLift_iff\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Adjunction\", \"type\": \": HasLift (sq.left_adjoint adj) ↔ HasLift sq\", \"doc\": \"Given a commutative square in category $\\\\mathcal{D}$ involving morphisms from a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and an adjunction $G \\\\dashv F$, applying the inverse of the adjunction's hom-e\"}\n  {\"name\": \"CategoryTheory.Adjunction.inv_map_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"{X : C} [IsIso (h.unit.app X)] : inv (L.map (h.unit.app X)) = h.counit.app (L.obj X)\", \"doc\": \"For any object $ X $ in category $ \\\\mathcal{C} $, if the unit component $ \\\\eta_X $ is an isomorphism, then the inverse of the left adjoint functor $ L $ applied to $ \\\\eta_X $ is equal to the counit co\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(f : X' ⟶ X) (g : X ⟶ G.obj Y') (h : X' ⟶ G.obj Y) (k : Y ⟶ Y') :\\n  (F.map f ≫ (adj.homEquiv X Y').symm g = (adj.homEquiv X' Y).symm h ≫ k) ↔ (f ≫ g = h ≫ G.map k)\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the natural isomorphism $ \\\\text{Hom}(F(X), Y) \\\\cong \\\\text{Hom}(X, G(Y)) $ satisfies the \"}\n  {\"name\": \"CategoryTheory.CatCommSq.hInv\", \"module\": \"Mathlib.CategoryTheory.CatCommSq\", \"type\": \"(_ : CatCommSq T.functor L R B.functor) : CatCommSq T.inverse R L B.inverse\", \"doc\": \"Given a commutative square of functors between four categories $C_1,C_2,C_3,C_4$ with horizontal functors $T:C_1→C_2$, $L:C_1→C_3$, $R:C_2→C_4$, $B:C_3→C_4$ and isomorphism $T∘R ≅ L∘B$, this construct\"}\n  {\"name\": \"CategoryTheory.Adjunction.inv_counit_map\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"{X : D} [IsIso (h.counit.app X)] : inv (R.map (h.counit.app X)) = h.unit.app (R.obj X)\", \"doc\": \"For any object $X$ in category $\\\\mathcal{D}$, if the counit $\\\\epsilon_X : F(G(X)) \\\\to X$ of an adjunction $F \\\\dashv G$ is an isomorphism, then the inverse of the right adjoint $G$ applied to $\\\\epsilon\"}\n  {\"name\": \"CategoryTheory.CommSq.instHasLift_1\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Adjunction\", \"type\": \"[HasLift sq] : HasLift (sq.left_adjoint adj)\", \"doc\": \"Given a commutative square in category $\\\\mathcal{D}$ involving a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and an adjunction $G \\\\dashv F$, applying the inverse of the adjunction's hom-equivalence to e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/unit formulas give ingredients, but do not identify the tensor/pullback exchange square and the normalized inverse-exchange open adjunct on the stated module topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change commutes with a normalized inverse exchange open adjunction mate including the open units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, the inverse mate equivalence $ (\\\\text{mateEquiv})^{-1}(α) $ satisfies the ident\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ c $ in category $ \\\\mathcal{C} $, the composition of the mate e\"}\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ β $ between functors involving these adjoints, applying the inverse of the mate equivalence to $ β $ yields a natural transfor\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} B] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.F\", \"doc\": \"For adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and a two-square diagram $ α $ between functors involving these adjoints, the inverse of the iterated mate equivalence $ (\\\\text{\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    {E : Type u₃} →\\n      {F : Type u₄} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n            [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n              [inst_3 : CategoryTheory.Category.{v₄,\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} B] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.F\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and a two-square diagram α between functors involving these adjoints, applying the mate equivalence twice (first with adj₁ and\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, the inverse of the mate equivalence relates the counit of $ L₁ ⊣ R₁ $ with functorial\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate formulas and ordinary scalar adjunctions do not state both normalized derived-topos identities; the project scheme-site results have additional hypotheses and different generality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.unit",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate formulas and ordinary scalar adjunctions do not state both normalized derived-topos identities; the project scheme-site results have additional hypotheses and different generality."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseExchange|inverse_exchange|scalar.*interchange",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate formulas and ordinary scalar adjunctions do not state both normalized derived-topos identities; the project scheme-site results have additional hypotheses and different generality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with base change exchange and normalized open adjuncts of inverse exchange",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.baseChange_smul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (r • f).baseChange A = r • f.baseChange A\", \"doc\": \"For any scalar $ r $ and $ R $-linear map $ f : M \\\\to N $, the base change of the scalar multiple $ r \\\\bullet f $ with respect to an $ R $-algebra $ A $ satisfies $ \\\\text{baseChange}_A(r \\\\bullet f) = \"}\n  {\"name\": \"AlgHom.extendScalars\", \"module\": \"Mathlib.RingTheory.AlgebraTower\", \"type\": \": @AlgHom B C D _ _ _ _ (f.restrictDomain B).toRingHom.toAlgebra\", \"doc\": \"Given an algebra homomorphism $ f : C \\to D $ over a commutative semiring $ A $, and a scalar tower $ A \\to B \\to C $, this constructs the extended algebra homomorphism over $ B $ by composing $ f $ with\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \"∀ {R : Type u_3} [inst : CommSemiring R] (S : Submonoid R) (A : Type u_4) [inst_1 : CommSemiring A]\\n  [inst_2 : Algebra R A] [inst_3 : IsLocalization S A] {M : Type u_5} {N : Type u_6} [inst_4 : AddCommMonoid M]\\n  [inst_5 : Module R M] [inst_6 : Module A M] [inst_7 : IsScalarTower R A M] [inst_8 : A\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M ≃ₗ[R] N) ≃ M ≃ₗ[A] N\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate formulas and ordinary scalar adjunctions do not state both normalized derived-topos identities; the project scheme-site results have additional hypotheses and different generality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-free-compact-composition",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 (Qbar stage): well-defined finite coefficient extension, through sk-thm-purity-transport Step 3; extracted compact-support composition/refinement compatibility in the ordered affine-coordinate argument; constituent 2 of the finite-free compact-support coefficient calculation",
+   "via": [
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-topos-scalar-inverse-exchange-mate",
+  "worker": "stage1",
+  "summary": "Proved the first square by comparing explicit counit transposes and the second by a typed calculation after postcomposing the open adjunct with t_B. Reused general K-flat word descent for the scalar/pullback cube. Added only the open-subtopos scalar-balancing/unit lemma; retained the imported statement and all metadata.",
+  "blueprint": "Nearest ancestor thm-pur-rational-and-qbar-purity proof Step 2, through purity-transport Step 3 and its finite-coefficient Step 1: coefficient compatibility of the normalized open adjunct used in compact-support composition.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-tensor-section-calculus",
+    "why": "Pure tensors determine the ordinary balancing maps; a generic algebraic tool, not a replacement purity route."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Descends an explicit ordinary coefficient/inverse-image cube to arbitrary unbounded derived objects; the purity unit supplies no such general localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Identifies the canonical tensor/pullback computation used in that descent."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "The mate bijection with its specified units and counits is used as a formal categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-adjunct-counit-identity",
+    "why": "Counit transposition tests equality in the actual module-derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-4041df95e",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-4041df95e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-pur-topos-open-scalar-unit and every cited statement in full: adjunction-mate, adjunct-counit-identity, ringed-tensor-section-calculus, ringed-topoi-derived-tensor-pullback, trf ringed-kflat-word-comparison-descent, derived-change-of-rings and ringed-sheaf-slice-adjunction. I recomputed every step. Step 3: the two L_r-transposes come out as S_V(L_b eps_p)S_V(theta_A)lambda_r L_r(lambda_i) and S_V(L_b eps_p)lambda_b L_b(lambda_p)theta_B, and (1) identifies them. Step 5: (5) follows from naturality of E_B for beta_b, (3) at j=b, the first identity at N=I_b M and naturality of chi_r for eta^{-1}. Step 6: t_B a = chi_r uses (5), naturality of lambda_i, (4) at j=i on R_r M, and t_A L_i(gamma_A) eta_i = 1. t_B is cancelled only at S_V M, where it is assumed invertible. The new node's unit formula holds: a subterminal slice gives L_j I_j M = M, and both routes send [m]_f⊗s to m⊗s. Edge cases empty u, u=1 and a nonflat ring map all check out. The new node is statement only, self-contained, and has five searches recorded. Its source, Stacks 0GL1 (sites-cohomology l.4578), is labelled as an agent refinement. It is not a clause of the item and not a duplicate: lem-sf-cbc-coefficient-linear-projection-descent covers only a site object with no unit normalization; the slice-tensor-generator nodes are ordinary only; the topos-finite-free siblings are finite free. Batch 5: lem-trf-ringed-kflat-word-comparison-descent is generic K-flat pasting descent. Its closure has no trace-formula or Poincaré-duality content; the only other trf node in it is localization-essentially-surjective. Neither assumption gives it, so I accepted it. I accepted the declared tool uses as generic. There is no SGA citation and no cycle, and proof_deps equals the union of uses. FIX (C4): step 6 concluded equality from equality of adjuncts under I_i ⊣ L_i by citing only the mate definition. I added lem-weil-pbc-adjunct-counit-identity to its uses and text; proof_deps is unchanged. The corrected item is in fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ToposScalarInverseExchangeMate",
+  "declaration": "CategoryTheory.ToposScalarInverseExchange.scalar_inverse_exchange_mate",
+  "declarations": [
+   "CategoryTheory.ToposScalarInverseExchange.Presentation",
+   "CategoryTheory.ToposScalarInverseExchange.Presentation.ring",
+   "CategoryTheory.ToposScalarInverseExchange.Presentation.derived",
+   "CategoryTheory.ToposScalarInverseExchange.Presentation.scalarMap",
+   "CategoryTheory.ToposScalarInverseExchange.Presentation.scalar",
+   "CategoryTheory.ToposScalarInverseExchange.Geometric",
+   "CategoryTheory.ToposScalarInverseExchange.Geometric.modules",
+   "CategoryTheory.ToposScalarInverseExchange.Geometric.insertion",
+   "CategoryTheory.ToposScalarInverseExchange.Open",
+   "CategoryTheory.ToposScalarInverseExchange.Image",
+   "CategoryTheory.ToposScalarInverseExchange.ScalarComparison",
+   "CategoryTheory.ToposScalarInverseExchange.Square",
+   "CategoryTheory.ToposScalarInverseExchange.Operations",
+   "CategoryTheory.ToposScalarInverseExchange.Operations.exchange",
+   "CategoryTheory.ToposScalarInverseExchange.Operations.t",
+   "CategoryTheory.ToposScalarInverseExchange.Operations.gamma",
+   "CategoryTheory.ToposScalarInverseExchange.ScalarComparison.chi",
+   "CategoryTheory.ToposScalarInverseExchange.Scalars",
+   "CategoryTheory.ToposScalarInverseExchange.ScalarPure",
+   "CategoryTheory.ToposScalarInverseExchange.ScalarResolving",
+   "CategoryTheory.ToposScalarInverseExchange.SquarePure",
+   "CategoryTheory.ToposScalarInverseExchange.SquareResolving",
+   "CategoryTheory.ToposScalarInverseExchange.scalar_inverse_exchange_mate"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ToposScalarInverseExchangeMate.lean",
+  "statement": "theorem scalar_inverse_exchange_mate {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (s : Square.{u}) (a : Operations s A) (b : Operations s B) (c : Scalars s φ a b) : (∀ N : s.T.derived A, c.atI.derived.hom.app (a.p.right.obj N) ≫ (s.Y.scalar φ).map (a.exchange.app N) ≫ c.atR.chi.app (a.b.left.functor.obj N) = b.i.left.functor.map (c.atP.chi.app N) ≫ b.exchange.app ((s.T.scalar φ).obj N) ≫ b.r.right.map (c.atB.derived.hom.app N)) ∧ (∀ (M : s.V.derived A) [IsIso (a.t M)] [IsIso (b.t ((s.V.scalar φ).obj M))], (s.Z.scalar φ).map (a.gamma M) ≫ c.atP.chi.app (a.extendB.obj M) ≫ b.p.right.map (c.betaB.hom.app M) = c.betaI.hom.app (a.r.right.obj M) ≫ b.extendI.map (c.atR.chi.app M) ≫ b.gamma ((s.V.scalar φ).obj M)) ∧ (∀ (M : s.V.derived A) [IsIso (a.t M)], a.openAdjI.unit.app (a.r.right.obj M) ≫ a.i.left.functor.map (a.gamma M) ≫ a.t M = 𝟙 _) ∧ (∀ (M : s.V.derived B) [IsIso (b.t M)], b.openAdjI.unit.app (b.r.right.obj M) ≫ b.i.left.functor.map (b.gamma M) ≫ b.t M = 𝟙 _) ∧ (∀ (M N : s.V.derived A) [IsIso (a.t M)] [IsIso (a.t N)] (f : M ⟶ N), a.extendI.map (a.r.right.map f) ≫ a.gamma N = a.gamma M ≫ a.p.right.map (a.extendB.map f)) ∧ (∀ (M N : s.V.derived B) [IsIso (b.t M)] [IsIso (b.t N)] (f : M ⟶ N), b.extendI.map (b.r.right.map f) ≫ b.gamma N = b.gamma M ≫ b.p.right.map (b.extendB.map f))",
+  "branch": "sheaf-dag",
+  "by": "Q159",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1133df44",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Lean module unchanged from 8227b6409f81; the H2 return is resolved: theorem stmt_dep lem-weil-pbc-constant-completion-equivalence dropped; def-sfb-constant-completion-coefficient-data, def-pur-strict-quotient-completion-data and new existing:true def node def-pur-constant-coefficient-inverse-image-data (InverseImageData/pull/pullInsertion/DerivedPull/derivedPull/constantMap/underlying/insertion; TeX states each, deps live, no other def owner) cited. Re-checked all clauses: λ pinned by ScalarPure/ScalarResolving, χ and E as mateEquiv, β by mate(β⁻¹)=λ⁻¹ (equivalent to open-scalar-unit (4), unique), t and γ = adjunct of t⁻¹; identity 1 unconditional, identity 2 under pointwise IsIso t_A, t_B; no extra hypotheses; edge cases OK; statement verbatim, 23 decls present, sorry only, docstrings OK, no collision, no supersession. Advisories: unused public imports GrothendieckTopos and RingedTopoiCanonicalTensorPullbackOfUniverses; conjuncts 3-6 follow from the definitions. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261025T002513-L-3118860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

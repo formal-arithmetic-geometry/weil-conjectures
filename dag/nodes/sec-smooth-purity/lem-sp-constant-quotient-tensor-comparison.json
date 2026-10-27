@@ -1,0 +1,175 @@
+{
+ "id": "lem-sp-constant-quotient-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor interpretation of one evaluated constant reduction and its pullback square",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "statement": "Let A be a commutative ring with adic datum d [def-weil-pbc-adic-coefficient-datum], f:U→V a scheme morphism, and n a nonnegative integer. Use the original-site ambient categories and universal reduction R_T of [def-sp-constant-reduction-models] and exact derived evaluation E_T,n of [def-cbc-strict-constant-tower-operations]. Let F be any flat-term K-flat complex of A_V-modules [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] with an augmentation quasi-isomorphism q:F→const_V(A/I^(n+1))[0]. There exist ordinary derived tensor models a on V and b on U, natural isomorphisms eV:R_V E_V,n ≅ (- tensor_a QF) and eU:R_U E_U,n ≅ (- tensor_b Lf*QF), such that for every M in D(V,A), Lf*(eV_M) followed by the canonical tensor/pullback comparison equals the inverse evaluation/pullback comparison, followed by evaluated reductionPullIso_M, followed by eU_(Lf*M). No boundedness, finite-projectivity or direct-image assertion is made.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sp-constant-reduction-models",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use flat K-flat localization to construct the ordinary uncompleted tensor models a and b, retaining the original site and coefficient universes.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  },
+  {
+   "text": "On V evaluate the universal reduction counit on a flat K-flat representative P. This gives restricted scalar extension to the finite ring at n. The finite constant-to-function coefficient comparison and balanced tensor symmetry identify that extension with P tensor the constant quotient. Tensor q with P; this is a quasi-isomorphism since P is K-flat. Localizing its inverse replaces the quotient by F. Naturality on resolving complexes descends to the functor isomorphism eV.",
+   "uses": [
+    "def-sp-constant-reduction-models",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  },
+  {
+   "text": "Exact inverse image carries the constant quotient and its resolution to the corresponding quotient on U. It preserves the flat K-flat representative class and the finite coefficient identification. Repeat the preceding tensor construction on U using Lf* QF to obtain eU.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  },
+  {
+   "text": "For a flat K-flat P, both routes in the square send m tensor a to pullback(m) tensor pullback(a). The defining counit normalization of reductionPullIso and the exact evaluation/pullback factorization identify the first route with the same balanced map. Cancel the localized tensor-resolution quasi-isomorphisms. Equality on resolving representatives descends to equality for every derived M. This proves the displayed pullback square; it uses no direct image, projection mate, finite-projective splitting or boundedness argument.",
+   "uses": [
+    "def-sp-constant-reduction-models",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-sp-constant-reduction-models",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula).",
+  "group": "F6",
+  "date": "2026-10-25"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantPerfectQuotientProjection",
+  "date": "2026-10-25",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Finite perfect-coefficient reduction subargument of the completion comparison: first step of lem-sp-constant-perfect-quotient-projection, before applying the perfect projection formula.",
+   "via": [
+    "lem-sp-constant-perfect-quotient-projection",
+    "lem-sp-completion-mate-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is tensor with the coefficient algebra, compatibly with inverse image",
+   "results": "ModuleCat.ExtendScalars.obj' and TensorProduct.AlgebraTensorModule.distribBaseChange concern ordinary modules, not evaluated derived sheaf reduction or its normalized pullback square.",
+   "verdict": "no exact match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "mapDerivedCategory, tensor",
+   "results": "No results; mapDerivedCategory is not a Mathlib identifier. Read the project derived scalar and tensor comparison declarations instead.",
+   "verdict": "no exact match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*projection|projection.*perfect (Mathlib source, through msearch.py)",
+   "results": "0 hits. The project contains the signed projection formula but lacks this evaluated reduction/tensor comparison. Blueprint search constant quotient tensor returned 0 nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantQuotientTensorComparison",
+  "file": "lean/Sheaf/Paper/ConstantQuotientTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.constantQuotientTensorComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.OrderedExchange.constantQuotientTensorComparison"
+  ],
+  "statement": "theorem constantQuotientTensorComparison (n : ℕ)\n    (F : CochainComplex (reductionModules V (exchangeConstantRing V A)) ℤ)\n    (hF : proEtaleFlatRepresentatives V (exchangeConstantRing V A) F)\n    (q : F ⟶ (CochainComplex.singleFunctor _ 0).obj\n      ((adicLisseConstantModules V A).obj (ModuleCat.of A (A ⧸ d.ideal ^ (n + 1)))))\n    (hq : QuasiIso q) :\n    ∃ (a : ProEtaleTensorModel V (exchangeConstantRing V A))\n      (b : ProEtaleTensorModel U (exchangeConstantRing U A))\n      (eV : reduction d V ⋙\n        ((CategoryTheory.evaluation ℕᵒᵖ\n          (reductionModules V (exchangeConstantRing V A))).obj (op n)).mapDerivedCategory ≅\n        (Functor.curryObj a.tensor).flip.obj (DerivedCategory.Q.obj F))\n      (eU : reduction d U ⋙\n        ((CategoryTheory.evaluation ℕᵒᵖ\n          (reductionModules U (exchangeConstantRing U A))).obj (op n)).mapDerivedCategory ≅\n        (Functor.curryObj b.tensor).flip.obj ((pull (A := A) f).obj\n          (DerivedCategory.Q.obj F))),\n      ∀ M : D (A := A) V,\n        (pull (A := A) f).map (eV.hom.app M) ≫\n          (proEtaleCanonicalTensorComparison f (exchangeConstantRing V A)\n            (exchangeConstantRing U A) (exchangeConstantIso f A) a b).hom.app\n              (M, DerivedCategory.Q.obj F) =\n        (AlgebraicGeometry.ProEtale.StrictTower.evalG A f n).inv.app\n            ((reduction d V).obj M) ≫\n          ((CategoryTheory.evaluation ℕᵒᵖ\n            (reductionModules U (exchangeConstantRing U A))).obj (op n)).mapDerivedCategory.map\n              ((reductionPullIso d f).hom.app M) ≫\n            eU.hom.app ((pull (A := A) f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T122905-L-1816307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T122905-L-1816307",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

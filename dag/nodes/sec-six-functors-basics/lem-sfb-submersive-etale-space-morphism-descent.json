@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-submersive-etale-space-morphism-descent",
+ "kind": "statement",
+ "title": "Morphisms of etale spaces descend along universal submersions",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], in the universes of [def-weil-size-convention], with algebraic spaces [def-trf-algebraic-space], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and atlas point topology [def-a1-space-point-topology]. Quasi-compactness of a space means that every open cover of its point space has a finite subcover; a morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source. A space is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact, and a morphism is quasi-separated if its relative diagonal is quasi-compact. Etaleness means chartwise etaleness [lem-trf-space-chartwise-etale-permanence], which allows nonrepresentable maps. Finite presentation means local finite presentation on scheme charts [def-sbc-locally-finite-presentation], quasi-compactness and quasi-separatedness. Let $p:B'\\to B$ be a map of quasi-separated spaces which is universally submersive: after every algebraic-space base change, its point map is surjective and has the quotient Zariski topology. For quasi-separated etale spaces $X,Y\\to B$, pullback identifies $\\operatorname{Hom}_B(X,Y)$ bijectively with those maps $a':X\\times_BB'\\to Y\\times_BB'$ over $B'$ whose two pullbacks to $B'\\times_BB'$ agree. In particular compatible isomorphisms descend uniquely, as do equalities of morphisms. No quasi-compactness, flatness, or finite-presentation hypothesis is imposed on $p$, $X\\to B$, or $Y\\to B$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Proposition (5.3), printed p.18, and Remark (5.2); graph proof through Corollary (A.3), printed p.35. Read online; local copy WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=X\\times_BY$, $W\\prime=W\\times_BB\\prime$, and $r:W\\prime\\to W$; these products exist by [lem-trf-space-fibre-products-etale-covers]. The hypothesis on $p$ makes $|r|$ a surjective quotient map. Since $Y\\times_BB\\prime\\to B\\prime$ is a base change of the etale map $Y\\to B$, it is chartwise etale by [lem-trf-space-chartwise-etale-permanence], so the graph correspondence [lem-sfb-space-etale-open-graph] over $B\\prime$ makes the graph $G\\prime$ of the given $a\\prime$ an open subspace of $W\\prime$. Its two inverse images on $W\\prime\\times_WW\\prime=W\\times_B(B\\prime\\times_BB\\prime)$ agree: graph formation commutes with base change and the two maps agree by assumption. Write $A\\prime=|G\\prime|$ and $A=|r|(A\\prime)$. For two points of $W\\prime$ above the same point of $W$, [lem-a1-space-point-open-calculus] supplies a point of their fibre product. Equality of the two pulled-back opens therefore says that either both points belong to $A\\prime$ or neither does. Hence $|r|^{-1}(A)=A\\prime$. The quotient topology implies that $A$ is open.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-open-graph",
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ."
+   }
+  },
+  {
+   "text": "The open-subspace correspondence of [lem-a1-space-etale-open-image] gives the unique open $G\\subseteq W$ with point image $A$. By the image/preimage formula and detection of open subspaces by their points in [lem-a1-space-point-open-calculus], $G\\times_BB\\prime=G\\prime$ as open subspaces of $W\\prime$. Let $q:G\\to X$ be projection. The open inclusion $G\\to W$ is chartwise etale by [lem-a1-space-open-chart-tests]. The map $W\\to X$ is a base change of the etale map $Y\\to B$; therefore $q$ is chartwise etale by [lem-trf-space-chartwise-etale-permanence]. Its pullback $q\\prime:G\\prime\\to X\\prime$ is an isomorphism by [lem-sfb-space-etale-open-graph], since $G\\prime$ is the graph of $a\\prime$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-open-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ."
+   }
+  },
+  {
+   "text": "For every algebraic-space map $T\\to X$, set $G_T=G\\times_XT$ and $T\\prime=T\\times_BB\\prime$. The map $G_T\\times_TT\\prime\\to T\\prime$ is an isomorphism. Surjectivity of $|T\\prime|\\to|T|$ then shows directly that $|G_T|\\to|T|$ is surjective. To check injectivity, put $D=G_T\\times_TG_T$. By [lem-trf-space-chartwise-etale-permanence], $G_T\\to T$ is etale; the graph of $1_{G_T}$ over $T$ is thus an open subspace $\\Delta\\subseteq D$ by [lem-sfb-space-etale-open-graph]. After pullback to $T\\prime$ this open is all of $D\\times_TT\\prime$, because $G_T\\times_TT\\prime\\to T\\prime$ is an isomorphism. The point map $|D\\times_TT\\prime|\\to|D|$ is surjective by universal submersivity of $p$. The image/preimage identity and open-subspace detection of [lem-a1-space-point-open-calculus] imply $|\\Delta|=|D|$. Given two points of $G_T$ with the same image in $T$, the same cited node supplies a point of $D$ above them. As this point lies in the diagonal image, the two points coincide. Thus $q$ is surjective and universally injective on points.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-open-graph",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-etale-open-graph] to the open $G\\subseteq X\\times_BY$ and the two properties just established. It says that $q:G\\to X$ is an isomorphism and that $a=\\operatorname{pr}_Y\\circ q^{-1}$ is the unique morphism having this graph. Its pullback has graph $G\\prime$ because the graph correspondence commutes with base change, so its pullback is exactly $a\\prime$. Conversely any morphism over $B$ has equal pullbacks to $B\\prime\\times_BB\\prime$, simply by associativity of pullback.",
+   "uses": [
+    "lem-sfb-space-etale-open-graph"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ."
+   }
+  },
+  {
+   "text": "If $a,b:X\\to Y$ become equal over $B\\prime$, [lem-sfb-space-etale-open-graph] identifies their pulled-back graphs. By [lem-a1-space-point-open-calculus], pulling back an open subspace takes its point image to the inverse image. Since $|W\\prime|\\to|W|$ is surjective, the two original graph images agree; the same node detects equality of the open subspaces, and the graph bijection gives $a=b$. This proves injectivity and the assertion about equalities. If $a\\prime$ is an isomorphism, its inverse is compatible too, because taking inverses preserves the two pullback equalities. Apply the existence already proved with $X,Y$ interchanged to descend the inverse. The composites pull back to identities, so injectivity makes them identities over $B$. This proves the isomorphism clause.",
+   "uses": [
+    "lem-sfb-space-etale-open-graph",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-etale-open-graph",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Proposition (5.3), Remark (5.2), and Corollary (A.3), printed pp.18 and 35; graph argument expanded using Stacks Tags 03H4 and 03BZ. Rydh read online; local PDF absent. Expanded argument uses existing DAG statements for the geometric ingredients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale algebraic spaces along a universally submersive morphism is fully faithful on compatible descent morphisms",
+   "results": "{\"t\": \"2026-10-23T21:16:18Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of etale algebraic spaces along a universally submersive morphism is fully faithful on compatible descent morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"efd8b05a9989733b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Etale.forgetFullyFaithful forgets the etale condition over a fixed scheme. It is not pullback along a submersive map. EffectiveEpi concerns already-known coequalizers, not this geometric Hom descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"FullyFaithful\"",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"FullyFaithful\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\"], \"digest\": \"9445ce739b607251\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Etale.forgetFullyFaithful forgets the etale condition over a fixed scheme. It is not pullback along a submersive map. EffectiveEpi concerns already-known coequalizers, not this geometric Hom descent."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale|[Ss]ubmersive",
+   "results": "{\"t\": \"2026-10-23T21:16:13Z\", \"tool\": \"grep\", \"query\": \"[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale|[Ss]ubmersive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"9768c84a3b8914bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Etale.forgetFullyFaithful forgets the etale condition over a fixed scheme. It is not pullback along a submersive map. EffectiveEpi concerns already-known coequalizers, not this geometric Hom descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between etale algebraic spaces descend uniquely along universal quotient maps",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms between etale algebraic spaces descend uniquely along universal quotient maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EffectiveEpiFamilyStruct.uniq\", \"TopCat.effectiveEpiStructOfQuotientMap\", \"CategoryTheory.EffectiveEpiFamily.desc\", \"AlgebraicGeometry.Scheme.Etale\", \"CategoryTheory.EffectiveEpiFamilyStruct.desc\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"CategoryTheory.EffectiveEpi.desc\"], \"digest\": \"196a2b4b335d91b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Etale.forgetFullyFaithful forgets the etale condition over a fixed scheme. It is not pullback along a submersive map. EffectiveEpi concerns already-known coequalizers, not this geometric Hom descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom equalizer sequence for etale spaces is exact for any universally submersive cover",
+   "results": "{\"t\": \"2026-10-23T21:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"The Hom equalizer sequence for etale spaces is exact for any universally submersive cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Profinite.NobelingProof.succ_exact\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\"], \"digest\": \"cc5ffa9a24e77eb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Etale.forgetFullyFaithful forgets the etale condition over a fixed scheme. It is not pullback along a submersive map. EffectiveEpi concerns already-known coequalizers, not this geometric Hom descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between etale algebraic spaces descend uniquely along a universally submersive morphism",
+   "results": "{\"t\": \"2026-10-23T22:09:16Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms between etale algebraic spaces descend uniquely along a universally submersive morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"ea7c43e0f6630ab8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme etale categories, forgetting structure, gluing on open covers, or fpqc property descent do not state Hom descent for algebraic spaces along arbitrary universally submersive maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"FullyFaithful\"",
+   "results": "{\"t\": \"2026-10-23T22:09:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"FullyFaithful\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\"], \"digest\": \"9445ce739b607251\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme etale categories, forgetting structure, gluing on open covers, or fpqc property descent do not state Hom descent for algebraic spaces along arbitrary universally submersive maps."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale|[Ss]ubmersive",
+   "results": "{\"t\": \"2026-10-23T22:10:34Z\", \"tool\": \"grep\", \"query\": \"[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale|[Ss]ubmersive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"9768c84a3b8914bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme etale categories, forgetting structure, gluing on open covers, or fpqc property descent do not state Hom descent for algebraic spaces along arbitrary universally submersive maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hom equalizer for etale algebraic spaces is exact for universally submersive covers",
+   "results": "{\"t\": \"2026-10-23T22:10:34Z\", \"tool\": \"leansearch\", \"query\": \"The Hom equalizer for etale algebraic spaces is exact for universally submersive covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.equalizer.congr_simp\", \"AlgHom.coe_equalizer\", \"AlgHom.mem_equalizer\", \"StandardEtalePair.homEquiv\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.ext'\", \"CategoryTheory.Limits.Fork.IsLimit.homIso\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"8939b9813645aa2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme etale categories, forgetting structure, gluing on open covers, or fpqc property descent do not state Hom descent for algebraic spaces along arbitrary universally submersive maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of morphisms between etale spaces by descending their open graphs through a universal quotient map",
+   "results": "{\"t\": \"2026-10-23T22:10:35Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of morphisms between etale spaces by descending their open graphs through a universal quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.PresheafedSpace.GlueData.diagramOverOpenπ\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιInvAppπApp\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιInvApp\", \"AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_π\"], \"digest\": \"7efd340a08cd3f83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme etale categories, forgetting structure, gluing on open covers, or fpqc property descent do not state Hom descent for algebraic spaces along arbitrary universally submersive maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-subtrusive-etale-descent",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the morphism descent used by Propositions (5.6)--(5.8) and by affine-chart gluing",
+   "via": [
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-submersive-etale-space-morphism-descent",
+  "worker": "stage1",
+  "summary": "Checked Rydh (5.3), (5.2), (A.2)-(A.3) and Stacks 03H4/03BZ. Preserved the statement. Expanded invariant-open graph descent and the universal-injectivity check using existing graph, point calculus and open-subspace nodes. No new nodes or unstated geometric descent theorem.",
+  "blueprint": "Inherited alteration/moduli support chain under det-thm-sf-ctf-stability-direct-images: morphism descent in Rydh (5.3), used in the descent route (5.17)/(5.19). The latest blueprint direct-image step (3) is preserved; this item supplies a below-unit tool. The ancestor tool returns None for this inherited support chain, retained as recorded.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre-product/open/point calculus used in the graph proof, not an alternative route to the unit theorem; the unit does not state this geometric tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General algebraic-space fibre-product/open/point calculus used in the graph proof, not an alternative route to the unit theorem; the unit does not state this geometric tool."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "General algebraic-space fibre-product/open/point calculus used in the graph proof, not an alternative route to the unit theorem; the unit does not state this geometric tool."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "General algebraic-space fibre-product/open/point calculus used in the graph proof, not an alternative route to the unit theorem; the unit does not state this geometric tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "General algebraic-space fibre-product/open/point calculus used in the graph proof, not an alternative route to the unit theorem; the unit does not state this geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-a8631450f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-a8631450f (reviewer sub-agent of L); spot-checked: Read in full: the item, its five steps and every cited statement (space-etale-open-graph, a1 point-open-calculus, etale-open-image, open-chart-tests, trf chartwise-etale-permanence, trf fibre-products). Sources read in the Rydh 2010 PDF: p.4 (all algebraic spaces quasi-separated), Remark 5.2 (algebraic-space bases allowed), Prop 5.3 (exactness of the Hom sequence along a universally submersive map; its proof is 'follows from A.3') and A.2/A.3 (graph correspondence). The statement matches the live base byte for byte and is faithful to the source. No SGA is cited. There are no new nodes and no re-split note. The steps are correct: saturation of the graph open via point lifting plus the image/preimage formula and the quotient topology; descent of the open through the open-subspace correspondence; q étale; universal surjectivity and injectivity checked over every T through the open diagonal of G_T over T becoming everything after T'; existence and uniqueness through the graph bijection; isomorphism clause by descending the inverse. Edge cases checked: empty B', nonseparated étale Y, nil-immersion p, non-qc p. No duplicate (grep 'universally submersive'); the proof_deps closure has no cycle. Batch-5 check: all four flagged citations reach trf only via the general definition def-trf-algebraic-space, outside the trace formula and Poincaré duality, so accepted; the tool_uses are accepted too. FIX: step 1 applied the graph lemma over B' without citing that Y×_BB'→B' is étale; added that sentence and the citation lem-trf-space-chartwise-etale-permanence.; 1 file(s) fixed by the reviewer"
+ }
+}

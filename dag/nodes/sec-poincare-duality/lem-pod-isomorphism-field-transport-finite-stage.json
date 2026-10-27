@@ -1,0 +1,141 @@
+{
+ "id": "lem-pod-isomorphism-field-transport-finite-stage",
+ "kind": "statement",
+ "title": "Normalized isomorphism inverse transport at a single finite coefficient field",
+ "statement": "Let l be a prime, E/Q_l a finite extension, g:X→Y an isomorphism of schemes with l invertible in the residue fields, and hX,hY proofs that l is a unit in the stalks. Then the single-field normalized transport package IsomorphismFieldTransportStage(l,E,g,hX,hY) of [def-pod-isomorphism-field-transport-clauses] is inhabited. This asserts the completed-module, integral and raw rational inverse equivalences, their additive/exact/linear and normalized shift properties, and precisely the lambda and epsilon component formulas. It does not compare different coefficient fields and does not assert any common-stage descent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "stmt_deps": [
+  "def-pod-isomorphism-field-transport-clauses"
+ ],
+ "proof": [
+  {
+   "text": "Use the completed coefficient limit-lift projection equation. The section-normalized module counits for g and inv g give both inverse-composition isomorphisms, hence an equivalence. Exactness and additivity are the sectionwise module inverse-image instances.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Apply normalized raw-stage exactness to g and inv g. Invert its kappa-normalized comparison to obtain lambda with its shift compatibility. Compose lambda_inv, inverse image of lambda_g, and the section-normalized derived counit; restrict this natural isomorphism through the full subcategory inclusion. Its component equals the prescribed epsilon by the lambda normalization. Exchange g and inv g for the other counit, hence obtain the integral equivalence. Retain the raw-stage linearity and exactness.",
+   "uses": [
+    "lem-pod-isomorphism-pullback-raw-stage",
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Extend the two additive linear integral functors by raw scalar localization with the identity coefficient map. The coefficient-map uniqueness makes that map the identity; the tensor formulas identify the extensions with the prescribed rational pullbacks by uniqueness. Localize the integral counit components. Naturality on arbitrary tensor Hom arrows follows from the generic transformation extension, and extension_comp identifies its source with the composite extensions. Both localized counits give the rational equivalence. The raw-stage theorem supplies the normalized rational shift and exactness.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-isomorphism-pullback-raw-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-pod-isomorphism-pullback-raw-stage",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse comparison of a linear equivalence of categories remains a natural isomorphism after scalar localization, compatible with extension of scalars",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply; LinearEquiv.extendScalarsOfIsLocalization_symm_apply; CategoryTheory.Localization.liftNatIso_inv. These are generic algebra/localization tools, not the prescribed completed constructible functors or their normalized inverse comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match; use the project normalization and scalar-localization declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a scheme isomorphism gives exact inverse equivalences on derived constructible sheaves with localized coefficients",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullbackIso. These concern ordinary module pullback and do not give the specified completed, raw rational, and common-stage normalization clauses.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg commonStage|rationalDerivedPullback|pullbackIdentityEpsilon|coefficientPairFunctor|inverseImageIntegralModules Mathlib/CategoryTheory Mathlib/AlgebraicGeometry; rg the same names in lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib occurrences. Project IsomorphismPullbackRawStage supplies normalized integral/rational exactness but no inverse-comparison package; PullbackIdentitiesScalarExtension gives the integral scalar square; StageSystemFunctorDescent gives functor descent but no specialized inverse and exactness package.",
+   "date": "2026-10-26",
+   "verdict": "no exact existing declaration; retain these generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismFieldTransport",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport.",
+   "via": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismFieldTransportFiniteStage",
+  "file": "lean/Sheaf/Paper/IsomorphismFieldTransportFiniteStage.lean",
+  "declaration": "WeilConjectures.isomorphismFieldTransportFiniteStage",
+  "statement": "theorem isomorphismFieldTransportFiniteStage (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (IsomorphismFieldTransportStage l E g hX hY)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Clauses decls vs clone originals (identical), item statement vs clone (identical), CommonStage sorry vs original item claim (equivalent since stage data pinned), 12 direct importers compiled against sandbox build of delivered modules (all OK), #print axioms (sorryAx only from upstream sorried decls)"
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: support and resolution subarguments for the coefficient transport comparisons.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarProofs",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProofs.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.derived_mate_isIso_of_resolution",
+  "statement": "theorem derived_mate_isIso_of_resolution\n    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]\n    [Abelian A] [Abelian B] [Abelian C] [Abelian D]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory C] [HasDerivedCategory D]\n    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]\n    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}\n    {G : A ⥤ C} {H : B ⥤ D}\n    [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)\n    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans]\n    (hres : ∀ (I : CochainComplex B ℤ), I.IsKInjective →\n      ∀ (J : CochainComplex D ℤ), J.IsKInjective →\n      ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,\n      QuasiIso j → QuasiIso ((R'.mapHomologicalComplex (.up ℤ)).map j)) :\n    IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction\n      adj'.mapDerivedCategoryRightDerivedAdjunction\n      (TwoSquare.mk _ _ _ _\n        (Functor.mapDerivedCategorySquareIso s.symm).inv)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "id": "lem-pur-derived-mate-resolution-criterion",
+ "kind": "statement",
+ "title": "Derived mate criterion from compatible injective resolutions",
+ "statement": "Let A,B,C,D be abelian categories with ordinary unbounded derived categories and K-injective resolutions in B and D. Let L ⊣ R and L′ ⊣ R′ be additive adjunctions, with exact L and L′. Let G : A → C and H : B → D be exact additive functors and s : G ⋙ L′ ≅ L ⋙ H. Assume the ordinary mate of s.hom is invertible. Assume that for each K-injective complex I of B, each quasi-isomorphic K-injective resolution j : H(I) → J in D stays a quasi-isomorphism under R′. Then the mate for the derived adjunctions of the inverse of the derived square of s.symm is invertible.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0D6E; already proved generic subargument of blueprint sk-thm-purity-transport Step 10, moved from the assigned module for compile performance."
+ },
+ "proof": [
+  {
+   "text": "For a K-injective I choose a K-injective resolution of H(I). The resolution hypothesis makes the derived unit for R′ at H(I) invertible; the derived unit for R at I is invertible because I is K-injective. The existing derived-mate factorization identifies the component, after multiplying by these units and canonical comparison isomorphisms, with the derived image of the ordinary mate. This is invertible. Cancel the units and comparisons. Every derived object is isomorphic to the image of a K-injective complex, so naturality transfers componentwise invertibility to every object. The derived square construction sends symmetry to inversion, giving the displayed orientation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": "K3 proved this argument as a private helper; K1 isolates the unchanged proof with a public supporting statement. No new proof assumption or sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertibility of derived adjunction mates from injective resolutions and preservation of quasi isomorphisms by ringed direct image; scalar restriction preserves open extension essential image",
+   "results": "Eight hits for restriction/coextension, injective presentations, right-derived-zero on injectives, and scheme module adjunctions. No exact unbounded coefficient-system statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement for this existing proved helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve hits for equivalence criteria and fully faithful adjoints. These underlie the helper, but none supplies its exact mate or derived support conclusion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse standard adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate.*[iI]sIso|continuous_scalar_resolution|scalarRestriction_openSupported|inverse_mate_isIso_of_support",
+   "results": "Zero Mathlib hits. The shared library has these proved private helpers in the assigned module; they are transferred, not reproved or replaced by holes. Imported blueprint searches found no exact statement.",
+   "date": "2026-10-27",
+   "verdict": "Isolate the existing proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

@@ -1,0 +1,292 @@
+{
+ "id": "lem-per-geometric-regularity-affine-cover",
+ "kind": "statement",
+ "title": "Geometric regularity over a field on affine open covers",
+ "statement": "Let $k$ be a field [def-weil-field] and let $Z$ be a locally Noetherian $k$-scheme [def-pc-scheme, pqf-def-locnoeth]. For a field extension $K/k$ put $Z_K=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-fibre-product]. The following conditions are equivalent: (1) $Z_K$ is a regular scheme [def-weil-regular-scheme] for every finite field extension $K/k$; (2) for every affine open $W\\subseteq Z$, the $k$-algebra $\\mathcal O_Z(W)$ is geometrically regular [def-weil-pbc-g-ring]; (3) there exists an affine open cover $Z=\\bigcup_i W_i$ such that every $\\mathcal O_Z(W_i)$ is geometrically regular over $k$. The empty scheme and an empty affine covering are allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038V, lemma-geometrically-regular, equivalence of conditions (1) to (5). The all-finite-extension test in this node is intermediate between the finitely-generated-extension test (2) and finite-purely-inseparable-extension test (3), so is equivalent to (4) and (5)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a field extension $K/k$ and write $p:Z_K\\to Z$. For each affine open $W\\subseteq Z$, put $A=\\mathcal O_Z(W)$. The canonical affine chart identifies $W$ with $\\operatorname{Spec}A$, and the structural map to $\\operatorname{Spec}k$ is induced by the given $k$-algebra structure on $A$ (apply the affine-opens induced-ring-map square with target the whole $\\operatorname{Spec}k$). Apply the finite-affine tensor-base-change statement with $B=k$, base-change algebra $K$, $r=1$, $E_0=A$, and the canonical isomorphism from a one-term coproduct to its sole summand. It gives $W\\times_k\\operatorname{Spec}K\\cong\\operatorname{Spec}(A\\otimes_kK)$. The two iterated pullbacks $Z_K\\times_ZW$ and $W\\times_k\\operatorname{Spec}K$ represent the same pairs of compatible morphisms, so are canonically isomorphic by the fibre-product universal property. The open-preimage fibre-product statement therefore identifies this scheme with $p^{-1}(W)$. In particular it is an affine open. If the $W_i$ cover $Z$, their preimages cover $Z_K$, since $\\bigcup_i p^{-1}(W_i)=p^{-1}(Z)=Z_K$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-sbc-finite-affine-tensor-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), 01JR (lemma-open-fibre-product); the affine-chart construction used by Tag 038V, lemma-geometrically-regular, proof (5) => (1)."
+   }
+  },
+  {
+   "text": "Record the elementary regularity dictionary used below. If $T$ is regular, it is locally Noetherian with regular stalks by the equivalence in the definition of regular scheme. Every open $V\\subseteq T$ is locally Noetherian by the locally Noetherian definition record; its stalk at $v$ is the same as that of $T$, since the restricted sheaf has the same neighbourhood germs. Thus $V$ is regular. If $V$ is affine, $B=\\mathcal O_T(V)$ is Noetherian by the affine-open Noetherianity statement; the affine-stalk localization statement identifies $B_{\\mathfrak q}$ with the regular stalk at the corresponding point for every prime $\\mathfrak q$. Hence $B$ is a regular ring. Conversely, if an affine open $V$ has Noetherian regular coordinate ring, it is itself a regular affine neighbourhood of every point in it, exactly as in the definition. Consequently an affine open cover with regular coordinate rings makes the whole scheme regular. These observations also show that scheme isomorphisms preserve regularity: they identify affine neighbourhoods and their section rings. Ring isomorphisms preserve Noetherianity, prime localizations and regular local rings, so preserve ring regularity.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "pqf-def-locnoeth",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 02IT (lemma-characterize-regular), 02IU (lemma-locally-regular), and 01OW (lemma-locally-Noetherian); direct consequences of the cited statements and definitions."
+   }
+  },
+  {
+   "text": "Assume (1), and let $W\\subseteq Z$ be any affine open. Its coordinate ring $A$ is Noetherian because $Z$ is locally Noetherian. For each finite purely inseparable extension $K/k$, condition (1) says that $Z_K$ is regular. Step 1 makes $W_K=p^{-1}(W)$ an affine open isomorphic to $\\operatorname{Spec}(A\\otimes_kK)$. Step 2 says that its coordinate ring is regular. The tensor symmetry $a\\otimes c\\mapsto c\\otimes a$, with itself as inverse after reversing the factors, identifies this ring with $K\\otimes_kA$. Thus every finite purely inseparable test in the definition of geometric regularity holds for the Noetherian algebra $A$. This proves (2).",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038V (lemma-geometrically-regular), proof (3) => (4); Algebra Tag 0382 (definition-geometrically-regular). Tensor symmetry follows by exchanging the two structure maps in the cited universal property."
+   }
+  },
+  {
+   "text": "Assume (2). The affine opens form a basis: apply the affine-opens-basis statement to $Z$ and every point of $Z$. Taking all affine opens, or selecting one neighbourhood for each point, gives an affine open cover. Condition (2) makes each of its coordinate algebras geometrically regular, proving (3).",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038V (lemma-geometrically-regular), proof (4) => (5); Schemes Tag 01IT (lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "Assume (3), and fix a finite extension $K/k$. Put $A_i=\\mathcal O_Z(W_i)$. Each $A_i$ is Noetherian and geometrically regular by the meaning of that hypothesis. A finite field extension is finitely generated (a finite vector-space basis generates it as a field). Apply the finitely-generated-extension theorem to obtain that every $K\\otimes_kA_i$ is Noetherian and regular. Step 1 gives the affine cover $Z_K=\\bigcup_i (W_i)_K$ with coordinate rings $A_i\\otimes_kK$, which are isomorphic to these regular rings by $a\\otimes c\\mapsto c\\otimes a$ as in step 3. By step 2 this cover makes $Z_K$ regular. Since $K/k$ was arbitrary among finite extensions, (1) holds.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038V (lemma-geometrically-regular), proof (5) => (1), restricted here to finite extensions; Algebra Tag 0381 (lemma-geometrically-regular), implication (2) => (1), supplies regularity for these extensions."
+   }
+  },
+  {
+   "text": "If $Z$ is empty, its base changes are empty: step 1 applied to its empty affine covering gives an empty covering of $Z_K$. Regularity is then vacuous at points. The only possible affine open is empty, with zero coordinate ring. The zero ring is Noetherian, has no prime ideals, and stays zero under tensor product (every pure tensor has zero first factor), so is geometrically regular. Thus (2) also holds, and (3) allows the empty cover. No step assumes a nonempty scheme, a nonzero coordinate algebra, a finite affine cover, or a separated scheme.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038V (lemma-geometrically-regular), empty-scheme case of the three equivalences, using the stated definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038V, lemma-geometrically-regular: (3) => (4), (4) => (5), (5) => (1), with the last implication restricted to finite extensions and Algebra Tag 0381 explicitly used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|geometric.?regular",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally Noetherian scheme over a field is geometrically regular iff its affine coordinate rings are geometrically regular algebras",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.IsLocallyNoetherian.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyRegular\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of a scheme over a field can be checked on the coordinate rings of an affine open covering using finite purely inseparable field extensions",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.affine_isIntegral_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian scheme over a field stays regular after every finite extension exactly when an affine cover consists of geometrically regular algebras",
+   "results": "8 hits: AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flatness, smoothness, Noetherianity, or geometric reducedness; none states geometric regularity of general locally Noetherian schemes and affine algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|geometric.?regular",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern geometric reducedness, smoothness, or Noetherianity; none states the general geometric-regularity affine-cover criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric regularity of a locally Noetherian scheme over a field is equivalent to geometric regularity of the coordinate algebras on an affine open cover",
+   "results": "8 hits: AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.Scheme.mk.noConfusion",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern geometric reducedness, smoothness, or Noetherianity; none states the general geometric-regularity affine-cover criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyRegular\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern geometric reducedness, smoothness, or Noetherianity; none states the general geometric-regularity affine-cover criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally Noetherian scheme over a field stays regular after every finite field extension if and only if every affine coordinate ring is geometrically regular",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.IsLocallyNoetherian, Algebra.IsGeometricallyReduced, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern geometric reducedness, smoothness, or Noetherianity; none states the general geometric-regularity affine-cover criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically regular algebras and regular schemes after scalar extension: affine locality using finite purely inseparable extensions",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern geometric reducedness, smoothness, or Noetherianity; none states the general geometric-regularity affine-cover criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-morphism-affine-criterion",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Supporting the regular-morphism affine criterion in the regular-precomposition/Temkin descent branch below lem-per-artin-gabber-affine-curve: the geometric-regularity comparison on fibre charts in Stacks 07R8, proof of (2) => (3) and (5) => (2). This supporting comparison is not explicit in the current ancestor proof.",
+   "via": [
+    "lem-per-regular-morphism-affine-criterion",
+    "lem-per-regular-scheme-stalk-criterion",
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-geometric-regularity-affine-cover",
+  "worker": "stage1",
+  "summary": "Checked the finite-extension affine-cover criterion against Stacks 038V, read every cited statement, and reused existing affine base-change and geometric-regularity nodes. Wrote the affine identification, regularity dictionary, all three implications and the empty case explicitly. No new nodes; no change to the statement. Mathlib searches found geometric reducedness and Noetherianity, not this criterion.",
+  "blueprint": "Supports the affine-chart regular-morphism criterion in the existing created-node chain below lem-per-artin-gabber-affine-curve. The current ancestor statement contains no explicit geometric-regularity sublemma; this item realizes the supporting comparison specified in its inherited blueprint.from.place. Whole-blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Use r=1 to identify a field-base-changed affine chart with the spectrum of its tensor algebra; generic scheme tool, not a replacement of the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "why": "Identifies the k-structure of the canonical affine chart with the induced map on sections; generic chart tool unavailable in the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Identifies pullback of an open subscheme with the inverse-image open; generic scheme tool unavailable in this perverse unit."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Supplies Noetherianity of every affine coordinate ring of a locally Noetherian scheme; generic scheme tool unavailable in this perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Uses the finite-extension instance of the algebraic geometric-regularity test, Stacks 0381; a generic commutative-algebra tool, not an alternative unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-67aea1e94",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-67aea1e94 (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no changes. The source is Stacks 038V (varieties.tex 2424) with its proof. The item's (1) tests every finite extension, which lies between Stacks (2) (f.g.) and (3) (finite purely inseparable); the item's (2) and (3) are Stacks (4) and (5), and (1)⇒(2)⇒(3)⇒(1) closes, so the statement is true and not weakened. Statement and stmt_deps are identical to the base (checked against the Q62 snapshot), and the item had an empty proof there. There is no repair note and no new node. Step 1: affine chart (spec-points plus the induced-ring-map square with V = Spec k); lem-sbc-finite-affine-tensor-base-change with B=k, base algebra K, r=1, E_0=A, whose hypotheses I checked; pullback pasting; open-preimage lemma (01JR). Step 2: the regularity dictionary from both forms of def-weil-regular-scheme, pqf-lem-affine-open-locnoeth and stalk-localization (c), correctly marked elementary. Step 3: A is Noetherian, then the finite purely inseparable tests plus tensor swap match def-weil-pbc-g-ring exactly. Step 4: affine-opens basis, with no quasi-compactness needed. Step 5: finite ⇒ f.g., then lem-weil-pbc-geometrically-regular-finitely-generated-extensions (0381/045I) gives K⊗A_i Noetherian and regular, and the cover makes Z_K regular, as in Stacks' proof. Step 6: empty case and zero ring, correct. Small cases checked: Spec k, k[ε]/ε², k(a^{1/p}) over an imperfect k, empty. Mathlib grep for geometrically regular gives 0 hits, so there is no leaf. rg over dag/nodes for 038V and geometric regularity finds no duplicate; the only consumer, lem-per-regular-morphism-affine-criterion, uses (1)⇒(2) and (3)⇒(1) as stated. I accept the declared tool_uses as generic algebra and scheme tools; no SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricRegularityAffineCover",
+  "declaration": "AlgebraicGeometry.geometricRegularity_affineCover_tfae",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricRegularityAffineCover.lean",
+  "statement": "theorem geometricRegularity_affineCover_tfae (k : Type u) [Field k] (Z : Scheme.{u}) [IsLocallyNoetherian Z] (f : Z ⟶ Spec (CommRingCat.of k)) : List.TFAE [ ∀ (K : Type u) [Field K] [Algebra k K] [Module.Finite k K], IsRegularScheme (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))), ∀ W : Z.affineOpens, @Algebra.IsGeometricallyRegular k Γ(Z, W.1) _ _ (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop ≫ Z.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op).hom.toAlgebra), ∃ S : Set Z.affineOpens, (⨆ W ∈ S, W.1) = ⊤ ∧ ∀ W ∈ S, @Algebra.IsGeometricallyRegular k Γ(Z, W.1) _ _ (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop ≫ Z.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op).hom.toAlgebra) ]",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ae21c5b0",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Checked against Stacks 038V (varieties.tex:2424) and the node. The finite-extension test lies between Stacks (2) and (3), so TFAE with (4)/(5) holds. Clauses: K : Type u finite field extensions with IsRegularScheme (LocNoeth ∧ IsRegular = def-weil-regular-scheme) of pullback f (Spec.map algebraMap); canonical algebra on Γ(Z,W) via ΓSpecIso.inv ≫ f.appTop ≫ restriction; cover as Set of affineOpens with iSup = ⊤. IsGeometricallyRegular (GRing.lean:37) tests k' in Type (max u u) = u, so no vacuous universe. Edge cases: empty Z / empty S, zero ring, K = k, no extra assumptions. lean.statement verbatim; the 6 stmt_dep records equal live; only the lean field was added to the item. Docstrings carry source, blueprint and all 6 proof steps; proof sorry only; no definitions. Not recompiled per instructions. No findings."
+ }
+}

@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-lattice-koszul-total-triangles",
+ "kind": "statement",
+ "title": "Signed lattice Koszul totalization preserves derived triangles",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $r\\geq0$, and put $D=\\mathbf Z^r$, $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $t:\\mathcal M\\to\\mathcal E$ for trivial action and $\\Gamma$ for invariants [lem-sfb-condensed-derived-restriction-calculus]. Use ordinary derived categories and localization $Q$ [def-weil-abstract-derived-category]. For equivariant cochain complexes use the finite Koszul complex of [lem-sfb-discrete-lattice-koszul-resolution] and its total $K(P)^n=\\bigoplus_{a+b=n}K_R(P^b;T)^a$, with differential $d_K+(-1)^a d_P$. Each functor $K^a:\\mathcal E\\to\\mathcal M$ is exact, and totalization is an additive functor on bounded-below complexes. It sends a homotopy $h$ to $H|_{K^a(P^b)}=(-1)^aK^a(h^b)$, preserves quasi-isomorphisms, and induces $\\mathsf K:D^+(\\mathcal E)\\to D^+(\\mathcal M)$. For every integer $n$ the shift comparison $K(P[n])\\cong K(P)[n]$ acts by $(-1)^{an}$ in Koszul degree $a$ and is coherent with addition of shifts. For a cochain map $f:P\\to P'$, with $\\operatorname{Cone}(f)^m=P'^m\\oplus P^{m+1}$ and differential $(y,x)\\mapsto(dy+fx,-dx)$, the map $K(\\operatorname{Cone}f)\\cong\\operatorname{Cone}(Kf)$ is identity on $K^a(P')$ and multiplication by $(-1)^a$ on $K^a(P[1])$. These are natural chain isomorphisms compatible with cone inclusion and projection (and hence with the cone triangle's signed last arrow). With these comparisons $\\mathsf K$ is triangulated. A termwise short exact sequence of input complexes remains termwise short exact after $K$; its canonical connecting arrow is carried by this triangle comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; agent-formulated lattice expansion, returned proof steps 1–3: exact finite totalization, homotopy, quasi-isomorphisms, shifts and cones. The blueprint supplies the route, not this structural calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-discrete-lattice-koszul-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Let $U:\\mathcal E\\to\\mathcal M$ forget the action. By [lem-sfb-condensed-derived-restriction-calculus], $U$ is additive and exact and both categories are abelian. The formula in [lem-sfb-discrete-lattice-koszul-resolution] identifies $K^a$ with $\\binom ra$ copies of $U$ for $0\\leq a\\leq r$, and zero otherwise. Kernels and cokernels of a finite direct sum of maps are the direct sums of their kernels and cokernels (the component projections and inclusions give the universal properties). Thus these functors are additive and exact. The same component calculation shows that a termwise short exact sequence stays termwise short exact after taking the finite diagonal sums defining $K$. In the Lean implementation, the term functor is naturally isomorphic to the action-forgetting functor followed by the finite constant diagram and its limit. The biproduct comparison identifies this limit functor with the corresponding colimit functor, proving preservation of finite limits and colimits. To handle the chosen coproduct presentation of each total degree directly, use that internal modules are Grothendieck abelian (the trivial-group case of the restriction calculus): AB5 implies AB4, so the coproduct functor on the diagonal diagrams is exact. The diagram functor is exact after every evaluation, by the term calculation. Their composite is naturally isomorphic to evaluation of the total; transport short exactness through this isomorphism.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): exact finite sums; compare homology.tex Tag 012Z, definition-associated-simple-complex."
+   }
+  },
+  {
+   "text": "Put $B(P)^{a,b}=K_R(P^b;T)^a$, with horizontal differential $d_K$ and vertical differential $d_P$. The Koszul formula of [lem-sfb-discrete-lattice-koszul-resolution] and equivariance give $d_K^2=0$ and $d_Kd_P=d_Pd_K$. Hence $(d_K+(-1)^ad_P)^2=0$: the mixed terms have coefficients $(-1)^{a+1}$ and $(-1)^a$. For a cochain map $f$, use $K^a(f^b)$ on each summand; it commutes with both differentials. Identities, composition and addition hold on each summand. Only $0\\leq a\\leq r$ contribute in any total degree. If $P^b=0$ for $b<N$, then $K(P)^n=0$ for $n<N$. Thus the stated finite totalization is an additive functor on bounded-below complexes.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): finite signed totalization; homology.tex Tag 012Z, definition-associated-simple-complex."
+   }
+  },
+  {
+   "text": "For an equivariant cochain homotopy $h$ with $f-g=d_{P'}h+hd_P$, set $H|_{B(P)^{a,b}}=(-1)^aK^a(h^b)$. In $dH+Hd$ the horizontal terms are $(-1)^ad_Kh+(-1)^{a+1}hd_K=0$, since $h$ is equivariant. The vertical terms are $d_{P'}h+hd_P$ on each summand, giving $K(f)-K(g)$. This proves the homotopy formula, so $K$ also acts on the bounded-below homotopy category (the homotopy convention is that used in [def-weil-abstract-derived-category]). The Lean proof constructs this homotopy for an arbitrary additive complex-valued functor and specializes it to the Koszul functor. The calculation follows the existing private helper additiveComplexFunctor_total_map_homotopy in WeilConjectures.AlgebraicGeometry.AlternatingCechTotalHomotopy, retaining the explicit summand formula in its conclusion.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): direct signed homotopy calculation."
+   }
+  },
+  {
+   "text": "If $f$ is a quasi-isomorphism, exactness of each $K^a$ and [lem-weil-pbc-exact-functor-complex-cohomology] show that $K^a(f)$ is a quasi-isomorphism of vertical complexes. Apply [lem-sc-integer-finite-column-total-comparison] to $B(f)$, with integer column bounds $x_0=0$, $x_1=r$. Both double complexes have zero columns outside these bounds; their diagonal totals exist by the finite sums of step 2. Its conclusion is precisely that $K(f)$ is a quasi-isomorphism. The localization universal property in [def-weil-abstract-derived-category] therefore gives $\\mathsf K:D^+(\\mathcal E)\\to D^+(\\mathcal M)$; the lower bound verified in step 2 ensures this codomain.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sc-integer-finite-column-total-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): finite-column comparison; homology.tex Tag 010N, lemma-exact-functor; integer finite-column theorem in BicomplexColumns.lean:939."
+   }
+  },
+  {
+   "text": "For $n\\in\\mathbf Z$, define $c_n:K(P[n])\\to K(P)[n]$ by the sign $s_a=(-1)^{an}$ on Koszul degree $a$, using the shift convention of [def-weil-abstract-derived-category]. The source differential is $d_K+(-1)^{a+n}d_P$; the target differential is $(-1)^nd_K+(-1)^{a+n}d_P$. The horizontal chain equation is $s_{a+1}=(-1)^ns_a$, and the vertical equation uses the same $s_a$ at both ends. Thus $c_n$ is a chain isomorphism, with inverse given by the same signs. These scalar maps commute with every $K(f)$, so are natural. Also $c_0=1$ and $(-1)^{an}(-1)^{am}=(-1)^{a(n+m)}$ give coherence for all integer shifts, including negative ones. The existing totalShiftIsoApp is the total of mapCochainComplexShiftIso followed by totalShift₂Iso. On a summand the former has identity components; the latter has the required signed inclusion formula. Thus no new shift construction is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): shift comparison; homology.tex Tag 011G, definition-shift-cochain. Compare TotalComplexShift.lean:313."
+   }
+  },
+  {
+   "text": "Use the cone convention in [def-weil-abstract-derived-category]. Reorder the finite summands of $K(\\operatorname{Cone}f)$ into those from $P'$ and those from $P[1]$. Define $\\theta_f$ to be identity on the first group and $s_a=(-1)^a$ on the second. On an input $x$ in the second group, the source differential has components $s_af(x)$ in the first group and $d_Kx-s_ad_Px$ in the second. Applying $\\theta_f$ to that differential gives $s_af(x)$ and $-s_ad_Kx-d_Px$, respectively, exactly the differential of $(0,s_ax)$ in $\\operatorname{Cone}(Kf)$. The first group already has the differential of $K(P')$. Thus $\\theta_f$ is a chain isomorphism with the stated inverse. Naturality follows because all component maps commute with the scalar signs. With $i,p$ and $i_K,p_K$ the cone inclusion and projection, these same component formulas give $\\theta_f K(i)=i_K$ and $p_K\\theta_f=c_1K(p)$, hence also $(-p_K)\\theta_f=c_1K(-p)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): cone comparison and signed last arrow; derived.tex Tag 014E, definition-cone."
+   }
+  },
+  {
+   "text": "The natural shift isomorphisms descend through localization, since their components are already chain isomorphisms. By [def-weil-abstract-derived-category], distinguished triangles are the triangles isomorphic to localized cone triangles with last arrow $-p$. Step 6 identifies the image of each such triangle under $\\mathsf K$, using $c_1$ on its final vertex, with the cone triangle of $K(f)$, including its last arrow. Isomorphic triangles retain this property. Here $D^+$ is, as in the statement, the localization of bounded-below complexes at quasi-isomorphisms, so its distinguished triangles are those isomorphic to localized cone triangles of chain maps $f$ between bounded-below complexes; the cone of such an $f$ is again bounded below, so steps 2–6 apply to it. (Those steps use no lower bound at all, so the same argument also gives a triangulated $\\mathsf K:D(\\mathcal E)\\to D(\\mathcal M)$.) This proves that $\\mathsf K$ is triangulated, in exactly the sense of [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): cone criterion for the triangulated structure on ordinary derived categories."
+   }
+  },
+  {
+   "text": "For a termwise short exact sequence $0\\to A\\xrightarrow{i}B\\xrightarrow{j}C\\to0$ let $i_c:B\\to\\operatorname{Cone}(i)$ and $p:\\operatorname{Cone}(i)\\to A[1]$ be the cone inclusion and projection, and let $q:\\operatorname{Cone}(i)\\to C$ be $(j,0)$, a chain map because $ji=0$. By [lem-pc-cone-short-exact-quasi-iso], $q$ is a quasi-isomorphism. The canonical connecting arrow of the sequence is, by definition, $\\delta=Q(-p)Q(q)^{-1}:C\\to A[1]$ (Stacks Tag 0152, $\\delta=-p\\circ q^{-1}$; this is also the arrow of Mathlib's DerivedCategory.triangleOfSES). Since $qi_c=j$ and $\\delta Q(q)=Q(-p)$, the triple $(1,1,Q(q))$ is an isomorphism from the localized cone triangle $(Q(i),Q(i_c),Q(-p))$ to $(Q(i),Q(j),\\delta)$, so the latter is distinguished by [def-weil-abstract-derived-category]. The image sequence $0\\to KA\\to KB\\to KC\\to0$ is termwise exact by step 1; write $p_K,q_K$ for its cone projection and its map $(Kj,0)$, so its canonical arrow is $\\delta_K=Q(-p_K)Q(q_K)^{-1}$, with $q_K$ a quasi-isomorphism by the same node. On the two summand groups $q_K\\theta_i=K(q)$: on the first it is $K(j)$ and on the second it is zero. $K(q)$ is a quasi-isomorphism by step 4, and $\\mathsf K(Q(q))=Q(Kq)$, $\\mathsf K(Q(-p))=Q(K(-p))$ by construction of $\\mathsf K$. Together with $(-p_K)\\theta_i=c_1K(-p)$ from step 6, $c_1\\mathsf K(\\delta)=Q(-p_K)Q(\\theta_i)Q(Kq)^{-1}=Q(-p_K)Q(q_K)^{-1}=\\delta_K$, using $Q(q_K)Q(\\theta_i)=Q(Kq)$ and invertibility of $Q(\\theta_i)$. This is the canonical connecting arrow for the image sequence, proving the final compatibility without a choice of degreewise splittings.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent expansion of paragraph (3): canonical short-exact-sequence boundary; derived.tex Tag 0152, lemma-derived-canonical-delta-functor, formula and proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sc-integer-finite-column-total-comparison",
+  "def-weil-triangulated-category",
+  "lem-pc-cone-short-exact-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), lattice expansion: explicit exact-total, homotopy, shift, cone and connecting-arrow calculations, using existing finite-column and short-exact-sequence lemmas. Stacks Tags 012Z, 014E, 0152 fix the total/cone/sign conventions. Stage-3 implementation by J1: exact term/diagonal functors, zero Koszul columns, the generic signed homotopy calculation, finite-column quasi-isomorphism comparison, and the existing totalShift₂Iso coordinate formula. The cone and localization steps remain existing named obligations; no replacement route for them is asserted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite lattice Koszul totalization on bounded below complexes of internal sheaf modules preserves quasi isomorphisms and cone triangles with shift sign",
+   "results": "{\"t\": \"2026-10-22T06:02:07Z\", \"tool\": \"leanfinder\", \"query\": \"Finite lattice Koszul totalization on bounded below complexes of internal sheaf modules preserves quasi isomorphisms and cone triangles with shift sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"279587789e37bbdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"shift\"",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"total\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₂\", \"HomologicalComplex₂.totalShift₁XIso\", \"HomologicalComplex₂.totalShift₂XIso\", \"HomologicalComplex₂.totalShift₁Iso\", \"HomologicalComplex₂.totalShift₂Iso\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₁ShiftFunctor₂\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₂ShiftFunctor₁\"], \"digest\": \"63b2430a294adf42\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(total|triangulat)|total.*koszul",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"grep\", \"query\": \"koszul.*(total|triangulat)|total.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite lattice Koszul totalization on bounded below complexes of internal sheaf modules preserves quasi isomorphisms and cone triangles with shift sign",
+   "results": "{\"t\": \"2026-10-22T06:02:09Z\", \"tool\": \"leansearch\", \"query\": \"Finite lattice Koszul totalization on bounded below complexes of internal sheaf modules preserves quasi isomorphisms and cone triangles with shift sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor\", \"quasiIso_comp\", \"HomologicalComplex.instRespectsIsoQuasiIso\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomologicalComplex.quasiIso_map_of_preservesHomology\", \"CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\"], \"digest\": \"9381800e85678048\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite complex of exact additive functors gives a triangulated total functor on derived categories",
+   "results": "{\"t\": \"2026-10-22T06:02:20Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded finite complex of exact additive functors gives a triangulated total functor on derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.IsHomological\", \"DerivedCategory.instPretriangulated\"], \"digest\": \"c9aee50c8e012388\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory|isoRightDerivedObj_hom_naturality|theorem derived_counit",
+   "results": "{\"t\": \"2026-10-22T06:03:50Z\", \"tool\": \"grep\", \"query\": \"totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory|isoRightDerivedObj_hom_naturality|theorem derived_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\"], \"digest\": \"112073ccfeab3350\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalShift₂Iso gives only the shift isomorphism for an existing bicomplex; exact-functor triangulation does not construct the lattice cochain-valued totalization or its cone and quasi-isomorphism comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"shift\"",
+   "results": "{\"t\": \"2026-10-22T12:03:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"total\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₂\", \"HomologicalComplex₂.totalShift₁XIso\", \"HomologicalComplex₂.totalShift₂XIso\", \"HomologicalComplex₂.totalShift₁Iso\", \"HomologicalComplex₂.totalShift₂Iso\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₁ShiftFunctor₂\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₂ShiftFunctor₁\"], \"digest\": \"63b2430a294adf42\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(total|triangulat)|total.*koszul",
+   "results": "{\"t\": \"2026-10-22T12:03:27Z\", \"tool\": \"grep\", \"query\": \"koszul.*(total|triangulat)|total.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of exact additive functors induces a triangulated totalization functor on derived categories",
+   "results": "{\"t\": \"2026-10-22T12:03:28Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex of exact additive functors induces a triangulated totalization functor on derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.exactFunctor_le_additiveFunctor\", \"CategoryTheory.Functor.IsTriangulated.mk\"], \"digest\": \"8e63fcb73519fffc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite lattice Koszul total complex of exact functors preserves quasi isomorphisms and distinguished triangles with signed shift and mapping cone comparisons",
+   "results": "{\"t\": \"2026-10-22T12:03:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite lattice Koszul total complex of exact functors preserves quasi isomorphisms and distinguished triangles with signed shift and mapping cone comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.mapDerivedCategory\"], \"digest\": \"491be0b949809404\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "results": "{\"t\": \"2026-10-22T12:04:09Z\", \"tool\": \"grep\", \"query\": \"totalShift₂Iso|instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\"], \"digest\": \"a4c0ff139c248ff5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of a finite bicomplex of exact additive functors is compatible with cochain homotopies, mapping cones and quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-22T12:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"Totalization of a finite bicomplex of exact additive functors is compatible with cochain homotopies, mapping cones and quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂_assoc\", \"CochainComplex.mappingConeCompTriangleh_comm₁\", \"CochainComplex.cm5b.homotopyEquiv\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂\", \"CochainComplex.mappingConeCompHomotopyEquiv_comm₂_assoc\"], \"digest\": \"c58e6b72fb5ebb4e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: exact-functor maps and individual bicomplex shift/cone infrastructure do not state this Koszul-valued total functor with all its comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; agent lattice expansion: returned proof steps 1–3: exact finite totalization, homotopy, quasi-isomorphisms, shifts and cones.",
+   "via": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-koszul-total-triangles",
+  "worker": "stage1",
+  "summary": "Reused the existing exact-forgetful, exact-cohomology, integer finite-column and cone-projection nodes. Wrote the signed homotopy, all integer shifts, cone comparison and canonical connecting-arrow equation explicitly. No new nodes, statement changes, Lean writing or compilation. Repair of the 2026-10-22 promotion return: rebased the retained split onto the current DAG and reread every proof-dependency statement, including the reviewed re-splits of condensed restriction calculus and lattice Koszul resolution. Step 8 now explicitly constructs the boundary by transporting the localized cone triangle, and cites the derived-category cone statement, rather than attributing the boundary formula to the existence-only short-exact triangle statement. Statement, route and existing search records are retained.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: auxiliary ordinary open direct-image lattice calculation; nearest blueprint ancestor is null as reported by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integer-finite-column-total-comparison",
+    "why": "Generic finite-column comparison in an arbitrary abelian category; supplies the quasi-isomorphism argument for the lattice total without replacing the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integer-finite-column-total-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-c2ef7e220",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c2ef7e220 (reviewer sub-agent of L); spot-checked: This head is a re-delivery after the promotion return of 287cfa874d26, whose FIX was lost. Against that head only step 8 and split_report changed. The statement, stmt_deps, source and blueprint are identical, and steps 1-7 are byte-identical. I read the item in full and the current statement of every cited node; the re-split restriction-calculus and koszul-resolution statements are unchanged. I also read Stacks derived.tex 0152 (δ=-p∘q⁻¹, also Comp⁺→D⁺) and main-20261015 direct-images ¶(3), which gives only the route, so proof_origin agent is correct. Recomputed: the D² cross terms cancel by d_Kd_P=d_Pd_K; DH+HD=(-1)^a(d_Kh-hd_K)+(d_Ph+hd_P)=Kf-Kg; columns K^a(P^•) carry unsigned d_P (Mathlib ε₂ convention) and lie in [0,r], so the finite-column node applies (tool use accepted as a generic black box); shift s_a=(-1)^{an} gives s_{a+1}=(-1)^n s_a; cone θ maps x to (s_a f x, -s_a d_K x - d_P x)=d(0,s_a x), with θK(i)=i_K and p_Kθ=c_1K(p); q_Kθ_i=Kq, hence c_1𝖪(δ)=δ_K. Two faults were not repaired by this head, so I re-applied the earlier FIX. (C3) Step 8 still says lem-weil-pbc-complex-ses-triangle asserts distinguishedness and naturality of this particular δ, but that node only asserts that some δ exists. The fix defines δ=Q(-p)Q(q)⁻¹ and proves distinguishedness through the triangle isomorphism (1,1,Qq) from the localized cone triangle. The ses-triangle citation is removed from uses and proof_deps, since the item needs no naturality of δ. (E5) The fix makes step 7 say that D⁺ is the localization of bounded-below complexes, whose triangles are cones of bounded-below maps. Edge cases checked: r=0, d_K=0, odd n, negative lower bounds, nonsplit degree-0 sequences. No new nodes, no SGA, no cycle; only proof and proof_deps change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeKoszulTotalTriangles",
+  "declaration": "Profinite.DiscreteLattice.TotalTriangles.lattice_koszul_total_triangles",
+  "declarations": [
+   "Profinite.DiscreteLattice.TotalTriangles.terms_exact",
+   "Profinite.DiscreteLattice.TotalTriangles.total_additive",
+   "Profinite.DiscreteLattice.TotalTriangles.total_lower_bound",
+   "Profinite.DiscreteLattice.TotalTriangles.total_homotopy",
+   "Profinite.DiscreteLattice.TotalTriangles.total_quasiIso",
+   "Profinite.DiscreteLattice.TotalTriangles.shift_coordinates",
+   "Profinite.DiscreteLattice.TotalTriangles.ConeComparison",
+   "Profinite.DiscreteLattice.TotalTriangles.cone_comparison",
+   "Profinite.DiscreteLattice.TotalTriangles.total_shortExact",
+   "Profinite.DiscreteLattice.TotalTriangles.connectingPlus",
+   "Profinite.DiscreteLattice.TotalTriangles.Descent",
+   "Profinite.DiscreteLattice.TotalTriangles.lattice_koszul_total_triangles"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeKoszulTotalTriangles.lean",
+  "statement": "theorem lattice_koszul_total_triangles (K : KoszulModel R r) : Nonempty (Descent R r K)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing signed TriangulatedCup.total and its canonical coherent shift comparisons, without duplicating the construction or assuming the downstream comparison with invariants. The structural theorem, auxiliary properties, signed cone specification and D-plus boundary equation are recorded together. Do not add a reciprocal proof import to LatticeKoszulTriangulatedCupComparison: this file already imports its existing total/shift construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a98633af",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_dep records (identical to live; item changed only in lean), the module, the report (Worker report + Second reading present), KoszulModel, the parent's TriangulatedCup.total/totalShift* and the Mathlib sign lemmas. Every clause matches: terms_exact for all a in Z; total_additive; total_lower_bound; total_homotopy pinned on every component with sign (-1)^a (horizontal terms cancel by equivariance); total_quasiIso on Plus; shift_coordinates sign (a*s).negOnePow = Mathlib totalShift2Iso; ConeComparison identity on inr, (-1)^a on inl (recomputed from inl_v_d), lastArrow keeps the minus of mor3 = (-fst).rightShift, naturality for all squares, iso fully pinned; Descent = triangulated D+ functor with factor and factorShift tied to the signed total shifts; connectingPlus is the canonical preimage of triangleOfSESdelta and Descent.connecting is the exact boundary equation. Statement field verbatim, all theorems sorry, docstrings and steps 1-8 present, no extra hypotheses or universe restriction, edge cases r=0, negative or odd shifts, zero map, characteristic 2 all OK. No file changed, so nothing compiled (the report records scompile clean). Advisory, maintainer: the item imports LatticeKoszulTriangulatedCupComparison, whose node lists this item (and the sibling injective-normalization) in proof_deps, for total, bicomplex and totalShift*; no definition node owns them, so this is a stage-3 import cycle the group cannot repair (rule-7 exception listed). Move those definitions into a module owned by a definition node and repoint the parent, this item and the sibling."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-22e0a",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T082228-L-2151685",
+  "kind": "interface",
+  "note": "independent cc review: delivered LatticeKoszulTotalTriangles.lean + node lem-sfb-lattice-koszul-total-triangles against published module/node, upstream TriangulatedCup holes, Mathlib totalShift₂Iso/finite-column lemmas, and the single importer LatticeKoszulInjectiveNormalization"
+ }
+}

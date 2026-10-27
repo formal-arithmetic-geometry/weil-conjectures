@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-affine-line-generated-vector-subgroup-straightening",
+ "kind": "statement",
+ "title": "Straightening affine-line-generated smooth subgroups of vector groups",
+ "statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field]. All groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup], and smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a(R)=(R,+)$ [def-sc-gm-ga] and $\\mathbb A^1_k=\\operatorname{Spec}k[x]$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. A vector group means a $k$-group isomorphic to $\\mathbf G_a^n$ for some integer $n\\geq0$. Let $E=\\mathbf G_a^N$ with $N\\geq0$, and let $L\\subseteq E$ be smooth. Fix a separable closure $K/k$. Suppose $L_K$ is the smallest closed subgroup scheme of $E_K$ through which all members of some set of pointed $K$-scheme morphisms $\\mathbb A^1_K\\to L_K\\hookrightarrow E_K$ factor, where pointed means $0\\mapsto0$. Then there exist a $k$-group automorphism $h:E\\xrightarrow{\\sim}E$ and an integer $0\\leq d\\leq N$ such that $h(L)=\\mathbf G_a^d\\times\\{0\\}^{N-d}$ as closed subgroup schemes of $E$. In particular $L\\simeq\\mathbf G_a^d$ and there is a $k$-group homomorphism $r:E\\to L$ whose restriction to $L$ is the identity. The automorphism is a group-scheme automorphism and is not required to be $k$-linear for the displayed coordinates.",
+ "source": {
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Proposition 1.15, printed p.9, including the coordinate-automorphism conclusion; the retraction is its coordinate projection. Read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; WANTED locally. No Stacks tag is claimed for this algebraic-group result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Prove the coordinate-subgroup assertion by strong induction on $N$, for every smooth closed subgroup and every generating family in the statement; the isomorphism and retraction will follow in Step 7. For $N=0$ there is only the trivial subgroup. For $N=1$, if $L\\ne E$, its defining ideal contains a nonzero polynomial $q\\in k[x]$. For every member $u$ of the family, its coordinate is $v(t)\\in K[t]$ with $q(v(t))=0$. If $v$ were nonconstant, the leading term of this composition would have degree $\\deg(q)\\deg(v)$ with nonzero coefficient, a contradiction. Hence $v$ is constant and pointedness makes it zero. Minimality gives $L_K=0$, and then $L=0$: equality of defining ideals is detected by tensoring with $K$, since a $k$-vector space injects into its scalar extension. If $L=E$, use the identity automorphism, in every dimension.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, induction and its n=1 base; degree calculation expanded."
+   }
+  },
+  {
+   "text": "Let $N>1$ and $L\\ne E$. The polynomial ring $k[x_1,\\ldots,x_N]$ is a domain, so its spectrum $E$ is an irreducible affine variety. The polynomial dimension formula gives $\\dim E=N$: a field is Noetherian (its only ideals are $0,k$) and has dimension zero. A nonzero defining ideal of $L$ has proper vanishing set, since it does not contain the prime $(0)$ in its vanishing set. The affine dimension-drop lemma therefore gives $\\dim L\\leq N-1$. We treat equality first and strict inequality in Step 6.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, division into codimension one and higher codimension; dimension facts made explicit."
+   }
+  },
+  {
+   "text": "If $\\dim L=N-1$, the hypersurface equation lemma supplies a $k$-group homomorphism $f:E\\to\\mathbf G_a$ with scheme-theoretic kernel $L$. Some generating curve in $L_K$ is nonconstant: otherwise every pointed curve in the family is zero, contradicting minimality and $\\dim L=N-1>0$. Apply separable axis extraction to $f$ and this curve. It gives $\\alpha$ such that $M=\\alpha^{-1}(L)$ contains the first coordinate axis $A=\\mathbf G_a\\times0$. The automorphism is over $k$; no assertion that a vector group admits only linear automorphisms is used.",
+   "uses": [
+    "lem-sfb-vector-hypersurface-additive-equation",
+    "lem-sfb-additive-kernel-separable-axis-extraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, codimension-one paragraph, invoking Corollary 1.8 and Lemmas 1.11, 1.13."
+   }
+  },
+  {
+   "text": "We record once the projection argument used in both remaining cases. For any smooth closed subgroup $M\\subseteq\\mathbf G_a\\times V'$, $V'=\\mathbf G_a^{N-1}$, generated after $K$ by a pointed family, factor $M\\to V'$ as a faithfully flat finitely presented quotient $q:M\\to I$ followed by a closed immersion $I\\hookrightarrow V'$, using the group-homomorphism factorization. Its separatedness hypothesis holds because all groups here are affine. Its kernel is a closed normal subgroup of $M$, and $I$ represents its fppf quotient. The affine normal-quotient lemma gives smoothness of $I$ and identifies $I_K$ with the corresponding quotient over $K$. The projected curves generate $I_K$: if a closed subgroup $J\\subseteq V'_K$ contains them, its inverse image in $(\\mathbf G_a\\times V')_K$ contains $M_K$ by generation. Thus $q_K$ factors through $J\\cap I_K$. On coordinate rings the ideal of $J\\cap I_K$ pulls back to zero in $\\mathcal O(M_K)$; faithful flatness makes this map injective, so the ideal is zero and $I_K\\subseteq J$. Finally the image-dimension bound, applied to the surjection $q$, gives $\\dim I\\leq\\dim M$. These statements require neither smoothness nor connectedness of $\\ker q$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, both projections to V prime; quotient and image hypotheses expanded using the existing general group-image lemmas."
+   }
+  },
+  {
+   "text": "Continue the codimension-one case with $M$ from Step 3 and $I$ from Step 4. Put $M'=M\\cap(0\\times V')$. On every $k$-algebra $R$, subtraction of $(a,0)\\in A(R)$ from $(a,v)\\in M(R)$ shows $(0,v)\\in M'(R)$; consequently $M=A\\times M'$ as closed subgroup schemes, with inverse maps $(a,v)\\mapsto(a,(0,v))$ and addition. The projection $M\\to M'$ represents $M/A$ (a section lifts every element and its fibres are exactly the $A$-cosets), so normal-quotient smoothness gives smoothness of $M'$. Its inclusion in $V'$ equals the image $I$: $\\mathcal O(M')\\to\\mathcal O(M')[t]$ is injective, so no additional equation of $V'$ vanishes on $M$. Hence Step 4 gives generation of $M'_K$. Induction on the ambient dimension $N-1$ supplies $\\beta\\in\\operatorname{Aut}_{k\\text{-gp}}(V')$ straightening $M'$. Then $(\\mathrm{id}\\times\\beta)\\alpha^{-1}$ straightens $L$; permute coordinate axes to put the nonzero factors first.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, equality h prime(U)=V1 times U prime and induction on V prime; the equality is checked on all algebras."
+   }
+  },
+  {
+   "text": "If $\\dim L<N-1$, apply Step 4 to $M=L$. Induction straightens $I\\subseteq V'$ by some $\\beta$, since $V'$ has $N-1$ coordinates and $I$ is smooth and generated as required. Write $\\beta(I)=\\mathbf G_a^e\\times0$, moving its nonzero axes first. The polynomial dimension formula gives $e=\\dim I\\leq\\dim L<N-1$, so $e+1<N$. Thus $M=(\\mathrm{id}\\times\\beta)(L)$ is a closed smooth subgroup of the smaller coordinate subgroup $B=\\mathbf G_a\\times\\mathbf G_a^e\\times0$. Its transformed curves generate it in $B_K$: every closed subgroup of $B_K$ is also closed in $E_K$, so minimality in $E_K$ applies. Induction in dimension $e+1$ gives a group automorphism of $B$ straightening $M$ there. Extend it by the identity on the remaining $N-e-1$ coordinates, and compose with $\\mathrm{id}\\times\\beta$. This is an automorphism of all of $E$, giving the required coordinate subgroup. Both recursive calls have strictly smaller ambient dimension; even $e=0$ is allowed.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, last paragraph: straighten the projection and induct again in its proper coordinate preimage."
+   }
+  },
+  {
+   "text": "Let $h$ be the automorphism obtained above and $C=\\mathbf G_a^d\\times0=h(L)$ after permuting axes. Restriction $h|_L:L\\xrightarrow{\\sim}C$ followed by the coordinate identification gives $L\\simeq\\mathbf G_a^d$. If $P:E\\to C$ sets the last $N-d$ coordinates to zero, define $r=(h|_L)^{-1}\\circ P\\circ h$. Every map is a $k$-group homomorphism, and $P|_C=\\mathrm{id}_C$, so $r|_L=\\mathrm{id}_L$. This includes $d=0$, $d=N$ and the empty generating family. No connectedness or perfectness assumption has been added.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Proposition 1.15, printed p.9, direct-factor conclusion; explicit conjugated coordinate projection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-polynomial-ring",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-wf-affine-dimension-drop",
+  "lem-sfb-vector-hypersurface-additive-equation",
+  "lem-sfb-additive-kernel-separable-axis-extraction",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Proposition 1.15, printed p.9, read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf; local PDF WANTED. Source induction expanded by Q42."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth subgroup of an additive vector group generated by affine line curves over a separable closure is carried to a coordinate subgroup by a group automorphism",
+   "results": "{\"t\": \"2026-10-24T09:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth subgroup of an additive vector group generated by affine line curves over a separable closure is carried to a coordinate subgroup by a group automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.instGroup\", \"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"WeierstrassCurve.VariableChange\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\"], \"digest\": \"c84c31adfe4797c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddAut and characteristic-subgroup results are for abstract additive groups, while Weierstrass changes act on cubic equations. Ax-Grothendieck and Noether normalization do not straighten group subschemes. Grep hits are elliptic-curve map_polynomial identities, not additive polynomials or wound subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic subgroup of a power of Ga generated by pointed maps from A1 over a separable closure is a coordinate direct factor after an additive polynomial change of coordinates",
+   "results": "{\"t\": \"2026-10-24T09:45:21Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic subgroup of a power of Ga generated by pointed maps from A1 over a separable closure is a coordinate direct factor after an additive polynomial change of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ax_grothendieck_of_definable\", \"ax_grothendieck_univ\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"NoetherNormalization.T1\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"ax_grothendieck_of_locally_finite\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"InfiniteGalois.mk_toAlgEquivAux\"], \"digest\": \"d7b1d9e355e3fc2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddAut and characteristic-subgroup results are for abstract additive groups, while Weierstrass changes act on cubic equations. Ax-Grothendieck and Noether normalization do not straighten group subschemes. Grep hits are elliptic-curve map_polynomial identities, not additive polynomials or wound subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism of a vector group sends a smooth subgroup generated by rational curves to a product of coordinate additive groups",
+   "results": "{\"t\": \"2026-10-24T09:41:50Z\", \"tool\": \"leansearch\", \"query\": \"Automorphism of a vector group sends a smooth subgroup generated by rational curves to a product of coordinate additive groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddAut\", \"AddAut.instGroup\", \"LinearEquiv.automorphismGroup\", \"AddAut.applyMulAction\", \"AddSubgroup.Characteristic.mk\", \"AddAut.group\", \"Subgroup.Characteristic.mk\", \"AddAut.smul_def\"], \"digest\": \"335b701aa288e106\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddAut and characteristic-subgroup results are for abstract additive groups, while Weierstrass changes act on cubic equations. Ax-Grothendieck and Noether normalization do not straighten group subschemes. Grep hits are elliptic-curve map_polynomial identities, not additive polynomials or wound subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAddGroupHom\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-24T09:41:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAddGroupHom\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddAut and characteristic-subgroup results are for abstract additive groups, while Weierstrass changes act on cubic equations. Ax-Grothendieck and Noether normalization do not straighten group subschemes. Grep hits are elliptic-curve map_polynomial identities, not additive polynomials or wound subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "vector.group|additive.polynomial|p.polynomial|wound",
+   "results": "{\"t\": \"2026-10-24T09:41:50Z\", \"tool\": \"grep\", \"query\": \"vector.group|additive.polynomial|p.polynomial|wound\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\"], \"digest\": \"50f103e665f8039b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddAut and characteristic-subgroup results are for abstract additive groups, while Weierstrass changes act on cubic equations. Ax-Grothendieck and Noether normalization do not straighten group subschemes. Grep hits are elliptic-curve map_polynomial identities, not additive polynomials or wound subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic subgroup of Ga power N generated by pointed affine line morphisms becomes a coordinate direct factor under a group scheme automorphism",
+   "results": "{\"t\": \"2026-10-24T10:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic subgroup of Ga power N generated by pointed affine line morphisms becomes a coordinate direct factor under a group scheme automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\"], \"digest\": \"3ccd90704252c0df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  },
+  {
+   "tool": "grep",
+   "query": "additive.polynomial|p.polynomial|vector.group|wound",
+   "results": "{\"t\": \"2026-10-24T10:12:33Z\", \"tool\": \"grep\", \"query\": \"additive.polynomial|p.polynomial|vector.group|wound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean\", \"Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean\", \"Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\"], \"digest\": \"d37815acb6765a94\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract additive groups, polynomial coefficients, coordinate reindexing, elliptic curves, standard smoothness, or Noether normalization; none gives this algebraic-group assertion over an imperfect field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-commutative-p-torsion-vector-wound-factor",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical vector factor of the central p-torsion kernel, before proving nonvanishing and torus stability. Supporting input: Proposition 1.15, printed p.9, including the coordinate-automorphism conclusion; the retraction is its coordinate projection.",
+   "via": [
+    "lem-sfb-commutative-p-torsion-vector-wound-factor",
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-line-generated-vector-subgroup-straightening",
+  "worker": "stage1",
+  "summary": "Read Conrad Proposition 1.15 online. Expanded strong induction, including the polynomial base case, scheme-theoretic projection and smoothness, generation of projected images, and conjugated coordinate retraction. Added only the codimension-one equation and separable axis-extraction prerequisites; retained the exact statement and inherited provenance. No finished project Lean declaration or Mathlib match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical vector factor of the central p-torsion kernel, before proving nonvanishing and torus stability. Supporting input: Proposition 1.15, printed p.9, including the coordinate-automorphism conclusion; the retraction is its coordinate projection. Latest blueprint direct-images proof (3) remains the route; this supporting algebraic-group step expands Conrad Proposition 1.15 as cited by the parent vector/wound split. The inherited ancestor is null and the ancestor command confirms this broken upstream chain; no ancestor was invented.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic dimension drop for a proper closed subset of affine space; this is an auxiliary algebraic geometry tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Only dimension of the image is at most dimension of the source is used for a projected group; no local-unit node supplies this bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-dimension-drop",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-3f03d856e",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-3f03d856e (reviewer sub-agent of L); spot-checked: I read Conrad's appbnew.pdf (fetched to /tmp, not in literature/). The item matches Prop 1.15: smooth U, generation by pointed curves over k_s, a k-group automorphism, and a coordinate direct factor; the added retraction is the projection conjugated by h. Steps 1-7 check out against the cited statements. Step 1 is the leading-degree argument plus detecting ideals after tensoring with K. Step 2 uses the polynomial-dimension Mathlib leaf and affine dimension drop. Step 3 is Cor 1.8 plus Lemmas 1.11/1.13, with the direction of alpha checked. Step 4 uses the factorization node, the affine-separated Mathlib leaf, the normal-quotient node (smoothness and base change) and the image-dimension bound; generation of I_K holds because O(I_K)->O(M_K) is injective under faithful flatness. Step 5: M = A x M', and M' is smooth as M/A. Step 6: e+1 < N, and generation inside B_K follows from minimality in E_K. Step 7: retraction; the edge cases d=0, d=N and the empty family hold. The only implicit point is that a group automorphism carries the generating family along, which is elementary. New node vector-hypersurface-additive-equation (Cor 1.8, Props 1.6-1.7) is true: c_{i0} != 0 is exactly separability; tested on H=0 and V(t^p-t); alpha_p is excluded by smoothness. New node additive-kernel-separable-axis-extraction (Lemma 1.11 (1)=>(3), descended to k by Lemmas 1.12/1.13) is true and strictly smaller than the item; the case n=1 gives f=0. No duplicate in the DAG (rg -L search): the trf additive-monomial classification and the one-variable subgroup quotient are different statements. Tool uses lem-wf-affine-dimension-drop and lem-zl-finite-type-fibre-image-dimension-bounds are generic and accepted. Batch 5: homomorphism-factorization reaches sec-trace-formula only through lem-trf-fppf-covering-base-change, a Mathlib leaf saying fppf covers are stable under base change. Affine-normal-quotient-geometry reaches it only through def-trf-scheme-cover-descent-datum, a general definition. Neither is a step of the trace formula or of Poincare duality, so they lie outside the assumptions. blueprint.from.node is null, inherited from the created chain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineLineGeneratedVectorSubgroupStraightening",
+  "declaration": "AlgebraicGeometry.affineLineGenerated_vectorSubgroup_straightening",
+  "declarations": [
+   "AlgebraicGeometry.affineLineVectorPower",
+   "AlgebraicGeometry.affineLineGenerated_vectorSubgroup_straightening"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineLineGeneratedVectorSubgroupStraightening.lean",
+  "statement": "theorem affineLineGenerated_vectorSubgroup_straightening {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (N : ℕ) (L : Grp (Over (Spec (.of k)))) [IsAffine L.X.left] [LocallyOfFiniteType L.X.hom] [QuasiCompact L.X.hom] [Smooth L.X.hom] (i : L ⟶ affineLineVectorPower k N) [IsClosedSubgroupScheme i.hom.hom] (K : Type u) [Field K] [Algebra k K] [IsSepClosure k K] (curves : Set (StandardGroupSchemes.additive K ⟶ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj L).X)) (hpointed : ∀ f ∈ curves, (1 : StandardGroupSchemes.additive K ⟶ StandardGroupSchemes.additive K) ≫ f = 1) (hgenerated : ∀ (J : Grp (Over (Spec (.of K)))) (j : J.X ⟶ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj (affineLineVectorPower k N)).X), IsClosedSubgroupScheme j → (∀ f ∈ curves, ∃ g : StandardGroupSchemes.additive K ⟶ J.X, g ≫ j = f ≫ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.map i).hom.hom) → ∃ a : ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj L).X ⟶ J.X, a ≫ j = ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.map i).hom.hom) : ∃ (h : affineLineVectorPower k N ≅ affineLineVectorPower k N) (d : ℕ), d ≤ N ∧ (∀ (T : Over (Spec (.of k))) (x : T ⟶ (affineLineVectorPower k N).X), (∃ y : T ⟶ L.X, y ≫ i.hom.hom ≫ h.hom.hom.hom = x) ↔ ∀ j : Fin N, d ≤ j.val → x ≫ (Pi.π (fun _ : Fin N ↦ Grp.mk (StandardGroupSchemes.additive k)) j).hom.hom = 1) ∧ Nonempty (L ≅ affineLineVectorPower k d) ∧ ∃ r : affineLineVectorPower k N ⟶ L, i ≫ r = 𝟙 L",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the categorical finite product of the recorded additive group, including its empty product. Minimal generation and coordinate-subgroup equality are expressed scheme-theoretically by factorization, with all test schemes in the conclusion; the automorphism and retraction are bundled group-scheme morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de24e321e",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Read node, def-sc-group-scheme-subgroup (IsClosedSubgroupScheme extends IsSubgroupScheme extends IsMonHom, plus closed immersion), def-sc-gm-ga (additive = affine k k[X] with pinned additiveGroup), delivered module and report (Worker report + Second reading by Q145 present). Clause by clause: char p prime; L closed smooth affine finite-type subgroup of the Fin N product of Grp.mk additive (same encoding as landed AdditiveSubgroupPerfectDecomposition and CharZeroCommutativeUnipotentVectorGroup; helper is an abbrev, not hollow, not a duplicate); K is IsSepClosure in universe u; L_K, E_K, i_K via Over.pullback mapGrp; curves are Over-morphisms from A^1_K, pointedness via Hom-monoid 1 (equivalent to eta_A then f = eta_L); minimality over all closed subgroups J of E_K; conclusion: h is a Grp iso, d <= N, image of i then h equals the coordinate subgroup as subfunctors over all T (scheme-theoretic), L iso G_a^d, homomorphism retraction r with i then r = id. Edge cases N=0, d=0, d=N, empty curve set, constant F_p, alpha_p and imperfect k all checked; no extra perfectness, connectedness or linearity. Docstrings carry source and blueprint; sorry only; statement field verbatim; node non-lean fields equal live. No file changed, so no compile. Note: a parallel Q95 S2 delivery of the same item (519dde499) exists; if it lands first, rebind."
+ }
+}

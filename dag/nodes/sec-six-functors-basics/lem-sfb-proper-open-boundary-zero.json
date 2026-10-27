@@ -21,110 +21,93 @@
  ],
  "proof": [
   {
-   "text": "Put $T=W\\times_{\\overline Y}Z$, with projections $a:T\\to W$ and $r_Z:T\\to Z$. Base change of the closed immersion $c$ makes $a$ a closed immersion; its underlying closed subset is $r^{-1}(|Z|)$, whose complement is exactly $U=r^{-1}(Y)$. The morphism $j$ is an open immersion by base change of $i$, and is quasi-compact by quasi-compact base change. Base change of properness makes $r_Z$ proper. The closed immersions $c$ and $a$ are proper, hence separated and of finite type; composition with the structure morphisms of $\\overline Y$ and $W$ shows that $Z$ and $T$ are separated finite-type $k$-schemes. Thus the square $(a,r_Z,r,c)$ is a proper base-change square inside the standing setting. The scheme $T$ need not be reduced: only its closed underlying subset, complementary to $U$, is used.",
+   "text": "Put $T=W\\times_{\\overline Y}Z$, with projections $a:T\\to W$ and $r_Z:T\\to Z$. Apply [lem-sfb-proper-open-complement-square] to the given $r,i,c$. It provides the proper Cartesian square inside the standing scheme setting, identifies $a$ and $j$ as complementary closed and quasi-compact open immersions (without assuming $T$ reduced), and gives $a^*j_!A\\simeq0$.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-sfb-finite-type-composition-base-change"
+    "lem-sfb-proper-open-complement-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
+    "place": "Proof (3), closed-complement calculation on bounded constructible finite-Tor inputs."
    }
   },
   {
-   "text": "Apply the mixed-restriction vanishing $i^*j_!=0$ of [lem-sfb-condensed-support-derived-localization] to the complementary immersions $a:T\\hookrightarrow W$ and $j:U\\hookrightarrow W$. Its quasi-compactness hypothesis holds by step 1. Its coefficients are arbitrary commutative condensed rings, and its derived categories are ordinary unbounded module-object categories, as here. Consequently $a^*j_!A\\simeq0$ in $D(T_{\\mathrm{pro\\acute et}},\\Lambda)$, without any further boundedness or reducedness assumption.",
+   "text": "Set $K=j_!A$. Apply [lem-sfb-open-extension-zero-constructible-finite-tor] to $j$ and $A$: it gives $K\\in\\Dctf(W,\\Lambda)$ and also bounded constructibility in the ring-object sense. Thus $K$ satisfies both constructibility conventions in the coefficient-specific base-change nodes.",
    "uses": [
-    "lem-sfb-condensed-support-derived-localization"
+    "lem-sfb-open-extension-zero-constructible-finite-tor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
+    "place": "Proof (3), closed-complement calculation on bounded constructible finite-Tor inputs."
    }
   },
   {
-   "text": "Set $K=j_!A$. Constructibility: since $j_!$ is exact and applied termwise, $H^q(K)\\cong j_!H^q(A)$ for every $q$ [lem-weil-pbc-exact-functor-complex-cohomology], so $K$ is bounded with the bounds of $A$. Each $H^q(A)$ is constructible in the finite-constant-local-model sense of [sk-def-sfb-constructible], hence so is $j_!H^q(A)$ by [lem-sf-open-extension-zero-constant-model-constructible] (strata of $U$ together with the reduced complement, zero model on the complement). Thus $K\\in\\Dbc(W,\\Lambda)$ in the sense used by $\\Dctf$. A finite constant local model is locally finitely presented [det-def-sfb-constructible-local-model], on the same strata, so $K$ is also bounded constructible in the ring-object sense of [sk-def-sfb-bounded-constructible] used by the rational base-change node. Tor amplitude: choose a finite Tor interval $[u,v]$ for $A$. For any sheaf $N$ of $\\Lambda_W$-modules, the open-immersion derived projection formula gives\n$$K\\otimes^{\\mathbf L}_{\\Lambda_W}N\\simeq j_!\\bigl(A\\otimes^{\\mathbf L}_{\\Lambda_U}j^*N\\bigr).$$\nThe cartesian-coefficient assertion makes $j^*$ exact, so $j^*N$ is again a sheaf in degree zero. The inner tensor therefore has cohomology only in $[u,v]$, and by exactness of $j_!$ again so does its extension by zero. Thus $K\\in\\Dctf(W,\\Lambda)$.",
+   "text": "Suppose $\\Lambda$ is a finite commutative ring killed by a power of $\\ell$. Apply clause (2) of [det-thm-sfb-proper-base-change-finite] to $r:W\\to\\overline Y$, $g=c$, $g'=a$, and $p'=r_Z$. Properness and the standing scheme hypotheses hold by step 1, and $K=j_!A$ lies in $\\Dctf(W,\\Lambda)$ by step 2. It follows that\n$$c^*Rr_*j_!A\\simeq R(r_Z)_*a^*j_!A.$$\nBoth sides are objects of the ordinary unbounded module-object derived category on $Z$. For a finite discrete coefficient presentation, identify its continuous-map condensed ring with the sheafified constant ring by lem-weil-pbc-finite-discrete-condensed-ring-constant, applying the canonical ring equivalence that removes the extra universe lift.",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sf-open-extension-zero-constant-model-constructible",
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-bounded-constructible",
-    "lem-sfb-open-immersion-derived-tensor-projection",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-module-open-lower-shriek",
-    "sk-def-sfb-constructible"
+    "det-thm-sfb-proper-base-change-finite",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
+    "place": "Proof (3), closed-complement calculation on bounded constructible finite-Tor inputs."
    }
   },
   {
-   "text": "Suppose $\\Lambda$ is a finite commutative ring killed by a power of $\\ell$. Apply clause (2) of [det-thm-sfb-proper-base-change-finite] to $r:W\\to\\overline Y$, $g=c$, $g'=a$, and $p'=r_Z$. Properness and the standing scheme hypotheses hold by step 1, and $K=j_!A$ lies in $\\Dctf(W,\\Lambda)$ by step 3. It follows that\n$$c^*Rr_*j_!A\\simeq R(r_Z)_*a^*j_!A.$$\nBoth sides are objects of the ordinary unbounded module-object derived category on $Z$.",
-   "uses": [
-    "det-thm-sfb-proper-base-change-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
-   }
-  },
-  {
-   "text": "For $\\Lambda=\\mathcal O_E$ use clause (3) of [det-thm-sfb-proper-base-change-integral] on the same square and $K=j_!A\\in\\Dbc(W,\\mathcal O_E)$ from step 3. This also covers $\\mathbf Z_\\ell$ by taking $E=\\mathbf Q_\\ell$, whose valuation ring is $\\mathbf Z_\\ell$. For $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, use clause (3) of [det-thm-sfb-proper-base-change-rational], again on that square and bounded constructible $K$. The case $\\mathbf Q_\\ell$ is $E=\\mathbf Q_\\ell$. These cases and step 4 exhaust the admissible list in [sk-def-localizing-closure]. The algebraic-closure coefficient is throughout the finite-subextension condensed ring fixed in the statement. We obtain in every case\n$$c^*Rr_*j_!A\\simeq R(r_Z)_*a^*j_!A.$$\nOnly bounded constructible inputs to these theorems are used, with no assertion on a localizing closure.",
+   "text": "For $\\Lambda=\\mathcal O_E$ use clause (3) of [det-thm-sfb-proper-base-change-integral] on the same square and $K=j_!A\\in\\Dbc(W,\\mathcal O_E)$ from step 2. This also covers $\\mathbf Z_\\ell$ by taking $E=\\mathbf Q_\\ell$, whose valuation ring is $\\mathbf Z_\\ell$. For $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, use the adopted proper-base-change theorems [nt-target-proetale-e] and [nt-target-proetale-qbar], again on that square and bounded constructible $K$. The case $\\mathbf Q_\\ell$ is $E=\\mathbf Q_\\ell$. These cases and step 3 exhaust the admissible list in [sk-def-localizing-closure]. The algebraic-closure coefficient is throughout the finite-subextension condensed ring fixed in the statement. We obtain in every case\n$$c^*Rr_*j_!A\\simeq R(r_Z)_*a^*j_!A.$$\nOnly bounded constructible inputs to these theorems are used, with no assertion on a localizing closure. Realize the ground field inside the fixed algebraic closure by an algebraic embedding and the uniqueness of the extended p-adic norm. The same norm uniqueness identifies the unit ball and the universe-lifted integral coefficient ring. Postcomposition gives the corresponding condensed ring isomorphisms. Transport constant-model finite-Tor inputs by lem-sfb-condensed-coefficient-iso-constructible. Scalar restriction along the inverse coefficient isomorphism is an exact equivalence, commutes with derived pullback and pushforward, preserves bounded constructibility (using lem-weil-pbc-module-constructible-pullback on cohomology), and reflects zero objects; thus the coefficient-specific vanishing statements transport to the given Lambda.",
    "uses": [
     "det-thm-sfb-proper-base-change-integral",
-    "det-thm-sfb-proper-base-change-rational",
-    "sk-def-localizing-closure"
+    "nt-target-proetale-e",
+    "nt-target-proetale-qbar",
+    "sk-def-localizing-closure",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
+    "place": "Proof (3), closed-complement calculation on bounded constructible finite-Tor inputs."
    }
   },
   {
-   "text": "Substitute $a^*j_!A\\simeq0$ from step 2 into the isomorphism of step 4 or 5. The derived adjunction $r_Z^*\\dashv R(r_Z)_*$ implies $R(r_Z)_*0\\simeq0$: for every $B$, its adjunction identifies $\\operatorname{Hom}(B,R(r_Z)_*0)$ with the singleton $\\operatorname{Hom}(r_Z^*B,0)$, so $R(r_Z)_*0$ is terminal and hence isomorphic to the zero object. Thus $c^*Rr_*j_!A\\simeq0$, as claimed.",
+   "text": "Substitute $a^*j_!A\\simeq0$ from step 1 into the isomorphism of step 3 or 4. The derived adjunction $r_Z^*\\dashv R(r_Z)_*$ implies $R(r_Z)_*0\\simeq0$: for every $B$, its adjunction identifies $\\operatorname{Hom}(B,R(r_Z)_*0)$ with the singleton $\\operatorname{Hom}(r_Z^*B,0)$, so $R(r_Z)_*0$ is terminal and hence isomorphic to the zero object. Thus $c^*Rr_*j_!A\\simeq0$, as claimed.",
    "uses": [
     "sk-def-sfb-module-derived-pushpull"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3), closed-complement calculation; auxiliary hypotheses expanded explicitly."
+    "place": "Proof (3), closed-complement calculation on bounded constructible finite-Tor inputs."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-pc-quasi-compact-base-change",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-sfb-condensed-support-derived-localization",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-sf-open-extension-zero-constant-model-constructible",
-  "det-def-sfb-constructible-local-model",
-  "sk-def-sfb-bounded-constructible",
-  "lem-sfb-open-immersion-derived-tensor-projection",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-sfb-module-open-lower-shriek",
-  "sk-def-sfb-constructible",
+  "lem-sfb-proper-open-complement-square",
+  "lem-sfb-open-extension-zero-constructible-finite-tor",
   "det-thm-sfb-proper-base-change-finite",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "det-thm-sfb-proper-base-change-integral",
-  "det-thm-sfb-proper-base-change-rational",
+  "nt-target-proetale-e",
+  "nt-target-proetale-qbar",
   "sk-def-localizing-closure",
-  "sk-def-sfb-module-derived-pushpull"
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-route-boundary-vanishing-finite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-  "place": "Proof (3), expanded using the existing coefficient-specific proper base-change and open-support nodes."
+  "place": "Proof (3), implemented by the complement-square and open-extension declarations, finite/integral base change, and the adopted source-library rational proper-base-change theorems, with explicit coefficient-isomorphism transport."
  },
  "mathlib_searches": [
   {
@@ -225,28 +208,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-proper-open-boundary-zero",
   "worker": "stage1",
-  "summary": "Expanded the closed-complement calculation into its geometric square, mixed-restriction vanishing, explicit constructibility and Tor-amplitude check, coefficient-by-coefficient proper base change, and preservation of zero by the derived right adjoint. Reused existing nodes throughout; no new nodes or statement changes. Reviewer repair (N5 maintainer reader, 2026-10-21): step 3 now derives constant-local-model constructibility of j_!A from lem-sf-open-extension-zero-constant-model-constructible instead of the locally-finitely-presented node lem-sfb-dc-open-lower-shriek-preserves.",
-  "blueprint": "Realizes exactly the target-object calculation in det-sf-comp-composition-interchange.proof.md, Proof (3), from proper base change along c to vanishing on the inverse-image complement. It does not use the comparison-isomorphism or localizing-extension clauses.",
+  "summary": "Repair of the human re-split return: extract two independent statement-only obligations (complementary proper square with mixed restriction vanishing; open extension with constant-model constructibility and fixed Tor bounds). Preserve the item statement and the finite/integral/rational base-change assembly. The report retains the complete old argument as handoff material, including its sources and citations.",
+  "blueprint": "Proof (3) of det-sf-comp-composition-interchange: the inverse-image complement and zero restriction are carried by lem-sfb-proper-open-complement-square; the proper-base-change input check is carried by lem-sfb-open-extension-zero-constructible-finite-tor; the parent assembles the coefficient-specific base-change isomorphisms and zero preservation.",
   "tool_uses": [
-   {
-    "node": "lem-sf-open-extension-zero-constant-model-constructible",
-    "why": "Extension by zero preserves constructibility in the finite-constant-local-model sense of sk-def-sfb-constructible (the sense of Dctf and of the base-change inputs); the composition unit gives no such node, and lem-sfb-dc-open-lower-shriek-preserves only gives the weaker locally-finitely-presented notion."
-   },
-   {
-    "node": "lem-sfb-condensed-support-derived-localization",
-    "why": "Mixed closed/open restriction vanishing on ordinary unbounded condensed module objects; the composition unit does not itself provide this support tool."
-   },
-   {
-    "node": "lem-sfb-open-immersion-derived-tensor-projection",
-    "why": "Open-immersion projection formula with arbitrary derived inputs, used only to check the finite Tor amplitude of j_!A."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Exact coefficient-compatible pullback on module sheaves, needed in the Tor-interval check."
-   },
    {
     "node": "det-thm-sfb-proper-base-change-finite",
     "why": "The finite-coefficient proper base-change isomorphism in the exact square used by the blueprint."
@@ -262,23 +229,29 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-open-extension-zero-constant-model-constructible",
-  "lem-sfb-condensed-support-derived-localization",
-  "lem-sfb-open-immersion-derived-tensor-projection",
-  "sk-prop-sfb-cartesian-coefficients",
   "det-thm-sfb-proper-base-change-finite",
-  "det-thm-sfb-proper-base-change-integral",
-  "det-thm-sfb-proper-base-change-rational"
+  "det-thm-sfb-proper-base-change-integral"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N5-bf4216140",
-  "group": "N5",
+  "reviewer": "NT-cc-Q129-cd5184c0e",
+  "group": "Q129",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-bf4216140 (reviewer sub-agent of L); spot-checked: I read the whole item, all 6 steps, the report, the source (det-sf-comp-composition-interchange.proof.md Proof (3), main-20261015) and the statement of every cited node. The statement is unchanged from the base and not weakened. It holds in every edge case I tried: U empty, Y=Ybar, U=W, A=0, non-reduced T, zero ring. The delivery creates no new nodes, and there is no cycle and no SGA citation. Step 1 (base-change geometry) is correct. Step 2 is correct: lem-sfb-condensed-support-derived-localization gives a^*j_!=0 on the item's module-object functors. One fault, C4 in step 3: it cited lem-sfb-dc-open-lower-shriek-preserves for bounded constructibility of j_!A. That node only gives the locally-finitely-presented notion of sk-def-sfb-bounded-constructible. The item's Dctf and the Dctf/Dbc inputs of det-thm-sfb-proper-base-change-finite (2) and -integral (3) need the finite-constant-local-model notion of sk-def-sfb-constructible. det-def-sfb-constructible-local-model says the converse implication fails, for example for Z_ell. I repaired step 3 in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-open-boundary-zero.json. It now argues H^q(j_!A)=j_!H^q(A) by exactness, then cites the existing reviewed node lem-sf-open-extension-zero-constant-model-constructible for constant-model constructibility. The lfp inclusion needed by the rational node comes from det-def-sfb-constructible-local-model. The Tor-amplitude argument is kept. The lfp node is removed from uses, proof_deps and tool_uses, and the new tool_use is proposed. Steps 4-6 are correct after the repair. Clause (2) of the finite node and clause (3) of the integral and rational nodes cover exactly the admissible list (Z_ell = O_{Q_ell}, Q_ell = E). Only an object isomorphism is used, and R(r_Z)_* sends 0 to 0 by adjunction. Batch-5 flags on the three det-thm-sfb-proper-base-change-* nodes are accepted. The path ends at def-trf-geometric-morphism, a general definition. The rest of the trf/pod closure is generic infrastructure (point systems, localization). Proper base change is a general six-functor theorem, not a step of the trace formula or Poincare duality, and the blueprint's own sk-prop-proper-base-change-unbounded route reduces to these same Dctf nodes. The declared tool uses are accepted. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-cd5184c0e (reviewer sub-agent of L); spot-checked: This answers the 2026-10-22 batch5 re-split note: 4259 characters of proof, at least 2 new nodes, parent at most 3000 characters. The item is not on any dropped list, and the live/side-live item is still the N5 6-step split. Diff against live: only proof, proof_deps and split_report change; the statement, stmt_deps, source and lean record are byte-identical. No SGA. Step mapping: old steps 1+2 became lem-sfb-proper-open-complement-square, old step 3 became lem-sfb-open-extension-zero-constructible-finite-tor, and old steps 4-6 are kept in the parent verbatim apart from renumbered step references. They apply generic proper base change to the item's own square, so they are assembly. The parent is 2303 characters, the two nodes are of comparable size, nothing was shortened, and proof_deps equals the union of the step uses. Node A checks: U, Z, T are separated finite-type k-schemes; j is a qc open immersion and a a closed immersion by base change; r_Z is proper; |a(T)| = |W| minus j(U). a^*j_!B=0 for every commutative condensed ring follows from lem-sfb-condensed-support-derived-localization. Edge cases Y empty, Y=Ybar, W empty and r=id all hold, and c need not be reduced. Node B checks: H^q(j_!A)=j_!H^q(A) keeps [m,n]. Constant-model constructibility comes from lem-sf-open-extension-zero-constant-model-constructible, which holds for any condensed ring. The lfp sense comes from the lemma in det-def-sfb-constructible-local-model. The Tor interval [u,v] is kept by the open projection formula (any Λ), by exactness of j^* (alpha_j is an iso for every Λ) and by exactness of D(j_!). Edge cases A=0, U empty, j=id, Λ=0 and disjoint intervals all hold. The general-Λ form is needed because the item's Qbar_l is the finite-subextension ring of sk-def-sfb-qlbar-condensed. Duplicates checked: det-proper-image-localizing-open, lem-sfb-dc-open-lower-shriek-preserves, sk-lem-sf-open-ctf, lem-trf-open-ctf and lem-sp-etale-compact-support-tor-window. The parallel sibling Q139 lem-sfb-qc-open-extension-ctf was merged on side-live at 07:18Z, after this commit at 06:56Z. It uses the induced-topology C(-,Qbar_l) convention of sk-def-localizing-closure and has no lfp clause, so it does not carry step 2, and node B is kept. Maintainer note: the two overlap on the admissible induced-topology rings, so whoever proves one should reuse the other. Statements were also grepped for a node-A duplicate: none found. The three det-thm-sfb-proper-base-change tool_uses are accepted again, and the unit route goes through sk-prop-sf-comp-coherence. Both new nodes are unsplit, have empty proofs and three search kinds, and cite blueprint main-20261015 det-sf-comp-composition-interchange proof (3) as source. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ProperOpenBoundaryZero",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proper_open_boundary_zero",
@@ -302,5 +275,19 @@
   "group": "Q08",
   "result": "fix",
   "note": "Re-delivery after the a7ecdd8f H13/H4 RETURN does what that RETURN required: the sk-def-localizing-closure record is byte-identical to side-live (cmp), the FiniteSubextensionAdmissibleCoefficients module is dropped, and IsFiniteSubextensionLocalizingAdmissibleCoefficient (body identical, 6 families with padicAlgClRingObj = the sk-def-sfb-qlbar-condensed ring) is now in the item module, listed in lean.declarations with a note. The item lean.statement is unchanged and verbatim. Clause-by-clause check OK: l prime; k with char p>0, p!=l; Over-k LOFT/QC/separated; IsProper r; qc open i; U = pullback, j = pullback.fst; reduced closed complement via hc + IsReduced; A in ConstantModelConstructibleFiniteTor; IsZero in ordinary D(Z). Edge cases OK. No duplicate: IsLocalizingAdmissibleCoefficient and IsNormTopological both carry C(-,Qbar_l); CondensedRing.IsAdmissibleCoefficient quantifies l. FIX: the helper docstring was tagged (blueprint: sk-def-localizing-closure), which re-attributes the narrowed predicate to the dep node; fixes/ProperOpenBoundaryZero.lean retags it (blueprint: lem-sfb-proper-open-boundary-zero) with an ownership sentence, docstring-only change, nt_compile --json clean in 20.4 s. No record fix needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T071230-L-153722",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite"
+  ],
+  "sorry_after": []
  }
 }

@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-weakly-etale-indetale-cech-refinement",
+ "kind": "statement",
+ "title": "Finite ind-etale refinement with locally ind-etale Cech terms",
+ "statement": "Let $b:U\\to V$ be a quasi-compact quasi-separated weakly étale morphism between qcqs schemes [def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-quasi-separated-morphism, sk-def-pe-morphisms]. Use the small pro-étale sites and universes [def-weil-pbc-proetale-site, def-weil-size-convention]. There is a finite covering family $q_a:D_a\\to U$ in $U_{\\mathrm{proét}}$, with every $D_a$ affine, such that the following holds. For every integer $n\\ge0$ and tuple $(a_0,\\ldots,a_n)$, the scheme\n$$D_{a_0\\ldots a_n}=D_{a_0}\\times_U\\cdots\\times_U D_{a_n}$$\nis qcqs and its composite $b_{a_0\\ldots a_n}:D_{a_0\\ldots a_n}\\to V$ has a finite affine open cover $T_\\beta$. Each $T_\\beta\\to V$ factors through an affine open $V_\\beta\\subseteq V$ with $T_\\beta\\to V_\\beta$ affine pro-étale, that is, induced by a small filtered colimit of finitely presented étale ring algebras [sk-def-pe-morphisms]. No affine or weak-contractibility assertion is made about the whole fibre product when $U,V$ are not affine. The family may be empty when $U$ is empty. No coefficient or cohomological hypothesis is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Theorem 2.3.4 and Proposition 2.3.3 (weakly étale / ind-étale permanence), with Remark 4.1.3 (every weakly étale Y -> X is Zariski locally on X and locally in Y_proet of the form Spec B -> Spec A with A -> B ind-étale): affine ind-étale refinements of weakly etale maps. This statement additionally packages finite affine covers and the locally ind-etale Cech intersections, via the flat diagonal; it does not assert that an arbitrary weakly etale affine is already ind-etale."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "sk-def-pe-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Pull the affine cover of V back to U, refine by affine open covers of the components and take a finite subcover of U. For each resulting affine map X → W to an affine open W of V, apply RingHom.WeaklyEtale.exists_indEtale_comp to the map on global sections. Its faithfully flat ind-etale spectrum map D → X is surjective, pro-affine-etale, and has pro-affine-etale composite D → W. Transport along isoSpec. Compose with X → U and assemble the finite jointly surjective weakly-etale family. Every component map to U is quasi-compact because its source is affine and U is quasi-separated, so the finite cover is pro-etale.",
+   "uses": [
+    "sk-thm-pe-indetale-refinement",
+    "sk-def-pe-morphisms",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the nonempty tuple length. A singleton product in Over U is isomorphic to its unique factor, which is affine, qcqs, and has the retained affine target factorization. In the successor case extend the product fan by a binary pullback with the new factor. Standard scheme quasi-compact and quasi-separated pullback instances, using the affine new factor and quasi-separated U, prove qcqs. Apply lem-sfb-indetale-pullback-charts to the preceding term and the retained factorization of the new factor through its source affine open. Transport along pullback symmetry and the product-fan isomorphism. The over-U triangle and pullback identity give the exact structural-map equality to V.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-indetale-pullback-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a finite subcover of the affine open cover of every tuple term. This preserves the chosen maps and their pro-affine-etale factorizations verbatim. The constructions already use small ring refinements and universe-u open covers, so no further universe reduction is necessary. Empty U gives an empty family automatically; there are no tuples indexed by an empty cover.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-covering",
+  "lem-sfb-indetale-pullback-charts",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "sk-def-pe-morphisms",
+  "sk-thm-pe-indetale-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Theorem 2.3.4, Proposition 2.3.3(4), and Remark 4.1.3; Q6 gives ring-level affine refinement, finite open subcover construction and product-fan induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(ind.etale|weakly.etale).*(limit|Cech|Čech|tensor|diagonal)",
+   "results": "{\"t\": \"2026-10-25T11:22:00Z\", \"tool\": \"grep\", \"query\": \"(ind.etale|weakly.etale).*(limit|Cech|Čech|tensor|diagonal)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind etale refinements of weakly etale maps and stability of their iterated Cech fibre products over the weakly etale scheme",
+   "results": "{\"t\": \"2026-10-25T11:22:00Z\", \"tool\": \"leansearch\", \"query\": \"Ind etale refinements of weakly etale maps and stability of their iterated Cech fibre products over the weakly etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"RingHom.Etale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"72da2c50d0078ea0\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale morphism of affine schemes admits a faithfully flat ind etale cover whose Cech nerve consists of ind etale schemes over the base",
+   "results": "{\"t\": \"2026-10-25T11:22:01Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale morphism of affine schemes admits a faithfully flat ind etale cover whose Cech nerve consists of ind etale schemes over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"040483932733c0bf\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-25T11:34:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"RingHom.Etale.codescendsAlong_faithfullyFlat\", \"Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat\"], \"digest\": \"25215f26191b1aff\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(indEtale|IndEtale|WeaklyEtale|weaklyEtale).*(pullback|diagonal|tensor|cover)",
+   "results": "{\"t\": \"2026-10-25T11:34:23Z\", \"tool\": \"grep\", \"query\": \"(indEtale|IndEtale|WeaklyEtale|weaklyEtale).*(pullback|diagonal|tensor|cover)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\"], \"digest\": \"602158ca70ae1ba7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact weakly etale morphism has a finite affine ind etale cover with ind etale Cech intersections",
+   "results": "{\"t\": \"2026-10-25T12:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact weakly etale morphism has a finite affine ind etale cover with ind etale Cech intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\"], \"digest\": \"f20920c50c29ce74\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits give ordinary etale morphisms, affine open refinements, or weak-etale stability; none gives ind-etale refinements and all Cech terms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-25T12:07:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeaklyEtale\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits give ordinary etale morphisms, affine open refinements, or weak-etale stability; none gives ind-etale refinements and all Cech terms"
+  },
+  {
+   "tool": "grep",
+   "query": "(indEtale|IndEtale|WeaklyEtale|weaklyEtale).*(pullback|diagonal|tensor|cover)",
+   "results": "{\"t\": \"2026-10-25T12:07:48Z\", \"tool\": \"grep\", \"query\": \"(indEtale|IndEtale|WeaklyEtale|weaklyEtale).*(pullback|diagonal|tensor|cover)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\"], \"digest\": \"602158ca70ae1ba7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits give ordinary etale morphisms, affine open refinements, or weak-etale stability; none gives ind-etale refinements and all Cech terms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly etale scheme morphism has finite affine refinements whose iterated fibre products are locally ind etale over the base",
+   "results": "{\"t\": \"2026-10-25T12:07:49Z\", \"tool\": \"leansearch\", \"query\": \"A weakly etale scheme morphism has finite affine refinements whose iterated fibre products are locally ind etale over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\"], \"digest\": \"fc06f47ff84263ea\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits give ordinary etale morphisms, affine open refinements, or weak-etale stability; none gives ind-etale refinements and all Cech terms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine covers of weakly etale schemes with locally ind etale Cech nerve terms",
+   "results": "{\"t\": \"2026-10-25T12:09:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine covers of weakly etale schemes with locally ind etale Cech nerve terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"bcf0d072c9a57475\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits give ordinary etale morphisms, affine open refinements, or weak-etale stability; none gives ind-etale refinements and all Cech terms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proetale-supported-model-coinduction",
+  "date": "2026-10-25",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph: finite ind-etale refinement with locally ind-etale Cech terms; the affine weakly-etale refinement and its iterated affine-local fibre products.",
+   "via": [
+    "lem-sfb-proetale-supported-model-coinduction",
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-weakly-etale-indetale-cech-refinement",
+  "worker": "stage1",
+  "summary": "Constructed a finite affine refinement using the existing affine weakly-etale refinement theorem. Verified the pro-etale covering on each affine open of U. An explicit induction restricts the previous Cech term to the affine target U_a of the next refinement and then uses affine base change and composition; qcqs gives the final finite subcover. No new node or statement change is needed.",
+  "blueprint": "The argument realizes the finite ind-etale refinement and the locally ind-etale Cech-intersection paragraph described in the imported refinement paragraph.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic Zariski locality and composition for weak etaleness, plus affine pro-etale base change/composition; used only for the geometric refinement sublemma."
+   },
+   {
+    "node": "lem-pe-ind-etale-small-index",
+    "why": "Generic universe reduction for filtered etale presentations; no compactification comparison step is replaced."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic quasi-compactness of intersections of quasi-compact opens in the quasi-separated scheme U."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Its singleton-family case computes each affine fibre product with its projection; no smooth-base-change result is used."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic affine-chart equivalence between scheme and ring weak etaleness, and etale implies weakly etale, used only in constructing the geometric refinement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NK-2ac613096",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-2ac613096 (reviewer sub-agent of L); spot-checked: Read the item in full (5 steps, no new nodes, statement and stmt_deps unchanged), every cited statement, and Bhatt–Scholze Prop 2.3.3, Thm 2.3.4, Def 4.1.1, Rem 4.1.3 and Ex 4.1.12. The statement asks only for local affine pro-étale charts T_β→V_β, which matches Rem 4.1.3. Step 1 is correct: sk-thm-pe-indetale-refinement gives B_a→C_a faithfully flat ind-étale and A_a→C_a ind-étale. Step 2 checks the pro-étale covering condition on each affine W; W∩U_a is quasi-compact because U is quasi-separated, and no intersection of affines is taken to be affine. Step 4's induction checks out: T'⊂T∩P⁻¹(U_a), and E=T'×_{U_a}D_a is affine, open, and contains the point. Two faults, both repaired. (1) C1/E5, step 3: it applied the algebraic-space qcqs theorem to schemes, using the uncited fact that a scheme is an algebraic space (h_T an fppf sheaf), and only sketched the matching of qc/qs conventions. Step 3 now cites lem-weil-pbc-proetale-qcqs-site-limits (unit sk-thm-properbasechange, which is on the unit's route) with X=U qcqs, and the induction also carries 'P→U weakly étale' via the stability node. (2) C1, step 4: going from an étale open immersion of affines to an affine pro-étale map needs the ring map O(T)→O(T') to be finitely presented étale, so step 4 now cites lem-weil-pbc-etale-ring-map-iff-etale-affine (Mathlib leaf). Batch-5: the four flagged citations (def-trf-algebraic-space, lem-sfb-space-qcqs-source-products, lem-sfb-space-quasicompact-affine-tests, lem-trf-space-fibre-products-etale-covers) are removed. They were generic algebraic-space foundations anyway, not steps of the trace formula or of Poincaré duality. The two added nodes reach no sec-trace-formula or sec-poincare-duality node and do not create a cycle. The three algebraic-space tool_uses are dropped; the remaining five are accepted as generic. Edge cases checked: U empty, V empty, b=id on P¹, repeated indices, non-separated quasi-separated U, n=0. No duplicate node exists. The fix file changes only proof, proof_deps and split_report.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WeaklyEtaleIndEtaleCechRefinement",
+  "declaration": "AlgebraicGeometry.exists_finite_affine_indEtale_cech_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/WeaklyEtaleIndEtaleCechRefinement.lean",
+  "statement": "theorem exists_finite_affine_indEtale_cech_refinement {U V : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U] [CompactSpace V] [QuasiSeparatedSpace V] (b : U ⟶ V) [QuasiCompact b] [QuasiSeparated b] [WeaklyEtale b] : ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, Finite D.I₀ ∧ (∀ a : D.I₀, IsAffine (D.X a)) ∧ ∀ (n : ℕ) (a : Fin (n + 1) → D.I₀), CompactSpace (∏ᶜ fun i : Fin (n + 1) ↦ Over.mk (D.f (a i))).left ∧ QuasiSeparatedSpace (∏ᶜ fun i : Fin (n + 1) ↦ Over.mk (D.f (a i))).left ∧ ∃ T : Scheme.OpenCover.{u} (∏ᶜ fun i : Fin (n + 1) ↦ Over.mk (D.f (a i))).left, Finite T.I₀ ∧ ∀ β : T.I₀, IsAffine (T.X β) ∧ ∃ (W : V.Opens) (_hW : IsAffineOpen W) (g : T.X β ⟶ W.toScheme), proAffineEtale g ∧ g ≫ W.ι = T.f β ≫ (∏ᶜ fun i : Fin (n + 1) ↦ Over.mk (D.f (a i))).hom ≫ b",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d73f1ee11",
+  "group": "NE",
+  "result": "fix",
+  "note": "Lean exact against node: qcqs U,V + qc/qs/WeaklyEtale b; ∃ finite affine Scheme.Cover proetalePrecoverage U; ∀ n, Fin(n+1) tuples; Over U products (fibre products over U), qcqs; finite affine OpenCover with ∃ affine open W ⊆ V and proAffineEtale g pinned by g≫W.ι = T.f β≫hom≫b (proAffineEtale_iff_appTop = IndEtale, universe u). Edge cases (U empty, n=0, repeats, universes) OK; node copy differs only in lean; statement verbatim; sorry only; docstrings OK. Sole fault H11: 'Second reading by NE' was a self-check → fixes/<item>.report.md with worker report verbatim + real clause-by-clause second reading. No compile needed (no Lean changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8cbd5",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261025T202832-L-2757273",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + new IndEtalePullbackCharts module/node against the unchanged item statement, unit sk-prop-sf-comp-coherence realized list, #print axioms, and node records"
+ }
+}

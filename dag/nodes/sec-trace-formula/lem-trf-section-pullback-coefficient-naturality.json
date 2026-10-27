@@ -1,0 +1,111 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingSectionDeformation",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "lem-trf-section-pullback-coefficient-naturality",
+ "title": "Section restriction preserves a coefficient comparison square",
+ "statement": "Let $A$ be a commutative ring and let $v:B'\\to B$, $p:P\\to B$, $q:P'\\to B'$, $h:P'\\to P$, $z:B\\to P$, and $w:B'\\to P'$ be morphisms of schemes with $hp=qv$, $wh=vz$, $zp=1_B$, and $wq=1_{B'}$. In the ordinary etale derived categories write $P_f=Lf^*$, $\\gamma_{a,b}:P_{ab}\\simeq P_bP_a$ for the canonical compositor and $\\sigma_z:P_zP_p\\simeq1$ and $\\sigma_w:P_wP_q\\simeq1$ for the section compositors [def-weil-pbc-derived-categories, def-weil-pbc-inverse-image]. Let $K\\in D(B,A)$, $K'\\in D(B',A)$, $L\\in D(P,A)$ and $L'\\in D(P',A)$, and take maps $e:P_vK\\to K'$, $a:P_pK\\to L$, $a':P_qK'\\to L'$, and $b:P_hL\\to L'$. Here $\\gamma_{q,v}^{hp}$ denotes the compositor with common composite $hp$. The cached inverse images and constant-coefficient conventions are [def-asd-ordinary-finite-p1-arrows]. Let $T:P_vP_z\\simeq P_wP_h$ be $\\gamma_{v,z}^{-1}\\gamma_{w,h}$ with common composite $vz$, using $wh=vz$. If $P_h(a)b=\\gamma_{h,p}^{-1}\\gamma_{q,v}^{hp}P_q(e)a'$, then\n$$P_v(\\sigma_z^{-1}P_z(a))\\,T_L\\,P_w(b)=e\\,\\sigma_w^{-1}\\,P_w(a').$$\nComposition is displayed in the order maps are applied. Neither Cartesianity nor invertibility of $a$, $a'$, $b$, or $e$ is required.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, frame integration transpose and restriction along the zero section; parent proof Step 7."
+ },
+ "proof": [
+  {
+   "text": "Expand the section pullback square as the inverse compositor for v,z followed by the compositor for w,h with common composite v z. Naturality of these two compositors moves a to its pullback along h. Replace h* a followed by b with the assumed coefficient square. The section-compositor pasting identity identifies the remaining middle path with the inverse target section compositor: compose the identity leftDerivedUpperStar_map_comp_compSectionIso with the inverse source section compositor and the inverse section square, using the source-library common-composite congruence to change w h to v z. Finally naturality of the target section compositor moves e to the front. This is formal functoriality and inverse cancellation; no finiteness, Cartesianity or nonzero coefficient is used.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, frame integration transpose and restriction along the zero section; parent proof Step 7."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (2), the normalized smooth-section normal-cone comparison: orientation-charts Step 4, transpose of the integration normalization followed by restriction to zero.",
+   "via": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image compositor naturality along compatible sections of scheme morphisms",
+   "results": "Eight scheme presheaf appLE and naturality lemmas; none states derived section restriction.",
+   "verdict": "Use existing source-library adjunction mates and derived pullback section-compositor laws.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map_comp\", \"naturality\"",
+   "results": "Zero hits.",
+   "verdict": "No specialized Mathlib match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRestrictionIso|leftDerivedUpperStar_map_comp_compSectionIso|mate_naturality",
+   "results": "Zero Mathlib hits. Local source search finds the exact proved derived section-pasting law in UpperStarIdCoherence and the proved abstract mate-naturality lemma in VectorIntegrationMate.",
+   "verdict": "Reuse those proved laws; remaining issue is specializing and pasting their concrete comparisons.",
+   "date": "2026-10-27"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionPullbackCoefficientNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionPullbackCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.sectionPullback_coefficient_naturality",
+  "statement": "theorem sectionPullback_coefficient_naturality\n    (A : Type (u + 1)) [CommRing A]\n    {B B' P P' : Scheme.{u}} (v : B' ⟶ B) (p : P ⟶ B) (q : P' ⟶ B')\n    (h : P' ⟶ P) (z : B ⟶ P) (w : B' ⟶ P')\n    (hp : h ≫ p = q ≫ v) (hz : w ≫ h = v ≫ z)\n    (h₀ : z ≫ p = 𝟙 B) (h₁ : w ≫ q = 𝟙 B')\n    (K : DerivedCategoryModule A B) (K' : DerivedCategoryModule A B')\n    (L : DerivedCategoryModule A P) (L' : DerivedCategoryModule A P')\n    (e : (ordinaryFinitePullback A v).obj K ⟶ K')\n    (a : (ordinaryFinitePullback A p).obj K ⟶ L)\n    (a' : (ordinaryFinitePullback A q).obj K' ⟶ L')\n    (b : (ordinaryFinitePullback A h).obj L ⟶ L')\n    (ha : (ordinaryFinitePullback A h).map a ≫ b =\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) h p).inv.app K ≫\n        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) q v (h ≫ p) hp).hom.app K ≫\n        (ordinaryFinitePullback A q).map e ≫ a') :\n    (ordinaryFinitePullback A v).map\n        ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) z p h₀).inv.app K ≫\n          (ordinaryFinitePullback A z).map a) ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) v z).inv.app L ≫\n        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) w h (v ≫ z) hz.symm).hom.app L ≫\n          (ordinaryFinitePullback A w).map b =\n    e ≫ (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) w q h₁).inv.app K' ≫\n      (ordinaryFinitePullback A w).map a'",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222710-L-683827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222710-L-683827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "def-sfb-adequate-moduli-space",
+ "kind": "definition",
+ "title": "Adequate moduli space",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $\\operatorname{Spec}k$ [def-sfb-algebraic-moduli-stack, def-weil-affine-spectrum], let $Y$ be an algebraic space over $k$ [def-trf-algebraic-space], and let $\\phi:\\mathcal X\\to Y$ be a quasi-compact, quasi-separated morphism in the conventions of [def-sfb-stack-qcqs-morphism]. The morphism $\\phi$ is an adequate moduli space if both of the following conditions hold. (1) The canonical map $\\mathcal O_Y\\to\\phi_*\\mathcal O_{\\mathcal X}$ is an isomorphism, with the structure sheaves and direct image as in [def-sfb-stack-quasi-coherent-algebra]. (2) For every etale morphism $v:W=\\operatorname{Spec}C\\to Y$ from an affine scheme, form $\\mathcal X_W=\\mathcal X\\times_YW$ as a $2$-fibre product [def-sfb-stable-pointed-moduli-groupoids]. For every surjection $\\mathcal A\\twoheadrightarrow\\mathcal B$ of quasi-coherent $\\mathcal O_{\\mathcal X_W}$-algebras [def-sfb-stack-quasi-coherent-algebra] and every $t\\in\\Gamma(\\mathcal X_W,\\mathcal B)$, there are an integer $N>0$ and $s\\in\\Gamma(\\mathcal X_W,\\mathcal A)$ whose image is $t^N$. All quasi-coherent algebras on $\\mathcal X_W$ are quantified over, including those that do not descend from $\\mathcal X$. Etaleness of maps to $Y$ is tested after etale scheme charts on $Y$ using [def-weil-etale-morphism]. Condition (2) is the local power-lifting condition; it does not replace condition (1). No exactness of $\\phi_*$ is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Definition 5.1.1 and Definition 4.1.1 (adequately affine), in the form of Lemma 4.1.8(3) with Remark 4.1.3 after etale base change to affine $W$, which is equivalent by Proposition 4.2.1(3) (base change along W to Y) and 4.2.1(4) (descent along the faithfully flat etale cover); algebraic.tex Tag 026O (definition-algebraic-stack) for algebraic stacks. Read Alper arXiv:1005.2398v3 online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-etale-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space power lifting quasi coherent algebras and pushforward structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Presheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    Y.ringCatSheaf ⟶\\n      ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous RingCat (Opens.grothendieckTopology ↥Y)\\n            (Opens.grothendieckTopology ↥X)).obj\\n        X.ringCatSheaf\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this function constructs the induced morphism between the ring sheaf of $ Y $ and the pushforward of the ring sheaf of $ X $ along the continuous base map $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequately affine morphism of algebraic stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A function that converts a predicate on morphisms of schemes with affine targets into a general morphism property by asserting the existence of a proof that the target is affine, combined with the ori\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of adequate moduli space of an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"Type (u + 1)\", \"doc\": \"A topological space equipped with a sheaf of commutative rings such that every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] (H : ValuativeCriterion f) : IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space of an algebraic stack: quasi compact quasi separated with structure sheaf isomorphism and local power lifting for quasi coherent algebras",
+   "results": "Scheme, AffineScheme, IsAffineHom, and quasi-compact/quasi-separated scheme morphism instances only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power lifting for surjections of quasi coherent algebras on algebraic stacks after etale affine base change",
+   "results": "FlatDescent and general morphism-property descent lemmas; no adequate-moduli definition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine|adequately.affine",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli space algebraic stack power lifting",
+   "results": "FormallyEtale, FormallySmooth, and scheme closed-immersion lift lemmas; no algebraic-stack notion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli space.",
+   "via": [
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "def-sfb-adequate-moduli-space",
+  "worker": "stage1",
+  "summary": "Rebased the retained delivery after L returned head 7183caf94fe (2026-10-22 16:39 UTC) for missing live promotion. The first dry run found a newly existing algebraic-stack definition, def-sfb-algebraic-moduli-stack. Removed the duplicate helper def-sfb-algebraic-stack, reused that current definition and its fibred-groupoid/2-product interface throughout, and retained only its missing qcqs predicates in the new statement-only def-sfb-stack-qcqs-morphism. Read all current dependencies and the source, retained the stack algebra helper and the two separate adequate-moduli conditions, and ran fresh actual Mathlib searches for the changed helper. Current live provenance and ancestry are preserved; prior searches, citations and report history are retained.",
+  "blueprint": "The inherited from.place locates the affine-PGL quotient prerequisite in direct-image stability proof (3). The two new definitions supply stack qcqs predicates and big-fppf ringed algebras; the existing algebraic-stack definition and 2-products are reused. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-7532b2d77",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-7532b2d77 (reviewer sub-agent of L); spot-checked: Fifth head of this split. The duplicate def-sfb-algebraic-stack was replaced by the existing def-sfb-algebraic-moduli-stack (026O, étale-stack convention) plus the general fibred-groupoid/2-product paragraph of def-sfb-stable-pointed-moduli-groupoids. There is a new node, def-sfb-stack-qcqs-morphism. The item's mathematics is unchanged and correct against Alper arXiv:1005.2398v3: Def 5.1.1 keeps (1) separate, and Def 4.1.1, Lemma 4.1.8(3), Rem 4.1.3 and Prop 4.2.1(3),(4) give lifting on all algebras on X_W. Dropping 'equivalently adequately affine' is right: Spec k[z]→Spec k is a counterexample. The edge cases (identity, BG with G linearly reductive, empty source or target) behave correctly. The qcqs node matches Stacks 050U, 04YC(3), 03HE, 03HL(3) and 04YW(4). Repair 1 (B3/E1), def-sfb-stack-quasi-coherent-algebra: it took an algebraic stack as input but is applied to X_W = X×_Y W, whose algebraicity is 04TF and not a node; lem-sfb-algebraic-stack-fibre-products needs Y to be an algebraic stack. I re-applied the widening to categories fibred in groupoids from the earlier heads, which has now been lost four times; the Stacks sections 06TP/06TV/06WG/06W6 are stated in that generality. Repair 2 (B3/E1), def-sfb-stack-qcqs-morphism: the stack and space qc predicates were applied to 2-fibre products and to a target that is an algebraic space, and representability of Δ_f (04XS) was presupposed. I stated the predicates for any fibred groupoid or fppf sheaf, since every atlas notion is already defined for arbitrary F, and made representability of the diagonal an explicit conjunct of quasi-separatedness. Neither repair weakens anything on algebraic stacks. Batch-5 flags (algebraic-moduli-stack, stable-pointed-moduli-groupoids, def-trf-algebraic-space, def-trf-space-quasi-coherent-module): all are general definitions. Their trf closure is projective-bundle and Proj geometry, not trace-formula or Poincaré-duality content, so I accept them. There is no cycle, no duplicate and no SGA citation. Maintainer: promote with fixes/ applied.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateModuliSpace",
+  "declaration": "CategoryTheory.IsAdequateModuliSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateModuliSpace.lean",
+  "statement": "def IsAdequateModuliSpace {k : Type u} [Field k] (F : BasedCategory.{v, w} (Over (AlgebraicGeometry.Spec (CommRingCat.of k)))) (hF : IsAlgebraicModuliStack F) (Y : AlgebraicGeometry.AlgebraicSpace (AlgebraicGeometry.Spec (CommRingCat.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing stack qcqs predicates, canonical structure map and all algebra sheaves on each actual affine etale 2-base change. Global section equality is pointwise equality of compatible families. The qcqs requirements are included as the first two conjuncts of the predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-864d80c2a",
+  "group": "NS",
+  "result": "pass",
+  "note": "IsAdequateModuliSpace matches the node clause by clause against Alper arXiv:1005.2398v3 Def 5.1.1 / Lemma 4.1.8(3) / Rem 4.1.3 / Prop 4.2.1(3),(4): qc+qs conjuncts via the recorded stack predicates; (1) IsIso of the canonical moduliStructureMap; (2) for every affine W in Y.EtaleSite, all quasi-coherent algebra sheaves A,B on the actual 2-fibre product moduliSpaceBaseChange, f an Under-morphism, fppf-locally surjective, every global section t has N>0 and s with f(s)=t^N as compatible families, N outside the pointwise quantifier. No extra hypotheses; enlargement universes 0,0 still contain every scheme over the base, so the qc test is not restricted. Edge cases (empty source, empty chart, A^1 over a point, zero algebras, identity) correct. lean.statement verbatim, node differs from live only in lean record, 8 stmt_deps with live records, public imports, source and blueprint docstrings, no proof, no duplicate in project Lean or Mathlib. No compile run (no file changed)."
+ }
+}

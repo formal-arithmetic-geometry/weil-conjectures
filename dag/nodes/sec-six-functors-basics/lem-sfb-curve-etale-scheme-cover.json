@@ -1,0 +1,199 @@
+{
+ "id": "lem-sfb-curve-etale-scheme-cover",
+ "kind": "statement",
+ "title": "Curve families become schemes etale locally on the base",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a morphism of algebraic spaces [def-trf-algebraic-space] which is proper, flat and of finite presentation. Proper means separated, of finite type and universally closed; flatness and finite presentation are tested on etale scheme charts. Suppose every geometric fibre $X\\times_T\\operatorname{Spec}\\Omega$, for an algebraically closed field $\\Omega$ and a map $\\operatorname{Spec}\\Omega\\to T$, has dimension at most one, with empty fibres permitted. Dimension is the supremum of the Krull dimensions of affine etale charts, with $\\dim\\varnothing=-\\infty$ [def-kun-topological-krull-dimension]. Then there is a jointly surjective etale covering $\\{T_i\\to T\\}_{i\\in I}$ by schemes such that every algebraic space $X\\times_TT_i$ is represented by a scheme. Fibre products and etale coverings are those of [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6F, lemma-etale-locally-scheme, first assertion; the definition of family of curves is in section-stack-curves."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-kun-topological-krull-dimension",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-curve-smooth-polarization-cover] to $f$. Its hypotheses are precisely the properness, flatness, finite presentation and geometric-fibre dimension bound assumed here. Obtain a smooth surjective scheme morphism $p:U\\to T$ and a scheme $Y$ representing $X\\times_TU$, with a relatively ample invertible module on $Y$. Retain $U,p,Y$ and the representing isomorphism; the polarization is the input which makes the smooth cover available.",
+   "uses": [
+    "lem-sfb-curve-smooth-polarization-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6F (lemma-etale-locally-scheme), first paragraph, using Tag 0DQ0 (lemma-polarized-curves-over-curves)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-space-cover-etale-sections] with base scheme $S=T$, target $T$, and source the scheme $U$, regarded as an algebraic space. It gives a set-indexed etale covering $e_i:T_i\\to T$ and maps $v_i:T_i\\to U$ satisfying $p v_i=e_i$. The empty target is included in that statement, so no nonemptiness or surjectivity of $f$ is required.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6F, second paragraph, invoking more-morphisms.tex Tag 055V (lemma-etale-dominates-smooth); existing space version Tag 0CFV supplies the same refinement."
+   }
+  },
+  {
+   "text": "For every $i$, form the scheme $Z_i=Y\\times_UT_i$ by [def-pc-fibre-product]. It represents $X\\times_TT_i$: for any scheme $A$, an $A$-point of $Z_i$ is a pair $((x,u),t_i)$ with $f(x)=p(u)$ and $u=v_i(t_i)$; sending it to $(x,t_i)$ gives $f(x)=e_i(t_i)$. Conversely $(x,t_i)$ maps to $((x,v_i(t_i)),t_i)$. These operations are inverse and commute with pullback in $A$, so they identify the sheaf fibre products of [lem-trf-space-fibre-products-etale-covers]. Morphisms of spaces are natural transformations [def-trf-algebraic-space], hence this is a representing isomorphism. Thus every pullback along the etale covering from step 2 is a scheme, as required.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6F, scheme-representability part after the etale refinement; associativity of fibre products written pointwise. The stronger H-projectivity assertion is not needed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-smooth-polarization-cover",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6F (lemma-etale-locally-scheme), first assertion, via Tag 0DQ0 and the existing smooth-cover etale-refinement statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented algebraic space family with geometric fibres of dimension at most one becomes a scheme after an etale covering of its base scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: etale scheme categories and Zariski local representability do not produce a scheme model of an algebraic-space curve after etale base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every family of proper algebraic curves is etale locally on the base representable by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: etale scheme categories and Zariski local representability do not produce a scheme model of an algebraic-space curve after etale base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: etale scheme categories and Zariski local representability do not produce a scheme model of an algebraic-space curve after etale base change"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*locally.*scheme|curve.*scheme.*cover|algebraicSpace.*representable",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: etale scheme categories and Zariski local representability do not produce a scheme model of an algebraic-space curve after etale base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every family of proper algebraic curves is etale locally on the base representable by schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: etale scheme categories and Zariski local representability do not produce a scheme model of an algebraic-space curve after etale base change"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*locally.*scheme|curve.*scheme.*cover|algebraicSpace.*representable",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat families of algebraic space curves are schemes after etale base change",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsScheme\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every proper flat finitely presented family of algebraic space curves becomes a scheme etale locally on the base",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-curve-qcoh-bound",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology.",
+   "via": [
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-etale-scheme-cover",
+  "worker": "stage1",
+  "summary": "Followed Tag 0E6F: isolated smooth local polarization, reused the existing smooth-space etale sections lemma, and proved scheme representability after refinement by explicit fibre-product maps. Statement unchanged. No new etale-refinement or ampleness-base-change duplicate.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite: local scheme representability before the proper-space curve cohomological bound. The latest blueprint proof (3) was read; the imported created.item chain ends at the missing module-id Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs.py ancestor returns None, retained as null. The precise inherited place and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-03e4bf153",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-03e4bf153 (reviewer sub-agent of L); spot-checked: Read Stacks moduli-curves section-stack-curves, the PolarizedCurves objects (scheme total space, relatively ample L), 0DQ0 (l.217) and 0E6F (l.254). The item statement is unchanged from base and matches the first assertion of 0E6F; the item is still unsplit in live and side-live, so this is not a re-split case. New node lem-sfb-curve-smooth-polarization-cover is exactly the 0DQ0 consequence unwound in the 0E6F proof: a smooth surjective scheme U→T with X×_T U a scheme carrying L ample over affine opens, which is Morphisms 01VH. It is statement-only, self-contained, every notion cites a definition node that defines it, its searches are recorded, and it is strictly smaller than the item (smooth cover, not étale). Small cases checked: T=Spec k (the curve is projective, U=T), empty X, empty T, non-Noetherian T. Duplicate search over dag/nodes (0DQ0, 0E6F, polarized, Picard stack, relatively ample) found none; the existing ample-locus and descent nodes all start from a given line module. Step 1 cites the new node with exactly the item's hypotheses. Step 2 uses lem-sfb-smooth-space-cover-etale-sections (0CFV, same unit) with S=T and V=U; its hypotheses hold, and its conclusion gives the étale e_i covering T with v_i and p v_i=e_i. Step 3 builds the explicit inverse A-point maps for Y×_U T_i ≅ X×_T T_i; it is a cartesian pasting and correctly marked elementary. No cycle. Tool use: lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero) is the generic fibre-product lemma 02X2/041F and was already a stmt_dep on base, so it is accepted. Batch-5: the flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space and the foundational fibre-product lemma, both already stmt_deps of the item on base and not steps of the trace-formula or Poincaré-duality proofs, so they are accepted. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveEtaleSchemeCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveEtaleSchemeCover.lean",
+  "statement": "theorem exists_etale_scheme_cover {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X.obj.obj ⟶ yoneda.obj T) (hf : IsProperCurveFamily X T f) : ∃ (I : Type u) (Tᵢ : I → Over S) (e : ∀ i : I, Tᵢ i ⟶ T), (∀ i : I, Etale (e i).left) ∧ (∀ t : T.left, ∃ (i : I) (tᵢ : (Tᵢ i).left), (e i).left.base tᵢ = t) ∧ ∀ i : I, ∃ Y : Over S, Nonempty (Limits.pullback f (yoneda.map (e i)) ≅ yoneda.obj Y)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af8971381",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Checked against Stacks moduli-curves 0E6F (l.254). The hypothesis IsProperCurveFamily (landed def-sfb-proper-curve-moduli, read in full) gives exactly flat, separated, qc, LFT, universally closed, qs, LFP and geometric-fibre dim ≤ 1, empty fibres allowed. Conclusion: I : Type u covering, each member Etale, joint surjectivity on points, and each pullback ≅ yoneda.obj Y, the same convention as etale_fibreProduct_isScheme. The added stmt_dep def-sfb-proper-curve-moduli is landed (allowed by brief §5) and creates no cycle. Statement field verbatim. Edge cases (empty T or X, non-surjective f, non-Noetherian base) covered. Docstrings, source place and 3 proof steps present; sorry only; no hollow definitions. No other node changes vs side-live. Advisory: the FibreProductsEtaleCovers import is not needed for typing."
+ }
+}

@@ -107,7 +107,33 @@
   "lemma-nagata-scheme-image-ideal-qc"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "module": "Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-closure",
  "lean": {
@@ -136,5 +162,23 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-259cd3c45 (reviewer sub-agent of L); spot-checked: Exact Mathlib leaf, statement unchanged, no new nodes. Clause 1 is Mathlib's instance IsClosedImmersion.instIsIsoSchemeToImage (ClosedImmersion.lean:155-174), read in full: for any f with [IsClosedImmersion f] it gives IsIso f.toImage, needs no other hypothesis and has no sorry. Clause 2 is Hom.toImage_imageι (Subscheme.lean:715): f.toImage ≫ f.imageι = f. Hom.image (:662) is f.ker.subscheme. Hom.ker (Basic.lean:692) is ofIdeals (:104 and :125), the largest quasi-coherent ideal inside the kernel; this matches the current def-nagata-scheme-theoretic-image. The current Q90 def-nagata-scheme-image-factor defines the factor as Hom.toImage. Its change caused the landing refusal, and its text in the snapshot is identical to clones/side-live, as are the other two stmt_deps (all three are Mathlib leaves). Dropping the unused def-nagata-scheme-theoretic-closure is correct. The main-20261015 statement and proof agree. Edge cases hold: empty Z, the identity, and a non-reduced Spec(A/I). There is no cycle, no repair note, no dropped-list entry and no SGA citation. No fixes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "If $i\\colon Z\\hookrightarrow Y$ is a closed immersion, then the factor map\n$i^{\\mathrm{im}}\\colon Z\\to\\operatorname{SIm}(i)$ is an isomorphism. Thus\nthe scheme-theoretic image of a closed immersion is canonically its source,\ncompatibly with the maps to $Y$.",
+  "proof": [
+   {
+    "text": "Let $i\\colon Z\\hookrightarrow Y$ be a closed immersion. Then\n$i_{\\mathrm{im}}\\circ i^{\\mathrm{im}}=i$ is a closed immersion, so\n$i^{\\mathrm{im}}$ is a closed immersion. Its range is closed and, by\n[lemma-nagata-scheme-image-ideal-qc] ($i$ is quasi-compact), dense in\n$\\operatorname{SIm}(i)$; hence $i^{\\mathrm{im}}$ is a homeomorphism. On\nstalks it is surjective, being a closed immersion, and injective, because\n$\\mathcal O_{\\operatorname{SIm}(i)}\\to i^{\\mathrm{im}}_*\\mathcal O_Z$ is\ninjective on stalks by [lemma-nagata-scheme-image-ideal-qc]. So\n$i^{\\mathrm{im}}$ is an isomorphism, and it is compatible with the maps to\n$Y$ by the factorization $i_{\\mathrm{im}}\\circ i^{\\mathrm{im}}=i$.",
+    "uses": [
+     "lemma-nagata-scheme-image-ideal-qc"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

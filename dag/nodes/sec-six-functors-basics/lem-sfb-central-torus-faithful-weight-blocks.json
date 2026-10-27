@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-central-torus-faithful-weight-blocks",
+ "kind": "statement",
+ "title": "Faithful matrix realization and weight blocks for a central split torus",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Let $H$ be an affine $F$-group scheme of finite type and let $T\\subset H$ be a central closed subgroup isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$. Here $\\mathbf G_m(A)=A^\\times$; central means commuting with all elements after every scalar extension. There exist a finite-dimensional nonzero $F$-vector space $V$, a closed-immersion homomorphism $\\rho:H\\hookrightarrow\\operatorname{GL}(V)$, and a decomposition $V=\\bigoplus_{i=1}^s V_i$ with each $V_i\\ne0$, such that each $V_i$ is $H$-stable and $T$ acts on $V_i$ through a character $\\chi_i:T\\to\\mathbf G_m$. Explicitly, for every commutative $F$-algebra $A$, $\\rho_A(t)|_{V_i\\otimes_F A}=\\chi_i(t)\\operatorname{id}$, and the action of $H(A)$ restricts to $V_i\\otimes_F A$. The tuple of characters $(\\chi_i):T\\to\\mathbf G_m^s$ is a closed immersion. Here $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(V\\otimes_F A)$, and a closed immersion of affine schemes is one induced by a surjection of coordinate algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.9 and Corollary 4.10, printed p.87; Theorem 12.12, printed pp.234--235; Proposition 12.46(a), proof, printed p.246 (weight blocks and their centralizer)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=F[H]$, with comultiplication $\\Delta$, counit $\\epsilon$, and antipode induced by the group operations. The affine-pair criterion [lem-weil-pbc-lft-affine-pairs], applied to $H\\to\\operatorname{Spec}F$ and the whole affine opens, says that $C$ is a finitely generated $F$-algebra. Choose finite algebra generators and adjoin $1$. Apply [lem-sfb-comodule-finite-subrepresentation] to the regular coaction $\\Delta:C\\to C\\otimes_F C$ and this finite set. Its coassociativity and counit identities are the group identities. We obtain a finite-dimensional subspace $V\\subset C$ containing $1$ and all generators, with $\\Delta(V)\\subset V\\otimes_F C$. Since $\\epsilon(1)=1$, $V\\ne0$. Take a finite spanning list of $V$ as in [def-weil-finite-dimensional-subspace] and discard each vector in the span of its predecessors. The retained list spans and is independent (a relation with nonzero last coefficient would contradict retention), hence is a basis $e_1,\\ldots,e_N$, $N\\ge1$, and write $\\Delta(e_j)=\\sum_i e_i\\otimes a_{ij}$. The finite-subrepresentation node explicitly asserts that $V$ with this restricted coaction is again a rational module; its statement supplies both restricted coaction identities.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-comodule-finite-subrepresentation",
+    "def-weil-pbc-free-module",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9, printed p.87, first paragraph; finite-dimensional subcomodule supplied by Proposition 4.7, p.86; affine-pair criterion: Stacks Tag 01T2, morphisms.tex, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-coaction-linearization] with $E=F$ (trivial algebra coaction) and $M=V$. The coaction gives a $C$-linear automorphism of $V\\otimes_F C$; evaluating along $g:C\\to A$ gives the matrix $(g(a_{ij}))$ for every commutative $F$-algebra $A$. Its identity and composition laws give a homomorphism $\\rho:H\\to\\operatorname{GL}(V)$. More explicitly, coassociativity and the counit give $\\Delta(a_{ij})=\\sum_k a_{ik}\\otimes a_{kj}$ and $\\epsilon(a_{ij})=\\delta_{ij}$. The inverse supplied by the antipode makes $\\det(a_{ij})$ a unit in $C$, so [def-sc-general-linear-group] gives the coordinate map $F[x_{ij},\\det(x)^{-1}]\\to C$, $x_{ij}\\mapsto a_{ij}$. Its image contains $e_j=\\sum_i\\epsilon(e_i)a_{ij}$ by the left counit identity on $C$. Hence it contains $V$ and the chosen algebra generators of $C$, and is surjective. By the affine quotient meaning of closed immersion in the statement, $\\rho$ is a closed immersion. This proves faithfulness scheme-theoretically, including for nonreduced $H$.",
+   "uses": [
+    "lem-sfb-hopf-coaction-linearization",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1 and equations (24)--(25), printed p.84; Theorem 4.9, printed p.87, counit calculation"
+   }
+  },
+  {
+   "text": "Fix $T\\simeq\\mathbf G_m^r$. We will refine $V$ successively by the $r$ coordinate factors. The following coefficient check makes each refinement $H$-stable. If $W\\subset V$ is already $H$-stable, restrict one coordinate $\\mathbf G_m\\to T$ to $W$ and use [lem-sfb-gm-representation-weight-basis] to write $W=\\bigoplus_a W_a$ (finitely many nonzero integer weights). Fix an $F$-algebra $A$, $h\\in H(A)$ and $w\\in W_a\\otimes_F A$, and write $\\rho_A(h)w=\\sum_b u_b$ with $u_b\\in W_b\\otimes_F A$. These base-changed summands form a direct sum: bases of the $W_b$ concatenate to a basis of $W$, and their coordinate maps extend by tensoring. Extend scalars to $B=A\\otimes_F F[z,z^{-1}]$ and take the universal point $z\\in\\mathbf G_m(B)$ in the chosen coordinate. Centrality gives\n$$\\sum_b u_bz^b=z^a\\sum_b u_b.$$\nApply the $A$-linear coefficient maps obtained by tensoring the $F$-linear coefficient maps of [def-weil-laurent-polynomial-ring] with $A$. They give $u_b=0$ for $b\\ne a$. This works even for nonreduced $A$; the inclusion of constants has the retraction given by $z=1$. Thus $h$ preserves $W_a\\otimes_F A$; applying the same calculation to $h^{-1}$ makes the restriction an automorphism. The restricted representation is a morphism: its matrix entries are the corresponding block entries of $\\rho$, and its inverse is the corresponding block of $\\rho(h^{-1})$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234--235; Proposition 12.46(a), proof, printed p.246, centralizer of the weight decomposition"
+   }
+  },
+  {
+   "text": "Induct on $j$, $0\\le j\\le r$: there is a finite direct sum into nonzero $H$-stable subspaces, each with an integer weight for each of the first $j$ coordinate factors. For $j=0$ the single summand is $V\\ne0$ and the empty weight tuple has trivial character. Given the decomposition for $j$, apply [lem-sfb-gm-representation-weight-basis] to factor $j+1$ on each summand and discard zero weight spaces. Step 3 proves that every refined space is $H$-stable, so the next coordinate action is defined on it; the first $j$ scalar actions retain their weights on every subspace. There are finitely many old summands and finitely many weights on each, so the refinement remains finite and direct, and still sums to $V$. After $r$ steps write the summands as $V_1,\\ldots,V_s$. If $(a_{i1},\\ldots,a_{ir})$ is the weight tuple of $V_i$, put $\\chi_i(t_1,\\ldots,t_r)=\\prod_{j=1}^r t_j^{a_{ij}}$. This is a group-scheme character by the unit-valued functor description of $\\mathbf G_m$ in [def-sc-gm-ga]. Every $t\\in T(A)$ is the product of its $r$ coordinate points, so on $V_i\\otimes_F A$ its action is $\\chi_i(t)\\operatorname{id}$. For $r=0$ the empty product gives the trivial character, and $s=1$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234--235: finite product version obtained here by induction from the existing one-factor theorem"
+   }
+  },
+  {
+   "text": "Choose a basis within each nonzero $V_i$ and concatenate them. On $T$, the matrix entries of $\\rho$ in this basis are either zero or $\\chi_i$, each $\\chi_i$ repeated $n_i=\\dim_F V_i\\ge1$ times; the determinant restricts to $\\prod_i\\chi_i^{n_i}$. The coordinate map $F[\\operatorname{GL}(V)]\\to F[T]$ is surjective: the first map to $C$ is surjective by step 2 and $C\\to F[T]$ is surjective since $T\\subset H$ is a closed subgroup. Changing basis does not change this, since conjugation and its inverse give inverse morphisms of $\\operatorname{GL}(V)$. The presentation in [def-sc-general-linear-group] shows that this surjective map factors through the coordinate map\n$$F[y_1^{\\pm1},\\ldots,y_s^{\\pm1}]\\longrightarrow F[T],\\qquad y_i\\longmapsto\\chi_i,$$\nby sending an entry in block $i$ on the diagonal to $y_i$, all other entries to zero, and $\\det(x)^{-1}$ to $\\prod_i y_i^{-n_i}$. Therefore this Laurent map is surjective too: every element of $F[T]$ lifts through the displayed factorization. It is exactly the coordinate map of $(\\chi_i):T\\to\\mathbf G_m^s$, using [def-sc-gm-ga] and the algebra tensor-product universal property for the finite product. Thus the character tuple is a closed immersion. Positivity of the $n_i$ follows because zero summands were discarded; $V\\ne0$ ensures $s\\ge1$.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9, printed p.87; Proposition 12.46(a), proof, printed p.246, weight-block matrix form; coordinate-algebra verification of the character tuple"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-comodule-finite-subrepresentation",
+  "def-weil-pbc-free-module",
+  "def-weil-finite-dimensional-subspace",
+  "lem-sfb-hopf-coaction-linearization",
+  "def-sc-general-linear-group",
+  "lem-sfb-gm-representation-weight-basis",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-laurent-polynomial-ring",
+  "def-sc-gm-ga",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.9, pp.86--87; Theorem 12.12 and Remark 12.13, pp.234--235; Proposition 12.46(a), proof p.246. Explicit all-test-algebra refinement and coordinate-algebra faithfulness argument added by Q123."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "an affine algebraic group has a faithful finite dimensional representation whose restriction to a central split torus decomposes into weight spaces stable under the group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.Weight.instFintype\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"If $ M $ is a Noetherian module over a commutative ring $ R $, and $ L $ is a nilpotent Lie ring acting on $ M $, then the set of weights $ \\\\text{Weight}(R, L, M) $ is finite.\"}\n  {\"name\": \"LieModule.Weight.instFinite\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian module over a commutative ring $ R $, and $ L $ is a nilpotent Lie ring acting on $ M $, then the set of weights $ \\\\text{Weight}(R, L, M) $ is finite.\"}\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] (V : Type u_3)\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [Nontrivial V] [LieAlgebra.IsSolvable L] [LieMod\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"For a Noetherian module $ M $ over a commutative ring $ R $, and for any element $ x $ in a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $ acting on $ M $, the set of scalars $ \\\\chi \\\\in R $ for whi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear algebraic group central torus acts by scalars on stable weight blocks of a faithful representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.weightSpaceOfIsLieTower\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"(R : Type u_1) →\\n  {L : Type u_2} →\\n    {A : Type u_3} →\\n      (V : Type u_4) →\\n        [inst : CommRing R] →\\n          [IsPrincipalIdealRing R] →\\n            [IsDomain R] →\\n              [CharZero R] →\\n                [inst_4 : LieRing L] →\\n                  [inst_5 : LieAlgebra R L] →\\n            \", \"doc\": \"For a Lie module $ V $ over a Lie algebra $ \\\\mathfrak{g} $ with a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspaces $ \\\\bigcap_{x \\\\in \\\\mathfrak{\"}\n  {\"name\": \"LieModule.exists_forall_lie_eq_smul\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [LieModule.LinearWeights R L M] [IsNoetherian\", \"doc\": \"Let $ R $ be a commutative ring, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ an abelian group equipped with compatible $ R $-module and Lie module structures over $ L $. If $ M $ is a Noetheri\"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieAlgebra.mapsTo_toEnd_genWeightSpace_add_of_mem_rootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H] (M : Type u_3) [inst_4 : AddCommGroup M]\\n  [inst_5 : Module R M] [inst_6 : LieRingModule L M] [inst_7 : LieModule R L M] (α χ : ↥H → R) {x : \", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a Cartan subalgebra $\\\\mathfrak{h}$, if $x$ belongs to the root space $\\\\mathfrak{g}_\\\\alpha$ corresponding to root $\\\\alpha : \\\\mathfrak{h\"}\n  {\"name\": \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a torsion-free commutative domain, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free Noetherian Lie module over $ L $. For any non-zero linear functional $ \\\\alpha: L \\\\to \"}\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"representation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus.*[Ww]eight|GroupScheme.*[Rr]epresentation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an affine algebraic group has a faithful finite dimensional representation whose restriction to a central split torus decomposes into weight spaces stable under the group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, and a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspac\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \"(η : Aut (forget k G)) : (G → k) →ₐ[k] (G → k)\", \"doc\": \"For any automorphism $\\\\eta$ of the forgetful functor from the category of finitely generated representations of a finite group $G$ over a commutative ring $k$ to the category of finitely generated $k$\"}\n  {\"name\": \"LieModule.weightSpaceOfIsLieTower\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"(χ : A → R) : LieSubmodule R L V\", \"doc\": \"For a Lie module $ V $ over a Lie algebra $ \\\\mathfrak{g} $ with a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspaces $ \\\\bigcap_{x \\\\in \\\\mathfrak{\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"Representation.asGroupHom\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \": G →* Units (V →ₗ[k] V)\", \"doc\": \"The group homomorphism from the monoid $ G $ to the group of invertible $ k $-linear endomorphisms of $ V $, obtained by mapping each element of $ G $ to its corresponding invertible linear transforma\"}\n  {\"name\": \"Rep.instAddCommGroupCarrierVModuleCat\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Monoid G] → (V : Rep k G) → AddCommGroup ↑V.V\", \"doc\": \"For any commutative ring $ k $, monoid $ G $, and representation $ V $ in $ \\\\text{Rep}(k, G) $, the underlying set of $ V $ is equipped with the structure of an additive commutative group.\"}\n  {\"name\": \"LieModule.Weight\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] → [LieModule R L M] → [\", \"doc\": \"The inductive structure defining weights for a Lie module $ M $ over a nilpotent Lie ring $ L $, where $ M $ is equipped with compatible $ R $-module and Lie ring module structures, and the nilpotency\"}\n  {\"name\": \"LieModule.instLinearWeightsOfIsLieAbelian\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"[IsLieAbelian L] [IsDomain R] [Module.IsTorsionFree R M] : LinearWeights R L M\", \"doc\": \"For any abelian Lie algebra $ L $ over a domain $ R $, and any torsion-free $ R $-module $ M $, the module $ M $ admits linear weights in the context of Lie algebra representations. This follows from \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine algebraic group faithful representation central split torus stable weight spaces closed immersion characters",
+   "results": "LieModule weight-space and root-space results; these concern Lie modules, not algebraic-group-scheme representations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"representation\"",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torus.*weight|GroupScheme.*representation",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine algebraic group faithful representation central split torus stable weight spaces",
+   "results": "LieModule.weightSpace, weightSpaceOfIsLieTower, genWeightSpace and related Lie-module results; none supplies group-scheme linearity or the closed immersion of characters.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-torus-semisimple-derived-product",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Faithful matrix realization and weight blocks for a central split torus.",
+   "via": [
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-central-torus-faithful-weight-blocks",
+  "worker": "stage1",
+  "summary": "Read Milne and reused the existing finite-subcomodule, Hopf-linearization and single-factor weight-decomposition nodes. Constructed a faithful regular subrepresentation by matrix coefficients and the counit, proved H-stability by a universal Laurent-variable calculation, refined by induction on the split-torus rank, and proved the character tuple is a closed immersion by a surjective coordinate-algebra factorization. No new nodes, no statement changes, no Lean attachment.",
+  "blueprint": "The inherited from.place traces this prerequisite through central-torus/derived multiplication to det-thm-sf-ctf-stability-direct-images (3). Steps 1--2 realize the faithful matrix input; steps 3--4 the central weight blocks; step 5 their scheme-theoretically faithful character tuple. The current latest blueprint no longer expands the alteration subargument; inherited ancestry is retained, including the null ancestor returned by blueprint_refs.py.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-7a36b846d",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-7a36b846d (reviewer sub-agent of L); spot-checked: Q123 lem-sfb-central-torus-faithful-weight-blocks 7a36b846: first split, no repair note; live and side-live still unsplit; 0 new nodes, statement and stmt_deps unchanged. Checked against Milne iAG2017 Thm 4.9 (p.87) and Prop 12.46(a) proof (p.246). Steps 1-2 follow 4.9: lft-affine-pairs gives finite generation, comodule-finite-subrepresentation applies to the regular coaction Delta with 1 and generators, Hopf-linearization with E=F trivial and M=V. Recomputed Delta(a_kj)=sum a_ki⊗a_ij and eps(a_ij)=delta_ij, which match the GL comultiplication, so rho is a homomorphism. The left counit gives e_j=sum eps(e_i)a_ij, hence surjectivity and a closed immersion. Step 3: recomputed the universal-z centrality identity sum u_b z^b = z^a sum u_b in W⊗A⊗F[z^±]; F-linear Laurent coefficient maps tensored with W⊗A kill u_b for b≠a, valid for nonreduced A; the inverse via h^{-1} and block entries make the restriction a morphism, so the weight-basis node applies to each refinement. Step 4: induction with explicit claim, base and successor step; product characters via def-sc-gm-ga. Step 5: verified the factorization F[GL]→F[y^±] (diagonal block entries to y_i, D^{-1} to prod y_i^{-n_i}) composed with y_i↦chi_i equals the surjective F[GL]→C→F[T], so the character tuple is a closed immersion. proof_deps equals the union of uses; no cycle; same-unit route, so no tool_uses; no SGA. Duplicate search (rg -L): finite-group-faithful-regular-matrices covers finite G only and Lie-Kolchin is a triangular embedding; neither restates the item. Edge cases r=0, H=1, T=1, H=T=G_m, nonreduced H in char p and repeated characters all hold. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CentralTorusFaithfulWeightBlocks",
+  "declaration": "AlgebraicGeometry.CentralTorusWeightBlocks.exists_faithful_weight_blocks",
+  "declarations": [
+   "AlgebraicGeometry.CentralTorusWeightBlocks.pointAction",
+   "AlgebraicGeometry.CentralTorusWeightBlocks.characterScalar",
+   "AlgebraicGeometry.CentralTorusWeightBlocks.exists_faithful_weight_blocks"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CentralTorusFaithfulWeightBlocks.lean",
+  "statement": "theorem exists_faithful_weight_blocks {F : Type u} [Field F] [IsAlgClosed F] (H T : Grp (Over (Spec (.of F)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (iT : T ⟶ H) [IsClosedSubgroupScheme iT.hom.hom] (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hcentral : ∀ (A : Type u) [CommRing A] [Algebra F A] (t : (Spec (.of A)).asOver (Spec (.of F)) ⟶ T.X) (h : (Spec (.of A)).asOver (Spec (.of F)) ⟶ H.X), Commute (t ≫ iT.hom.hom) h) : ∃ (N : ℕ) (_ : 0 < N) (ρ : H ⟶ Grp.mk (GeneralLinearGroup (ULift.{u} (Fin N)) F)) (s : ℕ) (V : Fin s → Submodule F (ULift.{u} (Fin N) → F)) (χ : Fin s → (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), IsClosedImmersion ρ.hom.hom.left ∧ DirectSum.IsInternal V ∧ (∀ i : Fin s, V i ≠ ⊥) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (h : (Spec (.of A)).asOver (Spec (.of F)) ⟶ H.X) (i : Fin s) (v : A ⊗[F] (ULift.{u} (Fin N) → F)), v ∈ (V i).baseChange A → pointAction ρ.hom.hom A h v ∈ (V i).baseChange A) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (t : (Spec (.of A)).asOver (Spec (.of F)) ⟶ T.X) (i : Fin s) (v : A ⊗[F] (ULift.{u} (Fin N) → F)), v ∈ (V i).baseChange A → pointAction ρ.hom.hom A (t ≫ iT.hom.hom) v = characterScalar (χ i) A t • v) ∧ IsClosedImmersion (Pi.lift (fun i : Fin s ↦ (χ i).hom.hom)).left",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite coordinate space V = ULift (Fin N) → F with N > 0; using a basis loses no existential case. Both H-stability and character-scalar action are stated on actual scalar extensions over every test algebra, including nonreduced algebras. pointAction and characterScalar are real-data evaluation helpers for this theorem. The added statement dependencies supply the already landed GL, G_m and split-torus notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad85ec251",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: alg. closed F; affine finite-type H (IsAffine+LocallyOfFiniteType+QuasiCompact); closed subgroup iT (IsClosedSubgroupScheme); T ≅ splitTorus F r in Grp(Over); centrality over all F-algebras A; ∃ N>0, closed-immersion hom ρ into upstream GL(ULift(Fin N)) (same model as def-sc-general-linear-group module), internal direct sum of nonzero blocks, H(A)-stability and χ_i(t)-scalar action on (V i).baseChange A for all A, closed immersion of Pi.lift of characters in Over (Spec F). No stronger hypotheses (no smooth/connected/reduced/distinct weights). Helpers pointAction (toLin' ∘ homMulEquiv, same convention as the comodule-dictionary finite_dictionary) and characterScalar (pullback of Laurent T 1 + ΓSpecIso) are real data. Edge cases r=0, s≥1 forced, N>0, nonreduced H/A, A=0, repeated characters, universes OK. lean.statement verbatim; 3 added stmt_deps landed defs, acyclic; docstrings with source, blueprint and 5 proof steps; sorry only; report has Worker report + Second reading by Q15 (self-rereading, disclosed). No changes, no compile needed."
+ }
+}

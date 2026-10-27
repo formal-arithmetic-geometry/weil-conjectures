@@ -1,0 +1,166 @@
+{
+ "id": "lem-sp-tower-p1-uniform-presentation",
+ "kind": "statement",
+ "title": "Uniform constructible domains in the fixed presentation coordinates",
+ "statement": "Fix a prime $\\ell$, finite $E/\\mathbf Q_\\ell$, a scheme $S$ with $\\ell$ invertible, and a projective-line presentation $p$ [def-sp-tower-p1-adjunction-data]. For every prime $p_0\\ne\\ell$, field $k$ of characteristic $p_0$, and separated finite-type $k$-structure on $S$, take any section-normalized coefficient tower interfaces $a_S,a_P$. The transported uniformly bounded constructible finite-Tor predicate uniform of the presentation lies in its bounded-below etale-origin domain at $S$ and $P=\\mathbf P^1_S$. The recorded functors $p.F$ and $p.G$ preserve this uniform predicate. More precisely, uniform $M$ at $P$ gives domain $M$ and uniform $p.F(M)$ at $S$, and uniform $K$ at $S$ gives domain $K$ and uniform $p.G(K)$ at $P$. No tower adjunction is asserted.",
+ "stmt_deps": [
+  "def-sp-tower-p1-adjunction-data",
+  "sk-def-sp-normalized-towers",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing uniform-domain theorem to p.classes and the two coefficient interfaces. Its first clause supplies lower bounds and every finite etale-origin witness for the forward realization of the inverse realization of an ambient input.",
+   "uses": [
+    "lem-sp-tower-p1-uniform-ctf-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Transport domain along the realization counit: boundedness is stable under derived isomorphism, and each origin realization is composed with the evaluated isomorphism. This uses no choice of an arbitrary object from an existence theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Apply the push and pullTwist clauses of the uniform-domain theorem, rewrite geometry by p.q_geometry, and apply the inverse realization to the image of the realization counit. The resulting isomorphisms identify precisely p.F and p.G. The shifted line is unchanged.",
+   "uses": [
+    "lem-sp-tower-p1-uniform-ctf-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Uniform constructible finite-Tor predicates transport along these isomorphisms with the same intervals. Map the isomorphisms through evaluation and homology; compose the same local trivializations for constructibility and use stalk linear equivalences for finite stalks. Tor tests are invariant by composing the representative isomorphisms. Thus all asserted memberships hold.",
+   "uses": [
+    "sk-def-sp-normalized-towers",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-p1-uniform-ctf-domains",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction through a fully faithful functor with compatible unit and counit",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful and map_restrictFullyFaithful_unit_app; no theorem for the recorded tower/finite comparison words.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction restriction is available, but the project-specific comparison equations and domains still need proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical trace from a projective line splitting is preserved by base change and inverse exchange",
+   "results": "LinearMap.trace_baseChange; Algebra.normalizedTrace_trans and related field trace results.",
+   "date": "2026-10-25",
+   "verdict": "No match for sheaf-derived projective-line splitting traces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit, mkOfUnitCounit_unit, mkOfUnitCounit_counit.",
+   "date": "2026-10-25",
+   "verdict": "Generic assembly only, not the geometric identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*base.*change|RespectsIso|restrict.*adjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; ObjectProperty/InheritedFromHom.lean; ring and linear algebra trace results. Project search found the five already stated P1 dependencies, none of the exact interface bridges.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate bridge found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible finite Tor amplitude is invariant under isomorphisms in a derived category",
+   "results": "CategoryTheory.Triangulated.TStructure.ge_isClosedUnderIsomorphisms; functorial homology and isomorphism lemmas. No result for the project-specific intrinsic constructible finite-Tor predicate.",
+   "date": "2026-10-25",
+   "verdict": "Use t-structure isomorphism invariance for the lower bound; prove the intrinsic constructibility and representative-Tor transports directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerP1Adjunction",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities; Levels; standing-setting restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1UniformPresentation",
+  "file": "lean/Sheaf/Paper/TowerP1UniformPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1_uniform_in_presentation",
+  "statement": "theorem towerP1_uniform_in_presentation (p : Presentation l E S hS) :\n    ∀ (pchar : ℕ) [Fact pchar.Prime]\n    (k : Type u) [Field k] [CharP k pchar], l ≠ pchar →\n    ∀ [S.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))]\n      [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]\n      (aS : SpCoefficientTowersAbelian l E S)\n      (aP : SpCoefficientTowersAbelian l E (ProjectiveLine S)),\n      (∀ M : SpTowerShriek.D l E (ProjectiveLine S),\n        uniform l E p.classes.base (ProjectiveLine S) aP M →\n          domain l E p.classes.base (ProjectiveLine S) M ∧\n            uniform l E p.classes.base S aS ((p.F l E).obj M)) ∧\n      (∀ K : SpTowerShriek.D l E S, uniform l E p.classes.base S aS K →\n        domain l E p.classes.base S K ∧ uniform l E p.classes.base (ProjectiveLine S) aP\n          ((p.G l E).obj K))",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "independent cc review: SmoothPurityTowerP1Data vs the old item body (verbatim apart from explicit pullback arguments in Presentation.exchange); item proof vs ComparisonsWithLine, KernelScalarNormalization, TriangleFactorization and the new nodes; 43-module sandbox build (all 7 direct importers OK); #print axioms"
+ }
+}

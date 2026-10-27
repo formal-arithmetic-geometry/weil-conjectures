@@ -1,0 +1,122 @@
+{
+ "id": "stage3-pur-extension-scalar-unit-transition",
+ "kind": "statement",
+ "title": "Transition compatibility of scalar units under finite evaluation",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding iota:E to L, a scheme W, coefficient-extension systems A [stage3-pur-extension-reduction-data], finite scalar evaluations rho with IsCoefficientScalarEvaluationUnit [stage3-pur-scalar-cochain-evaluation], and a coefficient E-system N. Define u_n(x)=rho_n inverse applied to the finite scalar-adjunction unit of x at level n. For n<=m and sections x at level m and y at level n over U, if the E-system transition sends x to y (HEq), then the L-system transition of A.scalar.model.E(N) sends u_m(x) to u_n(y) (HEq). No flatness or exactness is assumed.",
+ "stmt_deps": [
+  "stage3-pur-extension-reduction-data",
+  "stage3-pur-scalar-cochain-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjoint-pullback-pushforward-modules (03D7); sequence site preceding sites-cohomology.tex 0941."
+ },
+ "proof": [
+  {
+   "text": "Apply the ordinary evaluation unit equation, use the normalized restriction-evaluation section formula, and cancel rho to identify u_n(x) with the actual system scalar-adjunction unit section.",
+   "uses": [
+    "stage3-pur-scalar-cochain-evaluation",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any morphism of ring sheaves, the adjunction unit is a module-sheaf morphism. Its presheaf naturality for the horizontal sequence-site arrow identifies the image of its upper unit section with its lower unit applied to the presheaf restriction of x.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient transition section formula identifies these presheaf maps with finite system transitions. Substitute the assumed compatibility of x and y, and use the lower unit comparison in reverse.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "stage3-pur-extension-ordinary-strict-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "stage3-pur-scalar-cochain-evaluation",
+  "def-coef-semilinear-system-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "stage3-pur-extension-ordinary-strict-tensor"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjoint-pullback-pushforward-modules (03D7); sequence site preceding sites-cohomology.tex 0941. Fully proved auxiliary calculation for stage3-pur-extension-association-successor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension adjunction unit is natural for restriction maps of sheaves, and the mate of restriction composition sends the higher quotient unit to the lower quotient unit",
+   "results": "8 hits on sheaf pullback units and adjunctions, including SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No coefficient quotient-system identity.",
+   "date": "2026-10-26",
+   "verdict": "Use generic adjunction and presheaf naturality identities; the coefficient normalization needs the project API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_comp_map_eq_iff",
+   "results": "1 hit: CategoryTheory.Adjunction.unit_comp_map_eq_iff in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-26",
+   "verdict": "The generic mate/unit identity follows from the adjunction Hom equivalence. It does not supply the coefficient-system specialization or its evaluation transports."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality_apply|apply_symm_apply|ofOpSequence_map_homOfLE_succ; project rg coefficientTransition_section|scalarTensor_ab_hom_ext|scalarSection_eq_unit",
+   "results": "25 generic Mathlib hits; local Mathlib/CategoryTheory/Adjunction/Basic.lean supplies homEquiv and its inverse laws. Project search found proved private section and tensor extensionality APIs in CoefficientExtensionOrdinaryStrictTensor and unit normalization in CoefficientExtensionFiniteAssociation.",
+   "date": "2026-10-26",
+   "verdict": "Reuse these proved APIs. No existing declaration states the normalized quotient-unit or associated-tensor successor calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionAssociationSuccessor",
+  "date": "2026-10-26",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-extension-association-successor",
+   "place": "Transition compatibility of scalar units under finite evaluation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionAssociationScalarUnits",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionAssociationScalarUnits.lean",
+  "declaration": "WeilConjectures.CoefficientExtensionAssociation.evaluatedUnitSection_transition",
+  "statement": "theorem evaluatedUnitSection_transition\n    (A : CoefficientExtensionSystems l E L ι W)\n    (ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅\n      coefficientSequenceEvaluation l E W n ⋙ (A.levels n).model.E)\n    (hρ : IsCoefficientScalarEvaluationUnit l E L ι W A ρ)\n    (N : coefficientSequenceModules l E W) {m n : ℕ} (h : n ≤ m)\n    (U : W.ProEtᵒᵖ)\n    (x : ((coefficientSequenceEvaluation l E W m).obj N).val.obj U)\n    (y : ((coefficientSequenceEvaluation l E W n).obj N).val.obj U)\n    (hxy : HEq (((coefficientSequenceTransition l E W h).app N).val.app U x) y) :\n    HEq (((coefficientSequenceTransition l L W h).app\n      (A.scalar.model.E.obj N)).val.app U\n        (evaluatedUnitSection l E L ι W A ρ N m U x))\n      (evaluatedUnitSection l E L ι W A ρ N n U y)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T142340-L-315809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T142340-L-315809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-reductive-rank-one-reflections",
+ "kind": "statement",
+ "title": "Rank-one subgroups and normalizer reflections",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. A smooth group is unipotent if every geometric point is a unipotent matrix in a faithful linear representation, meaning $(u-I)^n=0$ for some $n\\geq1$. A reductive group is smooth and connected and has no nontrivial smooth connected normal unipotent subgroup. A torus is a group isomorphic over $F$ to $\\mathbf G_m^r$, where $r\\geq0$ and $\\mathbf G_m(A)=A^\\times$ for a commutative $F$-algebra $A$; a maximal torus is a torus subgroup maximal under inclusion. Let $G$ be reductive and $T\\subseteq G$ a maximal torus. Put $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=\\operatorname{Hom}(\\mathbf G_m,T)$, paired by $\\chi\\circ\\nu(t)=t^{\\langle\\chi,\\nu\\rangle}$. For the adjoint action on the tangent space $\\mathfrak g=\\operatorname{Lie}(G)$ one has a finite weight decomposition $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$, with $\\Phi\\subset X\\setminus\\{0\\}$. The group $W=N_G(T)(F)/T(F)$ is finite and acts on $X,Y$, preserving the pairing and permuting $\\Phi$; $N_G(T)$ denotes the subgroup functor normalizing $T$ after every scalar extension. For each $\\alpha\\in\\Phi$, let $T_\\alpha$ be the largest subtorus of $\\ker\\alpha$ and let $G_\\alpha=C_G(T_\\alpha)$ be its centralizer: its $A$-points commute with every point of $T_\\alpha$ after every commutative $A$-algebra extension. The group $G_\\alpha$ is reductive of semisimple rank one, meaning that its quotient by its largest smooth connected normal solvable subgroup has maximal tori of dimension one. Write $\\operatorname{SL}_2(A)$ for the $2\\times2$ matrices over $A$ of determinant one. There is $v_\\alpha:\\operatorname{SL}_2\\to G_\\alpha$, with central kernel and image the derived subgroup, whose restriction to the upper unitriangular subgroup identifies it with a one-dimensional root subgroup of Lie algebra $\\mathfrak g_\\alpha$. Set $\\alpha^\\vee(t)=v_\\alpha(\\operatorname{diag}(t,t^{-1}))\\in Y$. There is a unique nonidentity element of $N_{G_\\alpha}(T)(F)/T(F)$; its image $s_\\alpha\\in W$ acts by $s_\\alpha(x)=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ and $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. The cocharacter satisfying this reflection identity is unique, and conjugation by $n\\in N_G(T)(F)$ carries $\\alpha^\\vee$ to $(n\\alpha)^\\vee$. One has $\\dim\\mathfrak g_\\alpha=1$ and $\\mathbf Q\\alpha\\cap\\Phi=\\{\\alpha,-\\alpha\\}$. These assertions hold in every characteristic; weights are torus characters, not their differentials.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 21.1--21.2 and weight decomposition, pp.424--425; Theorem 21.11(a)--(e) and its rank-one SL2 construction, pp.428--430; equivariance is uniqueness in 21.11(e) after conjugating the rank-one subgroup."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Choose $T\\simeq\\mathbf G_m^r$. Character antiduality identifies $X=\\mathbf Z^r$ and $Y=\\operatorname{Hom}(X,\\mathbf Z)$ with the stated perfect pairing. Apply the multiplicative-group weight decomposition successively to the $r$ commuting coordinate actions on $\\mathfrak g$; each coordinate preserves the preceding weight spaces. This gives a finite decomposition by torus characters. The zero-weight space equals $\\operatorname{Lie}(C_G(T))$: a tangent vector is an element over $F[\\epsilon]/(\\epsilon^2)$ reducing to the identity, and membership in the centralizer says precisely that its conjugate by every $t$, after every algebra extension, is itself. The self-centralizer theorem gives $C_G(T)=T$, hence the zero-weight space is $\\operatorname{Lie}(T)$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 21(a), printed pp.424--425; Proposition 10.34, printed pp.197--198."
+   }
+  },
+  {
+   "text": "The normalizer-component lemma and $C_G(T)=T$ make $W=N_G(T)(F)/T(F)$ finite. For $n\\in N_G(T)(F)$ define $(n\\chi)(t)=\\chi(n^{-1}tn)$ and $(n\\nu)(z)=n\\nu(z)n^{-1}$. Composing these maps shows that the integer pairing is preserved, and elements of $T(F)$ act trivially. If $v\\in\\mathfrak g_\\alpha$, then $t\\operatorname{Ad}(n)v=\\operatorname{Ad}(n)(n^{-1}tn)v=\\alpha(n^{-1}tn)\\operatorname{Ad}(n)v$, so $\\operatorname{Ad}(n)$ identifies $\\mathfrak g_\\alpha$ with $\\mathfrak g_{n\\alpha}$. This proves the root-permutation assertion.",
+   "uses": [
+    "lem-sfb-torus-normalizer-components",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 21.1--21.2, printed pp.424--425."
+   }
+  },
+  {
+   "text": "Fix a root $\\alpha\\ne0$. Character antiduality and the largest-subtorus lemma identify $S=T_\\alpha$ as follows: write $\\alpha=m a$ with $a$ primitive in the free lattice $X$, and complete $a$ to an integral basis. In the corresponding torus coordinates $S$ is the subtorus with first coordinate $1$, of codimension one. A character is trivial on $S$ exactly when it belongs to $\\mathbf Z a=X\\cap\\mathbf Q\\alpha$. The dual-number argument in step 1, now for $S$, gives $$\\operatorname{Lie}(C_G(S))=\\mathfrak g^S=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\beta\\in\\Phi\\cap\\mathbf Q\\alpha}\\mathfrak g_\\beta.$$ In particular this space contains the nonzero summand $\\mathfrak g_\\alpha$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(a), printed pp.428--429; Proposition 10.34; Chapter 12 character description of subtori."
+   }
+  },
+  {
+   "text": "Put $H=C_G(S)$. Torus-centralizer reductivity makes $H$ reductive, and $T$ is still maximal in $H$ because a larger torus would be a larger torus in $G$. Among the smooth connected solvable normal subgroups of $H$, choose $R$ of maximal dimension, using the dimension bounds in the product lemma. If $N$ is any other such subgroup, its product $RN$ has these same properties and contains $R$; strict inclusion would increase dimension, so $RN=R$ and $N\\subseteq R$. Thus $R$ is the radical. The perfect-field solvable-group theorem gives a smooth connected unipotent subgroup $R_u\\triangleleft H$ and torus quotient $R/R_u$; normality in $H$, not just in $R$, is part of that theorem. Reductivity of $H$ makes $R_u=1$, hence $R$ is a torus. Connected-action rigidity applied to conjugation of $H$ on $R$ makes $R$ central. Since $S$ is itself central and a torus, $S\\subseteq R$.",
+   "uses": [
+    "lem-sfb-reductive-torus-fixed-subgroup",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-connected-action-torus-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The proof of Corollary 17.62(b), printed p.372; maximal-dimension radical construction in Sections 6.44--6.46; used in Theorem 21.11(a)."
+   }
+  },
+  {
+   "text": "Apply the semisimple-rank formula to the reductive group $H$, its still-maximal torus $T$, and the central radical $R$ just constructed. It gives $R\\subseteq T$ and $\\operatorname{rank}(H/R)=\\dim T-\\dim R$. Since $S\\subseteq R$ has codimension one in $T$, this rank is at most one. If it were zero, the included tori $R\\subseteq T$ of equal dimension would be equal (their character kernel is saturated of rank zero). Then $T$ would be central in $H$, so $H\\subseteq C_G(T)=T$. This contradicts the nonzero root summand in step 3. Thus $H=G_\\alpha$ has semisimple rank one.",
+   "uses": [
+    "lem-sfb-reductive-semisimple-rank-formula",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(a), printed p.429."
+   }
+  },
+  {
+   "text": "Apply the explicit rank-one classification to $(H,T)$. The extra $\\mathbf G_m^r$ factor is central and contributes only zero weights. In the SL2 model put $\\chi(\\operatorname{diag}(z,z^{-1}))=z$; conjugation on the off-diagonal matrix units has characters $\\pm2\\chi$. For PGL2 the scalar quotient is the determinant-nonzero open of projective matrix space: on a chart where one entry is nonzero, scale that entry to $1$; the resulting affine charts glue by rescaling. This also gives matrix representatives for its $F$-points. In the PGL2 model put $\\chi([\\operatorname{diag}(a,b)])=a/b$; its tangent space is $\\mathfrak{gl}_2/FI$, and the two off-diagonal classes have weights $\\pm\\chi$. In the GL2 model put $e_i(\\operatorname{diag}(a,b))=a,b$; the off-diagonal weights are $\\pm(e_1-e_2)$. Each listed weight space is one-dimensional and the remaining diagonal directions have weight zero, including in characteristic two. Comparing with step 3 shows that $\\Phi\\cap\\mathbf Q\\alpha=\\{\\alpha,-\\alpha\\}$ and $\\dim\\mathfrak g_\\alpha=1$. Choose the model or its conjugate by the off-diagonal matrix so that $\\alpha$ is the positive weight just listed.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b), printed p.429; Theorem 20.33; Examples 21.3--21.5 and 20.37."
+   }
+  },
+  {
+   "text": "In these three models define $v:\\operatorname{SL}_2\\to H$ by $g\\mapsto(1,g)$, $g\\mapsto(1,[g])$, or $g\\mapsto(1,g)$, respectively, and transport through the chosen pair isomorphism. The kernels are respectively trivial, $\\mu_2$, and trivial; $\\mu_2$ consists of scalar matrices $zI$ with $z^2=1$, so the kernel is central even in characteristic two. For the PGL2 map, an invertible matrix $g$ becomes determinant one after adjoining a root $c$ of $c^2=(\\det g)^{-1}$ and replacing $g$ by $cg$; this is a faithfully flat rank-two extension, even in characteristic two. Their scheme-theoretic images are the derived subgroups specified by the classification. The map on upper unitriangular matrices is an isomorphism onto their image: in PGL2 a scalar matrix that is unitriangular is the identity, and the coordinate on this affine chart is the upper-right entry. Conjugating by a diagonal matrix multiplies this entry by the positive weight of step 6. The image is consequently a one-dimensional root subgroup with tangent space $\\mathfrak g_\\alpha$. Finally $v(\\operatorname{diag}(z,z^{-1}))$ belongs to $T$, giving the asserted cocharacter.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b), printed p.429; Proposition 20.32 and explicit models of Theorem 20.33."
+   }
+  },
+  {
+   "text": "For the standard diagonal torus in each matrix model, a normalizing matrix must permute the two coordinate lines: these are its two distinct torus eigenspaces in the natural two-dimensional representation. Thus the normalizer consists of diagonal and antidiagonal matrices. For PGL2 use a GL2 representative over the algebraically closed field; normalizing the image torus implies normalizing its full inverse image, the diagonal torus in GL2. The same conclusion follows. The central product factor changes neither quotient. Hence $N_H(T)(F)/T(F)$ has exactly two elements, with nonidentity element represented by $v(w)$ for $w=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$. Its inclusion in $N_G(T)(F)/T(F)$ is injective, since both quotients have the same denominator $T(F)$. Call its image $s_\\alpha$.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(d), printed pp.429--430; 20.39; standard normalizer matrices for GL2 and PGL2."
+   }
+  },
+  {
+   "text": "The element $w$ inverts the SL2 diagonal coordinate and swaps the two GL2 diagonal entries. In the SL2 case $\\alpha=2\\chi$ and $\\alpha^\\vee:z\\mapsto\\operatorname{diag}(z,z^{-1})$, so $\\langle\\chi,\\alpha^\\vee\\rangle=1$ and $s_\\alpha\\chi=-\\chi=\\chi-\\alpha$. In the PGL2 case $\\alpha=\\chi$ and $\\chi(\\alpha^\\vee(z))=z^2$, so $s_\\alpha\\chi=-\\chi=\\chi-2\\alpha$. In the GL2 case $\\alpha=e_1-e_2$, the pairings of $e_1,e_2$ with $\\alpha^\\vee$ are $1,-1$, and swapping them is precisely $x\\mapsto x-\\langle x,\\alpha^\\vee\\rangle\\alpha$. The central-factor characters are fixed and have pairing zero. Checking this integral basis proves the reflection identity for every $x\\in X$ and gives $\\langle\\alpha,\\alpha^\\vee\\rangle=2$ in all three cases.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(e), printed p.430; 20.40; Examples 21.3--21.5."
+   }
+  },
+  {
+   "text": "If $\\nu,\\nu\\prime\\in Y$ satisfy the same reflection identity, then $\\langle x,\\nu-\\nu\\prime\\rangle\\alpha=0$ for every $x$. Since $X$ is torsion-free and $\\alpha\\ne0$, all these integers vanish. Perfectness of the pairing gives $\\nu=\\nu\\prime$. For $n\\in N_G(T)(F)$, conjugation takes the largest subtorus of $\\ker\\alpha$ to that of $\\ker(n\\alpha)$, hence takes $G_\\alpha$ to $G_{n\\alpha}$. It therefore takes the unique nonidentity local normalizer class to the corresponding class there: $ns_\\alpha n^{-1}=s_{n\\alpha}$. Conjugating the reflection identity and using pairing preservation yields $s_{n\\alpha}(x)=x-\\langle x,n\\alpha^\\vee\\rangle(n\\alpha)$. Uniqueness now gives $n\\alpha^\\vee=(n\\alpha)^\\vee$. All weight and pairing computations were in free integer character lattices; none used differentials of characters.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Uniqueness in Theorem 21.11(e), printed p.430, followed by conjugation; Chapter 12 character antiduality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-torus-normalizer-components",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-reductive-torus-fixed-subgroup",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-connected-action-torus-rigidity",
+  "lem-sfb-reductive-semisimple-rank-formula",
+  "lem-sfb-split-rank-one-classification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "The proof of Theorem 21.11(a)--(e), printed pp.429--430, expanding its rank-one SL2 input through Theorem 20.33 and its explicit matrix models; Propositions 21.1--21.2, pp.424--425."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral coroot cocharacters and Weyl reflections constructed from rank one centralizers in reductive algebraic groups in arbitrary characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.coroot'_reflection\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{i j : ι} (y : M) : P.coroot' j (P.reflection i y) = P.coroot' (P.reflectionPerm i j) y\", \"doc\": \"For any indices $i,j$ in $\\\\iota$ and any element $y \\\\in M$, the evaluation of the coroot functional $P.\\\\text{coroot}'_j$ on the reflection $P.\\\\text{reflection}_i(y)$ is equal to the evaluation of the \"}\n  {\"name\": \"RootPairing.mem_range_coroot_of_mem_range_coreflection_of_mem_range_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{r : N ≃ₗ[R] N} {α : N} (hr : r ∈ range P.coreflection) (hα : α ∈ range P.coroot) : r • α ∈ range P.coroot\", \"doc\": \"If $ r $ is a coreflection associated with the root pairing $ P $ and $ \\\\alpha $ is a coroot of $ P $, then the action of $ r $ on $ \\\\alpha $ is also a coroot of $ P $. Formally, if $ r \\\\in \\\\text{rang\"}\n  {\"name\": \"RootPairing.reflectionPerm_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (self : RootPairing ι R M N) (i j : ι),\\n  self.coroot j - (self.toLinearMap (self.root i)) (self.coroot j) • self.coroot\", \"doc\": \"For any indices $i, j$ in the index set $\\\\iota$ of a root pairing between $R$-modules $M$ and $N$, the coroot $\\\\alpha_j^\\\\vee$ satisfies the identity $\\\\alpha_j^\\\\vee - \\\\langle \\\\alpha_i, \\\\alpha_j^\\\\vee \\\\r\"}\n  {\"name\": \"RootPairing.coreflection_apply_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.coreflection i (P.coroot j) = P.coroot j - (P.pairing i j) • P.coroot i\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, applying the coreflection associated with index $ i $ to the coroot $ \\\\alpha_j^\\\\vee $ yields $ \\\\alpha_j^\\\\vee - \\\\langle \\\\alpha_i, \\\\alpha_j^\\\\vee \\\\\"}\n  {\"name\": \"RootPairing.weylGroup.ofIdx_smul\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \"(i : ι) (m : M) : weylGroup.ofIdx P i • m = Equiv.reflection P i • m\", \"doc\": \"For each index $i$ and element $m$ in the module $M$, the action of the Weyl group element corresponding to $i$ on $m$ equals the action of the reflection automorphism associated with $i$ on $m$, i.e.\"}\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \": LieIdeal R H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}\n  {\"name\": \"RootPairing.weylGroup_toSubmonoid\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroup.toSubmonoid = Submonoid.closure (range (Equiv.reflection P))\", \"doc\": \"The submonoid generated by the reflection automorphisms of a root pairing $ P $ is equal to the submonoid underlying its Weyl group, i.e., $ \\\\text{WeylGroup}(P) $ viewed as a submonoid coincides with \"}\n  {\"name\": \"RootPairing.weylGroupCorootRep\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Representation R P.weylGroup.op N\", \"doc\": \"The representation of the opposite group of the Weyl group $\\\\text{Weyl}(P)$ on the module $N$, constructed from the distributive multiplicative action of $\\\\text{Weyl}(P)^{\\\\text{op}}$ that commutes wit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root pairings assume the root datum; Lie-algebra results impose characteristic zero; no group-scheme rank-one construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \" (ι : Type u_1) (X₁ : Type u_5) (X₂ : Type u_6) [AddCommGroup X₁] [AddCommGroup X₂] : Type (max (max u_1 u_5) u_6)\", \"doc\": \"Informally a root datum is a root pairing with coefficients in the integers, for which the root\\nand coroot spaces are finitely-generated free Abelian groups.\\n\\nFormally `RootDatum` does not demand the \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root pairings assume the root datum; Lie-algebra results impose characteristic zero; no group-scheme rank-one construction"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReductive|IsMaximalTorus|coroot.*cocharacter|root.*subgroup",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"322\", \"text\": \"lemma _root_.Subgroup.IsArithmetic.conj (𝒢 : Subgroup (GL (Fin 2) ℝ)) [𝒢.IsArithmetic]\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"362\", \"text\": \"def _root_.unitarySubgroupUnitsEquiv {M : Type*} [Monoid M] [StarMul M] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"251\", \"text\": \"  _root_.mem_fixingSubgroup_iff _\"}\n  {\"file\": \"Mathlib/Algebra/Module/ZMod.lean\", \"line\": \"121\", \"text\": \"theorem _root_.Submodule.toAddSubgroup_toZModSubmodule (S : Submodule (ZMod n) M) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"145\", \"text\": \"def _root_.AddSubgroup.upperCentralSeriesAux (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"199\", \"text\": \"theorem _root_.AddSubgroup.upperCentralSeries_one (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"401\", \"text\": \"def _root_.AddSubgroup.lowerCentralSeries {G : Type*} [AddGroup G] (S : AddSubgroup G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"422\", \"text\": \"alias _root_.AddSubgroup.lowerCentralSeries_one := AddSubgroup.top_lowerCentralSeries_one\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"line\": \"289\", \"text\": \"    simp only [rootsOfUnity.val_mkOfPowEq_coe, Subgroup.coe_mul, Units.val_mul]\"}\n  {\"file\": \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"line\": \"453\", \"text\": \"  rw [_root_.commutator_def, Subgroup.map_commutator]\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/MaximalSubgroups.lean\", \"line\": \"203\", \"text\": \"lemma _root_.Subgroup.isPretransitive_of_stabilizer_lt\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"50\", \"text\": \"lemma _root_.Subgroup.isPerfect_iff : IsPerfect H ↔ ⁅H, H⁆ = H := by\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"54\", \"text\": \"lemma _root_.Subgroup.commutator_eq_self [hH : IsPerfect H] : ⁅H, H⁆ = H :=\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"85\", \"text\": \"def _root_.IsPGroup.toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"98\", \"text\": \"@[simp] theorem _root_.IsPGroup.toSylow_coe [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"102\", \"text\": \"@[simp] theorem _root_.IsPGroup.mem_toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"106\", \"text\": \"theorem _root_.IsPGroup.le_sylow_of_normal {N : Subgroup G} [N.Normal] (h : IsPGroup p N)\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"410\", \"text\": \"theorem _root_.Subgroup.Characteristic.comap_quotient_mk {H : Subgroup G} [hH : H.Characteristic]\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"425\", \"text\": \"def _root_.MonoidHom.domRestrictHomKerEquiv (A : Type*) [CommGroup A] (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"435\", \"text\": \"theorem _root_.MonoidHom.domRestrictHomKerEquiv_apply_coe (A : Type*) [CommGroup A] (H : Subgroup G)\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"189\", \"text\": \"protected def _root_.Con.subgroup (c : Con G) : Subgroup G where\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"196\", \"text\": \"theorem _root_.Con.mem_subgroup_iff {c : Con G} {x : G} :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"204\", \"text\": \"theorem _root_.Con.subgroup_quotientGroupCon (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"222\", \"text\": \"def _root_.Subgroup.orderIsoCon :\"}\n  {\"file\": \"Mathlib/GroupTheory/IsSubnormal.lean\", \"line\": \"85\", \"text\": \"inductive _root_.AddSubgroup.IsSubnormal {G : Type*} [AddGroup G] : AddSubgroup G → Prop where\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root pairings assume the root datum; Lie-algebra results impose characteristic zero; no group-scheme rank-one construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root centralizers in reductive algebraic group schemes and rank one SL2 central isogenies over algebraically closed fields",
+   "results": "Eight hits, including SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, SpecialLinearGroup.centerEquivRootsOfUnity, LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff, SpecialLinearGroup.centerEquivRootsOfUnity_invFun, RootPairing.GeckConstruction.instHasTrivialRadical, SpecialLinearGroup.centerEquivRootsOfUnity_apply, SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq. Types concern abstract special linear groups or characteristic-zero Lie algebras, not reductive group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme statement in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-rank-one-reflections",
+  "worker": "stage1",
+  "summary": "Read Milne Chapters 12, 13, 17, 19, 20 and 21 at the cited places. Reused the existing character, weight, largest-subtorus, solvable-radical ingredients and maximal-torus self-centralizer nodes. Isolated four genuine supporting theorems, and wrote the rank-one reduction, matrix root and normalizer computations, integral reflection identity, uniqueness and conjugation equivariance. No statement change; characteristic two and empty root systems checked. The dry run exposed a cycle in the existing radical-quotient proof through the Borel-pair existence clause. Replaced that citation by the maximal-dimension/product argument, the existing perfect-solvable-group theorem, and connected-action rigidity; the new rank/classification nodes take the constructed radical as explicit input.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Steps 1--10 supply the rank-one root/coroot prerequisite of the Borel-pair construction, itself supporting the Steinberg/Haboush prerequisite of the alteration route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-604939fb6",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-604939fb6 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full, and checked them against Milne iAG2017: 21.11(a)-(f) pp.428-430, 20.33/20.34 pp.418-419, 21.15, 17.59 p.371, 13.10-13.11 p.257. Steps 1-10 hold under the hypotheses in force. Step 1: weight decomposition plus Lie(C_G(T))=g^T, then self-centralizer. Step 2: the normalizer-components node makes W finite; the action, pairing invariance and Ad(n)g_a=g_{na} check by hand. Step 3: T_a=ker a for a primitive (also when p|m). Steps 4-5: radical via product lemma, perfect-solvable and rigidity, so R is a central torus containing S; the rank formula gives rank 1 and rank 0 contradicts C_G(T)=T. This is Milne's (a). Steps 6-9: weights, kernels, U+ isomorphism, normalizer and reflection formula verified in the SL2/PGL2/GL2 models, including characteristic 2 (Lie PGL2=gl2/F). Step 10: uniqueness from torsion-free X and perfect pairing; equivariance by conjugating T_a, G_a and s_a. New nodes: torus-fixed-subgroup (Milne 17.59), torus-normalizer-components (12.40, 13.10), semisimple-rank-formula (17.20) and split-rank-one-classification (20.33 with the errata rank-1 hypothesis). All four are true; I checked the classification independently on root data (the image of <.,a^v> is 2Z or Z, and the parity of k0 separates SL2 from GL2). The corrected derived groups SL2/PGL2/SL2 are right; Milne's text has a typo there. No new node is a duplicate after a dag-wide search, and none restates a clause of the item. The DAG stays acyclic, proof_deps equals the union of uses, every citation stays in unit sk-thm-sf-ctf-stability, and there is no SGA. Batch-5: lem-trf-smooth-fpqc-base-descent (Stacks 02VL, Mathlib leaf), lem-trf-fppf-covering-base-change (021O, Mathlib leaf) and def-trf-scheme-cover-descent-datum (02W5 definition) are generic descent tools, not steps of the trace formula or Poincare duality, so all six flagged citations are accepted. Advisory: a future split of the classification node must avoid citing borel-pair-structure, which cites this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveRankOneReflections",
+  "declaration": "AlgebraicGeometry.RankOneRoots.reductive_rankOne_reflections",
+  "declarations": [
+   "AlgebraicGeometry.RankOneRoots.reductive_rankOne_reflections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveRankOneReflections.lean",
+  "statement": "theorem reductive_rankOne_reflections {F : Type u} [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (i : T ⟶ G) (hG : ReductiveTorusCentralizer.IsReductive G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) : ∃ (a : ModObj T.X G.X) (pairing : Character T → Cocharacter T → ℤ) (act : Weyl i →* Aut T), a.smul = adjointMap i ∧ (∀ (χ : Character T) (ν : Cocharacter T), ν.hom.hom ≫ χ.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ pairing χ ν) ∧ (roots T G a).Finite ∧ iSupIndep (weight T G a) ∧ (⨆ χ : Character T, weight T G a χ) = ⊤ ∧ weight T G a 0 = (GrpObj.differential i.hom.hom).toLinearMap.range ∧ Finite (Weyl i) ∧ (∀ (n : normalizer i) (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ i.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n.val) * (t ≫ i.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n.val)⁻¹) ∧ (∀ (w : Weyl i) (χ : Character T) (ν : Cocharacter T), pairing ((act w).inv ≫ χ) (ν ≫ (act w).hom) = pairing χ ν) ∧ (∀ (w : Weyl i) (χ : Character T), (act w).inv ≫ χ ∈ roots T G a ↔ χ ∈ roots T G a) ∧ ∃ (coroot : {α // α ∈ roots T G a} → Cocharacter T) (reflection : {α // α ∈ roots T G a} → Weyl i), (∀ α : {α // α ∈ roots T G a}, pairing α.val (coroot α) = 2 ∧ (∀ x : Character T, (act (reflection α)).inv.hom.hom ≫ x.hom.hom = x.hom.hom / α.val.hom.hom ^ pairing x (coroot α)) ∧ (∀ ν : Cocharacter T, (∀ x : Character T, (act (reflection α)).inv.hom.hom ≫ x.hom.hom = x.hom.hom / α.val.hom.hom ^ pairing x ν) → ν = coroot α) ∧ Module.finrank F (weight T G a α.val) = 1 ∧ (∀ χ : Character T, (χ ∈ roots T G a ∧ ∃ m n : ℤ, n ≠ 0 ∧ χ.hom.hom ^ n = α.val.hom.hom ^ m) ↔ χ = α.val ∨ χ.hom.hom = α.val.hom.hom⁻¹) ∧ ∃ (S H : Grp (Over (Spec (.of F)))) (s : S ⟶ Grp.mk (CategoryTheory.GrpObj.ker α.val.hom.hom)) (h : H ⟶ G) (j : T ⟶ H) (v : SL2Hom H) (dG : Grp (Over (Spec (.of F)))) (d : dG ⟶ H) (upper : Grp.mk (StandardGroupSchemes.additive F) ⟶ H), MultiplicativeType.IsLargestSubtorus s ∧ IsClosedSubgroupScheme h.hom.hom ∧ j ≫ h = i ∧ ReductiveTorusCentralizer.IsReductive H ∧ HasSemisimpleRankOne H ∧ (∀ A : CommAlgCat.{u} F, ReductiveTorusCentralizer.centralizerPoints (Grp.homMk (s.hom.hom ≫ CategoryTheory.GrpObj.kerι α.val.hom.hom) ≫ i) A = (pointImage h (StandardGroupSchemes.affine F A) : Set _)) ∧ (∀ A : CommAlgCat.{u} F, (v.app A).ker ≤ Subgroup.center _) ∧ IsDerivedGroupScheme d.hom.hom ∧ v.IsImage d ∧ IsClosedSubgroupScheme upper.hom.hom ∧ @TorusCharacterTangent.IsStable F _ T G a _ (upper ≫ h) ∧ (GrpObj.differential (upper ≫ h).hom.hom).toLinearMap.range = weight T G a α.val ∧ (∀ (A : CommAlgCat.{u} F) (p : StandardGroupSchemes.affine F A ⟶ StandardGroupSchemes.additive F) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![1, (Scheme.ΓSpecIso (.of A)).hom (p.left.appTop ((Scheme.ΓSpecIso (.of (Polynomial F))).inv Polynomial.X)); 0, 1] → v.app A g = p ≫ upper.hom.hom) ∧ (∀ (A : CommAlgCat.{u} F) (z : StandardGroupSchemes.affine F A ⟶ StandardGroupSchemes.multiplicative F) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![multiplicativeValue A z, 0; 0, multiplicativeValue A z⁻¹] → v.app A g = z ≫ (coroot α).hom.hom ≫ j.hom.hom) ∧ ∃ (localReflection : Weyl j) (nH : normalizer j) (nG : normalizer i), localReflection ≠ 1 ∧ (∀ w : Weyl j, w ≠ 1 → w = localReflection) ∧ QuotientGroup.mk nH = localReflection ∧ nG.val = nH.val ≫ h.hom.hom ∧ QuotientGroup.mk nG = reflection α) ∧ ∀ (w : Weyl i) (α β : {α // α ∈ roots T G a}), β.val = (act w).inv ≫ α.val → coroot β = coroot α ≫ (act w).hom",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b19c2695",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-rank-one-root-interfaces, both modules and dep decls (IsReductive, IsMaximalTorus, centralizerPoints, IsLargestSubtorus, IsDerivedGroupScheme, weightSpace/IsStable, Mathlib Grp zero hom). Every clause matches Milne 21.1-21.2/21.11(a)-(e): pinned pairing via (𝟙 Gm)^n, adjoint action pinned, finite character weight decomposition with weight 0 = Lie T, all-algebra normalizer quotient W finite, act pinned to conjugation, pairing/root invariance, T_α largest subtorus of ker α, G_α centralizer on all A, reductive + semisimple rank one, natural SL2 family with central kernel and derived image, upper Ga root subgroup with Lie g_α, diagonal coroot, unique local reflection mapped to s_α, reflection formula, pairing 2, coroot uniqueness, equivariance, dim g_α = 1, Qα∩Φ = ±α. No extra hypotheses, universe u only; char 2 and empty-root cases covered. Item changed only in lean + stmt_deps (new def node); statements verbatim; docstrings with 10-step proof; no >100-char lines; only sorry. Advisory: live multiplicativePointCoordinate (theorem-node helper in a citer, cycle) duplicates multiplicativeValue. No compile needed (no file changed)."
+ }
+}

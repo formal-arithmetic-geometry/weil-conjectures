@@ -1,0 +1,244 @@
+{
+ "id": "lem-per-flat-base-change-torsion-free",
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=R\\setminus\\{0\\}$ and $K=T^{-1}R$. In the fraction construction [def-weil-pbc-module-localization], $a/t=0$ precisely when $ua=0$ for some $u\\in T$, hence precisely when $a=0$, because $R$ is a domain. Every nonzero $a/t$ has inverse $t/a$, so $K$ is a field. Let $V=T^{-1}N$, a $K$-module, and let $i:N\\to V$ send $n$ to $n/1$. If $i(n)=0$, the stated kernel criterion for module localization gives $tn=0$ for some $t\\in T$; torsion freeness of $N$ gives $n=0$. Thus $i$ is injective. The restricted $R$-action on $V$ is the original localization action.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AXM (lemma-flat-pullback-torsion), first sentence of proof; localization construction in algebra.tex, Tag 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "The localization lemma [lem-weil-pbc-localization-flat] applied to $R\\to K=T^{-1}R$ makes $K$ flat over $R$. The field-module lemma [lem-weil-pbc-module-over-field-flat] makes the $K$-vector space $V$ flat over $K$, without any dimension bound. Transitivity [lem-pc-module-flat-transitive], with $(A,B,M)=(R,K,V)$ and the compatible scalar actions of Step 1, now makes $V$ flat over $R$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization), (1) and (2); flatness reformulation of the vector-space basis argument in more-algebra.tex, Tag 0AXM."
+   }
+  },
+  {
+   "text": "The flat-map hypothesis means that $S$ is flat as an $R$-module [def-weil-pbc-flat-ring-map]. Apply [lem-trf-flat-tensor-preserves-injection] with its $(M,N,P,f)=(S,N,V,i)$ to obtain an injective map $J:S\\otimes_R N\\to S\\otimes_R V$, $s\\otimes n\\mapsto s\\otimes i(n)$. It is $S$-linear: on pure tensors $J(bs\\otimes n)=bs\\otimes i(n)=bJ(s\\otimes n)$, and the identity extends by additivity and generation by pure tensors [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AXM (lemma-flat-pullback-torsion), second sentence of proof."
+   }
+  },
+  {
+   "text": "By Step 2, $V$ is $R$-flat. Apply [lem-weil-pbc-flat-module-base-change] to $R\\to S$ and $V$: the target $S\\otimes_R V$, with $S$ acting on the first factor, is flat over $S$. Since $S$ is a domain, [lem-trf-flat-module-torsionfree-domain] implies that multiplication by every $0\\ne b\\in S$ is injective on this target. This establishes torsion freeness for all nonzero target scalars, including those outside the image of $R$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-trf-flat-module-torsionfree-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change); flat-target version of the localization/direct-sum argument concluding more-algebra.tex, Tag 0AXM."
+   }
+  },
+  {
+   "text": "The bilinear formula $n\\otimes s\\mapsto s\\otimes n$ defines $\\tau:N\\otimes_R S\\to S\\otimes_R N$ by [def-weil-pbc-module-tensor-product]; the reverse formula defines its inverse, since both composites are the identity on the generating pure tensors. Also $\\tau(n\\otimes bs)=bs\\otimes n=b\\tau(n\\otimes s)$, so $\\tau$ is $S$-linear for the stipulated second-factor action on the source. If $bz=0$ with $0\\ne b\\in S$, then $bJ\\tau(z)=J\\tau(bz)=0$. Step 4 gives $J\\tau(z)=0$; injectivity from Step 3 and invertibility of $\\tau$ give $z=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AXM (lemma-flat-pullback-torsion), conclusion; elementary tensor symmetry and restriction to a submodule."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-pc-module-flat-transitive",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-trf-flat-module-torsionfree-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AXM (lemma-flat-pullback-torsion), proof; its vector-space/direct-sum argument expressed using the existing flatness, localization and base-change lemmas."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-flat-base-change-reflexive-modules",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "title": "Flat extension of domains preserves torsion-free modules",
+ "statement": "Let $R\\to S$ be a flat homomorphism [def-weil-pbc-flat-ring-map] of commutative integral domains, and let $N$ be an $R$-module. Assume $N$ is torsion free: for every $0\\ne a\\in R$ and $n\\in N$, $an=0$ implies $n=0$. Then $N\\otimes_R S$ [def-weil-pbc-module-tensor-product], with $S$ acting on the second tensor factor, is torsion free as an $S$-module: for every $0\\ne b\\in S$ and $z\\in N\\otimes_R S$, $bz=0$ implies $z=0$. No finite generation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AXM (more-algebra-lemma-flat-pullback-torsion), entire statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsion free module over an integral domain remains torsion free after tensoring with a flat algebra that is an integral domain",
+   "results": "{\"t\": \"2026-10-24T01:58:38Z\", \"tool\": \"leanfinder\", \"query\": \"A torsion free module over an integral domain remains torsion free after tensoring with a flat algebra that is an integral domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.lTensor\", \"IsSMulRegular.rTensor\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"Module.FaithfullyFlat.instTensorProduct\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Module.Flat.baseChange\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain\"], \"digest\": \"2ea181e565d9e167\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with a flat domain algebra preserves torsion freeness over the target ring",
+   "results": "{\"t\": \"2026-10-24T01:58:59Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product with a flat domain algebra preserves torsion freeness over the target ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.lTensor\", \"IsSMulRegular.rTensor\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Module.Flat.baseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"Algebra.FormallyUnramified.base_change\", \"Module.Flat.instTensorProduct\"], \"digest\": \"bd440d304a94cb0e\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change preserves torsion free modules over domains",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"leansearch\", \"query\": \"Flat base change preserves torsion free modules over domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.flat_iff_torsion_eq_bot_of_isBezout\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"IsBaseChange.free\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\"], \"digest\": \"b3be8389e5928825\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsTorsionFree, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"loogle\", \"query\": \"Module.IsTorsionFree, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsionFree.*[Tt]ensor|[Tt]ensor.*IsTorsionFree|torsion.free.*base.change",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"grep\", \"query\": \"IsTorsionFree.*[Tt]ensor|[Tt]ensor.*IsTorsionFree|torsion.free.*base.change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsionFree|NoZeroSMulDivisors|torsionFree",
+   "results": "{\"t\": \"2026-10-24T01:58:52Z\", \"tool\": \"grep\", \"query\": \"IsTorsionFree|NoZeroSMulDivisors|torsionFree\", \"sub\": \"RingTheory/TensorProduct\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TensorProduct/Maps.lean\"], \"digest\": \"5cec4fa25d321c5d\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsionFree|IsSMulRegular.of_flat_of_isBaseChange",
+   "results": "{\"t\": \"2026-10-24T02:00:35Z\", \"tool\": \"grep\", \"query\": \"IsTorsionFree|IsSMulRegular.of_flat_of_isBaseChange\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"39bad7ae0a4e3738\"}; Read Mathlib/RingTheory/Regular/IsSMulRegular.lean:52-70 and Flat/Basic.lean:628, and the displayed Flat/TorsionFree.lean hits. IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange control only scalars from the source ring, not all nonzero scalars of the target domain. Flat.isBaseChange assumes the original module flat; torsion-free modules over arbitrary domains need not be flat. Dedekind/Bezout results impose extra hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsionFree.*[Tt]ensor|[Tt]ensor.*IsTorsionFree|torsion.free.*base.change",
+   "results": "{\"t\": \"2026-10-24T02:25:07Z\", \"tool\": \"grep\", \"query\": \"IsTorsionFree.*[Tt]ensor|[Tt]ensor.*IsTorsionFree|torsion.free.*base.change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange declarations: they control source-ring scalars only. Flat.baseChange assumes a flat original module. The Bezout/Dedekind criteria require extra hypotheses. Localization torsion freeness concerns a localization algebra, not an arbitrary flat domain algebra. None states this item or gives it by a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a torsion free module by a flat homomorphism of integral domains is torsion free",
+   "results": "{\"t\": \"2026-10-24T02:25:07Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a torsion free module by a flat homomorphism of integral domains is torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.flat_iff_torsion_eq_bot_of_isBezout\", \"Ideal.instIsTorsionFreeSubtypeMemSubmodule\", \"IsLocalizedModule.isTorsionFree\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"IsBaseChange.free\", \"IsBaseChange.rank_eq\", \"LinearMap.instIsTorsionFree\"], \"digest\": \"ed51fdc05cf2c9f9\"}; Read the returned IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange declarations: they control source-ring scalars only. Flat.baseChange assumes a flat original module. The Bezout/Dedekind criteria require extra hypotheses. Localization torsion freeness concerns a localization algebra, not an arbitrary flat domain algebra. None states this item or gives it by a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsTorsionFree, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T02:25:07Z\", \"tool\": \"loogle\", \"query\": \"Module.IsTorsionFree, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange declarations: they control source-ring scalars only. Flat.baseChange assumes a flat original module. The Bezout/Dedekind criteria require extra hypotheses. Localization torsion freeness concerns a localization algebra, not an arbitrary flat domain algebra. None states this item or gives it by a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of integral domains preserves torsion free modules under tensor product",
+   "results": "{\"t\": \"2026-10-24T02:25:08Z\", \"tool\": \"leanfinder\", \"query\": \"Flat extension of integral domains preserves torsion free modules under tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.lTensor\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.baseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.instTensorProduct\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\"], \"digest\": \"de28a0f5f058ecba\"}; Read the returned IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange declarations: they control source-ring scalars only. Flat.baseChange assumes a flat original module. The Bezout/Dedekind criteria require extra hypotheses. Localization torsion freeness concerns a localization algebra, not an arbitrary flat domain algebra. None states this item or gives it by a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a torsion free module with a flat domain algebra is torsion free over the target domain",
+   "results": "{\"t\": \"2026-10-24T02:25:31Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a torsion free module with a flat domain algebra is torsion free over the target domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.lTensor\", \"IsSMulRegular.rTensor\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.baseChange\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Subalgebra.LinearDisjoint.isDomain\"], \"digest\": \"82e35e81bff907d9\"}; Read the returned IsSMulRegular.lTensor/rTensor and of_flat_of_isBaseChange declarations: they control source-ring scalars only. Flat.baseChange assumes a flat original module. The Bezout/Dedekind criteria require extra hypotheses. Localization torsion freeness concerns a localization algebra, not an arbitrary flat domain algebra. None states this item or gives it by a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The torsion-free quotient after base change in Tag 0EB9.",
+   "via": [
+    "lem-per-flat-base-change-reflexive-modules",
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-base-change-torsion-free",
+  "worker": "stage1",
+  "group": "Q42",
+  "summary": "Preserved the Tag 0AXM statement and gave a five-step proof through the localization V of N, its R-flatness, an injective tensor map into an S-flat module, and explicit tensor symmetry. All ingredients already have DAG nodes; no new node is needed. Checked arbitrary modules and all nonzero S-scalars. Added the tensor-product statement dependency and retained the inherited searches.",
+  "blueprint": "Historical regular-pair refinement under lem-per-artin-gabber-affine-curve, latest proof Step 3 (duality symmetry); immediate Tag 0EB9 use in lem-per-flat-base-change-reflexive-modules. Steps 1 and 3 realize Tag 0AXM's localization embedding; Steps 2 and 4 give its basis/localization torsion-free target through flatness; Step 5 is the submodule conclusion. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-a7f32d8ed",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-a7f32d8ed (reviewer sub-agent of L); spot-checked: I read every step of the item in full; the delivery adds no new nodes. The statement matches Stacks more-algebra 0AXM (lemma-flat-pullback-torsion, lines 4824-4837) hypothesis by hypothesis: R→S is a flat map of domains, N is an arbitrary torsion-free R-module and S acts on the second factor. No SGA source is cited. Step 1: the module-localization criterion with R a domain gives that K=T^{-1}R is a field and that i:N→V=T^{-1}N is injective. Step 2: three Mathlib leaves (localization flat, vector space flat, Flat.trans with (R,K,V)) make V flat over R. Step 3: S is R-flat, so the tensor-injection leaf with (S,N,V,i) gives an injective J. J is S-linear, checked on pure tensors. Step 4: Flat.baseChange is applied to V, not N, so S⊗V is S-flat. Since S is a domain, the flat-module torsion-free leaf covers every nonzero b in S. Step 5: the swap τ is S-linear and invertible, so bz=0 gives Jτ(z)=0 and hence z=0. I tested N=0, R=S, S=K, a torsion-free non-flat N, and a non-finitely-generated N. Mathlib has no lemma for the item itself; I grepped Flat/TorsionFree.lean. Every cited node is a definition or a Mathlib leaf, so the item stays on its route and needs no tool_uses. Batch-5 check: lem-trf-flat-tensor-preserves-injection is the Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap. lem-trf-flat-module-torsionfree-domain is the Mathlib leaf Module.Flat.torsion_eq_bot. Both are generic commutative algebra that neither the trace-formula assumption nor the Poincaré-duality assumption gives. They have no closure beyond Mathlib and are not steps of either proof, so I accept both. The citer lem-per-flat-base-change-reflexive-modules uses the item as stated. I wrote no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatBaseChangeTorsionFree",
+  "declaration": "Module.torsionFree_baseChange_right",
+  "file": "lean/Sheaf/RingTheory/FlatBaseChangeTorsionFree.lean",
+  "statement": "theorem torsionFree_baseChange_right (R : Type u) (S : Type v) (N : Type w) [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [AddCommGroup N] [Module R N] (hflat : (algebraMap R S).Flat) (hN : ∀ (a : R), a ≠ 0 → ∀ (n : N), a • n = 0 → n = 0) : ∀ (b : S), b ≠ 0 → ∀ (z : N ⊗[R] S), (LinearMap.mul R S b).lTensor N z = 0 → z = 0",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d837b94db",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Stacks 0AXM matched clause by clause: IsDomain R,S; hflat:(algebraMap R S).Flat = recorded RingHom.Flat (equivalent via flat_algebraMap_iff); arbitrary N, hN verbatim torsion-free; conclusion ∀ b≠0 in S, ∀ z: (LinearMap.mul R S b).lTensor N z = 0 → z = 0, the canonical second-factor action (no default right S-module instance exists). No finiteness hypotheses; universes u v w independent. lean.statement verbatim equal to the file; stmt_dep nodes byte-identical to live; item not landed live (no supersession). Name torsionFree_baseChange absent from Mathlib and the project. Docstrings carry source place, blueprint id and the 5-step proof; sorry only; public imports minimal, plain imports are proof_dep modules. No fixes, no compile needed."
+ }
+}

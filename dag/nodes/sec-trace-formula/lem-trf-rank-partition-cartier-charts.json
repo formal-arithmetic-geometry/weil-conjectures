@@ -1,0 +1,246 @@
+{
+ "id": "lem-trf-rank-partition-cartier-charts",
+ "kind": "statement",
+ "title": "A finite clopen partition extends to Cartier affine charts after admissible blowup",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions], $U\\subset S$ a quasi-compact open, and $U=\\coprod_{i\\in I}U_i$ a finite partition into quasi-compact subsets open and closed in $U$. There is a $U$-admissible blowup $b:T\\to S$ [def-nagata-admissible-blowup] with $T$ quasi-compact and quasi-separated and a finite open-and-closed decomposition $T=\\coprod_{i\\in I}T_i$ such that $b^{-1}(U_i)=T_i\\cap b^{-1}(U)$. There is a finite affine open cover $W_j=\\operatorname{Spec}R_j$ of $T$, each $W_j$ contained in some $T_{i(j)}$, and elements $h_j\\in R_j$ which are nonzerodivisors and satisfy $W_j\\cap b^{-1}(U)=D(h_j)$. Here a nonzerodivisor means multiplication by $h_j$ on $R_j$ is injective, and $D(h_j)$ denotes the set of prime ideals not containing $h_j$ [def-weil-affine-spectrum]. The open $b^{-1}(U)$ is scheme-theoretically dense, meaning $\\mathcal O_T\\to j_*\\mathcal O_{b^{-1}(U)}$ is injective for its open inclusion $j$. The equations $h_j$ locally generate one effective Cartier ideal [def-nagata-effective-cartier-ideal] with zero set $T\\setminus b^{-1}(U)$. If $U$ is empty, $T$ may be chosen empty and both the decomposition and the cover may be empty.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, rank separation and affine Cartier reduction; Tag 080Y, remark-successive-blowups, boundary principalization paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-admissible-blowup",
+  "def-weil-affine-spectrum",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite-type quasi-coherent ideal $\\mathcal I$ on $S$ with $V(\\mathcal I)=S\\setminus U$ by [lemma-nagata-qc-open-complement-ideal-exists]. Apply [det-nagata-boundary-divisor-cartier] to its blowup $a:S_0\\to S$. Its extended ideal is invertible, its zero set is $S_0\\setminus U^0$, where $U^0=a^{-1}(U)$, and $U^0$ is scheme-theoretically dense. By [lemma-nagata-admissible-blowup-over-open], $U^0\\cong U$, so its pieces $U_i^0$ are still quasi-compact and clopen. Each is constructible in $U^0$: a clopen subset and its complement meet every quasi-compact open in a closed, hence quasi-compact, subset, so both are retrocompact as required by [def-weil-constructible-subset]. The base $S_0$ is qcqs by the final assertion of [lem-trf-module-admissible-blowup-calculus].",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "det-nagata-boundary-divisor-cartier",
+    "lemma-nagata-admissible-blowup-over-open",
+    "def-weil-constructible-subset",
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+   }
+  },
+  {
+   "text": "List the finitely many unordered pairs of distinct indices. Starting with $S_0$, for each pair $(i,k)$ apply [lemma-nagata-separate-constructible-closed] to the two clopen subsets of the current preserved open corresponding to $U_i,U_k$. They are closed and constructible, disjoint, and their complements are finite unions of the other quasi-compact pieces. This yields an admissible blowup on which their inverse-image closures are disjoint. The preserved open remains isomorphic to $U$ by [lemma-nagata-admissible-blowup-over-open], and the new base remains qcqs by [lem-trf-module-admissible-blowup-calculus], so the next application has all its hypotheses. Previously achieved disjointness persists: for a continuous map $g$, the closure of $g^{-1}(A)$ is contained in $g^{-1}(\\overline A)$, which is closed; inverse images of disjoint closed sets are disjoint. Finite induction therefore gives a tower ending in $T$ where all closures of the inverse images of $U_i$ are pairwise disjoint. If there are no pairs the tower is empty. By repeated [lemma-nagata-admissible-blowup-comp], its composite $b:T\\to S$ is one $U$-admissible blowup. The same result applied over $S_0$ shows that $T\\to S_0$ is $U^0$-admissible (the empty tower is the identity).",
+   "uses": [
+    "lemma-nagata-separate-constructible-closed",
+    "lemma-nagata-admissible-blowup-over-open",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+   }
+  },
+  {
+   "text": "Apply the further-blowup clause of [det-nagata-boundary-divisor-cartier] to $T\\to S_0$. Thus the extended ideal $\\mathcal J=\\mathcal I\\mathcal O_T$ is invertible with zero set $T\\setminus b^{-1}(U)$, and $b^{-1}(U)$ is scheme-theoretically dense. Invertibility here means locally free of rank one by [def-nagata-invertible-ideal]. A local free generator maps under the ideal inclusion to a section $h$ of $\\mathcal O_T$; multiplication by $h$ is injective because both the chosen trivialization and the ideal inclusion are injective. Hence $\\mathcal J$ is an effective Cartier ideal by [def-nagata-effective-cartier-ideal].",
+   "uses": [
+    "det-nagata-boundary-divisor-cartier",
+    "def-nagata-invertible-ideal",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+   }
+  },
+  {
+   "text": "Put $A_i=b^{-1}(U_i)$ and $T_i=\\overline {A_i}$ as subsets of $T$. Scheme-theoretic density implies topological density: on an open disjoint from $b^{-1}(U)$, the injection $\\mathcal O_T\\to j_*\\mathcal O_{b^{-1}(U)}$ forces the structure sheaf to be zero, hence that open has no points (each point has a nonzero local ring). Since the family is finite, $T=\\overline{\\bigcup_i A_i}=\\bigcup_i\\overline {A_i}$. The $T_i$ are pairwise disjoint closed subsets by step 2, and each has closed complement $\\bigcup_{k\\ne i}T_k$, hence is open. Give each its open subscheme structure. Closure in the open $b^{-1}(U)$ is computed by intersection with closure in $T$; there $A_i$ is already closed. Consequently $T_i\\cap b^{-1}(U)=A_i$. If $U=\\varnothing$, take $\\mathcal I=0$ in step 1: the zero ideal is finite type, and the density injection into the zero sheaf forces its blowup to be empty. All pieces and the affine covering may then be empty, including when the index set is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+   }
+  },
+  {
+   "text": "On the generator neighbourhoods of $\\mathcal J$ from step 3, refine by the open pieces $T_i$, and choose affine neighbourhoods of all points contained in these intersections. Affine neighbourhoods exist by the definition of a scheme [def-pc-scheme]. Each resulting $W=\\operatorname{Spec}R$ has a generator $h\\in R$ of the same ideal $\\mathcal J|_W$; restriction preserves the injectivity of multiplication by $h$, and taking sections is left exact, so $h$ is a nonzerodivisor in $R$. By the definition of the zero set of an ideal in an affine spectrum [def-weil-affine-spectrum], $W\\cap b^{-1}(U)=W\\setminus V(h)=D(h)$. The base $T$ is quasi-compact by step 2, so finitely many of these affine neighbourhoods cover it. Their equations generate the one global effective Cartier ideal $\\mathcal J$ and have exactly the required zero set. Quasi-separatedness of $T$ was also retained at every step.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-admissible-blowup-over-open",
+  "def-weil-constructible-subset",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lemma-nagata-separate-constructible-closed",
+  "lemma-nagata-admissible-blowup-comp",
+  "def-nagata-invertible-ideal",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, proof paragraphs 2–3; Tag 080Y, remark-successive-blowups, boundary principalization and successive blowups."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite clopen partition of a quasi compact open in a quasi compact quasi separated scheme extends after admissible blowup to clopen pieces with a Cartier boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"exists_clopen_partition_of_clopen_cover\", \"module\": \"Mathlib/Topology/Separation/Profinite\", \"type\": \"∀ {X : Type u_4} {I : Type u_5} [inst : TopologicalSpace X] [CompactSpace X] [T2Space X] [TotallyDisconnectedSpace X]\\n  [Finite I] {Z D : I → Set X},\\n  (∀ (i : I), IsClosed (Z i)) →\\n    (∀ (i : I), IsClopen (D i)) →\\n      (∀ (i : I), Z i ⊆ D i) →\\n        Set.univ.PairwiseDisjoint Z →\\n          ∃ C,\\n\", \"doc\": \"In a compact Hausdorff totally disconnected topological space $X$, given a finite index set $I$, closed sets $Z_i$ contained in clopen sets $D_i$ with pairwise disjoint $Z_i$, there exist clopen sets \"}\n  {\"name\": \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e f, e * f = 0 ∧ e + f = 1 ∧ s = ↑(PrimeSpectrum.basicOpen e) ∧ sᶜ = ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any clopen set $ s $ in the Zariski topology on the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot f = 0 $, $ e \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X.RationalMap Y) → (↑f.domain).OpenCover\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this constructs an open cover of the domain of $f$ using the domains of all partial maps equivalent to $f$. The cover consists of open immersions wh\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Clopen partitions and quasi-separatedness are present, but no blowup separating strata and principalizing a boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separate closures of disjoint quasi compact open subsets by blowing up and choose affine charts with regular principal boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : Type u_1} (U : I → X.Opens),\\n  TopologicalSpace.IsOpenCover U →\\n    (∀ (i : I), AlgebraicGeometry.IsAffineOpen (U i)) →\\n      (∀ (i j : I), IsCompact (↑(U i) ∩ ↑(U j))) → QuasiSeparatedSpace ↥X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated X.toSpecΓ\", \"doc\": \"If the underlying topological space of a scheme $X$ is quasi-separated, then the canonical morphism from $X$ to the affine scheme associated with its ring of global sections $\\\\operatorname{Spec}(\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated], QuasiSeparatedSpace ↥X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-separated, meaning that the diagonal morphism $ X \\\\to X \\\\times_{\\\\text{Normalization}(f)} X $ is quasi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Clopen partitions and quasi-separatedness are present, but no blowup separating strata and principalizing a boundary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsClopen\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Clopen partitions and quasi-separatedness are present, but no blowup separating strata and principalizing a boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowingUp|[Cc]artier.*[Pp]artition",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Clopen partitions and quasi-separatedness are present, but no blowup separating strata and principalizing a boundary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Admissible blowup separates clopen rank strata and principalizes the boundary of a quasi compact open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"PrimeSpectrum.instQuasiSeparatedSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": QuasiSeparatedSpace (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-separated topological space. This means that the intersection of any two quasi\"}\n  {\"name\": \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{s : Set (PrimeSpectrum R)} (hs : IsClopen s) : ∃ e : R, IsIdempotentElem e ∧ s = basicOpen e\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative semiring $ R $, every clopen set $ s $ is equal to the basic open set $ D(e) $ for some idempotent element $ e \\\\in R $.\"}\n  {\"name\": \"PolishSpace.IsClopenable\", \"module\": \"Mathlib.Topology.MetricSpace.Polish\", \"type\": \"[t : TopologicalSpace α] (s : Set α) : Prop\", \"doc\": \"A set $ s $ in a topological space $ (\\\\alpha, \\\\tau) $ is clopenable if there exists a coarser topology $ \\\\tau' \\\\leq \\\\tau $ such that $ (\\\\alpha, \\\\tau') $ is a Polish space (i.e., separable and complete\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": @UniversallyClosed = (topologically @SpecializingMap).universally ⊓ @QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": { e : R × R // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"NoetherianSpace.to_quasiSeparatedSpace\", \"module\": \"Mathlib.Topology.QuasiSeparated\", \"type\": \"[NoetherianSpace α] : QuasiSeparatedSpace α\", \"doc\": \"Every Noetherian topological space is quasi-separated. That is, in a Noetherian space, the intersection of any two quasi-compact open subsets remains quasi-compact.\"}\n  {\"name\": \"PrimeSpectrum.isClopen_iff_mul_add\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{s : Set (PrimeSpectrum R)} : IsClopen s ↔ ∃ e f : R, e * f = 0 ∧ e + f = 1 ∧ s = basicOpen e\", \"doc\": \"A subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is clopen in the Zariski topology if and only if there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Clopen partitions and quasi-separatedness are present, but no blowup separating strata and principalizing a boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*[Cc]lopen|[Cc]lopen.*blowup|[Cc]artier.*[Pp]artition",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: topology partitions and affine covers do not construct admissible blowups or a Cartier boundary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsClopen\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: topology partitions and affine covers do not construct admissible blowups or a Cartier boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen partition of a quasi compact open extends to Cartier boundary affine charts after admissible blowup",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
+   "date": "2026-10-23",
+   "verdict": "no match: topology partitions and affine covers do not construct admissible blowups or a Cartier boundary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Admissible blowup makes a finite partition into clopen pieces extend and gives an effective Cartier boundary",
+   "results": "8 hits; exists_clopen_partition_of_clopen_cover, Finpartition.extend_parts, Setoid.IsPartition.finpartition, DiscreteQuotient.finsetClopens, Finpartition.extend, PrimeSpectrum.mulZeroAddOneEquivClopens, PolishSpace.IsClopenable, isClopen_iff_frontier_eq_empty",
+   "date": "2026-10-23",
+   "verdict": "no match: topology partitions and affine covers do not construct admissible blowups or a Cartier boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up the complement of an open subscheme and separating the closures of its disjoint clopen components",
+   "results": "8 hits; AlgebraicGeometry.isCompl_opensRange_inl_inr, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen, AlgebraicGeometry.isCompl_range_inl_inr, AlgebraicGeometry.Scheme.Hom.coborderRange, PrimeSpectrum.isClopen_basicOpen_of_mul_add, PrimeSpectrum.isClopen_iff_mul_add, AlgebraicGeometry.disjoint_opensRange_sigmaι, AlgebraicGeometry.Scheme.Hom.liftCoborder",
+   "date": "2026-10-23",
+   "verdict": "no match: topology partitions and affine covers do not construct admissible blowups or a Cartier boundary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-free-blowup",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. Stacks 0811/080Y refinement: A finite clopen partition extends to Cartier affine charts after admissible blowup.",
+   "via": [
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-rank-partition-cartier-charts",
+  "worker": "stage1",
+  "summary": "Reused existing separation, boundary principalization and composition nodes; wrote the finite pairwise-separation induction, closure partition, and finite affine Cartier refinement explicitly. No new nodes or statement changes.",
+  "blueprint": "Serves lem-trf-local-term-locality proof (1)–(2) through the existing flattening ancestor chain; implements Stacks 0811 proof paragraphs 2–3 and 080Y boundary preparation. Current blueprint ancestor read; item is a created refinement, not a blueprint key node.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-qc-open-complement-ideal-exists",
+    "why": "Chooses the boundary ideal on the arbitrary qcqs base; generic blowup preparation tool. No statement in this trace-formula unit supplies this general scheme-theoretic tool."
+   },
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Principalizes the boundary and retains its regularity and density after further admissible blowups. No statement in this trace-formula unit supplies this general scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Identifies each preserved open with U during the finite tower. No statement in this trace-formula unit supplies this general scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-separate-constructible-closed",
+    "why": "Separates closures of two clopen pieces, a generic geometric tool for the Stacks 0811 rank separation. No statement in this trace-formula unit supplies this general scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-comp",
+    "why": "Makes the finite tower one admissible blowup, exactly Stacks 080Y. No statement in this trace-formula unit supplies this general scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-separate-constructible-closed",
+  "lemma-nagata-admissible-blowup-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-20e2f3fdf",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-20e2f3fdf (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes, statement and stmt_deps unchanged vs side-live, first split, no re-split note). Sources read: Stacks flat.tex 0811 lemma-flatten-module-pre proof paras 2-3 and 080Y remark-successive-blowups; divisors.tex 080P. Step 1: qc-open-complement ideal, then the main clause of det-nagata-boundary-divisor-cartier (hypotheses qcqs S, qc U, V(I)=S\\U all hold), then admissible-blowup-over-open; clopen pieces are retrocompact so they are constructible; calculus node keeps S_0 qcqs. Step 2: lemma-nagata-separate-constructible-closed applies to clopen pieces in both the stored version (constructible, closed in U) and the 20261023 version (qc complements). Finite induction over pairs, with persistence by cl(c^-1 A) ⊆ c^-1 cl A; tower composed by admissible-blowup-comp with qcqs intermediates. Step 3: further-blowup clause applied to T→S_0 (U^0-admissible), and the rank-one generator is shown to be a nonzerodivisor via the composite of two injections, giving an effective Cartier ideal. Step 4 (elementary, verified): scheme-theoretic density ⇒ topological density; finite closures give a clopen partition; T_i∩b^-1U=A_i. Edge cases U=∅, I=∅, U=S and the non-dense-U example all checked. Step 5 (elementary, verified): affine refinement of trivializing opens ∩ T_i gives J(W)=hR with h a nonzerodivisor and D(h)=W∩b^-1U, then a finite subcover. Replacing 080P by the existing Nagata closure-separation plus topology is a valid route. The 5 Nagata tool_uses are accepted as generic black boxes. proof_deps equals the union of uses; no cycle; no SGA; Mathlib searches are real and the no-match verdict is right. Duplicate search over 080P, clopen+blowup and nonzerodivisor+D(h) found no restatement. Advisory: step 2 could also list def-nagata-separate-constructible-closed. A dangling id def-weil-pbc-ideal-module-product-stalk in the deep base closure comes from the base DAG, not this delivery. Review written to review.md; no fixes."
+ }
+}

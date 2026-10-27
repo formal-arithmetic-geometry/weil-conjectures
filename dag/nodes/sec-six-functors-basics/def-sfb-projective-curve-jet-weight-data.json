@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-projective-curve-jet-weight-data",
+ "kind": "definition",
+ "title": "Projective curve jet flags and their actual Hilbert weight coefficients",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $r=n+2\\ge2$, and let $i:X\\to\\mathbf P^{r-1}_k$ be a scheme morphism [def-pc-scheme, def-nagata-projective-space-base-change]. Use $D=X_{\\mathrm{red}}$ and its canonical immersion [def-weil-pbc-scheme-reduction], and use the genuine component normalizations, branch germs and tangent-line equations of [def-sfb-projective-curve-branch-data]. The linear forms, weighted flags, monomial bases, section modules and minimum weights are those of [def-sfb-weighted-monomial-basis-weight]. Define the following predicates and concrete section map. A family $\\rho_m$ is polynomial restriction when its value on every standard chart is the dehomogenized polynomial times the standard generator of $i^*\\mathcal O(m)$ [def-pc-projective-space-twist, def-pc-module-pullback]. A rational number $a$ is its leading weight coefficient for $(b,w)$ when monomial bases exist eventually and $|w_{\\rho,b,w}(m)-am^2|\\le Am$ eventually for some $A\\in\\mathbf N$. The coefficient vector of a linear form is its degree-one monomial coefficients. A form vanishes at a point when its germ divided by every nonvanishing coordinate lies in the maximal ideal. It has branch order at least $h$ when the corresponding branch germ belongs to $\\mathfrak m_q^h$; this includes zero germs. Define the linear-section map by pulling back the standard coordinate sections of $\\mathcal O(1)$ by the canonical tensor-pullback unit and taking their coefficient linear combination. An embedded component $j:Y\\to\\mathbf P^{r-1}_k$ is rational normal in its own span when $Y\\cong\\mathbf P^1_k$ over $k$ and this map is surjective onto $H^0(Y,j^*\\mathcal O(1))$; equivalently its embedding in its span is the complete degree-$e$ embedding, where $e$ is its hyperplane degree [def-pc-degree-line-bundle]. The point flag has weights at most one and zero-weight subspace exactly the forms vanishing at the point. The ramified branch flag has weights at most four, subspaces at thresholds $0,1,2$ exactly branch orders at least $4,3,2$, and the threshold-three subspace equals the threshold-two subspace. The tangent flag has weights at most two, zero-weight subspace the tangent-line equations, and threshold-one subspace the point equations. Empty graded pieces are allowed; all weights are natural numbers.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-scheme-reduction",
+  "def-sfb-projective-curve-branch-data",
+  "def-sfb-weighted-monomial-basis-weight",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-pc-degree-line-bundle"
+ ],
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.2 Proposition 1 and Section 3.2 Theorem 8(3)--(6), printed pp.6--7 and 14--15; read https://arxiv.org/html/0810.2340, especially the displayed cusp filtration and tangent-line discussion."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "embedded projective curve branch jet flags orders four three two and leading minimum monomial basis coefficient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.degreeLT.basis\", \"module\": \"Mathlib.RingTheory.Polynomial.DegreeLT\", \"type\": \"(n : ℕ) : Basis (Fin n) R R[X]_n\", \"doc\": \"The basis for the submodule of $ R[X] $ consisting of polynomials with degree strictly less than $ n $, formed by the monomials $ 1, X, X^2, \\\\ldots, X^{n-1} $. This basis corresponds to the standard i\"}\n  {\"name\": \"MonomialOrder.leadingCoeff\", \"module\": \"Mathlib.RingTheory.MvPolynomial.MonomialOrder\", \"type\": \"(f : MvPolynomial σ R) : R\", \"doc\": \"The function maps a multivariate polynomial $ f $ to the coefficient of its leading monomial, where the leading monomial is defined as the supremum element in the support of $ f $ under the given mono\"}\n  {\"name\": \"MvPowerSeries.exists_coeff_ne_zero_and_order\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(h : f.order.toNat = f.order) : ∃ d : σ →₀ ℕ, coeff d f ≠ 0 ∧ degree d = f.order\", \"doc\": \"For any non-zero multivariate power series $ f $, there exists a monomial index $ d $ such that the coefficient of $ d $ in $ f $ is non-zero and the total degree of $ d $ equals the order of $ f $. I\"}\n  {\"name\": \"MvPowerSeries.le_order_smul\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{a : R} : f.order ≤ (a • f).order\", \"doc\": \"The order of a multivariate power series $ f $ is defined as the minimal total degree of a monomial in $ f $ with a non-zero coefficient. If $ f $ is the zero series, its order is $ \\\\top $ (infinity).\"}\n  {\"name\": \"MvPowerSeries.order\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(f : MvPowerSeries σ R) : ℕ∞\", \"doc\": \"The order of a multivariate power series $ f $ is the minimal total degree of a monomial with non-zero coefficient in $ f $. If $ f $ is the zero series, the order is $ \\\\top $ (infinity).\"}\n  {\"name\": \"MonomialOrder.leadingTerm\", \"module\": \"Mathlib.RingTheory.MvPolynomial.MonomialOrder\", \"type\": \"(f : MvPolynomial σ R) : MvPolynomial σ R\", \"doc\": \"The function maps a multivariate polynomial $ f $ to its leading term, defined as the product of its leading monomial (the supremum element in the support of $ f $ under the given monomial order) and \"}\n  {\"name\": \"MvPowerSeries.coeff_of_lt_order\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{d : σ →₀ ℕ} (h : degree d < f.order) : coeff d f = 0\", \"doc\": \"The order of a multivariate power series $ f $ is defined as the minimal total degree of a monomial with non-zero coefficient in $ f $, where the total degree of a monomial is the sum of its exponents\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \": Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match for this family of geometric jet flags or the rational-normal complete-system predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rational normal curve complete linear system embedding projective line and jet flags",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"WeierstrassCurve.Projective.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve.Projective R → WeierstrassCurve.Affine R\", \"doc\": \"The function maps a projective Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ to its affine counterpart $ Y^2 = X^3 + aX + b $ by dehomogenizing with respect to the $ Z $-coordinate.\"}\n  {\"name\": \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {K : Type u_3} [inst : Field K],\\n  Configuration.Nondegenerate (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"The projective plane over a field $ K $, constructed as the set of lines in $ K^3 $, forms a non-degenerate configuration of points and lines. This means the configuration avoids trivial arrangements \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffineLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Projective F} → W.Point → W.toAffine.Point\", \"doc\": \"The function maps a projective Weierstrass curve point $[X:Y:Z]$ over a field $F$ to its affine counterpart $(X/Z, Y/Z)$ on the dehomogenized curve by first quotienting by projective equivalence and t\"}\n  {\"name\": \"WeierstrassCurve.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Affine R\", \"doc\": \"The affine representation of a Weierstrass curve over a base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.fromAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] → {W' : WeierstrassCurve.Projective R} → [Nontrivial R] → W'.toAffine.Point → W'.Point\", \"doc\": \"The function maps an affine point on a Weierstrass curve to its corresponding projective point. The zero affine point is sent to the projective point $[0:1:0]$, and a nonsingular affine point $(x, y)$\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match for this family of geometric jet flags or the rational-normal complete-system predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalNormal|jetFlag|IsRamifiedFlag|IsPointFlag|HasCoefficient",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match for this family of geometric jet flags or the rational-normal complete-system predicate."
+  },
+  {
+   "tool": "rg",
+   "query": "rg -n \"jetFlag|IsOrdinaryNode|rationalNormal|RationalNormal|branchMultiplicity|JetCodimension|commonTangent\" lean/Sheaf lean/WeilConjectures; rg -l \"rational normal\" dag/nodes; tools/blueprint_refs.py search \"rational normal\"",
+   "results": "BranchMultiplicityTangentCriterion supplies Branch, HasMultiplicity, tangentImage, linearGerm, lineEquations and HasSplitNodeCompletion; BoundedHilbertWeightPolynomials and WeightedMonomialBasisWeight supply actual minimum weights. GiesekerPotentialStability has complete_nondegenerate but no separate rational-normal component predicate. NodalOpenLocus has an ordinary-node predicate; the branch completion predicate additionally preserves the structural k-map. No duplicate jet flag or rational-normal definition. Blueprint search: 0 blueprint nodes match rational normal. Integral-curve-span-degree-rigidity, component-projection-weight-bounds and subcurve-span-weight-bound mention rational normal curves but supply no definition declaration.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing branch and weight definitions; define only the specialized geometric jet predicates and complete-system predicate."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singular-point-jet-weight-bounds",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Morrison Section 3.2 Theorem 8(4)--(6): the point, ramified-branch and common-tangent flags and their leading coefficients, used by the item. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-singular-point-jet-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveJetWeightData",
+  "declaration": "AlgebraicGeometry.ProjectiveCurveJets.IsRamifiedFlag",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveJetWeightData.lean",
+  "statement": "def IsRamifiedFlag {k : Type u} [Field k] {n : ℕ} {D : Scheme.{u}} (i : D ⟶ Ambient k (n + 2)) (p : D) (q : Branch D p) (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveCurveJets.Reduction",
+   "AlgebraicGeometry.ProjectiveCurveJets.reductionMap",
+   "AlgebraicGeometry.ProjectiveCurveJets.IsRestriction",
+   "AlgebraicGeometry.ProjectiveCurveJets.HasCoefficient",
+   "AlgebraicGeometry.ProjectiveCurveJets.coefficients",
+   "AlgebraicGeometry.ProjectiveCurveJets.VanishesAt",
+   "AlgebraicGeometry.ProjectiveCurveJets.HasBranchOrder",
+   "AlgebraicGeometry.ProjectiveCurveJets.linearSection",
+   "AlgebraicGeometry.ProjectiveCurveJets.IsRationalNormal",
+   "AlgebraicGeometry.ProjectiveCurveJets.IsPointFlag",
+   "AlgebraicGeometry.ProjectiveCurveJets.IsRamifiedFlag",
+   "AlgebraicGeometry.ProjectiveCurveJets.IsTangentFlag"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af5ebdd01",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af5ebdd01",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 21038f6b457d (H2+H12). Lean files byte-identical to 21038f. New node def-sfb-projective-curve-branch-data: existing:true on Sheaf.AlgebraicGeometry.BranchMultiplicityTangentCriterion; its 12 declarations exist as plain abbrev/def (lines 55-166), none chooses from branch_multiplicity_tangent_criterion; statement 'def Branch (D : Scheme.{u}) (p : D) : Type u' verbatim; no other owner; fields complete. It replaces the theorem in the stmt_deps of the item and of def-sfb-projective-curve-jet-weight-data; the theorem stays in proof_deps. Against base, item changes only lean and stmt_deps (+ the 2 new def nodes and def-weil-pbc-scheme-reduction). Mathematics re-read: hypotheses (alg. closed, closed immersion into P^{n+1}, connected, dim 1, generically reduced, hspan nondegenerate, hlow rational normal = P^1 + complete linear system); (1) 0/1 flag, sum 1, a>=t/2; (2) deg>=4, 0/1/2/4 jet flag, sum<=7, a>=8, not met at generic points; (3) 0/1/2 tangent flag, sum<=3, 7/2, and 4 off lines; nilradical iff. Edge cases n=0, empty X, generic points, same-component branches, any characteristic, universes. Single sorry, docstrings, verbatim statements, report sections. zeroSections is a canonical iso inherited via the landed def-sfb-weighted-monomial-basis-weight, not a new H2. Not recompiled (no file changed)."
+ }
+}

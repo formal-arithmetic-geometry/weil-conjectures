@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-qcoh-bounded-submodule-union",
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-cardinal-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open cover $X=\\bigcup_{i\\in I}U_i$ and affine covers $U_i\\cap U_j=\\bigcup_{k\\in K_{ij}}V_{ijk}$ using [lem-weil-pbc-affine-opens-basis]. Choose these symmetrically, so $K_{ij}=K_{ji}$ and $V_{ijk}=V_{jik}$. Work in the ambient universe $\\mathcal V$ of [def-weil-size-convention]; these are small sets there. Apply [lem-coef-small-family-regular-bound] to the family consisting of $I$ and all $K_{ij}$, and fix an infinite cardinal $\\kappa$ larger than the cardinality of their disjoint union. Thus $|I|,|K_{ij}|\\leq\\kappa$, and $\\kappa$ depends only on $X$ and the chosen covers, and is a cardinal in $\\mathcal V$. Nothing asserts that an intersection is affine or that any cover is finite. The empty scheme is allowed: all covers can be empty and the bound is still infinite.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-coef-small-family-regular-bound",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, first paragraph (choice of covers and cardinal); affine basis is Schemes Tag 01IT, lemma-basis-affine-opens"
+   }
+  },
+  {
+   "text": "Fix a quasi-coherent $\\mathcal F$. Put $A_i=\\mathcal O_X(U_i)$, $B_{ijk}=\\mathcal O_X(V_{ijk})$, $M_i=\\mathcal F(U_i)$, and $M_{ijk}=\\mathcal F(V_{ijk})$. Restriction is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2). The canonical, natural affine restriction isomorphisms are\n$$M_i\\otimes_{A_i}B_{ijk}\\simeq M_{ijk}\\simeq M_j\\otimes_{A_j}B_{ijk},\\qquad m\\otimes b\\mapsto b\\,m|_{V_{ijk}}.$$\nIndeed apply [lem-weil-pbc-module-pullback-affine-sections] to the identity morphism and the nested affine opens; identify $\\mathrm{id}^*\\mathcal F$ with $\\mathcal F$ using [def-pc-module-pullback]. Since tensors are finite sums of pure tensors [def-weil-pbc-module-tensor-product], for each $i,j,k,m\\in M_i$ choose a finite subset $T_{ijk}(m)\\subset M_j$ and coefficients $b_t\\in B_{ijk}$ with $m|_{V_{ijk}}=\\sum_{t\\in T_{ijk}(m)}b_t\\,t|_{V_{ijk}}$. Choice is over a set, and no bound on the sizes of the rings or modules is required.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, second paragraph and its finite-support choices; Schemes Tag 01I9, lemma-widetilde-pullback"
+   }
+  },
+  {
+   "text": "Start with any family $S_i^{(0)}\\subset M_i$ with $|S_i^{(0)}|\\leq\\kappa$. Recursively set\n$$S_j^{(n+1)}=S_j^{(n)}\\cup\\bigcup_{i\\in I,\\ k\\in K_{ij},\\ m\\in S_i^{(n)}}T_{ijk}(m).$$\nAssuming the bounds at stage $n$, the triples $(i,k,m)$ for fixed $j$ inject, after choices of injections into a set of size $\\kappa$, into $\\kappa^3$. Each chosen $T_{ijk}(m)$ is finite, so its elements can be indexed by natural numbers. Thus the new union has size at most $\\kappa^3\\cdot\\aleph_0\\leq\\kappa$, using $\\kappa\\cdot\\kappa=\\kappa$ from [lem-sfb-infinite-cardinal-square]. Including $S_j^{(n)}$ does not change this bound. Induction proves the bound at every finite stage and the recursion makes the families increasing.",
+   "uses": [
+    "lem-sfb-infinite-cardinal-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, third paragraph, the operation on families and its cardinal estimate"
+   }
+  },
+  {
+   "text": "Set $S_i^\\infty=\\bigcup_{n\\in\\mathbf N}S_i^{(n)}$. An enumeration of the stages and an injection of each stage into $\\kappa$ bound this union by $\\aleph_0\\cdot\\kappa\\leq\\kappa$, again by [lem-sfb-infinite-cardinal-square]. If $m\\in S_i^\\infty$, it belongs to a stage $n$, so $T_{ijk}(m)\\subset S_j^{(n+1)}\\subset S_j^\\infty$. In particular every restriction of a generator in $S_i^\\infty$ lies in the $B_{ijk}$-span of the restrictions of $S_j^\\infty$. Symmetry of the covers and applying the same assertion with $i,j$ reversed give equality of these two spans inside $M_{ijk}$. This is the explicit countable closure construction; it makes no assertion that arbitrary submodules of bounded-generated modules are bounded-generated.",
+   "uses": [
+    "lem-sfb-infinite-cardinal-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, third paragraph, countable iteration and stability of the limiting family"
+   }
+  },
+  {
+   "text": "Let $N_i\\subset M_i$ be the $A_i$-span of $S_i^\\infty$. On the affine scheme $U_i$, [lem-weil-pbc-affine-tilde-gamma-adjunction](1)--(3) gives $\\mathcal F|_{U_i}\\simeq\\widetilde{M_i}$ and a map $\\widetilde{N_i}\\to\\mathcal F|_{U_i}$ whose map on whole-affine sections is $N_i\\hookrightarrow M_i$. Define $H_i$ to be its image subsheaf. The associated sheaf $\\widetilde{N_i}$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections]. By [lem-weil-pbc-quasi-coherent-module-cokernel-image](2),(3), $H_i$ is quasi-coherent and $H_i(U_i)=N_i$ as an actual submodule of $M_i$. The counit in the affine adjunction now identifies $H_i$ with $\\widetilde{N_i}$ and its section generators with $S_i^\\infty$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, third paragraph, construction of the affine submodules as actual quasi-coherent subsheaves; Schemes Tags 01HV, 01IA, 01IB, 01IC"
+   }
+  },
+  {
+   "text": "The affine restriction comparison from step 2, applied also to $H_i$, identifies $H_i(V_{ijk})\\subset M_{ijk}$ with the $B_{ijk}$-span of the restrictions of $N_i$, hence of $S_i^\\infty$. Its naturality for $H_i\\to\\mathcal F|_{U_i}$ ensures that this is the actual inclusion into $M_{ijk}$. By step 4 it equals $H_j(V_{ijk})$. The restrictions $H_i|_{V_{ijk}}$, $H_j|_{V_{ijk}}$ and $\\mathcal F|_{V_{ijk}}$ are quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2). The affine counit of [lem-weil-pbc-affine-tilde-gamma-adjunction] is natural: quasi-coherent subsheaves of $\\mathcal F|_{V_{ijk}}$ with this same submodule of whole-affine sections are the same subsheaf, since both inclusions are the associated map of that submodule inclusion. Therefore $H_i|_{V_{ijk}}=H_j|_{V_{ijk}}$. These $V_{ijk}$ cover $U_i\\cap U_j$, so the sheaf axiom, applied to local membership of sections in $H_i$ and $H_j$, gives $H_i|_{U_i\\cap U_j}=H_j|_{U_i\\cap U_j}$. Only images inside $M_{ijk}$ are compared; no unproved injectivity of a tensor map is used.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, third paragraph, equality on overlaps before gluing"
+   }
+  },
+  {
+   "text": "Glue the $H_i$ and their inclusions into $\\mathcal F$, using parts (2) and (1) of [lem-weil-pbc-glue-sheaves-of-modules]. The overlap identifications come from equality as subsheaves, hence satisfy the cocycle condition. The resulting map into $\\mathcal F$ is injective on sections, because it is so on the cover $U_i$. Its actual range is the sheaf $\\mathcal G$ with\n$$\\mathcal G(W)=\\{s\\in\\mathcal F(W):s|_{W\\cap U_i}\\in H_i(W\\cap U_i)\\text{ for all }i\\}.$$\nThis formula is a sheaf: a matching family glues in $\\mathcal F$, and membership glues in each $H_i$; uniqueness is inherited from $\\mathcal F$. Equality on overlaps shows $\\mathcal G|_{U_i}=H_i$. Thus $\\mathcal G$ is quasi-coherent by the affine-local definition [pqf-def-coherent], and it is $\\kappa$-generated on this cover by the images of the sets $S_i^\\infty$. In particular it contains every original seed $S_i^{(0)}$ in its sections over $U_i$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, third paragraph, gluing and bounded generation; Sheaves Tags 04TN, 00AL, 00AM"
+   }
+  },
+  {
+   "text": "For a fixed $\\mathcal F$, every actual subsheaf is determined by a family of subsets of $\\mathcal F(W)$, one for each open $W\\subset X$, with the inherited module operations and restrictions [def-weil-sheaf-of-modules-category]. Thus actual subsheaves inject into the set $\\prod_{W\\subset X\\text{ open}}\\mathcal P(\\mathcal F(W))$, which is small in $\\mathcal V$ by [def-weil-size-convention]. The families satisfying the subsheaf, quasi-coherence and $\\kappa$-generation conditions form a subset. Consequently $P_\\kappa(\\mathcal F)$ is small. The zero subsheaf is quasi-coherent on every affine open and generated by the empty sets, so it belongs to this poset, including when $X$ or $\\mathcal F$ is zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, last paragraph, the set of bounded-generated quasi-coherent subsheaves"
+   }
+  },
+  {
+   "text": "For $\\mathcal N,\\mathcal N'\\in P_\\kappa(\\mathcal F)$, let $\\mathcal L$ be the image of $\\mathcal N\\oplus\\mathcal N'\\to\\mathcal F$, $(s,t)\\mapsto s+t$. The source is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-direct-sum], and its image is a quasi-coherent subsheaf by [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Refine generating covers for $\\mathcal N$ and $\\mathcal N'$ to their pairwise intersections. On each such intersection the restrictions of their generating sections, taken together, generate $\\mathcal L$: a section of the image locally is a sum of images from the two summands, and their germs are spanned by those sections. The union of two sets of size at most $\\kappa$ has size at most $\\kappa$, by [lem-sfb-infinite-cardinal-square]. Hence $\\mathcal L$ belongs to the poset and contains both subsheaves. Together with step 8 this proves nonempty directedness.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-sfb-infinite-cardinal-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, last paragraph, sums as upper bounds; Modules Tag 01BF and Schemes Tag 01LB"
+   }
+  },
+  {
+   "text": "For each $i$ and each $s\\in M_i$, use the construction of steps 3--7 with $S_i^{(0)}=\\{s\\}$ and all other seeds empty. The result is a member $\\mathcal G\\in P_\\kappa(\\mathcal F)$ with $s\\in\\mathcal G(U_i)$. Form $C=\\operatorname{colim}_{\\mathcal N\\in P_\\kappa(\\mathcal F)}\\mathcal N$ in all module sheaves: it exists by [lem-pc-scheme-modules-grothendieck-abelian] and step 8. The inclusions give $c:C\\to\\mathcal F$ by [def-weil-pbc-category-colimit]. By [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections], $C$ is quasi-coherent and $C(U_i)$ is the directed module colimit of the $\\mathcal N(U_i)$. Its map to $M_i$ is surjective by the seed construction. It is injective: every element is represented by a section of some $\\mathcal N(U_i)$, and a representative mapping to zero in $M_i$ is already zero, since $\\mathcal N$ is an actual subsheaf of $\\mathcal F$. Therefore $c_{U_i}$ is an isomorphism for every $i$.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, last paragraph, exhaustion of affine sections and colimit; Modules Tag 01AH, lemma-limits-colimits, and Schemes Tag 01ID"
+   }
+  },
+  {
+   "text": "Since $C$ and $\\mathcal F$ are quasi-coherent, naturality and invertibility of the affine counit [lem-weil-pbc-affine-tilde-gamma-adjunction](1)--(3) identify $c|_{U_i}$ with the associated map of the isomorphism $c_{U_i}$. Thus each $c|_{U_i}$ has an inverse. On an overlap these inverses agree: both are inverses of the same restricted map, and inverses are unique. Glue them by [lem-weil-pbc-glue-sheaves-of-modules](1); the two composites with $c$ are identities because they are identities on every $U_i$. Hence $c$ is an isomorphism. Transporting the colimit cocone along $c$ proves that the given inclusions into $\\mathcal F$ are the asserted colimit cocone [def-weil-pbc-category-colimit]. The cardinal was fixed in step 1 independently of $\\mathcal F$, so this proves the full assertion for every scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077N, lemma-colimit-kappa, last sentence, the canonical colimit isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-infinite-cardinal-square",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 077N, lemma-colimit-kappa, entire proof; Tag 077L, definition-kappa-generated. Affine, gluing and colimit inputs are separately cited in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent sheaf on an arbitrary scheme is a directed union of locally kappa generated quasi coherent submodules for one cardinal depending only on the scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the objects indexing the local gen\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the local generators data at each index $i$ coincides with the gener\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local generators and finite presentations do not give a uniform cardinal or a directed exhaustion by quasi-coherent subobjects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every scheme there is an infinite cardinal kappa such that each quasi coherent module is the filtered colimit of its kappa generated quasi coherent subsheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits.hasColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} (κ : Cardinal.{w}) {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.HasCardinalFilteredColimits C κ] (J : Type w) [inst_2 : CategoryTheory.SmallCategory J]\\n  [CategoryTheory.IsCardinalFiltered J κ], CategoryTheory.Limits.HasColimitsOfSh\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal. If a category $\\\\mathcal{C}$ has all $\\\\kappa$-filtered colimits and $\\\\mathcal{J}$ is a $\\\\kappa$-filtered category, then $\\\\mathcal{C}$ admits colimits of diagrams ind\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.exists_colimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Presentable.CardinalFilteredPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C} {κ : Cardinal.{w}}\\n  [inst_1 : Fact κ.IsRegular],\\n  P.IsCardinalFilteredGenerator κ →\\n    ∀ (X : C), ∃ J x, ∃ (_ : CategoryTheory.IsCardinalFiltered J κ), P.colimitsOfShape J X\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$, if $P$ is a $\\\\kappa$-filtered generator (where $\\\\kappa$ is a regular cardinal), then there exists a $\\\\kappa$-filtered category $J$, an object $x$ in $\\\\m\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular],\\n  autoParam\\n      (∀ (J : Type w) [inst_2 : CategoryTheory.SmallCategory J] [CategoryTheory.IsCardinalFiltered J κ],\\n        CategoryTheory.Limits.HasColimitsOfShape J C)\\n      CategoryTheory.\", \"doc\": \"If for every small κ-filtered category $ J $, the category $ \\\\mathcal{C} $ admits all colimits of shape $ J $, then $ \\\\mathcal{C} $ has κ-filtered colimits, where $ κ $ is a regular cardinal.\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [toHasCardinalFilteredGenerator : CategoryTheory.HasCardinalFilteredGenerator C κ]\\n  [toHasColimitsOfSize : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v, u} C],\\n  CategoryTheory.IsCardinalLo\", \"doc\": \"If a category $\\\\mathcal{C}$ has a $\\\\kappa$-filtered generator and all colimits of $\\\\kappa$-small diagrams, then $\\\\mathcal{C}$ is locally presentable with respect to the regular cardinal $\\\\kappa$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \": HasColimit F\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}\n  {\"name\": \"CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.CardinalFilteredPresentation\", \"type\": \"(C : Type u) [Category.{v} C] (κ : Cardinal.{w}) [Fact κ.IsRegular] [HasCardinalFilteredGenerator C κ] :\\n  ObjectProperty.EssentiallySmall.{w} (isCardinalPresentable C κ)\", \"doc\": \"In a category $\\\\mathcal{C}$ with a $\\\\kappa$-filtered generator, where $\\\\kappa$ is a regular cardinal, the property of being $\\\\kappa$-presentable is essentially small. This means that all $\\\\kappa$-pres\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local generators and finite presentations do not give a uniform cardinal or a directed exhaustion by quasi-coherent subobjects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsCardinalPresentable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: local generators and finite presentations do not give a uniform cardinal or a directed exhaustion by quasi-coherent subobjects."
+  },
+  {
+   "tool": "grep",
+   "query": "(quasicoherent|quasi.coherent).*(cardinal|generat|union)|kappa.generated",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"117\", \"text\": \"def quasiCoherentData {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData) [q.IsLocallyFreeData] :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"129\", \"text\": \"lemma quasiCoherentData_localGeneratorsData {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"131\", \"text\": \"    q.quasiCoherentData.localGeneratorsData = q := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"225\", \"text\": \"/-- If `M` is quasicoherent, it is locally generated by sections. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local generators and finite presentations do not give a uniform cardinal or a directed exhaustion by quasi-coherent subobjects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber cardinal bound small quasi coherent subsheaves exhaust every quasi coherent sheaf without quasi compactness or separation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local generators and finite presentations do not give a uniform cardinal or a directed exhaustion by quasi-coherent subobjects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent sheaf on any scheme is a directed union of quasi coherent submodules generated by at most one fixed infinite cardinal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the objects indexing the local gen\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide local quasicoherent presentation data or qcqs section lemmas, not a uniform bound and quasi-coherent submodule exhaustion on arbitrary schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber theorem quasi coherent sheaves on an arbitrary scheme are filtered unions of locally kappa generated subsheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_X\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the objects indexing the local gen\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide local quasicoherent presentation data or qcqs section lemmas, not a uniform bound and quasi-coherent submodule exhaustion on arbitrary schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Cardinal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide local quasicoherent presentation data or qcqs section lemmas, not a uniform bound and quasi-coherent submodule exhaustion on arbitrary schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "(quasicoherent|quasi.coherent).*(cardinal|generat|union)|kappa.generated",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"117\", \"text\": \"def quasiCoherentData {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData) [q.IsLocallyFreeData] :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"129\", \"text\": \"lemma quasiCoherentData_localGeneratorsData {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"131\", \"text\": \"    q.quasiCoherentData.localGeneratorsData = q := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"225\", \"text\": \"/-- If `M` is quasicoherent, it is locally generated by sections. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide local quasicoherent presentation data or qcqs section lemmas, not a uniform bound and quasi-coherent submodule exhaustion on arbitrary schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cardinal bound for quasi coherent subsheaves containing any given affine local section without separation hypotheses",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide local quasicoherent presentation data or qcqs section lemmas, not a uniform bound and quasi-coherent submodule exhaustion on arbitrary schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcoh-grothendieck-generators",
+  "date": "2026-10-24",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Uniformly bounded-generated quasi-coherent subsheaves exhaust every quasi-coherent sheaf",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $X$ be any scheme [def-pc-scheme]. For an infinite cardinal $\\kappa$, call an $\\mathcal O_X$-module $\\mathcal N$ $\\kappa$-generated if an open cover $X=\\bigcup_a U_a$ admits subsets $S_a\\subseteq\\mathcal N(U_a)$, each of cardinality at most $\\kappa$, whose germs span every stalk of $\\mathcal N|_{U_a}$ as an $\\mathcal O_{X,x}$-module [def-weil-sheaf-of-modules-category]. There exists an infinite cardinal $\\kappa$, depending only on $X$, such that for every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], the set $P_\\kappa(\\mathcal F)$ of all $\\kappa$-generated quasi-coherent subsheaves $\\mathcal N\\subseteq\\mathcal F$, ordered by inclusion, is small, nonempty and directed, and the inclusions exhibit $\\mathcal F$ as its colimit in $\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. No quasi-compactness, quasi-separatedness or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 077N, lemma-colimit-kappa; local meaning of kappa-generated is Tag 077L, definition-kappa-generated."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Ordinary Brown input for arbitrary schemes, through lem-sfb-levelwise-quasicoherent-brown: the QCoh generator prerequisite. Stacks Tag 077P, proposition-coherator, proof of (1), construction of a generator from bounded-generated subsheaves. Input: Tag 077N, lemma-colimit-kappa.",
+   "via": [
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-qcoh-bounded-submodule-union",
+  "worker": "stage1",
+  "group": "Q34",
+  "summary": "Retained the eleven-step proof of Stacks 077N and the unchanged statement. Repaired the returned landing by delivering lem-sfb-infinite-cardinal-square as an exact Mathlib leaf with empty proof and the ordinary size-convention statement dependency; steps 3, 4 and 9 now cite it instead of the smaller-universe presentable-infinity-category leaf. Made the ambient universe explicit in step 1. Compared the returned head against current server main: none of the cited node files changed.",
+  "blueprint": "Auxiliary ordinary Brown/QCoh-generator input recorded in the existing blueprint.from.place (Stacks 077P proof (1), through 077N). The ancestor tool returns None, which is retained. Read the current latest sk-thm-sf-ctf-stability statement and proof: they contain no separate Gabber bounded-submodule node; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic Sections of the pullback of a quasi-coherent module over an affine open input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic Cokernel and image of a morphism of quasi-coherent modules: quasi-coherent, computed on affine opens input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic Glueing morphisms and sheaves of modules along an open covering input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "why": "Generic The direct sum of two quasi-coherent modules is quasi-coherent input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   },
+   {
+    "node": "lem-pc-scheme-modules-grothendieck-abelian",
+    "why": "Generic Sheaves of modules on a scheme form a Grothendieck abelian category input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+    "why": "Generic A directed colimit of quasi-coherent modules is quasi-coherent, with sections over an affine open the colimit of the sections input used with exactly its stated hypotheses; the item's unit supplies no replacement for this Zariski quasi-coherent module tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-0fa4168c7",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-0fa4168c7 (reviewer sub-agent of L); spot-checked: Read Stacks properties.tex l.3505-3631 in full: 077L's κ-generated definition matches the item; 077N is the item plus explicit 'small, nonempty' (both proved in steps 8-9); nothing weakened; any scheme, no qc/qs/Noetherian hypothesis. All 11 steps checked against the statements of the cited nodes: symmetric affine overlap covers; κ from lem-coef-small-family-regular-bound in V; finite tensor supports via module-pullback-affine-sections with f=id; recursion bound κ³·ℵ₀ ≤ κ; countable closure giving equal B-spans in M_ijk; H_i as image subsheaves via tilde adjunction (1)-(3) and cokernel-image (2),(3); overlap equality via counit naturality plus the sheaf axiom; explicit range-sheaf gluing; powerset smallness; directedness via image of direct sum; exhaustion with seed {s}; colimit in all Mod(O_X) via the unsplit Grothendieck-abelian node, not circular with 077P; colimit-affine-sections; local inverses glued. New node lem-sfb-infinite-cardinal-square = exact Cardinal.mul_eq_self (Arithmetic.lean:45, read), status mathlib, stmt_dep only def-weil-size-convention. It deliberately overlaps lem-coef-infinite-cardinal-square-power, which depends on presentable-∞ machinery; that replacement was requested by review 1735. No other duplicate found (rg for mul_eq_self, κ·κ, 077N, kappa-generated). Small cases X=∅, F=0, single affine, infinite disjoint union and non-qs all go through. The six tool_uses are accepted as generic Zariski qcoh tools. No SGA. One fault: the re-delivery lost review 1735's step-6 FIX (quasi-coherence of H_i|V, H_j|V, F|V before using counit (3)). Re-applied in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-qcoh-bounded-submodule-union.json: step 6 regains the sentence citing lem-weil-pbc-module-restriction-open-immersion-colimits(2) and its uses entry; proof_deps already equals the union of step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentBoundedSubmoduleUnion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cardinal_boundedQuasiCoherentSubmodule_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentBoundedSubmoduleUnion.lean",
+  "statement": "theorem exists_cardinal_boundedQuasiCoherentSubmodule_colimit (X : Scheme.{u}) : ∃ κ : Cardinal.{u}, Cardinal.aleph0 ≤ κ ∧ ∀ F : X.Modules, SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F → Small.{u} (BoundedQuasiCoherentSubmodules F κ) ∧ Nonempty (BoundedQuasiCoherentSubmodules F κ) ∧ Directed (· ≤ ·) (fun N : BoundedQuasiCoherentSubmodules F κ ↦ N) ∧ Nonempty (IsColimit (boundedQuasiCoherentSubmoduleCocone F κ))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.BoundedQuasiCoherentSubmodules",
+   "AlgebraicGeometry.Scheme.Modules.boundedQuasiCoherentSubmoduleDiagram",
+   "AlgebraicGeometry.Scheme.Modules.boundedQuasiCoherentSubmoduleCocone",
+   "AlgebraicGeometry.Scheme.Modules.exists_cardinal_boundedQuasiCoherentSubmodule_colimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4bf19cf35",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Item statement matches Stacks 077N and the node clause by clause: ∃ κ : Cardinal.{u} with aleph0 ≤ κ chosen before F; any scheme X with no qc/qs/Noetherian assumption; quasi-coherence = Mathlib SheafOfModules.IsQuasicoherent (STATE convention); poset = all Subobject F that are IsQuasicoherent ∧ IsCardinalGenerated; Small.{u}, Nonempty, Directed; Nonempty IsColimit of the canonical inclusion cocone (Subobject.underlying/arrow). New def node IsCardinalGenerated = Stacks 077L (cover by a Set of opens, |S| ≤ κ, germs span every stalk via Mathlib's stalk module instance, same carrier as def-weil-pbc-module-stalk stalkObj). Delta vs live: lean record plus new stmt_dep only. lean.statement copied exactly; imports = proof_dep modules; sorry only; docstrings carry source place, blueprint id and the 11-step proof; no H4 duplicate found. Edge cases (empty X, F = 0, infinite or non-qs covers, finite κ) are fine. Compile not reproduced. Advisory: Second reading section records no reading (dispatcher policy; worker report matches every clause); definition is scheme-only, while lem-sfb-bounded-generated-module-isoclasses (ringed spaces) should generalize it rather than duplicate it."
+ }
+}

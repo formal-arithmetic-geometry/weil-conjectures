@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-sheaf-dg-homotopy-system",
+ "kind": "statement",
+ "title": "Homotopy triangulation and quasi-isomorphism system for sheaf dg modules",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the universes of [def-weil-size-convention], with $\\mathcal O$ commutative, and use sheaves of modules [def-weil-sheaf-of-modules-category] and cohomology of cochain complexes [def-weil-abstract-derived-category]. Let $\\mathcal A$ be a sheaf of associative unital graded $\\mathcal O$-algebras with an $\\mathcal O$-linear differential of degree one, $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$. A right dg $\\mathcal A$-module is a graded sheaf with $d^2=0$ and $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$; left modules have $d(am)=d(a)m+(-1)^{|a|}a\\,d(m)$. Tensor products mean sheafifications of the balanced graded tensor products, with direct-sum total grading and $d(p\\otimes n)=dp\\otimes n+(-1)^{|p|}p\\otimes dn$. A quasi-isomorphism induces isomorphisms on all underlying cohomology sheaves. Write $K(\\mathcal A)$ for right dg modules with chain maps modulo homotopies $f-g=d h+h d$, where $h$ is right graded linear of degree $-1$. Then $K(\\mathcal A)$ is triangulated [def-weil-triangulated-category], with shifts $M[k]^i=M^{i+k}$, differential $(-1)^kd_M$, unchanged right graded action, and distinguished triangles those isomorphic to $M\\xrightarrow f N\\xrightarrow i C(f)\\xrightarrow{-p}M[1]$. Here $C(f)^i=N^i\\oplus M^{i+1}$, $d(n,m)=(dn+f(m),-dm)$, and $i,p$ are inclusion and projection. The class $W$ of quasi-isomorphisms in $K(\\mathcal A)$ is a saturated multiplicative system compatible with this triangulation [def-pur-saturated-triangulated-localization]; it has both calculi of fractions and two-out-of-three. The cohomology sheaves are functors on $K(\\mathcal A)$, and $f\\in W$ if and only if $C(f)$ is acyclic. No boundedness or graded-commutativity assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FS7 (proposition-homotopy-category-triangulated), 0FT2 (lemma-cohomology-homological), 0FT4 (lemma-qis); cone convention of Tag 0FS5 (definition-cone)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "Form the dg category of the specified right modules. Its degree-$r$ Hom group consists of families of sheaf maps $u^j:M^j\\to N^{j+r}$ satisfying $u(ma)=u(m)a$, with $\\partial u=d_Nu-(-1)^ru d_M$. For $m\\in M^j$, the two extra terms involving $d(a)$ in $\\partial u(ma)$ have coefficients $(-1)^{j+r}$ and $-(-1)^{r+j}$ and cancel. Thus $\\partial u$ is again graded linear. Expanding twice gives $\\partial^2u=0$; expanding a composite gives $\\partial(vu)=(\\partial v)u+(-1)^{|v|}v\\partial u$. Composition and identities are those of sheaf maps. Closed degree-zero maps are chain maps and degree-minus-one boundaries are exactly $dh+hd$, so $H^0$ of this dg category is the stated $K(\\mathcal A)$. The zero module and degreewise binary sums give a dg zero object and dg biproducts: the coordinate maps are closed and satisfy the five biproduct identities. These operations need only finite sums of sheaves. Modules and maps in a fixed underlying universe form sets in a larger universe; apply the small-dg-category result there. This uses no small skeleton of the isomorphism classes of all modules.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-dgm-dg-cat; definition-homotopy; Tag 0FS4 lemma-axioms-AB"
+   }
+  },
+  {
+   "text": "For axiom (B), reindex by $M[k]^j=M^{j+k}$ and put $d_{M[k]}=(-1)^kd_M$, leaving the right action unchanged. The Leibniz identity is $(-1)^kd_M(ma)=(-1)^kd_M(m)a+(-1)^jm\\,d(a)$ for $m\\in M^{j+k}$. On a degree-$r$ homogeneous map put $u[k]=(-1)^{kr}u$, with reindexed components. The differential on simultaneous shifts is $(-1)^k\\partial$, hence $\\partial(u[k])=(-1)^{k(r+1)}\\partial u=(\\partial u)[k]$. Composition is preserved since $(-1)^{k(r+s)}=(-1)^{kr}(-1)^{ks}$; shifts compose by addition. Reindexing identifies $\\operatorname{Hom}(M,N[k])^r$ with $\\operatorname{Hom}(M,N)^{r+k}$, and the differentials agree because $(-1)^kd_Nu-(-1)^ru d_M=(-1)^k(d_Nu-(-1)^{r+k}u d_M)$. For composition the first compatibility is the identity on components; the second has exactly the factor $(-1)^{k|g|}$ contributed by $g[k]$. These are the precise shift compatibilities in the cited ABC data. On closed degree-zero maps the shift has no additional sign.",
+   "uses": [
+    "def-coef-dg-abc-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRY section-shift-dg, correcting the homogeneous-map sign; Tag 0FS4"
+   }
+  },
+  {
+   "text": "For a chain map $f:M\\to N$, form the displayed cone with componentwise right action. Its differential squares to zero since $d_Nf=fd_M$; its Leibniz identity follows in the first coordinate from that of $N$ and $f(ma)=f(m)a$, and in the second from the shifted-module identity of step 2. The sequence $N\\xrightarrow i C(f)\\xrightarrow p M[1]$ has graded splitting $s(m)=(0,m)$ and $\\pi(n,m)=n$; its five splitting identities hold by the two coordinate projections. Its boundary is $\\pi\\partial s=\\pi d_Cs=f$, representing $f[1]:M[1]\\to N[1]$ under the target-shift Hom identification. This verifies axiom (C) with precisely the cone in the item, not an unspecified isomorphic cone.",
+   "uses": [
+    "def-coef-dg-abc-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS5 definition-cone; Tag 0FS6 lemma-axiom-C"
+   }
+  },
+  {
+   "text": "Apply the generic ABC triangulation theorem to the dg category and the data verified in steps 1--3. Its closed maps modulo boundaries are exactly the specified chain maps modulo homotopy. It supplies the triangulated structure with the indicated shifts, and its last sentence identifies distinguished triangles precisely with those isomorphic to $(M,N,C(f),f,i,-p)$. Thus the sign of the third arrow is the required negative projection. No boundedness or commutativity of $\\mathcal A$ entered any verification.",
+   "uses": [
+    "lem-coef-dg-abc-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS7 proposition-homotopy-category-triangulated, invoking dga Tag 09QY and Tag 09QU"
+   }
+  },
+  {
+   "text": "Forget the $\\mathcal A$-action. A dg homotopy is an underlying $\\mathcal O$-linear chain homotopy, so this gives $U:K(\\mathcal A)\\to K(\\operatorname{Mod}(\\mathcal O))$. Forgetting preserves the actual shifts, cone objects and all three cone arrows, hence carries every distinguished triangle to one in the ordinary homotopy category. The latter is triangulated and its localization $Q$ is exact by the cited ordinary-complex theorem. Therefore $QU$ is exact. Composing $QU$ with the derived cohomology functors gives the underlying cohomology sheaves by the definition of the derived category. They are functors, and the cited long-exact-cohomology result shows that $H^0$ on $K(\\mathcal A)$ is homological. In particular $H^n(M)=H^0(M[n])$. Homotopic representatives induce the same maps; explicitly on a cycle $x$, $(f-g)x=d(hx)$, an equality that descends to cohomology sheaves without choosing global lifts of local cohomology classes.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FT2 lemma-cohomology-homological; derived Tag 05RS"
+   }
+  },
+  {
+   "text": "Apply the homological-kernel detection leaf to this $H^0$. Its kernel is exactly the full subcategory $\\mathrm{Ac}$ of modules whose underlying cohomology sheaves vanish in every degree; the leaf makes it replete and triangulated. It identifies its cone class with the morphisms for which every $H^0(f[n])=H^n(f)$ is invertible, exactly $W$. The existing cone-system theorem now gives identities, closure under composition, both calculi of fractions and compatibility with the triangulation. Its hypotheses hold because $K(\\mathcal A)$ is triangulated by step 4 and $\\mathrm{Ac}$ is full, replete, contains zero and is closed under shifts and triangles by the kernel leaf.",
+   "uses": [
+    "lem-sfb-homological-kernel-cone-detection",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FT4 lemma-qis; derived Tags 05R5 and 05RG (the equivalent homological-kernel route)"
+   }
+  },
+  {
+   "text": "For completeness the cone criterion holds for the specified cone: forgetting its triangle and applying derived cohomology gives the exact segment $H^n(M)\\xrightarrow{H^n(f)}H^n(N)\\to H^n(C(f))\\to H^{n+1}(M)\\xrightarrow{H^{n+1}(f)}H^{n+1}(N)$. If every $H^n(f)$ is invertible, exactness forces the middle object to vanish; conversely vanishing for all $n$ makes every $H^n(f)$ both monic and epic, hence invertible in the abelian category of sheaf modules. Two-out-of-three follows degreewise for isomorphisms. Saturation in the specified stronger sense follows as well: if $fg$ and $gh$ induce isomorphisms, then in each degree $H(g)$ has left inverse $H(fg)^{-1}H(f)$ and right inverse $H(h)H(gh)^{-1}$; these inverses coincide, so $g\\in W$. Together with step 6 these are all clauses of the saturated compatible multiplicative system definition.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FT2 and 0FT4; cohomology exactness and elementary saturation check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-dg-abc-data",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-homological-kernel-cone-detection",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FS4--0FS7 and 0FT2--0FT4; use the equivalent homological-functor localization of derived Tag 05R5 rather than the exact-functor formulation 05R4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy category of sheaf differential graded modules is triangulated and quasi isomorphisms are a saturated triangulated multiplicative system",
+   "results": "{\"t\": \"2026-10-24T03:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy category of sheaf differential graded modules is triangulated and quasi isomorphisms are a saturated triangulated multiplicative system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.instIsTriangulatedIntUp\"], \"digest\": \"75121c7c6d792559\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*dg|dg.*sheaf|DifferentialGradedAlgebra",
+   "results": "{\"t\": \"2026-10-24T04:01:19Z\", \"tool\": \"grep\", \"query\": \"sheaf.*dg|dg.*sheaf|DifferentialGradedAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi isomorphisms in homotopy categories of differential graded sheaf modules admit triangulated localization",
+   "results": "{\"t\": \"2026-10-24T04:01:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasi isomorphisms in homotopy categories of differential graded sheaf modules admit triangulated localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso\", \"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\"], \"digest\": \"1a2ca15324efa9b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:01:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping cone triangles and cohomology detect quasi isomorphisms in the homotopy category of modules over a sheaf dg algebra",
+   "results": "{\"t\": \"2026-10-24T04:01:22Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping cone triangles and cohomology detect quasi isomorphisms in the homotopy category of modules over a sheaf dg algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"DerivedCategory.isIso_Qh_map_iff\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso\"], \"digest\": \"0502ed8bce826293\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(differential.?graded|dg)|dg.*sheaf",
+   "results": "{\"t\": \"2026-10-24T04:02:48Z\", \"tool\": \"grep\", \"query\": \"sheaf.*(differential.?graded|dg)|dg.*sheaf\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"DifferentialGraded\"",
+   "results": "{\"t\": \"2026-10-24T04:02:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"DifferentialGraded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; ordinary abelian cochain complexes, ordinary sheaf modules, flat ring modules and abstract derived functors do not give this sheaf dg assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy category of sheaves of differential graded modules over a sheaf of differential graded algebras is triangulated",
+   "results": "{\"t\": \"2026-10-24T04:35:37Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy category of sheaves of differential graded modules over a sheaf of differential graded algebras is triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.instPretriangulated\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\"], \"digest\": \"8fffba61624dbf56\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"DifferentialGraded\"",
+   "results": "{\"t\": \"2026-10-24T04:35:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"DifferentialGraded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|sheaf.*dg|dg.*sheaf",
+   "results": "{\"t\": \"2026-10-24T04:35:38Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|sheaf.*dg|dg.*sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf differential graded modules mapping cone triangulation quasi isomorphism localization",
+   "results": "{\"t\": \"2026-10-24T04:35:39Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf differential graded modules mapping cone triangulation quasi isomorphism localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"DerivedCategory.triangleOfSESIso\", \"DerivedCategory.instIsTriangulated\", \"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"HasDerivedCategory.standard\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\"], \"digest\": \"4556a530a45ab6d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphisms.*inverseImage|inverseImage.*isomorphisms|HasLeftCalculusOfFractions|HasRightCalculusOfFractions",
+   "results": "{\"t\": \"2026-10-24T04:38:59Z\", \"tool\": \"grep\", \"query\": \"isomorphisms.*inverseImage|inverseImage.*isomorphisms|HasLeftCalculusOfFractions|HasRightCalculusOfFractions\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\"], \"digest\": \"a436f38a845d9385\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of isomorphisms under a triangulated functor admits a calculus of fractions",
+   "results": "{\"t\": \"2026-10-24T04:39:00Z\", \"tool\": \"leansearch\", \"query\": \"The inverse image of isomorphisms under a triangulated functor admits a calculus of fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.hasLeftCalculusOfFractions'\", \"CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInverseImage\", \"CategoryTheory.Adjunction.hasRightCalculusOfFractions'\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.MorphismProperty.RespectsIso.inverseImage\", \"CategoryTheory.MorphismProperty.IsInvertedBy.iff_le_inverseImage_isomorphisms\", \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\"], \"digest\": \"645a76d99ce81553\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.IsTriangulated\", \"inverseImage\"",
+   "results": "{\"t\": \"2026-10-24T04:39:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor.IsTriangulated\\\", \\\"inverseImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact functor of triangulated categories the morphisms mapped to isomorphisms form a saturated multiplicative system with left and right calculus of fractions",
+   "results": "{\"t\": \"2026-10-24T04:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact functor of triangulated categories the morphisms mapped to isomorphisms form a saturated multiplicative system with left and right calculus of fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\"], \"digest\": \"ac00b1e2fe14f3b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of cochain complexes factors through homotopy and mapping cones detect quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-24T04:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of cochain complexes factors through homotopy and mapping cones detect quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CochainComplex.HomComplex.CohomologyClass.homAddEquiv\", \"CochainComplex.quasiIsoAt₀_iff\", \"DerivedCategory.isIso_Qh_map_iff\", \"ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization\"], \"digest\": \"c10e535da3f0fee9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "trW.*isZero|isZero.*trW|inverseImage.*isomorphisms|isomorphisms.*inverseImage",
+   "results": "{\"t\": \"2026-10-24T04:40:56Z\", \"tool\": \"grep\", \"query\": \"trW.*isZero|isZero.*trW|inverseImage.*isomorphisms|isomorphisms.*inverseImage\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\"], \"digest\": \"a4024c7465706015\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of a triangulated functor weak equivalences mapped to isomorphisms",
+   "results": "{\"t\": \"2026-10-24T04:40:56Z\", \"tool\": \"leansearch\", \"query\": \"Kernel of a triangulated functor weak equivalences mapped to isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologicalKernel\", \"CategoryTheory.Functor.isTriangulated_of_iso\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsHomologicalKernel\", \"CategoryTheory.Functor.mem_homologicalKernel_iff\", \"CategoryTheory.Limits.kernel\", \"CategoryTheory.Limits.PreservesKernel.of_iso_comparison\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\"], \"digest\": \"51469586618ffa88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"trW\", \"isZero\"",
+   "results": "{\"t\": \"2026-10-24T04:40:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"ObjectProperty\\\", \\\"trW\\\", \\\"isZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a triangulated functor F, morphisms whose image is an isomorphism are trW of the kernel subcategory of F",
+   "results": "{\"t\": \"2026-10-24T04:40:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a triangulated functor F, morphisms whose image is an isomorphism are trW of the kernel subcategory of F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Triangulated.Subcategory.W\", \"CategoryTheory.Triangulated.Subcategory.W_of_isIso\", \"CategoryTheory.Functor.essImageDistTriang_mem_of_iso\", \"CategoryTheory.ObjectProperty.trW_of_isIso\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsHomologicalKernel\"], \"digest\": \"f2c77843acc2d662\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a ringed site unbounded modules over a noncommutative dg algebra have cone triangles and quasi isomorphisms form a saturated system",
+   "results": "{\"t\": \"2026-10-24T04:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"Over a ringed site unbounded modules over a noncommutative dg algebra have cone triangles and quasi isomorphisms form a saturated system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"c6e5d7353be576d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_homologicalKernel_trW_iff|homologicalKernel.IsTriangulated|homologicalKernel.IsClosedUnderIsomorphisms",
+   "results": "{\"t\": \"2026-10-24T04:42:53Z\", \"tool\": \"grep\", \"query\": \"mem_homologicalKernel_trW_iff|homologicalKernel.IsTriangulated|homologicalKernel.IsClosedUnderIsomorphisms\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\"], \"digest\": \"4b78b08e9ffd0db0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mem_homologicalKernel_trW_iff",
+   "results": "{\"t\": \"2026-10-24T04:42:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\"], \"digest\": \"73cab8b871e0cd9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homological kernel trW admits left right calculus of fractions and triangulation compatibility",
+   "results": "{\"t\": \"2026-10-24T04:42:54Z\", \"tool\": \"leansearch\", \"query\": \"Homological kernel trW admits left right calculus of fractions and triangulation compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.MorphismProperty.HasLeftCalculusOfFractions.mk\", \"CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.mk\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated\"], \"digest\": \"126af064fdca3161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homological functor H from a triangulated category to an abelian category, morphisms inducing isomorphisms under all shifts of H admit both calculi of fractions and are compatible with triangulation",
+   "results": "{\"t\": \"2026-10-24T04:42:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a homological functor H from a triangulated category to an abelian category, morphisms inducing isomorphisms under all shifts of H admit both calculi of fractions and are compatible with triangulation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\"], \"digest\": \"a64d7bdfe1519dd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "homologicalKernel|mem_homologicalKernel_trW_iff",
+   "results": "{\"t\": \"2026-10-24T04:45:13Z\", \"tool\": \"grep\", \"query\": \"homologicalKernel|mem_homologicalKernel_trW_iff\", \"sub\": \"CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"35\", \"37\", \"67\", \"70\", \"71\"], \"digest\": \"736f3fe5169626f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homologicalKernel, CategoryTheory.ObjectProperty.trW",
+   "results": "{\"t\": \"2026-10-24T04:45:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.homologicalKernel, CategoryTheory.ObjectProperty.trW\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\"], \"digest\": \"73cab8b871e0cd9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for sheaf dg item: generic ordinary-complex and homological-kernel hits do not state the dg sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-dg-scalar-adjunction",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Derived comparison of dg coefficient realizations with the normalized scheme arrow. Prerequisite: Derived scalar adjunction and exact restriction for sheaf dg algebras. Tags 0FS7 (proposition-homotopy-category-triangulated), 0FT2 (lemma-cohomology-homological), 0FT4 (lemma-qis); cone convention of Tag 0FS5 (definition-cone).",
+   "via": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-homotopy-system",
+  "worker": "stage1",
+  "summary": "Verified sheaf dg Hom differential, signed dg shifts, sums and cones explicitly; applied the existing ABC theorem. Derived underlying cohomology is homological, and one new general Mathlib leaf identifies its kernel cone class; existing cone-system leaf provides fractions. Saturation is checked degreewise. Repaired a source proof sign error without changing the item statement.",
+  "blueprint": "Retains the supplied prerequisite ancestry, from.place and null from.node printed by blueprint_refs.py ancestor. Serves the sheaf-dg localization prerequisite of lem-sfb-ringed-dg-scalar-adjunction in the recorded CTF direct-image chain; the latest sk-thm-sf-ctf-stability/_section.md was read. Whole-blueprint searches for homotopy category, sheaf dg, homological kernel, multiplicative system, and 05R5 found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-abc-homotopy-category-triangulated",
+    "why": "Generic ABC triangulation theorem, used after explicitly checking its dg axioms; the current unit does not supply this foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-abc-homotopy-category-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-cde8fdee8",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-cde8fdee8 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new Mathlib leaf and every cited statement against Stacks sdga 0FRY, 0FS4-0FS7, 0FT2 and 0FT4 and Mathlib HomologicalFunctor.lean:67,114,117,263 (all lines verified). The item's statement and stmt_deps match the base exactly. The worker's 0FRY source error is real: with the same components, d(f[k]) = (-1)^k (df)[k]. The repair u[k] = (-1)^{kr}u is a strict dg functor and matches the phi_n(g[n]a) = (-1)^{n|g|} g phi_n(a) compatibility of def-coef-dg-abc-data; degree-zero maps are unchanged. I rechecked step 1 (Hom differential linearity: the da terms cancel), step 2 (Leibniz on M[k], phi_n chain isomorphism) and step 3 (cone Leibniz, five splitting identities, pi d(s) = f = phi_1(f[1])). Step 4 applies the ABC theorem, whose last sentence gives exactly the -p triangles; the declared tool_use of this off-unit node is accepted as the generic dg-ABC input that 0FS7 itself uses. Step 5: U is exact and Q is exact, and H^0 is homological via the long exact sequence plus rotation. Step 6: the kernel leaf identifies the class W with the cone class of Ac, and the cone-system leaf gives the calculi of fractions and compatibility. Step 7: the cone criterion and the MS4 saturation (via left and right inverses) are correct. The new node is a genuinely generic statement-only leaf with no duplicate (rg -L for homologicalKernel, trW, 05R5, 05RD and IsHomological, plus a blueprint search) and was tested on small cases. The existing O1/Q26 dg nodes are single dg-ring versions, not the sheaf version. Batch-5: lem-trf-triangulated-subcategory-cone-system is a generic Mathlib triangulated-subcategory leaf (closure: itself plus def-weil-triangulated-category), not part of the trace-formula or Poincare-duality proofs, so it is accepted. No other cited closure reaches trf or PD, and there is no cycle."
+ }
+}

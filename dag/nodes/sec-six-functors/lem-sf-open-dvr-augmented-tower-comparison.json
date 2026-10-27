@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-open-dvr-augmented-tower-comparison",
+ "kind": "statement",
+ "title": "Canonical DVR scalar transport of the augmented strict quotient tower",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, an adic datum $d$ on $R$, a scheme $T$, a coefficient comparison $C$ of [def-sf-open-quotient-koszul-models], and a calculus $S$ of [lem-coef-derived-system-evaluation-calculus]. There exist natural isomorphisms from the completed-adic quotient reduction after $C$ to the scalar-restricted $S$ reduction tower, and from its total derived limit to the scalar-transported actual coefficient limit. The latter extends the ordinary comparison normalized by every projection. On each flat-term K-flat complex $Q$, a single strict quotient tower $B$ and augmentation $\\Delta Q\\to B$ compute both reductions, with the prescribed tensor-generator, transition, counit and total-limit unit equations in OpenDvrAugmentedTowerComparison. In particular the completed-adic completion unit, followed by these two comparisons, equals $C(u^S_P)$ for every derived object $P$. No completeness hypothesis or countable-product exactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6E and 0941; strict tensor augmentation and derived constant/limit unit."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-koszul-reconstruction",
+  "def-sf-open-quotient-koszul-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply openDvrLimitComparison for the canonical normalized inverse-limit comparison, proved from the universal right-derived square and ordinary projection formula. Apply openDvrAugmentedReductionComparison relative to that limit model. Assemble its tower, representative and unit with the proved rlim and limit_model. The structure fields are definitionally the required original fields.",
+   "uses": [
+    "lem-sf-open-dvr-limit-comparison",
+    "lem-sf-open-dvr-augmented-reduction-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-dvr-limit-comparison",
+  "lem-sf-open-dvr-augmented-reduction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6E and 0941; strict tensor augmentation and derived constant/limit unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of ring sheaf module categories transports strict quotient tensor towers and the total derived inverse limit adjunction unit",
+   "results": "OK 8 hits: LightCondensed monoidal and internally projective declarations; none identifies these normalized strict quotient constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\", \"equivalence\"",
+   "results": "OK 4 hits: CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, instIsIsoFunctorCounitOfIsEquivalence_1, instIsIsoFunctorUnitOfIsEquivalence, instIsIsoFunctorUnitOfIsEquivalence_1.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary adjunction equivalence units, not adic completion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]omplet|[Cc]omplet.*Koszul",
+   "results": "OK 0 hits in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion over a discrete valuation ring is preserved by extension by zero along a quasicompact open immersion, using a Koszul quotient tower and its derived inverse limit",
+   "results": "OK 8 hits: AdicCompletion ring/module definitions and basic zero identities, IsAdicComplete.bot, Valuation.Completion, DerivedCategory.instHasZeroObject; none identifies the normalized derived sheaf completion or its coefficient comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenQuotientKoszulCompleteness",
+  "date": "2026-10-24",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Integral coefficient comparisons: tensor reassociation, evaluation and adjunction units and counits; Canonical DVR scalar transport of the augmented strict quotient tower",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrAugmentedTowerComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrAugmentedTowerComparison.lean",
+  "declaration": "WeilConjectures.openDvrAugmentedTowerComparison",
+  "declarations": [
+   "WeilConjectures.openDvrAugmentedTowerComparison",
+   "WeilConjectures.OpenDvrAugmentedTowerComparison"
+  ],
+  "statement": "theorem openDvrAugmentedTowerComparison\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E T) :\n    Nonempty (OpenDvrAugmentedTowerComparison l E C S)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/models/4 new modules vs clone item module (verbatim move, identical target signature), new node lean.statements vs files, three sorried statements vs landed completedOpenExchangeComparison / IsDerivedCompleteUnrestricted / CoefficientDerivedSystemCalculus; 7 delivered modules + 2 direct importers compiled together clean; #print axioms"
+ }
+}

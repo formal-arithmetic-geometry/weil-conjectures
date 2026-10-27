@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-quotient-intrinsic-ctf",
+ "kind": "statement",
+ "title": "Intrinsic finite-Tor constructibility under quotient extension",
+ "statement": "For any scheme T, prime ell and r>=m>=1, the actual proScalar quotient extension from the double-lifted coefficient ring at r to that at m preserves IsCtf [def-pur-finite-smooth-canonical-maps]. No Noetherianity or prime-invertibility assumption on T is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "Intrinsic finite-Tor constructibility under quotient extension; the two-level argument."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Convert the ordered homology interval of IsCtf to boundedness. Identify fixed constructible homology with the native fixed-module predicate. The existing comparison criterion produces native constructibleFiniteTor.",
+   "uses": [
+    "new-etale-proetale-exceptional-object-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use reductionGood_realization_iff and reductionGood_scalar with the ell^r and ell^m annihilators. The canonical scalarPresentation isomorphism identifies intrinsic scalar extension with the actual fixed proScalar. Transport ReductionGood along it, then apply realization_iff backwards. Convert native bounded constructibility to intrinsic constructibility. Replace unordered endpoint witnesses by min/max to recover the ordered homology and Tor intervals in IsCtf.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "def-sp-finite-scalar-realization-presentations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-etale-proetale-exceptional-object-comparison",
+  "det-sp-reduction-direct-image",
+  "def-sp-finite-scalar-realization-presentations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "K2 extracts this strictly smaller step from lem-pur-finite-smooth-two-level-reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar extension preserves constructible finite Tor amplitude sheaves",
+   "results": "Eight Mathlib hits; no normalized etale/pro-etale purity coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the project APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction transposition and naturality lemmas; used in the assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing categorical API."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionGood_scalar|reductionGood_realization_iff|scalarPresentation|fixed_constructible_iff",
+   "results": "Mathlib grep: zero hits. Local rg: Found proved private transport lemmas in ReductionDirectImage and the canonical scalarPresentation in SupportedEtaleTensorOrigin. They work on arbitrary schemes and give this assertion without a new mathematical obligation.",
+   "date": "2026-10-27",
+   "verdict": "Use existing declarations for formal steps; isolate only the stated step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothTwoLevelReduction",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 1: finite reductions; Intrinsic finite-Tor constructibility under quotient extension",
+   "via": [
+    "lem-pur-finite-smooth-two-level-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientIntrinsicCtf",
+  "file": "lean/Sheaf/Paper/QuotientIntrinsicCtf.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.quotientIntrinsicCtf",
+  "statement": "theorem quotientIntrinsicCtf\n    (ell : ℕ) [Fact ell.Prime] (r m : ℕ) (_hm : 1 ≤ m) (hmr : m ≤ r)\n    (T : Scheme.{u}) (K : proCategory (coefficient ell r) T)\n    (hK : IsCtf (coefficient ell r) T K) :\n    IsCtf (coefficient ell m) T\n      ((proScalar (FiniteReduction.quotient ell hmr) T).obj K)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T094432-L-225776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T094432-L-225776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

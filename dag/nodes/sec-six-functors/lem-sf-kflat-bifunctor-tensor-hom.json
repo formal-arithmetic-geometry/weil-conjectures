@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-kflat-bifunctor-tensor-hom",
+ "kind": "lemma",
+ "title": "K-flat total tensor represents derived bifunctor Hom",
+ "statement": "Let A be an abelian category with countable products, countable coproducts, a derived category, and K-injective resolutions. Let F : A → A → A and H₀ : Aᵒᵖ → A → A be additive bifunctors with a parametrized adjunction F(P)(-) ⊣ H₀(P)(-). Use the signed product Hom totalization and sum tensor totalization of [lem-sf-weil-native-closed-forgetful]. Let H : D(A)ᵒᵖ × D(A) → D(A) have specified product-total representative isomorphisms for every complex and K-injective target, natural in both complex variables. Let W be any class of complexes such that T in W implies that Tot(F(T)(-)) preserves quasi-isomorphisms. Then for every complex P, every T in W, and Z in D(A), there are bijections Hom_D(Q(Tot(F.flip(P,T))),Z) ≃ Hom_D(Q(P),H(Q(T),Z)), natural in Z and contravariantly in both P and T. The parameter order in F and the left-first order in the displayed tensor are connected by the signed total flip.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma RHom-from-K-flat-into-K-injective (0A96), Lemma internal-hom (08J9), and their proofs; categorical additive-bifunctor form of the same Hom-complex and localization argument."
+ },
+ "stmt_deps": [
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof": [
+  {
+   "text": "Curry homogeneous cochains using the parametrized adjunction, with component sign (-1)^(p*n). Check the differential and inverse identities using the signed product-Hom formula. Thus currying descends to a bijection on homotopy classes. The signed total flip converts the curried parameter-first total to the left-first total.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For T in W and K acyclic, the map K → 0 is a quasi-isomorphism, hence so is its tensor with T. Consequently the total tensor is acyclic. Transpose any map K → Hom(T,I), where I is K-injective, and transpose a null-homotopy back. This proves Hom(T,I) K-injective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify maps into both K-injective targets with maps in the derived category and use the specified H representative isomorphism. Choose a K-injective representative of Z and transport the bijection along it. Naturality of currying, the signed flip and the representative isomorphisms gives the two naturality identities; arbitrary maps between K-injectives come from homotopy classes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proofs of 0A96 and 08J9, retaining signed totalization and representative naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive parametrized adjunction of bifunctors induces a tensor Hom adjunction on cochain complexes by sum and product totalization",
+   "results": "Eight hits, including HomologicalComplex.tensorHom and CochainComplex.mapBifunctor; none gives the arbitrary-bifunctor product-Hom derived adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ParametrizedAdjunction",
+   "results": "Twelve hits for the base adjunction and its three-variable naturality; used to curry the cochain components.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive tensor Hom adjunction computes morphisms from a K flat total tensor into any derived object using K injective representatives",
+   "results": "Eight hits, including Adjunction.homAddEquiv and ordinary monoidal closed Hom; none states the localization result for an arbitrary bifunctor.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomObj|mapBifunctorFlipIso|Qh_map_bijective",
+   "results": "Mathlib supplies total flip and K-injective localization; the source supplies bifunctorHomObj and monoidal InternalHom. Existing Sheaf ringed-site lemmas are specialized to module sheaves and do not specialize to the native IsoAlgebra category. Their proofs guide the generic argument.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedWeilOperations",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The native tensor representative normalization in def-sf-derived-weil-category-and-operations; categorical part of native_closed_forgetful steps 3--5.",
+   "via": [
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatBifunctorTensorHom",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatBifunctorTensorHom.lean",
+  "declaration": "CategoryTheory.kFlatBifunctorTensorHom",
+  "statement": "theorem kFlatBifunctorTensorHom\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [HasCountableProducts A] [HasCountableCoproducts A]\n    [HasDerivedCategory.{v} A] [Abelian.HasKInjectiveResolutions A]\n    (F : A ⥤ A ⥤ A) [F.flip.Additive] [∀ P, (F.flip.obj P).Additive]\n    (B : CochainComplex A ℤ ⥤ CochainComplex A ℤ ⥤ CochainComplex A ℤ)\n    (hB : B = F.flip.map₂CochainComplex)\n    (H₀ : Aᵒᵖ ⥤ A ⥤ A) [H₀.Additive] [∀ P, (H₀.obj P).Additive]\n    (adj : F ⊣₂ H₀)\n    (H : (DerivedCategory A)ᵒᵖ × DerivedCategory A ⥤ DerivedCategory A)\n    (R : NativeHomRepresentatives H₀ H)\n    (KFlat : ObjectProperty (CochainComplex A ℤ))\n    (hflat : ∀ T, KFlat T →\n      ∀ {P P' : CochainComplex A ℤ} (f : P ⟶ P'), QuasiIso f →\n        QuasiIso ((B.flip.obj T).map f)) :\n    ∃ e : ∀ (P T : CochainComplex A ℤ), KFlat T → ∀ Z : DerivedCategory A,\n      (DerivedCategory.Q.obj ((B.obj P).obj T) ⟶ Z) ≃\n        (DerivedCategory.Q.obj P ⟶ H.obj (op (DerivedCategory.Q.obj T), Z)),\n      (∀ (P T : CochainComplex A ℤ) (hT : KFlat T) (Z Z' : DerivedCategory A)\n        (a : DerivedCategory.Q.obj ((B.obj P).obj T) ⟶ Z)\n        (b : Z ⟶ Z'),\n        e P T hT Z' (a ≫ b) =\n          e P T hT Z a ≫ H.map (Prod.mkHom (𝟙 _) b)) ∧\n      (∀ (P P' T T' : CochainComplex A ℤ) (hT : KFlat T) (hT' : KFlat T')\n        (f : P ⟶ P') (g : T ⟶ T') (Z : DerivedCategory A)\n        (a : DerivedCategory.Q.obj ((B.obj P').obj T') ⟶ Z),\n        e P T hT Z\n            (DerivedCategory.Q.map\n              ((B.map f).app T ≫\n                (B.obj P').map g) ≫ a) =\n          DerivedCategory.Q.map f ≫ e P' T' hT' Z a ≫\n            H.map (Prod.mkHom (DerivedCategory.Q.map g).op (𝟙 Z)))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T005419-L-3483980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T005419-L-3483980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

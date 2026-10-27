@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-internal-tensor-pull-route-model",
+ "kind": "statement",
+ "title": "The normalized tensor route computes the common ordinary tensor model",
+ "statement": "Let a:Λ→Λ′, f:X→Y, D,V,L,B be as in [def-sfb-internal-derived-scalar-comparisons]. Choose tY with TensorNormalized on Y; no scalar pullback isomorphism or X presentation is used. For every homotopy complex P let c,T_P,C_P be the explicit comparisons of [def-sfb-internal-scalar-tensor-pull-models]. Pull back tY.derived at Qh P, apply the specified derived tensor pullback comparison at Qh P and B_Y, tensor c.hom, and then apply T_P. This composite equals C_P, without any flatness assumptions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-scalar-tensor-pull-models",
+  "def-sfb-module-object-projection-map"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary_hom equations determine the ordinary isomorphism uniquely by faithfulness of forgetting the module action. Compare TensorNormalized for tY and the canonical presentation on a K-flat complex; the one-factor localization tensor map and the single-tensor isomorphism are invertible, so cancellation proves equality of their derived hom components on K-flat representatives. Naturality and exists_kFlat_iso extend this equality to every derived object. This is the complete private tensor_normalization_unique proof in Lean.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-canonical-coefficient-tensor-normalization",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Rewrite the derived hom component using that uniqueness equality, then apply the fixed canonical route model theorem.",
+   "uses": [
+    "lem-sfb-internal-canonical-tensor-pull-route-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-canonical-coefficient-tensor-normalization",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-internal-canonical-tensor-pull-route-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "Prove uniqueness of normalized tensor presentations by one-factor K-flat cancellation and naturality. Only the canonical tensor-route computation is left open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of a derived tensor product computes extension of scalars and is compatible with the tensor comparison for exact pullback",
+   "date": "2026-10-26",
+   "results": "8 hits, including CategoryTheory.Adjunction.derivedε, ModuleCat.ExtendRestrictScalarsAdj.counit_app and coalgebra tensor counit declarations.",
+   "verdict": "No internal module tensor model square. Use the existing project tensor-model API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedNatTrans\"",
+   "date": "2026-10-26",
+   "results": "8 hits for leftDerivedNatTrans and its id, fac, app, comp and reassociated equations.",
+   "verdict": "Generic derived uniqueness ingredients only; no normalized tensor/pullback model square."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelRoute_fac|tensorModelTarget_isIso|scalar.*pull.*route.*model",
+   "date": "2026-10-26",
+   "results": "0 hits in Mathlib. Local rg found the generic Functor.tensorModelRoute_fac and tensorModelTarget_isIso in IntegralResidueTensorModel, plus residue-specialized route computations.",
+   "verdict": "Reuse the common model construction. The scalar route for arbitrary normalized comparisons still needs the counit calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarTensorPullNormalization",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps.",
+   "via": [
+    "lem-sfb-internal-scalar-tensor-pull-normalization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalTensorPullRouteModel",
+  "file": "lean/Sheaf/Paper/InternalTensorPullRouteModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.tensor_pull_route_model",
+  "statement": "theorem tensor_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (tY : TensorNormalization a Y)\n    (hY : TensorNormalized a Y tY)\n    (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :\n    (L Λ f).map (tY.derived.hom.app (DerivedCategory.Qh.obj P)) ≫\n        ((CondensedRing.leftDerivedUpperStarTensor Λ f).app\n          (DerivedCategory.Qh.obj P)).app (B a Y) ≫\n        ((L Λ f).obj (DerivedCategory.Qh.obj P) ◁ (scalarTensorRegularPullIso a f).hom) ≫\n        scalarTensorPullModelTarget a f P = scalarTensorPullModelMap a f P",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T003052-L-144301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T003052-L-144301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

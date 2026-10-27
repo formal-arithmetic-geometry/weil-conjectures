@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-native-ringed-restriction-hom",
+ "kind": "statement",
+ "title": "Native Ringed Restriction Hom",
+ "status": "split",
+ "statement": "Let F:C→D be a continuous equivalence of sites such that every induced slice functor is an equivalence, and let R be a commutative ring sheaf. Direct module restriction is additive and agrees with the structural ringed pushforward by an identity change-of-scalars isomorphism. For every two cochain complexes L,M, restriction of their sheaf Hom complex is isomorphic to the sheaf Hom complex of their restrictions. The coefficient universe contains both site object and morphism universes; no equality of these universes is assumed. Dependencies: [def-pur-localized-ringed-site], [def-weil-pbc-chain-complex-tensor-module], [def-kun-constant-sheaf], [def-pur-hom-complex].",
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-chain-complex-tensor-module",
+  "def-kun-constant-sheaf",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "Restriction along a site equivalence commutes with the sheaf Hom complex. Full faithfulness of the induced slice restrictions identifies the sheaves of module homomorphisms. Products of these comparisons give an isomorphism in each degree. Naturality with respect to precomposition and postcomposition identifies the two terms of the Hom differential, so these degreewise isomorphisms form a cochain isomorphism. All products have indices in the fixed coefficient universe; no site or coefficient universe is identified. Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-chain-complex-tensor-module",
+    "def-kun-constant-sheaf",
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-chain-complex-tensor-module",
+  "def-kun-constant-sheaf",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Let F:C→D be a continuous equivalence of sites such that every induced slice functor is an equivalence, and let R be a commutative ring sheaf. Direct module restriction is additive and agrees with the structural ringed pushforward by an identity change-of-scalars isomorphism. For every two cochain complexes L,M, restriction of their sheaf Hom complex is isomorphic to the sheaf Hom complex of their restrictions. The coefficient universe contains both site object and morphism universes; no equality of these universes is assumed.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": (restrictScalars.{v} α).Additive\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the restriction of scalars functor from the category of sheaves\"}\n  {\"name\": \"PresheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : (restrictScalars.{v} α).Additive\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, the restriction of scalars functor from the category of presheaves of modules over $R'$ to th\"}\n  {\"name\": \"RestrictScalars.addEquiv\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \": RestrictScalars R S M ≃+ M\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module (given a ring homomorphism $ R \\\\to S $) is additively equivalent to $ M $ itself via the identity map.\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(M' : PresheafOfModules.{v} R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"Given a presheaf of modules $\\\\mathcal{M}'$ over a presheaf of rings $R'$ on a category $\\\\mathcal{C}$, and a natural transformation $\\\\alpha: R \\\\to R'$ between ring presheaves, this constructs a new pre\"}\n  {\"name\": \"PresheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \": PresheafOfModules.{v} R ⥤ PresheafOfModules.{v} S\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a presheaf of rings $ R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and a natural transformation $ \\\\phi: R \\\\to S $ between presheaves of rings, \"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n  {\"name\": \"SheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M N : SheafOfModules.{v} R) : AddCommGroup (M ⟶ N)\", \"doc\": \"For any sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, and for any two sheaves of modules $ M $ and $ N $ over $ R $, the set of sheaf homomorphisms $ \\\\mathrm{H\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homObj\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsEpimorphisms\", \"module\": \"Mathlib.CategoryTheory.Functor.EpiMono\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {F' : CategoryTheory.Functor D C} (adj : F' ⊣ F) {X : C} {Y : D} (f : Y ⟶ F.obj X) [hf : CategoryTheory.Epi f] [F.ReflectsEpimorphisms] : CategoryTheory.Epi (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms\", \"module\": \"Mathlib.CategoryTheory.Functor.EpiMono\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {F' : CategoryTheory.Functor D C} (adj : F ⊣ F') {X : C} {Y : D} (f : F.obj X ⟶ Y) [hf : CategoryTheory.Mono f] [F.ReflectsMonomorphisms] : CategoryTheory.Mon\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.FinCategory.instFintypeHomObjAsType\", \"module\": \"Mathlib.CategoryTheory.FinCategory.AsType\", \"type\": \" (α : Type u_1) [Fintype α] [CategoryTheory.SmallCategory α] [CategoryTheory.FinCategory α] {i j : CategoryTheory.FinCategory.ObjAsType α} : Fintype (i ⟶ j)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoOver.instMonoHomObjOverForget\", \"module\": \"Mathlib.CategoryTheory.Subobject.MonoOver\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {f : CategoryTheory.MonoOver X} : CategoryTheory.Mono ((CategoryTheory.MonoOver.forget X).obj f).hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.CountableCategory.instCountableHomObjAsType\", \"module\": \"Mathlib.CategoryTheory.Countable\", \"type\": \" (α : Type u) [CategoryTheory.Category.{v, u} α] [CategoryTheory.CountableCategory α] {i j : CategoryTheory.CountableCategory.ObjAsType α} : Countable (i ⟶ j)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instModuleCarrierObjOppositeCommRingCatCarrierCarrierRingCatCompForget₂RingHomObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (X : Cᵒᵖ) (M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) : Module ↑(R.obj X) ↑(M.obj X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Localization.instHasSmallLocalizedHomObjShiftFunctor\", \"module\": \"Mathlib.CategoryTheory.Localization.SmallShiftedHom\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (W : CategoryTheory.MorphismProperty C) {M : Type w'} [AddMonoid M] [CategoryTheory.HasShift C M] (X Y : C) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom W M X Y] (m : M) : CategoryTheory.Localization.HasSmallLocalizedHom W X (Y⟦m⟧)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Localization.instHasSmallLocalizedHomObjShiftFunctor_1\", \"module\": \"Mathlib.CategoryTheory.Localization.SmallShiftedHom\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (W : CategoryTheory.MorphismProperty C) {M : Type w'} [AddMonoid M] [CategoryTheory.HasShift C M] (X Y : C) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom W M X Y] (m : M) : CategoryTheory.Localization.HasSmallLocalizedHom W (X⟦m⟧) Y\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Localization.instHasSmallLocalizedHomObjShiftFunctor_2\", \"module\": \"Mathlib.CategoryTheory.Localization.SmallShiftedHom\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (W : CategoryTheory.MorphismProperty C) {M : Type w'} [AddMonoid M] [CategoryTheory.HasShift C M] (X Y : C) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom W M X Y] (m m' n : M) : CategoryTheory.Localization.HasSmallLocalizedHom W (X⟦m⟧⟦m'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Localization.instHasSmallLocalizedHomObjShiftFunctor_3\", \"module\": \"Mathlib.CategoryTheory.Localization.SmallShiftedHom\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (W : CategoryTheory.MorphismProperty C) {M : Type w'} [AddMonoid M] [CategoryTheory.HasShift C M] (X Y : C) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom W M X Y] (m n n' : M) : CategoryTheory.Localization.HasSmallLocalizedHom W (X⟦m⟧) (\", \"doc\": \"\"}\n  {\"name\": \"SSet.instDecidableEqHomObjSimplexCategoryStdSimplexOfOppositeOp\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex\", \"type\": \" (X : SSet) (n : SimplexCategory) [DecidableEq (X.obj (Opposite.op n))] : DecidableEq (SSet.stdSimplex.obj n ⟶ X)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.instAddHomObjTopCommRingCatForget₂SubtypeRingHomαContinuousCoeContinuousMapCarrier\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" (X : TopCat) (R : TopCommRingCat) : Add (X ⟶ (CategoryTheory.forget₂ TopCommRingCat TopCat).obj R)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (homObj|sheafHom).*([iI]so|[eE]quiv) Mathlib/ (local read-only Mathlib source)",
+   "results": "60 matching source lines. First matches:\nMathlib/CategoryTheory/Functor/FunctorHom.lean:49:def homObjEquiv (F G A : C ⥤ Type w) : (HomObj F G A) ≃ (F ⊗ A ⟶ G) where\nMathlib/CategoryTheory/Monoidal/Closed/FunctorToTypes.lean:38:  (Functor.functorHomEquiv F H G).trans (homObjEquiv F H G)\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:54:noncomputable def skyscraperPresheafHomEquiv :\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:72:lemma toPresheafFiber_skyscraperPresheafHomEquiv_symm\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:74:    Φ.toPresheafFiber X x P ≫ Φ.skyscraperPresheafHomEquiv.symm g =\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:76:  simp [skyscraperPresheafHomEquiv_symm_apply]\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:80:lemma skyscraperPresheafHomEquiv_naturality_left_symm\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:82:    Φ.skyscraperPresheafHomEquiv.symm (f ≫ g) =\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:83:      Φ.presheafFiber.map f ≫ Φ.skyscraperPresheafHomEquiv.symm g := by\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:89:lemma skyscraperPresheafHomEquiv_app_π\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:91:    (Φ.skyscraperPresheafHomEquiv f).app (op X) ≫ Pi.π (fun (_ : Φ.fiber.obj X) ↦ M) x =\nMathlib/CategoryTheory/Sites/Point/Skyscraper.lean:93:  simp [skyscraperPresheafHomEquiv_apply_app]",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeRingedRestrictionHom",
+  "file": "lean/Sheaf/CategoryTheory/NativeRingedRestrictionHom.lean",
+  "declaration": "CategoryTheory.NativeRestriction.homComplexRestriction",
+  "statement": "theorem homComplexRestriction\n    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]\n    {K : GrothendieckTopology C} {J : GrothendieckTopology D}\n    (F : C ⥤ D) [Functor.IsContinuous F K J] (R : Sheaf J CommRingCat.{max c d vc vd r})\n    (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence) :\n    let T := restrictModules.{_, _, _, _, r} (K := K) F R\n    let S := restrictedCommRing.{_, _, _, _, r} (K := K) F R\n    let Tc := T.mapHomologicalComplex (.up ℤ)\n    ∀ L M : CochainComplex (NativeModules.{max c d vc vd r, d, vd} R) ℤ,\n      Nonempty (Tc.obj (homComplex (R := R) L M) ≅\n        homComplex (R := S) (Tc.obj L) (Tc.obj M))",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.NativeRings",
+   "CategoryTheory.NativeRestriction.NativeModules",
+   "CategoryTheory.NativeRestriction.restrictedCommRing",
+   "CategoryTheory.NativeRestriction.restrictModules",
+   "CategoryTheory.NativeRestriction.restrictModules_additive",
+   "CategoryTheory.NativeRestriction.restrictModules_standardIso",
+   "CategoryTheory.NativeRestriction.complexMap",
+   "CategoryTheory.NativeRestriction.homComplexRestriction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

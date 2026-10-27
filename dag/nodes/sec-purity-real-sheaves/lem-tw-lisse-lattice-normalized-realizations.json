@@ -1,0 +1,125 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Elaboration of parent plan step(s) 2. Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preimageIso|map_injective|homologyFunctor_obj_singleFunctor",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Topology/Homeomorph/Lemmas.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-25",
+   "verdict": "No match for these normalized pro-etale integral/rational coefficient assertions; generic sheaf, localization and lattice results do not identify the specified maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free l-adic sheaf admits a constructible integral lattice and its rationalized lattice has unique local isomorphism lifts",
+   "results": "8 hits: Condensed.finFree, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.IsFinitePresentation, Profinite.NobelingProof.Nobeling_aux, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, SheafOfModules.IsFiniteType, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-25",
+   "verdict": "No match for these normalized pro-etale integral/rational coefficient assertions; generic sheaf, localization and lattice results do not identify the specified maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "12 hits: CategoryTheory.Functor.FullyFaithful.ofFullyFaithful, CategoryTheory.Functor.Full.of_comp_faithful, CategoryTheory.Functor.preimageIso, CategoryTheory.Functor.preimageIso_mapIso, CategoryTheory.Functor.preimage_id, CategoryTheory.Functor.preimage_map, CategoryTheory.Functor.Full.of_comp_faithful_iso, CategoryTheory.isIso_of_fully_faithful",
+   "date": "2026-10-25",
+   "verdict": "Found generic fully-faithful preimageIso, used in the parent proof, but no normalized coefficient or completed-pullback assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible integral l-adic lattices, normalized coefficient localization and pro-etale local freeness in the rational derived heart",
+   "results": "8 hits: Algebra.Etale.of_isLocalizationAway, ZLattice.module_free, Algebra.Etale.of_isLocalization_Away, LocallyConstant.freeOfProfinite, ZLattice.FG, ZLattice.module_finite, Zlattice.FG, IsZLattice.mk",
+   "date": "2026-10-25",
+   "verdict": "No match for these normalized pro-etale integral/rational coefficient assertions; generic sheaf, localization and lattice results do not identify the specified maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseLatticeHeartLift",
+  "date": "2026-10-25",
+  "group": "U9"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Lattice realization input for the first dual-stalk identification: lem-tw-lisse-lattice-heart-lift, plan step(s) 2.",
+   "via": [
+    "lem-tw-lisse-lattice-heart-lift",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-tw-lisse-lattice-normalized-realizations",
+ "kind": "statement",
+ "title": "Normalized completed and rational presentations with the balanced tensor restriction.",
+ "statement": "Use the normalized coefficient, raw rationalization, lattice-choice and specified comparison definitions of [def-tw-lisse-lattice-heart-lift-data]. The parameter D is a finite-field datum, hl says l differs from its characteristic, and X is an arbitrary finite-type scheme over its geometric field, without separation, wherever these occur below. Normalized completed and rational presentations with the balanced tensor restriction.\nSource: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15. Exact Lean formulation: theorem normalized_realizations : Nonempty (Realizations l E)",
+ "stmt_deps": [
+  "def-tw-lisse-lattice-heart-lift-data"
+ ],
+ "proof": [
+  {
+   "text": "identify the completed constant quotient tower with continuous integral functions.\nThe identification is fixed by every residue projection, so the constant uniformizer maps\nto the continuous constant uniformizer. The universal property of sheafified localization\nthen identifies rationalRing with continuous rational functions and identifies the units.\nExact scalar localization induces J on the full integral constructible subcategory:\non objects use derived extension and on a pure tensor a tensor f use a times F(f).\nThe balanced tensor relation and a common denominator prove that this descends to the\nraw rationalization. The integral factorization and fraction formula follow on generators.\nFor an etale map, inverse image is slice restriction. Associativity of extension of\nscalars gives the balance isomorphism. On a pulled-back pure tensor it sends b tensor n\nto the pulled-back b tensor the pulled-back n, giving balance_sections. Construct these\nmaps for every scheme; neither noetherianity nor constructibility is used in this scalar\nconstruction. Inverse identities follow from the localization and tensor universal\nproperties, rather than choices of arbitrary equivalences.",
+   "uses": [
+    "lem-per-continuous-coefficient-slice-normalization",
+    "lem-per-rational-continuous-coefficient-derived-localization",
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "lem-weil-pbc-continuous-coefficient-localization",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-continuous-coefficient-slice-normalization",
+  "lem-per-rational-continuous-coefficient-derived-localization",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.LisseLatticeNormalizedRealizations",
+  "file": "lean/Sheaf/Paper/LisseLatticeNormalizedRealizations.lean",
+  "declaration": "WeilConjectures.LisseLattice.normalized_realizations",
+  "statement": "theorem normalized_realizations : Nonempty (Realizations l E)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7b4e",
+  "group": "U9",
+  "result": "fix",
+  "landing": "20261025T124041-L-1929649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7b4e",
+  "group": "U9",
+  "result": "fix",
+  "landing": "20261025T124041-L-1929649",
+  "kind": "interface",
+  "note": "independent cc review: delivered LisseLatticeHeartLiftData vs clone item helpers (verbatim, blueprint tags only); item theorem signature vs clone and node lean.statement; 5 new sorry statements vs BS 6.8.2-6.8.15 and their nodes; sandbox compile of all 7 modules + #print axioms"
+ }
+}

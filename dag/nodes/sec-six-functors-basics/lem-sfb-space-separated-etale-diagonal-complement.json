@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-space-separated-etale-diagonal-complement",
+ "kind": "statement",
+ "title": "Clopen diagonal and degree-one criterion for etale maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. Let $a:U\\to X$ be separated and etale. Its diagonal $U\\to U\\times_XU$ is both an open immersion and a closed immersion, so it has an open and closed complement. If $a$ is surjective on point classes and every geometric fibre has exactly one point, then $a$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HK (lemma-properties-diagonal), etale diagonal; Tag 05W5 (lemma-etale-universally-injective-open), with Tag 040X (lemma-universally-injective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=U\\times_XU$, with projections $p_1,p_2$, and let $\\delta:U\\to W$ be the diagonal. By [lem-sfb-space-diagonal-scheme-tests], $\\delta$ is representable and a monomorphism: after every scheme test its source is a scheme and its map is monic. This also proves monicity as a sheaf map, since on a test scheme a point of the diagonal over $(u_1,u_2)$ exists precisely when $u_1=u_2$, and then is unique. Composition of representable etale maps in [lem-trf-space-representable-etale-scheme-tests] shows that $a$ composed with every representable etale scheme chart is representable etale. Thus $a$ is chartwise etale. By [lem-trf-space-chartwise-etale-permanence], $p_1$ is chartwise etale by base change, and $a p_1:W\\to X$ is chartwise etale by composition. Apply its comparison clause to $U\\to X$, $W\\to X$, and $\\delta$ over $X$: $\\delta$ is chartwise etale. Thus [lem-sfb-space-etale-monomorphism-open] makes $\\delta$ an open immersion. Separatedness of $a$, as defined in the statement, makes this same diagonal a closed immersion on scheme tests.",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HK (lemma-properties-diagonal), 05W1 (lemma-diagonal-unramified-morphism), and 05W5 (lemma-etale-universally-injective-open), monomorphism case."
+   }
+  },
+  {
+   "text": "Identify $U$ with the open subspace $D\\subseteq W$ given by $\\delta$. By [lem-a1-space-point-open-calculus], its underlying subset pulls back on any scheme atlas $T\\to W$ to the underlying open of $D\\times_WT$. This scheme-test immersion is also closed by separatedness, so that open subset of $T$ is closed. The atlas-topology definition [def-a1-space-point-topology] therefore makes $|D|$ closed as well as open in $|W|$. The open-subspace correspondence of [lem-a1-space-etale-open-image] supplies the complementary open subspace $C$ with $|C|=|W|\\setminus|D|$. On each scheme test, $C$ is the open subscheme complementary to the clopen subscheme $D\\times_WT$. Its inclusion is a closed immersion too: its image is closed and the restriction map of structure sheaves is surjective on stalks (an isomorphism on $C$, and a map to the zero stalk off $C$). Hence the complement is open and closed, with its induced structure.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-a1-space-point-topology",
+    "lem-a1-space-etale-open-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03BZ (lemma-open-subspaces) and 03BX (lemma-topology-points), applied to the clopen diagonal."
+   }
+  },
+  {
+   "text": "Now assume the geometric-fibre hypothesis. For any algebraically closed $\\Omega$ and $x:\\operatorname{Spec}\\Omega\\to X$, representable etaleness in [def-trf-algebraic-space] says that $F_x=U\\times_X\\operatorname{Spec}\\Omega$ is a scheme etale over $\\Omega$. It is therefore unramified by [def-weil-etale-morphism]. Apply [lem-trf-unramified-field-fibre-decomposition] to this scheme over the field $\\Omega$: it is a disjoint union of spectra of finite separable extensions of $\\Omega$. Every such extension equals $\\Omega$: the minimal polynomial of an element is irreducible, and over an algebraically closed field an irreducible polynomial has degree one. Exactly one underlying point therefore means exactly one summand, and $F_x\\simeq\\operatorname{Spec}\\Omega$ over $\\Omega$. In particular it has a unique $\\Omega$-section.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7 (lemma-unramified-over-field), part (1), applied to the geometric fibre."
+   }
+  },
+  {
+   "text": "Every point class of $W$ has a representative $z:\\operatorname{Spec}K\\to W$ by [def-a1-algebraic-space-point-classes]. Choose an algebraic closure $K\\hookrightarrow\\Omega$ using [def-weil-algebraic-closure]. Write $z_\\Omega=(u_1,u_2)$, so $a u_1=a u_2=x$. Each $u_i$ is a section of the same $F_x\\to\\operatorname{Spec}\\Omega$, hence Step 3 gives $u_1=u_2$. Thus $z_\\Omega=\\delta u_1$. The representative $z$ and its extension $z_\\Omega$ define the same point class, so every class lies in the image of $|\\delta|$. This is surjectivity on point classes of the diagonal, not merely injectivity on the point classes of $a$.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 040X (lemma-universally-injective), diagonal-surjectivity argument, using the geometric fibre calculation of Step 3."
+   }
+  },
+  {
+   "text": "The open subspace $D\\subseteq W$ of Step 2 has full point image by Step 4. The final clause of [lem-a1-space-point-open-calculus] gives $D=W$. Consequently $\\delta$ is an isomorphism. For any scheme $T$ and $u,v\\in U(T)$ with $a(u)=a(v)$, the pair $(u,v)\\in W(T)$ has a preimage under $\\delta(T)$; both its projections equal that preimage, so $u=v$. Thus $a$ is a monomorphism of sheaves on every test scheme, including nonreduced ones.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 040X (lemma-universally-injective) and 03BZ (lemma-open-subspaces), full-image open diagonal."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-etale-monomorphism-open] to $a$, which is etale by hypothesis and monic by Step 5. It identifies $U$ with an open subspace $J\\subseteq X$. The assumed surjectivity on point classes makes $|J|=|X|$. The full-image clause of [lem-a1-space-point-open-calculus] gives $J=X$, and hence $a$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open) and spaces-properties.tex Tag 03BZ (lemma-open-subspaces)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-diagonal-scheme-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "def-a1-space-point-topology",
+  "lem-a1-space-etale-open-image",
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "def-weil-algebraic-closure",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 05W1, 040X and 05W5; geometric fibre input morphisms.tex Tag 02G7 and open-subspace calculus spaces-properties.tex Tags 03BX and 03BZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated etale morphism of algebraic spaces has open and closed diagonal and is an isomorphism if every geometric fibre has exactly one point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective etale algebraic space morphism with singleton geometric fibres is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it is both an open immersion and a surjective morphism.\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔ AlgebraicGeometry.IsOpenImmersion f ∧ AlgebraicGeometry.Surjective f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is an isomorphism if and only if it is both an open immersion and surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔ AlgebraicGeometry.IsOpenImmersion f ∧ CategoryTheory.Epi f.base\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is an isomorphism if and only if $ f $ is an open immersion and the underlying continuous map $ f_{\\\\text{base}} $ is an epimorphism in the category of topological s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instRespectsIsoSchemeSurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.Surjective\", \"doc\": \"In the category of schemes, every isomorphism is a surjective morphism. This means that if $ f: X \\to Y $ is an isomorphism of schemes, then its underlying continuous map of topological spaces is surje\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale, IsIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Etale'",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Uu]niversallyInjective|[Ee]tale.*[Dd]iagonal",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"52\", \"text\": \"theorem weaklyEtale_eq_flat_inf_diagonal_flat :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"53\", \"text\": \"    @WeaklyEtale = (@Flat ⊓ MorphismProperty.diagonal @Flat : MorphismProperty Scheme.{u}) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"62\", \"text\": \"  rw [weaklyEtale_eq_flat_inf_diagonal_flat]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"67\", \"text\": \"  rw [weaklyEtale_eq_flat_inf_diagonal_flat]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"76\", \"text\": \"  rw [weaklyEtale_eq_flat_inf_diagonal_flat]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"127\", \"text\": \"  exact inferInstanceAs <| Etale (pullback.diagonal f)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen diagonal and off diagonal complement for a separated etale morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isSeparatedMap_iff_isClosed_diagonal\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosed f.pullbackDiagonal\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if and only if the diagonal subset of the pullback of $ f $ with itself is closed in the product topology.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"isSeparatedMap_iff_isClosedEmbedding\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosedEmbedding (toPullbackDiag f)\", \"doc\": \"A function $ f: X \\\\to Y $ between topological spaces is a separated map if and only if the diagonal map $ X \\\\to X \\\\times_Y X $ (defined by $ x \\\\mapsto (x, x) $) is a closed embedding, where $ X \\\\times\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsOpenImmersion",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsOpenImmersion",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Etale f\", \"doc\": \"Open immersions are étale.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated etale morphism of algebraic spaces has a clopen diagonal and is an isomorphism when surjective with singleton geometric fibres",
+   "results": "{\"t\": \"2026-10-23T12:02:48Z\", \"tool\": \"leanfinder\", \"query\": \"A separated etale morphism of algebraic spaces has a clopen diagonal and is an isomorphism when surjective with singleton geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\"], \"digest\": \"8d2f8d1319eb9dab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: logged hits read; scheme-only diagonal and isomorphism criteria do not state this algebraic-space assertion. Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 and Morphisms/IsIso.lean:24 were read; no algebraic-space declaration occurs in project source."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isOpenImmersion_diagonal|isIso_iff_isOpenImmersion_and_surjective",
+   "results": "{\"t\": \"2026-10-23T12:03:59Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|isOpenImmersion_diagonal|isIso_iff_isOpenImmersion_and_surjective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\"], \"digest\": \"f1b5fb65220ddd98\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: logged hits read; scheme-only diagonal and isomorphism criteria do not state this algebraic-space assertion. Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 and Morphisms/IsIso.lean:24 were read; no algebraic-space declaration occurs in project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a separated etale map is open and closed and a surjective etale map with singleton geometric fibres is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:06:03Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal of a separated etale map is open and closed and a surjective etale map with singleton geometric fibres is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isSeparatedMap_iff_isClosed_diagonal\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"isSeparatedMap_iff_isClosedEmbedding\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isSeparated_iff\"], \"digest\": \"171d571abdd331fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: logged hits read; scheme-only diagonal and isomorphism criteria do not state this algebraic-space assertion. Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 and Morphisms/IsIso.lean:24 were read; no algebraic-space declaration occurs in project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable etale map of fppf sheaves with exactly one point in each geometric fibre is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:06:06Z\", \"tool\": \"leanfinder\", \"query\": \"A representable etale map of fppf sheaves with exactly one point in each geometric fibre is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"484399692f73a8f3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: logged hits read; scheme-only diagonal and isomorphism criteria do not state this algebraic-space assertion. Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 and Morphisms/IsIso.lean:24 were read; no algebraic-space declaration occurs in project source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: degree one base case of the induction.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-separated-etale-diagonal-complement",
+  "worker": "stage1",
+  "summary": "Retained the complete statement and inherited searches, adding the earlier Q24 logged searches. Six-step split with no new nodes: etale comparison plus monicity gives the open diagonal; separatedness and open-subspace calculus give its clopen complement; field-fibre decomposition upgrades singleton fibres to Spec of the algebraically closed field; the diagonal then has full point image, is an isomorphism, and a is an open monomorphism with full image. Corrected the source attribution: 03HK alone does not state openness.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: degree one base case of the induction. The six steps realize the degree-one base case through the existing geometric and scheme-test nodes. The latest blueprint direct-images proof (3) was read; the inherited ancestor is null, as confirmed by blueprint_refs.py ancestor, and is retained. Whole-blueprint searches for diagonal, clopen diagonal, singleton and radicial found no identical statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-diagonal-scheme-tests",
+    "why": "Generic representability and monicity of relative diagonals; the unit does not replace the foundational scheme-test argument."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic base change, composition and comparison calculus for etale maps of algebraic spaces, used to show that the diagonal is etale."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-image and open-subspace calculus, including that a full-image open subspace is the whole space."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only its open-subspace/open-subset correspondence is used to construct the complement."
+   },
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Generic scheme-over-field decomposition, applied to a represented geometric fibre; no unit-level finiteness argument is replaced."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representable etale composition, used only to pass from the stated scheme-test etaleness to chartwise etaleness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-diagonal-scheme-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-4f705f530",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-4f705f530 (reviewer sub-agent of L); spot-checked: Read in full: the item, the parent's d=1 use in lem-sfb-qcqs-space-integral-scheme-cover, all 13 cited statements, and Stacks 05W1, 05W5, 040X, 03HK and 02G7 at the cited places. The statement is unchanged, has no new nodes and is true: it is the 05W1 open diagonal plus the 05W5/040X criterion.\n\nSteps:\n- Step 1: the diagonal is representable and monic, then chartwise etale by base change, composition and comparison, so it is an open immersion. 'Etale on scheme charts' in the etale-monomorphism node is the 03FR notion, and chartwise etale plus representable gives representable etale, so this is not a gap.\n- Step 2: inverse-image clause and final topology give a clopen |D|, and the complement subspace is a closed immersion. OK.\n- Step 3: by 02G7 and algebraic closedness, a singleton fibre is Spec Ω with a unique section. OK.\n- Step 4: the Ω-extension argument shows |δ| is surjective. OK.\n- Steps 5-6: an open subspace with full image is the whole space, then the monomorphism and full image give the isomorphism. OK.\n\nSmall cases checked: empty space, X⊔X, an open inclusion, nontrivial separable L/k, and inseparable extensions.\n\nThe six declared tool_uses are generic algebraic-space foundations and are accepted. Batch-5: all eight flagged citations are general definitions or foundations (03HK, 03FT-03FV, 03EC, 05W5, 03H4/03BX/03BZ, 02G7, 03BU), not trace-formula or Poincaré-duality steps; no RETURN. No SGA source is used.\n\nFIX: the item's source still credited 03HK with an 'etale diagonal', although the report claims this was corrected (only proof_origin had been). I replaced source.place with 05W1(1), 03HK(1),(3), and 05W5 with 040X(1)<=>(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSeparatedEtaleDiagonalComplement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separated_etale_diagonal_clopen_and_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSeparatedEtaleDiagonalComplement.lean",
+  "statement": "theorem separated_etale_diagonal_clopen_and_isIso {S : Scheme.{u}} (U X : AlgebraicSpace S) (a : U ⟶ X) (hsep : IsSeparatedPresheafMap a.hom.hom) (het : IsEtale a.hom.hom) : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (diagonalPresheafMap a.hom.hom) ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (diagonalPresheafMap a.hom.hom) ∧ (∃ (C : AlgebraicSpace S) (j : C.obj.obj ⟶ Limits.pullback a.hom.hom a.hom.hom), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) j ∧ pointImage j = (pointImage (diagonalPresheafMap a.hom.hom))ᶜ) ∧ (pointImage a.hom.hom = Set.univ → (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj), ∃ p : Point (Limits.pullback a.hom.hom x), ∀ q, q = p) → IsIso a)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af4624675",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Re-delivery of 294d: Lean statement byte-identical. R1 repaired: the theorem node lem-trf-space-qc-separated-etale-local is replaced in stmt_deps by the new existing:true node def-sfb-presheaf-map-separated-diagonal, owning diagonalPresheafMap and IsSeparatedPresheafMap in Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal; no other live owner; §5 fields OK. R2 repaired: real second reading. def-a1-algebraic-space-point-classes (landed) added to stmt_deps. Clause check OK: hsep/het hypotheses; open and closed diagonal; ∃ C, j open+closed with pointImage j = complement (pinned, not hollow); point surjectivity + singleton Point(pullback a x) for all algebraically closed Ω : Type u ⇒ IsIso a. True by 05W1/03HK/02G7/040X/05W5. Edge cases (empty, identity, X⊔X, separable/inseparable L/k) OK. lean.statement verbatim; docstrings with source, blueprint and proof steps; imports follow rule 7; no file changed, so no compile. Advisory: the stage-1 Q24 source.place FIX (05W1/03HK(1),(3)/040X) is missing on live; the item source still credits 03HK with an etale diagonal; maintainer should re-apply."
+ }
+}

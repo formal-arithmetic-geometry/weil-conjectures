@@ -116,7 +116,50 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.baseChangeField_of_compactification",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange",
+     "lines": [
+      170,
+      200
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.baseChangeField_isCurve",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.BaseChange",
+     "lines": [
+      59,
+      77
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.baseChangeField",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.BaseChange",
+     "lines": [
+      79,
+      97
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-ext-invariance",
  "statement_change": {
@@ -178,18 +221,27 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k\\subseteq k'$ be algebraically closed and let $C$ be a\ncurve over $k$. Then $C_{k'}$ is a curve over $k'$ of the same\ndimension. If $C$ is smooth (resp. proper, resp. affine), then so is\n$C_{k'}$; and if $C$ is a connected curve, then so is $C_{k'}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k\\subseteq k'$ be a field extension and let $C$ be a separated,\nquasi-compact $k$-scheme which is smooth of relative dimension one over $k$.\nThen $C_{k'}$ is a curve over $k'$ in the sense of [def-sc-curves] which is\nsmooth of relative dimension one; it is proper if $C$ is, and affine if $C$\nis. If moreover $k$ is algebraically closed and $C$ is a smooth connected\ncurve over $k$ which is proper, or which is an open subscheme of a smooth\nproper connected curve over $k$, then $C_{k'}$ is a connected curve over $k'$.",
   "proof": [
    {
-    "text": "Separation, smoothness, properness, finite type and affineness are\nall stable under base change ([def-weil-pbc-scheme-conventions]),\nand for an affine curve $C=\\operatorname{Spec}A$ one has\n$C_{k'}=\\operatorname{Spec}(A\\otimes_kk')$. For the dimension:\nfor an affine open piece $U=\\operatorname{Spec}A$ of $C$, by\nNoether normalization (*reference: Stacks Project, Commutative\nAlgebra, [Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)*) there is a finite injective map\n$k[x_1,\\dots,x_d]\\hookrightarrow A$ with $d=\\dim A$; tensoring\nwith $k'$ gives a finite injective map\n$k'[x_1,\\dots,x_d]\\hookrightarrow A\\otimes_kk'$, and finite\nmorphisms preserve dimension (the going-up theorem:\n*reference: Stacks Project, Commutative Algebra, [Tag 00GU](https://stacks.math.columbia.edu/tag/00GU)*), so\n$\\dim(A\\otimes_kk')=d=\\dim A$; hence\n$\\dim C_{k'}=\\dim C$. Finally let $C$ be a connected curve. Then\n$C_{k'}$ is nonempty, because $C_{k'}\\to C$ is surjective, it has\ndimension one by the above, and it is connected: over a separably\nclosed field the morphism $C_{k'}\\to C$ induces a bijection of\nconnected components (*reference: Stacks Project, Varieties,\n[Tag 0363](https://stacks.math.columbia.edu/tag/0363)*). (Smoothness\nof $C_{k'}$ needs smoothness of $C$: a curve in the sense of\n[def-sc-curves] may be singular, and its base change is then singular\ntoo.)",
+    "text": "Separation, quasi-compactness, smoothness of relative dimension one,\nproperness and affineness are all stable under base change\n([def-weil-pbc-scheme-conventions]); for affineness note that for\n$C=\\operatorname{Spec}A$ one has $C_{k'}=\\operatorname{Spec}(A\\otimes_kk')$.\nA scheme smooth of relative dimension one over a field is locally of finite\ntype, and each of its affine open pieces has dimension at most one (its\nirreducible components have transcendence degree one, or it is empty); hence\n$C_{k'}$, being also separated and quasi-compact, is a curve over $k'$.",
     "uses": [
-     "def-weil-pbc-scheme-conventions",
-     "def-sc-curves"
+     "def-weil-pbc-scheme-conventions"
     ],
     "elementary": false
+   },
+   {
+    "text": "Now let $k$ be algebraically closed and $C$ a smooth connected curve as in\nthe second assertion; being smooth, connected and of dimension one, it is\nsmooth of relative dimension one, so the first part applies. Then\n$C_{k'}$ is nonempty, because $C_{k'}\\to C$ is\nsurjective, and of dimension exactly one by the above, being smooth of\nrelative dimension one and nonempty. It is connected: over a separably\nclosed field the morphism $C_{k'}\\to C$ induces a bijection of connected\ncomponents (*reference: Stacks Project, Varieties,\n[Tag 0363](https://stacks.math.columbia.edu/tag/0363)*).",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

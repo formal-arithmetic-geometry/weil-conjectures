@@ -1,0 +1,107 @@
+{
+ "id": "lem-diagonal-closure-ordinary-line-factor",
+ "kind": "statement",
+ "title": "Factorization of the ordinary closure-line leg",
+ "statement": "For prime l, finite E and scheme X with l invertible, the prescribed closureLineMap factors through the ordinary scalar extension of spRationalTwist.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), ordinary root-line scalar extension before direct image"
+ },
+ "proof": [
+  {
+   "text": "Choose compatible normalized rational root bases on a pro-etale cover and pass their maps through the sheafified coefficient colimit; the resulting module morphism has composite with the scalar-extension unit equal to the prescribed colimit leg.",
+   "uses": [
+    "lem-sp-rational-root-diagram-basis",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-regular-scalar-extension-multiplication"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-rational-root-diagram-basis",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sfb-regular-scalar-extension-multiplication"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), colimit-leg factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "factorization of closure colimit leg through scalar extension of a finite rational root line",
+   "results": "No existing global module-sheaf theorem; use the normalized root diagram basis.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit leg factors through extendScalars module morphism",
+   "results": "No matching theorem for the pro-etale Tate line.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*closureLineMap|ordinaryLine_factor",
+   "results": "No existing declaration.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalClosureOrdinaryLine",
+  "date": "2026-10-27",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-closure-ordinary-line",
+   "place": "paragraph (2), ordinary root-line scalar extension before direct image",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalClosureOrdinaryLineFactor",
+  "file": "lean/Sheaf/Paper/DiagonalClosureOrdinaryLineFactor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalClosure_ordinaryLine_factor",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27",
+  "statement": "theorem diagonalClosure_ordinaryLine_factor\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (X : Scheme.{u}) (_hX : IsUnit (l : Γ(X, ⊤))) :\n    ∃ f : (Mod.extendScalars\n        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) X)).obj\n          (spRationalTwist X l E) ⟶ spQbarTwist X l,\n      Mod.extendUnitHom (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) X)\n          (spRationalTwist X l E) ≫ f.hom = closureLineMap l E X"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T050650-L-251464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T050650-L-251464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

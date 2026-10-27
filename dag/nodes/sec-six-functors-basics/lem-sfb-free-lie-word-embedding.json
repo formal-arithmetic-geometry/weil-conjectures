@@ -1,0 +1,196 @@
+{
+ "id": "lem-sfb-free-lie-word-embedding",
+ "kind": "statement",
+ "title": "Embedding a free rational Lie algebra into its associative word algebra",
+ "statement": "Let $I$ be a finite set and let $F(I)$ be a free rational Lie algebra [def-wf-lie-algebra] on generators $z_i$: every assignment of the $z_i$ to a rational Lie algebra extends uniquely to a Lie homomorphism. Let $A(I)$ be the unital associative rational algebra whose vector-space basis consists of all finite words in $I$, including the empty word $1$, and whose multiplication is concatenation. Write $t_i$ for the one-letter word $i$, and give $A(I)$ the Lie bracket $[a,b]=ab-ba$. The unique Lie homomorphism\n$$q:F(I)\\longrightarrow A(I),\\qquad q(z_i)=t_i,$$\nis injective. The empty generating set is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed p.504, supporting free-Lie input to the asserted freeness of the two subalgebras. The embedding lemma is supplied by the agent, not proved in Milne; WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapters 1--3, Chapter II, free Lie algebras and their embedding into tensor algebras. Mathlib/Algebra/Lie/Free.lean:36--44 and SerreConstruction.lean:40--46 describe precisely this missing identification."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=F(I)$ and form $U=U(F)$ with canonical linear map $j:F\\to U$ using [lem-sfb-enveloping-universal-property]. By [lem-sfb-arbitrary-basis-pbw], $j$ is injective; this theorem applies to every rational Lie algebra, so no finite-dimensionality assumption on $F$ is needed. The defining quotient relation gives $j([x,y])=j(x)j(y)-j(y)j(x)$ for every $x,y\\in F$, hence $j$ is a Lie homomorphism into the commutator Lie algebra of $U$.",
+   "uses": [
+    "lem-sfb-enveloping-universal-property",
+    "lem-sfb-arbitrary-basis-pbw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10j, pp.199–200, Theorem 10.36; supporting the free-Lie assertion of Theorem 23.63, first proof, p.504."
+   }
+  },
+  {
+   "text": "Define a rational linear map $p:A(I)\\to U$ on the given word basis by $p(1)=1$ and $p(t_{i_1}\\cdots t_{i_n})=j(z_{i_1})\\cdots j(z_{i_n})$. Every element of $A(I)$ is a finite linear combination of words, so this specifies $p$ uniquely. On two basis words, concatenation and associativity in $U$ give $p(vw)=p(v)p(w)$, including empty words. Bilinearity extends this equality to arbitrary elements. Thus $p$ is a unital rational algebra homomorphism and $p([a,b])=p(ab-ba)=p(a)p(b)-p(b)p(a)$, so it is also a Lie homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10j, pp.199–200, Theorem 10.36; supporting the free-Lie assertion of Theorem 23.63, first proof, p.504."
+   }
+  },
+  {
+   "text": "The Lie homomorphisms $p\\circ q$ and $j$ from $F(I)$ to $U$ have the same value $j(z_i)$ on each generator. The uniqueness clause in the stated universal property of $F(I)$ gives $p\\circ q=j$. If $q(x)=q(y)$, applying $p$ gives $j(x)=j(y)$, and the injectivity obtained in step 1 gives $x=y$. This proves injectivity of $q$. All constructions allow $I=\\varnothing$; moreover in that case the identity and zero Lie endomorphisms of $F(I)$ agree by the same uniqueness clause, so $F(I)=0$, and the assertion is the injectivity of $0\\to\\mathbf Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10j, pp.199–200, Theorem 10.36; supporting the free-Lie assertion of Theorem 23.63, first proof, p.504."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-enveloping-universal-property",
+  "lem-sfb-arbitrary-basis-pbw"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.36 and the construction of U(L), pp.199–200, followed by the explicit word-evaluation argument and uniqueness in the free Lie universal property; used for Theorem 23.63, p.504."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Lie homomorphism from a free Lie algebra into the free associative algebra on the same generators is injective",
+   "results": "{\"t\": \"2026-10-24T00:08:04Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical Lie homomorphism from a free Lie algebra into the free associative algebra on the same generators is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAlgebra.ι_injective\", \"LieHom.toNonUnitalAlgHom_injective\", \"FreeAlgebra.ι_inj\", \"FreeAlgebra.Pre.of.inj\", \"FreeRing.of_injective\", \"LieAlgebra.toModule_injective\", \"FreeAlgebra.algebraMap_inj\", \"FreeLieAlgebra.mk\"], \"digest\": \"112109a8764d192a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/Free.lean:36--44, 224--273 and SerreConstruction.lean:40--46. FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra (Free.lean:269) identifies enveloping and word algebras, but does not assert injectivity of the Lie map into its enveloping algebra. FreeAlgebra.ι_injective concerns only the generating set, not all Lie elements; LieHom.toNonUnitalAlgHom_injective concerns forgetting homomorphism structure. UniversalEnvelopingAlgebra.ι (UniversalEnveloping.lean:91) is only a definition. The source explicitly says the free-Lie subalgebra identification needs PBW; no injectivity theorem is provided."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A free Lie algebra embeds in the associative algebra of noncommutative polynomials by interpreting brackets as commutators",
+   "results": "{\"t\": \"2026-10-24T00:08:05Z\", \"tool\": \"leansearch\", \"query\": \"A free Lie algebra embeds in the associative algebra of noncommutative polynomials by interpreting brackets as commutators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.ι\", \"FreeLieAlgebra\", \"LieAlgebra.ofAssociativeAlgebra\", \"UniversalEnvelopingAlgebra.ι_apply\", \"FreeNonUnitalNonAssocAlgebra.of\", \"FreeLieAlgebra.instLieAlgebra\", \"FreeLieAlgebra.instLieRing\", \"FreeLieAlgebra.instAdd\"], \"digest\": \"36cbc962bca7791c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/Free.lean:36--44, 224--273 and SerreConstruction.lean:40--46. FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra (Free.lean:269) identifies enveloping and word algebras, but does not assert injectivity of the Lie map into its enveloping algebra. FreeAlgebra.ι_injective concerns only the generating set, not all Lie elements; LieHom.toNonUnitalAlgHom_injective concerns forgetting homomorphism structure. UniversalEnvelopingAlgebra.ι (UniversalEnveloping.lean:91) is only a definition. The source explicitly says the free-Lie subalgebra identification needs PBW; no injectivity theorem is provided."
+  },
+  {
+   "tool": "loogle",
+   "query": "FreeLieAlgebra, FreeAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:08:04Z\", \"tool\": \"loogle\", \"query\": \"FreeLieAlgebra, FreeAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra_symm_apply\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra_apply\"], \"digest\": \"963f96c20ea90261\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/Free.lean:36--44, 224--273 and SerreConstruction.lean:40--46. FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra (Free.lean:269) identifies enveloping and word algebras, but does not assert injectivity of the Lie map into its enveloping algebra. FreeAlgebra.ι_injective concerns only the generating set, not all Lie elements; LieHom.toNonUnitalAlgHom_injective concerns forgetting homomorphism structure. UniversalEnvelopingAlgebra.ι (UniversalEnveloping.lean:91) is only a definition. The source explicitly says the free-Lie subalgebra identification needs PBW; no injectivity theorem is provided."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of the Lie map from the free Lie algebra to its universal enveloping algebra Poincare Birkhoff Witt theorem",
+   "results": "{\"t\": \"2026-10-24T00:08:55Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of the Lie map from the free Lie algebra to its universal enveloping algebra Poincare Birkhoff Witt theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.toModule_injective\", \"LieHom.toNonUnitalAlgHom_injective\", \"LieEquiv.toLinearEquiv_injective\", \"UniversalEnvelopingAlgebra.ι\", \"LieDerivation.toLinearMapLieHom_injective\", \"FreeAlgebra.ι_injective\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra_apply\", \"LieAlgebra.Extension.incl_injective\"], \"digest\": \"7b0001acf96140b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/Free.lean:36--44, 224--273 and SerreConstruction.lean:40--46. FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra (Free.lean:269) identifies enveloping and word algebras, but does not assert injectivity of the Lie map into its enveloping algebra. FreeAlgebra.ι_injective concerns only the generating set, not all Lie elements; LieHom.toNonUnitalAlgHom_injective concerns forgetting homomorphism structure. UniversalEnvelopingAlgebra.ι (UniversalEnveloping.lean:91) is only a definition. The source explicitly says the free-Lie subalgebra identification needs PBW; no injectivity theorem is provided."
+  },
+  {
+   "tool": "grep",
+   "query": "def universalEnvelopingEquivFreeAlgebra|ι_injective|Birkhoff|PBW",
+   "results": "{\"t\": \"2026-10-24T00:11:04Z\", \"tool\": \"grep\", \"query\": \"def universalEnvelopingEquivFreeAlgebra|ι_injective|Birkhoff|PBW\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\"], \"digest\": \"a81b2cae024e20a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/Free.lean:36--44, 224--273 and SerreConstruction.lean:40--46. FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra (Free.lean:269) identifies enveloping and word algebras, but does not assert injectivity of the Lie map into its enveloping algebra. FreeAlgebra.ι_injective concerns only the generating set, not all Lie elements; LieHom.toNonUnitalAlgHom_injective concerns forgetting homomorphism structure. UniversalEnvelopingAlgebra.ι (UniversalEnveloping.lean:91) is only a definition. The source explicitly says the free-Lie subalgebra identification needs PBW; no injectivity theorem is provided."
+  },
+  {
+   "tool": "grep",
+   "query": "Birkhoff|PBW|universalEnvelopingEquivFreeAlgebra|ι_injective",
+   "results": "{\"t\": \"2026-10-24T00:36:21Z\", \"tool\": \"grep\", \"query\": \"Birkhoff|PBW|universalEnvelopingEquivFreeAlgebra|ι_injective\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/Lie/Free.lean\"], \"digest\": \"39a4e97ca39e3939\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define the enveloping algebra or forget homomorphism structure; none proves PBW or injectivity of the canonical map. Read UniversalEnveloping.lean:46–152, Free.lean:36–44,269–273 and SerreConstruction.lean:40–46. Module.Basis.symmetricAlgebra is the commutative symmetric algebra, not the enveloping algebra of a general Lie algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra.ι",
+   "results": "{\"t\": \"2026-10-24T00:36:21Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra.ι\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.hom_ext\", \"UniversalEnvelopingAlgebra.hom_ext_iff\", \"UniversalEnvelopingAlgebra.lift_symm_apply\", \"UniversalEnvelopingAlgebra.lift_ι_apply\", \"UniversalEnvelopingAlgebra.ι_comp_lift\", \"UniversalEnvelopingAlgebra.lift_unique\", \"UniversalEnvelopingAlgebra.ι_apply\"], \"digest\": \"c8a2f80be66fe663\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define the enveloping algebra or forget homomorphism structure; none proves PBW or injectivity of the canonical map. Read UniversalEnveloping.lean:46–152, Free.lean:36–44,269–273 and SerreConstruction.lean:40–46. Module.Basis.symmetricAlgebra is the commutative symmetric algebra, not the enveloping algebra of a general Lie algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare Birkhoff Witt ordered monomials in a basis of a Lie algebra form a basis of its universal enveloping algebra",
+   "results": "{\"t\": \"2026-10-24T00:36:23Z\", \"tool\": \"leanfinder\", \"query\": \"Poincare Birkhoff Witt ordered monomials in a basis of a Lie algebra form a basis of its universal enveloping algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInhabitedUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.Rel\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra_apply\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra\", \"UniversalEnvelopingAlgebra.Rel.lie_compat\"], \"digest\": \"359ca5aa1e0030d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define the enveloping algebra or forget homomorphism structure; none proves PBW or injectivity of the canonical map. Read UniversalEnveloping.lean:46–152, Free.lean:36–44,269–273 and SerreConstruction.lean:40–46. Module.Basis.symmetricAlgebra is the commutative symmetric algebra, not the enveloping algebra of a general Lie algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map of a Lie algebra into its universal enveloping algebra is injective by the PBW theorem",
+   "results": "{\"t\": \"2026-10-24T00:36:53Z\", \"tool\": \"leansearch\", \"query\": \"The natural map of a Lie algebra into its universal enveloping algebra is injective by the PBW theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.ι\", \"LieEquiv.injective\", \"UniversalEnvelopingAlgebra.ι_apply\", \"UniversalEnvelopingAlgebra.lift_ι_apply\", \"UniversalEnvelopingAlgebra.lift_unique\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.lift_ι_apply'\", \"LieHom.toNonUnitalAlgHom_injective\"], \"digest\": \"09c1d3b41fe16ea7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define the enveloping algebra or forget homomorphism structure; none proves PBW or injectivity of the canonical map. Read UniversalEnveloping.lean:46–152, Free.lean:36–44,269–273 and SerreConstruction.lean:40–46. Module.Basis.symmetricAlgebra is the commutative symmetric algebra, not the enveloping algebra of a general Lie algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weyl-relations-free-normal-form",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Graded triangular decomposition of a generalized Serre quotient. Supporting step: Theorem 23.63, first proof, printed p.504: the displayed Weyl-only algebra and its free negative/Cartan/free positive direct sum. The arbitrary-matrix rational form isolates the same normal-form input without using finite-type root theory. Detailed source referred to by Milne, Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, §4, no.2, is WANTED; the agent checks this generality in report.md. Supporting normal-form argument: Theorem 23.63, first proof, printed p.504, supporting free-Lie input to the asserted freeness of the two subalgebras. The embedding lemma is supplied by the agent, not proved in Milne; WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapters 1--3, Chapter II, free Lie algebras and their embedding into tensor algebras. Mathlib/Algebra/Lie/Free.lean:36--44 and SerreConstruction.lean:40--46 describe precisely this missing identification.",
+   "via": [
+    "lem-sfb-weyl-relations-free-normal-form",
+    "lem-sfb-serre-graded-triangular-quotient",
+    "lem-sfb-serre-rational-presentation",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-free-lie-word-embedding",
+  "worker": "stage1",
+  "summary": "Proved the embedding by word evaluation into the enveloping algebra and uniqueness of free Lie extensions. Reused the existing arbitrary-dimensional enveloping universal property; added only arbitrary-basis PBW, since existing rational/field PBW nodes assume finite dimension. Read Milne 10.36 and 23.63 and the Mathlib candidates. Normalized inherited doubled TeX escapes and literal newline escapes without changing the mathematical statement. Checked empty generators and arbitrary-dimensional use.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Graded triangular decomposition of a generalized Serre quotient. Supporting step: Theorem 23.63, first proof, printed p.504: the displayed Weyl-only algebra and its free negative/Cartan/free positive direct sum. The arbitrary-matrix rational form isolates the same normal-form input without using finite-type root theory. Detailed source referred to by Milne, Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, §4, no.2, is WANTED; the agent checks this generality in report.md. Supporting normal-form argument: Theorem 23.63, first proof, printed p.504, supporting free-Lie input to the asserted freeness of the two subalgebras. The embedding lemma is supplied by the agent, not proved in Milne; WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapters 1--3, Chapter II, free Lie algebras and their embedding into tensor algebras. Mathlib/Algebra/Lie/Free.lean:36--44 and SerreConstruction.lean:40--46 describe precisely this missing identification. The three steps realize precisely the free-Lie embedding prerequisite. Latest blueprint main-20261024, direct-images proof (3), remains the inherited upper route; blueprint_refs.py ancestor returns null, retained unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-5538816cc",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-5538816cc (reviewer sub-agent of L); spot-checked: I read the item and the one new node in full; no changes made. The item statement is byte-identical to Q13's copy (finite I, free F(I), word algebra A(I), q injective, empty I allowed); source is Milne 23.63 first proof, p.504, read. Step 1 cites the enveloping universal-property leaf (no finite-dimension hypothesis) and the new lem-sfb-arbitrary-basis-pbw for injectivity of j. The new node is needed because F(I) is infinite-dimensional for |I|>=2, and both lem-sfb-rational-pbw and lem-sfb-field-filtered-pbw assume finite dimension (statements read). Steps 2 and 3 are elementary: p is the word-evaluation algebra map, and p∘q=j follows from the item's own uniqueness clause. The new node matches Milne 10.36, p.200 (arbitrary totally ordered basis; footnote 2; construction (69) on pp.199-200). I tested it on L=0, 1-dimensional L, abelian L of any dimension, and the 2-dimensional nonabelian algebra. It is self-contained and statement-only, with real searches recorded. Mathlib has no PBW: the only hits are the comments at Free.lean:36-44 and SerreConstruction.lean:46. A duplicate search over all nodes for PBW, enveloping and free Lie found only finite-dimensional, restricted, integral or tensor-level nodes. The new node is strictly more general than a clause of the item and has no cycle. No SGA, no tool_uses, blueprint via chain consistent."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.FreeLieWordEmbedding",
+  "declaration": "FreeLieAlgebra.lift_freeAlgebra_injective",
+  "file": "lean/Sheaf/Algebra/Lie/FreeLieWordEmbedding.lean",
+  "statement": "theorem lift_freeAlgebra_injective (I : Type u) [Finite I] : Function.Injective (@FreeLieAlgebra.lift ℚ I _ (FreeAlgebra ℚ I) LieRing.ofAssociativeRing _ (FreeAlgebra.ι ℚ))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09defa832",
+  "group": "Q27",
+  "result": "pass",
+  "note": "FreeLieAlgebra.lift_freeAlgebra_injective (I : Type u) [Finite I]: injectivity of lift ℚ (FreeAlgebra.ι ℚ) with explicit LieRing.ofAssociativeRing (instance slot = LieAlgebra.ofAssociativeAlgebra, same as Mathlib universalEnvelopingEquivFreeAlgebra). Matches every clause: finite I, free Lie algebra via lift/lift_unique, word algebra FreeAlgebra ℚ I, t_i = ι, commutator bracket, injectivity only. Empty I allowed; no finite-dim/nonempty assumption; universe free. Only stmt_dep def-wf-lie-algebra (Mathlib leaf) is sufficient; proof-dep ArbitraryBasisPBW exists live. No existing Mathlib/project theorem or name clash. Proof sorry only, docstrings give source place, blueprint tag and 3 proof steps; lean.statement verbatim; node otherwise identical to live; report has Worker report and Second reading by Q27. No file changed, so no compile."
+ }
+}

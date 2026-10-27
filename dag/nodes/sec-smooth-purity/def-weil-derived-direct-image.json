@@ -69,6 +69,25 @@
     "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false
+  },
+  {
+   "text": "For arbitrary finite-type k-schemes use the coefficient-linear integral constructible adjunction. Reuse the proved raw scalar-localization construction rationalSystemPullback_isLeftAdjoint in SfRationalDirectImageAdjunction: localize functors, unit and counit, prove naturality by tensor induction and triangles on pure tensors, and identify the left functor with rationalDerivedPullback by its uniqueness specification. This supplies pointwise right adjoints at all finite coefficient stages, without a finite-field presentation.",
+   "uses": [
+    "lem-sf-integral-pullback-linear-adjunction",
+    "lem-sf-rational-direct-image-adjunctions",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generalized coefficient compatibility theorem to obtain the unique normalized left stage morphism and invertible right mates for the already proved pointwise adjunctions. Mathlib mateEquiv_counit supplies the actual counit equation. Reuse the fully proved generic helpers DirectImageAdjunction.mateFamily, mateFamilyUnit and mateFamilyCounit in SfCommonStageDirectImage: the counit equation implies right-family coherence and compatible units. Descend these maps with the stage-system functor construction; finite-stage triangle identities prove both descended triangles. The normalized representative formulas identify the descended left functor with commonStageDerivedPullback by commonStageDerivedPullback_existsUnique. Its right adjoint and specifying adjunction are therefore the existing geometricCommonStageDirectImage and geometricCommonStageAdjunction definitions.",
+   "uses": [
+    "lem-sf-rational-direct-image-coefficient-compatibility",
+    "prop-weil-pbc-descent-functors",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -81,14 +100,20 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-kinjective-total-derived",
-  "prop-pur-kinjective-resolutions-exist"
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-integral-pullback-linear-adjunction",
+  "lem-sf-rational-direct-image-adjunctions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "prop-weil-pbc-descent-functors"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F4",
-  "date": "2026-10-21",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6E and 0D6J for composition and unit normalization; sites-modules.tex Tag 03DA and sites.tex Tag 03CO for the sectionwise and limit constructions. Agent proof of the four auxiliary construction theorems; no change to the definition or its unit route."
+  "group": "C2",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.2, 6.8.14 and 6.8.15; retain the existing finite/integral construction steps and add the arbitrary-field rational adjunction and formal stage descent. Generic previously proved helpers are reused through private imports, without changing their declarations."
  },
  "mathlib_searches": [
   {
@@ -137,7 +162,18 @@
   "def-weil-rationalization-karoubi",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-derived-direct-image",
@@ -153,8 +189,8 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.SfDerivedDirectImage",
-  "declaration": "WeilConjectures.SfIntegralDirectImage",
+  "module": "Sheaf.Paper.GeometricCommonStageDirectImage",
+  "declaration": "WeilConjectures.geometricCommonStageDirectImage",
   "declarations": [
    "WeilConjectures.sfCompletedCoefficientMap_existsUnique",
    "WeilConjectures.sfCompletedCoefficientMap",
@@ -170,39 +206,46 @@
    "WeilConjectures.sfDirectImageTerm",
    "WeilConjectures.sfDirectImageTransition",
    "WeilConjectures.SfIntegralDirectImage",
-   "WeilConjectures.sfDirectImageReductionComparison"
+   "WeilConjectures.sfDirectImageReductionComparison",
+   "WeilConjectures.geometricCommonStagePull_isLeftAdjoint",
+   "WeilConjectures.geometricCommonStageDirectImage",
+   "WeilConjectures.geometricCommonStageAdjunction"
   ],
-  "file": "lean/Sheaf/Paper/SfDerivedDirectImage.lean",
-  "statement": "structure SfIntegralDirectImage (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) [HasProduct (sfDirectImageTerm l E f K)]",
+  "file": "lean/Sheaf/Paper/GeometricCommonStageDirectImage.lean",
+  "statement": "def geometricCommonStageDirectImage : generalAlgebraicallyClosedConstructibleCategory l Ω X ⥤ generalAlgebraicallyClosedConstructibleCategory l Ω Y",
   "branch": "newtargets-dag",
-  "by": "Q29",
-  "date": "2026-10-15",
+  "by": "NK",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "§1(B): The node has no Lean record; the current server has no Sheaf.Paper.DerivedDirectImage. Supply its finite-level derived image, the canonically normalized finite-image tower in completed modules, the Roos-triangle presentation of an integral image, and the actual scalar-adjoint projection comparison. The auxiliary completed pushforward specifies the transition comparison canonically; no arbitrary comparison is assumed."
+  "note": "§1(B): SfDerivedDirectImage supplies the finite-level and integral reconstruction, but no direct image on the common-stage category for arbitrary finite-type schemes over k. SfCommonStageDirectImage only handles schemes presented as base changes from k₀. Publicly retain both interfaces and supply the right adjoint and its specifying adjunction to the actual commonStageDerivedPullback for arbitrary finite-type k-schemes; its universal property determines the functor up to the unique adjunction-compatible isomorphism."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-80772b1e6",
-  "group": "Q29",
-  "result": "pass",
-  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
+  "reviewer": "NT-stage2-cc-e19e3ea47",
+  "group": "NK",
+  "result": "fix",
+  "note": "Statement correct: every clause of the node is matched (coefficient map pinned as precomposition; operations and adjunctions pinned by unit_sections/IsNormalizedPullCounit/transpose; a pinned by IntegralAgreement with the completion inverse and balanced scalar comparison, orientation rho_Z Lp* -> Lp_B* rho_Y; tensor and unit equations with the canonical comparisons; b fixed by the right-mate formula; counit equation verbatim; unit equation present; both preservation clauses). No hollow definitions; only the main theorem and geometricCommonStagePull_isLeftAdjoint are sorry. The §1(B) geometricCommonStageDirectImage = rightAdjoint of commonStageDerivedPullback (same pattern as landed sfModelDerivedPush, which covers only k0 models) is accepted. H12 FIX: the new def nodes did not cite their owners. fixes/def-sf-native-proper-coefficient-operations.json adds def-per-continuous-rational-realization-data, def-weil-pbc-bounded-constructible-tower, def-sf-ordinary-integral-pullback-construction, def-sf-ordinary-integral-derived-pullback, def-weil-algebraically-closed-coefficients, def-weil-proetale-inverse-image, def-weil-rationalization-karoubi; fixes/def-sf-native-proper-tensor-comparison.json adds def-coef-ringed-tensor-hom-model, def-pc-kflat-complex, def-zl-ringed-derived-closed-symmetric-monoidal-data. TeX cites each once (CITE set = stmt_deps); all on base, acyclic; no Lean change, no compile. Advisory: theorem-owned helpers (DirectImage push, ordinaryIntegralCompletionComparison, finiteFieldDatumPrimeUnit); main declaration of def-weil-derived-direct-image moved off SfIntegralDirectImage despite the N0 ownership note; the second reading is a self-reread."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $X,Y$ be schemes on which $\\ell$ is\ninvertible, and let $f:X\\to Y$ be a morphism\n[def-weil-scheme-morphism-properties]; write $f_n$ for this morphism at\ncoefficient level $A_{E,n}$. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with derived pullback and internal\nHom notation [def-weil-derived-pullback-tensor-hom] and derived tensor\nnotation [def-weil-derived-tensor], the functor\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$ is left exact. At\nfinite level, choose a K-injective resolution and define its total\nright-derived functor by\n\n$$\n Rf_{*,n}=R(f_n)_*:D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}).\n$$\n\nFor a derived-complete integral [def-weil-derived-complete-integral-detailed]\ncomplex $K\\in D^b_c(X,\\mathcal O_E)$, define\n\n$$\n Rf_*K=\n R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr).\n$$\n\nThe tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$. The\nfinite-reduction comparison is the natural map\n\n$$\n (Rf_*K)\\otimes^L_{\\mathcal O_E}A_{E,n}\n \\longrightarrow\n Rf_{*,n}\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr);\n$$\n\nHere $A_{E,n}$ and finite-level constructibility\nare the finite-torsion coefficient data\n[def-weil-finite-torsion-constructibility], and $\\mathcal H^r$ is the\ncohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. For\n$\\Lambda=E$ use the rationalized category\n[def-weil-rationalization-karoubi]; for $\\Lambda=\\Qlb$ use the common-stage\ncategory [def-weil-algebraically-closed-coefficients].",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring, with coefficient sheaves\n$\\Lambda_W=p_W^*\\Lambda$; the cases of interest are $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$\nfor a prime $\\ell$, a finite extension $E/\\Ql$ with uniformizer $\\pi_E$, an integer\n$n\\in\\mathbf Z_{\\geq1}$ and $A_{E,n}=\\mathcal O_E/\\pi_E^n$. Let $X,Y$ be schemes and let\n$f:X\\to Y$ be a morphism [def-weil-scheme-morphism-properties]. On the small pro-étale sites\n[def-weil-pbc-proetale-site], with derived pullback and internal Hom\nnotation [def-weil-derived-pullback-tensor-hom] and derived tensor notation\n[def-weil-derived-tensor], the pushforward of module objects\n$f_*:\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$\n([det-def-sfb-module-pushforward-pullback]) is left exact. Its total right\nderived functor, computed by K-injective resolutions\n([det-def-sfb-derived-categories]), is\n\n$$\n Rf_*:D(X_{\\mathrm{proét}},\\Lambda)\\longrightarrow D(Y_{\\mathrm{proét}},\\Lambda);\n$$\n\nit is right adjoint to the derived pullback $Lf^*$ of [def-weil-derived-pullback-tensor-hom], and,\nrestriction of scalars along $\\eta_f$ being exact, it is the right derived functor of the\ntransport $\\operatorname{mapMod}(f^{\\Ab}_*)$ followed by termwise restriction of scalars along\n$\\eta_f$.\n\nThe definition is the same for every $\\Lambda$; for\n$\\Lambda=A_{E,n}$, where $(A_{E,n})_W$ is the classical constant sheaf, write\n$f_n$ for $f$ with these coefficients and $Rf_{*,n}=R(f_n)_*$. Here $A_{E,n}$\nand finite-level constructibility are the finite-torsion coefficient data\n[def-weil-finite-torsion-constructibility], and $\\mathcal H^r$ is the\ncohomology-sheaf functor [def-weil-derived-cohomology-sheaves].\n\nFor $\\Lambda=\\mathcal O_E$ the projection-formula map\n\n$$\n (Rf_*K)\\otimes^L_{\\mathcal O_{E,Y}}(A_{E,n})_Y\n \\longrightarrow\n Rf_{*,n}\\bigl(K\\otimes^L_{\\mathcal O_{E,X}}(A_{E,n})_X\\bigr)\n$$\n\nis an isomorphism, and for derived $\\pi_E$-complete $K$ one has\n$Rf_*K\\simeq R\\varprojlim_nRf_{*,n}(K\\otimes^L_{\\mathcal O_{E,X}}(A_{E,n})_X)$.\nThese are consequences of the definition, proved in\n[prop-weil-pbc-direct-image-limits]; they are not used to define $Rf_*$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "lead_note": "Maintenance 2026-10-21 (N0): restore the finite/integral SfDerivedDirectImage ownership from before 35763188dc. The later common-stage/Weil construction, its adjunction proof dependencies and its existing review history are preserved under def-weil-common-stage-derived-direct-image. No statement or Lean source is changed by this ownership repair.",
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-f7254",
-  "group": "F4",
-  "result": "pass",
-  "landing": "20261021T101005-L-4184293",
+  "reviewer": "C-21bb5",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261024T232204-L-2311194",
   "kind": "interface",
-  "note": "independent cc review: delivered SfDerivedDirectImage.lean (4 sorries closed) vs live clone and node def-weil-derived-direct-image; old statement typechecks against new theorem; axioms clean; 10 direct importers compiled against the delivered module"
+  "note": "independent cc review: geometricCommonStagePull_isLeftAdjoint proof vs node def-weil-derived-direct-image steps 5-6; generalized sfRationalDirectImageCoefficientCompatibility vs its node, change record, and the one-line forced adaptation in SfRationalDirectImageAdjunction"
  }
 }

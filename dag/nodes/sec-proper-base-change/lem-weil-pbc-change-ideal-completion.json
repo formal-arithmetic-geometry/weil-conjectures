@@ -183,7 +183,65 @@
   "item": "lem-weil-pbc-finite-after-completion",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "powerReductionJI",
+    "powerReductionIJ",
+    "changeIdealCompletion",
+    "changeIdealCompletionRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "powerReductionJI",
+     "module": "WeilConjectures.Algebra.ChangeIdealCompletion",
+     "lines": [
+      20,
+      31
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "powerReductionIJ",
+     "module": "WeilConjectures.Algebra.ChangeIdealCompletion",
+     "lines": [
+      33,
+      42
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "changeIdealCompletion",
+     "module": "WeilConjectures.Algebra.ChangeIdealCompletion",
+     "lines": [
+      76,
+      116
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "changeIdealCompletionRing",
+     "module": "WeilConjectures.Algebra.ChangeIdealCompletion",
+     "lines": [
+      119,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -240,5 +298,51 @@
    "powerReductionJI"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $I,J\\subseteq A$ ideals and $c,d\\ge1$ integers with $I^c\\subseteq J$ and $J^d\\subseteq I$. Let $M$ be an $A$-module, $M^\\wedge_I=\\varprojlim_nM/I^nM$ and $M^\\wedge_J=\\varprojlim_nM/J^nM$ (compatible sequences, componentwise $A$-module structure), with canonical maps $\\iota_I:M\\to M^\\wedge_I$, $\\iota_J:M\\to M^\\wedge_J$, $x\\mapsto(x\\bmod I^nM)_n$ resp. $(x\\bmod J^nM)_n$. Then the map $\\theta:M^\\wedge_J\\to M^\\wedge_I$, $(x_n)_n\\mapsto(x_{dk}\\bmod I^kM)_k$ (well defined since $J^{dk}M\\subseteq I^kM$) is an isomorphism of $A$-modules with inverse $(y_k)_k\\mapsto(y_{cn}\\bmod J^nM)_n$ (well defined since $I^{cn}M\\subseteq J^nM$), and $\\theta\\circ\\iota_J=\\iota_I$. In particular $M$ is $I$-adically complete ($\\iota_I$ bijective) if and only if it is $J$-adically complete. For $M=A$ (where $M^\\wedge_I=\\varprojlim_nA/I^n$ with componentwise multiplication) $\\theta$ is an isomorphism of rings.",
+  "proof": [
+   {
+    "text": "Inclusions of submodules. For $k\\ge0$: $J^{dk}=(J^d)^k\\subseteq I^k$ (since $J^d\\subseteq I$ and powers of ideals are monotone), hence $J^{dk}M\\subseteq I^kM$; likewise $I^{cn}=(I^c)^n\\subseteq J^n$, hence $I^{cn}M\\subseteq J^nM$. So there are surjective $A$-linear quotient maps $\\pi^{JI}_k:M/J^{dk}M\\to M/I^kM$ and $\\pi^{IJ}_n:M/I^{cn}M\\to M/J^nM$, $x\\bmod(\\cdot)\\mapsto x\\bmod(\\cdot)$. Any composite of such reductions $M/N_1\\to M/N_2\\to M/N_3$ along inclusions $N_1\\subseteq N_2\\subseteq N_3$ of submodules is the reduction $M/N_1\\to M/N_3$ (both send $x\\bmod N_1$ to $x\\bmod N_3$); this is used below without further mention.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$\\theta$ and $\\psi$ are well defined. Let $(x_n)_n\\in M^\\wedge_J$, i.e. $x_n\\in M/J^nM$ with $x_{n'}\\bmod J^nM=x_n$ for $n\\le n'$. Put $y_k=\\pi^{JI}_k(x_{dk})=x_{dk}\\bmod I^kM$. For $k\\le k'$: $y_{k'}\\bmod I^kM=x_{dk'}\\bmod I^kM=(x_{dk'}\\bmod J^{dk}M)\\bmod I^kM=x_{dk}\\bmod I^kM=y_k$, using $J^{dk}M\\subseteq I^kM$ and compatibility of $(x_n)$ for $dk\\le dk'$. So $\\theta((x_n)_n)=(y_k)_k\\in M^\\wedge_I$. Symmetrically, for $(y_k)_k\\in M^\\wedge_I$ the family $\\psi((y_k)_k)=(y_{cn}\\bmod J^nM)_n$ is compatible (for $n\\le n'$: $y_{cn'}\\bmod J^nM=(y_{cn'}\\bmod I^{cn}M)\\bmod J^nM=y_{cn}\\bmod J^nM$), so $\\psi:M^\\wedge_I\\to M^\\wedge_J$ is defined. (Stacks uses the equivalent systems $M/I^nM\\to M/J^{\\lfloor n/c\\rfloor}M$, $M/J^mM\\to M/I^{\\lfloor m/d\\rfloor}M$; the reindexing by $dk$, $cn$ in the statement gives the same maps on the limits, by compatibility.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$\\theta$ and $\\psi$ are $A$-linear: the $A$-module structures of $M^\\wedge_I$, $M^\\wedge_J$ are componentwise, and each component of $\\theta$ (resp. $\\psi$) is the composite of the projection $(x_n)_n\\mapsto x_{dk}$ (resp. $(y_k)_k\\mapsto y_{cn}$), which is $A$-linear, with the $A$-linear quotient map $\\pi^{JI}_k$ (resp. $\\pi^{IJ}_n$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$\\psi\\circ\\theta=\\mathrm{id}$. For $(x_n)_n\\in M^\\wedge_J$ and $n\\ge0$, the $n$-th component of $\\psi(\\theta((x_n)))$ is $(x_{d\\cdot cn}\\bmod I^{cn}M)\\bmod J^nM=x_{dcn}\\bmod J^nM$ (reduction along $J^{dcn}M\\subseteq I^{cn}M\\subseteq J^nM$), and since $n\\le dcn$ ($c,d\\ge1$) compatibility of $(x_n)$ gives $x_{dcn}\\bmod J^nM=x_n$. $\\theta\\circ\\psi=\\mathrm{id}$. For $(y_k)_k\\in M^\\wedge_I$ and $k\\ge0$, the $k$-th component of $\\theta(\\psi((y_k)))$ is $(y_{c\\cdot dk}\\bmod J^{dk}M)\\bmod I^kM=y_{cdk}\\bmod I^kM=y_k$ since $k\\le cdk$. Hence $\\theta$ is an isomorphism of $A$-modules with inverse $\\psi$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$\\theta\\circ\\iota_J=\\iota_I$. For $x\\in M$, $\\iota_J(x)=(x\\bmod J^nM)_n$, and $\\theta(\\iota_J(x))_k=(x\\bmod J^{dk}M)\\bmod I^kM=x\\bmod I^kM=\\iota_I(x)_k$. Consequently $\\psi\\circ\\iota_I=\\psi\\circ\\theta\\circ\\iota_J=\\iota_J$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Completeness. Since $\\iota_I=\\theta\\circ\\iota_J$ with $\\theta$ bijective, $\\iota_I$ is bijective if and only if $\\iota_J$ is ($\\iota_J=\\psi\\circ\\iota_I$ with $\\psi=\\theta^{-1}$). So $M$ is $I$-adically complete iff it is $J$-adically complete (completeness meaning bijectivity of the canonical map).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Ring isomorphism for $M=A$. Then $I^kM=I^k$, $J^nM=J^n$, and $M^\\wedge_I=\\varprojlim_kA/I^k$, $M^\\wedge_J=\\varprojlim_nA/J^n$ are the adic completion rings, with componentwise operations. Each component of $\\theta$ is the projection to $A/J^{dk}$ (a ring map, operations being componentwise) followed by the quotient map $A/J^{dk}\\to A/I^k$, which is a ring homomorphism since $J^{dk}\\subseteq I^k$. So $\\theta$ preserves $1$ and products; being an additive bijection (previous steps), it is a ring isomorphism, with inverse the ring map $\\psi$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

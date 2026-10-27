@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-adic-perfect-module-hom",
+ "kind": "statement",
+ "title": "Natural ordinary quotient Hom comparison for a single pair of modules",
+ "statement": "Let \\(X\\) be a scheme, \\(A\\) a commutative ring, \\(J\\subseteq A\\) an ideal, and \\(U\\) an object of the coefficient-sized pro-etale site. Let \\(F_n\\) be constant \\(A\\)-module realization followed by completed scalar extension, restriction to \\(U\\), and ordinary scalar extension to the \\(n\\)-th quotient ring: the single-module construction underlying [def-sfb-adic-perfect-reduction-model-complexes]. Let \\(G\\) be additive constant \\(A\\)-module sections at the slice terminal object and let \\(H_n=G\\circ(-/J^{n+1}(-))\\), using [def-sfb-adic-short-complex-quotient-tower]. There are additive maps \\(t_n(M,N):H_n(\\operatorname{Hom}_A(M,N))\\longrightarrow\\operatorname{Hom}(F_nM,F_nN)\\) for all \\(A\\)-modules \\(M,N\\). They are natural for arbitrary precomposition \\(M'\\to M\\) and postcomposition \\(N\\to N'\\), are bijective when \\(M\\) is finite projective, and intertwine \\(G\\) of the canonical algebraic successor quotient transition with scalar change conjugated by the ordinary module balancing isomorphisms. There are no complexes or degree bounds in this statement.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sfb-adic-short-complex-quotient-tower",
+  "def-sfb-adic-perfect-module-functors"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Lemma lemma-connected-adic-lisse, Tag 09C6, quotient total-Hom calculation, its single-module finite-projective evaluation step; Modules on Sites Tag 093T; More on Algebra Tag 0A8H."
+ },
+ "proof": [
+  {
+   "text": "Use [lem-sfb-adic-perfect-unit-hom] to obtain the additive natural comparisons t with their successor equation and bijectivity for the source A. Keep the same t throughout.",
+   "uses": [
+    "lem-sfb-adic-perfect-unit-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a finite projective A-module M, choose a splitting from a finite free module, using Module.Finite.exists_comp_eq_id_of_projective. Coordinate inclusions and projections give maps i_j:A to M and p_j:M to A with sum_j i_j p_j = id_M. For fixed N, precomposition gives sum_j precomp(p_j) precomp(i_j)=id on Hom_A(M,N). Applying the additive H_n preserves this identity. Applying the additive F_n to the first identity preserves it as well. These identities include the empty rank-zero family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity: if t(x)=t(y), naturality for every i_j and the injectivity of t(A,N) imply H_n(precomp(i_j))(x)=H_n(precomp(i_j))(y). Reconstruct x and y with the finite sum identity of step 2. Surjectivity: given y:F_n M to F_n N, choose z_j with t(A,N)(z_j)=y composed with F_n(i_j). Then sum_j H_n(precomp(p_j))(z_j) maps to y by additivity, naturality and the F_n finite sum identity. Thus t(M,N) is bijective. Reuse the unchanged two-variable naturality and successor equations from step 1.",
+   "uses": [
+    "lem-sfb-adic-perfect-unit-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-perfect-unit-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6 quotient Hom calculation; Modules on Sites Tag 093T. The finite-projective step is implemented as the explicit finite-dual-basis reconstruction, using Mathlib.RingTheory.Finiteness.Projective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural map from constant sections of Hom modulo an ideal power to Hom between quotient module sheaves, bijective for finite projective source",
+   "results": "Returned Scheme.Modules.Hom, SheafOfModules.sectionsMap, Sheaf.ΓHomEquiv, freeHomEquiv and Submodule.factorPow. None states the ordinary quotient Hom comparison or its scalar successor equation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom of finite projective modules commutes with quotient scalar extension, finite total Hom complex constant sheaves",
+   "results": "Returned internally projective light condensed modules, FGModuleCat.ihom_obj and ModuleCat.projectiveResolution. No comparison for constant module sheaves and quotient scalar extension.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.*(quotient|Quotient)|quotient.*Hom",
+   "results": "msearch found generic homotopy quotients and Submodule quotient maps. Direct rg in both source roots found ModuleHomComplexQuotient (homology as homotopy classes), SiteConstantModuleHom (constant internal Hom), and scalar derived Hom interfaces. None provides this ordinary single-module quotient and completion balancing comparison. Blueprint search quotient Hom found only def-coef-normalized-dvr-tower and thm-coef-finite-hom, neither of which states the present assertion.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectHomCochains",
+  "date": "2026-10-26",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tags 09C5 and 09C6, dual-perfect tensor calculation and exact sections on each affine weakly contractible covering object. Supporting calculation: actual quotient Hom from two fixed constant perfect models, before image stabilization. The explicit ordinary-complex calculation in proof steps 1--3 of lem-sfb-adic-perfect-hom-cohomology-comparison. Chain-level evaluation and successor scalar balancing, before cycles and boundaries. Single-module quotient Hom evaluation, prior to finite cochain assembly.",
+   "via": [
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectModuleHom",
+  "file": "lean/Sheaf/Paper/AdicPerfectModuleHom.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectModuleHom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectModuleHom"
+  ],
+  "statement": "theorem adicPerfectModuleHom (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X) :\n    let G := AdicCohomology.sections\n      ((coefficientProEtaleModelTopology.{u, v} X).over U) (Over.mk (𝟙 U)) ⋙\n        forget₂ (ModuleCat A) AddCommGrpCat\n    let H := fun n : ℕ ↦ AdicCohomology.quotient J (n + 1) ⋙ G\n    let F := fun n : ℕ ↦ adicPerfectQuotientFunctor X J U n\n    ∃ t : ∀ (n : ℕ) (M N : ModuleCat.{max v (u + 1)} A),\n        (H n).obj (ModuleCat.of A (M →ₗ[A] N)) →+ ((F n).obj M ⟶ (F n).obj N),\n      (∀ (n : ℕ) (M N : ModuleCat.{max v (u + 1)} A)\n        (_ : Module.Finite A M) (_ : Module.Projective A M), Function.Bijective (t n M N)) ∧\n      (∀ (n : ℕ) (M M' N N' : ModuleCat.{max v (u + 1)} A)\n        (a : M' ⟶ M) (b : N ⟶ N') (x : (H n).obj (ModuleCat.of A (M →ₗ[A] N))),\n        t n M' N' ((H n).map (ModuleCat.ofHom\n          ((LinearMap.llcomp A M' N N' b.hom).comp (LinearMap.lcomp A N a.hom))) x) =\n          (F n).map a ≫ t n M N x ≫ (F n).map b) ∧\n      (∀ (n : ℕ) (M N : ModuleCat.{max v (u + 1)} A)\n        (x : (H (n + 1)).obj (ModuleCat.of A (M →ₗ[A] N))),\n        t n M N (G.map ((AdicCohomology.transition J\n          (Nat.add_le_add_right (Nat.le_succ n) 1)).app\n            (ModuleCat.of A (M →ₗ[A] N))) x) =\n          ((adicPerfectQuotientModuleStep X J U n).app M).inv ≫\n            (change (adicPerfectQuotientScalarStep X J U n)).map (t (n + 1) M N x) ≫\n              ((adicPerfectQuotientModuleStep X J U n).app N).hom)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261026T071532-L-3945858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8a7b",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T092913-L-3478464",
+  "kind": "interface",
+  "note": "independent cc review: AdicPerfectModuleHom/UnitHom/ModuleFunctors Lean against nodes lem-sfb-adic-perfect-module-hom, lem-sfb-adic-perfect-unit-hom, def-sfb-adic-perfect-module-functors; moved defs/instances Expr-hash identical to published; importer AdicPerfectHomCochains compiled OK"
+ }
+}

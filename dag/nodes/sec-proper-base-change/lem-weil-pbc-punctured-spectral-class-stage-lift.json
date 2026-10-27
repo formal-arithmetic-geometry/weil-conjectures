@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-punctured-spectral-class-stage-lift",
+ "kind": "statement",
+ "title": "Stage representation for constructed punctured restriction coefficients",
+ "statement": "For the explicitly constructed punctured compact-open inverse system and restriction coefficients, every cohomology class of the coefficient colimit sheaf is the spectral cohomology image of one stage class. This only concerns cohomology of stage inverse-image sheaves and the coefficient colimit; it does not identify ambient object cohomology or the specified punctured-neighborhood cocone.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01E1 and 03F3, lemma-cohomology-of-open; Tag 01F8, functoriality and canonical comparison"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-punctured-neighborhood-inverse-limit",
+  "lem-weil-pbc-open-system-restriction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing spectral-limit class-lifting theorem to the explicit geometric inverse limit and actual restriction presentation, with canonical normalized pullback families. The conclusion is stage representation in the coefficient colimit, before either comparison of cohomology or maps.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-inverse-limit",
+    "lem-weil-pbc-open-system-restriction-presentation",
+    "lem-weil-pbc-canonical-topological-pullback-normalization",
+    "lem-weil-pbc-spectral-limit-cohomology-class-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-punctured-neighborhood-inverse-limit",
+  "lem-weil-pbc-open-system-restriction-presentation",
+  "lem-weil-pbc-canonical-topological-pullback-normalization",
+  "lem-weil-pbc-spectral-limit-cohomology-class-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf on an open subspace; inverse image adjunction composition constant diagram colimit",
+   "results": "Scheme restriction and section isomorphisms; sheafAdjunctionContinuous and colimConstAdj. No normalized open-subspace cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "reuse adjunction and colimit API; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology on an intersection of compact open subspaces of a spectral space is the directed colimit",
+   "results": "Condensed locally constant diagram colimits, no sheaf cohomology match. Loogle coconePointUniqueUpToIso finds colimit uniqueness component equations.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|open)|IsOpenEmbedding.*cohomology; spectralSpace; leftAdjointUniq",
+   "results": "Found Mathlib open-embedding spectralSpace and adjunction uniqueness; project general spectral-limit lifting and object localization AddEquiv, but not the required comparison square.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing general dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured-neighborhood class-lifting proof: explicit geometry, restriction coefficients, and canonical map comparison in steps 1 through 5",
+   "via": [
+    "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodSpectralClassStageLift",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodSpectralClassStageLift.lean",
+  "declaration": "TopCat.punctured_spectral_class_stage_lift",
+  "declarations": [
+   "TopCat.punctured_spectral_class_stage_lift"
+  ],
+  "statement": "theorem punctured_spectral_class_stage_lift {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (y : CategoryTheory.Sheaf.H' (colimit (OpenSystem.coefficients (I := puncturedNeighborhoodIndex Z) (puncturedGeneralizations Z) A)) q ⊤) : ∃ (i : puncturedNeighborhoodIndex Z) (x : CategoryTheory.Sheaf.H' (OpenSystem.stageSheaf (puncturedStageOpen Z hZ) A i) q ⊤), (TopCat.Sheaf.spectralLimitCohomologyMap (OpenSystem.inclusionOfLE (puncturedStageOpen_contains Z hZ i)) (objectCohomologyPullback (OpenSystem.inclusionOfLE (puncturedStageOpen_contains Z hZ i))) ((OpenSystem.adjunction (OpenSystem.inclusionOfLE (puncturedStageOpen_contains Z hZ i))).homEquiv _ _ ((OpenSystem.coefficientIso (puncturedStageOpen Z hZ) (puncturedGeneralizations Z) (puncturedStageOpen_contains Z hZ) A i).inv ≫ colimit.ι (OpenSystem.coefficients (I := puncturedNeighborhoodIndex Z) (puncturedGeneralizations Z) A) i)) q).hom x = y",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

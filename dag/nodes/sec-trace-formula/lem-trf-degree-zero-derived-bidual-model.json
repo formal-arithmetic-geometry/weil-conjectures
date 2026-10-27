@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-degree-zero-derived-bidual-model",
+ "kind": "statement",
+ "title": "Degree-zero module biduality on K-flat and K-injective models",
+ "statement": "Let $P$ be a commutative ring and $M$ any $P$-module, regarded as the degree-zero complex $M[0]$. All site-based notions below are taken on the one-object ringed site with only identity coverings, whose module sheaves are the $P$-modules. Let $P[0]\\to I$ be any K-injective resolution [def-pur-kinjective-complex] and set $V=\\operatorname{Hom}_P^\\bullet(M[0],I)$ using [def-sc-module-total-hom-complex]. In the ordinary unbounded derived category $D(P)$ [def-weil-abstract-derived-category] with derived internal Hom [def-pur-derived-internal-hom], there are canonical identifications $QV\\cong R\\operatorname{Hom}_P(M[0],P[0])$ and $Q\\operatorname{Hom}_P^\\bullet(V,I)\\cong R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(M[0],P[0]),P[0])$. The formula\n$$\\delta_I:M[0]\\longrightarrow\\operatorname{Hom}_P^\\bullet(V,I),\\qquad \\delta_I(m)(h)=h(m)$$\nis a chain map, and under these identifications $Q\\delta_I$ is the canonical bidual morphism: the tensor-Hom transpose of coefficient evaluation after Koszul exchange of the two factors [lem-sfb-ringed-site-duality-maps]. More precisely, for any quasi-isomorphisms $r:F\\to M[0]$ and $t:T\\to V$ from K-flat complexes [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules], which exist by [lem-pc-kflat-resolution], put $W=\\operatorname{Hom}_P^\\bullet(F,I)$. Precomposition gives a quasi-isomorphism $r^*:V\\to W$ and $W$ and $\\operatorname{Hom}_P^\\bullet(T,I)$ are K-injective. On these models, coefficient evaluation is represented by\n$$T\\otimes_P F\\longrightarrow I,\\qquad z\\otimes x\\longmapsto (r^*t(z))(x)=t(z)(r(x)).$$\nAfter the Koszul exchange $x\\otimes z\\mapsto(-1)^{|x||z|}z\\otimes x$, this pairing equals the transpose of $\\delta_I\\circ r$ with its Hom variable precomposed by $t$, namely $x\\otimes z\\mapsto t(z)(r(x))$. The tensor products here are direct-sum total tensor complexes [def-pc-tensor-complex-sheaves], and the identifications and equality are in $D(P)$, not merely on cohomology. No projectivity, flatness or finite generation of $M$, no perfectness, and no Noetherianity is assumed; invertibility of the bidual morphism is not asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A97 (lemma-internal-hom-evaluate), K-flat/K-injective evaluation models, with Tag 0A90 (lemma-compose), Tag 0A95 (lemma-RHom-well-defined), and dualizing.tex Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c)."
+ },
+ "stmt_deps": [
+  "def-pur-kinjective-complex",
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "On the one-object site, the products and differentials defining sheaf Hom are exactly the module Hom products in the statement. Since $I$ is K-injective and represents $P[0]$, the definition of derived internal Hom gives canonical identifications $QV=R\\operatorname{Hom}_P(M[0],P[0])$ and $QB=R\\operatorname{Hom}_P(QV,P[0])$, where $B=\\operatorname{Hom}_P^\\bullet(V,I)$. This second calculation resolves the target only; it requires no K-flatness or K-injectivity of $V$.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  },
+  {
+   "text": "Define $\\delta_I$ in degree zero by $m\\mapsto(h\\mapsto h(m))$ and use the zero map in every other degree. Each component is $P$-linear. For homogeneous $h\\in V^q$, the Hom differential gives $(d_Vh)(m)=d_I(h(m))$, since $d_{M[0]}=0$. Therefore $(d_B\\delta_I(m))(h)=d_I(h(m))-(d_Vh)(m)=0$. Thus this is a chain map into the actual product-defined complex $B$, for an arbitrary, possibly unbounded resolution $I$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  },
+  {
+   "text": "Choose $r:F\\to M[0]$ and $t:T\\to V$ using the K-flat resolution theorem, with flat terms as required. Apply resolution independence with target map $1_I$ and source map $r$: it gives the quasi-isomorphism $r^*:V\\to W$. Apply the same result with source map $t$: it gives a quasi-isomorphism $s=t^*:B\\to B_T$, where $B_T=\\operatorname{Hom}_P^\\bullet(T,I)$. The K-flat-to-K-injective Hom theorem applied separately to $(F,I)$ and $(T,I)$ makes $W$ and $B_T$ K-injective. No assertion that $V$ itself is K-injective is needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  },
+  {
+   "text": "Apply the normalized chain-transpose theorem with its variables $(A,P,E,f)=(V,F,I,r^*)$. The morphism $Qr^*$ is the canonical representative identification for $R\\operatorname{Hom}_P(M[0],P[0])$ after the isomorphism $Qr$; hence its uncurrying is coefficient evaluation on these models. Precomposing its first factor with $t$ gives exactly the chain map $c:T\\otimes_P F\\to I$, $c(z\\otimes x)=(r^*t(z))(x)=t(z)(r(x))$. The theorem identifies its localization with derived evaluation after $Qt$ and $Qr$; it states compatibility with inversion of representative quasi-isomorphisms. In particular this identifies the morphism in the derived category, rather than only its effect on cohomology.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  },
+  {
+   "text": "Let $\\alpha=s\\delta_I:M[0]\\to B_T$. Apply the same chain-transpose theorem with $(A,P,E,f)=(M[0],T,I,\\alpha)$. Its transpose is $a:M[0]\\otimes_P T\\to I$, $a(m\\otimes z)=t(z)(m)$. Consequently the transpose of $\\alpha r$ is $a(r\\otimes1_T)$, sending $x\\otimes z$ to $t(z)(r(x))$. On the other hand Koszul exchange followed by $c$ sends a homogeneous $x\\otimes z$, with degrees $p,q$, to $(-1)^{pq}t(z)(r(x))$. If $p\\ne0$ then $r(x)=0$; if $p=0$ then $(-1)^{pq}=1$. The two maps are therefore equal on every tensor summand and thus on their direct-sum totalization.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  },
+  {
+   "text": "The ringed-site duality-maps theorem characterizes $b_{QM[0]}$ as the transpose of coefficient evaluation after Koszul exchange. Let $\\kappa: R\\operatorname{Hom}_P(QV,P[0])\\to R\\operatorname{Hom}_P(QT,P[0])$ be precomposition by $Qt$. Under step 1 and the target model $B_T$, resolution independence identifies $\\kappa$ with $Qs$. Steps 4 and 5 identify the transpose of $\\kappa b_{QM[0]}Qr$ with that of $Q\\alpha Qr$, as morphisms $QF\\to QB_T$. Bijectivity of the tensor-Hom correspondence gives $\\kappa b_{QM[0]}Qr=Q\\alpha Qr=Qs\\,Q\\delta_I\\,Qr$. Cancel the isomorphisms $Qr$ and $Qs=\\kappa$ to obtain $b_{QM[0]}=Q\\delta_I$ under step 1. Naturality and inversion compatibility are exactly those of the cited chain-transpose theorem. These are equalities in $D(P)$ for every choice of the two resolutions; no finiteness, perfectness or Noetherian hypothesis enters.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-sfb-hom-kflat-chain-transpose",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A97 (lemma-internal-hom-evaluate), specialized to the one-object ringed site; explicit degree-zero sign and cancellation argument supplied by Q11"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a module concentrated in degree zero derived double dual evaluation is represented using a K-injective resolution by a maps to h maps to h(a), identified by K-flat tensor resolutions and Koszul symmetry",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a module concentrated in degree zero derived double dual evaluation is represented using a K-injective resolution by a maps to h maps to h(a), identified by K-flat tensor resolutions and Koszul symmetry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"Rep.standardResolution.extIso\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CategoryTheory.ProjectiveResolution.extMk\"], \"digest\": \"d8e7d4d3a2ded6c4\"} Returned Ext, ordinary module tensor-Hom and vector-space evaluation declarations do not identify the canonical unbounded derived biduality morphism on these K-flat/K-injective models. The zero-hit searches and analytic double-dual hits provide no such declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|eval.*[Kk]Injective|[Kk]Injective.*eval",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"grep\", \"query\": \"bidual|doubleDual|eval.*[Kk]Injective|[Kk]Injective.*eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Lp/lpHolder.lean\", \"Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean\", \"Mathlib/Analysis/Normed/Module/DoubleDual.lean\", \"Mathlib/Analysis/Normed/Module/DoubleDual.lean\", \"Mathlib/Analysis/Normed/Module/DoubleDual.lean\", \"Mathlib/Analysis/Normed/Module/DoubleDual.lean\", \"Mathlib/Analysis/Normed/Module/DoubleDual.lean\", \"Mathlib/Algebra/Group/AddChar.lean\"], \"digest\": \"c524dc7dadfb1d66\"} Returned Ext, ordinary module tensor-Hom and vector-space evaluation declarations do not identify the canonical unbounded derived biduality morphism on these K-flat/K-injective models. The zero-hit searches and analytic double-dual hits provide no such declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, DerivedCategory",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"loogle\", \"query\": \"Module.Dual, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned Ext, ordinary module tensor-Hom and vector-space evaluation declarations do not identify the canonical unbounded derived biduality morphism on these K-flat/K-injective models. The zero-hit searches and analytic double-dual hits provide no such declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived bidual morphism of a degree zero module is represented by evaluation a maps to h maps to h(a) into a K-injective resolution",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"leansearch\", \"query\": \"The canonical derived bidual morphism of a degree zero module is represented by evaluation a maps to h maps to h(a) into a K-injective resolution\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived biduality morphism for any module is evaluation into its K-injective coefficient resolution, with canonical braided tensor Hom transpose",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"Derived biduality morphism for any module is evaluation into its K-injective coefficient resolution, with canonical braided tensor Hom transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.FGModuleCatCoevaluation\", \"ModuleCat.ihom_coev_app\", \"CharacterModule.homEquiv\", \"FGModuleCat.FGModuleCatEvaluation\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"FGModuleCat.FGModuleCatEvaluation_apply\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"ModuleCat.ihom_ev_app\"], \"digest\": \"67d9bcead2bcf65e\"} Returned Ext, ordinary module tensor-Hom and vector-space evaluation declarations do not identify the canonical unbounded derived biduality morphism on these K-flat/K-injective models. The zero-hit searches and analytic double-dual hits provide no such declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eval|curry|coevaluation",
+   "results": "{\"t\": \"2026-10-22T06:46:28Z\", \"tool\": \"grep\", \"query\": \"eval|curry|coevaluation\", \"sub\": \"CategoryTheory/Closed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned Ext, ordinary module tensor-Hom and vector-space evaluation declarations do not identify the canonical unbounded derived biduality morphism on these K-flat/K-injective models. The zero-hit searches and analytic double-dual hits provide no such declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|KInjective.*[Ee]val|[Ee]val.*KInjective",
+   "results": "{\"t\": \"2026-10-23T04:09:41Z\", \"tool\": \"grep\", \"query\": \"bidual|doubleDual|KInjective.*[Ee]val|[Ee]val.*KInjective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} The hits are ordinary module evaluation or Ext/resolution declarations; none states the unbounded derived bidual-model comparison. Read Module.Dual.eval at Mathlib/LinearAlgebra/Dual/Defs.lean:80 and ModuleCat.ihom_ev_app at Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean:71.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived double dual evaluation of an arbitrary module computed with a K-injective resolution and K-flat tensor Hom adjunction",
+   "results": "{\"t\": \"2026-10-23T04:09:42Z\", \"tool\": \"leansearch\", \"query\": \"Derived double dual evaluation of an arbitrary module computed with a K-injective resolution and K-flat tensor Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.bijective_dual_eval'\", \"Module.bijective_dual_eval\", \"Module.evalEquiv\", \"Module.evalEquiv_toLinearMap\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"Module.Dual.instIsReflecive\", \"Module.Dual.eval\", \"Module.apply_evalEquiv_symm_apply\"], \"digest\": \"403d155e845ec11a\"} The hits are ordinary module evaluation or Ext/resolution declarations; none states the unbounded derived bidual-model comparison. Read Module.Dual.eval at Mathlib/LinearAlgebra/Dual/Defs.lean:80 and ModuleCat.ihom_ev_app at Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean:71.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Dual",
+   "results": "{\"t\": \"2026-10-23T04:09:42Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} The hits are ordinary module evaluation or Ext/resolution declarations; none states the unbounded derived bidual-model comparison. Read Module.Dual.eval at Mathlib/LinearAlgebra/Dual/Defs.lean:80 and ModuleCat.ihom_ev_app at Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean:71.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor Hom transpose of evaluation with Koszul symmetry is represented by m maps to h maps to h(m) for a module in degree zero",
+   "results": "{\"t\": \"2026-10-23T04:09:53Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor Hom transpose of evaluation with Koszul symmetry is represented by m maps to h maps to h(m) for a module in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ihom_ev_app\", \"ModuleCat.exteriorPower.iso₁_hom_apply\", \"contractLeft_apply\", \"ModuleCat.ihom_coev_app\", \"TensorPower.algebraMap₀\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"exteriorPower.oneEquiv_ιMulti\", \"exteriorPower.zeroEquiv_symm_apply\"], \"digest\": \"c76a35d3ff08861c\"} The hits are ordinary module evaluation or Ext/resolution declarations; none states the unbounded derived bidual-model comparison. Read Module.Dual.eval at Mathlib/LinearAlgebra/Dual/Defs.lean:80 and ModuleCat.ihom_ev_app at Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean:71.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary module concentrated in degree zero, evaluation into a K-injective coefficient resolution represents the canonical derived biduality morphism under K-flat tensor Hom models",
+   "results": "{\"t\": \"2026-10-23T04:09:53Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary module concentrated in degree zero, evaluation into a K-injective coefficient resolution represents the canonical derived biduality morphism under K-flat tensor Hom models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.ι'_f_zero\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.InjectiveResolution.ι\", \"CategoryTheory.InjectiveResolution.self_cocomplex\"], \"digest\": \"f5d6ed23cd5c93c7\"} The hits are ordinary module evaluation or Ext/resolution declarations; none states the unbounded derived bidual-model comparison. Read Module.Dual.eval at Mathlib/LinearAlgebra/Dual/Defs.lean:80 and ModuleCat.ihom_ev_app at Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean:71.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the A-linear/P-linear derived-Hom comparison used in the scalar biduality calculation. Extracted argument: coefficient evaluation and braided bidual transpose (returned proof steps 7-8).",
+   "via": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-degree-zero-derived-bidual-model",
+  "worker": "stage1",
+  "summary": "Checked arbitrary unbounded K-injective coefficient models and the degree-zero evaluation differential; reused existing K-flat resolution, Hom resolution-independence, K-flat-to-K-injective Hom and normalized chain-transpose nodes. The Koszul sign vanishes only because r lands in degree zero. No new nodes or additional hypotheses. Repair of returned head 191cd353a09: reread all current cited statements and revalidated all fourteen citation quotes against the current DAG; made the final target comparison kappa=Q(t*) explicit before cancellation. Delivery is rebuilt on the freshly fetched origin/sheaf-dag; the source statement and dependencies are retained.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality, proof (1)--(2), nearby-cycle branch, through the existing algebraic-shriek-derived-hom-adjunction chain: isolates its coefficient-evaluation/bidual-transpose calculation. The current blueprint ancestor contains only the contracting-correspondence route, so this is a generic algebraic tool below that route, not a replacement of any unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat representatives of the two module complexes. No node of the curve-local-term unit supplies this general module-complex tool."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Contravariant resolution comparison into the fixed K-injective target. No node of the curve-local-term unit supplies this general module-complex tool."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "K-injectivity of Hom(F,I) and Hom(T,I). No node of the curve-local-term unit supplies this general module-complex tool."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Normalized unbounded tensor-Hom transposition and representative quasi-isomorphism compatibility. No node of the curve-local-term unit supplies this general module-complex tool."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Definition of canonical biduality as braided coefficient-evaluation transpose. No node of the curve-local-term unit supplies this general module-complex tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-3f4c27015",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-3f4c27015 (reviewer sub-agent of L); spot-checked: This is a re-delivery of 191cd353a09, which was returned at landing for a side completion that had not been promoted, not for its mathematics. The item JSON is identical to that head except that step 6 now names kappa=H(Qt,O) and identifies it with Qs before cancelling, and the split_report summary has a repair sentence. No new nodes, no repair note, no SGA. I reread the statement and all six steps against the cited statements. Step 2: d_V h=d_I h because d_{M[0]}=0, so delta is a chain map. Step 3: lem-pur-rhom-well-defined with s=1_I applied to r and to t, and lem-pur-hom-kflat-into-kinjective applied to (F,I) and (T,I); the hypotheses match. Steps 4-5: lem-sfb-hom-kflat-chain-transpose with (V,F,I,r*) and (M[0],T,I,s delta) needs only the second factor K-flat; the Koszul sign (-1)^{pq} disappears because r(x)=0 for p!=0. Step 6: only the general characterization of b_A in lem-sfb-ringed-site-duality-maps is used, and both cancelled maps are isomorphisms in D(P). Stacks sources 0A90/0A95/0A96/0A97 checked. No duplicate: signed-bidual-localization needs extra quasi-isomorphism hypotheses and derived-evaluation-resolved-model is the iterated evaluation. Small cases checked: M=0, a field, Z with Z/2, unbounded I. tool_uses accepted. Maintainer note: same mathematics as 191cd353a09; the earlier block was a promotion issue at landing."
+ }
+}

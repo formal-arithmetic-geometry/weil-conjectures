@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Sheaf.AlgebraicGeometry.FineFanBlowup
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
 import Sheaf.GroupTheory.FineMonoidFiniteSaturation
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
@@ -27,6 +29,8 @@ p. 104, and saturation in 3.1.17 (blueprint: lem-trf-affine-monoid-algebra-norma
 The multiplicative notation of `MonoidAlgebra` and `FineFan.IsFine` presents exactly the
 additive monoids in the source: `1` means `0` and `g ^ n` means `n • g`.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

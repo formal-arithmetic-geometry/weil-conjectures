@@ -81,7 +81,18 @@
   "date": "2026-10-12",
   "group": "J2"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -132,5 +143,24 @@
    "CommRingCat.filtered_colimit_localization_isDomain"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $I$ be a small filtered category and $i\\mapsto R_i$ a functor from $I$ to commutative rings with colimit $R=\\varinjlim_IR_i$. Assume that for every $i\\in I$ and every prime ideal $\\mathfrak q\\subset R_i$ the localization $(R_i)_{\\mathfrak q}$ is a domain. Then for every prime ideal $\\mathfrak p\\subset R$ the localization $R_{\\mathfrak p}$ is a domain.",
+  "proof": [
+   {
+    "text": "Let $\\mathfrak p\\subset R$ be prime and $\\mathfrak p_i\\subset R_i$ its preimage. By [lem-weil-pbc-filtered-colimit-localization-at-prime], $R_{\\mathfrak p}$ is the filtered colimit of the rings $(R_i)_{\\mathfrak p_i}$, which are domains by hypothesis. $R_{\\mathfrak p}$ is nonzero, being local. If $xy=0$ in $R_{\\mathfrak p}$, represent $x,y$ by elements $x_i,y_i$ of a common $(R_i)_{\\mathfrak p_i}$; as $x_iy_i$ maps to $0$, its image in some later $(R_j)_{\\mathfrak p_j}$ is $0$, so the image of $x_i$ or of $y_i$ there is $0$ ($(R_j)_{\\mathfrak p_j}$ being a domain), whence $x=0$ or $y=0$.",
+    "uses": [
+     "lem-weil-pbc-filtered-colimit-localization-at-prime"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

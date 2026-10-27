@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-adic-perfect-quotient-section-adjunction",
+ "kind": "statement",
+ "title": "Section adjunction and scalar normalization for ordinary quotient realization",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring, $J$ an ideal of $A$, and $U$ an object of the coefficient-sized pro-etale site. Let $T$ be its slice site at $U$, $B_n$ the restriction to $T$ of the constant ring sheaf $A/J^{n+1}$, and $F_n:\\operatorname{Mod}_A\\to\\operatorname{Mod}(B_n)$ the ordinary completed quotient realization [def-sfb-adic-perfect-module-functors, def-sfb-adic-perfect-reduction-model-complexes]. Let $G$ send an $A$-module to sections of its constant module sheaf at the terminal object of $T$, retaining the $A$-action, and put $H_n(M)=G(M/J^{n+1}M)$ [def-sfb-adic-short-complex-quotient-tower]. Write $C_n$ for scalar extension from $B_{n+1}$ to $B_n$ and $\\theta_n:F_{n+1}C_n\\simeq F_n$ for the fixed ordinary balancing isomorphism. There exist right adjoints $R_n$ with adjunctions $a_n:F_n\\dashv R_n$, natural isomorphisms $e_n:H_n\\simeq F_nR_n$, and natural transformations $\\kappa_n:R_{n+1}\\to C_nR_n$ such that, for every $M$, the lower adjunction unit equals the upper unit followed by $\\kappa_n(F_{n+1}M)$ and $R_n(\\theta_n(M))$. Moreover the canonical successor section transition $\\delta_n(M):H_{n+1}(M)\\to H_n(M)$ followed by $e_n(M)$ equals $e_{n+1}(M)$ followed by the same $\\kappa_n(F_{n+1}M)$ and $R_n(\\theta_n(M))$. These are statements about scalar realization and sections of individual modules; no comparison on modules of linear maps or bijectivity of a Hom comparison is asserted.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sfb-adic-perfect-module-functors",
+  "def-sfb-adic-short-complex-quotient-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-sheafification-presheaf-modules, Tag 03CY; section-tensor-product, Tag 03EK; together with proetale.tex, lemma-connected-adic-lisse, Tag 09C6, ordinary constant quotient calculation before total Hom."
+ },
+ "proof": [
+  {
+   "text": "Use the proved SectionModel tower of def-sfb-adic-perfect-quotient-section-model. It supplies right adjoints, adjunctions and successor maps; step_unit is the stored, already proved first required identity. The concrete sections construction proving its existence is in def-sfb-adic-perfect-quotient-section-realization.",
+   "uses": [
+    "def-sfb-adic-perfect-quotient-section-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the natural tensor quotient section isomorphisms and their successor equation from lem-sfb-adic-perfect-quotient-section-comparison. Combine them with the already proved adjunctions, successor mates and first equation by the existential constructors.",
+   "uses": [
+    "lem-sfb-adic-perfect-quotient-section-comparison",
+    "def-sfb-adic-perfect-quotient-section-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-perfect-quotient-section-model",
+  "lem-sfb-adic-perfect-quotient-section-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03EK; proetale.tex Tag 09C6. Concrete slice adjunction and completion cancellation followed by the remaining tensor quotient section comparison. This is a decomposition: one remaining comparison theorem, not a complete proof without sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant module sheaf scalar extension left adjoint sections quotient module comparison",
+   "results": "constantSheafAdj, extendRestrictScalarsAdj, PresheafOfModules.sheafificationAdjunction, PullbackConstruction.adjunction. These are the constituent adjunctions; none identifies the actual completed quotient functor and the fixed successor balancing map.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Uniqueness isomorphisms of left adjoints and their unit/counit formulas. They provide scalar-balancing tools, not the constant quotient section normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafAdj|tensorAdjunction|quotTensorEquivQuotSMul",
+   "results": "25 hits including the constant-sheaf adjunction, ordinary tensor/restriction adjunctions, and the algebraic tensor-quotient equivalence. Project AdicPerfectModelCompleteReduction contains scalar/slice balancing helpers and ConstantRealizationDerivedScalarExtension proves ordinary moduleComparison_tensor. No theorem packages these into the quotient realization section adjunction with its successor equations.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectUnitHom",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The scalar balancing and constant quotient section calculation in the local perfect-model total-Hom computation, before defining the comparison on Hom modules. This is step 1 and the scalar-normalization part of step 4 of lem-sfb-adic-perfect-unit-hom.",
+   "via": [
+    "lem-sfb-adic-perfect-unit-hom",
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectQuotientSectionAdjunction",
+  "file": "lean/Sheaf/Paper/AdicPerfectQuotientSectionAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectQuotientSectionAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientSectionAdjunction"
+  ],
+  "statement": "theorem adicPerfectQuotientSectionAdjunction (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X) :\n    let G := AdicCohomology.sections\n      ((coefficientProEtaleModelTopology.{u, v} X).over U) (Over.mk (𝟙 U))\n    let H := fun n : ℕ ↦ AdicCohomology.quotient J (n + 1) ⋙ G\n    let F := fun n : ℕ ↦ adicPerfectQuotientFunctor X J U n\n    ∃ (R : ∀ n : ℕ,\n        Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤\n          ModuleCat.{max v (u + 1)} A)\n      (a : ∀ n : ℕ, F n ⊣ R n)\n      (e : ∀ n : ℕ, H n ≅ F n ⋙ R n)\n      (κ : ∀ n : ℕ, R (n + 1) ⟶\n        change (adicPerfectQuotientScalarStep X J U n) ⋙ R n),\n      (∀ (n : ℕ) (M : ModuleCat.{max v (u + 1)} A),\n        (a n).unit.app M = (a (n + 1)).unit.app M ≫\n          (κ n).app ((F (n + 1)).obj M) ≫\n            (R n).map ((adicPerfectQuotientModuleStep X J U n).hom.app M)) ∧\n      (∀ (n : ℕ) (M : ModuleCat.{max v (u + 1)} A),\n        G.map ((AdicCohomology.transition J\n          (Nat.add_le_add_right (Nat.le_succ n) 1)).app M) ≫ (e n).hom.app M =\n          (e (n + 1)).hom.app M ≫ (κ n).app ((F (n + 1)).obj M) ≫\n            (R n).map ((adicPerfectQuotientModuleStep X J U n).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T104409-L-805618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

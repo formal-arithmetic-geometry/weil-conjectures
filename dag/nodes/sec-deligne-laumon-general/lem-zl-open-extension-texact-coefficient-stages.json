@@ -1,0 +1,372 @@
+{
+ "id": "lem-zl-open-extension-texact-coefficient-stages",
+ "kind": "statement",
+ "title": "Open compact support is t-exact through all coefficient stages",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $j:U\\hookrightarrow X$ be an open immersion of separated finite-type $k$-schemes [def-weil-open-immersion, def-weil-scheme-morphism-properties]. Use the derived-complete integral constructible category and its rational and common-stage versions [def-weil-derived-complete-integral-detailed, def-weil-algebraically-closed-coefficients], standard pairs [def-weil-constructible-standard-tstructure], and constructible hearts [def-weil-constructible-heart]. Let $J_\\Lambda=Rj_{!,\\Lambda}$ be the actual compact-support operation of [def-weil-integral-rational-qbar-compact-support], using the compactification $(j,\\operatorname{id}_X)$, and its specified scalar comparisons [def-weil-compact-support-coefficient-action].\n\nThe scheme $X$ is Noetherian and $j$ is quasi-compact. For $K\\in D^b_c(U,\\mathcal O_E)$ the actual integral operation\n$$J_{\\mathcal O_E}K=R\\varprojlim_n\\operatorname{Res}_n j_!(K\\otimes^L_{\\mathcal O_E}A_{E,n})$$\nhas a canonical natural isomorphism to termwise localized ringed-site extension by zero $j_!K$. This identifies the realized open adjunction unit and counit with the ringed-site unit and counit. The latter extension is exact on module sheaves; its output on $K$ is derived complete and constructible. In particular, for every integer $a$, the canonical comparison is\n$$\\mathcal H^a(J_{\\mathcal O_E}K)\\simeq j_!\\mathcal H^a(K),$$\nand $J_{\\mathcal O_E}$ preserves each cohomological vanishing half-line. This assertion concerns the actual complete integral objects, without requiring cohomology to commute with reduction modulo $\\varpi_E^n$.\n\nFor $\\Lambda=E$ and $\\Lambda=\\Qlb$, $J_\\Lambda$ preserves both standard halves, restricts to an exact functor of constructible hearts, and has the natural canonical comparison\n$$\\mathcal H^a(J_\\Lambda L)\\xrightarrow{\\sim}J_\\Lambda\\mathcal H^a(L).$$\nThe integral identification, its open unit, and the cohomology comparisons are compatible with the specified finite-field scalar comparisons, rationalization, and the common-stage representatives. In particular the open tensor comparisons, including completed scalar extension through the defining derived limit, give the same maps after enlarging $E$; the common-stage comparisons are independent of the chosen finite field and arrow representatives.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2 extension-by-zero sentence: integral realization and coefficient passage; returned item Steps 7 and 8; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-constructible-heart",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-coefficient-action",
+  "def-zl-ordinary-open-integral-operations",
+  "def-zl-normalized-integral-scalar-comparison",
+  "def-zl-texact-comparison-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-rationalization-karoubi",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-open-coefficient-adjunction-data",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-weil-system-operation-exchange-realization",
+  "def-sf-integral-comparison-system-data",
+  "def-zl-ordinary-open-support-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-open-roos-extension-comparison to j: U and X are Noetherian and qcqs and j is quasi-compact. Apply lem-kun-dimension-finite-type separately to U and X to get finite dimension. Their local rings are k-algebras, so ell is invertible. The category here is the intrinsic category of def-weil-derived-complete-integral-detailed. For that very category, lem-sf-intrinsic-integral-standard-truncations gives ambient boundedness and closure under both ambient truncations, without assuming compatible etale-origin witnesses. It is a full triangulated subcategory by lem-weil-integral-constructible-triangulated. Ambient orthogonality restricts to this full subcategory, its truncation triangles stay inside, and its objects are bounded; thus its standard pair is a bounded t-structure with the ambient truncations and maps. At rational and common stages prop-constructible-truncations supplies the bounded standard t-structures and finite-stage truncation maps. By def-weil-constructible-standard-tstructure the rational halves are the isomorphism closures of integral halves; hence raw localization is t-exact directly from these definitions. These are the categories and pairs required below, for every finite enlargement of E.",
+   "uses": [
+    "lem-sf-open-roos-extension-comparison",
+    "lem-kun-dimension-finite-type",
+    "lem-sf-intrinsic-integral-standard-truncations",
+    "lem-weil-integral-constructible-triangulated",
+    "prop-constructible-truncations",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), Proposition 6.8.14; restriction of the ambient standard t-structure using the cited intrinsic truncation theorem"
+   }
+  },
+  {
+   "text": "Write R for the completed integral coefficient sheaf and let Rcal and Lcal denote reduction and total derived limit. For the chosen compactification (j,id_X), the proper-image factor is the identity. Thus the actual functor in def-weil-integral-rational-qbar-compact-support is Lcal_X J_j Rcal_U, with precisely the strict quotient transitions specified there. Apply lem-sf-integral-open-reduction-comparison to the complete K. It gives a whole-system isomorphism r_j(K):Rcal_X(j_!K) ≅ J_j Rcal_U K, invertibility of the actual unit u_{j_!K}, and the natural comparison\n d_K = u_{j_!K}^{-1} Lcal_X(r_j(K))^{-1}: J_{O_E}K ≅ j_!K.\nIts evaluations are the canonical open tensor maps, with all quotient transitions retained. The same cited statement identifies the realized unit and counit with the localized ringed-site unit and counit. In particular this identifies the actual functor and adjunction, rather than choosing an isomorphic object separately for each K.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; strict completed comparison as specified in the cited node"
+   }
+  },
+  {
+   "text": "The same integral comparison states that j_!K is derived complete. For constructibility apply lem-sf-integral-compact-support-constructible with f=j and c=(j,id_X): j is separated and of finite type, its source and target are finite type over k, and ell is invertible. The strict tower in that lemma is exactly the tower of Step 2, so J_{O_E}K belongs to D^b_c(X,O_E), and its isomorphism d_K puts j_!K in that full subcategory as well. This obtains both finite-level constructibility and one uniform reduction interval; it imposes no finite-Tor condition over A_{E,n}. Finally, lem-pur-site-restriction-module-adjunction-exact applied to the completed ringed slice says that the underlying module-sheaf extension by zero is exact.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7; module exactness: Stacks 03DJ, sites-modules lemma-extension-by-zero-exact"
+   }
+  },
+  {
+   "text": "Represent K by a cochain complex C of completed-ring modules. By lem-sp-exact-functor-preserves-homology(c), exact j_! identifies the cycles, boundaries and quotient in degree a, naturally in C:\n H^a(j_!C) = ker(j_!d^a)/im(j_!d^{a-1}) ≅ j_!(ker d^a/im d^{a-1}) = j_!H^a(C).\nConsequently it preserves quasi-isomorphisms. Its termwise action is additive, commutes with shifts and with the signed mapping-cone formula, and hence induces an exact triangulated integral functor with its usual shift comparison. Compose the displayed cohomology isomorphism with H^a(d_K). This gives the claimed canonical H^a(J_{O_E}K) ≅ j_!H^a(K) and preserves either vanishing half-line, for any a. These are ambient cohomology sheaves of complete objects. No assertion that H^a(K tensor^L A_{E,n}) equals a reduction of H^a(K) enters the argument.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; exact functors preserve kernels, images and homology"
+   }
+  },
+  {
+   "text": "For E contained in L write T for the actual completed scalar extension. By lem-pod-completed-scalar-extension-texact, T is the derived functor of exact ordinary coefficient extension, equals its defining strict-limit construction, and preserves both integral halves. The arbitrary-ring open tensor comparison of lem-sf-open-tensor-normalization gives gamma:T_X j_{E!} ≅ j_{L!} T_U. This comparison includes the open unit: after restriction it is the identity. Its compatibility with the actual completed construction is also explicit: at quotient m its generator map is [x] tensor b ↦ [x tensor b|_U]; quotient maps send b to its image, so these maps form one strict tower map. Apply the augmentation-normalized lambda of lem-sf-open-roos-extension-comparison over O_L to pass through the defining derived limit of def-weil-integral-scalar-extension. It preserves the scalar-unit augmentation, so the resulting gamma is the completed open tensor comparison with the same unit. Under d_E and d_L the compact-support scalar map is\n b_{L/E}=d_L^{-1} gamma T_X(d_E).\nThis is the prescribed map of def-weil-compact-support-coefficient-action: its mixed unit has exactly s tensor x ↦ iota_m(s) tensor (1 tensor x), followed by the same limit map. The coherence assertion of lem-fix-operation-reduction ensures these comparisons preserve tensor associators, units and counits, and successive scalar extensions, as actual derived maps. This uses a simultaneous strict construction, not faithfulness of separate reduction functors.",
+   "uses": [
+    "lem-pod-completed-scalar-extension-texact",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-roos-extension-comparison",
+    "def-weil-integral-scalar-extension",
+    "def-weil-compact-support-coefficient-action",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 and sites-modules Tag 0E8I, lemma-j-shriek-and-tensor; proetale Tag 09BP, lemma-j-shriek-limits; completed augmentation normalization is the cited refinement"
+   }
+  },
+  {
+   "text": "Apply lem-a1-texact-coefficient-stage-descent to the integral functors of Step 4 for all finite E. They are O_E-linear because termwise j_! and d_E preserve scalar multiplication. The integral and rational bounded t-structures, the t-exact localization and the finite-stage truncations were checked in Step 1. The exact t-exact scalar transitions are given by lem-pod-completed-scalar-extension-texact, rationalized; the compatible beta maps are the b maps of Step 5, rationalized. The raw localization and pair categories are exactly def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients. In particular triangles are images of integral triangles up to isomorphism, or represented over one finite field, as required by the descent lemma. Its descended functors are the actual J_E and J_Qlb of def-weil-integral-rational-qbar-compact-support, since that definition uses the same integral values and scalar action. The descent lemma now gives preservation of both standard halves, exact functors of hearts, and canonical natural cohomology comparisons. Invert its F H^a ≅ H^a F comparison to obtain the direction H^a(J_Lambda L) ≅ J_Lambda H^a(L) requested here.",
+   "uses": [
+    "lem-a1-texact-coefficient-stage-descent",
+    "lem-pod-completed-scalar-extension-texact",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; formal coefficient descent as in the cited abstract lemma"
+   }
+  },
+  {
+   "text": "The integral comparison of Step 4 is the canonical truncation comparison: its kernel and quotient maps are exactly the cycle inclusion and homology projection. Uniqueness in lem-pod-texact-truncation-comparison therefore identifies it with the cohomology comparison used in Step 6 after localization. That lemma also says its truncation comparisons commute with natural transformations and composition. Apply this to d_E, to t-exact rationalization, and to b_{L/E} between the two composites of t-exact functors of Step 5, then shift by a. It follows that the integral, rational and common-stage cohomology maps commute with the specified scalar comparisons. The open unit already matches the ringed-site unit by Step 2, and its scalar normalization was checked in Step 5. Finally lem-a1-texact-coefficient-stage-descent states that the common-stage comparisons are represented by these finite-stage comparisons independently of further enlargement. For arbitrary presentations of the same common-stage object use lem-weil-compact-support-finite-field-independence: the comparison is relative to the specified representing isomorphisms and independent of the common overfield and arrow representatives. Thus replacing a common-stage arrow by an equal representative gives the same cohomology comparison and the same normalized open maps.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "lem-a1-texact-coefficient-stage-descent",
+    "lem-weil-compact-support-finite-field-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, extension-by-zero sentence; naturality and coefficient compatibility of its actual complete realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-roos-extension-comparison",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-intrinsic-integral-standard-truncations",
+  "lem-weil-integral-constructible-triangulated",
+  "prop-constructible-truncations",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-pod-completed-scalar-extension-texact",
+  "lem-sf-open-tensor-normalization",
+  "def-weil-integral-scalar-extension",
+  "def-weil-compact-support-coefficient-action",
+  "lem-fix-operation-reduction",
+  "lem-a1-texact-coefficient-stage-descent",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-compact-support-finite-field-independence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2 extension-by-zero sentence; detailed assembly of existing strict-completion, exactness and coefficient-descent statements, using Stacks 03DJ, 0GL1, 0E8I, 09BP, 010N and Bhatt-Scholze 6.1.13, 6.7.6-6.7.7, 6.8.11, 6.8.14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open compact support on constructible ell-adic complexes is integral exact extension by zero and is t-exact after rationalization and common finite coefficient stages",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, HomologicalComplex.isSupported_iff, HomologicalComplex.IsSupportedOutside.exactAt, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general derived complexes or Ext, not normalized complete open compact supports at coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete open extension by zero commutes with cohomology and scalar extension in rational constructible categories",
+   "results": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, DerivedCategory.instHasZeroObject, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.Abelian.Ext.comp_smul, CategoryTheory.ShiftedHom.mk₀_smul, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero, groupCohomology.instPreservesZeroMorphismsRepCochainComplexModuleCatNatCochainsFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general derived complexes or Ext, not normalized complete open compact supports at coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general derived complexes or Ext, not normalized complete open compact supports at coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general derived complexes or Ext, not normalized complete open compact supports at coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: returned hits concern scalar localization, ordinary adic module completion, Ext or general exact functors; none states normalized complete open compact support with its adjunction and coefficient comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on sheaves induces a t exact derived functor commuting with cohomology",
+   "results": "CategoryTheory.Functor.mapExtAddHom_coe, CategoryTheory.Functor.mapExtAddHom_apply, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExtAddHom, CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp, CategoryTheory.exactFunctor, CategoryTheory.Functor.mapExtLinearMap, CategoryTheory.ExactFunctor.of",
+   "date": "2026-10-22",
+   "verdict": "no match: returned hits concern scalar localization, ordinary adic module completion, Ext or general exact functors; none states normalized complete open compact support with its adjunction and coefficient comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: returned hits concern scalar localization, ordinary adic module completion, Ext or general exact functors; none states normalized complete open compact support with its adjunction and coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact open immersion extension by zero on derived complete ell adic constructible complexes is t exact and commutes with coefficient extension",
+   "results": "AdicCompletion.map_exact, localCohomology.diagram, Profinite.NobelingProof.succ_exact, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.extend_eq, Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: returned hits concern scalar localization, ordinary adic module completion, Ext or general exact functors; none states normalized complete open compact support with its adjunction and coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero on a localized ringed site commutes with reduction towers and with rational coefficient scalar extension",
+   "results": "exact_of_isLocalized_span, IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ, LocalizedModule.map_exact, ModuleCat.Tilde.instIsScalarTowerCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, IsLocalizedModule.map_exact, ModuleCat.Tilde.instIsScalarTowerAtPrimeAsIdealValCarrierTopMemOpensUnopLocalizations, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, exact_of_isLocalized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: returned hits concern scalar localization, ordinary adic module completion, Ext or general exact functors; none states normalized complete open compact support with its adjunction and coefficient comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-immersion-weil-local-behavior",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 2 extension-by-zero sentence: integral realization and coefficient passage; returned item Steps 7 and 8",
+   "via": [
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-open-extension-texact-coefficient-stages",
+  "worker": "stage1",
+  "summary": "Q38 checked the actual strict-tower integral realization and adjunction, sheaf exactness and ambient cohomology, constructible landing without a finite-quotient Tor assumption, and normalized scalar and common-stage descent. The existing DAG supplies all supporting statements; no nodes or Lean files were added and the statement is unchanged.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction.proof.md, Part 2: the sentence beginning Extension by zero, with complete integral realization and coefficient compatibility needed by its complex form.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-roos-extension-comparison",
+    "why": "Generic Normalized open-extension Roos comparison on arbitrary strict towers used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sf-intrinsic-integral-standard-truncations",
+    "why": "Generic Intrinsic integral constructible objects are bounded and stable under standard truncation used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic Construction of constructible truncations used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic Strict reduction and normalized realization of completed open extension used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic The integral compact-support direct image of a constructible complex is constructible used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-pod-completed-scalar-extension-texact",
+    "why": "Generic Completed integral scalar extension preserves standard cohomological bounds used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic Basic operations and coefficient reduction used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-a1-texact-coefficient-stage-descent",
+    "why": "Generic Descent of t-exact coefficient families and canonical comparison maps used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic Canonical truncation comparisons for t-exact triangulated functors used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-compact-support-finite-field-independence",
+    "why": "Generic Independence of the finite coefficient field used to justify the completed open-extension sentence; it does not replace the unit open-closed triangle/weight route, and this unit has no separate statement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-roos-extension-comparison",
+  "lem-sf-intrinsic-integral-standard-truncations",
+  "lem-weil-integral-constructible-triangulated",
+  "prop-constructible-truncations",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pod-completed-scalar-extension-texact",
+  "lem-sf-open-tensor-normalization",
+  "lem-fix-operation-reduction",
+  "lem-a1-texact-coefficient-stage-descent",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-compact-support-finite-field-independence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-83cfa1116",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-83cfa1116 (reviewer sub-agent of L); spot-checked: First split of a Q37-created item; no re-split note. Statement unchanged; seven steps; no new nodes. Read all 21 proof_deps and 8 stmt_deps; no cycle, no duplicate (finite-level, heart/stalk and parent nodes do not state the integral/rational/common-stage t-exactness), no SGA. Source: main-20261015 lem-zl-morphism-open-closed-reduction.proof.md Part 2 lines 63-69 (extension-by-zero sentence). S1: Noetherian/qcqs/quasi-compact from lem-sf-open-roos-extension-comparison; intrinsic truncations restrict to a bounded t-structure; rational halves are iso closures by definition, so localization is t-exact. S2: with c=(j,id) the finite operation is j_!; lem-sf-integral-open-reduction-comparison statement gives r_j, completeness, d_j and the unit/counit identification. S3: compact-support constructibility with f=j, no finite-Tor hypothesis; j_! exact for an arbitrary ring sheaf. S4: 010N clause (c) gives H^a(j_!C)=j_!H^a(C) for ambient H of complete objects; checked K=O_E/ϖ. S5: b_{L/E}=d_L^{-1}γT(d_E) has the right direction T J_E ≅ J_L T and is the identity at E=L; γ comes from the arbitrary-ring open tensor normalization; λ is the Roos comparison over O_L. S6: every hypothesis of lem-a1-texact-coefficient-stage-descent checked; its arrow formula β^{-1}F(u)β is the prescribed representative of def-weil-compact-support-coefficient-action. S7: truncation-comparison uniqueness and naturality plus finite-field independence relative to the representing isomorphisms. Batch-5: lem-pod-completed-scalar-extension-texact (completed scalar extension t-exact), lem-pod-texact-truncation-comparison (abstract t-structure lemma, closure of 2 definitions) and lem-a1-texact-coefficient-stage-descent (abstract descent) are generic coefficient tools, outside both the trace-formula and Poincaré duality assumptions. Their closure contains no thm/prop/cor of sec-poincare-duality or sec-trace-formula and no nt- node, only generic trf helpers via lem-weil-integral-constructible-triangulated. Advisory: the worker wrote split_report.tool_uses itself (C8); all 12 are genuine generic tools and do not replace the unit route."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlOpenExtensionTExact",
+  "declaration": "WeilConjectures.ZlOpenTExact.openExtension_tExact",
+  "declarations": [
+   "WeilConjectures.ZlOpenTExact.quasiCompact",
+   "WeilConjectures.ZlOpenTExact.integral",
+   "WeilConjectures.ZlOpenTExact.rational",
+   "WeilConjectures.ZlOpenTExact.identification",
+   "WeilConjectures.ZlOpenTExact.integralCohomology",
+   "WeilConjectures.ZlOpenTExact.ScalarModel",
+   "WeilConjectures.ZlOpenTExact.scalarRealization",
+   "WeilConjectures.ZlOpenTExact.integralShiftAdditive",
+   "WeilConjectures.ZlOpenTExact.scalarShift",
+   "WeilConjectures.ZlOpenTExact.stageInclusionShift",
+   "WeilConjectures.ZlOpenTExact.ordinaryOpenShift",
+   "WeilConjectures.ZlOpenTExact.OpenAdjunctionNormalization",
+   "WeilConjectures.ZlOpenTExact.stageStandardTStructure",
+   "WeilConjectures.ZlOpenTExact.AllStages",
+   "WeilConjectures.ZlOpenTExact.RepresentativeIndependence",
+   "WeilConjectures.ZlOpenTExact.openExtension_tExact"
+  ],
+  "file": "lean/Sheaf/Paper/ZlOpenExtensionTExact.lean",
+  "statement": "theorem openExtension_tExact : IsNoetherian X ∧ QuasiCompact j ∧ (letI : QuasiCompact j := quasiCompact D j ∃ S : SfCompactSupportCoefficientAction l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) Ω (Compactification.ofIsOpenImmersion j), AllStages D l hl j Ω S ∧ RepresentativeIndependence D l hl j Ω S)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 92dd127bd508 and 8914e01fd1fd: the definition ownership nodes replace theorem-only statement dependencies; the ordinary-open owner is split to cite Q53’s def-zl-ordinary-open-support-normalization and retain only ordinaryOpenPull/ordinaryOpenAdjunction/systemDirectId. OpenAdjunctionNormalization retains both strict-system unit/counit equations and the specified mate formula. The Lean module and main signature are unchanged from 8914e01fd1fd."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ed963462",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery of 8914 (RETURN H4/H12). Repaired exactly as required: def-zl-ordinary-open-integral-operations now owns only ordinaryOpenPull/ordinaryOpenAdjunction/systemDirectId (primary ordinaryOpenPull, signature = published line 158); its statement defines just these three and cites def-zl-ordinary-open-support-normalization (Q53, on base) in stmt_deps; the item also adds that stmt_dep. No overlap with Q53's five declarations; no other live or pending def owner of these declarations, sfIntegralOrdinaryComparison or the CoefficientStageDescent defs. Lean module byte-identical to 8914, whose clause-by-clause check (actual (j,id) integral, identification = dj_formula, pinned strict-system adjunction, cohomology natural iso with the derived iso, half-lines, rational/common-stage Comparisons, scalar/representative compatibility, edge cases, universes) still holds; statement verbatim; sorries only in quasiCompact and the main theorem. Item differs from live only in stmt_deps/lean. sfIntegralOrdinaryComparison record format-only change accepted; def-weil-derived-pullback-tensor-hom diff is a rebase artifact. Advisories: H11 self-review second reading; free CommShift structures (accepted earlier). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164659-L-1051085",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

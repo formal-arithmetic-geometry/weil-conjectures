@@ -1,0 +1,148 @@
+{
+ "id": "lem-zl-clopen-return-restriction",
+ "kind": "statement",
+ "title": "Native return restriction on a specified clopen support",
+ "statement": "Let k₁/k₀ be a finite extension of finite fields and ℓ an invertible prime. Let X/k₀ be smooth and finite type and C/k₁ geometrically connected and finite type. Let c:C→X be an open and closed immersion commuting with the field-extension maps [def-sbc-smooth-morphisms]. There exists an exact functor R between the source constructible pro-etale Weil-sheaf categories [def-weil-weil-sheaf-complex] on X/k₀ and C/k₁, preserving lissity [def-pod-lisse-l-adic-sheaves] and satisfying HasPointwisePowerTransport R c [def-zl-source-constant-field-restriction]. For every arithmetically simple lisse V on X with a nonzero stalk at c(z) for some finite point z of C, R(V) is arithmetically simple lisse. The scheme C and its embedding are supplied; no support or positive-dimensional model is constructed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-sbc-smooth-morphisms",
+  "def-zl-source-constant-field-restriction",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Put r=[k₁:k₀], so r>0 and #k₁=(#k₀)^r. Construct v from the structural square by exists_clopen_return_geometric_map. Take R to be poweredGeometricPullback v r hv. Its existing instances prove finite-limit and finite-colimit preservation, and its lissity theorem supplies the lisse clause.",
+   "uses": [
+    "lem-zl-clopen-return-data",
+    "def-zl-powered-geometric-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Apply poweredGeometricPullback_stalkEquiv using the fixed closure equivalence. This gives HasPointwisePowerTransport, including the residue cardinality condition and an actual Frobenius-module equivalence for every constructible sheaf.",
+   "uses": [
+    "lem-zl-clopen-return-stalk",
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "A zero restricted sheaf has zero stalk at z, by the stalk and coefficient functors. The pointwise Frobenius-module equivalence would make the specified nonzero source stalk subsingleton, a contradiction. To prove simplicity, lift each lisse subobject G→R(V) to U→V by exists_lisse_subobject_clopen_return. Source simplicity says U is zero or its injection is an isomorphism. In the first case exact R preserves its zero object and e gives IsZero G. In the second R maps the source injection to an isomorphism, and canceling e.hom gives IsIso i.",
+   "uses": [
+    "lem-zl-clopen-return-subobject",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-clopen-return-data",
+  "def-zl-powered-geometric-pullback",
+  "lem-zl-clopen-return-stalk",
+  "def-zl-source-constant-field-restriction",
+  "lem-zl-clopen-return-subobject",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "A8: explicit powered pullback and actual stalk equivalences proved; simplicity reduced to the strictly smaller geometric subobject lifting step. The original signature and unit route are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius return restriction from a cyclic disjoint union of sheets is an exact equivalence of Weil sheaf categories and identifies local Frobenius operators",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr, FiniteField.frobeniusAlgEquiv, frobeniusEquiv, CategoryTheory.Equivalence.sheafCongrPrecoherent, coe_frobenius_comp_coe_frobeniusEquiv_symm, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongrPreregular, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius return along a clopen component over a finite field extension defines an exact functor on Weil sheaves preserving irreducibility",
+   "results": "8 hits: WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.isocrystal_classification, WittVector.Isocrystal.frobenius, WittVector.Isocrystal.frob, WittVector.Isocrystal, IsArithFrobAt.exists_of_isInvariant, WittVector.exists_frobenius_solution_fractionRing. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIrreducibleLisse|Weil.*component|component.*Weil",
+   "results": "0 hits: . No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SimpleLisseSupportModel",
+  "date": "2026-10-26",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Native return restriction on a specified clopen support",
+   "via": [
+    "lem-zl-simple-lisse-support-model",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ClopenReturnRestriction",
+  "file": "lean/Sheaf/DeligneLaumon/ClopenReturnRestriction.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_clopen_return_restriction",
+  "statement": "theorem exists_clopen_return_restriction\n    {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n    [Algebra k₀ k₁] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] [Fact (ringChar k₁ ≠ l)]\n    {X C : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    [C.Over (Spec (CommRingCat.of k₁))]\n    [Smooth (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₁))]\n    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₁))]\n    [QuasiCompact (C ↘ Spec (CommRingCat.of k₁))]\n    (c : C ⟶ X) [IsOpenImmersion c] [IsClosedImmersion c]\n    (hc : c ≫ (X ↘ Spec (CommRingCat.of k₀)) =\n      (C ↘ Spec (CommRingCat.of k₁)) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁))) :\n    ∃ (R : WeilSheaf k₀ l X ⥤ WeilSheaf k₁ l C)\n      (_ : PreservesFiniteLimits R) (_ : PreservesFiniteColimits R),\n      (∀ F : WeilSheaf k₀ l X, F.IsLisse → (R.obj F).IsLisse) ∧\n      HasPointwisePowerTransport R c ∧\n      ∀ (V : WeilSheaf k₀ l X), V.IsIrreducibleLisse →\n        ∀ z : C.finitePoints,\n          Nontrivial (V.stalk ⟨c z.1, Scheme.Hom.map_mem_finitePoints c z.2⟩).carrier →\n          (R.obj V).IsIrreducibleLisse",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T070226-L-3477383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T180551-L-3354355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

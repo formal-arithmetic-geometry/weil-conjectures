@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-henselian-colimit-stage-root",
+ "kind": "statement",
+ "title": "A simple residue root over a henselian-ring colimit lifts at a stage",
+ "statement": "Let $I$ be a nonempty small directed poset and $(A_i,u_{ij})_{i\\le j}$ a direct system of commutative henselian local rings [def-weil-pbc-henselian-terminology], with maximal ideals $\\mathfrak m_i$ and local transition maps $u_{ij}^{-1}(\\mathfrak m_j)=\\mathfrak m_i$. Let $(A,(\\alpha_i))$ be a colimit in commutative rings [def-weil-pbc-category-colimit], and assume $A$ is local with maximal ideal $\\mathfrak m$ and $\\alpha_i^{-1}(\\mathfrak m)=\\mathfrak m_i$. Put $k_i=A_i/\\mathfrak m_i$, $k=A/\\mathfrak m$, and $\\rho_i([x])=[\\alpha_i(x)]$. Assume $(k,(\\rho_i))$ is the ring colimit of the induced residue-field diagram. For any monic $f\\in A[T]$ of degree $n$ and $a_0\\in k$ with $\\overline f(a_0)=0$ and $\\overline{f'}(a_0)\\ne0$, there exist $i\\in I$, a monic $f_i\\in A_i[T]$ of degree $n$, $a_{0,i}\\in k_i$, and $a_i\\in A_i$ such that $\\alpha_i[T](f_i)=f$, $\\rho_i(a_{0,i})=a_0$, $\\overline{f_i}(a_{0,i})=0$, $\\overline{f_i'}(a_{0,i})\\ne0$, $f_i(a_i)=0$, and $a_i\\bmod\\mathfrak m_i=a_{0,i}$. Here bars mean coefficientwise reduction, $\\alpha_i[T]$ means coefficientwise application of $\\alpha_i$, and the formal derivative of $\\sum_j c_jT^j$ is $\\sum_{j\\ge1}jc_jT^{j-1}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, proof: from the choice of a monic polynomial and simple residue root to the stage solution a_i."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, monicity gives $f=1$, whose reduction has no root in the field $k$; hence the hypotheses force $n>0$. Write $f=T^n+\\sum_{r<n}c_rT^r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-filtered-colimit-finite-data] to the finite list $(c_r)_{r<n}$ in the commutative-ring colimit $A$, with no equations imposed. It gives a stage $p$ and $b_r\\in A_p$ with $\\alpha_p(b_r)=c_r$. Put $g_p=T^n+\\sum_{r<n}b_rT^r$. Its leading coefficient is $1$, so it is monic of degree $n$ (the maximal ideal of $A_p$ is proper, so $1\\ne0$), and coefficientwise $\\alpha_p[T](g_p)=f$.",
+   "uses": [
+    "lemma-nagata-filtered-colimit-finite-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+   }
+  },
+  {
+   "text": "The nonempty small directed poset $I$ is filtered: two objects have an upper bound and parallel arrows are equal. Apply clause (1) of [lem-pc-filtered-colimit-commrings-elementwise] to the assumed commutative-ring colimit $k=\\varinjlim k_j$. Obtain $q$ and $b\\in k_q$ with $\\rho_q(b)=a_0$. Choose $i\\ge p,q$ by directedness. Let $f_i=u_{pi}[T](g_p)$ and $a_{0,i}=\\overline u_{qi}(b)$, where $\\overline u_{qi}([x])=[u_{qi}(x)]$ is well-defined since transitions carry maximal ideals into maximal ideals. Its coefficients are $d_r=u_{pi}(b_r)$ below degree $n$ and $1$ in degree $n$, so $f_i$ is monic of degree $n$. The cocone equalities give $\\alpha_i(d_r)=c_r$ and $\\rho_i(a_{0,i})=\\rho_q(b)=a_0$. Thus $\\alpha_i[T](f_i)=f$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+   }
+  },
+  {
+   "text": "The map $\\rho_i$ reflects zero: if $z=[x]\\in k_i$ satisfies $\\rho_i(z)=0$, then $\\alpha_i(x)\\in\\mathfrak m$, hence $x\\in\\mathfrak m_i$ by the assumed equality $\\alpha_i^{-1}(\\mathfrak m)=\\mathfrak m_i$, and $z=0$. Set $d_n=1$ and $c_n=1$. Expanding finite sums and using preservation of addition, multiplication, $1$ and integer multiples gives $\\rho_i(\\sum_{r=0}^n[d_r]a_{0,i}^r)=\\sum_{r=0}^n[c_r]a_0^r=\\overline f(a_0)=0$ and $\\rho_i(\\sum_{r=1}^n r[d_r]a_{0,i}^{r-1})=\\sum_{r=1}^n r[c_r]a_0^{r-1}=\\overline{f\\prime}(a_0)\\ne0$. The first sum is $\\overline{f_i}(a_{0,i})$, so zero reflection makes it zero. The second is $\\overline{f_i\\prime}(a_{0,i})$; it cannot be zero because a ring homomorphism sends zero to zero. These are precisely the two simple-root conditions at stage $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+   }
+  },
+  {
+   "text": "Apply implication (i)$\\Rightarrow$(ii) of [lem-weil-pbc-henselian-local-root-lifting] to the henselian local ring $A_i$, the monic polynomial $f_i$, and the residue root $a_{0,i}$ with the two conditions proved above. It supplies $a_i\\in A_i$ satisfying $f_i(a_i)=0$ and $a_i\\bmod\\mathfrak m_i=a_{0,i}$. Together with the equalities of step 3 and the conditions of step 4 these give every asserted clause.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, proof: monic polynomial, simple residue root, and stage solution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial and its simple residue root over a directed colimit of henselian local rings have a root lifted from some stage",
+   "results": "8 hits: HenselianLocalRing.is_henselian, HenselianLocalRing.TFAE, HenselianLocalRing.mk, HenselianRing.recOn, HenselianRing.rec, HenselianRing.is_henselian, HenselianRing.casesOn, HenselianLocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of henselian local rings with local maps a monic polynomial and simple residue root descend to a stage where Hensel lifting gives a root",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianRing.is_henselian, HenselianLocalRing.is_henselian, HenselianLocalRing, HenselianRing, IsAdicComplete.henselianRing, instHenselianRingMaximalIdeal, Field.henselian",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "(henselian|simple.root|monic).*(colimit|DirectLimit|directLimit)|(colimit|DirectLimit|directLimit).*(henselian|simple.root)",
+   "results": "0 hits: ; source subdirectory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic simple root lifting is preserved by directed limits of local rings with local homomorphisms",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, HenselianRing.is_henselian, HenselianLocalRing, StandardEtalePair.lift_X, HenselianRing, IsAdjoinRoot.lift_root, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing.TFAE|theorem TFAE|is_henselian",
+   "results": "5 hits: 96, 109, 115, 119, 144; source subdirectory RingTheory/Henselian.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and is_henselian give lifting over an already henselian ring, not descent of polynomial and residue data to a henselian stage of a colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "(henselian|simple.root|monic).*(colimit|DirectLimit|directLimit)|(colimit|DirectLimit|directLimit).*(henselian|simple.root)",
+   "results": "0 hits:  | subdirectory RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide henselian simple-root lifting or monic coefficient lifting, not simultaneous descent and lifting at a stage of the stated diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial and a simple residue root over a directed colimit of henselian local rings lift together at one stage",
+   "results": "8 hits: HenselianLocalRing.is_henselian, HenselianLocalRing.TFAE, HenselianLocalRing, HenselianLocalRing.mk, HenselianRing.is_henselian, Field.henselian, HenselianRing.rec, Polynomial.lifts_and_natDegree_eq_and_monic",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide henselian simple-root lifting or monic coefficient lifting, not simultaneous descent and lifting at a stage of the stated diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide henselian simple-root lifting or monic coefficient lifting, not simultaneous descent and lifting at a stage of the stated diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial and a simple residue root over a directed colimit of henselian local rings lift together at one stage",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, HenselianRing.is_henselian, HenselianLocalRing, HenselianRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide henselian simple-root lifting or monic coefficient lifting, not simultaneous descent and lifting at a stage of the stated diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficients of a monic polynomial descend in a filtered colimit of local rings and simple roots lift by Hensel lemma",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, HenselianLocalRing, HenselianRing.is_henselian, HenselianRing, Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map, Polynomial.Monic.exists_splits_map, Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide henselian simple-root lifting or monic coefficient lifting, not simultaneous descent and lifting at a stage of the stated diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-filtered-colimit-strictly-henselian-local",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Local-ring permanence input at a compatible family of closed points: Stacks Tag 04GI. Tag 04GI, lemma-colimit-henselian, proof: from the choice of a monic polynomial and simple residue root to the stage solution a_i.",
+   "via": [
+    "lem-sfb-filtered-colimit-strictly-henselian-local",
+    "lem-sfb-indfinite-contractible-base-wstrict",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-henselian-colimit-stage-root",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04GI into coefficient descent, residue-root descent, explicit polynomial and derivative evaluations, zero reflection from locality, and application of the existing henselian simple-root criterion. Statement unchanged; all ingredients already have nodes; no new nodes.",
+  "blueprint": "The inherited Paragraph (3) open-direct-image root-tower route: the local-ring permanence input 04GI, specifically its finite polynomial/residue-data descent and stage simple-root lifting. Steps 1--5 realize exactly that input. The ancestor command returns None on the inherited created.item chain, retained without inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Generic finite-element descent for commutative-ring colimits, used only for the coefficients; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic equivalence between the stated idempotent definition of henselianness and monic simple-residue-root lifting; needed at the chosen stage, not a different geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-22439f1e8",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-22439f1e8 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full, together with Stacks algebra.tex Tag 04GI lemma-colimit-henselian (lines 42926-42960). The statement is unchanged against the base and there are no new nodes. There is no repair note, so this is not a re-split; the base was an unsplit helper with no proof, made from steps 5-6 of its parent lem-sfb-filtered-colimit-strictly-henselian-local. Step 1: n=0 is vacuous, since f=1 and k is nonzero. Step 2: lemma-nagata-filtered-colimit-finite-data with no equations gives coefficient lifts; leading coefficient 1 makes the lift monic of degree n. Step 3: lem-pc-filtered-colimit-commrings-elementwise (1), a Mathlib leaf, gives a representative of a_0. A directed poset is filtered, and the residue transitions are well defined because the transitions are local. The cocone identities give alpha_i[T](f_i)=f and rho_i(a_{0,i})=a_0. Step 4 is elementary: rho_i reflects zero because alpha_i^{-1}(m)=m_i, so the reduced value of f_i is 0 and of f_i' is nonzero; this does not depend on the characteristic. Step 5: lem-weil-pbc-henselian-local-root-lifting (i)=>(ii) applies to A_i. Small cases checked: n=0, n=1, singleton I, non-injective local maps such as k[eps]->k, and characteristic p. proof_deps equals the union of uses and there is no cycle. Duplicate search over 04GI, colimit-henselian and simple-root nodes found none; the trf permanence, wf colimit-structure, per valued-field stability and pbc triples nodes all state different things. I accept the declared tool uses (the Nagata finite-data node and the root-lifting criterion, which is Lean-closed in slopmaster2) as generic algebra. No SGA. Advisory: the item may be unreachable, because according to the parent's merge note no node cited the parent in that snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianColimitStageRoot",
+  "declaration": "CommRingCat.exists_monic_simple_root_stage",
+  "file": "lean/Sheaf/RingTheory/HenselianColimitStageRoot.lean",
+  "statement": "theorem exists_monic_simple_root_stage {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [∀ i : I, HenselianLocalRing (F.obj i)] (hlocal : ∀ (i j : I) (hij : i ≤ j), (maximalIdeal (F.obj j)).comap (F.map (homOfLE hij)).hom = maximalIdeal (F.obj i)) (c : Cocone F) (hc : IsColimit c) [IsLocalRing c.pt] (hlegs : ∀ i : I, (maximalIdeal c.pt).comap (c.ι.app i).hom = maximalIdeal (F.obj i)) (ρ : ∀ i : I, ResidueField (F.obj i) →+* ResidueField c.pt) (hρ : ∀ (i : I) (x : F.obj i), ρ i (residue (F.obj i) x) = residue c.pt (c.ι.app i x)) (hrescolim : ∀ (B : CommRingCat.{u}) (β : ∀ i : I, ResidueField (F.obj i) →+* B), (∀ (i j : I) (hij : i ≤ j) (x : F.obj i), β j (residue (F.obj j) (F.map (homOfLE hij) x)) = β i (residue (F.obj i) x)) → ∃! g : ResidueField c.pt →+* B, ∀ i : I, g.comp (ρ i) = β i) (n : ℕ) (f : Polynomial c.pt) (hf : f.Monic) (hdegree : f.natDegree = n) (a₀ : ResidueField c.pt) (hroot : (f.map (residue c.pt)).eval a₀ = 0) (hsimple : (f.derivative.map (residue c.pt)).eval a₀ ≠ 0) : ∃ (i : I) (fᵢ : Polynomial (F.obj i)) (a₀ᵢ : ResidueField (F.obj i)) (aᵢ : F.obj i), fᵢ.Monic ∧ fᵢ.natDegree = n ∧ fᵢ.map (c.ι.app i).hom = f ∧ ρ i a₀ᵢ = a₀ ∧ (fᵢ.map (residue (F.obj i))).eval a₀ᵢ = 0 ∧ (fᵢ.derivative.map (residue (F.obj i))).eval a₀ᵢ ≠ 0 ∧ fᵢ.eval aᵢ = 0 ∧ residue (F.obj i) aᵢ = a₀ᵢ",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbfca329b",
+  "group": "N7",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only by the new lean record (no prior binding, so no rebind or no-op); lean.statement verbatim equal to the file signature; no new nodes or statement change; report has Worker report and Second reading by N7. Clause check: I:Type u nonempty directed poset (index universe = ring universe, same as exists_finite_data_stage and the strictly henselian sibling); HenselianLocalRing from the def-weil-pbc-henselian-terminology record; hlocal and hlegs are exact comap equalities; arbitrary Cocone+IsColimit per def-weil-pbc-category-colimit; rho pinned uniquely by hρ (residue surjective), so canonical, not arbitrary; hrescolim is the inline universal property, compatibility on representatives equivalent; all 8 conclusion clauses present and not weakened. Edge cases: n=0 vacuous with no positivity added, singleton/empty I, non-injective local maps, char p. No defs, proof sorry only, source and blueprint docstrings with the 5 steps, proof-dep imports exist in side-live. No duplicate (FilteredColimitStrictlyHenselianLocal and EtaleResidueTriplesSimpleRoots state different things). Not recompiled per instruction; worker reports clean compile."
+ }
+}

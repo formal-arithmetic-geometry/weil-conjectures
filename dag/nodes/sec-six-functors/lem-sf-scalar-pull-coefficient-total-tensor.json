@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-scalar-pull-coefficient-total-tensor",
+ "kind": "statement",
+ "title": "Ordinary signed-total tensor square for a coefficient change",
+ "statement": "Let R,S,a,g:U→V and the ordinary adjunction comparison gamma:G₀K₀≅F₀H₀ be as in [lem-sf-scalar-pull-coefficient-complex-normalization], where F₀ is geometric R module pullback, H₀ scalar extension on U, G₀ scalar extension on V, and K₀ geometric S module pullback. Write T_A,T_B,T_C,T_D for the signed direct-sum total tensors on the four module categories [def-pc-tensor-complex-sheaves]. Let dF:F₀T_A→T_B(F₀×F₀) and dK:K₀T_C→T_D(K₀×K₀) be the inverses of the canonical total pullback tensor isomorphisms [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and dG,dH the analogous inverses of the ordinary scalar total balancing maps, normalized by s⊗(m⊗n)↦(s⊗m)⊗(1⊗n). Then for all unbounded complexes P,Q of R_V-modules, K₀(dG(P,Q));dK(G₀P,G₀Q);T_D(gamma_P,gamma_Q)=gamma_(T_A(P,Q));H₀(dF(P,Q));dH(F₀P,F₀Q). This is an equality of ordinary cochain maps; it has no derived tensor models, derived adjunctions or localization, and assumes no flatness. The total functors are the existing proEtaleResolutionTotal [lem-sp-proetale-tensor-coefficient-resolution-square].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, signed-total construction; Modules on Sites Tag 03EL, lemma-tensor-product-pullback; expanded coefficient-square calculation of Tag 0E48 remark-compatible-with-diagram."
+ },
+ "stmt_deps": [
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "lem-sp-proetale-tensor-coefficient-resolution-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved ordinary module tensor square to each pair of terms P^p,Q^q. Its proof transposes through the two scalar/geometric adjunctions and uses their unit-normalized tensor generator formulas.",
+   "uses": [
+    "lem-sf-scalar-pull-coefficient-module-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the forward total tensor isomorphisms to obtain the formula for their inverses after each image of a (p,q) summand. The composite of scalar extension with geometric pullback is a left adjoint and preserves the total coproduct. Use hom_ext_of_map in each total degree, the inverse summand formulas, and the formula for the total map of a pair of cochain maps. Naturality of scalarPullModule moves the source summand inclusion across the coefficient comparison; scalarPullComplex has this module comparison as its degree component. Both sides reduce to the ordinary module square followed by the same target summand inclusion. Cochain extensionality finishes. Neither factor changes degree, hence no additional sign occurs.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sf-compact-support-scalar-tensor-identification",
+    "lem-sf-scalar-pull-coefficient-complex-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-scalar-pull-coefficient-module-tensor",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "lem-sf-scalar-pull-coefficient-complex-normalization"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "W8",
+  "note": "Complete ordinary module square in a separate proved module, followed by the signed total summand calculation, following Stacks 03EL and 07A4. The separation follows profiling and local unfolding improvements; it introduces no new proof obligations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived scalar extension and geometric pullback comparison agrees with the ordinary comparison on complexes",
+   "results": "8 hits, including PresheafOfModules.pullback and ModuleCat.ExtendRestrictScalarsAdj.homEquiv; no derived coefficient-square counit normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and the derived tensor comparison for sheaves of modules",
+   "results": "8 hits, including SheafOfModules.conjugateEquiv_pullbackComp_inv and SheafOfModules.pullbackComp; these concern ordinary continuous pullback.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for these normalized comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits for the ordinary adjunction uniqueness API and its unit/counit equations.",
+   "date": "2026-10-27",
+   "verdict": "Used in the construction; does not supply the derived normalization or total tensor equation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*scalar|scalar.*tensor",
+   "results": "25 hits, including module tensor/base-change results; none for the four sheaf coefficient functors and their total complex square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullTensorCoefficientCoherence",
+  "date": "2026-10-27",
+  "group": "E7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Tag 07A4, lemma-pullback-tensor-product, signed-total construction; Modules on Sites Tag 03EL, lemma-tensor-product-pullback; expanded coefficient-square calculation of Tag 0E48 remark-compatible-with-diagram.",
+   "via": [
+    "lem-sf-scalar-pull-tensor-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullCoefficientTotalTensor",
+  "file": "lean/Sheaf/Paper/ScalarPullCoefficientTotalTensor.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarPull_coefficient_total_tensor",
+  "statement": "theorem scalarPull_coefficient_total_tensor\n    {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (g : U ⟶ V)\n    (P Q : CochainComplex (pbcModules V (R.ring V)) ℤ) :\n    ((proEtaleRingModulePullback g (S.ring V) (S.ring U)\n        (S.pull g)).mapHomologicalComplex (.up ℤ)).map\n      (@inv.{u + 1, u + 2} _ _ _ _ (scalarTensorTotal (a.map V) P Q)\n        (scalarTensorTotal_isIso (a.map V) P Q)) ≫\n      (proEtaleTensorPullbackTotalIso g (S.ring V) (S.ring U) (S.pull g)\n        (((pbcExtend (a.map V)).mapHomologicalComplex (.up ℤ)).obj P)\n        (((pbcExtend (a.map V)).mapHomologicalComplex (.up ℤ)).obj Q)).inv ≫\n      (proEtaleResolutionTotal U (S.ring U)).map\n          (Prod.mkHom ((scalarPullComplex a g).hom.app P)\n            ((scalarPullComplex a g).hom.app Q)) =\n    (scalarPullComplex a g).hom.app\n        ((proEtaleResolutionTotal V (R.ring V)).obj (P, Q)) ≫\n      ((pbcExtend (a.map U)).mapHomologicalComplex (.up ℤ)).map\n        ((proEtaleTensorPullbackTotalIso g (R.ring V) (R.ring U) (R.pull g) P Q).inv) ≫\n      @inv.{u + 1, u + 2} _ _ _ _\n        (scalarTensorTotal (a.map U)\n          (((proEtaleRingModulePullback g (R.ring V) (R.ring U)\n            (R.pull g)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((proEtaleRingModulePullback g (R.ring V) (R.ring U)\n            (R.pull g)).mapHomologicalComplex (.up ℤ)).obj Q))\n        (scalarTensorTotal_isIso (a.map U) _ _)",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T222632-L-676109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T013002-L-2356192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

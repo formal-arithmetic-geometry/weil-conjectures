@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-strict-law-translation-embedding",
+ "kind": "statement",
+ "title": "Faithful birational left translations of a strict law",
+ "statement": "Let $A$ be a Noetherian normal strictly henselian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-henselian-terminology], and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. An open $U\\subset Y$ in an $S$-scheme is $S$-dense if $U_s$ is dense in $Y_s$ for every $s\\in S$. An $S$-rational map is a morphism on an $S$-dense open, modulo agreement on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Smoothness and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A strict birational law on a smooth separated finite-type $S$-scheme $Y$ with nonempty fibres is an associative $S$-rational map $m:Y\\times_SY\\dashrightarrow Y$ for which there are opens $D,V,W\\subset Y\\times_SY$, each dense in every fibre of both projections to $Y$, such that $m$ is defined on $D$ and $(x,y)\\mapsto(x,m(x,y))$, $(x,y)\\mapsto(m(x,y),y)$ induce isomorphisms $D\\simeq V$ and $D\\simeq W$, respectively. Let $Y$ carry such a strict law $m$. For an $S$-scheme $T$, put $Y_T=Y\\times_ST$ and let $B_Y(T)$ be the group, under composition, of $T$-birational self-maps of $Y_T$. Pullback defines a contravariant group-valued functor $B_Y$ on $S$-schemes. Here a $T$-birational self-map is an isomorphism between $T$-dense opens modulo agreement on a $T$-dense common open. For $a\\in Y(T)=\\operatorname{Hom}_S(T,Y)$, pull back the universal left translation $(x,y)\\mapsto(x,m(x,y))$ along $a$ in its first coordinate, obtaining $\\tau_a\\in B_Y(T)$. These assignments give an injective map $Y(T)\\to B_Y(T)$ for every $T$, natural in $T$. If $(a,b)\\in Y(T)^2$ factors through any open on which the rational law $m$ is represented by a morphism, then $\\tau_{m(a,b)}=\\tau_a\\circ\\tau_b$. These assertions include nonreduced $T$ and arbitrary $T\\to S$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.2 Lemma 4 and its preceding construction, printed pp.118-119 (PDF pp.124-125); primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, local PDF WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-sfb-relative-birational-maps",
+  "def-sfb-strict-birational-law"
+ ],
+ "proof": [
+  {
+   "text": "First construct the group functor, without any translation law. By [lem-sfb-strict-law-base-change], $Y_T$ is smooth, separated, finite type, with nonempty fibres for every $T\\to S$. The density assertion of [lem-sfb-smooth-fibrewise-dense-open-base-change] implies that inverse images of fibrewise dense opens under further base change remain fibrewise dense. Finite intersections of dense opens in each fibre are dense. If $f:U\\simeq V$ and $g:U'\\simeq V'$ represent two birational self-maps, restrict $f$ to $U\\cap f^{-1}(V\\cap U')$ and compose with $g$; this is an isomorphism onto an open dense in every fibre, since $V\\cap U'$ is dense in $V$ and the restriction is an isomorphism. Equivalent representatives give the same composite after intersecting the finitely many relevant dense opens. The identity of $Y_T$, reversed isomorphisms, and associativity of morphism composition give the group axioms. Pullback carries these representatives, intersections, composites and inverses to the corresponding ones over $T'$. The fibre-product universal property identifies successive pullbacks with direct pullback; hence the induced maps on equivalence classes obey the identity and composition laws. This constructs $B_Y$ on arbitrary test schemes.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2, construction immediately before Lemma 4, printed p.118; 2.5 on base change of dense opens"
+   }
+  },
+  {
+   "text": "Write $L:D\\simeq V$ for $(x,y)\\mapsto(x,m(x,y))$. The projection $Y\\times_SY\\to Y$ is smooth: apply [lem-sfb-strict-law-base-change] to $Y\\to S$ and the base $Y$. Its opens $D,V$ are dense in every fibre by strictness. Pulling $L$ back along any $a:T\\to Y$ gives an isomorphism $D_a\\simeq V_a$ of $T$-dense opens of $Y_T$ by [lem-sfb-smooth-fibrewise-dense-open-base-change]. This defines $\\tau_a$. A different representative of the rational multiplication agrees on a fibrewise dense common open; schematic density and the closed diagonal of $Y$ extend that agreement to the intersection of its domain with $D$ (the equalizer ideal restricts to zero, so injectivity into the open's structure sheaf makes it zero). For that equalizer argument, the common domain is smooth over $S$: the double product is smooth by [lem-trf-smooth-composition], and its open domain is smooth by [lem-pc-open-immersion-smooth-composition]. Thus the construction uses the rational law itself. Pullback along $T'\\to T$ gives exactly $D_{a|T'}\\simeq V_{a|T'}$, so $\\tau$ is natural.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "def-weil-closed-immersion",
+    "lem-trf-smooth-composition",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 preceding construction of the universal left translation, printed p.118"
+   }
+  },
+  {
+   "text": "Suppose $\\tau_a=\\tau_b$ in $B_Y(T)$. Choose a $T$-dense common open $H$ where their representatives agree, and intersect it with $D_a$ and $D_b$; this is still $T$-dense. Let $R:D\\simeq W$ be the other strictness isomorphism, $R(x,y)=(m(x,y),y)$. The two maps $H\\to D$, $x\\mapsto(a,x)$ and $x\\mapsto(b,x)$ have equal composites with $R$, namely $(\\tau_a(x),x)=(\\tau_b(x),x)$. Applying $R^{-1}$ gives $(a,x)=(b,x)$ as morphisms on $H$. Thus $a\\circ p=b\\circ p$ on $H$, where $p:Y_T\\to T$. This is cancellation of an actual isomorphism, including its structure sheaf maps, not cancellation only on geometric points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Lemma 4, cancellation with the universal right translation, printed p.118"
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-fibrewise-dense-open-base-change], $\\mathcal O_{Y_T}\\to j_*\\mathcal O_H$ is injective for $j:H\\hookrightarrow Y_T$. The equalizer $E$ of $a\\circ p$ and $b\\circ p$ is closed: it is the inverse image of the closed diagonal of $Y\\to S$. On affine charts this is the ideal generated by the differences of pullbacks of functions on $Y$. All its sections restrict to zero on $H$ by step 3; injectivity of restriction makes that ideal zero. Consequently $E=Y_T$ as a scheme and $a\\circ p=b\\circ p$ everywhere. No reducedness of $T$ or $Y_T$ is used.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Lemma 4, extension from the dense open, printed p.118; Stacks Tag 01RE (lemma-characterize-scheme-theoretically-dense)"
+   }
+  },
+  {
+   "text": "The morphism $p:Y_T\\to T$ is flat by [lem-pc-smooth-flat], and is quasi-compact by its finite type property [def-weil-finite-type-morphism]. Its nonempty fibres make it surjective. For each affine open $Q\\subset T$, a finite affine covering of $p^{-1}(Q)$ therefore maps onto $Q$, so $\\{p\\}$ satisfies [def-weil-pbc-fpqc-covering]. Apply uniqueness in [lem-weil-pbc-fpqc-representable-descent] to the common map $a\\circ p=b\\circ p:Y_T\\to Y$. Its two pullbacks agree since it already comes from $a$. Both $a$ and $b$ are descents of it, hence $a=b$. This proves injectivity for every $T$; when $T$ is empty all these maps are the unique empty morphisms.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Lemma 4, final descent to equality of sections; Stacks Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms)"
+   }
+  },
+  {
+   "text": "To justify specialization of associativity, let $P\\subset Y\\times_SY$ be any domain representing $m$ by $m_P$. On the open $K\\subset Y\\times_SY\\times_SY$ specified by $(u,v)\\in P$, $(v,w)\\in D$, $(u,m(v,w))\\in D$ and $(m_P(u,v),w)\\in D$, both morphisms $F(u,v,w)=m(u,m(v,w))$ and $G(u,v,w)=m(m_P(u,v),w)$ are defined. The triple product is smooth over $S$: its projections are base changes of $Y\\to S$ by [lem-sfb-strict-law-base-change], and use [lem-trf-smooth-composition]. Its open $K$ is smooth by [lem-pc-open-immersion-smooth-composition]. Associativity as equality of $S$-rational maps gives an $S$-dense open $C$ in the triple product where these two expressions agree, after intersecting the domains of their representatives. On $C\\cap K$ they still agree: the replacement $m_P$ agrees with $m$ on its common domain by the equalizer argument in step 2. The open $C\\cap K$ is dense in every fibre of $K$. By [lem-sfb-smooth-fibrewise-dense-open-base-change] it is schematically dense in $K$. The equalizer ideal of $F,G$ (pullback of the closed diagonal of $Y$) is zero by restriction, as in step 4. Hence $F=G$ on all of $K$, before any substitution of $T$-points.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-trf-smooth-composition",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Lemma 4, associativity argument, printed pp.118-119; explicit common-domain justification"
+   }
+  },
+  {
+   "text": "Now let $(a,b):T\\to P$ and $c=m_P(a,b)$. Pull $K$ back along $(a,b,\\mathrm{id}_{Y_T})$. Its domain is $J=D_b\\cap\\tau_b^{-1}(D_a)\\cap D_c$, where the inverse image is taken on $D_b$, the domain of $\\tau_b$. In each fibre, $\\tau_b:D_b\\simeq V_b$ is an isomorphism between dense opens, and $V_b\\cap D_a$ is dense in $V_b$; thus $D_b\\cap\\tau_b^{-1}(D_a)$ is dense in $Y_T$. Intersecting with the dense open $D_c$ keeps it dense. The opens $D_a,D_b,D_c,V_b$ have the required fibrewise density by [lem-sfb-smooth-fibrewise-dense-open-base-change] applied to the first projection, as in step 2. Pulling back the actual equality of morphisms $F=G$ from step 6 gives $\\tau_a(\\tau_b(x))=\\tau_c(x)$ on $J$. Equality on this $T$-dense common open is precisely $\\tau_a\\circ\\tau_b=\\tau_c$ in $B_Y(T)$. The argument works for every representing domain $P$ and arbitrary, possibly nonreduced, $T$.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Lemma 4, compatibility with composition, printed p.119"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-strict-law-base-change",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "lem-trf-smooth-composition",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-pc-smooth-flat",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.2 Lemma 4 and preceding construction, printed pp.118-119; primary scan read online, local PDF WANTED; explicit equalizer and fpqc details supplied by Q26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Embedding the functor of points of a strict birational group law into the group functor of birational self maps by left translations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [inst_1 : CategoryTheory.GaloisCategory C] →\\n      (F : CategoryTheory.Functor C FintypeCat) →\\n        CategoryTheory.Functor (CategoryTheory.PreGaloisCategory.PointedGaloisObject F) GrpCat\", \"doc\": \"The functor from the category of pointed Galois objects in a pre-Galois category to the category of groups, which sends each pointed Galois object to its automorphism group and each morphism between p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"CategoryTheory.Functor Type vᵒᵖ (CategoryTheory.Functor AlgebraicGeometry.Scheme AlgebraicGeometry.Scheme)\", \"doc\": \"The functor assigns to each type $n$ in the opposite category of types the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, and to each morphism $i: n \\\\to m$ in the opposite category the reindexing mo\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] (W : WeierstrassCurve.Jacobian F) [inst_1 : DecidableEq F] (P : W.Point),\\n  (WeierstrassCurve.Jacobian.Point.toAffineAddEquiv W) P = P.toAffineLift\", \"doc\": \"For a Weierstrass curve $ W $ over a field $ F $ with decidable equality, the additive equivalence between the Jacobian points $ W.\\\\text{Point} $ and the affine points $ W.\\\\text{toAffine}.\\\\text{Point}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: point groups, pre-existing group translations, RatFunc arithmetic and Galois automorphism functors do not give birational translations of a partial scheme law."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"Group\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: point groups, pre-existing group translations, RatFunc arithmetic and Galois automorphism functors do not give birational translations of a partial scheme law."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*(group|translat)|translation.*functor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: point groups, pre-existing group translations, RatFunc arithmetic and Galois automorphism functors do not give birational translations of a partial scheme law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left translations of a strict rational group law give an injective natural transformation into birational automorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"translate\", \"module\": \"Mathlib.Algebra.Group.Translate\", \"type\": \"(a : G) (f : G → α) : G → α\", \"doc\": \"Given an element $ a $ of an additive commutative group $ G $ and a function $ f : G \\\\to \\\\alpha $, the translated function maps each $ x \\\\in G $ to $ f(x - a) $. This operation shifts the input of $ f\"}\n  {\"name\": \"L_mul\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"{G : Type*} [Semigroup G] [TopologicalSpace G] [ChartedSpace H G] [ContMDiffMul I ∞ G] (g h : G) :\\n  𝑳 I (g * h) = (𝑳 I g).comp (𝑳 I h)\", \"doc\": \"For a group $G$ modeled as a charted space with a smooth multiplication operation (i.e., a $C^\\\\infty$-differentiable group structure), the left translation by the product $g \\\\cdot h$ is equal to the c\"}\n  {\"name\": \"isUniformEmbedding_translate_mul\", \"module\": \"Mathlib.Topology.Algebra.IsUniformGroup.Basic\", \"type\": \"(a : α) : IsUniformEmbedding fun x : α => x * a\", \"doc\": \"For any element $ a $ in a uniform group $ \\\\alpha $, the left translation map $ x \\\\mapsto x \\\\cdot a $ is a uniform embedding.\"}\n  {\"name\": \"addLeftEmbedding\", \"module\": \"Mathlib.Algebra.Group.Embedding\", \"type\": \"{G : Type u_1} → [inst : Add G] → [IsLeftCancelAdd G] → G → G ↪ G\", \"doc\": \"For each element $ a $ in a left-cancellative additive structure $ G $, the function mapping $ x $ to $ a + x $ is an injective function (embedding) from $ G $ to $ G $.\"}\n  {\"name\": \"measurableEmbedding_addLeft\", \"module\": \"Mathlib.MeasureTheory.Group.MeasurableEquiv\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : MeasurableSpace G] [MeasurableAdd G] (g : G),\\n  MeasurableEmbedding fun x => g + x\", \"doc\": \"For any additive group $ G $ equipped with a measurable space structure where the addition operation is measurable, the left translation map $ x \\\\mapsto g + x $ is a measurable embedding for every $ g\"}\n  {\"name\": \"MeasurableEquiv.addLeft\", \"module\": \"Mathlib.MeasureTheory.Group.MeasurableEquiv\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → [inst_1 : MeasurableSpace G] → [MeasurableAdd G] → G → G ≃ᵐ G\", \"doc\": \"For an additive group $G$ equipped with a measurable space where addition is measurable, the left translation map $\\\\lambda a, m + a : G \\\\to G$ is a measurable isomorphism for every fixed $m \\\\in G$. Th\"}\n  {\"name\": \"Group.mulLeft_bijective\", \"module\": \"Mathlib.Algebra.Group.Units.Equiv\", \"type\": \"(a : G) : Function.Bijective (a * ·)\", \"doc\": \"For any element $ a $ in a group $ G $, the function $ f: G \\\\to G $ defined by $ f(x) = a \\\\cdot x $ is bijective.\"}\n  {\"name\": \"Equiv.mulLeft\", \"module\": \"Mathlib.Algebra.Group.Units.Equiv\", \"type\": \"(a : G) : Perm G\", \"doc\": \"For a group element $a$, the permutation of $G$ induced by left multiplication by $a$, where each element $x$ is mapped to $a \\\\cdot x$, with the inverse permutation given by multiplication by the inve\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: point groups, pre-existing group translations, RatFunc arithmetic and Galois automorphism functors do not give birational translations of a partial scheme law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An associative rational multiplication with cancellative universal translations embeds into birational permutations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RatFunc.ofFractionRing_mul\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ {K : Type u} [inst : CommRing K] (p q : FractionRing (Polynomial K)),\\n  { toFractionRing := p * q } = { toFractionRing := p } * { toFractionRing := q }\", \"doc\": \"For any elements $p$ and $q$ in the fraction ring of the polynomial ring over a commutative ring $K$, the image of their product under the mapping `ofFractionRing` is equal to the product of their ima\"}\n  {\"name\": \"RatFunc.instMul\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"{K : Type u} → [inst : CommRing K] → Mul (RatFunc K)\", \"doc\": \"The multiplication operation on rational functions over a commutative ring $ K $ is defined by taking two rational functions and returning their product.\"}\n  {\"name\": \"RatFunc.mul_def\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"∀ {K : Type u_1} [inst : CommRing K] (x x_1 : RatFunc K),\\n  x.mul x_1 =\\n    match x, x_1 with\\n    | { toFractionRing := p }, { toFractionRing := q } => { toFractionRing := p * q }\", \"doc\": \"For any commutative ring $ K $, the product of two rational functions $ x $ and $ y $ in $ \\\\mathrm{RatFunc}(K) $ is defined by multiplying their corresponding elements in the fraction ring $ \\\\mathrm{F\"}\n  {\"name\": \"RatFunc.liftMonoidWithZeroHom\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"{G₀ : Type u_1} →\\n  {R : Type u_3} →\\n    [inst : CommGroupWithZero G₀] →\\n      [inst_1 : CommRing R] →\\n        (φ : Polynomial R →*₀ G₀) →\\n          nonZeroDivisors (Polynomial R) ≤ Submonoid.comap φ (nonZeroDivisors G₀) → RatFunc R →*₀ G₀\", \"doc\": \"Given a commutative ring $ R $, a commutative group with zero $ G_0 $, and a monoid-with-zero homomorphism $ \\\\varphi: R[X] \\\\to G_0 $ that maps non-zero divisors of $ R[X] $ to non-zero divisors of $ G\"}\n  {\"name\": \"RatFunc.liftOn_mk\", \"module\": \"Mathlib/FieldTheory/RatFunc/Defs\", \"type\": \"∀ {K : Type u} [inst : CommRing K] [inst_1 : IsDomain K] {P : Sort v} (p q : Polynomial K)\\n  (f : Polynomial K → Polynomial K → P),\\n  (∀ (p : Polynomial K), f p 0 = f 0 1) →\\n    ∀ (H' : ∀ {p q p' q' : Polynomial K}, q ≠ 0 → q' ≠ 0 → q' * p = q * p' → f p q = f p' q')\\n      (H :\\n        optParam\\n    \", \"doc\": \"For a rational function constructed from polynomials $p$ and $q$ over a commutative ring $K$ (an integral domain), applying the lifted function $f$ (which respects the equivalence relation of rational\"}\n  {\"name\": \"Rat.lift_binop_eq\", \"module\": \"Mathlib/Data/Rat/Defs\", \"type\": \"∀ (f : ℚ → ℚ → ℚ) (f₁ f₂ : ℤ → ℤ → ℤ → ℤ → ℤ),\\n  (∀ {n₁ : ℤ} {d₁ : ℕ} {h₁ : d₁ ≠ 0} {c₁ : n₁.natAbs.Coprime d₁} {n₂ : ℤ} {d₂ : ℕ} {h₂ : d₂ ≠ 0}\\n      {c₂ : n₂.natAbs.Coprime d₂},\\n      f { num := n₁, den := d₁, den_nz := h₁, reduced := c₁ } { num := n₂, den := d₂, den_nz := h₂, reduced := c₂ } =\\n   \", \"doc\": \"Given a binary operation $ f : \\\\mathbb{Q} \\\\to \\\\mathbb{Q} \\\\to \\\\mathbb{Q} $ defined in terms of integer operations $ f_1 $ and $ f_2 $ on numerators and denominators, for any rational numbers $ \\\\frac{a}\"}\n  {\"name\": \"GrpCat.SurjectiveOfEpiAuxs.g\", \"module\": \"Mathlib/Algebra/Category/Grp/EpiMono\", \"type\": \"{A B : GrpCat} → (f : A ⟶ B) → ↑B →* Equiv.Perm (GrpCat.SurjectiveOfEpiAuxs.XWithInfinity f)\", \"doc\": \"The group homomorphism from $ B $ to the symmetric group on $ X_{\\\\infty} $, defined by the group action where each element $ \\\\beta \\\\in B $ acts as the permutation $ x \\\\mapsto \\\\beta \\\\cdot x $. This hom\"}\n  {\"name\": \"RatFunc.instCommMonoid\", \"module\": \"Mathlib/FieldTheory/RatFunc/Basic\", \"type\": \"(K : Type u) → [inst : CommRing K] → CommMonoid (RatFunc K)\", \"doc\": \"The rational functions over a commutative ring $ K $ form a commutative monoid under multiplication, with multiplicative identity given by the constant function $ 1 $. This structure satisfies associa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: point groups, pre-existing group translations, RatFunc arithmetic and Galois automorphism functors do not give birational translations of a partial scheme law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embedding the functor of points of a strict birational group law into birational self maps by left translations",
+   "results": "{\"t\": \"2026-10-24T09:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"Embedding the functor of points of a strict birational group law into birational self maps by left translations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"WeierstrassCurve.instMulActionVariableChange\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\", \"WeierstrassCurve.VariableChange.instGroup\", \"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.Affine.Point.map_injective\"], \"digest\": \"5e0bc1de67a57cdf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned group translations presuppose a group, and absolute rational-map/function-field constructions do not give a strict relative birational scheme law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-complete-square-group",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 Lemma 8, extending product and division from a complete dense open square; auxiliary input to BLR 5.3 Lemma 8: 5.2 Lemma 4 and its preceding construction, printed pp.118-119 (PDF pp.124-125)",
+   "via": [
+    "lem-sfb-strict-law-complete-square-group",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-law-translation-embedding",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses. Split the birational-map group functor, natural left translations, right-chart cancellation, schematic-density equality, fpqc descent, universal associativity on common domains and specialization to arbitrary test schemes. Reused existing density, base-change and descent nodes; no new nodes are needed. No matching project declaration or Mathlib theorem was found.",
+  "blueprint": "The ancestor command returns None for this imported auxiliary chain. Retained the inherited BLR source-place and via chain: BLR 5.2 Lemma 4 is the translation input to 5.3 Lemma 8 (complete-square completion), on the local Neron-envelope route of the item. Steps 1-2 realize its preceding construction, steps 3-5 its monomorphism proof, steps 6-7 its associativity clause. Whole-blueprint searches birational and translation found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness of the smooth test family is needed only to recognize its finite-type surjection as an fpqc cover; no group-law argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Only uniqueness of morphism descent is used to infer a=b from equality after Y_T -> T; generic scheme descent, not a different birational-law route."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Forms the smooth triple product for the common-domain associativity calculation; generic smoothness permanence."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "The common domain K is an open in the smooth triple product; generic restriction of smoothness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-smooth-composition",
+  "lem-pc-open-immersion-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-e34102328",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-e34102328 (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement in full and found no mathematical faults. The delivery is one commit with the item and the report, has no new nodes, leaves the statement and stmt_deps unchanged, and creates no cycle (485-node closure). Checks: (1) B_Y is a group functor via lem-sfb-strict-law-base-change and the density base-change lemma; composites are taken on U∩f^-1(V∩U'), where the fibrewise homeomorphism keeps them dense. (2) τ_a is the pullback of L:D≅V along a for the smooth pr1. Independence of the representative of m is extended from an S-dense open to all of P∩D by schematic density on the smooth Y×Y and the closed diagonal; this matters because S-density does not give pr1-fibre density. (3) Cancellation through R^-1 on H⊂D_a∩D_b is elementary and correct. (4) Schematic density plus the equalizer ideal gives a∘p=b∘p without assuming T reduced; tested on k[ε]/ε² and T=∅. (5) p is flat, quasi-compact and surjective, so {p} is an fpqc covering, and descent uniqueness gives a=b; the facts that p is smooth with nonempty fibres come from step 1's citation, which is minor. (6) F=G on all of K, because C∩K is S-fibre dense in the smooth K. (7) The pullback domain J=D_b∩τ_b^-1(D_a∩V_b)∩D_c is T-dense, so τ_{m(a,b)}=τ_a∘τ_b in the stated order. BLR is not held locally (WANTED); proof_origin is agent, and the mathematics was checked directly. No duplicate: graph-charts is a citer, and trait-birational-envelope and bounded-group-translation-model state different things. I accept the four tool_uses: all are Mathlib leaves for smoothness permanence and fpqc uniqueness. Batch 5: lem-trf-smooth-composition is the Mathlib leaf for composing smooth morphisms, and lem-trf-smooth-at-point-fibre-criterion (reached through the density lemma) is the generic flat-plus-fibre criterion for smoothness. Neither is a step of the trace formula or of Poincaré duality, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLawTranslationEmbedding",
+  "declaration": "AlgebraicGeometry.strictLaw_translation_embedding",
+  "declarations": [
+   "AlgebraicGeometry.strictLaw_translation_embedding"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLawTranslationEmbedding.lean",
+  "statement": "theorem strictLaw_translation_embedding (A : Type u) [CommRing A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] (hnormal : ∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (Y : Over (Spec (CommRingCat.of A))) [Smooth Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsClosedImmersion (pullback.diagonal Y.hom)] (hfibres : ∀ s : Spec (CommRingCat.of A), Nonempty (Y.hom.fiber s)) (m : StrictLaw Y) : ∃ (B : (Over (Spec (CommRingCat.of A)))ᵒᵖ ⥤ GrpCat.{u}) (e : ∀ T : Over (Spec (CommRingCat.of A)), (B.obj (op T)) ≃ SelfMap ((Over.pullback T.hom).obj Y)) (τ : yoneda.obj Y ⟶ B ⋙ forget GrpCat), (∀ (T : Over (Spec (CommRingCat.of A))), Function.Injective (τ.app (op T))) ∧ (∀ (T : Over (Spec (CommRingCat.of A))) (a : T ⟶ Y), ∃ f : Chart ((Over.pullback T.hom).obj Y), IsLeftTranslation m T a f ∧ e T (τ.app (op T) a) = f.toSelfMap) ∧ (∀ (T : Over (Spec (CommRingCat.of A))) (f g : Chart ((Over.pullback T.hom).obj Y)), ∃ h : Chart ((Over.pullback T.hom).obj Y), IsComposite f g h) ∧ (∀ (T : Over (Spec (CommRingCat.of A))) (f g h : Chart ((Over.pullback T.hom).obj Y)), IsComposite f g h → e T ((e T).symm f.toSelfMap * (e T).symm g.toSelfMap) = h.toSelfMap) ∧ (∀ (T T' : Over (Spec (CommRingCat.of A))) (g : T' ⟶ T) (f : Chart ((Over.pullback T.hom).obj Y)), ∃ f' : Chart ((Over.pullback T'.hom).obj Y), RelativeBirational.IsPullback Y g f f') ∧ (∀ (T T' : Over (Spec (CommRingCat.of A))) (g : T' ⟶ T) (f : Chart ((Over.pullback T.hom).obj Y)) (f' : Chart ((Over.pullback T'.hom).obj Y)), RelativeBirational.IsPullback Y g f f' → e T' ((B.map g.op) ((e T).symm f.toSelfMap)) = f'.toSelfMap) ∧ (∀ (T : Over (Spec (CommRingCat.of A))) (a b c : T ⟶ Y) (r : RelativeBirational.PartialMap (square Y) Y), r.Agrees m.mul → ∀ d : T.left ⟶ r.domain.toScheme, d ≫ r.domain.ι ≫ pullback.fst Y.hom Y.hom = a.left → d ≫ r.domain.ι ≫ pullback.snd Y.hom Y.hom = b.left → d ≫ r.hom = c.left → τ.app (op T) c = τ.app (op T) a * τ.app (op T) b)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4afa7bd92",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Read item node (7 steps), all 11 stmt_dep records, new nodes def-sfb-relative-birational-maps and def-sfb-strict-birational-law, the 3 modules and report.md (Worker report + Second reading by Q131 present). Hypotheses match: Noetherian, IsStrictlyHenselianLocalRing, inline normal-ring form per record, Y : Over (Spec A) with Smooth, LOFT+QC, closed-immersion diagonal, nonempty fibres. FibrewiseDense = density of the preimage in the scheme-theoretic fibre. StrictLaw has the D representative, 6 projection densities, leftIso/rightIso with (x,m(x,y))/(m(x,y),y) equations, and Associative on an S-dense open of Y^3. B: (Over S)^op ⥤ GrpCat.{u} with e T ≃ SelfMap(Y_T); product pinned by IsComposite (f∘g, composites exist); B.map pinned by IsPullback (full inverse images under baseChangeMap, iso determined); τ pinned by IsLeftTranslation (q=(a∘pr_T,pr_Y), q⁻¹D→q⁻¹V commuting with L); injective; naturality from the nat-trans type; τ_c=τ_a*τ_b for every representative r agreeing with m and every factorization d. No conditions on T (nonreduced, empty T ok); single universe u. No hollow defs, only sorry, docstrings with source and blueprint, statements verbatim. No compile (no changes). Maintainer note: parallel unlanded S2 deliveries Q17 2251 (same item; same new id def-sfb-strict-birational-law), Q04 dbe5 (def-sfb-fibrewise-dense) and NF aa9f define the same notions; first lander owns them, the others rebind."
+ }
+}

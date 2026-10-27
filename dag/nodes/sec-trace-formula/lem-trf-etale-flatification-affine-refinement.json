@@ -1,0 +1,323 @@
+{
+ "id": "lem-trf-etale-flatification-affine-refinement",
+ "kind": "statement",
+ "title": "Finite affine refinement and base-ideal factors for etale local module flatifications",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $U\\subset S$ a quasi-compact open, $f:X\\to S$ a morphism of schemes, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module. Let $I$ be a finite index set and, for every $i\\in I$, let $g_i:X_i\\to S_i$, $e_i:S_i\\to S$ and $j_i:X_i\\to X$ satisfy $e_i g_i=fj_i$. Assume $e_i$ is quasi-compact and etale, $j_i$ is etale, and both families $(e_i)$ and $(j_i)$ are jointly surjective, meaning that every point of the target lies in some image. For each $i$ let $\\mathcal J_i\\subset\\mathcal O_{S_i}$ be a finite-type quasi-coherent ideal, equal to the unit ideal on $U_i=e_i^{-1}U$, such that the strict transform of $j_i^*\\mathcal F$ under $\\operatorname{Bl}_{\\mathcal J_i}S_i\\to S_i$ is flat over $\\operatorname{Bl}_{\\mathcal J_i}S_i$.\n\nThere are a finite set $R$, a map $i:R\\to I$, and affine open subschemes $W_r\\subset S_{i(r)}$ with $S_i=\\bigcup_{i(r)=i}W_r$. Put $Y_r=X_{i(r)}\\times_{S_{i(r)}}W_r$ and $\\mathcal J_r=\\mathcal J_{i(r)}|_{W_r}$. The induced maps $W_r\\to S$ are quasi-compact and etale and jointly surjective, and $Y_r\\to X$ are etale and jointly surjective. Each $W_r$ is qcqs. The restricted blowup is $\\operatorname{Bl}_{\\mathcal J_r}W_r$, is $(W_r\\times_SU)$-admissible, and its module strict transform is canonically the restriction of the given flat transform, hence is flat over that blowup.\n\nIf additionally $S=\\operatorname{Spec}A$ and $U=D(a)$ for an element $a\\in A$ whose multiplication map on $A$ is injective, the refinement can be chosen with, for each $r$, a finitely generated ideal $I_r\\subset A$ and a finite-type quasi-coherent ideal $\\mathcal J'_r\\subset\\mathcal O_{W_r}$ such that\n$$V(I_r)\\subset V(a),\\qquad I_r\\mathcal O_{W_r}=\\mathcal J_r\\mathcal J'_r.$$\nHere $V(I)$ denotes the primes containing $I$ and $D(a)$ its complement for the principal ideal $(a)$. Schemes, qcqs conventions, quasi-coherence, relative module flatness, admissible blowups, module strict transforms, fibre products and module pullbacks are as in [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-coherent], [def-pc-scheme-module-flat-over], [def-nagata-admissible-blowup], [def-trf-module-strict-transform], [def-pc-fibre-product] and [def-pc-module-pullback]. Etale morphisms and affine spectra are as in [def-weil-etale-morphism] and [def-weil-affine-spectrum]. Blowups themselves are those of [def-nagata-global-blowup].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: finite open refinement after applying lemma-push-ideal; preliminary finite affine refinement of the local bases. Returned proof steps 1 and 5."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum",
+  "def-nagata-global-blowup",
+  "def-trf-blowup-square-pullback-maps",
+  "def-nagata-blowup-flat-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] to $e_i$ and the quasi-compact open $S\\subset S$: every $S_i$ is quasi-compact. Choose a finite affine open cover $S_i=\\bigcup_t T_{it}$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. In the general case these will be the $W_r$. In the additional affine-base case we refine each $T_{it}$ further in the next two steps. All the preliminary opens $T_{it}$ are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "Now assume $S=\\operatorname{Spec}A$ and $U=D(a)$ with $a$ a nonzerodivisor. Fix $T=T_{it}=\\operatorname{Spec}B$. The inclusion $T\\hookrightarrow S_i$ and then $e_i$ compose to an etale map by [lem-weil-pbc-etale-composition-cancellation]. Set $J=\\Gamma(T,\\mathcal J_i|_T)$. By [lem-weil-pbc-affine-tilde-gamma-adjunction] its associated sheaf is $\\mathcal J_i|_T$, and [lem-weil-pbc-quasi-coherent-finite-type-affine] makes $J$ finitely generated. The inverse image of $D(a)$ is $D(a_B)$ by [lem-weil-pbc-basic-open-pullback], where $a_B$ is the image of $a$ in $B$. Since $\\mathcal J_i$ is the unit ideal there, [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] gives $V(J)\\subset V(aB)$. Thus all hypotheses of [lem-trf-etale-ideal-local-factor] hold for $A\\to B,a,J$; in particular the regular element is in $A$, as required.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-trf-etale-ideal-local-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "For every $q\\in T$, [lem-trf-etale-ideal-local-factor] supplies $g_q\\notin q$, a finitely generated $I_q\\subset A$ with $V(I_q)\\subset V(a)$, and a finitely generated $J'_q\\subset B_{g_q}$ such that $I_qB_{g_q}=(JB_{g_q})J'_q$. By [lem-weil-pbc-principal-localization-open-immersion], $W_q=D_T(g_q)$ is the affine open $\\operatorname{Spec}B_{g_q}$. On it let $\\mathcal J'_q=\\widetilde{J'_q}$; this is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections] and finite type by [lem-weil-pbc-quasi-coherent-finite-type-affine]. The sections of $\\mathcal J_i$ on $W_q$ are $JB_{g_q}$ by [lem-weil-pbc-quasi-coherent-affine-section-base-change]. The extended ideal $I_q\\mathcal O_{W_q}$ is generated by the images of a finite set of generators of $I_q$; on each principal open its sections are the corresponding localized ideal. By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] the product $(\\mathcal J_i|_{W_q})\\mathcal J'_q$ is quasi-coherent with sections $(JB_{g_q})J'_q$. The canonical affine reconstruction in [lem-weil-pbc-affine-tilde-gamma-adjunction] therefore turns the displayed ideal equality into the required equality of ideal subsheaves $I_q\\mathcal O_{W_q}=(\\mathcal J_i|_{W_q})\\mathcal J'_q$.",
+   "uses": [
+    "lem-trf-etale-ideal-local-factor",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "The opens $W_q$, one containing each $q\\in T$, cover $T$. Since $T$ is quasi-compact, choose a finite subcover. Do this for each of the finitely many $T_{it}$ and each $i$ in the finite set $I$. Their finite disjoint index set is $R$, and the projection to $i$ defines $i:R\\to I$. Retain the corresponding $I_q$ and $\\mathcal J'_q$ as $I_r$ and $\\mathcal J'_r$. In either case $S_i=\\bigcup_{i(r)=i}W_r$. Empty $S_i$ contribute no opens. This uses just the definition of quasi-compactness and finite unions of finite sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "Each $W_r$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lemma-nagata-open-immersion-qc-over-separated-target] to $W_r\\to S\\to\\operatorname{Spec}\\mathbf Z$: the first composite is quasi-compact because $W_r$ is quasi-compact, and $S\\to\\operatorname{Spec}\\mathbf Z$ is quasi-separated by hypothesis. Thus $W_r\\to S$ is quasi-compact, without assuming $S_i$ quasi-separated. It is etale by [lem-weil-pbc-etale-composition-cancellation]. The inverse-image open $g_i^{-1}W_r\\subset X_i$, with its restricted structure map to $W_r$, represents $X_i\\times_{S_i}W_r$: a map into $X_i$ whose composite lands in $W_r$ factors uniquely through this open. Hence $Y_r$ is that open subscheme, and $Y_r\\to X$ is etale by the same composition lemma. For every point $s\\in S$ choose $s_i\\in S_i$ over it and a $W_r$ containing $s_i$. For every $x\\in X$ choose $x_i\\in X_i$ over it and a $W_r$ containing $g_i(x_i)$; then $x_i\\in Y_r$. These choices prove both joint-surjectivity assertions. Finally $U_r=W_r\\times_SU$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open].",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "Fix $r$ and put $i=i(r)$. The module $j_i^*\\mathcal F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. In [lem-trf-module-strict-transform-flat-pullback] take $(X,S)=(X_i,S_i)$, $(Y,T)=(Y_r,W_r)$, $\\mathcal I=\\mathcal J_i$, and module $j_i^*\\mathcal F$. Both maps $W_r\\to S_i$ and $Y_r\\to X_i$ are open inclusions and therefore flat: their local-ring maps are isomorphisms, so they satisfy [def-weil-flat-morphism]. The lemma identifies $\\operatorname{Bl}_{\\mathcal J_r}W_r$ with the inverse-image open of $\\operatorname{Bl}_{\\mathcal J_i}S_i$, and identifies the strict transform on $Y_r$ with the pullback, hence restriction, of the given transform. By the composition isomorphism in [def-pc-module-pullback], the module being transformed is precisely the pullback of $\\mathcal F$ along $Y_r\\to X$. At every point of this open restriction both the module stalk and the base local ring equal the original ones. The flat transform remains flat by the stalk criterion in [def-pc-scheme-module-flat-over].",
+   "uses": [
+    "lem-trf-module-strict-transform-flat-pullback",
+    "def-weil-flat-morphism",
+    "def-pc-module-pullback",
+    "def-pc-scheme-module-flat-over",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  },
+  {
+   "text": "Restriction preserves quasi-coherence and finite type directly from their local definitions [pqf-def-coherent]. Thus $\\mathcal J_r$ is a finite-type quasi-coherent ideal and it equals the unit ideal on $U_r$. The blowup identification of step 6, together with the quasi-compactness of $U_r$ from step 5, is exactly the $U_r$-admissible blowup datum in [def-nagata-admissible-blowup]. In the affine-base case the $I_r,\\mathcal J'_r$ from steps 3--4 give $V(I_r)\\subset V(a)$ and $I_r\\mathcal O_{W_r}=\\mathcal J_r\\mathcal J'_r$. This proves every required assertion.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-trf-etale-ideal-local-factor",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-pc-fibre-product",
+  "lem-trf-module-strict-transform-flat-pullback",
+  "def-weil-flat-morphism",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "pqf-def-coherent",
+  "def-nagata-admissible-blowup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2 (finite open refinement); Tag 0813, lemma-push-ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine refinement of etale local blowups flattening a module with factorization of centre ideals from the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine an etale cover of Spec A so each blowup centre divides an ideal extended from A supported on a Cartier boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine refinement of etale local blowups flattening a module with factorization of centre ideals from the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"(h :\\n    ∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M},\\n      x f = 0 → ∃ (k : ℕ) (a : (Fin l →₀ R) →ₗ[R] (Fin k →₀ R)) (y : (Fin k →₀ R) →ₗ[R] M), x = y ∘ₗ a ∧ a f = 0) :\\n  Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝓤 : X.OpenCover) : X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ (P : Ideal S) [P.IsMaximal], Flat R (Mₚ P)) : Module.Flat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(refin|flatten)|flatification|strictTransform",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "flatification|flattening|strictTransform|strict.transform",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state the combined affine refinement, base-ideal factorization and module strict-transform comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine refinement of etale covers preserving blowup module strict transform flatness",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.HasAffineProperty.of_openCover, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.flat_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state the combined affine refinement, base-ideal factorization and module strict-transform comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, AlgebraicGeometry.Etale, Ideal",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state the combined affine refinement, base-ideal factorization and module strict-transform comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine refinement of etale local blowup module flatifications and factorization of the centers by ideals from a Cartier boundary base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.etaleLocus, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state the combined affine refinement, base-ideal factorization and module strict-transform comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize an etale algebra at finitely many elements so a blowup center is a factor of an extended ideal from the base",
+   "results": "8 hits: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, Algebra.Etale.of_isLocalizationAway, StandardEtalePresentation, Algebra.Etale.of_isLocalization_Away, Algebra.etaleLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state the combined affine refinement, base-ideal factorization and module strict-transform comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-flattening-descent",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: finite open refinement after applying lemma-push-ideal; preliminary finite affine refinement of the local bases. Returned proof steps 1 and 5.",
+   "via": [
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-flatification-affine-refinement",
+  "worker": "stage1",
+  "summary": "Expanded the finite affine refinement and its Cartier-boundary factorization using the existing 0813 local-factor lemma. Checked finite generation, sheaf-level ideal equality, joint surjectivity, quasi-compactness without quasi-separated local bases, and the canonical module strict-transform restriction. No statement correction or new node.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: finite open refinement after applying lemma-push-ideal; preliminary finite affine refinement of the local bases. Returned proof steps 1 and 5.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
+    "why": "Quasi-compact source and quasi-separated target imply the map is quasi-compact; the unit has no replacement for this scheme-theoretic permanence tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Converts finite type of the local ideal sheaf to finite generation of its affine section ideal, and back for the companion ideal; this generic affine module criterion is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "Identifies the vanishing locus of the restricted ideal sheaf with the affine ideal vanishing locus needed by 0813; it is a generic affine ideal tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "why": "Computes the restricted ideal on a principal affine open as the localized ideal; this affine quasi-coherent restriction tool is not an alternative proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "why": "Computes the product ideal sheaf on the affine refinement from the product of section ideals, to transfer the 0813 factorization to sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-be42897e2",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-be42897e2 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 0813 (lemma-push-ideal) and the whole proof of Tag 0814 (lemma-flatten-module-etale-localize); paragraph 2 is the place this item expands. The delivery has no new nodes, the statement is unchanged, and the parent lem-trf-etale-flattening-descent uses both clauses (its steps 1 and 2). Step 1: S_i is quasi-compact as the preimage of S under a quasi-compact e_i; it gets a finite affine cover, and S_i is never assumed quasi-separated. Step 2: T=Spec B is étale over Spec A by composition; J=J_i(T) is finitely generated; the preimage of D(a) is D(a_B), so V(J)⊂V(aB). Every hypothesis of lem-trf-etale-ideal-local-factor (0813) holds, with a a nonzerodivisor in A. Step 3: on W_q=D(g), the sections are JB_g, (JB_g)J' and I B_g, and the tilde reconstruction on the affine W_q turns the ring equality into the equality of ideal sheaves. Step 4: elementary finite subcover. Step 5: W_r→S is quasi-compact by the Nagata permanence node over Spec Z with S quasi-separated. The step only says W_r→Spec Z is quasi-compact because W_r is quasi-compact; I checked this (every open of Spec Z is D(n), whose preimage in the affine W_r is principal, hence quasi-compact). W_r→S and Y_r→X are étale, Y_r is the open g_i^{-1}W_r, joint surjectivity holds by choosing lifts, and U_r is quasi-compact. Step 6: the module strict-transform flat-pullback lemma applies to the open immersions W_r→S_i and Y_r→X_i, which are flat; stalks are unchanged, so flatness follows from the stalk criterion. Step 7: the admissible-blowup datum and the affine clause. Edge cases checked: I empty, S_i empty, a a unit, A not Noetherian. No duplicate (searched every node citing 0813/0814), no cycle, no SGA. The recorded tool_uses are accepted as generic tools. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFlatificationAffineRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_etaleFlatificationAffineRefinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatificationTransformRestriction",
+   "AlgebraicGeometry.Scheme.Modules.EtaleFlatificationAffineRefinement",
+   "AlgebraicGeometry.Scheme.Modules.exists_etaleFlatificationAffineRefinement",
+   "AlgebraicGeometry.Scheme.Modules.exists_etaleFlatificationAffineRefinement_baseFactors"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFlatificationAffineRefinement.lean",
+  "statement": "theorem exists_etaleFlatificationAffineRefinement {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Opens) (hU : IsCompact (U : Set S)) (f : X ⟶ S) (F : X.Modules) [F.IsQuasicoherent] {I : Type v} [Finite I] (Si Xi : I → Scheme.{u}) (g : ∀ i, Xi i ⟶ Si i) (e : ∀ i, Si i ⟶ S) (j : ∀ i, Xi i ⟶ X) (hcomm : ∀ i, g i ≫ e i = j i ≫ f) (he : ∀ i, QuasiCompact (e i)) (heEtale : ∀ i, Etale (e i)) (hjEtale : ∀ i, Etale (j i)) (hcoverS : ∀ s : S, ∃ (i : I) (t : Si i), e i t = s) (hcoverX : ∀ x : X, ∃ (i : I) (y : Xi i), j i y = x) (J : ∀ i, (Si i).IdealSheafData) (hJ : ∀ i, (J i).ofFiniteType) (hunit : ∀ i, (J i).comap ((e i) ⁻¹ᵁ U).ι = ⊤) (hflat : ∀ i, (cokernel (kernel.ι (moduleStrictTransformRestriction (g i) (J i) ((tensorPullback (j i)).obj F)))).IsFlatOver (pullback.snd (g i) (J i).blowupMap)) : Nonempty (EtaleFlatificationAffineRefinement U Si Xi g e j J F)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c76c0b23",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after 2b21 H2 RETURN. The item module is byte-identical to 2b21 except imports. Item JSON differs from live only in lean + stmt_deps: +new def node def-trf-blowup-square-pullback-maps and +def-nagata-blowup-flat-base-change-map (closed upstream, accepted as landed); the theorem node moved to proof_deps only. Re-checked all hypotheses and conclusion clauses, the affine D(a) version, edge cases and universes: correct. New def node statement matches live moduleStrictTransformFlatPullbackMap (pullback.lift via blowupFlatBaseChangeIso) and SourceIso (tensorPullbackSectionComp composite). Module = public re-export + transparent abbrev, not hollow, docstrings OK, no clash or cycle. Advisories: the two defs are double-listed in the theorem node's and new node's lean.declarations; def-nagata-blowup-flat-base-change-map has no lean record. No recompile (no file changed); worker reports clean compiles."
+ }
+}

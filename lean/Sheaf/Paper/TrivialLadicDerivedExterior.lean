@@ -13,6 +13,8 @@ import Sheaf.CategoryTheory.PolynomialDerivedBarComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 import Sheaf.Paper.RationalPolynomialBarContraction
 import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # The coordinate-cup exterior map for trivial ell-adic coefficients
 

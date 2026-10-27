@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-local-finite-free-minimal-model",
+ "kind": "statement",
+ "title": "Minimal bounded finite free models over a local ring",
+ "statement": "Let R be a commutative local ring. Let C be a cochain complex of R-modules [def-pc-derived-category] supported between integers a and b, whose terms are finite free [def-weil-pbc-free-module]. There is a cochain complex D with the same support bounds and finite free terms, homotopy equivalent to C, such that every differential of D has image in the maximal ideal times its target. This records the already proved adopted-source minimal-complex theorem.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT, finite iteration of unit cancellation"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "If a differential is nonzero modulo the maximal ideal, choose a nonzero matrix coefficient. It is a unit. Choose x and a linear form phi with phi(d(x))=1. The map G(y)=phi(y)x satisfies GdG=G and gives a null-homotopic idempotent chain map P. Its kernel subcomplex is homotopy equivalent to the original. The kernel terms are direct summands, hence finite projective and free over the local ring. These constructions are proved in the same adopted module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MT, lemma-add-trivial-complex"
+   }
+  },
+  {
+   "text": "Induct on the sum of term ranks over the finite support interval. Each cancellation lowers this sum and preserves the support interval. At termination every differential has image in the maximal ideal times its target. Compose the homotopy equivalences. The adopted Lean proof uses the equivalent split idempotent kernel construction and exactly this rank induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MT, finite iteration"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT, finite iteration of unit cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every bounded finite free cochain complex over a commutative local ring is homotopy equivalent to a minimal complex with differentials in the maximal ideal",
+   "results": "Module.free_of_flat_of_isLocalRing and CochainComplex.exists_iso_single; neither constructs a minimal homotopy representative.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyEquiv\", \"Minimal\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMinimal|exists_homotopyEquiv_isMinimal in Mathlib/Algebra/Homology",
+   "results": "No hits. The exact theorem is already proved in the adopted source module WeilConjectures.Algebra.Homology.MinimalComplex, so this node only records it.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatFibreSectionLifting",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proper-flat-fibre-section-lifting",
+   "place": "Supporting finite-complex section-lifting argument, steps 2-7; the inherited unit route and statement are unchanged.",
+   "via": [
+    "lem-sfb-proper-flat-fibre-section-lifting",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.MinimalComplex",
+  "declaration": "CochainComplex.exists_homotopyEquiv_isMinimal",
+  "statement": "theorem exists_homotopyEquiv_isMinimal (M : CochainComplex (ModuleCat.{v} A) ℤ) (a b : ℤ)\n    [M.IsStrictlyGE a] [M.IsStrictlyLE b] [∀ i, Module.Free A (M.X i)]\n    [∀ i, Module.Finite A (M.X i)] :\n    ∃ M' : CochainComplex (ModuleCat.{v} A) ℤ, M'.IsMinimal ∧ M'.IsStrictlyGE a ∧\n      M'.IsStrictlyLE b ∧ (∀ i, Module.Free A (M'.X i)) ∧ (∀ i, Module.Finite A (M'.X i)) ∧\n      Nonempty (HomotopyEquiv M M')",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

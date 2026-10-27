@@ -29,32 +29,25 @@
    }
   },
   {
-   "text": "Define natural isomorphisms by induction on positive $r$:\n$$d_1=\\mathrm{id}_T,\\qquad d_{r+1}=T(d_r)\\circ C_{1,r}:P_{r+1}\\longrightarrow T\\circ T^r.$$\nThe base is well typed because $P_1=T$. Each successor is natural and invertible: functors preserve inverses, and composites of natural isomorphisms are natural isomorphisms. This is the comparison from repeatedly taking the first summand to be $1$. These assertions follow directly by composing the naturality squares and the inverse identities for the comparisons of [lem-weil-pbc-proetale-derived-pullback-composition].",
+   "text": "Apply [lem-trf-positive-functor-binary-comparison] to this positive endofunctor family, using the cocycle of step 2. It constructs natural isomorphisms $d_1=\\mathrm{id}_T$, $d_{r+1}=T(d_r)\\circ C_{1,r}$ and gives $d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}$ for all positive $a,b$. Thus its hypotheses hold for exactly the prescribed, normalized comparisons.",
    "uses": [
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-trf-positive-functor-binary-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
-    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+    "place": "The m-th-iterate assertion; categorical expansion of the canonical pullback-composition argument, as recorded in report.md"
    }
   },
   {
-   "text": "For every $a,b\\geq1$, prove by induction on $a$ the equality\n$$d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}. \\tag{*}$$\nAt $a=1$, $d_1P_b$ is the identity, so this is the recursion of step 3. For $a\\geq2$, the recursion and the induction hypothesis at $(a-1,b)$ give\n$$d_{a+b}=T^a(d_b)\\circ(T(d_{a-1})P_b)\\circ T(C_{a-1,b})\\circ C_{1,a-1+b}.$$\nUse step 2 with $(1,a-1,b)$, valid because $a-1\\geq1$, to replace its last two factors by $(C_{1,a-1}P_b)\\circ C_{a,b}$. The middle factors then equal $d_aP_b$ by the recursion at $a-1$. This proves $(*)$ for every positive $a,b$. The calculation is an equality of natural transformations, so it also holds after evaluation on every complex.",
-   "uses": [],
-   "elementary": true,
+   "text": "Use [lem-trf-positive-functor-refinement-independence] with these $C_{a,b}$ and $d_r$. Its binary-compatibility hypothesis is step 3; its powers and associators are those of step 1. It identifies every complete ordered splitting tree, every order of refinement, and every positive multiway partition and reassociation with $d_r$, including the normalized case $r=1$. This is the required independence.",
+   "uses": [
+    "lem-trf-positive-functor-refinement-independence"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
-    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
-   }
-  },
-  {
-   "text": "Any complete sequence of binary splittings of the positive integer $r$ has a finite ordered binary tree: a vertex of weight $a+b$ applies $C_{a,b}$, and its two children refine $a$ and $b$. Induct on $r$ to compare its map with $d_r$. A tree of weight $1$ has no splitting and gives $d_1$. At a root $(a,b)$, both weights are smaller than $r$, so the subtree maps are $d_a,d_b$. The resulting composite is the right side of $(*)$, hence $d_r$. Refining the second subtree before the first gives the same map, since naturality of $d_a$ at $d_{b,M}$ reads\n$$T^a(d_{b,M})\\circ d_{a,P_bM}=d_{a,T^bM}\\circ P_a(d_{b,M}).$$\nSplittings at distinct deeper vertices commute by this same naturality equation inside their common functor context. A splitting into $j$ positive summands is a binary refinement with $j$ leaves; the just-proved induction applies to any parenthesization. The associators in step 1 have identity components, so inserting their reassociations does not change these component maps. This proves the stated independence of both order and reassociation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
-    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+    "place": "The m-th-iterate assertion; categorical expansion of the canonical pullback-composition argument, as recorded in report.md"
    }
   },
   {
@@ -72,7 +65,9 @@
   "def-weil-l-adic-coefficient-extension",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-trf-constant-coefficient-composition",
-  "lem-trf-derived-pullback-coherence"
+  "lem-trf-derived-pullback-coherence",
+  "lem-trf-positive-functor-binary-comparison",
+  "lem-trf-positive-functor-refinement-independence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -190,15 +185,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-trf-frobenius-pullback-comparison-coherence",
   "worker": "stage1",
-  "summary": "Preserved the statement and split the coherence claim into the normalized triple comparison, a recursive comparison, a positive-integer induction for binary splits, the ordered splitting-tree argument, and the explicit inverse cancellation. Reused the existing finite-coefficient derived coherence and constant-coefficient composition lemmas; no new nodes. Checked the unbounded coefficient category, positive-index bases, naturality interchanges and empty scheme.",
-  "blueprint": "Realizes the associativity of pullback comparisons underlying the m-th-iterate assertion in lem-trf-frobenius-operator-compact-description; this is the comparison used in step 3 of its reviewed split.",
+  "summary": "N7 repair of the 2026-10-22 re-split return. The statement is unchanged. Transfers the recursive construction and binary-compatibility induction to one generic statement-only node, and the ordered-tree/naturality argument to a second statement-only node of comparable proof size; preserves coefficient normalization and the inverse identity in the short assembly. Full returned arguments and their allocation are retained in report.md. New nodes are unsplit, with genuine logged Mathlib searches.",
+  "blueprint": "The m-th-iterate assertion of lem-trf-frobenius-operator-compact-description: canonical coefficient and triple-pullback normalization remain steps 1-2; returned steps 3-4 become the binary-comparison input at step 3; returned step 5 becomes the tree-refinement input at step 4; returned step 6 remains step 5.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Generic construction and normalization of the ordinary derived module pullback comparison for the coefficient isomorphisms; sk-d-weil uses these comparisons without constructing them."
+    "why": "Generic canonical composition of ordinary pro-etale derived pullbacks supplies C; the Frobenius unit does not reconstruct this foundational operation."
    }
   ]
  },
@@ -206,12 +201,12 @@
   "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q75-9b9bdd611",
-  "group": "Q75",
+  "reviewer": "NT-cc-N7-d86106d4c",
+  "group": "N7",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9b9bdd611 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item's statement, stmt_deps, source and blueprint are byte-identical to the unsplit live copy, so the statement is unchanged. The coefficient category is the ordinary unbounded D(X_proet,A) with constant A=A_{E,n}. This is the same category as def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition. That lemma normalizes its comparisons on K-flat complexes with flat terms, as Stacks Tag 0D6D (sites-cohomology.tex 3658-3680) does. No other coefficient category is substituted. Step 1: lem-trf-constant-coefficient-composition supplies the composite-identification hypothesis of the composition lemma. Clause 4 of def-weil-l-adic-coefficient-extension makes A finite, and A is commutative. Step 2: I matched lem-trf-derived-pullback-coherence index by index with j=g^a, h=g^b, k=g^c, i.e. c_{h,k}=C_{b,c}, c_{j,kh}=C_{a,b+c}, c_{j,h}=C_{a,b}, c_{hj,k}=C_{a+b,c}, using the direction convention c_{f,g}:L(gf)^*->Lf^*Lg^*. Steps 3-6: I re-derived the recursion, the a-induction for d_{a+b}=T^a(d_b)(d_aP_b)C_{a,b} using the cocycle at (1,a-1,b), the tree-independence argument with the naturality interchange, and the inverse identity d_{r+1}^{-1}T(d_r)=C_{1,r}^{-1}=b_r. All maps are well typed. Small cases r=2, 3 and 4 and the empty scheme check out. There are no new nodes and no duplicates: lem-trf-derived-pullback-coherence is an input, not a duplicate, and lem-trf-iterated-weil-cocycle concerns phi^[m]. There is no cycle, proof_deps equals the union of uses, and no SGA source is used. The parent cites this item for c_m of def-trf-frobenius-operators, and the item makes that c_m well defined. Accepted tool use: lem-weil-pbc-proetale-derived-pullback-composition, a generic construction of the comparison isomorphism. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-d86106d4c (reviewer sub-agent of L); spot-checked: This delivery answers the 2026-10-22 human re-split note (4135 characters, at least 2 new nodes, parent at most 3000). Compared with the live item, only proof, proof_deps and split_report changed. The statement, stmt_deps, source, Lean record and tool_uses are byte-identical, and all 5 old proof_deps are kept. Old steps 1, 2 and 6 (setup, the lem-trf-derived-pullback-coherence application, the elementary inversion) stay word for word as new steps 1, 2 and 5. Old steps 3–4 (recursion d_{r+1}=T(d_r)∘C_{1,r}, invertibility, and the induction for d_{a+b}=T^a(d_b)∘(d_aP_b)∘C_{a,b}) moved in full to lem-trf-positive-functor-binary-comparison. Old step 5 (tree induction, naturality interchange, multiway partitions, reassociation) moved in full to lem-trf-positive-functor-refinement-independence. The two nodes carry about 1250 and 1060 characters of old argument, so they are of comparable size, and the parent is 2576 characters. I checked node 1 by hand: the case a=1 is the recursion, and a≥2 follows from the cocycle at (1,a-1,b); I also tested (2,1) against the cocycle (1,1,1). I checked node 2 by induction on the root plus the interchange law, and tested r=1, r=3 (both bracketings) and r=4 (both orders). Both nodes are true and self-contained, unsplit with empty proofs, with stmt_deps def-nagata-category and def-trf-endofunctor-powers and 5 search records each (leansearch rate-limited, recorded honestly). Neither node needs the other's conclusion. Parent steps 3–5 satisfy every hypothesis, the direction of b_r=C_{1,r}^{-1} is correct, and the cocycle specializes exactly from the cited triple statement. I searched the DAG for duplicates: def-trf-frobenius-pullback-power-comparison (definitions only), lem-trf-pullback-coefficient-iterate-coherence (equivariance), lem-trf-derived-pullback-coherence (cocycle only) and the fix refinement-tree nodes are all distinct. The source is the main-20261015 lem-trf-frobenius-operator-compact-description proof, labelled honestly as an agent expansion. No SGA is used, and the only additions to the batch-5 closure are the two generic categorical nodes. Advisory: the report mentions a citations.json that was not delivered."
  },
  "lean": {
   "module": "Sheaf.Paper.FrobeniusPullbackComparisonCoherence",
@@ -240,5 +235,16 @@
   "result": "fix",
   "note": "Statement matches the node clause by clause. C_{a,b} is the canonical c_{g^a,g^b} from proEtaleConstantRingPullbackComposition (the canonical composition of lem-weil-pbc-proetale-derived-pullback-composition), via a pow_add eqToIso, in the correct direction. d_r is the recursion d_{r+1}=T(d_r)∘C_{1,r} with d_1=id. Splitting independence is (*) d_{a+b}≫assoc = C_{a,b}≫d_aP_b≫T^a(d_b) in both refinement orders, equivalent by tree induction. The inverse identity d_{r+1}^{-1}∘T(d_r)=b_r holds for all r and M. Edge cases (exponent 1/2, summand 1, zero object, empty X0, n=1) and universes are fine. No hollow defs; docstrings and the six-step proof are present; the statement is verbatim; the stmt_deps addition pur713-def-pullback-comparison is a landed node (allowed). H4 fixed: frobeniusPullbackPower was a private copy of the recorded FiniteFieldDatum.geometricGaloisDerivedPullback (def-trf-scheme-frobenius); fixes/FrobeniusPullbackComparisonCoherence.lean redefines it through that declaration, definitionally unchanged, and the node record is unchanged. nt_compile --json: delivered and fixed files both exit 0 with no diagnostics (about 10 s each)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

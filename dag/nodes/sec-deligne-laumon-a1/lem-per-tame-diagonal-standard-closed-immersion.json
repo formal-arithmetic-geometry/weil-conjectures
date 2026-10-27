@@ -14,7 +14,9 @@
   "def-weil-etale-morphism",
   "def-per-fs-log-smooth-etale",
   "def-weil-closed-immersion",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-per-fs-log-group-action",
+  "def-per-admissible-finite-scheme-quotient"
  ],
  "proof": [
   {
@@ -406,5 +408,44 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-77b4ea71d (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read in full: the item (15 steps, statement unchanged from the Q145 copy) and the new Mathlib leaf; the governance docs incl. delivery-errors A–F; ILO VI 2.3 and 3.4–3.7 (printed pp.73–76, PDF = printed + 6). Source: 3.5(b) states the strict closed immersion and 3.7(b) proves it. Steps 4–7 follow the 3.7(b) argument: averaging gives A = B + I, then I^N ⊂ m_B·A with N = r(n−1)+1, then A = D + I^k by induction, then 00DV Nakayama (submodule clause) on the finite B-module A. Using Z[P], Z[Q] instead of Λ[P], Λ[Q] changes nothing because B contains 1/n and the roots of unity. Steps 9–11 spread the setup étale-locally: idempotent permutation identities hold over Spec B by 05WR/0GIP and descend by finite data; extra pieces are removed by finite ⇒ proper ⇒ closed image; generator expressions descend. Steps 12–15 check that b is a chart of N = (f_*M)^H at every geometric point. At a point t, the stabiliser is K = ∩_{f∈F} ker χ_f (distinct roots have unit differences); the finite-quotient node gives N_s = M_t^K; the duality gives K^⊥ = D_F, which produces p = q + f_1 + (n−1)f_2 ∈ P; injectivity uses L ∩ F^gp = F_P^gp. I re-derived each step. Tested: Q = 0 and H = 1; the report's example k[x,y]/(x²,y²,xy) with x ↦ −x, where B[t]/t² → A is onto with kernel (yt), so a closed immersion but not an isomorphism, as stated. New leaf: matches CommGroup.subgroupOrderIsoSubgroupMonoidHom (Duality.lean line 176), the membership lemmas at 195–197 and 201–207, and HasEnoughRootsOfUnity (EnoughRootsOfUnity.lean 27–29); tested on trivial E, Z/2 and (Z/2)^2; a grep found no duplicate in the DAG. No cycle: it does not cite lem-per-very-tame-local-kummer-quotient, which cites the item. No SGA. The 12 split_report.tool_uses are generic and accepted. Batch-5 flags, each checked on the cited node's own closure: the new leaf → def-trf-fs-log-blowup (a definition); finite-quotient-strict-local-invariants, finite-base-strict-localization (Stacks strict-henselization algebra) and fine-log-stalk-chart-spreading (ILO VI 1.1, monoid and ring algebra) are generic; none reaches a thm-trf, Poincaré or sk-thm node. Advisory: Step 9's second refinement could say that H-stability is re-established as in Step 10."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TameDiagonalStandardClosedImmersion",
+  "declaration": "AlgebraicGeometry.exists_tameDiagonal_standard_closedImmersion",
+  "declarations": [
+   "AlgebraicGeometry.IsPointedRingStalkMap",
+   "AlgebraicGeometry.EtaleLogHom.IsPointedStalkMap",
+   "AlgebraicGeometry.tameDiagonalLattice",
+   "AlgebraicGeometry.tameDiagonalMonoid",
+   "AlgebraicGeometry.TameDiagonalChartRealization",
+   "AlgebraicGeometry.TameDiagonalChartRealization.comparison",
+   "AlgebraicGeometry.exists_tameDiagonal_standard_closedImmersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TameDiagonalStandardClosedImmersion.lean",
+  "statement": "theorem exists_tameDiagonal_standard_closedImmersion {G : Type v} [Group G] [Finite G] (X : FineSaturatedLogScheme.{u}) (action : FSLogGroupAction G X) {Y : Scheme.{u}} [IsNoetherian Y] (q : X.scheme ⟶ Y) (hquot : IsAdmissibleFiniteSchemeQuotient action.baseAction q) (N : EtaleLogStructure Y) (D : action.InvariantDirectImage q N) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ t ≫ (action.baseAction g).hom = t) (ρ : H →* (strictLocalRing X.scheme t ≃+* strictLocalRing X.scheme t)) (logActionStalk : H →* MulAut (X.logStructure.toEtalePrelogStructure.stalk t)) (hρ : ∀ h : H, IsPointedRingStalkMap (action.baseAction h.val⁻¹).hom t t (ρ h).toRingHom) (hlogActionStalk : ∀ h : H, (action.logMap h.val⁻¹).IsPointedStalkMap t t (logActionStalk h).toMonoidHom) (i : strictLocalRing Y (t ≫ q) →+* strictLocalRing X.scheme t) (hi : IsPointedRingStalkMap q t (t ≫ q) i) (hinj : Function.Injective i) (hinvariants : ∀ z : strictLocalRing X.scheme t, (∀ h : H, ρ h z = z) ↔ ∃ y : strictLocalRing Y (t ≫ q), i y = z) (hfinite : i.Finite) (hn : IsUnit (Nat.card H : strictLocalRing X.scheme t)) {Q : Type u} [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (hsharp : ∀ z : Q, IsUnit z → z = 1) (a : Q →* X.logStructure.toEtalePrelogStructure.stalk t) (ha : X.logStructure.IsStalkChart t a) (hcharacteristic : Function.Bijective (Associates.mkMonoidHom.comp a)) (hfixed : ∀ (h : H) (m : X.logStructure.toEtalePrelogStructure.stalk t), Associates.mk (logActionStalk h m) = Associates.mk m) (χ : Algebra.GrothendieckGroup Q →* (H →* rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t))) (hroots : ∀ (h : H) (ζ : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t)), ρ h (ζ.val : strictLocalRing X.scheme t) = (ζ.val : strictLocalRing X.scheme t)) (hdiagonal : ∀ (h : H) (r : Q), logActionStalk h (a r) = X.logStructure.unitsIn t (χ (Algebra.GrothendieckGroup.of r) h).val * a r) (hstratum : ∀ (h : H) (z : strictLocalRing X.scheme t), ρ h z - z ∈ X.logStructure.nonunitIdeal t) : ∃ b : tameDiagonalMonoid χ →* strictLocalRing Y (t ≫ q), i.toMonoidHom.comp b = (X.logStructure.toEtalePrelogStructure.stalkAlpha t).comp (a.comp (tameDiagonalMonoid χ).subtype) ∧ (∃ φ : pushout (CommRingCat.ofHom (MonoidAlgebra.lift ℤ (strictLocalRing Y (t ≫ q)) (tameDiagonalMonoid χ) b).toRingHom) (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ (tameDiagonalMonoid χ).subtype)) ⟶ strictLocalRing X.scheme t, Function.Surjective φ ∧ ∀ (y : strictLocalRing Y (t ≫ q)) (r : Q), φ (pushout.inl (CommRingCat.ofHom (MonoidAlgebra.lift ℤ (strictLocalRing Y (t ≫ q)) (tameDiagonalMonoid χ) b).toRingHom) (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ (tameDiagonalMonoid χ).subtype)) y * pushout.inr (CommRingCat.ofHom (MonoidAlgebra.lift ℤ (strictLocalRing Y (t ≫ q)) (tameDiagonalMonoid χ) b).toRingHom) (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ (tameDiagonalMonoid χ).subtype)) (MonoidAlgebra.single r 1)) = i y * X.logStructure.toEtalePrelogStructure.stalkAlpha t (a r)) ∧ ∃ c : TameDiagonalChartRealization action q N D t (tameDiagonalMonoid χ) a b, IsClosedImmersion c.comparison",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed group-action and admissible finite-scheme-quotient notions, added to stmt_deps. Stalk maps are normalized on every relative pointed etale test and use inverse pullback for left stabilizer actions. The ring pushout is the commutative-ring tensor product. Strictness relative to the target associated Q-chart is stated by source_chart together with the canonical chart-square comparison; target_chart is required at every geometric point. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da8f2b821",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Statement matches node clause by clause. The admissible-quotient definition's extra clauses (affine orbit, quotient topology) follow from finite+surjective. Stabilizer is geometric. B=A^H via injective i plus invariants, plus finiteness. Inverse-pullback stalk actions checked against Aut's (g*h).hom = h.hom ≫ g.hom, so ρ is a genuine H→* and nonabelian H is not vacuous. Stratum: nonunitIdeal = I under the sharp chart. χ: Q^gp→*(H→*μ_n) is the pairing. P = comap of ker χ. b is unique by injectivity of i. φ out of the CommRingCat pushout, surjective, given on pure tensors. Realization: charts at all geometric points incl. actual N, germs a and b, compatibility through D.pullbackMap, comparison = pullback.lift as in FSLogChart; strictness = source_chart. Records: item differs from live only in lean and 2 landed stmt_deps; 9 dep records byte-identical; lean.statement verbatim; imports exist. No hollow defs, sorry only, no pro-étale. Advisory: new stalk-map predicates overlap KummerLogMorphism.IsStrictLocalRingMap / automorphismStrictLocalMap (generic, not a DAG notion); square field redundant. No compile: no file changed."
+ }
 }

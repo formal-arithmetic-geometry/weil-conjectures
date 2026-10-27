@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-affine-commutative-extension-pushout",
+ "kind": "statement",
+ "title": "Affine representability of pushouts of commutative group extensions",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $0\\to N\\xrightarrow{i}B\\xrightarrow{q}Q\\to0$ be an exact sequence of commutative affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], where $i$ is a closed subgroup embedding [def-sc-group-scheme-subgroup] identifying $N$ with the scheme-theoretic kernel, and $q$ is faithfully flat and finitely presented. Let $\\varphi:N\\to\\mathbf G_a$ be a group homomorphism [def-sc-gm-ga]. Define $J\\subseteq B\\times\\mathbf G_a$ by the closed embedding $n\\mapsto(i(n),-\\varphi(n))$. The fppf sheafification of $R\\mapsto(B(R)\\times R)/J(R)$ for faithfully flat finitely presented coverings of commutative $k$-algebras is represented by a commutative affine finite-type $k$-group scheme $E$. The quotient map $\\rho:B\\times\\mathbf G_a\\to E$ is faithfully flat and finitely presented. Put $b(x)=\\rho(x,0)$, $j(t)=\\rho(0,t)$, and let $q':E\\to Q$ be induced by $(x,t)\\mapsto q(x)$. Then $0\\to\\mathbf G_a\\xrightarrow{j}E\\xrightarrow{q'}Q\\to0$ is exact in the same sense, $bi=j\\varphi$, $q'b=q$, and this square is a pushout in represented fppf sheaves of commutative groups. Products are over $\\operatorname{Spec}k$ [def-pc-fibre-product, def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.18 (affine quotient by a normal algebraic subgroup), printed pp.102-103; Theorem 5.13, printed pp.100-101, for the quotient universal property; the pushout diagram in the proof of Proposition 14.48, printed p.296. The displayed antidiagonal quotient is the explicit pushout used there."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=B\\times\\mathbf G_a$. The affine fibre-product formula identifies its coordinate ring with $k[B][T]$, so $G$ is affine of finite type. The map $a:N\\to G$, $n\\mapsto(i(n),-\\varphi(n))$, is a homomorphism since the groups are commutative. Its coordinate map $k[B][T]\\to k[N]$ extends the surjection $i^*:k[B]\\to k[N]$ and sends $T$ to $-\\varphi^*(T)$; it is therefore surjective. Thus $a$ is a closed immersion by the affine criterion (Stacks Tag 01QO). Its image $J\\simeq N$ is a finite-type normal subgroup of $G$: on every algebra the image is a subgroup, and $G(R)$ is abelian.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.18, printed p.103; antidiagonal construction making explicit Proposition 14.48, printed p.296"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-normal-quotient-geometry] to $J\\subseteq G$. It gives an affine finite-type group scheme $E=G/J$ representing exactly the fppf sheafification in the statement, with quotient $\\rho:G\\to E$ faithfully flat and finitely presented and scheme-theoretic kernel $J$. Its sheaf sections lift locally to $G$. Two local lifts commute because $G$ is commutative, hence the multiplication of $E$ is commutative as well; equality descends since $E$ is a sheaf. Define $b(x)=\\rho(x,0)$ and $j(t)=\\rho(0,t)$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.18, printed p.103; quotient/sheaf interpretation in Section 5(j), printed pp.116–118"
+   }
+  },
+  {
+   "text": "The homomorphism $q\\operatorname{pr}_B:G\\to Q$ vanishes on $J$, since $qi=0$. The quotient universal property [lem-sfb-faithfully-flat-group-quotient-universal], applied to $\\rho$ with target $Q$, produces a unique homomorphism $q':E\\to Q$ satisfying $q'\\rho=q\\operatorname{pr}_B$. In particular $q'b=q$ and $q'j=0$. For every algebra and $n\\in N(R)$, the relation $\\rho(i(n),-\\varphi(n))=0$ gives $b(i(n))=j(\\varphi(n))$, so $bi=j\\varphi$ as group-scheme morphisms.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.13, printed p.101; Proposition 14.48 pushout diagram, printed p.296"
+   }
+  },
+  {
+   "text": "Let $K=\\ker(q')$, a closed subgroup of $E$ by [lem-sc-kernel-subgroup]; hence it is affine of finite type (its coordinate algebra is a quotient of $k[E]$). For every $R$, if $j(t)=0$, the equality $\\ker(\\rho)(R)=J(R)$ supplies $n\\in N(R)$ with $(0,t)=(i(n),-\\varphi(n))$. Injectivity of $i(R)$ gives $n=0$, then $t=0$. Thus $j$ is injective on every algebra. If $e\\in K(R)$, lift it fppf locally through $\\rho$ to $(x,t)$. Then $q(x)=0$, so uniquely $x=i(n)$; the relation gives $e=j(t+\\varphi(n))$. These local values of $t+\\varphi(n)$ agree on overlaps by the just-proved injectivity and glue uniquely by representable descent [lem-weil-pbc-fpqc-representable-descent]. Thus $\\mathbf G_a(R)\\to K(R)$ is bijective naturally in $R$. Yoneda on affine schemes makes $j:\\mathbf G_a\\to K$ an isomorphism. In particular $j:\\mathbf G_a\\to E$ is the closed kernel embedding, not merely injective on field points.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.48, printed p.296, exact pushout row; Stacks Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms) for gluing the unique additive coordinate"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-normal-quotient-geometry] to the closed normal subgroup $K\\subseteq E$, obtaining $p:E\\to D=E/K$, faithfully flat and finitely presented. All $B,Q,E,D$ are affine of finite type. The map $pb:B\\to D$ kills $N$ since $bi=j\\varphi$, and $q'$ kills $K$. Apply [lem-sfb-faithfully-flat-group-quotient-universal] to $q$ and $p$ respectively to obtain $u:Q\\to D$, $v:D\\to Q$ with $uq=pb$, $vp=q'$. Now $vuq=q'b=q$, so uniqueness for $q$ gives $vu=1_Q$. Also $uvp\\rho=uq\\operatorname{pr}_B=pb\\operatorname{pr}_B=p\\rho$: indeed $\\rho(x,t)=b(x)+j(t)$ and $pj=0$. Uniqueness for $\\rho$ and then $p$ gives $uv=1_D$. Consequently $v$ is an isomorphism and $q'=vp$ is faithfully flat and finitely presented, with kernel identified in step 4. This proves the asserted exactness in the original scheme-theoretic sense.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.13, printed p.101, and Proposition 5.18, printed p.103; exact pushout row of Proposition 14.48, printed p.296"
+   }
+  },
+  {
+   "text": "For any fppf sheaf $H$ of commutative groups and homomorphisms $f:B\\to H$, $g:\\mathbf G_a\\to H$ with $fi=g\\varphi$, the homomorphism $(x,t)\\mapsto f(x)+g(t)$ kills $J$: on $a(n)$ its value is $fi(n)-g\\varphi(n)=0$. It therefore gives a natural homomorphism from the orbit presheaf $R\\mapsto G(R)/J(R)$ to $H$. The universal property of sheafification [def-weil-pbc-sheafification] gives a unique sheaf homomorphism $h:E\\to H$ with $h\\rho(x,t)=f(x)+g(t)$, so $hb=f$ and $hj=g$. Conversely every such $h$ must satisfy this formula, which proves uniqueness. This is the pushout property even among all commutative fppf sheaves, hence among represented ones.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.48, printed p.296, pushout diagram; explicit universal-property verification by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.48, printed p.296: explicit antidiagonal realization of the pushout diagram, using Proposition 5.18 and Theorem 5.13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative affine algebraic group extension can be pushed out along a homomorphism of its kernel to Ga by quotienting the product by the graph, and a group homomorphism with trivial scheme kernel is a closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Z) →\\n    (g : Y ⟶ Z) →\\n      [AlgebraicGeometry.IsClosedImmersion f] →\\n        AlgebraicGeometry.Scheme.Hom.ker f ≤ AlgebraicGeometry.Scheme.Hom.ker g → (Y ⟶ X)\", \"doc\": \"Given a closed immersion $ f: X \\to Z $ and a morphism $ g: Y \\to Z $ whose kernel ideal sheaf contains that of $ f $, this constructs a morphism $ Y \\to X $ by factoring through the image subschemes. Sp\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {ZX ZY X Y : AlgebraicGeometry.Scheme} (iX : ZX ⟶ X) (iY : ZY ⟶ Y) (Zf : ZX ⟶ ZY) (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsClosedImmersion iX] [AlgebraicGeometry.IsClosedImmersion iY],\\n  CategoryTheory.CategoryStruct.comp iX f = CategoryTheory.CategoryStruct.comp Zf iY →\\n    (AlgebraicGeometry.Scheme.Ho\", \"doc\": \"Given schemes $Z_X \\\\subset X$ and $Z_Y \\\\subset Y$ as closed immersions with ideal sheaves $\\\\mathcal{I}_X$ and $\\\\mathcal{I}_Y$, and morphisms $f: X \\\\to Y$ and $Zf: Z_X \\\\to Z_Y$ forming a commutative sq\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [inst : AlgebraicGeometry.IsClosedImmersion f]\\n  (H : AlgebraicGeometry.Scheme.Hom.ker f ≤ AlgebraicGeometry.Scheme.Hom.ker g),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.IsClosedImmersion.lift f g H) f = g\", \"doc\": \"Given a closed immersion $ f: X \\to Z $ and a morphism $ g: Y \\to Z $ such that the kernel ideal sheaf of $ f $ is contained in that of $ g $, the composition of the lifted morphism $ Y \\to X $ with $ f \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [inst : AlgebraicGeometry.IsClosedImmersion i₁]\\n  [AlgebraicGeometry.IsClosedImmersion i₂]\\n  (h : AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂),\\n  CategoryTheory.IsIso (AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Given two closed immersions $i_1: Z_1 \\\\to X$ and $i_2: Z_2 \\\\to X$ into a scheme $X$ with equal kernel ideal sheaves ($i_1.\\\\ker = i_2.\\\\ker$), the morphism $\\\\mathrm{lift}(i_1, i_2)$ constructed by facto\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [AlgebraicGeometry.IsClosedImmersion i₁]\\n  [AlgebraicGeometry.IsClosedImmersion i₂] (f : Z₁ ⟶ Z₂),\\n  CategoryTheory.CategoryStruct.comp f i₂ = i₁ →\\n    AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂ → Categ\", \"doc\": \"Let $ Z_1 \\\\xrightarrow{i_1} X $ and $ Z_2 \\\\xrightarrow{i_2} X $ be closed immersions of schemes. If there exists a morphism $ f: Z_1 \\\\to Z_2 $ such that $ f \\\\circ i_2 = i_1 $ and the kernel ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (i : Z ⟶ Y) (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion i],\\n  AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.Limits.pullback.fst f i) =\\n    (AlgebraicGeometry.Scheme.Hom.ker i).comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, given morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is a closed immersion, then the first projection morphism $ \\text{pullback}(f, g) \\to X $ from the pullback diagra\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f : X \\to Z $ is a closed immersion, then the second projection morphism from the pullback of $ f $ and $ g : Y \\to Z $ to $ Y $ is also a closed immersion. This means i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract pushouts and sheaf-ideal kernels do not supply affine representability of this fppf group quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"ker\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.AddMonObj.zero) (CategoryTheory.AddGrpObj.addCommutator G) = Cat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.η_whiskerRight_addCommutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.AddMonObj.zero G) (CategoryTheory.AddGrpObj.addCommutator G) = Ca\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.whiskerLeft_η_commutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.MonObj.one) (CategoryTheory.GrpObj.commutator G) = CategoryTheory.C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.η_whiskerRight_commutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.MonObj.one G) (CategoryTheory.GrpObj.commutator G) = CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.AddMonObj.zero) (CategoryTheory.CategoryStru\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.η_whiskerRight_addCommutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.AddMonObj.zero G) (CategoryTheory.CategoryStr\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.whiskerLeft_η_commutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.MonObj.one) (CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.η_whiskerRight_commutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.MonObj.one G) (CategoryTheory.CategoryStruct.com\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract pushouts and sheaf-ideal kernels do not supply affine representability of this fppf group quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|trivial.*kernel|kernel.*trivial",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract pushouts and sheaf-ideal kernels do not supply affine representability of this fppf group quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of an exact sequence of commutative affine group schemes along a kernel homomorphism to the additive group is represented by an affine algebraic group quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Monoid.PushoutI\", \"module\": \"Mathlib.GroupTheory.PushoutI\", \"type\": \"[∀ i, Monoid (G i)] [Monoid H] (φ : ∀ i, H →* G i) : Type _\", \"doc\": \"Given a family of monoids $\\\\{G_i\\\\}$ indexed by $I$, a monoid $H$, and homomorphisms $\\\\varphi_i : H \\\\to G_i$ for each $i$, the pushout is constructed as the quotient of the coproduct $\\\\left(\\\\coprod_{i \"}\n  {\"name\": \"AddGroupExtension.quotientKerRightHomEquivRight\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddGroup N] →\\n      [inst_1 : AddGroup G] →\\n        {E : Type u_3} → [inst_2 : AddGroup E] → (S : AddGroupExtension N E G) → E ⧸ S.rightHom.ker ≃+ G\", \"doc\": \"Given an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ represented by $S$, the quotient of $E$ by the kernel of the surjective homomorphism $E \\\\to G$ (the right homomorphism of the extension) i\"}\n  {\"name\": \"CategoryTheory.IsPushout.exact_shortComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.CommSq\", \"type\": \"(h : IsPushout t l r b) : h.shortComplex.Exact\", \"doc\": \"In an abelian category, a pushout square induces an exact short complex, where the image of each differential equals the kernel of the subsequent differential.\"}\n  {\"name\": \"Monoid.PushoutI.instGroup\", \"module\": \"Mathlib.GroupTheory.PushoutI\", \"type\": \": Group (PushoutI φ)\", \"doc\": \"Given a family of groups $\\\\{G_i\\\\}$ indexed by $I$, a monoid $H$, and homomorphisms $\\\\varphi_i : H \\\\to G_i$ for each $i$, the pushout $\\\\left(\\\\coprod_{i \\\\in I} G_i\\\\right) * H / \\\\sim$ (constructed by quo\"}\n  {\"name\": \"CategoryTheory.Abelian.hasPushouts\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \": HasPushouts C\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, every span diagram (two morphisms with a common domain) admits a pushout cone, meaning that pushouts exist in $\\\\mathcal{C}$.\"}\n  {\"name\": \"AddGroupExtension.quotientRangeInlEquivRight\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddGroup N] →\\n      [inst_1 : AddGroup G] →\\n        {E : Type u_3} → [inst_2 : AddGroup E] → (S : AddGroupExtension N E G) → E ⧸ S.inl.range ≃+ G\", \"doc\": \"Given an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ represented by $S$, the quotient of $E$ by the image of the canonical inclusion homomorphism $N \\\\to E$ is additively isomorphic to $G$. Th\"}\n  {\"name\": \"QuotientAddGroup.quotientKerEquivRange\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Basic\", \"type\": \"{G : Type u} → [inst : AddGroup G] → {H : Type v} → [inst_1 : AddGroup H] → (φ : G →+ H) → G ⧸ φ.ker ≃+ ↥φ.range\", \"doc\": \"Given additive groups $G$ and $H$, and an additive group homomorphism $\\\\varphi : G \\\\to+ H$, this constructs a canonical additive group isomorphism between the quotient group $G/\\\\ker(\\\\varphi)$ and the \"}\n  {\"name\": \"CategoryTheory.Square.pushoutCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Square\", \"type\": \": PushoutCocone sq.f₁₂ sq.f₁₃\", \"doc\": \"Given a commutative square diagram in a category $\\\\mathcal{C}$ with objects $X_1, X_2, X_3, X_4$ and morphisms $f_{12}: X_1 \\\\to X_2$, $f_{13}: X_1 \\\\to X_3$, $f_{24}: X_2 \\\\to X_4$, and $f_{34}: X_3 \\\\to\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract pushouts and sheaf-ideal kernels do not supply affine representability of this fppf group quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine algebraic groups the quotient of G times A by the antidiagonal kernel represents the pushout extension and group scheme monomorphisms are closed immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {X Y : CategoryTheory.Over S} [AlgebraicGeometry.IsSeparated Y.hom] (f g : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.equalizer.ι f g).left\", \"doc\": \"Given a separated morphism $ Y \\to S $ and two morphisms $ f, g : X \\to Y $ over $ S $, the equalizer of $ f $ and $ g $ is a closed immersion into $ X $. This means the subscheme of $ X $ where $ f $ a\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, given morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is a closed immersion, then the first projection morphism $ \\text{pullback}(f, g) \\to X $ from the pullback diagra\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f : X \\to Z $ is a closed immersion, then the second projection morphism from the pullback of $ f $ and $ g : Y \\to Z $ to $ Y $ is also a closed immersion. This means i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f g : X ⟶ Y) [Y.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a separated scheme and $ f, g : X \\\\to Y $ are morphisms of schemes, then the equalizer morphism $ \\\\iota : \\\\mathrm{Eq}(f, g) \\\\to X $ is a closed immersion. This follows from the separatedne\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract pushouts and sheaf-ideal kernels do not supply affine representability of this fppf group quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|quotient",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine group scheme modulo a closed normal subgroup represents its fppf quotient and its quotient map is faithfully flat",
+   "results": "hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Rep.quotientToCoinvariants, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.AffineScheme.forgetToScheme_faithful, AlgebraicGeometry.Scheme.Hom.liftQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"quotient\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf pushout of a commutative affine algebraic group extension along a map from the kernel to the additive group is an affine algebraic group",
+   "results": "hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd, AlgebraicGeometry.AffineScheme.hasColimits, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.instIsAffineHomDescScheme, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The antidiagonal quotient of the product of commutative group schemes represents a pushout of extensions",
+   "results": "hits: AlgebraicGeometry.Scheme.GrpObjAsOverPullback, AlgebraicGeometry.isPullback_Spec_map_pushout, AlgebraicGeometry.isPullback_Spec_map_isPushout, AlgebraicGeometry.isPullback_SpecMap_pushout, AlgebraicGeometry.instBraidedCategoryScheme, Monoid.PushoutI.instGroup, AlgebraicGeometry.instCartesianMonoidalCategoryScheme, AlgebraicGeometry.isPullback_SpecMap_of_isPushout",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|[Nn]ormal.*[Ss]ubgroup|[Pp]ushout",
+   "results": "hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underlying affine schemes, ring pushouts, flatness or abstract groups, not represented fppf quotients of affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zero-verschiebung-primitive-generation",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. Present split: Affine representability of pushouts of commutative group extensions. Theorem 5.18 (affine quotient by a normal algebraic subgroup), printed pp.102-103; Theorem 5.13, printed pp.100-101, for the quotient universal property; the pushout diagram in the proof of Proposition 14.48, printed p.296. The displayed antidiagonal quotient is the explicit pushout used there.",
+   "via": [
+    "lem-sfb-zero-verschiebung-primitive-generation",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-commutative-extension-pushout",
+  "worker": "stage1",
+  "summary": "Reused the existing affine normal-quotient and faithfully flat quotient universal-property nodes; wrote out the antidiagonal closed immersion, additive-coordinate kernel calculation, two-sided quotient comparison proving faithful flatness of q-prime, and the pushout property for arbitrary commutative fppf sheaves. No new nodes or statement changes.",
+  "blueprint": "Current latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, proof (3), through the inherited alteration/structural-group prerequisite chain. This item supplies the pushout row in Milne Proposition 14.48, p.296, as specified in blueprint.from.place; no blueprint node states this lemma (whole-blueprint searches for pushout, normal subgroup, group quotient).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Coordinate ring of the product for the antidiagonal closed immersion."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic definition used in the explicit affine group quotient construction; no unit-specific replacement is required."
+   },
+   {
+    "node": "def-sc-gm-ga",
+    "why": "Generic definition used in the explicit affine group quotient construction; no unit-specific replacement is required."
+   },
+   {
+    "node": "def-sc-group-scheme-subgroup",
+    "why": "Generic definition used in the explicit affine group quotient construction; no unit-specific replacement is required."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic definition used in the explicit affine group quotient construction; no unit-specific replacement is required."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Represent natural maps and isomorphisms of affine functors of points."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "The scheme-theoretic kernel is a closed subgroup on all algebra-valued points."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glue the unique additive coordinates in the kernel calculation (Stacks 023Q)."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic definition used in the explicit affine group quotient construction; no unit-specific replacement is required."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-finite-type-morphism",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-ND-a0a3b81d9",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-a0a3b81d9 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged, there are no new nodes and no SGA. Source: Milne iAG2017 Prop 14.48 (printed p.296), whose pushout row comes from 'G' quotient of G×G_a'; Prop 5.18 and Thm 5.13 enter through the existing quotient and factorization nodes. Step 1: a=(i,−φ) is a closed immersion because i* is surjective (def-weil-closed-immersion, 01QO form), and J is normal because G(R) is abelian. Step 2: lem-sfb-affine-normal-quotient-geometry gives E for the same fppf sheafification, ρ fppf and ker ρ=J. Local lifting follows from ρ being fppf; this is one line. Step 3: the factorization hypotheses all hold (affine finite type, ρ* faithfully flat, q pr_B a=qi=0). This gives q'b=q and q'j=0, and bi=jφ follows from ρ(in,−φn)=0. Step 4: lem-sc-kernel-subgroup gives K. j is injective because (0,t)=(in,−φn) forces n=0. A local lift x=i(n) gives e=j(t+φn), glued by fpqc representable descent on an fppf affine cover, then Yoneda gives G_a≅K, including non-reduced R. Step 5: the factorization node applied three times gives u,v with vu=1 (from vuq=q'b=q) and uv=1 (from uvpρ=pρ, since ρ(x,t)=b(x)+j(t) and pj=0), so q'=vp is fppf. Step 6: the universal property of sheafification (the only part used) gives the pushout among all commutative fppf sheaves. Small cases checked: N=0, φ=0, B=N=G_a with φ=id, char 2, and N=α_p⊂G_a. The citer zero-verschiebung-primitive-generation uses only clauses in the statement. No duplicate in the DAG or the blueprint. The tool_uses are generic and accepted. Batch-5 flag: lem-sfb-affine-normal-quotient-geometry reaches def-trf-scheme-cover-descent-datum, a general definition of scheme descent data, not a step of the trace-formula or Poincaré-duality proofs. The quotient node is general affine-group theory already cited by sibling sfb nodes, so I accept the citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineCommutativeExtensionPushout",
+  "declaration": "AlgebraicGeometry.affine_commutative_extension_pushout",
+  "declarations": [
+   "AlgebraicGeometry.affineExtensionAdditive",
+   "AlgebraicGeometry.affineExtensionAntidiagonal",
+   "AlgebraicGeometry.affineExtensionLeftInclusion",
+   "AlgebraicGeometry.affineExtensionRightInclusion",
+   "AlgebraicGeometry.affine_commutative_extension_pushout"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineCommutativeExtensionPushout.lean",
+  "statement": "theorem affine_commutative_extension_pushout {k : Type u} [Field k] (N B Q : Grp (Over (Spec (.of k)))) [IsCommMonObj N.X] [IsCommMonObj B.X] [IsCommMonObj Q.X] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [IsAffine B.X.left] [LocallyOfFiniteType B.X.hom] [QuasiCompact B.X.hom] [IsAffine Q.X.left] [LocallyOfFiniteType Q.X.hom] [QuasiCompact Q.X.hom] (i : N ⟶ B) (q : B ⟶ Q) [IsClosedSubgroupScheme i.hom.hom] (hqker : IsPullback i.hom.hom (toUnit N.X) q.hom.hom η[Q.X]) (hqflat : q.hom.hom.left.appTop.hom.FaithfullyFlat) (hqfp : LocallyOfFinitePresentation q.hom.hom.left) (φ : N ⟶ affineExtensionAdditive k) : ∃ (a : N ⟶ B ⊗ affineExtensionAdditive k), a.hom.hom = affineExtensionAntidiagonal i φ ∧ IsClosedImmersion a.hom.hom.left ∧ ∃ (E : Grp (Over (Spec (.of k)))) (ρ : B ⊗ affineExtensionAdditive k ⟶ E), IsCommMonObj E.X ∧ IsAffine E.X.left ∧ LocallyOfFiniteType E.X.hom ∧ QuasiCompact E.X.hom ∧ IsFppfGroupQuotient a ρ ∧ ρ.hom.hom.left.appTop.hom.FaithfullyFlat ∧ Flat ρ.hom.hom.left ∧ Surjective ρ.hom.hom.left ∧ LocallyOfFinitePresentation ρ.hom.hom.left ∧ ∃ (q' : E ⟶ Q), ρ ≫ q' = fst B (affineExtensionAdditive k) ≫ q ∧ IsClosedSubgroupScheme ((affineExtensionRightInclusion B ≫ ρ).hom.hom) ∧ IsPullback (affineExtensionRightInclusion B ≫ ρ).hom.hom (toUnit (affineExtensionAdditive k).X) q'.hom.hom η[Q.X] ∧ q'.hom.hom.left.appTop.hom.FaithfullyFlat ∧ Flat q'.hom.hom.left ∧ Surjective q'.hom.hom.left ∧ LocallyOfFinitePresentation q'.hom.hom.left ∧ i ≫ affineExtensionLeftInclusion B ≫ ρ = φ ≫ affineExtensionRightInclusion B ≫ ρ ∧ affineExtensionLeftInclusion B ≫ ρ ≫ q' = q ∧ (∀ (H : Grp (Over (Spec (.of k)))) [IsCommMonObj H.X] (f : B ⟶ H) (g : affineExtensionAdditive k ⟶ H), i ≫ f = φ ≫ g → ∃! h : E ⟶ H, affineExtensionLeftInclusion B ≫ ρ ≫ h = f ∧ affineExtensionRightInclusion B ≫ ρ ≫ h = g)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b556cbf6",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery of 7bb962710f6a: the H2 repair is correct. def-sfb-fppf-group-quotient-presentation (live, existing:true, owns IsFppfGroupQuotient) replaces the theorem node in stmt_deps; the theorem stays in proof_deps; all other node fields equal live; lean.statement is verbatim in the file. Clause by clause: field k; N,B,Q as Grp(Over Spec k) with IsCommMonObj, IsAffine, LocallyOfFiniteType+QuasiCompact; i an IsClosedSubgroupScheme plus the IsPullback kernel square; q FaithfullyFlat on global sections plus LocallyOfFinitePresentation; phi a hom to Grp.mk of StandardGroupSchemes.additive (standard Hopf law). Conclusions: a pinned to lift i (phi>>inv) with IsClosedImmersion; E commutative, affine, finite type; IsFppfGroupQuotient a rho (read in full: kernel square, fppf local surjectivity, sheaf, torsor iso, coset coequalizer with sheafification universal arrow); rho fppf; b,j via real inclusions; q' pinned by rho>>q'=fst>>q; exactness via closed subgroup j, kernel square and q' fppf; bi=j phi; q'b=q; unique-h pushout over all commutative H, not assumed affine. Universes: single u. Edge cases N=0, phi=0, B=N=Ga, char 2, alpha_p, zero ring all covered. No hollow defs, the only sorry is the theorem's proof, docstrings carry source, blueprint and six proof steps, no duplicate declaration, no pro-etale. Advisory, not counted: H11, the Second reading section is a self-reread (dispatcher forbids agents); the clause matching is in the Worker report and confirmed here. No compile run, no files changed."
+ }
+}

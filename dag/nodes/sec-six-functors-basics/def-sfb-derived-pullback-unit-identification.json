@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-derived-pullback-unit-identification",
+ "kind": "definition",
+ "title": "Canonical derived pullback identification of the structure sheaf",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], with derived pullback $Lf^*$ [def-pc-derived-pullback] and the shared derived tensor structures [def-pc-scheme-derived-tensor-structure]. Use the canonical pullback tensor comparison fixed on K-flat representatives [def-pc-derived-pullback-tensor-comparison] and its monoidal realization [lem-pc-canonical-pullback-tensor-monoidal-realization]. Define the unit identification $Lf^*(\\mathcal O_S[0])\\simeq\\mathcal O_X[0]$ to be the inverse of the unit isomorphism of this monoidal realization. Its tensorator is the fixed canonical comparison, so its unit laws determine this unit map; no arbitrary identification of line objects is selected.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-canonical-pullback-tensor-monoidal-realization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, canonical tensor pullback and its unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback monoidal unit isomorphism structure sheaf",
+   "results": "LeanSearch finds Functor.Monoidal.εIso and ordinary sheaf pullback unit APIs; LeanFinder finds structure-sheaf comap APIs. Source search finds the exact constructed zariskiTracePullbackUnitIso. No definition node owns this helper; no conclusion of the local-duality theorem is used.",
+   "date": "2026-10-24",
+   "verdict": "reuse source definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical unit identification derived pullback structure sheaf",
+   "results": "LeanSearch finds Functor.Monoidal.εIso and ordinary sheaf pullback unit APIs; LeanFinder finds structure-sheaf comap APIs. Source search finds the exact constructed zariskiTracePullbackUnitIso. No definition node owns this helper; no conclusion of the local-duality theorem is used.",
+   "date": "2026-10-24",
+   "verdict": "reuse source definition"
+  },
+  {
+   "tool": "grep",
+   "query": "NodalRelativeDualizingAdjunction|zariskiTracePullbackUnitIso|dualEvaluation|homOfGlobalSection",
+   "results": "msearch Mathlib/AlgebraicGeometry: 0 hits. rg of the named WeilConjectures and Sheaf source modules finds the exact existing declarations. DAG definition-record search and blueprint_refs search find no owner for this notion. LeanSearch finds Functor.Monoidal.εIso and ordinary sheaf pullback unit APIs; LeanFinder finds structure-sheaf comap APIs. Source search finds the exact constructed zariskiTracePullbackUnitIso. No definition node owns this helper; no conclusion of the local-duality theorem is used.",
+   "date": "2026-10-24",
+   "verdict": "existing source definition; add ownership node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical construction used by the smooth proper coherent trace pairing: Canonical derived pullback identification of the structure sheaf",
+   "via": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiLocalDualityAdjunction",
+  "declaration": "AlgebraicGeometry.zariskiTracePullbackUnitIso",
+  "declarations": [
+   "AlgebraicGeometry.zariskiTracePullbackUnitIso"
+  ],
+  "statement": "def zariskiTracePullbackUnitIso {X S : Scheme.{u}} (f : X ⟶ S) :\n    (derivedPullback f).obj (𝟙_ (schemeDerivedCategory S)) ≅\n      𝟙_ (schemeDerivedCategory X)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: the definition node owns these exact existing definitions; no assertion of the theorem in this module is being used. LeanSearch finds Functor.Monoidal.εIso and ordinary sheaf pullback unit APIs; LeanFinder finds structure-sheaf comap APIs. Source search finds the exact constructed zariskiTracePullbackUnitIso. No definition node owns this helper; no conclusion of the local-duality theorem is used."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of the 737909f H2 return. Lean differs only in imports; the definitions and theorem signature are byte-identical and lean.statement is verbatim in the file. The item node changes only in lean and stmt_deps, with the statement text unchanged. Four existing:true def nodes were added: def-sfb-relative-dualizing-adjunction (NodalRelativeDualizingAdjunction/.complex, 0A9E), def-sfb-derived-pullback-unit-identification (zariskiTracePullbackUnitIso = εIso of the canonical monoidal realization, 079U), def-sfb-sheaf-dual-evaluation (dual/dualEvaluation) and def-sfb-global-section-module-map (homOfGlobalSection). Each statement matches its construction, and no other def node owns these declarations in live. The §1(B) lean-only repair of def-pc-affine-global-hom-base-change-map points the record to the WeilConjectures module, which really holds affineGlobalHomBaseChangeMap (general M K) and canonicalPullbackAdjunction; the Sheaf module only re-imports it. Mechanical theorem-stmt_dep finding judged PASS: pull uses choose(exists_tensorPullbackAdjunction), whose module contains only that theorem and whose adjunction is pinned by the unit formula (the earlier review asked for this dep); tensorComparison = choose(module_pullback_tensor), pinned by naturality and the pure-tensor formula. Both are genuine theorem conclusions. Mathematics re-read clause by clause against Stacks 0FVV/0FVY/0FW0/0B6J/0AAB: counit-normalized trace, perfectness with both transposes, canonical base change for all k-algebras, t_A = 1⊗t, invariance under automorphisms with dual(η⁻¹), composition laws, and edge cases (d=0, empty Y, rank 0, A=0, non-Noetherian A, char 2, single universe u). nt_incremental2.check on live plus the snapshot nodes gives []. Gates: no hollow defs, docstrings carry source and blueprint, the only sorry is the main theorem. Advisory: dual is also listed under def-pc-divisor-line-bundle; the new unit-identification node does not cite lem-sc-mixed-hom-tensor-pullback-iso; def-trf-polynomial-duality-presentation-data is an unused stmt_dep/import; the ProperFlatSpaceDerivedDuality import clash is a stage-3 matter. No compile run, since no file was changed."
+ }
+}

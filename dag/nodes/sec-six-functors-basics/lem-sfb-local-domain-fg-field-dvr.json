@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-local-domain-fg-field-dvr",
+ "kind": "statement",
+ "title": "A dominating DVR in a prescribed finitely generated field extension",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is a local integral domain and not a field: $R\\ne0$, it has no zero divisors, and it has a unique maximal ideal $\\mathfrak m_R\\ne0$. Let $K\\subseteq L$ be fields [def-weil-field], with $R\\subseteq K$ and with every element of $K$ a quotient $r/s$ for $r,s\\in R$, $s\\ne0$ (so $K=\\operatorname{Frac}(R)$). Assume $L/K$ is finitely generated as a field extension: $L=K(a_1,\\ldots,a_n)$ for finitely many $a_i\\in L$, where this denotes the smallest subfield containing $K$ and the $a_i$. Then there is a discrete valuation subring $A\\subseteq L$ [def-sc-discrete-valuation-ring] containing $R$ such that every element of $L$ is a quotient of elements of $A$ and $\\mathfrak m_A\\cap R=\\mathfrak m_R$. Here $\\mathfrak m_A$ is the unique maximal ideal of $A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PH, algebra-lemma-exists-dvr (full statement, including a finitely generated extension L/K)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-polynomial-origin-finite-field-reduction] to $R\\subseteq K\\subseteq L$. It gives $R\\subseteq B\\subseteq K_0\\subseteq L$ with $B$ a nonfield Noetherian local domain, $\\operatorname{Frac}(B)=K_0$, $\\mathfrak m_B\\cap R=\\mathfrak m_R$, and $[L:K_0]<\\infty$. All its hypotheses are exactly the hypotheses on $R,K,L$.",
+   "uses": [
+    "lem-sfb-polynomial-origin-finite-field-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first paragraph; Fields Tags 030F (fields-lemma-transcendence-degree) and 09GH (fields-lemma-algebraic-finitely-generated)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-domain-birational-dimension-one] with input ring $B$ and ambient field $K_0$, and call its output subring $D$. Step 1 supplies its nonfield Noetherian local domain and fraction-field hypotheses. Thus $B\\subseteq D\\subseteq K_0$, $D$ is a Noetherian local integral domain of dimension $1$, $\\operatorname{Frac}(D)=K_0$ for this inclusion, and $\\mathfrak m_D\\cap B=\\mathfrak m_B$. Choose $0\\ne t\\in\\mathfrak m_R$; injectivity and the two contractions put this same nonzero element in $\\mathfrak m_B$ and $\\mathfrak m_D$. In particular $\\mathfrak m_D\\ne0$, and $\\mathfrak m_D\\cap R=\\mathfrak m_R$.",
+   "uses": [
+    "lem-sfb-local-domain-birational-dimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, second paragraph; Tag 00P8, algebra-lemma-dominate-by-dimension-1."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-normalization-local-dvr] with its $D,K,L$ equal to $D,K_0,L$. Step 2 supplies the nonzero Noetherian local domain of dimension $1$, its nonzero maximal ideal, and its prescribed fraction field; step 1 supplies $[L:K_0]<\\infty$. The lemma gives the integral closure $C\\subseteq L$, a prime $\\mathfrak q$ above $\\mathfrak m_D$, and the subring $A=\\{c/s\\in L:c,s\\in C,\\ s\\notin\\mathfrak q\\}$ identified with $C_{\\mathfrak q}$. It states that this $A$ is a DVR containing $D$, has fraction field $L$, and satisfies $\\mathfrak m_A\\cap C=\\mathfrak q$ and $\\mathfrak m_A\\cap D=\\mathfrak m_D$.",
+   "uses": [
+    "lem-sfb-finite-normalization-local-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, final paragraph, normalization and lying over; Tag 09IG, algebra-lemma-integral-closure-Dedekind; the fraction-field clause of normalization in a finite extension."
+   }
+  },
+  {
+   "text": "The inclusions give $R\\subseteq B\\subseteq D\\subseteq C\\subseteq A\\subseteq L$, and $\\mathfrak m_A\\cap R=(\\mathfrak m_A\\cap D)\\cap R=\\mathfrak m_D\\cap R=\\mathfrak m_R$. Since $\\operatorname{Frac}(A)=L$ for this inclusion, each element of $L$ is a quotient of elements of this $A$. These are exactly all the required clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, final sentence: domination; contraction through a prime localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-origin-finite-field-reduction",
+  "lem-sfb-local-domain-birational-dimension-one",
+  "lem-sfb-finite-normalization-local-dvr"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PH, algebra-lemma-exists-dvr, all three paragraphs, using the existing Tag 09IG normalization package for its last paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*[Vv]aluation|dominat|[Kk]rull.*[Aa]kizuki",
+   "results": "{\"t\": \"2026-10-22T04:15:45Z\", \"tool\": \"grep\", \"query\": \"exists.*[Vv]aluation|dominat|[Kk]rull.*[Aa]kizuki\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\"], \"digest\": \"ac20bcab9879b74e\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A discrete valuation subring of a finitely generated field extension dominating a nonfield Noetherian local domain",
+   "results": "{\"t\": \"2026-10-22T04:15:46Z\", \"tool\": \"leansearch\", \"query\": \"A discrete valuation subring of a finitely generated field extension dominating a nonfield Noetherian local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.mk\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing\", \"ValuationSubring.mk.noConfusion\", \"IsDiscreteValuationRing.TFAE\", \"ValuationSubring.ofSubring\", \"IsDiscreteValuationRing.not_isField\", \"ValuationSubring.mk\"], \"digest\": \"be6b5fe34f17304d\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Field.FG",
+   "results": "{\"t\": \"2026-10-22T04:15:46Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Field.FG\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local domain which is not a field is dominated by a discrete valuation ring with fraction field a prescribed finitely generated extension of its fraction field",
+   "results": "{\"t\": \"2026-10-22T04:15:48Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian local domain which is not a field is dominated by a discrete valuation ring with fraction field a prescribed finitely generated extension of its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindDomainDvr\", \"isDedekindDomain_iff\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsDiscreteValuationRing\"], \"digest\": \"a527a4b7308ee361\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|Noetherian|exists_le_valuationSubring|exists_factor_valuationRing",
+   "results": "{\"t\": \"2026-10-22T04:15:53Z\", \"tool\": \"grep\", \"query\": \"IsDiscreteValuationRing|Noetherian|exists_le_valuationSubring|exists_factor_valuationRing\", \"sub\": \"RingTheory/Valuation/LocalSubring.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"119\", \"149\", \"159\", \"177\", \"204\"], \"digest\": \"42980aa7a5990108\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a discrete valuation to a finitely generated field extension with a discrete valuation ring dominating a given Noetherian local subring",
+   "results": "{\"t\": \"2026-10-22T04:15:56Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a discrete valuation to a finitely generated field extension with a discrete valuation ring dominating a given Noetherian local subring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension\", \"Valuation.HasExtension.ofComapInteger\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"Valuation.HasExtension.instAlgebra_valuationSubring\", \"Valuation.HasExtension.instLiesOverSubtypeMemValuationSubringValuationSubringMaximalIdeal\", \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"Valuation.HasExtension.instIsLocalHomSubtypeMemValuationSubringValuationSubringRingHomAlgebraMap\", \"IsDedekindDomain.HeightOneSpectrum.valuation\"], \"digest\": \"5eb1081710cec031\"}; Read LocalSubring.exists_le_valuationSubring (RingTheory/Valuation/LocalSubring.lean:119-134): arbitrary valuation ring only. IsDiscreteValuationRing.TFAE characterizes a given ring, without constructing one. Valuation.HasExtension (RingTheory/Valuation/Extension.lean:65-67) assumes the extending valuation and does not construct a discrete one. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Dd]iscreteValuationRing|dominat|[Aa]kizuki",
+   "results": "{\"t\": \"2026-10-22T04:27:11Z\", \"tool\": \"grep\", \"query\": \"exists.*[Dd]iscreteValuationRing|dominat|[Aa]kizuki\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\"], \"digest\": \"7b76106955a33da9\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local domain dominated by a discrete valuation ring in a finitely generated field extension with prescribed fraction field",
+   "results": "{\"t\": \"2026-10-22T04:27:11Z\", \"tool\": \"leansearch\", \"query\": \"Noetherian local domain dominated by a discrete valuation ring in a finitely generated field extension with prescribed fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.TFAE\", \"IsDedekindDomainDvr.toIsNoetherian\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDedekindDomainDvr.isDedekindDomain\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDiscreteValuationRing.mk\"], \"digest\": \"9027298f2bb0c672\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T04:27:12Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.exists_units_eq_smul_zpow_of_irreducible\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDiscreteValuationRing.associated_of_valuation_eq\", \"IsDiscreteValuationRing.equivValuationSubring\", \"IsDiscreteValuationRing.mker_valuation_eq_isUnitSubmonoid\", \"WeierstrassCurve.HasAdditiveReduction\"], \"digest\": \"6a3d29d92e3d8f56\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfield Noetherian local domain is dominated by a discrete valuation subring of a prescribed finitely generated extension of its fraction field, whose fraction field is that extension",
+   "results": "{\"t\": \"2026-10-22T04:27:12Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfield Noetherian local domain is dominated by a discrete valuation subring of a prescribed finitely generated extension of its fraction field, whose fraction field is that extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindDomainDvr\", \"isDedekindRing_iff\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"LocalSubring.exists_valuationRing_of_isMax\", \"LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn\"], \"digest\": \"948271d7b45f6470\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_le_valuationSubring|exists_factor_valuationRing|HasExtension",
+   "results": "{\"t\": \"2026-10-22T04:27:22Z\", \"tool\": \"grep\", \"query\": \"exists_le_valuationSubring|exists_factor_valuationRing|HasExtension\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\"], \"digest\": \"072c340f1bdf2bea\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a discrete valuation to a finitely generated field extension while keeping a discrete value group and dominating a Noetherian local ring",
+   "results": "{\"t\": \"2026-10-22T04:27:23Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a discrete valuation to a finitely generated field extension while keeping a discrete value group and dominating a Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension\", \"Valuation.HasExtension.ofComapInteger\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"Valuation.HasExtension.instLiesOverSubtypeMemValuationSubringValuationSubringMaximalIdeal\", \"Valued.extension_extends\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"Valuation.HasExtension.id\"], \"digest\": \"f377e3ea05ba3315\"}; Read the hits: TFAE classifies a given ring, LocalSubring.exists_le_valuationSubring constructs a valuation ring without discreteness, and Valuation.HasExtension assumes an extension valuation. No construction of a DVR with the prescribed fraction field.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Dd]iscreteValuationRing|dominat|[Aa]kizuki",
+   "results": "{\"t\": \"2026-10-22T06:15:32Z\", \"tool\": \"grep\", \"query\": \"exists.*[Dd]iscreteValuationRing|dominat|[Aa]kizuki\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\", \"Mathlib/RingTheory/LocalRing/LocalSubring.lean\"], \"digest\": \"81352e7d4d54efd5\"}; Read the returned TFAE and Dedekind-localization statements: they characterize an existing ring or assume a Dedekind ring. LocalSubring valuation existence does not ensure discreteness; the upstream dominating-DVR theorem does not prescribe its fraction field. No exact Mathlib match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominate a Noetherian local integral domain by a discrete valuation ring with a prescribed finitely generated field extension as its fraction field",
+   "results": "{\"t\": \"2026-10-22T06:15:32Z\", \"tool\": \"leansearch\", \"query\": \"Dominate a Noetherian local integral domain by a discrete valuation ring with a prescribed finitely generated field extension as its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.mk\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr.toIsNoetherian\", \"IsDedekindDomainDvr.isDedekindDomain\"], \"digest\": \"b6d51467b993532d\"}; Read the returned TFAE and Dedekind-localization statements: they characterize an existing ring or assume a Dedekind ring. LocalSubring valuation existence does not ensure discreteness; the upstream dominating-DVR theorem does not prescribe its fraction field. No exact Mathlib match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:15:33Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.exists_units_eq_smul_zpow_of_irreducible\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDiscreteValuationRing.associated_of_valuation_eq\", \"IsDiscreteValuationRing.equivValuationSubring\", \"IsDiscreteValuationRing.mker_valuation_eq_isUnitSubmonoid\", \"WeierstrassCurve.HasAdditiveReduction\"], \"digest\": \"6a3d29d92e3d8f56\"}; Read the returned TFAE and Dedekind-localization statements: they characterize an existing ring or assume a Dedekind ring. LocalSubring valuation existence does not ensure discreteness; the upstream dominating-DVR theorem does not prescribe its fraction field. No exact Mathlib match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local domain not a field has a dominating discrete valuation subring in a prescribed finitely generated extension L of its fraction field, with fraction field exactly L",
+   "results": "{\"t\": \"2026-10-22T06:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian local domain not a field has a dominating discrete valuation subring in a prescribed finitely generated extension L of its fraction field, with fraction field exactly L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn\", \"IsDedekindDomainDvr\", \"LocalSubring.exists_valuationRing_of_isMax\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"1241f5efd4da1649\"}; Read the returned TFAE and Dedekind-localization statements: they characterize an existing ring or assume a Dedekind ring. LocalSubring valuation existence does not ensure discreteness; the upstream dominating-DVR theorem does not prescribe its fraction field. No exact Mathlib match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-image-boundary-dvr",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). Algebraic input in the proof of Tag 0CM2: Tag 00PH with the finitely generated field extension equal to the residue field of a source point.",
+   "via": [
+    "lem-sfb-noetherian-image-boundary-dvr",
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-local-domain-fg-field-dvr",
+  "worker": "stage1",
+  "summary": "Repair of the long-proof return: extracted former steps 1--3 and 5--8 into two comparably sized statement-only construction nodes. The parent keeps its statement verbatim and assembles the polynomial-origin reduction, the existing birational dimension-one reduction, and the normalization-localization construction. All eight old arguments are retained verbatim with their assignments in report.md. Promotion-return repair: rebased by the delivery overlay onto current origin/sheaf-dag, reread the current dimension-one bridge and all construction inputs, and distinguished both children from the two newer 00PH geometric nodes in the report. The four-step assembly and all mathematical statements remain unchanged. Continuation of the promotion repair: compared the retained item with the current read-clone node field by field and reread the current re-split dimension-one bridge. Steps 2 and 3 now name the substitutions and check every hypothesis explicitly, including the nonzero maximal ideal and the concrete subring inside L; no statement or dependency changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). Algebraic input in the proof of Tag 0CM2: Tag 00PH with the finitely generated field extension equal to the residue field of a source point.; Tag 00PH first paragraph realized by lem-sfb-polynomial-origin-finite-field-reduction, middle paragraph by the existing dimension-one node, last paragraph by lem-sfb-finite-normalization-local-dvr."
+ },
+ "tool_uses": [
+  "lem-sc-integral-closure-dedekind-surjective-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-f6c81a5c0",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-f6c81a5c0 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Re-split note of 2026-10-21 (released, stage 1, at least 2 nodes, assembly at most 3000 chars) is met. The live node still has the 8-step 4979-char proof and neither child exists live, so the delivery is not superseded. The three node files are byte-identical to the earlier heads 05e3a281/aeb0d5e7, which were refused at landing because the side completion had not been promoted. I re-read everything against the current snapshot. Against live, only proof, proof_deps, split_report and the added mathlib_searches differ; the statement is verbatim. Stacks 00PH (algebra.tex lemma-exists-dvr) has three paragraphs and maps as follows: (1) transcendence basis and origin localization = new lem-sfb-polynomial-origin-finite-field-reduction (old steps 1-3, about 2265 chars); (2) 00P8 = existing lem-sfb-local-domain-birational-dimension-one (old step 4, read: it needs a nonfield Noetherian local domain with K = Frac and gives dim-1 D with Frac K_0 and m_D∩B = m_B); (3) integral closure, lying over and C_q DVR = new lem-sfb-finite-normalization-local-dvr (old steps 5-8, about 2237 chars). The assembly is 1872 chars; each step's hypotheses are supplied by the earlier steps, and the t in m_R\\{0} argument gives m_D ≠ 0. Both new statements are true and statement-only: R[X] maps isomorphically to P by algebraic independence; n is maximal and is the kernel to R/m_R; B is not a field; L/K_0 is finite. Krull-Akizuki/09IG need no separability; Frac C = L; every q over m_D is maximal and C_q is a DVR. Small cases tested: r = 0 gives B = R; Z_(p) with Q(t); k[t^2,t^3]_m; a node with two primes above m_D; purely inseparable L. Duplicate search (rg -L for 00PH/09IG/00P8/Krull-Akizuki/transcendence basis) found no duplicate: 09IG, semilocal normalization, Krull-Akizuki, Krull domain, Galois e/f/g, same-field DVR, the bridge's chart lemmas and the geometric 00PH users are all distinct. No SGA is cited. Advisory: the item's carried-over tool_uses entry lem-sc-integral-closure-dedekind-surjective-fibres is no longer cited by the assembly; it is harmless and maintainer-owned."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DiscreteValuationRing.FinitelyGeneratedExtension",
+  "declaration": "IsLocalRing.exists_discreteValuationSubring_of_fg_extension",
+  "file": "lean/Sheaf/RingTheory/DiscreteValuationRing/FinitelyGeneratedExtension.lean",
+  "statement": "theorem IsLocalRing.exists_discreteValuationSubring_of_fg_extension (R : Type u) (K : Type v) (L : Type w) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] [Field K] [Field L] [Algebra R K] [IsFractionRing R K] [Algebra K L] (hR : ¬ IsField R) (hL : (⊤ : IntermediateField K L).FG) : ∃ (A : LocalSubring L) (f : R →+* A.toSubring), IsDiscreteValuationRing A.toSubring ∧ IsFractionRing A.toSubring L ∧ A.toSubring.subtype.comp f = (algebraMap K L).comp (algebraMap R K) ∧ Ideal.comap f (IsLocalRing.maximalIdeal A.toSubring) = IsLocalRing.maximalIdeal R",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f48c0a3a2",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Q61 lem-sfb-local-domain-fg-field-dvr f48c0a3a: Lean matches Stacks 00PH (algebra.tex:29312) and the node clause by clause: Noetherian local domain R, ¬IsField R, IsFractionRing R K, (⊤ : IntermediateField K L).FG; ∃ A : LocalSubring L and f : R →+* A pinned by A.subtype ∘ f = algebraMap K L ∘ algebraMap R K, with IsDVR A, IsFractionRing A L, comap f m_A = m_R. No extra hypotheses; universes u v w independent; statement field verbatim. Edge cases L=K, inseparable or positive-transcendence L/K, dim R>1 covered; field R and zero ring excluded as the node requires. No Mathlib or upstream match (exists_isDiscreteValuationRing does not prescribe the fraction field); same-field-dvr sister node is the L=K special case, not a duplicate. Item node unchanged except lean; live node has no Lean yet. Stmt_deps are Mathlib leaves; proof-dep import is the current upstream lean record. Docstrings carry source, blueprint id and 8 steps; report has both sections; proof is sorry only. Not recompiled (no change made); worker scompile clean. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

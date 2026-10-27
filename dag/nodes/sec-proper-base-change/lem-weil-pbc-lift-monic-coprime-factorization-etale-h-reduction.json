@@ -58,7 +58,32 @@
   "date": "2026-10-12",
   "group": "C3"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Polynomial.lift_monic_coprime_factorization_h_reduction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Polynomial.lift_monic_coprime_factorization_h_reduction",
+     "module": "WeilConjectures.RingTheory.LiftMonicCoprimeFactorizationEtaleCore",
+     "lines": [
+      156,
+      180
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "id": "lem-weil-pbc-lift-monic-coprime-factorization-etale-h-reduction",
  "title": "Compatibility of the second factor reduction",
  "statement": "Under the lifted factorization and first reduction, the second factor has the prescribed reduction.",
@@ -103,5 +128,22 @@
   "landing": "20261012T144114-L-2096595",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $f\\in A[X]$, and $g_0,h_0\\in(A/I)[X]$ monic with $\\bar f=g_0h_0$ in $(A/I)[X]$. Let $\\varphi:A\\to A'$ be a ring map, $\\alpha:A/I\\to A'/IA'$ the induced map, and $g',h'\\in A'[X]$ with $\\varphi(f)=g'h'$ such that the image of $g'$ in $(A'/IA')[X]$ is $\\alpha(g_0)$. Then the image of $h'$ in $(A'/IA')[X]$ is $\\alpha(h_0)$.",
+  "proof": [
+   {
+    "text": "Reduce $\\varphi(f)=g'h'$ modulo $IA'$: the image of $\\varphi(f)$ is $\\alpha(\\bar f)=\\alpha(g_0)\\alpha(h_0)$, and the image of $g'$ is $\\alpha(g_0)$, so $\\alpha(g_0)\\cdot(\\bar h'-\\alpha(h_0))=0$ in $(A'/IA')[X]$, where $\\bar h'$ is the image of $h'$. Since $g_0$ is monic, $\\alpha(g_0)$ is monic, hence a nonzerodivisor in $(A'/IA')[X]$; therefore $\\bar h'=\\alpha(h_0)$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

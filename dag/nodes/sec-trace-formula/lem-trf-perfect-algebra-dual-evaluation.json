@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-perfect-algebra-dual-evaluation",
+ "kind": "statement",
+ "title": "Perfect-algebra dual evaluation with its precomposition action",
+ "statement": "Let $q:S\\to B$ be a map of commutative rings such that $B[0]$ is perfect over $S$, meaning represented by a bounded complex of finitely generated projective $S$-modules [def-pc-perfect-ring-complex]. Work in ordinary module derived categories [def-weil-abstract-derived-category] with derived tensor [lem-pc-derived-tensor-second-factor-functor] and internal Hom [def-pur-derived-internal-hom]. Put $E=C_q(S[0])\\in D(B)$ using derived coinduction with precomposition action [def-trf-derived-coinduction], and let $\\epsilon:E\\to S[0]$ be its counit after restriction to $S$. For $V\\in D(S)$ let $J_E(V)\\in D(B)$ be derived $S$-linear Hom from $E$ to $V$ with precomposition $B$-action, as in [lem-trf-derived-bimodule-tensor-hom]: on a K-injective $S$-model $I$ it is $\\operatorname{Hom}_S^\\bullet(E^\\bullet,I)$ with $(bh)(z)=h(bz)$. Define $\\alpha_V:B\\otimes_S^{\\mathbf L}V\\to J_E(V)$ to be the adjunct of\n$$E\\otimes_B^{\\mathbf L}(B\\otimes_S^{\\mathbf L}V)\\cong E\\otimes_S^{\\mathbf L}V\\xrightarrow{\\epsilon\\otimes1}V.$$\nThen $\\alpha_V$ is an isomorphism in $D(B)$, natural in arbitrary $V\\in D(S)$. After restriction to $S$ it is the perfect evaluation comparison $B\\otimes_S^{\\mathbf L}V\\to R\\operatorname{Hom}_S(E,V)$ induced by the canonical bidual map $B\\to R\\operatorname{Hom}_S(E,S)$. No flatness of $B$ over $S$, Noetherianity, or boundedness of $V$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent B-linear lift of Tag 07VI (lemma-dual-perfect-complex), with Tag 0A66 (lemma-RHom-out-of-projective); adjunction from dga.tex Tags 09LN (lemma-tensor-hom-adjunction) and 09LT (lemma-tensor-hom-adjoint). Former step 4 of lem-trf-polynomial-diagonal-rhom-reduction; retained argument in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "def-zl-ring-derived-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $U:D(B)\\to D(S)$ for restriction, $O=S[0]$, and $H(-,-)=R\\operatorname{Hom}_S(-,-)$. By [lem-trf-derived-coinduction-adjunction], $UE=H(B,O)$ and the counit is evaluation at $1$. Apply [lem-trf-perfect-complex-derived-biduality] over $S$ to $B[0]$: $UE$ is perfect and the canonical bidual map $d:B[0]\\to H(UE,O)$ is an isomorphism. We use the ordinary Koszul symmetry on module complexes. The additional braided-structure allowance in that node imposes no restriction here.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex; dualizing.tex Tags 0A70, lemma-right-adjoint, and 0A71, lemma-RHom-ext"
+   }
+  },
+  {
+   "text": "For arbitrary $V$, [lem-pc-kflat-resolution] on the one-object ringed site gives a K-flat complex $F$ representing $V$. By [prop-pur-kinjective-resolutions-exist] choose a K-injective resolution $O\\to J$ and a K-injective resolution $q:F\\otimes_S J\\to I$. Thus $QI\\cong V$. Choose any complex $M$ representing $UE$. Apply [lem-trf-perfect-source-evaluation-quasi-isomorphism] to $(M,F,J,I,q)$; its perfectness hypothesis holds by step 1. Its last displayed comparison, with $QJ=O$, is the canonical isomorphism\n$$c_V:V\\otimes_S^{\\mathbf L}H(UE,O)\\xrightarrow{\\sim}H(UE,V).$$\nThe cited node fixes the arrow by its evaluation formula, including the unit comparison on the target. It applies to unbounded $F$ and $M$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-trf-perfect-source-evaluation-quasi-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1), and Tag 0BYN, lemma-internal-hom-diagonal-better"
+   }
+  },
+  {
+   "text": "Form $\\beta_V$ in $D(S)$ as\n$$B\\otimes_S^{\\mathbf L}V\\xrightarrow{\\mathrm{swap}}V\\otimes_S^{\\mathbf L}B\\xrightarrow{1\\otimes d}V\\otimes_S^{\\mathbf L}H(UE,O)\\xrightarrow{c_V}H(UE,V).$$\nAll three arrows are isomorphisms by steps 1--2. By the evaluation normalization of [lem-trf-perfect-source-evaluation-quasi-isomorphism] and the defining transpose of the canonical bidual map in [lem-trf-perfect-complex-derived-biduality], the transpose of $\\beta_V$ is the pairing $UE\\otimes_S^{\\mathbf L}B\\otimes_S^{\\mathbf L}V\\to V$ obtained by tensoring $V$ with the usual evaluation $H(B,O)\\otimes_S^{\\mathbf L}B\\to O$. Indeed uncurrying $c_V(1\\otimes d)$ first evaluates $d(b)$ on $z$ and then multiplies $V$ by that scalar; by the bidual transpose this scalar is evaluation of $z$ on $b$. The swaps are precisely the Koszul symmetries in these transposes. No claim that a finite-projective $S$-representative carries a strict $B$-action is needed.",
+   "uses": [
+    "lem-trf-perfect-source-evaluation-quasi-isomorphism",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, canonical signed bidual evaluation; Tag 0BYN, lemma-internal-hom-diagonal-better, normalized evaluation"
+   }
+  },
+  {
+   "text": "By [lem-trf-derived-bimodule-tensor-hom], the adjunct defining $\\alpha_V$ exists in $D(B)$, has target $J_E(V)$ with the stated precomposition action, and its scalar restriction is the $S$-linear tensor-Hom transpose of its defining pairing. The pairing uses the action $UE\\otimes_S^{\\mathbf L}B\\to UE$ followed by $\\epsilon$ and then tensors $V$. By [lem-trf-derived-coinduction-adjunction] and [def-trf-derived-coinduction], this first pairing is exactly usual evaluation: on the coinduced model $\\operatorname{Hom}_S(B,J)$,\n$$\\epsilon(bz)=(bz)(1)=z(1b)=z(b).$$\nThis is an equality of the evaluation maps into the K-injective coefficient model $J$; pulling back along any resolution used to compute the derived tensor retains the equality. Consequently this is the same pairing as in step 3. The tensor-Hom bijection (also the case $S\\to S$ of the cited bimodule adjunction) is injective, so $U\\alpha_V=\\beta_V$. This establishes the asserted comparison, rather than only existence of an isomorphism between its source and target.",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-derived-coinduction-adjunction",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LN, lemma-tensor-hom-adjunction, and 09LT, lemma-tensor-hom-adjoint; dualizing.tex Tags 0A70 and 0A71, coinduction evaluation"
+   }
+  },
+  {
+   "text": "The defining pairing for $\\alpha_V$ is natural in $V$: for $u:V\\to W$, both pairing composites are $\\epsilon\\otimes u$ after the same tensor associator. Naturality of the adjunction of [lem-trf-derived-bimodule-tensor-hom] therefore gives $J_E(u)\\alpha_V=\\alpha_W(1_B\\otimes u)$ for every derived morphism $u$, not merely for a chosen chain representative. By steps 3--4, $U\\alpha_V$ is an isomorphism. Conservativity in [lem-trf-derived-coinduction-adjunction] makes $\\alpha_V$ an isomorphism in $D(B)$. The only finiteness used was the stated $S$-perfectness of $B[0]$; no flatness of $B/S$, boundedness of $V$, or Noetherian hypothesis entered.",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A70, lemma-right-adjoint; dga.tex Tag 09LT, lemma-tensor-hom-adjoint, naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-trf-perfect-source-evaluation-quasi-isomorphism",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "def-trf-derived-coinduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07VI and 0ATK (1), assembled with the B-linear adjunction of dga.tex Tags 09LN/09LT and the evaluation-at-1 normalization of dualizing.tex Tags 0A70/0A71."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bidual|perfect.*eval|eval.*perfect|tensor.*[Hh]om",
+   "results": "5 hits; top=['Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean']; note=; digest=f852a4e309e04886; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary finite-module contraction and abstract rigid-category adjunctions do not construct this derived B-linear comparison from S-perfectness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a perfect algebra is Hom from its derived dual with the precomposition algebra action",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "12 hits; top=['CategoryTheory.MonoidalClosed', 'CategoryTheory.MonoidalClosed.closed', 'CategoryTheory.MonoidalClosed.mk', 'CategoryTheory.MonoidalClosed.internalHom', 'CategoryTheory.MonoidalClosed.internalHomAdjunction₂', 'CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom', 'CategoryTheory.MonoidalClosed.ofEquiv', 'CategoryTheory.MonoidalClosed.internalHom_obj']; note=; digest=e718cf89d43ce94f; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary finite-module contraction and abstract rigid-category adjunctions do not construct this derived B-linear comparison from S-perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect commutative algebra B over S its derived S dual E satisfies B derived tensor V is derived Hom_S E V as a B module by evaluation",
+   "results": "8 hits; top=[\"FGModuleCat.FGModuleCatEvaluation_apply'\", 'FGModuleCat.FGModuleCatEvaluation_apply', 'TensorProduct.AlgebraTensorModule.dualDistrib', 'Module.Dual.baseChange', 'CharacterModule.dual_rTensor_conj_homEquiv', 'dualTensorHomEquiv', 'Module.Invertible.linearEquivDual', 'FGModuleCat.FGModuleCatEvaluation']; note=; digest=7b93808c2d13f194; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary finite-module contraction and abstract rigid-category adjunctions do not construct this derived B-linear comparison from S-perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dualizable complex its double dual evaluation tensored with an arbitrary complex is an isomorphism to internal Hom from its dual",
+   "results": "8 hits; top=['CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight', 'CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft', 'CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation', 'CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation', 'CategoryTheory.tensorRightHomEquiv', 'CategoryTheory.tensorLeftHomEquiv', 'CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation', 'CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation']; note=; digest=eb686492300a2caf; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary finite-module contraction and abstract rigid-category adjunctions do not construct this derived B-linear comparison from S-perfectness"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|dualTensorHomEquiv|perfect.*eval|eval.*perfect",
+   "results": "{\"t\": \"2026-10-23T14:49:04Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|dualTensorHomEquiv|perfect.*eval|eval.*perfect\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\"], \"digest\": \"ca48538a2838836f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module tensor-Hom and abstract rigid-category identities do not give this comparison in D(B) from S-perfectness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a perfect algebra B over S, the canonical map B derived tensor V to derived Hom over S from the dual of B to V is an isomorphism of B modules",
+   "results": "{\"t\": \"2026-10-23T14:49:05Z\", \"tool\": \"leansearch\", \"query\": \"For a perfect algebra B over S, the canonical map B derived tensor V to derived Hom over S from the dual of B to V is an isomorphism of B modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquivOfBasis\", \"dualTensorHomEquiv\", \"LinearMap.IsPerfPair.dualEval\", \"Module.IsReflexive.of_isPerfPair\", \"dualTensorHomEquivOfBasis_toLinearMap\", \"Module.Invertible.linearEquivDual\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"Module.Invertible.linearEquiv\"], \"digest\": \"41092d11499fe43c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module tensor-Hom and abstract rigid-category identities do not give this comparison in D(B) from S-perfectness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.HasLeftDual",
+   "results": "{\"t\": \"2026-10-23T14:49:05Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.HasLeftDual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module tensor-Hom and abstract rigid-category identities do not give this comparison in D(B) from S-perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra B perfect over S, tensor with B is naturally derived Hom from RHom_S(B,S) with the precomposition B action",
+   "results": "{\"t\": \"2026-10-23T14:49:07Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebra B perfect over S, tensor with B is naturally derived Hom from RHom_S(B,S) with the precomposition B action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.liftEquiv\", \"Algebra.TensorProduct.lift\", \"AlgHom.tensorEqualizer\", \"Algebra.Extension.tensorCotangent\", \"Algebra.FormallySmooth.instTensorProduct\", \"Algebra.TensorProduct.mapOfCompatibleSMul'\", \"Algebra.TensorProduct.algHomOfLinearMapTensorProduct\", \"Algebra.Extension.tensorH1Cotangent\"], \"digest\": \"a85b26ea94ecab2d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module tensor-Hom and abstract rigid-category identities do not give this comparison in D(B) from S-perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable complex has tensor with its double dual isomorphic to internal Hom from its dual, by evaluation",
+   "results": "{\"t\": \"2026-10-23T14:51:05Z\", \"tool\": \"leanfinder\", \"query\": \"A dualizable complex has tensor with its double dual isomorphic to internal Hom from its dual, by evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation\", \"FGModuleCat.FGModuleCatCoevaluation\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"ModuleCat.ihom_coev_app\"], \"digest\": \"da3ff59ce35a9e94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module tensor-Hom and abstract rigid-category identities do not give this comparison in D(B) from S-perfectness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-diagonal-rhom-reduction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Perfect-algebra dual evaluation with its precomposition action (former steps 4).",
+   "via": [
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-perfect-algebra-dual-evaluation",
+  "worker": "stage1",
+  "summary": "N6 retained the full statement and all existing provenance. Five steps combine existing perfect biduality, perfect-source evaluation, the normalized bimodule adjunction and conservative scalar restriction. The evaluation-at-1 calculation identifies the actual B-linear adjunct, and adjunction naturality treats all derived coefficient morphisms. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Perfect-algebra dual evaluation with its precomposition action (former steps 4).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution existence on the one-object ringed site supplies the arbitrary coefficient model used by the existing perfect-source evaluation theorem; the trace unit contains no replacement resolution theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective resolution existence on the one-object ringed site supplies J and I for the existing perfect-source evaluation theorem; it does not replace a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-bfc807c00",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-bfc807c00 (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full, and checked Stacks more-algebra 07VI (lemma-dual-perfect-complex, l.19176) and 0ATK(1) (lemma-internal-hom-evaluate-tensor-isomorphism, l.28653, the M-perfect case, any ring, unbounded objects). The delivery has no new nodes, and the statement is byte-identical to the live node, which is still unsplit, so it is not superseded. The statement is true: on the coinduced model eps(bz)=(bz)(1)=z(b), so the restricted adjunct sends b⊗v to (z ↦ z(b)v). That is V tensored with the bidual map, followed by the perfect-source evaluation for UE. I tested it on q=id, B=0, V=0 and S=Z, B=Z/p with V=Z and V=Z/p; the last gives the Tor_1 class in H^-1, so B need not be flat and V can be unbounded. Step 1: the coinduction-adjunction node gives UE=RHom(B,S) and the counit at 1; biduality over S applies to B[0]. Step 2: the K-flat F, the K-injective J and I, and F⊗J ≅ V by K-flatness meet the hypotheses of perfect-source-evaluation (QM perfect from step 1). Step 3 is an elementary transpose computed from the stated evaluation formula t(f⊗h)(x)=q(f⊗h(x)). Step 4: in the bimodule tensor-Hom node the counit is evaluation and J_E(V) is represented by Hom_S(E,I), so U(alpha) and beta have the same transpose pairing and are equal by injectivity. Step 5: naturality comes from the adjunction, and alpha is an isomorphism because the stated conservativity of U applies. Hypotheses are applied only to UE and B[0] over S; no flatness, Noetherian or boundedness assumption enters. Duplicate check: lem-trf-perfect-algebra-coinduction-tensor has Hom-source B, not E, and no other node states this B-linear lift. No cycle; the parent polynomial-diagonal step 3 uses exactly this statement. I accept the tool_uses lem-pc-kflat-resolution and prop-pur-kinjective-resolutions-exist as generic resolution tools. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectAlgebraDualEvaluation",
+  "declaration": "ModuleCat.perfect_algebra_dual_evaluation",
+  "declarations": [
+   "ModuleCat.perfectAlgebraDual",
+   "ModuleCat.perfectAlgebraHomRestriction",
+   "ModuleCat.perfectAlgebraTensorCancellation",
+   "ModuleCat.perfectAlgebraDualEvaluation",
+   "ModuleCat.perfectAlgebraCoinductionRestriction",
+   "ModuleCat.perfectAlgebraScalarTensor",
+   "ModuleCat.perfectAlgebraBidualMap",
+   "ModuleCat.perfectAlgebraRestrictedEvaluation",
+   "ModuleCat.perfect_algebra_dual_evaluation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectAlgebraDualEvaluation.lean",
+  "statement": "theorem perfect_algebra_dual_evaluation (f : S →+* B) (hB : DerivedCategory.IsPerfectRingComplex ((restrictScalars f).mapDerivedCategory.obj (𝟙_ (DerivedCategory (ModuleCat.{u} B))))) : (∀ V : DerivedCategory (ModuleCat.{u} S), IsIso (perfectAlgebraDualEvaluation f V)) ∧ (∀ (V W : DerivedCategory (ModuleCat.{u} S)) (a : V ⟶ W), (moduleDerivedExtension f).map a ≫ perfectAlgebraDualEvaluation f W = perfectAlgebraDualEvaluation f V ≫ (derivedBimoduleHom f (perfectAlgebraDual f)).map a) ∧ (∀ V : DerivedCategory (ModuleCat.{u} S), (restrictScalars f).mapDerivedCategory.map (perfectAlgebraDualEvaluation f V) ≫ (perfectAlgebraHomRestriction f (perfectAlgebraDual f)).hom.app V = (perfectAlgebraScalarTensor f).hom.app V ≫ perfectAlgebraRestrictedEvaluation f V)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison is the actual bimodule-adjunction transpose of tensor cancellation followed by the evaluation-at-one counit. Cancellation and the underlying scalar-tensor identification are constructed by adjoint uniqueness from the existing normalized enriched coinduction isomorphism. The theorem includes invertibility, naturality for every derived morphism, and equality after restriction with evaluation induced by the canonical signed bidual map. The added statement dependency is the already landed canonical ordinary derived scalar extension, not a new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16ecb70b1",
+  "group": "Q38",
+  "result": "pass",
+  "note": "All node clauses rendered: hB is IsPerfectRingComplex of U(𝟙_ D(B)) = B[0] over S, the only hypothesis (no flatness/Noetherian/boundedness). E = derivedCoinduction(𝟙_); ε = the actual counit. J_E = derivedBimoduleHom of the cited node; B⊗V = landed moduleDerivedExtension. Cancellation = leftAdjointUniq mate of the pinned bimoduleCoinductionHomIso, not arbitrary. α = homEquiv of cancellation ≫ ε▷V ≫ λ, as the node defines it. Conjuncts: IsIso for all V; naturality for every derived a : V ⟶ W; U(α) composed with the J_E restriction equals scalarTensor (adjoint mate of U∘C ≅ ihom UB) followed by curry of evaluation through d = toIhomIhomUnit ≫ pre g, i.e. step 3's β, with correct orientation. Node diff vs side-live: only lean and stmt_deps (+ landed def-zl-ring-derived-scalar-extension, allowed); the theorem stmt_dep is from stage 1, not added. lean.statement verbatim; 9 decls exist; no hollow def; single sorry; docstrings with sources, blueprint and 5 proof steps; no lines over 100 chars; no duplicate found. Edge cases V=0, B=0, f=id, Z→Z/p non-flat with unbounded V covered. No change, so no compile; worker reports scompile clean (14.8 s/10.0 s). Advisory: proof-plan-only plain imports; perfect-source-evaluation node has no Lean record (proof dep only)."
+ }
+}

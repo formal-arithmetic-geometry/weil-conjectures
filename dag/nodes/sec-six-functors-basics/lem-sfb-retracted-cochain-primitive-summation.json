@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-retracted-cochain-primitive-summation",
+ "kind": "statement",
+ "title": "Retraction-corrected primitive assembly and pointwise finite uniform summation",
+ "statement": "Fix a prime $\\ell$ and a normed $\\mathbf Q_\\ell$-vector space $V$, not necessarily complete, with $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$ and $\\|av\\|=|a|_\\ell\\|v\\|$ [def-weil-l-adic-numbers]. Let $S$ be a nonempty profinite space, $G$ a profinite group, and $n\\geq2$. Here profinite means compact Hausdorff totally disconnected, and group operations are continuous. Define $C_V^r=C(S\\times G^r,V)$, with trivial action, $d^0=0$, and\n$$(dh)(s;g_1,\\ldots,g_{r+1})=h(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^ah(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}h(s;g_1,\\ldots,g_r).$$\nLet $(A_j)_{j\\geq1}$ be nonempty closed subsets covering $S$, with continuous retractions $\\rho_j:S\\to A_j$, and locally constant maps $k_i:S\\to\\{1,\\ldots,i\\}$, $i\\geq1$, eventually equal at each $s$ to $j(s)=\\min\\{j:s\\in A_j\\}$. For every $j$ let $T_j:C_V^n\\to C_V^{n-1}$ be a $\\mathbf Q_\\ell$-linear operator given by\n$$(T_j h)(s,x)=\\sum_{a=1}^{u_j}\\alpha_{j,a}h(s,\\psi_{j,a}(x)),$$\nwhere the sum is finite, $\\alpha_{j,a}\\in\\mathbf Q_\\ell$, and $\\psi_{j,a}:G^{n-1}\\to G^n$ is continuous. Suppose $\\|T_j h\\|_\\infty\\leq C_j\\|h\\|_\\infty$ with $C_j\\geq1$; set $D_i=\\max(1,C_1,\\ldots,C_i)$. Let $e_i\\in C_V^n$, $c_i\\in C_V^{n-1}$, $i\\geq0$, satisfy $de_i=0$, $dc_i=e_i$, and for $i\\geq1$,\n$$\\max(\\|e_i\\|_\\infty,\\|c_i\\|_\\infty)\\leq 2^{-(i-1)}/D_i.$$\nAssume $e_i(s,y)=0$ eventually for every fixed $(s,y)$, the partial sums $\\sum_{i=0}^Ne_i$ converge uniformly in $\\widehat V$ to a continuous $z:S\\times G^n\\to V$, and\n$$d(T_j e_i)(a,-)=e_i(a,-)\\quad(a\\in A_j,\\ 1\\leq j\\leq i).$$\nFor $i\\geq1$ and $1\\leq j\\leq i$, with $v_{i,j}=c_i-T_je_i$, define\n$$B_{i,j}(s,x)=(T_je_i)(s,x)+v_{i,j}(s,x)-v_{i,j}(\\rho_j(s),x),\\quad b_0=c_0,\\quad b_i(s,x)=B_{i,k_i(s)}(s,x)\\ (i\\geq1).$$\nThese $B_{i,j}$ and $b_i$ are continuous $V$-valued cochains; for $1\\leq j\\leq i$ one has $dB_{i,j}=e_i$ and $B_{i,j}(s,-)=T_je_i(s,-)$ for every $s\\in A_j$. Moreover\n$$\\|B_{i,j}\\|_\\infty\\leq\\max(\\|c_i\\|_\\infty,C_j\\|e_i\\|_\\infty),\\qquad db_i=e_i,\\qquad \\|b_i\\|_\\infty\\leq2^{-(i-1)}\\ (i\\geq1).$$\nFor each fixed $(s,x)$, $b_i(s,x)=0$ for all sufficiently large $i$. The partial sums $\\sum_{i=0}^Nb_i$ converge uniformly in the norm completion $\\widehat V$, their limit takes values in $V$ and is continuous for its original norm topology, and this limit $b_*$ satisfies $db_*=z$ as an equality of actual cochains. Use [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated scalar analytic input, not a theorem asserted in the blueprint. Old proof steps 11–13: retracted cocycle correction, clopen assembly, finite evaluations, uniform convergence and recovery of the incomplete coefficient space. Exact literature reference WANTED; the full inherited argument is retained in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-numbers",
+  "def-sfb-continuous-inhomogeneous-cochains"
+ ],
+ "proof": [
+  {
+   "text": "Write $R_jh(s,x)=h(\\rho_j(s),x)$, viewing $\\rho_j(s)$ in $S$. Since $\\rho_j$ and the $\\psi_{j,a}$ are continuous, the finite formula for $T_j$ and continuity of addition and scalar multiplication make $T_je_i$, $v_{i,j}$, $R_jv_{i,j}$ and $B_{i,j}$ continuous. The displayed differential changes only the group variables, so direct substitution in each of its finitely many terms gives $d(R_jh)=R_j(dh)$; it is also linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 1."
+   }
+  },
+  {
+   "text": "Fix $i\\geq1$ and $1\\leq j\\leq i$. The hypotheses give $dv_{i,j}=e_i-dT_je_i$, which is zero at every parameter in $A_j$. Since $\\rho_j(s)\\in A_j$, step 1 gives $d(R_jv_{i,j})=0$. Consequently $dB_{i,j}=dT_je_i+dv_{i,j}-dR_jv_{i,j}=e_i$. If $s\\in A_j$, then $\\rho_j(s)=s$, so the two $v_{i,j}$ terms cancel and $B_{i,j}(s,-)=T_je_i(s,-)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 2."
+   }
+  },
+  {
+   "text": "Put $M_{i,j}=\\max(\\|c_i\\|_\\infty,C_j\\|e_i\\|_\\infty)$. The ultrametric inequality and the assumed operator bound give $\\|v_{i,j}(t,x)\\|\\leq M_{i,j}$ for every $(t,x)$. Rewrite $B_{i,j}=c_i-R_jv_{i,j}$; since $\\rho_j(s)\\in S$, its pointwise norm is at most $M_{i,j}$. Taking the supremum proves the claimed bound for $B_{i,j}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 3."
+   }
+  },
+  {
+   "text": "For fixed $i\\geq1$, every $s$ has an open neighbourhood on which $k_i$ is the constant $j=k_i(s)$. On this neighbourhood times $G^{n-1}$, $b_i=B_{i,j}$, so $b_i$ is continuous. Every face in $d$ has the same parameter $s$, hence uses this same $j$; step 2 therefore gives $db_i=e_i$. Since $C_j\\leq D_i$ and $D_i\\geq1$, step 3 and the assumed smallness give $\\|b_i\\|_\\infty\\leq D_i\\max(\\|c_i\\|_\\infty,\\|e_i\\|_\\infty)\\leq2^{-(i-1)}$. Also $b_0=c_0$ is continuous and $db_0=e_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 4."
+   }
+  },
+  {
+   "text": "Fix $(s,x)$ and put $j=j(s)$. Eventually $i\\geq j$ and $k_i(s)=j$; since $s\\in A_j$, step 2 gives $b_i(s,x)=T_je_i(s,x)=\\sum_{a=1}^{u_j}\\alpha_{j,a}e_i(s,\\psi_{j,a}(x))$. Here $j$, the coefficients and all evaluation points are fixed. For each of these finitely many points the hypothesis makes $e_i$ eventually zero. Take a common index for these thresholds and selector stabilization. Then $b_i(s,x)=0$ beyond it. The empty sum $u_j=0$ is already zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 5."
+   }
+  },
+  {
+   "text": "Define $b_*(q)\\in V$ to be the eventual constant value of $P_N(q)=\\sum_{i=0}^Nb_i(q)$, which exists by step 5. For each $N\\geq0$ and $q=(s,x)$ choose $M\\geq N$ beyond the vanishing threshold at $q$. Then $b_*(q)-P_N(q)=\\sum_{i=N+1}^{M}b_i(q)$. Repeated application of the ultrametric inequality and step 4 bounds this finite sum by $2^{-N}$, including when it is empty. The bound is independent of $q$ and tends to zero, proving uniform convergence directly in $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 6."
+   }
+  },
+  {
+   "text": "Fix $q$ and $\\varepsilon>0$, and choose $N$ with $2^{-N}<\\varepsilon$. The finite sum $P_N$ is continuous, so on some neighbourhood of $q$, $\\|P_N(q\\prime)-P_N(q)\\|<\\varepsilon$. Step 6 and the ultrametric inequality yield $\\|b_*(q\\prime)-b_*(q)\\|\\leq\\max(2^{-N},\\|P_N(q\\prime)-P_N(q)\\|)<\\varepsilon$. This proves continuity of $b_*$ for the original norm topology of $V$, with no completeness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 7."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-metric-completion-isometry] to the metric $d_V(v,w)=\\|v-w\\|$. For the canonical $\\iota:V\\to\\widehat V$, step 6 gives $d_{\\widehat V}(\\iota P_N(q),\\iota b_*(q))=\\|P_N(q)-b_*(q)\\|\\leq2^{-N}$. Thus the same partial sums converge uniformly in the completion to $\\iota b_*$. This identifies the completed limit with the actual $V$-valued continuous cochain constructed above.",
+   "uses": [
+    "lem-sfb-metric-completion-isometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 8."
+   }
+  },
+  {
+   "text": "Fix $(s,y)\\in S\\times G^n$. The formula for $d$ uses finitely many points of $S\\times G^{n-1}$. By step 5 choose a common threshold after which $P_N$ equals $b_*$ at every one of these points. Thus $db_*(s,y)=dP_N(s,y)=\\sum_{i=0}^Ne_i(s,y)$ beyond that threshold, by linearity and step 4. For each $\\varepsilon>0$, take such an $N$ also beyond the convergence threshold for the assumed completed series. The distance identity of [lem-sfb-metric-completion-isometry] gives $\\|db_*(s,y)-z(s,y)\\|=d_{\\widehat V}(\\iota\\sum_{i=0}^Ne_i(s,y),\\iota z(s,y))<\\varepsilon$. The nonnegative norm is therefore zero, so $db_*(s,y)=z(s,y)$ in $V$.",
+   "uses": [
+    "lem-sfb-metric-completion-isometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion of old primitive-descent proof steps 11–13; Q59 detailed proof step 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-metric-completion-isometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar analytic input not asserted in the blueprint; explicit expansion of old primitive-descent steps 11–13, also recorded in Sheaf/RepresentationTheory/ParameterCochainCompletionBoundaryDescent.lean:154–185. The finite-value tail estimate constructs the limit directly in V before passing to its completion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Patch small continuous cochain primitives with retractions onto closed parameter sets and finite evaluation operators to obtain a uniformly convergent pointwise finite primitive series over an incomplete nonarchimedean field",
+   "results": {
+    "t": "2026-10-22T06:02:00Z",
+    "tool": "leanfinder",
+    "query": "Patch small continuous cochain primitives with retractions onto closed parameter sets and finite evaluation operators to obtain a uniformly convergent pointwise finite primitive series over an incomplete nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "Summable.multipliableLocallyUniformlyOn_one_add",
+     "Summable.hasProdLocallyUniformlyOn_one_add",
+     "PadicInt.hasSum_mahler",
+     "Summable.multipliableLocallyUniformlyOn_nat_one_add"
+    ],
+    "digest": "79f023eb8162dcd4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic continuous-map summation and Mahler series do not construct retraction-corrected primitives or prove pointwise eventual vanishing over an incomplete coefficient space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise finite summation of p-adic continuous cochain primitives using eventually stabilizing clopen choices and closed set retractions",
+   "results": {
+    "t": "2026-10-22T06:02:11Z",
+    "tool": "leanfinder",
+    "query": "Pointwise finite summation of p-adic continuous cochain primitives using eventually stabilizing clopen choices and closed set retractions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.hasSum_mahler",
+     "PadicInt.mahlerSeries_apply",
+     "PadicInt.mahlerSeries",
+     "PadicInt.mahlerSeries_apply_nat",
+     "PadicInt.hasSum_mahlerSeries",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "PadicInt.mahlerTerm"
+    ],
+    "digest": "2439d23a938b5c1d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic continuous-map summation and Mahler series do not construct retraction-corrected primitives or prove pointwise eventual vanishing over an incomplete coefficient space."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, Summable",
+   "results": {
+    "t": "2026-10-22T06:02:12Z",
+    "tool": "loogle",
+    "query": "ContinuousMap, Summable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousMap.summable_apply",
+     "ContinuousMap.tsum_apply",
+     "ContinuousMap.summable_of_locally_summable_norm",
+     "MeasureTheory.integrableOn_iUnion_of_summable_norm_restrict",
+     "MeasureTheory.integrable_of_summable_norm_restrict",
+     "intervalIntegral.hasSum_intervalIntegral_of_summable_norm",
+     "intervalIntegral.tsum_intervalIntegral_eq_of_summable_norm",
+     "ContinuousMap.hasSum_of_hasSum_Lp"
+    ],
+    "digest": "09c4a68586b283cf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic continuous-map summation and Mahler series do not construct retraction-corrected primitives or prove pointwise eventual vanishing over an incomplete coefficient space."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|cocycle).*(retract|pointwise|summable)|(retract|pointwise|summable).*(cochain|cocycle)",
+   "results": {
+    "t": "2026-10-22T06:02:12Z",
+    "tool": "grep",
+    "query": "(cochain|cocycle).*(retract|pointwise|summable)|(retract|pointwise|summable).*(cochain|cocycle)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic continuous-map summation and Mahler series do not construct retraction-corrected primitives or prove pointwise eventual vanishing over an incomplete coefficient space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Retraction correction of cochain primitives and pointwise finite nonarchimedean series",
+   "results": {
+    "t": "2026-10-22T06:02:13Z",
+    "tool": "leansearch",
+    "query": "Retraction correction of cochain primitives and pointwise finite nonarchimedean series",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CPolynomialAt",
+     "retractionOfSectionOfKerSqZero",
+     "sectionOfRetractionKerToTensorAux.congr_simp",
+     "FormalMultilinearSeries.hasFiniteFPowerSeriesOnBall_changeOrigin",
+     "CategoryTheory.Retract.r",
+     "inhomogeneousCochains.d",
+     "CategoryTheory.ShortComplex.Splitting.r",
+     "FormalMultilinearSeries.rightInv_removeZero"
+    ],
+    "digest": "6b572fac19753b15"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic continuous-map summation and Mahler series do not construct retraction-corrected primitives or prove pointwise eventual vanishing over an incomplete coefficient space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Patch continuous group cochain primitives using retractions and eventually constant clopen choices; prove a pointwise finite series converges uniformly in an incomplete nonarchimedean normed vector space",
+   "results": {
+    "t": "2026-10-22T11:19:24Z",
+    "tool": "leanfinder",
+    "query": "Patch continuous group cochain primitives using retractions and eventually constant clopen choices; prove a pointwise finite series converges uniformly in an incomplete nonarchimedean normed vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "PadicInt.mahlerSeries_apply",
+     "PadicInt.hasSum_mahlerSeries",
+     "PadicInt.hasSum_mahler",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "NonarchimedeanAddGroup.summable_of_tendsto_cofinite_zero",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "4023ffcd5fd808cd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern continuous-cohomology definitions, approximation, Mahler expansions or generic complete-target summation. None constructs these corrected primitives or the stabilizing finite-evaluation argument. FunctionSeries.lean:28–53 assumes a complete NormedAddCommGroup, whereas V here need not be complete; our proof uses finite pointwise sums and a direct uniform tail bound."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|cocycle).*(retract|pointwise|summable)|(retract|pointwise|summable).*(cochain|cocycle)",
+   "results": {
+    "t": "2026-10-22T11:20:16Z",
+    "tool": "grep",
+    "query": "(cochain|cocycle).*(retract|pointwise|summable)|(retract|pointwise|summable).*(cochain|cocycle)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern continuous-cohomology definitions, approximation, Mahler expansions or generic complete-target summation. None constructs these corrected primitives or the stabilizing finite-evaluation argument. FunctionSeries.lean:28–53 assumes a complete NormedAddCommGroup, whereas V here need not be complete; our proof uses finite pointwise sums and a direct uniform tail bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Retraction corrected continuous cochain primitives form a uniformly convergent pointwise eventually zero series in a noncomplete normed vector space",
+   "results": {
+    "t": "2026-10-22T11:20:16Z",
+    "tool": "leansearch",
+    "query": "Retraction corrected continuous cochain primitives form a uniformly convergent pointwise eventually zero series in a noncomplete normed vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "tendstoUniformlyOn_tsum_of_cofinite_eventually",
+     "tendstoUniformly_tsum_of_cofinite_eventually",
+     "CPolynomialOn.continuous",
+     "HasFPowerSeriesOnBall.tendstoUniformlyOn",
+     "FormalMultilinearSeries.continuousOn_of_finite",
+     "UniformFun.instCompleteSpace",
+     "PowerSeries.WithPiTopology.instCompleteSpace",
+     "CPolynomialAt.continuousAt"
+    ],
+    "digest": "5d55877cb136ee96"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern continuous-cohomology definitions, approximation, Mahler expansions or generic complete-target summation. None constructs these corrected primitives or the stabilizing finite-evaluation argument. FunctionSeries.lean:28–53 assumes a complete NormedAddCommGroup, whereas V here need not be complete; our proof uses finite pointwise sums and a direct uniform tail bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": {
+    "t": "2026-10-22T11:20:17Z",
+    "tool": "loogle",
+    "query": "\"continuousCohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.π",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.map_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.map",
+     "ContinuousCohomology.resolutionMap_id"
+    ],
+    "digest": "d0b4f6d4782fce60"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern continuous-cohomology definitions, approximation, Mahler expansions or generic complete-target summation. None constructs these corrected primitives or the stabilizing finite-evaluation argument. FunctionSeries.lean:28–53 assumes a complete NormedAddCommGroup, whereas V here need not be complete; our proof uses finite pointwise sums and a direct uniform tail bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Retraction correction c minus pullback of c minus T e gives a primitive agreeing with T e on a closed retract; finite evaluation gives eventual zero terms and uniform summation",
+   "results": {
+    "t": "2026-10-22T11:20:27Z",
+    "tool": "leanfinder",
+    "query": "Retraction correction c minus pullback of c minus T e gives a primitive agreeing with T e on a closed retract; finite evaluation gives eventual zero terms and uniform summation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FormalMultilinearSeries.changeOrigin_eval_of_finite",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "FormalMultilinearSeries.changeOriginSeries_sum_eq_partialSum_of_finite",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "PiNat.exists_retraction_of_isClosed",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "FormalMultilinearSeries.comp_rightInv_aux2"
+    ],
+    "digest": "1f478f3f5884e7f8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern continuous-cohomology definitions, approximation, Mahler expansions or generic complete-target summation. None constructs these corrected primitives or the stabilizing finite-evaluation argument. FunctionSeries.lean:28–53 assumes a complete NormedAddCommGroup, whereas V here need not be complete; our proof uses finite pointwise sums and a direct uniform tail bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: scalar analytic base. Old proof steps 11–13: retracted cocycle correction, clopen assembly, finite evaluations, uniform convergence and recovery of the incomplete coefficient space.",
+   "via": [
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-retracted-cochain-primitive-summation",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Wrote the retraction differential calculation, ultrametric bound, locally constant assembly, finite-evaluation eventual vanishing, direct finite-tail uniform convergence in V, epsilon continuity, completion identification and actual coboundary identity. Added one exact Mathlib leaf for metric-completion isometry; the existing normed-field completion node cannot be applied to an arbitrary normed vector space. No Lean writing or compilation. Repair of returned head 13626ca96eb: rebased through deliver.py onto current origin/sheaf-dag, compared the retained statement and dependencies with the live unsplit item, re-read the scalar/size definitions and completion-isometry leaf, and made the final norm-zero argument explicit without an uncited limit-uniqueness theorem. The original proof route and search evidence are retained.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), scalar analytic base below the open-direct-image comparison; expands old parameter-cochain primitive-descent proof steps 11–13. The inherited blueprint.from.node=null is retained: this is an agent-created analytic input, not a blueprint theorem. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-332a9590d",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-332a9590d (reviewer sub-agent of L); spot-checked: Q59 S1 split of lem-sfb-retracted-cochain-primitive-summation @332a9590. This is a re-delivery of 13626ca9. That head was read and PASSed, then returned only because landing refused the side-project promotion ('completed in this project's DAG but not in th[e side project]'), not for any mathematical fault. Diff against the 13626ca9 snapshot: the new leaf lem-sfb-metric-completion-isometry is byte-identical; in the item only step 9's text and the split_report date/summary changed. The item's statement, stmt_deps, title, source, unit and blueprint equal the live unsplit item exactly, so no target was weakened. The item is still unsplit in live and side-live, and the leaf is absent from both, so nothing superseded this delivery. There is no repair note and no SGA. proof_deps = {leaf} = the union of the step uses. I re-read all 9 steps. They check out: d∘R_j=R_j∘d; dB=e_i via the hypothesis on A_j and ρ_j(s)∈A_j; B=c−R_jv gives the max bound with no factor 2; the locally constant k_i≤i assembly with C_j≤D_i, D_i≥1 gives ‖b_i‖≤2^{-(i-1)}; eventual vanishing works on a fixed finite evaluation list at j(s); tails are ≤2^{-N} uniformly; ε-continuity holds in V. The new step 9 is correct: past a common threshold at the n+1 face points, db_*(s,y)=Σ_{i≤N}e_i(s,y), and the distance identity gives ‖db_*−z‖<ε, hence 0. The leaf is the exact specialization of Mathlib UniformSpace.Completion.coe_isometry (MetricSpace/Completion.lean:146–158, any pseudometric space), statement-only with stmt_dep def-weil-l-adic-numbers. It is not a duplicate: lem-sfb-normed-field-completion and lem-sfb-pointwise-finite-ultrametric-cochain-series (Q57) both require V to be a field. Advisory: that Q57 node could be generalized to normed vector spaces. Edge cases V=0, n=2, u_j=0, j=i, A_j=S and noncomplete V all hold. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RetractedCochainPrimitiveSummation",
+  "declaration": "ContinuousCohomology.exists_retractedCochainPrimitiveSummation",
+  "declarations": [
+   "ContinuousCohomology.retractedTrivialD",
+   "ContinuousCohomology.exists_retractedCochainPrimitiveSummation"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/RetractedCochainPrimitiveSummation.lean",
+  "statement": "theorem exists_retractedCochainPrimitiveSummation (l : ℕ) [Fact l.Prime] (V : Type u) [NormedAddCommGroup V] [NormedSpace ℚ_[l] V] (hultra : ∀ v w : V, ‖v + w‖ ≤ max ‖v‖ ‖w‖) (S : Type w) [TopologicalSpace S] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] [Nonempty S] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (n : ℕ) (A : ℕ+ → Set S) (hA : ∀ j : ℕ+, (A j).Nonempty ∧ IsClosed (A j)) (hcover : ∀ s : S, ∃ j : ℕ+, s ∈ A j) (rho : ∀ j : ℕ+, C(S, A j)) (hrho : ∀ (j : ℕ+) (a : A j), rho j a = a) (k : ∀ i : ℕ+, LocallyConstant S {j : ℕ+ // j ≤ i}) (hk : ∀ s : S, ∃ j : ℕ+, s ∈ A j ∧ (∀ q : ℕ+, s ∈ A q → j ≤ q) ∧ ∀ᶠ i : ℕ+ in atTop, (k i s).val = j) (T : ℕ+ → C(S × (Fin (n + 2) → G), V) →ₗ[ℚ_[l]] C(S × (Fin (n + 1) → G), V)) (uT : ℕ+ → ℕ) (alpha : ∀ j : ℕ+, Fin (uT j) → ℚ_[l]) (psi : ∀ j : ℕ+, Fin (uT j) → C((Fin (n + 1) → G), (Fin (n + 2) → G))) (hT : ∀ (j : ℕ+) (h : C(S × (Fin (n + 2) → G), V)) (s : S) (x : Fin (n + 1) → G), T j h (s, x) = ∑ a : Fin (uT j), alpha j a • h (s, psi j a x)) (C : ℕ+ → ℝ) (hC : ∀ j : ℕ+, 1 ≤ C j) (hbound : ∀ (j : ℕ+) (h : C(S × (Fin (n + 2) → G), V)), ‖T j h‖ ≤ C j * ‖h‖) (e : ℕ → C(S × (Fin (n + 2) → G), V)) (c : ℕ → C(S × (Fin (n + 1) → G), V)) (he : ∀ (i : ℕ) (s : S), retractedTrivialD l V G (n + 2) ((e i).curry s) = 0) (hc : ∀ (i : ℕ) (s : S), retractedTrivialD l V G (n + 1) ((c i).curry s) = (e i).curry s) (hsmall : ∀ i : ℕ, 1 ≤ i → max ‖e i‖ ‖c i‖ ≤ (2 : ℝ)⁻¹ ^ (i - 1) / max 1 (⨆ j : Fin i, C ⟨j.val + 1, Nat.succ_pos j.val⟩)) (hevent : ∀ q : S × (Fin (n + 2) → G), ∀ᶠ i : ℕ in atTop, e i q = 0) (z : C(S × (Fin (n + 2) → G), V)) (hz : TendstoUniformly (fun N q ↦ ((∑ i ∈ Finset.range (N + 1), e i q : V) : Completion V)) (fun q ↦ (z q : Completion V)) atTop) (hexact : ∀ (i j : ℕ+), j ≤ i → ∀ a : A j, retractedTrivialD l V G (n + 1) ((T j (e i)).curry a) = (e i).curry a) : ∃ (B : ∀ i : ℕ+, {j : ℕ+ // j ≤ i} → C(S × (Fin (n + 1) → G), V)) (b : ℕ → C(S × (Fin (n + 1) → G), V)) (bStar : C(S × (Fin (n + 1) → G), V)), (∀ (i : ℕ+) (j : {j : ℕ+ // j ≤ i}) (s : S) (x : Fin (n + 1) → G), B i j (s, x) = T j.val (e i) (s, x) + (c i (s, x) - T j.val (e i) (s, x)) - (c i ((rho j.val s : S), x) - T j.val (e i) ((rho j.val s : S), x))) ∧ b 0 = c 0 ∧ (∀ (i : ℕ+) (s : S) (x : Fin (n + 1) → G), b i (s, x) = B i (k i s) (s, x)) ∧ (∀ (i : ℕ+) (j : {j : ℕ+ // j ≤ i}) (s : S), retractedTrivialD l V G (n + 1) ((B i j).curry s) = (e i).curry s) ∧ (∀ (i : ℕ+) (j : {j : ℕ+ // j ≤ i}) (s : S), s ∈ A j.val → ∀ x : Fin (n + 1) → G, B i j (s, x) = T j.val (e i) (s, x)) ∧ (∀ (i : ℕ+) (j : {j : ℕ+ // j ≤ i}), ‖B i j‖ ≤ max ‖c i‖ (C j.val * ‖e i‖)) ∧ (∀ (i : ℕ) (s : S), retractedTrivialD l V G (n + 1) ((b i).curry s) = (e i).curry s) ∧ (∀ i : ℕ+, ‖b i‖ ≤ (2 : ℝ)⁻¹ ^ ((i : ℕ) - 1)) ∧ (∀ q : S × (Fin (n + 1) → G), ∀ᶠ i : ℕ in atTop, b i q = 0) ∧ TendstoUniformly (fun N q ↦ ((∑ i ∈ Finset.range (N + 1), b i q : V) : Completion V)) (fun q ↦ (bStar q : Completion V)) atTop ∧ ∀ s : S, retractedTrivialD l V G (n + 1) (bStar.curry s) = z.curry s",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper abbreviation specializes the existing continuousInhomogeneousD to the trivial action on the given normed vector space. Degree n+2 covers exactly n>=2 in the node. Positive indices and the subtype j<=i retain the stated range of B. The finite maximum D_i is written directly as max 1 of the finite supremum of C_1,...,C_i. The added definition dependency def-sfb-continuous-inhomogeneous-cochains owns the reused continuousInhomogeneousD declaration in the unchanged ContinuousCochainFiniteIndexTransfer module; the transfer existence theorem is not a statement dependency; no statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-902a1edf7",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of 454d3a9c2c3a (RETURN H2). Lean module byte-identical; item node changes only stmt_deps (theorem lem-sfb-continuous-cochain-finite-index-transfer → def-sfb-continuous-inhomogeneous-cochains, the existing:true owner of continuousInhomogeneousD) and lean.note; the def record copy equals live exactly; the report has Worker report, Second reading by NP and repair sections. Independently re-checked: trivial-action differential faces/signs incl. last face and d^0=0, degree n+2 ↔ n≥2, independent universes u v w, retraction as subtype equality, least-index pointwise selector stabilization, D_i = max 1 of finite iSup, completion casts on values, all 11 conclusion clauses incl. continuous V-valued bStar with dbStar=z in V; provability by hand (dR_jv=0 via hexact at ρ_j s, B=c−R_jv bound, C_j≤D_i). Edge cases V=0, incomplete V, n=2, u_j=0, j=i, A_j=S, i=0 covered. Statement verbatim in file; docstrings have source and blueprint tags plus 9 proof steps; only proof is sorry; no name clash in live; no compile (no file changed)."
+ }
+}

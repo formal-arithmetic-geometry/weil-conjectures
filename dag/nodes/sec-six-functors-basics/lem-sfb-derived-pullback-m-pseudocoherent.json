@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-derived-pullback-m-pseudocoherent",
+ "kind": "statement",
+ "title": "Derived pullback preserves degreewise pseudo-coherence",
+ "statement": "Let $h:T\\to Y$ be any morphism of schemes [def-pc-scheme], let $m\\in\\mathbf Z$, and let $K\\in D(\\mathcal O_Y)$ [def-pc-derived-category]. If $K$ is $m$-pseudo-coherent, in the local strictly perfect approximation sense of [def-sfb-m-pseudo-coherent-complex], then $Lh^*K\\in D(\\mathcal O_T)$ [def-pc-derived-pullback] is $m$-pseudo-coherent. No flatness of $h$, quasi-coherence of the cohomology of $K$, or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U7, lemma-pseudo-coherent-pullback, restricted from ringed spaces to schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose an open covering $Y=\\bigcup_i V_i$ and maps $\\alpha_i:P_i\\to K|_{V_i}$ with $P_i$ strictly perfect, cohomology isomorphisms above $m$ and a surjection at $m$, using [def-sfb-m-pseudo-coherent-complex]. Put $U_i=h^{-1}(V_i)$ and $h_i:U_i\\to V_i$. The $U_i$ cover $T$. The natural open-restriction comparison [lem-pc-derived-pullback-open-restriction-universes], applied to $h,U_i,V_i$, identifies $(Lh^*K)|_{U_i}$ with $Lh_i^*(K|_{V_i})$.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  },
+  {
+   "text": "Complete $\\alpha_i$ to a distinguished triangle $P_i\\to K|_{V_i}\\to C_i\\to P_i[1]$ by TR1 [def-weil-triangulated-category]. In its long exact cohomology sequence [lem-sf-derived-homology-long-exact], the segment $H^j(P_i)\\to H^j(K|_{V_i})\\to H^j(C_i)\\to H^{j+1}(P_i)\\to H^{j+1}(K|_{V_i})$ shows $H^j(C_i)=0$ for $j\\ge m$: the first map is surjective and the last injective for every such $j$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  },
+  {
+   "text": "The factorization of $Lh_i^*$ in [def-pc-derived-pullback] is termwise module inverse image followed by derived extension of scalars along $h_i^{-1}\\mathcal O_{V_i}\\to\\mathcal O_{U_i}$. Module inverse image is additive and exact by [lem-pc-inverse-image-module-functor-exact], so its induced functor on derived categories is triangulated by [lem-sf-exact-functor-derived-triangulated]. The scalar-extension functor is triangulated by clause (2) of [lem-pur-derived-change-of-rings]. The composite therefore sends the triangle of step 2 to a distinguished triangle $Lh_i^*P_i\\to Lh_i^*(K|_{V_i})\\to Lh_i^*C_i\\to (Lh_i^*P_i)[1]$.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-inverse-image-module-functor-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  },
+  {
+   "text": "Exact module inverse image [lem-pc-inverse-image-module-functor-exact] and [lem-weil-pbc-exact-functor-complex-cohomology] give $H^j(h_i^{-1}C_i)\\cong h_i^{-1}H^j(C_i)=0$ for $j\\ge m$, computed on any representative. Apply clause (a) of [lem-weil-pbc-ringed-tensor-cohomological-bounds] on the site of opens of $U_i$, with $R=h_i^{-1}\\mathcal O_{V_i}$, $S=\\mathcal O_{U_i}$ and $a=m-1$. The factorization [def-pc-derived-pullback] gives $H^j(Lh_i^*C_i)=0$ for $j>m-1$, equivalently for $j\\ge m$. The cited bound requires no flatness of $R\\to S$.",
+   "uses": [
+    "lem-pc-inverse-image-module-functor-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  },
+  {
+   "text": "The object represented by $P_i$ is perfect, using the one-member covering in [def-pc-perfect-complex]. Thus [lem-pc-derived-pullback-perfect] makes $Lh_i^*P_i$ perfect on $U_i$. By the same definition choose an open covering $U_i=\\bigcup_b W_{ib}$ and strictly perfect $Q_{ib}$ with isomorphisms $Q_{ib}\\cong(Lh_i^*P_i)|_{W_{ib}}$. Restriction is the exact module restriction in [lem-pc-derived-pullback-open-restriction-universes]; by [lem-sf-exact-functor-derived-triangulated] it preserves the triangle of step 3, and by [lem-weil-pbc-exact-functor-complex-cohomology] its third object still has zero cohomology in degrees $\\ge m$. Compose the first arrow with the displayed isomorphism to obtain $Q_{ib}\\to(Lh_i^*(K|_{V_i}))|_{W_{ib}}$. Naturality of the comparison in step 1 identifies this target with $(Lh^*K)|_{W_{ib}}$.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  },
+  {
+   "text": "For each arrow of step 5, apply [lem-sf-derived-homology-long-exact] to its distinguished triangle. For $j>m$ both adjacent groups $H^{j-1}((Lh_i^*C_i)|_{W_{ib}})$ and $H^j((Lh_i^*C_i)|_{W_{ib}})$ vanish, so $H^j(Q_{ib})\\to H^j((Lh^*K)|_{W_{ib}})$ is an isomorphism. At $j=m$ the latter adjacent group vanishes, so this map is surjective. The $W_{ib}$ cover $T$, and these strictly perfect approximations are precisely the witnesses in [def-sfb-m-pseudo-coherent-complex]. Hence $Lh^*K$ is $m$-pseudo-coherent.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-pc-derived-pullback",
+  "lem-pc-inverse-image-module-functor-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "def-pc-perfect-complex",
+  "lem-pc-derived-pullback-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U7, lemma-pseudo-coherent-pullback, proof; using the derived-category formulation of Tags 08CB and 08CC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback preserves m pseudo coherent complexes of structure modules on schemes",
+   "results": "{\"t\": \"2026-10-23T18:33:29Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pullback preserves m pseudo coherent complexes of structure modules on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"b865af1accb8334a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:33:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T18:33:27Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived pullback of an m pseudo coherent complex is m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T18:33:28Z\", \"tool\": \"leansearch\", \"query\": \"A derived pullback of an m pseudo coherent complex is m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoherent.pullback\", \"CategoryTheory.Precoherent.recOn\", \"CategoryTheory.ShortComplex.SnakeInput.P\", \"CategoryTheory.IsPullback.exact_shortComplex'\", \"CategoryTheory.MorphismProperty.Over.hasPullbacks\", \"CategoryTheory.Limits.hasPullback_of_comp_mono\", \"CategoryTheory.IsPullback.mono_shortComplex'_f\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\"], \"digest\": \"74e0fd05c44534fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free approximations to complexes are preserved by left derived inverse image",
+   "results": "{\"t\": \"2026-10-23T18:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally free approximations to complexes are preserved by left derived inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.hasPointwiseLeftDerivedFunctor_of_inverts\", \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\"], \"digest\": \"dd6227e261ec84ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived inverse image of sheaves of modules preserves m pseudo coherent complexes on schemes",
+   "results": "{\"t\": \"2026-10-23T19:07:39Z\", \"tool\": \"leanfinder\", \"query\": \"Left derived inverse image of sheaves of modules preserves m pseudo coherent complexes on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"SheafOfModules.IsFinitePresentation\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\"], \"digest\": \"06d0baf0a7e87bcc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed the returned declarations; they concern ordinary pullback, finite presentation, generic exact derived functors, or unrelated local properties, not m-pseudo-coherence of derived scheme pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T19:08:10Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed the returned declarations; they concern ordinary pullback, finite presentation, generic exact derived functors, or unrelated local properties, not m-pseudo-coherence of derived scheme pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T19:08:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed the returned declarations; they concern ordinary pullback, finite presentation, generic exact derived functors, or unrelated local properties, not m-pseudo-coherence of derived scheme pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback sends local finite projective approximations through degree m to such approximations",
+   "results": "{\"t\": \"2026-10-23T19:08:38Z\", \"tool\": \"leansearch\", \"query\": \"Derived pullback sends local finite projective approximations through degree m to such approximations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.pullbackSnd\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"CategoryTheory.Limits.pullbackIsPullback\", \"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.PreZeroHypercover.pullback₁\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj_proj\"], \"digest\": \"24d85b05b128b453\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed the returned declarations; they concern ordinary pullback, finite presentation, generic exact derived functors, or unrelated local properties, not m-pseudo-coherence of derived scheme pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex locally approximated by bounded finite free complexes remains so after derived inverse image",
+   "results": "{\"t\": \"2026-10-23T19:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"A complex locally approximated by bounded finite free complexes remains so after derived inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.topologically_isLocalAtTarget\", \"AlgebraicGeometry.topologically_isLocalAtSource\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally\", \"IsLocalDiffeomorphAt.localInverse_eventuallyEq_right\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"ApproximatesLinearOn.image_mem_nhds\", \"AlgebraicGeometry.topologically_isLocalAtTarget'\", \"exists_closed_cover_approximatesLinearOn_of_hasFDerivWithinAt\"], \"digest\": \"316e4e0eda918f1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed the returned declarations; they concern ordinary pullback, finite presentation, generic exact derived functors, or unrelated local properties, not m-pseudo-coherence of derived scheme pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-flat-base-change",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, equivalence (2) and (3): apply composition-relative-pseudo-coherent to id:P -> P after establishing relative pseudo-coherence of the structure sheaf. Prerequisite for Tag 09UT, middle paragraph: base change of the relatively pseudo-coherent structure sheaf along the polynomial projection. Prerequisite of Tag 09UR, final sentence: absolute m-pseudo-coherence of the pulled-back ambient complex, by Cohomology Tag 09U7.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-flat-base-change",
+    "lem-sfb-relative-pseudocoherence-composition",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-derived-pullback-m-pseudocoherent",
+  "worker": "stage1",
+  "group": "Q33",
+  "summary": "Read Stacks 09U7 and its cone proof. Retained the statement and statement dependencies; supplied six explicit steps using existing general-purpose nodes for cone cohomology, open comparisons, exact inverse image, derived scalar extension and perfect pullback. Refine the pulled-back perfect source to strictly perfect models rather than implicitly treating perfectness as strict perfectness. No new nodes, no attachment, no statement dispute; Mathlib searches found no match.",
+  "blueprint": "Supporting prerequisite for the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain recorded in blueprint.from.place: absolute degree-m pseudo-coherence in Tag 09UR via Tag 09U7. Read the current latest blueprint chapter, unit and direct-images proof; no matching absolute m-pseudo-coherent pullback statement was found. blueprint_refs.py ancestor returns None; preserve the inherited null ancestor and via list. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-pullback-open-restriction-universes",
+    "why": "Generic natural comparison of derived pullback with open restriction, for the inverse-image cover and its refinements; the unit has no replacement for this module-derived-category comparison."
+   },
+   {
+    "node": "lem-pc-inverse-image-module-functor-exact",
+    "why": "Generic exactness of module inverse image, before changing the structure ring; this is not exactness of ordinary tensor pullback."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise derived triangulatedness of an exact functor, applied to module inverse image and open restriction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic triangulatedness of derived scalar extension, for the structure-ring map in the definition of scheme pullback."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic cohomology comparison for exact functors, applied to inverse image and open restriction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "why": "Generic upper bound for derived scalar extension, clause (a), applied with a=m-1; no unit-specific coefficient or finiteness theorem supplies this bound."
+   },
+   {
+    "node": "lem-pc-derived-pullback-perfect",
+    "why": "Generic preservation of perfect structure-module complexes, used only for the strictly perfect approximation source, then refined to strictly perfect local representatives. Its DAG closure does not use this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-inverse-image-module-functor-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "lem-pc-derived-pullback-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-d32c510b3",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-d32c510b3 (reviewer sub-agent of L); spot-checked: PASS for Q33 lem-sfb-derived-pullback-m-pseudocoherent at d32c510b. Delivery shape: one commit with 0 new nodes; statement and stmt_deps unchanged; proof_deps equals the union of step uses; no repair note; the item is still unsplit in clones/live and clones/side-live, so the delivery is not superseded; no SGA source. I read Stacks 09U7 (cohomology.tex l.12014-12056) and the definition at l.11958, and the six steps follow that proof. Step 1: the open-restriction-universes node applies to U_i=h^{-1}V_i (only U ⊆ f^{-1}V is needed) and gives the restriction iso. Step 2: TR1 plus the long exact sequence give H^j(C_i)=0 for j>=m (elementary, checked). Step 3: Lh_i^* = termwise inverse image (exact by lem-pc-inverse-image-module-functor-exact, so triangulated by lem-sf-exact-functor-derived-triangulated) followed by change of rings, triangulated by clause (2) of lem-pur-derived-change-of-rings. Step 4: exact inverse image commutes with H^j; lem-weil-pbc-ringed-tensor-cohomological-bounds clause (a) with a=m-1 on the site of opens of U_i needs no Tor or flatness hypothesis, which replaces Stacks' 'dual of 05TC'. Step 5: P_i is perfect, so Lh_i^*P_i is perfect by lem-pc-derived-pullback-perfect, whose closure does not reach the item; the delivery then refines to strictly perfect Q_ib locally, so perfect is never used in place of strictly perfect (C4 avoided). The target identification holds by applying the open-restriction node to (h,W,V_i) and (h_i,W,V_i). Step 6: the reverse long-exact-sequence chase gives iso for j>m and surjection at j=m (checked). Minor point: the identification of the definition's Lj^* restriction with exact restriction is left implicit; it follows in one line from the same node with f=j, so this is a note and not a fault. Edge cases checked: Spec F_2 -> Spec Z with Z/2 = [Z -2-> Z]; Q, which is 1- but not 0-pseudo-coherent; K=0, empty T, negative m, non-quasi-compact T. No duplicate found by grepping for 09U7 and for pseudo-coherent pullback statements; same_as [] is correct. The 7 off-unit tool_uses are accepted as generic: open-restriction, inverse-image exactness, exact functor => triangulated, derived change of rings, exact-functor cohomology, scalar-extension bound (a), perfect pullback. The report names a citations.json that is not in the commit; this affects the report only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackMPseudoCoherent",
+  "declaration": "AlgebraicGeometry.derivedPullback_preserves_mPseudoCoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackMPseudoCoherent.lean",
+  "statement": "theorem derivedPullback_preserves_mPseudoCoherent {T Y : Scheme.{u}} (h : T ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [∀ U : T.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (m : ℤ) (K : schemeDerivedCategory Y) (hK : Scheme.IsMPseudoCoherent Y m K) : Scheme.IsMPseudoCoherent T m ((derivedPullback h).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6eeb64731",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09U7 (scheme case) clause by clause: arbitrary h:T⟶Y, m:ℤ, K:schemeDerivedCategory Y, hyp Scheme.IsMPseudoCoherent Y m K (landed def read in side-live), concl IsMPseudoCoherent T m ((derivedPullback h).obj K). Binders are exactly the HasDerivedCategory.{w} instances that derivedPullback and IsMPseudoCoherent require; single w, no autoImplicit. Node equals side-live except lean; lean.statement verbatim; only sorry is the proof; docstrings carry the source place, blueprint tag and the six proof steps. No duplicate (rg IsMPseudoCoherent/09U7 in side-live). Edge cases: empty T, K=0, negative m, non-flat, non-qc. No compile (no file changed); worker compile + deliver2 dry run OK. No findings."
+ }
+}

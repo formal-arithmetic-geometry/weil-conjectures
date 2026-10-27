@@ -12,107 +12,58 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak m$ be the unique maximal ideal and $k=R/\\mathfrak m$. This quotient is a field: for $a\\notin\\mathfrak m$, maximality gives $1=ra+b$ with $b\\in\\mathfrak m$, so $\\bar r\\bar a=1$. Reduction is a local ring homomorphism $\\rho:R\\to k$, since its inverse image of the maximal ideal $0$ of $k$ is $\\mathfrak m$. Reducing the coefficients of $\\alpha,\\beta$ in the standard bases gives $k$-linear maps $a,b:k^n\\to k^m$. Both are surjective: lift a target vector coordinatewise to $R^m$, choose a preimage under the corresponding original surjection, and reduce that preimage. Put $V=k^n$, $A=\\ker a$ and $B=\\ker b$. The case $m=0$ already has the solution $U=0$; the following argument also covers it.",
+   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$. Apply [lem-trf-residue-simultaneous-section-lift] to form the field $k=R/\\mathfrak m$ and the reduced maps $a,b:k^n\\to k^m$. Its reduction assertion applies to the two given surjections, so both $a$ and $b$ are surjective.",
    "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
-   }
-  },
-  {
-   "text": "We first construct a simultaneous complement over $k$. Apply [lem-trf-vector-subspace-complement] to $C=A\\cap B$ inside $A$ and inside $B$, obtaining $A=C\\oplus A_0$ and $B=C\\oplus B_0$. Apply it also to $A+B$ inside $V$, obtaining $V=(A+B)\\oplus D$. Every subspace $P$ of $V$ is finite-dimensional: choose its complement using the same lemma and project the finite standard spanning family of $V$ onto $P$; the images span $P$. Thus all subspaces just named are finite-dimensional.",
-   "uses": [
-    "lem-trf-vector-subspace-complement",
-    "def-weil-finite-dimensional-subspace",
-    "def-weil-pbc-free-module"
+    "lem-trf-residue-simultaneous-section-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
    }
   },
   {
-   "text": "By [lem-weil-pbc-idempotent-charpoly-rank-nullity] applied to $a$ and $b$, $\\dim A+m=n=\\dim B+m$, hence $\\dim A=\\dim B$. Apply that same theorem to the projections $A\\to A_0$ and $B\\to B_0$ along $C$, whose kernels are $C$, to obtain $\\dim A_0+\\dim C=\\dim A=\\dim B=\\dim B_0+\\dim C$. Therefore $\\dim A_0=\\dim B_0$. By [lem-trf-equal-dimension-linear-equivalence] choose a linear isomorphism $\\theta:A_0\\to B_0$.",
+   "text": "Apply [lem-trf-field-common-section] to these maps over the field $k$, with the same finite integers $m,n$. It gives $q:k^m\\to k^n$ with $aq=1$ and $bq$ an isomorphism; thus both square composites are isomorphisms.",
    "uses": [
-    "lem-weil-pbc-idempotent-charpoly-rank-nullity",
-    "lem-trf-equal-dimension-linear-equivalence"
+    "lem-trf-field-common-section"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
    }
   },
   {
-   "text": "The sum $A+B=C\\oplus A_0\\oplus B_0$ is direct. Indeed if $c+x+y=0$ with $c\\in C$, $x\\in A_0$, $y\\in B_0$, then $y=-c-x\\in A\\cap B=C$, so $y=0$ and then $c=x=0$. Consequently every vector of $V$ has unique coordinates $c+x+y+d$ in $C,A_0,B_0,D$. Define $G=\\{x+\\theta(x):x\\in A_0\\}$ and $\\overline U=G+D$. This is a subspace by linearity of $\\theta$, and its elements have unique expressions $x+\\theta(x)+d$. The displayed decompositions justify these assertions directly, without a dimension count.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
-   }
-  },
-  {
-   "text": "The subspace $\\overline U$ is complementary to both $A$ and $B$. For $v=c+x+y+d$, put $z=\\theta^{-1}(y)$; then $v=(c+x-z)+(z+\\theta(z)+d)$ lies in $A+\\overline U$. Also $v=(c+y-\\theta(x))+(x+\\theta(x)+d)$ lies in $B+\\overline U$. If $x+\\theta(x)+d\\in A$, the unique coordinates force $d=0$ and $\\theta(x)=0$, so $x=0$. Membership in $B$ similarly forces $d=x=0$. Thus $a|_{\\overline U}$ and $b|_{\\overline U}$ are injective. They are surjective because $a,b$ are surjective and vanish on $A,B$, respectively: decompose any preimage using the corresponding direct sum. The inverse of $a|_{\\overline U}$, followed by inclusion, is a linear map $q:k^m\\to k^n$ with image $\\overline U$, $aq=1$, and $bq$ an isomorphism. Linearity of the inverse follows by applying the injective linear map $a|_{\\overline U}$ to the addition and scalar identities.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
-   }
-  },
-  {
-   "text": "For each standard basis vector $e_j$ of $k^m$, choose a vector $v_j\\in R^n$ reducing to $q(e_j)$. Define $s:R^m\\to R^n$ by $s((r_j))=\\sum_j r_jv_j$. Its reduction is exactly $q$. In the scalar extension of [def-weil-module-base-change], identify $R^t\\otimes_R k$ with $k^t$ by $(r_i)\\otimes c\\mapsto(\\rho(r_i)c)$; its inverse is $(c_i)\\mapsto\\sum_i e_i\\otimes c_i$. The tensor relations verify the two composites on the standard generators and pure tensors. Under these identifications, the scalar extensions of $\\alpha s,\\beta s:R^m\\to R^m$ are $aq$ and $bq$, respectively: evaluate on each $e_j\\otimes1$.",
+   "text": "For each standard vector $e_j$ of $k^m$, choose $v_j\\in R^n$ reducing to $q(e_j)$, using the lifting assertion of [lem-trf-residue-simultaneous-section-lift]. Set $s((r_j))=\\sum_jr_jv_j$. That statement gives $\\rho_n\\circ s=q\\circ\\rho_m$ and identifies the reduced composites with $aq,bq$. By step 2 both are isomorphisms, so its invertibility assertion makes $\\alpha s,\\beta s$ isomorphisms and $s$ injective. These are square maps on the finite free module $R^m$.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-local-free-base-change-reflects-iso] to the local homomorphism $\\rho:R\\to k$ and separately to $\\alpha s$ and $\\beta s$. Both source and target are the finite free module $R^m$, and their scalar extensions are isomorphisms by steps 5--6. Hence $\\alpha s$ and $\\beta s$ are isomorphisms over $R$. In particular $s$ is injective: $s(t)=0$ implies $(\\alpha s)(t)=0$ and then $t=0$.",
-   "uses": [
-    "lem-sc-local-free-base-change-reflects-iso",
-    "def-weil-pbc-free-module",
-    "def-weil-module-base-change"
+    "lem-trf-residue-simultaneous-section-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
    }
   },
   {
-   "text": "Set $U=\\operatorname{im}s\\subseteq R^n$. The map $s:R^m\\to U$ is an isomorphism, with inverse $s(t)\\mapsto t$ by injectivity. Thus $\\alpha|_U$ and $\\beta|_U$ are isomorphisms because their composites with this parametrization are $\\alpha s$ and $\\beta s$. Finally, for either $\\gamma=\\alpha$ or $\\beta$, write $x=(x-u)+u$ with $u=(\\gamma|_U)^{-1}(\\gamma x)$; then $x-u\\in\\ker\\gamma$. If $u\\in U\\cap\\ker\\gamma$, injectivity of $\\gamma|_U$ gives $u=0$. This proves both asserted direct-sum decompositions. All sums and maps above allow empty standard bases.",
-   "uses": [],
-   "elementary": true,
+   "text": "Set $U=\\operatorname{im}(s)$. For this same lift, [lem-trf-residue-simultaneous-section-lift] identifies $s:R^m\\to U$ and both restrictions $\\alpha|_U,\\beta|_U$ as isomorphisms. Explicitly, for $\\gamma\\in\\{\\alpha,\\beta\\}$ and $x\\in R^n$, put $u=s((\\gamma s)^{-1}(\\gamma x))$. Then $x-u\\in\\ker\\gamma$, while $U\\cap\\ker\\gamma=0$ by injectivity of $\\gamma|_U$. Hence $R^n=\\ker(\\alpha)\\oplus U=\\ker(\\beta)\\oplus U$. For $m=0$ this gives $U=0$.",
+   "uses": [
+    "lem-trf-residue-simultaneous-section-lift"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "lem-trf-vector-subspace-complement",
-  "def-weil-finite-dimensional-subspace",
-  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
-  "lem-trf-equal-dimension-linear-equivalence",
-  "def-weil-module-base-change",
-  "lem-sc-local-free-base-change-reflects-iso"
+  "lem-trf-residue-simultaneous-section-lift",
+  "lem-trf-field-common-section"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift; Stacks explicitly omits these details"
+  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph, assembled through its field and residue-lifting arguments; source omits details, preserved in report.md for the two new statement-only work items."
  },
  "mathlib_searches": [
   {
@@ -226,28 +177,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-common-summand-surjections",
   "worker": "stage1",
-  "summary": "Expanded the omitted residue-field common-complement construction and its lift in Stacks 0FJK. Reused rank-nullity and local finite-free isomorphism reflection; added two Mathlib leaves for individual complements and equal-dimensional linear equivalences. Statement unchanged.",
-  "blueprint": "Realizes the auxiliary common-summand input of lem-trf-surjective-two-term-determinant-calculus under the inherited lem-trf-local-term-locality ancestry; retains the unit route. The field graph construction and the lifted maps are proved explicitly.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-local-free-base-change-reflects-iso",
-    "why": "Used only to reflect the two square finite-free isomorphisms along R to its residue field. This generic local algebra tool is not supplied by sk-i-curve-zero; it completes the prescribed residue-field lifting argument."
-   }
-  ]
+  "summary": "Repair of the human re-split return: statement unchanged; separated the field graph-complement argument and the residue reduction/column lifting argument into two independently stated unsplit nodes. Preserved every old proof paragraph verbatim in the report, assigned old steps 2--5 to the first node and old steps 1,6--8 to the second, including the explicit image/direct-sum argument. The parent only assembles the two independent inputs. Both new nodes have real logged Mathlib searches and no proof steps. Repair of the landing return (side completion not promoted): rebased the retained delivery through the delivery tool onto current sheaf-dag, compared the live item field by field, reread both new statements and all current definition/tool statements, and verified that all eight live argument paragraphs are still retained verbatim in the report. Made the chosen lift and its reduction equation explicit in assembly step 3; no mathematical statement or citation changed. Current landing-return retry: reran the retained dry run first (71e4e143677), compared the retained node with live again, and expanded assembly step 3 to choose lifted standard columns and define s explicitly before applying the conditional invertibility conclusion. Both child statements and all logged searches are retained unchanged. Landing-return repair of 2026-10-23: first dry run 58203cdbec3 passed on the current server DAG. Re-read the current cited statements and preserved all eight live proof paragraphs; expanded assembly step 4 with u=s((gamma s)^(-1)(gamma x)), its kernel membership and the zero-intersection check, making the final two decompositions explicit. Statements, child workloads and actual search records are retained.",
+  "blueprint": "Retains lem-trf-local-term-locality ancestry and the inherited sk-i-curve-zero route. Within the auxiliary Stacks 0FJK input to lem-trf-surjective-two-term-determinant-calculus, the two new nodes separately realize the field case and the residue-field lift; the parent assembles these to obtain both kernel decompositions.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-local-free-base-change-reflects-iso"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-NX-588fd2fa0",
-  "group": "NX",
+  "reviewer": "NT-cc-Q26-f87616071",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-588fd2fa0 (reviewer sub-agent of L); spot-checked: Read all eight steps, both new nodes, cited statements and source locations. The common-complement construction and residue-field lift are correct, including rank zero and characteristic two. Mathlib leaves match; no duplicates, cycles, long-step violations or dropped-route dependencies found. Accepted the local finite-free isomorphism-reflection tool use. Full checks recorded in review.md; no fixes needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-f87616071 (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the human re-split; the earlier heads 5f31ed40, 432de369 and 2ce0c8ec all passed. Each landing was refused only because the side completion was never promoted ('not in the live DAG ... L promotes it', live returns/Q26.md:33). Live and side-live still hold the 8-step version, and neither new id is in live, so the delivery is not superseded. Compared with 2ce0c8ec, both new nodes (lem-trf-field-common-section, lem-trf-residue-simultaneous-section-lift) are byte-identical. In the item, the statement, stmt_deps, source and lean are unchanged; only step 4 and split_report changed. New step 4 puts u=s((γs)^{-1}(γx)): then γu=γx, so x−u∈kerγ, and U∩kerγ=0 because γ|_U is injective. This gives R^n=kerα⊕U=kerβ⊕U, with U=0 when m=0. Correct. A script found all 8 live proof paragraphs verbatim in the report. Old steps 2-5 go to the field node and old steps 1 and 6-8 to the lift node, about 2.2k characters each. The parent is a 4-step assembly under 3000 characters, and its proof_deps equal the union of the steps' uses. Neither child restates the item: the field node has no lifting, and the lift node takes q as input. Field node: true over any field by the graph complement; I checked m=0, n=m, a=b, and F2 with a=(1,0), b=(0,1), q(1)=(1,1). Lift node: I checked each clause (k a field, ρ local, reduction keeps surjectivity, column lift ρ_n s=qρ_m, base changes equal aq and bq on e_j⊗1, reflection via lem-sc-local-free-base-change-reflects-iso, s injective, image decomposition with projection (γ|_U)^{-1}γ) and tested Z/4 with m=1, n=2. The stmt_deps match the bracketed definitions. Source: Stacks more-algebra.tex 0FJK, final paragraph (local problem; field linear algebra, then lift; details omitted). No SGA is cited and no duplicates were found. Maintainer note: the repeated landing refusals come from the L promotion loop, not from the mathematics."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.LocalCommonSummandSurjections",
@@ -268,5 +214,16 @@
   "result": "fix",
   "note": "Statement exists_common_summand_surjections matches node and Stacks 0FJK final paragraph clause by clause: CommRing+IsLocalRing, m n : ℕ, linear maps Fin n → R to Fin m → R, both surjective; ∃ U with both domRestrict bijective and IsCompl with both kernels. No extra hypotheses or universe restriction; n=0/m=0 covered; reuses Module.Free; no name clash; lean.statement verbatim. Fixes: (H8) theorem docstring lacked the source place and the node's 8 proof steps with their nodes (added); (H9/rule 7) missing non-public import of stated proof dep Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso, FiniteDimensional.Basic demoted from public import, TensorProduct.Tower added for def-weil-module-base-change, unused open scoped BigOperators removed. Signature unchanged, so the lean record is unchanged. nt_compile --json: delivered 2.3 s clean, fixed 2.9 s clean; error reporting checked with a broken copy. Complete replacement in fixes/LocalCommonSummandSurjections.lean."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-outer-base-change-differential-comparison",
+ "kind": "statement",
+ "title": "Explicit differential comparison for simultaneous outer scalar extension",
+ "statement": "Let $A_0,B_0,C_0,T$ be commutative rings, with $B_0,C_0,T$ $A_0$-algebras and $\\varphi_0:B_0\\to C_0$ an $A_0$-algebra map. Put $B_T=T\\otimes_{A_0}B_0$, $C_T=T\\otimes_{A_0}C_0$, and give $C_T$ its $B_T$-algebra structure by $t\\otimes b\\mapsto t\\otimes\\varphi_0(b)$. Write $M_0=\\Omega_{C_0/B_0}$ for the module of Kähler differentials with universal derivation $\\mathrm d_0$ [def-weil-pbc-kahler-differentials], and write $\\mathrm d_T$ for the universal $B_T$-derivation of $C_T$. Tensor products use [def-weil-pbc-module-tensor-product]. The formulas $q_T((t\\otimes b)\\otimes c)=t\\otimes\\varphi_0(b)c$ and $q_T^{-1}(t\\otimes c)=(t\\otimes1)\\otimes c$ define inverse $B_T$-algebra isomorphisms $B_T\\otimes_{B_0}C_0\\simeq C_T$. There are inverse $C_T$-linear isomorphisms $h_T:C_T\\otimes_{C_0}M_0\\simeq T\\otimes_{A_0}M_0$ given by $h_T((t\\otimes c)\\otimes\\omega)=t\\otimes c\\omega$ and $h_T^{-1}(t\\otimes\\omega)=(t\\otimes1)\\otimes\\omega$, where $(t\\otimes c)\\cdot(u\\otimes\\omega)=tu\\otimes c\\omega$ is the $C_T$-action on the right. Finally the canonical differential base-change map for $B_0\\to B_T$ and $B_0\\to C_0$, transported by $q_T$ and $h_T$, is a $C_T$-linear isomorphism $F_T:T\\otimes_{A_0}M_0\\xrightarrow{\\sim}\\Omega_{C_T/B_T}$ with $F_T(t\\otimes\\mathrm d_0c)=(t\\otimes1)\\,\\mathrm d_T(1\\otimes c)$ for all $t\\in T,c\\in C_0$. No finite-generation or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C4F (lemma-colimit-unramified), proof, scalar-extended rings and their differentials; Tag 00RV (lemma-differentials-base-change), canonical differential comparison, with the explicit ring/module reassociations for outer scalar extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor universal property in [def-weil-pbc-module-tensor-product]. The proposed $q_T$ is additive in each entry and balanced: for $a\\in A_0$, $ta\\otimes\\varphi_0(b)c=t\\otimes\\varphi_0(ab)c$, and for $b'\\in B_0$, $t\\otimes\\varphi_0(bb')c=t\\otimes\\varphi_0(b)\\varphi_0(b')c$. The proposed inverse is $A_0$-balanced because $(ta\\otimes1)\\otimes c=(t\\otimes a)\\otimes c=(t\\otimes1)\\otimes ac$. The rings $B_T$, $C_T$ and $B_T\\otimes_{B_0}C_0$ carry the multiplication $(x\\otimes y)(x'\\otimes y')=xx'\\otimes yy'$ with unit $1\\otimes1$ of [lem-weil-pbc-algebra-tensor-pushout-universal-property](1), and $B_T\\to C_T$, $t\\otimes b\\mapsto t\\otimes\\varphi_0(b)$, is the ring map given by [lem-weil-pbc-algebra-tensor-pushout-universal-property](2) for $T\\to C_T$, $t\\mapsto t\\otimes1$, and $B_0\\to C_T$, $b\\mapsto1\\otimes\\varphi_0(b)$. Both proposed maps preserve products of pure tensors and units by this rule, hence, being additive, preserve all products. Their composites on generators are $t\\otimes c\\mapsto t\\otimes c$ and $(t\\otimes b)\\otimes c\\mapsto(t\\otimes1)\\otimes\\varphi_0(b)c=(t\\otimes b)\\otimes c$. The forward map sends $(t\\otimes b)\\otimes1$ to $t\\otimes\\varphi_0(b)$, the specified $B_T$-structure on $C_T$; hence both are $B_T$-algebra maps. Additivity extends these identities to all tensors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), balancing relations; Tag 0C4F (lemma-colimit-unramified), scalar-extended rings"
+   }
+  },
+  {
+   "text": "By the same tensor universal property, $h_T$ is well defined: its $A_0$-balancing is $ta\\otimes c\\omega=t\\otimes ac\\omega$, and its $C_0$-balancing is $t\\otimes(cc')\\omega=t\\otimes c(c'\\omega)$. The inverse is $A_0$-balanced since $(ta\\otimes1)\\otimes\\omega=(t\\otimes a)\\otimes\\omega=(t\\otimes1)\\otimes a\\omega$. The action $(t\\otimes c)(u\\otimes\\omega)=tu\\otimes c\\omega$ respects the tensor relations; multiplication, unit and distributivity follow on pure tensors and extend by additivity. The inverse composites are $t\\otimes\\omega\\mapsto t\\otimes\\omega$ and $(t\\otimes c)\\otimes\\omega\\mapsto(t\\otimes1)\\otimes c\\omega=(t\\otimes c)\\otimes\\omega$. Finally, for $u,t\\in T$ and $c',c\\in C_0$, both $h_T(((u\\otimes c')(t\\otimes c))\\otimes\\omega)$ and $(u\\otimes c')h_T((t\\otimes c)\\otimes\\omega)$ equal $ut\\otimes c'c\\omega$. Thus $h_T$ and its inverse are $C_T$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), explicit balancing and inverse calculations"
+   }
+  },
+  {
+   "text": "Put $D=B_T\\otimes_{B_0}C_0$. Apply [lem-weil-pbc-kahler-differentials-base-change] with $R=B_0$, $R'=B_T$, $S=C_0$, $S'=D$. Its hypotheses are just the given ring maps; it supplies the canonical isomorphism $B_T\\otimes_{B_0}M_0\\to\\Omega_{D/B_T}$, sending $b_T\\otimes\\mathrm d_0c$ to $b_T\\,\\mathrm d_D(1\\otimes c)$, and its $D$-linear form $D\\otimes_{C_0}M_0\\simeq\\Omega_{D/B_T}$. Explicitly the two domains are identified by $(b_T\\otimes c)\\otimes\\omega\\mapsto b_T\\otimes c\\omega$, with inverse $b_T\\otimes\\omega\\mapsto(b_T\\otimes1)\\otimes\\omega$; balancing and the inverse identities are the calculations of step 2. To transport differentials along $q_T$, the universal property in [def-weil-pbc-kahler-differentials] applied to $\\mathrm d_T\\circ q_T$ gives $\\mathrm d_D z\\mapsto\\mathrm d_T(q_Tz)$; applying it to $q_T^{-1}$ gives its inverse. Their composites fix every differential generator, hence are identities. The ring $D$ has the multiplication of [lem-weil-pbc-algebra-tensor-pushout-universal-property](1). Since $q_T(1\\otimes c)=1\\otimes c$, $q_T$ is $C_0$-linear for $c\\mapsto(1\\otimes1)\\otimes c$ and $c\\mapsto1\\otimes c$, so $q_T^{-1}\\otimes\\mathrm{id}_{M_0}:C_T\\otimes_{C_0}M_0\\to D\\otimes_{C_0}M_0$ is defined by [def-weil-pbc-module-tensor-product], is inverse to $q_T\\otimes\\mathrm{id}_{M_0}$ by compatibility with composition and identities, and is $C_T$-linear when $C_T$ acts on the target through $q_T^{-1}$. Let $\\beta$ be the composite of $q_T^{-1}\\otimes\\mathrm{id}_{M_0}$, the domain identification above, the canonical isomorphism, and the differential transport. Consequently this transported canonical map is a $C_T$-linear isomorphism $\\beta:C_T\\otimes_{C_0}M_0\\simeq\\Omega_{C_T/B_T}$ and $\\beta(1\\otimes\\mathrm d_0c)=\\mathrm d_T(1\\otimes c)$, since $q_T(1\\otimes c)=1\\otimes c$. This uses only the cited theorem and the universal property, with no finiteness or flatness.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change), canonical isomorphism and its universal-derivation formula; Tags 07BK (definition-differentials) and 00RO (lemma-universal-omega)"
+   }
+  },
+  {
+   "text": "Define $F_T=\\beta\\circ h_T^{-1}$. Both factors are $C_T$-linear isomorphisms, so this is precisely the canonical base-change isomorphism transported by $q_T$ and $h_T$. For $t\\in T$ and $c\\in C_0$, $h_T^{-1}(t\\otimes\\mathrm d_0c)=(t\\otimes1)\\otimes\\mathrm d_0c=(t\\otimes1)\\cdot(1\\otimes\\mathrm d_0c)$; applying the $C_T$-linear map $\\beta$ and its formula from step 3 gives $F_T(t\\otimes\\mathrm d_0c)=(t\\otimes1)\\,\\mathrm d_T(1\\otimes c)$. Together with steps 1 and 2 this proves every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change), generator formula after the explicit identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit tensor calculations expanding Tag 00RV (lemma-differentials-base-change) in the scalar-extension setting of Tag 0C4F (lemma-colimit-unramified)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|isPushout|baseChange.*[dD]|[dD].*baseChange",
+   "results": "15 hits in Mathlib/RingTheory/Kaehler: Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differentials for a map of A algebras commute with simultaneous extension of the coefficient ring A to T",
+   "results": "8 hits: CommRingCat.KaehlerDifferential.map; CommRingCat.KaehlerDifferential; CommRingCat.KaehlerDifferential.d; KaehlerDifferential.tensorKaehlerEquivBase; KaehlerDifferential.mapBaseChange; KaehlerDifferential.tensorKaehlerEquiv; KaehlerDifferential.map; KaehlerDifferential.mapBaseChange.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivBase",
+   "results": "3 hits: KaehlerDifferential.tensorKaehlerEquivBase; KaehlerDifferential.tensorKaehlerEquivBase_tmul; KaehlerDifferential.tensorKaehlerEquivBase_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For A algebras B and C with a map B to C and A algebra T, identify T tensor_A Omega C B with Omega (T tensor_A C) (T tensor_A B), compatible with universal derivations",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul; KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul'; tensorKaehlerQuotKerSqEquiv_tmul_D; KaehlerDifferential.derivationTensorProduct; KaehlerDifferential.tensorKaehlerEquivBase; KaehlerDifferential.tensorKaehlerEquiv_tmul_D; tensorKaehlerQuotKerSqEquiv; KaehlerDifferential.derivationTensorProduct_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For A algebras B and C, an A algebra T and a map B to C, the tensor reassociation (T tensor_A C) tensor_C Omega(C/B) is T tensor_A Omega(C/B) and this is canonically Omega((T tensor_A C)/(T tensor_A B))",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul; KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul'; KaehlerDifferential.tensorKaehlerEquiv_tmul_D; tensorKaehlerQuotKerSqEquiv_tmul_D; KaehlerDifferential.tensorKaehlerEquivBase; KaehlerDifferential.tensorKaehlerEquiv_tmul; KaehlerDifferential.tensorKaehlerEquivBase_tmul; tensorKaehlerQuotKerSqEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehler.*(baseChange|assoc)|baseChange.*tensorKaehler|cancelBaseChange|tensorTensorTensorComm",
+   "results": "9 hits in Mathlib/RingTheory/TensorProduct: Mathlib/RingTheory/TensorProduct/Maps.lean; Mathlib/RingTheory/TensorProduct/Maps.lean; Mathlib/RingTheory/TensorProduct/Maps.lean; Mathlib/RingTheory/TensorProduct/Maps.lean; Mathlib/RingTheory/TensorProduct/Maps.lean; Mathlib/RingTheory/TensorProduct/Finite.lean; Mathlib/RingTheory/TensorProduct/Basic.lean; Mathlib/RingTheory/TensorProduct/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change has base B_0 and a different tensor domain; the outer A_0-tensor comparison requires ring and module reassociations and their formula checks"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|cancelBaseChange|baseChange.*assoc",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differentials commute with simultaneous scalar extension of both algebras along an outer base ring",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.instSMulCommClassTensorProduct_1, CommRingCat.KaehlerDifferential.map, CommRingCat.KaehlerDifferential, KaehlerDifferential.mapBaseChange, KaehlerDifferential.map, KaehlerDifferential.moduleBaseChange'. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivBase",
+   "results": "3 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquivBase_tmul, KaehlerDifferential.tensorKaehlerEquivBase_symm_apply. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For A algebras B and C and A algebra T, Kahler differentials of T tensor A C over T tensor A B are T tensor A Omega C B",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, tensorKaehlerQuotKerSqEquiv_tmul_D, KaehlerDifferential.moduleBaseChange, KaehlerDifferential.tensorKaehlerEquiv_tmul_D, KaehlerDifferential.tensorKaehlerEquiv_tmul, KaehlerDifferential.tensorKaehlerEquivBase_tmul, KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv(_tmul_D|Base)?|def cancelBaseChange",
+   "results": "5 hits: Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical reassociation (T tensor A B) tensor B C equals T tensor A C and (T tensor A C) tensor C M equals T tensor A M, compatible with relative Kahler differential base change",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, instIsScalarTowerTensorProductKaehlerDifferential, KaehlerDifferential.moduleBaseChange', KaehlerDifferential.isScalarTower', KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.mapBaseChange, KaehlerDifferential.instIsScalarTowerTensorProduct_1. Read Kaehler/TensorProduct.lean:189-215,249-310 and TensorProduct/Maps.lean:476-485.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: ordinary differential base change is already a DAG Mathlib leaf; outer A_0 cancellations and their formulas require explicit balancing calculations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-colimit-unramified-algebra",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the unramified descent used by the nodal-family approximation (Stacks 0CBY first proof, first paragraph); Limits 0C4W reduces it to the affine algebra statement Algebra 0C4F, which this node states. Extracted from lem-trf-colimit-unramified-algebra old proof steps 3--4: the two explicit tensor identifications and the canonical differential comparison with its generator formula.",
+   "via": [
+    "lem-trf-colimit-unramified-algebra",
+    "lem-trf-unramified-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-outer-base-change-differential-comparison",
+  "worker": "stage1",
+  "group": "Q105",
+  "summary": "Preserved the complete statement. Proved both explicit cancellations by tensor balancing and inverse identities, reused the existing Mathlib base-change node at B_0 -> B_T, justified differential transport by the universal property, and computed the transported generator formula. No new nodes: cancellations are elementary steps, and the only non-elementary input already exists. Read latest blueprint ancestry and kept the historical algebra task without reintroducing its obsolete trace-formula route.",
+  "blueprint": "Historical auxiliary algebra below lem-trf-local-term-locality proof (1)--(2), via lem-trf-colimit-unramified-algebra: the scalar-extension comparison used in its step 2. Latest blueprint contracting-correspondence proof no longer uses the historical nearby-duality/alteration chain; this split only discharges the inherited algebra lemma and changes no unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-c36b5810f",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-c36b5810f (reviewer sub-agent of L); spot-checked: I read the item and all three cited statements in full, plus Stacks 00RV (algebra.tex l.34213-34237) and 0C4F (l.47571-47596). The delivery adds no new nodes. The statement is unchanged; I tested it on T=A_0, T=0, B_0=C_0, C_0=B_0[x], and A_0=B_0=Z with T=Z/2 and C_0=Z[x]/(2x), a non-flat T where it still holds. Steps 1, 2 and 4: I checked the balancing, the inverse identities and C_T-linearity, and they are correct. Step 3 substitutes R=B_0, R'=B_T, S=C_0 into lem-weil-pbc-kahler-differentials-base-change correctly, and the transport of differentials along q_T by the universal property is correct. I found no duplicate in the DAG, no cycle and no SGA citation. Two repairs (fixes/dag/nodes/sec-trace-formula/lem-trf-outer-base-change-differential-comparison.json): (C4/B3) steps 1 and 3 use the ring structure on T⊗B_0, T⊗C_0 and B_T⊗_{B_0}C_0, and the ring map B_T→C_T, but the cited module-tensor node does not provide them. I added the existing Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property, clauses (1) and (2), to steps 1 and 3 and to proof_deps. (E5) Step 3 said 'transported' without the passage from C_T⊗_{C_0}M_0 to D⊗_{C_0}M_0. I wrote it out: q_T is C_0-linear, q_T^{-1}⊗id comes from the module-tensor node's f⊗id clause, and β is the explicit composite of four maps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.OuterBaseChangeDifferentialComparison",
+  "declaration": "KaehlerDifferential.OuterBaseChange.comparison",
+  "declarations": [
+   "KaehlerDifferential.OuterBaseChange.rightAlgebra",
+   "KaehlerDifferential.OuterBaseChange.tensorAlgebra",
+   "KaehlerDifferential.OuterBaseChange.comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/OuterBaseChangeDifferentialComparison.lean",
+  "statement": "theorem comparison (A : Type uA) (B : Type uB) (C : Type uC) (T : Type uT) [CommRing A] [CommRing B] [CommRing C] [CommRing T] [Algebra A B] [Algebra A C] [Algebra A T] [Algebra B C] [IsScalarTower A B C] : ∃ (m : Module (T ⊗[A] C) (T ⊗[A] KaehlerDifferential B C)) (q : (T ⊗[A] B) ⊗[B] C ≃ₐ[T ⊗[A] B] T ⊗[A] C) (h : @LinearEquiv (T ⊗[A] C) (T ⊗[A] C) _ _ (RingHom.id (T ⊗[A] C)) (RingHom.id (T ⊗[A] C)) _ _ ((T ⊗[A] C) ⊗[C] KaehlerDifferential B C) (T ⊗[A] KaehlerDifferential B C) _ _ _ m) (F : @LinearEquiv (T ⊗[A] C) (T ⊗[A] C) _ _ (RingHom.id (T ⊗[A] C)) (RingHom.id (T ⊗[A] C)) _ _ (T ⊗[A] KaehlerDifferential B C) (KaehlerDifferential (T ⊗[A] B) (T ⊗[A] C)) _ _ m _), (∀ (t : T) (b : B), algebraMap (T ⊗[A] B) (T ⊗[A] C) (t ⊗ₜ[A] b) = t ⊗ₜ[A] algebraMap B C b) ∧ (∀ (t : T) (b : B) (c : C), q ((t ⊗ₜ[A] b) ⊗ₜ[B] c) = t ⊗ₜ[A] (algebraMap B C b * c)) ∧ (∀ (t : T) (c : C), q.symm (t ⊗ₜ[A] c) = (t ⊗ₜ[A] (1 : B)) ⊗ₜ[B] c) ∧ (∀ (t u : T) (c : C) (ω : KaehlerDifferential B C), @SMul.smul _ _ m.toSMul (t ⊗ₜ[A] c) (u ⊗ₜ[A] ω) = (t * u) ⊗ₜ[A] (c • ω)) ∧ (∀ (t : T) (c : C) (ω : KaehlerDifferential B C), h ((t ⊗ₜ[A] c) ⊗ₜ[C] ω) = t ⊗ₜ[A] (c • ω)) ∧ (∀ (t : T) (ω : KaehlerDifferential B C), h.symm (t ⊗ₜ[A] ω) = (t ⊗ₜ[A] (1 : C)) ⊗ₜ[C] ω) ∧ (∀ (t : T) (c : C), F (t ⊗ₜ[A] KaehlerDifferential.D B C c) = (t ⊗ₜ[A] (1 : C)) • KaehlerDifferential.D (T ⊗[A] B) (T ⊗[A] C) ((1 : T) ⊗ₜ[A] c))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The compatible B-algebra structure on C encodes the A-algebra map. The canonical tensor-module action is packaged existentially with its full pure-tensor formula, and both linear equivalences use this same action. The differential formula uniquely specifies the transported canonical map. Scoped instances register Mathlib rightAlgebra and the actual tensor-map algebra; no data are chosen from a sorry theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-407704518",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read node, 2 stmt_deps (Mathlib KaehlerDifferential, TensorProduct), Stacks 00RV/0C4F, module and report (Worker report + Second reading by Q43 present). The Lean matches every clause: 4 CommRings in independent universes; φ0 encoded as [Algebra B C][IsScalarTower A B C]; B_T-algebra on C_T is the real Algebra.TensorProduct.map; q is an AlgEquiv over T⊗B with forward and inverse formulas; the C_T-action on T⊗Ω is existential with its full pure-tensor formula (unique; Mathlib's TensorProduct.Algebra.module is a different construction); h and F are C_T-linear equivs using that same action; the F generator formula uniquely fixes the transported canonical map. No extra hypotheses. Statement field verbatim; only the lean field changed vs side-live; no duplicate; abbrevs are real Mathlib data with docstrings; only sorry is the proof. Edge cases T=0, C=0, B=C, non-flat T, universes OK. No compile needed (no change)."
+ }
+}

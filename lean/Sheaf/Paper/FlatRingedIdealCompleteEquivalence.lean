@@ -18,7 +18,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Paper.FlatRingedCechBaseChange
 import Sheaf.Paper.CoefficientHomAugmentation
@@ -35,6 +34,7 @@ Source: Stacks Project, Algebraization, Tags 099I and 0999
 -/
 
 @[expose] public section
+set_option Elab.async false
 
 universe u w
 
@@ -42,8 +42,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+attribute [local instance 20000] ringedCompletionHasSheafCompose
+
 -- All computations with the chosen Hom complex use its public projection API.
-attribute [local irreducible] homComplexFunctor
+attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
 /-- Restriction of scalars is exact on module sheaves.
 Source: Stacks Project, Algebraization, Tag 099C
@@ -193,6 +195,7 @@ private theorem locallyDerivedRingedIdealComplete_of_iso
   exact (hN U f hf).of_iso ((derivedInternalHom (J.over U) (R.over U)).mapIso
     ((Iso.refl _).prod ((ringedDerivedRestriction R U).mapIso e)))
 
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified exact derived restriction preserves and reflects local completeness.
 Source: Stacks Project, Algebraization, Tag 099C
@@ -336,6 +339,7 @@ theorem siteCompleteRestrictScalars_equivalence_of_inverse
   let e := Equivalence.mk (siteCompleteRestrictScalars φ I) F (asIso β) α.symm
   exact ⟨e, ⟨Iso.refl _⟩⟩
 
+
 set_option backward.isDefEq.respectTransparency false in
 /-- An ambient coefficient-Hom construction with its augmentation comparison gives
 an equivalence on complete objects.
@@ -429,6 +433,7 @@ theorem siteCompleteRestrictScalars_equivalence_of_completion
     infer_instance
   exact IsIso.of_isIso_comp_right _ (θ.hom.app (r.obj M.obj))
 
+
 set_option maxHeartbeats 1200000 in
 -- The localization comparison contains both product variables and resolution functors.
 set_option backward.isDefEq.respectTransparency false in
@@ -468,43 +473,27 @@ private theorem ringedDerivedHomUnit_Q_obj
       (Opposite.op (ringedSiteRingComplex O)) ≅ 𝟭 _ :=
     NatIso.ofComponents (ringedHomUnitEvaluationIso O) (by
       intro M N f
-      apply HomologicalComplex.hom_ext
-      intro n
-      exact homComplex_unit_evaluation_naturality J O f n)
+      exact ringedHomUnitEvaluationIso_naturality O f)
+  let v : Q ⋙ F ≅ I ⋙ (homComplexFunctor (R := O)).obj
+      (Opposite.op (ringedSiteRingComplex O)) ⋙ Q :=
+    NatIso.ofComponents (fun M ↦ c.app (Opposite.op (ringedSiteRingComplex O), M)) (by
+      intro M N f
+      have hc := c.hom.naturality
+        (X := (Opposite.op (ringedSiteRingComplex O), M))
+        (Y := (Opposite.op (ringedSiteRingComplex O), N)) (𝟙 _, f)
+      dsimp at hc
+      simp only [Functor.map_id, NatTrans.id_app, Category.id_comp, op_id] at hc
+      change H.map
+          (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj M))
+          (Y := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj N))
+          (𝟙 _, Q.map f) ≫ c.hom.app (Opposite.op (ringedSiteRingComplex O), N) =
+        c.hom.app (Opposite.op (ringedSiteRingComplex O), M) ≫
+          Q.map (((homComplexFunctor (R := O)).obj
+            (Opposite.op (ringedSiteRingComplex O))).map (I.map f))
+      exact hc)
   let t : Q ⋙ 𝟭 _ ⟶ Q ⋙ F :=
-    { app := fun M ↦ Q.map (η.app M) ≫
-        Q.map (a.inv.app (I.obj M)) ≫ (c.inv.app (Opposite.op (ringedSiteRingComplex O), M))
-      naturality := by
-        intro M N f
-        dsimp only [Functor.comp_map, Functor.id_map, F, ringedCechCompletionFunctor]
-        have hc := c.inv.naturality
-          (X := (Opposite.op (ringedSiteRingComplex O), M))
-          (Y := (Opposite.op (ringedSiteRingComplex O), N)) (𝟙 _, f)
-        have ha := a.inv.naturality (I.map f)
-        have hη := η.naturality f
-        dsimp at hc ha hη
-        simp only [Functor.map_id, NatTrans.id_app, Category.id_comp, op_id] at hc
-        change Q.map f ≫ (Q.map (η.app N) ≫ Q.map (a.inv.app (I.obj N)) ≫
-            c.inv.app (Opposite.op (ringedSiteRingComplex O), N)) =
-          (Q.map (η.app M) ≫ Q.map (a.inv.app (I.obj M)) ≫
-            c.inv.app (Opposite.op (ringedSiteRingComplex O), M)) ≫
-              H.map
-                (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj M))
-                (Y := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj N))
-                (𝟙 _, Q.map f)
-        have hη' : Q.map f ≫ Q.map (η.app N) = Q.map (η.app M) ≫ Q.map (I.map f) := by
-          simpa only [← Q.map_comp] using congrArg Q.map hη
-        have ha' : Q.map (I.map f) ≫ Q.map (a.inv.app (I.obj N)) =
-            Q.map (a.inv.app (I.obj M)) ≫
-              Q.map ((homComplexFunctor (R := O)).obj
-                (Opposite.op (ringedSiteRingComplex O)) |>.map (I.map f)) := by
-          simpa only [← Q.map_comp] using congrArg Q.map ha
-        rw [← Category.assoc, hη']
-        simp only [Category.assoc]
-        rw [← Category.assoc (Q.map (I.map f)), ha']
-        simp only [Category.assoc]
-        rw [hc]
-        rfl }
+    Functor.whiskerRight η Q ≫
+      Functor.whiskerRight (Functor.whiskerLeft I a.inv) Q ≫ v.inv
   let W := HomologicalComplex.quasiIso A (ComplexShape.up ℤ)
   let full := Localization.fullyFaithfulWhiskeringLeft Q W (DerivedCategory A)
   let d : 𝟭 (DerivedCategory A) ⟶ F := full.preimage t
@@ -516,10 +505,12 @@ private theorem ringedDerivedHomUnit_Q_obj
     dsimp at hn
     rw [← cancel_epi e.hom]
     rw [hn, hd]
-    simp only [ringedDerivedHomUnit, t, a, e, Q, I, η, c,
+    simp only [ringedDerivedHomUnit, t, v, a, e, Q, I, η, c,
+      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Category.assoc, Iso.hom_inv_id_assoc]
     rfl
   exact (hu (Q.obj M)).trans (hd M)
+
 
 set_option maxHeartbeats 800000 in
 -- Computing the unit unfolds the product localization and its chosen resolution.
@@ -576,6 +567,7 @@ private theorem ringedCechCompletionUnit_Q_obj
   rw [hu]
   simp only [Functor.map_comp, Category.assoc]
   rw [← hc]
+
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem derivedCoefficientHomFunctor
@@ -642,6 +634,7 @@ private theorem derivedCoefficientHomFunctor
   let F := Localization.lift (I ⋙ G ⋙ QB) hinv QR
   let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
   exact ⟨F, ⟨fF⟩⟩
+
 
 set_option maxHeartbeats 800000 in
 -- The localization comparison involves three resolutions and several whiskered isomorphisms.
@@ -809,7 +802,7 @@ theorem flat_ringed_ideal_complete_equivalence
       QR.map (η.app M ≫ (ringedHomUnitEvaluationIso R (T.obj M)).inv ≫
         ((homComplexFunctor (R := R)).map ε.op).app (T.obj M)) ≫
           (dK M).inv at h
-    rw [h, Category.assoc, (dK M).inv_hom_id, Category.comp_id]
+    exact (Iso.eq_comp_inv (dK M)).mp h
   have hrep (M : ringedSiteComplex B) :
       rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M)) =
         ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) := by
@@ -882,6 +875,7 @@ theorem flat_ringed_ideal_complete_equivalence
   apply siteCompleteRestrictScalars_equivalence_of_completion φ I hI K ε hK F Θ β
   intro M
   exact congrArg (fun z ↦ z.app M) hβ
+
 
 
 end CategoryTheory

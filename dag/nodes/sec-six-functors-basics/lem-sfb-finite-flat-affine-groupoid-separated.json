@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-finite-flat-affine-groupoid-separated",
+ "kind": "statement",
+ "title": "Proper diagonal of a finite-flat groupoid quotient",
+ "statement": "Work over a field $k$ [def-weil-field], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], algebraic spaces mean [def-trf-algebraic-space], and stacks, representability and 2-fibre products mean [def-sfb-stable-pointed-moduli-groupoids]. Representable morphism properties are tested after scheme base change on etale scheme charts. Flatness, local finite presentation, etaleness and properness use [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism, def-weil-proper-morphism]. A stack morphism is separated if its relative diagonal is proper. The inertia stack $I_{\\mathcal A}$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows given by conjugating isomorphisms. Its projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a finite scheme morphism [def-weil-finite-integral-morphism]. The set $|\\mathcal A|$ consists of field-valued objects up to isomorphism after common field extension, with the atlas topology [lem-sfb-stack-point-topology]. A scheme groupoid $(U,R,s,t,e,i,c)$ has the laws of [def-a1-groupoid-scheme]. Its quotient $[U/R]$ is the fppf stackification of the groupoid of $T$-points, using [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Finite locally free means finite, flat and locally of finite presentation [def-pc-finite-locally-free]. Let $(U,R,s,t,e,i,c)$ be a groupoid of affine $k$-schemes with $s,t$ finite locally free. The algebraic stack $[U/R]$ has proper diagonal over $k$, and hence is separated over $k$. This assertion permits nonreduced stabilizer group schemes, variable ranks and empty schemes.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), part (6): proper source and target and separated U imply a separated quotient. Finite maps are proper by morphisms.tex Tag 01WN (lemma-finite-proper); affine U is separated."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k$ and $\\mathcal Q=[U/R]$. Regard the schemes as their representable algebraic spaces. By the definition of finite locally free, $s,t$ are flat and locally of finite presentation. Apply the flat-groupoid quotient theorem over $S$: $\\mathcal Q$ is algebraic, $\\Delta_{\\mathcal Q/S}$ and $p:U\\to\\mathcal Q$ are representable by algebraic spaces, $p$ is surjective, flat and locally of finite presentation, and $U\\times_{\\mathcal Q}U\\simeq R$ with its source and target projections.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-pc-finite-locally-free",
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FI (theorem-flat-groupoid-gives-algebraic-stack), 06FH (lemma-flat-quotient-flat-presentation); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian)."
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$. The affine fibre-product formula identifies $U\\times_kU$ with $\\operatorname{Spec}(A\\otimes_k A)$ and $j=(s,t):R\\to U\\times_kU$ with the ring map $a\\otimes a^{\\prime}\\mapsto s^*(a)t^*(a^{\\prime})$. Since $s$ is finite, choose finite $A$-module generators $b_1,\\ldots,b_n$ of $B$ via $s^*$. Each $b\\in B$ is $\\sum_i s^*(a_i)b_i=\\sum_i j^*(a_i\\otimes1)b_i$. Thus these same elements generate $B$ over $A\\otimes_kA$. The affine definition of finite morphism now gives that $j$ is finite. This calculation works also for the zero ring and does not require constant rank or reducedness.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), condition (6) implies (5), specialized to affine schemes; schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01WH (definition-integral)."
+   }
+  },
+  {
+   "text": "The finite scheme morphism $j$ is proper by the finite-implies-proper lemma.",
+   "uses": [
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper), finite implies affine and proper."
+   }
+  },
+  {
+   "text": "The product $\\mathcal Q\\times_S\\mathcal Q$ is algebraic by existence of algebraic-stack fibre products. Factor $q=p\\times p:U\\times_SU\\to\\mathcal Q\\times_S\\mathcal Q$ through $U\\times_S\\mathcal Q$. The first factor is the base change of $p$ along $U\\times_S\\mathcal Q\\to\\mathcal Q$ (second projection), and the second factor is its base change along $\\mathcal Q\\times_S\\mathcal Q\\to\\mathcal Q$ (first projection). Base-change and composition calculus therefore make $q$ representable, surjective, flat and locally of finite presentation. Its source is a scheme by the affine fibre-product formula.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), first paragraph of proof; algebraic.tex Tag 04T2 (lemma-2-fibre-product); stacks-properties.tex Section 04XB."
+   }
+  },
+  {
+   "text": "The pullback of $\\Delta_{\\mathcal Q/S}$ along $q$ is $U\\times_{\\mathcal Q}U\\to U\\times_SU$, hence is $j$ under Step 1. Explicitly its objects consist of $(u_1,u_2)$ and an isomorphism $p(u_1)\\simeq p(u_2)$: the extra diagonal object and its two isomorphisms can be eliminated by composing one with the inverse of the other. This is precisely the defining $2$-fibre product $U\\times_{\\mathcal Q}U$, and the identification preserves the two projections. Apply the representable proper fppf target test to $f=\\Delta_{\\mathcal Q/S}$ and $W=U\\times_SU$: the target is algebraic by Step 4, the covering has all required properties by Step 4, and its pullback is proper by Step 3. Consequently $\\Delta_{\\mathcal Q/S}$ is proper, which is separatedness of $\\mathcal Q$ over $k$ by the convention in the statement.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-representable-proper-fppf-target-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), cartesian diagram and (5); stacks-properties.tex Tag 04XD (lemma-check-property-covering), with P = proper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-algebraic-space",
+  "def-pc-finite-locally-free",
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "def-pc-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-proper",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-representable-proper-fppf-target-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), proof of (5),(6); affine finite-module calculation supplies its permanence argument in this specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid with finite locally free source and target has a separated quotient algebraic stack with finite flat affine presentation",
+   "results": "[leanfinder] OK 8 hit(s); top results: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient algebraic stack of a finite locally free groupoid on an affine scheme is separated since its diagonal is proper",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*separat|separat.*groupoid|well.nigh",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(proper|separat)|(proper|separat).*groupoid",
+   "results": "Search returned 0 hits: . Read the returned signatures; the hits are scheme morphism properties, not algebraic-stack quotient separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine morphism results do not state the groupoid quotient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat groupoid on an affine scheme defines a separated algebraic stack",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.isFinite_iff. Read the returned signatures; the hits are scheme morphism properties, not algebraic-stack quotient separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine morphism results do not state the groupoid quotient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsProper\"",
+   "results": "Search returned 0 hits: . Read the returned signatures; the hits are scheme morphism properties, not algebraic-stack quotient separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine morphism results do not state the groupoid quotient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient algebraic stack of an affine scheme groupoid with finite locally free source and target has proper diagonal",
+   "results": "Search returned 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme. Read the returned signatures; the hits are scheme morphism properties, not algebraic-stack quotient separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine morphism results do not state the groupoid quotient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of the diagonal of the fppf quotient of a finite locally free equivalence groupoid of affine schemes",
+   "results": "Search returned 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange. Read the returned signatures; the hits are scheme morphism properties, not algebraic-stack quotient separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine morphism results do not state the groupoid quotient assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-etale-affine-charts",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: last paragraph of Tag 0DUE: the shrunken finite-flat affine quotient is separated, as in Tag 0DUM.",
+   "via": [
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-flat-affine-groupoid-separated",
+  "worker": "stage1",
+  "summary": "Read Tags 0DTY, 0DUM, 06FI, 06FH, 04M9, 04XD, 01I4 and 01WN. Preserve the statement. Reuse the general flat-groupoid presentation and proper fppf target test; prove finiteness of the relation-pair map by its explicit affine finite generators. No new nodes or new Mathlib leaves. Scheme and stack products and their covering properties are cited explicitly.",
+  "blueprint": "Supporting separatedness input to the inherited chain from det-thm-sf-ctf-stability-direct-images, proof (3), recorded in blueprint.from.place; newest blueprint direct-image proof (3) read. No chapter or unit route changed. The ancestor command reports from.node = None on this pre-existing chain, retained as supplied."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-466f4274f",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-466f4274f (reviewer sub-agent of L); spot-checked: Proof-only split, no new nodes, statement unchanged. It matches Stacks 0DTY (6), stacks-morphisms.tex l.3860-3910 (as used in 0DUM). Step 1: lem-sfb-flat-groupoid-algebraic-quotient states algebraicity, representable Delta and p, p flat/lfp/surjective and R ~ U x_Q U, over an arbitrary base and without DM. Step 2: elementary and checked; generators of B over A via s* also generate B over A tensor_k A via j*, so j is finite; the zero ring works with the empty family. Step 3: finite implies proper (lem-weil-pbc-finite-proper). Step 4: checked both base-change factorizations of p x p; the fibre-product node and the two calculus nodes state the needed stability under base change and composition. Step 5: checked the explicit 2-fibre-product elimination giving Q x_{QxQ}(UxU) ~ U x_Q U = R; every hypothesis of lem-sfb-representable-proper-fppf-target-test holds. Edge cases: identity groupoid, B alpha_p (not DM, so the DM-only open-geometry node is correctly avoided), U empty, varying ranks. Duplicate grep over 0DTY/0DUM: none. Batch-5 flags (def-trf-scheme-algebraic-space and the three sfb stack-foundation nodes) are general algebraic-space and stack foundations, not trace-formula or Poincare steps; def-trf-algebraic-space is already in the item's stmt_deps, and the closure diff adds 2 non-trf nodes. Accepted. No SGA citation. No fixes."
+ }
+}

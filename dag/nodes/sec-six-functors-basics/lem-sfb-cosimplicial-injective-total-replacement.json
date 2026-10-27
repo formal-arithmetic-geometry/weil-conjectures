@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-cosimplicial-injective-total-replacement",
+ "kind": "statement",
+ "title": "Strict cosimplicial injective replacements and alternating-total comparison",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], and write $\\operatorname{Ch}^{\\ge0}(\\mathcal A)$ for nonnegative cochain complexes, extended by zero in negative degrees [def-weil-abstract-derived-category]. Let $\\Delta$ be the category of finite nonempty ordered sets $[n]$ and order-preserving maps. For a strict diagram $C:\\Delta\\to\\operatorname{Ch}^{\\ge0}(\\mathcal A)$ define $T(C)^r=\\bigoplus_{n+q=r}C_n^q$ and $d_T=\\delta+(-1)^n d_C$, with $\\delta=\\sum_i(-1)^iC(d^i)$ [def-sp-double-complex-total]. There are a functor $I$ on nonnegative complexes and a natural quasi-isomorphism $\\eta:\\mathrm{id}\\to I$, with all terms of $I(A)$ injective [def-sp-injective-resolutions], such that $R(C)=I\\circ C$ and $u_C=(\\eta_{C_n})_n$ define a strict functorial replacement of cosimplicial complexes and $T(u_C):T(C)\\to T(R(C))$ is a quasi-isomorphism. Here $I\\circ C$ denotes postcomposition by $I$. Every strict map $f:C\\to D$ has the strict lift $R(f)_n=I(f_n)$ with $R(f)u_C=u_Df$, and the same $I$ and $\\eta$ apply to whole strictly augmented diagrams, including their nonnegative augmentation objects. More generally, any strict map $v:C\\to D$ whose every $v_n$ is a quasi-isomorphism induces a quasi-isomorphism $T(v)$. The sign maps $(-1)^{nq}$ on $C_n^q$ specify natural chain isomorphisms from the total of the transposed double complex $(C_n^q,d_C,\\delta)$, indexed by $(q,n)$, to $T(C)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0141 (lemma-functorial-injective-resolutions and remark-match), 079H (injectives.tex, theorem-injective-embedding-grothendieck), and 0133 (homology.tex, lemma-double-complex-gives-resolution); strict cosimplicial extension with sign transposition of the finite-total comparison."
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "By the Grothendieck functorial embedding theorem choose functorial injective embeddings in $\\mathcal A$. Apply the lower-bound-preserving complex-resolution theorem to obtain one functor $I$ and natural quasi-isomorphism $\\eta$. Restrict its domain and codomain to complexes zero below $0$: the theorem preserves that bound, and every term remains injective. Equivalently restrict to nonnegative indices and extend by zero; maps in negative degrees are uniquely zero, so these operations identify the complex categories.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-functorial-bounded-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, lemma-functorial-injective-resolutions, construction with B=0; embedding input Tag 079H, injectives.tex theorem-injective-embedding-grothendieck"
+   }
+  },
+  {
+   "text": "For every $\\alpha:[n]\\to[m]$ set $R(C)(\\alpha)=I(C(\\alpha))$. The identity and composition laws follow directly from those of $I$ and $C$. For $f:C\\to D$, naturality follows from $I(D(\\alpha))I(f_n)=I(f_m)I(C(\\alpha))$; hence $R(f)_n=I(f_n)$ defines a strict map. Naturality of $\\eta$ gives $I(f_n)\\eta_{C_n}=\\eta_{D_n}f_n$ and the same equation for every simplex operator. These equations also apply to all augmentation arrows after adjoining $[-1]$; use $I$ on the nonnegative augmentation complex too. Thus replacements of whole augmented diagrams and maps are strict and functorial.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, remark-match; postcomposition and naturality"
+   }
+  },
+  {
+   "text": "For any $C$ form the transposed bicomplex $B(C)^{q,n}=C_n^q$ with first differential $d_C$ and second differential $\\delta$. In $\\delta^2$, pair the coface composite $d^j d^i$ with $d^i d^{j-1}$ for $i<j$; their signs $(-1)^{i+j}$ and $(-1)^{i+j-1}$ cancel. Every composite occurs once in such a pair. Each coface is a chain map, so $d_C\\delta=\\delta d_C$. Thus this is a first-quadrant double complex. Its total differential is $d_C+(-1)^q\\delta$. All diagonals are finite. A strict diagram map $v$ commutes with both differentials, so it induces $B(v)$ and its total map.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012X, section-double-complex; coface cancellation written out"
+   }
+  },
+  {
+   "text": "Define $S_C:\\operatorname{Tot}(B(C))\\to T(C)$ on the $(q,n)$ summand by $(-1)^{nq}$. For the $d_C$ component, $S_Cd_C$ has sign $(-1)^{n(q+1)}$, equal to the sign $(-1)^{nq+n}$ in $d_TS_C$. For the $\\delta$ component, $S_C(-1)^q\\delta$ has sign $(-1)^{q+(n+1)q}=(-1)^{nq}$, again equal to that in $d_TS_C$. Thus $S_C$ is a chain map. Its inverse has the same summand signs since $(-1)^{2nq}=1$. For every $v$, scalar multiplication commutes with $v_n^q$, giving $S_D\\operatorname{Tot}(B(v))=T(v)S_C$. This proves precisely the asserted natural sign isomorphism.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012X, section-double-complex; explicit signed transposition"
+   }
+  },
+  {
+   "text": "If each $v_n$ is a quasi-isomorphism, apply first-quadrant column comparison to $B(v)$. With the indices chosen above, $B(C).\\mathrm{flip}.X\\,n$ is exactly the complex $C_n$ in degree $q$, so every comparison hypothesis is the given one. Hence $\\operatorname{Tot}(B(v))$ is a quasi-isomorphism. The natural isomorphisms $S_C,S_D$ identify its cohomology maps with those of $T(v)$, which are therefore isomorphisms. In particular set $D=R(C)$ and $v=u_C$; every component is $\\eta_{C_n}$ from step 1. This gives $T(u_C)$ and the general assertion.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0132 (lemma-first-quadrant-ss) and 0133 (lemma-double-complex-gives-resolution); finite-diagonal column comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141, lemma-functorial-injective-resolutions and remark-match, with Tag 079H and first-quadrant comparison (homology.tex Tags 012X, 0132, 0133); explicit cosimplicial and sign assembly by Q94."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict cosimplicial diagram of nonnegative complexes has a functorial nonnegative termwise injective replacement inducing a quasi-isomorphism on alternating total complexes",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.cm5b, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CochainComplex.isKInjective_of_injective, CochainComplex.isKInjective_of_injective_aux, Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+   "date": "2026-10-22",
+   "verdict": "no match: object injective resolutions and CM5b factorizations do not give one strict lower-bound-preserving cosimplicial replacement with the signed total quasi-isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingCofaceMapComplex\", \"QuasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: object injective resolutions and CM5b factorizations do not give one strict lower-bound-preserving cosimplicial replacement with the signed total quasi-isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*injective|injective.*cosimplicial|alternatingCoface.*quasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: object injective resolutions and CM5b factorizations do not give one strict lower-bound-preserving cosimplicial replacement with the signed total quasi-isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial bounded below injective resolutions of diagrams preserve quasi-isomorphisms of first quadrant total complexes",
+   "results": "8 hits: CategoryTheory.injectiveResolutions, HomologicalComplex.quasiIso_map_of_preservesHomology, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.of, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.InjectiveResolution.quasiIso, CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology",
+   "date": "2026-10-22",
+   "verdict": "no match: object injective resolutions and CM5b factorizations do not give one strict lower-bound-preserving cosimplicial replacement with the signed total quasi-isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial injective resolution of nonnegative cochain complexes respecting all simplex operators and total quasi-isomorphism",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.cocomplex, CategoryTheory.InjectiveResolution.toRightDerivedZero', CochainComplex.cm5b.I, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.cochainComplex, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-22",
+   "verdict": "no match: object injective resolutions and CM5b factorizations do not give one strict lower-bound-preserving cosimplicial replacement with the signed total quasi-isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*injective|injective.*cosimplicial|alternatingCoface.*quasiIso",
+   "results": "{\"t\": \"2026-10-22T11:12:31Z\", \"tool\": \"grep\", \"query\": \"cosimplicial.*injective|injective.*cosimplicial|alternatingCoface.*quasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial injective replacement of nonnegative cosimplicial cochain complexes and total complex quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-22T11:12:32Z\", \"tool\": \"leansearch\", \"query\": \"Functorial injective replacement of nonnegative cosimplicial cochain complexes and total complex quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"HomologicalComplex₂.total.mapIso\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.mapBifunctor\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.InjectiveResolution.cocomplex\"], \"digest\": \"f3e3c1c131f98a0f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-22T11:12:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"CosimplicialObject\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict cosimplicial nonnegative cochain complexes admit a functorial injective replacement preserving alternating total quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-22T11:12:35Z\", \"tool\": \"leanfinder\", \"query\": \"Strict cosimplicial nonnegative cochain complexes admit a functorial injective replacement preserving alternating total quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.cm5b\", \"AlgebraicTopology.alternatingCofaceMapComplex\", \"CochainComplex.cm5b.I\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"AlgebraicTopology.alternatingCofaceMapComplex_obj\", \"CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt_1\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"b2b2e826cc06e41c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "injectiveResolutions|alternatingCofaceMapComplex|def I |theorem cm5b",
+   "results": "{\"t\": \"2026-10-22T11:13:15Z\", \"tool\": \"grep\", \"query\": \"injectiveResolutions|alternatingCofaceMapComplex|def I |theorem cm5b\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\"], \"digest\": \"85b89fca1c069f06\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural quasi-isomorphism to a nonnegative injective resolution induces strict replacements of simplex indexed diagrams and quasi-isomorphisms of first quadrant total complexes",
+   "results": "{\"t\": \"2026-10-22T11:13:16Z\", \"tool\": \"leanfinder\", \"query\": \"A natural quasi-isomorphism to a nonnegative injective resolution induces strict replacements of simplex indexed diagrams and quasi-isomorphisms of first quadrant total complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.InjectiveResolution.mk.inj\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.isKInjective_of_injective\"], \"digest\": \"b2fd892b5f4b0b64\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: object resolutions in the homotopy category, zero-differential CM5b replacement, or alternating-coface infrastructure do not supply the full strict cosimplicial resolution and total comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nonnegative-derived-totalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the formal bounded-below Cech descent used before the root-tower boundary-unit calculation; the compatible derived-image totalization comparison. The inherited ancestor is None. Re-split of nonnegative-derived-totalization: former steps 1,2.",
+   "via": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cosimplicial-injective-total-replacement",
+  "worker": "stage1",
+  "summary": "Assembled existing functorial lower-bound-preserving resolutions and first-quadrant comparison. Wrote the strict diagram/augmentation equations, coface cancellation, and both signed transposition equations explicitly. No statement change and no new nodes.",
+  "blueprint": "Paragraph (3), open direct image: the formal bounded-below Cech descent used before the root-tower boundary-unit calculation; the compatible derived-image totalization comparison. The inherited ancestor is None. Re-split of nonnegative-derived-totalization: former steps 1,2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "why": "Generic strict complex-resolution theorem preserving the common zero lower bound; the assigned unit has no such resolution construction."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic first-quadrant total comparison used after explicit transposition; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-aa4549b78",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-aa4549b78 (reviewer sub-agent of L); spot-checked: Ordinary first split of the Q52-created statement-only item, adding no new nodes and leaving the statement unchanged. No repair note exists for this item, so the re-split order does not apply. Checked against the Stacks sources: derived.tex l.7623 lemma-functorial-injective-resolutions (0141) and remark-match; injectives.tex l.1499 (079H); homology.tex 012X/0132/0133. Step 1: the embedding node gives the hypothesis of lem-weil-pbc-functorial-bounded-injective-resolution, and taking lower bound a=0 gives I and η on Ch^{>=0}. Step 2: postcomposition plus naturality of η gives strict R, u_C and lifts, and the same holds for augmented diagrams. Step 3: the δ² pairing under the cosimplicial identity is a bijection, and the Tot differential d_C+(-1)^q δ comes from def-sp-double-complex-total. Step 4: I recomputed both sign components of S=(-1)^{nq} against d_T=δ+(-1)^n d_C, and both agree. Step 5: B(C).flip.X n is C_n, so the first-quadrant column comparison (true by finite second-degree filtration) gives a quasi-isomorphism Tot(B(v)), which conjugates to T(v) and then to T(u_C). Edge cases checked: total degree 0, negative degrees, constant cosimplicial C, one-degree complexes. A duplicate grep found no existing node with this statement, and the parent nonnegative-derived-totalization uses exactly this item with the same sign convention. The two generic tool_uses (bounded injective resolution, first-quadrant comparison) are accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CosimplicialInjectiveTotalReplacement",
+  "declaration": "CategoryTheory.exists_cosimplicial_injective_total_replacement",
+  "file": "lean/Sheaf/CategoryTheory/CosimplicialInjectiveTotalReplacement.lean",
+  "statement": "theorem exists_cosimplicial_injective_total_replacement (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] : (∃ (I : CochainComplex A ℕ ⥤ CochainComplex A ℕ) (η : 𝟭 (CochainComplex A ℕ) ⟶ I), (∀ K : CochainComplex A ℕ, QuasiIso (η.app K)) ∧ (∀ (K : CochainComplex A ℕ) (q : ℕ), Injective ((I.obj K).X q)) ∧ (∀ K : CosimplicialObject (CochainComplex A ℕ), QuasiIso (total.map ((alternatingCofaceMapComplex _).map (Functor.whiskerLeft K η)) (ComplexShape.up ℕ))) ∧ (∀ (K L : CosimplicialObject (CochainComplex A ℕ)) (f : K ⟶ L), Functor.whiskerLeft K η ≫ Functor.whiskerRight f I = f ≫ Functor.whiskerLeft L η) ∧ (∀ (B : CochainComplex A ℕ) (K : CosimplicialObject (CochainComplex A ℕ)) (b : (Functor.const SimplexCategory).obj B ⟶ K), b ≫ Functor.whiskerLeft K η = (Functor.const SimplexCategory).map (η.app B) ≫ (Functor.constComp (J := SimplexCategory) B I).inv ≫ Functor.whiskerRight b I)) ∧ (∀ (K L : CosimplicialObject (CochainComplex A ℕ)) (f : K ⟶ L), (∀ n : SimplexCategory, QuasiIso (f.app n)) → QuasiIso (total.map ((alternatingCofaceMapComplex _).map f) (ComplexShape.up ℕ))) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (n q : ℕ), HomologicalComplex₂.ιTotal (HomologicalComplex₂.flip ((alternatingCofaceMapComplex _).obj K)) (ComplexShape.up ℕ) q n (n + q) (Nat.add_comm q n) ≫ (HomologicalComplex₂.totalFlipIso ((alternatingCofaceMapComplex _).obj K) (ComplexShape.up ℕ)).hom.f (n + q) = (-1 : ℤ) ^ (n * q) • HomologicalComplex₂.ιTotal ((alternatingCofaceMapComplex _).obj K) (ComplexShape.up ℕ) n q (n + q) rfl) ∧ (∀ (K L : CosimplicialObject (CochainComplex A ℕ)) (f : K ⟶ L), total.map ((HomologicalComplex₂.flipFunctor A (ComplexShape.up ℕ) (ComplexShape.up ℕ)).map ((alternatingCofaceMapComplex _).map f)) (ComplexShape.up ℕ) ≫ (HomologicalComplex₂.totalFlipIso ((alternatingCofaceMapComplex _).obj L) (ComplexShape.up ℕ)).hom = (HomologicalComplex₂.totalFlipIso ((alternatingCofaceMapComplex _).obj K) (ComplexShape.up ℕ)).hom ≫ total.map ((alternatingCofaceMapComplex _).map f) (ComplexShape.up ℕ))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-650209b13",
+  "group": "N9",
+  "result": "pass",
+  "note": "Node and Lean match clause by clause: I and η bound once; η quasi-iso; injective terms; replacement K⋙I with unit whiskerLeft K η; total quasi-iso; strict lift whiskerRight f I with naturality square; augmented square via constComp (componentwise b_n≫η = η_B≫I b_n); arbitrary degreewise quasi-iso ⇒ total quasi-iso; totalFlipIso pinned with (-1)^(n*q) and naturality. Signs: up ℕ ε n=(-1)^n gives d_T=δ+(-1)^n d; project TotalComplexShapeSymmetry(up ℕ) has σ p q=(-1)^(p*q), so the pinned coefficient is true by Mathlib ιTotal_totalFlipIso_f_hom. ℕ-index encoding matches the parent NonnegativeDerivedTotalization and quasiIso_totalMap_of_columns. Proof-dep signatures (exists_functorial_bounded_injective_resolution keeps lower bound 0) make the statement provable; no extra hypotheses; universes u, v free. Node diff vs side-live: only the lean field changed. Statement verbatim; all imports exist; no defs; single sorry; source and blueprint docstrings and 5-step proof present; Worker report and Second reading sections present. No compile per instruction (worker reports clean compiles); no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T043420-L-1743281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.exists_cosimplicial_injective_total_replacement"
+  ],
+  "sorry_after": []
+ }
+}

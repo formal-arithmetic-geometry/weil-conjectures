@@ -1,0 +1,262 @@
+{
+ "id": "lem-weil-point-restriction-ordinary-tensor-square",
+ "kind": "statement",
+ "title": "Ordinary sections-tensor square for restriction by a point automorphism",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. Let $s=\\operatorname{Spec}k$ and let $g:s\\to s$ be any scheme automorphism [def-weil-scheme-morphism-properties]. Work on its small pro-etale site [def-weil-pbc-proetale-site]. For each finite coefficient field $F\\subset\\overline{\\mathbf Q}_\\ell$, let $\\mathcal O_F$ be its valuation ring with a chosen uniformizer [def-weil-l-adic-coefficient-extension], put $R_F=\\widehat{\\mathcal O}_{F,s}$ [def-weil-completed-integral-coefficients], and write $G_F=g^{-1}$ with the $R_F$-action transported through $c_F^{-1}$ [def-weil-inverse-image-pullback-comparison]. Sections $\\Gamma(s,-)$ are termwise sections passed to derived categories [lem-weil-point-proetale-sections-exact].\n\nLet $E\\subset L$ be two such fields. For $H\\in D(R_E)$, the unbounded derived category of sheaves of $R_E$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], put $C_{L/E}H=H\\otimes^L_{R_E}R_L$. Let $b_H:C_{L/E}G_EH\\xrightarrow{\\sim}G_LC_{L/E}H$ be the canonical inverse-image tensor comparison, with its flat-term K-flat representative specified by [lem-weil-isomorphism-scalar-tensor-kflat-model]. Let $\\theta_H:\\Gamma(s,H)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,C_{L/E}H)$ be exactly the ordinary derived sections-tensor map of [lem-weil-point-derived-sections-tensor-descent], and let $\\sigma^{g,F}$ be the restriction/coprojection map of [lem-weil-point-automorphism-restriction-natural]. Then\n$$\\Gamma(s,b_H)\\theta_{G_EH}(\\sigma^{g,E}_H\\otimes1)=\\sigma^{g,L}_{C_{L/E}H}\\theta_H.$$\nThis holds without boundedness, constructibility or derived-completeness assumptions on $H$.\n\nOn every flat-term K-flat resolution $P\\to H$ [lem-pc-kflat-resolution], the two composites are represented by equal chain maps. Write $U=(s,\\mathrm{id})$ and $V=(s,g)$. Under the evaluation identification $(G_FM)(U)\\cong M(V)$ of [lem-weil-point-automorphism-restriction-natural], applied in the common target to $F=L$ and $M=C_{L/E}P=P\\otimes_{R_E}R_L$, so that $\\Gamma(s,G_LC_{L/E}P^n)\\cong(P^n\\otimes_{R_E}R_L)(V)$, their common degreewise value on $x\\otimes a$, with $x\\in P^n(U)$ and $a\\in\\mathcal O_L$, is the sheafification image of $x|_V\\otimes a_s|_V$, where $a_s$ is the constant-value section of [lem-weil-point-finite-free-sections-tensor]. The coefficient value is normalized by $\\sigma^{g,L}_{R_L}(a_s)=c_L^{-1}(a_s)$. These chain maps represent the displayed derived equality independently of the chosen resolution, using sheafified tensor products [def-pur-sheaf-tensor-product]; no assertion that arbitrary sheaf tensor sections are sectionwise tensors is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "Returned proof steps 1-2: ordinary sections-tensor descent and the restriction calculation before completion. Agent-written extraction of the existing explicit completed-coefficient proof; Deligne Weil II (1.1.3) and (1.1.7), pp. 150-151, supply context only."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "lem-weil-point-derived-sections-tensor-descent",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-pc-kflat-resolution",
+  "lem-weil-point-finite-free-sections-tensor",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution $P\\to H$ by [lem-pc-kflat-resolution]. By [lem-weil-isomorphism-scalar-tensor-kflat-model], $G_EP$ is flat-term K-flat, $Q=P\\otimes_{R_E}R_L$ represents $C_{L/E}H$, and $b_P:G_EP\\otimes_{R_E}R_L\\to G_LQ$ represents exactly $b_H$. By [lem-weil-point-derived-sections-tensor-descent], the two occurrences of $\\theta$ are represented by their termwise balanced maps on $P$ and $G_EP$. By [lem-weil-point-automorphism-restriction-natural], the occurrences of $\\sigma$ are termwise restriction/coprojection maps. Thus both sides can be calculated as maps from $\\Gamma(s,P)\\otimes_{\\mathcal O_E}\\mathcal O_L$ to $\\Gamma(s,G_LQ)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-point-derived-sections-tensor-descent",
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrow of both Frobenius composites: ordinary coefficient-extension restriction calculation before completion (agent-written). Tensor restrictions use Stacks Tag 03EK, sites-modules.tex, section-tensor-product; K-flat representatives use Tag 06YS, sites-cohomology.tex, lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "Fix $n$, $x\\in P^n(U)$, and $a\\in\\mathcal O_L$, with constant-value section $a_s$ as in [lem-weil-point-finite-free-sections-tensor]. Put $y=\\sigma^{g,E}_{P^n}(x)$. By [lem-weil-point-automorphism-restriction-natural], $y$ identifies with $x|_V$ and $\\sigma^{g,L}_{R_L}(a_s)=c_L^{-1}(a_s)$ identifies with $a_s|_V$. The left composite first sends $x\\otimes a$ to the sheafification image of $y\\otimes a_s$. In the local formula for $b_P$ in [lem-weil-isomorphism-scalar-tensor-kflat-model], the second input $a_s$ is $c_L(c_L^{-1}(a_s))$. Consequently its output, in the evaluation target $Q^n(V)$, is precisely the sheafification image of $x|_V\\otimes a_s|_V$. This substitution also checks the transported coefficient action; it does not replace that action by an untwisted one.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrow of both Frobenius composites: ordinary coefficient-extension restriction calculation before completion (agent-written). Tensor restrictions use Stacks Tag 03EK, sites-modules.tex, section-tensor-product; K-flat representatives use Tag 06YS, sites-cohomology.tex, lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "For the right composite, [lem-weil-point-finite-free-sections-tensor] sends $x\\otimes a$ to the sheafification image of $x\\otimes a_s$ over $U$. By [lem-weil-point-automorphism-restriction-natural] its subsequent $\\sigma^{g,L}_{Q^n}$ is restriction to $V$ under evaluation. The presheaf tensor restriction in [def-pur-sheaf-tensor-product] sends $x\\otimes a_s$ to $x|_V\\otimes a_s|_V$; the map to its sheafification is a morphism of presheaves by [def-weil-pbc-sheafification], hence commutes with this restriction. This gives exactly the value in Step 2. Pure tensors generate the algebraic tensor module in the source, so the two linear maps agree in every degree. Only the source is generated this way: no surjectivity of the presheaf-to-sheaf tensor map on arbitrary sections is used.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-automorphism-restriction-natural",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrow of both Frobenius composites: ordinary coefficient-extension restriction calculation before completion (agent-written). Tensor restrictions use Stacks Tag 03EK, sites-modules.tex, section-tensor-product; K-flat representatives use Tag 06YS, sites-cohomology.tex, lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "The maps $\\theta$, $\\sigma$ and $b_P$ are chain maps by [lem-weil-point-finite-free-sections-tensor, lem-weil-point-automorphism-restriction-natural, lem-weil-isomorphism-scalar-tensor-kflat-model]; tensoring with the degree-zero coefficient module adds no differential or sign. Steps 2-3 therefore give equality of chain maps. Apply localization to this equality. Sections preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. The specified $\\theta$ maps and their resolution identifications are independent of $P$ by [lem-weil-point-derived-sections-tensor-descent]; the same holds for $b$ by [lem-weil-isomorphism-scalar-tensor-kflat-model], and derived naturality of $\\sigma$ is in [lem-weil-point-automorphism-restriction-natural]. Conjugating the localized equality by these identifications gives the displayed equality for $H$. Repeating it for any other resolution gives that same equality, because each identification is the specified one. All cited assertions apply to unbounded ambient complexes, so no constructibility or completeness is needed.",
+   "uses": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-point-derived-sections-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First transport arrow of both Frobenius composites: ordinary coefficient-extension restriction calculation before completion (agent-written). Tensor restrictions use Stacks Tag 03EK, sites-modules.tex, section-tensor-product; K-flat representatives use Tag 06YS, sites-cohomology.tex, lemma-K-flat-resolution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "lem-weil-point-derived-sections-tensor-descent",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-point-finite-free-sections-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "First transport arrow of both Frobenius composites: ordinary coefficient-extension restriction calculation before completion (agent-written). Tensor restrictions use Stacks Tag 03EK, sites-modules.tex, section-tensor-product; K-flat representatives use Tag 06YS, sites-cohomology.tex, lemma-K-flat-resolution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionsTensor|tensor.*[Rr]estriction|[Rr]estriction.*tensor|ΓRes_map",
+   "results": "Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf tensor restriction and global-section naturality are ingredients, but do not identify the derived b comparison with the specified pro-etale restriction/coprojection square on completed coefficient sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorObjMap\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf tensor restriction and global-section naturality are ingredients, but do not identify the derived b comparison with the specified pro-etale restriction/coprojection square on completed coefficient sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections tensor comparison commutes with the canonical inverse image tensor isomorphism and restriction of sections on an isomorphism of sites",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; AlgebraicGeometry.arrowResLEAppIso; CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf tensor restriction and global-section naturality are ingredients, but do not identify the derived b comparison with the specified pro-etale restriction/coprojection square on completed coefficient sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of completed valuation ring modules on the pro etale site of an algebraically closed point, the canonical global sections tensor map commutes with restriction along a point automorphism and the inverse image tensor comparison",
+   "results": "ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; AlgebraicGeometry.StructureSheaf.toOpen_res",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf tensor restriction and global-section naturality are ingredients, but do not identify the derived b comparison with the specified pro-etale restriction/coprojection square on completed coefficient sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the map from tensor products of global sections to sections of tensor products under restriction on sheaves of modules",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓRes_map; CategoryTheory.Sheaf.ΓRes_map_assoc; PresheafOfModules.Monoidal.tensorObj_map_tmul; PresheafOfModules.Monoidal.tensorObjMap; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Hom.naturality_assoc; ModuleCat.Tilde.res_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf tensor restriction and global-section naturality are ingredients, but do not identify the derived b comparison with the specified pro-etale restriction/coprojection square on completed coefficient sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsTensor|tensorObj_map_tmul|ΓRes_naturality",
+   "results": "Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorObj_map_tmul\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections tensor comparison commutes with restriction of sheaves and inverse image tensor isomorphism",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.arrowResLEAppIso; CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm; CategoryTheory.Sheaf.ΓRes_map; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For completed valuation ring module sheaves on a pro etale point, the global sections tensor map commutes with restriction under a point automorphism and inverse image tensor comparison",
+   "results": "ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj_map_tmul|tensorObjMap",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the canonical balanced global sections tensor map under restriction along an equivalence of ringed sites, including the pure tensor formula after sheafification",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; SheafOfModules.pullbackObjFreeIso_hom_naturality; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; CategoryTheory.Sheaf.ΓObjEquivHom_naturality; CategoryTheory.Sheaf.ΓObjEquivSections_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general restriction/naturality or presheaf tensor facts do not state the completed-coefficient point automorphism square with its specified derived comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-automorphism-transport-scalar-extension",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First transport arrow of each ordinary/compact-support composite in def-weil-global-geometric-frobenius: its finite coefficient-extension compatibility. Returned proof steps 1-2: ordinary sections-tensor descent and the restriction calculation before completion.",
+   "via": [
+    "lem-weil-point-automorphism-transport-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-point-restriction-ordinary-tensor-square",
+  "worker": "stage1",
+  "summary": "Checked the exact K-flat, sections-tensor and restriction statements. Computed both chain maps on source pure tensors, with the coefficient input expressed through c_L inverse; used presheaf tensor restriction and naturality of the sheafification unit. No new nodes or statement changes.",
+  "blueprint": "The first transport arrow of each Frobenius composite in def-weil-global-geometric-frobenius: ordinary coefficient-extension restriction compatibility before the completion comparison. Steps 1 and 4 specify representatives and descent; steps 2 and 3 give the ordinary tensor calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-derived-sections-tensor-descent",
+    "why": "Uses the specified ordinary sections-tensor chain representative and its resolution-independent descent for every ambient complex; this coefficient tool is not a replacement for an upper-shriek preservation step."
+   },
+   {
+    "node": "lem-weil-point-finite-free-sections-tensor",
+    "why": "Uses the constant-value section and the balanced sheafification formula, with its chain-map assertion; the unit has no alternative sections-tensor construction."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Uses exactness of sections on the algebraically closed pro-etale point to localize the chain equality; a general sections tool, not a new upper-shriek route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-derived-sections-tensor-descent",
+  "lem-weil-point-finite-free-sections-tensor",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-bac080ceb",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-bac080ceb (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes; review.md is written. It is a 4-step split of the item with no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the unsplit base (04fcd9f865), and this is not a re-split order. Step 1: lem-pc-kflat-resolution gives P->H. The kflat-model node, with X=Y=s, g an isomorphism and ell!=p, gives G_EP flat-term K-flat, Q and Z as representatives, and [b_P]=b_H. The descent node gives theta on P and on G_EP. The restriction node gives sigma as termwise chain maps. Step 2, recomputed: y=ins_g(x|_V). The b_P local formula with p=x|_V and s_0=a_s|_V works because g^{-1}s_0=sigma_{R_L}(a_s)=c_L^{-1}(a_s), so c_L(g^{-1}s_0)=a_s. The output is ins_{g,Q}(x|_V(x)a_s|_V), and the direction of c_L is correct. Step 3: def-pur-sheaf-tensor-product gives the presheaf-tensor restriction, and the sheafification unit is a presheaf morphism (def-weil-pbc-sheafification). Both sides go through the same ins_g, and agreement on source pure tensors is enough. Step 4: theta, sigma and b_P are chain maps; sections are exact on the algebraically closed point; each identification is fixed independently of the resolution by its cited node; conjugation is by the same isomorphisms on both sides. Edge cases E=L, g=id, H=0, unbounded H and degree shifts all check. Route: sections-exact and the tensor definition are in sk-def-sf-admissible, and K-flat resolution and sheafification are in sk-thm-picard-semicon; the unit reaches both. The descent and finite-free tool_uses (sk-thm-sf-compatibility) are accepted as generic sections-tensor black boxes, and both are already in the item's stmt_deps. No duplicate of the square exists (rg finds only the item and its parent), there is no cycle, and proof_deps equals the union of the steps' uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointRestrictionOrdinaryTensorSquare",
+  "declaration": "WeilConjectures.point_restriction_ordinary_tensor_square",
+  "declarations": [
+   "WeilConjectures.pointRestrictionTensorLeft",
+   "WeilConjectures.pointRestrictionTensorRight",
+   "WeilConjectures.pointRestrictionOrdinaryTensorSquare",
+   "WeilConjectures.point_restriction_ordinary_tensor_square"
+  ],
+  "file": "lean/Sheaf/Paper/PointRestrictionOrdinaryTensorSquare.lean",
+  "statement": "theorem point_restriction_ordinary_tensor_square (D : FiniteFieldDatum.{t}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E L : IntermediateField ℚ_[l] Ω) [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (h : E ≤ L) (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] [HasDerivedCategory.{wE} (ModuleCat.{max u (t + 1)} (Padic.coefficientExtensionIntegers l E))] [HasDerivedCategory.{wL} (ModuleCat.{max u (t + 1)} (Padic.coefficientExtensionIntegers l L))] (d : PointFiniteFreeSectionsTensorData D.k l E L (IntermediateField.inclusion h)) (b : (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ leftComplex l E L (IntermediateField.inclusion h) g ≅ (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ rightComplex l E L (IntermediateField.inclusion h) g) (β : inverseImageIntegralDerived l E g ⋙ completedDerivedScalarExtension l E L (IntermediateField.inclusion h) (Spec (.of D.k)) ≅ completedDerivedScalarExtension l E L (IntermediateField.inclusion h) (Spec (.of D.k)) ⋙ inverseImageIntegralDerived l L g) (_hb : CompletedFormula l E L (IntermediateField.inclusion h) g b) (_hβ : DerivedModel l E L (IntermediateField.inclusion h) g b β) : ∃ dd : PointDerivedSectionsTensorData d, pointRestrictionOrdinaryTensorSquare d g dd b β",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion supplies the recorded PointDerivedSectionsTensorData and the square predicate using its normalized theta. Sigma is the recorded raw restriction in unlifted scalar coordinates and tau is its specified localization. The supplied b and beta are the dependency comparisons, constrained by its CompletedFormula and DerivedModel. Chain equality, the sheafified restricted pure-tensor value, and c_L inverse normalization are all included; no boundedness or completeness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7fb1ea16",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Only the item's lean record changed; the statement field is verbatim. θ is fixed by ∃ dd : PointDerivedSectionsTensorData (comparison_unique/localized_unique/theta_eq); d is pinned (constantE/L). σE/σL are equal component by component to pointRestrictionRaw … none, and τE/τL are fixed by the localization equation with the mapDerivedCategoryFactors isos. b and β are hypotheses determined uniquely by CompletedFormula and DerivedModel, the predicates of the K-flat-model theorem. The displayed equation T(τE_H)≫θ_{G_E H}≫Γ_L(β_H)=θ_H≫τL_{CH} holds for every unbounded H. The chain equality covers every good P. The pure-tensor value is completedScalarTensorSection at V of res_g a_s and res_g x. The coefficient equation is res_g(a_s)=c_L⁻¹(a_s). No added hypotheses; universes t/u/wE/wL independent; edge cases E=L, g=id, H=0 covered. No duplicate in side-live. Not hollow; only the main proof is sorry; docstrings complete. Advisories: imports PointProEtaleSectionsExact, not the recorded …OfUniverses module (unused, transitive); the Second reading section is the dispatcher no-second-reading wording (H11 advisory). Nothing compiled."
+ }
+}

@@ -1,0 +1,290 @@
+{
+ "id": "lem-sp-constructible-coefficient-site-square",
+ "kind": "statement",
+ "title": "Constructibility of the underived finite coefficient/site square",
+ "statement": "Let $X$ be a Noetherian scheme, meaning that it has a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]. Let $A\\to B$ be a unital map of finite commutative rings, let $a\\le b$ be integers, and let $C$ be a cochain complex of etale $A_X$-module sheaves [def-pc-cochain-complex-modules, def-weil-pbc-derived-categories]. Suppose that $C^q=0$ for $q\\notin[a,b]$ and that each $C^q$ is constructible with a global finite partition into constructible locally closed strata on which it is finite locally constant [def-weil-pbc-etale-constructible-sheaf]. Put $C_B=C\\otimes_{A_X}B_X$, using ordinary termwise sheaf tensor and the $B_X$-action on the second factor [def-pur-sheaf-tensor-product]. Write $N_R=\\nu_X^*$ for the exact comparison on constant-$R$ modules, for $R=A,B$ [lem-sf-comparison-pullback-exact], and write $Q$ for localization to the ordinary module derived categories of the two sites [def-weil-pbc-proetale-modules].\nEvery term of $C_B$ is constructible over $B$, and any finite stratification witnessing constructibility of $C^q$ also witnesses constructibility of $C_B^q$; on an etale trivializing cover with finite $A$-module value $M$, its value is the finite $B$-module $M\\otimes_A B$. For any constructible etale $R_X$-module sheaf $F$, where $R=A$ or $B$, $N_RF$ is intrinsically constructible on the pro-etale site [def-weil-proetale-constructible-sheaf]: each witnessing nonempty finite stratification for $F$ and each etale trivializing cover on its strata give the same stratification and a pro-etale trivializing cover with the same finite module values. If the chosen partition has zero strata (necessarily $X=\\varnothing$), replace it by the one-stratum partition consisting of the empty subscheme, with constant zero module; this satisfies the positive-number-of-strata convention on the pro-etale side [def-constructible-stratification]. The four objects $Q(C)$, $Q(C_B)$, $Q(N_AC)$ and $Q(N_BC_B)$ have constructible cohomology, zero outside $[a,b]$, on their respective sites [def-weil-pbc-constructible-complexes]. More precisely, $H^q(N_RC')\\simeq N_RH^q(C')$ for $(R,C')=(A,C),(B,C_B)$. These assertions do not require flatness of the terms of $C$ or of $B$ over $A$; $C_B$ here is an underived tensor complex, with no claim that it represents a derived scalar extension.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent deduction from Tag 0GKB (lemma-tensor-constructible), Tag 03RZ (lemma-constructible-abelian), and the forward sheaf/complex argument in literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md, parts (1)-(2); global stratifications are retained explicitly."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-comparison-pullback-exact",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved source functors in WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible: constantSheafCompEtaleSheafExtendScalarsIso identifies extension of a constant M with the constant extended module, and etaleSheafExtendScalarsCompUpperStarIso commutes extension with every scheme inverse image. These are uniqueness-of-left-adjoint comparisons, so do not require a presentation, a ringed-site encoding, or flatness. Convert finite-value constructibility with [lem-weil-pbc-constructible-etale-module-sheaf-comparison] and apply the proved source isConstructibleSheaf_etaleSheafExtendScalars_obj. On any specified stratum and etale object, transport the given model through the etale slice equivalence, apply the two comparisons, then transport back. ModuleCat.finite_extendScalars_obj' makes the extended module finitely generated over the finite ring B, hence a finite set. This proves constructibleCoefficientSheaf with its arbitrary-stratum/model clause.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Convert etale constructibility with [lem-weil-pbc-constructible-etale-module-sheaf-comparison] and use the already proved forward source theorem ProEtale.isConstructible_comparisonUpperStar_obj. On every stratum its finite-model predicate gives local constancy through [lem-weil-pbc-proetale-finite-model-local-constancy] and finite stalks through [lem-weil-pbc-proetale-finite-model-stalks]. For positive-size partitions retain all strata. A zero-size partition forces X empty; use its identity one-stratum partition and the empty covering. This gives intrinsic fixed-coefficient constructibility without passing through the ringed-coefficient encoding.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the arbitrary specified nonempty partition and cover, its etale cover belongs to the proetale precoverage. Transport each given constant model through the etale slice equivalence. The canonical scheme-pullback comparison [lem-weil-pbc-comparison-pullback], followed by comparisonUpperStarConstantSheafIso (uniqueness of the constant-sheaf left adjoint), gives the same constant M on the covering scheme. Transport back through the proetale slice equivalence [lem-weil-proetale-weakly-etale-localization]. For an empty input partition the underlying X is empty. Every object of its small site is empty and has the empty covering, hence every module sheaf is zero. Its identity one-stratum partition therefore has constant zero value as asserted. This proves all remaining clauses of constructibleSiteComparison.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each etale complex, [thm-constructible-serre] proves that the kernel of its outgoing differential and the cokernel of the incoming differential lifted to this kernel are constructible in the source-library predicate. ShortComplex.homologyIsoCokernelLift identifies this cokernel with its homology. Convert through [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. The representative comparison [def-weil-derived-cohomology-sheaves] identifies it with localized cohomology. ShortComplex.isZero_homology_of_isZero_X₂ proves vanishing whenever the middle term is zero. Scalar extension is additive, so preserves the support interval. Apply these facts to C and constructibleCoefficientComplex X phi C.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact comparison [lem-sf-comparison-pullback-exact] and Mathlib ShortComplex.mapHomologyIso give H^q(N D) isomorphic to N H^q(D) for both D=C and D=C_B. Apply constructibleSiteComparison to each etale homology object, then transport intrinsic constructibility along this isomorphism and the localization comparison [def-weil-derived-cohomology-sheaves]. Isomorphism invariance transports the local models and the colimit defining each geometric stalk. For vanishing, comparison is additive, so its term in degree q is zero whenever D^q is zero; apply the same middle-term homology vanishing lemma. Combine the termwise, bounded etale, intrinsic proetale, vanishing and comparison-isomorphism clauses to obtain constructibleCoefficientSiteSquare.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "thm-constructible-serre",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0GKB and 03RZ; implemented by V5 using the already proved source scalar-extension and forward site-comparison lemmas, the etale/proetale slice equivalences, finite-model local constancy/stalk lemmas, and Mathlib homology comparisons. All three original statements and the ordinary coefficient complex definition are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded termwise constructible etale sheaf complexes retain constructible cohomology after underived finite scalar extension and proetale comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type module sheaves, sheaf evaluation and site definitions do not state finite-stratification constructibility for these coefficient/site complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite stratification for constructible module sheaves persists under changing finite coefficient rings and exact inverse image to the proetale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat}\\n  {ins\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, there exists local ge\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type module sheaves, sheaf evaluation and site definitions do not state finite-stratification constructibility for these coefficient/site complex models"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, ModuleCat",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: no absence conclusion; replaced by the later fully qualified Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|IsConstructibleSheaf|proetale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type module sheaves, sheaf evaluation and site definitions do not state finite-stratification constructibility for these coefficient/site complex models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite scalar extension and etale proetale inverse image preserve finite stratifications of bounded termwise constructible complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.evaluation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) : CategoryTheory.Functor (SheafOfModules R) (ModuleCat ↑(R.obj.obj X))\", \"doc\": \"Evaluation on an object `X` gives a functor\\n`SheafOfModules R ⥤ ModuleCat (R.val.obj X)`.\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) (hX : CategoryTheory.Limits.IsInitial X) : CategoryTheory.Functor (SheafOfModules R) (CategoryTheory.Sheaf J (ModuleCat ↑(R.obj.obj X)))\", \"doc\": \"The forgetful functor from sheaves of modules over sheaf of ring `R` to sheaves of `R(X)`-module\\nwhen `X` is initial.\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat_obj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) (hX : CategoryTheory.Limits.IsInitial X) (M : SheafOfModules R) : ((SheafOfModules.forgetToSheafModuleCat R X hX).obj M).obj = (PresheafOfModules.forgetToPre\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat_map_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) (hX : CategoryTheory.Limits.IsInitial X) {X✝ Y✝ : SheafOfModules R} (f : X✝ ⟶ Y✝) : ((SheafOfModules.forgetToSheafModuleCat R X hX).map f).hom = (PresheafOfM\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_apply_coe\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} (M : SheafOfModules R) (f : SheafOfModules.unit R ⟶ M) (X : Cᵒᵖ) : ↑(M.unitHomEquiv f) X = (CategoryTheory.ConcreteCategory.hom (f.val.app X)) 1\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X Y : Cᵒᵖ) (hX : CategoryTheory.Limits.IsInitial X) (hY : CategoryTheory.Limits.IsInitial Y) (φ : X ≅ Y) : SheafOfModules.forgetToSheafModuleCat R X hX ≅ (SheafOfModu\", \"doc\": \"Isomorphism on `forgetToSheafModuleCat` when given isomorphic initial objects.\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesLimitsOfSize.{v₂, v, max u₁ v, v, max (max (max u u₁) (v + 1)) v₁, max u (v + 1)} (SheafOfModules.evaluation R X)\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesFiniteLimits (SheafOfModules.evaluation R X)\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Sheaf J RingCat) [Small.{v, u₂} D] (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesLimitsOfShape D (SheafOfModules.evaluation R X)\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat} (F : CategoryTheory.Functor D (SheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (SheafOfModules.evalua\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat} (F : CategoryTheory.Functor D (SheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (SheafOfModules.evalua\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat} (F : CategoryTheory.Functor D (SheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (SheafOfModules.evalua\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type module sheaves, sheaf evaluation and site definitions do not state finite-stratification constructibility for these coefficient/site complex models"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|constructible.*sheaf|proetale",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Sites.Proetale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"39\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"61\", \"text\": \"[Definition 6.8.1.][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"65\", \"text\": \"  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"66\", \"text\": \"    ⟨continuousMapPresheafAb (ℤ_[ℓ]), .of_le proetaleTopology_le_fpqcTopology <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"34\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"50\", \"text\": \"[Definition 4.1.1][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"52\", \"text\": \"def proetalePrecoverage : Precoverage Scheme.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"57\", \"text\": \"lemma proetalePrecoverage_le_precoverage_weaklyEtale :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"58\", \"text\": \"    proetalePrecoverage ≤ MorphismProperty.precoverage @WeaklyEtale :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type module sheaves, sheaf evaluation and site definitions do not state finite-stratification constructibility for these coefficient/site complex models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar extension of constructible etale module sheaves preserves their strata and exact etale proetale comparison preserves bounded constructible cohomology",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Condensed.profiniteSolid, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Algebra.Etale.comp, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern condensed module constructions, site definitions, or ordinary etale ring maps; none states global stratification preservation for the underived coefficient/site complex square."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|proetale|proEtale",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern condensed module constructions, site definitions, or ordinary etale ring maps; none states global stratification preservation for the underived coefficient/site complex square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat",
+   "results": "12 hits: SheafOfModules.evaluation, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.forgetToSheafModuleCat_obj_obj, SheafOfModules.forgetToSheafModuleCat_map_hom, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.forgetToSheafModuleCatOfIso, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern condensed module constructions, site definitions, or ordinary etale ring maps; none states global stratification preservation for the underived coefficient/site complex square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale sheaves under change of finite coefficient rings and etale to proetale comparison",
+   "results": "8 hits: Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.respectsIso, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.etaleTopology, RingHom.Etale, RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern condensed module constructions, site definitions, or ordinary etale ring maps; none states global stratification preservation for the underived coefficient/site complex square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite locally constant sheaves along a finite stratification has constructible cohomology after tensor with a finite constant ring",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.functor, Condensed.finFree, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstant.functor, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern condensed module constructions, site definitions, or ordinary etale ring maps; none states global stratification preservation for the underived coefficient/site complex square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-coefficient-input-models",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: finite coefficient extension; bounded input supplied through lem-sp-et-proet-coefficient-compatibility, old input-model proof Steps 5-7 (stratum scalar extension, cohomology Serre closure, global finite-stratification site comparison).",
+   "via": [
+    "lem-sp-finite-coefficient-input-models",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-constructible-coefficient-site-square",
+  "worker": "stage1",
+  "summary": "Q111: seven-step split with no new nodes. Retains global partitions and arbitrary finite coefficient maps, computes constant tensor models, uses existing exact closure and site comparisons, and corrects the empty-partition convention on the empty scheme. No Lean written or compiled.",
+  "blueprint": "det-sp-reduction-exceptional: finite coefficient extension on coordinate charts. These steps supply constructibility for the input models below lem-sp-et-proet-coefficient-compatibility, using the forward constructible comparison argument and Stacks 0GKB/03RZ.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic exact sheafification to sheafify a finite module presentation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact etale constant-coefficient module inverse image and coefficient-ring identification."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact module comparison and its cohomology formula, independent of exceptional functors."
+   },
+   {
+    "node": "lem-sf-proetale-sheafification-tensor-comparison",
+    "why": "Generic sheafification tensor comparison for constant presheaves."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic underived tensor comparison for algebraic inverse image; used on a stratum and its cover."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic commutation of the site comparison with stratum and cover pullbacks."
+   },
+   {
+    "node": "lem-pur-etale-proetale-cover",
+    "why": "Generic covering inclusion; no deformation-to-the-normal-cone argument is imported."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-encoding",
+    "why": "Generic equivalence with fixed-module-valued sheaves, used solely to read finite models."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-constructibility",
+    "why": "Generic equivalence of the intrinsic and fixed-module finite-global-partition predicates."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic kernel/cokernel closure for finite-coefficient etale constructible sheaves; applied to the two differentials, not to a six-operation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic criterion checking the locally bijective constant-presheaf sheafification unit for the tensor comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-b4dff7653",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-b4dff7653 (reviewer sub-agent of L); spot-checked: I read the 7-step split in full; it has no new nodes. Base: side-live Q18 unsplit node, sole citer lem-sp-finite-coefficient-input-models Step 3 (uses only the four-object clause). Statement change accepted: the étale stratification def (def-constructible-stratification, k<n) allows n=0 but def-weil-proetale-constructible-sheaf needs N>=1, so 'same stratification' fails for X empty with the empty partition. The repair (nonempty partitions; for X empty use the one empty stratum with the 0 module) adds no hypothesis and weakens nothing the citer uses; def-constructible-stratification correctly added to stmt_deps. Steps: (1) finite presentation by listing elements, plus exact sheafification and exact u^{-1}/nu^* with the ring identifications -> constants preserved; (2) sheafification tensor comparison with locally bijective unit via the iso criterion; presheaf tensor is constant M(x)_A B, finite, B-linear; (3) algebraic inverse-image tensor comparison on F and B_X. Small point: the AlgebraicInverseImage instantiation of étale u^{-1} is routine from prop-weil-pbc-inverse-image-modules-exact (2); accepted. (4) same strata and covers give M(x)_A B; (5) comparison-pullback twice, étale cover is pro-étale, encoding/constructibility bridge for any finite B and global partition, empty case handled; (6) thm-constructible-serre kernel then cokernel of C^{q-1}->Z^q = H^q; (7) lem-sf-comparison-pullback-exact (3). This matches Stacks 0GKB (proof omitted, same-stratification hint), 03RZ(3), and main-20261015 sk-thm-pe-constructible-comparison-equivalence (1)-(2), forward direction only. No SGA. Edge cases: X empty, B=0, A=B, Z/4->Z/2 underived, a=b, zero complex. DAG search found no duplicate: the classical/converse, surjective change-of-ring, derived condensed scalar-extension and O_E->E nodes all differ. 11 generic tool_uses accepted; all three Mathlib search kinds recorded; steps under 2000 chars. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleCoefficientSiteSquare",
+  "declaration": "AlgebraicGeometry.constructibleCoefficientSiteSquare",
+  "declarations": [
+   "AlgebraicGeometry.constructibleCoefficientComplex",
+   "AlgebraicGeometry.constructibleCoefficientSheaf",
+   "AlgebraicGeometry.constructibleSiteComparison",
+   "AlgebraicGeometry.constructibleCoefficientSiteSquare"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleCoefficientSiteSquare.lean",
+  "statement": "theorem constructibleCoefficientSiteSquare (X : Scheme.{u}) [IsNoetherian X] (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (a b : ℤ) (_hab : a ≤ b) (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hzero : ∀ q : ℤ, q < a ∨ b < q → IsZero (C.X q)) (_hcons : ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (C.X q)) : (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((constructibleCoefficientComplex X φ C).X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((constructibleCoefficientComplex X φ C).X q)) ∧ Etale.DerivedCategory.isBoundedConstructible A X (_root_.DerivedCategory.Q.obj C) ∧ Etale.DerivedCategory.isBoundedConstructible B X (_root_.DerivedCategory.Q.obj (constructibleCoefficientComplex X φ C)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj (_root_.DerivedCategory.Q.obj C)) ∧ IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj (_root_.DerivedCategory.Q.obj (constructibleCoefficientComplex X φ C)))) ∧ (∀ q : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X A ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) q).obj (_root_.DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapHomologicalComplex (.up ℤ)).obj C))) ∧ Scheme.IsConstructibleProEtaleFixedModuleSheaf X B ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) q).obj (_root_.DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapHomologicalComplex (.up ℤ)).obj (constructibleCoefficientComplex X φ C))))) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) q).obj (_root_.DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapHomologicalComplex (.up ℤ)).obj C))) ∧ IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) q).obj (_root_.DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapHomologicalComplex (.up ℤ)).obj (constructibleCoefficientComplex X φ C))))) ∧ (∀ q : ℤ, Nonempty ((((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapHomologicalComplex (.up ℤ)).obj C).homology q ≅ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).obj (C.homology q)) ∧ Nonempty ((((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapHomologicalComplex (.up ℤ)).obj (constructibleCoefficientComplex X φ C)).homology q ≅ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).obj ((constructibleCoefficientComplex X φ C).homology q)))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main theorem states all four localized cohomology assertions. The two additional theorems state the same-node sheaf clauses, including preservation of any chosen strata and trivializations and the explicit one-empty-stratum convention. The definition is the actual published ordinary scalar extension applied termwise, with its additive structure from the scalar adjunction; it is not derived scalar extension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-404bde7b7",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read item node, all 11 stmt_dep records, report (Worker report + Second reading present), module and live dep decls (IsConstructibleEtaleModuleSheaf, FiniteLocallyClosedStratification, IsConstructibleProEtaleFixedModuleSheaf, isBoundedConstructible, etaleSheafExtendScalars, comparisonPullbackExact cl.3). Only item lean record differs from live; statement verbatim. All hypotheses present and none stronger (A,B : Type (u+1) is the deps' encoding). Clauses: C_B termwise constructible with same strata and B⊗M values; N_R F intrinsically constructible with same stratification and etale cover as proet cover; zero-strata -> IsEmpty X + one empty stratum with value 0; Q(C),Q(C_B) isBoundedConstructible + [a,b] vanishing; proet H^q intrinsic constructible + vanishing; Nonempty H^q(N C') ≅ N H^q(C'), matching the dep interface. Edge cases X=∅, B=0, A=B, zero complex, a=b, Z/4->Z/2 ok. Gates: sorry-only, docstrings with source/blueprint, real-data helper def, no name collisions, imports exist. Advisory: C_B uses published etaleSheafExtendScalars rather than the SheafOfModules tensor of def-pur (canonically iso). No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261023T152053-L-439169",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,377 @@
+{
+ "id": "lem-pur-etale-proper-open-exchange-cube",
+ "kind": "statement",
+ "title": "Normalized unbounded proper/open interchange: pasting and the arbitrary-base-change cube",
+ "statement": "Let $A$ be a finite commutative ring. On the ordinary unbounded small-etale module derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], write $P_v=v^{-1}$ for exact inverse image, $R_v=Rv_*$ for total derived direct image, and $J_j=Dj_!$ for degreewise open extension [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-extension-by-zero-exact]. Let\n$$Q=\\begin{array}{ccc}U&\\xrightarrow{k}&V\\\\ r\\downarrow&&\\downarrow p\\\\ W&\\xrightarrow{i}&Z\\end{array},\\qquad pk=ir,$$\nbe a commutative square of arbitrary schemes, with $p,r$ proper and $i,k$ open [def-weil-proper-morphism, def-weil-open-immersion]. There is a canonical natural isomorphism $\\Gamma_Q:J_iR_r\\xrightarrow{\\sim}R_pJ_k$ with this normalization: for a K-injective representative $I$ of an input on $U$ and a K-injective resolution $k_!I\\to H$, its component is represented by\n$$i_!r_*I\\xrightarrow{\\theta_Q}p_*k_!I\\longrightarrow p_*H.$$\nHere $\\theta_Q$ is the canonical sheaf proper-support identification: both sheaves are the subsheaf of $(ir)_*I=(pk)_*I$ of sections with support proper over the target, extended by zero along the indicated open. K-injectives and total derived direct image are as in [def-pur-kinjective-complex, lem-weil-pbc-kinjective-total-derived]. For Cartesian $Q$ [def-pc-fibre-product], $\\Gamma_Q$ is exactly the unit--open-base-change--counit map of [lem-sf-etale-proper-open-tensor-square].\nFor vertically stacked squares $Q_1,Q_2$ of this kind, with middle open $i_1$, bottom open $i_2$, left proper maps $r_1,r_2$ and right proper maps $p_1,p_2$,\n$$\\Gamma_{Q_2Q_1}=(R_{p_2}\\Gamma_{Q_1})\\circ(\\Gamma_{Q_2}R_{r_1}).$$\nFor horizontally adjacent squares with top opens $k,l$, bottom opens $i,j$ and proper verticals $r,p,q$,\n$$\\Gamma_{Q_2Q_1}=(\\Gamma_{Q_2}J_k)\\circ(J_j\\Gamma_{Q_1}).$$\nInsert the canonical direct-image and open-extension compositors; squares with identity proper or identity open edges give their canonical identity comparisons [lem-weil-pbc-ringed-topoi-derived-pushforward-composition, lem-cbc-extension-zero-composition].\nFor any scheme map $b:Z_1\\to Z$, base change every vertex of $Q$ over $Z$; write $Q_1$ for the new square and $a:V_1\\to V$, $c:W_1\\to W$, $d:U_1\\to U$ for the projections. Let $\\beta_i:P_bJ_i\\xrightarrow{\\sim}J_{i_1}P_c$ and $\\beta_k:P_aJ_k\\xrightarrow{\\sim}J_{k_1}P_d$ be the inverses of the open-unit-normalized mates of [lem-asd-open-base-change-unit-mate]. With the unbounded unit--square--counit exchanges of [def-kun-unbounded-exchange],\n$$(R_{p_1}\\beta_k)\\circ(\\operatorname{Ex}_pJ_k)\\circ P_b(\\Gamma_Q)\n=(\\Gamma_{Q_1}P_d)\\circ(J_{i_1}\\operatorname{Ex}_r)\\circ(\\beta_iR_r).$$\nThis is an equality of the specified natural transformations $P_bJ_iR_r\\to R_{p_1}J_{k_1}P_d$. No quasi-compactness of the opens, Noetherianity, boundedness, constructibility or Tor-amplitude assumption is imposed, and $Q$ need not be Cartesian.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open), case (b), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7E (remark-going-around, the two-by-two grid), and 0F7F (lemma-shriek-proper-and-open-base-change, the arbitrary-base-change cube, without a Cartesian hypothesis on the original square). Open-immersion specialization. Only the identification with the specified Cartesian adjunction mate is an additional normalization assertion; compare lem-sf-etale-proper-open-tensor-square and upstream LowerShriek/Formalism/BaseChange.lean, exchange_pfBaseChange_cube."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-etale-proper-open-tensor-square",
+  "lem-asd-open-base-change-unit-mate",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct theta by the existing proved exists_sheafComparison helper: identify both paths with their common proper-support subsheaf, using the monic inclusion into the same direct image. Its defining equation is the required support normalization, transported to the statement’s composite.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-support-sheaf-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "Apply the proved openExtension_derivedUnit_isIso helper, whose pointwise cohomological-dimension bound and open-extended-injective acyclicity work on arbitrary schemes. Feed this into constructedDerivedComparison to obtain Gamma with its homotopy-unit normalization. The generic comparison_representative helper derives normalization on every K-injective representative and every resolution from this unit equation. Rearrange that equation by cancelling only canonical isomorphisms to obtain the displayed representative formula.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-open-extended-injective-proper-acyclic",
+    "lem-kun-finite-cd-acyclic-complex",
+    "lem-kun-proper-torsion-cd-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "Apply the separate arbitrary-scheme Cartesian normalization theorem to the support- and unit-normalized families. It identifies the actual Gamma with openImmersionLowerShriekLowerStarExchange.",
+   "uses": [
+    "lem-pur-etale-proper-open-cartesian-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "Use ordinary_vertical and generic_vertical_pasting, with geometric_comp_fac, from the existing proved composition module. The former cancels the monic common-direct-image inclusion; the latter is right-derived transformation uniqueness with the units. No Noetherian instance occurs in these helpers.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "Apply the arbitrary-scheme horizontal normalization result to theta, Gamma and their support and unit equations. Its compositor is definitionally the specified descended open-extension compositor.",
+   "uses": [
+    "lem-pur-etale-proper-open-horizontal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "For the proper-identity edges use ordinary_identity_vertical, derived_vertical_identity and derived_identity_fac. For identity open edges use ordinary_identity_horizontal and derived_horizontal_identity. Identify the two canonical left-adjoint identity isomorphisms via their unit equation. The derived identity maps are exactly those specified in the item.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-pasting",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  },
+  {
+   "text": "Apply the separate arbitrary-scheme unit-normalized cube theorem, then natural-transformation extensionality and the associator component equations. This inserts the fixed inverse open-base-change maps and exactDerivedBaseChangeMap without cancelling either base-change exchange.",
+   "uses": [
+    "lem-pur-etale-proper-open-cube-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B(b), 0F7C, 0F7D and 0F7F, with the indicated existing generic helper"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-open-extended-injective-proper-acyclic",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pur-etale-proper-open-cartesian-normalization",
+  "lem-amb-unbounded-proper-open-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-etale-proper-open-horizontal-normalization",
+  "lem-amb-unbounded-proper-open-pasting",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-etale-proper-open-cube-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "G9: reuse the arbitrary-scheme private helpers of UnboundedProperOpenInterchange, UnboundedProperOpenComposition and UnboundedProperOpenPasting; retain three distinct normalization arguments as separate source results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*open.*exchange|exchange.*cube|shriek.*baseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mates, sheaf compositors, scheme geometry or unrelated algebra; none states this ordinary unbounded etale proper/open coherence result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open interchange commutes with base change for unbounded etale derived categories",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange; Algebra.Etale.baseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; Algebra.Unramified.baseChange; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange; AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mates, sheaf compositors, scheme geometry or unrelated algebra; none states this ordinary unbounded etale proper/open coherence result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.comp_leftAdjointMate; CategoryTheory.comp_rightAdjointMate; CategoryTheory.comp_leftAdjointMate_assoc; CategoryTheory.comp_rightAdjointMate_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mates, sheaf compositors, scheme geometry or unrelated algebra; none states this ordinary unbounded etale proper/open coherence result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-proper-open-exchange-cube: Cartesian proper open interchange commutes with arbitrary base change on unbounded etale derived categories",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mates, sheaf compositors, scheme geometry or unrelated algebra; none states this ordinary unbounded etale proper/open coherence result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-proper-open-exchange-cube: Beck Chevalley mate of an open proper Cartesian square is natural under a Cartesian cube",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'_fst_snd; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mates, sheaf compositors, scheme geometry or unrelated algebra; none states this ordinary unbounded etale proper/open coherence result"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*(comp|past)|shriek.*(comp|[Bb]ase)|support.*[Nn]ormal",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: geometry/coherence datatype hits do not state normalized derived proper/open interchange or its pasting and cube equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized proper open interchange for finite coefficients in unbounded etale derived categories satisfies horizontal and vertical pasting and base change",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; Mathlib.Tactic.BicategoryLike.NormalizedHom; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: geometry/coherence datatype hits do not state normalized derived proper/open interchange or its pasting and cube equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-proper-open-exchange-cube: unbounded etale proper open interchange has canonical support normalization, horizontal vertical pasting and arbitrary base change compatibility",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: geometry/coherence datatype hits do not state normalized derived proper/open interchange or its pasting and cube equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale derived proper direct image and open extension interchange with arbitrary base change and pasting coherence",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange; AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; scheme stability, sheafification or generic mates do not state this normalized unbounded proper/open comparison and cube"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_comp_id_right; CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; scheme stability, sheafification or generic mates do not state this normalized unbounded proper/open comparison and cube"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*exchange|shriek.*baseChange|exchange.*cube",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; scheme stability, sheafification or generic mates do not state this normalized unbounded proper/open comparison and cube"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical support normalized unbounded etale proper open interchange and its base change cube",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.Unramified.baseChange; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; RingHom.Etale.isStableUnderBaseChange; RingHom.IsStandardOpenImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; scheme stability, sheafification or generic mates do not state this normalized unbounded proper/open comparison and cube"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support sheaf comparison after K injective resolutions obeys vertical and horizontal composition and arbitrary pullback",
+   "results": "8 hits: CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.Presheaf.isLocallyInjective_of_whisker; CategoryTheory.sheafComposeIso_hom_fac; CategoryTheory.sheafComposeIso_inv_fac; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; scheme stability, sheafification or generic mates do not state this normalized unbounded proper/open comparison and cube"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-exists-right-derived-lower-shriek-comp-iso",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence.",
+   "via": [
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pur-etale-proper-open-exchange-cube",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-scheme unbounded statement. Constructed the support-normalized comparison via K-injectives, proved the local finite-cd computation from existing nodes, identified the Cartesian mate, and proved both pasting laws, units, and the arbitrary-base-change cube using common resolutions. No new nodes: all non-elementary inputs already have DAG statements. No attachment covers every clause.",
+  "blueprint": "Serves prop-asd-smooth-base-change.proof.md coherences (i) and (iii), through the existing compact-support composition parent: the proper/open representative comparison, its composition laws, and its chart/base-change cube. Latest blueprint sk-prop-sf-cbc is in sec-six-functors-basics; the live item chapter/unit/provenance are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-sf-etale-module-stalk-cohomology-test",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-sf-etale-proper-open-tensor-square",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-module-termwise",
+    "why": "Generic module-sheaf, K-injective, cohomological-dimension or adjunction tool used for the explicit Stacks proper/open proof; its full statement applies without replacing the compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pc-proper-base-change",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sf-etale-module-stalk-cohomology-test",
+  "lem-sf-etale-proper-open-tensor-square",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-derived-exchange-module-termwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-8b9a2a31f",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-8b9a2a31f (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; there are no fixes. Shape: one commit with the item and the report only, no new nodes. The statement and stmt_deps are byte-identical to the live unsplit node that NC created on 2026-10-24, so nothing was weakened, and this is a first split, not a re-split. proof_deps equals the union of the steps' uses, the dependency graph has no cycle, no cited node is merged and no SGA source is cited. Statement: it is Stacks 0F7B case (b) for a finite coefficient ring A, specialised to open immersions (separated and locally quasi-finite, so no quasi-compactness is needed), together with 0F7C/0F7D pasting and the 0F7F cube. The coefficient category is constant-A module sheaves on the small etale site, unbounded D(T_et,A), which is Stacks' D(X_et,Lambda). The base-change maps are the unit-square-counit mates of def-kun-unbounded-exchange, and beta_i, beta_k are the inverses of the unit-normalized mates; this matches 0F7F. I checked that both sides of the cube and both pasting laws are well typed, and that the four side faces of the cube are Cartesian. Steps: I checked every step against the full statements of all 28 cited nodes and against the Stacks text. Step 1: lem-cbc-proper-support-sheaf-composition applies, since open immersions and proper maps are separated and locally of finite type. Step 2 follows the local argument of 0F7B(b): restriction to an affine open B keeps K-injectives and injectives, proper base change, the fibre-dimension bound on quasi-compact B, the cd bound 2d for torsion sheaves (A is finite, and the module/abelian comparison applies), and acyclicity of open-extended injectives with no Cartesian hypothesis. Step 3: Stacks 07K7 by naturality of alpha, then the stalk test; the case of a K-injective without injective terms is handled by homotopy equivalences, which I verified. Step 4: independence and naturality from the Hom bijection and the resolution cocycle. Step 5: I verified the sheaf identity: in the Cartesian case the source is supported on k(U), so k_! adjunction reduces both maps to the r-counit; the mate bijection then gives the Gamma of lem-sf-etale-proper-open-tensor-square. Steps 6-7 follow 0F7C/0F7D; I checked the compositor normalization and the naturality of theta, and the identity-edge cases hold. Steps 8-10 follow 0F7F; I expanded both paths and they agree by the step-8 sheaf cube and the step-9 homotopy h a^{-1}rho beta^{-1} ~ sigma k1_!u. Neither exchange is cancelled. Small cases tested: empty U, identity edges, a non-Cartesian clopen-component square, and a base that is not quasi-compact. Tool uses: I accept all 16 declared tool_uses as generic black boxes. Duplicates: lem-amb-unbounded-proper-open-interchange is the Noetherian special case of this item; the other candidates are bounded-below, Weil-sheaf or pro-etale. None states this result. For the maintainer: the Noetherian lem-amb node could later be merged into or cite this item, and blueprint.from.node is null, inherited from NC's creation of the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperOpenExchangeCube",
+  "declaration": "AlgebraicGeometry.Etale.etaleProperOpenExchangeCube",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ProperOpenSheafComparisonFamily",
+   "AlgebraicGeometry.Etale.ProperOpenDerivedComparisonFamily",
+   "AlgebraicGeometry.Etale.etaleProperOpenExchangeCube"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperOpenExchangeCube.lean",
+  "statement": "theorem etaleProperOpenExchangeCube (A : Type (u + 1)) [CommRing A] [Finite A] : ∃ (θ : ProperOpenSheafComparisonFamily A) (Γ : ProperOpenDerivedComparisonFamily A), (∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k] (sq : CommSq k r p i), (θ k r p i sq).hom ≫ Functor.whiskerRight (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k) (p)_*[ModuleCat.{u + 1} A] ≫ (lowerStarComp (ModuleCat.{u + 1} A) k p (r ≫ i) sq.w.symm).hom = Functor.whiskerLeft (r)_*[ModuleCat.{u + 1} A] (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i) ≫ (lowerStarComp (ModuleCat.{u + 1} A) r i).hom) ∧ (∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k] (sq : CommSq k r p i) (I : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) [I.IsKInjective] (H : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) [H.IsKInjective] (ρ : (((k)_!open[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj I ⟶ H) [QuasiIso ρ], ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.inv.app ((((r)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).obj I) ≫ D((i)_!open[ModuleCat.{u + 1} A]).map (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso I).inv ≫ (Γ k r p i sq).hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (θ k r p i sq).hom (.up ℤ)).app I ≫ (((p)_*[ModuleCat.{u + 1} A]).mapHomologicalComplex (.up ℤ)).map ρ) ≫ (((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorObjQIso H).inv ≫ R((p)_*[ModuleCat.{u + 1} A]).map (inv (DerivedCategory.Q.map ρ) ≫ ((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryFactors.inv.app I)) ∧ (∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p), (Γ k r p i sq.toCommSq.flip).hom = openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq) ∧ (∀ {U V W Z S T : Scheme.{u}} (k : U ⟶ V) (i₁ : W ⟶ Z) (i₂ : S ⟶ T) (r₁ : U ⟶ W) (p₁ : V ⟶ Z) (r₂ : W ⟶ S) (p₂ : Z ⟶ T) [IsProper r₁] [IsProper p₁] [IsProper r₂] [IsProper p₂] [IsOpenImmersion k] [IsOpenImmersion i₁] [IsOpenImmersion i₂] (s₁ : CommSq k r₁ p₁ i₁) (s₂ : CommSq i₁ r₂ p₂ i₂) (M : DerivedCategoryModule A U), (Γ k (r₁ ≫ r₂) (p₁ ≫ p₂) i₂ (s₁.vert_comp s₂)).hom.app M = D((i₂)_!open[ModuleCat.{u + 1} A]).map ((rightDerivedLowerStarComp (ModuleCat.{u + 1} A) r₁ r₂).inv.app M) ≫ (Γ i₁ r₂ p₂ i₂ s₂).hom.app (R((r₁)_*[ModuleCat.{u + 1} A]).obj M) ≫ R((p₂)_*[ModuleCat.{u + 1} A]).map ((Γ k r₁ p₁ i₁ s₁).hom.app M) ≫ (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) p₁ p₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj M)) ∧ (∀ {U V V' W Z Z' : Scheme.{u}} (k : U ⟶ V) (l : V ⟶ V') (i : W ⟶ Z) (j : Z ⟶ Z') (r : U ⟶ W) (p : V ⟶ Z) (q : V' ⟶ Z') [IsProper r] [IsProper p] [IsProper q] [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j] (s₁ : CommSq k r p i) (s₂ : CommSq l p q j) (M : DerivedCategoryModule A U), (Γ (k ≫ l) r q (i ≫ j) (s₁.horiz_comp s₂)).hom.app M = (mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j).hom.app (R((r)_*[ModuleCat.{u + 1} A]).obj M) ≫ D((j)_!open[ModuleCat.{u + 1} A]).map ((Γ k r p i s₁).hom.app M) ≫ (Γ l p q j s₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj M) ≫ R((q)_*[ModuleCat.{u + 1} A]).map ((mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l).inv.app M)) ∧ (∀ {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (s : CommSq j (𝟙 U) (𝟙 V) j) (M : DerivedCategoryModule A U), (Γ j (𝟙 U) (𝟙 V) j s).hom.app M = D((j)_!open[ModuleCat.{u + 1} A]).map ((rightDerivedLowerStarIdIso A U).hom.app M) ≫ (rightDerivedLowerStarIdIso A V).inv.app (D((j)_!open[ModuleCat.{u + 1} A]).obj M)) ∧ (∀ {U W : Scheme.{u}} (r : U ⟶ W) [IsProper r] (s : CommSq (𝟙 U) r r (𝟙 W)) (M : DerivedCategoryModule A U), (Γ (𝟙 U) r r (𝟙 W) s).hom.app M = (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) W).hom.app (R((r)_*[ModuleCat.{u + 1} A]).obj M) ≫ R((r)_*[ModuleCat.{u + 1} A]).map ((mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} A) U).inv.app M)) ∧ (∀ {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) (k₁ : U₁ ⟶ V₁) (r₁ : U₁ ⟶ W₁) (p₁ : V₁ ⟶ Z₁) (i₁ : W₁ ⟶ Z₁) (d : U₁ ⟶ U) (a : V₁ ⟶ V) (c : W₁ ⟶ W) (b : Z₁ ⟶ Z) [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k] [IsProper p₁] [IsProper r₁] [IsOpenImmersion i₁] [IsOpenImmersion k₁] (s : CommSq k r p i) (s₁ : CommSq k₁ r₁ p₁ i₁) (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b) (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c), Functor.whiskerRight (Γ k r p i s).hom D((b)^*[ModuleCat.{u + 1} A]) ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft D((k)_!open[ModuleCat.{u + 1} A]) (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sp.toCommSq) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) sk).inv R((p₁)_*[ModuleCat.{u + 1} A]) ≫ (Functor.associator _ _ _).hom = (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft R((r)_*[ModuleCat.{u + 1} A]) (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) si).inv ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sr.toCommSq) D((i₁)_!open[ModuleCat.{u + 1} A]) ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft D((d)^*[ModuleCat.{u + 1} A]) (Γ k₁ r₁ p₁ i₁ s₁).hom)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two abbreviations only name the types of the sheaf and derived comparison families. The theorem supplies both families with the common-direct-image support normalization, every K-injective representative/resolution formula, the specified Cartesian mate, vertical/horizontal pasting, both unit laws, and the arbitrary-base-change cube as equality of natural transformations. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b9bc1420",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement verbatim = file signature (script), node unchanged except lean, one sorry. θ pinned uniquely by the common (ir)_* inclusion (p_* of the mono k_!→k_*); Γ pinned on every K-injective I and resolution ρ, so canonical. Cartesian clause = openImmersionLowerShriekLowerStarExchange (recorded tensor-square map). Vertical/horizontal pasting orders and the rightDerivedLowerStarComp / mapDerivedCategoryOpenImmersionLowerShriekComp directions checked; unit laws use leftAdjointUniq/rightDerivedFunctorIsoMapDerivedCategory identities. Cube: exactDerivedBaseChangeMap (def-kun-unbounded-exchange) has the right orientation, and β = .inv of mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (hom = mate per the recorded _mate lemma); the four Cartesian side faces are equivalent to base change over Z; original square not assumed Cartesian. Edge cases (zero ring, empty schemes, identities, non-qc, non-Cartesian) covered; universes follow the recorded convention. Noetherian lem-amb node is a special case, not a duplicate. Advisory: upstream étale compositors have no DAG owner, and the cited ringed-topos composition lemma does not type here. Docstrings, source and blueprint present; not recompiled (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185855-L-3744288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

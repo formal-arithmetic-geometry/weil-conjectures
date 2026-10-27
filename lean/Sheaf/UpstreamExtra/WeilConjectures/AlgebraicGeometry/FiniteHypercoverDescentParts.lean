@@ -1,6 +1,5 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 public import Sheaf.Paper.TruncatedFiniteSplitEtaleDiagram

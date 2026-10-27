@@ -1,0 +1,231 @@
+{
+ "id": "def-sp-semilinear-compactified-graph-data",
+ "kind": "definition",
+ "title": "Ordinary semilinear compactified graph data",
+ "statement": "The ordinary data underlying compactified semilinear graph evaluation: inclusion into the pro-etale sequence site; the section-normalized restriction ring map and restriction functor; its sum-extension adjunction; the graph-value specifications; the corresponding operations at a single coefficient ring; and the specified ordinary evaluation comparisons for sum, open extension and direct image. These are the original constructions with their original eleven named helper theorem statements; this node records their module ownership after a compile-time split, without asserting that those eleven existing holes are filled.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph sections; agent extension to compactification and semilinear systems. Blueprint det-sp-tower-gluing, Local pairs and Levels paragraphs; old item steps 1–4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-sp-semilinear-constant-ring-operations",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual restriction ring map, restriction functor and sum-extension adjunction from continuity and the uniquely section-normalized ring map. The existing named helper theorems in this module retain their original complete proof docstrings and holes. The etale map $e$ is flat and has open diagonal by [def-weil-etale-morphism] and [def-weil-unramified-morphism]. An open immersion induces isomorphisms on local rings, hence is flat by [def-weil-open-immersion, def-weil-flat-morphism]. Thus $e$ is weakly etale by [def-weil-weakly-etale-morphism]. Apply [lem-weil-proetale-weakly-etale-localization] to identify the slice site and its constant rings with those on $U$. The presheaf in the item is exactly [def-weil-extension-by-zero-presheaf], so [lem-pur-site-restriction-module-adjunction-exact] makes its sheafification exact at each level. The semilinear system category has componentwise exactness by [lem-coef-semilinear-derived-sections]; therefore the resulting system functor is exact once its transitions are specified below.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, graph-section construction; agent extension to the compactification and semilinear systems, following det-sp-tower-gluing, Local pairs and Levels paragraphs."
+   }
+  },
+  {
+   "text": "Write $C_t=Z_V\\setminus s_t(V)$ and $F_n=j_!M_n$. On the graph, the inverse of the open unit [lem-exc-proetale-open-unit], restricted along $t$, identifies $F_n(s_t(V))$ with $M_n(V,t)$. Restriction along this open uses the ring identification of [lem-weil-proetale-weakly-etale-localization]. Apply [lem-pur-clopen-ringed-module-gluing] to the two clopen components of $Z_V$, with the restriction of the constant $R_n$ sheaf from $\\overline U$. Its section formula identifies $F_n(Z_V)$ with $F_n(s_t(V))\\times F_n(C_t)$. Define $g_{n,V,t}(m)$ to be the section corresponding to $(m,0)$. The same formula proves both existence and uniqueness, without finite-ring or constructibility assumptions.",
+   "uses": [
+    "lem-exc-proetale-open-unit",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, graph-section construction; agent extension to the compactification and semilinear systems, following det-sp-tower-gluing, Local pairs and Levels paragraphs."
+   }
+  },
+  {
+   "text": "Let $\\alpha_n:M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$ be a transition. Open extension acts on such systems by [lem-coef-semilinear-derived-sections]; denote its transition by $\\beta_n:j_!M_{n+1}\\to\\operatorname{Res}_{n+1,n}j_!M_n$. Its restriction on $U$ is $\\alpha_n$, since the open units are natural. Applying $\\beta_n$ to $g_{n+1,V,t}(m)$ therefore gives pair $(\\alpha_n(m),0)$ and hence\n$$\\beta_n g_{n+1,V,t}(m)=g_{n,V,t}(\\alpha_n(m)).$$\nOn the direct-sum presheaf the transition sends each summand by $\\alpha_n$, with scalars restricted through $R_{n+1}\\to R_n$. Thus the displayed equality supplies its compatibility with the graph map. The presheaf transition extends uniquely after sheafification by [def-weil-presheaf-modules-sheafification], using the target with its restricted scalar action. Compositions of transitions agree because they do so on every summand. Only restriction of scalars, addition and zero occur, so no flatness is used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, graph-section construction; agent extension to the compactification and semilinear systems, following det-sp-tower-gluing, Local pairs and Levels paragraphs."
+   }
+  },
+  {
+   "text": "Construct the same one-coefficient operations. Ordinary evaluation compares restrictions, sums and direct images by the specified section formulas and universal properties. The resulting isomorphisms are the actual named comparisons used by the derived graph-evaluation structure; their existing uniqueness theorem statements and proof plans are retained. No arbitrary witness of unproved mere existence is used.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, graph-section construction; agent extension to the compactification and semilinear systems, following det-sp-tower-gluing, Local pairs and Levels paragraphs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-unramified-morphism",
+  "def-weil-weakly-etale-morphism",
+  "lem-coef-semilinear-derived-sections",
+  "lem-exc-proetale-open-unit",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph sections; agent extension to compactification and semilinear systems. Blueprint det-sp-tower-gluing, Local pairs and Levels paragraphs; old item steps 1–4.",
+  "note": "Compile-time module split. Existing construction formulas and helper proof bodies are retained; no proof hole is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and extension by zero of semilinear module systems along an etale map",
+   "results": "8 hits for formally etale restriction of scalars and composition.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the existing normalized system construction; retain it."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "12 hits for pushforward, its identity comparison and adjunctions.",
+   "date": "2026-10-27",
+   "verdict": "The original constructions already use this Mathlib API."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|pushforward",
+   "results": "25 hits including sheaf-of-modules pushforward and continuous pullback.",
+   "date": "2026-10-27",
+   "verdict": "Keep the original continuous-site and sheafification constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: ordinary semilinear graph operations and their coefficient evaluation comparisons.",
+   "via": [
+    "lem-sp-semilinear-compactified-graph-evaluation",
+    "lem-sp-varying-ring-graph-summand",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearCompactifiedGraphData",
+  "file": "lean/Sheaf/Paper/SemilinearCompactifiedGraphData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearGraph.restriction",
+  "statement": "def restriction {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :\n    SemilinearProperOpen.Modules C τ T ⥤ SemilinearProperOpen.Modules C τ U",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.inclusion",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.inclusion_continuous",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.restrictionRing_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.restrictionRing",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.restriction",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.restriction_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumExtension",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumAdjunction",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumExtension_exact",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumExtensionAdditive",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumExtensionLimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumExtensionColimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.testProjection",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.openRestriction_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.openUnit",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.GraphValue",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.IsGraphMap",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelInclusion",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelRestrictionRing",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelRestriction",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelRestriction_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSum",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSumAdjunction",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSum_exact",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSumAdditive",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSumLimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelSumColimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.ev",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.evAdditive",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.evLimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.evColimits",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumEvaluation_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.sumEvaluation",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelOpenRestriction_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.levelOpenUnit",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.openEvaluation_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.openEvaluation",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.pushEvaluation_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.pushEvaluation",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.pushEvaluationComplex",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.LevelGraphValue",
+   "AlgebraicGeometry.ProEtale.SemilinearGraph.IsLevelGraphMap"
+  ],
+  "note": "All public headers, data bodies, proved bodies and eleven existing named theorem holes are retained verbatim from SemilinearCompactifiedGraphEvaluation. No new declaration name or hole is introduced; the original module publicly re-exports this data."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

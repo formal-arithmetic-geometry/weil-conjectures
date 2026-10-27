@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-dg-compact-map-finite-subcell",
+ "kind": "statement",
+ "title": "Compact-source maps into finite-length semi-free modules have finite-cell support",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $A=\\bigoplus_{j\\in\\mathbf Z}A^j$ be an associative unital graded ring with additive differential $d:A^j\\to A^{j+1}$, $d^2=0$, and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$. A right dg $A$-module is a graded right module $L$ with degree-one differential satisfying $d^2=0$ and $d(xa)=d(x)a+(-1)^{|x|}x\\,d(a)$. Let $D(A)$ be their homotopy category localized at the maps inducing isomorphisms on all cohomology groups, where homotopies satisfy $f-g=d h+h d$ for degree-minus-one graded right-linear maps $h$. Write $A[k]^j=A^{j+k}$ with differential $(-1)^k d_A$ and unchanged right action. Let $E\\in D(A)$ be compact [def-pc-compact-object] for small coproducts represented by direct sums. Let $n\\geq0$ and let $T$ be a right dg $A$-module with a specified finite filtration $0=F_{-1}T\\subseteq F_0T\\subseteq\\cdots\\subseteq F_nT=T$ by dg submodules and specified dg isomorphisms $F_iT/F_{i-1}T\\cong\\bigoplus_{j\\in J_i}A[k_{ij}]$ for $0\\leq i\\leq n$, small sets $J_i$ and integers $k_{ij}$. For every morphism $f:E\\to T$ in $D(A)$ there exist a dg submodule $T'\\subseteq T$, finite subsets $J'_i\\subseteq J_i$, and a morphism $g:E\\to T'$ in $D(A)$ such that $f$ is $g$ followed by the inclusion $T'\\hookrightarrow T$, and such that the injection\n$$ (F_iT\\cap T')/(F_{i-1}T\\cap T')\\longrightarrow F_iT/F_{i-1}T $$\nhas image exactly $\\bigoplus_{j\\in J'_i}A[k_{ij}]$ under the specified isomorphism. In particular these quotient maps identify the successive quotients with finite sums of shifts of $A$. Empty index sets and $T=0$ are allowed; no boundedness, commutativity, flatness or countability hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R2, lemma-factor-through-nicer, statement and finite-filtration induction; indices rewritten so that every layer, including F_0/F_{-1}, is covered."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-compact-object",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-finite-semi-free-filtration"
+ ],
+ "proof": [
+  {
+   "text": "We descend on $m=n,n-1,\\ldots,-1$. The induction assertion is that there is a DG submodule $U\\subseteq T$ containing $F_mT$, a map $a:E\\to U$ whose composite into $T$ is $f$, and finite subsets $S_i\\subseteq J_i$ for $i>m$, such that the image of $(U\\cap F_iT)/(U\\cap F_{i-1}T)$ in the specified layer is exactly the coordinate subsum on $S_i$. For $m=n$ take $U=T$, $a=f$; there are no conditions on higher layers. At $m=-1$ this assertion is exactly the conclusion, since $F_{-1}T=0$. We construct the step from any $m\\geq0$ to $m-1$ below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, descending induction assertion and base case; layer indices shifted to cover F_0T."
+   }
+  },
+  {
+   "text": "For each $i>m$ and $j\\in S_i$, lift the standard homogeneous generator of $A[k_{ij}]$ to $x_{ij}\\in U\\cap F_iT$, of degree $-k_{ij}$. There are finitely many such lifts. Successively subtract their multiples in layers $n,n-1,\\ldots,m+1$. This expresses every element of $U$ uniquely as an element of $F_mT$ plus a sum of their multiples: existence follows by killing its top layer at each subtraction, and uniqueness by projecting a relation to its highest nonzero layer, where the specified generators form a free graded basis. Thus, as graded modules, $U=F_mT\\oplus\\bigoplus_{i>m,j\\in S_i}x_{ij}A$, and $U\\cap F_lT=F_mT\\oplus\\bigoplus_{m<i\\leq l,j\\in S_i}x_{ij}A$ for $l\\geq m$. Since the quotient generator is closed, $d(x_{ij})\\in U\\cap F_{i-1}T$. The same subtraction expresses it as $y_{ij}+\\sum_{m<r<i,s\\in S_r}x_{rs}b_{ij}^{rs}$, with $y_{ij}\\in F_mT$ and homogeneous coefficients (each sum finite). These assertions concern the underlying graded modules only; the lifts need not be closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, homogeneous lifts and differential expansions; degree of the generator is -k with A[k]^j=A^{j+k}."
+   }
+  },
+  {
+   "text": "Let $K\\subseteq J_m$ be the union of the supports of the images of all $y_{ij}$ in $F_mT/F_{m-1}T=\\bigoplus_{j\\in J_m}A[k_{mj}]$. It is finite because there are finitely many $y_{ij}$ and each direct-sum element has finite support. Let $H_K\\subseteq F_mT$ be the inverse image of the coordinate subsum on $K$, and set $V_K=H_K+\\sum_{i>m,j\\in S_i}x_{ij}A\\subseteq U$. The subsum is a DG submodule, hence so is $H_K$. The displayed expansions give $d(x_{ij})\\in V_K$, and $d(x_{ij}b)=d(x_{ij})b+(-1)^{|x_{ij}|}x_{ij}d(b)$ proves that $V_K$ is a DG submodule. The unique expansion in the previous step gives $V_K\\cap F_mT=H_K$ and $V_K\\cap F_lT=H_K\\oplus\\bigoplus_{m<i\\leq l,j\\in S_i}x_{ij}A$ for $l\\geq m$. Its layer $m$ is precisely the coordinate subsum on $K$; its higher layers retain precisely $S_i$. It contains $F_{m-1}T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, finite supports, inverse-image submodule, and construction P double-prime plus the selected lifts."
+   }
+  },
+  {
+   "text": "The inclusion $F_mT\\to U$ induces a DG isomorphism $F_mT/H_K\\xrightarrow{\\sim}U/V_K$: it is surjective since the $x_{ij}$ are killed, and its kernel is $H_K$ by uniqueness of the graded expansion. Consequently $Q_K=U/V_K$ identifies as a DG module with $\\bigoplus_{j\\in J_m\\setminus K}A[k_{mj}]$. Denote the quotient by $q_K:U\\to Q_K$. For every remaining generator choose a homogeneous lift in $F_mT$; right-linear extension is a graded section of $q_K$. Thus $0\\to V_K\\to U\\xrightarrow{q_K}Q_K\\to0$ is graded-split. These lifts are not asserted to give a DG section. For any finite enlargement $L\\supseteq K$, the same construction works, $V_K\\subseteq V_L$, and the quotient map $U\\to Q_L$ is $q_K$ followed by the coordinate projection deleting the summands indexed by $L\\setminus K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, displayed complementary quotient; graded splitting made explicit by lifting its homogeneous free generators."
+   }
+  },
+  {
+   "text": "Apply compactness [def-pc-compact-object] to $q_Ka:E\\to Q_K$, using the coproduct represented by the stated DG direct sum. Its definition writes $q_Ka=\\sum_{j\\in B}\\iota_j c_j$ for a finite subset $B\\subseteq J_m\\setminus K$ and morphisms $c_j:E\\to A[k_{mj}]$. Put $L=K\\cup B$. The coordinate projection $Q_K\\to Q_L$ kills every displayed $\\iota_j$, so $q_La=0$. The module $V_L$ has exactly the layer properties already verified for $V_K$, now with layer $m$ indexed by $L$.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, compactness and finite enlargement; derived.tex Tag 07LS, definition-compact-object."
+   }
+  },
+  {
+   "text": "The graded-split sequence $0\\to V_L\\to U\\xrightarrow{q_L}Q_L\\to0$ gives a distinguished triangle $V_L\\to U\\xrightarrow{q_L}Q_L\\to V_L[1]$ by [lem-sfb-dg-derived-admissible-triangles]. Its first two arrows are the actual inclusion and quotient. Since $q_La=0$, clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] gives $b:E\\to V_L$ whose composite into $U$ is $a$. Therefore its composite into $T$ is $f$. Replace $U,a$ by $V_L,b$, retain $S_i$ for $i>m$, and take $S_m=L$. This proves the induction step. After the finite descent to $m=-1$, put $T'=U$, $g=a$, and $J'_i=S_i$. All quotient images are the specified coordinate subsums, not merely abstract isomorphic sums. The construction allows every selected set to be empty. When $T=0$ it gives $T'=0$ and the zero factorization.",
+   "uses": [
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R2, lemma-factor-through-nicer, final lifting assertion, expanded using Tags 09K8/09K6/09KX and derived.tex Tag 0149, lemma-representable-homological."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R2, lemma-factor-through-nicer, full descending induction; the final derived lift is made explicit via the graded-split exact triangle and derived.tex Tag 0149."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.cell|semi.free|Semifree|SemiFree",
+   "results": "{\"t\": \"2026-10-24T07:34:19Z\", \"tool\": \"grep\", \"query\": \"finite.cell|semi.free|Semifree|SemiFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Subcomplex.lean\", \"Mathlib/Topology/CWComplex/Classical/Subcomplex.lean\"], \"digest\": \"d86ac3f9e10693e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary derived-category bounded representatives, supports of complexes, ordinary module images or topological CW cells. They do not factor a derived dg-module morphism through a finite-cell dg submodule."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact morphism to a finite length semi free differential graded module factors through a finite cell submodule",
+   "results": "{\"t\": \"2026-10-24T07:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Compact morphism to a finite length semi free differential graded module factors through a finite cell submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.monoFactorisation\", \"compactOperator\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.ShortComplex.toCycles\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"IsFiniteLength.below.rec\", \"IsFiniteLength\", \"Module.Finite.kerRepr\"], \"digest\": \"4435018f9757894a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary derived-category bounded representatives, supports of complexes, ordinary module images or topological CW cells. They do not factor a derived dg-module morphism through a finite-cell dg submodule."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"Differential\"",
+   "results": "{\"t\": \"2026-10-24T07:34:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompactObject\\\", \\\"Differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary derived-category bounded representatives, supports of complexes, ordinary module images or topological CW cells. They do not factor a derived dg-module morphism through a finite-cell dg submodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a compact object to a differential graded module with finite filtration by sums of free shifts factors through a finite cell submodule",
+   "results": "{\"t\": \"2026-10-24T07:34:20Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a compact object to a differential graded module with finite filtration by sums of free shifts factors through a finite cell submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"HomologicalComplex.IsSupported\", \"ComplexShape.Embedding.AreComplementary.hom_ext\", \"CochainComplex.cm5b\"], \"digest\": \"aff0d69d1905d98c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary derived-category bounded representatives, supports of complexes, ordinary module images or topological CW cells. They do not factor a derived dg-module morphism through a finite-cell dg submodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from compact objects into bounded semi free differential graded modules have finite cell support",
+   "results": "{\"t\": \"2026-10-24T07:35:28Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from compact objects into bounded semi free differential graded modules have finite cell support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.IsSupported\", \"HomologicalComplex.IsSupportedOutside\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"HomologicalComplex.instIsStrictlySupportedOfNat\", \"HomologicalComplex.IsStrictlySupported\", \"HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside\", \"HomologicalComplex.IsStrictlySupportedOutside\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"05ce1062efeb901d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary derived-category bounded representatives, supports of complexes, ordinary module images or topological CW cells. They do not factor a derived dg-module morphism through a finite-cell dg submodule."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.free|Semifree|finite.cell",
+   "results": "{\"t\": \"2026-10-24T07:56:57Z\", \"tool\": \"grep\", \"query\": \"semi.free|Semifree|finite.cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Subcomplex.lean\", \"Mathlib/Topology/CWComplex/Classical/Subcomplex.lean\"], \"digest\": \"d86ac3f9e10693e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain-complex bounded fractions, ordinary module images/filtrations, support in a complex shape, or topological cells; none gives finite-cell submodule factorization for modules over an arbitrary differential graded ring. Read Fractions.lean:110-165; its hypotheses and conclusion are about degree bounds, not finite cells."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact source morphism finite filtration free differential graded module finite support factorization",
+   "results": "{\"t\": \"2026-10-24T07:56:57Z\", \"tool\": \"leansearch\", \"query\": \"Compact source morphism finite filtration free differential graded module finite support factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Free.finsupp\", \"ModuleCat.monoFactorisation\", \"IsModuleFiltration\", \"Ideal.Filtration\", \"IsModuleFiltration.recOn\", \"IsModuleFiltration.toGradedSMul\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"IsModuleFiltration.rec\"], \"digest\": \"89c17419deafd64f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain-complex bounded fractions, ordinary module images/filtrations, support in a complex shape, or topological cells; none gives finite-cell submodule factorization for modules over an arbitrary differential graded ring. Read Fractions.lean:110-165; its hypotheses and conclusion are about degree bounds, not finite cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"Differential\"",
+   "results": "{\"t\": \"2026-10-24T07:56:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompactObject\\\", \\\"Differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain-complex bounded fractions, ordinary module images/filtrations, support in a complex shape, or topological cells; none gives finite-cell submodule factorization for modules over an arbitrary differential graded ring. Read Fractions.lean:110-165; its hypotheses and conclusion are about degree bounds, not finite cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact derived dg module into a finite filtered semi free module factors through a finite cell dg submodule",
+   "results": "{\"t\": \"2026-10-24T07:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a compact derived dg module into a finite filtered semi free module factors through a finite cell dg submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"FGModuleRepr.embed\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"localCohomology.diagram\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\"], \"digest\": \"7b0a0bdd157de531\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain-complex bounded fractions, ordinary module images/filtrations, support in a complex shape, or topological cells; none gives finite-cell submodule factorization for modules over an arbitrary differential graded ring. Read Fractions.lean:110-165; its hypotheses and conclusion are about degree bounds, not finite cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from compact objects to bounded semi free differential graded modules have finite cell support compatible with their filtrations",
+   "results": "{\"t\": \"2026-10-24T07:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Maps from compact objects to bounded semi free differential graded modules have finite cell support compatible with their filtrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.IsSupported\", \"HomologicalComplex.IsStrictlySupported\", \"HomologicalComplex.map_isStrictlySupported\", \"HomologicalComplex.IsSupportedOutside\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside\", \"HomologicalComplex.instIsStrictlySupportedOfNat\", \"HomologicalComplex.IsStrictlySupportedOutside\"], \"digest\": \"d4ed5c005fbb2976\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain-complex bounded fractions, ordinary module images/filtrations, support in a complex shape, or topological cells; none gives finite-cell submodule factorization for modules over an arbitrary differential graded ring. Read Fractions.lean:110-165; its hypotheses and conclusion are about degree bounds, not finite cells."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-compact-finite-cell-retract",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: After proving global compactness from principal-cover descent, use only the compact-to-finite-cell implication. Stacks 09R3, compact-to-finite-cell proof: finite-subcell factorization in a bounded filtration (09R2), after the telescope reduction.",
+   "via": [
+    "lem-sfb-dg-compact-finite-cell-retract",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-compact-map-finite-subcell",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09R2 and expanded the descending finite-layer induction, including homogeneous lift degrees, actual coordinate images, graded-split complementary quotient, finite support by compactness, and the derived lift via exactness. Statement unchanged; no new nodes needed.",
+  "blueprint": "Inherited nearest blueprint ancestor is null (as printed by blueprint_refs.py ancestor). The inherited from.place identifies det-thm-sf-ctf-stability-direct-images proof (3); this is its existing DG finite-cell prerequisite via 09R3 and 09R2. Searched all blueprint nodes for semi-free, finite-cell, factor-through-nicer and 09R2; no equivalent imported node. Latest blueprint direct-images proof and unit read; no route replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic representable-Hom exactness for a distinguished triangle, used to lift a map killed by the quotient; the unit does not replace this general triangulated-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-1c65c1c50",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1c65c1c50 (reviewer sub-agent of L); spot-checked: Read Stacks dga.tex 09R2 lemma-factor-through-nicer (l.6216-6290) in full against the item. The statement is unchanged; its layers are reindexed as F_i/F_{i-1} for 0<=i<=n, and it gives coordinate-subsum images, which the source's construction yields. The source gives lift degree k, but with A[k]^j=A^{j+k} it is -k; the item uses -k correctly, the generator is closed (d1=0), and the shift sign is compatible with the right action. Steps 1-4 are elementary and checked. Step 1 sets up the induction explicitly: base m=n, conclusion at m=-1. Step 2: homogeneous lifts exist; the expansion is unique by projecting a relation to its highest layer, so x_ij A is free; d(x_ij) lies in U∩F_{i-1}. Step 3: K is finite; H_K and V_K are dg submodules by Leibniz; the intersections and layer images are exact; V_K contains F_{m-1}. Step 4: F_m/H_K≅U/V_K as dg modules, and the sequence is graded-split. Step 5 uses the surjectivity clause of def-pc-compact-object on DG direct sums, as the item's hypothesis allows, so q_L a=0. Step 6 cites lem-sfb-dg-derived-admissible-triangles, which has the same dga, sign, shift and D(A,d) conventions and whose first arrows are the inclusion and the quotient, then clause (ii) of lem-weil-pbc-hom-into-triangle-exact. Edge cases tested: n=0, T=0, empty J_i, A=0, and two layers where an upper differential hits layer 0. Duplicate search (09R2, factor-through-nicer, semi-free, finite-cell) finds only the parent consumer lem-sfb-dg-compact-finite-cell-retract and the converse lem-sfb-dg-finite-cell-compact. The closure of the cited nodes has no cycle. Batch 5: the only trace-formula node reached is lem-trf-triangulated-subcategory-cone-system, a Mathlib leaf of Stacks 05RG (cone multiplicative system). It is a generic triangulated fact, not part of the trace formula or Poincare duality, so it is accepted. tool_uses entry lem-weil-pbc-hom-into-triangle-exact is generic and accepted. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCompactMapFiniteSubcell",
+  "declaration": "CategoryTheory.DgAlgebra.exists_finite_subcell_factorization",
+  "file": "lean/Sheaf/CategoryTheory/DgCompactMapFiniteSubcell.lean",
+  "statement": "theorem exists_finite_subcell_factorization (A : Algebra.{u}) [DerivedStructure A] (E : Derived A) (hE : IsCompactObject.{u} E) (n : ℕ) (T : RightModule A) (F : FiniteSemiFreeFiltration A T n) (f : E ⟶ (Q A).obj T) : ∃ (U : RightModule A) (ι : U ⟶ T), (∀ p : ℤ, Function.Injective (((underlying A).map ι).f p)) ∧ ∃ (S : ∀ i : Fin (n + 1), Finset (F.index i)) (g : E ⟶ (Q A).obj U), f = g ≫ (Q A).map ι ∧ ∀ (i : Fin (n + 1)) (p : ℤ) (z : ((underlying A).obj (F.layer i)).X p), (∃ (x : ((underlying A).obj (F.term i.succ)).X p) (y : ((underlying A).obj U).X p), (((underlying A).map (F.inclusion i.succ)).f p) x = (((underlying A).map ι).f p) y ∧ (((underlying A).map (F.projection i)).f p) x = z) ↔ ∃ a : ∀ j : F.index i, ((underlying A).obj (F.summand i j)).X p, z = ∑ j ∈ S i, (((underlying A).map (F.coprojection i j)).f p) (a j)",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62687d36c",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Theorem exists_finite_subcell_factorization matches node and Stacks 09R2 clause by clause: A : Algebra.{u}, [DerivedStructure A], IsCompactObject.{u} E, n : ℕ, FiniteSemiFreeFiltration (n+2 terms with injective inclusions, Subsingleton term 0, surjective last inclusion, layers with exact surjective projections, ShiftComparison A k (regular A) summands, specified IsColimit cofan), f : E ⟶ Q T; conclusion ∃ U with injective ι, finite S i for every layer, f = g ≫ Q.map ι, and degreewise equality of q_i(F_i ∩ U) with the coordinate subsum on S i. No extra hypotheses; universes explicit; edge cases n=0, empty J_i/S_i, T=0, A=0 covered. New def node def-sfb-dg-finite-semi-free-filtration has real fields and no duplicate (side-live Sheaf/WeilConjectures, DAG, run snapshots, Mathlib). Both lean.statement fields verbatim; item node changes only lean + 2 stmt_deps; docstrings carry source, blueprint tag and 6-step proof; only sorry; report has both sections. Notes: proof step 5 needs Q to preserve dg direct sums (Stacks lemma-derived-products), not a proof_dep; lem-sfb-dg-derived-admissible-triangles has no Lean record yet; citer finite-cell-retract uses left modules. No file changed, no compile run."
+ }
+}

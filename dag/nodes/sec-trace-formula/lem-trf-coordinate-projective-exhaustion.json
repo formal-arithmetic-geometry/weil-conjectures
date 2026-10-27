@@ -1,0 +1,245 @@
+{
+ "id": "lem-trf-coordinate-projective-exhaustion",
+ "kind": "statement",
+ "title": "Exhaustive coordinate filtration from a successor enlargement property",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $M$ an $A$-module, $I$ a set and $(Q_i)_{i\\in I}$ any family of $B$-modules. Fix a $B$-linear isomorphism $\\theta:B\\otimes_A M\\xrightarrow{\\sim}\\bigoplus_{i\\in I}Q_i$ [def-weil-pbc-module-tensor-product] [def-weil-pbc-direct-sum-modules]. For $H\\subseteq I$ let $D_H$ be the coordinate submodule of families vanishing outside $H$ [def-trf-coordinate-submodule], and for an $A$-submodule $U\\subseteq M$ put $T(U)=\\theta(\\operatorname{im}(B\\otimes_A U\\to B\\otimes_A M))$, using the inclusion-induced map. Assume the following successor property: for every $U\\subseteq M$, $H\\subseteq I$ with $T(U)=D_H$, and $x\\in M\\setminus U$, there exist $V\\subseteq M$ and $H'\\subseteq I$ with $U\\subseteq V$, $x\\in V$, $H\\subseteq H'$, $T(V)=D_{H'}$ and $V/U$ countably generated and projective over $A$ [def-weil-pbc-quotient-module] [def-weil-pbc-projective-module]. Here countably generated means spanned by an at most countable subset using finite linear combinations. Fix a well-order on the underlying set of $M$, with order type the set ordinal $\\kappa$ and enumeration $(e_\\alpha)_{\\alpha<\\kappa}$. Then there are increasing families $(M_\\alpha)_{\\alpha\\leq\\kappa}$ of $A$-submodules of $M$ and $(H_\\alpha)_{\\alpha\\leq\\kappa}$ of subsets of $I$, satisfying $M_0=0$, $H_0=\\varnothing$, $M_\\kappa=M$ and $T(M_\\alpha)=D_{H_\\alpha}$ for every $\\alpha\\leq\\kappa$. For every nonzero limit ordinal $\\lambda\\leq\\kappa$ they satisfy $M_\\lambda=\\bigcup_{\\alpha<\\lambda}M_\\alpha$ and $H_\\lambda=\\bigcup_{\\alpha<\\lambda}H_\\alpha$. For every $\\alpha<\\kappa$, the module $M_{\\alpha+1}/M_\\alpha$ is countably generated and projective. If $M_\\alpha\\ne M$, $M_{\\alpha+1}$ contains the least element of $M\\setminus M_\\alpha$ in the chosen order; otherwise $M_{\\alpha+1}=M_\\alpha$ and $H_{\\alpha+1}=H_\\alpha$. In particular $e_\\beta\\in M_\\alpha$ whenever $\\beta<\\alpha\\leq\\kappa$. Neither flatness of $A\\to B$ nor countable generation or projectivity of the $Q_i$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05A9, theorem-ffdescent-projectivity, initial, limit and least-missing-element recursion and exhaustion paragraphs, abstracting only the successor property (old proof steps 1, 3, 4 and 8)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-direct-sum-modules",
+  "def-trf-coordinate-submodule",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-well-ordering-theorem] well-order the set of all pairs of a submodule of $M$ and a subset of $I$. Choose, once for each pair $(U,H)$ satisfying $T(U)=D_H$ and $U\\ne M$, the least witness $(V,H')$ to the assumed successor property for the least $x\\in M\\setminus U$. The witness set is nonempty by hypothesis; the fixed well-order makes this a specified rule. Apply [lem-weil-pbc-transfinite-recursion] to $E=\\{\\alpha:\\alpha\\leq\\kappa\\}$, with values pairs of a submodule of $M$ and a subset of $I$. At zero put $(0,\\varnothing)$. At a successor apply the selected witness if the preceding pair is valid and its module is not $M$; otherwise keep that pair. At a nonzero limit take the unions of preceding modules and subsets if the preceding modules form an increasing family, and put $(0,\\varnothing)$ otherwise. An increasing union is a submodule: two members lie together in the larger of their stages, where their sum and scalar multiples lie. Thus the rule is defined for every possible preceding family, as the recursion node requires. The subsequent steps prove that only the valid branches occur.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  },
+  {
+   "text": "The recursive families are increasing, independently of the coordinate invariant. Indeed a successor always contains its predecessor: this is part of a selected witness, and is an equality on the other branch. If increasingness first failed at a nonzero limit, all earlier stages would form a chain, so the rule at that limit would take their union and contain each earlier stage, a contradiction. At a successor the same conclusion follows from containment of its predecessor and the earlier chain. There is no failure at zero. Consequently the union branch always applies, giving both required continuity identities at every nonzero limit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  },
+  {
+   "text": "We prove $T(M_\\alpha)=D_{H_\\alpha}$ by induction on $\\alpha$. At zero every pure tensor in $B\\otimes_A0$ is zero, by bilinearity, and pure tensors generate the tensor product [def-weil-pbc-module-tensor-product]. Thus $T(0)=0$. The only family vanishing outside $\\varnothing$ is the zero family [def-trf-coordinate-submodule], so $T(M_0)=D_{H_0}$. At a successor, if the preceding module is proper, the induction hypothesis makes its pair valid and the selected witness gives $T(M_{\\alpha+1})=D_{H_{\\alpha+1}}$ as well as containment of the least missing element. If the preceding module is $M$, the rule is stationary, so the same coordinate equality persists.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-coordinate-submodule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  },
+  {
+   "text": "For the limit step let $0<\\lambda\\leq\\kappa$ be a limit, with the coordinate equality known for every $\\alpha<\\lambda$. By [def-weil-pbc-module-tensor-product], an element of $B\\otimes_A M_\\lambda$ is a finite sum $\\sum_j b_j\\otimes m_j$. Each $m_j$ lies in an earlier $M_{\\alpha_j}$; choose the maximum of these finitely many indices, or $0<\\lambda$ if the sum is empty. The sum is then the image of a tensor over that stage. Conversely inclusion $M_\\alpha\\subseteq M_\\lambda$ gives a factorization of the inclusion-induced tensor maps, by their pure-tensor formula and uniqueness. Applying $\\theta$ proves $T(M_\\lambda)=\\bigcup_{\\alpha<\\lambda}T(M_\\alpha)$. Similarly, an element of $D_{H_\\lambda}$ has finite support in $\\bigcup_{\\alpha<\\lambda}H_\\alpha$ [def-trf-coordinate-submodule] [def-weil-pbc-direct-sum-modules]. Choose a stage for each support index and take their finite maximum, or stage zero for empty support. It lies in that stage's $D_{H_\\alpha}$. The reverse inclusion follows from $H_\\alpha\\subseteq H_\\lambda$. Hence $D_{H_\\lambda}=\\bigcup_{\\alpha<\\lambda}D_{H_\\alpha}=T(M_\\lambda)$. This completes the induction; in particular the invalid successor branch never occurs.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-coordinate-submodule",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  },
+  {
+   "text": "At every nonstationary successor the chosen witness states directly that $M_{\\alpha+1}/M_\\alpha$ is countably generated and projective; these are assumptions of the enlargement property, not consequences of flatness. At a stationary successor this quotient has just the zero coset by [def-weil-pbc-quotient-module]. It is generated by the empty set. It is projective by the lifting characterization in [def-weil-pbc-projective-module]: every map from this zero module is zero and lifts along any surjection by the zero map. This proves the quotient assertion in both branches.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  },
+  {
+   "text": "Finally induct on $\\alpha\\leq\\kappa$ to show $e_\\beta\\in M_\\alpha$ for all $\\beta<\\alpha$. At zero there is nothing to check. At $\\alpha+1$, all $e_\\beta$ with $\\beta<\\alpha$ persist by increasingness. If $e_\\alpha$ is already present, it too persists. Otherwise every earlier element in the fixed well-order is present by induction, so $e_\\alpha$ is exactly the least missing element and is added by the nonstationary successor. At a nonzero limit $\\lambda$, for $\\beta<\\lambda$ one has $\\beta+1<\\lambda$, so $e_\\beta\\in M_{\\beta+1}\\subseteq M_\\lambda$. Surjectivity of the enumeration gives $M_\\kappa=M$. These inductions can equivalently be read as least-counterexample arguments in the specified ordinal well-order. The recursion and the preceding steps give every asserted identity and successor condition. Only finite tensor expressions and finite coordinate supports were used; no injectivity after tensoring, flatness, or generation or projectivity of any $Q_i$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-weil-pbc-transfinite-recursion",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-coordinate-submodule",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05A9, theorem-ffdescent-projectivity, proof: initial stage, limit union, least-missing-element successor and exhaustion paragraphs; successor enlargement is assumed here"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A module with an enlargement property for coordinate submodules has a continuous exhaustive ordinal filtration with countably generated projective successive quotients",
+   "results": "{\"t\": \"2026-10-22T06:50:36Z\", \"tool\": \"leanfinder\", \"query\": \"A module with an enlargement property for coordinate submodules has a continuous exhaustive ordinal filtration with countably generated projective successive quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.iSup_filtration\", \"Field.Emb.Cardinal.filtration_apply\", \"Field.Emb.Cardinal.directed_filtration\", \"Ideal.Filtration.Stable.exists_forall_le\", \"IsModuleFiltration.mk_int\", \"Ideal.Filtration.Stable.bounded_difference\", \"Ideal.Filtration.Stable\", \"IsModuleFiltration\"], \"digest\": \"a0b2087f812a9b18\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Well order elements of a module and add the least missing element at each successor, preserving tensor coordinate sums and taking unions at limit ordinals",
+   "results": "{\"t\": \"2026-10-22T06:50:35Z\", \"tool\": \"leanfinder\", \"query\": \"Well order elements of a module and add the least missing element at each successor, preserving tensor coordinate sums and taking unions at limit ordinals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"Profinite.NobelingProof.P\", \"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval\", \"Profinite.NobelingProof.GoodProducts.span_sum\", \"Profinite.NobelingProof.GoodProducts.max_eq_eval\"], \"digest\": \"df00e58202ab40be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, Ordinal, Module.Projective",
+   "results": "{\"t\": \"2026-10-22T06:50:24Z\", \"tool\": \"loogle\", \"query\": \"Submodule, Ordinal, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "grep",
+   "query": "((transfinite|ordinal|exhaustive).*(filtration|submodule))|((filtration|submodule).*(transfinite|ordinal))",
+   "results": "{\"t\": \"2026-10-22T06:50:24Z\", \"tool\": \"grep\", \"query\": \"((transfinite|ordinal|exhaustive).*(filtration|submodule))|((filtration|submodule).*(transfinite|ordinal))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous exhaustive transfinite filtration of submodules from a successor enlargement property",
+   "results": "{\"t\": \"2026-10-22T06:50:24Z\", \"tool\": \"leansearch\", \"query\": \"continuous exhaustive transfinite filtration of submodules from a successor enlargement property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.toIsFiltration\", \"IsModuleFiltration\", \"Field.Emb.Cardinal.filtration_succ\", \"Ideal.Filtration.recOn\", \"Ideal.Filtration\", \"Ideal.Filtration.rec\", \"MeasureTheory.Filtration.rightCont_eq_of_exists_gt\", \"Ideal.trivialFiltration\"], \"digest\": \"98b7ec6820f6abe2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite|devissage|exhaustive|filtration",
+   "results": "{\"t\": \"2026-10-22T06:51:34Z\", \"tool\": \"grep\", \"query\": \"transfinite|devissage|exhaustive|filtration\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal filtrations and specific intermediate-field or Nobeling filtrations do not construct a module filtration from this enlargement property while preserving tensor coordinate images."
+  },
+  {
+   "tool": "grep",
+   "query": "((transfinite|ordinal|exhaustive).*(filtration|submodule))|((filtration|submodule).*(transfinite|ordinal))",
+   "results": "{\"t\": \"2026-10-23T14:42:33Z\", \"tool\": \"grep\", \"query\": \"((transfinite|ordinal|exhaustive).*(filtration|submodule))|((filtration|submodule).*(transfinite|ordinal))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned module-filtration predicates, ideal filtrations, field-extension filtrations, finite basis flags or Nobeling exact sequences do not assert this successor-property construction or its tensor coordinate invariant. Read FilteredAlgebra/Basic.lean:85-110, FieldTheory/CardinalEmb.lean:89-160,245-263, LinearAlgebra/Basis/Flag.lean:30-60 and Topology/Category/Profinite/Nobeling/Successor.lean:275-287."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous exhaustive transfinite filtration of modules preserving images under tensor base change",
+   "results": "{\"t\": \"2026-10-23T14:42:33Z\", \"tool\": \"leansearch\", \"query\": \"continuous exhaustive transfinite filtration of modules preserving images under tensor base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.toIsFiltration\", \"IsModuleFiltration\", \"Ideal.Filtration\", \"Ideal.trivialFiltration\", \"Ideal.stableFiltration\", \"IsModuleFiltration.mk\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Ideal.Filtration.Stable\"], \"digest\": \"2cca530f37d38618\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned module-filtration predicates, ideal filtrations, field-extension filtrations, finite basis flags or Nobeling exact sequences do not assert this successor-property construction or its tensor coordinate invariant. Read FilteredAlgebra/Basic.lean:85-110, FieldTheory/CardinalEmb.lean:89-160,245-263, LinearAlgebra/Basis/Flag.lean:30-60 and Topology/Category/Profinite/Nobeling/Successor.lean:275-287."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, Ordinal, Module.Projective",
+   "results": "{\"t\": \"2026-10-23T14:42:33Z\", \"tool\": \"loogle\", \"query\": \"Submodule, Ordinal, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned module-filtration predicates, ideal filtrations, field-extension filtrations, finite basis flags or Nobeling exact sequences do not assert this successor-property construction or its tensor coordinate invariant. Read FilteredAlgebra/Basic.lean:85-110, FieldTheory/CardinalEmb.lean:89-160,245-263, LinearAlgebra/Basis/Flag.lean:30-60 and Topology/Category/Profinite/Nobeling/Successor.lean:275-287."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module with a successor enlargement property admits a continuous exhaustive ordinal filtration preserving tensor coordinate images and projective successive quotients",
+   "results": "{\"t\": \"2026-10-23T14:42:36Z\", \"tool\": \"leanfinder\", \"query\": \"A module with a successor enlargement property admits a continuous exhaustive ordinal filtration preserving tensor coordinate images and projective successive quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Field.Emb.Cardinal.iSup_filtration\", \"Profinite.NobelingProof.CC_exact\", \"Field.Emb.Cardinal.filtration_succ\", \"Field.Emb.Cardinal.directed_filtration\", \"Field.Emb.Cardinal.filtration_apply\", \"Profinite.NobelingProof.GoodProducts.union_succ\", \"IsModuleFiltration.mk_int\"], \"digest\": \"f91e7a437e440222\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned module-filtration predicates, ideal filtrations, field-extension filtrations, finite basis flags or Nobeling exact sequences do not assert this successor-property construction or its tensor coordinate invariant. Read FilteredAlgebra/Basic.lean:85-110, FieldTheory/CardinalEmb.lean:89-160,245-263, LinearAlgebra/Basis/Flag.lean:30-60 and Topology/Category/Profinite/Nobeling/Successor.lean:275-287."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Well order all elements of a module, add the least missing element at successor stages, and take unions at limit ordinals",
+   "results": "{\"t\": \"2026-10-23T14:43:01Z\", \"tool\": \"leanfinder\", \"query\": \"Well order all elements of a module, add the least missing element at successor stages, and take unions at limit ordinals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"Module.Basis.flag\", \"Module.Basis.sumExtendIndex\", \"Module.Basis.flag_succ\", \"exists_maximal_linearIndepOn\", \"Module.Baer.ExtensionOf.max\", \"Profinite.NobelingProof.P\"], \"digest\": \"2cb04086c2170b25\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned module-filtration predicates, ideal filtrations, field-extension filtrations, finite basis flags or Nobeling exact sequences do not assert this successor-property construction or its tensor coordinate invariant. Read FilteredAlgebra/Basic.lean:85-110, FieldTheory/CardinalEmb.lean:89-160,245-263, LinearAlgebra/Basis/Flag.lean:30-60 and Topology/Category/Profinite/Nobeling/Successor.lean:275-287."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-projective-faithfully-flat-descent",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Refinement of Tag 05A9 used in that projectivity descent: initial, limit and least-missing-element recursion and exhaustion paragraphs, abstracting only the successor property (old proof steps 1, 3, 4 and 8)",
+   "via": [
+    "lem-trf-local-projective-faithfully-flat-descent",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coordinate-projective-exhaustion",
+  "worker": "stage1",
+  "summary": "Checked Stacks 05A9 and the newest blueprint; retained the statement and all original metadata. Wrote the set-sized, totalized least-missing-element recursion using the existing transfinite-recursion Mathlib leaf; verified monotonicity, both limit union identities by finite expressions, the stationary zero quotient, and exhaustion at the fixed order type. No new nodes or Lean attachments.",
+  "blueprint": "The nearest blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), supplies the contracting-correspondence route; this inherited algebraic refinement serves its semistable-alteration projectivity input recorded in blueprint.from.place. Precisely, the steps expand the initial, limit, least-missing and exhaustion paragraphs of Stacks 05A9 used by the parent lem-trf-local-projective-faithfully-flat-descent; no change of unit or chapter route. The latest ancestor proof was read; it does not itself state this auxiliary module lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-096cada32",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-096cada32 (reviewer sub-agent of L); spot-checked: PASS: read the item and all six steps in full against Stacks Tag 05A9 (algebra-theorem-ffdescent-projectivity), the whole proof, and checked the parent lem-trf-local-projective-faithfully-flat-descent steps 2-4. The statement is unchanged and not weakened. In 05A9 flatness is used only at the successor stage, and the item takes that stage as its hypothesis. Because it uses tensor images, the limit stage needs no flatness. The parent's step 2 supplies the hypothesis in exactly this form (H ⊆ H∪J), and its steps 3-4 use exactly the conclusions given. Step 1 applies the well-ordering and transfinite-recursion Mathlib leaves on a set of pairs, with total fallback rules. Step 2 proves the families increase, by first failure. Steps 3-4 prove the coordinate equality by induction: T(0)=0=D_∅, the successor comes from the witness, and the limit case uses finite sums and finite supports (generation and functoriality from the tensor node; finite support from the direct-sum and coordinate-submodule nodes). Step 5 gives the projective quotient from the witness, or a zero quotient that is projective by the lifting clause. Step 6 proves exhaustion from the least missing element. Every step is correct and every cited statement says what the step takes from it; proof_deps equals the union of uses. Edge cases checked: M=0 (κ=1), I empty or all Q_i zero, κ successor or limit, empty supports, early stabilisation, non-flat B. Route: the only non-Mathlib citation is the same-unit def-trf-coordinate-submodule, so no tool_uses are needed and no SGA is cited. There are no new nodes. The DAG search (05A9, Kaplansky, transfinite) found no duplicate: the invariant-coordinate transfinite filtration, the countable successor exhaustion and the transfinite successor generators surjective nodes differ. Not a re-split item (first split, no repair note). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoordinateProjectiveExhaustion",
+  "declaration": "Module.exists_coordinate_projective_exhaustion",
+  "file": "lean/Sheaf/RingTheory/CoordinateProjectiveExhaustion.lean",
+  "statement": "theorem exists_coordinate_projective_exhaustion (A : Type u) [CommRing A] (B : Type v) [CommRing B] [Algebra A B] (M : Type w) [AddCommGroup M] [Module A M] (I : Type s) (Q : I → Type t) [∀ i, AddCommGroup (Q i)] [∀ i, Module B (Q i)] (θ : (B ⊗[A] M) ≃ₗ[B] DirectSum I Q) (henlarge : ∀ (U : Submodule A M) (H : Set I), (U.baseChange B).map θ.toLinearMap = DirectSum.coordinateSubmodule B I Q H → ∀ x : M, x ∉ U → ∃ (V : Submodule A M) (H' : Set I), U ≤ V ∧ x ∈ V ∧ H ⊆ H' ∧ (V.baseChange B).map θ.toLinearMap = DirectSum.coordinateSubmodule B I Q H' ∧ (∃ S : Set (V ⧸ U.comap V.subtype), S.Countable ∧ Submodule.span A S = ⊤) ∧ Module.Projective A (V ⧸ U.comap V.subtype)) [LinearOrder M] (κ : Ordinal.{w}) (e : Set.Iio κ ≃o M) : ∃ (F : Set.Iic κ → Submodule A M) (H : Set.Iic κ → Set I), Monotone F ∧ Monotone H ∧ F ⟨0, bot_le (a := κ)⟩ = ⊥ ∧ H ⟨0, bot_le (a := κ)⟩ = ∅ ∧ F ⟨κ, le_refl κ⟩ = ⊤ ∧ (∀ α : Set.Iic κ, ((F α).baseChange B).map θ.toLinearMap = DirectSum.coordinateSubmodule B I Q (H α)) ∧ (∀ l : Set.Iic κ, Order.IsSuccLimit l.val → (F l : Set M) = ⋃ (α : Set.Iic κ) (_ : α < l), (F α : Set M)) ∧ (∀ l : Set.Iic κ, Order.IsSuccLimit l.val → H l = ⋃ (α : Set.Iic κ) (_ : α < l), H α) ∧ (∀ (α : Set.Iic κ) (hα : α.val < κ), (∃ S : Set (F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩ ⧸ (F α).comap (F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩).subtype), S.Countable ∧ Submodule.span A S = ⊤) ∧ Module.Projective A (F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩ ⧸ (F α).comap (F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩).subtype) ∧ (F α ≠ ⊤ → ∃ x : M, x ∉ F α ∧ (∀ y : M, y < x → y ∈ F α) ∧ x ∈ F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩) ∧ (F α = ⊤ → F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩ = F α ∧ H ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩ = H α)) ∧ (∀ (α : Set.Iic κ) (β : Set.Iio κ), β.val < α.val → e β ∈ F α)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-799e5de9d",
+  "group": "NP",
+  "result": "pass",
+  "note": "All node clauses matched in Module.exists_coordinate_projective_exhaustion: T(U) = (U.baseChange B).map θ is the inclusion-induced image (Submodule.baseChange is the range of p.subtype.baseChange, Tower.lean:831), D_H uses the landed DirectSum.coordinateSubmodule, V/U = V ⧸ U.comap V.subtype, countable generation is an existing countable spanning set, the well-order is LinearOrder M plus e : Set.Iio κ ≃o M with κ in Ordinal.{w}, and monotonicity, initial/terminal values, coordinate invariant, nonzero-limit set unions (IsSuccLimit), successor quotient, least-missing, stationary branch and exhaustion clauses are all present. Edge cases checked: M=0 (κ=1), κ=0 impossible, I empty or zero summands, non-flat B, κ a limit, T(0)=D_∅. Node changed only in its lean field; statement verbatim in file; stmt_deps all used; no definitions, only sorry; docstrings carry source place, blueprint id and the six proof steps; no duplicate found. Advisory: the Second reading by NP section is the dispatcher-policy placeholder, but the Worker report matches clause by clause."
+ }
+}

@@ -69,23 +69,30 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
  "lean": {
-  "module": "Sheaf.Paper.TotallyDisconnectedCoefficientRealization",
+  "module": "Sheaf.Paper.ContinuousSetConstructions",
   "declaration": "AlgebraicGeometry.ProEtale.continuousSetPresheaf",
   "statement": "abbrev continuousSetPresheaf (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D]",
   "branch": "sheaf-dag",
   "by": "NR",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Return H2 repair: the plain presheaf abbrev at line 46 has real functor data and is not chosen from the realization theorem. This definition node owns precisely that existing notion; the realization theorem remains a proof dependency of the torsor-monodromy item."
+  "note": "Return H2 repair: the plain presheaf abbrev at line 46 has real functor data and is not chosen from the realization theorem. This definition node owns precisely that existing notion; the realization theorem remains a proof dependency of the torsor-monodromy item.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousSetPresheaf"
+  ]
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -102,5 +109,15 @@
   "group": "NR",
   "result": "pass",
   "note": "Re-delivery of the a4e30b3eebcf RETURN. R1 (H2) repaired: new def node def-sfb-continuous-set-presheaf (C(|U|,D) with precomposition restriction, BS 4.2.12) is existing:true on the unchanged TotallyDisconnectedCoefficientRealization, and its statement matches line 46 verbatim. It replaces the realization theorem in the stmt_deps of both the item and def-sfb-continuous-right-torsor; the theorem stays in proof_deps. continuousSetPresheaf is the only declaration of that module used (ContinuousRightTorsor.lean:80,187,193). A1 ExtensionPresentation docstring corrected, A2 def-weil-proetale-inverse-image added to stmt_deps, A3 8 proof-only imports dropped. Lean declarations byte-identical to the returned head. Item node differs from live only in lean and stmt_deps. The three lean.statement fields are verbatim. The earlier full substance check stands: hypotheses, fibre torsor, arrow bijection ρ_Q b=bρ_P, conjugation, pinned pullback, universal contracted product, field Čech c(σ)=ρ(jσ). No hollow defs, sole sorry is the item theorem, not dropped. Advisory: FieldSeparableCech plain defs come from a base-era theorem stmt_dep that the mechanical check did not flag. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-3795d",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261023T102928-L-3007894",
+  "kind": "interface",
+  "note": "independent cc review: item proofs vs node steps and the Kan-evaluation/coherence/descent-components dependency statements; 15 moved declarations vs the base item text (identical apart from 2 sorrys now filled); 3 import-only adaptations vs the import cycle; 8 direct importers compiled against the delivered modules in a sandbox"
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-locally-constant-perfect-dual-ctf",
+ "kind": "statement",
+ "title": "Constructibility and evaluation for the scalar-perfect dual",
+ "statement": "Let l be prime, k a field of positive characteristic p different from l, X separated of finite type over k and Λ an admissible commutative condensed coefficient ring [sk-def-localizing-closure]. If P is locally constant perfect with scalar models [def-sfb-locally-constant-perfect-complex], then its specified relative dual P∨=RHom(P,Λ_X[0]) is bounded constructible in the finite constant model sense [sk-def-sfb-constructible]. For every object N of the full ambient unbounded derived module category there is an isomorphism RHom(P,N) ≅ P∨ tensor^L N for the existing relative tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. No boundedness or constructibility of N is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Step 6; perfect dual and tensor--Hom evaluation in paragraph 2"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-locally-constant-perfect-complex",
+  "det-lem-int-tensor-projection"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-ringed-site-perfect-duality], $P^\\vee$ is perfect and $\\cHom_S(P,N)\\simeq P^\\vee\\otimes^{\\mathbf L}N$ for every ambient $N$. The slice-restriction assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies its restrictions with the duals of the local models. The scalar-cohomology formulas of [lem-sfb-internal-hom-dual-constructible-models] apply to the locally constant perfect models in the statement and put both $P$ and $P^\\vee$ in $\\Dbc(S,\\Lambda)$, including completed integral coefficients. Finite Tor amplitude is established separately in Step 7. Specialize the normalized ringed-site duality through the exact internal-module comparison, and carry scalar presentations and cohomology through that equivalence. For the finite-subextension algebraic-closure ring use finite matrix descent to a finite coefficient subextension, rather than identifying it with the ring of all continuous algebraic-closure-valued functions.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Paragraph 2, perfect dual and tensor-Hom formula; paragraph 3, membership of the perfect factors."
+   }
+  },
+  {
+   "text": "Compare internal module objects with modules on the ringed site, preserving the\nrelative derived tensor, unit, internal Hom and slice restrictions. Pull the given\nbounded finite-projective scalar complexes to the local charts. Finite projective\nsplittings give finite free retracts, so their duals are finite projective and the\ncanonical tensor--Hom evaluation is an isomorphism, also against an unbounded complex:\nin every degree only finitely many source terms occur. Perfect duality and exact\nslice restriction descend this canonical evaluation to the whole scheme. Scalar\ncohomology models give bounded constructibility for the dual, including the completed\nintegral models and finite-subextension-valued algebraic closure. A finite affine\nrefinement of the cover exists since X is Noetherian and quasi-compact. The finitely\nmany bounded models have common cohomological bounds; descend their vanishing and\nfinite constant cohomology presentations by the cover criterion.\nFor empty X the cohomology is zero and has the empty stratification; evaluation is\nthen the unique isomorphism of zero objects. Finite Tor amplitude is a separate\nassertion supplied by the existing dual Tor-amplitude theorem.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Step 6; perfect dual and tensor--Hom evaluation in paragraph 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-internal-hom-dual-constructible-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Step 6; perfect dual and tensor--Hom evaluation in paragraph 2; specialization and module/coefficient comparison glue made explicit by A6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant perfect complex has a constructible finite Tor dual and internal Hom is dual tensor",
+   "results": "Returned dualTensorHomEquiv, CondensedSet.LocallyConstant.functorFullyFaithful, TensorProduct.dualDistribEquiv, CondensedMod.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.LocallyConstant.functorFullyFaithful, map_dualTensorHom. No exact condensed-coefficient assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant perfect complex dual is bounded constructible and its tensor with any complex is derived internal Hom",
+   "results": "Returned LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'. No exact condensed-coefficient assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom_dual|ctf_generated|support_hom_model|BoundedConstructible.*triangulated",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DetThmSfCtfStabilityInternalHom",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Step 6; perfect dual and tensor--Hom evaluation in paragraph 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyConstantPerfectDualCtf",
+  "file": "lean/Sheaf/Paper/LocallyConstantPerfectDualCtf.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.locallyConstantPerfect_dual_constructible",
+  "statement": "theorem locallyConstantPerfect_dual_constructible\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)\n    (P : (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))))\n    (hP : IsLocallyConstantPerfectComplex Λ X P) :\n    constantModelBoundedConstructible Λ X (relativeInternalHomDual (Mon.mk Λ) X P) ∧\n    ∀ N : (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),\n      Nonempty (((derivedHom Λ X).obj (op P)).obj N ≅\n      ((derivedTensor Λ X).obj (relativeInternalHomDual (Mon.mk Λ) X P)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T201322-L-2420949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T201322-L-2420949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

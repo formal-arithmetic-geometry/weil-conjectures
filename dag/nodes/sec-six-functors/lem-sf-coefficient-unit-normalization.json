@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-coefficient-unit-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Normalization of the regular coefficient unit; first two proof paragraphs, parent finite-system refinement.",
+   "via": [
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual pullback dual formula on normalized derived coefficient systems with structural counit trace and canonical finite evaluations",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε",
+    "CategoryTheory.Functor.totalLeftDerivedCounit",
+    "CategoryTheory.Adjunction.derivedε.congr_simp",
+    "CategoryTheory.ExactPairing.coevaluation_evaluation'",
+    "CategoryTheory.ChosenPullbacksAlong.fst'",
+    "LinearEquiv.trans_dualMap_symm_flip",
+    "SheafOfModules.conjugateEquiv_pullbackId_hom",
+    "Module.symm_dualMap_evalEquiv"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct proper open compact support and its right adjoint on normalized coefficient systems with absolute dualizing objects and integral support comparison",
+   "results": [
+    "CondensedSet.compactlyGeneratedAdjunction",
+    "CondensedMod.LocallyConstant.adjunction",
+    "Condensed.setAbAdjunction",
+    "Condensed.profiniteSolidification",
+    "LightCondMod.LocallyConstant.adjunction",
+    "Condensed.profiniteSolidCounit",
+    "Condensed.profiniteSolid",
+    "LightCondSet.LocallyConstant.adjunction"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientUnit|CoefficientDerivedSystemCoherence|FiniteAdjunctionDiagram|SectionsPush|DualizingSpec|RingedDerivedTensorCoherence",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteAdjunctionDiagramRealization",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "title": "Normalization of the regular coefficient unit",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $\\varpi$, and positive quotients $A_{n+1}=R/\\varpi^{n+1}$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use strict semilinear coefficient systems and their ordinary derived category and exact evaluations [lem-coef-derived-system-evaluation-calculus, def-coef-finite-adjunction-system-data]. For every scheme $W$, the actual degree-zero regular coefficient unit [def-sf-finite-adjunction-coefficient-unit] is normalized: for every $n\\le m$ and every $P$ over $A_{n+1}$, precomposition with its quotient transition induces a bijection from maps out of its nth evaluation into $P$ to maps from its mth evaluation into the restricted $P$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-finite-adjunction-system-data",
+  "def-sf-finite-adjunction-coefficient-unit"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of the regular sequence-ring module is the regular finite module and its transition is the quotient homomorphism, on each section. Since this free rank-one module is flat, derived quotient extension is ordinary quotient extension. Multiplication identifies that extension with the target regular module. The derived scalar-extension/restriction adjunction then gives exactly the required bijection for every derived target P; the identity quotient gives the identity bijection.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-finite-adjunction-system-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-finite-adjunction-system-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefficientUnitNormalization",
+  "file": "lean/Sheaf/SixFunctors/CoefficientUnitNormalization.lean",
+  "declaration": "WeilConjectures.FiniteAdjunctionDiagram.coefficientUnit_normalized",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionDiagram.coefficientUnit_normalized"
+  ],
+  "statement": "theorem coefficientUnit_normalized (W : Scheme.{u}) : IsNormalizedCoefficientSequence l E W (coefficientUnit (l := l) (E := E) W)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to clone; moved decls diffed verbatim vs clone (only coefficientUnit_mem/structure_isOver proofs changed); 7 direct importers + 9 delivered modules compiled together (exit 0); axioms: sorryAx only via the 6 new sorry lemmas, structure_isOver clean; node records match Lean signatures"
+ }
+}

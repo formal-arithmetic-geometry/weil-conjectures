@@ -1,0 +1,130 @@
+{
+ "id": "def-trf-adic-initial-ideal-generator-degrees",
+ "kind": "definition",
+ "title": "Adic initial ideal and padded homogeneous generator degree sequence",
+ "status": "split",
+ "statement": "For a field $k$, a commutative $k$-algebra $A$, submodules $\\mathcal A_d\\subseteq A$ indexed by $d\\in\\mathbf N$, and an ideal $C\\subseteq A$, put $C_d=\\mathcal A_d\\cap C$ and\n$$\\mu_{\\mathcal A,C}(d)=\\operatorname{finrank}_k\\left(C_d/\\iota_d^{-1}\\left(\\sum_{j=1}^{d}\\mathcal A_j C_{d-j}\\right)\\right),$$\nwhere $\\iota_d:C_d\\hookrightarrow A$ is inclusion, the product is the span of products of elements, and finrank is the natural-number dimension (zero for infinite-dimensional spaces) [def-weil-vector-space-dimension]. For any $\\mu:\\mathbf N\\to\\mathbf N$ define\n$$\\Delta_\\mu(i)=\\inf\\{d\\in\\mathbf N:1\\le d,\\ i<\\sum_{j=1}^d\\mu(j)\\}\\in\\mathbf N\\cup\\{\\infty\\},\\quad i\\in\\mathbf N,$$\nwith infimum of the empty set equal to $\\infty$. This is the increasing enumeration of positive degrees with their multiplicities, padded by $\\infty$ when the cumulative multiplicity is bounded.\nFor a commutative ring $W$ and ideals $\\mathfrak l,\\mathfrak c$, use the canonical associated graded ring $G=\\bigoplus_{d\\ge0}\\mathfrak l^d/\\mathfrak l^{d+1}$ and its inclusions $\\operatorname{in}_d$ [def-weil-pbc-associated-graded-ring]. Let $\\operatorname{adicGrade}(\\mathfrak l,d)$ be the $(W/\\mathfrak l)$-span of the image of $\\operatorname{in}_d$. Define\n$$E_{\\mathfrak l}(\\mathfrak c)=\\left(\\operatorname{in}_d(a\\bmod\\mathfrak l^{d+1}):d\\ge0,\\ a\\in\\mathfrak c\\cap\\mathfrak l^d\\right)\\subseteq G.$$\nFor local $W$, take $\\mathfrak l$ to be its maximal ideal and $k=W/\\mathfrak l$ its residue field [def-weil-residue-field], and define\n$$\\nu^*(W,\\mathfrak c)=\\Delta_{\\mu_{\\operatorname{adicGrade}(\\mathfrak l,-),E_{\\mathfrak l}(\\mathfrak c)}}.$$\nThese are concrete definitions, with no finiteness or regularity claim; for the regular local applications and $\\mathfrak c\\subseteq\\mathfrak l$ they give the initial ideal and Hironaka's minimal homogeneous generator degree sequence.",
+ "stmt_deps": [
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities (1970), §2, pp.153–154 (initial ideals), §3, p.155, conditions (i)–(ii) and Remark 1 (generator degrees). Online PDF: https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. The existing constructions are in ProjectiveConeHilbertStandardDegrees.lean, definitions preceding its theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nuStar|adicInitialIdeal|adicGrade|gradedGeneratorMultiplicity|generatorDegreeSequence",
+   "results": "{\"t\": \"2026-10-23T21:27:42Z\", \"tool\": \"grep\", \"query\": \"nuStar|adicInitialIdeal|adicGrade|gradedGeneratorMultiplicity|generatorDegreeSequence\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib construction. Reuse the plain existing definitions in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees through this definition-only node; do not duplicate them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Initial ideal in the associated graded local ring and sequence of minimal homogeneous generator degrees padded with infinity",
+   "results": "{\"t\": \"2026-10-23T21:27:42Z\", \"tool\": \"leansearch\", \"query\": \"Initial ideal in the associated graded local ring and sequence of minimal homogeneous generator degrees padded with infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.homogeneous_span\", \"Ideal.isHomogeneous_iff_forall_subset\", \"Ideal.IsHomogeneous.iff_eq\", \"HomogeneousIdeal\", \"Ideal.IsHomogeneous.iff_exists\", \"Ideal.IsHomogeneous\", \"Ideal.IsHomogeneous.top\", \"Ideal.homogeneousHull_eq_iSup\"], \"digest\": \"2693ee1587353aa4\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib construction. Reuse the plain existing definitions in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees through this definition-only node; do not duplicate them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hironaka nu star initial ideal associated graded minimal generator degree multiplicity",
+   "results": "{\"t\": \"2026-10-23T21:27:43Z\", \"tool\": \"leanfinder\", \"query\": \"Hironaka nu star initial ideal associated graded minimal generator degree multiplicity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.deg\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"Ideal.leadingCoeffNth\", \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"Ideal.leadingCoeffNth_mono\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\"], \"digest\": \"63829b7edb862374\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib construction. Reuse the plain existing definitions in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees through this definition-only node; do not duplicate them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n nuStar|adicInitialIdeal|adicGrade|gradedGeneratorMultiplicity|generatorDegreeSequence lean/WeilConjectures lean/Sheaf and dag/nodes/sec-trace-formula; python3 tools/blueprint_refs.py search initial ideal",
+   "results": "Blueprint search: 0 nodes. No WeilConjectures hit. Sheaf hits only ProjectiveConeHilbertStandardDegrees.lean (lines 44–102); DAG ownership only in the declaration list of theorem node lem-trf-projective-cone-hilbert-standard-degrees. No definition node owns these plain definitions. Read full local module and current server source with scompile.py --source; signatures and bodies agree.",
+   "date": "2026-10-23",
+   "verdict": "Attach existing:true to these exact six declarations, as requested by the independent return. No move or copy."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-standard-basis-one-step",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Coordinate definitions for Hironaka Lemma 20. Definition-only ownership of the already published initial ideal, graded pieces, multiplicities and padded degree sequence.",
+   "via": [
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees",
+  "declaration": "Hironaka.nuStar",
+  "declarations": [
+   "Hironaka.gradedIdealPiece",
+   "Hironaka.gradedGeneratorMultiplicity",
+   "Hironaka.generatorDegreeSequence",
+   "Hironaka.adicGrade",
+   "Hironaka.adicInitialIdeal",
+   "Hironaka.nuStar"
+  ],
+  "statement": "def nuStar {W : Type u} [CommRing W] [IsLocalRing W]\n    (c : Ideal W) : ℕ → ℕ∞",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-only ownership requested by return L at immutable head 15039e6fb241, H2 (§2). These six unchanged declarations are plain definitions with real data in the existing module, not choices from projectiveConeHilbertStandardDegrees. No Lean file is added, moved or copied, and that theorem is not a statement dependency."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f4914d27",
+  "group": "Q37",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f4914d27",
+  "group": "Q37",
+  "result": "fix",
+  "note": "Lean files byte-identical to returned 15039e6f (sha256 165d1f17/8912c327/df41f334); delta is records only. H2 repair accepted: theorem stmt_dep replaced by new def-trf-adic-initial-ideal-generator-degrees (existing:true on unchanged ProjectiveConeHilbertStandardDegrees: gradedIdealPiece, gradedGeneratorMultiplicity, generatorDegreeSequence, adicGrade, adicInitialIdeal, nuStar; bodies read against node text, all match; body owners cited; no cycle); item gains landed def owners def-sfb-nodal-tangent-comparison-data (initialForm) and def-trf-permissible-coordinate-chart-ring (relations), allowed as STMT_DEPS MAY GAIN LANDED NODES. check_lean_text clean on all 3 records. FIX 1: def-trf-permissible-basis-chart-data cited two ids in one bracket [a, b], so check_new_node failed (b) with 'stmt_deps not cited'; split into two citations, same meaning, now clean. FIX 2: trimmed noncomputable from the existing:true record's lean.statement (check_existing note gone). Owner audit: only Mathlib-leaf gaps (Localization.Away), advisory. No compile: no Lean file changed."
+ }
+}

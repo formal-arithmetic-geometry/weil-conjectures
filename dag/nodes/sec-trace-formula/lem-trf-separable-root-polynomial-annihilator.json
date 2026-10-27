@@ -1,0 +1,218 @@
+{
+ "id": "lem-trf-separable-root-polynomial-annihilator",
+ "kind": "statement",
+ "title": "Separable-root divided differences give polynomial annihilators",
+ "statement": "Let $L$ be a field [def-weil-field], let $R$ be a commutative ring, and let $\\iota:L\\to R$ be a unital ring homomorphism. For $G=\\sum_jc_jT^j\\in L[T]$ [def-weil-polynomial-ring] and $t\\in R$ write $G(t)=\\sum_j\\iota(c_j)t^j$. Suppose $\\alpha\\in L$ and $P\\in L[T]$ satisfy $P(\\alpha)=0$ and $P$ is separable [def-pc-separable-polynomial]. For each $G=\\sum_jc_jT^j\\in L[T]$ define the polynomial\n$$D_{G,\\alpha}(T)=\\sum_{j\\geq1}c_j\\sum_{h=0}^{j-1}T^{j-1-h}\\alpha^h,$$\nwhere both sums are finite because the coefficients of $G$ have finite support. The following identities hold in $L[T]$ and $L$:\n$$G(T)-G(\\alpha)=(T-\\alpha)D_{G,\\alpha}(T),\\qquad D_{G,\\alpha}(\\alpha)=G'(\\alpha).$$\nPut $Q=D_{P,\\alpha}$. Then\n$$P=(T-\\alpha)Q,\\qquad Q(\\alpha)=P'(\\alpha)\\ne0.$$\nFor every $t\\in R$ with $P(t)=0$ and every $F\\in L[T]$ with $F(\\alpha)=0$, put $H=D_{F,\\alpha}$. One has\n$$F=(T-\\alpha)H,\\qquad Q(t)F(t)=P(t)H(t)=0.$$\nThese assertions allow $F=0$, all characteristics, and the zero ring $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite primitive-element calculation and general algebraic-union paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "All sums may be taken over a finite range containing the coefficient support. For each $j\\geq1$, expand the product to get the telescoping identity $(T-\\alpha)\\sum_{h=0}^{j-1}T^{j-1-h}\\alpha^h=\\sum_{h=0}^{j-1}(T^{j-h}\\alpha^h-T^{j-1-h}\\alpha^{h+1})=T^j-\\alpha^j$: consecutive terms cancel, leaving precisely the two endpoints. Multiplying by $c_j$ and summing gives $(T-\\alpha)D_{G,\\alpha}=G(T)-G(\\alpha)$; the $j=0$ term on the right is zero. These are identities of coefficient sequences with the polynomial multiplication of [def-weil-polynomial-ring], not merely identities of polynomial functions.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension paragraph: the factorization P=(x-alpha)Q and Q(alpha) nonzero, with the elementary calculation made explicit"
+   }
+  },
+  {
+   "text": "At $T=\\alpha$, each of the $j$ summands $T^{j-1-h}\\alpha^h$ becomes $\\alpha^{j-1}$, since $(j-1-h)+h=j-1$. Hence $D_{G,\\alpha}(\\alpha)=\\sum_{j\\geq1}j c_j\\alpha^{j-1}=G'(\\alpha)$ by the formal derivative formula of [def-pc-separable-polynomial]. Here $j c_j$ means repeated addition, so this calculation holds in every characteristic, also when $\\alpha=0$ (powers of exponent zero equal $1$).",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension paragraph: the factorization P=(x-alpha)Q and Q(alpha) nonzero, with the elementary calculation made explicit"
+   }
+  },
+  {
+   "text": "With $G=P$ the first two steps and $P(\\alpha)=0$ give $P=(T-\\alpha)Q$ and $Q(\\alpha)=P'(\\alpha)$. By [def-pc-separable-polynomial], separability supplies $U,V\\in L[T]$ with $UP+VP'=1$. Evaluating this equality at $\\alpha$ gives $V(\\alpha)P'(\\alpha)=1$. Evaluation preserves products directly from the convolution formula: for $A=\\sum_i a_iT^i$ and $B=\\sum_j b_jT^j$, $(AB)(\\alpha)=\\sum_{i,j}a_ib_j\\alpha^{i+j}=(\\sum_i a_i\\alpha^i)(\\sum_j b_j\\alpha^j)$, and it preserves sums and $1$ coefficientwise. If $P'(\\alpha)=0$, the displayed equality would give $0=1$, contradicting [def-weil-field]. Thus $Q(\\alpha)\\ne0$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-polynomial-ring",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension paragraph: the factorization P=(x-alpha)Q and Q(alpha) nonzero, with the elementary calculation made explicit"
+   }
+  },
+  {
+   "text": "For $F(\\alpha)=0$, Step 1 with $G=F$ gives $F=(T-\\alpha)H$. More generally the evaluation in $R$ satisfies $(AB)(t)=\\sum_{i,j}\\iota(a_i b_j)t^{i+j}=(\\sum_i\\iota(a_i)t^i)(\\sum_j\\iota(b_j)t^j)=A(t)B(t)$, using that $\\iota$ preserves products and $R$ is commutative. Consequently $Q(t)F(t)=Q(t)(t-\\iota(\\alpha))H(t)=((t-\\iota(\\alpha))Q(t))H(t)=P(t)H(t)=0$. If $F=0$, its defining coefficient sum gives $H=0$. No cancellation, division or nontriviality in $R$ was used, so the zero ring is allowed.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension paragraph: the factorization P=(x-alpha)Q and Q(alpha) nonzero, with the elementary calculation made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-extension paragraph; explicit coefficient-level expansion of the argument there called clear"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Separable.*(div|root)|(eval|aeval).*divByMonic|eval.*derivative.*ne_zero",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"grep\", \"query\": \"Separable.*(div|root)|(eval|aeval).*divByMonic|eval.*derivative.*ne_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/Roots.lean\"], \"digest\": \"2922ba128c09ebda\"}; Read Separable.lean:136-147 and Minpoly/MinpolyDiv.lean:35-85. The former gives derivative nonvanishing only; the latter concerns the minimal-polynomial quotient and not this explicit divided-difference formula for arbitrary G or the annihilation identity in arbitrary commutative L-algebras. The nodal-derivative and iterated-derivative results concern different polynomials. No complete match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separable polynomial P and a root a the complementary factor Q has Q(a) nonzero and Q(t) annihilates F(t) whenever P(t)=0 and F(a)=0",
+   "results": "{\"t\": \"2026-10-22T05:59:24Z\", \"tool\": \"leansearch\", \"query\": \"For a separable polynomial P and a root a the complementary factor Q has Q(a) nonzero and Q(t) annihilates F(t) whenever P(t)=0 and F(a)=0\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Separable\", \"Polynomial.separable_def\", \"Polynomial.separable_def'\", \"IsSeparable\", \"Polynomial.Separable.isCoprime\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"Polynomial.Separable.squarefree\", \"Polynomial.nodup_aroots_iff_of_splits\"], \"digest\": \"e1dd7cc97f053a98\"}; Read Separable.lean:136-147 and Minpoly/MinpolyDiv.lean:35-85. The former gives derivative nonvanishing only; the latter concerns the minimal-polynomial quotient and not this explicit divided-difference formula for arbitrary G or the annihilation identity in arbitrary commutative L-algebras. The nodal-derivative and iterated-derivative results concern different polynomials. No complete match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a separable polynomial P over a field L with root a and an L algebra element t killed by P there is Q with P=(X-a)*Q and Q(a) nonzero such that Q(t) kills every F(t) with F(a)=0",
+   "results": "{\"t\": \"2026-10-22T05:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"Given a separable polynomial P over a field L with root a and an L algebra element t killed by P there is Q with P=(X-a)*Q and Q(a) nonzero such that Q(t) kills every F(t) with F(a)=0\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.exists_eval₂_eq_zero\", \"Polynomial.exists_finset_of_splits\", \"IsSepClosed.exists_aeval_eq_zero\", \"IsSepClosed.exists_eval₂_eq_zero_of_injective\", \"IsSepClosed.exists_root\", \"Polynomial.X_sub_C_mul_removeFactor\", \"Polynomial.Separable.aeval_derivative_ne_zero\", \"IsSeparable\"], \"digest\": \"f350beebf2d6f65a\"}; Read Separable.lean:136-147 and Minpoly/MinpolyDiv.lean:35-85. The former gives derivative nonvanishing only; the latter concerns the minimal-polynomial quotient and not this explicit divided-difference formula for arbitrary G or the annihilation identity in arbitrary commutative L-algebras. The nodal-derivative and iterated-derivative results concern different polynomials. No complete match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.eval",
+   "results": "{\"t\": \"2026-10-22T05:59:41Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Separable, Polynomial.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Polynomial.eq_X_sub_C_of_separable_of_root_eq\", \"IsSepClosed.of_exists_root\"], \"digest\": \"a09b541d5f51ef2c\"}; Read Separable.lean:136-147 and Minpoly/MinpolyDiv.lean:35-85. The former gives derivative nonvanishing only; the latter concerns the minimal-polynomial quotient and not this explicit divided-difference formula for arbitrary G or the annihilation identity in arbitrary commutative L-algebras. The nodal-derivative and iterated-derivative results concern different polynomials. No complete match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The explicit divided difference D_G at a satisfies G(X)-G(a)=(X-a)D_G and D_P(a)=derivative P(a), giving a nonvanishing annihilator in any algebra killed by a separable P",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"The explicit divided difference D_G at a satisfies G(X)-G(a)=(X-a)D_G and D_P(a)=derivative P(a), giving a nonvanishing annihilator in any algebra killed by a separable P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Separable.aeval_derivative_ne_zero\", \"Polynomial.Separable.eval₂_derivative_ne_zero\", \"Polynomial.aeval_sumIDeriv_of_pos\", \"Polynomial.aeval_sumIDeriv\", \"Lagrange.eval_nodal_derivative_eval_node_eq\", \"eval_minpolyDiv_self\", \"eval_minpolyDiv_of_aeval_eq_zero\", \"Polynomial.aeval_iterate_derivative_of_lt\"], \"digest\": \"dd444089cfd6b1ee\"}; Read Separable.lean:136-147 and Minpoly/MinpolyDiv.lean:35-85. The former gives derivative nonvanishing only; the latter concerns the minimal-polynomial quotient and not this explicit divided-difference formula for arbitrary G or the annihilation identity in arbitrary commutative L-algebras. The nodal-derivative and iterated-derivative results concern different polynomials. No complete match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?difference|eval₂_derivative_ne_zero|eval_derivative_ne_zero|geom_sum_mul|mul_geom_sum",
+   "results": "{\"t\": \"2026-10-23T04:17:21Z\", \"tool\": \"grep\", \"query\": \"divided.?difference|eval₂_derivative_ne_zero|eval_derivative_ne_zero|geom_sum_mul|mul_geom_sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/Algebra/Field/GeomSum.lean\", \"Mathlib/Algebra/Order/Field/GeomSum.lean\", \"Mathlib/Algebra/Order/Field/GeomSum.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Ring/GeomSum.lean\", \"Mathlib/Algebra/Ring/GeomSum.lean\"], \"digest\": \"457b96c7b26d1f8a\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separable polynomial P with root a has P=(X-a)*Q with Q(a) nonzero and Q(t)*F(t)=0 if P(t)=0 and F(a)=0",
+   "results": "{\"t\": \"2026-10-23T04:17:22Z\", \"tool\": \"leansearch\", \"query\": \"A separable polynomial P with root a has P=(X-a)*Q with Q(a) nonzero and Q(t)*F(t)=0 if P(t)=0 and F(a)=0\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Separable\", \"IsSeparable\", \"Polynomial.separable_def'\", \"Polynomial.separable_def\", \"Polynomial.Separable.of_dvd\", \"Polynomial.Separable.squarefree\", \"Polynomial.Separable.aeval_derivative_ne_zero\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\"], \"digest\": \"d51d18bb597e7b54\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.eval",
+   "results": "{\"t\": \"2026-10-23T04:17:22Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Separable, Polynomial.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Polynomial.eq_X_sub_C_of_separable_of_root_eq\", \"IsSepClosed.of_exists_root\"], \"digest\": \"a09b541d5f51ef2c\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The divided difference D of a polynomial G at a satisfies G(X)-G(a)=(X-a)*D and D(a)=G derivative at a, with a complementary factor of a separable polynomial annihilating evaluations vanishing at a",
+   "results": "{\"t\": \"2026-10-23T04:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"The divided difference D of a polynomial G at a satisfies G(X)-G(a)=(X-a)*D and D(a)=G derivative at a, with a complementary factor of a separable polynomial annihilating evaluations vanishing at a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aeval_sumIDeriv\", \"Lagrange.eval_nodal_derivative_eval_node_eq\", \"Polynomial.aeval_sumIDeriv_of_pos\", \"Polynomial.divByMonic_add_X_sub_C_mul_derivative_divByMonic_eq_derivative\", \"Polynomial.eval_derivative_div_eval_of_ne_zero_of_splits\", \"Polynomial.eval₂_derivative_of_splits\", \"Polynomial.eval_derivative_eq_eval_mul_sum_of_splits\", \"Polynomial.eval_sumIDeriv_of_pos\"], \"digest\": \"017e2f7108ea5123\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "divByMonic.*(eval|derivative)|eval.*divByMonic|sum.*(X_sub_C|sub_C)",
+   "results": "{\"t\": \"2026-10-23T04:18:28Z\", \"tool\": \"grep\", \"query\": \"divByMonic.*(eval|derivative)|eval.*divByMonic|sum.*(X_sub_C|sub_C)\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Eval/Degree.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/FieldDivision.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\"], \"digest\": \"03fa28fffc6b0516\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial difference quotient expanded as sum of coefficients times sum of powers has value equal to the formal derivative on the diagonal",
+   "results": "{\"t\": \"2026-10-23T04:18:41Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial difference quotient expanded as sum of coefficients times sum of powers has value equal to the formal derivative on the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aeval_iterate_derivative_of_ge\", \"Polynomial.sumIDeriv_eq_self_add\", \"Polynomial.hasseDeriv_apply\", \"Polynomial.eval_sumIDeriv_of_pos\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\", \"Polynomial.aeval_sumIDeriv\", \"Polynomial.sumIDeriv_apply\", \"Polynomial.sumIDeriv_apply_of_le\"], \"digest\": \"afc94c4aa48950ef\"}; Read FieldTheory/Separable.lean:136-147 (derivative nonvanishing at a root), Algebra/Polynomial/FieldDivision.lean:630-641 (quotient by X-C a), Algebra/Ring/GeomSum.lean:181-197 (geometric telescoping), and FieldTheory/Minpoly/MinpolyDiv.lean:35-80 (minimal-polynomial factor). SumIteratedDerivative.lean:168-202 concerns a different sum of iterated derivatives. These prove ingredients, not the specified finite coefficient formula D for arbitrary G together with its annihilation identity in arbitrary R; the whole item is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-algebraic-diagonal-localization",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the separable-scalar-restriction ingredient in the ancestor proof, namely the passage to a finite separable constants extension; complementary factor at a separable root, its nonvanishing value, and its annihilation action after polynomial evaluation (returned item steps 4-5 and the Q(t)F(t)=0 computation of step 6)",
+   "via": [
+    "lem-trf-separable-algebraic-diagonal-localization",
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-separable-root-polynomial-annihilator",
+  "worker": "stage1",
+  "summary": "Proved the explicit divided-difference identity by telescoping, its value by the formal derivative coefficient formula, nonvanishing by evaluating the Bezout identity already contained in the separability definition, and annihilation by an explicit convolution/evaluation calculation. No new nodes: every step is elementary from the existing definitions. Statement and its hypotheses retained. Mathlib searches cover the item and two phrasings; no complete match.",
+  "blueprint": "Realizes the separable-scalar-restriction ingredient below lem-trf-local-term-locality, through lem-trf-separable-algebraic-diagonal-localization: the complementary factor and its annihilation calculation used to localize the separable algebraic diagonal (Stacks 0C2X)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-1e7ef852e",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-1e7ef852e (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes, no repair note and no fixes. The delivery is one commit with the item and its report, and proof_deps equals the union of the step uses. Source: Stacks algebra.tex:10221-10262 (Tag 0C2X). Its finite case factors P=(x-α)Q, says Q(α)≠0 because P is separable, and calls the localization 'clear'. The item writes out exactly that factorization and the annihilation Q(t)F(t)=0, over a field L, a commutative ring R and a unital ι. The parent lem-trf-separable-algebraic-diagonal-localization step 3 applies it with L=k1, R=k1⊗k1, ι(c)=c⊗1 and t=1⊗α, and gets exactly the hypotheses and conclusions it needs. Step 1 (telescoping, as an identity of convolution coefficient sequences), step 2 (j summands become α^{j-1}; the formal-derivative clause of def-pc-separable-polynomial; valid in every characteristic and at α=0), step 3 (Bezout UP+VP'=1 evaluated at α, multiplicativity written out, 0≠1 from def-weil-field) and step 4 (evaluation into commutative R is a ring hom, P(t)H(t)=0, no cancellation, so R=0 is fine) are all genuinely elementary from the cited definition statements. Small cases: C with T^2+1 gives Q(i)=2i; F4 with T^2+T+1 gives Q(ω)=1 in characteristic 2; inseparable T^2-a in characteristic 2 gives Q(α)=0, so the hypothesis is needed; F=0, constant G, P=T-α and R=0 all hold. rg -L over the DAG finds no duplicate: the candidates (root-multiplicity-pos-iff, frobenius-polynomial-simple-roots, irreducible-separable-derivative) are different statements. Mathlib searches cover grep, LeanSearch, LeanFinder and Loogle with no match, so the split status is accepted. No SGA, no tool_uses, and no unit or chapter change."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableRootPolynomialAnnihilator",
+  "declaration": "Polynomial.separable_root_polynomial_annihilator",
+  "declarations": [
+   "Polynomial.rootDividedDifference",
+   "Polynomial.separable_root_polynomial_annihilator"
+  ],
+  "file": "lean/Sheaf/FieldTheory/SeparableRootPolynomialAnnihilator.lean",
+  "statement": "theorem separable_root_polynomial_annihilator (L : Type u) [Field L] (R : Type v) [CommRing R] (ι : L →+* R) (α : L) (P : L[X]) (hP : P.eval α = 0) (hsep : P.Separable) : (∀ G : L[X], G - C (G.eval α) = (X - C α) * rootDividedDifference G α ∧ (rootDividedDifference G α).eval α = G.derivative.eval α) ∧ P = (X - C α) * rootDividedDifference P α ∧ (rootDividedDifference P α).eval α = P.derivative.eval α ∧ P.derivative.eval α ≠ 0 ∧ ∀ (t : R), P.eval₂ ι t = 0 → ∀ (F : L[X]), F.eval α = 0 → F = (X - C α) * rootDividedDifference F α ∧ (rootDividedDifference P α).eval₂ ι t * F.eval₂ ι t = P.eval₂ ι t * (rootDividedDifference F α).eval₂ ι t ∧ P.eval₂ ι t * (rootDividedDifference F α).eval₂ ι t = 0",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3fe3f02c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Lean statement matches node clause-by-clause: Field L, CommRing R (no Nontrivial, R=0 allowed), ι : L →+* R, eval₂ for G(t), Separable P with eval α = 0; rootDividedDifference is the node's explicit finite sum (j=0 empty range, exact ℕ-subtraction), a real def in the owning module listed in lean.declarations; conjuncts: ∀G factorization + derivative value, P=(X−Cα)Q, Q(α)=P'(α), P'(α)≠0, ∀t ∀F: F=(X−Cα)H, Q(t)F(t)=P(t)H(t), =0 (chains split, equivalent); all true. Stacks algebra.tex:10221-10255 Tag 0C2X read; no stronger hypotheses. lean.statement verbatim once in file; non-lean node fields identical to side-live 8f11b24d6ff; no live lean record or name clash; docstrings carry source place, blueprint id and the 4 proof steps; sorry only; universes u,v bound; both report sections present (second reading is a self-review, noted). No recompile (unchanged file; worker reports clean scompile)."
+ }
+}

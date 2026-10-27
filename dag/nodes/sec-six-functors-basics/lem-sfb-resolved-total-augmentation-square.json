@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-resolved-total-augmentation-square",
+ "kind": "statement",
+ "title": "Normalized derived augmentation square for finite cosimplicial totals",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], let $F:\\mathcal A\\to\\mathcal B$ be left exact and additive [def-sp-left-exact-additive], and use ordinary derived categories, localization $Q$, and the K-injective right derived functor $RF$ [sk-def-sfb-derived-categories]. Let $\\Delta$ have the finite nonempty ordered sets $[n]$ and order-preserving maps as its objects and arrows. For a strict functor $C:\\Delta\\to\\operatorname{Ch}^{\\ge0}(\\mathcal A)$, put $T(C)^r=\\bigoplus_{n+q=r}C_n^q$ and $d_T=\\delta+(-1)^n d_C$, where $\\delta=\\sum_i(-1)^i C(d^i)$ [def-sp-double-complex-total]. Let $A,B$ be nonnegative complexes, let $b:\\operatorname{const}(A)\\to K$ and $c:\\operatorname{const}(B)\\to J$ be strict augmentations, and let $v:A\\to B$ and $u:K\\to J$ be quasi-isomorphisms (columnwise for $u$) with $B,J_n$ termwise injective and $u_nb_n=c_nv$ for every $n$. The maps $a:A\\to T(K)$ and $a_J:B\\to T(J)$, equal to $b_0$ and $c_0$ in cosimplicial degree zero and zero in higher cosimplicial degrees, are chain maps and satisfy $a_Jv=T(u)a$. With $\\beta_J:F(T(J))\\cong T(FJ)$ the finite-biproduct comparison, $\\rho_E:RF(QE)\\cong QF(E)$ the inverse derived unit, $c_v=\\rho_B RF(Qv)$, and $\\chi_u=Q\\beta_J\\rho_{T(J)}RF(QT(u))$, one has\n$$\\chi_u RF(Qa)=Q(\\beta_JF(a_J))c_v.$$\nThe chain map $\\beta_JF(a_J)$ has component $F(c_0)$ in cosimplicial degree zero and zero elsewhere. Under the column comparisons $\\rho_{J_n}RF(Qu_n)$ and $c_v$, its source maps correspond to $RF(Qb_n)$. If $(h,f)$ is a strict map between two augmented diagrams, so $f_nb_n=b'_nh$, any compatible strict lifts $(\\widetilde h,g)$ with $g_nc_n=c'_n\\widetilde h$ satisfy the total augmentation square; after localization the displayed equation commutes with that square. These statements hold for every such compatible choice of augmented nonnegative injective replacements [def-sp-injective-resolutions].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141 (lemma-functorial-injective-resolutions and remark-match) applied to augmented diagrams, and Tag 015J (lemma-two-ss-complex-functor, finite-total equality); explicit degree-zero augmentation and normalized derived-unit square."
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\iota_{n,q}$ for the diagonal inclusions. The augmentation identities for the two maps $[0]\\to[1]$ give $K(d^0)b_0=b_1=K(d^1)b_0$. Hence $\\delta b_0=(K(d^0)-K(d^1))b_0=0$. Since $b_0$ is a chain map and the vertical sign at $n=0$ is $+1$, the total differential satisfies $d_T\\iota_{0,q}b_0^q=\\iota_{0,q+1}b_0^{q+1}d_A$. Thus $a^q=\\iota_{0,q}b_0^q$ is a chain map. Replacing $(A,K,b)$ by $(B,J,c)$ proves the same for $a_J$. In degree $q$, $a_Jv$ and $T(u)a$ are respectively $\\iota_{0,q}c_0^qv^q$ and $\\iota_{0,q}u_0^qb_0^q$; the assumed augmentation square makes them equal. These calculations use the signed total of [def-sp-double-complex-total].",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), finite total convention; explicit augmentation calculation extending the source."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-injective-finite-total-derived-comparison] to $u:K\\to J$. Its hypotheses hold because every $J_n$ is nonnegative and termwise injective and each $u_n$ is a quasi-isomorphism. It supplies the summand-preserving $\\beta_J$, the quasi-isomorphism $T(u)$, and K-injectivity of $T(J)$ and $J_n$. Apply the same statement to the constant cosimplicial diagram on $B$ and its identity replacement: its column $B$ is K-injective as well. By [def-sfb-right-derived-functor], the natural derived unit $\\eta_E:QF(E)\\to RF(QE)$ is invertible on these complexes; put $\\rho_E=\\eta_E^{-1}$. Since $v$ and $T(u)$ are quasi-isomorphisms, $c_v$ and $\\chi_u$ are precisely the isomorphisms specified in the statement.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070J (lemma-bounded-below-injectives-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies), and 015J (lemma-two-ss-complex-functor)."
+   }
+  },
+  {
+   "text": "Naturality of the unit in [def-sfb-right-derived-functor], applied to $a_J:B\\to T(J)$, says $RF(Qa_J)\\eta_B=\\eta_{T(J)}QF(a_J)$. Multiply by the two inverse components to obtain $\\rho_{T(J)}RF(Qa_J)=QF(a_J)\\rho_B$. Using step 1 and functoriality, compute\n$$\\begin{aligned}\\chi_u RF(Qa)&=Q\\beta_J\\rho_{T(J)}RF(Q(T(u)a))\\\\&=Q\\beta_J\\rho_{T(J)}RF(Q(a_Jv))\\\\&=Q\\beta_J QF(a_J)\\rho_B RF(Qv)\\\\&=Q(\\beta_JF(a_J))c_v.\\end{aligned}$$\nThis is equality in $D(\\mathcal B)$ of the entire derived-object maps, not just equality on cohomology.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies), natural derived-unit comparison; direct functorial calculation."
+   }
+  },
+  {
+   "text": "By the defining summand identity for $\\beta_J$ in [lem-sfb-injective-finite-total-derived-comparison], $\\beta_J^qF(\\iota_{0,q}c_0^q)=\\iota'_{0,q}F(c_0^q)$. Thus $m=\\beta_JF(a_J)$ has precisely the asserted degree-zero cosimplicial component and all other components zero. For every $n$, naturality of the unit of [def-sfb-right-derived-functor] at $c_n:B\\to J_n$ gives $QF(c_n)\\rho_B=\\rho_{J_n}RF(Qc_n)$. Therefore\n$$QF(c_n)c_v=\\rho_{J_n}RF(Q(c_nv))=\\rho_{J_n}RF(Q(u_nb_n))=c_{u_n}RF(Qb_n),$$\nwhich is the asserted correspondence of the augmentation maps under the specified column and source comparisons.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), summand-preserving finite-total equality, and Tags 070Y/070K, natural derived unit."
+   }
+  },
+  {
+   "text": "For a second augmented diagram use primes. A strict augmented map satisfies $f_nb_n=b'_nh$; a compatible strict lift satisfies $gu=u'f$, $\\widetilde h v=v'h$, and $g_nc_n=c'_n\\widetilde h$. Degree-zero components give $T(f)a=a'h$ and $T(g)a_J=a'_J\\widetilde h$, while every higher cosimplicial component of these composites is zero. The natural finite-total comparison of [lem-sfb-injective-finite-total-derived-comparison] gives\n$$T(Fg)m=T(Fg)\\beta_JF(a_J)=\\beta_{J'}F(T(g)a_J)=m'F(\\widetilde h).$$\nThis is the strict total augmentation square, including its mapped version.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141 (lemma-functorial-injective-resolutions and remark-match), strict augmented squares, and Tag 015J (lemma-two-ss-complex-functor), finite-total equality; direct component calculation."
+   }
+  },
+  {
+   "text": "Naturality of the unit of [def-sfb-right-derived-functor] at $\\widetilde h$ and $T(g)$ gives\n$$QF(\\widetilde h)c_v=c_{v'}RF(Qh),\\qquad QT(Fg)\\chi_u=\\chi_{u'}RF(QT(f)).$$\nFor the first equality expand $c_v$, use $QF(\\widetilde h)\\rho_B=\\rho_{B'}RF(Q\\widetilde h)$, and substitute $\\widetilde h v=v'h$. For the second, expand $\\chi_u$, use $T(Fg)\\beta_J=\\beta_{J'}F(T(g))$ from [lem-sfb-injective-finite-total-derived-comparison], then $QF(T(g))\\rho_{T(J)}=\\rho_{T(J')}RF(QT(g))$, and substitute $T(g)T(u)=T(u')T(f)$. Combining these equalities with steps 3 and 5 yields\n$$QT(Fg)\\chi_u RF(Qa)=Qm'c_{v'}RF(Qh)=\\chi_{u'}RF(Qa')RF(Qh).$$\nThus the displayed derived equation commutes with the localized augmented square. Every calculation used only the stated compatibility equations and injectivity assumptions, so it holds for every compatible choice of replacements and lifts.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sfb-injective-finite-total-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141 (remark-match), functorial resolution squares; Tags 070Y/070K, natural unit; Tag 015J, natural finite-total comparison. Explicit localization calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "lem-sfb-injective-finite-total-derived-comparison",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0141 (lemma-functorial-injective-resolutions and remark-match), 015J (lemma-two-ss-complex-functor), 070Y (lemma-K-injective-defined), and 070K (lemma-enough-K-injectives-implies); explicit signed augmentation and inverse-derived-unit naturality calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict augmentation from a constant nonnegative complex into a cosimplicial complex induces a degree zero total map compatible with normalized right derived injective resolution comparisons",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.ι', CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: augmented simplex-category definitions and object-level derived maps do not state the degree-zero total augmentation equation with the whole derived unit and compatible augmented maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingCofaceMapComplex\", \"augmentation\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: augmented simplex-category definitions and object-level derived maps do not state the degree-zero total augmentation equation with the whole derived unit and compatible augmented maps."
+  },
+  {
+   "tool": "grep",
+   "query": "(cosimplicial|total).*(augment|Augment)|(augment|Augment).*(cosimplicial|total)",
+   "results": "15 hits: Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: augmented simplex-category definitions and object-level derived maps do not state the degree-zero total augmentation equation with the whole derived unit and compatible augmented maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived functor comparison with cosimplicial total complex commutes with augmented diagram maps",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Functor.totalRightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: augmented simplex-category definitions and object-level derived maps do not state the degree-zero total augmentation equation with the whole derived unit and compatible augmented maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective resolution of augmented cosimplicial cochain complexes identifies the totalized derived augmentation with the derived degree zero inclusion",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.ι'_f_zero, CategoryTheory.InjectiveResolution.ι', CategoryTheory.InjectiveResolution.ι'_f_zero_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'",
+   "date": "2026-10-22",
+   "verdict": "no match: augmented simplex-category definitions and object-level derived maps do not state the degree-zero total augmentation equation with the whole derived unit and compatible augmented maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of right derived unit identifies a degree zero cosimplicial augmentation with the augmentation of the finite total of injective resolutions",
+   "results": "8 hits: CategoryTheory.CosimplicialObject.augment, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits give augmented cosimplicial objects, alternating coface complexes, or derived functors of individual objects; none states the finite-total augmentation equation with the whole-derived-unit normalization and compatible augmented maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict cosimplicial augmentation of a nonnegative cochain complex induces a map to the finite diagonal total compatible with the inverse right derived unit",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε, AlgebraicTopology.DoldKan.N₂Γ₂_inv_app_f_f, AlgebraicTopology.DoldKan.Γ₂_obj_p_app, AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app, AlgebraicTopology.alternatingCofaceMapComplex, CochainComplex.augmentTruncate, CategoryTheory.Idempotents.DoldKan.Γ_map_app, AlgebraicTopology.DoldKan.Γ₀_map_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits give augmented cosimplicial objects, alternating coface complexes, or derived functors of individual objects; none states the finite-total augmentation equation with the whole-derived-unit normalization and compatible augmented maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from an augmented cosimplicial cochain complex to its total is natural and agrees with the totalized derived augmentation after injective replacement",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε, AlgebraicTopology.alternatingCofaceMapComplex, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero, CochainComplex.augmentTruncate, AlgebraicTopology.DoldKan.Γ₀.map_app, AlgebraicTopology.DoldKan.Γ₀_map_app, AlgebraicTopology.alternatingCofaceMapComplex_map, AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+   "date": "2026-10-22",
+   "verdict": "no match: the read hits give augmented cosimplicial objects, alternating coface complexes, or derived functors of individual objects; none states the finite-total augmentation equation with the whole-derived-unit normalization and compatible augmented maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nonnegative-derived-totalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the formal bounded-below Cech descent used before the root-tower boundary-unit calculation; the compatible derived-image totalization comparison. The inherited ancestor is None. Re-split of nonnegative-derived-totalization: former steps 8.",
+   "via": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-resolved-total-augmentation-square",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Six steps compute the augmentation chain map and replacement square, invoke the existing normalized finite-total comparison, and calculate the whole-derived-object identity, column identifications, and naturality for strict compatible augmented lifts. No new nodes are needed.",
+  "blueprint": "The inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports. This realizes former step 8 of lem-sfb-nonnegative-derived-totalization, now its step 4: augmentation and compatible maps in the finite-total comparison. The inherited open-direct-image paragraph (3) place is retained; the chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-b18bd9070",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-b18bd9070 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is the item only: 0 new nodes, with statement, stmt_deps and blueprint unchanged against the Q52 base copies. I recomputed all six steps. Step 1: augmentation naturality gives K(d^0)b_0=b_1=K(d^1)b_0, so δb_0=0. With the +1 sign at n=0, d_T ι_{0,q}b_0=ι_{0,q+1}b_0 d_A. The identity a_J v=T(u)a follows from c_0v=u_0b_0. Step 2: the hypotheses of lem-sfb-injective-finite-total-derived-comparison hold (nonnegative termwise-injective J_n, columnwise quasi-isomorphism u). Applying it to const(B) with the identity is legitimate and gives B K-injective. def-sfb-right-derived-functor says η is invertible on K-injectives. Step 3: unit naturality at a_J gives χ_u RF(Qa)=Q(β_J F(a_J))c_v. Step 4: β_J F(ι_{n,q})=ι'_{n,q} gives the degree-zero component F(c_0), and QF(c_n)c_v=c_{u_n}RF(Qb_n) follows from u_n b_n=c_n v. Steps 5-6: β-naturality and unit naturality, with gu=u'f, h̃v=v'h and g_n c_n=c'_n h̃, give the strict square and the localized square. I checked both routes. Sources checked in derived.tex: 0141 (lemma-functorial-injective-resolutions l.7623, remark-match l.7691), 015J (l.7177), 070J, 070Y and 070K (l.9688, 9747, 9767). Edge cases checked: r<0, constant diagram, zero complexes, F=id. Route: the only statement cited is in the same unit; the rest are definitions, so no tool_uses. proof_deps equals the union of uses, searches cover all three kinds, and the TeX is valid. Duplicate search found nothing: the Čech augmentation nodes are topos-specific, and the sibling descent/replacement nodes lack the augmentation identity. Step 6's strict-square equation repeats a clause of the sibling descent node, re-derived inline in three lines, which is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ResolvedTotalAugmentationSquare",
+  "declaration": "CategoryTheory.resolved_total_augmentation_square",
+  "declarations": [
+   "CategoryTheory.ResolvedTotalAugmentationData",
+   "CategoryTheory.ResolvedTotalAugmentationData.sourceComparison",
+   "CategoryTheory.ResolvedTotalAugmentationData.totalComparison",
+   "CategoryTheory.ResolvedTotalAugmentationData.mappedAugmentation",
+   "CategoryTheory.ResolvedTotalAugmentationSquare",
+   "CategoryTheory.resolved_total_augmentation_square"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ResolvedTotalAugmentationSquare.lean",
+  "statement": "theorem resolved_total_augmentation_square [PreservesFiniteLimits F] : Nonempty (ResolvedTotalAugmentationSquare F)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary structures package exactly the canonical degree-zero augmentations, finite-summand beta, inverse derived units and all strict/localized square equations. Every map is fixed by its component or inverse-unit normalization. The three helper definitions are explicit composites. Uses the existing Mathlib total and zero extension directly to avoid importing the downstream lem-sfb-nonnegative-derived-totalization module; no duplicate total/localization definition or dependency cycle. RF uses the canonical upstream K-injective convention explicitly permitted by sk-def-sfb-derived-categories. The item statement and all dependency lists are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01ee82eea",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Every node clause matches a Lean field: a and a_J (augmentation with components b_0/c_0 into the degree-zero summand), a_J v = T(u)a (augmentation_naturality), chi_u RF(Qa) = Q(beta_J F(a_J)) c_v (square), the F(c_0) component (mapped_component), the column correspondence (columns), and the strict and localized lift squares (lifts plus augmentation_naturality). Hypotheses are QuasiIso v, columnwise QuasiIso u, termwise injective B and J_n, and the augmentation squares; nothing stronger. The Nonempty structure is fully determined: augmentation by its components, beta by the summand formula (F additive preserves finite coproducts), rho by its inverse being Q(mapExtendIso.inv) followed by rightDerivedFunctorUnitQ. All fields are true, so it is not hollow. Total, Q and unit are the same composites as the parent NonnegativeDerivedTotalization module; it is not imported to avoid a cycle, and the derived-categories dep note allows upstream rightDerivedFunctor. Only the lean field differs from live, the statement is verbatim, docstrings and blueprint ids are present, only sorry, universes are independent, no name clash. Checked Stacks derived.tex 015J, 0141 and remark-match. No compile because no file changed. Minor: the second reading was in-thread."
+ }
+}

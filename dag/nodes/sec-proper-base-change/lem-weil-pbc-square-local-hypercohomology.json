@@ -1,0 +1,167 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-square-local-hypercohomology",
+ "kind": "statement",
+ "title": "Local hypercohomology of a normalized coefficient square",
+ "statement": "Let $v:Z\\to X$, $f:X\\to S$, $k:Z\\to T$, $g:T\\to S$ satisfy $vf=kg$, and let $\\varphi:F\\to v_*G$, $q\\ge0$, $V\\subseteq S$, injective resolutions $I,J$ and restricted-resolution data $R,R^{\\prime}$ on $U=f^{-1}V$ and $U^{\\prime}=v^{-1}U=k^{-1}(g^{-1}V)$ be given [def-weil-pbc-flat-base-change-open-choices]. Let $c_f,c_k,d_g$ be the normalized comparisons [def-weil-pbc-derived-square-local-models], $K=Rk_*G[0]$, $A(\\varphi)$ the coefficient-square map [lem-weil-pbc-derived-square-unit-map], and $\\lambda_g$ the local Leray comparison [lem-weil-pbc-derived-adjunction-top-edge]. Then $c_f;P_S^q(A(\\varphi))_V;\\lambda_{g,K,V};d_{g,K,V}=H^q(\\varphi_U);c_k$, where the h-map on the right is moduleCohomologyFMap of restrictedDirectImageMap [def-weil-pbc-module-cohomology-fmap]. This is an equality of maps into local derived hypercohomology before sheafification; it assumes no map e or equation for a sheaf edge.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images; Tag 01FB, remark-explain-arrow; Tags 0BKJ and 0D5X; normalization on the fixed K-injective representatives"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-derived-adjunction-top-edge",
+  "lem-weil-pbc-derived-square-unit-map",
+  "def-weil-pbc-derived-square-local-models",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Factor both existing endpoint comparisons into classical section cohomology followed by raw local hypercohomology.",
+   "uses": [
+    "def-weil-pbc-square-resolution-roof-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the injective replacement ell:v_*J→L and augmentation lift beta:I→L using the proved natural-indexed resolution and lifting lemmas. Extend the roof by zero. Local sections of ell are a quasi-isomorphism: use the unbounded local direct-image sections theorem and exact evaluation on U.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-trf-unbounded-direct-image-section-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the raw derived-square roof action equation and the one-morphism restricted classical roof equation. They have the same numerator HΓ(beta) and denominator HΓ(ell).",
+   "uses": [
+    "lem-weil-pbc-square-injective-roof-action",
+    "lem-weil-pbc-restricted-coefficient-roof"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose with the inverse target raw comparison and the invertible denominator, then cancel them. Associativity gives precisely the unchanged asserted equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-square-resolution-roof-models",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-weil-pbc-square-injective-roof-action",
+  "lem-weil-pbc-restricted-coefficient-roof"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB; explicit injective roof and cancellation after separately comparing classical and raw derived actions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from cohomology of sections of an injective resolution to sections of its cohomology sheaf agrees with the derived sheafification unit, and coefficient maps act by their resolution roofs.",
+   "results": "8 hits: toSheafify, toSheafification, TopCat.Presheaf.toSheafify, Functor.rightDerived_map_eq, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, toSheafify_app_apply, Sheaf.sheafifyCocone_ι_app_val, GrothendieckTopology.instIsLocallyInjectiveToSheafify. These supply generic ingredients; no normalized derived/classical local comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local cohomology class naturality derived direct image comparison of commutative square",
+   "results": "8 hits: four localCohomology diagram declarations, LocalizerMorphism.rightDerivedFunctorComparison_fac_app, and three InjectiveResolution/Sheaf naturality declarations; no sheaf-of-modules square comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|topEdgeLocalClass|homologyRightDerivedFunctorObjSingleFunctorIso",
+   "results": "msearch Mathlib grep: 0 hits. Local rg in the project found the existing definitions and specialized flat-base-change and stalk comparisons. No derived/classical comparison for arbitrary coefficient square.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyRightDerivedFunctorObjSingleFunctorIso\"; \"mapHomologyIso\", \"homologyπ\"",
+   "results": "Both recorded msearch queries returned zero hits; exact signatures were read from the project source.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedSquareLocalClasses",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Local hypercohomology of a normalized coefficient square",
+   "via": [
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareLocalHypercohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareLocalHypercohomology.lean",
+  "declaration": "AlgebraicGeometry.square_localHypercohomology",
+  "declarations": [
+   "AlgebraicGeometry.square_localHypercohomology"
+  ],
+  "statement": "theorem square_localHypercohomology {X S Z T : Scheme.{u}}\n    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)\n    (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)\n    (V : S.Opens) (I : InjectiveResolution F) (J : InjectiveResolution G)\n    (R : RestrictedResolutionSections I (f ⁻¹ᵁ V))\n    (R' : RestrictedResolutionSections J (v ⁻¹ᵁ (f ⁻¹ᵁ V))) :\n    (squareLocalResolutionComparison f F q V I (f ⁻¹ᵁ V) rfl R).hom ≫\n      ((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace (q : ℤ)).map\n        (derivedSquareUnitMap f k g v h F G φ)).app (op V) ≫\n      (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).hom.app (op V) ≫\n      (squareInverseOpenComparison g (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).hom.app (op V) =\n    moduleCohomologyFMap (v.resLE (f ⁻¹ᵁ V) (v ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl)\n      (restrictedDirectImageMap v φ (f ⁻¹ᵁ V)) q ≫\n      (squareLocalResolutionComparison k G q (g ⁻¹ᵁ V) J (v ⁻¹ᵁ (f ⁻¹ᵁ V)) (by\n        rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h]) R').hom",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f3b98",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T202016-L-2663496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

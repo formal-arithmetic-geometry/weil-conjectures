@@ -1,0 +1,156 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge",
+  "date": "2026-10-21",
+  "group": "Z6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting for the canonical derived base change map followed by the single module tensor pullback counit",
+   "results": "Eight hits about algebraic tensor base change cancellation and dual base change; none about derived sheaf mates or Leray edges.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Leray\", \"naturality\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray.*naturality|baseChange.*pasting|single.*[Cc]omposition",
+   "results": "15 hits, concerning combinatorics, single functors and analytic composition; no derived module base-change statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Horizontal pasting of derived base change for sheaves of modules compatible with the single-module pullback counit",
+   "results": "CategoryTheory.Limits.leftSquareIsPullback; CategoryTheory.Limits.pasteHorizIsPullback; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Limits.pasteHorizIsPushout; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary sheaf pullback, categorical pullback pasting, or generic derived single functors; none states the normalized derived sheaf mate comparison"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "0GKA structure-cohomology input in the 0GKV case (b) used by the classical torsion constructibility proof: canonical affine Leray/derived-base-change identifications and their compatibility with an arrow W to V of etale base objects (former proof steps 4 and 5).; coherent affine edge proof step 4: normalized single-module horizontal pasting",
+   "via": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-tensor-single-base-change-pasting",
+ "title": "Horizontal pasting with the normalized single-module tensor counits",
+ "statement": "Let X,S,Y,T,Z,U be schemes [def-pc-scheme]. Let f:X\\to S, g:T\\to S, h:U\\to T, p:Y\\to X, q:Y\\to T, t:Z\\to Y, r:Z\\to U and p_0:Z\\to X satisfy pf=qg, tq=rh and tp=p_0. For an O_X-module G [def-weil-sheaf-of-modules-category], let δ_1:Lg^*Rf_*(G[0])\\to Rq_*((p^*G)[0]), δ_2:Lh^*Rq_*((p^*G)[0])\\to Rr_*((t^*p^*G)[0]), and δ_0:L(hg)^*Rf_*(G[0])\\to Rr_*((p_0^*G)[0]) be the specified single-degree base-change composites [def-weil-pbc-single-degree-module-base-change-composite]. Let e:t^*p^*G\\xrightarrow{\\sim}p_0^*G be inverse normalized tensor composition [def-pc-module-pullback] followed by transport along tp=p_0. Let c:Lh^*Lg^*\\xrightarrow{\\sim}L(hg)^* be the composition pinned by the same derived counits [lem-pc-ringed-spaces-derived-pullback-composition]. Then Lh^*(δ_1) followed by δ_2 and Rr_*(e[0]) equals c followed by δ_0. No square is assumed cartesian and no flatness or base-change invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0ATM, remark-compose-base-change-horizontal, with Tag 08HY, remark-base-change; apply to a module in degree zero and the canonical counit to ordinary pullback."
+ },
+ "proof": [
+  {
+   "text": "Apply the derived horizontal pasting theorem to G[0], before applying any single-module counit.",
+   "uses": [
+    "lem-pc-derived-base-change-horizontal-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coefficient naturality moves the first single-module counit through the second mate. Evaluate the factorization for the composition-pinned counits on the homotopy single complex. The degreewise single-complex composition identity identifies its termwise map with inverse normalized tensor composition. Uniqueness of normalized tensor adjunctions identifies the tensor compositor with the mate used in that factorization. The pinned single-module comparison is the explicit construction supplied in the top-cohomology module. Use the existing named pinned composition and additive comparison; package the fixed counits behind definition equations and perform the single-complex calculation first for abstract additive functors.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-derived-base-change-coefficient-naturality",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-perfect-hom-cochain-counit",
+    "lem-pc-perfect-hom-transport",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-derived-pullback-top-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the inverse derived-composition factor supplied by pasting against that single-complex factorization. Functoriality of Rr_* combines the coefficient maps. Substitute tp=p_0 and use proof irrelevance for the square equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-derived-base-change-coefficient-naturality",
+  "lem-pc-derived-base-change-horizontal-pasting",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-perfect-hom-cochain-counit",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-derived-pullback-top-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0ATM, remark-compose-base-change-horizontal, with Tag 08HY, remark-base-change; apply to a module in degree zero and the canonical counit to ordinary pullback."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-pbc-single-degree-module-base-change-composite",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorSingleBaseChangePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorSingleBaseChangePasting.lean",
+  "declaration": "AlgebraicGeometry.tensorSingleBaseChange_pasting",
+  "statement": "theorem tensorSingleBaseChange_pasting\n    {X S Y T Z U : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (h : U ⟶ T)\n    (p : Y ⟶ X) (q : Y ⟶ T) (t : Z ⟶ Y) (r : Z ⟶ U) (p₀ : Z ⟶ X)\n    (hs : p ≫ f = q ≫ g) (hi : t ≫ q = r ≫ h) (hp : t ≫ p = p₀)\n    (ho : p₀ ≫ f = r ≫ (h ≫ g)) (G : X.Modules) :\n    letI : ∀ {V W : Scheme.{u}} (k : V ⟶ W),\n      (Scheme.Modules.tensorPullback k).Additive :=\n      fun {_ _} k ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} k\n    let e := ((Scheme.Modules.tensorPullbackSectionComp t p).symm.app G) ≪≫\n      eqToIso (congrArg (fun k ↦ (Scheme.Modules.tensorPullback k).obj G) hp)\n    (derivedPullback h).map (singleDegreeBaseChangeComposite f g p q hs 0 G) ≫\n        singleDegreeBaseChangeComposite q h t r hi 0\n          ((Scheme.Modules.tensorPullback p).obj G) ≫\n        (schemeDerivedDirectImage r).map\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).map e.hom) =\n      (perfectHomComposition h g).hom.app ((schemeDerivedDirectImage f).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)) ≫\n        singleDegreeBaseChangeComposite f (h ≫ g) p₀ r ho 0 G",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.tensorPasting_moduleCategory",
+   "AlgebraicGeometry.tensorPasting_modulePreadditive",
+   "AlgebraicGeometry.tensorPasting_moduleAbelian",
+   "AlgebraicGeometry.tensorSingleBaseChange_pasting"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-53e2d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261022T114331-L-608771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-53e2d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261022T114331-L-608771",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-weil-pbc-coherent-affine-base-change-edge-naturality and new nodes top-degree-leray-square / tensor-single-base-change-pasting against the delivered Lean; six re-bodied coherentEdge* defs checked defeq against the published module in a sandbox; axioms printed for the item, the pasting theorem and the square"
+ }
+}

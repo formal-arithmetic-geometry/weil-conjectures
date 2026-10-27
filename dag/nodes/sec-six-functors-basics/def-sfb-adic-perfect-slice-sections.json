@@ -1,0 +1,168 @@
+{
+ "id": "def-sfb-adic-perfect-slice-sections",
+ "kind": "definition",
+ "title": "Constant module realization and terminal sections on a slice",
+ "statement": "Let C be a small category, T a Grothendieck topology, A a commutative ring in the same coefficient universe, and U an object. Restrict the constant-ring sheafification unit from T to T/U. Construct L_A by sheafifying constant module presheaves along this unit, and S_A by forgetting and restricting scalars along the unit and evaluating at the terminal object. Construct the adjunction L_A left adjoint S_A. Construct natural isomorphisms identifying L_A with restriction to U of global constant module realization and identifying L_A followed by S_A with ordinary sections of the constant sheaf of A-modules. Also construct the natural isomorphism commuting ordinary scalar change with slice restriction. Finally, for arbitrary adjunctions F_0 left adjoint R_0, F_1 left adjoint R_1 and a natural isomorphism theta:F_1 C_0 isomorphic F_0, define the mate kappa:R_1 to C_0 R_0 of theta inverse and prove eta_0(M)=eta_1(M) followed by kappa(F_1(M)) and R_0(theta(M)). All constructions use sheafification universal properties and proved comparison maps [def-sfb-site-derived-constant-module-functor, lem-weil-pbc-constant-completion-equivalence].",
+ "stmt_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-sheafification-presheaf-modules, Tag 03CY; section-tensor-product, Tag 03EK; together with proetale.tex, lemma-connected-adic-lisse, Tag 09C6, ordinary constant quotient calculation before total Hom."
+ },
+ "proof": [
+  {
+   "text": "The constant module presheaf is left adjoint to evaluation at the terminal slice object: the unit is identity and the counit consists of restriction maps along the unique maps to the terminal object. Compose with module sheafification to construct localAdjunction.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the global module sheafification unit to the slice and transpose by slice module sheafification. Its underlying additive map and both sheafification units are locally bijective, so the comparison is invertible. Transpose naturality by the same Hom equivalence. Forgetting variable scalars gives a sheaf of A-modules; sheafify its constant generators to construct fixedConstantIso and then sectionsIso.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bundle the existing proved scalar-change/slice isomorphisms and their naturality from AdicPerfectModelCompleteReduction as a natural isomorphism. The choice is from a proved Nonempty theorem, without any new unproved data.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary adjunctions F_0 left adjoint R_0 and F_1 left adjoint R_1 and theta:F_1 C isomorphic F_0, define the mate on N by eta_0(R_1 N) followed by R_0 of theta inverse followed by C of epsilon_1(N). Naturality follows from naturality of eta_0, theta and epsilon_1. For the unit equation, move eta_1 through eta_0 by unit naturality, move it through theta inverse by theta naturality, and cancel F_1(eta_1) followed by epsilon_1 using the left triangle identity. The final theta inverse followed by theta cancels.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-sfb-adic-perfect-model-complete-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The constant-generator adjunction and completion cancellation in steps 1 and 2, and the unit-identity part of step 4, of lem-sfb-adic-perfect-quotient-section-adjunction. Tags 03CY and 03EK; Stacks proetale.tex Tag 09C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant module sheaf extension of scalars quotient sections adjunction",
+   "results": "constantSheafΓAdj, extendRestrictScalarsAdj and PullbackConstruction.adjunction are constituent adjunctions. None supplies the actual completed realization and its fixed balancing map.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits. LeanFinder on constant sheaf of modules scalar extension adjoint global sections found unitHomEquiv, tensor adjunction and extendScalars, not the completed quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*[Aa]dj|[Aa]dj.*overFunctor|constantModuleHom.*[Aa]dj; quotient.*sections; quotTensorEquivQuotSMul; unit_mateEquiv",
+   "results": "No packaged slice adjunction match. Mathlib has module sheafification and unit_mateEquiv. AdicPerfectModelCompleteReduction has proved private presentation, scalar adjunction and changeOverIso helpers. ConstantRealizationDerivedScalarExtension proves moduleComparison_tensor. The algebraic tensor quotient equivalence does not supply the natural section comparison with successor coherence.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the constituent proofs; no duplicate of the bundled construction or remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectQuotientSectionAdjunction",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The constant-generator adjunction in step 1, the slice restriction comparison in step 2, and the formal unit identity in step 4 of lem-sfb-adic-perfect-quotient-section-adjunction.",
+   "via": [
+    "lem-sfb-adic-perfect-quotient-section-adjunction",
+    "lem-sfb-adic-perfect-unit-hom",
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectSliceSections",
+  "file": "lean/Sheaf/Paper/AdicPerfectSliceSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicQuotientSections.localAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localRingUnit",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localRingUnit_injective",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localRingUnit_surjective",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localConstant",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localSections",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.constantPresheafAdjunction",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localAdjunction",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localConstantMap",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localConstantMap_fac",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localConstantMap_isIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.localConstantIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.changeOverIso_exists",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.changeOverIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedPresheaf",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedScalars",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantUnit",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantUnit_injective",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantUnit_surjective",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantMap",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantMap_isIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.fixedConstantIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.sectionsIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.balancingMate",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.balancingMate_unit"
+  ],
+  "statement": "def localAdjunction : localConstant T A U ⊣ localSections T A U",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

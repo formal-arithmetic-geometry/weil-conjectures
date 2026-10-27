@@ -1,0 +1,165 @@
+{
+ "id": "lem-sfb-canonical-coefficient-tensor-normalization",
+ "kind": "statement",
+ "title": "Computation normalization of the canonical balanced scalar tensor presentation",
+ "statement": "Let $a:R\\to S$ be a morphism of commutative condensed rings [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. For every scheme $T$ use ordinary internal-module derived categories [sk-def-sfb-module-derived-pushpull]. Write $D_T$ for derived extension, $V_T$ for exact restriction, $B_T=V_TS_T[0]$, and $\\operatorname{TensorNormalized}$ for the computation-counit equation of [def-sfb-internal-derived-scalar-comparisons]. Define $t_T$ by the ordinary balanced extension/restriction isomorphism followed by symmetry, and by the fixed derived isomorphism $\\operatorname{residueDerivedTensorIso}$ of [new-integral-residue-tensor-presentation]. Then $\\operatorname{TensorNormalized}(t_T)$ for every $T$. Moreover, for every scheme morphism $f:X\\to Y$, the exact-single restricted-regular pullback isomorphism $\\operatorname{regularPullback}(a,f)$ of [def-sfb-restricted-regular-pullback-data] equals $\\operatorname{residueRestrictedRegularPullIso}(R,S,a,f)$ of [def-weil-pbc-integral-residue-tensor-pull-presentation], after exposing their identical total derived pullback and degree-zero endpoints. No exactness of scalar extension is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "new-integral-residue-tensor-presentation",
+  "def-sfb-restricted-regular-pullback-data",
+  "def-weil-pbc-integral-residue-tensor-pull-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply derivedTensorPresentationIso_fac from [new-integral-residue-tensor-presentation] to the homotopy quotient of a cochain complex. The single/quotient comparison is the composite of two identity maps. Postcompose with the quotient of the Koszul braiding and the second single-tensor comparison; braidedness of Qh cancels the derived inverse braiding. The first and second single-tensor comparisons identify the resulting map with the termwise ordinary braiding: expand the bicomplex braiding, cancel the total flip, and use ordinary braiding naturality and the inverse/hom identity of the first single comparison. Expand the balanced counit and restriction localization factor at the generic module-category level. Functoriality of Q and mapHomologicalComplex gives the ordinary balanced comparison followed by braiding. Specialize to coefficientMap(a,T) and remove the identity quotient factors in compute of [def-sfb-internal-derived-scalar-comparisons]. This proves TensorNormalized for every complex, without a flatness assumption.",
+   "uses": [
+    "new-integral-residue-tensor-presentation",
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+   }
+  },
+  {
+   "text": "Compare the ordinary unit maps of the standard composite monoidal pullback and the transported structure of [new-integral-residue-ordinary-monoidal]. The standard formula is scalar extension applied to mapMod's identity unit morphism, followed by the scalar-extension inverse unit; functoriality removes the mapped identity, after which its formula is definitionally the transported formula. Hence the ordinary restricted-regular comparisons agree. Expand singleFunctorCompLeftDerivedFunctorIso and use the exact mapDerivedCategory single-object comparison formula. Both sides have the same exact localization factor, single-complex comparison and ordinary restricted-regular map; Q.map_comp identifies their last factors. This gives the equality with [def-weil-pbc-integral-residue-tensor-pull-presentation].",
+   "uses": [
+    "new-integral-residue-ordinary-monoidal",
+    "def-weil-pbc-integral-residue-tensor-pull-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-tensor-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits; V4: explicit generic counit and single-comparison calculations, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived tensor scalar restriction presentation satisfies its balanced computation counit normalization",
+   "results": "8 hits: Module.Relations.Solution.isPresentationCoreTensor, Algebra.Presentation.tensorModelOfHasCoeffsInv, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Module.Relations.Solution.IsPresentation.tensor, Module.Presentation.tensor, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Functor.mapCocone",
+   "results": "12 hits: CategoryTheory.Limits.IsColimit.mapCoconeEquiv, CategoryTheory.Limits.IsColimit.ofFaithful, CategoryTheory.Limits.isColimitOfPreserves, CategoryTheory.Limits.isColimitOfReflects, CategoryTheory.Limits.preservesColimit_of_preserves_colimit_cocone, CategoryTheory.Limits.PreservesColimit.mk, CategoryTheory.Limits.PreservesColimit.preserves, CategoryTheory.Limits.ReflectsColimit.mk",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPresentation|singleFunctorCompLeftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No matching geometric statement; generic cocone isomorphism and preservation lemmas are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived scalar extension followed by restriction tensor presentation satisfies the balanced computation counit normalization",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-23",
+   "verdict": "No match: these concern ordinary module scalar adjunctions or abstract filtered colimits, not the fixed derived internal-module comparisons and their specified cocone legs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientPushFilteredLegs",
+  "date": "2026-10-23",
+  "group": "C5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-push-filtered-legs",
+   "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalCoefficientTensorNormalization",
+  "file": "lean/Sheaf/Paper/CanonicalCoefficientTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.canonicalCoefficientTensorNormalization_normalized",
+  "statement": "theorem canonicalCoefficientTensorNormalization_normalized :\n    (∀ T : Scheme.{u},\n      TensorNormalized a T (canonicalCoefficientTensorNormalization a T)) ∧\n    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y),\n      RestrictedCoefficientMate.regularPullback a f =\n      (by\n        unfold L CondensedRing.moduleObjectDerivedPullback\n        let e := CondensedRing.residueRestrictedRegularPullIso R S a f\n        unfold CondensedRing.residueExchangeUpperStar at e\n        run_tac Lean.Elab.Tactic.withMainContext do\n          let e ← Lean.Meta.getLocalDeclFromUserName `e\n          (← Lean.Elab.Tactic.getMainGoal).assign e.toExpr\n          Lean.Elab.Tactic.replaceMainGoal []))",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.canonicalCoefficientTensorNormalization",
+   "AlgebraicGeometry.ProEtale.QuotientChange.canonicalCoefficientTensorNormalization_normalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261023T230522-L-3438591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T203502-L-2821845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "K5 stage 3",
+  "old_statement": "Let $a:R\\to S$ be a morphism of commutative condensed rings [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. For every scheme $T$ use ordinary internal-module derived categories [sk-def-sfb-module-derived-pushpull]. Write $D_T$ for derived extension, $V_T$ for exact restriction, $B_T=V_TS_T[0]$, and $\\operatorname{TensorNormalized}$ for the computation-counit equation of [def-sfb-internal-derived-scalar-comparisons]. Define $t_T$ by the ordinary balanced extension/restriction isomorphism followed by symmetry, and by the fixed derived isomorphism $\\operatorname{residueDerivedTensorIso}$ of [new-integral-residue-tensor-presentation]. Then $\\operatorname{TensorNormalized}(t_T)$ for every $T$. Moreover, for every scheme morphism $f:X\\to Y$, the exact-single restricted-regular pullback isomorphism $\\operatorname{regularPullback}(a,f)$ of [lem-sfb-restricted-coefficient-mate-projection] equals $\\operatorname{residueRestrictedRegularPullIso}(R,S,a,f)$ of [def-weil-pbc-integral-residue-tensor-pull-presentation], after exposing their identical total derived pullback and degree-zero endpoints. No exactness of scalar extension is assumed.",
+  "what": "The theorem node was cited solely for its regularPullback definition, creating a false proof cycle. The new existing-definition owner supplies that unchanged definition independently of the mate theorem. No hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+   "place": "paragraph (1), canonical scalar comparison and filtered coefficient colimits"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-coefficient-push-filtered-legs",
+    "holds": true,
+    "note": "The Lean statement and both normalization clauses are unchanged; the revised citation names only the existing regularPullback definitions."
+   }
+  ],
+  "old_stmt_deps": [
+   "sk-def-sfb-condensed-ring",
+   "sk-def-sfb-coefficient-morphisms",
+   "sk-def-sfb-module-derived-pushpull",
+   "def-sfb-internal-derived-scalar-comparisons",
+   "new-integral-residue-tensor-presentation",
+   "lem-sfb-restricted-coefficient-mate-projection",
+   "def-weil-pbc-integral-residue-tensor-pull-presentation"
+  ]
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-exact-compactification-unit-tower",
+ "kind": "statement",
+ "title": "Forward exact derived-unit equation on a fixed compactification tower",
+ "statement": "Let A be a finite commutative ring and h:V→T, e:T→B separated finite-type quasi-compact morphisms of Noetherian schemes. Fix a compactification d of e and c of h followed by d.i. Let F and G be additive exact functors on constant-A module sheaves, with sheaf isomorphisms ah:F≅j!q* for c.restrict, ae:G≅i!s* for d, and a:F⋙G≅a!t* for d.comp c. Suppose a followed by the inclusion into (h e)* is ae followed by the inclusion into e*, then e* applied to ah followed by its inclusion into h*, then ordinary direct-image composition. Then whiskering the forward normalized units for ah and ae and composing with the canonical fixed-tower derived compact-support comparison equals the inverse exact-derived composition comparison followed by the single forward normalized unit for a. No invertibility of these units or compatibility family over other compactifications is assumed. Conventions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories], [def-weil-compactifications-refinements], [def-amb-etale-compact-support], [def-sfb-exact-compactification-unit], [lem-amb-unbounded-compact-support-comparisons].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-sfb-exact-compactification-unit",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse ordinary open-base-change isomorphism and take its mate along q^* ⊣ q_* and p^* ⊣ p_*. Naturality of the support inclusions and the base-change-map compatibility show that this ordinary mate, followed by the open support inclusion, is the ordinary direct-image square. Combine open-extension composition and direct-image associativity to normalize its sheaf tower map. The compactification inclusion is monic: restrict its kernel to the open and closed complement, then use that both restrictions vanish. Direct image preserves this monomorphism. Cancel the inclusion and use the hypothesis na to identify the constructed sheaf map with a.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Apply the canonical open-exchange unit normalization theorem. Its proof specializes the mixed derived-mate identity to inverse open base change, using formal symmetry of exact-derived squares. This gives the forward derived-unit normalization without choosing resolutions.",
+   "uses": [
+    "lem-sfb-open-exchange-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Paste the normalized mixed mate with the right-derived direct-image composition unit identity and the exact-derived open composition factorization. For the ordinary input maps ah and ae, the homotopy-category termwise identity follows from ae-naturality and cancellation of the open-composition isomorphism; prove it on complex representatives. The defining exactCompactificationUnit formula and the exact-derived composition factorization of F and G then identify the two homotopy-normalized tower paths. The sheaf-map identity from the first step identifies the final ordinary input map with a.",
+   "uses": [
+    "def-sfb-exact-compactification-unit",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sfb-normalized-derived-unit-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Precomposition with the homotopy localization Qh is fully faithful. Apply its injectivity on natural transformations to the equality of normalized components on homotopy representatives. This proves the stated equality on the entire derived category without choosing any K-injective resolutions in this module.",
+   "uses": [
+    "lem-sfb-normalized-derived-unit-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J (fixed canonical proper/open tower), Tag 0D6E (derived-unit normalization); B2 proves the canonical mixed mate normalization and pastes the derived units directly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized total right derived unit is compatible with a proper open compactification tower",
+   "results": "Eight hits, including Functor.totalRightDerivedUnit and totalRightDerived; the remaining hits are generic normalization tactics or algebraic normalization. None states the geometric tower equation.",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; use the existing properOpenTowerDerivedUnit and localization API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of a right derived functor respects composition of exact functors",
+   "results": "Eight hits include Functor.rightDerivedNatTrans_comp, Functor.rightDerived_fac, NatTrans.rightDerived_comp, and LocalizerMorphism.rightDerivedFunctorComparison_fac. These concern abstract derived units, not the proper/open tower exchange.",
+   "date": "2026-10-27",
+   "verdict": "The formal factorization API is useful but does not state the tower calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorCompIso\"",
+   "results": "No Mathlib hits. The composition comparison used here is in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*unit|properOpenTowerDerivedUnit",
+   "results": "msearch.py returned zero Mathlib hits. Local rg found properOpenTowerDerivedUnit and its successive/single resolution formula modules, but no theorem composing exactCompactificationUnit on a fixed tower. Blueprint searches for proper/open tower and normalized exact found no duplicate blueprint statement.",
+   "date": "2026-10-27",
+   "verdict": "New node is the fixed-tower portion of the parent, not a duplicate of the chain-level resolution theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitComposition",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), composition normalization of the exact compact-support comparison, fixed compatible-tower unit calculation",
+   "via": [
+    "lem-sfb-exact-compactification-unit-composition",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactCompactificationUnitTower.lean",
+  "declaration": "AlgebraicGeometry.Etale.exactCompactificationUnit_tower",
+  "statement": "theorem exactCompactificationUnit_tower\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V T B : Scheme.{u}} [IsNoetherian V] [IsNoetherian T] [IsNoetherian B]\n    (h : V ⟶ T) (e : T ⟶ B)\n    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]\n    (d : Compactification e) (c : Compactification (h ≫ d.i))\n    (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A))\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (ah : F ≅ openImmersionLowerShriek (ModuleCat.{u + 1} A) c.restrict.i ⋙\n      lowerStar (ModuleCat.{u + 1} A) c.restrict.g)\n    (ae : G ≅ openImmersionLowerShriek (ModuleCat.{u + 1} A) d.i ⋙\n      lowerStar (ModuleCat.{u + 1} A) d.g)\n    (a : F ⋙ G ≅ openImmersionLowerShriek (ModuleCat.{u + 1} A) (d.comp c).i ⋙\n      lowerStar (ModuleCat.{u + 1} A) (d.comp c).g)\n    (na : ∀ M, a.hom.app M ≫ (compactificationSheafToDirectImage A (d.comp c)).app M =\n      ae.hom.app (F.obj M) ≫ (compactificationSheafToDirectImage A d).app (F.obj M) ≫\n        (lowerStar (ModuleCat.{u + 1} A) e).map\n          (ah.hom.app M ≫ (compactificationSheafToDirectImage A c.restrict).app M) ≫\n        (lowerStarComp (ModuleCat.{u + 1} A) h e).hom.app M) :\n    Functor.whiskerRight (exactCompactificationUnit A c.restrict F ah) G.mapDerivedCategory ≫\n      Functor.whiskerLeft\n        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c.restrict)\n        (exactCompactificationUnit A d G ae) ≫\n      (rightDerivedLowerShriekOfCompactificationCompIso A d c).hom =\n    (Functor.mapDerivedCategoryCompIso F G).inv ≫\n      exactCompactificationUnit A (d.comp c) (F ⋙ G) a",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sfb-open-exchange-derived-unit",
+  "def-sfb-exact-compactification-unit",
+  "lem-sfb-normalized-derived-unit-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T050635-L-248120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T103410-L-1066659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

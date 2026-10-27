@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-space-module-isom-affine",
+ "kind": "statement",
+ "title": "Affine finite-presentation Isom space for relatively flat modules with proper support",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $f:X\\to B$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space] of finite presentation [def-sfb-space-morphism-properties]: it is locally of finite presentation on etale charts, quasi-compact and quasi-separated. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules on small etale ringed sites [def-trf-space-quasi-coherent-module], and canonical tensor pullback [def-trf-space-etale-module-functors]. Let $M,N$ be finitely presented quasi-coherent $\\mathcal O_X$-modules, both flat over $B$ and both with support proper over $B$. Finitely presented means etale locally a cokernel of a map between finite rank free modules. Relative flatness means that on etale scheme charts the module stalks are flat over the local rings of the base [def-pc-scheme-module-flat-over]. Proper support means that each module is isomorphic to $i_*E$ for some closed subspace $i:Z\\hookrightarrow X$ proper over $B$ and some finite type quasi-coherent module $E$ on $Z$, where finite type means etale locally finitely generated [def-sfb-space-proper-quot-functor]. For each scheme $T\\to B$, put $X_T=X\\times_BT$ and let $M_T,N_T$ be the tensor pullbacks. Then the functor $T\\mapsto\\operatorname{Isom}_{\\mathcal O_{X_T}}(M_T,N_T)$, with transition maps given by tensor pullback of isomorphisms, is represented by an algebraic space $I\\to B$ affine and of finite presentation. The representing bijections are natural in every scheme $T\\to B$. Affine means that every base change to an affine scheme over $B$ is an affine scheme; finite presentation includes quasi-compactness and quasi-separatedness as above. No properness or flatness of $f$, and no Noetherian hypothesis on $B$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08K9, proposition-isom, with situation-hom (Tag 08JT)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-flat-proper-coefficient"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-module-hom-affine] to the four ordered pairs $(M,N),(N,M),(M,M),(N,N)$. In every application the source is finitely presented, and the target is finitely presented, flat over $B$, and has proper support by the hypotheses on $M,N$. Obtain representing spaces $H=\\operatorname{Hom}(M,N)$, $H'=\\operatorname{Hom}(N,M)$, $E=\\operatorname{Hom}(M,M)$ and $E'=\\operatorname{Hom}(N,N)$, each affine and of finite presentation over $B$, with the stated natural identifications on all scheme tests. No property of $f$ beyond finite presentation is used.",
+   "uses": [
+    "lem-sfb-space-module-hom-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9 (proposition-isom), opening paragraph, applying Tag 08K6 (proposition-hom)."
+   }
+  },
+  {
+   "text": "Form $P=H'\\times_B H$ and $Q=E\\times_B E'$ using [lem-trf-space-fibre-products-etale-covers]. The projection $P\\to H$ is the base change of $H'\\to B$, and $Q\\to E'$ is the base change of $E\\to B$. By [lem-sfb-space-affine-locality] these projections are affine; by [lem-sfb-space-flat-proper-fp-locality] they are of finite presentation. Composing them with $H\\to B$ and $E'\\to B$, respectively, gives $P,Q\\to B$ affine by [lem-sfb-space-affine-locality] and of finite presentation by [lem-sfb-space-separated-fp-composition]. In particular $q:Q\\to B$ is separated by the affine-locality node.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9, Hom products; spaces-morphisms.tex Tags 03WI (lemma-base-change-affine), 03WH (lemma-composition-affine), 03XR (lemma-base-change-finite-presentation), 03XQ (lemma-composition-finite-presentation)."
+   }
+  },
+  {
+   "text": "For $T\\to B$, send $(v:N_T\\to M_T,u:M_T\\to N_T)$ to $(v\\circ u,u\\circ v)\\in E(T)\\times E'(T)$. Pullback is a functor [def-trf-space-etale-module-functors], so it preserves these compositions and identity maps. The canonical comparison of successive tensor pullbacks [def-sfb-space-module-tensor-composition] is natural in module maps, so these formulas commute with every $T'\\to T$. They therefore define $c:P\\to Q$ and the identity section $\\sigma:B\\to Q$, since morphisms of algebraic spaces are natural transformations [def-trf-algebraic-space]. The order of the components is essential: $v\\circ u$ acts on $M_T$ and $u\\circ v$ on $N_T$. The reversed order printed in Tag 08K9 does not have the displayed codomain.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-module-tensor-composition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9, composition map and identity section; corrected component order; Tag 03D8 (lemma-push-pull-composition-modules) for the canonical pullback comparison."
+   }
+  },
+  {
+   "text": "We justify the properties of $\\sigma$ without taking a general section lemma as an extra input. For a scheme $T$ and $a:T\\to Q$, the pullback of $\\Delta_q:Q\\to Q\\times_BQ$ along $(a,\\sigma q a)$ consists of a map $z:T'\\to Q$ with $z=a|_{T'}=\\sigma q a|_{T'}$. It is naturally $B\\times_QT$: the forward map uses $b=q a|_{T'}$, and the reverse map sends $b$ with $\\sigma b=a|_{T'}$ to $z=a|_{T'}$. These maps are inverse because $q\\sigma=\\mathrm{id}_B$. By [lem-sfb-space-affine-locality], $q$ is separated, so its diagonal is representable by closed immersions. Thus every scheme test of $\\sigma$ is a closed immersion. Such scheme morphisms are affine by [def-weil-closed-immersion], so $\\sigma$ is affine by the definition of affine space morphism in [lem-sfb-space-affine-locality]. The same node gives quasi-compactness and separatedness, hence quasi-separatedness, of $\\sigma$. Since $q$ is of finite presentation, it is locally of finite type. Apply [lem-sfb-space-relative-lfp-permanence] to $B\\xrightarrow{\\sigma}Q\\xrightarrow{q}B$: their composite is $\\mathrm{id}_B$, which is locally of finite presentation in the chart test of [def-sfb-space-morphism-properties], because every scheme map $h:U\\to V$ between representable etale charts of $B$ with $b\\circ h=a$ is etale by [lem-trf-space-representable-etale-scheme-tests], hence locally of finite presentation by [def-weil-etale-morphism]. It follows that $\\sigma$ is locally of finite presentation; together with its quasi-compactness and quasi-separatedness this says it is of finite presentation.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-relative-lfp-permanence",
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9, identity section: Tag 03KP (lemma-section-immersion), with its diagonal-pullback argument written out, and Tag 05WT (lemma-finite-presentation-permanence)."
+   }
+  },
+  {
+   "text": "Let $J=P\\times_{c,Q,\\sigma}B$, an algebraic space by [lem-trf-space-fibre-products-etale-covers]. The map $J\\to P$ is a base change of $\\sigma$; it is affine by [lem-sfb-space-affine-locality] and of finite presentation by [lem-sfb-space-flat-proper-fp-locality]. Compose with $P\\to B$ from Step 2. Affine composition [lem-sfb-space-affine-locality] and finite-presentation composition [lem-sfb-space-separated-fp-composition] show that $J\\to B$ is affine and of finite presentation.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9, displayed fibre product and final conclusion; Tags 03WI, 03WH, 03XR and 03XQ for permanence."
+   }
+  },
+  {
+   "text": "For every scheme $T\\to B$, the fibre-product universal property identifies $J(T)$ with pairs $(v,u)$ for which $v u=\\mathrm{id}_{M_T}$ and $u v=\\mathrm{id}_{N_T}$. Send such a pair to the isomorphism $u:M_T\\to N_T$, and send an isomorphism $u$ to $(u^{-1},u)$. If $v,w$ are both inverses of $u$, then $v=v(uw)=(vu)w=w$, so the two maps are inverse bijections. For $a:T'\\to T$, functoriality of tensor pullback [def-trf-space-etale-module-functors] gives $a^*(v)a^*(u)=\\mathrm{id}$ and $a^*(u)a^*(v)=\\mathrm{id}$. Hence $a^*(v)$ is the inverse of $a^*(u)$. Conjugating by the natural comparison [def-sfb-space-module-tensor-composition] gives exactly the specified $M_{T'},N_{T'}$ and their transition maps. Thus the bijections commute with every base change, proving the asserted representation with $I=J$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9, last displayed formula, omitted inverse-pair identification and naturality expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-hom-affine",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-tensor-composition",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-relative-lfp-permanence",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08K9 (proposition-isom), proof; composition-map order corrected and final omitted details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Isom.*represent|isom.*affine|isom.*finitePresentation|isom.*finite_presentation",
+   "results": "8 hits; read returned names/types and grep lines: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms between finitely presented flat sheaves with proper support are represented by an affine algebraic space of finite presentation",
+   "results": "8 hits; read returned names/types and grep lines: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, CategoryTheory.RepresentablyFlat.of_iso, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIso, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "12 hits; read returned names/types and grep lines: AlgebraicGeometry.SheafedSpace.isoMk, AlgebraicGeometry.SheafedSpace.isoMk_hom, AlgebraicGeometry.SheafedSpace.isoMk_inv, AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace, AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism of algebraic spaces, the isomorphism functor between two finitely presented modules flat over the base with proper support is affine of finite presentation",
+   "results": "8 hits; read returned names/types and grep lines: AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Isom scheme of two coherent flat sheaves with proper support on an algebraic space is affine and finitely presented over the base",
+   "results": "8 hits; read returned names/types and grep lines: AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "grep",
+   "query": "Isom.*(sheaf|module)|IsomScheme|isomFunctor|Isom.*[Rr]epresent",
+   "results": "25 hits; read returned names/types and grep lines: Mathlib/LinearAlgebra/Goursat.lean, Mathlib/LinearAlgebra/DFinsupp.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Isomorphisms.lean, Mathlib/LinearAlgebra/Isomorphisms.lean, Mathlib/LinearAlgebra/Isomorphisms.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme isomorphism criteria, general sheafed-space isomorphisms and module isomorphism theorems do not represent the relative module Isom functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative isomorphism functor of finitely presented flat quasi coherent modules with proper support on an algebraic space is affine of finite presentation",
+   "results": "{\"t\": \"2026-10-23T19:41:34Z\", \"tool\": \"leanfinder\", \"query\": \"The relative isomorphism functor of finitely presented flat quasi coherent modules with proper support on an algebraic space is affine of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"26b8705ed9a08cc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme isomorphism criteria, affine-space finiteness and module-presentation declarations do not represent the relative module Isom functor on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "IsomFunctor|isomFunctor|Isom.*(represent|proper|[Ff]inite[Pp]resentation)|[Ii]som.*[Aa]ffine",
+   "results": "{\"t\": \"2026-10-23T19:42:03Z\", \"tool\": \"grep\", \"query\": \"IsomFunctor|isomFunctor|Isom.*(represent|proper|[Ff]inite[Pp]resentation)|[Ii]som.*[Aa]ffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\"], \"digest\": \"e3cd0fc1c84c8bd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme isomorphism criteria, affine-space finiteness and module-presentation declarations do not represent the relative module Isom functor on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms between flat finitely presented quasi coherent sheaves with proper support are represented by an affine algebraic space",
+   "results": "{\"t\": \"2026-10-23T19:42:03Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms between flat finitely presented quasi coherent sheaves with proper support are represented by an affine algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso\"], \"digest\": \"28d939d9f147e340\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme isomorphism criteria, affine-space finiteness and module-presentation declarations do not represent the relative module Isom functor on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "{\"t\": \"2026-10-23T19:42:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Isom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.isoMk\", \"AlgebraicGeometry.SheafedSpace.isoMk_hom\", \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\"], \"digest\": \"cbbe266771e5c4aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme isomorphism criteria, affine-space finiteness and module-presentation declarations do not represent the relative module Isom functor on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finitely presented scheme represents the isomorphism functor of two flat coherent sheaves with proper support over the base",
+   "results": "{\"t\": \"2026-10-23T19:42:29Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finitely presented scheme represents the isomorphism functor of two flat coherent sheaves with proper support over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\"], \"digest\": \"079c5e8f746e982f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme isomorphism criteria, affine-space finiteness and module-presentation declarations do not represent the relative module Isom functor on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-sheaf-representability",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Represent the unpointed sheaf before identifying it with the rigidified functor; use 0DNI for quasi-separatedness and local finite presentation. Supporting input to quasi-separatedness: Tag 08K9, affine finite presentation of the module Isom functor, applied to the Picard-stack diagonal.",
+   "via": [
+    "lem-sfb-space-picard-sheaf-representability",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-module-isom-affine",
+  "worker": "stage1",
+  "summary": "Read Stacks 08K9 and 08K6. Reused the existing general module Hom node and space permanence nodes; no new nodes. Corrected the type order of the source composition map, proved the identity section affine and finitely presented via its diagonal pullback and relative local finite presentation, and expanded the inverse-pair identification and arbitrary-base-change naturality. Statement unchanged. Searched the project Lean and whole DAG/blueprint and ran five logged Mathlib searches; no attachment or match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Represent the unpointed sheaf before identifying it with the rigidified functor; use 0DNI for quasi-separatedness and local finite presentation. Supporting input to quasi-separatedness: Tag 08K9, affine finite presentation of the module Isom functor, applied to the Picard-stack diagonal. The six steps realize the 08K9 prerequisite by the four Hom spaces and their inverse-pair fibre product; this remains a prerequisite below the original unit, not a change of its route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of sheaf fibre products of algebraic spaces; used to form P, Q and J. The stability unit supplies no separate product-existence theorem."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space fact that a scheme map between representable etale charts over a common space is etale; used (reviewer FIX) to see that id_B is locally of finite presentation in the chart test. No node of the stability unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-c836689f0",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-c836689f0 (reviewer sub-agent of L); spot-checked: Read Stacks 08K9 (quot.tex proposition-isom) and 08JT; the item statement and stmt_deps are unchanged against live, where it is still unsplit; 0 new nodes, no re-split note, no SGA. The source error is confirmed: the printed (u∘u',u'∘u) has the wrong types, and the delivered (v∘u,u∘v)∈End(M_T)×End(N_T) is correct. Step 1: the hypotheses of the Hom node hold for all four pairs, and the source is fp so the Hom spaces are fp. Steps 2/5: base change and composition of affine and fp maps come from the affine-locality, flat-proper-fp and fp-composition nodes. Step 4: I checked the diagonal-pullback identification B×_{σ,Q,a}T against Δ_q, so σ is representable by closed immersions, affine and qcqs; relative-lfp permanence applies. One fault, repaired: Step 4 justified id_B lfp by 'the empty presentation', but under the chart test of def-sfb-space-morphism-properties every map h:U→V between étale charts of B must be lfp. The FIX cites lem-trf-space-representable-etale-scheme-tests (such an h is étale) and def-weil-etale-morphism (étale includes lfp), adds them and def-sfb-space-morphism-properties to the step's uses and proof_deps, and records the tool use. Steps 3/6 are genuinely elementary (functoriality, γ conjugation, uniqueness of inverses). Edge cases checked: X empty or M=N=0, GL_r, r≠s gives the empty space, non-Noetherian B. Batch-5: all six flagged citations are generic algebraic-space foundations reaching def-trf-algebraic-space only as a definition, neither the trace formula nor Poincaré duality nor steps of their proofs; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleIsomAffine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.module_isom_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleIsomAffine.lean",
+  "statement": "theorem module_isom_affine {S : Scheme.{u}} {X B : AlgebraicSpace S} (f : X ⟶ B) (hf : ProperQuotFinitePresentation f) (M N : X.QCoh) (hMfp : M.obj.IsFinitePresentation) (hNfp : N.obj.IsFinitePresentation) (hMflat : ModuleIsFlatOver f M.obj) (hNflat : ModuleIsFlatOver f N.obj) (hMsupport : ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ f) ∧ ∃ E : Z.Modules, E.IsQuasicoherent ∧ E.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj E ≅ M.obj)) (hNsupport : ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ f) ∧ ∃ E : Z.Modules, E.IsQuasicoherent ∧ E.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj E ≅ N.obj)) : ∃ (I : AlgebraicSpace S) (p : I ⟶ B), IsRepresentableWith (fun _ _ q ↦ IsAffineHom q.left) p.hom.hom ∧ ProperQuotFinitePresentation p ∧ ∃ e : ∀ T : ProperQuotTest B, {g : yoneda.obj T.left ⟶ I.obj.obj // g ≫ p.hom.hom = T.hom} ≃ ((moduleTensorPullback (properQuotFst f T)).obj M.obj ≅ (moduleTensorPullback (properQuotFst f T)).obj N.obj), ∀ (T' T : ProperQuotTest B) (h : T' ⟶ T) (g : {g : yoneda.obj T.left ⟶ I.obj.obj // g ≫ p.hom.hom = T.hom}) (g' : {g : yoneda.obj T'.left ⟶ I.obj.obj // g ≫ p.hom.hom = T'.hom}), g'.val = yoneda.map h.left ≫ g.val → e T' g' = (properQuotSourceIso f M.obj h).symm ≪≫ (moduleTensorPullback (properQuotFibreMap f h)).mapIso (e T g) ≪≫ properQuotSourceIso f N.obj h",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af416b3a3",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked every clause against Stacks 08K9/08JT and the node. FP of f = ProperQuotFinitePresentation (lfp ∧ qc ∧ qc diagonal). Flatness = landed ModuleIsFlatOver (chartwise pairs); its owning def-sfb-space-flat-proper-coefficient was added to stmt_deps, which brief l.177 allows (landed node). Proper support is inline, identical to the ProperQuotient.properSupport carrier field (no separate owner; the annihilator predicate is correctly not used). Affine = IsRepresentableWith IsAffineHom for every scheme T. FP of p. Equiv for every ProperQuotTest. Naturality uses canonical properQuotSourceIso, inverse then forward (types checked), and the g' premise is always realizable. No extra hypotheses; edge cases (zero modules, empty X/B, non-Noetherian, non-schematic B) covered. lean.statement verbatim; docstrings carry source, blueprint id and all 6 proof steps; sorry only; recorded proof-dep modules exist; no existing declaration or parallel landing in live. Item diff vs live: lean record + one stmt_dep only. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,229 @@
+{
+ "id": "lem-per-rational-stratum-pullback-models",
+ "kind": "statement",
+ "title": "Realized rational pullback on arbitrary trivializing stratum charts",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E$, with $A_E=\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be noetherian finite-dimensional schemes with $\\ell$ invertible, and $g:Y\\to X$ any scheme morphism [def-weil-scheme-morphism-properties]. Here noetherian means a finite affine cover by spectra of noetherian rings, and finite-dimensional means a finite bound on lengths of strict chains of nonempty irreducible closed subsets. On the small pro-etale site [def-weil-pbc-proetale-site] put $B_{E,W}=\\varprojlim_{n\\ge1}(A_E/\\varpi_E^n)_W$ for $W=X,Y$ [def-weil-pbc-adic-coefficient-datum]. Write $\\mathcal C_{W,E}=D^b_c(W,A_E)$ for the integral derived-complete constructible category including compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete]. Let $\\widehat P_{g,E}$ be the specified quotient-tower completed pullback, with its completion unit $\\gamma_{g,K}:B_{E,Y}\\otimes^L_{g^{-1}B_{E,X}}g^{-1}K\\to\\widehat P_{g,E}K$ [def-weil-pbc-completed-pullback].\n\nPut $E_W=B_{E,W}[1/\\varpi_E]$ and let $J_W:\\mathcal C_{W,E}[1/\\varpi_E]\\xrightarrow{\\sim}D^b_{\\mathrm{cons}}(W_{\\mathrm{proet}},E_W)$ be continuous rational realization [lem-per-continuous-rational-derived-realization, def-weil-pbc-rational-category]. Let $F$ be a constructible $E_X$-module sheaf, meaning locally finite free on a finite locally closed stratification [def-weil-pbc-continuous-constructible-module, def-constructible-stratification], and $K$ an object of the raw rationalization equipped with $J_XK\\cong F[0]$. Let $\\overline P_{g,E}$ be the fraction extension of $\\widehat P_{g,E}$ and put $G_g(M)=E_Y\\otimes^L_{g^{-1}E_X}g^{-1}M$. For any locally closed immersion $i:S\\hookrightarrow X$ on which $F$ is locally finite free, set $S'=Y\\times_XS$, with projections $i':S'\\to Y$ and $g_S:S'\\to S$. There is a natural isomorphism in the derived category\n$$i'{}^*J_Y(\\overline P_{g,E}K)\\cong G_{g_S}(F|_S[0]).$$\nFor every pro-etale chart $u:U\\to S$ with a trivialization $F|_U\\cong E_U^r$, put $U'=S'\\times_SU$ and let $g_U:U'\\to U$. Restriction of the displayed isomorphism to $U'$ identifies both sides with $E_{U'}^r[0]$. Here continuous coefficient sheaves on arbitrary chart schemes are the continuous-function sheaves of [lem-per-continuous-coefficient-slice-normalization]; no noetherian hypothesis on $U,U'$ is imposed. The identification is the canonical balanced-tensor map\n$$e'\\otimes(e_1,\\ldots,e_r)\\longmapsto(e'g_U^\\sharp(e_1),\\ldots,e'g_U^\\sharp(e_r)),$$\nwith inverse given on a basis vector by $a e_j\\mapsto a\\otimes e_j$. Thus $i'{}^*J_Y(\\overline P_{g,E}K)$ is concentrated in degree zero. These comparisons use the finite-quotient normalized structural maps and ambient derived composition and slice restriction; they include $r=0$ and empty $S'$, without any flatness hypothesis on $g^{-1}E_X\\to E_Y$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Definitions 6.8.6/6.8.8 and Remark 6.8.15; old proof steps 7-8: restriction, balanced tensor and chartwise degree-zero detection"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "lem-per-continuous-rational-derived-realization",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-constructible-stratification",
+  "lem-per-continuous-coefficient-slice-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Obtain normalized Pull counits for the immersion, both projections and their composites. Pointwise normalization and injectivity of the ring adjunction identify the supplied Along coefficient with the actual continuous pullback. Obtain both normalized Composition records. The immersion coefficient map is invertible and single computation gives exactInclusion. Assemble Stratum from these records.",
+   "uses": [
+    "lem-per-rational-ambient-pull-models",
+    "lem-per-rational-ambient-pull-composition",
+    "lem-per-rational-pull-single-computation",
+    "lem-weil-pbc-continuous-coefficient-pullback-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply single computation to the finite locally free restricted F. Compose Stratum.comparison with this single isomorphism to identify the realized pulled-back K with an ordinary module in degree zero. Transfer both standard derived bounds through this isomorphism.",
+   "uses": [
+    "lem-per-rational-pull-single-computation",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each chart U obtain its ambient Pull counits and both normalized compositions. Slice transport identifies its coefficient map with an isomorphism, and single computation gives exactChart. The balanced finite-free theorem gives an ordinary isomorphism and both section formulas. Its finite free source is finite locally free by the canonical generating sections; single computation supplies computes. Assemble FreeModel and Chart. No realization on a chart is used.",
+   "uses": [
+    "lem-per-rational-ambient-pull-models",
+    "lem-per-rational-ambient-pull-composition",
+    "lem-per-rational-pull-single-computation",
+    "lem-per-rational-balanced-free-pullback",
+    "lem-per-rational-continuous-slice-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-ambient-pull-models",
+  "lem-per-rational-ambient-pull-composition",
+  "lem-per-rational-pull-single-computation",
+  "lem-weil-pbc-continuous-coefficient-pullback-isIso",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-per-rational-balanced-free-pullback",
+  "lem-per-rational-continuous-slice-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "U1 Lean assembly of the normalized ambient and finite-free models, following the original six steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous rational sheaf derived pullback on a locally free stratum is degree zero and finite free on the pulled back pro etale chart without flatness",
+   "results": "Read hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff. SheafOfModules.pullbackObjFreeIso covers ordinary free-module pullback only; it does not identify realized completed derived pullback on arbitrary stratum slices or supply degree-zero descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a finite direct sum of the tensor unit is a finite direct sum of the target unit in degree zero on a pro etale slice",
+   "results": "Read hits: Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.pi_iff, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp. SheafOfModules.pullbackObjFreeIso covers ordinary free-module pullback only; it does not identify realized completed derived pullback on arbitrary stratum slices or supply degree-zero descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "Read hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. SheafOfModules.pullbackObjFreeIso covers ordinary free-module pullback only; it does not identify realized completed derived pullback on arbitrary stratum slices or supply degree-zero descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*pullback|pullback.*[Ff]ree|[Ff]ree.*pullback",
+   "results": "Read hits: . SheafOfModules.pullbackObjFreeIso covers ordinary free-module pullback only; it does not identify realized completed derived pullback on arbitrary stratum slices or supply degree-zero descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a finite locally free sheaf along ringed topoi is a finite free sheaf on trivializing charts",
+   "results": "Read hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pullback. SheafOfModules.pullbackObjFreeIso covers ordinary free-module pullback only; it does not identify realized completed derived pullback on arbitrary stratum slices or supply degree-zero descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "Read returned hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. For the sheaf candidate read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:113-142: pullbackObjFreeIso (118) and its basis normalization (125) concern ordinary module pullback, not the completed rational realization, arbitrary stratum comparison or derived vanishing. Other returned ring-module, etale-locus, and functor-linearity facts do not state this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of finite locally free continuous coefficient sheaves on pro etale stratum charts is degree zero",
+   "results": "Read returned hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, StandardEtalePair.instFormallyEtaleRing, Algebra.basicOpen_subset_etaleLocus_iff, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. For the sheaf candidate read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:113-142: pullbackObjFreeIso (118) and its basis normalization (125) concern ordinary module pullback, not the completed rational realization, arbitrary stratum comparison or derived vanishing. Other returned ring-module, etale-locus, and functor-linearity facts do not state this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|pullback.*[Ff]ree|[Ff]ree.*pullback",
+   "results": "Read returned hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. For the sheaf candidate read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:113-142: pullbackObjFreeIso (118) and its basis normalization (125) concern ordinary module pullback, not the completed rational realization, arbitrary stratum comparison or derived vanishing. Other returned ring-module, etale-locus, and functor-linearity facts do not state this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a locally free sheaf is concentrated in degree zero on trivializing charts",
+   "results": "Read returned hits: SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback, Trivialization.pullback. For the sheaf candidate read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:113-142: pullbackObjFreeIso (118) and its basis normalization (125) concern ordinary module pullback, not the completed rational realization, arbitrary stratum comparison or derived vanishing. Other returned ring-module, etale-locus, and functor-linearity facts do not state this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars sends a finite direct sum of the ring in degree zero to a finite direct sum of the target ring under derived pullback",
+   "results": "Read returned hits: IsBaseChange.directSumPow, CommRingCat.moduleCatExtendScalarsPseudofunctor, CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.extendScalarsId, DerivedCategory.instLinearSingleFunctor, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, CategoryTheory.Functor.mapExtLinearMap, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId. For the sheaf candidate read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:113-142: pullbackObjFreeIso (118) and its basis normalization (125) concern ordinary module pullback, not the completed rational realization, arbitrary stratum comparison or derived vanishing. Other returned ring-module, etale-locus, and functor-linearity facts do not state this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-stratified-pullback-texact",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, exactness of Lf* and its cohomology pullback assertion; Lemma 6.8.2, Definitions 6.8.6/6.8.8 and Remark 6.8.15; old proof steps 7-8: restriction, balanced tensor and chartwise degree-zero detection",
+   "via": [
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-rational-stratum-pullback-models",
+  "worker": "stage1",
+  "summary": "Q86: unchanged statement; six-step proof reusing existing realization and slice normalization, ambient derived composition and K-flat pullback. Wrote the finite-free tensor inverse and chartwise vanishing argument explicitly. No new nodes and no Mathlib leaves; no Lean attachment exists.",
+  "blueprint": "First proof paragraph of lem-per-smooth-pullback-t-exact: exactness of Lf* and its cohomology pullback assertion; realizes the arbitrary-trivializing-chart calculation extracted as old steps 7-8 of lem-per-adic-stratified-pullback-texact.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ambient ringed-topos derived composition for the two factorizations of the stratum square; it imposes no finiteness hypothesis on chart schemes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic K-flat computation of derived module pullback on the explicit finite-free degree-zero complex; no same-unit theorem replaces this construction."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic stability theorem ensuring pulled-back charts are objects of the pro-etale site."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic covering stability needed to pull back a chosen trivializing family and detect vanishing; no new cohomological route is introduced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-59e782bd5",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-59e782bd5 (reviewer sub-agent of L); spot-checked: Read the item and its six steps in full; the delivery has no new nodes and the statement is unchanged; it is cited only by its parent lem-per-adic-stratified-pullback-texact (step 5), and nothing is weakened. Checked against Bhatt–Scholze 6.8.2, 6.8.3, 6.8.6/6.8.8 and Remark 6.8.15: the item's G_g is the ambient scalar-extension pullback f^*K = f^*_naive K ⊗ Λ_Y on the realized D_cons(W,E_W), the same coefficient category the realization node uses. Step 1: base change of an immersion via (R/I)⊗T = T/IT, plus the immersion clause of lem-per-continuous-coefficient-slice-normalization (S and S' are noetherian finite-dimensional). Step 2: the pullback clause of lem-per-continuous-rational-derived-realization applies to g:Y→X. Step 3: c_{f,g} in lem-sfb-ringed-derived-monoidal-comparisons, including its clause on 2-isomorphisms with commuting structural ring maps, covers g∘i' = i∘g_S; the coefficient maps agree because realization's comparisons are all induced by the finite-quotient maps. Step 4: Stacks 094U makes U' a site object, and the slice node allows non-noetherian U and identifies restricted ambient pullback with G_{g_U}. Step 5: E_U^r[0] is flat and K-flat by a finite-sum argument, the derived pullback is computed termwise by the 06YY node, and I verified the balanced-tensor inverse. Step 6: an fpqc pullback covering (022D(3)) plus exact restriction and sheaf separatedness give degree zero; the r = 0 and empty-S' cases are written out. The four declared off-unit tool_uses are generic and accepted; no SGA is cited; no cycle. Advisory only: lem-sfb-locally-free-derived-scalars (Q18) already states the general K-flat/degree-zero scalar-extension fact that step 5 proves inline in a few correct lines; 'locally closed immersion' in the statement, which predates the delivery, has no definition citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalStratumPullbackModels",
+  "declaration": "AlgebraicGeometry.Scheme.RationalStratumPullback.rational_stratum_pullback_models",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.RationalStratumPullback.rational_stratum_pullback_models"
+  ],
+  "file": "lean/Sheaf/Paper/RationalStratumPullbackModels.lean",
+  "statement": "theorem rational_stratum_pullback_models (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (_embedding : E →ₐ[ℚ_[l]] Ω) (X Y : ContinuousRational.Base.{u} l) (g : Y.scheme ⟶ X.scheme) (aX : ContinuousRational.At l E X) (aY : ContinuousRational.At l E Y) (a : ContinuousRational.Along l E g aY aX) (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E)) (_hF : ContinuousRational.IsConstructible l E X.scheme aX.encoding F) (K : PbcRationalCategory X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) (_eK : aX.J.obj K ≅ (DerivedCategory.singleFunctor _ 0).obj F) (S : Scheme.{u}) (i : S ⟶ X.scheme) [IsImmersion i] (_hS : ((ContinuousRational.modulePull i (coefficient l E i)).obj F).IsFiniteLocallyFree) : ∃ m : Stratum l E g aX aY a i, ((ContinuousRational.derivedPull (pullback.fst g i) (coefficient l E (pullback.fst g i))).obj (aY.J.obj ((a.raw l E).obj K))).IsGE 0 ∧ ((ContinuousRational.derivedPull (pullback.fst g i) (coefficient l E (pullback.fst g i))).obj (aY.J.obj ((a.raw l E).obj K))).IsLE 0 ∧ ∀ (U : S.ProEt) (r : ℕ) (e : (ContinuousRational.modulePull U.hom (coefficient l E U.hom)).obj ((ContinuousRational.modulePull i (coefficient l E i)).obj F) ≅ free l E U.left r), Nonempty (Chart l E m F U r e)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Data declarations relocated verbatim to RationalStratumPullbackData and publicly reexported here; unchanged main theorem statement. Proof assembles Stratum and Chart and transfers both bounds through the canonical single comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d787adbe3",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Item JSON differs from side-live only in lean; all 11 stmt_dep records byte-identical to live; statement verbatim; 17 declarations present; one sorry; no new nodes and no other delivery of this item. Clause by clause: prime/E⊂Ω embedding, Base (noetherian, dim bound, ℓ unit), arbitrary g with no flatness, At/Along realization data with the actual completed pullback and its completion_unit, IsConstructible F, raw K with _eK, any IsImmersion i with IsFiniteLocallyFree restriction, S'=pullback g i with fst/snd. Conclusion: ∃ Stratum m (pinned Pull counits via IsNormalizedPullCounit, Compositions pinned by units/components/K-flat normalization, exact immersion counit); m.comparison is the natural composite a.comparison≫square≫g_S^*(i^*_eK≫exact counit); IsGE 0 ∧ IsLE 0 of i'^*J_Y(raw K); ∀ U r e Nonempty Chart with FreeModel pinned by forward a•unit(Σb_j e_j)↦Σ(a·f♯b_j)e_j and backward a e_j↦a⊗e_j, Chart.right/left identifying both sides with free r[0] on U'. coefficient = canonical continuousCoefficientPullback, scalarImage = precomposition. r=0 and empty S' covered; no noetherian hypothesis on charts. Docstrings with source/blueprint and the six steps. Advisories: ContinuousRational.* owned by uncited existing:true def-per-continuous-rational-realization-data (stage-1 theorem stmt_dep unchanged); second reading is the author's self-audit; PullbackFree public import possibly unneeded. No file changed, no recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b9c09",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164433-L-1013788",
+  "kind": "interface",
+  "note": "independent cc review: the 16 relocated data declarations against the old item module (identical); the item statement against the clone (unchanged); the four new sorry statements against the ContinuousRational, pbc and continuous-coefficient definitions (all true and smaller than the item); the item node diff (only proof, proof_deps, proof_origin, tool_uses and lean changed)"
+ }
+}

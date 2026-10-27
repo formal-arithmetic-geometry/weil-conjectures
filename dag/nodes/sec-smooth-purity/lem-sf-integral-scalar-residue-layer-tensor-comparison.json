@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-integral-scalar-residue-layer-tensor-comparison",
+ "kind": "statement",
+ "title": "Balanced tensor comparison for an integral scalar uniformizer layer",
+ "statement": "Let l be prime, let E and L be finite extensions of Q_l with a Q_l-algebra map iota:E->L, and let Y be a scheme. Put B=ULift(O_L/(pi_L^(n+1))) and F_j=(pi_L^j) in B, for 0<=j<=n+1. Let q:B->ULift(O_L/(pi_L)) be the quotient reduction. For every cochain complex P over the completed source coefficient sheaf and 0<=j<n+1, Q(P tensor_R (F_j/F_(j+1))) is isomorphic in D(Y_proet,B) to Q(Res_q(T(C))), where C is termwise ordinary reduction of P to the source residue ring, T is ordinary scalar extension along integralScalarQuotientSheafMap at level zero, and Res_q is termwise restriction of scalars. The filtered tensor is precisely filteredCoefficientTensorComplex, and all coefficient maps and complexes are the recorded constructions. There are no constructibility, boundedness or flatness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Modules on Sites, Section tensor products (03EK); scalar-extension proof step (4), associativity; first two sentences of parent residue-layer argument, made explicit with the principal-ideal quotient computation."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-derived-reduction",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use integralScalarResidueCoefficientIso to identify the constant uniformizer-layer module sheaf with the restriction of the regular target residue sheaf along integralScalarResidueProjection. This existing theorem includes the multiplication-and-cancellation computation in the valuation domain and the constant-sheaf comparison. Use integralScalarResidue_triangle for the commuting square from the completed source ring to the target residue ring.",
+   "uses": [
+    "lem-sf-integral-scalar-residue-coefficient-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the natural sheaf tensor cancellation isomorphism with the target residue unit as its first factor. Remove tensoring with that unit by the left unitor and use symmetry to obtain tensorRight(Res_q unit) isomorphic to extension along q followed by restriction along q. The siteSheafTensorRightIso comparison and the layer isomorphism identify the actual filtered coefficient tensor functor with that extension-restriction composite.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "lem-sf-integral-scalar-residue-coefficient-iso",
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of scalar restriction is canonically identified along equal composites by pbcRestrictComp. Compose the ordinary extension-restriction adjunctions and use uniqueness of left adjoints to identify extension first to the target finite quotient and then to its residue ring with extension first to the source residue ring and then along the residue inclusion. The equality of ring-sheaf composites is integralScalarResidue_triangle. Use scalarReductionExtension_adjunction to identify extension along the source residue projection with the prescribed ordinary reduction functor.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sf-integral-scalar-residue-coefficient-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the natural isomorphisms of the preceding steps, identifying the concrete change-of-rings functor with pbcExtend by its recorded object and morphism equations. Apply its components to the terms of P. Naturality for each differential is the chain-map equation, giving an actual cochain-complex isomorphism by HomologicalComplex.Hom.isoOfComponents. Applying DerivedCategory.Q.mapIso gives the required isomorphism. No K-flat or bounded representative is needed.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-scalar-residue-coefficient-iso",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "description": "V9: reuse the proved coefficient-layer isomorphism and scalar triangle, use natural tensor cancellation and uniqueness of the ordinary scalar-extension adjunction, and lift their composite termwise to a complex isomorphism before localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived change of rings residue field uniformizer successive quotient tensor complex associativity",
+   "results": "Algebra.TensorProduct.assoc, TensorProduct.tensorTensorTensorAssoc, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop and TensorProduct.tensorQuotMapSMulEquivTensorQuot. These are module-level tools, not the ringed-sheaf complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal\", \"quotient\", \"pow\"",
+   "results": "Ideal.Quotient.factorPow, factorPowSucc, IsDiscreteValuationRing.length_quotient_pow_maximalIdeal, and quotient finiteness; no sheaf complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotEquivPowQuotPowSucc|constructible.*[Ss]calar; project searches for residue scalar comparison",
+   "results": "Ideal.quotEquivPowQuotPowSucc supplies the algebraic principal-ideal layer. The project supplies finiteFieldSheafScalarExtension and change-of-rings tensor cancellation, but neither identifies the B-linear uniformizer-layer complex with the two-stage residue complex. Blueprint search for residue layer returned no node; balanced tensor found only def-pur-supported-cup.",
+   "date": "2026-10-26",
+   "verdict": "no existing declaration of this comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarResidueLayerConstructible",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "Integral finite-level scalar extension before rationalization; parent residue-layer proof, identification of consecutive powers and balanced tensor associativity.",
+   "via": [
+    "lem-sf-integral-scalar-residue-layer-constructible",
+    "lem-sf-integral-scalar-residue-layers",
+    "lem-sf-integral-scalar-finite-level-bounds",
+    "lem-weil-integral-scalar-extension-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarResidueLayerTensorComparison",
+  "file": "lean/Sheaf/Paper/IntegralScalarResidueLayerTensorComparison.lean",
+  "declaration": "WeilConjectures.integralScalarResidueLayerTensorComparison",
+  "statement": "theorem integralScalarResidueLayerTensorComparison\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (j : Fin (n + 1)) :\n    let B := ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))\n    let F : Fin (n + 1 + 1) → Submodule B B := fun a ↦\n      (Ideal.span ({ULift.up ((Ideal.Quotient.mk\n        (Padic.coefficientExtensionIdeal l L (n + 1)))\n          (Padic.coefficientExtensionUniformizer l L))} : Set B)) ^ (a : ℕ)\n    let q : Padic.coefficientExtensionRing l L (n + 1) →+*\n        Padic.coefficientExtensionRing l L 1 :=\n      Ideal.Quotient.factor (Ideal.pow_le_pow_right (by omega))\n    let R := pbcRestrict ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map\n      (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} q)))\n    let T := pbcExtend (integralScalarQuotientSheafMap l E L ι Y 0)\n    letI := scalarReductionExtensionAdditive l E Y 0\n    let C := ((scalarReductionExtension l E Y 0).mapHomologicalComplex (.up ℤ)).obj P\n    Nonempty (DerivedCategory.Q.obj\n      (filteredCoefficientTensorComplex Y B\n        (completedIntegralCommRingSheafUnrestricted l E Y) (integralScalarRho l E L ι Y n)\n        P (ModuleCat.of B ((F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype))) ≅\n      DerivedCategory.Q.obj\n        ((R.mapHomologicalComplex (.up ℤ)).obj\n          ((T.mapHomologicalComplex (.up ℤ)).obj C)))",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023032-L-514834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261026T071412-L-3925309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

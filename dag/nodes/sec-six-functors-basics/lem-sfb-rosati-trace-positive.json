@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-rosati-trace-positive",
+ "kind": "statement",
+ "title": "Positive Rosati trace pairing",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g=\\dim A$ [def-kun-topological-krull-dimension], and put $E=\\operatorname{End}_k(A)\\otimes_{\\mathbf Z}\\mathbf Q$, using module tensor products [def-weil-pbc-module-tensor-product], where endomorphisms are group-scheme homomorphisms [def-sc-group-scheme] and multiplication is composition. Let $A^\\vee=\\operatorname{Pic}^0_{A/k}$ be the dual abelian variety of algebraically trivial invertible sheaves rigidified at the identity. Let $L$ be an ample [def-sc-ample] invertible sheaf [def-sc-invertible-module], and set $\\lambda(x)=[t_x^*L\\otimes L^{-1}]$ for translation $t_x$ by $x$. Then $\\lambda$ has a two-sided inverse $\\mu$ in $\\operatorname{Hom}_k(A^\\vee,A)\\otimes_{\\mathbf Z}\\mathbf Q$. Pullback of invertible sheaves defines the dual $u^\\vee$, extended $\\mathbf Q$-linearly to rational homomorphisms, and $u^\\dagger=\\mu u^\\vee\\lambda$ defines a $\\mathbf Q$-linear involution of $E$ reversing multiplication. There is a $\\mathbf Q$-linear map $\\operatorname{Tr}_A:E\\to\\mathbf Q$ whose image in $\\mathbf Q_\\ell$ equals $\\operatorname{tr}(u\\mid V_\\ell A)$ for every prime $\\ell\\ne\\operatorname{char}k$; here $V_\\ell A$ is the rational Tate module [sk-def-av-tate] and $\\operatorname{tr}$ is linear endomorphism trace [def-weil-endomorphism-trace]. It satisfies $\\operatorname{Tr}_A(1)=2g$. The form $B_\\lambda(u,v)=\\operatorname{Tr}_A(u^\\dagger v)$ is symmetric and $\\mathbf Q$-bilinear, and $B_\\lambda(u,u)>0$ for every nonzero $u\\in E$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-sc-group-scheme",
+  "sk-def-av-tate",
+  "def-weil-endomorphism-trace",
+  "def-weil-pbc-module-tensor-product",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-abelian-rational-hom",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-abelian-rational-tate-action"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-ample], choose $r>0$ such that $L^r$ is very ample: there is a closed immersion $i:A\\hookrightarrow\\mathbf P^N_k$ with $i^*\\mathcal O(1)\\cong L^r$. Some coordinate $x_j$ does not vanish identically on $i(A)$, so $s=i^*x_j$ is a nonzero section of $L^r$. The variety $A$ is integral by [lem-sc-abelian-variety-characterization], so its zero scheme $F=Z(s)$ is an effective Cartier divisor by [lem-pc-nonzero-section-integral-cartier]. That node also says that on an affine open $U$ where $L^r|_U=\\mathcal O_Ue$ and $s|_U=ae$, the ideal $\\mathcal I_F|_U$ is $a\\mathcal O_U$ with $a$ a nonzerodivisor. Hence $\\varphi\\mapsto\\varphi(s)$ maps $L^{-r}$ isomorphically onto $\\mathcal I_F$ (locally $e^\\vee\\mapsto a$), and dualizing gives $\\mathcal O_A(F)=\\mathcal I_F^\\vee\\cong L^r$ [def-pc-divisor-line-bundle]. This sheaf is ample by [def-sc-ample] with exponent $1$, because $L^r$ is very ample. The criterion in [lem-sfb-abelian-polarization-calculus] makes $\\phi_{L^r}$ an isogeny. The defining translation family gives $\\phi_{L^r}=r\\lambda$: on points $t_x^*L^r\\otimes L^{-r}\\cong(t_x^*L\\otimes L^{-1})^{\\otimes r}$. By [lem-sfb-simple-isogeny-decomposition], choose $h$ with $h(r\\lambda)=[n]_A$ and $(r\\lambda)h=[n]_{A^\\vee}$, $n>0$. Then $\\mu=(r/n)h$ has both required inverse identities in rational Hom. Empty $F$ is allowed in dimension zero.",
+   "uses": [
+    "def-sc-ample",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-nonzero-section-integral-cartier",
+    "def-pc-divisor-line-bundle",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-simple-isogeny-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§§8,11,14: polarization isogeny and rational inverse, pp.35–40,53,61"
+   }
+  },
+  {
+   "text": "By [lem-sfb-abelian-weil-pairing], dualization is additive, contravariant and preserves identities; extend it rationally and put $u^\\dagger=\\mu u^\\vee\\lambda$. Expanding gives $(u+v)^\\dagger=u^\\dagger+v^\\dagger$, $(a u)^\\dagger=a u^\\dagger$ and $(uv)^\\dagger=v^\\dagger u^\\dagger$, since $\\lambda\\mu=1$. For any $\\ell\\ne\\operatorname{char}k$, write $e(x,y)=e_{A,\\ell}(x,V_\\ell(\\lambda)y)$. Its nondegeneracy follows from perfection and the inverse $V_\\ell(\\mu)$; the pairing lemma gives alternation and $e(V_\\ell(u)x,y)=e(x,V_\\ell(u^\\dagger)y)$. Skew symmetry then gives $e(x,V_\\ell(u^{\\dagger\\dagger})y)=e(x,V_\\ell(u)y)$. Nondegeneracy implies equality of these operators. Tate faithfulness in [lem-sfb-abelian-tate-action-saturation] implies equality in $E$: clear a rational denominator first, then apply its injectivity. Thus dagger is an involution.",
+   "uses": [
+    "lem-sfb-abelian-weil-pairing",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§14 opening, p.61, using §13 Proposition 13.2"
+   }
+  },
+  {
+   "text": "If $g>0$, set $\\operatorname{Tr}_A(u)=-[X^{2g-1}]P_u$ from [lem-sfb-abelian-tate-charpoly]. In a matrix determinant the coefficient of $X^{2g-1}$ is minus the sum of diagonal entries; hence this rational number has the required Tate traces for every $\\ell$. Trace is the matrix diagonal sum of [def-weil-endomorphism-trace], so additivity and scalar linearity follow entry by entry and descend along the injective embedding $\\mathbf Q\\to\\mathbf Q_\\ell$. By [lem-sfb-abelian-tate-action-saturation], $\\dim V_\\ell A=2g$, so the identity has trace $2g$. If $g=0$, that same node gives a zero Tate module and injectivity of integral Hom, so $E=0$. Take the zero trace; all claims, including positivity for nonzero elements, are vacuous or zero identities in this case.",
+   "uses": [
+    "lem-sfb-abelian-tate-charpoly",
+    "def-weil-endomorphism-trace",
+    "lem-sfb-abelian-tate-action-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§10 pp.45–52, characteristic polynomial and trace"
+   }
+  },
+  {
+   "text": "Trivialize the one-dimensional value line of $e$ and choose a basis of $V_\\ell A$. If $J$ is its invertible pairing matrix and $U$ is the matrix of $u$, the adjoint identity is $U^{\\mathsf t}J=JU^\\dagger$. Therefore $U^\\dagger=J^{-1}U^{\\mathsf t}J$. The trace of this matrix is the trace of $U$: conjugation invariance is part of [def-weil-endomorphism-trace], and transpose preserves the diagonal sum. Descending to $\\mathbf Q$ gives $\\operatorname{Tr}_A(u^\\dagger)=\\operatorname{Tr}_A(u)$. Consequently\n$\\operatorname{Tr}_A(u^\\dagger v)=\\operatorname{Tr}_A((u^\\dagger v)^\\dagger)=\\operatorname{Tr}_A(v^\\dagger u)$.\nThis proves symmetry. Bilinearity follows by distributing multiplication and applying the two linear maps already constructed.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§14 pp.61–62, adjoint identity and bilinear form"
+   }
+  },
+  {
+   "text": "For positivity assume $u\\ne0$. Choose $n>0$ and an integral endomorphism $f$ with $nu=f\\otimes1$. Injectivity of integral Hom in [lem-sfb-abelian-tate-action-saturation] implies it is torsion-free, so its map to rational Hom is injective and $f\\ne0$. It suffices to prove positivity for $f$, since $B_\\lambda(f,f)=n^2B_\\lambda(u,u)$. The trace/intersection formula [lem-sfb-abelian-trace-intersection] gives\n$$B_\\lambda(f,f)=\\frac{2g\\,(L^{g-1}\\cdot f^*L\\cdot A)}{(L^g\\cdot A)}.$$\nIts hypotheses hold: $g>0$ by the zero case above, $L$ is ample, and $\\mu$ has the two inverse identities of step 1. The denominator is positive by [lem-sc-positive-ample-hilbert-degree]; its Hilbert degree equals $(L^g\\cdot A)$ by [def-sc-intersection-number], substituting $m=n_1+\\cdots+n_g$ in the degree polynomial.",
+   "uses": [
+    "lem-sfb-abelian-tate-action-saturation",
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sc-positive-ample-hilbert-degree",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 14.3 p.62; rational denominator reduction"
+   }
+  },
+  {
+   "text": "By [def-sc-ample], choose $r>0$ such that $L^r$ is very ample, with a closed immersion $i:A\\hookrightarrow\\mathbf P^N_k$ and $i^*\\mathcal O(1)\\cong L^r$. There is $x\\in A(k)$ with $f(x)\\ne0$: otherwise density from [lem-pc-rational-points-dense] and reducedness from [lem-sc-abelian-variety-characterization] force $f$ to be the zero morphism. Explicitly its equalizer with zero is closed since $A$ is separated; the equalizer ideal vanishes on the dense rational points and hence on the reduced source. A coordinate linear form for the immersion defined by $L^r$ can be chosen to vanish at $0$ and not at $f(x)$ (two distinct projective points give distinct one-dimensional quotients). Its pullback by $f$ is a section $s$ of $(f^*L)^r$, zero at $0$ and nonzero at $x$. Thus $Z(s)$ is nonempty and, by [lem-pc-nonzero-section-integral-cartier], is an effective Cartier divisor $H$. By [lem-sc-intersection-effective-cartier], $H$ is proper of dimension $g-1$, $L|_H$ is ample, and\n$$((f^*L)^r\\cdot L^{g-1}\\cdot A)=(L^{g-1}\\cdot H)>0,$$\nthe last inequality being [lem-sc-positive-ample-hilbert-degree] on $H$, including dimension zero.",
+   "uses": [
+    "def-sc-ample",
+    "lem-pc-rational-points-dense",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-sc-intersection-effective-cartier",
+    "lem-sc-positive-ample-hilbert-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 14.3 proof p.62: make the effective nonzero pullback explicit; Stacks varieties.tex Tags 0BEU,0BEV"
+   }
+  },
+  {
+   "text": "For completeness, intersection symmetry and scaling by a tensor power are elementary coefficient calculations in [def-sc-intersection-number]. Symmetry permutes the variables. For scaling in one slot use [lem-sc-snapper-numerical-polynomial]: the Euler polynomial has total degree at most $g$; substituting $n_1\\mapsto rn_1$ multiplies its $n_1\\cdots n_g$ coefficient by $r$. Hence the positive number in step 6 equals $r(f^*L\\cdot L^{g-1}\\cdot A)$. The numerator in step 5 is therefore positive. Since $2g>0$ and the denominator there is positive, $B_\\lambda(f,f)>0$, and division by $n^2>0$ proves $B_\\lambda(u,u)>0$.",
+   "uses": [
+    "def-sc-intersection-number",
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 14.3 p.62; Stacks Tag 0BER, varieties.tex lemma-intersection-number-additive"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-nonzero-section-integral-cartier",
+  "def-pc-divisor-line-bundle",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-sfb-abelian-weil-pairing",
+  "lem-sfb-abelian-tate-action-saturation",
+  "lem-sfb-abelian-tate-charpoly",
+  "def-weil-endomorphism-trace",
+  "lem-sfb-abelian-trace-intersection",
+  "lem-sc-positive-ample-hilbert-degree",
+  "def-sc-intersection-number",
+  "lem-pc-rational-points-dense",
+  "lem-sc-intersection-effective-cartier",
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §§10,13,14, especially Theorem 14.3 pp.61–62, with explicit ample-section argument and zero-dimensional case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Rosati trace pairing on the rational endomorphism algebra of a polarized abelian variety is positive definite",
+   "results": "8 hits; top results: RootPairing.posRootForm_rootFormIn_posDef, RootPairing.RootPositiveForm.exists_pos_eq, RootPairing.rootForm_pos_of_ne_zero, RootPairing.posRootForm_posForm_pos_of_ne_zero, RootPairing.posRootForm, RootPairing.algebraMap_posRootForm_posForm, RootPairing.posRootForm_posForm_nondegenerate, RootPairing.RootPositiveForm.algebraMap_posForm",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system positive forms and field-algebra trace forms do not construct dual abelian varieties, the Rosati involution or its positive geometric trace pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rosati\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system positive forms and field-algebra trace forms do not construct dual abelian varieties, the Rosati involution or its positive geometric trace pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|polarization|abelian.variety",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system positive forms and field-algebra trace forms do not construct dual abelian varieties, the Rosati involution or its positive geometric trace pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Rosati involution of a polarization gives a positive definite rational trace form",
+   "results": "8 hits; top results: Algebra.traceForm, LieModule.traceForm, Algebra.traceForm_isSymm, RootPairing.CoPolarizationIn, QuadraticMap.associated_flip, RootPairing.toLinearMap_apply_apply_Polarization, RootPairing.self_comp_coPolarization_eq_corootForm, RootPairing.flip_comp_polarization_eq_rootForm",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system positive forms and field-algebra trace forms do not construct dual abelian varieties, the Rosati involution or its positive geometric trace pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ample line bundle on an abelian variety the Rosati involution has positive trace norm",
+   "results": "8 hits; top results: det_traceForm_ne_zero, RootPairing.RootPositiveForm.exists_pos_eq, traceForm_nondegenerate, traceForm_nondegenerate_tfae, RootPairing.algebraMap_posRootForm_posForm, RootPairing.RootPositiveForm.algebraMap_posForm, RootPairing.posRootForm_posForm_pos_of_ne_zero, Algebra.norm_one_add_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system positive forms and field-algebra trace forms do not construct dual abelian varieties, the Rosati involution or its positive geometric trace pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|polarization|abelian.variety",
+   "results": "25 hits; top: Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix or root-system positivity and commutative algebra trace forms do not state geometric Rosati positivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace pairing of the Rosati involution of an abelian variety is positive definite",
+   "results": "8 hits; top: Matrix.PosDef.trace_pos, RootPairing.posRootForm_rootFormIn_posDef, Algebra.traceForm_isSymm, RootPairing.posRootForm_posForm_pos_of_ne_zero, LinearMap.IsPosSemidef.mk, Algebra.traceForm, LinearMap.isPosSemidef_def, RootPairing.rootForm_symmetric",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix or root-system positivity and commutative algebra trace forms do not state geometric Rosati positivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian variety endomorphisms have rational characteristic polynomials independent of the Tate module prime",
+   "results": "8 hits; top: LinearMap.charpoly, LinearMap.polyCharpolyAux_basisIndep, LinearMap.polyCharpoly, Matrix.charpoly, LinearMap.polyCharpolyAux_baseChange, LinearMap.charpoly_def, LinearMap.polyCharpoly.congr_simp, LinearMap.polyCharpoly_coeff_eq_zero_iff_of_basis",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix or root-system positivity and commutative algebra trace forms do not state geometric Rosati positivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rosati trace form on the rational endomorphisms of a polarized abelian variety is positive definite",
+   "results": "8 hits; top: RootPairing.posRootForm_rootFormIn_posDef, RootPairing.RootPositiveForm.exists_pos_eq, RootPairing.rootForm_pos_of_ne_zero, RootPairing.posRootForm_posForm_pos_of_ne_zero, QuadraticMap.linMulLinSelfPosDef, RootPairing.posRootForm, RootPairing.algebraMap_posRootForm_posForm, RootPairing.posRootForm_posForm_nondegenerate",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix or root-system positivity and commutative algebra trace forms do not state geometric Rosati positivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-automorphisms-finite",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules).",
+   "via": [
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rosati-trace-positive",
+  "worker": "stage1",
+  "summary": "Reuses dual/polarization calculus, isogeny quasi-inverses, faithful Tate actions and ample intersection positivity. Isolates geometric Weil pairings, rational Tate characteristic polynomials and the omitted trace/intersection calculation in three statement-only nodes. Proves the algebraic assembly, trace symmetry, effective nonzero pullback and rational positivity explicitly; handles dimension zero without a negative intersection exponent.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/level-rigidity chain; this is the auxiliary Milne I 14.3 supporting Proposition 14.4(a), not a replacement of a unit step. The inherited created-chain ancestor tool returns None; preserve the same null ancestor on children.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 1,6; no same-unit node supplies this fact. The unit route is unchanged."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 1,6; no same-unit node supplies this fact. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sc-positive-ample-hilbert-degree",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 5,6; no same-unit node supplies this fact. The unit route is unchanged."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 6; no same-unit node supplies this fact. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sc-intersection-effective-cartier",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 6; no same-unit node supplies this fact. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic geometric or intersection tool used with its stated hypotheses in steps 7; no same-unit node supplies this fact. The unit route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-sc-positive-ample-hilbert-degree",
+  "lem-pc-rational-points-dense",
+  "lem-sc-intersection-effective-cartier",
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-a07a40f67",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a07a40f67 (reviewer sub-agent of L); spot-checked: Read Milne AV I §§10, 13 and 14: Thm 10.9, Prop 10.20, Prop 13.2(a),(d), §14 Rosati p.61, Thm 14.3 p.62. The item statement is unchanged from the base and matches Milne §14 plus Thm 14.3 for algebraically closed k and λ=φ_L. Three new statement-only nodes, all true and none a duplicate. weil-pairing = additivity and contravariance of dualization, the perfect V_ℓ pairing, the 13.2(a) adjunction and 13.2(d) alternation (char Q_ℓ=0, so skew-symmetric is alternating). tate-charpoly = 10.9 + 10.20, with the rational case via n^{-2g}P_f(nX). trace-intersection = Thm 14.3 for f†f, the calculation Milne omits; it assumes the rational inverse (no cycle) and g>0. Checked f=[m] (2gm²) and f=0. Rg over the snapshot for Weil pairing, Rosati and Tate charpoly/trace found only the unrelated lem-pod-point-weil-pairing-realization. Steps 2–4 check algebraically: †† via skew symmetry, nondegeneracy from perfect + V(λ) invertible, injectivity from tate-action-saturation; Tr = −[X^{2g−1}]P_u; trace symmetry via U†=J⁻¹UᵗJ; g=0 gives E=0. Steps 5–7 are the explicit positivity argument: f≠0, a point x with f(x)≠0 by the density/equalizer argument, a linear form vanishing at 0 and not at f(x), H=Z(s) nonempty Cartier, 0BEU (c) and positive Hilbert degree on H (including g=1), monomial scaling. FIX (2 repairable faults, C4/E1). (1) Steps 1 and 6 cited lem-weil-pbc-ample-very-ample-immersion-affine-base, whose ampleness hypothesis is def-weil-pbc-ample-invertible-module, while L is def-sc-ample; replaced by [def-sc-ample], which directly gives a closed immersion with i*O(1)≅L^r. (2) Step 1 applied the polarization-calculus criterion to O_A(F) without identifying O_A(F)≅L^r or proving it ample; added via the local generator of lem-pc-nonzero-section-integral-cartier and [def-pc-divisor-line-bundle], plus φ_{L^r}=rλ on points. proof_deps recomputed and the stale tool_uses entry removed; the remaining generic tool_uses are accepted. Batch-5: all eight listed citations reach sec-trace-formula only via the generic lem-trf-projective-bundle-quotient-geometry (P(E) universal property) or def-trf-schematically-dense-open (a definition). Neither is a trace-formula or Poincaré-duality step, so all are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.RosatiTracePositive",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_rosati_trace_positive",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/RosatiTracePositive.lean",
+  "statement": "theorem IsAbelianVariety.exists_rosati_trace_positive {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (L : A.left.Modules) [L.IsInvertible] (hL : IsAmple A.hom L) : ∃ c : ∀ (B C F : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj F] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety F], abelianRationalHom B C →ₗ[ℚ] abelianRationalHom C F →ₗ[ℚ] abelianRationalHom B F, (∀ (B C F : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj F] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety F] (r s : ℚ) (f : abelianHom B C) (g : abelianHom C F), c B C F (r ⊗ₜ[ℤ] f) (s ⊗ₜ[ℤ] g) = (r * s) ⊗ₜ[ℤ] abelianHomComp f g) ∧ ∃ (D : AbelianDualPoincareDatum A) (lambda : abelianHom A D.dual) (d : abelianHom A A →+ abelianHom D.dual D.dual) (dQ : abelianRationalHom A A →ₗ[ℚ] abelianRationalHom D.dual D.dual), ClassifiesAbelianDifference D L (abelianHomMap lambda) ∧ (∀ (f : abelianHom A A) (g : abelianHom D.dual D.dual), Nonempty ((Scheme.Modules.pullback (abelianHomMap f ▷ D.dual).left).obj D.poincare ≅ (Scheme.Modules.pullback (A ◁ abelianHomMap g).left).obj D.poincare) ↔ g = d f) ∧ (∀ (r : ℚ) (f : abelianHom A A), dQ (r ⊗ₜ[ℤ] f) = r ⊗ₜ[ℤ] d f) ∧ ∃ (mu : abelianRationalHom D.dual A) (dagger : abelianRationalHom A A →ₗ[ℚ] abelianRationalHom A A) (tr : abelianRationalHom A A →ₗ[ℚ] ℚ) (B : abelianRationalHom A A →ₗ[ℚ] abelianRationalHom A A →ₗ[ℚ] ℚ), c A D.dual A (abelianHomToRational lambda) mu = abelianHomToRational (abelianHomId A) ∧ c D.dual A D.dual mu (abelianHomToRational lambda) = abelianHomToRational (abelianHomId D.dual) ∧ (∀ v : abelianRationalHom A A, dagger v = c A D.dual A (c A D.dual D.dual (abelianHomToRational lambda) (dQ v)) mu) ∧ Function.Involutive dagger ∧ (∀ v w : abelianRationalHom A A, dagger (c A A A v w) = c A A A (dagger w) (dagger v)) ∧ (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ ringChar k → ∀ v : abelianRationalHom A A, algebraMap ℚ ℚ_[ℓ] (tr v) = LinearMap.trace ℚ_[ℓ] (IsAbelianVariety.rationalTateModule ℓ A) (IsAbelianVariety.rationalHomTateMap ℓ v)) ∧ tr (abelianHomToRational (abelianHomId A)) = (2 * IsAbelianVariety.dim A : ℕ) ∧ (∀ v w : abelianRationalHom A A, B v w = tr (c A A A w (dagger v))) ∧ (∀ v w : abelianRationalHom A A, B v w = B w v) ∧ ∀ v : abelianRationalHom A A, v ≠ 0 → 0 < B v v",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e828636a",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read item node (diff vs side-live: only lean + 3 landed stmt_deps def-sfb-abelian-rational-hom/dual-poincare-datum/rational-tate-action, records identical to live), delivered RosatiTracePositive.lean, dep decls (RationalHom, DualPoincareDatum incl. ClassifiesAbelianDifference and universal ∃!, RationalHomTateAction, TateModule.rationalTateModule) and Milne AV I §14 p.61, Thm 14.3, Prop 10.20. Every clause rendered: existential c/d/dQ/mu/dagger/tr/B all pinned (pure-tensor equations, Poincaré-pullback iff, ℓ-adic trace equations), same pattern as landed N9 PolarizationCalculusOverField; dagger = mu∘dQ v∘lambda, anti-multiplicative, involutive; both inverse identities; tr matches V_ℓ trace for all primes ℓ≠ringChar k; Tr(1)=2g; B v w = Tr(v†w), symmetric, strictly positive on v≠0. No extra hypotheses, single universe u, edge cases g=0, v=0, char p/ℓ=2 checked. lean.statement verbatim; single sorry; docstrings with source, blueprint tag, 7-step proof; report has Worker report and Second reading by NO. Advisories: self second reading; ℚ_ℓ owner reached transitively. No compile (no file changed)."
+ }
+}

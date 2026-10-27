@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-finite-forward-compactified-swap",
+ "kind": "statement",
+ "title": "Signed swap of the compactified ordinary product normal form",
+ "statement": "Use [def-pur-conventions] and separated finite-type k-schemes B,X,Z with separated finite-type maps f:X→B,g:Z→B and bounded-below fixed-scalar pro-etale complexes M,N with retained etale-origin witnesses. Let sq be the chosen pullback cone for f,g, cf,cg their chosen compactifications, G the product geometry using sq, and G′ the reversed geometry using sq.flip on the same P. For ordered domains d,d′ of [def-pur-finite-forward-product], let O and O′ be finiteProductOrdinaryInCoordinates in the two orders, including canonical input compactification comparisons, the ordinary proper product and the pushed-forward two-stage open tensor comparison of [lem-pur-finite-product-compactification]. Let out,out′ be the canonical isomorphisms from the chosen output compactifications to the displayed product compactifications on the respective external tensor objects. Let S be the common-cone factor swap of [def-pur-finite-forward-product] and σ the signed source tensor symmetry. Then O = σ ≫ O′ ≫ out′.inv ≫ S ≫ out.hom. No compact-support forward product appears in this equation. Auxiliary proper tensor objects are arbitrary unbounded objects; only endpoint compactification comparisons use the supplied bounded-below etale-origin conditions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph (i), proper compactification, open tensor compatibility and counit transposes."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-forward-product",
+  "def-pur-finite-forward-tensor-symmetry",
+  "lem-pur-finite-product-compactification",
+  "lem-pur-finite-forward-cartesian-coordinates",
+  "def-weil-pbc-etale-origin-witness",
+  "def-pur-finite-product-compactification-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the final clause of the ordinary proper product transpose theorem to the proper compactification maps and the two open extensions. Transport through the canonical intrinsic/fixed-scalar equivalence and its normalized tensor, pullback, direct-image and adjunction comparisons. These preserve the ordinary counit-defined exchange/projection maps and the direct-image compositor, giving the symmetry equation for finiteProductOrdinary.",
+   "uses": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph (i), proper compactification, open tensor compatibility and counit transposes."
+   }
+  },
+  {
+   "text": "Apply the open product swap theorem. Identify its exact pullback presentation with total-left-derived pullback using the canonical comparison. The two-stage open tensor maps agree because both restrict to identity under the same open units, and extension by zero is fully faithful. Hence its signed swap equation identifies the two finiteProductOpenTensor chains.",
+   "uses": [
+    "lem-pur-finite-open-product-swap",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph (i), proper compactification, open tensor compatibility and counit transposes."
+   }
+  },
+  {
+   "text": "Apply the ordinary direct-image functor to the open square and paste with the proper-product equality. Move the input comparisons past the signed tensor symmetry by naturality. Use the compactification comparison cocycle and naturality to move the output comparisons to the right. The remaining structure-map equality is sq.w and its signed external tensor symmetry, exactly S.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph (i), proper compactification, open tensor compatibility and counit transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-proper-product-transpose",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-finite-open-product-swap",
+  "lem-sf-open-tensor-normalization",
+  "thm-sf-comp-composition",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph (i), proper compactification, open tensor compatibility and counit transposes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ordinary derived external product followed by the product open extension comparison commutes with signed symmetry",
+   "results": "Equiv.Perm.prod_Ioi_comp_eq_sign_mul_prod; Equiv.Perm.prod_Iio_comp_eq_sign_mul_prod; TensorProduct.gradedCommAux; Equiv.Perm.sign_prodExtendRight; TensorProduct.gradedComm_symm; ComplexShape.σ_ε₂; AlternatingMap.domCoprod.summand_mk''; CategoryTheory.Limits.prod.symmetry'_assoc",
+   "date": "2026-10-26",
+   "verdict": "no match: these general categorical maps do not identify the specified derived geometric transformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper direct image external product and the open extension by zero tensor isomorphism respect the symmetry under swapping factors",
+   "results": "CategoryTheory.MonoidalCategory.externalProductSwap; LightCondensed.instSymmetricCategoryLightCondMod; CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app; CategoryTheory.MonoidalCategory.externalProductFlip; CategoryTheory.MonoidalCategory.externalProductFlip_hom_app_app_app_app; CategoryTheory.MonoidalCategory.externalProductFlip_inv_app_app_app_app; CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app; LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-26",
+   "verdict": "no match: these general categorical maps do not identify the specified derived geometric transformations"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]ymmetr|[Ss]ymmetr.*pullback",
+   "results": "Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Descent.lean; Mathlib/CategoryTheory/MorphismProperty/Descent.lean; Mathlib/CategoryTheory/MorphismProperty/Limits.lean; Mathlib/CategoryTheory/MorphismProperty/Limits.lean; Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+   "date": "2026-10-26",
+   "verdict": "no match: these general categorical maps do not identify the specified derived geometric transformations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteForwardProductSymmetry",
+  "date": "2026-10-26",
+  "group": "D9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry of the actual forward external product, used for coordinate permutation in the iterated affine-space trace.",
+   "via": [
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteForwardCompactifiedSwap",
+  "file": "lean/Sheaf/Paper/FiniteForwardCompactifiedSwap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteForwardCompactifiedSwap",
+  "statement": "theorem finiteForwardCompactifiedSwap\n    (C : WeilConjectures.PurityFiniteSetting.{u})\n    {B X Z : Scheme.{u}}\n    [B.Over (Spec (CommRingCat.of C.field.k))]\n    [X.Over (Spec (CommRingCat.of C.field.k))]\n    [Z.Over (Spec (CommRingCat.of C.field.k))]\n    [IsSeparated (B ↘ Spec (CommRingCat.of C.field.k))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of C.field.k))]\n    [IsSeparated (Z ↘ Spec (CommRingCat.of C.field.k))]\n    [LocallyOfFiniteType (B ↘ Spec (CommRingCat.of C.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of C.field.k))]\n    [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of C.field.k))]\n    [QuasiCompact (B ↘ Spec (CommRingCat.of C.field.k))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of C.field.k))]\n    [QuasiCompact (Z ↘ Spec (CommRingCat.of C.field.k))]\n    (f : X ⟶ B) (g : Z ⟶ B)\n    [f.IsOver (Spec (CommRingCat.of C.field.k))]\n    [g.IsOver (Spec (CommRingCat.of C.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    (M : _root_.DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C.Coefficient)))\n    (N : _root_.DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} C.Coefficient)))\n    (wM : Scheme.FixedEtaleOriginWitness X C.Coefficient M)\n    (wN : Scheme.FixedEtaleOriginWitness Z C.Coefficient N) :\n  letI : CompactSpace B := QuasiCompact.compactSpace_of_compactSpace\n    (B ↘ Spec (CommRingCat.of C.field.k))\n  letI : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated\n    (B ↘ Spec (CommRingCat.of C.field.k))\n  letI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace\n    (X ↘ Spec (CommRingCat.of C.field.k))\n  letI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated\n    (X ↘ Spec (CommRingCat.of C.field.k))\n  letI : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace\n    (Z ↘ Spec (CommRingCat.of C.field.k))\n  letI : QuasiSeparatedSpace Z := quasiSeparatedSpace_of_quasiSeparated\n    (Z ↘ Spec (CommRingCat.of C.field.k))\n  let sq := IsPullback.of_hasPullback f g\n  let cf := HasCompactification.compactification f\n  let cg := HasCompactification.compactification g\n  let G := finiteForwardCartesianGeometry cf cg sq\n  let G' := finiteForwardCartesianGeometry cg cf sq.flip\n  letI : HasCompactification (G.q ≫ g) := finiteProductGeometry_h_hasCompactification G\n  letI : HasCompactification (G'.q ≫ f) := finiteProductGeometry_h_hasCompactification G'\n  ∀ (d : FiniteForwardProductDomain (ModuleCat.{u + 1} C.Coefficient) sq M.obj N.obj)\n    (d' : FiniteForwardProductDomain (ModuleCat.{u + 1} C.Coefficient) sq.flip N.obj M.obj),\n    let hm : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} C.Coefficient) X M.obj :=\n      ⟨wM.complex.obj, wM.complex.property, ⟨wM.iso⟩⟩\n    let hn : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} C.Coefficient) Z N.obj :=\n      ⟨wN.complex.obj, wN.complex.property, ⟨wN.iso⟩⟩\n    let out := (finiteForwardCompactificationComparison C.Coefficient\n      (HasCompactification.compactification (G.q ≫ g))\n      (finiteProductCompactification G)).hom.app ⟨_, d.external⟩\n    let out' := (finiteForwardCompactificationComparison C.Coefficient\n      (HasCompactification.compactification (G'.q ≫ f))\n      (finiteProductCompactification G')).inv.app ⟨_, d'.external⟩\n    finiteProductOrdinaryInCoordinates G C.Coefficient cf cg M.obj N.obj hm hn =\n      finiteForwardTensorSymmetry (ModuleCat.{u + 1} C.Coefficient) B _ _ ≫\n        finiteProductOrdinaryInCoordinates G' C.Coefficient cg cf N.obj M.obj hn hm ≫\n        out' ≫ finiteForwardProductSwap (ModuleCat.{u + 1} C.Coefficient)\n          sq M.obj N.obj ≫ out",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b107f",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261026T001256-L-4181127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b107f",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261026T001256-L-4181127",
+  "kind": "interface",
+  "note": "independent cc review: b107 vs da58 head (diff -r: only the warn.sorry line removed + a report paragraph); delivered nodes vs da58 fix JSONs; reader gate: 5 delivered modules + 8 current direct importers compiled"
+ }
+}

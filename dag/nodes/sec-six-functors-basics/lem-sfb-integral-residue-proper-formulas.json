@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-integral-residue-proper-formulas",
+ "kind": "lemma",
+ "title": "Invertibility of the actual proper formulas after first residue reduction",
+ "statement": "Let l be prime, E a finite extension of Q_l, k a field of positive characteristic prime to l, and p:X→Y a proper k-morphism of separated finite-type k-schemes. For any integral complex K whose first derived residue reduction is bounded constructible of finite Tor amplitude, reduction of the canonical ambient exchange is invertible for every cartesian square over p, with arbitrary base-changed schemes. For any such K and integral complex M on Y with first reduction in Dctf, reduction of the canonical ordinary uncompleted projection map is invertible. Neither completeness nor integral constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3): operation reduction and application of the finite theorem, before derived Nakayama."
+ },
+ "stmt_deps": [
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-pe-derived-nakayama-resolution",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-module-object-projection-map",
+  "sk-def-sfb-constructible",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "The existing coefficientTopology and quotientDiscrete lemmas identify the spectral-norm and absolute-value integer topologies and identify the quotient topology with the discrete topology. Bundle the two coefficient rings, their monoid and commutativity structures, and the actual quotient map. Equality of this data transports the whole assertion, preserving the specified canonical maps. The DVR characterization puts l in the maximal ideal, so the first quotient is killed by l. Positive-quotient finiteness supplies Finite. Apply the existing private coefficient-isomorphism helper of the finite proper theorem, accessed by proof-only import all, to the identity coefficient isomorphism and the normalized finite encoding. The fully proved unbundled adapter is placed in its own comparison-tools module to compile the generic argument once. Equality transport also compares the finite theorem hypothesis presentations explicitly; the scalar wrapper is unfolded when passing to the common coefficient-data assertion.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-sfb-integral-quotient-coefficients",
+    "det-thm-sfb-proper-base-change-finite",
+    "det-pe-derived-nakayama-resolution",
+    "lem-sfb-finite-coefficient-proper-formulas"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At exponent one apply the normalized quotient-exchange comparison rectangle. Its scalar/direct-image mates are isomorphisms by the quotient direct-image theorem, and its balancing comparisons are isomorphisms. Finite proper base change applies to the Dctf residue input and makes the finite exchange invertible. Cancel the comparisons, then transport by the coefficient identifications to get invertibility of derivedReduction.map of the specified integral ambient exchange. Only X and Y need the standing hypotheses. The cancellation is first checked for arbitrary coefficient rings and a normalized rectangle, then specialized to these integral and finite rings, so no coefficient construction is expanded in the categorical argument. Only the internal rectangle component is used; the additional section-realization outputs are not needed here.",
+   "uses": [
+    "lem-sfb-integral-quotient-direct-image-comparison",
+    "lem-sfb-integral-quotient-exchange-comparison",
+    "det-thm-sfb-proper-base-change-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized scalar-tensor comparison is an isomorphism. Apply the quotient-projection comparison equation at exponent one. Its other factors are balancing and direct-image comparisons, hence invertible. Apply the finite projection formula to the two Dctf residue inputs and cancel all comparison factors, obtaining invertibility of reduction of the actual integral projection map. All identities are ambient, so noncomplete and unbounded integral inputs are allowed, as are zero objects and empty schemes. A private generic coefficient lemma performs the cancellation before specialization to the concrete first residue coefficients.",
+   "uses": [
+    "lem-sfb-integral-quotient-projection-comparison",
+    "lem-sfb-integral-quotient-direct-image-comparison",
+    "det-thm-sfb-proper-base-change-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), finite-reduction subargument; reuse of the proved topology-identification API and private finite coefficient helper, followed by equality transport of coefficient data and cancellation in the normalized quotient rectangles."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change and projection formula remain isomorphisms after reducing integral adic coefficients modulo the uniformizer",
+   "date": "2026-10-24",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, PreTilt.mk_comp_untilt_eq_coeff_zero, PreTilt.exists_smodEq_untiltAux, BDeRhamPlus, PreTilt.mk_untilt_eq_coeff_zero, AdicCompletion.transitionMap_comp_reduceModIdeal, PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod, instCommRingBDeRhamPlus",
+   "verdict": "No direct proper-coefficient reduction theorem in Mathlib. Use the project finite theorem and normalized quotient comparison rectangles."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "date": "2026-10-24",
+   "results": "12 hits: CategoryTheory.IsIso, CategoryTheory.IsIso.id, CategoryTheory.Iso.isIso_hom, CategoryTheory.Iso.isIso_inv, CategoryTheory.asIso, CategoryTheory.asIso', CategoryTheory.IsIso.epi_of_iso, CategoryTheory.IsIso.mono_of_iso",
+   "verdict": "No direct proper-coefficient reduction theorem in Mathlib. Use the project finite theorem and normalized quotient comparison rectangles."
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|projectionFormula",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No direct proper-coefficient reduction theorem in Mathlib. Use the project finite theorem and normalized quotient comparison rectangles."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperBaseChange",
+  "date": "2026-10-24",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), identification and invertibility of the first-reduced proper arrows",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueProperFormulas",
+  "file": "lean/Sheaf/Paper/IntegralResidueProperFormulas.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidueProperFormulas",
+  "statement": "theorem integralResidueProperFormulas\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] :\n    (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X)\n      (sq : ChosenCartesianSquare g' p' p g)\n      (K : DerivedCategory (AdicCompletion.Modules l E X)),\n      (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X ⊓\n        DerivedCategory.finiteTorAmplitude _)\n          ((AdicCompletion.derivedReduction l E X 0).obj K) →\n      IsIso ((AdicCompletion.derivedReduction l E Y' 0).map\n        ((condensedAmbientExchange (DerivedNakayama.integerRing l E) sq).app K))) ∧\n    (∀ (K : DerivedCategory (AdicCompletion.Modules l E X))\n      (M : DerivedCategory (AdicCompletion.Modules l E Y)),\n      (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X ⊓\n        DerivedCategory.finiteTorAmplitude _)\n          ((AdicCompletion.derivedReduction l E X 0).obj K) →\n      (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) Y ⊓\n        DerivedCategory.finiteTorAmplitude _)\n          ((AdicCompletion.derivedReduction l E Y 0).obj M) →\n      IsIso ((AdicCompletion.derivedReduction l E Y 0).map\n        (moduleObjectProjectionMap (DerivedNakayama.integerRing l E) p K M)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidueProperFormulas"
+  ]
+ },
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sfb-integral-quotient-coefficients",
+  "det-thm-sfb-proper-base-change-finite",
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-finite-coefficient-proper-formulas",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "lem-sfb-integral-quotient-exchange-comparison",
+  "lem-sfb-integral-quotient-projection-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-3c762",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261024T214903-L-727387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28a7e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T222655-L-680687",
+  "kind": "interface",
+  "note": "independent cc review: item IntegralResidueProperFormulas + new FiniteCoefficientProperFormulaTools + private-helper restatement in unclaimed FiniteProperBaseChange vs clone 3d5c9bc0 and the node plan; sandbox /tmp/g3irpf_28a7 run_set of the 3 delivered modules + 4 direct importers all rc 0; axioms: adapter and finiteProperBaseChange clean, item sorryAx traced to upstream integral_quotient_direct_image/projection_comparison"
+ }
+}

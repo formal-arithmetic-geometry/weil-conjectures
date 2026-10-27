@@ -23,73 +23,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "$J$ is contained in the Jacobson radical of $A$. Let $x\\in J$ and let $\\mathfrak m$ be a maximal ideal with $x\\notin\\mathfrak m$. Then $1=ax+m$ for some $a\\in A$, $m\\in\\mathfrak m$. Since $ax\\in J$ is nilpotent, say $(ax)^N=0$, the element $m=1-ax$ is a unit with inverse $1+ax+\\dots+(ax)^{N-1}$, contradicting $m\\in\\mathfrak m$. Hence $x$ lies in every maximal ideal. (Stacks says 'It is clear that $I$ is contained in the Jacobson radical of $A$'; Mathlib: mem_nilradical with nilradical_le_jacobson, Mathlib/RingTheory/KrullDimension/Basic.lean:140.)",
+   "text": "For x in J and y in A, x*y lies in J and is nilpotent, so x*y+1 is a unit (IsNilpotent.isUnit_add_one). Ideal.mem_jacobson_bot gives J <= jacobson(bot). Thus isLocalHom_of_le_jacobson_bot makes the quotient map reflect units.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), proof, second paragraph, first sentence; cf. algebra.tex Lemmas 0AME (lemma-contained-in-radical) and 0AMG (lemma-locally-nilpotent-unit)"
-   }
+   "elementary": true
   },
   {
-   "text": "$(A,J)$ is henselian in the sense of [def-weil-pbc-henselian-terminology]. Let $B$ be a finite $A$-algebra. The kernel of $B\\to B/JB$ is the ideal $JB$, every element of which is nilpotent by [lem-weil-pbc-locally-nilpotent-extension] applied to $A\\to B$. By [lem-weil-pbc-lift-idempotents-locally-nilpotent] applied to $(B,JB)$, every idempotent of $B/JB$ lifts to exactly one idempotent of $B$. This is the defining condition of a henselian pair. (Finiteness of $B$ is not even used.)",
+   "text": "Use the simple-root definition of HenselianRing [def-weil-pbc-henselian-terminology]. Given a monic P and x with P(x) in J and derivative a unit modulo J, the derivative is a unit in A by step 1. Choose n with P(x)^n=0. Mathlib.Dynamics.Newton, Polynomial.aeval_pow_two_pow_dvd_aeval_iterate_newtonMap, says P(x)^(2^n) divides P evaluated at the nth Newton iterate, hence that value is zero. Every iterate remains congruent to x modulo J: inductively the polynomial evaluation differs from P(x) by a multiple of the difference of the arguments (Polynomial.sub_dvd_eval_sub), so it belongs to J, and the next Newton correction is a multiple of this evaluation. This proves root lifting and hence HenselianRing A J.",
    "uses": [
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-locally-nilpotent-extension",
-    "lem-weil-pbc-lift-idempotents-locally-nilpotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemmas Tag 0544 (lemma-locally-nilpotent) and Tag 00J9 (lemma-lift-idempotents); the henselian-pair characterization more-algebra.tex Lemma Tag 09XI (3)"
-   }
-  },
-  {
-   "text": "Existence. By step 1, $J$ lies in the Jacobson radical of $A$, and by step 2 the pair $(A,J)$ is henselian; so the direction 'henselian $\\Rightarrow$ factorizations lift' of [lem-weil-pbc-henselian-factorization-criterion] applies to the given monic $f$ and the factorization $\\overline f=g_0h_0$ into monic polynomials generating the unit ideal of $(A/J)[T]$: there are monic $g,h\\in A[T]$ with $f=gh$, $\\overline g=g_0$, $\\overline h=h_0$. (Stacks deduces existence instead from the equivalence of etale algebras over $A$ and $A/J$ together with Lemma 0ALH; the route through 09XI (3) $\\Rightarrow$ (1) and the idempotent definition of the DAG is used here because the DAG defines henselian pairs by idempotent lifting.)",
-   "uses": [
-    "lem-weil-pbc-henselian-factorization-criterion",
     "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian), 'Moreover, the pair is henselian', with Definition Tag 09XE and Lemma Tag 09XI (3) => (1)"
-   }
+   "elementary": true
   },
   {
-   "text": "Coprimality lifts. Let $g,k\\in A[T]$ with $g$ monic whose reductions $\\overline g,\\overline k$ generate the unit ideal of $(A/J)[T]$; then $g,k$ generate the unit ideal of $A[T]$. Put $M=A[T]/(g,k)$. It is a quotient of $A[T]/(g)$, which is a finite $A$-module because $g$ is monic [lem-weil-pbc-monic-quotient-free]; so $M$ is a finitely generated $A$-module. Since $A[T]/JA[T]=(A/J)[T]$, we get $M/JM=A[T]/(g,k,JA[T])=(A/J)[T]/(\\overline g,\\overline k)=0$, i.e. $JM=M$. As $J$ lies in the Jacobson radical (step 1), Nakayama's lemma [lem-weil-pbc-nakayama-jacobson] gives $M=0$, i.e. $1=ug+vk$ for some $u,v\\in A[T]$. (Only $J\\subseteq\\operatorname{rad}(A)$ is used here, not local nilpotence.)",
+   "text": "Apply the proved henselianRing_iff_factorization_criterion [lem-weil-pbc-henselian-factorization-criterion] to the HenselianRing A J proof from step 2. This gives monic g,h with f=g*h and prescribed reductions.",
    "uses": [
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-nakayama-jacobson"
+    "lem-weil-pbc-henselian-factorization-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "written by an agent; Nakayama Lemma Tag 00DV (2), and the argument pattern of more-algebra.tex Lemma Tag 0ALJ/09XI (coprimality checked modulo an ideal in the radical); Stacks states no uniqueness lemma for lifted factorizations"
-   }
+   "elementary": false
   },
   {
-   "text": "Uniqueness. Let $f=gh=g'h'$ with $g,h,g',h'\\in A[T]$ monic, $\\overline g=\\overline{g'}=g_0$ and $\\overline h=\\overline{h'}=h_0$. If $A=0$ there is nothing to prove; otherwise $1\\notin J$ (a nonzero ring has $1$ not nilpotent), so $A/J\\neq0$ and reduction keeps the degree of a monic polynomial: $\\deg g=\\deg g_0=\\deg g'$. By step 4 applied to the monic $g$ and $k=h'$ (whose reductions $g_0,h_0$ generate the unit ideal) there are $u,v$ with $ug+vh'=1$. Then $g'=ugg'+vh'g'=ugg'+vgh=g(ug'+vh)$, so $g'=gq$ with $q\\in A[T]$. As $g$ is monic, $\\deg(gq)=\\deg g+\\deg q$ and the leading coefficient of $gq$ is that of $q$; comparing with $g'$ monic of degree $\\deg g$ gives $\\deg q=0$ and $q=1$, i.e. $g'=g$. Then $g(h-h')=0$, and a monic polynomial is a nonzerodivisor in $A[T]$ (look at the leading coefficient of $g\\cdot(h-h')$), so $h'=h$. (Mathlib pieces: IsCoprime.dvd_of_dvd_mul_left, Polynomial.Monic.natDegree_mul, Polynomial.eq_one_of_monic_natDegree_zero, Polynomial.Monic.mul_right_eq_zero_iff.)",
+   "text": "Coprimality lifts directly for nil ideals, without monicity or Nakayama. Given g,h-prime reducing to g0,h0, lift their Bezout coefficients to a,b in A[X] by Polynomial.map_surjective. The error a*g+b*h-prime-1 reduces to zero, so every coefficient lies in J and is nilpotent. Polynomial.isNilpotent_iff makes the error polynomial nilpotent; IsNilpotent.isUnit_add_one makes a*g+b*h-prime a unit. Multiply by its inverse and distribute to get IsCoprime g h-prime.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "written by an agent; Stacks states 0ALI without uniqueness and has no uniqueness lemma for lifted factorizations (searched more-algebra.tex Sections 'Lifting' and 'Henselian pairs' and algebra.tex)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For another monic lift f=g-prime*h-prime, step 4 makes g,h-prime coprime. IsCoprime.dvd_of_dvd_mul_right applied to g | g-prime*h-prime gives g | g-prime. In a subsingleton ring the pairs are equal immediately. Otherwise J is proper because 1 is not nilpotent, so A/J is nontrivial. Monic.natDegree_map and the equal reductions give equal degrees; Polynomial.eq_of_monic_of_dvd_of_natDegree_le gives g-prime=g. Finally Monic.isRegular cancels g to give h-prime=h, and Prod.ext gives equality of the pairs.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-henselian-factorization-criterion",
-  "lem-weil-pbc-lift-idempotents-locally-nilpotent",
-  "lem-weil-pbc-locally-nilpotent-extension",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-nakayama-jacobson"
+  "lem-weil-pbc-henselian-factorization-criterion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0ALI (lemma-locally-nilpotent-henselian) for 'the pair is henselian', with Definition 09XE and Lemma 09XI (3) => (1); existence proved via the DAG's idempotent definition instead of Stacks' etale-equivalence argument, and the uniqueness (not in Stacks) written by the agent"
+  "document": "literature/stacks-project/more-algebra.tex; Mathlib/Dynamics/Newton.lean; Mathlib/RingTheory/Polynomial/Nilpotent.lean",
+  "place": "Tag 0ALI and Tag 09XI for factorization existence. A3, 2026-10-23: finite Newton iteration proves the simple-root henselian condition; lifting Bezout coefficients and using coefficientwise nilpotence replaces the Nakayama uniqueness argument."
  },
  "mathlib_searches": [
   {
@@ -164,7 +134,18 @@
   "item": "lem-weil-pbc-complete-pair-henselian",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -196,5 +177,15 @@
   "group": "G1",
   "result": "pass",
   "note": "A comm ring Type u; J ideal with hJ elementwise IsNilpotent (not Ideal.IsNilpotent); f Monic; g0 h0 in (A/J)[X] Monic, IsCoprime (Bezout = unit ideal); f.map mk = g0*h0; ExistsUnique ordered pair monic, f = g*h, reductions g0,h0; A=0 and J=0 edge cases; node proof 5 steps in docstring"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261023T102354-L-2884909",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-continuous-scalar-finite-presentation",
+ "kind": "statement",
+ "title": "Finite scalar presentations over continuous condensed coefficients",
+ "statement": "Let A be a commutative topological ring and let Lambda be its sheaf of continuous functions on profinite sets [def-weil-pbc-condensed-e-module-category]. Let K be the actual ordinary scalar-module encoding, followed by constant sheafification and extension along the constant-function map [def-sfb-finite-constant-model-data]. An internal Lambda-module P has a finite presentation by regular Lambda-modules if and only if there is a finitely presented ordinary A-module N [def-sc-finitely-presented-module] and an isomorphism P ≅ K(N).",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-sfb-finite-constant-model-data",
+  "def-sc-finitely-presented-module"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), finite scalar presentations and local models"
+ },
+ "proof": [
+  {
+   "text": "Continuous functions on the terminal profinite point are exactly A. Construct the additive isomorphism by constant functions with inverse evaluation at the unique point. The constant-sheaf adjunction and its monoidal unit identify scalar sections with maps from the condensed tensor unit to Lambda. The composite adjunction formula identifies its counit with the existing scalarToContinuous map.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The actual composite scalarModules, constant sheaf mapMod, and extendScalars preserves finite colimits and sends the regular scalar module to the regular condensed module. Its finite biproduct comparisons send each scalar regular endomorphism to multiplication by the scalar section. The regular-module universal property and step 1 show surjectivity on maps between finite free modules. The scalarModules functor is fully faithful, by evaluation of its action on pure tensors.",
+   "uses": [
+    "def-sfb-finite-constant-model-data",
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given a finite condensed presentation, lift its matrix using step 2 and take its ordinary cokernel. This cokernel is finitely presented: a finite free module modulo the finitely generated range of a finite free source. Functorial preservation of cokernels and the finite free comparisons give the asserted isomorphism. Conversely, an ordinary finitely presented module admits a right exact sequence of finite free modules; transport its cokernel through the same functor. Zero ranks and the zero ring are included, with no flatness used.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-sfb-finite-constant-model-data",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), finite scalar presentations and local models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented|scalarToContinuous",
+   "results": "6 hits: Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for internal finite presentations over the continuous coefficient ring; use finite free presentations and scalar sections at the point."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, ModuleCat",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match for internal finite presentations over the continuous coefficient ring; use finite free presentations and scalar sections at the point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented module over the condensed ring of continuous functions is extension of a finitely presented ordinary scalar module",
+   "results": "8 hits: Condensed.finFree, CondensedMod.IsSolid, CondensedMod.LocallyConstant.functor, LightCondMod, CondensedMod, LightCondMod.LocallyConstant.functor, Condensed.profiniteSolid, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-23",
+   "verdict": "No match for internal finite presentations over the continuous coefficient ring; use finite free presentations and scalar sections at the point."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleScalarLocalModelRepresentatives",
+  "date": "2026-10-23",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proetale-scalar-local-model-representatives",
+   "place": "Finite scalar presentation comparison in proof step 2",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousScalarFinitePresentation",
+  "file": "lean/Sheaf/Paper/ContinuousScalarFinitePresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousScalarFinitePresentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousScalarFunctor",
+   "AlgebraicGeometry.ProEtale.continuousScalarFinitePresentation"
+  ],
+  "statement": "theorem continuousScalarFinitePresentation (A : Type u) [CommRing A]\n    [TopologicalSpace A] [IsTopologicalRing A]\n    (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n      (Profinite.continuousCoefficientRingObj A)) :\n    Mod.IsFinitelyPresented (Profinite.continuousCoefficientRingObj A) P ↔\n      ∃ N : ModuleCat.{u + 1} A, Module.FinitePresentation A N ∧\n        Nonempty (P ≅ (continuousScalarFunctor A).obj N)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fb31c",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261024T020654-L-2638760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fb31c",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261024T020654-L-2638760",
+  "kind": "interface",
+  "note": "independent cc review: Item proof (fully closed, axioms propext/choice/Quot.sound) and new lemma continuousScalarFinitePresentation vs node statements; unit files sk-lem-int-integral-heart (realized empty) and sk-prop-sfb-cartesian-coefficients (lean = isIso_condensedPullbackHom, used by the proof); proof_deps vs declarations used"
+ }
+}

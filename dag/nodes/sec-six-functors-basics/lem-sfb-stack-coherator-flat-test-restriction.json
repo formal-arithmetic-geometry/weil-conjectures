@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-stack-coherator-flat-test-restriction",
+ "kind": "statement",
+ "title": "The quasi-coherator counit on a flat scheme test",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $\\mathcal Z/S$ an algebraic stack [def-sfb-algebraic-moduli-stack], with its ringed big fppf site [def-sfb-stack-quasi-coherent-algebra] and module sheaves [def-weil-sheaf-of-modules-category]. Let $H$ be locally quasi-coherent and flat-compatible in the explicit sense of [lem-sfb-stack-lqc-coherator], and let $q_H:j_{\\mathcal Z}Q_{\\mathcal Z}H\\to H$ be the counit of that node. For a scheme test $z:T\\to\\mathcal Z$ which is flat on scheme charts [def-weil-flat-morphism], restriction of $q_H$ to the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site] is an isomorphism of $\\mathcal O_T$-module sheaves. In particular its value $q_H(z):(Q_{\\mathcal Z}H)(z)\\to H(z)$ is an isomorphism. No quasi-compactness, quasi-separatedness, finite-presentation or Noetherian hypothesis on $\\mathcal Z$, $z$, or $H$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 0GQK, lemma-flat-object-and-Q, statement and proof (the notation is the locally quasi-coherent flat-base-change category of lemma-adjoint)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-stack-lqc-coherator",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-etale-site",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $a:U\\to\\mathcal Z$ using [def-sfb-algebraic-moduli-stack]. Its relation $R=U\\times_{\\mathcal Z}U$ and triple relation are algebraic spaces by [def-sfb-stable-pointed-moduli-groupoids]. Their projections are smooth, hence flat, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Put $N=H_U$, a quasi-coherent etale module by [lem-sfb-stack-lqc-coherator]. On each etale scheme chart $V\\to R$, the two maps $v_i:V\\to U$ are flat. The two objects $av_1,av_2$ are isomorphic by the defining $2$-arrow of $R$. Their restrictions identify the targets of the flat-comparison isomorphisms $c_i:v_i^*N\\xrightarrow{\\sim}H_{av_i}$. Define $\\delta_V=c_2^{-1}c_1:v_1^*N\\to v_2^*N$. These maps and their inverses commute with etale chart restrictions: on a local tensor $b\\otimes m$ each comparison is $b$ times the restriction of $m$, so composing comparisons is the comparison for the composite arrow. The etale scheme charts of $R$ form a jointly surjective etale family, hence an fppf covering by [lem-sfb-space-fppf-covering-calculus](1), so full faithfulness of descent in [lem-sfb-space-fppf-qcoh-descent] glues them to an isomorphism $\\delta:p_1^*N\\simeq p_2^*N$ on $R$ (pullbacks as in [def-trf-space-etale-module-functors]). On a chart of the triple relation, $\\delta_{23}\\delta_{12}=c_3^{-1}c_2c_2^{-1}c_1=c_3^{-1}c_1=\\delta_{13}$ under the tensor composition identifications; the identity comparison gives $e^*\\delta=1$. The same faithfulness verifies these equalities globally.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-space-fppf-qcoh-descent",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0778, lemma-adjoint, construction of the groupoid datum; Tag 0779, lemma-adjoint-kernel-parasitic, atlas choice."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-atlas-module-descent] to $(N,\\delta)$. Obtain $M\\in\\operatorname{QCoh}(\\mathcal Z)$ and an isomorphism $\\eta:M_U\\xrightarrow{\\sim}N$ respecting the descent datum. The condition on $\\eta$ is exactly $c_1^H p_1^*\\eta=c_2^H p_2^*\\eta\\delta_M$. Hence [lem-sfb-smooth-atlas-quasicoherent-source-maps] extends $\\eta$ uniquely to a module map $\\phi:M\\to H$. For every $A\\in\\operatorname{QCoh}(\\mathcal Z)$, these same two cited statements identify maps $A\\to M$ with compatible maps $A_U\\to N$, and identify the latter with maps $A\\to H$. Under these identifications the bijection is $f\\mapsto\\phi f$, because its restriction is $\\eta f_U$.",
+   "uses": [
+    "lem-sfb-smooth-atlas-module-descent",
+    "lem-sfb-smooth-atlas-quasicoherent-source-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0778, lemma-adjoint, the two displayed Hom identifications; Tag 076S, lemma-map-from-quasi-coherent."
+   }
+  },
+  {
+   "text": "The actual counit $q_H:QH\\to H$ has the same universal property by [lem-sfb-stack-lqc-coherator]. Obtain unique maps $b:M\\to QH$ and $c:QH\\to M$ with $q_H b=\\phi$ and $\\phi c=q_H$. Injectivity of composition with $\\phi$ on maps $M\\to M$ gives $cb=1_M$, since $\\phi cb=q_H b=\\phi$. Injectivity of composition with $q_H$ on maps $QH\\to QH$ gives $bc=1_{QH}$, since $q_Hbc=\\phi c=q_H$. Therefore $b$ is invertible. Restricting $q_Hb=\\phi$ to $U_{\\mathrm{et}}$ gives $(q_H)_U b_U=\\eta$. Thus $(q_H)_U=\\eta b_U^{-1}$ is an isomorphism. This is a uniqueness argument for universal arrows, with both inverse equations written out; it uses the bijection proved in step 2, not a property of an unspecified construction of $Q$.",
+   "uses": [
+    "lem-sfb-stack-lqc-coherator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0778, lemma-adjoint, adjunction identification; Tag 0779, proof of (2), counit on the chosen atlas."
+   }
+  },
+  {
+   "text": "For the given flat test $z:T\\to\\mathcal Z$, let $W=T\\times_{\\mathcal Z}U$ with projections $r:W\\to T$ and $s:W\\to U$. This is an algebraic space by [def-sfb-algebraic-moduli-stack]. Choose a surjective etale scheme chart $v:V\\to W$ using [def-trf-algebraic-space]. Set $g=rv:V\\to T$ and $h=sv:V\\to U$. The projection $r$ is smooth surjective as a base change of the atlas, whereas $s$ is flat as a scheme base change of the assumed chartwise-flat map $z$. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $g$ is smooth surjective and $h$ is flat. The defining $2$-arrow of $W$ identifies the objects $zg$ and $ah$. No assertion that $W$ is a scheme, or that any atlas or projection is quasi-compact, is needed.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0779, lemma-adjoint-kernel-parasitic, square W=V times_X U; Tag 0GQK, lemma-flat-object-and-Q."
+   }
+  },
+  {
+   "text": "For $E=j_{\\mathcal Z}QH$ and $E=H$, let $c_g^E:g^*E_T\\to E_{zg}$ and $c_h^E:h^*E_U\\to E_{ah}$ be the tensor comparisons. For $H$ they are isomorphisms by flat compatibility in [lem-sfb-stack-lqc-coherator], since $g,h$ are flat. For $j_{\\mathcal Z}QH$ they are isomorphisms by [lem-sfb-stack-quasi-coherent-scheme-restriction]. Naturality follows on local tensors $b\\otimes m$ from the identity $q(b\\,m|)=b\\,q(m)|$. Consequently, after the identification $zg\\simeq ah$, $$c_g^H\\circ g^*(q_H)_T\\circ(c_g^{jQH})^{-1}=q_{H,zg}=q_{H,ah}=c_h^H\\circ h^*(q_H)_U\\circ(c_h^{jQH})^{-1}.$$ The right side is an isomorphism by step 3, so $g^*(q_H)_T$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0779, proof of (1) and (2): the two flat-comparison identifications; Tag 0GQK."
+   }
+  },
+  {
+   "text": "Both endpoints of $(q_H)_T$ are quasi-coherent etale modules: use [lem-sfb-stack-quasi-coherent-scheme-restriction] for $QH$ and the locally quasi-coherent hypothesis of [lem-sfb-stack-lqc-coherator] for $H$. The singleton cover $g:V\\to T$ is fppf by [lem-sfb-space-fppf-covering-calculus], since it is smooth surjective and hence flat locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Apply full faithfulness in [lem-sfb-space-fppf-qcoh-descent] to this cover, viewing schemes as algebraic spaces. The inverse of $g^*(q_H)_T$ respects the two descent identifications: the compatibility equation for $g^*(q_H)_T$ can be multiplied on both sides by its inverse. It therefore descends to an inverse of $(q_H)_T$, and faithfulness verifies the two inverse equations. Thus the original restriction of the counit to $T_{\\mathrm{et}}$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-fppf-qcoh-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0779, proof of (1): faithful pullback along the smooth surjection; Tag 0GQK, conclusion."
+   }
+  },
+  {
+   "text": "Evaluate this isomorphism at the final object $1_T:T\\to T$ of the small etale site [def-weil-pbc-etale-site]. By the definition of restriction along the test $z$, this evaluation is exactly $q_H(z):(QH)(z)\\to H(z)$. Evaluating its inverse supplies the inverse on sections. All choices used only an arbitrary smooth atlas and etale charts; no finiteness or quasi-separatedness assumption has entered.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQK, lemma-flat-object-and-Q, evaluation at the test object."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-lqc-coherator",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-smooth-atlas-module-descent",
+  "lem-sfb-smooth-atlas-quasicoherent-source-maps",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 0GQK (lemma-flat-object-and-Q), 0779 (lemma-adjoint-kernel-parasitic), proof of (1) and (2), and 0778 (lemma-adjoint). The atlas construction and Hom identification are expanded to identify the specified counit without citing an equivalent flat-test assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quasi coherator counit for locally quasi coherent flat compatible modules on an algebraic stack is an isomorphism on every flat scheme test",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.isIso_of_surjective_of_mono; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.Flat.of_stalkMap; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match: these are scheme, condensed, or general adjunction facts, not the quasi-coherator counit on stack flat tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent approximation of a sheaf on an algebraic stack agrees with the sheaf after restriction to flat objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the objects indexing the local gen\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern local presentation data, sheafification, equivalences of sites, or restriction along open scheme immersions; none constructs or compares the quasi-coherator on locally quasi-coherent flat-compatible stack modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"counit\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern local presentation data, sheafification, equivalences of sites, or restriction along open scheme immersions; none constructs or compares the quasi-coherator on locally quasi-coherent flat-compatible stack modules."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|parasitic|flat.object.and.Q|LQCoh",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern local presentation data, sheafification, equivalences of sites, or restriction along open scheme immersions; none constructs or compares the quasi-coherator on locally quasi-coherent flat-compatible stack modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherator counit is an isomorphism on flat objects of an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instIsIsoFunctorOppositeValAppSheafCounitSheafificationAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"(P : Sheaf J D) : IsIso ((sheafificationAdjunction J D).counit.app P).val\", \"doc\": \"For any sheaf $ P $ on a category $ \\\\mathcal{C} $ with values in a category $ \\\\mathcal{A} $, the counit component of the sheafification adjunction at $ P $ is an isomorphism. This means that applying \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": IsIso (restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.counitIso\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": inverse J K e A ⋙ functor J K e A ≅ 𝟭 (Sheaf _ A)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where $e^{-1}$ is a dense subsite, this natural isomor\"}\n  {\"name\": \"CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso\", \"module\": \"Mathlib.CategoryTheory.Endofunctor.Algebra\", \"type\": \"(adj : F ⊣ G) : Coalgebra.toAlgebraOf adj ⋙ Algebra.toCoalgebraOf adj ≅ 𝟭 (Coalgebra G)\", \"doc\": \"Given an adjunction between endofunctors $ F $ and $ G $ on a category $ \\\\mathcal{C} $, the counit of the induced adjunction between the categories of $ F $-algebras and $ G $-coalgebras is a natural \"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": IsIso.{u + 1, u + 1} locallyRingedSpaceAdjunction.counit\", \"doc\": \"The counit of the Γ-Spec adjunction, which is a natural transformation from the composition of the Spec functor applied to the global sections functor to the identity functor on the category of locall\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Precoherent C] (A : Type u_3)\\n  [inst_3 : CategoryTheory.Category.{v_3, u_3} A] (e : C ≌ D)\\n  (X : CategoryTheory.Sheaf (CategoryTheory.coherentTop\", \"doc\": \"For precoherent categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with coherent Grothendieck topologies $J_{\\\\mathcal{C}}$ and $J_{\\\\mathcal{D}}$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, the co\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[L.Faithful] [L.Full] {Y : C} : IsIso (h.counit.app (L.obj Y))\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if $ F $ is fully faithful, then the counit component $ \\\\epsilon_{F(Y)} : G(F(Y)) \\\\to Y \"}\n  {\"name\": \"CategoryTheory.Coreflective.instIsIsoAppCounitCoreflectorAdjunctionA\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"[Coreflective R] (X : (coreflectorAdjunction R).toComonad.Coalgebra) : IsIso ((coreflectorAdjunction R).counit.app X.A)\", \"doc\": \"For any coreflective subcategory $\\\\mathcal{R}$ and any object $X$ in the coalgebra category of the coreflector adjunction associated with $\\\\mathcal{R}$, the counit of the adjunction evaluated at $X$ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern local presentation data, sheafification, equivalences of sites, or restriction along open scheme immersions; none constructs or compares the quasi-coherator on locally quasi-coherent flat-compatible stack modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi coherator counit for a locally quasi coherent flat compatible module on an algebraic stack becomes an isomorphism on any flat scheme test",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.isIso_of_surjective_of_mono; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat.iff_flat_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme restriction adjunctions, sheafification counits and local-presentation structures do not state the stack quasi-coherator comparison on flat tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent approximation of a sheaf on a stack agrees with its small etale restriction at flat objects",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.localGeneratorsData_X; SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData.X; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData.mk.inj; SheafOfModules.isQuasicoherent; SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme restriction adjunctions, sheafification counits and local-presentation structures do not state the stack quasi-coherator comparison on flat tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"counit\"",
+   "results": "4 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction; PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme restriction adjunctions, sheafification counits and local-presentation structures do not state the stack quasi-coherator comparison on flat tests."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|parasitic|LQCoh",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme restriction adjunctions, sheafification counits and local-presentation structures do not state the stack quasi-coherator comparison on flat tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherator counit isomorphism on flat scheme objects of an algebraic stack",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; CategoryTheory.Equivalence.sheafCongr.counitIso; CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; CategoryTheory.OverPresheafAux.counit; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit; CategoryTheory.OverPresheafAux.counitAuxAux",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme restriction adjunctions, sheafification counits and local-presentation structures do not state the stack quasi-coherator comparison on flat tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-flat-module-pushforward-comparison",
+  "date": "2026-10-24",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: flat-test module comparison and the tensor pairing underlying algebra multiplication; flat-test comparison: restriction of the quasi-coherator counit to a flat object, before applying it to the naive direct image.",
+   "via": [
+    "lem-sfb-stack-flat-module-pushforward-comparison",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-coherator-flat-test-restriction",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and all its hypotheses. Expanded the atlas construction and identified the specified adjunction counit by its universal property. Propagated its atlas isomorphism to a flat test through an etale scheme chart of the algebraic-space fibre product and fully faithful fppf descent. Added two statement-only prerequisites (smooth-atlas module descent and maps from a quasi-coherent source to an arbitrary module), neither mentioning Q or the flat-test counit. No new Mathlib leaves.",
+  "blueprint": "The latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) supplies the direct-image-preservation route. This item is a generic quasi-coherent moduli/adequate-affineness prerequisite on the existing deeper alteration chain recorded in blueprint.from.place. The automatic ancestor command returns None because the creation chain is broken upstream; inherited from.node null and via are retained, with same_as=[] after whole-blueprint searches. No unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-6792f8ea8",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6792f8ea8 (reviewer sub-agent of L); spot-checked: Read all of it: the item, its 7 steps, both new nodes, every cited statement, and the sources stacks-cohomology 0778/0779/0GQK and stacks-sheaves 06WT/076S. The split follows the source route of 0779/0GQK. Step 1 builds the atlas datum, writing out the cocycle check Stacks omits. Step 2 is 06WT descent plus the 076S universal arrow phi. Step 3 identifies phi with the node's actual counit q_H by a Yoneda argument; this avoids using the construction of Q, which would be a C3 fault. Steps 4-6 are the W=T x_Z U chart argument: h flat comes straight from the hypothesis that z is flat on scheme charts, and g is smooth surjective, so a singleton fppf cover; invertibility descends by full faithfulness. Step 7 is evaluation. New node 06WT-on-a-04T5-presentation is checked against the source (orientation and cocycle) and tested on X=U, BG over a field, and empty X. New node 076S is checked: s,t flat lfp hold because the atlas is smooth, the comparison-diagram equation was verified, and H stays arbitrary. Neither new node restates the item; neither mentions Q, a counit or a flat test. No duplicates: the groupoid-module-descent node is for scheme groupoids, the qcoh-presentation-tensor node is for DM stacks, the space-qcoh-groupoid node is for spaces, smooth-atlas-algebra-descent's statement covers algebras only, and smooth-cover-section-descent covers G=O only. Batch-5: every flagged citation is a general definition or a generic QCoh/fppf calculus node, not a step of the trace formula or Poincare duality; accepted. No cycle; no tool_uses; no SGA. Repairs: (1) both new nodes cite [def-pc-module-pullback, def-trf-space-etale-module-functors] in the statement but did not have them in stmt_deps; added. (2) B2: the module-descent node did not specify the datum delta_F=(c_2^F)^{-1}c_1^F put on a restriction, which step 2 uses; sentence added. (3) Step 1 glued along the etale charts of R without citing that they form an fppf cover; added lem-sfb-space-fppf-covering-calculus(1) to the text and uses.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackCoheratorFlatTestRestriction",
+  "declaration": "CategoryTheory.moduliLqcCoherator_counit_flatTest_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackCoheratorFlatTestRestriction.lean",
+  "statement": "theorem moduliLqcCoherator_counit_flatTest_isIso {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (h : SheafOfModules.isQuasicoherent (moduliModuleRings F hF.1.1) ≤ locallyQuasicoherentFlatCompatible F hF.1.1) (Q : (locallyQuasicoherentFlatCompatible F hF.1.1).FullSubcategory ⥤ (SheafOfModules.isQuasicoherent (moduliModuleRings F hF.1.1)).FullSubcategory) (adj : ObjectProperty.ιOfLE h ⊣ Q) (H : (locallyQuasicoherentFlatCompatible F hF.1.1).FullSubcategory) (T : Over S) (z : BasedFunctor (discreteModuli (yoneda.obj T)) F) (hz : ModuliSpaceTest @Flat z) : IsIso ((moduliEtaleRestriction F hF.1.1 (z.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T))))).map (adj.counit.app H).hom) ∧ IsIso ((SheafOfModules.evaluation (moduliModuleRings F hF.1.1) (op (z.obj (CostructuredArrow.mk (𝟙 (yoneda.obj T)))))).map (adj.counit.app H).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual counit of any right adjunction supplied by exists_moduliLqcCoherator, the existing small-etale restriction, and evaluation at the object of the scheme test. The additional landed statement dependency supplies ModuliSpaceTest, used for chartwise flatness, without assuming a DM stack or properness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94c2411e9",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0GQK clause by clause. S scheme, F with IsAlgebraicModuliStack, moduliModuleRings, H in locallyQuasicoherentFlatCompatible; h/Q/adj are exactly the witnesses of exists_moduliLqcCoherator, and the map is the actual counit (allowing any adjunction is the same statement by uniqueness of right adjoints). z is a scheme test BasedFunctor with flatness ModuliSpaceTest @Flat, the landed chartwise predicate, which adds no extra assumption. Conclusion: IsIso of the moduliEtaleRestriction image and IsIso of the evaluation at op x. No qc/qs/fp/Noetherian/DM hypotheses; universes independent. Node differs from live only in lean plus the added landed stmt_dep def-sfb-dm-stack-morphism-properties (owner of ModuliSpaceTest, no cycle). Statement verbatim; proof only sorry; no defs, no axiom; docstrings give source, blueprint and all 7 proof steps; imports exist on side-live. No compile (no file changed). Advisory: the second reading was written by the same worker."
+ }
+}

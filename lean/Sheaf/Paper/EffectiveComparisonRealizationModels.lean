@@ -9,20 +9,9 @@ public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.NormalizedDVRTower
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientExtensionReductionModel
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
-import Sheaf.Paper.SystemNormalizedTensorClosure
-import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
-import Sheaf.Paper.IntegralScalarExtensionWellDefined
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.EffectiveQuotientModelDescent
+import Sheaf.Paper.EffectiveCompletionPresentationModels
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-!
 # Effective normalized integral realization models
@@ -54,7 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The actual completion unit is the strict quotient augmentation, on every
-simultaneous quotient presentation of every flat-term K-flat representative.
+whole-system coherent quotient presentation of every flat-term K-flat representative.
 The unshifted projections are quotient-unit sections; every shifted coordinate
 is zero. The final equation is an equality of entire derived morphisms.
 Source: Stacks 0941; blueprint common-stage transport, completion-unit normalization
@@ -70,6 +59,7 @@ def IsEffectiveComparisonCompletionNormalized (X : Scheme.{t})
         (unrestrictedIntegralFiniteComplex l E X n).obj P.obj),
     CoefficientReductionPresentation l E X S.toCoefficientDerivedSystemReduction
       P.obj P.property.1 C e κ →
+    IsIntegralComparisonPresentationCoherent l E X S P.obj C e κ →
     ∃ v : P.obj ⟶ integralOperationsRoos
         (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj C).asFunctor,
       (∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ) (x : (P.obj.X i).val.obj U),
@@ -156,6 +146,26 @@ structure EffectiveComparisonRealizationModels (l : ℕ) [Fact l.Prime] where
     [∀ x : X, Invertible (l : X.residueField x)]
     (K : sfIntegralConstructibleCategory l E X), IsIso ((system E X).adjunction.unit.app K.obj)
 
+private theorem complete_unrestricted
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
+    (K : DerivedCategory (scalarReductionSource l E X))
+    (hK : IsSfDerivedComplete l E X K) : IsDerivedCompleteUnrestricted l E X K := by
+  obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+  have : Fact p.Prime := ⟨hprime⟩
+  let D : FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hprime
+      exponent_pos := by decide
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl : l ≠ D.p := by change l ≠ p; omega
+  exact ⟨D, hl, (sfDerivedComplete_iff_legacy l E X D hl K).mp hK⟩
+
 /-- Effective normalized models exist simultaneously.
 Source: Stacks 099N(2),(5), 0941; blueprint common-stage transport
 (blueprint: lem-trf-effective-comparison-realization-models).
@@ -178,7 +188,7 @@ fields both associations multiply all three scalars; identity coefficients multi
 by the unit. No quotient ring-map flatness is used.
 (5) The strict quotient augmentation is a chain map since its quotient tuple is
 killed by 1-shift. Its shifted coordinate is zero. The actual unit identity is the
-completion-unit strict-quotient-model lemma, and holds on every presentation.
+completion-unit strict-quotient-model lemma, and holds on every coherent presentation.
 (6) Reduction is normalized; exact whole-system inverse image and the scalar
 reduction-model comparison preserve normalization. purNormalizedReconstruction
 makes the actual counits invertible and their realizations complete. Its unit
@@ -193,6 +203,52 @@ the counit is the natural transformation of the whole-system adjunction.
 Thus all formulas are resolution-independent and retain all quotient transitions. -/
 theorem effectiveComparisonRealizationModels (l : ℕ) [Fact l.Prime] :
     Nonempty (EffectiveComparisonRealizationModels.{u} l) := by
-  sorry
+  classical
+  have models (F : Type u) [Field F] [Algebra ℚ_[l] F]
+      [FiniteDimensional ℚ_[l] F] (W : Scheme.{u})
+      [∀ x : W, Invertible (l : W.residueField x)] :=
+    effectiveCompletionPresentationModels l F W
+  choose S ρ hn using models
+  have primitives (F : Type u) [Field F] [Algebra ℚ_[l] F]
+      [FiniteDimensional ℚ_[l] F] (G : Type u) [Field G] [Algebra ℚ_[l] G]
+      [FiniteDimensional ℚ_[l] G] (ι : F →ₐ[ℚ_[l]] G) {X Y : Scheme.{u}}
+      [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :=
+    effectiveQuotientModelDescent l F G ι f
+      (fun x ↦ isUnit_of_invertible (l : X.residueField x))
+      (fun y ↦ isUnit_of_invertible (l : Y.residueField y))
+      (S F Y) (S F X) (S G Y) (ρ F X) (ρ G Y)
+  let pull (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
+      {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
+      [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :=
+    (primitives F F (AlgHom.id ℚ_[l] F) f).2.1.some
+  let scalar (F : Type u) [Field F] [Algebra ℚ_[l] F]
+      [FiniteDimensional ℚ_[l] F] (G : Type u) [Field G] [Algebra ℚ_[l] G]
+      [FiniteDimensional ℚ_[l] G] (ι : F →ₐ[ℚ_[l]] G) (W : Scheme.{u})
+      [∀ x : W, Invertible (l : W.residueField x)] :=
+    (primitives F G ι (𝟙 W)).2.2.some
+  refine ⟨{
+    system := S
+    roos := ρ
+    pullback := pull
+    scalar := scalar
+    completion_normalization := hn
+    pullback_effective := ?_
+    scalar_effective := ?_
+    complete := ?_ }⟩
+  · intro F _ _ _ X Y _ _ f K
+    have h := (primitives F F (AlgHom.id ℚ_[l] F) f).1 K.obj
+    have hc := effectiveQuotientModelConstructible l F F (AlgHom.id ℚ_[l] F) f
+      (S F Y) (ρ F X) (ρ F Y) (pull F f)
+      (scalar F F (AlgHom.id ℚ_[l] F) Y) K.obj K.property
+    exact ⟨h.2.1, hc.2.2.1, h.2.2.2.2.2.1⟩
+  · intro F _ _ _ G _ _ _ ι W _ K
+    have h := (primitives F G ι (𝟙 W)).1 K.obj
+    have hc := effectiveQuotientModelConstructible l F G ι (𝟙 W)
+      (S F W) (ρ F W) (ρ G W) (pull F (𝟙 W)) (scalar F G ι W) K.obj K.property
+    exact ⟨h.2.2.1, hc.2.2.2, h.2.2.2.2.2.2.1⟩
+  · intro F _ _ _ W _ K
+    have h := (primitives F F (AlgHom.id ℚ_[l] F) (𝟙 W)).1 K.obj
+    exact h.2.2.2.2.2.2.2 (complete_unrestricted l F W K.obj K.property.1)
 
 end WeilConjectures

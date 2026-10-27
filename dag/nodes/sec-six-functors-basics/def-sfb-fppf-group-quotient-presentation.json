@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-fppf-group-quotient-presentation",
+ "kind": "definition",
+ "title": "Presentation of the fppf quotient of a group scheme by a specified kernel",
+ "status": "split",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and let $N,G,Q$ be group objects in schemes over $B$ (the relative form of [def-sc-group-scheme]), with group homomorphisms $i:N\\to G$ and $q:G\\to Q$. Use fibre products as in [def-pc-fibre-product] and the big fppf site of $B$ [def-pc-fppf-site]. A presentation of $Q$ as the fppf group quotient of $G$ by the specified kernel $i$ means the following conjunction. The square with top map $i$, left map $N\\to B$, right map $q$, and bottom map the unit $e_Q:B\\to Q$ is cartesian. The represented map $h_q:h_G\\to h_Q$ is locally surjective for the fppf topology, and $h_Q$ is an fppf sheaf. There is an isomorphism $G\\times_BN\\simeq G\\times_QG$ whose two projections are $(g,n)\\mapsto g$ and $(g,n)\\mapsto g\\,i(n)$. Let $C$ be the coequalizer, in presheaves of sets on schemes over $B$, of the maps $h_{G\\times_BN}\\rightrightarrows h_G$ induced by those same projection and multiplication maps; thus $C$ is the pointwise right-coset presheaf. There exists $\\eta_q:C\\to h_Q$ whose composite with the coequalizer projection is $h_q$, such that for every fppf sheaf of sets $Z$, precomposition with $\\eta_q$ is a bijection $\\operatorname{Hom}(h_Q,Z)\\to\\operatorname{Hom}(C,Z)$. This last condition is the sheafification universal property [def-weil-pbc-sheafification]. All test schemes and values use the common size universe of the group schemes. No affineness, finite-type, smoothness or field-base condition is part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 5.24--5.25 and Corollary 5.27, printed pp.104--105; Section 5(j), especially Proposition 5.68 and Example 5.71, printed pp.116--117. Relative presentation of these kernel, torsor and sheafification conditions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A group scheme quotient presentation is the fppf sheafification of the right coset presheaf with specified kernel and quotient map",
+   "results": "{\"t\": \"2026-10-24T01:28:26Z\", \"tool\": \"leansearch\", \"query\": \"A group scheme quotient presentation is the fppf sheafification of the right coset presheaf with specified kernel and quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"QuotientGroup.mk'_apply\", \"QuotientGroup.rightRel\", \"AddGroupExtension.quotientKerRightHomEquivRight\", \"SheafOfModules.Presentation\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.Presentation.isColimit\", \"GroupExtension.quotientKerRightHomEquivRight\"], \"digest\": \"fa49665aafe8af45\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition AlgebraicGeometry.IsFppfGroupQuotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation of the fppf quotient of a group scheme by a kernel with canonical torsor isomorphism and sheafification universal property",
+   "results": "{\"t\": \"2026-10-24T01:28:26Z\", \"tool\": \"leanfinder\", \"query\": \"Presentation of the fppf quotient of a group scheme by a kernel with canonical torsor isomorphism and sheafification universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"SheafOfModules.Presentation.relations\", \"CategoryTheory.PresheafOfGroups.H1\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"c86be9e9bda7b430\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition AlgebraicGeometry.IsFppfGroupQuotient."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFppfGroupQuotient|fppf.*quotient|coset.*presheaf",
+   "results": "{\"t\": \"2026-10-24T01:28:26Z\", \"tool\": \"grep\", \"query\": \"IsFppfGroupQuotient|fppf.*quotient|coset.*presheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition AlgebraicGeometry.IsFppfGroupQuotient."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsFppfGroupQuotient|fppf.*quotient|coset.*presheaf lean/WeilConjectures/AlgebraicGeometry lean/Sheaf/AlgebraicGeometry; rg -l IsFppfGroupQuotient dag/nodes",
+   "results": "No occurrence in WeilConjectures. Sheaf/AlgebraicGeometry/GroupScheme/AffineNormalQuotientGeometry.lean:60 defines IsFppfGroupQuotient. DAG matches are the affine quotient theorem and consumers (diagonalizable groups and split solvable torsors); no definition node lean record owns this declaration.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing definition without moving or copying it."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "fppf quotient",
+   "results": "0 blueprint nodes match 'fppf quotient'",
+   "date": "2026-10-24",
+   "verdict": "No blueprint definition node for the quotient presentation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homomorphism-factorization",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). The fppf quotient presentation used in the homomorphism factorization, step 6.",
+   "via": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineNormalQuotientGeometry",
+  "declaration": "AlgebraicGeometry.IsFppfGroupQuotient",
+  "declarations": [
+   "AlgebraicGeometry.IsFppfGroupQuotient"
+  ],
+  "statement": "def IsFppfGroupQuotient {B : Scheme.{u}} {N G Q : Grp (Over B)}\n    (i : N ⟶ G) (q : G ⟶ Q) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Registers the existing real-data Prop-valued definition at AffineNormalQuotientGeometry.lean:60, without moving or copying it and without assuming affine_normal_quotient_geometry. The predicate is relative over an arbitrary base scheme; only its original theorem consumer has affine finite-type hypotheses."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35173503d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35173503d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Re-delivery of 2c4ce78e04a2 (H2 RETURN) does exactly what the return asked. New def node def-sfb-fppf-group-quotient-presentation records the existing AlgebraicGeometry.IsFppfGroupQuotient (existing:true, module Sheaf.AlgebraicGeometry.GroupScheme.AffineNormalQuotientGeometry, nothing moved or copied); its statement field matches side-live l.60-61 verbatim. All five parts of the definition match the node text (kernel square i/toUnit/q/eta, fppf local surjectivity of yoneda q, h_Q is a sheaf, torsor iso (g,n)->(g,g i(n)), coset coequalizer with pi>>etaq = yoneda q and bijective precomposition into every Type-u fppf sheaf). Source Milne 5.24/5.25/5.27/5.68/5.71 checked in the PDF; dependencies are definition nodes; no other live definition node owns the declaration. In the item's stmt_deps the theorem node is replaced by the new definition node; item statement, proof, proof_deps and lean.statement are unchanged. HomomorphismFactorization.lean is byte-identical to the previously reviewed module; clause-by-clause, edge-case and universe checks re-confirmed. Item not yet landed live. Pre-existing points, not counted: the theorem node still lists IsFppfGroupQuotient among its declarations; blueprint.from.node is null, inherited from the base item. No file changed, no compile run."
+ }
+}

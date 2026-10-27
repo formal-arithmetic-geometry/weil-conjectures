@@ -1,0 +1,148 @@
+{
+ "id": "def-cbc-strict-tower-realization-comparisons",
+ "kind": "definition",
+ "title": "Canonical normalized comparisons for strict-tower realization",
+ "statement": "For an adic coefficient datum $d$ on $(A,I)$ [def-weil-pbc-adic-coefficient-datum], construct the following comparisons for pro-etale module sheaves. The completed and constant strict tower operations are those of [def-weil-pbc-strict-tower-operations] and [def-cbc-strict-constant-tower-operations]; open extension and its coefficient/quotient comparisons are fixed by [def-cbc-strict-tower-open-extension] and [def-cbc-completed-open-scalar-quotient-interface]. For schemes $T,S$, coefficient ring sheaves $R_T,R_S$, and an additive exact functor $F:\\operatorname{Mod}(R_T)\\to\\operatorname{Mod}(R_S)$, write $F^{\\mathrm{Tow}}$ for postcomposition on strict towers and $L_T,L_S$ for derived inverse limits [def-weil-pbc-derived-inverse-limit]. The constant-tower/derived-limit adjunction determines the comparison $F^D L_T\\to L_S(F^{\\mathrm{Tow}})^D$ as the mate of the identity constant-diagram square. When $F$ preserves countable products this mate is invertible [lem-cbc-exact-product-functor-strict-limit]. Apply it to scalar restriction and quasi-compact open extension to obtain the specified scalar/limit and open/limit isomorphisms. Direct image/limit is the conjugate of the constant/pullback square, including both adjunction units [prop-weil-pbc-direct-image-limits]; scalar/direct-image is the derived normalized coefficient comparison [lem-weil-pbc-strict-tower-exchange-mate-normalization]. Using these maps, form the source and target presentations of the proper/open composite for compactifications [def-weil-compactifications-refinements], and their open-factor endpoints for a Cartesian open square [def-cbc-open-immersion-square]. The source first applies the completed-pullback projection, scalar/limit, proper corner and quotient/open comparisons; the target applies inverse direct-image/limit, inverse open/limit, inverse completed-pullback, inverse scalar/open and inverse scalar/direct-image comparisons, in that order. These are actual constructions, with no freely chosen endpoint isomorphism. Their naturality and finite evaluation are the component naturality and evaluation formulas of these same maps. This node records the comparison constructions and already proved auxiliary properties extracted from the realization module; it asserts neither the completed compact-support realization identity nor its completed open-factor identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Definition 1939 and the proof of thm-cbc-complete-proetale, canonical source/target comparisons; Stacks 03DI, 09BP, 0A07. Existing Lean constructions of lem-cbc-complete-proetale-strict-tower-realization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-strict-tower-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-compactifications-refinements",
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Conservative extraction of the already proved comparison constructions and auxiliary properties from the parent realization module; no new mathematical construction or postponed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical constant diagram mate inverse limit exact product preserving functor",
+   "results": "8 hits: exactFunctor, exactFunctor_iff, constLimAdj, ExactFunctor, ExactFunctor.of, piConst, isLimitOfPreserves, isLimitOfHasProductOfPreservesLimit. No pro-etale normalized comparison construction.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing project comparison definitions; constLimAdj and the mate laws are the generic ingredients already used there."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 generic mate-law hits, including mateEquiv, mateEquiv_counit, unit_mateEquiv, mateEquiv_vcomp, mateEquiv_hcomp and iterated_mateEquiv_conjugateEquiv. No normalized pro-etale interface.",
+   "date": "2026-10-26",
+   "verdict": "Use the generic laws within the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcRealizationLimitMap|cbcRealizationSource|cbcRealizationTarget",
+   "results": "msearch grep: 0 hits. Local rg on the project finds the already implemented constructions in CompleteProetaleStrictTowerRealization, which are extracted rather than duplicated.",
+   "date": "2026-10-26",
+   "verdict": "An independent construction module resolves the import cycle; no replacement endpoint maps are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteProetaleStrictTowerRealization",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Canonical endpoint comparisons in the strict proper/open realization, extracted from the parent comparison constructions.",
+   "via": [
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTowerRealizationComparisons",
+  "file": "lean/Sheaf/Paper/StrictTowerRealizationComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcRealizationLimitMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcRealizationWhiskerLimits",
+   "AlgebraicGeometry.Scheme.cbcRealizationWhiskerColimits",
+   "AlgebraicGeometry.Scheme.cbcRealizationLimitAdj",
+   "AlgebraicGeometry.Scheme.cbcRealizationConst",
+   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap",
+   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap_isIso",
+   "AlgebraicGeometry.Scheme.cbcRealizationRes",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenAdj",
+   "AlgebraicGeometry.Scheme.cbcRealizationTowerJ",
+   "AlgebraicGeometry.Scheme.cbcRealizationJ",
+   "AlgebraicGeometry.Scheme.cbcRealizationTowerAdj",
+   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv",
+   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv_properties",
+   "AlgebraicGeometry.Scheme.cbcRealizationReduction",
+   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv",
+   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv_isIso",
+   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcRealizationTowerScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcRealizationDerivedScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcRealizationQuotientOpen",
+   "AlgebraicGeometry.Scheme.cbcRealizationProducts",
+   "AlgebraicGeometry.Scheme.cbcRealizationResLimit",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenLimit",
+   "AlgebraicGeometry.Scheme.cbcRealizationPushLimit",
+   "AlgebraicGeometry.Scheme.cbcRealizationResPush",
+   "AlgebraicGeometry.Scheme.cbcRealizationPullLimit",
+   "AlgebraicGeometry.Scheme.cbcRealizationStrict",
+   "AlgebraicGeometry.Scheme.cbcRealizationSource",
+   "AlgebraicGeometry.Scheme.cbcRealizationTarget",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenQC",
+   "AlgebraicGeometry.Scheme.cbcRealizationSingleSquare",
+   "AlgebraicGeometry.Scheme.cbcRealizationSingleProper",
+   "AlgebraicGeometry.Scheme.cbcRealizationSingleBeta_isIso",
+   "AlgebraicGeometry.Scheme.cbcRealizationSingleOpen",
+   "AlgebraicGeometry.Scheme.cbcRealizationEvalSource",
+   "AlgebraicGeometry.Scheme.cbcRealizationEvalTarget",
+   "AlgebraicGeometry.Scheme.cbcRealizationFinite",
+   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_evaluation",
+   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_naturality",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenSource",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenTarget",
+   "AlgebraicGeometry.Scheme.cbcRealizationOpenFactor"
+  ],
+  "statement": "def cbcRealizationLimitMap {T S : Scheme.{t}}\n    {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}\n    {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}\n    (F : reductionModules T R ⥤ reductionModules S R') [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :\n    completedRlim T R ⋙ F.mapDerivedCategory ⟶\n      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory ⋙ completedRlim S R'",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-42fc8",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070353-L-3563540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-42fc8",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070353-L-3563540",
+  "kind": "interface",
+  "note": "independent cc review: item proofs of completeProetaleStrictTowerRealization(_open) and the moved StrictTowerRealizationComparisons module vs the published item (declaration sets, signatures, def bodies identical); new sorry strictTowerScalarPushLimitCoherence vs its node and the canonical mate definitions; 8 delivered modules + 9 direct importers compiled in a sandbox"
+ }
+}

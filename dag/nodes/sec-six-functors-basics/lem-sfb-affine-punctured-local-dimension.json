@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-affine-punctured-local-dimension",
+ "kind": "statement",
+ "title": "An affine punctured Noetherian local spectrum has dimension at most one",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] with a unique maximal ideal $\\mathfrak m$ (so $A$ is local). Let $P=\\operatorname{Spec}A\\setminus\\{\\mathfrak m\\}$ be the open subscheme of its prime spectrum [def-weil-affine-spectrum, def-weil-open-immersion]. If $P$ is affine [def-pc-scheme], then $\\dim A\\leq1$ [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCR, lemma-affine-punctured-spec, the only-if implication; statement at lines 3349–3352 and proof at lines 3355–3406."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=\\sqrt{(0)}$. Every prime contains $N$, so the quotient-spectrum identification gives an inclusion-preserving bijection between the prime ideals of $A$ and $A/N$. Thus their dimensions agree. The ring $A/N$ is local and Noetherian: its ideals lift to ideals of $A$ and the images of finite generating sets generate them. The quotient closed immersion restricted to the affine open $P$ has affine inverse image by the closed-immersion affine-cover criterion; this inverse image is the punctured spectrum of $A/N$. It suffices therefore to prove the assertion for reduced $A$. If $\\dim A=0$ we are done; assume $\\dim A\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "The minimal primes of $A$ are finite in number. None is $\\mathfrak m$: if $\\mathfrak m$ were minimal, every prime, being contained in the unique maximal ideal, would equal $\\mathfrak m$, contrary to $\\dim A\\geq1$. Prime avoidance therefore gives $f\\in\\mathfrak m$ outside every minimal prime. Since $A$ is reduced, the zerodivisor criterion says multiplication by $f$ on $A$ is injective.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "Write $P=\\operatorname{Spec}B$ and let $\\rho:A\\to B$ be restriction. For every $g\\in\\mathfrak m$, $D_A(g)\\subseteq P$. Pullback of basic opens identifies it with $D_B(\\rho(g))$; basic-open sections of the structure sheaf identify their rings as $A_g$ and $B_{\\rho(g)}$, compatibly with restriction. Hence $A_g\\to B_{\\rho(g)}$ is an isomorphism. In particular this holds for $g=f$. Since $A\\to A_f$ is injective and factors through $B$, $\\rho$ is injective. Multiplication by $f$ is also injective on $B$: at each point of $P$ its stalk is a localization of multiplication by $f$ on $A$, hence injective; a section with all germs zero is zero.",
+   "uses": [
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-localization-injective",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "View $A\\subseteq B$ and set $Q=B/A$. Localizing this quotient is exact. The isomorphisms of the preceding step give $Q_g=0$ for $g\\in\\mathfrak m$, in particular $Q_f=0$, so every element of $Q$ is killed by a power of $f$. If $\\mathfrak p\\ne\\mathfrak m$, choose $g\\in\\mathfrak m\\setminus\\mathfrak p$; every element of $Q$ is killed by some power of $g$, so its image in $Q_{\\mathfrak p}$ is zero. Thus $Q_{\\mathfrak p}=0$. The same holds for its submodule $Q[f]$ by localization exactness.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "There is an exact sequence $0\\to Q[f]\\xrightarrow{\\delta}A/fA\\to B/fB\\to Q/fQ\\to0$. Explicitly, for $q=b+A$ with $fq=0$, set $\\delta(q)=fb+fA$; changing $b$ by an element of $A$ does not change this class. If $fb\\in fA$, injectivity of multiplication by $f$ on $B$ gives $b\\in A$, so $\\delta$ is injective. Its image is the kernel of $A/fA\\to B/fB$: if $a=fb$ in $B$, use $q=b+A$. Finally $b+fB\\mapsto(b+A)+fQ$ is surjective, and its kernel is the image of $A/fA$, by subtracting $fc$ from a representative whenever $b+A=f(c+A)$. As a submodule of the finite module $A/fA$, $Q[f]$ is finite. If it is nonzero, its support is contained in $\\{\\mathfrak m\\}$ by the preceding step, so the finite-support length lemma applies; if it is zero its length is zero. In both cases $Q[f]$ has finite length.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sc-generic-stalk-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "Apply the power-torsion cokernel bound to $Q$ and $f$: every element is killed by a power of $f$, and $Q[f]$ has finite length. Therefore $Q/fQ$ has finite length. A finite simple filtration shows it is finitely generated: simple factors are cyclic (any nonzero element generates), and lifting their generators successively generates the extension. The exact sequence in the preceding step now shows $B/fB$ is finite over $A/fA$: its image from $A/fA$ is cyclic, and lifts of a finite set of generators of $Q/fQ$, together with $1$, generate $B/fB$.",
+   "uses": [
+    "lem-sfb-power-torsion-cokernel-length",
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "The spectrum of the finite ring map $A/fA\\to B/fB$ is a finite morphism and hence a closed map. Its image is exactly $V_A(f)\\cap P$: indeed $\\operatorname{Spec}(B/fB)$ identifies with the zero locus of $\\rho(f)$ in $\\operatorname{Spec}B=P$, and the quotient-spectrum identifications give precisely this subset of $\\operatorname{Spec}(A/fA)$. Thus the punctured spectrum of $A/fA$ is closed. It must be empty: any nonempty closed subset of the spectrum of a local ring contains its closed point, since a prime in that subset is contained in the maximal ideal. Consequently $A/fA$ has exactly one prime ideal, its maximal ideal (it is nonzero since $f\\in\\mathfrak m$), and $\\dim(A/fA)=0$.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  },
+  {
+   "text": "Apply dimension drop for the nonzerodivisor $f\\in\\mathfrak m$ in the Noetherian local ring $A$: $\\dim A=\\dim(A/fA)+1=1$. Together with the dimension-zero case and the equality of dimensions before and after reduction, this proves $\\dim A\\leq1$.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCR, lemma-affine-punctured-spec, converse proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-pc-affine-localization-injective",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-sfb-power-torsion-cokernel-length",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCR, lemma-affine-punctured-spec, only-if implication, lines 3368–3406; connecting map written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "punctured|puncture|0BCR",
+   "results": "Read returned hits: . No hits in AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine punctured spectrum of a Noetherian local ring has Krull dimension at most one",
+   "results": "Read returned hits: Ring.DimensionLEOne, IsDedekindRing.toDimensionLEOne, Ring.DimensionLEOne.mk, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, AlgebraicGeometry.AffineScheme, Ring.KrullDimLE.of_isLocalization, PrimeSpectrum.instKrullDimLEOfNatNat, AlgebraicGeometry.noetherianSpace_of_isAffine. DimensionLEOne is the definition, and the other results concern Dedekind rings, finite dimension or dimension zero; none proves the implication from affineness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, ringKrullDim",
+   "results": "Read returned hits: . No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian local ring the punctured spectrum is affine if and only if its Krull dimension is at most one",
+   "results": "Read returned hits: instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, Ring.KrullDimLE.subsingleton_primeSpectrum, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain, IsDiscreteValuationRing.TFAE, PrimeSpectrum.unique_of_ringKrullDimLE_zero, Ring.krullDimLE_one_iff_of_noZeroDivisors, Ring.krullDimLE_zero_and_isLocalRing_tfae. These give dimension finiteness, DVR characterizations and dimension-zero spectra, not affineness of the puncture.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*[Ss]pec|[Ss]pec.*punctured|affine.*[Dd]im|[Dd]im.*affine",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean. Eleven hits are closed immersions and smooth relative dimension; no puncture criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the closed point of the prime spectrum of a local Noetherian ring cannot be affine in dimension at least two",
+   "results": "Read returned hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.IsAffineOpen.primeIdealOf_eq_map_closedPoint, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero. Generic points, affine charts, Noetherian spectra and Artinian criteria do not state the puncture criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine punctured spectrum of a Noetherian local ring has Krull dimension at most one",
+   "results": "Read returned hits (8): instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, IsDedekindDomainDvr.ring_dimensionLEOne.  No affine-puncture dimension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, ringKrullDim",
+   "results": "Read returned hits (0): none.  No affine-puncture dimension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*[Ss]pec|[Ss]pec.*punctured",
+   "results": "Read returned hits (0): none.  No affine-puncture dimension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine punctured spectrum of a Noetherian local ring has Krull dimension at most one",
+   "results": "Read returned hits (8): Ring.DimensionLEOne, IsDedekindRing.toDimensionLEOne, Ring.DimensionLEOne.mk, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, AlgebraicGeometry.AffineScheme, Ring.KrullDimLE.of_isLocalization, PrimeSpectrum.instKrullDimLEOfNatNat, AlgebraicGeometry.noetherianSpace_of_isAffine.  No affine-puncture dimension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the closed point of the spectrum of a local Noetherian ring cannot be affine in dimension at least two",
+   "results": "Read returned hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_eq_map_closedPoint, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint. These concern affine charts, generic points, Noetherian spectra and basic properties of local rings, not the affine puncture dimension criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-open-boundary-codimension-one",
+  "date": "2026-10-24",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Affine-complement step: choose a nonempty affine open U of the smooth integral group; its boundary is an effective Cartier divisor D. Supporting input for this split: the codimension-one assertion for irreducible components of an affine-open complement, used before making those components Cartier. Local algebra input: Stacks Tag 0BCR (lemma-affine-punctured-spec), used after passing to the local spectrum of a boundary generic point.",
+   "via": [
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-sfb-smooth-affine-cartier-boundary",
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-punctured-local-dimension",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BCR through reduction, a regular element, the explicit scalar connecting sequence, a separately stated general torsion length bound, and the finite closed-map contradiction. Reused existing algebra and scheme nodes; no Lean attachment or Mathlib match for the item.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration/Picard/ample-line prerequisite chain; this local algebra item supports the affine-boundary codimension-one step. Steps 1–8 realize the converse of Stacks 0BCR without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Generic algebra or affine-scheme tool used exactly as stated in the Stacks 0BCR local algebra proof; this unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "Generic algebra or affine-scheme tool used exactly as stated in the Stacks 0BCR local algebra proof; this unit has no replacement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-finite-length-module-simple-filtration"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-0cf368177",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-0cf368177 (reviewer sub-agent of L); spot-checked: I read Stacks 0BCR (divisors.tex 3349-3406). The item states the only-if direction (Noetherian local A, affine punctured spectrum implies dim A <= 1) with the same hypotheses and conclusion. All 8 steps follow the source's proof and every non-elementary fact cites a node whose statement says it. (1) Reduction to A/N: 00E5 gives an inclusion-preserving bijection of primes, 01IG gives the closed immersion, and clause (1) of 01QO makes the inverse image of P (the punctured spectrum of A/N) affine. (2) 00FR, then prime avoidance 00DS, then 00EW(3) give a nonzerodivisor f in m. (3) Basic-open pullback plus tilde sections give A_g = B_{rho g} for g in m. rho is injective through A to A_f. f is injective on B through germs, using 01HV(c) localization and 00CS exactness. (4) is elementary and correct: Q_g = 0, Q is f-power torsion, and Q[f] is supported in {m}; containment is stated rather than the source's equality, which is right when Q[f] = 0. (5) I checked the exact sequence 0 -> Q[f] -> A/fA -> B/fB -> Q/fQ -> 0 by representatives. Q[f] is finite by 00IK and has finite length by 00L5, with the zero case handled separately. (6) The new node bounds length(Q/fQ); the simple filtration makes Q/fQ finitely generated, so A/fA -> B/fB is finite. (7) 01WI and 01WN make Spec(B/fB) -> Spec(A/fA) a closed map; its image is the punctured spectrum of A/fA, which must therefore be empty, so dim A/fA = 0. (8) 00KW gives dim A = 1. The new node lem-sfb-power-torsion-cokernel-length (R commutative, Q f-power torsion, length Q[f] = l finite, then length(Q/fQ) <= l) is true by the K_n = Q[f^n] argument. I tested it on Q = 0, f = 0, f a unit, a DVR with K/R and with R/f^n, and an infinite direct sum, where the hypothesis fails. It is self-contained, statement-only, not a clause of the item, and has no duplicate in the DAG (grepped 0BCR, Q[f], power torsion, length with torsion); its three kinds of search are recorded. Accepted tool_uses: lem-sc-generic-stalk-finite-length (00L5) and lem-weil-pbc-finite-length-module-simple-filtration, both generic tools used as stated. No SGA is cited. Minor: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePuncturedLocalDimension",
+  "declaration": "AlgebraicGeometry.ringKrullDim_le_one_of_isAffine_puncturedSpectrum",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePuncturedLocalDimension.lean",
+  "statement": "theorem ringKrullDim_le_one_of_isAffine_puncturedSpectrum (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (hP : IsAffine (puncturedSpectrum A).toScheme) : ringKrullDim A ≤ 1",
+  "branch": "sheaf-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d802bf937",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BCR only-if: CommRing+IsNoetherianRing+IsLocalRing (unique max ideal), IsAffine (puncturedSpectrum A).toScheme, ringKrullDim A ≤ 1; no extra hypotheses, universe u arbitrary. puncturedSpectrum read at upstream PuncturedCurveBranches.lean:33 = complement of closedPoint as Opens of Spec A, needing only local ring; real data, not owned by any Sheaf DAG node, no duplicate. Edge cases: dim 0 empty affine puncture covered; zero ring excluded by node too. Only lean field changed vs live; live has no lean record; lean.statement verbatim in file; 5 existing:true stmt_deps used exactly; proof-dep imports exist in live. Docstrings carry source/blueprint and 8 proof steps; sorry only; report sections present (second reading by same worker, disclosed). No compile rerun per instructions; no files changed."
+ }
+}

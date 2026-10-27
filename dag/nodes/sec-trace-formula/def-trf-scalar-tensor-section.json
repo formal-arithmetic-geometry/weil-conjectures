@@ -1,0 +1,118 @@
+{
+ "id": "def-trf-scalar-tensor-section",
+ "kind": "definition",
+ "title": "Pure-tensor section in a prescribed scalar-extension model",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site small in the coefficient universe [def-weil-pbc-sites-and-cohomology], [def-weil-size-convention], with sheaf composition along the forgetful functor from commutative rings to rings, abelian sheafification, and equality of the sheafification-local equivalences with locally bijective maps. Let $a:R\\to S$ be a morphism of sheaves of commutative rings, and choose independently sized unbounded derived categories of their module sheaves. Let $F$ be a derived change-of-rings cochain model for $a$ [def-sfb-derived-change-of-rings-cochain-model], with ordinary extension $F.E$ and its prescribed object equality $F.E(M)=a^*M$. For an $R$-module sheaf $M$ [def-weil-sheaf-of-modules-category], an object $U$ of $\\mathcal C^{\\mathrm{op}}$, $s\\in S(U)$ and $x\\in M(U)$, define $\\operatorname{scalarTensorSection}(F,M,U,s,x)\\in (F.E(M))(U)$ to be the image of the pure tensor $s\\otimes x\\in S(U)\\otimes_{R(U)}M(U)$ under the sheafification-unit map for the sectionwise change-of-rings presheaf, transported from $a^*M$ to $F.E(M)$ along the inverse of the prescribed object equality. This definition asserts no flatness, finite-freeness, completion hypothesis, or existence of a model.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), sectionwise change of rings and sheafification; the pure-tensor normalization of the scalar associator in the item."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The section of a sheafified extension of scalars represented by a pure tensor, transported through the ordinary scalar extension object equality",
+   "results": "[leansearch] OK 8 hit(s): PresheafOfModules.Sheafify.smul.congr_simp; ModuleCat.ExtendScalars.map_tmul; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.SMulCandidate; PresheafOfModules.Sheafify.SMulCandidate.mk.congr_simp; PresheafOfModules.Sheafify.SMulCandidate.ctorIdx; ModuleCat.ExtendScalars.obj'; PresheafOfModules.Sheafify.SMulCandidate.mk.",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib model-transported section; reuse the existing project definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PrincipalQuotientCompletion.scalarTensorSection",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.PrincipalQuotientCompletion.scalarTensorSection'",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib declaration; existing project definition is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorSection|changeOfRingsPresheaf|toSheafify",
+   "results": "[grep] OK 9 hit(s), subdirectory Algebra/Category/ModuleCat: Presheaf/Sheafify.lean:333,338,339,342,344; Presheaf/Sheafification.lean:55,58,96,147. These supply sheafification units rather than the model-transported section.",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib model-transported section."
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalarTensorSection dag/nodes lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search scalar tensor section",
+   "results": "DAG search: only lem-pur-finite-free-completion-exchange-coherence records scalarTensorSection. No occurrence in lean/WeilConjectures. Existing public definition in lean/Sheaf/Algebra/Homology/FiniteFreeCompletionExchangeCoherence.lean:71, used there at lines 92,93,111; other scalarTensorSections_hom_ext and scalarTensorSectionIso declarations are private and different. Blueprint search: 0 blueprint nodes match scalar tensor section.",
+   "date": "2026-10-22",
+   "verdict": "No existing definition node owns the public helper; record it existing:true on its unchanged module as the maintainer requests."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ringed-kflat-word-comparison-descent",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "The scalar associator and identity-scalar normalization in lem-trf-ringed-kflat-word-comparison-descent, serving the final common-stage Frobenius transport sentence of prop-trf-karoubi-independence.proof.md.",
+   "via": [
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-trf-quotient-system-mixed-coherence",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarTensorSection",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.scalarTensorSection",
+  "statement": "def scalarTensorSection\n    (F : SheafOfModules.DerivedChangeOfRingsCochainModel a)\n    (M : ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R))\n    (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) : (F.E.obj M).val.obj U",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "B4: definition extracted verbatim to its own module; the completion coherence module publicly reexports it.",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarTensorSection.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-982efc2ed",
+  "group": "Q146",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-982efc2ed",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed e6d4fae26d0d (A3/H2 theorem stmt_deps). Snapshot diff vs returned head: Lean module changes only imports (PullbackTensorResolvingComputation now plain; KFlatIndependentCoefficients and Functor.Derived.LeftDerived public for signature use); all signatures unchanged, so the prior clause-by-clause verdict on the mathematics stands. stmt_deps: lem-pur-derived-change-of-rings -> landed existing:true def-sfb-derived-change-of-rings-cochain-model (owns DerivedChangeOfRingsCochainModel); lem-pur-finite-free-completion-exchange-coherence -> new def-trf-scalar-tensor-section, an existing:true record of the real def PrincipalQuotientCompletion.scalarTensorSection (FiniteFreeCompletionExchangeCoherence.lean:71, eqToHom of sheafified pure tensor). Node statement matches the def and its hypotheses (V/wV not included); record starts at def and is verbatim in live; deps are all live definition nodes, no cycle; no other owner node in live. Item lean.statement verbatim, 24 declarations present, 8 sorries, all 8 base stmt_deps kept. Report has Worker report, Second reading by Q146 and a re-read of the repair. Advisory only: the plain proof-tool import is unused while proofs are sorry. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "independent cc review: item signatures byte-identical to live; split lemma checked clause by clause against RepresentativeRoosComparison/index/block/selection; 26 importers compiled against the delivered set and against published PQCM/FFCE"
+ }
+}

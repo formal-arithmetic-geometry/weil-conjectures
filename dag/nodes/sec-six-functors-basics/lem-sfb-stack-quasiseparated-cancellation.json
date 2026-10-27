@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-stack-quasiseparated-cancellation",
+ "kind": "statement",
+ "title": "Quasi-separated cancellation for a composite of stack morphisms",
+ "statement": "Work with schemes [def-pc-scheme], universes [def-weil-size-convention], algebraic stacks [def-sfb-algebraic-moduli-stack], and the morphisms and $2$-fibre products of [def-sfb-stable-pointed-moduli-groupoids]. Quasi-compactness and quasi-separatedness of stack morphisms use [def-sfb-stack-qcqs-morphism]. Let $S$ be a scheme and $\\mathcal A\\xrightarrow{a}\\mathcal B\\xrightarrow{b}\\mathcal C$ morphisms of algebraic stacks over $S$. Suppose $b\\circ a$ is quasi-separated and the relative diagonal $\\Delta_b:\\mathcal B\\to\\mathcal B\\times_{\\mathcal C}\\mathcal B$ is quasi-separated as a representable morphism, meaning that its algebraic-space scheme base changes have quasi-compact diagonals. Then $a$ is quasi-separated. Neither $a$ nor $b$ is assumed representable, quasi-compact or of finite type.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050M (lemma-compose-after-separated), clause (4), including its diagonal factorization and algebraic-space scheme tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathcal A\\times_{\\mathcal B}\\mathcal A$ and $Q=\\mathcal A\\times_{\\mathcal C}\\mathcal A$; these are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products]. There is a map $i:P\\to Q$ sending $(x_1,x_2,\\phi)$ to $(x_1,x_2,b(\\phi))$, and $\\Delta_{ba}\\simeq i\\Delta_a$. The map $i$ is a base change of $\\Delta_b$ along $Q\\to\\mathcal B\\times_{\\mathcal C}\\mathcal B$, $(x_1,x_2,\\psi)\\mapsto(a(x_1),a(x_2),\\psi)$. Indeed, a lift of this triple through $\\Delta_b$ is precisely an isomorphism $\\phi:a(x_1)\\simeq a(x_2)$ satisfying $b(\\phi)=\\psi$: writing a lift as an object $y$ and isomorphisms $u:a(x_1)\\simeq y$, $v:a(x_2)\\simeq y$ gives $\\phi=v^{-1}u$, with inverse $y=a(x_2),u=\\phi,v=1$. These constructions respect arrows and pullbacks by the groupoid fibre-product formula [def-sfb-stable-pointed-moduli-groupoids]. Thus the square is $2$-cartesian. The representability assertion of [lem-sfb-stack-relative-diagonal-finite-type], applied to $a$ and $b$, makes $\\Delta_a$ and $i$ representable by algebraic spaces.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-relative-diagonal-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (lemma-compose-after-separated), proof of (4), diagonal factorization; Tag 050H (lemma-fibre-product-after-map), displayed 2-cartesian square, with its object-level verification written here; Tag 04XS (lemma-properties-diagonal), (1)."
+   }
+  },
+  {
+   "text": "Fix any scheme map $t:T\\to P$ and use $it:T\\to Q$ to form the algebraic spaces $E=\\mathcal A\\times_QT$ and $F=P\\times_QT$, with maps $E\\xrightarrow{u}F\\xrightarrow{v}T$. The first space is the scheme test of $\\Delta_{ba}$, and the second is the scheme test of $i$. By the square of step 1, $F\\to T$ is also the scheme test of $\\Delta_b$ at the composite $T\\to Q\\to\\mathcal B\\times_{\\mathcal C}\\mathcal B$. Consequently $v$ is quasi-separated by the hypothesis on $\\Delta_b$, while $vu:E\\to T$ is quasi-compact and quasi-separated by the hypothesis on $ba$ and [def-sfb-stack-qcqs-morphism]. These are assertions about these algebraic-space projections; they require no representability of $a$ or $b$.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (lemma-compose-after-separated), proof of (4), its algebraic spaces A and B (here E and F); Tag 04YW (definition-separated), (4)."
+   }
+  },
+  {
+   "text": "The map $u$ is quasi-separated by the following elementary diagonal calculation (the argument of Tag 03KR). Since $E,F,T$ are sheaves of sets [def-trf-algebraic-space], $j:E\\times_FE\\to E\\times_TE$ is the inclusion of pairs having equal $F$-image. Pulling $\\Delta_{E/T}$ back along $j$ gives exactly $\\Delta_{E/F}$: a pair $(e_1,e_2)$ lies on either diagonal precisely when $e_1=e_2$, and then its two $F$-images agree automatically. The diagonal of $E\\to T$ is quasi-compact by step 2 and [def-sfb-stack-qcqs-morphism]. Its pullback is quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. Hence $\\Delta_{E/F}$ is quasi-compact, which is the algebraic-space definition of quasi-separatedness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KR (lemma-compose-after-separated), (3), with the sheaf diagonal calculation written out; Tag 03HF (lemma-base-change-quasi-compact)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-qc-cancellation] to the algebraic-space maps $E\\xrightarrow{u}F\\xrightarrow{v}T$. Its composite is quasi-compact by step 2, and $v$ is quasi-separated by that step, so $u$ is quasi-compact. The conventions agree as follows: [lem-a1-space-etale-open-image] says that an algebraic space has quasi-compact point space exactly when it has a quasi-compact scheme atlas; [lem-sfb-space-quasicompact-affine-tests] identifies quasi-compact morphisms with affine-scheme tests and gives stability under arbitrary algebraic-space base change. The stronger test by every quasi-compact algebraic space in [def-sfb-stack-qcqs-morphism] implies the affine tests, and follows back from them: for a quasi-compact $Z\\to Y$, the pullback $X\\times_YZ\\to Z$ is quasi-compact by base change, so applying its quasi-compact-scheme test to a quasi-compact scheme atlas $V\\to Z$ gives a quasi-compact atlas of $X\\times_YZ$. The composite of its etale atlas with the pullback of $V\\to Z$ is etale and surjective, by [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to these representable maps of algebraic spaces. Thus the output gives quasi-compactness in the statement's convention as well.",
+   "uses": [
+    "lem-sfb-space-qc-cancellation",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KS (lemma-quasi-compact-permanence), applied to E -> F -> T; Tag 03KG (lemma-quasi-compact-local), (1) iff (3); spaces-properties.tex Tag 03E4 (lemma-quasi-compact-space), identifying the atlas and topological conventions."
+   }
+  },
+  {
+   "text": "The original $t:T\\to P$ gives a section $s:T\\to F=P\\times_QT$, $z\\mapsto(t(z),z,1_{it(z)})$. Pulling $u:E\\to F$ back along $s$ yields $H=\\mathcal A\\times_PT\\to T$: in the iterated $2$-fibre product an object includes an identification of its $P$-coordinate with $t(z)$, so forgetting the redundant $Q$-coordinate gives this equivalence, with inverse inserting that coordinate and its identity isomorphism [def-sfb-stable-pointed-moduli-groupoids]. The map $H\\to T$ is quasi-compact by step 4 and base-change stability [lem-sfb-space-quasicompact-affine-tests]. Its diagonal is the base change of $\\Delta_u$ along $H\\times_TH\\to E\\times_FE$: both fibre products parametrize pairs of $E$-sections with the same $F$-image, together with their common $T$-coordinate. Hence that diagonal is quasi-compact by step 3 and the same base-change result, so $H\\to T$ is quasi-separated. Step 1 supplies representability of $\\Delta_a$; since $t$ was an arbitrary scheme test, [def-sfb-stack-qcqs-morphism] now says exactly that $a$ is quasi-separated.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (lemma-compose-after-separated), the section T -> B and iterated 2-cartesian diagram in its proof, applied to (4); spaces-morphisms.tex Tags 03HF (lemma-base-change-quasi-compact) and 03KL (lemma-base-change-separated), with the diagonal pullback identity written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-relative-diagonal-finite-type",
+  "def-sfb-stack-qcqs-morphism",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-qc-cancellation",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050M (lemma-compose-after-separated), clause (4); scheme-test pullback along the section as in the earlier diagram in the same proof. Elementary expansions follow spaces-morphisms.tex 03KR and 03KL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a composite of morphisms of algebraic stacks is quasi separated and the diagonal of the second morphism is quasi separated then the first morphism is quasi separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If the composition of two morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-separated, then the first morphism $ f $ is quasi-separated. This means that the diagonal morphism $ X \\\\to X \\\\times_Y X $\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.QuasiSeparated g], AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two quasi-separated morphisms of schemes is quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated is multiplicative: the composition of two quasi-separated morphisms of schemes is again quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results or general categorical stacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi separated cancellation for algebraic stacks assuming quasi separated diagonal of postcomposition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated is multiplicative: the composition of two quasi-separated morphisms of schemes is again quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.QuasiSeparated g], AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two quasi-separated morphisms of schemes is quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If the composition of two morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-separated, then the first morphism $ f $ is quasi-separated. This means that the diagonal morphism $ X \\\\to X \\\\times_Y X $\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results or general categorical stacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"of_comp\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results or general categorical stacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiSeparated.*of_comp|quasiSeparated.*[Ss]tack|[Ss]tack.*quasiSeparated",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"219\", \"text\": \"theorem QuasiSeparated.of_comp (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiSeparated (f ≫ g)] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results or general categorical stacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite algebraic stack morphism quasi separated and postcomposed morphism diagonal quasi separated imply first morphism quasi separated",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [QuasiSeparated (f ≫ g)] : QuasiSeparated f\", \"doc\": \"If the composition of two morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-separated, then the first morphism $ f $ is quasi-separated. This means that the diagonal morphism $ X \\\\to X \\\\times_Y X $\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderComposition @QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam →\\n    AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is quasi-separated if its diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [QuasiSeparated f] [QuasiSeparated g] : QuasiSeparated (f ≫ g)\", \"doc\": \"The composition of two quasi-separated morphisms of schemes is quasi-separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results or general categorical stacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|quasiSeparated.*of_comp|class QuasiSeparated",
+   "results": "{\"t\": \"2026-10-23T14:11:48Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|quasiSeparated.*of_comp|class QuasiSeparated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\"], \"digest\": \"f452a75c68c9bf28\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return Scheme morphisms only. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and :219-224; no algebraic-stack cancellation declaration, and scheme cancellation does not specialize to arbitrary nonrepresentable stack maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi separated cancellation for nonrepresentable morphisms of algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T14:11:48Z\", \"tool\": \"leansearch\", \"query\": \"Quasi separated cancellation for nonrepresentable morphisms of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.QuasiSeparated.mk\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"6e9254c4f2f399b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return Scheme morphisms only. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and :219-224; no algebraic-stack cancellation declaration, and scheme cancellation does not specialize to arbitrary nonrepresentable stack maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"of_comp\"",
+   "results": "{\"t\": \"2026-10-23T14:11:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiSeparated\\\", \\\"of_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.of_comp\"], \"digest\": \"d2e86bc1ce843261\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return Scheme morphisms only. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and :219-224; no algebraic-stack cancellation declaration, and scheme cancellation does not specialize to arbitrary nonrepresentable stack maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact quasi separated diagonals of morphisms between algebraic stacks and cancellation after composition",
+   "results": "{\"t\": \"2026-10-23T14:11:49Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi compact quasi separated diagonals of morphisms between algebraic stacks and cancellation after composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.IsSeparated.stableUnderComposition\"], \"digest\": \"2aff2d25146eb7fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return Scheme morphisms only. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and :219-224; no algebraic-stack cancellation declaration, and scheme cancellation does not specialize to arbitrary nonrepresentable stack maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of algebraic stack morphisms is quasi separated and the second morphism has quasi separated diagonal; show the first morphism is quasi separated",
+   "results": "{\"t\": \"2026-10-23T14:11:50Z\", \"tool\": \"leanfinder\", \"query\": \"A composite of algebraic stack morphisms is quasi separated and the second morphism has quasi separated diagonal; show the first morphism is quasi separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\"], \"digest\": \"a91660acca19331e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return Scheme morphisms only. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and :219-224; no algebraic-stack cancellation declaration, and scheme cancellation does not specialize to arbitrary nonrepresentable stack maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-qcqs-permanence",
+  "date": "2026-10-23",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Deduce qcqs of the descended invariant morphism from qcqs of its source and the affine target without a finite-generation hypothesis on invariants. Supporting input: Quasi-separated cancellation for a composite of stack morphisms.",
+   "via": [
+    "lem-sfb-algebraic-stack-qcqs-permanence",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-quasiseparated-cancellation",
+  "worker": "stage1",
+  "summary": "Retained the full statement and its hypotheses. Followed Stacks 050M(4): explicit diagonal factorization and 2-cartesian square, algebraic-space tests, elementary quasi-separated cancellation, existing space quasi-compact cancellation, and pullback along the test section. Checked atlas/topological quasi-compactness compatibility and retained both diagonal conditions. Reused every non-elementary input; created no nodes. No Lean attachment or Mathlib match exists.",
+  "blueprint": "Realizes the inherited prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), as recorded in from.place and via, through lem-sfb-algebraic-stack-qcqs-permanence. Read the latest unit and direct-images proof. The inherited null from.node agrees with blueprint_refs.py ancestor; no blueprint node states cancellation by searches for 050M, quasi-separated cancellation, quasiseparated and diagonal quasi. This leaves the unit route intact.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only its last sentence is used: quasi-compact point space iff a quasi-compact scheme atlas exists. This identifies the topological convention of the existing space cancellation node with this unit's atlas convention; no same-unit node states this equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-a6315da56",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-a6315da56 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The statement is exactly Stacks 050M(4) (stacks-morphisms.tex lemma-compose-after-separated), with no hypotheses added or dropped and no representability, DM or finite-type assumption. The split has no new nodes. Steps: 1 checks the 050H 2-cartesian square at object level (lifts are phi=v^-1u with b(phi)=psi); representability comes from lem-sfb-stack-relative-diagonal-finite-type (any morphism) and lem-sfb-algebraic-stack-fibre-products. 2 sets up the scheme tests E->F->T and applies the qcqs definition and the Delta_b hypothesis; it is elementary. 3 is the 03KR diagonal pullback plus space base change (lem-sfb-space-quasicompact-affine-tests); it is elementary. 4 applies 03KS via lem-sfb-space-qc-cancellation. I checked the bridge between the topological, affine-test and qc-space-test conventions using the last sentence of lem-a1-space-etale-open-image, the affine-test node and the etale/surjective composition in lem-sfb-stack-chartwise-smooth-etale-calculus. Minor: step 3 relies on the convention bridge that is only written in step 4; the argument there is general. 5 pulls back along the section T->F to get A x_P T, then uses base change of qc and the 03KL diagonal formula; both diagonal conditions are kept. Edge cases checked: empty, schemes, identity, BG_m. No duplicate found: I searched the snapshot DAG for 050M/03KR/050H/04XS/03KL; space-qcqs-permanence (073B), stack-separation-compactness-permanence and a1-space-monic-diagonal-tests are different results. I accept the tool use of lem-a1-space-etale-open-image (only its last sentence; the same-unit lem-sfb-qc-space-affine-etale-atlas gives one direction only). All six batch-5 flags reach sec-trace-formula only through the general definition def-trf-algebraic-space; they are foundational space/stack facts, not steps of the trace formula or Poincare duality, so they are generic. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQuasiSeparatedCancellation",
+  "declaration": "CategoryTheory.algebraicStack_quasiSeparated_cancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQuasiSeparatedCancellation.lean",
+  "statement": "theorem algebraicStack_quasiSeparated_cancellation {S : Scheme.{u}} {A : BasedCategory.{v₁, w₁} (Over S)} {B : BasedCategory.{v₂, w₂} (Over S)} {C : BasedCategory.{v₃, w₃} (Over S)} (a : BasedFunctor A B) (b : BasedFunctor B C) (hA : IsAlgebraicModuliStack A) (hB : IsAlgebraicModuliStack B) (hC : IsAlgebraicModuliStack C) (hab : IsQuasiSeparatedAlgebraicModuliMap (a.comp b)) (hΔb : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct b b)), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal b) T t Z p ∧ AlgebraicSpace.MapIsQuasiSeparated p) : IsQuasiSeparatedAlgebraicModuliMap a",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41ed72eaf",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Stacks 050M(4) rendered exactly. hab is the recorded IsQuasiSeparatedAlgebraicModuliMap of a.comp b. hΔb is that predicate's body for moduliRelativeDiagonal b without MapIsQuasiCompact: HasSpaceBaseChange pins p as the real projection, MapIsQuasiSeparated means a quasi-compact diagonal, and Δ_b is correctly not assumed quasi-compact. Conclusion is the full predicate for a. No representability, qc, finite-type or DM assumption on a or b; universes independent; empty, identity and BG_m cases covered. Node changed only in lean; statement verbatim; moduliRelativeDiagonal reached through the stmt_dep def-sfb-stack-qcqs-morphism (owner is a def node, so no H2). No duplicate; only proof is sorry; docstrings carry source, blueprint id and all five proof steps; lines at most 86 characters. Advisory: proof-dep imports unused by the statement; second reading is a self-check that still matches each clause. No files changed, so no compile."
+ }
+}

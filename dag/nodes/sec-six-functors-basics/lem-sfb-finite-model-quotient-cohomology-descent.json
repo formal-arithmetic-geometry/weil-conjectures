@@ -1,0 +1,163 @@
+{
+ "id": "lem-sfb-finite-model-quotient-cohomology-descent",
+ "kind": "statement",
+ "title": "Descent of finite-model quotient cohomology from the chart calculation",
+ "statement": "Fix $\\ell,E,A,R_n$ and the quotient coordinates of [def-sfb-finite-model-quotient-coordinates]. Let $V$ be qcqs and $M$ an integral constant-model constructible module sheaf as in [sk-def-sfb-constructible]. Fix $n\\ge0$, a finiteness witness for $R_n$, discreteness for its recorded quotient topology, and a normalized encoding on every scheme. Assume LocalCalculation for this $M,n$ and these encodings: on every specified stratification and covering chart, each exact scalar resolution gives the internal two-term quotient complex with constant finite, finitely presented kernel and cokernel cohomology. Then $H^q(M_n)=0$ whenever $q\\ne-1,0$; every $H^q(M_n)$ is internal constant-model constructible; and every encoded $H^q(M_n)$ is intrinsically constructible in the fixed-coefficient sense [def-weil-proetale-constructible-sheaf]. Boundedness is not part of this conclusion: it is deduced separately in the parent proof.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Locality and Strata: descent of the local two-term calculation to individual cohomology sheaves."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-model-quotient-coordinates",
+  "sk-def-sfb-constructible",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Unpack hM into a finite stratification and pro-etale covering charts. The proved integral_scalar_model_coordinates theorem realizes each internal scalar finite presentation as a finitely presented ordinary module over the integral DVR. The existing scalar_resolution theorem gives a length-one finite free presentation over that DVR. Express its linear map as the original scalar matrix, including zero ranks, and apply the supplied universal chart calculation.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-integral-scalar-model-coordinates",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "def-sfb-finite-model-quotient-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the scalar cohomology model of the literal two-term complex to be its matrix kernel in degree -1, its matrix cokernel in degree 0, and the zero module in every other degree. The chart record supplies the two constant cohomology identifications and finiteness. For other degrees the complex has a zero term; exact constant realization and the counit of the specified derived encoding show its cohomology is zero. Exact quotient inverse image commutes with cohomology. Compose these comparisons to identify the encoded pullback of every cohomology sheaf with the displayed finite scalar model, which is zero outside {-1,0}.",
+   "uses": [
+    "def-sfb-finite-model-quotient-coordinates",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved normalized encoding-pullback comparison to express those chart identifications in ordinary fixed-coefficient sheaves. For q outside {-1,0}, each chart restriction is zero. The adopted generic upperStarIsoLocalizationRestriction and isIso_of_isIso_localizationRestriction implement the localized-site restriction comparison and cover-local isomorphism detection, which descend zero to the strata. Constructible strata in a qcqs scheme have compact domains and quasi-compact immersions. Their finite jointly covering family detects zero by the adopted proved module-sheaf detection theorem. The fixed encoding is faithful and reflects zero, so the internal cohomology is zero. The argument allows the empty family on an empty scheme.",
+   "uses": [
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-sfb-finite-qc-proetale-module-detection",
+    "lem-weil-pbc-constructible-is-retrocompact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the original strata and covers and the finite scalar cohomology models in every degree. They witness ordinary finite-model stratified constructibility. The proved finite-discrete constructibility comparison gives internal constant-model constructibility. Exactness of the encoding identifies encoded internal cohomology with cohomology of the encoded complex. Constant finite models are locally constant and have finite geometric stalks, which gives the intrinsic fixed-module constructibility predicate. If there are no strata, use the existing positive-stratification helper on the empty scheme. No Noetherianity, completeness, or weak-etaleness assumption on the stratum immersions is used.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-pe-finite-coefficient-model-comparison",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "sk-def-sfb-constructible",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-model-quotient-coordinates",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-pe-finite-coefficient-model-comparison",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sfb-finite-qc-proetale-module-detection",
+  "lem-sfb-integral-scalar-model-coordinates",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "sk-def-sfb-constructible",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models, Locality and Strata; P3 uses the actual scalar cohomology models and existing finite quasi-compact ordinary module detection in place of open/closed refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing and constructibility of cohomology sheaves descend from finite constructible strata and pro etale covering charts",
+   "results": "OK 8 hits: LightCondensed; LightCondensed.lanLightCondSet; Condensed.lanSheafProfinite; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; Scheme.smallEtaleTopology; LightCondensed.IsDiscrete; Scheme.etaleTopology; TopCat.Sheaf.forget.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"double\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|isZero_homology_of_isZero_X₂|isIso_of_coversTop",
+   "results": "OK 12 hits, including ShortComplex.mapHomologyIso, ShortComplex.isZero_homology_of_isZero_X₂, Sheaf.isIso_of_coversTop. These provide generic homology and cover operations, not finite-stratification descent with both constructibility predicates.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelSheafQuotientConstructible",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients. Locality and Strata: descent of the local two-term calculation to individual cohomology sheaves.",
+   "via": [
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelQuotientCohomologyDescent",
+  "file": "lean/Sheaf/Paper/FiniteModelQuotientCohomologyDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.cohomology_descent",
+  "statement": "theorem cohomology_descent\n    (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]\n    (M : AdicCompletion.Modules l E V)\n    (hM : IsConstantModelConstructible (DerivedNakayama.integerRing l E) V M)\n    (n : ℕ) (hf : Finite (R l E n))\n    (hd : @DiscreteTopology (R l E n) (AdicCompletion.finiteTopology l E (n + 1)))\n    (enc : ∀ T : Scheme.{u}, Encoding l E n T)\n    (hcalc : LocalCalculation l E V M n enc) :\n    (∀ q : ℤ, q ≠ -1 → q ≠ 0 →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (reduction l E V M n))) ∧\n    (∀ q : ℤ, IsConstantModelConstructible\n      (DerivedNakayama.quotientRing l E (n + 1)) V\n      ((DerivedCategory.homologyFunctor _ q).obj (reduction l E V M n))) ∧\n    (letI := hf\n     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n     ∀ q : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf V\n       (ULift.{u + 1} (R l E n))\n       ((DerivedCategory.homologyFunctor _ q).obj\n         ((enc V).fixedDerived.functor.obj (reduction l E V M n))))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9ff81",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T101103-L-3656596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/Constructible/item/IntegralScalarModelCoordinates vs clone base and nodes; ChartCalculation fields vs old 7 conjuncts; 12-module importer chain compiled (exit 0); axioms clean"
+ }
+}

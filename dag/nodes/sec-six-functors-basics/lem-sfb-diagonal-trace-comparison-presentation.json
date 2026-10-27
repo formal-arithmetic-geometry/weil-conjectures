@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-diagonal-trace-comparison-presentation",
+ "kind": "statement",
+ "title": "Construction of normalized projective-line comparison data",
+ "statement": "Let l be prime and f:X→S a morphism of Noetherian schemes with DiagonalTraceLocalizations at X and S. For a specified isomorphism m:X≅P1(S) over S and l invertible on S, there is a Presentation p over ULift(Q_l) with p.model.model=m. This asserts only the normalized Chern, twisting, restriction, derived-image and limit comparison data, not invertibility of the unit/Chern splitting, trace normalization, or fullness of completed restriction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), construction of normalized projective-line comparison data"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the partial normalized comparison data from exists_diagonalTraceComparisonPartial, then obtain the two Milnor invertibility assertions from diagonalTraceComparisonLimitIsos. Assemble the full Presentation record field by field; the model equality is inherited from the partial record.",
+   "uses": [
+    "new-sfb-diagonal-trace-comparison-partial-existence",
+    "new-sfb-diagonal-trace-comparison-limit-isos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-sfb-diagonal-trace-comparison-partial",
+  "new-sfb-diagonal-trace-comparison-limit-isos"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), assembly after separating the geometric/derived data and Milnor invertibility",
+  "by": "B4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The trace on a projective line is the second projection after the inverse of its unit and Chern class decomposition; restriction from completed to constant coefficients is fully faithful on derived complete sheaves",
+   "results": "8 hits, all algebraic or linear traces, including Algebra.trace and LinearMap.trace_eq_contract; no projective-line sheaf trace or derived-complete coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Use existing categorical biproduct identities and retain the separate geometric comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the derived category of inverse systems of modules is an isomorphism if its evaluations at every level are isomorphisms",
+   "results": "8 hits, including DerivedCategory.isIso_Q_map_iff_quasiIso and componentwise isomorphisms of complexes; no geometric trace presentation.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing semilinear calculus joint conservativity; no exact existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biprod.desc_comp",
+   "results": "No hit under that name. The biproduct inclusion/projection identities are in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "Use the standard biprod.inl_snd and biprod.inr_snd identities in the assembly proof."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalTrace|TowerClasses|IsIso.*Ev|Bijective.*dres; rg over lean/Sheaf, lean/WeilConjectures and quarantine/Sheaf/Paper",
+   "results": "The trace Model and Presentation are records. TowerClasses is also a record, with no inhabitance theorem. The semilinear Data.detects theorem is already available. ConstantCompletion.equivalence is the general completeness equivalence.",
+   "date": "2026-10-26",
+   "verdict": "No theorem directly supplies the normalized presentation, the component compatibility, or the specialized complete-object Hom bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of compatible Kummer Chern classes and restriction of coefficient systems to constant l-adic scalars",
+   "results": "8 hits about algebraic Hilbert 90, cyclotomic characters and BDeRhamPlus; no simultaneous sheaf Chern and trace-comparison presentation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the geometric intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTracePresentationExistence",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceComparisonPresentation",
+  "file": "lean/Sheaf/Paper/DiagonalTraceComparisonPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceComparisonPresentation",
+  "statement": "theorem exists_diagonalTraceComparisonPresentation\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian S]\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    (f : X ⟶ S) (m : X ≅ ProjectiveLine S)\n    (hm : m.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (hS : IsUnit (l : Γ(S, ⊤))) :\n    ∃ p : Presentation l (ULift.{u} (Padic l)) f, p.model.model = m",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T183548-L-3751290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222554-L-669355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

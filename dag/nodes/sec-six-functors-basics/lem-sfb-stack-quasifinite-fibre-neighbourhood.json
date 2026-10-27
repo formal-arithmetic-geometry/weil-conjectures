@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+ "kind": "statement",
+ "title": "A zero-dimensional field-fibre point gives a locally quasi-finite neighbourhood",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], fibred groupoids and $2$-fibre products mean [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces mean [def-trf-algebraic-space]. A morphism is representable if every scheme base change is an algebraic space. Properties of representable maps are tested after scheme base change on etale scheme charts. Let $\\mathcal X/S$ be an algebraic stack and $h:A\\to\\mathcal X$ a morphism from an algebraic space locally of finite type [def-weil-finite-type-morphism]. Let $a:\\operatorname{Spec}k\\to\\mathcal X$ be a field-valued object [def-weil-field] and $F=A\\times_{\\mathcal X}\\operatorname{Spec}k$, with projection $p:F\\to A$. If $z\\in|F|$ satisfies $\\dim_zF=0$, there is an open subspace $A'\\subset A$ containing $p(z)$ for which $h|_{A'}$ is locally quasi-finite [pqf-def-quasifinite]. Open subspace means an inclusion becoming an open immersion after every scheme base change [def-weil-open-immersion]. Dimension at a point of an algebraic space is computed on an etale scheme chart, using the infimum of dimensions of open neighbourhoods in that chart. No Noetherian or quasi-compactness hypothesis on $A$ or $\\mathcal X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06ME (lemma-quasi-finite-at-point). The open quasi-finite locus and its base-change property are stacks-properties.tex Tag 06M5 (remark-local-source-apply), item (2), and spaces-morphisms.tex Tags 04NV (lemma-locally-quasi-finite-rel-dimension-0), 04NW (lemma-locally-finite-type-quasi-finite-part)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-a1-space-open-subspace",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-algebraic-space-etale-dimension",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-stack-diagonal-space-source-representability], both $h:A\\to\\mathcal X$ and $a:\\operatorname{Spec}k\\to\\mathcal X$ are representable: the required diagonal hypothesis is part of [def-sfb-algebraic-moduli-stack]. Thus $F$ is an algebraic space. By [lem-sfb-stack-chartwise-smooth-etale-calculus], its map $g:F\\to\\operatorname{Spec}k$, being the base change of $h$, is locally of finite type.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06ME (lemma-quasi-finite-at-point), proof; canonical locus descent: stacks-properties.tex Tags 06M3 and 06M5(2); zero-dimensional chart argument: spaces-morphisms.tex Tag 04NV and morphisms.tex Tag 0397."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-source-local-property-locus-descent] to $P=$ locally quasi-finite. Arbitrary base change and fppf target descent are [lem-sfb-representable-lqf-calculus-descent]. Etale source locality reduces on scheme charts to [lem-a1-scheme-lqf-etale-source-locality]: the intersections of two scheme charts are the etale scheme refinements supplied by [lem-trf-space-fibre-products-etale-covers], and the forward and converse implications apply to their projections. For a jointly surjective etale family, apply the converse implication to the single surjective etale map from the scheme coproduct of the refined charts [lem-weil-pbc-scheme-coproduct-family]; it is etale and locally quasi-finite over the target because both properties are checked on the open summands. For a locally finite type $E\\to T$ with $T$ a scheme, take the open $Q_{E/T}$ of [lem-sfb-space-quasifinite-locus-open]. It is the largest open with $P$: the definition of $Q$ tests quasi-finiteness on every scheme chart, and affine witnesses for a point of an open subscheme are witnesses in the ambient scheme [pqf-def-quasifinite]. Its scheme-base-change equality is exactly the last clause of the same locus node. The descent lemma therefore gives a largest open $W_h\\subseteq A$ with $h|_{W_h}$ locally quasi-finite, and identifies $p^{-1}(W_h)$ with the largest locally quasi-finite open $W_g$ of $F$.",
+   "uses": [
+    "lem-sfb-source-local-property-locus-descent",
+    "lem-sfb-representable-lqf-calculus-descent",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasifinite-locus-open",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06ME (lemma-quasi-finite-at-point), proof; canonical locus descent: stacks-properties.tex Tags 06M3 and 06M5(2); zero-dimensional chart argument: spaces-morphisms.tex Tag 04NV and morphisms.tex Tag 0397."
+   }
+  },
+  {
+   "text": "We show $z\\in W_g=Q_{F/k}$, using the scheme-target locus of [lem-sfb-space-quasifinite-locus-open]. Let $c:U\\to F$ be any etale scheme chart and $u$ any point above $z$. By the chart definition of dimension in the statement, $\\dim_{u_0}U_0=\\dim_zF=0$ for some etale scheme chart $c_0:U_0\\to F$ and some $u_0\\in U_0$ above $z$. This value does not depend on the chart: $u$ and $u_0$ represent the same point $z$, so their field-valued points agree after a common field extension $K$, and the resulting $K$-point of the scheme $U\\times_FU_0$ [lem-trf-space-fibre-products-etale-covers] lies over a point $w$ mapping to $u$ and to $u_0$. Both projections of $U\\times_FU_0$ are etale, being base changes of the etale charts, so [lem-sfb-etale-topological-dimension-at-point] gives $\\dim_uU=\\dim_w(U\\times_FU_0)=\\dim_{u_0}U_0=0$. The minimum description in [def-kun-topological-dimension-at-point] gives an open neighbourhood $V\\subseteq U$ of $u$ with $\\dim V=0$. For every $v\\in V$, $0\\leq\\dim_v V\\leq\\dim V=0$. The fibre of $V\\to\\operatorname{Spec}k$ at its unique target point is $V$ itself, and this map is locally of finite type by the chartwise hypothesis and restriction. Consequently [lem-trf-locally-quasi-finite-relative-dimension-zero] shows $V\\to\\operatorname{Spec}k$ is locally quasi-finite. The affine witness at $u$ in $V$ is also an affine neighbourhood in $U$, so $U\\to\\operatorname{Spec}k$ is quasi-finite at $u$ by [pqf-def-quasifinite]. Since the chart and lift were arbitrary, the definition of $Q_{F/k}$ gives $z\\in Q_{F/k}$.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-etale-topological-dimension-at-point",
+    "def-kun-topological-dimension-at-point",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06ME (lemma-quasi-finite-at-point), proof; canonical locus descent: stacks-properties.tex Tags 06M3 and 06M5(2); zero-dimensional chart argument: spaces-morphisms.tex Tag 04NV and morphisms.tex Tag 0397."
+   }
+  },
+  {
+   "text": "The equality $W_g=p^{-1}(W_h)$ and $z\\in W_g$ imply $p(z)\\in W_h$. Set $A'=W_h$. This is an open subspace containing $p(z)$, and the construction in Step 2 gives precisely that $h|_{A'}$ is locally quasi-finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06ME (lemma-quasi-finite-at-point), proof; canonical locus descent: stacks-properties.tex Tags 06M3 and 06M5(2); zero-dimensional chart argument: spaces-morphisms.tex Tag 04NV and morphisms.tex Tag 0397."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-source-local-property-locus-descent",
+  "lem-sfb-representable-lqf-calculus-descent",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-quasifinite-locus-open",
+  "pqf-def-quasifinite",
+  "def-kun-topological-dimension-at-point",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-etale-topological-dimension-at-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06ME (lemma-quasi-finite-at-point), proof; canonical locus descent: stacks-properties.tex Tags 06M3 and 06M5(2); zero-dimensional chart argument: spaces-morphisms.tex Tag 04NV and morphisms.tex Tag 0397."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The locally quasi finite locus of a representable locally finite type map from an algebraic space to an algebraic stack is open and commutes with base change",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional point in a field fibre of a map from a scheme to an algebraic stack has a locally quasi finite neighbourhood",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable morphism to algebraic stack quasi finite at a fibre point has open locally quasi finite locus",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"LocallyQuasiFinite\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|quasiFiniteLocus|quasi_finite_locus",
+   "results": "OK; 5 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|quasiFiniteLocus|quasi_finite_locus",
+   "results": "{\"t\": \"2026-10-23T19:57:23Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|quasiFiniteLocus|quasi_finite_locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"b803b3c26129a486\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"LocallyQuasiFinite\"",
+   "results": "{\"t\": \"2026-10-23T19:57:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"LocallyQuasiFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional point in a field fibre of a locally finite type map from an algebraic space to an algebraic stack has an open locally quasi finite neighbourhood",
+   "results": "{\"t\": \"2026-10-23T19:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"A zero dimensional point in a field fibre of a locally finite type map from an algebraic space to an algebraic stack has an open locally quasi finite neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"3fcc60b3a8d3a590\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional field fibre point of a locally finite type morphism to an algebraic stack lies in its open locally quasi finite locus",
+   "results": "{\"t\": \"2026-10-23T19:59:31Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional field fibre point of a locally finite type morphism to an algebraic stack lies in its open locally quasi finite locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"69b18f997738c7ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic stack a representable map has an open quasi finite locus detected by dimension zero of a field fibre",
+   "results": "{\"t\": \"2026-10-23T19:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic stack a representable map has an open quasi finite locus detected by dimension zero of a field fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"46ed77cf1e3409b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable locally finite type morphism from an algebraic space to an algebraic stack has a largest open locally quasi finite locus which commutes with every representable base change",
+   "results": "{\"t\": \"2026-10-23T20:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"A representable locally finite type morphism from an algebraic space to an algebraic stack has a largest open locally quasi finite locus which commutes with every representable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\"], \"digest\": \"bd563c3a5a5c014c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 06ME (lemma-quasi-finite-at-point). The open quasi-finite locus and its base-change property are stacks-properties.tex Tag 06M5 (remark-local-source-apply), item (2), and spaces-morphisms.tex Tags 04NV (lemma-locally-quasi-finite-rel-dimension-0), 04NW (lemma-locally-finite-type-quasi-finite-part).",
+   "via": [
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+  "worker": "stage1",
+  "summary": "Read Stacks 06ME and the source-open descent of 06M3/06M5(2). Retained the statement without added hypotheses; split off the generic canonical-locus descent theorem, reused space locus/base-change and scheme dimension-zero criteria, and expanded the field-fibre chart argument. Searched source, DAG and current blueprint; no closed project attachment or Mathlib match.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting geometric input along the recorded stable-curve/moduli/finite-inertia chain. The inherited from.node=null and via chain are retained; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-stack-diagonal-space-source-representability",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "def-sfb-algebraic-moduli-stack",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-representable-lqf-calculus-descent",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-etale-source-locality",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-space-quasifinite-locus-open",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "def-kun-topological-dimension-at-point",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "why": "Generic algebraic geometry used for the Stacks 06ME chart/dimension proof; the six-functor stability unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Reviewer repair: scheme coproduct of refined etale charts in the etale source-locality check of step 2; generic scheme fact, Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-representable-lqf-calculus-descent",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-quasifinite-locus-open",
+  "pqf-def-quasifinite",
+  "def-kun-topological-dimension-at-point",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-07b11eb4c",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-07b11eb4c (reviewer sub-agent of L); spot-checked: I read Stacks 06ME, 06M3/06M5(2), the spaces dimension-at-point definition (any/some chart) and 04N4; tags verified. The item statement agrees with 06ME and is unchanged. New node lem-sfb-source-local-property-locus-descent (generic 06M3 locus descent, R = all) is statement-only and self-contained, and its statement is true: I reconstructed the descent via scheme covers of the space targets and a smooth atlas; its hypothesis (iii) is unneeded but harmless. It is not a clause of the item, and the DAG search finds no duplicate (closest are the unramified instance, the scheme-groupoid quasi-finite locus and the maximal smooth open). Step 1 representability and locally-finite-type base change are OK. Step 2 hypotheses (i)-(ii) come from lem-sfb-representable-lqf-calculus-descent; the space quasi-finite locus Q is the largest lqf open with arbitrary base change. Step 3's lqf argument on the open V is correct. Two repairs to the item: (1) step 2 did not handle jointly surjective families in the etale source-locality check, so I added the scheme-coproduct reduction citing lem-weil-pbc-scheme-coproduct-family; (2) step 3 used chart independence of dim_z F uncited (C1), so I added a common-point argument on U x_F U_0 citing lem-trf-space-fibre-products-etale-covers and the existing lem-sfb-etale-topological-dimension-at-point (04N4). Step 4 is elementary. Batch-5: the trf citations are general definitions and the foundations 02X2 and 0397, not steps of the trace-formula or Poincare proofs; accepted. No SGA. No cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQuasiFiniteFibreNeighbourhood",
+  "declaration": "CategoryTheory.exists_open_locallyQuasiFinite_of_field_fibre_dimension_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQuasiFiniteFibreNeighbourhood.lean",
+  "statement": "theorem exists_open_locallyQuasiFinite_of_field_fibre_dimension_zero {S : Scheme.{u}} (X : BasedCategory.{v, w} (Over S)) (hX : IsAlgebraicModuliStack X) (A : AlgebraicSpace S) (h : BasedFunctor (discreteModuli A.obj.obj) X) (hft : ModuliSpaceTest @LocallyOfFiniteType h) (k : Type u) [Field k] (s : Spec (CommRingCat.of k) ⟶ S) (a : BasedFunctor (discreteModuli (yoneda.obj (Over.mk s))) X) (F : AlgebraicSpace S) (p : F.obj.obj ⟶ A.obj.obj) (e : BasedFunctor (discreteModuli F.obj.obj) (moduliTwoFiberProduct h a)) (he : e.toFunctor.IsEquivalence) (hp : Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst h a)) (discreteModuliMap p))) (z : Point F.obj.obj) (hz : etaleLocalDimension F.obj.obj z = 0) : ∃ V : OpenSubspace A, mapPoint p z ∈ pointImage V.val.ι ∧ ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite ((discreteModuliMap V.val.ι).comp h)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The algebraic space F is identified with the actual 2-fibre product by e and he; hp fixes its projection to A. Uses the existing chartwise property, point map, dimension and open-subspace definitions. Adds their already landed definition nodes to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b419867",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, Stacks 06ME (morphisms.tex 4035-4049) and every used dep declaration (IsAlgebraicModuliStack, ModuliSpaceTest/HasSpaceBaseChange, moduliTwoFiberProduct/Fst, Point, etaleLocalDimension=sup of topologicalKrullDimAt over etale chart lifts, OpenSubspace, mapPoint, pointImage, Scheme.Hom.IsLocallyQuasiFinite 01TD with finite type). All clauses match: arbitrary S/universes u v w, algebraic stack, lft via chartwise representable test (presentation existence follows from the diagonal, so not extra), arbitrary field point, F fixed as the actual 2-fibre product by e/he/hp, local dim_z F=0, exists OpenSubspace containing p(z) with chartwise lqf restriction; no Noetherian/qc additions. IsLocallyQuasiFiniteModuliMap is the non-representable 06PU notion, not a duplicate. Node diff vs side-live: only lean + 6 added definition stmt_deps (H2 clean; previous Point-owner return fixed). lean.statement verbatim; one sorry; docstrings with source/blueprint and 4-step proof; private imports exist; report has Worker report and Second reading by Q38 (self-audit). No duplicate in Sheaf/WeilConjectures. No file changed, so no compile."
+ }
+}

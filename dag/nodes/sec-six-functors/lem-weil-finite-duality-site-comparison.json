@@ -31,199 +31,108 @@
  ],
  "proof": [
   {
-   "text": "The comparison inverse image is exact and identifies the two constant coefficient rings by [lem-sf-comparison-pullback-exact]. The tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to this flat ringed-site morphism, therefore makes $\\nu^*$ a strong monoidal functor on the derived categories. Define $\\beta_{K,M}$ by transposing\n$$\n\\nu^*R\\mathcal Hom(K,M)\\otimes^L\\nu^*K\\cong\\nu^*(R\\mathcal Hom(K,M)\\otimes^LK)\\xrightarrow{\\nu^*\\mathrm{ev}}\\nu^*M.\n$$\nThe tensor-Hom adjunction used here is obtained as follows on either ringed site. Choose K-flat representatives of the two tensor arguments by [lem-pc-kflat-resolution] and a K-injective representative $I$ of the target, whose existence is part of [def-pur-derived-internal-hom]. The functorial complex isomorphism of [lem-sc-derived-hom-tensor-total] identifies $\\mathcal Hom^\\bullet(Q,\\mathcal Hom^\\bullet(P,I))$ with $\\mathcal Hom^\\bullet(\\operatorname{Tot}(Q\\otimes P),I)$. The inner Hom is K-injective by [lem-pur-hom-kflat-into-kinjective], so taking zeroth derived global sections and using [lem-pur-rhom-global-sections] gives the natural bijection $\\operatorname{Hom}(Q,R\\mathcal Hom(P,I))\\cong\\operatorname{Hom}(Q\\otimes^LP,I)$. Its evaluation is the transpose of the identity, and at the dualizing target this is the pairing of [lem-weil-duality-pairing]. This formula specifies the map to be checked, rather than just an unspecified isomorphism. Inverse-image comparison with scheme pullback follows by composing the two inverse-image adjunctions: both compositions are left adjoint to the same direct-image composition, as seen by evaluating at the fibre product. Thus open restriction commutes with comparison, including its units and counits.",
+   "text": "A lisse finite flat sheaf has a degree-zero derived exact pairing, constructed by the proved lisse-flat comparison module. Strong monoidal comparison preserves this pairing, so its canonical internal-Hom comparison is invertible for every target, without a constructibility hypothesis on that target.",
    "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-duality-pairing",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-proetale-operations",
-    "lem-pc-kflat-resolution",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-pur-rhom-global-sections",
-    "def-pur-derived-internal-hom"
+    "lem-sf-lisse-flat-hom-site-comparison",
+    "def-sf-evaluation-hom-site-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, first paragraph: exact comparison and open restrictions; evaluation convention in the final paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "For a closed immersion $i:Z\\hookrightarrow T$ in the finite-type setting, apply [lem-weil-finite-duality-closed-comparison] to the bounded constructible etale input $M$. It supplies bounded-below $Ri_{\\mathrm{et}}^!M$ and the canonical isomorphism $\\nu_Z^*Ri_{\\mathrm{et}}^!M\\cong Ri_{\\mathrm{proet}}^!\\nu_T^*M$, together with its exceptional-counit equation. The comparison uses the ambient closed right adjoints on the two sites; no interchange of ordinary closed restriction with internal Hom is required.",
+   "text": "For a closed-then-open stratum, construct the ambient closed right adjoints. The proved closed-support comparison identifies their values on bounded-below etale inputs; exact open pullback comparison pastes this to an isomorphism between the two stratum exceptional values. The etale value remains bounded below. This is the coefficient-independent closedComparisonAlpha_isIso argument of lem-weil-finite-duality-closed-comparison, rather than a new arbitrary existence assertion.",
    "uses": [
-    "lem-weil-finite-duality-closed-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, first paragraph: compare the closed-support triangles"
-   }
-  },
-  {
-   "text": "For a locally closed immersion $s:S\\hookrightarrow T$, apply [lem-weil-finite-duality-locally-closed-comparison]. With $N=Rs_{\\mathrm{et}}^!M$, where the etale functor is the closed ambient adjoint after open restriction, it gives $N\\in D^+$ and $\\nu_S^*N\\cong Rs_{\\mathrm{proet}}^!\\nu_T^*M$. Its counit equation is the one needed for the stratum-Hom identity, and it identifies this ambient value with the transported functor of [def-weil-exceptional-inverse-image]. Thus no ambient pro-etale adjoint for arbitrary morphisms is used.",
-   "uses": [
-    "lem-weil-finite-duality-locally-closed-comparison",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, second paragraph: locally closed exceptional restriction and its adjunction comparison"
-   }
-  },
-  {
-   "text": "Clause (1) of [thm-sf-preservation-class] makes the transported exceptional value on $\\nu_T^*M$ bounded constructible; its hypotheses hold because $T,S$ are separated finite-type $k$-schemes and $s$ is a separated finite-type immersion. By step 3 this value is $\\nu_S^*N$. The equivalence [lem-sf-proetale-constructible-origin] supplies $N_0\\in D^b_c(S_{\\mathrm{et}},A)$ with $\\nu_S^*N_0\\cong\\nu_S^*N$. Both $N,N_0$ are bounded below, so full faithfulness [thm-weil-pbc-site-comparison] lifts this isomorphism and its inverse to inverse maps, giving $N\\cong N_0$. Hence $Rs_{\\mathrm{et}}^!M$ is bounded constructible, with no finite-Tor hypothesis on $M$ or $N$.",
-   "uses": [
-    "thm-sf-preservation-class",
-    "lem-sf-proetale-constructible-origin",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, second paragraph: verify the second-variable hypothesis for the stratum-Hom comparison"
-   }
-  },
-  {
-   "text": "We make the generator reduction explicit without borrowing a stratification from the proof of another node. By [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-tor-amplitude], $\\nu_X^*$ is an equivalence on bounded constructible finite-Tor objects. Apply the generation statement of [lem-trf-devissage-generation] on the pro-etale side. Its generators have the form $g_*j_!L$, where $j:S\\hookrightarrow\\overline S$ is open, $g:\\overline S\\hookrightarrow X$ is closed, and $L$ is lisse with finite flat stalks. The lisse descent statement [lem-sf-proetale-locally-constant-origin] supplies a lisse etale $L_0$ with $\\nu_S^*L_0\\cong L$. It has Tor amplitude $[0,0]$ by the converse in [lem-sf-comparison-tor-amplitude]: a locally constant sheaf with flat stalks is locally a constant flat module, so tensoring it is exact. By [lem-cbc-proetale-extension-zero-comparison] and [prop-weil-pbc-comparison-direct-image],\n$$\\nu_X^*(Rg_{\\mathrm{et},*}j_{\\mathrm{et},!}L_0)\\cong Rg_{\\mathrm{proet},*}j_{\\mathrm{proet},!}L.$$\nAll these objects are bounded constructible, and the equivalence lifts the finite cones, shifts and retract diagrams exhibiting generation. Hence the etale $D^b_{ctf}$ is generated thickly by these etale objects. Put $s=g\\circ j:S\\hookrightarrow X$ and factor it as $s=v\\circ c$ with $v:V=X\\setminus(\\overline S\\setminus S)\\hookrightarrow X$ open and $c:S\\hookrightarrow V$ closed. Closed immersions are finite [lem-weil-pbc-closed-immersion-finite], so $Rg_{\\mathrm{et},*}=g_{\\mathrm{et},*}$ and $Rc_{\\mathrm{et},*}=c_{\\mathrm{et},*}$ on these bounded-below objects [lemma-weil-pbc-finite-direct-image-exact], and [lem-sfb-etale-locally-closed-extension-comparison] gives $g_*j_!L_0\\cong v_!c_*L_0=:Rs_!L_0$, the form used in steps 3 and 8. Since $\\beta_{K,M}$ is natural in $K$, it suffices to treat $Rs_!L_0$. This uses the statements of the generation and lisse-descent nodes, not their internal proofs.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "lem-trf-devissage-generation",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-sfb-etale-locally-closed-extension-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, second paragraph: finite stratification and reduction to extensions from site-perfect strata"
-   }
-  },
-  {
-   "text": "For fixed $M$ the property that $\\beta_{K,M}$ is an isomorphism is thick in $K$. On the etale side exactness in the first variable is [lem-sf-hom-triangulated]. On the pro-etale side this is the following explicit calculation with [def-pur-derived-internal-hom] and [def-pur-hom-complex]: for a map $u:K_1\\to K_2$ and a K-injective representative $I$ of the second variable, $\\mathcal Hom^\\bullet(\\operatorname{Cone}(u),I)$ is the shifted cone of $\\mathcal Hom^\\bullet(K_2,I)\\to\\mathcal Hom^\\bullet(K_1,I)$, with the differential $d(f)=d_I f-(-1)^{|f|}f d_K$. This is checked on the two cone summands, and descends to the derived category because the chosen internal Hom does. Exact $\\nu^*$ carries cone triangles to triangles, and the transpose formula in step 1 is natural, so these are morphisms of triangles. If two components are isomorphisms, the long exact cohomology sequences give the third by the five lemma. Shifts and finite sums are preserved. If $K$ is a retract of $K'$ with inclusion $u$ and projection $v$, an inverse for its component is $F(u)\\beta_{K',M}^{-1}G(v)$, where $F,G$ are the two contravariant functors; the two inverse identities follow from naturality and $vu=1$. It therefore suffices to check the generators from step 5.",
-   "uses": [
-    "lem-sf-hom-triangulated",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, second paragraph: triangulated internal Hom and induction through the triangles"
-   }
-  },
-  {
-   "text": "For a generator $Rs_!L_0$, set $N=Rs_{\\mathrm{et}}^!M$, bounded constructible by steps 2–4. The ring $A$ is finite and local by [def-weil-l-adic-coefficient-extension], hence Noetherian (an ascending chain of ideals is an ascending chain of subsets of a finite set). On an etale cover trivializing $L_0$ its module value is a finite flat $A$-module. Apply [lem-weil-bounded-finite-tor-perfect] to that module in degree zero with interval $[0,0]$: it is finite projective, and therefore finite free because $A$ is local. Thus $L_0$ is etale-locally $A^{\\oplus r}[0]$, a site-perfect object. Apply [lem-sf-hom-comparison-finite-free] on each such cover member to this first variable and $N$; it gives $\\beta_{L_0,N}$ there. Here is why this local check suffices. Restriction of a K-injective remains K-injective by [lem-pur-kinjective-restrict-localized], and the Hom-complex formula of [def-pur-derived-internal-hom] restricts termwise to the slice site, so restriction of $R\\mathcal Hom$ is the internal Hom of the restricted inputs. The pro-etale slice is the small pro-etale site of the cover member by [lem-weil-proetale-weakly-etale-localization]; the etale slice has the same description by composing etale maps. The evaluation formula in step 1 restricts to the displayed local comparison. The etale covering is also a pro-etale covering, and [lem-cbc-proetale-stalk-conservative](1) detects its being an isomorphism. Therefore $\\beta_{L_0,N}$ is an isomorphism on $S$.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-bounded-finite-tor-perfect",
-    "lem-sf-hom-comparison-finite-free",
-    "lem-pur-kinjective-restrict-localized",
-    "def-pur-derived-internal-hom",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-cbc-proetale-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, third paragraph: comparison for a site-perfect first variable, with its locality justification"
-   }
-  },
-  {
-   "text": "Use [lem-weil-stratum-ambient-hom] on both sites. Under its canonical tensor-adjunction identifications, the comparison for a generator is the composite\n$$\n\\nu_X^*Rs_{\\mathrm{et},*}R\\mathcal Hom(L_0,N)\n\\xrightarrow{\\sim}Rs_{\\mathrm{proet},*}\\nu_S^*R\\mathcal Hom(L_0,N)\n\\xrightarrow{Rs_*\\beta_{L_0,N}}Rs_{\\mathrm{proet},*}R\\mathcal Hom(\\nu_S^*L_0,\\nu_S^*N)\n\\xrightarrow{\\sim}Rs_{\\mathrm{proet},*}R\\mathcal Hom(\\nu_S^*L_0,Rs_{\\mathrm{proet}}^!\\nu_X^*M).\n$$\nThe first arrow is [prop-weil-pbc-comparison-direct-image], the second is step 7, and the last is steps 2–4. The first arrow is applicable: $s$ is quasi-compact and quasi-separated, and $R\\mathcal Hom(L_0,N)$ is bounded below because locally it is the finite sum $N^{\\oplus r}$. To check that this composite is the specified $\\beta_{Rs_!L_0,M}$, uncurry it. The stratum-adjunction identity is obtained by evaluating on $S$ and applying the counit $Rs_!Rs^!M\\to M$. Steps 2–4 identify that counit under comparison, step 7 identifies evaluation, and the direct-image comparison is the adjunction mate of the commuting pullbacks by [lem-weil-pbc-comparison-direct-image-canonical-mate]. Thus uncurrying the displayed composite gives exactly $\\nu_X^*\\mathrm{ev}$ from step 1; injectivity of the tensor-Hom adjunction gives equality of the maps. Every arrow is invertible, so the generator comparison is invertible. Steps 6 and generation prove $\\beta_{K,M}$ for all stated inputs.",
-   "uses": [
-    "lem-weil-stratum-ambient-hom",
-    "prop-weil-pbc-comparison-direct-image",
-    "thm-sf-ambient-adjoint-class",
-    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-finite-duality-closed-comparison",
     "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, second and third paragraphs: stratum internal Hom identity and assembly of the canonical comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $a=a_X$ and $s=\\operatorname{Spec}k$. By the transported exceptional functor of [def-weil-exceptional-inverse-image],\n$$\n\\omega_{X,\\mathrm{proet}}=\\nu_X^*a^{\\times}R\\nu_{s,*}A_{s,\\mathrm{proet}}.\n$$\nExact comparison identifies $A_{s,\\mathrm{proet}}=\\nu_s^*A_{s,\\mathrm{et}}$ by [lem-sf-comparison-pullback-exact], and the unit isomorphism of [thm-weil-pbc-site-comparison] identifies $R\\nu_{s,*}\\nu_s^*A$ with $A$. Substituting gives the required canonical $w:\\nu_X^*\\omega_{X,\\mathrm{et}}\\xrightarrow{\\sim}\\omega_{X,\\mathrm{proet}}$. This single global formula provides the overlap compatibility that the imported local-embedding argument left implicit. The preservation statement [lem-weil-verdier-preservation-strata], applied to the unit $A_X$ of Tor amplitude $[0,0]$, shows that $\\omega_{X,\\mathrm{et}}=D_{X,\\mathrm{et}}A_X$ is bounded constructible of finite Tor amplitude; it also shows the same for $D_{X,\\mathrm{et}}K$ when $K$ is finite-Tor constructible. These are precisely its stated conclusions, rather than a stratification borrowed from its proof.",
+   "text": "Use the two projection-adjunction Hom isomorphisms constructed in lem-sf-stratum-hom-comparison-mate. Compare their middle ordinary direct images using the canonical bounded-below direct-image comparison, the lisse-flat Hom comparison, and the stratum exceptional-value isomorphism. The exact extension comparison identifies the first inputs. This assembles an isomorphism of the two Hom objects on every stratum generator; all component isomorphisms are proved, and no separated-Hom existence theorem is used.",
+   "uses": [
+    "lem-sf-stratum-hom-comparison-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-lisse-flat-hom-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a strong monoidal left adjoint F, transposing beta through tensor-Hom and F adjunctions gives R(beta) after the unit as Hom(unit) followed by the canonical right-adjoint projection isomorphism. The units are invertible on M and RHom(K,M), since M is bounded below and K bounded above. Therefore R(beta) is invertible. The generator isomorphism of the preceding step puts the target in the essential image of F; both counits are invertible. Counit naturality proves invertibility of the evaluation-defined beta.",
+   "uses": [
+    "def-sf-evaluation-hom-site-comparison",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding adjunction criterion to each stratum generator. The normalized locally closed sheaf-extension isomorphism identifies the closure generator g_*j_!L with that closed-then-open extension in degree zero. The canonical comparison has a triangulated, retract-stable isomorphism locus, closed under isomorphisms by naturality. Etale thick generation therefore proves invertibility for every constructible finite-Tor K.",
+   "uses": [
+    "lem-sfb-etale-locally-closed-extension-comparison",
+    "sk-lem-sf-flat-model",
+    "lem-sf-site-hom-comparison-thick",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed dualizing arrow is F applied to the etale exceptional functor of the base comparison unit. That unit and its degree-zero constant-unit transport are isomorphisms. Functors preserve isomorphisms, giving exactly the prescribed omega isomorphism.",
    "uses": [
     "def-weil-exceptional-inverse-image",
-    "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-verdier-preservation-strata"
+    "thm-weil-pbc-site-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, final paragraph: dualizing-object comparison; global version using the current exceptional-inverse-image convention"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $F=\\nu_X^*$, $D=D_{X,\\mathrm{et}}$ and $D'=D_{X,\\mathrm{proet}}$. Steps 8 and 9 define $c_K:FDK\\xrightarrow{\\sim}D'FK$ by $\\beta_{K,\\omega}$ followed by $R\\mathcal Hom(FK,w)$. Its defining equation is\n$$\n\\mathrm{ev}'_{FK}\\circ(c_K\\otimes1)=w\\circ F(\\mathrm{ev}_K)\n$$\nunder the monoidal identification of step 1. This proves evaluation compatibility. The construction of [lem-weil-duality-pairing] defines $\\delta_K$ by transposing $\\mathrm{ev}_K$ with the tensor factors interchanged. Since $DK$ is finite-Tor constructible by step 9, step 8 also applies to it. The resulting comparison of double duals is\n$$\nFDDK\\xrightarrow{c_{DK}}D'FDK\\xrightarrow{D'(c_K^{-1})}D'D'FK.\n$$\nUncurrying its composite with $F\\delta_K$ gives the factor-interchanged evaluation above: use the evaluation equation for $K$ and $DK$, and naturality of evaluation for $c_K^{-1}$. It is the same transpose that defines $\\delta'_{FK}$, so\n$$\\delta'_{FK}=D'(c_K^{-1})\\circ c_{DK}\\circ F(\\delta_K).$$\nThese equations explicitly identify the double-dual maps. Finally [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-tor-amplitude] give an equivalence on the finite-Tor bounded constructible categories; $c$ identifies their duality functors. The etale biduality theorem [thm-weil-etale-geometric-biduality] then makes the displayed pro-etale double-dual map invertible and transports the etale anti-equivalence. This final application uses the already separate etale theorem, which has no dependency on the present site-comparison lemma.",
+   "text": "Canonical exact coefficient realization identifies the intrinsic and fixed-module constructibility predicates and Tor intervals. Bounded constructible origin, bounded-below full faithfulness and preservation/reflection of Tor amplitude yield the equivalence of the two prescribed finite-Tor constructible full subcategories.",
    "uses": [
-    "lem-weil-duality-pairing",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport",
     "lem-sf-comparison-tor-amplitude",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary inverse image is braided by adjunction from sheaf restriction. Derive this braiding equation and conjugate along the canonical derived-functor isomorphism; the prescribed tensor components give the braided structure used by beta. Pairing normalization identifies the recorded evaluation and transpose with native closed-category evaluation and double dual.",
+   "uses": [
+    "def-sf-evaluation-hom-site-comparison",
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply evaluation-bidual comparison transport to beta at omega and at the dual of K, the prescribed omega isomorphism and the full-subcategory equivalence. Etale geometric biduality supplies dual preservation and invertible biduality. The transport theorem gives the evaluation square, double-dual square, target anti-equivalence and invertibility of every target bidual map.",
+   "uses": [
+    "lem-sf-evaluation-bidual-comparison-transport",
     "thm-weil-etale-geometric-biduality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-    "place": "Proof, final paragraph: evaluation, double-dual maps, and transport of finite-stage Verdier duality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
+  "def-sf-evaluation-hom-site-comparison",
   "def-weil-exceptional-inverse-image",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-site-comparison-morphism",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proetale-stalk-conservative",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-pur-rhom-global-sections",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sf-comparison-pullback-exact",
+  "lem-exc-intrinsic-tor-amplitude-transport",
   "lem-sf-comparison-tor-amplitude",
-  "lem-sf-hom-comparison-finite-free",
-  "lem-sf-hom-triangulated",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-proetale-locally-constant-origin",
+  "lem-sf-evaluation-bidual-comparison-transport",
+  "lem-sf-lisse-flat-hom-site-comparison",
+  "lem-sf-site-hom-comparison-thick",
+  "lem-sf-stratum-hom-comparison-mate",
   "lem-sfb-etale-locally-closed-extension-comparison",
-  "lem-trf-devissage-generation",
-  "lem-weil-bounded-finite-tor-perfect",
   "lem-weil-duality-pairing",
   "lem-weil-finite-duality-closed-comparison",
-  "lem-weil-finite-duality-locally-closed-comparison",
-  "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-stratum-ambient-hom",
-  "lem-weil-verdier-preservation-strata",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-weil-pbc-comparison-direct-image",
-  "thm-sf-ambient-adjoint-class",
-  "thm-sf-preservation-class",
+  "sk-lem-sf-flat-model",
   "thm-weil-etale-geometric-biduality",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
-  "place": "Proof, four paragraphs; corrected citation interfaces and explicit map compatibility"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "E9 repair of C-58656: lisse dualizability, proved closed-support comparison, stratum projection-adjunction Hom isomorphisms and bounded-below direct-image comparison; canonicality by the retained monoidal adjunction criterion; thick generation; then the unchanged prescribed dualizing and evaluation-bidual transport assembly."
  },
  "mathlib_searches": [
   {
@@ -289,15 +198,26 @@
   "thm-pur-finite-coefficient-smooth-purity"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-weil-finite-duality-site-comparison",
   "worker": "stage1",
-  "summary": "Repair of the 2364-character original step 2: extract the closed-support comparison and locally closed ambient/transported-adjoint identification into two statement-only nodes; use the existing preservation theorem and bounded-below full faithfulness to recover etale constructibility in a third short step. Preserve the statement, Lean record and remaining arguments, updating their step references and adding the canonical-mate citation where required. For the return at immutable head 45e73dad61fb, deliver and review this DAG-only repair on stage 1 as explicitly requested by the return; no stage-2 module or compile is part of this authorized delivery. Rechecked the cited exceptional adjoints, canonical mate, constructible second-variable hypothesis and source Lean nonattachment; corrected stale proof-step references.",
-  "blueprint": "Steps 1–2 realize the first proof paragraph (evaluation-defined comparison and closed-support comparison); steps 3–4 extract locally closed comparison and the bounded-constructible second-variable check used in paragraph 2. Steps 5–8 retain the generator reduction, thick closure, finite-free local calculation and stratum-Hom argument of paragraph 2. Steps 9–10 retain the global transported-dualizing-object and evaluation/biduality arguments corresponding to the final paragraph.",
+  "summary": "Repair of the 12134-character proof: four independent statement-only lemmas for exactness/thickness, local finite-flat lisse Hom comparison, the stratum mate equation, and evaluation-normalized transport of a duality category. Reuse the now-explicit etale generation clause in sk-lem-sf-flat-model. Keep the item statement unchanged and preserve the complete old ten-step argument, citation interfaces, searches and Lean record in the report; assemble in six steps under 3000 characters.",
+  "blueprint": "Assembly 1 and new thick-comparison node realize proof paragraphs 1–2; assembly 2 keeps closed/locally closed comparison and bounded-constructible reflection; assembly 3 uses the existing generation theorem for paragraph 2; assembly 4 and two new local/stratum nodes realize its finite-free and adjunction calculations; assemblies 5–6 and the new duality-transport node realize the final paragraph using the existing global transported exceptional formula.",
   "tool_uses": [
    {
     "node": "lem-sf-comparison-pullback-exact",
@@ -402,6 +322,46 @@
    {
     "node": "lemma-weil-pbc-finite-direct-image-exact",
     "why": "Step 5 uses exactness of finite (closed) etale direct image to replace Rg_*, Rc_* by g_*, c_* before applying the sheaf-level interchange; generic black box, no node of this unit states it."
+   },
+   {
+    "node": "def-sf-evaluation-hom-site-comparison",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-finite-duality-locally-closed-comparison",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-verdier-preservation-strata",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "sk-lem-sf-flat-model",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Use the stated generic generation, comparison, preservation or adjunction interface in the retained proof; this is a tool within the existing site-comparison route, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-exact-tensor-functor-derived-normalization",
+    "why": "Generic: derived functor of an exact strong monoidal functor preserving flat/K-flat objects is strong monoidal; gives the monoidal hypothesis of lem-sf-evaluation-bidual-comparison-transport for nu_X^* (step 6). Added by the reviewer."
+   },
+   {
+    "node": "lem-sfb-exact-tensor-functor-derived-braiding",
+    "why": "Generic: the same derived tensor comparison respects the native signed braidings; gives the symmetry hypothesis of lem-sf-evaluation-bidual-comparison-transport for nu_X^* (step 6). Added by the reviewer."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ordinary module-pullback tensor comparison (step 6). Added by the reviewer."
    }
   ]
  },
@@ -431,21 +391,32 @@
   "thm-weil-etale-geometric-biduality",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-sfb-etale-locally-closed-extension-comparison",
-  "lemma-weil-pbc-finite-direct-image-exact"
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-sf-evaluation-hom-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-duality-locally-closed-comparison",
+  "lem-weil-verdier-preservation-strata",
+  "sk-lem-sf-flat-model",
+  "thm-sf-preservation-class",
+  "lem-sfb-exact-tensor-functor-derived-normalization",
+  "lem-sfb-exact-tensor-functor-derived-braiding",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q44-d6b6d1131",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q02-5abd28f7d",
+  "group": "Q02",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-d6b6d1131 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, both blueprint snapshots (identical text; paragraph 1 is the closed comparison, paragraph 2 the locally closed sentence) and unit sk-prop-sf-rf-shriek-preservation. Item statement unchanged and not weakened. It is not a target, so no master base-change declaration applies; the coefficient category is constant A_{E,n} on the small et/proet sites throughout; no SGA. New node lem-weil-finite-duality-closed-comparison is true. Proof: map the nu^* image of the etale support triangle to the proet support triangle; prop-weil-pbc-comparison-direct-image handles Rj_* (T Noetherian, j qcqs); Hom(i_*X,Rj_*Y)=0 makes the fibre map i_*alpha; full faithfulness of proet i_* finishes. It is not a duplicate of lem-coef-site-closed-counit-transport, which compares with the transported J, not the ambient sections-with-support Ri^!. New node lem-weil-finite-duality-locally-closed-comparison is true: closed comparison pasted with open restriction, then eta_M and uniqueness of adjoints. Neither node restates a parent clause. Edge cases Z empty, Z=T, s open, s closed and S empty all behave correctly. B1-B9 hold; no cycle (DFS); proof_deps equals the union of uses; no step over 2000 characters. Steps 4 (preservation clause (1) plus constructible origin plus D^+ full faithfulness), 7, 8, 9 and 10 check against the cited statements. One C1 fault, fixed: step 5 produced generators Rg_*j_!L_0 (open into closure, then closed) but steps 3 and 8 use Rs_!=v_!Rc_* (closed, then open), and nothing cited the identification. I added lem-weil-pbc-closed-immersion-finite (Mathlib leaf), lemma-weil-pbc-finite-direct-image-exact and lem-sfb-etale-locally-closed-extension-comparison, a sentence that the identification suffices by naturality of beta in K, and two split_report.tool_uses. Accepted tool uses: lem-weil-pbc-comparison-direct-image-canonical-mate plus the two I added. Corrected item in fixes/dag/nodes/sec-six-functors/; full checks in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-5abd28f7d (reviewer sub-agent of L); spot-checked: I read the 2026-10-21 re-split note; it requires at least 4 new nodes and an assembly of at most 3000 characters. Live still holds the old 10-step proof (12134 characters), so the delivery is not superseded. Only the proof fields of the item changed; statement, stmt_deps and lean record are unchanged. Master and main-20261015 have the same blueprint text. No SGA is cited. Every old step has a carrier. Steps 6, 7, 8 and 10 became the new nodes thick-locus, lisse-flat, stratum-mate and evaluation-bidual-transport. Steps 2-3 are covered by the existing locally-closed comparison. Steps 4 and 9 are assembly steps with the same argument. Step 5 is carried by the existing sk-lem-sf-flat-model Complement, which states generation on either small site. Step 1 is carried by the existing def-sf-evaluation-hom-site-comparison and lem-sf-ringed-derived-closed-symmetric-monoidal, through the thick node. The four nodes are true. I checked the stratum-mate equation arrow by arrow, and checked the double-dual equation of the bidual node by uncurrying. The lisse node holds because a finite flat module over local A is free. The cases L=0, S empty, s=id/open/closed and F=id behave correctly. No node is a duplicate. Batch 5: the flagged sk-lem-sf-flat-model -> det-sf-flat-model-generation -> lem-trf-proetale-pullback-stalk-coherence adds nothing. The base and delivered closures contain the same 77 trace-formula/Poincare nodes, and that node was already reached through the old citation of lem-trf-devissage-generation. It is a generic pullback-stalk coherence lemma, not a step of either assumed proof, so I accepted it. Fault (C1/E1): step 6 applies the bidual node, which needs F=nu_X^* to be strong symmetric monoidal, but cited nothing for it. The derived-tensor-pullback node gives only the isomorphism. I fixed step 6 to cite lem-sfb-exact-tensor-functor-derived-normalization and -braiding, which apply to the exact, flat/K-flat-preserving nu^* with the tensorator of lem-weil-pbc-ringed-topoi-module-pullback-tensor, and lem-sf-ringed-derived-closed-symmetric-monoidal. I added these as tool_uses. There is no cycle, nothing new enters the batch-5 closure, and the assembly is 2953 characters. Advisory, not fixed: stale tool_uses remain, and the stratum node fixes the normalization of chi in words only.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.SixFunctors.FiniteDualitySiteComparison",
   "declaration": "WeilConjectures.finite_duality_site_comparison",
   "declarations": [
    "CategoryTheory.finiteDualitySingleTransport",
+   "CategoryTheory.evaluationDualityCompatibility",
    "AlgebraicGeometry.ProEtale.finiteDualityBaseUnit",
    "AlgebraicGeometry.ProEtale.finiteDualityEtaleObject",
    "AlgebraicGeometry.ProEtale.finiteDualityProEtaleObject",
@@ -453,7 +424,15 @@
    "AlgebraicGeometry.ProEtale.FiniteDualityCompatibility",
    "AlgebraicGeometry.ProEtale.FiniteDualityComparisonData",
    "WeilConjectures.FiniteDualitySiteComparison",
-   "WeilConjectures.finite_duality_site_comparison"
+   "WeilConjectures.finite_duality_site_comparison",
+   "CategoryTheory.evaluationDualityConclusions",
+   "CategoryTheory.EvaluationDualityData",
+   "CategoryTheory.specifiedDualityPairing",
+   "AlgebraicGeometry.ProEtale.finiteDualityNativeBidual",
+   "AlgebraicGeometry.ProEtale.nativeEtaleEvaluation",
+   "AlgebraicGeometry.ProEtale.nativeProEtaleEvaluation",
+   "AlgebraicGeometry.ProEtale.nativeProEtaleBiduality",
+   "AlgebraicGeometry.ProEtale.pairing_normalized"
   ],
   "file": "lean/Sheaf/SixFunctors/FiniteDualitySiteComparison.lean",
   "statement": "theorem finite_duality_site_comparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : FiniteDualitySiteComparison D l hl E n hn X",
@@ -461,7 +440,7 @@
   "by": "Q63",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The helpers expose the prescribed dualizing objects, their canonical comparison arrow from the comparison adjunction unit, and both evaluation/biduality commuting diagrams. The theorem uses the evaluation-defined Hom comparison, fixed-scalar finite-Tor predicates, and comparison-class exceptional functor; no ambient pro-etale adjoint is assumed. Generic helper parameters are fixed by the final coefficient specialization. Constant-unit transport composes the published exact-functor single-functor comparison with the existing degree-zero unit identifications and canonical constant-unit map. This avoids expensive conversion checks without changing the theorem or any mathematical clause."
+  "note": "The prescribed canonical Hom comparison is proved by thick generation from lisse-flat strata, using the coefficient-independent proved closed-support and projection-adjunction helpers. No adopted separated-Hom existence theorem is used. The remaining clauses retain the prescribed exceptional-unit transport and evaluation-biduality assembly. The public compatibility predicates share the same canonical evaluation and biduality formulas, with proved pairing normalization."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -470,5 +449,62 @@
   "group": "Q63",
   "result": "fix",
   "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $X$ be a separated finite-type scheme over\n$k=\\overline{\\mathbf F}_q$, and let\n$\\nu_X:X_{\\mathrm{proet}}\\to X_{\\Et}$ be the comparison morphism.\nFor finite coefficients $A$, $K\\in D^b_{ctf}(X_{\\Et},A)$, and\n$M\\in D^b_c(X_{\\Et},A)$, the canonical map\n\n$$\n\\nu_X^*R\\mathcal Hom_A(K,M)\n\\longrightarrow R\\mathcal Hom_A(\\nu_X^*K,\\nu_X^*M)\n$$\n\nis an isomorphism. Moreover\n$\\nu_X^*\\omega_{X,\\Et}\\cong\\omega_{X,\\mathrm{proet}}$, and these\ncomparisons identify evaluations and double-dual maps. In particular\nfinite-stage Verdier duality on the pro-etale constructible category\nis transported from etale Verdier duality.",
+  "proof": [
+   {
+    "text": "The comparison for $Rj_*$, including a quasi-compact open immersion\n$j$, is [prop-weil-pbc-comparison-direct-image]. The exact\ncomparison pullback commutes with the open restrictions and closed\ndirect images, as their stalk and extension-by-zero descriptions show.\nApply it to the closed-support triangle of\n[lem-exc-closed-support-triangle]; the first comparison identifies\nthe third term with the pro-etale $Rj_*j^*$ term. Full faithfulness\nof closed direct image then gives\n$\\nu_Z^*Ri_{\\Et}^!M\\cong Ri_{\\mathrm{proet}}^!\\nu_X^*M$.\nThis establishes the required closed exceptional comparison directly\nfrom recollement, without an assertion that closed ordinary restriction\ncommutes with internal Hom.",
+    "uses": [
+     "prop-weil-pbc-comparison-direct-image",
+     "lem-exc-closed-support-triangle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The finite stratification in\n[lem-weil-verdier-preservation-strata], and the triangles of\n[def-weil-open-closed-recollement], reduce internal-Hom comparison\nto $K=Rs_!P$, with $P$ site-perfect: internal Hom is triangulated in\nthe first variable by [lem-sf-hom-triangulated] (the same Hom-complex\nargument applies on the pro-etale site), and the exact $\\nu^*$ carries\ntriangles to triangles, so the comparison maps form morphisms of\ntriangles. On both sites the identity\nof [lem-weil-stratum-ambient-hom] reads\n\n$$\nR\\mathcal Hom(Rs_!P,M)\n=Rs_*R\\mathcal Hom(P,Rs^!M).\n$$",
+    "uses": [
+     "lem-weil-verdier-preservation-strata",
+     "def-weil-open-closed-recollement",
+     "lem-sf-hom-triangulated",
+     "lem-weil-stratum-ambient-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The locally closed $Rs^!$ commutes with $\\nu^*$ by the open and\nclosed comparisons above. The site-perfect complex $P$ of\n[def-weil-site-perfect-complex] is locally a bounded complex of finite\nfree modules, and for such a first variable and a bounded constructible\nsecond variable the internal Hom commutes with $\\nu^*$ by\n[lem-sf-hom-comparison-finite-free]; the question being local, this\napplies to $R\\mathcal Hom(P,Rs^!M)$. Finally $Rs_*$ commutes with comparison by\n[prop-weil-pbc-comparison-direct-image]. Hence the specified\ninternal-Hom map is an isomorphism on every stratum generator and then\non $K$.",
+    "uses": [
+     "def-weil-site-perfect-complex",
+     "lem-sf-hom-comparison-finite-free",
+     "prop-weil-pbc-comparison-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Locally embed $X$ as a closed subscheme of a smooth affine space.\nOn both sites its dualizing object is the closed exceptional inverse\nimage of the smooth dualizing object. Smooth purity\n[thm-pur-finite-coefficient-smooth-purity] and the closed comparison\njust proved identify these objects; uniqueness of the adjunction\ncomparisons makes the local identifications agree on overlaps.\nThe Hom comparisons are defined by evaluation, so they identify its\ntranspose, the double-dual map, as well. Finally the equivalence of\nbounded constructible categories is\n[lem-sf-proetale-constructible-origin], and finite Tor intervals\nare preserved and detected by [lem-exc-comparison-tor-interval].",
+    "uses": [
+     "thm-pur-finite-coefficient-smooth-purity",
+     "lem-sf-proetale-constructible-origin",
+     "lem-exc-comparison-tor-interval"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4f7d0",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261026T001410-L-4189220",
+  "kind": "interface",
+  "note": "independent cc review: 4f7d Lean+node byte-identical to eb28 (reviewed FIX); change record lost eb28's FiniteConstructibleHom user row; reader gate re-run on current build: item + adapted FiniteStageVerdierBiduality + 18 direct importers + BoundaryFiniteSiteData all compiled; removed unit-route imports are def nodes of other units, not in item unit realized"
  }
 }

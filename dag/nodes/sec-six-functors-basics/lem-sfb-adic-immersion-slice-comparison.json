@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-adic-immersion-slice-comparison",
+ "kind": "statement",
+ "title": "Slice coefficient equivalence for the fixed completed immersion model",
+ "statement": "Let i:S→X be an immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], [def-weil-open-immersion], A a Noetherian ring and I any ideal. For every U in S.ProEt there is an equivalence from the standard derived category over the completed coefficient ring on the AsSmall model slice at up(U) to the standard derived category over the actual inverse-image completed coefficient ring on U. Uniformly in every completed complex K, this equivalence identifies slice restriction of the fixed object sfbImmersionCompletedModel(K) [def-sfb-adic-immersion-completed-model] with sfbLocalRestriction(K) [def-sfb-adic-stratified-perfect-data]. The same equivalence identifies slice restriction of adicResidueConstantPerfect(P) [def-sfb-adic-residue-lift-comparisons] with sfbLocalRestriction of sfbCompletedModel(P), for every ordinary A-complex P. No completeness, residue witness, boundedness or perfectness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-adic-immersion-completed-model",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Before localization use the additive slice module equivalence and natural comparison of the ordinary normalized inverse image with the actual module pullback. The normalization of actual derived objects is isomorphic to the exact derived functor of N_X: apply the Q-preimage isomorphisms twice and the exact derived composition comparison.",
+   "uses": [
+    "lem-sfb-adic-immersion-module-normalization",
+    "lem-sfb-completion-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an immersion, completedMap is invertible and the universal derived-pullback comparison is invertible on every complex. Its value on Q.objPreimage identifies sfbImmersionCompletedModel(K) with D(T_i)(D(N_X)(K)). Derive the module equivalence and its natural isomorphism. Compose the exact-functor composition isomorphisms and the actual slice representative isomorphism to obtain the first comparison for every K with the same derived equivalence eU.",
+   "uses": [
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-adic-immersion-module-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the natural ordinary constant-module comparison termwise to the arbitrary coefficient complex P and localize. The normalization and completed-pullback isomorphisms identify sfbImmersionCompletedModel(sfbCompletedModel(P)) with adicResidueConstantPerfect(P). Restrict this isomorphism to the slice, apply eU, and compose its inverse with the inverse first comparison at sfbCompletedModel(P).",
+   "uses": [
+    "lem-sfb-adic-immersion-constant-module-comparison",
+    "lem-sfb-adic-immersion-module-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-immersion-module-normalization",
+  "lem-sfb-completion-normalization",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-adic-immersion-constant-module-comparison"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 03A0, 03CY, 03DJ, 099L and 099R; completed inverse image and exact slice restriction"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary module comparison and exact localization: lemmas pullback-module, adjoint-pullback-pushforward-modules and push-pull-composition-modules; Bhatt--Scholze Lemma 6.5.8. Lean derived composition and localization glue written by Y5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived complete complexes of sheaves along an immersion preserving residue and restriction to slices",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, restrictFunctor, restrict, restrictFunctorComp_hom_app_app, restrictFunctorCongr, restrictFunctorCongr_hom_app_app; open immersion restriction comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No complete theorem. Reuse the project exact inverse image, scalar restriction, finite-comparison and local-completeness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence; pushforwardPushforwardEquivalence_unit_app_val_app; pushforwardPushforwardEquivalence_counit_app_val_app.",
+   "date": "2026-10-26",
+   "verdict": "Module equivalences exist, but do not state these completed-ring, residue or slice compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|derivedEquivalence|mapDerivedCategoryEquivalence",
+   "results": "Mathlib/Topology/Sheaves/Module.lean:32; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388,403,404,408,409; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:435.",
+   "date": "2026-10-26",
+   "verdict": "No completed normalization theorem; exact derived factorization and canonical module equivalences are the applicable ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionCompletedTransport",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Bhatt--Scholze Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 03A0, 03CY, 03DJ, 099L and 099R; completed inverse image and exact slice restriction"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionSliceComparison",
+  "file": "lean/Sheaf/Paper/AdicImmersionSliceComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_sliceComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbImmersion_sliceComparisons"
+  ],
+  "statement": "theorem sfbImmersion_sliceComparisons\n    {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :\n    ∀ U : S.ProEt, ∃ eU :\n          ConstantCompletion.D\n            ((ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I).over\n              ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)) ≌\n            (let R := (adicLisseForget S).obj\n              ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj\n                (adicLisseCompletedRing X I))\n             @DerivedCategory (SheafOfModules.{u + 1} (R.over U)) _ _\n               (HasDerivedCategory.standard _)),\n        (∀ K : @DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) _ _\n            (proEtaleRingModules_hasDerivedCategory X (adicLisseCompletedRing X I)),\n          Nonempty (sfbLocalRestriction i (adicLisseCompletedRing X I) U K ≅\n          eU.functor.obj ((adicResidueRestriction.{u + 1}\n            (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I)\n            ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)).obj\n              (sfbImmersionCompletedModel i I K)))) ∧\n        ∀ P : CochainComplex (ModuleCat.{u + 1} A) ℤ,\n          Nonempty (eU.functor.obj ((adicResidueRestriction.{u + 1}\n            (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I)\n            ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)).obj\n              (adicResidueConstantPerfect.{u, 0} S I P)) ≅\n            sfbLocalRestriction i (adicLisseCompletedRing X I) U (sfbCompletedModel X I P))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T001524-L-6141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261026T024244-L-653309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

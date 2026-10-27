@@ -1,0 +1,298 @@
+{
+ "id": "lem-pur-open-restriction-comparison-augmentation",
+ "kind": "statement",
+ "title": "Open restriction preserves the comparison augmentation and its normalization",
+ "statement": "Let $A$ be a finite commutative ring, $T$ a scheme [def-pc-scheme], and $j:V\\hookrightarrow T$ an open immersion [def-weil-open-immersion]. Use ordinary constant-$A$ module sheaves on small etale and pro-etale sites in a common larger universe [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, def-weil-size-convention]. Let $\\nu_S^*\\dashv\\nu_{S,*}$ for $S=T,V$ be the comparison adjunctions with ordinary units $\\eta^0$ [def-weil-pbc-site-comparison-morphism], and use inverse-image restrictions $j_e^{-1},j_p^{-1}$ [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image]. Write $\\beta_F:\\nu_V^*j_e^{-1}F\\xrightarrow{\\sim}j_p^{-1}\\nu_T^*F$ for the canonical pullback comparison [lem-weil-pbc-comparison-pullback]. Identify $j_e^{-1}\\nu_{T,*}G=\\nu_{V,*}j_p^{-1}G$ by the identity of sections $G(W\\to V\\to T)$ on every etale $W\\to V$, as in [lem-pur-comparison-pullback-open-unit].\n\nLet $F$ be an etale $A$-module sheaf and $h:\\nu_T^*F\\to J$ any bounded-below injective resolution [def-sp-injective-resolutions]. Set $I=\\nu_{T,*}J$, $a=\\nu_{T,*}(h)\\eta^0_F$, $F_V=j_e^{-1}F$, $J_V=j_p^{-1}J$ and\n$$h_V=(j_p^{-1}h)\\beta_F,\\qquad a_V=\\nu_{V,*}(h_V)\\eta^0_{F_V}.$$\nThen $h_V:\\nu_V^*F_V\\to J_V$ is a bounded-below injective resolution, $\\nu_{V,*}J_V=j_e^{-1}I$, and $a_V$ is an etale bounded-below injective resolution representing the derived unit under its canonical injective computation [lem-weil-pbc-right-derived-plus-injective, lem-pur-support-comparison-common-injectives]. In these identifications the ordinary unit and the augmentations satisfy the actual equalities\n$$j_e^{-1}(\\eta^0_F)=\\nu_{V,*}(\\beta_F)\\eta^0_{F_V},$$\n$$a_V=\\nu_{V,*}(j_p^{-1}h)\\nu_{V,*}(\\beta_F)\\eta^0_{F_V}=j_e^{-1}(a).$$\nFor each etale $W\\to V$, evaluation of $j_e^{-1}I$ and $J_V$ gives the same complex $J(W\\to T)$, with its actual differential and all restriction maps.\n\nThese are identifications of augmented resolutions, natural in chain maps: for a second pair $F',h':\\nu_T^*F'\\to J'$ and $f:F\\to F'$, $t:J\\to J'$ with $th=h'\\nu_T^*f$, put $f_V=j_e^{-1}f$, $t_V=j_p^{-1}t$. Then\n$$t_Vh_V=h'_V\\nu_V^*(f_V),\\qquad\\nu_{V,*}(t_V)a_V=a'_V f_V.$$\nThe canonical injective computation isomorphisms for the restricted resolutions commute with these maps. No assertion about supported or global comparison morphisms, or connecting morphisms, is included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF (lemma-localize-morphism), localization square and its direct-image/restriction identity; with proetale.tex Tags 099V (lemma-relative-comparison) and 09B1 (lemma-compare-derived). Agent-formulated augmentation normalization extracted from returned section-model steps 2 and 4, the restriction identity in step 1, and open naturality in step 6; uses the exact canonical unit normalization of lem-pur-comparison-pullback-open-unit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-size-convention",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-comparison-pullback-open-unit",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-pur-support-comparison-common-injectives"
+ ],
+ "proof": [
+  {
+   "text": "An open immersion is etale by [lem-weil-pbc-open-immersion-etale], hence weakly etale. Use the adopted source instance ProEtale.preservesInjectiveObjects_localizationRestriction directly, specialized to ModuleCat A and j, to show every term of the restricted complex is injective. Restriction is the continuous sheaf pushforward, so it preserves finite limits; the existing openImmersionRestrictionLowerStarAdjunction also makes it a left adjoint, so it preserves finite colimits. The exact-functor homology instances of [lem-weil-pbc-exact-functor-complex-cohomology] therefore preserve the quasi-isomorphism h. Precompose with the canonical comparison beta and the degree-zero source transport from [lem-weil-pbc-comparison-pullback, lem-pur-comparison-pullback-open-unit]. An additive functor preserves the lower bound, already recorded by mapCochainComplexPlus. Thus this very h_V is the required bounded-below injective resolution; the slice-equivalence and unbounded derived-evaluation parts of the larger restriction theorem are unnecessary.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-comparison-pullback-open-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), localization square; proetale.tex Tag 099V; homology.tex Tag 010N (lemma-exact-functor), termwise application"
+   }
+  },
+  {
+   "text": "Use the restriction identifications and the actual unit equation of [lem-pur-comparison-pullback-open-unit]. Its map $a_F$ is $\\beta_F^{-1}$, and its direct-image map $c$ is the identity on sections in the identifications of the present statement. It says $\\nu_{V,*}(\\beta_F^{-1})j_e^{-1}(\\eta^0_F)=\\eta^0_{F_V}$. Compose on the left with $\\nu_{V,*}(\\beta_F)$ and cancel the inverse factors. This gives the required equality $j_e^{-1}(\\eta^0_F)=\\nu_{V,*}(\\beta_F)\\eta^0_{F_V}$, with exactly the prescribed canonical $\\beta$, rather than a newly chosen pullback isomorphism.",
+   "uses": [
+    "lem-pur-comparison-pullback-open-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), sectionwise restriction/direct-image identity; canonical-unit normalization in lem-pur-comparison-pullback-open-unit"
+   }
+  },
+  {
+   "text": "The direct-image/restriction identification $c_G$ of [lem-pur-comparison-pullback-open-unit] is the identity on $G(W\\to V\\to T)$. Applied degreewise to $J$, it identifies $\\nu_{V,*}J_V$ with $j_e^{-1}\\nu_{T,*}J=j_e^{-1}I$, and, applied to $h$, identifies $\\nu_{V,*}(j_p^{-1}h)$ with $j_e^{-1}(\\nu_{T,*}h)$. Expand the definition of $h_V$ and use functoriality and step 2:\n$$a_V=\\nu_{V,*}(j_p^{-1}h)\\nu_{V,*}(\\beta_F)\\eta^0_{F_V}=j_e^{-1}(\\nu_{T,*}h)j_e^{-1}(\\eta^0_F)=j_e^{-1}a.$$\nEvery equality is in the category of augmented complexes under the stated restriction identifications.",
+   "uses": [
+    "lem-pur-comparison-pullback-open-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), final assertion and displayed evaluation calculation in its proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-support-comparison-common-injectives] with the scheme $V$, the same finite commutative ring $A$, and the resolution $h_V$ established in step 1. It gives that $a_V:F_V\\to\\nu_{V,*}J_V$ is an etale bounded-below injective resolution and that, under its canonical injective computation isomorphism, $Qa_V$ is the derived unit. No constructibility assumption on $F_V$ is needed. The sectionwise identity from [lem-pur-comparison-pullback-open-unit] evaluates, on every etale $W\\to V$, to $J^n(W\\to T)$ in each degree $n$. It evaluates the differential to $d_J^n(W\\to T)$, and an arrow $W'\\to W$ to the restriction map of $J^n$ along that same arrow over $T$. Thus these are the same complexes, differentials and restriction maps, not just isomorphic cohomology groups.",
+   "uses": [
+    "lem-pur-support-comparison-common-injectives",
+    "lem-pur-comparison-pullback-open-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V (lemma-relative-comparison), clause (2); Tag 09B1 (lemma-compare-derived), clause (2); sites.tex Tag 03CF, sectionwise evaluation"
+   }
+  },
+  {
+   "text": "Naturality of $\\beta$ in [lem-weil-pbc-comparison-pullback] gives $(j_p^{-1}\\nu_T^*f)\\beta_F=\\beta_{F'}\\nu_V^*f_V$. Restrict the given equation $th=h'\\nu_T^*f$ and substitute this identity:\n$$t_Vh_V=(j_p^{-1}t)(j_p^{-1}h)\\beta_F=(j_p^{-1}h')(j_p^{-1}\\nu_T^*f)\\beta_F=h'_V\\nu_V^*f_V.$$\nThe unit of the adjunction of [def-weil-pbc-site-comparison-morphism] is a natural transformation, so $\\nu_{V,*}(\\nu_V^*f_V)\\eta^0_{F_V}=\\eta^0_{F'_V}f_V$. Consequently\n$$\\nu_{V,*}(t_V)a_V=\\nu_{V,*}(t_Vh_V)\\eta^0_{F_V}=\\nu_{V,*}(h'_V)\\eta^0_{F'_V}f_V=a'_Vf_V.$$\nThis is an equality of chain maps, with no choice of a comparison lift.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), natural localization square; ordinary adjunction unit naturality"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-support-comparison-common-injectives] to both restricted resolutions to obtain theta and theta-prime with their canonical computation and derived-unit normalization equations. Step 5 gives the augmentation chain-map equality. The first augmentation is a quasi-isomorphism by the same common-injectives theorem, so its image under the bounded-below derived localization Q is invertible. Precompose the desired theta/theta-prime naturality square with that image. Functoriality of Q and the augmentation equality turn its left side into Q(f_V) followed by Qa-prime and theta-prime. Replace Qa-prime theta-prime and Qa theta by the two derived units. The remaining equality is precisely naturality of the unit of the derived comparison adjunction [def-weil-pbc-site-comparison-morphism]. Cancel the invertible image of the first augmentation. Thus the canonical computation isomorphisms commute with every compatible chain map without reconstructing them or making any additional choice.",
+   "uses": [
+    "lem-pur-support-comparison-common-injectives",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI/05TH for the canonical computation supplied by common injectives; naturality of the derived comparison adjunction unit and localization of quasi-isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-comparison-pullback-open-unit",
+  "lem-pur-support-comparison-common-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF (lemma-localize-morphism), final assertion; agent elaboration of augmentation and chain-map equations, with proetale.tex Tags 099V/09B1 and derived.tex Tags 05TI/05TH/05SA; final naturality square proved by cancellation of the localized quasi-isomorphic augmentation and derived-unit naturality; restriction injectivity is supplied directly by the adopted localizationRestriction instance, and exactness by its two adjunctions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit|[Oo]pen.*[Ii]njective|[Ii]njective.*[Oo]pen",
+   "results": "{\"t\": \"2026-10-22T05:56:36Z\", \"tool\": \"grep\", \"query\": \"restrictAdjunction_unit|[Oo]pen.*[Ii]njective|[Ii]njective.*[Oo]pen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/OpenPartialHomeomorph/Basic.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Composition.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Composition.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Defs.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Defs.lean\", \"Mathlib/Topology/Algebra/Constructions.lean\", \"Mathlib/Algebra/Group/Action/Faithful.lean\", \"Mathlib/Algebra/Group/Action/Pretransitive.lean\"], \"digest\": \"c694c2cdfe03bed8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give Zariski structure-module restriction or ordinary adjunction identities, not the etale/proetale restricted augmented resolution with its derived unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a common injective etale proetale augmented resolution to an open subscheme and identify the comparison unit augmentation",
+   "results": "{\"t\": \"2026-10-22T05:56:36Z\", \"tool\": \"leansearch\", \"query\": \"Restrict a common injective etale proetale augmented resolution to an open subscheme and identify the comparison unit augmentation\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "{\"t\": \"2026-10-22T05:56:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.unit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\", \"CategoryTheory.LiftRightAdjoint.unitEqualizes\"], \"digest\": \"dc5b6bd2b0a9e6ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give Zariski structure-module restriction or ordinary adjunction identities, not the etale/proetale restricted augmented resolution with its derived unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an etale proetale comparison injective resolution to an open subscheme gives the same augmented etale resolution after the canonical pullback isomorphism and commutes with lifting chain maps",
+   "results": "{\"t\": \"2026-10-22T05:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of an etale proetale comparison injective resolution to an open subscheme gives the same augmented etale resolution after the canonical pullback isomorphism and commutes with lifting chain maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ofRestrict_app\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"7b1850a661db39fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give Zariski structure-module restriction or ordinary adjunction identities, not the etale/proetale restricted augmented resolution with its derived unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary adjunction unit for comparison of small etale and proetale sites commutes with open restriction, so the adjoint augmentation of a restricted injective resolution equals the restriction of its augmentation",
+   "results": "{\"t\": \"2026-10-22T05:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"The ordinary adjunction unit for comparison of small etale and proetale sites commutes with open restriction, so the adjoint augmentation of a restricted injective resolution equals the restriction of its augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"CategoryTheory.plusPlusAdjunction_counit_app_val\", \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\"], \"digest\": \"ce0fc1e7bc04b708\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give Zariski structure-module restriction or ordinary adjunction identities, not the etale/proetale restricted augmented resolution with its derived unit"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|[Pp]ro[Ee]tale|[Ee]tale.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T05:57:14Z\", \"tool\": \"grep\", \"query\": \"restrictAdjunction_unit_app_app|[Pp]ro[Ee]tale|[Ee]tale.*[Ii]njective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"87d5722b3254d217\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give Zariski structure-module restriction or ordinary adjunction identities, not the etale/proetale restricted augmented resolution with its derived unit"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|proetale.*comparison|comparison.*proetale",
+   "results": "{\"t\": \"2026-10-22T06:52:44Z\", \"tool\": \"grep\", \"query\": \"restrictAdjunction_unit_app_app|proetale.*comparison|comparison.*proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"56e5d504398ccb40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunction/resolution naturality or Zariski modules; they do not identify the etale/proetale restricted augmentation or its canonical site-comparison unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "{\"t\": \"2026-10-22T06:52:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.unit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\", \"CategoryTheory.LiftRightAdjoint.unitEqualizes\"], \"digest\": \"dc5b6bd2b0a9e6ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunction/resolution naturality or Zariski modules; they do not identify the etale/proetale restricted augmentation or its canonical site-comparison unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subscheme preserves the unit augmentation of an etale proetale injective resolution",
+   "results": "{\"t\": \"2026-10-22T06:52:44Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to an open subscheme preserves the unit augmentation of an etale proetale injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\"], \"digest\": \"7a8e46a12858e037\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunction/resolution naturality or Zariski modules; they do not identify the etale/proetale restricted augmentation or its canonical site-comparison unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of etale proetale comparison preserves augmented bounded below injective resolutions and the adjunction unit",
+   "results": "{\"t\": \"2026-10-22T06:52:51Z\", \"tool\": \"leanfinder\", \"query\": \"Open restriction of etale proetale comparison preserves augmented bounded below injective resolutions and the adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.Φ_functor_map_ι_app\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\"], \"digest\": \"f426dba5a545fc68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunction/resolution naturality or Zariski modules; they do not identify the etale/proetale restricted augmentation or its canonical site-comparison unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of adjunction units identifies the restriction of the adjoint augmentation of an injective resolution with its local augmentation",
+   "results": "{\"t\": \"2026-10-22T06:52:52Z\", \"tool\": \"leanfinder\", \"query\": \"A commuting square of adjunction units identifies the restriction of the adjoint augmentation of an injective resolution with its local augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.desc_commutes_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality\"], \"digest\": \"d753e47818ae653e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunction/resolution naturality or Zariski modules; they do not identify the etale/proetale restricted augmentation or its canonical site-comparison unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-support-comparison-section-model",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Current main-20261015 thm-pur-rank-one-local-calculation.proof.md, final sentence 'The pro-etale form is the comparison [thm-weil-pbc-site-comparison]': localization of the augmented common resolution to the open complement, returned section-model steps 2 and 4, restriction identity in step 1 and open naturality in step 6.",
+   "via": [
+    "lem-pur-support-comparison-section-model",
+    "lem-pur-support-comparison-boundary"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-open-restriction-comparison-augmentation",
+  "worker": "stage1",
+  "summary": "Proved restriction of the given resolution using existing pro-etale restriction and exact-functor cohomology nodes; derived the unit and augmentation equalities from the existing canonical open-unit normalization; applied the existing common-injective theorem on V; wrote both chain-map equations and the naturality square of the canonical injective computation explicitly. No statement change and no new nodes.",
+  "blueprint": "Realizes the final pro-etale comparison sentence of main-20261015 thm-pur-rank-one-local-calculation.proof.md by supplying its open-restricted augmented resolution normalization; retains the imported ancestor and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic exactness and injective preservation for localization of ordinary constant-coefficient module sheaves; needed for the given restricted resolution and not a replacement of the Kummer unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic homology compatibility of an exact additive functor proves that restriction carries h to a quasi-isomorphism; the Kummer unit has no alternative generic exact-functor statement."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical comparison pullback isomorphism and its naturality; supplies beta for the open restriction used by the item."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic natural derived comparison and its invertibility on bounded-below injective complexes, used to write the canonical computation naturality square."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic geometric fact making the given open immersion an object of the small etale site and, by inclusion, of the pro-etale site."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck property for module sheaves on the small pro-etale site in the prescribed larger universe, verifying the derived-functor hypotheses."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives for that Grothendieck category, verifying the hypothesis of the cited canonical right-derived comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-00bf06719",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-00bf06719 (reviewer sub-agent of L); spot-checked: PASS. The split adds proof steps only. Statement, stmt_deps, source and blueprint are identical to the live unsplit node, there are no new nodes, no repair note or re-split note, and no SGA source. I re-checked every step. Step 1: restriction to V is exact and preserves injectives (lem-weil-pbc-proetale-restriction-injectives, via the restriction identification in lem-pur-comparison-pullback-open-unit), the exact-functor cohomology node carries quasi-isomorphisms, and composing with the isomorphism beta keeps h_V a bounded-below injective resolution. Step 2: in open-unit, a_F is exactly beta_F^{-1} and c is the identity on sections, so cancelling gives j_e^{-1}eta^0_F = nu_{V,*}(beta_F) eta^0_{F_V} with beta in the right direction. Step 3: c is natural in G, which gives a_V = j_e^{-1}a. Step 4: lem-pur-support-comparison-common-injectives applies on V to every such resolution and needs no constructibility hypothesis. Step 5: both chain-map equations follow from naturality of beta and of the unit; I re-derived them. Step 6: with the natural alpha of right-derived-plus-injective (hypotheses met by the Grothendieck and enough-injectives nodes), the computation theta' Q(Sb) = RS(Ql) theta is correct and inverts only Qk and Qk'. The enough-injectives requirement of def-sp-injective-resolutions is verified only in step 6; this is a matter of order, not a fault. Stacks 03CF (sites.tex l.6265) is the localization square of topoi; the 099V/09B1/05TH/05TI tags exist and the proof_origin is agent. Edge cases checked: empty V, V=T, F=0, A=Z/4, negative-degree terms. I found no duplicate node in the DAG and accept the 7 generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityOpenRestrictionAugmentation",
+  "declaration": "AlgebraicGeometry.ProEtale.supportComparisonOpenRestrictionAugmentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportComparisonOpenSourceIso",
+   "AlgebraicGeometry.ProEtale.supportComparisonOpenResolutionMap",
+   "AlgebraicGeometry.ProEtale.supportComparisonOpenRestrictionAugmentation"
+  ],
+  "file": "lean/Sheaf/Paper/PurityOpenRestrictionAugmentation.lean",
+  "statement": "theorem supportComparisonOpenRestrictionAugmentation (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (J : CochainComplex.Plus (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) (h : (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj (supportComparisonSource T A F) ⟶ J) : QuasiIso h.hom → (∀ n : ℤ, Injective (J.obj.X n)) → QuasiIso (supportComparisonOpenResolutionMap A j F J h).hom ∧ (∀ n : ℤ, Injective (((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J).obj.X n)) ∧ (comparisonLowerStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) = (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj ((comparisonLowerStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj J) ∧ (∀ n : ℤ, Injective (((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J)).obj.X n)) ∧ QuasiIso (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h)) ∧ (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F) = (comparisonAdjunction (ModuleCat.{u + 1} A) V).unit.app ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ≫ (comparisonLowerStar (ModuleCat.{u + 1} A) V).map ((comparisonPullbackOpenUnitGamma A j).hom.app F) ∧ (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h)) = (NatTrans.mapHomologicalComplex (V.proEtaleSiteComparisonModules A).unit (.up ℤ)).app (supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F)).obj ≫ ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapHomologicalComplex (.up ℤ)).map (supportComparisonOpenSourceIso A j F).hom ≫ ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapHomologicalComplex (.up ℤ)).map (((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).map h.hom) ∧ (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h)) = ((HomologicalComplex.singleMapHomologicalComplex (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j) (.up ℤ) 0).app F).inv ≫ ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).map (supportComparisonAugmentation T A F J h) ∧ (∀ W : V.Etale, (((sheafSections V.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (op W)).mapHomologicalComplex (.up ℤ)).obj (((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj ((comparisonLowerStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj J)).obj) = (((sheafSections (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)).obj (op ((Scheme.toProEt T).obj ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).obj W)))).mapHomologicalComplex (.up ℤ)).obj J.obj ∧ (((sheafSections (Scheme.ProEt.topology V) (ModuleCat.{u + 1} A)).obj (op ((Scheme.toProEt V).obj W))).mapHomologicalComplex (.up ℤ)).obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J).obj = (((sheafSections (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)).obj (op ((Scheme.toProEt T).obj ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).obj W)))).mapHomologicalComplex (.up ℤ)).obj J.obj) ∧ (∀ (W₁ W₂ : V.Etale) (b : W₁ ⟶ W₂) (n : ℤ), (((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj ((comparisonLowerStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj J)).obj.X n).obj.map b.op = (J.obj.X n).obj.map ((Scheme.toProEt T).map ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).map b)).op ∧ (((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J).obj.X n).obj.map ((Scheme.toProEt V).map b).op = (J.obj.X n).obj.map ((Scheme.toProEt T).map ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).map b)).op) ∧ (∃ θ : DerivedCategory.Plus.Q.obj ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J)) ≅ (comparisonLowerStar (ModuleCat.{u + 1} A) V).rightDerivedFunctorPlus.obj ((comparisonUpperStar (ModuleCat.{u + 1} A) V).mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Q.obj (supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F)))), θ.hom ≫ supportComparisonDerivedResolutionMap V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h) = (comparisonLowerStar (ModuleCat.{u + 1} A) V).rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J)) ∧ DerivedCategory.Plus.Q.map (ObjectProperty.homMk (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h))) ≫ θ.hom = (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} A) V).unit.app (DerivedCategory.Plus.Q.obj (supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F))) ∧ ∀ (F' : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (J' : CochainComplex.Plus (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) (h' : (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj (supportComparisonSource T A F') ⟶ J') (f : F ⟶ F') (t : J ⟶ J'), QuasiIso h'.hom → (∀ n : ℤ, Injective (J'.obj.X n)) → h ≫ t = (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.map (ObjectProperty.homMk ((CochainComplex.singleFunctor _ 0).map f)) ≫ h' → (supportComparisonOpenResolutionMap A j F J h) ≫ ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.map t) = (comparisonUpperStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.map ((ObjectProperty.homMk ((CochainComplex.singleFunctor _ 0).map ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map f))) : supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ⟶ supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F')) ≫ (supportComparisonOpenResolutionMap A j F' J' h') ∧ (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J) (supportComparisonOpenResolutionMap A j F J h)) ≫ ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapHomologicalComplex (.up ℤ)).map ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.map t).hom = ((CochainComplex.singleFunctor _ 0).map ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map f)) ≫ (supportComparisonAugmentation V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F') ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J') (supportComparisonOpenResolutionMap A j F' J' h')) ∧ ∃ θ' : DerivedCategory.Plus.Q.obj ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J')) ≅ (comparisonLowerStar (ModuleCat.{u + 1} A) V).rightDerivedFunctorPlus.obj ((comparisonUpperStar (ModuleCat.{u + 1} A) V).mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Q.obj (supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F')))), θ'.hom ≫ supportComparisonDerivedResolutionMap V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F') ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J') (supportComparisonOpenResolutionMap A j F' J' h') = (comparisonLowerStar (ModuleCat.{u + 1} A) V).rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj J')) ∧ DerivedCategory.Plus.Q.map ((comparisonLowerStar (ModuleCat.{u + 1} A) V).mapCochainComplexPlus.map ((openImmersionRestriction (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.map t)) ≫ θ'.hom = θ.hom ≫ (comparisonLowerStar (ModuleCat.{u + 1} A) V).rightDerivedFunctorPlus.map ((comparisonUpperStar (ModuleCat.{u + 1} A) V).mapDerivedCategoryPlus.map (DerivedCategory.Plus.Q.map ((ObjectProperty.homMk ((CochainComplex.singleFunctor _ 0).map ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map f))) : supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ⟶ supportComparisonSource V A ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F')))))",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ordinary fixed-ring module sheaves, integer-indexed bounded-below complexes, and every given injective resolution. The source is transported only by Mathlib singleMapHomologicalComplex and the prescribed comparisonPullbackOpenUnitGamma. Direct-image/restriction and section complexes are actual equalities. The derived computation isomorphisms are normalized by theta followed by R(Qh_V) = alpha, and commute with every compatible chain map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ef338b9b",
+  "group": "NO",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node. β = comparisonPullbackOpenUnitGamma.hom in the node's direction (ν_V^* j_e^{-1} → j_p^{-1} ν_T^*); the direct-image/restriction identification c is Iso.refl, so all stated equalities (Plus complexes, section evaluations, restriction arrows) are literal. h_V is the canonical singleMapHomologicalComplex transport followed by β, then restriction of h; no hollow data. The unit equation is the open-unit equation with c = refl and γ cancelled. Both augmentation equalities, injectivity and quasi-isomorphism of h_V and a_V, θ pinned uniquely by θ ≫ R(Qh_V) = α plus the derived-unit normalization, both chain-map identities and the θ/θ' naturality square are stated; I re-derived the square as true, and the parenthesization keeps θ' compared with the same θ. Statement field verbatim; non-lean node fields identical to live; docstrings carry source and blueprint; proof is sorry only; proof imports allowed by brief-stage2 rule 7. Edge cases (empty V/T, F = 0, ℤ/4, negative-degree terms) are not excluded. Advisory: derivedComparisonAdjunctionPlus is owned by thm-weil-pbc-site-comparison and reaches the item through common-injectives. No compile run, as nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T020158-L-2565845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

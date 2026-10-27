@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-analytic-closed-direct-image",
+ "kind": "statement",
+ "title": "Analytification and closed direct image",
+ "statement": "Let $i:X\\hookrightarrow Y$ be a closed immersion of separated finite-type smooth schemes over $\\mathbf C$ [def-pc-scheme, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-weil-closed-immersion], and let $i^{\\mathrm{an}}:X^{\\mathrm{an}}\\hookrightarrow Y^{\\mathrm{an}}$ be the induced closed holomorphic embedding [lem-sfb-smooth-analytification-cotangent]. Write $\\pi_X,\\pi_Y$ for the analytification maps, and $a_E:E\\to\\pi_*E^{\\mathrm{an}}$ for $s\\mapsto1\\otimes s$. For every coherent $\\mathcal O_X$-module $F$ [pqf-def-coherent], the canonical tensor map and the identification of direct-image sections give a canonical isomorphism of analytic $\\mathcal O_{Y^{\\mathrm{an}}}$-modules\n$$ (i_*F)^{\\mathrm{an}}\\;\\cong\\;i^{\\mathrm{an}}_*F^{\\mathrm{an}}. $$\nIt sends a local tensor $h\\otimes s$ to $h|_{X^{\\mathrm{an}}}\\otimes s$ and, after applying $\\pi_{Y,*}$, identifies $a_{i_*F}$ with $i_*a_F$, using $i_*\\pi_{X,*}=\\pi_{Y,*}i^{\\mathrm{an}}_*$.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED: Serre, Géométrie algébrique et géométrie analytique, §10 Prop.11(i), printed p.18; stalk calculation for a closed immersion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "lem-sfb-smooth-analytification-cotangent",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct $\\alpha:(i_*F)^{\\mathrm{an}}\\to i^{\\mathrm{an}}_*F^{\\mathrm{an}}$ on inverse-image representatives. For $U\\subseteq Y$ open, $s\\in(i_*F)(U)=F(i^{-1}U)$ and analytic $W\\subseteq\\pi_Y^{-1}U$, pull $s$ to $1\\otimes s$ on $\\pi_X^{-1}(i^{-1}U)$ and restrict to $(i^{\\mathrm{an}})^{-1}W$. Pair this section with $h\\in\\mathcal O_{Y^{\\mathrm{an}}}(W)$ by multiplication by $h|_{(i^{\\mathrm{an}})^{-1}W}$. The square of analytification maps commutes: both paths send a complex point to its underlying algebraic point and a regular function to its holomorphic evaluation. Thus the indicated domains agree. Refining an inverse-image representative restricts both entries, so the rule is well defined, additive in both variables and balanced over $\\pi_Y^{-1}\\mathcal O_Y$; multiplication by a regular function gives the same product on both sides. The inverse-image colimit and the sheafifications defining inverse image and tensor therefore give the required module map. Its formula is $h\\otimes s\\mapsto h|_{X^{\\mathrm{an}}}\\otimes s$.",
+   "uses": [
+    "lem-sfb-smooth-analytification-cotangent",
+    "def-weil-pbc-topological-inverse-image",
+    "def-pc-topological-inverse-image-module",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008X (lemma-pullback-module), 0095 (definition-pushforward); sites-modules.tex Tag 03EK (section-tensor-product)."
+   }
+  },
+  {
+   "text": "For any algebraic module $E$ and analytic point $z$ of its scheme $T$, the tensor-stalk isomorphism, applied over the ringed space $(T^{\\mathrm{an}},\\pi_T^{-1}\\mathcal O_T)$, and the inverse-image stalk isomorphism identify\n$$(E^{\\mathrm{an}})_z=\\mathcal O_{T^{\\mathrm{an}},z}\\otimes_{\\mathcal O_{T,\\pi_T(z)}}E_{\\pi_T(z)}.$$\nThe scalar action agrees because multiplication in the inverse-image module is multiplication of representatives on a common open; the inverse-image stalk comparison sends a pulled-back section germ to its original germ. At $y=i^{\\mathrm{an}}(x)$, write $x_0=\\pi_X(x)$, $y_0=i(x_0)$, $M=F_{x_0}$ and put $A=\\mathcal O_{Y,y_0}$, $R=\\mathcal O_{X,x_0}$, $B=\\mathcal O_{Y^{\\mathrm{an}},y}$, $D=\\mathcal O_{X^{\\mathrm{an}},x}$. The algebraic closed-pushforward stalk theorem identifies $(i_*F)_{y_0}$ with $M$ as an $A$-module. The topological closed-pushforward theorem identifies $(i^{\\mathrm{an}}_*F^{\\mathrm{an}})_y$ with $(F^{\\mathrm{an}})_x$; its germ map is $B$-linear through $B\\to D$, since restriction of a product is the product of restrictions. Consequently the source and target stalks of $\\alpha$ are $B\\otimes_A M$ and $D\\otimes_R M$, and the section formula from step 1 identifies $\\alpha_y$ with $b\\otimes m\\mapsto\\bar b\\otimes m$.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-sc-closed-pushforward-abelian-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 01CB (modules.tex, lemma-stalk-tensor-product), 008H (lemma-stalk-pullback), 008X (module action on inverse image), 00AE (lemma-stalks-closed-pushforward)."
+   }
+  },
+  {
+   "text": "The algebraic map $A\\to R$ is surjective: a germ of an $\\mathcal O_X$-section lifts locally through the surjective sheaf map in the definition of closed immersion. With $I$ its kernel, $R=A/I$. The local analytic ideal theorem gives $D=B/IB$ through the actual restriction map. The inverse to the stalk map in step 2 is\n$$(B/IB)\\otimes_{A/I}M\\longrightarrow B\\otimes_A M,\\qquad[b]\\otimes m\\longmapsto b\\otimes m.$$\nThis is independent of the lift of $[b]$: each difference $b'a$ with $a\\in I$ contributes $b'a\\otimes m=b'\\otimes am=0$. It is balanced over $A/I$ by lifting a scalar to $A$ and using the tensor balancing relation; different scalar lifts differ by $I$ and act by zero on $M$. Both composites fix pure tensors and hence every tensor. Thus $\\alpha_y$ is invertible at every point in the analytic closed image.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-analytic-closed-ideal-local-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre, §6 Proposition 4 and §10 Proposition 11 (printed pp.10–11,18); the displayed inverse and its balancing are elementary tensor algebra. (External source WANTED locally.)"
+   }
+  },
+  {
+   "text": "If $y\\notin i^{\\mathrm{an}}(X^{\\mathrm{an}})$, then $\\pi_Y(y)\\notin i(X)$. Indeed, if a complex point of $Y$ has underlying point in the closed subscheme, the defining ideal maps to zero in its residue field and therefore in $\\mathbf C$; the complex point factors uniquely through $X$, giving an analytic preimage. The algebraic closed-pushforward stalk theorem now gives $(i_*F)_{\\pi_Y(y)}=0$. The tensor and inverse-image stalk comparisons of step 2 make $((i_*F)^{\\mathrm{an}})_y=\\mathcal O_{Y^{\\mathrm{an}},y}\\otimes_{\\mathcal O_{Y,\\pi_Y(y)}}0=0$. The topological closed-pushforward stalk theorem also gives $(i^{\\mathrm{an}}_*F^{\\mathrm{an}})_y=0$. Hence $\\alpha_y$ is an isomorphism off the closed image as well.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AE (lemma-stalks-closed-pushforward), 01CB (modules.tex, lemma-stalk-tensor-product), 008H (lemma-stalk-pullback); affine quotient clause of closed immersion."
+   }
+  },
+  {
+   "text": "The criterion that a sheaf map is an isomorphism exactly when all stalk maps are bijective proves $\\alpha$ invertible. Its inverse preserves addition and scalar multiplication by cancelling the corresponding identities through the bijective linear maps $\\alpha_U$, so it is an analytic module isomorphism. Finally, on any algebraic open $U\\subseteq Y$ and $s\\in F(i^{-1}U)$, the composite $\\pi_{Y,*}(\\alpha)\\,a_{i_*F}$ sends $s$ first to $1\\otimes s$ and then to $1|_{X^{\\mathrm{an}}}\\otimes s=1\\otimes s$. This is exactly $(i_*a_F)_U(s)$. The direct-image composition identification is literal on sections, since both sides evaluate $F^{\\mathrm{an}}$ on $\\pi_X^{-1}(i^{-1}U)=(i^{\\mathrm{an}})^{-1}(\\pi_Y^{-1}U)$, with the same restrictions. This proves the required compatibility with the specified canonical maps, not merely existence of an abstract isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 007T (lemma-points-exactness, part (3)); the unit compatibility is checked directly on sections using step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-analytification-cotangent",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "def-weil-closed-immersion",
+  "lem-sfb-analytic-closed-ideal-local-quotient",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Explicit canonical-map assembly from Stacks Tags 008F, 008H, 008X, 0095, 00AE and 007T, Modules Tag 01CB, and the separately stated Serre §6 Proposition 4. Serre §10 Proposition 11 was read online; its PDF is WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Analytification commutes with pushforward of coherent module sheaves along a closed immersion of smooth complex algebraic varieties",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.pushforward_map_app, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion i of complex algebraic varieties the analytic sheaf of i star F equals the closed analytic pushforward of F analytic",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.pushforwardSections_coe, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytification of a closed direct image of a coherent module equals its analytic closed direct image",
+   "results": "OK 8 hits: IsClosed.analyticSet, MeasureTheory.AnalyticSet.image_of_continuousOn, MeasureTheory.AnalyticSet.image_of_continuous, analyticAt_congr, AnalyticAt.congr, analyticOnNhd_congr, ClosedSubmodule.coe_comap, ContinuousLinearEquiv.analyticOn.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "analytification|analytic.*pushforward|pushforward.*analytic",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytification commutes with pushforward of a coherent sheaf along a closed immersion",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctor. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic scheme pushforward or closed-immersion facts only; no analytification comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed embedding the analytification of the direct image of a module is the direct image of its analytification",
+   "results": "OK 8 hits: AlgebraicGeometry.IsClosedImmersion.base_closed, AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic scheme pushforward or closed-immersion facts only; no analytification comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytification preserves closed immersion direct images of coherent sheaves",
+   "results": "OK 8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic scheme pushforward or closed-immersion facts only; no analytification comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic scheme pushforward or closed-immersion facts only; no analytification comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "analytification|analyticLocalRing|GAGA",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic scheme pushforward or closed-immersion facts only; no analytification comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gaga-derived-coherent-sections",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytification and closed direct image.",
+   "via": [
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-analytic-closed-direct-image",
+  "worker": "stage1",
+  "summary": "Constructed the canonical tensor comparison, computed its stalk map using existing generic stalk nodes, isolated the genuine local analytic ideal-extension theorem as one unsplit input, and wrote the inverse tensor map and canonical-unit compatibility explicitly. No statement correction was necessary. No matching project Lean or Mathlib theorem exists; Serre Proposition 11 has no subclause (i), and its citation was corrected.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited GAGA/Kodaira prerequisite chain. Latest blueprint contains no separate analytification node. Steps realize Serre Proposition 11 by construction, on-image stalks, the Proposition 4 local quotient, off-image stalks and the canonical-unit equation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-module-stalk-tensor",
+    "why": "General ringed-space tensor-stalk calculation, used over the inverse-image structure sheaf; the unit has no analytic stalk calculus."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "General continuous-map inverse-image stalk comparison including the unit germ formula; scheme/etale pullback statements would not apply to analytification."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "Algebraic closed-image module stalks with scalar action; this is a generic topological tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-closed-pushforward-abelian-stalks",
+    "why": "Topological closed-subspace stalks on the analytic manifolds; the scheme-only version does not apply there."
+   },
+   {
+    "node": "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "why": "General stalkwise isomorphism criterion, applied to the underlying sheaves of the constructed analytic module map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-343d9fd30",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-343d9fd30 (reviewer sub-agent of L); spot-checked: I read all of it: the item's five steps, the new node lem-sfb-analytic-closed-ideal-local-quotient and every cited statement (01CB ringed-space tensor stalk, 008H inverse-image stalk with germ formula, 008X inverse-image module, the 00AE scheme and topological closed-pushforward stalk nodes, 007T stalkwise iso, closed immersion, sheafification, analytification-cotangent). The GAGA PDF is not local, so I read the Numdam scan. n°6 Prop. 4 (printed pp.10–11) says the analytic ideal is generated by θ(I_x(Y)). n°10 Prop. 11 (printed p.18) gives (F^h)^X ≅ (F^X)^h through E⊗_A B' with B' = B/𝔞B by Prop. 4, and has no subclause (i). The steps follow this proof: step 1 builds the map from representatives and sheafification, which Serre leaves as 'comme on le voit aisément'; step 2 identifies the stalks as B⊗_A M → D⊗_R M; step 3 gives the explicit inverse using D = B/IB; step 4 shows both stalks are zero off the image (a C-point over i(X) lifts to X); step 5 applies 007T and checks the unit compatibility s↦1⊗s exactly. The new node is true, statement-only, self-contained, non-elementary (analytic Nullstellensatz or implicit functions) and strictly smaller than the item. I tested it on a point in A^1 (kernel (t)), X=Y, {t=0}⊂A^2, empty X and components of mixed dimension. A grep for analytif/holomorph over the DAG (29 nodes) finds no duplicate, and there is no cycle and no SGA citation. The five generic stalk tools in split_report.tool_uses are accepted. The citer gaga-derived-coherent-sections uses only clauses of the unchanged statement. One fault: the item's source.place still says '§10 Prop.11(i)', although the report claims it was corrected (only proof_origin was changed). FIX: the corrected item file sets source.place to n°10 Prop. 11 p.18 (no subclauses), using n°6 Prop. 4 pp.10–11, WANTED locally, with the Numdam URL.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AnalyticClosedDirectImage",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.exists_analyticClosedDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/AnalyticClosedDirectImage.lean",
+  "statement": "theorem exists_analyticClosedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) (g : Y ⟶ Spec (.of (ULift.{u} ℂ))) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [Smooth g] (D : Data f) (E : Data g) (i : Over.mk f ⟶ Over.mk g) [IsClosedImmersion i.left] : ∃ (j : D.space ⟶ E.space) (hpre : ∀ U : Y.Opens, (Opens.map D.pi.hom.base).obj (i.left ⁻¹ᵁ U) = (Opens.map j.hom.base).obj ((Opens.map E.pi.hom.base).obj U)), (∀ x : D.space, j.hom.base x = mapPoints D E i x) ∧ (∀ (W : Opens E.space) (h : E.space.presheaf.obj (op W)) (x : (Opens.map j.hom.base).obj W), D.functions.eval _ (j.hom.c.app (op W) h) x = E.functions.eval W h ⟨j.hom.base x.val, x.property⟩) ∧ IsClosedHolomorphicEmbedding D.atlas E.atlas j.hom.base ∧ ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → ∃ e : analytify E ((Scheme.Modules.pushforward i.left).obj F) ≅ (SheafOfModules.pushforward (F := Opens.map j.hom.base) (S := moduleRings E.space) (R := moduleRings D.space) ⟨Functor.whiskerRight j.hom.c (forget₂ CommRingCat RingCat)⟩).obj (analytify D F), (∀ (U : Y.Opens) (W : Opens E.space) (hW : W ≤ (Opens.map E.pi.hom.base).obj U) (hX : (Opens.map j.hom.base).obj W ≤ (Opens.map D.pi.hom.base).obj (i.left ⁻¹ᵁ U)) (h : E.space.presheaf.obj (op W)) (s : F.val.obj (op (i.left ⁻¹ᵁ U))), e.hom.val.app (op W) (h • (analytify E ((Scheme.Modules.pushforward i.left).obj F)).val.map (homOfLE hW).op (tensorSection E ((Scheme.Modules.pushforward i.left).obj F) U 1 s)) = j.hom.c.app (op W) h • (analytify D F).val.map (homOfLE hX).op (tensorSection D F (i.left ⁻¹ᵁ U) 1 s)) ∧ (∀ (U : Y.Opens) (s : F.val.obj (op (i.left ⁻¹ᵁ U))), e.hom.val.app (op ((Opens.map E.pi.hom.base).obj U)) (tensorSection E ((Scheme.Modules.pushforward i.left).obj F) U 1 s) = (analytify D F).val.map (eqToHom (hpre U).symm).op (tensorSection D F (i.left ⁻¹ᵁ U) 1 s))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a77d1be0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, the SmoothAnalyticData/Cotangent/Coherent APIs and the report. Only the lean record changed; the statement field is verbatim; the proof is sorry only; no new definitions; no duplicate. Hypotheses are separated + LocallyOfFiniteType + QuasiCompact + Smooth over Spec ULift C, IsClosedImmersion i.left as an Over hom, and RingedSpace.IsCoherent (01BV), nothing stronger than the node. The arbitrary Data D,E is pinned. j is unique: its base is mapPoints and its ring map is fixed by eval via FunctionSheaf.injective; hpre is true and Prop-valued. e : analytify E (i_*F) ≅ pushforward along j with j^# scalars is fixed by the h⊗s ↦ j^#h⊗s formula on every analytic W ⊆ π_Y⁻¹U (local tensors generate); the unit clause is correct and redundant. Edge cases: empty X, identity, F=0, positive codimension, varying dimension; single universe u. No compile (no file changed). Advisories: (1) Data/analytify/tensorSection/mapPoints/IsClosedHolomorphicEmbedding are owned by def-sfb-smooth-analytic-data, which is not in stmt_deps; the cotangent theorem stmt_dep is inherited from stage 1, the sibling closed-ideal-local-quotient passed with the same pattern, and an S2 fix cannot change stmt_deps, so a maintainer should add the def node; (2) source.place still says Prop.11(i): the stage-1 reviewer's correction was lost, re-apply it outside S2; (3) the second reading is the worker's own reread (H11 process note)."
+ }
+}

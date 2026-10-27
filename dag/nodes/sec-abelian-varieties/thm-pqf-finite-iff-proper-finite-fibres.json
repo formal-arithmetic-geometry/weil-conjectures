@@ -126,7 +126,30 @@
   "pqf-def-locnoeth"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsFinite.iff_isProper_and_finite_preimage_singleton",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite",
+     "lines": [
+      88,
+      99
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -177,8 +200,13 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $f:X\\to S$ be a morphism of schemes, where $S$ is\nlocally Noetherian. The following are\nequivalent:\n\n1. **(1)** $f$ is\nfinite;\n1. **(2)** $f$ is\nproper with finite\nfibres, in the sense of\n[pqf-def-quasifinite].",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a morphism of schemes (no hypothesis on $S$). The\nfollowing are equivalent:\n\n1. **(1)** $f$ is\nfinite;\n1. **(2)** $f$ is\nproper with finite\nfibres, in the sense of\n[pqf-def-quasifinite].",
   "proof": [
    {
     "text": "*(1) $\\Rightarrow$ (2).* If $f$ is finite, then $f$ is proper by\n[lem-weil-pbc-finite-proper] of the ambient-foundations chapter, and $f$ is\nquasi-finite by [pqf-lem-finite-qf]. A quasi-finite morphism has\nfinite fibres by [pqf-lem-qf-finitefibres]. Hence $f$ is proper\nwith finite fibres.",
@@ -190,7 +218,19 @@
     "elementary": false
    },
    {
-    "text": "*(2) $\\Rightarrow$ (1).* Assume $f$ is proper with finite fibres.\nIt suffices to prove that $f$ is affine: if $f$ is affine, then $f$ is\nuniversally closed by [pqf-lem-proper-basic] (it is proper), so\n$f$ is integral by [pqf-lem-integral-univclosed]; since $f$ is\nproper it is of finite type, hence locally of finite type, by\n[def-weil-pbc-scheme-conventions]; therefore $f$ is finite by\n[pqf-lem-integral-lft-finite].\n\nTo prove that $f$ is affine, by\n[pqf-lem-affine-local-target] we may assume that $S$ is affine,\nand our goal is to show that $X$ is affine. Since $f$ is proper, $X$\nis separated and quasi-compact by [pqf-lem-proper-basic], so we\nmay use [pqf-lem-serre-criterion] to prove that $X$ is affine.\nLet $\\mathcal I\\subset\\mathcal O_X$ be a quasi-coherent sheaf of\nideals of finite type. First, $X$ is locally Noetherian: $f$ is of\nfinite type by [def-weil-pbc-scheme-conventions] and $S$ is\nlocally Noetherian, so [pqf-lem-locnoeth-lft] applies. Hence\n$\\mathcal I$, being quasi-coherent of finite type on the locally\nNoetherian scheme $X$, is coherent by\n[pqf-lem-coherent-ft-locnoeth]. By\n[pqf-lem-fff-vanishing] applied to the coherent sheaf\n$\\mathcal I$ we get $(R^1f_*\\mathcal I)_s=0$ for all $s\\in S$\n(the fibre $f^{-1}(\\{s\\})$ is finite by assumption), i.e. the sheaf\n$R^1f_*\\mathcal I$ has vanishing stalks at every point, so\n$R^1f_*\\mathcal I=0$ by [pqf-lem-sheaf-zero-stalks]. From the\nLeray spectral sequence [pqf-lem-leray] of the morphism $f$, more\nprecisely from its low degree terms\n[pqf-lem-leray-lowdegree], we obtain\n\n$$\n\\mathrm H^1(X,\\mathcal I)\\cong\\mathrm H^1(S,f_*\\mathcal I).\n$$\n\nNow $f$ is quasi-compact and quasi-separated by\n[pqf-lem-proper-basic], so $f_*\\mathcal I$ is quasi-coherent by\n[pqf-lem-pushforward-qcoh]. Since $S$ is affine,\n[pqf-lem-affine-vanishing] gives\n$\\mathrm H^1(S,f_*\\mathcal I)=0$. Hence\n$\\mathrm H^1(X,\\mathcal I)=0$ for every quasi-coherent ideal of finite\ntype, and [pqf-lem-serre-criterion] shows that $X$ is affine.\nSince $S$ is affine as well, $f$ is affine by\n[pqf-def-affine-morphism], which finishes the proof.",
+    "text": "*(2) $\\Rightarrow$ (1).* Assume $f$ is proper with finite fibres. By\n[pqf-lem-proper-basic], $f$ is separated, universally closed, of finite\ntype and quasi-compact, so it is quasi-finite by\n[pqf-lem-qf-finitefibres], hence quasi-finite at every point of $X$ by\n[pqf-lem-qf-locqf-qc]. Finiteness is local on $S$\n([def-weil-pbc-scheme-conventions], [pqf-lem-affine-local-target]), and\nthe restriction of $f$ over an open of $S$ is again proper with finite\nfibres, so we may assume $S=\\operatorname{Spec}R$ affine; we must show that\n$X$ is affine with $\\Gamma(X,\\mathcal O_X)$ a finite $R$-module. Since $S$\nis quasi-compact and quasi-separated, Zariski's main theorem\n[thm-pqf-zmt-factorization] factors $f=p\\circ j$ with\n$j:X\\hookrightarrow T$ an open immersion and $p:T\\to S$ finite; then\n$T=\\operatorname{Spec}B$ for a finite $R$-algebra $B$, and $p$ is\nseparated. The graph $(\\mathrm{id}_X,j):X\\to X\\times_ST$ is a closed\nimmersion (a base change of the diagonal of $p$), and the projection\n$X\\times_ST\\to T$ is closed (a base change of the universally closed $f$),\nso $j(X)$ is open and closed in $\\operatorname{Spec}B$. Hence\n$j(X)=D(e)$ for an idempotent $e\\in B$, and\n$X\\cong\\operatorname{Spec}(B/(1-e)B)$ is affine with\n$\\Gamma(X,\\mathcal O_X)$ a quotient of the finite $R$-module $B$. So $f$ is\nfinite.",
+    "uses": [
+     "pqf-lem-proper-basic",
+     "pqf-lem-qf-finitefibres",
+     "pqf-lem-qf-locqf-qc",
+     "def-weil-pbc-scheme-conventions",
+     "pqf-lem-affine-local-target",
+     "thm-pqf-zmt-factorization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The locally Noetherian case without Zariski's main theorem.* If $S$ is\nlocally Noetherian, (2) $\\Rightarrow$ (1) can also be seen as follows.\nIt suffices to prove that $f$ is affine: if $f$ is affine, then $f$ is\nuniversally closed by [pqf-lem-proper-basic] (it is proper), so\n$f$ is integral by [pqf-lem-integral-univclosed]; since $f$ is\nproper it is of finite type, hence locally of finite type, by\n[def-weil-pbc-scheme-conventions]; therefore $f$ is finite by\n[pqf-lem-integral-lft-finite].\n\nTo prove that $f$ is affine, by\n[pqf-lem-affine-local-target] we may assume that $S$ is affine,\nand our goal is to show that $X$ is affine. Since $f$ is proper, $X$\nis separated and quasi-compact by [pqf-lem-proper-basic], so we\nmay use [pqf-lem-serre-criterion] to prove that $X$ is affine.\nLet $\\mathcal I\\subset\\mathcal O_X$ be a quasi-coherent sheaf of\nideals of finite type. First, $X$ is locally Noetherian: $f$ is of\nfinite type by [def-weil-pbc-scheme-conventions] and $S$ is\nlocally Noetherian, so [pqf-lem-locnoeth-lft] applies. Hence\n$\\mathcal I$, being quasi-coherent of finite type on the locally\nNoetherian scheme $X$, is coherent by\n[pqf-lem-coherent-ft-locnoeth]. By\n[pqf-lem-fff-vanishing] applied to the coherent sheaf\n$\\mathcal I$ we get $(R^1f_*\\mathcal I)_s=0$ for all $s\\in S$\n(the fibre $f^{-1}(\\{s\\})$ is finite by assumption), i.e. the sheaf\n$R^1f_*\\mathcal I$ has vanishing stalks at every point, so\n$R^1f_*\\mathcal I=0$ by [pqf-lem-sheaf-zero-stalks]. From the\nLeray spectral sequence [pqf-lem-leray] of the morphism $f$, more\nprecisely from its low degree terms\n[pqf-lem-leray-lowdegree], we obtain\n\n$$\n\\mathrm H^1(X,\\mathcal I)\\cong\\mathrm H^1(S,f_*\\mathcal I).\n$$\n\nNow $f$ is quasi-compact and quasi-separated by\n[pqf-lem-proper-basic], so $f_*\\mathcal I$ is quasi-coherent by\n[pqf-lem-pushforward-qcoh]. Since $S$ is affine,\n[pqf-lem-affine-vanishing] gives\n$\\mathrm H^1(S,f_*\\mathcal I)=0$. Hence\n$\\mathrm H^1(X,\\mathcal I)=0$ for every quasi-coherent ideal of finite\ntype, and [pqf-lem-serre-criterion] shows that $X$ is affine.\nSince $S$ is affine as well, $f$ is affine by\n[pqf-def-affine-morphism], which finishes this second argument.",
     "uses": [
      "pqf-lem-proper-basic",
      "pqf-lem-integral-univclosed",
@@ -211,6 +251,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

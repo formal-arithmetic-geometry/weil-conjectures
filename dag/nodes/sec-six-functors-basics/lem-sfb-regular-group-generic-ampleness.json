@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-regular-group-generic-ampleness",
+ "kind": "statement",
+ "title": "Generic ampleness criterion for smooth connected group schemes",
+ "statement": "Let $S$ be a regular locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-regular-scheme] and let $p:G\\to S$ be a smooth separated commutative group scheme [def-sbc-smooth-morphisms] of finite presentation [def-sbc-locally-finite-presentation], with geometrically connected fibres. A commutative group scheme means an $S$-scheme with multiplication, inverse and identity satisfying the group identities and commutativity; separated means that its diagonal is a closed immersion. Every geometric fibre is semiabelian: over an algebraically closed residue-field extension $k$ it fits into an exact sequence of fppf sheaves of commutative groups $1\\to(\\mathbf G_{m,k})^r\\to G_k\\to A\\to1$, for some integer $r\\geq0$ and a proper smooth geometrically connected $k$-group scheme $A$ (an abelian variety); here $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication. Assume there is a dense open $V\\subseteq S$ [def-weil-open-immersion] such that $G_V\\to V$ is proper [def-weil-proper-morphism], so it is an abelian scheme. Let $L$ be an invertible $\\mathcal O_G$-module [def-sc-invertible-module] which is symmetric: $[-1]^*L\\simeq L$, with tensor inverse-image pullback [def-pc-module-pullback]. If $L|_{G_\\eta}$ is ample for every generic point $\\eta$ of every irreducible component of $S$, then $L$ is relatively ample over $S$: for each affine open $W\\subseteq S$, $L|_{p^{-1}(W)}$ is ample [def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Proposition 4.3 and its proof in Section 4.8, printed pp.142,144: the scheme-only generic-ampleness criterion invoked as Raynaud, Faisceaux amples sur les schemas en groupes et les espaces homogenes, LNM 119 (1970), XI Theorem 1.13. The citation [8] XI 1.13 in 4.8 is a bibliographic typo: [10], as correctly cited in 4.3. Raynaud original local WANTED; general regular-base formulation extracted from Deligne usage, agent responsibility."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-group-scheme",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Cover $S$ by affine opens on which the invertible module $e^*L$ is trivial, using local freeness of rank one. Each such affine is Noetherian. By [rem-pc-regular-normal] it is normal and decomposes into finitely many open and closed integral components. These components are affine, regular and Noetherian. It suffices first to prove ampleness over these affine pieces; retain a chosen rigidification of $L$ on each piece. Work on one nonempty piece $T$. The prescribed dense open meets $T$ in a dense open, and its generic point $\\eta$ is a generic point of $S$.",
+   "uses": [
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Local reduction; Stacks Tags 0569, 033M; trivialization of an invertible module."
+   }
+  },
+  {
+   "text": "Every fibre of $G_T\\to T$ is nonempty because of the identity section. Apply [lem-trf-smooth-connected-fibre-normal-integrality] to the smooth group morphism: its geometrically connected fibres are geometrically integral. On an affine neighbourhood of $\\eta$ contained in $V\\cap T$, the group morphism is proper and the base is Noetherian. Since $L_\\eta$ is ample, [lem-trf-noetherian-fibre-ample-neighbourhood] gives a nonempty affine open $U\\subseteq V\\cap T$ containing $\\eta$ on whose inverse image $L$ is ample. This is also relative ampleness over $U$, by [lem-trf-scheme-relative-ample-affine-cover] applied to the single affine open $U$ itself. Since $T$ is integral, $U$ is dense.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-trf-noetherian-fibre-ample-neighbourhood",
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Proper abelian open and ampleness neighbourhood; Stacks Tag 0D2N, then Tag 01VJ."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-symmetric-ample-power-extension] with $H=G_T$ and $M=L|_{G_U}$. Its base is normal integral Noetherian affine by step 1; its fibres are semiabelian by hypothesis, and $G_U\\to U$ is proper. The line is symmetric by restriction and is rigidified by the choice in step 1. Step 2 gives exactly the required relative ampleness over $U$. Thus obtain an affine cover $T_i$ of $T$, integers $n_i>0$, and relatively ample rigidified lines $B_i$ on $G_{T_i}$ with specified rigidified isomorphisms to $L^{\\otimes n_i}$ over $G_{U\\cap T_i}$.",
+   "uses": [
+    "lem-sfb-symmetric-ample-power-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Raynaud XI Theorem 1.13: existence of an ample extension of a power of the symmetric line."
+   }
+  },
+  {
+   "text": "For each nonempty $T_i$, the open $U\\cap T_i$ is dense in $T_i$. Both $B_i$ and $L^{\\otimes n_i}|_{G_{T_i}}$ are rigidified lines on the separated smooth commutative group scheme $G_{T_i}$ over the regular locally Noetherian base $T_i$, with geometrically integral fibres by step 2. Regard the scheme as an algebraic space. The specified isomorphism on this dense open extends by [lem-sfb-regular-group-rigidified-line-extension] to an isomorphism $B_i\\simeq L^{\\otimes n_i}|_{G_{T_i}}$. This uses the full faithfulness clause, not existence of another arbitrary extension.",
+   "uses": [
+    "lem-sfb-regular-group-rigidified-line-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Rigidified uniqueness, the comparison used in Moret-Bailly VI Proposition 3.1 and Deligne 4.2--4.3."
+   }
+  },
+  {
+   "text": "Because $T_i$ is affine, $B_i$ is ample on $G_{T_i}$; the isomorphism in step 4 makes $L^{\\otimes n_i}$ ample there. Unfold [def-weil-pbc-ample-invertible-module]. For every point an affine nonvanishing open is cut out by a section of $(L^{\\otimes n_i})^{\\otimes m}$ with $m>0$. Regard the same section, using associativity of tensor powers, as a section of $L^{\\otimes(n_i m)}$. Its stalk values and nonvanishing open are unchanged, and $n_i m>0$. Quasi-compactness is already part of ampleness of $B_i$. These same opens therefore prove that $L$ is ample on $G_{T_i}$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Elementary positive-power converse directly from Stacks Definition 01PS."
+   }
+  },
+  {
+   "text": "The affine opens $T_i$ constructed over all pieces in step 1 cover $S$. The morphism $p$ is quasi-compact, as part of finite presentation. By [lem-trf-scheme-relative-ample-affine-cover], the ampleness established on every $G_{T_i}$ implies ampleness on $p^{-1}(W)$ for every affine open $W\\subseteq S$, as asserted. For the empty base the affine cover is empty and the same statement is vacuous.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 01VJ: locality of relative ampleness on the base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "rem-pc-regular-normal",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "lem-sfb-symmetric-ample-power-extension",
+  "lem-sfb-regular-group-rigidified-line-extension",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Sections 4.1--4.3 and 4.8; corrected symmetric semiabelian route. Missing local Raynaud and Deligne originals are WANTED in report.md; assembly and explicit locality by Q124."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a smooth separated finite type group scheme with geometrically connected fibres over a regular noetherian base is relatively ample if it is ample on generic fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smoothness, affine-space, formally etale and convex-analysis declarations do not state relative ampleness for group-scheme line modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud generic ampleness criterion for smooth connected group schemes over normal bases",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AmpleSet.of_one_lt_codim\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"[IsTopologicalAddGroup F] [ContinuousSMul ℝ F] {E : Submodule ℝ F} (hcodim : 1 < Module.rank ℝ (F ⧸ E)) :\\n  AmpleSet (Eᶜ : Set F)\", \"doc\": \"Let $ F $ be a real topological vector space with continuous scalar multiplication, and let $ E $ be a submodule of $ F $. If the codimension of $ E $ in $ F $, defined as the dimension of the quotien\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R A ↔ FormallyUnramified R A ∧ FormallySmooth R A\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally étale if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[FinitePresentation R S] :\\n  IsStandardSmooth R S ↔\\n    Subsingleton (H1Cotangent R S) ∧ ∃ (I : Type) (b : Module.Basis I S (Ω[S⁄R])), Set.range b ⊆ Set.range (D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smoothness, affine-space, formally etale and convex-analysis declarations do not state relative ampleness for group-scheme line modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smoothness, affine-space, formally etale and convex-analysis declarations do not state relative ampleness for group-scheme line modules."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*ample|ample.*generic|Raynaud|IsRelativelyAmple",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smoothness, affine-space, formally etale and convex-analysis declarations do not state relative ampleness for group-scheme line modules."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*ample|ample.*generic|Raynaud|IsRelativelyAmple",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud criterion relative ampleness generic fibre smooth connected group over regular scheme",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.FormallyUnramified.casesOn; AlgebraicGeometry.isSmoothOfRelativeDimension_comp; AlgebraicGeometry.FormallyUnramified.recOn; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.ValuativeCommSq.commRing",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a smooth connected group scheme over a regular base is relatively ample if ample on the generic fibres",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.formallyUnramified_iff; AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty; AlgebraicGeometry.AffineSpace.instIsAffine; AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE; AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE; AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric line bundle on a semiabelian scheme over a regular base is relatively ample when ample on the generic fibres",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.AffineSpace.isPullback_map; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ; AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass; AlgebraicGeometry.instIsAffineFiberOfIsAffineHom; AlgebraicGeometry.AffineSpace; RingHom.IsStableUnderBaseChange.pullback_fst_appTop; AlgebraicGeometry.instBraidedCategoryScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric invertible sheaf generic ampleness regular scheme commutative group degeneration abelian",
+   "results": "[leansearch] OK 8 hit(s): instCommGroupPic; CommRing.Pic.instFreeOfSubsingleton; CommRing.Pic.AsModule; CommRing.Pic.mk; CommRing.Pic.instAddCommGroupAsModule; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.ΓSpecIso; smoothSheafCommGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*ample|ample.*symmetric|generic.*ample|ample.*generic",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-theta-ampleness",
+  "date": "2026-10-23",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes.",
+   "via": [
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-group-generic-ampleness",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: arbitrary-line generic ampleness fails over C[[q1,q2]]. Restored symmetry and the semiabelian, dense abelian-open setting used for the canonical Picard line in Deligne. Split into local normal integral reduction, proper ampleness spreading, a separate Raynaud existence theorem, comparison using existing rigidified uniqueness, elementary extraction of a positive tensor root, and affine-cover locality.",
+  "blueprint": "Inherited supporting node below stable Picard theta ampleness; no exact statement found in the latest blueprint. The existing from.node=null ancestry break is retained. Deligne 4.1 gives symmetry, which the imported broad generalization omitted.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme-theoretic input for normal integral affine-component reduction; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic scheme-theoretic input for geometric integrality required by rigidified uniqueness; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-noetherian-fibre-ample-neighbourhood",
+    "why": "Generic scheme-theoretic input for spreading generic ampleness inside the proper abelian open; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic scheme-theoretic input for affine-base locality of relative ampleness; no node of this unit replaces this general tool."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Generic scheme-theoretic input for the positive-power converse from the definition; no node of this unit replaces this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-e0848bace",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-e0848bace (reviewer sub-agent of L); spot-checked: PASS, no files changed. Statement repair (E7) confirmed. Deligne, Lemme de Gabber (Numdam scan, read-only): 4.1 says the canonical line is symmetric and trivialized along the zero section; 4.2 extends it over a regular base, unique because geometric fibres are irreducible; 4.3 and 4.8 apply Raynaud XI 1.13 over a regular base whose smooth open is dense. The base item, stated for an arbitrary L on an arbitrary smooth connected-fibre group, is false. I checked the counterexample myself: over C[[q1,q2]] with psi(y)=q1^{(y^2+y)/2} q2^{(y^2-y)/2}, the Fourier recursion forces every coefficient of a section of L^n except a_0 into (q1,q2), so sections are constant on the closed G_m fibre and L is not ample, while the symmetric cocycle leaves n unit coefficients. The new hypotheses (symmetry, semiabelian fibres, dense open with proper G_V) are exactly the setting of Deligne. Steps: (1) regular implies normal and splits into integral components, with a rigidification from trivial e*L; (2) geometric integrality from the identity section, the 0D2N neighbourhood applied inside V∩T where properness holds, then 01VJ for relative ampleness over U; (3) every hypothesis of the new node is checked; (4) regular-base full faithfulness on the dense U∩T_i gives B_i ≅ L^{n_i}; (5) the positive-root converse follows in one line from the definition, so elementary is correct; (6) 01VJ locality, with quasi-compactness from finite presentation. New node lem-sfb-symmetric-ample-power-extension: statement-only, self-contained, stmt_deps match its citations, three kinds of search recorded, no SGA, Raynaud original WANTED. It is not a restatement (normal base, power, existence only) and duplicate greps for Raynaud, XI 1.13, semiabelian and symmetric ampleness found nothing. Edge cases: field, abelian scheme, empty base. Batch 5: the three trf citations (057J integrality, 0D2N neighbourhood, 01VJ locality) are generic scheme lemmas, not trace-formula or Poincaré steps; rigidified-line-extension reaches sec-trace-formula only through the definition def-trf-algebraic-space. All upheld. I accept the five tool_uses. Maintainer note: the citer lem-sfb-stable-picard-theta-ampleness step 5 must now check symmetry of M_0, semiabelian fibres of D_0 (not stated in lem-sfb-nodal-picard-etale-schematic) and properness over the smooth open. That needs a repair note for the citer; it cannot be fixed in this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularGroupGenericAmpleness",
+  "declaration": "AlgebraicGeometry.regularGroupGenericAmpleness",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularGroupGenericAmpleness.lean",
+  "statement": "theorem regularGroupGenericAmpleness {S : Scheme.{u}} (hS : IsRegularScheme S) (G : Grp (Over S)) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [GeometricallyConnected G.X.hom] (hG : HasSemiabelianGeometricFibres G) (V : S.Opens) (hV : Dense (V : Set S)) (hproper : IsProper (G.X.hom ∣_ V)) (L : G.X.left.Modules) [L.IsInvertible] (symmetry : (Scheme.Modules.tensorPullback ι[G.X].left).obj L ≅ L) (hgeneric : ∀ (C : Set S), C ∈ irreducibleComponents S → ∀ ξ : S, IsGenericPoint ξ C → @Scheme.Modules.IsAmple (G.X.hom.fiber ξ) ((Scheme.Modules.tensorPullback (G.X.hom.fiberι ξ)).obj L) ((Scheme.Modules.invertible_pullback_tensor (G.X.hom.fiberι ξ)).1 L).2) : ∀ (W : S.Opens), IsAffineOpen W → @Scheme.Modules.IsAmple (G.X.hom ⁻¹ᵁ W).toScheme ((Scheme.Modules.tensorPullback (G.X.hom ⁻¹ᵁ W).ι).obj L) ((Scheme.Modules.invertible_pullback_tensor (G.X.hom ⁻¹ᵁ W).ι).1 L).2",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f403879f",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: IsRegularScheme; Grp (Over S) + IsCommMonObj; Smooth/IsSeparated/LFP+QuasiCompact (=finite presentation); GeometricallyConnected (nonemptiness automatic from the identity section); HasSemiabelianGeometricFibres over all alg-closed k:Type u, r=0 allowed; dense V with IsProper (G.X.hom ∣_ V); symmetry iso via ι[G.X].left tensorPullback; generic-fibre IsAmple for every irreducible component's generic point; conclusion IsAmple on p⁻¹(W) for every affine W. Node diff = lean + 5 landed stmt_deps (brief §5 OK); statement verbatim; only sorry, no defs; docstrings carry source/blueprint/6 steps; proof-dep imports exist. Theorem stmt_dep lem-weil-pbc-invertible-pullback-tensor: IsAmple takes [IsInvertible], and invertibility of tensorPullback is the theorem's clause (1); the only global instance IsInvertible.pullback is for Mathlib pullback, not tensorPullback → genuine dependence on the theorem's conclusion, PASS on that point. Edge cases (empty/reducible/non-qc base, rank 0, field, universes) OK. No fixes, no compile."
+ }
+}

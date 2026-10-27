@@ -1,0 +1,222 @@
+{
+ "id": "lem-sf-ringed-forget-tensor-transposition",
+ "kind": "statement",
+ "title": "Normalized derived tensor and transposition under ringed forgetting",
+ "statement": "Let $(C,R)$ and $(C',R')$ be small ringed sites with commutative ring sheaves, in the universes of [def-weil-size-convention]. Put $\\mathcal B=\\operatorname{Mod}(R)$ and $\\mathcal A=\\operatorname{Mod}(R')$ [def-weil-sheaf-of-modules-category], and use unbounded derived categories [def-weil-abstract-derived-category]. Let $U:\\mathcal B\\to\\mathcal A$ be exact additive, preserving small products and coproducts, with coherent underlying-module identifications for sheaf tensor, tensor unit and sheaf internal Hom, preserving their symmetry and evaluation. Assume termwise $U$ preserves K-injective complexes and K-flat complexes with flat terms [def-pur-kinjective-complex, def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Write $F=D(U)$. Use total K-flat derived tensors and their signed symmetric monoidal structures [lem-sf-ringed-derived-closed-symmetric-monoidal] and derived internal Homs $H_{\\mathcal B},H_{\\mathcal A}$ [def-pur-derived-internal-hom]. On both sites fix precisely the evaluation-normalized adjunction of [lem-sf-ringed-derived-tensor-hom-adjunction, def-coef-ringed-tensor-hom-model]. Let $\\chi_{K,L}:FH_{\\mathcal B}(K,L)\\simeq H_{\\mathcal A}(FK,FL)$ be the natural comparison of [lem-sf-ringed-forget-two-injective-hom] (whose hypotheses hold here), given on K-injective representatives by the product [def-pur-hom-complex] of the specified underived sheaf-Hom [def-pur-sheaf-hom] identifications.\n\nThere is a natural isomorphism $\\mu_{K,L}:F(K\\otimes^{\\mathbf L}L)\\simeq FK\\otimes^{\\mathbf L}FL$, whose representative on K-flat flat-term complexes $P,Q$ is $U\\operatorname{Tot}(P\\otimes_RQ)\\simeq\\operatorname{Tot}(UP\\otimes_{R'}UQ)$, induced on every summand by the underived tensor identification. Both differentials on bidegree $(p,q)$ are $d_P\\otimes1+(-1)^p1\\otimes d_Q$. The comparison extends uniquely from these representatives to all derived objects and morphisms; it preserves the unit, associativity, and the symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$.\n\nThese specified $\\mu$ and $\\chi$ commute with the specified derived adjunctions: for every $a:M\\to H_{\\mathcal B}(K,L)$, uncurrying $\\chi_{K,L}\\circ F(a)$ gives $F(\\operatorname{uncurry}(a))\\circ\\mu_{M,K}^{-1}$. On simultaneous K-flat source models and a K-injective target this equation uses exactly the chain map $x\\otimes y\\mapsto\\phi(x)(y)$ followed by the inverse localized target augmentation; it is independent of all representative choices. In particular $\\operatorname{ev}_{FK,FL}\\circ(\\chi_{K,L}\\otimes1)\\circ\\mu_{H_{\\mathcal B}(K,L),K}=F(\\operatorname{ev}_{K,L})$.\n\nFor any $W\\in D(\\mathcal B)$ let $D_WK=H_{\\mathcal B}(K,W)$ and define $\\delta_K^W:K\\to D_WD_WK$ to be the transpose, for this same adjunction, of evaluation after symmetry. These maps are natural in $K$, and under the iterated $\\chi$ identifications $F\\delta_K^W$ is exactly $\\delta_{FK}^{FW}$. Neither double-dual map is asserted to be invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation/transposition paragraph; agent native ringed-site refinement, argument allocated from returned item steps 5, 7 and 8; supporting Stacks labels and original arguments in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the tensor-only descent theorem to obtain t and uniqueness of its derived transformation.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized uncurrying theorem gives hu for the fixed two-injective comparison and t.derive. At the identity arrow, adjunction uncurrying is evaluation; multiply by the tensor comparison and cancel its inverse to obtain evaluation preservation.",
+   "uses": [
+    "lem-sf-ringed-forget-normalized-uncurry",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any closed symmetric monoidal category, uncurry both proposed naturality composites for delta. Naturality of evaluation in its contravariant parameter and naturality of the braiding make them equal. Injectivity of the adjunction gives delta naturality on each site.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the iterated Hom comparison applied to F delta. Contravariant adjunction naturality introduces tensor(1,chi inverse). The uncurry equation replaces the remaining transpose. Tensor symmetry coherence and the evaluation equation cancel mu and chi with their inverses. Braiding naturality leaves symmetric evaluation on the target; adjunction injectivity gives delta_forget. Assemble the original Comparison fields and reuse the tensor transformation uniqueness proof.",
+   "uses": [
+    "lem-sf-ringed-forget-normalized-uncurry",
+    "lem-sf-ringed-forget-tensor-descent",
+    "def-sf-ringed-forget-tensor-transposition-data",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-tensor-descent",
+  "lem-sf-ringed-forget-normalized-uncurry",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original ten-step route: steps 1–4 and 5–8 are the two split lemmas; evaluation, naturality and delta preservation are the complete categorical calculations in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact forgetful functor of ringed module sheaves preserves derived tensor Hom adjunction evaluation and the transpose of symmetric evaluation on K flat models",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalClosedLightCondMod, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor Hom comparisons under forgetting preserve uncurrying evaluation and the double dual map by normalized complex representatives",
+   "results": "8 hits: dualTensorHomEquivOfBasis, TensorProduct.uncurry_apply, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.uncurry_expComparison, ModuleCat.ihom_ev_app, dualTensorHom, CategoryTheory.MonoidalClosed.uncurry, TensorProduct.uncurry. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed, CategoryTheory.MonoidalClosed.closed, CategoryTheory.MonoidalClosed.mk, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.id, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.unitIsoSelf. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry|ihom.*ev|bifunctorRHom",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving K flat complexes and tensor Hom evaluation induces derived tensor comparison compatible with transposition and double dual maps",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; CategoryTheory.Tor'_map_app; Module.Flat.iff_rTensor_preserves_shortComplex_exact; CategoryTheory.Tor'_obj_map; hits concern Ext or ordinary injective resolutions or module flatness, not this unbounded internal-Hom and signed tensor compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_expComparison|MonoidalClosed|derived.*[Tt]ensor",
+   "results": "Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; read Closed/Functor.lean:42-103 and DerivedCategory/KInjective.lean:41-46; no result constructs the specified ringed derived tensor and Hom comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor of ringed module sheaves preserves the normalized derived tensor Hom adjunction and the evaluation transpose defining double duality",
+   "results": "CategoryTheory.exactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.ExactFunctor.of; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.evaluation; SheafOfModules.Finite.evaluationPreservesFiniteLimits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; exact functors and underived module-sheaf adjunctions do not state the derived comparison with normalized transposition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uncurry\", \"expComparison\"",
+   "results": "CategoryTheory.uncurry_expComparison; read Closed/Functor.lean: CartesianMonoidalCategory is required, so the tensor-derived situation is not a specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal exact functor preserving injective resolutions comparison between derived internal Homs commutes with evaluation on tensor complexes",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; hits concern Ext or ordinary injective resolutions or module flatness, not this unbounded internal-Hom and signed tensor compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-closed-forgetful",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native refinement of cor-coef-verdier-weil-equivariance, internal-Hom comparison, evaluation and transposition paragraph; returned item steps 5, 7 and 8. The maintainer-created ancestry has no blueprint id (ancestor command prints None).",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ringed-forget-tensor-transposition",
+  "worker": "stage1",
+  "summary": "Gave ten proof steps constructing the signed tensor comparison by K-flat localization, checking structural coherence, aligning the two fixed K-injective augmentations in normalized uncurrying, and computing naturality and forgetting of the double-dual arrow. Reused existing DAG tools; no new nodes and no statement change.",
+  "blueprint": "Native refinement of the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance.proof.md: tensor comparison (Steps 1-4), normalized evaluation (Steps 5-8), transposition and delta (Steps 9-10). The ancestry command prints None; existing null ancestry retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-class localization and extension of natural tensor transformations on any small ringed site; the biduality unit does not provide this localization theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives on a ringed site, needed to check coherence and represent the two source variables."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of flat-term K-flat representatives under total tensor, needed to evaluate iterated tensor comparisons on the actual triple models; no geometric biduality route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-f32f5a460",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f32f5a460 (reviewer sub-agent of L); spot-checked: I read the full item (10 steps, no new nodes, statement and stmt_deps unchanged), every cited statement, the cor-coef-verdier-weil-equivariance blueprint paragraph and the parent lem-sf-weil-native-closed-forgetful step 3. Hypotheses: they cover lem-sf-ringed-forget-two-injective-hom's (exact, products, sheaf-Hom isomorphisms, K-injective preservation). The native and closed-symmetric tensor structures are matched by lem-sf-ringed-derived-native-tensor. Steps 1-4: the comparison c is a direct sum of underived isomorphisms, invertible because U preserves coproducts, with the (-1)^p sign from additivity. It descends by the extension and uniqueness of lem-weil-pbc-site-derived-tensor-descent, applied on target flat-term K-flat images. Coherence is checked on (p,q,r) summands using lem-pur-kflat-total-tensor-model closure. Steps 5-8: I recomputed the target replacement j: U_cI->I' from the 070I leaf, the identity q(eta')^{-1}q(j)=q(U_c eta)^{-1} and psi'=j U_c psi c^{-1}, giving uncurry(chi F(a)) = F(uncurry a) mu^{-1} with the correct orientation; a=1 gives the evaluation equation. Steps 9-10: I recomputed naturality of delta via extranaturality of evaluation, the contravariant alpha_K, and the cancellation chain. Edge cases checked: W=0, K=0, unit R[0], odd/odd sign. Tool uses accepted: site-derived-tensor-descent, pc-kflat-resolution, pur-kflat-total-tensor-model. No duplicate among the forget/transpose nodes. No SGA. FIX: step 10 used naturality of the target symmetry sigma' without citing it (C1/C2); it now cites lem-sf-ringed-derived-closed-symmetric-monoidal, already in proof_deps, and the text says so. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-ringed-forget-tensor-transposition.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedForgetTensorTransposition",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_tensor_transposition",
+  "declarations": [
+   "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_tensor_transposition"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTensorTransposition.lean",
+  "statement": "theorem ringed_forget_tensor_transposition [∀ I : Type (max c v r), PreservesColimitsOfShape (Discrete I) U] (_preserves_flat_models : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ, P.IsKFlatIndependentCoefficients → (∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r} (R := R) (P.X p)) → CochainComplex.IsKFlatIndependentCoefficients (R := R') ((U.mapHomologicalComplex (.up ℤ)).obj P) ∧ ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{d, vd, max d vd s, max d vd s} (R := R') (U.obj (P.X p))) : ∃ m : Comparison.{c, v, r, d, vd, s, wb, wa} J R J' R' U u SB TB βB cB SA TA βA cA χ, UniqueExtension.{c, v, r, d, vd, s, wb, wa} J R J' R' U u SB TB βB cB SA TA βA cA χ m",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original ten data definitions are reexported unchanged from RingedForgetTensorTranspositionData. This module proves the original theorem from tensor descent and normalized uncurrying, with complete formal evaluation and delta calculations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8cb120b15",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the item, the source place, all stmt_dep records and these exact declarations in side-live: CoefficientClosedStructure (evaluation=counit, transpose=homEquiv), CoefficientTensorModels.iso/uncurry_model, RingedDerivedTensorCoherence, RingedForgetTwoInjective.Comparison. Hypotheses are complete and none is stronger than the node: independent universes; U exact additive, preserving products/coproducts/K-injectives/flat-term K-flats; Underived tensor/coherence/hom/evaluation, with evaluation characterized by the IsSheafEvaluation pure-tensor convention, the same as coefficientHomSectionEvaluation and justified by the equal-universe upstream MonoidalClosed; χ is the two-injective Comparison, uniquely pinned. Conclusion clauses all checked with orientations: chain summands, RepresentativeModel square, UniqueExtension over all natural transformations, TensorCoherence plus unit_normalization, uncurry and evaluation equations, delta naturality on both sites, delta_forget with χ⁻¹ contravariant, no IsIso. Statement verbatim; 11 declarations listed; only the theorem is sorried; docstrings complete; only the lean field differs from live; no competing delivery. Advisory: sheafTensorGenerator is the object-level inner part of coefficientTensorGenerator; the second reading is a self-check. No compile run, since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e9b03",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T180957-L-3422968",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); ten Data declarations vs clone item module (verbatim, re-exported via public import); child statements vs original Comparison/UniqueExtension/TranspositionLaws.uncurry; node proof/proof_deps vs Lean; delivered set + direct importer NativeWeilTensorTransport compiled OK; axioms = std + sorryAx from the two new children only"
+ }
+}

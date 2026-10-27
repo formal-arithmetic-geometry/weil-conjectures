@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-tensor-inclusion-flat-reduction",
+ "kind": "statement",
+ "title": "Tensor injectivity for a quotient killed by an ideal under flat reduction",
+ "statement": "Let $R$ be a commutative ring, $J\\subseteq R$ an ideal, and $E$ an $R$-module. Put $JE=\\{\\sum_{i=1}^n j_i e_i:j_i\\in J,\\ e_i\\in E,\\ n\\geq0\\}$. Use module tensor products [def-weil-pbc-module-tensor-product] and flat modules [def-weil-pbc-flat-ring-map]. Suppose $E/JE$ is flat over $R/J$ and the multiplication map $J\\otimes_R E\\to E$, $j\\otimes e\\mapsto je$, is injective. Let $V$ be any $R$-module and $U\\subseteq V$ an $R$-submodule such that $JV\\subseteq U$, meaning $jv\\in U$ for every $j\\in J$ and $v\\in V$. Then the map $U\\otimes_R E\\to V\\otimes_R E$ induced by inclusion is injective. No nilpotence, Noetherian, finite-generation, or proper-ideal hypothesis is imposed; zero rings and zero modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph: first Tor vanishing for every module annihilated by J, applied to V/U; stated using the injective ideal-multiplication form of the ring-quotient Tor hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Compute $\\operatorname{Tor}_1^R(R,E)=0$ from the free resolution consisting of $R$ in degree zero and zero in positive degrees. Apply the first-variable Tor exact sequence to $0\\to J\\to R\\to R/J\\to0$. It gives an injective boundary $\\delta:\\operatorname{Tor}_1^R(R/J,E)\\to J\\otimes_R E$ with image the kernel of $J\\otimes_R E\\to R\\otimes_R E$. The isomorphism $R\\otimes_R E\\to E$, $r\\otimes e\\mapsto re$, has inverse $e\\mapsto1\\otimes e$: the two composites are identities by the tensor balancing relation. Under it the last map is exactly the assumed multiplication map. That map has zero kernel, so $\\delta$ has zero image and $\\operatorname{Tor}_1^R(R/J,E)=0$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph; Tag 00M6 (remark-Tor-ring-mod-ideal); low-degree Tor exactness from Tags 00M0 (lemma-long-exact-sequence-tor) and 00M3 (lemma-tor-left-right)."
+   }
+  },
+  {
+   "text": "Let $A$ be any $R$-module with $JA=0$ and put $S=R/J$. The action $\\bar r a=ra$ is independent of the lift $r$ because $JA=0$. Let $F=S^{(A)}$ be the finitely supported functions from the underlying set of $A$ to $S$. Evaluation $p:F\\to A$, $(c_a)\\mapsto\\sum_a c_a a$, is $S$-linear and surjective, since the basis vector at $a$ maps to $a$. Set $K=\\ker p$; both $K$ and $F$ are killed by $J$. Apply the free-restriction Tor bound to $R\\to S$, degree $1$, module $E$, and index set the underlying set of $A$. Step 1 gives its Tor-vanishing hypothesis, hence $\\operatorname{Tor}_1^R(F,E)=0$. The first-variable exact sequence of $0\\to K\\to F\\to A\\to0$ now gives an injective boundary $\\delta_A:\\operatorname{Tor}_1^R(A,E)\\to K\\otimes_R E$ whose image is $\\ker(K\\otimes_R E\\to F\\otimes_R E)$.",
+   "uses": [
+    "lem-pc-free-restriction-tor-bound",
+    "lem-weil-pbc-tor-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph; Tag 00M6 (remark-Tor-ring-mod-ideal); low-degree Tor exactness from Tags 00M0 (lemma-long-exact-sequence-tor) and 00M3 (lemma-tor-left-right)."
+   }
+  },
+  {
+   "text": "Apply the natural quotient-ring tensor isomorphism to the $S$-modules $K$ and $F$: it sends $k\\otimes e$ to $k\\otimes\\bar e$ and $f\\otimes e$ to $f\\otimes\\bar e$, with $\\bar e\\in E/JE$. Thus the inclusion-induced map of Step 2 is identified with $K\\otimes_S(E/JE)\\to F\\otimes_S(E/JE)$; the square commutes on pure tensors and hence on all tensors. Since $E/JE$ is flat over $S$, the flat tensor exactness lemma applied to $0\\to K\\to F\\to A\\to0$ makes this map injective. Consequently $\\delta_A$ has zero image; as it is injective, $\\operatorname{Tor}_1^R(A,E)=0$ for every $A$ killed by $J$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph; Tag 00M6 (remark-Tor-ring-mod-ideal); low-degree Tor exactness from Tags 00M0 (lemma-long-exact-sequence-tor) and 00M3 (lemma-tor-left-right)."
+   }
+  },
+  {
+   "text": "Set $A=V/U$. For $j\\in J$ and $v\\in V$ one has $j(v+U)=jv+U=0$, because $JV\\subseteq U$. Therefore Step 3 gives $\\operatorname{Tor}_1^R(V/U,E)=0$. Apply the first-variable Tor exact sequence to $0\\to U\\to V\\to V/U\\to0$. Exactness at $U\\otimes_R E$ says that the kernel of its inclusion-induced map to $V\\otimes_R E$ is the image of the zero module $\\operatorname{Tor}_1^R(V/U,E)$. This kernel is zero, which is the claimed injectivity.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph; Tag 00M6 (remark-Tor-ring-mod-ideal); low-degree Tor exactness from Tags 00M0 (lemma-long-exact-sequence-tor) and 00M3 (lemma-tor-left-right)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-pc-free-restriction-tor-bound",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051C (lemma-what-does-it-mean), first proof paragraph; Tag 00M6 (remark-Tor-ring-mod-ideal); low-degree Tor exactness from Tags 00M0 (lemma-long-exact-sequence-tor) and 00M3 (lemma-tor-left-right)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If M modulo I M is flat over R modulo I and I tensor M to M is injective then tensoring M preserves injections whose cokernel is killed by I",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:51:43Z\", \"tool\": \"leanfinder\", \"query\": \"If M modulo I M is flat over R modulo I and I tensor M to M is injective then tensoring M preserves injections whose cokernel is killed by I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"8150ff1829ac5f5e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "smul_le|annihilat|quotient|Quotient|[tT]or",
+   "sub": "RingTheory/Flat",
+   "results": "{\"t\": \"2026-10-23T13:52:16Z\", \"tool\": \"grep\", \"query\": \"smul_le|annihilat|quotient|Quotient|[tT]or\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Domain.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"c649f6a17df59cab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Ideal.Quotient",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:52:16Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If M mod I M is flat over R mod I and I tensor M to M is injective then tensoring preserves inclusions with cokernel annihilated by I",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:52:16Z\", \"tool\": \"leansearch\", \"query\": \"If M mod I M is flat over R mod I and I tensor M to M is injective then tensoring preserves inclusions with cokernel annihilated by I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_injective'\", \"IsTensorProduct.map_id_injective_of_flat_left\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.FaithfullyFlat.rTensor_nontrivial\", \"Module.Flat.mk\", \"Module.Flat.lTensor_exact\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.rTensor_preserves_injective_linearMap\"], \"digest\": \"fd447fe90858c7dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative purity tensor injectivity for a quotient annihilated by an ideal with flat reduction and vanishing first Tor of the ring quotient",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:52:17Z\", \"tool\": \"leanfinder\", \"query\": \"Relative purity tensor injectivity for a quotient annihilated by an ideal with flat reduction and vanishing first Tor of the ring quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_rTensor_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Module.Flat.iff_lTensor_injective'\", \"TensorProduct.rTensor_injective_of_forall_vanishesTrivially\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Submodule.injective_tensorToSpan\"], \"digest\": \"dffff813c82c749d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:55:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat\", \"Module.Flat.self\", \"Module.Flat.of_free\", \"Module.Flat.of_projective\", \"Module.Flat.of_ulift\", \"Module.Flat.ulift\", \"Module.Flat.of_shrink\", \"Module.Flat.shrink\"], \"digest\": \"0b175d8989706cee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_inclusion_injective_of_smul_le|of_flat_quotient|051C|annihilated by.*ideal",
+   "sub": "RingTheory/Flat",
+   "results": "{\"t\": \"2026-10-23T13:56:35Z\", \"tool\": \"grep\", \"query\": \"lTensor_inclusion_injective_of_smul_le|of_flat_quotient|051C|annihilated by.*ideal\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_injective_of_exact_of_flat",
+   "sub": "RingTheory/Flat/Equalizer.lean",
+   "results": "{\"t\": \"2026-10-23T13:56:36Z\", \"tool\": \"grep\", \"query\": \"lTensor_injective_of_exact_of_flat\", \"sub\": \"RingTheory/Flat/Equalizer.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"192\", \"232\"], \"digest\": \"dea14c8e047b1015\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general flat-module tensor injectivity requires E flat, or the cokernel flat over R; neither follows here. The relative ideal criterion is not in the searched Mathlib sources. Project Filtration.lean:66 and :198 together implement this implication, but neither declaration individually has exactly these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_inclusion_injective_of_smul_le|of_flat_quotient|annihilated by.*ideal",
+   "sub": "RingTheory/Flat",
+   "results": "{\"t\": \"2026-10-23T15:20:01Z\", \"tool\": \"grep\", \"query\": \"lTensor_inclusion_injective_of_smul_le|of_flat_quotient|annihilated by.*ideal\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:20:02Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_left\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_right\", \"Algebra.TensorProduct.includeRight_injective\", \"Algebra.TensorProduct.includeLeft_injective\", \"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.rTensor_preserves_injective_linearMap\"], \"digest\": \"2763b631069c4c4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If E modulo J E is flat over R modulo J and J tensor E to E is injective then tensoring E preserves inclusions with quotient annihilated by J",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:20:02Z\", \"tool\": \"leanfinder\", \"query\": \"If E modulo J E is flat over R modulo J and J tensor E to E is injective then tensoring E preserves inclusions with quotient annihilated by J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_rTensor_injectiveₛ\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"f3633a612b65a2ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_injective_of_exact_of_flat|iff_lift_lsmul_comp_subtype_injective",
+   "sub": "RingTheory/Flat",
+   "results": "{\"t\": \"2026-10-23T15:20:16Z\", \"tool\": \"grep\", \"query\": \"lTensor_injective_of_exact_of_flat|iff_lift_lsmul_comp_subtype_injective\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"7281e37a5a92b1af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flatness criterion: flat reduction modulo an ideal and injective ideal multiplication imply tensor injectivity for submodules containing ideal times the ambient module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:20:17Z\", \"tool\": \"leansearch\", \"query\": \"Relative flatness criterion: flat reduction modulo an ideal and injective ideal multiplication imply tensor injectivity for submodules containing ideal times the ambient module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Flat.rTensor_preserves_injective_linearMap\", \"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.mk\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"d8cb91df0845c1f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product preserves a submodule inclusion when the cokernel is killed by I and M mod I M is flat and Tor one of R mod I with M vanishes",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:20:18Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product preserves a submodule inclusion when the cokernel is killed by I and M mod I M is flat and Tor one of R mod I with M vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor\", \"rTensor_mkQ\", \"lTensor_mkQ\", \"TensorProduct.tensorQuotEquivQuotSMul_comp_mk\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mk\", \"LinearMap.ker_tensorProductMk\", \"TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ\"], \"digest\": \"2e4513f103ce8f70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give full-flatness tensor criteria or quotient tensor identities, not this relative criterion; LinearMap.lTensor_injective_of_exact_of_flat assumes the cokernel flat over R. Read Flat/Basic.lean, Flat/Tensor.lean:95 and Flat/Equalizer.lean:192. The project Filtration.lean:66 and :198 supply related proved statements, but :198 assumes the separate purity condition hQ, rather than flat reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-module-fibre-product-patching",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 0D2I (lemma-flat-module-over-fibre-product, parts (1) and (2)). Supporting input: Tag 051C, first proof paragraph, through 00M6: tensor injectivity when the quotient is annihilated by the kernel ideal, without nilpotence.",
+   "via": [
+    "lem-sfb-flat-module-fibre-product-patching",
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tensor-inclusion-flat-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the first paragraph of Stacks 051C, using the existing Tor definition, first-variable low-degree exact sequence, free-restriction Tor bound, natural quotient-ring tensor comparison and flat tensor exactness. Proved the conclusion for V/U without nilpotence or finiteness hypotheses. No new nodes or statement changes. Checked project attachment candidates and reran semantic, Loogle and source searches.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary module-patching prerequisite: the 051C first-paragraph argument used below 0D2I and 08KQ. The current latest blueprint gives the high-level direct-image route; the local module proof follows Stacks. Inherited blueprint.from.node is null, as blueprint_refs.py ancestor confirms; its existing precise place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tor-long-exact-first-variable",
+    "why": "Generic module Tor exact sequence used three times in the Stacks 051C argument; this auxiliary module calculation is not supplied by the constructible-stability unit."
+   },
+   {
+    "node": "lem-pc-free-restriction-tor-bound",
+    "why": "Generic vanishing of Tor on arbitrary direct sums of a restricted coefficient ring; used for the free R/J presentation in 051C, not as a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-pc-free-restriction-tor-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-4b1cac7f1",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-4b1cac7f1 (reviewer sub-agent of L); spot-checked: I read the item, all five cited proof statements and both statement dependencies, and Stacks algebra.tex Tag 051C (lemma-what-does-it-mean, first proof paragraph, lines 23650-23720) and Tag 00M6 (remark-Tor-ring-mod-ideal, line 18690), with both labels checked against the tag file. The delivery has no new nodes and leaves the statement unchanged. The four steps follow 051C's first paragraph exactly. Step 1: the free resolution gives Tor_1(R,E)=0, and the J->R->R/J sequence with the multiplication hypothesis gives Tor_1(R/J,E)=0. Step 2: for A with JA=0, the free S=R/J presentation F->A and the free-restriction bound (with ring map R->S, j=1, index set A) give Tor_1(F,E)=0 and an injective delta_A. Step 3: clause (2) of the quotient-ring node, natural in A, identifies the map K(x)_R E -> F(x)_R E with the map over S; flatness of E/JE over S then kills Tor_1(A,E). Step 4: the U->V->V/U sequence gives injectivity. Each cited statement says what its step takes from it. There is no cycle. Edge cases J=0, J=R, Z with J=2Z and E=Z hold. The counterexample E=Z/2 shows the injectivity hypothesis is needed. Duplicate search (051C, 'what-does-it-mean', killed/annihilated by J): the nilpotent flatness nodes need I^n=0, and the Noetherian local criteria are narrower, so neither is a duplicate or generalization. Advisory: the Tor-vanishing argument of Steps 1-3 also appears inside lem-sfb-nilpotent-ideal-module-flatness and could be factored into one shared node later. I accept both tool_uses (first-variable Tor exact sequence, free-restriction Tor bound) as generic module tools. The 066K label mismatch on the existing lem-pc-free-restriction-tor-bound is for the maintainer. There is no SGA citation and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorInclusionFlatReduction",
+  "declaration": "Module.Flat.rTensor_subtype_injective_of_flat_reduction",
+  "file": "lean/Sheaf/RingTheory/TensorInclusionFlatReduction.lean",
+  "statement": "theorem rTensor_subtype_injective_of_flat_reduction {R : Type u} [CommRing R] (J : Ideal R) {E : Type v} [AddCommGroup E] [Module R E] (hflat : Module.Flat (R ⧸ J) (E ⧸ J • (⊤ : Submodule R E))) (hmul : Function.Injective (TensorProduct.lift ((LinearMap.lsmul R E).comp J.subtype))) {V : Type w} [AddCommGroup V] [Module R V] (U : Submodule R V) (hJU : ∀ (j : R), j ∈ J → ∀ (x : V), j • x ∈ U) : Function.Injective (U.subtype.rTensor E)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb13b8a44",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Every clause matches Stacks 051C first paragraph and the node: CommRing R, Ideal J, E; JE = J•⊤; Flat (R⧸J) (E⧸J•⊤) via Mathlib's instance (Torsion/Basic:648); hmul = injectivity of lift(lsmul∘J.subtype) : J⊗E→E; hJU elementwise over all of V; conclusion Injective (U.subtype.rTensor E). Independent universes u v w; no extra hypotheses; edge cases J=0, J=⊤, R=0, E/V/U=0, U=⊤ not excluded. Filtration.lean lTensor_subtype_injective_of_smul_eq_zero / lTensor_inclusion_injective_of_smul_le differ (hQ hypothesis, same universe as R, opposite order), so not H4 duplicates; no name collision. Proof is by sorry; docstrings give source, blueprint tag and 4 proof steps; lean.statement verbatim; proof-dep modules exist. Advisory: the Second reading section is short and by the same worker but names the clauses it checked."
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "id": "lem-a1-directed-ring-cocone-recognition",
+ "kind": "statement",
+ "title": "Recognition and functoriality of directed ring colimit cocones",
+ "statement": "Let $I$ be a small nonempty directed poset and $(A_i,f_{ij})$ a diagram of commutative rings, with $f_{ii}=\\mathrm{id}$ and $f_{jk}f_{ij}=f_{ik}$ for $i\\leq j\\leq k$. Let $R$ be a commutative ring with ring homomorphisms $q_i:A_i\\to R$ satisfying $q_jf_{ij}=q_i$. Assume every $r\\in R$ is $q_i(a)$ for some $i,a$, and whenever $a,b\\in A_i$ have $q_i(a)=q_i(b)$ there is $k\\geq i$ with $f_{ik}(a)=f_{ik}(b)$. Then $(R,(q_i))$ is a colimit cocone [def-weil-pbc-category-colimit] in commutative rings, and its underlying cocones are colimits in abelian groups and sets. Explicitly, for every compatible cocone $t_i:A_i\\to B$ of ring homomorphisms, of additive homomorphisms of the underlying abelian groups, or of functions of the underlying sets, respectively, there is exactly one map $t:R\\to B$ of the respective kind satisfying $t(q_i(a))=t_i(a)$ for every $i,a$. For any other such ring diagram $(A'_i,f'_{ij})$ and cocone $(R',q'_i)$ satisfying the same two assumptions, and any compatible ring maps $u_i:A'_i\\to A_i$ and $u:R'\\to R$ with $u q'_i=q_i u_i$, the canonical colimit identifications commute with the induced colimit map in all three categories. The rings may be zero rings, and the maps need not be injective.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), representative and eventual equality description, and Tag 002F (definition-colimit), universal property; algebraic verification extracted from equation-sections-of-intersection in more-groupoids.tex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib CategoryTheory.Limits.Types.FilteredColimit.isColimitOf' to the underlying set cocone. The representation hypothesis supplies its surjectivity condition (with equality reversed); the same-stage eventual-equality hypothesis supplies its injectivity condition using homOfLE. The nonempty directed preorder is filtered. Mathlib constructs a filtered ring colimit and the forgetful functor to sets preserves filtered colimits and reflects isomorphisms, hence reflects this colimit. Therefore the supplied ring cocone is colimiting.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Limits/Types/Filtered.lean; Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+    "place": "Types.FilteredColimit.isColimitOf'; CommRingCat.FilteredColimits.colimitCoconeIsColimit and forget_preservesFilteredColimits; reflectsColimit_of_reflectsIsomorphisms"
+   }
+  },
+  {
+   "text": "The composite forgetful functor from commutative rings through rings to additive commutative groups preserves filtered colimits, as does the forgetful functor to sets. Apply isColimitOfPreserves to obtain the other two colimit structures. Repeat the construction for the second diagram and cocone.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+    "place": "CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits; RingCat.FilteredColimits forgetful functor to AddCommGrpCat instance; CommRingCat.FilteredColimits.forget_preservesFilteredColimits"
+   }
+  },
+  {
+   "text": "For arbitrary chosen colimits d and d', prove each comparison square by IsColimit.hom_ext on the source colimit. On every coprojection, comp_coconePointUniqueUpToIso_hom and ι_map reduce the square to the assumed cocone compatibility. In additive groups and sets, apply the corresponding forgetful functor to this compatibility, using preservation of composition. This establishes naturality in all three categories.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex; Mathlib/CategoryTheory/Limits/IsLimit.lean",
+    "place": "Tag 002F (definition-colimit); IsColimit.hom_ext, comp_coconePointUniqueUpToIso_hom and ι_map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex; Mathlib/CategoryTheory/Limits/Types/Filtered.lean; Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+  "place": "Tags 04AX and 002F; Mathlib set recognition, reflection and preservation of filtered colimits replace the explicit algebraic descent construction; naturality follows by coprojection extensionality. Lean implementation by F5, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isColimit.*(iff|[Bb]ijective)|([Ss]urjective|[Ii]njective).*isColimit|[Ff]iltered",
+   "results": "5 hits: 9, 13, 16, 18, 21; source subdirectory Algebra/Category/Ring/FilteredColimits.lean. The returned declarations construct particular ring colimits or prove properties of already-colimiting cocones; none is this recognition criterion for a supplied cocone in all three categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recognize a filtered colimit of commutative rings using existence of representatives and eventual equality in a cocone",
+   "results": "8 hits: CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCocone, RingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, RingCat.FilteredColimits.colimitRing, CommRingCat.FilteredColimits.R, RingCat.FilteredColimits.colimitCocone, RingCat.FilteredColimits.R. The returned declarations construct particular ring colimits or prove properties of already-colimiting cocones; none is this recognition criterion for a supplied cocone in all three categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, CategoryTheory.Limits.IsColimit",
+   "results": "11 hits: CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.nontrivial, CommRingCat.Colimits.colimitIsColimit, CommRingCat.coproductCoconeIsColimit, CommRingCat.pushoutCoconeIsColimit, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl. The returned declarations construct particular ring colimits or prove properties of already-colimiting cocones; none is this recognition criterion for a supplied cocone in all three categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocone of commutative rings indexed by a nonempty directed poset is a colimit in rings abelian groups and sets if every target element has a representative and any two same-stage representatives with equal image agree at a later stage",
+   "results": "8 hits: CommRingCat.Colimits.colimitCocone, CommRingCat.Colimits.colimitIsColimit, Ring.DirectLimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.colimitCoconeIsColimit, RingCat.Colimits.colimitCocone, CommRingCat.Colimits.ColimitType, CommRingCat.Colimits.hasColimits_commRingCat. The returned declarations construct particular ring colimits or prove properties of already-colimiting cocones; none is this recognition criterion for a supplied cocone in all three categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit|jointly_surjective|eventually",
+   "results": "5 hits: 129, 133, 135, 142, 146. Subdirectory: Algebra/Category/Ring/FilteredColimits.lean. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recognize colimit cocones of rings from surjectivity and eventual equality of representatives",
+   "results": "8 hits: RingCat.Colimits.colimitIsColimit, RingCat.Colimits.colimitCocone, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.Colimits.colimitCocone, CommRingCat.Colimits.colimitIsColimit, CommRingCat.Colimits.ColimitType, CategoryTheory.Limits.IsColimit.ofExistsUnique, CommRingCat.Colimits.colimit. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, CategoryTheory.Limits.IsColimit",
+   "results": "11 hits: CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.nontrivial, CommRingCat.Colimits.colimitIsColimit, CommRingCat.coproductCoconeIsColimit, CommRingCat.pushoutCoconeIsColimit, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocone of commutative rings is a filtered colimit if every element is represented and equality of same-stage representatives holds at a later stage, also in abelian groups and sets",
+   "results": "8 hits: CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCommRing, CommRingCat.FilteredColimits.R, RingCat.FilteredColimits.colimitCoconeIsColimit, RingCat.FilteredColimits.colimitCocone, RingCat.FilteredColimits.colimit. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_iff|isColimit.*(surjective|injective)|isColimitOf",
+   "results": "20 hits: Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Colimits.lean, Mathlib/CategoryTheory/Limits/Types/Colimits.lean, Mathlib/CategoryTheory/Limits/Types/Colimits.lean. Subdirectory: CategoryTheory/Limits/Types. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characterize a filtered colimit cocone by existence of representatives and eventual equality; the underlying set creates colimits for commutative rings",
+   "results": "8 hits: CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.R, CommRingCat.FilteredColimits.colimitCommRing, RingCat.FilteredColimits.colimitCoconeIsColimit, RingCat.FilteredColimits.colimitCocone, RingCat.FilteredColimits.colimit. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimitOf",
+   "results": "1 hits: CategoryTheory.Limits.Types.FilteredColimit.isColimitOf. Read returned hits and the relevant Types/Filtered.lean and Ring/FilteredColimits.lean source: set recognition is covered by Types.FilteredColimit.isColimitOf and isColimitOf\\prime; the ring hits construct a particular colimit. None directly states all three universal properties plus comparison-map functoriality for the supplied cocone.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-sections-intersection-structure-colimit",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67. In the Tag 0APK input, this is the equation-sections-of-intersection identification used to compute the section rings of the invariant intersection. Extracted argument: Recognition and functoriality of directed ring colimit cocones.",
+   "via": [
+    "lem-a1-sections-intersection-structure-colimit",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-directed-ring-cocone-recognition",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Direct elementary proof: cross-stage equality from the same-stage hypothesis; representative-independent set descent; additive and multiplicative preservation at a common upper bound; universal properties; explicit comparison-map naturality. No new nodes: all calculations are immediate from the hypotheses and the existing colimit definition. Read sources, checked zero rings, singleton indices and noninjective transitions, and searched for exact upstream attachments and Mathlib recognition results.",
+  "blueprint": "Realizes the directed-ring-colimit recognition argument extracted from equation-sections-of-intersection in the fpqc descent input to ancestor lem-a1-affine-hc0, along the recorded blueprint.from.via chain. The inherited chapter and unit route are unchanged."
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'",
+  "file": "Mathlib/CategoryTheory/Limits/Types/Filtered.lean",
+  "how": "Lines 98-105 give exactly the set recognition clause for a filtered category. The item also requires additive and ring universal properties and naturality; these are supplied by the explicit elementary proof rather than a new node restating this clause."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-d34c14ffc",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-d34c14ffc (reviewer sub-agent of L); spot-checked: I read the item, the report, the cited def-weil-pbc-category-colimit, the parent lem-a1-sections-intersection-structure-colimit (steps 4-5), Stacks categories.tex 04AX/002F and Mathlib Types/Filtered.lean:58-105 (isColimitOf'). The delivery is one commit with the item and its report, adds no new nodes and leaves the statement unchanged. proof_deps equals the union of the step uses. The statement is true and elementary: a colimit is recognised by representatives plus same-stage eventual equality, in sets, abelian groups and commutative rings, and the comparison isomorphisms are natural. All five steps are correct and genuinely elementary: (1) equality across stages through a common upper bound and the transition law; (2) the set map is well defined and unique; (3) additivity at a common stage; (4) multiplicativity and the unit; (5) the comparison isomorphisms follow from uniqueness, and naturality holds because both u∘α' and α∘v send c'_i to q_i u_i. The cited definition states exactly the universal property, uniqueness and canonical map that the steps use. The parent's use of both clauses matches the statement. Edge cases tested: a singleton index set; R=0 with a ring cocone into a nonzero ring, which forces 1=0 and so cannot exist; non-injective Z→Z/2 transitions. No duplicate exists in the DAG: the existing *-filtered-colimit-*-elementwise nodes go in the converse direction. The Mathlib candidate isColimitOf' covers only the set clause and was read correctly. The only citation is a definition with status mathlib, so there is no route issue, no tool_uses and no SGA citation. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedRingCoconeRecognition",
+  "declaration": "CommRingCat.directed_cocone_recognition",
+  "file": "lean/Sheaf/RingTheory/DirectedRingCoconeRecognition.lean",
+  "statement": "theorem directed_cocone_recognition {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hrep : ∀ r : c.pt, ∃ (i : I) (a : F.obj i), c.ι.app i a = r) (heq : ∀ (i : I) (a b : F.obj i), c.ι.app i a = c.ι.app i b → ∃ (k : I) (hik : i ≤ k), F.map (homOfLE hik) a = F.map (homOfLE hik) b) : ∃ hR : IsColimit c, ∃ hA : IsColimit ((forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).mapCocone c), ∃ hS : IsColimit ((forget CommRingCat).mapCocone c), ∀ (F' : I ⥤ CommRingCat.{u}) (c' : Cocone F'), (∀ r : c'.pt, ∃ (i : I) (a : F'.obj i), c'.ι.app i a = r) → (∀ (i : I) (a b : F'.obj i), c'.ι.app i a = c'.ι.app i b → ∃ (k : I) (hik : i ≤ k), F'.map (homOfLE hik) a = F'.map (homOfLE hik) b) → ∀ (τ : F' ⟶ F) (u : c'.pt ⟶ c.pt), (∀ i : I, c'.ι.app i ≫ u = τ.app i ≫ c.ι.app i) → ∃ hR' : IsColimit c', ∃ hA' : IsColimit ((forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).mapCocone c'), ∃ hS' : IsColimit ((forget CommRingCat).mapCocone c'), (∀ (d : Cocone F) (d' : Cocone F') (hd : IsColimit d) (hd' : IsColimit d'), (hd'.coconePointUniqueUpToIso hR').hom ≫ u = hd'.map d τ ≫ (hd.coconePointUniqueUpToIso hR).hom) ∧ (∀ (d : Cocone (F ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) (d' : Cocone (F' ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) (hd : IsColimit d) (hd' : IsColimit d'), (hd'.coconePointUniqueUpToIso hA').hom ≫ (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).map u = hd'.map d (Functor.whiskerRight τ (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) ≫ (hd.coconePointUniqueUpToIso hA).hom) ∧ (∀ (d : Cocone (F ⋙ forget CommRingCat)) (d' : Cocone (F' ⋙ forget CommRingCat)) (hd : IsColimit d) (hd' : IsColimit d'), (hd'.coconePointUniqueUpToIso hS').hom ≫ (forget CommRingCat).map u = hd'.map d (Functor.whiskerRight τ (forget CommRingCat)) ≫ (hd.coconePointUniqueUpToIso hS).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef2cf8811",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-weil-pbc-category-colimit, report, module, Mathlib IsColimit.map/coconePointUniqueUpToIso/Subsingleton, and side-live citer lem-a1-sections-intersection-structure-colimit. hrep/heq match exactly; nonempty directed preorder weakens poset harmlessly; I : Type u follows the brief-stage2 index-universe rule; hR/hA/hS give colimits in CRing/Ab/Set and the naturality squares hold for all chosen colimits d,d' via hd'.map and coconePointUniqueUpToIso. Zero rings and non-injective maps are allowed. lean.statement matches the file verbatim; non-lean node fields equal live; docstrings carry source and blueprint id; single sorry, no defs; no duplicate found (isColimitOf' covers only the Set clause). Citer index is Type u, so it needs only an op/order-dual transport at stage 3. No changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T102717-L-2958033",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

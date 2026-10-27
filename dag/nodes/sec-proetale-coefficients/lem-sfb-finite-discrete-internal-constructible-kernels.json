@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-finite-discrete-internal-constructible-kernels",
+ "kind": "statement",
+ "title": "Kernel closure for finite-discrete constructible internal modules",
+ "statement": "Let B be a finite commutative ring with its discrete topology and let T be any scheme. Put R=p_T* of the condensed continuous-function ring B [sk-def-sfb-pulled-back-coefficients]. For internal R-modules M and N constructible by finite scheme stratifications and local finite presentations [def-sfb-constructible-module], the categorical kernel of every R-linear f:M→N is constructible in the same sense. No noetherian assumption on T is needed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.1 and Lemma 5.4.1; constructible Serre theorem in the source library ConstructibleSheaf/KernelCokernel.lean; finite-presentation transport from FiniteDiscreteConstructibleModel.lean"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-constructible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the constant-ring isomorphism $e$ and the additive-group-compatible equivalence $G$ using the two existence lemmas, and form the single encoding $E_T$ of [def-weil-pbc-common-finite-discrete-encoding]. Put $H=E_T\\nu_T^*$. The module comparison is exact and fully faithful by [det-pe-classical-sheaves-modules]; composing with an equivalence retains these properties. In particular $H$ preserves kernels. For $E_T$, this follows directly from the kernel universal property by applying its inverse equivalence to a test arrow and using the unit and counit. All coefficients here are the same finite ring $\\operatorname{ULift}B$, with the ring object transported along $e$.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099T (lemma-fully-faithful) and 09AK (lemma-compare-constructible), finite coefficient specialization; internal encoding assembly written by Q60."
+   }
+  },
+  {
+   "text": "Apply constructible encoding and then fixed-module constructible origin to $M,N$. Obtain constructible etale module sheaves $F_1,F_2$ and isomorphisms $i_1:H(F_1)\\cong M$, $i_2:H(F_2)\\cong N$, using the counit of $E_T$. Full faithfulness gives a unique $g:F_1\\to F_2$ with $H(g)=i_2^{-1}fi_1$ [det-pe-classical-sheaves-modules]. Thus $i_2H(g)=fi_1$. Both origin applications allow an arbitrary scheme and the finite coefficient ring used here.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099T (lemma-fully-faithful) and 09AK (lemma-compare-constructible), finite coefficient specialization; internal encoding assembly written by Q60."
+   }
+  },
+  {
+   "text": "Set $K=\\ker g$. The finite-ring constructible Serre theorem makes $K$ constructible on $T_{\\mathrm{et}}$, with no Noetherian assumption on $T$. Exactness of comparison and the equivalence $E_T$ give $H(K)\\cong\\ker H(g)$. The commuting square from Step 2 then gives $H(K)\\cong\\ker f$: send its kernel inclusion through $i_1$; an arrow annihilated by $f$ factors uniquely after applying $i_1^{-1}$. The resulting inverse maps agree by uniqueness of kernel factorization.",
+   "uses": [
+    "thm-constructible-serre",
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ, lemma-constructible-abelian (3); kernel universal-property assembly."
+   }
+  },
+  {
+   "text": "It remains to check internal constructibility of $H(K)=E_T(L)$, $L=\\nu_T^*K$. The reverse implication of fixed-module constructible origin makes $L$ intrinsically constructible: there are a finite global stratification $(j_a:S_a\\to T)_a$ and, for each $a$, a pro-etale cover $\\{u:U\\to S_a\\}$ with $u^*j_a^*L\\cong\\underline P_U$ for finite $\\operatorname{ULift}B$-modules $P$. The restriction is iterated, first to the stratum and then to the cover member, as in [def-sfb-constructible-module]. Fix $a$ and write $j=j_a$, $S=S_a$. Restriction encoding for $j$ and the $R_T$-module $E_T(L)$, with the unit $E_T^{-1}E_T(L)\\cong L$, gives $E_S^{-1}(N_S)\\cong j^*L$, where $N_S$ is $\\operatorname{mapMod}(j^*)(E_TL)$ with scalars restricted along the coefficient isomorphism $\\beta$ between $j^*R_T$ and $R_S$. Restriction encoding again, for $u$ and the $R_S$-module $N_S$, gives $E_U^{-1}(N_U)\\cong u^*E_S^{-1}(N_S)\\cong u^*j^*L\\cong\\underline P_U$, where $N_U$ is $\\operatorname{mapMod}(u^*)(N_S)$ with scalars restricted along the isomorphism between $u^*R_S$ and $R_U$. Applying $E_U$ and its counit, $N_U\\cong E_U(\\underline P_U)$, which is finitely presented over $R_U$ by the new encoded-constant lemma. Restriction of scalars along a ring isomorphism $\\alpha$ is an isomorphism of module categories; it carries the regular module to one isomorphic to the regular module via $\\alpha$, and it preserves finite biproducts and cokernels, so it preserves and reflects finite presentation. Moreover $\\operatorname{mapMod}(u^*)$ turns restriction along $\\beta$ into restriction along $u^*\\beta$, since the transported action is $u^*(\\gamma)\\circ\\mu$ and $\\mu$ is natural. Hence $\\operatorname{mapMod}(u^*)\\operatorname{mapMod}(j^*)(H(K))$ is finitely presented over $u^*j^*R_T$ for every member of every cover. So each $\\operatorname{mapMod}(j_a^*)(H(K))$ is locally finitely presented, and $H(K)$ is constructible by [def-sfb-constructible-module]. Finally every $\\operatorname{mapMod}$ carries the isomorphism $H(K)\\cong\\ker f$ to a module isomorphism; composing it with these presentations shows that $\\ker f$ is constructible.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "lem-sfb-finite-discrete-encoded-constant-fp",
+    "def-sfb-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093N, lemma-locally-constant-finite-type (2), combined with the restriction encoding; the existing encodedConstantFP argument in lean/Sheaf/Paper/FiniteDiscreteConstructibleKernels.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "thm-constructible-serre",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-sfb-finite-discrete-encoded-constant-fp",
+  "def-sfb-constructible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099T and 09AK, with etale-cohomology.tex Tag 03RZ and sites-modules.tex Tag 093N; heart-level encoding argument read from lean/Sheaf/Paper/FiniteDiscreteConstructibleKernels.lean.",
+  "note": "Q60 repairs missing statement citations and isolates the encoded finite-constant presentation ingredient. No appeal to a bounded-derived comparison or a Noetherian hypothesis on T."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a morphism between constructible sheaves of modules over a finite discrete ring on the pro etale site is constructible",
+   "results": "{\"t\": \"2026-10-22T04:51:20Z\", \"tool\": \"leanfinder\", \"query\": \"kernel of a morphism between constructible sheaves of modules over a finite discrete ring on the pro etale site is constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instAbelianCondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.ofSheafLightProfinite\", \"AlgebraicGeometry.Scheme.kerFunctor\", \"instAbelianLightCondMod\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"922a86398836f008\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapMod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf\", \"PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf\", \"LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop\"], \"digest\": \"a5a913423bb068ad\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"grep\", \"query\": \"mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of internal modules preserves local finite presentation and commutes with inverse image",
+   "results": "{\"t\": \"2026-10-22T04:57:40Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension of internal modules preserves local finite presentation and commutes with inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"ModuleCat.ExtendScalars.obj'\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"LinearEquiv.extendScalarsOfIsLocalization\", \"LinearEquiv.extendScalarsOfSurjective_symm\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\"], \"digest\": \"acfa775ab17a0814\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of constructible internal modules over a finite discrete ring on the pro etale site is constructible",
+   "results": "{\"t\": \"2026-10-24T04:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel of constructible internal modules over a finite discrete ring on the pro etale site is constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.IsSolid\", \"CondensedMod.ofSheafCompHaus\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functor\"], \"digest\": \"507482f442bc8431\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general kernels and condensed-module infrastructure do not assert constructibility of these internal pro-etale modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimit, CategoryTheory.Limits.parallelPair",
+   "results": "{\"t\": \"2026-10-24T04:33:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.PreservesLimit, CategoryTheory.Limits.parallelPair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.preservesSplitEqualizers\", \"CategoryTheory.Limits.PreservesEqualizer.iso\", \"CategoryTheory.Limits.instIsIsoEqualizerComparison\", \"CategoryTheory.Limits.PreservesEqualizer.of_iso_comparison\", \"CategoryTheory.Limits.isLimitOfHasEqualizerOfPreservesLimit\", \"CategoryTheory.Limits.isLimitForkMapOfIsLimit\", \"CategoryTheory.Limits.PreservesEqualizer.iso_hom\", \"CategoryTheory.Limits.PreservesEqualizer.iso_inv_ι\"], \"digest\": \"f472dc2278e1f939\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general kernels and condensed-module infrastructure do not assert constructibility of these internal pro-etale modules."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*kernel|IsConstructibleModuleObject|finiteDiscrete_constructible_kernel",
+   "results": "{\"t\": \"2026-10-24T04:34:38Z\", \"tool\": \"grep\", \"query\": \"constructible.*kernel|IsConstructibleModuleObject|finiteDiscrete_constructible_kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general kernels and condensed-module infrastructure do not assert constructibility of these internal pro-etale modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels of morphisms of constructible pro etale internal modules with finite coefficients",
+   "results": "{\"t\": \"2026-10-24T04:34:38Z\", \"tool\": \"leansearch\", \"query\": \"Kernels of morphisms of constructible pro etale internal modules with finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.kernel\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"CategoryTheory.Limits.kerIsKernel\", \"CategoryTheory.Limits.kernelIsKernel\", \"CategoryTheory.Limits.kernel.ι\", \"ModuleCat.hasKernels_moduleCat\", \"ModuleCat.kernelIsLimit\", \"TopModuleCat.ker\"], \"digest\": \"81abe3f406018e0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general kernels and condensed-module infrastructure do not assert constructibility of these internal pro-etale modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite coefficient sheaves closed under kernels using exact fully faithful etale comparison",
+   "results": "{\"t\": \"2026-10-24T04:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible finite coefficient sheaves closed under kernels using exact fully faithful etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\"], \"digest\": \"c82cd34e1e994d4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general kernels and condensed-module infrastructure do not assert constructibility of these internal pro-etale modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+  "date": "2026-10-22",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-bounded-constructible",
+   "place": "Triangulatedness via constructible heart closure, specifically closure under kernels for finite discrete coefficients; the local finite-presentation transport supplies the finite-coefficient case.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-bounded-constructible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteConstructibleKernels",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteConstructibleKernels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscrete_constructible_kernel",
+  "statement": "theorem finiteDiscrete_constructible_kernel\n    (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]\n    [DiscreteTopology B] [Finite B] (T : Scheme.{u})\n    (M N : FiniteDiscreteInternalModules B T) (f : M ⟶ N)\n    (hM : IsConstructibleModuleObject\n      (condensedRingObj (Profinite.continuousMapRingObj B) T) M)\n    (hN : IsConstructibleModuleObject\n      (condensedRingObj (Profinite.continuousMapRingObj B) T) N) :\n    IsConstructibleModuleObject\n      (condensedRingObj (Profinite.continuousMapRingObj B) T) (kernel f)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-discrete-internal-constructible-kernels",
+  "worker": "stage1",
+  "summary": "Read the existing Lean proof as source material, found no exact declaration under WeilConjectures, repaired C4 uses of the comparison definition and of the one-way encoded-presentation statement, and added one strictly local finite-constant presentation lemma. The original statement and arbitrary-scheme hypotheses are retained.",
+  "blueprint": "The bounded-constructible unit uses constructible heart closure in its triangulatedness step. This proof supplies its finite-discrete kernel input by etale descent, the constructible Serre theorem, and internal finite-presentation recovery. Current blueprint proof prop-sfb-bounded-constructible-triangulated.proof.md, Kernels paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Identifies finite discrete condensed coefficients with the constant ring; generic coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-internal-module-ab-equivalence",
+    "why": "Supplies the additive-group-compatible scalar equivalence used to form the sectionwise encoding."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "why": "Translates an internal constructible module into finite constant ordinary models."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-constructible-origin",
+    "why": "Gives constructible etale origins and their converse on arbitrary schemes; no node of the bounded-constructible unit supplies this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "why": "Compares this fixed encoding with stratum and cover restrictions."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Exactness and full faithfulness of module comparison lift the arrow and preserve its kernel."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-4d581f9a2",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-4d581f9a2 (reviewer sub-agent of L); spot-checked: Read the whole item, the new node, the base proof (side-live: split, no reviewed field, no repair note) and the statements of all 11 cited nodes. Sources checked: Stacks 099T, 09AK (Λ Noetherian, X arbitrary), 03RZ(3) (Λ Noetherian, X arbitrary), 093N, and the blueprint Kernels paragraph of prop-sfb-bounded-constructible-triangulated. The item statement is unchanged. Steps 1-3 are correct. e and G come from the two existence lemmas. H=E_T ν^* is exact and fully faithful by det-pe-classical-sheaves-modules with Λ=ULift B, which replaces the base's wrong citation of site-comparison-morphism (C4). The arrow lift satisfies i2 H(g)=f i1. thm-constructible-serre applies to finite Λ with no hypothesis on the scheme. The kernel transport through i1 is written out. Step 4 keeps the base argument, with the regular-presentation construction moved into the new node; the wrong-direction encoded-presentation citation and the module-constructible-pullback citation are rightly removed. FIX 1 (E5/C3): Step 4 restricted along the composite ju and applied restriction encoding once. def-sfb-constructible-module and def-sfb-locally-finitely-presented need mapMod(u^*)mapMod(j^*), and the origin node's models are for u^*j^*L; nothing gave the (ju)^*≅u^*j^* module comparison. Step 4 is rewritten to apply restriction encoding twice (to j, then to u on the normalized N_S), with the mapMod/restriction-of-scalars commutation written out. uses and proof_deps are unchanged. FIX 2 (B3): the new node lem-sfb-finite-discrete-encoded-constant-fp now cites, and lists in stmt_deps, def-weil-pbc-proetale-site, sk-def-sfb-pulled-back-coefficients and def-weil-pbc-constant-sheaf; its content is unchanged. The new node is true: B is finite, so P is finitely presented; constant sheafification and E_T preserve cokernels and biproducts; G preserves the regular module up to isomorphism by representability of the forgetful functor, even if G twists by an automorphism. Tested B=0, T=∅, P=0, P=B. It is strictly smaller than the item. It is not a duplicate of encoded-presentation or constructible-local-piece (converse direction), continuous-scalar-finite-presentation (on the point), det-def-sfb-constructible-local-model or lem-zl-condensed-scalar-finite-presentation (scalar-extension model), pe-finite-discrete-scalar-constant-models (normalized encoding) or finite-discrete-constructible-model (Noetherian, derived). Accepted tool_uses: the six declared coefficient-encoding and comparison nodes, used as black boxes that the unit cannot supply. blueprint.from.node is null because the ancestor tool returns None; left as is. No SGA, no Noetherian hypothesis added, no cycle.; 2 file(s) fixed by the reviewer"
+ }
+}

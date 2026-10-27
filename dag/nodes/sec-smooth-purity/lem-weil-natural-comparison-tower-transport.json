@@ -1,0 +1,260 @@
+{
+ "id": "lem-weil-natural-comparison-tower-transport",
+ "kind": "statement",
+ "title": "Natural comparison conjugation preserves tower squares, units and scalar localization",
+ "statement": "Let $\\mathcal D_0,\\mathcal D_1,\\mathcal D_2$ be categories [def-nagata-category]. For $0\\leq i<j\\leq2$, let $T_{ji},B_{ji}:\\mathcal D_i\\to\\mathcal D_j$ be functors and $\\chi_{ji}:T_{ji}\\xrightarrow{\\sim}B_{ji}$ natural isomorphisms. Let $W_i:\\mathcal D_i\\to\\mathcal D_i$ be functors, $\\alpha_{ji}:T_{ji}W_i\\xrightarrow{\\sim}W_jT_{ji}$ natural isomorphisms, and $\\mu:T_{21}T_{10}\\xrightarrow{\\sim}T_{20}$ a natural isomorphism. Functors preserve identities and composition; a natural isomorphism is a family of invertible arrows commuting with every morphism. Composition below is read right to left, with functor associators understood. Suppose\n$$W_2(\\mu_K)\\circ\\alpha_{21,T_{10}K}\\circ T_{21}(\\alpha_{10,K})=\\alpha_{20,K}\\circ\\mu_{W_0K}.$$\nPut\n$$d_K=\\chi_{21,B_{10}K}\\circ T_{21}(\\chi_{10,K}),\\quad a_K=\\chi_{20,K}\\circ\\mu_K\\circ d_K^{-1},\\quad\\beta_{ji,K}=W_j(\\chi_{ji,K})\\circ\\alpha_{ji,K}\\circ\\chi_{ji,W_iK}^{-1}.$$\nThese are natural isomorphisms and satisfy\n$$W_2(a_K)\\circ\\beta_{21,B_{10}K}\\circ B_{21}(\\beta_{10,K})=\\beta_{20,K}\\circ a_{W_0K}.$$\nMore precisely, the normalization of its two paths is\n$$\\beta_{21,B_{10}K}\\circ B_{21}(\\beta_{10,K})\\circ d_{W_0K}=W_2(d_K)\\circ\\alpha_{21,T_{10}K}\\circ T_{21}(\\alpha_{10,K}),$$\n$$\\beta_{20,K}\\circ a_{W_0K}\\circ d_{W_0K}=W_2(\\chi_{20,K})\\circ\\alpha_{20,K}\\circ\\mu_{W_0K}.$$\nFor identity transitions include $T_{ii},B_{ii}$ and $\\chi_{ii}$, and a natural unit $u_i:T_{ii}\\xrightarrow{\\sim}1$. Set $v_i=u_i\\circ\\chi_{ii}^{-1}:B_{ii}\\to1$. If $W_i(u_{i,K})\\circ\\alpha_{ii,K}=u_{i,W_iK}$ and the ordinary associators with repeated adjacent indices are $T_{ji}(u_i)$ and $u_jT_{ji}$, respectively, their transported versions satisfy $W_i(v_{i,K})\\circ\\beta_{ii,K}=v_{i,W_iK}$ and are $B_{ji}(v_i)$ and $v_jB_{ji}$.\n\nSuppose additionally that $A_0\\to A_1\\to A_2$ are commutative rings, $t_i\\in A_i$, each $\\mathcal D_i$ is $A_i$-linear [def-weil-linear-category], each transition functor $F:\\mathcal D_i\\to\\mathcal D_j$ is additive and semilinear for the ring map $\\varphi:A_i\\to A_j$ (for $j=2$, $i=0$ the composite $A_0\\to A_1\\to A_2$), that is $F(f+g)=F(f)+F(g)$ and $F(af)=\\varphi(a)F(f)$ for $a\\in A_i$, and $W_i$ is $A_i$-linear [def-weil-linear-functor]. Assume the images of $t_i$ are invertible in $A_j[1/t_j]$ for $i<j$. In the raw scalar localizations [def-weil-linear-scalar-localization], every comparison above extends with components equal to its image under the localization functor. All displayed equations and inverse and unit equations remain true; localization of $a$ is exactly the transport of localized $\\mu$ through localized $\\chi$. The extensions are natural for every localized morphism $f\\otimes s$, and thus for its finite sums, not only for integral morphisms. No faithfulness of scalar localization is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final common-stage sentence, transport from ordinary models to completed comparisons; scalar-extension-composition proof, both paragraphs, for unit and rationalization normalization. Extracts old item steps 6-7 and the transport/localization arguments of steps 8-9."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization",
+  "def-trf-semilinear-raw-localization-extension"
+ ],
+ "proof": [
+  {
+   "text": "First note the elementary natural-transformation rules used below. If $\\eta:F\\to G$ and $\\theta:G\\to H$ are natural, then $H(f)\\theta_X\\eta_X=\\theta_YG(f)\\eta_X=\\theta_Y\\eta_YF(f)$; their composite is natural. Applying a functor to this equation gives naturality after postcomposition, and evaluating it on the image of an arrow gives naturality after precomposition. Multiplying $G(f)\\eta_X=\\eta_YF(f)$ by the component inverses gives $F(f)\\eta_X^{-1}=\\eta_Y^{-1}G(f)$. Functors preserve inverse equations since they preserve identities and composition. Consequently $d,a,\\beta$ and $v_i$ are natural with invertible components, by their displayed formulas. These calculations use only the definition of natural isomorphism in the statement and the category laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "Fix $K$ and abbreviate $F=T_{21}$, $G=B_{21}$, $P=T_{10}$, $Q=B_{10}$, $c=\\chi_{21}$, $e=\\chi_{10}$, $A=\\alpha_{21}$, $b=\\alpha_{10}$, $U=W_0$, $V=W_1$, $W=W_2$. Composition is still right to left. Naturality of $c$ at $\\beta_{10,K}:Q(UK)\\to V(QK)$ gives\n$$c_{VQK}^{-1}G(\\beta_{10,K})c_{QUK}=F(\\beta_{10,K}).$$\nExpand the definition of $\\beta_{21,QK}$ and $d_{UK}$, use this equality, then cancel $F(e_{UK}^{-1})F(e_{UK})$:\n$$\\begin{aligned}\n\\beta_{21,QK}G(\\beta_{10,K})d_{UK}\n&=W(c_{QK})A_{QK}F(\\beta_{10,K})F(e_{UK})\\\\\n&=W(c_{QK})A_{QK}F(V(e_K))F(b_K).\n\\end{aligned}$$\nNaturality of $A$ at $e_K:PK\\to QK$ says $A_{QK}F(V(e_K))=W(F(e_K))A_{PK}$. The last expression is therefore $W(d_K)A_{PK}F(b_K)$, exactly the first required normalization. Only naturality, the functor laws and the associative/inverse laws of [def-nagata-category] were used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "For the second normalization, expand $\\beta_{20,K}$ and $a_{W_0K}$ and cancel the adjacent component inverses:\n$$\\beta_{20,K}a_{W_0K}d_{W_0K}\n=W_2(\\chi_{20,K})\\alpha_{20,K}\\chi_{20,W_0K}^{-1}\\chi_{20,W_0K}\\mu_{W_0K}d_{W_0K}^{-1}d_{W_0K}\n=W_2(\\chi_{20,K})\\alpha_{20,K}\\mu_{W_0K}.$$\nFor the other path, the first normalization and $a_Kd_K=\\chi_{20,K}\\mu_K$ give\n$$W_2(a_K)\\beta_{21,B_{10}K}B_{21}(\\beta_{10,K})d_{W_0K}\n=W_2(\\chi_{20,K})W_2(\\mu_K)\\alpha_{21,T_{10}K}T_{21}(\\alpha_{10,K}).$$\nThe assumed ordinary tower equation makes these two expressions equal. Cancel the invertible $d_{W_0K}$ on the right by composing with its inverse. This proves the transported tower equation by the category laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "For an identity transition, substitute the definitions and use the assumed unit compatibility:\n$$\\begin{aligned}\nW_i(v_{i,K})\\beta_{ii,K}\n&=W_i(u_{i,K})W_i(\\chi_{ii,K}^{-1})W_i(\\chi_{ii,K})\\alpha_{ii,K}\\chi_{ii,W_iK}^{-1}\\\\\n&=u_{i,W_iK}\\chi_{ii,W_iK}^{-1}=v_{i,W_iK}.\n\\end{aligned}$$\nThe inverse factors cancel by the functor and category laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "For repeated indices use the same definition of transported associator, with the repeated-index ordinary associators specified in the hypothesis. For $(j,i,i)$ it gives, on $K\\in\\mathcal D_i$,\n$$\\begin{aligned}\na_{jii,K}&=\\chi_{ji,K}T_{ji}(u_{i,K})T_{ji}(\\chi_{ii,K}^{-1})\\chi_{ji,B_{ii}K}^{-1}\\\\\n&=\\chi_{ji,K}T_{ji}(v_{i,K})\\chi_{ji,B_{ii}K}^{-1}=B_{ji}(v_{i,K}),\n\\end{aligned}$$\nwhere the final equality is naturality of $\\chi_{ji}$ at $v_{i,K}:B_{ii}K\\to K$. For $(j,j,i)$ it gives\n$$a_{jji,K}=\\chi_{ji,K}u_{j,T_{ji}K}T_{jj}(\\chi_{ji,K}^{-1})\\chi_{jj,B_{ji}K}^{-1}\n=u_{j,B_{ji}K}\\chi_{jj,B_{ji}K}^{-1}=v_{j,B_{ji}K},$$\nusing naturality of $u_j:T_{jj}\\to1$ at $\\chi_{ji,K}:T_{ji}K\\to B_{ji}K$. Thus both asserted unit degeneracies hold, also if all indices coincide. This is substitution and the category laws [def-nagata-category], without any further coherence assumption.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-semilinear-scalar-localization] to every $T_{ji},B_{ji}$, taking $R=A_i$, $S=A_j$, $t=t_i$, $u=t_j$ and the specified coefficient map. Its unit-image hypothesis is exactly the assumed invertibility in $A_j[1/t_j]$. For $W_i$ and the identity transition functors use the identity coefficient map; $t_i$ is already invertible in $A_i[1/t_i]$. Linearity of $W_i$ includes additivity by [def-weil-linear-functor]. The cited localization lemma extends each functor and every natural isomorphism, with components $Q_j$ of its original components; it preserves identities, vertical composition and whiskering. Hence the localized definitions of $d,a,\\beta,v$ are precisely the definitions using the extended functors and comparisons. Localized inverse components are the images of the integral inverses. Apply its equation-preservation assertion to the tower, both normalizations, inverse equations and the unit equations proved above. In particular $\\overline a=\\overline\\chi_{20}\\,\\overline\\mu\\,\\overline d^{-1}$ is exactly transport of localized $\\mu$ through localized $\\chi$. No triangle or exactness clause of the localization lemma is used.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-linear-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  },
+  {
+   "text": "To make naturality on the full raw localization explicit, let $\\eta:F\\Rightarrow G$ be any comparison in the preceding step between functors with the same coefficient map $\\varphi:A_i\\to A_j$, and write $\\bar\\varphi:A_i[1/t_i]\\to A_j[1/t_j]$ for its extension. The fraction formula of [lem-pur-semilinear-scalar-localization] and semilinearity give\n$$\\bar F(f\\otimes s)=Q_j(F(f))\\bar\\varphi(s),\\qquad\n\\bar G(f\\otimes s)=Q_j(G(f))\\bar\\varphi(s).$$\nUsing integral naturality and bilinearity of composition [def-weil-linear-category],\n$$\\bar G(f\\otimes s)Q_j(\\eta_K)\n=\\bar\\varphi(s)Q_j(G(f)\\eta_K)\n=\\bar\\varphi(s)Q_j(\\eta_LF(f))\n=Q_j(\\eta_L)\\bar F(f\\otimes s).$$\nEvery morphism in the tensor Hom module of [def-weil-linear-scalar-localization] is a finite sum of pure tensors, so additivity extends this equality to all arrows. For the composite transition the coefficient maps agree because the $0\\to2$ map is the composite; for $\\alpha,\\beta$ the $W_i$ have identity coefficient map. Thus this calculation applies to every comparison, including their inverses and units. Equalities were only mapped forward by $Q_j$; faithfulness is unnecessary.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-linear-category",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-linear-functor",
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation; explicit naturality and cancellation proof by Q31; localization from the cited generic lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given functors T1 T2 T3 and B1 B2 B3 naturally isomorphic by chi and endofunctors W0 W1 W2 transport of a commuting twist tower square preserves its coherence equation and unit maps and extends under scalar localization of linear categories",
+   "results": "CategoryTheory.LocalizerMorphism.catCommSq; CategoryTheory.Localization.Monoidal.triangle_aux₁; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp; CategoryTheory.Localization.Monoidal.triangle_aux₃; CategoryTheory.Localization.Monoidal.triangle_aux₂; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom; CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal transport, single naturality squares and localization lifts do not state this three-functor tower cancellation with specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal transport, single naturality squares and localization lifts do not state this three-functor tower cancellation with specified comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugat|transport.*coheren|localiz.*[Nn]at[Tt]rans",
+   "results": "Mathlib/CategoryTheory/EqToHom.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal transport, single naturality squares and localization lifts do not state this three-functor tower cancellation with specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a tower of functors and a twist comparison by natural isomorphisms preserves the commuting square and identity normalization and naturality extends to rational morphisms in a linear scalar localization",
+   "results": "CategoryTheory.Localization.functor_linear_iff; CategoryTheory.NatTrans.commShift_iso_hom_of_localization; CategoryTheory.Functor.commShiftOfLocalization; CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app; CategoryTheory.Functor.commShiftOfLocalization.iso; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app; CategoryTheory.Localization.liftNatIso; CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal transport, single naturality squares and localization lifts do not state this three-functor tower cancellation with specified comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a natural commuting tower square by specified natural isomorphisms and preserve its units and equations after rationalization of linear categories",
+   "results": "CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.CatCommSq.iso_hom_naturality_assoc; CategoryTheory.Monad.transport; CategoryTheory.CatCommSq.iso_inv_naturality; CategoryTheory.CatCommSq.iso; CategoryTheory.Functor.Monoidal.transport_ε; CategoryTheory.CatCommSq.noConfusion",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal transport, single naturality squares and localization lifts do not state this three-functor tower cancellation with specified comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugat|transport.*coheren|localiz.*[Nn]at[Tt]rans",
+   "results": "Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean; Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Groupoid/VertexGroup.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/Bicategory/EqToHom.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical localization lifting and monoidal transport do not state the explicit three-category conjugation normalization, repeated-index units and semilinear raw-scalar extension together"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Iso",
+   "results": "CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical localization lifting and monoidal transport do not state the explicit three-category conjugation normalization, repeated-index units and semilinear raw-scalar extension together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a natural commuting tower square by specified natural isomorphisms and preserve units after scalar localization of linear categories",
+   "results": "CategoryTheory.CatCommSq.iso_hom_naturality_assoc; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.CatCommSq.iso; CategoryTheory.Monad.transport; CategoryTheory.CatCommSq.iso_hom_naturality; CategoryTheory.CatCommSq.ctorIdx; CategoryTheory.CatCommSq.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical localization lifting and monoidal transport do not state the explicit three-category conjugation normalization, repeated-index units and semilinear raw-scalar extension together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating natural isomorphisms of functors preserves a commuting composition tower square with an endofunctor and the identity transition unit equations, and the comparisons extend under scalar localization",
+   "results": "CategoryTheory.Localization.liftNatIso; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.lift₂NatIso_hom; CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app; CategoryTheory.Localization.homEquiv_trans; CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.LocalizerMorphism.catCommSq",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical localization lifting and monoidal transport do not state the explicit three-category conjugation normalization, repeated-index units and semilinear raw-scalar extension together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturally isomorphic diagrams of functors transport coherence equations by cancellation of isomorphisms; semilinear functors and their natural transformations extend to categories with Hom modules localized at a scalar",
+   "results": "CategoryTheory.Localization.functor_linear_iff; CategoryTheory.Localization.linear; CategoryTheory.Shift.linear_of_localization; CategoryTheory.Localization.functor_linear; CategoryTheory.Localization.instLinearLocalization'Q'; CategoryTheory.Localization.instLinearLocalizationQ; CategoryTheory.Localization.liftNatTrans; CategoryTheory.Localization.liftNatIso",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical localization lifting and monoidal transport do not state the explicit three-category conjugation normalization, repeated-index units and semilinear raw-scalar extension together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-integral-twist-scalar-coherence",
+  "date": "2026-10-21",
+  "group": "Q85"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation",
+   "via": [
+    "lem-weil-integral-twist-scalar-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-weil-natural-comparison-tower-transport",
+  "worker": "stage1",
+  "summary": "No new nodes: explicit naturality and inverse cancellation prove the tower normalizations and both identity degeneracies; the existing general semilinear raw-localization lemma supplies extension and preservation of equations, followed by a pure-tensor naturality calculation. No statement change or route change.",
+  "blueprint": "Final sentence: integral twists levelwise and twists at common finite coefficient stages; explicit auxiliary natural-comparison calculation",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic tool for semilinear raw Hom-module localization and extension of natural transformations, already proved in another unit; this unit has no replacement and its geometric proof route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-f66fdac17",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-f66fdac17 (reviewer sub-agent of L); spot-checked: Item lem-weil-natural-comparison-tower-transport (Q31, f66fdac1) has no new nodes, and its statement and stmt_deps are unchanged against the base. The base already has Q85 fix (b): the inline definition of additive/semilinear with φ, and the composite map for 0→2. I checked the types of every map in the statement. I redid steps 2 to 5 myself. Step 2: naturality of χ21 at β10,K and of α21 at χ10,K gives W2(d)α21T21(α10). Step 3: the tower hypothesis plus cancelling the invertible d_{W0K} gives the square. Step 4: the unit cancellation is correct. Step 5: the repeated-index associators come out as B_ji(v_i) and v_jB_ji, by naturality of χ_ji at v_i and of u_j at χ_ji. Step 6: lem-pur-semilinear-scalar-localization applies with R=A_i, S=A_j, t=t_i, u=t_j. Its invertibility hypothesis is the item's own, including 0→2 through the composite. α and μ match because their two sides have the same coefficient map, and the units use the identity map. Its triangulated part is not used. Step 7: the fraction formula F̄(f⊗s)=φ̄(s)Q(Ff), together with composition in def-weil-linear-scalar-localization and finite sums, gives naturality on all localized arrows. Nothing relies on faithfulness. I read every cited statement. There is no cycle, and proof_deps equals the union of the step uses. The tool use of lem-pur-semilinear-scalar-localization is generic and accepted. The source is the final sentence of prop-weil-twist-preserves (main-20261015 and latest); the proof is agent-written and below the unit, and there is no SGA citation. Advisory: lem-pur-transition-associator-iso-transport already states the two unit degeneracies of step 5, but not the W/β twist square or the localization, so it is not a duplicate of the item. Edge cases checked: all comparisons identities, i=j=k, empty categories, t=1, nilpotent t, and non-faithful Q."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NaturalComparisonTowerTransport",
+  "declaration": "CategoryTheory.NaturalComparisonTowerTransport.tower",
+  "declarations": [
+   "CategoryTheory.NaturalComparisonTowerTransport.comparison",
+   "CategoryTheory.NaturalComparisonTowerTransport.associator",
+   "CategoryTheory.NaturalComparisonTowerTransport.twist",
+   "CategoryTheory.NaturalComparisonTowerTransport.unitIso",
+   "CategoryTheory.NaturalComparisonTowerTransport.TowerEquations",
+   "CategoryTheory.NaturalComparisonTowerTransport.tower",
+   "CategoryTheory.NaturalComparisonTowerTransport.unit",
+   "CategoryTheory.NaturalComparisonTowerTransport.unit_degeneracies",
+   "CategoryTheory.NaturalComparisonTowerTransport.localized_comparisons",
+   "CategoryTheory.NaturalComparisonTowerTransport.localized_tower",
+   "CategoryTheory.NaturalComparisonTowerTransport.localized_unit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NaturalComparisonTowerTransport.lean",
+  "statement": "theorem tower {T₁₀ B₁₀ : C₀ ⥤ C₁} {T₂₁ B₂₁ : C₁ ⥤ C₂} {T₂₀ B₂₀ : C₀ ⥤ C₂} (χ₁₀ : T₁₀ ≅ B₁₀) (χ₂₁ : T₂₁ ≅ B₂₁) (χ₂₀ : T₂₀ ≅ B₂₀) (W₀ : C₀ ⥤ C₀) (W₁ : C₁ ⥤ C₁) (W₂ : C₂ ⥤ C₂) (α₁₀ : W₀ ⋙ T₁₀ ≅ T₁₀ ⋙ W₁) (α₂₁ : W₁ ⋙ T₂₁ ≅ T₂₁ ⋙ W₂) (α₂₀ : W₀ ⋙ T₂₀ ≅ T₂₀ ⋙ W₂) (μ : T₁₀ ⋙ T₂₁ ≅ T₂₀) (h : ∀ K : C₀, T₂₁.map (α₁₀.hom.app K) ≫ α₂₁.hom.app (T₁₀.obj K) ≫ W₂.map (μ.hom.app K) = μ.hom.app (W₀.obj K) ≫ α₂₀.hom.app K) : TowerEquations χ₁₀ χ₂₁ χ₂₀ W₀ W₁ W₂ α₁₀ α₂₁ α₂₀ μ",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: statement dependency def-trf-semilinear-raw-localization-extension owns IsSemilinear, coefficientMap and extension. Localized comparisons are existential natural isomorphisms with both hom and inverse components prescribed by localization.map; extensionNatIso is absent from all signatures. lem-pur-semilinear-scalar-localization remains a proof dependency. The categorical tower signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0225ba7b2",
+  "group": "O1",
+  "result": "pass",
+  "note": "Only stmt_deps (+def-trf-semilinear-raw-localization-extension, existing on-base owner of IsSemilinear/coefficientMap/extension; lem-pur-semilinear-scalar-localization only in proof_deps, per L 897b H2 return) and the lean record differ from side-live; statement verbatim unchanged; lean.statement is a substring of the module. comparison/associator/twist match d, a, β with right-to-left vs ≫ order checked; tower hypothesis, transported square and both normalizations match term by term; unit and repeated-index degeneracies (T(u0)+leftUnitor, u1T+rightUnitor → B(v0), v1 at B K) are correct with non-strict identity transitions. Localized clauses use canonical ScalarLocalization.extension/map; every witness has hom and inv components fixed as localization.map images at every object ⟨K⟩, so none is arbitrary; NatIsos on the raw tensor-Hom category give naturality on all arrows; pure-tensor formula; ā = transport of μ̄ through χ̄; no faithfulness assumed. Independent universes; no stronger hypotheses (h₂₀ is derivable, advisory only). Proofs are sorry only, definitions are real, docstrings have source and blueprint id, report has Worker report and Second reading sections, no pro-étale content. No changes, so no compile run."
+ }
+}

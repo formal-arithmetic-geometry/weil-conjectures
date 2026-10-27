@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-finite-derived-tensor-model-bridge",
+ "kind": "statement",
+ "title": "Explicit bridge between finite cochain and canonical tensor models",
+ "statement": "For sites X,Y with their recorded derived tensor models and a ringed pullback f with its normalized ordinary comparison k, retain k.q and k.mu to construct the legacy ordinary comparison. Its total inverse is the cochain comparison. Independent coefficient K-flatness with site-flat terms is equivalent to the native flat-term K-flat predicate, so restriction defines a native tensor model with the same components. The ordinary normalized module unit j gives the same single-complex map as CochainPullback.unit. The cochain comparison recovered from a homotopy comparison has its original components. In particular:\ntheorem unit_presentation {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : Comparison f) :\n    ∃ j : f.L.obj (SheafOfModules.unit Y.ring) ≅ SheafOfModules.unit X.ring,\n      (∀ M : Y.modules,\n        ((legacyComparison f k).mu M (SheafOfModules.unit Y.ring)).hom ≫\n            (SheafOfModules.monoidalCategory X.A).tensorHom (𝟙 _) j.hom ≫\n            ((SheafOfModules.monoidalCategory X.A).rightUnitor (f.L.obj M)).hom =\n          f.L.map ((SheafOfModules.monoidalCategory Y.A).rightUnitor M).hom) ∧\n      (HomologicalComplex.singleMapHomologicalComplex f.L (.up ℤ) 0).hom.app\n          (SheafOfModules.unit Y.ring) ≫\n        (CochainComplex.singleFunctor X.modules 0).map j.hom = (unit f k).hom",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, the canonical tensor comparison on flat-term K-flat representatives; ordinary unit compatibility uses Modules on Sites, Tag 03EL."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Define the legacy ordinary comparison field by field from k. Both total comparisons use tensorPullbackTotal with the same tensor isomorphisms, so their inverse maps agree by congruence. The homotopy-to-complex quotient isomorphisms have identity components; their functor images are identities, and the recovered counit component simplifies to the original one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Independent coefficient K-flatness is the existing native K-flat predicate. Transport exactness of right tensoring along siteSheafTensorRightIso and its inverse to identify the term-flatness predicates. Restrict X.model.comparison along the full subcategory inclusion to construct canonical_model; its component equation is definitional.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the module unit fixed by the ordinary normalized comparison. Its right unit equation is the specification of canonicalRingedTensorComparison_unit. The chosen cochain unit is defined by the single-map comparison followed by the single-complex image of precisely that module unit, giving the final equation by reflexivity.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit interface identifications in the proof of normalization, following 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor comparison for a left derived functor is uniquely determined by its normalized square on K-flat complexes",
+   "results": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived: leftDerivedUnique, leftDerived_ext and isLeftDerivedFunctor_iff_isIso_leftDerivedLift; Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor: mapDerivedCategoryFactors and mapDerivedCategoryFactorsh; generic Tor declarations. None identifies this normalized ringed-site comparison or its model presentations.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; use the existing project canonical representative characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One match: CategoryTheory.Functor.leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived. It gives uniqueness of a left derived functor, not the normalized tensor square or its coherence equations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalComparison_eq|normalized_cochain_tensor_diagrams|canonical_model_eq",
+   "results": "msearch grep returned zero matches. Direct repository reads found the applicable canonicalTensorDiagrams and ringedTopoiCanonicalDerivedTensorPullback interfaces; the explicit cochain presentation bridges are the remaining glue.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: the comparison mu_{g;K,Lambda(m)} before theta_K tensor theta_m; identify the two normalized cochain tensor models and their scalar-action unit.",
+   "via": [
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDerivedTensorModels",
+  "file": "lean/Sheaf/Paper/FiniteDerivedTensorModels.lean",
+  "declaration": "CategoryTheory.FiniteDerivedTensorModels.unit_presentation",
+  "declarations": [
+   "CategoryTheory.FiniteDerivedTensorModels.complexComparison_eq_component",
+   "CategoryTheory.FiniteDerivedTensorModels.legacyComparison",
+   "CategoryTheory.FiniteDerivedTensorModels.resolving_native",
+   "CategoryTheory.FiniteDerivedTensorModels.canonical_model",
+   "CategoryTheory.FiniteDerivedTensorModels.canonical_model_eq",
+   "CategoryTheory.FiniteDerivedTensorModels.legacy_comparison_eq",
+   "CategoryTheory.FiniteDerivedTensorModels.unit_presentation"
+  ],
+  "statement": "theorem unit_presentation {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : Comparison f) :\n    ∃ j : f.L.obj (SheafOfModules.unit Y.ring) ≅ SheafOfModules.unit X.ring,\n      (∀ M : Y.modules,\n        ((legacyComparison f k).mu M (SheafOfModules.unit Y.ring)).hom ≫\n            (SheafOfModules.monoidalCategory X.A).tensorHom (𝟙 _) j.hom ≫\n            ((SheafOfModules.monoidalCategory X.A).rightUnitor (f.L.obj M)).hom =\n          f.L.map ((SheafOfModules.monoidalCategory Y.A).rightUnitor M).hom) ∧\n      (HomologicalComplex.singleMapHomologicalComplex f.L (.up ℤ) 0).hom.app\n          (SheafOfModules.unit Y.ring) ≫\n        (CochainComplex.singleFunctor X.modules 0).map j.hom = (unit f k).hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

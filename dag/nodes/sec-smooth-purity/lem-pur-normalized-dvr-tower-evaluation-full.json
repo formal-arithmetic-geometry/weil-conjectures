@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-normalized-dvr-tower-evaluation-full",
+ "kind": "statement",
+ "title": "Evaluation fullness for completed-coefficient towers with independent universes",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, a scheme W, a finite-field datum D with residue characteristic different from ell, and the completed integral coefficient sheaf R_W. For two objects X,Y in the derived category of strict inverse towers of R_W-module sheaves [def-coef-normalized-dvr-tower], every family f_n between their canonical derived evaluations satisfying f_(n+1);t^Y_n=t^X_n;f_n has a morphism g:X→Y whose evaluation at every n equals f_n. Site and coefficient universes are independent, using the module universe max(r,t+1) of the coefficient construction. Neither uniqueness nor a natural choice is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Choose strict tower complexes $P,V$ and isomorphisms $QP\\simeq X$, $QV\\simeq Y$, using the complex localization description of the derived category. The index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ is small in the stated universe, so the small-module-diagram theorem makes $\\mathcal B$ Grothendieck abelian. Apply the injective-term K-injective resolution theorem in $\\mathcal B$ to obtain a quasi-isomorphism $v:V\\to J$, with $J$ K-injective and each $J^q$ injective as a TOWER object. Fix the resulting identification $QJ\\simeq Y$. Evaluation is exact by the levelwise-abelian theorem, so $v_n$ is a quasi-isomorphism. Transport the given $f_n$ to maps $\\bar f_n:QP_n\\to QJ_n$; naturality of $v$ and of the evaluated identifications gives $Q(t^J_n)\\bar f_{n+1}=\\bar f_n Q(t^P_n)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an object $M$ and positive integer $n$, define $L_n(M)$ to have value $M$ at indices $m\\leq n$, zero at $m>n$, identity transitions within its support and zero transitions elsewhere. For an injective tower $T$, the componentwise identity/zero inclusion $L_n(T_n)\\hookrightarrow L_{n+1}(T_n)$ is monic by levelwise monomorphisms. Define $a:L_n(T_n)\\to T$ by the composite transition $T_n\\to T_m$ at $m\\leq n$ and zero otherwise. Injectivity extends $a$ to $b:L_{n+1}(T_n)\\to T$. Its components satisfy $b_n=\\mathrm{id}_{T_n}$ and $t^T_n b_{n+1}=b_n$, so $b_{n+1}$ is a section of $t^T_n$. Apply this to $T=J^q$ and choose sections $s_n^q:J_n^q\\to J_{n+1}^q$ in every degree. These sections are graded maps only; no commutation with differentials is needed.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of the K-injective tower complex $J$ is K-injective by the evaluation theorem (reindex positive integers by $n\\mapsto n-1$ to use its natural-number indexing). Therefore the Hom-to-derived-Hom bijection supplies a chain map $a_n:P_n\\to J_n$ representing each $\\bar f_n$. That bijection is also injective: two chain maps into $J_n$ that represent the same derived morphism have the same homotopy class. Thus an adjacent commutation defect is null-homotopic, rather than merely zero after localization.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct $b_n:P_n\\to J_n$ inductively, with $b_n$ homotopic to $a_n$ and $t^J_i b_{i+1}=b_i t^P_i$ for $i<n$. Set $b_1=a_1$. Given $b_1,\\ldots,b_n$, compatibility and the Hom bijection show that $D_n=t^J_n a_{n+1}-b_n t^P_n$ is null-homotopic. Choose $H^q:P_{n+1}^q\\to J_n^{q-1}$ with $D_n^q=d_{J_n}^{q-1}H^q+H^{q+1}d_{P_{n+1}}^q$, and set $\\widetilde H^q=s_n^{q-1}H^q$. Define $b_{n+1}^q=a_{n+1}^q-d_{J_{n+1}}^{q-1}\\widetilde H^q-\\widetilde H^{q+1}d_{P_{n+1}}^q$. The correction $d\\widetilde H+\\widetilde H d$ is a chain map, since both products with a differential equal $d\\widetilde H d$ after $d^2=0$. It is null-homotopic, so $b_{n+1}$ still represents $\\bar f_{n+1}$. As $t^J_n$ is a chain map and $t^J_n\\widetilde H=H$, applying $t^J_n$ to the correction gives $dH+Hd=D_n$; hence $t^J_n b_{n+1}=b_n t^P_n$. Previous $b_i$ are unchanged. Recursion over the positive integers now gives all components.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjacent equalities imply commutation with each longer transition by repeated composition. Thus the family $(b_n)$ is a strict tower chain map $b:P\\to J$: its degreewise components are natural transformations, and the chain equation is checked at each index. Localize $b$ and compose with the fixed identifications $QP\\simeq X$ and $QJ\\simeq Y$ to obtain $f:X\\to Y$. Its evaluation at $n$ is $f_n$ because $b_n$ is homotopic to $a_n$ and localization factors through the homotopy category. The homotopies between $b_n$ and $a_n$ need not form a tower homotopy; only their evaluation classes are asserted. The choices in this construction give existence only.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finally let $g:X\\to Y$ be ANY lift with all $g_n$ invertible. The Hom bijection in $\\mathcal B$, with K-injective target $J$, represents the transported $g$ by a strict tower chain map $c:P\\to J$. For every $q,n$, the map $H^q(c_n)$ is invertible, since cohomology factors through localization and the evaluated derived map is $g_n$. Evaluation computes kernels and cokernels levelwise, so $H^q(c)$ is the natural transformation with components $H^q(c_n)$. Its component inverses form a natural transformation: invert the naturality equation on both sides. Hence $H^q(c)$ is invertible for every $q$, making $c$ a quasi-isomorphism by definition. Localization inverts $c$, so $g$ is an isomorphism. This proves the isomorphism clause for every lift, without asserting uniqueness or a functorial choice.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use essentiallySmallSelf on the pro-etale site at the coefficient universe and [lem-pur-ringed-site-grothendieck-coefficient-universe] to supply the module Grothendieck instance. The staircase separator proof above works for any Grothendieck abelian category; take its natural-number tower category and specialize the chain-map construction. All derived categories use their standard localization witnesses.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-coefficient-universe"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible maps between derived evaluations of inverse towers in a Grothendieck abelian category lift to derived tower morphism",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, AdicCompletion.eval_lift_apply",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible maps between derived evaluations of inverse towers in a Grothendieck abelian category lift to derived tower morphism",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "sequentialTowerEvaluation_full|tower.*evaluation.*full",
+   "date": "2026-10-25",
+   "results": "0 hits: ",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedPurityLift",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3.",
+   "via": [
+    "lem-pur-adic-normalized-purity-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedDVRTowerEvaluationFull",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedDVRTowerEvaluationFull.lean",
+  "declaration": "WeilConjectures.normalizedDVRTowerEvaluation_full",
+  "declarations": [
+   "WeilConjectures.normalizedDVRTowerEvaluation_full"
+  ],
+  "statement": "theorem normalizedDVRTowerEvaluation_full\n    (l : ℕ) [Fact l.Prime] (E : Type r) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (W : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)\n    (X Y : normalizedDVRDerivedTowers l E W D hl)\n    (f : ∀ n : ℕ, (normalizedDVRTowerEvaluation l E W D hl n).obj X ⟶\n      (normalizedDVRTowerEvaluation l E W D hl n).obj Y)\n    (hf : ∀ n : ℕ, f (n + 1) ≫\n        (normalizedDVRTowerTransition l E W D hl (Nat.le_succ n)).app Y =\n      (normalizedDVRTowerTransition l E W D hl (Nat.le_succ n)).app X ≫ f n) :\n    ∃ g : X ⟶ Y, ∀ n : ℕ, (normalizedDVRTowerEvaluation l E W D hl n).map g = f n",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (identical); 10 moved defs vs old item bodies (identical); 2 new sorry lemmas vs item clauses 2.3 and 3 (verbatim); tower-full copy vs SequentialTowerEvaluationFull (universe-general re-proof, axioms clean)"
+ }
+}

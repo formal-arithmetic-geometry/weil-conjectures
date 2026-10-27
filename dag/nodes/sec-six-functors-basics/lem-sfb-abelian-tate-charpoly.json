@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-abelian-tate-charpoly",
+ "kind": "statement",
+ "title": "Rational characteristic polynomial of an abelian endomorphism",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g$ [def-kun-topological-krull-dimension]. Put $E=\\operatorname{End}_k(A)\\otimes_{\\mathbf Z}\\mathbf Q$, with composition multiplication and group-scheme endomorphisms [def-sc-group-scheme, def-weil-pbc-module-tensor-product]. For every $u\\in E$ there is a unique monic polynomial $P_u(X)\\in\\mathbf Q[X]$ [def-weil-polynomial-ring] of degree $2g$ whose image in $\\mathbf Q_\\ell[X]$ [def-weil-l-adic-numbers] is $\\det(X\\,1-V_\\ell(u)\\mid V_\\ell A)$ for every prime $\\ell\\ne\\operatorname{char}k$, with $V_\\ell A$ as in [sk-def-av-tate]. For an integral endomorphism $u$, $P_u$ has coefficients in $\\mathbf Z$. For $g=0$, $P_u=1$. Characteristic polynomials and determinants use [def-weil-characteristic-polynomial, def-weil-endomorphism-determinant].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "sk-def-av-tate",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-l-adic-numbers",
+  "def-kun-topological-krull-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-characteristic-polynomial",
+  "def-weil-endomorphism-determinant",
+  "def-sfb-rational-abelian-endomorphism-action"
+ ],
+ "proof": [
+  {
+   "text": "By [prop-av-tate-rank], $V_\\ell A$ has dimension $2g$. If $g=0$, its matrix has size zero, so its determinant polynomial is the empty determinant $1$. Thus $P_u=1$ has all required properties in this case. Henceforth $g>0$.",
+   "uses": [
+    "prop-av-tate-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§10, Proposition 10.20, printed p.50; rank-zero convention"
+   }
+  },
+  {
+   "text": "Put $R=\\operatorname{End}_k(A)$ and $E=R\\otimes\\mathbf Q$. By [lem-sfb-abelian-hom-finite-free], $R$ is finite free, so $E$ is finite-dimensional. It is nonzero: [lem-sfb-abelian-degree-polynomial] gives $\\delta(1)=1$ and $\\delta(0)=0$ for its rational degree function $\\delta=d^0$. The same node makes $\\delta$ homogeneous polynomial of degree $2g$. By [lem-sfb-abelian-degree-multiplicative], degree is multiplicative on $R$. For $v=j(a)/n,w=j(b)/m$ from [lem-sfb-rational-tensor-fractions], the degree formula gives $\\delta(vw)=(nm)^{-2g}d(ab)=\\delta(v)\\delta(w)$. Thus $\\delta$ satisfies every hypothesis of [lem-sfb-multiplicative-polynomial-norm].",
+   "uses": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-degree-multiplicative",
+    "lem-sfb-rational-tensor-fractions",
+    "lem-sfb-multiplicative-polynomial-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11, Proposition 10.13, printed pp.47–48; Lemma 10.22, printed p.51"
+   }
+  },
+  {
+   "text": "For $a\\in R$, [lem-sfb-multiplicative-polynomial-norm] constructs the monic rational polynomial $P_a(t)=\\delta(t1-a)$ of degree $2g$, with its root-product identity. It has integer coefficients: left multiplication $L_a$ acts on the finite free abelian group $R$ of step 2. By [lem-weil-cayley-hamilton-free-module], its integral monic characteristic polynomial $H$ annihilates $L_a$; applying $H(L_a)$ to $1$ gives $H(a)=0$. The integral-coefficient clause of [lem-sfb-multiplicative-polynomial-norm] now applies. This does not infer integrality merely from integer values.",
+   "uses": [
+    "lem-sfb-multiplicative-polynomial-norm",
+    "lem-weil-cayley-hamilton-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 10.9 and Remark 10.11, printed pp.46–48; integral-coefficient detail using Theorem 10.15, printed p.49"
+   }
+  },
+  {
+   "text": "Fix an allowable $\\ell$, set $T=V_\\ell(a)$, and let $Q=\\det(X1-T)$. By [prop-av-tate-rank] and [lem-weil-charpoly-monic-degree], $Q$ is monic of degree $2g$. Over an algebraic closure of $\\mathbf Q_\\ell$, [p-linear-triangular] supplies a basis making $T$ upper triangular, with diagonal entries $b_i$, the roots of $Q$. For $F\\in\\mathbf Z[T]$, the matrix $F(T)$ is upper triangular with diagonal $F(b_i)$; its determinant is therefore $\\prod_iF(b_i)$. The componentwise definition [sk-def-av-tate] respects sums, composition and integer multiplication, so $F(T)=V_\\ell(F(a))$. If $a_i$ are the roots of $P_a$ in the same algebraic closure of $\\mathbf Q_\\ell$, which is a field extension of $\\mathbf Q$ splitting $P_a$, [lem-sfb-multiplicative-polynomial-norm] and [lem-sfb-abelian-degree-tate-valuation] give\n$$\\left|\\prod_iF(a_i)\\right|_\\ell=|d(F(a))|_\\ell=|\\det F(T)|_\\ell=\\left|\\prod_iF(b_i)\\right|_\\ell.$$\nHere $F(a)$ is an integral endomorphism and may be a non-isogeny; the valuation node includes that case. Apply [lem-sfb-padic-resultant-rigidity] to conclude $P_a=Q$ after coefficient extension.",
+   "uses": [
+    "prop-av-tate-rank",
+    "lem-weil-charpoly-monic-degree",
+    "p-linear-triangular",
+    "sk-def-av-tate",
+    "lem-sfb-multiplicative-polynomial-norm",
+    "lem-sfb-abelian-degree-tate-valuation",
+    "lem-sfb-padic-resultant-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.20, printed pp.50–52, using Lemmas 10.21 and 10.22"
+   }
+  },
+  {
+   "text": "For any $u\\in E$, choose $n>0$ and $a\\in R$ with $nu=j(a)$ by [lem-sfb-rational-tensor-fractions], and define $P_u(X)=n^{-2g}P_a(nX)$. It is monic of degree $2g$ over $\\mathbf Q$. For every allowable $\\ell$, $V_\\ell(u)=n^{-1}V_\\ell(a)$ by rational extension of the componentwise action. Factoring $n$ from each of the $2g$ rows gives\n$$\\det(X1-V_\\ell(u))=n^{-2g}\\det(nX1-V_\\ell(a))=n^{-2g}P_a(nX).$$\nFor integral $u$ take $n=1$, recovering step 3 and its integer coefficients. No invertibility of $n$ in $k$ is needed, only its invertibility in $\\mathbf Q_\\ell$.",
+   "uses": [
+    "lem-sfb-rational-tensor-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11, printed p.47, rational rescaling formula"
+   }
+  },
+  {
+   "text": "Choose $\\ell=2$ when $\\operatorname{char}k\\ne2$, and $\\ell=3$ otherwise. The canonical homomorphism $\\mathbf Q\\to\\mathbf Q_\\ell$ is injective by [def-weil-l-adic-numbers]. If two rational polynomials satisfy the required realizations, their images at this prime agree with the same determinant polynomial, so injectivity on every coefficient makes them equal. This proves uniqueness, and also independence of the choice of denominator in step 5.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.10, printed p.46; uniqueness from one faithful coefficient field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-av-tate-rank",
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-sfb-abelian-degree-polynomial",
+  "lem-sfb-abelian-degree-multiplicative",
+  "lem-sfb-rational-tensor-fractions",
+  "lem-sfb-multiplicative-polynomial-norm",
+  "lem-weil-cayley-hamilton-free-module",
+  "lem-weil-charpoly-monic-degree",
+  "p-linear-triangular",
+  "sk-def-av-tate",
+  "lem-sfb-abelian-degree-tate-valuation",
+  "lem-sfb-padic-resultant-rigidity",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 10.11, Proposition 10.13 and Proposition 10.20 with Lemmas 10.21–10.22, printed pp.46–52; explicit integrality, non-isogeny and denominator details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateModule|tate.module|abelian.variety",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: universal linear-map characteristic polynomials and scalar extension do not prove rationality or independence of ell for a geometric Tate representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateModule\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: universal linear-map characteristic polynomials and scalar extension do not prove rationality or independence of ell for a geometric Tate representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"intersectionNumber\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: universal linear-map characteristic polynomials and scalar extension do not prove rationality or independence of ell for a geometric Tate representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The characteristic polynomial on the Tate module of an abelian variety is a rational polynomial independent of the prime ell",
+   "results": "8 hits; top: WeierstrassCurve.Ψ, WeierstrassCurve.ψ, WeierstrassCurve.φ, LinearMap.polyCharpolyAux_map_eq_charpoly, LinearMap.polyCharpolyAux_map_aeval, LinearMap.polyCharpoly_map_eq_charpoly, WittVector.map_frobeniusPoly, WeierstrassCurve.preΨ_ofNat",
+   "date": "2026-10-23",
+   "verdict": "no match: universal linear-map characteristic polynomials and scalar extension do not prove rationality or independence of ell for a geometric Tate representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The characteristic polynomial of a rational endomorphism of an abelian variety descends from Q ell to Q independently of ell",
+   "results": "8 hits; top: Algebra.IsInvariant.charpoly_mem_lifts, LinearMap.charpoly_baseChange, LinearMap.polyCharpolyAux_map_eq_charpoly, LinearMap.polyCharpoly_map_eq_charpoly, Matrix.charpoly.univ_map_map, LinearMap.polyCharpolyAux_map_eval, LinearMap.polyCharpoly_baseChange, LinearMap.polyCharpolyAux_map_aeval",
+   "date": "2026-10-23",
+   "verdict": "no match: universal linear-map characteristic polynomials and scalar extension do not prove rationality or independence of ell for a geometric Tate representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characteristic polynomial of an abelian variety endomorphism is rational and independent of the Tate module prime ell",
+   "results": "8 hits; top: LinearMap.polyCharpolyAux, LinearMap.polyCharpolyAux_map_aeval, LinearMap.polyCharpolyAux_map_eq_charpoly, LinearMap.polyCharpoly_map_eq_charpoly, LinearMap.polyCharpolyAux_map_eval, LinearMap.polyCharpoly_coeff_eval, LinearMap.polyCharpolyAux_coeff_eval, Algebra.IsInvariant.charpoly_mem_lifts",
+   "date": "2026-10-23",
+   "verdict": "no match: general linear-map characteristic polynomials do not prove rational descent of a Tate action"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*integral|integral.*charpoly|charpoly.*lifts",
+   "results": "6 hits; top: Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Galois.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general linear-map characteristic polynomials do not prove rational descent of a Tate action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"charpoly\", \"IsIntegral\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general linear-map characteristic polynomials do not prove rational descent of a Tate action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosati-trace-positive",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11.",
+   "via": [
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "worker": "stage1",
+  "summary": "Read Milne I pp.46–52. Reused rational degree polynomiality and Tate rank; isolated multiplicativity, the general polynomial-norm root identity with integrality, prime-adic root-product rigidity, and geometric Tate degree valuation. Added explicit non-isogeny, inseparable, rational-denominator and dimension-zero checks. No finished project declaration or exact Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Present proof resolves the Milne Proposition 10.20 prerequisite without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-av-tate-rank",
+    "why": "Steps 1 and 4 take only dim V_ell A = 2g at an algebraically closed base; no node of this unit gives the Tate rank, and it does not replace the unit route."
+   },
+   {
+    "node": "p-linear-triangular",
+    "why": "Step 4 takes a full invariant flag of V_ell(a) over an algebraic closure of Q_ell, generic linear algebra (sec-trace-formula only by location, not a step of the trace formula); no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-av-tate-rank",
+  "p-linear-triangular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-6907e0c5c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-6907e0c5c (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps, all four new nodes and every cited node's statement. Source is Milne AV I Thm 10.9, Rem 10.11, Prop 10.13, Prop 10.20 and Lemmas 10.21-10.22 (printed pp.46-52, pdftotext). The statement adds only references to the charpoly/det definitions; it is not weakened. Live still has the item unsplit, with no repair note and no live copies of the new ids. Steps: rational degree δ is homogeneous of degree 2g and multiplicative (rational extension checked with nv=j(a)); Cayley-Hamilton on L_a gives integrality; the step-4 Tate comparison is exactly Milne p.52 (norm node with L=Q̄_ℓ, valuation node including non-isogenies, rigidity at degree 2g); step 5 is n^{-2g}P_a(nX); step 6 is uniqueness via Q⊂Q_ℓ with ℓ∈{2,3}; g=0 gives the empty determinant. New nodes are all true and statement-only. degree-multiplicative: kernel orders multiply, non-isogeny composites fail. multiplicative-polynomial-norm: exact sign, roots of F handled by enlarging L, integrality by invertibility of u−a; tested on δ=x^d and on Q×Q with δ=x²y. padic-resultant-rigidity: Lemma 10.21, multiplicities via f+ε. degree-tate-valuation: p.52 display plus the reduced kernel component for non-isogenies. None restates the item. Duplicate search: the live unsplit lem-sfb-isogeny-relative-tate-determinant (Q104) implies the valuation node at λ=id, but its natural proof passes through this item. Kept, with a maintainer note that it should cite this item when split. Batch-5: prop-av-tate-rank (reaches only the schematically-dense-open definition), hom-finite-free (torsion-free rationalization), degree-polynomial (infinite-evaluation polynomial identity) and p-linear-triangular (triangularization) are all generic, not trace-formula or Poincaré-duality steps; accepted. No SGA. FIX applied: split_report.tool_uses declares the off-unit statements prop-av-tate-rank and p-linear-triangular (both accepted as generic tools); step 4 now says the roots of P_a lie in the algebraic closure of Q_ℓ. review_split.py does not follow the symlinked chapter dirs, so the route was judged by hand.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.RationalTateCharpoly",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.existsUnique_rational_tate_charpoly",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.rationalEndomorphismTateCharpoly",
+   "AlgebraicGeometry.IsAbelianVariety.existsUnique_rational_tate_charpoly"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/RationalTateCharpoly.lean",
+  "statement": "theorem existsUnique_rational_tate_charpoly {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (f : RationalEndomorphisms A) : ∃ P : Polynomial ℚ, P.Monic ∧ P.natDegree = 2 * dim A ∧ (∀ (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k), P.map (algebraMap ℚ ℚ_[ℓ]) = rationalEndomorphismTateCharpoly A ℓ hℓ f) ∧ (∀ Q : Polynomial ℚ, Q.Monic → Q.natDegree = 2 * dim A → (∀ (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k), Q.map (algebraMap ℚ ℚ_[ℓ]) = rationalEndomorphismTateCharpoly A ℓ hℓ f) → Q = P) ∧ ((∃ a : Additive (Grp.mk A ⟶ Grp.mk A), f = a ⊗ₜ[ℤ] (1 : ℚ)) → ∀ n : ℕ, ∃ z : ℤ, P.coeff n = (z : ℚ)) ∧ (dim A = 0 → P = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a12de73eb",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Item clauses match node and Milne I Thm 10.9/Prop 10.20/Rem 10.11: alg-closed k, abelian variety A, g = dim A, E = Additive(Grp.mk A ⟶ Grp.mk A) ⊗[ℤ] ℚ (pointwise addition via Mathlib Grp-in-Grp commutative structure), ∃ monic P of natDegree 2g in ℚ[X] with P.map = LinearMap.charpoly of the rational Tate action for all primes ℓ ≠ ringChar k, explicit uniqueness among monic degree-2g realizers, integral u = a⊗1 ⇒ ℤ coefficients, dim 0 ⇒ P = 1. New def node def-sfb-rational-abelian-endomorphism-action: real TensorProduct.lift data, a⊗q ↦ q·rationalTateModuleMap a over the upstream action; well-definedness rationalTateModuleMap_add is a named sorry theorem with docstring and matching node clause; no duplicate in DAG or project Lean; live item unbound. Statements verbatim, imports are proof-dep modules or mathlib_match, docstrings with source/blueprint and the 6 proof steps, sorry only, lines ≤ 100, both report sections present. No file changed, no compile. Advisory: Q83's later-landed EndomorphismDegreeMultiplicative module can be imported in stage 3."
+ }
+}

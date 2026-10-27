@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-affine-comparison-chosen-equality",
+ "kind": "statement",
+ "title": "Defining equation of the chosen normalized affine comparison",
+ "statement": "For a compact separated scheme Y, a quasi-coherent module F, and q a natural number, affineRealizationComparison Y F q equals the inverse of the family selected by exists_unique_qcoherentNormalizedComparison Y [def-weil-pbc-affine-cohomology-comparison-data]. Equivalently it is the inverse of the constructed affineNormalizedComparisonFamily [def-weil-pbc-affine-normalized-comparison-family].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD; defining equation of the canonical normalized affine comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "def-weil-pbc-affine-normalized-comparison-family"
+ ],
+ "proof": [
+  {
+   "text": "Unfold affineRealizationComparison to obtain its inverse-choice equation. Unfold the named affineNormalizedComparisonFamily and apply that equation to identify the inverse named family with the existing comparison. The definitions use the same unique-existence theorem and the same witness, so no new choice is introduced. The statement holds on empty schemes, zero modules and in every degree.",
+   "uses": [
+    "def-weil-pbc-affine-cohomology-comparison-data",
+    "def-weil-pbc-affine-normalized-comparison-family"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "def-weil-pbc-affine-normalized-comparison-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD; defining equation of the canonical normalized affine comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical affine realization comparison equals the inverse of the chosen unique normalized coherent etale comparison",
+   "results": "Eight affine-space and standard-etale hits; none concerns the project comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.symm",
+   "results": "Twelve inverse equivalence lemmas; none states the defining equation of the project comparison.",
+   "date": "2026-10-26",
+   "verdict": "No project-specific match."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRealizationComparison_eq_chosen",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-comparison-pullback",
+   "place": "Identify the inverse chosen normalized comparison on each affine chart."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonChosenEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonChosenEquality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison_eq_chosen",
+  "statement": "theorem affineRealizationComparison_eq_chosen (Y : Scheme.{u})\n    [CompactSpace Y] [Y.IsSeparated] (F : Y.Modules) [F.IsQuasicoherent] (q : ℕ) :\n    affineRealizationComparison Y F q =\n      (Classical.choose (exists_unique_qcoherentNormalizedComparison Y) F q).symm",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison_eq_chosen",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison_eq_family"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

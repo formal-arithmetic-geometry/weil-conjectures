@@ -50,7 +50,45 @@
   "def-sc-function-field"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny-degree"
+ "unit": "sk-prop-av-isogeny-degree",
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be a finite morphism of schemes which is locally of\nfinite presentation, with $Y$ reduced and Jacobson (for example $Y$ a\nreduced scheme of finite type over a field). For $y\\in Y$ let\n$\\deg_y(f):=\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\n=\\dim_{\\kappa(y)}f_*\\mathcal O_X\\otimes\\kappa(y)$ be the length of the\nfibre $X_y=f^{-1}(y)$, and suppose that $\\deg_y(f)=r$ for every closed\npoint $y$ of $Y$. Then $\\deg_y(f)=r$ for every $y\\in Y$, $f$ is flat,\nand $f_*\\mathcal O_X$ is locally free of rank $r$. If moreover $X$ is\nintegral with generic point $\\eta$, then\n$[\\kappa(\\eta):\\kappa(f(\\eta))]=r$; in particular, for a finite\nsurjective morphism $f$ of varieties over a field $k$, the degree\n$\\deg(f)=[k(X):k(Y)]$ of function fields\n([def-sc-function-field]) equals $r$.",
+  "proof": [
+   {
+    "text": "*Step 1: every fibre has length $r$.* The function\n$y\\mapsto\\deg_y(f)$ is upper semicontinuous: $f_*\\mathcal O_X$ is a\nquasi-coherent $\\mathcal O_Y$-module of finite type, so by Nakayama's\nlemma (*reference: Stacks Project, Algebra, Lemma 10.20.1,\n[Tag 00DV](https://stacks.math.columbia.edu/tag/00DV)*) lifts of a\n$\\kappa(y)$-basis of $f_*\\mathcal O_X\\otimes\\kappa(y)$ generate\n$f_*\\mathcal O_X$ on an open neighbourhood $U$ of $y$, and then\n$\\deg_{y'}(f)\\le\\deg_y(f)$ for $y'\\in U$. Let $y\\in Y$ and let $U$ be\nsuch a neighbourhood. As $Y$ is Jacobson, the nonempty locally closed\nsubset $U\\cap\\overline{\\{y\\}}$ contains a closed point $z$ of $Y$. Then\n$r=\\deg_z(f)\\le\\deg_y(f)$ because $z\\in U$, and\n$\\deg_y(f)\\le\\deg_z(f)=r$ because $y$ lies in every open neighbourhood\nof its specialization $z$. Hence $\\deg_y(f)=r$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: local freeness.* The assertion is local on $Y$, so let\n$Y=\\operatorname{Spec}R$ with $R$ reduced and $X=\\operatorname{Spec}S$;\nas $f$ is finite and of finite presentation, $S$ is a finitely presented\n$R$-module (a finite $R$-algebra of finite presentation is finitely\npresented as a module). Let\n$\\mathfrak p\\subset R$ be prime and choose $s_1,\\dots,s_r\\in S$ whose\nimages form a $\\kappa(\\mathfrak p)$-basis of $S\\otimes\\kappa(\\mathfrak p)$.\nBy Nakayama's lemma $\\varphi:R_{\\mathfrak p}^{\\oplus r}\\to S_{\\mathfrak p}$,\n$e_i\\mapsto s_i$, is surjective; let $K$ be its kernel. For every prime\n$\\mathfrak q\\subseteq\\mathfrak p$ the map\n$\\kappa(\\mathfrak q)^{\\oplus r}\\to S\\otimes\\kappa(\\mathfrak q)$ is a\nsurjection between $\\kappa(\\mathfrak q)$-vector spaces of the same\ndimension $r$ (Step 1), hence injective; by right exactness of\n$-\\otimes\\kappa(\\mathfrak q)$ the image of $K$ in\n$\\kappa(\\mathfrak q)^{\\oplus r}$ is this kernel, so it is zero, i.e. the\ncoordinates of every element of $K$ lie in $\\mathfrak qR_{\\mathfrak p}$.\nHence they lie in $\\bigcap_{\\mathfrak q\\subseteq\\mathfrak p}\\mathfrak qR_{\\mathfrak p}$,\nthe nilradical of the reduced ring $R_{\\mathfrak p}$, which is zero. So\n$K=0$ and $S_{\\mathfrak p}\\cong R_{\\mathfrak p}^{\\oplus r}$. Since $S$ is\nfinitely presented, an isomorphism at $\\mathfrak p$ spreads out to an\nopen neighbourhood of $\\mathfrak p$: lift the isomorphism to a map\n$R_g^{\\oplus r}\\to S_g$ for some $g\\notin\\mathfrak p$; its cokernel is\nfinitely generated and vanishes at $\\mathfrak p$, so after inverting a\nfurther element the map is surjective, and then its kernel is finitely\ngenerated (as $S_g$ is finitely presented) and vanishes at $\\mathfrak p$,\nso it vanishes after inverting one more element.\nThus $f_*\\mathcal O_X$ is locally free of rank $r$, and $f$ is flat.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3: the degree.* Let $X$ be integral with generic point $\\eta$ and\nput $y=f(\\eta)$. Every point of $X_y$ is a specialization of $\\eta$ with\nthe same image, so equals $\\eta$, since a finite morphism has no\nnontrivial specializations inside a fibre (incomparability for integral\nring maps). On an affine open $\\operatorname{Spec}S\\to\\operatorname{Spec}R$\nas above, with $S$ a domain and $y=\\mathfrak q$, the ring\n$S\\otimes\\kappa(\\mathfrak q)=S_{\\mathfrak q}/\\mathfrak qS_{\\mathfrak q}$\ntherefore has the single prime ideal $0$, so $\\mathfrak qS_{\\mathfrak q}=0$;\nthus it is the domain $S_{\\mathfrak q}$, finite-dimensional over\n$\\kappa(\\mathfrak q)$, hence a field, namely $\\kappa(\\eta)$. So\n$[\\kappa(\\eta):\\kappa(y)]=\\deg_y(f)=r$ by Step 1. If $f$ is a finite\nsurjective morphism of varieties, then $f(\\eta)$ is the generic point of\n$Y$, and $\\kappa(\\eta)=k(X)$, $\\kappa(f(\\eta))=k(Y)$, so\n$\\deg(f)=[k(X):k(Y)]=r$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-proetale-scalar-local-model-representatives",
+ "kind": "statement",
+ "title": "Small representative families of finitely presented scalar local models on a pro-etale site",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal V$ and bounded small site skeletons as in [def-weil-size-convention]. Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, and $A=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For every scheme $U$ in the bound put $R_U=p_U^*\\underline A$ [sk-def-sfb-pulled-back-coefficients, def-sfb-integral-model-condensed-coefficients]. Let $T$ be any scheme in that bound, with its $\\mathcal V$-small pro-étale site [def-weil-pbc-proetale-site]. Modules are sectionwise sheaves of modules [def-weil-sheaf-of-modules-category], or equivalently internal modules via [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. For a finitely presented scalar $A$-module $P$ [def-sc-finitely-presented-module], its scalar-extension model on $U$ is $R_U\\otimes_{\\underline A}\\underline P$. A module has a finite constant local model if its module pullback on a pro-étale covering of $T$ is isomorphic on each member $U$ to such a scalar-extension model, as in [sk-def-sfb-constructible]; pullback uses [sk-def-sfb-module-pushforward-pullback]. There exist a set $I_T\\in\\mathcal V$ and modules $(F_{T,t})_{t\\in I_T}$, each having a finite constant local model, such that every $R_T$-module having a finite constant local model is isomorphic to some $F_{T,t}$. The local scalar models may be indexed by $Q=\\coprod_{m,n\\in\\mathbf N}\\operatorname{Mat}_{n\\times m}(A)$, using the actual modules $P_q=A^n/\\operatorname{im}(q:A^m\\to A^n)$ and their scalar extensions; no local-model sheaves defined by arbitrary matrices of $R_U$-sections are required. No Noetherian, quasi-compactness, torsion-freeness or invertibility-of-$\\ell$ hypothesis is imposed on $T$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), final sentence: finite scalar presentations and local models on a fixed small site; extracted argument of product-bound proof steps 1–3 (finite limits, scalar quotient codes, slice-ring comparison and prescribed-local-model smallness)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integral-model-condensed-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sc-finitely-presented-module",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentations on the condensed point are coded by natural numbers n,m and a map between regular finite free modules. Each finite presented module is isomorphic to the cokernel of one of these maps, so these point models have a small label type.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-weil-size-convention"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullbacks along a pro-etale cover are jointly faithful on internal coefficient modules. The cartesian coefficient map is an isomorphism; extendScalarsIsoComapInv reduces equality to equality of underlying abelian inverse images. The proved localization comparison identifies these inverse images with restriction. Pull the original cover back along each test object and apply sheaf separatedness to prove equality. This includes the empty cover.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-sfb-coefficient-sections-localization",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Repeat the proved prescribed-model counting argument directly for internal modules, using its private essentiallySmall_embeds helper. The witnessing covers have index type in Type u, so the type of all such covers of T lives in Type (u+1). Codes consist of one such cover and a point-model label on each member. For each code take the product of the actual lowerStar direct images of the models. Adjunction transposes local trivializations to a map from M to that product. The indexed cover and step 2 show this map is monic by cancellation through the local isomorphisms. Internal module categories are Grothendieck abelian, hence well powered. The small family of subobjects of each product and the small union over codes yield essential smallness. ObjectProperty.EssentiallySmall.exists_small_le chooses representatives that themselves satisfy the local condition.",
+   "uses": [
+    "lem-sfb-locally-prescribed-modules-small",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-size-convention",
+    "lem-sfb-modobj-grothendieck"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the continuous scalar finite-presentation comparison to each point module in a witnessing cover. An ordinary finite presented A-module is isomorphic to A^n/range(q) for a scalar matrix q: choose a finitely generated relation submodule and express its generators as a finite linear map. Transport the quotient equivalence through scalar realization and point pullback. Conversely every such quotient is finitely presented, since the range of its finite free source is finitely generated. The continuous scalar comparison gives a finite presented point module for each such model. These two arguments give the exact second conjunct on the same cover.",
+   "uses": [
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "def-sc-finitely-presented-module",
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "def-weil-size-convention",
+  "lem-sfb-alpha-iso",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-sfb-coefficient-sections-localization",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-locally-prescribed-modules-small",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-continuous-scalar-finite-presentation",
+  "def-sc-finitely-presented-module",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2); direct internal-module version of the prescribed-model product/subobject counting argument and explicit scalar quotient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a small pro etale site sheaves locally isomorphic to scalar extensions of finitely presented modules have a small set of isomorphism class representatives",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates do not supply representative families of scalar constant local models on the pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.EssentiallySmall",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates do not supply representative families of scalar constant local models on the pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "(constant|local).*(model|presentation)|[Ee]ssentiallySmall",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates do not supply representative families of scalar constant local models on the pro-etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small family of finitely presented scalar modules provides representatives for locally constant scalar extension sheaves on a small site",
+   "results": "8 hits: SheafOfModules.Presentation.IsFinite.mk, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, SheafOfModules.IsFinitePresentation.recOn, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates do not supply representative families of scalar constant local models on the pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essential smallness of sheaves locally having prescribed constant finitely presented scalar models on pro etale covers",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates do not supply representative families of scalar constant local models on the pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "(constant|local).*(model|presentation)|[Ee]ssentiallySmall",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, small section sets, well-poweredness and essential smallness of scalar modules do not assert the sheaf local-model representative theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Essential smallness of modules with prescribed scalar local models on a small pro etale site",
+   "results": "8 hits: instSmallLocalizedModule, instEssentiallySmallFGModuleCat, CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.locallySmall_self, ModuleCat.instSmallSubtypeForallCarrierObjMemSubmoduleSectionsSubmodule, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.essentiallySmall_iff, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, small section sets, well-poweredness and essential smallness of scalar modules do not assert the sheaf local-model representative theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.EssentiallySmall",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, small section sets, well-poweredness and essential smallness of scalar modules do not assert the sheaf local-model representative theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves locally scalar extensions of finitely presented modules on a small site have a set of isomorphism class representatives",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, small section sets, well-poweredness and essential smallness of scalar modules do not assert the sheaf local-model representative theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules locally isomorphic to a small prescribed family of sheaves form an essentially small full subcategory",
+   "results": "8 hits: SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.IsFiniteType, PresheafOfModules.wellPowered, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isQuasicoherent, ModuleCat.instSmallSubtypeForallCarrierObjMemSubmoduleSectionsSubmodule, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates, small section sets, well-poweredness and essential smallness of scalar modules do not assert the sheaf local-model representative theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stratified-constant-model-product-bound",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-integral-heart-triangulated",
+   "place": "Paragraph (2), final sentence: finite scalar presentations and local models on a fixed small site; extracted argument of product-bound proof steps 1–3 (finite limits, scalar quotient codes, slice-ring comparison and prescribed-local-model smallness).",
+   "via": [
+    "lem-sfb-stratified-constant-model-product-bound"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proetale-scalar-local-model-representatives",
+  "worker": "stage1",
+  "summary": "Kept statement and statement dependencies. Explicit scalar quotient codes exhaust finite scalar presentations; the pro-etale slice equivalence, abelian inverse-image comparison and cartesian coefficient isomorphism identify the local condition with prescribed slice models. Applied the existing general smallness theorem. No new nodes; no new finiteness hypotheses. Review FIX (Q01 maintainer reader): step 3 cites lem-sfb-coefficient-sections-localization for the identification of the module-pullback inverse image u^*_Ab with slice restriction, instead of the restriction lemma for the different inverse-image construction of def-weil-proetale-inverse-image.",
+  "blueprint": "Realizes the finite-presentation/local-model/small-site portion of paragraph (2), final sentence of det-lem-int-integral-heart-triangulated.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic closure and between-objects properties establish finite limits of the small site; this unit has no replacement for scheme weakly-etale stability."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies a pro-etale object site with the slice, for applying the small-site theorem."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "States that the abelian inverse image u^*_Ab of the module pullback along an object of the pro-etale site is restriction to the slice and gives the sectionwise coefficient ring isomorphism; the integral-heart unit has no own node for it."
+   },
+   {
+    "node": "lem-sfb-locally-prescribed-modules-small",
+    "why": "Generic small-site counting theorem for specified slice modules; the integral-heart unit supplies no independent counting theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-sfb-locally-prescribed-modules-small"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-898dc89c3",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-898dc89c3 (reviewer sub-agent of L); spot-checked: I read the item in full (5 steps), every cited statement and the source: main-20261015 sk-lem-int-integral-heart-triangulated.proof.md, paragraph (2), last sentence. There are no new nodes, and the statement and stmt_deps are unchanged. This is the first split of a node Q37 created on 2026-10-22; there is no re-split note. Step 1 is correct: weakly-etale stability, chosen fibre products, terminal T->T. Step 2 is correct: P_q=A^n/im q is isomorphic to any finitely presented P, with m=n=0, m=0 and A/varpi checked. Step 4 is correct: every hypothesis of lem-sfb-locally-prescribed-modules-small holds, and its class P matches the item's condition in both directions. Step 5 is correct: an empty T gives the zero sheaf. One fault, C4 in step 3: it cited clause (1) of lem-sfb-proetale-object-inverse-image-restriction. That clause is about the inverse image r^{-1} of def-weil-proetale-inverse-image (an explicit colimit over I_U). The module pullback of sk-def-sfb-module-pushforward-pullback is instead built from u^*_Ab of def-sfb-finite-upper-star (sheafify of Lan along base change). The two are isomorphic, but no cited statement says so. FIX: step 3 now cites lem-sfb-coefficient-sections-localization, which states that u^*_Ab is restriction to the slice and gives the coefficient isomorphism theta. I also added the naturality sentence for the restricted action and updated proof_deps and the split_report tool_uses to match. The new dependency does not reach the item, so there is no cycle. I accept the generic tool uses: weakly-etale stability, slice localization, the prescribed-model counting theorem and the sections-localization node. No other faults, and no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleScalarLocalModelRepresentatives",
+  "declaration": "AlgebraicGeometry.ProEtale.proetale_scalar_local_model_representatives",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbScalarPresentationModule",
+   "AlgebraicGeometry.ProEtale.sfbIntegralScalarPresentationModel",
+   "AlgebraicGeometry.ProEtale.proetale_scalar_local_model_representatives"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleScalarLocalModelRepresentatives.lean",
+  "statement": "theorem proetale_scalar_local_model_representatives (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) : (∃ (I : Type (u + 1)) (F : I → Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (integralModelCondensedCoefficients l E).X T)), (∀ t : I, HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X T (F t)) ∧ ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (integralModelCondensedCoefficients l E).X T), HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X T M → ∃ t : I, Nonempty (M ≅ F t)) ∧ (∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (integralModelCondensedCoefficients l E).X T), HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X T M ↔ ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : 𝒰.I₀, ∃ (m n : ℕ) (q : Matrix (Fin n) (Fin m) (Padic.coefficientExtensionIntegers l E)), Nonempty ((CondensedRing.upperStar (integralModelCondensedCoefficients l E).X (𝒰.f i)).obj M ≅ sfbIntegralScalarPresentationModel l E (𝒰.X i) m n q))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The first conjunct gives a Type (u + 1) index family of members exhausting all finite constant local models. The second conjunct gives the exact equivalence with pro-etale covers labelled by finite scalar matrices. Helpers form the actual quotient A^n/range(q), with a harmless ULift, and apply the existing modelFunctor at the same spectral topology as integralModelCondensedCoefficients. The added landed definition dependency def-sfb-finite-constant-model-data owns FiniteConstantModel.modelFunctor in Sheaf.Paper.FiniteConstantModelResolution; the two-term free-resolution theorem is not needed to state the item. No statement correction or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-093bd31c8",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of the 1490bc7e9445 H2 RETURN. The Lean file is byte-identical (sha 9ab97086). The node changes only in stmt_deps (two-term-free-resolution theorem -> landed existing:true def-sfb-finite-constant-model-data, which owns the plain def FiniteConstantModel.modelFunctor, allowed by brief-stage2 'stmt_deps may gain landed nodes') and lean.note; against live only lean/stmt_deps differ. Re-checked: HasFiniteConstantLocalModel is the recorded sk-def-sfb-constructible(1) predicate; the first conjunct matches the node (I : Type (u+1), members satisfy the predicate, exhaustion up to iso); the second-conjunct iff is true (a map Λ^m->Λ^n is a matrix over Λ(*)=O_E, constant sheafification and scalar extension preserve cokernels); the coefficient ring and spectralNorm instance match integralModelCondensedCoefficients; no extra hypotheses on T; universes correct; edge cases m=n=0, m=0, torsion q and empty T covered; helpers have real data; sorry only; docstrings carry source and proof steps; statement verbatim. No compile (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fb31c",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261024T020654-L-2638760",
+  "kind": "interface",
+  "note": "independent cc review: Item proof (fully closed, axioms propext/choice/Quot.sound) and new lemma continuousScalarFinitePresentation vs node statements; unit files sk-lem-int-integral-heart (realized empty) and sk-prop-sfb-cartesian-coefficients (lean = isIso_condensedPullbackHom, used by the proof); proof_deps vs declarations used"
+ }
+}

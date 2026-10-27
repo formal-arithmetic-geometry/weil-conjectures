@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-graded-polynomial-vertex-regularity",
+ "kind": "statement",
+ "title": "Homogeneous polynomials with nonzero vertex image become monic in a linear direction",
+ "statement": "Let $k$ be an infinite field and let $B$ be a standard graded $k$-algebra, so $B=\\bigoplus_{j\\ge0}B_j$, $B_0=k$, and $B_+=\\bigoplus_{j>0}B_j$ [def-pc-standard-graded-algebra]. Give $P=B[T_1,\\ldots,T_e]$ the total grading with $\\deg T_i=1$, where $e\\ge1$ [def-weil-pbc-mv-polynomial-ring]. Let $n\\ge1$ and let $f\\in P_n$ be homogeneous. Let $\\epsilon:P\\to k[T_1,\\ldots,T_e]$ be coefficientwise reduction modulo $B_+$ and suppose $H=\\epsilon(f)\\ne0$. There exist $v\\in k^e\\setminus\\{0\\}$ with $H(v)\\ne0$ and $M\\in\\operatorname{GL}_e(k)$ with first column $v$ such that the graded $B$-algebra automorphism $\\sigma_M$, defined by $T_i\\mapsto\\sum_jM_{ij}T_j$, makes $\\sigma_M(f)$ a degree-$n$ polynomial in $T_1$ over $D=B[T_2,\\ldots,T_e]$ whose leading coefficient is the nonzero scalar $H(v)$. In particular $H(v)^{-1}\\sigma_M(f)$ is monic in $D[T_1]$, and multiplication by $f$ on $P$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written algebraic refinement of the item, former steps 5--6. Supporting Tag 07BV, lemma-colimit-syntomic (monic polynomial regularity in its proof). Infinite-field direction input: existing lem-trf-infinite-field-top-form-direction; no Stacks tag asserts this full graded-polynomial comparison."
+ },
+ "stmt_deps": [
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Expand $f=\\sum_\\alpha b_\\alpha T^\\alpha$, where $|\\alpha|=\\sum_i\\alpha_i$. By the total grading and [def-pc-standard-graded-algebra], each nonzero $b_\\alpha$ lies in $B_{n-|\\alpha|}$, and $|\\alpha|\\le n$. Reduction modulo $B_+$ kills the terms with $|\\alpha|<n$ and is the identity on $B_0=k$. Hence $H=\\sum_{|\\alpha|=n}b_\\alpha T^\\alpha$ is a nonzero homogeneous form of degree $n$ over $k$. In particular the $T$-degree-$n$ part of $f$ has scalar coefficients.",
+   "uses": [
+    "def-pc-standard-graded-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written graded coefficient and linear substitution calculation refining former steps 5--6 of lem-trf-normal-cone-directrix-minimal-primes. Supporting Tag 07BV, lemma-colimit-syntomic, proof, monic regular-sequence assertion; the full statement is not asserted there."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-infinite-field-top-form-direction] to $H$ in $e\\ge1$ variables over the infinite field $k$. This gives $v\\ne0$ with $c:=H(v)\\ne0$. Choose an index $r$ with $v_r\\ne0$.",
+   "uses": [
+    "lem-trf-infinite-field-top-form-direction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Existing infinite-field direction input; application to the homogeneous form computed in step 1."
+   }
+  },
+  {
+   "text": "List the indices other than $r$ as $i_2,\\ldots,i_e$. Let $M$ have columns $v,e_{i_2},\\ldots,e_{i_e}$, where $e_i$ is the coordinate vector. For $y=Mx$ its inverse is explicitly $x_1=v_r^{-1}y_r$ and $x_j=y_{i_j}-v_{i_j}v_r^{-1}y_r$ for $j\\ge2$; substitution verifies both inverse identities. Thus $M\\in\\operatorname{GL}_e(k)$ and its first column is $v$. By the universal property in [def-weil-pbc-mv-polynomial-ring], substitution $T_i\\mapsto\\sum_jM_{ij}T_j$ defines a $B$-algebra map $\\sigma_M$. Substitution for $M^{-1}$ is its inverse: on $T_i$ their composites have coefficient matrices $MM^{-1}$ and $M^{-1}M$. Each image of a variable is homogeneous of degree one and coefficients in $B$ are fixed, so both maps preserve the total grading.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written graded coefficient and linear substitution calculation refining former steps 5--6 of lem-trf-normal-cone-directrix-minimal-primes. Supporting Tag 07BV, lemma-colimit-syntomic, proof, monic regular-sequence assertion; the full statement is not asserted there."
+   }
+  },
+  {
+   "text": "Group monomials by their exponent of $T_1$ to identify $P$ with $D[T_1]$, $D=B[T_2,\\ldots,T_e]$: $bT_1^{a_1}\\cdots T_e^{a_e}$ corresponds to $(bT_2^{a_2}\\cdots T_e^{a_e})T_1^{a_1}$; the inverse expands its coefficients. These maps preserve products because exponents add. Each substituted monomial from step 1 has $T_1$-degree at most $|\\alpha|\\le n$. It contributes to the coefficient of $T_1^n$ only if $|\\alpha|=n$, and then only by choosing $M_{i1}T_1=v_iT_1$ from every factor. The coefficient is therefore $\\sum_{|\\alpha|=n}b_\\alpha\\prod_i v_i^{\\alpha_i}=H(v)=c$. This is a nonzero scalar in $B_0=k\\subset D$, so $\\sigma_M(f)$ has $T_1$-degree exactly $n$ and $q:=c^{-1}\\sigma_M(f)$ is monic.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written graded coefficient and linear substitution calculation refining former steps 5--6 of lem-trf-normal-cone-directrix-minimal-primes. Supporting Tag 07BV, lemma-colimit-syntomic, proof, monic regular-sequence assertion; the full statement is not asserted there."
+   }
+  },
+  {
+   "text": "The ring $D$ is commutative, so apply [lem-weil-pbc-monic-polynomial-nonzerodivisor] to the monic polynomial $q\\in D[T_1]$. If $fg=0$ in $P$, applying $\\sigma_M$ and multiplying by the scalar $c^{-1}$ gives $q\\sigma_M(g)=0$. The cited statement gives $\\sigma_M(g)=0$, and applying the explicit inverse substitution gives $g=0$. Finally $fg=fh$ implies $f(g-h)=0$ and hence $g=h$, proving injectivity of multiplication by $f$.",
+   "uses": [
+    "lem-weil-pbc-monic-polynomial-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BV, lemma-colimit-syntomic, proof (monic regularity), through the existing Mathlib leaf lem-weil-pbc-monic-polynomial-nonzerodivisor; explicit inverse-substitution calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-infinite-field-top-form-direction",
+  "lem-weil-pbc-monic-polynomial-nonzerodivisor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written graded coefficient and linear substitution calculation refining former steps 5--6 of lem-trf-normal-cone-directrix-minimal-primes. Supporting Tag 07BV, lemma-colimit-syntomic, proof, monic regular-sequence assertion; the full statement is not asserted there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Hh]omogeneous|[Ii]sHomogeneous).*(nonZeroDivisors|[Rr]egular)|nonZeroDivisors.*([Hh]omogeneous|[Ii]sHomogeneous)",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"grep\", \"query\": \"([Hh]omogeneous|[Ii]sHomogeneous).*(nonZeroDivisors|[Rr]egular)|nonZeroDivisors.*([Hh]omogeneous|[Ii]sHomogeneous)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.isRegular covers an already monic univariate polynomial only; variable/monomial regularity and homogeneous degree lemmas do not produce a scalar leading coefficient by a linear change in a graded coefficient algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: over an infinite field a homogeneous polynomial with a nonzero scalar top form becomes monic after an invertible linear change of variables and is regular over its graded coefficient algebra",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: over an infinite field a homogeneous polynomial with a nonzero scalar top form becomes monic after an invertible linear change of variables and is regular over its graded coefficient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.isRegular\", \"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"MvPolynomial.IsHomogeneous\", \"Polynomial.IsMonicOfDegree\", \"MvPolynomial.IsHomogeneous.rename_isHomogeneous_iff\", \"MvPolynomial.IsHomogeneous.rename_isHomogeneous\", \"MvPolynomial.homogeneousComponent\"], \"digest\": \"4c10c1dae0324899\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.isRegular covers an already monic univariate polynomial only; variable/monomial regularity and homogeneous degree lemmas do not produce a scalar leading coefficient by a linear change in a graded coefficient algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, nonZeroDivisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial\", \"instIsPushoutFractionRingMvPolynomial\", \"instIsPushoutFractionRingMvPolynomial_1\", \"AlgebraicIndependent.aevalEquivField\", \"AlgebraicIndependent.reprField\", \"AlgebraicIndependent.aevalEquivField_apply_coe\", \"AlgebraicIndependent.aevalEquivField_algebraMap_apply_coe\", \"AlgebraicIndependent.lift_reprField\"], \"digest\": \"01a29156d6738e41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.isRegular covers an already monic univariate polynomial only; variable/monomial regularity and homogeneous degree lemmas do not produce a scalar leading coefficient by a linear change in a graded coefficient algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: a homogeneous polynomial over a nonnegatively graded algebra over an infinite field with nonzero image modulo the positive degree ideal is a nonzerodivisor",
+   "results": "{\"t\": \"2026-10-22T07:19:08Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: a homogeneous polynomial over a nonnegatively graded algebra over an infinite field with nonzero image modulo the positive degree ideal is a nonzerodivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isRegular_prod_X\", \"MvPolynomial.isRegular_X\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem\", \"MvPolynomial.isRegular_X_pow\", \"IsRegular.monomial\", \"MvPolynomial.nonTorsionWeight_of\", \"Polynomial.mem_nonZeroDivisors_iff\", \"Polynomial.mem_nonzeroDivisors_of_coeff_mem\"], \"digest\": \"a74c68098caf44b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.isRegular covers an already monic univariate polynomial only; variable/monomial regularity and homogeneous degree lemmas do not produce a scalar leading coefficient by a linear change in a graded coefficient algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: homogeneous polynomial in B[T] whose image in (B/Bplus)[T] is nonzero has injective multiplication when B is graded with Bzero an infinite field",
+   "results": "{\"t\": \"2026-10-22T07:19:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: homogeneous polynomial in B[T] whose image in (B/Bplus)[T] is nonzero has injective multiplication when B is graded with Bzero an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous.inj_right\", \"MvPolynomial.IsHomogeneous.of_map\", \"MvPolynomial.isRegular_prod_X\", \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"HomogeneousLocalization.val_injective\", \"MvPolynomial.IsHomogeneous.funext\", \"MvPolynomial.isRegular_X\"], \"digest\": \"9041728fd8a03686\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.isRegular covers an already monic univariate polynomial only; variable/monomial regularity and homogeneous degree lemmas do not produce a scalar leading coefficient by a linear change in a graded coefficient algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.coeff, nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-22T07:19:43Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.coeff, nonZeroDivisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MvPolynomial.coeff'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: a homogeneous polynomial over a nonnegatively graded algebra with degree zero an infinite field and nonzero image modulo the positive ideal becomes monic in one variable by invertible linear substitution",
+   "results": "{\"t\": \"2026-10-23T12:14:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: a homogeneous polynomial over a nonnegatively graded algebra with degree zero an infinite field and nonzero image modulo the positive ideal becomes monic in one variable by invertible linear substitution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.freeMonic\", \"Polynomial.MonicDegreeEq.freeMonic\", \"Polynomial.monic_freeMonic\", \"Polynomial.isHomogeneous_homogenize\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"Polynomial.homogenize_eq_of_isHomogeneous\", \"Polynomial.homogenize_monomial_of_lt\", \"Polynomial.homogenize\"], \"digest\": \"105372a43118c266\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern homogenization, evaluation, irrelevant ideals or existing leading coefficients; none supplies the graded-coefficient linear-direction comparison. The two needed general inputs are already DAG Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, Polynomial.Monic",
+   "results": "{\"t\": \"2026-10-23T12:14:50Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, Polynomial.Monic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern homogenization, evaluation, irrelevant ideals or existing leading coefficients; none supplies the graded-coefficient linear-direction comparison. The two needed general inputs are already DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "([Hh]omogeneous|[Ii]sHomogeneous).*(nonZeroDivisors|[Rr]egular)|nonZeroDivisors.*([Hh]omogeneous|[Ii]sHomogeneous)",
+   "results": "{\"t\": \"2026-10-23T12:15:11Z\", \"tool\": \"grep\", \"query\": \"([Hh]omogeneous|[Ii]sHomogeneous).*(nonZeroDivisors|[Rr]egular)|nonZeroDivisors.*([Hh]omogeneous|[Ii]sHomogeneous)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern homogenization, evaluation, irrelevant ideals or existing leading coefficients; none supplies the graded-coefficient linear-direction comparison. The two needed general inputs are already DAG Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: homogeneous polynomial over a graded algebra with nonzero reduction at the irrelevant ideal has a unit leading coefficient after a linear coordinate change",
+   "results": "{\"t\": \"2026-10-23T12:15:35Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: homogeneous polynomial over a graded algebra with nonzero reduction at the irrelevant ideal has a unit leading coefficient after a linear coordinate change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.irrelevant\", \"HomogeneousIdeal.mem_irrelevant_iff\", \"MonomialOrder.isUnit_leadingCoeff\", \"Polynomial.leadingCoeff_map_eq_of_isUnit_leadingCoeff\", \"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous\", \"MvPolynomial.homogeneousComponent_of_mem\", \"Polynomial.leadingCoeffHom\"], \"digest\": \"6398e9bf226cf991\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern homogenization, evaluation, irrelevant ideals or existing leading coefficients; none supplies the graded-coefficient linear-direction comparison. The two needed general inputs are already DAG Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-graded-polynomial-vertex-regularity: over an infinite field choose invertible linear coordinates so a polynomial whose top degree part has scalar coefficients has constant nonzero leading coefficient in the first variable",
+   "results": "{\"t\": \"2026-10-23T12:15:57Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-graded-polynomial-vertex-regularity: over an infinite field choose invertible linear coordinates so a polynomial whose top degree part has scalar coefficients has constant nonzero leading coefficient in the first variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.coeff_toPolynomialAdjoinImageCompl_ne_zero\", \"MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero\", \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"MvPolynomial.IsWeightedHomogeneous\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"Polynomial.homogenize\"], \"digest\": \"9429157d9e028b17\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern homogenization, evaluation, irrelevant ideals or existing leading coefficients; none supplies the graded-coefficient linear-direction comparison. The two needed general inputs are already DAG Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-cone-directrix-minimal-primes",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: The linear vertex of a flat normal-cone fibre survives every minimal-prime quotient. New refinement: Agent-written algebraic refinement of the item, former steps 5--6. Supporting Tag 07BV, lemma-colimit-syntomic (monic polynomial regularity in its proof). Infinite-field direction input: existing lem-trf-infinite-field-top-form-direction; no Stacks tag asserts this full graded-polynomial comparison.",
+   "via": [
+    "lem-trf-normal-cone-directrix-minimal-primes",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-graded-polynomial-vertex-regularity",
+  "worker": "stage1",
+  "summary": "Expanded the agent-written graded polynomial refinement into five complete steps, retaining the statement and inherited provenance. Reused the existing infinite-field nonvanishing-direction and monic-polynomial nonzerodivisor Mathlib leaves. Constructed the matrix and its inverse explicitly, verified the substitution and its inverse on generators, calculated the T_1^n coefficient from the total grading, and applied the existing monic regularity statement. No new nodes; no Lean writing or compilation.",
+  "blueprint": "Realizes the polynomial regularity argument (former steps 5--6 of lem-trf-normal-cone-directrix-minimal-primes) on the inherited historical resolution branch below lem-trf-local-term-locality. Read the current latest blueprint: its contracting-correspondence proof replaces that historical branch. This split resolves only the assigned algebraic descendant; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-049991399",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-049991399 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit containing only the item and its report, with no new nodes. Live and side-live still have the item unsplit, and there is no repair note. The statement, stmt_deps and blueprint are unchanged; only proof, proof_deps, proof_origin, mathlib_searches, status and split_report changed. I checked the statement independently. f in P_n means b_alpha lies in B_{n-|alpha|}. Under T_i -> sum_j M_ij T_j, only the |alpha|=n terms reach T_1^n, and they give coefficient sum b_alpha v^alpha = H(v), a unit in k, so the statement is true. Small cases checked: B=k with f=T1T2, v=(1,1), M=[[1,0],[1,1]] gives sigma(f)=T1^2+T1T2 with leading coefficient 1; B=k[u]/(u^2) with f=T^2+uT shows no domain hypothesis is needed; e=1 is ordinary normalisation. Step 1 (degree bookkeeping, reduction mod B_+) is elementary from def-pc-standard-graded-algebra and def-weil-pbc-mv-polynomial-ring. Step 2: lem-trf-infinite-field-top-form-direction, a same-unit Mathlib leaf, has all its hypotheses met. Step 3: the explicit inverse x_1=v_r^{-1}y_r, x_j=y_{i_j}-v_{i_j}v_r^{-1}y_r checks out, and the inverse substitution follows from the uniqueness clause of the universal property (composites have matrices MN). Step 4: the D[T_1] identification and the T_1^n coefficient are correct. Step 5: lem-weil-pbc-monic-polynomial-nonzerodivisor (Mathlib leaf, R commutative) applied over D, then transported back by the inverse. proof_deps equals the union of uses. Stacks 07BV is lemma-colimit-syntomic (tags:9355); its proof only supports monic regularity, and proof_origin is correctly by agent. No SGA. A duplicate search over dag/nodes (graded-generic-initial-borel, normalized-polynomial-prime-lift, regular-hypersurface-initial-form, formal-associated-graded nodes and others) found nothing that states this result. 11 Mathlib searches across grep, leansearch, loogle and leanfinder, with one recorded as unavailable. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedPolynomialVertexRegularity",
+  "declaration": "MvPolynomial.exists_monic_linear_direction_of_vertex_ne_zero",
+  "file": "lean/Sheaf/RingTheory/GradedPolynomialVertexRegularity.lean",
+  "statement": "theorem exists_monic_linear_direction_of_vertex_ne_zero {k : Type u} [Field k] [Infinite k] {B : Type v} [CommRing B] [Nontrivial B] [Algebra k B] (𝒜 : ℕ → Submodule k B) [GradedAlgebra 𝒜] [GradedAlgebra.IsStandard 𝒜] (e n : ℕ) (hn : 1 ≤ n) (f : MvPolynomial (Fin (e + 1)) B) (hf : ∀ d : Fin (e + 1) →₀ ℕ, coeff d f ∈ 𝒜 (n - d.degree) ∧ (n < d.degree → coeff d f = 0)) (H : MvPolynomial (Fin (e + 1)) k) (hH : map (algebraMap k B) H = map (GradedRing.projZeroRingHom 𝒜) f) (hH0 : H ≠ 0) : (∃ (v : Fin (e + 1) → k) (M : Matrix.GeneralLinearGroup (Fin (e + 1)) k) (σ : MvPolynomial (Fin (e + 1)) B ≃ₐ[B] MvPolynomial (Fin (e + 1)) B), v ≠ 0 ∧ eval v H ≠ 0 ∧ (∀ i : Fin (e + 1), (M : Matrix (Fin (e + 1)) (Fin (e + 1)) k) i 0 = v i) ∧ (∀ i : Fin (e + 1), σ (X i) = ∑ j : Fin (e + 1), C (algebraMap k B ((M : Matrix (Fin (e + 1)) (Fin (e + 1)) k) i j)) * X j) ∧ (∀ (m : ℕ) (g : MvPolynomial (Fin (e + 1)) B), (∀ d : Fin (e + 1) →₀ ℕ, coeff d g ∈ 𝒜 (m - d.degree) ∧ (m < d.degree → coeff d g = 0)) ↔ (∀ d : Fin (e + 1) →₀ ℕ, coeff d (σ g) ∈ 𝒜 (m - d.degree) ∧ (m < d.degree → coeff d (σ g) = 0))) ∧ (finSuccEquiv B e (σ f)).natDegree = n ∧ (finSuccEquiv B e (σ f)).leadingCoeff = C (algebraMap k B (eval v H)) ∧ (finSuccEquiv B e (C (algebraMap k B ((eval v H)⁻¹)) * σ f)).Monic) ∧ Function.Injective (fun g : MvPolynomial (Fin (e + 1)) B ↦ f * g)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-616ee049e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Q53 lem-trf-graded-polynomial-vertex-regularity 616ee049: only the lean field changed vs live, and live has no lean record. stmt_deps IsStandard (degree-zero part = 1 = k) and MvPolynomial used correctly; proof-dep leaves funext_set and Monic.mem_nonZeroDivisors imported non-public. Statement verbatim. Nontrivial B follows from B_0=k and is needed (B=0 breaks natDegree=n). hf is exact total-grading homogeneity with truncated subtraction handled. hH via projZeroRingHom determines H=eps(f) uniquely and H always exists. Conclusion has every clause: v, M in GL with first column v, sigma pinned by generators, two-way grading preservation, natDegree n and leadingCoeff C(H(v)) in finSuccEquiv, monic rescaling, injectivity. Math checked true. Docstrings and both report sections present; no defs, no proof beyond sorry; no changes made, so no compile."
+ }
+}

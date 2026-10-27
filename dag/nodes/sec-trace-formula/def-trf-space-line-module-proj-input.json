@@ -16,9 +16,34 @@
   "document": "literature/stacks-project/spaces-divisors.tex",
   "place": "Tag 0D2Z, assumptions, generation open and parts (2),(3); Tag 03G7, modules on the small etale site; Constructions Tag 01O9, homogeneous-section chart construction"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-trf-cartesian-line-presentation-existence] to realize the given L as P. For any Q with the same line field, the equality of those fields gives a small-etale module isomorphism a:P.line to Q.line.",
+   "uses": [
+    "lem-trf-cartesian-line-presentation-existence",
+    "def-trf-cartesian-line-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-trf-cartesian-line-presentation-hom-descent] to a.hom and a.inv. Their lifts f and g compose to the identity: composition induces a.hom followed by a.inv, and the identity family induces the identity; uniqueness of lifts equates them. Do the same in the reverse order. Thus their component maps form the required cartesian isomorphism e. Its etale compatibility is the compatibility of f followed by transport along the equality of the two line fields. Any other compatible isomorphism has the same underlying lift of a.hom, hence equals e. The other graded-input definitions are unchanged.",
+   "uses": [
+    "lem-trf-cartesian-line-presentation-hom-descent",
+    "def-trf-cartesian-line-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cartesian-line-presentation-existence",
+  "def-trf-cartesian-line-presentation",
+  "lem-trf-cartesian-line-presentation-hom-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G7 and 03M3; descent.tex Tags 03DX, 03LC, 023T and 05VG. The atlas argument and its morphism argument are specialized to rank one."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -92,23 +117,24 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "lean": {
   "module": "Sheaf.TraceFormula.SpaceLineModuleProjInput",
   "declaration": "AlgebraicGeometry.AlgebraicSpace.GradedLineMap",
   "declarations": [
-   "AlgebraicGeometry.AlgebraicSpace.SchemeTests",
-   "AlgebraicGeometry.AlgebraicSpace.testToBase",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.sectionMap",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.powerMap",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.IsCoherent",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.pullback",
-   "AlgebraicGeometry.AlgebraicSpace.EtaleLinePresentation",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineIso",
-   "AlgebraicGeometry.AlgebraicSpace.TestLineIso.IsEtaleCompatible",
    "AlgebraicGeometry.AlgebraicSpace.exists_linePresentation",
    "AlgebraicGeometry.AlgebraicSpace.linePresentation",
    "AlgebraicGeometry.AlgebraicSpace.lineTestFamily",
@@ -126,7 +152,7 @@
   "by": "Q69",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The arbitrary scheme pullbacks are selected only from the stated descent universal property, which determines them up to the unique cartesian isomorphism preserving the given small-etale line module. The input is not an arbitrary family of line modules. Existing generic tensor-power comparisons from SquareZeroTensorBoundaryComparisons are reused without copying their definitions."
+  "note": "The arbitrary scheme pullbacks are selected only from the stated descent universal property, which determines them up to the unique cartesian isomorphism preserving the given small-etale line module. The input is not an arbitrary family of line modules. Existing generic tensor-power comparisons from SquareZeroTensorBoundaryComparisons are reused without copying their definitions. T4: presentation definitions move verbatim to SpaceLinePresentationDefs, publicly reexported here. The existence-and-unique-isomorphism proof assembles effective realization and full-faithful morphism descent."
  },
  "reviewed": {
   "date": "2026-10-17",
@@ -143,5 +169,15 @@
   "group": "Q69",
   "result": "pass",
   "note": "Read the full packet, immutable node/dependencies, both Lean modules, source/report/docstrings, and route-pivot records. Verified clause and hypothesis correspondence, edge cases, real definitions, canonical dependencies, required report sections, and successful per-file scompile.py compilation with no errors."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-92e05",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261023T135412-L-2883719",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in SpaceLinePresentationDefs vs live SpaceLineModuleProjInput (verbatim but blueprint ids); new sorried lemmas vs original exists_linePresentation and Stacks 03G7/023T; direct importers SpaceLineModuleProjMap and SpaceSectionAlgebraEtaleBaseChange compiled against sandbox .lbuild"
  }
 }

@@ -1,0 +1,553 @@
+{
+ "id": "lem-weil-pbc-exact-restriction-augmented-completion",
+ "kind": "statement",
+ "title": "Exact right adjoints preserve augmented derived tower completion units",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] which are Grothendieck (they admit all small colimits, filtered colimits are exact, and they have a generator), with unbounded derived categories [def-weil-abstract-derived-category], countable inverse limits, and K-injective resolutions also in their categories of strict towers [def-pur-kinjective-complex, def-weil-inverse-system]. Let $E:\\mathcal A\\rightleftarrows\\mathcal B:U$ be an adjunction of additive exact functors. Write $U^{\\mathcal T}$ for levelwise $U$, $L_{\\mathcal A},L_{\\mathcal B}$ for ordinary tower limits, and $RL_{\\mathcal A},RL_{\\mathcal B}$ for their total right derived functors [def-weil-derived-limit]. There is a canonical isomorphism\n$$\\gamma_X:D(U)RL_{\\mathcal B}X\\xrightarrow{\\sim}RL_{\\mathcal A}D(U^{\\mathcal T})X,$$\nnormalized, on every strict tower complex, by the ordinary compatible-family limit isomorphism and the universal right-derived comparisons.\nIn addition, let $T_{\\mathcal A},T_{\\mathcal B}$ be additive functors from cochain complexes to cochain complexes of strict towers, respecting homotopies, with augmentations $\\eta_{\\mathcal A}:\\Delta_{\\mathcal A}\\to T_{\\mathcal A}$ and $\\eta_{\\mathcal B}:\\Delta_{\\mathcal B}\\to T_{\\mathcal B}$. Suppose they have universal total left derived presentations $LT_{\\mathcal A},LT_{\\mathcal B}$ with counits $\\epsilon$, computed isomorphically on resolving classes $\\mathcal P_{\\mathcal A},\\mathcal P_{\\mathcal B}$: every complex receives a quasi-isomorphism from that class and each counit is invertible there. Assume $U$ sends $\\mathcal P_{\\mathcal B}$ into $\\mathcal P_{\\mathcal A}$ and an ordinary natural isomorphism\n$$\\theta:U^{\\mathcal T}T_{\\mathcal B}\\xrightarrow{\\sim}T_{\\mathcal A}U$$\ncommutes with the augmentations (using $U^{\\mathcal T}\\Delta_{\\mathcal B}=\\Delta_{\\mathcal A}U$). There is a unique derived isomorphism $\\rho:D(U^{\\mathcal T})LT_{\\mathcal B}\\cong LT_{\\mathcal A}D(U)$ satisfying the counit equation induced by $\\theta$ on the resolving class. Let $c_{\\mathcal A}:1\\to RL_{\\mathcal A}LT_{\\mathcal A}$ and $c_{\\mathcal B}:1\\to RL_{\\mathcal B}LT_{\\mathcal B}$ be the normalized maps $c=RF(t)\\circ v$ of [lem-weil-pbc-augmented-derived-tower-unit], taken with $G=\\Delta$, $F=L$, $\\nu$ the ordinary constant/limit unit, $\\eta$ the given augmentation, $\\alpha$ the exact derived comparison of $\\Delta$, $\\beta=\\epsilon$, and $RF=RL$ with its universal right-derived comparison; no derived constant/limit adjunction is used. For every $M\\in D(\\mathcal B)$,\n$$RL_{\\mathcal A}(\\rho_M)\\,\\gamma_{LT_{\\mathcal B}M}\\,D(U)(c_{\\mathcal B,M})=c_{\\mathcal A,D(U)M}.$$\nComposition in this formula is right to left. The isomorphism $\\gamma$ and this unit equation are independent of resolutions; no exactness of countable products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 (sites-cohomology-section-derived-limits) and 0A07 (sites-cohomology-lemma-Rf-commutes-with-Rlim), exact-adjoint strict tower case, with augmentation normalization written by the worker"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-weil-inverse-system",
+  "def-weil-derived-limit",
+  "lem-weil-pbc-augmented-derived-tower-unit"
+ ],
+ "proof": [
+  {
+   "text": "Upgrade each supplied K-injective tower resolution j : X → I to a monomorphic one X → Cone(id_X) ⊕ I. The mapping cone is contractible and the projection to I is a homotopy equivalence, so the new target is K-injective and the new map is a quasi-isomorphism. On K-injectives a quasi-isomorphism is a homotopy equivalence. An additive functor preserves the latter, hence the existing K-injective derivability structure computes each supplied universal right-derived comparison and makes its component invertible on K-injectives. This is implemented by the proved private helpers monicKInjectiveResolutions, derives and unitIso, using the existing source KInjectives.localizerMorphism and Mathlib Derives.isRightDerivedFunctor_of_isIso/isIso_of_isRightDerivedFunctor APIs.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y; explicit contractible-summand construction, implemented using the existing K-injective derivability structure"
+   }
+  },
+  {
+   "text": "Apply E ⊣ U levelwise to towers. Exactness is levelwise and the right adjoint U^T preserves K-injectives. Put F = L_B^complex ⋙ Q ⋙ D(U). The unit α for RLB ⋙ D(U) is D(U)δB. The unit β for D(U^T) ⋙ RLA is the composite of the exact U factor, Q(ordinaryLimitIso a), δA on U^T(X), and RLA of the inverse U^T factor. Both are invertible on K-injectives, so the derivability criterion gives two right-derived presentations of F. rightDerivedUnique gives γ with α_X γ_QX = β_X on every complex. Left-Kan injectivity gives uniqueness of γ.",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); applied to the strict tower categories"
+   }
+  },
+  {
+   "text": "Localize the actual exact tower adjunction with its standard exact-functor factors. The private helper derivedAdjunction writes this localization for independent source/target universes (the recorded concrete helper fixes common universes). Postcomposition with the resulting right adjoint preserves the right Kan presentation of LTB: transpose a map qH → F R, lift its transpose through LTB, and transpose back. Counit naturality proves the mate equation, which proves factorization and uniqueness. The private helper kanRightAdjoint implements this full argument.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, exact localization; elementary natural-transformation adjunction and universal Kan calculation"
+   }
+  },
+  {
+   "text": "Apply Step 3 to the natural transformation\n$$LT_{\\mathcal A}D(U)q_{\\mathcal B}\\xrightarrow{\\epsilon_{\\mathcal A,U(-)}}q_{\\operatorname{Tow}(\\mathcal A)}T_{\\mathcal A}U\\xrightarrow{q(\\theta^{-1})}Rq_{\\operatorname{Tow}(\\mathcal B)}T_{\\mathcal B}.$$\nIt gives $\\sigma:LT_{\\mathcal A}D(U)\\to RLT_{\\mathcal B}$ with\n$$R(\\epsilon_{\\mathcal B,P})\\sigma_{qP}=q(\\theta_P^{-1})\\epsilon_{\\mathcal A,UP}.$$\nFor $P\\in\\mathcal P_{\\mathcal B}$ both counits are invertible: the second because $UP\\in\\mathcal P_{\\mathcal A}$. Hence $\\sigma_{qP}$ is invertible. Every complex receives a quasi-isomorphism from such a $P$, so naturality transports this invertibility to every derived object. Define $\\rho=\\sigma^{-1}$. Its counit equation holds on every complex:\n$$\\epsilon_{\\mathcal A,UP}\\rho_{qP}=q(\\theta_P)R(\\epsilon_{\\mathcal B,P}). \\tag{**}$$\nUniqueness even if normalization is specified only on the resolving class follows by inverting the two counits there and transporting along each $qP\\cong qM$. Thus no fullness or closure assumption on that class is being inserted. In Lean, the private natTransExtResolving helper extends equality from PB to all qX using naturality and cancellation of the image of a resolving quasi-isomorphism, then applies Localization.natTrans_ext.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Universal total left-derived counit, explicit right Kan lift and resolving-class test; agent argument"
+   }
+  },
+  {
+   "text": "For the supplied t and v satisfying NormalizedUnit, combine their defining equations and naturality of δ at η to prove c(QP) RL(ε_P) = Q(ν_P L(η_P)) δ_TP, with c = v ≫ RL(t). This is exactly the ordinary-map normalization of the augmented-derived-unit lemma; no existence choice is needed. The private normalizedCompletion proves it directly. The ordinary compatible-family comparison preserves ν: in each degree both composites have identity projection at every index. Naturality of the ordinary comparison and the augmentation square hη therefore identify its images of ν_B L_B(ηB) and ν_A L_A(ηA). These calculations are the private ordinaryUnitCompatibility and ordinaryCompletionCompatibility helpers.",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-weil-pbc-augmented-derived-tower-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; defining equation of the normalized constant/limit lift"
+   }
+  },
+  {
+   "text": "Compare the desired two natural transformations on qP for P in PB. Postcompose by RLA(LTA of the exact U factor followed by εA_UP), an isomorphism on this class. Substitute the ρ counit equation. Naturality of γ at εB_P, normalizedCompletion for B, and the all-complex γ equation replace the left side by the exact U factor followed by Q of the ordinary completion map and δA. Naturality of δA at θ_P and ordinaryCompletionCompatibility identify that ordinary map with the one for A. Naturality of cA and normalizedCompletion for A identify the right side with the same expression. Finally natTransExtResolving uses resolving quasi-isomorphisms and localization to extend equality to every derived object. This replaces the separate t/v comparison calculations of the earlier plan by a single calculation for their composite c, cancelling a counit only on the resolving class where invertibility is assumed. No exactness of countable products is used.",
+   "uses": [
+    "lem-weil-pbc-augmented-derived-tower-unit",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; normalized completion map and naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-augmented-derived-tower-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0A07; derived.tex Tags 08BJ, 070I, 070Y, 015F; complete Lean proof by K2 using existing K-injective derivability and Kan uniqueness, with direct completion-map normalization on the resolving class. No new public statements or assumptions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived completion unit commutes with exact scalar restriction and derived inverse limits",
+   "results": "8 hit(s): Derivation.restrictScalars, AdicCompletion.instIsScalarTower, AdicCompletion.module, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.instIsScalarTower_1, AdicCompletion.instSMul.congr_simp, AdicCompletion, AdicCompletion.instModuleOfIsScalarTower.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars transports the normalized unit from an object to the right derived limit of its left derived quotient tower",
+   "results": "8 hit(s): CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_obj, ModuleCat.localizedModule_functor_map_exact, Rep.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|derivedLimitRestriction|rlim|Rlim",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"unit\"",
+   "results": "3 hit(s): CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "totalRightDerivedUnit|rightDerived.*[Cc]omp|comp.*[Rr]ightDerived",
+   "results": "7 hit(s): Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact right adjoint between Grothendieck abelian categories preserves total derived inverse limits of strict towers and the actual augmented left derived tower completion unit",
+   "results": "8 hit(s): CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure', CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract right-derived transformations or ordinary scalar towers do not give the simultaneous left/right derived augmented-tower comparison and its specified completion-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "isRightKanExtension.*comp|comp.*isRightKanExtension|isRightAdjoint.*Kan",
+   "results": {
+    "t": "2026-10-22T09:35:56Z",
+    "tool": "grep",
+    "query": "isRightKanExtension.*comp|comp.*isRightKanExtension|isRightAdjoint.*Kan",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean"
+    ],
+    "digest": "4bc9b4a90caeef81"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"IsRightAdjoint\"",
+   "results": {
+    "t": "2026-10-22T09:35:56Z",
+    "tool": "loogle",
+    "query": "\"IsRightKanExtension\", \"IsRightAdjoint\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"IsIso\"",
+   "results": {
+    "t": "2026-10-22T09:35:56Z",
+    "tool": "loogle",
+    "query": "\"IsRightDerivedFunctor\", \"IsIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc",
+     "CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts",
+     "CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso",
+     "CategoryTheory.Functor.isIso_natTransOfIsRightDerivedFunctorComp_app"
+    ],
+    "digest": "ea7ede6cfe034ff6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoints preserve right Kan extensions by postcomposition",
+   "results": {
+    "t": "2026-10-22T09:35:56Z",
+    "tool": "leansearch",
+    "query": "Right adjoints preserve right Kan extensions by postcomposition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.RightExtension.postcomp₁_obj_right",
+     "CategoryTheory.Functor.RightExtension.postcompose₂_obj_right",
+     "CategoryTheory.Functor.PreservesRightKanExtension.mk'",
+     "CategoryTheory.Functor.PreservesRightKanExtension.mk_of_preserves_isUniversal",
+     "CategoryTheory.Functor.RightExtension.postcomp₁",
+     "CategoryTheory.Functor.PreservesPointwiseRightKanExtensionAt.preserves",
+     "CategoryTheory.Functor.PreservesRightKanExtension.preserves",
+     "CategoryTheory.Functor.PreservesRightKanExtensions"
+    ],
+    "digest": "5298b5ceb883d61e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact right adjoint preserves derived inverse limits and the unit to the derived limit of an augmented left derived tower",
+   "results": {
+    "t": "2026-10-22T09:35:57Z",
+    "tool": "leanfinder",
+    "query": "An exact right adjoint preserves derived inverse limits and the unit to the derived limit of an augmented left derived tower",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derived"
+    ],
+    "digest": "21b700cd83bcb159"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a right adjoint preserves a right Kan extension and its counit",
+   "results": {
+    "t": "2026-10-22T09:35:59Z",
+    "tool": "leanfinder",
+    "query": "Postcomposition by a right adjoint preserves a right Kan extension and its counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.ranCounit_app_app_ranAdjunction_unit_app_app",
+     "CategoryTheory.Functor.ranAdjunction_unit_app",
+     "CategoryTheory.Functor.ranCounit_app_whiskerLeft_ranAdjunction_unit_app",
+     "CategoryTheory.Functor.ranCounit_app_app_ranAdjunction_unit_app_app_assoc",
+     "CategoryTheory.Functor.ranCounit_app_whiskerLeft_ranAdjunction_unit_app_assoc",
+     "CategoryTheory.Functor.PreservesRightKanExtension.mk_of_preserves_isRightKanExtension",
+     "CategoryTheory.Functor.isRightKanExtension_iff_postcomp₁",
+     "CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_hom_fac"
+    ],
+    "digest": "44205a90872691e8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint|isRightAdjoint|adjunction",
+   "results": {
+    "t": "2026-10-22T09:36:37Z",
+    "tool": "grep",
+    "query": "rightAdjoint|isRightAdjoint|adjunction",
+    "sub": "CategoryTheory/Functor/KanExtension/Preserves.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "8"
+    ],
+    "digest": "6769fa91bf4a7e7a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived",
+   "results": {
+    "t": "2026-10-22T09:36:37Z",
+    "tool": "grep",
+    "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived",
+    "sub": "CategoryTheory/Functor/Derived",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean"
+    ],
+    "digest": "3a112bd8d0f61286"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"adjunction\"",
+   "results": {
+    "t": "2026-10-22T09:36:37Z",
+    "tool": "loogle",
+    "query": "\"IsRightKanExtension\", \"adjunction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of exact functors between abelian categories induces an adjunction on unbounded derived categories",
+   "results": {
+    "t": "2026-10-22T09:36:38Z",
+    "tool": "leanfinder",
+    "query": "An adjunction of exact functors between abelian categories induces an adjunction on unbounded derived categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived_unit"
+    ],
+    "digest": "b43238de1dd39544"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "augmented.*tower|tower.*completion|derivedLimitRestriction|PreservesRightKanExtension",
+   "results": {
+    "t": "2026-10-22T09:38:53Z",
+    "tool": "grep",
+    "query": "augmented.*tower|tower.*completion|derivedLimitRestriction|PreservesRightKanExtension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+     "Mathlib/Topology/Algebra/UniformMulAction.lean"
+    ],
+    "digest": "64898c4258f95246"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact right adjoint commutes with total right derived inverse limit and normalized augmented left derived completion unit",
+   "results": {
+    "t": "2026-10-22T09:38:54Z",
+    "tool": "leansearch",
+    "query": "Exact right adjoint commutes with total right derived inverse limit and normalized augmented left derived completion unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Functor.totalRightDerivedUnit",
+     "CategoryTheory.LiftRightAdjoint.unitEqualises",
+     "CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso"
+    ],
+    "digest": "fb99f50daca624e5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of an augmented derived tower completion map under an exact right adjoint preserving resolving representatives",
+   "results": {
+    "t": "2026-10-22T09:38:55Z",
+    "tool": "leanfinder",
+    "query": "Naturality of an augmented derived tower completion map under an exact right adjoint preserving resolving representatives",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality",
+     "CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.Functor.leftDerived_map_eq",
+     "CategoryTheory.Functor.rightDerived_fac_app",
+     "CategoryTheory.Functor.rightDerivedNatTrans_fac"
+    ],
+    "digest": "b93da4e334a6e8fb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived adjunction and Kan-extension interfaces do not state the augmented-tower comparison and its normalized completion-unit identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "the comparison is the completion map: preservation of strict derived limits and of the actual unit (old split steps 3 and 6)",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-exact-restriction-augmented-completion",
+  "worker": "stage1",
+  "summary": "Kept the statement and all original metadata. Reused exact localization, K-injective Hom/computation and exact-derived adjunction nodes; constructed the normalized limit comparison, derived the left-tower comparison by the right-adjoint Kan bijection, and proved the unit identity by separate augmentation and constant-unit equations. No new node is needed: every additional categorical calculation is displayed explicitly. Repair of the returned head 49de96ce5c8: revalidated the current augmented-unit statement, explicitly instantiated its cochain localization/right Kan hypotheses in Step 7, distinguished the supplied RL and comparison from the Roos-triangle property in Step 8, and cited the existing localization universal-property leaf for equality of natural transformations. The statement and statement dependencies are retained.",
+  "blueprint": "def-weil-pbc-completed-pullback, current main-20261015 final sentence: the comparison from ordinary pullback is the completion map; via lem-weil-pbc-constant-completion-equivalence, old split steps 3 and 6.",
+  "tool_uses": [
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic exact-adjunction localization for the strict tower categories, used only to transpose natural transformations in Step 5."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic Stacks 08BJ preservation of K-injectives by an additive right adjoint with exact left adjoint; applies to the levelwise exact adjunction in Step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-e1bff61ad",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-e1bff61ad (reviewer sub-agent of L); spot-checked: Read the item, all nine steps and every cited statement in full, including the current split lem-weil-pbc-augmented-derived-tower-unit (supplied q, RF, γ). There are no new nodes and no repair note. Against the previous head 49de96ce5c8c, only Steps 7–8, proof_deps (adds the localization leaf) and split_report changed; statement and stmt_deps are identical. Steps checked: 1 levelwise exact tower adjunction, so the 08BJ node applies to U and U^T. 2 right adjoints preserve limit cones, and the ordinary unit equation holds. 3 γ is defined on K-injectives (δ invertible by the total-derived node, U^T I K-injective) and extended through the K_inj ≃ D equivalence (Hom node plus resolutions). 4 (*) on all complexes: RL_A(qU^T j) is invertible since U^T is exact. 5 right adjoints preserve right Kan extensions; the three-bijection chain is correct by the triangle identity. 6 σ and ρ = σ⁻¹ have the stated orientation, are invertible because U P_B ⊂ P_A, and are unique on the resolving class. 7 the unit node's hypotheses are instantiated correctly; (***) follows from the augmentation square and Kan injectivity. 8 (****) at qP from (*) and Step 2, then clause (3) of the localization leaf. 9 naturality of γ at t_B. Edge cases checked: U = id, T = 0, no products, no inverted non-invertible counit. Duplicate search (0A07, right adjoint/derived limit, Kan preservation): none. Route: final sentence of main-20261015 def-weil-pbc-completed-pullback, via the parent constant-completion-equivalence, whose Step 5 use is unaffected. Stacks 0A07 (ringed topoi) is context only, so by = agent is correct. No SGA source is used. tool_uses accepted: def-weil-exact-derived-adjunction (Step 5 transposition) and lem-weil-pbc-right-adjoint-preserves-kinjective (Step 1)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactRestrictionAugmentedCompletion",
+  "declaration": "CategoryTheory.ExactRestrictionAugmentedCompletion.exists_exactRestrictionAugmentedCompletion",
+  "declarations": [
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.towerMap",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.towerMapFiniteLimits",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.towerMapFiniteColimits",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.limitAdditive",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.complexLimit",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.complexConstant",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.ordinaryLimitIso",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.ordinaryUnit",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.NormalizedUnit",
+   "CategoryTheory.ExactRestrictionAugmentedCompletion.exists_exactRestrictionAugmentedCompletion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactRestrictionAugmentedCompletion.lean",
+  "statement": "theorem exists_exactRestrictionAugmentedCompletion {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B] [HasLimitsOfShape ℕᵒᵖ A] [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)] (hIA : ∀ K : CochainComplex A ℤ, ∃ (I : CochainComplex A ℤ) (j : K ⟶ I), I.IsKInjective ∧ QuasiIso j) (hIB : ∀ K : CochainComplex B ℤ, ∃ (I : CochainComplex B ℤ) (j : K ⟶ I), I.IsKInjective ∧ QuasiIso j) (hITA : ∀ K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ, ∃ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (j : K ⟶ I), I.IsKInjective ∧ QuasiIso j) (hITB : ∀ K : CochainComplex (ℕᵒᵖ ⥤ B) ℤ, ∃ (I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (j : K ⟶ I), I.IsKInjective ∧ QuasiIso j) (E : A ⥤ B) (U : B ⥤ A) [E.Additive] [U.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E] [PreservesFiniteLimits U] [PreservesFiniteColimits U] (a : E ⊣ U) (RLA : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory A) (RLB : DerivedCategory (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory B) (δA : complexLimit A ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RLA) (δB : complexLimit B ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RLB) [RLA.IsLeftKanExtension δA] [RLB.IsLeftKanExtension δB] : ∃ γ : RLB ⋙ U.mapDerivedCategory ≅ (towerMap U).mapDerivedCategory ⋙ RLA, (∀ X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ, U.mapDerivedCategory.map (δB.app X) ≫ γ.hom.app (DerivedCategory.Q.obj X) = U.mapDerivedCategoryFactors.hom.app ((complexLimit B).obj X) ≫ DerivedCategory.Q.map ((ordinaryLimitIso a).hom.app X) ≫ δA.app (((towerMap U).mapHomologicalComplex (.up ℤ)).obj X) ≫ RLA.map ((towerMap U).mapDerivedCategoryFactors.inv.app X)) ∧ (∀ γ' : RLB ⋙ U.mapDerivedCategory ≅ (towerMap U).mapDerivedCategory ⋙ RLA, (∀ X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ, U.mapDerivedCategory.map (δB.app X) ≫ γ'.hom.app (DerivedCategory.Q.obj X) = U.mapDerivedCategoryFactors.hom.app ((complexLimit B).obj X) ≫ DerivedCategory.Q.map ((ordinaryLimitIso a).hom.app X) ≫ δA.app (((towerMap U).mapHomologicalComplex (.up ℤ)).obj X) ≫ RLA.map ((towerMap U).mapDerivedCategoryFactors.inv.app X)) → γ' = γ) ∧ (∀ (TA : CochainComplex A ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (TB : CochainComplex B ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤ B) ℤ) [TA.Additive] [TB.Additive] (hTA : ∀ (P Q : CochainComplex A ℤ) (f g : P ⟶ Q), Nonempty (Homotopy f g) → Nonempty (Homotopy (TA.map f) (TA.map g))) (hTB : ∀ (P Q : CochainComplex B ℤ) (f g : P ⟶ Q), Nonempty (Homotopy f g) → Nonempty (Homotopy (TB.map f) (TB.map g))) (ηA : complexConstant A ⟶ TA) (ηB : complexConstant B ⟶ TB) (LTA : DerivedCategory A ⥤ DerivedCategory (ℕᵒᵖ ⥤ A)) (LTB : DerivedCategory B ⥤ DerivedCategory (ℕᵒᵖ ⥤ B)) (εA : DerivedCategory.Q ⋙ LTA ⟶ TA ⋙ DerivedCategory.Q) (εB : DerivedCategory.Q ⋙ LTB ⟶ TB ⋙ DerivedCategory.Q) [LTA.IsRightKanExtension εA] [LTB.IsRightKanExtension εB] (PA : CochainComplex A ℤ → Prop) (PB : CochainComplex B ℤ → Prop) (hPA : ∀ K : CochainComplex A ℤ, ∃ (P : CochainComplex A ℤ) (j : P ⟶ K), PA P ∧ QuasiIso j) (hPB : ∀ K : CochainComplex B ℤ, ∃ (P : CochainComplex B ℤ) (j : P ⟶ K), PB P ∧ QuasiIso j) (hεA : ∀ P : CochainComplex A ℤ, PA P → IsIso (εA.app P)) (hεB : ∀ P : CochainComplex B ℤ, PB P → IsIso (εB.app P)) (hUP : ∀ P : CochainComplex B ℤ, PB P → PA ((U.mapHomologicalComplex (.up ℤ)).obj P)) (θ : TB ⋙ (towerMap U).mapHomologicalComplex (.up ℤ) ≅ U.mapHomologicalComplex (.up ℤ) ⋙ TA) (hη : ∀ P : CochainComplex B ℤ, ((towerMap U).mapHomologicalComplex (.up ℤ)).map (ηB.app P) ≫ θ.hom.app P = (NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ U) (.up ℤ)).inv.app P ≫ ηA.app ((U.mapHomologicalComplex (.up ℤ)).obj P)), ∃ ρ : LTB ⋙ (towerMap U).mapDerivedCategory ≅ U.mapDerivedCategory ⋙ LTA, (∀ P : CochainComplex B ℤ, PB P → ρ.hom.app (DerivedCategory.Q.obj P) ≫ LTA.map (U.mapDerivedCategoryFactors.hom.app P) ≫ εA.app ((U.mapHomologicalComplex (.up ℤ)).obj P) = (towerMap U).mapDerivedCategory.map (εB.app P) ≫ (towerMap U).mapDerivedCategoryFactors.hom.app (TB.obj P) ≫ DerivedCategory.Q.map (θ.hom.app P)) ∧ (∀ ρ' : LTB ⋙ (towerMap U).mapDerivedCategory ≅ U.mapDerivedCategory ⋙ LTA, (∀ P : CochainComplex B ℤ, PB P → ρ'.hom.app (DerivedCategory.Q.obj P) ≫ LTA.map (U.mapDerivedCategoryFactors.hom.app P) ≫ εA.app ((U.mapHomologicalComplex (.up ℤ)).obj P) = (towerMap U).mapDerivedCategory.map (εB.app P) ≫ (towerMap U).mapDerivedCategoryFactors.hom.app (TB.obj P) ≫ DerivedCategory.Q.map (θ.hom.app P)) → ρ' = ρ) ∧ (∀ (tA : (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapDerivedCategory ⟶ LTA) (vA : 𝟭 (DerivedCategory A) ⟶ (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapDerivedCategory ⋙ RLA) (tB : (Functor.const ℕᵒᵖ : B ⥤ (ℕᵒᵖ ⥤ B)).mapDerivedCategory ⟶ LTB) (vB : 𝟭 (DerivedCategory B) ⟶ (Functor.const ℕᵒᵖ : B ⥤ (ℕᵒᵖ ⥤ B)).mapDerivedCategory ⋙ RLB), NormalizedUnit TA ηA LTA εA RLA δA tA vA → NormalizedUnit TB ηB LTB εB RLB δB tB vB → ∀ M : DerivedCategory B, U.mapDerivedCategory.map ((vB ≫ Functor.whiskerRight tB RLB).app M) ≫ γ.hom.app (LTB.obj M) ≫ RLA.map (ρ.hom.app M) = (vA ≫ Functor.whiskerRight tA RLA).app (U.mapDerivedCategory.obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-369aaceac",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read the node (9 steps), the module, the report (has Worker report + Second reading by Q17), the augmented-unit dependency's statement and Lean record, and the Mathlib sources for compConstIso, preservesLimitNatIso, IsGrothendieckAbelian and mapDerivedCategoryFactors. Node differs from side-live only in lean; item not landed elsewhere; lean.statement verbatim equal to the signature; single sorry; docstrings carry source/blueprint and all 9 steps; no line over 100 chars. Clause check: Grothendieck/derived/K-injective binders; exact additive adjunction; supplied universal RL with delta (IsLeftKanExtension); gamma orientation, all-complex normalization (*) with u = preservesLimitIso, plus uniqueness; T additive and homotopy-respecting with augmentations; LT IsRightKanExtension; resolving classes with incoming quasi-isomorphisms, counits invertible only on the class, U preserves the class; theta with augmentation square via compConstIso; exists unique rho with (**) on P_B; NormalizedUnit = the dependency's t/v equations (G=const, F=lim, nu=constLimAdj unit, alpha=mapDerivedCategoryFactors, beta=eps, gamma=delta), so the quantified pairs are not vacuous; final equation endpoints match. No product exactness or derived const/lim adjunction; universes independent. Edge cases U=id, T=0, zero category, N vs N>=1 indexing all fine. Advisory: a few proof-context imports and Sites.Abelian look unused. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261023T151846-L-417764",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

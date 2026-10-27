@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-space-integral-finite-etale-locality",
+ "kind": "statement",
+ "title": "Integral and finite morphisms of spaces are etale local on the target",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:Y\\to X$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fix $P$ equal to integral or finite for scheme morphisms [def-weil-finite-integral-morphism]. Say that $f$ is representable with property $P$ if, for every scheme $T$ and every map $T\\to X$, the sheaf fibre product $Y\\times_XT$ is a scheme and its projection to $T$ has $P$. Fibre products are [lem-trf-space-fibre-products-etale-covers]. For every representable surjective etale map $p:U\\to X$ from a scheme $U$, $f$ is representable with property $P$ if and only if $Y\\times_XU$ is a scheme and $Y\\times_XU\\to U$ has $P$. No quasi-compactness, separatedness, finite-type or Noetherian hypothesis on $S,X,Y,U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03ZQ (lemma-integral-local), equivalence (1) and (3), separately for integral and finite."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is representable with $P$, take the scheme test $T=U$ and the map $p:U\\to X$ in the definition in the statement. This gives precisely the required scheme $Y\\times_XU$ with its projection having $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZQ (lemma-integral-local), direction (1) to (3), with the prescribed atlas"
+   }
+  },
+  {
+   "text": "Conversely suppose $W=Y\\times_XU$ is a scheme and $W\\to U$ has $P$. For either choice of $P$, the definition of integral and finite scheme morphisms says that $W\\to U$ is affine. Apply the etale target criterion for affine space morphisms to the given representable surjective etale $U\\to X$. It follows that $f$ is representable and affine.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03ZQ (lemma-integral-local), (3) to (1), and 03WG (lemma-affine-local)"
+   }
+  },
+  {
+   "text": "Fix any scheme $T\\to X$. Put $Z=Y\\times_XT$ and $V=T\\times_XU$. The affineness just proved, its base-change stability, and its scheme-target clause show that $Z$ is a scheme. The base-change assertion for etale covers shows that $V$ is a scheme and $q:V\\to T$ is surjective etale. Pullback associativity identifies $Z\\times_TV$ with $W\\times_UV$ over $V$: both are the sheaf of triples $(y,t,u)$ whose three images in $X$ agree.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZQ (lemma-integral-local), (3) to (1), tested on an arbitrary scheme over the target"
+   }
+  },
+  {
+   "text": "The projection $W\\times_UV\\to V$ is integral if $P$ is integral, by stability of integral scheme morphisms under arbitrary base change; it is finite if $P$ is finite, by stability of finite scheme morphisms under arbitrary base change. Thus the preceding identification makes $Z\\times_TV\\to V$ a scheme morphism with $P$.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL (lemma-base-change-finite), both assertions"
+   }
+  },
+  {
+   "text": "The singleton $\\{q:V\\to T\\}$ is an etale covering of the terminal object $T$ of the small etale site of $T$, so the etale-to-fpqc covering lemma makes it an fpqc covering. Apply integral fpqc descent to $Z\\to T$ in the integral case, and finite fpqc descent in the finite case. Their hypotheses hold because $Z,T,V$ are schemes and the unique base change has $P$. Hence $Z\\to T$ has $P$. Since $T\\to X$ was arbitrary, this proves representability with $P$. The covering lemma requires no quasi-compactness of $q$, so the argument introduces none of the excluded hypotheses.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-descend-integral",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L9 (lemma-descending-property-integral), 02LA (lemma-descending-property-finite); topologies.tex Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-affine-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-descend-integral",
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03ZQ (lemma-integral-local), equivalence (1) and (3); its affine effective-descent argument is factored through existing Tag 03WG, then scheme fpqc descent Tags 02L9 and 02LA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral and finite morphisms of algebraic spaces can be checked after a surjective etale scheme cover of the target",
+   "results": "{\"t\": \"2026-10-23T12:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"Integral and finite morphisms of algebraic spaces can be checked after a surjective etale scheme cover of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"f81f0a291a011e06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-23T12:13:35Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descendsAlong.*(integral|finite)|[Ii]ntegral.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T12:13:35Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|descendsAlong.*(integral|finite)|[Ii]ntegral.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"36a36f0fabbe33b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable morphism of algebraic spaces is integral or finite if and only if it is so on an etale atlas of its target",
+   "results": "{\"t\": \"2026-10-23T12:13:36Z\", \"tool\": \"leansearch\", \"query\": \"A representable morphism of algebraic spaces is integral or finite if and only if it is so on an etale atlas of its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite\"], \"digest\": \"999c0fb9fc7be036\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Space.*IsIntegral|Space.*IsFinite",
+   "results": "{\"t\": \"2026-10-23T12:13:57Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Space.*IsIntegral|Space.*IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Niven.lean\", \"Mathlib/Dynamics/Ergodic/RadonNikodym.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/Probability/Moments/CovarianceBilinDual.lean\", \"Mathlib/Probability/Moments/CovarianceBilin.lean\", \"Mathlib/Probability/Moments/CovarianceBilin.lean\"], \"digest\": \"6a3b195388f9595b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of integral finite maps of etale sheaves after pullback to a scheme atlas",
+   "results": "{\"t\": \"2026-10-23T12:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of integral finite maps of etale sheaves after pullback to a scheme atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"62f54f04f01e2260\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "{\"t\": \"2026-10-23T12:14:50Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned IsFinite, IsIntegralHom and descent declarations are for schemes, not arbitrary algebraic spaces; the second phrasing returns only scheme etale-site infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "{\"t\": \"2026-10-23T13:41:50Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic and type hits concern schemes or scheme etale sites, not integral/finite representability of arbitrary algebraic-space morphisms. Source read: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:35 and Finite.lean:39 have Scheme endpoints; algebraic-space grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and finiteness or integrality of a morphism of algebraic spaces descend from an etale atlas",
+   "results": "{\"t\": \"2026-10-23T13:41:50Z\", \"tool\": \"leansearch\", \"query\": \"Representability and finiteness or integrality of a morphism of algebraic spaces descend from an etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"0bbc1c708fb4ebc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic and type hits concern schemes or scheme etale sites, not integral/finite representability of arbitrary algebraic-space morphisms. Source read: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:35 and Finite.lean:39 have Scheme endpoints; algebraic-space grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-23T13:41:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.eq_inf\"], \"digest\": \"cd327801d4992070\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic and type hits concern schemes or scheme etale sites, not integral/finite representability of arbitrary algebraic-space morphisms. Source read: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:35 and Finite.lean:39 have Scheme endpoints; algebraic-space grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral and finite morphisms of algebraic spaces are local on the target for surjective etale scheme covers",
+   "results": "{\"t\": \"2026-10-23T13:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"Integral and finite morphisms of algebraic spaces are local on the target for surjective etale scheme covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\"], \"digest\": \"d4a99bd9b74de447\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic and type hits concern schemes or scheme etale sites, not integral/finite representability of arbitrary algebraic-space morphisms. Source read: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:35 and Finite.lean:39 have Scheme endpoints; algebraic-space grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of representable integral or finite scheme morphisms between etale sheaves along a scheme atlas of the target",
+   "results": "{\"t\": \"2026-10-23T13:44:41Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of representable integral or finite scheme morphisms between etale sheaves along a scheme atlas of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\"], \"digest\": \"f7f8b7029d8cc7a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic and type hits concern schemes or scheme etale sites, not integral/finite representability of arbitrary algebraic-space morphisms. Source read: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean:35 and Finite.lean:39 have Scheme endpoints; algebraic-space grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-spec-correspondence",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Affine algebraic spaces and quasi-coherent algebras via relative Spec. Property-test input: Tag 03ZQ, equivalence (1) and (3), for integral and finite morphisms independently of relative Spec.",
+   "via": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-integral-finite-etale-locality",
+  "worker": "stage1",
+  "summary": "Proved locality on a prescribed etale atlas without additional hypotheses: descend affineness using the existing space-affine-locality node, test on arbitrary schemes, and descend integral or finite scheme morphisms along the resulting etale (hence fpqc) covering. Reused all existing prerequisites; no new nodes and no statement correction. Searched the project Lean source and Mathlib; only scheme-level Mathlib candidates were found.",
+  "blueprint": "Supporting property-test input to relative Spec and the integral-to-finite-presentation approximation in the inherited det-thm-sf-ctf-stability-direct-images proof-(3) alteration chain. Realizes the inherited from.place reference to Tag 03ZQ, equivalence (1) and (3), independently of the relative-Spec correspondence. Current latest blueprint direct-images proof (3) was read; this is a generic algebraic-space tool beneath that route, not a replacement of a unit step. No blueprint node stating the same locality assertion was found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Uses existence of space fibre products and preservation of surjective etale scheme covers under base change; no scheme representability or integral property is taken from this lemma."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Uses the generic conversion of a small-etale covering of T into an fpqc covering, without imposing quasi-compactness on its covering arrows."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-integral",
+    "why": "Uses integral descent for a scheme morphism after representability was obtained separately; the unit does not provide scheme fpqc descent."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Uses finite descent for a scheme morphism after representability was obtained separately; the unit does not provide scheme fpqc descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-descend-integral",
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-1caa2b643",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-1caa2b643 (reviewer sub-agent of L); spot-checked: I read the item in full; it creates no new nodes and keeps the base statement and stmt_deps verbatim. Source checked: Stacks spaces-morphisms 03ZQ (lemma-integral-local) (1)<=>(3) and its proof (affine schematicity, effective descent 0423, 01WL, 02L9/02LA). The steps follow that argument and spell out what 0423 does. Step 1 (=>) is elementary. Step 2: def-weil-finite-integral-morphism makes integral and finite include affine, and lem-sfb-space-affine-locality (03WG) gives f representable and affine from the given atlas. Step 3: by the affine node's base-change and scheme-target clauses, Z=Y×_X T is a scheme; by lem-trf-space-fibre-products-etale-covers, V=T×_X U is a scheme with V->T surjective étale; Z×_T V ≅ W×_U V by pasting. Step 4: base change of W->U along V->U, via the Mathlib leaves lem-sbc-integral-morphism-base-change (01WL) and the finite clause of lem-trf-finite-radicial-basechange (no radicial hypothesis used). Step 5: {V->T} is a T_Et covering and hence fpqc (lem-weil-pbc-fpqc-finer-than-etale, no qc needed); then fpqc descent (descend-integral/-finite) for scheme Z->T, with T arbitrary. Every hypothesis holds. Small cases checked: X empty, identity atlas, non-qc disjoint-union atlas, integral but not finite. No duplicate: finite-fppf-descent, local-properties-chart-test, four-property-fppf-descent and pbc-finite-local-on-target state other properties or settings. No cycle. I accept the tool uses as generic (space fibre products, sk-i-curve-zero; scheme fpqc covering and descent, sk-thm-p1). Batch 5: lem-sfb-space-affine-locality reaches def-trf-algebraic-space only as the general definition of an algebraic space (already a base stmt_dep), and lem-trf-space-fibre-products is the general 02X2 lemma. Neither is part of the trace formula or Poincaré proofs, so this is not a RETURN. No SGA is used. The inherited null blueprint from.node is a base-node matter and needs a maintainer note only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceIntegralFiniteEtaleLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isRepresentableWith_integral_iff_etaleAtlas",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.isRepresentableWith_integral_iff_etaleAtlas",
+   "AlgebraicGeometry.AlgebraicSpace.isRepresentableWith_finite_iff_etaleAtlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceIntegralFiniteEtaleLocality.lean",
+  "statement": "theorem isRepresentableWith_integral_iff_etaleAtlas {S : Scheme.{u}} (Y X : AlgebraicSpace S) (f : Y ⟶ X) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj) (he : IsEtale p) (hs : IsSurjective p) : IsRepresentableWith (fun _ _ r ↦ IsIntegralHom r.left) f.hom.hom ↔ ∃ (W : Over S) (r : W ⟶ U) (q : yoneda.obj W ⟶ Y.obj.obj), IsPullback q (yoneda.map r) f.hom.hom p ∧ IsIntegralHom r.left",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two equivalences state the integral and finite choices separately. An existential scheme with a Yoneda pullback square expresses that the atlas fibre product is a scheme and its projection has the property. The existing scheme-test predicate IsRepresentableWith is used directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a2d8722c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, the 5 stmt_deps (AlgebraicSpace IsRepresentableWith/IsEtale/IsSurjective, Mathlib IsFinite/IsIntegralHom, fibre-products module), Stacks 03ZO/03ZQ and proof, the module and the report (Worker report + Second reading by Q23 present). Two theorems: IsRepresentableWith(P r.left) f.hom.hom ↔ ∃ W r q, IsPullback q (yoneda.map r) f.hom.hom p ∧ P r.left, with IsEtale p and IsSurjective p for any scheme atlas. Matches the node clause by clause; leg orientation matches IsRepresentableWith; the prescribed-atlas form follows the source proof; no extra hypotheses; single universe u. lean.statement verbatim; non-lean fields identical to live; proof-dep imports match records (affine-locality has no record, correctly not imported); sorry-only; docstrings carry source, blueprint id and the 5 steps; ≤100 columns. rg found no duplicate locality theorem or space-level integral/finite predicate. No changes, so no compile."
+ }
+}

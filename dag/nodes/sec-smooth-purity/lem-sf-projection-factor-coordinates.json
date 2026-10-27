@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-projection-factor-coordinates",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-reduction",
+   "place": "Proof (1): proper counit, open unit, and presentation comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper and open scalar equations in intrinsic finite-coefficient coordinates",
+ "statement": "Let D be a finite-field datum, C its coefficient datum with prime l different from the residue characteristic, and E a finite extension of Q_l. Let 0 <= m <= n. Let X,Y be separated finite-type schemes over D.k, f:X -> Y a separated morphism and c=(j:X -> Z,r:Z -> Y) a compactification. Put A=O_E/(varpi_E^(n+1)) and B=O_E/(varpi_E^(m+1)). Fix normalized intrinsic derived tensor models at A and B on X,Z,Y and their canonical pullback compositors. For finite-Tor constructible intrinsic complexes K on X and L on Y over A, the proper projection and the open projection factor separately commute with scalar reduction, in the precise two equations of ProjectionFactorIdentities. Writing M=j_!K, rho for derived scalar extension, s for the scalar tensorator, a^g for its composite with scalar pullback comparison, c for the proper scalar mate, d for the open scalar mate, pi for proper projection and gamma for the open factor, in left-to-right composition order these are rho(pi_A)c_(M tensor Lr_A^*L)Rr_*,B(a^r) = s_Y(c_M tensor 1)pi_B(rho M,rho L), and rho(gamma_A)d_(K tensor Lf_A^*L)j_!,B(a^f) = a^r(d_K tensor 1)gamma_B(rho K,rho L). This asserts neither the composite compact-support square nor invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "Transport of the proper and open identities between normalized tensor presentations"
+ },
+ "stmt_deps": [
+  "lem-sf-pf-reduction-proper-open-identities",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sfb-proetale-tensor-model",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "transport K and L through the inverse of the exact constant-coefficient\nrealization. Constructibility and finite Tor amplitude are preserved by this\ncoefficient equivalence. Choose ordered bounds for both Tor amplitudes. Apply\n`exists_witnessedFlatDomains` at these bounds to obtain bounded constructible\netale origins for both inputs, with flat models at levels n+1 and m+1. Cohomology\nvanishing below the lower bounds supplies the bounded-below objects required by\n`FixedEtaleOriginWitness`. Reflect the Tor bounds across the etale/proetale\ncomparison, then use its equivalence with etale Tor amplitude. These witnesses\nmeet all the input and origin hypotheses of `pfReductionProperOpenIdentities`.\nChoose the unit-normalized open projections supplied by\n`open_scalar_tensor_normalization` and apply that theorem.\n\nIdentify each intrinsic tensor model with the selected fixed-module model using\nthe fully faithful restriction to pairs of flat K-flat representatives. On such\npairs the scalar and geometric tensorators commute with the comparison: both\nroutes send each balanced pure tensor to the same sections, preserving bidegrees\nand the signed total differential. Resolving-class localization descends these\nequations. The scalar comparison is the unique comparison of left adjoints with\nthe same restriction right adjoint. Its unit and counit equations identify the\nproper scalar mates. Transpose the proper projection: both coordinates give the\nsame tensor comparison followed by counit tensor identity. For the open factor,\ntranspose its inverse: both give the prescribed open unit followed by inverse\ntensor comparison. Adjunction injectivity identifies them. The pullback\ncompositor is the same canonical compositor. Conjugate the two supplied factor\nequations by these comparisons, then use naturality at the realization counits\nof K and L. This yields exactly the two displayed equations. None of these\nsteps asserts flatness of the quotient.",
+   "uses": [
+    "lem-sf-pf-reduction-witnessed-flat-domains",
+    "lem-sf-pf-reduction-proper-open-identities",
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-fix-open-scalar-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pf-reduction-witnessed-flat-domains",
+  "lem-sf-pf-reduction-proper-open-identities",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-fix-open-scalar-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "Transport of the proper and open identities between normalized tensor presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|tensor).*square|constant.*projection.*identification",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection morphism for compact support is unchanged under the exact equivalence between fixed coefficient sheaves and modules over a constant ring sheaf",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.counit_app_val; CondensedMod.LocallyConstant.functorToPresheaves; CondensedMod.LocallyConstant.functorIsoDiscreteAux₁; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived compact support projection morphism is natural under equivalence of constant coefficient module sheaves and change of normalized tensor presentations",
+   "results": "CondensedMod.hom_naturality_apply; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc; AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality; SheafOfModules.freeHomEquiv_comp_apply; CompHausLike.LocallyConstant.counit; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFiniteReduction",
+  "date": "2026-10-25",
+  "group": "H8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionFactorCoordinates",
+  "file": "lean/Sheaf/Paper/ProjectionFactorCoordinates.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.projection_factor_coordinates",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.properProjectionData",
+   "WeilConjectures.PurCompactSupport.mixedChange",
+   "WeilConjectures.PurCompactSupport.ProjectionFactorIdentities",
+   "WeilConjectures.PurCompactSupport.projection_factor_coordinates"
+  ],
+  "statement": "theorem projection_factor_coordinates\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (m n : ℕ) (hmn : m ≤ n)\n    (X Y : SixFunctorSpace D) [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom]\n    (f : X ⟶ Y) [IsSeparated f.hom.left] (c : Compactification f.hom.left)\n    (hR : (finite C.l E (n + 1) (Nat.succ_pos n)).pull (c.i ≫ c.g) =\n      proEtaleRingCompositeCoefficients c.i c.g\n      ((finite C.l E (n + 1) (Nat.succ_pos n)).ring Y.obj.left)\n      ((finite C.l E (n + 1) (Nat.succ_pos n)).ring c.Z)\n      ((finite C.l E (n + 1) (Nat.succ_pos n)).ring X.obj.left)\n      ((finite C.l E (n + 1) (Nat.succ_pos n)).pull c.g)\n      ((finite C.l E (n + 1) (Nat.succ_pos n)).pull c.i))\n    (hS : (finite C.l E (m + 1) (Nat.succ_pos m)).pull (c.i ≫ c.g) =\n      proEtaleRingCompositeCoefficients c.i c.g\n      ((finite C.l E (m + 1) (Nat.succ_pos m)).ring Y.obj.left)\n      ((finite C.l E (m + 1) (Nat.succ_pos m)).ring c.Z)\n      ((finite C.l E (m + 1) (Nat.succ_pos m)).ring X.obj.left)\n      ((finite C.l E (m + 1) (Nat.succ_pos m)).pull c.g)\n      ((finite C.l E (m + 1) (Nat.succ_pos m)).pull c.i))\n    (aX : ProEtaleTensorModel X.obj.left ((finite C.l E (n + 1) (Nat.succ_pos n)).ring X.obj.left))\n    (aZ : ProEtaleTensorModel c.Z ((finite C.l E (n + 1) (Nat.succ_pos n)).ring c.Z))\n    (aY : ProEtaleTensorModel Y.obj.left ((finite C.l E (n + 1) (Nat.succ_pos n)).ring Y.obj.left))\n    (bX : ProEtaleTensorModel X.obj.left ((finite C.l E (m + 1) (Nat.succ_pos m)).ring X.obj.left))\n    (bZ : ProEtaleTensorModel c.Z ((finite C.l E (m + 1) (Nat.succ_pos m)).ring c.Z))\n    (bY : ProEtaleTensorModel Y.obj.left ((finite C.l E (m + 1) (Nat.succ_pos m)).ring Y.obj.left))\n    (K : proEtaleDerivedCategory X.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)))\n    (L : proEtaleDerivedCategory Y.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)))\n    (hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) X.obj.left K)\n    (hL : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) Y.obj.left L) :\n    ProjectionFactorIdentities\n      (finiteQuotientChange C.l E (n + 1) (m + 1) (Nat.succ_pos n)\n        (Nat.succ_pos m) (Nat.succ_le_succ hmn)) c hR hS\n      aX aZ aY bX bZ bY K L",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T204724-L-2998467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T204724-L-2998467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

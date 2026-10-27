@@ -1,0 +1,129 @@
+{
+ "id": "lem-trf-coherent-primitive-reduction-presentation",
+ "kind": "statement",
+ "title": "Coherent strict quotient presentation of every good complex",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Fix a prime l, a finite coefficient extension E/Q_l, any scheme Y, a coefficient derived system calculus S [lem-coef-derived-system-evaluation-calculus], and a flat-term K-flat completed-coefficient complex P. There exist a strict sequence-site complex C, an isomorphism e from S.reduction(Q(P)) to Q(C), and simultaneous chain isomorphisms kappa from each evaluation of C to the actual termwise finite tensor reduction of P, satisfying CoefficientReductionPresentation and IsIntegralComparisonPresentationCoherent [def-trf-integral-comparison-realization-models]. The latter fixes e through the two adjunction Hom bijections as the localization of the strict tensor-unit tower map specified by kappa. Site and coefficient universes are independent; no geometric invertibility, constructibility or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived tensor), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok), and derived.tex lemma-derived-adjoint-functors (09T5); canonical quotient-presentation substep of lem-trf-primitive-quotient-realizations-unique."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose the existing ordinary quotient-system tensor/limit model M. Apply its tensor functor termwise to P, obtaining C. The mapped finite evaluation isomorphisms give kappa; M.transition proves every horizontal presentation equation degreewise.",
+   "uses": [
+    "lem-trf-completion-unit-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing canonical termwise-limit comparison and normalized constant-limit derived unit. The resolving-class helpers of the derived-adjunction comparison module derive M.tensor and its adjunction to coefficientSequenceLimit. Transport the resulting comparison to the given S.reduction using uniqueness of left adjoints. It is invertible on P. The transported Hom formula identifies its transpose with the localized ordinary unit followed by the actual composite right-derived unit. Apply finiteComparison_of_unit to obtain every normalized finite presentation equation.",
+   "uses": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-derived-adjunction-comparison",
+    "lem-trf-completion-unit-finite-mate-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the ordinary complex unit through the constant-tower/ordinary-limit adjunction to obtain the strict tower map b. M.unit_tensor, the inverse finite evaluation isomorphism, and equality transports on section types give the prescribed formula for b. Apply the derived adjunction counit factorization and the exact localization comparison to its Hom formula. The two termwise-limit identifications coincide by their projections, so cancel. Naturality of the derived diagonal-limit counit gives exactly the entire-tower equation of IsIntegralComparisonPresentationCoherent. No finite derived evaluation is used to detect an equality. The zero complex, n=0 (exponent one), and arbitrary schemes use the same universal properties.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-completion-unit-canonical-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-ordinary-adjunction",
+  "lem-trf-completion-unit-canonical-models",
+  "lem-trf-completion-unit-derived-adjunction-comparison",
+  "lem-trf-completion-unit-finite-mate-comparison",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived tensor), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok), and derived.tex lemma-derived-adjoint-functors (09T5); canonical quotient-presentation substep of lem-trf-primitive-quotient-realizations-unique."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a derived adjunction computed on a K-flat representative agrees with the localization of the ordinary tensor unit",
+   "results": "Found Adjunction.derived_unit, derivedε_fac_app and related generic derived-adjunction constructions. These provide the counit factorization but no coefficient-sequence presentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the generic derived counit factorization together with the existing project quotient-model and resolving-class declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": "Exact generic counit factorization in Mathlib.CategoryTheory.Functor.Derived.Adjunction. Read its signature and proof.",
+   "date": "2026-10-26",
+   "verdict": "Applicable to the exact constant-tower functor and ordinary inverse limit; coefficient specialization and strict sections still require proof."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app|derivedε_fac_app; IsIntegralComparisonPresentationCoherent across Sheaf and quarantine",
+   "results": "Found Mathlib adjunction uniqueness and derived counit formulas. The project has the coherence predicate and a comparison conditional on coherence, but no existence statement of coherent presentations for arbitrary S. Read CompletionUnitModels, OrdinaryAdjunction, DerivedAdjunctionComparison, CanonicalModels and FiniteMateComparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse existing ordinary models, resolving-class helpers and finite-mate theorem; state and prove only the missing coherent-presentation consequence."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrimitiveQuotientRealizationsUnique",
+  "date": "2026-10-26",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Tags 06YY (derived tensor), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok), and derived.tex lemma-derived-adjoint-functors (09T5); canonical quotient-presentation substep of lem-trf-primitive-quotient-realizations-unique.",
+   "via": [
+    "lem-trf-primitive-quotient-realizations-unique",
+    "lem-trf-effective-quotient-model-descent",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoherentPrimitiveReductionPresentation",
+  "file": "lean/Sheaf/Paper/CoherentPrimitiveReductionPresentation.lean",
+  "declaration": "WeilConjectures.coherentPrimitiveReductionPresentation",
+  "statement": "theorem coherentPrimitiveReductionPresentation {Y : Scheme.{t}}\n    (S : CoefficientDerivedSystemCalculus l E Y)\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :\n    ∃ (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n      (e : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n      (κ : ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj C ≅\n          (unrestrictedIntegralFiniteComplex l E Y n).obj P.obj),\n      CoefficientReductionPresentation l E Y S.toCoefficientDerivedSystemReduction\n        P.obj P.property.1 C e κ ∧\n      IsIntegralComparisonPresentationCoherent l E Y S P.obj C e κ",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T100235-L-4158067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T100235-L-4158067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

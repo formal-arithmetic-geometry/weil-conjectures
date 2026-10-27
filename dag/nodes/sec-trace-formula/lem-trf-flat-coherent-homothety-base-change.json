@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-flat-coherent-homothety-base-change",
+ "kind": "statement",
+ "title": "Flat base change of bounded coherent complexes and their scalar-action morphisms",
+ "statement": "Let $R\\to S$ be a flat homomorphism [def-weil-pbc-flat-ring-map] of commutative Noetherian rings [def-weil-pbc-noetherian-ring]. Work in the ordinary module derived category $D(R)$ [def-weil-abstract-derived-category], realized on the one-object ringed site. Write $D^b_{\\mathrm{fg}}(R)$ for objects whose cohomology is zero outside a finite interval and is finitely generated [def-weil-finitely-generated-module] in every degree. Use the internal Hom $R\\operatorname{Hom}$ [def-pur-derived-internal-hom] and derived extension of scalars [lem-pur-derived-change-of-rings], and put $K_S=K\\otimes_R^{\\mathbf L}S$. Every $K\\in D^b_{\\mathrm{fg}}(R)$ has $K_S\\in D^b_{\\mathrm{fg}}(S)$. For $C,Z\\in D^b_{\\mathrm{fg}}(R)$ the canonical scalar-extension morphism\n$$\\beta_{C,Z}:R\\operatorname{Hom}_R(C,Z)\\otimes_R^{\\mathbf L}S\\longrightarrow R\\operatorname{Hom}_S(C_S,Z_S)$$\nis an isomorphism in $D(S)$. For any object $L\\in D(T)$, where $T$ is either ring, let $h_L:T\\to R\\operatorname{Hom}_T(L,L)$ be scalar action, namely the transpose of the unitor $T\\otimes_T^{\\mathbf L}L\\to L$. Under the canonical identification $R\\otimes_R^{\\mathbf L}S\\cong S$, one has\n$$\\beta_{C,C}\\circ(h_C\\otimes_R^{\\mathbf L}S)=h_{C_S}.$$\nIn particular, if $h_C$ is an isomorphism then $h_{C_S}$ is an isomorphism, and if $R\\operatorname{Hom}_R(C,Z)=0$ then $R\\operatorname{Hom}_S(C_S,Z_S)=0$. No finite projective or injective dimension is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent corollary of Tag 0A6A, lemma-base-change-RHom, case (3), with canonical homothety compatibility. The scalar-extension map is equation-base-change-RHom; the complete argument is preserved in report.md (returned proof steps 1--2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=-\\otimes_R^{\\mathbf L}S$. For a representative $A$ of $K$, [lem-trf-flat-projective-hom-models] gives $H^i(FK)\\cong S\\otimes_RH^i(K)$. The vanishing outside the given finite interval is therefore preserved. If $m_1,\\ldots,m_r$ generate $H^i(K)$, then $1\\otimes m_1,\\ldots,1\\otimes m_r$ generate its scalar extension: expand $m=\\sum a_jm_j$ in each pure tensor $s\\otimes m$ to obtain $\\sum s f(a_j)(1\\otimes m_j)$. Thus $K_S\\in D^b_{\\mathrm{fg}}(S)$. No faithful-flatness or finite-dimensional resolution is used.",
+   "uses": [
+    "lem-trf-flat-projective-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Flat-model computation of cohomology in Tag 0A6A(3); finite-generation conclusion is the displayed generator calculation"
+   }
+  },
+  {
+   "text": "The upper cohomology bound and finite cohomology of $C$ imply that $C$ is pseudo-coherent by [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion]. The lower cohomology bound on $Z$ says exactly that $Z\\in D^+(R)$. Apply [lem-trf-pseudocoherent-rhom-flat-base-change] with $E=C,L=Z$ and the given flat map. It gives precisely the canonical $\\beta_{C,Z}$ as an isomorphism in $D(S)$, without any perfectness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-trf-pseudocoherent-rhom-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent (2), and Tag 0A6A, lemma-base-change-RHom (3)"
+   }
+  },
+  {
+   "text": "Let $U$ be restriction, $\\eta:\\mathrm{id}\\to UF$ the unit, and $\\gamma:U R\\operatorname{Hom}_S(FC,FC)\\cong R\\operatorname{Hom}_R(C,UFC)$ the evaluation-normalized isomorphism of [lem-sfb-dc-hom-scalar-adjunction]. By the canonical-map description in [lem-trf-pseudocoherent-rhom-flat-base-change], the scalar-adjunction transpose of $\\beta_{C,C}\\circ F(h_C)$ is $\\gamma^{-1}\\circ R\\operatorname{Hom}_R(C,\\eta_C)\\circ h_C$. Apply $\\gamma$ and then tensor-Hom transposition to both this map and the scalar-adjunction transpose of $h_{FC}$. The first becomes $\\eta_C\\circ\\lambda_C:R\\otimes_R^{\\mathbf L}C\\to UFC$, since $h_C$ transposes to $\\lambda_C$. The second is the same map: evaluation normalization inserts $\\eta_C$ and restricts the scalar action of $S$ along $R\\to S$, giving $r\\otimes x\\mapsto f(r)\\eta_C(x)=\\eta_C(rx)$. The two adjunction bijections are injective, so the original arrows agree, under $F(R)\\cong S$. This proves the required equality of canonical morphisms.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-trf-pseudocoherent-rhom-flat-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Equation 0E1X, equation-base-change-RHom, and Tag 0E1W, lemma-upgrade-adjoint-tensor-RHom: elementary evaluation-normalized adjunction calculation"
+   }
+  },
+  {
+   "text": "If $h_C$ is invertible, then the functor $F$ carries its inverse to an inverse of $F(h_C)$, and Step 2 makes $\\beta_{C,C}$ invertible; their composite is $h_{C_S}$ by Step 3. If $R\\operatorname{Hom}_R(C,Z)=0$, its scalar extension is zero (use the zero complex in the flat-model comparison of [lem-trf-flat-projective-hom-models]); the isomorphism of Step 2 then identifies $R\\operatorname{Hom}_S(C_S,Z_S)$ with zero.",
+   "uses": [
+    "lem-trf-flat-projective-hom-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Consequences of Tag 0A6A(3) and the preceding scalar-action calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-flat-projective-hom-models",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent assembly of Tags 066E(2), 0A6A(3), and the evaluation-normalized map 0E1X via 0E1W; the homothety calculation is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat change of Noetherian rings preserves semidualizing complexes and the canonical scalar action under derived Hom base change",
+   "results": "8 hits; top=['Module.Flat.iff_characterModule_baer', 'Module.Flat.iff_characterModule_injective', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'Module.FaithfullyFlat', 'Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'Module.Flat.isBaseChange']; note=; digest=ba2816aac44965fb; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern ordinary module scalar extension or affine homotheties, not the derived scalar-action compatibility asserted here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom scalar extension isomorphism for bounded finite complexes over flat Noetherian ring maps preserves homothety",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern ordinary module scalar extension or affine homotheties, not the derived scalar-action compatibility asserted here"
+  },
+  {
+   "tool": "grep",
+   "query": "semidualizing|homothety|base.change.*[Rr][Hh]om|[Rr][Hh]om.*base.change",
+   "results": "25 hits; top=['Mathlib/Geometry/Euclidean/Incenter.lean', 'Mathlib/Geometry/Euclidean/Inversion/Basic.lean', 'Mathlib/Geometry/Euclidean/Inversion/Basic.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean']; note=; digest=55572b9b37833741; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern ordinary module scalar extension or affine homotheties, not the derived scalar-action compatibility asserted here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical homothety of a bounded coherent complex is compatible with flat scalar extension",
+   "results": "8 hits; top=['ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'Module.Flat.isBaseChange', 'ModuleCat.extendScalarsComp', 'ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat', 'Module.Flat.toAlgebra', 'Module.Flat.trans', 'comonadicExtendScalars', 'ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat']; note=; digest=72bf3fecf19b7bea; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern ordinary module scalar extension or affine homotheties, not the derived scalar-action compatibility asserted here"
+  },
+  {
+   "tool": "grep",
+   "query": "semidualiz|homothety|base.change.*[Rr][Hh]om|[Rr][Hh]om.*base.change",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern ordinary module scalar extension or affine homotheties, not the derived scalar-action compatibility asserted here"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|homothety|semidualiz|coherent.*base.change",
+   "results": "{\"t\": \"2026-10-23T11:34:19Z\", \"tool\": \"grep\", \"query\": \"RHom|homothety|semidualiz|coherent.*base.change\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\"], \"digest\": \"57588d4f1050b8d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar extension commutes with derived internal Hom for bounded coherent complexes over Noetherian rings",
+   "results": "{\"t\": \"2026-10-23T11:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Flat scalar extension commutes with derived internal Hom for bounded coherent complexes over Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.lTensor_shortComplex_exact\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"cc92ad7efe5741c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T11:34:19Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat map of Noetherian rings derived Hom of bounded complexes with finitely generated cohomology commutes with scalar extension and preserves the scalar action morphism",
+   "results": "{\"t\": \"2026-10-23T11:34:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat map of Noetherian rings derived Hom of bounded complexes with finitely generated cohomology commutes with scalar extension and preserves the scalar action morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"CategoryTheory.Functor.mapExtLinearMap_coe\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"Module.Flat.isBaseChange\", \"CategoryTheory.Functor.mapExtLinearMap\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"d9ef41f7301380eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(^|[^a-zA-Z])RHom|pseudo.?coherent|semidualiz|derivedHom",
+   "results": "{\"t\": \"2026-10-23T11:35:01Z\", \"tool\": \"grep\", \"query\": \"(^|[^a-zA-Z])RHom|pseudo.?coherent|semidualiz|derivedHom\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of a pseudo coherent complex into a bounded below complex commutes with flat base change",
+   "results": "{\"t\": \"2026-10-23T11:35:02Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom of a pseudo coherent complex into a bounded below complex commutes with flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"Ext\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\"], \"digest\": \"c0f046e5a3e51f18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exact scalar extension, Ext maps and derived localization do not state the internal derived-Hom isomorphism and homothety compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semidualizing-rhom-conservative",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Re-split component: Flat base change of bounded coherent complexes and their scalar-action morphisms.",
+   "via": [
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-coherent-homothety-base-change",
+  "worker": "stage1",
+  "summary": "Reused existing flat model/cohomology, Noetherian pseudo-coherence and general derived-Hom base-change nodes. Wrote out finite-generator preservation and the evaluation-normalized adjunction calculation identifying the canonical scalar-action maps. No new nodes or statement changes.",
+  "blueprint": "Realizes exactly the final flat coherent scalar-action auxiliary component of blueprint.from.place, within the inherited local-term-locality algebraic dualizing rigidity ancestry. Current latest blueprint and whole-blueprint searches were read; no equivalent blueprint statement found. Chapter, unit, ancestry and statement are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian finite-cohomology criterion needed to apply the unit's existing pseudo-coherent base-change theorem; it changes no geometric route."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic evaluation-normalized scalar and tensor-Hom adjunction used to identify the two scalar-action morphisms; the unit's base-change theorem alone does not assert this normalization equality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-dbcb1e6a2",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-dbcb1e6a2 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all four steps and every cited statement in full; the delivery has no new nodes, and the statement and stmt_deps are unchanged. The source checks out: Stacks more-algebra.tex lemma-base-change-RHom (0A6A, lines 28820-28852), case (3) 'flat, K pseudo-coherent, M in D^+', and the label for 066E is confirmed in tags/tags. Step 1: lem-trf-flat-projective-hom-models gives H^i(FC)=S⊗H^i(C), so the cohomology interval is kept, and the elements 1⊗m_j generate. Step 2: the Noetherian criterion makes C pseudo-coherent, and Z is in D^+, so 0A6A(3) applies (lem-trf-pseudocoherent-rhom-flat-base-change) and no perfectness is used. Step 3: I redid the chase myself. Through γ of lem-sfb-dc-hom-scalar-adjunction, the transposes of β∘F(h_C) and of h_{FC} both come out as η_C∘λ_C, so injectivity of the adjunction bijections gives equality of the actual arrows. Elementary is acceptable here, and the β description matches the normalization of lem-trf-projective-hom-scalar-unit-normalization. Step 4: functoriality plus F(0)=0. Edge cases tested: identity map, C or Z zero, S=0, shifts, and k=R/m over a singular local ring (not perfect, still covered). Duplicate search: pc-base-change-rhom-perfect covers case (1) only, homothety-evaluation-biduality is a different statement, and no blueprint node states the item. Both declared tool uses (pbc Noetherian criterion, sfb scalar adjunction) are generic and accepted. Batch-5 check: neither flagged node's closure (285 and 506 nodes) reaches a trace-formula or Poincaré-duality theorem, sk-thm-trace-transport or a batch-4 target. Both are generic flat-base-change algebra (0A6A(3) and its model comparisons), outside both assumptions, so neither flag is a RETURN. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatCoherentHomothetyBaseChange",
+  "declaration": "DerivedCategory.flat_coherent_homothety_base_change",
+  "file": "lean/Sheaf/Algebra/Homology/FlatCoherentHomothetyBaseChange.lean",
+  "statement": "theorem flat_coherent_homothety_base_change {R S : Type u} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] (φ : R →+* S) (hφ : φ.Flat) : (∀ K : DerivedCategory (ModuleCat.{u} R), (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj K)) → (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj K)) → (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} S) i).obj ((ModuleCat.ordinaryDerivedExtendScalars φ).obj K))) ∧ (∀ i : ℤ, Module.Finite S ((homologyFunctor (ModuleCat.{u} S) i).obj ((ModuleCat.ordinaryDerivedExtendScalars φ).obj K)))) ∧ (∀ C Z : DerivedCategory (ModuleCat.{u} R), (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj C)) → (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) → (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj Z)) → (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj Z)) → IsIso ((Functor.LaxMonoidal.ihomComparison (ModuleCat.ordinaryDerivedExtendScalars φ) C).natTrans.app Z) ∧ (Functor.LaxMonoidal.ε (ModuleCat.ordinaryDerivedExtendScalars φ) ≫ (ModuleCat.ordinaryDerivedExtendScalars φ).map (MonoidalClosed.id C) ≫ (Functor.LaxMonoidal.ihomComparison (ModuleCat.ordinaryDerivedExtendScalars φ) C).natTrans.app C = MonoidalClosed.id ((ModuleCat.ordinaryDerivedExtendScalars φ).obj C)) ∧ (IsIso (MonoidalClosed.id C) → IsIso (MonoidalClosed.id ((ModuleCat.ordinaryDerivedExtendScalars φ).obj C))) ∧ (IsZero ((ordinaryModuleDerivedInternalHom R).obj (op C, Z)) → IsZero ((ordinaryModuleDerivedInternalHom S).obj (op ((ModuleCat.ordinaryDerivedExtendScalars φ).obj C), (ModuleCat.ordinaryDerivedExtendScalars φ).obj Z))))",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2da8de97d",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Item node, all 6 stmt_dep records (byte-identical to live), delivered module and report read. Clauses: Noetherian R,S + flat φ, no extra hypotheses; D^b_fg written out as finite-interval vanishing + Module.Finite of H^i; K_S bounded/fg; β = ihomComparison (mate of the tensorator, the canonical 0A6A/0E1X map) IsIso; homothety equation ε ≫ F(id C) ≫ β = id(F C) with ε: S→F(R) as the inverse of F(R)≅S; homothety-iso and RHom-vanishing preservation via ordinaryModuleDerivedInternalHom; no proj/inj dimension. lean.statement verbatim; node copy differs only in lean; docstrings with source/blueprint and 4 proof steps; only sorry; no defs. Edge cases (zero rings/objects, a>b, identity) covered; universes as fixed by recorded deps. Not recompiled (no change). Advisories: the equality clause is upstream lemma ε_comp_map_id_comp_ihomComparison; the pseudo-coherent proof dep uses the one-point-site presentation (stage-3 bridge); second reading by the author."
+ }
+}

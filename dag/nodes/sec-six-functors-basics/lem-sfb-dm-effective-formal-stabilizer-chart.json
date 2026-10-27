@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-dm-effective-formal-stabilizer-chart",
+ "kind": "statement",
+ "title": "Completed etale groupoid at a finite stabilizer",
+ "statement": "Let $k$ be an algebraically closed field, let $\\mathcal X$ be a finite-type Deligne--Mumford stack over $k$ with finite diagonal, and let $x\\in\\mathcal X(k)$. Use the stack and Deligne--Mumford conventions of [def-sfb-stable-pointed-moduli-groupoids]. There is an etale scheme atlas $p:T\\to\\mathcal X$ with a point $u\\in T(k)$ and an identification $p(u)\\simeq x$. Write $R=T\\times_{\\mathcal X}T$, with source $s$, target $t$, identity and composition, and $H=\\operatorname{Aut}(x)$. The fibre of $R\\to T\\times_kT$ at $(u,u)$ is a finite reduced set indexed by $H$. Put $A=\\widehat{\\mathcal O}_{T,u}$, the maximal-ideal-adic completion [def-weil-pbc-adic-completion]. The completion of $R$ along that finite set is the disjoint union of the completions $\\widehat R_h$ at its points, and both $s:\\widehat R_h\\to\\operatorname{Spf}A$ and $t:\\widehat R_h\\to\\operatorname{Spf}A$ are isomorphisms for each $h\\in H$. Identity and composition reduce to the identity and composition in $H$. The stackification of this completed groupoid presents the formal completion of $\\mathcal X$ along the residual gerbe of $x$, meaning the substack of objects locally isomorphic to $x$. Here formal schemes mean the systems of their nilpotent thickenings. The object over $\\operatorname{Spf}A$ is induced by the effective morphism $\\operatorname{Spec}A\\to T\\to\\mathcal X$, and every completed arrow supplies a compatible isomorphism of the two pulled-back objects on every thickening. Schemes and etaleness are [def-pc-scheme] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DR3, Remark remark-groupoid-defo (completed groupoid presentation); etale.tex Tag 039M, Lemma lemma-characterize-etale-completions (completed source and target maps). The finite-stabilizer decomposition is the finite-diagonal etale specialization."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-algebraic-closure",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-per-adic-formal-completion",
+  "def-sfb-formal-moduli-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-type atlas convention to choose a surjective etale scheme atlas $T\\to\\mathcal X$ with $T$ of finite type over $k$. The base change $E=\\operatorname{Spec}k\\times_{x,\\mathcal X}T$ is a scheme by the finite-diagonal convention, and $E\\to\\operatorname{Spec}k$ is etale and surjective by the atlas definition. Its nonempty fibre is a disjoint union of spectra of finite separable extensions of $k$. Each extension is $k$, since $k$ is algebraically closed. Choose one component. Its map to $T$ gives $u\\in T(k)$ and its 2-fibre-product datum gives the specified identification $p(u)\\simeq x$.",
+   "uses": [
+    "def-sfb-finite-stack-scheme-tests",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC, lemma-quasi-compact-stack; morphisms.tex Tag 02GL, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "The finite-diagonal convention represents $R=T\\times_{\\mathcal X}T$ by a scheme finite over $T\\times_kT$. Its projections $s,t:R\\to T$ are etale, being the two base changes of the atlas. The scheme $D=R\\times_{T\\times_kT}\\operatorname{Spec}k$ at $(u,u)$ represents $\\operatorname{Isom}(p(u),p(u))$: the two maps to $T$ are fixed, so the remaining datum is precisely that isomorphism. By the DM Isom-space lemma this scheme is unramified over $k$. It is affine, being finite over $k$. The unramified-algebra lemma therefore writes its ring as a finite product of finite separable extensions of $k$, all equal to $k$. Thus $D=\\coprod_{h\\in H}\\operatorname{Spec}k$, with indexing supplied by conjugation with $p(u)\\simeq x$. This also proves finiteness of $H$, rather than assuming it.",
+   "uses": [
+    "def-sfb-finite-stack-scheme-tests",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-isom-space-unramified",
+    "lem-weil-pbc-unramified-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7, lemma-unramified-over-field; stacks-morphisms.tex Tag 06N3, theorem-DM; algebraic.tex Tag 045G, lemma-representable-diagonal"
+   }
+  },
+  {
+   "text": "The scheme $T$ is Noetherian by finite type over the Noetherian scheme $\\operatorname{Spec}k$ (a field has only the ideals $0,k$). In particular $T$ is locally Noetherian, so by that definition $u$ lies in an affine open $V=\\operatorname{Spec}C\\subseteq T$ with $C$ a Noetherian ring; $\\mathcal O_{T,u}$ is the localization of $C$ at the prime of $u$, hence Noetherian by localization permanence. The etale maps $s,t:R\\to T$ are unramified, hence locally of finite type: the preimage of every affine open of $T$, in particular $s^{-1}(V)$, is covered by spectra of finitely generated algebras over its ring. Each $r_h$ maps to $u$ under $s$, so it has an affine open neighbourhood $\\operatorname{Spec}C_h\\subseteq s^{-1}(V)$ with $C_h$ a finitely generated $C$-algebra. Then $C_h$ is Noetherian by finite-type algebra permanence, and its local ring at $r_h$ is Noetherian by localization permanence. Put $B=\\mathcal O_{T,u}$, $A=\\widehat B$, and $B_h=\\mathcal O_{R,r_h}$. Their maximal ideals are finitely generated. The completion-mod-power lemma identifies every quotient of $A$ by $(\\mathfrak m_B A)^N$ with $B/\\mathfrak m_B^N$, and similarly for $\\widehat B_h$. Completion is therefore exactly the compatible system of these pointed nilpotent neighbourhoods. The local-completion lemma identifies the maximal ideal of $A$ with $\\mathfrak m_B A$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-local-completion-local-ring",
+    "pqf-def-locnoeth",
+    "def-weil-unramified-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN, lemma-Noetherian-permanence; 05GG, lemma-hathat-finitely-generated; 05GI, lemma-radical-completion; morphisms.tex Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Apply the etale completed-local-ring lemma to $s:R\\to T$ at each $r_h$: its closed-point conclusion shows that $u$ and $r_h$ are closed. Thus $(u,u)$ is a closed $k$-point of $T\\times_kT$, and its fibre $D\\subset R$ is a closed finite reduced subscheme. Write $\\mathcal I_D$ for its ideal. Every neighbourhood cut out by $\\mathcal I_D^N$ has underlying space $|D|$, a finite discrete space. Its singleton open-and-closed pieces are disjoint and exhaust it. The ring on the piece at $r_h$ is its stalk, namely $B_h/(\\mathcal I_D B_h)^N$. Since $D$ is reduced with residue field $k$ at $r_h$, $\\mathcal I_D B_h$ is the maximal ideal of $B_h$. These identifications commute with reduction in $N$. Taking the systems gives $\\widehat R_D=\\coprod_h\\operatorname{Spf}\\widehat B_h$. This is a decomposition of infinitesimal neighbourhoods, not a claim that the points admit disjoint open neighbourhoods in $R$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-trf-etale-completed-local-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DR3, remark-groupoid-defo, finite-stabilizer specialization; decomposition of the finite discrete infinitesimal neighbourhoods; etale.tex Tag 039M, lemma-characterize-etale-completions; closed-point clause of the cited completion lemma"
+   }
+  },
+  {
+   "text": "Apply the etale completed-local-ring lemma to $s:R\\to T$ and to $t:R\\to T$, at each $r_h$ above $u$. The target is locally finite type over the algebraically closed field $k$, both maps are etale, and both points are $k$-rational by steps 1--2. The induced maps $A\\to\\widehat B_h$ are isomorphisms. Hence both maps $\\widehat R_h\\to\\operatorname{Spf}A$ are isomorphisms of formal schemes. They preserve maximal ideals and every power, so this assertion holds on every specified thickening, compatibly with its reduction maps.",
+   "uses": [
+    "lem-trf-etale-completed-local-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 039M, lemma-characterize-etale-completions and its following residue-degree remark"
+   }
+  },
+  {
+   "text": "Restrict identity, inverse and composition of the 2-fibre-product groupoid to the completed systems. Under the source isomorphism of step 5, write the component indexed by $h$ as the unique arrow $a_h(z)$ with source $z$, and put $\\alpha_h=t\\circ s_h^{-1}$. Each $\\alpha_h$ is an automorphism preserving the maximal ideal and all its powers. The composable pair $a_g(z),a_h(\\alpha_g(z))$ has composite reducing to $r_{hg}$, where $hg=h\\circ g$ in $H$, and source $z$. Composition induces a map to the completion at $r_{hg}$: its closed point maps there, so its local-ring homomorphism sends the maximal ideal, and every power, into the corresponding ideal of the source. In that component there is exactly one arrow with source $z$, because $s_{hg}$ is an isomorphism. Thus the composite is $a_{hg}(z)$ and its target gives $\\alpha_{hg}(z)=\\alpha_h(\\alpha_g(z))$. The same reasoning for identity and inverse gives the identity component and the inverse indexed by $h^{-1}$. This calculation is valid on each nilpotent thickening and commutes with reduction. Associativity and the unit laws are the restrictions of those of $R\\rightrightarrows T$. The completed operations therefore form a groupoid reducing to the one-object groupoid $H$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DR3, remark-groupoid-defo, groupoid structure maps; algebraic.tex Tag 045G, Isom interpretation"
+   }
+  },
+  {
+   "text": "There is an effective map $f:\\operatorname{Spec}A\\to\\operatorname{Spec}B\\to T\\to\\mathcal X$, using the canonical completion homomorphism $B\\to A$. Let $U_N=\\operatorname{Spec}(B/\\mathfrak m_B^N)$, identified with the corresponding thickening of $\\operatorname{Spf}A$ by step 3. The universal arrow on $R=T\\times_{\\mathcal X}T$ is an isomorphism between the source and target pullbacks of the atlas object. Pull it back to $\\operatorname{Spec}(B_h/\\mathfrak m_h^N)$ for every $h,N$. This gives the asserted compatible isomorphisms of the two objects induced by $f$. Identity and cocycle compatibility are the identities of the universal arrow on the original groupoid, so hold after every restriction.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DR3, remark-groupoid-defo, formal object and presentation; algebraic.tex Tag 045G, lemma-representable-diagonal"
+   }
+  },
+  {
+   "text": "Describe the formal neighbourhood on nilpotent tests: an object $\\xi$ over a scheme $S$ lies in it when its restriction to a closed subscheme $S_0\\subset S$, cut out by a nilpotent ideal, is locally isomorphic to the constant object $x$. This is the residual-gerbe completion convention of the statement. Choose an etale cover of $S_0$ on which such an isomorphism exists. The thickening-invariance equivalence for small etale sites lifts this cover to an etale cover of $S$; it remains covering because a nilpotent closed immersion is a homeomorphism. Refine by affine opens. On one such affine test, the isomorphism $\\xi|_{S_0}\\simeq x$ and $u$ give a section of $E_\\xi=S\\times_{\\mathcal X}T$ over $S_0$. The finite diagonal makes $E_\\xi$ a scheme, and the atlas definition makes $E_\\xi\\to S$ etale. Its flatness and unramifiedness satisfy the unique-lifting lemma. Write the affine test as $S=\\operatorname{Spec}C$, with $S_0=\\operatorname{Spec}(C/J)$ and $J^N=0$. Starting with the given section over $C/J$, induct on $1\\leq i<N$: the closed immersion $\\operatorname{Spec}(C/J^i)\\subset\\operatorname{Spec}(C/J^{i+1})$ is affine first order because $(J^i/J^{i+1})^2=0$. The lifting lemma gives exactly one extension of the section at each step. The final section is over $C/J^N=C$. The resulting map $S\\to T$ reduces to $u$ and comes with an isomorphism to $\\xi$.",
+   "uses": [
+    "def-sfb-finite-stack-scheme-tests",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "sbc-lem-thickening-etale-site",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04FF, lemma-unramified-flat-formally-etale; etale-cohomology.tex Tag 04DZ, theorem-topological-invariance and Tag 03SI, proposition-topological-invariance"
+   }
+  },
+  {
+   "text": "The lift in step 8 factors locally through some $U_N$. Indeed, any function vanishing at $u$ pulls back into $J$, so its $N$th power ideal pulls back to zero once $J^N=0$. Functions nonvanishing at $u$ become units: modulo $J$ they are nonzero constants, and a finite geometric series in a nilpotent element lifts their inverses. Hence the local-ring map factors through $B/\\mathfrak m_B^N$, and step 3 identifies it with a map to the completed atlas. This proves local essential surjectivity onto the formal neighbourhood. For two such lifts, their isomorphisms in $\\mathcal X$ are exactly the maps to $R$ by the defining 2-fibre-product equation. Modulo $J$ such a map lands in $D$, and every section of $\\mathcal I_D$ pulls back into $J$. Thus it factors through the $N$th neighbourhood of $D$, which is exactly the completed arrow system of step 4. Conversely every such completed arrow is an isomorphism by step 7. This identifies the entire isomorphism sheaf, including all automorphisms.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DR3, remark-groupoid-defo, unwinding the presentation; elementary factorization on nilpotent tests"
+   }
+  },
+  {
+   "text": "Stackify the completed groupoid using etale descent. Step 9 identifies its arrow sheaves with the isomorphism sheaves of the formal neighbourhood. On any covering, a cocycle of completed arrows is therefore exactly a cocycle of isomorphisms of the corresponding $\\mathcal X$-objects. Effectivity of object descent in the definition of a stack glues these objects, and the sheaf condition on isomorphisms glues their maps uniquely. Step 8 and the local essential surjectivity of step 9 show that every formal-neighbourhood object is obtained this way. The functor from the stackification is consequently fully faithful and essentially surjective on every nilpotent test, naturally under pullback. Its equivalence is compatible with all reductions, since the atlas, universal arrows and lifted sections used above restrict compatibly (the latter by uniqueness). This is the asserted formal presentation together with its effective atlas object.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DR3, remark-groupoid-defo; direct etale descent verification in the unframed finite-stabilizer case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-dm-isom-space-unramified",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-local-completion-local-ring",
+  "pqf-def-locnoeth",
+  "def-weil-unramified-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-etale-completed-local-ring-iso",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-flat-unramified-formally-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DR3, remark-groupoid-defo, motivates the route. Direct proof from the etale atlas on nilpotent test schemes; Tag 039M supplies the completed projection isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated Deligne Mumford stack with finite diagonal the formal completion at a geometric point is the quotient of a complete local etale atlas by the automorphism group, also in wild characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|residualGerbe|formalCompletion|stabilizerChart",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective formal local quotient chart of a Deligne Mumford stack by the finite stabilizer at a geometric point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(g : α ⧸ MulAction.stabilizer α x) : β\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and a fixed element $x \\\\in \\\\alpha$, this defines the induced action of the quotient group $G / \\\\text{Stab}(x)$ on $\\\\beta$. Given a coset $g \\\\cdot \\\\text{Stab\"}\n  {\"name\": \"Topology.IsQuotientMap.isCoveringMapOn_of_properlyDiscontinuousSMul\", \"module\": \"Mathlib.Topology.Covering.Quotient\", \"type\": \": IsCoveringMapOn f (f '' {e | MulAction.stabilizer G e = ⊥})\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $E$, then the quotient map $f: E \\\\to X$ is a covering map on the image of the set of points in $E$ with trivial stabil\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \": {γ : Γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"[ProperlyDiscontinuousSMul Γ T] (x : T) : (MulAction.stabilizer Γ x : Set Γ).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd\", \"module\": \"Mathlib.Topology.Covering.Quotient\", \"type\": \"∀ {E : Type u_1} [inst : TopologicalSpace E] {G : Type u_3} [inst_1 : AddGroup G] [inst_2 : AddAction G E]\\n  [ContinuousConstVAdd G E] [ProperlyDiscontinuousVAdd G E] [LocallyCompactSpace E] [T2Space E],\\n  IsCoveringMapOn (Quotient.mk (AddAction.orbitRel G E))\\n    (Quotient.mk (AddAction.orbitRel G \", \"doc\": \"If $ G $ is an additive group acting continuously and properly discontinuously on a locally compact Hausdorff topological space $ E $, then the quotient map $ E \\to E/G $ is a covering map on the image\"}\n  {\"name\": \"MulAction.selfEquivSigmaOrbitsQuotientStabilizer'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{φ : Ω → β} (hφ : LeftInverse Quotient.mk'' φ) : β ≃ Σ ω : Ω, α ⧸ stabilizer α (φ ω)\", \"doc\": \"For a group action on a set $\\\\beta$, this constructs an equivalence between $\\\\beta$ and the disjoint union (sigma type) over each orbit $\\\\omega$ in the quotient set $\\\\Omega = \\\\beta/\\\\sim$ of the quotie\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib.CategoryTheory.Galois.Examples\", \"type\": \"(X : Action FintypeCat G) [IsConnected X] (x : X.V) [Fintype (G ⧸ (MulAction.stabilizer G x))] :\\n  X ≅ G ⧸ₐ MulAction.stabilizer G x\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropAt_chart\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"[HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) : LiftPropAt Q (chartAt (H := H) x) x\", \"doc\": \"If a property $ Q $ is invariant under the structure groupoid $ G $ and holds for the identity map on the universal set, then for any point $ x $ in the charted space $ M $, the property $ Q $ holds w\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed local etale groupoid of a smooth algebraic stack with unramified finite diagonal is an action groupoid of the point stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (nhds 1).HasBasis (fun x => True) fun X => ↑(MulAction.stabilizer (CategoryTheory.Aut F) X.pt)\", \"doc\": \"The neighborhood filter at the identity element of the automorphism group $\\\\mathrm{Aut}(F)$ (for a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$ from a pre-Galois category $\\\\mathcal{C}$) has a basis\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"IsFreeGroupoid.actionGroupoidIsFree\", \"module\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier\", \"type\": \"{G A : Type u} →\\n  [inst : Group G] → [IsFreeGroup G] → [inst_2 : MulAction G A] → IsFreeGroupoid (CategoryTheory.ActionCategory G A)\", \"doc\": \"Given a free group $G$ acting on a set $A$, the action groupoid $\\\\mathrm{ActionCategory}(G, A)$ is a free groupoid. This follows because the generators of the free group $G$ induce generating morphism\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"hasGroupoid_model_space\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ (H : Type u_5) [inst : TopologicalSpace H] (G : StructureGroupoid H), HasGroupoid H G\", \"doc\": \"For any topological space $ H $ and its structure groupoid $ G $, the natural charted space structure on $ H $ (where $ H $ serves as its own model space via the identity map) is compatible with $ G $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract group actions, elliptic Weierstrass curves, ring Picard groups, or number-theoretic Kummer theory; none states this deformation or semiabelian Picard assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale atlas of a Deligne Mumford stack completed at a point presents its formal completion by the finite stabilizer groupoid",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary etale scheme morphisms, Galois categories, topological group quotients and manifold groupoids do not state a completed algebraic-stack presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|residualGerbe|formalCompletion|stabilizerChart",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary etale scheme morphisms, Galois categories, topological group quotients and manifold groupoids do not state a completed algebraic-stack presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of an etale Deligne Mumford groupoid at a geometric point is a formal quotient by its automorphism group",
+   "results": "Hits: CategoryTheory.PreGaloisCategory.IsGalois.quotientByAutTerminal, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, QuotientGroup.completeSpace, CategoryTheory.Localization.groupoid, CategoryTheory.PreGaloisCategory.autGaloisSystem_obj_coe, CategoryTheory.PreGaloisCategory.isTerminalQuotientOfIsGalois, QuotientAddGroup.completeSpace', CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary etale scheme morphisms, Galois categories, topological group quotients and manifold groupoids do not state a completed algebraic-stack presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stack\"",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary etale scheme morphisms, Galois categories, topological group quotients and manifold groupoids do not state a completed algebraic-stack presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford etale groupoid with finite diagonal becomes a finite union of isomorphic formal local charts after completion",
+   "results": "Hits: hasGroupoid_model_space, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, HasGroupoid, StructureGroupoid.HasGroupoid.comp, AlgebraicGeometry.Scheme.smallEtaleTopology, hasGroupoid_continuousGroupoid, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary etale scheme morphisms, Galois categories, topological group quotients and manifold groupoids do not state a completed algebraic-stack presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-level-versal-branch-freeness",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Generic completed etale groupoid input to the versal formal quotient; no level structure or freeness assertion.",
+   "via": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-effective-formal-stabilizer-chart",
+  "worker": "stage1",
+  "summary": "Q124 repair of returned head 116cea67188: reconstructed the retained split over the current server DAG, whose live item is still unsplit, and re-read every current proof and statement dependency. All 27 quotation assertions agree. Step 6 now derives the completed composition formula from uniqueness of an arrow with specified source in each component, including the local-ring factorization and compatibility on every thickening. The preceding closed-centre and explicit square-zero lifting repairs are retained. Statement unchanged; ten steps; no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Generic completed etale groupoid input to the versal formal quotient; no level structure or freeness assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-algebra-over-field-product",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-trf-etale-completed-local-ring-iso",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic scheme/commutative-algebra tool used for the atlas completion or nilpotent descent, not a replacement for the alteration/stable-moduli unit route. Its precise use is described in the proof step and report."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-trf-etale-completed-local-ring-iso",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-flat-unramified-formally-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-4edb20aab",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-4edb20aab (reviewer sub-agent of L); spot-checked: I read the whole split: 10 steps citing 15 existing nodes, no new nodes, statement unchanged. On clones/live and side-live the item is still unsplit and there is no repair note, so the delivery is not superseded and the re-split rule does not apply. This is a side-completion promotion loop: the L return at head 116cea67188 says the split was never promoted to live. Compared with the 116cea67 FIX, this head changes two steps. Step 6 is new: it computes composition explicitly. a_h(z) is the unique arrow with source z in component h, alpha_h = t∘s_h^-1, and uniqueness in the hg-component gives alpha_hg = alpha_h∘alpha_g. I checked it and kept it. Step 3 has again gone back to the unfixed text. Source checks: Stacks 0DR3 (stacks-geometry l.403) is the framed deformation groupoid on C_Λ, so proof_origin=agent is right. 039M (etale l.1110), 00FN, 01T6 and 03SI resolve to their labels. No SGA source is used. Steps 1, 2 and 4-10 are correct. Step 1: E is étale, surjective and nonempty over k, so it is a disjoint union of copies of Spec k, giving u. Step 2: D represents Isom(p(u),p(u)), is unramified and finite, so D = Spec k^H and H is proved finite. Step 4: the closed-point clause applies at r_h, and I_D B_h = m_h. Step 5: both s and t give Â ≅ B̂_h. Step 8: J^i/J^{i+1} has square zero, which matches the affine first-order lifting lemma exactly; I checked N=1 and N=2. Steps 9-10: m^N maps into J^N = 0, units lift, arrows factor through I_D^N, then descent. Edge cases checked: H=1; B(Z/p) in characteristic p (no tameness used); a finite action on a local scheme. Duplicate search with rg -L found only the converse node or nodes that assume the presentation. Batch-5 check: def-sfb-finite-stack-scheme-tests and lem-sfb-dm-isom-space-unramified reach sec-trace-formula only through the general definition def-trf-algebraic-space and generic space/Proj lemmas. lem-trf-etale-completed-local-ring-iso is pure commutative algebra (02GL/01TE/039M). The closures reach no assumption leaf and no trace-formula or Poincaré theorem, so all three are generic and accepted. The 10 declared tool_uses are generic and accepted. FIX (C4, step 3, the same fix now lost three times): 'étale implies lfp' does not give a Noetherian affine base around u. I re-applied the 116cea67 step-3 text verbatim: pqf-def-locnoeth gives a Noetherian affine Spec C around u; unramified implies locally of finite type, so s^-1(Spec C) is covered by finitely generated C-algebras; the permanence lemmas then apply. proof_deps is recomputed and adds pqf-def-locnoeth, def-weil-unramified-morphism and def-weil-finite-type-morphism. All other fields of this head are kept.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DMEffectiveFormalStabilizerChart",
+  "declaration": "CategoryTheory.exists_effectiveFormalStabilizerChart",
+  "declarations": [
+   "CategoryTheory.DMFormalChart.tower",
+   "CategoryTheory.DMFormalChart.towerι",
+   "CategoryTheory.DMFormalChart.restrictIso",
+   "CategoryTheory.DMFormalChart.completedAtlas",
+   "CategoryTheory.DMFormalChart.completedAtlasMap",
+   "CategoryTheory.DMFormalChart.completedIdeal",
+   "CategoryTheory.DMFormalChart.Chart",
+   "CategoryTheory.exists_effectiveFormalStabilizerChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DMEffectiveFormalStabilizerChart.lean",
+  "statement": "theorem exists_effectiveFormalStabilizerChart {k : Type u} [Field k] [IsAlgClosed k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (_hDM : IsDeligneMumfordModuliStack F) (_hfin : HasFiniteModuliDiagonal F) (_hft : HasFiniteTypeEtaleModuliAtlas F) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk (𝟙 (Spec (.of k)))))) F) : Nonempty (DMFormalChart.Chart F x)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Chart bundles the exact atlas, universal relation and finite reduced fibre, the nilpotent-thickening diagrams with canonical ambient maps, their source/target isomorphisms and coproduct decomposition, and the local object/all-arrow presentation of the residual-gerbe completion. Identity, inverse and composition are the actual stack-isomorphism operations under the universal relation; label identifies their reductions multiplicatively with Aut(x). Formal thickenings and residual-gerbe support reuse the two added landed definition prerequisites. The effective completed-stalk map is the explicit composite Spec.map(algebraMap) followed by fromSpecStalk in completedAtlas and completedAtlasMap; no completed-local-base-change theorem statement dependency is used. No statement correction or new definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a56acbd4d",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery of e558f94391c4 fixes its H2/H12 return. completedAtlas/completedAtlasMap now write out Spec.map(algebraMap stalk → AdicCompletion) ≫ fromSpecStalk, identical to the body of Scheme.completionBaseMap. The CompletedLocalBaseChange import is replaced by Mathlib.AlgebraicGeometry.Stalk and lem-trf-completed-local-base-change is dropped from stmt_deps. Chart fields and theorem signature are unchanged byte for byte; the node differs from live only by the lean record and two added stmt_deps (def-per-adic-formal-completion, def-sfb-formal-moduli-quotient), both definition nodes on the base with records identical to live. Re-checked hypotheses (IsAlgClosed, DM, finite diagonal, finite-type atlas), the universal relation, fibre/label with H ≃* Aut x, thickening towers, effectiveComparison, source/target, pieces, ModuliCompletionAt objects/arrows clauses, and edge cases (trivial H, B(Z/p) in char p, empty tests, n=0). Only sorry is the main theorem; docstrings present; lean.statement verbatim. Report has a Worker report and a Second reading by NO (openly a self-reading). No compile run since no file was changed; worker reports clean scompile and dry run."
+ }
+}

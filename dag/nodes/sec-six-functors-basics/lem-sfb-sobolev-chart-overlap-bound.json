@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-sobolev-chart-overlap-bound",
+ "kind": "statement",
+ "title": "Bounded Sobolev localization across two bundle charts",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $M$ be a smooth Hausdorff manifold without boundary of dimension $m\\geq1$, and let $E\\to M$ be a smooth real vector bundle of finite rank $r\\geq0$. Fix coordinate charts $\\kappa_U:U\\to O_U\\subset\\mathbf R^m$ and $\\kappa_V:V\\to O_V\\subset\\mathbf R^m$, smooth frames of $E$ on $U$ and $V$, a compact subset $K\\subset U$, a smooth scalar function $\\eta$ on $M$ with compact support contained in $V$, and an integer $s\\geq0$. For an $L^2(\\mathbf R^m,\\mathbf R^r)$ function $f$ vanishing almost everywhere outside $\\kappa_U(K)$, let $v_f$ be the measurable section having components $f\\circ\\kappa_U$ in the $U$ frame and zero outside $U$. Let $T f$ be the components of $\\eta v_f$ in the $V$ frame, transported by $\\kappa_V$ and extended by zero outside $O_V$. Write $W^{s,2}$ for the space of $L^2$ functions whose distributional derivatives through order $s$ belong to $L^2$, with $\\|f\\|_{W^{s,2}}^2=\\sum_{|\\alpha|\\leq s}\\|\\partial^\\alpha f\\|_2^2$, distributional derivatives being defined by duality against compactly supported smooth test functions. There is $C>0$, depending only on the fixed charts, frames, $K$, $\\eta$ and $s$, such that $T f\\in W^{s,2}$ and $\\|T f\\|_{W^{s,2}}\\leq C\\|f\\|_{W^{s,2}}$ for every such $f\\in W^{s,2}$. The weak derivatives of $T f$ are given by the distributional Leibniz and chain rules for this formula. This map agrees with multiplication and change of frame and coordinates for the associated distributional sections, where distributions transform by duality with the Jacobian factor on test functions.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Sobolev setup, atlas independence; supporting chart transition estimate. Supplemental online Demailly course Differential and pseudodifferential operators on manifolds, §2, pp.3–4, (2.2), (2.2 prime), and Lemma 2.3. The integer-order weak chain-rule estimate across two charts is made explicit by the agent. WANTED locally; supplemental source read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-euclidean-weak-sobolev"
+ ],
+ "proof": [
+  {
+   "text": "If $r=0$, $K=\\varnothing$, or $\\eta=0$, the map is zero and $C=1$ works. Otherwise put $K_U=\\kappa_U(K)$. Choose finitely many pairs of concentric balls with compact outer closed balls contained in $O_U$ and inner open balls covering $K_U$. Use [lem-sfb-euclidean-smooth-ball-bump] to obtain their functions $\\beta_j$, and set $\\chi=1-\\prod_j(1-\\beta_j)$. The cited product rule shows $\\chi$ is smooth; it is one on a neighborhood of $K_U$ and has compact support $H\\subset O_U$. Thus $\\chi f=f$ almost everywhere for every input under consideration. All choices depend only on $K$ and the fixed $U$ chart.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-ball-bump",
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "Put $D=\\kappa_V(U\\cap V)$, $D^{\\prime}=\\kappa_U(U\\cap V)$ and $F=\\kappa_U\\circ\\kappa_V^{-1}:D\\to D^{\\prime}$. These are open coordinate domains and a smooth diffeomorphism by the chart assumptions. Let $B(y)$ be the smooth matrix converting the $U$ frame to the $V$ frame at $\\kappa_V^{-1}(y)$, and let $\\eta_V=\\eta\\circ\\kappa_V^{-1}$. Set $A(y)=\\eta_V(y)\\chi(F(y))B(y)$ on $D$. Its support is contained in the compact set $L=\\kappa_V(\\kappa_U^{-1}(H)\\cap\\operatorname{supp}\\eta)\\subset D$: the intersection is compact since its two compact sets are closed in the Hausdorff manifold. Consequently $A$ extends smoothly by zero to all of $\\mathbf R^m$, as does every derivative. Define $Rh=A(h\\circ F)$ on $D$, zero elsewhere. Since $\\chi f=f$ a.e., the component formula in the question is $Tf=Rf$. The empty overlap or empty $L$ gives the zero map.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "Here is the measure estimate used below. If $a$ is a smooth matrix supported in $L$ and $h\\in L^2(\\mathbf R^m,\\mathbf R^r)$, apply [lem-sfb-euclidean-jacobian-nonnegative-integrability] to $F^{-1}$ on the Borel compact set $F(L)$. It gives $$\\|a(h\\circ F)\\|_2^2\\leq M_a^2 J\\|h\\|_2^2,\\qquad M_a=\\sup_L\\|a\\|,\\quad J=\\max(1,\\sup_{F(L)}|\\det D(F^{-1})|).$$ Indeed the changed integrand is $|a(F^{-1}x)h(x)|^2|\\det D(F^{-1})(x)|$ on $F(L)$, bounded by the displayed multiple of $|h(x)|^2$. These constants are finite by continuity and compactness. Measurability is also justified: $h$ is integrable on compact $F(L)$ by Cauchy–Schwarz; the integrability clause gives strong measurability of $J_F(h\\circ F)$ on $L$, hence of $h\\circ F$ there, since $J_F>0$. This positivity follows by differentiating $F^{-1}F=\\mathrm{id}$. The same nonnegative identity for indicators of Borel null sets shows inverse images of null sets are null; therefore the formula is independent of all a.e. representatives.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability",
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "For smooth $h$, differentiate the expression for $Rh$ componentwise using [lem-sfb-real-smooth-differentiation]. Induction on the derivative order gives $$\\partial^\\alpha Rh=\\sum_{|\\beta|\\leq|\\alpha|}C_{\\alpha\\beta}(\\partial^\\beta h)\\circ F.$$ Initially $C_{0,0}=A$. When taking $\\partial_i$, replace a coefficient $C$ by $\\partial_i C$ with the same $\\beta$, and add $C\\partial_i F_j$ with index $\\beta+e_j$ for each $j$. This explicit recursion proves the formula at the next order. Every coefficient is smooth, has support in $L$, and depends only on $A,F,\\alpha,\\beta$; extend it by zero. There are no boundary terms, since $L$ is compact inside $D$. Let $N$ be the number of multi-indices of order at most $s$, and let $M$ be the maximum of $1$ and the finitely many $M_{C_{\\alpha\\beta}}$. The measure estimate and $|\\sum_{j=1}^N z_j|^2\\leq N\\sum_j|z_j|^2$ yield $$\\sum_{|\\alpha|\\leq s}\\|\\partial^\\alpha Rh\\|_2^2\\leq N^2M^2J\\sum_{|\\beta|\\leq s}\\|\\partial^\\beta h\\|_2^2.$$ This uses only finite sums after the cited first-order chain and product rules.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "For a smooth compactly supported $h$, all the functions in the last display and all products with a test function are continuous and compactly supported; their integrability follows from [lem-sfb-continuous-compact-support-integrable], applied componentwise, also to squared norms. Apply [lem-sfb-scalar-integrable-integration-by-parts] to a real component (regarded as complex-valued), a scalar test function, and each coordinate direction. Its three integrability hypotheses hold as just checked. Repeating the equality shows that the classical derivatives in the recursion represent the distributional derivatives, with sign $(-1)^{|\\alpha|}$. Thus $Rh\\in W^{s,2}$ and the previous estimate is an estimate in precisely the weak-derivative norm of the question.",
+   "uses": [
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-scalar-integrable-integration-by-parts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-euclidean-sobolev-graph-mollification] with $\\Omega=O_U$ and compact $K_U$ to obtain $h_n\\in C_c^\\infty(O_U,\\mathbf R^r)$ with $h_n\\to f$ in $W^{s,2}$. The measure estimate shows $Rh_n\\to Rf$ in $L^2$. For each $\\alpha$, it also shows that the finitely many terms in its recursion converge in $L^2$ to $$g_\\alpha=\\sum_{|\\beta|\\leq|\\alpha|}C_{\\alpha\\beta}(\\partial^\\beta f)\\circ F,$$ zero outside $D$. The closed-graph clause of that same node applies to $Rh_n$, proved to be in $W^{s,2}$ in the previous step: $g_0=Rf$, so $Rf\\in W^{s,2}$ and $\\partial^\\alpha Rf=g_\\alpha$. Taking limits in the finite squared-norm estimate gives $\\|Tf\\|_{W^{s,2}}\\leq NM\\sqrt J\\|f\\|_{W^{s,2}}$. This constant is positive and depends only on the fixed data. The recursion is the weak Leibniz and chain formula. The auxiliary $\\chi$ can be suppressed in that formula: it is one near $K_U$, and outside $K_U$ all distributional derivatives of $f$ vanish locally, directly from their action on tests supported in that complement.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  },
+  {
+   "text": "Finally let $\\psi:\\mathbf R^m\\to\\mathbf R^r$ be any smooth compactly supported test vector. Componentwise Jacobian change of variables gives $$\\langle Rf,\\psi\\rangle=\\int_{D^{\\prime}} f(x)^t A(F^{-1}x)^t\\psi(F^{-1}x)|\\det D(F^{-1})(x)|\\,dx.$$ Cite [lem-sfb-euclidean-jacobian-integral] with real integrands embedded in $\\mathbf C$; integrability of both sides follows from the preceding $L^2$ bound and Cauchy–Schwarz, or the integrability criterion. The test vector on the right extends by zero smoothly with compact support in $D^{\\prime}$, because $A$ has compact support in $D$. This is exactly the dual action of multiplication by the cutoff and change of frame and coordinates, with the absolute inverse Jacobian. The inserted $\\chi$ does not change the distribution supported on $K_U$. The same equality with $\\partial^\\alpha\\psi$ identifies its distributional derivatives with those already obtained by the recursion. In the original charts this proves the asserted agreement for the associated distributional sections, including orientation reversing transitions.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent integer-order argument supporting Demailly, Differential and pseudodifferential operators on manifolds, §2, pp.3–4, integer-order description, (2.2), (2.2 prime), and atlas independence before Lemma 2.3; source WANTED locally and read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-smooth-ball-bump",
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-euclidean-jacobian-nonnegative-integrability",
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-scalar-integrable-integration-by-parts",
+  "lem-sfb-euclidean-sobolev-graph-mollification",
+  "lem-sfb-euclidean-jacobian-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Integer-order proof made explicit by Q24, following the online Demailly course §2, pp.3–4, and using the cited Euclidean smoothing and Mathlib calculus/change-of-variables nodes. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by smooth cutoff and smooth coordinate diffeomorphism give bounded maps on integer Sobolev W s 2 norms for compactly supported functions",
+   "results": {
+    "t": "2026-10-24T03:03:57Z",
+    "tool": "leanfinder",
+    "query": "Multiplication by smooth cutoff and smooth coordinate diffeomorphism give bounded maps on integer Sobolev W s 2 norms for compactly supported functions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffMapSupportedIn.seminorm_postcompLM_le",
+     "ContDiffMapSupportedIn.postcompCLM_apply",
+     "ContDiffMapSupportedIn.seminorm",
+     "ContDiffMapSupportedIn.supSeminorm",
+     "ContDiffMapSupportedIn.postcompLM_apply",
+     "HasCompactSupport.toSchwartzMap",
+     "ContDiffMapSupportedIn.seminorm_apply",
+     "ContDiffMapSupportedIn.norm_apply_le_seminorm"
+    ],
+    "digest": "798235c50c540f34"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern smooth sup-seminorms, ordinary smooth chain rules or Fourier-defined Sobolev spaces, not the stated weak-derivative chart-localization bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sobolev weak derivative product rule and change of variables bounded on compact supports",
+   "results": {
+    "t": "2026-10-24T03:03:57Z",
+    "tool": "leansearch",
+    "query": "Sobolev weak derivative product rule and change of variables bounded on compact supports",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "HasCompactSupport.deriv",
+     "HasDerivWithinAt.clm_apply",
+     "HasCompactSupport.iteratedFDeriv",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "SchwartzMap.integral_mul_deriv_eq_neg_deriv_mul",
+     "SchwartzMap.integral_mul_lineDerivOp_right_eq_neg_left",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv"
+    ],
+    "digest": "9c05c66f1b5e20e8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern smooth sup-seminorms, ordinary smooth chain rules or Fourier-defined Sobolev spaces, not the stated weak-derivative chart-localization bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "TemperedDistribution.MemSobolev",
+   "results": {
+    "t": "2026-10-24T03:03:58Z",
+    "tool": "loogle",
+    "query": "TemperedDistribution.MemSobolev",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TemperedDistribution.MemSobolev",
+     "TemperedDistribution.MemSobolev.mono",
+     "TemperedDistribution.memSobolev_fun_zero",
+     "TemperedDistribution.MemSobolev.lineDerivOp",
+     "TemperedDistribution.MemSobolev.laplacian",
+     "TemperedDistribution.MemSobolev.neg",
+     "TemperedDistribution.MemSobolev.sub",
+     "TemperedDistribution.MemSobolev.add"
+    ],
+    "digest": "9f33c41d8fc07c0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern smooth sup-seminorms, ordinary smooth chain rules or Fourier-defined Sobolev spaces, not the stated weak-derivative chart-localization bound."
+  },
+  {
+   "tool": "grep",
+   "query": "MemSobolev.*(comp|mul)|sobolev.*(diffeo|coordinate)|weak.*chain.*rule",
+   "results": {
+    "t": "2026-10-24T03:03:58Z",
+    "tool": "grep",
+    "query": "MemSobolev.*(comp|mul)|sobolev.*(diffeo|coordinate)|weak.*chain.*rule",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean"
+    ],
+    "digest": "198a4079896fef63"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern smooth sup-seminorms, ordinary smooth chain rules or Fourier-defined Sobolev spaces, not the stated weak-derivative chart-localization bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing coordinates and a local frame of a vector bundle and multiplying by a compactly supported smooth cutoff preserves the W s 2 weak Sobolev norm with a fixed bound",
+   "results": {
+    "t": "2026-10-24T03:05:35Z",
+    "tool": "leanfinder",
+    "query": "Changing coordinates and a local frame of a vector bundle and multiplying by a compactly supported smooth cutoff preserves the W s 2 weak Sobolev norm with a fixed bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "ContDiffMapSupportedIn.seminorm_apply",
+     "ContDiffMapSupportedIn.norm_apply_le_seminorm",
+     "ContDiffMapSupportedIn.seminorm_le_iff",
+     "ContDiffMapSupportedIn.seminorm_le_iff_withOrder",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv"
+    ],
+    "digest": "ca4c5cb1f0dab3ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern smooth sup-seminorms, ordinary smooth chain rules or Fourier-defined Sobolev spaces, not the stated weak-derivative chart-localization bound."
+  },
+  {
+   "tool": "grep",
+   "query": "MemSobolev.*(comp|mul)|sobolev.*(diffeo|coordinate)|weak.*chain.*rule",
+   "results": {
+    "t": "2026-10-24T03:31:55Z",
+    "tool": "grep",
+    "query": "MemSobolev.*(comp|mul)|sobolev.*(diffeo|coordinate)|weak.*chain.*rule",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean"
+    ],
+    "digest": "198a4079896fef63"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth supported sup-seminorms, ordinary manifold coordinate changes and Fourier-defined MemSobolev do not state the integer weak-derivative chart norm bound. Read Sobolev.lean:151–154 and the candidate statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported Sobolev functions change of coordinates weak derivative chain rule",
+   "results": {
+    "t": "2026-10-24T03:31:55Z",
+    "tool": "leansearch",
+    "query": "Compactly supported Sobolev functions change of coordinates weak derivative chain rule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasCompactSupport.deriv",
+     "ContMDiff.coordChange",
+     "HasCompactSupport.comp_homeomorph",
+     "TestFunction.coe_ofSupportedIn",
+     "HasMFDerivWithinAt.comp",
+     "Diffeomorph.contMDiffWithinAt_comp_diffeomorph_iff",
+     "HasMFDerivAt.comp_hasMFDerivWithinAt",
+     "MeasurableEmbedding.withDensity_ofReal_comap_apply_eq_integral_abs_det_fderiv_mul"
+    ],
+    "digest": "2c40d6fa996eb350"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth supported sup-seminorms, ordinary manifold coordinate changes and Fourier-defined MemSobolev do not state the integer weak-derivative chart norm bound. Read Sobolev.lean:151–154 and the candidate statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "TemperedDistribution.MemSobolev",
+   "results": {
+    "t": "2026-10-24T03:31:55Z",
+    "tool": "loogle",
+    "query": "TemperedDistribution.MemSobolev",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TemperedDistribution.MemSobolev",
+     "TemperedDistribution.MemSobolev.mono",
+     "TemperedDistribution.memSobolev_fun_zero",
+     "TemperedDistribution.MemSobolev.lineDerivOp",
+     "TemperedDistribution.MemSobolev.laplacian",
+     "TemperedDistribution.MemSobolev.neg",
+     "TemperedDistribution.MemSobolev.sub",
+     "TemperedDistribution.MemSobolev.add"
+    ],
+    "digest": "9f33c41d8fc07c0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth supported sup-seminorms, ordinary manifold coordinate changes and Fourier-defined MemSobolev do not state the integer weak-derivative chart norm bound. Read Sobolev.lean:151–154 and the candidate statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integer order Sobolev norm is preserved up to a constant by bundle frame and chart transitions on compact support",
+   "results": {
+    "t": "2026-10-24T03:31:56Z",
+    "tool": "leanfinder",
+    "query": "Integer order Sobolev norm is preserved up to a constant by bundle frame and chart transitions on compact support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffMapSupportedIn.seminorm_apply",
+     "ContDiffMapSupportedIn.seminorm_le_iff_withOrder",
+     "ContDiffMapSupportedIn.seminorm_le_iff",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "ContDiffMapSupportedIn.norm_apply_le_seminorm",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm",
+     "eventually_norm_symmL_trivializationAt_self_comp_lt"
+    ],
+    "digest": "94b925c811257ab1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth supported sup-seminorms, ordinary manifold coordinate changes and Fourier-defined MemSobolev do not state the integer weak-derivative chart norm bound. Read Sobolev.lean:151–154 and the candidate statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth cutoff multiplication and smooth coordinate changes are bounded on integer weak Sobolev W s 2 spaces for compact supports",
+   "results": {
+    "t": "2026-10-24T03:31:57Z",
+    "tool": "leanfinder",
+    "query": "Smooth cutoff multiplication and smooth coordinate changes are bounded on integer weak Sobolev W s 2 spaces for compact supports",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffMapSupportedIn.seminorm_postcompLM_le",
+     "ContDiffMapSupportedIn.seminorm",
+     "ContDiffMapSupportedIn.supSeminorm",
+     "ContDiffMapSupportedIn.norm_apply_le_seminorm",
+     "HasCompactSupport.toSchwartzMap",
+     "ExistsContDiffBumpBase.u",
+     "ExistsContDiffBumpBase.u_smooth",
+     "ContDiffMapSupportedIn.seminorm_apply"
+    ],
+    "digest": "bd3f4f64a5af1cbb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth supported sup-seminorms, ordinary manifold coordinate changes and Fourier-defined MemSobolev do not state the integer weak-derivative chart norm bound. Read Sobolev.lean:151–154 and the candidate statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bundle-sobolev-rellich",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Bounded Sobolev localization across two bundle charts.",
+   "via": [
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sobolev-chart-overlap-bound",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed one fixed compactly supported overlap matrix, gave its complete derivative recursion and norm bound, passed to weak derivatives using the existing support-controlled mollification and closed graph, and checked distributional duality with the inverse absolute Jacobian. Added one Mathlib leaf for nonnegative Jacobian and integrability formulas, reusing all other analytic inputs.",
+  "blueprint": "Read current latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3). This analytic prerequisite remains in the inherited direct-image/Haboush/Kodaira/Hodge chain, supporting Demailly atlas independence and bundle Sobolev Rellich. blueprint_refs.py ancestor returns None, as in the live item; retained None and the full inherited from.place/via, extending those on the new measure leaf. Searches over all blueprint nodes for Sobolev, distribution, mollification, change of variables, Jacobian, nonnegative integral and integrability found no matching analytic statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-2468f1ee7",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-2468f1ee7 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new leaf and every cited statement in full; changed nothing, no fixes. The cited Demailly sources are not in literature/, so the agent-written argument was checked on its own merits. New leaf lem-sfb-euclidean-jacobian-nonnegative-integrability: Mathlib Jacobian.lean lines 1183-1186 (lintegral_image_eq_lintegral_abs_det_fderiv_mul) and 1199-1202 (integrableOn_image_iff_integrableOn_abs_det_fderiv_smul), section hypotheses at 99-101, read; each clause specializes in one line (E=R^m, volume, Borel S, HasFDerivAt on open D restricted to S, InjOn); q=0 and non-measurable H are consistent with Mathlib's lintegral. Not a duplicate: lem-sfb-euclidean-jacobian-integral is the Bochner identity with zero default and cannot give integrability; planar-polar is a specific map. It is not a clause of the item. Step 1: bump cutoff chi=1-prod(1-beta_j) is smooth, equal to 1 near K_U, with compact support H in O_U. Step 2: direction checked, Tf=eta_V B (f o F), F=kappa_U o kappa_V^{-1}; supp A is in L=kappa_V(kappa_U^{-1}(H) cap supp eta), compact in D by Hausdorffness. Step 3: lintegral identity for F^{-1} on F(L) gives ||a(h o F)||^2 <= M_a^2 J ||h||^2; measurability from the integrability clause and J_F>0; null-set preservation checked. Step 4: Leibniz/chain recursion and the N^2 M^2 J bound checked. Step 5: all integrability and differentiability hypotheses of the IBP node hold; sign (-1)^|alpha| matches. Step 6: mollification applies with Omega=O_U and compact K_U; terms converge, the closed graph gives Rf in W^{s,2} with C=NM sqrt(J)>0; dropping chi is valid (two open sets cover D). Step 7: change of variables with phi=F^{-1}; the transformed test is C_c^infty in D' since |det| is smooth; this is the asserted duality and covers orientation reversal. Statement unchanged; Hausdorff, chart and frame hypotheses used where needed. Small cases s=0, identity charts, dilation, disjoint charts, r=0 checked. All cited nodes are in unit sk-thm-sf-ctf-stability, so no tool_uses; no SGA; no cycle; no repair note, so the re-split rule does not apply. Cosmetic only: step 2 relies on the null-set fact proved in step 3."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.SobolevChartOverlap",
+  "declaration": "BundleSobolev.sobolev_chart_overlap_bound",
+  "declarations": [
+   "BundleSobolev.overlapChainCoefficient",
+   "BundleSobolev.overlapWeakDerivative",
+   "BundleSobolev.overlapMultiplier",
+   "BundleSobolev.overlapTransform",
+   "BundleSobolev.sobolev_chart_overlap_bound"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/SobolevChartOverlap.lean",
+  "statement": "theorem sobolev_chart_overlap_bound [T2Space M] [IsManifold 𝓘(ℝ, Model m) ∞ M] [ContMDiffVectorBundle ∞ (Model r) E 𝓘(ℝ, Model m)] (hm : 1 ≤ m) (cU cV : OpenPartialHomeomorph M (Model m)) (hcU : cU ∈ IsManifold.maximalAtlas 𝓘(ℝ, Model m) ∞ M) (hcV : cV ∈ IsManifold.maximalAtlas 𝓘(ℝ, Model m) ∞ M) (eU eV : Trivialization (Model r) (TotalSpace.proj : TotalSpace (Model r) E → M)) [eU.IsLinear ℝ] [eV.IsLinear ℝ] (heU : eU ∈ trivializationAtlas (Model r) E) (heV : eV ∈ trivializationAtlas (Model r) E) (hU : cU.source ⊆ eU.baseSet) (hV : cV.source ⊆ eV.baseSet) (K : Set M) (hK : IsCompact K) (hKU : K ⊆ cU.source) (η : M → ℝ) (hη : ContMDiff 𝓘(ℝ, Model m) 𝓘(ℝ, ℝ) ∞ η) (hηc : HasCompactSupport η) (hηV : tsupport η ⊆ cV.source) (s : ℕ) : ∃ C : ℝ, 0 < C ∧ ∀ f : Model m → Model r, EuclideanMem s f → (∀ᵐ x ∂volume, x ∉ cU '' K → f x = 0) → EuclideanMem s (overlapTransform E cU cV eU eV η f) ∧ euclideanNorm s (overlapTransform E cU cV eU eV η f) ≤ C * euclideanNorm s f ∧ (∀ α : Fin m → ℕ, (∑ i, α i) ≤ s → ∀ k : Fin r, IsWeakDerivative ⊤ α (fun y ↦ overlapTransform E cU cV eU eV η f y k) (overlapWeakDerivative (cV.symm ≫ₕ cU).source (overlapMultiplier E cV eU eV η) (fun y ↦ cU (cV.symm y)) α f k)) ∧ (∀ g : Model m → Model r, f =ᵐ[volume] g → overlapTransform E cU cV eU eV η f =ᵐ[volume] overlapTransform E cU cV eU eV η g) ∧ (∀ ψ : Model m → Model r, ContDiff ℝ ∞ ψ → HasCompactSupport ψ → (∫ y, ∑ k : Fin r, overlapTransform E cU cV eU eV η f y k * ψ y k) = ∫ x in (cU.symm ≫ₕ cV).source, |LinearMap.det (fderiv ℝ (fun z ↦ cV (cU.symm z)) x).toLinearMap| * ∑ k : Fin r, ∑ l : Fin r, f x l * overlapMultiplier E cV eU eV η (cV (cU.symm x)) k l * ψ (cV (cU.symm x)) k)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0990874bd",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read the item node and its 7 steps, the new def-sfb-euclidean-weak-sobolev node and module, the item module, the report, and the upstream BundleSobolevSpace declarations (multiPartial, IsWeakDerivative, weakDerivative, Localization). Every node hypothesis and conclusion clause is rendered with no extra assumptions, and ∃C>0 comes before ∀f. overlapTransform is η·v_f in the V frame on κ_V(U∩V), zero elsewhere. The overlapChainCoefficient recursion (∂_i C_β + Σ_{β_j>0} ∂_i F_j C_{β−e_j}) is correct, and the derivative formula holds globally without the cutoff because everything is supported in κ_V(K∩tsupport η), compact in the overlap. The a.e. clause holds (F^{-1} preserves null sets). The duality clause is the y=F^{-1}x change of variables with |det|, transposed frame action and no orientation assumption. Edge cases r=0, K=∅, η=0, disjoint charts, s=0, m=1 hold; universes u,v are independent. New def node: correct fields, three search kinds, reuses weakDerivative; not a duplicate (Mathlib MemSobolev is Fourier/Bessel). Item changed only in lean/stmt_deps (adds only the new node); def-weil-field unchanged; statements verbatim; lines ≤100; docstrings and proof plan present; only sorry is the theorem proof. Notes: frames are trivializationAtlas members, the same convention as def-sfb-bundle-sobolev-space; the second reading is the worker's consistency pass, as accepted before. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "def-trf-resolution-word-charts",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Re-split: ILO VIII 2.3.11 and 2.3.13, pp.93--94; normalized head and local marked-ideal word gluing, corresponding to old proof steps 1--2 and the finite-image/closedness part of step 3. Detailed BMT sections 6.1--6.3 WANTED; no Stacks tag states this resolution input. Refinement: Retained-head charts and the fixed resolution-word alphabet.",
+   "via": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "definition",
+ "title": "Retained-head charts and the fixed resolution-word alphabet",
+ "statement": "For an embedded rational resolution pair and any finite history H [def-trf-admissible-embedded-history], define the alphabet ResolutionWord as WithBot (DimensionHead ×ₗ MarkedIdeal.Word), using the normalized head space [lem-trf-hilbert-samuel-smooth-dimension-profile] and the fixed marked-ideal alphabet [lem-trf-marked-ideal-numerical-resolution-engine]. Define sumResolutionWord D to fix bottom and apply sumHead D to the head while leaving the tail unchanged. For a marked ideal, freshWordEmbedded replaces only its test boundary by the empty list, and freshWordMarked retains its support, ideal and marking. Define wordStageMap to be the final-to-stage map in the intrinsic diagram, and wordEarlierCenters by ordinary pullback of every preceding center kernel followed by appending the current extended kernel, retaining identity stages. A ResolutionWordChart R H x consists of a singularity proof at x and an engine-admissible marked-ideal history covering a consecutive suffix of H from the first occurrence of its current normalized head. It specifies etale intrinsic maps over Q, pointed transition squares, center-kernel pullback equalities, the ordered earlier ideals, the pullback of coefficientHistoryBoundary [def-trf-chronological-history-boundary], and birth k+1-index(0) with truncated subtraction. The initial fresh presentation is minimal, has the actual Hilbert--Samuel level, Presents and FullMaximalOrder; every suffix stage has maximal order and the retained normalized head. Its last cosupport point maps to the specified intrinsic point. Define its tail by dropping the first entry of R.value on that history and point, and its word by prefixing the normalized intrinsic head and adjoining it as a nonbottom word. These are data definitions, with no existence, comparison, finiteness or semicontinuity assertion.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11 and 2.3.13, pp.93--94; normalized head and local marked-ideal word gluing, corresponding to old proof steps 1--2 and the finite-image/closedness part of step 3. Detailed BMT sections 6.1--6.3 WANTED; no Stacks tag states this resolution input."
+ },
+ "stmt_deps": [
+  "def-trf-admissible-embedded-history",
+  "lem-trf-hilbert-samuel-smooth-dimension-profile",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "def-trf-chronological-history-boundary"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical gluing of Hilbert Samuel resolution invariant words on finite admissible embedded resolution histories",
+   "results": "Scheme.GlueData and IdealSheafData gluing maps; no construction or theorem about the numerical resolution word prescription.",
+   "date": "2026-10-26",
+   "verdict": "no match: scheme gluing does not provide numerical invariant words, their finite images, or retained-head history charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite image and local upper bounds for glued Hilbert Samuel head and marked ideal resolution tail words",
+   "results": "PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last; IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime; Profinite.NobelingProof.GoodProducts.maxTail_isGood; localCohomology.ideal_powers_initial; PowerSeries.exist_eq_span_eq_ncard_of_X_notMem.",
+   "date": "2026-10-26",
+   "verdict": "no match: these statements concern prime chains, module filtrations, profinite products, or power series, not embedded resolution charts or words"
+  },
+  {
+   "tool": "grep",
+   "query": "rg HilbertSamuel|ResolutionWordChart|NumericalResolution lean/.lake/packages/mathlib/Mathlib",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "no match: no Mathlib Hilbert--Samuel/marked-ideal resolution interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedResolutionWordGluing",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedResolutionWordCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedResolutionWordCharts.lean",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.ResolutionWord",
+  "statement": "abbrev ResolutionWord",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.ResolutionWord",
+   "AlgebraicGeometry.HilbertSamuel.sumResolutionWord",
+   "AlgebraicGeometry.HilbertSamuel.freshWordEmbedded",
+   "AlgebraicGeometry.HilbertSamuel.freshWordMarked",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordStageMap",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.wordEarlierCenters",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.ResolutionWordChart",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.ResolutionWordChart.tail",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.ResolutionWordChart.word"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd753",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T091036-L-3301601",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd753",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T091036-L-3301601",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-trf-normalized-resolution-word-gluing node; moved defs vs published item module (identical text apart from blueprint tags); 2 new sorry statements vs item conjuncts; 3 direct importers compiled against delivered modules"
+ }
+}

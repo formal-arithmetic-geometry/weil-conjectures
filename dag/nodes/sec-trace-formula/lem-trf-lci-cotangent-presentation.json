@@ -15,7 +15,16 @@
   "def-weil-pbc-koszul-regular-sequence",
   "def-pc-module-pullback",
   "def-amb-finite-locally-free-module",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-trf-cotangent-resolution-data",
+  "def-trf-naive-cotangent-comparison-data",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-relative-differential-sheaf",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-relative-affine-space",
+  "def-pc-pullback-stalk-tensor-comparison",
+  "lem-pc-recorded-pullback-composition"
  ],
  "proof": [
   {
@@ -320,5 +329,80 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-2807728c1 (reviewer sub-agent of L); spot-checked: Read the full mathematics of all ten steps and eight new nodes against the cited Stacks sources. Repaired affine-sheaf citations in Steps 1 and 6 and completed blueprint ancestry records. Statements unchanged; no cycles or dropped route-pivot dependencies found. Detailed checks and accepted tool uses are in review.md; nine corrected JSON files are under fixes/.; 9 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LciCotangentPresentation",
+  "declaration": "AlgebraicGeometry.CotangentPresentation.exists_lciCotangentPresentation",
+  "declarations": [
+   "AlgebraicGeometry.CotangentPresentation.ringComplex",
+   "AlgebraicGeometry.CotangentPresentation.sectionArrow",
+   "AlgebraicGeometry.CotangentPresentation.restrictionSquare",
+   "AlgebraicGeometry.CotangentPresentation.SectionModel",
+   "AlgebraicGeometry.CotangentPresentation.sheafComplex",
+   "AlgebraicGeometry.CotangentPresentation.sectionMap",
+   "AlgebraicGeometry.CotangentPresentation.SchemeModel",
+   "AlgebraicGeometry.CotangentPresentation.cotangent",
+   "AlgebraicGeometry.CotangentPresentation.inverseUnit",
+   "AlgebraicGeometry.CotangentPresentation.BaseSquare",
+   "AlgebraicGeometry.CotangentPresentation.BaseSquare.sectionSquare",
+   "AlgebraicGeometry.CotangentPresentation.pullbackComplex",
+   "AlgebraicGeometry.CotangentPresentation.tildeComplexFunctor",
+   "AlgebraicGeometry.CotangentPresentation.System",
+   "AlgebraicGeometry.CotangentPresentation.System.model",
+   "AlgebraicGeometry.CotangentPresentation.System.chartSquare",
+   "AlgebraicGeometry.CotangentPresentation.System.affine",
+   "AlgebraicGeometry.CotangentPresentation.System.augmentation",
+   "AlgebraicGeometry.CotangentPresentation.System.square",
+   "AlgebraicGeometry.CotangentPresentation.System.change",
+   "AlgebraicGeometry.CotangentPresentation.ChartSquareLeftLaw",
+   "AlgebraicGeometry.CotangentPresentation.ChartSquareRightLaw",
+   "AlgebraicGeometry.CotangentPresentation.AffineFormula",
+   "AlgebraicGeometry.CotangentPresentation.AugmentationFormula",
+   "AlgebraicGeometry.CotangentPresentation.ChangeFormula",
+   "AlgebraicGeometry.CotangentPresentation.SystemLaws",
+   "AlgebraicGeometry.CotangentPresentation.derivedChange",
+   "AlgebraicGeometry.CotangentPresentation.conormalTerm",
+   "AlgebraicGeometry.CotangentPresentation.ambientDifferentials",
+   "AlgebraicGeometry.CotangentPresentation.IsKoszulImmersion",
+   "AlgebraicGeometry.CotangentPresentation.ConormalModel",
+   "AlgebraicGeometry.CotangentPresentation.ImmersionChart",
+   "AlgebraicGeometry.CotangentPresentation.ConormalChartIso",
+   "AlgebraicGeometry.CotangentPresentation.tensorModule",
+   "AlgebraicGeometry.CotangentPresentation.AffineIdentifications",
+   "AlgebraicGeometry.CotangentPresentation.pullbackCounit",
+   "AlgebraicGeometry.CotangentPresentation.LciIdentification",
+   "AlgebraicGeometry.CotangentPresentation.LciPresentation",
+   "AlgebraicGeometry.CotangentPresentation.LciIdentifications",
+   "AlgebraicGeometry.CotangentPresentation.ConormalChange",
+   "AlgebraicGeometry.CotangentPresentation.identityComplex",
+   "AlgebraicGeometry.CotangentPresentation.Properties",
+   "AlgebraicGeometry.CotangentPresentation.exists_lciCotangentPresentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LciCotangentPresentation.lean",
+  "statement": "theorem exists_lciCotangentPresentation (C : Coherence.{u}) (κ : Naive.Comparison C) : ∃ (D : System C) (F : AffineIdentifications D) (E : LciIdentifications D F κ), Properties D F κ E",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The standard-resolution Coherence and Naive.Comparison are representation data with already recorded existence theorems. The main theorem supplies the intrinsic sheaf construction and comparisons simultaneously, including a specified family E of global lci identifications. The lci, Tor-amplitude and conormal-base-change clauses refer only to this same family: affine normalizations alone do not imply uniqueness of global derived maps. No definition chooses unspecified objects or maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c957a13",
+  "group": "Q41",
+  "result": "pass",
+  "note": "H3/H6 return of 5b643677a408 fixed by option (b): a specified existential family E : LciIdentifications (one identification per LciPresentation); lci, Tor-amplitude and conormal_baseChange refer only to E, with no free N N' binders, so the non-affine V(z^2) counterexample no longer applies and the canonical NL-based family satisfies all clauses. Rest of the Lean diff is definitional (SystemLaws split into 5 Prop defs, simpler tildeComplexFunctor). Item statement, proof and stmt_deps unchanged; the two new def nodes are byte-identical to 5b64 (accepted), and the owned modules are unchanged live since 10-19. Mechanical finding: recordedDerivedPullbackComposition is asIso via the lem-pc-recorded-pullback-composition instance, a genuine dependency, PASS. Advisory: no compatibility of E with restriction to non-affine open sub-immersions (affine charts already fixed by normalization; not separately in the node). Gates OK: one sorry, docstrings, statement verbatim, lines <=100. No compile (no fix); worker reports clean 47.6/49.1 s."
+ }
 }

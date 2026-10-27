@@ -1,0 +1,341 @@
+{
+ "id": "lem-trf-lift-regular-generators-through-fibre",
+ "kind": "statement",
+ "title": "Lifting generators regular in the target along a generator-space isomorphism",
+ "statement": "Let $(R,\\mathfrak m)$ and $(S,\\mathfrak n)$ be nonzero commutative Noetherian local rings [def-weil-pbc-noetherian-ring]. Let $c:R\\to S$ be a local ring homomorphism, meaning $c(\\mathfrak m)\\subseteq\\mathfrak n$, inducing an isomorphism $k=R/\\mathfrak m\\xrightarrow{\\sim}S/\\mathfrak n$. Let $I\\subseteq\\mathfrak m$ be a finitely generated ideal, put $J=IS$, and suppose that the induced map $\\beta:I/\\mathfrak mI\\to J/\\mathfrak nJ$, $a\\bmod\\mathfrak mI\\mapsto c(a)\\bmod\\mathfrak nJ$, is a $k$-linear isomorphism. Suppose $y_1,\\ldots,y_r\\in\\mathfrak n$ is an $S$-regular sequence generating $J$ [def-weil-pbc-regular-sequence]. Then $y_1,\\ldots,y_r$ modulo $\\mathfrak nJ$ form a $k$-basis of $J/\\mathfrak nJ$. For every $k$-basis $\\bar f_1,\\ldots,\\bar f_r$ of $I/\\mathfrak mI$ and every choice of lifts $f_j\\in I$, the $f_j$ generate $I$, and $c(f_1),\\ldots,c(f_r)$ is an $S$-regular sequence generating $J$. Such bases and lifts exist, including the empty basis when $r=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066A (lemma-independence-of-generators), part (1), together with Algebra Tags 00LN (lemma-regular-quasi-regular), 061S (lemma-quasi-regular-regular), and 00DV (lemma-NAK); agent-formulated lifting consequence of a specified isomorphism on generator spaces."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-regular-ideal-residue-basis-prescribed-generator] with ring $S$, maximal ideal $\\mathfrak n$, and sequence $y$. Its first assertion gives the residue basis $([y_i])$ of $J/\\mathfrak nJ$ over $S/\\mathfrak n$, hence over $k$ through the specified residue-field isomorphism.",
+   "uses": [
+    "lem-trf-regular-ideal-residue-basis-prescribed-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LN (lemma-regular-quasi-regular), degree one, and 00SE (lemma-ci-well-defined), final paragraph."
+   }
+  },
+  {
+   "text": "The inverse images $\\beta^{-1}([y_i])$ are a basis of $I/\\mathfrak mI$: a linear relation maps to a relation in the basis $([y_i])$, and any vector maps to its linear combination. Choose representatives in $I$ using the quotient map. This proves existence of a basis with $r$ entries and of lifts. Now fix ANY such basis $([f_i])$ and ANY representatives $f_i\\in I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary basis transport through the stipulated linear isomorphism and quotient representatives."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-nakayama-local-generators] with $A=R$ and finite module $M=I$. Since the residues of the $f_i$ span $I/\\mathfrak mI$, the lifts generate $I$. Put $x_i=c(f_i)$. If $a=\\sum a_if_i\\in I$, then $c(a)=\\sum c(a_i)x_i$, so extending ideals gives $J=IS=(x_1,\\ldots,x_r)$. Also $x_i\\in\\mathfrak n$ since $I\\subseteq\\mathfrak m$ and $c$ is local.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), part (8), followed by the definition of ideal extension."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-local-generating-tuples] over the nonzero local ring $S$ to the finite $S$-module $J$ and the two generating tuples $y$ and $x$, both of length $r$. It supplies an invertible matrix $P\\in\\mathrm{GL}_r(S)$ with $x=Py$. Finiteness of $J$ follows from either displayed generating tuple. Write $B=S/J$; reducing $P$ and its inverse modulo $J$ gives mutually inverse matrices $\\bar P$ and $\\overline{P^{-1}}$ over $B$.",
+   "uses": [
+    "lem-pur-local-generating-tuples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), local generating-tuple consequence; compare More on Algebra Tag 066A (lemma-independence-of-generators), part (1)."
+   }
+  },
+  {
+   "text": "By [lem-pur-regular-sequence-graded-polynomial], the map $\\theta_y:B[T_1,\\ldots,T_r]\\to\\operatorname{gr}_J(S)$ sending $T_i$ to $[y_i]_1$ is an isomorphism. Define $\\alpha(T_i)=\\sum_j\\bar P_{ij}T_j$ and let $\\alpha$ fix $B$. Substitution using $\\overline{P^{-1}}$ is its inverse: on each variable either composite is the corresponding identity-matrix row. On coefficients and variables $\\theta_y\\alpha$ agrees with $\\theta_x$, since $[x_i]_1=\\sum_j\\bar P_{ij}[y_j]_1$. Thus the canonical graded map $\\theta_x$ is an isomorphism.",
+   "uses": [
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), part (1); explicit invertible linear substitution as in More on Algebra Tag 066A (lemma-independence-of-generators), part (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-quasi-regular-noetherian-local] to $A=S$, $b=r$, and the tuple $x$. The ring $S$ is nonzero Noetherian local, every $x_i\\in\\mathfrak n$ by Step 3, and its canonical polynomial-to-graded map is an isomorphism by Step 5. Hence $x$ is $S$-regular; Step 3 already proves it generates $J$. For $r=0$, the original empty tuple gives $J=0$, so $\\beta$ gives $I/\\mathfrak mI=0$ and Step 3 gives $I=0$. All matrices and polynomial substitutions then have zero variables, and the empty sequence is regular because $S\\ne0$.",
+   "uses": [
+    "lem-pur-quasi-regular-noetherian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S (lemma-quasi-regular-regular), with M=S; empty case by the definition of regular sequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-regular-ideal-residue-basis-prescribed-generator",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-pur-local-generating-tuples",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-quasi-regular-noetherian-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066A (lemma-independence-of-generators), part (1), expanded through the existing local generating-tuple, polynomial-graded and quasi-regular criterion nodes; Algebra Tags 00LN, 061S, 00DV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a local ring homomorphism and an isomorphism I/mI to IS/nIS, lift a regular generating sequence of IS to generators of I whose images are regular",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"leanfinder\", \"query\": \"Given a local ring homomorphism and an isomorphism I/mI to IS/nIS, lift a regular generating sequence of IS to generators of I whose images are regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isRegular_cons_iff'\"], \"digest\": \"366f8eff6cb3acd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization and permutation lemmas do not lift generators across an arbitrary local map with the stated generator-space isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal generating tuples for a complete intersection ideal over a Noetherian local ring are regular, and can be lifted across an isomorphism on generator spaces",
+   "results": "{\"t\": \"2026-10-22T06:45:51Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal generating tuples for a complete intersection ideal over a Noetherian local ring are regular, and can be lifted across an isomorphism on generator spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"IsLocalRing.isRegular_of_perm\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.IsRegular.of_perm_of_subset_jacobson_annihilator\"], \"digest\": \"6f179d2dd9fc66a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization and permutation lemmas do not lift generators across an arbitrary local map with the stated generator-space isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegular, Ideal.map",
+   "results": "{\"t\": \"2026-10-22T06:44:48Z\", \"tool\": \"loogle\", \"query\": \"IsRegular, Ideal.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization and permutation lemmas do not lift generators across an arbitrary local map with the stated generator-space isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|generat|basis).*([Rr]egular|[Cc]onormal)|([Rr]egular|[Cc]onormal).*(lift|generat)",
+   "results": "{\"t\": \"2026-10-22T06:44:47Z\", \"tool\": \"grep\", \"query\": \"(lift|generat|basis).*([Rr]egular|[Cc]onormal)|([Rr]egular|[Cc]onormal).*(lift|generat)\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\"], \"digest\": \"c5274da9d0515ad5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization and permutation lemmas do not lift generators across an arbitrary local map with the stated generator-space isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift regular generators of an extended ideal along a local homomorphism inducing an isomorphism on the ideal modulo maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:44:48Z\", \"tool\": \"leansearch\", \"query\": \"Lift regular generators of an extended ideal along a local homomorphism inducing an isomorphism on the ideal modulo maximal ideal\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|generat|basis).*([Rr]egular|[Cc]onormal)|([Rr]egular|[Cc]onormal).*(lift|generat)",
+   "results": {
+    "t": "2026-10-23T09:48:37Z",
+    "tool": "grep",
+    "query": "(lift|generat|basis).*([Rr]egular|[Cc]onormal)|([Rr]egular|[Cc]onormal).*(lift|generat)",
+    "sub": "RingTheory/Regular",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+     "Mathlib/RingTheory/Regular/ProjectiveDimension.lean"
+    ],
+    "digest": "c5274da9d0515ad5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; local Nakayama generation is already an existing leaf, and projective-dimension statements do not give the lifting and regularity assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Ideal.map",
+   "results": {
+    "t": "2026-10-23T09:48:38Z",
+    "tool": "loogle",
+    "query": "RingTheory.Sequence.IsRegular, Ideal.map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting bases of the generator space of an ideal along a local ring map to a regular generating tuple in the target",
+   "results": {
+    "t": "2026-10-23T09:48:38Z",
+    "tool": "leansearch",
+    "query": "Lifting bases of the generator space of an ideal along a local ring map to a regular generating tuple in the target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalRing.span_eq_top_of_tmul_eq_basis",
+     "Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot",
+     "PowerBasis.lift_gen",
+     "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway",
+     "Algebra.FormallySmooth.exists_lift",
+     "CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux",
+     "Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective",
+     "Module.Basis.ofIsLocalizedModule"
+    ],
+    "digest": "cd7b6a4f96235c96"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: span_eq_top_of_tmul_eq_basis gives generation only; the basis-extraction hit needs an extra tensor-injectivity hypothesis and neither proves regularity of target generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism inducing an isomorphism I modulo m I to IS modulo n IS allows lifting any basis to generators whose images form a regular sequence",
+   "results": {
+    "t": "2026-10-23T09:48:49Z",
+    "tool": "leanfinder",
+    "query": "A local homomorphism inducing an isomorphism I modulo m I to IS modulo n IS allows lifting any basis to generators whose images form a regular sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+     "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+     "RingTheory.Sequence.isWeaklyRegular_iff_Fin",
+     "Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective",
+     "RingTheory.Sequence.isWeaklyRegular_iff",
+     "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem",
+     "RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev",
+     "RingTheory.Sequence.isRegular_cons_iff'"
+    ],
+    "digest": "31b9e7151f526f3f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned localization, permutation and regularity-definition results do not give arbitrary changes of generators or lifting along the given local map."
+  },
+  {
+   "tool": "grep",
+   "query": "span_eq_top_of_tmul_eq_basis|exists_basis_of_span_of_maximalIdeal_rTensor_injective|map_mkQ_eq_top",
+   "results": {
+    "t": "2026-10-23T09:49:43Z",
+    "tool": "grep",
+    "query": "span_eq_top_of_tmul_eq_basis|exists_basis_of_span_of_maximalIdeal_rTensor_injective|map_mkQ_eq_top",
+    "sub": "RingTheory/LocalRing",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/LocalRing/Module.lean",
+     "Mathlib/RingTheory/LocalRing/Module.lean",
+     "Mathlib/RingTheory/LocalRing/Module.lean",
+     "Mathlib/RingTheory/LocalRing/Module.lean",
+     "Mathlib/RingTheory/LocalRing/Module.lean"
+    ],
+    "digest": "49625ab025151a8c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; local Nakayama generation is already an existing leaf, and projective-dimension statements do not give the lifting and regularity assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two generating lists of equal length for a complete intersection ideal in a Noetherian local ring are both regular sequences",
+   "results": {
+    "t": "2026-10-23T09:49:46Z",
+    "tool": "leanfinder",
+    "query": "Two generating lists of equal length for a complete intersection ideal in a Noetherian local ring are both regular sequences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalRing.isRegular_of_perm",
+     "IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal",
+     "RingTheory.Sequence.IsRegular.of_perm_of_subset_jacobson_annihilator",
+     "RingTheory.Sequence.isRegular_iff",
+     "RingTheory.Sequence.IsRegular",
+     "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+     "RingTheory.Sequence.isWeaklyRegular_iff_Fin",
+     "RingTheory.Sequence.isRegular_cons_iff'"
+    ],
+    "digest": "2cc2f9cba46a482c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned localization, permutation and regularity-definition results do not give arbitrary changes of generators or lifting along the given local map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completion-regular-kernel-preservation",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "lem-trf-local-term-locality.proof.md, paragraph (1) and (2), final normal-cone argument sentences; supporting local algebra in the existing completion/local-complete-intersection branch through lem-trf-regular-quotient-completion-kernel-test and lem-trf-completion-regular-kernel-preservation, the latter Step 4 (lifting regular generators). The blueprint itself does not state this commutative-algebra consequence.",
+   "via": [
+    "lem-trf-completion-regular-kernel-preservation",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lift-regular-generators-through-fibre",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six proof steps reuse the residue-basis, Nakayama, local generating-tuple, associated-graded polynomial and quasi-regular criterion nodes. Wrote explicit basis transport, ideal extension and inverse linear substitutions. No new nodes or attachments; checked arbitrary lifts and r=0.",
+  "blueprint": "lem-trf-local-term-locality.proof.md, paragraph (1) and (2), final normal-cone argument sentences; supporting local algebra in the existing completion/local-complete-intersection branch through lem-trf-regular-quotient-completion-kernel-test and lem-trf-completion-regular-kernel-preservation, the latter Step 4 (lifting regular generators). The blueprint itself does not state this commutative-algebra consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-local-generating-tuples",
+    "why": "Generic local-module change-of-generators tool supplying an invertible matrix; no statement of sk-i-curve-zero supplies this algebra fact."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic regular-sequence associated-graded isomorphism, used for the ideal J in S; supports the existing completion branch without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-quasi-regular-noetherian-local",
+    "why": "Generic Noetherian local criterion turning the explicit polynomial-to-graded isomorphism into regularity; no node of this unit gives the criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-local-generating-tuples",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-quasi-regular-noetherian-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-7ac9d3635",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-7ac9d3635 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. There are no new nodes, the statement and stmt_deps are unchanged, there is no repair note (ordinary split), proof_deps equals the union of the step uses, there is no cycle (24-node closure checked) and no SGA source. Sources read: Stacks 066A (more-algebra.tex:7712; part (1) gives only quasi-regularity, as the report says), 061S (algebra.tex:17060: quasi-regular implies regular for Noetherian local rings), 00LN, 00DV and 00SE; all tags resolve. Step 1: the same-unit residue-basis node applied to (S,n,y) gives the k-basis of J/nJ. Step 2 is elementary basis transport through β. Step 3: Nakayama Mathlib leaf with M=I finite; J=IS=(c(f_i)) and x_i in n. Step 4: lem-pur-local-generating-tuples applied to J over the nonzero local ring S with two length-r tuples gives P in GL_r. Step 5: θ_y is an isomorphism by lem-pur-regular-sequence-graded-polynomial; the linear substitution α is invertible and θ_x=θ_y∘α is checked on generators. Step 6: lem-pur-quasi-regular-noetherian-local hypotheses (Noetherian local, x_i in n, canonical isomorphism) all hold. r=0 is handled. The parent completion-regular-kernel-preservation step 4 uses exactly the stated conclusion. Edge cases checked: r=0, r=1 with I=(t^2), a non-flat c. No duplicate in the DAG (rg -L for 066A, independence-of-generators, minimal-generator regularity). Accepted tool_uses: the three generic lem-pur algebra nodes; the unit route is not replaced."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LiftRegularGeneratorsThroughFibre",
+  "declaration": "Ideal.lift_regular_generators_through_fibre",
+  "file": "lean/Sheaf/RingTheory/LiftRegularGeneratorsThroughFibre.lean",
+  "statement": "theorem lift_regular_generators_through_fibre {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S] (c : R →+* S) [IsLocalHom c] (σ : (R ⧸ IsLocalRing.maximalIdeal R) ≃+* (S ⧸ IsLocalRing.maximalIdeal S)) (hσ : ∀ a : R, σ (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R) a) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal S) (c a)) (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) (hIfg : I.FG) (β : (I ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R I))) →ₛₗ[σ.toRingHom] ((I.map c) ⧸ (IsLocalRing.maximalIdeal S • (⊤ : Submodule S (I.map c))))) (hβbij : Function.Bijective β) (hβ : ∀ a : I, β (Submodule.Quotient.mk a) = Submodule.Quotient.mk (⟨c a, Ideal.mem_map_of_mem c a.property⟩ : I.map c)) (r : ℕ) (y : Fin r → I.map c) (hy : ∀ i : Fin r, (y i).val ∈ IsLocalRing.maximalIdeal S) (hyreg : RingTheory.Sequence.IsRegular S (List.ofFn (fun i ↦ (y i).val))) (hygen : Ideal.span (Set.range (fun i ↦ (y i).val)) = I.map c) : (∃ b : Module.Basis (Fin r) (R ⧸ IsLocalRing.maximalIdeal R) (I ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R I))), ∀ i : Fin r, β (b i) = Submodule.Quotient.mk (y i)) ∧ (∀ (b : Module.Basis (Fin r) (R ⧸ IsLocalRing.maximalIdeal R) (I ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R I)))) (f : Fin r → I), (∀ i : Fin r, Submodule.Quotient.mk (f i) = b i) → Ideal.span (Set.range (fun i ↦ (f i).val)) = I ∧ RingTheory.Sequence.IsRegular S (List.ofFn (fun i ↦ c (f i))) ∧ Ideal.span (Set.range (fun i ↦ c (f i))) = I.map c) ∧ (∃ (b : Module.Basis (Fin r) (R ⧸ IsLocalRing.maximalIdeal R) (I ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R I)))) (f : Fin r → I), ∀ i : Fin r, Submodule.Quotient.mk (f i) = b i)",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77b87c4dd",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Lean statement exact against node and Stacks 066A(1)+061S: Noetherian local rings (nonzero via IsLocalRing), IsLocalHom c, sigma and beta fixed to the induced maps by hσ/hβ (beta bijective sigma-semilinear), J = I.map c, y in n, regular and generating; conclusions: basis clause via beta(b i)=[y i] (equivalent to [y_i] being a k-basis of J/nJ), every basis and every lift generate I with c∘f regular and generating J, existence including r=0. Records: stmt_deps unchanged, lean.statement verbatim, docstrings with source/blueprint/six steps, sorry only, no defs, imported proof-dep modules exist, no duplicate. Only fault H11: the second reading is an author self-check ('No independent worker reading is claimed') -> fixes/lem-trf-lift-regular-generators-through-fibre.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean change, no compile needed."
+ }
+}

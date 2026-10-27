@@ -1,0 +1,155 @@
+{
+ "id": "lem-zl-bertini-fibre-jet-comparison",
+ "kind": "statement",
+ "title": "Compare the universal equation and differential with the tensor of local first jets",
+ "statement": "Use the smooth source f:Y -> Spec k, invertible L, finite sections s_i, source open U and point z, frame e on W containing U.ι(z), actual singular fibre T, coordinate map rho and local jets of [lem-zl-bertini-singular-fibre-coordinates] and [lem-zl-bertini-local-first-jets]. Let p be the ambient projection from coefficient affine space times Y, M the tensor pullback of L, V the inverse image of W, and g:T -> coefficient affine space times Y the canonical composite [def-zl-bertini-universal-family]. Then g maps T into V, and there is a free generator ep of M on V. Let F be the coefficient of the restricted universal section in ep. There is an injective additive map J from Gamma(T,O_T) tensor over kappa_U(z) (kappa_U(z) plus bertiniCotangentFibre f U z) into Gamma(T,O_T) times Gamma(T,g^*Omega_p). This map sends the sum of rho(X_i) tensor the local first jets of the e-coefficients of s_i to the pair consisting of g^*F and g^*(dF), restricted to the top open. This is an identity of sections, asserting no vanishing and using no nonsmoothness criterion.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, universal-family final paragraph; Morphisms Tag 01V0, lemma-base-change-differentials"
+ },
+ "stmt_deps": [
+  "lem-zl-bertini-singular-fibre-coordinates",
+  "lem-zl-bertini-local-first-jets",
+  "def-zl-bertini-universal-family",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use uniqueness of left adjoints to transfer the ordinary pullback free-generator theorem to the section-normalized tensor pullback. Naturality of its unit and the coefficient identity give F=sum_i x_i pr_Y^*(a_i). This is proved in the private helpers tensor_unit_free and tensor_frame_expansion.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-zl-bertini-universal-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre square and restriction inclusion give g followed by the source projection = h followed by the residue-point morphism and U inclusion. This proves the image is in V. Evaluate the coordinate-map projection identity on X_i and use naturality of GammaSpecIso to identify g^*x_i with rho(X_i). Evaluate source sections through the residue-point morphism to identify g^*a with the value part of its local jet, using rho(C) as scalar action.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-zl-bertini-singular-fibre-coordinates",
+    "lem-zl-bertini-local-first-jets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-fibre differential-sections comparison to obtain an injective A-linear D on A tensor the cotangent fibre, with its formula on differential germs. Combine D with tensor cancellation A tensor K = A and tensor distribution over a product to construct J; injectivity follows from injectivity of its two components.",
+   "uses": [
+    "lem-zl-source-fibre-differential-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relative derivation kills restrictions of every coordinate pulled back from the coefficient base. Leibniz and additivity therefore express the pulled-back derivative of F as sum_i rho(X_i) times the pulled-back derivative of pr_Y^*a_i. Apply the pure-tensor formula of D termwise; the value calculation proves the other component. This gives the unchanged displayed pair.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-pc-module-pullback",
+    "lem-zl-bertini-local-first-jets"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-sc-relative-differential-sheaf",
+  "def-zl-bertini-universal-family",
+  "lem-zl-bertini-local-first-jets",
+  "lem-zl-bertini-singular-fibre-coordinates",
+  "lem-zl-source-fibre-differential-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini final paragraph: frame expansion and Leibniz rule, with the differential-only comparison isolated as lem-zl-source-fibre-differential-sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The universal equation and its differential on a source fibre identify with the tensor of value-and-differential first jets",
+   "results": "KaehlerDifferential.baseChange_jacobian; cotangentComplexBaseChange; mapBaseChange_tmul",
+   "date": "2026-10-26",
+   "verdict": "Algebraic base-change formulas, no scheme-level fibre comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.prodRight",
+   "results": "TensorProduct.prodRight; TensorProduct.prodRight_tmul; distribution over a product",
+   "date": "2026-10-26",
+   "verdict": "Useful algebraic product identification, does not identify the geometric differential sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of differentials under base change of schemes",
+   "results": "KaehlerDifferential.tensorKaehlerEquiv; isBaseChange; Scheme.Modules.pullback",
+   "date": "2026-10-26",
+   "verdict": "Use the existing project RelativeDifferentialSheafBaseChange theorem; no direct jet comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackSection|relativeDifferentialsBaseChange|bertiniLocalFirstJet in lean/WeilConjectures and lean/Sheaf",
+   "results": "TensorPullbackSectionAdjunction; RelativeDifferentialSheafBaseChange; BertiniLocalFirstJets; BertiniSingularFibreCoordinates",
+   "date": "2026-10-26",
+   "verdict": "These supply the ingredients, but none states the comparison identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularFibreJetTensor",
+  "date": "2026-10-26",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Compare the universal equation and differential with the tensor of local first jets; a step of the universal first-jet argument in Tag 0FD6",
+   "via": [
+    "lem-zl-bertini-singular-fibre-jet-tensor",
+    "lem-zl-bertini-singular-fibre-polynomial-equations",
+    "lem-zl-bertini-singular-fibre-equations",
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniFibreJetComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniFibreJetComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_bertini_fibre_jet_comparison",
+  "declarations": [
+   "AlgebraicGeometry.exists_bertini_fibre_jet_comparison"
+  ],
+  "statement": "theorem exists_bertini_fibre_jet_comparison\n    {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (.of k)) [Smooth f] (L : Y.Modules) [L.IsInvertible]\n    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤))\n    (U : Y.Opens) (z : U) (W : Y.Opens) (hz : U.ι z ∈ W)\n    (e : Γ(L, W)) (he : Scheme.Modules.IsFreeGenerator e) :\n    let c := Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial I k))\n    let p := pullback.fst c f\n    let M := (Scheme.Modules.tensorPullback (pullback.snd c f)).obj L\n    let V := (pullback.snd c f) ⁻¹ᵁ W\n    let t := (bertiniSingularToSource f L s ∣_ U).fiberι z ≫\n      ((bertiniSingularToSource f L s) ⁻¹ᵁ U).ι\n    let j := (bertiniSingularIdeal f L s).subschemeι ≫\n      (bertiniUniversalIdeal f L s).subschemeι\n    let g := t ≫ j\n    let K := (U : Scheme).residueField z\n    let A := Γ((bertiniSingularToSource f L s ∣_ U).fiber z, ⊤)\n    let ρ := bertiniSingularFibreRingMap f L s U z\n    letI : Algebra K A := (ρ.comp MvPolynomial.C).toAlgebra\n    ∃ (hV : (⊤ : ((bertiniSingularToSource f L s ∣_ U).fiber z).Opens) ≤ g ⁻¹ᵁ V)\n      (ep : Γ(M, V)) (hep : Scheme.Modules.IsFreeGenerator ep),\n      let F := hep.coeff (M.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op\n        (bertiniUniversalSection f L s))\n      ∃ J : (A ⊗[K] (K × bertiniCotangentFibre f U z)) →+\n          (A × Γ((Scheme.Modules.tensorPullback g).obj p.relativeDifferentials, ⊤)),\n        Function.Injective J ∧\n        J (∑ i, ρ (MvPolynomial.X i) ⊗ₜ[K]\n          bertiniLocalFirstJet f U z W hz\n            (he.coeff (L.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op (s i)))) =\n          (g.appLE V ⊤ hV F,\n            ((Scheme.Modules.tensorPullback g).obj p.relativeDifferentials).presheaf.map\n              (homOfLE hV).op (Scheme.Modules.tensorPullbackSection g p.relativeDifferentials\n                V (p.relativeDifferentialsDerivation.d (X := Opposite.op V) F)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T114216-L-2273955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261026T130519-L-3470586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

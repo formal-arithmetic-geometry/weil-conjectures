@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-scheme-large-algclosed-jacobson",
+ "kind": "statement",
+ "title": "Large algebraically closed extensions make arbitrary schemes Jacobson",
+ "statement": "Let $k$ be a field [def-weil-field] and $U$ any scheme over $\\operatorname{Spec}k$ [def-pc-scheme]. There exists an algebraically closed field extension $K/k$ [def-weil-algebraic-closure, def-pc-field-extension] such that $U_K=U\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-fibre-product] has both properties: (i) for every closed subset $Z$ of the underlying topological space of $U_K$, the closed points of $U_K$ lying in $Z$ are dense in $Z$; (ii) for every closed point $u$ of $U_K$, the structure map $K\\to\\kappa(u)$ is an isomorphism. Closed points and residue fields are [def-weil-closed-points, def-weil-residue-field]. There is no finite-type, quasi-compactness, reducedness or separatedness hypothesis on $U$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0479 (lemma-make-Jacobson), with an algebraically closed extension of sufficiently large cardinality; the rational-point corollary is used explicitly in Tag 0B8E (spaces-more-groupoids, lemma-group-space-scheme-over-kbar)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-weil-closed-points",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose a set-indexed affine open cover $U=\\bigcup_{i\\in J}\\operatorname{Spec}A_i$, with each $A_i$ a $k$-algebra, using [def-pc-scheme]. Apply [lem-coef-small-family-regular-bound] to the underlying sets of the $A_i$ to choose an infinite cardinal $\\lambda$ strictly larger than $|\\coprod_i A_i|$. Thus $|A_i|<\\lambda$ for every $i$. By [lem-sfb-algclosed-extension-cardinal-lower-bound], choose an algebraically closed field extension $K/k$ with $\\lambda\\leq |K|$. This chooses one field for the entire cover, including when $J$ is infinite; for an empty cover the same construction still chooses a field.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-coef-small-family-regular-bound",
+    "lem-sfb-algclosed-extension-cardinal-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0479 (lemma-make-Jacobson), first and second proof paragraphs; replace the written maximum by a strict cardinal upper bound on the disjoint union."
+   }
+  },
+  {
+   "text": "Let $p:U_K\\to U$ be the projection. Apply [lem-weil-pbc-affine-chart-base-change-iso] with $S=\\operatorname{Spec}k$, $W=S$, $V=\\operatorname{Spec}A_i$, $T=\\operatorname{Spec}K$, and rings $R=k$, $A=K$, $B=A_i$. It gives $p^{-1}(V)\\cong\\operatorname{Spec}B_i$, where $B_i=K\\otimes_k A_i$, with its specified $K$-structure. The elements $1\\otimes a$, indexed by $a\\in A_i$, generate $B_i$ as a $K$-algebra: a pure tensor $c\\otimes a$ is $c(1\\otimes a)$, and every tensor is a finite sum of pure tensors. Since $|A_i|<|K|$, [lem-sfb-cardinal-generator-nullstellensatz] makes $B_i$ Jacobson and makes every maximal quotient $B_i/\\mathfrak m$ algebraic over $K$.",
+   "uses": [
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-sfb-cardinal-generator-nullstellensatz"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046V (lemma-base-change-Jacobson), proof applying Tag 00FU (theorem-uncountable-nullstellensatz); affine charts are Schemes Tags 01JR and 01I4."
+   }
+  },
+  {
+   "text": "The opens $p^{-1}(\\operatorname{Spec}A_i)$ cover $U_K$, since inverse images preserve unions. Clause (1) of [lem-sfb-jacobson-spectrum-open-cover] makes each chart a Jacobson topological space, using step 2. Clause (2) of the same node then makes $U_K$ Jacobson. Written out, this is exactly conclusion (i): for any closed subset $Z$ of $U_K$, its intersection with the closed points of $U_K$ is dense in $Z$.",
+   "uses": [
+    "lem-sfb-jacobson-spectrum-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P3 (lemma-affine-jacobson); Tag 01P4 (lemma-locally-jacobson), equivalence (1) and (5)."
+   }
+  },
+  {
+   "text": "For a closed point $u\\in U_K$, choose a chart $\\operatorname{Spec}B_i$ containing it. The singleton $\\{u\\}$ remains closed in this open subspace. Under the spectrum description [def-weil-affine-spectrum] it therefore corresponds to a maximal ideal $\\mathfrak m$: the closure of a prime $\\mathfrak p$ consists of the primes containing $\\mathfrak p$, so a closed singleton is maximal. Restricting the structure sheaf to an open leaves its stalk unchanged. By [def-weil-residue-field], $\\kappa(u)=(B_i)_{\\mathfrak m}/\\mathfrak m(B_i)_{\\mathfrak m}=B_i/\\mathfrak m$: localization does nothing to the field $B_i/\\mathfrak m$, because all denominators have nonzero classes. These identifications commute with the structural map from $K$. Thus step 2 makes $\\kappa(u)/K$ algebraic.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0479 (lemma-make-Jacobson), last proof sentence; the affine residue identification is the local-ring definition."
+   }
+  },
+  {
+   "text": "Because $K$ is algebraically closed [def-weil-algebraic-closure], every nonzero polynomial over $K$ factors into a nonzero constant times linear factors, by successively taking a root and dividing by its linear factor. For $\\alpha\\in\\kappa(u)$ choose a nonzero annihilating polynomial, using step 4. Its degree is positive because the field homomorphism $K\\to\\kappa(u)$ is injective [def-pc-field-extension]. Evaluating the factorization in the field $\\kappa(u)$, one linear factor must vanish, so $\\alpha$ is the image of an element of $K$. Thus the structural homomorphism is surjective as well as injective, proving (ii).",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), the sentence following the appeal to Varieties Tag 0479; algebraically closed fields have no proper algebraic field extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-coef-small-family-regular-bound",
+  "lem-sfb-algclosed-extension-cardinal-lower-bound",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-sfb-cardinal-generator-nullstellensatz",
+  "lem-sfb-jacobson-spectrum-open-cover",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0479 (lemma-make-Jacobson), using Algebra Tags 046V and 00FU and Properties Tags 01P3 and 01P4; rationality as in Tag 0B8E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme over a field becomes Jacobson with rational closed points after a sufficiently large algebraically closed field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y],\\n  JacobsonSpace ↥X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {R : CommRingCat} [IsJacobsonRing ↑R], JacobsonSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a Jacobson ring (i.e., every prime ideal of $ R $ is the intersection of maximal ideals containing it), the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsJacobsonRing R],\\n  JacobsonSpace ↥(AlgebraicGeometry.Spec { carrier := R, commRing := inst })\", \"doc\": \"If $ R $ is a Jacobson ring, then the topological space underlying the scheme $ \\\\operatorname{Spec}(R) $ is a Jacobson space. This means that every prime ideal of $ R $ is the intersection of the maxi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [JacobsonSpace ↥Y] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  closedPoints ↥X ⊆ ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' closedPoints ↥Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given any scheme over a field there exists an algebraically closed extension making its base change Jacobson and every closed point rational without finite type assumptions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"(f : X ⟶ Y) [LocallyOfFiniteType f] [JacobsonSpace Y] : JacobsonSpace X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [JacobsonSpace Y] [LocallyOfFiniteType f] : closedPoints X ⊆ f ⁻¹' closedPoints Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"finite_of_finite_type_of_isJacobsonRing\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"(R S : Type*) [CommRing R] [Field S] [Algebra R S] [IsJacobsonRing R] [Algebra.FiniteType R S] : Module.Finite R S\", \"doc\": \"If $ R $ is a Jacobson ring, $ S $ is a field equipped with an $ R $-algebra structure, and $ S $ is finitely generated as an $ R $-algebra, then $ S $ is finitely generated as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsJacobsonRing R] : JacobsonSpace (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a Jacobson ring, then the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Jacobson space. This means that every closed irreducible subset of $ \\\\operatorna\"}\n  {\"name\": \"isJacobsonRing_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"[Algebra R S] [Algebra.IsIntegral R S] [IsJacobsonRing R] : IsJacobsonRing S\", \"doc\": \"If $ R $ is a Jacobson ring and $ S $ is an $ R $-algebra such that every element of $ S $ is integral over $ R $, then $ S $ is also a Jacobson ring. This means that for such $ S $, every prime ideal\"}\n  {\"name\": \"closure_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"[JacobsonSpace X] : closure (closedPoints X) = Set.univ\", \"doc\": \"In a Jacobson space $ X $, the closure of the set of closed points of $ X $ is equal to the universal set $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Jacobson\", \"IsAlgClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "make.?Jacobson|base.?change.?Jacobson|cardinal.*[Jj]acobson|[Jj]acobson.*cardinal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "uncountable|nullstellensatz|cardinal.*[Jj]acobson|[Jj]acobson.*cardinal",
+   "results": "25 hits; Mathlib/Data/Countable/Basic.lean; Mathlib/Data/Countable/Basic.lean; Mathlib/Data/Countable/Basic.lean; Mathlib/Data/Countable/Basic.lean; Mathlib/Data/Countable/Basic.lean; Mathlib/Data/Countable/Small.lean; Mathlib/Data/Countable/Small.lean; Mathlib/Data/Countable/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every scheme becomes Jacobson with rational closed points over a sufficiently large algebraically closed field extension",
+   "results": "8 hits; PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace; jacobsonSpace_iff_locallyClosed; AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace; jacobsonSpace_iff; AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints; JacobsonSpace.mk; RingHom.FiniteType.isJacobsonRing; isJacobsonRing_of_finiteType",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Jacobson\", \"IsAlgClosed\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any scheme over a field becomes Jacobson with algebraic residue fields after base change to a field of sufficiently large cardinality",
+   "results": "8 hits; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing; AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; isJacobsonRing_of_finiteType; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.isField_of_universallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "[Jj]acobson|[Nn]ullstellensatz",
+   "results": "6 hits; Mathlib/FieldTheory/JacobsonNoether.lean; Mathlib/FieldTheory/JacobsonNoether.lean; Mathlib/FieldTheory/JacobsonNoether.lean; Mathlib/FieldTheory/JacobsonNoether.lean; Mathlib/FieldTheory/JacobsonNoether.lean; Mathlib/FieldTheory/RatFunc/Luroth.lean; source directory Mathlib/FieldTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After extending scalars a scheme with no finiteness assumptions has dense rational closed points over a sufficiently large algebraically closed field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap.dense_domain; AlgebraicGeometry.Scheme.Hom.denseRange; AlgebraicGeometry.Scheme.PartialMap.dense_domain; AlgebraicGeometry.IsDominant.denseRange; AlgebraicGeometry.dominant_eq_topologically; AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.isDominant_iff; AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-type Jacobson results, spectrum/open-cover criteria or density of rational-map domains do not supply this field extension for an arbitrary scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-group-space-geometric-scheme",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas.",
+   "via": [
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-large-algclosed-jacobson",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-scheme statement from a single cardinal bound on all affine chart rings, cardinal enlargement of an algebraically closed extension, the cardinal-generator Nullstellensatz and Jacobson gluing. Reused the existing affine-chart base-change node. Kept rationality as the elementary algebraically-closed-field argument. The statement is unchanged. Corrected the nonexistent maximum of an arbitrary family of cardinal bounds in the source proof by using a strict bound on a disjoint union.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), auxiliary chain recorded by blueprint.from.place: large algebraically closed field for a scheme atlas in Stacks 0B8E. The ancestor command returns None because the created.item chain terminates at the module Sheaf.SixFunctors.CtfStabilityDirectImages; retain that existing from.node and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine fibre-product coordinates, applied over Spec k to identify the field-base-changed affine charts and their K-structure. The unit has no alternate chart-coordinates node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-chart-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-92319dab1",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-92319dab1 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the sources: Stacks 0479 (varieties.tex:2700), 046V, 00FU and 00FT (algebra.tex:6873-6963), 01P3/01P4 and 005W, 09GT; tags checked in tags/tags; no SGA. This is the first delivery: live is unsplit, there is no repair note and no parallel split. The statement and stmt_deps are unchanged. Step 1: the Mathlib leaf lem-coef-small-family-regular-bound gives an infinite λ in U with |∐A_i|<λ, so |A_i|<λ≤|K| on every chart; replacing Stacks' max by this one bound is a correct minor repair. Step 2: the hypotheses of lem-weil-pbc-affine-chart-base-change-iso hold with W=S=Spec k, T=Spec K, A=K, B=A_i; its q-formula gives the correct K-structure. The elements 1⊗a generate B_i and there are fewer than |K| of them, so the 00FU node applies. Step 3: the leaf's clause (1) and the open-cover clause (2) together give exactly (i). Steps 4 and 5 are correctly elementary: a globally closed point is closed in its chart, so it is a maximal ideal and κ=B/m, and an algebraic extension of an algebraically closed field is trivial. New nodes: the cardinal-extension node is true (algebraic closure of Frac k[X_t]) and needs the transcendental step for k finite. The 00FU node is exactly Stacks; I tested I empty, F finite with I finite, and the zero algebra. Neither restates the item, and the DAG-wide search found no duplicates. The tool use of affine-chart-base-change-iso is accepted as generic. FIX (B6/B8): the leaf lem-sfb-jacobson-spectrum-open-cover states clause (1) in prime form, while Mathlib's IsJacobsonRing is the radical-ideal form; its `how` now also names isJacobsonRing_iff_prime_eq (Mathlib/RingTheory/Jacobson/Ring.lean:73-74). Only `how` changed, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-jacobson-spectrum-open-cover.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LargeAlgClosedJacobson",
+  "declaration": "AlgebraicGeometry.Scheme.exists_algClosed_extension_jacobson_rational",
+  "file": "lean/Sheaf/AlgebraicGeometry/LargeAlgClosedJacobson.lean",
+  "statement": "theorem exists_algClosed_extension_jacobson_rational (k : Type u) [Field k] (U : Scheme.{u}) (f : U ⟶ Spec (.of k)) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K), IsAlgClosed K ∧ JacobsonSpace ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ ∀ x : ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))), x ∈ closedPoints ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) → Function.Bijective ((pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).residueFieldAlgebraMap x)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4656492e",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0479/0B8E: k:Type u field, U:Scheme.{u} with f:U⟶Spec k, ∃ K:Type u with Field/Algebra k K, IsAlgClosed K (not IsAlgClosure, correctly allowing transcendental K); U_K = pullback f (Spec.map (algebraMap k K)) used identically throughout; (i) JacobsonSpace = ∀ closed Z, closure(Z∩closedPoints)=Z (Mathlib JacobsonSpace.lean:72); (ii) ∀ closed x, Bijective of canonical (pullback.snd).residueFieldAlgebraMap x (STATE RESIDUE FIELD convention, ZetaSeries.lean:224). Universe u suffices since chart rings are u-small; empty scheme/empty Z/infinite covers/finite k covered. Node unchanged vs live except new lean record; statement verbatim; single sorry; docstrings with source, blueprint id and 5 proof steps; proof-dep imports exist; no existing declaration or name collision. No findings."
+ }
+}

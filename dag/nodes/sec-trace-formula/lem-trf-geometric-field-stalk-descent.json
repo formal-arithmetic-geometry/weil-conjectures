@@ -39,59 +39,30 @@
    }
   },
   {
-   "text": "Fix any prime $\\mathfrak q$ of $S$ contracting to $\\mathfrak p$. It contains every $a\\otimes\\lambda$ with $a\\in\\mathfrak p$, since $a\\otimes\\lambda=(a\\otimes1)(1\\otimes\\lambda)$. The bilinear map $(\\bar t,\\lambda)\\mapsto(t\\otimes\\lambda)\\bmod\\mathfrak q$ is therefore well defined and induces a surjection $F\\otimes_k\\Omega\\twoheadrightarrow S/\\mathfrak q$. If $e_1,\\ldots,e_d$ is a $k$-basis of $F$, the elements $e_i\\otimes1$ span this tensor product over $\\Omega$: expand each first factor of a pure tensor in that basis. Hence $S/\\mathfrak q$ is finite dimensional over $\\Omega$. It is a nonzero domain, so [lem-weil-pbc-finite-dimensional-domain-is-field] makes it a field. Thus $\\mathfrak q$ is maximal.",
+   "text": "For every prime $\\mathfrak q$ of $S$ over $\\mathfrak p$, apply [lem-trf-finite-residue-geometric-prime] using the finite extension $F/k$ from step 1. Its quotient and residue-field conclusions show that $\\mathfrak q$ is maximal and identify $\\kappa(\\mathfrak q)$ with $\\Omega$ through its structural map.",
    "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "lem-weil-pbc-finite-dimensional-domain-is-field"
+    "lem-trf-finite-residue-geometric-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FV (theorem-nullstellensatz), finiteness over an algebraically closed field; explicit finite spanning argument."
+    "place": "Tag 00FV (theorem-nullstellensatz), finite residue field and algebraically closed case; explicit tensor-quotient version of the finite-dimensional argument in the geometric field-stalk descent, original proof steps 3-4."
    }
   },
   {
-   "text": "Write $D=S/\\mathfrak q$, now a finite-dimensional field extension of $\\Omega$. For $x\\in D$, linear dependence of $1,x,\\ldots,x^{\\dim_\\Omega D}$ gives a nonzero polynomial $P\\in\\Omega[X]$ with $P(x)=0$. By [lem-weil-alg-closed-linear-factorization], $P=c\\prod_i(X-a_i)$ with $c\\ne0$. Evaluating in the field $D$ gives $0=c\\prod_i(x-a_i)$, so some $x=a_i$ (the constant-polynomial case cannot vanish). Thus the structural map $\\Omega\\to D$ is surjective and, as a field homomorphism, injective. The residue field $\\kappa(\\mathfrak q)$ equals $D$ canonically: localizing the field $D$ at the images of $S\\setminus\\mathfrak q$ only inverts nonzero elements. This proves the asserted structural $\\Omega$-algebra identification for every such prime.",
+   "text": "Choose the prime in the conditional hypothesis, and set $A=T_{\\mathfrak p}$, $B=S_{\\mathfrak q}$. The map $T\\to S$ is flat by step 2 and [def-weil-pbc-faithfully-flat-ring-map]. The given $\\Omega$-algebra isomorphism makes $B$ a field. Apply [lem-trf-flat-localized-field-descent] to obtain the canonical residue isomorphism $A\\xrightarrow{\\sim}F$.",
    "uses": [
-    "lem-weil-alg-closed-linear-factorization",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FV (theorem-nullstellensatz), algebraically closed case; factorization and evaluation."
-   }
-  },
-  {
-   "text": "Choose a prime in the hypothesis and put $A=T_{\\mathfrak p}$, $B=S_{\\mathfrak q}$. Since $t\\notin\\mathfrak p$ implies $t\\otimes1\\notin\\mathfrak q$, the map $T\\to B$ factors through a local map $f:A\\to B$: a fraction with numerator in $\\mathfrak p$ maps to the maximal ideal of $B$. The map $T\\to S$ is flat by its faithful flatness in step 2. The localization $S\\to B$ is flat by [lem-weil-pbc-localization-flat], hence $T\\to B$ is flat by [lem-weil-pbc-flat-ring-map-comp]. Now [lem-weil-pbc-flat-over-localization] applied to $T\\to A$ shows $f$ is flat. Apply [lem-weil-pbc-flat-local-hom-faithfully-flat] to $f$, and then [lem-weil-pbc-faithfully-flat-ideal-contraction] with zero ideal: $f$ is injective.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-faithfully-flat-ring-map",
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-flat-ring-map-comp",
-    "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+    "lem-trf-flat-localized-field-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HT (lemma-flat-localization), parts (1),(2); Tag 00HC (lemma-composition-flat); Tag 00HR (lemma-local-flat-ff); Tag 05CK (lemma-faithfully-flat-universally-injective)."
+    "place": "Tag 00HT (lemma-flat-localization), parts (1),(2); Tag 00HR (lemma-local-flat-ff); Tag 05CK (lemma-faithfully-flat-universally-injective), zero-ideal case. Application to a field upstairs is the local-ring argument of Curves lemma-nodal, arbitrary-field descent paragraph."
    }
   },
   {
-   "text": "The hypothesis identifies $B$ with the field $\\Omega$ as an $\\Omega$-algebra, so its maximal ideal is zero. Locality of $f$ and its injectivity give $\\mathfrak pA=0$. The residue homomorphism $A\\to F$ sends $t/s$ to $\\bar t/\\bar s$ and is surjective (every $\\bar t$ is the image of $t/1$); its kernel is $\\mathfrak pA$, since $\\bar s\\ne0$. Consequently this residue map is an isomorphism $A\\cong F$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D (lemma-nodal), arbitrary-field paragraph: descent of the field local ring."
-   }
-  },
-  {
-   "text": "For every extension field $H/\\Omega$, the $\\Omega$-algebra identification $B\\cong\\Omega$ gives $B\\otimes_\\Omega H\\cong H$, by $b\\otimes h\\mapsto b h$ and inverse $h\\mapsto1\\otimes h$. This ring is reduced because a field has no nonzero nilpotents. Apply [lem-trf-geometric-reducedness-local-base-change] with $R=T$, $L=\\Omega$, and the chosen prime $\\mathfrak q$. Its condition (2) has just been verified, so $A\\otimes_kE$ is reduced for every extension field $E/k$. In particular $A\\otimes_k\\Omega$ is reduced. The residue isomorphism of step 6, tensored with the identity, identifies this ring with $F\\otimes_k\\Omega$.",
+   "text": "For every extension field $H/\\Omega$, the $\\Omega$-algebra identification $B\\cong\\Omega$ gives $B\\otimes_\\Omega H\\cong H$, by $b\\otimes h\\mapsto b h$ and inverse $h\\mapsto1\\otimes h$. This ring is reduced because a field has no nonzero nilpotents. Apply [lem-trf-geometric-reducedness-local-base-change] with $R=T$, $L=\\Omega$, and the chosen prime $\\mathfrak q$. Its condition (2) has just been verified, so $A\\otimes_kE$ is reduced for every extension field $E/k$. In particular $A\\otimes_k\\Omega$ is reduced. The residue isomorphism of step 4, tensored with the identity, identifies this ring with $F\\otimes_k\\Omega$.",
    "uses": [
     "lem-trf-geometric-reducedness-local-base-change",
     "def-weil-pbc-module-tensor-product"
@@ -103,7 +74,7 @@
    }
   },
   {
-   "text": "Apply [lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable] to the finite extension $F/k$ of step 1 and the reduced tensor product of step 7. It yields separability in the sense of [def-weil-pbc-separable-field-extension]. For a finite extension this gives separability algebraic as required: choose the finitely generated subextension $F$ itself in clause (2) (a finite $k$-basis generates $F$ as a field), and observe that its transcendence basis in clause (1) must be empty because $F/k$ is algebraic. Algebraicity follows from linear dependence of the powers of each element in the finite-dimensional $k$-space $F$. Thus the resulting separable algebraic extension over $k(\\varnothing)=k$ is exactly $F/k$ [def-weil-pbc-separable-algebraic-extension]. Together with step 6 this proves the conditional conclusion.",
+   "text": "Apply [lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable] to the finite extension $F/k$ of step 1 and the reduced tensor product of step 5. It yields separability in the sense of [def-weil-pbc-separable-field-extension]. For a finite extension this gives separability algebraic as required: choose the finitely generated subextension $F$ itself in clause (2) (a finite $k$-basis generates $F$ as a field), and observe that its transcendence basis in clause (1) must be empty because $F/k$ is algebraic. Algebraicity follows from linear dependence of the powers of each element in the finite-dimensional $k$-space $F$. Thus the resulting separable algebraic extension over $k(\\varnothing)=k$ is exactly $F/k$ [def-weil-pbc-separable-algebraic-extension]. Together with step 4 this proves the conditional conclusion.",
    "uses": [
     "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
     "def-weil-pbc-separable-field-extension",
@@ -120,17 +91,11 @@
   "lem-weil-pbc-zariski-lemma",
   "lem-weil-pbc-field-extension-base-change-faithfully-flat",
   "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
-  "lem-weil-alg-closed-linear-factorization",
-  "def-weil-pbc-localization-at-prime",
+  "lem-trf-finite-residue-geometric-prime",
   "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-flat-ring-map-comp",
-  "lem-weil-pbc-flat-over-localization",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-trf-flat-localized-field-descent",
   "lem-trf-geometric-reducedness-local-base-change",
+  "def-weil-pbc-module-tensor-product",
   "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
   "def-weil-pbc-separable-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
@@ -241,11 +206,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-geometric-field-stalk-descent",
   "worker": "stage1",
-  "summary": "Split the geometric field-stalk descent into finiteness, existence and residue-field identification, flat local injectivity, identification via the residue map, geometric reducedness descent and separability. One new statement-only general local-ring base-change lemma (0384/035W); all other tools already exist. No change to the statement.",
-  "blueprint": "Descent of a reduced geometric singular point to a separable residue field in Curves 0C4D, paragraph beginning Now assume k is an arbitrary field.",
+  "summary": "Rebased the retained reader-approved re-split onto the current read-clone DAG for the side-completion landing return. The initial server dry run passed at 1b603f1b98b. Re-read every current cited statement and its hypotheses; no replacement citation or mathematical statement change is needed. Overlay only proof, proof_deps and split_report on the current item, retaining its current statement, Lean record, review metadata and ancestry. Preserve both independently assignable statement-only obligations, all extracted arguments in report.md, citations.json, and the genuine logged searches. The six-step assembly remains 2615 characters. The final dry run and push rebuild against the server DAG.",
+  "blueprint": "Descent of a reduced geometric singular point to a separable residue field in Curves 0C4D, paragraph beginning Now assume k is an arbitrary field. Original steps 3-4 now form the geometric-prime quotient lemma; original steps 5-6 form the flat localized-field lemma; the residual assembly retains finiteness, prime existence, geometric reducedness and separability.",
   "tool_uses": [
    {
     "node": "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
@@ -257,12 +222,12 @@
   "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q28-1b65dbfcf",
-  "group": "Q28",
+  "reviewer": "NT-cc-Q152-8896dce37",
+  "group": "Q152",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1b65dbfcf (reviewer sub-agent of L); spot-checked: Read the item (8 steps), the new node, all 19 cited statements, and the sources: Varieties 035U/035W/0384 with proofs, Curves 0C4D arbitrary-field paragraph (curves.tex line 4220), and Algebra 030W. Route is 0C4D -> 0384 -> field stalk -> 030W. Step 1: Zariski lemma applies to F=T/p. Steps 2-4: a prime q over p exists by faithful flatness; S/q is a finite-dimensional domain over Omega, so it equals Omega; kappa(q)=S/q with its structural Omega-algebra structure. Step 5: the localization flatness lemmas give a flat local map A->B, hence faithfully flat, hence injective. Step 6: pA=0, so the residue map A->F is an isomorphism. Step 7: B tensor_Omega H = H gives clause (2) of the new node; clause (1) with E=Omega makes F tensor_k Omega reduced. Step 8: the pc criterion gives separability; with an empty transcendence basis this is separable algebraic. New node lem-trf-geometric-reducedness-local-base-change is exactly 0384 in affine local-ring form via 035W, true with no extra hypotheses. Tested on L=k, R=0, F_p(u)[v]/(v^p-u) with L=k^{1/p}, and R[x]/(x^2+1) over C. It is not a duplicate: rg for 0384, 035W and geometric-reducedness phrasings found only global or other statements. It does not restate a clause of the item. Its form, searches and blueprint ancestry/via are correct. The parent's uses in steps 1, 4 and 9 match the item statement. No SGA is cited, and no target, base-change morphism or coefficient category is involved. Accepted tool_use: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable, a generic field-theory criterion that no node of sk-i-curve-zero gives. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-8896dce37 (reviewer sub-agent of L); spot-checked: Fifth delivery of this re-split; the four earlier heads (4f9c, 7a96, 6e16, a9ee) were all PASSed and returned only for side-completion promotion. Both new nodes are byte-identical to a9ee's. The item differs only in split_report date and summary, and against the base item 8092899 only in proof, proof_deps and split_report; statement, stmt_deps and Lean record are unchanged and both new ids are absent from the base. Step-by-step comparison with the base 8-step proof: steps 3-4 become lem-trf-finite-residue-geometric-prime and steps 5-6 become lem-trf-flat-localized-field-descent, with every clause kept in their statements, and the other steps are verbatim. The assembly is 2615 characters with no step over 2000. The old dagsnap is gone, so I re-read all 11 cited statements on the current base; each supports its use (Zariski lemma; faithfully flat base change and surjective Spec; the flat clause of faithful flatness; geometric-reducedness (2)=>(1) with E=Omega; the pc finite-extension separability criterion plus the empty transcendence basis giving separable algebraic). Both new nodes are true, checked on T=k, k[e]/e^2, a purely inseparable F, a non-flat quotient and R=0. Duplicate search on the base found no duplicate. Stacks 00FV, 00HT(1,2), 00HR, 05CK and Curves 0C4D (curves.tex 4219-4237) match. No SGA is cited and no target node is involved. Accepted tool_use: the pc separability criterion. No fixes. Maintainer note: identical landing-loop re-delivery."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -283,5 +248,16 @@
   "existing": false,
   "note": "The structural Ω-algebra identifications are bijectivity of the canonical maps from Ω through the right tensor factor. The conditional conclusion is bijectivity of the canonical residue map to T/p, not an arbitrary ring isomorphism."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

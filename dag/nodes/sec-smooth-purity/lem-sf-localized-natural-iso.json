@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-localized-natural-iso",
+ "kind": "statement",
+ "title": "Normalized isomorphisms of localized functors",
+ "statement": "Let R,S be commutative rings, C an R-linear preadditive category, D an S-linear preadditive category [def-weil-linear-category], t in R, b in S, and c:R[1/t] → S[1/b] any function. Let U,V:C → D be functors and e:U ≅ V. Let F,G:L_t(C) → L_b(D) be additive functors on raw scalar localizations [def-weil-linear-scalar-localization], with prescribed object equalities F(K)=U(K), G(K)=V(K). Assume for every integral arrow a and z in R[1/t] that F(z tensor a)=c(z) tensor U(a) and G(z tensor a)=c(z) tensor V(a), interpreted as heterogeneous equalities. Then there exists a unique natural isomorphism alpha:F ≅ G such that alpha_K is heterogeneously equal to Q_D(e_K) for every K. No algebraic laws for c are required beyond the displayed functor map hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CV (tensor products), 00CX (universal property), applied to the rational-operation formulas in def-weil-derived-pullback-tensor-hom: Common-stage paragraph, rationalization of the scalar-extension comparison theta; naturality of the localized comparison"
+ },
+ "stmt_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the localized integral comparison by the prescribed object equalities. On a pure tensor, the two map formulas and the integral naturality square prove naturality; additivity proves it on zero and sums. The conjugated components are isomorphisms, hence form a natural isomorphism. The prescribed component equality and natural transformation extensionality prove uniqueness.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "Already proved private scalar-localization calculus, extracted unchanged in argument to Sheaf.CategoryTheory.DerivedScalarLocalizationIso for predictable per-file compilation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between linear functors extends uniquely to scalar localized categories with unchanged objects",
+   "results": "CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Functor.linear_of_iso",
+   "date": "2026-10-26",
+   "verdict": "General localization has liftNatIso and NatIso.ofComponents, but not this raw tensor-normalized comparison for arbitrary coefficient functions and prescribed object equalities. The existing lem-real-raw-localization-natural-iso additionally requires triangulated source data absent here. Extract the already proved private comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-26",
+   "verdict": "General localization has liftNatIso and NatIso.ofComponents, but not this raw tensor-normalized comparison for arbitrary coefficient functions and prescribed object equalities. The existing lem-real-raw-localization-natural-iso additionally requires triangulated source data absent here. Extract the already proved private comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rawIso_existsUnique|rawBilinearIso_existsUnique",
+   "results": "No matches",
+   "date": "2026-10-26",
+   "verdict": "General localization has liftNatIso and NatIso.ofComponents, but not this raw tensor-normalized comparison for arbitrary coefficient functions and prescribed object equalities. The existing lem-real-raw-localization-natural-iso additionally requires triangulated source data absent here. Extract the already proved private comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Common-stage paragraph, rationalization of the scalar-extension comparison theta; naturality of the localized comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedScalarLocalizationIso",
+  "file": "lean/Sheaf/CategoryTheory/DerivedScalarLocalizationIso.lean",
+  "declaration": "WeilConjectures.OperationsScalarLocalization.iso_existsUnique",
+  "statement": "theorem iso_existsUnique\n    {R : Type r} [CommRing R] {S : Type s} [CommRing S]\n    {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]\n    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear S D]\n    (t : R) (b : S) (c : Localization.Away t → Localization.Away b)\n    (U V : C ⥤ D) (e : U ≅ V)\n    (F G : ScalarLocalization R C t ⥤ ScalarLocalization S D b)\n    [F.Additive] [G.Additive]\n    (hF : ∀ K, F.obj K = ⟨U.obj K.obj⟩)\n    (hG : ∀ K, G.obj K = ⟨V.obj K.obj⟩)\n    (mF : ∀ (K L : C) (a : K ⟶ L) (z : Localization.Away t),\n      HEq (F.map (z ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))\n        (c z ⊗ₜ[S] U.map a))\n    (mG : ∀ (K L : C) (a : K ⟶ L) (z : Localization.Away t),\n      HEq (G.map (z ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))\n        (c z ⊗ₜ[S] V.map a)) :\n    ∃! α : F ≅ G, ∀ K, HEq (α.hom.app K)\n      ((ScalarLocalization.localization S D b).map (e.hom.app K.obj))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FiniteRationalDerivedOperations + 4 DerivedScalarLocalization* modules vs clone original (declaration chunks: public defs verbatim, 6 theorem proofs changed); compiled delivered set + the 2 `import all` importers in a sandbox"
+ }
+}

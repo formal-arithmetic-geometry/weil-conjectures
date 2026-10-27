@@ -1,0 +1,182 @@
+{
+ "id": "lem-trf-polynomial-log-chart-stalks",
+ "kind": "statement",
+ "title": "Polynomial chart characteristic, characteristic rank and nonunit ideal",
+ "statement": "Let $Y=\\operatorname{Spec}C$ be locally Noetherian and let $M$ be an fs log structure [def-trf-fs-log-blowup]. Let $P$ be an fs monoid, $\\alpha:P\\to C$ a monoid homomorphism, and $c_Y:P\\to M(Y)$ a global chart whose structural map on global sections is $\\alpha$. For $r\\ge0$ let $W=\\operatorname{Spec}C[t_i:i\\in\\operatorname{Fin}(r)]$, let $N$ be a log structure on $W$, and suppose $c_W:P\\times\\mathbf N^r\\to N(W)$ is a global chart with structural map $(p,n)\\mapsto\\alpha(p)\\prod_i t_i^{n_i}$. Use the constructions of [def-trf-polynomial-log-chart-constructions]. Then $N$ is fs. For every algebraically closed field $\\Omega$ and compatible geometric points $w:\\operatorname{Spec}\\Omega\\to W$ and $y:\\operatorname{Spec}\\Omega\\to Y$, write $A=\\mathcal O^{\\mathrm{sh}}_{Y,y}$, $B=\\mathcal O^{\\mathrm{sh}}_{W,w}$, $\\varphi:A\\to B$ for the canonical map [def-trf-strict-henselization-local-ring-maps], $I=I_M(y)$, $J=I_N(w)$, and $K=K(w)$. There exists a multiplicative monoid isomorphism $e:\\overline M_{W,w}\\simeq\\overline M_{Y,y}\\times\\mathbf N^K$ such that $e([c_W(p,n)])=([c_Y(p)],n|_K)$ for every $p,n$. Moreover $\\operatorname{rank}\\overline M_{W,w}^{\\mathrm{gp}}=\\operatorname{rank}\\overline M_{Y,y}^{\\mathrm{gp}}+|K|$, $J=\\varphi(I)B+L(w)$, and $I\\subseteq\\mathfrak m_A$. The rank is rational group-completion dimension, converted to $\\mathbf N\\cup\\{\\infty\\}$ as in [def-trf-fs-log-blowup]. There is no log-regularity assumption and no assertion here of regularity, flatness, or a Krull-dimension formula.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1--1.2, printed p.69, and polynomial case of 1.8, printed p.70; explicit chart-face calculation expanded from the item proof, steps 1--3 and rank part of step 5."
+ },
+ "stmt_deps": [
+  "def-trf-polynomial-log-chart-constructions",
+  "def-trf-fs-log-blowup",
+  "def-weil-geometric-point",
+  "def-trf-strict-henselization-local-ring-maps"
+ ],
+ "proof": [
+  {
+   "text": "The product of P with the finite free monoid is fs: combine finite generating sets and use the product of group completions to check injectivity and saturation coordinatewise. The displayed global chart thus witnesses that N is fs at every geometric point.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify W with relative affine space. The projection is smooth and locally of finite type, and W is locally Noetherian. The smooth strict-stalk theorem gives that the canonical A→B is local, hence reflects units. The unit face of the polynomial chart is H×N^(K-complement), where H is the unit face of the base chart: a product in a local ring is a unit exactly when all factors are units. Localize the two charts at these faces and quotient by their groups of units using chart-face logification. The polynomial characteristic is the base characteristic times N^K, with the stated formula on every chart element, since restriction of exponents kills exactly the complementary generators.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-chart-face-localization-logification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Group completion carries the characteristic product to the direct product with Z^K. Rationalization gives a direct sum with Q^K. Its dimension is the base dimension plus |K|. Cardinal.toENat preserves this addition, including infinite rank, giving the recorded rank equality.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The stalk chart pushout represents every log germ by a chart element times a ring unit. Such a polynomial chart element is a nonunit exactly when its base factor is a nonunit or some selected coordinate has positive exponent. Its structural image then belongs to IB+(t_i:i∈K). Conversely base nonunit generators remain nonunits by locality, and the selected variables are nonunits by definition, so they belong to J. This proves both ideal inclusions. Reflection of ring units by the base log structure puts every base nonunit image in m_A and hence its ideal span there. Transport along the canonical strict-local comparison proves the equalities in the recorded strict henselizations. The same computations apply to empty K, r=0, and to the absence of geometric points over an empty base.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-log-etale-restriction-stalk-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-nagata-relative-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-smooth-geometric-stalk-algebra",
+  "lem-trf-chart-face-localization-logification",
+  "def-trf-log-etale-restriction-stalk-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1--1.2, printed p.69, and polynomial case of 1.8, printed p.70; explicit chart-face calculation expanded from the item proof, steps 1--3 and rank part of step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "logRegular|logStructure|characteristicRank",
+   "results": "{\"t\": \"2026-10-26T08:06:07Z\", \"tool\": \"grep\", \"query\": \"logRegular|logStructure|characteristicRank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-26T08:06:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial extension with logarithmic coordinate chart of a log regular scheme is log regular; characteristic equals base characteristic times free monoid on vanishing coordinates",
+   "results": "{\"t\": \"2026-10-26T08:06:14Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial extension with logarithmic coordinate chart of a log regular scheme is log regular; characteristic equals base characteristic times free monoid on vanishing coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.IsStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"5b1b475f5f7941c8\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The characteristic of a polynomial logarithmic chart is the base characteristic times the free monoid on the vanishing coordinates, and its nonunit ideal is the base ideal plus those coordinates.",
+   "results": "{\"t\": \"2026-10-26T08:13:07Z\", \"tool\": \"leansearch\", \"query\": \"The characteristic of a polynomial logarithmic chart is the base characteristic times the free monoid on the vanishing coordinates, and its nonunit ideal is the base ideal plus those coordinates.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.instCharP\", \"Polynomial.charP\", \"MvPolynomial.instCharP\", \"Polynomial.charZero\", \"FreeAlgebra.charP\", \"MvPolynomial.instExpChar\", \"CharP.eq\", \"RatFunc.instCharP\"], \"digest\": \"3fa21da0f68f6b04\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomialOneHom|subtypeDomain",
+   "results": "{\"t\": \"2026-10-26T08:15:35Z\", \"tool\": \"grep\", \"query\": \"monomialOneHom|subtypeDomain\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"Mathlib/Algebra/MvPolynomial/Basic.lean\"], \"digest\": \"4fca09ea4a971349\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the structural map from the product of a commutative monoid and the free commutative monoid to a polynomial ring by sending the free generators to the variables.",
+   "results": "{\"t\": \"2026-10-26T08:15:35Z\", \"tool\": \"leansearch\", \"query\": \"Construct the structural map from the product of a commutative monoid and the free commutative monoid to a polynomial ring by sending the free generators to the variables.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.free_obj_coe\", \"freeCommRingEquivMvPolynomialInt\", \"Polynomial.algebra\", \"CommRingCat.free_map_coe\", \"MvPolynomial.instFree\", \"MvPolynomial\", \"Polynomial.ofFinsupp\", \"Algebra.Generators.σ\"], \"digest\": \"5cd51e790080d618\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"monomialOneHom\"",
+   "results": "{\"t\": \"2026-10-26T08:15:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"monomialOneHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPolynomial.monomialOneHom\", \"MvPolynomial.monomialOneHom_apply\"], \"digest\": \"b09041d02f82d5cc\"} Exact logarithmic chart-stalk assertion absent; ordinary polynomial/ring-characteristic hits do not state it. For the construction extraction the exact seven project definitions already exist and are relocated verbatim; monomialOneHom is used for the polynomial monomial factor.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolynomialLogChartRegularity",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polynomial logarithmic chart case of ILO VI 1.8 below the log-smooth preservation step: Polynomial chart characteristic, characteristic rank and nonunit ideal. Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: ILO VI Proposition 1.9, the final application of log smoothness, using VI 1.8 and VI 1.4. Extraction: VI 1.8--1.9, pp.70--71; coordinate argument in returned item steps 2--3. Algebraic inputs: Stacks algebra.tex Tag 031E (lemma-flat-over-regular-with-regular-fibre) and Tag 00ON (lemma-dimension-base-fibre-equals-total).",
+   "via": [
+    "lem-trf-polynomial-log-chart-regularity",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolynomialLogChartStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialLogChartStalks.lean",
+  "declaration": "AlgebraicGeometry.polynomial_log_chart_stalks",
+  "statement": "theorem polynomial_log_chart_stalks\n    (C P : Type u) [CommRing C] [CommMonoid P]\n    [hN : IsLocallyNoetherian (Spec (.of C))]\n    (M : EtaleLogStructure (Spec (.of C))) (hfs : M.IsFineSaturated)\n    (hP : IsFineSaturatedMonoid P) (α : P →* C)\n    (cY : P →* M.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 (Spec (.of C))))))\n    (hcY : M.IsChart (Scheme.Etale.mk (𝟙 (Spec (.of C)))) cY)\n    (hα : ∀ p : P, M.alpha.app (op (Scheme.Etale.mk (𝟙 (Spec (.of C))))) (cY p) =\n      (Scheme.ΓSpecIso (.of C)).inv (α p))\n    (r : ℕ) (N : EtaleLogStructure (Spec (.of (MvPolynomial (Fin r) C))))\n    (cW : P × Multiplicative (Fin r →₀ ℕ) →*\n      N.monoidSheaf.obj.obj\n        (op (Scheme.Etale.mk (𝟙 (Spec (.of (MvPolynomial (Fin r) C)))))))\n    (hcW : N.IsChart (Scheme.Etale.mk (𝟙 (Spec (.of (MvPolynomial (Fin r) C))))) cW)\n    (hβ : ∀ q : P × Multiplicative (Fin r →₀ ℕ),\n      N.alpha.app (op (Scheme.Etale.mk (𝟙 (Spec (.of (MvPolynomial (Fin r) C)))))) (cW q) =\n        (Scheme.ΓSpecIso (.of (MvPolynomial (Fin r) C))).inv\n          (PolynomialLogChart.structuralMap α r q)) :\n    N.IsFineSaturated ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n        (w : Spec (.of Ω) ⟶ Spec (.of (MvPolynomial (Fin r) C)))\n        (y : Spec (.of Ω) ⟶ Spec (.of C))\n        (hy : w ≫ Spec.map (CommRingCat.ofHom\n          (MvPolynomial.C : C →+* MvPolynomial (Fin r) C)) = y),\n        (∃ e : N.characteristic w ≃*\n            M.characteristic y × Multiplicative (PolynomialLogChart.vanishingCoordinates w →₀ ℕ),\n          ∀ (p : P) (n : Multiplicative (Fin r →₀ ℕ)),\n            e (PolynomialLogChart.characteristicChart N cW w (p, n)) =\n              (PolynomialLogChart.characteristicChart M cY y p,\n                Multiplicative.ofAdd (n.toAdd.subtypeDomain\n                  (fun i ↦ i ∈ PolynomialLogChart.vanishingCoordinates w)))) ∧\n        N.characteristicRank w = M.characteristicRank y +\n          (PolynomialLogChart.vanishingCoordinates w).card ∧\n        PolynomialLogChart.nonunitIdeal N w =\n          Ideal.map (strictHenselizationRingMapAlong\n            (Spec.map (CommRingCat.ofHom\n              (MvPolynomial.C : C →+* MvPolynomial (Fin r) C))) y w hy)\n            (PolynomialLogChart.nonunitIdeal M y) ⊔ PolynomialLogChart.coordinateIdeal w ∧\n        PolynomialLogChart.nonunitIdeal M y ≤\n          IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing y)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-24989",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T091129-L-3312002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-24989",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T091129-L-3312002",
+  "kind": "interface",
+  "note": "independent cc review: polynomial_log_chart_regularity signature vs clone (identical); 7 relocated defs vs change record (verbatim); new polynomial_log_chart_stalks vs IsChart/characteristic/nonunitIdeal defs (true, strictly weaker); item node proof_deps vs Lean lemmas used; importers of item in clone (none)"
+ }
+}

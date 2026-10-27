@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-relative-pseudocoherent-pullback",
+ "kind": "statement",
+ "title": "Pullback along a pseudo-coherent morphism preserves relative degreewise pseudo-coherence",
+ "statement": "Let $X\\xrightarrow{h}Y\\to S$ be morphisms of schemes [def-pc-scheme], with $h$, $X\\to S$ and $Y\\to S$ locally of finite type [def-pc-morphism-conventions]. Suppose $\\mathcal O_X[0]\\in D(\\mathcal O_X)$ is pseudo-coherent relative to $Y$ [def-pc-derived-category, def-sfb-relative-pseudo-coherent-complex]. For every integer $m$ and every $K\\in D(\\mathcal O_Y)$ that is $m$-pseudo-coherent relative to $S$, the derived pullback $Lh^*K\\in D(\\mathcal O_X)$ [def-pc-derived-pullback] is $m$-pseudo-coherent relative to $S$. No quasi-coherence or boundedness assumption on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09US, lemma-pull-relative-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Work locally with affine opens $X_0\\subset X$, $Y_0\\subset Y$, $S_0\\subset S$ such that $h(X_0)\\subset Y_0$ and $Y_0\\to S$ lands in $S_0$. Such triples cover $X$. The all-affine-charts criterion restricts the two relative pseudo-coherence hypotheses to these opens. Once the conclusion holds on these triples it holds on $X$: its defining affine covers over every affine base open can be united, or equivalently use source locality. Derived pullback composition identifies the restriction of $Lh^*K$ with the pullback of $K|_{Y_0}$. Thus rename this triple $X,Y,S$ and write $S=\\operatorname{Spec}R$, $Y=\\operatorname{Spec}A$, $X=\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-sfb-relative-pseudocoherence-local-on-source",
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, first sentence; Tag 09UJ, affine-chart characterization."
+   }
+  },
+  {
+   "text": "The affine-pairs finite-type criterion gives finite generating sets for $A/R$ and $B/A$. Their evaluation maps are surjections $R[t_1,\\ldots,t_n]\\twoheadrightarrow A$ and $A[u_1,\\ldots,u_d]\\twoheadrightarrow B$. Taking spectra gives $X\\xrightarrow{i}P=\\mathbf A^d_Y\\xrightarrow{j}W=\\mathbf A^{n+d}_S$, with $i,j$ closed immersions, and $p:P\\to Y$ the projection, so $h=pi$. Here $j$ comes from the surjection $R[t,u]\\twoheadrightarrow A[u]$. These are the polynomial chart and its coefficient base change, not additional geometric factorizations.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, displayed factorization; more-algebra.tex, proof of lemma-pull-relative-pseudo-coherent."
+   }
+  },
+  {
+   "text": "Apply the all-affine-charts criterion in every degree to $\\mathcal O_X[0]$ relative to $Y$, using $i$. Hence $M=Ri_*\\mathcal O_X[0]$ is absolutely pseudo-coherent on $P$ (the all-degree characterization in [def-pur-pseudo-coherent-complex]). The closed-immersion exactness clause of [lem-sfb-closed-immersion-unbounded-projection-formula] identifies $M$ with $(i_*\\mathcal O_X)[0]$. On $P=\\operatorname{Spec}(A[u])$ this sheaf is the associated sheaf of the $A[u]$-module $B$: on $D(g)$ its sections are $B_{\\bar g}$. Thus the affine pseudo-coherence criterion applies to $B[0]$ and makes it pseudo-coherent over $A[u]$. The bounded finite-free-model lemma, with $b=0$, supplies a finite free complex $G^\\bullet\\to B[0]$ with $G^q=0$ for $q>0$. The affine derived equivalence sends it to a complex $F^\\bullet\\simeq M$ on $P$ with finite free terms and the same nonpositive degree bound.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-pur-pseudo-coherent-complex",
+    "lem-sfb-closed-immersion-unbounded-projection-formula",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, finite free resolution paragraph; perfect.tex Tag 08E7, lemma-pseudo-coherent-affine; more-algebra.tex Tag 064U, lemma-pseudo-coherent, last assertion."
+   }
+  },
+  {
+   "text": "Let $S'=\\mathbf A^d_S$. Its projection to $S$ is flat by [lem-nagata-polynomial-projection-flat], and $P=Y\\times_S S'$. Flat relative base change therefore makes $Q=Lp^*K$ $m$-pseudo-coherent relative to $S'$. The map $j:P\\hookrightarrow W=\\mathbf A^n_{S'}$ is a polynomial closed chart over $S'$. The all-affine-charts criterion gives that $Rj_*Q$ is absolutely $m$-pseudo-coherent on $W$. This applies to the given arbitrary $K$; neither the base-change lemma nor the chart criterion assumes quasi-coherent cohomology.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "def-nagata-relative-affine-space",
+    "lem-sfb-relative-pseudocoherence-flat-base-change",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, last sentence; Tag 09UR, lemma-base-change-relative-pseudo-coherent, flat case."
+   }
+  },
+  {
+   "text": "Derived pullback composition and the projection formula for $i$, with $E=\\mathcal O_X[0]$, give an isomorphism in $D(\\mathcal O_P)$,\n$$Ri_*Lh^*K\\cong Ri_*Li^*Q\\cong Q\\otimes^{\\mathbf L}_{\\mathcal O_P}Ri_*\\mathcal O_X[0]\\cong Q\\otimes^{\\mathbf L}_{\\mathcal O_P}F^\\bullet.$$\nThe tensor unit and symmetry are those of the structure-module derived tensor. Both $P,W$ are affine, $j$ is closed, $Rj_*Q$ is $m$-pseudo-coherent by step 4, and $F^\\bullet$ is finite free in nonpositive degrees by step 3. Apply the nonpositive-free-tensor lemma to conclude that $Rj_*(Q\\otimes^{\\mathbf L}F^\\bullet)$ is $m$-pseudo-coherent. Derived direct-image composition identifies this with $R(ji)_*Lh^*K$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sfb-closed-immersion-unbounded-projection-formula",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-sfb-closed-pushforward-nonpositive-free-tensor",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, projection formula and tensor-filtration paragraphs; cohomology.tex Tag 0B55."
+   }
+  },
+  {
+   "text": "The composite $ji:X\\hookrightarrow\\mathbf A^{n+d}_S$ is the closed immersion defined by the composite surjection $R[t,u]\\twoheadrightarrow B$. Step 5 gives the required $m$-pseudo-coherent derived pushforward in this one chart. The relative definition therefore proves that $Lh^*K$ is $m$-pseudo-coherent relative to $S$ on the affine triple. Step 1 assembles these triples to give the assertion on the original $X$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, conclusion in the polynomial chart."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-sfb-relative-pseudocoherence-local-on-source",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sfb-closed-immersion-unbounded-projection-formula",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-sfb-relative-pseudocoherence-flat-base-change",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sfb-closed-pushforward-nonpositive-free-tensor",
+  "lem-pc-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, with the finite free model supplied by Tag 064U and the tensor-tail inequality corrected as explained in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along a pseudo coherent scheme morphism preserves m pseudo coherence relative to a fixed base scheme",
+   "results": "OK: 8 hits; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme; AlgebraicGeometry.instLocallyQuasiFiniteFstScheme; AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme; AlgebraicGeometry.instLocallyQuasiFiniteSndScheme; AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme; AlgebraicGeometry.Scheme.Pullback.instHasPullbacks",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For schemes locally of finite type over S if O_X is pseudo coherent relative to Y then pullback of an m pseudo coherent complex relative to S is m pseudo coherent relative to S",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme; AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher.*pull|pull.*pseudo.?coher",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along a pseudo coherent morphism of schemes preserves m pseudo coherence relative to a base scheme",
+   "results": "OK: 8 hits; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.instLocallyQuasiFiniteFstScheme, AlgebraicGeometry.instLocallyQuasiFiniteSndScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudocoherence of arbitrary complexes is preserved by pullback along pseudo coherent scheme morphisms",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-fppf-descent",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, first paragraph and converse refinement paragraph, invoking lemma-pull-relative-pseudo-coherent.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherent-pullback",
+  "worker": "stage1",
+  "summary": "Followed Tag 09US in six explicit steps, preserving the statement and the arbitrary structure-module category. Reused the affine free-model criterion and separated the genuinely missing unbounded closed projection formula and nonpositive finite-free tensor filtration into two statement-only nodes. Corrected the printed filtration-tail inequality in the source, without changing the theorem.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images clause (3) is the inherited direct-image route. This support lemma supplies the Tag 09US input to the source-descent/etale-locality chain named in blueprint.from.place. The current latest blueprint has no relative pseudo-coherence statement. blueprint_refs ancestor returns None; retain the inherited null ancestor and its precise place. Steps 1-2 realize the affine reduction; step 3 the omitted nonpositive resolution; steps 4-6 the flat-base-change, projection-formula and tensor-filtration argument. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Composition identifies the restricted pullback and the factorization h=pi; this is a generic functoriality tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "The general affine criterion supplies finite algebra generators for the explicit polynomial charts; it does not replace a unit step."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "The generic affine criterion converts the structure module in the polynomial chart to a pseudo-coherent ring complex."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "This generic algebra lemma gives the required upper bound zero on the free resolution; no node in this unit supplies that bound."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The generic affine equivalence sends the ring resolution to its sheaf resolution."
+   },
+   {
+    "node": "lem-nagata-polynomial-projection-flat",
+    "why": "This generic polynomial flatness result verifies the hypothesis of relative flat base change."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "The generic direct-image composition isomorphism identifies the final closed-chart direct image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-4b830cc61",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-4b830cc61 (reviewer sub-agent of L); spot-checked: Read Stacks 09US (more-morphisms.tex line 17155) and 0B55 (cohomology.tex line 13946). The item statement matches 09US hypothesis by hypothesis and is unchanged; the extra 'h lft' is implied by the source. Confirmed source error: for q≪0 the pieces vanish in degrees ≥m, not ≤m as printed; the A^n_Y and A^{n+m}_S letter slips are also real; the item statement is unaffected. Step 1: reduction over each V_a of an affine cover gives the defining covers directly, with no affine intersections assumed. Step 2: elementary charts from 01T2; j is a closed immersion over S'. Step 3: all-affine-charts criterion, then 08E7, then the bounded finite-free model with b=0, then the 06Z0 affine equivalence; this writes out the source's omitted details. Step 4: polynomial flatness, flat base change (09UR flat case) over S'=A^d_S with P=Y×_S S', then the chart criterion for j; no QCoh needed. Step 5: 0D5S, the new 0B55 node with E=O_X[0], unit, symmetry (not explicit in the tensor-structure def; minor), the new tensor node, then 0D5T. Step 6: one chart, so the definition is met. proof_deps equals the union of uses. New nodes are statement-only with all three search kinds recorded. Unbounded closed-immersion projection formula: true by the 0B55 proof; not a duplicate of lem-pc-projection-formula (QCoh), lem-sfb-closed-immersion-derived-tensor-projection (Λ-coefficient étale modules) or the perfect ringed-site formula. Nonpositive-free tensor lemma: true via a global upper bound on affine W, brutal truncation, shifts to m+q≤m and 08FV triangle closure; small cases F=0, O[0], O[-q], Q=0, F unbounded below all hold; not a duplicate of 0DJE (ring), 09VA or 08FV, and not a clause of the parent. No SGA. Tool uses accepted (0D5S, 01T2, 08E7, finite-free model, 06Z0, polynomial flatness, 0D5T). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherentPullback",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_derivedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherentPullback.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_derivedPullback [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] {X Y S : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ S) [LocallyOfFiniteType h] [LocallyOfFiniteType (h ≫ f)] [LocallyOfFiniteType f] (hOX : IsPseudoCoherentRelativeTo h ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace)))) (m : ℤ) (K : schemeDerivedCategory Y) (hK : IsMPseudoCoherentRelativeTo f m K) : IsMPseudoCoherentRelativeTo (h ≫ f) m ((derivedPullback h).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12e5304f1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09US clause by clause: X→Y→S schemes with X→S as h≫f; h, h≫f, f locally of finite type (no stronger than source); O_X[0] as singleFunctor 0 of SheafOfModules.unit, pseudo-coherent relative to Y via the all-m predicate; every m:ℤ and every K in unbounded schemeDerivedCategory Y (no QCoh or bound); conclusion IsMPseudoCoherentRelativeTo (h≫f) m (derivedPullback h K) at the same m. Universes u,w explicit; the ∀T HasDerivedCategory.{w} binder is the dependency convention. Node differs from side-live only in lean; the other 5 dep records are unchanged; lean.statement verbatim; stmt_deps all definition nodes and all used; proof-dep modules exist and are imported privately; docstrings carry source, blueprint id and the 6 proof steps; no definitions, sorry only, no pro-etale substitute, no duplicate. Report has Worker report and Second reading by Q29 sections. Edge cases (empty schemes, K=0, identity/open h, any m, non-QCoh K) covered. No compile (no changes)."
+ }
+}

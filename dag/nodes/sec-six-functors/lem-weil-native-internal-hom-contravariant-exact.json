@@ -13,71 +13,51 @@
  ],
  "proof": [
   {
-   "text": "The source library already constructs the native monoidal closed structure for derived tensor over C using its K-flat left derivability structure. Fix its internal-Hom bifunctor, and an arbitrary target W. The desired assertion concerns its contravariant source variable, not the already constructed ordinary right adjoint in the target variable.",
+   "text": "Choose a K-injective representative I and an isomorphism W ≅ Q I. Specialize lem-sf-bifunctor-homotopy-exact to the native internal-Hom bifunctor of C and I. Internal Hom is separately additive: the covariant functors are right adjoints of additive tensor functors, and precomposition is additive by pre_add_app. The result gives coherent integral shifts and triangulatedness of F=(bifunctorHomHomotopyFunctor internalHom I).leftOp on K(C)^op.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
-   }
-  },
-  {
-   "text": "Choose a K-injective representative I of W. The source-library map qhInternalHomToIhom P I, adjoint to evaluation, is an isomorphism and is natural in P. Hence the functor P ↦ Q internalHomObj P I sends quasi-isomorphisms to isomorphisms and represents native Hom(-,W) after localization. The underlying complex in degree n is the product of [P^p,I^q] for p+n=q, with differential (-1)^p(d_I f-f d_P).",
-   "uses": [
+    "def-sp-grothendieck-abelian",
     "def-weil-abstract-derived-category",
-    "def-sp-grothendieck-abelian"
+    "lem-sf-bifunctor-homotopy-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
+    "place": "Tag 08JC; signed bifunctor-Hom exactness and the native K-injective comparison"
    }
   },
   {
-   "text": "The private, fully proved cochainSourceShift gives source-shift isomorphisms categorically by right-adjoint uniqueness and the two-variable tensor shift. To normalize the model maps, for m in Z put q(m)=m(m-1)/2. On the target factor indexed by r, reindexing gives F(P[m]) -> F(P)[-m] with coefficient (-1)^(m*r+q(m)). The Hom differential (-1)^p(d_I f-f d_P), d_(P[m])=(-1)^m d_P and the change of the coefficient under r -> r+1 verify the chain-map equation. Inverse reindexing gives an inverse. Precomposition gives naturality. Raw reindexings compose with discrepancy (-1)^(m*l), canceled by q(m+l)=q(m)+q(l)+m*l, proved for all integers by the private sourceShiftSign_add. At zero the map is the identity. Setting m=-n gives the coherent opposite n-shift, including negative n.",
+   "text": "The bifunctorHomObj specialization and native internalHomObj have definitionally identical objects and differentials. On each product projection, bifunctorHomMapLeft and internalHomPre both act by precomposition, so their maps agree. The native comparison qhInternalHomToIhom is invertible for K-injective I and natural for these maps. Choose complex representatives of objects of K(C), and lift a homotopy-category arrow to a chain map, to obtain a natural isomorphism F ≅ Qh.op ⋙ internalHom(-,Q I). Postcompose with the functorial isomorphism induced by Q I ≅ W.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
-   }
-  },
-  {
-   "text": "For a degreewise split sequence A -> B -> C with retraction r and section s, the source connecting cochain is h_p = r_(p+1) ∘ d_B ∘ s_p. The reversed Hom sequence has retraction pre(s) and section pre(r), as provided by internalHomShortComplexSplitting. Its connecting cochain, at degree n and the factor C^p -> I^(p+n+1), is (-1)^(p+1) f_(p+1) h_p: expand section*d_F*retraction; the d_I term vanishes since r_p ∘ s_p=0, and the remaining term has this sign. Mathlib triangleOpEquivalence sends the third arrow to h[-1].op without an additional sign. Applying F and the m=-1 comparison gives exactly this same factor, since q(-1)=1. Thus the image is the actual distinguished triangle of the reversed Hom split sequence, including its connecting morphism.",
-   "uses": [
+    "def-sp-grothendieck-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
+    "place": "Tag 08JC; signed bifunctor-Hom exactness and the native K-injective comparison"
    }
   },
   {
-   "text": "Localize the coherent shift comparisons along the opposite of Q. All quasi-isomorphisms are inverted by the model comparison in step 2. Every distinguished triangle is isomorphic to the image of a degreewise split sequence of complexes, so step 4 proves IsTriangulated for the localized functor with the shift structure from step 3. Descend the natural model isomorphism qhInternalHomToIhom, and transport shifts and the triangle property across it. Finally transport along the chosen isomorphism Q I = W. The assertion uses no boundedness or reflexivity, and the displayed integral sign identities apply also in characteristic two.",
+   "text": "Use Functor.commShiftOfLocalization for Qh.op and the opposite quasi-isomorphism property to descend the coherent shifts of F to T=internalHom(-,W), using the natural isomorphism of step 2 as Localization.Lifting data. Its inverse automatically commutes with the descended shifts; taking its inverse gives shift compatibility of the original isomorphism. Transport triangulatedness of F across that isomorphism to Qh.op ⋙ T. The functor Qh.op is triangulated, and its functor on arrows is essentially surjective by the calculus of fractions for opposite homotopy quasi-isomorphisms. Functor.isTriangulated_of_precomp then proves T.IsTriangulated with exactly the descended CommShift structure.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sp-grothendieck-abelian"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
+    "place": "Tag 08JC; signed bifunctor-Hom exactness and the native K-injective comparison"
    }
   }
  ],
  "proof_deps": [
+  "def-sp-grothendieck-abelian",
   "def-weil-abstract-derived-category",
-  "def-sp-grothendieck-abelian"
+  "lem-sf-bifunctor-homotopy-exact"
  ],
  "proof_origin": {
-  "by": "S1 stage 3",
+  "by": "Q4 stage 3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JC; native-complex expansion of its omitted cone calculation"
+  "place": "Tag 08JC; specialize the existing signed bifunctor-Hom exactness theorem, identify the native model and descend along Qh.op"
  },
  "mathlib_searches": [
   {
@@ -149,14 +129,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261020T230831-L-618552",
+  "landing": "20261024T190650-L-4189963",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

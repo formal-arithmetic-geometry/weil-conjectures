@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-contracting-line-equivariant-torsor-rigidity",
+ "kind": "statement",
+ "title": "Lifting torsor isomorphisms along a contracting affine line",
+ "statement": "Let $k$ be a field [def-weil-field]. A $k$-group scheme means a group object in schemes over $\\operatorname{Spec}k$: the multiplication, unit and inverse diagrams of [def-sc-group-scheme], with this base in place of the field base. Write $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. Let $H$ be a smooth affine finite-type $k$-group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. A right $H$-torsor over a $k$-scheme $Y$ means a represented right torsor in [def-sfb-split-solvable-right-torsors], with base $\\operatorname{Spec}k$. A $\\mathbf G_m$-equivariant such torsor has a left $\\mathbf G_{m,k}$-action covering the specified action on $Y$ and commuting with the right $H$-action; isomorphisms respect both actions and the projection to $Y$. Put $L=\\operatorname{Spec}k[u]$ with the action $z\\cdot u=zu$. For any two $\\mathbf G_{m,k}$-equivariant right $H$-torsors $P,Q$ over $L$ and any $\\mathbf G_{m,k}$-equivariant right $H$-torsor isomorphism $\\alpha_0:P|_{u=0}\\simeq Q|_{u=0}$ over $k$, there exists an equivariant right $H$-torsor isomorphism $\\alpha:P\\simeq Q$ over $L$ whose restriction to $u=0$ is $\\alpha_0$. There is no assertion of uniqueness and no assumption that either fibre torsor is trivial.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Lemma 3.6, proof of (2) implies (1), printed p.6: compare a torsor on the contracting affine line with the pullback of its fibre at zero. The symmetry interchanging s and t permits the weight +1 line."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sfb-equivariant-right-torsor-fibre-isomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-affine-torsor-isom-scheme] with $S=\\operatorname{Spec}k$, $Y=L$ and the given $H,P,Q$. It gives an affine scheme $I=\\underline{\\operatorname{Isom}}_H(P,Q)$ smooth over $L$, whose $T$-points are torsor isomorphisms after pullback to $T$, also for the origin and its thickenings. The actions on $P,Q$ induce the action on $I$ given on test points by $z\\cdot\\alpha=z_Q\\circ\\alpha\\circ z_P^{-1}$. This covers scaling on $L$ and satisfies the action laws by cancellation.",
+   "uses": [
+    "lem-sfb-smooth-affine-torsor-isom-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+   }
+  },
+  {
+   "text": "Write $A=k[u]$ and $I=\\operatorname{Spec}B$, with structure map $j:A\\to B$, using [def-weil-affine-spectrum]. The action gives a coaction $\\rho:B\\to B[z,z^{-1}]$. Writing $\\rho(b)=\\sum_d b_dz^d$, counitality gives $b=\\sum_d b_d$ and coassociativity gives $\\rho(b_d)=b_dz^d$. Coefficient comparison proves the direct-sum grading $B=\\bigoplus_{d\\in\\mathbf Z}B_d$, with $B_dB_e\\subseteq B_{d+e}$ and $j(u)\\in B_1$. The same coefficient comparison says that a map $B\\to D$ into a graded algebra is equivariant exactly when it preserves degrees. The given $\\alpha_0$ is therefore a graded $A$-algebra map $f_0:B\\to A_0=k[u]/(u)$, where $u$ maps to zero. Put $A_n=k[u]/(u^{n+1})$, with its quotient grading.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+   }
+  },
+  {
+   "text": "Suppose a graded $A$-algebra map $f_n:B\\to A_n$ has been chosen. The kernel $J=(u^{n+1})/(u^{n+2})$ of $A_{n+1}\\to A_n$ has square zero. By smoothness in [def-sbc-smooth-morphisms], the corresponding section over $\\operatorname{Spec}A_n$ lifts over $\\operatorname{Spec}A_{n+1}$; [def-weil-affine-spectrum] gives an $A$-algebra lift $g:B\\to A_{n+1}$. For $b\\in B_d$ define $f_{n+1}(b)$ to be the degree-$d$ component of $g(b)$ and extend additively. Every other component of $g(b)$ belongs to $J$, since $f_n$ preserves degrees. For $b\\in B_d,c\\in B_e$, the degree-$(d+e)$ component of $g(b)g(c)$ is the product of their degree-$d$ and degree-$e$ components: every other contributing pair has both factors in $J$ and vanishes. Hence $f_{n+1}(bc)=f_{n+1}(b)f_{n+1}(c)$. Also $f_{n+1}(1)=1$, and $g(j(a))=a$ shows it fixes $A$ on homogeneous elements and hence on sums. It is a graded lift of $f_n$. Induction starting with the specified $f_0$ gives compatible $f_n$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+   }
+  },
+  {
+   "text": "For each integer $d$, the maps $A_d\\to(A_n)_d$ are isomorphisms for all $n\\geq\\max(d,0)$: both sides are $ku^d$ when $d\\geq0$ and zero when $d<0$. For $b\\in B_d$, the compatible $f_n(b)$ therefore determine a unique $f(b)\\in A_d$. Extend over finite homogeneous sums to $f:B\\to A$. Addition, multiplication, the unit and $f\\circ j=1_A$ follow after reduction to every $A_n$, since $\\bigcap_n(u^{n+1})=0$ in the polynomial ring. Thus $f$ is a graded $A$-algebra map reducing to the chosen $f_0$. This uses stabilization in each weight, rather than identifying $k[u]$ with its ungraded completion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+   }
+  },
+  {
+   "text": "By [def-weil-affine-spectrum], $f$ gives a section $L\\to I$. Its grading means that it is equivariant, by the coefficient calculation in step 2. By the representing property and base-change assertion of [lem-sfb-smooth-affine-torsor-isom-scheme], it is an $H$-torsor isomorphism $\\alpha:P\\xrightarrow{\\sim}Q$ with fibre $\\alpha_0$. Equivariance for the conjugation action on $I$ is precisely $\\alpha\\circ z_P=z_Q\\circ\\alpha$, so it respects both actions as required. No trivialization of $P|_0$ or $Q|_0$ was chosen.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-smooth-affine-torsor-isom-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-affine-torsor-isom-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf read online. Lemma 3.6, proof of (2) implies (1), printed p.6, expanding its smooth lifting and algebraization by the calculation of Section 2, Claim 3, printed p.3; adapted to the weight +1 affine line."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant isomorphism of smooth affine group torsors over affine line extends from the origin under multiplicative group scaling",
+   "results": "AffineEquiv.constVAddHom: The group homomorphism from the multiplicative structure on the vector space $ V_1 $ to the group of affine equivalences of $ P_1 $, defined by mapping each vector $ v $ to the affine equivalence give; DilationEquiv.smulTorsor_apply: For a non-zero scalar $ k $ in a normed division ring $ \\mathbb{K} $, a point $ c $ in a pseudo-metric space $ P $ equipped with a normed additive torsor structure over a seminormed $ \\mathbb{K} $-mod; AffineEquiv.homothetyUnitsMulHom: A group homomorphism that sends each invertible element $\\lambda \\in R^\\times$ to the homothety centered at point $p$ with scale factor $\\lambda$, viewed as an affine equivalence of the affine space $; AffineEquiv.constVAddHom_apply: For any ring $ k $, affine space $ P_1 $ over a $ k $-module $ V_1 $, and any vector $ v $ in the multiplicative structure on $ V_1 $, applying the group homomorphism from the multiplicative vectors t; AffineEquiv.coe_homothetyUnitsMulHom_apply: The canonical embedding of invertible elements $\\lambda \\in R^\\times$ into affine equivalences of the affine space $P$ over ring $R$ sends each unit to the homothety centered at point $p$ with scale f; AffineEquiv.val_equivUnitsAffineMap_apply: The group of affine equivalences from an affine space $ P_1 $ over a ring $ k $ to itself is canonically isomorphic to the group of units of the monoid of affine self-maps $ P_1 \to P_1 $. This isomorp; AffineEquiv.coe_homothetyUnitsMulHom_eq_homothetyHom_coe: For a fixed point $ p $ in an affine space $ P $ over a ring $ R $, this defines a group homomorphism from the multiplicative group of units $ R^\times $ to the group of affine equivalences of $ P $. I; affineHomeomorph: Given a topological field $\\mathbb{K}$ and elements $a, b \\in \\mathbb{K}$ with $a \\neq 0$, this constructs the homeomorphism $f: \\mathbb{K} \\to \\mathbb{K}$ defined by $f(x) = a \\cdot x + b$, with inve",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equivariant\"",
+   "results": "MonoidAlgebra.equivariantOfLinearOfComm: Build a `R[M]`-linear map from a `R`-linear map and evidence that it is `M`-equivariant.; MonoidAlgebra.equivariantOfLinearOfComm_apply:  {R : Type u_1} {M : Type u_7} [Monoid M] [CommSemiring R] {V : Type u_10} {W : Type u_11} [AddCommMonoid V] [Module R V] [Module (MonoidAlgebra R M) V] [IsScalarTower R (MonoidAlgebra R M) V] [AddCommMonoid W] [Module R; SubAddAction.ofFixingAddSubgroup_equivariantMap: The identity map of the `SubAddAction` of the `fixingAddSubgroup`\ninto the ambient set, as an equivariant map.; SubMulAction.ofFixingSubgroup_equivariantMap: The identity map of the `SubMulAction` of the `fixingSubgroup`\ninto the ambient set, as an equivariant map.; SubAddAction.ofFixingAddSubgroup_equivariantMap_injective:  {M : Type u_1} {α : Type u_2} [AddGroup M] [AddAction M α] {s : Set α} : Function.Injective ⇑(SubAddAction.ofFixingAddSubgroup_equivariantMap M s); SubMulAction.ofFixingSubgroup_equivariantMap_injective:  {M : Type u_1} {α : Type u_2} [Group M] [MulAction M α] {s : Set α} : Function.Injective ⇑(SubMulAction.ofFixingSubgroup_equivariantMap M s); SubAddAction.ofFixingAddSubgroupEmpty_equivariantMap_bijective:  {M : Type u_1} {α : Type u_2} [AddGroup M] [AddAction M α] : Function.Bijective ⇑(SubAddAction.ofFixingAddSubgroup_equivariantMap M ∅); SubMulAction.ofFixingSubgroupEmpty_equivariantMap_bijective:  {M : Type u_1} {α : Type u_2} [Group M] [MulAction M α] : Function.Bijective ⇑(SubMulAction.ofFixingSubgroup_equivariantMap M ∅); Equiv.Perm.Basis.toCentralizer_equivariant:  {α : Type u_1} [DecidableEq α] [Fintype α] {g : Equiv.Perm α} (a : g.Basis) (c : ↥g.cycleFactorsFinset) (τ : ↥(Equiv.Perm.OnCycleFactors.range_toPermHom' g)) : a.toCentralizer τ • c = ↑τ c; Derivative.serreDerivative_slash_equivariant: Serre derivative is equivariant under the slash action. More precisely,\n$\\partial_k (F ∣[k] γ) = (\\partial_k F) ∣[k + 2] \\gamma$ for all $\\gamma \\in SL(2, \\mathbb{Z})$.; FDRep.scalar_product_char_eq_finrank_equivariant: If `V` and `W` are finite-dimensional representations of a finite group, then the\nscalar product of their characters is equal to the dimension of the space of\nequivariant maps from `V` to `W`.; LinearMap.equivariantProjection: We construct our `k[G]`-linear retraction of `i` as\n$$ \\frac{1}{|G|} \\sum_{g \\in G} g⁻¹ • π(g • -). $$",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|principal.*bundle",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration for this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative group equivariant principal bundle on affine line is determined up to isomorphism by its fiber at zero",
+   "results": "Trivialization.linearEquivAt: For a linear trivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, this constructs a linear equivalence between the fiber $ ; Trivialization.mk.inj: If two trivializations constructed via the Trivialization.mk constructor are equal, then their underlying open partial homeomorphisms and base sets must be equal.; Bundle.Trivial.continuousLinearEquivAt_trivialization: For any base point $x$ in the base space $B$ of a trivial vector bundle with fiber $F$ over a nontrivially normed field $\\mathbb{K}$, the continuous linear equivalence between the fiber $E_x$ and the ; Pretrivialization.linearEquivAt: For a linear pretrivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, this constructs a linear equivalence between the fiber; Trivialization.IsLinear: A property of a trivialization stating that it is linear with respect to the module structures on the fibers, i.e., the local trivialization maps are linear isomorphisms between the fiber and the base; Trivialization.linearEquivAt_apply: For a linear trivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, there exists a linear equivalence between the fiber $ E_b; Pretrivialization.linearEquivAt_apply: For a linear pretrivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, the linear equivalence between the fiber $ E_b $ and $; Pretrivialization.IsLinear: A predicate asserting that a pretrivialization of a fiber bundle is linear, meaning it preserves the $R$-module structure on fibers $E_x$ and the fiber $F$, where $R$ is a semiring, $B$ is a topologic",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant smooth torsors affine line restriction to zero is full",
+   "results": "AffineEquiv.mk.inj: Two affine equivalences between affine spaces over a ring are equal if and only if their underlying set-theoretic equivalence, linear equivalence of the associated modules, and compatibility with the ; ContinuousAffineMap.coe_zero: The zero element of the space of continuous affine maps from a torsor $ P $ to a torsor $ W $ over a ring $ R $, when viewed as a function from $ P $ to $ W $, is equal to the zero function that maps ; AffineEquiv.constVAdd_zero: The affine equivalence defined by translating every point in the affine space $ P_1 $ by the zero vector is equal to the identity affine equivalence on $ P_1 $. This follows from the fact that adding ; ContinuousAffineMap.zero_contLinear: The linear component of the zero continuous affine map from torsor $P$ to torsor $W$ over a ring $R$ is equal to the zero continuous linear map between the underlying modules.; AffineEquiv.noConfusion: A structure representing an invertible affine map between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ and $ P_2 $ are torsors over $ k $-modules $ V_1 $ and $ V_2 $. This in; MulActionHom.coe_zero: The coercion of the zero element in the space of equivariant maps $X \\to_\\sigma Y$ to an ordinary function coincides with the zero function, i.e., $\\forall x \\in X$, $0(x) = 0_Y$ where $0_Y$ denotes t; AffineMap.zero_linear: The linear component of the zero affine map from an affine space $ P_1 $ over a $ k $-module to another affine space over a $ k $-module is the zero linear map, i.e., $ (0 : P_1 \\to^a[k] V_2).\\text{li; ContinuousAffineMap.contLinear_eq_zero_iff_exists_const: For continuous affine maps between topological torsors $P$ and $Q$ over $R$-modules, the linear component of the map is zero if and only if the map is a constant function. Formally, for $f : P →ᴬ[R] Q",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative group equivariant isomorphism of smooth affine group scheme torsors over affine line lifts any equivariant isomorphism at zero",
+   "results": "Hits read: AffineEquiv.val_equivUnitsAffineMap_apply, AlgebraicGeometry.AffineSpace.homOverEquiv, AffineEquiv.constVAddHom_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|principal.*bundle",
+   "results": "No hits. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"lift\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every equivariant isomorphism at the origin of two smooth affine group scheme torsors on the affine line extends globally",
+   "results": "Hits read: AffineEquiv.ext_iff, AffineEquiv.ext, AffineEquiv.mk.inj, Equiv.vaddConst, AffineEquiv.ctorIdx, AffineEquiv.recOn, AffineEquiv.vaddConst, AffineIsometryEquiv.ext",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant principal bundles on an affine line with scalar action admit isomorphisms extending a chosen isomorphism of the zero fibres",
+   "results": "Hits read: hom_trivializationAt, hom_trivializationAt_baseSet, hom_trivializationAt_apply, Trivialization.linearEquivAt, Pretrivialization.linearEquivAt, Trivialization.IsLinear, Trivialization.coe_continuousLinearEquivAt_eq, VectorBundle.trivialization_linear'",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  },
+  {
+   "tool": "grep",
+   "query": "([Gg]raded.*[Ss]mooth|[Ss]mooth.*[Gg]raded|[Gg]raded.*square.zero)",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern additive or topological torsors, affine-space coordinates, or ungraded lifting, not equivariant smooth affine group-scheme torsors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-dvr-cocharacter-cartan",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.6, proof of (2) implies (1), printed p.6: compare a torsor on the contracting affine line with the pullback of its fibre at zero. The symmetry interchanging s and t permits the weight +1 line.",
+   "via": [
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-contracting-line-equivariant-torsor-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Reduced to the smooth affine Isom scheme, derived the integer grading directly from the coaction, lifted through square-zero polynomial truncations and projected to matching weights, then algebraized using stabilization of each weight. No fibre trivialization or uniqueness is used. One new general torsor-Isom representability lemma; the weight projection and stabilization calculations are elementary steps, not new nodes.",
+  "blueprint": "The inherited from.place traces det-thm-sf-ctf-stability-direct-images, proof (3), through the marked alteration and Cartan prerequisites. This split supplies its stated supporting contraction input by the smooth-Isom argument of Lemma 3.6 and the explicit graded calculation of Section 2, Claim 3; no unit route is replaced. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-5d45996b6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-5d45996b6 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-smooth-affine-torsor-isom-scheme and every cited statement (split-solvable-right-torsors, sbc-smooth-morphisms, weil-affine-spectrum, sc-group-scheme, pqf-def-affine-morphism, pc-scheme, finite-type, field). The statement is byte-identical to live and side-live, so nothing was weakened; this is not a re-split. Step 1: the new node's hypotheses hold (H affine and smooth, P and Q represented fppf torsors), and the conjugation action on Isom is well defined by Yoneda. Step 2: the coaction gives the Z-grading with j(u) in B_1; equivariance of alpha_0 makes f_0 graded. Step 3: the smoothness definition gives the lift over thickenings of affine schemes, and J^2=0 holds even for n=0. The weight projection is correct: J is homogeneous of degree n+1, and a pair of degrees (d',e') other than (d,e) with the same sum has both factors in J. Step 4: each weight stabilizes once n >= max(d,0), and the intersection of the powers of u is zero, so the f_n assemble to a graded map f. Step 5: the section is equivariant, its fibre at 0 is alpha_0, and it intertwines both actions. The new node is true: the torsors trivialize on the fppf cover PxQ, Isom is locally H_Y, affine morphisms descend, and smoothness is local on the base. I checked it on empty Y, trivial torsors and twisted forms. Its source, Stacks 04AG (examples.tex line 3907), states affineness of Isom; the node generalizes it. A DAG scan of statements with torsor and Isom found no duplicate. There are no SGA citations and no tool_uses. Advisory: in step 4 the notation A_d for the degree-d part clashes with the truncation A_n; the text disambiguates it, so I made no fix. The AHHL source is WANTED and not available locally; the proof is self-contained and I verified it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ContractingLineTorsorRigidity",
+  "declaration": "AlgebraicGeometry.exists_equivariantRightTorsorIso_contractingLine",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ContractingLineTorsorRigidity.lean",
+  "statement": "theorem exists_equivariantRightTorsorIso_contractingLine (k : Type u) [Field k] (H : Grp (Over (Spec (.of k)))) [Smooth H.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (P Q : EquivariantRightTorsor (Grp.mk (StandardGroupSchemes.multiplicative k)) H (StandardGroupSchemes.additive k) (ContractingLine.scaling k)) (α₀ : EquivariantRightTorsor.FibreIso P Q (ContractingLine.origin k)) : ∃ α : EquivariantRightTorsor.EquivariantIso P Q, pullback.fst P.torsor.projection (ContractingLine.origin k) ≫ α.iso.hom = α₀.iso.hom ≫ pullback.fst Q.torsor.projection (ContractingLine.origin k)",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d30ad915",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clause-by-clause match. Field k : Type u; H : Grp (Over Spec k) with Smooth, IsAffine, LocallyOfFiniteType, QuasiCompact = smooth affine finite type, nothing stronger. G_m = Grp.mk multiplicative (Mathlib Laurent Hopf law). L = additive k with ContractingLine.scaling = mu_algSpec >> Spec(aeval (T1 ⊗ X)), i.e. u -> z⊗u. P, Q = RepresentedRightTorsor + ModObj left action + covers + commutes. alpha0 = FibreIso at origin (aeval 0): an actual iso of pullbacks; graph preservation = fibre equivariance because the origin is scaling-fixed and the fibre inclusion is mono. Conclusion: exists EquivariantIso (over, left, right) with pullback.fst >> alpha = alpha0 >> pullback.fst; no uniqueness, no triviality. New def node def-sfb-equivariant-right-torsor-fibre-isomorphism: real data, no sorry, TeX matches Lean, fields per H12 (3 search kinds, created, stmt_deps incl. def-sc-gm-ga); no duplicate in the DAG (scheme-action torsor groupoids are single-action) or in lean/Sheaf and lean/WeilConjectures. Item differs from live only by lean + new-node stmt_dep; both lean.statement fields verbatim. Docstrings carry source, blueprint tag and the five proof steps; one sorry; universes bound. Edge cases: trivial H, char p, fibres without rational points, arbitrary alpha0. No file changed, no compile run. Advisory only: LocallyOfFiniteType is implied by Smooth."
+ }
+}

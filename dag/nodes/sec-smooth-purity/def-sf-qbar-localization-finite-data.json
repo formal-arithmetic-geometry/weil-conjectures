@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-qbar-localization-finite-data",
+ "kind": "definition",
+ "title": "Finite localization and exact coefficient-family records",
+ "statement": "For the raw rational coefficient stages [def-weil-algebraically-closed-coefficients], a finite exact coefficient-family record consists of a stage-system morphism, integer shift, additive and triangulated structures on each finite functor, shift compatibility of every beta, and the scalar-unit equation. For complementary closed/open immersions over a finite-field datum [def-weil-finite-field-fiber], define a finite localization data record with the actual finite localization packages [def-sf-rational-localization-data], normalized compact-support coefficient action [def-weil-compact-support-coefficient-action], closed direct-image family, and the two prescribed pullback families [def-weil-derived-pullback-tensor-hom]. Include the four finite exact records, normalized finite adjunctions, inverse-pullback-mate closed beta, and compatible unit/counit families with their finite equations. This is a record of finite data only; it asserts no existence or descended property.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-compact-support-coefficient-action",
+  "def-sf-rational-localization-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible finite exact functors descend through filtered colimits of triangulated categories with normalized stage inclusions",
+   "results": "8 hits; CategoryTheory.exactFunctor; CategoryTheory.leftExactFunctor; CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi; CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits; CategoryTheory.rightExactFunctor; CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits; CategoryTheory.exactFunctor_iff",
+   "date": "2026-10-24",
+   "verdict": "Generic adjunction, shift, and filtered-category infrastructure; no theorem of the stated normalized finite localization or exact pair-descent package."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits; CategoryTheory.Functor.CommShift.id; CategoryTheory.Functor.CommShift; CategoryTheory.Functor.CommShift.ofIso; CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.comp; CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-24",
+   "verdict": "Generic adjunction, shift, and filtered-category infrastructure; no theorem of the stated normalized finite localization or exact pair-descent package."
+  },
+  {
+   "tool": "grep",
+   "query": "Morphism.*[Aa]djunction|adjunction.*[Dd]esc|[Dd]esc.*adjunction",
+   "results": "25 hits; Mathlib/Condensed/Discrete/LocallyConstant.lean; Mathlib/Topology/Convenient/Category.lean; Mathlib/Topology/Convenient/Category.lean; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean; Mathlib/RepresentationTheory/Induced.lean; Mathlib/RepresentationTheory/Coinduced.lean; Mathlib/RepresentationTheory/Coinduced.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction, shift, and filtered-category infrastructure; no theorem of the stated normalized finite localization or exact pair-descent package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfQbarLocalizationCommonStage",
+  "date": "2026-10-25",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Finite data needed for the coefficient-stage localization descent",
+   "via": [
+    "lem-sf-qbar-localization-common-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfQbarLocalizationFiniteData",
+  "file": "lean/Sheaf/Paper/SfQbarLocalizationFiniteData.lean",
+  "declaration": "WeilConjectures.SfLocalizationFiniteExact",
+  "statement": "structure SfLocalizationFiniteExact {V W : Scheme.{u}}\n    (system : (stageSystem l Ω V).Morphism (stageSystem l Ω W))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.SfLocalizationFiniteExact",
+   "WeilConjectures.SfQbarLocalizationFiniteData"
+  ],
+  "note": "The second record is in the same module; both have completely explicit fields and no proof placeholders."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261025T101416-L-3690709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261025T101416-L-3690709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

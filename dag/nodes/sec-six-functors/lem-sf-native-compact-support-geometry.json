@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-native-compact-support-geometry",
+ "kind": "statement",
+ "title": "Native locally finite coefficient section transport",
+ "statement": "For every prime l, the native locally finite adic coefficient system admits NativeGeometry: at all schemes its section functor is an additive equivalence preserving finite limits and colimits; its ring pullback is normalized by function precomposition; direct-image comparisons are identity on sections; the inverse-image and open-extension comparisons have exactly the specified mates.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7–6.8, especially Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; agent decomposition of lem-sf-locally-finite-adic-compact-support-realization"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data"
+ ],
+ "proof": [
+  {
+   "text": "The native vector-space-valued coefficient sheaf is commutative. The lax braided coefficient-forgetful functor and its sheaf-compose version preserve commutative monoid objects, giving the commutative native abelian-sheaf ring.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every scheme morphism choose the uniquely precomposition-normalized coefficient inverse-image isomorphism. Its normalization is exactly the pull_normalized field of NativeRings. Uniqueness determines all the chosen ring data.",
+   "uses": [
+    "lem-sf-native-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting constant vector-space structure is an equivalence by the native scalar-recovery theorem. Compose it with the existing internal-abelian-module section equivalence to obtain the specified sections functor as an equivalence. Equivalences preserve finite limits and colimits; preservation of binary products implies additivity.",
+   "uses": [
+    "lem-sf-native-adic-forget-ab-equivalence",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the native direct-image section theorem to the chosen coefficient ring system. Its isomorphism has exactly the identity-on-sections HEq normalization required for lower.",
+   "uses": [
+    "lem-sf-native-direct-image-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved equivalence-square adjunction-comparison theorem first to the native upper/lower adjunction and the ringed module pullback/direct-image adjunction, with lower as its right comparison. Choose its unique normalized left comparison as upper. Apply the same theorem to the native open-extension/restriction adjunction and the specified ringed open adjunction, with upper as right comparison. This gives extension and its required mate equation. These data fill every field of NativeGeometry, with no derived comparison needed in this structure.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-native-adic-forget-ab-equivalence",
+  "lem-sf-native-coefficient-inverse-image",
+  "lem-sf-native-direct-image-sections",
+  "lem-sfb-equivalence-square-inverse-mate-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Native compact-support geometry proof: coefficient and scalar-recovery inputs, identity-on-sections direct comparison, and the existing equivalence-square adjunction comparison applied twice; Q3, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support of constructible adic complexes commutes with realization by extension of scalars to the locally finite algebraic closure coefficient sheaf",
+   "results": "Eight results: compact support of functions, condensed sets and the p-adic complex field. No sheaf-derived compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence realizes a common finite coefficient field derived compact support functor as compact support in locally finite adic sheaves",
+   "results": "Eight results on condensed modules, free modules and locally constant modules; none supplies the native transport or the compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "Unknown identifier in Mathlib; StageSystem is in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; use the existing project stage system."
+  },
+  {
+   "tool": "grep",
+   "query": "locally_finite_adic_compact_support|NativeGeometry|rationalCocycle",
+   "results": "No Mathlib matches. Project rg located the assigned theorem, its consumers and CoefficientFieldCoherence.rationalCocycle.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific coefficient comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCompactSupportRealization",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance, final common-field-comparisons paragraph; Bhatt--Scholze Remark 6.8.15. Native locally finite coefficient section transport.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportGeometry",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportGeometry.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_geometry",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_geometry"
+  ],
+  "statement": "theorem native_compact_support_geometry : Nonempty (NativeGeometry.{u} l)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T034727-L-3679526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

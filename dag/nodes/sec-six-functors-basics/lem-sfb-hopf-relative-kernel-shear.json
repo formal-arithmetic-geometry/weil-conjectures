@@ -1,0 +1,448 @@
+{
+ "id": "lem-sfb-hopf-relative-kernel-shear",
+ "kind": "statement",
+ "title": "Relative Hopf kernel shear isomorphisms and their naturality",
+ "statement": "Let $k$ be a field [def-weil-field]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. A Hopf homomorphism $u:P\\to Q$ means a $k$-algebra homomorphism with $\\Delta_Qu=(u\\otimes u)\\Delta_P$, $\\epsilon_Qu=\\epsilon_P$ and $S_Qu=uS_P$. Let $C,A,B$ be commutative Hopf $k$-algebras and let $u:C\\to A$, $i:A\\to B$ be Hopf homomorphisms. Put $C^+=\\ker\\epsilon_C$, $D=A/(u(C^+)A)$ and $E=B/((iu)(C^+)B)$ [def-weil-pbc-algebra-hom-quotient]. These quotients have the induced commutative Hopf $k$-algebra structures, and $i$ induces a Hopf homomorphism $\\alpha:D\\to E$, $\\bar a\\mapsto\\overline{i(a)}$. There are $B$-algebra isomorphisms, with $B$ acting through the second tensor factor,\n$$\\Phi_A:A\\otimes_C B\\xrightarrow{\\sim}D\\otimes_k B,\\qquad a\\otimes b\\longmapsto\\sum\\bar a_{(1)}\\otimes i(a_{(2)})b,$$\n$$\\Phi_B:B\\otimes_C B\\xrightarrow{\\sim}E\\otimes_k B,\\qquad x\\otimes b\\longmapsto\\sum\\bar x_{(1)}\\otimes x_{(2)}b.$$\nHere $B$ is a $C$-algebra through $iu$, $\\Delta_A(a)=\\sum a_{(1)}\\otimes a_{(2)}$ and $\\Delta_B(x)=\\sum x_{(1)}\\otimes x_{(2)}$ are finite tensor presentations. Their inverses are\n$$\\bar a\\otimes b\\longmapsto\\sum a_{(1)}\\otimes i(S_A(a_{(2)}))b,\\qquad\\bar x\\otimes b\\longmapsto\\sum x_{(1)}\\otimes S_B(x_{(2)})b,$$\nindependently of the lifts $a,x$. With $a_i=i\\otimes_C1_B$ and $b_i=\\alpha\\otimes_k1_B$, one has $\\Phi_Ba_i=b_i\\Phi_A$. No injectivity, flatness, finite-type, or surjectivity hypothesis is imposed on $u$ or $i$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Exercises 2-1 and 2-2, printed pp.61--62, and the two diagrams in Theorem 3.31, p.74: the explicit coordinate maps of the kernel/product trivializations; Proposition 3.12, p.67, for quotient Hopf structures."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Work simultaneously with $(X,v,h)=(A,u,i)$ and $(B,iu,1_B)$; thus $hv=iu$. Write $I=v(C^+)X$, $Q=X/I$, and $q:X\\to Q$. For $c\\in C$, $c-\\epsilon_C(c)1\\in C^+$, so $qv(c)=\\epsilon_C(c)1$. Applying $\\epsilon_C$ to $\\sum c_{(1)}S_C(c_{(2)})=\\epsilon_C(c)1$ and then using the counit identity gives $\\epsilon_CS_C(c)=\\epsilon_C(c)$. Consequently the three algebra maps $(q\\otimes q)\\Delta_X$, $\\epsilon_X$, and $qS_X$ vanish on every $v(c)$ with $c\\in C^+$: their respective values on $v(c)$ are $\\epsilon_C(c)(1\\otimes1)$, $\\epsilon_C(c)$, and $\\epsilon_C(S_C(c))1$. Since these maps are multiplicative and additive they vanish on $I$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 3.12, p.67, quotient construction expanded on the generators of the ideal; Definition 3.3, pp.65--66."
+   }
+  },
+  {
+   "text": "Define $\\Delta_Q(qx)=(q\\otimes q)\\Delta_X(x)$, $\\epsilon_Q(qx)=\\epsilon_X(x)$ and $S_Q(qx)=qS_X(x)$. Step 1 proves independence of the representative: changing $x$ by an element of $I$ changes each value by zero. These are unital algebra maps because their composites with the surjective algebra map $q$ are. Coassociativity on $qx$ is the image of coassociativity on $x$ under $q\\otimes q\\otimes q$; the two counit equations on $qx$ are the images under $q$ of the counit equations on $x$. Likewise the two antipode products on $qx$ are $q(\\sum S_X(x_{(1)})x_{(2)})$ and $q(\\sum x_{(1)}S_X(x_{(2)}))$, both $\\epsilon_X(x)1_Q$. Every element is $qx$, proving all the Hopf axioms and that $q$ preserves the structure maps.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 3.12, p.67, routine verification written out; Definition 3.3, pp.65--66."
+   }
+  },
+  {
+   "text": "The map $i$ carries each generator $u(c)$ of $u(C^+)A$ to the generator $iu(c)$ of $(iu)(C^+)B$, and hence carries the first ideal into the second. Define $\\alpha(q_Aa)=q_Bi(a)$; differences of representatives map to zero, so this is a well-defined unital $k$-algebra homomorphism. On $q_Aa$ its comultiplication identity is $(q_B\\otimes q_B)\\Delta_Bi(a)=(q_Bi\\otimes q_Bi)\\Delta_A(a)$; its counit and antipode identities follow respectively from $\\epsilon_Bi=\\epsilon_A$ and $S_Bi=iS_A$. Surjectivity of $q_A$ proves that $\\alpha$ is Hopf.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 3.12, p.67, factorization on quotient representatives; Theorem 3.31, p.74, lower horizontal map."
+   }
+  },
+  {
+   "text": "For either triple of step 1, put $F=(q\\otimes h)\\Delta_X:X\\to Q\\otimes_kB$. This is a $k$-algebra map. For $c\\in C$, the Hopf property of $v$ and the equation $qv=\\eta_Q\\epsilon_C$ give\n$$F(v(c))=\\sum\\epsilon_C(c_{(1)})1\\otimes hv(c_{(2)})=1\\otimes iu(c).$$\nThus $F$ and $b\\mapsto1\\otimes b$ agree on $C$. Equip $Q\\otimes_kB$ with this common $C$-algebra structure and apply the tensor universal property to obtain the algebra map\n$$\\Phi_X:X\\otimes_CB\\to Q\\otimes_kB,\\qquad x\\otimes b\\mapsto\\sum q(x_{(1)})\\otimes h(x_{(2)})b.$$\nIt is a $B$-algebra map because $\\Phi_X(1\\otimes b)=1\\otimes b$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercises 2-1 and 2-2, pp.61--62; coordinate form of the vertical isomorphisms in Theorem 3.31, p.74."
+   }
+  },
+  {
+   "text": "Define the $k$-algebra map $T:X\\to X\\otimes_CB$ by $T(x)=\\sum x_{(1)}\\otimes hS_X(x_{(2)})$. It is the composite of $\\Delta_X$ with the tensor map induced by $x\\mapsto x\\otimes1$ and $x\\mapsto1\\otimes hS_X(x)$; commutativity ensures these are algebra maps with commuting images. Balancing over $C$ and the antipode equation give\n$$T(v(c))=\\sum v(c_{(1)})\\otimes hvS_C(c_{(2)})=1\\otimes hv\\!\\left(\\sum c_{(1)}S_C(c_{(2)})\\right)=\\epsilon_C(c)(1\\otimes1).$$\nThus $T$ kills the generators of $I$ and, being an algebra map, kills $I$. The rule $\\bar T(qx)=T(x)$ is independent of the lift and is an algebra map on $Q$. Apply the tensor universal property over $k$ to $\\bar T$ and $b\\mapsto1\\otimes b$. This gives a $B$-algebra map $\\Psi_X:Q\\otimes_kB\\to X\\otimes_CB$ with $\\Psi_X(qx\\otimes b)=\\sum x_{(1)}\\otimes hS_X(x_{(2)})b$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercises 2-1 and 2-2, pp.61--62, inverse division map; Definition 3.3, pp.65--66, antipode equations."
+   }
+  },
+  {
+   "text": "Coassociativity, followed by the two antipode equations and the counit equation, computes the two composites:\n$$\\Psi_X\\Phi_X(x\\otimes b)=\\sum x_{(1)}\\otimes h(S_X(x_{(2)})x_{(3)})b=x\\otimes b,$$\n$$\\Phi_X\\Psi_X(qx\\otimes b)=\\sum q(x_{(1)})\\otimes h(x_{(2)}S_X(x_{(3)}))b=qx\\otimes b.$$\nFor example the first sum is $(1\\otimes h)\\bigl(\\sum x_{(1)}\\otimes S_X(x_{(2)})x_{(3)}\\bigr)(1\\otimes b)$, and the parenthesis is $\\sum x_{(1)}\\otimes\\epsilon_X(x_{(2)})1=x\\otimes1$; the second uses the other antipode identity in exactly the displayed order. Pure tensors generate the tensor products additively, and every element of $Q$ lifts along $q$, so the two identities hold everywhere. Hence $\\Phi_X$ and $\\Psi_X$ are inverse $B$-algebra isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercises 2-1 and 2-2, pp.61--62, multiplication/division cancellation expressed by Definition 3.3, pp.65--66."
+   }
+  },
+  {
+   "text": "Specializing $(X,v,h)$ to $(A,u,i)$ and $(B,iu,1_B)$ gives precisely the two asserted isomorphisms and their lift-independent inverses. The tensor universal property defines $a_i=i\\otimes_C1_B$ and $b_i=\\alpha\\otimes_k1_B$. On $a\\otimes b$ their composites with the shears agree, since\n$$\\Phi_Ba_i(a\\otimes b)=\\sum q_B(i(a_{(1)}))\\otimes i(a_{(2)})b=\\sum\\alpha(q_A(a_{(1)}))\\otimes i(a_{(2)})b=b_i\\Phi_A(a\\otimes b).$$\nHere the first equality is exactly $\\Delta_Bi=(i\\otimes i)\\Delta_A$, and the second is the defining equation of $\\alpha$. Additivity gives equality on the whole tensor product. Every construction used only the stated Hopf equations and tensor balancing, so requires none of the excluded additional hypotheses.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.74, compatibility of its two vertical kernel/product isomorphisms, expanded on coordinates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Exercises 2-1 and 2-2, pp.61--62; Proposition 3.12, p.67; Theorem 3.31, p.74. Explicit coordinate proof supplied from the stated Hopf axioms; no surjectivity or finite-generation assumption from the geometric exercises is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For maps of commutative Hopf algebras C to A to B there is an isomorphism A tensor over C B with the kernel fibre A modulo C plus tensor over the field B compatible with the analogous isomorphism for B",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:36Z",
+    "tool": "leanfinder",
+    "query": "For maps of commutative Hopf algebras C to A to B there is an isomorphism A tensor over C B with the kernel fibre A modulo C plus tensor over the field B compatible with the analogous isomorphism for B",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.tacticHopf_tensor_induction_With__",
+     "Algebra.kerTensorProductMapIdToAlgHomEquiv",
+     "Algebra.kerTensorProductMapIdToAlgHomEquiv_symm_apply",
+     "Algebra.Extension.tensorCotangent",
+     "TensorProduct.antipode_def",
+     "HopfAlgCat.tensorHom_def",
+     "TensorProduct.instHopfAlgebra",
+     "HopfAlgCat.tensorObj_instRing"
+    ],
+    "digest": "3543f6c42abcbd2b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor Hopf structures or an abstract-group fibre bijection. They do not give the relative algebra isomorphisms, quotient Hopf structures and compatible square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For group homomorphisms G to H to Q the fibre product H times over Q G is isomorphic to kernel of H to Q times G",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:37Z",
+    "tool": "leanfinder",
+    "query": "For group homomorphisms G to H to Q the fibre product H times over Q G is isomorphic to kernel of H to Q times G",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonoidHom.fiberEquivKer_symm_apply",
+     "MonoidHom.fiberEquivKer_apply",
+     "MonoidHom.fiberEquivKer",
+     "MonoidHom.fiberEquivKerOfSurjective",
+     "MonoidHom.fiberEquiv",
+     "AddCommGrpCat.kernelIsoKerOver",
+     "MonoidHom.fiberEquiv_apply",
+     "AddMonoidHom.fiberEquivKer"
+    ],
+    "digest": "0c70bdd7f003f2c6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor Hopf structures or an abstract-group fibre bijection. They do not give the relative algebra isomorphisms, quotient Hopf structures and compatible square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre product of two group schemes over a common quotient is a product with the kernel when one map factors through the other",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:30Z",
+    "tool": "leansearch",
+    "query": "The fibre product of two group schemes over a common quotient is a product with the kernel when one map factors through the other",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonoidHom.ker_prodMap",
+     "AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback",
+     "CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct",
+     "AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom",
+     "AddMonoidHom.ker_prodMap",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
+     "AlgebraicGeometry.Scheme.Hom.ker_comp",
+     "AlgebraicGeometry.Scheme.Hom.fiber"
+    ],
+    "digest": "95aae43d373d7088"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor Hopf structures or an abstract-group fibre bijection. They do not give the relative algebra isomorphisms, quotient Hopf structures and compatible square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"TensorProduct\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:31Z",
+    "tool": "loogle",
+    "query": "\"HopfAlgebra\", \"TensorProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "TensorProduct.instHopfAlgebra"
+    ],
+    "digest": "df802ba2ccb64f37"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor Hopf structures or an abstract-group fibre bijection. They do not give the relative algebra isomorphisms, quotient Hopf structures and compatible square."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]hear|[Kk]ernel.*[Pp]rod|[Pp]rod.*[Kk]ernel",
+   "sub": "AlgebraicGeometry/Group",
+   "results": {
+    "t": "2026-10-23T14:47:31Z",
+    "tool": "grep",
+    "query": "[Ss]hear|[Kk]ernel.*[Pp]rod|[Pp]rod.*[Kk]ernel",
+    "sub": "AlgebraicGeometry/Group",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor Hopf structures or an abstract-group fibre bijection. They do not give the relative algebra isomorphisms, quotient Hopf structures and compatible square."
+  },
+  {
+   "tool": "grep",
+   "query": "shear|quotient|augmentation|ker",
+   "sub": "RingTheory/HopfAlgebra",
+   "results": {
+    "t": "2026-10-23T19:02:21Z",
+    "tool": "grep",
+    "query": "shear|quotient|augmentation|ker",
+    "sub": "RingTheory/HopfAlgebra",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean"
+    ],
+    "digest": "d0beffbda01165b2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf algebra relative tensor product is isomorphic to kernel quotient tensor product by the shear map",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:02:21Z",
+    "tool": "leansearch",
+    "query": "Hopf algebra relative tensor product is isomorphic to kernel quotient tensor product by the shear map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.instHopfAlgebra",
+     "Algebra.kerTensorProductMapIdToAlgHomEquiv",
+     "TensorProduct.antipode_def",
+     "Algebra.Extension.cotangentEquiv",
+     "HopfAlgCat.associator_def",
+     "HopfAlgCat.MonoidalCategory.inducingFunctorData_μIso",
+     "HopfAlgCat.tensorObj_carrier",
+     "tensorKaehlerQuotKerSqEquiv"
+    ],
+    "digest": "6836699dfd58cb32"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"TensorProduct\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:02:21Z",
+    "tool": "loogle",
+    "query": "\"HopfAlgebra\", \"TensorProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "TensorProduct.instHopfAlgebra"
+    ],
+    "digest": "df802ba2ccb64f37"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative Hopf algebras C to A to B the relative tensor product A tensor C B is isomorphic to A modulo the augmentation ideal of C tensor k B by comultiplication and inverse antipode",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:02:22Z",
+    "tool": "leanfinder",
+    "query": "For commutative Hopf algebras C to A to B the relative tensor product A tensor C B is isomorphic to A modulo the augmentation ideal of C tensor k B by comultiplication and inverse antipode",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.antipode_def",
+     "HopfAlgebra.mul_antipode_rTensor_comul_apply",
+     "TensorProduct.instHopfAlgebra",
+     "HopfAlgebra.mul_antipode_lTensor_comul_apply",
+     "HopfAlgebra.mul_antipode_rTensor_comul",
+     "TensorProduct.tacticHopf_tensor_induction_With__",
+     "HopfAlgebra.mul_antipode_lTensor_comul",
+     "HopfAlgCat.tensorObj_instHopfAlgebra"
+    ],
+    "digest": "a39e6b5db53b7ef2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  },
+  {
+   "tool": "grep",
+   "query": "shear|[Kk]ernel.*[Pp]rod|[Pp]rod.*[Kk]ernel",
+   "sub": "AlgebraicGeometry/Group",
+   "results": {
+    "t": "2026-10-23T19:02:52Z",
+    "tool": "grep",
+    "query": "shear|[Kk]ernel.*[Pp]rod|[Pp]rod.*[Kk]ernel",
+    "sub": "AlgebraicGeometry/Group",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group homomorphism admits an isomorphism from its self fibre product to its kernel times the group by division in the first coordinate, on affine coordinate Hopf algebras",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:02:54Z",
+    "tool": "leanfinder",
+    "query": "A group homomorphism admits an isomorphism from its self fibre product to its kernel times the group by division in the first coordinate, on affine coordinate Hopf algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonoidHom.fiberEquivKer_apply",
+     "MonoidHom.fiberEquivKer_symm_apply",
+     "MonoidHom.fiberEquivKer",
+     "AddCommGrpCat.kernelIsoKerOver",
+     "AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp",
+     "AlgebraicGeometry.pullbackSpecIso_hom_base",
+     "AlgebraicGeometry.pullbackSpecIso_hom_fst",
+     "AlgebraicGeometry.diagonal_Spec_map"
+    ],
+    "digest": "2fb3ba0f791d2df9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned tensor Hopf structures, antipode axioms, Hopf-ideal quotient construction and abstract-group fibre bijections do not state the relative algebra shears and their compatible square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hopf-subalgebra-faithfully-flat",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Exercises 2-1 and 2-2, printed pp.61--62, and the two diagrams in Theorem 3.31, p.74: the explicit coordinate maps of the kernel/product trivializations; Proposition 3.12, p.67, for quotient Hopf structures.",
+   "via": [
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hopf-relative-kernel-shear",
+  "worker": "stage1",
+  "summary": "Q27 checked the full live Lean source for an attachment, searched the DAG and latest blueprint, read Milne Exercises 2-1/2-2, Proposition 3.12 and Theorem 3.31, and supplied a direct seven-step coordinate proof. Quotient descent, balancing, inverse cancellation and naturality are explicit. All subcalculations are elementary from the inline Hopf axioms and the existing tensor universal-property leaf, so no new node is created. Statement unchanged.",
+  "blueprint": "Latest blueprint main-20261023-1620, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting alteration prerequisites recorded in blueprint.from.place. This item supplies the two compatible vertical coordinate isomorphisms in Milne Theorem 3.31 p.74 used by its parent. Existing blueprint.from.node is null; ancestor command confirms None.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-8c6a971a1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-8c6a971a1 (reviewer sub-agent of L); spot-checked: Read the item and both cited leaves in full: the algebra tensor universal property (parts 1-3) and the algebra quotient definition. The statement is unchanged. The split has 7 steps and no new nodes. proof_deps equal the union of the step uses, and stmt_deps cover the three nodes the statement cites. No repair note exists, so the re-split rule does not apply. No SGA source is cited. tool_uses is empty. Source checks: Milne iAG2017 Exercises 2-1/2-2 (pp.61-62) and Theorem 3.31 (pp.73-74, the right-hand algebra diagram with its vertical isomorphisms). Phi_A is the coordinate pullback along (n,g)->(n phi(g),g), so the formula and its direction match the source. The surjectivity hypothesis of Exercise 2-2 is correctly not needed. Step checks: (1) eps S = eps is derived correctly, and (q⊗q)Delta, eps and qS vanish on v(C+), hence on the ideal. (2) The quotient Hopf axioms hold via surjectivity of q. (3) alpha is well defined with no injectivity of i used. (4) F(v(c))=1⊗iu(c) gives the C-agreement hypothesis of the tensor universal property, and Phi_X is a B-algebra map. (5) T(v(c))=eps(c)(1⊗1) is a valid balancing computation, and T is an algebra map because S is an algebra map in the commutative convention. (6) Both composites are the identity, with Sweedler order preserved and no cocommutativity used. (7) The square follows from Delta_B i=(i⊗i)Delta_A and the definition of alpha. Small cases checked: C=k gives the plain shear; C=A=B gives A⊗_A A=A; non-injective u and i both work. The parent faithfully-flat node uses exactly alpha, Phi_A, Phi_B and the square. DAG searches for hopf, shear, C+ and Hopf ideal found no duplicate, and Mathlib's Hopf quotient is not this statement. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.RelativeKernelShear",
+  "declaration": "HopfAlgebra.exists_relativeKernelShear",
+  "declarations": [
+   "HopfAlgebra.relativeKernelIdeal",
+   "HopfAlgebra.exists_relativeKernelShear"
+  ],
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/RelativeKernelShear.lean",
+  "statement": "theorem exists_relativeKernelShear (k : Type u) (C : Type v) (A : Type w) (B : Type z) [Field k] [CommRing C] [CommRing A] [CommRing B] [HopfAlgebra k C] [HopfAlgebra k A] [HopfAlgebra k B] (u : C →ₐc[k] A) (i : A →ₐc[k] B) (huS : ∀ c : C, u (antipode k c) = antipode k (u c)) (hiS : ∀ a : A, i (antipode k a) = antipode k (i a)) [Algebra C A] [Algebra C B] (hu : algebraMap C A = u.toAlgHom.toRingHom) (hiu : algebraMap C B = (i.comp u).toAlgHom.toRingHom) : (relativeKernelIdeal u).IsHopfIdeal k ∧ (relativeKernelIdeal (i.comp u)).IsHopfIdeal k ∧ ∀ [hD : (relativeKernelIdeal u).IsHopfIdeal k] [hE : (relativeKernelIdeal (i.comp u)).IsHopfIdeal k], ∃ α : (A ⧸ relativeKernelIdeal u) →ₐc[k] (B ⧸ relativeKernelIdeal (i.comp u)), (∀ a : A, α (Ideal.Quotient.mk (relativeKernelIdeal u) a) = Ideal.Quotient.mk (relativeKernelIdeal (i.comp u)) (i a)) ∧ (∀ d : A ⧸ relativeKernelIdeal u, α (antipode k d) = antipode k (α d)) ∧ ∃ ΦA : @AlgEquiv B (A ⊗[C] B) ((A ⧸ relativeKernelIdeal u) ⊗[k] B) _ _ _ (Algebra.TensorProduct.rightAlgebra (R := C)) (Algebra.TensorProduct.rightAlgebra (R := k)), ∃ ΦB : @AlgEquiv B (B ⊗[C] B) ((B ⧸ relativeKernelIdeal (i.comp u)) ⊗[k] B) _ _ _ (Algebra.TensorProduct.rightAlgebra (R := C)) (Algebra.TensorProduct.rightAlgebra (R := k)), (∀ (a : A) (b : B) (n : ℕ) (l r : Fin n → A), Coalgebra.comul a = ∑ j, l j ⊗ₜ[k] r j → ΦA (a ⊗ₜ[C] b) = ∑ j, Ideal.Quotient.mk (relativeKernelIdeal u) (l j) ⊗ₜ[k] (i (r j) * b)) ∧ (∀ (x b : B) (n : ℕ) (l r : Fin n → B), Coalgebra.comul x = ∑ j, l j ⊗ₜ[k] r j → ΦB (x ⊗ₜ[C] b) = ∑ j, Ideal.Quotient.mk (relativeKernelIdeal (i.comp u)) (l j) ⊗ₜ[k] (r j * b)) ∧ (∀ (a : A) (b : B) (n : ℕ) (l r : Fin n → A), Coalgebra.comul a = ∑ j, l j ⊗ₜ[k] r j → (@AlgEquiv.symm B _ _ _ _ _ (Algebra.TensorProduct.rightAlgebra (R := C)) (Algebra.TensorProduct.rightAlgebra (R := k)) ΦA) (Ideal.Quotient.mk (relativeKernelIdeal u) a ⊗ₜ[k] b) = ∑ j, l j ⊗ₜ[C] (i (antipode k (r j)) * b)) ∧ (∀ (x b : B) (n : ℕ) (l r : Fin n → B), Coalgebra.comul x = ∑ j, l j ⊗ₜ[k] r j → (@AlgEquiv.symm B _ _ _ _ _ (Algebra.TensorProduct.rightAlgebra (R := C)) (Algebra.TensorProduct.rightAlgebra (R := k)) ΦB) (Ideal.Quotient.mk (relativeKernelIdeal (i.comp u)) x ⊗ₜ[k] b) = ∑ j, l j ⊗ₜ[C] (antipode k (r j) * b)) ∧ ∃ aᵢ : (A ⊗[C] B) →ₐ[C] (B ⊗[C] B), (∀ (a : A) (b : B), aᵢ (a ⊗ₜ[C] b) = i a ⊗ₜ[C] b) ∧ ∀ t : A ⊗[C] B, ΦB (aᵢ t) = Algebra.TensorProduct.map α.toAlgHom (AlgHom.id k B) (ΦA t)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d31e68269",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: field k; Hopf algebras as CommRing + HopfAlgebra k; BialgHom u, i plus antipode clauses huS/hiS, which hold automatically; hu/hiu only fix the C-algebra structures, so no stronger assumption; no injectivity/flatness/finite-type/surjectivity binders; independent universes. relativeKernelIdeal = (ker ε_C).map v is exactly v(C⁺)X. Both ideals are asserted IsHopfIdeal, then Mathlib's canonical quotient Hopf instance via ∀[hD][hE]. α is a BialgHom with the representative formula and the antipode clause. ΦA/ΦB are AlgEquiv over B with rightAlgebra on both sides. Forward and inverse formulas hold for all lifts and all Fin n presentations, in the node's factor order. The naturality square is stated on the whole tensor product, with aᵢ fixed by its value on pure tensors. lean.statement verbatim; single sorry; docstrings carry source, blueprint and the 7 proof steps; only the lean record changed; stmt_deps are Mathlib-status and unchanged. H4: RelativeHopf.augmentationIdeal (Q38) builds the related ideal from a subalgebra; the node does not cite it and both citers are proof-only, so the local helper is accepted (advisory). No file changed, so no compile; the worker compiled before delivery."
+ }
+}

@@ -1,0 +1,361 @@
+{
+ "id": "lem-dl-a1-field-galois-fibre-identification",
+ "kind": "statement",
+ "title": "Field Galois group and the finite etale geometric fibre functor",
+ "statement": "Let $K$ be a field, $\\Omega/K$ a separable closure [def-pd-separable-closure], and $\\widetilde\\Omega/\\Omega$ an algebraic closure [def-weil-algebraic-closure]. Give $G=\\operatorname{Aut}_K(\\Omega)$ the Krull topology: the subgroups fixing finite intermediate extensions pointwise form a neighbourhood basis of the identity. Put $s:\\operatorname{Spec}\\widetilde\\Omega\\to\\operatorname{Spec}K$ and let $F_s$ be the finite etale fibre functor [def-galois-categories, def-galois-fibre-functor]. Every $\\sigma\\in G$ has a unique $K$-automorphism extension $\\widetilde\\sigma$ of $\\widetilde\\Omega$. The formula\n$$j(\\sigma)_Q(t)=t\\circ\\operatorname{Spec}(\\widetilde\\sigma)$$\nfor finite etale $K$-schemes $Q$ and $t:\\operatorname{Spec}\\widetilde\\Omega\\to Q$ defines an isomorphism of profinite topological groups\n$$j:G\\xrightarrow{\\sim}\\pi_1(\\operatorname{Spec}K,s).$$\nFor $r:\\operatorname{Spec}\\widetilde\\Omega\\to\\operatorname{Spec}\\Omega$, precomposition gives a bijection, natural in finite etale $Q/K$,\n$$b_Q:\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,Q)\\xrightarrow{\\sim}|Q_s|,\\qquad u\\longmapsto u\\circ r.$$\nIt satisfies $b_Q(u\\circ\\operatorname{Spec}\\sigma)=j(\\sigma)_Q(b_Q(u))$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BNE, lemma-fundamental-group-Galois-group (both parts and the displayed equality of Hom sets in the proof); Tag 0BQ9, remark-variance (extension to the algebraic closure and the explicit action)."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-algebraic-closure",
+  "def-galois-categories",
+  "def-galois-fibre-functor"
+ ],
+ "proof": [
+  {
+   "text": "First extend automorphisms. For each $x\\in\\widetilde\\Omega$, the simple extension $\\Omega(x)/\\Omega$ is finite (powers below the degree of an annihilating polynomial span it). Apply [lem-kun-sep-closed-finite-extension-purely-inseparable] to this extension: its bottom field is separably closed by [def-pd-separable-closure]. Thus $\\widetilde\\Omega/\\Omega$ is purely inseparable, in the sense of [def-weil-pbc-finite-purely-inseparable-extension]. In characteristic zero it equals $\\Omega$; in characteristic $p>0$ each $x$ has a power $x^{p^n}\\in\\Omega$. Given $\\sigma\\in G$, view the same algebraically closed field $\\widetilde\\Omega$ with the two embeddings $i:\\Omega\\hookrightarrow\\widetilde\\Omega$ and $i\\sigma$. Both are algebraic closures of $\\Omega$ since their images coincide. The uniqueness-up-to-isomorphism clause of [def-weil-algebraic-closure] gives a field automorphism $\\widetilde\\sigma$ with $\\widetilde\\sigma i=i\\sigma$. Two such extensions agree: their values on $x$ have the same $p^n$-th power $\\sigma(x^{p^n})$, and Frobenius is injective in a field. The characteristic-zero case is immediate. Uniqueness also gives $\\widetilde{\\sigma\\tau}=\\widetilde\\sigma\\widetilde\\tau$.",
+   "uses": [
+    "lem-kun-sep-closed-finite-extension-purely-inseparable",
+    "def-pd-separable-closure",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQ9, remark-variance, the algebraic closure is the perfection of the separable closure"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois] with intermediate field $K$, $\\Omega/K$ is normal and separable algebraic. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] over the unique point of $\\operatorname{Spec}K$ to write $Q=\\coprod_{i\\in I}\\operatorname{Spec}L_i$ with $L_i/K$ finite separable. The index set is finite: $Q/K$ is finite, hence its underlying affine algebra is a finite-dimensional $K$-vector space by [def-weil-finite-integral-morphism]; the component idempotents are linearly independent in this finite-dimensional algebra, since restriction to any component sends its own idempotent to $1$ and every other one to $0$. By [def-weil-affine-spectrum], a point in this component is an embedding $L_i\\to\\widetilde\\Omega$. The minimal polynomial of every $a\\in L_i$ splits in $\\Omega$: it is separable, and $\\Omega$ is separably closed. Consequently every possible image of $a$ in $\\widetilde\\Omega$ is in $\\Omega$, by evaluating that product of linear factors in a field. Thus this embedding factors uniquely through $\\Omega$. This proves that $b_Q$ is bijective, including $Q=\\varnothing$. Postcomposition with any $K$-morphism $Q\\to Q'$ commutes with precomposition by $r$, so the bijections are natural.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE, lemma-fundamental-group-Galois-group, proof of part (1), equality of Hom sets"
+   }
+  },
+  {
+   "text": "Contravariant functoriality of $\\operatorname{Spec}$ in [def-weil-affine-spectrum] gives $\\operatorname{Spec}(\\widetilde{\\sigma\\tau})=\\operatorname{Spec}(\\widetilde\\tau)\\circ\\operatorname{Spec}(\\widetilde\\sigma)$. Hence $j(\\sigma\\tau)_Q(t)=j(\\sigma)_Q(j(\\tau)_Q(t))$. Identity and inverses follow likewise. Postcomposition with a map of finite etale schemes commutes with these operations, so this is a natural automorphism of $F_s$. The equality $\\widetilde\\sigma i=i\\sigma$ gives $r\\circ\\operatorname{Spec}(\\widetilde\\sigma)=\\operatorname{Spec}(\\sigma)\\circ r$. Therefore\n$$j(\\sigma)_Q(b_Q(u))=u\\circ r\\circ\\operatorname{Spec}(\\widetilde\\sigma)=u\\circ\\operatorname{Spec}(\\sigma)\\circ r=b_Q(u\\circ\\operatorname{Spec}\\sigma).$$",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQ9, remark-variance, displayed action and multiplication calculation"
+   }
+  },
+  {
+   "text": "The restriction map of [lem-exc-galois-krull-finite-limit], applicable because step 2 proves $\\Omega/K$ Galois, identifies $G$ topologically with the compatible tuples in the product of the finite groups $\\operatorname{Gal}(L/K)$. This is a closed subgroup: for every inclusion $L\\subseteq M$, the equation $g_M|_L=g_L$ cuts out the inverse image of the diagonal in a finite discrete set; intersect these closed equations. Thus [lem-galois-closed-subgroup-product-finite-groups] makes $G$ profinite, in particular compact Hausdorff. Its identity has the required basis of open subgroups by the Krull topology in the statement.",
+   "uses": [
+    "lem-exc-galois-krull-finite-limit",
+    "lem-galois-closed-subgroup-product-finite-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE part (2); field-theoretic input Stacks Tag 0BU2, fields-lemma-infinite-galois-limit"
+   }
+  },
+  {
+   "text": "Apply the compact alternative of [lem-sfb-complete-group-forgetful-automorphisms] to $G$, with the Hausdorff, compactness and open-subgroup-basis hypotheses checked in step 4. It identifies $G$ with the automorphism group of the underlying-set functor on its orbit category $\\mathcal O_G$. Every orbit $G/U$ in this category is finite: the open cosets of $U$ cover compact $G$, and a finite subcover contains every distinct coset. Thus every object of $\\mathcal O_G$ is a finite transitive continuous $G$-set.",
+   "uses": [
+    "lem-sfb-complete-group-forgetful-automorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE part (2), reconstruction of the group from its action category; compact reconstruction supplied by Bhatt-Scholze Proposition 7.1.5 and Example 7.1.6"
+   }
+  },
+  {
+   "text": "Let $\\alpha\\in\\operatorname{Aut}(F_s)$. Transport it through $b$ to $a_Q=b_Q^{-1}\\alpha_Qb_Q$ on $H(Q)=\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,Q)$. By [lem-exc-etale-field-galois-classification], for every orbit $O=G/U$ choose a finite separable field $L_O/K$ and an equivariant bijection $c_O:H(\\operatorname{Spec}L_O)\\to O$. These spectra are finite etale: finiteness is [def-weil-finite-integral-morphism] and etaleness is [lem-weil-pbc-finite-separable-extension-etale]. Set $a_O=c_Oa_{\\operatorname{Spec}L_O}c_O^{-1}$. Every equivariant map $O\\to O'$ is induced, through $c_O,c_{O'}$, by a unique $K$-morphism of the corresponding spectra, by the full-faithfulness clause of the classification. Naturality of $a_Q$ therefore proves naturality of $a_O$; applying the same construction to $\\alpha^{-1}$ proves invertibility. Step 5 now gives a unique $\\sigma\\in G$ acting as $a_O$ on every orbit. The same full-faithfulness clause, applied to an equivariant isomorphism from $H(\\operatorname{Spec}L)$ to a chosen orbit representative, implies $a_{\\operatorname{Spec}L}(u)=u\\circ\\operatorname{Spec}\\sigma$ for every finite separable $L/K$. For general $Q$, its decomposition in step 2 and naturality along each component inclusion give this equality on every point of $H(Q)$. Step 3 gives $\\alpha=j(\\sigma)$. Uniqueness from reconstruction also proves injectivity: if $j(\\sigma)=j(\\tau)$ their actions on all these orbit representatives coincide, so $\\sigma=\\tau$.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE part (1) and part (2); Tag 03QR, lemma-sheaves-point, orbit classification and full faithfulness"
+   }
+  },
+  {
+   "text": "Check the topology explicitly, using [def-galois-aut-topology]. For $u\\in H(Q)$ in the $L$-component, its stabilizer in $G$ fixes the finite subfield $u^\\sharp(L)\\subseteq\\Omega$ pointwise and is open by the stated Krull basis. The kernel of the action on the finite set $H(Q)$ is the finite intersection of these open stabilizers. Thus every map $G\\to\\operatorname{Aut}(F_s(Q))$ is continuous, and so $j$ is continuous for the product-induced topology. Conversely, for any open subgroup $U\\subseteq G$, choose the orbit $G/U$ and its finite separable field representative as in step 6. The identity coset corresponds to a point $x$ of its geometric fibre. Since its stabilizer is exactly $U$, the bijection $j$ sends $U$ onto the stabilizer of $x$ in $\\operatorname{Aut}(F_s)$. This latter subgroup is open in the product-induced topology. Hence $j^{-1}$ is continuous at the identity (open subgroups form a basis), and by translation everywhere. Together with steps 3, 4 and 6 this makes $j$ an isomorphism of profinite topological groups.",
+   "uses": [
+    "def-galois-aut-topology",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE part (2); Tag 0BQ9 explicit action; topology from section-galois, equation-embedding-product"
+   }
+  },
+  {
+   "text": "Finally the finite-etale fibre-functor interpretation of $\\pi_1$ agrees with the finite-locally-constant-sheaf interpretation in [def-galois-fibre-functor]: [thm-galois-lc-etale] supplies an equivalence compatible with these fibre functors. Conjugation by that natural fibre isomorphism identifies their natural automorphisms; the inverse uses the inverse equivalence. Its coordinate maps are bijections of finite fibres, so it also identifies their product-induced topologies. Thus the group just identified is the stated $\\pi_1(\\operatorname{Spec}K,s)$, with exactly the action and natural equivariance formula proved in step 3.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE, lemma-fundamental-group-Galois-group, fibre-functor compatibility; finite-etale/FLC identification in thm-galois-lc-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "def-pd-separable-closure",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-galois-closed-subgroup-product-finite-groups",
+  "lem-sfb-complete-group-forgetful-automorphisms",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-galois-aut-topology",
+  "def-galois-fibre-functor",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BNE and 0BQ9; detailed assembly of the Hom-factorization and reconstruction arguments, using existing orbit reconstruction rather than an unrecorded formal consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Galois group of a field is canonically isomorphic as a profinite group to the automorphisms of the finite etale geometric fibre functor",
+   "results": "8 hits: InfiniteGalois.mulEquivToLimit, InfiniteGalois.limitToAlgEquiv, InfiniteGalois.limitToAlgEquiv_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, InfiniteGalois.profiniteGalGrpIsoLimit, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, InfiniteGalois.algEquivToLimit. Read Mathlib/FieldTheory/AbsoluteGaloisGroup.lean 40-49 and CategoryTheory/Galois/IsFundamentalgroup.lean 122-194. The former defines a Galois group and the InfiniteGalois hits compare it with field-theoretic inverse limits; none identifies finite etale geometric fibres with separable embeddings or gives the scheme fundamental-group comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a separable closure extend uniquely to its algebraic closure and identify the Galois group with the automorphisms of the geometric fibre functor on finite etale schemes",
+   "results": "8 hits: InfiniteGalois.limitToAlgEquiv, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, InfiniteGalois.limitToAlgEquiv_apply, InfiniteGalois.mulEquivToLimit, InfiniteGalois.toAlgEquivAux_eq_liftNormal, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, finGaloisGroupMap, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π. Read Mathlib/FieldTheory/AbsoluteGaloisGroup.lean 40-49 and CategoryTheory/Galois/IsFundamentalgroup.lean 122-194. The former defines a Galois group and the InfiniteGalois hits compare it with field-theoretic inverse limits; none identifies finite etale geometric fibres with separable embeddings or gives the scheme fundamental-group comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.absoluteGaloisGroup, CategoryTheory.Aut",
+   "results": "0 hits: . Read Mathlib/FieldTheory/AbsoluteGaloisGroup.lean 40-49 and CategoryTheory/Galois/IsFundamentalgroup.lean 122-194. The former defines a Galois group and the InfiniteGalois hits compare it with field-theoretic inverse limits; none identifies finite etale geometric fibres with separable embeddings or gives the scheme fundamental-group comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "absoluteGaloisGroup|IsPurelyInseparable.*[Aa]lgEquiv|[Aa]lgEquiv.*IsPurelyInseparable",
+   "results": "9 hits: Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/AbsoluteGaloisGroup.lean, Mathlib/FieldTheory/AbsoluteGaloisGroup.lean, Mathlib/FieldTheory/AbsoluteGaloisGroup.lean, Mathlib/FieldTheory/AbsoluteGaloisGroup.lean. Read Mathlib/FieldTheory/AbsoluteGaloisGroup.lean 40-49 and CategoryTheory/Galois/IsFundamentalgroup.lean 122-194. The former defines a Galois group and the InfiniteGalois hits compare it with field-theoretic inverse limits; none identifies finite etale geometric fibres with separable embeddings or gives the scheme fundamental-group comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale fundamental group of the spectrum of a field is its absolute Galois group with Krull topology",
+   "results": "8 hits: Field.absoluteGaloisGroup, Field.instTopologicalSpaceAbsoluteGaloisGroup, instIsTopologicalGroupAlgEquiv, Field.instGroupAbsoluteGaloisGroup, InfiniteGalois.profiniteGalGrp, galBasis, krullTopology, krullTopology_t2. Read Mathlib/FieldTheory/AbsoluteGaloisGroup.lean 40-49 and CategoryTheory/Galois/IsFundamentalgroup.lean 122-194. The former defines a Galois group and the InfiniteGalois hits compare it with field-theoretic inverse limits; none identifies finite etale geometric fibres with separable embeddings or gives the scheme fundamental-group comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSepClosed.*isPurelyInseparable|IsPurelyInseparable.*algHom|algHom.*IsPurelyInseparable",
+   "results": "5 hits: Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean. Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Galois group of a field is the automorphism group of its finite etale geometric fibre functor",
+   "results": "8 hits: Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, Field.absoluteGaloisGroupAbelianization, InfiniteGalois.profiniteGalGrp, Field.instTopologicalSpaceAbsoluteGaloisGroup, IsGaloisGroup.of_isGalois, finGaloisGroupFunctor, CategoryTheory.PreGaloisCategory.AutGalois. Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fundamental group of the spectrum of a field is the absolute Galois group",
+   "results": "8 hits: Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', CategoryTheory.PreGaloisCategory.IsFundamentalGroup.casesOn, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.mk, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, termGal(_/_). Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Aut, Field.absoluteGaloisGroup",
+   "results": "0 hits: . Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural automorphisms of the forgetful functor on finite continuous G sets recover a profinite group",
+   "results": "8 hits: ProfiniteGrp.instHasForget₂FiniteGrp, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, CategoryTheory.PreGaloisCategory.toAutMulEquiv, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, CategoryTheory.PreGaloisCategory.toAutHomeo, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.toAutHomeo_apply. Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toAutMulEquiv|toAutHomeo|absoluteGaloisGroup",
+   "results": "5 hits: Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean. Read AbsoluteGaloisGroup.lean:40-49, IsFundamentalgroup.lean:122-287 and PurelyInseparable/Basic.lean:148-153. The field definition and abstract categorical reconstruction do not identify finite-etale geometric fibres with separable embeddings; none states the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-field-point-full-faithful-galois-map",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph of rem-dl-a1-conventions: extension across infinity is equivalent to trivial inertia; the Galois presentation used by lem-dl-a1-normal-scheme-galois-inertia-presentation, via the fully faithful field-point comparison.",
+   "via": [
+    "lem-dl-a1-field-point-full-faithful-galois-map",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-field-galois-fibre-identification",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0BNE and 0BQ9, the current rem-dl-a1-conventions and all cited statements. Retained the statement. Split the unique extension, geometric Hom factorization, variance, profiniteness, orbit reconstruction and topological checks using existing DAG facts; no new nodes. No exact sorry-free project attachment or Mathlib match exists.",
+  "blueprint": "rem-dl-a1-conventions, final paragraph: extending across infinity is equivalent to trivial inertia; realizes the separable-closure/geometric-fibre comparison required by the field-point comparison on that route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-sep-closed-finite-extension-purely-inseparable",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-pd-separable-closure",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-weil-pbc-finite-purely-inseparable-extension",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-weil-algebraic-closure",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "lem-exc-galois-krull-finite-limit",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "lem-galois-closed-subgroup-product-finite-groups",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "lem-sfb-complete-group-forgetful-automorphisms",
+    "why": "Generic compact-group reconstruction of the orbit forgetful functor; the affine-line conventions unit contains no reconstruction theorem."
+   },
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Generic finite separable extension/orbit classification and full faithfulness; needed for the field-point comparison, not a replacement of the affine-line route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-galois-aut-topology",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "def-galois-fibre-functor",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic field, scheme or fibre-functor tool needed for the field comparison; the affine-line conventions unit contains no such general-purpose statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "def-pd-separable-closure",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-galois-closed-subgroup-product-finite-groups",
+  "lem-sfb-complete-group-forgetful-automorphisms",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-galois-aut-topology",
+  "def-galois-fibre-functor",
+  "thm-galois-lc-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-751a154c5",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-751a154c5 (reviewer sub-agent of L); spot-checked: I read the item, all 16 cited statements and Stacks pione.tex 0BNE (lines 1269-1308) and 0BQ9 (lines 1312-1336). The statement, stmt_deps and blueprint block are identical to live. The item is still unsplit in live and side-live, so no other group has superseded it. There are no new nodes, no cycle, and proof_deps equal the union of the step uses. Step checks: (1) Omega(x)/Omega is finite, hence purely inseparable by the kun lemma. The two embeddings i and i·sigma make Omega~ an algebraic closure twice, so the uniqueness clause gives sigma~, and Frobenius injectivity makes it unique (K not assumed perfect). (2) cite (2) with k'=K makes Omega/K Galois. The etale-fibre lemma at the single point gives Q as a disjoint union of Spec L_i, finitely many by independence of the idempotents. Each embedding L_i into Omega~ lands in Omega because the separable polynomials split there. (3) Spec(sigma tau)=Spec tau∘Spec sigma, a left action as in 0BQ9; the identity r∘Spec sigma~ = Spec sigma∘r is checked. (4) Krull limit plus a closed subgroup of a product of finite groups gives G profinite. (5) Compact case of lem-sfb-complete-group-forgetful-automorphisms; the orbits G/U are finite. (6) The classification's converse and full-faithfulness clauses make the transported automorphism natural on the orbit category. This gives sigma, extended to every finite separable L via H(g)^{-1} sigma H(g) and then to every Q through its components; injectivity comes from reconstruction. (7) Stab(u) is the fixer of u#(L), so j is continuous. For open U, j(U)=Stab(x), so j is open and hence a homeomorphism. (8) The FEt/FLC equivalence compatible with fibre functors (thm-galois-lc-etale) transfers the group and its topology to pi_1 as defined in def-galois-fibre-functor. Edge cases checked: Q empty, K separably closed, characteristic 0, imperfect K, the trivial orbit. Duplicate search over 0BNE/0BQ9 and absolute-Galois nodes (lem-wf-arithmetic-exact-sequence, lem-sfb-field-profinite-galois-site and others) found none that state this. The tool_uses list generic other-unit nodes (orbit reconstruction, the 03QR classification, 02GL, lc-etale) and I accept them. Advisory: from.place says 'Second paragraph' of rem-dl-a1-conventions while split_report says 'final paragraph'. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FieldGaloisFibreIdentification",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.field_galois_fibre_identification",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FieldGaloisFibreIdentification.lean",
+  "statement": "theorem field_galois_fibre_identification (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosed Ks] [Algebra.IsSeparable K Ks] [Algebra Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] : ∃ j : Gal(Ks/K) ≃ₜ* Aut (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K))))), (∀ σ : Gal(Ks/K), ∃! τ : Gal(Ω/K), ∀ a : Ks, τ (algebraMap Ks Ω a) = algebraMap Ks Ω (σ a)) ∧ (∀ (σ : Gal(Ks/K)) (τ : Gal(Ω/K)), (∀ a : Ks, τ (algebraMap Ks Ω a) = algebraMap Ks Ω (σ a)) → ∀ (Q : (Spec (.of K)).FiniteEtale) (t : (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K))))).obj Q), ((j σ).hom.app Q t).left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ t.left) ∧ (∃ b : ∀ Q : (Spec (.of K)).FiniteEtale, (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj Q ≃ (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K))))).obj Q, (∀ (Q : (Spec (.of K)).FiniteEtale) (t : (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj Q), (b Q t).left = Spec.map (CommRingCat.ofHom (algebraMap Ks Ω)) ≫ t.left) ∧ (∀ (Q Q' : (Spec (.of K)).FiniteEtale) (f : Q ⟶ Q') (t : (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj Q), b Q' ((fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).map f t) = (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K))))).map f (b Q t)) ∧ (∀ (σ : Gal(Ks/K)) (Q : (Spec (.of K)).FiniteEtale) (t : (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj Q), b Q ((galoisToAut (𝟙 (Spec (.of K))) σ).hom.app Q t) = (j σ).hom.app Q (b Q t)))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finite-etale fibre functor is the one explicitly specified in this node. Its automorphism group has Mathlib’s evaluation topology. The recorded thm-galois-lc-etale fibre-compatible equivalence identifies it with Aut(flcFiber), the FLC model of def-galois-fibre-functor. The closure hypotheses are expressed by the components of isSepClosure_iff and isAlgClosure_iff, without redundant closure-class assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80ab2a34e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, Stacks pione.tex 0BNE/0BQ9 (1269-1336), module, report, GaloisAction/FiniteEtale.fiber/FLCFiber/AutProfinite/LocallyConstantEquivalence sources. Hypotheses = isSepClosure_iff + isAlgClosure_iff components + IsScalarTower, no extra assumptions; Gal(Ks/K) uses krullTopology; Aut(fiber s) uses Mathlib's PreGaloisCategory evaluation topology (SetFunctorAut instance only matches Type-valued functors, no clash). j pinned by the ∃! extension clause + the Spec.map τ ≫ t.left formula (left action, matches 0BQ9 and Aut's multiplication); b pinned by the precomposition formula; naturality and equivariance via galoisToAut_hom_app_left. π₁ on FÉt matches the node's explicit finite-étale F_s, Stacks, and the current def-galois-fibre-functor blueprint; FLC identification is proof step 8. Edge cases: Q empty, K separably closed or imperfect, char 0/p, shared universe forced by Spec. Node differs from live only in lean; statement verbatim; no defs, only sorry, docstrings with source/blueprint/8 steps; no duplicate found. No recompile (human 2026-10-21); worker's compile clean."
+ }
+}

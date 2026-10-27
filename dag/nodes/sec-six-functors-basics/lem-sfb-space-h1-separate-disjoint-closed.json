@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-h1-separate-disjoint-closed",
+ "kind": "statement",
+ "title": "Vanishing first cohomology separates disjoint closed subsets by global functions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact and quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: its point space is quasi-compact and its absolute diagonal is quasi-compact on scheme tests. Give $|X|$ the atlas topology on field-valued point classes [def-a1-space-point-topology]. Use quasi-coherent modules on the small etale ringed site [def-trf-space-quasi-coherent-module] and cohomology of their underlying additive sheaves [def-weil-pbc-sites-and-cohomology]. Suppose $H^1(X,F)=0$ for every quasi-coherent module $F$. For any disjoint closed subsets $Z_0,Z_1\\subseteq|X|$, there is $a\\in\\Gamma(X,\\mathcal O_X)$ such that $$Z_0\\subseteq V(a),\\qquad Z_1\\subseteq V(a-1).$$ Here $V(b)$ is the set of points where evaluation of $b$ under a field-valued representative is zero; this is independent of the representative. Either or both closed subsets may be empty.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V1 (lemma-vanishing-separate-closed), under Situation 07UY (situation-vanishing)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "If $Z_0$ is empty, take $a=1$; if $Z_1$ is empty, take $a=0$. These choices give the required inclusions directly, including when both subsets or $X$ are empty. In the remaining steps assume both closed subsets are nonempty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-reduced-closed-support], give each $Z_j$ its reduced closed subspace structure, writing $i_j:Z_j\\hookrightarrow X$ for the inclusion. By [lem-sfb-space-closed-immersion-quasi-coherent-modules], $Q_j=i_{j,*}\\mathcal O_{Z_j}$ is quasi-coherent and the canonical map $q_j:\\mathcal O_X\\to Q_j$ is surjective. Also $\\mathcal O_X$ is quasi-coherent directly from [def-trf-space-quasi-coherent-module]: its local presentation is $0\\to\\mathcal O_X\\xrightarrow{1}\\mathcal O_X\\to0$ (zero relations and one generator).",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "Form $r=(q_0,q_1):\\mathcal O_X\\to Q_0\\oplus Q_1$. A finite direct sum here is the sectionwise product: $r(s)=(q_0(s),q_1(s))$ defines its two components. By [lem-sfb-space-closed-pushforward-geometric-stalks], $(Q_j)_{\\bar x}=0$ when the geometric point $\\bar x$ does not factor through $Z_j$. Since $Z_0\\cap Z_1=\\varnothing$, no geometric point factors through both. If it factors through one, the other stalk is zero and $r_{\\bar x}$ is its surjective component $q_{j,\\bar x}$; otherwise both target stalks are zero. The component is surjective because [lem-sfb-space-etale-conservative-geometric-points] preserves small colimits (hence epimorphisms) on stalks and $q_j$ is a sheaf epimorphism. This node also preserves finite products and detects epimorphisms, so $r$ is surjective.",
+   "uses": [
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "Put $N=Q_0\\oplus Q_1$ and $K=\\ker r$. By [lem-sfb-space-qcoh-kernels-colimits], $N$ and $K$ are quasi-coherent. By [def-weil-sheaf-of-modules-category], kernels are computed sectionwise, so the underlying abelian sheaf of $K$ is the kernel of the underlying map $r$. Surjectivity was proved on underlying stalks in the preceding step. Thus $0\\to K\\to\\mathcal O_X\\xrightarrow{r}N\\to0$ is short exact also as abelian sheaves, and the hypothesis of the item applies to give $H^1(X,K)=0$.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to this short exact sequence in abelian sheaves on $X_{\\mathrm{et}}$, with $v=\\Gamma(X_{\\mathrm{et}},-)$. The abelian category has enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. Global sections mean compatible families of sections over all etale scheme charts, equivalently maps from the terminal sheaf; addition and kernels of these families are componentwise, so $v$ is additive and left exact. The canonical natural identification $R^0v=v$ is [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. Hence the relevant exact segment is $\\Gamma(X,\\mathcal O_X)\\xrightarrow{\\Gamma(r)}\\Gamma(X,N)\\to H^1(X,K)=0$, where cohomology is computed on underlying additive sheaves as required. Exactness says that every section of $N$ has a lift in $\\Gamma(X,\\mathcal O_X)$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "The zero section of $\\mathcal O_{Z_0}$ and unit section of $\\mathcal O_{Z_1}$ give global sections of $Q_0$ and $Q_1$: in the chart-limit definition of direct image [def-trf-space-etale-module-functors], assign respectively $0$ and $1$ on every chart, compatibly with restriction. Pairing these gives $t=(0,1)\\in\\Gamma(X,N)$. Choose a lift $a\\in\\Gamma(X,\\mathcal O_X)$ by the preceding step. Thus the two canonical restrictions of $a$ are $0$ and $1$.",
+   "uses": [
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  },
+  {
+   "text": "To check the stated field-valued zero loci, let $x:\\operatorname{Spec}L\\to X$ represent a point in $Z_j$. By the base-change support assertion of [lem-sfb-space-reduced-closed-support], $Z_j\\times_X\\operatorname{Spec}L$ is a nonempty closed subscheme of $\\operatorname{Spec}L$. A closed subscheme of the spectrum of a field is either empty or the whole spectrum: its defining ideal is either the unit ideal or zero, by [def-weil-closed-immersion]. Thus $x$ factors through $Z_j$, and evaluation of the restrictions just obtained gives $a(x)=0$ for $j=0$ and $a(x)=1$ for $j=1$. Therefore $Z_0\\subseteq V(a)$ and $Z_1\\subseteq V(a-1)$. Evaluation commutes with extensions of the representative field, and a field extension is injective, so being zero is independent of the field-valued representative.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-closed-pushforward-geometric-stalks",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-trf-space-etale-module-functors",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V1, lemma-vanishing-separate-closed, proof under Situation 07UY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated algebraic space with vanishing first quasi coherent cohomology disjoint closed subsets are separated by a global function zero and one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: exists_of_res_zero_of_qcqs and related scheme localization lemmas clear powers of a section; they do not give a function with prescribed values on disjoint closed subsets of an algebraic space. Closure under isomorphisms of IsQuasicoherent is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre affineness proof Chinese remainder theorem global section zero on one closed subspace and one on another disjoint closed subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (g : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ f', X.basicOpen f' = X.basicOpen g\", \"doc\": \"For any affine scheme $X$ and basic open subset $X_{f}$ defined by a section $f$ of the structure sheaf, the open subset $X_{f}$ is itself an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: exists_of_res_zero_of_qcqs and related scheme localization lemmas clear powers of a section; they do not give a function with prescribed values on disjoint closed subsets of an algebraic space. Closure under isomorphisms of IsQuasicoherent is unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosed\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : (SheafOfModules.isQuasicoherent R).IsC\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: exists_of_res_zero_of_qcqs and related scheme localization lemmas clear powers of a section; they do not give a function with prescribed values on disjoint closed subsets of an algebraic space. Closure under isomorphisms of IsQuasicoherent is unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|separat.*closed.*(section|function)|vanishing.*separate",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: exists_of_res_zero_of_qcqs and related scheme localization lemmas clear powers of a section; they do not give a function with prescribed values on disjoint closed subsets of an algebraic space. Closure under isomorphisms of IsQuasicoherent is unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zero first coherent cohomology algebraic space disjoint closed subsets distinguished by global sections zero and one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.basicOpen_zero\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(X : LocallyRingedSpace.{u}) (U : Opens X.carrier) : X.toRingedSpace.basicOpen (0 : X.presheaf.obj <| op U) = ⊥\", \"doc\": \"For any locally ringed space $ X $ and open subset $ U $ of $ X $, the basic open set defined by the zero section over $ U $ is the empty set, i.e., $ X.\\text{basicOpen}(0) = \\bot $.\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.res_zero\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{X : RingedSpace.{u}} {U V : TopologicalSpace.Opens X} (hUV : U ≤ V) :\\n  (0 : X.presheaf.obj (op V)) |_ U = (0 : X.presheaf.obj (op U))\", \"doc\": \"For any ringed space $X$ and open subsets $U \\\\subseteq V$ of $X$, the restriction of the zero section over $V$ to $U$ equals the zero section over $U$. In symbols: if $0_V$ denotes the zero element in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Codisjoint (X.zeroLocus s) U\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any set $ s $ of sections of the structure sheaf over $ U $, the zero locus of $ s $ (the set of points in $ X $ where all sections in $ s $ vanish) and\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any set $ s $ of sections over $ U $, the zero locus of $ s $ (i.e., the set of points in $ U $ where all elements of $ s $ vanish) is a closed su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.zero_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (0 : (Proj.structureSheaf 𝒜).1.obj V).1 x = 0\", \"doc\": \"For the structure sheaf $\\\\mathcal{O}$ on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, the zero element $0 \\\\in \\\\mathcal{O}(V)$ satisfies $0(x) = 0$ for all points \"}\n  {\"name\": \"AlgebraicGeometry.Spec_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{R : CommRingCat} (s : Set Γ(Spec R, ⊤)) :\\n  (Spec R).zeroLocus s = PrimeSpectrum.zeroLocus ((Scheme.ΓSpecIso R).inv ⁻¹' s)\", \"doc\": \"For a commutative ring $ R $ and a set $ S $ of global sections of the structure sheaf on $ \\\\operatorname{Spec}(R) $, the zero locus of $ S $ in the scheme $ \\\\operatorname{Spec}(R) $ coincides with th\"}\n  {\"name\": \"groupCohomology.H1π_eq_zero_iff\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(x : cocycles₁ A) : H1π A x = 0 ↔ ⇑x ∈ coboundaries₁ A\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, and a 1-cocycle $ x : G \\to A $, the projection of $ x $ into the first group cohomology module $ H^1(G, A) $ is zero i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} (s : Γ(X, U)) (𝒰 : X.OpenCover) (h : ∀ i : 𝒰.I₀, (𝒰.f i).app U s = 0) : s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: exists_of_res_zero_of_qcqs and related scheme localization lemmas clear powers of a section; they do not give a function with prescribed values on disjoint closed subsets of an algebraic space. Closure under isomorphisms of IsQuasicoherent is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing first cohomology of every quasi coherent module on an algebraic space separates disjoint closed subsets by a global function zero and one",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme localization and affineness facts do not state the algebraic-space separation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsClosed\"",
+   "results": "SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: closure of quasi-coherence under isomorphisms does not separate closed subsets."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|vanishing.*separate|separat.*closed.*function",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme localization and affineness facts do not state the algebraic-space separation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre affineness global functions distinguish two disjoint closed subsets of an algebraic space using H1 vanishing",
+   "results": "AlgebraicGeometry.IsAffine.casesOn; AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint; AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat; AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen; AlgebraicGeometry.Scheme.component_nontrivial; AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.IsAffineOpen.sup_of_disjoint",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme localization and affineness facts do not state the algebraic-space separation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder theorem for structure sheaves lift a pair of constants on two disjoint closed subspaces from zero H1 of the kernel",
+   "results": "AlgebraicGeometry.StructureSheaf.const_mul_cancel'; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.StructureSheaf.const_add; AlgebraicGeometry.StructureSheaf.exists_const; AlgebraicGeometry.StructureSheaf.const_ext; AlgebraicGeometry.StructureSheaf.const_mul_cancel; AlgebraicGeometry.StructureSheaf.const_mul_rev; AlgebraicGeometry.StructureSheaf.const_mul",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf constant-fraction identities, not a lifting theorem for disjoint closed subspaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-acyclic-affinization-geometry",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Tag 07V4 last paragraph: distinguish two distinct closed rational-point singletons by a global function, using Tag 07V1.",
+   "via": [
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-h1-separate-disjoint-closed",
+  "worker": "stage1",
+  "summary": "Read Stacks 07V1 and all cited statements. Wrote the reduced-subspace, stalk-surjectivity, quasi-coherent-kernel and long-exact-sequence argument, including empty subsets and evaluation on arbitrary field-valued representatives. Reused existing nodes throughout; created no nodes. Fixed doubled TeX escapes without changing the mathematical statement. All proof steps are under 2000 characters.",
+  "blueprint": "Supports the inherited historical det-thm-sf-ctf-stability-direct-images proof (3) route through algebraic-space Serre affineness: Tag 07V4 separates two closed rational points using Tag 07V1. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). The current blueprint calls its direct-image node sk-thm-sf-ctf-stability-direct-images, with historical det-... retained in proof metadata. Retain inherited from.node=null and via chain; blueprint_refs.py ancestor returns None. No upper route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "The canonical chart-limit definition of direct image supplies the compatible zero and unit sections; this is a general small-etale module tool, not a step of the trace-formula route."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "The general sectionwise description of module kernels identifies the underlying abelian kernel; the unit gives no replacement for this ringed-site definition."
+   },
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "Its local free-presentation predicate verifies that the structure module is quasi-coherent; this is a foundational definition for algebraic spaces."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "The general homological-algebra long exact sequence turns H1(K)=0 into surjectivity of global sections; the unit supplies no different cohomology sequence."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Enough injectives in abelian sheaves verifies the hypothesis of the general derived-functor theorem on the small etale site; this is a generic site tool."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "The defining scheme-test quotient description shows a nonempty closed subscheme of Spec of a field is the whole spectrum; this is a generic definition, not a substitute route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-cdedb13f5",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-cdedb13f5 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-cohomology 07UY and 07V1 (lines 2774-2876). The item statement matches the source hypothesis by hypothesis, keeps qcqs, and its parsed text is identical to live. This is the first split: live and side-live still show the item unsplit, and there is no repair note. The delivery creates 0 new nodes. The 7 steps carry Stacks' argument one for one. Step 1 handles empty subsets. Step 2 uses the reduced closed subspace (reduced-closed-support), surjectivity and quasi-coherence of O_X->i_*O_Z (closed-immersion-qcoh), and O_X quasi-coherent with I empty. Step 3 shows r stalkwise surjective: the complement stalks vanish, no geometric point factors through both Z_j, and the stalk functor preserves finite limits and detects epimorphisms. Step 4 uses quasi-coherent kernels and sums and sectionwise kernels to get a short exact sequence of abelian sheaves. Step 5 applies the long exact sequence on Ab(X_et), with enough injectives and the R^0 identification, to v = Gamma(X,-) as the chart limit (a remark only: the cited cohomology definition is per site object). Step 6 lifts (0,1). Step 7 shows a field point in Z_j factors through Z_j, since a nonempty closed subscheme of Spec L is all of it, which gives a(x) = 0 or 1. Each cited statement says what the step uses. Edge cases tested: empty subsets and X empty, Spec k[t] with a=t, k[e]/e^2, P^1 (fails the hypothesis, consistent), nonreduced X. The DAG search for 07V1 finds only the item and its parent, so there is no duplicate. I accept the declared tool_uses: generic trf, weil and pbc definitions and the pbc homological lemmas. No SGA. Batch-5: I computed the closure of each of the five flagged citations (reduced-closed-support, closed-immersion-qcoh, closed-pushforward-stalks, qcoh-kernels-colimits, def-trf-space-etale-module-functors). None reaches an nt- node, the trace formula, trace transport or a Poincare-duality proof node. They reach only sk-i-curve-zero algebraic-space foundations, two generic category lemmas, and pod sk-lem-finite generic module lemmas. These are general foundations outside both assumptions, so I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceH1SeparateClosed",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_global_function_separating_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceH1SeparateClosed.lean",
+  "statement": "theorem exists_global_function_separating_closed {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (hH : ∀ (F : X.Modules) (_ : F.IsQuasicoherent), Subsingleton (@Sheaf.H _ _ _ ((sheafCompose X.etaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj ((SheafOfModules.toSheaf X.structureSheaf).obj F)) inferInstance (HasExt.standard _) 1)) (Z₀ Z₁ : Set (Point X.obj.obj)) (hZ₀ : IsClosed Z₀) (hZ₁ : IsClosed Z₁) (hdisj : Disjoint Z₀ Z₁) : ∃ a : RingCat.sectionsSubring X.structurePresheaf, (∀ (T : X.EtaleSite) (x : X.etaleForget.obj T), schemePointMap T.obj.hom x ∈ Z₀ → (X.etaleForget.obj T).Γevaluation x (a.val (op T)) = 0) ∧ (∀ (T : X.EtaleSite) (x : X.etaleForget.obj T), schemePointMap T.obj.hom x ∈ Z₁ → (X.etaleForget.obj T).Γevaluation x ((a - 1).val (op T)) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Global functions use RingCat.sectionsSubring of the recorded structurePresheaf. Both zero-locus inclusions are expressed equivalently on every etale chart by Scheme.Γevaluation at its points. The cohomology is Sheaf.H of the canonical ULift of the underlying additive sheaf, with HasExt.standard, avoiding infrastructure assumptions or any restriction on S. Absolute quasi-separatedness uses the existing def-sfb-space-absolute-quasi-separated interface, added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f5d473a1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read Stacks 07UY/07V1, item node, all stmt_dep Lean (AlgebraicSpace EtaleSite/structurePresheaf/Modules, Point/schemePointMap/pointTopologicalSpace, IsQuasicoherent instances, IsAbsolutelyQuasiSeparated 0AHR(3), SiteCoveringAxioms keeping Sheaf.H). Every clause matches: arbitrary S and X; CompactSpace on points; absolute qs; ∀ qcoh F, Subsingleton H^1 of the canonical ULift of the underlying additive sheaf (Sheaf.H with inferInstance sheafification and HasExt.standard, no added hypotheses, same convention as other project etale-site modules); arbitrary closed disjoint Z0, Z1 with no nonemptiness; a in RingCat.sectionsSubring = Γ(X,O_X); the chart-point Γevaluation clauses are equivalent to Z0⊆V(a), Z1⊆V(a-1). Edge cases: empty Z_j or X, nonreduced X, base not qs. Item diff = lean + landed stmt_dep def-sfb-space-absolute-quasi-separated; statement verbatim; single sorry; source/blueprint docstrings with the 7-step proof; imports exist. No compile (no change). Advisories: sibling 07V0 states the H^1 hypothesis with HasSheafify/HasExt instance args instead of the ULift form, so stage 3 needs a comparison; the second reading was done by the same worker."
+ }
+}

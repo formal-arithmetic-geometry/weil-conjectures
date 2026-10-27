@@ -1,0 +1,114 @@
+{
+ "id": "new-t2-etale-adic-path-pullback",
+ "kind": "statement",
+ "title": "Pullback square for normalized algebraic fibre paths",
+ "statement": "Under the hypotheses of [new-t2-etale-adic-path-data], for every scheme automorphism h:Y≅Y, algebraic lisse sheaf F, and finite etale fibre path τ from y to z, the path on h*F followed by the prescribed fibre comparison at z equals the prescribed fibre comparison at y followed by the path on F along h_*τ. The comparison is exactly that of [def-wf-lisse-adic-automorphism-pullback], including its recorded coefficient-stage equality transports.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "stmt_deps": [
+  "new-t2-etale-adic-path-data",
+  "def-wf-lisse-adic-automorphism-pullback"
+ ],
+ "proof": [
+  {
+   "text": "the small-etale automorphism sends a cover (U,u) to (U,h u).\nIts stalk comparison carries the germ at a point a to the same section's germ\nat its image. By the definition of pullbackPathIso, finite path evaluation on the\ntransformed cover gives exactly the transformed endpoint. The finite germ rule\ntherefore proves the square at every adic level. Composing with the limit\nprojections proves the integral square. The rational comparison is its scalar\nextension, and the algebraic comparison is the further scalar extension at the\nsame finite coefficient field recorded by F. Both scalar extensions preserve the\nsquare. The equality transporting the pullback object's recorded fibre to that\ncommon stage is precisely lisseAlgebraicAutomorphismFiberAtStage_eq, so it yields\nthe stated equation on the recorded fibres. Identity automorphisms and zero-rank\nobjects give the corresponding identity and zero-map squares.",
+   "uses": [
+    "def-wf-lisse-adic-automorphism-pullback",
+    "new-t2-etale-adic-path-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lisse-adic-automorphism-pullback",
+  "new-t2-etale-adic-path-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-25",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric stalk action of a lisse l-adic sheaf is continuous and descends to a finite coefficient field; path transport commutes with sheaf morphisms and pullback",
+   "results": "Eight hits, all generic pullback/stalk APIs; no normalized etale adic path compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; use existing categorical naturality and scalar-extension APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including NatTrans.naturality; this applies once a natural isomorphism with the recorded path components is identified.",
+   "date": "2026-10-25",
+   "verdict": "Generic naturality API only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleAlgebraicPath|etaleWeilFrobenius|etaleGeometricRep|NatTrans.naturality|isoOfNatIso_hom_π|generalLinearEquiv",
+   "results": "Read the item, its consumers, FibreFunctorLinearTransport, IntegralFibrePathConstruction, AlgebraicFibrePathConstruction, RationalFibrePathConstruction, and Mathlib. No existing theorem states the two compatibility equations. The upstream Monodromy module proves the abstract group extension and uniqueness.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the proved group lift; split only the two missing path squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Pullback square for normalized algebraic fibre paths in the geometric and Weil fundamental representation construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleAdicPathPullback",
+  "file": "lean/Sheaf/Paper/EtaleAdicPathPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleAlgebraicPath_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPath_pullback"
+  ],
+  "statement": "theorem etaleAlgebraicPath_pullback (h : Y ≅ Y)\n    (F : LisseAlgebraicSheaf l Y Q) (τ : fiber y ≅ fiber z) :\n    (etaleAlgebraicPathIso l Q ((lisseAlgebraicAutomorphismPullback h l Q).obj F) τ).hom ≫\n        (lisseAlgebraicAutomorphismFiberIso h l Q z F).hom =\n      (lisseAlgebraicAutomorphismFiberIso h l Q y F).hom ≫\n        (etaleAlgebraicPathIso l Q F (pullbackPathIso h.hom τ)).hom",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T164316-L-995972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPath_pullback"
+  ],
+  "sorry_after": []
+ }
+}

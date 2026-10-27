@@ -1,0 +1,154 @@
+{
+ "id": "def-pur-framed-pro-realization",
+ "kind": "definition",
+ "title": "Normalized supported pro-etale realization of an integral extension",
+ "status": "split",
+ "statement": "Fix the finite datum $P$ of [def-pur-conventions], a $k$-scheme $T$ and a closed immersion $i:Z\\hookrightarrow T$ [def-weil-closed-immersion]. For an integral extension $\\beta$, let $b_A(\\beta)$ be [def-pur-framed-scalar-realization]. Define $b_A^{\\mathrm{pro}}(\\beta)$ to be the unique element satisfying the normalized support-Hom comparison predicate [def-pur-framed-pro-predicate] for $b_A(\\beta)$. Existence and uniqueness are part of this characterization; its support cohomology group, cocycle normalization, canonical site comparison and roots coefficient are exactly those of the predicate. No arbitrary comparison or trivialization is selected.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-pur-framed-scalar-realization",
+  "def-pur-framed-pro-predicate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks 03AJ torsors-h1; 03PL Kummer sequence; 0A45 support triangle. Framed-line construction in blueprint main-20261015 lem-pur-divisor-class.proof.md, first sentence and final paragraph."
+ },
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use the normalized pro-etale supported-Hom identification supplied by [lem-pur-supported-hom-pullback]. Its additive equivalence identifies the actual right-derived supported group in degree two with the shifted Hom group in the predicate. No compatibility with another site map is needed to invert this equivalence.",
+   "uses": [
+    "lem-pur-supported-hom-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "step": 2,
+   "text": "Any two normalized identifications agree. On a degreewise injective bounded-below complex, lift the supported class through the canonical supportSequenceModelIso and the surjective homology projection to a supported cocycle. Apply the evaluation and cocycle clauses of [lem-pur-supported-hom-cocycle-normalization] to obtain its representing map from the ordinary supported constant. Precompose with the canonical isomorphism from the etale-origin supported constant; its composite with the actual constant restriction is the ordinary restriction. Both Identification.normalization clauses therefore give the identical localized map. For a general bounded-below derived object choose a degreewise injective representative. Naturality identifies both comparisons after the same invertible shifted map; cancel that map.",
+   "uses": [
+    "lem-pur-supported-hom-cocycle-normalization",
+    "lem-pur-supported-hom-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 3,
+   "text": "Let b be the canonical site-comparison Hom image already specified by [def-pur-framed-pro-predicate], applied to the scalar realization. Invert the chosen normalized supported-Hom equivalence on b. Step 2 makes the image of this class equal b for every normalized identification, proving the predicate. Conversely the predicate evaluated at the chosen identification and injectivity of that equivalence prove uniqueness. This argument applies to every scalar Ext class, and hence to every integral extension in the statement.",
+   "uses": [
+    "def-pur-framed-pro-predicate",
+    "def-pur-framed-scalar-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-supported-hom-cocycle-normalization",
+  "def-pur-framed-pro-predicate",
+  "def-pur-framed-scalar-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4, Example 9.5 and injective-resolution Ext proof, pp. 66–67; Q7 inverse-equivalence assembly and normalization uniqueness, 2026-10-25."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer class of a framed line bundle is realized by the integral Yoneda extension and unique finite coefficient lift",
+   "results": "{\"t\": \"2026-10-23T05:35:33Z\", \"tool\": \"leansearch\", \"query\": \"The supported Kummer class of a framed line bundle is realized by the integral Yoneda extension and unique finite coefficient lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isExtensionAlongYoneda\", \"CategoryTheory.Presheaf.instUniqueHomLeftExtensionOppositeOpObjFunctorTypeYonedaMkYonedaMap\", \"CategoryTheory.Presheaf.instUniqueHomLeftExtensionOppositeOpObjFunctorTypeUliftYonedaMkUliftYonedaMap\", \"CategoryTheory.Presheaf.isExtensionAlongULiftYoneda\", \"KummerExtension.termK[_√_]\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"groupCohomologyIso\"], \"digest\": \"a297a3c6b5c64314\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Reuse the existing Ext, Kummer, scalar-forgetting and normalized support interfaces; this node names the indicated canonical composite or uniquely characterized realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative torsor integral extension with a specified zero complementary frame and normalized pro etale supported realization",
+   "results": "{\"t\": \"2026-10-23T05:35:34Z\", \"tool\": \"leanfinder\", \"query\": \"Relative torsor integral extension with a specified zero complementary frame and normalized pro etale supported realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.hasMap_X\", \"Algebra.Etale.exists_subalgebra_fg\", \"StandardEtalePresentation.hasMap\", \"Algebra.Generators.cotangentCompAwaySec\"], \"digest\": \"db646050e9d8b3cb\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Reuse the existing Ext, Kummer, scalar-forgetting and normalized support interfaces; this node names the indicated canonical composite or uniquely characterized realization."
+  },
+  {
+   "tool": "grep",
+   "query": "framedRealization|divisorScalar|relativeTorsor",
+   "results": "{\"t\": \"2026-10-23T05:44:06Z\", \"tool\": \"grep\", \"query\": \"framedRealization|divisorScalar|relativeTorsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Reuse the existing Ext, Kummer, scalar-forgetting and normalized support interfaces; this node names the indicated canonical composite or uniquely characterized realization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n divisorRelativeExtension|divisorIntegralSplice|DivisorProRealizes|framed.*realization lean/WeilConjectures lean/Sheaf; blueprint_refs.py search framed; DAG id search",
+   "results": "No matching project declaration; blueprint_refs: 0 blueprint nodes match framed. No DAG ids def-pur-framed-*. Generic relative extension and supported-Hom nodes are reused; the Cartier-specific SupportedKummerBoundary is not a definition for arbitrary closed support.",
+   "date": "2026-10-23",
+   "verdict": "No exact existing definition of this specialized composite or its uniquely characterized value."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-divisor-normalized-realization",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "First sentence and final paragraph: integral framed extension, its scalar and supported pro-etale realizations.",
+   "via": [
+    "lem-pur-divisor-normalized-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.FramedProRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.divisorProRealization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.divisorProRealization_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.divisorProRealization"
+  ],
+  "file": "lean/Sheaf/Paper/FramedProRealization.lean",
+  "statement": "def divisorProRealization (P : PurityFiniteSetting.{u}) {Z T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) (i : Z ⟶ T) [IsClosedImmersion i] (β : Ext.{u + 1} ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant Z)) T.gmSheaf 1) : P.DivisorProGroup i",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1329c6000",
+  "group": "Q106",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1329c6000",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery of the f8b5 H2 return. Lean byte-identical to the previously reviewed head (15 modules). H2 repaired: six new def nodes now cite the landed def-pur-supported-class-operations (FunctorialCupH/OrdinaryH/Forget/Pullback/ChangeSupport) and def-pur-supported-hom-site-comparison (functorialCupCompare), whose records are identical to the live clone. New existing:true owners: def-pur-ordinary-hom-site-comparison (functorialCupOrdinaryCompare, statement verbatim SupportedCupFunctoriality:1714) and def-pur-supported-hom-pair (SupportHomPair with its fields, Identification and the etale/pro-etale pairs, verbatim line 53; node text matches the structure and the normalization). Neither duplicates a live def node. No theorem node remains a stmt_dep owner of plain data. stmt_deps equal the statement citations in all 16 new nodes. The item changes only in stmt_deps (adding landed and new nodes, permitted) and its lean.statement is verbatim. No module or node collisions with live. Mathematics re-read: β characterization with f(s)=0, positive Kummer splice with the root map, unique b_A in Ext^2, b^pro in the actual supported group with a normalized-Identification predicate, iso/pullback (canonical unit-pinned tensor-pullback comparison)/enlarge/additive/forget-support clauses all faithful. Edge cases and universes OK; all 8 theorems proved by sorry; no hollow definitions; no SGA. No compile (nothing changed). Advisories: item uniqueness is stated over all three equations (full uniqueness is in divisorScalarRealization_existsUnique); four nodes reach the Identification owner only through pro-predicate; upstream owners of kummerδ₁, classH1, etaleIsoTorsor, openSectionPullback and gmSheaf are not cited; the second reading is the worker's own check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T013232-L-3944154",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

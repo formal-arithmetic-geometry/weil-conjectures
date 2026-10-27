@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-finite-proper-transport-transpose",
+ "kind": "statement",
+ "title": "Transpose of ordinary unit-compositor transport",
+ "statement": "Use the ordinary operations and specified compositors of [def-pur-finite-proper-product-maps]. Fix the finite coefficient setting P, schemes B,X,X′, and objects M∈D(P,B), K′∈D(P,X′), K∈D(P,X). For s:X→X′, q:X′→B, c:X→B with s;q=c, d:P_s K′→K and u:M→R_q K′, the c-transpose of u;R_q(eta_s);kappa_s,q inverse;R_c(d), with the indicated equality cast, is the pullback equality cast followed by comp_s,q, then P_s of the q-transpose of u, then d. No invertibility or properness hypothesis on s, q or d is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-finite-proper-product-maps"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate the equality c=s;q. Move d through inverse-Hom by naturality. The specified compositor-mate identity changes to the composite adjunction. Expand its Hom bijection. Counit naturality moves the s-unit next to the s-counit, and the left triangle cancels them, leaving the asserted pullback of the q-transpose followed by d.",
+   "uses": [
+    "lem-pur-finite-proper-compositor-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-proper-compositor-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit realization/mate or signed symmetry calculation in the cited proper-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the ordinary external product defined by exchange and projection is the tensor of pullback counits and is invariant under swapping the factors",
+   "results": "8 hits including CategoryTheory.MonoidalCategory.externalProductSwap, externalProductFlip and frobeniusMorphism_mate. They concern abstract external products or cartesian closed functors, not the specified intrinsic derived comparisons and transported direct-image compositor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse direct image compositor is the adjunction mate of pullback composition for intrinsic constant coefficient derived sheaves",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, and Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. These are underived module-sheaf comparisons or abstract adjunctions; the intrinsic derived realization transport is not supplied.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDerivedPullbackComp|canonicalFinitePullbackTensor_composition_condition|conjugateEquiv_counit",
+   "results": "Mathlib CategoryTheory/Adjunction/Mates.lean:285 and 291 give conjugateEquiv_counit and its converse. These prove formal transpose consequences after the intrinsic compositor conjugacy is supplied, not that conjugacy itself. Local rg also inspected the actual intrinsic composition and realization constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProductTranspose",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, proper-product interchange: the specified K-injective compositor must preserve the actual ordinary derived adjunction after intrinsic realization transport.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProperTransportTranspose",
+  "file": "lean/Sheaf/Paper/FiniteProperTransportTranspose.lean",
+  "declaration": "WeilConjectures.FiniteProperProduct.finiteProperTransportTranspose",
+  "statement": "theorem finiteProperTransportTranspose (P : PurityFiniteSetting.{u})\n    {B X X' : Scheme.{u}} (s : X ⟶ X') (q : X' ⟶ B) (c : X ⟶ B)\n    (hc : s ≫ q = c) {M : D P B} {K' : D P X'} {K : D P X}\n    (d : (pull P s).obj K' ⟶ K) (u : M ⟶ (push P q).obj K') :\n    ((adj P c).homEquiv _ _).symm\n      (u ≫ (push P q).map ((adj P s).unit.app K') ≫\n        (kappa P s q).inv.app ((pull P s).obj K') ≫\n        (eqToIso (congrArg (fun f ↦ (push P f).obj ((pull P s).obj K')) hc)).hom ≫\n        (push P c).map d) =\n      (eqToIso (congrArg (fun f ↦ (pull P f).obj M) hc.symm)).hom ≫\n        (comp P s q).hom.app M ≫\n        (pull P s).map (((adj P q).homEquiv _ _).symm u) ≫ d",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
+ }
+}

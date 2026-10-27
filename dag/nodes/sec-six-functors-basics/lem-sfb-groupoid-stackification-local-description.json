@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-groupoid-stackification-local-description",
+ "kind": "statement",
+ "title": "Stackification of groupoids: local objects, isomorphisms and extension",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a site [def-weil-pbc-topos] small in the larger universe, with fibre groupoids and their morphism sets in that universe. A category fibred in groupoids $\\mathcal P$ on $\\mathcal C$ has pullback objects along every base arrow, unique up to the usual cartesian isomorphisms. A $J$-stack means that isomorphism presheaves on slice sites are $J$-sheaves and all covering descent data for objects are effective. There exist a $J$-stack $a_J\\mathcal P$ and a pullback-compatible functor $i:\\mathcal P\\to a_J\\mathcal P$ with the following properties. For every $T\\in\\mathcal C$ and $u,v\\in\\mathcal P(T)$, the isomorphism sheaf $\\operatorname{Isom}(i(u),i(v))$ is the sheafification [def-weil-pbc-sheafification] of $\\operatorname{Isom}_{\\mathcal P}(u,v)$. Every object of $(a_J\\mathcal P)(T)$ belongs locally on a $J$-covering of $T$ to the essential image of $i$. For every $J$-stack $\\mathcal Y$ and pullback-compatible functor $F:\\mathcal P\\to\\mathcal Y$, there exist a pullback-compatible functor $\\bar F:a_J\\mathcal P\\to\\mathcal Y$ and an invertible natural transformation $\\bar F i\\cong F$. These assertions apply also to the category fibred in groupoids associated to a presheaf of groupoids. The notation $a_J\\mathcal P$ denotes a stackification with these properties.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 02ZP (lemma-stackify-groupoids), clauses (1),(2), and 0436 (lemma-stackify-groupoids-universal-property)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-groupoid-morphism-sheafification] to obtain $q:\\mathcal P\\to\\mathcal Q=\\mathcal P^{\\mathrm{pre}}$. Thus $\\mathcal Q$ is a prestack with exactly the same fibre objects, and its isomorphism sheaves are the sheafifications of those of $\\mathcal P$. Apply [lem-sfb-prestack-sieve-descent-completion] to this prestack and set $a_J\\mathcal P=\\mathcal D\\mathcal Q$ and $i=e q$. The cited construction makes this a stack and $i$ pullback-compatible.",
+   "uses": [
+    "lem-sfb-groupoid-morphism-sheafification",
+    "lem-sfb-prestack-sieve-descent-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "The fibrewise full faithfulness of $e$ identifies $\\operatorname{Isom}(i(u),i(v))$ with $\\operatorname{Isom}_{\\mathcal Q}(q(u),q(v))$, compatibly on every slice restriction. The latter is $I_{u,v}^{\\#}$ by the morphism-sheafification node. For an object $(R,x)$ of the completion, every $f:V\\to T$ in its covering sieve gives $(R,x)|_V\\cong e(x_f)$. Since $q$ is identity on objects, each $x_f$ is $q(u_f)$ for an object of $\\mathcal P(V)$. These are precisely the required local representatives.",
+   "uses": [
+    "lem-sfb-groupoid-morphism-sheafification",
+    "lem-sfb-prestack-sieve-descent-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "Let $F:\\mathcal P\\to\\mathcal Y$ with $\\mathcal Y$ a stack. It is a prestack, so the morphism-sheafification node gives $G:\\mathcal Q\\to\\mathcal Y$ and $Gq\\cong F$. For $A=(R,x)$, apply $G$ to the cartesian section $x$. Effectivity of descent in $\\mathcal Y$ gives an object $y_A\\in\\mathcal Y(T)$ with identifications $y_A|_V\\cong G(x_f)$ compatible for all $f:V\\to T$ in $R$. Choose these objects and identifications. An arrow $A\\to B$ is represented on a common covering subsieve $K$ by a compatible family $\\alpha_f:x_f\\to z_f$. Conjugating $G(\\alpha_f)$ by the chosen identifications gives a matching family of arrows $y_A|_V\\to y_B|_V$. The isomorphism sheaf of $\\mathcal Y$ glues it uniquely to $\\bar F(\\alpha):y_A\\to y_B$. Representatives equal on a covering refinement give the same glued arrow; composition and identities hold because they hold after restriction to a common covering subsieve. Hence this defines fibre functors.",
+   "uses": [
+    "lem-sfb-groupoid-morphism-sheafification",
+    "lem-sfb-prestack-sieve-descent-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "For a base arrow $h:V\\to T$, both $h^*y_A$ and $y_{h^*A}$ are realizations of the section $G(x)$ pulled back to $h^*R$. Their specified identifications give a unique comparison isomorphism, by the isomorphism-sheaf axiom of $\\mathcal Y$. The identity and composition comparisons agree on covering sieves, where they are the comparisons for $G$, hence agree globally. Define the functor on arrows over $h$ by factoring them as a vertical arrow followed by a cartesian lift and using this comparison; its coherence gives a pullback-compatible $\\bar F$. For $A=e(u)$ the maximal-sieve section is the pullback section of $u$, so $y_{e(u)}\\cong G(u)$ by the same unique gluing. The construction of arrows makes these isomorphisms natural, giving $\\bar F e\\cong G$ and $\\bar F i\\cong Gq\\cong F$. All descent and comparison assertions here use the defining stack axioms of $\\mathcal Y$, not a uniqueness assertion absent from the supporting nodes.",
+   "uses": [
+    "lem-sfb-prestack-sieve-descent-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "For a presheaf of groupoids $P$, its associated fibred groupoid has objects $(T,u)$, $u\\in P(T)$; an arrow over $h:V\\to T$ from $(V,v)$ to $(T,u)$ is an isomorphism $v\\to P(h)(u)$. Identity and composition use those of $P$, and the identity of $P(h)(u)$ supplies a cartesian lift. Thus it meets the same hypotheses, and the construction above applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-morphism-sheafification",
+  "lem-sfb-prestack-sieve-descent-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 02ZN (lemma-stackify), naive construction; 02ZP (lemma-stackify-groupoids); 0435 and 0436 (lemma-stackify-universal-property and lemma-stackify-groupoids-universal-property)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of a category fibred in groupoids sheafifies isomorphisms and every object locally comes from the original category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Under the conditions that the category has weak sheafification, the forgetful functor preserves filtered colimits, the category is locally small, the WEqualsLocallyBijective condition holds, and the f\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsPrestackFor R.arrows) → F.IsPrestack J\", \"doc\": \"If a pseudofunctor $ F $ satisfies the prestack condition for every sieve $ R $ in a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then $ F $ is a prestack for $ J $. Formally, for all ob\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated stack universal property for functors from a prestack into a stack in groupoids",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      {S : C} → CategoryTheory.Presieve S → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}$ from the locally discrete bicategory of $\\\\mathcal{C}^{\\\\text{op}}$ to $\\\\mathsf{Cat}$, an object $S$ in $\\\\mathcal{C}$, and a presieve $R$ on $\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stackification\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|associatedStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stackification of fibered groupoids universal property and local description of morphisms and objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.FreeGroupoid.strictUniversalPropertyFixedTarget\", \"module\": \"Mathlib.CategoryTheory.Groupoid.FreeGroupoidOfCategory\", \"type\": \": Localization.StrictUniversalPropertyFixedTarget (of C) ⊤ G\", \"doc\": \"For any category $\\\\mathcal{C}$ and groupoid $\\\\mathcal{G}$, the free groupoid $\\\\text{FreeGroupoid}(\\\\mathcal{C})$ satisfies the strict universal property: every functor $\\\\phi: \\\\mathcal{C} \\\\to \\\\mathcal{G\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"(hF : ∀ (S : C) (R : Sieve S) (_ : R ∈ J S), F.IsStackFor R.arrows) : F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {motive : F.IsStack J → Sort u_1} →\\n          (t : F.IsStack J) →\\n            ([to\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ that is a prestack with respect to $J$, and for e\"}\n  {\"name\": \"CategoryTheory.Localization.isGroupoid\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"[L.IsLocalization ⊤] : IsGroupoid D\", \"doc\": \"If a functor $ L : C \\\\to D $ is a localization with respect to the top morphism property, then the category $ D $ is a groupoid, i.e., every morphism in $ D $ is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stackification\"",
+   "results": "{\"t\": \"2026-10-23T09:48:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"stackification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|associatedStack",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"grep\", \"query\": \"stackification|stackify|associatedStack\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category fibered in groupoids has an associated stack universal for functors to stacks",
+   "results": "{\"t\": \"2026-10-23T09:49:29Z\", \"tool\": \"leansearch\", \"query\": \"A category fibered in groupoids has an associated stack universal for functors to stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"HasFibers.noConfusion\", \"HasFibers.noConfusionType\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"HasFibers.canonical\", \"HasFibers.mk\"], \"digest\": \"e618b1359b27e212\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of a fibered groupoid sheafifies its isomorphisms has local representatives and extends functors to stacks",
+   "results": "{\"t\": \"2026-10-23T09:49:37Z\", \"tool\": \"leanfinder\", \"query\": \"Stackification of a fibered groupoid sheafifies its isomorphisms has local representatives and extends functors to stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack\"], \"digest\": \"26393f42139bbf46\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated stack universal property for functors from a prestack into a stack in groupoids",
+   "results": "{\"t\": \"2026-10-23T09:51:26Z\", \"tool\": \"leanfinder\", \"query\": \"Associated stack universal property for functors from a prestack into a stack in groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\"], \"digest\": \"ef87c9e83b9b5b37\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Stackification of groupoids: local objects, isomorphisms and extension.",
+   "via": [
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-stackification-local-description",
+  "worker": "stage1",
+  "summary": "Separated the two actual construction stages: sheafify arrows with fixed fibre objects, then complete a prestack by cartesian descent sections on covering sieves. Wrote the extension functor, its arrows, and pullback coherence explicitly using the target stack axioms; no change to the item statement.",
+  "blueprint": "Local supporting input in the inherited det-thm-sf-ctf-stability-direct-images proof (3) route, through Tag 076V: the stackification invoked for etale-to-fppf descent. Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) remains unchanged. The ancestor tool returns null for this pre-existing support chain; preserved null and its entire via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-6b107ed63",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-6b107ed63 (reviewer sub-agent of L); spot-checked: Read the source in full: stacks.tex lemma-stackify 02ZN (naive and less-naive proofs), 0435 with its hint, 02ZP (1),(2) and 0436. The item statement is unchanged from the base (byte-identical to every Q79 snapshot). New node lem-sfb-groupoid-morphism-sheafification is true. It keeps the objects and sheafifies the Isom presheaves (sheafification commutes with slice restriction and finite products), gives a prestack with q the identity on objects, and extends functors into prestacks because Isom_Z is a sheaf. New node lem-sfb-prestack-sieve-descent-completion is true. Its transitions between covering subsieves are bijective for a prestack, so the Hom colimit is well defined. e is fibrewise fully faithful through maximal sieves, the Isom sheaves glue over the composite sieve, object descent is effective via the generated sieve, and (R,x)|_V ≅ e(x_f) because f^*R is maximal. With an empty sieve the fibre is contractible. Both new nodes are statement-only, self-contained, carry tags and labels, have their searches recorded, and are not leaves (Mathlib has no stackification). rg -L over the DAG and blueprint_refs search found no duplicates. Neither node restates the item: node 1 adds no objects; node 2 assumes a prestack and has no universal property. Steps: 1 composes the two nodes (node 2's sole hypothesis comes from node 1). 2 is elementary: full faithfulness plus pullback compatibility give Isom = I^#, and local representatives are e(q(u_f)). 3 and 4 write out the extension that 0435 omits: effectivity in Y, conjugated matching families glued in Isom_Y, independence of representatives by separatedness, pullback comparisons glued uniquely, and F̄e ≅ G. 5 is the elementary Grothendieck construction. Small cases checked: trivial topology, a discrete non-sheaf fibred groupoid (node 2 essential), BG (sheafify G, then torsors), and ∅ ∈ J. No SGA cited, route unchanged, no tool_uses. Advisory: the slice-site topology is used without a definition node (already so in the base statement), and Y in the item should be read as a stack in groupoids as in 0436. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GroupoidStackificationLocalDescription",
+  "declaration": "CategoryTheory.Pseudofunctor.exists_groupoid_stackification_local_description",
+  "file": "lean/Sheaf/CategoryTheory/GroupoidStackificationLocalDescription.lean",
+  "statement": "theorem exists_groupoid_stackification_local_description {C : Type w} [SmallCategory C] (J : GrothendieckTopology C) (P : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}) (hP : ∀ T : C, IsGroupoid (P.obj (.mk (op T)))) : ∃ A : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}, (∀ T : C, IsGroupoid (A.obj (.mk (op T)))) ∧ A.IsStack J ∧ ∃ i : StrongTrans P A, (∀ (T : C) (u v : P.obj (.mk (op T))), ∃ e : sheafify (J.over T) (P.presheafHom u v) ≅ A.presheafHom ((i.app (.mk (op T))).toFunctor.obj u) ((i.app (.mk (op T))).toFunctor.obj v), ∀ (V : Over T) (φ : (P.presheafHom u v).obj (op V)), e.hom.app (op V) ((toSheafify (J.over T) (P.presheafHom u v)).app (op V) φ) = (i.naturality V.hom.op.toLoc).inv.toNatTrans.app u ≫ (i.app (.mk (op V.left))).toFunctor.map φ ≫ (i.naturality V.hom.op.toLoc).hom.toNatTrans.app v) ∧ (∀ (T : C) (a : A.obj (.mk (op T))), ∃ R : Sieve T, R ∈ J T ∧ ∀ (V : C) (f : V ⟶ T), R f → ∃ u : P.obj (.mk (op V)), Nonempty ((i.app (.mk (op V))).toFunctor.obj u ≅ (A.map f.op.toLoc).toFunctor.obj a)) ∧ (∀ (Y : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}), (∀ T : C, IsGroupoid (Y.obj (.mk (op T)))) → Y.IsStack J → ∀ F : StrongTrans P Y, ∃ H : StrongTrans A Y, Nonempty (@CategoryTheory.Iso (StrongTrans P Y) (StrongTrans.homCategory (F := P) (G := Y)) (StrongTrans.vcomp i H) F))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-759220cfc",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Single sorry theorem exists_groupoid_stackification_local_description; node diff vs side-live = lean field only; lean.statement verbatim. Checked against Stacks 02ZP(1),(2)/0436: universe w (C : Type w, SmallCategory, Cat.{w,w}); pseudofunctor + IsGroupoid fibres = fibred groupoid with cleavage; Mathlib IsStack = Isom-sheaf + effective sieve descent; Isom clause = natural iso with sheafify (J.over T) pinned on toSheafify to i's map conjugated by i.naturality (direction checked); local image on a covering sieve; extension ∀ groupoid stack Y, F ∃ H with i.vcomp H ≅ F in StrongTrans.homCategory (invertible modification); presheaf case via toPseudofunctor'. Uniqueness omitted as in node. No extra hypotheses; edge cases (empty C/fibres/empty sieve, automorphisms, no pullbacks) covered. No new definitions, docstrings with Stacks place + blueprint id + proof steps, report sections present. No duplicate (SiteStackification.lean is fppf-only predicate). Advisory: fppf citers use BasedCategory/IsFibredInGroupoids and will need a Grothendieck-construction bridge."
+ }
+}

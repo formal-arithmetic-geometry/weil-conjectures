@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-fibre-cotangent-localization-generators",
+ "kind": "statement",
+ "title": "Fibre cotangent comparison after localization with generator bound",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $\\mathfrak q\\subset A$ a prime ideal and $\\mathfrak p\\subset R$ its inverse image. Put $k=\\kappa(\\mathfrak p)$, $F=k\\otimes_R A$, $\\mathfrak Q=\\ker(F\\to\\kappa(\\mathfrak q))$ with $\\lambda\\otimes a\\mapsto\\bar\\lambda\\bar a$, and $L=\\kappa(\\mathfrak Q)$ [def-weil-pbc-localization-at-prime]. Module localization has the meaning of [def-weil-pbc-module-localization] and finite-dimensional vector-space dimension that of [def-weil-vector-space-dimension]. Let $M=\\Omega_{A/R}$ and $N=\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials]; tensor products are those of [def-weil-pbc-module-tensor-product]. The homomorphism $A\\to L$ induces $A_{\\mathfrak q}\\to L$, and the differential base-change isomorphism $\\beta:N\\xrightarrow{\\sim}F\\otimes_A M$ induces a canonical $L$-linear isomorphism $\\theta:M_{\\mathfrak q}\\otimes_{A_{\\mathfrak q}}L\\xrightarrow{\\sim}N\\otimes_F L$. Its value on $(\\omega/a)\\otimes\\lambda$, for $a\\notin\\mathfrak q$, is $\\beta^{-1}(1\\otimes\\omega)\\otimes(\\lambda/\\bar a)$; its inverse sends $\\beta^{-1}(b\\otimes\\omega)\\otimes\\lambda$ to $(\\omega/1)\\otimes\\bar b\\lambda$, where $\\bar b$ is the image of $b\\in F$ in $L$. If $m_1,\\ldots,m_r$ generate $M_{\\mathfrak q}$ over $A_{\\mathfrak q}$, with $r\\geq0$, then $\\theta(m_i\\otimes1)$ span $N\\otimes_F L$ over $L$ and $\\dim_L(N\\otimes_F L)\\leq r$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RV (lemma-differentials-base-change), followed by localization and tensor comparison for the displayed equality in Morphisms Tag 01V9 (lemma-smooth-at-point), clause (4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First check the denominators. The residue map $A\\to\\kappa(\\mathfrak q)$ has kernel $\\mathfrak q$: indeed $a/1\\in\\mathfrak q A_{\\mathfrak q}$ implies $ta\\in\\mathfrak q$ for some $t\\notin\\mathfrak q$, hence $a\\in\\mathfrak q$ by primality; the converse is immediate. Thus $R\\setminus\\mathfrak p$ maps to nonzero elements of $\\kappa(\\mathfrak q)$. The ring localization universal property extends $R\\to\\kappa(\\mathfrak q)$ to $R_{\\mathfrak p}$; it kills $\\mathfrak pR_{\\mathfrak p}$ and therefore factors through $k$. The tensor relations give the stated map $F\\to\\kappa(\\mathfrak q)$. Its kernel $\\mathfrak Q$ is prime, since the target is a field, and its inverse image in $A$ is $\\mathfrak q$. Consequently $a\\notin\\mathfrak q$ has image outside $\\mathfrak Q$, so its image $\\bar a$ in $L=\\kappa(\\mathfrak Q)$ is nonzero. Apply the same localization universal property to $A\\to L$, obtaining $A_{\\mathfrak q}\\to L$, $c/t\\mapsto\\bar c/\\bar t$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 00CP (proposition-universal-property-localization), and Section 07BH (residue fields); tensor universal property, Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "Apply differential base change with $R'=k$ and $S=A$. The $F$-module form of [lem-weil-pbc-kahler-differentials-base-change] gives the canonical isomorphism $F\\otimes_A M\\xrightarrow{\\sim}N$. Its inverse is exactly the map $\\beta$ in the statement; in particular $\\beta^{-1}$ is $F$-linear. No finiteness or flatness of $A/R$ is required here.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change), with the equivalent scalar-extension form of its canonical isomorphism."
+   }
+  },
+  {
+   "text": "Use the standard localization-tensor equivalence $M_{\\mathfrak q}\\cong A_{\\mathfrak q}\\otimes_A M$, sending $\\omega/a$ to $(1/a)\\otimes\\omega$, and extend scalars to $L$. After commuting the outer tensor factors, cancellation [lem-trf-scalar-tensor-cancel-base-change] identifies $L\\otimes_{A_{\\mathfrak q}}(A_{\\mathfrak q}\\otimes_A M)$ with $L\\otimes_A M$. The map on $z\\otimes(\\omega/a)$ is $(z/\\bar a)\\otimes\\omega$: the extension $\\rho$ sends $1/a$ to $\\bar a^{-1}$, as follows by multiplying by the nonzero $\\bar a$. The inverse sends $z\\otimes\\omega$ to $z\\otimes(\\omega/1)$. In Lean these are LocalizedModule.equivTensorProduct and AlgebraTensorModule.cancelBaseChange, including their pure-tensor formulas.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-scalar-tensor-cancel-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ (definition-localization-module), fraction relation preceding it; Tag 00CX (lemma-tensor-product). This writes out the localization cancellation used after Tag 00RV."
+   }
+  },
+  {
+   "text": "Apply cancellation [lem-trf-scalar-tensor-cancel-base-change] again to $A\\to F\\to L$, obtaining $L\\otimes_F(F\\otimes_A M)\\cong L\\otimes_A M$, with $z\\otimes(b\\otimes\\omega)\\mapsto(\\bar b z)\\otimes\\omega$ and inverse $z\\otimes\\omega\\mapsto z\\otimes(1\\otimes\\omega)$. Compose the first cancellation with the inverse of this one, scalar extension of $\\beta^{-1}$, and outer tensor symmetries. Tensor symmetry is made $L$-linear using exactly the transported right-factor actions in ComparisonAlong. This composite is $\\theta$. The pure-tensor formulas for the localization equivalence, cancellation, and scalar extension give both asserted formulas, including the inverse formula.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-scalar-tensor-cancel-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product) and 00D2 (lemma-tensor-with-bimodule), explicit balanced cancellation after Tag 00RV."
+   }
+  },
+  {
+   "text": "If the $m_i$ generate $M_{\\mathfrak q}$, write any $m\\in M_{\\mathfrak q}$ as $m=\\sum_{i=1}^r c_i m_i$ with $c_i\\in A_{\\mathfrak q}$. Then $m\\otimes\\lambda=\\sum_{i=1}^r m_i\\otimes\\bar c_i\\lambda=\\sum_{i=1}^r(\\bar c_i\\lambda)(m_i\\otimes1)$. Every tensor is a finite sum of pure tensors, so the $m_i\\otimes1$ span the source of $\\theta$. Applying the surjective $L$-linear map $\\theta$ shows that the $r$ displayed images span $N\\otimes_F L$. This also applies to the empty family: its span is zero.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), pure-tensor generation and balancing; the generator implication used in Morphisms Tag 01V9, clause (4)."
+   }
+  },
+  {
+   "text": "The image family has $r$ elements and spans by step 5. Its range is finite, so its span is a finitely generated $L$-module; since that span is the whole target, the target is finite dimensional. The elementary dimension inequality for a finite spanning family gives $\\dim_L(N\\otimes_F L)\\leq r$, directly implemented by Mathlib finrank_le_of_span_eq_top. This avoids separately extracting an independent subfamily. It includes $r=0$, when the span is zero and the whole target has dimension zero.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9 (lemma-smooth-at-point), clause (4), elementary linear-algebra completion via the two cited Mathlib leaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-module-localization",
+  "lem-trf-scalar-tensor-cancel-base-change",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RV, 07JZ, 00CX, 00DK and 00D2, with the fibre comparison of Morphisms Tag 01V9(4). Formalized by R4 using Mathlib localization-tensor equivalence and tensor cancellation, then finite spanning-family dimension bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials of a fibre algebra tensored with its residue field are the localized original differentials tensored with that field, and generators bound their dimension",
+   "results": "8 hits: Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, tensorKaehlerQuotKerSqEquiv_tmul_D, Algebra.instFreeCotangentToExtensionUnitLocalizationAway, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, tensorKaehlerQuotKerSqEquiv, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential. KaehlerDifferential.tensorKaehlerEquiv (Mathlib/RingTheory/Kaehler/TensorProduct.lean:249) supplies base change before localization; the claimed field comparison, fraction formula and generator bound require further arguments, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, TensorProduct, Module.finrank",
+   "results": "0 hits: . KaehlerDifferential.tensorKaehlerEquiv (Mathlib/RingTheory/Kaehler/TensorProduct.lean:249) supplies base change before localization; the claimed field comparison, fraction formula and generator bound require further arguments, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank|[Ll]ocaliz|baseChange",
+   "results": "15 hits: Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean. KaehlerDifferential.tensorKaehlerEquiv (Mathlib/RingTheory/Kaehler/TensorProduct.lean:249) supplies base change before localization; the claimed field comparison, fraction formula and generator bound require further arguments, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of Kahler differentials to a fibre residue field commutes with localization and sends a finite spanning family to a spanning family bounding finrank",
+   "results": "8 hits: KaehlerDifferential.mapBaseChange, KaehlerDifferential.isLocalizedModule_map, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquivBase, CommRingCat.KaehlerDifferential.map, CommRingCat.KaehlerDifferential, KaehlerDifferential.isLocalizedModule, KaehlerDifferential.span_range_map_derivation_of_isLocalization. KaehlerDifferential.tensorKaehlerEquiv (Mathlib/RingTheory/Kaehler/TensorProduct.lean:249) supplies base change before localization; the claimed field comparison, fraction formula and generator bound require further arguments, so this is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|finrank_le_card",
+   "results": "5 hits: Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a module then tensoring with a residue field agrees with tensoring the original module and finite generators bound vector space dimension",
+   "results": "8 hits: IsLocalizedModule.rTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, Module.rankAtStalk_eq_finrank_tensorProduct, IsLocalization.tensorProduct_isLocalizedModule, Module.rankAtStalk_eq, localizedModuleIsLocalizedModule, IsLocalRing.span_eq_top_of_tmul_eq_basis, IsLocalRing.subsingleton_tensorProduct. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, TensorProduct",
+   "results": "12 hits: instModuleTensorProductKaehlerDifferential, KaehlerDifferential.mapBaseChange, KaehlerDifferential.kerToTensor, KaehlerDifferential.kerCotangentToTensor, KaehlerDifferential.isScalarTower', instIsScalarTowerTensorProductKaehlerDifferential, KaehlerDifferential.range_mapBaseChange, KaehlerDifferential.tensorProductTo_surjective. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials base change to residue field of fibre tensor localization finite generators dimension bound",
+   "results": "8 hits: Algebra.SubmersivePresentation.rank_kaehlerDifferential, KaehlerDifferential.finite, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.QuasiFinite.finite_fiber, IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, Module.rankAtStalk_eq, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank, Submodule.span",
+   "results": "12 hits: Submodule.exists_finset_span_eq_linearIndepOn, Submodule.mem_span_set_iff_exists_finsupp_le_finrank, Submodule.exists_fun_fin_finrank_span_eq, finrank_le_of_span_eq_top, span_lt_top_of_ncard_lt_finrank, span_lt_top_of_card_lt_finrank, finrank_span_le_ncard, finrank_span_le_card. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector space spanned by r vectors is finite dimensional and its dimension is at most r",
+   "results": "8 hits: finrank_span_finset_le_card, finrank_span_le_card, FiniteDimensional.span_finset, finrank_vectorSpan_range_le, rank_span_finset_le, finrank_vectorSpan_image_finset_le, finrank_le_of_span_eq_top, FiniteDimensional.span_of_finite. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_le_card|finrank_span_le|finrank_le_of_span",
+   "results": "5 hits: Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/LinearAlgebra/Dimension/Constructions.lean. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A vector space spanned by a finite family of r vectors has dimension at most r",
+   "results": "8 hits: finrank_le_of_span_eq_top, FiniteDimensional.span_finset, FiniteDimensional.span_of_finite, rank_span_finset_le, finrank_span_finset_le_card, Submodule.spanFinrank_span_le_ncard_of_finite, FiniteDimensional.of_finite_basis, finrank_span_le_card. Read the hits: these supply ingredients, not the whole localization comparison, explicit fraction formulas and generator bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-at-point-differential-criterion",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise singular-locus calculation in the nodal-family/Fitting argument: convert the bounded-generator condition for relative differentials into smoothness at a point. Pointwise criterion proof, old step 4 (differential base change, fraction maps and generator inequality).",
+   "via": [
+    "lem-trf-smooth-at-point-differential-criterion",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-cotangent-localization-generators",
+  "worker": "NB",
+  "summary": "Checked Stacks 00RV and Morphisms 01V9(4), the live Lean source, and existing DAG statements. Reused differential base change and two linear-algebra Mathlib leaves; wrote the localization and tensor cancellation maps, their balancing and inverse identities explicitly. Added the missing module-localization and dimension notion dependencies. No new nodes and no mathematical statement change.",
+  "blueprint": "Realizes the inherited lem-trf-local-term-locality fibrewise singular-locus calculation, via the nodal-family/Fitting chain and lem-trf-smooth-at-point-differential-criterion old step 4: differential base change, fraction maps and generator inequality. The generic algebra tools do not change the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-cf6c9fdf6",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-cf6c9fdf6 (reviewer sub-agent of L); spot-checked: Read the item and all 6 steps in full. The delivery creates no new nodes, and the only change outside the proof is two added stmt_deps (module-localization, vector-space-dimension), both used in the statement. Each cited statement was checked against its step. Step 1: ring-localization universal property (images of R∖𝔭 are units in κ(𝔮); the map factors through k; 𝔔 contracts to 𝔮, so ā≠0 in L). Step 2: kahler-differentials-base-change with R'=k, S=A, S'=F, whose S'-module clause gives β. Steps 3-5 are elementary and I recomputed them: fraction well-definedness via u(bω−aη)=0, both balancings, both composite formulas and spanning. Step 6 uses the Mathlib leaves exists_linearIndependent' and finrank_span_eq_card, which assume no finite-dimensionality. Checked the statement against Stacks 00RV (algebra.tex l.34213) and Morphisms 01V9(4). Tags 00CO/00CP/07JZ/00CX/00D2/00DK exist with the labels the steps name. The parent lem-trf-smooth-at-point-differential-criterion step 2 uses only the dim bound with matching F, 𝔔, L. Small cases: k[t] at (t); ℤ[i] at (1+i), where F=𝔽₂[x]/(x+1)² has zero divisors and dim 1≤1; quotient rings; r=0. A grep -R of the DAG finds no duplicate. No SGA source, no Lean declaration under the item id, and no tool_uses needed. No faults; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreCotangentLocalizationGenerators",
+  "declaration": "KaehlerDifferential.FibreLocalization.comparison",
+  "declarations": [
+   "KaehlerDifferential.FibreLocalization.basePrime",
+   "KaehlerDifferential.FibreLocalization.fibre",
+   "KaehlerDifferential.FibreLocalization.residueMap",
+   "KaehlerDifferential.FibreLocalization.fibrePoint",
+   "KaehlerDifferential.FibreLocalization.fibreField",
+   "KaehlerDifferential.FibreLocalization.fibreAlgebra",
+   "KaehlerDifferential.FibreLocalization.beta",
+   "KaehlerDifferential.FibreLocalization.ComparisonAlong",
+   "KaehlerDifferential.FibreLocalization.comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/FibreCotangentLocalizationGenerators.lean",
+  "statement": "theorem comparison {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] (q : Ideal A) [q.IsPrime] : ∃ ρ : Localization.AtPrime q →+* fibreField (R := R) q, (∀ a : A, ρ (algebraMap A (Localization.AtPrime q) a) = algebraMap (fibre (R := R) q) (fibreField (R := R) q) (Algebra.TensorProduct.includeRight a)) ∧ ComparisonAlong (R := R) q ρ",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical fibre residue map and prime, the existing differential base-change equivalence, and a pure-tensor specification with the standard right-factor scalar actions. Helpers belong to this comparison; all data is constructed without sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b7ee5949",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Item JSON differs from side-live only in lean; the 5 stmt_dep records are identical; lean.statement verbatim; lines ≤100; Mathlib-only imports (plain imports = proof-dep leaves). Clause check: basePrime = comap; fibre = Ideal.Fiber; residueMap = TensorProduct.lift(mapₐ, toAlgHom) = λ⊗a↦λ̄ā; 𝔔 = ker; L = κ(𝔔); beta = (tensorKaehlerEquiv R k A F).symm, the canonical map; ρ fixed by ρ(a/1) = image of 1⊗a (unique); θ is an L-linear equiv for right-factor actions transported through comm, determined by the (ω/a)⊗z formula; inverse formula exact; generator clause ∀ r (Fin r), span → span ∧ FiniteDimensional ∧ finrank ≤ r (FiniteDimensional follows from span). Edge cases r=0, non-reduced fibre, non-maximal q, independent universes all covered. No hollow defs; only the theorem is sorry; docstrings carry source, blueprint id and 6 proof steps. No Mathlib duplicate (preimageEquivFiber only inlines the same term). Advisory: tensorKaehlerEquiv comes from proof_dep lem-weil-pbc-kahler-differentials-base-change, not a stmt_dep; the node itself names β; precedent PASS+note. Not recompiled per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T002448-L-89468",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -63,7 +63,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage",
+     "lines": [
+      87,
+      135
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
@@ -78,11 +103,16 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\Lambda$ be a commutative ring, let $\\square$ be a cartesian square as in\n[def-weil-pbc-derived-exchange], and for a sheaf $E$ of $\\Lambda$-modules on\n$X_{\\Et}$ and $q\\in\\mathbf Z$ write\n\n$$\n \\Ex^q_{\\square,E}:g^{-1}R^qf_*E\\longrightarrow R^qf'_*g'^{-1}E\n$$\n\nfor the map induced on $q$-th cohomology sheaves by the exchange morphism of\n[def-weil-pbc-derived-exchange] at $E$ placed in degree $0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of sheaves of\n$\\Lambda$-modules on $X_{\\Et}$ (for instance torsion sheaves\n[def-weil-pbc-etale-sheaves]). Then the maps $\\Ex^q$ form a morphism between the\ntwo long exact sequences of higher direct images, and if $\\Ex^q_{\\square,F_1}$\nand $\\Ex^q_{\\square,F_2}$ are isomorphisms for every $q$, then so is\n$\\Ex^q_{\\square,F}$ for every $q$. More generally, if two of the three families\n$(\\Ex^q_{\\square,F_1})_q$, $(\\Ex^q_{\\square,F})_q$, $(\\Ex^q_{\\square,F_2})_q$\nconsist of isomorphisms, then so does the third.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring, let $\\square$ be a cartesian square as in\n[def-weil-pbc-derived-exchange], and for a sheaf $E$ of $\\Lambda$-modules on\n$X_{\\Et}$ and $q\\in\\mathbf Z$ write\n\n$$\n \\Ex^q_{\\square,E}:g^{-1}R^qf_*E\\longrightarrow R^qf'_*g'^{-1}E\n$$\n\nfor the map induced on $q$-th cohomology sheaves by the exchange morphism of\n[def-weil-pbc-derived-exchange] at $E$ placed in degree $0$. Let\n$0\\to F_1\\to F\\to F_2\\to0$ be a short exact sequence of sheaves of\n$\\Lambda$-modules on $X_{\\Et}$ (for instance torsion sheaves\n[def-weil-pbc-etale-sheaves]). Then the maps $\\Ex^q$ form a morphism between the\ntwo long exact sequences of higher direct images, and if $\\Ex^q_{\\square,F_1}$\nand $\\Ex^q_{\\square,F_2}$ are isomorphisms for every $q$, then so is\n$\\Ex^q_{\\square,F}$ for every $q$.",
   "proof": [
    {
-    "text": "Applying $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ to the distinguished triangle\n$F_1\\to F\\to F_2\\to F_1[1]$ defined by the short exact sequence produces two long\nexact cohomology sequences (the functors are triangulated and $g^{-1}$ is\nexact). Naturality of the derived exchange morphism, as in\n[lemma-weil-pbc-derived-exchange-replacement], makes the maps $\\Ex^q$ a morphism\nbetween these sequences; compatibility with the connecting maps holds because\n$\\Ex_\\square$ is a natural transformation of triangulated functors, or\nconcretely by the connecting-homomorphism construction from an injective\nresolution of [def-weil-pbc-derived-exchange]. The terms adjacent to\n$g^{-1}R^qf_*F$ are\n$g^{-1}R^{q-1}f_*F_2\\to g^{-1}R^qf_*F_1\\to g^{-1}R^qf_*F\\to g^{-1}R^qf_*F_2\\to\ng^{-1}R^{q+1}f_*F_1$, and similarly for the target; if the exchange maps at\n$F_1$ and $F_2$ are isomorphisms in all degrees, the five lemma shows that\n$\\Ex^q_{\\square,F}$ is an isomorphism. The other two cases are the same\nargument with the five consecutive terms centred at $g^{-1}R^qf_*F_1$\n(neighbours $R^{q-1}f_*F$, $R^{q-1}f_*F_2$, $R^qf_*F$, $R^qf_*F_2$) or at\n$g^{-1}R^qf_*F_2$ (neighbours $R^qf_*F_1$, $R^qf_*F$, $R^{q+1}f_*F_1$,\n$R^{q+1}f_*F$).",
+    "text": "Applying $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ to the distinguished triangle\n$F_1\\to F\\to F_2\\to F_1[1]$ defined by the short exact sequence produces two long\nexact cohomology sequences (the functors are triangulated and $g^{-1}$ is\nexact). Naturality of the derived exchange morphism, as in\n[lemma-weil-pbc-derived-exchange-replacement], makes the maps $\\Ex^q$ a morphism\nbetween these sequences; compatibility with the connecting maps holds because\n$\\Ex_\\square$ is a natural transformation of triangulated functors, or\nconcretely by the connecting-homomorphism construction from an injective\nresolution of [def-weil-pbc-derived-exchange]. The terms adjacent to\n$g^{-1}R^qf_*F$ are\n$g^{-1}R^{q-1}f_*F_2\\to g^{-1}R^qf_*F_1\\to g^{-1}R^qf_*F\\to g^{-1}R^qf_*F_2\\to\ng^{-1}R^{q+1}f_*F_1$, and similarly for the target; if the exchange maps at\n$F_1$ and $F_2$ are isomorphisms in all degrees, the five lemma shows that\n$\\Ex^q_{\\square,F}$ is an isomorphism.",
     "uses": [
      "lemma-weil-pbc-derived-exchange-replacement",
      "def-weil-pbc-derived-exchange"
@@ -90,6 +120,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

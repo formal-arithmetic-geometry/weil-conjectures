@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-resolution-cocycle-homology-tail",
+ "kind": "definition",
+ "title": "The shifted resolution homology composite",
+ "statement": "For a morphism of schemes $f:X\\to S$, an abelian etale sheaf $F$ on $X$, an injective resolution $I$ and $q\\in\\mathbf N$, write $R=f_*$ and $J=I[q]$ as in [lem-weil-pbc-raw-restricted-resolution-cocycle]. Define a sheaf morphism $T_{f,q,F,I}:H^0(RJ)\\to H^q(R^+(F[0]))$ as follows. Apply $H^0$ to the canonical termwise shift map $R(I[q])\\to R(I)[q]$, then apply the homology shift $H^0(R(I)[q])\\to H^q(R(I))$, then the inverse of $I.\\mathrm{isoRightDerivedObjCochainComplex}(R,q)$, then the inverse of $R.\\mathrm{homologyRightDerivedFunctorPlusObjSingleFunctorIso}(F,q)$. Thus this morphism is the explicit four-factor composite of the prescribed maps, with its source expressed using the bounded-below shifted resolution. The notation and prescribed comparisons are those of [def-weil-pbc-raw-restricted-normalization-data] and [def-weil-pbc-abelian-higher-image-class].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images: injective resolution computation of the higher direct image; derived-functor shift compatibility in derived.tex, Tag 0DVC."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "def-weil-pbc-abelian-higher-image-class",
+  "lem-weil-pbc-raw-restricted-resolution-cocycle"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing direct-image commShift isomorphism and apply zeroth homology. Compose with the homology shift, the inverse classical resolution comparison, and the inverse comparison of classical right-derived functors with bounded-below derived homology. The shifted resolution has underlying complex I[q], so the first map has the declared source. The final comparison has the declared target. This directly constructs the map; there is no witness chosen from an unproved existence theorem. The same formula applies for q=0 and for the zero sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images: injective resolution computation of the higher direct image; derived-functor shift compatibility in derived.tex, Tag 0DVC."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Named direct construction of an existing composite, with a declared source and target."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObjCochainComplex|homologyRightDerivedFunctorPlusObjSingleFunctorIso",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the composite from zeroth homology of the direct image of a shifted injective resolution to degree q homology of a right derived direct image, using shift and inverse resolution comparisons",
+   "results": "OK 8 hits; CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology of a shifted injective resolution with the direct image shift comparison and the inverse classical derived functor resolution isomorphisms",
+   "results": "OK 8 hits; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.isoRightDerivedObj, HomotopyCategory.homologyShiftIso_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResolutionCocycleAdjunctionClass",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof of the constructibility statement: the fixed-resolution cocycle comparison and its explicitly constructed ordinary adjunct and shifted homology maps.",
+   "via": [
+    "lem-weil-pbc-resolution-cocycle-adjunction-class",
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionCocycleHomologyTail",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionCocycleHomologyTail.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionCocycleHomologyTail",
+  "statement": "def resolutionCocycleHomologyTail {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) : (((lowerStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (.up ℤ)).obj (normalizationShiftedResolution F I q).obj).homology 0 ⟶ (DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

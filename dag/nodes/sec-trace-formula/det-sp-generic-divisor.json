@@ -1,0 +1,71 @@
+{
+ "id": "det-sp-generic-divisor",
+ "kind": "statement",
+ "title": "Generic vanishing of the defect along a principal divisor",
+ "statement": "Let $X$ be a normal separated finite-type $k$-scheme, $i\\colon Z\\hookrightarrow X$ an effective\nprincipal Cartier divisor, and $L\\in D^b_c(X_{\\mathrm{\\acute et}},A)$ with $i^*L=0$. Then the\ndefect $C_{X,Z}(L)$ of [det-sp-defect-definition] vanishes at every generic point of $Z$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-lem-tf-sp-generic-divisor/det-sp-generic-divisor.md",
+  "place": "node det-sp-generic-divisor, order None"
+ },
+ "stmt_deps": [
+  "det-sp-defect-definition"
+ ],
+ "proof": [
+  {
+   "text": "Fix a generic point $\\zeta$ of $Z$; the question is local at $\\zeta$, and we discard the other\nirreducible components of $X$ and $Z$. Write $j\\colon U=X\\setminus Z\\hookrightarrow X$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Reduction to $j_!G$.* Since $C_{X,Z}$ is exact, truncation triangles reduce to a constructible\nsheaf $F$ with $F|_Z=0$. Shrink around $\\zeta$ until $F=j_!G$ for a finite locally constant sheaf\n$G$ on $U$. This is possible since the closure of its non-lisse locus in $U$ cannot contain a\ngeneric point of the divisor $Z$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Induction on the degree.* We prove by induction on $r$, simultaneously for all such normal pairs\nand all $G$, that $H^r(C_{X,Z}(j_!G))$ vanishes generically on $Z$. Nearby cycles are left\n$t$-exact and $i^*j_!G=0$, so\n\n$$\nC_{X,Z}(j_!G)=e^*\\operatorname{Sp}_{X,Z}(j_!G)[1]\\in D^{\\geq-1}.\n$$\n\nThus the induction starts with every $r<-1$.\n\nChoose a finite étale surjection $f_U\\colon U'\\to U$ trivializing $G$, and let $f\\colon X'\\to X$\nbe the normalization of $X$ in $U'$, taken componentwise as in [def-fin-normalization-extension].\nIt is finite [lem-fin-normalization-extension-finite], and $X'$ is normal. Put $Z'=f^{-1}Z$ and\n$j'\\colon U'\\hookrightarrow X'$. The sheaf $f^*F=j'_!f_U^*G$ has constant restriction on each\ncomponent of $U'$, so [det-sp-generic-divisor-constant] applies to each normal component of $X'$\nwith the principal divisor $Z'$. The points over a generic point of $Z$ are generic points of\n$Z'$. Hence the proper case of [det-sp-defect-proper-smooth] shows that\n$C_{X,Z}(f_*f^*F)\\simeq f_{Z*}C_{X',Z'}(f^*F)$ vanishes generically on $Z$.\n\nThe unit $F\\to f_*f^*F$ is injective: on a geometric stalk in $U$ it is the diagonal inclusion into\na nonempty finite product, and both sides vanish on $Z$. Consequently there is a short exact\nsequence\n\n$$\n0\\longrightarrow F\\longrightarrow f_*f^*F\\longrightarrow j_!G'\\longrightarrow0,\n$$\n\nwhere $G'$ is again finite locally constant on $U$. Applying $C_{X,Z}$ and the long exact sequence\nof cohomology sheaves, at a generic point where the middle term vanishes, gives\n\n$$\nH^r(C_{X,Z}(F))\\simeq H^{r-1}(C_{X,Z}(j_!G')).\n$$\n\nThe induction hypothesis kills the right side. The argument uses only the injectivity of the unit,\nwhich holds for every $A$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-fin-normalization-extension-finite",
+    "det-sp-generic-divisor-constant",
+    "det-sp-defect-proper-smooth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "lem-fin-normalization-extension-finite",
+  "det-sp-generic-divisor-constant",
+  "det-sp-defect-proper-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-lem-tf-sp-generic-divisor/det-sp-generic-divisor.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-sp-defect-definition",
+  "det-sp-generic-divisor-constant",
+  "det-sp-defect-proper-smooth",
+  "def-fin-normalization-extension",
+  "lem-fin-normalization-extension-finite"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "det-sp-generic-divisor",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-lem-tf-sp-generic-divisor"
+}

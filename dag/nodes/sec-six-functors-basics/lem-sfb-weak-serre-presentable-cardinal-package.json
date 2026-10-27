@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-weak-serre-presentable-cardinal-package",
+ "kind": "statement",
+ "title": "Compatible presentable subobjects and epimorphism lifts for a Grothendieck weak-Serre pair",
+ "statement": "Fix a universe $U$ for small sets and Hom sets [def-weil-size-convention]. Let $\\mathcal B$ be Grothendieck abelian [def-sp-grothendieck-abelian], and let $\\mathcal A\\subseteq\\mathcal B$ be full replete, contain zero, and be closed under kernels and cokernels of maps between its objects and under extensions in $\\mathcal B$. Suppose $\\mathcal A$ is Grothendieck abelian with the induced exact structure and is closed under $U$-small ambient coproducts. For an infinite regular cardinal $\\lambda\\in U$, call a small category $\\lambda$-filtered if every diagram with fewer than $\\lambda$ morphisms has a cocone. An object is $\\lambda$-presentable if its Hom functor preserves small $\\lambda$-filtered colimits [def-weil-pbc-category-colimit]; write $\\mathcal C^\\lambda$ for these objects in a category $\\mathcal C$. Regular means that a union of fewer than $\\lambda$ sets of size less than $\\lambda$ has size less than $\\lambda$. There is an uncountable regular $\\lambda\\in U$ such that: (a) $\\mathcal B^\\lambda$ and $\\mathcal A^\\lambda$ are essentially $U$-small (each has a $U$-small family of representatives up to isomorphism) and are Serre subcategories of their respective abelian categories, meaning closed under subobjects, quotients and extensions; (b) $\\mathcal A^\\lambda=\\mathcal A\\cap\\mathcal B^\\lambda$; (c) each object of $\\mathcal C$, for $\\mathcal C=\\mathcal A,\\mathcal B$, is the colimit of its $\\lambda$-presentable subobjects, a $U$-small $\\lambda$-filtered poset, and for an object of $\\mathcal A$ this colimit agrees with the ambient colimit in $\\mathcal B$; (d) given an epimorphism $x\\twoheadrightarrow y$ in $\\mathcal B$ and a map $n\\to y$ with $n\\in\\mathcal B^\\lambda$, there are $m\\in\\mathcal B^\\lambda$, an epimorphism $m\\twoheadrightarrow n$ and a map $m\\to x$ forming a commutative square. If $n\\to y$ is monic, $m\\to x$ can be chosen monic.",
+ "source": {
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Lemma A.6 (1), (2), (4), with the common-cardinal choice and intersection equality in the first two paragraphs of the proof of Theorem A.3 Hall--Neeman--Rydh, arXiv:1405.1888, Appendix A. No Stacks tag states this input; archive WANTED, online source read."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose the module presentations $(R_C,F_C,G_C)$ for $C=A,B$ from the module-size lemma. Put $H=F_A(R_A)$. Choose an uncountable regular $\\lambda\\in U$ larger than $|R_A|$, $|R_B|$ and $|G_B(iH)|$, where $i:\\mathcal A\\hookrightarrow\\mathcal B$ is inclusion. Such a successor cardinal exists in the universe. The counit identifies $iH$ with $F_B G_B(iH)$, so the lemma makes $iH$ $\\lambda$-presentable in $\\mathcal B$. Below, write $F,G,R$ for either chosen presentation.",
+   "uses": [
+    "lem-sfb-grothendieck-presentables-module-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Remark A.4, Lemma A.5; Theorem A.3, first paragraph (explicit common-cardinal bound)"
+   }
+  },
+  {
+   "text": "For $s\\hookrightarrow F(M)$ with $|M|<\\lambda$, pull back $G(s)\\hookrightarrow GF(M)$ along the adjunction unit $M\\to GF(M)$. The resulting module $P$ is a submodule of $M$. Applying the finite-limit-preserving $F$, and using $FG(s)\\cong s$ and $F(M)\\xrightarrow{F\\eta_M}FGF(M)\\cong F(M)$ equal to the identity by the triangle identity, gives $FP\\cong s$. Thus subobjects are presentable. For a quotient $F(M)\\twoheadrightarrow q$, do this for its kernel to get $P\\subseteq M$; preservation of cokernels gives $q\\cong F(M/P)$, hence quotient closure. Finally, a coproduct of fewer than $\\lambda$ objects $F(M_j)$ is $F(\\bigoplus_j M_j)$; regularity and finite support give $|\\bigoplus_j M_j|<\\lambda$. This includes the empty coproduct. Thus presentables are closed under these coproducts as well.",
+   "uses": [
+    "lem-sfb-grothendieck-presentables-module-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.6, proof (1) and (3): subquotients and small coproducts"
+   }
+  },
+  {
+   "text": "Modules of cardinality less than $\\lambda$ have a $U$-small set of isomorphism representatives: encode each on an ordinal $\\alpha<\\lambda$ by its addition, negation, zero and $R$-action functions. Their $F$-images represent all $\\lambda$-presentables by the module-size lemma, proving essential smallness. For any $c$, the submodules $M\\subseteq Gc$ of size less than $\\lambda$ form a $U$-small $\\lambda$-filtered poset: the sum of fewer than $\\lambda$ such submodules still has size less than $\\lambda$, as $|R|<\\lambda$ and $\\lambda$ is uncountable regular. Their union is $Gc$, since every element generates a small cyclic submodule. The union has the module colimit universal property: compatible linear maps glue on elements. Applying $F$ gives a colimit $c\\cong FGc$ of the presentable subobjects $FM\\subseteq c$.",
+   "uses": [
+    "lem-sfb-grothendieck-presentables-module-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.5; Lemma A.6, proof (2); smallness made explicit"
+   }
+  },
+  {
+   "text": "Consider the poset $P_c$ of all $\\lambda$-presentable subobjects of $c$. It is $U$-small by well-poweredness. It is $\\lambda$-filtered: for fewer than $\\lambda$ members, take the image of their coproduct in $c$; step 2 makes that image presentable and an upper bound, including zero for the empty family. Every compatible family of maps on $P_c$ restricts to the colimit diagram $FM$ of step 3 and so defines a unique map from $c$. It agrees on any $s\\in P_c$: presentability factors $s\\hookrightarrow c$ through some $FM$, and that factor is monic because its composite is monic. Compatibility with this containment gives agreement on $s$. Uniqueness follows already on the $FM$. Hence $c$ is the colimit over $P_c$, as asserted in (c).",
+   "uses": [
+    "lem-pur-kinjective-set-of-subobjects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.6 (2), replacing the displayed family by the full poset of presentable subobjects"
+   }
+  },
+  {
+   "text": "For $x\\twoheadrightarrow y\\leftarrow n$ in either category, form $t=x\\times_y n$. The pullback lemma makes $t\\to n$ epic. Express $t$ by its presentable subobjects $m_j$ using step 4, and put $n_j=\\operatorname{im}(m_j\\to n)$. These are presentable by quotient closure. Their colimit is $n$: exactness of filtered colimits, applied to the image factorizations of the compatible maps $m_j\\to n$, identifies the colimit of these images with the image of $t\\to n$, which is $n$. The indexing poset is $\\lambda$-filtered. Presentability of $n$ factors $\\operatorname{id}_n$ through some $n_j\\hookrightarrow n$. That inclusion is then split epic and monic, hence invertible; thus $m_j\\twoheadrightarrow n$. Taking $m=m_j$ gives the required square. If $n\\to y$ is monic, the pullback lemma makes $t\\to x$ monic, and so is $m_j\\to t\\to x$. This proves (d), in particular for $\\mathcal B$.",
+   "uses": [
+    "lem-sfb-abelian-pullback-epi-mono",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.6, proof (4)"
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to k\\to z\\to n\\to0$ with $k,n$ presentable, apply step 5 to $z\\twoheadrightarrow n\\xleftarrow{\\mathrm{id}}n$. Obtain a presentable subobject $m\\subseteq z$ mapping epimorphically onto $n$. The map $k\\oplus m\\to z$ is epic: any map from $z$ vanishing on $k$ factors through $n$, and vanishing also on $m$ makes that factor zero by the epimorphism $m\\to n$. Steps 2 and quotient closure imply that $z$ is presentable. Together with subobject and quotient closure and step 3, this proves (a) for both categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.6, final paragraph: extension closure"
+   }
+  },
+  {
+   "text": "The inclusion $i$ preserves all $U$-small colimits. Indeed it preserves coproducts by hypothesis, and cokernels of maps in $\\mathcal A$ by the induced exact structure. For a small diagram $D$, its colimit in an additive category is the cokernel of the two incidence maps' difference $\\bigoplus_{a:j\\to k}D(j)\\to\\bigoplus_jD(j)$; maps out of this cokernel are exactly compatible families of maps out of $D$. This construction is the same in $\\mathcal A$ and $\\mathcal B$. Thus fullness and equality of colimits imply that any ambient $\\lambda$-presentable object in $\\mathcal A$ is intrinsically $\\lambda$-presentable: the two Hom-colimit comparison maps are the same. This gives $\\mathcal A\\cap\\mathcal B^\\lambda\\subseteq\\mathcal A^\\lambda$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3, second paragraph: reverse intersection inclusion and ambient colimits"
+   }
+  },
+  {
+   "text": "Conversely, $a\\in\\mathcal A^\\lambda$ is $F_A(M)$ for $|M|<\\lambda$. The free module on the underlying set of $M$ surjects onto $M$ by sending the basis vector $[m]$ to $m$. Applying $F_A$ makes $a$ a quotient of a coproduct of fewer than $\\lambda$ copies of $H$. Inclusion preserves this quotient and coproduct by step 7. Each $iH$ is ambient $\\lambda$-presentable by step 1, so the coproduct and its quotient $ia$ are ambient presentable by step 2. This gives the other inclusion in (b). Step 7 also identifies the colimit of intrinsic presentable subobjects of any $a\\in\\mathcal A$ with its ambient colimit. This is exactly the final compatibility in (c); it makes no claim that every ambient subobject of $a$ lies in $\\mathcal A$.",
+   "uses": [
+    "lem-sfb-grothendieck-presentables-module-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Lemma A.6 (3) and Theorem A.3, first two paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-grothendieck-presentables-module-size",
+  "lem-pur-kinjective-set-of-subobjects",
+  "lem-sfb-abelian-pullback-epi-mono",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Hall--Neeman--Rydh, Remark A.4, Lemmas A.5--A.6 and proof of Theorem A.3, first two paragraphs. Archive unavailable; online source read and the full-poset and ambient-colimit arguments written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Grothendieck weak Serre inclusion choose a regular cardinal whose presentable objects form a Serre subcategory and agree under intersection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {G : C} [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C],\\n  (CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms G).HasSmallObjectArgument\", \"doc\": \"In a Grothendieck abelian category, the generating monomorphisms associated with an object $ G $ satisfy the conditions required for the small object argument.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.wellPowered\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.WellPowered.{w, v, u} C\", \"doc\": \"Every Grothendieck abelian category is locally small, meaning its hom-sets are small types and its class of objects is small.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {G : C} [inst_1 : CategoryTheory.Abelian C]\\n  (hG : CategoryTheory.IsSeparator G) {X : C} [inst_2 : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C]\\n  (A₀ : CategoryTheory.Subobject X) {J : Type w} [inst_3 : LinearOrder J] [OrderBot J] [inst_\", \"doc\": \"In a Grothendieck abelian category with enough injectives, for any subobject $ A_0 $ of an object $ X $, there exists an element $ j $ in a well-ordered set $ J $ (equipped with a bottom element, succ\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"(C : Type u₁) →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (κ : Cardinal.{w}) → [Fact κ.IsRegular] → CategoryTheory.ObjectProperty C\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is said to be $ \\\\kappa $-presentable if it satisfies the property defined by $ \\\\text{IsCardinalPresentable}\\\\, X\\\\, \\\\kappa $, typically meaning that the hom\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"An object $ X $ in a category is $ \\\\kappa $-presentable if the hom-functor $ \\\\text{Hom}(X, -) $ is $ \\\\kappa $-accessible, meaning it preserves colimits of diagrams indexed by $ \\\\kappa $-filtered categ\"}\n  {\"name\": \"CategoryTheory.AreCardinalFilteredGenerators\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.ObjectProperty C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A predicate asserting that an object property $P$ in a category $\\\\mathcal{C}$ satisfies the conditions to be a $\\\\kappa$-filtered generator, where $\\\\kappa$ is a regular cardinal. This means that $P$-ob\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → CategoryTheory.ObjectProperty C → Prop\", \"doc\": \"A predicate $ P $ on objects of an abelian category $ \\\\mathcal{C} $ is a Serre class if it satisfies the axioms defining a Serre class, including closure under subobjects, quotients, extensions, and f\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredGenerators\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [hκ : Fact κ.IsRegular] → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a regular cardinal $\\\\kappa$, this proposition asserts that $\\\\mathcal{C}$ has a set of $\\\\kappa$-filtered generators. This means there exists a set of objects in $\\\\mat\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give presentability definitions, Grothendieck AB4, well-poweredness and factorization through filtered unions, not the common-rank Serre, density and epimorphism-lifting package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sufficiently large presentable objects in a Grothendieck category are closed under subobjects quotients and extensions and lift along epimorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderQuotients.casesOn\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.EpiMono\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {P : CategoryTheory.ObjectProperty C} →\\n      {motive : P.IsClosedUnderQuotients → Sort u_1} →\\n        (t : P.IsClosedUnderQuotients) →\\n          ((prop_of_epi : ∀ {X Y : C} (f : X ⟶ Y) [CategoryTheory.Epi f], P X → P Y) → motive ⋯) → \", \"doc\": \"For a category $\\\\mathcal{C}$ and an object property $P$, this definition states that $P$ is closed under quotients: if there exists an epimorphism $f : X \\\\to Y$ and the object $X$ satisfies $P$, then \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderQuotients\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.EpiMono\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.ObjectProperty C → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$ and an object property $P$, this proposition states that $P$ is closed under quotients: if there exists an epimorphism $X \\\\twoheadrightarrow Y$ and $X$ satisfies $P$, then\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": AB4OfSize.{w} C\", \"doc\": \"Every Grothendieck abelian category satisfies the AB4 axiom, which requires that the category has all coproducts and that coproducts preserve exact sequences (i.e., coproducts are exact functors).\"}\n  {\"name\": \"CategoryTheory.AB4OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Limits.HasCoproducts C] → Prop\", \"doc\": \"The category $\\\\mathcal{C}$ satisfies the AB4 axiom of Grothendieck, which requires that it has all coproducts and that coproducts are exact functors (preserve exact sequences).\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives\", \"type\": \": EnoughInjectives C\", \"doc\": \"Every Grothendieck abelian category has enough injective objects, meaning that for every object $A$ in the category, there exists an injective object $I$ and a monomorphism $A \\to I$.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderQuotients.mk\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.EpiMono\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C},\\n  (∀ {X Y : C} (f : X ⟶ Y) [CategoryTheory.Epi f], P X → P Y) → P.IsClosedUnderQuotients\", \"doc\": \"If for every epimorphism $ f : X \\to Y $, the property $ P $ holding for $ X $ implies $ P $ holds for $ Y $, then $ P $ is closed under quotients.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \": (⊤ : ObjectProperty C).IsSerreClass\", \"doc\": \"The class of all objects in an abelian category is a Serre class. This means that it is closed under subobjects, quotients, extensions, and finite direct sums.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \"(j₀ : J) (y₁ y₂ : X ⟶ Y.obj j₀) (hy : y₁ ≫ c.ι.app j₀ = y₂ ≫ c.ι.app j₀) :\\n  ∃ (j : J) (φ : j₀ ⟶ j), y₁ ≫ Y.map φ = y₂ ≫ Y.map φ\", \"doc\": \"In a Grothendieck abelian category, for any κ-filtered category $\\\\mathcal{J}$ and diagram $Y: \\\\mathcal{J} \\\\to \\\\mathcal{C}$, if two morphisms $y_1, y_2: X \\\\to Y(j_0)$ satisfy $y_1 \\\\circ \\\\iota_{j_0} = y\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give presentability definitions, Grothendieck AB4, well-poweredness and factorization through filtered unions, not the common-rank Serre, density and epimorphism-lifting package."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPresentable\", \"IsGrothendieckAbelian\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {j₀ : J} (y : X ⟶ Y.obj j₀) : CategoryTheory.Functor (CategoryTheory.Under j₀) (CategoryTheory.MonoOver X)\", \"doc\": \"The kernel of `g y` gives a family of subobjects of `X` indexed by `Under j₀`, and\\nwe consider it as a functor `Under j₀ ⥤ MonoOver X`.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.F\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (z : X ⟶ c.pt) [CategoryTheory.Mono c.ι] : CategoryTheory.Functor J (CategoryTheory.MonoOver X)\", \"doc\": \"The functor `J ⥤ MonoOver X` which sends `j : J` to the inverse image by `z : X ⟶ c.pt`\\nof the subobject `Y.obj j` of `c.pt`; it is defined here as the object in `MonoOver X`\\ncorresponding to the mono\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.g\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {j₀ : J} (y : X ⟶ Y.obj j₀) : (CategoryTheory.Functor.const (CategoryTheory.Under j₀)).obj X ⟶ (CategoryTheory.Under.forget j₀).comp Y\", \"doc\": \"The natural transformation `X ⟶ Y.obj t.right` for `t : Under j₀`\\nthat is induced by `y : X ⟶ Y.obj j₀`.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheory.Limits.IsColimit c) [∀ (j j'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.g_app\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {j₀ : J} (y : X ⟶ Y.obj j₀) (t : CategoryTheory.Under j₀) : (CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.g y).app t = CategoryTheory.CategoryStr\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheory.Limits.IsColimit c) {κ : Car\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheory.Limits.IsColimit c) {κ : Car\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.F_obj\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (z : X ⟶ c.pt) [CategoryTheory.Mono c.ι] (j : J) : (CategoryTheory.IsGrothendieckAbelian.IsPresentab\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F_obj\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {j₀ : J} (y : X ⟶ Y.obj j₀) (j : CategoryTheory.Under j₀) : (CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F y).obj j =\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.f\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (z : X ⟶ c.pt) : CategoryTheory.Limits.colimit (C\", \"doc\": \"The canonical map `colimit (pullback c.ι ((Functor.const J).map z)) ⟶ X`,\\nwhich is an isomorphism when `J` is filtered, see `isIso_f`.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.epi_f\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheory.Limits.IsColimit c) (z : X ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [CategoryTheory.SmallCategory J] {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheory.Limits.IsColimit c) (z : X ⟶\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give presentability definitions, Grothendieck AB4, well-poweredness and factorization through filtered unions, not the common-rank Serre, density and epimorphism-lifting package."
+  },
+  {
+   "tool": "grep",
+   "query": "presentab.*[Ss]erre|[Ss]erre.*presentab",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give presentability definitions, Grothendieck AB4, well-poweredness and factorization through filtered unions, not the common-rank Serre, density and epimorphism-lifting package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small subobjects cover a Grothendieck category and small objects lift through epimorphisms with compatible presentability for an exact full inclusion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {G : C} [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C],\\n  (CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms G).HasSmallObjectArgument\", \"doc\": \"In a Grothendieck abelian category, the generating monomorphisms associated with an object $ G $ satisfy the conditions required for the small object argument.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsSmallGeneratingMonomorphismsOfSmallSubobject\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (G : C) [Small.{w, max u v} (CategoryTheory.Subobject G)],\\n  CategoryTheory.MorphismProperty.IsSmall.{w, v, u} (CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms G)\", \"doc\": \"If the subobject lattice of an object $ G $ in a Grothendieck abelian category is small, then the collection of generating monomorphisms $ X \\to G $ (where $ X $ ranges over subobjects of $ G $) forms \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [inst_3 : CategoryTheory.SmallCategory J]\\n  {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheor\", \"doc\": \"In a Grothendieck abelian category, given a κ-regular cardinal $\\\\kappa$, a κ-filtered category $\\\\mathcal{J}$, and a functor $Y: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ whose morphisms are monomorphisms, if an ob\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [inst_3 : CategoryTheory.SmallCategory J]\\n  (F : CategoryTheory.Functor J (CategoryTheory.MonoOver X)) {κ : Cardinal.{w}} [hκ : Fact \", \"doc\": \"In a Grothendieck abelian category, given a regular cardinal $\\\\kappa$, a $\\\\kappa$-filtered category $J$, and an object $X$ with $|\\\\text{Sub}(X)| < \\\\kappa$, if $F : J \\\\to \\\\text{MonoOver}(X)$ is a diagr\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {G : C} [inst_1 : CategoryTheory.Abelian C]\\n  (hG : CategoryTheory.IsSeparator G) {X : C} [inst_2 : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C]\\n  (A₀ : CategoryTheory.Subobject X) {J : Type w} [inst_3 : LinearOrder J] [OrderBot J] [inst_\", \"doc\": \"In a Grothendieck abelian category with enough injectives, for any subobject $ A_0 $ of an object $ X $, there exists an element $ j $ in a well-ordered set $ J $ (equipped with a bottom element, succ\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] {X : C} {J : Type w} [inst_3 : CategoryTheory.SmallCategory J]\\n  {Y : CategoryTheory.Functor J C} {c : CategoryTheory.Limits.Cocone Y} (hc : CategoryTheor\", \"doc\": \"In a Grothendieck abelian category, given a filtered category $\\\\mathcal{J}$, a diagram $Y : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a cocone $c$ with apex $N$, and a morphism $y : X \\\\to Y(j_0)$ such that $y$ co\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_larger_subobject\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {G : C} [CategoryTheory.Abelian C],\\n  CategoryTheory.IsSeparator G →\\n    ∀ {X : C} (A : CategoryTheory.Subobject X),\\n      A ≠ ⊤ →\\n        ∃ A', ∃ (h : A < A'), (CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms G).pushouts (A.ofLE \", \"doc\": \"In a Grothendieck abelian category with enough injectives, for any object $X$ and subobject $A$ of $X$ that is not the maximal subobject $\\\\top$, there exists a subobject $A'$ of $X$ containing $A$ suc\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : C} →\\n      [CategoryTheory.Abelian C] →\\n        CategoryTheory.IsSeparator G → {X : C} → CategoryTheory.Subobject X → CategoryTheory.Subobject X\", \"doc\": \"Given a subobject $ A $ of an object $ X $ in a Grothendieck abelian category with enough injectives, this function returns the maximal subobject $ \\\\top $ if $ A $ is already maximal. Otherwise, it co\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give presentability definitions, Grothendieck AB4, well-poweredness and factorization through filtered unions, not the common-rank Serre, density and epimorphism-lifting package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-serre-derived-small-generators",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary Brown input for arbitrary schemes and noncartesian levelwise quasi-coherent total systems; independent of properness and adjoint locality. Input: Cohomological representability for a Grothendieck weak-Serre derived subcategory. Supporting input: a small family generating the weak-Serre derived subcategory under triangles and ambient coproducts, before Brown representability. Supporting prerequisite: Lemma A.6 (1), (2), (4), with the common-cardinal choice and intersection equality in the first two paragraphs of the proof of Theorem A.3",
+   "via": [
+    "lem-sfb-weak-serre-derived-small-generators",
+    "lem-sfb-grothendieck-weak-serre-derived-representability",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weak-serre-presentable-cardinal-package",
+  "worker": "stage1",
+  "summary": "Q06: unchanged statement; split through the module-size characterization of presentables, with explicit subquotient closure, full subobject-poset density, epic lifts, extension closure and a common-cardinal comparison. Two new statement-only nodes, one a Mathlib leaf. No exact sorry-free project attachment exists.",
+  "blueprint": "Inherited provenance has no blueprint ancestor (ancestor command prints None); supports det-thm-sf-ctf-stability-direct-images proof (3), through the existing weak-Serre small-generator route. Realizes the presentable-cardinal prerequisite cited in step 2 of lem-sfb-weak-serre-derived-small-generators; latest direct-image proof paragraph (3) and chapter/unit route were read."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-20ad0efb8",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-20ad0efb8 (reviewer sub-agent of L); spot-checked: Ordinary first split; there is no repair note, the item statement is unchanged, and proof_deps equals the union of the uses lists. HNR arXiv:1405.1888 Appendix A is WANTED and not in literature, so I could not read it; the proof is marked agent-written and I checked every step as mathematics. New node lem-sfb-grothendieck-presentables-module-size (unsplit) is true for every uncountable regular rho > |R|. (<=) holds because ideals are rho-presented, so the Gabriel localization and G preserve rho-filtered colimits. (=>) holds because Gc is the rho-filtered union of its small submodules, giving a retract of F(M), and the kernel image is F(N) with N in GFM, so c = F((eta M + N)/N). It does not duplicate new-stage3-gabriel-popescu-abelian-core, lem-coef-grothendieck-locally-presentable, lem-sfb-presentable-generator-cardinal-bound or lem-coef-ordinary-presentables-small. Mathlib's GabrielPopescu.lean has only the existence half, so unsplit is right. New node lem-sfb-abelian-pullback-epi-mono is an exact Mathlib leaf: Abelian.epi_pullback_of_epi_f (Basic.lean:653) and pullback.fst_of_mono (Pullback/Mono.lean:125), both read. Steps checked: 1 successor-cardinal lambda, with iH = F_B G_B iH presentable; 2 subobjects by pulling back along eta (F eta invertible by the triangle identity), quotients F(M/P), and coproducts by regularity plus finite support; 3 U-small module codes and a lambda-filtered union of small submodules; 4 well-poweredness from the mathlib leaf lem-pur-kinjective-set-of-subobjects, with each s factoring through some FM; 5 AB5 makes colim im(m_j) -> n an isomorphism, presentability of n splits it, and the monic case follows from the leaf; 6 k (+) m -> z is epic by the vanishing test; 7 colimits are cokernels of coproducts, so i is cocontinuous and the Hom comparison maps coincide; 8 a is a quotient of fewer than lambda copies of H. Edge cases A=B, A=0, empty families and the zero ring are fine, and no step assumes ambient Serre closure. The route stays in the unit sk-thm-sf-ctf-stability (other citations are mathlib leaves), no tool_uses are needed, and there is no cycle. Minor points, no change: the source field is an online URL, the search verdicts are repeated, and blueprint.from.node is null as inherited from Q16's node."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeakSerrePresentableCardinalPackage",
+  "declaration": "CategoryTheory.weakSerre_presentable_cardinal_package",
+  "file": "lean/Sheaf/CategoryTheory/WeakSerrePresentableCardinalPackage.lean",
+  "statement": "theorem weakSerre_presentable_cardinal_package {B : Type u} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] (A : ObjectProperty B) [A.IsClosedUnderIsomorphisms] [A.ContainsZero] [A.IsClosedUnderKernels] [A.IsClosedUnderCokernels] [A.IsClosedUnderExtensions] [Abelian A.FullSubcategory] [IsGrothendieckAbelian.{v} A.FullSubcategory] (hcoprod : ∀ (I : Type v), A.IsClosedUnderColimitsOfShape (Discrete I)) : ∃ (κ : Cardinal.{v}) (_ : Fact κ.IsRegular), Cardinal.aleph0 < κ ∧ (EssentiallySmall.{v} (isCardinalPresentable B κ).FullSubcategory ∧ EssentiallySmall.{v} (isCardinalPresentable A.FullSubcategory κ).FullSubcategory ∧ (isCardinalPresentable B κ).IsSerreClass ∧ (isCardinalPresentable A.FullSubcategory κ).IsSerreClass) ∧ (∀ a : A.FullSubcategory, IsCardinalPresentable a κ ↔ IsCardinalPresentable a.obj κ) ∧ (∀ X : B, Small.{v} {s : Subobject X // IsCardinalPresentable (s : B) κ} ∧ IsCardinalFiltered {s : Subobject X // IsCardinalPresentable (s : B) κ} κ ∧ ∀ (Y : B) (f : ∀ s : {s : Subobject X // IsCardinalPresentable (s : B) κ}, (s.val : B) ⟶ Y), (∀ (s t : {s : Subobject X // IsCardinalPresentable (s : B) κ}) (h : s.val ≤ t.val), Subobject.ofLE s.val t.val h ≫ f t = f s) → ∃! g : X ⟶ Y, ∀ s : {s : Subobject X // IsCardinalPresentable (s : B) κ}, s.val.arrow ≫ g = f s) ∧ (∀ X : A.FullSubcategory, Small.{v} {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ} ∧ IsCardinalFiltered {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ} κ ∧ ∀ (Y : A.FullSubcategory) (f : ∀ s : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}, (s.val : A.FullSubcategory) ⟶ Y), (∀ (s t : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}) (h : s.val ≤ t.val), Subobject.ofLE s.val t.val h ≫ f t = f s) → ∃! g : X ⟶ Y, ∀ s : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}, s.val.arrow ≫ g = f s) ∧ (∀ (X : A.FullSubcategory) (Y : B) (f : ∀ s : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}, ((s.val : A.FullSubcategory).obj) ⟶ Y), (∀ (s t : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}) (h : s.val ≤ t.val), (Subobject.ofLE s.val t.val h).hom ≫ f t = f s) → ∃! g : X.obj ⟶ Y, ∀ s : {s : Subobject X // IsCardinalPresentable (s : A.FullSubcategory) κ}, s.val.arrow.hom ≫ g = f s) ∧ (∀ (x y n : B) (p : x ⟶ y) (f : n ⟶ y), Epi p → IsCardinalPresentable n κ → ∃ (m : B) (q : m ⟶ n) (a : m ⟶ x), IsCardinalPresentable m κ ∧ Epi q ∧ a ≫ p = q ≫ f ∧ (Mono f → Mono a))",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a17f3892",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement verbatim in file; node differs from live only in lean field; no live supersession. Hypotheses match Mathlib defs (weak Serre: kernels/cokernels between A-objects, extensions in B, Type v ambient coproducts incl. empty, u free). Conclusion: regular κ with aleph0<κ; (a) EssentiallySmall.{v}+IsSerreClass for B and A; (b) intrinsic/ambient presentability iff; (c) full presentable-subobject poset Small/IsCardinalFiltered/∃! colimit property in B, in A, and A-diagram ambient in B; (d) epi lift with Mono f → Mono a. Edge cases A=B, A=0, X=0, n=0 fine. No duplicate, no definitions, sorry-only, docstrings with source and blueprint tag, report sections present. Advisory: free [Abelian A.FullSubcategory] binder is equivalent (unique additive structure) and matches landed sibling encoding."
+ }
+}

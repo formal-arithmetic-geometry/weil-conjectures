@@ -1,0 +1,138 @@
+{
+ "id": "lem-trf-compact-support-finite-coefficient-presentation",
+ "kind": "statement",
+ "title": "Normalized finite coefficient restriction and direct image",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite field extension, and let $p:Z\\to Y$ be a morphism of schemes. Scheme and coefficient universes are independent as in [def-trf-compact-support-system-evaluation-diagram]. Write $P_{p,n}$ for its actual finite-level direct image, $\\mathrm{Res}_{W,h}$ for its ordinary coefficient restriction, and $\\mathrm{Res}_{W,h}^D$ for its exact derived coefficient restriction. Assume every $P_{p,n}$ is additive and every source finite module category admits K-injective resolutions. For every $h:n\\le m$ there are natural isomorphisms $a_h:P_{p,m}\\circ\\mathrm{Res}_{Z,h}\\cong\\mathrm{Res}_{Y,h}\\circ P_{p,n}$ and $d_h:RP_{p,m}\\circ\\mathrm{Res}_{Z,h}^D\\cong\\mathrm{Res}_{Y,h}^D\\circ RP_{p,n}$. The ordinary map is the identity on every section, as an equality of functions between the actual section carriers. The pair $(a_h,d_h)$ satisfies CompactSupportDerivedSquareNormalization of [def-trf-compact-support-system-evaluation-diagram] for every K-injective source complex and every K-injective resolution of its restricted complex.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; specialization of coherence proof steps 1--3 and 6"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Prove naturality of the actual constant-section direct ring map in a morphism of coefficient rings, using the sheafification adjunction. Extend successor compatibility along the actual inverse sequence using NatTrans.ofOpSequence to obtain the commutative ring square for normalizedDVRQuotient. Identity on every section is then a linear natural isomorphism between the two ordinary composites, with identity inverse.",
+   "uses": [
+    "def-trf-compact-support-system-evaluation-diagram",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport module sheaves to the coefficient-sized AsSmall models. Construct the ringed-topos module direct image there from the transported constant-section ring map. The coefficient-acyclicity theorem for ringed-topos direct images applies to any commutative ring-sheaf map: a K-injective module complex restricted to the other ring is acyclic for that direct image. Module equivalences preserve K-injectivity. The derived square for these equivalences and naturality of its unit transfer this acyclicity back to the original pro-etale sites, retaining independent scheme and coefficient universes.",
+   "uses": [
+    "lem-pur-coefficient-pullback-exact",
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+    "lem-pur-derived-square-normalization-naturality",
+    "lem-pur-diagram-ring-restriction-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived-square existence theorem to the ordinary identity comparison and the restricted-complex acyclicity just proved. Invert its unit-normalized comparison. For any K-injective J and any K-injective resolution r of its restricted complex, postcompose the required normalization equation with the inverse of the direct-image comparison at the target resolution. Naturality of the right-derived unit at r and the unit-normalized square identify the two composites; cancellation proves exactly CompactSupportDerivedSquareNormalization.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "def-trf-compact-support-system-evaluation-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-pur-diagram-ring-restriction-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pushforward-composition, with the coefficient restriction specialization already formalized in DiagramRingRestrictionPushforward and DerivedExactSquareCoherence; Zheng Construction 4.1 and Lemma 4.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation on a sequence site commutes with derived direct image and with the units and counits of the componentwise adjunction",
+   "results": "Eight hits, including pushforwardPushforwardAdj unit/counit formulas and Adjunction.derived_unit; no specialization to these actual coefficient functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image evaluation natural isomorphism normalized by adjunction unit and counit",
+   "results": "Eight results for general adjunction and derived normalization; no specialization to the actual coefficient system functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Five general conjugation lemmas, without the required geometric coefficient and evaluation squares.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*evaluation|evaluation.*rightDerivedFunctor",
+   "results": "No Mathlib results.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportSystemNormalizedPresentation",
+  "date": "2026-10-27",
+  "group": "E6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Proof Step 1 (Global powers), compatibility with composition before rationalization; the comparison prerequisite of prop-trf-rational-frobenius-integral-model.proof.md (2)-(3). Coherence proof steps 1--3, 6.; Normalized finite coefficient restriction and direct image",
+   "via": [
+    "lem-trf-compact-support-normalized-presentation",
+    "lem-trf-compact-support-system-evaluation-coherence",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportFiniteCoefficientPresentation",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportFiniteCoefficientPresentation.lean",
+  "declaration": "WeilConjectures.compactSupportFiniteCoefficientPresentation",
+  "statement": "theorem compactSupportFiniteCoefficientPresentation\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y)\n    [∀ n : ℕ, (compactSupportLevelDirectImage l E p n).Additive]\n    [∀ n : ℕ, Abelian.HasKInjectiveResolutions (normalizedDVRModules l E Z n)] :\n    ∃ (a : ∀ {m n : ℕ} (h : n ≤ m),\n        normalizedDVRModuleRes l E Z h ⋙ compactSupportLevelDirectImage l E p m ≅\n          compactSupportLevelDirectImage l E p n ⋙ normalizedDVRModuleRes l E Y h)\n      (d : ∀ {m n : ℕ} (h : n ≤ m),\n        normalizedDVRRes l E Z h ⋙\n            (compactSupportLevelDirectImage l E p m).rightDerivedFunctor ≅\n          (compactSupportLevelDirectImage l E p n).rightDerivedFunctor ⋙\n            normalizedDVRRes l E Y h),\n      (∀ {m n : ℕ} (h : n ≤ m)\n              (N : normalizedDVRModules l E Z n) (V : Y.ProEtᵒᵖ),\n              HEq (fun x ↦ ((a h).hom.app N).val.app V x)\n                (fun x : N.val.obj ((Scheme.proEtaleBaseChange p).op.obj V) ↦ x)) ∧\n      (∀ {m n : ℕ} (h : n ≤ m),\n        letI := normalizedDVRModuleRes_limits l E Z h\n        letI := normalizedDVRModuleRes_colimits l E Z h\n        letI := normalizedDVRModuleRes_limits l E Y h\n        letI := normalizedDVRModuleRes_colimits l E Y h\n        CompactSupportDerivedSquareNormalization\n            (compactSupportLevelDirectImage l E p n) (compactSupportLevelDirectImage l E p m)\n            (normalizedDVRModuleRes l E Z h) (normalizedDVRModuleRes l E Y h)\n            (a h)\n              (d h))",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T034634-L-3668344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T050559-L-239862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

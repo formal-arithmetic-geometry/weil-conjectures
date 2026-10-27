@@ -1,0 +1,243 @@
+{
+ "id": "lem-pur-affine-space-last-factor-product",
+ "kind": "statement",
+ "title": "The last-coordinate product is the specified binary Kunneth comparison",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes and morphisms below are separated finite type over $k$ [def-weil-scheme-morphism-properties]. Work with the small pro-etale derived categories, derived pullback and tensor [def-weil-derived-pullback-tensor-hom], compact supports [def-compact-support-direct-image-detailed], Tate twists [def-coefficient-twists-detailed], and $D^b_{ctf}$ as in [def-weil-finite-tor-amplitude]. Write $\\otimes=\\otimes_A^L$ and $\\rho$ for the right tensor unitor. Let $Y$ be such a scheme and $m\\geq1$. Put $X_j=\\mathbf A^j_Y$, $p=p_m:X_m\\to Y$, $a=p_1:X_1\\to Y$, and let $q:X_{m+1}\\to X_m$ and $r:X_{m+1}\\to X_1$ be the first-$m$ and last-coordinate projections [def-sbc-affine-space]. Thus $pq=ar=p_{m+1}$. Set $T_j=A_{X_j}(j)[2j]$, $T=T_1$, $V_j=Rp_{j!}T_j$, and $U=V_1$. Assume $V_m$, $U$ and $V_{m+1}$ are bounded constructible of finite Tor amplitude. Use the concrete finite-coefficient exchanges and projection transformations of [def-exchange-projection], the normalized composition comparisons of [thm-sf-comp-composition], and the Tate pullback/tensor identifications fixed in [def-pur-affine-space-comparison], in particular\n$$T_{m+1}=Lq^*T_m\\otimes Lr^*T.$$\nLet $\\kappa_{m,1}:V_{m+1}\\xrightarrow{\\sim}V_m\\otimes U$ be a supplied isomorphism equal to the specified binary relative compact-support product construction in [thm-sf-kunneth-relative] at $(p,T_m),(a,T)$; only that explicit construction is specified, and no abstract six-functor datum is assumed. Put\n$$\\alpha=\\alpha_{p,q},\\qquad E=\\operatorname{Ex}_{!,a,p,T}:Lp^*U\\xrightarrow{\\sim}Rq_!Lr^*T,\\qquad P_U=\\operatorname{PF}_{p,T_m,U}.$$\nLet\n$$\\Pi^q_{T_m}=\\sigma_{Rq_!Lr^*T,T_m}\\,\\operatorname{PF}_{q,Lr^*T,T_m}^{-1}\\,Rq_!(\\sigma_{Lq^*T_m,Lr^*T})$$\nbe the two-symmetry inverse projection map, with $\\sigma$ the signed tensor symmetry [def-weil-derived-pullback-tensor-hom]. The four projection transformations at $(q,Lr^*T,T_m)$, $(p,T_m,U)$, $(r,Lq^*T_m,T)$ and $(a,T,V_m)$, the exchanges for both product squares, and the relevant composition comparisons are invertible. Every tensor object appearing in the two forward-product composites of [lem-pur-finite-forward-product-symmetry] at $(p,T_m),(a,T)$ is bounded below and of etale origin. Under the indicated twist and tensor identifications, the actual morphisms satisfy\n$$\\kappa_{m,1}=P_U^{-1}\\,Rp_!(1_{T_m}\\otimes E^{-1})\\,Rp_!(\\Pi^q_{T_m})\\,\\alpha_{T_{m+1}}^{-1}.$$\nThis identifies two maps in the derived category; it neither evaluates an integration map nor asserts coordinate-permutation invariance of a purity comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration paragraph and ancestor composition-law Proof Steps 3--4: the binary product before evaluating the trace; returned trace-factorization Steps 1 and 6"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-pur-affine-space-comparison",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-finite-forward-product-symmetry",
+  "thm-sf-comp-composition",
+  "thm-sf-kunneth-relative",
+  "def-pur-finite-product-compactification-data",
+  "def-pur-finite-forward-tensor-symmetry"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=T_m$, $N=T$, $Q=Lq^*M$, $R=Lr^*N$, $H=Q\\otimes R=T_{m+1}$ and $W=Rq_!R$. The schemes and maps are separated finite type by the hypotheses. The finite Tate sheaves $A_{X_m}(m)$ and $A_{X_1}(1)$ are locally constant rank-one sheaves by [prop-weil-twist-preserves]; since $A$ is finite they are constructible. Their shifts $M,N$ are bounded constructible, so [lem-sf-proetale-constructible-origin](ii) supplies bounded-below etale-origin witnesses. All further tensor-domain conditions for the two forward products are explicitly assumed in the item. Thus the forward-product symmetry applies to $(f,g;M,N)=(p,a;T_m,T)$; no abstract six-functor datum has been supplied or is needed.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry"
+   }
+  },
+  {
+   "text": "Let $F=\\Xi_{p,a}(M,N):V_m\\otimes U\\to Rp_{m+1!}H$ be the explicit forward map in [lem-pur-finite-forward-product-symmetry]. The assumption identifying $\\kappa_{m,1}$ with the binary construction in [thm-sf-kunneth-relative] says precisely $F=\\kappa_{m,1}^{-1}$: reversing the factors of that specified inverse construction gives\n$$F=\\alpha_{a,r}\\,Ra_!(\\operatorname{PF}_{r,Q,N})\\,Ra_!(\\operatorname{Ex}_{!,p,a,M}\\otimes1_N)\\,Ra_!(\\sigma_{N,La^*V_m})\\,\\operatorname{PF}_{a,N,V_m}\\,\\sigma_{V_m,U}.$$\nEvery factor here is invertible by the hypotheses. This step only unfolds the construction stipulated in the item; it does not apply the relative-product theorem, whose general assertion assumes a six-functor datum.",
+   "uses": [
+    "lem-pur-finite-forward-product-symmetry",
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry"
+   }
+  },
+  {
+   "text": "For the swapped fibre product use the same scheme $X_{m+1}$ with the projections interchanged: it is a pullback of $(a,p)$ because the pullback universal property is unchanged by interchanging its two legs. Thus on this common model the swap identification is the identity on the underlying scheme, the swapped exterior product is $R\\otimes Q$, and the map $S$ in [lem-pur-finite-forward-product-symmetry] is $Rp_{m+1!}(\\sigma_{R,Q})$. Identity composition comparisons are normalized to identities by [thm-sf-comp-composition]. That symmetry theorem therefore gives\n$$F=Rp_{m+1!}(\\sigma_{R,Q})\\,\\Xi_{a,p}(N,M)\\,\\sigma_{V_m,U}.$$\nIts hypotheses were checked in Step 1. This equality compares actual forward products; no integration map occurs.",
+   "uses": [
+    "lem-pur-finite-forward-product-symmetry",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry"
+   }
+  },
+  {
+   "text": "Write $C=\\operatorname{PF}_{q,R,M}$ and $P_U=\\operatorname{PF}_{p,M,U}$. Expanding the swapped forward map by [lem-pur-finite-forward-product-symmetry] gives\n$$\\Xi_{a,p}(N,M)=\\alpha_{p,q}\\,Rp_!(C)\\,Rp_!(E\\otimes1_M)\\,Rp_!(\\sigma_{M,Lp^*U})\\,P_U\\,\\sigma_{U,V_m}.$$\nIn Step 3 the last symmetry cancels $\\sigma_{V_m,U}$. Naturality of $\\alpha$ in [thm-sf-comp-composition] gives\n$$Rp_{m+1!}(\\sigma_{R,Q})\\,\\alpha_{p,q,R\\otimes Q}=\\alpha_{p,q,H}\\,Rp_!Rq_!(\\sigma_{R,Q}).$$\nNaturality of the signed symmetry gives\n$$(E\\otimes1_M)\\sigma_{M,Lp^*U}=\\sigma_{M,W}(1_M\\otimes E).$$\nFor completeness the symmetry identities used here are elementary: on homogeneous tensors the double swap multiplies by $(-1)^{ij+ji}=1$, and a degree-zero morphism in either factor commutes with $(-1)^{ij}$. These identities pass through the K-flat models defining the specified derived symmetry. Consequently, with\n$$B=Rq_!(\\sigma_{R,Q})\\,C\\,\\sigma_{M,W}:M\\otimes W\\to Rq_!H,$$\nwe obtain $F=\\alpha_{p,q,H}\\,Rp_!(B)\\,Rp_!(1_M\\otimes E)\\,P_U$.",
+   "uses": [
+    "lem-pur-finite-forward-product-symmetry",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry"
+   }
+  },
+  {
+   "text": "By its definition in the item,\n$$\\Pi^q_{T_m}=\\sigma_{W,M}\\,C^{-1}\\,Rq_!(\\sigma_{Q,R}).$$\nCompose this map with $B$ in either order. The adjacent symmetries cancel, $C^{-1}C$ or $CC^{-1}$ cancels, and the remaining adjacent symmetries cancel as well. Hence $B^{-1}=\\Pi^q_{T_m}$. Tensor functoriality [lem-weil-derived-tensor-functorial] gives $(1_M\\otimes E)^{-1}=1_M\\otimes E^{-1}$; direct-image functors also carry inverse pairs to inverse pairs. Inverting the final composite in Step 4, and using $F^{-1}=\\kappa_{m,1}$ from Step 2, proves\n$$\\kappa_{m,1}=P_U^{-1}\\,Rp_!(1_M\\otimes E^{-1})\\,Rp_!(\\Pi^q_{T_m})\\,\\alpha_{p,q,H}^{-1}.$$\nThis is the asserted equality after the already fixed identification $H=T_{m+1}$. All signed symmetries have been retained and cancelled in pairs; no purity comparison or coordinate-permutation invariance has been invoked.",
+   "uses": [
+    "lem-weil-derived-tensor-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-forward-product-symmetry",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-derived-tensor-functorial",
+  "prop-weil-twist-preserves",
+  "thm-sf-comp-composition",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry clause (i), applied to the binary product in sk-prop-an Step 6; explicit inversion of the supplied forward-product symmetry; the calculation is written out here from the existing cited statements, not attributed literally to Stacks Tag 0E48."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative compact support Kunneth isomorphism for affine space times the affine line equals the inverse projection formula product using the opposite projection",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd; AlgebraicGeometry.AffineSpace.SpecIso_inv_over; ContinuousMap.piComparison_fac; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst; Profinite.NobelingProof.spanFunctorIsoIndexFunctor_inv_app Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetry of the two finite etale compact support forward product constructions identifies their inverse binary product maps for shifted Tate lines",
+   "results": "TopCat.piIsoPi_inv_π; TopCat.piIsoPi_inv_π_apply; CategoryTheory.PreGaloisCategory.fiberBinaryProductEquiv_symm_snd_apply; CategoryTheory.Limits.FintypeCat.productEquiv_symm_comp_π_apply; CategoryTheory.PreGaloisCategory.fiberBinaryProductEquiv_symm_fst_apply; TopCat.piIsoPi_inv_π_assoc; ComplexShape.π_symm; TopCat.prodIsoProd_inv_fst Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "No hits. Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|compactSupport.*(product|tensor)|affine.*projectionFormula",
+   "results": "No hits. Mathlib/AlgebraicGeometry searched. Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify the actual affine space compact support binary Kunneth comparison with the inverse product computed by first integrating the last coordinate",
+   "results": "MeasureTheory.integral_integral_swap_of_hasCompactSupport; AffineEquiv.prodCongr_symm; HasCompactSupport.convolution; ContinuousAffineMap.prodMap_toAffineMap; AffineEquiv.prodComm_symm; ContinuousAffineEquiv.prodCongr_toAffineEquiv; ContinuousAffineEquiv.prodComm; ContinuousAffineEquiv.prodCongr_symm Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse compact support Kunneth product equals the projection formula computed through the other product projection by symmetry",
+   "results": "ContinuousAlternatingMap.piEquiv_symm_apply; TopCat.piIsoPi_inv_π; TopCat.piIsoPi_inv_π_apply; TopCat.piIsoPi_inv_π_assoc; TopCat.prodIsoProd_inv_fst; ContinuousAlternatingMap.piLinearEquiv_symm_apply; TopCat.prodIsoProd_inv_snd; TopCat.prodIsoProd_inv_fst_assoc. Read returned signatures: product projections, module-sheaf pullback comparisons, and condensed internal-Hom identities do not identify these compact-support derived-sheaf composites.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetry of finite etale compact support external products identifies the two inverse projection formula maps",
+   "results": "CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst; CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst_assoc; CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst; CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd; AlgebraicGeometry.Scheme.Pullback.t_fst_snd; CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd; CategoryTheory.Functor.relativelyRepresentable.symmetry_snd; CategoryTheory.symmetricOfHasFiniteProducts_braiding_inv. Read returned signatures: product projections, module-sheaf pullback comparisons, and condensed internal-Hom identities do not identify these compact-support derived-sheaf composites.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaves relative Kunneth compactly supported cohomology symmetry projection formula base change",
+   "results": "LightCondensed.ihomPoints_symm_comp; SheafOfModules.conjugateEquiv_pullbackComp_inv; TopCat.Sheaf.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pushforwardComp_inv_app_val_app. Read returned signatures: product projections, module-sheaf pullback comparisons, and condensed internal-Hom identities do not identify these compact-support derived-sheaf composites.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-space-trace-factorization",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Integration paragraph and ancestor composition-law Proof Steps 3--4: the binary product before evaluating the trace; returned trace-factorization Steps 1 and 6",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-affine-space-last-factor-product",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Identified the stipulated binary comparison as the inverse forward product; applied the existing concrete finite forward-product symmetry on a common pullback model; expanded and cancelled the actual signed tensor maps to obtain the displayed opposite-projection inverse. Checked all domains and did not use an abstract six-functor datum, integration, or purity permutation invariance. No new nodes.",
+  "blueprint": "Realizes the binary-product identification needed in prop-pur-affine-space-composition-law Proof Steps 3--4 and sk-prop-an Step 6, before trace evaluation. The nearest ancestor and existing from.place are retained; searches found no blueprint node stating this exact last-factor inverse formula.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Uses only the explicit binary comparison construction stipulated in the item, not its theorem under a six-functor datum; it fixes which inverse forward map is meant."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Clause (ii) supplies etale-origin witnesses for the finite shifted Tate sheaves. This is a generic site-comparison tool, not a replacement for the affine-space unit route."
+   },
+   {
+    "node": "lem-weil-derived-tensor-functorial",
+    "why": "Generic derived tensor functoriality sends the inverse pair E,E^{-1} to an inverse pair after tensoring with the identity; no purity assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-kunneth-relative",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-derived-tensor-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NL-fc5f39d4a",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-fc5f39d4a (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement. The item statement is unchanged and correct: inverting the canonical map of thm-sf-kunneth-relative at (p,T_m),(a,T), with pi_X=q and pi_Y=r, gives exactly the forward product Xi_{p,a} of lem-pur-finite-forward-product-symmetry. I checked this factor by factor against the PF and Ex conventions of def-exchange-projection. Step 1: prop-weil-twist-preserves (locally constant rank one, finite stalks) and lem-sf-proetale-constructible-origin(ii) give the etale-origin witnesses; the tensor-domain hypotheses are assumed verbatim. Step 3 models the swapped square on X_{m+1} with legs (r,q), so s=id and S=Rh_!(sigma_{R,Q}) by the identity normalization of thm-sf-comp-composition. The choice of chosen fibre product does not matter, and the item already treats X_{m+1} as X_m x_Y X_1. Step 4: I checked the types of E, C and P_U, sigma-sigma=1, alpha naturality and sigma naturality, which give B. Step 5: Pi matches the item's definition, Pi*B=B*Pi=1 by three cancellations, and lem-weil-derived-tensor-functorial gives (1⊗E)^-1. The final inversion equals the displayed formula. Edge cases m=1, empty Y and ell=2 are fine. There are no new nodes and no duplicates, and the forward-product symmetry is reused. The worker's tool_uses (kunneth-relative construction only, proetale-constructible-origin, derived-tensor-functorial) are accepted. prop-weil-twist-preserves is generic (Q113 precedent); the maintainer may record it as a tool_use. No SGA source is used, and the item is not in the drop list. Maintainer note (inherited): the signed symmetry sigma is cited to def-weil-derived-pullback-tensor-hom, which defines no symmetry. review_split 'no such node' messages come from the snapshot's symlinked chapter directories."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineSpaceLastFactorProduct",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.affineSpace_lastFactor_product",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.geometry",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.exchange",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.inverseProjection",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.forward",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.composition",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.Equation",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.positiveTate",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.Assertion",
+   "AlgebraicGeometry.ProEtale.AffineSpaceLastFactorProduct.affineSpace_lastFactor_product"
+  ],
+  "file": "lean/Sheaf/Paper/AffineSpaceLastFactorProduct.lean",
+  "statement": "theorem affineSpace_lastFactor_product (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ) : Assertion P Y d",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "H2 repair of returned head 2bea48e4b2fa: cite the existing definition owner def-pur-finite-product-compactification-data for FiniteProductGeometry, finiteProductChosenForward and finiteProductComposition, instead of adding the binary compactification comparison theorem as a statement dependency. Also cite def-pur-finite-forward-tensor-symmetry for the actual signed swap. Lean is byte-identical to the reviewed delivery. The finite affine tower is the recorded iterated-affine-line model; m=d+1 covers exactly m≥1. Statement in fixed-scalar coordinates used by the recorded finite forward product, with T_(m+1) written under the specified tensor identification. The supplied kappa is fixed by kappa.inv=the prescribed concrete forward product; no abstract six-functor datum is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd1b861b7",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 2bea48e4b2fa. Lean module byte-identical (SHA256 2a544dd1…), so the earlier clause-by-clause check of the mathematics stands: kappa.inv pinned to the six-factor finiteProductChosenForward; Pi = Rq_!(sigma_{Q,R}) then PF_q^-1 then sigma_{W,M}; all PF, Ex and compositor invertibilities, both FiniteForwardProductDomain arguments and the three ctf antecedents present; the conclusion equals the node's formula. The item-node diff is only stmt_deps (lem-pur-finite-product-compactification -> def-pur-finite-product-compactification-data, plus def-pur-finite-forward-tensor-symmetry) and lean.note. Both new deps are definition nodes on the base with existing:true, and their declarations include FiniteProductGeometry, finiteProductChosenForward, finiteProductComposition and finiteForwardTensorSymmetry. The report has Worker report, Second reading by N6 and Return repair sections. Single sorry. No file changed, nothing compiled."
+ }
+}

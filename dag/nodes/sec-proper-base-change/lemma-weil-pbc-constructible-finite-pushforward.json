@@ -183,7 +183,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar",
+     "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+     "lines": [
+      417,
+      439
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -227,27 +252,29 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "If $U$ is quasi-compact and quasi-separated and $C$ is constructible torsion\non $U_{\\Et}$, there is a monomorphism\n\n$$\n C\\hookrightarrow\\bigoplus_{i=1}^m(h_i)_*\\underline{M_i},\n$$\n\nwhere every $h_i:V_i\\to U$ is finite and finitely presented and every $M_i$ is\na finite abelian group.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a Noetherian commutative ring, let $U$ be a quasi-compact and\nquasi-separated scheme, and let $C$ be a constructible sheaf of\n$\\Lambda$-modules on $U_{\\Et}$ [def-weil-pbc-constructible-complexes]. Then there\nis a monomorphism of sheaves of $\\Lambda$-modules\n\n$$\n C\\hookrightarrow\\bigoplus_{i=1}^m(h_i)_*\\underline{M_i},\n$$\n\nwhere every $h_i:V_i\\to U$ is finite and locally of finite presentation, every\n$M_i$ is a finitely generated $\\Lambda$-module, $\\underline{M_i}$ is the constant\nsheaf on $V_{i,\\Et}$, and $(h_i)_*$ is the direct image\n[def-weil-pbc-direct-image]. (For instance, for $\\Lambda$ finite the $M_i$ are\nfinite.)",
   "proof": [
    {
-    "text": "Write $U=\\varprojlim U_\\lambda$ with affine transition maps and noetherian,\nquasi-compact, quasi-separated $U_\\lambda$. The finite stratification of\n$C$, its finite stalk groups, all restriction maps, and their equalizer\nrelations descend to one stage $U_\\lambda$. We prove the assertion there by\nnoetherian induction on a closed complement of a dense stratum. Choose a\ndense open $j:V\\hookrightarrow U_\\lambda$ where $C_\\lambda$ is finite\nlocally constant and a finite etale cover $e:W\\to V$ trivializing it. Take\nthe integral closure of $U_\\lambda$ in $e_*\\mathcal O_W$ and discard\ncomponents disjoint from $V$; this gives a finite map $h:W'\\to U_\\lambda$\nextending $e$. The adjunction unit is a monomorphism on $V$,\n\n$$\nC_\\lambda|_V\\hookrightarrow e_*\\underline M\n=(h_*\\underline M)|_V,\n$$\n\nfor a finite group $M$.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "Let $Z=U_\\lambda\\setminus V$ with its reduced closed structure. By\ninduction, $C_\\lambda|_Z$ embeds into a finite sum\n$\\bigoplus_b(h_b)_*\\underline{M_b}$ with $h_b$ finite over $Z$; composing\nwith $Z\\hookrightarrow U_\\lambda$ keeps the maps finite. Map\n$C_\\lambda$ to\n\n$$\nh_*\\underline M\\oplus\\bigoplus_b(h_b)_*\\underline{M_b}\n$$\n\nby the dense-open unit in the first component and restriction to $Z$ in the\nremaining components. At a geometric point of $V$ the first component is\ninjective, and at a geometric point of $Z$ the second block is injective, so\nthe combined map is monic. Pull the finite diagram and monomorphism\nback to $U$. Etale inverse image is exact, and finite direct image commutes\nwith this pullback by the finite geometric-stalk product formula. This gives\nthe displayed monomorphism.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "Apply [lem-weil-pbc-constructible-finite-pushforward-approximation] to $U$ and\n$C$. The finite maps obtained there are finite over the Noetherian\napproximation and therefore of finite presentation; their pullbacks remain\nfinite and finitely presented. Exactness of inverse image and\nfinite-base-change compatibility of direct image preserve the monomorphism,\ngiving the displayed map on $U$. This is precisely the descent argument in\nStacks Project, Lemma 59.74.4 (Tag\n[09Z7](https://stacks.math.columbia.edu/tag/09Z7)); no composition with a\nlocally closed stratum is used.",
+    "text": "By Noetherian approximation [lem-weil-pbc-constructible-finite-pushforward-approximation]\nthere are a morphism $\\nu:U\\to U'$ to a Noetherian scheme $U'$, a constructible\nsheaf of $\\Lambda$-modules $C'$ on $U'_{\\Et}$ with an isomorphism\n$\\nu^{-1}C'\\cong C$, and a monomorphism\n\n$$\n C'\\hookrightarrow\\bigoplus_{i=1}^m(h'_i)_*\\underline{M_i}\n$$\n\nwith $h'_i:V'_i\\to U'$ finite and locally of finite presentation and $M_i$\nfinitely generated $\\Lambda$-modules. On the Noetherian scheme $U'$ this is\nproved by Noetherian induction: on a dense open $V\\subseteq U'$ where $C'$ is\nfinite locally constant, a finite étale cover trivializing $C'|_V$ extends to a\nfinite morphism $W'\\to U'$ (integral closure), whose unit gives a monomorphism\non $V$; on the reduced closed complement one uses the induction hypothesis, and\nthe two maps together are monic on all geometric stalks.",
     "uses": [
      "lem-weil-pbc-constructible-finite-pushforward-approximation"
     ],
     "elementary": false
+   },
+   {
+    "text": "By [lem-weil-pbc-finite-pushforward-embedding-pullback] the inverse image along\n$\\nu$ of this monomorphism is again a monomorphism\n$\\nu^{-1}C'\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$ into finite direct\nimages of the same constant sheaves along finite morphisms $h_i:V_i\\to U$\nlocally of finite presentation (the base changes of the $h'_i$): inverse image\nis exact, commutes with finite direct sums and with direct image along finite\nmorphisms, and preserves constant sheaves. Composing with $C\\cong\\nu^{-1}C'$\ngives the displayed monomorphism. This is the descent argument of Stacks\nProject, Lemma 59.74.4 (Tag [09Z7](https://stacks.math.columbia.edu/tag/09Z7)).",
+    "uses": [
+     "lem-weil-pbc-finite-pushforward-embedding-pullback"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

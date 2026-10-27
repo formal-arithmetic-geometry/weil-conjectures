@@ -12,33 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Let 0→N→N′→N″→0 be any short exact sequence of R-modules. Tensoring the given universally exact sequence with each of N, N′, and N″ yields three short exact rows, and tensoring 0→N→N′→N″→0 with the flat module M₂ yields an injective middle vertical map M₂⊗N→M₂⊗N′. The resulting commutative 3×3 diagram has exact rows and an injective middle vertical arrow.",
+   "text": "Apply the tensor-injectivity criterion for flatness in the testing universe max u t (which contains the ring universe). Given an injective map i : N → N′, set Q = N′/range(i) and q : N′ → Q. The pair i,q is exact and q is surjective. Right exactness gives exactness of M₁⊗N → M₁⊗N′ → M₁⊗Q, without needing flatness of M₁. Flatness of M₂ gives injectivity of i.lTensor M₂. Universal exactness supplies the rows of the tensor diagram.",
    "uses": [
     "def-weil-pbc-flat-ring-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058P, proof of lemma-ui-flat-domain, diagram setup"
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, tensor diagram setup"
    }
   },
   {
-   "text": "Let N→N′ be any injective R-linear map and complete it to a short exact sequence 0→N→N′→N″→0 with N″ its cokernel. Let x∈M₁⊗N map to zero in M₁⊗N′. By commutativity of the left square, the image of x in M₂⊗N′ (through M₁⊗N′) equals the image under M₂⊗N→M₂⊗N′ of its image in M₂⊗N, so the latter vanishes, since M₂⊗N→M₂⊗N′ is injective (step 1). Since the top row is exact, M₁⊗N→M₂⊗N is injective, so x=0. Thus M₁⊗N→M₁⊗N′ is injective for every injection N→N′, and M₁ is flat by the definition of flatness.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
+   "text": "For x in M₃⊗N killed by i.lTensor M₃, use surjectivity of g.rTensor N to write x = (g.rTensor N)(y). Tensor commutativity implies that (i.lTensor M₂)(y) is killed by g.rTensor N′. Exactness of the N′ row supplies z′ in M₁⊗N′ with (f.rTensor N′)(z′) = (i.lTensor M₂)(y). Apply q.lTensor M₂ and commute tensors. The composite q ∘ i is zero, so (f.rTensor Q)((q.lTensor M₁)(z′)) = 0. Injectivity of f.rTensor Q gives (q.lTensor M₁)(z′) = 0.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058P, proof of lemma-ui-flat-domain, argument that M₁ is flat"
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, final diagram chase"
    }
   },
   {
-   "text": "Keep the diagram of step 1 for an injection N→N′ with cokernel N″. Let x∈M₃⊗N map to zero in M₃⊗N′. The top row is exact, so x is the image of some y∈M₂⊗N. Let y′ be the image of y in M₂⊗N′; it maps to the image of x in M₃⊗N′, which is zero, so by exactness of the middle row y′ is the image of some z′∈M₁⊗N′. The image of z′ in M₂⊗N″ equals the image of y′ there, which is zero because N→N′→N″ is zero. The bottom row is exact, so M₁⊗N″→M₂⊗N″ is injective and z′ maps to zero in M₁⊗N″. By right exactness of M₁⊗−, the left column M₁⊗N→M₁⊗N′→M₁⊗N″→0 is exact (and short exact by the flatness of M₁ from step 2), so z′ is the image of some z∈M₁⊗N. Then y minus the image of z in M₂⊗N maps to y′−y′=0 in M₂⊗N′, and injectivity of M₂⊗N→M₂⊗N′ (step 1) gives that y is the image of z. Hence x, the image of y in M₃⊗N, is the image of an element of M₁⊗N under the composite M₁⊗N→M₂⊗N→M₃⊗N, which is zero; so x=0. Thus M₃⊗N→M₃⊗N′ is injective for every injection N→N′, and M₃ is flat by the definition of flatness.",
+   "text": "Right exactness of the left column supplies z in M₁⊗N with (i.lTensor M₁)(z) = z′. Tensor commutativity and injectivity of i.lTensor M₂ give y = (f.rTensor N)(z). Since the N row is exact, its composite is zero, whence x = (g.rTensor N)((f.rTensor N)(z)) = 0. Thus i.lTensor M₃ has trivial kernel, proving the required tensor injectivity and flatness.",
    "uses": [
     "def-weil-pbc-flat-ring-map"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 058P, proof of lemma-ui-flat-domain, final diagram chase"
@@ -51,7 +49,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 058P, lemma-ui-flat-domain"
+  "place": "Tag 058P, proof of lemma-ui-flat-domain; direct cokernel chase using tensor right exactness, omitting the unnecessary intermediate proof of M₁ flatness"
  },
  "mathlib_searches": [
   {
@@ -147,5 +145,26 @@
   "result": "pass",
   "note": "Immutable files verified; source, dependencies, exact signature, universes, edge cases, docstrings and route-pivot checks passed. Compilation reproduced through scompile.py; no delivery faults found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261023T110134-L-3653747",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

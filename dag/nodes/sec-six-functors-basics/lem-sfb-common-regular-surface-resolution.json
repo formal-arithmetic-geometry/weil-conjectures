@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-common-regular-surface-resolution",
+ "kind": "statement",
+ "title": "Common point-blowup resolution of regular proper surfaces",
+ "statement": "Let $S$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth]. Let $T_1,T_2$ be integral schemes [def-pc-integral-scheme], proper over $S$ [def-weil-proper-morphism], regular [def-weil-regular-scheme] and of dimension two [def-kun-topological-krull-dimension]. Given an $S$-isomorphism between dense open subschemes of $T_1$ and $T_2$ [def-weil-open-immersion], there is a regular integral $S$-scheme $W$ and morphisms $q_i:W\\to T_i$ inducing the given birational identification, each a finite composition of blowups of reduced closed points [def-nagata-global-blowup].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5S (lemma-birational-regular-surfaces); the specified identification is the rational map used in its proof."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Write the given identification as $\\alpha:U_1\\xrightarrow{\\sim}U_2$, with both $U_i$ dense, and put $f:U_1\\to T_2$ equal to $\\alpha$ followed by the open immersion. Each $T_i$ is Noetherian: its proper structural morphism is of finite type, and a scheme of finite type over the Noetherian scheme $S$ is Noetherian. Also $T_2\\to S$ is separated by the definition of properness.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S, hypotheses; morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Apply elimination of indeterminacy to $X=T_1$, $Y=T_2$, the dense open $U_1$ and the $S$-map $f$. It gives a tower of point blowups $p:W=X_n\\to T_1$ and an $S$-map $g:W\\to T_2$ agreeing with $f$ over $U_1$. Its statement supplies that $W$ is integral, regular, Noetherian and of dimension $2$, that $p$ is proper, and that $p^{-1}(U_1)\\to U_1$ is an isomorphism. In particular this nonempty open is dense in the integral scheme $W$.",
+   "uses": [
+    "lem-sfb-surface-rational-map-point-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S, first application of Tag 0C5H."
+   }
+  },
+  {
+   "text": "The structure map $W\\to S$ is proper, being the composite of $p$ with the proper map $T_1\\to S$. Since $T_2\\to S$ is separated and $g$ is an $S$-map, properness over a separated target gives that $g$ is proper. On the dense open $p^{-1}(U_1)$ the map $g$ is exactly $\\alpha\\circ p$, an isomorphism onto the dense open $U_2$. Thus $g$ is birational in the explicit dense-open sense required by the factorization theorem.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S, properness and birationality of the extended morphism."
+   }
+  },
+  {
+   "text": "Apply proper birational surface factorization to $g:W\\to T_2$: both schemes are integral regular Noetherian of dimension $2$, and the preceding step supplies properness and the dense-open isomorphism. Hence $g$ is a finite composition of blowups at reduced closed points. Set $q_1=p$ and $q_2=g$. The first has its point-blowup tower from Step 2 and the second from this factorization. Equip the second tower with the structural maps obtained by composing to $T_2\\to S$; its maps and the identification of its top with $W$ are then over $S$. The equality $q_2|_{q_1^{-1}(U_1)}=\\alpha\\circ q_1|_{q_1^{-1}(U_1)}$ from Step 2 preserves precisely the specified birational identification. This proves every clause, including the case of a tower of length zero.",
+   "uses": [
+    "lem-sfb-proper-birational-surface-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S, application of Tag 0C5R and assembly of the diagram."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-surface-rational-map-point-resolution",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-sfb-proper-birational-surface-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5S (resolve-lemma-birational-regular-surfaces), forward direction, with the specified rational map kept throughout."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two proper regular integral surfaces birational over a Noetherian base have a common sequence of closed point blowups",
+   "results": "{\"t\": \"2026-10-22T04:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"Two proper regular integral surfaces birational over a Noetherian base have a common sequence of closed point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"22b292909413d949\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational maps and birational partial isomorphisms do not give point-blowup common resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor birational maps of regular surfaces into blowups at closed points on both sides",
+   "results": "{\"t\": \"2026-10-22T04:21:02Z\", \"tool\": \"leansearch\", \"query\": \"Factor birational maps of regular surfaces into blowups at closed points on both sides\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"0a1a599c74d10b48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational maps and birational partial isomorphisms do not give point-blowup common resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-22T04:21:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational maps and birational partial isomorphisms do not give point-blowup common resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*regular|regular.*surface|point.*blowup",
+   "results": "{\"t\": \"2026-10-22T04:21:02Z\", \"tool\": \"grep\", \"query\": \"birational.*regular|regular.*surface|point.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rational maps and birational partial isomorphisms do not give point-blowup common resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two proper regular integral surfaces birational over a Noetherian base have a common sequence of closed point blowups",
+   "results": "{\"t\": \"2026-10-22T04:46:44Z\", \"tool\": \"leanfinder\", \"query\": \"Two proper regular integral surfaces birational over a Noetherian base have a common sequence of closed point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"22b292909413d949\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: checked rational-map and birationality hits; none gives simultaneous point-blowup resolution of surfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor birational maps of regular surfaces into blowups at closed points on both sides",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"leansearch\", \"query\": \"Factor birational maps of regular surfaces into blowups at closed points on both sides\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"0a1a599c74d10b48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: checked rational-map and birationality hits; none gives simultaneous point-blowup resolution of surfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: checked rational-map and birationality hits; none gives simultaneous point-blowup resolution of surfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*regular|regular.*surface|point.*blowup",
+   "results": "{\"t\": \"2026-10-22T04:46:41Z\", \"tool\": \"grep\", \"query\": \"birational.*regular|regular.*surface|point.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: checked rational-map and birationality hits; none gives simultaneous point-blowup resolution of surfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Common point-blowup resolution of regular proper surfaces",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-common-regular-surface-resolution",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0C5S with the chosen dense-open S-isomorphism. Added the two distinct inputs 0C5H (elimination of indeterminacy, including its regular surface tower) and 0C5R (proper birational morphism factorization); reused the existing Mathlib leaves for finite-type Noetherianity, proper composition and properness over a separated target. Statement unchanged; no attachment found.",
+  "blueprint": "The inherited blueprint.from.place locates the common-model prerequisite in det-thm-sf-ctf-stability-direct-images proof (3), through the stable-pointed-curve and semistable lattice route. These four steps realize exactly its regular-surface common-domination input by the specified Stacks 0C5S route. The ancestor command reports None for the inherited from.node; it is retained, as are all via entries. No matching blueprint theorem was found."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NI-885d69f77",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-885d69f77 (reviewer sub-agent of L); spot-checked: Pass with no changes. The item and both new nodes are absent from the dropped list. The item is still unsplit in live and side-live with no repair note. Its statement, stmt_deps, blueprint and source match the base exactly. I read Stacks resolve.tex 0C5S, 0C5H, 0C5R (with the 0C5J and conormal argument) and 0AGR. The 4 steps follow the 0C5S proof in order and keep the given identification alpha throughout. Step 1: proper gives finite type and separated, and the Mathlib leaf 01T6 gives T_i Noetherian. Step 2: the new 0C5H node is applied with all its hypotheses met. Step 3: the proper-composition and proper-over-separated leaves are cited correctly (q∘g = h because g is an S-map), and g restricted to p^{-1}(U_1) is alpha∘p, an isomorphism onto U_2. Step 4: the new 0C5R node is applied, and the tower is over S. New node surface-rational-map-point-resolution is 0C5H with integral and quasi-compact added on X, both true at the only citer. Its preservation clauses are true: 0AGR gives integral and regular, closed points of the exceptional divisor have local dimension 2, the tower is projective so p is proper and Noetherian, and centres avoid U. Small cases checked: U=X gives n=0; Spec Z[x] with x/p needs one blowup. New node proper-birational-surface-factorization is 0C5R verbatim, with birational written as a dense-open isomorphism; a length-zero tower means f is an isomorphism. Neither new node restates a clause of the item, and they are of comparable size. Duplicate search with rg -L over the DAG: 0AHI, 0AHH, 0C5J, 0BBT, 0BX7 and the Nagata elimination nodes are proof inputs or different statements. No SGA source. Every off-unit citation is a definition or Mathlib leaf, so no tool_uses. Maintainer note: blueprint.from.node is null, inherited from the base item that NH created; this is a base fault, not this delivery's."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommonRegularSurfaceResolution",
+  "declaration": "AlgebraicGeometry.exists_common_regular_surface_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommonRegularSurfaceResolution.lean",
+  "statement": "theorem exists_common_regular_surface_resolution (S T₁ T₂ : Scheme.{u}) [IsNoetherian S] [IsIntegral T₁] [IsIntegral T₂] (s₁ : T₁ ⟶ S) (s₂ : T₂ ⟶ S) [IsProper s₁] [IsProper s₂] (hT₁ : IsRegularScheme T₁) (hT₂ : IsRegularScheme T₂) (hdim₁ : topologicalKrullDim T₁ = 2) (hdim₂ : topologicalKrullDim T₂ = 2) (U₁ : T₁.Opens) (U₂ : T₂.Opens) (hU₁ : Dense (U₁ : Set T₁)) (hU₂ : Dense (U₂ : Set T₂)) (α : U₁.toScheme ≅ U₂.toScheme) (hα : α.hom ≫ U₂.ι ≫ s₂ = U₁.ι ≫ s₁) : ∃ (W : Scheme.{u}) (w : W ⟶ S) (q₁ : W ⟶ T₁) (q₂ : W ⟶ T₂), IsRegularScheme W ∧ IsIntegral W ∧ q₁ ≫ s₁ = w ∧ q₂ ≫ s₂ = w ∧ (∃ (A : OrdinaryBlowupTower T₁) (e : W ≅ A.level (Fin.last A.length)), e.hom ≫ A.toBase (Fin.last A.length) = q₁ ∧ ∀ i : Fin A.length, ∃ (p : A.level i.castSucc) (hp : IsClosed ({p} : Set _)), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩) ∧ (∃ (A : OrdinaryBlowupTower T₂) (e : W ≅ A.level (Fin.last A.length)), e.hom ≫ A.toBase (Fin.last A.length) = q₂ ∧ ∀ i : Fin A.length, ∃ (p : A.level i.castSucc) (hp : IsClosed ({p} : Set _)), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩) ∧ ∃ V : W.Opens, Dense (V : Set W) ∧ ∃ hV : V ≤ q₁ ⁻¹ᵁ U₁, q₁.resLE U₁ V hV ≫ α.hom ≫ U₂.ι = V.ι ≫ q₂",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-337df672b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records/declarations, Stacks 0C5S, module, report (has Worker report and Second reading sections). Every hypothesis matches: IsNoetherian S, IsIntegral, IsProper s_i, IsRegularScheme, topologicalKrullDim=2, dense opens with an S-iso alpha (hα). Conclusion: W regular and integral over S; q_i = e.hom ≫ OrdinaryBlowupTower.toBase with centers vanishingIdeal of closed singletons (reduced closed points, same rendering as RegularPointBlowupGeometry); dense V ≤ q1⁻¹U1 with q1.resLE ≫ α ≫ ι = V.ι ≫ q2 keeps alpha and is non-vacuous since W is integral. Statement verbatim; universes Scheme.{u}; length-0 towers and empty S OK. Node diff vs side-live: lean added plus stmt_dep def-trf-ordinary-resolution-rule (landed, reviewed, OrdinaryBlowupTower listed in its declarations); the item's live lean is null, so no supersession. No duplicate tower or theorem in project lean. Docstrings carry source and 4 steps; sorry only; imports all used. Advisory: the added trf def stmt_dep is generic definition data, not a batch-5 fault. No compile (no change)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261023T132554-L-2302165",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_common_regular_surface_resolution"
+  ],
+  "sorry_after": []
+ }
+}

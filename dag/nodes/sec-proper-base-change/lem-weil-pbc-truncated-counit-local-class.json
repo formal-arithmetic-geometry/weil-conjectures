@@ -1,0 +1,215 @@
+{
+ "id": "lem-weil-pbc-truncated-counit-local-class",
+ "kind": "statement",
+ "title": "Local class formula for the explicit truncated counit",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes with the shared derived module categories, $q\\in\\mathbf Z$, and $K\\in D(\\mathcal O_T)$. Let $e$ be the explicit upper-truncation counit edge of [def-weil-pbc-truncated-counit-edge]. With the canonical local-class map $\\Theta$, local Leray comparison $\\lambda$, and inverse-open local-class map computed on the same K-injective representative [lem-trf-unbounded-direct-image-section-presheaf, lem-pc-ringed-space-sheafification-cohomology], every open $V\\subseteq S$ satisfies $\\Theta^{Rg_*K}_V\\,\\Gamma(V,e)=\\lambda_{g,K,V}\\,\\Theta^K_{g^{-1}V}$, in diagrammatic composition order. No choice of source object or arbitrary derived morphism appears, and no lower bound on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0BKJ, 0D5X; derived.tex Tags 08J5, 06XS. Agent refinement of the top-edge argument."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-truncated-counit-edge",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-pc-ringed-space-sheafification-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct a natural local-class edge e_K and its normalized values on all single complexes by sheafifying the local cocycle maps. This construction involves no derived adjunction.",
+   "uses": [
+    "lem-weil-pbc-local-class-edge-single-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove naturality of the explicit truncated counit from naturality of upper truncation, of its inverse Hq inclusion, of the derived adjunction transpose, and of kappa. This is an equality of ordinary adjunction transposes after cancelling kappa.",
+   "uses": [
+    "def-weil-pbc-truncated-counit-edge",
+    "lem-weil-pbc-derived-pullback-top-cohomology",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sf-derived-truncation-triangle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized derived adjunction on a single complex gives the explicit truncated counit the same value as e after precomposition with Hq of the single direct-image comparison. That comparison is invertible, so the two edges agree on singles.",
+   "uses": [
+    "lem-weil-pbc-single-truncated-counit-normalization",
+    "lem-weil-pbc-local-class-edge-single-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The right-derived functor preserves lower bounds, by its bounded-below compatibility. Any two natural edges Hq(RK) -> F(Hq K) agreeing on singles agree on all K: first project K to J=tau_{>=q}K and cancel F(Hq of the projection); then include P=tau_{<=q}J into J. P is a single, and Hq of R(P -> J) is invertible because R(tau_{>=q+1}J) has zero H^{q-1} and Hq. The homology sequence of the truncation triangle proves this last isomorphism.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-sf-derived-truncation-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this uniqueness to the two edges. Replacing e_K by the equal truncated counit in its local-class equation is exactly the required conclusion.",
+   "uses": [
+    "lem-weil-pbc-local-class-edge-single-normalization",
+    "def-weil-pbc-truncated-counit-edge"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-class-edge-single-normalization",
+  "def-weil-pbc-truncated-counit-edge",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-single-truncated-counit-normalization",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0BKJ and 0D5X; derived.tex Tags 08J5 and 06XS. U1: integer-degree single normalization and uniqueness of natural edges by lower truncation, replacing the arbitrary-morphism factorization and shift route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical local cohomology edge is induced by the derived counit on an upper truncation",
+   "results": "Functor.totalLeftDerivedCounit, Functor.totalRightDerivedUnit, CochainComplex.iTruncLE; no normalized module local-class equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The edge map from cohomology of derived pushforward to pushforward cohomology equals the transpose of the derived counit on the upper truncation",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, ordinary pullbackPushforwardAdjunction unit formulas, Functor.mapDerivedCategoryFactorsh_hom_app; none states this normalized cohomology map.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*counit|counit.*truncLE|topEdgeTruncatedCounit; rg in Mathlib, WeilConjectures and Sheaf; blueprint_refs search truncated counit and cohomology counit",
+   "results": "No match for the normalized truncation/counit edge; existing top-edge theorem is the parent, not a proof of this local step. No blueprint duplicate.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge",
+  "date": "2026-10-25",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. The top-degree normalization of the derived-to-ordinary module adjoint. Local normalization on the upper truncation of the derived direct image.",
+   "via": [
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeLocalCalculation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedAdjunctionTopEdgeLocalCalculation.lean",
+  "declaration": "AlgebraicGeometry.topEdgeTruncatedCounit_localClass",
+  "statement": "theorem topEdgeTruncatedCounit_localClass {T S : Scheme.{u}} (g : T ⟶ S)\n    (q : ℤ) (K : schemeDerivedCategory T) :\n    ∀ V : (Opens S)ᵒᵖ,\n      (RingedSpace.topEdgeLocalClass S.toRingedSpace q\n        ((schemeDerivedDirectImage g).obj K)).app V ≫\n        ((SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map\n          (topEdgeTruncatedCounit g q K)).hom.app V =\n      (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom q K).hom.app V ≫\n        (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom q K).app V",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge",
+  "worker": "stage3",
+  "summary": "Isolate the normalized local cocycle equation for the explicit counit on the upper truncation of Rg_*K. The arbitrary-source naturality and uniqueness arguments are proved in the parent.",
+  "blueprint": "Generic derived-module local normalization below the unchanged proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-sheafification-cohomology",
+    "why": "Canonical local-class map, its naturality, and cocycle formula on arbitrary ringed spaces; no node of this unit supplies that generic module-sheaf tool."
+   },
+   {
+    "node": "lem-trf-unbounded-direct-image-section-presheaf",
+    "why": "Canonical local Leray comparison, natural in the derived object and opens; generic ringed-space tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Ordinary module transpose, its naturality and sectionwise scalar action; generic ringed-space tool."
+   },
+   {
+    "node": "lem-pc-canonical-single-direct-image-comparison",
+    "why": "The actual single direct-image comparison map is needed, without the conditional assertion that it is an isomorphism."
+   },
+   {
+    "node": "def-pc-ringed-spaces-derived-direct-image",
+    "why": "K-injective representative formula for the derived direct image and its resolution comparisons."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Canonical standard truncation triangles in an arbitrary abelian derived category; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-pc-pinned-pullback-counit-shifts",
+    "why": "Integer-shift compatibility of the particular derived-to-ordinary pullback comparison."
+   },
+   {
+    "node": "lem-pc-canonical-single-adjunction-transpose",
+    "why": "Fixed single-module normalization of the derived transpose; a generic module adjunction compatibility."
+   },
+   {
+    "node": "lem-pc-pinned-derived-adjunction-shifts",
+    "why": "Allows the same normalized single-module transpose in degree q, with the recorded shift structure."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Bifunctoriality of the canonical module-derived adjunction under source and target maps."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-35b98",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261025T100951-L-3644939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T100416-L-17961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

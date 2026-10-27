@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-chosen-nodal-fibres-universal",
+ "kind": "statement",
+ "title": "From chosen algebraic-closure nodal fibres to all geometric points",
+ "statement": "Let $f:Y\\to S$ be a flat [def-weil-flat-morphism] locally finitely presented morphism [def-sbc-locally-finite-presentation] of schemes whose nonempty scheme-theoretic fibres are pure of dimension $1$ [def-weil-pure-dimension]. For each $s\\in S$, choose an algebraic closure $k_s$ of $\\kappa(s)$ [def-weil-algebraic-closure, def-weil-residue-field]. Assume every nonsmooth point of $Y_{\\bar s}=Y\\times_S\\operatorname{Spec}k_s$ [def-weil-geometric-fibre] has maximal-ideal-adic completed local ring [def-weil-pbc-adic-completion] isomorphic to $k_s[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. Then for every algebraically closed field $\\Omega$ and morphism $\\operatorname{Spec}\\Omega\\to S$, lying over $s$, one can choose an embedding $k_s\\hookrightarrow\\Omega$ extending $\\kappa(s)\\to\\Omega$, and associating fibre products identifies $Y_\\Omega$ with $Y_{\\bar s}\\times_{k_s}\\Omega$ [def-pc-fibre-product]. Every such $Y_\\Omega$ is empty or pure of dimension $1$ and every nonsmooth point has completed local ring $\\Omega[[u,v]]/(uv)$. Moreover the relative smooth locus $U\\subseteq Y$ [def-sbc-smooth-morphisms] is open. For every $S'\\to S$ the smooth locus of $Y\\times_SS'\\to S'$ is exactly $U\\times_SS'$. Thus a point nonsmooth after this base change maps to a nonsmooth point of $f$. No quasi-compactness or Noetherian hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C56 (lemma-node-field-extension), implication (1) to (2), and Tag 0C59 (lemma-nodal-family): chosen residue-field closures versus all geometric points and complements of Fitting singular supports; returned Step 4."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-algebraic-closure",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\operatorname{Spec}\\Omega\\to S$ over $s$; by [def-weil-geometric-point] it is the composite of $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(s)$, induced by a field homomorphism $\\kappa(s)\\to\\Omega$, with the canonical morphism $\\operatorname{Spec}\\kappa(s)\\to S$. Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to $\\kappa(s)\\to k_s$ and $\\kappa(s)\\to\\Omega$: the former is algebraic and the latter has algebraically closed target. The resulting field homomorphism $k_s\\to\\Omega$ is injective. By the universal property [def-pc-fibre-product], $Y_\\Omega\\cong(Y\\times_S\\operatorname{Spec}k_s)\\times_{k_s}\\operatorname{Spec}\\Omega$: maps into either side are precisely compatible maps into $Y$ and $\\operatorname{Spec}\\Omega$, since the map into $\\operatorname{Spec}k_s$ is forced by the latter.",
+   "uses": [
+    "def-weil-geometric-point",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, lemma-node-field-extension, choosing compatible algebraic closures; Fields Tag 09GU, lemma-map-into-algebraic-closure."
+   }
+  },
+  {
+   "text": "A finitely presented algebra is finitely generated (retain its finitely many polynomial generators), so the affine presentations in [def-sbc-locally-finite-presentation] make $f$ locally of finite type [def-weil-finite-type-morphism]. By [lem-weil-pbc-lft-base-change], $C=Y_{\\bar s}$ is locally of finite type over $k_s$. Apply [lem-trf-relative-dimension-base-change] with $d=1$ to $f$, first along $\\operatorname{Spec}k_s\\to S$ and then along $\\operatorname{Spec}\\Omega\\to S$: both resulting schemes are empty or pure of dimension $1$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TP (definition-finite-presentation), 01T0 (definition-finite-type), 01T4 (lemma-base-change-finite-type), 02NK (lemma-base-change-relative-dimension-d)."
+   }
+  },
+  {
+   "text": "The hypothesis gives exactly the completed-local-ring condition at every nonsmooth point of $C$. Thus [lem-trf-node-algebraically-closed-extension], applied to the algebraically closed fields $k_s\\subseteq\\Omega$ and the locally finite type $C$ of Step 2, gives $\\widehat{\\mathcal O}_{C_\\Omega,y}\\cong\\Omega[[u,v]]/(uv)$ for every nonsmooth $y$. The isomorphism of Step 1 identifies $C_\\Omega$ with $Y_\\Omega$ over $\\Omega$, so this proves the asserted nodality. The cited statement allows empty $C$ and needs no quasi-compactness.",
+   "uses": [
+    "lem-trf-node-algebraically-closed-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, lemma-node-field-extension, direction (1) to (2)."
+   }
+  },
+  {
+   "text": "Let $U$ be the union of the open subschemes of $Y$ on which $f$ is smooth. It is open, and [lem-weil-pbc-smooth-local-on-source] makes $f|_U$ smooth, so this is precisely the relative smooth locus. For any $S\\prime\\to S$, apply [lem-sfb-scheme-flat-smooth-point-base-change] to the given flat locally finitely presented $f$. It says pointwise that $f\\prime$ is smooth at $y\\prime$ if and only if $f$ is smooth at its image. Hence its smooth open subscheme has underlying open $p^{-1}(U)$, and by the universal property [def-pc-fibre-product] (a morphism into $Y\\times_SS\\prime$ factors through $p^{-1}(U)$ exactly when its component to $Y$ factors through $U$) this open subscheme is $U\\times_SS\\prime$. Taking complements proves the final nonsmooth-image assertion. These statements require neither quasi-compactness nor a Noetherian base.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V6 (lemma-smooth-characterize), 02V4 (lemma-set-points-where-fibres-smooth), case (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "lem-trf-node-algebraically-closed-extension",
+  "lem-trf-relative-dimension-base-change",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C56 (lemma-node-field-extension), compatible closure and nodal extension argument, with Morphisms Tags 02NK and 02V4 for dimension and smooth loci."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented curves nodal over chosen algebraic closures have nodal fibres over every algebraically closed field and smooth locus commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locally finitely presented curves nodal over chosen algebraic closures have nodal fibres over every algebraically closed field and smooth locus commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"3eb3df93773339e9\"}; Generic smooth-base-change and residue-field point classifications do not compare chosen nodal fibres with all geometric points or supply the Fitting complement comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a chosen algebraic closure of a residue field into any algebraically closed geometric point and preserve ordinary double point singularities",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a chosen algebraic closure of a residue field into any algebraically closed geometric point and preserve ordinary double point singularities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"0b989120f59d69a2\"}; Generic smooth-base-change and residue-field point classifications do not compare chosen nodal fibres with all geometric points or supply the Fitting complement comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat locally finitely presented curves nodal over chosen algebraic closures have nodal fibres over every algebraically closed field and smooth locus commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T06:09:45Z\", \"tool\": \"leansearch\", \"query\": \"Flat locally finitely presented curves nodal over chosen algebraic closures have nodal fibres over every algebraically closed field and smooth locus commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"Algebra.FinitePresentation.baseChange\"], \"digest\": \"093b85bea6160c86\"}; Generic smooth-base-change and residue-field point classifications do not compare chosen nodal fibres with all geometric points or supply the Fitting complement comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-22T06:09:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFlatOfSmooth\", \"AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField\"], \"digest\": \"202f2e2e6534e01e\"}; Generic smooth-base-change and residue-field point classifications do not compare chosen nodal fibres with all geometric points or supply the Fitting complement comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|smoothLocus.*(pullback|baseChange)",
+   "results": "{\"t\": \"2026-10-22T06:09:45Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|smoothLocus.*(pullback|baseChange)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Generic smooth-base-change and residue-field point classifications do not compare chosen nodal fibres with all geometric points or supply the Fitting complement comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|smoothLocus.*(pullback|baseChange)",
+   "results": "{\"t\": \"2026-10-23T09:22:25Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|smoothLocus.*(pullback|baseChange)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: only smooth-base-change instances, whole-fibre smoothness, smoothLocus definition, or power-series/Weierstrass results; none supplies the full chosen-closure nodal-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth locus of a flat locally finitely presented morphism commutes with arbitrary base change and nodal geometric fibres",
+   "results": "{\"t\": \"2026-10-23T09:22:25Z\", \"tool\": \"leansearch\", \"query\": \"Smooth locus of a flat locally finitely presented morphism commutes with arbitrary base change and nodal geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"773fbe6e8a3e5480\"}; Read hits: only smooth-base-change instances, whole-fibre smoothness, smoothLocus definition, or power-series/Weierstrass results; none supplies the full chosen-closure nodal-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-23T09:22:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFlatOfSmooth\", \"AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField\"], \"digest\": \"202f2e2e6534e01e\"}; Read hits: only smooth-base-change instances, whole-fibre smoothness, smoothLocus definition, or power-series/Weierstrass results; none supplies the full chosen-closure nodal-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented morphism with nodal fibres over chosen algebraic closures has nodal fibres over every geometric point and smooth locus commutes with base change",
+   "results": "{\"t\": \"2026-10-23T09:22:29Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locally finitely presented morphism with nodal fibres over chosen algebraic closures has nodal fibres over every geometric point and smooth locus commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"f81080005473c6c8\"}; Read hits: only smooth-base-change instances, whole-fibre smoothness, smoothLocus definition, or power-series/Weierstrass results; none supplies the full chosen-closure nodal-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal curve singularities preserved by algebraically closed field extension completed local ring power series uv",
+   "results": "{\"t\": \"2026-10-23T09:22:30Z\", \"tool\": \"leanfinder\", \"query\": \"Nodal curve singularities preserved by algebraically closed field extension completed local ring power series uv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivision\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"9c8c20f6ecbbbf12\"}; Read hits: only smooth-base-change instances, whole-fibre smoothness, smoothLocus definition, or power-series/Weierstrass results; none supplies the full chosen-closure nodal-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Re-split argument: From chosen algebraic-closure nodal fibres to all geometric points (returned item Steps 4).",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-chosen-nodal-fibres-universal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing nodes for algebraic-closure embedding, pure relative dimension, nodal field extension, and pointwise smooth-locus base change. Four assembly steps, no new nodes, no Lean attachment. Verified every cited statement and the empty/non-quasi-compact/non-Noetherian cases; Mathlib searches find smooth base change but not the full nodal assertion.",
+  "blueprint": "Ancestor lem-trf-local-term-locality proof (1)--(2), semistable-alteration input in the nearby-cycle branch, as refined by the existing from.place: chosen closure fibres imply nodal fibres at every geometric point and smooth loci commute with base change. The latest blueprint has no separate matching node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-scheme-flat-smooth-point-base-change",
+    "why": "Generic scheme pointwise smoothness under arbitrary base change for a flat locally finitely presented morphism; needed to identify both smooth loci. No same-unit node supplies this comparison, and it does not change the semistable geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-scheme-flat-smooth-point-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-8ac481084",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8ac481084 (reviewer sub-agent of L); spot-checked: I read the item, all 9 cited statements and the sources: Stacks 09GU, 01T4, 02NK, 01V6, 02V4(1) and 0C56. The statement is unchanged and true. It has no new nodes, cites no SGA source, and all four steps are short assemblies of existing nodes. Step 1: 09GU with K=kappa(s), L=k_s gives psi:k_s->Omega, and fibre-product associativity follows from the universal property. Step 2: lfp implies lft (Stacks 01TW, proof omitted there), so 01T4 and 02NK (d=1) apply along Spec k_s and Spec Omega, where the only fibre is the whole scheme. Step 3: lem-trf-node-algebraically-closed-extension has all its hypotheses met. I also checked that node is true: a nonsmooth point upstairs maps to a nonsmooth, hence nodal and closed, point with residue field k_s, which covers the 0C56 closed-point warning. Step 4: U is the union of the smooth opens (01V6), and 02V4(1) via the sfb scheme node gives smooth locus = p^{-1}(U). The tool_use lem-sfb-scheme-flat-smooth-point-base-change is a generic 02V4 lemma; accepted. Duplicate search: no existing node states the item. lem-trf-nodal-family-fitting-singular assumes all geometric fibres are nodal, and lem-sfb-flat-space-smooth-locus is about algebraic spaces. Edge cases checked: empty Y, k[u,v]/(uv) with transcendental Omega, nonclosed s, non-Noetherian base. FIX (two missing citations): Step 1 used kappa(s)->Omega and the factorisation through Spec kappa(s) without citing def-weil-geometric-point, so I added it (also to proof_deps). Step 4 identified the open subscheme p^{-1}(U) with U x_S S' without citing the universal property, so I added def-pc-fibre-product with a one-line justification. proof_deps equals the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ChosenNodalFibresUniversal",
+  "declaration": "AlgebraicGeometry.chosen_nodal_fibres_universal",
+  "file": "lean/Sheaf/TraceFormula/ChosenNodalFibresUniversal.lean",
+  "statement": "theorem chosen_nodal_fibres_universal {Y S : Scheme.{u}} (f : Y ⟶ S) [Flat f] [LocallyOfFinitePresentation f] (hpure : ∀ s : S, Nonempty (f.fiber s) → (f.fiber s).IsPureDimension 1) (k : S → Type u) [∀ s : S, Field (k s)] [∀ s : S, Algebra (S.residueField s) (k s)] [∀ s : S, IsAlgClosure (S.residueField s) (k s)] (hnodal : ∀ (s : S) (x : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s)), (¬ ∃ V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s)).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s))) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s)).presheaf.stalk x)) ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s)).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) (k s) ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) (k s)) * MvPowerSeries.X 1}))) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : S) (φ : S.residueField s →+* Ω), (∃ ψ : k s →+* Ω, Function.Injective ψ ∧ ψ.comp (algebraMap (S.residueField s) (k s)) = φ ∧ ∃ e : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s) ≅ pullback (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s)) (Spec.map (CommRingCat.ofHom ψ)), e.hom ≫ pullback.snd _ (Spec.map (CommRingCat.ofHom ψ)) = pullback.snd f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s) ∧ e.hom ≫ pullback.fst _ (Spec.map (CommRingCat.ofHom ψ)) ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (k s))) ≫ S.fromSpecResidueField s) = pullback.fst f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)) ∧ (Nonempty (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)) → (pullback f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)).IsPureDimension 1) ∧ ∀ x : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s), (¬ ∃ V : (pullback f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s))) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)).presheaf.stalk x)) ((pullback f (Spec.map (CommRingCat.ofHom φ) ≫ S.fromSpecResidueField s)).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))) ∧ (∀ y : Y, y ∈ f.smoothLocus ↔ ∃ V : Y.Opens, y ∈ V ∧ Smooth (V.ι ≫ f)) ∧ (∀ (S' : Scheme.{u}) (g : S' ⟶ S), (pullback.snd f g).smoothLocus = pullback.fst f g ⁻¹ᵁ f.smoothLocus ∧ ∀ x : pullback (C := Scheme.{u}) f g, x ∉ (pullback.snd f g).smoothLocus → pullback.fst f g x ∉ f.smoothLocus)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5d4610c2",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement verbatim; only the lean field changed vs live. Every clause matches the node and Stacks 0C56/0C59/02V4(1): arbitrary IsAlgClosure family k; geometric points as (s,φ) via SpecToEquivOfField; injective ψ extending φ; iso e compatible with both projections; empty-or-pure-dim-1; nodal completions over Ω using the same ring-iso form as dep node_algebraically_closed_extension (ring iso forces k-algebra iso here); f.smoothLocus open plus its smooth-neighbourhood characterization; smooth-locus base change for every g and nonsmooth-image clause; no extra hypotheses. No definitions, only sorry, docstrings with source and blueprint, worker and second-reading sections present, no new nodes, no duplicate (HasNodalGeometricFibres needs connected fibres; SemistableMarkedBaseChange is a special case). No compile run since no files changed."
+ }
+}

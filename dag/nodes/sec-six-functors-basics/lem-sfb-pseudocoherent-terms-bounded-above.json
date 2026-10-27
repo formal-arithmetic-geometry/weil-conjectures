@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-pseudocoherent-terms-bounded-above",
+ "kind": "statement",
+ "title": "A bounded-above complex of pseudo-coherent modules is pseudo-coherent",
+ "statement": "Let $R$ be a commutative ring and $C^\\bullet$ a cochain complex of $R$-modules. Suppose there exists $b\\in\\mathbf Z$ such that $C^i=0$ for every $i>b$. If each module $C^i$, viewed as a complex $C^i[0]$ concentrated in degree zero, is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], then the image of $C^\\bullet$ in $D(R)$ [def-weil-abstract-derived-category] is pseudo-coherent.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, final assertion."
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $m\\in\\mathbf Z$. By [lem-pc-ring-pseudo-coherent-iff-all-m], each $C^i[0]$ is $r$-pseudo-coherent for every integer $r$. Iterating [lem-pc-ring-m-pseudo-coherent-shift] in either direction shows that $C^i[-i]$ is $m$-pseudo-coherent: take $r=m-i$.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-pc-ring-m-pseudo-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+   }
+  },
+  {
+   "text": "Write $T_c=\\sigma_{\\ge c}C$, with original terms and differential in degrees at least $c$ and zero below. The inclusion $T_{c+1}\\to T_c$ has quotient $C^c[-c]$. In each degree its sequence is either $0\\to C^j\\xrightarrow{1}C^j\\to0$ or $0\\to0\\to C^c\\xrightarrow{1}C^c\\to0$; take the identity or zero as the sections and retractions. Thus [lem-weil-pbc-degreewise-split-derived-triangle] gives a distinguished triangle $T_{c+1}\\to T_c\\to C^c[-c]\\to T_{c+1}[1]$. Since $C^j=0$ for $j>b$, $T_{b+1}=0$, which is $m$-pseudo-coherent using the zero finite free complex as witness in [def-pc-ring-m-pseudo-coherent]. Descending induction from $b+1$ to $m-1$ now proves $T=T_{m-1}$ is $m$-pseudo-coherent: at each step the first and third vertices are $m$-pseudo-coherent, so the middle-vertex clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] applies. If $m-1>b$, $T$ is already zero.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "def-pc-ring-m-pseudo-coherent",
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+   }
+  },
+  {
+   "text": "Let $L=C/T$. Explicitly $L^j=C^j$ for $j<m-1$ and $L^j=0$ for $j\\ge m-1$, with induced differential (zero at the upper boundary). In particular $H^j(L)=0$ for all $j\\ge m$. The zero morphism from the zero bounded finite free complex to $L$ is therefore an isomorphism on cohomology above $m$ and a surjection in degree $m$. This is an $m$-pseudo-coherent witness by [def-pc-ring-m-pseudo-coherent].",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+   }
+  },
+  {
+   "text": "The sequence $0\\to T\\to C\\to L\\to0$ splits in every degree: above or at $m-1$ its nonzero map is $T^j\\xrightarrow{1}C^j$, and below $m-1$ it is $C^j\\xrightarrow{1}L^j$. Choose these identity and zero splittings. By [lem-weil-pbc-degreewise-split-derived-triangle] it gives a distinguished triangle $T\\to C\\to L\\to T[1]$. Both outer vertices are $m$-pseudo-coherent by the preceding steps, so [lem-pc-ring-pseudo-coherent-distinguished-triangle], middle-vertex clause, makes $C$ $m$-pseudo-coherent.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+   }
+  },
+  {
+   "text": "This holds for every $m\\in\\mathbf Z$. Apply [lem-pc-ring-pseudo-coherent-iff-all-m] to obtain a bounded-above finite free model of $C$ in $D(R)$, which is the required pseudo-coherence.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-m-pseudo-coherent-shift",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "def-pc-ring-m-pseudo-coherent",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Y, lemma-complex-pseudo-coherent-modules, proof of the final assertion; Tags 064R and 064U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above cochain complex of pseudo coherent modules is pseudo coherent",
+   "results": "OK: 8 hits; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.isGE_of_ge, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.IsKProjective, CochainComplex.isLE_of_le, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general projective resolutions, support bounds or K-projectivity, without finiteness of free terms or pseudo-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of pseudo coherent modules is pseudo coherent",
+   "results": "OK: 8 hits; LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HomologicalComplex.isGrothendieckAbelian, Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence or finiteness of free terms in the returned general homological/support statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence or finiteness of free terms in the returned general homological/support statements."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|pseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence or finiteness of free terms in the returned general homological/support statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex whose terms admit resolutions by finite free modules admits a bounded above finite free resolution",
+   "results": "OK: 8 hits; CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, ModuleCat.projectiveResolution",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence or finiteness of free terms in the returned general homological/support statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex bounded on the right with terms of type FP infinity has a resolution bounded on the right by finite rank free modules",
+   "results": "OK: 8 hits; CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.cochainComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence or finiteness of free terms in the returned general homological/support statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-algebra-scalar-restriction",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Pseudo-coherence of the diagonal module needed to realize the algebraic class test as sheaf internal Hom. Supporting algebra input: Comparison of pseudo-coherence after forgetting from either quotient of the common polynomial ring; this is the general algebra theorem underlying the relative comparison used by 0E1T. Supporting lemma: Tag 064Y, passage from pseudo-coherent terms to a pseudo-coherent bounded-above complex.",
+   "via": [
+    "lem-sfb-pseudocoherent-algebra-scalar-restriction",
+    "lem-sfb-flat-fp-quotient-pseudocoherent",
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pseudocoherent-terms-bounded-above",
+  "worker": "stage1",
+  "summary": "Followed Tag 064Y using existing finite-approximation and triangle nodes; wrote the finite stupid-truncation induction, the zero lower-tail approximation, and the final all-m passage. No statement change and no new nodes.",
+  "blueprint": "Realizes the inherited place in det-thm-sf-ctf-stability-direct-images proof (3), supporting the scalar-restriction prerequisite via Tag 064Y. The ancestor command reports no imported blueprint ancestor, so the inherited null from.node and its explicit place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic derived-module pseudo-coherence or split-sequence tool for the Tag 064Y argument; the current unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-pc-ring-m-pseudo-coherent-shift",
+    "why": "Generic derived-module pseudo-coherence or split-sequence tool for the Tag 064Y argument; the current unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-derived-triangle",
+    "why": "Generic derived-module pseudo-coherence or split-sequence tool for the Tag 064Y argument; the current unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "why": "Generic derived-module pseudo-coherence or split-sequence tool for the Tag 064Y argument; the current unit has no statement supplying this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-m-pseudo-coherent-shift",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-60fb21155",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-60fb21155 (reviewer sub-agent of L); spot-checked: I read the item, all five proof steps and every cited statement, plus the source: Stacks more-algebra.tex, lemma-complex-pseudo-coherent-modules (Tag 064Y), with 064R and 064U. The statement is the final assertion of 064Y without weakening; the commutative-ring hypothesis is stronger than the source's. Step 1: iterating the shift node (C[1] m-pc iff C (m+1)-pc) in either direction with r=m-i makes C^i[-i] m-pseudo-coherent, using the forward direction of the all-m node. Step 2: I checked the degreewise splittings for T_{c+1}->T_c->C^c[-c] (pi=id, s=0 above c; pi=0, s=id at c); the split-triangle node needs no boundedness. The base T_{b+1}=0 uses the zero witness, the descending induction to m-1 uses the middle-vertex clause, and T is zero when m-1>b. Step 3: L=C/T vanishes in degrees >= m-1, so the zero map is an m-pc witness. Step 4: the degreewise split T->C->L plus the middle clause, at the same m with no off-by-one. Step 5: the reverse direction of the all-m node. Edge cases checked: zero ring, one-degree complexes, unbounded below, non-coherent R (the argument never uses H^i). Duplicate search (rg -L over pseudo-coherent with bounded-above/terms/064Y/064U/064R): the only other 064Y node is the parent, which cites this item. lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent is the cohomology version 064Z, not a duplicate. There are no new nodes and no SGA. The inherited blueprint place/via are kept. I accept the four generic tool_uses (all-m, shift, triangle, degreewise split). Minor: the report mentions citations.json and searches.jsonl, but they are not on the branch; this is not a fault."
+ }
+}

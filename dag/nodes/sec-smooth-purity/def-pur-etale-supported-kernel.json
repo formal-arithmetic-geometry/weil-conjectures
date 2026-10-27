@@ -67,18 +67,33 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction",
-  "declaration": "AlgebraicGeometry.Etale.supportedKernel",
-  "branch": "newtargets-dag",
-  "by": "Q72",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "The published adjunction module defines the exact supportedKernel and supportedClosedInverseImage notions before its theorem; no delivery module is needed.",
-  "statement": "def supportedKernel {O X : Scheme.{u}} (j : O ⟶ X) :\n    Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}"
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek",
+  "declaration": "AlgebraicGeometry.Etale.sectionsWithSupport",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sectionsWithSupport",
+   "AlgebraicGeometry.Etale.closedUpperShriek"
+  ],
+  "statement": "def sectionsWithSupport :\n    Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A",
+  "note": "§1(B) repair requested in the return of 3977feaf3409: the former supportedKernel/supportedClosedInverseImage attachment is specialized to AddCommGrpCat and cannot supply the module-valued support functor used by this consumer. The existing upstream sectionsWithSupport is the pointwise kernel of the canonical open unit and closedUpperShriek is this kernel followed by upperStar i, for an arbitrary Grothendieck abelian coefficient category A. Specializing A to AddCommGrpCat gives exactly this node, including arbitrary i and j; specializing to ModuleCat supplies the same construction over constant coefficients. The functor-category kernel is computed pointwise, so this is the same notion, not a new definition. The source section binds (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X).",
+  "branch": "slopmaster2",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": true
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -89,12 +104,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0582b0b15",
-  "group": "Q72",
+  "reviewer": "NT-stage2-cc-80e179293",
+  "group": "Q14",
   "result": "pass",
-  "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+  "note": "Re-delivery after return 3977feaf3409. Item record changes only lean and stmt_deps (six landed nodes added). Lean module unchanged. Two §1(B) lean-only rebinds: def-pur-etale-supported-kernel → upstream sectionsWithSupport/closedUpperShriek (iso to old supportedKernel at AddCommGrpCat, general coefficients); lem-pur-etale-supported-kernel-adjunction → lowerStarClosedUpperShriekAdjunction plus HomEquiv/unit-iso/exactness declarations. Both correct with notes. Statement matches node clause by clause: finite A at Type(u+1); IsNoetherian T,T'; IsAffineHom g plus IndEtaleAcrossUniverses on affine charts; IsPullback h i' i g; explicit complements; D⁺ of ModuleCat-valued small-étale sheaves; β = mateEquiv of c⁻¹ (asIso finite baseChangeMap) under derivedPlus support adjunctions, variance checked; IsIso, CommShift ℤ (canonical rightDerivedFunctorPlus instance), counit equation c≫i'_*β≫ε'=g^*ε, paste_horiz composition with upperStarCompDerivedPlus, identity law; no constructibility. Edge cases allowed; universes bound; only sorry is the theorem body; docstrings carry source and blueprint. Mechanical finding on theorem-node stmt_deps judged genuine (finite-exchange IsIso builds c; derivedPlus is the adjunction; compositors have no def owner; closed adjunction data) → PASS on that point. Advisory: def-per-closed-support-plus-adjunction closedSupportPlus is the same R⁺ functor with canonical complement; no H4 duplicate. No file changed, so no compile."
  },
  "reviewed_proof": {
   "date": "2026-10-19",

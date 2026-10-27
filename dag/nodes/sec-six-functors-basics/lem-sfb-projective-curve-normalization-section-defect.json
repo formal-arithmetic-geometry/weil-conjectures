@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-projective-curve-normalization-section-defect",
+ "kind": "statement",
+ "title": "Bounded section defect under normalization of a generically reduced projective curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] and let $X\\subset\\mathbf P^N_k$ be a connected generically reduced one-dimensional closed subscheme [def-pc-scheme, def-weil-closed-immersion, def-pc-projective-space-twist]. Here generically reduced means that the local ring at each generic point of an irreducible component is reduced. Let $D=X_{\\mathrm{red}}$ [def-pc-reduced-scheme], and let $\\nu:\\coprod_{i=1}^t E_i\\longrightarrow D\\longrightarrow X$ be the disjoint union of the normalizations of its reduced irreducible components [def-sc-normalization]. The list is finite, each $E_i$ is a smooth proper connected curve [def-sc-curves, def-weil-proper-morphism], and $\\nu$ is finite. Put $A_i=\\nu^*\\mathcal O_X(1)|_{E_i}$ and $e_i=\\deg_k A_i>0$ [def-pc-module-pullback, def-pc-degree-line-bundle]. For each $m\\ge0$ put $H_m=H^0(X,\\mathcal O_X(m))$ and $T_{i,m}=H^0(E_i,A_i^{\\otimes m})$, with Zariski module cohomology [def-sc-ringed-space-module-cohomology]. The canonical restriction and pullback map is\n$$\\rho_m:H_m\\longrightarrow\\bigoplus_{i=1}^t T_{i,m}.$$\nThere exist integers $C,m_0\\ge0$, depending on this embedded scheme, such that for every $m\\ge m_0$ all these spaces are finite-dimensional and\n$$\\dim_k\\ker\\rho_m\\le C,\\quad \\dim_k\\operatorname{coker}\\rho_m\\le C,\\quad |\\dim_k T_{i,m}-me_i|\\le C\\ (1\\le i\\le t),\\quad |\\dim_k H_m-m\\sum_i e_i|\\le C.$$\nThe constants need not be uniform as $X$ varies. No nodality, linear normality or absence of finite embedded nilpotents is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BXR, lemma-normalization-locally-algebraic; 0C1R, lemma-prepare-delta-invariant; 0AYT, lemma-chi-tensor-finite. With coherent.tex Tag 0B3J (lemma-coherent-support-dimension-0) and curves.tex Tag 0BS6 (lemma-rr). Agent assembly including finite embedded nilpotents."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization",
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-pc-degree-line-bundle",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Write $i:D\\hookrightarrow X$, $E=\\coprod_iE_i$, $p:E\\to D$, and $L=\\mathcal O_X(1)$. By [lem-pc-projective-proper] $X$ is proper; [def-weil-pbc-scheme-reduction] and [lem-weil-pbc-closed-immersion-proper](c) make $D$ proper as well. Apply [lem-trf-proper-field-invertible-coherent] to obtain Noetherianness and coherence of the structure sheaves. The component cover [lem-trf-proper-curve-normalized-component-cover] gives finitely many integral proper dimension-one components and their finite normalization cover. Its zero-dimensional components would be open and closed singletons, so connectedness and $\\dim X=1$ exclude them. The reduction has the same space as $X$, hence has precisely these dimension-one components. Each $E_i$ is integral, hence connected. An algebraically closed field is perfect (every irreducible polynomial is linear), so [lem-sc-normalization-properties](c) makes every $E_i$ smooth. This proves the asserted geometric properties of the normalization.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-trf-proper-curve-normalized-component-cover",
+    "lem-sc-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), normalized component cover; morphisms.tex Tag 01WC (lemma-locally-projective-proper)."
+   }
+  },
+  {
+   "text": "The hyperplane bundle $L$ is invertible and ample by [lem-weil-pbc-projective-ample-invertible]. Its restriction to each reduced component is ample, and so is its pullback to $E_i$: both the component closed immersion and the finite normalization morphism are affine, by [def-weil-finite-integral-morphism] for the latter, and [lem-weil-pbc-pullback-ample-invertible] applies successively (a closed immersion is affine by its affine quotient description). Pullback and tensor products preserve invertibility by [lem-weil-pbc-invertible-pullback-tensor]. Thus [lem-trf-proper-integral-curve-ample-degree] gives the positive integer $e_i=\\deg_kA_i$.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), part (2); varieties.tex Tag 0B5X (lemma-ample-curve); properties.tex Tag 01PU (lemma-ample-on-closed)."
+   }
+  },
+  {
+   "text": "Let $J=\\mathcal N_X$. The reduction definition gives $0\\to J\\to\\mathcal O_X\\to i_*\\mathcal O_D\\to0$. It makes $J$ quasi-coherent; since $\\mathcal O_X$ is coherent, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2) makes $J$ coherent. At each component generic point $\\eta$, generically reducedness and the reduction's quotient description give $J_\\eta=0$. Here the nilradical commutes with passage to a stalk: a nilpotent germ has a representative whose power is zero after shrinking. For any point where $J_x=0$, choose finitely many local generators; each has zero germ and is zero on a smaller neighbourhood, so their finite intersection is a neighbourhood on which $J=0$. Thus $\\operatorname{Supp}J$ is closed and misses every component generic point. Any irreducible closed subset of this support is properly contained in a component of $X$; a strict chain inside it of length one would then extend to length two in $X$. Therefore $\\dim\\operatorname{Supp}J\\le0$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y1 (lemma-coherent-Noetherian-quasi-coherent-sub-quotient); elementary finite-generator proof of closed support, as in Tag 01Y5 (lemma-coherent-support-closed)."
+   }
+  },
+  {
+   "text": "By [lem-trf-curve-normalization-coherent-support] on the reduced pure one-dimensional finite-type scheme $D$, there is an exact sequence $0\\to\\mathcal O_D\\to p_*\\mathcal O_E\\to Q\\to0$, with $Q$ coherent and supported on finitely many closed points. Put $L_D=i^*L$ and $J_m=J\\otimes L^{\\otimes m}$, $Q_m=Q\\otimes L_D^{\\otimes m}$. Applying [lem-pc-chi-zero-dim-support] on the proper schemes $X,D$ gives, for every $m\\ge0$, $H^1(X,J_m)=0$, $h^0(X,J_m)=a:=h^0(X,J)$ and $h^0(D,Q_m)=b:=h^0(D,Q)$. Coherent cohomology finiteness [lem-pc-euler-characteristic-well-defined] shows that $a,b$ are finite nonnegative integers. All twists used here are invertible by [lem-weil-pbc-invertible-pullback-tensor].",
+   "uses": [
+    "lem-trf-curve-normalization-coherent-support",
+    "lem-pc-chi-zero-dim-support",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (1)--(4); Tag 0AYT (lemma-chi-tensor-finite), parts (3)--(5)."
+   }
+  },
+  {
+   "text": "Tensor the reduction sequence by $L^{\\otimes m}$ and the normalization sequence by $L_D^{\\otimes m}$. Tensoring by a line bundle preserves exactness: on a trivializing open it is the identity functor. The closed-immersion projection formula [lem-pc-closed-immersion-coherent-cohomology] identifies $(i_*\\mathcal O_D)\\otimes L^{\\otimes m}$ with $i_*L_D^{\\otimes m}$. For the other sequence the canonical map $(p_*\\mathcal O_E)\\otimes L_D^{\\otimes m}\\to p_*(p^*L_D^{\\otimes m})$ sends $b\\otimes s$ to $b\\,p^*s$; on a trivializing open it is the identity on $p_*\\mathcal O_E$, so is an isomorphism, and these maps glue. By [lem-weil-pbc-invertible-pullback-tensor] the restriction of $p^*L_D^{\\otimes m}$ to $E_i$ is $A_i^{\\otimes m}$. Global sections on a finite disjoint union are the product by the sheaf axiom, equal to the finite direct sum. Thus the middle section map of this normalization sequence is the canonical map to $T_m:=\\bigoplus_iT_{i,m}$.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Morphisms Tag 01QY (lemma-i-star-equivalence); Cohomology Tag 01E8 (lemma-projection-formula); modules.tex Tag 01CD (lemma-tensor-product-pullback). The finite-map projection calculation is written explicitly by local trivialization."
+   }
+  },
+  {
+   "text": "The long exact derived-functor sequence [lem-weil-pbc-derived-functor-long-exact] applies to global sections, whose derived functors are the module cohomology of [def-sc-ringed-space-module-cohomology]. Using $H^1(X,J_m)=0$ and the closed-pushforward cohomology comparison of [lem-pc-closed-immersion-coherent-cohomology] gives $0\\to H^0(X,J_m)\\to H_m\\xrightarrow{u_m}H^0(D,L_D^{\\otimes m})\\to0$. The normalization sequence gives $0\\to H^0(D,L_D^{\\otimes m})\\xrightarrow{v_m}T_m\\to H^0(D,Q_m)$. The composite $v_mu_m$ is $\\rho_m$: each map restricts a section and then pulls it back along the indicated scheme morphism. Thus $\\ker\\rho_m=\\ker u_m$ has dimension $a$, and surjectivity of $u_m$ identifies $\\operatorname{coker}\\rho_m$ with $\\operatorname{coker}v_m$, a subspace of $H^0(D,Q_m)$; its dimension is at most $b$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), exact cohomology sequence; varieties.tex Tag 0AYT (lemma-chi-tensor-finite), vanishing from the preceding step."
+   }
+  },
+  {
+   "text": "Every $H_m$ and $T_{i,m}$ is finite-dimensional for every $m\\ge0$: the schemes are proper, their line bundles are coherent by [lem-trf-proper-field-invertible-coherent], and [lem-pc-euler-characteristic-well-defined] supplies finiteness. Put $g_i=\\dim_kH^1(E_i,\\mathcal O_{E_i})$, the genus [def-sc-genus]. By [lem-trf-curve-degree-tensor-additive], induction on $m$ gives $\\deg A_i^{\\otimes m}=me_i$ (degree of $\\mathcal O_{E_i}$ is zero by its defining Euler difference). Choose $m_0=\\max(0,\\max_i(2g_i-1))$. Since $e_i$ is a positive integer, $m\\ge m_0$ implies $me_i\\ge2g_i-1$. The degree in [lem-sc-riemann-roch-large-degree] is that of [def-sc-pic0]; by [lem-sc-riemann-roch](1), applied to $A_i^{\\otimes m}$ and to $\\mathcal O_{E_i}$ (where $\\chi(E_i,\\mathcal O_{E_i})=1-g_i$), it equals $\\chi(E_i,A_i^{\\otimes m})-\\chi(E_i,\\mathcal O_{E_i})=me_i$. Therefore [lem-sc-riemann-roch-large-degree] gives $\\dim_kT_{i,m}=me_i+1-g_i$.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-euler-characteristic-well-defined",
+    "def-sc-genus",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sc-riemann-roch-large-degree",
+    "def-pc-degree-line-bundle",
+    "def-sc-pic0",
+    "lem-sc-riemann-roch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS6 (lemma-rr), with large-degree Serre-duality vanishing as in the current blueprint lem-sc-riemann-roch-large-degree.proof.md; varieties.tex Tag 0AYX (lemma-degree-tensor-product)."
+   }
+  },
+  {
+   "text": "For a map of finite-dimensional spaces, a basis of its kernel extends to a basis of its source, whose remaining images form a basis of the image; extending the latter to a target basis gives $\\dim H_m=\\dim T_m+\\dim\\ker\\rho_m-\\dim\\operatorname{coker}\\rho_m$. Hence $|\\dim H_m-\\dim T_m|\\le a+b$. Put $R=\\sum_i|1-g_i|$ and $C=a+b+R$. The preceding step gives $|\\dim T_{i,m}-me_i|=|1-g_i|\\le R\\le C$ and $|\\dim T_m-m\\sum_ie_i|=|\\sum_i(1-g_i)|\\le R$. The triangle inequality now gives $|\\dim H_m-m\\sum_ie_i|\\le C$, while the kernel and cokernel bounds are $a\\le C$ and $b\\le C$. Both $C,m_0$ depend only on the given embedded scheme and are nonnegative integers, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Agent assembly of the exact-sequence bounds from Tag 0AYT and the component Riemann--Roch formulas; elementary finite-dimensional basis calculation and triangle inequality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-trf-proper-curve-normalized-component-cover",
+  "lem-sc-normalization-properties",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-proper-integral-curve-ample-degree",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-trf-curve-normalization-coherent-support",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-genus",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-riemann-roch-large-degree",
+  "def-pc-degree-line-bundle",
+  "def-weil-closed-immersion",
+  "def-sc-pic0",
+  "lem-sc-riemann-roch"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of Tags 0BXR, 0C1R, 0AYT with curves.tex Tag 0BS6; finite embedded nilpotents retained via the reduction sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sections from a generically reduced projective curve to the disjoint normalization of its components has kernel and cokernel of bounded dimension for all large twists",
+   "results": "Actual search log f330f8be737b3f5d: 8 hits; AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso only identifies sections on affine opens with an integral closure. It gives neither coherent section defects nor asymptotic dimensions. ker_toNormalization concerns a scheme morphism kernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(section|Section)|section.*normalization|hilbertPolynomial|HilbertPolynomial",
+   "results": "Actual search log 194500843e379b24: 1 hits; Mathlib/AlgebraicGeometry/Normalization.lean. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso only identifies sections on affine opens with an integral closure. It gives neither coherent section defects nor asymptotic dimensions. ker_toNormalization concerns a scheme morphism kernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization of a projective curve changes global sections of high powers of a line bundle by a bounded dimension",
+   "results": "Actual search log 651503c4eb7978a7: 8 hits; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso only identifies sections on affine opens with an integral closure. It gives neither coherent section defects nor asymptotic dimensions. ker_toNormalization concerns a scheme morphism kernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "Actual search log d48a5d2f8710c873: 12 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso only identifies sections on affine opens with an integral closure. It gives neither coherent section defects nor asymptotic dimensions. ker_toNormalization concerns a scheme morphism kernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a generically reduced curve gives global section maps with bounded kernels and cokernels under all high hyperplane twists",
+   "results": "Actual search log e74aa1de6cb081de: 8 hits; AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso only identifies sections on affine opens with an integral closure. It gives neither coherent section defects nor asymptotic dimensions. ker_toNormalization concerns a scheme morphism kernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(section|Section)|section.*normalization|hilbertPolynomial|HilbertPolynomial",
+   "results": "Actual msearch log 58ff015fcd644019: 8 hits; Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean, Mathlib/RingTheory/Polynomial/IntegralNormalization.lean, Mathlib/Algebra/GCDMonoid/Basic.lean, Mathlib/Algebra/GCDMonoid/Basic.lean, Mathlib/Algebra/GCDMonoid/Nat.lean, Mathlib/Algebra/Polynomial/FieldDivision.lean. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso describes integral-closure sections only. The Proj maps concern morphisms from homogeneous global sections; HilbertPoly is polynomial combinatorics. None supplies coherent section defects or the curve asymptotics.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a projective curve changes dimensions of high twist global sections by a bounded constant",
+   "results": "Actual msearch log 982575412d1548e9: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso describes integral-closure sections only. The Proj maps concern morphisms from homogeneous global sections; HilbertPoly is polynomial combinatorics. None supplies coherent section defects or the curve asymptotics.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "Actual msearch log d48a5d2f8710c873: 12 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso describes integral-closure sections only. The Proj maps concern morphisms from homogeneous global sections; HilbertPoly is polynomial combinatorics. None supplies coherent section defects or the curve asymptotics.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a generically reduced projective curve and its normalization differ by bounded kernel and cokernel under hyperplane twists",
+   "results": "Actual msearch log 351c710e24497f58: 8 hits; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso describes integral-closure sections only. The Proj maps concern morphisms from homogeneous global sections; HilbertPoly is polynomial combinatorics. None supplies coherent section defects or the curve asymptotics.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert function of a generically reduced projective curve is the sum of the degrees of its normalized components times m plus a bounded error",
+   "results": "Actual msearch log 11fe602231d0e511: 8 hits; ChevalleyThm.degBound, ChevalleyThm.numBound, WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, Polynomial.natDegree_hilbertPoly_of_ne_zero. Read Mathlib/AlgebraicGeometry/Normalization.lean:217-229: normalizationObjIso describes integral-closure sections only. The Proj maps concern morphisms from homogeneous global sections; HilbertPoly is polynomial combinatorics. None supplies coherent section defects or the curve asymptotics.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subcurve-span-weight-bound",
+  "date": "2026-10-23",
+  "group": "Q121"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli route; Morrison Section 3.2 step (7), before step (8) removes nilpotents: compare the monomial filtration with sections on normalized reduced components, retaining only bounded errors.",
+   "via": [
+    "lem-sfb-subcurve-span-weight-bound",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-curve-normalization-section-defect",
+  "worker": "stage1",
+  "summary": "Proved the section-defect estimates using the existing component cover, coherent normalization quotient, zero-dimensional twist invariance and large-degree Riemann--Roch nodes. Retained the finite embedded nilradical, with explicit constants a+b+sum |1-g_i|. No new nodes or statement change. Added the actual reduction-definition dependency.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite, and the recorded Morrison Section 3.2 step (7) comparison before removal of nilpotents in step (8). The current blueprint direct-image proof is only a high-level compactification assembly; this item fills the inherited numerical prerequisite below it. The ancestor command returns None, preserved as null.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step(s) 1 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Step(s) 1, 7 use this node only for its stated proper-field Noetherianness and coherence; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-proper-curve-normalized-component-cover",
+    "why": "Step(s) 1 use this node only for its stated finite integral proper component normalization cover; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Step(s) 1 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Step(s) 2 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Step(s) 2 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Step(s) 2, 4, 5 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-proper-integral-curve-ample-degree",
+    "why": "Step(s) 2 use this node only for its stated positive degree of an ample line on a proper integral curve; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Step(s) 3 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-curve-normalization-coherent-support",
+    "why": "Step(s) 4 use this node only for its stated coherent normalization quotient with finite support; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Step(s) 4 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Step(s) 4, 7 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Step(s) 5, 6 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Step(s) 6 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Step(s) 7 use this node only for its stated additivity of curve line-bundle degree; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-riemann-roch-large-degree",
+    "why": "Step(s) 7 use this node only for its stated generic coherent-cohomology or scheme-theoretic conclusion; no node of the inherited alteration/moduli unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "Step 7 uses part (1) only to identify the divisor degree of def-sc-pic0 in lem-sc-riemann-roch-large-degree with the Euler-characteristic degree e_i; added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-trf-proper-curve-normalized-component-cover",
+  "lem-sc-normalization-properties",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-proper-integral-curve-ample-degree",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-trf-curve-normalization-coherent-support",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sc-riemann-roch"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-75b3ab1ef",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-75b3ab1ef (reviewer sub-agent of L); spot-checked: First split of a statement-only item. The statement is unchanged (diffed against clones/live and side-live). There are no new nodes. The added stmt_dep def-weil-pbc-scheme-reduction is justified because def-pc-reduced-scheme only defines reducedness, not the construction X_red. I read all 8 steps against every cited statement. Step 1: proper (projective) plus the component cover; connectedness and dim 1 remove the zero-dimensional components; normalization-properties(c) over a perfect k gives smooth E_i. Step 2: pullback-ample along affine maps, then ample-degree gives e_i>0. Step 3: generic reducedness gives dim Supp J<=0. Step 4: 0C1R node applied to D (reduced-normalization = coproduct E), and chi-zero-dim-support (1)-(3) gives a and b independent of m. Steps 5-6: projection formulas, long exact sequence, rho_m=v_m u_m, so ker has dimension a and coker dimension at most b. Step 8: arithmetic giving C=a+b+sum|1-g_i|. Small cases checked: P^1; two crossing lines; Proj k[x,y,z]/(xy,y^2) with an embedded point, where the kernel has dimension 1; doubled line excluded. Stacks sources checked: varieties.tex l.8819 (0C1R) and tags 0BXR/0AYT/0B3J/0BS6. Fault C4, repaired: step 7 applied lem-sc-riemann-roch-large-degree, whose degree is def-sc-pic0 (divisor degree on the base), with d=me_i, a chi-degree, and never compared the two. The fix cites lem-sc-riemann-roch(1), chi(L)=deg L+1-g and chi(O)=1-g, so the pic0 degree equals the chi-degree me_i, and adds def-sc-pic0 and lem-sc-riemann-roch to uses and proof_deps. It also adds def-weil-closed-immersion to step 2, where it is the reason a closed immersion is affine, and records a tool_use for lem-sc-riemann-roch. Batch-5 flags: the 5 lem-trf nodes are generic coherent/curve algebra (Noetherianness, component cover, 0B5X, 0C1R, 0AYX). lem-pc-euler-characteristic-well-defined and the Riemann-Roch nodes reach sec-trace-formula only through the definition def-trf-schematically-dense-open. None is part of the trace formula or Poincare duality, so none needs an assumption leaf. No SGA citations. Worker tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect",
+  "declaration": "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.exists_bounded_section_defect",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.component",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.componentMap",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.twistOn",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.ambientPower",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.line",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.componentStructure",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.componentDegree",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.sourceSections",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.componentSections",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.componentTwistIso",
+   "AlgebraicGeometry.ProjectiveCurveNormalizationSectionDefect.exists_bounded_section_defect"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveNormalizationSectionDefect.lean",
+  "statement": "theorem exists_bounded_section_defect {k : Type u} [Field k] [IsAlgClosed k] {N : ℕ} {X : Scheme.{u}} (j : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k))) [IsClosedImmersion j] [ConnectedSpace X] (hdim : topologicalKrullDim X = 1) (hgeneric : ∀ (Z : irreducibleComponents X) (η : X), IsGenericPoint η Z.1 → _root_.IsReduced (X.presheaf.stalk η)) : IsFinite X.fromReducedNormalization ∧ (∃ νred : X.reducedNormalization ⟶ X.nilradical.subscheme, νred ≫ X.nilradical.subschemeι = X.fromReducedNormalization) ∧ ∃ (t : ℕ) (c : Fin t ≃ irreducibleComponents X), (∀ i : Fin t, IsConnectedCurve (componentStructure j (c i)) ∧ Smooth (componentStructure j (c i)) ∧ IsProper (componentStructure j (c i)) ∧ 0 < componentDegree j (c i)) ∧ ∃ ρ : ∀ m : ℕ, sourceSections j m →ₗ[k] (∀ i : Fin t, componentSections j (c i) m), (∀ (m : ℕ) (s : sourceSections j m) (i : Fin t), (UniformProjectiveFibreVanishing.zeroSections ((line j (c i)).tensorPow m)).hom (ρ m s i) = (componentTwistIso j (c i) m).hom.app ⊤ (((tensorPullback (componentMap X (c i))).obj (twistOn j m)).presheaf.map (eqToHom (by simp) : op (componentMap X (c i) ⁻¹ᵁ (⊤ : X.Opens)) ⟶ op (⊤ : (component X (c i)).Opens)) ((((tensorPullbackSectionAdjunction (componentMap X (c i))).unit.app (twistOn j m)).app ⊤ ((UniformProjectiveFibreVanishing.zeroSections (twistOn j m)).hom s))))) ∧ ∃ C m₀ : ℕ, ∀ m : ℕ, m₀ ≤ m → Module.Finite k (sourceSections j m) ∧ (∀ i : Fin t, Module.Finite k (componentSections j (c i) m)) ∧ Module.finrank k (LinearMap.ker (ρ m)) ≤ C ∧ Module.finrank k ((∀ i : Fin t, componentSections j (c i) m) ⧸ LinearMap.range (ρ m)) ≤ C ∧ (∀ i : Fin t, |(Module.finrank k (componentSections j (c i) m) : ℤ) - (m : ℤ) * componentDegree j (c i)| ≤ (C : ℤ)) ∧ (|(Module.finrank k (sourceSections j m) : ℤ) - (m : ℤ) * ∑ i : Fin t, componentDegree j (c i)| ≤ (C : ℤ))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing componentwise normalization is used without changing X to its reduction. The finite product is the canonical model of the finite direct sum. The map is uniquely characterized on every section through the normalized pullback unit and canonical power comparisons. The additional landed definition dependency supplies the shared componentwise normalization; scalar restriction, degree-zero identification and tensor comparisons use existing helpers for the already cited cohomology, pullback and projective-twist notions. No new node, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d66b1c2dd",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node, all 13 stmt_dep records, the module, report, and the exact decls (ReducedNormalization, UniformProjectiveFibreVanishing.cohomology/zeroSections, Modules.degree, IsConnectedCurve, tensorPow, boundaryPullbackPowIso, twistTensorIso). Every hypothesis and conclusion clause matches; ρ is uniquely pinned via zeroSections + normalized tensorPullbackSectionAdjunction unit + canonical componentTwistIso; integer abs bounds; no extra assumptions or universe restriction. Node changes only lean + added landed def stmt_dep def-weil-pbc-reduced-normalization (allowed, acyclic). lean.statement verbatim; docstrings/source/blueprint/8-step proof present; no hollow defs. Edge cases (empty, N=0, embedded points, double line, char p, m=0) ok. Advisory: uncited owners lem-sfb-uniform-projective-fibre-vanishing (cohomology/zeroSections), lem-pc-twist-tensor (twistTensorIso), def-sc-tensor-pullback-power-comparison (boundaryPullbackPowIso). No fixes, no compile needed."
+ }
+}

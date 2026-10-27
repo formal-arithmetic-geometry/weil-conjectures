@@ -1,0 +1,508 @@
+{
+ "id": "lem-sfb-space-relative-proj-scheme-tests",
+ "kind": "statement",
+ "title": "Relative Proj on an algebraic space: scheme tests and arbitrary base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ be a commutative unital graded $\\mathcal O_X$-algebra on the small etale site [def-trf-etale-graded-module-algebra], with each $\\mathcal A_n$ quasi-coherent [def-trf-space-quasi-coherent-module]. Pullbacks mean tensor pullback [def-trf-space-etale-module-functors]. There is an algebraic space $P_X(\\mathcal A)$ with a morphism $p:P_X(\\mathcal A)\\to X$ representable by schemes. For every $S$-scheme $W$ and morphism $g:W\\to X$, there is a canonical isomorphism of $W$-schemes\n$$W\\times_XP_X(\\mathcal A)\\simeq\\operatorname{Proj}_W((g^*\\mathcal A)_{\\mathrm{Zar}}),$$\nwhere degreewise passage to the Zariski site uses [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] and the scheme relative Proj is [def-nagata-relative-proj]. These comparisons commute with further scheme base change and the projections to $W$; they determine $P_X(\\mathcal A)$ up to unique isomorphism preserving the comparisons. For every morphism $h:Y\\to X$ of algebraic spaces over $S$, there is a canonical isomorphism\n$$P_Y(h^*\\mathcal A)\\simeq Y\\times_XP_X(\\mathcal A),$$\ncompatible with the scheme-test comparisons, identity base change and composition. A graded $\\mathcal O_X$-algebra isomorphism $e:\\mathcal A\\simeq\\mathcal B$ induces a canonical isomorphism $P_X(\\mathcal B)\\simeq P_X(\\mathcal A)$, compatible with these base-change identifications; on a scheme test it is the ordinary relative-Proj isomorphism induced by $e$. No finite generation, flatness, Noetherian, separation or quasi-compactness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tags 084B (lemma-relative-proj), 084C (definition-relative-proj), 085C (lemma-relative-proj-base-change); the scheme-test comparisons and their naturality in a graded algebra isomorphism are those of the relative-Proj functor constructed in the paragraphs before 084B."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-nagata-relative-proj"
+ ],
+ "proof": [
+  {
+   "text": "Tensor pullback preserves quasi-coherence degreewise by [lem-sfb-space-module-pullback-quasicoherent]. The tensor isomorphism [lem-weil-pbc-ringed-topoi-module-pullback-tensor] pulls back the homogeneous products and unit, giving the graded algebras in the statement. On a scheme the Zariski/etale equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies these operations: locally both are scalar extension, with product $(b\\otimes x)(c\\otimes y)=bc\\otimes xy$ and unit $1\\otimes1$. Use the normalized compositors of [def-sfb-space-module-tensor-composition] throughout. On iterated local tensors the two three-map composites both send $b\\otimes(c\\otimes(d\\otimes x))$ to $bc'd'\\otimes x$, where primes denote restriction to the final chart; the unit sends $1\\otimes x$ to $x$. Thus these comparisons respect products, units, identities and composition. These are comparisons of sheaves and homogeneous maps, not assertions that sections commute with infinite direct sums.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 084B (lemma-relative-proj), scheme coefficient identification; 085C (lemma-relative-proj-base-change), identification of successive pullbacks."
+   }
+  },
+  {
+   "text": "For a quasi-compact $S$-scheme $T$ define $F_{X,\\mathcal A}(T)$ using quadruples $(d,f:T\\to X,\\mathcal L,\\psi)$: $d\\geq1$, $\\mathcal L$ is an ordinary invertible module on $T$, and $\\psi:(f^*\\mathcal A)_{\\rm Zar}^{(d)}\\to\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}$ is a graded unital map surjective in degree one. Here $(\\mathcal A^{(d)})_n=\\mathcal A_{dn}$. Identify two quadruples with the same $f$ when, for some $m=ad=a'd'>0$, there is $\\beta:\\mathcal L^{\\otimes a}\\simeq(\\mathcal L')^{\\otimes a'}$ satisfying $\\beta^{\\otimes n}\\psi_{an}=\\psi'_{a'n}$ for every $n$. This is an equivalence relation: the identity and inverse witnesses give reflexivity and symmetry; for transitivity raise two witnesses to a common multiple of their degrees, then compose the resulting isomorphisms and their tensor powers. Invertible tensor powers and their pullbacks are supplied by [lem-weil-pbc-invertible-pullback-tensor]. This is the quotient relation of [lem-sfb-scheme-proj-veronese-quotient-functor] on scheme bases; the same explicit relation makes sense for the present $f$. The projection to $X(T)$ remembers $f$.",
+   "uses": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Paragraphs before Tag 084B (lemma-relative-proj): quadruples, common-multiple equivalence and equation-proj."
+   }
+  },
+  {
+   "text": "For arbitrary $T$ set $F(T)=\\varprojlim_{V\\subseteq T\\ {\\rm qc\\ open}}F(V)$. On a quasi-compact $T$ this recovers the preceding definition because $T$ is itself an index. To pull a family back along $u:T'\\to T$, take a quasi-compact open $V'\\subseteq T'$ and choose a quasi-compact open $V\\subseteq T$ containing $u(V')$; finitely many affine opens covering the quasi-compact image give such $V$. Pull the representative over $V$ back to $V'$. Its line remains invertible by [lem-weil-pbc-invertible-pullback-tensor]. Pullback preserves the surjection: it is a cokernel, and module pullback of Zariski modules on schemes is a left adjoint [def-pc-module-pullback], so preserves cokernels by [lem-weil-pbc-left-adjoint-preserves-colimits]. Step 1 identifies its source and tensor powers. Equivalent data remain equivalent by pulling back their witnesses. Different choices of $V$ agree by comparison with their quasi-compact union. The same argument for inclusions of $V'$ gives a compatible family; the identity and composite formulas of step 1 prove the functor laws. The remembered maps $V\\to X$ agree on every quasi-compact open of each intersection, hence on the intersection, and glue uniquely to $T\\to X$, since $X$ is a sheaf [def-trf-algebraic-space]. This defines a presheaf $F$ and a natural transformation $F\\to X$. No intersection is assumed quasi-compact or affine.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Paragraphs before Tag 084B (lemma-relative-proj): extension to arbitrary schemes and functoriality of equation-proj."
+   }
+  },
+  {
+   "text": "Fix $g:W\\to X$ with $W$ a scheme, and set $\\mathcal B=(g^*\\mathcal A)_{\\rm Zar}$. On quasi-compact $T$, a section of $h_W\\times_X F$ is a map $a:T\\to W$ and a quadruple $(d,f,\\mathcal L,\\psi)$ with $f=g\\circ a$. The compositor and scheme comparison of step 1 identify its source with $a^*\\mathcal B^{(d)}$. Send it to $(d,a,\\mathcal L,\\psi)$ in $Q_{W,\\mathcal B}(T)$. The inverse replaces $a$ by $g\\circ a$ and retains the same line and homogeneous maps. They are inverse on equivalence classes because the witnesses are literally unchanged. For arbitrary $T$, perform this on quasi-compact opens; the maps to $W$ glue uniquely and both constructions commute with restriction. Therefore $h_W\\times_XF\\simeq Q_{W,\\mathcal B}$. By [lem-sfb-scheme-proj-veronese-quotient-functor] the latter is represented by $\\operatorname{Proj}_W(\\mathcal B)$. The structural map remembers $a$. Replacing $W$ by a scheme $W'\\to W$ simply replaces $a$ by its factorization through $W'$ and leaves $d,\\mathcal L,\\psi$ unchanged. This proves the claimed naturality under further scheme base change, including the projections.",
+   "uses": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 084B (lemma-relative-proj), proof: explicit identification of the scheme quadruple functor with the fibre product."
+   }
+  },
+  {
+   "text": "Each scheme in step 4 is an algebraic space by [def-trf-scheme-algebraic-space]. Apply [lem-sfb-presheaf-space-target-bootstrap] to $F\\to X$: it requires a presheaf and the algebraicity of all scheme-test fibre products, both established above; no sheaf hypothesis on $F$ is needed. Thus $P_X(\\mathcal A):=F$ is an algebraic space. Its map to $X$ is representable by schemes by step 4 and the definition [def-trf-algebraic-space]; the presheaf fibre products are now the sheaf fibre products. These give exactly the comparisons of the statement. For uniqueness, let another algebraic space $P$ over $X$ carry the same natural comparisons. For $q\\in P(T)$ with image $g:T\\to X$, apply its $W=T$ comparison to $(\\operatorname{id}_T,q)$ and then the inverse of our comparison. This gives an element of $F(T)$ with image $g$. The reverse construction gives inverse maps, natural in $T$ by the compatibility of the comparisons. They therefore define inverse algebraic-space morphisms. Any morphism preserving the comparisons must act by this formula on every $q$, which proves uniqueness.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-presheaf-space-target-bootstrap",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 084B (lemma-relative-proj), first sentence of proof; 084C (definition-relative-proj)."
+   }
+  },
+  {
+   "text": "Let $h:Y\\to X$ be arbitrary. Step 1 ensures that $h^*\\mathcal A$ is a graded quasi-coherent algebra, so the construction applies on $Y$. On a quasi-compact test $T$ define\n$$[d,b:T\\to Y,\\mathcal L,\\psi]\\longmapsto\\bigl(b,[d,h\\circ b,\\mathcal L,\\psi]\\bigr).$$\nThe sources of $\\psi$ agree by the normalized pullback compositor. Conversely a pair $(b,[d,f,\\mathcal L,\\psi])$ in the fibre product satisfies $f=h\\circ b$; replace $f$ by $b$ to obtain its preimage. Both operations leave every equivalence witness unchanged, are inverse and commute with scheme restriction. They extend to arbitrary tests by the compatible families of step 3, yielding an isomorphism $F_{Y,h^*\\mathcal A}\\simeq Y\\times_XF_{X,\\mathcal A}$; the right side is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. For an identity $h$ the formula retains the original quadruple. For $Z\\xrightarrow{k}Y\\xrightarrow{h}X$, both successive and direct comparisons send $[d,c,\\mathcal L,\\psi]$ to $(c,[d,hkc,\\mathcal L,\\psi])$, under the projection-preserving fibre-product associator. Step 1 identifies the sources of $\\psi$ coherently. The formula is also the one in step 4 on every scheme test, proving all base-change compatibilities without flatness.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085C (lemma-relative-proj-base-change), proof and inverse on quadruples."
+   }
+  },
+  {
+   "text": "For a graded isomorphism $e:\\mathcal A\\simeq\\mathcal B$, send a $\\mathcal B$-quadruple to the $\\mathcal A$-quadruple with the same $d,f,\\mathcal L$ and map $\\psi\\circ(f^*e)^{(d)}$. Degree-one surjectivity remains true because $f^*e_d$ is invertible. Precomposition retains each common-power equivalence witness; the inverse uses $e^{-1}$. The maps commute with restriction and thus define inverse morphisms $P_X(\\mathcal B)\\simeq P_X(\\mathcal A)$. Under any base change the two possible composites have homogeneous maps $\\psi_{n}\\circ f^*e_{dn}$ after the compositor, so coincide. On a scheme test this is the ordinary relative-Proj isomorphism by the normalization in [lem-sfb-scheme-proj-veronese-quotient-functor]. The arguments used neither finite generation nor any flatness, separation, quasi-compactness or Noetherian hypothesis on the base spaces.",
+   "uses": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Quadruple construction before Tag 084B and the induced graded-isomorphism diagram following 084C."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sfb-space-module-tensor-composition",
+  "lem-sfb-scheme-proj-veronese-quotient-functor",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-presheaf-space-target-bootstrap",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 084B and its preceding functor construction, Definition 084C and the following graded-isomorphism diagram, Tag 085C proof; explicit details supplied for the omitted identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeProj|relative[Pp]roj|[Bb]lowup",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Proj of a graded quasi-coherent algebra on an algebraic space is an algebraic space representable over the base with scheme test relative Proj and base change",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "9a6e00ba8979d5b6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\"",
+   "results": {
+    "hits": [
+     "Lean.Meta.DSimp.Config.proj",
+     "Lean.Meta.Simp.Config.proj",
+     "Lean.Parser.Sym.DSimp.proj",
+     "Std.Sat.AIG.denote_projected_entry",
+     "Std.Sat.AIG.denote_projected_entry'",
+     "Lean.Expr.isProj",
+     "Lean.Expr.projExpr!",
+     "Lean.Expr.projIdx!"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "30886d928e61170d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of a quasi-coherent graded algebra on an algebraic space is representable by schemes and commutes with arbitrary base change",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7bfd8212d72e6e5b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "grep",
+   "query": "def Proj|pullbackAwayιIso|fromOfGlobalSections",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean"
+    ],
+    "n_hits": 14,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "e76469674b87a53d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.basicOpenToSpec",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_hom",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "76425d6487090c9c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of projective spectra over a sheaf quotient with representable diagonal and compatibility of graded algebra pullback",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "b50fa20fdca809f8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]lowup|[Bb]lowing|[Cc]artier|[Ss]chematically[Dd]ense",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; these concern graded rings, schemes, Proj standard-open overlaps, or scheme properness, not relative Proj over an algebraic space or the algebraic-space blowup package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of a quasi-coherent graded algebra on an algebraic space is representable by schemes and commutes with arbitrary base change",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7bfd8212d72e6e5b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeProj|relative[Pp]roj",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.basicOpenToSpec",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_hom",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "76425d6487090c9c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj of a graded quasi coherent algebra over an algebraic space represents line quotient data and arbitrary base change",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum",
+     "AlgebraicGeometry.termProj|_",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.mul_apply",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.toSpecZero"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "965ebb3b950a3a12"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of projective spectra over a sheaf quotient with representable diagonal and compatibility of graded algebra pullback",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "b50fa20fdca809f8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern absolute Proj of graded rings, homogeneous localization, or maps from global sections; none represents the Veronese invertible-quotient functor of an arbitrary graded sheaf algebra on a scheme or relative Proj over an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-blowup-chart-properties",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C).",
+   "via": [
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-proj-scheme-tests",
+  "worker": "stage1",
+  "group": "Q73",
+  "summary": "Followed the quadruple-functor construction of Stacks 084B and 085C, retaining all hypotheses and clauses. Reused the presheaf-to-space bootstrap, quasi-coherent pullback and ringed tensor inputs; created only the missing scheme Veronese-quotient representation theorem. Wrote the equivalence relation, non-quasi-compact test functor, mutually inverse comparison maps, uniqueness and all composition/naturality formulas. Fixed inherited doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, proper/open direct-image paragraph: compactification f=pj. This inherited subordinate blowup/Chow/Grothendieck-existence chain supplies its relative-Proj construction via Stacks 084B and 085C; no unit step is replaced. The blueprint ancestor command returns None for this created chain, retained as null with its full inherited via list.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic scheme/space or ringed-topos foundation used in the quadruple construction; it supplies the exact tensor, coefficient-comparison, invertible-module, or fibre-product operation named in the proof. The unit contains no alternative version and its direct-image/compactification route is preserved."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/space or ringed-topos foundation used in the quadruple construction; it supplies the exact tensor, coefficient-comparison, invertible-module, or fibre-product operation named in the proof. The unit contains no alternative version and its direct-image/compactification route is preserved."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme/space or ringed-topos foundation used in the quadruple construction; it supplies the exact tensor, coefficient-comparison, invertible-module, or fibre-product operation named in the proof. The unit contains no alternative version and its direct-image/compactification route is preserved."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space or ringed-topos foundation used in the quadruple construction; it supplies the exact tensor, coefficient-comparison, invertible-module, or fibre-product operation named in the proof. The unit contains no alternative version and its direct-image/compactification route is preserved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-6a193a1a6",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-6a193a1a6 (reviewer sub-agent of L); spot-checked: Verdict FIX: the split is sound and three small citation/TeX faults are repaired in fixes/dag/nodes/sec-six-functors-basics/. Sources read: spaces-divisors 084B/084C/085C, constructions 01NW/01NY/01NZ/01O0, and spaces lemma-representable-over-space. Shape: the item statement is unchanged apart from un-doubled TeX escapes; there is no re-split note. The item now has 7 steps that follow the Stacks quadruple-functor proof. Step 1: quasi-coherent pullback, tensor pullback, Zariski/etale comparison and the normalized compositor. Step 2: the equivalence relation; transitivity by a common multiple is elementary. Step 3: the qc-limit presheaf, pullback along maps and gluing f, using that X is a sheaf. Step 4: h_W x_X F is identified with Q_{W,B}, represented by the new node. Step 5: the existing presheaf bootstrap 02YS (which needs no sheaf hypothesis) makes F an algebraic space; this step also proves uniqueness. Step 6: base change along an arbitrary h through 02X2 fibre products, with identity and composition checked and no flatness used. Step 7: naturality in a graded isomorphism e. The single new node lem-sfb-scheme-proj-veronese-quotient-functor is the scheme case 01NY+01NZ, with the equivalence in the form of 01NW(3) and with Stacks' exponent typo corrected (target (L')^{a'n}, not mn; I checked this). It is strictly smaller than the item and is the input Stacks itself cites. Searching rg -L for 01NW/01NY/01NZ/01O9 found no duplicate: lem-trf-space-line-module-proj-map and lem-trf-space-line-test-map give only the map U(psi)->Proj, not the bijection. Small cases tested: k[x] gives a point; an algebra in degree 0 gives the empty space; the empty test; locally varying d. FIXes: (1) B4: the new node's corrupted {\\rm (\\r had become a newline) is replaced by \\mathrm{quasi\\text{-}compact\\ open}. (2) B3: the new node now cites def-sfb-relative-proj-iso-of-graded-iso for the induced Proj isomorphism and def-weil-pbc-proj-twisting-sheaf for O(d), with the twist clause made chart-local; both are added to stmt_deps. (3) C4: step 3 cited the etale space functor definition for left-adjointness of the Zariski scheme pullback; it now cites def-pc-module-pullback, and proof_deps is the union of the step uses. Neither new citation creates a cycle. Batch 5: the five flagged citations (quasi-coherent pullback, compositor, scheme-as-space, bootstrap, space fibre products) are general algebraic-space foundations; they reach def-trf-algebraic-space only as a general definition, are not steps of the trace formula or Poincare duality proofs, and are accepted. Tool uses accepted: ringed-topoi pullback tensor, Zariski/etale qc equivalence, invertible pullback tensor, space fibre products, and def-pc-module-pullback. No SGA citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeProjSchemeTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_space_relativeProj_scheme_tests",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjInput",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjGradedIso",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjPullback",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjPullback.input",
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjOpenChart",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjSchemeAlgebra",
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjScheme",
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjSchemeProjection",
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjSchemeIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceProjSchemeBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjCoefficients",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjRealization",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjSystem",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjSystem.baseChangeTarget",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjSystem.baseChangeIso",
+   "AlgebraicGeometry.AlgebraicSpace.exists_space_relativeProj_scheme_tests"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeProjSchemeTests.lean",
+  "statement": "theorem exists_space_relativeProj_scheme_tests (S : Scheme.{u}) : ∃ C : SpaceProjCoefficients S, Nonempty (SpaceProjSystem C)",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem asserts the simultaneous scheme-test, uniqueness, base-change and graded-isomorphism package. The auxiliary structures expand its conclusion; they are not extra input hypotheses. Every coefficient comparison is normalized on homogeneous sections or local tensors, and the actual base-change isomorphism is extracted from its specified cartesian square."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e6b63dd0",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read item node, 8 stmt_dep records, Stacks spaces-divisors 084A/084B/084C/085C (ll.2240-2470), the delivered SpaceRelativeProjSchemeTests.lean and every dependency declaration it uses. Every clause is rendered: SpaceProjInput is exactly EtaleGradedModuleAlgebra plus degreewise IsQuasicoherent; p is representable by schemes via IsRepresentable; the scheme test is an IsPullback with yoneda.map relProjHom on an affine GradedAlgebraData that is Γ-linearly identified with Γ(evaluationZariskiRestriction(g^*A_n),V), respecting mul, unit and restriction; naturality goes through schemeBaseChange_normalized; uniqueness is ∃! preserving the compares; base change along f:Y→X is cartesian and normalized on scheme tests, identity, composition and graded isos via moduleTensorPullbackId and moduleTensorComposition (both pinned by ∃! with a tensor formula); graded isos are contravariant, with iso_test against relProjIsoOfIso. All existential data are pinned; the HEq types are definitionally equal; no extra hypotheses; one universe as in the dependency. Edge cases: empty spaces, degree-0-only algebras, A_0≠O_X, identity and non-flat base change. lean.statement verbatim, declarations list complete, stmt_deps unchanged, source/blueprint docstrings and 7-step proof docstring present, sorry only. Advisories: owner nodes of moduleTensorComposition, moduleTensorPullbackId, PullbackData and relProjIsoOfIso (def nodes) and of the evaluation* defs (theorem lem-trf-graded-evaluation-zariski-etale-comparison) are not in stmt_deps (S2 cannot add existing nodes; precedent advisory); SpaceProjGradedIso repeats EtaleGradedModuleAlgebra.Hom with isomorphisms. No compile run (no changes)."
+ }
+}

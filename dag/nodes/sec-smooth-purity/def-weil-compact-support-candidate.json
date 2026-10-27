@@ -52,7 +52,68 @@
  "uses_not_cited": [
   "def-weil-pbc-etale-origin-witness"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
+     "lines": [
+      84,
+      96
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek",
+     "lines": [
+      87,
+      103
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-compact-support-candidate",
@@ -85,9 +146,13 @@
   "note": "Wrote review.md. Checked all ten statement dependencies, source correspondence, canonical comparisons, universes, edge cases, report sections, and verbatim signature. Independent scompile.py compilation passed at both module paths. No fixes needed; branch unchanged."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}$. Let $c=(j,\\bar f)$ be an object of the compactification\ncategory [def-weil-compactifications-refinements] $\\operatorname{Comp}(f)$.\nUsing the finite-torsion coefficient sheaves\n[def-weil-finite-torsion-constructibility] $A$, the derived direct image\n[def-weil-derived-direct-image] $R\\bar f_{*,n}$, and the extension-by-zero\nfunctor [def-weil-extension-by-zero] $j_!$, set\n\n$$\n Rf_{!,n}^{c}=R\\bar f_{*,n}\\,j_!:\n D(X_{\\mathrm{proet}},A)\n \\longrightarrow D(Y_{\\mathrm{proet}},A),\n$$\n\na functor attached to the chosen compactification $c$. Let $\\mathcal\nD^{+}_{\\mathrm{et}}(X,A)\\subseteq D(X_{\\mathrm{proet}},A)$ be the full\nsubcategory of complexes that *come from the etale site* in the sense of the\netale-origin witness of the proper-base-change chapter; it contains the\nfinite-torsion constructible complexes of\n[def-weil-finite-torsion-constructibility] together with their witnesses. On\n$\\mathcal D^{+}_{\\mathrm{et}}(X,A)$ the superscript $c$ may be dropped.\nHere $R\\bar f_{*,n}$ is computed by a K-injective resolution and $j_!$ is\nexact.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes and let $\\Lambda$ be a commutative\ncoefficient ring; the case of interest is a finite-torsion coefficient ring\n$A=A_{E,n}$ of [def-weil-finite-torsion-constructibility]. Let $c=(j,\\bar f)$\nbe a compactification of $f$, i.e. an object of the compactification category\n[def-weil-compactifications-refinements] $\\operatorname{Comp}(f)$. Using the\nderived direct image [def-weil-derived-direct-image] $R\\bar f_{*}$ and the\nextension-by-zero functor [def-weil-extension-by-zero] $j_!$, set\n\n$$\n Rf_{!,n}^{c}=R\\bar f_{*}\\,j_!:\n D(X_{\\mathrm{proet}},\\Lambda)\n \\longrightarrow D(Y_{\\mathrm{proet}},\\Lambda),\n$$\n\na functor attached to the chosen compactification $c$. Here $R\\bar f_{*}$ is\ncomputed by a K-injective resolution and $j_!$ is exact, so it is applied\ntermwise. Let $\\mathcal D^{+}_{\\mathrm{et}}(X,\\Lambda)\\subseteq\nD(X_{\\mathrm{proet}},\\Lambda)$ be the full subcategory of complexes that are\nbounded below of étale origin [def-weil-pbc-etale-origin-witness]; it\ncontains the finite-torsion constructible complexes of\n[def-weil-finite-torsion-constructibility]. The *compact-support candidate*\nattached to $c$ is the restriction of $Rf^c_{!,n}$ to\n$\\mathcal D^{+}_{\\mathrm{et}}(X,\\Lambda)$. On\n$\\mathcal D^{+}_{\\mathrm{et}}(X,\\Lambda)$ the superscript $c$ may be dropped.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

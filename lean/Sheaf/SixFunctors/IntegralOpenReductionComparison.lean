@@ -5,31 +5,14 @@ Authors: SHEAF group Q65
 -/
 module
 
-public import Sheaf.Paper.IntegralComparisonRealizationModels
-public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-public import Sheaf.Paper.SemilinearDerivedSections
-public import Sheaf.Paper.DerivedCompleteOnSlices
-public import Sheaf.SixFunctors.OpenTensorNormalization
-public import Sheaf.Paper.CompletedExtensionZeroComparison
-public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+public import Sheaf.SixFunctors.IntegralOpenReductionDefinitions
+import Sheaf.SixFunctors.OpenSemilinearTensorModel
+import Sheaf.Paper.CanonicalOpenRestrictionModel
+import Sheaf.Paper.OpenRestrictionCompleteness
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
+import Sheaf.SixFunctors.NormalizedOpenSections
+import Sheaf.SixFunctors.IntegralOpenExtensionComplete
 
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.CompletedOpenExchangeTransport
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.SfImmersionCompletedPullbackComparison
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.KoszulReconstruction
-
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Strict reduction and normalized realization of integral open extension
 
@@ -53,10 +36,16 @@ set_option autoImplicit false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
+set_option Elab.async false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] HasDerivedCategory.standard
+  WeilConjectures.IntegralOnSlice.completionUnit WeilConjectures.IntegralOnSlice.completion
+  WeilConjectures.IntegralOnSlice.completionComparison WeilConjectures.IntegralOnSlice.roosUnit
+  WeilConjectures.IntegralOnSlice.augmentation
 
 universe t u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
@@ -67,513 +56,221 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Sheafification in the universe containing both sites and coefficients.
-Source: Stacks 03DA (blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance openAbSheafify : HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t+1)} :=
-  SemilinearSections.abelianSheafify.{t+1, t, max u (t+1)} (ProEt.topology X)
+private def inverseUnitIso
+    {I C D : Type*} [Category* I] [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    (A : I ⥤ C) (B : I ⥤ D) (r : A ⋙ R ≅ B)
+    (h : ∀ i, IsIso (adj.unit.app (A.obj i))) : B ⋙ L ≅ A := by
+  letI (i : I) := h i
+  refine NatIso.ofComponents
+    (fun i ↦ L.mapIso (r.symm.app i) ≪≫ (asIso (adj.unit.app (A.obj i))).symm) ?_
+  intro i k f
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom,
+    NatTrans.comp_app, Functor.comp_map, asIso_inv]
+  apply (cancel_mono (adj.unit.app (A.obj k))).1
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  have hn := adj.unit.naturality (A.map f)
+  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hn
+  rw [hn, IsIso.inv_hom_id_assoc]
+  rw [← L.map_comp, ← L.map_comp]
+  exact congrArg L.map (r.inv.naturality f)
 
-/-- The corresponding local sheafification criterion. Source: Stacks 03DA
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance openAbLocallyBijective :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t+1)} :=
-  SemilinearSections.locallyBijective.{t+1, t, max u (t+1)} (ProEt.topology X)
+private theorem inverseUnitIso_normalization
+    {I C D : Type*} [Category* I] [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    (A : I ⥤ C) (B : I ⥤ D) (r : A ⋙ R ≅ B)
+    (h : ∀ i, IsIso (adj.unit.app (A.obj i))) (i : I) :
+    R.map ((inverseUnitIso adj A B r h).hom.app i) ≫ r.hom.app i =
+      adj.counit.app (B.obj i) := by
+  let := h i
+  change R.map (L.map (r.inv.app i) ≫ inv (adj.unit.app (A.obj i))) ≫ _ = _
+  rw [R.map_comp, Functor.map_inv, adj.inv_map_unit]
+  have hn := adj.counit.naturality (r.inv.app i)
+  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hn
+  have hn' := congrArg (fun f ↦ f ≫ r.hom.app i) hn
+  simp only [Category.assoc, Iso.inv_hom_id_app] at hn'
+  exact (Category.assoc _ _ _).trans
+    (hn'.trans (Category.comp_id (adj.counit.app (B.obj i))))
 
-/-- The actual open object, including the empty open. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev openObject := cbcOpenObject j inferInstance
+private theorem inverse_unit_natural
+    {C D : Type*} [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    {K H : C} (f : K ⟶ H) [IsIso (adj.unit.app H)] :
+    adj.unit.app K ≫ L.map (R.map f) ≫ inv (adj.unit.app H) = f := by
+  have hn := adj.unit.naturality f
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  rw [← Category.assoc, ← hn]
+  simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
-/-- The literal slice-to-open site functor. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev sliceSite := cbcSliceFunctor X (openObject j)
+private theorem realize_counit_composite
+    {C D : Type*} [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    {K H : C} {A B : D} (f : K ⟶ H)
+    (a : R.obj K ⟶ A) (b : A ⟶ B) (c : B ⟶ R.obj H)
+    (h : a ≫ b ≫ c = R.map f) [IsIso (adj.unit.app H)] :
+    (adj.unit.app K ≫ L.map a) ≫ L.map b ≫ L.map c ≫ inv (adj.unit.app H) = f := by
+  simp only [Category.assoc, ← L.map_comp_assoc]
+  rw [h]
+  exact inverse_unit_natural adj f
 
-/-- Continuity of the literal slice presentation. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance sliceContinuous : (sliceSite j).IsContinuous
-    ((ProEt.topology X).over (openObject j)) (ProEt.topology U) :=
-  cbcSliceFunctor_continuous X (openObject j)
-
-/-- The finite coefficient sheaves, with their recorded quotient transitions.
-Source: Stacks 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev rings (T : Scheme.{t}) := integralCoefficientCommRingSheaf l E T
-
-/-- The actual strict quotient maps. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev transitions (T : Scheme.{t}) := coefficientSequenceCommRingTransition l E T
-
-/-- The actual localized semilinear system category. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev SliceSystems := SemilinearSections.Systems.{t+1, t, max u (t+1)}
-  ((ProEt.topology X).over (openObject j))
-  (fun n ↦ (rings l E X n).over (openObject j))
-  (fun n ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}
-    (openObject j)).map (transitions l E X n))
-
-/-- The actual slice coefficient system, not independent finite coefficient choices.
-Source: Stacks 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev sliceRing := SemilinearSections.systemRing.{t+1, t, max u (t+1)}
-  ((ProEt.topology X).over (openObject j))
-  (fun n ↦ (rings l E X n).over (openObject j))
-  (fun n ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}
-    (openObject j)).map (transitions l E X n))
-
-/-- Transport of completed and finite coefficients to the open's actual slice.
-All finite maps are fixed by constant sections, the completed map by its quotient
-projections, and each module equivalence by the concrete continuous pushforward.
-Source: Stacks 098K, 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-structure Coefficients where
-  finiteMap : ∀ n : ℕ, (rings l E X n).over (openObject j) ⟶
-    ((sliceSite j).sheafPushforwardContinuous CommRingCat.{max u (t+1)}
-      ((ProEt.topology X).over (openObject j)) (ProEt.topology U)).obj (rings l E U n)
-  finiteConstants : ∀ (n : ℕ) (V : Over (openObject j)),
-    (toSheafify (ProEt.topology X)
-      ((Functor.const X.ProEtᵒᵖ).obj
-        (CommRingCat.of (ULift.{t+1} (Padic.coefficientExtensionRing l E (n+1)))))).app
-          (op V.left) ≫ (finiteMap n).hom.app (op V) =
-    (toSheafify (ProEt.topology U)
-      ((Functor.const U.ProEtᵒᵖ).obj
-        (CommRingCat.of (ULift.{t+1} (Padic.coefficientExtensionRing l E (n+1)))))).app
-          (op ((sliceSite j).obj V))
-  completedMap : (completedIntegralCommRingSheafUnrestricted l E X).over (openObject j) ⟶
-    ((sliceSite j).sheafPushforwardContinuous CommRingCat.{max u (t+1)}
-      ((ProEt.topology X).over (openObject j)) (ProEt.topology U)).obj
-        (completedIntegralCommRingSheafUnrestricted l E U)
-  projections : ∀ n : ℕ, completedMap ≫
-    ((sliceSite j).sheafPushforwardContinuous CommRingCat.{max u (t+1)}
-      ((ProEt.topology X).over (openObject j)) (ProEt.topology U)).map
-        (completedIntegralCommRingProjectionUnrestricted l E U n) =
-    ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)} (openObject j)).map
-      (completedIntegralCommRingProjectionUnrestricted l E X n) ≫ finiteMap n
-  integral : scalarReductionSource l E U ≌
-    SheafOfModules.{max u (t+1)}
-      ((completedIntegralCoefficientSheafUnrestricted l E X).over (openObject j))
-  integralFunctor : integral.functor = SheafOfModules.pushforward.{max u (t+1)}
-    (F := sliceSite j)
-    ((sheafCompose _ (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
-      completedMap)
-  finite : ∀ n : ℕ, normalizedDVRModules l E U n ≌
-    SheafOfModules.{max u (t+1)} ((integralCoefficientSheaf l E X n).over (openObject j))
-  finiteFunctor : ∀ n : ℕ, (finite n).functor =
-    SheafOfModules.pushforward.{max u (t+1)} (F := sliceSite j)
-      ((sheafCompose _ (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
-        (finiteMap n))
-  [systemContinuous : ((𝟭 ℕ).prod (sliceSite j)).IsContinuous
-    (coefficientSequenceTopology ((ProEt.topology X).over (openObject j)))
-    (coefficientSequenceTopology (ProEt.topology U))]
-  systemMap : sliceRing l E j ⟶
-    (((𝟭 ℕ).prod (sliceSite j)).sheafPushforwardContinuous CommRingCat.{max u (t+1)}
-      (coefficientSequenceTopology ((ProEt.topology X).over (openObject j)))
-      (coefficientSequenceTopology (ProEt.topology U))).obj
-        (coefficientSequenceCommRingSheaf l E U)
-  systemComponents : ∀ (n : ℕ) (V : Over (openObject j)),
-    systemMap.hom.app (op (n, V)) = (finiteMap n).hom.app (op V)
-  systems : coefficientSequenceModules l E U ≌ SliceSystems l E j
-  systemsFunctor : systems.functor =
-    SheafOfModules.pushforward.{max u (t+1)} (F := (𝟭 ℕ).prod (sliceSite j))
-      ((sheafCompose _ (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
-        systemMap)
-
-/-- All coefficient transports are additive, and the strict open extension is the
-section-normalized localized adjunction supplied by semilinear derived sections.
-Source: Stacks 03DI--03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-structure Operations extends Coefficients l E j where
-  [integralAdditive : integral.functor.Additive]
-  [finiteAdditive : ∀ n : ℕ, (finite n).functor.Additive]
-  [systemsAdditive : systems.functor.Additive]
-  openSystems : SemilinearSections.OpenSystems.{t+1, t, max u (t+1)}
-    (ProEt.topology X) (rings l E X) (transitions l E X) (openObject j)
-  transportEvaluation : ∀ n : ℕ,
-    systems.functor ⋙ SemilinearSections.evaluation.{t+1, t, max u (t+1)}
-      ((ProEt.topology X).over (openObject j))
-      (fun k ↦ (rings l E X k).over (openObject j))
-      (fun k ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}
-        (openObject j)).map (transitions l E X k)) n ≅
-      coefficientSequenceEvaluation l E U n ⋙ (finite n).functor
-  transportSections : ∀ (n : ℕ) (M : coefficientSequenceModules l E U)
-    (V : (Over (openObject j))ᵒᵖ)
-    (x : ((systems.functor ⋙ SemilinearSections.evaluation.{t+1, t, max u (t+1)}
-      ((ProEt.topology X).over (openObject j))
-      (fun k ↦ (rings l E X k).over (openObject j))
-      (fun k ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}
-        (openObject j)).map (transitions l E X k)) n).obj M).val.obj V),
-      HEq (((transportEvaluation n).hom.app M).val.app V x) x
-
-attribute [instance] Operations.integralAdditive Operations.finiteAdditive
-  Operations.systemsAdditive
-
-variable (o : Operations l E j)
-
-attribute [instance] SemilinearSections.OpenSystems.extensionAdditive
-  SemilinearSections.OpenSystems.extensionLimits SemilinearSections.OpenSystems.extensionColimits
-
-/-- Ordinary completed-coefficient extension: concrete slice transport followed
-by direct-sum extension and sheafification. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev extension := o.integral.functor ⋙
-  SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
-    (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
-
-/-- The corresponding completed-coefficient restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev restriction := SheafOfModules.localizedSystemRestriction.{t+1, t, max u (t+1)}
-  (completedIntegralCommRingSheafUnrestricted l E X) (openObject j) ⋙ o.integral.inverse
-
-/-- Ordinary extension at the positive finite level. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev finiteExtension (n : ℕ) := (o.finite n).functor ⋙
-  SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
-    (rings l E X n) (openObject j)
-
-/-- Ordinary finite restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev finiteRestriction (n : ℕ) :=
-  SheafOfModules.localizedSystemRestriction.{t+1, t, max u (t+1)}
-    (rings l E X n) (openObject j) ⋙ (o.finite n).inverse
-
-/-- Exact termwise system extension, before taking the derived category.
-Source: Stacks 03DI, 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev systemExtension := o.systems.functor ⋙ o.openSystems.extension
-
-/-- Exact termwise system restriction. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev systemRestriction :=
-  SemilinearSections.openRestriction.{t+1, t, max u (t+1)}
-    (ProEt.topology X) (rings l E X) (transitions l E X) (openObject j) ⋙ o.systems.inverse
-
-/-- Additivity of the constructed open functors. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance extensionAdditive : (extension l E j o).Additive :=
-  letI := o.integralAdditive
-  letI := SheafOfModules.localizedSystemExtensionAdditive.{t+1, t, max u (t+1)}
-    (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
-  inferInstance
-
-/-- Additivity of restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance restrictionAdditive : (restriction l E j o).Additive :=
-  letI := o.integralAdditive
-  inferInstance
-
-/-- Additivity of finite extension. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance finiteExtensionAdditive (n : ℕ) : (finiteExtension l E j o n).Additive :=
-  letI := o.finiteAdditive n
-  letI := SheafOfModules.localizedSystemExtensionAdditive.{t+1, t, max u (t+1)}
-    (rings l E X n) (openObject j)
-  inferInstance
-
-/-- Additivity of strict extension. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance systemExtensionAdditive : (systemExtension l E j o).Additive :=
-  letI := o.systemsAdditive
-  letI := o.openSystems.extensionAdditive
-  inferInstance
-
-/-- Additivity of strict restriction. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance systemRestrictionAdditive : (systemRestriction l E j o).Additive :=
-  letI := o.systemsAdditive
-  inferInstance
-
-/-- Left exactness of extension. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance extensionLimits : PreservesFiniteLimits (extension l E j o) :=
-  letI := SheafOfModules.localizedSystemExtensionLimits.{t+1, t, max u (t+1)}
-    (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
-  inferInstance
-
-/-- Right exactness of extension. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance extensionColimits : PreservesFiniteColimits (extension l E j o) :=
-  letI := SheafOfModules.localizedSystemExtensionColimits.{t+1, t, max u (t+1)}
-    (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
-  inferInstance
-
-/-- Left exactness of termwise system extension. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance systemExtensionLimits : PreservesFiniteLimits (systemExtension l E j o) :=
-  letI := o.openSystems.extensionLimits
-  inferInstance
-
-/-- Right exactness of termwise system extension. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-instance systemExtensionColimits : PreservesFiniteColimits (systemExtension l E j o) :=
-  letI := o.openSystems.extensionColimits
-  inferInstance
-
-/-- The localized ringed open adjunction, retaining the actual summand unit.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
-def ordinaryAdjunction : extension l E j o ⊣ restriction l E j o :=
-  o.integral.toAdjunction.comp
-    (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
-      (completedIntegralCommRingSheafUnrestricted l E X) (openObject j))
-
-/-- The ordinary strict-system adjunction. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-def ordinarySystemAdjunction : systemExtension l E j o ⊣ systemRestriction l E j o :=
-  o.systems.toAdjunction.comp o.openSystems.ordinaryAdjunction
-
-/-- Localized completed extension on unbounded derived categories. Source: Stacks 0GL1
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev shriek := (extension l E j o).mapDerivedCategory
-
-/-- Localized completed restriction. Source: Stacks 0GL1
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev star := (restriction l E j o).mapDerivedCategory
-
-/-- Localized strict-system extension. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev J := (systemExtension l E j o).mapDerivedCategory
-
-/-- Localized strict-system restriction. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev P := (systemRestriction l E j o).mapDerivedCategory
-
-/-- The actual localized open adjunction. Source: Stacks 015F, 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-def openAdjunction : shriek l E j o ⊣ star l E j o :=
-  SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (ordinaryAdjunction l E j o)
-
-/-- The actual localized system adjunction. Source: Stacks 015F, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-def systemAdjunction : J l E j o ⊣ P l E j o :=
-  SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
-    (ordinarySystemAdjunction l E j o)
-
-/-- Termwise extension evaluation with the identity on transported sections.
-Source: Stacks 03DI, 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
-def extensionEvaluation (n : ℕ) :
-    systemExtension l E j o ⋙ coefficientSequenceEvaluation l E X n ≅
-      coefficientSequenceEvaluation l E U n ⋙ finiteExtension l E j o n :=
-  Functor.associator _ _ _ ≪≫
-    isoWhiskerLeft o.systems.functor (o.openSystems.extensionEvaluation n) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    isoWhiskerRight (o.transportEvaluation n)
-      (SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
-        (rings l E X n) (openObject j)) ≪≫
-    Functor.associator _ _ _
-
-open Classical in
-/-- The actual extension generator, including the prescribed slice transport.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
-def extensionSection (M : scalarReductionSource l E U) (V : X.ProEt)
-    (a : V ⟶ openObject j) (x : M.val.obj (op ((sliceSite j).obj (Over.mk a)))) :
-    ((extension l E j o).obj M).val.obj (op V) :=
-  ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
-    ((SheafOfModules.extensionByZeroPresheaf.{max u (t+1)}
-      (completedIntegralCoefficientSheafUnrestricted l E X) (openObject j)).obj
-        (o.integral.functor.obj M))).app (op V)
-    (DirectSum.lof ((completedIntegralCoefficientSheafUnrestricted l E X).obj.obj (op V))
-      (V ⟶ openObject j) (fun b ↦ (o.integral.functor.obj M).val.obj (op (Over.mk b))) a
-        (((eqToHom o.integralFunctor.symm).app M).val.app (op (Over.mk a)) x))
-
-open Classical in
-/-- The same direct-sum generator at a finite quotient coefficient.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
-def finiteExtensionSection (n : ℕ) (M : normalizedDVRModules l E U n) (V : X.ProEt)
-    (a : V ⟶ openObject j) (x : M.val.obj (op ((sliceSite j).obj (Over.mk a)))) :
-    ((finiteExtension l E j o n).obj M).val.obj (op V) :=
-  ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
-    ((SheafOfModules.extensionByZeroPresheaf.{max u (t+1)}
-      (integralCoefficientSheaf l E X n) (openObject j)).obj
-        ((o.finite n).functor.obj M))).app (op V)
-    (DirectSum.lof ((integralCoefficientSheaf l E X n).obj.obj (op V))
-      (V ⟶ openObject j) (fun b ↦ ((o.finite n).functor.obj M).val.obj (op (Over.mk b))) a
-        (((eqToHom (o.finiteFunctor n).symm).app M).val.app (op (Over.mk a)) x))
-
-/-- The canonical open-tensor comparison, fixed on every scalar-extension unit
-of every extension summand. Linearity then fixes all coefficient multiples.
-Source: Stacks 0E8I (blueprint: lem-sf-integral-open-reduction-comparison). -/
-structure TensorComparison where
-  ordinary : ∀ n : ℕ,
-    extension l E j o ⋙ scalarReductionExtension l E X n ≅
-      scalarReductionExtension l E U n ⋙ finiteExtension l E j o n
-  generators : ∀ (n : ℕ) (M : scalarReductionSource l E U) (V : X.ProEt)
-    (a : V ⟶ openObject j) (x : M.val.obj (op ((sliceSite j).obj (Over.mk a)))),
-    ((ordinary n).hom.app M).val.app (op V)
-      (coefficientIntegralScalarUnitSection l E X n ((extension l E j o).obj M) (op V)
-        (extensionSection l E j o M V a x)) =
-    finiteExtensionSection l E j o n ((scalarReductionExtension l E U n).obj M) V a
-      (coefficientIntegralScalarUnitSection l E U n M
-        (op ((sliceSite j).obj (Over.mk a))) x)
-
-/-- The recorded quotient-tower completeness predicate, without a boundedness assumption.
-Source: Bhatt--Scholze 3.5.2 (blueprint: lem-sf-integral-open-reduction-comparison). -/
-abbrev complete (T : Scheme.{t}) : ObjectProperty (DerivedCategory (scalarReductionSource l E T)) :=
-  IntegralOnSlice.IsComplete l E T none
-
-/-- A presentation is normalized by the scalar-adjunction units as one strict
-chain augmentation, and by its transpose for the actual reduction/limit adjunction.
-This fixes the system arrow itself, rather than a lift of its finite evaluations.
-Source: Stacks 06YY, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-def AugmentedPresentation (T : Scheme.{t}) (S : CoefficientDerivedSystemCalculus l E T)
-    (Q : CochainComplex (scalarReductionSource l E T) ℤ)
-    (C : CochainComplex (coefficientSequenceModules l E T) ℤ)
-    (e : S.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj C)
-    (κ : ∀ n : ℕ,
-      ((coefficientSequenceEvaluation l E T n).mapHomologicalComplex (.up ℤ)).obj C ≅
-        ((scalarReductionExtension l E T n).mapHomologicalComplex (.up ℤ)).obj Q) : Prop :=
-  ∃ a : ((Functor.const ℕᵒᵖ : scalarReductionSource l E T ⥤
-      (ℕᵒᵖ ⥤ scalarReductionSource l E T)).mapHomologicalComplex (.up ℤ)).obj Q ⟶
-    ((coefficientSequenceRestriction l E T).mapHomologicalComplex (.up ℤ)).obj C,
-    (∀ (i : ℤ) (n : ℕ) (V : T.ProEtᵒᵖ) (x : (Q.X i).val.obj V),
-      HEq ((((a.f i).app (op n)).val.app V) x)
-        ((((κ n).inv.f i).val.app V)
-          (coefficientIntegralScalarUnitSection l E T n (Q.X i) V x))) ∧
-    (S.adjunction.homEquiv _ _ e.hom =
-      (integralComparisonConstantAdjunction l E T).homEquiv _ _
-        ((Functor.const ℕᵒᵖ : scalarReductionSource l E T ⥤
-          (ℕᵒᵖ ⥤ scalarReductionSource l E T)).mapDerivedCategoryFactors.hom.app Q ≫
-          DerivedCategory.Q.map a ≫
-          (coefficientSequenceRestriction l E T).mapDerivedCategoryFactors.inv.app C))
-
-/-- Representative normalization of one strict system map, including all its
-finite tensor components. Naming this predicate avoids expanding the full
-simultaneous representative construction in every projection of Comparison.
-Source: Stacks 0GL1 and 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-def StrictModel (SX : CoefficientDerivedSystemCalculus l E X)
-    (SU : CoefficientDerivedSystemCalculus l E U) (tensor : TensorComparison l E j o)
-    (r : (complete l E U).ι ⋙ shriek l E j o ⋙ SX.reduction ≅
-      (complete l E U).ι ⋙ SU.reduction ⋙ J l E j o) : Prop :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := ProEt.topology U) (R := completedIntegralCommRingSheafUnrestricted l E U) Q)
-    (_hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite
-      (J := ProEt.topology U) (R := completedIntegralCommRingSheafUnrestricted l E U) (Q.X i))
-    (hcomplete : complete l E U (DerivedCategory.Q.obj Q)),
-    ∃ (hJQ : CochainComplex.IsKFlatIndependentCoefficients
-        (J := ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X)
-        (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q))
-      (C : CochainComplex (coefficientSequenceModules l E U) ℤ)
-      (D : CochainComplex (coefficientSequenceModules l E X) ℤ)
-      (eC : SU.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj C)
-      (eD : SX.reduction.obj (DerivedCategory.Q.obj
-        (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q)) ≅ DerivedCategory.Q.obj D)
-      (κC : ∀ n : ℕ,
-        ((coefficientSequenceEvaluation l E U n).mapHomologicalComplex (.up ℤ)).obj C ≅
-          ((scalarReductionExtension l E U n).mapHomologicalComplex (.up ℤ)).obj Q)
-      (κD : ∀ n : ℕ,
-        ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj D ≅
-          ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj
-            (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q))
-      (f : D ≅ ((systemExtension l E j o).mapHomologicalComplex (.up ℤ)).obj C),
-      CoefficientReductionPresentation l E U SU.toCoefficientDerivedSystemReduction
-        Q hQ C eC κC ∧
-      AugmentedPresentation l E U SU Q C eC κC ∧
-      CoefficientReductionPresentation l E X SX.toCoefficientDerivedSystemReduction
-        (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q) hJQ D eD κD ∧
-      AugmentedPresentation l E X SX
-        (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q) D eD κD ∧
-      (r.hom.app ⟨DerivedCategory.Q.obj Q, hcomplete⟩ ≫ (J l E j o).map eC.hom ≫
-        (systemExtension l E j o).mapDerivedCategoryFactors.hom.app C =
-      SX.reduction.map ((extension l E j o).mapDerivedCategoryFactors.hom.app Q) ≫
-        eD.hom ≫ DerivedCategory.Q.map f.hom) ∧
-      (∀ (n : ℕ) (i : ℤ),
-        (coefficientSequenceEvaluation l E X n).map (f.hom.f i) ≫
-          (extensionEvaluation l E j o n).hom.app (C.X i) ≫
-          (finiteExtension l E j o n).map ((κC n).hom.f i) =
-        (κD n).hom.f i ≫ (tensor.ordinary n).hom.app (Q.X i))
-
-/-- The comparisons of actual strict systems and the actual completion units.
-The representative square is imposed before evaluation; its finite components
-are the generator-normalized open-tensor map. The last equations are the realized
-open unit and counit, as words in the specified adjunction transformations.
-Source: Stacks 0GL1, 0E8I and 0941; node proof Steps 1--10
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
-structure Comparison (SX : CoefficientDerivedSystemCalculus l E X)
-    (SU : CoefficientDerivedSystemCalculus l E U) (tensor : TensorComparison l E j o) where
-  r : (complete l E U).ι ⋙ shriek l E j o ⋙ SX.reduction ≅
-    (complete l E U).ι ⋙ SU.reduction ⋙ J l E j o
-  extensionComplete : ∀ K : (complete l E U).FullSubcategory,
-    complete l E X ((shriek l E j o).obj K.obj)
-  restrictionComplete : ∀ H : (complete l E X).FullSubcategory,
-    complete l E U ((star l E j o).obj H.obj)
-  s : (complete l E X).ι ⋙ star l E j o ⋙ SU.reduction ≅
-    (complete l E X).ι ⋙ SX.reduction ⋙ P l E j o
-  /-- Ordinary restriction is realized by its actual completion unit. -/
-  unitU : ∀ K : (complete l E U).FullSubcategory,
-    K.obj ≅ (coefficientSequenceLimit l E U).obj (SU.reduction.obj K.obj)
-  unitUHom : ∀ K, (unitU K).hom = SU.adjunction.unit.app K.obj
-  unitX : ∀ H : (complete l E X).FullSubcategory,
-    H.obj ≅ (coefficientSequenceLimit l E X).obj (SX.reduction.obj H.obj)
-  unitXHom : ∀ H, (unitX H).hom = SX.adjunction.unit.app H.obj
-  d : (complete l E U).ι ⋙ SU.reduction ⋙ J l E j o ⋙ coefficientSequenceLimit l E X ≅
-    (complete l E U).ι ⋙ shriek l E j o
-  dFormula : ∀ K : (complete l E U).FullSubcategory,
-    d.hom.app K = (coefficientSequenceLimit l E X).map (r.inv.app K) ≫
-      (unitX ⟨(shriek l E j o).obj K.obj, extensionComplete K⟩).inv
-  reductionD : ∀ K : (complete l E U).FullSubcategory,
-    SX.reduction.map (d.hom.app K) ≫ r.hom.app K =
-      SX.adjunction.counit.app ((J l E j o).obj (SU.reduction.obj K.obj))
-  /-- Completed restriction comparison, inverse of its actual reconstruction unit. -/
-  pullRealization : (complete l E X).ι ⋙ SX.reduction ⋙ P l E j o ⋙
-      coefficientSequenceLimit l E U ≅ (complete l E X).ι ⋙ star l E j o
-  pullFormula : ∀ H : (complete l E X).FullSubcategory,
-    pullRealization.hom.app H = (coefficientSequenceLimit l E U).map (s.inv.app H) ≫
-      (unitU ⟨(star l E j o).obj H.obj, restrictionComplete H⟩).inv
-  systemUnit : ∀ K : (complete l E U).FullSubcategory,
-    SU.reduction.map ((openAdjunction l E j o).unit.app K.obj) ≫
-      s.hom.app ⟨(shriek l E j o).obj K.obj, extensionComplete K⟩ ≫
-      (P l E j o).map (r.hom.app K) =
-    (systemAdjunction l E j o).unit.app (SU.reduction.obj K.obj)
-  systemCounit : ∀ H : (complete l E X).FullSubcategory,
-    r.hom.app ⟨(star l E j o).obj H.obj, restrictionComplete H⟩ ≫
-      (J l E j o).map (s.hom.app H) ≫
-      (systemAdjunction l E j o).counit.app (SX.reduction.obj H.obj) =
-    SX.reduction.map ((openAdjunction l E j o).counit.app H.obj)
-  realizedUnit : ∀ K : (complete l E U).FullSubcategory,
-    (unitU K).hom ≫
-      (coefficientSequenceLimit l E U).map
-        ((systemAdjunction l E j o).unit.app (SU.reduction.obj K.obj)) ≫
-      (coefficientSequenceLimit l E U).map ((P l E j o).map (r.inv.app K)) ≫
-      pullRealization.hom.app ⟨(shriek l E j o).obj K.obj, extensionComplete K⟩ =
-    (openAdjunction l E j o).unit.app K.obj
-  realizedCounit : ∀ H : (complete l E X).FullSubcategory,
-    d.inv.app ⟨(star l E j o).obj H.obj, restrictionComplete H⟩ ≫
-      (coefficientSequenceLimit l E X).map ((J l E j o).map (s.hom.app H)) ≫
-      (coefficientSequenceLimit l E X).map
-        ((systemAdjunction l E j o).counit.app (SX.reduction.obj H.obj)) ≫
-      (unitX H).inv = (openAdjunction l E j o).counit.app H.obj
-  /-- One strict chain comparison, before evaluation or realization. -/
-  strictModel : StrictModel l E j o SX SU tensor r
+private theorem comparisonOfModel
+    (hlX : IsUnit (l : Γ(X, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤)))
+    (SX : CoefficientDerivedSystemCalculus l E X)
+    (SU : CoefficientDerivedSystemCalculus l E U)
+    (o : Operations l E j) (tensor : TensorComparison l E j o)
+    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)
+    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)
+    (c : OpenSemilinearTensor.Comparison l E j o SX SU AX AU tensor)
+    (hext : ∀ K, complete l E U K → complete l E X ((shriek l E j o).obj K)) :
+    Nonempty (Comparison l E j o SX SU tensor) := by
+  classical
+  let hInvX (x : X) : Invertible (l : X.residueField x) :=
+    (show IsUnit (l : X.residueField x) from by
+      simpa only [map_natCast] using
+        hlX.map ((X.presheaf.germ ⊤ x (by trivial)) ≫ X.residue x).hom).invertible
+  let hInvU (x : U) : Invertible (l : U.residueField x) :=
+    (show IsUnit (l : U.residueField x) from by
+      simpa only [map_natCast] using
+        hlU.map ((U.presheaf.germ ⊤ x (by trivial)) ≫ U.residue x).hom).invertible
+  let : ∀ x : X, Invertible (l : X.residueField x) := hInvX
+  let : ∀ x : U, Invertible (l : U.residueField x) := hInvU
+  have hX := purNormalizedReconstruction l E X hlX SX
+  have hU := purNormalizedReconstruction l E U hlU SU
+  have hcall := @CanonicalOpenRestriction.canonicalOpenRestrictionModel.{t, u}
+    l ‹Fact l.Prime› E ‹Field E› ‹Algebra ℚ_[l] E› ‹FiniteDimensional ℚ_[l] E›
+    U X j ‹IsOpenImmersion j› o SU SX
+  have hcall' := hcall c.r tensor
+  obtain ⟨s, hmate, _hmodel⟩ := hcall' (by
+    intro Q hQ
+    obtain ⟨cU, cX, hsquare⟩ := c.model Q hQ.1 hQ.2
+    refine ⟨⟨c.kflat Q hQ.1 hQ.2, c.preservesFlatTerms Q hQ.1 hQ.2⟩,
+      _, _, cU.iso, cX.iso, AU.complexEvaluation l E Q,
+      AX.complexEvaluation l E _,
+      OpenSemilinearTensor.ordinaryChain l E j o AX AU c.ordinary Q,
+      cU.presentation, cU.augmentation, cX.presentation, cX.augmentation, hsquare, ?_⟩
+    intro n i
+    exact c.components (Q.X i) n)
+  clear hcall' hcall _hmodel
+  have hc : ∀ H, complete l E X H → complete l E U ((star l E j o).obj H) :=
+    fun H hH ↦ (OpenRestrictionCompleteness.openRestrictionComplete l E j o H hH).1
+  have hsu (K) : SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
+      s.hom.app ((shriek l E j o).obj K) ≫ (P l E j o).map (c.r.hom.app K) =
+        (systemAdjunction l E j o).unit.app (SU.reduction.obj K) := by
+    rw [hmate, ← Category.assoc]
+    rw [show SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
+        ((mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+          (TwoSquare.mk _ _ _ _ c.r.inv)).natTrans.app ((shriek l E j o).obj K)) =
+        (systemAdjunction l E j o).unit.app (SU.reduction.obj K) ≫
+          (P l E j o).map (c.r.inv.app K) from
+      unit_mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+        (TwoSquare.mk _ _ _ _ c.r.inv) K]
+    simp [← Functor.map_comp]
+  have hsc (H) : SX.reduction.map ((openAdjunction l E j o).counit.app H) =
+      c.r.hom.app ((star l E j o).obj H) ≫ (J l E j o).map (s.hom.app H) ≫
+        (systemAdjunction l E j o).counit.app (SX.reduction.obj H) := by
+    rw [hmate]
+    rw [show (J l E j o).map
+        ((mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+          (TwoSquare.mk _ _ _ _ c.r.inv)).natTrans.app H) ≫
+        (systemAdjunction l E j o).counit.app (SX.reduction.obj H) =
+        c.r.inv.app ((star l E j o).obj H) ≫
+          SX.reduction.map ((openAdjunction l E j o).counit.app H) from
+      mateEquiv_counit (openAdjunction l E j o) (systemAdjunction l E j o)
+        (TwoSquare.mk _ _ _ _ c.r.inv) H]
+    simp
+  let di := inverseUnitIso SX.adjunction
+    ((complete l E U).ι ⋙ shriek l E j o)
+    ((complete l E U).ι ⋙ SU.reduction ⋙ J l E j o)
+    (isoWhiskerLeft (complete l E U).ι c.r)
+    (fun K ↦ hX.2 _ (hext _ K.property))
+  let bi := inverseUnitIso SU.adjunction
+    ((complete l E X).ι ⋙ star l E j o)
+    ((complete l E X).ι ⋙ SX.reduction ⋙ P l E j o)
+    (isoWhiskerLeft (complete l E X).ι s)
+    (fun H ↦ hU.2 _ (hc _ H.property))
+  let uU (K : (complete l E U).FullSubcategory) :=
+    @asIso _ _ _ _ (SU.adjunction.unit.app K.obj) (hU.2 _ K.property)
+  let uX (H : (complete l E X).FullSubcategory) :=
+    @asIso _ _ _ _ (SX.adjunction.unit.app H.obj) (hX.2 _ H.property)
+  refine ⟨{
+    r := isoWhiskerLeft (complete l E U).ι c.r
+    extensionComplete := fun K ↦ hext K.obj K.property
+    restrictionComplete := fun H ↦ hc H.obj H.property
+    s := isoWhiskerLeft (complete l E X).ι s
+    unitU := uU
+    unitUHom := fun _ ↦ rfl
+    unitX := uX
+    unitXHom := fun _ ↦ rfl
+    d := di
+    dFormula := fun _ ↦ rfl
+    reductionD := fun K ↦ inverseUnitIso_normalization SX.adjunction _ _ _ _ K
+    pullRealization := bi
+    pullFormula := fun _ ↦ rfl
+    systemUnit := fun K ↦ hsu K.obj
+    systemCounit := fun H ↦ (hsc H.obj).symm
+    realizedUnit := ?_
+    realizedCounit := ?_
+    strictModel := ?_ }⟩
+  · intro K
+    let : IsIso (SU.adjunction.unit.app
+        ((star l E j o).obj ((shriek l E j o).obj K.obj))) :=
+      hU.2 _ (hc _ (hext _ K.property))
+    have ht : (systemAdjunction l E j o).unit.app (SU.reduction.obj K.obj) ≫
+        (P l E j o).map (c.r.inv.app K.obj) ≫
+        s.inv.app ((shriek l E j o).obj K.obj) =
+        SU.reduction.map ((openAdjunction l E j o).unit.app K.obj) := by
+      rw [← hsu K.obj]
+      simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+      erw [(P l E j o).map_id]
+      simp only [Category.id_comp, Iso.hom_inv_id_app]
+      erw [Category.comp_id]
+    dsimp only [bi, inverseUnitIso, NatIso.ofComponents_hom_app, Iso.trans_hom,
+      Iso.symm_hom, Functor.mapIso_hom, asIso_inv, Iso.app_hom, uU, asIso_hom,
+      isoWhiskerLeft_inv, whiskerLeft_app, Functor.comp_obj, ObjectProperty.ι_obj]
+    simp only [← Functor.map_comp_assoc]
+    rw [ht]
+    exact @inverse_unit_natural _ _ _ _ _ _ SU.adjunction K.obj
+      ((star l E j o).obj ((shriek l E j o).obj K.obj))
+      ((openAdjunction l E j o).unit.app K.obj)
+      (hU.2 _ (hc _ (hext _ K.property)))
+  · intro H
+    dsimp only [di, inverseUnitIso, NatIso.ofComponents_inv_app, Iso.trans_inv,
+      Iso.symm_inv, Functor.mapIso_inv, asIso_hom, Iso.app_inv, uX, asIso_inv,
+      isoWhiskerLeft_hom, whiskerLeft_app, Functor.comp_obj]
+    exact @realize_counit_composite _ _ _ _ _ _ SX.adjunction _ H.obj _ _
+      ((openAdjunction l E j o).counit.app H.obj)
+      (c.r.hom.app ((star l E j o).obj H.obj))
+      ((J l E j o).map (s.hom.app H.obj))
+      ((systemAdjunction l E j o).counit.app (SX.reduction.obj H.obj))
+      (hsc H.obj).symm (hX.2 H.obj H.property)
+  · intro Q hQ hf hcomplete
+    obtain ⟨cU, cX, hsquare⟩ := c.model Q hQ hf
+    refine ⟨c.kflat Q hQ hf, _, _, cU.iso, cX.iso,
+      AU.complexEvaluation l E Q, AX.complexEvaluation l E _,
+      OpenSemilinearTensor.ordinaryChain l E j o AX AU c.ordinary Q,
+      cU.presentation, cU.augmentation, cX.presentation, cX.augmentation, hsquare, ?_⟩
+    intro n i
+    exact c.components (Q.X i) n
 
 /-- Strict completed open reduction, its inverse-unit realization, and adjunction
 normalization. Source: Stacks 0GL1, 0E8I and 0941; `fix-prop-coherence`, open factor
 (blueprint: lem-sf-integral-open-reduction-comparison).
-Proof:
-1. On a flat-term K-flat representative the quotient balancing isomorphisms
-make reduction normalized, with every strict transition retained.
-2. Normalized DVR effectivity makes the actual counit invertible. The triangle
-identity, naturality and the augmented quotient Roos triangle then make the
-actual unit invertible on complete objects; an arbitrary reconstruction map
-is never substituted for this unit.
-3. The valuation ring is a Noetherian DVR with finite quotients, and each quotient
-has its length-one finite-free resolution. The completed-constant reduction
-comparison identifies its coefficients with the adic datum. Koszul reconstruction
-identifies its completion map with the same strict augmentation x mapped to x tensor 1.
-4. Completed open extension comparison, on the identity base-change square,
-preserves intrinsic completeness. Koszul reconstruction and the Roos triangle
-return precisely the quotient-tower completeness of the statement.
-5. The slice tensor identity makes extension of each flat term flat. Totalize it;
-restriction and extension are exact and extension preserves the direct sums.
-Hence extension of the flat-term K-flat representative is again K-flat.
-6. Apply the open tensor comparison. Its extension-summand formula is natural in
-every quotient coefficient, so it gives one strict chain isomorphism. Localize
-that map on the simultaneous semilinear models; its evaluations are the canonical
-tensor isomorphisms, and every quotient transition commutes before localization.
-7. Apply total limit to its inverse and then the inverse actual unit. The
-triangle identity and counit naturality give reductionD.
-8. Immersion completed pullback comparison identifies complete restriction with
-ordinary restriction; the same quotient representatives give s and pullFormula.
-9. The summand-unit formula for the open tensor map gives systemUnit in the
-system category itself. Semilinear sections preserve these actual transposes.
-10. Transpose to obtain systemCounit. Reduction and total limit are inverse
-equivalences on complete/normalized objects by effectivity. Transport the two
-equations using reductionD and the actual units; these are realizedUnit and
-realizedCounit. This never infers equality of derived arrows from evaluations. -/
+Proof: choose the two reduction/total-limit calculi with their coherence packages.
+Normalize the semilinear open localization on sections using the identity-block
+case of block repetition. The simultaneous open tensor-model theorem then supplies
+the strict reduction comparison on every flat-term K-flat representative, with its
+specified coefficient components and its augmentation. Quasi-compact open extension
+preserves the actual quotient completeness predicate: its exact termwise functor
+preserves countable products and the uniformizer scalar, hence transports the
+principal-completion construction. Normalized reconstruction makes the actual units
+invertible on complete objects and the actual counits invertible on normalized
+systems. The canonical restriction model supplies the inverse extension mate.
+Restriction preserves completeness. Form inverse-unit realizations pointwise;
+naturality makes them natural isomorphisms, and the mate unit/counit identities
+and the adjunction triangle identities give all strict system and realized
+unit/counit equations. Retain these equations in Comparison; obtain its
+StrictModel directly from the same simultaneous tensor-model representatives.
+No equality of derived morphisms is inferred from their finite evaluations. -/
 theorem integralOpenReductionComparison [QuasiCompact j]
     (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤))) :
     ∃ (SX : CoefficientDerivedSystemCalculus l E X)
@@ -582,6 +279,15 @@ theorem integralOpenReductionComparison [QuasiCompact j]
       (_cU : CoefficientDerivedSystemCoherence l E U SU)
       (o : Operations l E j) (tensor : TensorComparison l E j o),
       Nonempty (Comparison l E j o SX SU tensor) := by
-  sorry
+  classical
+  obtain ⟨SX, ⟨cX⟩⟩ := coefficientDerivedSystemEvaluationCalculus l E X
+  obtain ⟨SU, ⟨cU⟩⟩ := coefficientDerivedSystemEvaluationCalculus l E U
+  obtain ⟨sections, hsections⟩ := normalizedOpenSections l E j
+  obtain ⟨o, AX, AU, tensor, _ho, ⟨c⟩⟩ :=
+    OpenSemilinearTensor.openSemilinearTensorModel l E j _hlX _hlU SX SU cX cU
+      sections hsections
+  exact ⟨SX, SU, cX, cU, o, tensor,
+    comparisonOfModel l E j _hlX _hlU SX SU o tensor AX AU c
+      (integralOpenExtensionComplete l E j _hlX _hlU o)⟩
 
 end WeilConjectures.IntegralOpenReduction

@@ -1,0 +1,319 @@
+{
+ "id": "lem-sf-native-adic-mayer-vietoris-triangle",
+ "kind": "statement",
+ "title": "Derived Mayer-Vietoris triangle for native adic direct image",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], with its extended absolute-value topology [def-weil-l-adic-coefficient-extension]. For every scheme $T$ [def-pc-scheme], on a small representative of $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], let $B_T(W)$ be the continuous functions $|W|\\to\\Omega$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-vector space, with restrictions by precomposition, and put $\\mathcal A(T)=\\operatorname{Mod}(B_T)$ [def-weil-sheaf-of-modules-category]. For a scheme morphism $g:T\\to S$, use the ordinary sheaf direct image with its $B_S$-action induced by precomposition $B_S\\to g_*B_T$, and its total right derived functor $Rg_*$ [def-sfb-right-derived-functor]. For an open immersion $j:U\\hookrightarrow T$ [def-weil-open-immersion], write $j^*$ for restriction of module sheaves to $U_{\\mathrm{proet}}$, and also for its termwise functor on derived categories; here $B_T|_U=B_U$. Let $T=U\\cup V$ be a cover by two open subschemes, let $W=U\\cap V$, let $j_U,j_V,j_W$ denote their inclusions into $T$, and let $g:T\\to S$ be any scheme morphism. For every $C\\in D(\\mathcal A(T))$ there is a distinguished triangle in $D(\\mathcal A(S))$ [def-weil-triangulated-category]\n$$Rg_*C\\longrightarrow R(gj_U)_*(C|_U)\\oplus R(gj_V)_*(C|_V)\\longrightarrow R(gj_W)_*(C|_W)\\longrightarrow (Rg_*C)[1].$$\nHere the first map is the pair of restriction maps induced by the open adjunction units, and the second map is restriction from $U$ minus restriction from $V$. No finiteness or constructibility hypothesis is imposed on $C$ or $g$.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+  "place": "finiteLowerStar_of_openCover, lines 175-243: its K-injective cone construction and open exchange, read as the derived Mayer-Vietoris triangle rather than its finiteness consequence; MayerVietoris.lean, isIso_Q_map_unit_of_isZero."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-open-immersion",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For $Z=U,V,W$, [lem-weil-proetale-weakly-etale-localization](1) identifies $Z_{\\mathrm{proet}}$ with $T_{\\mathrm{proet}}/Z$. Under this equivalence $B_T|_Z=B_Z$: on an object $P\\to Z$, both rings consist of the same locally finite-dimensional continuous functions on $|P|$, with the same operations and restriction maps. This uses the displayed definition of $B$, not the constant-coefficient clause of the localization lemma. Restriction is exact by [lem-sfb-ringed-site-restriction-kflat], so it preserves cohomology and quasi-isomorphisms; its termwise functor therefore represents the restriction on derived categories. Iterated restrictions are sectionwise identities by [def-pur-localized-ringed-site]. Work throughout in a common universe in which these sites are small and coefficient values belong to the module universe.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Restriction to a localized ringed site; lemma-restrict-K-injective-to-open and the localization discussion preceding it; coefficient identification written out by Q32"
+   }
+  },
+  {
+   "text": "For an open inclusion $j:Z\\hookrightarrow T$, ordinary direct image is $(j_*N)(P)=N(P\\times_T Z)$, with scalars restricted along $B_T(P)\\to B_Z(P\\times_T Z)$. The restriction adjunction can be checked directly: a map $\\psi:M|_Z\\to N$ gives the map $M(P)\\to M(P\\times_T Z)\\xrightarrow{\\psi}N(P\\times_T Z)$; conversely evaluate a map $M\\to j_*N$ on objects over $Z$, where $P\\times_T Z=P$. These operations are inverse by naturality. Thus $j^*\\dashv j_*$ has unit the ordinary restriction maps and counit the identity under that identification. The same calculation for nested opens gives the restriction $j_{Z*}(M|_Z)\\to j_{W*}(M|_W)$ when $W\\subseteq Z$. All these maps are linear by the sectionwise module definition [def-weil-sheaf-of-modules-category], and the identities remain true degreewise for complexes and modulo homotopies.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Localization of ringed sites, Section 03DH; explicit verification of the open restriction/direct-image adjunction"
+   }
+  },
+  {
+   "text": "Represent $C$ by a complex $K$ and choose $K\\to I$ K-injective with every $I^n$ injective, using [prop-pur-kinjective-resolutions-exist] for the small ringed site $(T_{\\mathrm{proet}},B_T)$. Thus $QI\\cong C$. By [lem-pur-kinjective-restrict-localized], $I_Z=I|_Z$ is K-injective for $Z=U,V,W$. Its universe requirement is met by regarding site objects, arrows and ring values in the common enlarged universe fixed in step 1. Restriction sends zero maps to zero sectionwise. By exactness from [lem-sfb-ringed-site-restriction-kflat], $K|_Z\\to I_Z$ is a quasi-isomorphism, so $QI_Z\\cong C|_Z$. No truncation of $K$ or $I$ has been made.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Theorem 079P, theorem-K-injective-embedding-grothendieck; localized K-injectivity is sites-cohomology.tex Lemma 08FI, lemma-restrict-K-injective-to-open"
+   }
+  },
+  {
+   "text": "Define complexes on $S_{\\mathrm{proet}}$ by $A=g_*I$, $D=(gj_U)_*I_U\\oplus(gj_V)_*I_V$ and $E=(gj_W)_*I_W$. Define $a:A\\to D$ by the pair of restrictions and $b:D\\to E$ by restriction from $U$ minus restriction from $V$. To check exactness in degree $n$, take any $P\\to S$ in $S_{\\mathrm{proet}}$, put $P_T=P\\times_S T$, and put $P_Z=P_T\\times_T Z$. Base-change stability in [lem-weil-pbc-weakly-etale-composition-base-change] makes all these objects of $T_{\\mathrm{proet}}$. By [lem-weil-pbc-open-immersion-base-change], $P_U,P_V$ are open subschemes of $P_T$; their underlying opens are inverse images of $U,V$, so they cover $P_T$, hence a covering in the pro-etale topology [def-weil-pbc-proetale-site], and its overlap is $P_W$. The sheaf axiom gives injectivity and exactness in the middle of\n$$0\\to I^n(P_T)\\xrightarrow{(r_U,r_V)}I^n(P_U)\\oplus I^n(P_V)\\xrightarrow{r_{UW}-r_{VW}}I^n(P_W)\\to0.$$\nThe arrow $P_W\\to P_U$ is a monomorphism: an arrow to an open subscheme is unique when it exists, as in [lem-weil-proetale-weakly-etale-localization](4). By [lem-pur-ringed-site-injective-mono-restriction], $I^n(P_U)\\to I^n(P_W)$ is surjective. Given $c$ in the last group, lift it to $x$ in $I^n(P_U)$; then $b(x,0)=c$. The displayed sequence is therefore exact at every section. Its maps are $B_S(P)$-linear, and restrictions commute with $d_I$. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category]; thus $0\\to A\\xrightarrow a D\\xrightarrow b E\\to0$ is degreewise short exact in $\\mathcal A(S)$.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BV, lemma-exact-sequence-j-star, sectionwise proof adapted to pro-etale modules and evaluated after g_*; surjectivity is sites-cohomology.tex Tag 093X, lemma-restriction-along-monomorphism-surjective"
+   }
+  },
+  {
+   "text": "All four direct-image functors used in step 4 are additive: they act on sections and on addition of morphisms by precomposition, with the stated scalar restriction. Their sources admit K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. The comparison of [def-sfb-right-derived-functor], whose existence and computation are supplied by [lem-weil-pbc-kinjective-total-derived], therefore identifies\n$$QA\\cong Rg_*C,\\quad QD\\cong R(gj_U)_*(C|_U)\\oplus R(gj_V)_*(C|_V),\\quad QE\\cong R(gj_W)_*(C|_W).$$\nFor the first use $I$; for the other three use $I_U,I_V,I_W$ from step 3. These are unbounded K-injective computations, not an assertion that a merely termwise injective unbounded complex computes a derived functor. The middle identification also uses additivity of the localization $Q$ [def-weil-abstract-derived-category], so it preserves the finite biproduct.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemma-enough-K-injectives-implies and lemma-K-injective-defined"
+   }
+  },
+  {
+   "text": "Check the normalization of the first map. For $j=j_U$ or $j_V$, the exactness of $j^*$ and the adjunction of step 2 imply that $j_*I_Z$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective]. The bijection of [lem-weil-pbc-kinjective-hom-derived] applied to the K-injective targets $I_Z$ and $j_*I_Z$ turns the degreewise adjunction into\n$$\\operatorname{Hom}_{D(B_T)}(QN,Q(j_*I_Z))\\cong\\operatorname{Hom}_{D(B_Z)}(Q(N|_Z),QI_Z).$$\nThe identity of $QI_Z$ corresponds to $Q(I\\to j_*I_Z)$, since its chain-level transpose is the identity of $I_Z$. Hence this is the canonical derived open adjunction unit at $QI$. Both $I$ and $j_*I_Z$ are K-injective. Naturality of the derived comparison in [def-sfb-right-derived-functor] says that applying $Rg_*$ to this map is represented by $g_*(I\\to j_*I_Z)$. Finally $g_*j_*I_Z=(gj)_*I_Z$ sectionwise, including the coefficient action, since precomposition of functions is associative. Using this same complex for both derived computations identifies $Q(a)$ with the pair of required restriction maps; it does not choose an arbitrary comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ, 070I and 070Y: adjoint-preserve-K-injectives, K-injective Hom bijection and normalized derived computation; explicit transpose calculation"
+   }
+  },
+  {
+   "text": "For $k:W\\hookrightarrow Z$, $Z=U,V$, repeat step 6 on $Z$ with $I_Z$ and $I_W$: the underived unit is the restriction to $W$, $k_*I_W$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], and [lem-weil-pbc-kinjective-hom-derived] identifies its transpose with the identity. Naturality of the comparison [def-sfb-right-derived-functor] computes its image under $R(gj_Z)_*$ by the degreewise restriction map. The two termwise composites $(gj_Z)_*k_*I_W=(gj_W)_*I_W$ agree, with the same coefficient action. Thus $Q(b)$ is precisely restriction from $U$ minus restriction from $V$. There is no extra sign in either restriction: on sections $b(x,y)=x|_{P_W}-y|_{P_W}$, so $ba$ is zero because the two restrictions of any section coincide.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y; nested-open version of the explicit adjunction-unit calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the degreewise short exact sequence of step 4 in the abelian category $\\mathcal A(S)$. It gives a distinguished triangle $QA\\xrightarrow{Q(a)}QD\\xrightarrow{Q(b)}QE\\to QA[1]$. Transport it along the isomorphisms of step 5 and their shifts. Being distinguished is invariant under an isomorphism of triangles [def-weil-abstract-derived-category]. Steps 6 and 7 identify the first two arrows, including the minus sign, so this is exactly the triangle in the statement. The argument used only smallness, module sheaf gluing, injective terms and K-injectivity; it imposed no finiteness, constructibility, quasi-compactness or boundedness condition.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; transport of the resulting distinguished triangle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV, lemma-exact-sequence-j-star: its injective-term K-injective proof adapted explicitly to the small pro-etale ringed site with B_T coefficients and ordinary direct image to S; compatible with LowerStar.lean finiteLowerStar_of_openCover, lines 175-243."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris distinguished triangle for derived direct images of pro etale locally finite continuous Qbar l module sheaves under a two open covering",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂ Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃ Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g Mathlib/CategoryTheory/Sites/MayerVietorisSquare",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Triangle",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Triangle'; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ayer.?[Vv]ietoris|finiteLowerStar_of_openCover",
+   "results": "[grep] OK 15 hit(s); Mathlib/Topology/Sheaves/MayerVietoris.lean:8 public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare; Mathlib/Topology/Sheaves/MayerVietoris.lean:12 # Mayer-Vietoris squares; Mathlib/Topology/Sheaves/MayerVietoris.lean:15 we construct the associated Mayer-Vietoris square:; Mathlib/Topology/Sheaves/MayerVietoris.lean:36 a Mayer-Vietoris square. -/; Mathlib/Topology/Sheaves/MayerVietoris.lean:38 noncomputable def mayerVietorisSquare' (sq : Square (Opens T)); Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:19 # Mayer-Vietoris squares; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:22 Mayer-Vietoris sequences in sheaf cohomology. If `X₄` is an open subset; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:30 `GrothendieckTopology.MayerVietorisSquare` which extends `Square C`,; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:32 exact Mayer-Vietoris sequences in sheaf cohomology (TODO).; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:46 Given a Mayer-Vietoris square `S` and a presheaf `P` on `C`,; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean:10 public import Mathlib.CategoryTheory.Sites.MayerVietorisSquare; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean:14 # The Mayer-Vietoris exact sequence in sheaf cohomology; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean:17 Let `S : J.MayerVietorisSquare` be a Mayer-Vietoris square for `J`.; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean:20 In this file, we obtain a long exact Mayer-Vietoris sequence:; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean:38 namespace GrothendieckTopology.MayerVietorisSquare",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward Mayer Vietoris triangle two open subsets sheaves of modules",
+   "results": "[leansearch] OK 8 hit(s); Opens.mayerVietorisSquare Mathlib.Topology.Sheaves.MayerVietoris; SheafOfModules.pushforward_map_val Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous; TopCat.Sheaf.pushforward Mathlib.Topology.Sheaves.Functors; SheafOfModules.pushforwardSections Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout Mathlib.CategoryTheory.Sites.MayerVietorisSquare; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj Mathlib.AlgebraicGeometry.Modules.Sheaf; Opens.mayerVietorisSquare' Mathlib.Topology.Sheaves.MayerVietoris; PresheafOfModules.pushforward₀_obj Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two open cover U V derived direct image of K to direct sum of restrictions to U and V then their intersection forms distinguished triangle for ringed sites",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.GrothendieckTopology.MayerVietorisSquare Mathlib/CategoryTheory/Sites/MayerVietorisSquare; Opens.mayerVietorisSquare Mathlib/Topology/Sheaves/MayerVietoris; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex Mathlib/CategoryTheory/Sites/MayerVietorisSquare; Opens.mayerVietorisSquare' Mathlib/Topology/Sheaves/MayerVietoris; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂ Mathlib/CategoryTheory/Sites/MayerVietorisSquare; TopCat.Sheaf.objSupIsoProdEqLocus Mathlib/Topology/Sheaves/CommRingCat; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃ Mathlib/CategoryTheory/Sites/MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf Mathlib/CategoryTheory/Sites/MayerVietorisSquare",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "mayerVietoris|MayerVietoris|mayer_vietoris",
+   "results": "{\"t\": \"2026-10-22T06:15:11Z\", \"tool\": \"grep\", \"query\": \"mayerVietoris|MayerVietoris|mayer_vietoris\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"51fab83ae552f201\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free abelian sheaf Mayer-Vietoris squares or Ext cohomology; not the derived direct-image triangle for B_T-module complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image triangle for modules on a ringed site covered by two subterminal opens",
+   "results": "{\"t\": \"2026-10-22T06:15:11Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image triangle for modules on a ringed site covered by two subterminal opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"DerivedCategory.triangleOfSES_distinguished\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"DerivedCategory.triangleOfSESδ.congr_simp\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"SheafOfModules.pushforwardComp\", \"DerivedCategory.triangleOfSES\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"0cea71ed1486b7bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic short-exact-complex triangles and scheme structure-sheaf adjunctions; the native pro-etale module triangle still requires the sectionwise construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare, DerivedCategory",
+   "results": "{\"t\": \"2026-10-22T06:15:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image Mayer Vietoris distinguished triangle for sheaves of modules on pro etale sites with a cover by two opens",
+   "results": "{\"t\": \"2026-10-22T06:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived direct image Mayer Vietoris distinguished triangle for sheaves of modules on pro etale sites with a cover by two opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"08369df3d5c822bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free abelian sheaf Mayer-Vietoris squares or Ext cohomology; not the derived direct-image triangle for B_T-module complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings on a site a two open cover gives a distinguished triangle of derived pushforwards using a K injective resolution and alternating restrictions",
+   "results": "{\"t\": \"2026-10-22T06:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of rings on a site a two open cover gives a distinguished triangle of derived pushforwards using a K injective resolution and alternating restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\"], \"digest\": \"b146d3ff1b8dc46f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free abelian sheaf Mayer-Vietoris squares or Ext cohomology; not the derived direct-image triangle for B_T-module complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-affine-finiteness-descent",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package proof, clause 3: the two-open derived triangle used in conditional finite-affine-cover descent of the native proper finiteness input; no imported blueprint ancestor exists.",
+   "via": [
+    "lem-sf-adic-affine-finiteness-descent",
+    "lem-sf-native-weil-proper-sheaf-finiteness",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-mayer-vietoris-triangle",
+  "worker": "stage1",
+  "summary": "Kept the entire statement unchanged. Proved the two-open triangle using an unbounded K-injective representative with injective terms, sectionwise sheaf gluing and injective restriction surjectivity, then the existing short-exact-complex triangle. Verified the first map by the explicit open adjunction transpose and K-injective Hom bijection and the second by nested-open restriction with the required minus sign. Reused existing nodes throughout; no new nodes. All steps are under 2000 characters.",
+  "blueprint": "Realizes the inherited from.place: the two-open derived triangle in conditional finite-affine-cover descent for native proper finiteness (prop-functor-package proof, clause 3). There is no imported blueprint ancestor (blueprint_refs ancestor returns None). The sk-thm-sf-package route and its finiteness input are unchanged; this is the elementary Cech homological tool below that input. Whole-blueprint searches for Mayer and Mayer Vietoris found only different coefficient/space statements, not this native pro-etale triangle.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies an open pro-etale site with a slice; coefficient equality is checked directly, not taken from its constant-coefficient clause."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Only its exactness-of-restriction clause is needed for representatives on opens; no native finiteness assertion supplies this generic site fact."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Preservation of K-injectivity by slice restriction, needed for unbounded derived computations."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Surjectivity of restriction of an injective module sheaf along a site monomorphism, which makes the sectionwise difference map surjective."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Existence and K-injective computation of total unbounded right derived functors; a generic homological tool, not a finiteness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-a62989c4c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-a62989c4c (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. On live and side-live the item is unsplit, statement-only and unreviewed, with no repair note, so the re-split rule does not apply; it is not in the dropped list. Its statement, stmt_deps and blueprint are byte-identical to side-live. The 8 steps faithfully adapt Stacks 08BV (cohomology.tex:8119, read) to the small ringed site (T_proet, B_T) followed by g_*. S1: B_T|_Z=B_Z is checked from the item's definition, using only the site-equivalence clause of the localization node. S2: the explicit open adjunction is correctly marked elementary. S3: K-injective resolution with injective terms (079P via prop-pur), with restriction K-injective (08FI via lem-pur-kinjective-restrict-localized). S4: P_U,P_V cover P_T in the pro-etale topology (affine quasi-compactness); sheaf gluing plus 093X surjectivity along the monomorphism P_W->P_U make the sequence sectionwise exact, with no exactness of g_* assumed. S5: K-injective computation of Rg_* and R(gj_Z)_*. S6/S7: right-adjoint preservation of K-injectives (08BJ) and the Hom bijection pin the unit and the difference-of-restrictions maps. S8: the complex short-exact-sequence triangle (0152) transported along those isomorphisms. Every cited statement says what its step takes from it. Edge cases checked: U=V=T, one open empty, disjoint opens, unbounded C, arbitrary g. Duplicate search over the DAG (Mayer-Vietoris, 08BV, two-open triangles) found only Zariski scheme/ringed-space versions (lem-pc-/lem-sc-derived-mayer-vietoris-triangle, relative-mv-*), none on sites or with B_T coefficients. The declared tool uses (weakly-etale localization, ringed-site restriction exactness, K-injective restriction, injective restriction along a monomorphism, K-injective total derived functor) are generic and accepted. No SGA. Searches cover all three kinds. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NativeAdicMayerVietorisTriangle",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeAdic_mayerVietoris_triangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicDerivedOpenRestriction",
+   "AlgebraicGeometry.ProEtale.adicDerivedOverlapIso",
+   "AlgebraicGeometry.ProEtale.adicMayerVietorisFirst",
+   "AlgebraicGeometry.ProEtale.adicMayerVietorisSecond",
+   "AlgebraicGeometry.ProEtale.nativeAdic_mayerVietoris_triangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NativeAdicMayerVietorisTriangle.lean",
+  "statement": "theorem nativeAdic_mayerVietoris_triangle (l : ℕ) [Fact l.Prime] {X Y U V W : Scheme.{u}} (f : X ⟶ Y) (jU : U ⟶ X) (jV : V ⟶ X) (pU : W ⟶ U) (pV : W ⟶ V) [IsOpenImmersion jU] [IsOpenImmersion jV] [IsOpenImmersion pU] [IsOpenImmersion pV] (_hcov : ∀ x, x ∈ Set.range jU.base ∨ x ∈ Set.range jV.base) (hsq : IsPullback pU pV jU jV) (C : DerivedCategory (AdicSheaf l X)) : ∃ δ : (adicLowerStar l (pU ≫ jU ≫ f)).rightDerivedFunctor.obj ((adicUpperStar l pU).mapDerivedCategory.obj ((adicUpperStar l jU).mapDerivedCategory.obj C)) ⟶ ((adicLowerStar l f).rightDerivedFunctor.obj C)⟦(1 : ℤ)⟧, Triangle.mk (adicMayerVietorisFirst l f jU jV C) (adicMayerVietorisSecond l f jU jV pU pV hsq.w C) δ ∈ distTriang (DerivedCategory (AdicSheaf l Y))",
+  "branch": "sheaf-dag",
+  "by": "Q113",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Native AdicSheaf coefficients and canonical total right derived direct images. The first and second arrows are constructed from ordinary open adjunction units via rightDerivedPullback, with canonical overlap comparison; the boundary is existential. No finiteness or boundedness restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc1f3654",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Node unchanged except lean; the statement is verbatim. Objects match: PadicAlgCl l; adicConstantSheaf sections = locallyFiniteFunctions (same local finite-span condition); AdicSheaf on Scheme.ProEt.topology (def-weil-pbc-proetale-site record); adicLowerStar plus K-injective rightDerivedFunctor; exact adicUpperStar termwise. Arrows canonical: rightDerivedPullback of f_*(unit)≫comp (fac lemmas read), biprod.lift, biprod.desc U − V with adicLowerStarCongr and mapDerivedCategoryCompIso/adicUpperStarCompIso overlap iso; δ existential, distTriang. Cover hypothesis plus IsPullback; the open-immersion instances on pU/pV follow from the pullback; no finiteness; universe u arbitrary. Edge cases checked (empty/equal/disjoint opens, X empty, unbounded C, arbitrary f). No duplicate found. Docstrings carry source, blueprint and all proof steps; only sorry. Advisory: native AdicSheaf/rightDerivedFunctor rather than the recorded ringedSiteModules/rightDerivedFunctorOfQuasiIsoResolutions, accepted on the landed precedent lem-sf-adic-affine-finiteness-descent. No compile: no file changed; worker's compile evidence."
+ }
+}

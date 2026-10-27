@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-epp-weak-solution",
+ "kind": "definition",
+ "title": "Weak Epp solution via normalized tensor branches",
+ "statement": "Let A and B be commutative rings with a ring map A\\to B. Let K,L,H be fields and suppose given compatible algebra structures A\\to K\\to L, A\\to B\\to L, and A\\to K\\to H [def-pc-field-extension]. Put T=(L\\otimes_K H)/\\sqrt{(0)}, where the quotient kills every nilpotent element [def-weil-pbc-module-tensor-product]. Put A_H equal to the integral closure of A in H and B_H equal to the integral closure of B in T [def-weil-pbc-integral-closure]. The canonical map H\\to T, h\\mapsto 1\\otimes h followed by reduction, restricts to f:A_H\\to B_H. Define IsEppWeakSolution(A,B,K,L,H) to mean that H/K is finite-dimensional and, for every maximal ideal q of B_H, the contraction n=f^{-1}(q) is maximal, both (A_H)_n and (B_H)_q are discrete valuation rings [def-sc-discrete-valuation-ring, def-weil-pbc-localization-at-prime], and the images of n and q generate the same ideal of (B_H)_q. For an injective local map of DVRs A\\to B with fraction fields K\\subseteq L, this is the weak-solution condition: every normalized local branch has ramification index one. No residue separability or stability under further extensions is required.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-integral-closure",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09EM (remark-construction) and 09EN (definition-solution): the normalized branch criterion, constructed for compatible ring and field algebras and used for DVR fraction fields."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weak Epp solution finite field extension integral closure reduced tensor product maximal ideals DVR",
+   "results": "[leansearch] OK 8 hit(s): integralClosure.isIntegrallyClosedOfFiniteExtension; TensorProduct.toIntegralClosure; Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced; Ring.instIsIntegrallyClosedNormalClosure; Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct; Ring.NormalClosure; Algebra.IsIntegral.tensorProduct; IsIntegrallyClosed.of_isLocalization_maximal.",
+   "date": "2026-10-24",
+   "verdict": "No weak Epp solution predicate; hits provide only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension is a weak Epp solution if normalized localizations have ramification index one",
+   "results": "[leanfinder] OK 8 hit(s): Algebra.Unramified; Ideal.ramificationIdx_eq_one_of_map_localization; Ideal.ramificationIdx_eq_one_of_isUnramifiedAt; Algebra.isUnramifiedAt_iff_of_isDedekindDomain; Algebra.IsUnramifiedAt; Ideal.ramificationIdx_le_finrank; Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff; Algebra.IsUnramifiedAt.of_liesOver.",
+   "date": "2026-10-24",
+   "verdict": "No weak Epp solution predicate; unramifiedness is a different, stronger condition."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEppWeakSolution|EppWeakSolution|weak.solution (Mathlib RingTheory; lean/WeilConjectures; lean/Sheaf; dag/nodes)",
+   "results": "[grep] OK 0 hit(s) in Mathlib RingTheory. rg in WeilConjectures has no match; Sheaf has only two prose references in EppEssentiallyFiniteTypeTraits.lean. No definition node for weak Epp solutions. Server rg on current dag/nodes and lean/Sheaf for IsEppWeakSolution|EppWeakSolution|def-sfb-epp-weak-solution: no matches. scompile --source Sheaf.RingTheory.EppWeakSolution: Module source unavailable. blueprint_refs.py search weak solution: zero matches.",
+   "date": "2026-10-24",
+   "verdict": "No currently published definition or definition node; supply the shared module at the path requested by the return under brief-stage2 section 1(A)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Weak-solution definition in the historical Epp finite coefficient triple, supporting the algebraic preparation in the inherited direct-image creation chain; the latest direct-image proof does not state Epp.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.EppWeakSolution",
+  "declaration": "IsDiscreteValuationRing.IsEppWeakSolution",
+  "file": "lean/Sheaf/RingTheory/EppWeakSolution.lean",
+  "statement": "def IsEppWeakSolution (A : Type u) (B : Type v) (K : Type f) (L : Type g) (H : Type h) [CommRing A] [CommRing B] [Field K] [Field L] [Field H] [Algebra A B] [Algebra A K] [Algebra B L] [Algebra K L] [Algebra A L] [IsScalarTower A B L] [IsScalarTower A K L] [Algebra K H] [Algebra A H] [IsScalarTower A K H] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-463f7ad21",
+  "group": "Q139",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-463f7ad21",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after the landing return of 6f7e (duplicate IsEppWeakSolution). The def is moved byte-identical into Sheaf.RingTheory.EppWeakSolution under the new def node def-sfb-epp-weak-solution; the theorem module imports it, and the theorem signature, statement, proof and proof_deps are unchanged (diffed vs 6f7e and side-live; only lean and the added stmt_dep differ). lean.statement is verbatim for both nodes. Re-read every clause against the node and Stacks 09F8/09F9: p prime; injective local U→V→W with scalar towers; fraction fields; U,V adically complete, W not; algebraically closed residue field of char p; m_U V=m_V; Module.Finite G J; hcore as range of the canonical ResidueField.map (n=0 harmless); weak solution in Type(max…); char-p clause with finite separable S and a^(p^r)=t, S⊔F(a)=⊤. Def vs 09EM/09EN (read): (L⊗_K H)/nilradical, both integralClosures, canonical codRestrict map with no choice, Finite K H and for every maximal q: maximal comap, both localizations DVR, n·C_q=q·C_q (e=1); the extra conditions are automatic for DVRs, binders general, not hollow. H4: no Mathlib/project predicate; eppNormalizationMap is owned by a downstream theorem node (cycle). Docstrings, sorry-only proof and report sections ok. No compile (no FIX); worker compiled both files clean. Maintainer notes: (1) race: O4 dcca057e, Q16 94e57708 and Q87 393c4a2b also create def-sfb-epp-weak-solution; the O4/Q16 FIX signatures add DVR/IsLocalHom/IsFractionRing binders, so if one lands first this item must rebind (it binds IsLocalHom only for U→V and V→W, not U→W); none has landed yet. (2) The proof cites the dropped lem-per-complete-dvr-finite-normalization; the S1 reviewer accepted it as a tool use, and it is not a stage-2 matter."
+ }
+}

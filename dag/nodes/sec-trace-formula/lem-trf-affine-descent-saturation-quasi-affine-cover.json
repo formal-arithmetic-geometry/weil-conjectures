@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-affine-descent-saturation-quasi-affine-cover",
+ "kind": "statement",
+ "title": "Quasi-affine covering by saturations of affine opens",
+ "statement": "Let $p:A\\to B$ be a flat [def-weil-flat-morphism], surjective [def-weil-surjective-morphism] morphism of finite presentation between affine schemes [def-pc-scheme]; finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\pi:V\\to A$ be a scheme over $A$ with a descent datum $\\phi:V\\times_B A\\xrightarrow{\\sim}A\\times_B V$ satisfying the cocycle $\\phi_{02}=\\phi_{12}\\circ\\phi_{01}$ [def-pd-descent-datum, def-pc-fibre-product]. For an affine open subscheme $C\\subset V$ [def-weil-open-immersion], define $r_C:C\\times_B A\\to V$ as the inclusion into $V\\times_B A$, followed by $\\phi$ and the projection to $V$, and put $W_C=\\operatorname{im}(|r_C|)\\subset |V|$. Assume $\\pi$ is separated [def-weil-proper-morphism] and locally quasi-finite [pqf-def-quasifinite]. Then $W_C$ is open and quasi-compact [def-weil-pbc-quasi-compact-scheme], $C\\subseteq W_C$, and the induced morphism from the open subscheme $W_C$ to $A$ is quasi-affine [def-nagata-quasi-affine-morphism]. As $C$ ranges through all affine opens of $V$, these $W_C$ form an open covering of $V$. No quasi-compactness or local finite-presentation hypothesis on $\\pi$ is imposed. All schemes and families lie in the universes of [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph, construction of W from an affine W^1, its openness, quasi-compactness, covering and quasi-affineness (old steps 3 and 5)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-nagata-quasi-affine-morphism",
+  "def-weil-size-convention",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the transport cocycle and transport_self of [def-pd-descent-datum] to construct the involution i of R = V ×_B A with i followed by pr_V equal to D.toHom. The universal transport formula proves that i followed by D.toHom is pr_V; the two pullback projections then show i² = 1. Thus D.toHom is the composite of an isomorphism and pr_V, which is open by [lem-weil-pbc-flat-lfp-open]. The inclusion C ×_B A → R is an open immersion by [lem-weil-pbc-open-immersion-base-change], so the range of its composite with D.toHom is open.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  },
+  {
+   "text": "The affine scheme $C$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Since $p$ is quasi-compact, its base change $C\\times_BA\\to C$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3), and its source is quasi-compact by (2) of that node. The continuous image $W_C$ is quasi-compact: pull an open covering of $W_C$ back along the surjection $|C\\times_BA|\\to W_C$, take a finite subcover, and use surjectivity to obtain a finite subcover of $W_C$. This proves quasi-compactness as a space, without any quasi-compactness hypothesis on $V$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  },
+  {
+   "text": "The diagonal lift C → C ×_B A sends a point to itself and its structural A-point. Its composite with the pullback inclusion is the lift of (C.ι, C.ι ≫ π) into V ×_B A. The universal transport formula of [def-pd-descent-datum], followed by transport_self, identifies its composite with D.toHom with C.ι. Evaluating this equality on points proves C ⊆ W_C. All maps are the canonical maps of [def-pc-fibre-product].",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  },
+  {
+   "text": "The open immersion W_C.ι is separated by [def-weil-open-immersion], [def-weil-closed-immersion] and [def-weil-proper-morphism]. Since π is separated, Mathlib’s composition instance gives separatedness of W_C.ι ≫ π (equivalently, the closed diagonal restricts to the open subscheme).",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  },
+  {
+   "text": "Apply Scheme.Hom.isLocallyQuasiFinite_iff from WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison to the Stacks-sense hypothesis [pqf-def-quasifinite]. This gives Mathlib local quasi-finiteness and local finite type, using [lem-weil-pbc-lqf-locally-finite-type]. Both are preserved by composition with the open immersion W_C.ι. Step 2 supplies CompactSpace W_C; the affine target A is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence] gives quasi-compactness of W_C → A. Apply [lemma-nagata-quasi-affine-morphism-of-quasi-finite] to this morphism.",
+   "uses": [
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "pqf-def-quasifinite",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  },
+  {
+   "text": "The affine-open basis [lem-weil-pbc-affine-opens-basis] gives iSup_affineOpens_eq_top. By step 3 each affine open is contained in its saturation, so monotonicity of the supremum proves that the W_C have supremum top. This argument includes the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph",
+  "note": "G2: Lean proof follows the cited saturation argument, expressing the descent isomorphism by its transport-induced relation involution and using Mathlib composition instances for open restrictions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "saturat.*descent|descent.*saturat|quasiAffine.*image|image.*quasiAffine",
+   "results": "{\"t\": \"2026-10-22T05:59:27Z\", \"tool\": \"grep\", \"query\": \"saturat.*descent|descent.*saturat|quasiAffine.*image|image.*quasiAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"deb138d9cdf365d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturating affine opens under a scheme descent datum gives quasi-affine quasi-compact opens covering a separated locally quasi-finite scheme",
+   "results": "{\"t\": \"2026-10-22T05:59:27Z\", \"tool\": \"leansearch\", \"query\": \"Saturating affine opens under a scheme descent datum gives quasi-affine quasi-compact opens covering a separated locally quasi-finite scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.Scheme.openCover_affineOpenCover\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.Scheme.AffineOpenCover\"], \"digest\": \"e2d24fbb3818d32a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"QuasiAffine\"",
+   "results": "{\"t\": \"2026-10-22T05:59:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"QuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat surjective finite presentation morphism A to B of affine schemes and a separated locally quasi-finite A-scheme with descent datum, saturations of affine opens form a quasi-compact quasi-affine open covering",
+   "results": "{\"t\": \"2026-10-22T05:59:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat surjective finite presentation morphism A to B of affine schemes and a separated locally quasi-finite A-scheme with descent datum, saturations of affine opens form a quasi-compact quasi-affine open covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\"], \"digest\": \"527569765ca659f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an affine open under a faithfully flat descent relation is an open quasi-compact neighbourhood and is quasi-affine over the affine cover",
+   "results": "{\"t\": \"2026-10-22T05:59:39Z\", \"tool\": \"leanfinder\", \"query\": \"The image of an affine open under a faithfully flat descent relation is an open quasi-compact neighbourhood and is quasi-affine over the affine cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\"], \"digest\": \"3b3c0e236aed59e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturations of affine open subschemes under faithfully flat descent data cover a separated locally quasi-finite scheme by quasi-compact quasi-affine opens",
+   "results": "{\"t\": \"2026-10-22T07:34:51Z\", \"tool\": \"leanfinder\", \"query\": \"Saturations of affine open subschemes under faithfully flat descent data cover a separated locally quasi-finite scheme by quasi-compact quasi-affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\"], \"digest\": \"01f9af8a4b684aaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*descent|descent.*saturat|quasiAffine.*image|image.*quasiAffine",
+   "results": "{\"t\": \"2026-10-22T07:35:18Z\", \"tool\": \"grep\", \"query\": \"saturat.*descent|descent.*saturat|quasiAffine.*image|image.*quasiAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"deb138d9cdf365d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Under a flat surjective affine cover the images of affine opens by a scheme descent relation are quasi-compact quasi-affine opens",
+   "results": "{\"t\": \"2026-10-22T07:35:19Z\", \"tool\": \"leansearch\", \"query\": \"Under a flat surjective affine cover the images of affine opens by a scheme descent relation are quasi-compact quasi-affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"8e4be2ae8c3ce1f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"QuasiAffine\"",
+   "results": "{\"t\": \"2026-10-22T07:35:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"QuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an fppf morphism of affine schemes and a separated locally quasi-finite scheme with descent datum, an affine open has an open quasi-affine quasi-compact saturation",
+   "results": "{\"t\": \"2026-10-22T07:36:08Z\", \"tool\": \"leanfinder\", \"query\": \"For an fppf morphism of affine schemes and a separated locally quasi-finite scheme with descent datum, an affine open has an open quasi-affine quasi-compact saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\"], \"digest\": \"68f5360374fe4915\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separated-lqf-fppf-effective-descent",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The geometric quotient-presentation support for the local-term specialization chain: Tag 0265, first and third representability steps, applications of effective fppf descent to the base changes of t and of the relation monomorphism j. In the supporting Tag 02W8 proof: construction of W from an affine W^1, its openness, quasi-compactness, covering and quasi-affineness (old steps 3 and 5).",
+   "via": [
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-affine-descent-saturation-quasi-affine-cover",
+  "worker": "stage1",
+  "summary": "Read Stacks 02W8 and its 01UA and Zariski-main inputs. Split the saturation construction into openness, quasi-compact image, diagonal normalization and containment, separated open restriction, quasi-affineness, and covering. Reused existing DAG nodes throughout; no new node or statement change. Distinguish Stacks locally quasi-finite from the weaker Mathlib predicate.",
+  "blueprint": "The geometric quotient-presentation support for the local-term specialization chain: Tag 0265, first and third representability steps, applications of effective fppf descent to the base changes of t and of the relation monomorphism j. In the supporting Tag 02W8 proof: construction of W from an affine W^1, its openness, quasi-compactness, covering and quasi-affineness (old steps 3 and 5).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic open-restriction lemma supplies local quasi-finiteness of W_C to A; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic implication for the Stacks finite-type notion, needed for the quasi-affineness theorem; this unit has no replacement."
+   },
+   {
+    "node": "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "why": "Generic separated quasi-finite quasi-affineness theorem explicitly invoked by Stacks 02W8; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-35c8ec0e1",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-35c8ec0e1 (reviewer sub-agent of L); spot-checked: Read the item in full against Stacks more-morphisms.tex Tag 02W8 (lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph) and lemma-quasi-finite-separated-quasi-affine, which needs no hypothesis on S. The delivery has no new nodes; statement and stmt_deps are kept; proof_deps equals the union of step uses; nothing cites SGA. Step 1: q is the base change of p along V->B and is open by lem-weil-pbc-flat-lfp-open; j is an open immersion by lem-weil-pbc-open-immersion-base-change; W_C=q(phi(j(...))). Step 2: quasi-compactness via the affine-qcqs node and permanence (3) then (2), plus a continuous image. Step 3 (elementary): pulling phi back along the diagonal gives e with e=e∘e, so e=1 and C⊆W_C; checked. Step 4 (elementary): the separated open restriction is a few lines, the same argument as in the a1 sibling. Step 5: lqf restriction, lft and permanence (1) with A quasi-separated give the four hypotheses of lemma-nagata-quasi-affine-morphism-of-quasi-finite. Step 6: covering from the affine basis. Edge cases checked: trivial datum V=A gives W_C=p^{-1}p(C), quasi-affine; V empty; V not quasi-compact. No cycle (closure checked). No duplicate: the sibling lem-trf-descent-saturation-invariant-open covers cocycle restriction and is different. Accepted tool_uses: lem-weil-pbc-lqf-restriction-to-opens, lem-weil-pbc-lqf-locally-finite-type, lemma-nagata-quasi-affine-morphism-of-quasi-finite (generic scheme lemmas). Maintainer note: lem-a1-separated-lqf-fpqc-effective-descent (sk-p-real-rankin) generalizes the parent's singleton-cover case; this is not a fault of this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDescentSaturationQuasiAffineCover",
+  "declaration": "CategoryTheory.Over.DescentDatum.affine_descent_saturation_quasi_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDescentSaturationQuasiAffineCover.lean",
+  "statement": "theorem affine_descent_saturation_quasi_affine_cover {A B : Scheme.{u}} [IsAffine A] [IsAffine B] (p : A ⟶ B) [Flat p] [Surjective p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] {V : Over A} (D : Over.DescentDatum p V) [IsSeparated V.hom] (_hπ : V.hom.IsLocallyQuasiFinite) : ∃ W : V.left.affineOpens → V.left.Opens, (∀ C : V.left.affineOpens, (W C : Set V.left) = Set.range (pullback.map (C.1.ι ≫ V.hom ≫ p) p (V.hom ≫ p) p C.1.ι (𝟙 A) (𝟙 B) (by simp) (by simp) ≫ D.toHom) ∧ IsCompact (W C : Set V.left) ∧ C.1 ≤ W C ∧ IsQuasiAffineHom ((W C).ι ≫ V.hom)) ∧ (⨆ C : V.left.affineOpens, W C) = ⊤",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6368bd5f",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 02W8 clause by clause. Only the lean record differs from the live node; lean.statement appears verbatim in the module. r_C = pullback.map(C.ι,𝟙,𝟙) ≫ D.toHom, with toHom = pr_V∘φ (orientation checked in DescentDatum.lean:127); W C is pinned by equality to Set.range of r_C, so not hollow. Hypotheses: p Flat/Surjective/LFP/QC/QS on affines; π IsSeparated plus the Stacks IsLocallyQuasiFinite (includes finite type); nothing extra on π. Conclusions: Opens, IsCompact, C ≤ W C, IsQuasiAffineHom ((W C).ι ≫ V.hom), ⨆ = ⊤. Same expression and hypotheses as the sibling lem-trf-descent-saturation-invariant-open module. Edge cases checked: empty V, empty C, identity p, non-qc V, empty B. No duplicate found. Docstrings carry the source place and blueprint tag; the proof is sorry only; the report has both sections. Advisories: IsCompact vs the recorded CompactSpace (equivalent); three proof-only plain imports. No compile, since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261023T105014-L-3475859",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,289 @@
+{
+ "id": "lem-zl-derived-section-pairing-coherence",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Canonical derived section pairing from adapted resolutions and its coherence",
+ "statement": "Let $\\mathcal C$ be a site small relative to its module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of commutative rings, $W$ an object and $A=\\mathcal O(W)$. Let $E(M)=M(W)$ on module sheaves [def-weil-sheaf-of-modules-category] be exact and preserve all small colimits. Assume the actual section pairings $E(M)\\otimes_AE(N)\\to E(M\\otimes_{\\mathcal O}N)$ [def-pur-sheaf-tensor-product], with unit $A\\to E(\\mathcal O)$ the identity, are isomorphisms satisfying the ordinary symmetric monoidal diagrams. Assume every unbounded complex $K$ admits a quasi-isomorphism $P\\to K$ with flat terms, with both $P$ and $E(P)$ K-flat [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Write $G=D(E)$ for termwise localization on the ordinary derived categories [def-weil-abstract-derived-category]. The section pairings induce a canonical natural transformation\n$$c_{K,L}:G(K)\\otimes_A^L G(L)\\longrightarrow G(K\\otimes_{\\mathcal O}^L L).$$\nIt is normalized on every pair of flat-term K-flat complexes $P,Q$ by the composite from the derived tensor of $E(P),E(Q)$ to their ordinary total tensor (the canonical derived-to-ordinary comparison), then the section pairing into $E(\\operatorname{Tot}(P\\otimes Q))$, and the canonical sheaf K-flat model comparison. This specifies the comparison independently of all resolutions, natural for arbitrary derived morphisms, not just chain maps. For every pair of complexes the ordinary total section pairing is a chain isomorphism, with degree $n$ component\n$$\\bigoplus_{p+q=n}P^p(W)\\otimes_AQ^q(W)\\xrightarrow{\\sim}(\\bigoplus_{p+q=n}P^p\\otimes_{\\mathcal O}Q^q)(W),$$\ncommuting with $d_P\\otimes1+(-1)^p1\\otimes d_Q$ [def-pc-tensor-complex-sheaves]. On adapted resolutions as above both evaluated complexes are K-flat, so $c_{K,L}$ is an isomorphism. With the prescribed derived constraints [lem-sf-ringed-derived-closed-symmetric-monoidal], these maps and $A[0]\\to G(\\mathcal O[0])=A[0]$ satisfy associativity, symmetry and both unit diagrams. On representatives the diagrams are respectively unsigned reassociation of $(p,q,r)$, $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$, and scalar multiplication; localization preserves their equalities. No claim that $E$ preserves every K-flat complex is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), canonical tensor comparison, unbounded computation and coherence; Stacks Tags 06YU (sites-cohomology.tex, definition-derived-tor) and 0FPT (lemma-symmetric-monoidal-derived); adapted-resolution formulation without preservation of every K-flat complex"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-module-pure-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Write $t$ for direct-sum total tensor and $b_{P,Q}:t(E(P),E(Q))\\to E(t(P,Q))$ for the ordinary total section map. In degree $n$ take the direct sum of the assumed section isomorphisms in bidegrees $p+q=n$, followed by the coproduct comparison for $E$. Both maps are isomorphisms by the hypotheses. Naturality of the section pairing with respect to $d_P$ and $d_Q$, and additivity of evaluation, give $b(d_Px\\otimes y+(-1)^px\\otimes d_Qy)=E(d)(b(x\\otimes y))$. Thus $b$ is the asserted chain isomorphism for arbitrary complexes, natural for cochain maps. This calculation uses no flatness or boundedness.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Let $Q_{\\mathcal O}$ and $Q_A$ denote cochain localizations; view $A$-modules as module sheaves on the one-object point site. Exactness of $E$ identifies $H^n(E(K))$ with $E(H^nK)$, since $E$ preserves kernels, images and their quotients. Hence it preserves quasi-isomorphisms, and the localization universal property gives $G$ and its termwise factorization $GQ_{\\mathcal O}\\cong Q_AE$. Let $\\mathcal P$ be the full cochain subcategory of flat-term K-flat sheaf complexes. Its two-variable restriction is fully faithful on functor categories by the cochain model rigidity theorem. No assertion about $E(\\mathcal P)$ being K-flat is made here.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Use the canonical lax tensorator $m^A_{U,V}:Q_AU\\otimes_A^LQ_AV\\to Q_At(U,V)$ of native localization; it is natural for all complexes, and invertible when either input is K-flat. On $P,Q\\in\\mathcal P$ define a transformation from $(K,L)\\mapsto GK\\otimes_A^LGL$ to $(K,L)\\mapsto G(K\\otimes_{\\mathcal O}^LL)$ by\n$$m^A_{E(P),E(Q)}\\ ;\\ Q_A(b_{P,Q})\\ ;\\ G(r_{P,Q}),$$\nwith the termwise factorization inserted, where $r_{P,Q}:Q_{\\mathcal O}t(P,Q)\\xrightarrow{\\sim}Q_{\\mathcal O}P\\otimes_{\\mathcal O}^LQ_{\\mathcal O}Q$ is the fixed K-flat model comparison. All three factors are natural on this cochain subcategory. Fullness in Step 2 extends this transformation to $c$ on derived categories, and faithfulness gives uniqueness. In particular this is the prescribed normalization on every flat-term K-flat pair, including pairs whose evaluations are not known to be K-flat. Naturality for arbitrary derived arrows is part of this extension, rather than an assertion only for chain maps.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "For any $K,L$, choose the adapted quasi-isomorphisms $P\\to K$, $Q\\to L$ in the hypotheses. Then $P,Q\\in\\mathcal P$ and $E(P),E(Q)$ are K-flat. The first factor of Step 3 is invertible by the native localization theorem, the second by Step 1, and the third is a functor applied to an isomorphism. Therefore $c_{Q_{\\mathcal O}P,Q_{\\mathcal O}Q}$ is invertible. Naturality along the two localized resolution isomorphisms conjugates this component to $c_{K,L}$, so every component is invertible. Two choices of resolutions give this same already defined natural transformation by the uniqueness in Step 3. Only the selected adapted resolutions are used for this invertibility argument.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Check associativity on $P,Q,R\\in\\mathcal P$. Their two total tensors are again flat-term K-flat representatives by the total-tensor model lemma, so Step 3 computes the inner and outer comparisons in both routes. Cancel the source K-flat model comparisons using compatibility of native localization with associators. The lax associativity equation for $m^A$ reduces the two routes to localization of the ordinary $b$ associativity square. On each summand $(p,q,r)$ that square is the assumed ordinary section-pairing associativity square, with unsigned reassociation $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$. Coproduct universality gives equality of chain maps. The differential is $d_P+(-1)^pd_Q+(-1)^{p+q}d_R$ in both parenthesizations. Thus the derived associativity equation holds on these triples. Every derived object is isomorphic to a localized representative in $\\mathcal P$; naturality conjugates the equation to arbitrary triples. These are precisely the prescribed derived associators of the closed symmetric monoidal theorem.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "For symmetry, on bidegree $(p,q)$ both routes through the ordinary $b$ square apply the assumed ordinary sheaf symmetry and multiply by $(-1)^{pq}$. Evaluation preserves this integer scalar; hence the square commutes. The native localization braiding compatibility and the prescribed derived Koszul symmetry identify its localization with the braided equation for $c$. For the left and right unit diagrams use $\\mathcal O[0]$, a flat-term K-flat complex since tensoring with it is the identity, and $E(\\mathcal O[0])=A[0]$. The ordinary diagrams both send $a\\otimes x$ or $x\\otimes a$ to $ax$, by the assumed section unit and its ordinary coherence. The localization unit comparison is invertible and compatible with both unitors, so Step 3 gives the same two derived unit equations with unit map the identity $A[0]\\to G(\\mathcal O[0])$. As in Step 5, conjugation by representative isomorphisms extends these equations to all inputs. Together with Step 4 these equations make $G$ strong symmetric monoidal.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding construction); Tag 0FPT (lemma-symmetric-monoidal-derived); ordinary section calculation in Hemo–Richarz–Scholbach Lemma 4.1(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact cocontinuous strong symmetric monoidal evaluation functor with adapted K-flat resolutions induces the canonical coherent strong symmetric monoidal functor on unbounded derived categories",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "No match: exact derived functor localization and total tensor infrastructure do not construct or normalize this section comparison with adapted resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, DerivedCategory",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: exact derived functor localization and total tensor infrastructure do not construct or normalize this section comparison with adapted resolutions."
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]onoidal|[Tt]ensor",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: exact derived functor localization and total tensor infrastructure do not construct or normalize this section comparison with adapted resolutions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical section tensor pairing descends on K-flat resolutions and preserves the Koszul symmetry and unit in derived categories",
+   "results": "unavailable: service unavailable: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the section pairing of total tensor complexes gives a natural derived tensor comparison normalized by the derived-to-ordinary map and coherent with associativity Koszul signs and scalar units",
+   "results": "8 hits; IsLocalizedModule.map_lTensor, HomologicalComplex.ιTensorObj, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+   "date": "2026-10-22",
+   "verdict": "No match: exact derived functor localization and total tensor infrastructure do not construct or normalize this section comparison with adapted resolutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact cocontinuous strong symmetric monoidal sections functor induces a coherent tensor comparison on unbounded derived categories using adapted K-flat resolutions",
+   "results": "8 hits; CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "monoidal|tensor",
+   "results": "0 hits; ; subdirectory Algebra/Homology/DerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"monoidal\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact symmetric monoidal evaluation functor induces a strong symmetric monoidal functor between unbounded derived categories normalized by K-flat tensor representatives",
+   "results": "8 hits; CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.ExactPairing.ofFaithful, CategoryTheory.exactPairingOfFaithful, CategoryTheory.exactPairingOfFullyFaithful, CategoryTheory.symmetricCategoryOfFullyFaithful, CategoryTheory.ExactPairing.evaluation', CategoryTheory.ExactPairing.evaluation, CategoryTheory.Pi.δ_def",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|fullyFaithfulWhiskeringLeft|tensorBifunctor",
+   "results": "23 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a natural section tensor pairing gives a resolution independent map between derived tensor products compatible with associators Koszul braidings and scalar units",
+   "results": "8 hits; CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.id_tensorHom_id, CategoryTheory.Localization.Monoidal.id_tensorHom, CategoryTheory.Localization.Monoidal.tensorHom_id, CategoryTheory.Localization.Monoidal.μ, CategoryTheory.Localization.Monoidal.β_hom_app, CategoryTheory.Localization.Monoidal.triangle_aux₂, CategoryTheory.Localization.Monoidal.tensorBifunctor",
+   "date": "2026-10-22",
+   "verdict": "No exact match: inspected ordinary monoidal localization, exact derived functors and bounded-resolution Tor do not give this normalized sections comparison under the adapted-resolution hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-contractible-derived-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 8-9.",
+   "via": [
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-derived-section-pairing-coherence",
+  "worker": "stage1",
+  "summary": "Constructed the comparison on all flat-term K-flat cochain representatives using the ordinary total section isomorphism and the native localization lax tensorator, descended it by existing cochain model rigidity, and used only adapted resolutions to prove invertibility. Wrote associativity, Koszul symmetry and both scalar unit equations explicitly. No new nodes or statement changes.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 8-9. Steps 1–6 supply the ordinary total calculation and derived coherence formerly in parent steps 8–9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of exact termwise evaluation; the unit has no separate localization theorem."
+   },
+   {
+    "node": "lem-sf-cochain-tensor-model-rigidity",
+    "why": "Generic fully faithful restriction along flat-term K-flat cochain representatives, giving existence and uniqueness on all derived morphisms."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Native localization lax tensorator and its compatibility with associator, braiding and both unitors; needed before knowing evaluations are K-flat."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of flat-term K-flat representatives under total tensor, used for iterated comparisons."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The prescribed ordinary derived constraints explicitly referenced in the item statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-ddbcf15d4",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-ddbcf15d4 (reviewer sub-agent of L); spot-checked: I read the item's full statement and all 6 steps, every cited node's statement, HRS 2305.18131 Lemma 4.1(1) with its proof (pdftotext), and Stacks sites-cohomology 0FPT (lemma-symmetric-monoidal-derived, whose proof is Omitted). The delivery is one commit: the item plus the report, no new nodes. The statement is byte-identical to the one Q27 created; I checked it against the Q27 packet. stmt_deps is unchanged. This is an ordinary split of a node Q27 made in its re-split, not an answer to a re-split note itself. Steps 1-6 keep all of old parent steps 8-9. Step 1 (elementary, correctly marked): the degree-n total section map is the sum of the assumed pairing isomorphisms followed by E's coproduct comparison, invertible because E preserves colimits. The differential d_P⊗1+(-1)^p 1⊗d_Q matches def-pc-tensor-complex-sheaves. Step 2: exact E preserves quasi-isomorphisms, so the localization universal property gives G with GQ_O≅Q_A E. lem-sf-cochain-tensor-model-rigidity states word for word that precomposition with q×q is fully faithful for every target category. Step 3: m^A;Q_A(b);G(r) is natural on flat-term K-flat pairs, and fullness and faithfulness give c, its uniqueness and naturality for all derived arrows. The arrows point the right way, and the definition does not need E(P) to be K-flat. Step 4: on adapted resolutions m^A is invertible because E(P) is K-flat; this is the native-tensor node's either-input clause. b and r are invertible, and conjugating along the resolutions gives every component. Step 5: t(P,Q) stays in the flat-term K-flat class by lem-pur-kflat-total-tensor-model. The native-tensor node states that its comparisons preserve the associator. The remaining square is the assumed ordinary one, unsigned. The extension to all triples is valid because every triple is isomorphic to representatives and both sides are natural. Step 6: the symmetry sign is (-1)^{pq} on both sides. O[0] is flat and K-flat, and E(O[0])=A[0] with unit the identity. The unit squares are scalar multiplication. Edge cases tested: zero ring and zero complex, complexes unbounded in both directions, negative degrees, non-adapted pairs. Duplicate check: lem-sfb-exact-tensor-functor-derived-normalization and -braiding need preservation of K-flat complexes and a left adjoint, and go in the oplax direction. lem-pd-section-derived-tensor-normalization and lem-pd-section-kflat-tensor-comparison are about the condensed equivalence E_T. Neither pair is a duplicate. No SGA. Accepted tool_uses: lem-weil-pbc-localization-universal-property, lem-sf-cochain-tensor-model-rigidity, lem-sf-ringed-derived-native-tensor, lem-pur-kflat-total-tensor-model and lem-sf-ringed-derived-closed-symmetric-monoidal, all generic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.DerivedSectionPairingCoherence",
+  "declaration": "CategoryTheory.DerivedSectionPairing.derived_section_pairing_coherence",
+  "declarations": [
+   "CategoryTheory.DerivedSectionPairing.evaluation",
+   "CategoryTheory.DerivedSectionPairing.evaluation_additive",
+   "CategoryTheory.DerivedSectionPairing.onComplexes",
+   "CategoryTheory.DerivedSectionPairing.TotalPairing",
+   "CategoryTheory.DerivedSectionPairing.TotalPairingFormula",
+   "CategoryTheory.DerivedSectionPairing.Comparison",
+   "CategoryTheory.DerivedSectionPairing.Normalization",
+   "CategoryTheory.DerivedSectionPairing.Symmetry",
+   "CategoryTheory.DerivedSectionPairing.UnitNormalization",
+   "CategoryTheory.DerivedSectionPairing.derived_section_pairing_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/DerivedSectionPairingCoherence.lean",
+  "statement": "theorem derived_section_pairing_coherence [PreservesColimitsOfSize.{max c v u, max c v u} (evaluation.{c, v, u} J R W)] (ordinary : (evaluation.{c, v, u} J R W).CoreMonoidal) (_hpair : ∀ (M N : RingedTensorModules.{c, v, u} J R) (x : M.val.obj W) (y : N.val.obj W), (ordinary.μIso M N).hom (x ⊗ₜ[R.obj.obj W] y) = CochainPullback.moduleTmul M N W x y) (_hunit : ordinary.εIso.hom = 𝟙 _) (_hsym : ∀ M N : RingedTensorModules.{c, v, u} J R, (ordinary.μIso M N).hom ≫ (evaluation.{c, v, u} J R W).map (β_ M N).hom = (β_ ((evaluation.{c, v, u} J R W).obj M) ((evaluation.{c, v, u} J R W).obj N)).hom ≫ (ordinary.μIso N M).hom) (_hadapted : ∀ K : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ, ∃ (P : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) (f : P ⟶ K), QuasiIso f ∧ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∧ (∀ p : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X p)) ∧ (HomologicalComplex.quasiIso (ModuleCat.{max c v u} (R.obj.obj W)) (.up ℤ)).kFlat ((onComplexes.{c, v, u} J R W).obj P)) (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R)) (T : CoefficientTensorModels.{u, c, v, w} J R S) (β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _ S.monoidal) (H : RingedDerivedTensorCoherence.{c, v, u, w} J R S T β) : ∃ b : TotalPairing.{c, v, u} J R W, TotalPairingFormula.{c, v, u} J R W b ∧ ∃! m : Comparison.{c, v, u, w, z} J R W S, Normalization.{c, v, u, w, z} J R W S T b m ∧ Symmetry.{c, v, u, w, z} J R W S β m ∧ UnitNormalization.{c, v, u, w, z} J R W S T β H m",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "H2 repair of returned head 892b3af548dd: cite the landed definition node def-pur-module-pure-tensor and its existing CochainPullback.moduleTmul construction. The ordinary pairing is fixed elementwise on every pure tensor by _hpair, with no theorem dependency used solely for a plain definition. The mathematical node statement is unchanged. Source and target derived-category morphism universes w and z are independent. CoreMonoidal contains naturality for all derived arrows, invertibility, associativity and both unit diagrams; the separate predicates specify normalization, Koszul symmetry and the identity section unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad41efb9d",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Re-delivery of 892b (H2 RETURN). Diff vs 892b: only _hpair (now elementwise μIso(x⊗ₜy)=CochainPullback.moduleTmul M N W x y), stmt_dep lem-zl-partition-section-tensor-flat→def-pur-module-pure-tensor, and imports (PartitionSectionTensorFlat dropped; ModuleTensorGenerators, SiteCoveringAxioms added); statement text and proof unchanged. def-pur-module-pure-tensor is landed in the base (existing:true, Q125, 2026-10-23; in the blueprint index). moduleTmul is a real def (sheafification unit then tensorObjIsoSheafification.inv); pure tensors determine the linear map, so _hpair pins the actual section pairing with no new hypothesis; the tensor object (cochainModulesMonoidal = monoidalCategory) and the max c v u universe match. Other clauses re-read with no fault: exactness and all small colimits, adapted K-flat resolutions only, natural chain-iso TotalPairing with formula, ∃! CoreMonoidal comparison, Normalization on every flat-term K-flat pair, Koszul Symmetry, identity unit; edge cases covered; docstrings, sorry-only proof and verbatim lean.statement OK. No compile run (no file changed); worker reports clean 5.8 s/6.0 s. Advisories: statement text does not cite [def-pur-module-pure-tensor]; second-reading section is a self-check."
+ }
+}

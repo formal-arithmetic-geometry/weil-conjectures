@@ -1,0 +1,439 @@
+{
+ "id": "lem-sfb-direct-image-hom-open-ext",
+ "kind": "statement",
+ "title": "Direct-image internal-Hom comparison on open Ext groups",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes [def-pc-scheme]. Use the unbounded derived categories $D(\\mathcal O_X),D(\\mathcal O_Y)$ of module sheaves [def-pc-derived-category], derived direct image $Rf_*$ [def-pc-derived-direct-image], and derived internal Hom $R\\mathcal Hom$ [def-pur-derived-internal-hom]. For $E,N\\in D(\\mathcal O_X)$, let $c_{E,N}:Rf_*R\\mathcal Hom_X(E,N)\\to R\\mathcal Hom_Y(Rf_*E,Rf_*N)$ be the canonical evaluation-mate comparison of [lem-pc-sheaf-rhom-projection-formula]. For every open $V\\subseteq Y$, put $U=f^{-1}V$ and $g=f|_U:U\\to V$. Under the canonical open-restriction comparisons for $Rf_*$ and $R\\mathcal Hom$, the restriction of $c_{E,N}$ is $c^g_{E|_U,N|_U}$. For every integer $q$, under the canonical identifications\n$$H^q(V,Rf_*R\\mathcal Hom_X(E,N))\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(E|_U,N|_U[q]),$$\n$$H^q(V,R\\mathcal Hom_Y(Rf_*E,Rf_*N))\\cong\\operatorname{Hom}_{D(\\mathcal O_V)}(Rg_*(E|_U),Rg_*(N|_U)[q]),$$\nthe map $H^q(V,c_{E,N})$ sends $u$ to $Rg_*u$, using the canonical shift comparison of the exact derived functor $Rg_*$. These identities are natural in $E,N$ and compatible with restriction to smaller opens. Here $H^q(V,A)=H^q(R\\Gamma(V,A))$ [def-pc-open-module-derived-sections]. No adjunction with $Rf_*$ as left adjoint, quasi-coherence, boundedness, or compactness hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0B69 (cohomology-remark-projection-formula-for-internal-hom), evaluation construction; open Ext and restriction normalization expanded using lemma-section-RHom-over-U, lemma-restriction-RHom-to-U, lemma-restrict-direct-image-open and lemma-Leray-unbounded in the same document."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "lem-pc-sheaf-rhom-projection-formula",
+  "def-pc-open-module-derived-sections",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-n3-open-base-change-comparisons",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-sfb-direct-image-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Lf^*$, $G=Rf_*$, $H_T(A,B)=R\\mathcal Hom_T(A,B)$, and $e_T$ for the canonical uncurrying bijection. Let $\\varepsilon:FG\\to1$ be the pullback/direct-image counit and $t:F(A\\otimes B)\\cong FA\\otimes FB$ the canonical monoidal comparison. The cited comparison is characterized as follows: for $a:A\\to GH_X(E,N)$ its composite with $c_{E,N}$ uncurries on $Y$ to the adjoint of\n$$F(A\\otimes GE)\\xrightarrow{t}FA\\otimes FGE\\xrightarrow{1\\otimes\\varepsilon_E}FA\\otimes E\\xrightarrow{e_X(\\operatorname{adj}^{-1}(a))}N.$$\nIndeed its evaluation transpose is relative cup product followed by $G$ of evaluation, as in Tag 0B69. Applying the adjunction formula to relative cup product gives exactly these three arrows. Thus this formula specifies the already given canonical comparison, rather than a new choice of it. The monoidal model also supplies the unit isomorphism $l:F1_Y\\cong1_X$ and its unit laws.",
+   "uses": [
+    "lem-pc-sheaf-rhom-projection-formula",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-derived-pullback-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B69 (remark-projection-formula-for-internal-hom), remark-cup-product, Tag 079W (lemma-adjoint), Tag 079U (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Let $r_X,r_Y$ be restriction to $U,V$, respectively, and $F_0=Lg^*$, $G_0=Rg_*$. Use the direct-image restriction isomorphism $r_YG\\cong G_0r_X$ and the internal-Hom restriction isomorphisms. Restrict the three-arrow formula of Step 1. Uncurrying commutes with restriction by the closed-monoidal restriction statement. For the canonical comparisons here, its equation is also read directly from the defining componentwise uncurrying: restriction sends $a\\otimes v\\mapsto\\phi(a)(v)$ to the same formula on the smaller open; the unit map is likewise unchanged. This pins the comparison to the canonical internal-Hom restriction isomorphism, rather than to unspecified witnesses. For the middle arrow the cited counit equation is exactly\n$$F_0(b_K);\\varepsilon_{0,r_XK}=d_{GK};r_X(\\varepsilon_K),$$\nwhere $b:r_YG\\cong G_0r_X$ and $d:F_0r_Y\\cong r_XF$ are the canonical open comparisons (semicolon means composition in order). The first arrow also agrees: the monoidal model defines it on every K-flat tensor summand by the ordinary pullback tensor map, and restricting that map simply restricts both entries and their coefficients. The last arrow agrees by preservation of uncurrying. Substituting the counit equation therefore turns the restricted formula into precisely Step 1 for $g,E_U,N_U$. Injectivity of the adjunction and uncurrying bijections proves $r_Y(c_{E,N})=c^g_{E_U,N_U}$ with the stated source and target comparisons.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-open-restriction-closed-monoidal",
+    "lem-pc-t2-open-counit-compatibility",
+    "def-pc-derived-pullback-monoidal-model",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), Tag 08DL (lemma-restriction-RHom-to-U), Tags 08HY and 079U (open counit and tensor comparisons)"
+   }
+  },
+  {
+   "text": "The natural Leray isomorphism of abelian presheaves gives\n$$H^q(V,GH_X(E,N))\\cong H^q(U,H_X(E,N)).$$\nApply the open Ext comparison to the right hand side to get $\\operatorname{Hom}(E_U,N_U[q])$. Apply the same Ext comparison on $Y$ to $(GE,GN)$ to get $\\operatorname{Hom}((GE)_V,(GN)_V[q])$, and then the direct-image restriction isomorphisms to identify this with $\\operatorname{Hom}(G_0E_U,G_0N_U[q])$. These are exactly the two isomorphisms in the statement; the cited presheaf statements already include all integer degrees, naturality and smaller-open restriction compatibility. It remains to compute the map under them.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5W (lemma-Leray-unbounded), Tag 08DK (lemma-section-RHom-over-U), Tag 08FE (lemma-restrict-direct-image-open)"
+   }
+  },
+  {
+   "text": "Fix the canonical degree-zero section convention. For any scheme $T$ and $B\\in D(\\mathcal O_T)$, a cycle $s\\in\\Gamma(T,I(B)^0)$ gives the chain map $1_T[0]\\to I(B)$ taking $1$ to $s$. Boundaries give homotopies, and the K-injective localization bijection identifies its class with a unique arrow $\\gamma_T(B)([s]):1_T\\to B$. This defines the canonical section-to-unit-Hom identification.\nFor its compatibility with open Ext, choose a K-flat representative $P$ of $E$ using the resolution theorem, and a K-injective representative $J$ of $N$. The cited Hom theorem says $C=\\mathcal Hom^\\bullet(P,J)$ is K-injective; by the definition it represents $H_T(E,N)$. Thus a class $x\\in H^0(T,H_T(E,N))$ is a global degree-zero cycle $\\phi$ of $C$, namely a chain map $P\\to J$. The canonical Ext comparison of Tag 08DK sends $x$ to $u=Q\\phi$. Meanwhile $\\gamma_T(H_T(E,N))(x)$ is represented by the map $1_T[0]\\to C$ taking $1$ to $\\phi$. The defining componentwise uncurrying equation sends this map on the summand $1_T^0\\otimes P^p$ to $a\\otimes v\\mapsto a\\phi^p(v)$. Consequently\n$$e_T(\\gamma_T(H_T(E,N))(x))=u\\circ\\lambda_E.$$\nAll representatives have the hypotheses required by the cited statements. This computation fixes the canonical conventions; existence of abstract additive equivalences alone would not fix them.",
+   "uses": [
+    "def-pc-open-module-derived-sections",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08DK (cohomology-lemma-section-RHom-over-U), 08DJ (cohomology-lemma-internal-hom), 06YS (sites-cohomology-lemma-K-flat-resolution), and 0A96 (sites-cohomology-lemma-RHom-from-K-flat-into-K-injective); explicit unit-summand calculation"
+   }
+  },
+  {
+   "text": "We spell out the normalization needed in degree zero. For $B\\in D(\\mathcal O_X)$, let $x\\in H^0(Y,GB)$ correspond by Leray to $y\\in H^0(X,B)$. Under the canonical section-to-unit-Hom identifications, write $a:1_Y\\to GB$ and $b:1_X\\to B$. Then\n$$\\operatorname{adj}^{-1}(a)=b\\circ l,\\qquad a=G(b)\\circ\\operatorname{adj}(l).$$\nHere is a representative check, avoiding any assertion that $f_*$ preserves K-injectives. Choose a K-injective representative $J$ of $B$. The cited sections-acyclicity theorem makes $\\Gamma(Y,f_*J)=\\Gamma(X,J)$ compute both sides of Leray. A degree-zero cycle $s$ defines the map $1_X[0]\\to J$ taking $1$ to $s$; the same cycle on $Y$ defines $1_Y[0]\\to f_*J$. Under the ordinary module pullback adjunction the latter transposes to the former composed with $f^*1_Y\\cong1_X$. Localization yields the displayed equation for the derived adjunction: the unit sheaf in degree zero is K-flat (tensoring with it is the identity), and the target is K-injective, so the derived adjunction uses this same ordinary chain map. Boundaries are chain homotopies; the K-injective localization bijection identifies their classes. Thus this is the canonical Leray comparison, not merely some additive bijection. The section-to-Hom convention is the explicit canonical one fixed in Step 4.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-global-sections-direct-image-kinjective-acyclic",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pc-derived-pullback-monoidal-model",
+    "def-pc-open-module-derived-sections",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5W (lemma-Leray-unbounded), Tag 079W (lemma-adjoint), Tag 0D5T (lemma-derived-pushforward-composition); sectionwise unit normalization"
+   }
+  },
+  {
+   "text": "First work over the whole spaces and with $q=0$. Put $B=H_X(E,N)$ and let the class corresponding to $u:E\\to N$ give $b:1_X\\to B$ and $a:1_Y\\to GB$. By the canonical unit calculation of Step 4,\n$$e_X(b)=u\\circ\\lambda_E,$$\nwhere $\\lambda_E:1_X\\otimes E\\cong E$. Substitute $\\operatorname{adj}^{-1}(a)=b\\circ l$ from Step 5 into Step 1. Naturality of uncurrying and the strong monoidal unit law reduce the adjoint's argument to\n$$F(1_Y\\otimes GE)\\xrightarrow{F\\lambda_{GE}}FGE\\xrightarrow{\\varepsilon_E}E\\xrightarrow{u}N.$$\nCounit naturality says $u\\circ\\varepsilon_E=\\varepsilon_N\\circ FG(u)$. Since $\\operatorname{adj}(v)=G(v)\\circ\\eta$ and $G(\\varepsilon_E)\\circ\\eta_{GE}=1_{GE}$, the adjoint of this composite is $G(u)\\circ\\lambda_{GE}$. Uncurrying and the canonical unit calculation on $Y$ therefore identify the output with $G(u)$. This calculation uses only the pullback-left/direct-image-right adjunction; no right adjoint of $G$ occurs.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pc-derived-pullback-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B69 (remark-projection-formula-for-internal-hom), Tag 08DJ (lemma-internal-hom), Tag 079W (lemma-adjoint); explicit unit and counit calculation"
+   }
+  },
+  {
+   "text": "For arbitrary $q\\in\\mathbf Z$, use $H_X(E,N)[q]\\cong H_X(E,N[q])$ and the analogous isomorphism on $Y$, and $G(N[q])\\cong(GN)[q]$. The cited unbounded right-derived functor theorem supplies the last shift comparison; it applies both to direct image and to derived sections. The comparison $c$ respects these identifications: in its three-arrow defining formula, shift the target $N$; evaluation becomes evaluation into $N[q]$, the counit becomes its shifted counit, and the tensor comparison has unchanged source factors. Equivalently, on the Hom-complex model the degree-$q$ cocycle is the chain map to the shifted target, so this is the right-shift internal-Hom comparison. Thus the degree-$q$ map is the degree-zero calculation of Step 6 with target $N[q]$, followed by $G(N[q])\\cong(GN)[q]$. It sends $u:E\\to N[q]$ to $G(u)$ with exactly that shift comparison. Apply this calculation to $g$ and use Steps 2–3 to obtain the claimed formula over every $V$.",
+   "uses": [
+    "lem-pur-derived-internal-hom-shift-right",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pur-derived-internal-hom",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DK (lemma-section-RHom-over-U), Tag 08DJ (lemma-internal-hom), Tag 0B69; right-shift Hom-complex construction, sites-cohomology.tex Section 0A8X"
+   }
+  },
+  {
+   "text": "For $t:E'\\to E$, $s:N\\to N'$ the represented Ext morphism is $s[q]\\circ u\\circ t$. Functoriality gives $G_0(s)[q]\\circ G_0(u)\\circ G_0(t)$ after the natural shift comparison. This proves the asserted two-variable naturality. For $W\\subseteq V$, the presheaf Leray and Ext comparisons commute with restriction. The direct-image restriction isomorphism is natural in the arrow $u$, so under those comparisons restricting $Rg_*u$ is exactly $R(g|_{f^{-1}W})_*(u|_{f^{-1}W})$. For successive restrictions the sectionwise identities $f^{-1}W\\subseteq f^{-1}V$ compose; restriction of a section twice is its direct restriction. The corresponding canonical derived comparisons are induced by these same identities, hence their intermediate inverse factors cancel. This gives compatibility with every smaller open, including identity and empty restrictions.",
+   "uses": [
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DK, 08DL, 08FE and 0D5W; naturality and successive open restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-rhom-projection-formula",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-pullback-monoidal-model",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-open-restriction-closed-monoidal",
+  "lem-pc-t2-open-counit-compatibility",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-trf-open-ext-hypercohomology-comparison",
+  "def-pc-open-module-derived-sections",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0B69 evaluation construction with Tags 08DK, 08DL, 08FE, 0D5W and 079W; explicit unit/counit and open-restriction normalization written by N6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom pushforward comparison followed by a supplied counit induces composition on Hom groups over every open",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(pushforward|directImage)|(pushforward|directImage).*internalHom",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image internal Hom comparison induces the pushforward map on Ext groups and commutes with restriction to open subsets",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CategoryTheory.Abelian.Ext.mapExactFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Functor.mapExtAddHom_coe, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mk₀_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation mate of derived pushforward on internal Hom, open restriction and action on global Ext",
+   "results": "8 hits: LightCondensed.ihom_map_val_app, CategoryTheory.Sheaf.H, LightCondensed.ihomPoints_apply, CategoryTheory.Abelian.extFunctor_map_app, LightCondensed.ihomPoints, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|internalHom",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Over.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|internalHom.*(pushforward|directImage)|(pushforward|directImage).*internalHom",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived pushforward, Ext for exact functors, cartesian closed categories or condensed modules; none gives the unbounded ringed-space derived comparison and its open Ext normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image internal Hom evaluation mate acts on Ext groups by pushforward and commutes with open restriction",
+   "results": "{\"t\": \"2026-10-23T13:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image internal Hom evaluation mate acts on Ext groups by pushforward and commutes with open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"LightCondensed.ihom_map_val_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"d6104acc09744dac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
+   "results": "{\"t\": \"2026-10-23T13:46:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"CategoryTheory.Monoidal.Reflective.monoidalClosed\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\"], \"digest\": \"c458cd4b44ac3020\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(pushforward|directImage)|(pushforward|directImage).*internalHom",
+   "results": "{\"t\": \"2026-10-23T13:46:58Z\", \"tool\": \"grep\", \"query\": \"internalHom.*(pushforward|directImage)|(pushforward|directImage).*internalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For unbounded complexes of sheaves of modules the pushforward internal Hom comparison induces the direct image of derived morphisms over each open",
+   "results": "{\"t\": \"2026-10-23T13:46:59Z\", \"tool\": \"leansearch\", \"query\": \"For unbounded complexes of sheaves of modules the pushforward internal Hom comparison induces the direct image of derived morphisms over each open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_map_val\", \"TopCat.Sheaf.pushforward\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"SheafOfModules.pushforwardNatIso_hom\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\"], \"digest\": \"fddc7551d1972d09\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|internalHomComparison|map.*[Ee]xt|[Ee]xt.*map",
+   "results": "{\"t\": \"2026-10-23T13:47:54Z\", \"tool\": \"grep\", \"query\": \"ihomComparison|internalHomComparison|map.*[Ee]xt|[Ee]xt.*map\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\"], \"digest\": \"2e849d6818f650cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoidal left adjoint and its right adjoint the evaluation mate on internal Hom induces the functor map on morphisms from the tensor unit",
+   "results": "{\"t\": \"2026-10-23T13:47:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a monoidal left adjoint and its right adjoint the evaluation mate on internal Hom induces the functor map on morphisms from the tensor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.leftAdjointMate\", \"CategoryTheory.leftAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.leftAdjointMate_comp_evaluation\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.Functor.ihom_coev_app\", \"CategoryTheory.rightAdjointMate\", \"CategoryTheory.ihom.coev\", \"CategoryTheory.exp.coev\"], \"digest\": \"4698d37ce9281b16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison",
+   "results": "{\"t\": \"2026-10-23T13:48:57Z\", \"tool\": \"grep\", \"query\": \"ihomComparison\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardSections_unitHomEquiv|homEquiv_pullbackObjUnitToUnit",
+   "results": "{\"t\": \"2026-10-23T13:48:57Z\", \"tool\": \"grep\", \"query\": \"pushforwardSections_unitHomEquiv|homEquiv_pullbackObjUnitToUnit\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"d0814eeac2184847\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module pushforward, cartesian/rigid closed categories or elementary monoidal maps; none states the unbounded ringed-space derived-Hom comparison and open Ext normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-local-duality-adjunction",
+  "date": "2026-10-23",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Zariski local criterion for a trace-defined derived adjunction. Supporting computation: the internal-Hom direct-image comparison on open Ext groups, before the local-to-global argument.",
+   "via": [
+    "lem-sfb-zariski-local-duality-adjunction",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-direct-image-hom-open-ext",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and all statement dependencies. Reused existing open Ext, Leray, closed restriction and counit-normalization tools; wrote the unit test of the evaluation mate and its all-integer shift calculation. No new nodes or Mathlib leaves. No exact project attachment found. On resumption explicitly pinned the section/unit normalization by its cycle representative; reused existing K-flat resolution and K-injective Hom nodes.",
+  "blueprint": "The inherited from.node is null (blueprint_refs ancestor also prints None). The inherited place traces det-thm-sf-ctf-stability-direct-images (3), through the local duality-adjunction prerequisite. The latest blueprint at literature/blueprint/latest, commit 7284bb09daf97437d544c51882b325f9c52cd345, now gives proper direct image, quasi-compact open direct image and compactification in proof (3), rather than the older alteration argument recorded in the inherited place. This item supplies its already assigned generic ringed-space comparison prerequisite, without editing or replacing the current unit route. Whole-blueprint searches found no exact copy.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-rhom-projection-formula",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint-general",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-open-restriction-closed-monoidal",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-t2-open-counit-compatibility",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-unbounded-direct-image-section-presheaf",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-open-ext-hypercohomology-comparison",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-global-sections-direct-image-kinjective-acyclic",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-right",
+    "why": "Generic unbounded module-sheaf homological algebra used for the evaluation-mate/open Ext calculation; the constructible direct-image stability unit supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Choose a K-flat representative to compute canonical global Ext by a K-injective Hom complex. This is a generic module-sheaf tool; the constructible-stability unit provides no substitute."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Ensure the Hom-complex representative used for the normalization computes derived sections without another resolution. This is a generic module-sheaf tool; the constructible-stability unit provides no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-rhom-projection-formula",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-open-restriction-closed-monoidal",
+  "lem-pc-t2-open-counit-compatibility",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-trf-open-ext-hypercohomology-comparison",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-a7de1f22e",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a7de1f22e (reviewer sub-agent of L); spot-checked: Ordinary first split. The live item is still unsplit with no repair note. The statement and stmt_deps are unchanged against live, there are no new nodes, no SGA is cited, and proof_deps equals the union of the step uses. I read the Stacks source at Tag 0B69 (remark-projection-formula-for-internal-hom), remark-cup-product, 08DK (with its proof), 08DL, 08FE, 0D5W and 0D5X. Step by step: (1) the three-arrow formula t, 1⊗ε, e_X(adj⁻¹a) is the transpose of Stacks' cup product followed by Rf_*(ev); I recomputed it. (2) The counit equation of lem-pc-t2-open-counit-compatibility matches the one displayed in the step symbol by symbol (b: r_Y G≅G_0 r_X, d: Lf_0^* r_Y≅r_X Lf^*). The existential witnesses of the closed-monoidal restriction node are pinned through the componentwise uncurrying definition. (3) The Leray and 08DK presheaf nodes cover every degree, naturality and restriction. (4) The section-to-Hom convention matches Stacks' K-flat P / K-injective Hom^•(P,J) proof of 08DK, and e(γx)=u∘λ_E is correct. (5) RΓ(Y,f_*J)=Γ(X,J) comes from the K-injective acyclicity node, and the derived adjunct on K-flat 1 and K-injective J comes from the underived-adjunction node. (6) I redid the computation: the unit law plus the triangle identity give G(u)∘λ, so marking it elementary is justified. (7) Shifts are taken in the target only, via the right-shift node and lem-pc-right-derived-functor-triangulated. (8) Naturality and restriction are elementary. Small cases checked: f=id, V=∅, E=0 or N=0, q<0, and an affine ring map. Duplicate search over dag/nodes (direct-image-hom, rhom-projection, evaluation-square, kflat direct-image-hom localization) found no duplicate. Batch-5 finding: lem-trf-unbounded-direct-image-section-presheaf (0D5W/0D5X Leray) and lem-trf-open-ext-hypercohomology-comparison (08DK) are generic ringed-space homological algebra. Neither assumption gives them, and their closures (260 and 235 nodes) reach no trace-formula theorem, Poincaré-duality, nt-assume or trace-transport node; the only other sec-trace-formula node in either closure is the definition def-trf-ringed-derived-open-hom-restriction. So they are accepted as generic and stay outside the assumptions. The two sk-i-curve-zero tool_uses are accepted. The remaining declared tool uses are on the unit route already. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DirectImageHomOpenExt",
+  "declaration": "AlgebraicGeometry.directImageHom_openExt",
+  "declarations": [
+   "AlgebraicGeometry.sfbRHom",
+   "AlgebraicGeometry.sfbOpenCohomology",
+   "AlgebraicGeometry.sfbOpenHomComparison",
+   "AlgebraicGeometry.sfbDerivedSectionsRestriction",
+   "AlgebraicGeometry.sfbOpenCohomologyRestriction",
+   "AlgebraicGeometry.sfbOpenExtRestriction",
+   "AlgebraicGeometry.sfbOpenLerayComparison",
+   "AlgebraicGeometry.sfbResolution",
+   "AlgebraicGeometry.sfbRHomResolutionIso",
+   "AlgebraicGeometry.sfbHomSectionComplex",
+   "AlgebraicGeometry.sfbHomSectionClass",
+   "AlgebraicGeometry.sfbSliceComplexRestriction",
+   "AlgebraicGeometry.sfbOpenRepresentativeHom",
+   "AlgebraicGeometry.sfbIsCanonicalOpenExt",
+   "AlgebraicGeometry.sfbPushforwardOpenExt",
+   "AlgebraicGeometry.sfbTargetOpenExtEquiv",
+   "AlgebraicGeometry.directImageHom_openExt"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageHomOpenExt.lean",
+  "statement": "theorem directImageHom_openExt : ∃ α : ∀ (X : Scheme.{u}) (E N : schemeDerivedCategory X) (V : X.Opens) (q : ℤ), (sfbOpenCohomology X V q).obj ((sfbRHom X).obj (op E, N)) ≃+ ((schemeOpenRestriction X V).mapDerivedCategory.obj E ⟶ ((schemeOpenRestriction X V).mapDerivedCategory.obj N)⟦q⟧), (∀ X : Scheme.{u}, sfbIsCanonicalOpenExt X (α X)) ∧ (∀ (X : Scheme.{u}) (E E' N N' : schemeDerivedCategory X) (t : E' ⟶ E) (s : N ⟶ N') (V : X.Opens) (q : ℤ) (x : (sfbOpenCohomology X V q).obj ((sfbRHom X).obj (op E, N))), α X E' N' V q ((sfbOpenCohomology X V q).map ((sfbRHom X).map (t.op, s)) x) = (schemeOpenRestriction X V).mapDerivedCategory.map t ≫ α X E N V q x ≫ ((schemeOpenRestriction X V).mapDerivedCategory.map s)⟦q⟧') ∧ (∀ (X : Scheme.{u}) (E N : schemeDerivedCategory X) {W V : X.Opens} (i : W ⟶ V) (q : ℤ) (x : (sfbOpenCohomology X V q).obj ((sfbRHom X).obj (op E, N))), α X E N W q ((sfbOpenCohomologyRestriction X i q).app _ x) = sfbOpenExtRestriction X i E N q (α X E N V q x)) ∧ ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), ∃ ell : ∀ V : Y.Opens, RingedSpace.openModuleDerivedSections X.toRingedSpace (f ⁻¹ᵁ V) ≅ schemeDerivedDirectImage f ⋙ RingedSpace.openModuleDerivedSections Y.toRingedSpace V, (∀ V : Y.Opens, (ell V).hom = sfbOpenLerayComparison f V) ∧ (∀ {W V : Y.Opens} (i : W ⟶ V) (B : schemeDerivedCategory X), (ell V).hom.app B ≫ (sfbDerivedSectionsRestriction Y i).app ((schemeDerivedDirectImage f).obj B) = (sfbDerivedSectionsRestriction X ((Opens.map f.base).map i)).app B ≫ (ell W).hom.app B) ∧ (∀ (E N : schemeDerivedCategory X) (V : Y.Opens), IsIso (sfbOpenHomComparison X (f ⁻¹ᵁ V) E N) ∧ IsIso (sfbOpenHomComparison Y V ((schemeDerivedDirectImage f).obj E) ((schemeDerivedDirectImage f).obj N)) ∧ (schemeOpenRestriction Y V).mapDerivedCategory.map (sfbDirectImageHomComparison f E N) ≫ sfbOpenHomComparison Y V ((schemeDerivedDirectImage f).obj E) ((schemeDerivedDirectImage f).obj N) ≫ (sfbRHom V.toScheme).map (X := (op ((schemeOpenRestriction Y V).mapDerivedCategory.obj ((schemeDerivedDirectImage f).obj E)), (schemeOpenRestriction Y V).mapDerivedCategory.obj ((schemeDerivedDirectImage f).obj N))) (Y := (op ((schemeDerivedDirectImage (f ∣_ V)).obj ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj E)), (schemeDerivedDirectImage (f ∣_ V)).obj ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj N))) (((singleComplexOpenDirectImageIso f V).inv.app E).op, (singleComplexOpenDirectImageIso f V).hom.app N) = (singleComplexOpenDirectImageIso f V).hom.app ((sfbRHom X).obj (op E, N)) ≫ (schemeDerivedDirectImage (f ∣_ V)).map (sfbOpenHomComparison X (f ⁻¹ᵁ V) E N) ≫ sfbDirectImageHomComparison (f ∣_ V) ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj E) ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj N)) ∧ (∀ (E E' N N' : schemeDerivedCategory X) (t : E' ⟶ E) (s : N ⟶ N'), (schemeDerivedDirectImage f).map ((sfbRHom X).map (t.op, s)) ≫ sfbDirectImageHomComparison f E' N' = sfbDirectImageHomComparison f E N ≫ (sfbRHom Y).map (((schemeDerivedDirectImage f).map t).op, (schemeDerivedDirectImage f).map s)) ∧ ∀ (E N : schemeDerivedCategory X) (V : Y.Opens) (q : ℤ) (x : (sfbOpenCohomology Y V q).obj ((schemeDerivedDirectImage f).obj ((sfbRHom X).obj (op E, N)))), sfbTargetOpenExtEquiv f V E N q (α Y ((schemeDerivedDirectImage f).obj E) ((schemeDerivedDirectImage f).obj N) V q ((sfbOpenCohomology Y V q).map (sfbDirectImageHomComparison f E N) x)) = sfbPushforwardOpenExt f V E N q (α X E N (f ⁻¹ᵁ V) q ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} q).map ((ell V).inv.app ((sfbRHom X).obj (op E, N))) x))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4795e0fc",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Re-delivery fixes return L (e34b). F1: lem-pc-global-hom-adjunction removed from stmt_deps; new def node def-sfb-direct-image-hom-comparison-data (DirectImageHomComparisonData.lean) owns c = component of Classical.choose of the proved exists_mixedHomDirectImageComparison (same term as mixedHomDirectImageComparison; mate equation determines it), t_f alias of mixedHomTensorPullbackIso (proved, IsCanonicalPullbackTensorComparison), a_f alias of schemeHomPullbackAdjunction (same term as canonicalSchemeDerivedAdjunction of cited def-sfb-canonical-scheme-derived-adjunction-composition). F2: item-private explicit c removed. Item theorem signature textually unchanged from e34b, clause check (any f, U=f^-1V, g=f|_V, restriction square, alpha pinned on Hom-complex cycles, derived Leray ell, Rg_* map ≫ commShiftIso, naturality, smaller-open restriction, all q in Z, no extra hypotheses) re-confirmed. Sign spot-check: homComplex differential = Mathlib delta convention and equivHomShift unsigned, so alpha fully pinned. No rival owner in dag/nodes or lean trees. Notes: sfbHomPullbackAdjunction is a delta-alias (unused by item); item still names mixedHomTensorPullbackIso instead of alias sfbHomTensorPullbackIso; rename FIX compiled def module clean (13.2 s) but item hit the 60 s limit (it runs at 54-57 s), so FIX withdrawn, no fixes."
+ }
+}

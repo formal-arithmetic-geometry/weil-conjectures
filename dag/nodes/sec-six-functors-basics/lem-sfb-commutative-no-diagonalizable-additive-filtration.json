@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-commutative-no-diagonalizable-additive-filtration",
+ "kind": "statement",
+ "title": "Additive subgroup factors when the multiplicative subgroup vanishes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a commutative affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Closed subgroups mean [def-sc-group-scheme-subgroup]. A diagonalizable group means a group isomorphic to $\\operatorname{Spec}k[M]$ for a finitely generated abelian group $M$, with basis $e_m$, multiplication $e_me_n=e_{m+n}$ and comultiplication $e_m\\mapsto e_m\\otimes e_m$ [def-weil-affine-spectrum, lem-weil-pbc-algebra-tensor-pushout-universal-property]. Suppose every diagonalizable closed subgroup of $G$ is the trivial group $1=\\operatorname{Spec}k$. There are $s\\geq0$ and a chain of closed subgroup schemes $1=G_0\\subseteq G_1\\subseteq\\cdots\\subseteq G_s=G$, together with affine finite-type group schemes $Q_j$, faithfully flat [def-weil-flat-morphism] finitely presented [def-sbc-locally-finite-presentation] homomorphisms $q_j:G_j\\to Q_j$ with scheme-theoretic kernel $G_{j-1}$, and closed group embeddings $Q_j\\hookrightarrow\\mathbf G_a$ [def-weil-closed-immersion], for $1\\leq j\\leq s$. Here $\\mathbf G_a(R)=(R,+)$ [def-sc-gm-ga], and $Q_j$ represents the fppf sheafification [def-weil-pbc-sheafification, def-pc-fppf-site] of $R\\mapsto G_j(R)/G_{j-1}(R)$ for faithfully flat finitely presented coverings. Neither smoothness nor connectedness of $G$ is required; the trivial group admits $s=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(a), printed p.328, and Proposition 14.21, printed pp.284-285; over an algebraically closed field multiplicative type is diagonalizable. The absence of a multiplicative subgroup makes G itself unipotent, to which 14.21 applies."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-gm-ga",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-sfb-diagonalizable-group",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-commutative-diagonalizable-unipotent-product] to $G$. Its diagonalizable closed subgroup $D$ is $1$ by hypothesis. The product isomorphism $U\\times_kD\\to G$ therefore restricts to an isomorphism $U\\to G$, with inverse the first projection composed with the product inverse. Combining its inverse with the supplied closed embedding gives $i:G\\hookrightarrow U_{n,k}$, for some $n\\geq1$.",
+   "uses": [
+    "lem-sfb-commutative-diagonalizable-unipotent-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(b), p.328, and Theorem 14.5, p.281; special case of 16.13(a) when the multiplicative subgroup is trivial."
+   }
+  },
+  {
+   "text": "Take the series $U^{(0)}\\supseteq\\cdots\\supseteq U^{(m)}=1$ and coordinate homomorphisms $p_r$ of [lem-sfb-unitriangular-coordinate-filtration], where $m=n(n-1)/2$. Write $G=\\operatorname{Spec}A$ and let $x_l\\in A$ be the pullback of the matrix coordinate indexed by $C_l$. Set $H_r=\\operatorname{Spec}(A/(x_1,\\ldots,x_r))$. Thus $H_r$ is the closed inverse image of $U^{(r)}$; on every algebra its points are exactly those $g\\in G$ whose first $r$ coordinates vanish. These subsets are subgroups because $U^{(r)}$ is a subgroup [def-sc-group-scheme-subgroup]. The affine quotient description [def-weil-closed-immersion] gives closed embeddings $H_r\\subseteq G$ and $H_r\\subseteq H_{r-1}$. Each is finite type: the images of finitely many algebra generators of $A$ generate each quotient [def-weil-finite-type-morphism]. We have $H_0=G$ and $H_m=1$, since $i$ is a closed group embedding and $U^{(m)}=1$.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21 proof, pp.284--285: intersect the series of Example 6.49 with G; intersections written as coordinate quotients."
+   }
+  },
+  {
+   "text": "For $1\\leq r\\leq m$, restrict $p_r$ to $f_r:H_{r-1}\\to\\mathbf G_a$. It is a group homomorphism by [lem-sfb-unitriangular-coordinate-filtration]. Its scheme-theoretic kernel is $H_r$: its zero equation adds $x_r=0$ to the equations defining $H_{r-1}$. Both groups in this homomorphism are affine and finite type, and hence separated by [lem-weil-pbc-affine-source-morphism-separated]. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $f_r$. It supplies $H_{r-1}\\xrightarrow{q_r}I_r\\hookrightarrow\\mathbf G_a$, with $q_r$ faithfully flat finitely presented, kernel $H_r$, and $I_r$ representing the stated fppf sheaf quotient. The closed subscheme $I_r$ of the affine line is affine [def-weil-closed-immersion], and is finite type as supplied by that theorem.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21 proof and Section 6.2 (intersection series); Theorem 5.39, p.108, for the image and quotient maps."
+   }
+  },
+  {
+   "text": "Reverse the indices: set $s=m$, $G_j=H_{m-j}$ for $0\\leq j\\leq m$, and $Q_j=I_{m-j+1}$ for $1\\leq j\\leq m$. Use the map $q_{m-j+1}$ as $G_j\\to Q_j$. The preceding kernel, quotient, finite-presentation and closed-embedding conclusions give every required clause. If $G=1$, instead choose $s=0$, $G_0=G$, with no quotient data. All constructions used the full group schemes, so no smoothness or connectedness was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, reversing its descending central series; empty filtration for the trivial group."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-commutative-diagonalizable-unipotent-product",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-algebraic-group-homomorphism-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(a),(b), printed p.328, followed by the intersection construction in Proposition 14.21, printed pp.284--285, using the coordinate series of Example 6.49 and the Homomorphism Theorem 5.39."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine commutative algebraic group over an algebraically closed field with no nontrivial diagonalizable closed subgroup has a finite filtration whose quotients are closed subgroups of the additive group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Group.IsVirtuallyNilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is virtually nilpotent if there exists a nilpotent subgroup $ N $ of $ G $ such that $ N $ has finite index in $ G $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : TopologicalSpace G] [IsTopologicalAddGroup G] [CompactSpace G]\\n  (U : OpenAddSubgroup G) (K : OpenAddSubgroup ↥U), Finite (↥U ⧸ ↑K)\", \"doc\": \"In a compact topological additive group $G$, for any open additive subgroup $U$ and open additive subgroup $K$ of the subtype $U$, the quotient group $U/K$ is finite. This follows from the compactness\"}\n  {\"name\": \"ProfiniteAddGrp.ofFiniteAddGrp\", \"module\": \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic\", \"type\": \"FiniteAddGrp.{u_1} → ProfiniteAddGrp.{u_1}\", \"doc\": \"The function embeds a finite additive group into the category of profinite additive groups by equipping it with the discrete topology, which makes it compact, Hausdorff, and totally disconnected.\"}\n  {\"name\": \"ProfiniteAddGrp.ofClosedAddSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic\", \"type\": \"{G : ProfiniteAddGrp.{u_1}} → ClosedAddSubgroup ↑G.toProfinite.toTop → ProfiniteAddGrp.{u_1}\", \"doc\": \"Given a profinite additive group $ G $ and a closed additive subgroup $ H $ of the underlying topological space of $ G $, this constructor equips $ H $ with the subspace topology and returns it as a p\"}\n  {\"name\": \"Group.IsNilpotent.isVirtuallyNilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Group.IsNilpotent G → Group.IsVirtuallyNilpotent G\", \"doc\": \"Every nilpotent group $ G $ is virtually nilpotent, meaning $ G $ contains a nilpotent subgroup $ N $ (specifically $ N = G $) with finite index in $ G $. Since the trivial subgroup has finite index i\"}\n  {\"name\": \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]\\n  (U : OpenSubgroup G) (K : OpenSubgroup ↥U), Finite (↥U ⧸ ↑K)\", \"doc\": \"In a compact topological group $G$, for any open subgroup $U$ and open subgroup $K$ of $U$, the quotient group $U/K$ is finite. This result follows from the compactness of $G$ and the openness of the \"}\n  {\"name\": \"AddSubgroup.quotient_finite_of_isOpen'\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : TopologicalSpace G] [IsTopologicalAddGroup G] [CompactSpace G]\\n  (U : AddSubgroup G) (K : AddSubgroup ↥U), IsOpen ↑U → IsOpen ↑K → Finite (↥U ⧸ K)\", \"doc\": \"Let $ G $ be a compact topological additive group. If $ U $ is an open subgroup of $ G $ and $ K $ is an open subgroup of $ U $, then the quotient group $ U/K $ is finite.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and profinite quotients do not give a group-scheme filtration with closed additive subgroup factors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"unipotent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and profinite quotients do not give a group-scheme filtration with closed additive subgroup factors."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|diagonalizable|centralSeries",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and profinite quotients do not give a group-scheme filtration with closed additive subgroup factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative algebraic group modulo its maximal multiplicative subgroup is unipotent and has a central series with additive subgroup quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommGroup.isNilpotent\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"{G : Type*} [CommGroup G] : IsNilpotent G\", \"doc\": \"Every abelian group is nilpotent. A nilpotent group is one that has a central series terminating at the trivial subgroup after finitely many steps, and this instance asserts that the property holds fo\"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \": ℕ → Σ' H : Subgroup G, Normal H\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeries\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(n : ℕ) : Subgroup G\", \"doc\": \"For a group $ G $, the $ n $th term of the upper central series is recursively defined by starting with the trivial subgroup and taking the centralizer of the previous term in $ G $. Each term forms a\"}\n  {\"name\": \"CommGroup.isSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G : Type*} [CommGroup G] : IsSolvable G\", \"doc\": \"Every commutative (abelian) group is a solvable group. This follows because the derived series of an abelian group terminates at the trivial subgroup after one step.\"}\n  {\"name\": \"Group.isNilpotent_iff\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Group.IsNilpotent G ↔ ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ such that the $n$th term of its upper central series equals the entire group $G$.\"}\n  {\"name\": \"QuotientAddGroup.Quotient.addCommGroup\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \"{G : Type u_5} → [inst : AddCommGroup G] → (N : AddSubgroup G) → AddCommGroup (G ⧸ N)\", \"doc\": \"Given an additive commutative group $ G $ and an additive subgroup $ N $, the quotient type $ G/N $ inherits an additive commutative group structure. The addition operation on cosets is defined by $ [\"}\n  {\"name\": \"CommGrpMax\", \"module\": \"Mathlib.Algebra.Category.Grp.Basic\", \"type\": \"Type ((max u1 u2) + 1)\", \"doc\": \"The category of commutative groups, where objects are commutative groups and morphisms are group homomorphisms.\"}\n  {\"name\": \"upperCentralSeries_one\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \": upperCentralSeries G 1 = center G\", \"doc\": \"The first term of the upper central series of a group $G$ is equal to the center of $G$, i.e., $\\\\mathrm{upperCentralSeries}(G, 1) = \\\\mathrm{center}(G)$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and profinite quotients do not give a group-scheme filtration with closed additive subgroup factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unipotent group schemes have a finite central normal series with factors isomorphic to algebraic subgroups of Ga without smoothness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"nilpotent_iff_finite_ascending_central_series\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], Group.IsNilpotent G ↔ ∃ n H, IsAscendingCentralSeries H ∧ H n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ and an ascending central series $H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G$ such that $H(n)$ equals the entire group $G$.\"}\n  {\"name\": \"nilpotent_iff_finite_descending_central_series\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], Group.IsNilpotent G ↔ ∃ n H, IsDescendingCentralSeries H ∧ H n = ⊥\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ and a descending central series $H : \\\\mathbb{N} \\\\to \\\\text{Subgroup}(G)$ such that $H(0) = G$, each subsequent term is generate\"}\n  {\"name\": \"Group.IsNilpotent.nilpotent'\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_2} {inst : Group G} [self : Group.IsNilpotent G], ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $th term of the upper central series of $ G $ equals the entire group $ G $ itself.\"}\n  {\"name\": \"Group.IsNilpotent.nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G] [Group.IsNilpotent G], ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the upper central series of $ G $ is equal to $ G $ itself.\"}\n  {\"name\": \"Group.IsNilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_2) → [Group G] → Prop\", \"doc\": \"A proposition asserting that a group $G$ is nilpotent, meaning it has a central series terminating at the trivial subgroup after finitely many steps.\"}\n  {\"name\": \"Group.isNilpotent_iff\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Group.IsNilpotent G ↔ ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ such that the $n$th term of its upper central series equals the entire group $G$.\"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G] (n : ℕ), (upperCentralSeries G n).Normal\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and profinite quotients do not give a group-scheme filtration with closed additive subgroup factors."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|diagonalizable|multiplicativeType",
+   "results": "{\"t\": \"2026-10-24T00:52:40Z\", \"tool\": \"grep\", \"query\": \"unipotent|diagonalizable|multiplicativeType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative algebraic group over a perfect field decomposes into its multiplicative type subgroup and unipotent subgroup",
+   "results": "{\"t\": \"2026-10-24T00:52:40Z\", \"tool\": \"leansearch\", \"query\": \"A commutative algebraic group over a perfect field decomposes into its multiplicative type subgroup and unipotent subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Multiplicative.commGroup\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"Field.instGroupAbsoluteGaloisGroup\", \"CommGroupWithZero\", \"CommGroup.toGroup\", \"GroupLike.instCommGroup\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\"], \"digest\": \"9cfccf5de4fab60a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T00:52:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every commutative affine algebraic group over an algebraically closed field is the direct product of a diagonalizable group and a closed subgroup scheme of upper unitriangular matrices",
+   "results": "{\"t\": \"2026-10-24T00:52:42Z\", \"tool\": \"leanfinder\", \"query\": \"Every commutative affine algebraic group over an algebraically closed field is the direct product of a diagonalizable group and a closed subgroup scheme of upper unitriangular matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"Module.End.exists_isNilpotent_isSemisimple\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"da93d39380c2eb76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|unipotent|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T00:53:24Z\", \"tool\": \"grep\", \"query\": \"unitriangular|unipotent|diagonalizable\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unipotent algebraic group admits a finite central series with successive quotients algebraic subgroups of Ga",
+   "results": "{\"t\": \"2026-10-24T00:53:24Z\", \"tool\": \"leansearch\", \"query\": \"A unipotent algebraic group admits a finite central series with successive quotients algebraic subgroups of Ga\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_iff_finite_ascending_central_series\", \"upperCentralSeries\", \"IsAscendingCentralSeries\", \"nilpotent_iff_finite_descending_central_series\", \"Group.IsNilpotent\", \"lowerCentralSeries\", \"upperCentralSeriesAux\", \"IsDescendingCentralSeries\"], \"digest\": \"5b65cdbcd09f4e69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative finite type affine group scheme over an algebraically closed field with no nontrivial diagonalizable closed subgroup admits a filtration with quotients closed subgroups of the additive group scheme",
+   "results": "{\"t\": \"2026-10-24T00:53:25Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative finite type affine group scheme over an algebraically closed field with no nontrivial diagonalizable closed subgroup admits a filtration with quotients closed subgroups of the additive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AddCommGrpCat.instIsSerreClassIsFinite\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"InfiniteGalois.profiniteGalGrp\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"IsZGroup.instQuotientSubgroupOfFinite\"], \"digest\": \"29dd13dba8c2caba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan decomposition of a commutative affine group scheme into a group of multiplicative type and a unipotent group without smoothness",
+   "results": "{\"t\": \"2026-10-24T00:53:26Z\", \"tool\": \"leanfinder\", \"query\": \"Jordan decomposition of a commutative affine group scheme into a group of multiplicative type and a unipotent group without smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"Module.End.exists_isNilpotent_isSemisimple\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"MeasureTheory.JordanDecomposition.toJordanDecomposition_toSignedMeasure\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.over\"], \"digest\": \"5351b336add79c4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned linear Jordan decomposition, Lie triangularization, affine-space and abstract group-series statements do not decompose affine group schemes or give scheme-theoretic additive quotient factors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zero-verschiebung-primitive-generation",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. Present split: Additive subgroup factors when the multiplicative subgroup vanishes. Theorem 16.13(a), printed p.328, and Proposition 14.21, printed pp.284-285; over an algebraically closed field multiplicative type is diagonalizable. The absence of a multiplicative subgroup makes G itself unipotent, to which 14.21 applies.",
+   "via": [
+    "lem-sfb-zero-verschiebung-primitive-generation",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-commutative-no-diagonalizable-additive-filtration",
+  "worker": "stage1",
+  "summary": "Checked Milne 16.13 and 14.21 without smoothness or connectedness. Added the general diagonalizable/unipotent product decomposition as the only new statement-only node. Reused the coordinate filtration and homomorphism theorem, constructing intersections explicitly and reversing the indices. No statement change. Searches found no group-scheme Mathlib match.",
+  "blueprint": "The existing ancestry names det-thm-sf-ctf-stability-direct-images proof (3) through the alteration/moduli/Haboush prerequisites. This is the Milne structural-group subargument below that route. The inherited blueprint.from.node is null (also reported by blueprint_refs ancestor), retained with its full concrete from.place and via chain; latest blueprint proof (3) was read."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-060c3d62d",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-060c3d62d (reviewer sub-agent of L); spot-checked: Read Milne Theorem 16.13(a),(b) and its proof (p.328), Theorem 14.5 (p.281) and Proposition 14.21 (pp.284-285). The new node lem-sfb-commutative-diagonalizable-unipotent-product is 16.13(b) over the algebraically closed (so perfect) k, with D=G_s diagonalizable by 12.9 and U embedded in U_n by 14.5(a)=>(b). It is true: checked on mu_p, alpha_p, constant Z/p in char p, Z/l, G_a x G_m, alpha_p x mu_p and the trivial group. It is statement-only, self-contained and searched with eight records. It is not a duplicate of geometric-unipotence-unitriangular-embedding (that one assumes smoothness), multiplicative-type-extension, or either direction of 14.18. It is not a restated clause of the item: the item still has to intersect with the coordinate series and factor each coordinate map. Step 1: D=1 by hypothesis, so U=G and i:G->U_n is a closed group embedding. Step 2: H_r = G x_{U_n} U^(r) = Spec A/(x_1..x_r); subgroups because i is a homomorphism; H_m=1 because ker i is trivial, not by a geometric-point argument. Step 3: all hypotheses of the homomorphism-factorization statement hold (separated because the source is affine, finite type, homomorphism with kernel H_r); it supplies faithfully flat finitely presented q, kernel, fppf quotient and closed i; I_r is affine. Step 4: the index reversal is correct, and m=0 forces G=1. The route stays inside sk-thm-sf-ctf-stability; the mathlib leaf affine-source-separated is a tool; no tool_uses needed. Live and side-live still have the item unsplit, so it is not superseded. Batch-5 flag: lem-trf-fppf-covering-base-change is a generic mathlib fact (fppf coverings are stable under base change), not part of the trace formula or Poincare duality, and the parent already cites the homomorphism theorem, so it does not cause a RETURN. FIX (B3): the item statement used faithfully flat, finitely presented, closed embedding and fppf sheafification without citing definitions. fixes/dag/nodes/sec-six-functors-basics/lem-sfb-commutative-no-diagonalizable-additive-filtration.json adds the inline citations and the stmt_deps def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-closed-immersion, def-weil-pbc-sheafification and def-pc-fppf-site. The meaning is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CommutativeAdditiveFiltration",
+  "declaration": "AlgebraicGeometry.commutative_no_diagonalizable_additive_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CommutativeAdditiveFiltration.lean",
+  "statement": "theorem commutative_no_diagonalizable_additive_filtration {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsCommMonObj G.X] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hdiag : ∀ (M : Type u) [AddCommGroup M] [AddGroup.FG M] (i : diagonalizableGroup k M ⟶ G), IsClosedSubgroupScheme i.hom.hom → IsIso (diagonalizableGroup k M).X.hom) : ∃ (s : ℕ) (H : Fin (s + 1) → Grp (Over (Spec (.of k)))) (ι : ∀ j : Fin (s + 1), H j ⟶ G) (a : ∀ j : Fin s, H j.castSucc ⟶ H j.succ) (Q : Fin s → Grp (Over (Spec (.of k)))) (q : ∀ j : Fin s, H j.succ ⟶ Q j) (b : ∀ j : Fin s, Q j ⟶ Grp.mk (StandardGroupSchemes.additive k)), (∀ j : Fin (s + 1), IsClosedSubgroupScheme (ι j).hom.hom) ∧ IsIso (H 0).X.hom ∧ IsIso (ι (Fin.last s)).hom.hom.left ∧ (∀ j : Fin s, a j ≫ ι j.succ = ι j.castSucc) ∧ (∀ j : Fin s, IsClosedSubgroupScheme (a j).hom.hom) ∧ (∀ j : Fin s, IsAffine (Q j).X.left ∧ LocallyOfFiniteType (Q j).X.hom ∧ QuasiCompact (Q j).X.hom ∧ Flat (q j).hom.hom.left ∧ Surjective (q j).hom.hom.left ∧ LocallyOfFinitePresentation (q j).hom.hom.left ∧ QuasiCompact (q j).hom.hom.left ∧ QuasiSeparated (q j).hom.hom.left ∧ IsClosedSubgroupScheme (b j).hom.hom ∧ IsFppfGroupQuotient (a j) (q j))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed diagonalizable-group and fppf-quotient definition nodes, added to stmt_deps. The finite chain has explicit inclusions into G and compatible successive closed inclusions. IsFppfGroupQuotient retains the specified kernel square and coset-sheafification map. Endpoint identifications are isomorphisms, permitting s=0; no smoothness or connectedness is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-775f51958",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean and stmt_deps (+def-sfb-diagonalizable-group, +def-sfb-fppf-group-quotient-presentation, both existing definition nodes); lean.statement verbatim. Clause check against IsClosedSubgroupScheme, IsFppfGroupQuotient, diagonalizableGroup and StandardGroupSchemes.additive (additiveGroup pinned by ∃!): hdiag is equivalent to 'every diagonalizable closed subgroup is trivial' (scheme-theoretic, μ_p excluded); chain with closed inclusions, endpoint isos, affine finite-type Q_j, faithfully flat finitely presented q_j, kernel and fppf quotient via IsFppfGroupQuotient(a j)(q j), closed embedding into G_a; no extra hypotheses; s=0 and trivial G handled; single universe u. Only sorry, docstrings carry the Milne places, the blueprint id and the 4 proof steps; no new definitions or duplicates; report has both sections. No file changed, no compile run."
+ }
+}

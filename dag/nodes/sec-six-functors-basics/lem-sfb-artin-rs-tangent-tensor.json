@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-artin-rs-tangent-tensor",
+ "kind": "statement",
+ "title": "Tangent space and square-zero parameter algebras",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be a predeformation category on $\\mathcal C_{R,k}$ satisfying (RS), as defined in [def-sfb-artin-deformation-test-category]. Then $T\\mathcal F$ is naturally a $k$-vector space and, for every finite-dimensional $k$-vector space $V$, there is a natural bijection $\\overline{\\mathcal F}(k[V])\\cong T\\mathcal F\\otimes_k V$ [def-weil-pbc-module-tensor-product]. For a linear map $\\lambda:V\\to W$, transport along $(a,v)\\mapsto(a,\\lambda(v))$ corresponds to $1\\otimes\\lambda$. In particular if $\\theta_1,\\ldots,\\theta_d$ is a basis of $T\\mathcal F$ and $V$ has basis $v_1,\\ldots,v_d$, the class $\\sum_i\\theta_i\\otimes v_i$ maps onto all of $T\\mathcal F$ under the maps $k[V]\\to k[\\epsilon]$ induced by all linear functionals $V\\to k$. This includes $d=0$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06IH (lemma-tangent-space-vector-space), together with Tags 06J7 (lemma-RS-implies-S1-S2) and 06I0 (lemma-S1-S2-associated-functor)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $F(A)=\\overline{\\mathcal F}(A)$ and $L(V)=F(k[V])$, with $L(f)$ induced by $(a,v)\\mapsto(a,f(v))$. These ring maps preserve multiplication and compose as the linear maps do, so transport on isomorphism classes makes $L$ a covariant functor. The rings $k[V]$ belong to the test category: $(a,v)$ is a unit exactly when $a\\ne0$, with inverse $(a^{-1},-a^{-2}v)$, so the maximal ideal is $V$ and the residue field is $k$; every ideal is a $k$-subspace of the finite-dimensional space $k\\oplus V$, so descending chains stabilize. The isomorphism $k[U\\oplus V]\\to k[U]\\times_k k[V]$ is $(a,u,v)\\mapsto((a,u),(a,v))$. The augmentation $k[V]\\to k$ is surjective, so (RS) identifies its deformation groupoid with the 2-fibre product over $\\mathcal F(k)$. This last groupoid has isomorphism classes exactly $F(k[U])\\times F(k[V])$: between any two objects of $\\mathcal F(k)$ there is exactly one arrow, since that groupoid is equivalent to the terminal groupoid. Thus a pair of objects admits exactly one gluing arrow, and every pair of component isomorphisms respects that arrow. Taking isomorphism classes gives the bijection $c_{U,V}:L(U\\oplus V)\\to L(U)\\times L(V)$. Also $L(0)=F(k)$ is a singleton.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IH (lemma-tangent-space-vector-space), product-preservation input; here obtained directly from the definition of (RS), rather than through Tags 06J7 and 06I0."
+   }
+  },
+  {
+   "text": "Apply the product-preserving functor linearization lemma to the functor $L$ of step 1. Its hypotheses hold for every finite-dimensional pair, including zero. It supplies canonical vector structures on all $L(V)$, linear maps $L(f)$ and linearity in $f$. In particular $L(k)=F(k[\\epsilon])=T\\mathcal F$ is a $k$-vector space. Addition is $L(+):L(k\\oplus k)\\to L(k)$ after the inverse product comparison, and multiplication by $a$ is induced by $\\epsilon\\mapsto a\\epsilon$, exactly the deformation operations.",
+   "uses": [
+    "lem-sfb-product-preserving-vector-functor-linearization",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), as used by Tags 06IA (lemma-tangent-space-functor) and 06IH (lemma-tangent-space-vector-space)."
+   }
+  },
+  {
+   "text": "Write $T=L(k)$. For $v\\in V$, let $f_v:k\\to V$ send $1$ to $v$. The map $(x,v)\\mapsto L(f_v)(x)$ is bilinear: it is linear in $x$ because $L(f_v)$ is linear, and linear in $v$ because $f_{av+bw}=af_v+bf_w$ and $L$ is linear on maps. The tensor universal property gives $\\Phi_V:T\\otimes_k V\\to L(V)$ with $\\Phi_V(x\\otimes v)=L(f_v)(x)$. Choose a basis $e_1,\\ldots,e_r$ of $V$, with coordinates $p_i:V\\to k$. The inverse is explicitly $\\Psi_V(z)=\\sum_i L(p_i)(z)\\otimes e_i$. Indeed, on a pure tensor, $\\Psi_V\\Phi_V(x\\otimes v)=\\sum_i p_i(v)x\\otimes e_i=x\\otimes v$ by bilinearity and $v=\\sum_i p_i(v)e_i$; pure tensors generate. Conversely $\\Phi_V\\Psi_V(z)=\\sum_i L(f_{e_i}p_i)(z)=L(\\sum_i f_{e_i}p_i)(z)=z$. For $r=0$, $L(V)=L(0)$ is the zero vector space, and the tensor product is zero because every pure tensor has second factor zero. This proves bijectivity in every finite dimension. The construction of $\\Phi_V$ uses no basis, so the resulting bijection and its inverse are canonical.",
+   "uses": [
+    "lem-sfb-product-preserving-vector-functor-linearization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I8 (lemma-linear-functor-over-field), explicit pure-tensor construction and finite-basis inverse; used by Tag 06IH."
+   }
+  },
+  {
+   "text": "For $\\lambda:V\\to W$ and a pure tensor, $L(\\lambda)\\Phi_V(x\\otimes v)=L(\\lambda f_v)(x)=L(f_{\\lambda(v)})(x)=\\Phi_W(x\\otimes\\lambda(v))$. Both sides are linear maps and pure tensors generate, so $L(\\lambda)\\Phi_V=\\Phi_W(1\\otimes\\lambda)$. By step 1, $L(\\lambda)$ is exactly transport along $(a,v)\\mapsto(a,\\lambda(v))$. For $W=k$, identify $T\\otimes_k k$ with $T$ by $x\\otimes a\\mapsto ax$ (inverse $x\\mapsto x\\otimes1$); the same formula for $\\Phi_k$ gives this identification.",
+   "uses": [
+    "lem-sfb-product-preserving-vector-functor-linearization",
+    "def-weil-pbc-module-tensor-product",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I8 (lemma-linear-functor-over-field), formula for the natural isomorphism; Tag 06IH, functoriality in V."
+   }
+  },
+  {
+   "text": "For the final clause assume the stated finite bases $\\theta_1,\\ldots,\\theta_d$ of $T$ and $v_1,\\ldots,v_d$ of $V$. Step 4 sends $\\sum_i\\theta_i\\otimes v_i$ under a functional $\\ell:V\\to k$ to $\\sum_i\\ell(v_i)\\theta_i$. Every $t\\in T$ has a basis expansion $t=\\sum_i a_i\\theta_i$. The functional $\\ell(\\sum_i b_i v_i)=\\sum_i b_i a_i$ has $\\ell(v_i)=a_i$, hence gives precisely $t$. If $d=0$, both spaces are zero; the empty tensor sum and the unique functional give the unique element of $T$, so surjectivity still holds.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IH (lemma-tangent-space-vector-space), functorial tensor identification; elementary finite-basis evaluation consequence needed for the versal-object construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-product-preserving-vector-functor-linearization",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06IH (lemma-tangent-space-vector-space), 06I6 (lemma-linear-functor), 06I8 (lemma-linear-functor-over-field). The argument follows the square-zero/product/linearization route, obtaining the product comparison directly from (RS)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformation functor preserving Artinian pullbacks sends square zero vector algebras to tangent space tensor vector space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.CotangentSpace.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Algebra.Extension R S} →\\n            {R' : Type u'} →\\n              {S' : Type v'} →\\n                [inst_3 : CommRing R'] →\\n                  [inst_4 : CommRing S\", \"doc\": \"Given an algebra extension homomorphism $ f : P \\to P' $, this constructs the induced linear map $ P.\\text{CotangentSpace} \\to P'.\\text{CotangentSpace} $ over $ S $, defined by restricting scalars and com\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.Extension.tensorCotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, and algebra extensions $ P $ and $ Q $, if the linear map induced by the kernel of $ Q $'s algebra map is bijective,\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.CotangentSpace.map P.toInfinitesimal)\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the linear map from the cotangent space of $ P $ to the cotangent space of its infinitesimal extension $ P/I^2 \"}\n  {\"name\": \"Algebra.Extension.tensorCotangentInvFun\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"A linear map from the cotangent module $\\\\ker(\\\\phi_Q)/\\\\ker(\\\\phi_Q)^2$ of an algebra extension $Q$ to the tensor product $T \\\\otimes_S \\\\ker(\\\\phi_P)/\\\\ker(\\\\phi_P)^2$ over a semiring $S$, constructed using \"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (x : ↥P.ker), P.cotangentComplex (Algebra.Extension.Cotangent.mk x) = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) ↑x\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ inherits the structure of an additive commutative group from its module structure over $S$. This group operation is induced by \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: TrivSqZeroExt supplies the ring but no deformation-groupoid tangent tensor theorem; ring cotangent modules are different objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger condition tangent vector space deformations of trivial square zero extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TrivSqZeroExt\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(R : Type u) (M : Type v)\", \"doc\": \"The trivial square-zero extension of a ring $ R $ by an $ R $-module $ M $, defined as the direct product $ R \\times M $ equipped with component-wise addition and multiplication where the product of an\"}\n  {\"name\": \"TrivSqZeroExt.algebra'\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \": Algebra S (tsze R M)\", \"doc\": \"Given a commutative semiring $ S $, a semiring $ R $ equipped with an $ S $-algebra structure, and an $ R $-module $ M $ with compatible module structures over $ R $ and its opposite ring $ R^\\\\mathrm{\"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : R →ₐ[S] A) (g : M →ₗ[S] A) (hg : ∀ x y, g x * g y = 0) (hfg : ∀ r x, g (r •> x) = f r * g x)\\n  (hgf : ∀ r x, g (x <• r) = g x * f r) : tsze R M →ₐ[S] A\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.algebra'.congr_simp\", \"module\": \"Mathlib.Data.Matrix.DualNumber\", \"type\": \"∀ (S : Type u_1) (R : Type u) (M : Type v) [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given a commutative semiring $ S $, a semiring $ R $ equipped with an $ S $-algebra structure, and an $ R $-module $ M $ with compatible module structures over $ R $ and its opposite ring $ R^\\\\mathrm{\"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv_apply\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.instNontrivial_of_right\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"{R M : Type*} [Nonempty R] [Nontrivial M] : Nontrivial (TrivSqZeroExt R M)\", \"doc\": \"If $ R $ is a nonempty type and $ M $ is a nontrivial $ R $-module, then the trivial square-zero extension $ R \\times M $ is a nontrivial type.\"}\n  {\"name\": \"TrivSqZeroExt.instNontrivial_of_left\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"{R M : Type*} [Nontrivial R] [Nonempty M] : Nontrivial (TrivSqZeroExt R M)\", \"doc\": \"If $ R $ is a nontrivial ring and $ M $ is a nonempty $ R $-module, then the trivial square-zero extension $ R \\times M $ is nontrivial.\"}\n  {\"name\": \"TrivSqZeroExt.inrHom\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Semiring R] [AddCommMonoid M] [Module R M] : M →ₗ[R] tsze R M\", \"doc\": \"The linear map sending each element $ m $ of the $ R $-module $ M $ to the pair $ (0, m) $ in the trivial square-zero extension $ R \\\\times M $, embedding $ M $ as an ideal with zero multiplication in \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: TrivSqZeroExt supplies the ring but no deformation-groupoid tangent tensor theorem; ring cotangent modules are different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tangent\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Ideal.Cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) : Type u\", \"doc\": \"`I ⧸ I ^ 2` as a quotient of `I`.\"}\n  {\"name\": \"IsLocalRing.CotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" (R : Type u_1) [CommRing R] [IsLocalRing R] : Type u_1\", \"doc\": \"The `A ⧸ I`-vector space `I ⧸ I ^ 2`.\"}\n  {\"name\": \"Ideal.instAddCommGroupCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) : AddCommGroup I.Cotangent\", \"doc\": \"\"}\n  {\"name\": \"Ideal.instInhabitedCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) : Inhabited I.Cotangent\", \"doc\": \"\"}\n  {\"name\": \"Ideal.instSMulCotangentOfAlgebra\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_2} {S : Type u_1} [CommRing R] [CommSemiring S] [Algebra S R] (I : Ideal R) : SMul S I.Cotangent\", \"doc\": \"\"}\n  {\"name\": \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_1} [CommRing R] [IsLocalRing R] [IsNoetherianRing R] : Subsingleton (IsLocalRing.CotangentSpace R) ↔ IsField R\", \"doc\": \"\"}\n  {\"name\": \"Ideal.instModuleCotangentOfAlgebra\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_2} {S : Type u_1} [CommRing R] [CommSemiring S] [Algebra S R] (I : Ideal R) : Module S I.Cotangent\", \"doc\": \"\"}\n  {\"name\": \"Ideal.instModuleQuotientCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) : Module (R ⧸ I) I.Cotangent\", \"doc\": \"\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" (R : Type u_1) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] : FiniteDimensional (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"\"}\n  {\"name\": \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" (R : Type u_1) [CommRing R] [IsLocalRing R] : Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"\"}\n  {\"name\": \"Ideal.cotangent_subsingleton_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) : Subsingleton I.Cotangent ↔ IsIdempotentElem I\", \"doc\": \"\"}\n  {\"name\": \"Ideal.isTorsionBySet_cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) : Module.IsTorsionBySet R I.Cotangent ↑I\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: TrivSqZeroExt supplies the ring but no deformation-groupoid tangent tensor theorem; ring cotangent modules are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|[Tt]angent.*[Dd]eform|[Dd]eform.*[Tt]angent",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: TrivSqZeroExt supplies the ring but no deformation-groupoid tangent tensor theorem; ring cotangent modules are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|predeformation|tangent.*deformation",
+   "results": "0 hits. .  Hits concern formally smooth algebras, ring cotangent modules or the square-zero algebra construction, not the isomorphism-class functor of a deformation category.",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-category tangent/tensor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation functor satisfying Rim Schlessinger has tangent vector space and sends square zero algebra k plus V to tangent tensor V",
+   "results": "8 hits. Algebra.FormallySmooth, Algebra.FormallyEtale, Algebra.Extension.homInfinitesimal, Algebra.formallySmooth_iff, Algebra.FormallyEtale.instFormallySmooth, RingHom.FormallyEtale, Algebra.Smooth.formallySmooth, Algebra.Extension.formallySmooth_iff_split_injection.  Hits concern formally smooth algebras, ring cotangent modules or the square-zero algebra construction, not the isomorphism-class functor of a deformation category.",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-category tangent/tensor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rim Schlessinger predeformation category tangent space square zero extension tensor product",
+   "results": "8 hits. TrivSqZeroExt, TrivSqZeroExt.algebra', TensorAlgebra.toTrivSqZeroExt, retractionOfSectionOfKerSqZero, tensorKaehlerQuotKerSqEquiv, Algebra.Extension.cotangentEquiv, Algebra.Extension.tensorCotangentSpace, CommRingCat.Under.tensorProductFan'.  Hits concern formally smooth algebras, ring cotangent modules or the square-zero algebra construction, not the isomorphism-class functor of a deformation category.",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-category tangent/tensor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TrivSqZeroExt\"",
+   "results": "12 hits. TrivSqZeroExt, TrivSqZeroExt.fst, TrivSqZeroExt.snd, TrivSqZeroExt.inl, TrivSqZeroExt.inr, TrivSqZeroExt.add, TrivSqZeroExt.addCommGroup, TrivSqZeroExt.addCommMonoid.  Hits concern formally smooth algebras, ring cotangent modules or the square-zero algebra construction, not the isomorphism-class functor of a deformation category.",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-category tangent/tensor theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06IH (lemma-tangent-space-vector-space), together with Tags 06J7 (lemma-RS-implies-S1-S2) and 06I0 (lemma-S1-S2-associated-functor).",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-rs-tangent-tensor",
+  "worker": "stage1",
+  "summary": "Searched the project Lean, whole DAG and blueprint; no attachment or duplicate found. Preserved the statement. Wrote the (RS) product comparison explicitly, isolated the general set-valued product-functor linearization input as one statement-only node, and wrote the tensor map, finite-basis inverse, naturality and zero-dimensional basis consequence. No use of SGA, effectivity or a hull theorem.",
+  "blueprint": "Local supporting lemma of the recorded versal-formal-object chain, for the tangent-space parameter algebra in Stacks 07XY/06IH; retains the inherited null ancestor and via list (blueprint_refs.py ancestor prints None). The latest det-thm-sf-ctf-stability-direct-images proof was read; this is a lower-level deformation/linear-algebra input, not a change to that unit or its direct-image route. Whole-blueprint searches for tangent, Schlessinger, square-zero, 06I6, 06I8, linear-functor and preserves finite products found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-d52178026",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d52178026 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps, the new node and the cited definitions (test category, module tensor product, linear functor) in full. Checked them against formal-defos.tex: lemma-linear-functor 06I6, lemma-linear-functor-over-field 06I8, lemma-tangent-space-functor 06IA and lemma-tangent-space-vector-space 06IH. The item statement is unchanged from the Q15 parent snapshot. The parent versal-object steps 2 and 4 use exactly the bijection and the functional-surjectivity clause, d=0 included. Step 1 (from the (RS) definition): k[V] is in the test category. The product comparison is the projection comparison. On isomorphism classes, the 2-fibre product over a groupoid equivalent to the terminal one is the product: surjectivity holds because a gluing arrow always exists; injectivity holds because the compatibility condition is automatic between unique arrows. L(0) is a single point. This is elementary. Step 3: I checked the explicit inverse Psi_V both ways, using L(p_i f_v) = p_i(v)·id and sum of f_{e_i} p_i = id, and the case r=0. Step 4: naturality and the identification for W=k check out. Step 5: the basis/functional argument works, including d=0. The new node is 06I6 specialized to a field. Its existence follows from (f,g) composed with the sum map, and its uniqueness from id = i1 p1 + i2 p2. Tested on L constant point, the forgetful functor and V -> V⊗T. It has the statement only and six searches of three kinds; it is not a restatement of the item and has no cycle. Duplicate search with rg -L over the DAG (06I6/06I8/06IA/06IH and the linear-functor and product-preservation phrasings) found only scheme and group tangent-space nodes, none of which is a duplicate. Every citation is a definition or the new node, both in the same unit, so there are no tool_uses and no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinRSTangentTensor",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.artinRS_tangent_tensor",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.squareZeroMap",
+   "AlgebraicGeometry.ArtinDeformation.isoClassesMap",
+   "AlgebraicGeometry.ArtinDeformation.artinRS_tangent_tensor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinRSTangentTensor.lean",
+  "statement": "theorem artinRS_tangent_tensor (F : CofibredGroupoids.{u, v, w} R k) (hpre : IsPredeformation F) (hrs : IsRimSchlessinger F) : ∃ (_ : AddCommGroup (tangentSet F)) (_ : Module k (tangentSet F)) (e : ∀ (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V], TensorProduct k (tangentSet F) V ≃ isoClasses F (squareZeroTest (R := R) (k := k) V)), (∀ (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] (x : tangentSet F) (z : V), e V (x ⊗ₜ[k] z) = isoClassesMap F (squareZeroMap (LinearMap.toSpanSingleton k V z)) x) ∧ (∀ (x : tangentSet F) (a : k), e k (x ⊗ₜ[k] a) = a • x) ∧ (∀ (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] (W : Type u) [AddCommGroup W] [Module k W] [FiniteDimensional k W] (f : V →ₗ[k] W), isoClassesMap F (squareZeroMap f) ∘ e V = e W ∘ (TensorProduct.map (LinearMap.id : tangentSet F →ₗ[k] tangentSet F) f)) ∧ (∀ (d : ℕ) (bT : Module.Basis (Fin d) k (tangentSet F)) (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] (bV : Module.Basis (Fin d) k V) (t : tangentSet F), ∃ f : V →ₗ[k] k, isoClassesMap F (squareZeroMap f) (e V (∑ i : Fin d, bT i ⊗ₜ[k] bV i)) = t)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential structures are on the exact tangentSet F. The tensor equivalences are fixed by the pure-tensor transport formula, normalized over k, and natural under every linear parameter map. Helpers construct the actual marked square-zero arrow and its quotient transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b545c305",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause by clause the Lean matches the node and Stacks 06IH/06I8: Noetherian R, k of finite type (Algebra.FiniteType), F : CofibredGroupoids with IsPredeformation and IsRimSchlessinger. The existential AddCommGroup/Module on tangentSet F is forced to the canonical structure: scalars by the V=k pure-tensor formula plus the normalization e k (x⊗a)=a•x, addition by naturality under the projections and the sum map of k². e V is fixed by the 06I8 formula x⊗v ↦ L(f_v)(x) and is natural under 1⊗f. The functional-surjectivity clause holds for all d including 0, and an infinite-dimensional T is allowed. Helpers are real: squareZeroMap = TrivSqZeroExt.map, isoClassesMap = Quotient.map of push. Statement field verbatim; docstrings carry source, blueprint id and the 5 proof steps; sorry only in the item. The test-category dependency node is identical to live (Q74). No duplicate declaration in side-live lean/Sheaf (search rerun after the first one timed out) or in Mathlib. Report has both sections. V : Type u is forced by squareZeroTest and is not a restriction. Advisory only: the finite-type dependency is recorded in scheme form; the item uses the equivalent Algebra.FiniteType, as the test-category dependency does. No compile: no file changed; the worker reports a clean compile."
+ }
+}

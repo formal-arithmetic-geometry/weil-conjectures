@@ -1,0 +1,279 @@
+{
+ "id": "lem-sf-created-grothendieck-exact-integer-sum",
+ "kind": "statement",
+ "title": "Grothendieck transfer through creation and exactness of orbit sums",
+ "statement": "Fix a universe $\\mathcal V$, a Grothendieck abelian category $\\mathcal A$ [def-sp-grothendieck-abelian] relative to $\\mathcal V$, and a locally $\\mathcal V$-small abelian category $\\mathcal B$ [def-sp-abelian]. Let $U:\\mathcal B\\to\\mathcal A$ be additive, faithful, exact and conservative, creating all $\\mathcal V$-small colimits, and let $A:\\mathcal A\\to\\mathcal B$ be an additive left adjoint. For any generator $G$ of $\\mathcal A$, $A(G)$ is a generator of $\\mathcal B$: here generator means that every proper subobject $N\\subsetneq X$ is missed by some map from the generator to $X$. Filtered colimits in $\\mathcal B$ are exact, so $\\mathcal B$ is Grothendieck abelian. In addition assume given additive exact autoequivalences $P_n:\\mathcal A\\to\\mathcal A$, $n\\in\\mathbf Z$, and a natural isomorphism $UA\\cong\\bigoplus_nP_n$, where the sum is taken pointwise. Then $A$ is exact. Explicitly, for every small family of short exact sequences $0\\to X_i\\to Y_i\\to Z_i\\to0$ in $\\mathcal A$, the sequence of their coproducts is short exact. For each family $(X_i)$ the canonical maps from finite subsums identify $\\bigoplus_iX_i$ with $\\operatorname{colim}_{J\\subseteq I,\\,J\\text{ finite}}\\bigoplus_{i\\in J}X_i$. These identifications are natural in maps of families and identify kernels and cokernels of finite subsum sequences and their filtered colimits with the corresponding direct-sum sequences. Consequently $UA$, and hence $A$, preserves short exact sequences.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079B, definition-grothendieck-conditions (AB5 and generator); generic transfer and exact integer sum argument of returned item steps 5-6; source implementation Endofunctor/IsoAlgebra.lean isGrothendieckAbelian and RightDerivedFunctor/IsoAlgebra.lean Free.preservesHomology_functor"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-galois-exact-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Use hasColimits_of_hasColimits_createsColimits to obtain all colimits of size w in D from creation by U and [def-sp-grothendieck-abelian] in C. Mathlib also infers their preservation by U from creation. Restrict to filtered diagrams to obtain HasFilteredColimitsOfSize.{w,w} D, using [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, definition-grothendieck-conditions and following discussion; unpacking the assumed creation of colimits."
+   }
+  },
+  {
+   "text": "Use the equivalent separator formulation isSeparator_def. If two arrows f,g out of X agree after every map L(G) -> X, transpose each a : G -> U(X) under the adjunction. Applying the hom equivalence to this equality and homEquiv_naturality_right shows a >> U(f) = a >> U(g). Since G separates, U(f) = U(g), and faithfulness gives f = g. This proves the generator transfer in the abelian setting of [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "Free.isSeparator_algebra, lines 228-233, and isGrothendieckAbelian, lines 366-383; generic adjunction version of the generator argument, with the generator convention from Stacks Tag 079B."
+   }
+  },
+  {
+   "text": "Apply Mathlib HasExactColimitsOfShape.domain_of_functor J U for each w-small filtered J. U preserves and reflects finite limits: reflection follows from preservation and conservativity. It preserves J-colimits by creation (step 1). Thus the exact filtered colimits of C supplied by [def-sp-grothendieck-abelian] transfer to D. Use step 2 on an existing separator of C to obtain HasSeparator D; together with local smallness, these instances construct IsGrothendieckAbelian.{w} D. Exactness here is the finite-limit formulation of [def-galois-exact-functor].",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-galois-exact-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "isGrothendieckAbelian, lines 374-383: transfer of AB5 and the generator; Stacks Tag 079B, definition-grothendieck-conditions."
+   }
+  },
+  {
+   "text": "Mathlib CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone supplies the canonical colimit cocone, including the empty finite subset, for any family X. IsColimit.nonempty_isColimit_iff_isIso_desc for the chosen colimit shows its canonical desc is invertible. These are precisely the constructions of [def-weil-pbc-category-colimit], available by [def-sp-grothendieck-abelian].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, direct sums as coproducts; lemma-F-G-monos proof, finite-subset filtered-colimit presentation; universal-property details written here."
+   }
+  },
+  {
+   "text": "Apply the naturality equation of Mathlib CoproductsFromFiniteFiltered.liftToFinsetColimIso.hom to the given map a of families. Its source functor is liftToFinset C I followed by colim, so its naturality is exactly the displayed square, with the induced colimit maps of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, following discussion: maps of direct-sum sequences; naturality supplied by the coproduct and colimit universal properties."
+   }
+  },
+  {
+   "text": "Install HasFiniteBiproducts C using HasFiniteBiproducts.of_hasFiniteProducts from [def-sp-abelian]. Mathlib preservesFiniteLimits_liftToFinset gives preservation of finite limits. For finite colimits use preservesFiniteColimits_of_evaluation: each evaluation of liftToFinset is naturally isomorphic, by liftToFinsetEvaluationIso, to restriction to the finite subset followed by its coproduct functor. Restriction and colim preserve finite colimits. This establishes exactFunctor of liftToFinset in the sense of [def-galois-exact-functor]. Finite-subset coproduct functors also have exact colimits by Mathlib hasExactColimitsOfShape_discrete_finite.",
+   "uses": [
+    "def-sp-abelian",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, exactness of direct sums; finite biproduct case expanded using kernels and cokernels, before applying AB5."
+   }
+  },
+  {
+   "text": "The Grothendieck category C is AB4 by the Mathlib instance IsGrothendieckAbelian.ab4OfSize, implemented by the finite-subsum filtered-colimit argument. Consequently its coproduct functor preserves finite limits and colimits. Evaluation functors jointly reflect isomorphisms by NatIso.isIso_of_isIso_app. Apply [lem-weil-pbc-jointly-reflect-short-exact] to these evaluations to recognize the given family as a short exact complex in the functor category; ShortExact.map_of_exact colim gives the asserted short exact coproduct sequence. This uses the short exact sequence convention of [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-jointly-reflect-short-exact",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, AB5 and the discussion of exact direct sums; lemma-F-G-monos proof, passage of kernels through the finite-subsum filtered colimit."
+   }
+  },
+  {
+   "text": "For every finite discrete subset, filtered category Finset(Discrete I), and full discrete index category, infer invertibility of kernelComparison and cokernelComparison from preservation of the respective kernels and cokernels. Finite subsets use finite biproducts, filtered finite subsets use [lem-sfb-grothendieck-filtered-finite-limits], and full coproducts use AB4 from step 7. Cokernels are preserved since colim is a left adjoint. All are Mathlib canonical comparisons, so the universal-property identifications of [def-weil-pbc-category-colimit] are retained.",
+   "uses": [
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, right exactness of colimits in the following discussion; canonical comparison and naturality expanded by universal properties."
+   }
+  },
+  {
+   "text": "Set Q := Discrete.functor P. For each integer n, extract preservation of finite limits and colimits from the exactFunctor hypothesis [def-galois-exact-functor]. Evaluation of Q.flip is definitionally P_n; preservesFiniteLimits_of_evaluation and its colimit dual prove Q.flip exact. The colimit functor on Discrete Z is exact by AB4 (shrink the available colimit universes to zero). Thus Q.flip followed by colim is exact. The natural isomorphism colimitIsoFlipCompColim Q identifies this functor with the pointwise coproduct of the P_n. Transport exactness through this isomorphism and e to L followed by U. Since U reflects finite limits and finite colimits by exactness and conservativity, preservesFiniteLimits_of_reflects_of_preserves and its colimit dual give exactness of L. Finally ShortExact.map_of_exact gives both short exact sequence conclusions in the convention of [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-galois-exact-functor",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+    "place": "Free.preservesHomology_functor, lines 54-58; generic direct-sum proof and reflection along U, with finite-sum-to-filtered-colimit details in steps 4-8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-exact-functor",
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-exact-sequence",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-weil-pbc-jointly-reflect-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079B and lemma-F-G-monos; N2 formal proof, 2026-10-24, reuses Mathlib GrothendieckAxioms.Basic, Limits.Constructions.Filtered, and Functor.ReflectsIso.Exact. Generator transfer uses the adjunction hom equivalence and faithfulness; integer-sum exactness uses colimitIsoFlipCompColim and reflection of finite (co)limits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian category with a faithful conservative colimit creating functor to a Grothendieck category and a left adjoint has a generator given by the left adjoint and exact filtered colimits",
+   "results": "CategoryTheory.IsGrothendieckAbelian; CategoryTheory.Limits.isGrothendieckAbelian_ind; CategoryTheory.Adjunction.hasCardinalFilteredGenerator; CategoryTheory.Abelian.freyd_mitchell; CategoryTheory.abelianOfAdjunction; CategoryTheory.Adjunction.isCardinalFilteredGenerator; CategoryTheory.Adjunction.hasExactColimitsOfShape; CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct sum of exact additive equivalences of a Grothendieck abelian category is exact and a faithful right adjoint transfers generators",
+   "results": "CategoryTheory.Abelian.freyd_mitchell; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj; CategoryTheory.IsGrothendieckAbelian; CategoryTheory.Limits.isGrothendieckAbelian_ind; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.Abelian.FreydMitchell.functor; CategoryTheory.abelianOfAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian",
+   "results": "CategoryTheory.IsGrothendieckAbelian; CategoryTheory.IsGrothendieckAbelian.hasColimits; CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.hasLimits; CategoryTheory.IsGrothendieckAbelian.hasSeparator; CategoryTheory.IsGrothendieckAbelian.locallySmall; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; CategoryTheory.IsGrothendieckAbelian.wellPowered",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian|isSeparator.*adj|HasExactColimitsOfShape",
+   "results": "Mathlib/Condensed/Light/AB.lean; Mathlib/Condensed/Light/AB.lean; Mathlib/Algebra/Category/Grp/AB.lean; Mathlib/Condensed/AB.lean; Mathlib/Condensed/AB.lean; Mathlib/Condensed/AB.lean; Mathlib/Condensed/AB.lean; Mathlib/CategoryTheory/ObjectProperty/FunctorCategory/PreservesLimits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian category with a faithful conservative colimit creating functor to a Grothendieck category and a left adjoint has a generator given by the left adjoint and exact filtered colimits",
+   "results": "CategoryTheory.IsGrothendieckAbelian.hasLimits; CategoryTheory.abelianOfAdjunction; CategoryTheory.IsGrothendieckAbelian.hasColimits; CategoryTheory.IsGrothendieckAbelian.casesOn; CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.IsGrothendieckAbelian.tensorObj; CategoryTheory.Adjunction.hasCardinalFilteredGenerator",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "domain_of_functor|isSeparator.*adj|isSeparator.*left|of_AB5|coproduct.*[Ff]inset",
+   "results": "Mathlib/CategoryTheory/Generator/Basic.lean; Mathlib/CategoryTheory/Preadditive/LiftToFinset.lean; Mathlib/CategoryTheory/Limits/Lattice.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Indization.lean; Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean; Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic ingredients found, but no declaration gives the full transfer and canonical finite-subsum kernel/cokernel comparisons under these hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithful right adjoint to a Grothendieck abelian category transfers generators and exact filtered colimits; coproducts are filtered colimits of finite subsums and are exact",
+   "results": "CategoryTheory.AB4.of_AB5; CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; CategoryTheory.IsGrothendieckAbelian.hasLimits; CategoryTheory.IsGrothendieckAbelian.ab4OfSize; CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup; CategoryTheory.Adjunction.isCardinalFilteredGenerator; CategoryTheory.IsGrothendieckAbelian.mk",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic ingredients found, but no declaration gives the full transfer and canonical finite-subsum kernel/cokernel comparisons under these hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasExactColimitsOfShape.domain_of_functor",
+   "results": "CategoryTheory.HasExactColimitsOfShape.domain_of_functor",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic ingredients found, but no declaration gives the full transfer and canonical finite-subsum kernel/cokernel comparisons under these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful conservative exact colimit creating right adjoint from an abelian category to a Grothendieck abelian category transfers a generator and exact filtered colimits; the direct sum of exact autoequivalences is exact",
+   "results": "CategoryTheory.Adjunction.hasExactColimitsOfShape; CategoryTheory.Abelian.freyd_mitchell; CategoryTheory.Limits.isGrothendieckAbelian_ind; CategoryTheory.abelianOfAdjunction; CategoryTheory.IsGrothendieckAbelian; CategoryTheory.IsGrothendieckAbelian.ab4OfSize; CategoryTheory.IsGrothendieckAbelian.ab5OfSize; CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic ingredients found, but no declaration gives the full transfer and canonical finite-subsum kernel/cokernel comparisons under these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left adjoint to a faithful exact conservative functor sends a generator to a generator and is exact when its composite is a coproduct of exact functors; coproducts are filtered colimits of finite coproducts",
+   "results": "CategoryTheory.Adjunction.hasExactColimitsOfShape; CategoryTheory.Adjunction.hasExactLimitsOfShape; CategoryTheory.abelianOfAdjunction; CategoryTheory.Adjunction.hasCardinalFilteredGenerator; CategoryTheory.finitaryExtensive_of_reflective; CategoryTheory.Adjunction.isCardinalFilteredGenerator; CategoryTheory.HasExactColimitsOfShape.domain_of_functor; CategoryTheory.Functor.preservesFiniteColimits_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic ingredients found, but no declaration gives the full transfer and canonical finite-subsum kernel/cokernel comparisons under these hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent returned proof steps 5-6: Grothendieck transfer through creation and exactness of orbit sums; open-immersion comparison for package clause (2), following inherited provenance.",
+   "via": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-created-grothendieck-exact-integer-sum",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Proved the generator transfer by adjunction naturality and AB5 transfer with the existing conservative-exact detection leaf. Wrote out the finite-subsum universal property, finite biproduct kernel/cokernel calculation, filtered exactness, all canonical comparisons and their naturality. No new nodes: the non-elementary inputs already have Mathlib-leaf nodes. No source declaration covers the generic item.",
+  "blueprint": "blueprint_refs ancestor returns None. Inherited provenance: parent lem-sf-fixed-pair-derived-forget-comparison, returned steps 5-6, generic Grothendieck transfer and exact orbit sums for the open-immersion comparison in package clause (2). Steps 1-3 realize Grothendieck transfer; steps 4-9 realize exactness and canonical finite-subsum comparisons. The chapter and unit route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-08c018f8b",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-08c018f8b (reviewer sub-agent of L); spot-checked: PASS, no fixes, no dropped nodes; review.md is in the run directory. The delivery is a one-commit split with no new nodes. The item statement and stmt_deps are unchanged and proof_deps equals the union of the steps' uses. Live node is still unsplit and there is no repair note, so this is not a re-split order and no group has superseded it. The parent's step 2 uses the item exactly as stated. Sources read: Stacks injectives.tex Tag 079B (the generator convention matches the item) and the lemma-F-G-monos proof (finite-subsum filtered colimit plus AB5 for kernels). The cited Lean source lines (IsoAlgebra.lean 228-233 and 366-383, RightDerivedFunctor/IsoAlgebra.lean 54-58) match the files but cover only the fixed-pair special case, so proof_origin agent is correct. Steps: (1) creation gives colimits in B and their preservation by U. (2) generator transfer: Ui is monic and not invertible by conservativity, and a factorization b = i c would give a = Ui Phi(c), a contradiction. (3) AB5 transfer through lem-weil-pbc-jointly-reflect-short-exact, both directions, hypotheses checked. (4)-(5) Fin(I), including the empty set, is filtered, and the coproduct is the colimit of finite subsums, naturally in maps of families. (6) componentwise kernels and cokernels of finite biproducts. (7) lem-sfb-grothendieck-filtered-finite-limits applied to the V-small filtered category Fin(I), plus AB5. (8) cokernels pass through the colimit by the written universal-property argument, with naturality by cancelling a mono or an epi. (9) sum over Z of the P_n(S), identified with UA(S) by naturality, then reflected through U; the finite-limit form of exactness comes from the comparison maps, U-preservation and conservativity. Edge cases tested: zero category, empty and singleton families, u = 0 and u = id, Ab with U = id. Faithfulness of U is never used, which is harmless. The only non-definition citations are two Mathlib leaves (tools, not route), so tool_uses = [] is correct. No duplicate of the generic statement exists in the DAG. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CreatedGrothendieckExactIntegerSum",
+  "declaration": "CategoryTheory.createdGrothendieck_exactIntegerSum",
+  "file": "lean/Sheaf/CategoryTheory/CreatedGrothendieckExactIntegerSum.lean",
+  "statement": "theorem createdGrothendieck_exactIntegerSum {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{w} C] {D : Type u₂} [Category.{v₂} D] [Abelian D] [LocallySmall.{w} D] (U : D ⥤ C) [U.Additive] [U.Faithful] [U.ReflectsIsomorphisms] [PreservesFiniteLimits U] [PreservesFiniteColimits U] [CreatesColimitsOfSize.{w, w} U] (L : C ⥤ D) [L.Additive] (adj : L ⊣ U) : (∀ G : C, IsSeparator G → IsSeparator (L.obj G)) ∧ IsGrothendieckAbelian.{w} D ∧ (∀ I : Type w, exactFunctor (Discrete I ⥤ C) C colim ∧ (∀ S : ShortComplex (Discrete I ⥤ C), (∀ i : Discrete I, (S.map ((evaluation (Discrete I) C).obj i)).ShortExact) → (S.map colim).ShortExact) ∧ (∀ X : I → C, Nonempty (IsColimit (finiteSubcoproductsCocone X)) ∧ IsIso (colimit.desc (liftToFinsetObj (Discrete.functor X)) (finiteSubcoproductsCocone X))) ∧ (∀ (F G : Discrete I ⥤ C) (a : F ⟶ G), colim.map ((liftToFinset C I).map a) ≫ liftToFinsetColimIso.hom.app G = liftToFinsetColimIso.hom.app F ≫ colim.map a) ∧ exactFunctor (Discrete I ⥤ C) (Finset (Discrete I) ⥤ C) (liftToFinset C I) ∧ (∀ (J : Finset (Discrete I)) (F G : Discrete J ⥤ C) (a : F ⟶ G), IsIso (kernelComparison a (colim (J := Discrete J) (C := C))) ∧ IsIso (cokernelComparison a (colim (J := Discrete J) (C := C)))) ∧ (∀ (F G : Discrete I ⥤ C) (a : F ⟶ G), IsIso (kernelComparison ((liftToFinset C I).map a) (colim (J := Finset (Discrete I)) (C := C))) ∧ IsIso (cokernelComparison ((liftToFinset C I).map a) (colim (J := Finset (Discrete I)) (C := C))) ∧ IsIso (kernelComparison a (colim (J := Discrete I) (C := C))) ∧ IsIso (cokernelComparison a (colim (J := Discrete I) (C := C))))) ∧ (∀ (P : ℤ → C ⥤ C) [∀ n : ℤ, (P n).Additive] [∀ n : ℤ, (P n).IsEquivalence], (∀ n : ℤ, exactFunctor C C (P n)) → (L ⋙ U ≅ ∐ P) → exactFunctor C C (L ⋙ U) ∧ exactFunctor C D L ∧ ∀ S : ShortComplex C, S.ShortExact → (S.map (L ⋙ U)).ShortExact ∧ (S.map L).ShortExact)",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "One conjunction states every clause, using Mathlib’s canonical finite-subsum diagram, natural comparison, and kernel/cokernel comparisons; all universes remain independent. No statement correction or new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0959cb376",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Only the lean field differs from the live node; 5 stmt_dep records identical; statement field verbatim. Hypotheses match exactly (IsGrothendieckAbelian.{w} C, LocallySmall.{w} D, U additive/faithful/ReflectsIsomorphisms/PreservesFiniteLimits+Colimits/CreatesColimitsOfSize.{w,w}, L additive with L ⊣ U; P_n additive, IsEquivalence, exact, and L⋙U ≅ ∐P only in the final implication); universes independent. Conclusions: IsSeparator equals the Stacks 079B generator convention in abelian categories (checked injectives.tex 1286-1288); IsGrothendieckAbelian.{w} D; exact colim on Discrete I and the short-complex clause; canonical finiteSubcoproductsCocone/liftToFinsetColimIso (Filtered.lean read); IsIso of canonical kernelComparison/cokernelComparison for finite, Finset-filtered and full sums; exactFunctor L and L⋙U plus SES preservation. Edge cases empty I/J, zero category, ℤ shrink: covered. No hollow definitions; docstrings carry source places and blueprint tag with all 9 proof steps; sorry only; proof-dep import required. Not recompiled per instructions. Notes only: naturality conjunct is automatic; U.Faithful unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261024T190408-L-4043049",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

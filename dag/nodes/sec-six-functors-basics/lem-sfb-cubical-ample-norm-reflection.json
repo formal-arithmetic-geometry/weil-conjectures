@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-cubical-ample-norm-reflection",
+ "kind": "statement",
+ "title": "An ample inversion norm detects positivity of a cubical line",
+ "statement": "Let $S$ be a normal integral Noetherian affine scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring]; Noetherian means locally Noetherian and quasi-compact, and normal means that all local rings are integrally closed domains. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation, def-sc-group-scheme] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Its multiplication $m:G\\times_SG\\to G$, identity $e:S\\to G$, and inversion $\\iota:G\\to G$ are $S$-morphisms satisfying associativity, identity, inverse and commutativity identities [def-pc-fibre-product]. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Let $(P,r,\\tau)$ be a cubical rigidified invertible module on $G$ [def-sfb-cubical-rigidified-line, def-sc-invertible-module]. Use tensor pullback and tensor product [def-pc-module-pullback, def-pur-sheaf-tensor-product]. Suppose the specified line $N=P\\otimes\\iota^*P$ is ample on the WHOLE scheme $G$ [def-weil-pbc-ample-invertible-module]. Then $P$ is ample on $G$. The hypothesis is absolute ampleness of this supplied global inversion norm, not ampleness of its residue-field restrictions; no conclusion about extending a line from a generic fibre is asserted.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "Agent-formulated norm-reflection input to the cubical ampleness argument; the normal-base relative version is a separate unsplit theorem, not claimed as a numbered assertion of Raynaud. Original ampleness chapters WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sfb-cubical-rigidified-line",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Set $D=P\\otimes(\\iota^*P)^\\vee$. Apply [lem-sfb-cubical-antisymmetric-frame-extension] to the given cubical rigidified $P$. Obtain the actual frame scheme $q:E=D^\\times\\to G$ with its commutative group law. In particular $E/S$ is smooth separated of finite presentation with semiabelian geometric fibres; $q$ is affine, faithfully flat of finite presentation and a group quotient with kernel $\\mathbf G_{m,S}$. Its tautological frame trivializes $q^*D$. The given normal integral Noetherian affine base is unchanged.",
+   "uses": [
+    "lem-sfb-cubical-antisymmetric-frame-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I, cubical torsors and associated extensions (especially the cube/second-difference calculus in I 2 and I 5). Agent-formulated antisymmetric-frame construction; local original WANTED, not a claimed verbatim numbered theorem. The multiplication is obtained from the cube at (x,y,-x-y)."
+   }
+  },
+  {
+   "text": "Let $N=P\\otimes\\iota^*P$, the supplied ample line. Rank-one evaluation and tensor symmetry identify $P^{\\otimes2}\\simeq N\\otimes D$: the factors $\\iota^*P$ and $(\\iota^*P)^\\vee$ cancel. Pullback distributes over tensor products by [lem-weil-pbc-invertible-pullback-tensor]. Using $q^*D\\simeq\\mathcal O_E$ from step 1 gives $q^*(P^{\\otimes2})\\simeq q^*N$. These are isomorphisms of invertible modules on the whole schemes; no fibrewise comparison is used. Evaluation is checked in any local frame, where it is $a\\otimes b\\mapsto ab$, and these maps agree on overlaps.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tensor-pullback and rank-one evaluation, explicit local-frame cancellation."
+   }
+  },
+  {
+   "text": "Since $q$ is affine and $N$ is ample on all of $G$, [lem-weil-pbc-pullback-ample-invertible] makes $q^*N$ ample on all of $E$. Transport its sections through the preceding line isomorphism: their residue values and nonvanishing loci agree, so $q^*(P^{\\otimes2})$ is ample.",
+   "uses": [
+    "lem-weil-pbc-pullback-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Affine pullback of an ample invertible module, as stated in the cited node; transport along an isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semiabelian-gm-extension-ample-reflection] to $q:E\\to G$ and $M=P^{\\otimes2}$. Step 1 supplies its full group-extension, smoothness, separation, finite-presentation and semiabelian-fibre hypotheses; the base meets exactly its normal integral Noetherian affine assumptions. Step 3 supplies absolute ampleness upstairs. Therefore $P^{\\otimes2}$ is ample on $G$.",
+   "uses": [
+    "lem-sfb-semiabelian-gm-extension-ample-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.11, ampleness comparison for group quotients: supporting source for the field abelian-quotient case. The relative semiabelian Gm-extension assertion here is an agent-formulated geometric prerequisite, not claimed as the verbatim statement of XI 1.11. Original and proof of this relative formulation WANTED. No general fpqc descent of absolute ampleness is asserted."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-ample-invertible-module], $G$ is quasi-compact and every $x\\in G$ has an affine section locus $G_s$ containing $x$ for some $s\\in\\Gamma(G,(P^{\\otimes2})^{\\otimes n})$, $n\\geq1$. Regard $s$ as a section of $P^{\\otimes2n}$ by reassociating tensor factors. Its residue value and locus are unchanged and $2n\\geq1$. The same affine loci and quasi-compactness verify the definition for $P$, proving the conclusion.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS, definition of ampleness; positive-power reflection directly from the affine section loci."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cubical-antisymmetric-frame-extension",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-sfb-semiabelian-gm-extension-ample-reflection",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "Agent assembly via the antisymmetric frame extension and a separate group-quotient reflection input; no circular fibrewise criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|ample.*inversion|inversion.*ample",
+   "results": "{\"t\": \"2026-10-24T02:33:05Z\", \"tool\": \"grep\", \"query\": \"cubical|cubist|ample.*inversion|inversion.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; convex AmpleSet, affine scheme morphisms and structure-sheaf localization do not state positivity of an invertible sheaf on a semiabelian group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rigidified cubist line bundle is ample if its symmetrization L tensor minus-one pullback L is ample over a normal Noetherian affine base",
+   "results": "{\"t\": \"2026-10-24T02:33:06Z\", \"tool\": \"leansearch\", \"query\": \"A rigidified cubist line bundle is ample if its symmetrization L tensor minus-one pullback L is ample over a normal Noetherian affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AmpleSet.preimage_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AmpleSet.image_iff\", \"Submodule.tensorInvEquiv\"], \"digest\": \"a0d58bc545921d64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; convex AmpleSet, affine scheme morphisms and structure-sheaf localization do not state positivity of an invertible sheaf on a semiabelian group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T02:33:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; convex AmpleSet, affine scheme morphisms and structure-sheaf localization do not state positivity of an invertible sheaf on a semiabelian group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical invertible sheaf on a smooth semiabelian group scheme over a normal affine Noetherian base is ample if its tensor product with its inverse-image under inversion is ample",
+   "results": "{\"t\": \"2026-10-24T02:33:08Z\", \"tool\": \"leanfinder\", \"query\": \"A cubical invertible sheaf on a smooth semiabelian group scheme over a normal affine Noetherian base is ample if its tensor product with its inverse-image under inversion is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"c9e34382c3b27785\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; convex AmpleSet, affine scheme morphisms and structure-sheaf localization do not state positivity of an invertible sheaf on a semiabelian group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness is detected by symmetrizing a cubical line bundle on a smooth commutative group with semiabelian fibres over a normal Noetherian affine scheme",
+   "results": "{\"t\": \"2026-10-24T02:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"Ampleness is detected by symmetrizing a cubical line bundle on a smooth commutative group with semiabelian fibres over a normal Noetherian affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AmpleSet.image_iff\", \"AmpleSet.preimage_iff\", \"AmpleSet.image\", \"AmpleSet.preimage\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"506fe1fcfeab4862\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; convex AmpleSet, affine scheme morphisms and structure-sheaf localization do not state positivity of an invertible sheaf on a semiabelian group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical rigidified line on a semiabelian group over an algebraically closed field is ample exactly when its tensor product with its inversion pullback is ample",
+   "results": "Hits: AmpleSet.preimage_iff, AmpleSet.image_iff, AmpleSet.preimage, AmpleSet.image, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, IsSemiabelian, inversion, tensor invertible module",
+   "results": "No hits. Note: loogle: unknown identifier 'IsAmple' None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|semiabelian|IsAmple|ample.*inversion",
+   "results": "No hits. None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ampleness of a cubical line reflected by its inversion norm on a semiabelian group scheme",
+   "results": "Hits: GroupSeminormClass.map_inv_eq_map, norm_inv', nnnorm_inv', EuclideanGeometry.inversion_inversion, normGroupSeminorm, enorm_inv', GroupSeminorm.inv', inv_closedBall None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically semiabelian group scheme over a field with a cubical line whose inversion norm is ample has ample line",
+   "results": "Hits: AmpleSet.image_iff, AmpleSet.preimage_iff, AmpleSet.image, AlgebraicGeometry.AffineSpace.instIsAffine, AmpleSet.preimage, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.not_isIntegralHom None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AmpleSet, IsAffine, tensor product invertible sheaf",
+   "results": "No hits. Note: loogle: unknown identifier 'IsAffine' None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample|semiabelian|cubical",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cubical-strict-local-affine-seed",
+  "date": "2026-10-24",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: Agent-formulated norm-reflection input to the cubical ampleness argument; the normal-base relative version is a separate unsplit theorem, not claimed as a numbered assertion of Raynaud. Original ampleness chapters WANTED.",
+   "via": [
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cubical-ample-norm-reflection",
+  "worker": "stage1",
+  "summary": "Construct the antisymmetric frame extension, trivialize the antisymmetric factor there, reflect ampleness of P squared by the separate group-quotient input, and use the defining affine section loci. Neither multiplication-map finiteness nor the circular fibrewise-ample ancestor is used. Two statement-only inputs are explicitly agent-formulated, with originals WANTED.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: Agent-formulated norm-reflection input to the cubical ampleness argument; the normal-base relative version is a separate unsplit theorem, not claimed as a numbered assertion of Raynaud. Original ampleness chapters WANTED. Steps 1–5 supply norm reflection in the affine-seed step without returning through the fibrewise criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor-pullback compatibility for the tautological cancellation; no special group or positivity route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic affine pullback preserves absolute ampleness; the affine frame projection is checked before applying it."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Definition used to reflect ampleness of a positive tensor power by the same affine section loci."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-09faedb90",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-09faedb90 (reviewer sub-agent of L); spot-checked: I read the whole split. The item statement and stmt_deps are unchanged from live, the item is still unsplit on live and side-live (so no parallel group superseded it), there is no repair note, and no SGA source is used. Step 1 cites the new lem-sfb-cubical-antisymmetric-frame-extension with H=G and L=P; its hypotheses are exactly the item's. I checked by hand that the cube identity at (x,y,-x-y) gives D_xD_y ≅ D_{x+y}. Commutativity follows from the S_3 symmetry of tau. The associativity and commutativity defects are normalized units, which Rosenlicht's theorem forces to be trivial. Each fibre of E is an extension of a torus by G_m over a semiabelian fibre, so it is semiabelian. Step 2 is the identity P^{⊗2} ≅ N⊗D, which is elementary, plus pullback of tensor products (lem-weil-pbc-invertible-pullback-tensor (2)), giving q*P^2 ≅ q*N. Step 3 uses that q is affine and N is ample, so q*N is ample (Stacks 0892(2), morphisms.tex l.8829). Step 4 applies the new lem-sfb-semiabelian-gm-extension-ample-reflection; every hypothesis is supplied by step 1, and the kernel is G_m by fppf exactness. Step 5 passes from P^2 to P using the same affine loci with exponent 2n (Stacks 01PS, properties.tex l.4244). I tested the reflection node on: a trivial extension (restrict to H×{1}); H a torus; a field with D non-torsion (then E is not quasi-affine); H an abelian scheme (fibres plus the field case); a DVR with generic elliptic fibre and special fibre G_m (Pic(H)=Pic(H_eta)); and E quasi-affine (then H is a torus). A general G_m-torsor counterexample such as A^{n+1}∖0 → P^n is excluded by the group hypothesis. The node is not a duplicate of the field-only abelian-quotient-ample-reflection, of subtorus-quotient-schematicity, of fpqc descent or of algebraic-equivalence-norm. The frame node is not a duplicate of picard-multiplicative-torsor, second-difference-diagonal or def-sfb-cubical-rigidified-line. Both new nodes are honestly labelled as agent-formulated, with the Raynaud XI 1.11 and Moret-Bailly I originals marked WANTED. The generic sec-proper-base-change tool uses are accepted. FIX (B2): the frame-extension statement never declared H to be a commutative S-group scheme and used m, e, p_1 and p_2 without introducing them. The corrected statement is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-cubical-antisymmetric-frame-extension.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubicalAmpleNormReflection",
+  "declaration": "AlgebraicGeometry.CubicalRigidifiedLine.isAmple_of_isAmple_inversionNorm",
+  "file": "lean/Sheaf/AlgebraicGeometry/CubicalAmpleNormReflection.lean",
+  "statement": "theorem CubicalRigidifiedLine.isAmple_of_isAmple_inversionNorm {S : Scheme.{u}} [IsIntegral S] [IsNoetherian S] [IsAffine S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (G : Over S) [CommGrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] (hG : HasSemiabelianGeometricFibres (Grp.mk G)) (P : CubicalRigidifiedLine G) (hN : ∃ h : (P.line ⊗ (Scheme.Modules.tensorPullback (ι[G]).left).obj P.line).IsInvertible, @Scheme.Modules.IsAmple G.left (P.line ⊗ (Scheme.Modules.tensorPullback (ι[G]).left).obj P.line) h) : @Scheme.Modules.IsAmple G.left P.line P.invertible",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7503879b7",
+  "group": "Q45",
+  "result": "pass",
+  "note": "New module CubicalAmpleNormReflection.lean (absent on side-live); the node is unchanged apart from the added lean record (diffed against side-live). Every clause matches: IsIntegral/IsNoetherian/IsAffine plus stalkwise IsDomain∧IsIntegrallyClosed (the node's local-ring normality); Over S with CommGrpObj, Smooth, IsSeparated, LocallyOfFinitePresentation+QuasiCompact (finite presentation via separation); HasSemiabelianGeometricFibres (Grp.mk G) (signature checked); CubicalRigidifiedLine G; N = P.line ⊗ tensorPullback (ι[G]).left P.line; ∃ h binds only the Prop instance of IsAmple; the absolute Stacks 01PS IsAmple on G.left in both hypothesis and conclusion, never fibrewise. No extra assumptions, single universe, sorry only, no new defs, source/blueprint docstrings present, report sections present. No file changed, so no compile."
+ }
+}

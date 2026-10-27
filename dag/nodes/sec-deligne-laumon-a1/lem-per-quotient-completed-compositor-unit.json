@@ -1,0 +1,407 @@
+{
+ "id": "lem-per-quotient-completed-compositor-unit",
+ "kind": "statement",
+ "title": "Quotient-tower completed pullback adjunction and compositor unit equation",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$, and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $X''\\xrightarrow hX'\\xrightarrow gX$ be morphisms of noetherian finite-dimensional schemes on which $\\ell$ is invertible. Use their small pro-etale sites and canonical inverse images [def-weil-pbc-proetale-site, def-weil-proetale-inverse-image]. For $W=X,X',X''$, put $B_W=\\varprojlim_{n\\geq1}(A/\\varpi^n)_W$, with projections $\\pi_{W,n}$ [def-weil-pbc-adic-coefficient-datum], and $E_W=B_W[1/\\varpi]$ [def-weil-pbc-ringed-section-localization]. Use module sheaves, sheaf tensor products and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. For a morphism $u:V\\to W$, let $d_{u,n}:u^{-1}(A/\\varpi^n)_W\\to(A/\\varpi^n)_V$ be the canonical constant-section map and $c_u:u^{-1}B_W\\to B_V$ the map with components $d_{u,n}u^{-1}\\pi_{W,n}$ [def-weil-pbc-completed-pullback]. Set $P_u=B_V\\otimes^L_{u^{-1}B_W}u^{-1}(-)$, with canonical ordinary composition $a:P_hP_g\\xrightarrow\\sim P_{g\\circ h}$ and identity $e:P_{\\mathrm{id}}\\xrightarrow\\sim\\mathrm{id}$ [lem-sfb-ringed-derived-monoidal-comparisons]. Let $\\mathscr D_W^{\\mathrm{comp}}\\subset D(B_W)$ be the full category of locally derived $(\\varpi)$-complete objects: $M$ belongs to it when $R\\mathcal Hom_{B_W|_U}(B_W|_U[1/t],M|_U)=0$ for every site object $U$ and every section $t\\in(\\varpi)B_W(U)$ [def-pur-derived-internal-hom]. Denote its completion reflector with its specified unit by $\\Lambda_W,\\eta_W$ [lem-weil-pbc-ringed-koszul-completion-reflector]. For $u:V\\to W$, let $\\widehat P_u$ and $\\gamma_{u,K}:P_uK\\to\\widehat P_uK$ be the actual strict finite-quotient-tower pullback and quotient augmentation of [def-weil-pbc-completed-pullback]. Give ordinary $P_u\\dashv Ru_*$ the specified derived adjunction of [lem-sfb-ringed-derived-monoidal-comparisons].\nThen on $\\mathscr D_W^{\\mathrm{comp}}$ there is a canonical identification $\\widehat P_u=\\Lambda_VP_u$ carrying $\\gamma_{u,K}$ to $\\eta_{V,P_uK}$, compatible with restriction to constant coefficients and the finite-quotient/Koszul completion equivalence [lem-weil-pbc-constant-completion-equivalence]. The functor $Ru_*$ preserves these full complete categories, and $\\widehat P_u\\dashv Ru_*|_{\\mathscr D_V^{\\mathrm{comp}}}$ has Hom bijection\n$$\\operatorname{Hom}(\\widehat P_uK,L)\\xrightarrow{-\\circ\\gamma_{u,K}}\\operatorname{Hom}(P_uK,L)\\xrightarrow\\sim\\operatorname{Hom}(K,Ru_*L).$$\nLet $\\widehat a:\\widehat P_h\\widehat P_g\\xrightarrow\\sim\\widehat P_{g\\circ h}$ be the conjugate, for precisely these restricted adjunctions and their composite adjunction [def-weil-pbc-composite-adjunction, lem-weil-pbc-conjugate-iso-unit-equation], of the canonical direct-image composition comparison; let $\\widehat e:\\widehat P_{\\mathrm{id}}\\xrightarrow\\sim\\mathrm{id}$ be its identity analogue. For every complete $K$ the specified maps satisfy\n$$\\widehat a_K\\,\\gamma_{h,\\widehat P_gK}\\,P_h(\\gamma_{g,K})=\\gamma_{g\\circ h,K}\\,a_K,\\qquad \\widehat e_K\\,\\gamma_{\\mathrm{id},K}=e_K.$$\nThese equations use the actual quotient-tower units and the ordinary adjunction-compatible compositor, and are equations of natural transformations before any unit is assumed invertible. They fix the same comparisons under the quotient-tower/reflector identification, rather than merely giving isomorphic endpoints. There is no constructibility or boundedness restriction on $K$ in the complete categories and no assumption that $u^{-1}B_W\\to B_V$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (lemma-pushforward-Noetherian-case), clauses (2),(5); algebraization.tex Tags 099J (lemma-pushforward-derived-complete), 0A0E (lemma-derived-completion-koszul), lemma-pushforward-derived-complete-adjoint; specified reflected-conjugate normalization supplied by agent"
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pur-ringed-principal-local-tests",
+  "def-weil-pbc-completed-constant-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the intrinsic complete predicate with the singleton Koszul invertible-unit predicate using the already proved wfComplete_iff. Transport the principal local RHom test to the explicit small completed site by the native slice local-test and local-divisibility restriction theorems and the standard module-equivalence comparison (on the exact AsSmall.{0} site, preserving its Hom universe). Apply principalLocallyComplete_iff to the image ideal of the global uniformizer and ringedKoszulCompletionReflector. The existing completed_fiber_strict_limit_comparison identifies that reflector unit with the published wfCompletionUnit; reflect invertibility through the site equivalence. This proves complete_iff_local without changing its slice universes.",
+   "uses": [
+    "lem-sf-automorphism-completion-unit-comparison",
+    "lem-pur-principal-ideal-local-test-criterion",
+    "lem-pur-unit-power-completeness",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-pur-native-ringed-restriction-local-test",
+    "lem-pur-native-ringed-restriction-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0999, 0A0E; principal local test and normalized Koszul comparison"
+   }
+  },
+  {
+   "text": "Use the actual reflection adjunction of the full intrinsic-complete subcategory and the Hom bijection of wfCompletionReflector. wfComplete_iff identifies their predicates. For each object, construct the unique unit-preserving isomorphism by the two Hom bijections; injectivity after precomposition with the unit proves naturality, the inverse identities and uniqueness. Naturality of the specified Koszul unit follows directly from apply_symm_apply for the Hom bijection of wfCompletionReflector; no Weil tensor-product construction is needed. This proves koszul_identification.",
+   "uses": [
+    "lem-sf-automorphism-completion-unit-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B, 0A0E; uniqueness of reflection"
+   }
+  },
+  {
+   "text": "Reuse pbcActualCompletedPullback_tower, which already compares the actual strict quotient tower with ordinary pullback followed by completion and identifies its exact augmentation. Transport the existing intrinsic-completeness witness across each component isomorphism to prove pull_complete; the same unique natural isomorphism, with componentwise unit equation, proves reflector_identification. Thus no second coefficient-map or finite-quotient construction is needed here.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "proetale.tex Tags 099N(2),(5), 099M"
+   }
+  },
+  {
+   "text": "For a complete object L, completeUnit_iff makes its actual completion unit invertible. The existing pbcActualDirectCompletionIso_exists has equation eta_(G L) followed by its comparison equals G(eta_L). The right hand side and comparison are isomorphisms, so eta_(G L) is invertible. completeUnit_iff gives push_complete. This is the existing unit-normalized direct-image/completion comparison, with no invertibility assumption on structural coefficient maps.",
+   "uses": [
+    "lem-sf-automorphism-completion-unit-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099J; unit-normalized direct-image/completion comparison"
+   }
+  },
+  {
+   "text": "For constant_identification, transport the Koszul comparison in CompletedConstantPresentationData along the chosen derived representative isomorphism, using naturality of the constant completion unit. Compose it with reflector_identification and koszul_identification, then restrict coefficients and use ConstantCompletion.completion_restriction. The resulting component isomorphism carries gamma to the uncompleted constant completion unit. Its Hom bijection, supplied by koszul_quotient_reflector, proves naturality and uniqueness of the componentwise isomorphisms.",
+   "uses": [
+    "def-weil-pbc-completed-constant-presentation-data",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099M, 099I, 0A0E"
+   }
+  },
+  {
+   "text": "The ordinary completion reflector Hom bijection and reflector_identification make precomposition with gamma bijective into a complete target. Compose this bijection with pbcActualDerivedAdjunction and the fully faithful inclusion Hom equivalence. Prove source naturality using gamma.naturality and ordinary Hom source naturality, and target naturality using ordinary Hom target naturality. Mathlib Adjunction.mkOfHomEquiv constructs the required adjunction. Equality of the prescribed Hom bijections, evaluated on identities, makes its unit and hence its adjunction unique.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K; Mathlib Adjunction.CoreHomEquiv and Adjunction.ext"
+   }
+  },
+  {
+   "text": "For two specified adjunctions, expand homEquiv through the unit. Mathlib unit_conjugateEquiv and naturality of the conjugate transformation prove the transpose equation for an isomorphism of left adjoints. The restricted right comparison is recovered through the fully faithful inclusion. Apply this equation to the completed compositor and to the ordinary pullback comparison. Expanding the completed composite Hom bijection twice and source naturality of the ordinary second adjunction shows that gamma_g, gamma_h and any completed map have the same transpose as its completed transpose. At the identity of the completed composite pullback, the two conjugate equations and the normalized completed Hom formula therefore give equal ordinary composite transposes. Their injectivity proves compositor_unit, componentwise and hence as natural transformations.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "categories.tex Tags 0B65, 0DV0; source naturality and injectivity of Hom equivalences"
+   }
+  },
+  {
+   "text": "Use the same conjugate transpose equation with the identity adjunction. The completed identity transposes to the inverse restricted direct-image identity. Full faithfulness identifies its underlying map with the inverse ordinary direct-image identity, which is the transpose of the specified ordinary pullback identity by its definition as a conjugate. The completed Hom formula and injectivity of the ordinary Hom equivalence prove identity_unit. No ordinary-pullback completion unit is inverted.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "categories.tex Tag 0B65; identity adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-automorphism-completion-unit-comparison",
+  "lem-pur-principal-ideal-local-test-criterion",
+  "lem-pur-unit-power-completeness",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+  "lem-pur-native-ringed-restriction-local-test",
+  "lem-pur-native-ringed-restriction-divisibility",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-completed-constant-presentation-data",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "K3 stage-3 proof: Tags 0999, 099J, 099K, 0A0E and proetale.tex 099M/099N; existing normalized strict-tower and direct-completion comparisons; Mathlib natural Hom adjunction and conjugation unit equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reflector.*[Cc]omp|[Cc]ompletion.*[Aa]djoint|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 3–4 and the completed identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "10 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv, CategoryTheory.Bicategory.conjugateIsoEquiv, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 3–4 and the completed identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflection into derived complete complexes identifies the composite adjunction pullback comparison with the unit normalized ambient pullback compositor",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Over.postAdjunctionLeft, CategoryTheory.Adjunction.derivedη, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.ChosenPullbacksAlong.comp.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 3–4 and the completed identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived pullback on full locally derived complete module categories is adjoint to derived pushforward and its compositor is normalized by the quotient completion units",
+   "results": "8 hits: SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, SheafOfModules.sheafificationCompPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, SheafOfModules.pullbackIso.  Read the relevant source and signatures; ordinary sheaf pullback/abstract mates or scalar localization do not state old proof Steps 3–4 and the completed identity calculation of Step 7.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived[Cc]omplet|[Cc]ompleted.*[Pp]ullback|[Rr]eflect.*[Aa]djunction|conjugateIsoEquiv",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Opposites.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract reflection and mate lemmas, or ordinary module-sheaf pullbacks, do not state the strict quotient-tower/complete-derived adjunction and its specified-unit equations",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflective full subcategories and adjoint functors: completion unit and composition comparison for derived pullback",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Reflective.toFull",
+     "CategoryTheory.unitCompPartialBijective_symm_apply",
+     "CategoryTheory.ChosenPullbacksAlong.comp",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract reflection and mate lemmas, or ordinary module-sheaf pullbacks, do not state the strict quotient-tower/complete-derived adjunction and its specified-unit equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": {
+    "hits": 10,
+    "top": [
+     "CategoryTheory.conjugateIsoEquiv",
+     "CategoryTheory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_apply_inv",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_hom",
+     "CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom",
+     "CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract reflection and mate lemmas, or ordinary module-sheaf pullbacks, do not state the strict quotient-tower/complete-derived adjunction and its specified-unit equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback followed by completion is adjoint to pushforward on complete module sheaves, with quotient tower unit compatible with composition",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract reflection and mate lemmas, or ordinary module-sheaf pullbacks, do not state the strict quotient-tower/complete-derived adjunction and its specified-unit equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflecting left adjoints into full subcategories preserved by right adjoints: mate of composite and identity isomorphisms commutes with reflection units",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.unit_obj_eq_map_unit",
+     "CategoryTheory.unitCompPartialBijectiveAux_symm_apply",
+     "CategoryTheory.unitCompPartialBijective_symm_apply",
+     "CategoryTheory.unitCompPartialBijective_symm_natural",
+     "CategoryTheory.unitCompPartialBijective_natural",
+     "CategoryTheory.unitCompPartialBijectiveAux",
+     "CategoryTheory.μ_iso_of_reflective",
+     "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract reflection and mate lemmas, or ordinary module-sheaf pullbacks, do not state the strict quotient-tower/complete-derived adjunction and its specified-unit equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-pullback-composition-coherence",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 3–4 and the completed identity calculation of Step 7.",
+   "via": [
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-quotient-completed-compositor-unit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing ringed completion, constant-coefficient equivalence, pushforward preservation and adjunction nodes; no new nodes. Wrote finite-projection coefficient composition, identification of the actual strict quotient augmentation with the reflector unit, specified restricted Hom bijections, and explicit composite and identity Hom calculations before inverting any completion unit.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph asserting cohomology sheaves of Lf* K are pullbacks: the normalized continuous-coefficient realization comparison isolated through lem-per-rational-pullback-composition-coherence; its old Steps 3–4 and identity calculation of Step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Valuation ring is a PID, hence Noetherian, to apply the constant-completion equivalence; coefficient algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Finite-quotient/Koszul and constant/completed coefficient comparison including transitions and actual completion units."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Universal Hom property of the ringed Koszul completion and its specified unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pushforward-completion",
+    "why": "Generic ringed direct image preserves local derived completeness for the generated image ideal; only the preservation clause is used."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical ordinary unbounded adjunctions and their composition and identity normalization."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Unique unit-normalized conjugate isomorphism for the fixed restricted adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-1025562bb",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-1025562bb (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full: no new nodes, statement unchanged, first split of a Q143-created node, no re-split note. Checked against Stacks 099N (1),(2),(5) at proetale.tex:4336, with tag mappings 099J/099K/099M/0A0E/0A0G verified. Step 1: π_n c_h h^{-1}c_g = d_{gh}(gh)^{-1}π_n holds via the α mates, so c_{gh}=c_h h^{-1}c_g and c_u(ϖ)=ϖ; this makes the ringed composite valid for lem-sfb and gives Step 3's image-ideal hypothesis. Step 2: the constant-completion equivalence (finite-reduction pullback isos along c, Rlim and unit identification, Koszul = quotient completion), the definition of completed pullback and the Koszul reflector identify γ with η. E1 fault repaired here: the adic-datum hypotheses (A/ϖ torsion, A/ϖ^n finite and perfect) were not checked, so I added one sentence to Step 2 using the already-cited DVR node (2),(3) and 0→A→A→A/ϖ^n→0. Step 3: the preservation clause of ringed pushforward-completion; all hypotheses checked (small sites, one global generator, same local R𝓗om predicate, no boundedness, ring map not assumed iso). Steps 4–8: I re-derived the restricted adjunction unit R(γ)ν, the conjugate relation Φ̂_{h,g}(vâ)=κΦ̂_{gh}(v), source naturality, injectivity for the compositor, and Φ_id(e)=ρ^{-1} for the identity; all correct, and no completion unit is inverted. Edge cases K=0, g=h=id and the empty scheme are fine. Accepted tool_uses: dvr, constant-completion-equivalence, ringed-koszul-reflector, ringed-pushforward-completion, sfb-ringed-derived-monoidal-comparisons (generic). Maintainer note: lem-sbc-reflected-compositor-unit-normalization and lem-weil-pbc-completed-pullback-reflection already state the abstract parts of Steps 4–7 and Step 2 and could be cited; this is not a duplicate since the item has more content. Fix file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-quotient-completed-compositor-unit.json (Step 2 text only).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientCompletedCompositorUnit",
+  "declaration": "AlgebraicGeometry.Scheme.QuotientCompleted.compositor_unit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.QuotientCompleted.uniformizerSection",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.locallyComplete",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.complete_iff_local",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.Complete",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.inclusion",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.koszul_identification",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.pull_complete",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.push_complete",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.pull",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.push",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.gamma",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.reflector_identification",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.constant_identification",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.adjunction_existsUnique",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.adjunction",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.rightComp",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.compositor",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.compositor_unit",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.rightId",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.identity",
+   "AlgebraicGeometry.Scheme.QuotientCompleted.identity_unit"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientCompletedCompositorUnit.lean",
+  "statement": "theorem compositor_unit (g : Y ⟶ X) (h : Z ⟶ Y) : whiskerRight (gamma l E g) (pbcActualDerivedPull h (pbcIntegralDatum l E)) ≫ whiskerLeft (pull l E g) (gamma l E h) ≫ whiskerRight (compositor l E g h).hom (inclusion l E Z) = whiskerLeft (inclusion l E X) (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv ≫ gamma l E (h ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The clauses are stated separately in the same module: local completeness equivalence; singleton Koszul and constant restriction comparisons preserving units; strict-tower pullback and ordinary pushforward on full complete categories; uniquely normalized adjunction; compositor_unit and identity_unit as natural transformation equalities. Complete is the existing intrinsic predicate, identified explicitly with the local RHom condition. No boundedness or constructibility restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8655eb929",
+  "group": "Q06",
+  "result": "pass",
+  "note": "All 13 node clauses checked against the Lean module and the dependency source (PbcCompletedPullbackActual, PbcActualStrictPullback, PbcActualRingedExchange, RingedPrincipalLocalTests, ConstantCompletionEquivalence, CompletedConstantPresentationTransport, Mathlib conjugateIsoEquiv). pull is the actual strict-tower functor and gamma its augmentation; complete_iff_local ties the existing PbcIsIntrinsicallyComplete to the landed principal local RHom test; koszul_identification pins the reflector to wfCompletion; adjunction_existsUnique pins homEquiv f = ordinary Phi(gamma ≫ f); compositor and identity are conjugates of the restricted direct-image comparisons via Adjunction.comp/id with consistent orientation, and the ordinary DirectCompIso/DirectIdIso are by definition the conjugates of PullCompIso/PullIdIso, so compositor_unit (P_h gamma_g ≫ gamma_h ≫ a-hat = a ≫ gamma_gh) and identity_unit are the node's equations as natural transformations with no gamma inverted. Hypotheses exact (Noetherian, finite dimension, l invertible); no boundedness or constructibility; edge cases fine (empty scheme, K=0, id). lean.statement matches the signature; node statement unchanged; stmt_deps only gained two landed def nodes; docstrings and report sections present; no file changed, so no compile. Advisories: the ordinary comparisons are owned by the uncited def-weil-pbc-ambient-ringed-exchange module; reflector_identification restates pbcActualCompletedPullback_tower; the second reading was done by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261023T231703-L-3633615",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-finite-scalar-representative-invertible",
+ "kind": "lemma",
+ "title": "K-flat invertibility of the actual scalar representative",
+ "status": "split",
+ "statement": "For commutative rings A,B, phi:A→B, a scheme T and a K-flat cochain complex C of A-module sheaves, the actual chosen-adjoint scalar representative at C [def-sp-coefficient-scalar-representatives] is invertible. No flatness of phi, boundedness or finiteness is assumed.",
+ "stmt_deps": [
+  "def-sp-coefficient-scalar-representatives",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: finite reduction is derived scalar tensor and its compatibility with invertible twists follows from derived tensor associativity; Stacks Tags 07A4 and 0FPT."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved exact-right-derived-adjoint K-flat comparison to ordinary scalar extension and exact restriction. Scalar extension preserves K-flat quasi-isomorphisms. Restriction preserves finite limits by its scalar adjunction and finite colimits by its coextension adjunction. Identify the mapped ordinary unit with the cochain adjunction unit degree by degree, then substitute into that comparison.",
+   "uses": [
+    "def-sp-coefficient-scalar-representatives",
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-coefficient-scalar-representatives",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "proof_origin": "J2, 2026-10-26: expose this proved native property as a public named API because the actual certified scalar diagram definition must refer to named proved theorems, not private proof helpers. No sorry is introduced.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor counit representative diagram source isomorphism K-flat localization scalar extension",
+   "results": "8 unrelated ordinary module flatness results; no diagram record or scalar cochain representative source theorem. Local source search finds the native derived localization counit isomorphism, cochain oplax tensor isomorphism, and exact-right-adjoint K-flat representative theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use proved native ingredients; add a typed diagram interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ, IsIso",
+   "results": "0 hits; service does not resolve the qualified identifier. Local Mathlib/source inspection supplies the monoidal localization structure.",
+   "date": "2026-10-26",
+   "verdict": "No exact interface."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorRepresentativeData|isIso_cochainTranspose_of_kFlat|isIso_μ_Qh_of_kFlat",
+   "results": "0 Mathlib service hits; repository source search finds the latter two native APIs, but no typed record sealing the scalar diagram.",
+   "date": "2026-10-26",
+   "verdict": "Use existing isomorphism ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison and scalar extension derived adjunction counit commute on cochain representatives; localization tensorators and scalar counits are isomorphisms on K-flat complexes.",
+   "results": "8 hits, including Adjunction.localization_counit_app and ordinary module extension/restriction counits; no exact fixed-derived-scalar representative tensor square or K-flat source certificate.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved native derived APIs and actual typed scalar diagram."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: derived scalar reduction and tensor/twist compatibility",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarRepresentativeIso",
+  "file": "lean/Sheaf/Paper/FiniteScalarRepresentativeIso.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteScalarRepresentative_isIso",
+  "statement": "theorem finiteScalarRepresentative_isIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u})\n    (C : CochainComplex (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A)) ℤ)\n    (hC : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C) :\n    IsIso (ProEtale.SupportedEtaleTensorOrigin.proScalarExtensionRepresentative φ T C)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

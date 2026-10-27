@@ -18,57 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Use the union characterization of $W_d$ in the hypothesis. Its covering charts are $V=D_+(ab)$ with $\\alpha=\\deg(a)$, $\\beta=\\deg(b)$, $\\alpha=\\beta+d$; put $h=ab$ and $k=\\alpha+\\beta>0$. By [def-weil-pbc-proj-twisting-sheaf], sections of $\\mathcal O_P(nd)$ on $V$ are the degree-$nd$ fractions in $A_h$. Both $a$ and $b$ are units in $A_h$, since their product is inverted. Thus $e=(a/b)^n=a^{2n}/h^n$ has degree $nd$, its inverse has degree $-nd$, and multiplication by $e$ identifies $(A_h)_0$ with $(A_h)_{nd}$: the inverse sends $t$ to $e^{-1}t$. These formulas commute with localization restrictions, so they give an isomorphism of sheaves $\\mathcal O_V\\simeq\\mathcal O_P(nd)|_V$. The canonical section restricts to $f/1=c e$, with $c=b^nf/a^n\\in(A_h)_0$. This is a direct fraction calculation from the cited definition, including when $V$ is empty.",
+   "text": "Cover $U$ by $U\\cap V$, where $V=D_+(ab)$, $\\alpha=\\deg a=\\deg b+d=\\beta+d$; these charts cover by the assumed union description of $W_d$. Apply [lem-trf-proj-product-chart-twist-frame] with the given $n,f$: the restricted twist has basis $e=(a/b)^n$ and $s_f=c e$, $c=b^nf/a^n$. Apply the stalk definition in [def-weil-pbc-ample-invertible-module] to the invertible module $\\mathcal L=\\mathcal O_U(nd)$ and its first tensor power. At $x\\in U\\cap V$ nonvanishing is $c_xe_x\\notin\\mathfrak m_x(\\mathcal O_U(nd))_x$. The basis identifies this with $c_x\\notin\\mathfrak m_x$, equivalently $c_x$ is a unit of the local ring. Restriction to an open preserves this local ring and the displayed frame.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01MU (lemma-where-invertible), first paragraph of proof, and 01MV (lemma-principal-open), chart calculation."
-   }
-  },
-  {
-   "text": "Fix a chart from Step 1 and a point $x\\in U\\cap V$. Nonvanishing means $s_{f,x}\\notin\\mathfrak m_x\\mathcal O_U(nd)_x$, by [def-weil-pbc-ample-invertible-module]. In the basis $e$ this is $c_x\\notin\\mathfrak m_x$, equivalently $c_x$ is a unit. The degree-zero fraction $u=b^{2n\\alpha}/a^{2n\\beta}$ is a unit of $(A_h)_0$, with inverse $a^{2n\\beta}/b^{2n\\alpha}$. Direct multiplication, using $d=\\alpha-\\beta$, gives $c^k=u f^k/h^{nd}$. In any commutative local ring a positive power is a unit exactly when its base is a unit; multiplication by a unit does not change this. Therefore $c_x$ is a unit exactly when $(f^k/h^{nd})_x$ is. Apply [lem-weil-pbc-proj-basic-open-intersection] with its chart element $h\\in A_k$ and second element $f\\in A_{nd}$: this unit locus is precisely $V\\cap D_+(f)$. Both degrees are positive. Consequently $U_{s_f}\\cap V=U\\cap V\\cap D_+(f)$. The charts cover $U$, so equality of these sets on every chart gives $U_{s_f}=U\\cap D_+(f)$.",
-   "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-proj-basic-open-intersection"
+    "lem-trf-proj-product-chart-twist-frame",
+    "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MV (lemma-principal-open), principal open of the coefficient; Tag 01M4 (lemma-standard-open) (1)(f) / 01MA (lemma-standard-open-proj)."
+    "place": "Tags 01MU (lemma-where-invertible), first proof paragraph, and 01MV (lemma-principal-open), coefficient in a local frame."
    }
   },
   {
-   "text": "Let $x\\in U$ and let $N\\subseteq U$ be an open neighbourhood. Since $U$ is open in $P$, $N$ is also open in $P$. The positive-degree basis clause of [lem-weil-pbc-proj-standard-open-inclusion] gives a homogeneous $g\\in A_q$, $q>0$, with $x\\in D_+(g)\\subseteq N$. Put $f=g^d\\in A_{qd}$, so its degree is divisible by $d$. For every homogeneous prime $\\mathfrak p$, primality gives $g^d\\notin\\mathfrak p$ if and only if $g\\notin\\mathfrak p$ because $d\\geq1$. Thus $D_+(f)=D_+(g)\\subseteq U$, and Step 2 gives $U_{s_f}=D_+(g)$. Every prescribed neighbourhood therefore contains one of the stated loci through its point; all these loci are open since $D_+(f)$ is open. This proves the basis assertion without quasi-compactness of $U$.",
+   "text": "Apply [lem-trf-proj-product-chart-coefficient-locus] on each such $V$, with $d,n\\geq1$ and $\\alpha=\\beta+d$. It identifies the unit locus of precisely this coefficient $c$ with $V\\cap D_+(f)$. The previous step therefore gives $U_{s_f}\\cap V=U\\cap V\\cap D_+(f)$. For every point of $U$ some chart contains it, so these equalities imply $U_{s_f}=U\\cap D_+(f)$. Empty charts contribute no points; zero or nilpotent $f$ gives the empty locus by the cited coefficient lemma.",
    "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion"
+    "lem-trf-proj-product-chart-coefficient-locus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW (lemma-ample-on-proj), (5)--(6), with the standard-open basis of 01M4; no finite subcover is needed."
+    "place": "Tag 01MV (lemma-principal-open), coefficient principal open and covering argument."
    }
   },
   {
-   "text": "The loci chosen in Step 3 equal whole standard opens $D_+(g)\\subseteq U$. By the affine-chart clause of [def-pc-proj], each is the affine scheme $\\operatorname{Spec}(A_{(g)})$. Hence for every point and neighbourhood in $U$ there is an affine member of the stated family inside that neighbourhood. This proves that its affine members form an affine-open basis. We do not assert that an arbitrary intersection $U\\cap D_+(f)$ is affine. When $U$ is empty all the equalities and basis conditions are vacuous; when $f=0$ or is nilpotent, the chart calculation yields the empty nonvanishing locus as required.",
+   "text": "Let $x\\in U$ and let $N\\subseteq U$ be an open neighbourhood of $x$. Since $U$ is open in $P$, $N$ is open in $P$ too. Apply [lem-trf-proj-degree-multiple-affine-refinement] with this $d$ to obtain $g\\in A_q$, $q\\geq1$, and $f=g^d\\in A_{qd}$ with $x\\in D_+(f)=D_+(g)\\subseteq N$. The first clause just proved gives $U_{s_f}=U\\cap D_+(f)=D_+(g)$, an affine open by that same refinement lemma. Thus every point and neighbourhood contain an affine member of the stated section-locus family. Every member is open by $U_{s_f}=U\\cap D_+(f)$; this proves both basis assertions. This argument uses whole standard opens contained in $U$, and asserts no affineness of an arbitrary intersection $U\\cap D_+(f)$. For empty $U$ the conditions are vacuous.",
    "uses": [
-    "def-pc-proj"
+    "lem-trf-proj-degree-multiple-affine-refinement"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW (lemma-ample-on-proj), (7), using affine standard opens (01MB)."
+    "place": "Tag 01MW (lemma-ample-on-proj), clauses (6)--(7), assembly after positive-power affine refinement."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-proj",
+  "lem-trf-proj-product-chart-twist-frame",
   "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-proj-standard-open-inclusion"
+  "lem-trf-proj-product-chart-coefficient-locus",
+  "lem-trf-proj-degree-multiple-affine-refinement"
  ],
  "proof_origin": {
   "by": "document",
@@ -188,10 +176,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-proj-twist-section-basic-open",
   "worker": "stage1",
-  "summary": "Preserved the statement. Expanded Stacks 01MV into a direct degree-part chart trivialization and an explicit unit-power calculation invoking the existing chart-intersection Mathlib leaf, then derived the basis and affine-basis clauses by positive powers and ambient standard opens contained in U. No new nodes: the proposed chart-generator node was eliminated as elementary. Corrected the source tag 01MS to 01MU for lemma-where-invertible and added the nonvanishing definition statement dependency.",
+  "summary": "Repair of the human re-split return. Statement unchanged. Extracted three independent statement-only tasks of comparable workload: explicit product-chart frame and restrictions (old Step 1), coefficient unit-power identity and basic-open locus (old Step 2), and degree-multiple affine refinement on arbitrary opens (old Steps 3--4). The item now only identifies stalk nonvanishing in the cited frame, glues the cited coefficient loci, and assembles both bases. All original arguments and edge-case checks are retained verbatim in the report, with their new owners. Searches and source/duplicate/citation reviews are recorded. Rebased the retained Q159 delivery after the promotion return at 286efbea541: current DAG still carries the original four-step proof and the released stage-1 repair order. Re-read current cited statements, verified all verbatim quotes, and made openness of the neighbourhood explicit in the final assembly. Existing mathematical statement and maintainer metadata remain those of the current baseline. Rebased repair of returned head 4d76db8d558 against the current shared DAG; reread all eight unchanged dependencies, verified every citation, and made the first-tensor-power specialization of the nonvanishing definition explicit in Step 1.",
   "blueprint": "Realizes the inherited Section-algebra/Proj ampleness input of lem-trf-local-term-locality: homogeneous twist nonvanishing loci and affine standard-open basis, following Stacks 01MU/01MV/01MW.",
   "tool_uses": [
    {
@@ -214,12 +202,12 @@
   "lem-weil-pbc-proj-standard-open-inclusion"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q98-ff23f174b",
-  "group": "Q98",
+  "reviewer": "NT-cc-Q159-c703411a2",
+  "group": "Q159",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-ff23f174b (reviewer sub-agent of L); spot-checked: Read the full item, report, unit, DAG context, cited node statements, and Stacks sources 01MU/01MV/01MW with 01M4/01MA. Verified all four proof steps, fraction and unit calculations, hypotheses, edge cases, Mathlib searches, route compliance, and corrected tag mapping. No mathematical, citation, duplication, circularity, or long-step fault found."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-c703411a2 (reviewer sub-agent of L); spot-checked: This is the fourth promotion-loop delivery of the same split (after PASSed heads 286efbea, 8b8bc5fc and 4d76db8d5588). The live return of 2026-10-22 16:45 refused landing only because the side completion was never promoted. Against 4d76db8d5588, the three new nodes (product-chart-twist-frame, product-chart-coefficient-locus, degree-multiple-affine-refinement) are field-identical. The item changes only in proof Step 1 and split_report: Step 1 now applies the stalk test of def-weil-pbc-ample-invertible-module to L=O_U(nd) with n=1. That is correct: O_U(nd) is invertible on W_d, and it is exactly Stacks 01MV's X_s (constructions.tex l.1919). The item statement, stmt_deps and proof_deps are unchanged. The delivery is not superseded: live and side-live still have status split with the old 4-step proof, and none of the 3 new ids exists there. The 2026-10-22 human re-split note still stands. Re-split compliance: old Step 1 goes to the frame node, old Step 2 (c^k=u f^k/h^{nd}, u a unit, unit locus via basic-open-intersection) to the coefficient node, and old Steps 3-4 (g^d refinement, D_+(g)=Spec A_(g), no quasi-compactness) to the refinement node. The item keeps a 3-step assembly of 1904 chars (693/470/741), and no new node restates a clause of the item. I re-checked the degrees of e and c, the b and a exponents (both nk), D_+(g^d)=D_+(g), and the edge cases α=3/β=1/d=2, β=0, h or f nilpotent, and empty U/P. I re-read the cited statements twisting-sheaf (2)-(3), ample-invertible-module, standard-open-inclusion (0), basic-open-intersection, def-pc-proj and def-nagata-homogeneous-localization-degree-zero, and Stacks 01MU/01MV/01MW (l.1853-1990). There is no SGA citation. The inherited source tag 01MS is a typo for 01MU; the field is immutable, so this is a note only. Maintainer note: please promote this delivery instead of returning it again."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -245,5 +233,16 @@
   "existing": false,
   "note": "Uses the node's equivalent union characterization of W_d as the explicit equality hW; the two helper definitions construct the restricted canonical section and collect its actual stalk nonvanishing sets. No twisting sheaf, module restriction, or nonvanishing predicate is redefined."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

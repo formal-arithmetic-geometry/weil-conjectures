@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-proetale-projection-mate-exact",
+ "kind": "statement",
+ "title": "Exact projection-mate data for native pro-etale operations",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes. On their small pro-etale sites [def-weil-proetale-inverse-image], take commutative ring sheaves $R,S$ and an isomorphism $c:f^{-1}R\\cong S$. Use the native module derived operations $L=Lf^*$ and $D=Rf_*$ [def-weil-pbc-proetale-operations], tensor models $a,b$ with their natural flat-term K-flat representative isomorphisms [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the specified counit projection mate [def-weil-pbc-projection-formula-map]. For every $E\\in D(S)$, the functors $F(P)=D(E)\\otimes_a P$ and $G(P)=D(E\\otimes_b L(P))$ admit integer-shift structures making them triangulated. There is a natural transformation $\\tau:F\\to G$ whose components are exactly the specified native projection mates; it commutes with these shifts and is an isomorphism at the degree-zero coefficient unit $R[0]$. Site objects, site morphisms, and coefficients retain their native universes; no perfectness hypothesis or conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0B56 (equation-projection-formula-map)."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the repaired native mate-data theorem, which constructs the shifts jointly with exactness, the normalized natural transformation, its shift compatibility and invertibility at the coefficient unit. This is exactly the unchanged conclusion. The previous independent shift-data split does not determine compatible shifts and is no longer used.",
+   "uses": [
+    "lem-weil-pbc-proetale-projection-mate-data-s4"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-projection-mate-data-s4"
+ ],
+ "proof_origin": {
+  "by": "D7",
+  "group": "D7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4, 07A6, 0B56; repaired jointly compatible native shift and mate data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image tensor comparison respects shifts and the projection formula mate is an isomorphism on the coefficient ring",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Tor",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CommShift",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.CommShift'",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleProjection.*(Exact|Slice)|ringedProjectionMateExact|projectionMateSlicePresentation",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectProjectionFormula",
+  "date": "2026-10-23",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof, first paragraph: the tensor identity for the coefficient ring and exact triangulated operations with compatible shift comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleProjectionMateExact",
+  "file": "lean/Sheaf/Paper/ProEtaleProjectionMateExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProjectionMateExact",
+  "statement": "theorem proEtaleProjectionMateExact :\n    ∃ (sF : ((Functor.curryObj a.tensor).obj\n        ((proEtaleRingDerivedDirectImage f R S c).obj E)).CommShift ℤ)\n      (sG : (proEtaleRingDerivedPullback f R S c ⋙\n        (Functor.curryObj b.tensor).obj E ⋙\n          proEtaleRingDerivedDirectImage f R S c).CommShift ℤ),\n      ((Functor.curryObj a.tensor).obj\n        ((proEtaleRingDerivedDirectImage f R S c).obj E)).IsTriangulated ∧\n      (proEtaleRingDerivedPullback f R S c ⋙\n        (Functor.curryObj b.tensor).obj E ⋙\n          proEtaleRingDerivedDirectImage f R S c).IsTriangulated ∧\n      ∃ τ : (Functor.curryObj a.tensor).obj\n          ((proEtaleRingDerivedDirectImage f R S c).obj E) ⟶\n        proEtaleRingDerivedPullback f R S c ⋙\n          (Functor.curryObj b.tensor).obj E ⋙ proEtaleRingDerivedDirectImage f R S c,\n        (∀ P, τ.app P = proEtaleProjectionFormulaMate f R S c a b E P) ∧\n        NatTrans.CommShift τ ℤ ∧\n        IsIso (τ.app ((DerivedCategory.singleFunctor (proEtaleRingModules Y R) 0).obj\n          (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))))",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-23",
+  "note": "The generic ringedProjectionMateExact is already proved but its RingedTensorCorner requires the site-object, site-Hom, and coefficient universes to coincide. The actual pro-etale site has objects in u+1, morphisms in u, and coefficients in u+1, and its operations and ProEtaleTensorModel are the native ones. This node asks only for transport of the exact functor and unit data to that native model, not thick closure, finite-free coefficients, or perfect coefficients. No existing declaration is weakened or replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-58ea3",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261024T191427-L-349376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b3802",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261027T034630-L-3667613",
+  "kind": "interface",
+  "note": "independent cc review: new ∃-joint-shift statement of proEtaleProjectionMateData vs parent proEtaleProjectionMateExact (verbatim) and change record; proof vs GlobalComparison/TensorExact/SignedNormalization statements; axioms scratch (sorryAx only from cited holes); 3b PerfectProjectionFormula OK"
+ }
+}

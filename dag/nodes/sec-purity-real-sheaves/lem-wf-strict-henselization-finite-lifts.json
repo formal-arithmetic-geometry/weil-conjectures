@@ -18,164 +18,55 @@
  ],
  "proof": [
   {
-   "text": "Put $K=\\kappa^{\\mathrm{sep}}$. For a finite separable subfield $e/\\kappa$ of $K$, apply the finite separable field-lifting theorem over the henselian local ring $H$ to obtain a module-finite etale $H$-algebra $B_e$ with $B_e/\\mathfrak m_HB_e\\simeq e$. Every maximal ideal of $B_e$ contains $\\mathfrak m_HB_e$ by the finite-algebra radical lemma. Since the quotient is the nonzero field $e$, its zero ideal is the only maximal ideal, so $B_e$ is local with maximal ideal $\\mathfrak n_e=\\mathfrak m_HB_e$. Its inverse image in $H$ is $\\mathfrak m_H$, so the structure map is local. This proves locality rather than assuming that an arbitrary finite etale algebra is local.",
+   "text": "Apply [lem-wf-henselian-residue-lift-diagram] to $H$ and $K=\\kappa^{\\mathrm{sep}}$. Its local finite etale lifts, unique residue-compatible arrows and unique isomorphisms give exactly the required filtered diagram. Its Galois cocone-restriction assertion gives the same colimit after restriction, including the structural and residue maps.",
    "uses": [
-    "lem-weil-pbc-henselian-finite-etale-field-lift",
-    "lem-weil-pbc-finite-algebra-local-radical"
+    "lem-wf-henselian-residue-lift-diagram"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL (remark-construct-sh-from-h), first sentence; Tag 04GK (lemma-henselian-cat-finite-etale), essential surjectivity"
+    "place": "Tag 0BSL (remark-construct-sh-from-h), finite lifts and arrows, using Tag 04GK (lemma-henselian-cat-finite-etale); fields.tex, Tags 09DT (lemma-normal-closure) and 0EXM (lemma-normal-closure-galois), finite Galois cofinal restriction."
    }
   },
   {
-   "text": "Reduction on homomorphisms between finite etale $H$-algebras is bijective. Lift each residue inclusion $e\\subset f$ to its unique $H$-algebra map $u_{ef}:B_e\\to B_f$. For $b\\in B_e$, its residue maps to zero in $f$ exactly when its residue in $e$ is zero; hence $u_{ef}^{-1}(\\mathfrak n_f)=\\mathfrak n_e$, so the lift is local. The composite $u_{fg}u_{ef}$ and $u_{eg}$ have the same residue map, as do $u_{ee}$ and the identity; injectivity of reduction gives the diagram laws. For two lifts of the same identified field $e$, lift the identity in both directions; their composites are identities by the same argument. This gives precisely uniqueness up to unique residue-compatible isomorphism. The finite separable subfields of $K$ form a small directed poset containing $\\kappa$, as in the filtered-colimit description of a separable closure. Thus this is a filtered diagram.",
+   "text": "Apply [lem-wf-finite-local-lift-colimit-structure] to this diagram. It provides a colimit $C$ in $H$-algebras and in rings, with surjection $q:C\\to K$, kernel the maximal ideal, local map $H\\to C$, henselianity and ind-etaleness over $H$. Thus the residue identification needed for both comparisons is the specified one.",
    "uses": [
-    "lem-weil-pbc-henselian-finite-etale-map-bijective",
-    "def-pd-separable-closure"
+    "lem-wf-finite-local-lift-colimit-structure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, arrows sentence, using Tag 04GK full faithfulness"
+    "place": "Tag 0BSL (remark-construct-sh-from-h), local union, residue field and henselianity sentences; Tags 04GH (lemma-finite-over-henselian), 04GI (lemma-colimit-henselian); more-algebra.tex Tag 0FWT (lemma-filtered-colimits-henselian)."
    }
   },
   {
-   "text": "The small diagram has a colimit $C$ in commutative $H$-algebras, which is also its colimit in commutative rings; every element of $C$ comes from some $B_e$. The residue maps $B_e\\to e\\subset K$ give $\\psi:C\\to K$. This map is surjective because every element of $K$ belongs to some $e$ and $B_e\\to e$ is surjective. If $c$ is represented by $b\\in B_e$, injectivity of $e\\to K$ shows that $\\psi(c)=0$ exactly when $b\\in\\mathfrak n_e$. Consequently $I=\\ker\\psi$ is the union of the images of the $\\mathfrak n_e$. If $c\\notin I$, its representative $b$ is outside the maximal ideal of the local ring $B_e$, hence is a unit, and its inverse maps to an inverse of $c$. Since $C/I=K$ is nonzero, $I$ is the unique maximal ideal. Thus $C$ is local with the specified residue identification, and each $B_e\\to C$ is local.",
+   "text": "Now [lem-wf-henselization-ind-etale-comparison] applies to $A,H,C,q$: it proves ind-etaleness over $A$ and the unique residue-compatible comparisons to the strict-henselization triple colimits over both bases. It identifies these with the pointed-algebra strict henselizations and makes the comparison over $A$ compatible with the canonical $H$-structure.",
    "uses": [
-    "lem-weil-pbc-commutative-algebras-colimits-exist",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "def-pd-separable-closure"
+    "lem-wf-henselization-ind-etale-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, union and residue sentences; Tag 04GI (lemma-colimit-henselian), omitted locality/residue argument expanded"
+    "place": "Tag 0BSL (remark-construct-sh-from-h), final ind-etaleness and uniqueness sentences; Tags 04GN (lemma-henselization), 0BSI (lemma-composition-colimit-etale), 08HR (lemma-map-into-henselian-colimit), 08HT (lemma-uniqueness-henselian) and 04GW (lemma-strict-henselization-different), applied over both A and its henselization."
    }
   },
   {
-   "text": "Each $B_e$ is henselian by the finite-local-algebra permanence theorem applied to $H\\to B_e$. Hence $(B_e,\\mathfrak n_e)$ is a henselian pair. Step 2 shows that the transitions carry these ideals into one another, and Step 3 identifies their image union with $I=\\mathfrak m_C$. Apply preservation of henselian pairs under directed colimits to obtain that $(C,\\mathfrak m_C)$ is henselian. Since $C/\\mathfrak m_C=K$ is separably closed, $C$ is strictly henselian. No Noetherian or completeness assumption is used.",
+   "text": "Finally [lem-wf-geometric-triples-colimit-comparison] applies to this local ind-etale $A$-algebra $C$ and $q$. Choose its allowed algebraic closure $\\Omega$ of $K$. The lemma verifies that the relative separable closure is $K$ and that all neighbourhood residue embeddings land there, and gives the canonical pointed-neighbourhood comparison preserving every chart map. Composing the comparisons proves all stated descriptions of $C$ with their residue identifications.",
    "uses": [
-    "lem-weil-pbc-finite-local-henselian",
-    "lem-weil-pbc-filtered-colimit-henselian-pair",
-    "def-weil-pbc-henselian-terminology",
-    "def-pd-separable-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, henselianity sentences, using Tags 04GH (lemma-finite-over-henselian), 04GI (lemma-colimit-henselian); pair formulation: more-algebra.tex Tag 0FWT (lemma-filtered-colimits-henselian)"
-   }
-  },
-  {
-   "text": "As a filtered colimit of the etale $H$-algebras $B_e$, $C$ is ind-etale over $H$. The henselization ind-etaleness theorem applied to the maximal ideal of the local ring $A$ gives that $A\\to H$ is ind-etale (identifying $A_{\\mathfrak m}$ with $A$). Stability under composition therefore makes $A\\to C$ ind-etale too. In particular both $H\\to C$ and $A\\to C$ have the filtered-etale presentations required by the henselian mapping lemma; their being filtered colimits is not being inferred from a universal-property definition of henselization alone.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-trf-henselization-prime-ind-etale",
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, last two sentences, using Tag 04GN (lemma-henselization) and Tag 0BSI (lemma-composition-colimit-etale)"
-   }
-  },
-  {
-   "text": "Let $D_A$ be the colimit of etale residue triples over $(A,\\mathfrak m,K)$. The strict-henselization triples theorem gives that $D_A$ is henselian local, ind-etale over $A$, and has its canonical residue map onto $K$; the triples-colimit identification makes it a strict henselization in the pointed-algebra sense. Apply the henselian mapping lemma first with source $C$, target $D_A$, and then with source $D_A$, target $C$, over the base $A$, prescribing the identity of $K$ on residue fields in both cases. Its hypotheses hold by Steps 3--5 and the triples theorem, and both maximal ideals lie over $\\mathfrak m$. The resulting local maps have composites with residue identity. Uniqueness in that same mapping lemma, compared with each identity map, proves that both composites are identities. Thus $C\\simeq D_A$ canonically as an $A$-algebra respecting the chosen residue identification.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-sc-etale-triples-colimit-is-strict-henselization",
-    "lem-weil-pbc-map-into-henselian-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, final uniqueness sentence; Tags 08HR (lemma-map-into-henselian-colimit), 08HT (lemma-uniqueness-henselian), 04GW (lemma-strict-henselization-different)"
-   }
-  },
-  {
-   "text": "Apply the same comparison over the local base $H$, with its identified residue field $\\kappa$, to the strict-henselization triple colimit $D_H$. Steps 3--5 make $C$ henselian local, ind-etale over $H$, with residue field $K$; the triples theorem gives these properties for $D_H$. The two maps provided by the henselian mapping lemma with residue identity are inverse by its uniqueness, giving $C\\simeq D_H$ as an $H$-algebra. The comparison in Step 6 respects the canonical $H$-structure on $D_A$: the composite $H\\to C\\to D_A$ is local and extends $A\\to D_A$, so the universal property defining $H$ identifies it with the canonical map $H\\to D_A$. This also explains compatibility of the two descriptions.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-sc-etale-triples-colimit-is-strict-henselization",
-    "lem-weil-pbc-map-into-henselian-colimit",
-    "def-weil-pbc-henselization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BSL, construction from the henselization and uniqueness; Tags 08HR, 04GW"
-   }
-  },
-  {
-   "text": "To compare with geometric neighbourhoods even for imperfect $\\kappa$, choose an algebraic closure $\\Omega$ of $K$ and the geometric point $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}A$ through $A\\to\\kappa\\to K$. The relative separable closure of $\\kappa$ in $\\Omega$ is exactly the given $K$: one inclusion follows from separable algebraicity of $K/\\kappa$; if $x\\in\\Omega$ is separable over $\\kappa$, its minimal polynomial over $K$ divides a separable polynomial over $\\kappa$, so $K(x)/K$ is finite separable and therefore trivial because $K$ is separably closed. For every etale neighbourhood with residue embedding into $\\Omega$, the etale-residue-field theorem says this residue field is finite separable over $\\kappa$. Every element of its image is therefore in $K$. This verifies, rather than assumes, the image-containment hypothesis of the chart/triple equivalence used next.",
-   "uses": [
-    "lem-pc-algebraic-closure-exists-unique",
-    "def-pd-separable-closure",
-    "lem-pc-sepclosed-finite-sep-trivial",
-    "def-weil-pbc-relative-separable-closure",
-    "lem-weil-pbc-etale-algebra-residue-field-separable"
+    "lem-wf-geometric-triples-colimit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 04HT (remark-etale-neighbourhoods), 04HX (lemma-describe-etale-local-ring), residue-closure choice and proof first paragraph"
-   }
-  },
-  {
-   "text": "Use the affine-chart/triple equivalence with $Y=U=\\operatorname{Spec}A$ and the geometric point of Step 8. Every affine neighbourhood already factors through $U$, and Step 8 verifies the required residue-image condition. The equivalence identifies the opposite affine pointed-neighbourhood category with the residue-triple category and identifies their ring diagrams, including the structural and residue maps. A cocone on either diagram gives a cocone on the other by this equivalence; their universal factorization properties are identical. Thus their colimits are canonically isomorphic, with the same maps from $A$ and to $K$. Taking a small representative category as in the neighbourhood-colimit definition does not change that universal property. Hence the ring $D_A$ of Step 6 is the strict henselization ring of the pointed scheme-neighbourhood definition, and Step 6 gives the claimed comparison with $C$.",
-   "uses": [
-    "lem-weil-pbc-etale-chart-residue-triples-equivalence",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX (lemma-describe-etale-local-ring), proof first paragraph and displayed triple colimit"
-   }
-  },
-  {
-   "text": "The separable-closure Galois theorem shows that $K/\\kappa$ is Galois. Choose a finite $\\kappa$-basis of any finite separable subfield $e$; the finite-set-in-finite-Galois-subextension theorem supplies a finite Galois subfield $g\\subset K$ containing that basis, hence containing $e$. It also supplies a common finite Galois overfield for two such $g$'s, by applying it to the union of their finite bases. To see directly that restriction gives the same colimit, extend any cocone on the Galois subdiagram by sending $B_e$ to its target through $B_e\\to B_g$ for a chosen $g\\supset e$. A common Galois overfield shows independence of this choice and compatibility for every $e\\subset f$. Extension and restriction are inverse on cocones and their maps. Their universal properties therefore give the same colimit, canonically and respecting both the $H$-structure and the residue maps.",
-   "uses": [
-    "lem-weil-pbc-separable-closure-exists-galois",
-    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 09DT (lemma-normal-closure), Tag 0EXM (lemma-normal-closure-galois), applied inside the separable closure; cofinal restriction of Tag 0BSL"
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), proof: relative separable closure, affine neighbourhood/residue-triple comparison and canonical colimit identification; recognition of an arbitrary henselian local ind-etale algebra uses algebra.tex Tag 08HR (lemma-map-into-henselian-colimit)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-henselian-finite-etale-field-lift",
-  "lem-weil-pbc-finite-algebra-local-radical",
-  "lem-weil-pbc-henselian-finite-etale-map-bijective",
-  "def-pd-separable-closure",
-  "lem-weil-pbc-commutative-algebras-colimits-exist",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-finite-local-henselian",
-  "lem-weil-pbc-filtered-colimit-henselian-pair",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-trf-henselization-prime-ind-etale",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-sc-etale-triples-colimit-is-strict-henselization",
-  "lem-weil-pbc-map-into-henselian-colimit",
-  "def-weil-pbc-henselization-at-prime",
-  "lem-pc-algebraic-closure-exists-unique",
-  "lem-pc-sepclosed-finite-sep-trivial",
-  "def-weil-pbc-relative-separable-closure",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-weil-pbc-etale-chart-residue-triples-equivalence",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-separable-closure-exists-galois",
-  "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+  "lem-wf-henselian-residue-lift-diagram",
+  "lem-wf-finite-local-lift-colimit-structure",
+  "lem-wf-henselization-ind-etale-comparison",
+  "lem-wf-geometric-triples-colimit-comparison"
  ],
  "proof_origin": {
   "by": "document",
@@ -255,61 +146,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-wf-strict-henselization-finite-lifts",
   "worker": "stage1",
-  "summary": "Proved the finite residue lifts and coherent local transition maps from existing finite-etale lifting nodes, computed the local colimit and its residue field elementwise, proved henselianity and ind-etaleness, and wrote both canonical comparisons and finite-Galois cofinality. Reused existing nodes throughout; no new nodes or statement changes. Checked imperfect residue fields and the scheme/ring colimit comparison.",
-  "blueprint": "Expands the local-algebra construction behind lem-wf-boundary-stalk-invariants, first proof paragraph ('the spectrum of a field with absolute Galois group the inertia group') and second paragraph ('the fraction field of the strict henselization' and automorphisms over the henselization), through parent lem-wf-strict-henselian-fraction-inertia.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-henselian-finite-etale-field-lift",
-    "why": "Lifts a finite separable residue field over an arbitrary henselian local base; needed to construct the finite stages, and absent from the boundary unit."
-   },
-   {
-    "node": "lem-weil-pbc-henselian-finite-etale-map-bijective",
-    "why": "Full faithfulness of residue reduction supplies the unique arrows and unique comparisons; the boundary unit has no finite-etale algebra lifting theorem."
-   },
-   {
-    "node": "lem-weil-pbc-commutative-algebras-colimits-exist",
-    "why": "Existence of the small commutative-algebra colimit used to construct C; no such general existence theorem in the boundary unit."
-   },
-   {
-    "node": "lem-weil-pbc-finite-local-henselian",
-    "why": "Henselianity of finite local algebras is the permanence input explicitly cited in 0BSL, not a replacement for the boundary argument."
-   },
-   {
-    "node": "lem-weil-pbc-filtered-colimit-henselian-pair",
-    "why": "Directed-colimit permanence of henselian pairs proves henselianity of C; generic local-algebra tool not supplied by the boundary unit."
-   },
-   {
-    "node": "lem-trf-henselization-prime-ind-etale",
-    "why": "Ind-etaleness of the ordinary henselization in its universal-property convention; generic algebra theorem, with no trace-formula input used."
-   },
-   {
-    "node": "lem-weil-pbc-ind-etale-stability",
-    "why": "Composition of ind-etale maps is the generic algebraic presentation lemma explicitly cited by 0BSL; the boundary unit has no such presentation theorem."
-   },
-   {
-    "node": "lem-weil-pbc-strict-henselization-triples",
-    "why": "Properties of the pointed-etale triple colimit give the comparison object D, not the finite-lift construction being proved here."
-   },
-   {
-    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
-    "why": "Identifies the residue-triple colimit with the existing pointed-algebra definition, required for a correctly typed comparison."
-   },
-   {
-    "node": "lem-weil-pbc-map-into-henselian-colimit",
-    "why": "Unique maps from ind-etale algebras into henselian local rings prove the canonical comparison by inverse maps; exactly the uniqueness input of 0BSL."
-   },
-   {
-    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
-    "why": "Finite separability of etale residue fields verifies the image-containment hypothesis for the scheme/ring diagram equivalence."
-   },
-   {
-    "node": "lem-weil-pbc-etale-chart-residue-triples-equivalence",
-    "why": "Identifies the geometric-neighbourhood and pointed-residue-triple diagrams with their structural maps; a comparison tool absent from the boundary unit."
-   }
-  ]
+  "summary": "Repair of human re-split order: four independent statement-only nodes distribute all ten original proof steps, whose verbatim argument text and original dependencies are retained and assigned in report.md. The unchanged parent statement now has a four-step assembly. No Lean written or compiled.",
+  "blueprint": "Expands the local-algebra construction behind lem-wf-boundary-stalk-invariants, first proof paragraph ('the spectrum of a field with absolute Galois group the inertia group') and second paragraph ('the fraction field of the strict henselization' and automorphisms over the henselization), through parent lem-wf-strict-henselian-fraction-inertia."
  },
  "tool_uses": [
   "lem-weil-pbc-henselian-finite-etale-field-lift",
@@ -326,12 +167,12 @@
   "lem-weil-pbc-etale-chart-residue-triples-equivalence"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q15-6c262b057",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q115-07e23a5d1",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-6c262b057 (reviewer sub-agent of L); spot-checked: Read all ten steps and cited statements against Stacks 0BSL, 04GK, 04GH, 0FWT, 08HR, 04HX, and normal-closure sources. Comparisons preserve structure and residue maps; edge cases pass. No new nodes, duplicates, cycles, or mathematical faults. Accepted twelve tool uses; detailed checks and isolated-source limitations recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-07e23a5d1 (reviewer sub-agent of L); spot-checked: Re-split of a 10-step, 7704-char proof into 4 statement-only new nodes plus a 4-step, 1483-char assembly. All 10 old step texts are kept verbatim in the report. The arguments are carried as follows: steps 1, 2, 10 by henselian-residue-lift-diagram; 3, 4 and H-ind-etale by finite-local-lift-colimit-structure; 5, 6, 7 by henselization-ind-etale-comparison (A-ind-etale, unique a_R over A and H via 08HR, H-compatibility via the universal property of henselization); 8, 9 by geometric-triples-colimit-comparison. The four nodes are of comparable size, none restates the item, there is no cycle and no SGA citation. Statements were checked against Stacks 0BSL, 04GK/04GH/04GI/0FWT, 08HR/08HT, 04HX and 09DT/0EXM, with edge cases: separably closed k, H=A, imperfect k. Existing nodes searched for duplicates: trf-initial-henselian-colimit-comparison, exc-affine-strict-local-ring-comparison, sfb-filtered-colimit-strictly-henselian-local, sbc triples/geometric presentations, pbc-etale-local-ring-triples. None is a duplicate. Batch-5 flag: def-weil-pbc-henselization-at-prime is a general definition, already a stmt_dep of the item on the base, and not part of the trace formula or Poincare duality, so accepted. FIX: in geometric-triples-colimit-comparison, the sentence 'i identifies the canonical maps from every etale residue triple to its colimit' was not self-contained. It is replaced by an explicit D_A, mu_t, q_A, the triple t_V=(Gamma(V),q_v,phi_v), and a unique g:D_A->G with g mu_{t_V}=lambda_V, which is an A-algebra isomorphism with q i^{-1} g=q_A. Also cited def-weil-algebraic-closure (added to stmt_deps). Fixed file: fixes/dag/nodes/sec-purity-real-sheaves/lem-wf-geometric-triples-colimit-comparison.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -359,5 +200,16 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

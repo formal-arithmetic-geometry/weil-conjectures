@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-quotient-pair-tensor-kernel",
+ "kind": "statement",
+ "title": "Tensor kernel of a leg in a two-summand exact presentation",
+ "statement": "Let $R$ be a commutative ring, let $P,Q,Q',E,L$ be $R$-modules, and let $a:P\\to Q$ and $b:P\\to Q'$ be linear maps. Put $D=Q'\\oplus Q$ [def-weil-pbc-direct-sum-modules], $\\delta(x)=(b(x),-a(x))$, and let $\\pi:D\\to E$ be a surjective linear map with $\\ker\\pi=\\operatorname{im}\\delta$. Set $\\iota_1(y)=(y,0)$, $\\iota_2(z)=(0,z)$ and $j=\\pi\\iota_1$. For every linear map $h$ write $h_L=h\\otimes_R\\mathrm{id}_L$, using [def-weil-pbc-module-tensor-product]. There are mutually inverse linear maps $F:D\\otimes_RL\\to(Q'\\otimes_RL)\\oplus(Q\\otimes_RL)$ and $G$ characterized by $F((y,z)\\otimes l)=(y\\otimes l,z\\otimes l)$ and $G(s,t)=(\\iota_1)_L(s)+(\\iota_2)_L(t)$. They satisfy $F\\delta_L(w)=(b_L(w),-a_L(w))$ and $\\pi_LG(s,0)=j_L(s)$. Moreover $\\pi_L$ is surjective, $\\ker\\pi_L=\\operatorname{im}\\delta_L$, and\n$$\\ker j_L=b_L(\\ker a_L)=\\{b_L(w):w\\in P\\otimes_RL,\\ a_L(w)=0\\}.$$\nThese assertions hold for arbitrary $L$, without any flatness hypothesis or injectivity hypothesis on $a$, $b$ or $\\delta$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUM, lemma-domination-universally-injective, proof: tensoring the quotient pushout and its kernel sequence; Tag 00DF, lemma-tensor-product-exact, for right exactness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For two summands, the componentwise definition [def-weil-pbc-direct-sum-modules] identifies $D=Q'\\oplus Q$ with the product $Q'\\times Q$. Apply [lem-weil-pbc-tensor-finite-product] to these two modules and $N=L$. It gives the linear isomorphism $F$ with the required pure-tensor formula. Define the linear map $G(s,t)=(\\iota_1)_L(s)+(\\iota_2)_L(t)$, using the induced linear maps of [def-weil-pbc-module-tensor-product]. On pairs $(y\\otimes l,0)$ and $(0,z\\otimes l)$ its composite with $F$ is the identity; these pairs generate the target. Conversely, $GF((y,z)\\otimes l)=(y,0)\\otimes l+(0,z)\\otimes l=(y,z)\\otimes l$. Pure tensors generate the source, so $GF=1$ and $FG=1$. Thus $G=F^{-1}$; the generation statement also proves uniqueness of the maps characterized in the item.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensor-pushout paragraph; two-summand tensor distribution expanded using the universal property of Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "For $w=x\\otimes l$ the definitions give $F\\delta_L(w)=(b(x)\\otimes l,-a(x)\\otimes l)=(b_L(w),-a_L(w))$. Both sides are linear in $w$, so equality holds for all $w\\in P\\otimes_RL$ by pure-tensor generation [def-weil-pbc-module-tensor-product]. Since $G(s,0)=(\\iota_1)_L(s)$, functoriality from that same definition gives $\\pi_LG(s,0)=(\\pi\\iota_1)_L(s)=j_L(s)$ for every $s$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensor-pushout paragraph: explicit coordinates; Tag 00CX (lemma-tensor-product), universal property."
+   }
+  },
+  {
+   "text": "The hypotheses on $\\pi$ say exactly that $P\\xrightarrow{\\delta}D\\xrightarrow{\\pi}E\\to0$ is right exact. Apply [lem-weil-pbc-tensor-right-exact] with $(M_1,M_2,M_3,N)=(P,D,E,L)$ and $(f,g)=(\\delta,\\pi)$. It yields surjectivity of $\\pi_L$ and $\\ker\\pi_L=\\operatorname{im}\\delta_L$. Its hypotheses ask for surjectivity of $\\pi$ and the stated kernel equality, both given, and impose neither flatness of $L$ nor injectivity of $\\delta$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF, lemma-tensor-product-exact; applied to the presentation of Tag 0AUM (lemma-domination-universally-injective)."
+   }
+  },
+  {
+   "text": "Let $s\\in\\ker j_L$. Step 2 gives $G(s,0)\\in\\ker\\pi_L$. The right-exact kernel equality of [lem-weil-pbc-tensor-right-exact], applied in Step 3, supplies $w\\in P\\otimes_RL$ with $\\delta_L(w)=G(s,0)$. Applying $F$ and using Steps 1 and 2 gives $(b_L(w),-a_L(w))=(s,0)$, hence $b_L(w)=s$ and $a_L(w)=0$. This proves $\\ker j_L\\subseteq b_L(\\ker a_L)$. Conversely, if $a_L(w)=0$, Step 2 gives $F\\delta_L(w)=(b_L(w),0)$; applying the inverse $G$ yields $\\delta_L(w)=G(b_L(w),0)$. Therefore $j_L(b_L(w))=\\pi_LG(b_L(w),0)=\\pi_L\\delta_L(w)=0$, the last equality following from the exactness in Step 3. Both inclusions hold for the arbitrary module $L$, and prove the asserted equality and its displayed set description.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensor-kernel short exact sequence: both inclusions written explicitly, with Tag 00DF (lemma-tensor-product-exact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "lem-weil-pbc-tensor-finite-product",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUM, lemma-domination-universally-injective, tensor-pushout paragraph, expanded into coordinates using Tag 00DF (lemma-tensor-product-exact) and the tensor universal property (Tag 00CX, lemma-tensor-product)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rTensor_exact|rTensor_mkQ|prodRight|prodLeft|map_ker",
+   "results": "{\"t\": \"2026-10-22T06:45:31Z\", \"tool\": \"grep\", \"query\": \"rTensor_exact|rTensor_mkQ|prodRight|prodLeft|map_ker\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\"], \"digest\": \"85e4017d7038c4e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a quotient leg after tensoring equals the image of the tensor kernel of the other map, using right exactness and tensor distribution over two summands",
+   "results": "{\"t\": \"2026-10-22T06:45:31Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of a quotient leg after tensoring equals the image of the tensor kernel of the other map, using right exactness and tensor distribution over two summands\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.rTensor, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-22T06:45:32Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.rTensor, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"rTensor_mkQ\", \"TensorProduct.map_ker\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\"], \"digest\": \"360c4d90a7a963fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For linear maps a:P to Q and b:P to Qprime and a surjection pi:Qprime direct sum Q to E with kernel image(b,-a), after tensoring by any module L the kernel of j=pi inclusion is b tensor L applied to kernel of a tensor L",
+   "results": "{\"t\": \"2026-10-22T06:45:48Z\", \"tool\": \"leanfinder\", \"query\": \"For linear maps a:P to Q and b:P to Qprime and a surjection pi:Qprime direct sum Q to E with kernel image(b,-a), after tensoring by any module L the kernel of j=pi inclusion is b tensor L applied to kernel of a tensor L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.tensorKer_tmul\", \"LinearMap.tensorKerEquivOfSurjective_symm_tmul\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer_coe\", \"LinearMap.tensorKerEquiv_apply\"], \"digest\": \"d438f676c8460519\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*prod|prod.*ker|range.*ker|ker.*range",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"grep\", \"query\": \"ker.*prod|prod.*ker|range.*ker|ker.*range\", \"sub\": \"LinearAlgebra/Prod\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, LinearMap.prod",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.ker, LinearMap.prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LinearMap.ker_prod\", \"LinearMap.range_prod_eq\", \"LinearMap.coe_equivProdOfSurjectiveOfIsCompl\"], \"digest\": \"fb466c04ce369a1d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a right exact sequence P to V direct sum W to E to zero with first map (b,-a), the kernel of V tensor L to E tensor L is the image of b tensor L on the kernel of a tensor L",
+   "results": "{\"t\": \"2026-10-22T06:46:23Z\", \"tool\": \"leanfinder\", \"query\": \"In a right exact sequence P to V direct sum W to E to zero with first map (b,-a), the kernel of V tensor L to E tensor L is the image of b tensor L on the kernel of a tensor L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"lTensor_mkQ\", \"LinearMap.kerLTensorEquivOfSurjective\", \"rTensor_mkQ\", \"lTensor.inverse_comp_lTensor\"], \"digest\": \"9341a322de4cc33d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: right exactness, tensor distribution, and flat-kernel ingredients do not state the restricted-image kernel identity without the coordinate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a right exact sequence P to Qprime direct sum Q to E, with first map (b,-a), tensoring by any module L gives kernel of the first leg equal to b tensor id applied to kernel of a tensor id",
+   "results": "{\"t\": \"2026-10-23T22:52:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a right exact sequence P to Qprime direct sum Q to E, with first map (b,-a), tensoring by any module L gives kernel of the first leg equal to b tensor id applied to kernel of a tensor id\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.tensorKerEquiv_apply\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.tensorKer_tmul\", \"Module.Flat.ker_lTensor_eq\"], \"digest\": \"45b2d97969ec60d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide right exactness, distribution over products, kernels of tensor maps, or flat-kernel comparisons; none states the restricted-image identity for an arbitrary two-summand presentation. The two required general ingredients are existing Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "rTensor_exact|prodLeft|map_ker",
+   "results": "{\"t\": \"2026-10-23T22:53:05Z\", \"tool\": \"grep\", \"query\": \"rTensor_exact|prodLeft|map_ker\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Prod.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\"], \"digest\": \"a3af16cbf5639cc5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide right exactness, distribution over products, kernels of tensor maps, or flat-kernel comparisons; none states the restricted-image identity for an arbitrary two-summand presentation. The two required general ingredients are existing Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of a map into a pushout of modules after tensoring, computed as image of the other map on the tensor kernel",
+   "results": "{\"t\": \"2026-10-23T22:53:05Z\", \"tool\": \"leansearch\", \"query\": \"kernel of a map into a pushout of modules after tensoring, computed as image of the other map on the tensor kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.ker_lTensor_eq\", \"LinearMap.tensorKerEquiv_apply\", \"LinearMap.tensorKer_coe\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.tensorKer\", \"Algebra.TensorProduct.rTensor_ker\", \"Algebra.TensorProduct.lTensor_ker\", \"LinearMap.tensorKerEquiv\"], \"digest\": \"b08545fa3bef2659\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide right exactness, distribution over products, kernels of tensor maps, or flat-kernel comparisons; none states the restricted-image identity for an arbitrary two-summand presentation. The two required general ingredients are existing Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, LinearMap.prod",
+   "results": "{\"t\": \"2026-10-23T22:53:05Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.ker, LinearMap.prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LinearMap.ker_prod\", \"LinearMap.range_prod_eq\", \"LinearMap.coe_equivProdOfSurjectiveOfIsCompl\"], \"digest\": \"fb466c04ce369a1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide right exactness, distribution over products, kernels of tensor maps, or flat-kernel comparisons; none states the restricted-image identity for an arbitrary two-summand presentation. The two required general ingredients are existing Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an exact sequence P to V direct sum W to E to zero with relation map (b,-a), the kernel of V tensor L to E tensor L is b tensor L of the kernel of a tensor L",
+   "results": "{\"t\": \"2026-10-23T22:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"In an exact sequence P to V direct sum W to E to zero with relation map (b,-a), the kernel of V tensor L to E tensor L is b tensor L of the kernel of a tensor L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.tensorKerEquiv_apply\", \"Module.Flat.ker_lTensor_eq\", \"lTensor_exact\"], \"digest\": \"ca08ec08036d1f05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide right exactness, distribution over products, kernels of tensor maps, or flat-kernel comparisons; none states the restricted-image identity for an arbitrary two-summand presentation. The two required general ingredients are existing Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-domination-pushout-universal-injective",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0AUM tensor-kernel paragraph, expanded by Tag 00DF; supporting algebraic input under lem-trf-local-term-locality via the recorded Mittag-Leffler descent ancestry; returned item Steps 2-4.",
+   "via": [
+    "lem-trf-domination-pushout-universal-injective",
+    "lem-trf-mittag-leffler-faithfully-flat-descent",
+    "lem-trf-countable-projective-faithfully-flat-descent",
+    "lem-trf-local-projective-faithfully-flat-descent",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-quotient-pair-tensor-kernel",
+  "worker": "stage1",
+  "summary": "Q120: unchanged statement, four-step split with no new nodes. Reused the existing Mathlib leaves for finite-product tensor distribution and tensor right exactness. Constructed the inverse, checked both coordinate formulas on generators, applied right exactness with all hypotheses explicit, and proved both kernel inclusions. Read Stacks Tags 0AUM/00DF/00CX, the current blueprint ancestor and unit, every cited statement, and the Mathlib search candidates. Tested degenerate and non-flat cases. No exact project attachment was found.",
+  "blueprint": "Unchanged ancestry: supporting algebra for lem-trf-local-term-locality (1)--(2) through the recorded flattening/Mittag-Leffler descent chain. Immediately realizes the tensor-pushout paragraph of Stacks Tag 0AUM used by lem-trf-domination-pushout-universal-injective: explicit tensor coordinates, right exactness, and the image of the tensor kernel. The latest ancestor proof and the unit route are unchanged; no replacement of their geometric argument is proposed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-3dee8a1d6",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-3dee8a1d6 (reviewer sub-agent of L); spot-checked: Read the item's 4-step split in full, all 4 cited statements and Stacks algebra.tex 0AUM (line 20936; tags/tags line 13655), 00DF and 00CX. The statement and stmt_deps are unchanged and there are no new nodes. The item is still unsplit on live and side-live, and there is no repair note. Step 1: the finite-product leaf with t=2 gives F; G is built from the (iota_i)_L maps, and FG and GF were checked on generators. Step 2: the formula for F delta_L(x tensor l), and pi_L G(s,0)=j_L(s) by the composition clause of the tensor definition. Step 3: tensor-right-exact applied to (P,D,E,L), whose hypotheses are exactly the two given ones (pi surjective, ker pi = im delta); no flatness is needed. Step 4: both inclusions are written out and the sign is handled correctly. The result matches the 0AUM proof with f=a, g=b, f'=j. Small cases checked: L=0, a=0, a=id, and the non-flat case Z with a=2, b=id, L=Z/2, where ker j_L = Z/2 = b_L(ker a_L) although ker a = 0. No duplicate: the module-pushout-quotient-presentation node is the untensored construction. No cycle: the two citers are not proof dependencies. No tool_uses. FIX (B4): Step 1 wrote Q\\prime twice, which renders a full-size prime; replaced with Q' in fixes/dag/nodes/sec-trace-formula/lem-trf-quotient-pair-tensor-kernel.json. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TensorProduct.QuotientPairKernel",
+  "declaration": "LinearMap.quotient_pair_tensor_kernel",
+  "file": "lean/Sheaf/LinearAlgebra/TensorProduct/QuotientPairKernel.lean",
+  "statement": "theorem quotient_pair_tensor_kernel {R : Type uR} [CommRing R] {P : Type uP} [AddCommGroup P] [Module R P] {Q : Type uQ} [AddCommGroup Q] [Module R Q] {Q' : Type uQ'} [AddCommGroup Q'] [Module R Q'] {E : Type uE} [AddCommGroup E] [Module R E] (a : P →ₗ[R] Q) (b : P →ₗ[R] Q') (π : Q' × Q →ₗ[R] E) (hπ : Function.Surjective π) (hker : π.ker = (b.prod (-a)).range) (L : Type uL) [AddCommGroup L] [Module R L] : ∃! F : (Q' × Q) ⊗[R] L ≃ₗ[R] (Q' ⊗[R] L) × (Q ⊗[R] L), (∀ (y : Q') (z : Q) (l : L), F ((y, z) ⊗ₜ[R] l) = (y ⊗ₜ[R] l, z ⊗ₜ[R] l)) ∧ (∀ (s : Q' ⊗[R] L) (t : Q ⊗[R] L), F.symm (s, t) = (inl R Q' Q).rTensor L s + (inr R Q' Q).rTensor L t) ∧ (∀ w : P ⊗[R] L, F ((b.prod (-a)).rTensor L w) = (b.rTensor L w, -(a.rTensor L w))) ∧ (∀ s : Q' ⊗[R] L, π.rTensor L (F.symm (s, 0)) = (π.comp (inl R Q' Q)).rTensor L s) ∧ Function.Surjective (π.rTensor L) ∧ (π.rTensor L).ker = ((b.prod (-a)).rTensor L).range ∧ ((π.comp (inl R Q' Q)).rTensor L).ker = ((a.rTensor L).ker).map (b.rTensor L) ∧ (∀ s : Q' ⊗[R] L, (π.comp (inl R Q' Q)).rTensor L s = 0 ↔ ∃ w : P ⊗[R] L, a.rTensor L w = 0 ∧ b.rTensor L w = s)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1dec44b95",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Checked every clause against the node. Q'×Q with inl/inr is the binary direct sum from proof step 1; δ = b.prod (-a) with the correct sign; h_L = rTensor L throughout. ∃! F linear equivalence with the pure-tensor formula and F.symm = inl_L s + inr_L t for all s,t (uniqueness true, existence via prodLeft). Fδ_L and π_L G(s,0) = j_L s clauses present. π_L surjective and ker π_L = range δ_L. ker j_L = map b_L (ker a_L), the kernel of the tensored map, not (ker a)⊗L, plus the elementwise iff. Only the hypotheses hπ and hker; no flatness or injectivity; six independent universes. Edge cases L=0, P=0, Q=0, Q'=0, E=0, zero ring, a=b=0 and non-flat ℤ, a=2, b=id, L=ℤ/2 all hold. Stmt_deps are Mathlib leaves with no lean record. Node differs from side-live only in the lean field; lean.statement matches the file verbatim. No definitions, sorry only, docstrings cite Tags 0AUM/00DF and the blueprint id and carry all 4 steps. Report has Worker report and Second reading by Q67. Searches find no existing statement. No findings."
+ }
+}

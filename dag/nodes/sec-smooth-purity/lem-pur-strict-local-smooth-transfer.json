@@ -1,0 +1,343 @@
+{
+ "id": "lem-pur-strict-local-smooth-transfer",
+ "kind": "statement",
+ "title": "Strict-local smooth transfer for constant affine-line sections",
+ "statement": "Let $k$ be an algebraically closed field, $\\ell$ a prime invertible in $k$, and $B$ a finite abelian group killed by a power of $\\ell$. Let $R$ be a strictly henselian local $k$-algebra (henselian local with separably closed residue field) [def-weil-pbc-henselian-terminology], and put $S=\\operatorname{Spec}R$, $C=\\mathbf A^1_k$ and $C_S=\\mathbf A^1_S$ [def-sbc-affine-space]. Write $g:S\\to\\operatorname{Spec}k$, $f:C\\to\\operatorname{Spec}k$, $h:C_S\\to C$ and $e:C_S\\to S$ for the projections of their Cartesian square. All coefficient sheaves are constant sheaves [def-weil-pbc-constant-sheaf]. Use the small etale sites [def-weil-pbc-etale-site], the bounded-below abelian derived categories [def-weil-pbc-derived-categories], direct images [def-weil-pbc-direct-image], and inverse-image units [def-weil-pbc-inverse-image]. Then the canonical unit\n$$B_C[0]\\longrightarrow Rh_*B_{C_S}[0]$$\nis an isomorphism. Under the ordinary derived-sections composition comparison, its image is the canonical pullback isomorphism\n$$h^*:R\\Gamma(C_{\\mathrm{et}},B_C)\\xrightarrow{\\sim}R\\Gamma((C_S)_{\\mathrm{et}},B_{C_S}).$$\nThis map preserves constants: the composite of $B[0]\\to R\\Gamma(C,B_C)$ with $h^*$ equals the constants map $B[0]\\to R\\Gamma(C_S,B_{C_S})$. There is no finite-type, Noetherian or dimension hypothesis on $R$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYU, theorem-smooth-base-change, and 03QO, lemma-vanishing-etale-cohomology-strictly-henselian; blueprint Reduction to a geometric fibre, with smooth side f and qcqs side g, not smoothness of the affine-line projection over S as an arbitrary-base-change assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-sbc-affine-space",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\operatorname{Spec}k$. The square in the statement is Cartesian since $R\\otimes_k k[t]=R[t]$. By [sbc-lem-affine-space-smooth], $f:C\\to P$ is smooth. The map $g:\\operatorname{Spec}R\\to\\operatorname{Spec}k$ is affine: its inverse image over the sole nonempty affine open of $P$ is $S$, which is affine. Thus [lem-weil-pbc-affine-morphism-permanence] makes $g$ quasi-compact and quasi-separated. By [lem-kun-pullback-constant] all inverse images of the constant coefficient sheaves in this square are canonically the corresponding constant sheaves. These identifications are induced by constant sections. Every element of $B$ is killed by $\\ell^a$ for some fixed $a$, and $\\ell^a$ is a unit on $P$, so $B_S$ satisfies the torsion hypothesis of smooth base change.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change: verification of the square; Tags 00T7 and 01V5 for affine space"
+   }
+  },
+  {
+   "text": "For a nonzero local ring every prime is contained in its unique maximal ideal, so every nonempty closed subset of its spectrum contains the closed point. A partition into two clopen subsets therefore has an empty part. Consequently $S$ and $P$ are connected and nonempty. By [lem-weil-pbc-constant-sheaf-sections-connected] the actual constant-section maps $B\\to\\Gamma(S,B_S)$ and $B\\to\\Gamma(P,B_P)$ are isomorphisms. By [lem-weil-pbc-strictly-henselian-etale-acyclic], $H^q(S,B_S)=0$ for $q>0$. The same node applied to the field $k$ says that $\\Gamma(P,-)$ is exact: a field is henselian (a simple residue root already lies in the field), and the algebraically closed field $k$ is separably closed. By [lem-weil-pbc-geometric-point-cohomology], for every geometric point $\\bar p$ of $P$ the germ map $\\Gamma(P,F)\\to F_{\\bar p}$ is an isomorphism for every abelian sheaf $F$. Thus a map whose global sections are bijective is bijective on all these stalks; alternatively the identity geometric point already realizes global sections.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-geometric-point-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian; Tags 03QT and 03QU"
+   }
+  },
+  {
+   "text": "Let $I$ be an injective resolution of $B_S$ in nonnegative degrees. By [def-weil-pbc-direct-image], $g_*I$ represents $Rg_*B_S$ and $\\Gamma(P,g_*I)=\\Gamma(S,I)$. Exactness of $\\Gamma(P,-)$ and [lem-weil-pbc-exact-functor-complex-cohomology] identify $\\Gamma(P,\\mathcal H^q(g_*I))$ with $H^q(S,B_S)$. The adjunction unit $a:B_P[0]\\to Rg_*B_S[0]$ is represented by $B_P[0]\\to g_*I$: first pull back constant sections, then apply $B_S\\to I$. On global sections this induces the isomorphism $B\\to\\Gamma(S,B_S)$ in degree zero from step 2, and an isomorphism between zero groups in all other degrees. Step 2 identifies these global-section maps with every geometric stalk map. Apply [lemma-weil-pbc-geometric-stalk-conservative] to each cohomology sheaf map: all are isomorphisms. The representing map of complexes is therefore a quasi-isomorphism and is inverted in the derived category [def-weil-abstract-derived-category]. Hence the specified unit $a$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QO and 03PU, theorem-exactness-stalks (stalk criterion), using the resolution computation of higher direct images"
+   }
+  },
+  {
+   "text": "Let $\\beta=f^{-1}Rg_*B_S[0]\\to Rh_*e^{-1}B_S[0]$ be the derived exchange of [sbc-def-base-change-map], specialized to abelian sheaves ($\\Lambda=\\mathbf Z$). Its $q$-th cohomology map is precisely $f^{-1}R^qg_*B_S\\to R^qh_*e^{-1}B_S$, as that definition specifies. By [sbc-thm-smooth-base-change] and the hypotheses verified in step 1 this map is invertible for every $q\\geq0$. For $q<0$ both sides vanish, since the sheaf is in degree zero, direct image is right derived, and inverse image is exact. Thus $\\beta$ is invertible: represent it by a map from its source to an injective representative of its target; that map induces isomorphisms on all cohomology sheaves, hence is a quasi-isomorphism [def-weil-abstract-derived-category]. Consequently $\\beta\\circ f^{-1}a:B_C[0]\\to Rh_*B_{C_S}[0]$ is invertible.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "sbc-thm-smooth-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; canonical derived exchange and its cohomology maps"
+   }
+  },
+  {
+   "text": "We identify the last composite with the actual unit $\\eta_h$. The transpose formula in [sbc-def-base-change-map] says that its transpose under $h^{-1}\\dashv Rh_*$ is, after the square identification, $e^{-1}(\\varepsilon_g\\circ g^{-1}\\eta_g)$ evaluated on $B_P[0]$. Here $a=\\eta_{g,B_P[0]}$ and $g^{-1}B_P=B_S$. The triangle identity gives $\\varepsilon_{g,g^{-1}B_P}\\circ g^{-1}\\eta_{g,B_P}=\\mathrm{id}_{g^{-1}B_P}$. Its inverse image along $e$ is $\\mathrm{id}_{B_{C_S}[0]}$. The transpose of $\\eta_h$ is the same identity by the unit formula for an adjunction. Equality of transposes gives $\\beta\\circ f^{-1}a=\\eta_h$. Thus the unit in the statement is invertible.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU with the unit-counit definition of exchange; triangle identity"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cohomology-pullback-derived-unit] with $u=h$ and $K=B_C[0]$. Its Leray isomorphism identifies $R\\Gamma(C,Rh_*B_{C_S})$ with $R\\Gamma(C_S,B_{C_S})$, and its clause (2) identifies $R\\Gamma(C,\\eta_h)$ followed by this isomorphism with the canonical pullback $h^*$. Since functors preserve isomorphisms, this is an isomorphism. To check constants as a derived morphism, choose a nonnegative injective resolution $s:B_C\\to J$ and a K-injective resolution $r:h^{-1}J\\to I$, taking $t:B_{C_S}\\to I$ to be $r\\circ h^{-1}s$. This is exactly the resolution recipe in [def-weil-pbc-cohomology-pullback]. The pullback recipe [def-weil-pbc-cohomology-pullback] is the map $\\Gamma(C,J)\\to\\Gamma(C_S,I)$ induced by the inverse-image unit and that comparison. Precomposing with $B[0]\\to\\Gamma(C,J)$ sends $b$ to $t(b)$, because $r\\circ h^{-1}s=t$ and the inverse image of a constant section $b$ is the same constant section by [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf]. This is exactly the constants map $B[0]\\to\\Gamma(C_S,I)$. Thus the two maps agree already on these complexes, and hence in $D^+(\\mathrm{Ab})$.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01EZ, lemma-before-Leray; 01F9, equation-functorial-derived; 01FB, remark-explain-arrow; constant-section normalization in Etale Cohomology Tag 03P5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-abstract-derived-category",
+  "sbc-def-base-change-map",
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Unit sk-prop-a1-kummer, Reduction to a geometric fibre; explicit assembly from Stacks 0EYU, 03QO, 03P5 and derived sections functoriality 01EZ/01F9, with the exchange/unit triangle calculation written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraically closed field k and a strictly henselian local k algebra R the projection from affine line over R to affine line over k has invertible constant sheaf derived unit",
+   "results": "{\"t\": \"2026-10-22T06:11:24Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraically closed field k and a strictly henselian local k algebra R the projection from affine line over R to affine line over k has invertible constant sheaf derived unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\"], \"digest\": \"c80df7bb809260bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change identifies derived sections of affine line over a strictly henselian local base with the affine line over the algebraically closed field",
+   "results": "{\"t\": \"2026-10-22T06:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change identifies derived sections of affine line over a strictly henselian local base with the affine line over the algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\"], \"digest\": \"0d52952c69018b3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraically closed field k and a strictly henselian local k algebra R the projection from affine line over R to affine line over k has invertible constant sheaf derived unit",
+   "results": "{\"t\": \"2026-10-22T06:11:53Z\", \"tool\": \"leansearch\", \"query\": \"For an algebraically closed field k and a strictly henselian local k algebra R the projection from affine line over R to affine line over k has invertible constant sheaf derived unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CompHausLike.LocallyConstant.unitIso\", \"AlgebraicGeometry.SheafedSpace.unit\", \"AlgebraicGeometry.StructureSheaf.comap_id'\", \"CompHausLike.LocallyConstant.unit\", \"CompHausLike.LocallyConstant.counit\", \"AlgebraicGeometry.StructureSheaf.res_const'\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\"], \"digest\": \"7205fb3b00081d46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-22T06:11:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*cohom|strict.*local.*[Ss]heaf|smooth.*base.*change",
+   "results": "{\"t\": \"2026-10-22T06:11:53Z\", \"tool\": \"grep\", \"query\": \"henselian.*cohom|strict.*local.*[Ss]heaf|smooth.*base.*change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\"], \"digest\": \"217010566ecaf2b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change along affine line identifies constant etale sheaf with derived pushforward from a strictly henselian local algebra",
+   "results": "{\"t\": \"2026-10-22T11:20:47Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change along affine line identifies constant etale sheaf with derived pushforward from a strictly henselian local algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.homEquiv\", \"Algebra.FormallyEtale.localization_base\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"e088266371afdebd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results are algebraic smoothness/formal etaleness or a constant-sheaf import, not the specified derived etale unit and constants compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyHenselian|smoothBaseChange|constantSheaf",
+   "results": "{\"t\": \"2026-10-22T11:21:41Z\", \"tool\": \"grep\", \"query\": \"strictlyHenselian|smoothBaseChange|constantSheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"c09cda384f1e6ba7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results are algebraic smoothness/formal etaleness or a constant-sheaf import, not the specified derived etale unit and constants compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change for a constant etale sheaf over a strictly henselian local ring",
+   "results": "{\"t\": \"2026-10-22T11:21:41Z\", \"tool\": \"leansearch\", \"query\": \"Smooth base change for a constant etale sheaf over a strictly henselian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"39c3cfaa086706db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results are algebraic smoothness/formal etaleness or a constant-sheaf import, not the specified derived etale unit and constants compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"constantSheaf\"",
+   "results": "{\"t\": \"2026-10-22T11:21:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"constantSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results are algebraic smoothness/formal etaleness or a constant-sheaf import, not the specified derived etale unit and constants compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant torsion etale sheaf on the affine line is the derived direct image of its pullback along a strictly henselian local base extension",
+   "results": "{\"t\": \"2026-10-22T11:21:43Z\", \"tool\": \"leanfinder\", \"query\": \"A constant torsion etale sheaf on the affine line is the derived direct image of its pullback along a strictly henselian local base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.localization_base\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\"], \"digest\": \"f97b8577b66f837c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results are algebraic smoothness/formal etaleness or a constant-sheaf import, not the specified derived etale unit and constants compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-line-ordinary-invariance",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input: Strict-local smooth transfer for constant affine-line sections; retained ordinary-invariance proof steps 4.",
+   "via": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-strict-local-smooth-transfer",
+  "worker": "stage1",
+  "summary": "Verified the precise smooth-arrow orientation and arbitrary strictly henselian base. Reused existing acyclicity, constant sections, smooth base change and derived-unit pullback interfaces; wrote the exchange/unit triangle identity and constants equality explicitly. No new nodes, no statement change, no SGA, no Lean writing or compilation.",
+  "blueprint": "Realizes sk-prop-a1-kummer Reduction to a geometric fibre, the affine-line square and its actual unit; supplies the ordinary affine-line input used by the shear paragraph of lem-pur-frame-independence.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic strict-henselian acyclicity interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Generic geometric-point evaluation interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Generic smooth exchange interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic Leray and actual pullback interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "def-weil-pbc-cohomology-pullback",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "why": "Generic sheaf/derived-category interface used exactly as stated; realizes the unit's smooth-square strict-local reduction, which has no separate copy of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-abstract-derived-category",
+  "sbc-def-base-change-map",
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-5bb71ccab",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5bb71ccab (reviewer sub-agent of L); spot-checked: Read the item, its six steps and every cited statement. The delivery has no new nodes and leaves the statement unchanged. It follows the main-20261015 sk-prop-a1-kummer 'Reduction to a geometric fibre' paragraph, and the route uses no SGA. Smooth base change (Stacks 0EYU, l.17446) is applied in the right orientation: the smooth arrow is f: A^1_k -> Spec k and the qcqs arrow is g: Spec R -> Spec k. In sbc-thm-smooth-base-change terms, X=C, S=P, T=Spec R, Y=C_S. The torsion hypothesis holds because l^a kills B_S. Step 2: connectedness is elementary. 03QO acyclicity (l.8207) needs no Noetherian hypothesis, and the natural germ isomorphism on Spec k checks out. Step 3: the unit is represented through adjunction clause (2) and the exact functor Gamma(P,-) is moved past H^q. Global sections are identified with stalks and stalk conservativity gives a quasi-isomorphism. Step 4: BC^q is H^q of the derived exchange by definition, and q<0 is trivial. Step 5 has one gap: the cited square nodes do not say how theta acts on constant sections. So 'equals eta_h' holds only up to Rh_* of an isomorphism, but invertibility of the stated unit follows anyway. Step 6: Leray and the derived-unit clause (2) give the pullback, and the constants are checked on representing complexes via the unique constant-section iso. Small cases tested: R=k, B=0, nonreduced R, non-Noetherian R. The DAG and blueprint duplicate search found only the G_m Kummer node, which is not a duplicate. The generic tool_uses are accepted. Step 2's reason that a field is henselian is worded loosely but the claim is true; no change made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmoothTransfer",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalSmoothTransfer",
+  "declarations": [
+   "AlgebraicGeometry.Etale.StrictLocalSmoothTransfer.constantObject",
+   "AlgebraicGeometry.Etale.StrictLocalSmoothTransfer.constantPullbackIso",
+   "AlgebraicGeometry.Etale.StrictLocalSmoothTransfer.unit",
+   "AlgebraicGeometry.Etale.StrictLocalSmoothTransfer.pullback",
+   "AlgebraicGeometry.Etale.StrictLocalSmoothTransfer.constants",
+   "AlgebraicGeometry.Etale.strictLocalSmoothTransfer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmoothTransfer.lean",
+  "statement": "theorem strictLocalSmoothTransfer (k R : Type u) [Field k] [IsAlgClosed k] [CommRing R] [Algebra k R] [IsStrictlyHenselianLocalRing R] (ℓ : ℕ) (hℓ : ℓ.Prime) (hunit : IsUnit (ℓ : k)) (B : AddCommGrpCat.{u + 1}) [Finite B] (hB : ∃ a : ℕ, ∀ b : B, ℓ ^ a • b = 0) : IsIso (StrictLocalSmoothTransfer.unit (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R)))) B) ∧ ((Sheaf.Γ (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of k))).smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.map (StrictLocalSmoothTransfer.unit (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R)))) B) ≫ (etaleLerayPlus (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R))))).hom.app (StrictLocalSmoothTransfer.constantObject (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R))) B) = StrictLocalSmoothTransfer.pullback (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R)))) B) ∧ IsIso (StrictLocalSmoothTransfer.pullback (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R)))) B) ∧ StrictLocalSmoothTransfer.constants (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of k))) B ≫ StrictLocalSmoothTransfer.pullback (AffineSpace.map (n := ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom (algebraMap k R)))) B = StrictLocalSmoothTransfer.constants (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R))) B",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e6c2750b",
+  "group": "Q60",
+  "result": "pass",
+  "note": "All hypotheses match the node and none is stronger (k alg. closed, ℓ prime invertible in k, B finite ℓ-power torsion in AddCommGrpCat.{u+1}, IsStrictlyHenselianLocalRing R as k-algebra, no Noetherian/finite-type hypothesis). h = AffineSpace.map (ULift (Fin 1)) (Spec.map algebraMap) points the right way. The four conjuncts (unit iso; RΓ(unit)≫etaleLerayPlus = pullback, built independently via abelianDerivedCohomologyPullback; pullback iso; constants≫pullback = constants in D+) render the node fully; the constant identification upperStarConstantSheafIso is leftAdjointUniq, so canonical. Mathematically true via 0EYU with smooth f, qcqs g, and 03QO. Only lean and stmt_deps changed; the added def-weil-pbc-cohomology-pullback is a landed definition node; the 8 dep records are identical to live; statement verbatim once; imports exist. Edge cases B=0, R=k, non-Noetherian R and both characteristics are covered. No hollow definitions, sorry only, docstrings carry source and blueprint, no pro-étale substitute, no H4 duplicate. Advisory: etaleLerayPlus, Adjunction.derivedPlus and upperStarConstantSheafIso have owners outside stmt_deps (two theorem proof_deps; removed after the dry run; an S2 fix cannot change stmt_deps). Not recompiled (2026-10-21 rule); worker reports clean 8.0 s / 7.6 s."
+ }
+}

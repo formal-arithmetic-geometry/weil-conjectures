@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-scalar-associator-shifts",
+ "kind": "statement",
+ "title": "Normalized rational coefficient associators commute with integer shifts",
+ "statement": "For finite extensions E, L, M of Q_l, algebra homomorphisms i:E→L and j:L→M, a finite-field datum D with l≠D.p, and a scheme Y, the canonical rationalConstructibleScalarComp of [lem-weil-scalar-extension-composition] commutes with all integer shifts for the normalized comparisons of [lem-weil-scalar-extension-exact-triangulated]. The construction uses the raw rational stages of [def-weil-rationalization-karoubi], without idempotent completion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Transitivity of exact derived scalar extensions; normalized finite-stage version in lem-weil-scalar-extension-composition and lem-weil-scalar-extension-exact-triangulated."
+ },
+ "stmt_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary derived tensor associator is the composite of mapDerivedCategoryCompIso inverse and mapDerivedCategoryNatIso. Both commute with shifts by the proved derived-functor API. The specified full-subcategory components and inherited shift maps identify its restriction with the integral constructible associator. Faithfulness of the full inclusion proves the integral equation.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-scalar-extension-exact-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At shift one, identify the rational associator and the three scalar shift comparisons with their integral components tensored with one. The prescribed tensor Hom map sends 1⊗f to 1⊗F(f), and the rational shift sends 1⊗f to 1⊗f[1]. Endpoint equalities come from the triangulation datum. Thus the rational square is the localization image of the integral square. Integer shift coherence extends degree one to zero, sums, and negative integers.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-scalar-extension-exact-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed associator is the ordinary rational associator conjugated by rationalOrdinaryComparison. These comparisons commute with every shift by their unique normalization. Composition, inversion and whiskering preserve NatTrans.CommShift, so the completed associator commutes with shifts.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-scalar-extension-exact-triangulated"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Shift compatibility of the tensor associator, expanded from the exact scalar-extension construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural associator between exact coefficient extension functors commutes with every integer shift",
+   "results": "See searches.jsonl; generic derived functor shift comparisons only.",
+   "date": "2026-10-25",
+   "verdict": "Use generic derived functor comparisons; no specialized rational coefficient result."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift, Functor.mapDerivedCategoryCompIso",
+   "results": "See searches.jsonl.",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient associator statement."
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftCore_neg|commShift_of_one|rationalConstructibleScalarComp_commShift",
+   "results": "Private integer-coherence helper in CoefficientBidualTriangleCompatibility; derived shift API in WeilConjectures.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the generic proved arguments; retain the specialization as its own theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AlgebraicallyClosedCoefficients",
+  "date": "2026-10-25",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "def-weil-algebraically-closed-coefficients"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionAssociatorShifts",
+  "file": "lean/Sheaf/Paper/ScalarExtensionAssociatorShifts.lean",
+  "declaration": "WeilConjectures.rationalConstructibleScalarComp_commShift",
+  "statement": "theorem rationalConstructibleScalarComp_commShift :\n    NatTrans.CommShift (rationalConstructibleScalarComp l E L i Y M j D hl).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3d36b",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T002808-L-116338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3d36b",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T002808-L-116338",
+  "kind": "interface",
+  "note": "independent cc review: 15 closed theorems' signatures vs clone (unchanged); changed def bodies vs change record (associator_formula/correctedTensorAssociator_formula, StageSystem.tr = old transport formula, concrete hasShift satisfies shift_exists); new node lem-weil-scalar-associator-shifts vs rationalConstructibleScalarComp_commShift; 5 direct importers + General compiled exit 0"
+ }
+}

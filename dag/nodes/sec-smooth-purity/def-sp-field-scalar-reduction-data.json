@@ -1,0 +1,111 @@
+{
+ "id": "def-sp-field-scalar-reduction-data",
+ "kind": "definition",
+ "title": "Normalized field scalar reduction comparison data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For field-scalar system data $c,H$ [def-sp-field-scalar-system-data], reduction data means the completed coefficient basis and derived finite-power coordinate comparison, together with the natural ordinary isomorphism between completed scalar extension followed by reduction and reduction followed by whole-system scalar extension [det-sp-reduction-tower-normalized]. On local generators its forward map sends $(x\\otimes s)\\otimes b$ to $(x\\otimes1)\\otimes\\overline s b$ and its inverse sends $(x\\otimes a)\\otimes b$ to $(x\\otimes1)\\otimes\\overline a b$. The basis columns are the same integral vectors used in the system data. It also includes a natural isomorphism between the corresponding functors into the ordinary derived category of whole strict systems; on every K-flat representative its composite with the reduction and exact-extension counits is the localization of this very ordinary cochain isomorphism, composed with the completed-scalar counit. Completed scalar extension is the existing normalized scalar model [lem-coef-semilinear-derived-sections]. This defines the data and its normalized representative equation; it does not assert existence.",
+ "stmt_deps": [
+  "def-sp-field-scalar-system-data",
+  "det-sp-reduction-tower-normalized",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), finite free scalar extension and reduction associativity"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact finite free scalar extension datum on strict quotient coefficient towers with basis coordinates",
+   "results": "Algebra.TensorProduct.basisAux; Module.Basis.smulTower; IsBaseChange.free; Module.Basis.smulTower_repr_mk; Module.Free.tensor; Algebra.TensorProduct.instFree; Algebra.QuasiFinite.of_restrictScalars; Algebra.Presentation.tensorModelOfHasCoeffsHom. None packages strict-system scalar or reduction normalization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, SystemScalarModel, ExactExtension",
+   "results": "0 hits; unknown identifier SystemScalarModel.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactExtension|ReductionComparison|systemModelTmul CategoryTheory (Mathlib); field.scalar.system.data|field.scalar.reduction.data|structure (ExactExtension|Coordinates|ReductionComparison) lean/WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search field scalar normalized systems",
+   "results": "Mathlib 0 hits. Project has unrelated Coordinates records in Kummer/Cech, shriek interfaces, supported integral models, algebraic spaces, Cohen lift, and equivariant fibres. No field-scalar system/reduction data node or record. Blueprint search 0 matches; ancestor is det-sp-field-extension-towers. Existing systemModelTmul is used rather than redefined.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-scalar-normalized-systems",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1), finite free scalar extension and reduction formula",
+   "via": [
+    "lem-sp-field-scalar-normalized-systems"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldScalarReductionData",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldScalar.ReductionComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldScalar.integralScalar",
+   "AlgebraicGeometry.ProEtale.FieldScalar.sourceTensor",
+   "AlgebraicGeometry.ProEtale.FieldScalar.targetTensor",
+   "AlgebraicGeometry.ProEtale.FieldScalar.OrdinaryComparison",
+   "AlgebraicGeometry.ProEtale.FieldScalar.comparisonChain",
+   "AlgebraicGeometry.ProEtale.FieldScalar.ReductionComparison",
+   "AlgebraicGeometry.ProEtale.FieldScalar.derivedRestriction",
+   "AlgebraicGeometry.ProEtale.FieldScalar.derivedPower",
+   "AlgebraicGeometry.ProEtale.FieldScalar.integralConstant",
+   "AlgebraicGeometry.ProEtale.FieldScalar.integralUnit",
+   "AlgebraicGeometry.ProEtale.FieldScalar.integralRestriction",
+   "AlgebraicGeometry.ProEtale.FieldScalar.Coordinates"
+  ],
+  "file": "lean/Sheaf/Paper/FieldScalarReductionData.lean",
+  "statement": "structure ReductionComparison extends OrdinaryComparison c H",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62e2e848f",
+  "group": "Q117",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62e2e848f",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read the item, its 6 steps, the 3 delivered modules (SystemData, ReductionData, NormalizedSystems), the report and the dependency declarations (SpReductionTower, spIntegralSectionRing/EllProjection, SpCoefficientTowersAbelian, PurityFiniteSetting/FiniteFieldDatum). The clause table matches the node: bases with exists-unique coordinates of rank [F:E] and their reductions; exact ordinary extension with t(x)⊗q(b) transitions; restriction; coordinates pinned by columns; a left-derived functor invertible on all complexes; preservation of normalized towers and of literal support/Tor intervals; isoDerived of whole systems pinned on K-flat representatives by the forward/inverse generator formulas; Identity/Successive unitors and compositors pinned on generators and by counit equations; cofinal ℓ=aϖ^h clause. Generalizing to arbitrary finite extensions E,F is stronger and true. Hypotheses are not stronger than the node. Pinning: coefficients by quotient_mk/tower_app, integral by projections (completed ring is the limit), ordinary up to unique iso by levels+transitions, derived by its universal property. Item JSON differs from side-live only in lean and +2 stmt_deps on the new def nodes; proof_deps unchanged; statements verbatim. New def nodes have source/blueprint docstrings and real data; no FieldScalar namespace or duplicate found. No hollow definition; only the theorem is sorry. No compile, since no file changed. Advisory: derived_level and Coordinates.derived are existence-only isos."
+ }
+}

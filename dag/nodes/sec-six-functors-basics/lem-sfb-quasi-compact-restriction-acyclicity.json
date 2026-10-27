@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Fix a quasi-compact open $V\\subseteq X$ and put $F=G|_V$, so $F(W)=G(W)$ for each open $W\\subseteq V$. Work on the open site of the subspace $V$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal B_V$ be the opens of $V$ whose images are quasi-compact opens of $X$, including $\\varnothing$. These form a basis: an open of $V$ is open in $X$, so each of its points has a quasi-compact open neighbourhood contained in it. Let $\\mathrm{Cov}_V$ consist of all finite covers $W=\\bigcup_{i\\in I}W_i$ with $W,W_i\\in\\mathcal B_V$, using finite ordinal index sets (including the empty one). This is a set of covers. Given any open cover of $W\\in\\mathcal B_V$, choose for every point a basis neighbourhood contained in a cover member and then take a finite subcover by quasi-compactness of $W$. Thus $\\mathrm{Cov}_V$ is cofinal among covers of every $W\\in\\mathcal B_V$. For $W=\\varnothing$ the empty cover gives the same refinement statement.",
+   "text": "Fix a quasi-compact open $V\\subseteq X$ and put $F=G|_V$, so $F(W)=G(W)$ for each open $W\\subseteq V$. Work on the open site of the subspace $V$ [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal B_V$ be the opens of $V$ whose images are quasi-compact opens of $X$, including $\\varnothing$. These form a basis: an open of $V$ is open in $X$, so each of its points has a quasi-compact open neighbourhood contained in it. Let $\\mathrm{Cov}_V$ consist of all finite covers $W=\\bigcup_{i\\in I}W_i$ with $W,W_i\\in\\mathcal B_V$, using finite ordinal index sets (including the empty one). This is a set of covers. Given any open cover of $W\\in\\mathcal B_V$, choose for every point a basis neighbourhood contained in a cover member and then take a finite subcover by quasi-compactness of $W$. Thus $\\mathrm{Cov}_V$ is cofinal among covers of every $W\\in\\mathcal B_V$. For $W=\\varnothing$ the empty cover gives the same refinement statement. In Lean, use the existing CategoryTheory.Sheaf.compact_basis_cofinal theorem for this cofinality step, with arbitrary finite index types (finite subtypes of the compactness subcover) instead of finite ordinals.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
@@ -23,7 +23,7 @@
    }
   },
   {
-   "text": "For a cover $\\mathcal W=(W_i)_{i\\in I}$ in $\\mathrm{Cov}_V$, every nonempty finite intersection $W_J=\\bigcap_{j\\in J}W_j$ is a quasi-compact open of $X$, by induction using the pairwise-intersection hypothesis. In particular all tuple intersections, with repetitions allowed, belong to $\\mathcal B_V$. There are only finitely many nonempty subsets of the finite set $I$. Hence an arbitrary union $W_{\\mathcal S}=\\bigcup_{J\\in\\mathcal S}W_J$ of these intersections is a finite union of quasi-compact opens, and is quasi-compact: for any open cover take a finite subcover on each of the finitely many pieces and join these subcovers. The empty union is quasi-compact as well. Since $W_{\\mathcal S}\\subseteq W$ and both are quasi-compact opens in $X$, the hypothesis on $G$ gives a surjection $F(W)=G(W)\\longrightarrow G(W_{\\mathcal S})=F(W_{\\mathcal S})$.",
+   "text": "For a cover $\\mathcal W=(W_i)_{i\\in I}$ in $\\mathrm{Cov}_V$, every nonempty finite intersection $W_J=\\bigcap_{j\\in J}W_j$ is a quasi-compact open of $X$, by induction using the pairwise-intersection hypothesis. In particular all tuple intersections, with repetitions allowed, belong to $\\mathcal B_V$. There are only finitely many nonempty subsets of the finite set $I$. Hence an arbitrary union $W_{\\mathcal S}=\\bigcup_{J\\in\\mathcal S}W_J$ of these intersections is a finite union of quasi-compact opens, and is quasi-compact: for any open cover take a finite subcover on each of the finitely many pieces and join these subcovers. The empty union is quasi-compact as well. Since $W_{\\mathcal S}\\subseteq W$ and both are quasi-compact opens in $X$, the hypothesis on $G$ gives a surjection $F(W)=G(W)\\longrightarrow G(W_{\\mathcal S})=F(W_{\\mathcal S})$. Use the existing CategoryTheory.Sheaf.compact_cech_intersections theorem to identify compactness of the chosen SiteCechComplex tuple intersections.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -64,7 +64,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, proof of (1) assuming (2), applying Tags 0A36 and 01EW; use the general-site abelian version 03F9 of the latter on each open subspace V."
+  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, proof of (1) assuming (2), applying Tags 0A36 and 01EW; use the general-site abelian version 03F9 of the latter on each open subspace V. Lean implementation reuses the elementary compact_basis_cofinal and compact_cech_intersections helpers of Sheaf.Topology.FilteredInjectiveCechAcyclic, exposed in place without changing their statements or proofs."
  },
  "mathlib_searches": [
   {
@@ -220,5 +220,27 @@
   "group": "NO",
   "result": "pass",
   "note": "Node differs from live only in lean; lean.statement verbatim; report has Worker report + Second reading by NO. Clause-by-clause: qc-open basis (IsTopologicalBasis, IsCompact = quasi-compact), pairwise qc intersections over Opens, abelian sheaf on Opens X in AddCommGrpCat.{u}, hres = surjectivity of the actual restriction G.obj.map (homOfLE).op for qc U≤V, every qc V and q>0, G|_V = Mathlib IsOpenEmbedding.sheafPullback (naive restriction, Functors.lean read), conclusion Subsingleton H' (G|_V) q ⊤ with the hasExt_of_enoughInjectives witness recorded for def-sc-topological-abelian-cohomology. No qc/Noetherian/separation assumption on X; universe convention same as def-sc note and the existing consumer SpectralSpaceCohomologyDimension. Edge cases empty X/V, non-qc X, q=0 excluded OK. Proof-dep plain imports match the recorded modules; isZero_H'_of_siteCech_vanishing signature matches Step 4. No existing declaration found by rg; no hollow defs; docstrings carry source and blueprint tags and the 4-step proof. No file changed, no compile run. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261023T170210-L-2075080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

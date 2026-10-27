@@ -1,0 +1,306 @@
+{
+ "id": "lem-pur-point-frobenius-transport-normalization",
+ "kind": "statement",
+ "title": "Normalization of point Frobenius transport on free coefficient sheaves",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ with $q=p^a$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. Put $s=\\operatorname{Spec}k$ and $g=\\operatorname{Spec}(\\gamma)$, where $\\gamma$ is geometric Frobenius [def-weil-frobenius-detailed]. For $B=A_{E,n}$ or $\\mathcal O_E$, write $B_s$ for its constant or completed coefficient sheaf, respectively [def-weil-completed-integral-coefficients]. Let $M$ be a finite free $B_s$-module sheaf placed in degree zero whose class belongs to $D^b_c(s,B)$. Regard $g^{-1}M$ as a $B_s$-module through the coefficient structure isomorphism $c_B:g^{-1}B_s\\to B_s$. Let $\\kappa_M:g^{-1}M\\to Lg^*M$ be the specified comparison [def-weil-inverse-image-pullback-comparison], $\\lambda_M:Lg^*M\\xrightarrow{\\sim}g^{-1}M$ the following normalized identification (an isomorphism of the type asserted in [lem-weil-isomorphism-derived-pullback]): at finite level it is the sheafified multiplication map $x\\otimes b\\mapsto c_B^{-1}(b)x$; at integral level put $G=g^{-1}$, let $u_M:M\\to\\widehat M$ be the actual derived-completion unit and $\\theta_{g,M}:Lg^*M\\xrightarrow{\\sim}G\\widehat M$ the entire-cone comparison of [lem-weil-isomorphism-derived-pullback-comparison-normalization], and set $\\lambda_M=G(u_M)^{-1}\\circ\\theta_{g,M}$, where $u_M$ is invertible by [lem-pur-normalized-actual-reconstruction-maps] since $M\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], and $\\sigma_M$ restriction along $g:(s,g)\\to(s,\\operatorname{id})$ followed by the inverse-image coprojection [def-weil-frobenius-point-transport]. Then\n$$\\lambda_M\\circ\\kappa_M=\\operatorname{id}_{g^{-1}M}\\quad\\text{in }D(s_{\\mathrm{proet}},B).$$\nAt finite level these inverse coordinate maps are $x\\mapsto x\\otimes1$ and $x\\otimes b\\mapsto c_B^{-1}(b)x$. For completed coefficients their reductions are these maps at every $A_{E,r}$, and the same identity holds for the specified derived inverse-limit comparison. In the Frobenius square with structural map $\\operatorname{id}_s$, the ordinary direct-image exchange [def-weil-frobenius-square-exchange] is the identity under the identity-operation identifications. Consequently, for any $B_s$-linear sheaf isomorphism $v:g^{-1}M\\to M$ and $\\theta=v\\circ\\lambda_M$, the ordinary transport [def-weil-frobenius-cohomology-transport] satisfies\n$$\\Gamma(s,\\theta)\\circ\\tau_M=\\Gamma(s,v)\\circ\\sigma_M\\quad\\text{in }D(B).$$\nThe coefficient composite $\\Gamma(s,c_B)\\circ\\sigma_{B_s}$ fixes each element of $B$. The maps $\\sigma$ commute with the canonical tensor and dual evaluation maps, where the dual is $M^\\vee=\\mathcal Hom_{B_s}(M,B_s)$ [def-pur-sheaf-hom], tensor is the sheafified tensor product [def-pur-sheaf-tensor-product], and inverse-image comparisons are those of [lem-pur-isomorphism-inverse-image-tensor-hom]. The rational versions are the images under $-\\otimes_{\\mathcal O_E}E$, and the algebraically closed versions are represented by them at a common finite stage [def-weil-finite-coefficient-point].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism and geometric Frobenius convention: point-transport and canonical pullback comparisons; Deligne Weil II (1.1.7), pp. 150-151; returned item step 4"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-detailed",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-isomorphism-inverse-image-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite multiplication inverse, localize its inverse identity with the specified exact-functor comparisons, and cancel kappa-lambda. Substitute the identity-exchange sigma-kappa recipe and functoriality to obtain the finite equation for every v.",
+   "uses": [
+    "lem-pur-point-finite-multiplication-inverse",
+    "lem-pur-point-identity-exchange-recipe",
+    "def-pur-point-normalization-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical pointQuotientComparisonData and its proved determining coordinate API, obtaining j and eta with the specified generator inverse and both cone coordinates. The generator equation and the section specification of kappa make j hom a left inverse sectionwise; the finite multiplication hom is a right inverse. Function.LeftInverse.eq_rightInverse identifies their section functions and transfers the full scalar formula. The two cone coordinates and isomorphismRoosUnitCancellation give the whole augmentation equality, with explicit categorical reassociation. Work sectionwise because the tower components have completed scalar action after restriction, whereas the finite isomorphism is over the finite coefficient ring.",
+   "uses": [
+    "def-pur-point-quotient-comparison-coordinates",
+    "lem-trf-isomorphism-roos-unit-cancellation",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-pur-point-finite-multiplication-inverse"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert intrinsic completeness to the legacy predicate using an explicit universe-zero finite-field datum at a prime greater than l. Apply the whole-cone normalization theorem to a coherent evaluation calculus and retain its two-sided inverse of the fixed kappa. The complete field of the recorded Frobenius models makes the recorded actual unit an isomorphism epsilon. Define theta as inverse kappa followed by G(epsilon). The kappa inverse identity gives kappa followed by theta equals G(epsilon), and cancellation of G(epsilon) gives the integral kappa-lambda identity.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the integral identity-exchange recipe, cancel kappa-lambda, and apply the rational and common-stage scalar functors to the resulting equality for every v.",
+   "uses": [
+    "lem-pur-point-identity-exchange-recipe",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply point restriction normalization to the coefficient section and cancel the coefficient map with its inverse. Tensor compatibility is naturality of the module-sheafification unit on a pure tensor. Internal-Hom evaluation compatibility is naturality of the local module map on the corresponding slice arrow. Assemble the three clauses.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-inverse-image-tensor-hom-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-point-finite-multiplication-inverse",
+  "lem-pur-point-identity-exchange-recipe",
+  "def-pur-point-normalization-coordinates",
+  "def-pur-point-quotient-comparison-coordinates",
+  "lem-trf-isomorphism-roos-unit-cancellation",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-automorphism-restriction-natural",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-inverse-image-tensor-hom-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius transport on the cohomology of a point is restriction followed by inverse image coprojection and derived pullback comparison",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of ringed sites the canonical comparison from inverse image to completed derived pullback is inverse to its identification on free lines",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.IsCoverDense.presheafIso_inv, CategoryTheory.Functor.IsCoverDense.Types.presheafIso_inv_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"iso\"",
+   "results": "12 hits: CategoryTheory.Limits.widePullbackShapeOpEquiv_counitIso, CategoryTheory.Limits.WidePullbackShape.diagramIsoWideCospan, CategoryTheory.Limits.widePullbackShapeOpEquiv_unitIso, CategoryTheory.Limits.PullbackCone.flipFlipIso, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.pullbackProdFstIsoProd",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image derived pullback comparison cancels for finite and completed integral coefficient lines at a point",
+   "results": "8 hits: CategoryTheory.Limits.instIsIsoPullbackComparison, TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, TopCat.Presheaf.stalkPullbackInv, CategoryTheory.IsPullback.isoPullback_inv_fst, CategoryTheory.Over.prodComparisonIso_pullback_inv_left_snd', CategoryTheory.Over.prodComparisonIso_pullback_inv_left_fst_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*transport|transport.*frobenius|inverseImage.*derived|derived.*inverseImage",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|freeFunctorCompPullbackIso",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point Frobenius restriction transport on completed free coefficient sheaves agrees with the inverse of the canonical derived pullback identification",
+   "results": "8 hits: coe_frobenius_comp_coe_frobeniusEquiv_symm, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, AlgebraicGeometry.SheafedSpace.restrictTopIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a scheme isomorphism with constant coefficients cancels the canonical derived pullback comparison and commutes with tensor evaluation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Hom.inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*transport|transport.*frobenius|pullbackObjFreeIso",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|completion.*unit|roos|Roos",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map to derived adic completion intertwines inverse image under an isomorphism with the entire quotient tower cone",
+   "results": "8 hits: AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.congr_symm_apply, AdicCompletion.congr_apply, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, AdicCompletion.of_ofAlgEquiv_symm, AdicCompletion.congr, AdicCompletion.of_ofLinearEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free-sheaf pullback, scheme structure maps and underived adic completion do not state the specified completed point-transport and whole-cone normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-frobenius-scalar",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Natural Weil isomorphism and geometric Frobenius convention: point-transport and canonical pullback comparisons; Deligne Weil II (1.1.7), pp. 150-151; returned item step 4",
+   "via": [
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-point-frobenius-transport-normalization",
+  "worker": "stage1",
+  "summary": "Specified the previously unspecified lambda by multiplication at finite level and the actual completion-unit/whole-cone comparison at integral level. Proved cancellation, the identity structural-map exchange, the transport formula, coefficient and tensor/dual normalization, and coefficient passage using existing nodes only. No Lean written or compiled. Reviewer FIX (2026-10-22): v required B_s-linear; step 3 cites the composition isomorphisms of the square identification; step 4 cites point-transport naturality.",
+  "blueprint": "def-weil-frobenius-coefficient-twists: natural Weil isomorphism and geometric Frobenius convention, via lem-pur-twist-frobenius-scalar; supplies the point-transport normalization used by its step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic scalar transport along a ring-sheaf isomorphism with its two explicit inverse formulas; the unit has no more specific statement."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Generic actual reconstruction unit is invertible for derived-complete objects; needed to normalize lambda rather than choose an arbitrary isomorphism."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Generic whole-cone comparison for a scheme isomorphism and the specified kappa; it supplies the integral normalization without changing the Tate-twist route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic operation-comparison coherence for finite reduction, evaluation, units and counits, including integral system realization."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic identity adjunction and composition normalization for ringed-topos derived functors, used in the identity structural-map mate computation."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic whole-system derived adjunction and mate construction, so integral exchange is computed as a system morphism before realization."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact sections at an algebraically closed point, used to apply Gamma to derived equalities."
+   },
+   {
+    "node": "lem-weil-point-automorphism-restriction-natural",
+    "why": "Generic restriction/coprojection evaluation and constant-coefficient normalization for any point automorphism, specialized to geometric Frobenius."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic termwise description of the derived pullback composition isomorphisms that build the square identification; used only to see that it is the identity when the structural map is the identity."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the specified point transport, used to replace iota at Ra_{s*}M by iota at M along the identity-operation isomorphism; the unit has no own point-transport naturality statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-fix-operation-reduction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-9ee4a2a28",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-9ee4a2a28 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 6 steps and every cited statement, the main-20261015 blueprint text of def-weil-frobenius-coefficient-twists (geometric Frobenius acts on E(m) by q^{-m}) and the base statement in the Q122 snapshot. No SGA source is used. The delivery has 0 new nodes and only the item and report files. STATEMENT-DISPUTED accepted: lambda of lem-weil-isomorphism-derived-pullback is only existential. Counterexample: over F_5, 2*lambda is again a natural iso and (2 lambda)kappa = 2, so the clause lambda kappa = id was undetermined. The delivery now fixes lambda as the multiplication map at finite level and as G(u_M)^{-1}theta at integral level. The types check (u_M is invertible on derived-complete M), and nothing is weakened. Step 1 is the scalar-extension ring-iso lemma with c=c_B; its inverse pair is exactly kappa(a) and lambda. Step 2: the normalization node gives theta kappa = G(u) as whole derived maps, and lem-pur-normalized-actual-reconstruction-maps makes u invertible. Step 5: restriction-lemma sigma(b) = c^{-1}(b); tensor and dual compatibility with the canonical maps hold on pure tensors and by the Hom restriction formula. Step 6: the rational and Qbar versions are images of the integral identities. FIX (3 edits): (1) the statement now requires v to be B_s-linear, since the equation is in D(B) and the parent uses a Lambda-linear tau_m. (2) Step 3 stated that the square identification theta_square is the identity without citing its source; it now cites def-weil-pbc-ambient-ringed-exchange and lem-weil-pbc-proetale-derived-pullback-composition and gives the termwise argument (x tensor 1 goes to x tensor 1, and these sections generate). (3) Step 4 needs naturality of iota to replace iota at Ra_{s*}M by iota at M, which is not termwise at integral level; it now cites lem-weil-frobenius-point-transport-natural (2) and is set to elementary=false. proof_deps was recomputed and two tool_uses entries added; the 8 declared tool uses are accepted. Edge cases checked: M=0, rank 0 and 1, n=1, ramified E, g=id. Advisory: the existing unsplit lem-weil-point-automorphism-derived-transport-inverse already states the kappa-inverse clause for any point automorphism; the item re-proves it from split nodes, which is acceptable. Maintainer note: def-weil-frobenius-coefficient-twists clause 4 still uses the unspecified lambda; the parent's step theta_m = v lambda needs that clause to use this item's normalized lambda. tools/review_split.py reports 'no such node' for nodes that exist in the snapshot; this comes from the symlinked chapter directories, not from the delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointFrobeniusTransportNormalization",
+  "declaration": "WeilConjectures.PointFrobeniusNormalization.point_frobenius_transport_normalization",
+  "declarations": [
+   "WeilConjectures.PointFrobeniusNormalization.point_frobenius_transport_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/PointFrobeniusTransportNormalization.lean",
+  "statement": "theorem point_frobenius_transport_normalization : (∀ (n : ℕ) (M : integralOperationsFiniteModules l E (Spec (.of D.k)) n), (∃ r : ℕ, Nonempty (M ≅ SheafOfModules.free (ULift.{u + 1} (Fin r)))) → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) (Spec (.of D.k)) (DerivedCategory.Q.obj (finiteComplex D l E n M)) → FiniteNormalization D l hl E n M) ∧ (∀ (M : integralTowerModules l E (Spec (.of D.k))) (hM : sfIntegralConstructible l E (Spec (.of D.k)) (DerivedCategory.Q.obj (integralComplex D l E M))), (∃ r : ℕ, Nonempty (M ≅ SheafOfModules.free (ULift.{u + 1} (Fin r)))) → IntegralNormalization D l hl E M hM) ∧ (∀ a : Option ℕ, TensorDualNormalization D l E a)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The single theorem states all finite, completed, identity-exchange, transport, coefficient, tensor/dual and scalar-image clauses. Auxiliary definitions name the canonical comparison words and their coordinate predicates; every data definition is complete. Positive exponent r is represented by n+1. The derived v is the canonical image of a module-sheaf isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f45c0a1c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Only the item lean field changed; lean.statement verbatim; 27 declarations listed with source/blueprint docstrings; 6-step proof docstring; single sorry; real Worker report and Second reading section. Clauses: finite e pinned by e.inv = inverseImageFiniteComparisonComplex (κ representative), multiplication formula, κ≫λ=𝟙; integral ∃θ,ε with ε.hom = actual unit and κ≫θ = G(ε) forces κ invertible, so θ = κ⁻¹G(u) is unique (matches the dependency's existential θ); identity-square exchange via canonical rightAdjointUniq identifications and the recorded whole-system mate (same term as directIntegral); transport equation for every module-sheaf iso v, same recipe as frobeniusOrdinaryTransportFinite/frobeniusTransportIntegral at a = id_s; coefficient composite fixes every b including O_E; tensor/dual restriction identities in sectionwise coordinates; rational/closed versions as functor images, as the node defines them. Universes: site u+1/u, Ω : Type v independent. Edge cases: M = 0, r = 0/1, n = 0, ramified E, g = id, inverseOrZero only on complete objects. Advisories: (A1) the integral reductions clause is the representative-level specialization of the cone-descent and Roos-unit-cancellation conclusions (non-stmt_dep nodes), M-independent, no derived reduction of κ_M via lem-fix-operation-reduction; (A2) the tensor/dual clause omits the inverseImage_tensor_hom_iso comparisons and the report's claim that they are retained is inaccurate; (A3) σ-derived maps and the system exchange come from non-stmt_dep modules; (A4) τ re-expanded at Y = s instead of the recorded geometricFiber declaration. No compile: no file changed; the worker's scompile and deliver2 dry run are recorded."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone original (26 defs verbatim, theorem signature identical); pointIdentityExchangeRecipe clauses vs FiniteNormalization/IntegralNormalization fields; item node vs base node"
+ }
+}

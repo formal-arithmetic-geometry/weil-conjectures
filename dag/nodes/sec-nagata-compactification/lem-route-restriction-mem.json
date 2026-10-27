@@ -1,0 +1,138 @@
+{
+ "id": "lem-route-restriction-mem",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "The local-squares paragraph: the graded restriction map on affine sections is induced by the sheaf restriction maps, and the chart construction uses these degree-preserving restrictions."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of the algebra sheaf preserves every homogeneous subgroup.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $A$ be a quasi-coherent commutative graded $\\mathcal O_X$-algebra with homogeneous sheaves $A_n$ and a decomposition isomorphism $\\bigoplus_{n\\ge 0}A_n\\xrightarrow{\\sim}A$ as in [def-nagata-relative-proj] and [def-weil-pbc-graded-sheaf-structures]. For an affine open $V\\subseteq X$ and $n\\in\\mathbb N$, let\n$$\nG_n(V):=\\operatorname{im}\\bigl(A_n(V)\\longrightarrow A(V)\\bigr)\n$$\nbe the homogeneous section subgroup. If $W\\subseteq V$ are affine opens, $h:W\\le V$, $a\\in A(V)$ and $a\\in G_n(V)$, then the restriction of $a$ to $W$ lies in $G_n(W)$:\n$$\n\\operatorname{res}_{W,V}(a)\\in G_n(W).\n$$\nIn the source notation this is\n```lean\ntheorem restriction_mem {V W : X.affineOpens} (h : W ≤ V) (n : ℕ)\n    (a : A.sections V) (ha : a ∈ A.sectionGrade V n) :\n    (A.algebra.obj.right.obj.map (homOfLE h).op).hom a ∈ A.sectionGrade W n\n```",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lem-nagata-proj-affine-restriction: the Lean of this node (its module Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction imports Sheaf.AlgebraicGeometry.RelativeProjData (1 step)) reaches AlgebraicGeometry.RelativeProjAlgebra.restriction_mem, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean, declaration AlgebraicGeometry.RelativeProjAlgebra.restriction_mem (module Sheaf.AlgebraicGeometry.RelativeProjData, lines 105-112, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-relative-proj",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Lift the section through the homogeneous inclusion, restrict its representative in the homogeneous sheaf, and apply naturality of Sigma.ι piece n followed by decomposition.hom. Its restricted representative maps to the restriction of the original section.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-quasi-coherent-algebra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-quasi-coherent-algebra"
+ ],
+ "proof_origin": {
+  "by": "G6",
+  "date": "2026-10-27",
+  "kind": "agent-written",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section relative-proj-via-glueing (01LH), lemma-proj-inclusion (01NO); direct Lean proof using the coproduct universal property and compact affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf morphism maps a section in the image of a homogeneous component inclusion to the image of its restriction",
+   "results": "SheafOfModules.sectionsMap; AlgebraicGeometry.Scheme.Opens.ι_app; AlgebraicGeometry.Scheme.Opens.ι_appTop; AlgebraicGeometry.Scheme.Modules.Hom; SheafOfModules.Hom.mk; CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.Scheme.Hom.appTop (no exact sectionGrade theorem)",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup.range, NatTrans.naturality, CategoryTheory.ConcreteCategory",
+   "results": "0 hits; loogle reports unknown identifier AddSubgroup.range",
+   "date": "2026-10-27",
+   "verdict": "no match (pattern identifier unavailable)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of restriction maps for a morphism of sheaves",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓRes_map; CategoryTheory.Sheaf.ΓRes_map_assoc; TopCat.Presheaf.map_restrict; AlgebraicGeometry.Scheme.Hom.naturality; no theorem for the project-specific sectionGrade image",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic sheaf naturality only; no exact project theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction_mem|sectionGrade|toSheafify_naturality (Mathlib/AlgebraicGeometry/)",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.naturality|Presheaf.*naturality|toSheafify_naturality (Mathlib/CategoryTheory/)",
+   "results": "25 hits, including generic NatTrans.naturality occurrences; no project-specific theorem",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic naturality only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-nagata-proj-affine-restriction",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.restriction_mem",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.restriction_mem"
+  ],
+  "statement": "theorem restriction_mem {V W : X.affineOpens} (h : W ≤ V) (n : ℕ)\n    (a : A.sections V) (ha : a ∈ A.sectionGrade V n) :\n    (A.algebra.obj.right.obj.map (homOfLE h).op).hom a ∈ A.sectionGrade W n := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-restriction-mem",
+  "worker": "stage1",
+  "summary": "Replaced the provisional route record by the self-contained homogeneous-section image statement matching RelativeProjAlgebra.restriction_mem. The single proof step unpacks range membership and applies the restriction naturality square of the homogeneous-sheaf inclusion; no child node is needed because the witness calculation is elementary. No Lean source was changed.",
+  "blueprint": "The step realizes the local-squares paragraph of lemma-nagata-relative-proj-exists.proof.md: affine graded restriction maps arise from the sheaf restriction maps. The exact witness calculation is the implementation detail documented in RelativeProjData.lean.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-fabdcd3fd",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-fabdcd3fd (reviewer sub-agent of L); spot-checked: I read the item in full: the raw JSON, the report, RelativeProjData.lean (lines 37-54, 69-71 and 105-120), every cited node's statement, the blueprint def-nagata-relative-proj.md and the local-squares paragraph of lemma-nagata-relative-proj-exists.proof.md. The statement matches restriction_mem hypothesis by hypothesis, is not weakened and is true. I tested it on W=V, n=0, a zero piece and the empty scheme. The duplicate search over dag/nodes found only the sibling route nodes and the parent lem-nagata-proj-affine-restriction, whose conclusions differ. A single elementary step with no child node is right, because any child would only restate the item. I repaired three faults in fixes/dag/nodes/sec-nagata-compactification/lem-route-restriction-mem.json. (1) B4: the statement read 'graded \\mathcal O_X$-algebra' with the opening $ missing. (2) B4: the step wrote \\to with a single backslash in the JSON, which decodes as a TAB followed by 'o'. (3) C4: the step credited the naturality of iota_n: A_n -> A to the restriction-compatibility clause of def-weil-pbc-graded-sheaf-structures, but that clause is about the multiplication maps. The step now says that iota_n is the coproduct inclusion into the direct sum in sheaves of modules followed by the decomposition iso, so it is a morphism of sheaves of modules and commutes with restriction by def-weil-sheaf-of-modules-category. It also says that the ring-sheaf restriction is the module restriction, citing def-weil-pbc-quasi-coherent-algebra. uses and proof_deps now list graded-sheaf-structures, sheaf-of-modules-category and quasi-coherent-algebra. All three are existing definitions and add no cycle. There are no tool_uses and no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T112350-L-1576056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

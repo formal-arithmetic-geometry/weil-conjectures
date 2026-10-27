@@ -19,225 +19,68 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-sharp-cone-lattice-intersection] to $P$. It gives a finite free lattice $G\\subset V$, a finite list $a_1,\\ldots,a_m\\in P$ generating $\\sigma$ rationally, pointedness and spanning of $\\sigma$, and $P=\\sigma\\cap G$. If $G=0$, then $P=\\{0\\}$ and $V=\\sigma=0$, so the facet assertions hold with an empty set. For the cone argument in Steps 2--5 suppose $d=\\dim V>0$.",
+   "text": "Apply [lem-trf-sharp-cone-primitive-facet-preparation] to the given sharp fs monoid. Obtain the finite free lattice $G$, $P=\\sigma\\cap G$, the finite facet set, its unique primitive normals, the half-space equality and the witnesses $f_F\\in P\\cap F$ positive on all other facets.",
    "uses": [
-    "lem-trf-sharp-cone-lattice-intersection"
+    "lem-trf-sharp-cone-primitive-facet-preparation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
+    "place": "Agent-written short assembly of the four re-split arguments for the models of Expose VI 1.6, printed p. 70; retained old steps 1--18."
    }
   },
   {
-   "text": "By [lem-trf-rational-cone-dual-finite], $\\sigma$ is the nonnegative locus of a finite rational family $h_i$. Delete zero forms and successively delete redundant inequalities, stopping with an irredundant family indexed by a finite set $I$. Each remaining $h_i$ is nonzero and nonnegative on $P$. Put $x_0=\\sum_j a_j$. Then $h_i(x_0)>0$ for every $i$: otherwise nonnegativity forces $h_i(a_j)=0$ for every generator, and spanning forces $h_i=0$. Thus $x_0$ is a rational point satisfying all inequalities strictly. The family is nonempty when $d>0$, since otherwise $\\sigma=V$ would contradict pointedness.",
-   "uses": [
-    "lem-trf-rational-cone-dual-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "For each $i\\in I$, irredundancy supplies $y_i\\in V$ satisfying $h_j(y_i)\\ge0$ for $j\\ne i$ and $h_i(y_i)<0$. On the rational segment from $x_0$ to $y_i$, let $f_i$ be the unique point with $h_i(f_i)=0$. The coefficient of $x_0$ is strictly positive, so $h_j(f_i)>0$ for every $j\\ne i$. Choose a basis $u_1,\\ldots,u_{d-1}$ of $\\ker h_i$. For each $u_l$, choose rational $\\epsilon_l>0$ with $\\epsilon_l|h_j(u_l)|<h_j(f_i)$ whenever $j\\ne i$ and $h_j(u_l)\\ne0$. Then $f_i+\\epsilon_l u_l$ still satisfies all inequalities. Differences from $f_i$ span $\\ker h_i$, showing that $F_i=\\sigma\\cap\\ker h_i$ spans $\\ker h_i$, hence is a facet. Moreover $f_i\\notin F_j$ for $j\\ne i$, so these facets are distinct.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "Conversely take any facet $F=\\sigma\\cap\\ker h$, with $h\\ge0$ on $\\sigma$. In a nonnegative generator expression for a point of $F$, every occurring $a_j$ has $h(a_j)=0$. Thus these zero-valued generators generate $F$ as a rational cone. Let $a$ be their sum, with the empty sum allowed. At least one $h_i(a)$ is zero: if all were positive, choose $v\\in V$ with $h(v)<0$ and rational $\\epsilon>0$ with $\\epsilon|h_i(v)|<h_i(a)$ for each nonzero $h_i(v)$. Then every $h_i(a+\\epsilon v)>0$, so $a+\\epsilon v\\in\\sigma$, whereas $h(a+\\epsilon v)=\\epsilon h(v)<0$, a contradiction. Nonnegativity of $h_i$ on the zero-valued generators and $h_i(a)=0$ imply that $h_i$ vanishes on all of $F$. Since $F$ spans a hyperplane, $\\ker h_i=\\operatorname{span}F=\\ker h$, and $F=F_i$. This proves that the finite list in Step 3 is exactly $\\mathcal F$, and that its supporting inequalities still cut out $\\sigma$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "For $F_i$, clear the rational denominators of $h_i$ on a finite $\\mathbf Z$-basis of $G$, then divide the resulting integer coordinates by their positive gcd. This gives $\\nu_{F_i}:G\\to\\mathbf Z$ with image $\\mathbf Z$ and a positive rational multiple of $h_i$ as rational extension. Its sign and zero locus are unchanged, so these primitive forms cut out $\\sigma$. If another primitive nonnegative form defines $F_i$, it has the same hyperplane kernel, hence is $c\\nu_{F_i}$ for $c\\in\\mathbf Q_{>0}$. The two image conditions give $c\\mathbf Z=\\mathbf Z$, so $c=1$. Finally multiply the rational $f_i$ of Step 3 by a positive integer so that $f_i\\in G$. It then belongs to $P$ by Step 1, with $\\nu_{F_i}(f_i)=0$ and $\\nu_H(f_i)>0$ for all other facets $H$. For a sole rank-one facet one may take $f_i=0$.",
-   "uses": [
-    "lem-trf-sharp-cone-lattice-intersection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "The coefficient ring $L$ is Noetherian: a field has only two ideals; a Cohen ring is a principal ideal domain by [def-weil-pbc-cohen-ring]. If $g_1,\\ldots,g_s$ generate $P$, the map $L[X_1,\\ldots,X_s,t_1,\\ldots,t_n]\\to L[P][t]$ sending $X_i$ to $z^{g_i}$ is surjective. Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes the monoid polynomial ring Noetherian, [lem-weil-pbc-adic-completion-noetherian] makes $B_L(P,n)$ Noetherian, and [lem-weil-pbc-surjective-image-noetherian] gives the same for its quotient $R$ in case (ii).",
-   "uses": [
-    "def-weil-pbc-cohen-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-surjective-image-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00FN (lemma-Noetherian-permanence) and 0316 (lemma-completion-Noetherian-Noetherian)."
-   }
-  },
-  {
-   "text": "By [lem-trf-sharp-monoid-positive-grading], choose $w:G\\to\\mathbf Z$ positive on $P\\setminus\\{0\\}$. Put $T=P\\times\\mathbf N^n\\subset G\\times\\mathbf Z^n$ and $W(q,e)=w(q)+\\sum e_i$, positive on $T\\setminus\\{0\\}$. The coefficient ring is complete separated local (trivially for a field, by [def-weil-pbc-cohen-ring] for $C$). Apply [lem-trf-monoid-completion-coefficients] to $L,T,W$. Relabelling $z^{(q,e)}$ as $z^qt^e$ identifies its completion with $B_L(P,n)$, and identifies its elements with all $L$-coefficient families on $T$, with finite convolution. In particular $z^q$ is nonzero in case (i).",
+   "text": "Use [lem-trf-sharp-monoid-positive-grading] on the lattice and sharp monoid from Step 1 to choose $w$ positive off zero. Set $T=P\\times\\mathbf N^n\\subset G\\times\\mathbf Z^n$, a finitely generated submonoid of a finite free group, and $W(q,e)=w(q)+\\sum e_i$; this is positive off zero. A field is Noetherian and complete for $(0)$; a Cohen ring is a complete local PID by [def-weil-pbc-cohen-ring], hence Noetherian. Apply [lem-trf-complete-model-coefficient-nonvanishing] to $A=L,T,W$. Relabelling $z^{(q,e)}=z^qt^e$ identifies the rings and completion ideals: a nonzero $(q,e)$ has $q\\ne0$ or some $e_i>0$, so its monomial is divisible by a displayed chart generator; conversely those generators are product monomials. In the Cohen case $\\theta$ has constant coefficient $p$, since every chart generator has positive weight and convolution gives zero constant coefficient for each of its multiples, hence for their finite sums. Here $p$ is nonzero and a nonunit. Thus $R$ is Noetherian and every chart monomial survives in both cases.",
    "uses": [
     "lem-trf-sharp-monoid-positive-grading",
     "def-weil-pbc-cohen-ring",
-    "lem-trf-monoid-completion-coefficients"
+    "lem-trf-complete-model-coefficient-nonvanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
+    "place": "Agent-written short assembly of the four re-split arguments for the models of Expose VI 1.6, printed p. 70; retained old steps 1--18."
    }
   },
   {
-   "text": "In case (ii), $\\theta$ has constant coefficient $p$: the other generators of the stipulated ideal have positive $W$-weight, so any multiple has zero constant coefficient. If $z^q=\\theta b$ before quotienting, induct on the integer weight of exponents $u$ below $W(q,0)$. At such a $u$ the convolution equation is $0=p b_u$ plus terms involving only $b_v$ of smaller weight. Induction and the fact that $p\\ne0$ in the domain $C$ give $b_u=0$ for all those exponents. The coefficient equation at $(q,0)$ is then $1=p b_{(q,0)}$, impossible because $p$ is a nonunit. Thus no $z^q$ lies in $(\\theta)$, including $q=0$. This proves monomial nonvanishing in $R$ without appealing to a construction in another node's proof.",
+   "text": "For a facet $F$, put $S=P\\cap F$. Nonnegativity of $\\nu_F$ shows that $a+b\\in S$ forces $a,b\\in S$, so $S$ is a face. Apply [lem-trf-complete-model-face-quotients]. Its kernel generators, and their images in the Cohen quotient, identify its ideal with the displayed $\\mathfrak p_F$. Its quotient isomorphism makes $\\mathfrak p_F$ prime, and its membership criterion says $z^q\\in\\mathfrak p_F$ exactly when $q\\notin F$, equivalently $\\nu_F(q)>0$.",
    "uses": [
-    "def-weil-pbc-cohen-ring",
-    "lem-trf-monoid-completion-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "Fix a facet $F$ and put $S=P\\cap F$. This is a face of $P$: $\\nu_F(a+b)=0$ with $a,b\\in P$ forces both nonnegative summands to be zero. In a generator expression for an element of $S$, every occurring $g_i$ therefore lies in $S$; thus $S$ is generated by the subset of the $g_i$ in $F$. Integrality and sharpness are inherited from $P$. For saturation, if $N g\\in S$ for $g\\in S^{\\rm gp}\\subset G$ and $N>0$, saturation of $P$ gives $g\\in P$, and $N\\nu_F(g)=0$ gives $g\\in S$. Consequently $S$ is also sharp fs. The weight $w$ restricts positively to $S$, so the coefficient description of Step 7 applies to $S\\times\\mathbf N^n$ as well.",
-   "uses": [
-    "def-trf-fs-log-blowup",
-    "lem-trf-monoid-completion-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "On coefficient families, keep precisely the exponents $(q,e)$ with $q\\in S$. This defines a surjective ring map $\\rho:B_L(P,n)\\to B_L(S,n)$: for an exponent in $S$, the face property forces both exponents in every convolution summand to be in $S$, and extension by zero gives surjectivity. Its kernel is the ideal generated by the finitely many $z^{g_i}$ with $g_i\\notin F$. Indeed every exponent $q\\notin F$ is divisible by one such generator. Assign each such $q$ to one choice of $g_i$, and form the family $b_i$ by moving its assigned coefficient at $(q,e)$ to $(q-g_i,e)$. The coefficient lemma allows every such family. Thus every element of the kernel equals the finite sum $\\sum_{g_i\\notin F}z^{g_i}b_i$. Conversely each summand has support outside $S$. This also proves that this ideal is generated by all $z^q$ with $q\\notin F$.",
-   "uses": [
-    "lem-trf-monoid-completion-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "In case (i), Step 10 gives $R/\\mathfrak p_F\\cong B_k(S,n)$. In case (ii), let $\\theta_S=\\rho(\\theta)$. It still satisfies $\\theta_S-p\\in(z^s:s\\in S\\setminus\\{0\\},t_1,\\ldots,t_n)$, and the surjectivity and kernel calculation give $R/\\mathfrak p_F\\cong B_C(S,n)/(\\theta_S)$. Apply [lem-trf-log-regular-saturation-normality] to the sharp fs monoid $S$ and this unchanged coefficient alternative. Its statement says that each of these quotient models is a nonzero normal domain. Hence $\\mathfrak p_F$ is prime. The coefficient and weight argument in Steps 7--8, now for $S$, shows that all its chart monomials are nonzero. In particular, a monomial $z^q$ lies in $\\mathfrak p_F$ if and only if $q\\notin F$.",
-   "uses": [
-    "lem-trf-log-regular-saturation-normality",
-    "lem-trf-monoid-completion-coefficients",
-    "def-weil-pbc-cohen-ring"
+    "lem-trf-complete-model-face-quotients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
+    "place": "Agent-written short assembly of the four re-split arguments for the models of Expose VI 1.6, printed p. 70; retained old steps 1--18."
    }
   },
   {
-   "text": "For $F\\ne H$, the lattice point $f_F$ constructed in Step 5 lies in $F$ and not in $H$. Thus $z^{f_F}\\notin\\mathfrak p_F$ but $z^{f_F}\\in\\mathfrak p_H$, proving distinctness. Also each $\\mathfrak p_F$ is nonzero: the nonzero $\\nu_F$ takes a positive value on some generator of $P$ since $P$ spans $V$, and its nonzero monomial lies in $\\mathfrak p_F$. Put $A_F=R_{\\mathfrak p_F}$. By [def-weil-pbc-localization-at-prime] its maximal ideal is $\\mathfrak p_FA_F$. It is a Noetherian domain: it embeds in $\\operatorname{Frac}(R)$, and any ideal of $A_F$ is generated by images of generators of its contraction to $R$, because denominators are units.",
+   "text": "Apply [lem-trf-monomial-boundary-localizations] with $I=\\mathcal F$, the normals and witnesses of Step 1, and the ring and chart of Steps 2--3. Its half-space hypothesis on $P$ is the combination of $P=\\sigma\\cap G$ and the cone half-space equality. The group completion is generated by $P$, and sharpness gives $P\\cap(-P)=\\{0\\}$. Each $\\nu_F$ is surjective by Step 1. The assumed domain $R$ is Noetherian by Step 2, and its chart obeys $z^0=1$ and $z^{q+q'}=z^qz^{q'}$ by construction. Step 3 supplies primality and exact monomial membership. Thus every hypothesis of the localization lemma holds. It gives distinct nonzero height-one boundary primes, exhaustion of the height-one primes containing monomials, and DVR localizations with $v_F(z^q)=\\nu_F(q)$.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "Choose $e\\in G$ with $\\nu_F(e)=1$, possible by primitivity. For the lattice point $f=f_F\\in P\\cap F$ of Step 5, all other facet values are strictly positive. Choose $N\\ge0$ so that $\\nu_H(e)+N\\nu_H(f)\\ge0$ for all $H\\ne F$. Then $e+Nf\\in\\sigma\\cap G=P$, whereas $Nf\\in P\\cap F$. In $A_F$ define $\\pi=z^{e+Nf}/z^{Nf}$. Its denominator is outside $\\mathfrak p_F$ by Step 11, its numerator is in $\\mathfrak p_F$, and both monomials are nonzero, so $\\pi$ is a nonzero element of the maximal ideal.",
-   "uses": [
-    "lem-trf-sharp-cone-lattice-intersection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "For $q\\in P$ write $m=\\nu_F(q)\\ge0$ and $g=q-me\\in\\ker\\nu_F$. Choose $M\\ge0$ so that $\\nu_H(g)+M\\nu_H(f)\\ge0$ for all $H\\ne F$. The half-space equality and $P=\\sigma\\cap G$ give $g+Mf\\in P\\cap F$. Consequently $u_q=z^{g+Mf}/z^{Mf}$ is a unit of $A_F$. Cancellation of the nonzero monomials in the fraction field gives $z^q=u_q\\pi^m$. In particular every generator $z^{g_i}$ of $\\mathfrak p_F$ is divisible by $\\pi$ in $A_F$, since its value $\\nu_F(g_i)>0$. Step 13 already put $\\pi$ in that ideal, so $\\mathfrak p_FA_F=(\\pi)$. This gives a generator, rather than assuming that a primitive lattice character is a uniformizer.",
-   "uses": [
-    "lem-trf-sharp-cone-lattice-intersection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
-   }
-  },
-  {
-   "text": "The ring $A_F$ is a Noetherian local domain with maximal ideal generated by the single nonzero element $\\pi$. The equivalent characterization in [def-sc-discrete-valuation-ring] therefore makes it a DVR. To check the stipulated height-one convention explicitly, [lem-weil-pbc-noetherian-local-dimension-le-generators] gives $\\dim A_F\\le1$. Its nonzero maximal ideal supplies a chain $(0)\\subsetneq(\\pi)$, so its dimension is one. Primes of $R$ contained in $\\mathfrak p_F$ correspond by extension and contraction to primes of $A_F$: denominators avoid all these primes, so contraction of an extension recovers the original prime, and a fraction belongs to an extended ideal exactly when its numerator does. Hence no prime of $R$ lies strictly between $(0)$ and $\\mathfrak p_F$, which is the required height-one assertion.",
-   "uses": [
-    "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-noetherian-local-dimension-le-generators"
+    "lem-trf-monomial-boundary-localizations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PD (lemma-characterize-dvr), equivalent condition (4), and Tag 00KQ (proposition-dimension)."
-   }
-  },
-  {
-   "text": "The fraction field of $A_F$ is $\\operatorname{Frac}(R)$, since $R\\subset A_F\\subset\\operatorname{Frac}(R)$. Let $v_F$ be its normalized additive valuation. By [lem-sc-dvr-valuation-ring-characterization], $v_F(\\pi)=1$ and the values of a unit $u$ and $u^{-1}$ are both nonnegative. By [lem-sc-dvr-valuation-arithmetic] their sum is $v_F(1)=0$, so a unit has value zero. Apply the same additivity to the equality $z^q=u_q\\pi^{\\nu_F(q)}$ proved in Step 14. It gives $v_F(z^q)=\\nu_F(q)$, including $q=0$.",
-   "uses": [
-    "lem-sc-dvr-valuation-ring-characterization",
-    "lem-sc-dvr-valuation-arithmetic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PD (lemma-characterize-dvr), normalized order of a uniformizer and multiplicative extension to the fraction field."
-   }
-  },
-  {
-   "text": "Let $\\mathfrak q$ be a height-one prime containing a monomial $z^a$. Suppose that no $\\mathfrak p_F$ is contained in $\\mathfrak q$. Since $\\mathfrak p_F$ is generated by its monomials, for every $F$ choose $b_F\\in P\\setminus F$ with $z^{b_F}\\notin\\mathfrak q$. Set $b=\\sum_F b_F$. Primality gives $z^b\\notin\\mathfrak q$, and for every facet $H$, $\\nu_H(b)\\ge\\nu_H(b_H)>0$. Thus for a sufficiently large integer $K$, all $\\nu_H(Kb-a)\\ge0$. The half-space identity and saturation equality $P=\\sigma\\cap G$ imply $Kb-a\\in P$. But then $(z^b)^K=z^a z^{Kb-a}\\in\\mathfrak q$, contradicting primality. Therefore some $\\mathfrak p_F\\subseteq\\mathfrak q$, and the nonzero prime $\\mathfrak p_F$ and height-one convention force equality. Each $\\mathfrak p_F$ itself contains a monomial by Step 12, proving both directions of the classification.",
-   "uses": [
-    "lem-trf-sharp-cone-lattice-intersection"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
+    "place": "Agent-written short assembly of the four re-split arguments for the models of Expose VI 1.6, printed p. 70; retained old steps 1--18."
    }
   },
   {
-   "text": "If $P=\\{0\\}$, Step 1 gives $V=0$ and no facets. Its only chart monomial is $z^0=1$, which belongs to no prime, so the boundary-prime list is empty. Steps 6--8 still prove Noetherianity and monomial nonvanishing, and the empty half-space intersection in $V=0$ is $V$. For $n=0$, the product monoid in Step 7 is just $P$; no other step uses a parameter variable. This completes every clause, including the degenerate cases.",
+   "text": "For $P=\\{0\\}$, Step 1 gives $G=V=0$ and no facets. The only chart monomial is $1$, in no prime, and the empty half-space intersection is $V=0$. Step 2 still applies. All arguments permit $n=0$, when $T=P$. These observations give every degenerate clause.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written algebraic argument for the complete models displayed in Expose VI 1.6, printed p. 70; not an assertion that ILO proves this step."
+    "place": "Agent-written short assembly of the four re-split arguments for the models of Expose VI 1.6, printed p. 70; retained old steps 1--18."
    }
   }
  ],
  "proof_deps": [
-  "def-sc-discrete-valuation-ring",
-  "def-trf-fs-log-blowup",
   "def-weil-pbc-cohen-ring",
-  "def-weil-pbc-localization-at-prime",
-  "lem-sc-dvr-valuation-arithmetic",
-  "lem-sc-dvr-valuation-ring-characterization",
-  "lem-trf-log-regular-saturation-normality",
-  "lem-trf-monoid-completion-coefficients",
-  "lem-trf-rational-cone-dual-finite",
-  "lem-trf-sharp-cone-lattice-intersection",
-  "lem-trf-sharp-monoid-positive-grading",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-noetherian-local-dimension-le-generators",
-  "lem-weil-pbc-surjective-image-noetherian"
+  "lem-trf-complete-model-coefficient-nonvanishing",
+  "lem-trf-complete-model-face-quotients",
+  "lem-trf-monomial-boundary-localizations",
+  "lem-trf-sharp-cone-primitive-facet-preparation",
+  "lem-trf-sharp-monoid-positive-grading"
  ],
  "proof_origin": {
   "by": "agent",
@@ -332,33 +175,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-complete-toric-facet-valuations",
   "worker": "stage1",
-  "summary": "Repaired D1 by dropping the two uncommitted clause-alias children and proving the item in 18 explicit steps using existing generic DAG inputs. Derives facets from an irredundant finite rational inequality family; constructs face quotients by coefficient projection; proves nonvanishing by weight induction; constructs an actual monomial-ratio uniformizer and its unit factors; and proves height-one exhaustion by an interior-monomial contradiction. The statement and all hypotheses are unchanged.",
+  "summary": "Repair of the side-completion promotion return on the current DAG: retain the four statement-only argument nodes and every argument of the old eighteen-step proof in report.md; keep the parent statement, source, statement dependencies, blueprint ancestry and maintainer fields unchanged. Re-read every current assembly citation and definition dependency and check all six literal quotations. The five-step assembly now explicitly verifies equality of the product-monoid and displayed model completion ideals and vanishing of constant coefficients on the completed chart ideal. All four auxiliary statements and their twenty actual logged searches are retained. The assembly has 2771 characters, within the released repair order of at most 3000.",
   "blueprint": "Retains the existing ancestry from lem-trf-local-term-locality, proof (1)--(2), through complete-toric recognition in the log-regular divisorial-structure argument. This auxiliary algebraic proof realizes the complete-model facet and boundary-valuation input in that retained ancestry; the current blueprint has no separate toric facet theorem.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-dvr-valuation-ring-characterization",
-    "why": "Generic normalized DVR valuation tool with its stated hypotheses; no step of the trace-formula route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-adic-completion-noetherian",
-    "why": "Generic adic-completion Noetherianity tool with its stated hypotheses; no step of the trace-formula route is replaced."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-dvr-valuation-ring-characterization",
   "lem-weil-pbc-adic-completion-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q38-38e5fe92b",
-  "group": "Q38",
+  "reviewer": "NT-cc-Q138-153901872",
+  "group": "Q138",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-38e5fe92b (reviewer sub-agent of L); spot-checked: Read the complete item, report, route, every cited DAG statement, and cited literature. All 18 proof steps are mathematically valid with hypotheses checked, edge cases tested, searches and tool uses verified, and no duplicates, route violations, SGA citations, weakened targets, or repairs found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-153901872 (reviewer sub-agent of L); spot-checked: Fifth push of the batch5 re-split (earlier heads 8531, d655, 18ad and f11e were all PASSed, then refused at promotion). Live still has the 18-step proof, and the stage-1 repair note of 2026-10-22 is released and still open. I diffed against f11e: the four new nodes are byte-identical, and the item changes only the wording of assembly step 2 and its split_report. The new step-2 text is correct. T=P×N^n is a finitely generated submonoid of G×Z^n, so the coefficient node applies. A monomial z^{(q,e)} with (q,e)≠0 is divisible by z^q or by some t_i, so the completion ideals agree. Every chart generator has positive weight, so (gb)_0=g_0b_0=0 and θ has constant coefficient p. I re-read every node in full. Cone node: true; uniqueness of primitive normals by cZ=Z; checked on P=N, N^2 and the cone 0≤b≤2a. Coefficient node: (θb)_v=r·b_v plus lower-weight terms, so induction in the domain A gives 1=r·b_u, impossible for a nonunit r. Face node: S is saturated and ρ is a ring map by the face property, and the kernel is generated by the z^{g_i} with g_i∉S. Normality comes from lem-trf-log-regular-saturation-normality (unconditional) applied to S. Localization node: π=z^{e+Nf}/z^{Nf} and z^q=u_q·π^m, so the localization is a DVR (Stacks 00PD (4)) and the prime has height one. Exhaustion holds because Kb−a∈P. Edge cases checked: I empty, P=0, n=0, S=P, S=0. Every hypothesis in assembly steps 2–4 is supplied (Cohen ring = complete DVR with maximal ideal pΛ). ILO VI 1.6 (PDF pp. 75–76) matches the two models. No SGA is used. All 18 old steps are retained verbatim and split 1–5, 6–8, 9–11, 12–17 across four comparable nodes; the assembly is 2771 characters. Duplicate audit with rg -L, including the new Q68 lem-trf-complete-toric-localized-unit-divisor-lift and the facet/face definitions: no duplicate. Advisories: the item's maintainer-level tool_uses are stale for the new proof, and the coefficient node repeats the identification from lem-trf-monoid-completion-coefficients. Please promote rather than return again."
  },
  "lean": {
   "module": "Sheaf.RingTheory.CompleteToricFacetValuations",
@@ -379,5 +213,16 @@
   "result": "fix",
   "note": "Statement matches the node clause by clause: fs/sharp hypotheses use the recorded predicates; IsCompleteModel gives both coefficient cases (IsCohenRing includes Nat.Prime p; completion ideal (m_L, z^q (q≠0), t); theta-p in the completed chart ideal); normal domain uses the recorded inline form; conclusions cover Noetherian, z q ≠ 0, finitely many facets, unique primitive normals, half-space cone, injective boundary ideals that are prime, nonzero and height one, the exact height-one classification, DVR localization, and the normalized valuation -log v(z q) = ν_F(q) (uniformizer value one); the P=0 clause is present; universes u, v, w independent and bound. Edge cases P=0, n=0, q=0, field, Cohen with P=0 checked. Both modules compile clean with nt_compile.py --json (rc 0, about 2 s each; a negative control produced an error). No hollow definitions; only the theorem is sorry; the local monomial is kept to avoid a future import cycle with CompleteToricKatoRecognition. The new node's blueprint via matches blueprint_refs.chain. Fixed (merge_delivery dry run not run): H8 missing docstrings (16 of 17 model declarations, module source places, theorem proof steps) via docstring-only replacement Lean files with signatures verbatim, recompiled clean; H12 vague statement of def-trf-complete-toric-model replaced by self-contained TeX and a precise source place; H1/H11 non-reading second-reading section replaced by a clause-by-clause reading in the fixed report."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

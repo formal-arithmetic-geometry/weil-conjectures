@@ -1,0 +1,145 @@
+{
+ "id": "lem-qcqs-compact-support-torsion-coefficient-action",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Restriction-of-scalars isomorphism for actual compact support, transported to the recorded value; source ancestor: def-weil-integral-rational-qbar-compact-support",
+   "via": [
+    "lem-qcqs-compact-support-reduction-rigidity",
+    "lem-qcqs-compact-support-normalized-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Recorded compact support preserves finite quotient coefficient actions",
+ "statement": "Let l,E,k,X,Y,f,c be as in [def-weil-derived-complete-integral-detailed] and [def-weil-compact-support-finite-action], and let n be a nonnegative integer indexing the positive coefficient exponent n+1. If a constructible integral input K is in the essential image of derived scalar restriction from the nth finite quotient [def-weil-integral-derived-reduction], then the ambient value of the recorded integral compact-support functor on K is in the essential image of derived scalar restriction from that same finite quotient on Y. No comparison of arbitrary natural transformations is part of the assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Proper/open coefficient comparison; Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941, 0F7J",
+  "note": "Agent-formulated step of the original rigidity argument; not a verbatim assertion of the cited paper."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the strict reduction-system comparison to construct a natural morphism from the actual completed-coefficient compact-support image to the recorded integral value: apply the system adjunction unit, then the strict comparison, then the inverse of the recorded gamma. The unit/projection formula and scalar-adjunction transposition identify each reduction of this morphism with the finite proper/open mate, in the finiteReductionIso and finiteImageIso coordinates. This is the existence construction of the normalized lift, without its uniqueness assertion.",
+   "uses": [
+    "lem-qcqs-compact-support-strict-reduction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite mates are isomorphisms by the finite comparison theorem, which also gives derived completeness of the actual image. Transfer bounded constructibility from the recorded value along the reduction isomorphisms. Form a distinguished cone triangle of the comparison, using triangulated closure of constructible integral objects. Its reductions vanish. The distinguished completion triangle expresses the complete cone through a product of its restricted reductions, so this cone is zero; thus the comparison is an isomorphism.",
+   "uses": [
+    "lem-qcqs-compact-support-finite-comparison",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a presentation K ≅ Res(M) from the essential-image hypothesis. The actual proper/open compact-support image commutes with scalar restriction via PurCompactSupport.restriction. Compose the inverse of that restriction isomorphism at M with the compact-support image of the presentation and the isomorphism from the preceding steps. Its source is Res(image_finite(M)) and its target is the prescribed recorded value, proving the desired essential-image membership. No definition is made by choosing the presentation.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-strict-reduction-comparison",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B9",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Constructive part of the strict normalized comparison, reduction conservativity, and the proper/open restriction isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compact support direct image preserves restriction of scalars from finite quotient coefficients",
+   "results": "RestrictScalars and unrelated topological compact-support lemmas; no derived compact-support result.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support direct image preserves essential image of scalar restriction",
+   "results": "hasCompactSupport_comp_left and unrelated topological support results; no match on derived functors.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Rr]estriction|restriction.*compactSupport|essImage.*[Rr]estrict",
+   "results": "Mathlib search returned zero hits. Local PurCompactSupport.restriction compares the actual proper/open functors under scalar restriction, but does not state the assertion for the recorded Roos-limit value.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportReductionRigidity",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportTorsionCoefficientAction",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportTorsionCoefficientAction.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_torsion_coefficient_action",
+  "statement": "theorem sfQcqsCompactSupport_torsion_coefficient_action\n    (n : ℕ) (K : sfIntegralConstructibleCategory l E X)\n    (hK : (scalarReductionDerivedRestriction l E X n).essImage K.obj) :\n    (scalarReductionDerivedRestriction l E Y n).essImage\n      ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).obj",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T012813-L-2333489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T012813-L-2333489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

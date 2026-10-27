@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-residue-valuation-product-dimension",
+ "kind": "statement",
+ "title": "Dimension of products of subspaces in a field with a rational residue valuation",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be a field extension [def-pc-field-extension], and let $R\\subset K$ be a subring containing $k$, with fraction field $K$ (every element of $K$ is a quotient of two elements of $R$). Assume $R$ is a discrete valuation ring [def-sc-discrete-valuation-ring], with maximal ideal $\\mathfrak m$, and that the quotient map induces an isomorphism $k\\xrightarrow{\\sim}R/\\mathfrak m$. Let $V,W\\subset K$ be nonzero finite-dimensional $k$-linear subspaces [def-weil-finite-dimensional-subspace] of dimensions $r,s$ [def-weil-vector-space-dimension]. Define $P$ to be the $k$-linear span of the products $vw$ with $v\\in V,w\\in W$, that is, the subspace of finite $k$-linear combinations of those products. Then $P$ is finite-dimensional and\n$$\\dim_k P\\geq r+s-1.$$",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, Theorem 5, printed p.10, the Clifford-line bound: agent auxiliary product-subspace lemma for reconstructing that bound by multiplication of sections and orders at a rational point. This auxiliary is not separately stated in Morrison. Its full valuation argument is given in the delivery report; local Morrison PDF WANTED, read online.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-rational-residue-distinct-order-basis] for $U=V$ and $U=W$. All its hypotheses are exactly those of the item. Obtain bases $v_1,\\ldots,v_r$ and $w_1,\\ldots,w_s$ whose orders $a_i=\\nu(v_i)$ and $b_j=\\nu(w_j)$ are strictly increasing. Since $V,W$ are nonzero, $r,s\\geq1$.",
+   "uses": [
+    "lem-sfb-rational-residue-distinct-order-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent product-subspace argument using Tag 00IE (algebra-definition-value-group), the DVR normalized valuation, and the distinct-order basis auxiliary."
+   }
+  },
+  {
+   "text": "Every product $vw$ is a linear combination of the $rs$ products $v_iw_j$: if $v=\\sum_i c_i v_i$ and $w=\\sum_j d_jw_j$, then $vw=\\sum_{i,j}c_i d_jv_iw_j$. Conversely these $rs$ products belong to $P$. Thus they span $P$, which is finite-dimensional by [def-weil-finite-dimensional-subspace].",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent product-subspace argument using Tag 00IE (algebra-definition-value-group), the DVR normalized valuation, and the distinct-order basis auxiliary."
+   }
+  },
+  {
+   "text": "Consider the $r+s-1$ nonzero elements $v_1w_1,v_2w_1,\\ldots,v_rw_1,v_rw_2,\\ldots,v_rw_s$ of $P$. Multiplicativity from [lem-sc-dvr-valuation-arithmetic] gives their orders $a_1+b_1<\\cdots<a_r+b_1<a_r+b_2<\\cdots<a_r+b_s$. If $r=1$ or $s=1$, the corresponding segment is empty; the count and inequalities still hold.",
+   "uses": [
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent product-subspace argument using Tag 00IE (algebra-definition-value-group), the DVR normalized valuation, and the distinct-order basis auxiliary."
+   }
+  },
+  {
+   "text": "Any finite family of nonzero elements with distinct orders is $k$-linearly independent here. Indeed, $c\\in k^\\times$ is a unit of $R$ (its inverse lies in $k\\subset R$), so $\\nu(c)=0$ by the value-group description in [def-sc-discrete-valuation-ring]. In a nontrivial relation, retain only terms with nonzero coefficients and order them by increasing valuation. Their weighted terms still have distinct orders by multiplicativity. Repeatedly apply the unequal-order addition formula of [lem-sc-dvr-valuation-arithmetic], starting with the largest-order term and adding terms of decreasing order. Each partial sum is nonzero and has the least order so far, so the final sum is nonzero, a contradiction. Apply this to step 3. The resulting independent family of $r+s-1$ elements extends to a basis of the finite-dimensional space $P$; hence the basis-cardinality definition [def-weil-vector-space-dimension] gives $\\dim_kP\\geq r+s-1$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-valuation-arithmetic",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent product-subspace argument using Tag 00IE (algebra-definition-value-group), the DVR normalized valuation, and the distinct-order basis auxiliary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-residue-distinct-order-basis",
+  "def-weil-finite-dimensional-subspace",
+  "lem-sc-dvr-valuation-arithmetic",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Product-of-subspaces argument written by Q08 from the normalized DVR valuation of Tag 00IE and the arithmetic of Tag 00IF (algebra-lemma-properties-valuation); distinct-order bases isolated as a separate auxiliary. This argument is not attributed to Morrison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank_mul|finrank.*mul.*(le|add)|add.*finrank.*mul|hopf.*lemma|valuation.*(subspace|basis)",
+   "results": "[grep] OK 25 hit(s)\n{\"top\": [\"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/IsSimpleOrder.lean\", \"Mathlib/RingTheory/LittleWedderburn.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\"], \"sub\": \"\", \"digest\": \"fe81c5bcf420ef54\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the product of two finite dimensional subspaces of a discretely valued field with one dimensional residue field is at least the sum of the dimensions minus one",
+   "results": "[leansearch] OK 8 hit(s)\n{\"top\": [\"Submodule.finrank_sup_add_finrank_inf_eq\", \"Module.length_prod\", \"FiniteDimensional.finiteDimensional_pi'\", \"Submodule.finrank_add_finrank_le_of_disjoint\", \"SSet.hasDimensionLE_prod\", \"IntermediateField.LinearDisjoint.of_finrank_sup\", \"Submodule.finiteDimensional_iSup\", \"SSet.instHasDimensionLETensorObjHAddNat\"], \"sub\": \"\", \"digest\": \"cb521b51e0015510\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, \"finrank\", \"mul\"",
+   "results": "[loogle] OK 6 hit(s)\n{\"top\": [\"LinearMap.finrank_le_of_isSMulRegular\", \"LinearEquiv.finrank_fixedSubmodule_dilatransvection_mul_le\", \"LinearEquiv.finrank_fixedSubmodule_mul_dilatransvection_le\", \"LinearEquiv.le_one_add_finrank_fixedSubmodule_dilatransvection_mul\", \"LinearEquiv.le_one_add_finrank_fixedSubmodule_mul_dilatransvection\", \"Representation.card_inv_mul_sum_char_eq_finrank\"], \"sub\": \"\", \"digest\": \"864a69914f76690c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two nonzero finite dimensional subspaces V and W of the fraction field of a discrete valuation ring with residue field k, the span of products has dimension at least dim V plus dim W minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n{\"top\": [\"Submodule.IsLattice.finrank_of_pi\", \"Submodule.IsLattice.rank_of_pi\", \"Submodule.IsLattice.rank'\", \"Submodule.IsLattice.of_rank_le\", \"Submodule.finrank_span_eq_finrank_span\", \"Ideal.finrank_eq_finrank\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"Submodule.exists_of_finrank_lt\"], \"sub\": \"\", \"digest\": \"3b5e342fb48bfe1b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*mul|mul.*finrank|valuation.*(basis|subspace)|subspace.*valuation|hopf",
+   "results": "[grep] OK 25 hit(s)\n{\"top\": [\"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\"], \"sub\": \"LinearAlgebra\", \"digest\": \"02c425fc132dae7e\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hopf lemma for a field with a valuation and residue field equal to the scalars: dimension of the span of pairwise products of two finite subspaces is at least their dimensions added minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n{\"top\": [\"Submodule.IsLattice.finrank_of_pi\", \"Submodule.exists_of_finrank_lt\", \"AmpleSet.of_one_lt_codim\", \"Submodule.IsLattice.rank_of_pi\", \"Submodule.exists_smul_notMem_of_rank_lt\", \"Submodule.IsLattice.of_rank_le\", \"iSupIndep.subtype_ne_bot_le_finrank_aux\", \"Submodule.exists_forall_notMem_of_forall_ne_top\"], \"sub\": \"\", \"digest\": \"a9fe62b6e9f61795\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_of_pi|finrank_le_of_isSMulRegular|finrank_mul|finrank_span_mul",
+   "results": "[grep] OK 2 hit(s)\n{\"top\": [\"Mathlib/Algebra/Algebra/Subalgebra/IsSimpleOrder.lean\", \"Mathlib/Algebra/Module/Lattice.lean\"], \"sub\": \"Algebra\", \"digest\": \"23d59df8953e88a2\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: lattice ranks, sums/intersections of vector subspaces, tower finranks and dimensions of scalar multiplication do not bound the span of pairwise products by r+s-1. Read Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; it concerns the R-rank of a full R-lattice, not k-dimensions of products."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, \"finrank\", \"mul\"",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"top\": [\"LinearMap.finrank_le_of_isSMulRegular\", \"LinearEquiv.finrank_fixedSubmodule_dilatransvection_mul_le\", \"LinearEquiv.finrank_fixedSubmodule_mul_dilatransvection_le\", \"LinearEquiv.le_one_add_finrank_fixedSubmodule_dilatransvection_mul\", \"LinearEquiv.le_one_add_finrank_fixedSubmodule_mul_dilatransvection\", \"Representation.card_inv_mul_sum_char_eq_finrank\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"864a69914f76690c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned submodule sum/intersection dimensions, field compositum upper bounds, tower dimensions and lattice ranks do not state the product-span lower bound. Read LinearMap.finrank_le_of_isSMulRegular at Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean:565 and Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; they compare different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of the span of products of two nonzero finite dimensional subspaces of a field with a rational discrete valuation is at least the sum of their dimensions minus one",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Submodule.finrank_add_le_finrank_add_finrank\", \"Submodule.finrank_add_finrank_le_of_disjoint\", \"Submodule.IsLattice.finrank_of_pi\", \"Submodule.IsLattice.rank_of_pi\", \"rank_add_rank_le_rank_prod\", \"lift_rank_add_lift_rank_le_rank_prod\", \"Submodule.finrank_sup_add_finrank_inf_eq\", \"finrank_vectorSpan_range_add_one_le\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"8f86dce4b4fed460\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned submodule sum/intersection dimensions, field compositum upper bounds, tower dimensions and lattice ranks do not state the product-span lower bound. Read LinearMap.finrank_le_of_isSMulRegular at Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean:565 and Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; they compare different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*mul|mul.*finrank|valuation.*basis|hopf",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Zero.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Zero.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Zero.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\"], \"note\": \"\", \"sub\": \"LinearAlgebra\", \"digest\": \"b305a563c932841e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned submodule sum/intersection dimensions, field compositum upper bounds, tower dimensions and lattice ranks do not state the product-span lower bound. Read LinearMap.finrank_le_of_isSMulRegular at Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean:565 and Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; they compare different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf lemma dimension of product of vector subspaces in a field is at least dim V plus dim W minus one when the field has a rational place",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Submodule.finrank_sup_add_finrank_inf_eq\", \"Submodule.finrank_add_finrank_le_of_disjoint\", \"Subspace.finrank_add_finrank_dualAnnihilator_eq\", \"rank_quotient_add_rank_of_divisionRing\", \"Submodule.finrank_add_finrank_orthogonal\", \"IntermediateField.LinearDisjoint.of_finrank_sup\", \"LinearMap.BilinForm.finrank_add_finrank_orthogonal\", \"Submodule.finrank_add_eq_of_isCompl\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"c273bcb4e71f4836\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned submodule sum/intersection dimensions, field compositum upper bounds, tower dimensions and lattice ranks do not state the product-span lower bound. Read LinearMap.finrank_le_of_isSMulRegular at Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean:565 and Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; they compare different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For subspaces V and W of the function field of a curve with a rational point, dim span {v*w} is at least dim V + dim W - 1",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"RatFunc.rank_ratFunc_ratFunc\", \"MvRatFunc.rank_eq_max_lift\", \"IntermediateField.rank_sup_le\", \"IntermediateField.rank_sup_le_of_isAlgebraic\", \"IntermediateField.finrank_sup_le\", \"finrank_vectorSpan_insert_le_set\", \"finrank_vectorSpan_insert_le\", \"Submodule.IsLattice.finrank_of_pi\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"d256364925be72c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned submodule sum/intersection dimensions, field compositum upper bounds, tower dimensions and lattice ranks do not state the product-span lower bound. Read LinearMap.finrank_le_of_isSMulRegular at Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean:565 and Submodule.IsLattice.finrank_of_pi at Mathlib/Algebra/Module/Lattice.lean:191; they compare different objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-linear-series-degree-dimension-bound",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Section 2.4, Theorem 5, printed p.10, the Riemann-Roch and Clifford bounds for the generated sub-linear series; Stacks Project Tag 0BS6, curves.tex, lemma-rr, for Riemann-Roch. Local Morrison PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Agent auxiliary: the product-of-sections dimension estimate underlying the Clifford bound, proved by distinct orders at a rational smooth point.",
+   "via": [
+    "lem-sfb-linear-series-degree-dimension-bound",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-residue-valuation-product-dimension",
+  "worker": "stage1",
+  "summary": "No exact project declaration found by blueprint tag or concept. Kept the statement and rational-residue hypothesis. Isolated the nontrivial valuation-adapted basis lemma as one unsplit child, after DAG/blueprint/project and logged Mathlib searches. Proved finite generation by the rs basis products and the r+s-1 bound by the explicit monotone chain of products and a finite unequal-order cancellation argument. Reused the existing Mathlib valuation-arithmetic leaf. Checked zero-dimensional child, r=1, s=1, negative orders, finite scalar fields and necessity of the residue-field hypothesis.",
+  "blueprint": "Realizes the inherited supporting product-of-sections estimate for the Clifford bound in the alteration/plurinodal-input route under det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. The inherited nearest imported ancestor is null (blueprint_refs.py ancestor confirms); preserve that ancestry and its full via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-57b884c7e",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-57b884c7e (reviewer sub-agent of L); spot-checked: Read the item, the one new node, every cited statement (def-weil-field, def-pc-field-extension, def-sc-discrete-valuation-ring, lem-sc-dvr-valuation-arithmetic as a Mathlib leaf, def-weil-finite-dimensional-subspace, def-weil-vector-space-dimension), Stacks 00IE/00IF/00PD in algebra.tex, and the citer lem-sfb-linear-series-degree-dimension-bound step 5, whose hypotheses match. There is no repair note, so this is a first split and no re-split rule applies. The item statement is true: V=<1..t^{r-1}> and W=<1..t^{s-1}> show the bound is sharp, and V=W=L with [L:k]>1 shows the rational-residue hypothesis is needed. Step 1 uses the child with identical hypotheses. Step 2 is the bilinear expansion giving finite spanning. Step 3 is the chain of r+s-1 products with strictly increasing orders, handling r=1 and s=1. Step 4 uses that scalars are units of order 0, so elements of distinct orders are independent by iterated unequal-order addition, and then the basis-size definition. All steps are correctly marked elementary, and proof_deps equals the union of the uses. The new node lem-sfb-rational-residue-distinct-order-basis is true (proved by the residue functional res(t^{-N}x) and induction on dimension), self-contained with nu defined inline, statement-only, strictly smaller than the item and not a clause of it. The rg -L duplicate search found no existing node or blueprint node stating it. The blueprint ancestor is null and via is correct. There are no SGA citations, no tool_uses, and Morrison is WANTED and not claimed as read. FIX (B3): the item statement used 'finite-dimensional' and 'dimension' without citing nodes and lacked them in stmt_deps. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-residue-valuation-product-dimension.json adds [def-weil-finite-dimensional-subspace] and [def-weil-vector-space-dimension] to the statement and to stmt_deps. The meaning is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ResidueValuationProductDimension",
+  "declaration": "Submodule.finiteDimensional_mul_and_finrank_add_sub_one_le",
+  "file": "lean/Sheaf/LinearAlgebra/ResidueValuationProductDimension.lean",
+  "statement": "theorem finiteDimensional_mul_and_finrank_add_sub_one_le {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (R : Subalgebra k K) [IsDiscreteValuationRing R] [IsFractionRing R K] (hres : Function.Bijective ((IsLocalRing.residue R).comp (algebraMap k R))) (V W : Submodule k K) [FiniteDimensional k V] [FiniteDimensional k W] (hV : V ≠ ⊥) (hW : W ≠ ⊥) : FiniteDimensional k (V * W) ∧ Module.finrank k V + Module.finrank k W - 1 ≤ Module.finrank k (V * W)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d748be940",
+  "group": "Q96",
+  "result": "fix",
+  "note": "Lean statement exact: R : Subalgebra k K with IsDiscreteValuationRing and IsFractionRing R K (subtype inclusion), residue∘algebraMap k R bijective = the node's induced iso k≅R/m, V W nonzero FiniteDimensional submodules, P = V*W (Submodule.mul_def span of products), conclusion FiniteDimensional ∧ finrank V + finrank W - 1 ≤ finrank (V*W) (ℕ-subtraction safe since r,s≥1). Edge cases r=1/s=1, independent universes, no extra assumptions; statement true and sharp. lean.statement verbatim; stmt_dep records Field/Algebra/IsDiscreteValuationRing/FiniteDimensional/Module.finrank match; no new defs; docstrings, blueprint tag and sorry body OK; no compile needed (no Lean change). Sole fault H11: the 'Second reading by Q96' section is the worker's self-check. FIX: fixes/lem-sfb-residue-valuation-product-dimension.report.md = worker report verbatim + independent clause-by-clause second reading."
+ }
+}

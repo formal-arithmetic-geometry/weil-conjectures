@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-compact-oscillatory-amplitude-reduction",
+ "kind": "statement",
+ "title": "Compact oscillatory amplitudes reduce to diagonal symbols modulo lower order",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol estimates and oscillatory-integral normalization of [def-sfb-symbol-pseudodifferential-operators]. Fix integers $m\\geq1$, $p,q\\geq0$ and $r\\in\\mathbf Z$. Let $a(x,y,\\xi)$ be a smooth complex $q\\times p$ matrix on $(\\mathbf R^m)^3$, vanishing outside one compact set of $(x,y)$, with $$\\|\\partial_x^\\alpha\\partial_y^\\gamma\\partial_\\xi^\\beta a(x,y,\\xi)\\|\\leq C_{\\alpha\\gamma\\beta}(1+|\\xi|)^{r-|\\beta|}.$$ Define $A_a f(x)=(2\\pi)^{-m}\\operatorname{Os}\\int e^{i(x-y)\\cdot\\xi}a(x,y,\\xi)f(y)\\,dy\\,d\\xi$, where $\\operatorname{Os}$ is the frequency-cutoff limit after testing. This limit exists on compactly supported smooth $f$, is independent of the cutoff, and $A_a$ and its bilinear transpose for the section–dual-density pairing are continuous maps from smooth functions to compactly supported smooth functions, with supports in the closures of the two spatial projections of $\\operatorname{supp}a$. Their transposes therefore define continuous maps on all distributions with the strong dual topology. There exist a symbol $q_a\\in S^r$ compactly supported in $x$, a real $\\mu\\in C_c^\\infty(\\mathbf R^m)$ equal to one near both spatial projections, and a smooth compactly supported matrix kernel $K$ such that $$A_a=\\operatorname{Op}(q_a)\\mu+R_K,\\qquad q_a(x,\\xi)-a(x,x,\\xi)\\in S^{r-1}.$$ The equality holds on all distributions by transposition. The distribution kernel of $A_a$ is smooth for $x\\ne y$; in particular, an amplitude vanishing on a neighborhood of the diagonal gives a smooth kernel. The assertions hold with compact supports in any prescribed open coordinate domain. Complex conjugation on real inputs replaces $a$ by $a^\\natural(x,y,\\xi)=\\overline{a(x,y,-\\xi)}$, so taking real parts is exactly replacement by $(a+a^\\natural)/2$, including on distributions.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, (3.4)–(3.5) and Proposition 3.7, printed pp.12–13. Local oscillatory-integral prerequisites for global quantization: amplitude reduction, smooth off-diagonal kernel, and distributional transposition. Agent-supplied local formulation. Supplemental course read online: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3, (3.3)–(3.6), 3.12–3.15, printed pp.6–12; coordinate-change and amplitude reduction details are supplied by the agent, not asserted to be proved in those notes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Write $P_x,P_y$ for the closures of the spatial projections; these are compact because the amplitude vanishes outside a fixed compact spatial set. For a frequency cutoff $\\rho(\\xi/R)$ and a smooth $f$, integrate in $y$ first. Repeated integration by parts gives\n$$\\int e^{-iy\\cdot\\xi}a(x,y,\\xi)f(y)\\,dy=(1+|\\xi|^2)^{-N}\\int e^{-iy\\cdot\\xi}(1-\\Delta_y)^N(af)(x,y,\\xi)\\,dy.$$\nTo justify each integration, insert a compact smooth function equal to one near $P_y$ in the exponential factor; the cited bump theorem supplies it inside a sufficiently large ball. The other factor and its derivatives are supported in $P_y$, so the scalar integration-by-parts hypotheses hold entrywise, and every integral in $y$ is absolutely convergent. After $k$ derivatives in $x$, the full integrand including $e^{ix\\cdot\\xi}$ is bounded by\n$$C_{N,k}(1+|\\xi|)^{r+k-2N}\\max_{|\\nu|\\leq2N}\\sup_{y\\in P_y}|\\partial^\\nu f(y)|.$$\nChoose $2N>r+k+m$. This is integrable by the Euclidean bracket lemma and the majorant estimate; all factors are measurable. The bound is uniform in $x$, with support in $P_x$.",
+   "uses": [
+    "lem-sfb-scalar-integrable-integration-by-parts",
+    "lem-sfb-euclidean-smooth-bump",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "Dominated differentiation, using the bound in step 1 also at derivative order $k+1$, shows that the integral without $\\rho$ is smooth and gives its derivatives. Dominated convergence removes every permissible frequency cutoff, independently of its shape. In fact the supremum of each derivative of the error is bounded by the integral of the step-1 majorant times $|\\rho(\\xi/R)-1|$, which tends to zero. Thus the cutoff operators converge in every fixed-support smooth seminorm. Pairing against a compact test gives exactly the required tested limit. For each output derivative order the displayed estimate uses only finitely many input derivatives on the compact set $P_y$; hence $A_a:C^\\infty\\to\\mathscr D_{P_x}$ is continuous, followed by the continuous inclusion into the test space. The fixed-support and locally convex test topologies are those of the cited definition, applied to real and imaginary components.",
+   "uses": [
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "def-sfb-local-coefficient-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "The bilinear transpose amplitude is $a^t(y,x,-\\xi)$, where $t$ denotes matrix transpose without complex conjugation. It obeys the same estimates with $P_x,P_y$ exchanged. At finite cutoff, Fubini and $\\xi\\mapsto-\\xi$ give $\\int g^t A_{a,\\rho,R}f=\\int (A_{a^t,\\rho(-\\cdot),R}g)^t f$; the cutoffs need not be even. Step 2 takes the limit on both sides and proves the transpose formula for compact tests, then for arbitrary smooth inputs by the spatial supports. The same estimates give $A_a^t:C^\\infty\\to\\mathscr D_{P_y}$ continuously. In particular its restriction is a continuous map of test spaces. Define $A_a u$ by $\\langle A_a u,\\phi\\rangle=\\langle u,A_a^t\\phi\\rangle$. For a bounded set $S$ of tests, $A_a^t S$ is bounded: for any zero neighborhood $V$, continuity supplies $W$ with $A_a^tW\\subset V$, and $S\\subset tW$ eventually in $|t|$. Thus the strong-dual seminorm of $A_a u$ on $S$ is the strong-dual seminorm of $u$ on $A_a^tS$. This proves strong continuity directly from the cited definition, also for the other transpose.",
+   "uses": [
+    "lem-sfb-product-fubini-integral-swap",
+    "lem-sfb-euclidean-jacobian-integral",
+    "def-sfb-local-coefficient-tests",
+    "def-sfb-real-strong-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "Set $b(x,z,\\lambda)=a(x,x+z,\\lambda)$ and $B(x,\\eta,\\lambda)=(2\\pi)^{-m}\\int e^{-iz\\cdot\\eta}b(x,z,\\lambda)\\,dz$. The chain rule expresses each derivative of $b$ as a finite sum of derivatives of $a$. Its support lies in $P_x\\times(P_y-P_x)$, a product of compact sets. Apply the partial-Fourier lemma with $d=m$. It gives joint smoothness, the support in $P_x$, and all bounds\n$$|\\partial_x^\\alpha\\partial_\\lambda^\\beta B|\\leq C_{\\alpha\\beta L}(1+|\\eta|)^{-L}(1+|\\lambda|)^{r-|\\beta|}.$$\nThe lemma's uniformity also applies to $b$ multiplied by any fixed collection of spatial cutoff derivatives. No amplitude-reduction theorem is being invoked here.",
+   "uses": [
+    "lem-sfb-parameter-symbol-partial-fourier-decay"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "Here is the elementary frequency-weight estimate used below. For $0\\leq t\\leq1$ both\n$$1+|\\xi+t\\eta|\\leq(1+|\\xi|)(1+|\\eta|),\\qquad 1+|\\xi|\\leq(1+|\\xi+t\\eta|)(1+|\\eta|)$$\nfollow from the triangle inequality. Consequently, for every integer $s$, $(1+|\\xi+t\\eta|)^s\\leq(1+|\\xi|)^s(1+|\\eta|)^{|s|}$. Therefore, if a smooth $F(x,\\eta,\\lambda)$ satisfies the step-4 bounds with $r$ replaced by $s$, then for any polynomial $P$ of degree $h$,\n$$|P(\\eta)\\partial_x^\\alpha\\partial_\\lambda^\\beta F(x,\\eta,\\xi+t\\eta)|\\leq C(1+|\\xi|)^{s-|\\beta|}(1+|\\eta|)^{h-L+|s-|\\beta||}.$$\nChoose $L>m+h+|s-|\\beta||$. This is an integrable majorant in $\\eta$, uniformly in $t$, by the bracket lemma. The same bound for one further derivative justifies differentiation of the integral by the cited dominated-derivative lemma on each compact parameter neighborhood. Thus integration in $\\eta$, and also in $t\\in[0,1]$, preserves these symbol estimates; Fubini applies to their product majorants.",
+   "uses": [
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-product-fubini-integral-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "Define explicitly $q_a(x,\\xi)=\\int B(x,\\eta,\\xi+\\eta)\\,d\\eta$. Step 5 with $F=B$, $P=1$, $t=1$ gives $q_a\\in S^r$, smooth and supported in $P_x$. For fixed $(x,\\xi)$, $b(x,\\cdot,\\xi)$ is a compactly supported smooth function, hence Schwartz. Fourier inversion in the cited $2\\pi$ convention, with frequency substitution $\\eta=2\\pi\\theta$, gives $b(x,0,\\xi)=\\int B(x,\\eta,\\xi)\\,d\\eta=a(x,x,\\xi)$. The fundamental theorem of calculus on the segment $\\xi+t\\eta$ yields\n$$q_a-a(x,x,\\xi)=\\sum_j\\int\\!\\int_0^1\\eta_j\\partial_{\\lambda_j}B(x,\\eta,\\xi+t\\eta)\\,dt\\,d\\eta.$$\nFor each $j$, $\\partial_{\\lambda_j}B$ has the step-4 bounds of order $r-1$. Apply step 5 with $s=r-1$, $P=\\eta_j$ and then differentiate in $x,\\xi$. Every such derivative has order $r-1-|\\beta|$; hence the displayed difference belongs to $S^{r-1}$. This proves the lower-order claim rather than shifting it to another node.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "For a compactly supported smooth $f$, put $\\widehat f_1(\\xi)=\\int e^{-iy\\cdot\\xi}f(y)\\,dy$. It is Schwartz by test inclusion and the Fourier rule, after the linear frequency rescaling. At finite frequency cutoff, insert Fourier inversion for $f(x+z)$ in the amplitude integral, then use Fubini and the determinant-one change $\\lambda=\\xi+\\eta$. This gives\n$$A_{a,\\rho,R}f(x)=(2\\pi)^{-m}\\int e^{ix\\cdot\\xi}\\widehat f_1(\\xi)\\left(\\int B(x,\\eta,\\xi+\\eta)\\rho((\\xi+\\eta)/R)\\,d\\eta\\right)d\\xi.$$\nThese finite-cutoff interchanges are absolutely integrable: $z$ is in a fixed compact set, $\\lambda$ is bounded for fixed $R$, and $\\widehat f_1$ is integrable. To remove $\\rho$, use the bound from steps 4–5 with $\\beta=0$: the absolute integrand is at most\n$$C\\sup|\\rho|(1+|\\eta|)^{-L+|r|}(1+|\\xi|)^r|\\widehat f_1(\\xi)|.$$\nTake $L>m+|r|$; Schwartz decay makes the second factor integrable. Fubini and dominated convergence give $A_af=\\operatorname{Op}(q_a)f$. The compact-symbol frequency-kernel node identifies this absolute Fourier expression with the prescribed tested oscillatory quantization, with the same $(2\\pi)^{-m}$ normalization.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-product-fubini-integral-swap",
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-compact-symbol-frequency-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "Choose a relatively compact open $W$ containing $P_x\\cup P_y$. Smooth separation applied to the disjoint closed sets $\\mathbf R^m\\setminus W$ and $P_x\\cup P_y$ gives a real $\\mu$ that is zero near the former and one near the latter; its support is a compact subset of $\\overline W$. Since $a(x,y,\\xi)\\mu(y)=a(x,y,\\xi)$, steps 1–2 give $A_a\\mu=A_a$. Applying step 7 to $\\mu f$ proves $A_a=\\operatorname{Op}(q_a)\\mu$ for every smooth $f$. Take $K=0$, a smooth compactly supported matrix kernel. For the localized right side, the amplitude $q_a(x,\\xi)\\mu(y)$ satisfies steps 1–3 too. Its bilinear transpose equals $A_a^t$: pairing their difference against every compact smooth $f$ gives zero by the smooth-input identity; the cited test-separation and continuous-a.e.-pointwise lemmas apply entrywise to this smooth difference. Therefore their transposed distribution operators coincide on every distribution, without a density argument in a distribution topology.",
+   "uses": [
+    "lem-sfb-smooth-separating-cutoff",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "First define the kernel distribution by pairing the regularized amplitude against any $H\\in C_c^\\infty(\\mathbf R^{2m})$. Step 1, with $af$ replaced by $aH$ and then integrated over the compact $x$ projection, gives a cutoff-independent limit bounded by finitely many test seminorms. This defines a distribution by the local-test topology. Off the diagonal put $v=x-y$ and $L_v=(i|v|^2)^{-1}v\\cdot\\partial_\\xi$, so $L_v e^{iv\\cdot\\xi}=e^{iv\\cdot\\xi}$. For each fixed compact spatial set with $|v|\\geq\\varepsilon>0$, integrate by parts $N$ times in the finite-cutoff kernel. Its resulting amplitude is $(-L_v)^N(a\\rho(\\xi/R))$. After $k$ spatial derivatives, the terms without derivatives on $\\rho$ are bounded by $C(1+|\\xi|)^{r-N+k}$. Choose $N>r+k+m$. Terms where $j>0$ frequency derivatives hit $\\rho$ tend pointwise to zero and have the same integrable bound: on their annular support $|\\xi|\\asymp R$ and $R^{-j}\\leq C(1+|\\xi|)^{-j}$ for $R\\geq1$. Scalar integration by parts is applicable because of the finite frequency support. Dominated convergence and dominated differentiation give a $C^k$ kernel, independent of cutoff, there. As $k$ is arbitrary the kernel is smooth off the diagonal; pairing against any compact smooth test supported off the diagonal and Fubini identifies it with this kernel distribution. If $a$ vanishes on a neighborhood of the diagonal its kernel is zero there, so the off-diagonal smooth kernels and zero glue to a globally smooth kernel, supported in the compact spatial support of $a$.",
+   "uses": [
+    "lem-sfb-scalar-integrable-integration-by-parts",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-product-fubini-integral-swap",
+    "def-sfb-local-coefficient-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  },
+  {
+   "text": "If the compact spatial support is inside a prescribed open coordinate domain $U\\times U$, extend the amplitude by zero: it is smooth across the boundary because that compact support is contained in $U\\times U$. Take $W$ above with $\\overline W\\subset U$; finitely many small Euclidean balls around the compact projections supply such a $W$. The same separation gives $\\mu\\in C_c^\\infty(U)$, and $q_a$ has spatial support in $P_x\\subset U$, while $K=0$. This proves the asserted domain version. Finally conjugate a regularized amplitude formula and replace $\\xi$ by $-\\xi$; the result has amplitude $a^\\natural(x,y,\\xi)=\\overline{a(x,y,-\\xi)}$ and cutoff $\\overline{\\rho(-\\xi/R)}$. Cutoff independence gives the conjugation identity on real smooth inputs. Linearity gives the real part by $(a+a^\\natural)/2$. The bilinear transpose has the same conjugation identity, so its action on real distributions gives exactly the same formula by evaluating against real tests. If either matrix rank is zero every formula is the zero map; if the amplitude is zero all constructions can be chosen zero except for any allowable real cutoff.",
+   "uses": [
+    "lem-sfb-smooth-separating-cutoff",
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-local-coefficient-tests",
+  "def-sfb-real-strong-dual",
+  "lem-sfb-compact-symbol-frequency-kernel",
+  "lem-sfb-continuous-ae-pointwise",
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-euclidean-smooth-bump",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-oscillatory-cutoff-convergence",
+  "lem-sfb-parameter-symbol-partial-fourier-decay",
+  "lem-sfb-product-fubini-integral-swap",
+  "lem-sfb-scalar-integrable-integration-by-parts",
+  "lem-sfb-schwartz-fourier-coordinate-rule",
+  "lem-sfb-schwartz-test-inclusion-integrability",
+  "lem-sfb-smooth-separating-cutoff",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compactly supported smooth oscillatory amplitude of symbol order r defines a continuous distribution operator and reduces to its diagonal symbol modulo order r minus one",
+   "results": "{\"t\": \"2026-10-24T04:13:41Z\", \"tool\": \"leanfinder\", \"query\": \"A compactly supported smooth oscillatory amplitude of symbol order r defines a continuous distribution operator and reduces to its diagonal symbol modulo order r minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.delta\", \"SchwartzMap.evalCLM\", \"SchwartzMap.pairing\", \"SchwartzMap.mkLM\", \"TemperedDistribution\", \"SchwartzMap.bilinLeftCLM\", \"TemperedDistribution.delta\", \"ContDiffMapSupportedIn.structureMapLM\"], \"digest\": \"fe522129bf11806e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oscillatory\"",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"oscillatory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relevant pseudodifferential or oscillatory declaration; symbol-name hits are parser syntax."
+  },
+  {
+   "tool": "grep",
+   "query": "oscillatory|amplitude.*symbol|symbol.*amplitude",
+   "results": "{\"t\": \"2026-10-24T04:14:03Z\", \"tool\": \"grep\", \"query\": \"oscillatory|amplitude.*symbol|symbol.*amplitude\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits in Mathlib/Analysis/."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An oscillatory integral amplitude reduces to a left symbol with one lower order remainder",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"leansearch\", \"query\": \"An oscillatory integral amplitude reduces to a left symbol with one lower order remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Asymptotics.term_=o[_]_\", \"ContDiff.termω\", \"ContinuousAt.oscillation_eq_zero\", \"Asymptotics.term_=o[_;_]_\", \"analyticOrderAt_add_eq_right_of_lt\", \"analyticOrderAt_neg\", \"Asymptotics.IsLittleO.add_iff_left\", \"HasFDerivAtFilter.isLittleO\"], \"digest\": \"6800485281264bf4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary asymptotic order, diffeomorphisms or matrices, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A double symbol a x y xi has a left quantization symbol equal to a x x xi modulo a symbol of one smaller order",
+   "results": "{\"t\": \"2026-10-24T04:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"A double symbol a x y xi has a left quantization symbol equal to a x x xi modulo a symbol of one smaller order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sym.term_::ₛ_\", \"Mathlib.FindSyntax.extractSymbols\", \"RingTheory.LinearMap.termμ\", \"termS(_,_)\", \"RingTheory.LinearMap.termμ[_]\", \"DualNumber.term_[ε]\", \"SymAlg.sym_mul_sym\", \"SymAlg.sym_mul_self\"], \"digest\": \"6ed9c600938bc251\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-leading-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Local oscillatory-integral prerequisites for global quantization: amplitude reduction, smooth off-diagonal kernel, and distributional transposition.",
+   "via": [
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "worker": "stage1",
+  "summary": "Direct partial-Fourier construction of the exact left symbol, with an explicit first Taylor remainder; uniform test estimates, bilinear transposes and strong-dual continuity, nonstationary off-diagonal integration, coordinate-domain supports, and real conjugation are checked separately. One strictly smaller parameter-Fourier estimate remains statement-only. Corrected the support claim to closures of spatial projections; an escaping-frequency smoothing amplitude shows why the unclosed projection claim is false.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route reaches this analytic prerequisite through Kodaira vanishing and elliptic regularity. The latest blueprint has no oscillatory-amplitude node; these steps realize the local prerequisite introduced in lem-sfb-pseudodifferential-leading-calculus step 1. blueprint_refs ancestor reports null; retain that provenance and its full via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-5e5256c62",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-5e5256c62 (reviewer sub-agent of L); spot-checked: All of item lem-sfb-compact-oscillatory-amplitude-reduction (10 steps), the new node and the 17 cited statements read in full. Demailly's notes are not under literature/: WANTED is recorded and proof_origin is agent, so I checked the mathematics myself. Statement change: 'in the spatial projections of supp a' became 'in the closures of' them. I verified the counterexample: the sum Σ e^{-n^4}h_n(x)ψ(y)χ(ξ−n)e^{-i(x−y)ξ} is locally finite and a symbol; its x-projection misses 0; A_aψ is nonzero at the points 1/n → 0. So the old claim is false, the closure is correct, and both citers (leading-calculus, asymptotic-sum) only need support in supp χ×supp ψ. Recomputed: transpose amplitude a^t(y,x,−ξ) with cutoff ρ(−ξ); the exact identity A_a f = Op(q_a)μf with q_a=∫B(x,η,ξ+η)dη (substitute y=x+z, invert f, set λ=ξ+η), so K=0 is legitimate. Also checked: the Peetre bounds for both signs of s; Fourier inversion giving ∫B(x,η,ξ)dη=a(x,x,ξ); the FTC remainder in S^{r−1}; L_v e^{ivξ}=e^{ivξ} off the diagonal, with cutoff-derivative terms controlled on the annulus; transposes equal via test separation plus the continuous-a.e. node, with no density argument; the conjugation and real-part formulas, including transposes. The cited nodes' hypotheses hold where used (IBP supports via the bump, bracket s>m/2, frequency-kernel node's single compact x-support with global bounds). New node lem-sfb-parameter-symbol-partial-fourier-decay is true (moments of ∂_z derivatives, compact z-support), tested on a product case, b=0, p or q=0, η=0 and r<0. It is strictly smaller than the item, not a duplicate of compact-symbol-frequency-kernel (no parameter uniformity, mixed derivatives or joint smoothness there), and its form (B1–B9) is OK with via = item + item.via. All citations are in unit sk-thm-sf-ctf-stability, so no tool_uses. No fixes."
+ }
+}

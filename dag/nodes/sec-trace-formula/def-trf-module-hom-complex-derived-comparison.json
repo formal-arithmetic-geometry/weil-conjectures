@@ -1,0 +1,129 @@
+{
+ "id": "def-trf-module-hom-complex-derived-comparison",
+ "kind": "definition",
+ "title": "Canonical localized module Hom comparison by signed evaluation",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring, $E,I$ arbitrary cochain complexes of $R$-modules, and $Q$ the localization to $D(R)$ [def-weil-abstract-derived-category]. Use the product total Hom complex $H=\\operatorname{Hom}_R^\\bullet(E,I)$ [def-sc-module-total-hom-complex] and the direct-sum total tensor [def-pc-tensor-complex-sheaves]. Let $\\operatorname{ev}_{E,I}:\\operatorname{Tot}(E\\otimes_R H)\\to I$ be the signed evaluation chain map whose restriction to the $(p,q)$ summand sends $x\\otimes f$ to $(-1)^{pq}f_p(x)$, using the actual $p$-th product projection $f_p:E^p\\to I^{p+q}$ of $f\\in H^q$. This is the coordinate-characterized evaluation of [lem-pod-projective-hom-evaluation-model], whose evaluation clause holds for arbitrary $E,I$. Using the existing derived internal Hom [def-pur-derived-internal-hom], define the canonical comparison $j_{E,I}:QH\\to R\\operatorname{Hom}_R(QE,QI)$ to be the left tensor-Hom transpose of $QE\\otimes_R^{\\mathbf L}QH\\xrightarrow{\\mu_{E,H}}Q\\operatorname{Tot}(E\\otimes_R H)\\xrightarrow{Q\\operatorname{ev}_{E,I}}QI$, where $\\mu$ is the native localization lax tensorator. No boundedness, projectivity, flatness or K-injectivity is assumed in this definition.",
+ "stmt_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A5Y and 0A65, section-RHom, equation-internal-hom and lemma-internal-hom; signed evaluation in section-hom-complexes."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical map from the localization of a module Hom complex to derived internal Hom by currying signed evaluation after the localization tensorator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalizedModule.mapExtendScalars\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M →ₗ[R] N) →ₗ[R] (M' →ₗ[Rₛ] N')\", \"doc\": \"Let $R$ be a commutative semiring, $S$ a submonoid of $R$, and $R_S$ the localization of $R$ at $S$. Let $M$ and $N$ be $R$-modules, and let $M'$ and $N'$ be their respective localizations at $S$, whi\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.lcurry\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M ⊗[R] N →ₗ[A] P) →ₗ[B] M →ₗ[A] N →ₗ[R] P\", \"doc\": \"The currying operation that maps a linear map from $ M \\\\otimes_R N $ to $ P $ to a linear map from $ M $ to the space of linear maps from $ N $ to $ P $, preserving the module structures over $ R $ an\"}\n  {\"name\": \"LocalizedModule.coe_map_eq\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \"{M' N' : Type*} [AddCommMonoid M'] [AddCommMonoid N'] [Module R M'] [Module R N'] (g₁ : M →ₗ[R] M') (g₂ : N →ₗ[R] N')\\n  [IsLocalizedModule S g₁] [IsLocalizedModule S g₂] (l : M →ₗ[R] N) :\\n  ⇑(map S l) = (IsLocalizedModule.iso S g₂).symm ∘ IsLocalizedModule.map S g₁ g₂ l ∘ IsLocalizedModule.iso S g₁\", \"doc\": \"Given commutative semiring $ R $, submonoid $ S $, and $ R $-modules $ M, N $ with localizations $ M', N' $ at $ S $, the canonical linear map induced by an $ R $-linear map $ l: M → N $ between the l\"}\n  {\"name\": \"ModuleCat.localizedModuleMkLinearMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Localization\", \"type\": \"[Small.{v} R] (M : ModuleCat.{v} R) (S : Submonoid R) : M →ₗ[R] (M.localizedModule S)\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its localization $ M_S $ with respect to a submonoid $ S $, defined by sending each element $ m \\\\in M $ to the equivalence class $ [m, 1] $ in $ \"}\n  {\"name\": \"IsLocalizedModule.lift\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Basic\", \"type\": \"(g : M →ₗ[R] M'') (h : ∀ x : S, IsUnit ((algebraMap R (Module.End R M'')) x)) : M' →ₗ[R] M''\", \"doc\": \"Given a linear map $ g : M \\to M'' $ and the condition that every element of the submonoid $ S $ acts as an invertible endomorphism on $ M'' $, this constructs the induced linear map from the localized\"}\n  {\"name\": \"LocalizedModule.mkLinearMap\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Basic\", \"type\": \": M →ₗ[R] LocalizedModule S M\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its localization $ M_S $ with respect to an Ore set $ S $, defined by sending each element $ m \\\\in M $ to the equivalence class $ [m, 1] $ in $ M\"}\n  {\"name\": \"localizedModuleIsLocalizedModule\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Basic\", \"type\": \": IsLocalizedModule S (LocalizedModule.mkLinearMap S M)\", \"doc\": \"For any commutative semiring $ R $, $ R $-module $ M $, and Ore set $ S $ in $ R $, the localized module $ M_S $ constructed via the canonical linear map from $ M $ to $ M_S $ is indeed the localizati\"}\n  {\"name\": \"ModuleCat.Tilde.localizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M) ⟶ (TopCat.Presheaf.stalk (tildeInModuleCat M) x)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative ring $R$, this defines the canonical morphism from the localization of an $R$-module $M$ at the complement of $\\\\mathfrak{p}$ to \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib comparison; reuse existing evaluation and transpose. Project search found the exact plain coinduction helpers without a definition-node owner; this definition node and equal expressions are required by the immutable-head return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom comparison localized module Hom complex signed evaluation tensorator",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.monoidalClosedHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M N P : ModuleCat R) →\\n      ((CategoryTheory.MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃\\n        (N ⟶ ((CategoryTheory.linearCoyoneda R (ModuleCat R)).obj (Opposite.op M)).obj P)\", \"doc\": \"Let $R$ be a commutative ring. For any $R$-modules $M, N, P$, there is a canonical equivalence between the set of $R$-linear maps from the tensor product $M \\\\otimes_R N$ to $P$, and the set of $R$-lin\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {E : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Category.{v_3, u_3} E]\\n  [inst_3 : CategoryTheory.MonoidalCategory C] [inst_4 : CategoryTheory.MonoidalCategory D]\\n  [inst_5 : Categ\", \"doc\": \"For a monoidal category $\\\\mathcal{C}$ with a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and morphism property $W$, there exists a natural isomorphism between the curried tensor pre-functor\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2, \\\\mathcal{E}$, localizations $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$ and $L_2: \\\\mathcal{C}_2 \\\\to \\\\mathcal{D}_2$ with respect\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] →\\n              {X Y : C} →\\n                {n : ℕ} \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{C})}(X[\"}\n  {\"name\": \"CategoryTheory.Localization.linear\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"(R : Type w) →\\n  [inst : Ring R] →\\n    {C : Type u₁} →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₁} C] →\\n        {D : Type u₂} →\\n          [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n            [inst_3 : CategoryTheory.Preadditive C] →\\n              [inst_4 : CategoryTheory.Preadditive D] →\", \"doc\": \"Given a ring $ R $, a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, and a localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a morphism property $ W $, thi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib comparison; reuse existing evaluation and transpose. Project search found the exact plain coinduction helpers without a definition-node owner; this definition node and equal expressions are required by the immutable-head return."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|moduleHomComplex|signed.*evaluation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib comparison; reuse existing evaluation and transpose. Project search found the exact plain coinduction helpers without a definition-node owner; this definition node and equal expressions are required by the immutable-head return."
+  },
+  {
+   "tool": "grep",
+   "query": "rg coinductionHomComparison|coinductionHomEvaluation|module-hom-complex-derived-comparison lean/WeilConjectures lean/Sheaf dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean:44:def coinductionHomEvaluation {R : Type u} [CommRing R]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean:55:def coinductionHomComparison {R : Type u} [CommRing R]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean:62:      DerivedCategory.Q.map (coinductionHomEvaluation E I))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean:183:                  (eP E I hI).hom = coinductionHomComparison E I) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/AlgebraicShriekDerivedHomAdjunction.lean:185:                  (eA E I hI).hom = coinductionHomComparison E I) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/DerivedBimoduleTensorHom.lean:143:  coinductionHomComparison E ((coinductionComplexFunctor f).obj I) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/DerivedBimoduleTensorHom.lean:507:    have hmodel : IsIso (coinductionHomComparison E ((coinductionComplexFunctor f).obj I)) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-algebraic-shriek-derived-hom-adjunction.json:280:   \"ModuleCat.coinductionHomEvaluation\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-algebraic-shriek-derived-hom-adjunction.json:281:   \"ModuleCat.coinductionHomComparison\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-algebraic-shriek-derived-hom-adjunction.json:289:  \"statement\": \"theorem algebraicShriek_derivedHom_adjunction : ∃ hJ : ∀ (I : CochainComplex (ModuleCat.{u} P) ℤ), I.IsKInjective → ((coinductionComplexFunctor f).obj I).IsKInjective, ∃ eP : ∀ (E I : CochainComplex (ModuleCat.{u} P) ℤ) (_hI : I.IsKInjective), DerivedCategory.Q.obj (CochainComplex.moduleHomComplex E I) ≅ (ihom (DerivedCategory.Q.obj E)).obj (DerivedCategory.Q.obj I), ∃ eA : ∀ (E I : CochainComplex (ModuleCat.{u} A) ℤ) (_hI : I.IsKInjective), DerivedCategory.Q.obj (CochainComplex.moduleHomComplex E I) ≅ (ihom (DerivedCategory.Q.obj E)).obj (DerivedCategory.Q.obj I), ∃ T : ∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ), ((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)) ≅ CochainComplex.moduleHomComplex (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I, ∃ θ : coinductionHomLeft f ≅ coinductionHomRight f, ∃ κ : derivedCoinduction f ⋙ (restrictScalars f).mapDerivedCategory ≅ ihom ((restrictScalars f).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))), (∀ (E I : CochainComplex (ModuleCat.{u} P) ℤ) (hI : I.IsKInjective), (eP E I hI).hom = coinductionHomComparison E I) ∧ (∀ (E I : CochainComplex (ModuleCat.{u} A) ℤ) (hI : I.IsKInjective), (eA E I hI).hom = coinductionHomComparison E I) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (r p q : ℤ) (h : p + r = q) (z : (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)).X r) (x : E.X p), (((T E I).hom.f r z).v p q h) x = (coinductionEvaluation f I).f q ((z.v p q h) x)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (r p q : ℤ) (h : p + r = q) (z : (CochainComplex.moduleHomComplex (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I).X r) (x : E.X p) (a : A), (coinductionEvaluation f I).f q (a • (((T E I).inv.f r z).v p q h) x) = (z.v p q h) (a • x)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (hI : I.IsKInjective), θ.hom.app (op (DerivedCategory.Q.obj E), DerivedCategory.Q.obj I) = (restrictScalars f).mapDerivedCategory.map ((ihom (DerivedCategory.Q.obj E)).map (@derivedCoinductionModel P A _ _ f _ _ I hI).hom) ≫ (restrictScalars f).mapDerivedCategory.map (eA E ((coinductionComplexFunctor f).obj I) (hJ I hI)).inv ≫ (restrictScalars f).mapDerivedCategoryFactors.hom.app (CochainComplex.moduleHomComplex E ((coinductionComplexFunctor f).obj I)) ≫ DerivedCategory.Q.map (T E I).hom ≫ (eP (((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj E) I hI).hom ≫ (MonoidalClosed.pre ((restrictScalars f).mapDerivedCategoryFactors.hom.app E)).app (DerivedCategory.Q.obj I)) ∧ (∀ Y : DerivedCategory (ModuleCat.{u} P), κ.hom.app Y = (restrictScalars f).mapDerivedCategory.map ((MonoidalClosed.unitNatIso.hom.app ((derivedCoinduction f).obj Y)) ≫ (MonoidalClosed.pre (DerivedCategory.singleFunctorObjUnitIso (ModuleCat.{u} A)).hom).app ((derivedCoinduction f).obj Y)) ≫ θ.hom.app (op ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A)), Y)) ∧ (∀ n : ℤ, coinductionHomScalarFormula f θ κ (((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P))⟦n⟧) (((derivedCoinduction f).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P)))⟦n⟧) (coinductionHomShift f ((DerivedCategory.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P)) n))\",\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definitions are plain helpers owned only by a theorem record, not by any definition node. The return explicitly requires a new definition-node module with moved or definitionally equal definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-one-kflat-uncurry-normalization",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting bounded case: Tag 0A68 (2), applied to each pseudo-coherent truncation in the proof of Tag 0A69. Extracted auxiliary argument: Tags 0A60 (lemma-evaluate-and-more, equations alpha and beta), 0A61 (remark-sign-explanation), and 0A67 (lemma-internal-hom-evaluate, representative construction); normalization of the tensor-Hom transpose when only one tensor factor is K-flat. Definition-node ownership of the canonical module Hom representative comparison by localized signed evaluation.",
+   "via": [
+    "lem-trf-module-one-kflat-uncurry-normalization",
+    "lem-trf-double-evaluation-signed-derived-model",
+    "lem-trf-derived-evaluation-pseudocoherent",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleHomComplexDerivedComparison",
+  "declaration": "ModuleCat.moduleHomComplexDerivedComparison",
+  "declarations": [
+   "ModuleCat.moduleHomComplexEvaluation",
+   "ModuleCat.moduleHomComplexDerivedComparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ModuleHomComplexDerivedComparison.lean",
+  "statement": "def moduleHomComplexDerivedComparison {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)] (E I : CochainComplex (ModuleCat.{u} R) ℤ) : DerivedCategory.Q.obj (CochainComplex.moduleHomComplex E I) ⟶ (ihom (DerivedCategory.Q.obj E)).obj (DerivedCategory.Q.obj I)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Required by immutable-head return 037a4012f4e7: definition-node ownership of the plain canonical comparison. The two definitions have exactly the same defining expressions as coinductionHomEvaluation and coinductionHomComparison, with the evaluation name changed in the latter. They import the existing coordinate-characterized evaluation theorem directly, not the coinduction-adjunction theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11f51197",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11f51197",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Clause-by-clause match: R CommRing at ModuleCat.{u}/HasDerivedCategory.{u}; arbitrary U V I; recorded moduleHomComplex and native total tensor with ιTensorObj; [I.IsKInjective]; hflat disjunction of recorded quasiIso.kFlat with no added flatness or boundedness; huncurry ∀ p q x y uses the real projection .v q (q+p) with no sign; c⁻¹ = μ Q U V; tr = curry after DerivedMonoidal.braiding', the Koszul (-1)^{pq} symmetry of lem-sf; j = new def-node ModuleCat.moduleHomComplexDerivedComparison. Hand sign check: both sides equal curry(μ_{V,U} ≫ Q(…)) sending v⊗u to (-1)^{ab}φ(u)(v), so the statement is consistent and true. New def node def-trf-module-hom-complex-derived-comparison (H2 repair of return 037a): ev is the Classical.choose of the landed projective_hom_evaluation_model, pinned by its hypothesis-free coordinate formula, so it is not hollow; j = curry(μ≫Q ev); names absent in live Lean; source and blueprint docstrings present. Item node differs from live only in lean and the added stmt_dep; lean.statement verbatim; only the theorem is sorry. Edge cases (zero complexes, zero ring, unbounded complexes, odd degrees, either K-flat factor) covered. Not compiled (no change). Advisory: the theorem-owned coinductionHom* helpers duplicate the new node-owned definitions."
+ }
+}

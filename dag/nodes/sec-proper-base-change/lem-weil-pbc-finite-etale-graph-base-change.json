@@ -128,5 +128,57 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.finiteEtale_graph_base_change"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.finiteEtale_graph_base_change",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphBaseChange",
+     "lines": [
+      27,
+      106
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p:U\\to Y$, $q:V\\to Y$, and $i:Y_0\\to Y$ be morphisms of schemes [def-pc-scheme], with $q$ finite etale. Form $U_0=U\\times_Y Y_0$, $V_0=V\\times_Y Y_0$, $P=V\\times_Y U$, and $P_0=V_0\\times_{Y_0}U_0$. Write $t:U_0\\to U$, $j:P_0\\to P$ for the canonical maps and $r:P\\to U$, $r_0:P_0\\to U_0$ for the projections. Then the square with maps $(j,r_0,r,t)$ is cartesian. For every $a:U\\to V$ over $Y$, let $a_0:U_0\\to V_0$ be its base change. The image of the graph of $a_0$ is exactly $j^{-1}$ of the image of the graph of $a$.",
+  "proof": [
+   {
+    "text": "*The product square.* Given $a:T\\to P$ and $b:T\\to U_0$ with $r\\circ a=t\\circ b$, the $V$-component of $a$ and the $Y_0$-component of $b$ define a morphism $T\\to V_0$, and together with $b$ a morphism $T\\to P_0$; the projection identities show that it is compatible with $a$ and $b$. Uniqueness follows by checking components on the fibre products $P_0$ and $V_0$. Hence $(j,r_0,r,t)$ is cartesian.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The graph square.* Let $s=(a,\\mathrm{id}_U):U\\to P$ and $s_0=(a_0,\\mathrm{id}_{U_0}):U_0\\to P_0$ be the graph sections. Comparing the two product projections gives $j\\circ s_0=s\\circ t$. Pasting this square with the cartesian product square gives the outer square with identities as horizontal maps, which is cartesian; by cancellation the graph square is cartesian.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Images.* Since $q$ is etale and separated, the section $s$ of the etale projection $r$ is an open immersion. The base change of an open immersion along $j$ is the open subscheme $j^{-1}(s(U))$ of $P_0$, and by the graph square this base change is $s_0$ up to isomorphism. Hence the image of $s_0$ equals $j^{-1}$ of the image of $s$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

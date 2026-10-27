@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-coefficient-etale-chart-comparison",
+ "kind": "statement",
+ "title": "Pro-etale restriction of a supplied etale constant chart",
+ "statement": "Let X be any scheme and B any commutative coefficient ring. Let K be an intrinsic derived object on the coefficient-sized etale site, W an etale model object and M an ordinary B-module cochain complex supplying a local model [def-sfb-coefficient-fixed-derived-models]. For every coefficient-sized pro-etale object V and morphism from its underlying pro-etale object to W viewed as pro-etale, the actual-slice restriction [def-sfb-adic-residue-lift-comparisons] to V of the commutative constant realization [def-sfb-site-derived-constant-module-functor] of Q(M) is isomorphic to the restriction of adicFinitePullback(K). No boundedness, finiteness, covering or stalk hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, supplied local constant models; Pro-etale Cohomology Tag 099R and Modules on Sites Tag 03DJ, inverse image and actual slice restriction."
+ },
+ "stmt_deps": [
+  "def-sfb-coefficient-fixed-derived-models",
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use restriction of scalars along the constant ring unit and its restriction to V. These are exact equivalences, commute sectionwise with actual slice restriction, and identify the commutative constant module functor with fixed-B constant sheaves.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the etale/pro-etale site inclusion over W and its image. The product-preservation square, by taking adjunction mates, identifies fixed-coefficient inverse image followed by restriction with restriction followed by localized inverse image. Restrict further along the supplied V→W. This composite sends a constant sheaf to the constant sheaf on V, naturally in all modules.",
+   "uses": [
+    "lem-sfb-coefficient-finite-local-systems-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified intrinsic comparison commutes with fixed scalars by the normalized comparison on constant scalar sections. Identify its exact localization with adicFinitePullback using the supplied termwise factorization and the fully faithful localization universal property.",
+   "uses": [
+    "lem-pe-coefficient-comparison-fixed-pullback",
+    "lem-sfb-adic-exact-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact localized fixed-coefficient inverse image to the supplied chart isomorphism. Descend all natural comparisons termwise. Both the restriction of the commutative constant model and the restriction of adicFinitePullback(K) become the same constant complex on V. Lift their composite isomorphism back through the fully faithful derived scalar equivalence.",
+   "uses": [
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-sfb-coefficient-finite-local-systems-pullback",
+  "lem-pe-coefficient-comparison-fixed-pullback",
+  "lem-sfb-adic-exact-comparison",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, supplied local constant models; Pro-etale Cohomology Tag 099R and Modules on Sites Tag 03DJ, inverse image and actual slice restriction. Formal assembly uses the existing proved categorical interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with restriction to an object of the slice site and preserves constant module sheaves",
+   "results": "8 hits include module pullback of free objects and pullback composition, no derived literal-slice coefficient chart theorem.",
+   "date": "2026-10-26",
+   "verdict": "Reuse project slice comparison and scalar normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback",
+   "results": "8 hits include sheafAdjunctionContinuous, sheafPullbackIso and sheafFiberComapIso.",
+   "date": "2026-10-26",
+   "verdict": "Component APIs, not the complete coefficient chart comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|sheafPullbackIso|sheafAdjunctionContinuous",
+   "results": "25 hits include module slice pullback, sheaf pullback and adjunction APIs. Repository search finds CoefficientFiniteLocalSystemsPullback and AdicExactComparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse those existing proved comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves commutes with restriction to a slice and preserves constant sheaves of modules",
+   "results": "UNAVAILABLE: service unavailable.",
+   "date": "2026-10-26",
+   "status": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientEtaleDerivedChartAtlas",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 094G, supplied local constant models; Pro-etale Cohomology Tag 099R and Modules on Sites Tag 03DJ, inverse image and actual slice restriction.",
+   "via": [
+    "lem-sfb-coefficient-etale-derived-chart-atlas",
+    "lem-sfb-coefficient-connected-local-stalk-models",
+    "lem-sfb-coefficient-connected-stalk-constant",
+    "lem-sfb-adic-etale-stalk-levels",
+    "lem-sfb-adic-residue-stalk-tower-family",
+    "lem-sfb-adic-finite-reduction-model-family",
+    "lem-sfb-adic-residue-finite-local-models",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEtaleChartComparison",
+  "file": "lean/Sheaf/Paper/CoefficientEtaleChartComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coefficient_etale_chart_comparison",
+  "statement": "theorem coefficient_etale_chart_comparison\n    (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]\n    (K : ConstantCompletion.D\n      (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) B))\n    (W : smallModelComparisonEtaleSite.{u, v} X)\n    (M : CochainComplex (ModuleCat.{max v (u + 1)} B) ℤ)\n    (hM : CoefficientFixedLocalModel (smallModelComparisonEtaleTopology.{u, v} X) B K W M) :\n    letI := HasDerivedCategory.standard (ConstantCompletion.Mod\n      (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B))\n    ∀ (V : coefficientProEtaleSiteModel.{u, v} X),\n      ((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj V ⟶\n        (toProEt X).obj (AsSmall.down.obj W)) →\n      Nonempty ((adicResidueRestriction\n        (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) V).obj\n          ((commutativeSiteDerivedConstantModuleFunctor.{max v (u + 1), max v (u + 1),\n            max v (u + 1), max v (u + 1) + 1}\n            (coefficientProEtaleModelTopology.{u, v} X) B).obj (DerivedCategory.Q.obj M)) ≅\n        (adicResidueRestriction\n          (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) V).obj\n            ((adicFinitePullback.{u, v} X B).obj K))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T130546-L-3475843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T130546-L-3475843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

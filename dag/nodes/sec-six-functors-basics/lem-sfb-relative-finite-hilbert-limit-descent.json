@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-relative-finite-hilbert-limit-descent",
+ "kind": "statement",
+ "title": "Relative object descent for finite Hilbert groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $F:\\mathcal X\\to\\mathcal Y$ be a morphism of stacks in groupoids on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-sfb-stable-pointed-moduli-groupoids]: isomorphism presheaves are sheaves and object descent is effective. Suppose $F$ is representable by algebraic spaces [def-trf-algebraic-space], meaning that for every $S$-scheme $T$ and $y\\in\\mathcal Y(T)$, $\\mathcal X\\times_{\\mathcal Y}h_T$ is an algebraic space $X_y$ over $T$. Assume each $X_y\\to T$ is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. For every integer $d\\geq1$, the map $p_d:\\mathcal H_d(F)\\to\\mathcal Y$ [def-sfb-relative-finite-hilbert-groupoids] has the following relative object-descent property. Let $(T_i)$ be any small nonempty directed inverse system of affine $S$-schemes with limit $T$ and affine transition maps. Given an index $i$, an object $y_i\\in\\mathcal Y(T_i)$, an object $\\xi\\in\\mathcal H_d(F)(T)$ and an isomorphism $\\gamma:p_d(\\xi)\\xrightarrow{\\sim}y_i|_T$, there exist $j\\geq i$, $\\xi_j\\in\\mathcal H_d(F)(T_j)$ and isomorphisms $a:\\xi_j|_T\\xrightarrow{\\sim}\\xi$, $b:p_d(\\xi_j)\\xrightarrow{\\sim}y_i|_{T_j}$ with $b|_T=\\gamma\\circ p_d(a)$. No flatness or surjectivity of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CH (lemma-limit-preserving), with relative object-descent terminology of Tag 06CX (lemma-representable-by-spaces-limit-preserving)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-relative-finite-hilbert-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the index set to $J=\\{j:j\\geq i\\}$. This remains small, nonempty and directed and has the same limit $T$, now viewed over $T_i$. Indeed a cone on the tail extends to an index $k$ by choosing $j\\geq i,k$ and composing its map to $T_j$ with $T_j\\to T_k$; a common upper bound proves independence and compatibility. This construction is inverse to restricting cones. We henceforth work on this tail.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), initial limit datum; elementary verification of restriction to the tail"
+   }
+  },
+  {
+   "text": "Write $\\xi=(Z\\to T,y,x,\\alpha)$ using [def-sfb-relative-finite-hilbert-groupoids]. Set $\\delta=\\alpha\\circ(\\gamma|_Z)^{-1}:y_i|_Z\\xrightarrow{\\sim}F(x)$. Replacing $(y,\\alpha)$ by $(y_i|_T,\\delta)$ gives an object $\\xi'$ and an isomorphism $c:\\xi'\\to\\xi$ with cover map $\\mathrm{id}_Z$, $x$-component $\\mathrm{id}_x$ and $y$-component $\\gamma^{-1}$: its arrow equation is $\\delta=\\alpha\\circ\\gamma^{-1}|_Z$. Let $W=X_{y_i}$, locally finitely presented over $T_i$ by hypothesis. By the explicit represented-fibre convention of [def-sfb-relative-finite-hilbert-groupoids], the assumed representation identifies the fibre groupoid of pairs $(v,\\epsilon:y_i|_V\\xrightarrow{\\sim}F(v))$ with the discrete groupoid $W(V)$, naturally for $V\\to T_i$. Thus $(x,\\delta)$ gives a point of $W(Z)$, or equivalently a map $u:Z\\to W$ by [lem-pc-yoneda] and the sheaf convention [def-trf-algebraic-space]. This uses the given equivalence of fibred groupoids evaluated at $Z$, rather than an assertion about coarse isomorphism classes alone.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-pc-yoneda",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), representing space and the map f_xi; explicit normalization of the prescribed comparison"
+   }
+  },
+  {
+   "text": "The cover $Z\\to T$ is finite, flat and locally finitely presented by [def-pc-finite-locally-free]. The limit $T$ is affine by [lem-weil-pbc-limit-affine-transition]. Affine schemes are qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Since $T$ is affine, [lem-weil-pbc-finite-morphism-permanence](b) makes $Z$ affine. By [lem-weil-pbc-qcqs-morphism-permanence](1) its locally finitely presented structure map to the affine scheme $T$ is of finite presentation. Apply [lem-weil-pbc-finite-presentation-family-descent] to the one-member family $Z\\to T$ and the tail system: all its bases are affine, hence qcqs, and its transition maps are affine. Obtain a finite-presentation qcqs scheme $Z_k\\to T_k$ and a $T$-isomorphism $\\lambda:Z_k\\times_{T_k}T\\xrightarrow{\\sim}Z$, with $k\\geq i$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-presentation-family-descent",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), descent of the cover, first application of limits.tex Tag 01ZM (lemma-descend-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-finite-locally-free] to the tail based at $k$, with $S_0=T_k$, $X_0=Z_k$, $Y_0=T_k$ and $f_0$ the structure map. These three schemes are qcqs, $f_0$ is locally finitely presented, and its limit base change is the given finite locally free cover of degree $d$ via $\\lambda$. We obtain $l\\geq k$ such that $Z_l=Z_k\\times_{T_k}T_l\\to T_l$ is finite locally free of degree $d$. For $j\\geq l$ put $Z_j=Z_l\\times_{T_l}T_j$. Finiteness, flatness and local finite presentation persist by [lem-weil-pbc-finite-morphism-permanence](a), [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3); degree stays $d$ by [lem-weil-pbc-finite-flat-rank-iso](2). The $Z_j$ are affine by [lem-weil-pbc-finite-morphism-permanence](b). By [lem-weil-pbc-scheme-over-limit], this small directed system has affine transition maps and limit $Z_l\\times_{T_l}T\\simeq Z$.",
+   "uses": [
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-weil-pbc-scheme-over-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), descent of the cover with degree d, limits.tex Tag 06AC; formation of its base-change system"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lfp-space-scheme-limit-test] over the base scheme $T_i$ to $W\\to T_i$ and $(Z_j)_{j\\geq l}$. Its source schemes are affine, in particular qcqs, its transitions are affine, and its limit is identified with $Z$ in step 4. The representing map is locally finitely presented by the hypothesis on $F$. The factorization clause gives $j\\geq l$ and a $T_i$-map $u_j:Z_j\\to W$ whose restriction, under $\\lambda$, equals $u$. There is no need for $W$ to be quasi-compact or quasi-separated.",
+   "uses": [
+    "lem-sfb-lfp-space-scheme-limit-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), factorization of f_xi through Z_j, spaces-limits.tex Tag 04AK"
+   }
+  },
+  {
+   "text": "Evaluate the representing equivalence of [def-sfb-relative-finite-hilbert-groupoids] at $Z_j$. The point $u_j$ gives $x_j\\in\\mathcal X(Z_j)$ and $\\alpha_j:y_i|_{Z_j}\\xrightarrow{\\sim}F(x_j)$, so $\\xi_j=(Z_j\\to T_j,y_i|_{T_j},x_j,\\alpha_j)$ is a Hilbert object by [def-sfb-relative-finite-hilbert-groupoids]. Naturality sends its restriction to $u_j|_Z=u$. Full faithfulness of the equivalence with a discrete groupoid therefore lifts this equality to an isomorphism $\\eta:x_j|_Z\\xrightarrow{\\sim}x$ satisfying $F(\\eta)\\circ\\alpha_j|_Z=\\delta$. With the cover identification $\\lambda$ and identity on $y_i|_T$, this is precisely a Hilbert arrow $c':\\xi_j|_T\\to\\xi'$. Set $a=c\\circ c'$ and let $b:p_d(\\xi_j)\\to y_i|_{T_j}$ be the identity. Then $p_d(a)=\\gamma^{-1}$, so $\\gamma\\circ p_d(a)=\\mathrm{id}=b|_T$. The displayed equation also checks the $x$-component of the arrow to $\\xi$, since $F(\\eta)\\alpha_j=\\alpha\\gamma^{-1}|_Z$. Thus both requested isomorphisms and their compatibility are obtained.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CH (lemma-limit-preserving), reconstruction of Xi_j from its point and final compatibility square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "lem-pc-yoneda",
+  "def-trf-algebraic-space",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-sfb-lfp-space-scheme-limit-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CH (lemma-limit-preserving), entire proof, with comparison isomorphisms and fixed-degree descent written explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The finite Hilbert stack over a locally finitely presented representable morphism is limit preserving on objects",
+   "results": "8 hits; AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.instHasFiniteLimitsScheme, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme limit hits concern morphism factorization/equality, not descent of finite locally free covers and objects of the relative Hilbert groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite locally free schemes of fixed degree and their maps into a locally finitely presented algebraic space along filtered affine limits",
+   "results": "8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme limit hits concern morphism factorization/equality, not descent of finite locally free covers and objects of the relative Hilbert groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite Hilbert stack over a locally finitely presented representable morphism is limit preserving on objects",
+   "results": "8 hits; CategoryTheory.Functor.representable_preservesLimits, CategoryTheory.MorphismProperty.isFinitelyPresentable, CategoryTheory.preservesFiniteLimits_of_flat, CategoryTheory.ObjectProperty.isFinitelyPresentable, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, CategoryTheory.PresheafIsFinite, CategoryTheory.flat_of_preservesFiniteLimits, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme limit hits concern morphism factorization/equality, not descent of finite locally free covers and objects of the relative Hilbert groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyOfFinitePresentation\"",
+   "results": "12 hits; AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme limit hits concern morphism factorization/equality, not descent of finite locally free covers and objects of the relative Hilbert groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert.*limit|limit.*hilbert",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme limit hits concern morphism factorization/equality, not descent of finite locally free covers and objects of the relative Hilbert groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert.*limit|limit.*hilbert|relative.*hilbert",
+   "results": "0 logged hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ring finite-presentation factorization, and directed limit/equality results do not state relative Hilbert object descent or the required comparison square; source of FinitePresentation.lean and AffineTransitionLimit.lean inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"FinitePresentation\"",
+   "results": "0 logged hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ring finite-presentation factorization, and directed limit/equality results do not state relative Hilbert object descent or the required comparison square; source of FinitePresentation.lean and AffineTransitionLimit.lean inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite locally free schemes and their maps to locally finitely presented algebraic spaces along directed inverse limits",
+   "results": "8 logged hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ring finite-presentation factorization, and directed limit/equality results do not state relative Hilbert object descent or the required comparison square; source of FinitePresentation.lean and AffineTransitionLimit.lean inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite Hilbert stack for a representable locally finitely presented morphism preserves directed affine limits on objects",
+   "results": "8 logged hits: AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsLocallyDirectedI₀CompFunctorForgetOfIsThin, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.Cover.instIsLocallyDirectedI₀CompFunctorOfLocallyDirectedForget",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ring finite-presentation factorization, and directed limit/equality results do not state relative Hilbert object descent or the required comparison square; source of FinitePresentation.lean and AffineTransitionLimit.lean inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat algebra of constant rank and a morphism from its spectrum to a locally finitely presented algebraic space descend over a filtered colimit of base rings",
+   "results": "8 logged hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Flat.instDescScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ring finite-presentation factorization, and directed limit/equality results do not state relative Hilbert object descent or the required comparison square; source of FinitePresentation.lean and AffineTransitionLimit.lean inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CH (lemma-limit-preserving), with relative object-descent terminology of Tag 06CX (lemma-representable-by-spaces-limit-preserving).",
+   "via": [
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-finite-hilbert-limit-descent",
+  "worker": "stage1",
+  "summary": "Expanded Tag 06CH into six steps using only existing DAG statements. Descended the cover first as a finite-presentation model and then as finite locally free of the same degree; applied the existing algebraic-space continuity lemma to its base-change system. Normalized the specified gamma and recovered the equality b|T = gamma composed with p_d(a) from full faithfulness of the representing equivalence. No statement change and no new nodes. Repair of returned head 274665d3e98: revalidated every cited statement on the current DAG; steps 2 and 6 now explicitly cite the expanded definition for the represented fibre and its compatible arrows. The added lci-subcategory and chart clauses impose no extra hypothesis on H_d(F). Refreshed both definition quotations in citations.json.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CH (lemma-limit-preserving), with relative object-descent terminology of Tag 06CX (lemma-representable-by-spaces-limit-preserving). The six steps realize the Tag 06CH supporting limit argument. Read the current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3); this is its already assigned lower-level moduli prerequisite, not a replacement of the unit route. The ancestor command reports null, which is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-presentation-family-descent",
+    "why": "Generic finite-presentation descent (01ZM) supplies a model of the cover; no theorem in this unit gives that scheme model."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Generic scheme property descent (06AC), including constant degree, upgrades the model; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Generic base-change limit identity (01YZ) identifies the limit of the descended covers; this unit has no replacement."
+   },
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "The general definition of finite locally free degree, required to unpack the Hilbert cover; no replacement definition is introduced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-pc-finite-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-37427a784",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-37427a784 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps; there are no new nodes. This head repairs 274665d3e98, which was reviewed PASS but refused at landing because def-sfb-relative-finite-hilbert-groupoids changed afterwards. Compared with that head, only the step 2 and step 6 texts and split_report changed: they now cite the definition's explicit represented-fibre convention. Statement, stmt_deps, proof_deps and blueprint fields are unchanged. I reread the current definition in full. The H_d objects, arrows, arrow equation F(a)alpha=(h^*alpha')(b|_Z) and p_d are unchanged; the new triple description (t, xi, beta: t^*y = F(xi)) matches the pairs (v, eps: y_i|_V = F(v)) used in steps 2 and 6, with the same orientation; the added L_d/lci clauses are not used. Live and side-live still have the item unsplit and the definition identical to this snapshot. Source: criteria.tex 06CH (lemma-limit-preserving), lines 1997-2080, read in full. Its route (01ZM, then 06AC, then 04AK, then 2-Yoneda) is followed. The source's strict y=y_i|_U is generalized to the 06CX form with gamma: step 2 normalizes delta=alpha*gamma^{-1}|_Z via the arrow c, and step 6 recovers p_d(a)=gamma^{-1} with b=id, so b|_T=gamma*p_d(a). I checked each cited statement against its use: affine limit 01YW; affine schemes qcqs; finite-perm (b) for affine Z; qcqs-perm (1) for fp; family-descent singleton model; descend-finite-locally-free with S0=Y0=T_k, X0=Z_k all qcqs and its degree-d clause; base-change permanences and rank-iso (2) for the degree; scheme-over-limit 01YZ for lim Z_j = Z; lfp-space-scheme-limit-test over T_i, which needs no qcqs hypothesis on W. Edge cases checked: empty T, d=1, nontrivial Aut(y), non-separated W, constant system. proof_deps equals the union of uses, there is no cycle and no SGA citation, and the tool_uses are generic and accepted. Batch-5 flag: lem-sfb-lfp-space-scheme-limit-test reaches def-trf-algebraic-space, already a stmt_dep of the item. The added trf closure is only generic space/scheme foundations (def-trf-scheme-algebraic-space; lfp-fppf-source-locality; fp-fppf-source-algebra; finite-affine-composite-presentation; smooth-composition; etale-descent-through-source-cover; etale-source-smoothness; fppf-covering-base-change). None of these is a step of the trace formula or of Poincare duality, so the cite is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFiniteHilbertLimitDescent",
+  "declaration": "AlgebraicGeometry.RelativeFiniteHilbert.relativeFiniteHilbert_limit_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFiniteHilbertLimitDescent.lean",
+  "statement": "theorem relativeFiniteHilbert_limit_descent {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (F : BasedFunctor X Y) (_hX : IsFppfModuliStack X) (_hY : IsFppfModuliStack Y) (R : ∀ (T : Over S) (y : Functor.Fiber Y.p T), Representative (F := F) T y) (_hlfp : ∀ (T : Over S) (y : Functor.Fiber Y.p T), SpaceProperty (fun _ _ f ↦ LocallyOfFinitePresentation f) (R T y).projection) (d : ℕ+) (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over S) (c : Cone D) (_hc : IsLimit c) [∀ i : I, IsAffine (D.obj (op i)).left] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] (i : I) (yᵢ : Functor.Fiber Y.p (D.obj (op i))) (ξ : Fiber (F := F) (d := d) c.pt) (γ : ξ.val.y.val ⟶ yᵢ.val) (_hγ : Y.p.IsHomLift (c.π.app (op i)) γ) : ∃ (j : I) (hij : i ≤ j) (ξⱼ : Fiber (F := F) (d := d) (D.obj (op j))) (a : ξ.val ⟶ ξⱼ.val) (b : ξⱼ.val.y.val ⟶ yᵢ.val), (base (F := F) (d := d)).IsHomLift (c.π.app (op j)) a ∧ Y.p.IsHomLift (D.map (homOfLE hij).op) b ∧ a.b ≫ b = γ",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Total-category cartesian arrows encode the stated pullback isomorphisms, following RelativeFiniteHilbert.Hom. The Hilbert arrow a encodes the inverse of the requested pullback isomorphism; a.b ≫ b = γ is exactly the prescribed compatibility after cancellation of the cartesian restriction arrow. R fixes the algebraic-space representatives already specified by the definition; only local finite presentation, without flatness or surjectivity, is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9b64771c",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause check of relativeFiniteHilbert_limit_descent against the node and Stacks criteria.tex 06CH (lines 1997ff) and section-limit-preserving (333-365): fppf stacks, fixed Representative family R with SpaceProperty(LocallyOfFinitePresentation) only (no FlatLfp, no flatness, surjectivity or qcqs), d:ℕ+, small nonempty directed I:Type u, affine stages and IsAffineHom transitions, IsLimit cone in Over S. ξ is a Fiber of base; γ, a and b are arrows over c.π_i, c.π_j and D.map(homOfLE). Hom's cartesian square and α-square make a the inverse of the requested a after restriction. I verified by hand that a.b ≫ b = γ ⇔ b|_T = γ∘p_d(a_req). Edge cases: empty T, d=1, constant systems, automorphisms, non-separated spaces. Node equals side-live apart from lean; statement is verbatim in the file; no name collision; imports exist; no new defs; proof is sorry only; docstrings give source, blueprint and the 6 steps; report has both sections. No findings; not recompiled since no file was changed."
+ }
+}

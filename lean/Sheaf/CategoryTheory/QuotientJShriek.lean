@@ -8,9 +8,6 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # The canonical extension-by-zero generator epimorphism
@@ -36,19 +33,14 @@ map corresponding to `s`, followed by the sheafification counit.
 Source: Stacks Project, Lemma 18.28.8 (03EW), clause (3)
 (blueprint: lem-pc-sites-modules-quotient-j-shriek).
 
-Proof: (1) By the free-presheaf adjunction and sheafification adjunction,
-`Hom(j_{U!} R_U,M) = M(U)`: the free generator at the identity maps to `s`,
-and its restriction along `V ⟶ U` maps to the restriction of `s`. This is
-step 1 of the node, using def-weil-extension-by-zero-presheaf and
-def-weil-presheaf-modules-sheafification.
-(2) The pairs form a set; sheafifying the sectionwise direct sum gives their
-coproduct, by lem-weil-pbc-module-sheaves-colimits-forgetful, clause (2).
-Its universal property gives the map with the specified components.
-(3) Each section `t ∈ M(V)` is the image of the identity generator in the
-`(V,t)` summand. The map is thus sectionwise surjective, its sectionwise
-cokernel is zero, and its sheafified cokernel is zero by
-lem-weil-pbc-module-sheaves-colimits-forgetful, clause (1). In the abelian
-category of def-weil-sheaf-of-modules-category it is an epimorphism. -/
+Proof: Mathlib's canonical coproduct of free Yoneda presheaves has a sectionwise
+surjective evaluation map to `M.val`: the identity generator in the `(U,s)` summand
+maps to `s`. Apply module sheafification to this coproduct and its evaluation map.
+As a left adjoint, sheafification preserves both the coproduct and epimorphisms.
+Compose the sheafified evaluation map with the sheafification counit at `M`,
+which is an isomorphism. The component equations follow by functoriality from
+the component equations of the presheaf evaluation map. This is the sheafification
+alternative in the proof of Stacks Project, Tag 03EW, clause (3). -/
 theorem exists_epi_coproduct_jShriek
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J RingCat.{u})
@@ -61,6 +53,16 @@ theorem exists_epi_coproduct_jShriek
         c.inj m ≫ q =
           (PresheafOfModules.sheafification (𝟙 R.obj)).map m.fromFreeYoneda ≫
             (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).counit.app M := by
-  sorry
+  let L := PresheafOfModules.sheafification (𝟙 R.obj)
+  let c := Cofan.mk (L.obj M.val.freeYonedaCoproduct)
+    (fun m : M.val.Elements => L.map (M.val.ιFreeYonedaCoproduct m))
+  refine ⟨c, ?_, L.map M.val.fromFreeYonedaCoproduct ≫
+    (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).counit.app M, ?_, ?_⟩
+  · exact isColimitOfHasCoproductOfPreservesColimit L _
+  · infer_instance
+  · intro m
+    change L.map (M.val.ιFreeYonedaCoproduct m) ≫
+      (L.map M.val.fromFreeYonedaCoproduct ≫ _) = _
+    rw [← Category.assoc, ← L.map_comp, M.val.ι_fromFreeYonedaCoproduct m]
 
 end SheafOfModules

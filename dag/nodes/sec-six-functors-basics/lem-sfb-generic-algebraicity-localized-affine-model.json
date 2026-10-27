@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-generic-algebraicity-localized-affine-model",
+ "kind": "statement",
+ "title": "Generic algebraicity in a localized affine model",
+ "statement": "Let $g:Z\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $s\\in S$, and choose affine opens $V=\\operatorname{Spec}R\\subseteq S$ containing $s$ and $U=\\operatorname{Spec}A\\subseteq Z$ with $g(U)\\subseteq V$ [def-weil-affine-spectrum]. Let $\\mathfrak p\\subset R$ represent $s$, put $B=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pB$ and $C=A\\otimes_R B$ [def-weil-pbc-localization-at-prime]. Assume that for every generic point $\\eta$ of every irreducible component of $Z$ [def-sc-generic-point, def-weil-irreducible-components], the residue extension $\\kappa(g(\\eta))\\subseteq\\kappa(\\eta)$ is algebraic (every element satisfies a nonzero polynomial over the smaller field) [def-weil-residue-field]. Then $A$ is a finite type $R$-algebra and $C$ is a finite type $B$-algebra [def-weil-pbc-finite-type-algebra]; $B$ is local with maximal ideal $\\mathfrak m$, its residue field identifies with $\\kappa(s)$, and $A\\to C$ is localization at the image of $R\\setminus\\mathfrak p$; the canonical map $B\\to\\mathcal O_{S,s}$ is an isomorphism; and $\\operatorname{Spec}C\\cong U\\times_V\\operatorname{Spec}B$ with its canonical projections [def-pc-fibre-product]. Moreover, for every minimal prime $Q'$ of $C$ (a prime containing no strictly smaller prime), its contraction $Q$ to $A$ is a minimal prime disjoint from the image of $R\\setminus\\mathfrak p$, $Q'=QC$, and, writing $q_0=Q\\cap R$ and $q=Q'\\cap B$, one has $q=q_0B$ and $q_0\\subseteq\\mathfrak p$. The canonical isomorphisms $\\kappa(Q)\\cong\\kappa(Q')$ and $\\kappa(q_0)\\cong\\kappa(q)$ commute with the induced residue-field maps, and $\\kappa(q)\\subseteq\\kappa(Q')$ is algebraic. No Noetherian or dimension hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), localization paragraph; affine-local generic-point and minimal-prime transfer made explicit (returned proof steps 1–4)."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\varphi:R\\to A$ for the chart map. Apply [lem-weil-pbc-lft-affine-pairs] to the given affine pair $(U,V)$: $A=R[a_1,\\ldots,a_n]$ for finitely many $a_i$. Every pure tensor in $C$ is a $B$-linear combination of monomials in $a_i\\otimes1$, because its first factor is a polynomial in the $a_i$. Sums of pure tensors give all of $C$, so $C=B[a_1\\otimes1,\\ldots,a_n\\otimes1]$. This proves both finite-type assertions.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize, (1) implies (2); finite generators after tensoring are written out."
+   }
+  },
+  {
+   "text": "Put $T=R\\setminus\\mathfrak p$ and $W=\\varphi(T)\\subset A$. Apply [lem-weil-pbc-localization-tensor-over-base] with base ring and algebra both $R$, multiplicative set $T$, module $M=R$ and module $N=A$. It identifies $B\\otimes_R A$ with $T^{-1}A$ as modules, taking $(r/t)\\otimes a$ to $\\varphi(r)a/\\varphi(t)$. Flip the tensor factors to obtain $C\\to W^{-1}A$, $a\\otimes(r/t)\\mapsto a\\varphi(r)/\\varphi(t)$. This is multiplicative and sends $1$ to $1$, as checked on pure tensors; its inverse is $a/\\varphi(t)\\mapsto(a\\otimes1)(1\\otimes(1/t))$. Thus $A\\to C$, $a\\mapsto a\\otimes1$, satisfies the three localization properties of [lem-weil-pbc-localization-prime-residue-field-iso]. This also covers $0\\in W$, when both rings are zero.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization: apply to the R-module A, with tensor symmetry; the multiplicative formula is checked explicitly."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-localization-at-prime], $B$ is local with maximal ideal $\\mathfrak m=\\mathfrak pB$ and residue field $\\kappa_R(\\mathfrak p)$. Apply [lem-weil-pbc-affine-open-stalk-localization] to $(S,V,s)$. Its canonical isomorphism is $B\\to\\mathcal O_{S,s}$, $r/t\\mapsto r_s/t_s$; it identifies maximal ideals and hence identifies $B/\\mathfrak m$ with $\\kappa(s)$. Apply [lem-weil-pbc-fibre-product-affine-spectra] to $R\\to A$ and $R\\to B$. Its inverse gives $\\operatorname{Spec}C\\cong U\\times_V\\operatorname{Spec}B$, and the two projections are induced by $a\\mapsto a\\otimes1$ and $b\\mapsto1\\otimes b$, as required.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves, (6)), 01HF (example-open-subspace), 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines)."
+   }
+  },
+  {
+   "text": "Let $Q'$ be a minimal prime of $C$ and let $Q$ be its contraction to $A$. The prime correspondence in [lem-weil-pbc-localization-prime-residue-field-iso](1), applied to step 2, gives $Q\\cap W=\\emptyset$ and $Q'=QC$. If $P\\subseteq Q$ is any prime of $A$, it too avoids $W$, so the same correspondence gives a prime $PC\\subseteq QC=Q'$. Minimality gives $PC=Q'$, and contraction then gives $P=Q$. Thus $Q$ is minimal in $A$. Put $q_0=\\varphi^{-1}(Q)$ and $q=(B\\to C)^{-1}(Q')$. The tensor square commutes, so the contraction of $q$ to $R$ is $q_0$. Since $Q$ avoids $W$, $q_0$ avoids $T$, equivalently $q_0\\subseteq\\mathfrak p$. Apply the same prime correspondence to $R\\to B=T^{-1}R$: $q=q_0B$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization: contraction and extension are inverse, with inclusion preserved by extension."
+   }
+  },
+  {
+   "text": "The component theorem [lem-weil-pbc-spec-irreducible-components-minimal-primes] makes $V(Q)$ an irreducible component of $U=\\operatorname{Spec}A$. The closure of $\\{Q\\}$ in $U$ is $V(Q)$: a closed $V(I)$ contains $Q$ exactly when $I\\subseteq Q$. Let $\\eta$ be this point in $Z$, and put $D=\\overline{\\{\\eta\\}}$ in $Z$. The closure of a singleton is irreducible, and $D\\cap U=V(Q)$. If an irreducible closed subset $E\\subseteq Z$ contains $D$, then $E\\cap U$ is nonempty, open in $E$, irreducible and dense in $E$. Indeed any two nonempty relatively open subsets of an irreducible space meet, which proves both irreducibility and density of a nonempty open subset. Maximality of $V(Q)$ inside $U$ forces $E\\cap U=V(Q)$, and density yields $E=\\overline{E\\cap U}=\\overline{V(Q)}=D$. Consequently $D$ is an irreducible component of $Z$ and $\\eta$ is its generic point. This argument does not require a finite or locally finite component family.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES, lemma-irreducible, (1) and (3); extension of the component through an open chart is proved from irreducibility."
+   }
+  },
+  {
+   "text": "Let $y=g(\\eta)$. Its prime on $V$ is $q_0$: the map of affine spectra sends a prime to its contraction. The germ isomorphisms of [lem-weil-pbc-affine-open-stalk-localization] identify $\\mathcal O_{S,y}$ with $R_{q_0}$ and $\\mathcal O_{Z,\\eta}$ with $A_Q$. Under these identifications the stalk map of $g$ sends $r/t$ to $\\varphi(r)/\\varphi(t)$, since it sends a section germ $r_y$ to the germ $\\varphi(r)_\\eta$ and preserves inverses. Taking quotients by maximal ideals therefore identifies the residue extension $\\kappa(y)\\to\\kappa(\\eta)$ with $\\kappa_R(q_0)\\to\\kappa_A(Q)$, by [def-weil-residue-field]. The hypothesis applies to the generic point produced in step 5, so this last extension is algebraic.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, (6), and Tag 01HB, definition-locally-ringed-space: compute the stalk map on section germs and inverses."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-prime-residue-field-iso](3) to $A\\to C$ and to $R\\to B$. It gives field isomorphisms $\\alpha:\\kappa_A(Q)\\to\\kappa_C(Q')$ and $\\beta:\\kappa_R(q_0)\\to\\kappa_B(q)$ induced by the localization maps. If $h$ and $h'$ denote the residue maps before and after localization, then $\\alpha h=h'\\beta$: on the class of $r/t\\in R_{q_0}$ both sides are the class of $(\\varphi(r)\\otimes1)/(\\varphi(t)\\otimes1)$ in $\\kappa_C(Q')$. Such classes represent every element of $\\kappa_R(q_0)$, so this proves the full square commutes. Given $z\\in\\kappa_C(Q')$, choose a nonzero polynomial $\\sum_i c_iX^i$ over $\\kappa_R(q_0)$ annihilating $\\alpha^{-1}(z)$, by step 6. Then $\\sum_i\\beta(c_i)X^i$ is nonzero, since $\\beta$ is injective, and annihilates $z$ by the square. Hence $\\kappa_B(q)\\to\\kappa_C(Q')$ is algebraic. All clauses are proved without a Noetherian or dimension assumption.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, and Tag 00C9, item-localization-localization; residue compatibility and polynomial transport are written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, localization paragraph; affine algebra and generic-point transfer expanded using Tags 01T2, 00DK, 00E3, 00ES, 01HV and 01I4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic algebraicity at irreducible component points of a scheme transfers to minimal primes of an affine chart after localization at a target prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsIntegral X] {U : X.Opens}\\n  (hU : AlgebraicGeometry.IsAffineOpen U) [h : Nonempty ↥↑U],\\n  hU.primeIdealOf ⟨genericPoint ↥X, ⋯⟩ = genericPoint ↥(AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op U)))\", \"doc\": \"For an integral scheme $X$ and an affine open subset $U \\\\subseteq X$, the prime ideal associated with the generic point of $X$ in the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(U, \\\\mathcal{O}_X))$ coin\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (R : CommRingCat) [inst : IsDomain ↑R], genericPoint ↥(AlgebraicGeometry.Spec R) = ⊥\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the generic point of its prime spectrum $ \\\\operatorname{Spec}(R) $ coincides with the zero ideal $ (0) $, which is the minimal element in the\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [hX : IrreducibleSpace ↥X]\\n  [inst : IrreducibleSpace ↥Y], (CategoryTheory.ConcreteCategory.hom f.base) (genericPoint ↥X) = genericPoint ↥Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"PrimeSpectrum.quasiSober\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], QuasiSober (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-sober topological space. This means that every irreducible closed subset of $\\\\\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"{α : Type u_1} → [inst : TopologicalSpace α] → [QuasiSober α] → ↑(irreducibleComponents α) → ↑(genericPoints α)\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_eq_map_closedPoint\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (x : ↥U),\\n  hU.primeIdealOf x =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.presheaf.germ U ↑x ⋯)).base)\\n      (IsLocalRing.closedPoint ↑(X.presheaf.stalk ↑x))\", \"doc\": \"For a point $ x $ in an affine open subset $ U $ of a scheme $ X $, the prime ideal corresponding to $ x $ in $ U $ is equal to the image of the closed point (maximal ideal) of the local ring at $ x $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalization.minimalPrimes_map/comap handle minimal primes but do not identify both residue-field maps or transfer the generic algebraicity of an arbitrary scheme through an affine chart. Scheme generic-point hits concern integral/irreducible spaces. These are constituent tools, not this combined localized model statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization and affine open restriction preserve algebraic residue field extensions at minimal primes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"minimalPrimes\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \" {R : Type u_5} [CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_6) [CommSemiring S] [Algebra R S] [IsLocalization.AtPrime S p] : Subsingleton (PrimeSpectrum S)\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.minimalPrimes_map\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \" {R : Type u_1} [CommSemiring R] (S : Submonoid R) (A : Type u_2) [CommSemiring A] [Algebra R A] [IsLocalization S A] (J : Ideal R) : (Ideal.map (algebraMap R A) J).minimalPrimes = Ideal.under R ⁻¹' J.minimalPrimes\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \" {R : Type u_1} [CommSemiring R] (A : Type u_2) [CommSemiring A] [Algebra R A] (q : Ideal R) [hqp : q.IsPrime] [IsLocalization.AtPrime A q] (I : Ideal R) (hIq : q ∈ I.minimalPrimes) : (Ideal.map (algebraMap R A) I).radical = Ideal.map (algebraMap R A) q\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.minimalPrimes_comap\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \" {R : Type u_1} [CommSemiring R] (S : Submonoid R) (A : Type u_2) [CommSemiring A] [Algebra R A] [IsLocalization S A] (J : Ideal A) : (Ideal.comap (algebraMap R A) J).minimalPrimes = Ideal.comap (algebraMap R A) '' J.minimalPrimes\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalization.minimalPrimes_map/comap handle minimal primes but do not identify both residue-field maps or transfer the generic algebraicity of an arbitrary scheme through an affine chart. Scheme generic-point hits concern integral/irreducible spaces. These are constituent tools, not this combined localized model statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(minimalPrimes|minimalPrime).*(localiz|IsLocalization)|(localiz|IsLocalization).*(minimalPrimes|minimalPrime)",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization\"}\n  {\"file\": \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"line\": \"168\", \"text\": \"lemma Ring.KrullDimLE.of_isLocalization (p : Ideal R) (hp : p ∈ minimalPrimes R)\"}\n  {\"file\": \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"line\": \"171\", \"text\": \"  have := IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes p hp S\"}\n  {\"file\": \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"line\": \"115\", \"text\": \"  · rwa [IsLocalization.minimalPrimes_map p.primeCompl (Localization.AtPrime p) I,\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"line\": \"203\", \"text\": \"        rw [← Set.mem_preimage, ← IsLocalization.minimalPrimes_map p.primeCompl, map_span] at hp\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"line\": \"475\", \"text\": \"lemma IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"23\", \"text\": \"- `IsLocalization.minimalPrimes_comap`: If `A` is a localization of `R` with respect to the\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"26\", \"text\": \"- `IsLocalization.minimalPrimes_map`: If `A` is a localization of `R` with respect to the\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"180\", \"text\": \"theorem IsLocalization.minimalPrimes_map [IsLocalization S A] (J : Ideal R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"205\", \"text\": \"theorem IsLocalization.minimalPrimes_comap [IsLocalization S A] (J : Ideal A) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"line\": \"211\", \"text\": \"theorem IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean\", \"line\": \"27\", \"text\": \"`Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean\", \"line\": \"33\", \"text\": \"assert_not_exists Localization -- See `Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean`\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Height.lean\", \"line\": \"410\", \"text\": \"  simp only [IsLocalization.minimalPrimes_comap S A, iInf_image]\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Dedekind.lean\", \"line\": \"43\", \"text\": \"      IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes (Localization.AtPrime q) q,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalization.minimalPrimes_map/comap handle minimal primes but do not identify both residue-field maps or transfer the generic algebraicity of an arbitrary scheme through an affine chart. Scheme generic-point hits concern integral/irreducible spaces. These are constituent tools, not this combined localized model statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme map and an affine source target chart at s, base change to the local ring at s is finite type and its minimal primes have algebraic residue extensions when all source component generic residue extensions are algebraic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalization.minimalPrimes_map/comap handle minimal primes but do not identify both residue-field maps or transfer the generic algebraicity of an arbitrary scheme through an affine chart. Scheme generic-point hits concern integral/irreducible spaces. These are constituent tools, not this combined localized model statement."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes_(map|comap)|residueField.*(iso|equiv)|residue.*[Ll]ocaliz",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/Padics/RingHoms.lean; Mathlib/NumberTheory/RamificationInertia/Galois.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give separate localization, stalk or residue-map tools, not the combined assertion for arbitrary component generic points and compatible base and source residue fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine base change to the local ring of the target preserves algebraic residue field extensions at component generic points",
+   "results": "[leansearch] OK 8 hit(s); RingHom.IsStableUnderBaseChange.of_isLocalization; RingHom.IsStableUnderBaseChange; AlgebraicGeometry.Scheme.Hom.residueFieldMap; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange; AlgebraicGeometry.LocallyRingedSpace.residueFieldMap",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give separate localization, stalk or residue-map tools, not the combined assertion for arbitrary component generic points and compatible base and source residue fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"minimalPrimes\"",
+   "results": "[loogle] OK 4 hit(s); IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes; IsLocalization.minimalPrimes_map; IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes; IsLocalization.minimalPrimes_comap",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give separate localization, stalk or residue-map tools, not the combined assertion for arbitrary component generic points and compatible base and source residue fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes, algebraic residue field extensions at generic points remain algebraic on minimal primes of any affine chart localized at a prime of the base",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; instIsAlgebraicResidueFieldOfIsIntegral; AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; Algebra.instFiniteResidueFieldOfQuasiFiniteAt; RingHom.EssFiniteType.residueFieldMap; AlgebraicGeometry.Scheme.instOverSpecResidueField; Algebra.QuasiFinite.instResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give separate localization, stalk or residue-map tools, not the combined assertion for arbitrary component generic points and compatible base and source residue fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a localization are minimal primes of the original ring avoiding denominators, and residue fields commute with localization and with affine open restriction",
+   "results": "[leanfinder] OK 8 hit(s); IsLocalization.minimalPrimes_map; IsLocalization.minimalPrimes_comap; IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes; AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'; AlgebraicGeometry.IsAffineOpen.isLocalization_stalk; IsLocalization.isLocalization_atPrime_localization_atPrime; AlgebraicGeometry.IsAffineOpen.primeIdealOf; AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give separate localization, stalk or residue-map tools, not the combined assertion for arbitrary component generic points and compatible base and source residue fields."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0AB6, lemma-quasi-finite-in-codim-1, condition (1); its application in Tag 0AB7, lemma-finite-in-codim-1, supplies the codimension-one route in 0BFP(2).; Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), localization paragraph; affine-local generic-point and minimal-prime transfer made explicit (returned proof steps 1–4).",
+   "via": [
+    "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-algebraicity-localized-affine-model",
+  "worker": "stage1",
+  "summary": "Q143 checked the full statement, project source, current blueprint, Stacks sources and existing DAG tools. Seven explicit steps prove finite generation, tensor localization, the canonical stalk and fibre-product identifications, minimal-prime transfer, component-generic transfer through an open chart and commuting residue-field squares. All auxiliary results already have nodes; no new nodes. Statement unchanged.",
+  "blueprint": "Preserves the inherited from.place and via chain: the Tag 0AB6 affine-localization prerequisite below the historical direct-image alteration route. The current latest direct-images proof (3) packages this route through compactification and the direct-image theorem; this split only proves the assigned algebraic prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic commutative algebra tool for localization prime correspondence and residue-field isomorphisms, independent of any base-change proof route; no statement of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-52f4c8091",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-52f4c8091 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement and stmt_deps match live (unsplit, no repair note), and there are no new nodes. Source checked: Stacks varieties.tex Tag 0AB6 (lemma-quasi-finite-in-codim-1), proof of case (2), the localization and minimal-prime reduction. Step 1: lft-affine-pairs applies since g(U)⊆V; C=B[a_i⊗1]. Step 2: the tensor-localization leaf with algebra R, M=R, N=A gives C≅W^{-1}A; a ring check and an inverse are given, and 0∈W is covered. Step 3: def-localization-at-prime, clause (c) of the stalk lemma, and the fibre-product leaf with both projections. Step 4: the prime correspondence (1) gives minimality of Q, q∩R=q_0 from the commuting square, q_0⊆p, and q=q_0B. Step 5: V(Q) is a component of U, and density of the open E∩U makes closure{η} a component of Z. Only closed E is treated, but the closure of an irreducible set is irreducible, so this is accepted as elementary. Step 6: by clause (c) at y and at η, the stalk map is local, so the prime of y is q_0 and the residue extension is κ_R(q_0)→κ_A(Q). Step 7: I checked the residue square on r/t, and the polynomial carried over by β stays nonzero. Tested on ℤ→ℤ×F_2 at p=0 and on ℤ[x]/(2x), where the hypothesis fails. No Noetherian assumption is used. No duplicate node found with rg -L, and there is no SGA citation. proof_deps equals the union of uses. The tool use of lem-weil-pbc-localization-prime-residue-field-iso (generic localization algebra from sk-thm-p1) is accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericAlgebraicityLocalizedAffineModel",
+  "declaration": "AlgebraicGeometry.generic_algebraicity_localized_affine_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericAlgebraicityLocalizedAffineModel.lean",
+  "statement": "theorem generic_algebraicity_localized_affine_model {Z S : Scheme.{u}} (g : Z ⟶ S) [LocallyOfFiniteType g] (R A : CommRingCat.{u}) [Algebra R A] (i : Spec A ⟶ Z) (j : Spec R ⟶ S) [IsOpenImmersion i] [IsOpenImmersion j] (hchart : i ≫ g = Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ j) (p : PrimeSpectrum R) (hgeneric : ∀ (D : Set Z), D ∈ irreducibleComponents Z → ∀ (η : Z), IsGenericPoint η D → @Algebra.IsAlgebraic (S.residueField (g η)) (Z.residueField η) _ _ (g.residueFieldMap η).hom.toAlgebra) : (algebraMap R A).FiniteType ∧ ((Algebra.TensorProduct.includeRight (R := R) (A := A) (B := Localization.AtPrime p.asIdeal)).toRingHom).FiniteType ∧ IsLocalRing (Localization.AtPrime p.asIdeal) ∧ Ideal.map (algebraMap R (Localization.AtPrime p.asIdeal)) p.asIdeal = IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ∧ IsLocalization (p.asIdeal.primeCompl.map (algebraMap R A)) (A ⊗[R] Localization.AtPrime p.asIdeal) ∧ IsIso ((Spec.stalkIso R p).inv ≫ inv (j.stalkMap p)) ∧ (∃ ρ : CommRingCat.of p.asIdeal.ResidueField ≅ S.residueField (j p), CommRingCat.ofHom (IsLocalRing.residue (Localization.AtPrime p.asIdeal)) ≫ ρ.hom = ((Spec.stalkIso R p).inv ≫ inv (j.stalkMap p)) ≫ S.residue (j p)) ∧ (∃ e : Spec (CommRingCat.of (A ⊗[R] Localization.AtPrime p.asIdeal)) ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)))), e.hom ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (algebraMap A (A ⊗[R] Localization.AtPrime p.asIdeal))) ∧ e.hom ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight (R := R) (A := A) (B := Localization.AtPrime p.asIdeal)).toRingHom)) ∧ ∀ (Q' : PrimeSpectrum (A ⊗[R] Localization.AtPrime p.asIdeal)), Q'.asIdeal ∈ minimalPrimes (A ⊗[R] Localization.AtPrime p.asIdeal) → ∃ (Q : PrimeSpectrum A) (q₀ : PrimeSpectrum R) (q : PrimeSpectrum (Localization.AtPrime p.asIdeal)), ∃ (hQ : Q.asIdeal = Q'.asIdeal.comap (algebraMap A (A ⊗[R] Localization.AtPrime p.asIdeal))) (hq₀ : q₀.asIdeal = Q.asIdeal.comap (algebraMap R A)) (hq : q.asIdeal = Q'.asIdeal.comap (Algebra.TensorProduct.includeRight (R := R) (A := A) (B := Localization.AtPrime p.asIdeal)).toRingHom) (hbase : q₀.asIdeal = q.asIdeal.comap (algebraMap R (Localization.AtPrime p.asIdeal))), Q.asIdeal ∈ minimalPrimes A ∧ Disjoint (p.asIdeal.primeCompl.map (algebraMap R A) : Set A) (Q.asIdeal : Set A) ∧ Ideal.map (algebraMap A (A ⊗[R] Localization.AtPrime p.asIdeal)) Q.asIdeal = Q'.asIdeal ∧ Ideal.map (algebraMap R (Localization.AtPrime p.asIdeal)) q₀.asIdeal = q.asIdeal ∧ q₀.asIdeal ≤ p.asIdeal ∧ ∃ (α : Q.asIdeal.ResidueField ≃+* Q'.asIdeal.ResidueField) (β : q₀.asIdeal.ResidueField ≃+* q.asIdeal.ResidueField), α.toRingHom = Ideal.ResidueField.map Q.asIdeal Q'.asIdeal (algebraMap A (A ⊗[R] Localization.AtPrime p.asIdeal)) hQ ∧ β.toRingHom = Ideal.ResidueField.map q₀.asIdeal q.asIdeal (algebraMap R (Localization.AtPrime p.asIdeal)) hbase ∧ α.toRingHom.comp (Ideal.ResidueField.map q₀.asIdeal Q.asIdeal (algebraMap R A) hq₀) = (Ideal.ResidueField.map q.asIdeal Q'.asIdeal (Algebra.TensorProduct.includeRight (R := R) (A := A) (B := Localization.AtPrime p.asIdeal)).toRingHom hq).comp β.toRingHom ∧ @Algebra.IsAlgebraic q.asIdeal.ResidueField Q'.asIdeal.ResidueField _ _ (Ideal.ResidueField.map q.asIdeal Q'.asIdeal (Algebra.TensorProduct.includeRight (R := R) (A := A) (B := Localization.AtPrime p.asIdeal)).toRingHom hq).toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The open affine charts are presented by open immersions i : Spec A → Z and j : Spec R → S, with the chart square hchart. The point s is j p; p ranges over all points in the target chart. C is the literal tensor product. Both residue-field equivalences are required to equal the canonical Ideal.ResidueField.map and the square commutes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da36822a4",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only the lean record changed; the statement matches the file verbatim, with one sorry. Clause-by-clause match: chart square fixes the map R→A; B=R_p and C=A⊗_R B literal; hgeneric over components and generic points via residueFieldMap, no stronger; both finite-type clauses use the correct maps; local ring with maximal ideal pB; residue iso ρ pinned through the canonical B→O_{S,s} (Spec.stalkIso.inv then inv stalkMap); IsLocalization at φ(R∖p); Spec C ≅ pullback with both projections pinned; minimal-prime clause with Q, q₀, q pinned by contraction equalities, hbase a true conclusion; α and β equal Ideal.ResidueField.map, with the commuting square and algebraicity on the canonical map. Edge cases (empty source, C=0, R=0, non-reduced) covered; single universe u forced. All 9 stmt_dep records used as recorded; the extra import is a proof_dep module. Docstrings carry Tag 0AB6, the blueprint id and the 7 steps. No SGA, no pro-étale. Advisory only: the IsIso clause is true by construction, matching the node's canonical-iso clause."
+ }
+}

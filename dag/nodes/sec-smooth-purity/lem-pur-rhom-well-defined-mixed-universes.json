@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-rhom-well-defined-mixed-universes",
+ "kind": "lemma",
+ "title": "Hom-complex quasi-isomorphism invariance with an independent smaller ring universe",
+ "statement": "Let C : Type u be a category with morphisms in Type v, J a Grothendieck topology on C, and R a sheaf of commutative rings in Type r. Set m=max(u,v,r). Assume abelian sheafification and its locally bijective characterization on J in universe m, and assume forgetting commutativity sends R to a ring sheaf. Let I',I,L',L be integer-indexed cochain complexes of R-modules [def-pc-cochain-complex-modules] whose sections lie in Type m. Suppose I' and I are K-injective [def-pur-kinjective-complex], and s:I'→I and t:L'→L are quasi-isomorphisms [def-pc-quasi-iso-modules]. Then the Hom-complex map [def-pur-hom-complex] from Hom(L,I') to Hom(L',I) given by f↦s f t is a quasi-isomorphism. The coefficient ring itself stays in universe r; no enlargement of its sections is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A95 (lemma-RHom-well-defined), Lemma 0A94 (lemma-RHom-into-K-injective), and Equation 0A8Y; exact localized extension from sites-modules.tex, Tags 03DI and 03DJ."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to C/U is exact: its composite with the exact conservative underlying-abelian-sheaf functor is the underlying sheaf restriction, which preserves finite limits and finite colimits. It preserves K-injectives because the explicit sheafified direct-sum extension is an exact additive left adjoint (siteModuleExtensionByZero_exact); apply Adjunction.preservesKInjectiveComplexes.",
+   "uses": [
+    "lem-sp-module-extension-zero-independent-ring",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The product projections of homComplex identify sections in degree n over U with all degree-n cochains between the restricted complexes. Evaluation preserves the product cone. The differential projection formula gives d_I f - (-1)^n f d_L, which equals the external Hom-complex differential. Consequently these additive degreewise equivalences form an isomorphism of complexes. The resulting equivalences on cycles and homology send a cocycle to its shifted chain map and its homotopy class. The projection formula for homComplexFunctor maps sends the family f to s f t, so the comparison is natural in arbitrary s and t.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted K-injective targets remain K-injective after integer shift. CochainComplex.IsKInjective.Qh_map_bijective identifies both homotopy-category Hom sets with derived-category Hom sets. Exact restriction preserves s and t; their shifted and unshifted quotient images are inverted by Qh. For an arbitrary functor with bijective maps on the two Hom sets, invertibility of the images of t and s implies that composition k↦tks is bijective: compose with the functor, use composition with inverse images in the codomain, then reflect bijectivity. Apply this generic fact to Qh and the natural sectionwise homology comparison.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-weil-abstract-derived-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underlying abelian presheaf map is a quasi-isomorphism because evaluation is exact and detects homology isomorphisms. Exact abelian sheafification preserves this quasi-isomorphism; its counit identifies the sheafified presheaf complexes with the original underlying abelian sheaf complexes. The exact conservative functor from module sheaves to abelian sheaves reflects quasi-isomorphisms. This gives the asserted module-sheaf quasi-isomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-module-extension-zero-independent-ring",
+  "lem-sf-site-perfect-restriction-exact",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-quasi-iso-modules",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "0A95 and 0A94; adapts the sectionwise proof with independent ring and module-section sizes. Uses Qh directly on homotopy-category morphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of sheaves of modules preserves quasi-isomorphisms into K-injectives",
+   "results": "8 hits including HomologicalComplex.quasiIso_map_of_preservesHomology, CategoryTheory.sheafHom, CochainComplex.isKInjective_of_iso; no sheaf Hom-complex theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use exact-functor and K-injective APIs; prove the mixed-universe sheaf Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf Hom complex sends quasi-isomorphisms of K-injective complexes to quasi-isomorphisms with a smaller coefficient ring universe",
+   "results": "8 hits including CochainComplex.IsKInjective.Qh_map_bijective and DerivedCategory.isIso_Q_map_iff_quasiIso; no mixed-universe sheaf Hom assertion.",
+   "date": "2026-10-25",
+   "verdict": "Use the K-injective localization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "12 hits including Qh comparison infrastructure, homotopyZero and eq_δ_of_cocycle; no sheaf-valued Hom invariance.",
+   "date": "2026-10-25",
+   "verdict": "Use Mathlib K-injectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*quasiIso|quasiIso.*homComplex",
+   "results": "Search service returned 0 Mathlib hits; repository search found quasiIso_homComplex_mapOfUniverses, which forces the ring universe to max u v r.",
+   "date": "2026-10-25",
+   "verdict": "The independent smaller ring companion is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomMixedUniverses",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Internal Hom construction: quasi-isomorphism invariance needed to descend the Hom complex to the derived category.",
+   "via": [
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.QuasiIsoHomComplexMapMixedUniverses",
+  "file": "lean/Sheaf/Algebra/Homology/QuasiIsoHomComplexMapMixedUniverses.lean",
+  "declaration": "CategoryTheory.quasiIso_homComplex_mapMixedUniverses",
+  "statement": "theorem quasiIso_homComplex_mapMixedUniverses\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [HasSheafify J AddCommGrpCat.{max u v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]\n    {R : Sheaf J CommRingCat.{r}}\n    {I' I L' L : CochainComplex\n      (SheafOfModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ}\n    (s : I' ⟶ I) (t : L' ⟶ L) [I'.IsKInjective] [I.IsKInjective]\n    [QuasiIso s] [QuasiIso t] :\n    QuasiIso (((homComplexFunctor (R := R)).map t.op).app I' ≫\n      ((homComplexFunctor (R := R)).obj (op L')).map s)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261024T233301-L-2447538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261024T233301-L-2447538",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

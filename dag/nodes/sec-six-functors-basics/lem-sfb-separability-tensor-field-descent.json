@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-separability-tensor-field-descent",
+ "kind": "statement",
+ "title": "Separability descends from a tensor field after scalar extension",
+ "statement": "Let $k\\subseteq k'$ and $k\\subseteq F$ be field extensions [def-pc-field-extension]. Suppose that the commutative tensor algebra $F\\otimes_k k'$ [def-weil-pbc-module-tensor-product], with multiplication $(a\\otimes b)(c\\otimes d)=ac\\otimes bd$, is a field and is separable over $k'$ in the possibly transcendental sense of [def-weil-pbc-separable-field-extension]: every intermediate field finitely generated over $k'$ is separably generated. Then $F/k$ is separable in that same sense. Neither extension is assumed algebraic or finitely generated.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 030U, lemma-separable-extension-preserves-reducedness, and 030W, lemma-characterize-separable-field-extensions; faithful extension of scalars and a common extension field give the stated descent corollary. Applies to the corrected tensor-field identification in more-algebra.tex Tag 09II, proposition-epp-essentially-finite-type."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=F\\otimes_k k'$, with its given field structure. If $\\operatorname{char}k=0$, [lem-weil-pbc-char-zero-field-extension-separable] applied to $F/k$ proves the conclusion. Henceforth let $\\operatorname{char}k=p>0$; since $k$ is a field, $p$ is prime.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TX, lemma-characteristic-zero-local-smooth, first sentence of proof; characteristic-zero branch separated from Tag 030W"
+   }
+  },
+  {
+   "text": "Fix any field extension $L/k$. Apply [lem-weil-common-extension-fields] to $L/k$ and $k'/k$, obtaining a field $M$ and compatible $k$-embeddings $i:L\\to M$ and $j:k'\\to M$. Regard $M$ as a $k'$-algebra through $j$. No embedding of either $L$ or $k'$ into the other is being assumed.",
+   "uses": [
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0H7K, lemma-common-extension-field, statement"
+   }
+  },
+  {
+   "text": "We show that $T\\otimes_{k'}M$ is reduced. A nilpotent $x$ is a finite sum $\\sum_r t_r\\otimes m_r$ by [def-weil-pbc-module-tensor-product]. Let $E=k'(t_1,\\ldots,t_s)\\subseteq T$. The separability hypothesis on $T/k'$, using [def-weil-pbc-separable-field-extension] (2), says precisely that $E/k'$ is separably generated. The field $M$ is reduced, so [lem-weil-pbc-separably-generated-tensor-reduced] gives reducedness of $E\\otimes_{k'}M$. Its map into $T\\otimes_{k'}M$ is injective: $M$ is flat over $k'$ by [lem-weil-pbc-module-over-field-flat], and [lem-trf-flat-tensor-preserves-injection] applies to the inclusion $E\\hookrightarrow T$ (interchanging tensor factors by $e\\otimes m\\mapsto m\\otimes e$). The element $y=\\sum_r t_r\\otimes m_r$ in this smaller tensor ring maps to $x$. If $x^n=0$ for $n>0$, injectivity gives $y^n=0$, hence $y=0$ by reducedness and $x=0$. This proves the claim without assuming that $T/k'$ is finitely generated or separably generated.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U, lemma-separable-extension-preserves-reducedness, separable case: reduction to finitely generated subextensions; explicit finite-tensor argument"
+   }
+  },
+  {
+   "text": "There is a ring isomorphism $\\Phi:T\\otimes_{k'}M\\to F\\otimes_k M$ given by $\\Phi((a\\otimes b)\\otimes m)=a\\otimes j(b)m$, with inverse $\\Psi(a\\otimes m)=(a\\otimes1)\\otimes m$. The tensor universal properties [def-weil-pbc-module-tensor-product, lem-weil-pbc-algebra-tensor-pushout-universal-property] give these maps: the displayed formulas are additive and balanced over $k$ and $k'$, and preserve products and units on pure tensors. Their composites fix $a\\otimes m$ and $(a\\otimes b)\\otimes m$, respectively, the latter because $(a\\otimes b)\\otimes m=(a\\otimes1)\\otimes j(b)m$. Pure tensors generate, so the composites are identities. If $z$ in $F\\otimes_k M$ is nilpotent, $\\Psi(z)$ is nilpotent and hence zero by step 3; applying $\\Phi$ shows $z=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030U and 030W descent corollary: explicit tensor reassociation from the tensor universal property"
+   }
+  },
+  {
+   "text": "The map $1_F\\otimes i:F\\otimes_k L\\to F\\otimes_k M$ is injective by [lem-weil-pbc-module-over-field-flat] applied to the $k$-vector space $F$ and [lem-trf-flat-tensor-preserves-injection] applied to the injective $k$-linear map $i:L\\to M$. It is a ring homomorphism by the tensor product multiplication. Every nilpotent $z$ in its source maps to a nilpotent in its reduced target, hence to zero; injectivity gives $z=0$. Thus $F\\otimes_k L$ is reduced. Since $L/k$ was arbitrary, this holds for every field extension of $k$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, condition (4); reducedness descends through the explicitly injective scalar-extension map"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-reduced-extension-separable] to $F/k$ and the prime $p$. Its characteristic hypothesis is step 1, and its reducedness hypothesis for every $L/k$ is step 5. It gives exactly that every finitely generated intermediate field of $F/k$ is separably generated, which is the required separability. No algebraicity or finite-generation hypothesis on $F/k$ or $k'/k$ has entered.",
+   "uses": [
+    "lem-weil-pbc-geometrically-reduced-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, implication (4) => (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-common-extension-fields",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Descent corollary assembled from Tags 030U and 030W using the common field of Fields Tag 0H7K; finite-coefficient and tensor-reassociation arguments written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A field extension is separable in the possibly transcendental sense if its scalar extension to another field is a field separable over that larger base",
+   "results": "{\"t\": \"2026-10-24T04:53:50Z\", \"tool\": \"leanfinder\", \"query\": \"A field extension is separable in the possibly transcendental sense if its scalar extension to another field is a field separable over that larger base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosure.isSeparable\", \"Algebra.IsSeparable\", \"IsSepClosure.separable\", \"IsSeparable.tower_top\", \"Algebra.IsSeparable.trans\", \"IntermediateField.isSeparable_tower_top\", \"IsSeparable.tower_bot\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\"], \"digest\": \"959b8b7a4773fcf8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Algebra.IsSeparable is algebraic (Separable.lean:549,570), while this statement includes transcendental separability. GeometricallyReduced.lean:62,78 gives geometric reducedness tests and injective descent, not this field-separability conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness of a field extension descends along arbitrary faithfully flat extension of its base field",
+   "results": "{\"t\": \"2026-10-24T04:53:51Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness of a field extension descends along arbitrary faithfully flat extension of its base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"7115ebb593146a9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Algebra.IsSeparable is algebraic (Separable.lean:549,570), while this statement includes transcendental separability. GeometricallyReduced.lean:62,78 gives geometric reducedness tests and injective descent, not this field-separability conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If F tensor over k with kprime is isomorphic to a separable field extension of kprime then F is separable over k, also for transcendental field extensions",
+   "results": "{\"t\": \"2026-10-24T04:53:49Z\", \"tool\": \"leansearch\", \"query\": \"If F tensor over k with kprime is isomorphic to a separable field extension of kprime then F is separable over k, also for transcendental field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable\", \"IsGalois.to_isSeparable\", \"Algebra.IsSeparable.trans\", \"IsSeparable.tower_bot\", \"Field.finSepDegree_eq_zero_of_transcendental\", \"IntermediateField.isSeparable_tower_top\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IntermediateField.isSeparable_adjoin_simple_iff_isSeparable\"], \"digest\": \"4b1a42646cf0a10d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Algebra.IsSeparable is algebraic (Separable.lean:549,570), while this statement includes transcendental separability. GeometricallyReduced.lean:62,78 gives geometric reducedness tests and injective descent, not this field-separability conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T04:53:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Algebra.IsSeparable is algebraic (Separable.lean:549,570), while this statement includes transcendental separability. GeometricallyReduced.lean:62,78 gives geometric reducedness tests and injective descent, not this field-separability conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]eparab.*([Dd]escen|[Bb]ase[Cc]hange)|[Gg]eometrically[Rr]educed.*(iff|of_)",
+   "results": "{\"t\": \"2026-10-24T04:53:49Z\", \"tool\": \"grep\", \"query\": \"[Ss]eparab.*([Dd]escen|[Bb]ase[Cc]hange)|[Gg]eometrically[Rr]educed.*(iff|of_)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"2d354aaa2138a1b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib Algebra.IsSeparable is algebraic (Separable.lean:549,570), while this statement includes transcendental separability. GeometricallyReduced.lean:62,78 gives geometric reducedness tests and injective descent, not this field-separability conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separability for possibly transcendental field extensions descends when a tensor product with an extension field is a separable field",
+   "results": "{\"t\": \"2026-10-24T06:54:12Z\", \"tool\": \"leanfinder\", \"query\": \"Separability for possibly transcendental field extensions descends when a tensor product with an extension field is a separable field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.trans\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IsSeparable.tower_bot\", \"IsSeparable.tower_top\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"Algebra.IsSeparable.of_algHom\", \"IntermediateField.isSeparable_tower_top\"], \"digest\": \"7e39665463cb1ba1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparableExtension|[Ss]eparab.*[Dd]escen|[Gg]eometrically[Rr]educed",
+   "results": "{\"t\": \"2026-10-24T06:54:53Z\", \"tool\": \"grep\", \"query\": \"IsSeparableExtension|[Ss]eparab.*[Dd]escen|[Gg]eometrically[Rr]educed\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the tensor product of two field extensions is a separable field over the second factor then the first extension is separable in the transcendental sense",
+   "results": "{\"t\": \"2026-10-24T06:54:54Z\", \"tool\": \"leansearch\", \"query\": \"If the tensor product of two field extensions is a separable field over the second factor then the first extension is separable in the transcendental sense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"IsGalois.to_isSeparable\", \"Field.sepDegree\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"Field.finSepDegree_eq_zero_of_transcendental\", \"IsSepClosure.recOn\", \"IsPurelyInseparable.trans\"], \"digest\": \"5ba0853cff22af86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T06:54:54Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness and separability of arbitrary field extensions descend after extension of scalars",
+   "results": "{\"t\": \"2026-10-24T06:54:55Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness and separability of arbitrary field extensions descend after extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsSeparable.of_algHom\"], \"digest\": \"ddfb83bb101eefb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  },
+  {
+   "tool": "grep",
+   "query": "isGeometricallyReduced_field_iff|IsGeometricallyReduced.of_injective|class IsGeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T06:56:23Z\", \"tool\": \"grep\", \"query\": \"isGeometricallyReduced_field_iff|IsGeometricallyReduced.of_injective|class IsGeometricallyReduced\", \"sub\": \"RingTheory/Nilpotent\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\"], \"digest\": \"3fd840c3162baf46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable concerns algebraic separability (Separable.lean:539,570); geometric reducedness declarations in Nilpotent/GeometricallyReduced.lean:54,62,78 do not state this separability descent corollary, and the arbitrary-field reducedness equivalence remains a TODO there."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-normalized-finite-stage-descent",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. Tag 09II last paragraph: replace the invalid compositum argument by descent from an actual unreduced tensor-field isomorphism.",
+   "via": [
+    "lem-sfb-dvr-normalized-finite-stage-descent",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separability-tensor-field-descent",
+  "worker": "stage1",
+  "summary": "Proved descent through a common overfield and explicit tensor reassociation. Used finite tensor coefficients to apply the existing separably-generated 030U node, handled characteristic zero separately from the positive-characteristic 030W criterion, and reused every auxiliary node; no new nodes. Statement unchanged.",
+  "blueprint": "Historical auxiliary algebra for the ancestor recorded in blueprint.from.place, supporting finite-stage descent after Epp preparation. The latest sk-thm-sf-ctf-stability-direct-images proof (3) has no such auxiliary statement. Preserved the null historical ancestor and the creation chain; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic field amalgamation provides compatible embeddings of L and kprime; the unit has no alternative field-amalgamation statement."
+   },
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Generic separably-generated case of 030U applied to a finitely generated intermediate field, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "why": "Generic positive-characteristic criterion 030W turns the established tensor reducedness into the required separability."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-9906f7ac3",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-9906f7ac3 (reviewer sub-agent of L); spot-checked: I read the item, the report and every cited statement in full and found no faults, so no fixes were written. The statement is unchanged and true. If F⊗_k k' is a field separable over k', then F/k is separable; I checked this on the cases k'=k, F=k, the inseparable F_p(s^{1/p}) case (the tensor is not a field, so the hypothesis fails) and F=k(t). Stacks sources checked: 030O (algebra.tex 9915), 030U (10152, statement and proof), 030W (10360, (4)⇒(1)) and 0H7K (fields.tex 395). Step 1: the char-0 Mathlib leaf settles characteristic 0; otherwise the characteristic is a prime p. Step 2: 0H7K gives a common field M for L and k'. Step 3 is the finite-coefficient reduction of the 030U separable case: E=k'(t_r) is finitely generated, so it is separably generated by definition 030O (2). The separably-generated 030U node then gives E⊗M reduced. E⊗M→T⊗M is an injective ring map by vector-space flatness and the Mathlib lTensor injectivity leaf. Step 4 is the elementary isomorphism (F⊗k')⊗_{k'}M≅F⊗_k M; I checked the balancing over k and k' and both composites. Step 5: flatness of F over k makes F⊗L→F⊗M injective, so F⊗L is reduced. Step 6: 030W (4)⇒(1) gives separability; its hypotheses come from steps 1 and 5. proof_deps equals the union of the uses, and no step uses a proof instead of a statement. There is no new node and no duplicate in the DAG. I accept the three declared tool_uses: common-extension-fields, separably-generated-tensor-reduced (030U) and geometrically-reduced-extension-separable (030W). Batch-5 check: lem-trf-flat-tensor-preserves-injection is exactly the Mathlib declaration Module.Flat.lTensor_preserves_injective_linearMap (Flat/Basic.lean:131) with no dependencies. It is generic flatness and not part of the trace formula or Poincaré duality, so the citation stands. coord/dag-sync.md is absent from the snapshot. The report mentions a citations.json that is not in the commit, which is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparabilityTensorFieldDescent",
+  "declaration": "Algebra.isSeparableExtension_of_isField_tensorProduct",
+  "file": "lean/Sheaf/FieldTheory/SeparabilityTensorFieldDescent.lean",
+  "statement": "theorem isSeparableExtension_of_isField_tensorProduct (k : Type u) (k' : Type v) (F : Type w) [Field k] [Field k'] [Field F] [Algebra k k'] [Algebra k F] (hfield : IsField (F ⊗[k] k')) (hsep : @IsSeparableExtension k' (F ⊗[k] k') _ hfield.toField (Algebra.TensorProduct.rightAlgebra (R := k) (A := F) (B := k'))) : IsSeparableExtension k F",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47d3d8a9e",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match: fields k,k',F with Algebra k k', Algebra k F; IsField on canonical F⊗[k]k'; hsep uses @IsSeparableExtension with hfield.toField (IsField.toField keeps the Ring) and Algebra.TensorProduct.rightAlgebra (b↦1⊗b, Basic.lean:492/508); conclusion IsSeparableExtension k F (side-live SeparableExtension.lean:44). No algebraic/FG/char/universe restrictions; universes u v w independent. Mathematics true (0H7K common field, 030U finite-coefficient reducedness of T⊗M≅F⊗M, flat injection F⊗L→F⊗M, 030W (4)⇒(1), char-0 leaf); edge cases k'=k, F=k, k(t), F_p(s)(s^{1/p}) correct. lean.statement verbatim; sole theorem by sorry; docstrings carry 030U/030W/0H7K and blueprint tag plus the 6 proof steps; proof-only imports exist in side-live; no duplicate in side-live/Mathlib; report has Worker report and Second reading by Q21. No compile needed (no changes); worker scompile clean and dry run OK."
+ }
+}

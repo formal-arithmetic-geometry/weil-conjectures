@@ -375,8 +375,18 @@ class Batch:
         message = 'Stage-2 batch ' + self.id + f' ({len(self.staged)} reviewed deliveries)\n\n'
         message += '\n'.join(r['message'] for r in self.staged)
         print('staged side paths:', paths, flush=True)
-        md.git_retry('add', '--', *paths)
-        md.git_retry('commit', '-q', '-m', message, '--', *paths)
+        # 2026-10-24: a 3241-delivery batch failed here with "Argument list too long: 'git'" after 53 minutes of
+        # preparation (every path and every delivery's message on the command line); paths and message go by file
+        import tempfile
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.paths') as pf:
+            pf.write('\n'.join(paths) + '\n')
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.msg') as mf:
+            mf.write(message.rstrip() + '\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n')
+        try:
+            md.git_retry('add', '--pathspec-from-file=' + pf.name)
+            md.git_retry('commit', '-q', '-F', mf.name, '--pathspec-from-file=' + pf.name)
+        finally:
+            os.unlink(pf.name); os.unlink(mf.name)
         sha = md.git('rev-parse', 'HEAD')
         self.record['commit'] = sha
         atomic(self.path, self.record)

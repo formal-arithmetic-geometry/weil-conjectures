@@ -1,0 +1,104 @@
+{
+ "id": "def-sf-exceptional-system-interfaces",
+ "kind": "definition",
+ "title": "Exceptional strict-system comparison and transport interfaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For strict etale coefficient systems with their normalized derived comparison [def-pur-coefficient-system-image-data], a compactification [def-weil-compactifications-refinements], its ordinary compact-support data [def-per-strict-etale-system-interfaces], and its exceptional adjoint [def-sf-strict-etale-exceptional-adjoint-interfaces], define the strict pro-etale compact-support and site-comparison interfaces. These retain the actual ordinary geometric inverse images, their adjunctions, exact-localization and universal right-derived factorization maps, normalized finite evaluations, and the bounded-below etale-origin subcategories. Define the proper/open comparison by the proper adjunction mate followed by open comparison, its origin comparison using the actual site counit, and the transported right functor by the literal site-direct/right-adjoint/site-inverse composite. The transport interface records the restricted Hom-chain adjunction, finite units and counits, quotient mates and transition equations, exactness, linearity, normalizedness and the uniform lower bound.",
+ "stmt_deps": [
+  "def-sf-strict-etale-exceptional-adjoint-interfaces",
+  "def-per-strict-etale-system-interfaces",
+  "def-weil-compactifications-refinements",
+  "def-pur-coefficient-system-image-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Constructions 4.1 and 5.15, Lemma 4.10, Lemma 5.22, Proposition 5.24; blueprint exceptional integral reconstruction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Strict coefficient system exceptional adjoint data, site comparison, pro-etale compact support transport, and resolution-normalized derived adjoint shifts",
+   "results": "8 hits: CochainComplex.isStrictlyGE_shift; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Adjunction.commShift_of_rightAdjoint; DerivedCategory.TStructure.t; LightCondSet.LocallyConstant.adjunction; CochainComplex.isStrictlyLE_shift; CategoryTheory.Functor.sheafAdjunctionCocontinuous. No strict coefficient-system interface.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "Loogle",
+   "query": "StrictEtaleExceptionalAdjoint,ExceptionalSystemTransport,PurSequenceAdjointShifts",
+   "results": "0 hits; unknown identifier 'StrictEtaleExceptionalAdjoint'.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ExceptionalSystemTransport|StrictEtaleExceptionalAdjoint|PurSequenceAdjointShifts",
+   "results": "msearch Mathlib grep: 0 hits. rg lean/WeilConjectures: no hits. rg lean/Sheaf finds existing definitions in ExceptionalSystemTransport, EtaleCoefficientSystemAdjoint and PurSequenceAdjointResolutionShifts theorem modules. DAG definition search: no owners; clopen specialization nodes merely consume the etale adjoint. blueprint_refs search exceptional system and sequence adjoint shift: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "Relocate existing definitions unchanged to one owning module; do not duplicate notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exceptional-integral-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Exceptional inverse-image integral reconstruction steps 10–12: named comparison and shift data.",
+   "via": [
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalSystemInterfaces",
+  "declaration": "AlgebraicGeometry.ExceptionalSystemSiteComparisonInterface",
+  "declarations": [
+   "AlgebraicGeometry.ExceptionalSystemSiteComparisonInterface"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalSystemInterfaces.lean",
+  "statement": "abbrev ExceptionalSystemSiteComparisonInterface (O : Type (u + 1)) [CommRing O] (ell : O) (T : Scheme.{u}) (P : StrictEtaleEvaluation T O ell)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer fix (landing): the 47 listed constructions stay in the published module Sheaf.Paper.ExceptionalSystemTransport (unchanged live text), because the landing index refuses an intra-delivery move ('declares names that other modules already declare'). This module publicly re-exports Sheaf.Paper.ExceptionalSystemTransport and adds one transparent abbrev alias, its primary declaration; this node owns every name listed here.",
+  "fixed_by": "NT-stage2-cc-84770e904"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84770e904",
+  "group": "Q74",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84770e904",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Maths correct clause by clause (D, l≠p, E/Q_l; finite-type X,Y, only f separated; C_{T,R}, N_T = normalized ∧ common LevelBounds; Reconstruction unit/counit pinned to the calculus adjunction; F_R/G_R composite adjunction with transpose pinned to the étale adjunction, exactness, shifts, uniform bounds; P_R, h_R, u, r_R with I(u)=h⁻¹∘r componentwise). The earlier objections (da5c A1 arbitrary systemLeft, Q114 F3 free u/r) are resolved: systemLeft_normalization pins systemLeft (levelwise) to a canonical composite, Operations is pinned, normalized inputs have étale origin, so primitive fixes r and normalization fixes u. H2 repair right: three new def nodes own the verbatim-moved definitions. But the intra-delivery move is refused at landing (nt_parallel2's prune index still lists the names in the live theorem modules; N6 91e1 and Q48 1638 precedents). FIX in the landed Q97/Q38 shape: EtaleCoefficientSystemAdjoint, ExceptionalSystemTransport and PurSequenceAdjointResolutionShifts restored to live text byte for byte; the three interface modules become a public re-export plus one abbrev alias each (primary decl); three node JSONs changed only in their lean records; report gets a reviewer-fix section; item module, record and stmt_deps unchanged. nt_compile --json: 5.6, 6.1, 6.0 s and item 35.2 s, clean, exit 0; check_lean_text finds nothing on the new and dependency records. Advisory: the dependency records' notes still describe the move (--revert-nodes available); integralTriangulated owner def-weil-exceptional-inverse-image is uncited; the second reading is a self-check."
+ }
+}

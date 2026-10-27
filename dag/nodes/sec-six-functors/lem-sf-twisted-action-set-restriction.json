@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-twisted-action-set-restriction",
+ "kind": "statement",
+ "title": "Set restriction on a specified twisted site",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, let $s:C\\simeq C$ have both directions continuous, let $R$ be a commutative ring sheaf, and let $a:(s^{-1})^*R\\simeq R$. Use the Site, module translation $\\sigma$, and fixed-pair definitions of [def-sf-twisted-action-presentation-data]. For every specified $S:\\operatorname{Site}(J,s,R,a)$ there are an equivalence $e:\\operatorname{Sh}(S.\\mathrm{topology},\\mathrm{Sets})\\simeq\\operatorname{Pairs}((s^{-1})^*)$ and a natural isomorphism from $e$ followed by forgetting to precomposition by $S.\\mathrm{inclusion}$. The minus-one generator is identified with the inverse of the fixed-pair structure on all sections, exactly as in RestrictionPresentation.set_generator. No module or geometric-adjunction data is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site step 3; agent twisted variant of Tag 00W0 (proposition-sheaves-on-group)."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restriction functor explicitly. The minus-one restriction is natural and invertible: its composites with a degree-one arrow are images of isomorphisms in C. Use its inverse as the pair structure. Naturality of sheaf maps gives the intertwining equation.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove full faithfulness directly. A property of arrows closed under composition and inversion that holds on base arrows and the minus-one generators holds in every degree: get degree one by inversion and prove closure of the set of degrees under addition using powerComp, then use integer induction. Apply this to naturality of a compatible map. Transport components along inclusion_obj to obtain the unique map on all copied objects.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed pair, extend its underlying presheaf using lem-sf-twisted-action-presheaf-extension. Its restricted presheaf is isomorphic to the underlying sheaf, so lem-sf-twisted-action-sheaf-detection makes the extension a sheaf. The extension generator equation, multiplied by the invertible structure maps, says that the comparison is an isomorphism of pairs. This proves essential surjectivity.",
+   "uses": [
+    "lem-sf-twisted-action-presheaf-extension",
+    "lem-sf-twisted-action-sheaf-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Turn the full, faithful and essentially surjective restriction functor into an equivalence using Functor.asEquivalence. Forgetting the pair is definitionally ordinary restriction, so take the identity natural comparison. The generator equation is the sectionwise inverse identity for the minus-one restriction isomorphism.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-presheaf-extension",
+  "lem-sf-twisted-action-sheaf-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z5",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site step 3; direct generator-induction proof of full faithfulness, reducing only object extension and generated-topology descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves with invertible semilinear action of an automorphism of a site are sheaves on its semidirect category with integers",
+   "results": "Eight hits, including SheafOfModules.instCategory, Sheaf.H, and generic sheaf algebraic-structure APIs. No construction of the twisted action site or its normalized restriction equivalences.",
+   "date": "2026-10-27",
+   "verdict": "related primitives only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.powFunctor",
+   "results": "Zero hits: unknown identifier CategoryTheory.Equivalence.powFunctor. Read Mathlib CategoryTheory/Equivalence.lean:506--540: integer powers exist, while their addition comparisons are explicitly marked TODO.",
+   "date": "2026-10-27",
+   "verdict": "no matching declared construction"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|sheafEquivOfEquiv",
+   "results": "Seven hits, notably SheafOfModules.pushforwardPushforwardEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388. Used for the translation equivalence and identity-site scalar equivalence. Local searches found no twisted action-site construction; ContinuousCocontinuousRingedRestriction supplies the geometric step.",
+   "date": "2026-10-27",
+   "verdict": "generic module equivalence reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules.pushforwardPushforwardEquivalence",
+   "results": "Eight hits, including SheafOfModules.pushforward and pullbackPushforwardAdjunction; no complete twisted action-site construction. The explicit pushforward equivalence is read in Mathlib and used.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionSiteRestriction",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation. Supporting step: Set restriction on a specified twisted site. The ancestor tool returns null for the parent; blueprint_refs search twisted action site and semidirect found no corresponding blueprint node.",
+   "via": [
+    "lem-sf-twisted-action-site-restriction",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionSetRestriction",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionSetRestriction.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.setRestriction",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.setRestriction"
+  ],
+  "statement": "theorem setRestriction [HasPullbacks C] (S : Site J s R a) :\n    letI := S.category\n    letI := S.inclusion_continuous\n    ∃ (e : Sheaf S.topology (Type u) ≌\n        Pairs (s.inverse.sheafPushforwardContinuous (Type u) J J))\n      (c : e.functor ⋙ forgetPairs (s.inverse.sheafPushforwardContinuous (Type u) J J) ≅\n        S.inclusion.sheafPushforwardContinuous (Type u) J S.topology),\n      ∀ (M : Sheaf S.topology (Type u)) (X : C)\n        (x : (e.functor.obj M).obj.a.obj.obj (op (s.inverse.obj X))),\n        (c.hom.app M).hom.app (op (s.inverse.obj X)) x =\n          M.obj.map ((S.arrows (s.inverse.obj X) X).symm ⟨-1, 𝟙 _⟩).op\n            ((c.hom.app M).hom.app (op X)\n              ((e.functor.obj M).obj.str.hom.app (op X) x))",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T064441-L-2179293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T084518-L-3687740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

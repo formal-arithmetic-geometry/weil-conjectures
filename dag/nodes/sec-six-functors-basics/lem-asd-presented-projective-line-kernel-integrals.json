@@ -1,0 +1,112 @@
+{
+ "id": "lem-asd-presented-projective-line-kernel-integrals",
+ "kind": "statement",
+ "title": "Both integrals of the constructed projective-line datum are identity",
+ "statement": "Under the finite diagonal property for the normalized arbitrary-base projective-line splitting, there is a supported diagonal class whose explicitly constructed trace-diagonal datum has both compact-support integrals identity. The shifted coefficient pullback and the actual constructed trace are those of [def-sf-p1-integral-transport-data]. The ordinary identities are those of [lem-sp-tower-p1-arbitrary-base-integrals], and the comparison with compact-support integrals is [lem-asd-presented-projective-line-datum-integrals].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sp-tower-p1-arbitrary-base-integrals"
+ ],
+ "proof": [
+  {
+   "text": "Extract the supported class from the finite diagonal property. Apply the proved comparison of each constructed compact-support integral with the corresponding ordinary integral. Substitute the two identities from the diagonal property; functoriality and inverse-hom cancellation make both conjugates identity.",
+   "uses": [
+    "lem-asd-presented-projective-line-datum-integrals",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-presented-projective-line-datum-integrals",
+  "lem-sp-tower-p1-arbitrary-base-integrals"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport the two projective-line diagonal integrals through an isomorphism over the base while retaining the constructed trace",
+   "results": "Eight hits: scheme diagonal respectsIso and diagonalRestrictIsoDiagonal; elliptic-curve base-change identities; algebraic trace transport. No derived supported-integral comparison.",
+   "date": "2026-10-26",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "Generic inverse/hom cancellation and a descent-unit specialization.",
+   "date": "2026-10-26",
+   "verdict": "Generic cancellation only; used through the categorical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "sfP1IntegralTransport|sectionComparison|traceComparison",
+   "results": "No Mathlib hits. Local source rg finds SfP1IntegralSectionComparison and SfP1IntegralTraceComparison, which are used rather than restated.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing section and trace comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective line supported diagonal property implies both integrals of the transported compact support datum are identities",
+   "results": "AlgebraicGeometry.AffineTargetMorphismProperty.diagonal; CategoryTheory.MorphismProperty.diagonal_iff; CompactlySupportedContinuousMap.integralPositiveLinearMap; CompactlySupportedContinuousMap.integralLinearMap.congr_simp; AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback; LipschitzWith.integral_lineDeriv_mul_eq; AlgebraicGeometry.HasAffineProperty.diagonal_iff; CategoryTheory.MorphismProperty.instDescendsAlongDiagonalOfRespectsIsoOfIsStableUnderBaseChange",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLinePresentedKernelIntegrals",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLinePresentedKernelIntegrals.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_presentedFiniteP1Datum_integrals",
+  "statement": "theorem exists_presentedFiniteP1Datum_integrals\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),\n      ArbitraryBaseFiniteP1Splitting A N hA t T hT)\n    (hbc : ArbitraryBaseFiniteP1BaseChange A N hA t d)\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (e : X ≅ ProjectiveLine Y) (w : e.hom ≫ (ProjectiveLine Y ↘ Y) = q)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (hdiag : finiteP1DiagonalProperty A N hA t d Y hY) :\n    ∃ κ : Ext\n      ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine Y ↘ Y))).obj\n        (ordinaryFiniteConstant A (ProjectiveLine Y)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA) 2,\n      SfDiagonalKernel.Integrals A\n        (SfP1Transport.datum A N hA t q e w hY (d Y hY).trace κ)\n        (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine Y N A hA) 1)\n        (ordinaryFiniteShiftedLinePullback A N hA t q hY).symm",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

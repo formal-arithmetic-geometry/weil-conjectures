@@ -1,0 +1,72 @@
+{
+ "id": "lem-sf-exact-pairing-symmetric-swap",
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-perfect-dual-pair-and-tate-stability",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "title": "Symmetry reverses an exact dual pair",
+ "statement": "Let $\\mathcal C$ be a symmetric monoidal category: a monoidal category [def-sfb-monoidal-category] with natural symmetry $\\sigma_{A,B}:A\\otimes B\\xrightarrow{\\sim}B\\otimes A$, satisfying the two hexagon equations and $\\sigma_{B,A}\\sigma_{A,B}=1$. Let $P,Q\\in\\mathcal C$ have maps $e:Q\\otimes P\\to\\mathbf1$ and $b:\\mathbf1\\to P\\otimes Q$ satisfying $(1_P\\otimes e)(b\\otimes1_P)=1_P$ and $(e\\otimes1_Q)(1_Q\\otimes b)=1_Q$, with canonical associators and unitors understood. Then $Q,P$ with evaluation $e\\circ\\sigma_{P,Q}:P\\otimes Q\\to\\mathbf1$ and coevaluation $\\sigma_{P,Q}\\circ b:\\mathbf1\\to Q\\otimes P$ satisfy both triangle identities.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FN8, lemma-dual-symmetric"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category swapping evaluation and coevaluation by the symmetry reverses an exact dual pairing",
+   "results": "{\"t\": \"2026-10-22T07:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal category swapping evaluation and coevaluation by the symmetry reverses an exact dual pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"CategoryTheory.ExactPairing.coevaluation_evaluation''\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.HasRightDual.exact\"], \"digest\": \"7623d9f7c744d0de\"}",
+   "date": "2026-10-22",
+   "verdict": "match: CategoryTheory.BraidedCategory.exactPairing_swap"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact pairing can be reversed in a braided monoidal category using the braiding",
+   "results": "{\"t\": \"2026-10-22T07:57:19Z\", \"tool\": \"leansearch\", \"query\": \"An exact pairing can be reversed in a braided monoidal category using the braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.reverseBraiding\", \"CategoryTheory.ExactPairing.mk\", \"CategoryTheory.BraidedCategory.curriedBraidingNatIso_inv_app_app\", \"CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app\", \"CategoryTheory.BraidedCategory.hasLeftDualOfHasRightDual\", \"CategoryTheory.SymmetricCategory.reverseBraiding_eq\", \"CategoryTheory.Center.braiding_inv_f\"], \"digest\": \"069b88524a4f5721\"}",
+   "date": "2026-10-22",
+   "verdict": "match: exactPairing_swap with prescribed braiding formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.exactPairing_swap",
+   "results": "{\"t\": \"2026-10-22T07:57:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.BraidedCategory.exactPairing_swap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\"], \"digest\": \"fff8e860baf66d74\"}",
+   "date": "2026-10-22",
+   "verdict": "match: arbitrary braided category, hence symmetric specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "def exactPairing_swap|coevaluation.*β_|evaluation.*β_",
+   "results": "{\"t\": \"2026-10-22T07:57:58Z\", \"tool\": \"grep\", \"query\": \"def exactPairing_swap|coevaluation.*β_|evaluation.*β_\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\"], \"digest\": \"2b22ccd0fc2b67d0\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Braided.lean:81-83 read; directory grep gives filename and lines"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.BraidedCategory.exactPairing_swap",
+  "file": "Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean",
+  "how": "specializes in one line: CategoryTheory.BraidedCategory.exactPairing_swap at Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:81, with coevaluation and evaluation fields at 82-83. Symmetry identifies the inverse braiding on Q tensor P with sigma_(P,Q), giving exactly the two displayed maps.",
+  "line": 81
+ },
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "proof, last sentence: perfect coefficient dual and the coefficient biduality K to K^vee^vee",
+   "via": [
+    "lem-sf-perfect-dual-pair-and-tate-stability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -150,7 +150,18 @@
   "lem-weil-pbc-w-local-partition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -229,5 +240,34 @@
   "landing": "20261015T154204-L-162267",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The map $A\\to A^w$ of [def-weil-pbc-w-localization] is ind-Zariski\n[def-weil-pbc-ind-etale-algebra] and faithfully flat, and it identifies local\nrings: $A_{\\mathfrak q\\cap A}\\to A^w_{\\mathfrak q}$ is an isomorphism for\nevery prime $\\mathfrak q$ of $A^w$. The spectrum of $A^w$ is w-local\n[def-weil-pbc-w-local], its closed points are exactly the points of\n$V(I_A)$, every point specializes to a unique point of $V(I_A)$, and\n$\\operatorname{Spec}A^w\\to\\operatorname{Spec}A$ restricts to a bijection\n$V(I_A)\\to\\operatorname{Spec}A$. If $J\\subset A$ is an ideal such that\n$V(J)$ consists of closed points, then $V(JA^w)\\to V(J)$ is bijective and\n$A/J\\to A^w/JA^w$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "Each $A_{Z(E',E'')}$ is a localization of $A$, so each $P_E$ is a finite\nproduct of localizations and $A\\to P_E$ is ind-Zariski; hence so is the\nfiltered colimit $A\\to A^w$, by [lem-weil-pbc-ind-etale-stability]. Each\nprime of $A$ lies in exactly one stratum $Z(E',E'')$ and survives in the\ncorresponding factor, so $A\\to P_E$ is flat and surjective on spectra, i.e.\nfaithfully flat; a filtered colimit of faithfully flat algebras is faithfully\nflat. Ind-Zariski maps identify local rings, because local isomorphisms do and\nlocal rings commute with filtered colimits.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A prime $\\mathfrak q$ of $A^w$ chooses, at every stage $E$, one stratum and a\nprime of the corresponding localization. It contains $I_A$ if and only if at\nevery stage its image lies in the stratum itself, i.e. contains the kernel of\n$A_{Z(E',E'')}\\to(A/(E''))_{\\prod E'}$. A prime $\\mathfrak p$ of $A$ lies in\nexactly one stratum for each $E$, and these choices are compatible, so there\nis exactly one prime of $V(I_A)$ over $\\mathfrak p$: the map\n$V(I_A)\\to\\operatorname{Spec}A$ is bijective. Every prime $\\mathfrak q$\nsatisfies $\\mathfrak q+I_A\\neq A^w$, since at each stage a prime of the\nlocalization at a stratum specializes to a point of the stratum; so it\nspecializes to a point of $V(I_A)$. If $\\mathfrak q$ specializes to two\npoints $c,c'$ of $V(I_A)$, then for each $f\\in A$ the stage $E=\\{f\\}$ shows\nthat $c,c'$ lie over the same part $D(f)$ or $V(f)$, as comparable primes of a\nfinite product lie over the same factor; hence the images of $c$ and $c'$ in\n$\\operatorname{Spec}A$ contain the same elements, and $c=c'$ by the\nbijection. Points of $V(I_A)$ are maximal: a prime containing one of them also\ncontains $I_A$, and the stagewise description shows it lies over the same\nprime of $A$. Conversely a closed point specializes to a point of $V(I_A)$,\nso equals it. Thus the closed points form the closed set $V(I_A)$, every\npoint has a unique closed specialization, and $\\operatorname{Spec}A^w$ is\nw-local.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $V(J)$ consists of closed points, every prime of $A^w$ containing $JA^w$\nlies over a maximal ideal of $A$ and, by the stagewise description, lies in\n$V(I_A)$; the bijection $V(I_A)\\to\\operatorname{Spec}A$ therefore restricts\nto a bijection $V(JA^w)\\to V(J)$. The map $A/J\\to A^w/JA^w$ is ind-Zariski\nwith bijective map on spectra between zero-dimensional spectra and identifies\nlocal rings, hence is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

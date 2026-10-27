@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-integral-dualizing-exceptional-unit",
+ "kind": "statement",
+ "title": "Coherent integral dualizing object as exceptional image of the coefficient unit",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a separated finite-type $D.k$-scheme $a:T\\to s=\\operatorname{Spec}(D.k)$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $S$ be a normalized constructible exceptional operation system for $a$ [lem-sf-constructible-exceptional-adjunction-coefficients], and let $w$ be any coherent integral dualizing datum [def-sf-coherent-integral-dualizing-datum]. Let $U$ be in the integral finite-Tor category at $s$ [def-weil-finite-tor-amplitude], with ambient realization isomorphic to the completed regular coefficient module in degree zero [def-sf-verdier-exchange-data]. Then the ambient realization of $(S.Ra^!)U$ is isomorphic to $w.\\omega$. This asserts only an object isomorphism, and no duality functor, evaluation map or biduality assertion.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-verdier-exchange-data",
+  "def-sf-rational-verdier-identifications"
+ ],
+ "proof": [
+  {
+   "text": "Write V for the integral exceptional image of U under S. Its membership in the integral finite-Tor category implies derived completeness. The underlying object of w is derived complete by its integral constructibility.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+   }
+  },
+  {
+   "text": "Reduce the supplied unit isomorphism. Constant coefficient reduction identifies its target with the finite regular coefficient unit. The exceptional coefficient mate of S identifies the reduction of V with the finite exceptional value, and S.ring.finiteRight identifies that value with integralDualizingFiniteTerm. The normalized counit equations and cocycles identify the restricted transitions with integralDualizingExceptionalTransition.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+   }
+  },
+  {
+   "text": "Compose these comparisons with the inverse of w.reduction at every level. The equation w.coherent says that the resulting isomorphisms between the reduction towers commute with every transition. Applying restriction of scalars preserves those equations.",
+   "uses": [
+    "def-sf-coherent-integral-dualizing-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+   }
+  },
+  {
+   "text": "Derived completeness supplies the canonical Roos triangles of V and w.omega. Products of the tower isomorphisms commute with the shift maps and hence with 1 minus shift. Rotate the distinguished triangles and complete this square to a morphism of triangles. Its two product components are isomorphisms, so the remaining component is an isomorphism. Its inverse gives the required direction. This proves existence of an object isomorphism; it does not claim that reduction detects equality of morphisms. Empty T gives zero objects; at the point the comparison is the identity-adjunction normalization. The triangle extension is Pretriangulated.complete_distinguished_triangle_morphism, and isIso₁_of_isIso₂₃ detects invertibility of the remaining vertex; these are the standard triangulated-category axioms and their immediate isomorphism consequence.",
+   "uses": [
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph: exceptional inverse image of the coefficient unit, coherent reductions, and reconstruction by derived completeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two derived complete complexes with coherent isomorphic reductions are isomorphic to the same homotopy inverse limit",
+   "results": "8 hits, led by ComplexShape.QFactorsThroughHomotopy and CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; no coefficient-dualizing comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete dualizing complex is isomorphic to exceptional inverse image of the integral coefficient unit",
+   "results": "8 hits, including HomologicalComplex.dgoEquivHomologicalComplexUnitIso_inv_app_f, FractionalIdeal.dual_inv, CommRing.Pic.mk_dual; no matching sheaf-coefficient statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete.*[Ii]so|[Ii]so.*DerivedComplete|dualizing.*exceptional|exceptional.*dualizing",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VerdierCoefficientRealization",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Proof clause (7): integral duality by thm-coef-integral-verdier; identification of its dualizing object with the exceptional value of the unit.",
+   "via": [
+    "lem-sf-package-verdier-coefficient-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralDualizingExceptionalUnit",
+  "file": "lean/Sheaf/Paper/IntegralDualizingExceptionalUnit.lean",
+  "declaration": "WeilConjectures.integral_dualizing_exceptional_unit",
+  "statement": "theorem integral_dualizing_exceptional_unit\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u}) [T.Over (Spec (.of D.k))]\n    [IsSeparated (T ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))]\n    (S : RationalOperations.structureSystem l T D hl Ω)\n    (w : IntegralFiniteExtension.DualizingDatum l T D hl E)\n    (U : ConstructibleExceptionalCoefficients.C l Ω\n      (Spec (.of D.k)) (.integral { carrier := E }))\n    (hU : Nonempty ((RingStage.inclusion l Ω (Spec (.of D.k))\n      (.integral { carrier := E })).obj U ≅\n        VerdierExchange.ringUnit l (Spec (.of D.k)) (.integral { carrier := E }))) :\n    Nonempty ((RingStage.inclusion l Ω T (.integral { carrier := E })).obj\n      ((S.ring.operation (integralDualizingCompactification D T)\n        (.integral { carrier := E })).G.obj U) ≅ w.omega.obj)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-finite-dualizing",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aa105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T095000-L-3280149",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aa105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T095000-L-3280149",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs published dependency theorems (coef_rational_operations witnesses, finite_stage_verdier_biduality, boundary_duality_input, integral_verdier_biduality, coef_qbar_verdier, verdier_exchange); new sorried lemma vs System.integralLeft/DualizingDatum.coherent/integralDualizingFiniteTerm; removed FiniteTorAmplitudeSites import vs unit realized lists (empty)"
+ }
+}

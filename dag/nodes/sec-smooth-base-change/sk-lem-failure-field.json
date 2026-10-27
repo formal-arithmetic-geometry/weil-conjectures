@@ -264,7 +264,54 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.FieldFailure",
+    "AlgebraicGeometry.Etale.nonempty_fieldFailure",
+    "AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.FieldFailure",
+     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.FieldFailure",
+     "lines": [
+      45,
+      94
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.nonempty_fieldFailure",
+     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection",
+     "lines": [
+      67,
+      125
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a",
+     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.FieldFailure",
+     "lines": [
+      97,
+      105
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-lem-failure-field",
@@ -341,5 +388,65 @@
   "group": "Q111",
   "result": "pass",
   "note": "existing:true binding to slopmaster2 Etale.nonempty_fieldFailure (FailureOverField.Detection) + FieldFailure + FieldFailure.isAffineHom_a. Commit touches only the node lean record and the report (Worker report + Second reading by Q111 present). Every clause checked against the node and the main-20261015 _section.md (verbatim): arbitrary p, CommRing Λ (sk-def-bc universe convention), q≥1, ∀ q'<q UniversalBaseChangeProperty, ¬BaseChangeProperty at the fixed base, affine S', both IsPullback squares, any field K, Λ-module sheaf on Spec K, ¬IsIso of baseChangeHomologyMap, separated⇒IsAffineHom. No extra assumptions; edge cases q=1, Λ=0, F=0, empty schemes fine. lean.statement is verbatim in source; upstream identical in side clone and slopmaster2. Check file re-stating the signature compiled via lcompile.py (exit 0); nt_compile.py refused it as outside the side tree, and no file is delivered. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:Y'\\to Y$ be a morphism and $n$ an integer invertible on $Y$, and let\n$\\mathrm{BC}(g,n,r)$ be the property of [sk-prop-injectivity]: the degree-$i$ exchange maps\nfor all base changes $Y'\\times_YT\\to T$, all qcqs direct-image morphisms $Z\\to T$, all\nsheaves of $\\mathbf Z/n$-modules on $Z_{\\mathrm{\\acute et}}$ and all $i\\leq r$ are\nisomorphisms; a *failure* of $\\mathrm{BC}(g,n,q)$ is such a datum whose degree-$q$ exchange\nmap is not an isomorphism.\nIf $\\mathrm{BC}(g,n,q-1)$ holds but $\\mathrm{BC}(g,n,q)$ fails, then\nsome failure occurs for an affine base change $T\\to Y$, a direct-image\nmorphism $\\operatorname{Spec}K\\to T$ with $K$ a field, and a sheaf of\n$\\mathbf Z/n$-modules on $\\operatorname{Spec}K$.\n\n*Complement.* In the notation of [sk-def-bc] (smooth side $f$, qcqs side $g$):\n\nLet $f:X\\to S$ be a morphism of schemes, $\\Lambda$ a commutative ring,\nand $q\\ge1$. If $\\mathrm{BC}(f,\\Lambda,r)$ holds universally for every\n$r\\le q-1$ ([sk-def-bc]: base change in all degrees $\\le q-1$, after\nevery preliminary base change of $f$) but $\\mathrm{BC}(f,\\Lambda,q)$ does\nnot hold, then there is a counterexample over a field: a morphism\n$S'\\to S$ with $S'$ an affine scheme (so that $S'\\to S$ is an affine\nmorphism when $S$ is separated), the base change\n$f':X'=X\\times_SS'\\to S'$, a field $K$ with a morphism\n$g:\\Spec K\\to S'$, the Cartesian square of $f'$ along $g$ with\n$Y=X'\\times_{S'}\\Spec K$, $h:Y\\to X'$, $e:Y\\to\\Spec K$, and a sheaf\n$\\mathcal F$ of $\\Lambda$-modules on $(\\Spec K)_{\\Et}$ with\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ not an\nisomorphism.\n\nThe hypothesis in degrees $\\le q-1$ has to be the universal one: the\nclosed–open step of the proof applies it to a base change of $f$.",
+  "proof": [
+   {
+    "text": "Choose a failing square and a nonzero element of the cokernel of the\nexchange map at a geometric point. For a qcqs scheme $Z'$ over the\nsource $Z$ of the direct-image morphism, let $P(Z')$ mean that this\nfixed element stays outside the image after pullback to $Z'$. The\nverification in [Stacks, Tag 0F07](https://stacks.math.columbia.edu/tag/0F07) gives three\nproperties:",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "1. **1.** thickenings preserve $P$, by topological invariance;",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "2. **2.** limits with affine transition maps preserve $P$, by continuity;",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "3. **3.** if $P(Z')$ holds and $V\\subset Z'$ is a quasi-compact open with\n   closed complement $W$, then $P(V)$ or $P(W)$ holds.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the third property let $j\\colon V\\to Z'$ and $i\\colon W\\to Z'$ be\nthe inclusions, embed the coefficient sheaf $M$ into\n$j_*J\\oplus i_*i^{-1}M$, with $J$ injective on $V_{\\mathrm{\\acute et}}$, and apply\n[sk-prop-injectivity]. Closed pushforward is exact. For the\nopen summand, with $j'$ and $g_V$ the base changes of $j$ and $g$,\n$\\mathrm{BC}(g,n,q-1)$ gives $R^aj'_*g_V^{-1}J=0$ for\n$1\\leq a<q$, so the Leray spectral sequence gives the required injection\ninto the degree-$q$ direct image from $V$.",
+    "uses": [
+     "sk-prop-injectivity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By the second property and Zorn's lemma there is a minimal closed\nsubscheme with $P$; by the first it is reduced, and it is nonempty. Let\n$\\xi$ be the generic point of an irreducible component. Every affine\nopen neighbourhood of $\\xi$ has $P$, since otherwise its closed\ncomplement, a smaller closed subscheme, would have $P$. The limit of\nthese neighbourhoods is $\\operatorname{Spec}\\kappa(\\xi)$, which has $P$\nby the second property. This is the argument of\n[Stacks, Tag 0F06](https://stacks.math.columbia.edu/tag/0F06).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Complement.* In the notation of [sk-def-bc]:",
+    "uses": [
+     "sk-def-bc"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $g:T\\to S$, $\\mathcal F$ be a failing datum: $g$ is a\nquasi-compact quasi-separated *morphism* ([sk-def-bc]) but $T$\nneed not be a qcqs scheme, as [sk-lem-minimal] requires. Being an\nisomorphism is local on $X$, and restriction to an affine open\n$S'\\subseteq S$ is pullback along an étale map, with which\n$R^qg_*$, $R^qh_*$ and the base-change map commute; so the map already\nfails over some affine open $S'$, and replacing $S$ by $S'$, $X$ by\n$X\\times_SS'$ and $T$ by $T\\times_SS'$ we may assume $S$ affine (this\nis the $S'$ of the statement; the hypothesis in degrees $\\le q-1$ is\ninherited, being universal). Now $T$, being qcqs over the affine\n$S$, is a qcqs scheme. Since $\\mathrm{BC}(f,\\Lambda,q-1)$ holds, the\nbase-change map in degree $q$ is injective ([sk-prop-injectivity] (1)),\nso it is not surjective: there is a geometric point $\\bar x$ of $X$ and\nan element $\\xi$ of the stalk of $R^qh_*e^{-1}\\mathcal F$ at $\\bar x$\nnot in the image. Apply [sk-lem-minimal] to the property ``the chosen cokernel\nelement survives'' (for $T'\\to T$ qcqs, the image of $\\xi$ in the stalk\nof the corresponding $R^qh'_*$ of the pulled-back sheaf is not in the image\nof the base-change map): it fails for the empty scheme, over which the stalk of\n$R^qh_*e^{-1}\\mathcal F$ is $0$, so the image of $\\xi$ is $0$ and\nlies in the image; thickenings do not change the étale site; limits work by\nthe limit theorem for higher direct images. For the closed–open\nsplit let $i:Z\\to T'$ be closed with quasi-compact open complement\n$j:V\\to T'$, and let $\\mathcal J$ be an injective sheaf of\n$\\Lambda$-modules on $V$ containing $j^{-1}\\mathcal F'$; the injectivity of\n[sk-prop-injectivity] (2) applied to the embedding\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ puts the\nsurviving element into one of the two summands. The closed summand\nis handled by the exactness of $i_*$. For the open summand one\ncannot use exactness of $j_*$, which fails in general\n($R^1j_*(\\Z/\\ell)\\neq0$ for $j:\\gm\\hookrightarrow\\Aaf^1$); instead\nlet $e':Y'=X\\times_ST'\\to T'$ be the base change of $f$ along\n$T'\\to S$ and $j':V\\times_{T'}Y'\\to Y'$. The hypothesis that\n$\\mathrm{BC}(f,\\Lambda,r)$ holds universally for $r\\le q-1$, applied to $e'$ and the qcqs morphism\n$j$ — this is where the property after a *preliminary* base\nchange, $T'\\to S$, and in *all* degrees $\\le q-1$ is consumed\n— gives $e'^{-1}j_*\\mathcal J\\cong j'_*e_V^{-1}\\mathcal J$ (degree\n$0$) and $R^aj'_*e_V^{-1}\\mathcal J\\cong e'^{-1}R^aj_*\\mathcal J=0$\nfor $1\\le a\\le q-1$ ($\\mathcal J$ is injective). The relative Leray\nspectral sequence for $h'\\circ j'$ then makes\n$R^qh'_*e'^{-1}j_*\\mathcal J\\to R^q(h'\\circ j')_*e_V^{-1}\\mathcal J$\ninjective, and [sk-prop-injectivity] (3) for the square of $f$\nalong $g'\\circ j:V\\to S$ and $j^{-1}\\mathcal F'\\subseteq\\mathcal J$\nshows that the element survives on $V$. Hence [sk-lem-minimal] gives a\nmorphism $\\Spec K\\to T$ with $K$ a field over which the element survives;\ntaking $g$ to be the composite $\\Spec K\\to T\\to S'$ and $\\mathcal F$ the\npullback of the coefficient sheaf to $\\Spec K$, the base-change map of the\nsquare of $f'$ along $g$ is not surjective, hence not an isomorphism.",
+    "uses": [
+     "sk-def-bc",
+     "sk-lem-minimal",
+     "sk-prop-injectivity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

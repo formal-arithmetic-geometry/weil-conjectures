@@ -16,9 +16,53 @@
   "def-weil-etale-morphism",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For isEtale_comp, apply the scheme-test definition twice to obtain W -> V -> T and two representing pullback squares. Paste the squares vertically (IsPullback.paste_vert) and use composition of etale scheme morphisms for W -> T. This works for arbitrary presheaves and does not choose an atlas.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an etale scheme map r, use yoneda.preimage on a test map into its target. The scheme pullback of r represents the presheaf pullback because Yoneda preserves limits; its projection is etale by base change. For a covering arrow a:U->T and any b:V->T in the small site, form the scheme pullback P=U times_T V in Over S. Its projection to V is etale, so composition gives an etale chart P->F. The projections are morphisms of the small site and give a pullback there: etaleForget reflects pullbacks as the composite of a fully faithful inclusion and connected-limit-creating comma/over projections. Thus covering pullbacks exist and etaleForget preserves them.",
+   "uses": [
+    "lem-pc-yoneda",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify etalePrecoverage with the comap of Scheme.etalePrecoverage along etaleForget by writing a presieve as ofArrows and checking joint surjectivity and etaleness. The preceding pullback construction and scheme covering base-change give stability under base change. Mathlib Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy then proves continuity of etaleForget. The adopted source theorem Scheme.isSheaf_Γ says that global sections form a sheaf for every subcanonical topology, and the same source supplies subcanonicity of the big etale topology through fppf descent. Restrict that sheaf along etaleForget. Apply the already proved liftedRingForgetHasSheafCompose to forget commutativity, preserving the independent site and ring universes. This proves structurePresheaf_isSheaf.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fppf-site",
+    "def-pur-cochain-coefficient-universe-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For etaleMap, the composite with the target etaleForget is definitionally the source etaleForget. Preservation of pairwise covering pullbacks follows by reflection along the target etaleForget. The image of a covering family is covering because its underlying schemes and maps are unchanged; check this through precoverage_eq_comap and ofArrows. Apply the same Mathlib precoverage continuity criterion to obtain etaleMap_isContinuous. The explicit definitions of structureSheaf and module pullback then have their required proofs.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-yoneda",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-pc-fppf-site",
+  "def-pur-cochain-coefficient-universe-transport",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "lemma-composition-representable-transformations, definition-relative-representable-property; definition-etale-site (03ED), lemma-sheaf-condition-holds preceding definition-structure-sheaf (03G7). Formal Lean implementation by P1 using existing Mathlib site criteria and proved source-library global-sections descent."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -137,5 +181,26 @@
   "existing": false,
   "note": "The category is the full subcategory of fppf sheaves with representable diagonal and an étale surjective atlas. The same module supplies scheme-test representability, the small étale site, the explicit regular-functions structure sheaf, its module category, étale restriction, and line modules. Named sheaf-condition, étale-composition and continuity proof obligations support the constructions; their proofs are postponed, with source and natural-language proof docstrings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261023T123921-L-1293257",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

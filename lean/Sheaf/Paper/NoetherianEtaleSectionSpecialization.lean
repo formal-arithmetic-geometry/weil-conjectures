@@ -25,22 +25,15 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
-import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.Paper.SectionLocalDualizingComparisons
+import Sheaf.AlgebraicGeometry.SmoothSectionAffineCoordinates
+import Sheaf.AlgebraicGeometry.EtaleShiftedLineNormalizedDescent
+import all Sheaf.Paper.SectionExceptionalFibreCoherence
 import Sheaf.Paper.PurityConventions
 public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
-import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Normalized ordinary etale specialization along a smooth section
 
@@ -292,71 +285,6 @@ theorem geometry
   have hnunit := (V.mem_zeroLocus_iff _ _).mp hz 1 (htopI ▸ trivial)
   exact hnunit (by simpa only [Scheme.basicOpen_one] using hx)
 
-private theorem section_line
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y T : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-    (d : ℕ) [SmoothOfRelativeDimension d f] [HasInvertibleExponent A X]
-    (t : T ⟶ X) :
-    ∃ L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
-      Nonempty (((upperStar (ModuleCat.{u + 1} A) t).leftDerivedFunctor.obj
-        (dualizingComplex (ModuleCat.{u + 1} A) f))⟦-(2 * (d : ℤ))⟧ ≅
-          (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧
-      ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage T,
-        ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅
-          (constantSheaf (T.smallEtaleTopology.over (cover.etalePrecoverageToEtale i))
-            (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)) := by
-  classical
-  obtain ⟨L₀, hLC₀, hStalk₀, ⟨e₀⟩, _⟩ := exists_dualizingComplex_iso_and_tensor A f d
-  let L := (upperStar (ModuleCat.{u + 1} A) t).obj L₀
-  have hLC : Scheme.IsLocallyConstantSheaf L :=
-    Scheme.IsLocallyConstantSheaf.upperStar t L₀
-  have hStalk : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ T),
-      Nonempty ((Scheme.pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of A A) := by
-    intro Ω _ _ x
-    exact ⟨(upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) t x).app L₀ ≪≫
-      (hStalk₀ Ω (x ≫ t)).some⟩
-  refine ⟨L, ?_, ?_⟩
-  · let P := (upperStar (ModuleCat.{u + 1} A) t).leftDerivedFunctor
-    let e : P.obj (dualizingComplex (ModuleCat.{u + 1} A) f) ≅
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * (d : ℤ))⟧ :=
-      P.mapIso e₀ ≪≫ (P.commShiftIso (2 * (d : ℤ))).app _ ≪≫
-        (shiftFunctor _ (2 * (d : ℤ))).mapIso
-          ((singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) t).app L₀)
-    exact ⟨(shiftFunctor _ (-(2 * (d : ℤ)))).mapIso e ≪≫
-      shiftShiftNeg _ (2 * (d : ℤ))⟩
-  · obtain ⟨datum⟩ := hLC.nonempty_locallyConstantDatum
-    let cover : Scheme.Cover.{u} Scheme.etalePrecoverage T :=
-      Scheme.Cover.mkOfCovers (Σ i : datum.cover.I₀, datum.cover.X i)
-        (fun i ↦ datum.cover.X i.1) (fun i ↦ datum.cover.f i.1)
-        (by
-          intro x
-          obtain ⟨i, y, hy⟩ := datum.cover.exists_eq x
-          exact ⟨⟨i, y⟩, y, hy⟩)
-        (fun i ↦ datum.cover.map_prop i.1)
-    refine ⟨cover, ?_⟩
-    intro i
-    let U := datum.cover.etalePrecoverageToEtale i.1
-    have hC := datum.isConstant i.1
-    obtain ⟨M, ⟨eM⟩⟩ := (L.over U).mem_essImage_of_isConstant
-    let x := (datum.cover.X i.1).algClosurePoint i.2
-    let P := upperStar (ModuleCat.{u + 1} A) U.hom
-    let eP : (constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M ≅ P.obj L :=
-      ((Scheme.Etale.overEquiv U).constantSheafSheafCongrIso
-        (T.smallEtaleTopology.over U) U.left.smallEtaleTopology (ModuleCat.{u + 1} A)
-        Over.mkIdTerminal).symm.app M ≪≫
-      (Scheme.Etale.overSheafEquiv U (ModuleCat.{u + 1} A)).functor.mapIso eM ≪≫
-      Scheme.overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} A) U L
-    have : PreservesFilteredColimitsOfSize.{u, u}
-        (CategoryTheory.forget (ModuleCat.{u + 1} A)) :=
-      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-    let eFree : M ≅ ModuleCat.of A A :=
-      ((Scheme.pointSmallEtale x).sheafFiberConstantSheafIso M).symm ≪≫
-      (Scheme.pointSmallEtale x).sheafFiber.mapIso eP ≪≫
-      (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) U.hom x).app L ≪≫
-      (hStalk _ (x ≫ U.hom)).some
-    exact ⟨eM.symm ≪≫
-      (constantSheaf (T.smallEtaleTopology.over U) (ModuleCat.{u + 1} A)).mapIso eFree⟩
-
 private theorem invertible_exponent (ell n : ℕ) [Fact ell.Prime]
     (S : Scheme.{u}) (hS : ∀ x : S, IsUnit (ell : S.presheaf.stalk x)) :
     HasInvertibleExponent (Coeff ell n) S := by
@@ -382,6 +310,22 @@ private theorem isIso_sectionMap
     infer_instance
   unfold sectionMap
   infer_instance
+
+private theorem compact_normalProjection {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
+    [SmoothOfRelativeDimension d (Scheme.Hom.deformationSpaceProj g s)] :
+    HasCompactification (SectionLocalDualizingComparisons.normalProjection d g s hs) := by
+  have hsq := (SectionLocalDualizingComparisons.normalFibre_spec d g s hs).1
+  have : SmoothOfRelativeDimension d
+      (SectionLocalDualizingComparisons.normalProjection d g s hs) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback hsq inferInstance
+  have : IsSeparated (SectionLocalDualizingComparisons.normalProjection d g s hs) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hsq inferInstance
+  have : Smooth (SectionLocalDualizingComparisons.normalProjection d g s hs) :=
+    SmoothOfRelativeDimension.smooth d _
+  have := SectionLocalDualizingComparisons.normalProjectionQuasiCompact d g s hs
+  exact (NagataCompactification _).hasCompactification
 
 /-- The two shifted complexes are actual locally constant free rank-one module sheaves;
 the canonical exceptional fibre maps are isomorphisms.
@@ -437,9 +381,16 @@ theorem lines_and_fibres
   have : HasInvertibleExponent (Coeff ell n) s.ker.deformationSpace :=
     HasInvertibleExponent.of_hom (s.ker.deformationSpaceProj ≫ g)
   have hD := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
-  refine ⟨section_line (Coeff ell n) g d s,
-    section_line (Coeff ell n) (Scheme.Hom.deformationSpaceProj g s) d
-      s.deformationSpaceSection, ?_, ?_⟩
+  have : IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    isNoetherian_of_locallyOfFiniteType (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have : IsNoetherian s.ker.deformationSpace :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s)
+  have := compact_normalProjection d g s hs
+  obtain ⟨N, hN, hA, hNS⟩ :=
+    HasInvertibleExponent.exists_isUnit_natCast (Λ := Coeff ell n) (X := S)
+  have hlocal := SectionLocalDualizingComparisons.section_local_dualizing_comparisons
+    (Coeff ell n) N hN hA hNS d g s hs
+  refine ⟨hlocal.1, hlocal.2.1, ?_, ?_⟩
   · exact isIso_sectionMap (Coeff ell n) (Scheme.Hom.deformationSpaceProj g s) d g
       (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
       (Scheme.Hom.deformationSpaceOneFibre g s)
@@ -451,6 +402,151 @@ theorem lines_and_fibres
       (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
       s.deformationSpaceSection s.normalConeZeroSection
       Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace
+
+private def pointChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
+    [SmoothOfRelativeDimension d g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) (x : S) :
+    SmoothSectionCentredCoordinates.AffineChart d g s :=
+  (SmoothSectionCentredCoordinates.exists_affineChart d g s hs x).choose
+
+private theorem pointChart_mem {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
+    [SmoothOfRelativeDimension d g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) (x : S) : x ∈ (pointChart d g s hs x).T.1 :=
+  (SmoothSectionCentredCoordinates.exists_affineChart d g s hs x).choose_spec
+
+private def centredChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
+    (c : SmoothSectionCentredCoordinates.AffineChart d g s) :
+    SectionLocalDualizingComparisons.Chart d g s hs := by
+  let j := pullback.lift c.U.1.ι (g.resLE c.T.1 c.U.1 c.mapsInto)
+    (g.resLE_comp_ι c.mapsInto).symm
+  let r := s.resLE c.U.1 c.T.1 c.sectionInto
+  have hr : r ≫ c.U.1.ι = c.T.1.ι ≫ s := s.resLE_comp_ι c.sectionInto
+  have hrpb : IsPullback r c.T.1.ι c.U.1.ι s :=
+    IsOpenImmersion.isPullback _ _ _ _ hr.symm (by
+      simpa only [Scheme.Opens.opensRange_ι] using c.sectionPreimage)
+  have hclosed : IsClosedImmersion r :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) hrpb.flip inferInstance
+  refine
+    { T := c.T.1.toScheme
+      b := c.T.1.ι
+      affineT := c.T.2
+      openB := inferInstance
+      U := c.U.1.toScheme
+      affineU := c.U.2
+      j := j
+      openJ := c.openInBaseChange
+      r := r
+      closedR := hclosed
+      section_eq := ?_
+      e := c.e
+      etaleE := c.etale
+      separatedE := c.separated
+      overE := ?_
+      centres := ?_ }
+  · apply pullback.hom_ext
+    · simpa only [Category.assoc, j, pullback.lift_fst,
+        Scheme.Hom.baseChangeSection_fst] using hr
+    · simp only [Category.assoc, j, pullback.lift_snd,
+        Scheme.Hom.baseChangeSection_snd]
+      apply (cancel_mono c.T.1.ι).mp
+      rw [Category.assoc, g.resLE_comp_ι, ← Category.assoc, hr, Category.assoc, hs]
+      simp
+  · simpa only [j, pullback.lift_snd] using c.over
+  · exact c.zeroFiber
+
+private theorem line_shape (A : Type (u + 1)) [CommRing A] (d : ℕ)
+    (T : Scheme.{u}) (K : DerivedCategoryModule A T)
+    (hK : ∃ L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
+      Nonempty (K⟦-(2 * (d : ℤ))⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧
+      ∃ cov : Scheme.Cover.{u} Scheme.etalePrecoverage T,
+        ∀ i : cov.I₀, Nonempty (L.over (cov.etalePrecoverageToEtale i) ≅
+          (constantSheaf (T.smallEtaleTopology.over (cov.etalePrecoverageToEtale i))
+            (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) :
+    ∃ L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
+      Scheme.IsLisseRankOneSheaf L ∧
+        Nonempty (K⟦-(2 * (d : ℤ))⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) := by
+  obtain ⟨L, hKL, cov, hcov⟩ := hK
+  refine ⟨L, ⟨cov, fun i ↦ ?_⟩, hKL⟩
+  obtain ⟨e⟩ := hcov i
+  let U := cov.etalePrecoverageToEtale i
+  let E := Scheme.Etale.overSheafEquiv U (ModuleCat.{u + 1} A)
+  let ec := ((Scheme.Etale.overEquiv U).constantSheafSheafCongrIso
+    (T.smallEtaleTopology.over U) U.left.smallEtaleTopology
+    (ModuleCat.{u + 1} A) Over.mkIdTerminal).app (ModuleCat.of A A)
+  exact ⟨(Scheme.overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} A) U L).symm ≪≫
+    E.functor.mapIso e ≪≫ ec⟩
+
+private theorem chart_comparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S)
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (SectionLocalDualizingComparisons.normalProjection d g s hs)]
+    [IsNoetherian s.ker.deformationSpace]
+    [SmoothOfRelativeDimension d (Scheme.Hom.deformationSpaceProj g s)]
+    (c : SectionLocalDualizingComparisons.Chart d g s hs) :
+    Nonempty ((upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace.map (ULift.{u} (Fin 1)) c.b)).leftDerivedFunctor.obj (family A g s) ≅
+      (upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T)).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) c.b).leftDerivedFunctor.obj
+            (sectionInvariant A g s))) := by
+  obtain ⟨adjT, adjL, cIso, fIso, _⟩ :=
+    (SectionLocalDualizingComparisons.section_local_dualizing_comparisons
+      A N hN hA hS d g s hs).2.2.2.2 c
+  exact ⟨SectionLocalDualizingComparisons.rawComparison A N hN hA _
+    (SectionLocalDualizingComparisons.invertibleOnSource _ c.b hS) d _ _ cIso fIso⟩
+
+private theorem local_comparisons_exist
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S)
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (SectionLocalDualizingComparisons.normalProjection d g s hs)]
+    [IsNoetherian s.ker.deformationSpace]
+    [SmoothOfRelativeDimension d (Scheme.Hom.deformationSpaceProj g s)] :
+    ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S,
+      ∀ x : cover.I₀, Nonempty
+        ((upperStar (ModuleCat.{u + 1} A)
+          (AffineSpace.map (ULift.{u} (Fin 1)) (cover.f x))).leftDerivedFunctor.obj
+            (family A g s) ≅
+          (upperStar (ModuleCat.{u + 1} A)
+            (AffineSpace (ULift.{u} (Fin 1)) (cover.X x) ↘ cover.X x)).leftDerivedFunctor.obj
+              ((upperStar (ModuleCat.{u + 1} A) (cover.f x)).leftDerivedFunctor.obj
+                (sectionInvariant A g s))) := by
+  let c := pointChart d g s hs
+  let cover : Scheme.Cover.{u} Scheme.etalePrecoverage S :=
+    Scheme.Cover.mkOfCovers S (fun x ↦ (c x).T.1.toScheme) (fun x ↦ (c x).T.1.ι)
+      (fun x ↦ ⟨x, ⟨x, pointChart_mem d g s hs x⟩, rfl⟩) (fun _ ↦ inferInstance)
+  refine ⟨cover, fun x ↦ ?_⟩
+  exact chart_comparison A N hN hA hS d g s hs (centredChart d g s hs (c x))
+
+private theorem normalize_chart (A : Type (u + 1)) [CommRing A]
+    {S T : Scheme.{u}} (b : T ⟶ S) (C : DerivedCategoryModule A S)
+    (F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S))
+    (theta : (upperStar (ModuleCat.{u + 1} A)
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.obj F ≅ C)
+    (e : (upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.obj F ≅
+      (upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace (ULift.{u} (Fin 1)) T ↘ T)).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) b).leftDerivedFunctor.obj C)) :
+    ∃ k, AffineLineNormalizedDescent.LocallyNormalized A b theta k := by
+  let ratio := sectionRestrictionIso (ModuleCat.{u + 1} A)
+    b (AffineSpace.map (ULift.{u} (Fin 1)) b) (AffineSpace.oneSection_comp_map b)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) T) theta e
+  refine ⟨e ≪≫ (upperStar (ModuleCat.{u + 1} A)
+    (AffineSpace (ULift.{u} (Fin 1)) T ↘ T)).leftDerivedFunctor.mapIso ratio.symm, ?_⟩
+  unfold AffineLineNormalizedDescent.LocallyNormalized
+  rw [sectionRestrictionIso_trans_right]
+  exact Iso.self_symm_id ratio
 
 /-- Existence and uniqueness of the comparison normalized at one.
 Source: sk-thm-dnc, Local construction and Gluing
@@ -484,7 +580,40 @@ theorem existsUnique_normalized
         (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
           (sectionInvariant (Coeff ell n) g s),
       Normalized (Coeff ell n) g s hs κ := by
-  sorry
+  classical
+  let A := Coeff ell n
+  have hD := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have : IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    isNoetherian_of_locallyOfFiniteType (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have : IsNoetherian s.ker.deformationSpace :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s)
+  have : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have hlines := lines_and_fibres ell n hn hS hV d g s hs hregular
+  have := hlines.2.2.1
+  let theta := asIso (atOne A g s hs)
+  have hN : 0 < ell ^ n := pow_pos (Nat.Prime.pos Fact.out) n
+  have hA : ((ell ^ n : ℕ) : A) = 0 := by
+    apply ULift.ext
+    exact ZMod.natCast_self _
+  have hNS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)) := by
+    apply S.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    change IsUnit ((S.presheaf.germ ⊤ x hx).hom _)
+    simpa only [map_pow, map_natCast, Nat.cast_pow] using (hS x).pow n
+  have hnormal := compact_normalProjection d g s hs
+  obtain ⟨cover, local_exists⟩ :=
+    local_comparisons_exist A (ell ^ n) hN hA hNS d g s hs
+  choose normalized hnormalized using fun x : cover.I₀ ↦
+    normalize_chart A (cover.f x) (sectionInvariant A g s) (family A g s)
+      theta (local_exists x).some
+  obtain ⟨kappa, hkappa, _, huniq, _⟩ :=
+    (AffineLineNormalizedDescent.normalized_descent A S (2 * (d : ℤ))
+      (sectionInvariant A g s) (family A g s)
+      (line_shape A d S _ hlines.1) (line_shape A d _ _ hlines.2.1) theta cover
+      normalized hnormalized).2.2
+  exact ⟨kappa, hkappa, huniq⟩
 
 /-- The inverse zero restriction is an isomorphism from the original section line to
 the normal-bundle zero-section line, in its canonical Rees-cone presentation.
@@ -704,6 +833,181 @@ theorem baseChange_geometry
         Category.id_comp, Category.assoc,
         Scheme.Hom.normalConeZeroSection_normalConeProj hs, Category.comp_id]
 
+private theorem comparison_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {d : ℕ} {B B' : Scheme.{u}} {Q : ExceptionalSectionPair B d}
+    {Q' : ExceptionalSectionPair B' d} {v : B' ⟶ B}
+    (e : ExceptionalSectionChange Q Q' v) :
+    sectionExceptionalComparison A e =
+      sectionMap A Q.map Q'.map v e.upper e.square
+        Q.sect Q'.sect e.section_comm := by
+  simp only [sectionExceptionalComparison, sectionCoherencePullbackIso, sectionMap,
+    Iso.trans_hom, Iso.app_hom, Iso.app_inv, Iso.symm_hom, Category.assoc]
+
+private def reesFamily {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (Scheme.Hom.normalConeProj g s)] :
+    ExceptionalSectionFamily S d := by
+  have hd := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have hline : IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    isNoetherian_of_locallyOfFiniteType (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have hD : IsNoetherian s.ker.deformationSpace :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s)
+  have hn : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) hd
+  have hsep : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+        (inferInstance : IsSeparated (Scheme.Hom.deformationSpaceProj g s))
+  have : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have hN : IsNoetherian s.ker.normalCone :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.normalConeProj g s)
+  have hcD : IsClosedImmersion s.deformationSpaceSection := by
+    have : IsClosedImmersion
+        (s.deformationSpaceSection ≫ Scheme.Hom.deformationSpaceProj g s) := by
+      rw [Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs]
+      infer_instance
+    exact IsClosedImmersion.of_comp s.deformationSpaceSection
+      (Scheme.Hom.deformationSpaceProj g s)
+  have hcN : IsClosedImmersion s.normalConeZeroSection := by
+    have : IsClosedImmersion (s.normalConeZeroSection ≫ Scheme.Hom.normalConeProj g s) := by
+      rw [Scheme.Hom.normalConeZeroSection_normalConeProj hs]
+      infer_instance
+    exact IsClosedImmersion.of_comp s.normalConeZeroSection
+      (Scheme.Hom.normalConeProj g s)
+  let source : ExceptionalSectionPair S d :=
+    { total := V, map := g, sect := s, section_map := hs }
+  let normal : ExceptionalSectionPair S d :=
+    { total := s.ker.normalCone
+      map := Scheme.Hom.normalConeProj g s
+      sect := s.normalConeZeroSection
+      section_map := Scheme.Hom.normalConeZeroSection_normalConeProj hs }
+  refine
+    { ambient :=
+        { total := s.ker.deformationSpace
+          map := Scheme.Hom.deformationSpaceProj g s
+          sect := s.deformationSpaceSection
+          section_map := Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs }
+      fibre := fun t ↦ if t then source else normal
+      restriction := ?_ }
+  intro t
+  cases t
+  · exact
+      { upper := s.ker.normalConeToDeformationSpace
+        square := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+        section_comm := Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace }
+  · exact
+      { upper := Scheme.Hom.deformationSpaceOneFibre g s
+        square := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+        section_comm := Scheme.Hom.comp_deformationSpaceOneFibre hs }
+
+private theorem oneFibre_toBase {V S : Scheme.{u}} (g : V ⟶ S) (s : S ⟶ V) :
+    Scheme.Hom.deformationSpaceOneFibre g s ≫ s.ker.deformationSpaceProj = 𝟙 V := by
+  simp [Scheme.Hom.deformationSpaceOneFibre]
+
+private theorem oneFibre_naturality {V S S' : Scheme.{u}} (g : V ⟶ S)
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (b : S' ⟶ S)
+    (sq : IsPullback (deformationMap g s hs b)
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b))
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b)) :
+    pullback.fst g b ≫ Scheme.Hom.deformationSpaceOneFibre g s =
+      Scheme.Hom.deformationSpaceOneFibre (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b) ≫ deformationMap g s hs b := by
+  let f := Scheme.Hom.deformationSpaceOneFibre (pullback.snd g b)
+    (Scheme.Hom.baseChangeSection g s hs b) ≫ deformationMap g s hs b
+  have hw : f ≫ Scheme.Hom.deformationSpaceProj g s =
+      (pullback.snd g b ≫ b) ≫ AffineSpace.oneSection (ULift.{u} (Fin 1)) S := by
+    dsimp only [f]
+    rw [Category.assoc, sq.w, ← Category.assoc,
+      (Scheme.Hom.isPullback_deformationSpaceOneFibre (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b)).w, Category.assoc,
+      AffineSpace.oneSection_comp_map, ← Category.assoc]
+  let l := (Scheme.Hom.isPullback_deformationSpaceOneFibre g s).lift f
+    (pullback.snd g b ≫ b) hw
+  have hl : l ≫ Scheme.Hom.deformationSpaceOneFibre g s = f := IsPullback.lift_fst _ _ _ _
+  have he : l = pullback.fst g b := by
+    calc
+      l = l ≫ (Scheme.Hom.deformationSpaceOneFibre g s ≫ s.ker.deformationSpaceProj) := by
+        rw [oneFibre_toBase, Category.comp_id]
+      _ = f ≫ s.ker.deformationSpaceProj := by rw [← Category.assoc, hl]
+      _ = pullback.fst g b := by
+        dsimp only [f, deformationMap]
+        rw [Category.assoc, Scheme.IdealSheafData.deformationSpaceMap_toBase,
+          ← Category.assoc, oneFibre_toBase, Category.id_comp]
+  rw [← he]
+  exact hl
+
+private def reesBaseChange {V S S' : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]
+    [IsNoetherian S'] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g]
+    [IsSeparated g] [QuasiCompact g] [HasCompactification g]
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (b : S' ⟶ S)
+    [IsNoetherian (pullback g b)]
+    [SmoothOfRelativeDimension d (pullback.snd g b)]
+    [IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs b)]
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (Scheme.Hom.normalConeProj g s)]
+    [HasCompactification (Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+      (Scheme.Hom.baseChangeSection g s hs b))]
+    [HasCompactification (Scheme.Hom.normalConeProj (pullback.snd g b)
+      (Scheme.Hom.baseChangeSection g s hs b))]
+    (sq : IsPullback (deformationMap g s hs b)
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b))
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b))
+    (sqN : IsPullback (normalMap g s hs b sq)
+      (Scheme.Hom.normalConeProj (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b))
+      (Scheme.Hom.normalConeProj g s) b)
+    (hz : (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection ≫
+      normalMap g s hs b sq = b ≫ s.normalConeZeroSection) :
+    ExceptionalFamilyBaseChange (reesFamily d g s hs)
+      (reesFamily d (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)
+        (Scheme.Hom.baseChangeSection_snd g s hs b)) b := by
+  refine
+    { ambient :=
+        { upper := deformationMap g s hs b
+          square := sq
+          section_comm :=
+            Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection
+              g s hs b }
+      fibre := ?_
+      point_comm := ?_
+      fibre_comm := ?_ }
+  · intro t
+    cases t
+    · exact { upper := normalMap g s hs b sq, square := sqN, section_comm := hz }
+    · exact
+        { upper := pullback.fst g b
+          square := IsPullback.of_hasPullback g b
+          section_comm := Scheme.Hom.baseChangeSection_fst g s hs b }
+  · intro t
+    cases t
+    · exact (AffineSpace.zeroSection_comp_map b).symm
+    · exact (AffineSpace.oneSection_comp_map b).symm
+  · intro t
+    cases t
+    · exact IsPullback.lift_fst _ _ _ _
+    · exact oneFibre_naturality g s hs b sq
+
+private theorem line_compositor (A : Type (u + 1)) [CommRing A]
+    {S S' : Scheme.{u}} (b : S' ⟶ S) (C : DerivedCategoryModule A S) :
+    (sectionCoherencePullbackIso A (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S') b
+      (AffineSpace.map (ULift.{u} (Fin 1)) b)
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) (AffineSpace.map_over b).symm C).inv =
+        (linePullback A b C).hom := by
+  have h := congrArg Iso.hom (sectionPullback_endpoint A
+    (AffineSpace.map (ULift.{u} (Fin 1)) b)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S') b _ _
+    (AffineSpace.map_over b).symm rfl rfl (AffineSpace.map_over b) C)
+  simpa only [sectionCoherencePullbackIso, linePullback, Iso.trans_inv, Iso.symm_inv,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    NatTrans.comp_app] using h
+
 /-- Both normalized comparisons commute with arbitrary Noetherian base change under the
 canonical exceptional mates. The first equation is b_F followed by kappa', equal to
 pullback(kappa) followed by the projection compositor and a'^*b_C. The second is
@@ -784,6 +1088,90 @@ theorem baseChange_compatibility
         (Scheme.Hom.normalConeProj (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b))
         b (normalMap g s hs b sq) sqN s.normalConeZeroSection
         (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection hz := by
-  sorry
+  classical
+  have hsm : SmoothOfRelativeDimension d (pullback.snd g b) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      (IsPullback.of_hasPullback g b) inferInstance
+  have : Smooth (pullback.snd g b) := SmoothOfRelativeDimension.smooth d _
+  have : IsNoetherian (pullback g b) :=
+    isNoetherian_of_locallyOfFiniteType (pullback.snd g b)
+  have hS' : ∀ x : S', IsUnit (ell : S'.presheaf.stalk x) := by
+    intro x
+    simpa only [map_natCast] using (hS (b x)).map (b.stalkMap x).hom
+  have hV' : ∀ x : (pullback g b : Scheme.{u}), IsUnit (ell : (pullback g b).presheaf.stalk x) := by
+    intro x
+    simpa only [map_natCast] using (hS' (pullback.snd g b x)).map
+      ((pullback.snd g b).stalkMap x).hom
+  have hregular' : ∀ x : S', ∃ U : (pullback g b).affineOpens,
+      (Scheme.Hom.baseChangeSection g s hs b) x ∈ U.1 ∧
+      ∃ r : Fin d → Γ(pullback g b, U.1),
+        RingTheory.Sequence.IsWeaklyRegular Γ(pullback g b, U.1) (List.ofFn r) ∧
+          Ideal.span (Set.range r) = (Scheme.Hom.baseChangeSection g s hs b).ker.ideal U := by
+    intro x
+    obtain ⟨c, hc⟩ := SmoothSectionCentredCoordinates.exists_affineChart d
+      (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)
+      (Scheme.Hom.baseChangeSection_snd g s hs b) x
+    refine ⟨c.U, c.sectionInto hc, c.x, c.regular.toIsWeaklyRegular, ?_⟩
+    simpa only [Ideal.map_span, ← Set.range_comp, Function.comp_def,
+      MvPolynomial.eval₂Hom_X'] using c.sectionIdeal
+  have hu := existsUnique_normalized ell n hn hS hV d g s hs hregular
+  have hu' := existsUnique_normalized ell n hn hS' hV' d (pullback.snd g b)
+    (Scheme.Hom.baseChangeSection g s hs b)
+    (Scheme.Hom.baseChangeSection_snd g s hs b) hregular'
+  let P := reesFamily d g s hs
+  let P' := reesFamily d (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)
+    (Scheme.Hom.baseChangeSection_snd g s hs b)
+  let e := reesBaseChange d g s hs b sq sqN hz
+  have norm_eq (k) : P.IsNormalized (Coeff ell n) k ↔ Normalized (Coeff ell n) g s hs k := by
+    simp only [ExceptionalSectionFamily.IsNormalized, ExceptionalSectionFamily.fibreMap,
+      comparison_eq, P, reesFamily, exceptionalFamilyPoint, Normalized,
+      atOne]
+    rfl
+  have norm_eq' (k) : P'.IsNormalized (Coeff ell n) k ↔
+      Normalized (Coeff ell n) (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b) (Scheme.Hom.baseChangeSection_snd g s hs b) k := by
+    simp only [ExceptionalSectionFamily.IsNormalized, ExceptionalSectionFamily.fibreMap,
+      comparison_eq, P', reesFamily, exceptionalFamilyPoint, Normalized,
+      atOne]
+    rfl
+  have hk : P.IsNormalized (Coeff ell n) κ ∧
+      ∀ τ, P.IsNormalized (Coeff ell n) τ → τ = κ :=
+    ⟨(norm_eq κ).mpr hκ, fun τ hτ ↦ hu.unique ((norm_eq τ).mp hτ) hκ⟩
+  have hk' : P'.IsNormalized (Coeff ell n) κ' ∧
+      ∀ τ, P'.IsNormalized (Coeff ell n) τ → τ = κ' :=
+    ⟨(norm_eq' κ').mpr hκ', fun τ hτ ↦ hu'.unique ((norm_eq' τ).mp hτ) hκ'⟩
+  have hN : 0 < ell ^ n := pow_pos (Nat.Prime.pos Fact.out) n
+  have hA : ((ell ^ n : ℕ) : Coeff ell n) = 0 := by
+    apply ULift.ext
+    exact ZMod.natCast_self _
+  have hInv : ∀ x : S, IsUnit ((ell ^ n : ℕ) : S.presheaf.stalk x) := by
+    intro x
+    simpa only [Nat.cast_pow] using (hS x).pow n
+  have hc := sectionExceptional_fibre_coherence (Coeff ell n) (ell ^ n) hN hA
+    P P' hInv b e
+  have hbc := sectionExceptional_normalized_baseChange (Coeff ell n) (ell ^ n) hN hA
+    P P' hInv b e κ κ' hk hk'
+  simp only [comparison_eq] at hc hbc
+  have ha := hc.1
+  have hf := (hc.2 true).2.2.1
+  have hn := (hc.2 false).2.2.1
+  have hfirst := hbc.1
+  have hsecond := hbc.2
+  change IsIso (familyBaseChange (Coeff ell n) g s hs b sq) at ha
+  change IsIso (sourceBaseChange (Coeff ell n) g s hs b) at hf
+  change IsIso (sectionMap (Coeff ell n) (Scheme.Hom.normalConeProj g s)
+      (Scheme.Hom.normalConeProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b)) b (normalMap g s hs b sq) sqN
+      s.normalConeZeroSection
+      (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection hz) at hn
+  change familyBaseChange (Coeff ell n) g s hs b sq ≫ κ'.hom = _ at hfirst
+  simp only [ExceptionalSectionFamily.specialization,
+    ExceptionalSectionFamily.fibreMap, comparison_eq] at hsecond
+  change sourceBaseChange (Coeff ell n) g s hs b ≫
+      specialization (Coeff ell n) (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b) κ' = _ at hsecond
+  refine ⟨hf, ha, hn, ?_, hsecond⟩
+  rw [line_compositor] at hfirst
+  exact hfirst
 
 end AlgebraicGeometry.Etale.NoetherianSectionSpecialization

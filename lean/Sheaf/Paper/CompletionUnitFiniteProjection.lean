@@ -232,6 +232,7 @@ private theorem unit_projection_model (S : Site.{u}) (A : Type u) [CommRing A]
   apply (cancel_mono ((S.finiteRestriction A I n).map
     ((ConstantCompletion.extendComparison φ).app P))).mp
   have he := (S.finiteEvaluationIso_existsUnique A I n).exists.choose_spec P hP hflat
+  dsimp only [evaluationSquareFormula] at he
   erw [ConstantCompletion.quotientEvaluationComplexIso_hom_id,
     CategoryTheory.Functor.map_id, Category.comp_id] at he
   have hu := (S.finiteAdjunction_existsUnique A I n).exists.choose_spec P hP

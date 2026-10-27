@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-affine-isolated-deformation-lift",
+ "kind": "statement",
+ "title": "Lifting prescribed isolated local deformations of an affine scheme",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $A'\\twoheadrightarrow A$ be a surjective homomorphism of finite-dimensional commutative $k$-algebras, each with an augmentation to $k$ whose kernel is its unique maximal ideal, and suppose the homomorphism respects the augmentations. Let $V$ be an affine finite-type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism], and let $p_1,\\ldots,p_r$ be distinct closed points such that $V$ is smooth over $k$ [def-sbc-smooth-morphisms] away from them. Let $Y$ be an affine scheme flat over $A$ [def-weil-flat-morphism] with a specified isomorphism $Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k\\cong V$ [def-pc-fibre-product]. Use this nilpotent special fibre to identify the points of $Y$ with those of $V$. For each $i$, let $D_i$ be a local $A'$-algebra (a ring with a unique maximal ideal), flat [def-weil-pbc-flat-ring-map] and essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], with a specified isomorphism $\\delta_i:D_i\\otimes_{A'}A\\cong\\mathcal O_{Y,p_i}$. Here tensor products have their usual algebra structure [def-weil-pbc-module-tensor-product]. Then there are an affine scheme $Y'$ flat over $A'$, an isomorphism $\\alpha:Y'\\times_{\\operatorname{Spec}A'}\\operatorname{Spec}A\\cong Y$, and local $A'$-algebra isomorphisms $\\beta_i:\\mathcal O_{Y',p_i}\\cong D_i$. The reduction of $\\beta_i$ followed by $\\delta_i$ equals the local-ring identification $\\mathcal O_{Y',p_i}\\otimes_{A'}A\\cong\\mathcal O_{Y,p_i}$ induced by $\\alpha$. The case $r=0$ is included.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZF, lemma-isolated, first smooth arrow, unpacked using Tag 0DYX, lemma-affine, and Example example-rings; smoothness includes a compatible isomorphism over the given deformation. Only the first arrow is asserted; no henselization, completion or tangent-space clause."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-dim-algebra-artinian] the base rings are Artinian; [lem-weil-pbc-artinian-local-noetherian-nilpotent] makes them Noetherian with nilpotent maximal ideals. The kernel $J=\\ker(A'\\to A)$ lies in the maximal ideal of $A'$, hence is nilpotent. In any algebra over one of these bases, its maximal-ideal extension is nilpotent, so every prime contains it; inverse image and quotient therefore give mutually inverse bijections of prime ideals with the special fibre. This also identifies the unique prime above any specified special-fibre point. These observations justify all point labels and all inverse-image multiplicative subsets used below. Explicitly, for a multiplicative subset $S\\subset P$, use its full inverse image under each reduction map to $P$; at $p_i$ this is the complement of the unique prime over $\\mathfrak m_i$. Thus the localization maps in steps 4–6 refer to the same marked local lifting problem at every stage.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, lemma-isolated: Artinian coefficient rings and nilpotent special fibres"
+   }
+  },
+  {
+   "text": "Write $Y=\\operatorname{Spec}B$ by [lem-weil-pbc-affine-open-spec-points]. Apply [lem-sbc-finite-affine-tensor-base-change] for a single affine summand: the given special-fibre marking identifies $P=B\\otimes_Ak$ with $\\Gamma(V,\\mathcal O_V)$. By [lem-pc-affine-finite-type-algebra], $P$ is finite type over $k$. The nilpotent lifting lemma [lem-weil-pbc-finite-type-lift-nilpotent] implies that $B$ is finite type over $A$, and the affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes it a flat $A$-algebra. Let $\\mathfrak m_i\\subset P$ be the maximal ideals of the closed points $p_i$, and let $\\mathfrak q_i\\subset B$ be their inverse images. By [lem-weil-pbc-affine-open-stalk-localization], $\\mathcal O_{Y,p_i}=B_{\\mathfrak q_i}$. Thus $\\delta_i$ marks the reduction of $D_i$ as that localization.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-sbc-finite-affine-tensor-base-change",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tags 0DYX, lemma-affine, and 0DZF, lemma-isolated, passage to flat algebra deformations"
+   }
+  },
+  {
+   "text": "Filter $J$ using [lem-weil-pbc-artinian-ideal-length-one-filtration], say $0=J_0\\subset\\cdots\\subset J_s=J$, and put $C_t=A'/J_{s-t}$ for $0\\leq t\\leq s$. Then $C_0=A$, $C_s=A'$, and $C_{t+1}\\to C_t$ has length-one kernel $I_t$. This kernel is annihilated by the maximal ideal: multiplication by that ideal sends a simple module either to zero or to itself, and the latter is impossible because the ideal is nilpotent. Each kernel lies in the maximal ideal of its augmented source, so $I_t^2=0$. Hence these are small extensions. Put $D_{i,t}=D_i\\otimes_{A'}C_t$. They are flat over $C_t$: on any injection of $C_t$-modules, tensoring with $D_{i,t}$ is the same as tensoring the underlying injection over $A'$ with $D_i$ [def-weil-pbc-flat-ring-map]. Tensor associativity identifies successive reductions, and reduction modulo a nilpotent ideal of the local ring $D_i$ is local. We inductively construct flat finite-type $C_t$-algebras $B_t$, starting with $B_0=B$, reduction isomorphisms $a_t:B_{t+1}\\otimes_{C_{t+1}}C_t\\cong B_t$, and local isomorphisms $b_{i,t}:(B_t)_{p_i}\\cong D_{i,t}$. At $t=0$ use $b_{i,0}=\\delta_i^{-1}$. Require for each $t$ that $\\rho_{i,t}(b_{i,t+1}\\otimes C_t)=b_{i,t}(a_t)_{p_i}$, where $\\rho_{i,t}:D_{i,t+1}\\otimes C_t\\cong D_{i,t}$ is the tensor-associativity map.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, first smooth arrow: reduction to small extensions, with the marked induction stated explicitly"
+   }
+  },
+  {
+   "text": "Fix $t$ and the inductive data. The special fibre of $B_t$ is still $P$. Set $N_t=P\\otimes_kI_t$, a finite $P$-module, and $T^j=\\operatorname{Ext}^j_P(L_{P/k},N_t)$ for $j=1,2$. By [lem-sfb-cotangent-ext-smooth-support], both are finite $P$-modules, their localizations are the corresponding local cotangent Ext groups, and they vanish at every prime where $V/k$ is smooth. Their supports therefore lie in $\\{\\mathfrak m_1,\\ldots,\\mathfrak m_r\\}$. Apply [lem-sfb-finite-maximal-support-localization] to obtain isomorphisms $T^j\\cong\\prod_i(T^j)_{\\mathfrak m_i}$. Its Noetherian hypothesis follows from [lem-weil-pbc-finite-type-algebra-noetherian] applied to $k\\to P$; a field is Noetherian because its only ideals are zero and the whole field.",
+   "uses": [
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-finite-maximal-support-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, first arrow: finite support of positive cotangent cohomology, as in lemma-first-order-localization"
+   }
+  },
+  {
+   "text": "By [lem-sfb-flat-algebra-small-extension-control], the obstruction to a marked flat lift of $B_t$ to $C_{t+1}$ is an element $o\\in T^2$. For each $i$, the prescribed $D_{i,t+1}$ is a marked flat lift of $(B_t)_{p_i}$: its reduction marking is $b_{i,t}^{-1}\\rho_{i,t}$. Naturality of that obstruction, composed with the localization isomorphism $(T^2)_{\\mathfrak m_i}\\cong T^2(P_{\\mathfrak m_i},(N_t)_{\\mathfrak m_i})$ of [lem-sfb-cotangent-ext-smooth-support], identifies its local obstruction with $o_{\\mathfrak m_i}$, and existence of this marked local lift makes it zero. Injectivity of the product map in the preceding step forces $o=0$. Choose a marked flat lift $(B^*,a)$ of $B_t$. It is finite type over $C_{t+1}$ by [lem-weil-pbc-finite-type-lift-nilpotent], applied to the square-zero ideal $I_t$. By [lem-pc-affine-flat-module-localization-preserves-flatness], its localizations are flat over $C_{t+1}$.",
+   "uses": [
+    "lem-sfb-flat-algebra-small-extension-control",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "lem-pc-affine-flat-module-localization-preserves-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, first arrow: local obstruction vanishing gives a global lift"
+   }
+  },
+  {
+   "text": "Let $x_i$ be the marked class of $(B^*)_{p_i}$ and $y_i$ that of $D_{i,t+1}$, both marked over $(B_t)_{p_i}$ as above. The torsor assertion of [lem-sfb-flat-algebra-small-extension-control] gives a unique $u_i\\in(T^1)_{\\mathfrak m_i}$, the local torsor group being identified with $(T^1)_{\\mathfrak m_i}$ by the localization isomorphism of [lem-sfb-cotangent-ext-smooth-support], with $x_i+u_i=y_i$. Surjectivity of $T^1\\to\\prod_i(T^1)_{\\mathfrak m_i}$ from [lem-sfb-finite-maximal-support-localization] gives $u$ with these coordinates. Replace $(B^*,a)$ by a marked lift in its torsor class $x+u$. Localization preserves the torsor action by [lem-sfb-flat-algebra-small-extension-control], so each local class now equals $y_i$. Choose the resulting marked isomorphisms as $b_{i,t+1}$ and call the new algebra $B_{t+1}$, with marking $a_t$. Equality as marked classes means precisely $b_{i,t}^{-1}\\rho_{i,t}(b_{i,t+1}\\otimes C_t)=(a_t)_{p_i}$; multiplying by $b_{i,t}$ proves the induction equation, including the reduction compatibility. Nilpotent lifting of finite type again applies to this representative. When $r=0$, the two support modules are zero; the same argument supplies a lift and there are no adjustment conditions.",
+   "uses": [
+    "lem-sfb-flat-algebra-small-extension-control",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-finite-maximal-support-localization",
+    "lem-weil-pbc-finite-type-lift-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, first arrow: adjust the global lift to realize the specified local lifts with their markings"
+   }
+  },
+  {
+   "text": "Induction yields $B_s$ over $A'$ and the composite reduction marking $a:B_s\\otimes_{A'}A\\cong B$. Compose the induction equations of step 3; at $t=0$ one has $b_{i,0}=\\delta_i^{-1}$, so they give $\\delta_i(b_{i,s}\\otimes_{A'}A)=a_{p_i}$. Set $Y'=\\operatorname{Spec}B_s$. The one-summand affine base-change formula [lem-sbc-finite-affine-tensor-base-change] makes $a$ into $\\alpha:Y'\\times_{A'}A\\cong Y$, and each stalk is flat over $A'$ by [lem-pc-affine-flat-module-localization-preserves-flatness]. The spectrum of $A'$ has one point with local ring $A'$, so [def-weil-flat-morphism] gives flatness of $Y'$ over $A'$. The stalk dictionary [lem-weil-pbc-affine-open-stalk-localization] identifies $b_{i,s}$ with $\\beta_i:\\mathcal O_{Y',p_i}\\cong D_i$. These ring isomorphisms are local because both rings are local. Under the same dictionary the displayed equation is exactly the required compatibility with $\\alpha$. Thus all clauses, including $J=0$, empty $V$, and $r=0$, hold.",
+   "uses": [
+    "lem-sbc-finite-affine-tensor-base-change",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tags 0DZF and 0DYX: iterate the marked lifts and return from algebras to affine schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-lift-nilpotent",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-cotangent-ext-smooth-support",
+  "lem-sfb-finite-maximal-support-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-flat-algebra-small-extension-control",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZF, lemma-isolated, first arrow; explicit obstruction-and-torsor proof via cotangent.tex Tag 08SP and finite support, filling the local-to-global argument without henselizations or completions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra smooth away from finitely many maximal ideals lifts deformations of its local rings along a surjection of Artinian local algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal smoothness of algebra homomorphisms does not lift the algebra itself with specified local deformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The deformation functor of an affine scheme maps smoothly to the product of deformation functors of its isolated singular local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S).toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (Mv\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is isomorphic to the spectrum of the polynomial ring $ \\\\Gamma(S)[x_1,\\\\dots,x_n] $ over the global sections of $ S $. Th\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [AlgebraicGeometry.IsAffine S] →\\n      AlgebraicGeometry.AffineSpace n S ≅\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n ↑(S.presheaf.obj (Opposite.op ⊤)),\\n            commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over an affine scheme $S$ is defined as the global section of the structure sheaf corresponding to\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal smoothness of algebra homomorphisms does not lift the algebra itself with specified local deformations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal smoothness of algebra homomorphisms does not lift the algebra itself with specified local deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|Deformation|isolated.*singular",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Decomposition/Lebesgue.lean\", \"line\": \"120\", \"text\": \"isolated, see `MeasureTheory.Measure.measure_sub_singularPart` and\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Decomposition/Lebesgue.lean\", \"line\": \"126\", \"text\": \"isolated, see `MeasureTheory.Measure.measure_sub_singularPart` and\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal smoothness of algebra homomorphisms does not lift the algebra itself with specified local deformations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local to global lifting of deformations of an affine algebra with isolated singularities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(Q : AffineTargetMorphismProperty) [Q.IsLocal] : HasAffineProperty (targetAffineLocally Q) Q\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then any morphism that satisfies $ Q $ locally on affine opens of the target scheme must satisfy $ Q $ globally.\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) (x : A) :\\n  Ideal.Quotient.mk I (FormallySmooth.lift I hI g x) = g x\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}\n  {\"name\": \"Algebra.FormallySmooth.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I)\\n  (g g_1 : A →ₐ[R] B ⧸ I), g = g_1 → Algebra.FormallySmooth.lift I hI g \", \"doc\": \"For a commutative ring $ R $ and a formally smooth $ R $-algebra $ A $, given a commutative ring $ B $ with a nilpotent ideal $ I $, if two algebra homomorphisms $ g $ and $ g_1 $ from $ A $ to $ B/I \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{x : X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A)\\n  (φRX : R ⟶ Γ(X, U)) (hφRA : RingHom.FiniteType φRA.hom) (e : φRA ≫ φ = φRX ≫ X.presheaf.germ U x hxU) :\\n  ∃ (V : X.Opens) (hxV : x ∈ V) (φ' : A ⟶ Γ(X, V)) (i : V ≤ U),\\n    IsAffineOpen V ∧ φ = φ'\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (I : Ideal B) (hI : IsNilpotent I) (g₁ g₂ : A →ₐ[R] B)\\n  (h : (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I).comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formal smoothness of algebra homomorphisms does not lift the algebra itself with specified local deformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme smooth outside finitely many closed points lifts prescribed flat local algebra deformations over an Artinian base",
+   "results": {
+    "t": "2026-10-22T06:29:36Z",
+    "tool": "leanfinder",
+    "query": "An affine scheme smooth outside finitely many closed points lifts prescribed flat local algebra deformations over an Artinian base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "Algebra.Smooth.formallySmooth",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth"
+    ],
+    "digest": "109b5508d092f364"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and formal smoothness of maps do not realize prescribed local algebra deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "isolated.*deform|deform.*isolated|lift.*[Dd]eformation",
+   "results": {
+    "t": "2026-10-22T06:29:36Z",
+    "tool": "grep",
+    "query": "isolated.*deform|deform.*isolated|lift.*[Dd]eformation",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and formal smoothness of maps do not realize prescribed local algebra deformations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-curve-formal-lifting",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine.",
+   "via": [
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-affine-isolated-deformation-lift",
+  "worker": "stage1",
+  "summary": "Q24 gives the first-arrow isolated local lifting statement an explicit marked small-extension induction: positive cotangent cohomology has finite isolated support, so local obstruction vanishing and local torsor differences lift globally. Three smaller algebra inputs are stated and searched. The imported statement, its earlier searches, and all inherited provenance are retained. Repair of the 2026-10-22 side-completion return: current live statements and all citation quotations were reread, the inverse-image localization convention is explicit in step 1, and the two new shared-tag comparisons are distinguished in the report. Delivery is rebuilt on current origin/sheaf-dag by the delivery tool, retaining current maintainer-owned fields.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. The affine first-arrow lifting input is realized by steps 1–7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-dim-algebra-artinian",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-spec-points",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-lift-nilpotent",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "def-weil-pbc-flat-ring-map",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   },
+   {
+    "node": "def-weil-flat-morphism",
+    "why": "Generic affine, flatness, finite-type Noetherianity, or Artinian algebra tool for the isolated affine lifting argument; the unit has no replacement for this dictionary/filtration fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-lift-nilpotent",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "def-weil-flat-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-8cb8a65dc",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-8cb8a65dc (reviewer sub-agent of L); spot-checked: Fourth push. Content is the same as head b2475 (json diff of all four nodes is empty). The b2475 FIX was lost again, so I re-applied it. Item: matches the first arrow of Stacks 0DZF (examples-defos lemma-isolated, with example-rings and lemma-affine); no henselization, completion or tangent clause; not weakened. Steps 1-7 read against all 13 cited statements and every hypothesis holds: nilpotent lifting with I=m_A, the affine flatness criterion with U=Y, stalk localization (c), the length-one filtration giving m*I_t=0 and I_t^2=0, Noetherian over k, flat localization, def-weil-flat-morphism on the one-point Spec A'. The obstruction is zero because the product map is injective; the torsor adjustment uses its surjectivity; the composed equations give delta_i(b_{i,s} tensor A)=a_{p_i}. Edge cases J=0, V empty and r=0 hold. New nodes are true, general and statement-only. Small-extension-control checked against cotangent.tex l.2952 (08SP) with N=B tensor_C I=P tensor_k I, 051C, 08QQ and 08SF. Cotangent-ext-smooth-support checked against 08PX, 08SF, 0A6A and 08R5, tested on k[x,y]/(xy). Finite-maximal-support checked against 00L2, 00JA and 00JB, tested on Z/6 and r=0. Duplicates: the new ND node lem-sfb-isolated-affine-completion-deformation (composite map to completions) differs, because complete D_i do not determine the local rings; it is overlap only, maintainer note. pbc product-of-localizations is a ring statement; sc finite-length-finite-maximal-support gives finite length only. Batch-5: def-trf-cotangent-resolution-data, cited by two new nodes, is a general definition of the cotangent complex (08PM/08PN), not part of the trace formula or Poincare duality proofs; accepted. No SGA. The 13 tool uses are accepted. Fixes: (B4) step 4 literal TAB restored to k\\to P; (C3) steps 5 and 6 cite lem-sfb-cotangent-ext-smooth-support for the localization isomorphism, in text and uses, and proof_deps equals the union of uses; (B2) the cotangent-ext node's vanishing clause now says 'for every j>=1' (j was unbound there, and the claim fails for j=0).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineIsolatedDeformationLift",
+  "declaration": "AlgebraicGeometry.exists_affine_isolated_deformation_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineIsolatedDeformationLift.lean",
+  "statement": "theorem exists_affine_isolated_deformation_lift (k A' A : Type u) [Field k] [CommRing A'] [CommRing A] [Algebra k A'] [Algebra k A] [Algebra A' A] [IsScalarTower k A' A] [FiniteDimensional k A'] [FiniteDimensional k A] [IsLocalRing A'] [IsLocalRing A] (ε' : A' →ₐ[k] k) (ε : A →ₐ[k] k) (hε' : RingHom.ker ε'.toRingHom = IsLocalRing.maximalIdeal A') (hε : RingHom.ker ε.toRingHom = IsLocalRing.maximalIdeal A) (hsurj : Function.Surjective (algebraMap A' A)) (haug : ε.toRingHom.comp (algebraMap A' A) = ε'.toRingHom) (V : Scheme.{u}) [IsAffine V] (f : V ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (r : ℕ) (p : Fin r → V) (hp : Function.Injective p) (hclosed : ∀ i : Fin r, IsClosed ({p i} : Set V)) (hsmooth : ∀ x : V, x ∉ Set.range p → ∃ U : V.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) (Y : Scheme.{u}) [IsAffine Y] (g : Y ⟶ Spec (.of A)) [Flat g] (j : V ⟶ Y) (hspecial : IsPullback j f g (Spec.map (CommRingCat.ofHom ε.toRingHom))) (D : Fin r → Type v) [∀ i : Fin r, CommRing (D i)] [∀ i : Fin r, IsLocalRing (D i)] [∀ i : Fin r, Algebra A' (D i)] [∀ i : Fin r, Module.Flat A' (D i)] [∀ i : Fin r, Algebra.EssFiniteType A' (D i)] (δ : ∀ i : Fin r, (D i ⊗[A'] A) ≃+* Y.presheaf.stalk (j (p i))) (hδ : ∀ (i : Fin r) (a : A), δ i (1 ⊗ₜ[A'] a) = (StructureSheaf.toStalk A (g (j (p i))) ≫ g.stalkMap (j (p i))).hom a) : ∃ (Y' : Scheme.{u}) (g' : Y' ⟶ Spec (.of A')) (l : Y ⟶ Y'), IsAffine Y' ∧ Flat g' ∧ IsPullback l g g' (Spec.map (CommRingCat.ofHom (algebraMap A' A))) ∧ ∃ β : ∀ i : Fin r, Y'.presheaf.stalk (l (j (p i))) ≃+* D i, (∀ (i : Fin r) (a : A'), β i ((StructureSheaf.toStalk A' (g' (l (j (p i)))) ≫ g'.stalkMap (l (j (p i)))).hom a) = algebraMap A' (D i) a) ∧ (∀ (i : Fin r) (z : Y'.presheaf.stalk (l (j (p i)))), δ i (β i z ⊗ₜ[A'] (1 : A)) = l.stalkMap (j (p i)) z)",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cc35aae9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: local f.d. augmented A'->A surjection (IsScalarTower, haug), affine finite-type V (LocallyOfFiniteType+QuasiCompact), distinct closed points via Fin r, smooth-open away from range p, flat affine Y with IsPullback j f g (Spec ε), local flat EssFiniteType D_i with A-linear δ_i (hδ). Conclusion: affine flat Y', IsPullback l g g' (Spec algebraMap) = α, β_i RingEquiv + A'-scalar eq, marked compatibility δ(β z⊗1)=l.stalkMap z (A-linear so it fixes the whole map). No extra hypotheses; r=0, V=∅, A'=A covered; universes bound (D in v). lean.statement verbatim in file; only the lean record changed vs side-live; imports = proof_deps with Lean modules; source/blueprint docstrings and 7-step proof plan present; sorry only, no defs. No duplicate in Mathlib/project. First S2 delivery; only citer is a proof dependency. No findings."
+ }
+}

@@ -21,89 +21,59 @@
  ],
  "proof": [
   {
-   "text": "For $C_T(M)=\\Lambda_T\\otimes_{\\underline R}\\underline M$, the admissible scalar-realization lemma gives Noetherian $R$ and exact $C_T$, also on slices, retaining the completed integral sheaf and continuous field coefficients.",
+   "text": "For every canonical coefficient case use admissible_scalar_realization_exact to obtain Noetherian scalars and exact modelFunctor on every scheme. For the finite ring turn (ell:A)^n=0 into annihilation of every a by ell^n. Finite-type schemes over the given field are locally Noetherian and quasi-compact.",
    "uses": [
-    "lem-sfb-admissible-scalar-realization-exact"
+    "lem-sfb-admissible-scalar-realization-exact",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 2--3; coefficient exactness extracted from old steps 1, 3, 4."
-   }
+   "elementary": false
   },
   {
-   "text": "The finite-projective dual lemma makes $F_i^\\vee$ bounded finite projective. For $G=F_i,F_i^\\vee$, finite kernels give finite $Z^q(G)$; the cokernel of $G^{q-1}\\to Z^q(G)$ is finite $H^q(G)$. Noetherian finite-module presentation makes both cohomology modules finitely presented.",
+   "text": "The explicit scalarDual has finite terms by finite-projective duality and reversed term bounds [-b,-a]. For each scalar complex, its degree-q cohomology is isomorphic to the quotient of ker(d^q) by the range of its previous differential. The kernel is finite over the Noetherian scalar ring, as is its quotient, and hence this cohomology is finitely presented. The same applies to the dual.",
    "uses": [
     "lem-sf-finite-projective-dual",
     "lem-pc-noetherian-finite-kernels-cokernels",
     "lem-sc-noetherian-finite-module-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 3 perfect-factor membership; old step 2."
-   }
+   "elementary": false
   },
   {
-   "text": "Derived internal Hom restriction gives $P^\\vee|_{U_i}=R\\mathcal Hom_{B|_{U_i}}(C_{U_i}F_i,B|_{U_i})$. Apply scalar-perfect dual realization to obtain $P^\\vee|_{U_i}\\simeq C_{U_i}(F_i^\\vee)$, with its signed differential.",
+   "text": "Apply ordinaryScalarPerfect_local_dual to F and the actual scalarDual F. Its coordinates are the identity and its differential equation is definitional. This yields the derived dual models on every original cover member.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sfb-scalar-perfect-dual-realization"
+    "lem-sfb-ordinary-scalar-perfect-local-dual"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2 final sentence; old steps 5--7."
-   }
+   "elementary": false
   },
   {
-   "text": "Exact realization and exact slice restriction commute with homology. Applied to the given model and Step 3, this yields $H^q(P)|_{U_i}\\cong C_{U_i}(H^qF_i)$ and $H^q(P^\\vee)|_{U_i}\\cong C_{U_i}(H^qF_i^\\vee)$ on every ORIGINAL cover member. Step 2 supplies finite presentation.",
+   "text": "Exact pullback, derived cohomology factorization and exact scalar realization identify the restriction of cohomology with the realization of scalar cohomology. Apply this to the given models and to the dual models. Pair the two formulas with the scalar finite presentations.",
    "uses": [
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "lem-sp-exact-functor-preserves-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 2--3; old step 8."
-   }
+   "elementary": false
   },
   {
-   "text": "A field is Noetherian since its ideals are $0,(1)$. Finite type over it makes $S$ Noetherian and quasi-compact; local Noetherianity makes it quasi-separated. Choose a finite affine open cover and apply finite affine pro-etale refinement, obtaining finitely many $V_j$ factoring through original $U_{i(j)}$. Coefficient localization and exact slice restriction carry both models to these charts, with the same scalar maps. If $S$ is empty use the zero complexes and bound $[0,0]$. Otherwise choose supports $[a_j,b_j]$ for $F_{i(j)}$, put $a=\\min a_j$, $b=\\max b_j$, and use $[-b,-a]$ for the duals. Apply local-model cohomology descent to each complex: Step 1 gives exactness and Step 2 finite presentation. It gives global boundedness and constructibility on the single stratum $S$, hence both $\\Dbc$ memberships.",
+   "text": "Apply ordinaryScalarModel_bounded_descent separately to P and its coefficient dual, using the term bounds and finite scalar homology proved above. Combine these Dbc conclusions with the original-chart formulas, and assemble the six coefficient cases.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-sfb-finite-affine-proetale-refinement",
-    "lem-sfb-coefficient-sections-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sfb-local-model-cohomology-descent"
+    "lem-sfb-ordinary-scalar-model-bounded-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 3 membership; old steps 9--10."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sfb-admissible-scalar-realization-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sf-finite-projective-dual",
   "lem-pc-noetherian-finite-kernels-cokernels",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-sfb-scalar-perfect-dual-realization",
+  "lem-sfb-ordinary-scalar-perfect-local-dual",
   "lem-sp-exact-functor-preserves-homology",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-sfb-finite-affine-proetale-refinement",
-  "lem-sfb-coefficient-sections-localization",
-  "lem-sfb-local-model-cohomology-descent"
+  "lem-sfb-ordinary-scalar-model-bounded-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-  "place": "Paragraph 2 final sentence and paragraph 3 perfect-factor membership; expanded with Stacks Tags 00FP, 093J, 093M, 08JB, 08JH, 08JJ."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2, last sentence, and paragraph 3, perfect-factor membership.",
+  "note": "B9: compiled assembly with two isolated module-presentation comparisons; no statement changes."
  },
  "mathlib_searches": [
   {
@@ -390,5 +360,26 @@
   "note": "Six explicit coefficient cases of the single local-model assertion: finite discrete A, Z_l, O_E, Q_l, E, and Qbar_l. Ordinary scalar realization reuses FiniteConstantModelResolution. Maintainer review fix: the Qbar_l case is the continuous condensed ring C(-,Qbar_l) for the l-adic norm topology (sk-def-sfb-condensed-ring; the coefficient convention of sk-def-localizing-closure, IsLocalizingAdmissibleCoefficient), realized by the same canonical modelFunctor as the other cases, replacing the delivered finite-subextension colimit object padicAlgClRingObj. The ordinary signed scalar dual is given by real degreewise data. ULift on the three Type-0 base rings only transports scalar coordinates to the scheme universe; all scalar module objects live in Type (u+1). No assumptions of scalar exactness, dualizability or constructibility are added.",
   "fixed_by": "NT-stage2-cc-031c3fa39"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T205856-L-3384397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

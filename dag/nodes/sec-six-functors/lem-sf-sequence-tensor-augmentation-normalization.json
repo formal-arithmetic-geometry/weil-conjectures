@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-sequence-tensor-augmentation-normalization",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Whole-augmentation comparison: abstract normalized Hom-transpose calculation used in Steps 3-4 of lem-sf-sequence-tensor-augmentation-unit.",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-sequence-tensor-augmentation-unit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Normalized strict augmentation from a derived adjunction",
+ "statement": "Let D and E be abelian categories with unbounded derived categories [def-weil-abstract-derived-category], and assume D has inverse limits of countable towers and the tower category has a derived category. Write Δ for the exact constant-tower functor, Q for localization, and Uφ and Δφ for the canonical exact-functor comparison isomorphisms. Let G:D→E and F:E→D be additive, with adjunction a:G⊣F [lem-weil-pbc-termwise-adjunction-homotopy]. Let U:E→(ℕᵒᵖ→D) be additive and exact, and let e:F≅U⋙lim. Let L:D(D)→D(E), R:D(E)→D(D), ε:Q⋙L→G_C⋙Q and η:F_C⋙Q→Q⋙R have an adjunction d:L⊣R whose cochain Hom normalization is d.homEquiv(ε_Q≫Q(f))=Q(a_C.homEquiv(f))≫η_I for every complex Q of D, complex I of E and chain map f:G_C(Q)→I. Let RL:D(towers D)→D(D), with right-derived comparison ζ:lim_C⋙Q→Q⋙RL, be a right derived limit; assume ζ is invertible on K-injective towers [lem-coef-derived-tower-counit-projections]. Assume every E-complex and every tower complex has a quasi-isomorphism into a K-injective complex. Fix c:R≅U^D⋙RL. For every K-injective I, K-injective tower T and quasi-isomorphism j:U_C(I)→T assume η_I≫c_QI≫RL(Uφ_I)=Q(e_C,I)≫Q(lim_C(j))≫ζ_T≫RL((Q(j))⁻¹).\n\nFix any property O of natural transformations β:Δ→G⋙U such that the component identities β_M,n=a.unit_M≫e_GM≫lim.π_U(GM),n imply O(β). Fix any two predicates P₁,P₂ on complexes of D. Then there exist β:Δ→G⋙U, an adjunction t:Δ^D⊣RL and a natural transformation α:Δ^D→L⋙U^D with O(β) and all the following equations. The unit v of t satisfies v_Q≫RL(Δφ_Q)=Q((Δ_C⊣lim_C).unit_Q)≫ζ_ΔC(Q). The unit u of d transported along c satisfies u_P=v_P≫RL(α_P) for every derived object P. For every Q satisfying P₁(Q) and P₂(Q), the entire cochain augmentation satisfies α_Q≫U^D(ε_Q)≫Uφ_GC(Q)=Δφ_Q≫Q(β_C,Q). Moreover u_Q≫RL(U^D(ε_Q)≫Uφ_GC(Q))=Q((Δ_C⊣lim_C).homEquiv(β_C,Q))≫ζ_UC(GC(Q)). These are equalities of the whole strict derived augmentation and its total derived limit, with no exactness assumption on countable products.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-coef-derived-tower-counit-projections"
+ ],
+ "proof": [
+  {
+   "text": "Take the inverse ordinary constant/limit Hom transpose of the unit of a transported through e. Naturality of the adjunction unit and both Hom naturality formulas show that the components form a natural transformation beta:Delta→G⋙U. Its ordinary transpose is a.unit followed by e; postcomposing this identity with the nth ordinary limit projection gives exactly the component formula required by O. Apply the assumed implication to obtain O(beta).",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  },
+  {
+   "text": "Derive the constant-complex/limit-complex adjunction. The constant functor is exact, and the supplied K-injective tower resolutions give the K-injective derivability structure for the right derived limit. Mathlib Adjunction.derived and derivedη_fac_app give the normalized unit of the resulting tower adjunction. Write its Hom equivalence as unit followed by RL of the morphism. Applying the unit normalization and naturality of zeta gives the cochain Hom formula t.homEquiv(DeltaPhi_Q followed by Q(f)) = Q(constLimAdj_C.homEquiv(f)) followed by zeta_T for every strict chain map f:Delta_C(Q)→T.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  },
+  {
+   "text": "Extend the assumed c comparison to arbitrary complexes. On a K-injective I choose a tower resolution j of U_C(I). Naturality of zeta at j and invertibility of Q(j) remove j and its inverse from the displayed comparison, giving eta_I c_QI RL(Uphi_I) = Q(e_C,I) zeta_UC(I). Compose on the right with RL(Uphi_I inverse) and recognize both sides as components of natural transformations F_C⋙Q→Q⋙U^D⋙RL. For arbitrary X choose a K-injective resolution X→I. Naturality of both transformations gives equality after postcomposition by (U^D⋙RL)(Q(X→I)), an isomorphism. Cancel it. Finally postcompose by RL(Uphi_X) to recover the formula on X.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  },
+  {
+   "text": "Define alpha_P to be the inverse tower-adjoint transpose of the unit of d transported through c. Both naturality identities for the Hom equivalence and naturality of that unit prove alpha natural. Applying the tower Hom equivalence gives u_P=v_P RL(alpha_P). For cochain normalization apply the same injective Hom equivalence after alpha is postcomposed by U^D(epsilon_Q) and Uphi_GC(Q). Naturality of c at epsilon_Q, the assumed sequence Hom formula at the identity of G_C(Q), and the preceding all-complex comparison reduce this transpose to Q(a_C.unit_Q followed by e_C,GC(Q)) followed by zeta_UC(GC(Q)). In each degree the ordinary mate equation for beta identifies a_C.unit followed by e_C with constLimAdj_C.homEquiv(beta_C,Q). The normalized tower Hom formula from Step 2 therefore identifies the two transposes, giving equality of the whole augmentations. Apply RL to this equality and use u=v RL(alpha) and the same Hom formula to obtain the last total-limit equality. The argument works for every Q and hence for the arbitrary predicates P1 and P2.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived adjunction and exact constant towers construct a natural strict augmentation as the inverse adjoint transpose of the unit and identify its cochain localization",
+   "results": "{\"t\": \"2026-10-26T20:48:15Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized derived adjunction and exact constant towers construct a natural strict augmentation as the inverse adjoint transpose of the unit and identify its cochain localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derived'_counit\"], \"digest\": \"f7fd7da11026ffb9\"}",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies derived-adjunction unit factorization and Hom identities used in the proof, but not the combined strict augmentation and comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app",
+   "results": "{\"t\": \"2026-10-26T20:48:26Z\", \"tool\": \"grep\", \"query\": \"derivedη_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"3fdf55f0254eea7f\"}",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies derived-adjunction unit factorization and Hom identities used in the proof, but not the combined strict augmentation and comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "{\"t\": \"2026-10-26T20:48:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"f7a59756025fbb96\"}",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies derived-adjunction unit factorization and Hom identities used in the proof, but not the combined strict augmentation and comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SequenceTensorAugmentationUnit",
+  "date": "2026-10-27",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SequenceTensorAugmentationNormalization",
+  "file": "lean/Sheaf/CategoryTheory/SequenceTensorAugmentationNormalization.lean",
+  "declaration": "SheafOfModules.SequenceProjection.normalizedTensorAugmentation",
+  "statement": "theorem normalizedTensorAugmentation {D E : Type*} [Category D] [Category E] [Abelian D] [Abelian E] [HasLimitsOfShape ℕᵒᵖ D] [HasDerivedCategory.{d} D] [HasDerivedCategory.{d} E] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ D)] (G : D ⥤ E) (F : E ⥤ D) [G.Additive] [F.Additive] (adj : G ⊣ F) (U : E ⥤ (ℕᵒᵖ ⥤ D)) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U] (e : F ≅ U ⋙ lim) (L : DerivedCategory.{d} D ⥤ DerivedCategory.{d} E) (R : DerivedCategory.{d} E ⥤ DerivedCategory.{d} D) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (dAdj : L ⊣ R) (hnorm : ∀ Q I (f : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I), dAdj.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (ε.app Q ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ η.app I) (RL : DerivedCategory.{d} (ℕᵒᵖ ⥤ D) ⥤ DerivedCategory.{d} D) (ζ : (lim : (ℕᵒᵖ ⥤ D) ⥤ D).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RL) (c : R ≅ U.mapDerivedCategory ⋙ RL) (hresSystem : ∀ X : CochainComplex E ℤ, ∃ (I : CochainComplex E ℤ) (q : X ⟶ I), I.IsKInjective ∧ QuasiIso q) (hres : ∀ X : CochainComplex (ℕᵒᵖ ⥤ D) ℤ, ∃ (I : CochainComplex (ℕᵒᵖ ⥤ D) ℤ) (q : X ⟶ I), I.IsKInjective ∧ QuasiIso q) (hRL : RL.IsRightDerivedFunctor ζ (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ D) (.up ℤ))) (hζ : ∀ I : CochainComplex (ℕᵒᵖ ⥤ D) ℤ, I.IsKInjective → IsIso (ζ.app I)) (hc : ∀ (I : CochainComplex E ℤ), I.IsKInjective → ∀ (T : CochainComplex (ℕᵒᵖ ⥤ D) ℤ), T.IsKInjective → ∀ (j : (U.mapHomologicalComplex (.up ℤ)).obj I ⟶ T) [QuasiIso j], η.app I ≫ c.hom.app (DerivedCategory.Q.obj I) ≫ RL.map (U.mapDerivedCategoryFactors.hom.app I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app I) ≫ DerivedCategory.Q.map (((lim : (ℕᵒᵖ ⥤ D) ⥤ D).mapHomologicalComplex (.up ℤ)).map j) ≫ ζ.app T ≫ RL.map (inv (DerivedCategory.Q.map j))) (OrdinaryProperty : ((Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D) ⟶ G ⋙ U) → Prop) (hOrd : ∀ beta : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D) ⟶ G ⋙ U, (∀ (M : D) (n : ℕᵒᵖ), (beta.app M).app n = adj.unit.app M ≫ e.hom.app (G.obj M) ≫ limit.π (U.obj (G.obj M)) n) → OrdinaryProperty beta) (P₁ P₂ : CochainComplex D ℤ → Prop) : ∃ (beta : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D) ⟶ G ⋙ U) (towerAdj : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D).mapDerivedCategory ⊣ RL) (augmentation : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D).mapDerivedCategory ⟶ L ⋙ U.mapDerivedCategory), OrdinaryProperty beta ∧ (∀ Q : CochainComplex D ℤ, towerAdj.unit.app (DerivedCategory.Q.obj Q) ≫ RL.map ((Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D).mapDerivedCategoryFactors.hom.app Q) = DerivedCategory.Q.map (((constLimAdj : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D) ⊣ lim).mapHomologicalComplex (.up ℤ)).unit.app Q) ≫ ζ.app (((Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D).mapHomologicalComplex (.up ℤ)).obj Q)) ∧ (∀ (P : DerivedCategory.{d} D), (dAdj.ofNatIsoRight c).unit.app P = towerAdj.unit.app P ≫ RL.map (augmentation.app P)) ∧ (∀ (Q : CochainComplex D ℤ), P₁ Q → P₂ Q → (augmentation.app (DerivedCategory.Q.obj Q) ≫ U.mapDerivedCategory.map (ε.app Q) ≫ U.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q) = (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D).mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex beta (.up ℤ)).app Q)) ∧ ((dAdj.ofNatIsoRight c).unit.app (DerivedCategory.Q.obj Q) ≫ RL.map (U.mapDerivedCategory.map (ε.app Q) ≫ U.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q)) = DerivedCategory.Q.map (((constLimAdj : (Functor.const ℕᵒᵖ : D ⥤ ℕᵒᵖ ⥤ D) ⊣ lim).mapHomologicalComplex (.up ℤ)).homEquiv Q ((U.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj Q)) ((NatTrans.mapHomologicalComplex beta (.up ℤ)).app Q)) ≫ ζ.app ((U.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj Q))))",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f619a",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222545-L-667952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f619a",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222545-L-667952",
+  "kind": "interface",
+  "note": "independent cc review: sequenceTensorAugmentationUnit factored statement vs original published statement (scratch client proved by exact, compiled; axioms clean); node lem-sf-sequence-tensor-augmentation-unit + new lem-sf-sequence-tensor-augmentation-normalization vs Lean"
+ }
+}

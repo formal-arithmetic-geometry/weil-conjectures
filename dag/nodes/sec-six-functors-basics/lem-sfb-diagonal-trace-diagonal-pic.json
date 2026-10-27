@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-diagonal-trace-diagonal-pic",
+ "kind": "statement",
+ "title": "The diagonal divisor line in any projective-line model",
+ "statement": "theorem diagonalTrace_diagonalPic_factorization (Y : Scheme.{u})\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (e : diagonalSurface Y ≅ ProjectiveLine (ProjectiveLine Y))\n    (he : e.hom ≫ (ProjectiveLine (ProjectiveLine Y) ↘ ProjectiveLine Y) = f) :\n    ∃ (L : (ProjectiveLine Y).Modules) (hL : Scheme.Modules.IsInvertible L),\n      letI := hL\n      diagonalPic Y =\n        Scheme.Pic.ofIsInvertible ((Scheme.Modules.pullback f).obj L) *\n          Scheme.Pic.mapHom e.hom (hyperplanePic (ProjectiveLine Y))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite diagonal components before trace; divisor-line step of lem-amb-p1-diagonal-chern-components and projective-model change by EGA II Remark 4.2.7 (lem-sfb-projective-bundle-picard-classification); arbitrary-base extension by finite-presentation descent, Stacks Tag 0B8W"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Choose the Boolean canonical chart c of the projection f. The proved finiteP1_diagonal_picard identifies c*diagonalPic with H times q*H_Y. Its kernel-ideal invertibility is diagonalImmersion_cartier. This reuses the complete determinant calculation rather than repeating the four charts.",
+   "uses": [
+    "lem-sp-finite-p1-diagonal-picard",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison g=c followed by e is an automorphism of the standard projective line over ProjectiveLine Y, since c.hom followed by f is q and e.hom followed by q is f. Apply the generic hyperplane automorphism lemma to obtain g*H=q*B times H.",
+   "uses": [
+    "lem-sfb-projective-line-automorphism-hyperplane"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set C=H_Y times B inverse and let L be the existing skeleton representative of C. It is invertible and has Picard class C. Pull the desired formula along c. Pullback functoriality changes f* into q* and e*H into g*H. Substitute the two formulas and cancel q*B with its inverse in the commutative Picard group. Pullback along c is injective because pullback along c inverse is its left inverse. This proves the original equality with no remaining diagonal-specific obligation.",
+   "uses": [
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-p1-diagonal-picard",
+  "def-sp-tower-class-diagonal",
+  "lem-sfb-projective-line-automorphism-hyperplane"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "Reuse the completed canonical diagonal Picard calculation, then isolate only the EGA II Remark 4.2.7 change-of-model step. The Picard transport and cancellation are proved directly in Lean.",
+  "by": "W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The diagonal divisor line on a product of projective lines is a relative O(1) tensored with the pullback of a base line bundle",
+   "results": "8 hits: image_toPullbackDiag, AlgebraicGeometry.diagonal_SpecMap, Function.pullbackDiagonal, range_toPullbackDiag, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard class of the diagonal in a projective line product is a relative hyperplane line tensored with a line pulled back from the base, for any projective line model",
+   "results": "8 hits: Projectivization.nonZeroEquivProjectivizationProdUnits, CommRing.Pic.mul_eq_tensor, Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat, CommRing.Pic.mk_tensor, AlgebraicGeometry.Proj.pullbackAwayιIso, Projectivization.cross, Projectivization.mk'', Projectivization.mk''_submodule",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*mapHom|firstChern.*mul|homAddEquiv_add",
+   "results": "1 hits: Mathlib/CategoryTheory/Adjunction/Additive.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite diagonal components before trace; divisor-line step of lem-amb-p1-diagonal-chern-components and projective-model change by EGA II Remark 4.2.7 (lem-sfb-projective-bundle-picard-classification)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-pretrace-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceDiagonalPic",
+  "file": "lean/Sheaf/Paper/DiagonalTraceDiagonalPic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_diagonalPic_factorization",
+  "statement": "theorem diagonalTrace_diagonalPic_factorization (Y : Scheme.{u})\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (e : diagonalSurface Y ≅ ProjectiveLine (ProjectiveLine Y))\n    (he : e.hom ≫ (ProjectiveLine (ProjectiveLine Y) ↘ ProjectiveLine Y) = f) :\n    ∃ (L : (ProjectiveLine Y).Modules) (hL : Scheme.Modules.IsInvertible L),\n      letI := hL\n      diagonalPic Y =\n        Scheme.Pic.ofIsInvertible ((Scheme.Modules.pullback f).obj L) *\n          Scheme.Pic.mapHom e.hom (hyperplanePic (ProjectiveLine Y))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "worker": "S4",
+  "summary": "The diagonal divisor line in any projective-line model",
+  "blueprint": "paragraph (2), finite diagonal components before trace; divisor-line step of lem-amb-p1-diagonal-chern-components and projective-model change by EGA II Remark 4.2.7 (lem-sfb-projective-bundle-picard-classification); arbitrary-base extension by finite-presentation descent, Stacks Tag 0B8W",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-projective-bundle-picard-classification",
+    "why": "Generic classification of invertible modules on projective bundles, used only to factor a relative degree-one line; no trace, cohomological integration or target theorem is assumed."
+   },
+   {
+    "node": "lem-sp-p1-diagonal-local-ideal",
+    "why": "Generic four-chart equation of the projective-line diagonal, used only to identify its divisor line and fibre degree."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T050652-L-251999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

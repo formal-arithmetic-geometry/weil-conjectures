@@ -188,7 +188,18 @@
   "def-galois-category"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "mathlib_candidate": {
@@ -258,5 +269,24 @@
   "landing": "20261018T062755-L-650505",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(\\mathcal C,F)$ be a Galois category. Then:\n\n1. $F$ is faithful;\n1. $X\\to Y$ is a monomorphism if and only if $F(X)\\to F(Y)$ is\ninjective, and an epimorphism if and only if $F(X)\\to F(Y)$ is\nsurjective;\n1. an object is initial if and only if its image under $F$ is empty,\nand final if and only if its image is a singleton;\n1. every morphism from an object with nonempty fibre to a connected\nobject is an epimorphism; in particular every morphism between\nconnected objects is an epimorphism;\n1. if $X$ is connected and $a,b:X\\to Y$ agree on one element of\n$F(X)$, then $a=b$;\n1. for connected $X$ and $s\\in F(X)$ the map\n$\\operatorname{Aut}(X)\\to F(X)$, $g\\mapsto F(g)(s)$, is injective, so\n$\\#\\operatorname{Aut}(X)\\le\\#F(X)$; $X$ is *Galois* if it is connected\nand equality holds, equivalently if $\\operatorname{Aut}(X)$ acts\ntransitively on $F(X)$;\n1. if $X=\\coprod_iX_i$ and $Y=\\coprod_jY_j$ with connected $X_i$,\n$Y_j$, then every morphism $X\\to Y$ is given by a map of index sets\n$\\alpha$ with components $X_i\\to Y_{\\alpha(i)}$;\n1. every object of $\\mathcal C$ is a finite coproduct of connected\nobjects.",
+  "proof": [
+   {
+    "text": "Throughout, $(\\mathcal C,F)$ is a Galois category in the sense of\n[def-galois-category] and the axioms referred to are the axioms\n(1)–(6) of that definition; $F$ preserves finite limits by axioms (1)\nand (4).\n(1) If $F(a)=F(b)$ for $a,b:X\\to Y$, the equalizer $E\\to X$ satisfies\n$F(E)=F(X)$, so $E\\to X$ is an isomorphism by axiom (6) and $a=b$.\n(2) $X\\to Y$ is a monomorphism iff the first projection\n$X\\times_YX\\to X$ is an isomorphism; applying $F$, which preserves fibre\nproducts, turns this into $F(X)\\times_{F(Y)}F(X)\\to F(X)$, which is an\nisomorphism iff $F(X)\\to F(Y)$ is injective, and axiom (6) transports\nthe conclusion back. An epimorphism is sent to an epimorphism of finite\nsets by axiom (5), i.e. a surjection; conversely if $F(f)$ is surjective\nit is an epimorphism, and the faithful functor $F$ reflects\nepimorphisms by (1).\n(3) $F$ preserves the initial object (the empty coproduct) by axiom\n(5), so it has empty image; conversely if $F(X)=\\emptyset$ the unique\nmorphism from the initial object induces a bijection under $F$, hence is\nan isomorphism by axiom (6). Dually for the final object, using axiom\n(4).\n(5) The equalizer $E\\to X$ of $a,b$ is a monomorphism, and $F(E)$ is\nthe set on which $F(a)$ and $F(b)$ agree. If this set is nonempty, $E$ is\nnot initial by (3), so $E\\to X$ is an isomorphism by connectedness of\n$X$, and $a=b$.\n(4) Let $f:X\\to Y$ with $F(X)\\neq\\emptyset$ and $Y$ connected, and let\n$u,v:Y\\to Z$ with $uf=vf$. For $x\\in F(X)$, $F(u)$ and $F(v)$ agree on\n$F(f)(x)$, so $u=v$ by (5). A connected object has nonempty fibre by\n(3).\n(6) Apply (5) to $a=g$, $b=\\operatorname{id}_X$: if $F(g)(s)=s$ then\n$g=\\operatorname{id}_X$. Hence $g\\mapsto F(g)(s)$ is injective and\n$\\#\\operatorname{Aut}(X)\\le\\#F(X)$; the map is bijective exactly when\nthe action is transitive, which gives the stated equivalence.\n(8) If $X$ is initial it is the empty coproduct. Otherwise, if $X$ is\nnot connected there is a monomorphism $Y\\to X$ which is not an\nisomorphism, with $Y$ not initial; by axiom (3) $X=Y\\amalg Z$, and\n$0<\\#F(Y),\\#F(Z)<\\#F(X)$ by (2), (3) and axiom (5). Induction on $\\#F(X)$\ngives the decomposition.\n(7) Coproduct inclusions are monomorphisms, since $F$ sends them to\ninjections by axiom (5) and (2). For each $i,j$ the projection\n$E_{ij}=X_i\\times_YY_j\\to X_i$ is therefore a monomorphism, hence an\nisomorphism or with initial source, by connectedness of $X_i$. Since\n$F(Y)$ is the disjoint union of the $F(Y_j)$, the nonempty set $F(X_i)$\nis the disjoint union of the $F(E_{ij})$; so some $E_{ij}$ is not\ninitial, hence $E_{ij}\\to X_i$ is an isomorphism and all $F(E_{ij'})$,\n$j'\\neq j$, are empty. Thus $X_i\\to Y$ factors through $Y_j$ for exactly\none $j=\\alpha(i)$.",
+    "uses": [
+     "def-galois-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

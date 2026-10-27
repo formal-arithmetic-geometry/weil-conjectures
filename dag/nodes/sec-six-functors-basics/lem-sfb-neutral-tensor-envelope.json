@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-neutral-tensor-envelope",
+ "kind": "statement",
+ "title": "Neutral tensor reconstruction, generators and tangent families",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathcal C$ be an essentially small $k$-linear abelian category [def-sp-abelian], meaning that its isomorphism classes form a set in the object universe and each morphism set is a $k$-vector space with bilinear composition. Equip it with a $k$-bilinear monoidal product [def-sfb-monoidal-category], symmetry isomorphisms satisfying the symmetric monoidal identities, and a unit $\\mathbf1$ with $\\operatorname{End}(\\mathbf1)=k$. Assume every object has a dual, with evaluation and coevaluation satisfying the two triangle identities. Let $\\omega$ be a faithful exact $k$-linear symmetric tensor functor to finite-dimensional $k$-vector spaces: it injects every morphism set, preserves short exact sequences, and identifies products, unit, symmetry, evaluation and coevaluation with their usual vector-space counterparts. Fix a small skeleton to index families.\n\nFor every commutative $k$-algebra $A$, let $H(A)$ consist of families of invertible $A$-linear maps $a_V$ on $A\\otimes_k\\omega(V)$, natural for all morphisms in $\\mathcal C$, with $a_{V\\otimes W}=a_V\\otimes a_W$ and $a_{\\mathbf1}=1$. Then $H$ is represented by an affine $k$-group scheme [def-sc-group-scheme]. Its tautological actions give an equivalence $\\mathcal C\\simeq\\operatorname{Rep}_k(H)$ preserving underlying vector spaces and tensor products; a rational representation means a homomorphism to $\\operatorname{GL}(V)$ [def-wf-algebraic-representations], with $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(A\\otimes_kV)$. If an object $W$ tensor-generates $\\mathcal C$, meaning every object is a subquotient of a finite direct sum of tensor words in $W,W^\\vee$, then $H\\to\\operatorname{GL}(\\omega(W))$ is a closed immersion, and $H$ is of finite type over $k$. A subquotient means a quotient of a subobject.\n\nThe tangent Lie algebra $\\operatorname{Lie}(H)=\\ker(H(k[\\varepsilon]/\\varepsilon^2)\\to H(k))$ identifies with natural families $D_V\\in\\operatorname{End}_k(\\omega(V))$ satisfying $D_{V\\otimes W}=D_V\\otimes1+1\\otimes D_W$ and $D_{\\mathbf1}=0$, with componentwise commutator bracket. Under this identification the differential of the tautological action on $\\omega(V)$ is $D\\mapsto D_V$. The standard vector-space operations on this kernel are the tangent operations [def-sc-scheme-tangent-space, def-sc-dual-numbers]. For any affine group scheme $K$ of finite type, differentials of rational representations define a tensor functor from $\\operatorname{Rep}_k(K)$ to the finite-dimensional representations of $\\operatorname{Lie}(K)$ [def-wf-lie-algebra], and $d\\operatorname{Ad}(x)(y)=[x,y]$. All spaces lie in a fixed universe and the families in a containing universe.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 9.24 and 9.46--9.47, Notes 9.25--9.27, printed pp.172--173,182--184; Lie tangent-family description is the dual-number calculation in Lemma 23.69, p.506. Differentiation and adjoint bracket: Theorem 10.23, pp.193--194; tensor differential: 10.28, pp.194--195. No existence of a semisimple group is asserted here."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sp-abelian",
+  "def-sfb-monoidal-category",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-exact-fibre-coalgebra-reconstruction] to the underlying abelian category and $\\omega$. Its hypotheses are precisely essential smallness and faithful exact linearity, all assumed here. Write $c_V(\\phi,v)=[\\phi\\otimes v]_V$ for its coefficient classes. They span the resulting coalgebra $B$, satisfy $c_W(\\psi,\\omega(f)v)=c_V(\\psi\\omega(f),v)$, and give the stated equivalence with finite-dimensional right $B$-comodules. Work with the fixed skeleton, transporting tensor objects and duals along their chosen representative isomorphisms; the displayed naturality relation makes this transport independent of those isomorphisms.",
+   "uses": [
+    "lem-sfb-exact-fibre-coalgebra-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.37, p.178; start of 9.45, p.182"
+   }
+  },
+  {
+   "text": "Define multiplication and unit on this actual coefficient quotient by\n$$c_V(\\phi,v)c_W(\\psi,w)=c_{V\\otimes W}(\\phi\\otimes\\psi,v\\otimes w),\\qquad 1_B=c_{\\mathbf1}(1,1).$$\nThe tensor universal property [def-weil-pbc-module-tensor-product] extends this formula bilinearly. A relation for $f:V\\to V'$ multiplied by a coefficient of $W$ becomes the relation for $f\\otimes1_W$; the relation in the other factor becomes that for $1_V\\otimes g$. Thus it descends to $B$. Associativity follows by applying the relation to the associator; the two unit identities follow by applying it to the unitors. Applying it to the symmetry gives commutativity. These maps have their usual underlying-vector-space formulas by the hypothesis on $\\omega$. For tensor-product bases, the formula for $\\Delta$ in Step 1 gives $\\Delta(cc')=\\Delta(c)\\Delta(c')$; evaluation gives $\\epsilon(cc')=\\epsilon(c)\\epsilon(c')$, and the one-dimensional unit gives $\\Delta(1)=1\\otimes1$, $\\epsilon(1)=1$. Each equality holds on the spanning coefficient classes and hence everywhere. We have constructed a commutative bialgebra, without invoking a tensor reconstruction theorem.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.44-9.45, pp.181-182; coefficient verification of their bialgebra construction"
+   }
+  },
+  {
+   "text": "For $v\\in\\omega(V)$ let $\\widehat v$ be evaluation at $v$ on $\\omega(V)^*$. Define\n$$S(c_V(\\phi,v))=c_{V^\\vee}(\\widehat v,\\phi).$$\nThis is well-defined: the dual morphism of $f$ acts by precomposition with $\\omega(f)$, and the relation for $f^\\vee$ is exactly the image of the relation for $f$. The identification $(V\\otimes W)^\\vee\\simeq W^\\vee\\otimes V^\\vee$ and the symmetry show $S(cc')=S(c)S(c')$ and $S(1)=1$. Put $C_{ij}=c_V(e_i^*,e_j)$ and $Q_{ij}=c_{V^\\vee}(\\widehat e_i,e_j^*)=S(C_{ji})$. Naturality for evaluation and coevaluation gives respectively $Q^{\\mathsf t}C=I$ and $CQ^{\\mathsf t}=I$: their $(i,j)$ entries are the coefficients of evaluation on $e_i^*\\otimes e_j$, and coevaluation $1\\mapsto\\sum_i e_i\\otimes e_i^*$. Thus $\\sum_a S(C_{ia})C_{aj}=\\delta_{ij}=\\sum_a C_{ia}S(C_{aj})$. These are both antipode identities on all matrix coefficients, which span $B$. Therefore $B$ is a commutative Hopf algebra. Both triangle identities, and both orders of inverse, have been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.46-9.47, pp.182-184; rigidity supplies inverses by evaluation and coevaluation"
+   }
+  },
+  {
+   "text": "Let $G=\\operatorname{Spec}B$ with the group structure supplied by [lem-sfb-hopf-spectrum-functor]. A linear map $t:B\\to A$ is equivalent to a natural family $a_V$ of $A$-linear endomorphisms: in a finite basis set $a_V(1\\otimes v)=\\sum_i t(c_V(e_i^*,v))\\otimes e_i$; conversely set $t(c_V(\\phi,v))=(1\\otimes\\phi)a_V(1\\otimes v)$. Bilinearity and the quotient relations prove that these formulas are well-defined and inverse. By the product and unit formulas in Step 2, $t$ is a unital algebra map exactly when $a$ respects tensors and the unit. Step 3 gives an inverse family by composing $t$ with $S$. The comultiplication formula gives $(t*u)(C_{ij})=\\sum_a t(C_{ia})u(C_{aj})$, so the group law is composition of families. [def-weil-affine-spectrum] now identifies $G(A)$ with exactly $H(A)$, naturally for every algebra $A$, including nonreduced and zero algebras. Hence $G$ represents $H$.",
+   "uses": [
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.41-9.42, p.180, and proof of 9.46, pp.182-183"
+   }
+  },
+  {
+   "text": "For this possibly infinite-type affine group the comodule/action identification can be checked directly. Given $\\rho(v)=\\sum_i v_i\\otimes b_i$, let a point $t:B\\to A$ act by $1\\otimes v\\mapsto\\sum_i t(b_i)\\otimes v_i$. Coassociativity, counit and antipode give multiplication, identity and inverse. This is a group-scheme representation on a finite-dimensional space because its coefficient matrix has the inverse supplied by the antipode: hence its determinant is a unit and the coefficients define an algebra map from the coordinate ring in [def-sc-general-linear-group]. Apply [def-weil-affine-spectrum]; for the zero space the action is the unique trivial action. Conversely evaluate a representation on the universal point $\\mathrm{id}_B\\in G(B)$ to obtain $\\rho$. Multiplication and identity evaluated on the universal pair over $B\\otimes B$ give the two comodule identities. The constructions are inverse by naturality under $t:B\\to A$. A linear map is equivariant exactly when it commutes with the universal coactions, by evaluating at $\\mathrm{id}_B$. The tensor coaction is $v\\otimes w\\mapsto\\sum(v_i\\otimes w_j)\\otimes b_i b'_j$; the unit coaction is $1\\mapsto1\\otimes1$. Thus Step 1's equivalence is the tautological equivalence with $\\operatorname{Rep}_k(H)$ and preserves the specified underlying vector spaces and tensors. No finite-type version of the representation dictionary is used for $H$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.46, pp.182-183, Comod(C) to Rep(G); pointwise formulas of 4.1, p.84"
+   }
+  },
+  {
+   "text": "Suppose $W$ tensor-generates and choose a basis of $\\omega(W)$, of dimension $n$. Let $C=(C_{ij})$ be its coefficient matrix. Step 3 makes $S(C)$ its inverse; coefficients of $W^\\vee$ are the transposed inverse entries. Let $B_0$ be the subalgebra generated by entries of $C$ and $C^{-1}$. Tensor coefficients are products and direct-sum coefficients are linear combinations. Coefficients of subobjects introduce nothing new: for $i:U\\hookrightarrow T$, extend a functional $\\phi$ on $\\omega(U)$ to a functional $\\widetilde\\phi$ on $\\omega(T)$ using a finite basis, so $c_U(\\phi,u)=c_T(\\widetilde\\phi,\\omega(i)u)$. For a quotient $q:U\\twoheadrightarrow V$, lift $v$ to $u$ using exactness of $\\omega$; then $c_V(\\psi,v)=c_U(\\psi\\omega(q),u)$. Consequently every coefficient lies in $B_0$ and $B=B_0$. If $n>0$, determinant multiplicativity [lem-weil-pbc-cauchy-binet] gives $\\det C\\det C^{-1}=1$; [lem-weil-pbc-matrix-adjugate-identity] gives $C^{-1}=(\\det C)^{-1}\\operatorname{adj}(C)$. Therefore $B$ is generated by the $n^2$ entries of $C$ and $(\\det C)^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.27, p.173, tensor generation; matrix-coefficient proof of the closed immersion"
+   }
+  },
+  {
+   "text": "For $n>0$, the representation of $W$ is dual to the map $k[x_{ij},(\\det x)^{-1}]\\to B$ sending $x_{ij}$ to $C_{ij}$, by [def-sc-general-linear-group] and the action formula of Step 5. Step 6 proves surjectivity. Apply clause (2) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] to the single affine open equal to the whole target: the source is $\\operatorname{Spec}B$ and its map on global sections is that surjection. Thus $H\\to\\operatorname{GL}(\\omega(W))$ is a closed immersion. Also $B$ is finitely generated over $k$, so its spectrum has the single finite-type affine chart over $\\operatorname{Spec}k$; this is the finite-affine-cover criterion in [def-weil-finite-type-morphism]. If $n=0$, faithfulness implies $W=0$. Every tensor word is zero unless it is the empty word $\\mathbf1$, so Step 6 instead gives $B=k$; then $H$ and $\\operatorname{GL}(0)$ are the trivial group $\\operatorname{Spec}k$ and the assertion still holds.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "9.27, p.173; Stacks Tag 01QO, lemma-closed-immersion, affine criterion; finite-type definition"
+   }
+  },
+  {
+   "text": "Put $E=k[\\varepsilon]/(\\varepsilon^2)$ [def-sc-dual-numbers]. A component of a family in the kernel of $H(E)\\to H(k)$ has a unique expression $1+\\varepsilon D_V$ in a finite basis, with inverse $1-\\varepsilon D_V$. Comparing coefficients of $\\varepsilon$ in naturality gives $D_W\\omega(f)=\\omega(f)D_V$; comparison in the tensor identity gives $D_{V\\otimes W}=D_V\\otimes1+1\\otimes D_W$, and in the unit gives $D_{\\mathbf1}=0$. Conversely these equations give a kernel family. Addition from [def-sc-scheme-tangent-space] uses the algebra with basis $1,\\varepsilon_1,\\varepsilon_2$ and all products of the $\\varepsilon_i$ zero: its component is $1+\\varepsilon_1D_V+\\varepsilon_2E_V$, whose pullback $\\varepsilon_1,\\varepsilon_2\\mapsto\\varepsilon$ has coefficient $D_V+E_V$. Scaling $\\varepsilon\\mapsto a\\varepsilon$ gives $aD_V$. Thus the bijection is linear for precisely the stipulated tangent operations, without finite type of $H$.",
+   "uses": [
+    "def-sc-dual-numbers",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.69, p.506, dual-number calculation; 10.6 and 10.11, pp.188-189"
+   }
+  },
+  {
+   "text": "Write a point in Step 8 as $\\epsilon+\\varepsilon d:B\\to E$. Being multiplicative is exactly $d(bb')=\\epsilon(b)d(b')+d(b)\\epsilon(b')$, by multiplying its constant and $\\varepsilon$ parts. The tangent Lie bracket is the convolution commutator $[d,e]=d*e-e*d$ by [lem-sfb-bialgebra-distribution-tangent-calculus], which applies to the commutative bialgebra of Step 2 without any finiteness assumption. On a coefficient, $d(c_V(\\phi,v))=\\phi(D_Vv)$; hence\n$$(d*e)(c_V(\\phi,v))=\\sum_i\\phi(D_Ve_i)e_i^*(E_Vv)=\\phi(D_VE_Vv).$$\nSubtracting the reversed expression proves that the bracket is the componentwise commutator. In particular it again satisfies the family equations. The tautological action at $V$ sends $1+\\varepsilon D$ to $1+\\varepsilon D_V$, so its differential is exactly $D\\mapsto D_V$. This computation also identifies the standard affine-group tangent bracket, defined by invariant derivations as in the cited node, rather than introducing a bracket with an unrelated convention.",
+   "uses": [
+    "lem-sfb-bialgebra-distribution-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.27-10.29, pp.194-195; 23.69, p.506"
+   }
+  },
+  {
+   "text": "Now let $K$ be any affine finite-type $k$-group scheme, with no smoothness or characteristic assumption. [lem-sfb-affine-group-lie-tangent-calculus] says the differential of every rational representation $r:K\\to\\operatorname{GL}(V)$ is a linear Lie homomorphism and $r(t_x)=1+\\varepsilon dr(x)$. If $f:V\\to U$ intertwines two representations, apply the intertwining equation to $t_x$ and compare $\\varepsilon$ coefficients to obtain $f\\,dr_V(x)=dr_U(x)f$. Thus the same linear maps define the functor on morphisms; identity and composition are preserved because their underlying linear maps are unchanged. For tensor representations,\n$$(1+\\varepsilon dr_V(x))\\otimes(1+\\varepsilon dr_U(x))=1+\\varepsilon(dr_V(x)\\otimes1+1\\otimes dr_U(x)).$$\nThe unit representation differentiates to zero. The usual associativity, unit and symmetry linear maps remain intertwiners by the preceding morphism calculation, so this is a tensor functor to finite-dimensional Lie representations [def-wf-lie-algebra]. This tensor formula is calculated here; Proposition 10.28 is the derivation description, not itself a tensor-differentiation theorem.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "def-wf-lie-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.23, p.193; direct dual-number tensor computation after 10.18, p.191"
+   }
+  },
+  {
+   "text": "The adjoint homomorphism for $K$ and its conjugation characterization on all algebra points are supplied by [lem-sfb-affine-group-dual-number-calculus]. Choose a closed immersion $\\rho:K\\to\\operatorname{GL}_m$ from [lem-sfb-affine-group-faithful-linear-representation]. Its differential is injective by the closed-subgroup clause of the dual-number node. Put $X=d\\rho(x)$ and $Y=d\\rho(y)$. Apply its adjoint-naturality formula with the algebra $k[s]/(s^2)$ and the point $t_x=1+sX$. Conjugating the scalar-extended tangent matrix $Y$ gives\n$$(1+sX)Y(1-sX)=Y+s(XY-YX).$$\nThe constant term is the identity action and its $s$ coefficient is the differential of $\\operatorname{Ad}$ applied to $y$. Thus $d\\rho(d\\operatorname{Ad}(x)(y))=XY-YX=d\\rho([x,y])$, where the last equality is bracket preservation in [lem-sfb-affine-group-lie-tangent-calculus]. Injectivity gives $d\\operatorname{Ad}(x)(y)=[x,y]$. This includes nonreduced finite-type groups.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.20-10.23, pp.192-193, especially formula (63)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exact-fibre-coalgebra-reconstruction",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-affine-spectrum",
+  "def-sc-general-linear-group",
+  "lem-weil-pbc-cauchy-binet",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-finite-type-morphism",
+  "def-sc-dual-numbers",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-bialgebra-distribution-tangent-calculus",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "def-wf-lie-algebra",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-affine-group-faithful-linear-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit coefficient-quotient realization of 9.37 and 9.44-9.47; coefficient argument for 9.27; dual-number calculation of 23.69 and 10.20-10.29. The tensor-differential formula is written out rather than misattributed to 10.28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tannaka reconstruction of the category of finite dimensional Lie algebra modules as representations of an affine group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.forget\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.LaxMonoidalFunctor (FDRep k G) (FGModuleCat k)\", \"doc\": \"The forgetful functor from the category of finitely generated representations of a finite group $ G $ over a commutative ring $ k $ to the category of finitely generated $ k $-modules is equipped with\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.instMonoidalFDRepFGModuleCatForget₂\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → (CategoryTheory.forget₂ (FDRep k G) (FGModuleCat k)).Monoidal\", \"doc\": \"The forgetful functor from the category of finitely generated representations of a finite group $G$ over a commutative ring $k$ to the category of finitely generated $k$-modules is equipped with a can\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.forget_obj\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X : FDRep k G),\\n  (TannakaDuality.FiniteGroup.forget k G).obj X = X.V\", \"doc\": \"For any finitely generated representation $ X $ of a finite group $ G $ over a commutative ring $ k $, the object mapping of the forgetful functor sends $ X $ to its underlying finitely generated $ k \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [IsDomain k]\\n  (η : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)),\\n  ∃ s,\\n    ModuleCat.Hom.hom (η.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep).hom =\\n      TannakaDuality.FiniteGroup.rightRegular s\", \"doc\": \"Let $ G $ be a finite group and $ k $ a commutative ring that is an integral domain. Every automorphism $ \\\\eta $ of the forgetful functor from the category of finitely generated $ k $-representations \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [inst_3 : Fintype G] (X : FDRep k G)\\n  (v : ↑X.V),\\n  (TannakaDuality.FiniteGroup.ofRightFDRep X v).hom =\\n    CategoryTheory.InducedCategory.homMk (ModuleCat.ofHom (TannakaDuality.FiniteGroup.sumSMulInv v))\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.forget_map\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : FDRep k G) (f : X ⟶ Y),\\n  (TannakaDuality.FiniteGroup.forget k G).map f = f.hom\", \"doc\": \"For any morphism $ f $ between objects $ X $ and $ Y $ in the category $ \\\\text{FDRep}_k(G) $ of finitely generated representations of a finite group $ G $ over a commutative ring $ k $, the forgetful \"}\n  {\"name\": \"FDRep.instConcreteCategoryHomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGV\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : Monoid G] → CategoryTheory.ConcreteCategory (FDRep R G) (Action.HomSubtype (FGModuleCat R) G)\", \"doc\": \"The category $\\\\text{FDRep}_R(G)$ of finitely generated left $R$-modules equipped with a monoid action of $G$ is endowed with a concrete category structure. This means that morphisms between representa\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → [Finite G] → CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G) → (G → k) →ₐ[k] G → k\", \"doc\": \"For any automorphism $\\\\eta$ of the forgetful functor from the category of finitely generated representations of a finite group $G$ over a commutative ring $k$ to the category of finitely generated $k$\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tannaka\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.rightFDRep\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Finite G] : FDRep k G\", \"doc\": \"The right regular representation `rightRegular` on `G → k` as a `FDRep k G`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.leftRegular\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] : Representation k G (G → k)\", \"doc\": \"The representation on `G → k` induced by multiplication on the left in `G`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.rightRegular\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] : Representation k G (G → k)\", \"doc\": \"The representation on `G → k` induced by multiplication on the right in `G`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.leftRegularFDRepHom\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Finite G] (s : G) : CategoryTheory.End TannakaDuality.FiniteGroup.rightFDRep\", \"doc\": \"`leftRegular` as a morphism `rightFDRep k G ⟶ rightFDRep k G` in `FDRep k G`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.equivApp\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] (g : G) (X : FDRep k G) : X.V ≅ X.V\", \"doc\": \"Definition of `equivHom g : Aut (forget k G)` by its components.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Finite G] [Fintype G] (X : FDRep k G) (v : ↑X.V) : TannakaDuality.FiniteGroup.rightFDRep ⟶ X\", \"doc\": \"For `v : X` and `G` a finite group, the representation morphism from the right\\nregular representation `rightFDRep` to `X` sending `single 1 1` to `v`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.forget\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" (k G : Type u) [CommRing k] [Group G] : CategoryTheory.LaxMonoidalFunctor (FDRep k G) (FGModuleCat k)\", \"doc\": \"The monoidal forgetful functor from `FDRep k G` to `FGModuleCat k`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.mulRepHom\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Finite G] : CategoryTheory.MonoidalCategoryStruct.tensorObj TannakaDuality.FiniteGroup.rightFDRep TannakaDuality.FiniteGroup.rightFDRep ⟶ TannakaDuality.FiniteGroup.rightFDRep\", \"doc\": \"The `FDRep k G` morphism induced by multiplication on `G → k`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.forget_obj\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] (X : FDRep k G) : (TannakaDuality.FiniteGroup.forget k G).obj X = X.V\", \"doc\": \"\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.sumSMulInv\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Fintype G] {X : FDRep k G} (v : ↑X.V) : (G → k) →ₗ[k] ↑X.V\", \"doc\": \"For `v : X` and `G` a finite group, the `G`-equivariant linear map from the right\\nregular representation `rightFDRep` to `X` sending `single 1 1` to `v`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" {k G : Type u} [CommRing k] [Group G] [Finite G] (η : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)) : (G → k) →ₐ[k] G → k\", \"doc\": \"The `rightFDRep` component of `η : Aut (forget k G)` gives rise to\\nan algebra morphism `(G → k) →ₐ[k] (G → k)`.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.equiv\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \" (k G : Type u) [CommRing k] [Group G] [Finite G] [IsDomain k] : G ≃* CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)\", \"doc\": \"Tannaka duality for finite groups:\\n\\nA finite group `G` is isomorphic to `Aut (forget k G)`, where `k` is any integral domain,\\nand `forget k G` is the monoidal forgetful functor `FDRep k G ⥤ FGModuleCa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Tannaka|Tannakian|AutTensor|tensorEnvelope",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Tannaka.lean\", \"line\": \"11\", \"text\": \"# Tannaka duality for finite groups\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Tannaka.lean\", \"line\": \"13\", \"text\": \"In this file we prove Tannaka duality for finite groups.\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Tannaka.lean\", \"line\": \"34\", \"text\": \"namespace TannakaDuality\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Tannaka.lean\", \"line\": \"225\", \"text\": \"/-- Tannaka duality for finite groups:\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Tannaka.lean\", \"line\": \"234\", \"text\": \"end TannakaDuality\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"line\": \"21\", \"text\": \"* Some form of Tannaka reconstruction:\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Tannaka.lean\", \"line\": \"12\", \"text\": \"# Tannaka duality for rings\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Tannaka.lean\", \"line\": \"28\", \"text\": \"/-- An ingredient of Tannaka duality for rings:\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor automorphism group of a faithful exact fiber functor is affine and its representations recover the category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat\", \"module\": \"Mathlib.CategoryTheory.Galois.IsFundamentalgroup\", \"type\": \": IsFundamentalGroup F (Aut F)\", \"doc\": \"For a pre-Galois category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, the automorphism group $\\\\mathrm{Aut}(F)$ of the functor $F$ serves as the fundamental group of the Gal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Galois.IsFundamentalgroup\", \"type\": \"(g : G) : toAutMulEquiv F G g = toAut F G g\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autGaloisSystem_obj_coe\", \"module\": \"Mathlib.CategoryTheory.Galois.Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) (A : CategoryTheory.PreGaloisCategory.PointedGaloisObject F),\\n  ↑((CategoryTheory.PreGaloisCategory.autGaloisSystem F).obj A) = CategoryTheory.Aut A.obj\", \"doc\": \"The automorphism group functor sends each pointed Galois object to its automorphism group, which consists of all isomorphisms from the object to itself with composition as the group operation.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \"[IsDomain k] (η : Aut (forget k G)) : ∃ (s : G), (η.hom.hom.app rightFDRep).hom.hom = rightRegular s\", \"doc\": \"Let $ G $ be a finite group and $ k $ a commutative ring that is an integral domain. Every automorphism $ \\\\eta $ of the forgetful functor from the category of finitely generated $ k $-representations \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"module\": \"Mathlib.CategoryTheory.Galois.Prorepresentability\", \"type\": \": PointedGaloisObject F ⥤ GrpCat.{u₂}\", \"doc\": \"The functor from the category of pointed Galois objects in a pre-Galois category to the category of groups, which sends each pointed Galois object to its automorphism group and each morphism between p\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv\", \"module\": \"Mathlib.CategoryTheory.Galois.IsFundamentalgroup\", \"type\": \": G ≃* Aut F\", \"doc\": \"There is a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the functor $ F $, established by the bijective group homomorphism m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutHomeo\", \"module\": \"Mathlib.CategoryTheory.Galois.IsFundamentalgroup\", \"type\": \": G ≃ₜ Aut F\", \"doc\": \"The canonical homeomorphism from a compact topological group $ G $ to the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $ in a pre-Galois category $ \\\\m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \": FiberFunctor (GaloisCategory.getFiberFunctor C)\", \"doc\": \"Every Galois category admits a fiber functor to the category of finite types that is exact, faithful, and satisfies Galois descent properties.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor generator makes the Tannakian group a closed subgroup of a general linear group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  IsClosed (Set.range ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F))\", \"doc\": \"The image of the automorphism group embedding $\\\\text{Aut}(F) \\\\to \\\\prod_{X \\\\in \\\\mathcal{C}} \\\\text{Aut}(F(X))$ is a closed subset in the product topology, where each factor $\\\\text{Aut}(F(X))$ is equippe\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_isClosedEmbedding\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F)\", \"doc\": \"The embedding of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$ into the product $\\\\prod_{X \\\\in \\\\mathcal{C}} \\\\mathrm{Aut}(F(X))$ (equipped with the produc\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [IsDomain k]\\n  (η : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)),\\n  ∃ s,\\n    ModuleCat.Hom.hom (η.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep).hom =\\n      TannakaDuality.FiniteGroup.rightRegular s\", \"doc\": \"Let $ G $ be a finite group and $ k $ a commutative ring that is an integral domain. Every automorphism $ \\\\eta $ of the forgetful functor from the category of finitely generated $ k $-representations \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.mulRepHom\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : Finite G] →\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj TannakaDuality.FiniteGroup.rightFDRep\\n            TannakaDuality.FiniteGroup.rightFDRep ⟶\\n          TannakaDuality.FiniteGroup.rightFDRep\", \"doc\": \"A morphism in the category $\\\\text{FDRep}_k(G)$ from the tensor product $\\\\text{rightFDRep} \\\\otimes \\\\text{rightFDRep}$ to $\\\\text{rightFDRep}$, induced by the multiplication operation of the group algebr\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [inst_3 : Fintype G] (X : FDRep k G)\\n  (v : ↑X.V),\\n  (TannakaDuality.FiniteGroup.ofRightFDRep X v).hom =\\n    CategoryTheory.InducedCategory.homMk (ModuleCat.ofHom (TannakaDuality.FiniteGroup.sumSMulInv v))\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [(X : C) → MulAction G (F.obj X).carrier] →\\n              [inst : TopologicalS\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"Rep.instMonoidalClosed\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.MonoidalClosed (Rep k G)\", \"doc\": \"For a commutative ring $k$ and group $G$, the category $\\\\text{Rep}(k, G)$ of $k$-linear representations of $G$ is equipped with a monoidal closed structure. This means: (1) The tensor product $\\\\otimes\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} {R : Type u_8} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R] [T0Space R],\\n  Topology.IsClosedEmbedding ⇑Matrix.SpecialLinearGroup.toGL\", \"doc\": \"For any T₀ topological space $ R $, the inclusion map from the special linear group $ \\\\mathrm{SL}(n, R) $ to the general linear group $ \\\\mathrm{GL}(n, R) $ is a closed embedding, meaning it is a homeo\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "grep",
+   "query": "coendomorphism|Aut.*[Tt]ensor|[Tt]annak|[Tt]ensor.*[Rr]econstruction",
+   "results": "{\"t\": \"2026-10-24T13:36:56Z\", \"tool\": \"grep\", \"query\": \"coendomorphism|Aut.*[Tt]ensor|[Tt]annak|[Tt]ensor.*[Rr]econstruction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Attr/Register.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"15281519bc85088f\"}; Read returned types and Mathlib/CategoryTheory/Abelian/FreydMitchell.lean:125-146, Algebra/Category/ModuleCat/Tannaka.lean:28-47, RepresentationTheory/Tannaka.lean:225-231 and CategoryTheory/Monoidal/Bimon_.lean:18-25. Freyd-Mitchell embeds into modules over a different ring; finite-group Tannaka assumes a given finite abstract group; comonadic comparison assumes comonadicity; none reconstructs this coalgebra and equivalence from the specified fibre functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neutral Tannaka reconstruction of an exact faithful symmetric tensor functor as rational representations of an affine group scheme",
+   "results": "{\"t\": \"2026-10-24T13:36:57Z\", \"tool\": \"leansearch\", \"query\": \"Neutral Tannaka reconstruction of an exact faithful symmetric tensor functor as rational representations of an affine group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"TannakaDuality.FiniteGroup.forget_obj\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp.congr_simp\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"Rep.instMonoidalClosed\", \"Representation.repOfTprodIso_apply\", \"TannakaDuality.FiniteGroup.forget\", \"Representation.repOfTprodIso\"], \"digest\": \"904dfb01c2f3cebf\"}; Read returned types and Mathlib/CategoryTheory/Abelian/FreydMitchell.lean:125-146, Algebra/Category/ModuleCat/Tannaka.lean:28-47, RepresentationTheory/Tannaka.lean:225-231 and CategoryTheory/Monoidal/Bimon_.lean:18-25. Freyd-Mitchell embeds into modules over a different ring; finite-group Tannaka assumes a given finite abstract group; comonadic comparison assumes comonadicity; none reconstructs this coalgebra and equivalence from the specified fibre functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tannaka\"",
+   "results": "{\"t\": \"2026-10-24T13:36:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tannaka\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.rightFDRep\", \"TannakaDuality.FiniteGroup.leftRegular\", \"TannakaDuality.FiniteGroup.rightRegular\", \"TannakaDuality.FiniteGroup.leftRegularFDRepHom\", \"TannakaDuality.FiniteGroup.equivApp\", \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"TannakaDuality.FiniteGroup.forget\", \"TannakaDuality.FiniteGroup.mulRepHom\"], \"digest\": \"73bd106be994ca34\"}; Read returned types and Mathlib/CategoryTheory/Abelian/FreydMitchell.lean:125-146, Algebra/Category/ModuleCat/Tannaka.lean:28-47, RepresentationTheory/Tannaka.lean:225-231 and CategoryTheory/Monoidal/Bimon_.lean:18-25. Freyd-Mitchell embeds into modules over a different ring; finite-group Tannaka assumes a given finite abstract group; comonadic comparison assumes comonadicity; none reconstructs this coalgebra and equivalence from the specified fibre functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neutral Tannakian category reconstruction affine group scheme tensor generator closed immersion and tensor derivation Lie algebra",
+   "results": "{\"t\": \"2026-10-24T13:36:57Z\", \"tool\": \"leanfinder\", \"query\": \"Neutral Tannakian category reconstruction affine group scheme tensor generator closed immersion and tensor derivation Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"TannakaDuality.FiniteGroup.forget\", \"TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"TannakaDuality.FiniteGroup.instMonoidalFDRepFGModuleCatForget₂\", \"TannakaDuality.FiniteGroup.mulRepHom\", \"Rep.diagonalSuccIsoTensorTrivial\"], \"digest\": \"eed057098331171a\"}; Read returned types and Mathlib/CategoryTheory/Abelian/FreydMitchell.lean:125-146, Algebra/Category/ModuleCat/Tannaka.lean:28-47, RepresentationTheory/Tannaka.lean:225-231 and CategoryTheory/Monoidal/Bimon_.lean:18-25. Freyd-Mitchell embeds into modules over a different ring; finite-group Tannaka assumes a given finite abstract group; comonadic comparison assumes comonadicity; none reconstructs this coalgebra and equivalence from the specified fibre functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-charzero-lie-group-integration",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Theorems 9.24 and 9.46--9.47, Notes 9.25--9.27, printed pp.172--173,182--184; Lie tangent-family description is the dual-number calculation in Lemma 23.69, p.506. Differentiation and adjoint bracket: Theorem 10.23, pp.193--194; tensor differential: 10.28, pp.194--195. No existence of a semisimple group is asserted here.",
+   "via": [
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neutral-tensor-envelope",
+  "worker": "stage1",
+  "summary": "Read Milne 9.24-9.47, 10.18-10.29 and 23.69. Reconstruct the underlying coalgebra using one strictly weaker abelian reconstruction input; construct its multiplication and antipode explicitly, identify all-algebra families and representations, prove coordinate surjectivity from tensor generation, then compute tangent families, bracket and differentiation. Reuse the existing general finite-type Lie and Hopf-spectrum nodes with their exact hypotheses. Statement unchanged. No Lean attachment covers the item.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), deep supporting characteristic-zero integration prerequisite, specifically neutral tensor reconstruction and differentiation. Read latest sk-thm-sf-ctf-stability/_section.md and recorded unit/chapter. The ancestor command reports null, as in the live item; retain its existing via chain and precise inherited from.place. Whole-blueprint Tannaka, coalgebra, comodules, exact faithful, and tensor reconstruction searches yield no equivalent blueprint result.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic determinant multiplicativity, the square-matrix specialization of Cauchy-Binet, to express inverse coefficients using the inverted determinant. This is a linear-algebra tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-99496a7e1",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-99496a7e1 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the new node lem-sfb-exact-fibre-coalgebra-reconstruction in full, against Milne iAG 9.24-9.27, 9.32/9.37 (pp.175-178) and 9.44-9.47 (pp.181-184). The item statement is unchanged from live, where the item was unsplit with no proof; this is not a re-split. The new node is Milne 9.37 with C(omega) written as the coend quotient (an agent formulation). I checked its comodule and coalgebra axioms and that the relation N is respected. In the zero category B=0 and the equivalence holds. It assumes no unit and no tensor structure, so it is strictly weaker than the item. It is not a duplicate: rg -L over the snapshot for comodule, coend, Tannak, fibre functor and tensor-generat finds only lem-sfb-affine-group-tensor-reconstruction and lem-sfb-comodule-finite-subcomodule, which state different things. Step checks: Step 2 multiplication descends via the relations for f⊗1 and 1⊗g. Step 3: the antipode is well defined via omega(f^vee)=omega(f)^*, and ev/coev give Q^tC=I=CQ^t. Step 4: algebra maps correspond to tensor-compatible natural families, and invertibility is automatic from t∘S (Milne 9.46). Step 5 builds the comodule/representation dictionary for possibly infinite-type H. Step 6: subobject and quotient coefficients come from extension and lifting, and Cauchy-Binet plus the adjugate give C^{-1}. Step 7: closed immersion via 01QO clause (2) on the single affine target, with the n=0 case handled. Steps 8-9: the convolution bracket of the bialgebra node equals the componentwise commutator; I checked d(c(phi,v))=phi(D_V v). Step 11: conjugation over k[s], using E_{GL,R}(Y+sZ)=1+δY+sδZ from the dual-number node's additivity, scaling and naturality, together with an injective d rho. No step uses smoothness or characteristic 0. The Cauchy-Binet tool use (unit sk-thm-p1) is declared in split_report.tool_uses and accepted. Citations, proof_deps, searches and blueprint fields are consistent. No changes."
+ }
+}

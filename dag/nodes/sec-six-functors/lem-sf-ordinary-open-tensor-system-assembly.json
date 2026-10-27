@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-ordinary-open-tensor-system-assembly",
+ "kind": "statement",
+ "title": "Natural strict-system assembly of ordinary open tensor comparisons",
+ "statement": "Fix independent site and coefficient universes, a prime l, a finite extension E of Q_l, an open immersion j:U→X and section-normalized operations o [def-sf-integral-open-operations]. Let AX and AU be the supplied ordinary reduction models [def-sf-open-semilinear-tensor-model-data], with their finite evaluations and quotient squares, and let tensor be a generator-normalized TensorComparison. There is a natural isomorphism r:extension⋙AX.functor≅AU.functor⋙systemExtension. For every module M and level n, evaluation(n)(r_M) equals scalarLevelComparison(o,AX,AU,tensor,n)_M. This is extension tensor assembly only; no geometric restriction mate or its invertibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DJ and 0E8I, with sites-cohomology.tex Tag 0941: compatible ordinary coefficient tensor comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-open-operations",
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "The repaired restrictionSections field supplies exactly the hrestriction hypothesis of openScalarTransitionCompatibility. The normalized finite scalarLevelComparison components therefore commute with every coefficient transition.",
+   "uses": [
+    "lem-sf-open-scalar-transition-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved naturalIsoOfEvaluation_exists to these compatible finite isomorphisms. Its prescribed evaluations are exactly the required scalarLevelComparison components.",
+   "uses": [
+    "lem-coef-natural-system-iso-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-scalar-transition-compatibility",
+  "lem-coef-natural-system-iso-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary extension part of the open-factor compatibility; existing scalar transition comparison followed by natural system assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "assemble a natural isomorphism of functors from compatible isomorphisms on every coefficient evaluation",
+   "results": "Eight hits include NatIso.ofComponents and its component equations. This supplies the final natural-isomorphism constructor; objectwise semilinear assembly and joint faithfulness of coefficient evaluations still need the project lemma and proof.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve hits: NatIso.ofComponents, app, hom_app, inv_app and uses in equivalences. Used NatIso.ofComponents, but no result assembles compatible semilinear evaluations naturally.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "JointlyFaithful|NatIso.ofComponents",
+   "results": "Twenty-five hits showing NatIso.ofComponents constructions in ordinary functor categories. Local source supplies systemIsoOfEvaluation_exists; the new proof adds naturality by sectionwise faithfulness.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryOpenRestrictionQuotient",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Natural ordinary extension tensor assembly, before the restriction mate calculation.",
+   "via": [
+    "lem-sf-open-restriction-ordinary-quotient",
+    "lem-sf-open-restriction-augmented-descent",
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryOpenTensorSystemAssembly",
+  "file": "lean/Sheaf/Paper/OrdinaryOpenTensorSystemAssembly.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.ordinaryExtensionTensorAssembly",
+  "statement": "theorem ordinaryExtensionTensorAssembly\n    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)\n    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)\n    (tensor : TensorComparison l E j o) :\n    ∃ r : extension l E j o ⋙ AX.functor ≅ AU.functor ⋙ systemExtension l E j o,\n      ∀ M n, (coefficientSequenceEvaluation l E X n).map (r.hom.app M) =\n        (OpenSemilinearTensor.scalarLevelComparison l E j o AX AU tensor n).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+ }
+}

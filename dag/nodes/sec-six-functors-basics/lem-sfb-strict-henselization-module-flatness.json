@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-strict-henselization-module-flatness",
+ "kind": "statement",
+ "title": "Module flatness over a local ring and its strict henselization",
+ "statement": "Let $R$ be a commutative local ring, meaning a commutative ring with a unique maximal ideal $\\mathfrak m$. Let $K$ be a separable closure of $R/\\mathfrak m$ (a separable algebraic extension which is separably closed [def-pc-separably-closed]), and let $R^{\\mathrm{sh}}$ be its strict henselization relative to $K$ [def-sc-ring-strict-henselization]. For every $R^{\\mathrm{sh}}$-module $M$, give $M$ the $R$-action by restriction along the structural map $R\\to R^{\\mathrm{sh}}$. Then $M$ is flat over $R$ if and only if $M$ is flat over $R^{\\mathrm{sh}}$, where module flatness means [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05VL, lemma-flat-up-down-henselization, equivalence (1) and (3), applied to S=Spec R at its closed point. More on Algebra Tag 07QM supplies faithful flatness in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=R^{\\mathrm{sh}}$. Use the pointed etale algebra presentation of [def-sc-ring-strict-henselization]. It is the triples presentation of [lem-weil-pbc-strict-henselization-triples] at $\\mathfrak m$: a pair $(S,\\chi:S\\to K)$ determines $\\mathfrak q=\\ker\\chi$ and the field embedding $\\phi:\\kappa(\\mathfrak q)\\to K$ extending $S/\\mathfrak q\\hookrightarrow K$, and a triple gives back $\\chi$. The compatibility equations on morphisms agree by taking kernels and then fractions. These inverse identifications preserve the underlying $R$-algebra diagrams. Since $R$ is local, $R_{\\mathfrak m}\\cong R$ by $r/s\\mapsto rs^{-1}$, so the triples theorem gives $C$ as their filtered colimit, with coprojections $\\iota_t:S_t\\to C$ and a map $\\psi:C\\to K$ whose kernel is the maximal ideal of $C$ and with $\\psi\\iota_t=\\chi_t$.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW, lemma-strict-henselization-different: triples, filteredness, and the first colimit; Tag 04GP, lemma-strict-henselization, local structure"
+   }
+  },
+  {
+   "text": "First suppose $M$ is flat over $C$. The structural map $R\\to C$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat], hence flat by [def-weil-pbc-faithfully-flat-ring-map]. Apply [lem-pc-module-flat-transitive] with $A=R$, $B=C$, and the given module $M$. This proves $R$-flatness for precisely the restricted action in the statement.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05VL, lemma-flat-up-down-henselization, (3) implies (1), using More on Algebra Tag 07QM and Algebra Tag 00HC"
+   }
+  },
+  {
+   "text": "Now suppose $M$ is flat over $R$. For a triple $t=(S_t,\\mathfrak q_t,\\phi_t)$ put $A_t=(S_t)_{\\mathfrak q_t}$ [def-weil-pbc-localization-at-prime]. If $s\\notin\\mathfrak q_t$, then $\\psi(\\iota_t(s))=\\chi_t(s)\\ne0$, so $\\iota_t(s)$ is outside the maximal ideal of the local ring $C$ and is a unit. Thus $j_t:A_t\\to C$, $a/s\\mapsto\\iota_t(a)\\iota_t(s)^{-1}$, is a well-defined ring map extending $\\iota_t$. Give $M$ its $A_t$-action through $j_t$. Apply [lem-trf-etale-local-ring-flatness] to $\\operatorname{Spec}S_t\\to\\operatorname{Spec}R$ at $\\mathfrak q_t$ over $\\mathfrak m$. By [lem-weil-pbc-affine-open-stalk-localization](c), its two local rings and germ maps are $(S_t)_{\\mathfrak q_t}=A_t$ and $R_{\\mathfrak m}=R$. The induced map is the localization of $R\\to S_t$, hence its composite with $j_t$ is the structural map $R\\to C$ (check $r/1$). Its restricted action on $M$ is therefore the stipulated $R$-action. The cited equivalence proves that $M$ is flat over every $A_t$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-etale-local-ring-flatness",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05VL, proof of (1) implies (3), applying Tag 05BA, lemma-etale-flat-up-down-local-ring; Algebra Tag 04GW and Schemes Tag 01HV for localizations"
+   }
+  },
+  {
+   "text": "Let $\\sum_{i=1}^n c_ix_i=0$ be any finite relation in the $C$-module $M$. By [lem-weil-pbc-filtered-colimit-algebras-elementwise], each coefficient $c_i$ comes from one pointed etale algebra $S_t$ in the colimit of step 1. Filteredness gives one object receiving all these finitely many objects; transport the representatives to it and still call it $t$, obtaining $b_i\\in S_t$ with $\\iota_t(b_i)=c_i$. For $n=0$ choose any object, which exists because the category is filtered. Put $a_i=b_i/1\\in A_t$. The relation $\\sum_i a_ix_i=0$ holds in $M$ with its $A_t$-action, because $j_t(a_i)=c_i$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05UU, lemma-colimit-rings-flat (1), finite-coefficient argument expanded using Tag 00HK, lemma-flat-eq, and the representative property of filtered colimits"
+   }
+  },
+  {
+   "text": "Apply the forward direction of [lem-weil-pbc-flat-equational-criterion] to the $A_t$-flat module $M$ and the relation in step 4. It supplies $m\\ge0$, $y_1,\\ldots,y_m\\in M$ and $d_{ij}\\in A_t$ with $x_i=\\sum_j d_{ij}y_j$ and $\\sum_i a_id_{ij}=0$ for each $j$. Set $e_{ij}=j_t(d_{ij})\\in C$. The definition of the restricted $A_t$-action gives $x_i=\\sum_j e_{ij}y_j$. Applying $j_t$ to the coefficient equations gives $\\sum_i c_ie_{ij}=0$. Thus the original arbitrary relation over $C$ is trivial. The reverse direction of the same equational criterion proves that $M$ is flat over $C$. Together with step 2 this proves the required equivalence.",
+   "uses": [
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HK, lemma-flat-eq, both implications; explicit finite-relation implementation of Tag 05UU (1), as used in flat.tex Tag 05VL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-pc-module-flat-transitive",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-flat-equational-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05VL (lemma-flat-up-down-henselization), equivalence (1) and (3), with its colimit step written explicitly via Algebra Tags 04GW and 00HK rather than importing a ring-map-only specialization of 05UU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A module over the strict henselization of a local ring is flat over the original local ring if and only if it is flat over the strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  (p : Submonoid R) [IsLocalization p S] (M : Type u_3) [inst_4 : AddCommMonoid M] [inst_5 : Module R M]\\n  [inst_6 : Module S M] [IsScalarTower R S M], Module.Flat S M ↔ Module.Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [IsLocalRing A]\\n  [IsLocalRing B] [Module.Flat A B] [IsLocalHom (algebraMap A B)], Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Module.flat_of_localized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (M : Type u_3) [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∀ (P : Ideal R) [inst_3 : P.IsMaximal], Module.Flat R (LocalizedModule P.primeCompl M)) → Module.Flat R M\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If for every maximal ideal $ P $ of $ R $, the localization of $ M $ at the complement of $ P $ is a flat $ R $-module, then $ M $ is fla\"}\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along an ind etale local ring extension detects flat modules over the strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, HenselianLocalRing",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "grep",
+   "query": "(hensel.*flat|flat.*hensel|ind.?etale.*flat|flat.*ind.?etale)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a module is equivalent over a local ring and its strict henselization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ (P : Ideal S) [P.IsMaximal], Flat R (Mₚ P)) : Module.Flat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"module\": \"Mathlib.RingTheory.Flat.Tensor\", \"type\": \": Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective (TensorProduct.lift ((lsmul R M).comp I.subtype))\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Then $M$ is a flat module if and only if for every finitely generated ideal $I$ of $R$, the canonical linear map from the tensor product $I \\\\oti\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"[IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)] : Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationSpanTarget Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_restrictScalars|flat_iff_of_isLocalization",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Unramified/Finite.lean\", \"line\": \"26\", \"text\": \"- `Algebra.FormallyUnramified.flat_of_restrictScalars`:\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Finite.lean\", \"line\": \"275\", \"text\": \"lemma flat_of_restrictScalars [Module.Flat R M] : Module.Flat S M :=\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"115\", \"text\": \"  rw [RingHom.Flat, Module.flat_iff_of_isLocalization\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Localization.lean\", \"line\": \"18\", \"text\": \"* `Module.flat_iff_of_isLocalization` : Let `Rₚ` a localization of a commutative ring `R`\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Localization.lean\", \"line\": \"52\", \"text\": \"theorem flat_iff_of_isLocalization : Flat S M ↔ Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Localization.lean\", \"line\": \"113\", \"text\": \"  rw [Module.flat_iff_of_isLocalization (Localization.AtPrime p) p.primeCompl]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"line\": \"132\", \"text\": \"  rw [← flat_iff_of_isLocalization (Localization P.primeCompl) P.primeCompl,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and essentially finite type unramified results do not apply to an arbitrary strict henselization"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_restrictScalars|flat_iff_of_isLocalization|hensel.*flat|flat.*hensel",
+   "results": "Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/TorsionFree.lean; Mathlib/RingTheory/Unramified/Finite.lean; Mathlib/RingTheory/Unramified/Finite.lean; Mathlib/RingTheory/RingHom/Flat.lean",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localization results require a localization; flat_of_restrictScalars requires essential finite type and applies to etale stages, not the whole strict henselization. Other hits do not state the arbitrary-module strict-henselization equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars detects module flatness over an ind etale algebra",
+   "results": "Algebra.FormallyUnramified.flat_of_restrictScalars; RestrictScalars; Module.Flat.of_flat_tensorProduct; RingHom.Flat; RingHom.flat_algebraMap_iff; Algebra.FormallyEtale.of_restrictScalars; RestrictScalars.module; Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localization results require a localization; flat_of_restrictScalars requires essential finite type and applies to etale stages, not the whole strict henselization. Other hits do not state the arbitrary-module strict-henselization equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, HenselianLocalRing",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localization results require a localization; flat_of_restrictScalars requires essential finite type and applies to etale stages, not the whole strict henselization. Other hits do not state the arbitrary-module strict-henselization equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a strict henselization is flat if and only if it is flat over the original local ring",
+   "results": "Module.flat_iff_of_isLocalization; Module.flat_of_isLocalized_maximal; Module.FaithfullyFlat.of_flat_of_isLocalHom; Module.flat_of_localized_maximal; Algebra.FormallyUnramified.flat_of_restrictScalars; RingHom.Flat.localRingHom; RingHom.Flat.propertyIsLocal; instFlatAtPrime",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localization results require a localization; flat_of_restrictScalars requires essential finite type and applies to etale stages, not the whole strict henselization. Other hits do not state the arbitrary-module strict-henselization equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat modules over filtered colimits of etale neighbourhood rings and restriction to the base ring",
+   "results": "Algebra.Smooth.flat; RingHom.Etale.propertyIsLocal; RingHom.Flat.propertyIsLocal; RingHom.Etale.ofLocalizationSpan; RingHom.Etale.ofLocalizationSpanTarget; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.etaleLocus; Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localization results require a localization; flat_of_restrictScalars requires essential finite type and applies to etale stages, not the whole strict henselization. Other hits do not state the arbitrary-module strict-henselization equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-strict-local-flatness",
+  "date": "2026-10-23",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation. Supporting input: Etale local rings on charts and flat morphisms of algebraic spaces. In the present split: the flatness comparison of 04NG, via the module scalar-restriction criterion 05VL.",
+   "via": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-stack-fibre-regular-slice-flat",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-strict-henselization-module-flatness",
+  "worker": "stage1",
+  "summary": "Checked Stacks 05VL, 05BA, 04GW, 07QM, 05UU and 00HK. The statement is correct unchanged. All inputs already exist in the DAG. Expanded the directed-colimit argument for an arbitrary module using finite relation matrices; the existing 05UU node only states the ring-map case and is not cited for this stronger use. No new nodes, no Lean changes, no attachment.",
+  "blueprint": "Supporting scalar-flatness input of lem-sfb-space-strict-local-flatness in the inherited det-thm-sf-ctf-stability-direct-images proof (3), chart-to-strict-local comparison in the regular-slice branch. The nearest-ancestor command returns None; the inherited blueprint.from.node and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic filtered-colimit and local-ring construction for a strict henselization, needed for the inherited chart flatness argument."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic scalar extension flatness, used only for the reverse implication."
+   },
+   {
+    "node": "lem-trf-etale-local-ring-flatness",
+    "why": "Generic arbitrary-module flatness comparison at etale local rings (Stacks 05BA), the exact input of 05VL; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-etale-local-ring-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-13db68c8e",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-13db68c8e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. It matches Stacks 05VL (1)<=>(3) (flat.tex l.183-241), with the statement unchanged and no target weakened, and it follows the source route. Step 1: pairs (S,chi) and triples (S,q,phi) at m give isomorphic diagrams (q=ker chi, phi extends S/q into K to Frac(S/q), morphism conditions agree), so lem-weil-pbc-strict-henselization-triples gives filteredness, locality, psi and psi.iota_t=chi_t. Step 2: 07QM faithful flatness, then the faithful-flatness definition and Module.Flat.trans give flat over C => flat over R. Step 3: iota_t(s) is a unit for s outside q_t, so j_t:(S_t)_{q_t}->C is well defined; 05BA (lem-trf-etale-local-ring-flatness, no finiteness on M) together with affine-open-stalk-localization (c) gives M flat over every A_t, with the R-action checked. Steps 4-5: coefficients lift to one stage via the elementwise colimit lemma and filteredness (n=0 included); the 00HK equational criterion over A_t, pushed through j_t, makes every C-relation trivial, so M is flat over C. Not citing lem-weil-pbc-colimit-rings-flat (ring-map case only) or directed-union-subrings (j_t need not be injective) is correct. No duplicate of the item in the DAG (grep for 05VL, 05BA, 05UU and strict-henselization flatness), no cycle, no SGA. Small cases: R a field, R=Z_(p) with C/pC and Frac C, M=0. Batch-5 flag on lem-trf-etale-local-ring-flatness: 05BA is generic commutative algebra; its proof cites only etale/flat definitions, the Mathlib flat_of_restrictScalars leaf and Module.Flat.trans. Neither the trace-formula nor the Poincare-duality assumption gives it and it is no step of their proofs, so it is not a fault. Accepted tool_uses: triples (sk-thm-p1), 07QM faithful flatness (sk-thm-br), 05BA (sk-i-curve-zero). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationModuleFlatness",
+  "declaration": "Module.flat_iff_strictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationModuleFlatness.lean",
+  "statement": "theorem flat_iff_strictHenselization (R : Type u) (K C : Type (max u v)) [CommRing R] [IsLocalRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (_P : Algebra.StrictHenselizationPresentationIn.{u, v} R K C) (M : Type w) [AddCommGroup M] [Module C M] : @Module.Flat R M _ _ (Module.compHom M (algebraMap R C)) ↔ Module.Flat C M",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecd604b5f",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement matches Stacks 05VL (1)<=>(3) at the closed point of Spec R, clause by clause: local R with IsLocalRing; K with IsSepClosure of the residue field and the R-algebra structure through it via IsScalarTower; C given by the recorded strict-henselization presentation (pointed-etale universal colimit with an R-algebra iso to C); arbitrary M in its own universe w; R-action is exactly Module.compHom along algebraMap R C; the conclusion has the same M on both sides. No extra hypotheses: no Noetherian or finiteness condition, no IsLocalRing C, universes follow the recorded presentation. lean.statement matches the file verbatim (script check). The node equals live apart from the added lean field, and live has no prior lean record. The docstrings carry the source place, blueprint tag and all 5 proof steps; the only proof is sorry. Plain imports are the proof_deps' recorded modules and all exist in side-live. No duplicate found in Mathlib or the project; no pro-etale substitute. Edge cases: M=0, R a field, R strictly henselian, any characteristic, empty relation. Not compiled because no FIX was made; the worker reports a clean compile. No findings."
+ }
+}

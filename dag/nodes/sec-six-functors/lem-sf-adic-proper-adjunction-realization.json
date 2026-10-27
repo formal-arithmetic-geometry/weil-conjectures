@@ -1,0 +1,299 @@
+{
+ "id": "lem-sf-adic-proper-adjunction-realization",
+ "kind": "statement",
+ "title": "Proper adjunction comparison for the continuous-coefficient realization",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For a separated finite-type $k$-scheme $T$, let $B_T$ be the sheaf on its small pro-etale site [def-weil-pbc-proetale-site] whose sections are continuous $\\Omega$-valued functions whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-subspace. Write $\\mathcal A_T=\\operatorname{Mod}(B_T)$ for its module sheaves [def-weil-sheaf-of-modules-category], and let $\\mathcal D_T\\subset D(\\mathcal A_T)$ be the full bounded subcategory of the ordinary derived category [def-weil-abstract-derived-category] with cohomology sheaves pro-etale locally finite free on a finite locally closed stratification. Identify $B_T$ with the locally finite-extension-valued coefficient sheaf of [lem-sf-adic-qbar-constructible-realization], and use its exact symmetric monoidal equivalence $\\rho_T:\\mathcal C_T\\xrightarrow{\\sim}\\mathcal D_T$, where $\\mathcal C_T$ is the common-finite-coefficient-field category [def-weil-algebraically-closed-coefficients].\n\nLet $p:Z\\to Y$ be proper between separated finite-type $k$-schemes [def-weil-proper-morphism, def-weil-finite-type-morphism]. The coefficient map $p^{-1}B_Y\\to B_Z$ is precomposition of functions. Let $L p_B^*=B_Z\\otimes^L_{p^{-1}B_Y}p^{-1}(-)$ and $Rp_{*,B}$ be the actual ordinary module derived inverse image and right-derived direct image, with their canonical adjunction [lem-weil-pbc-ringed-projection-mate-exact]. Both preserve the indicated bounded constructible subcategories. There is a natural isomorphism\n$$a_p:\\rho_Z Lp^*\\xrightarrow{\\sim}Lp_B^*\\rho_Y.$$\nHere $Lp^*\\dashv Rp_*$ on $\\mathcal C$ uses precisely the common-stage operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. The map $a_p$ is the balanced coefficient-extension comparison on finite-field integral representatives. It preserves the tensor unit and the canonical pullback tensor comparison. Its right-adjoint mate is an isomorphism\n$$b_p:\\rho_Y Rp_*\\xrightarrow{\\sim}Rp_{*,B}\\rho_Z.$$\nThe pair $(a_p,b_p)$ identifies the actual adjunction units and counits. In particular, if $\\varepsilon_p:Lp^*Rp_*\\to1$ and $\\varepsilon_{p,B}:Lp_B^*Rp_{*,B}\\to1$ are the two counits, then for every $K\\in\\mathcal C_Z$\n$$\\rho_Z(\\varepsilon_{p,K})=\\varepsilon_{p,B,\\rho_ZK}\\circ Lp_B^*(b_{p,K})\\circ a_{p,Rp_*K}.$$\nThese assertions concern functors and morphisms in the ordinary module derived categories; no category of derived Frobenius pairs and no projection-formula assertion is part of this statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15 (pp. 61-62), with the proper finiteness of Lemma 6.7.2: finite-field continuous realization and its actual ambient operations. Common-stage, tensor-normalized adjunction comparison is an agent-formulated consequence, not a verbatim statement of the proposition."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sf-native-proper-coefficient-operations",
+  "def-sf-native-proper-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Choose the existing normalized realization Family F. Apply the balanced normalized inverse-image realization to every p and retain its Operations, integral/tensor comparisons, a, integral normalization and tensor/unit equations. No proper-direct-image result is included in that input.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-adic-normalized-pullback-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For bounded constructible K on T, the image clause of F writes K ≅ ordinary_T(M). Apply the ordinary pullback to this isomorphism and compose it with a_M. This expresses its pullback as ordinary_Z(Lp*(M)); the image clause on Z gives bounded constructibility.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-adic-normalized-pullback-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply proper ordinary push preservation to the actual Operations supplied by the inverse-image comparison. In particular Rprime(ordinary_Z(K)) lies in the essential image of ordinary_T.",
+   "uses": [
+    "lem-sf-adic-proper-ordinary-push-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the geometricCommonStageAdjunction for the published common-stage operations, and set m to the right mate of a.inv under this and Operations.adjunction. For each c,d, full faithfulness of the two ordinary realizations, the two adjunction bijections, and a.inv identify Hom(Gc,G(Rd)) with Hom(Gc,Rprime(Hd)). Counit naturality and the mate counit identity show this bijection is postcomposition with m_d. The previous step writes Rprime(Hd) ≅ Gc for some c. Surjectivity at this c gives a right inverse of m_d. Injectivity at Rd makes it a left inverse. Thus all components are invertible and asIso m supplies b with exactly the displayed mate formula. This is the mate-equivalence argument inside the full essential images, without requiring G to be essentially surjective onto the ambient unbounded category.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib mate counit identity reads Lprime(b_K) ≫ epsilonprime = a.inv_(RK) ≫ H(epsilon_K). Compose with a.hom_(RK) and cancel the inverse. The Mathlib mate unit identity reads G(eta_M) ≫ b_(LM) = etaprime ≫ Rprime(a.inv_M). Postcompose with Rprime(a.hom_M), combine functorial images of the inverse pair and cancel. These are precisely Comparison.counit and Comparison.unit in the ordinary ambient categories. Fill the Comparison record with these maps and the preceding preservation and normalization fields; instantiate AtSpaces with the Family residue-unit and geometric structure instances.",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-adic-normalized-pullback-realization",
+  "lem-sf-adic-proper-ordinary-push-preservation",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-adjunction-mate",
+  "lem-amb-mate-unit-counit",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas",
+  "note": "G3 Lean reduction: two genuine geometric subarguments are split off; the upper module proves both preservation transport and mate invertibility with the actual unit/counit identities. No statement or definition is weakened."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adic.*[Rr]ealization|[Rr]ealization.*[Pp]ushforward|PadicAlgCl|WeilComplex",
+   "results": "OK 5 hits; Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf adjunctions, abstract equivalence adjunctions and the coefficient field alone do not assert this geometric derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence from rationalized constructible adic complexes to derived continuous coefficient modules intertwines the pullback pushforward adjunction",
+   "results": "OK 8 hits; SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf adjunctions, abstract equivalence adjunctions and the coefficient field alone do not assert this geometric derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Adjunction",
+   "results": "OK 6 hits; CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf adjunctions, abstract equivalence adjunctions and the coefficient field alone do not assert this geometric derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of constructible ell adic complexes as modules over the continuous coefficient sheaf commutes with proper derived direct image and pullback",
+   "results": "OK 8 hits; SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CompHausLike.LocallyConstantModule.functor, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf adjunctions, abstract equivalence adjunctions and the coefficient field alone do not assert this geometric derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*realization|realization.*adjunction|continuous.*coefficient",
+   "results": "OK 5 hits; Mathlib/Analysis/Analytic/Composition.lean, Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno.lean, Mathlib/Analysis/Fourier/AddCircleMulti.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Topology/Instances/Matrix.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general module adjunctions, condensed comparison facts and coefficient definitions do not state this constructible adic geometric adjunction comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension realization of constructible ell adic complexes intertwines derived pullback and proper pushforward with units and counits",
+   "results": "OK 8 hits; PresheafOfModules.pullback, PresheafOfModules.pullbackPushforwardAdjunction, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general module adjunctions, condensed comparison facts and coefficient definitions do not state this constructible adic geometric adjunction comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Adjunction",
+   "results": "OK 1 hits; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general module adjunctions, condensed comparison facts and coefficient definitions do not state this constructible adic geometric adjunction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of constructible adic sheaves over continuous coefficients preserves proper pullback pushforward adjunction and its counit",
+   "results": "OK 8 hits; SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general module adjunctions, condensed comparison facts and coefficient definitions do not state this constructible adic geometric adjunction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between constructible adic derived categories and continuous coefficient module complexes commutes with geometric derived inverse image",
+   "results": "OK 8 hits; LightCondensed.ihomPoints_symm_comp, CondensedMod.IsSolid.isIso_solidification_map, localCohomology.diagramComp, CondensedMod.LocallyConstant.functorIsoDiscrete, SheafOfModules.pushforwardNatIso_inv, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general module adjunctions, condensed comparison facts and coefficient definitions do not state this constructible adic geometric adjunction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-compact-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection: realize the proper factor of the compactification projection formula on native continuous-coefficient modules, including the counit. The seeded root has no blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-proper-adjunction-realization",
+  "worker": "stage1",
+  "summary": "No new nodes. Revalidated the returned split against the current DAG, making the coefficient-realization inclusion and the precise mate-normalized scheme-map square explicit in Step 1. Retained the normalized balanced pullback, whole-tower tensor/unit comparisons, actual proper direct-image preservation, invertible right mate and both adjunction equations. Statement and stmt_deps unchanged. Reviewer (Q108 3d22db25): Step 6 re-cited from the 2026-10-19 dropped lem-per-qbar-ordinary-adjunction/lem-per-arbitrary-field-adjunction-scalars to the live fix-prop-adjunctions (1) and lem-pur-ordinary-adjunction-scalar-compatibility, as in the 96673e81 FIX.",
+  "blueprint": "Seeded root has no blueprint ancestor. Realizes fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection, through the parent compact projection formula: the proper factor requires the specified actual counit. No projection-formula theorem is used here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of finite-type schemes needed by the continuous realization."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension needed by the finite-field realization."
+   },
+   {
+    "node": "lem-per-rational-realization-pullback-comparison",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-per-rational-realization-scalar-coherence",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-tw-ordinary-completed-integral-pullback",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-completed-primitive-counit-comparison",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Canonical ordinary adjunction Lf^* -| Rf_* on the common-stage Qbar_l categories (clause (1)), used only as an adjunction tool."
+   },
+   {
+    "node": "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "why": "Finite-field scalar compatibility fixing the common-stage adjunct independently of field and representative."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "The specified scalar-extension comparisons named by the compatibility lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic coefficient, ringed-topos or completion comparison used as stated to identify actual operations; the unit provides no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Abstract mate invertibility through equivalences."
+   },
+   {
+    "node": "lem-amb-mate-unit-counit",
+    "why": "Abstract counit identity for a mate."
+   },
+   {
+    "node": "lem-pur-mate-unit-compatibility",
+    "why": "Abstract unit identity for a mate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-mate-unit-counit",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-3d22db253",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-3d22db253 (reviewer sub-agent of L); spot-checked: This head re-delivers 96673e81 after landing refused my earlier FIX because the cited lem-sf-locally-finite-coefficient-ring-realization had changed. Compared field by field with the 96673e81 snapshot: the statement, stmt_deps, proof_deps, tool_uses and Steps 2-8 are byte-identical; only Step 1 and the summary changed. Of the cited nodes, only the coefficient-ring node changed its statement, so my earlier checks of Steps 2-8 still hold (Bhatt-Scholze Prop. 6.8.14 and Rem. 6.8.15, pp. 61-62; edge cases p=id, Z=∅, E=L, ramified E⊂L, P^1→pt; mate orientation; counit and unit equations). The new Step 1 is correct: the changed statement gives θ_T, the finite-E postcomposition clause and the square (h_*θ_{T'})∘η_h=β_h∘θ_T. With h=p, taking adjoints identifies p^{-1}B_Y→B_Z with the precomposition map used in the balanced pullback, and no naive-inverse-image claim is needed. Fault, the same as before: Step 6 again cites lem-per-qbar-ordinary-adjunction and lem-per-arbitrary-field-adjunction-scalars, which are in the 2026-10-19 artin-gabber dropped section (clones/live route-pivot-dropped lines 1839 and 1425), and no step justifies them. The item itself is not dropped and is still unsplit live. FIX: I re-applied the 96673e81 Step 6, which cites fix-prop-adjunctions (1) at Λ=Q̄_ℓ over F̄_q, lem-pur-ordinary-adjunction-scalar-compatibility, prop-weil-pbc-scalar-extension, def-weil-algebraically-closed-coefficients and lem-weil-pbc-ringed-projection-mate-exact. It drops lem-a1-rational-direct-image-realization because Steps 7-8 are formal. I also re-applied the matching proof_deps and tool_uses. Checks on the fixed node: uses equal proof_deps (24), all ids exist, no cycle, no SGA, longest step 1931 characters. Batch 5: closure of stmt_deps ∪ fixed proof_deps adds 0 trace-formula or Poincaré nodes over stmt_deps alone (247=247). The remaining flagged citations reach only generic tools (trf counit substitution, geometric inverse-image exactness, constant-coefficient composition, pd push-pull normalization). Fix file: fixes/dag/nodes/sec-six-functors/lem-sf-adic-proper-adjunction-realization.json. Maintainer note: this fix has now been lost after a landing refusal; the worker should rebuild from the reviewer's fixes/ file.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicProperAdjunctionRealization",
+  "declaration": "WeilConjectures.AdicQbarRealization.Proper.adic_proper_adjunction_realization",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.Proper.Comparison",
+   "WeilConjectures.AdicQbarRealization.Proper.AtSpaces",
+   "WeilConjectures.AdicQbarRealization.Proper.adic_proper_adjunction_realization"
+  ],
+  "file": "lean/Sheaf/Paper/AdicProperAdjunctionRealization.lean",
+  "statement": "theorem adic_proper_adjunction_realization (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) : ∃ F : Family l D, ∀ (Z T : GeometricSpace D) (p : Z.base ⟶ T.base), IsProper p.left → Nonempty (AtSpaces l D hl F Z T p)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e19e3ea47",
+  "group": "NK",
+  "result": "fix",
+  "note": "Statement correct: every clause of the node is matched (coefficient map pinned as precomposition; operations and adjunctions pinned by unit_sections/IsNormalizedPullCounit/transpose; a pinned by IntegralAgreement with the completion inverse and balanced scalar comparison, orientation rho_Z Lp* -> Lp_B* rho_Y; tensor and unit equations with the canonical comparisons; b fixed by the right-mate formula; counit equation verbatim; unit equation present; both preservation clauses). No hollow definitions; only the main theorem and geometricCommonStagePull_isLeftAdjoint are sorry. The §1(B) geometricCommonStageDirectImage = rightAdjoint of commonStageDerivedPullback (same pattern as landed sfModelDerivedPush, which covers only k0 models) is accepted. H12 FIX: the new def nodes did not cite their owners. fixes/def-sf-native-proper-coefficient-operations.json adds def-per-continuous-rational-realization-data, def-weil-pbc-bounded-constructible-tower, def-sf-ordinary-integral-pullback-construction, def-sf-ordinary-integral-derived-pullback, def-weil-algebraically-closed-coefficients, def-weil-proetale-inverse-image, def-weil-rationalization-karoubi; fixes/def-sf-native-proper-tensor-comparison.json adds def-coef-ringed-tensor-hom-model, def-pc-kflat-complex, def-zl-ringed-derived-closed-symmetric-monoidal-data. TeX cites each once (CITE set = stmt_deps); all on base, acyclic; no Lean change, no compile. Advisory: theorem-owned helpers (DirectImage push, ordinaryIntegralCompletionComparison, finiteFieldDatumPrimeUnit); main declaration of def-weil-derived-direct-image moved off SfIntegralDirectImage despite the N0 ownership note; the second reading is a self-reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e55ba",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261027T094408-L-222429",
+  "kind": "interface",
+  "note": "independent cc review: item proof (mate helper + Mathlib mate unit/counit) and two new sorry lemmas against Comparison fields, DAG nodes, unit sk-prop-sf-biduality-general (realized empty)"
+ }
+}

@@ -1,0 +1,362 @@
+{
+ "id": "lem-sfb-space-qcqs-derived-projection-formula",
+ "kind": "statement",
+ "title": "Unbounded projection formula for qcqs algebraic-space morphisms",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pullback and tensor use K-flat resolutions; derived direct image uses K-injective resolutions. Let $S$ be a scheme, let $g:Y\\to Z$ be a quasi-compact and quasi-separated morphism of algebraic spaces over $S$, and let $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$. Quasi-compact means that inverse images of quasi-compact spaces are quasi-compact, and quasi-separated means that the diagonal is quasi-compact and quasi-separated. The canonical adjunction-mate projection morphism is an isomorphism in $D(\\mathcal O_Z)$: $$(Rg_*F)\\otimes^{\\mathbf L}_{\\mathcal O_Z}L\\xrightarrow{\\sim}Rg_*\\left(F\\otimes^{\\mathbf L}_{\\mathcal O_Y}Lg^*L\\right).$$ The map is adjoint to the tensor pullback of $Rg_*F\\otimes^{\\mathbf L}L$ followed by the counit $Lg^*Rg_*F\\to F$ on the first factor. No flatness, properness, Noetherian or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IN, lemma-cohomology-base-change."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Realize the small etale module functors as ringed-topos functors: the enlarged ringed-site model gives the canonical ringed morphism, and the chart adjunction realization identifies its tensor pullback and direct image with the specified module functors, preserving the units. Work in the equivalent small models in the fixed universes. Apply the ringed projection-mate exactness theorem to $g$. For fixed $F$, put $A(L)=Rg_*F\\otimes^{\\mathbf L}L$ and $B(L)=Rg_*(F\\otimes^{\\mathbf L}Lg^*L)$. It supplies the natural transformation $\\alpha:A\\to B$ whose adjoint is $(\\varepsilon_F\\otimes1)\\mu_{Rg_*F,L}$. This is precisely the morphism in the statement, and is a transformation of exact functors compatible with shifts. Its value at $\\mathcal O_Z$ is the identity under the unit identifications.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "Choose an etale covering by affine schemes $a:U\\to Z$ and set $Y_U=Y\\times_ZU$, with projections $b:Y_U\\to Y$ and $g_U:Y_U\\to U$. Such fibre products and coverings exist by the algebraic-space fibre-product theorem and the affine chart basis of the small model. Quasi-compactness of $g_U$ and of its diagonal follows by base change from $g$ and $\\Delta_g$; indeed $\\Delta_{g_U}$ is the base change of $\\Delta_g$. Thus $g_U$ is qcqs. The chart calculus gives $a^*Rg_*\\cong R(g_U)_*b^*$ and $b^*Lg^*\\cong Lg_U^*a^*$, with the composition comparisons respecting counits. Together with the tensor pullback comparison these identify $a^*\\alpha_L$ with $\\alpha^{g_U}_{a^*L}$: both adjoints are the pullback of $(\\varepsilon_F\\otimes1)\\mu$, using the same counit. Exact etale restriction commutes with cohomology. If these restricted maps are isomorphisms, each cohomology map of $\\alpha_L$ is an isomorphism on every geometric stalk, since the charts cover all geometric points. Geometric-stalk conservativity then makes each cohomology map an isomorphism, hence $\\alpha_L$ an isomorphism in the derived category. It therefore suffices to prove the assertion when $Z=\\operatorname{Spec}R$. The restrictions of $F,L$ remain quasi-coherent by the chart calculus.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-small-ringed-model",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "Now assume $Z=\\operatorname{Spec}R$. Let $\\mathcal T$ be the full subcategory of $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ consisting of $L$ for which $\\alpha_L$ is invertible. The affine etale realization $a_R:D(R)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ is the termwise exact associated-module functor, and takes $R[k]$ to $\\mathcal O_Z[k]$. On the affine scheme, the perfect-localizing-generation theorem ensures that the quasi-coherent derived subcategory is closed under ambient coproducts and distinguished-triangle cones. We will check that $\\mathcal T$ contains these shifted units and is closed under those operations and retracts.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "For a small family $(L_i)$ in $\\mathcal T$, derived pullback and tensor preserve coproducts: pullback is a left adjoint by the derived adjunction in the projection-mate theorem, and tensor in either variable is a left adjoint by the closed symmetric monoidal theorem. Apply the left-adjoint colimit theorem to the corresponding small discrete diagrams. Each $F\\otimes^{\\mathbf L}Lg^*L_i$ has quasi-coherent cohomology by the quasi-coherent pullback/tensor theorem. The qcqs derived pushforward coproduct theorem therefore applies to this family. Consequently both $A$ and $B$ preserve its coproduct. Naturality for every injection $L_i\\to\\bigoplus_iL_i$ identifies $\\alpha_{\\bigoplus_iL_i}$ with $\\bigoplus_i\\alpha_{L_i}$ under these comparisons, by the coproduct universal property. The latter has inverse $\\bigoplus_i\\alpha_{L_i}^{-1}$, so $\\bigoplus_iL_i\\in\\mathcal T$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-sfb-space-derived-pushforward-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "For a distinguished triangle with vertices in $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$, the exactness and shift compatibility of $\\alpha$ established in step 1 make its three components a morphism of distinguished triangles. The triangle two-out-of-three theorem shows that if two vertices are in $\\mathcal T$ then so is the third. The same shift compatibility, iterated forwards or backwards, shows that $\\mathcal T$ is closed under every integer shift. In particular all $\\mathcal O_Z[k]$ belong to it, because $\\alpha_{\\mathcal O_Z}$ is the identity by step 1.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "The class $\\mathcal T$ is closed under isomorphisms by naturality. For a retract $i:L\\to M$, $p:M\\to L$ with $pi=1_L$ and $M\\in\\mathcal T$, an inverse to $\\alpha_L$ is $A(p)\\alpha_M^{-1}B(i)$. Naturality gives $\\alpha_LA(p)=B(p)\\alpha_M$ and $B(i)\\alpha_L=\\alpha_MA(i)$, so composing in either order gives respectively $B(pi)=1$ and $A(pi)=1$. Thus $L\\in\\mathcal T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  },
+  {
+   "text": "Transport $\\mathcal T$ along the affine equivalence $a_R$. An equivalence preserves coproducts by their universal property; here these are ambient coproducts by step 3. Since $a_R$ comes from the termwise exact associated-module functor, it also carries shifts and distinguished triangles to shifts and distinguished triangles. Thus the transported class in $D(R)$ contains every $R[k]$ and is closed under small coproducts, triangle two-out-of-three and retracts, by steps 4--6. Derived-module free generation implies that it is all of $D(R)$. Essential surjectivity of $a_R$ now gives $\\mathcal T=D_{\\mathrm{QCoh}}(\\mathcal O_Z)$. This proves the formula for affine $Z$; step 2 proves it on every $Z$. The construction throughout is the canonical mate from step 1, without any boundedness or flatness restriction.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-small-ringed-model",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IN, lemma-cohomology-base-change, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived projection formula for quasi compact quasi separated algebraic spaces and quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward commutes with tensoring by arbitrary derived pullbacks on qcqs algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).inv.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      (((AlgebraicGeometry.Scheme.Modules.pushforward (Ca\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the inverse of the natural isomorphism between the pushforward functor along $g \\\\circ f$ and the composition of pushforward functors a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived projection formula for quasi compact quasi separated algebraic spaces and quasi coherent cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughProjectives\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \"[LocallySmall.{w} C] [EnoughProjectives C] : HasExt.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small and has enough projective objects, then the derived category of $\\\\mathcal{C}$ has well-defined hom-sets between single-term cochain complexes concentrated \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @QuasiCompact @QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [QuasiSeparated g] : QuasiSeparated (pullback.fst f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $g$ is quasi-separated, then the first projection morphism from the pullback of $f$ and $g$ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"[HasDerivedCategory C] (x : Cocycle R.cochainComplex ((singleFunctor C 0).obj Y) n) :\\n  (R.extEquivCohomologyClass.symm (.mk x)).hom =\\n    (ShiftedHom.mk₀ _ rfl\\n          ((DerivedCategory.singleFunctorIsoCompQ C 0).hom.app X ≫ inv (DerivedCategory.Q.map R.π'))).comp\\n      ((ShiftedHom.map (Cocycle.\", \"doc\": \"For a projective resolution $ R $ in an abelian category $ \\\\mathcal{C} $ with derived category structure, the inverse equivalence of the cohomology class equivalence maps a cocycle $ x $ to a morphism\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|pushforward.*tensor|tensor.*pushforward",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback",
+   "results": "12 hits, including SheafOfModules.pullback, pullbackPushforwardAdjunction, pullbackComp, pullbackObjFreeIso. These concern underived functors and their adjunction, with no derived tensor projection formula.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "directory AlgebraicGeometry; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for derived direct image of quasi coherent complexes on algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, CategoryTheory.CostructuredArrow.grothendieckProj_map, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', AlgebraicGeometry.Scheme.instQuasiCompactToImage, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, tensor",
+   "results": "0 hits: . loogle: unknown identifier 'tensor'",
+   "date": "2026-10-24",
+   "verdict": "no match: loogle: unknown identifier 'tensor'; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded projection formula for quasi compact quasi separated morphisms of algebraic spaces with quasi coherent complexes",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|D_QCoh|QCoh",
+   "results": "directory AlgebraicGeometry; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward tensor pullback projection comparison for quasi coherent sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "no match; inspected results, which do not state the unbounded algebraic-space projection formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, two displayed global-section projection-formula comparisons.",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qcqs-derived-projection-formula",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08IN: canonical exact mate, etale affine reduction respecting counits, coproduct/triangle/retract closure, shifted unit, and D(R) free generation. Reused existing input nodes only; no new nodes. Normalized accidentally doubled TeX backslashes without changing any mathematical hypothesis or conclusion. Added K-flat and K-injective definition dependencies.",
+  "blueprint": "Supporting input to the two 0CTT global-section projection comparisons in the inherited ancestry of det-thm-sf-ctf-stability-direct-images. Current latest blueprint direct-images proof clause (3) is unchanged at the unit route level; this split only supplies the subsidiary Stacks 08IN input. The inherited blueprint.from.node is null, and blueprint_refs ancestor returns None; no maintainer-owned ancestry was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic Chart-adjunction pullbacks realize normalized ringed tensors input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic The derived category of a ringed site is closed symmetric monoidal input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic Isomorphism on two terms of a distinguished triangle input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic Generation of a module derived category by shifts of the ring input to the Stacks 08IN affine-localizing proof; this unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-defd41341",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-defd41341 (reviewer sub-agent of L); spot-checked: I read the whole S1 split: Stacks 08IN (spaces-perfect.tex l.4666-4722) and all 17 cited statements. No new nodes. Statement text is byte-identical to the live/base text; it matches 08IN (qcqs morphism, unbounded D_QCoh inputs, map defined through the counit). Added stmt_deps K-flat and K-injective are used by the statement. The extra 'Δ qs' in the item's own definition holds automatically (03KL); downstream only needs Δ qc. Steps: (1) ringed model + chart tensor realization + projection-mate-exact give the canonical α (exact, shift-compatible, α_O=1). (2) Étale-local reduction: fibre products, base-changed qc, chart calculus for unbounded restriction of Rg_*/Lg^* with unit/counit compatibility, tensor pullback, geometric-stalk conservativity on cohomology sheaves. (3) Affine realization D(A)≃D_QCoh, and coproduct closure of D_QCoh, used only for the affine Z. (4) Coproducts via left adjoints + QC tensor/pullback + qcqs Rg_* sums (08FB). (5) Triangle 2-of-3 and ±shifts. (6) Elementary retract inverse, checked. (7) 09PB generation by A[k], sums, triangles and retracts. Follows 08IN paragraph by paragraph. Checked g=id, L=O[k], zero/empty cases, nonflat Spec R/I, non-quasi-compact Z. No cycle. Not a duplicate of the affine-flat, proper-support, scheme or perfect-L variants. Accepted the generic tool_uses. Batch-5: the flagged trf nodes are algebraic-space foundations (03G0/03D7/02X2), not trace-formula or PD steps; the other flagged sfb nodes reach trf only through def-trf-algebraic-space, already a base stmt_dep. The closure diff against the citing parent is 0 nodes. Not superseded (live is still unsplit)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcqsDerivedProjectionFormula",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_qcqs_derived_projection_mate",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcqsDerivedProjectionFormula.lean",
+  "statement": "theorem isIso_qcqs_derived_projection_mate {S : Scheme.{u}} {Y Z : AlgebraicSpace S} [HasDerivedCategory.{w} Y.SmallModules] [HasDerivedCategory.{w} Z.SmallModules] (g : Y ⟶ Z) (hqc : MapIsQuasiCompact g.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal g.hom.hom)) (F : Y.DerivedModules) (L : Z.DerivedModules) (hF : Y.derivedQCohProperty F) (hL : Z.derivedQCohProperty L) : IsIso ((spaceDerivedAdjunction g).homEquiv _ _ ((moduleDerivedPullbackTensor g).hom.app ((derivedDirectImage g).obj F, L) ≫ Y.derivedDualityModel.closed.tensor.map (Prod.mkHom ((spaceDerivedAdjunction g).counit.app F) (𝟙 ((derivedTensorPullback g).obj L)))))",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97c2c782b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Checked against Stacks 08IN (spaces-perfect.tex l.4666): S scheme, Y Z AlgebraicSpace S, MapIsQuasiCompact g plus MapIsQuasiCompact of the diagonal (03HK; Δ qs automatic by 03KL), unbounded F and L with derivedQCohProperty. Arrow = (spaceDerivedAdjunction g).homEquiv of moduleDerivedPullbackTensor followed by Y-tensor.map(counit_F, 𝟙): type-checked as Rg_*F⊗L → Rg_*(F⊗Lg^*L), the source's adjoint map, all on the same derivedTensorPullback.{u,w,w} (spaceDerivedPullback is an abbrev for it). IsIso is the derived form. No extra hypotheses; edge cases (id, O[k], zero, empty, non-flat, non-qc Z) covered. lean.statement verbatim, no statement_change. 5 added stmt_deps are landed owners; public imports present; sorry only; docstrings carry source, blueprint and 7 steps; report has both sections. H4: no existing equivalent (space_affine_derived_projection_formula needs flatness and an affine base). Advisory: hqs writes out AlgebraicSpace.MapIsQuasiSeparated (def-sfb-stack-qcqs-morphism, landed 2026-10-24) inline; definitionally identical, not a duplicate declaration. No file changed, so no compile."
+ }
+}

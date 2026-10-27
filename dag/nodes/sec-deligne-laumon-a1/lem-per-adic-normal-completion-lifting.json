@@ -1,0 +1,293 @@
+{
+ "id": "lem-per-adic-normal-completion-lifting",
+ "kind": "statement",
+ "title": "Normal local completions over a quasi-excellent closed fibre",
+ "statement": "Let $A$ be a commutative Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], let $I\\subseteq A$ be an ideal, and assume $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring] and $A/I$ is quasi-excellent [def-exc-excellent-ring]. For every prime ideal $\\mathfrak p\\subset A$, the maximal-ideal-adic completion $\\widehat{A_{\\mathfrak p}}=\\varprojlim_n A_{\\mathfrak p}/\\mathfrak p^n A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion] is a normal local domain. No universal catenarity or G-ring hypothesis on $A$ is assumed.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1 Step 1 (1-4), printed p.8, invoking Nishimura–Nishimura Theorem A (lifting of Nagata Z-rings); normal rings with geometrically normal formal fibres have normal completions. Applied also in (5.3), printed p.9. This is the normal-completion consequence of the weaker Z-ring lifting theorem, not Theorem 5.1 itself."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=A/I$. By [lem-exc-quasi-excellent-nagata], $Q$ is Nagata. By [def-exc-excellent-ring] it is a G-ring. For every prime of $Q$, [def-weil-pbc-g-ring] says that each formal fibre of its local completion is geometrically regular: after every finite purely inseparable extension of its residue field the fibre is a Noetherian regular ring. Each such ring is normal by [lem-weil-pbc-regular-ring-normal]. This verifies exactly $N(Q)$ in the lifting lemma, without any assertion about formal fibres of $A$ yet.",
+   "uses": [
+    "lem-exc-quasi-excellent-nagata",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QV, lemma-quasi-excellent-nagata; 07QT, definition-excellent; 07GH, definition-G-ring. For regular-implies-normal: algebra.tex Tag 0567, lemma-regular-normal. Normal-fibre preparation in Kurano–Shimomoto Step 1 (1-4)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-nagata-normal-formal-fibres-lifting] to the original pair $(A,I)$: Noetherianity and $I$-adic completeness are hypotheses, and Step 1 supplies both quotient conditions. Obtain $N(A)$. In particular, for any prime $\\mathfrak p$ of $A$, all fibre rings of $A_{\\mathfrak p}\\to\\widehat{A_{\\mathfrak p}}$ are normal: take the identity (finite purely inseparable) residue-field extension in $N(A)$. The theorem applies to $(A,I)$, not to the possibly incomplete localization.",
+   "uses": [
+    "lem-per-nagata-normal-formal-fibres-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 1 (1-4), printed p.8; Appendix A, Definition A.1(1) and the Nagata Z-ring row, printed pp.14–15, quoting Nishimura–Nishimura, Ideal-adic completion of Noetherian rings II, Theorem A."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p$ and put $B=A_{\\mathfrak p}$ and $C=\\widehat B$. By [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-localization-normal-domain], $B$ is a Noetherian normal domain. Applying the latter also to each further prime localization makes $B$ a normal ring. By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], $C$ is Noetherian and local, with maximal ideal $\\mathfrak pBC$ and nonzero residue field $B/\\mathfrak pB$. By [lem-weil-pbc-local-completion-faithfully-flat], $B\\to C$ is flat.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN, lemma-Noetherian-permanence; 00GY, lemma-localize-normal-domain; 0316, lemma-completion-Noetherian-Noetherian; 05GI, lemma-radical-completion and 05GG, lemma-hathat-finitely-generated; 00MC, lemma-completion-faithfully-flat."
+   }
+  },
+  {
+   "text": "The two Noetherian rings $B,C$, the flat map of Step 3, the normal base $B$, and every normal fibre from Step 2 meet all five hypotheses of [lem-weil-pbc-flat-normal-fibres-noetherian-normal]. Thus $C$ is a normal ring.",
+   "uses": [
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C22, lemma-normal-goes-up-noetherian; also more-algebra.tex Tag 0C23, lemma-completion-normal-local-ring."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n$ be the maximal ideal of $C$. By [def-weil-pbc-normal-ring], $C_{\\mathfrak n}$ is a normal domain. Every denominator outside $\\mathfrak n$ is a unit in the local ring $C$, so $c/s\\mapsto cs^{-1}$ is an inverse to $C\\to C_{\\mathfrak n}$. Hence $C$ itself is a normal local domain. The prime $\\mathfrak p$ was arbitrary.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GV, definition-ring-normal and 0309, definition-domain-normal; local-ring localization identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-quasi-excellent-nagata",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-per-nagata-normal-formal-fibres-lifting",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Assembly of the weaker Nagata Z-ring lifting input in Theorem 5.1 Step 1 (1-4) with the Stacks flat-normal-fibre argument (0C22/0C23); full source integration requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normal Noetherian domain complete along an ideal with quasi excellent quotient has normal maximal ideal completions at every prime localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"OfLocalizationMaximal fun R x => ∀ [IsDomain R], IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}\n  {\"name\": \"IsIntegrallyClosed.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"Let $ R $ be an integral domain. If for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ itself is integrally c\"}\n  {\"name\": \"OfLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Basic\", \"type\": \"((R : Type u) → [CommRing R] → Prop) → Prop\", \"doc\": \"For any commutative ring $ R $, if a property $ P $ holds for the localization of $ R $ at every maximal ideal $ J $, then $ P $ also holds for $ R $ itself. This expresses that properties can be veri\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDomain R],\\n  (∀ (p : Ideal R), p ≠ ⊥ → ∀ [inst_2 : p.IsMaximal], IsIntegrallyClosed (Localization.AtPrime p)) →\\n    IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"}\n  {\"name\": \"IsLocalization.AtPrime.isDedekindDomain\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [IsDomain A] [IsDedekindDomain A] (P : Ideal A) [inst_3 : P.IsPrime]\\n  (Aₘ : Type u_2) [inst_4 : CommRing Aₘ] [IsDomain Aₘ] [inst_6 : Algebra A Aₘ] [IsLocalization.AtPrime Aₘ P],\\n  IsDedekindDomain Aₘ\", \"doc\": \"Let $ A $ be a Dedekind domain and $ P $ a prime ideal of $ A $. If $ A_\\\\mathfrak{m} $ denotes the localization of $ A $ at the complement of $ P $, then $ A_\\\\mathfrak{m} $ is also a Dedekind domain. \"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"Localization.AtPrime.isDedekindDomain\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [IsDomain A] [IsDedekindDomain A] (P : Ideal A) [inst_3 : P.IsPrime],\\n  IsDedekindDomain (Localization.AtPrime P)\", \"doc\": \"The localization of a Dedekind domain $ A $ at a prime ideal $ P $ is also a Dedekind domain. This means that when $ A $ satisfies the conditions of being an integral domain, Noetherian, integrally cl\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give localization criteria for integral closedness, Dedekind localizations and Henselian completeness; none gives normality of these completions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"IsIntegrallyClosed\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give localization criteria for integral closedness, Dedekind localizations and Henselian completeness; none gives normality of these completions"
+  },
+  {
+   "tool": "grep",
+   "query": "Nishimura|Z.?ring|geometrically.?normal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give localization criteria for integral closedness, Dedekind localizations and Henselian completeness; none gives normality of these completions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal Noetherian domain complete along an ideal with quasi excellent quotient has normal maximal ideal completions at every prime localization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegrallyClosed.of_isLocalization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \"[IsDomain R] (h : ∀ (P : Ideal R) [P.IsMaximal], IsIntegrallyClosed (Rₚ P)) : IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be an integral domain. If for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ itself is integrally c\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \"[IsDomain R] (h : ∀ p : Ideal R, p ≠ ⊥ → [p.IsMaximal] → IsIntegrallyClosed (Localization.AtPrime p)) :\\n  IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(H : ∀ (P : Ideal R) [P.IsMaximal], IsNoetherianRing (Rₚ P)) : IsNoetherianRing R\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral\", \"type\": \"[IsNoetherianRing R] [IsDomain R] [IsFractionRing R S] : completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \": OfLocalizationMaximal fun R _ => ([IsDomain R] → IsIntegrallyClosed R)\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \"[IsAdicComplete m R] : IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"module\": \"Mathlib.RingTheory.DedekindDomain.PID\", \"type\": \"[IsDomain S] {P : Ideal Sₚ} (hP : IsPrime P) (hP0 : P ≠ ⊥) : P ∈ normalizedFactors (Ideal.map (algebraMap R Sₚ) p)\", \"doc\": \"If $ P $ is a nonzero prime ideal in the localized ring $ S_P $, then $ P $ is a normalized prime factor of the ideal generated by $ p $ in $ S_P $, where $ p $ is the image of the algebra map from $ \"}\n  {\"name\": \"isReduced_ofLocalizationMaximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Reduced\", \"type\": \": OfLocalizationMaximal fun R _ => IsReduced R\", \"doc\": \"If every localization of a commutative ring $ R $ at its maximal ideals is a reduced ring (i.e., contains no nonzero nilpotent elements), then $ R $ itself is reduced.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give localization criteria for integral closedness, Dedekind localizations and Henselian completeness; none gives normality of these completions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically normal formal fibres lift in an ideal adically complete ring with Nagata closed fibre so that normal local rings have normal completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"Algebra.IsUnramifiedAt\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"Given a prime ideal $ q $ in a commutative ring $ A $, this proposition asserts that the localization of $ A $ at the complement of $ q $ is formally unramified over the base commutative ring $ R $. I\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give localization criteria for integral closedness, Dedekind localizations and Henselian completeness; none gives normality of these completions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring complete for an ideal has geometrically normal formal fibres at all prime localizations if its quotient is Nagata with geometrically normal formal fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Zariski main property, quasi-finiteness and flatness, not lifting normal formal fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"IsIntegrallyClosed\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration has both queried completion and integral-closedness names"
+  },
+  {
+   "tool": "grep",
+   "query": "Nishimura|Z.?ring|geometrically.?normal.*formal|formal.*fib.*normal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hit for the queried normal-formal-fibre and Z-ring terminology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting the Nagata property and geometrically normal formal fibers from a quotient to an ideal adically complete Noetherian ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \": R →+* S\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(x : R) : of I S (liftRingHom I f hf x) = (AdicCompletion.liftRingHom I f hf x)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.mk_comp_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mk (I ^ n)).comp (liftRingHom I f hf) = f n\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, there exists a ring homomorphism $ R \\to S $ constructed by composing the inverse of the \"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n  {\"name\": \"IsAdicComplete.lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  [IsAdicComplete I\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and let $M$ and $N$ be $R$-modules. Assume that $N$ is $I$-adically complete. This definition constructs an $R$-linear map from $M$ to $N$ from a co\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Noetherian\", \"type\": \"{R : Type*} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits construct completion maps or assert flatness and quotient Noetherianity, not normal formal-fibre lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata normal formal fibers lift from a closed fiber to an adically complete ring without universal catenarity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.mk_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (n : ℕ) (x : R),\\n  (Ideal.Quotient.mk (I ^ n)) ((IsAdi\", \"doc\": \"For each natural number $n$ and element $x$ in the commutative ring $R$, the image of the lifted ring homomorphism $\\\\text{liftRingHom}(I, f, hf, x)$ under the canonical quotient map to $R/I^n$ is equa\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.StrictMono.mk_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S) {a : ℕ → ℕ}\\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n)\\n  (hf : ∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) [inst_2 : IsAdicComplete I S] {n : ℕ} (x : R),\\n  (Ideal.Quotie\", \"doc\": \"For any natural number $ n $ and element $ x $ in the ring $ R $, the canonical quotient map $ R \\to R/I $ applied to the lifted ring homomorphism $ \\text{liftRingHom}(I, ha, f, hf, x) $ equals $ f(n, x\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_3} →\\n  {S : Type u_4} →\\n    {A : Type u_5} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            (I : Ideal S) →\\n              [IsAdicComplete I S] →\\n                [inst_4 : CommRing A] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          [IsAdicComplete I S] →\\n            (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n              (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give Henselian completeness and formally smooth lifting, not normality of formal fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal Noetherian adically complete domain with quasi excellent quotient has normal completions at all prime localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R) (r : R),\\n  ↑((algebraMap R K) r) ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v\", \"doc\": \"For any element $ r $ in a Dedekind domain $ R $, the image of $ r $ under the canonical algebra homomorphism from $ R $ to its fraction field $ K $, when embedded into the adic completion of $ K $ wi\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                Algebra R ↥(IsDed\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $ and a height one prime ideal $ v $, the adic completion integers of $ K $ at $ v $ form an $ R $-algebra. This structure equips the valuation subr\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2\", \"doc\": \"Given a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, this constructs the completion of $ K $ with respect to the non-Archimedean valuation induced by $ v $. The\"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of elements with valuation less than or equal to 1, is a discret\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Dedekind valuation completions and Henselian rings, not arbitrary normal domains with quasi-excellent quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-normal-counterexample-reduction",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, duality/cosupport direction: the regular-local purity input in its existing DAG realization passes through small-singular-locus completion and quasi-excellence lifting. Here: Kurano–Shimomoto Theorem 5.1 Step 1 (1-4), the weaker Nagata Z-ring lifting input, before the G-ring contradiction; no use of the quasi-excellence lifting conclusion.",
+   "via": [
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-adic-normal-completion-lifting",
+  "worker": "stage1",
+  "summary": "Q05: statement unchanged. Isolated the general Nagata normal-formal-fibre lifting theorem as one statement-only node; assembled quasi-excellent quotient fibres, normal localizations, flat completion and normal ascent using existing nodes. Checked all primes, arbitrary ideals and residue characteristics; no quasi-excellence lifting circularity.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, duality/cosupport direction: the regular-local purity input in its existing DAG realization passes through small-singular-locus completion and quasi-excellence lifting. Here: Kurano–Shimomoto Theorem 5.1 Step 1 (1-4), the weaker Nagata Z-ring lifting input, before the G-ring contradiction; no use of the quasi-excellence lifting conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic commutative-algebra input for the Nagata/formal-fibre or flat-normal-ascent argument; the curve-perverse unit has no replacement for this ring-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-676f4f7d1",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-676f4f7d1 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and the source. Kurano–Shimomoto kurano40.pdf (not under literature/; fetched read-only, text extracted in /tmp): Thm 5.1 (1-3) and (1-4) p.8, §2 Z-ring := [12, Def (0.1)], App. A Def A.1(1) and table p.15 (LP for Nagata = Marot; LP for Nagata Z-ring = Nishimura–Nishimura Theorem A). Geometric normality checked with Stacks 037Z/0380 (finite purely inseparable form; no Noetherian hypothesis). The item is exactly the (1-4) inference: normal domain + Z-ring ⇒ Â_P normal local domain. Arbitrary I is fine because the LP is general. Steps: (1) QE ⇒ Nagata by 07QV, G-ring regular fibres normal by 0567, so N(Q) holds. (2) The new node is applied to the complete pair (A,I), not to A_p; the identity extension gives normal fibres. (3) 00FN, 00GY, 0316, 05GI/05GG, 00MC: B is a Noetherian normal ring, C Noetherian local, B→C flat. (4) All 5 hypotheses of 0C22 matched. (5) Local normal ring = normal domain. Edge cases checked: p=0, I=0, I=A, nonnormal A, char 0 vs char p. The item is reachable from nt-target via the qe-normal-counterexample-reduction chain. No circularity: the QE lifting nodes are downstream. No SGA. FIX: the new node's conclusion 'A is a Nagata ring and …' duplicated the existing unsplit node lem-per-adic-nagata-lifting (Marot), and the item does not use that conjunct. The conclusion now reads 'then A satisfies N(A)'; the A/I-Nagata hypothesis is kept, as NN Thm A needs it; title adjusted. Whole file in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-nagata-normal-formal-fibres-lifting.json. The generic commutative-algebra split_report.tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicNormalCompletionLifting",
+  "declaration": "AdicCompletion.normal_atPrime_of_isQuasiExcellent_quotient",
+  "file": "lean/Sheaf/RingTheory/AdicNormalCompletionLifting.lean",
+  "statement": "theorem normal_atPrime_of_isQuasiExcellent_quotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (I : Ideal A) [IsAdicComplete I A] (hquot : IsQuasiExcellent (A ⧸ I)) (p : Ideal A) [p.IsPrime] : IsDomain (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) ∧ IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p))",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-984fbdd69",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep records (IsQuasiExcellent at ExcellentRing.lean:69, AdicCompletion, IsAdicComplete, Localization.AtPrime, IsNoetherianRing, normal-domain inline form IsDomain+IsIntegrallyClosed), module and report (Worker report + Second reading present). Hypotheses match exactly (no extra catenary/G-ring/locality/universe assumptions; no I ≤ p condition); conclusion IsDomain ∧ IsLocalRing ∧ IsIntegrallyClosed of AdicCompletion (maximalIdeal A_p) A_p = normal local domain of the p A_p-adic completion. Edge cases p=0, I=0, I=⊤ (vacuous via IsDomain, as in node) agree. Only lean field changed vs clone; lean.statement verbatim in file; no name collision or existing Mathlib/project statement; docstrings carry source place, blueprint tag and 5 proof steps; proof sorry only; imported proof modules exist. No recompile (no file changed). No findings."
+ }
+}

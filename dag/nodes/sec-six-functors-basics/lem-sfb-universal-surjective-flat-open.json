@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-universal-surjective-flat-open",
+ "kind": "statement",
+ "title": "The universal surjective-flat locus in the base is open",
+ "statement": "Let $B,A,C$ be schemes [def-pc-scheme], let $p:A\\to B$ and $q:C\\to B$ be morphisms, and let $f:A\\to C$ satisfy $q\\circ f=p$. Assume $p$ is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and a closed map of underlying topological spaces. Assume $q$ is locally of finite type [def-weil-finite-type-morphism] and a closed map of underlying topological spaces. There is an open subscheme $V\\subseteq B$ [def-weil-open-immersion] such that for every scheme $T$ and morphism $h:T\\to B$, the base change $f_T:A\\times_BT\\to C\\times_BT$ [def-pc-fibre-product] is surjective [def-weil-surjective-morphism] and flat [def-weil-flat-morphism] if and only if $h$ factors through $V\\hookrightarrow B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, scheme specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-universal-flat-open] to $p,q,f$; all its hypotheses are among ours. Obtain the open $F\\subseteq B$ and, for every $h:T\\to B$, the equivalence between flatness of $f_T$ and factorization of $h$ through $F$. Write $A_F=p^{-1}(F)$ and $C_F=q^{-1}(F)$ with their restricted structure sheaves [def-weil-open-immersion]. Taking $T=F$ and $h$ its inclusion shows that $f_F:A_F\\to C_F$ is flat.",
+   "uses": [
+    "lem-sfb-relative-universal-flat-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, scheme specialization."
+   }
+  },
+  {
+   "text": "Restrict to $F$, writing $A_F=p^{-1}(F)$, $C_F=q^{-1}(F)$ and $f_F:A_F\\to C_F$. The restriction is flat by Step 1. It is locally of finite presentation: on compatible affine neighbourhoods over $\\operatorname{Spec}R\\subseteq F$, write the target as $\\operatorname{Spec}D$ and the source as $\\operatorname{Spec}E$. The affine-local finite-type and finite-presentation conditions [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation] give $D$ finite type over $R$ and $E$ finitely presented over $R$. Apply [lem-weil-pbc-finite-presentation-over-finite-type-algebra] to $R\\to D\\to E$ to get finite presentation over $D$. These neighbourhoods cover $A_F$, proving the claim. Therefore [lem-weil-pbc-flat-lfp-open] implies that $I=f_F(|A_F|)$ is open in $|C_F|$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof; the flat-case reduction is expanded using Tag 05XB."
+   }
+  },
+  {
+   "text": "The map $q_F:C_F\\to F$ is closed: a closed subset of $C_F$ is $D\\cap q^{-1}(F)$ for a closed $D\\subseteq C$, and its image is $q(D)\\cap F$, closed in $F$. Apply [lem-sfb-open-image-universal-surjectivity] to $A_F\\to C_F\\to F$ and the open image $I$ from Step 2. Obtain the open subscheme $V=F\\setminus q_F(|C_F|\\setminus I)$ of $F$, hence of $B$ [def-weil-open-immersion], representing surjectivity of all base changes over $F$.",
+   "uses": [
+    "lem-sfb-open-image-universal-surjectivity",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, scheme specialization."
+   }
+  },
+  {
+   "text": "For $h:T\\to B$ factoring as $\\iota_F h\\prime$, the fibre products over $B$ identify canonically with $A_F\\times_FT$ and $C_F\\times_FT$, compatibly with the induced maps [def-pc-fibre-product]. Indeed a compatible test pair into $A$ (respectively $C$) and $T$ lands in the inverse image of $F$ and factors uniquely through that open; compatibility over $F$ is equivalent to compatibility over $B$ because the inclusion of $F$ is injective on maps [def-weil-open-immersion]. If $h$ factors through $V$, Step 1 gives flatness and Step 3 gives surjectivity of $f_T$. Conversely if $f_T$ is flat and surjective, Step 1 factors $h$ through $F$; then Step 3 factors $h\\prime$ through $V$. These factorizations compose to the required one over $B$.",
+   "uses": [
+    "lem-sfb-relative-universal-flat-open",
+    "lem-sfb-open-image-universal-surjectivity",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, scheme specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-universal-flat-open",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-open-image-universal-surjectivity",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC, spaces-more-morphisms-lemma-where-surjective-flat, proof; the flat-case reduction is expanded using Tag 05XB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "where.*surjective|surjective.*flat.*locus|flat.*surjective.*locus",
+   "results": "{\"t\": \"2026-10-22T04:11:01Z\", \"tool\": \"grep\", \"query\": \"where.*surjective|surjective.*flat.*locus|flat.*surjective.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"8fb3aa92de2d3d22\"}; no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-22T04:11:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Flat\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"61c8852206c0f6e3\"}; no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If p A to B is flat locally of finite presentation and closed, and q C to B is locally of finite type and closed, then the base changes for which a B morphism A to C is surjective and flat are represented by an open subscheme of B",
+   "results": "{\"t\": \"2026-10-22T04:11:04Z\", \"tool\": \"leanfinder\", \"query\": \"If p A to B is flat locally of finite presentation and closed, and q C to B is locally of finite type and closed, then the base changes for which a B morphism A to C is surjective and flat are represented by an open subscheme of B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"bc9f5655c23d5b79\"}; no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base.",
+   "date": "2026-10-22",
+   "verdict": "no match: flat/surjective descent, affine faithfully flat criteria and universally open morphisms do not construct the universal surjective-flat open in the parameter base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simultaneous surjectivity and flatness locus in the parameter base of a morphism of families of schemes is open",
+   "results": "{\"t\": \"2026-10-22T04:11:01Z\", \"tool\": \"leansearch\", \"query\": \"The simultaneous surjectivity and flatness locus in the parameter base of a morphism of families of schemes is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"1480fbc28504a294\"}; affine faithfully-flat criteria and flat morphism permanence only; no universal locus.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map from a flat locally finitely presented family to a locally finite type family, the locus on the parameter base where the map becomes flat and surjective after base change is represented by an open subscheme",
+   "results": "{\"t\": \"2026-10-22T04:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a map from a flat locally finitely presented family to a locally finite type family, the locus on the parameter base where the map becomes flat and surjective after base change is represented by an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"8e2ff9fcfa1776fa\"}; no match: UniversallyOpen.of_flat, flat monomorphisms and flat descent do not represent the universal surjective-flat parameter locus.",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat, flat monomorphisms and flat descent do not represent the universal surjective-flat parameter locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open parameter locus representing base changes of a morphism of schemes which are both surjective and flat",
+   "results": "{\"t\": \"2026-10-22T04:24:33Z\", \"tool\": \"leansearch\", \"query\": \"Open parameter locus representing base changes of a morphism of schemes which are both surjective and flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyOpen.mk\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\"], \"digest\": \"b7224d216f9eed59\"}; no match: flatness and surjectivity are stable under base change, but these results do not construct the representing open.",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness and surjectivity are stable under base change, but these results do not construct the representing open."
+  },
+  {
+   "tool": "grep",
+   "query": "where.*surjective|surjective.*flat.*locus|flat.*surjective.*locus",
+   "results": "{\"t\": \"2026-10-22T04:24:33Z\", \"tool\": \"grep\", \"query\": \"where.*surjective|surjective.*flat.*locus|flat.*surjective.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"d16a3c139284e62a\"}; no match: three hits concern affine group schemes, generic morphism-property documentation and flat rank; none constructs this locus.",
+   "date": "2026-10-22",
+   "verdict": "no match: three hits concern affine group schemes, generic morphism-property documentation and flat rank; none constructs this locus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-isomorphism-open",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1",
+   "via": [
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-universal-surjective-flat-open",
+  "worker": "stage1",
+  "summary": "Q132 repair of the human batch5 re-split return: kept the statement, its hypotheses, Lean attribution and existing metadata. Extracted original Steps 1--3 into the statement-only 05XB universal flatness lemma, and original Steps 5--7 into the statement-only open-image universal-surjectivity lemma. Original Step 4 (affine finite-presentation cancellation and flat-lfp openness) remains explicit in the parent. Open restriction and base-change identifications remain explicit in the assembly. The report retains every original step verbatim with its new owner; both new nodes are unsplit and have actual logged Mathlib searches.",
+  "blueprint": "Preserved null ancestor and the inherited de Jong / Hilbert / 05XD via chain. The first 05XC sentence is carried by lem-sfb-relative-universal-flat-open (05XB); its finite-presentation and open-map sentences remain Step 2; its displayed complement and the forward/reverse surjectivity arguments are carried by lem-sfb-open-image-universal-surjectivity. This changes only the node-level work distribution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-36bd4b1fa",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-36bd4b1fa (reviewer sub-agent of L); spot-checked: I read Stacks 05XB (spaces-more-morphisms lemma-where-flat, l.11686), 05XC (lemma-where-surjective-flat, l.11729, statement and full proof) and 05VK (more-morphisms lemma-base-change-flatness-fibres, l.4759). The item statement is unchanged and is 05XC for schemes: p is flat, lfp and closed; q is lft and closed (closed maps, not universally closed); T is arbitrary. Re-split check: base Steps 1-3 became the new node lem-sfb-relative-universal-flat-open, which is exactly 05XB with F = S minus p(X minus U). Base Step 4 (lfp of f_F by of_restrict_scalars_finitePresentation, then I open by UniversallyOpen.of_flat) is kept verbatim as parent Step 2. Base Steps 5-7 became the new node lem-sfb-open-image-universal-surjectivity (V = S minus q(Y minus I)), while the q_F-closedness and the fibre-product identifications over F and B stay written out in parent Steps 3-4. Nothing was dropped or summarised. The two nodes are of comparable size and neither restates the item; the parent is a 4-step, 2351-character assembly. I checked both new statements independently. The surjectivity node holds for any S-morphism with open image: both directions follow from lem-weil-pbc-base-change-image on singleton points, and openness of I is only needed to make V open. The flatness node follows from 05VK (= lem-sfb-relative-flat-locus-base-change, whose hypotheses match) plus point lifting. Small cases tested: f = id; X empty; Spec k[t] into Spec k[t][eps]/eps^2, which gives U = F = empty; k into k[eps], which gives F empty and V = S, so the two nodes are independent. Parent steps: hypotheses match at every application; q_F closed because its closed sets are D intersected with q^-1(F); fibre products restricted to an open are correct. Advisory: Step 1 uses the A x_B F = A_F identification that Step 4 writes out; this is not circular. B1-B9 hold for both nodes: statement only, unsplit, single-escaped TeX, tag and label given, inherited null blueprint ancestor, same_as empty, searches recorded with LeanSearch marked unavailable. An rg search of the DAG found no duplicate; I compared relative-flat-locus, pointwise/fibrewise flatness and the universal-isomorphism, closed-immersion and unramified-radicial opens. No cycle, no SGA, tool_uses empty, every uses list is contained in proof_deps. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalSurjectiveFlatOpen",
+  "declaration": "AlgebraicGeometry.exists_universalSurjectiveFlatOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalSurjectiveFlatOpen.lean",
+  "statement": "theorem exists_universalSurjectiveFlatOpen {B A C : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (hf : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] (hp : IsClosedMap p) [LocallyOfFiniteType q] (hq : IsClosedMap q) : ∃ V : B.Opens, ∀ (T : Scheme.{u}) (h : T ⟶ B), (Surjective (pullback.map p h q h f (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using hf.symm) (by simp)) ∧ Flat (pullback.map p h q h f (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using hf.symm) (by simp))) ↔ ∃ l : T ⟶ V.toScheme, l ≫ V.ι = h",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49dc21d04",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 05XC (scheme case) clause by clause: p flat+lfp+IsClosedMap, q lft+IsClosedMap, hf : f ≫ q = p, canonical pullback.map p h q h f (𝟙 T) (𝟙 B), ∃ V : B.Opens ∀ T h, (Surjective ∧ Flat) ↔ ∃ l, l ≫ V.ι = h; no extra assumptions, single universe u; lean.statement verbatim; one sorry; node diff vs side-live only `lean`; stmt_dep records unchanged; not dropped, not yet Lean-closed live; no duplicate declaration; docstrings carry source/blueprint and 7 proof steps; proof-leaf imports verified (image_preimage_eq_of_isPullback, UniversallyOpen.of_flat, of_restrict_scalars_finitePresentation); edge cases (empty T/B/A/C, iso f, nonreduced T) fine; no files changed, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

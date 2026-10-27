@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-relative-finite-constant-model-identification",
+ "kind": "statement",
+ "title": "Transported inverse-image constants are native constant coefficient modules",
+ "statement": "theorem relativeFiniteConstantModelIdentification {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B]\n    (M : ModuleCat.{u + 1} B) (V : proEtaleSiteModel Y) :\n    Nonempty (((relativeFiniteModelModules g B).obj\n        ((proEtaleModuleInverseImage g (adicLisseConstantRing X B)).obj\n          ((adicLisseConstantModules X B).obj M))).over V ≅\n      ((SheafOfModules.constantCoefficientModule\n        (proEtaleModelTopology Y) B).obj M).over V)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved private declaration relativeConstant in Sheaf.Paper.PbcFinitePullbackConstructibility: restricting the inverse-image constant M-module along relativeUnit gives the ordinary constant ModuleCat B sheaf on Y. This is obtained there from the module inverse-image adjunction and uniqueness of left adjoints, with no finiteness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-pullback-constructibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the AsSmall constant-sheaf comparison, apply unit_leftAdjointUniq_hom_app to its defining adjunctions. Evaluation at the transported terminal object is injective on maps out of a constant presheaf. The AsSmall site-equivalence unit acts by the identity, so the comparison carries the transported sheafification unit to the small-site unit. Cancel its inverse and compose with the inverse constant-ring inverse-image comparison. This proves transportUnit: the coefficient map used by relativeFiniteModelModules sends each small-site constant scalar to relativeUnit on the original site.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-coefficient-transport",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define restriction to constant B-scalars on the small site. Local surjectivity of the constant-ring unit makes this functor fully faithful by restrictHomEquivOfIsLocallySurjective. The module-sheafification unit extends to smallConstantComparisonHom from the ordinary constant ModuleCat B sheaf; its local injectivity and local surjectivity make it an isomorphism. These are explicit proved private helpers in the item module, with no new unproved obligations.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation transportUnit makes the identity on additive sections a B-linear isomorphism between smallRestriction after relativeFiniteModelModules and precomposition of relativeRestriction by AsSmall.down. Compose it with the first-step constant comparison, the existing constantSheafSheafCongrIso for ModuleCat B, and smallConstantComparisonHom. Lift the resulting isomorphism through fully faithful smallRestriction, and apply SheafOfModules.overFunctor at V.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-coefficient-transport",
+    "lem-weil-pbc-finite-pullback-constructibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence. Reuses the proved relativeConstant helper of PbcFinitePullbackConstructibility; the scalar normalization and fully faithful lifting are proved here."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeFiniteConstantSliceComparison",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-relative-finite-constant-slice-comparison",
+   "place": "Constant module comparison on slices",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeFiniteConstantModelIdentification",
+  "file": "lean/Sheaf/Paper/RelativeFiniteConstantModelIdentification.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFiniteConstantModelIdentification",
+  "statement": "theorem relativeFiniteConstantModelIdentification {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B]\n    (M : ModuleCat.{u + 1} B) (V : proEtaleSiteModel Y) :\n    Nonempty (((relativeFiniteModelModules g B).obj\n        ((proEtaleModuleInverseImage g (adicLisseConstantRing X B)).obj\n          ((adicLisseConstantModules X B).obj M))).over V ≅\n      ((SheafOfModules.constantCoefficientModule\n        (proEtaleModelTopology Y) B).obj M).over V)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T054607-L-968947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T070607-L-2636884",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,62 +19,58 @@
   "def-pc-fibre-product",
   "def-nagata-effective-cartier-ideal",
   "lem-asd-ordinary-supported-kummer",
-  "lem-amb-p1-diagonal-integrals"
+  "def-z8-ordinary-finite-p1-diagonal-components"
  ],
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-tower-geometric",
  "proof": [
   {
-   "text": "On product affine charts the ideal generators are the diagonal polynomial divided by xi*yj. Their transition ratios identify its dual with p1*O(1) tensor p2*O(1), with its canonical divisor section. Cartier regularity is a hypothesis here and is supplied independently in the existence lemma.",
+   "text": "Use the canonical derived Chern arrow defined by the inverse of the proved class bijection. Supported Chern normalization identifies the supported diagonal arrow with the canonical Chern arrow of the dual diagonal ideal. The Picard identity, normalized pullback naturality and additivity identify its chart transport with the sum of the base and relative Chern arrows; the given Chern specification identifies the relative arrow with c.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
+    "def-sp-ordinary-finite-first-chern",
+    "lem-asd-ordinary-supported-chern-normalization",
+    "lem-sp-finite-p1-diagonal-picard",
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "lem-sp-ordinary-finite-chern-pullback",
     "def-pc-divisor-line-bundle"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
    }
   },
   {
-   "text": "The given supported boundary has forgotten-support Chern class of this dual ideal, by the supported Kummer unit formula and boundary uniqueness. Additivity of the Kummer connecting homomorphism gives the sum of the two hyperplane pullbacks.",
+   "text": "Factor the original projected supported composite using functoriality and associativity. The chart transport is the fixed adjunction/composition/twist composite. Use the proved equations for the unchanged supported unit and its composition, then adjunction naturality, to identify the chart image with the adjunct of the pulled-back Chern arrow. Direct image is additive. Finally the proved equations identifying the published projective-line components with the recorded adjunction give the base and Chern summands.",
    "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-amb-kummer-any-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
-   }
-  },
-  {
-   "text": "The free rank-one constant source identifies module-derived Hom with abelian cohomology evaluated at one: use injective module resolutions and section-acyclicity after forgetting. This is the ordinaryFiniteClass map. Thus the actual relative class is c. Under the chart the other term is a base class beta. Take adjoints and use unit naturality and triangles to obtain precisely beta followed by the twisted unit plus the Chern adjunct, with the stated chart transport.",
-   "uses": [
-    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-asd-ordinary-supported-kummer-system",
     "def-asd-ordinary-finite-p1-arrows",
-    "def-kun-unbounded-exchange"
+    "def-sp-ordinary-finite-coefficient-records",
+    "lem-sp-ordinary-finite-constant-unit-comp"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
    }
   }
  ],
  "proof_deps": [
   "def-asd-ordinary-finite-p1-arrows",
   "def-asd-ordinary-finite-p1-kummer-class",
-  "def-kun-unbounded-exchange",
+  "def-asd-ordinary-supported-kummer-system",
   "def-pc-divisor-line-bundle",
-  "lem-amb-kummer-any-base",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-weil-pbc-projective-space-standard-charts"
+  "def-sp-ordinary-finite-coefficient-records",
+  "def-sp-ordinary-finite-first-chern",
+  "lem-asd-ordinary-supported-chern-normalization",
+  "lem-sp-finite-p1-diagonal-picard",
+  "lem-sp-ordinary-finite-chern-pullback",
+  "lem-sp-ordinary-finite-constant-unit-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-  "place": "Levelwise finite diagonal check, expanded in lem-sp-tower-p1-arbitrary-base-integrals"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
  },
  "mathlib_searches": [
   {
@@ -125,19 +121,25 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1DiagonalKummerComponentFormula.lean",
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DiagonalComponents.lean",
   "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_kummer_component_formula",
-  "statement": "theorem ordinaryFiniteP1_diagonal_kummer_component_formula (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))\n    (hPP : IsUnit (N : Γ(ProjectiveLine (ProjectiveLine S), ⊤)))\n    (hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine (ProjectiveLine S)) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n    (hc : ordinaryFiniteP1ChernSpec A N hA (ProjectiveLine S) hPP c)\n    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible)\n    (κ : Ext\n      ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n        (ordinaryFiniteConstant A (ProjectiveLine S)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2)\n    (hκ : SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S))\n      hI hW κ) :\n    ∀ a : Bool, ∃ β : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n              (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n            ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫\n              ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n            β ≫ ordinaryFiniteP1Unit A N hA t (ProjectiveLine S) hP +\n              ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c",
+  "statement": "theorem ordinaryFiniteP1_diagonal_kummer_component_formula (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤)))\n    (hPP : IsUnit (N : Γ(ProjectiveLine (ProjectiveLine S), ⊤)))\n    (hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine (ProjectiveLine S)) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n    (hc : ordinaryFiniteP1ChernSpec A N hA (ProjectiveLine S) hPP c)\n    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible)\n    (κ : ordinaryFiniteSupportedExt A (pullback.diagonal (ProjectiveLine S ↘ S))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA))\n    (hκ : SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S))\n      hI hW κ) :\n    ∀ a : Bool, ∃ β : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n              (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n            ordinaryFiniteP1DiagonalSupportedMap A N hA S a κ ≫\n              ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n            β ≫ ordinaryFiniteP1Unit A N hA t (ProjectiveLine S) hP +\n              ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c",
   "branch": "sheaf-dag",
   "by": "G5",
   "date": "2026-10-20",
   "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteSupportedExt",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSupportedRealization",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSupportedArrow_pushforward",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSupportedArrow",
    "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalTarget",
    "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalSupportedMap",
    "AlgebraicGeometry.Etale.ordinaryFiniteP1DiagonalChartMap",
-   "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_kummer_component_formula"
-  ]
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_kummer_component_formula",
+   "AlgebraicGeometry.Etale.ordinaryFiniteChartTransport"
+  ],
+  "note": "F1 records the existing Ext group and supported realization on the named objects. The supported map retains the original alpha-then-realization composite through a definitionally equal wrapper. Its proof factors this composite through ordinaryFiniteSupportedArrow_pushforward. The supported-map and component-theorem kappa binders name the same Ext group; all other existing binders, conclusions and attributes are preserved. The chart-map body specializes ordinaryFiniteChartTransport, the same literal canonical adjunction/composition/shifted-line comparison composite constructed for arbitrary schemes. Z8 relocates this complete F1 construction and proof below the adjunction unit; FiniteP1DiagonalPicard imports the lower projection/chart interface to avoid the previous import cycle. The defining-equation conversion from cached Alpha to the same supported-unit pair is proved in ProjectiveLineDiagonalAlphaUnits and rewritten before the original factorization. This conversion changes none of the mathematical proof steps or dependencies. The statement dependency on the higher diagonal integrals is replaced by the lower canonical component construction, which now owns the target and maps; statement, proof and proof_deps remain main's."
  },
  "reviewed": {
   "date": "2026-10-20",
@@ -150,14 +152,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-810d7",
-  "group": "G5",
-  "result": "pass",
-  "landing": "20261020T230743-L-608710",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
   "kind": "interface",
-  "note": "independent cc review: re-delivery byte-identical to PASSed b77640285 (landing failed on unrelated missing file); recompiled all 8 modules + #print axioms against current live build, re-checked item statement folding vs change record, node lean records, live importers (none), new B2 kummer-maps node overlap and dropped lists"
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -236,7 +236,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-ece375d7b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three steps are valid; coefficients and mate construction match master, with no cycle, missing dependency, or new duplicate. Accepted the transport tool use. Corrected only the stale split_report.summary claiming a unit file was included; review.md records source checks and edge cases.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      606,
+      611
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
   "declaration": "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom",
@@ -254,5 +279,25 @@
   "group": "Q77",
   "result": "pass",
   "note": "existing:true binding to AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom (side ModuleObject/Basic.lean:608); only the lean field changes vs side-live. Statement verbatim. Λ arbitrary MonObj condensed ring, f arbitrary, Λ_X/Λ_Y = condensedRingObj (= coefficientRing dep), f^*/f_* = monoidal_upperStar/laxMonoidal_lowerStar (sole LaxMonoidal instance on lowerStar), target structure = monObjObj; probe proved the one/mul equations against explicit ε/μ of lowerStar; η = unitAlgHom ≫ lowerStar.map α = def-sfb-eta record. No extra hypotheses or universe restriction; axioms standard. nt_compile --json probe clean, 9.1 s. Consistent with the alpha-ring-hom precedent and the unit-level declarations list. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Give $f_*\\Lambda_X$ the ring object structure induced by the lax monoidal\nfunctor $f_*$ ([def-sfb-finite-lower-star-lax-monoidal]). Then\n$\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda_X$ ([def-sfb-eta]) is a morphism of ring\nobjects.",
+  "proof": [
+   {
+    "text": "The adjunction $f^*\\dashv f_*$ is monoidal\n([lem-sfb-finite-monoidal-adjunction]). So its unit is a monoidal natural\ntransformation, and its component $\\Lambda_Y\\to f_*f^*\\Lambda_Y$ is a morphism\nof ring objects. By [lem-sfb-alpha-ring-hom], $\\alpha_f$ is a morphism of\nring objects, and the lax monoidal $f_*$ sends it to a morphism of ring\nobjects. A composite of morphisms of ring objects is one.",
+    "uses": [
+     "lem-sfb-finite-monoidal-adjunction",
+     "lem-sfb-alpha-ring-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

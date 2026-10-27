@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-geometric-ordinary-kflat",
+ "kind": "statement",
+ "title": "Flat-term K-flat preservation for the ordinary geometric realization",
+ "statement": "variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n\n\ntheorem geometricOrdinary_kflat [PreservesFiniteLimits uInv] :\n    (∀ (n : ℕ) (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := B n) P →\n      flatTerms.{c, v, r} J (B n) P →\n      CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := O.coefficients n)\n        (((O.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P)) ∧\n    (∀ (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J)\n        (R := systemRing.{c, v, max c v r} J B τ) P →\n      flatTerms.{c, v, r} (coefficientSequenceTopology J)\n        (systemRing.{c, v, max c v r} J B τ) P →\n      CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J')\n        (R := systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n        ((O.pull.mapHomologicalComplex (.up ℤ)).obj P))",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; Zheng Construction 4.1, evaluation on the ringed sequence site."
+ },
+ "proof": [
+  {
+   "text": "At each level apply the proved ringed-topos K-flat pullback theorem with identity scalar extension, then remove this extension using the proved scalar unit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact jointly faithful evaluations detect acyclicity. Extend the ordinary tensor evaluation isomorphism to tensor totals using the evaluation/coextension adjunction, hence preservation of coproducts. Evaluating any acyclic tensor test shows that levelwise K-flatness implies system K-flatness.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-sf-sequence-module-pullback-evaluation",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation preserves flat-term K-flat representatives. Evaluate the source system, apply the level pullback result, and transport through ordinaryPullEvaluation. The preceding detection lemma gives K-flatness of the pulled system.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-system-scalar-coherence",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-sf-sequence-module-pullback-evaluation",
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-ordinary-geometric-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; Zheng Construction 4.1, evaluation on the ringed sequence site.",
+  "note": "G3: complete Lean proof using level pullback and exact tensor evaluation; no new sorry."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOrdinaryTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary tensor comparison and resolving-class preservation for geometric systems. Resolving-class preservation before localization.",
+   "via": [
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image preserves K flat complexes of sheaves with flat terms, componentwise on coefficient sequences",
+   "results": "8 hits concerning representably flat site functors, restricted flat scheme morphisms, and inverse images of morphism properties; no K-flat complex theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complexes of sheaves and flat terms are preserved by inverse image; evaluation detects acyclicity",
+   "results": "8 hits including Module.Flat.iff_lTensor_preserves_shortComplex_exact, its right-tensor variant, faithful flatness detecting exactness, and flat Kan extension lemmas.",
+   "date": "2026-10-26",
+   "verdict": "No sheaf-complex or coefficient-sequence result; reuse existing project K-flat pullback and evaluation APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat in Mathlib/Algebra/Homology and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib result."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricOrdinaryKFlat",
+  "file": "lean/Sheaf/Paper/GeometricOrdinaryKFlat.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricOrdinary_kflat",
+  "statement": "theorem geometricOrdinary_kflat [PreservesFiniteLimits uInv] :\n    (∀ (n : ℕ) (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := B n) P →\n      flatTerms.{c, v, r} J (B n) P →\n      CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := O.coefficients n)\n        (((O.inverseImage n).modules.mapHomologicalComplex (.up ℤ)).obj P)) ∧\n    (∀ (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J)\n        (R := systemRing.{c, v, max c v r} J B τ) P →\n      flatTerms.{c, v, r} (coefficientSequenceTopology J)\n        (systemRing.{c, v, max c v r} J B τ) P →\n      CochainComplex.IsKFlatIndependentCoefficients (J := coefficientSequenceTopology J')\n        (R := systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n        ((O.pull.mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.geometricOrdinary_kflat"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

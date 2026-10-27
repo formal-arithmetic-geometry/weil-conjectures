@@ -1,0 +1,130 @@
+{
+ "id": "def-trf-polynomial-duality-affine-compatibility",
+ "kind": "definition",
+ "title": "Full and principal-open affine compatibility of polynomial duality models",
+ "status": "split",
+ "statement": "Let $f:X\\to S$, $K\\in D(\\mathcal O_X)$ and a polynomial restriction atlas for $K$ be as in [def-trf-polynomial-duality-restriction-atlas]. Let $\\operatorname{Spec}A\\to X$ and $\\operatorname{Spec}R\\to S$ be affine open charts over an $R$-algebra $A$, $M\\in D(A)$, $e:K|_{\\operatorname{Spec}A}\\cong\\widetilde M$ and a polynomial presentation system $F$ for $M$ [def-trf-polynomial-duality-presentation-data]. Using the canonical affine realization maps [def-trf-polynomial-duality-affine-atlas-comparison], define affine compatibility as follows, for every atlas chart identified with the affine closed immersion $\\operatorname{Spec}A\\to\\operatorname{Spec}P$ for a quotient $p:P=R[x_0,\\ldots,x_{n-1}]\\twoheadrightarrow A$ over these fixed charts. The ordinary comparison $\\widetilde{\\operatorname{Res}_p N}\\cong(\\operatorname{Spec}p)_*\\widetilde N$ must have adjunct the actual tilde/Gamma unit [lem-weil-pbc-affine-tilde-gamma-adjunction], transported by the identity-on-elements global-sections comparison [lem-weil-pbc-pushforward-spec-global-sections]. Its derived comparison is constrained on every homotopy complex by the original right-derived units [def-pc-ringed-spaces-derived-direct-image]; all exactness and composite-additivity proofs are included as proof data, not new hypotheses. The ambient coefficient isomorphism must send the ordered polynomial differential volume to the wedge of the derivatives of the actual coordinate functions. Define the affine model arrow as the sheaf-coinduction adjunct of the actual module-coinduction evaluation [def-trf-derived-coinduction], transported by those unit-normalized affine comparisons and native direct-image composition [lem-pc-ringed-spaces-derived-direct-image-composition]. Require that the atlas identification equals the composite of the canonical open-restriction unit, the direct image of $e$, the associated-sheaf realization of $F$'s identification for $p$, and this independently defined affine model arrow. Thus the affine presentation identifications and the geometric atlas use the same comparison maps. Also impose the same compatibility on every principal ambient open $B=R[x_0,\\ldots,x_{n-1}]_h$ [def-weil-ring-localization-away]. Define $\\pi:R[x_0,\\ldots,x_{n-1},t]\\to B$ by the original coordinates and $t\\mapsto h^{-1}$. Its coefficient comparison from derived coinduction of the $(n+1)$-variable top form to the localized $n$-variable top form is the adjunct of the shifted boundary for multiplication by $ht-1$. Normalize the quotient map by sending the new volume to $h^{-1}$ times the localized old volume. For a quotient $p:B\\twoheadrightarrow A$, use the presentation-system identification for $p\\pi$, the actual two-counit coinduction comparison for $\\pi,p$, and this coefficient contraction before the canonical affine realization map. Require that this composite with $e$ equals the very same geometric atlas identification. This includes $h=1$, $h=0$, and zero-variable charts. It ties principal-open restriction to the presentation system even when a new inverse coordinate is necessary.",
+ "stmt_deps": [
+  "def-trf-polynomial-duality-restriction-atlas",
+  "def-trf-polynomial-duality-presentation-data",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-trf-derived-coinduction",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-trf-polynomial-duality-affine-atlas-comparison",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "0BZI and 0BZJ polynomial comparison and coefficient contraction; localization on principal opens and duality.tex, 0E2X"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical polynomial relative duality models, derived coinduction restriction mates, exact affine tilde realization, and normalized comparison on localizations",
+   "results": "[leansearch] OK 8 hit(s): IsLocalization.integerNormalization; IsLocalization.coeffIntegerNormalization.congr_simp; Rep.coindResAdjunction; IsLocalization.integerNormalization_spec; IsLocalization.integerNormalization.congr_simp; CategoryTheory.Adjunction.derived; MvPolynomial.isLocalization; IsLocalization.integerNormalization_coeff. These concern polynomial localization denominators, representation coinduction and general derived adjunctions; none defines the polynomial-duality comparison packages.",
+   "date": "2026-10-22",
+   "verdict": "no matching package; canonical primitive maps are reused from their existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction comparison for relative duality polynomial chart models by coinduction adjunction and affine associated sheaf",
+   "results": "8 hits: Scheme.ofRestrict_app, ofRestrict_toLRSHom_c_app, restrictFunctorΓ, restrictFunctorΓ_hom_app, ModuleCat.Tilde.toOpen_res, Scheme.ofRestrict_appLE, IsAffineOpen.fromSpec_app_of_le, Γ_map_morphismRestrict. These are restrictions and associated-sheaf section lemmas; none defines polynomial duality presentation systems, a restriction atlas or its affine compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no matching package"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "2 hits: tilde.adjunction and the IsIso instance on its unit. These existing maps are reused, not redefined; they do not define the comparison packages.",
+   "date": "2026-10-22",
+   "verdict": "related canonical adjunction reused"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch AlgebraicGeometry: coinduction.*[Rr]estrict|[Rr]estrict.*coinduction|[Dd]uality.*[Cc]hart; blueprint_refs search polynomial duality; rg polynomialDuality|PolynomialDuality in dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "Mathlib grep 0 hits; blueprint search 0 nodes. Project and DAG searches find the returned item and the existing coinduction, differential, exterior-power and composition dependencies, but no separate definition node for these three data packages. Their canonical component maps are reused.",
+   "date": "2026-10-22",
+   "verdict": "no independent definition-node owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-duality-polynomial-chart",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Full and principal-open restriction compatibility for lem-trf-relative-duality-polynomial-chart",
+   "via": [
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolynomialDualityAffineCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialDualityAffineCompatibility.lean",
+  "declaration": "AlgebraicGeometry.IsPolynomialLocalizedAffineAtlasCompatible",
+  "declarations": [
+   "AlgebraicGeometry.polynomialDualityLocalizedTop",
+   "AlgebraicGeometry.polynomialDualityLocalizedVolume",
+   "AlgebraicGeometry.polynomialDualityLocalizedCoefficient",
+   "AlgebraicGeometry.polynomialDualityLocalizationMap",
+   "AlgebraicGeometry.polynomialDualityLocalizationEquationMap",
+   "AlgebraicGeometry.IsPolynomialDualityLocalizationContraction",
+   "AlgebraicGeometry.IsPolynomialAffineAtlasCompatible",
+   "AlgebraicGeometry.IsPolynomialLocalizedAffineCoefficient",
+   "AlgebraicGeometry.IsPolynomialLocalizedAffineAtlasCompatible"
+  ],
+  "statement": "def IsPolynomialLocalizedAffineAtlasCompatible [∀ Z : RingedSpace.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z))] {X S : Scheme.{u}} {f : X ⟶ S} {K : schemeDerivedCategory X} (atlas : PolynomialDualityChartAtlas f K) (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (jA : Spec (.of A) ⟶ X) (jR : Spec (.of R) ⟶ S) [IsOpenImmersion jA] (M : DerivedCategory (ModuleCat.{u} A)) (e : (polynomialOpenRestriction jA).obj K ≅ (polynomialAffineTilde A).obj M) (F : PolynomialDualityPresentationSystem R A (algebraMap R A) M) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d518f86",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d518f86",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the 2f1e RETURN. F1 fixed: PolynomialDualityChartAtlas carries an independent restriction equation (coinduction-adjunct model restriction vs native restriction of K, unit-normalized direct-image squares; b unique, q pinned on wedges, F any left adjoint used on both sides; IsIso exchange holds in the basic D.U=C.U∩P_D case, so not vacuous). IsPolynomialAffineAtlasCompatible and the localized (ht-1, h^-1 volume) variant tie e and every F.identification to atlas.identification; sigma, q and tau are each pinned uniquely (tilde/Gamma unit, global volume, right-derived units on all complexes). Checked consistency: independence of eP and of the embedding; R Noetherian. F2 fixed: free-arrow helper deleted, all new definitions referenced. F3 fixed: coinduction-adjunction node cited; relativeDualizingAffineTilde replaced by native tilde mapDerivedCategory. Mechanical theorem-stmt_dep finding: PASS on that point. Coinduction and direct-image composition are choices from pinned existentials; tilde finite-limits is an instance needed to type the statement; tilde.adjunction and pushforwardSpecMapCompΓIso are the nodes' own recorded constructions. lean.statement verbatim; 6 new definition nodes' declarations match their modules; dependency records identical to live; no live collision; single sorry; universes u,w independent; edge cases n=0, empty, zero ring, h=0/1 covered. Advisory: realization node cites the atlas node without using it; singleδ sign used uniformly. No compile by reviewer (2026-10-21 rule)."
+ }
+}

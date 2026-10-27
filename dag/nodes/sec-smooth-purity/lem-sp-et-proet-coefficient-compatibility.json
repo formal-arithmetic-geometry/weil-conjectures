@@ -45,41 +45,28 @@
  ],
  "proof": [
   {
-   "text": "Finite type over k makes the schemes Noetherian. Apply the input-model and compact-support-domain lemmas: L, L_B, and every F_f^et L used in composition, together with their actual B-extensions, lie in the required finite-Tor constructible classes.",
+   "text": "Translate etaleProperty into boundedness, constructibility and a finite Tor interval, using the minimum of its endpoints when necessary. Lift the given ring torsion identities along ULift. Apply finiteCompactSupportDomains to the actual L: its scalar-domain conclusion supplies the required bounded-below witness hLB. Finite type over the field supplies Noetherianity of X and Y.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sp-finite-coefficient-input-models",
-    "lem-sp-finite-compact-support-domains"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Domains of Tags 0GL6 and 0F7J"
-   }
-  },
-  {
-   "text": "Apply the proper scalar/site mate square to E=j_!L; its site map beta^R is the counit mate d_r of the canonical-mate theorem, so its boundary uses the same d_r as c and paste the open scalar/site square. Expanding F=Rr_*j_!, c=Rr_*(e_j)d_r and q=Rr_*(t_j)q_r, naturality cancels the middle whiskerings and gives exactly the displayed site/coefficient equality. All factors of c are invertible. The map b is invertible by the reduction-direct-image theorem; the equality makes nu^*beta invertible. Step 1 puts both endpoints of beta in D+. Full faithfulness of site comparison reflects its inverse, so beta is invertible.",
-   "uses": [
-    "lem-sfb-etale-proetale-scalar-mate",
-    "lem-sp-open-scalar-site-coherence",
-    "det-sp-reduction-direct-image",
-    "thm-weil-pbc-site-comparison",
     "lem-sp-finite-compact-support-domains",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6, paste the proper and open squares"
-   }
+   "elementary": false
   },
   {
-   "text": "The scalar-coherence theorem gives the etale refinement and composition equations for the same proper counit mate and open tensor map; its unbounded composition and refinement maps restrict on D^+ to those of the etale compact-comparison theorem by the unbounded-comparisons theorem. Its inverse-open-unit normalization equals t_j inverse, hence its q equals beta. Apply finite-ring site coherence: c intertwines the actual refinement and composition pastes. Substitute Step 2 into each etale equation and cancel adjacent c inverse/c and delta inverse/delta pairs. The remaining boundary is the asserted pro-etale equation for b. Common-refinement independence, identities and associativity follow by the identical cancellation in the canonical compactification coherence equations.",
+   "text": "The first clause of etaleCompactScalarCoherence makes compactScalarMap at L invertible. Its inverse-open-unit normalization identifies it with the published etaleCoefficientMap. Apply the normalized transported compact-support scalar/site equation using the lower-bound witness from Step 1. Its right side is a composite of the scalar/site isomorphism, site pullback of the etale coefficient isomorphism, and the inverse B-support site isomorphism. Hence its left side is invertible. Cancel scalar extension of the inverse A-support comparison on the left and proper/open support of delta_X on the right to prove invertibility of the actual transported proEtaleCoefficientMap. Return the lower-bound witness, both invertibility proofs and the same equation. No reflection through site comparison or call to reductionDirectImage_isIso is needed.",
    "uses": [
     "lem-pur-etale-compact-scalar-coherence",
-    "lem-sp-finite-compact-site-coherence",
+    "lem-sp-transported-compact-scalar-site-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar-coherence theorem gives the etale refinement equation. For composition, first apply its refinement equations to pass each of the three supplied compactifications to the canonical chosen compactification. Naturality of compactScalarMap and cancellation of inverse compactification changes then transport etaleCompactScalarComposition back to the supplied compactifications, giving exactly etaleCompositor. The inverse-open-unit normalization identifies compactScalarMap with the published etaleCoefficientMap. For the pro-etale composition equation apply the main site/coefficient square at L, at F_c L, and for the composite. The compact-support-domain theorem supplies the bounded-below and constructible finite-Tor hypotheses at the intermediate input and its scalar extension. Naturality of the bounded-below inclusion comparison reduces compositionSiteBoundary to the two successive site comparisons. Naturality of delta, of the coefficient transformation, and of the B-site comparison then moves these maps past one another; functoriality and inverse cancellation give the required equation. The definitions siteRefinement and siteCompositor already specify transport through these exact site boundaries, so an additional finite compact-site coherence theorem is unnecessary. Common-refinement independence, identities and associativity follow by the same cancellations in the canonical compactification comparisons.",
+   "uses": [
+    "lem-pur-etale-compact-scalar-coherence",
     "lem-amb-etale-compact-comparisons",
-    "lem-amb-unbounded-compact-support-comparisons"
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-finite-compact-support-domains"
    ],
    "elementary": false,
    "source": {
@@ -88,16 +75,20 @@
    }
   },
   {
-   "text": "For etale e choose the bounded flat model P of Step 1. The sheetwise computation represents beta by (x_s) tensor b mapped to (x_s tensor b). Both canonical c_e normalizations retain s. Thus the two representing chain maps agree, proving the displayed equality with sigma_e, including empty fibres.",
+   "text": "Extract a bounded flat constructible cochain representative QP≅L directly from the etale flat constructible model theorem. Uniqueness against the monomorphism from compactification support into direct image identifies each supplied normalization sheaf map with the graph map. The existing bounded-model equation identifies the compactified model boundary after the exact-sum localization factor with the inverse chosen comparison: postcompose with the comparison and the sum localization factor, use its chain isomorphism and the graph identification, and cancel both inverse pairs. Scalar extension preserves the degree bounds for the B model. Apply etaleSumCoefficientComputation and the sum/scalar representative normalization. Cancel the invertible scalar representative, use naturality of the B normalization, and cancel the inverse A and B comparison components. Finally use naturality of compactScalarMap, both normalizations and sumCoefficientIso to transport the equality along QP≅L. No coefficient flatness is used.",
    "uses": [
-    "lem-sp-finite-coefficient-input-models",
+    "lem-sf-etale-flat-constructible",
     "lem-sp-etale-sum-coefficient-computation",
-    "lem-asd-etale-compact-support-normalization"
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-sp-etale-compactification-bounded-models",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-etale-sum-scalar-representative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6, etale sum normalization"
+    "place": "Tag 0GL6, etale sum normalization, with the representative formula of sites-cohomology.tex Tag 06YY and graph normalization of etale-cohomology.tex Tag 0F4L."
    }
   },
   {
@@ -111,25 +102,23 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sp-finite-coefficient-input-models",
   "lem-sp-finite-compact-support-domains",
-  "lem-sfb-etale-proetale-scalar-mate",
-  "lem-sp-open-scalar-site-coherence",
-  "det-sp-reduction-direct-image",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-pur-etale-compact-scalar-coherence",
-  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-transported-compact-scalar-site-square",
   "lem-amb-etale-compact-comparisons",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sf-etale-flat-constructible",
   "lem-sp-etale-sum-coefficient-computation",
-  "lem-asd-etale-compact-support-normalization"
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-sp-etale-compactification-bounded-models",
+  "lem-sp-etale-sum-scalar-representative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts and Locality; finer repair of the returned Steps 1--11, retaining the normalized proper/open route with Stacks 0GL6, 0F7I, 0F7J."
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GL6 and 0F7J; K2 uses the existing ordinary etale coefficient isomorphism to prove transported pro-etale invertibility by cancellation, isolating only the normalized scalar/site equation. Remaining composition, sum, counit and naturality steps are unchanged."
  },
  "mathlib_searches": [
   {
@@ -488,7 +477,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-57a9af2d8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and repaired 3 small citation faults. Context: the item was split and reviewed live (Q115), then re-released by the human 2026-10-21 note. The note asked for a proof of at most 3000 chars and at least 4 statement-only nodes, with every old argument reappearing. The delivery fulfils it. The statement, stmt_deps, Lean record and tool_uses are unchanged; only proof, proof_deps, proof_origin and split_report differ from live. The proof went from 14928 chars to 2337 (2600 after my fix), in 5 steps. The 5 new nodes are unsplit, each with 5 logged searches, created.item set to the item and blueprint.from det-sp-reduction-exceptional via [item]. Mapping: old 1 → input-models; old 2 → open; old 3 → existing lem-sfb-etale-proetale-scalar-mate; old 4 → parent Step 2 + domains; old 5–8 coefficient parts → existing lem-pur-etale-compact-scalar-coherence; old 5/6/9 site parts → site child; old 10 → sum child (it carries the sheet-sum clause on a flat model, accepted because the note asks for each old argument as a node); old 11 → elementary Step 5. I checked all 5 children true: input models via lem-sf-etale-flat-constructible, origin equivalence and det-sp-scalar-extension-functor(2), tested on B=0, L=0 and nonflat Z/ℓ²→Z/ℓ; domains via ctf preservation and the D^+ site comparison; the open square has consistent types and correct nested-open order; site coherence is mate pasting with lem-sp-refinement-coefficient-mate and lem-sp-proper-open-coefficient-mate, and generalizes lem-pur-compact-support-site-coherence (A_{E,n} only), so it is not a duplicate; for the sum model, R^a r_*j_! = 0 follows from lem-asd-etale-compact-support-normalization, flatness from the sheet stalks, and the hypotheses of lem-sp-acyclic-flat-proper-coefficient-model hold. Parent Steps 2–5: I checked the hypotheses (J and T J in D^+, M and Q M in D^+), invertibility of b on Dctf and reflection by full faithfulness on D^+. Sources read: Stacks 0GL6 (more-etale l.3739), 0GL1, 09AF, 0F4L, the 0F7I/0F7J tags, and the blueprint Charts/Locality paragraphs. No SGA, no cycles. Fixes: (1) C1/C4 Step 2 now cites lem-weil-pbc-comparison-direct-image-canonical-mate, which identifies the scalar-mate β^R with d_r; (2) C4 Step 3 now cites lem-amb-unbounded-compact-support-comparisons, whose unbounded α restricts on D^+ to that of lem-amb-etale-compact-comparisons; (3) B3: domains child gains def-weil-pbc-site-comparison-morphism, def-weil-proetale-constructible-sheaf and def-weil-proetale-tor-amplitude, the open child gains the site-comparison def, and the site child names its pro-étale ρ/Γ via def-weil-pbc-proper-open-comparison, lem-sp-refinement-coefficient-mate and lem-sp-proper-open-coefficient-mate. Batch-5: lem-asd-etale-compact-support-normalization was already in the item's stmt_deps and live proof. Its path to lem-pod-lisse-module-sheaves-as-module-objects runs through generic bounded-below proper base change, so it is neither a step of the trace formula nor of Poincaré duality → accepted. Tool uses accepted: scalar-mate, scalar-coherence, unbounded comparisons, site comparison, reduction-direct-image.; 4 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "blueprint_parent": {
   "node": "sk-thm-sf-compatibility",
   "clause": 7,
@@ -532,13 +532,13 @@
   "note": "Repair R1/R2/R3/R4: proEtaleCoefficientMap is now definitionally the genuine transport of reductionDirectImageComparison via normalized scalar/support realization comparisons. Every pro-etale statement uses it. Finite rings are small and their fixed-module presentations use ULift into u+1, leaving site objects u+1 and morphisms u distinct. The unused aliases and independent fixed composite are removed. No mathematical clause changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y8",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261019T034406-L-428261",
-  "kind": "proof",
+  "landing": "20261026T001918-L-40923",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-excellent-blowup-projective-transforms",
+ "kind": "statement",
+ "title": "Excellent blowup geometry and projective closed transforms",
+ "statement": "Let $S$ be an excellent integral Noetherian scheme [def-exc-excellent-ring, def-pc-integral-scheme, def-weil-pbc-noetherian-ring], and let $I\\subset\\mathcal O_S$ be a quasi-coherent ideal of finite type which is the unit ideal on a nonempty open $U\\subset S$. Set $T=\\operatorname{Bl}_I S=\\operatorname{Proj}_S(\\bigoplus_{n\\geq0}I^n)$ [def-nagata-global-blowup, def-nagata-relative-proj] and let $v:T\\to S$ be its structure map. Then $T$ is excellent, integral and Noetherian, and $v$ is proper [def-weil-proper-morphism] and an isomorphism over $S\\setminus V(I)$, hence birational. The degreewise multiplication surjection $\\operatorname{Sym} I\\twoheadrightarrow\\bigoplus_{n\\geq0}I^n$ induces a closed immersion $T\\hookrightarrow\\mathbf P_S(I)$, so $v$ is projective in the projective-bundle sense [def-trf-projective-bundle-morphism]. For any finite-projective-space projective morphism $X\\to S$ [def-kun-projective] and any closed subscheme $Y\\subset X\\times_S T$ [def-weil-closed-immersion, def-pc-fibre-product], $Y\\to T$ is projective in the finite-projective-space sense. On every affine $\\operatorname{Spec}A\\subset S$ with $I=(a_1,\\ldots,a_r)$, the nonempty standard charts of $T$ have domain rings $A[I/a_j]\\subset\\operatorname{Frac}A$ for $a_j\\ne0$; charts for $a_j=0$ are empty.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0804, lemma-blowing-up-affine; Tag 02NS, lemma-blowing-up-projective (Sym-to-Rees closed immersion); More on Algebra Tag 07QU, lemma-finite-type-over-excellent. Retained proof Steps 3--4 of the parent, including the two distinct projectivity conventions."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-kun-projective",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-global-blowup",
+  "def-nagata-relative-proj",
+  "def-nagata-sheaf-rees-algebra",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-rees-piece",
+  "def-trf-relative-proj-induced-morphism",
+  "def-trf-rees-degree-one-element",
+  "def-nagata-homogeneous-away-to-chart",
+  "def-nagata-affine-proj"
+ ],
+ "proof": [
+  {
+   "text": "The ideal sheaf $I$ is nonzero: at a point of the nonempty $U$ its stalk is the nonzero local ring of the integral $S$. Apply [lem-sfb-integral-blowup-chart-density]. On each nonempty affine $V=\\operatorname{Spec}A\\subset S$ and for generators $I|_V=(a_1,\\ldots,a_r)$ it gives the indicated finite chart cover, with empty charts for zero generators and nonzero domain rings $B_j=A[I/a_j]\\subset A_{a_j}$ otherwise. Since $A$ is a domain and $a_j\\ne0$, the map $A_{a_j}\\to\\operatorname{Frac}A$, $x/a_j^n\\mapsto x/a_j^n$, is injective: a zero fraction has numerator zero. Thus the displayed chart rings are subrings of $\\operatorname{Frac}A$, as asserted. Put $W=S\\setminus V(I)$; the same cited lemma gives that $W$ is a nonempty dense integral open of $S$ and $v^{-1}(W)$ meets every nonempty chart in a nonempty dense principal open.",
+   "uses": [
+    "lem-sfb-integral-blowup-chart-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; algebra.tex Tag 052R, lemma-blowup-domain"
+   }
+  },
+  {
+   "text": "By [thm-nagata-global-blowup-complement], $v^{-1}(W)\\to W$ is an isomorphism. Step 1 makes this open dense in $T$: every nonempty open meets a chart and then its dense principal open. The domain chart cover makes $T$ reduced. Its dense open $v^{-1}(W)$ is nonempty irreducible, so $T$ is irreducible: any two nonempty opens meet this dense open and intersect there. Hence $T$ is integral by [def-pc-integral-scheme]. The isomorphism between the dense opens $v^{-1}(W)$ and $W$ proves birationality. Finite type of $I$ allows [lemma-nagata-blowup-proper], giving properness of $v$. Proper includes finite type by [def-weil-proper-morphism]; as $S$ is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] gives that $T$ is Noetherian.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-pc-integral-scheme",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND, lemma-blow-up-integral-scheme, and 02NS, lemma-blowing-up-projective; morphisms.tex Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Choose an affine cover of $S$ by spectra of excellent rings, as in the definition of an excellent scheme (Morphisms, definition-excellent); [lem-trf-excellent-scheme-affine-cover] also ensures that every affine open of $S$ has an excellent ring. Above each member $\\operatorname{Spec}A$ use Step 1. For $a_j\\ne0$, $B_j=A[I/a_j]$ is generated over $A$ by the finite list $a_i/a_j$: if $x=\\sum c_i a_i\\in I$, then $x/a_j=\\sum c_i(a_i/a_j)$, and by [def-nagata-blowup-chart-ring] these fractions generate the chart algebra. Thus $B_j$ is a finite type $A$-algebra. Apply [lem-exc-finite-type-localization-excellent] with multiplicative set $\\{1\\}$ to conclude that $B_j$ is excellent. These charts cover $T$, so $T$ is excellent by the same affine-cover definition; [lem-trf-excellent-scheme-affine-cover] gives the assertion for every affine open of $T$ as well.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent; morphisms.tex definition-excellent and Tag 0HAB, lemma-locally-excellent"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-rees-symmetric-presentation] with $X=S$ and $\\mathcal I=I$. It supplies the quasi-coherent sheaf Rees algebra $\\mathcal R=\\bigoplus I^n$, its canonical affine graded identifications (identity in degree zero, compatible with affine restriction), and the degreewise-surjective multiplication morphism $\\varphi:\\operatorname{Sym}I\\twoheadrightarrow\\mathcal R$. These are precisely the inputs of [lem-sfb-rees-presentation-blowup-immersion] with $\\mathcal C=\\mathcal R$: it identifies the ordinary blowup with $\\operatorname{Proj}_S\\mathcal R$ and gives the closed immersion induced by $\\varphi$, $T\\hookrightarrow\\mathbf P_S(I)$, whose structural composite is $v$. The sheaf $I$ is quasi-coherent and of finite type, so taking $\\mathcal E=I$ in [def-trf-projective-bundle-morphism] proves projectivity in the projective-bundle sense.",
+   "uses": [
+    "lem-sfb-sheaf-rees-symmetric-presentation",
+    "lem-sfb-rees-presentation-blowup-immersion",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS, lemma-blowing-up-projective, proof; constructions.tex Tag 07ZK, lemma-surjective-generated-degree-1-map-relative-proj"
+   }
+  },
+  {
+   "text": "Choose the closed immersion $i:X\\hookrightarrow\\mathbf P^N_S$ over $S$ given by [def-kun-projective]. Its base change along $T\\to S$ is a closed immersion $X\\times_S T\\hookrightarrow\\mathbf P^N_S\\times_S T$ by [lem-weil-pbc-closed-immersion-base-change]. The cartesian projective-space square of [lemma-nagata-projective-space-base-change-pullback] identifies its target over $T$ with $\\mathbf P^N_T$. Compose this immersion with the given $Y\\hookrightarrow X\\times_S T$; [lem-weil-pbc-closed-immersion-comp] makes the resulting $Y\\hookrightarrow\\mathbf P^N_T$ a closed immersion. Both arrows are over $T$, so its structural composite is the given $Y\\to T$. This is the finite-projective-space condition of [def-kun-projective], with the same $N$. No flatness of $v$ or nonemptiness of $Y$ is needed.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR, lemma-base-change-closed-immersion, and 01QS, lemma-composition-closed-immersion; H-projective base change by its defining embedding"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-nagata-blowup-chart-ring",
+  "def-pc-integral-scheme",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sfb-integral-blowup-chart-density",
+  "lem-sfb-rees-presentation-blowup-immersion",
+  "lem-sfb-sheaf-rees-symmetric-presentation",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0804, 02ND and 02NS with more-algebra.tex Tag 07QU and morphisms.tex Tags 01QR, 01QS, 01T6, 0HAB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a finite type ideal on an excellent integral Noetherian scheme yields an excellent integral Noetherian proper birational projective bundle morphism and preserves projective space embeddings of closed strict transforms",
+   "results": "8 hits; top=['AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.valuativeCriterion_existence', 'AlgebraicGeometry.Proj', 'AlgebraicGeometry.Proj.fromOfGlobalSections', 'AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.projIsoSpec']; ; digest=737ed7afb57955e2. Types read: Affine Proj properness and Rees algebra definitions do not supply the excellent global blowup and projective-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Excellent Noetherian integral blowup is birational and projective and strict transforms of projective schemes are projective",
+   "results": "0 hits; top=[]; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Types read: Affine Proj properness and Rees algebra definitions do not supply the excellent global blowup and projective-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Types read: Affine Proj properness and Rees algebra definitions do not supply the excellent global blowup and projective-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|ReesAlgebra|IsExcellent",
+   "results": "15 hits; top=['Mathlib/Tactic/ITauto.lean', 'Mathlib/Tactic/Linarith/Frontend.lean', 'Mathlib/Tactic/GRewrite/Core.lean', 'Mathlib/Algebra/HierarchyDesign.lean', 'Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean', 'Mathlib/RingTheory/ReesAlgebra.lean', 'Mathlib/RingTheory/ReesAlgebra.lean', 'Mathlib/RingTheory/ReesAlgebra.lean']; ; digest=3580efd44cc7f9a7. Types read: Affine Proj properness and Rees algebra definitions do not supply the excellent global blowup and projective-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup of a finite type ideal on an excellent integral Noetherian scheme is excellent integral proper birational and embeds in the projective bundle of the ideal",
+   "results": "8 hits; top=['AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.valuativeCriterion_existence', 'AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization', 'AlgebraicGeometry.Proj.fromOfGlobalSections']; ; digest=deba555670c4da0e. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"excellent\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsExcellent|[Ee]xcellent|blowup|Blowup|blowUp",
+   "results": "7 hits; top=['Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean', 'Mathlib/Algebra/HierarchyDesign.lean', 'Mathlib/Algebra/Lie/InvariantForm.lean', 'Mathlib/Tactic/GRewrite/Core.lean', 'Mathlib/Tactic/Linarith/Frontend.lean', 'Mathlib/RingTheory/ReesAlgebra.lean', 'Mathlib/Tactic/ITauto.lean']; ; digest=2903cab194f3ab44. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up an excellent integral Noetherian scheme preserves excellence and integrality and is projective",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Hom.isIntegral_app', 'AlgebraicGeometry.IsIntegralHom.instMorphismRestrict', 'AlgebraicGeometry.IsIntegralHom.hasAffineProperty', 'AlgebraicGeometry.IsIntegralHom.mk', 'AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.IsIntegralHom', 'AlgebraicGeometry.IsIntegralHom.instUniversallyClosed', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization']; ; digest=afc86f077eead86d. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of an ideal has standard affine charts generated by fractions and is integral when the base is integral",
+   "results": "8 hits; top=['AlgebraicGeometry.IsIntegralHom.hasAffineProperty', 'AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier', 'AlgebraicGeometry.affine_isIntegral_iff', 'AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.IsIntegralHom.integral_app', 'AlgebraicGeometry.IsIntegralHom.isIntegral_app', 'AlgebraicGeometry.Scheme.Hom.isIntegral_app']; ; digest=95487427ae40880c. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat|def reesAlgebra|def reesGrading",
+   "results": "1 hits; top=['Mathlib/RingTheory/ReesAlgebra.lean']; ; digest=77eeec65a7024e37. Integral morphisms and normalization differ from integrality of a blowup; Proj properness alone lacks excellence, blowup charts and the specified projective embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flatification-horizontal-curve-pair",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 3--4: Excellent blowup geometry and projective closed transforms.",
+   "via": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-excellent-blowup-projective-transforms",
+  "worker": "stage1",
+  "summary": "Repaired the return on f25dd006ee4 against the current DAG: retained the five-step approved route and all recorded searches, reread every current statement and source, made density in S explicit in step 1, and added the chart-ring definition as an explicit step-3 citation. Refreshed every citation excerpt to the full current statement. No new nodes, no Mathlib leaves, and no mathematical statement change; current upstream metadata is preserved by the delivery overlay.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 3--4: Excellent blowup geometry and projective closed transforms.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic scheme/algebra tool used in the blowup argument: Excellence is preserved by finite type algebras and localization. The current unit has no alternative statement supplying this interface; this keeps its alteration route."
+   },
+   {
+    "node": "lem-sfb-integral-blowup-chart-density",
+    "why": "Generic scheme/algebra tool used in the blowup argument: Integral blowup charts and density of the center complement. The current unit has no alternative statement supplying this interface; this keeps its alteration route."
+   },
+   {
+    "node": "lem-sfb-rees-presentation-blowup-immersion",
+    "why": "Generic scheme/algebra tool used in the blowup argument: Chart-compatible blowup immersion from a graded Rees presentation. The current unit has no alternative statement supplying this interface; this keeps its alteration route."
+   },
+   {
+    "node": "lem-sfb-sheaf-rees-symmetric-presentation",
+    "why": "Generic scheme/algebra tool used in the blowup argument: Affine presentations and symmetric-algebra surjection for the sheaf Rees algebra. The current unit has no alternative statement supplying this interface; this keeps its alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sfb-integral-blowup-chart-density",
+  "lem-sfb-rees-presentation-blowup-immersion",
+  "lem-sfb-sheaf-rees-symmetric-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f7b4b52c0",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f7b4b52c0 (reviewer sub-agent of L); spot-checked: Read the item, all 16 proof_deps and its stmt_deps in full, and checked the Stacks sources: divisors 0804, 02ND, 02NS with its Sym-to-Rees proof; algebra 052R; more-algebra 07QU; morphisms definition-excellent, 0HAB, 01QR, 01T6. The delivery has no new nodes and leaves the statement unchanged; there is no SGA citation and no repair note applies. It re-delivers f25dd006ee40, which had a reader PASS and was refused at landing because the item was still unsplit on live. A field diff shows only two changes, both improvements: step 1 now also states that W is dense in S, and step 3 now cites def-nagata-blowup-chart-ring. Step 1: chart-density lemma; I is nonzero because it is the unit ideal on the nonempty U; A_a embeds in Frac A. Step 2: v^-1(W) ≅ W is dense in T, the domain charts make T reduced, and the dense irreducible open makes T irreducible, so T is integral by def-pc-integral-scheme. Birationality comes from the isomorphism of dense opens, properness from lemma-nagata-blowup-proper, and Noetherianity from 01T6 since proper includes finite type. Step 3: A[I/a_j] is generated by the a_i/a_j, so it is finite type and excellent by 07QU with S={1}; the chart cover and 0HAB give excellence of T. Step 4: the sheaf Rees presentation supplies exactly the hypotheses of the Rees presentation immersion lemma, giving T ↪ P_S(I) over S with E=I. Step 5: base change and composition of closed immersions plus P^N_S×_S T ≅ P^N_T give an embedding with the same N. No existing node duplicates the item. The four other-unit nodes in tool_uses are generic tools and are accepted. Edge cases checked: I=O_S, the field case, a DVR, (x,y) on A^2, zero or repeated generators, empty Y. Minor point, not a fault: 'excellent scheme' has no definition node; step 3 quotes the Stacks definition, and the cited cover lemma makes the two readings equivalent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentBlowupProjectiveTransforms",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.excellent_blowup_projective_transforms",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentBlowupProjectiveTransforms.lean",
+  "statement": "theorem excellent_blowup_projective_transforms {S : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (hexc : ∀ V : S.affineOpens, IsExcellent Γ(S, V.1)) (I : S.IdealSheafData) (hfinite : I.toModules.IsQuasiCoherentFiniteType) (U : S.Opens) (hU : Nonempty U) (hunit : Disjoint (U : Set S) (I.support : Set S)) : (∀ V : I.blowup.affineOpens, IsExcellent Γ(I.blowup, V.1)) ∧ IsIntegral I.blowup ∧ IsNoetherian I.blowup ∧ IsProper I.blowupMap ∧ IsIso (I.blowupMap ∣_ I.support.compl) ∧ Dense (I.support.compl : Set S) ∧ Dense (I.blowupMap ⁻¹ᵁ I.support.compl : Set I.blowup) ∧ (∃ hqc : I.toModules.IsQuasicoherent, ∃ q : (@SymmetricAlgebraSheaf.gradedAlgebraData S I.toModules hqc ⟶ I.reesData), (∀ (V : S.affineOpens) (n : ℕ), Function.Surjective ((q.app V).gradedAddHom n)) ∧ (∀ (V : S.affineOpens) (n : ℕ) (x : Fin n → Γ(I.toModules, V.1)), (reesAlgebra (I.ideal V)).subtype (q.app V (∏ i, SymmetricAlgebra.ι Γ(S, V.1) (I.toModules.val.obj (op V.1)) (x i))) = Polynomial.monomial n (∏ i, @id Γ(S, V.1) (I.toModulesι.app V.1 (x i)))) ∧ ∃ hq : GradedAlgebraData.IrrelevantLE q, IsClosedImmersion (I.relProjReesIso.inv ≫ GradedAlgebraData.relProjMap q hq) ∧ (I.relProjReesIso.inv ≫ GradedAlgebraData.relProjMap q hq) ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData S I.toModules hqc).relProjHom = I.blowupMap) ∧ IsProjectiveBundle I.blowupMap ∧ (∀ (X : Scheme.{u}) (f : X ⟶ S), IsHProjective f → ∀ (Y : Scheme.{u}) (i : Y ⟶ pullback f I.blowupMap), IsClosedImmersion i → IsHProjective (i ≫ pullback.snd f I.blowupMap)) ∧ (∀ (V : S.affineOpens) (r : ℕ) (a : Fin r → I.ideal V), Ideal.span (Set.range (fun j ↦ (a j : Γ(S, V.1)))) = I.ideal V → (⨆ j, Proj.basicOpen (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2)) = ⊤ ∧ ∀ j : Fin r, ((a j).1 = 0 → IsEmpty (Proj.basicOpen (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2))) ∧ ((a j).1 ≠ 0 → IsDomain (AffineBlowup.chartRing (I.ideal V) (a j).1) ∧ (∃ e : (Proj.basicOpen (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2)).toScheme ≅ Spec (.of (AffineBlowup.chartRing (I.ideal V) (a j).1)), e.hom = (Proj.basicOpenIsoSpec (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2) (reesX_mem (I.ideal V) (a j).1 (a j).2) one_pos).hom ≫ Spec.map (CommRingCat.ofHom (AffineBlowup.homogeneousAwayEquivChart (I.ideal V) (a j).2).symm.toRingHom) ∧ e.inv ≫ (Proj.basicOpen (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2)).ι ≫ I.blowupι V = Spec.map (CommRingCat.ofHom (AffineBlowup.homogeneousAwayToChart (I.ideal V) (a j).2)) ≫ Proj.awayι (reesGrading (I.ideal V)) (reesX (I.ideal V) (a j).1 (a j).2) (reesX_mem (I.ideal V) (a j).1 (a j).2) one_pos ≫ I.blowupι V) ∧ ∃ ρ : Localization.Away (a j).1 →ₐ[Γ(S, V.1)] FractionRing Γ(S, V.1), Function.Injective ρ))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40f3f7eb0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3ae79de0 (H2+H3). Item diff vs live: only lean added and stmt_deps +6. Statement, proof and source unchanged; lean.statement verbatim. H2 fixed: landed owners def-trf-canonical-symmetric-graded-algebra (gradedAlgebraData), def-nagata-rees-piece (reesGrading), def-nagata-homogeneous-away-to-chart and def-nagata-affine-proj cited. New §1(A) existing:true def nodes def-trf-relative-proj-induced-morphism (relProjMap/IrrelevantLE; text checked vs Functoriality.lean l.43-95: B_+ ⊆ q(A_+)B, chart gluing, direction B.relProj→A.relProj) and def-trf-rees-degree-one-element (reesX = monomial 1 a, ReesGrading l.204-215). No live def node owns these and the new ids are not on live, so no race. H3 fixed: e.hom = basicOpenIsoSpec.hom ≫ Spec.map θ⁻¹ (direction correct) plus the inverse equation through blowupι V. The two are consistent via awayι := basicOpenIsoSpec.inv ≫ ι, and the second alone pins e (open immersions are mono). Other clauses identical to the previously accepted reading; edge cases I=O_S, r=0, empty affine, zero/repeated generators, empty X/Y OK. No hollow defs, docstrings present, sorry only, no universe restriction. Advisory: homogeneousAwayEquivChart (RingEquiv.ofBijective of the owned θ_a) has no node record; accepted, as the prior review recommended it. No file changed, so no compile."
+ }
+}

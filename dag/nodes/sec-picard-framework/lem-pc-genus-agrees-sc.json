@@ -125,7 +125,32 @@
   "def-pc-smooth-projective-curve"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1021,
+      1029
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-pic-split",
  "split_report": {
@@ -167,5 +192,26 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and $C$ a scheme over $k$ which is smooth of relative\ndimension $1$ and proper over $k$ (for instance a smooth projective curve\nover $k$, or a proper smooth connected curve in the sense of\n[def-sc-curves]). Then the genus\n$g(C)=\\dim_kH^0(C,\\Omega^1_{C/k})$ of [def-sc-genus] equals\n$\\dim_kH^1(C,\\mathcal{O}_C)$, the genus of [def-pc-genus].",
+  "proof": [
+   {
+    "text": "By [def-sc-genus], $g(C)=\\dim_kH^0(C,\\Omega^1_{C/k})$, while the genus of\n[def-pc-genus] is $\\dim_kH^1(C,\\mathcal{O}_C)$. Serre duality\n([thm-sc-serre-duality-curve]) with $\\mathcal M=\\mathcal O_C$, $q=1$, $p=0$\ngives a $k$-linear isomorphism\n$H^1(C,\\mathcal O_C)^\\vee\\cong H^0(C,\\mathcal O_C^\\vee\\otimes\\Omega^1_{C/k})\n\\cong H^0(C,\\Omega^1_{C/k})$, and both spaces are finite-dimensional, so the\ntwo dimensions agree.",
+    "uses": [
+     "def-sc-genus",
+     "def-pc-genus",
+     "thm-sc-serre-duality-curve"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

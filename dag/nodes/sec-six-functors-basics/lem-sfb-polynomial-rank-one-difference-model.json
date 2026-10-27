@@ -1,0 +1,196 @@
+{
+ "id": "lem-sfb-polynomial-rank-one-difference-model",
+ "kind": "statement",
+ "title": "Finite polynomial stages present the rank-one translation module as an ind-unipotent colimit",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, and $F=E$ or $F=\\Omega$. On the coherent profinite site put $A(S)=C(S,F)$, using all continuous functions [def-sfb-continuous-map-condensed-ring] and the compatible universes of [def-weil-size-convention]. Fix integers $r\\geq1$ and $m\\geq0$. Put $G=\\mathbf Z_\\ell^{r-1}$ and $H=\\mathbf Z_\\ell$, with their inverse-limit topologies. Let $T$ be the internal direct sum of copies of $A$ indexed by monomials in $y_1,\\ldots,y_r,z_1,\\ldots,z_m$ [def-weil-pbc-mv-polynomial-ring], an internal $A$-module [sk-def-sfb-module-objects]. Its internal $A$-linear $G\\times H$-action is translation by $-t$ in $y_1$ for $t\\in H$, translation by the negative $G$ coordinates in $y_2,\\ldots,y_r$, and the identity on the $z_j$ [def-sfb-condensed-action-module]. These formulas hold for varying continuous group parameters on every profinite test set.\n\nFor $n\\geq0$ let $V_n\\subset E[y_1,\\ldots,y_r,z_1,\\ldots,z_m]$ be the span of monomials of total degree at most $n$, with its finite-dimensional norm topology. Let $i_n:V_n\\to V_{n+1}$ be the inclusion, $D_n=-\\partial/\\partial y_1$ on $V_n$, $e_n=n+1$, and $\\rho_n$ the $G\\times H$-representation on $V_n$ by the same translations. Then $(V_n,i_n,D_n,e_n,\\rho_n)$ is a finite ind-unipotent system for $G$ and $H$ in the sense of [def-sfb-ind-unipotent-system]. The $i_n$ are injective and equivariant with $i_nD_n=D_{n+1}i_n$. Each translation preserves $V_n$, its matrix entries in the monomial basis are polynomial functions of the group coordinates, and $\\rho_n$ is continuous. Moreover $D_n^{n+1}=0$, $D_n$ commutes with $G$, and for every $t\\in\\mathbf Z_\\ell$ the finite Taylor identity\n$$\\sum_{j=0}^{n}\\frac{t^jD_n^j f}{j!}=f(y_1-t,y_2,\\ldots,y_r,z)\\qquad(f\\in V_n)$$\nholds, so $\\rho_n(1,t)=\\exp(tD_n)$.\n\nSet $M_n(S)=C(S,F\\otimes_E V_n)$, with the finite-dimensional product norm topology on $F\\otimes_E V_n$ and the induced $G\\times H$-action. Coefficient projections in the monomial basis give $G\\times H$-equivariant internal isomorphisms of $M_n$ with the sub-direct-sum $\\bigoplus_{|\\alpha|\\leq n}A$ of $T$, compatible with the transitions $F\\otimes_E i_n$ and the inclusions of sub-sums. Consequently the colimit $M=\\operatorname{colim}_nM_n$, formed in internal $A$-modules with its induced $G\\times H$-action, is equivariantly isomorphic to $T$, with each monomial coprojection preserved. Under this isomorphism the induced endomorphism $D$ of $M$ is $-\\partial/\\partial y_1$ on $T$, and for $\\tau=1\\in H$\n$$\\tau-1=\\exp(D)-1=\\Delta,\\qquad \\Delta f=f(y_1-1,y_2,\\ldots,z)-f(y_1,y_2,\\ldots,z),$$\na finite sum on each monomial. This includes $r=1$, $m=0$ and $n=0$; it imposes no degree bound on $T$ and no completeness assumption on $\\Omega$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, polynomial translation acyclicity obligation: retained proof steps 2 and 3 (finite polynomial filtration, exponential translation, and presentation of the polynomial module as the sheaf colimit of a finite ind-unipotent system). Agent-formulated argument; exact all-continuous noncomplete reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-ind-unipotent-system",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-sfb-polynomial-translation-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-polynomial-rank-one-system-existence to the finite intermediate field E₀ to obtain one finite polynomial system Q. This uses no algebraic-closure completeness.",
+   "uses": [
+    "def-sfb-polynomial-rank-one-model-data",
+    "lem-sfb-polynomial-rank-one-system-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-polynomial-rank-one-presentation to Q first with F=E₀ and then with F=Ω. Both scalar towers are canonical. The first coefficient homomorphism is identity and continuous; the second is the continuous subtype inclusion of an intermediate field. Pair the two assertions with the same Q, proving the original existential and conjunction.",
+   "uses": [
+    "def-sfb-polynomial-rank-one-model-data",
+    "lem-sfb-polynomial-rank-one-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-polynomial-rank-one-model-data",
+  "lem-sfb-polynomial-rank-one-system-existence",
+  "lem-sfb-polynomial-rank-one-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); original expanded argument divided into finite algebra (steps 1--5) and internal scalar-extended presentation (steps 6--9). Lean combines the two parts using the same finite system and canonical continuous coefficient maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(polynomial|MvPolynomial).*(unipotent|derived|nilpotent)|(derived|nilpotent).*(polynomial|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"grep\", \"query\": \"(polynomial|MvPolynomial).*(unipotent|derived|nilpotent)|(derived|nilpotent).*(polynomial|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Newton.lean\", \"Mathlib/Dynamics/Newton.lean\", \"Mathlib/Dynamics/Newton.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\"], \"digest\": \"07a2fe2699e93fda\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Taylor equivalences, nilpotent polynomial elements and cotangent complexes do not give the finite-stage equivariant condensed presentation and ordinary derived rank-one comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants of p adic polynomial translation modules are computed by the translation minus identity complex",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"leansearch\", \"query\": \"Derived invariants of p adic polynomial translation modules are computed by the translation minus identity complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iteratedDeriv_comp_const_add\", \"Matrix.det_vandermonde_add\", \"AffineEquiv.linear_constVAdd\", \"iteratedFDerivWithin_comp_add_right\", \"iteratedFDerivWithin_comp_sub\", \"iteratedFDeriv_comp_sub\", \"WittVector.verschiebung_isPoly\", \"HasFPowerSeriesWithinAt.comp_sub\"], \"digest\": \"8a056d7dac92452c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Taylor equivalences, nilpotent polynomial elements and cotangent complexes do not give the finite-stage equivariant condensed presentation and ordinary derived rank-one comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial.taylor\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Polynomial.taylor\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Taylor equivalences, nilpotent polynomial elements and cotangent complexes do not give the finite-stage equivariant condensed presentation and ordinary derived rank-one comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite degree polynomial translation modules with p adic coefficients are ind unipotent and derived invariants are a two term difference complex",
+   "results": "{\"t\": \"2026-10-22T06:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"Finite degree polynomial translation modules with p adic coefficients are ind unipotent and derived invariants are a two term difference complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.Generators.H1Cotangent.δAux_X\", \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"BDeRham\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\"], \"digest\": \"805682535a71a950\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Taylor equivalences, nilpotent polynomial elements and cotangent complexes do not give the finite-stage equivariant condensed presentation and ordinary derived rank-one comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite degree polynomial filtration with negative derivative has exponential equal to translation and colimit equal to the polynomial direct sum",
+   "results": "{\"t\": \"2026-10-22T06:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"The finite degree polynomial filtration with negative derivative has exponential equal to translation and colimit equal to the polynomial direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.existsUnique_hilbertPoly\", \"Polynomial.degreeLT.addLinearEquiv_symm_apply_inr\", \"RatFunc.laurentAux_algebraMap\", \"LaurentPolynomial.exists_T_pow\", \"Polynomial.degreeLT.addLinearEquiv_apply_snd\", \"RatFunc.laurent_algebraMap\", \"Polynomial.taylorLinearEquiv\", \"RatFunc.laurentAux_ofFractionRing_mk\"], \"digest\": \"ccf65f80a3c016b7\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Taylor equivalences, nilpotent polynomial elements and cotangent complexes do not give the finite-stage equivariant condensed presentation and ordinary derived rank-one comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "taylor|pderiv|totalDegree",
+   "results": "{\"t\": \"2026-10-23T10:42:25Z\", \"tool\": \"grep\", \"query\": \"taylor|pderiv|totalDegree\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Variables.lean\", \"Mathlib/Algebra/MvPolynomial/Variables.lean\", \"Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean\", \"Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean\"], \"digest\": \"a325c4afe42b7423\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; polynomial Taylor and finite free sheaf constructions do not state the equivariant finite polynomial filtration and all-continuous section presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taylor formula for translation of a polynomial in characteristic zero with nilpotent derivative",
+   "results": "{\"t\": \"2026-10-23T10:42:25Z\", \"tool\": \"leansearch\", \"query\": \"Taylor formula for translation of a polynomial in characteristic zero with nilpotent derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.taylor_apply\", \"Polynomial.taylor\", \"Polynomial.taylor_coeff\", \"Polynomial.taylor_eval\", \"Polynomial.map_taylor\", \"Polynomial.taylorEquiv\", \"iteratedDeriv_comp_add_const\", \"hasDerivAt_taylorWithinEval_succ\"], \"digest\": \"1fcce8c6df465417\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; polynomial Taylor and finite free sheaf constructions do not state the equivariant finite polynomial filtration and all-continuous section presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, MvPolynomial.totalDegree",
+   "results": "{\"t\": \"2026-10-23T10:42:26Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.pderiv, MvPolynomial.totalDegree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; polynomial Taylor and finite free sheaf constructions do not state the equivariant finite polynomial filtration and all-continuous section presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite degree multivariate polynomial translation representations have nilpotent partial derivative exponential equal to translation and their continuous section modules exhaust the monomial direct sum",
+   "results": "{\"t\": \"2026-10-23T10:42:26Z\", \"tool\": \"leanfinder\", \"query\": \"Finite degree multivariate polynomial translation representations have nilpotent partial derivative exponential equal to translation and their continuous section modules exhaust the monomial direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.mvPolynomial\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.PreSubmersivePresentation.aevalDifferential_single\", \"Algebra.SubmersivePresentation.basisDeriv_apply\", \"MvPolynomial.finSuccEquiv_eq\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"KaehlerDifferential.mvPolynomialBasis_repr_symm_single\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\"], \"digest\": \"6e3176fe600e1505\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; polynomial Taylor and finite free sheaf constructions do not state the equivariant finite polynomial filtration and all-continuous section presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of continuous maps into a finite dimensional polynomial space is a finite direct sum of the continuous coefficient sheaf; degree truncations have colimit the polynomial module",
+   "results": "{\"t\": \"2026-10-23T10:46:15Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of continuous maps into a finite dimensional polynomial space is a finite direct sum of the continuous coefficient sheaf; degree truncations have colimit the polynomial module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"SheafOfModules.free\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.mapFree\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\"], \"digest\": \"6a7c43385f070196\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; polynomial Taylor and finite free sheaf constructions do not state the equivariant finite polynomial filtration and all-continuous section presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-translation-acyclic",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, polynomial translation acyclicity obligation: retained proof steps 2 and 3 (finite polynomial filtration, exponential translation, and presentation of the polynomial module as the sheaf colimit of a finite ind-unipotent system). Agent-formulated argument; exact all-continuous noncomplete reference WANTED.",
+   "via": [
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-rank-one-difference-model",
+  "worker": "stage1",
+  "summary": "Expanded the finite polynomial stages by monomial computations, checked joint continuity before condensation, and proved the colimit identification by its coproduct universal property. Reused existing binomial, continuity, condensation and action-colimit nodes; no new nodes and no statement change. Added the existing formal-partial-derivative definition to statement dependencies.",
+  "blueprint": "Latest direct-images proof paragraph (3), open coefficient comparison: realizes the retained finite-filtration and exponential-translation argument below that route. The latest blueprint does not itself state the polynomial lemma; the detailed proof is agent-written."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-7b88d488e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-7b88d488e (reviewer sub-agent of L); spot-checked: I read all nine steps and every cited statement, and I recomputed the formulas. The delivery has one commit (item and report), no new nodes, and the statement is unchanged against live. The only stmt_deps addition is def-weil-pbc-polynomial-partial-derivative, which the statement already uses for ∂/∂y_1. There is no cycle, no repair note for this item, and no SGA citation. Signs check out: D=−∂/∂y_1 gives Σ t^jD^jf/j!=f(y_1−t), and the definition's sum to e_n−1=n matches. Step 2: the binomial expansion of Π(y_i−u_i)^{a_i} is correct (add_pow at Sum.lean:75 checked); the representation law follows from composing substitutions, and the group is abelian. Step 3: the finite-dimensional continuity lemma (FiniteDimension.lean:283) is applied over E, which is complete as a finite extension of Q_ℓ, not over the noncomplete Ω, and the polynomial matrix entries give joint continuity. Step 4: D^j(y_1^k w_0)=(−1)^j k⋯(k−j+1) y_1^{k−j} w_0, D^{n+1}=0, and D commutes with G because the G-substitutions do not touch y_1. Step 5: t^j/j!·(−1)^j k!/(k−j)! = C(k,j)(−t)^j, and division by j! is valid in characteristic 0; all clauses of def-sfb-ind-unipotent-system are checked. Steps 6–7: the finite biproduct is checked through p_c ι_d=δ_cd and Σι_c p_c=1, the realization by def-sfb-continuous-representation-condensation is correct, and joint continuity over F needs no completeness. Step 8: the hypotheses of the filtered-colimit creation node hold (C(−,F) commutative, Z_ℓ^r profinite, ℕ filtered), and the identification of the colimit of the sub-sums with T by the coproduct universal property is correct. Step 9: exp(D)−1=Δ stagewise. Edge cases n=0, r=1 and m=0 all check out. The coefficient ring C(−,F) with all continuous functions matches def-sfb-norm-continuous-monodromy-data and the ind-unipotent definition. The blueprint source is main-20261015 direct-images (3); this is an auxiliary lemma below sk-prop-open-coefficients, and the report honestly records the missing reference as WANTED. No duplicate exists: I grepped for unipotent and Taylor. The only citer, lem-sfb-polynomial-translation-acyclic, uses exactly these conclusions. Advisory: a parallel Q32 delivery of the same item exists (19:13:41); the item is still unsplit in live."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PolynomialRankOneDifferenceModel",
+  "declaration": "Profinite.CondensedAction.PolynomialRankOne.polynomial_rank_one_difference_model",
+  "declarations": [
+   "Profinite.CondensedAction.PolynomialRankOne.polynomial_rank_one_difference_model"
+  ],
+  "file": "lean/Sheaf/Paper/PolynomialRankOneDifferenceModel.lean",
+  "statement": "theorem polynomial_rank_one_difference_model (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (E₀ : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E₀] : ∃ Q : PolynomialSystem ℓ E₀ k m, PresentationAssertion ℓ E₀ k m E₀ Q ∧ PresentationAssertion ℓ E₀ k m Ω Q",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The data declarations are extracted unchanged to PolynomialRankOneDifferenceModelData and publicly reexported. The proof constructs one finite system via the system-existence lemma and applies the presentation lemma to that same system over E₀ and Ω, using the continuous canonical coefficient inclusions. This is a decomposition into two genuine parts, not an axiom-free proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22260db5",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Lean exact against node: Ω NormedField+NormedAlgebra ℚ_ℓ+IsAlgClosure (no completeness), E₀ finite intermediate field, F=E₀ and F=Ω conjuncts with the same Q, r=k+1, G=Fin k→ℤ_ℓ, H=ℤ_ℓ; π pinned t-first, consistent with Model's X−g substitution (signs y1↦y1−t). PolynomialSystem pins V_n (injective embed, image = degree≤n), monomial basis, inclusion, D=−pderiv(inl 0), e_n=n+1, aeval translation, polynomial matrix entries; System gives nilpotence, compatibility, G-commutation, equivariance, joint continuity, Taylor sum over range(n+1). PresentationAssertion: P = existing Presentation; j/p/w/e pinned by section formulas, j≫w=T.ι and c.ι≫e=identify≫w; colimit in ActionModule and after forgetAction; D/expD/delta pinned on stages and coprojections, delta=τ−1 with monomial formula f(y1−1)−f. Edge cases k=0, m=0, n=0, empty S, no degree bound, noncomplete Ω OK. New existing:true def-sfb-polynomial-translation-model: check_existing clean; stmt_deps own Model's declarations. Statement field verbatim; no hollow defs; only the item theorem is sorried. Sole fault H11: the second reading was the author's self-check → fixes/<item>.report.md (worker report + New nodes verbatim + independent clause-by-clause second reading). Advisories: item imports the module of the downstream acyclic theorem (omit the later proof import or move Model); normContinuousRing/Extended reached via def-sfb-ind-unipotent-system; ∀ T does not assert that a Model exists (the acyclic node does). No compile (no Lean change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "independent cc review: data module vs old item module (verbatim apart from blueprint tags); item statement unchanged; the 2 sorried splits (system existence, presentation for arbitrary Q) against the item node's plan steps 1-5/6-9 and IndUnipotent.System/exists_presentation"
+ }
+}

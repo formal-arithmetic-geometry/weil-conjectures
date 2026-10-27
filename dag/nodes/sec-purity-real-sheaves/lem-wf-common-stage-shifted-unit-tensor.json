@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "status": "split",
+ "merged_into": null,
+ "mathlib_match": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageCurveWeilMiddleExtension",
+  "date": "2026-10-26",
+  "group": "J6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Artin Schreier sheaf for the trivial character is the tensor unit, and tensoring with its shift is the shift functor",
+   "results": "8 hits: shiftFunctorZero, Sheaf.tensorUnit_isSheaf, HasShift.Induced.zero, shiftFunctorZero', MonoidalCategory.tensorUnitLeft, Sheaf.cartesianMonoidalCategory, AddChar.mulShift_unit_eq_one_iff, DifferentialObject.shiftZero. None supplies the completed common-stage comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor with the tensor unit shifted by one is naturally isomorphic to the shift functor in a monoidal derived category",
+   "results": "8 hits, including HomologicalComplex.rightUnitor and rightUnitor' and DerivedCategory.instCommShiftCochainComplexIntQ. These give cochain or localization ingredients, not the completed common-stage statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "artinSchreierSheaf|rightUnitorNatIso|mapBifunctorShift₂Iso",
+   "results": "20 hits, including Mathlib/Algebra/Homology/BifunctorShift.lean:156 mapBifunctorShift₂Iso and Mathlib/CategoryTheory/Monoidal/Category.lean:863 rightUnitorNatIso. No completed adic Artin--Schreier or common-stage shifted-unit comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-wf-common-stage-shifted-unit-tensor",
+ "title": "Right tensor with a shifted common-stage unit is the shift functor",
+ "statement": "Let l be prime, Omega an algebraic closure of Q_l, and X a scheme on which l is invertible in every residue field. In the actual common-stage category of [def-weil-algebraically-closed-coefficients], use the tensor bifunctor of [def-weil-derived-pullback-tensor-hom] and its specified coefficient unit 1_X of [lem-pur-derived-pullback-tensor-iso]. For every integer r there is a natural isomorphism from the functor K mapped to K tensor 1_X[r], acting on arrows by f tensor id, to the cohomological shift K mapped to K[r]. This concerns only geometric common-stage objects, without a Fourier setting, character sheaf, arithmetic descent or Weil structure.",
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [
+  {
+   "text": "On flat-term K-flat finite-coefficient representatives use the total tensor shift comparison of [lem-weil-pbc-pullback-tensor-canonical-shift-unit] and the regular coefficient module in degree zero. The comparison K tensor 1[r] to (K tensor 1)[r] has sign (-1)^(a*r) on degree a in K. Follow it by the shift of the right unitor. The signed differential identity makes this a chain isomorphism, natural in every chain map. Resolving descent extends it to all derived arrows, including inverted quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All maps commute with quotient projections, so their natural isomorphisms give an isomorphism of coherent coefficient systems. Derived inverse limit with its signed shift comparison gives the integral comparison. The reduction-normalized unit and unitor are the prescribed ones of [lem-pur-derived-pullback-tensor-iso]. Rationalize the comparison, preserving its inverse and naturality.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each common-stage object, enlarge to a stage containing its field and the least unit field. Use the tensor-stage comparison, the unit scalar comparison and the scalar shift comparison to represent the rational isomorphism there. An arbitrary common-stage arrow has a representative at one larger common field. The prescribed tensor and shift actions conjugate the rational naturality equation by the same scalar comparisons; the intermediate inverses cancel. Therefore these components are natural in every common-stage arrow. Their inverse components descend in the same way, proving the natural isomorphism. The formulas work for every signed r, the empty scheme and zero objects.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "section-sign-rules, item-shift-tensor; sites-cohomology.tex Tags 06YY and 0941 for derived tensor and coherent reconstruction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "section-sign-rules, item-shift-tensor; sites-cohomology.tex Tags 06YY and 0941 for derived tensor and coherent reconstruction."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-middle-extension",
+   "place": "The cohomological-shift convention after ordinary direct image: tensor with the coefficient unit shifted by one realizes that shift; the present lemma isolates the geometric tensor/shift calculation for all integer shifts.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageShiftedUnitTensor",
+  "file": "lean/Sheaf/Paper/CommonStageShiftedUnitTensor.lean",
+  "declaration": "WeilConjectures.commonStageShiftedUnit_tensor",
+  "statement": "theorem commonStageShiftedUnit_tensor (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] (r : ℤ) :\n    Nonempty (Functor.prod' (𝟭 _) ((Functor.const _).obj\n        ((shiftFunctor _ r).obj (pullbackTensorCommonUnit l Ω X))) ⋙\n      commonStageDerivedTensor l Ω X ≅ shiftFunctor _ r)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T202304-L-2702660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T202304-L-2702660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

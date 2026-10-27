@@ -1,0 +1,199 @@
+{
+ "id": "lem-weil-pbc-augmented-derived-tower-unit",
+ "kind": "statement",
+ "title": "Augmented derived tower unit with all-object ordinary normalization",
+ "statement": "Let $\\mathcal C_0,\\mathcal C_1,\\mathcal D_0,\\mathcal D_1$ be categories, $q:\\mathcal C_0\\to\\mathcal D_0$ a localization at a class $W$ of arrows [lem-weil-pbc-localization-universal-property], and $q':\\mathcal C_1\\to\\mathcal D_1$ a functor. Let $G,T:\\mathcal C_0\\to\\mathcal C_1$, $F:\\mathcal C_1\\to\\mathcal C_0$, $DG,LT:\\mathcal D_0\\to\\mathcal D_1$ and $RF:\\mathcal D_1\\to\\mathcal D_0$ be functors. Give natural transformations $\\nu:1_{\\mathcal C_0}\\to FG$, $\\eta:G\\to T$, $\\gamma:qF\\to RFq'$, an isomorphism $\\alpha:DGq\\cong q'G$, and $\\beta:LTq\\to q'T$. Assume $(LT,\\beta)$ is a universal right Kan extension of $q'T$ along $q$, meaning that every $a:Hq\\to q'T$ factors uniquely as $\\beta(bq)$ with $b:H\\to LT$.\nThere is a unique natural $t:DG\\to LT$ with $\\beta_Xt_{qX}=q'(\\eta_X)\\alpha_X$. There is a unique natural $v:1_{\\mathcal D_0}\\to RF\\,DG$ with $RF(\\alpha_X)v_{qX}=\\gamma_{GX}q(\\nu_X)$, for all $X\\in\\mathcal C_0$. For the natural map $c=RF(t)\\circ v:1_{\\mathcal D_0}\\to RF\\,LT$, one has\n$$RF(\\beta_X)c_{qX}=\\gamma_{TX}\\,q\\bigl(F(\\eta_X)\\nu_X\\bigr)\\qquad(X\\in\\mathcal C_0).$$\nComposition is right to left. When $G=\\Delta$ is the constant strict tower functor, $F=\\lim$, $\\nu$ its ordinary adjunction unit, and $T$ an augmented tower functor with augmentation $\\eta$ [def-weil-inverse-system], this formula normalizes the completion map by the actual ordinary cochain map $X\\to\\lim T(X)$. With a chosen functor $RF=R\\lim$ and ordinary-to-derived comparison $\\gamma$, the equation holds on every complex, without requiring it to be a resolving representative. Here the functor and comparison are supplied data; the derived-limit property [def-weil-derived-limit] by itself does not choose either of them. The assertion does not require invertibility of $\\beta_X$ or $\\gamma_Y$, or an adjunction between the cochain functors.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (proetale-lemma-naive-completion), construction of the canonical completion map; agent-written categorical refinement of the Q1 argument in the live constant-completion proof, the comparison from ordinary pullback is the completion map: old step 3, Q1 two universal lifts and all-complex ordinary-unit equation"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-inverse-system",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Put $a_X=q'(\\eta_X)\\alpha_X:DG(qX)\\to q'(TX)$. It is natural, being the composite of $\\alpha$ with $q'$ applied to $\\eta$. Apply the right Kan universal property assumed in the statement with $H=DG$ and $a$. It gives a unique $t:DG\\to LT$ with $\\beta_Xt_{qX}=a_X$. This is exactly the asserted characterization of $t$. In Lean use Functor.liftOfIsRightKanExtension, its fac_app lemma, and hom_ext_of_isRightKanExtension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (proetale-lemma-naive-completion), completion-map context; agent-written universal-lift and naturality calculation refining the completed-pullback comparison"
+   }
+  },
+  {
+   "text": "Define $d_X=RF(\\alpha_X^{-1})\\gamma_{GX}q(\\nu_X):qX\\to RF(DG(qX))$. These components are natural: they compose $q\\nu$, $\\gamma$ whiskered by $G$, and $RF$ applied to the inverse natural isomorphism $\\alpha$. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with $L=q$, target category $\\mathcal D_0$, $F_1=q$, $F_2=(RF\\,DG)q$, lifts $F'_1=1_{\\mathcal D_0}$ and $F'_2=RF\\,DG$, identity comparison isomorphisms, and $\\tau=d$. Both source functors invert $W$, since $q$ does and functors preserve isomorphisms. The cited clause gives a unique natural $v$ with $v_{qX}=d_X$. Multiplying by $RF(\\alpha_X)$ gives the required equation for $v$. Conversely that equation implies $v_{qX}=d_X$ by cancellation of the specified isomorphism, so the same uniqueness applies. In Lean assemble d by whiskering with the functor associators and unitors, then use Localization.liftNatTrans and Localization.natTrans_ext.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (proetale-lemma-naive-completion), completion-map context; agent-written universal-lift and naturality calculation refining the completed-pullback comparison"
+   }
+  },
+  {
+   "text": "Define $c=RF(t)\\circ v$; whiskering and composition of natural transformations make it natural. Functoriality of $RF$, the equation defining $t$, the equation defining $v$, and naturality of $\\gamma$ at $\\eta_X:GX\\to TX$ give\n$$\\begin{aligned}\nRF(\\beta_X)c_{qX}\n&=RF(\\beta_Xt_{qX})v_{qX}\\\\\n&=RF(q'(\\eta_X))RF(\\alpha_X)v_{qX}\\\\\n&=RF(q'(\\eta_X))\\gamma_{GX}q(\\nu_X)\\\\\n&=\\gamma_{TX}q(F(\\eta_X))q(\\nu_X)\\\\\n&=\\gamma_{TX}q(F(\\eta_X)\\nu_X).\n\\end{aligned}$$\nEvery equality is at the given object $X$; only $\\alpha$ was inverted, so neither $\\beta_X$ nor $\\gamma_{TX}$ need be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (proetale-lemma-naive-completion), completion-map context; agent-written universal-lift and naturality calculation refining the completed-pullback comparison"
+   }
+  },
+  {
+   "text": "For the tower specialization, write $p_n:\\lim T(X)\\to T(X)_n$ for the limit projections, and $r_n:\\lim\\Delta X\\to X$ for those of the constant tower. The ordinary adjunction unit has $r_n\\nu_X=1_X$. By the definition of the morphism of towers $\\eta_X$ [def-weil-inverse-system], the map induced on limits satisfies $p_nF(\\eta_X)=(\\eta_X)_nr_n$. Thus $p_nF(\\eta_X)\\nu_X=(\\eta_X)_n$ for every $n$. The limit universal property identifies $F(\\eta_X)\\nu_X$ with the actual ordinary map induced by the augmentation cone. Substitution in Step 3 proves the claimed ordinary-map normalization on every complex. In this specialization $RF$ and $\\gamma$ remain supplied data; no functor or comparison is extracted from the Roos-triangle property of [def-weil-derived-limit]. The contextual derived-limit definition is not used by this proof; Limits.limit.hom_ext, limMap_π and the definition of constLimAdj suffice.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (proetale-lemma-naive-completion), completion-map context; agent-written universal-lift and naturality calculation refining the completed-pullback comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (proetale-lemma-naive-completion), contextual completion formula; categorical proof supplied by Q39, using the existing localization universal-property Mathlib leaf; formalized by J6 using only Mathlib universal-property and limit APIs, with the unused derived-limit proof dependency removed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented additive tower functor construct its derived completion natural map using two universal derived lifts and the ordinary limit comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.leftDerived_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the composition of the natural transformation component $(LF.leftDerivedLift \\\\, \\\\alpha \\\\, W \\\\, G \\\\, \\\\beta).app(L(X))$ with $\\\\alpha.app(X)$ equals $\\\\beta.a\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans_fac\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (LF' LF : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n\", \"doc\": \"For natural transformation $\\\\tau : F' \\\\Rightarrow F$ between functors $F', F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, the composition of the left whiskering of the induced natural transformation $LF' \\\\Rightarr\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}_1$, the composition of the natural transformation $\\\\alpha_1$ at $X$ with the component of the right derived functor comparison morphism at $L_1(X)$ equals t\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerived_fac\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, and $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, along with a natural transformation $ \\\\beta : L \\\\circ G \\\\Rightarrow F \"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$, a localizer morphism $\\\\Phi: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$ preserving a morphism property $W_1$, and localization funct\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_5, u_3} H] →\\n            (LF' LF : CategoryTheory.Functor D H) →\\n              {F F'\", \"doc\": \"Given natural transformation $\\\\tau : F' \\\\Rightarrow F$ between functors $F', F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural transformation $LF' \\\\Rightarrow LF$ between their lef\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, and a natural transformation $ \\\\beta : F \\\\Rightarrow L \\\\circ G $, this con\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {H : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} H] →\\n            {D₁ : Type u₄} →\\n              {D₂ : Type u₅} →\\n                \", \"doc\": \"A natural transformation comparing the right derived functor $ RF_1 $ with the composition of the localized functor $ \\\\Phi_{\\\\text{localized}} $ and $ F_2 $, constructed using the universal property of\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"unit\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|leftDerived_fac_app|isLeftDerivedFunctor_of_inverts",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"85\", \"text\": \"lemma leftDerived_fac_app (G : D ⥤ H) (β : L ⋙ G ⟶ F) (X : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"103\", \"text\": \"lemma derivedη_fac_app (X₁ : C₁) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"106\", \"text\": \"  simpa using! ((G' ⋙ F').leftDerived_fac_app ((Functor.associator _ _ _).inv ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"174\", \"text\": \"lemma isLeftDerivedFunctor_of_inverts\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"182\", \"text\": \"  isLeftDerivedFunctor_of_inverts W _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"185\", \"text\": \"lemma isIso_of_isLeftDerivedFunctor_of_inverts [L.IsLocalization W]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"199\", \"text\": \"  ⟨fun _ ↦ isIso_of_isLeftDerivedFunctor_of_inverts LF α hF, fun _ ↦\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"200\", \"text\": \"    isLeftDerivedFunctor_of_inverts W LF (asIso α)⟩\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived augmented inverse tower unit equals ordinary augmentation followed by right derived inverse limit comparison on all complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.totalRightDerivedUnit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \": F ⟶ L ⋙ F.totalRightDerived L W\", \"doc\": \"The natural transformation from $ F $ to the composition of $ L $ with the total right derived functor of $ F $, defined as the unit of the left Kan extension. This transformation satisfies the univer\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CochainComplex.augmentTruncate_inv_f_zero\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : CochainComplex V ℕ) : (augmentTruncate C).inv.f 0 = 𝟙 (C.X 0)\", \"doc\": \"For any cochain complex $ C $, the inverse of the augmentation-truncation isomorphism at index $ 0 $ is the identity morphism $ \\\\text{id}_{C_0} $.\"}\n  {\"name\": \"CochainComplex.truncateAugment_inv_f\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : CochainComplex V ℕ) {X : V} (f : X ⟶ C.X 0) (w : f ≫ C.d 0 1 = 0) (i : ℕ) :\\n  (truncateAugment C f w).inv.f i = 𝟙 ((truncate.obj (augment C f w)).X i)\", \"doc\": \"For any cochain complex $ C $ in category $ \\\\mathcal{V} $, object $ X $, morphism $ f: X \\\\to C_0 $ satisfying $ f \\\\circ d_{0,1} = 0 $, and natural number $ i $, the inverse of the truncation of the au\"}\n  {\"name\": \"ChainComplex.truncateAugment\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : ChainComplex V ℕ) {X : V} (f : C.X 0 ⟶ X) (w : C.d 1 0 ≫ f = 0) : truncate.obj (augment C f w) ≅ C\", \"doc\": \"Given a chain complex $C$ indexed by $\\\\mathbb{N}$ in a category $\\\\mathcal{V}$, and an augmentation map $f: C_0 \\\\to X$ (satisfying $f \\\\circ d_1 = 0$), one can form the augmented chain complex by placin\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"{X Y : C} (f : X ⟶ Y) (I : InjectiveResolution X) (J : InjectiveResolution Y) (φ : I.cocomplex ⟶ J.cocomplex)\\n  (comm : I.ι.f 0 ≫ φ.f 0 = f ≫ J.ι.f 0) (F : C ⥤ D) [F.Additive] :\\n  (I.isoRightDerivedToHomotopyCategoryObj F).inv ≫ F.rightDerivedToHomotopyCategory.map f =\\n    (F.mapHomologicalComplex _\", \"doc\": \"For objects $X,Y$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I,J$, a morphism $f:X\\\\to Y$, and compatible cochain complex morphism $\\\\phi:I.\\\\text{cocomplex}\\\\to J.\\\\text{cocomplex}$ \"}\n  {\"name\": \"ChainComplex.truncateAugment_inv_f\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : ChainComplex V ℕ) {X : V} (f : C.X 0 ⟶ X) (w : C.d 1 0 ≫ f = 0) (i : ℕ) :\\n  (truncateAugment C f w).inv.f i = 𝟙 ((truncate.obj (augment C f w)).X i)\", \"doc\": \"For an augmented chain complex obtained by replacing the 0th object with $X$ and a truncation of this complex, the inverse morphism of the truncation functor applied to the augmented complex has compo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "grep",
+   "query": "natTransExtension|natTransEquiv|fullyFaithfulWhiskeringLeft|leftDerived_fac_app",
+   "results": "Actual msearch: ok=True, n_hits=19; Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Predicate.lean; Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole augmented construction. Localization.natTrans_ext/liftNatTrans and leftDerivedLift provide individual APIs; the localization fact is already the existing Mathlib leaf lem-weil-pbc-localization-universal-property. The full normalization needs the displayed naturality calculation and tower specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposition with a localization is fully faithful and extends natural transformations uniquely",
+   "results": "Actual msearch: ok=True, n_hits=8; CategoryTheory.Localization.natTrans_ext; CategoryTheory.Localization.Construction.natTransExtension; CategoryTheory.Localization.instFaithfulFunctorWhiskeringLeftFunctor'; CategoryTheory.Functor.LeftExtension.isUniversalPrecomp₂; CategoryTheory.Adjunction.isLocalization'; CategoryTheory.Functor.LeftExtension.isUniversalOfPrecomp₂; CategoryTheory.Localization.LeftBousfield.isLocalization; CategoryTheory.Localization.Construction.whiskerLeft_natTransExtension",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole augmented construction. Localization.natTrans_ext/liftNatTrans and leftDerivedLift provide individual APIs; the localization fact is already the existing Mathlib leaf lem-weil-pbc-localization-universal-property. The full normalization needs the displayed naturality calculation and tower specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"natTrans\"",
+   "results": "Actual msearch: ok=True, n_hits=12; CategoryTheory.Localization.Construction.NatTransExtension.app; CategoryTheory.Localization.Construction.natTransExtension; CategoryTheory.Localization.Construction.natTransExtension_app; CategoryTheory.Localization.Construction.whiskerLeft_natTransExtension; CategoryTheory.Localization.Construction.natTransExtension_hcomp; CategoryTheory.Localization.Construction.NatTransExtension.app_eq; CategoryTheory.Localization.Construction.natTrans_hcomp_injective; CategoryTheory.Localization.liftNatTrans",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole augmented construction. Localization.natTrans_ext/liftNatTrans and leftDerivedLift provide individual APIs; the localization fact is already the existing Mathlib leaf lem-weil-pbc-localization-universal-property. The full normalization needs the displayed naturality calculation and tower specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a natural map from the identity to a composite derived functor from an augmented functor, a right Kan extension and a localization, with its normalization on every original object",
+   "results": "Actual msearch: ok=True, n_hits=8; CategoryTheory.Functor.totalRightDerivedUnit; CategoryTheory.Functor.rightDerivedDesc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Functor.leftDerivedLift; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.Functor.rightDerived_fac; CategoryTheory.Functor.rightDerivedNatTrans",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole augmented construction. Localization.natTrans_ext/liftNatTrans and leftDerivedLift provide individual APIs; the localization fact is already the existing Mathlib leaf lem-weil-pbc-localization-universal-property. The full normalization needs the displayed naturality calculation and tower specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation map to derived inverse limit of a tower agrees with ordinary limit map followed by the ordinary to derived comparison",
+   "results": "Actual msearch: ok=True, n_hits=8; LightProfinite.lightToProfinite_map_proj_eq; InverseSystem.invLimEquiv_apply_coe; CategoryTheory.liftedLimitMapsToOriginal_inv_map_π; CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_limit_map; AdicCompletion.transitionMap_comp_eval; Profinite.asLimitConeIso; CategoryTheory.Limits.limit_map_limitObjIsoLimitCompEvaluation_hom; AdicCompletion.transitionMap_comp_eval_apply",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole augmented construction. Localization.natTrans_ext/liftNatTrans and leftDerivedLift provide individual APIs; the localization fact is already the existing Mathlib leaf lem-weil-pbc-localization-universal-property. The full normalization needs the displayed naturality calculation and tower specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "the comparison from ordinary pullback is the completion map: old step 3, Q1 two universal lifts and all-complex ordinary-unit equation",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-augmented-derived-tower-unit",
+  "worker": "stage1",
+  "summary": "Four-step proof: the assumed right Kan property constructs t, the existing localization universal-property leaf descends the conjugated ordinary unit to v, naturality of gamma gives the all-object equation, and limit projections identify the ordinary augmentation map. No new nodes. Corrected two reference mismatches without changing any categorical hypothesis or conclusion: general localization is not defined by the derived-category definition; the Roos-triangle definition supplies neither a functor nor its universal comparison.",
+  "blueprint": "Realizes the sentence \"The comparison from ordinary pullback is the completion map of Lg^*K\" in current main-20261015 def-weil-pbc-completed-pullback, via lem-weil-pbc-constant-completion-equivalence, Q1 two universal lifts and all-complex ordinary-unit equation. The blueprint states the comparison, not the abstract categorical calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-2ebcab1e6",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-2ebcab1e6 (reviewer sub-agent of L); spot-checked: I read the item, the base statement, all 4 steps, every cited statement and both citers in full. There are 0 new nodes. No repair note exists, so this is not a re-split, and the item is still unsplit in live and side-live, so no other group has split it. The reported statement correction is right and weakens nothing. (1) The stmt_dep def-weil-abstract-derived-category, which defines only D(A) as localization at quasi-isomorphisms, is replaced by lem-weil-pbc-localization-universal-property, whose statement defines localization at an arbitrary class W; no general localization def node exists. (2) The 'R lim and its universal comparison [def-weil-derived-limit]' wording becomes explicitly supplied RF and gamma. 08TC says it defines a property of an object with a triangle, not a functor, and the general statement already quantifies over arbitrary RF and gamma. The categorical hypotheses, both uniqueness claims and the displayed equation are unchanged. The citers constant-completion-equivalence (Step 3) and exact-restriction-augmented-completion (RF=RL with its universal comparison) are covered. Every arrow type checks. Step 1 is the assumed right Kan property with H=DG and a=q'eta.alpha. Step 2 is leaf clause (2) with F1=q, F2=RF.DG.q, lifts id and RF.DG, phi=id and tau=RF(alpha^-1).gammaG.qnu; Mathlib Predicate.lean has liftNatTrans at 326 and natTrans_ext at 286; the leaf is in the same unit, so there is no cycle. Step 3 is functoriality plus naturality of gamma at eta_X, with only alpha inverted. Step 4 uses limit projections p_n F(eta) nu = eta_n. Small cases: gamma=0 gives c=0; with C0=[0->1] over the point and T=(k->0), beta is not invertible and the equation still holds. Sources: Stacks 099M lemma-naive-completion (context only) and the last sentence of main-20261015 def-weil-pbc-completed-pullback. A duplicate scan of right-Kan/localization/unit statements finds only siblings with different content. No SGA is cited and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AugmentedDerivedTowerUnit",
+  "declaration": "CategoryTheory.exists_augmentedDerivedTowerUnit",
+  "declarations": [
+   "CategoryTheory.exists_augmentedDerivedTowerUnit",
+   "CategoryTheory.towerAugmentation_ordinaryUnit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AugmentedDerivedTowerUnit.lean",
+  "statement": "theorem exists_augmentedDerivedTowerUnit {C₀ : Type u₀} {C₁ : Type u₁} {D₀ : Type u₂} {D₁ : Type u₃} [Category.{v₀} C₀] [Category.{v₁} C₁] [Category.{v₂} D₀] [Category.{v₃} D₁] (W : MorphismProperty C₀) (q : C₀ ⥤ D₀) [q.IsLocalization W] (q' : C₁ ⥤ D₁) (G T : C₀ ⥤ C₁) (F : C₁ ⥤ C₀) (DG LT : D₀ ⥤ D₁) (RF : D₁ ⥤ D₀) (ν : 𝟭 C₀ ⟶ G ⋙ F) (η : G ⟶ T) (γ : F ⋙ q ⟶ q' ⋙ RF) (α : q ⋙ DG ≅ G ⋙ q') (β : q ⋙ LT ⟶ T ⋙ q') [LT.IsRightKanExtension β] : ∃ (t : DG ⟶ LT) (v : 𝟭 D₀ ⟶ DG ⋙ RF), (∀ X : C₀, t.app (q.obj X) ≫ β.app X = α.hom.app X ≫ q'.map (η.app X)) ∧ (∀ t' : DG ⟶ LT, (∀ X : C₀, t'.app (q.obj X) ≫ β.app X = α.hom.app X ≫ q'.map (η.app X)) → t' = t) ∧ (∀ X : C₀, v.app (q.obj X) ≫ RF.map (α.hom.app X) = q.map (ν.app X) ≫ γ.app (G.obj X)) ∧ (∀ v' : 𝟭 D₀ ⟶ DG ⋙ RF, (∀ X : C₀, v'.app (q.obj X) ≫ RF.map (α.hom.app X) = q.map (ν.app X) ≫ γ.app (G.obj X)) → v' = v) ∧ (∀ X : C₀, (v ≫ Functor.whiskerRight t RF).app (q.obj X) ≫ RF.map (β.app X) = q.map (ν.app X ≫ F.map (η.app X)) ≫ γ.app (T.obj X))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c316a9ab",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Every clause matches the node: localization q at W, Kan extension (LT,β), ν,η,γ,α,β with correct variance, ∃ t and ∃ v each with its equation and uniqueness conjunct, final c equation, no invertibility of β/γ and no adjunction assumed, 8 independent universes. Tower step 4 is towerAugmentation_ordinaryUnit (constLimAdj unit ≫ lim.map η = limit.lift of the augmentation cone, towers ℕᵒᵖ ⥤ C per def-weil-inverse-system). lean.statement verbatim; no statement_change, no new nodes or dep modules; only sorry proofs; docstrings carry source and blueprint tag and the 4 node steps; lines ≤100; no duplicate in Mathlib or project; item unlanded in side-live. Advisory: plain DerivedLimit import is unused by the signatures (contextual stmt_dep). No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261023T041116-L-1253655",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

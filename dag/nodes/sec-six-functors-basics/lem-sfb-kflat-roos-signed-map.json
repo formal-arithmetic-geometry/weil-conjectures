@@ -1,0 +1,159 @@
+{
+ "id": "lem-sfb-kflat-roos-signed-map",
+ "kind": "statement",
+ "title": "Signed tensor map on strict Roos fibres",
+ "statement": "Let M be an abelian monoidal category with additive tensor, countable products, inverse-sequence limits and countable coproducts. Let A be any cochain complex in M and I,J strict tower complexes in M [def-sp-total-tensor-summand-interface, def-weil-strict-roos-model]. If b:A tensor P_I -> P_J commutes with one minus transition, the canonical tensor/cone and tensor/shift isomorphisms followed by the shifted mapping-cone map define psi:A tensor roosF(I)->roosF(J). Its two total summand coordinates are exactly SignedCoordinates(A,I,J,b,psi) [def-sfb-kflat-augmented-roos-interface]. If theta:A tensor lim I->lim J satisfies tensor(inclusion_I)b=theta inclusion_J, then tensor(roos_iota_I)psi=theta roos_iota_J as whole chain maps. No K-flatness or exact-products hypothesis is needed. The module exports the sheaf specialization with the original tensor wrappers as well.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok); Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 014A (lemma-third-isomorphism-triangle); explicit agent comparison calculation."
+ },
+ "stmt_deps": [
+  "def-sp-total-tensor-summand-interface",
+  "def-weil-strict-roos-model",
+  "def-sfb-kflat-augmented-roos-interface"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified tensor/shift isomorphism for shift -1, then the signed tensor/cone isomorphism, and finally the shifted mapping-cone map of the commuting square b. This constructs a chain map with no chosen filler.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 014A (lemma-third-isomorphism-triangle); explicit agent comparison calculation."
+   }
+  },
+  {
+   "text": "Project to the two cone summands. Naturality of degree-transport isomorphisms cancels the intermediate shift transports. On the cone-source summand the tensor/cone sign (-1)^p cancels the tensor/shift sign (-1)^(-p), giving the unshifted coordinate b. On the other summand only the tensor/shift sign remains, giving (-1)^p b. These are precisely the two equations of SignedCoordinates.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "def-sfb-kflat-augmented-roos-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 014A (lemma-third-isomorphism-triangle); explicit agent comparison calculation."
+   }
+  },
+  {
+   "text": "Check the inclusion square by the two biproduct projections and by each total summand. The shifted coordinate of roos_iota is zero, so both composites have zero there. The other coordinate is the ordinary product inclusion; its equality is exactly the assumed whole inclusion equation for theta and b.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 014A (lemma-third-isomorphism-triangle); explicit agent comparison calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-kflat-augmented-roos-interface",
+  "def-weil-strict-roos-model",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok); Tags 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 014A (lemma-third-isomorphism-triangle); explicit agent comparison calculation. The signed calculation is proved generically in an abelian monoidal category and specialized to module sheaves, avoiding coefficient-structure unfolding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorShift₂Iso_hom_f|mapBifunctorMappingCone₂Iso",
+   "results": "5 hits; Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The relevant general localization, cone, shift and product lemmas are used in the proved construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed total tensor commutes with the mapping cone and with shift by minus one with explicit summand coordinates",
+   "results": "8 hits; CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.shiftTriangleIso, TensorProduct.gradedCommAux, CochainComplex.mappingCone.shiftTrianglehIso, CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt, TensorProduct.gradedComm, CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The relevant general localization, cone, shift and product lemmas are used in the proved construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Map on tensor mapping fibres has signed coordinates and commutes with the kernel inclusion into the fibre",
+   "results": "8 hits; LinearMap.tensorKer, LinearMap.tensorKerBil, LinearMap.tensorKer_coe, LinearMap.tensorKer_tmul, lTensor.toFun, KaehlerDifferential.cotangentComplexBaseChange_tmul, LinearMap.tensorKerEquivOfSurjective_symm_tmul, tensorKaehlerQuotKerSqEquiv_tmul_D",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The relevant general localization, cone, shift and product lemmas are used in the proved construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.KFlatAugmentedRoosComparison",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: exact tensor preserves derived inverse limits as fibres of maps between products, and the canonical completeness augmentation.",
+   "via": [
+    "lem-sfb-kflat-augmented-roos-comparison",
+    "lem-sfb-evaluation-duality-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.KFlatRoosSignedMap",
+  "file": "lean/Sheaf/CategoryTheory/KFlatRoosSignedMap.lean",
+  "declaration": "CategoryTheory.KFlatAugmentedRoos.signedFiberMap_spec",
+  "declarations": [
+   "CategoryTheory.KFlatAugmentedRoos.GenericSigned.genericTotalExists",
+   "CategoryTheory.KFlatAugmentedRoos.GenericSigned.tensorCoconeIso",
+   "CategoryTheory.KFlatAugmentedRoos.GenericSigned.signedFiberMap",
+   "CategoryTheory.KFlatAugmentedRoos.GenericSigned.signedFiberMap_spec",
+   "CategoryTheory.KFlatAugmentedRoos.tensorCoconeIso",
+   "CategoryTheory.KFlatAugmentedRoos.signedFiberMap",
+   "CategoryTheory.KFlatAugmentedRoos.signedFiberMap_spec"
+  ],
+  "statement": "theorem signedFiberMap_spec (A : CochainComplex (Modules R) ℤ)\n    (I J : CochainComplex (ℕᵒᵖ ⥤ Modules R) ℤ)\n    (b : ((total R).obj A).obj (roosP I) ⟶ roosP J)\n    (θ : ((total R).obj A).obj (limit I.asFunctor) ⟶ limit J.asFunctor)\n    (hb : ((total R).obj A).map (roosU I) ≫ b = b ≫ roosU J)\n    (hθ : ((total R).obj A).map (InjectiveTowerRoos.inclusion I) ≫ b =\n      θ ≫ InjectiveTowerRoos.inclusion J) :\n    SignedCoordinates A I J b (signedFiberMap R A I J b hb) ∧\n      ((total R).obj A).map (roosι I) ≫ signedFiberMap R A I J b hb = θ ≫ roosι J",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kflat-roos-signed-map",
+  "worker": "stage3",
+  "summary": "Fully proved helper result in the delivery; no new sorry or arbitrary witness chosen from an unproved existence statement.",
+  "blueprint": "det-lem-int-tensor-product.proof.md first paragraph, product-to-derived-limit preservation and the canonical completeness augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "The same generic homological tool approved for the parent comparison; used without replacing the integral tensor unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ced57",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184854-L-3238630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ced57",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184854-L-3238630",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clones/live (byte-identical statement); ComparisonFormulas old existential vs new Nonempty ComparisonData via proved comparisonFormulas_iff + change record; node lean records vs delivered declarations; sandbox compile of all 6 modules + #print axioms (propext, Classical.choice, Quot.sound only)"
+ }
+}

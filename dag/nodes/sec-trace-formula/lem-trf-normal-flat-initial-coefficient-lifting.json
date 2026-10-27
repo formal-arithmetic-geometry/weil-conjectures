@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-normal-flat-initial-coefficient-lifting",
+ "kind": "statement",
+ "title": "Normally flat initial equations lift with maximal-ideal coefficients",
+ "statement": "Let $(T,\\mathfrak M,k)$ be a nonzero commutative regular local ring, with residue field $k=T/\\mathfrak M$ [def-weil-regular-scheme, def-weil-residue-field]. Fix a regular system of parameters $(x_0,\\ldots,x_r,y_1,\\ldots,y_s)$, where $r,s\\geq0$, and put $P=(x_0,\\ldots,x_r)$ [def-weil-pbc-regular-system-of-parameters]. Let $\\mathfrak a\\subseteq P$ be an ideal, put $R=T/\\mathfrak a$, $\\mathfrak m=\\mathfrak M/\\mathfrak a$, $I=P/\\mathfrak a$, $A=T/P=R/I$, and assume $G=\\operatorname{gr}_I R$ is flat over $A$ [def-weil-pbc-associated-graded-ring, def-weil-pbc-flat-ring-map]. Let $B=k[X_0,\\ldots,X_r]$ with all variables of degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra], and identify $\\operatorname{gr}_{\\mathfrak M}T=k[X_0,\\ldots,X_r,Y_1,\\ldots,Y_s]$ by these parameters. Let $m\\geq1$ and $f_1,\\ldots,f_m\\in\\mathfrak a$ have finite $\\mathfrak M$-orders $d_i\\geq1$, satisfy $f_i\\in P^{d_i}$, and have initial forms $\\phi_i\\in B_{d_i}$ minimally generating $\\ker(\\operatorname{gr}_{\\mathfrak M}T\\to\\operatorname{gr}_{\\mathfrak m}R)$. Here the order of $f_i$ is $\\sup\\{v:f_i\\in\\mathfrak M^v\\}$ and its initial form is its class in $\\mathfrak M^{d_i}/\\mathfrak M^{d_i+1}$.\nFor every $n\\geq0$ and $u\\in\\mathfrak a\\cap P^n\\cap\\mathfrak M^{n+1}$, there exist coefficients $c_i\\in\\mathfrak M P^{n-d_i}$ for the indices with $d_i\\leq n$ such that\n$$u-\\sum_{d_i\\leq n}c_if_i\\in\\mathfrak a\\cap P^{n+1}.$$\nAn empty sum is zero and $P^0=T$. No reducedness hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10 (1970), proof of Lemma 20, (20.6) and the first coefficient lifting before (20.7), p.179; normal-flat initial-ideal statement attributed there to Hironaka (1964), Chapter II, Lemma 7; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival original WANTED; the local ILO PDF is ancestor motivation (VIII 2.3.13), not the text of this lemma. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-trf-local-standard-basis-invariants",
+  "def-trf-permissible-basis-chart-data",
+  "def-trf-adic-initial-ideal-generator-degrees"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak n=\\mathfrak M/P\\subset A$. By [lem-weil-pbc-regular-local-generators-regular-sequence], the parameter list is regular and $A=T/P$ is regular local, hence Noetherian. Its $x$-prefix is regular: the successive injectivity conditions are unchanged and its final quotient $A$ is nonzero, as required by [def-weil-pbc-regular-sequence]. By [lem-pur-regular-sequence-graded-polynomial] this gives the specified identification $H=\\operatorname{gr}_P T=A[X_0,\\ldots,X_r]$. The quotient $T\\to R$ induces a graded surjection $H\\to G$; in degree $e$ it sends the class of $t\\in P^e$ to its image modulo $I^{e+1}$. It is surjective since every element of $I^e$ lifts to $P^e$. Write $K_e=\\ker(H_e\\to G_e)$ and let $F_i\\in K_{d_i}$ be the $P$-initial class of $f_i$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM), 00LF (definition-regular-sequence), 00LN(1) (lemma-regular-quasi-regular), and 061P (definition-quasi-regular-sequence)."
+   }
+  },
+  {
+   "text": "Each $G_e$ is flat over $A$: its inclusion into $G$ and the degree projection split, so the tensor map for an injection on $G_e$ is a direct summand of the injective tensor map on $G$ [def-weil-pbc-flat-ring-map, def-weil-pbc-module-tensor-product]. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to K_e\\to H_e\\to G_e\\to0$ and $k=A/\\mathfrak n$. Thus $k\\otimes_A K_e\\to k\\otimes_A H_e$ is injective and has image the kernel of $k\\otimes_A H_e\\to k\\otimes_A G_e$. Here $k\\otimes_A N=N/\\mathfrak nN$: the mutually inverse maps send $\\bar a\\otimes v$ to $av\\bmod\\mathfrak nN$ and $\\bar v$ to $1\\otimes v$; changing lifts changes a multiple of $\\mathfrak n$, and the tensor balancing relations check both composites. Consequently reduction embeds $K_e/\\mathfrak nK_e$ in $B_e=H_e/\\mathfrak nH_e$, and in particular $K_e\\cap\\mathfrak nH_e=\\mathfrak nK_e$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero); explicit residue-field tensor identification from Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "Let $C=\\ker(B\\to G\\otimes_A k)$. The injection in Step 2 identifies $K_e/\\mathfrak nK_e$ with $C_e$. By [lem-trf-normal-flat-double-initial-ideal], the tangent kernel in $k[X,Y]$ is $Ck[X,Y]$. By hypothesis that same kernel is generated by the $\\phi_i\\in B$. Evaluating $Y=0$ in these two ideals gives $C=(\\phi_1,\\ldots,\\phi_m)$ in $B$: elements of $C$ remain themselves, and the $\\phi_i$ remain themselves. Moreover $F_i\\bmod\\mathfrak n=\\phi_i$. Indeed write $f_i=\\sum_{|\\alpha|=d_i}a_\\alpha x^\\alpha$; its class in $H_{d_i}$ has coefficients $a_\\alpha\\bmod P$, whereas its degree-$d_i$ class in $\\operatorname{gr}_{\\mathfrak M}T$ has coefficients $a_\\alpha\\bmod\\mathfrak M$. These are exactly successive reduction modulo $\\mathfrak n$ under the fixed parameter identifications.",
+   "uses": [
+    "lem-trf-normal-flat-double-initial-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Existing normal-flat comparison node, with the explicit parameter maps of its statement; Hironaka (1970), normal-flat initial-ideal comparison used before (20.7), agent assembly."
+   }
+  },
+  {
+   "text": "For every $e$, the module $H_e$ has the finite monomial basis of degree $e$. Since $A$ is Noetherian, [lem-weil-pbc-noetherian-submodule-finite] makes $K_e$ finite. Let $L_e\\subseteq K_e$ be the $A$-span of the finitely many $X^\\alpha F_i$ with $|\\alpha|=e-d_i$ and $d_i\\leq e$. Step 3 says their reductions span $C_e$: take the degree-$e$ parts in $C=(\\phi_i)$. By Step 2 these are all of $K_e/\\mathfrak nK_e$. Applying [lem-weil-pbc-nakayama-local-generators] to $L_e\\subseteq K_e$ yields $L_e=K_e$. Thus every element of $K_e$ is a sum $\\sum_{d_i\\leq e}h_iF_i$ with $h_i\\in H_{e-d_i}$. This application is degreewise to finite modules, not to the unbounded graded sum.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IK (lemma-Noetherian-basic), 00DV (lemma-NAK), especially items (4) and (8)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and $u\\in\\mathfrak a\\cap P^n\\cap\\mathfrak M^{n+1}$. Expand $u=\\sum_{|\\alpha|=n}a_\\alpha x^\\alpha$; products of the generators of $P$ generate $P^n$. In degree $n$ of $\\operatorname{gr}_{\\mathfrak M}T=k[X,Y]$, this is $\\sum(a_\\alpha\\bmod\\mathfrak M)X^\\alpha=0$, since $u\\in\\mathfrak M^{n+1}$. Independence of distinct polynomial monomials gives $a_\\alpha\\in\\mathfrak M$ for every $\\alpha$. Therefore $u\\in\\mathfrak M P^n$, and its class $U\\in H_n=P^n/P^{n+1}$ belongs to $\\mathfrak nH_n$. Also $U\\in K_n$ because $u\\in\\mathfrak a$. Step 2 now gives $U\\in\\mathfrak nK_n$. This argument uses the parameter identification assumed in the statement and does not assume an intersection formula for the two filtrations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary monomial coefficient calculation in the specified tangent polynomial ring; no additional intersection lemma."
+   }
+  },
+  {
+   "text": "By Step 4, $K_n=\\sum_{d_i\\leq n}H_{n-d_i}F_i$, hence $\\mathfrak nK_n=\\sum_{d_i\\leq n}(\\mathfrak nH_{n-d_i})F_i$ by distributing finite sums and scalar products. Write $U=\\sum h_iF_i$ accordingly, with every coefficient of the homogeneous polynomial $h_i$ in $\\mathfrak n$. Lift these finitely many coefficients along $\\mathfrak M\\twoheadrightarrow\\mathfrak n$ and evaluate the monomials at the $x_j$. This gives $c_i\\in\\mathfrak M P^{n-d_i}$ whose degree-$(n-d_i)$ $P$-class is $h_i$. Multiplication of associated-graded classes then gives $u-\\sum c_if_i\\in P^{n+1}$. Every summand lies in $\\mathfrak a$, so the difference lies also in $\\mathfrak a$. This proves the required intersection. If no $d_i\\leq n$, Step 4 says $K_n=0$ and the argument gives $u\\in P^{n+1}$ with the empty sum. It includes $n=0$; it never uses reducedness of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary lifting of finitely many polynomial coefficients and multiplication of associated-graded classes, concluding the coefficient step before Hironaka (1970), (20.7)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-trf-normal-flat-double-initial-ideal",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent degreewise kernel/Nakayama proof assembled from Tags 00NQ, 00LN, 00HL, 00IK, 00DV and the existing normal-flat-double-initial-ideal node. Hironaka (1970), Lemma 20, p.179, is WANTED, not claimed read locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "initialIdeal|initial_ideal|normal.?flat|standard.?bas[ei]",
+   "results": "{\"t\": \"2026-10-23T21:18:39Z\", \"tool\": \"grep\", \"query\": \"initialIdeal|initial_ideal|normal.?flat|standard.?bas[ei]\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"c9570b61cf457e0b\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-normal-flat-initial-coefficient-lifting: In a regular local ring with a normally flat quotient, elements of an ideal in P power n and maximal ideal power n plus one have standard basis expressions modulo P power n plus one with coefficients in maximal ideal times P powers",
+   "results": "{\"t\": \"2026-10-23T21:18:39Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-normal-flat-initial-coefficient-lifting: In a regular local ring with a normally flat quotient, elements of an ideal in P power n and maximal ideal power n plus one have standard basis expressions modulo P power n plus one with coefficients in maximal ideal times P powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"IsLocalRing.basisQuotient_repr\", \"localCohomology.ideal_powers_initial\", \"factorPowSucc.isUnit_of_isUnit_image\", \"IsLocalRing.basisQuotient_apply\", \"Ideal.smithCoeffs\", \"PowerBasis.repr_gen_pow_isIntegral\", \"PowerSeries.ker_coeff_eq_max_ideal\"], \"digest\": \"a6fe505110cbe963\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Flat\", \"Ideal\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T21:18:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Flat\\\", \\\"Ideal\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-initial-coefficient-lifting: normal flatness gives initial ideal generators and lifts a vanishing residue relation with maximal ideal coefficients",
+   "results": "{\"t\": \"2026-10-23T21:18:42Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-initial-coefficient-lifting: normal flatness gives initial ideal generators and lifts a vanishing residue relation with maximal ideal coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallySmooth.exists_lift\", \"Module.exists_basis_of_span_of_flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"Algebra.Smooth.flat\"], \"digest\": \"4ad743ef9e9e7b1d\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-initial-coefficient-lifting: P adic standard basis normal flatness homogeneous kernel Nakayama lifts equations with residue zero",
+   "results": "{\"t\": \"2026-10-23T21:18:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-initial-coefficient-lifting: P adic standard basis normal flatness homogeneous kernel Nakayama lifts equations with residue zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.mk_untilt_eq_coeff_zero\", \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"PreTilt.exists_smodEq_untiltAux\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"PreTilt.untiltFun\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"WittVector.mk_fontaineTheta\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"36dce0d6133dc6b8\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isTrivialRelation_of_sum_smul_eq_zero|span_eq_top_of_tmul_eq_basis|linearCombination_bijective_of_flat",
+   "results": "{\"t\": \"2026-10-23T21:19:58Z\", \"tool\": \"grep\", \"query\": \"isTrivialRelation_of_sum_smul_eq_zero|span_eq_top_of_tmul_eq_basis|linearCombination_bijective_of_flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\"], \"digest\": \"4bfdee32fbe9f25e\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normally flat ideal in a regular local ring a standard basis lifts every equation with zero residue initial form using maximal ideal coefficients modulo the next power of the center ideal",
+   "results": "{\"t\": \"2026-10-23T21:20:00Z\", \"tool\": \"leanfinder\", \"query\": \"For a normally flat ideal in a regular local ring a standard basis lifts every equation with zero residue initial form using maximal ideal coefficients modulo the next power of the center ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\"], \"digest\": \"5209d165aa2e2c35\"} Read LocalRing/Module.lean:102-108,294-301 and Flat/EquationalCriterion.lean:167-180: these are Nakayama and flat-relation tools, not the normally-flat two-filtration coefficient assertion. Other hits concern smooth lifting, perfectoid completion, or univariate division; Submersive.lean:86-108 concerns a Jacobian matrix.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, Submodule",
+   "results": "{\"t\": \"2026-10-23T22:09:11Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsLocalRing, Submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.exists_basis_of_span_of_flat\", \"CovBy.length_baseChange\"], \"digest\": \"9554dc586f7d50f0\"} Read hits: local-ring flat bases and Nakayama generate finite modules; localization, ramification ideal quotients, homogeneous localization and Weierstrass division do not give the two-filtration normal-flat assertion. Source read: LocalRing/Module.lean:102-108,294-309; Flat/EquationalCriterion.lean:167-180. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "initialIdeal|initial_ideal|normal.?flat|standard.?bas[ei]",
+   "results": "{\"t\": \"2026-10-23T22:09:11Z\", \"tool\": \"grep\", \"query\": \"initialIdeal|initial_ideal|normal.?flat|standard.?bas[ei]\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\"], \"digest\": \"c320e739979c2970\"} Read hits: local-ring flat bases and Nakayama generate finite modules; localization, ramification ideal quotients, homogeneous localization and Weierstrass division do not give the two-filtration normal-flat assertion. Source read: LocalRing/Module.lean:102-108,294-309; Flat/EquationalCriterion.lean:167-180. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat graded quotient over a local ring: lifts of homogeneous generators of the fibre kernel generate the kernel by Nakayama",
+   "results": "{\"t\": \"2026-10-23T22:09:14Z\", \"tool\": \"leanfinder\", \"query\": \"Flat graded quotient over a local ring: lifts of homogeneous generators of the fibre kernel generate the kernel by Nakayama\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"Module.exists_basis_of_span_of_flat\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"Module.Flat.tfae_equational_criterion\", \"HomogeneousIdeal.toIdeal_irrelevant\"], \"digest\": \"60f2ed453010ff2d\"} Read hits: local-ring flat bases and Nakayama generate finite modules; localization, ramification ideal quotients, homogeneous localization and Weierstrass division do not give the two-filtration normal-flat assertion. Source read: LocalRing/Module.lean:102-108,294-309; Flat/EquationalCriterion.lean:167-180. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular local ring quotient normally flat along a parameter ideal has equations with coefficients in the maximal ideal modulo the next parameter ideal power",
+   "results": "{\"t\": \"2026-10-23T22:10:44Z\", \"tool\": \"leansearch\", \"query\": \"A regular local ring quotient normally flat along a parameter ideal has equations with coefficients in the maximal ideal modulo the next parameter ideal power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientToQuotientRangePowQuotSuccAux\", \"Ideal.quotientToQuotientRangePowQuotSuccAux.congr_simp\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Ideal.Quotient.factorPowSucc\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"8563c13b43c42ec1\"} Read hits: local-ring flat bases and Nakayama generate finite modules; localization, ramification ideal quotients, homogeneous localization and Weierstrass division do not give the two-filtration normal-flat assertion. Source read: LocalRing/Module.lean:102-108,294-309; Flat/EquationalCriterion.lean:167-180. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-flat-chart-relation-removal",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), proof of Lemma 20, (20.3)–(20.12), pp.177–181, isolated as the ideal-intersection assertion used there; the finite-jet generation hypothesis is exactly the use of (iv) in (20.7). Q37 refinement: proof of Lemma 20, (20.6) and the first coefficient lifting before (20.7), p.179; normal-flat initial-ideal statement attributed there to Hironaka (1964), Chapter II, Lemma 7",
+   "via": [
+    "lem-trf-normal-flat-chart-relation-removal",
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-normal-flat-initial-coefficient-lifting",
+  "worker": "stage1",
+  "summary": "Q82: unchanged statement; six-step proof using only existing nodes. Flatness identifies the residue kernel and its strict intersection; normal-flat double-initial comparison identifies the fibre equations; degreewise finite Nakayama lifts their generation; an explicit monomial calculation and coefficient lifts prove the required congruence. No new nodes and no Lean changes.",
+  "blueprint": "Historical resolution branch of lem-trf-local-term-locality, proof (1)--(2), through the retained via chain: Hironaka Lemma 20 (20.6), first coefficient lifting before (20.7), as specified in blueprint.from.place. Current latest blueprint read; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic parameter-prefix regularity and regularity of A; the unit has no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic specified polynomial identification of gr_P(T) for a regular parameter prefix; not a purity-route substitution."
+   },
+   {
+    "node": "lem-weil-pbc-flat-quotient-tensor-injective",
+    "why": "Generic exactness after tensoring a sequence with flat quotient, applied degreewise; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Finiteness of each kernel inside the finite monomial module, required for Nakayama."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-cf513d22a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-cf513d22a (reviewer sub-agent of L); spot-checked: PASS: the delivery is a one-level split with 0 new nodes and no Lean. The statement, stmt_deps, source and blueprint are byte-identical to live, and live and side-live both still show the item unsplit. There is no repair note and no SGA citation. No cycle: the transitive closure of lem-trf-normal-flat-double-initial-ideal (51 nodes) does not contain the item, and the only citer of the item is the parent chart-relation-removal, which the proof does not cite. I read all nine cited statements: 00NQ, 00LF, 00LN, 00HL, 00IK, 00DV (submodule form), 00HB, 00CV and the double-initial node, whose hypotheses are word-for-word the item's setup. Step 1: by 00NQ and 00LN, H = gr_P T = A[X] maps onto G in each degree, with K_e = (a∩P^e + P^{e+1})/P^{e+1}, and F_i ≠ 0. Step 2: G_e is flat as a direct summand of G; 00HL gives K_e ∩ nH_e = nK_e. Step 3: setting Y=0 in ker γ = C·k[X,Y] = (φ_i) gives C = (φ_i) in B, and F_i mod n = φ_i (checked coefficient by coefficient). Step 4: each K_e is finite by 00IK, so Nakayama applied one degree at a time gives K_e = span of the X^α F_i. Step 5: monomial independence puts every coefficient a_α in M, so U ∈ nH_n ∩ K_n = nK_n. Step 6: lifting coefficients gives c_i ∈ M·P^{n-d_i}, and the remainder lies in a ∩ P^{n+1}. Small cases checked: T = k[[x,y]], a = (x^2) with u = x^2 y and u = x^3 y; n = 0; and no d_i ≤ n. No duplicate found among normal-flat / standard-basis / initial-form nodes. The tool_uses are generic commutative algebra and accepted. Hironaka 1970 is marked WANTED and was not claimed as read; proof_origin is agent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalFlatInitialCoefficientLifting",
+  "declaration": "Hironaka.normalFlatInitialCoefficientLifting",
+  "file": "lean/Sheaf/RingTheory/NormalFlatInitialCoefficientLifting.lean",
+  "statement": "theorem normalFlatInitialCoefficientLifting {T : Type u} [CommRing T] [IsRegularLocalRing T] (r s : ℕ) (x : Fin (r + 1) → T) (y : Fin s → T) (hparams : IsLocalRing.IsRegularSystemOfParameters (List.ofFn x ++ List.ofFn y)) (b : Ideal T) (hb : b ≤ Ideal.span (Set.range x)) (hflat : Module.Flat ((T ⧸ b) ⧸ (Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.associatedGraded ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)))) (χ : MvPolynomial (Fin (r + 1) ⊕ Fin s) (IsLocalRing.ResidueField T) →+* Ideal.associatedGraded (IsLocalRing.maximalIdeal T)) (hχ : IsParameterGradedMap x y χ) (m : ℕ) (hm : 1 ≤ m) (f : Fin m → T) (d : Fin m → ℕ) (φ : Fin m → MvPolynomial (Fin (r + 1)) (IsLocalRing.ResidueField T)) (hdpos : ∀ i, 1 ≤ d i) (hf : ∀ i, f i ∈ b ∧ f i ∈ Ideal.span (Set.range x) ^ d i ∧ adicOrder (IsLocalRing.maximalIdeal T) (f i) = d i) (hφ : ∀ i, (φ i).IsHomogeneous (d i) ∧ ∃ hi : f i ∈ IsLocalRing.maximalIdeal T ^ d i, χ (MvPolynomial.rename Sum.inl (φ i)) = DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal T)) (d i) (Submodule.Quotient.mk ⟨f i, hi⟩)) (hbasis : IsMinimalGeneratingFamily (adicInitialIdeal (IsLocalRing.maximalIdeal T) b) (fun i ↦ χ (MvPolynomial.rename Sum.inl (φ i)))) (n : ℕ) (u : T) (hu : u ∈ b ⊓ Ideal.span (Set.range x) ^ n ⊓ IsLocalRing.maximalIdeal T ^ (n + 1)) : ∃ c : Fin m → T, (∀ i, d i ≤ n → c i ∈ IsLocalRing.maximalIdeal T * Ideal.span (Set.range x) ^ (n - d i)) ∧ u - ∑ i ∈ Finset.univ.filter (fun i ↦ d i ≤ n), c i * f i ∈ b ⊓ Ideal.span (Set.range x) ^ (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-82b5b8b9b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82b5b8b9b",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Statement matches node and Hironaka p.179 clause by clause: IsRegularLocalRing T; ordered regular parameters x:Fin(r+1), y:Fin s; b≤P; Module.Flat ((T/b)/I) (gr_I) with the canonical algebra structure; χ fixed by IsParameterGradedMap; adicOrder=d_i, f_i∈P^{d_i}, φ_i homogeneous of degree d_i with χ-image the class in M^{d_i}/M^{d_i+1}; IsMinimalGeneratingFamily of adicInitialIdeal M b (checked equal to ker gr_M T→gr_m R); conclusion has non-strict filter, M·P^(n−d_i) coefficients and remainder in b⊓P^(n+1). Edge cases n=0, empty sum, s=0, r=0 and non-reduced R covered. No hollow defs, sorry only, docstrings present, the three added def stmt_deps are landed and used. FIX (H2): hφ used NodalLocal.initialForm, owned by uncited def-sfb-nodal-tangent-comparison-data; inlined the identical DirectSum.of/Submodule.Quotient.mk body, dropped the unused open, added one docstring sentence; lean-record statement updated verbatim. nt_compile --json clean (exit 0); broken control copy fails as expected."
+ }
+}

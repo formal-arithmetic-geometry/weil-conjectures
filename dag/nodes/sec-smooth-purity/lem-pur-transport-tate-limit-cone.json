@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-transport-tate-limit-cone",
+ "kind": "statement",
+ "title": "Pullback preserves the actual integral Tate limit cone",
+ "statement": "Let $\\ell$ be prime and let $f:X\\to Y$ be a morphism of schemes such that $\\ell$ is invertible in all residue fields of X and Y. Use the actual all-natural-level diagram F_Y=tateModuleSystem Y ell of [def-pur-condensed-tate-twists] and the ordinary internal-module functor U=CondensedRing.upperStar (continuousMapRingObj Z_ell) f of [def-sfb-module-upper-star]. The cone U.mapCone(limit.cone F_Y) is limiting. Its vertex is U(tateModule Y ell), its projections are U.map(limit.pi F_Y n), and the target diagram is F_Y followed by U. This says nothing about comparison with the root tower on X or normalization of finite comparisons, and it does not assert preservation of unrelated infinite limits.",
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-sfb-module-upper-star"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, inverse limit represented by the affine limit of finite etale root schemes, and base change of that limit."
+ },
+ "proof": [
+  {
+   "text": "Apply tateLevelRepresentation at every natural level. The helper lift_representable_diagram from NativeIntegralTateTowerLimit transports the actual transitions through fully faithful lifted Yoneda, giving a representing diagram D and a natural isomorphism to the underlying set-valued Tate diagram. No compatible choice of bases at different levels is assumed.",
+   "uses": [
+    "lem-pur-transport-tate-level-representation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reindex D along AsSmall.equiv so the source library affine-limit construction has the required small-index universe. Apply the proved private finiteEtale_geometric_limit from NativeIntegralTateTowerLimit: the affine scheme limit is weakly etale over Y, hence is an object of Y.ProEt, and base change preserves its limit. Lifted Yoneda preserves limits. The proved representableInverseImageIso identifies its inverse image with Yoneda of base change. Transfer preservation through that natural isomorphism, back through the index equivalence, and through the represented diagram isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved abelianForgetInverseImageIso from NativeIntegralTateTowerLimit, and preservation and reflection of limits by sheaf composition with abelian forgetting, to obtain preservation on the abelian Tate diagram. The source private helpers used here are proved generic statements; the public spIntegralTwist_inverseImage_isLimit theorem for the different O_E diagram is not used. The module functor followed by forgetting is naturally isomorphic to module forgetting followed by abelian inverse image: whisker extendScalarsIsoComapInv by mapMod and the target module forgetful functor. Transfer preservation through this comparison and reflect through target module forgetting. Applying isLimitOfPreserves to limit.isLimit gives exactly the displayed cone.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-sfb-module-upper-star",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-transport-tate-level-representation",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "def-sfb-module-upper-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph. Generic represented-diagram, affine-limit and abelian-forgetting arguments reused from proved private helpers of NativeIntegralTateTowerLimit; actual Z_ell module reflection by Q3.",
+  "group": "Q3",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image preserves the inverse limit of the tower of finite roots of unity on the pro etale site",
+   "results": "8 hits concerning directed inverse systems, profinite Galois limits and Profinite.asLimit. None concerns pro-etale inverse image or the integral module tower.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of the integral Tate module commutes with the inverse limit of roots of unity",
+   "results": "8 hits: cyclotomicCharacter.toZModPow, toFun, toFun_apply and related modular characters, number-field roots and Selmer groups. No scheme or sheaf pullback theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"Tate|tateModule|rootsOfUnity|inverseImage.*[Ll]imit\" Mathlib/CategoryTheory Mathlib/AlgebraicGeometry; rg -n \"tateModule|PullNormalized|rootTensorPull\" lean/Sheaf lean/WeilConjectures",
+   "results": "Mathlib has no pro-etale Tate module construction. Project hits include TransportRoot and TransportPull, the proved local-basis theorems in PoincareDuality, and spIntegralTwist_inverseImage_isLimit for the different O_E tower. No existing declaration gives this normalized finite diagram or preserves the particular Z_ell tateModuleSystem cone.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Reuse the existing coefficient, root and limit constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.TransportPull",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Canonical base-change comparison of the root-tower Tate line in f* K(d)[2d]; Integral twist paragraph, inverse limit represented by the affine limit of finite etale root schemes, and base change of that limit.",
+   "via": [
+    "def-pur-transport-canonical-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.TransportTateLimit",
+  "file": "lean/Sheaf/SecSmoothPurity/TransportTateLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PurityTransport.tateLimitCone",
+  "statement": "theorem tateLimitCone (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (ell : X.residueField x)]\n    [∀ y : Y, Invertible (ell : Y.residueField y)] :\n    Nonempty (IsLimit\n      ((CondensedRing.upperStar (Profinite.continuousMapRingObj ℤ_[ell]) f).mapCone\n        (limit.cone (tateModuleSystem Y ell))))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

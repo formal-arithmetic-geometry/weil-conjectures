@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+ "kind": "statement",
+ "title": "Naturality and K-flat computation of the tensor augmentation",
+ "statement": "Let $\\mathcal C$ be a site small in a coefficient universe [def-weil-size-convention], and let $R$ be a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], cochain complexes and their unbounded derived category with localization $Q$ [def-weil-abstract-derived-category]. Put $T(A,B)=\\operatorname{Tot}(A\\otimes_R B)$ with the signed direct-sum total [def-pc-tensor-complex-sheaves], and use the derived tensor and its specified K-flat representative comparisons of [lem-weil-pbc-site-derived-tensor-descent]. There is a canonical natural transformation on pairs of complexes\n$$\\rho_{A,B}:QA\\otimes_R^{\\mathbf L}QB\\longrightarrow Q T(A,B).$$\nFor arbitrary cochain maps $a:A\\to A'$ and $b:B\\to B'$ its naturality equation is\n$$Q T(a,b)\\circ\\rho_{A,B}=\\rho_{A',B'}\\circ(Qa\\otimes_R^{\\mathbf L}Qb).$$\nFor K-flat complexes $P,Q'$ with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], $\\rho_{P,Q'}$ is the inverse of the specified representative isomorphism $QT(P,Q')\\cong QP\\otimes_R^{\\mathbf L}QQ'$. For any K-flat resolutions $p:P\\to A$ and $q:Q'\\to B$ with flat terms, its normalization is\n$$\\rho_{A,B}\\circ(Qp\\otimes_R^{\\mathbf L}Qq)=QT(p,q)\\circ\\rho_{P,Q'}.$$\nThis construction is independent of the resolution choices. No boundedness or flatness of $A,B,A',B'$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, canonical horizontal tensor arrows and their computation by the two resolution augmentations in the proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sf-ringed-kflat-tensor-representative-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $D(f,g)=Qf\\otimes_R^{\\mathbf L}Qg$ for maps of complexes. For flat-term K-flat $P,N$ let $c_{P,N}:QT(P,N)\\xrightarrow{\\sim}QP\\otimes_R^{\\mathbf L}QN$ be the specified comparison. The descent node supplies this isomorphism and its naturality. Choose resolutions $p:P\\to A$, $q:N\\to B$ using the resolution node. Since localization inverts their quasi-isomorphisms, $D(p,q)$ is invertible. Define\n$$r(p,q)=QT(p,q)\\circ c_{P,N}^{-1}\\circ D(p,q)^{-1}.$$\nIt has source $QA\\otimes_R^{\\mathbf L}QB$ and target $QT(A,B)$; the ordinary target is not asserted to invert quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction), and 0FPH (lemma-tensor-pull-compatibility), horizontal resolution arrows."
+   }
+  },
+  {
+   "text": "First compare resolutions related by maps. Let $u:P_0\\to P$ and $v:N_0\\to N$ be quasi-isomorphisms between flat-term K-flat complexes. Naturality of $c$ gives\n$$QT(u,v)\\circ c_{P_0,N_0}^{-1}=c_{P,N}^{-1}\\circ D(u,v).$$\nFunctoriality gives $QT(pu,qv)=QT(p,q)QT(u,v)$ and $D(pu,qv)=D(p,q)D(u,v)$. Substitution in the definition in step 1 cancels $D(u,v)$ with its inverse, giving $r(pu,qv)=r(p,q)$. This uses only the specified comparison on K-flat pairs; no inverse of an ordinary tensor augmentation is used.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, independence of resolution; naturality of the K-flat representative comparison."
+   }
+  },
+  {
+   "text": "For two arbitrary choices $(p_i:P_i\\to A,q_i:N_i\\to B)$, $i=1,2$, apply strict-diagram replacement to the finite cospan $P_1\\to A\\leftarrow P_2$, and separately to $N_1\\to B\\leftarrow N_2$. It gives flat-term K-flat complexes $X_i,U,Y_i,V$, quasi-isomorphisms $e_i:X_i\\to P_i$, $r:U\\to A$, $f_i:Y_i\\to N_i$, $s:V\\to B$, and strict arrows $u_i:X_i\\to U$, $v_i:Y_i\\to V$ with $ru_i=p_ie_i$ and $sv_i=q_if_i$. These arrows are quasi-isomorphisms: on every cohomology object $H^n(u_i)=H^n(r)^{-1}H^n(p_i)H^n(e_i)$, and similarly for $v_i$. Step 2 therefore gives\n$$r(p_i,q_i)=r(p_ie_i,q_if_i)=r(ru_i,sv_i)=r(r,s).$$\nThus both choices give the same morphism. Define $\\rho_{A,B}$ to be this choice-independent value.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero) via the existing strict-diagram replacement theorem; Tag 06YU resolution independence. The finite-cospan argument is an agent expansion."
+   }
+  },
+  {
+   "text": "For arbitrary $a:A\\to A'$ and $b:B\\to B'$, replace the two walking-arrow diagrams by the strict-diagram theorem. This supplies flat-term K-flat resolutions $p:P\\to A$, $p':P'\\to A'$, $q:N\\to B$, $q':N'\\to B'$ and maps $\\alpha:P\\to P'$, $\\beta:N\\to N'$ with $ap=p'\\alpha$ and $bq=q'\\beta$. Neither $\\alpha$ nor $\\beta$ need be quasi-isomorphisms. Functoriality and comparison naturality give\n$$QT(a,b)QT(p,q)=QT(p',q')QT(\\alpha,\\beta),\\qquad QT(\\alpha,\\beta)c_{P,N}^{-1}=c_{P',N'}^{-1}D(\\alpha,\\beta),$$\n$$D(\\alpha,\\beta)D(p,q)^{-1}=D(p',q')^{-1}D(a,b).$$\nInserting these three identities into step 1 gives\n$$QT(a,b)\\rho_{A,B}=QT(p',q')c_{P',N'}^{-1}D(p',q')^{-1}D(a,b)=\\rho_{A',B'}D(a,b).$$\nStep 3 permits these diagram-adapted choices. This proves naturality on pairs of complexes, without descending $QT$ to pairs of derived objects.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH (lemma-tensor-pull-compatibility), resolution augmentation computation; Tag 077J via the strict-diagram replacement theorem. The displayed naturality calculation is an agent expansion."
+   }
+  },
+  {
+   "text": "If $P,N$ already are K-flat with flat terms, take their identity maps as resolutions in step 1. All identity factors disappear, so $\\rho_{P,N}=c_{P,N}^{-1}$. For arbitrary resolutions $p:P\\to A$, $q:N\\to B$, multiply the defining formula on the right by $D(p,q)$ to obtain\n$$\\rho_{A,B}D(p,q)=QT(p,q)c_{P,N}^{-1}=QT(p,q)\\rho_{P,N}.$$\nThis is the requested normalization for every choice by step 3. Existence of the resolutions and all diagram replacements used above hold for unbounded complexes, so no boundedness or flatness assumption has been imposed on $A,B,A',B'$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH (lemma-tensor-pull-compatibility), computation by the two augmentations, and Tag 06YS (lemma-K-flat-resolution)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 077J and 0FPH; explicit finite-diagram expansion of the resolution augmentation construction, using existing strict-diagram replacement and representative-descent statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ounit|[Cc]ounit.*tensor|derivedTensor",
+   "results": "{\"t\": \"2026-10-23T23:33:33Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Cc]ounit|[Cc]ounit.*tensor|derivedTensor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, \"counit\"",
+   "results": "{\"t\": \"2026-10-23T23:33:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftDerivedFunctor, \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\"], \"digest\": \"143ee827a10eb863\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the comparison from the derived tensor product to the ordinary tensor product of two unbounded complexes of sheaves of modules",
+   "results": "{\"t\": \"2026-10-23T23:33:33Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of the comparison from the derived tensor product to the ordinary tensor product of two unbounded complexes of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.prodComparison_natural_assoc\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison'_naturality\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison'_naturality_assoc\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonNatTrans\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Limits.prodComparisonNatTrans\"], \"digest\": \"11e0faac810013e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of complexes of sheaves of modules has a natural comparison to the ordinary total tensor induced by K-flat resolution augmentations",
+   "results": "{\"t\": \"2026-10-23T23:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"The derived tensor product of complexes of sheaves of modules has a natural comparison to the ordinary total tensor induced by K-flat resolution augmentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.tensorObj\", \"CategoryTheory.Tor'_map_app\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\"], \"digest\": \"f1f818ec566e5cf3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ounit|[Cc]ounit.*tensor|leftDerived₂",
+   "results": "{\"t\": \"2026-10-23T23:34:02Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Cc]ounit|[Cc]ounit.*tensor|leftDerived₂\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization functor from complexes of module sheaves to their derived category is lax monoidal, with tensorator from derived tensor to the localized ordinary total tensor",
+   "results": "{\"t\": \"2026-10-23T23:34:03Z\", \"tool\": \"leanfinder\", \"query\": \"The localization functor from complexes of module sheaves to their derived category is lax monoidal, with tensorator from derived tensor to the localized ordinary total tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\"], \"digest\": \"7108c9a7da73621c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ounit|[Cc]ounit.*tensor|derivedTensor",
+   "results": "{\"t\": \"2026-10-23T23:58:18Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Cc]ounit|[Cc]ounit.*tensor|derivedTensor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, \"counit\"",
+   "results": "{\"t\": \"2026-10-23T23:58:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftDerivedFunctor, \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\"], \"digest\": \"143ee827a10eb863\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product to ordinary tensor comparison natural transformation using K-flat resolutions of sheaves",
+   "results": "{\"t\": \"2026-10-23T23:58:18Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor product to ordinary tensor comparison natural transformation using K-flat resolutions of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.NatTrans.leftDerived\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonNatTrans\", \"LinearMap.tensorKerEquiv_apply\", \"CategoryTheory.Limits.prodComparisonNatTrans\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\"], \"digest\": \"59520ca46d19a1df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map from derived tensor of unbounded complexes of sheaves of modules to ordinary total tensor natural in cochain maps",
+   "results": "{\"t\": \"2026-10-23T23:58:20Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical map from derived tensor of unbounded complexes of sheaves of modules to ordinary total tensor natural in cochain maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.tensorHom\", \"HomologicalComplex.HasTensor\", \"CochainComplex.ιMapBifunctor\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\"], \"digest\": \"8b26d12161e1131a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerivedCounit|tensorBifunctorIso|fromLeftDerivedZero",
+   "results": "{\"t\": \"2026-10-23T23:59:25Z\", \"tool\": \"grep\", \"query\": \"totalLeftDerivedCounit|tensorBifunctorIso|fromLeftDerivedZero\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"156dfa0db6ff3714\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A total left derived bifunctor has a natural counit to the original bifunctor on complexes computed by any flat resolutions",
+   "results": "{\"t\": \"2026-10-23T23:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"A total left derived bifunctor has a natural counit to the original bifunctor on complexes computed by any flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.NatTrans.leftDerived\"], \"digest\": \"7f332485599339b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor-complex constructors do not construct the derived-to-ordinary augmentation; totalLeftDerivedCounit assumes a derived-functor existence instance and does not supply the site tensor or its specified K-flat normalization. Monoidal localization requires tensor to preserve all inverted maps, which fails on arbitrary complexes; fromLeftDerivedZero uses projective resolutions of objects, not unbounded module-sheaf complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for tensor compatibility: the derived-to-naive cup comparison of Stacks 0FPK. Supporting input in Tag 0FPK, final diagram, top polygon: compatibility of derived pullback with the derived-to-ordinary tensor arrow (Tag 0FPH). Prerequisite in the resolution diagram: naturality and resolution computation of the derived-to-ordinary tensor augmentation, before introducing pullback.",
+   "via": [
+    "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+    "lem-sfb-ringed-derived-naive-cup-comparison",
+    "lem-sfb-ringed-hypercohomology-edge-tensor",
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "worker": "stage1",
+  "summary": "Construct the tensor augmentation by the specified K-flat comparisons. Prove invariance under maps of resolutions, compare arbitrary resolutions by finite cospan replacements, prove naturality by strict arrow replacements, and compute identity and general normalization. No new nodes or statement changes.",
+  "blueprint": "Auxiliary prerequisite in the current blueprint det-thm-sf-ctf-stability-direct-images proof (3), the existing from.place chain through the derived-to-naive cup comparison: Tags 0FPK and 0FPH horizontal tensor augmentations. Steps 1 and 5 construct and normalize these arrows; steps 2-4 supply their omitted resolution independence and naturality. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The item already specifies this generic ringed-site derived tensor and its natural K-flat representative comparisons; the six-functor unit does not reconstruct this localization theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded flat-term K-flat resolution existence is the explicit 06YS input of 0FPH, independent of the constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Only the first clause is used, on finite cospans and walking arrows over the same coefficient site. It provides compatible resolutions needed for choice independence and naturality; no same-unit statement supplies strict diagram replacements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-193e1a8f3",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-193e1a8f3 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, all 5 cited statements and Stacks 0FPH (lemma-tensor-pull-compatibility, statement and proof). The statement is unchanged from its Q53 creation (same sha1, same stmt_deps); there are no new nodes and no repair note. Step 1 defines r(p,q)=QT(p,q)c^{-1}D(p,q)^{-1}. Step 2's cancellation is correct and elementary. Step 3 handles arbitrary resolutions by a strict cospan replacement (first clause of lem-weil-pbc-diagram-kflat-replacements only), with u_i a quasi-iso by two-out-of-three, giving r(p_i,q_i)=r(r,s). Step 4 uses walking-arrow replacements; descent naturality covers arbitrary maps α,β in P_R ('natural in both homotopy-category variables'), and the three identities substitute in the stated directions. Step 5 gets ρ=c^{-1} from identity resolutions, and the normalization follows by multiplying by D(p,q). No flatness or boundedness of A,B is used, and ρ is not claimed invertible (Z/2⊗^L Z/2 on the point over Z shows it is not). proof_deps equal the union of the step uses; no cycle. Checked as duplicates and rejected: single-tensor-augmentation-coherence (scheme, degree 0), trf one-sided normalization, fixed-tensor localization, pc derived-pullback-tensor and pd section comparison. Accepted the generic tool_uses: descent, kflat-resolution, diagram-replacements clause 1. No SGA. Minor: the letter r is used both for r(·,·) and for r:U→A in step 3; readable, so no fix."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedDerivedTensorAugmentationNaturality",
+  "declaration": "SheafOfModules.exists_unique_ringedTensorAugmentation",
+  "declarations": [
+   "SheafOfModules.ringedTensorAugmentationSource",
+   "SheafOfModules.ringedTensorAugmentationTarget",
+   "SheafOfModules.exists_unique_ringedTensorAugmentation",
+   "SheafOfModules.ringedTensorAugmentation",
+   "SheafOfModules.modelTensorAugmentationSource",
+   "SheafOfModules.modelTensorAugmentationTarget",
+   "SheafOfModules.modelTensorAugmentation_existsUnique",
+   "SheafOfModules.modelTensorAugmentation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedDerivedTensorAugmentationNaturality.lean",
+  "statement": "theorem exists_unique_ringedTensorAugmentation : ∃! ρ : ringedTensorAugmentationSource R ⟶ ringedTensorAugmentationTarget R, ∀ (P N : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (hN : CochainComplex.IsKFlatIndependentCoefficients N) (hPf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) (hNf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (N.X n)), ρ.app (P, N) = (representativeIso R P N hP hN hPf hNf).inv ∧ ∀ (A B : CochainComplex (Modules R) ℤ) (p : P ⟶ A) (q : N ⟶ B), QuasiIso p → QuasiIso q → (ringedTensorAugmentationSource R).map (Prod.mkHom p q) ≫ ρ.app (A, B) = ρ.app (P, N) ≫ (ringedTensorAugmentationTarget R).map (Prod.mkHom p q)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The natural transformation is on pairs of actual complexes; its naturality is structural. Its unique characterization gives the inverse of the published representativeIso on every flat-term K-flat pair and the normalization for every pair of resolution augmentations. The selected augmentation is chosen only from this uniqueness theorem. KFlatFixedTensorTriangulated supplies the existing packaging of the original descent tensor and specified representative comparisons; no tensor or flatness notion is redefined. Repair F2 (Q11): preserve the NI module, primary exists_unique_ringedTensorAugmentation, independent-universe interface and all four original declarations; append the four modelTensorAugmentation declarations in this same module for the existing equivalent RingedTensorModel presentation. This is an additional presentation at a common universe, not a generalization or rebinding."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9070b444",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after RETURN c4151ad8 (F1–F3); all three repairs applied, nothing else changed. Item Lean byte-identical apart from importing RingedDerivedTensorAugmentationNaturality instead of the removed companion; statement, proof and proof_deps unchanged. F1: new existing:true def node def-sfb-ringed-path-right-derived-data owns CategoryTheory.RingedPathRightDerived and the ringedPath* defs in Sheaf.Paper.RingedComparisonTensorAdjunction; statement field matches l.47–48; stmt_deps size/tensor-square-presentation/abstract-derived-category; cited instead of lem-sfb-ringed-comparison-tensor-adjunction. F2: NI's live module kept, only public import ProjectionMateExact and the four modelTensorAugmentation* declarations (byte-identical to the reviewed companion) appended; NI record keeps module and primary, declarations a strict superset. F3: def-sfb-ringed-site-global-derived-adjunction (unchanged) added to stmt_deps. Mechanical finding: the theorem stmt_dep lem-sfb-ringed-derived-tensor-augmentation-naturality is genuine, since modelTensorAugmentation = Classical.choose of that node's ∃! theorem (ρ pinned by representative isos and naturality). β = d.eta, uniquely the canonical mate via canonicalAdjunction at M=f_*I, a=counit, so no extra hypothesis. 0FPK square, naive ν, global clause without a final object, and edge cases (f=id, zero, unbounded, ℤ→ℤ/2, empty site) re-confirmed. No file changed, so no compile; the worker's per-file compiles and dry run are reported clean."
+ }
+}

@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-norm-frame-tensor-section-gluing",
+ "kind": "statement",
+ "title": "Norm transition frames and tensor-power section gluing",
+ "statement": "Let $p:Y\\to Z$ be a morphism of schemes [def-pc-scheme]. For each open $V\\subseteq Z$ let $\\nu_V:\\Gamma(p^{-1}V,\\mathcal O_Y)\\to\\Gamma(V,\\mathcal O_Z)$ preserve multiplication and $1$, and suppose these maps commute with restriction. Let $M$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], $(V_i)_{i\\in I}$ an open cover of $Z$, and $e_i$ a generating section of $M|_{p^{-1}V_i}$, meaning that $a\\mapsto ae_i$ is an isomorphism from the structure sheaf to that restriction. Define the unique units $u_{ij}$ on $p^{-1}(V_i\\cap V_j)$ by $e_i=u_{ij}e_j$, and set $v_{ij}=\\nu_{V_i\\cap V_j}(u_{ij})$. Then $v_{ij}$ are units satisfying $v_{ii}=1$, $v_{ji}=v_{ij}^{-1}$ and $v_{ik}=v_{ij}v_{jk}$ on triple intersections. There exist an invertible $\\mathcal O_Z$-module $N$ and generating sections $f_i$ on $V_i$ with $f_i=v_{ij}f_j$. For these fixed $N,f_i$, every integer $n\\geq1$ and section $s\\in\\Gamma(Y,M^{\\otimes n})$ determine a unique section $t\\in\\Gamma(Z,N^{\\otimes n})$ with $$t|_{V_i}=\\nu_{V_i}(b_i)f_i^{\\otimes n},\\qquad s|_{p^{-1}V_i}=b_i e_i^{\\otimes n}.$$ Here $M^{\\otimes n},N^{\\otimes n}$ are the tensor powers of [def-weil-pbc-ample-invertible-module]; they are invertible, $e_i^{\\otimes n},f_i^{\\otimes n}$ are generators, and their transition functions are $u_{ij}^n,v_{ij}^n$, respectively. No finiteness, power identity, or vanishing hypothesis on $p,\\nu$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCY (divisors-lemma-norm-invertible), 0BCZ (divisors-lemma-norm-map-invertible), and Section 0BCX (divisors-section-norms)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "On $p^{-1}(V_i\\cap V_j)$ the inverse of the frame isomorphism $a\\mapsto ae_j$ gives a unique coefficient $u_{ij}$ for $e_i$. Reversing the indices gives $e_j=u_{ji}e_i$, hence $u_{ij}u_{ji}=1$ by uniqueness of coefficients in the frame $e_i$. Thus these coefficients are units. On triple intersections substitute $e_j=u_{jk}e_k$ into $e_i=u_{ij}e_j$ and compare coefficients in $e_k$ to obtain $u_{ik}=u_{ij}u_{jk}$; the same uniqueness gives $u_{ii}=1$. All formulas use the restricted coefficients on the displayed intersection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCY, divisors-lemma-norm-invertible, proof: generating sections and their overlap units"
+   }
+  },
+  {
+   "text": "Apply $\\nu$ on each overlap. Multiplicativity and preservation of $1$ give $v_{ij}\\nu(u_{ji})=\\nu(1)=1$, so $v_{ij}$ is a unit and $v_{ji}=v_{ij}^{-1}$. They also give $v_{ii}=1$. Restriction compatibility lets us apply the triple-intersection map to the identity of step 1, obtaining $v_{ik}=v_{ij}v_{jk}$. These statements require neither additivity nor any power or vanishing axiom for $\\nu$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCY, divisors-lemma-norm-invertible, proof: the v cocycle"
+   }
+  },
+  {
+   "text": "Use part (2) of [lem-weil-pbc-glue-sheaves-of-modules] on $Z$ with local modules $\\mathcal O_{V_i}$ and $\\varphi_{ij}$ multiplication by $v_{ij}$ from chart $i$ to chart $j$. These are module isomorphisms, and $\\varphi_{jk}\\varphi_{ij}=\\varphi_{ik}$ by step 2. Obtain $N$ and $\\alpha_i:N|_{V_i}\\simeq\\mathcal O_{V_i}$ with $\\alpha_j=v_{ij}\\alpha_i$. Put $f_i=\\alpha_i^{-1}(1)$. Then $\\alpha_j(f_i)=v_{ij}$ and $\\alpha_j(f_j)=1$, whence $f_i=v_{ij}f_j$. These sections are frames. On any affine neighbourhood $W\\subseteq V_i$, $N|_W\\simeq\\mathcal O_W\\simeq\\widetilde{\\Gamma(W,\\mathcal O_W)}$ by [lem-weil-pbc-spec-tilde-free-module] with rank one; hence $N$ is quasi-coherent by [pqf-def-coherent] and locally free of rank one, so invertible by [def-sc-invertible-module].",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "pqf-def-coherent",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL (sheaves-lemma-glue-sheaves) and 00AM (sheaves-lemma-glue-sheaves-structures); applied to the cocycle of divisors Tag 0BCY"
+   }
+  },
+  {
+   "text": "For $M$ and $N$ separately, induct on $n\\geq1$. Tensor products remain invertible by (1) of [lem-weil-pbc-invertible-pullback-tensor], applied with the identity morphism. For frames, the base $n=1$ is given. At $n+1$, [lem-weil-pbc-module-restriction-tensor-comparison] identifies the restricted tensor product with the tensor product of the restricted factors and respects pure sections. Tensor the frame isomorphisms from the induction hypothesis and the original frame, and precompose with the inverse of $\\mathcal O\\otimes\\mathcal O\\simeq\\mathcal O$ from [lem-weil-pbc-module-tensor-symmetric-monoidal]. This gives the frame $e_i^{\\otimes(n+1)}$ (respectively $f_i^{\\otimes(n+1)}$). By bilinearity in [def-pur-sheaf-tensor-product], $(u_{ij}^{n}e_j^{\\otimes n})\\otimes(u_{ij}e_j)=u_{ij}^{n+1}e_j^{\\otimes(n+1)}$, and likewise for $v$. This proves all tensor-power, generator and transition assertions.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CT (modules-lemma-constructions-invertible (1)), Tag 01CD (modules-lemma-tensor-product-pullback), Section 01CA (modules-section-tensor-product), iterated"
+   }
+  },
+  {
+   "text": "Fix $n$ and $s$. The frame isomorphisms of step 4 give unique $b_i$ with $s=b_ie_i^{\\otimes n}$ on $p^{-1}V_i$. On an overlap, equality of the restrictions of $s$ and $e_i^{\\otimes n}=u_{ij}^ne_j^{\\otimes n}$ imply $b_j=b_i u_{ij}^n$. Restriction compatibility and multiplicativity give $\\nu(b_j)=\\nu(b_i)v_{ij}^n$ (the power identity here follows by induction from multiplication, not from a degree axiom). Consequently $\\nu(b_i)f_i^{\\otimes n}=\\nu(b_i)v_{ij}^nf_j^{\\otimes n}=\\nu(b_j)f_j^{\\otimes n}$ on $V_i\\cap V_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCZ, divisors-lemma-norm-map-invertible, proof: the local coefficient calculation, applied to a section of a tensor power"
+   }
+  },
+  {
+   "text": "The local sections in step 5 belong to the sheaf of modules $N^{\\otimes n}$, with the underlying abelian sheaf of [def-weil-sheaf-of-modules-category]. Since $(V_i)$ covers $Z$, the gluing and uniqueness axioms in [def-sc-zariski-site] give exactly one global section $t$ with these restrictions. This applies to every $n\\geq1$ and $s$, with the same $N,f_i$ of step 3. An empty cover can only cover the empty scheme; the same empty-cover sheaf axiom gives its unique section.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-zariski-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCZ, divisors-lemma-norm-map-invertible, proof: glue the compatible local coefficient expressions; sheaf axiom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-sc-zariski-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCY and 0BCZ, local-frame construction and coefficient calculation, with sheaves Tags 00AL/00AM and modules Tags 01CD/01CT; only the hypotheses used in those calculations are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given local frames of a line bundle and a restriction-compatible multiplicative norm on regular functions, glue norm transition functions and norm coefficients of all tensor power sections",
+   "results": "Read returned hits: IsLocalFrameOn.coeff_apply_of_mem, IsLocalFrameOn.eventually_eq_sum_coeff_smul, VectorBundleCore.inCoordinates_eq, inCoordinates_apply_eq₂, IsLocalFrameOn, IsLocalFrameOn.coeff, Trivialization.localFrame, IsLocalFrameOn.coeff_eq_of_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: no norm of scheme line bundles with the specified tensor-section coefficient rule."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(transition|cocycle|tensorPow)",
+   "results": "Read returned hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: no norm of scheme line bundles with the specified tensor-section coefficient rule."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"IsInvertible\"",
+   "results": "Read returned hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: no norm of scheme line bundles with the specified tensor-section coefficient rule."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiplicative map of structure sheaves glues norm line bundles and norm global sections from local trivializations",
+   "results": "Read returned hits: TopCat.Sheaf.interUnionPullbackConeLift, AlgebraicGeometry.StructureSheaf.comapFun, AlgebraicGeometry.StructureSheaf.comap, SheafOfModules.sectionsMap, Trivialization.coordChangeL_prod, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, smoothSheafCommRing.coeFun, AlgebraicGeometry.Proj.mul_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: no norm of scheme line bundles with the specified tensor-section coefficient rule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normed transition cocycles of invertible sheaves and compatible multiplicative coefficient maps on their tensor-power sections",
+   "results": "Read returned hits: CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCocycle.ev_trans, CategoryTheory.PresheafOfGroups.OneCocycle.ev_symm, CategoryTheory.PresheafOfGroups.OneCocycle.ev_refl, CategoryTheory.PresheafOfGroups.OneCocycle, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, Trivialization.coordChangeL_apply', Trivialization.coordChangeL_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: no norm of scheme line bundles with the specified tensor-section coefficient rule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restriction compatible multiplicative map on functions sends line bundle transition functions to a cocycle and glues tensor power sections",
+   "results": "Read returned hits: hom_trivializationAt, hom_trivializationAt_apply, hom_trivializationAt_baseSet, Trivialization.linearMapAt, Pretrivialization.continuousLinearMap, Trivialization.continuousLinearMap, Trivialization.coe_linearMapAt, Trivialization.coordChangeL_apply'",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state norm cocycle gluing for invertible scheme modules and all tensor-power sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"IsInvertible\"",
+   "results": "Read returned hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state norm cocycle gluing for invertible scheme modules and all tensor-power sections."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(transition|cocycle|tensorPow)",
+   "results": "Read returned hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state norm cocycle gluing for invertible scheme modules and all tensor-power sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiplicative map of structure sheaves glues norm line bundles and sections of tensor powers from local frames",
+   "results": "Read returned hits: TopCat.Sheaf.interUnionPullbackConeLift, AlgebraicGeometry.StructureSheaf.comapFun, AlgebraicGeometry.StructureSheaf.comap, SheafOfModules.sectionsMap, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, smoothSheafCommRing.coeFun, PresheafOfModules.Sheafify.map_smul, AlgebraicGeometry.StructureSheaf.toOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state norm cocycle gluing for invertible scheme modules and all tensor-power sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norm of a line bundle by applying a sheaf homomorphism of multiplicative monoids to its transition cocycle",
+   "results": "Read returned hits: hom_trivializationAt_apply, hom_trivializationAt, hom_trivializationAt_baseSet, trivialization_linear, Trivialization.linearMapAt, VectorBundle.trivialization_linear', VectorBundle, Pretrivialization.linearMapAt",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state norm cocycle gluing for invertible scheme modules and all tensor-power sections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-norm-invertible-sections",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tags 0BCY (divisors-lemma-norm-invertible) and 0BCZ (divisors-lemma-norm-map-invertible), applied to sections of tensor powers; Section 0BCX (divisors-section-norms) specifies the norm hypotheses. Re-split: Local-frame norm construction of Stacks 0BCY and coefficient calculation of 0BCZ; former item steps 2-4.",
+   "via": [
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-norm-frame-tensor-section-gluing",
+  "worker": "stage1",
+  "summary": "Verified the supplied generality against the local arguments in Stacks 0BCY/0BCZ, expanded the cocycle and coefficient equations, fixed the orientation of the gluing maps explicitly, and gave the tensor-frame induction and unique section gluing. Reuses existing general module-gluing and tensor nodes; no new nodes. The statement is unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration/tame-boundary route uses ample descent through finite covers. This item realizes its local-frame norm construction (Stacks 0BCY) and tensor-section coefficient argument (0BCZ), through lem-sfb-finite-norm-invertible-sections. Latest blueprint direct-images proof (3) and chapter/unit files were read; the imported auxiliary ancestry has no blueprint id (ancestor command returns None), retained as recorded.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Part (2) is the general Zariski gluing theorem for module sheaves with cocycle isomorphisms. It supplies the underlying sheaf for the norm transition cocycle; the unit supplies no substitute for general module gluing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-de1bd7ba4",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-de1bd7ba4 (reviewer sub-agent of L); spot-checked: PASS, no fixes, and I read the mathematics in full. The delivery is a 0-new-node split; the item's statement, source and stmt_deps are identical to live, where it is still unsplit; there is no repair note, no earlier review, no parallel split and no SGA. Source check: I read Stacks 0BCY and 0BCZ with their proofs. The orientation s_j = u_{jj'} s_{j'}, v = Norm(u) matches the item, and the item drops the degree and vanishing axioms correctly because the parent lem-sfb-finite-norm-invertible-sections handles them. Steps 1-2 are elementary: units, the inverse relation and the cocycle follow from uniqueness of coefficients and from multiplicativity, ν(1)=1 and restriction compatibility, with no additivity. Step 3: lem-weil-pbc-glue-sheaves-of-modules (2) with φ_ij = ·v_ij; the cocycle φ_ik = φ_jk∘φ_ij holds, α_j = v_ij α_i, so f_i = v_ij f_j. N is invertible via spec-tilde-free-module (n=1), pqf-def-coherent (1) and def-sc-invertible-module. Step 4: tensor powers by induction, using invertible-pullback-tensor (1) with f = id, the restriction-tensor comparison for the open immersion, the unitor l(r⊗s) = rs from the symmetric monoidal node, and bilinearity; this gives u^{n+1} and v^{n+1}. The convention F^m⊗F matches def-pur-sheaf-tensor-product. Steps 5-6: b_j = b_i u_ij^n and ν(b_i) f_i^n = ν(b_j) f_j^n on overlaps, then the sheaf axiom gives a unique t. Tested: one chart, n = 1, ν = p = id, empty p^{-1}V_i (forces v = 1, consistent), empty cover. Duplicates: lem-sc-glue-component-transition-cocycle covers only the step-3 sub-gluing; the other 0BCY/norm nodes (pur Kummer determinant norm, sfb function-norm nonvanishing, orbit-pair norm) and the sc tensor-power comparison nodes are not duplicates. Route: sk-thm-p1 and sk-thm-reduction are reached transitively from sk-thm-sf-ctf-stability; the declared tool_use for lem-weil-pbc-glue-sheaves-of-modules is accepted. proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.NormFrameTensorSectionGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.norm_frame_tensor_section_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.norm_frame_tensor_section_gluing",
+   "AlgebraicGeometry.Scheme.Modules.tensorPowLocalSection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/NormFrameTensorSectionGluing.lean",
+  "statement": "theorem norm_frame_tensor_section_gluing {Y Z : Scheme.{u}} (p : Y ⟶ Z) (ν : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) →* Γ(Z, V)) (hν : ∀ (V W : Z.Opens) (h : W ≤ V) (a : Γ(Y, p ⁻¹ᵁ V)), ν W (Y.presheaf.map (homOfLE (p.preimage_mono h)).op a) = Z.presheaf.map (homOfLE h).op (ν V a)) (M : Y.Modules) [M.IsInvertible] (I : Type w) (V : I → Z.Opens) (hcover : ⨆ i, V i = ⊤) (e : ∀ i : I, Γ(M, p ⁻¹ᵁ V i)) (he : ∀ i : I, IsFreeGenerator (e i)) : ∃ uij : ∀ i j : I, Γ(Y, p ⁻¹ᵁ (V i ⊓ V j))ˣ, (∀ i j : I, M.presheaf.map (homOfLE (p.preimage_mono inf_le_left)).op (e i) = (uij i j : Γ(Y, p ⁻¹ᵁ (V i ⊓ V j))) • M.presheaf.map (homOfLE (p.preimage_mono inf_le_right)).op (e j) ∧ ∀ a : Γ(Y, p ⁻¹ᵁ (V i ⊓ V j))ˣ, M.presheaf.map (homOfLE (p.preimage_mono inf_le_left)).op (e i) = (a : Γ(Y, p ⁻¹ᵁ (V i ⊓ V j))) • M.presheaf.map (homOfLE (p.preimage_mono inf_le_right)).op (e j) → a = uij i j) ∧ ∃ vij : ∀ i j : I, Γ(Z, V i ⊓ V j)ˣ, (∀ i j : I, vij i j = Units.map (ν (V i ⊓ V j)) (uij i j)) ∧ (∀ i : I, vij i i = 1) ∧ (∀ (i j : I) (W : Z.Opens) (hi : W ≤ V i) (hj : W ≤ V j), Units.map (Z.presheaf.map (homOfLE (le_inf hj hi)).op).hom.toMonoidHom (vij j i) = (Units.map (Z.presheaf.map (homOfLE (le_inf hi hj)).op).hom.toMonoidHom (vij i j))⁻¹) ∧ (∀ (i j k : I) (W : Z.Opens) (hi : W ≤ V i) (hj : W ≤ V j) (hk : W ≤ V k), Units.map (Z.presheaf.map (homOfLE (le_inf hi hk)).op).hom.toMonoidHom (vij i k) = Units.map (Z.presheaf.map (homOfLE (le_inf hi hj)).op).hom.toMonoidHom (vij i j) * Units.map (Z.presheaf.map (homOfLE (le_inf hj hk)).op).hom.toMonoidHom (vij j k)) ∧ ∃ N : Z.Modules, N.IsInvertible ∧ ∃ f : ∀ i : I, Γ(N, V i), (∀ i : I, IsFreeGenerator (f i)) ∧ (∀ i j : I, N.presheaf.map (homOfLE inf_le_left).op (f i) = (vij i j : Γ(Z, V i ⊓ V j)) • N.presheaf.map (homOfLE inf_le_right).op (f j)) ∧ ∀ (n : ℕ), 1 ≤ n → (M.tensorPow n).IsInvertible ∧ (N.tensorPow n).IsInvertible ∧ (∀ i : I, IsFreeGenerator (tensorPowLocalSection (e i) n)) ∧ (∀ i : I, IsFreeGenerator (tensorPowLocalSection (f i) n)) ∧ (∀ i j : I, (M.tensorPow n).presheaf.map (homOfLE (p.preimage_mono inf_le_left)).op (tensorPowLocalSection (e i) n) = (uij i j : Γ(Y, p ⁻¹ᵁ (V i ⊓ V j))) ^ n • (M.tensorPow n).presheaf.map (homOfLE (p.preimage_mono inf_le_right)).op (tensorPowLocalSection (e j) n)) ∧ (∀ i j : I, (N.tensorPow n).presheaf.map (homOfLE inf_le_left).op (tensorPowLocalSection (f i) n) = (vij i j : Γ(Z, V i ⊓ V j)) ^ n • (N.tensorPow n).presheaf.map (homOfLE inf_le_right).op (tensorPowLocalSection (f j) n)) ∧ ∀ s : Γ(M.tensorPow n, ⊤), ∃ b : ∀ i : I, Γ(Y, p ⁻¹ᵁ V i), (∀ i : I, (M.tensorPow n).presheaf.map (homOfLE le_top).op s = b i • tensorPowLocalSection (e i) n ∧ ∀ a : Γ(Y, p ⁻¹ᵁ V i), (M.tensorPow n).presheaf.map (homOfLE le_top).op s = a • tensorPowLocalSection (e i) n → a = b i) ∧ ∃! t : Γ(N.tensorPow n, ⊤), ∀ i : I, (N.tensorPow n).presheaf.map (homOfLE le_top).op t = ν (V i) (b i) • tensorPowLocalSection (f i) n",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a70c7b3d1",
+  "group": "O3",
+  "result": "pass",
+  "note": "Clause-by-clause match of norm_frame_tensor_section_gluing against the node and Stacks 0BCY/0BCZ: p; ν as MonoidHom (no additivity); hν restriction compatibility; [M.IsInvertible]; arbitrary I:Type w cover via ⨆=⊤; IsFreeGenerator (bijective r↦r•e|_W on every subopen = O≅M|_U); u_ij units with e_i=u_ij e_j and uniqueness among units; v=Units.map ν u; v_ii=1, inverse and cocycle laws on any W in the intersections (equivalent); ∃N invertible, frames f_i=v_ij f_j; ∀n≥1 after fixed N,f: M^n,N^n invertible, frame powers via tensorPowLocalSection matching tensorPow M⊗M^n, transitions u^n,v^n; unique b_i, ∃! t with t|V_i=ν(b_i)f_i^n. Edge cases fine (empty I, zero rings, ν=1). Item changes only in lean; dep records identical to live; lean.statement verbatim; only sorry; helper has real data; docstrings with source and blueprint; report has Worker report and Second reading by O3. Notes: IsFreeGenerator is owned by def-sc-local-free-generator, not in stmt_deps (node defines it inline, faithful); identical frame-power helpers exist (private InvertibleSectionRing.tensorPowLocalSection, public quotientFramePower and lineProjFramePower in theorem-node modules); maintainer consolidation. No compile needed (no change)."
+ }
+}

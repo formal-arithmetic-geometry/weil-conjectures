@@ -1,0 +1,481 @@
+{
+ "id": "lem-sfb-contractive-extension-from-admissible-values",
+ "kind": "statement",
+ "title": "Contractive global extension from admissible scalar values",
+ "statement": "Let $K$ be a field [def-weil-field] with a multiplicative absolute value $|\\cdot|:K\\to\\mathbf R_{\\geq0}$ satisfying $|a|=0\\iff a=0$, $|1|=1$, $|ab|=|a||b|$, and $|a+b|\\leq\\max(|a|,|b|)$. Let $V$ be a $K$-vector space with a norm $\\|\\cdot\\|:V\\to\\mathbf R_{\\geq0}$ satisfying $\\|v\\|=0\\iff v=0$, $\\|av\\|=|a|\\|v\\|$, and $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$. A $K$-linear map means an additive map preserving multiplication by scalars. Assume the following scalar-value condition: for every $K$-linear subspace $U\\subseteq V$, every $K$-linear $g:U\\to K$ with $|g(u)|\\leq\\|u\\|$ for all $u\\in U$, and every $x\\in V\\setminus U$, there is $b\\in K$ with $|b-g(u)|\\leq\\|x-u\\|$ for every $u\\in U$. Then, for every $K$-linear subspace $W\\subseteq V$ and every $K$-linear $f:W\\to K$ satisfying $|f(w)|\\leq\\|w\\|$ for every $w\\in W$, there exists a $K$-linear $h:V\\to K$ such that $h(w)=f(w)$ for every $w\\in W$ and $|h(v)|\\leq\\|v\\|$ for every $v\\in V$. No completeness, compactness, closedness, or dimension hypothesis is imposed on $V$ or $W$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel finite-field projection input; extension on U+Kx and maximal partial graphs, old projection proof steps 4-6. Agent-formulated auxiliary; exact external reference WANTED (Ingleton scalar extension theorem)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $W,f$ as in the statement. To verify one-vector extendability, take any subspace $W\\subseteq U\\subseteq V$, any contractive linear extension $g:U\\to K$ of $f$, and any $x\\notin U$. The scalar-value hypothesis applied to these $U,g,x$ gives $b\\in K$ with $|b-g(z)|\\leq\\|x-z\\|$ for all $z\\in U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: the assumed admissible value for an arbitrary bounded partial extension"
+   }
+  },
+  {
+   "text": "Every vector of $U+Kx$ has a unique expression $u+ax$ with $u\\in U$, $a\\in K$: if $u+ax=u\\prime+a\\prime x$ and $a\\ne a\\prime$, then $x=(a-a\\prime)^{-1}(u\\prime-u)\\in U$, a contradiction; hence $a=a\\prime$ and $u=u\\prime$. Define $G(u+ax)=g(u)+ab$. For $u,v\\in U$ and $a,c,t\\in K$, the formulas $G((u+ax)+(v+cx))=g(u)+g(v)+(a+c)b=G(u+ax)+G(v+cx)$ and $G(t(u+ax))=tg(u)+tab=tG(u+ax)$ prove linearity. Taking $a=0$ gives $G|_U=g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: explicit linear map on the direct sum U+Kx"
+   }
+  },
+  {
+   "text": "If $a=0$, then $|G(u)|=|g(u)|\\leq\\|u\\|$. If $a\\ne0$, put $z=-a^{-1}u\\in U$. Then $u+ax=a(x-z)$ and $G(u+ax)=a(b-g(z))$, so the chosen inequality and multiplicativity give $$|G(u+ax)|=|a|\\,|b-g(z)|\\leq |a|\\,\\|x-z\\|=\\|u+ax\\|.$$ Thus the explicitly constructed extension has the same contractive bound on all of $U+Kx$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: normalization of each nonzero scalar coefficient and the contractive estimate"
+   }
+  },
+  {
+   "text": "For nonnegative real numbers $r,s$, if $r\\leq s$ then $\\max(r,s)=s\\leq r+s$, and otherwise $\\max(r,s)=r\\leq r+s$. Applying this to $|a|,|b|$ and to $\\|v\\|,\\|w\\|$ shows that the given scalar absolute value and vector norm satisfy the ordinary triangle inequalities. All other field, absolute-value and norm axioms required by the bounded-extension lemma are already explicit hypotheses of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: ordinary triangle inequalities needed by the existing bounded-extension lemma"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-extension-zorn] with the given $K,V,W,f$ and $C=1$. Step 4 verifies its triangle inequalities, $1>0$ verifies its constant hypothesis, and the bound on $f$ is exactly $|f(w)|\\leq 1\\|w\\|$. For each $W\\subseteq U\\subseteq V$, each linear $g:U\\to K$ restricting to $f$ with $|g(u)|\\leq1\\|u\\|$, and each $x\\notin U$, steps 1–3 give the required linear $G:U+Kx\\to K$, with $G|_U=g$ and $|G(y)|\\leq1\\|y\\|$. The cited global-existence conclusion therefore gives a linear $h:V\\to K$ restricting to $f$ with $|h(v)|\\leq1\\|v\\|=\\|v\\|$ for every $v$. No completeness, compactness, closedness, or dimension condition is required by that conclusion.",
+   "uses": [
+    "lem-sfb-bounded-extension-zorn"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: maximal partial-graph assembly using the existing bounded-extension lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-extension-zorn"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary scalar tame-kernel projection expansion: explicit one-vector formula followed by the existing conditional Zorn extension principle; this argument is not printed in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spherically|\\\\bIngleton\\\\b|nonarchimedean.*(Hahn|functional)|admissible.*ball",
+   "results": {
+    "t": "2026-10-22T06:05:32Z",
+    "tool": "grep",
+    "query": "spherically|\\\\bIngleton\\\\b|nonarchimedean.*(Hahn|functional)|admissible.*ball",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_extension_norm_eq\"",
+   "results": {
+    "t": "2026-10-22T06:05:33Z",
+    "tool": "loogle",
+    "query": "\"exists_extension_norm_eq\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "BoundedContinuousFunction.exists_extension_norm_eq_of_isClosedEmbedding'",
+     "BoundedContinuousFunction.exists_extension_norm_eq_of_isClosedEmbedding"
+    ],
+    "digest": "8bb1863c03811c3b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exists_extension_norm_eq requires IsRCLikeNormedField (HahnBanach.lean:40-46); LinearMap.exists_extend has no contractive bound (Basis/VectorSpace.lean:289-296). Tietze extensions are not linear extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*extend|extend.*exists|Hahn.Banach",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "grep",
+    "query": "exists.*extend|extend.*exists|Hahn.Banach",
+    "sub": "LinearAlgebra",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/LinearPMap.lean"
+    ],
+    "digest": "e361e1a9d9b16641"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "grep",
+   "query": "nonarchimedean|spherically|\\\\bIngleton\\\\b",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "grep",
+    "query": "nonarchimedean|spherically|\\\\bIngleton\\\\b",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A contractive scalar valued linear map on a subspace extends to the whole vector space if all one vector extension ball constraints are solvable",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "leansearch",
+    "query": "A contractive scalar valued linear map on a subspace extends to the whole vector space if all one vector extension ball constraints are solvable",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap.exists_extend\"",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "loogle",
+    "query": "\"LinearMap.exists_extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "LinearMap.exists_extend",
+     "LinearMap.exists_extend_of_notMem"
+    ],
+    "digest": "d2721ccaccc9741c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exists_extension_norm_eq requires IsRCLikeNormedField (HahnBanach.lean:40-46); LinearMap.exists_extend has no contractive bound (Basis/VectorSpace.lean:289-296). Tietze extensions are not linear extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zorn lemma extension of a bounded scalar valued linear functional using compatible admissible values for each vector outside its domain",
+   "results": {
+    "t": "2026-10-22T06:06:03Z",
+    "tool": "leanfinder",
+    "query": "Zorn lemma extension of a bounded scalar valued linear functional using compatible admissible values for each vector outside its domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RieszExtension.step",
+     "RieszExtension.exists_top",
+     "exists_extension_of_le_sublinear",
+     "riesz_extension",
+     "Module.Baer.ExtensionOf.max",
+     "Module.Baer.extensionOfMax",
+     "Module.Baer.extensionOfMax_le",
+     "Module.Baer.extensionOfMax_is_max"
+    ],
+    "digest": "5e4ce16009526dd0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RieszExtension.exists_top/step and exists_extension_of_le_sublinear are real cone theorems (Convex/Cone/Extension.lean:53,65,113,160); Baer maximal algebraic extensions have no norm bound. HahnBanach.lean:40-46 requires IsRCLikeNormedField, and dense extensions require density."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal contractive partial linear functional on an arbitrary nonarchimedean normed space is everywhere defined provided every one dimensional enlargement has an admissible scalar value",
+   "results": {
+    "t": "2026-10-22T06:06:22Z",
+    "tool": "leanfinder",
+    "query": "Maximal contractive partial linear functional on an arbitrary nonarchimedean normed space is everywhere defined provided every one dimensional enlargement has an admissible scalar value",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "RieszExtension.exists_top",
+     "RieszExtension.step",
+     "Module.Baer.extensionOfMax_is_max",
+     "Module.Baer.extensionOfMax_to_submodule_eq_top",
+     "Real.exists_extension_norm_eq",
+     "exists_extension_norm_eq",
+     "ContinuousLinearMap.exists_lt_apply_of_lt_opNorm"
+    ],
+    "digest": "afc645f8da8304b5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RieszExtension.exists_top/step and exists_extension_of_le_sublinear are real cone theorems (Convex/Cone/Extension.lean:53,65,113,160); Baer maximal algebraic extensions have no norm bound. HahnBanach.lean:40-46 requires IsRCLikeNormedField, and dense extensions require density."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonarchimedean contractive linear functional extension from solvable scalar ball constraints using maximal partial linear maps",
+   "results": {
+    "t": "2026-10-22T06:06:47Z",
+    "tool": "leansearch",
+    "query": "Nonarchimedean contractive linear functional extension from solvable scalar ball constraints using maximal partial linear maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "Real.exists_extension_norm_eq",
+     "exists_extension_norm_eq",
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "IsNonarchimedean",
+     "ContinuousLinearMap.extendTo𝕜",
+     "LinearMap.extendOfNorm_eq",
+     "RieszExtension.step"
+    ],
+    "digest": "a4d9095f3b33c031"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RieszExtension.exists_top/step and exists_extension_of_le_sublinear are real cone theorems (Convex/Cone/Extension.lean:53,65,113,160); Baer maximal algebraic extensions have no norm bound. HahnBanach.lean:40-46 requires IsRCLikeNormedField, and dense extensions require density."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearPMap.supSpanSingleton\"",
+   "results": {
+    "t": "2026-10-22T12:03:53Z",
+    "tool": "loogle",
+    "query": "\"LinearPMap.supSpanSingleton\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "LinearPMap.supSpanSingleton",
+     "LinearPMap.supSpanSingleton_apply_self",
+     "LinearPMap.supSpanSingleton_apply_mk_of_mem",
+     "LinearPMap.supSpanSingleton_apply_of_mem",
+     "LinearPMap.supSpanSingleton_apply_smul_self",
+     "LinearPMap.supSpanSingleton_apply_mk"
+    ],
+    "digest": "e3d3e7e3257c0139"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LinearPMap.supSpanSingleton, LinearAlgebra/LinearPMap.lean:535–578, constructs an algebraic one-vector extension but asserts no bound; the item also requires global extension."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_extension_norm_eq|norm_extendOfNorm_apply_le",
+   "results": {
+    "t": "2026-10-22T12:03:53Z",
+    "tool": "grep",
+    "query": "exists_extension_norm_eq|norm_extendOfNorm_apply_le",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Operator/Extend.lean",
+     "Mathlib/Analysis/Normed/Operator/Extend.lean",
+     "Mathlib/Analysis/Normed/Operator/Extend.lean",
+     "Mathlib/Analysis/Normed/Operator/Extend.lean"
+    ],
+    "digest": "d73e407fd7eddaa6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: HahnBanach.lean:40–46 requires IsRCLikeNormedField; Convex/Cone/Extension is real-linear; Operator/Extend.lean:182–204 requires complete target and a dense embedding; algebraic Baer and one-vector extensions have no contractive bound. None states the present arbitrary-field conditional extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a bounded linear functional by choosing admissible scalar values then applying Zorn lemma over any valued field",
+   "results": {
+    "t": "2026-10-22T12:03:53Z",
+    "tool": "leansearch",
+    "query": "Extend a bounded linear functional by choosing admissible scalar values then applying Zorn lemma over any valued field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "exists_extension_norm_eq",
+     "Real.exists_extension_norm_eq",
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "RieszExtension.step",
+     "RieszExtension.exists_top",
+     "ContinuousLinearMap.extendTo𝕜",
+     "TietzeExtension.of_tvs"
+    ],
+    "digest": "88aafe33b95f921e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: HahnBanach.lean:40–46 requires IsRCLikeNormedField; Convex/Cone/Extension is real-linear; Operator/Extend.lean:182–204 requires complete target and a dense embedding; algebraic Baer and one-vector extensions have no contractive bound. None states the present arbitrary-field conditional extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contractive linear functional on a subspace extends to the entire nonarchimedean normed vector space if every outside vector has a scalar satisfying all extension inequalities",
+   "results": {
+    "t": "2026-10-22T12:04:02Z",
+    "tool": "leanfinder",
+    "query": "A contractive linear functional on a subspace extends to the entire nonarchimedean normed vector space if every outside vector has a scalar satisfying all extension inequalities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "exists_extension_of_le_sublinear",
+     "LinearMap.extendOfNorm",
+     "Real.exists_extension_norm_eq",
+     "LinearEquiv.norm_extend_le",
+     "LinearMap.norm_extendOfNorm_apply_le",
+     "riesz_lemma_of_norm_lt",
+     "LinearMap.extendOfNorm_unique"
+    ],
+    "digest": "720b3eaeddfdeb1e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: HahnBanach.lean:40–46 requires IsRCLikeNormedField; Convex/Cone/Extension is real-linear; Operator/Extend.lean:182–204 requires complete target and a dense embedding; algebraic Baer and one-vector extensions have no contractive bound. None states the present arbitrary-field conditional extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal bounded partial linear map is total when all one dimensional scalar ball constraints have a solution",
+   "results": {
+    "t": "2026-10-22T12:04:53Z",
+    "tool": "leanfinder",
+    "query": "Maximal bounded partial linear map is total when all one dimensional scalar ball constraints have a solution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "RieszExtension.exists_top",
+     "Module.Baer.extensionOfMax_to_submodule_eq_top",
+     "LinearMap.extendOfNorm",
+     "LinearMap.mem_span_iff_bound",
+     "RieszExtension.step",
+     "Real.exists_extension_norm_eq",
+     "exists_extension_norm_eq"
+    ],
+    "digest": "d4fac7c159360ddb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: HahnBanach.lean:40–46 requires IsRCLikeNormedField; Convex/Cone/Extension is real-linear; Operator/Extend.lean:182–204 requires complete target and a dense embedding; algebraic Baer and one-vector extensions have no contractive bound. None states the present arbitrary-field conditional extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "spherically|Ingleton|admissible.*(scalar|value)|contractive.*extend",
+   "results": {
+    "t": "2026-10-22T12:04:53Z",
+    "tool": "grep",
+    "query": "spherically|Ingleton|admissible.*(scalar|value)|contractive.*extend",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/RCLike/Inner.lean",
+     "Mathlib/Analysis/RCLike/Inner.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean"
+    ],
+    "digest": "0b50c8257c8ffba3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned singleton/subsingleton substring hits do not concern scalar admissible values or bounded extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-one-finite-subfield-projection",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, Paragraph (3), scalar tame-kernel finite-field projection input; extension on U+Kx and maximal partial graphs, old projection proof steps 4-6.",
+   "via": [
+    "lem-sfb-norm-one-finite-subfield-projection",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-contractive-extension-from-admissible-values",
+  "worker": "stage1",
+  "summary": "Q100 repaired returned head 2b855e98962 against the current DAG: retained the scalar construction and exact bound, reread the now split-and-reviewed lem-sfb-bounded-extension-zorn and def-weil-field, separated the ordinary-triangle verification as an elementary step, and matched every quantified local-extension hypothesis explicitly in the final assembly. Statement, route, searches and provenance retained; no new nodes.",
+  "blueprint": "Realizes the agent auxiliary for Paragraph (3) of det-thm-sf-ctf-stability-direct-images: extension on U+Kx and maximal partial graphs, old norm-one projection steps 4–6. The ancestor tool returns null for the inherited created-item chain; the existing precise source place and via list are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-9c2f04983",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-9c2f04983 (reviewer sub-agent of L); spot-checked: I read the whole item. It has one commit, no new nodes, and its statement is byte-identical to the previous head 2b855e98962 (md5 d69d08ee). That head hit a landing refusal, not a content return. This head differs from it because the old step 4 was split into a new elementary step 4 (max ≤ sum) and an assembly step 5 that matches each quantifier, so it is not an A6 re-push. The snapshot has no re-split note for this item. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); I read it in full. It has no scalar-extension argument, the item is an honestly recorded agent auxiliary from the Q91 chain with Ingleton listed as WANTED, and no SGA source is used. Steps 1–4 are correct and elementary. Step 1 instantiates the scalar-value hypothesis at a contractive extension g on U ⊇ W and x∉U. Step 2 proves the u+ax decomposition unique (a≠a′ would give x∈U) and checks that G(u+ax)=g(u)+ab is linear and restricts to g. Step 3: with z=−a⁻¹u, a(x−z)=u+ax and a(b−g(z))=G(u+ax), so |G| ≤ ‖·‖ with constant exactly 1. Step 4: max(r,s) ≤ r+s gives the ordinary triangle inequalities. Step 5 uses only the statement of lem-sfb-bounded-extension-zorn (split, same unit) with C=1; all its hypotheses are met: field axioms, triangle inequalities, C>0, a local condition over all U ⊇ W and all g with g|_W=f, and it concludes an h with h|_W=f and |h| ≤ ‖·‖. There is no cycle. Duplicate check: lem-sfb-ultrametric-one-vector-extension and lem-sfb-proper-ultrametric-scalar-extension both assume compact balls, so neither can be cited without adding a hypothesis; lem-sfb-dense-subspace-contractive-extension and lem-sfb-ultrametric-orthogonal-extension have different hypotheses. Edge cases checked: V=0, W=V, W=U=0, a=0, trivial absolute value, finite field. Maintainer note: the Q91 route (lem-sfb-admissible-scalar-balls, unsplit) overlaps the ball-intersection clause of Q139's lem-sfb-ultrametric-one-vector-extension; they could be consolidated later. This is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.Module.ContractiveExtensionFromAdmissibleValues",
+  "declaration": "LinearMap.exists_contractive_extension_of_admissible_values",
+  "file": "lean/Sheaf/Analysis/Normed/Module/ContractiveExtensionFromAdmissibleValues.lean",
+  "statement": "theorem exists_contractive_extension_of_admissible_values {K : Type u} [Field K] {V : Type v} [AddCommGroup V] [Module K V] (scalarAbs : K → NNReal) (vectorNorm : V → NNReal) (habs_zero : ∀ a : K, scalarAbs a = 0 ↔ a = 0) (habs_one : scalarAbs 1 = 1) (habs_mul : ∀ a b : K, scalarAbs (a * b) = scalarAbs a * scalarAbs b) (habs_add : ∀ a b : K, scalarAbs (a + b) ≤ max (scalarAbs a) (scalarAbs b)) (hnorm_zero : ∀ y : V, vectorNorm y = 0 ↔ y = 0) (hnorm_smul : ∀ (a : K) (y : V), vectorNorm (a • y) = scalarAbs a * vectorNorm y) (hnorm_add : ∀ y z : V, vectorNorm (y + z) ≤ max (vectorNorm y) (vectorNorm z)) (hadmissible : ∀ (U : Submodule K V) (g : U →ₗ[K] K), (∀ z : U, scalarAbs (g z) ≤ vectorNorm (z : V)) → ∀ x : V, x ∉ U → ∃ b : K, ∀ z : U, scalarAbs (b - g z) ≤ vectorNorm (x - (z : V))) (W : Submodule K V) (f : W →ₗ[K] K) (hf : ∀ w : W, scalarAbs (f w) ≤ vectorNorm (w : V)) : ∃ h : V →ₗ[K] K, (∀ w : W, h (w : V) = f w) ∧ ∀ y : V, scalarAbs (h y) ≤ vectorNorm y",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d522a6dd",
+  "group": "ND",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: Field K; separate universes u,v; scalarAbs/vectorNorm : → NNReal with every node axiom explicit (zero iff, one, mul, both max inequalities, smul homogeneity) and none stronger; hadmissible has the node's order ∀U ∀g contractive ∀x∉U ∃b ∀z, with b uniform in z; conclusion ∃h with restriction and global bound. Edge cases (V=0, W=0/V, trivial absolute value, finite fields, any dimension) not excluded. No defs, proof only sorry; docstrings carry the source place, blueprint tag and all 5 steps; Mathlib-only imports, all used; no line over 100 chars; lean record statement copied exactly from the file; item changed only in lean. No name clash in Mathlib, WeilConjectures or Sheaf; AdmissibleScalarBalls and ProperUltrametricScalarExtension are different statements. Proof dep bounded-extension-zorn landed by Q105 after base, not needed for typing. Report has Worker report and Second reading by ND. No recompile per instructions."
+ }
+}

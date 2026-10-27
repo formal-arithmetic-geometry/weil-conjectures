@@ -24,50 +24,43 @@
  ],
  "proof": [
   {
-   "text": "View the bounded-above complex $E^\\bullet$ as a complex in the homotopy category of $A$-modules. The Mathlib K-projectivity statement [lem-sc-bounded-above-projective-kprojective] applies to the abelian category of $A$-modules, so applying $\\operatorname{Hom}_A(E^\\bullet,-)$ to an acyclic complex preserves acyclicity. The quasi-isomorphism $E^\\bullet\\to F[0]$ therefore computes the total derived Hom by the ordinary Hom complex in the definition [def-pur-derived-internal-hom], so $\\operatorname{Hom}_A^\\bullet(E^\\bullet,G[0])$ is a representative of $R\\operatorname{Hom}_A(F[0],G[0])$.",
+   "text": "Restriction to the slice at an object of the one-point discrete site preserves projective objects: the restriction/pushforward adjunction is an equivalence, since its unit and counit are sectionwise images of isomorphisms. Restrict E termwise and transfer its upper support bound and projective terms; apply CochainComplex.isKProjective_of_projective. Restriction sends a quasi-isomorphism s to a quasi-isomorphism by lem-pur-localized-module-restriction-quasi-iso. By lem-pur-hom-complex-sections-homotopy-naturality, the map on degree-n section homology of Hom(E,s) is postcomposition by the shifted restricted s in the homotopy category. The two bijections IsKProjective.Qh_map_bijective identify it with postcomposition by an isomorphism in the derived category; composing with its inverse proves bijectivity. Apply lem-pur-quasi-iso-of-sections to obtain the sheaf quasi-isomorphism Hom(E,s), for any quasi-isomorphism s.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-sc-bounded-above-projective-kprojective"
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pur-localized-module-restriction-quasi-iso",
+    "lem-pur-hom-complex-sections-homotopy-naturality",
+    "lem-pur-quasi-iso-of-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories.tex",
-    "place": "Lemma Tag 06XR (derived-lemma-compute-ext-resolutions), projective-resolution construction of derived Hom"
-   }
+   "elementary": false
   },
   {
-   "text": "The Hom complex is formed degreewise by the products $\\prod_j\\operatorname{Hom}_A(E^j,G[0]^{j+i})$, with differential induced by the differentials of $E^\\bullet$ and $G[0]$. This is exactly the product totalization specified by [def-pur-derived-internal-hom]; because $G[0]^q=0$ for $q\\ne0$, its degree-$i$ term reduces to $\\operatorname{Hom}_A(E^{-i},G)$, with the induced differential. The comparison is canonical because the derived-Hom functor sends the quasi-isomorphism $E^\\bullet\\to F[0]$ to an isomorphism after K-projective replacement.",
+   "text": "For any functorial K-injective replacement (I,eta), apply Step 1 to eta at G[0]. Apply lem-pur-rhom-well-defined to the identity of I(G[0]) and e to show that Hom(F[0],I(G[0])) to Hom(E,I(G[0])) is a quasi-isomorphism. Q inverts these maps, proving both IsIso clauses for every replacement. Choose the canonical K-injective resolution, evaluate derivedInternalHom_comparison at (F[0],G[0]), and compose Q Hom(E,eta), the inverse of Q Hom(e,I(G[0])), and the inverse comparison. This gives the required representing isomorphism.",
    "uses": [
     "def-pur-derived-internal-hom",
-    "lem-sc-bounded-above-projective-kprojective"
+    "lem-pur-rhom-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories.tex",
-    "place": "Lemma Tag 06XR, construction of the Hom complex from a projective resolution"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying the cohomology functor in degree $i$ to the representative from Step 1 gives $H^i(\\operatorname{Hom}_A^\\bullet(E^\\bullet,G[0]))\\cong H^i(R\\operatorname{Hom}_A(F[0],G[0]))$. The isomorphism is canonical because [def-pur-derived-internal-hom] is a functor on the derived category and the K-projective comparison is unique in that category; it is therefore independent of the chosen resolution and natural in $F$ and $G$. It holds for every integer $i$, including negative degrees (where both sides vanish in the module-in-degree-zero situation when appropriate).",
+   "text": "For every integer i apply DerivedCategory.homologyFunctor to the representing isomorphism and prepend the inverse of DerivedCategory.homologyFunctorFactors at Hom(E,G[0]). This gives the cohomology identification with exactly the statement's two objects, including negative degrees.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-sc-bounded-above-projective-kprojective"
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories.tex",
-    "place": "Lemma Tag 06XR, conclusion identifying cohomology of the resolution Hom complex with derived Hom"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-pur-localized-module-restriction-quasi-iso",
+  "lem-pur-hom-complex-sections-homotopy-naturality",
+  "lem-pur-quasi-iso-of-sections",
   "def-pur-derived-internal-hom",
-  "lem-sc-bounded-above-projective-kprojective"
+  "lem-pur-rhom-well-defined"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived-categories.tex",
-  "place": "More on Algebra Tag 0A5W, Section 15.75 construction of RHom, and Derived Categories Tag 06XR, part (2)"
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories, Tag 06XR; More on Algebra, Section 0A5W; Mathlib KProjective",
+  "place": "Y3, 2026-10-24: complete Lean balancing argument using the existing sectionwise homotopy comparison; no new public intermediate statements"
  },
  "mathlib_searches": [
   {
@@ -171,5 +164,26 @@
   "result": "fix",
   "note": "A comm ring -> onePointRingSheaf A; F G E SheafOfModules on one-point site; bounded above IsStrictlyLE d; projective terms; e quasi-iso to F[0]; Hom(E,G[0]) homComplex represents derivedInternalHom (Q F[0], Q G[0]) with canonical maps iso after Q; H^i iso for all i; dropped duplicate new node(s) def-sc-module-derived-hom, def-sc-module-hom-complex (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/Algebra/Homology/ModuleHomComplex.lean, lean/Sheaf/Algebra/Homology/ModuleDerivedHom.lean (--drop-files, or a record fixed to existing: true); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261024T191801-L-494530",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

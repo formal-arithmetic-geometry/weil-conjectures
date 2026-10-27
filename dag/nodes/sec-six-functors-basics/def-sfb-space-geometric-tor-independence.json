@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-space-geometric-tor-independence",
+ "kind": "definition",
+ "title": "Geometric Tor independence of algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme and $F,G,H$ be algebraic spaces over $S$, with geometric local rings and canonical stalk maps as in [def-sfb-space-geometric-stalk-models]. For morphisms $f:F\\to H$ and $g:G\\to H$, say that $f$ and $g$ are geometrically Tor independent if, for every algebraically closed field $\\Omega$ in the section universe and every pair of geometric points $x:\\operatorname{Spec}\\Omega\\to F$ and $y:\\operatorname{Spec}\\Omega\\to G$ over $S$ with $f x=g y=t$, one has $\\operatorname{Tor}^{\\mathcal O_{H,t}}_i(\\mathcal O_{F,x},\\mathcal O_{G,y})=0$ for every integer $i>0$. The two local rings are modules via the canonical stalk maps, with the common base stalk identified by $f x=g y$; Tor uses projective resolutions [def-weil-pbc-tor-modules].",
+ "stmt_deps": [
+  "def-sfb-space-geometric-stalk-models",
+  "def-weil-pbc-tor-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IP, definition-tor-independent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric Tor independence of algebraic spaces is vanishing of positive Tor of geometric local rings",
+   "results": "[leansearch] OK 8 hit(s): Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.casesOn, Algebra.IsGeometricallyReduced.mk, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.",
+   "date": "2026-10-24",
+   "verdict": "No matching geometric Tor predicate in Mathlib; these hits concern geometric reducedness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition Tor independent algebraic spaces geometric stalk rings",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.stalkwise, AlgebraicGeometry.HasRingHomProperty.stalkwise, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.HasRingHomProperty.stalkMap, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.HasRingHomProperty.of_stalkMap, AlgebraicGeometry.Flat.of_stalkMap.",
+   "date": "2026-10-24",
+   "verdict": "No matching definition; scheme stalkwise flatness is different."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGeometricallyTorIndependent|TorIndependent|tor_independent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No matching definition in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsGeometricallyTorIndependent lean/WeilConjectures lean/Sheaf",
+   "results": "No WeilConjectures hits. lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceTorIndependenceEtaleChart.lean:40 defines IsGeometricallyTorIndependent; lines 93 and 111 use it in theorem conclusions.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definition reused, without adding a Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l geometric.*Tor independent|geometrically Tor independent|geometric Tor independence|Geometric Tor independence dag/nodes; python3 tools/blueprint_refs.py search \"geometric Tor independence\"",
+   "results": "Related statement nodes: lem-sfb-space-product-tor-independence, lem-sfb-space-tor-independence-etale-chart-criterion, lem-sfb-space-relative-flat-closed-kernel-base-change, lem-sfb-space-tor-independent-base-change. 0 blueprint nodes match 'geometric Tor independence'.",
+   "date": "2026-10-24",
+   "verdict": "No independent definition node owns the plain predicate. The criterion node bundles it with a theorem; this new existing:true node supplies the definition ownership requested by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-product-tor-independence",
+  "date": "2026-10-24",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence: the full arbitrary commutative-square assertion, before specializing to a closed immersion. Definition input: Tag 08IP, geometric Tor independence in the conclusion of Tag 0CTQ.",
+   "via": [
+    "lem-sfb-space-product-tor-independence",
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceTorIndependenceEtaleChart",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsGeometricallyTorIndependent",
+  "statement": "def IsGeometricallyTorIndependent {S : Scheme.{u}} {F G H : AlgebraicSpace S}\n    (f : F ⟶ H) (g : G ⟶ H) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain definition at line 40 of the published module, Stacks 08IP. This definition-node ownership is required by the return of immutable head 73ff9386654e: the predicate is not chosen from or dependent on torIndependent_iff_etale_chart. The theorem remains a proof dependency of the consumer. No source declaration or construction is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-810128c15",
+  "group": "Q134",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-810128c15",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 73ff9386654e. stmt_deps: the criterion theorem node is replaced by the new definition node def-sfb-space-geometric-tor-independence, bound existing:true to the plain published def AlgebraicGeometry.AlgebraicSpace.IsGeometricallyTorIndependent; its lean.statement matches the source verbatim and it does not depend on torIndependent_iff_etale_chart. The node statement matches Stacks 08IP and its deps are def-sfb-space-geometric-stalk-models and def-weil-pbc-tor-modules. The criterion stays in proof_deps. The item JSON differs from live only in lean and stmt_deps; statement, proof and proof_deps are unchanged. The Lean module is byte-identical to the previous delivery, already checked clause by clause against 0CTQ. lean.statement is verbatim and the proof is sorry only. No same-id node or competing owner exists in side-live or the main repo. The report has the Worker report and Second reading sections. Advisories: the def docstring still names the criterion blueprint id, and the item statement text does not name the new deps."
+ }
+}

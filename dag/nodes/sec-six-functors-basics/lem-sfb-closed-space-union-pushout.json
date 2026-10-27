@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-closed-space-union-pushout",
+ "kind": "statement",
+ "title": "A closed scheme-theoretic union is a pushout of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $i:A\\hookrightarrow X$ and $j:B\\hookrightarrow X$ be closed subspaces [def-sfb-space-closed-subspace], with quasi-coherent ideals $\\mathcal I,\\mathcal J\\subseteq\\mathcal O_X$ under [lem-sfb-space-closed-ideal-correspondence]. Suppose $\\mathcal I\\cap\\mathcal J=0$ as subsheaves of $\\mathcal O_X$. Put $E=A\\times_XB$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Then the inclusions exhibit $X$ as the pushout $A\\amalg_E B$ in algebraic spaces over $S$ [def-weil-pbc-category-colimit]. Explicitly, for every algebraic space $H/S$, morphisms $f:A\\to H$ and $g:B\\to H$ agreeing on $E$ extend to a unique morphism $X\\to H$. No Noetherian, separation or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0GFQ, lemma-pushout-fpqc-local, applied to closed unions on etale affine charts; those charts are the scheme pushouts of morphisms.tex Tag 0C4J, lemma-scheme-theoretic-union, and are algebraic-space pushouts by Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-closed-subspace",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:U\\to X$ using [def-trf-algebraic-space]. More generally let $v:V\\to X$ be any representable etale map with $V$ a scheme. Put $A_V=A\\times_XV$, $B_V=B\\times_XV$ and $E_V=E\\times_XV$. The first two are closed subschemes of $V$ by [def-sfb-space-closed-subspace], and $E_V=A_V\\times_VB_V$ by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. Their defining ideals are the restrictions $\\mathcal I_V,\\mathcal J_V$ by [lem-sfb-space-closed-ideal-correspondence]. Etale pullback here is restriction on the localized small etale site [def-trf-algebraic-space]: for each etale $W\\to V$, the two restricted ideals are evaluated on the same object $W\\to X$. Hence their intersection is the restriction of $\\mathcal I\\cap\\mathcal J$, and is zero. This assertion is made only for etale $v$, not for arbitrary base change.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-closed-subspace",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-closed-ideal-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, lemma-closed-immersion-ideals, proof: restriction of the quotient structure sheaf to an etale chart."
+   }
+  },
+  {
+   "text": "The scheme-theoretic union $W_V=A_V\\cup B_V$ is cut out by $\\mathcal I_V\\cap\\mathcal J_V$ by [lem-weil-pbc-scheme-theoretic-union]. Since that ideal is zero, its closed inclusion identifies $W_V$ with $V$: on every affine open $\\operatorname{Spec}R\\subset V$ the inclusion is $\\operatorname{Spec}(R/0)\\to\\operatorname{Spec}R$. Applying [lem-trf-closed-union-pushout] therefore makes the given cocone $A_V\\leftarrow E_V\\to B_V$, with vertex $V$, a pushout in schemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-union",
+    "lem-trf-closed-union-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4J, lemma-scheme-theoretic-union: affine-local description and the cocartesian square."
+   }
+  },
+  {
+   "text": "This scheme pushout is also an algebraic-space pushout by [lem-sfb-ferrand-pushout-space-agreement], as follows. Both $E_V\\to A_V$ and $E_V\\to B_V$ are closed immersions (base change of the closed inclusions), and the latter is integral by [lem-weil-pbc-closed-immersion-integral-separated-uc]. For any $b\\in B_V$, the fibre of the closed immersion $E_V\\to B_V$ has at most one underlying point. If it is nonempty, choose an affine open of $A_V$ containing the image of that point using [lem-weil-pbc-affine-opens-basis]; if empty, the empty affine open suffices. This verifies precisely the affine-neighborhood hypothesis in the cited Ferrand lemma. Thus, for the prescribed compatible $f:A\\to H$, $g:B\\to H$, there is a unique $h_V:V\\to H$ extending their pullbacks to $A_V,B_V$, for every such scheme chart $V$. All maps are over $S$.",
+   "uses": [
+    "def-sfb-space-closed-subspace",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-ferrand-pushout-space-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral; more-morphisms.tex situation-pushout-along-closed-immersion-and-integral, conditions (1)-(3)."
+   }
+  },
+  {
+   "text": "In particular obtain $h_U:U\\to H$. The overlap $R=U\\times_XU$ is a scheme and the projections $R\\to U$ are etale by [lem-trf-space-fibre-products-etale-covers] and the representable diagonal in [def-trf-algebraic-space]. The composite $R\\to X$ is representable etale: on a scheme test $T\\to X$, its source is $U_T\\times_TU_T$, and its projection to $T$ is a composite of etale scheme maps by [lem-weil-pbc-etale-composition-cancellation]. Apply step 3 to $R\\to X$. The maps $h_U\\circ\\operatorname{pr}_1$ and $h_U\\circ\\operatorname{pr}_2$ restrict to the same maps induced by $f$ on $A_R$ and by $g$ on $B_R$; uniqueness of $h_R$ makes them equal. Now apply [lem-trf-etale-open-chart-morphism-descent] with atlas $U\\to X$, invariant open $O=U$ and target $H$. Its unique descended open is all of $X$, since $X$ itself has inverse image $U$. We obtain a unique map $h:X\\to H$ whose pullback to $U$ is $h_U$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-trf-etale-open-chart-morphism-descent",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GFQ, lemma-pushout-fpqc-local, proof: compatibility on double overlaps and descent of chart morphisms; here etale atlas descent is supplied by the cited node."
+   }
+  },
+  {
+   "text": "The base-changed maps $A_U\\to A$ and $B_U\\to B$ are representable surjective etale scheme atlases by [lem-trf-space-fibre-products-etale-covers]. On $A_U$ the two maps $h\\circ i$ and $f$ agree by construction, and on $B_U$ the maps $h\\circ j$ and $g$ agree. Apply the equality-detection clause of [lem-trf-etale-open-chart-morphism-descent] with the full invariant opens $A_U$ and $B_U$ to deduce $h\\circ i=f$ and $h\\circ j=g$. Any other extension pulls back to $h_U$ by the local pushout uniqueness in step 3, and then equals $h$ by the same detection clause for $U\\to X$. This is the claimed pushout universal property [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-etale-open-chart-morphism-descent",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GFQ, lemma-pushout-fpqc-local, proof: coverwise recovery of the cocone and uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-closed-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-weil-pbc-scheme-theoretic-union",
+  "lem-trf-closed-union-pushout",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-ferrand-pushout-space-agreement",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tags 0GFQ (lemma-pushout-fpqc-local) and 0EDP (lemma-pushout-along-closed-immersion-and-integral), combined with morphisms.tex Tag 0C4J (lemma-scheme-theoretic-union); etale-cover instance with every overlap and the affine-neighborhood condition checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space which is the scheme theoretic union of two closed subspaces is their categorical pushout along the intersection",
+   "results": "{\"t\": \"2026-10-24T11:43:47Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space which is the scheme theoretic union of two closed subspaces is their categorical pushout along the intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\"], \"digest\": \"9c30f5485fd501d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing morphisms from two closed algebraic subspaces with zero intersection of defining ideals to any algebraic space",
+   "results": "{\"t\": \"2026-10-24T11:43:43Z\", \"tool\": \"leansearch\", \"query\": \"Gluing morphisms from two closed algebraic subspaces with zero intersection of defining ideals to any algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms.congr_simp\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\"], \"digest\": \"ede98c3ef65cdb7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-24T11:43:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPushout\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*union|union.*closed|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-24T11:43:43Z\", \"tool\": \"grep\", \"query\": \"closed.*union|union.*closed|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\"], \"digest\": \"e6fc128301087ba9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme theoretic union of two closed algebraic subspaces is the pushout along their intersection",
+   "results": "{\"t\": \"2026-10-24T12:04:47Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme theoretic union of two closed algebraic subspaces is the pushout along their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_sup\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\"], \"digest\": \"94b8032fdcfc83ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give open scheme gluing, coproducts or vanishing ideals of closed sets; none states pushouts of closed algebraic subspaces against arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-24T12:04:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPushout\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give open scheme gluing, coproducts or vanishing ideals of closed sets; none states pushouts of closed algebraic subspaces against arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*union|union.*closed|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-24T12:04:47Z\", \"tool\": \"grep\", \"query\": \"closed.*union|union.*closed|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"eef526cdb727d245\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give open scheme gluing, coproducts or vanishing ideals of closed sets; none states pushouts of closed algebraic subspaces against arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing maps out of closed subspaces into an algebraic space along a scheme theoretic intersection",
+   "results": "{\"t\": \"2026-10-24T12:04:48Z\", \"tool\": \"leansearch\", \"query\": \"Gluing maps out of closed subspaces into an algebraic space along a scheme theoretic intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.ι\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"TopCat.GlueData.fromOpenSubsetsGlue\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\"], \"digest\": \"06a06545d9390493\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give open scheme gluing, coproducts or vanishing ideals of closed sets; none states pushouts of closed algebraic subspaces against arbitrary algebraic-space targets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-space-closure-thickenings-scheme",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited trait schematicity input: identify the local trait space with the closed gluing of the horizontal closure and a high special-fibre thickening, as in Anantharaman Proposition 1.3.2.",
+   "via": [
+    "lem-sfb-trait-space-closure-thickenings-scheme",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-space-union-pushout",
+  "worker": "stage1",
+  "summary": "Retain the statement and all its hypotheses. Reduce on every etale scheme chart to the existing scheme closed-union pushout; verify the Ferrand affine-neighborhood condition using singleton fibres of a closed immersion; compare the two maps on the scheme overlap and descend using the existing atlas morphism-descent node. No new nodes.",
+  "blueprint": "Realizes the inherited closed-gluing input described in blueprint.from.place: identify the local trait space with the gluing of the horizontal closure and special-fibre thickening. No change to the unit route or chapter. The existing ancestor command returns None; retain that inherited provenance field unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-closed-union-pushout",
+    "why": "Generic pushout theorem for two closed subschemes (Stacks 0C4J), needed on the scheme charts; the item unit has no second version of this theorem."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-union",
+    "why": "Generic identification of the scheme union with the subscheme cut out by the intersection of ideals; this identifies the chart vertex with its closed union."
+   },
+   {
+    "node": "lem-trf-etale-open-chart-morphism-descent",
+    "why": "Generic atlas descent and equality detection for algebraic-space morphisms, specialized to the full invariant open; no theorem of this item unit supplies that morphism-descent statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base change of jointly surjective etale families; already required by the item statement and needed for chart intersections and the restricted atlases."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-closed-union-pushout",
+  "lem-weil-pbc-scheme-theoretic-union",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-861107ae7",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-861107ae7 (reviewer sub-agent of L); spot-checked: I read the whole item, with no new nodes in the delivery and no fixes. Sources read: Stacks 0GFQ (spaces-pushouts.tex l.165), 0EDP (l.1325) with More-on-Morphisms Situation conditions (1)-(3), and 0C4J. The statement is true. I tested it on A=X, A empty, X empty, disjoint A and B, and k[e,x,y]/(e^2,xy) with I=(x), J=(y); the k[e]/(e^3) case with I=(e), J=(e^2) is correctly excluded. Step 1: on an étale chart the ideals restrict and their intersection stays 0. Step 2: the scheme-theoretic-union node is used only for the ideal I∩J, and lem-trf-closed-union-pushout supplies the scheme pushout. Step 3: the Ferrand hypothesis (3) holds because fibres of the closed immersion E_V→B_V have at most one point, and lem-weil-pbc-closed-immersion-integral-separated-uc (c) gives integrality. Step 4: R→X is étale by composition; uniqueness of h_R gives agreement on R; descent with O=U yields h with descended open X. Step 5: equality detection along A_U and B_U, plus chart uniqueness, gives the full universal property. Advisory only: the step-2 Zariski ideal is the étale ideal evaluated on Zariski opens, which is elementary. Duplicate search found nothing: the etale-affine-pinching, flat-trait-pinching and Ferrand nodes all state different things. Four tool_uses accepted: lem-trf-closed-union-pushout, lem-weil-pbc-scheme-theoretic-union, lem-trf-etale-open-chart-morphism-descent and lem-trf-space-fibre-products-etale-covers. Batch-5 flags: lem-trf-closed-union-pushout has a 30-node closure whose only trf node is itself, and it is generic 0C4J. lem-trf-etale-open-chart-morphism-descent has a 142-node closure whose only trf nodes are itself, def-trf-algebraic-space and the fppf open-subfunctor descent node (all sk-i-curve-zero foundations), with no Poincaré-duality, nt-, sk- or thm- nodes; it is generic 02WU/03BZ/0D2Z descent. Neither is a step of the trace formula or Poincaré duality, so both are accepted. from.node=null is inherited metadata."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSpaceUnionPushout",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closed_union_isPushout",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSpaceUnionPushout.lean",
+  "statement": "theorem closed_union_isPushout {S : Scheme.{u}} (X : AlgebraicSpace S) (A B : ClosedSubspace X) (hIJ : ∀ (V : X.EtaleSite) (s : X.structureSheaf.obj.obj (op V)), (moduleStructureMap A.val.arrow).val.app (op V) s = 0 → (moduleStructureMap B.val.arrow).val.app (op V) s = 0 → s = 0) (E : AlgebraicSpace S) (a : E ⟶ (A.val : AlgebraicSpace S)) (b : E ⟶ (B.val : AlgebraicSpace S)) (hE : IsPullback a b A.val.arrow B.val.arrow) : IsPushout a b A.val.arrow B.val.arrow",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The zero intersection of the defining kernel ideals is expressed sectionwise on every object of the small etale site, avoiding a chosen complete-lattice structure on module subobjects. An arbitrary presentation of the sheaf fibre product is specified by IsPullback; IsPushout gives the full unique-extension property in algebraic spaces over S."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1c101d3d",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean + stmt_deps (+landed def-sfb-space-module-structure-map, the requested H2 repair); statement/proof/proof_deps unchanged; lean.statement verbatim. hIJ = sectionwise ker(moduleStructureMap A)∩ker(moduleStructureMap B)=0, exactly I∩J=0 via closed_ideal_correspondence kernelSubobject pin; E by IsPullback in AlgebraicSpace S; conclusion IsPushout in AlgebraicSpace S (all H/S, existence+uniqueness). No extra hypotheses, single universe u. Edge cases (empty, A=X, disjoint, nonreduced, k[e]/(e^3) excluded) fine. No defs, sorry only, docstrings with 0GFQ/0EDP/0C4J + blueprint + 5 proof steps, imports exist, all used decls owned by stmt_deps, no duplicate found. Report has Worker report and Second reading by NQ (self-check, advisory). No file changed, no compile."
+ }
+}

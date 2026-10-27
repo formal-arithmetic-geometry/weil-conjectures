@@ -1,0 +1,322 @@
+{
+ "id": "lem-trf-fan-descent-refinement-pullback",
+ "kind": "statement",
+ "title": "Affine-lift descent respects cover refinements and smooth pullback",
+ "statement": "Use fine monoschemes, fans, coherent monoid ideals, saturated blowup towers, recursive pullback, and contraction as in [def-trf-monoscheme-toric-realization] and [def-trf-fine-fan-blowup]. Let $\\mathscr C$ be the full category of fine monoschemes with finite affine covers such that both their ordinary stalk group completions and the group completions of their sharpened stalks are torsion free. Let $R$ be a smooth-functorial saturated desingularization rule on $\\mathscr C$, with centers and order retained and with identity and composition compatibility. For a fine torsion-free fan $F$ with finite affine cover $\\mathcal U=\\{U_i\\simeq S(P_i)\\}$ by sharp fine monoids, let $T_{\\mathcal U}$ be the tower obtained by gluing the sharpened uncontracted component restrictions of the single tower $R(\\coprod_i\\operatorname{Spec}_{\\mathrm{mon}}P_i)$, using the identity comparisons of the overlap ideals and fraction charts. These glued towers exist as in [lem-trf-affine-lift-tower-descent].\n\nFor any two such covers $\\mathcal U,\\mathcal V$, the restriction of the single tower on the disjoint union of the lifts for $\\mathcal U\\amalg\\mathcal V$ to either subunion, followed by contraction, is the assigned tower there. A stage of this combined tower is removable on every member of $\\mathcal U$ if and only if it is removable on every member of $\\mathcal V$. Thus the two restrictions delete the same original indices, and $T_{\\mathcal U}$ and $T_{\\mathcal V}$ are canonically identified with the same centers, order and arrows. These comparisons are compatible with further cover refinements. The same identification holds when any of the sharp affine lifts is replaced by another affine lift in $\\mathscr C$ over that affine fan. Denote the cover-independent tower by $T_R(F)$.\n\nFor every smooth fan morphism $g:G\\to F$ between fine torsion-free fans with finite affine covers there is a canonical identification\n$$T_R(G)\\simeq(g^*T_R(F))^c.$$\nOn the smallest neighborhoods of a point and its image, the map on sharp monoids is $B\\to B\\oplus\\mathbf N^r$ and is induced by the corresponding smooth map of sharp affine monoscheme models. After localization at any point, the local monoid map of this unsharpened affine monoscheme morphism has form $B'\\to B'\\oplus\\mathbf N^{r-t}\\oplus\\mathbf Z^t$. In a single disjoint union containing the finitely many source and target affine models, the local comparison identifies every pulled-back ideal and fraction chart at its inherited uncontracted index. A global index is deleted exactly when its pulled-back center is the whole sheaf and its arrow is an isomorphism, equivalently when both conditions hold locally everywhere. The comparisons respect identities and composition, on indices and on every level map. In particular for composable smooth maps $H\\xrightarrow hG\\xrightarrow gF$ the surviving subsequence and level maps obtained by successive contractions agree with those obtained by contracting $(gh)^*T_R(F)$ once; before contraction the ideals satisfy $(gh)^*I=h^*(g^*I)$ and the fraction maps are the corresponding substitutions. Deleting a whole-ideal isomorphism leaves every later ideal and its pullbacks unchanged under the canonical identification of its source and target.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.1.13--3.1.16, 3.1.22, 3.1.25--3.1.27, pp.100--102, and Remark 2.3.5(ii)--(iii), p.92; refinement, local smooth pullback and contraction coherence (returned proof steps 11--13). No Stacks tag states this monoidal-geometric result."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-lift-tower-descent"
+ ],
+ "proof": [
+  {
+   "text": "Put $L_{\\mathcal U}=\\coprod_i\\operatorname{Spec}_{\\rm mon}P_i$ and similarly $L_{\\mathcal V}$, and apply $R$ once to $D=L_{\\mathcal U}\\amalg L_{\\mathcal V}$. These objects lie in $\\mathscr C$ by [lem-trf-affine-lift-tower-descent]. The component inclusions are smooth, since their stalk maps are identities. The assumed functoriality of $R$ identifies the contraction of $R(D)|_{L_{\\mathcal U}}$ with $R(L_{\\mathcal U})$, including centers and arrows; likewise for $\\mathcal V$. By [lem-trf-sharpening-blowup-chart-comparison] and [lem-trf-smooth-tower-index-synchronization], sharpening retains exactly these original indices and these contraction tests. Apply [lem-trf-affine-lift-tower-descent] to the combined cover: its full component restrictions glue to a single tower $W$ on $F$. Thus the restrictions to either subcover are restrictions of this same $W$ before any contraction.",
+   "uses": [
+    "lem-trf-affine-lift-tower-descent",
+    "def-trf-monoscheme-toric-realization",
+    "lem-trf-sharpening-blowup-chart-comparison",
+    "lem-trf-smooth-tower-index-synchronization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.25--3.1.27, p.102; Remark 2.3.5(ii), p.92; combined-cover construction."
+   }
+  },
+  {
+   "text": "At a fixed original index of $W$, its ideal $J$ is the whole sheaf if and only if $0$ belongs to $J$ locally at every point: representatives of these germs cover the space, and the subsheaf gluing condition gives $0\\in J$ on every open. Its arrow is an isomorphism if and only if its restrictions over a covering are isomorphisms: the local inverses agree on overlaps, since each is inverse to the same arrow, and their maps and section homomorphisms glue to an inverse. Apply these tests at each level, covered by the inverse images of either $\\mathcal U$ or $\\mathcal V$. A stage is removable on every member of one cover exactly when it is removable on every member of the other. Delete that common subsequence, in its inherited order. Step 1 and the uniqueness of the glued tower in [lem-trf-affine-lift-tower-descent] identify the results with $T_{\\mathcal U}$ and $T_{\\mathcal V}$. In fact $W$ is globally contracted by that same lemma, so no original stage can disappear on an entire subcover of $F$. A stage removable on only some charts is still retained.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-lift-tower-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.22, 3.1.26--3.1.27, pp.101--102; Remark 2.3.5(ii), p.92; explicit locality and deletion test."
+   }
+  },
+  {
+   "text": "For three covers, use the rule on the disjoint union of all their lifts. The two-cover argument identifies every comparison with restriction of its identical local center ideals, followed by deletion of the same globally removable original indices. On an $a$-chart of a center $I$, the comparison fixes each element of $P$ and each difference $b-a$, and therefore fixes the generated monoid $P[I-a]$, its saturation, and every localization used for a chart overlap. This is precisely the fraction comparison specified by [lem-trf-sharpening-blowup-chart-comparison]. Consequently the direct comparison and either composite agree on every chart and every level. The same construction includes any further finite refinement, and proves the cover-comparison cocycle without choosing an affine intersection. Write $T_R(F)$ for the tower so identified.",
+   "uses": [
+    "lem-trf-sharpening-blowup-chart-comparison",
+    "lem-trf-affine-lift-tower-descent",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.25--3.1.27, p.102; Remark 2.3.5(ii)--(iii), p.92; refinement cocycle on centers and fraction charts."
+   }
+  },
+  {
+   "text": "Consider another affine lift $\\operatorname{Spec}_{\\rm mon}P\\in\\mathscr C$ whose sharpening is the given affine fan $S(B)$. By [lem-trf-affine-fan-localization-sections], global sharp sections identify $P/P^\\times$ with $B$. Both $P^{\\rm gp}$ and $B^{\\rm gp}$ are torsion free: these are the ordinary and sharp stalks at the unique closed point. Thus [lem-trf-fine-monoid-unit-splitting] gives $P\\simeq B\\oplus\\mathbf Z^s$ over $B$. For two lifts use $B\\oplus\\mathbf Z^{s+t}$, mapping to each by adjoining the other free group. These maps are smooth and surjective: ideals are invariant under translation by units, so primes of each product with a group are exactly inverse images of primes of $B$. The common model lies in $\\mathscr C$, since its group completion is torsion free and its sharp stalks are those of $S(B)$. Put both lifts into one disjoint union. The two-smooth-maps assertion of [lem-trf-smooth-tower-index-synchronization] identifies their full pulled-back towers on this common model. Sharpening, by [lem-trf-sharpening-blowup-chart-comparison], identifies the ideals and fraction charts over the identity of $S(B)$, independently of the splittings. Steps 2--3 give exactly the same contracted global tower and comparisons after any finite lift replacements.",
+   "uses": [
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-fine-monoid-unit-splitting",
+    "def-trf-monoscheme-toric-realization",
+    "lem-trf-smooth-tower-index-synchronization",
+    "lem-trf-sharpening-blowup-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.11, 3.1.13, 3.1.25--3.1.27, pp.100--102; Remark 2.3.5(iii), p.92; comparison of arbitrary affine lifts."
+   }
+  },
+  {
+   "text": "Fix a smooth $g:G\\to F$ and $y\\in G$, with $x=g(y)$. By [lem-trf-affine-lift-tower-descent], the smallest neighborhoods $G_y,F_x$ are affine. They have sharp section monoids equal to their stalks, by [lem-trf-affine-fan-localization-sections]. Continuity sends generalizations of $y$ to generalizations of $x$, so $g$ restricts to $G_y\\to F_x$. Put $B=\\mathcal P_{F,x}$. Smoothness says the stalk map is $B\\to B\\oplus\\mathbf N^r$. The natural Hom/sections bijection of [lem-trf-affine-fan-hom-universal] says the entire restricted fan map is induced by this homomorphism. Its sharp affine monoscheme models belong to $\\mathscr C$ by [lem-trf-affine-lift-tower-descent], applied to these open fans. Only finitely many such models are needed: a prime in a monoid generated by $k$ elements is determined by which generators lie in its complementary face, giving at most $2^k$ primes. The face is generated by precisely these generators, as follows by expanding a sum and using primality. Each finite affine cover therefore has a finite underlying space; use all its point neighborhoods.",
+   "uses": [
+    "lem-trf-affine-lift-tower-descent",
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-affine-fan-hom-universal",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(ii), 3.1.10(ii), 3.1.13--3.1.16, pp.99--100; explicit local fan models and finiteness."
+   }
+  },
+  {
+   "text": "The monoscheme map induced by $B\\to B\\oplus\\mathbf N^r$ is smooth at every point, not just at its closed point. Indeed take a prime of $B\\oplus\\mathbf N^r$ and its image in $B$. If a sum is in its complementary face, each summand is in that face. The face is therefore the sum of a face of $B$ and the submonoid generated by a subset of the free coordinates. Localizing gives\n$$B'\\longrightarrow B'\\oplus\\mathbf N^{r-t}\\oplus\\mathbf Z^t,$$\nwhere $B'$ is the localization of $B$ at the image prime and $t$ is the number of inverted free coordinates. This is exactly the defining smooth form. More generally, localizing such a product at any further point repeats the same computation. All induced morphisms to component opens of a disjoint union are smooth as well, because open inclusions do not alter stalks.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 3.1.14 and 3.1.15--3.1.16, p.100; explicit localization calculation."
+   }
+  },
+  {
+   "text": "Choose the point-neighborhood covers of $F$ and $G$ from Step 5, and let $D$ now be the single disjoint union of all their sharp affine monoscheme models. Write $Q=R(D)$ with its original index set. At $y$, the source model has two smooth maps to $D$: its own component inclusion, and its smooth map to the target model followed by that component inclusion. By [lem-trf-smooth-tower-index-synchronization] these two maps pull back $Q$ to canonically identical full towers, with all original centers. No surjectivity onto $D$ is required for this assertion. By [lem-trf-sharpening-blowup-chart-comparison], their sharpenings identify the source tower with the recursively pulled-back target tower at each inherited index; the chart map sends a difference $b-a$ to $g(b)-g(a)$. On overlapping source neighborhoods these are the same pulled-back ideal subsheaves and the same substitutions in fractions, so the comparisons agree there. Induction on the index, starting with $G\\to F$, applies this argument to the next identified ideal and its saturated fraction charts. Using the gluing assertion of [lem-trf-affine-lift-tower-descent], the raw source restriction tower is thus the recursive pullback of the raw target restriction tower, at all original indices.",
+   "uses": [
+    "lem-trf-smooth-tower-index-synchronization",
+    "lem-trf-sharpening-blowup-chart-comparison",
+    "lem-trf-affine-lift-tower-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.22--3.1.27, pp.101--102; Remark 2.3.5(iii), p.92; one disjoint union synchronizes all smooth local comparisons."
+   }
+  },
+  {
+   "text": "We may contract these raw comparisons compatibly. In a local smooth product chart, [lem-trf-smooth-tower-index-synchronization] gives level monoids $P_i\\oplus\\mathbf N^r\\oplus\\mathbf Z^s$, and saturation of this monoid is equivalent to saturation of $P_i$. Thus a whole-ideal isomorphism stage remains one under smooth recursive pullback: its pulled-back ideal is still whole, and its source is saturated whenever the target of this unit-ideal saturated blowup is saturated. The blowup of the whole ideal has chart $P_i$ before saturation by [def-trf-fine-fan-blowup]. Deleting such a stage replaces an isomorphism by its inverse identification, so every subsequent ideal and fraction substitution is the same after transport. This also proves, by induction through the finite original index list, that deletion followed by further smooth pullback and contraction equals smooth pullback followed by contraction once. The contracted source restriction of $Q$ is its assigned $R$ on the source subunion, by functoriality for that open inclusion, and likewise for the target subunion. Sharpening preserves exactly the contraction tests by [lem-trf-smooth-tower-index-synchronization]. Step 7 followed by the local tests of Step 2 therefore gives\n$$T_R(G)\\simeq(g^*T_R(F))^c.$$\nAt a retained index the center is the generated image of the target center, and the arrow is its saturated blowup. The chart comparisons above fix the order and every level map.",
+   "uses": [
+    "lem-trf-smooth-tower-index-synchronization",
+    "def-trf-fine-fan-blowup",
+    "lem-trf-sharpening-blowup-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, 3.1.22, 3.1.25--3.1.27, pp.101--102; contraction under smooth pullback and assembly of the comparison."
+   }
+  },
+  {
+   "text": "For composition $H\\xrightarrow hG\\xrightarrow gF$, let $I$ be a center at an original index. Locally $g^*I$ consists of sums $g(a)+q$ with $a\\in I$ and $q$ a source monoid section. Its further generated image consists of sums $h(g(a))+h(q)+u$. This equals the ideal generated by the $h(g(a))$: one inclusion uses closure under addition, the other takes $q=0$. Hence $h^*(g^*I)=(gh)^*I$. The chart substitutions compose too:\n$$b-a\\longmapsto g(b)-g(a)\\longmapsto h(g(b))-h(g(a)).$$\nThey agree on the original monoid and its adjoined fractions, hence on its saturation inside the group completion and on localized overlaps. Induct on the original index, using equality of the current ideals to identify the next saturated charts. This yields identical full recursive towers and level maps before contraction. The fraction substitutions used here are exactly those specified by [lem-trf-sharpening-blowup-chart-comparison].",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-sharpening-blowup-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.22, 3.1.25--3.1.27, pp.101--102; generated-image ideals and explicit fraction substitutions for composition."
+   }
+  },
+  {
+   "text": "Each index removed after pullback along $g$ remains removable after the further smooth pullback along $h$, by Step 8. At every other index Step 9 identifies the tests on the final pullbacks: the ideal is whole and the same arrow is an isomorphism in either construction. Transport over an already deleted whole-ideal isomorphism leaves the next ideal unchanged, as shown in Step 8. Induction along the ordered original indices therefore gives precisely the same surviving subsequence for successive contractions as for contracting $(gh)^*T_R(F)$ once. The level maps agree by the substitutions of Step 9 and the inverse identifications at deleted stages. For an identity morphism those substitutions are identities and the globally contracted tower loses no index. The local comparisons agree on every overlap by Step 7; gluing the identical local maps gives identical global maps. Step 3 makes these statements independent of the covers used for $F,G,H$, and Step 4 makes them independent of the affine lifts. This proves both identity and composition compatibility, including all indices and level maps.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-smooth-tower-index-synchronization",
+    "lem-trf-sharpening-blowup-chart-comparison",
+    "lem-trf-affine-lift-tower-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.22, 3.1.25--3.1.27, pp.101--102; Remark 2.3.5(ii)--(iii), p.92; comparison coherence after contraction."
+   }
+  },
+  {
+   "text": "The empty fan is included: [lem-trf-affine-lift-tower-descent] gives its length-zero tower. Pullback to the empty fan has whole ideals and empty isomorphism arrows at every original stage, so contraction deletes every index. A map from a nonempty fan to the empty fan does not exist. The same proof also permits length zero on a nonempty fan, free rank $r=0$, and a cover with repeated members: the index tests and the displayed identities then have the indicated vacuous or identity meanings. A nonidentity initial saturation with whole ideal is retained throughout, since every deletion above requires both the whole-ideal condition and an isomorphism arrow.",
+   "uses": [
+    "lem-trf-affine-lift-tower-descent",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, 3.1.22, 3.1.26--3.1.27, pp.101--102; empty and initial-saturation cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-lift-tower-descent",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-sharpening-blowup-chart-comparison",
+  "lem-trf-smooth-tower-index-synchronization",
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections",
+  "lem-trf-fine-monoid-unit-splitting",
+  "lem-trf-affine-fan-hom-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expanded proof of ILO VIII 3.1.26--3.1.27 using 3.1.8(ii), 3.1.13--3.1.16, 3.1.22, 3.1.25 and Remark 2.3.5(ii)--(iii); explicit cover-index, localized smoothness and contraction-coherence arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-fan-descent-refinement-pullback: Gluing synchronized saturated resolution towers of affine monoid spectra is independent of the finite fan cover and commutes with smooth fan pullback and contraction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).t' i j k = AlgebraicGeometry.Scheme.Pullback\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the coherence isomorphism $t'_{ijk}$ in the gluing data constructed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j : 𝒰.I₀), (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).t i j = AlgebraicGeometry.Scheme.Pullback.t 𝒰 f \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the symmetry isomorphism $t_{ij}$ in the gluing data constructed by $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluedLift\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (s : CategoryTheory.Limits.PullbackCone f g) → s.pt ⟶ (AlgebraicGeometry.Sche\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and a pullback cone $s$ of $f$ and $g$, this constructs a morphism from the apex $s.pt$ of the pullback cone\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (j : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).ι j =\\n    CategoryTheory.Limits.Multicoequalizer.π\", \"doc\": \"For each index $ j $ in the open cover $ \\\\mathcal{U} $, the inclusion morphism $ \\\\iota_j $ mapping the pullback $ U(j) $ to the glued scheme is equal to the canonical projection morphism from the diag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.pullback.fst (𝒰.f y) (𝒰.f z))\\n   \", \"doc\": \"For a glued open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphism $\\\\mathcal{U}.\\\\text{gluedCoverT}'(x, y, z)$ with the first projection of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Limits.pullback.snd (CategoryTheory.Limits.pullback.fst (𝒰.f y) (𝒰.f z))\\n   \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the second projection from the pullback of $\\\\mathcal{U}.f(x)$ with $\\\\mathcal{U}.f(y)$ fol\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.pullback.fst (𝒰.f y) (𝒰.f z))\\n   \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphism $\\\\text{gluedCoverT}'(\\\\mathcal{U}, x, y, z)$ with the first projection $\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Limits.pullback.snd (CategoryTheory.Limits.pullback.fst (𝒰.f y) (𝒰.f z))\\n   \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphism $\\\\text{gluedCoverT'}(\\\\mathcal{U}, x, y, z)$ with the second projection follo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes, rings, projective spectra, number fields or limits, not this monoidal-space statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-fan-descent-refinement-pullback: A fan desingularization from a monoscheme rule has cover independent ordered centers and identity and composition compatible pullbacks after contraction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (self : AlgebraicGeometry.ExistsHomHomCom\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function construc\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes, rings, projective spectra, number fields or limits, not this monoidal-space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-fan-descent-refinement-pullback: Finite affine fan cover refinement preserves synchronized saturated blowup towers and smooth functoriality",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sharpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no monoidal-space sharpening or saturated resolution tower declaration among the hits"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoscheme|KatoFan|saturated.*tower|tower.*saturat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no monoidal-space sharpening or saturated resolution tower declaration among the hits"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoscheme|KatoFan|saturated.*tower|tower.*saturat",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or smooth manifolds, not sharp monoidal spaces or centered saturated fan towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth functorial desingularization of fans from affine monoid spectra descends independently of cover and contracts identity blowups",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.sigmaFunctor, AlgebraicGeometry.IsSmooth.casesOn, instMonoidHomClassContMDiffMonoidMorphism, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, Algebra.smoothLocus, AlgebraicGeometry.IsSmooth, ModuleCat.localizedModule_functor.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or smooth manifolds, not sharp monoidal spaces or centered saturated fan towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoscheme\"",
+   "results": "3 hits: AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or smooth manifolds, not sharp monoidal spaces or centered saturated fan towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine fan descent of saturated monoidal blowup towers independent of covers and compatible with smooth pullback contraction",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or smooth manifolds, not sharp monoidal spaces or centered saturated fan towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato fans sharp monoids synchronized resolution tower cover refinement and iterated contracted pullback",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or smooth manifolds, not sharp monoidal spaces or centered saturated fan towers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-sharpening-fan-bijection",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Lemma 3.1.25, 3.1.26, Theorem 3.1.27, Remark 3.1.28, printed p.102; synchronization refers to Remark 2.3.5(ii), p.92. Subargument: ILO VIII 3.1.13--3.1.16, 3.1.22, 3.1.25--3.1.27, pp.100--102, and Remark 2.3.5(ii)--(iii), p.92; refinement, local smooth pullback and contraction coherence (returned proof steps 11--13).",
+   "via": [
+    "lem-trf-sharpening-fan-bijection",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fan-descent-refinement-pullback",
+  "worker": "stage1",
+  "group": "NH",
+  "summary": "Preserved the statement verbatim. Expanded the combined-cover, affine-lift and smooth-pullback arguments into eleven explicit steps, citing existing exact chart, synchronization, splitting and affine-fan statements. Proved the local removability tests, localization formula, generated-image composition and ordered contraction induction in the steps; no new nodes or Mathlib leaves. Checked actual Mathlib searches and edge cases.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Lemma 3.1.25, 3.1.26, Theorem 3.1.27, Remark 3.1.28, printed p.102; synchronization refers to Remark 2.3.5(ii), p.92. Subargument: ILO VIII 3.1.13--3.1.16, 3.1.22, 3.1.25--3.1.27, pp.100--102, and Remark 2.3.5(ii)--(iii), p.92; refinement, local smooth pullback and contraction coherence (returned proof steps 11--13). This split realizes the historical auxiliary cover-refinement and smooth-pullback subargument (old sharpening-fan-bijection steps 11--13). Read latest main-20261023-1620, commit 7284bb09daf97437d544c51882b325f9c52cd345: locality now uses contracting correspondences; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a4f23ce9e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a4f23ce9e (reviewer sub-agent of L); spot-checked: Ordinary stage-1 split (no repair note; live and side-live hold the item as unsplit with no proof). The statement is byte-identical to live and stmt_deps are unchanged; the 5 inherited searches are kept and 5 real new ones are appended (grep, LeanSearch, Loogle, 2 LeanFinder; verdict no match). No new nodes. proof_deps equals the union of the step uses. All 8 cited nodes exist, are unmerged and are in unit sk-i-curve-zero, so there are no tool_uses. No cycle (a reachability walk over 284 nodes never reaches the item). No SGA source. Checked against ILO VIII 3.1.11-3.1.28 (pp.100-102) and Remark 2.3.5(ii)-(iii) (p.92): the item expands the claim at the end of 3.1.26 that the fan rule is determined on disjoint unions of affines, so proof_origin=agent is correct. The worker's note that the reverse direction of ILO 3.1.15 is false is correct (x2: Z->Z sharpens to id_0 but is not smooth), and the proof avoids that inference. Steps: 1 combined cover D=L_U+L_V lies in the category by the descent lemma. 2 whole ideal (contains 0) and isomorphism are local, so removability agrees on both covers; W is globally contracted. 3 cocycle by literal equality of fractions. 4 a replaced lift splits as B+Z^s by unit-splitting (both torsion-free hypotheses checked at the closed point); the common model B+Z^{s+t} maps smoothly and surjectively to both. 5 G_y and F_x are affine with sections = stalk, and Hom-universal says the restricted map is S(B->B+N^r); at most 2^k primes. 6 a face of B+N^r splits, giving B'->B'+N^{r-t}+Z^t. 7 the two-smooth-maps clause of synchronization (no surjectivity needed) plus chart-comparison's substitutions, by induction on the index. 8 a whole-ideal saturated blowup is the saturation, so the stage is an isomorphism iff the level is saturated; P+N^r is saturated iff P is, so removable stages persist under smooth pullback and deleting them commutes with pullback. 9 h*(g*I)=(gh)*I and the substitutions compose. 10 identity and composition after contraction by induction. 11 empty-fan and initial-saturation edge cases. Tested S(N)->S(N^2), the non-saturated <2,3> case, and a stage removable on one chart only. No duplicate found (descended-resolution-smooth-comparisons is the scheme analogue). Minor: one sentence in step 8 ('its source is saturated whenever the target...') is awkwardly worded but the content is correct."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FanDescentRefinementPullback",
+  "declaration": "AlgebraicGeometry.Monoscheme.fan_descent_refinement_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.IsBasedFanTowerIdentification",
+   "AlgebraicGeometry.Monoscheme.CombinedAffineLiftCover",
+   "AlgebraicGeometry.Monoscheme.IsFanSubcoverCompatibility",
+   "AlgebraicGeometry.Monoscheme.smoothFanModelInclusion",
+   "AlgebraicGeometry.Monoscheme.SmoothFanNeighborhoodModel",
+   "AlgebraicGeometry.Monoscheme.SmoothCoverUnion",
+   "AlgebraicGeometry.Monoscheme.SubunionFanTower",
+   "AlgebraicGeometry.Monoscheme.FanDescentRefinementData",
+   "AlgebraicGeometry.Monoscheme.fan_descent_refinement_pullback"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FanDescentRefinementPullback.lean",
+  "statement": "theorem fan_descent_refinement_pullback (R : SmoothFunctorialDesingularization.{u}) : ∃ Q : FineFan.SmoothFunctorialDesingularization.{u}, Nonempty (FanDescentRefinementData R Q)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3e689de9",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Node unchanged apart from the lean block; lean.statement verbatim in the file; 9 declarations listed; only the main theorem is sorry; source and blueprint docstrings and the 11-step proof present; single universe u. Clauses checked against the side-live FineFanBlowup, SharpeningFanBijection and AffineLiftTowerDescent interfaces: cover independence via CombinedAffineLiftCover using R's actual comparison for each subunion inclusion, the removable-stage iff (whole ideal and IsIso), compare/cocycle over any three covers, Q.comparison as the contracted recursive pullback pinned by smoothUnion, local smooth models with the localized B'+N^(r-t)+Z^t form, fraction substitutions, ideal composition, identity and composition fields, deletedTransport. Edge cases fine (empty fan forces length 0, rank 0, t=0 or r). Notes, not faults: arbitraryAffineLift is the single-affine form because AffineLiftCover admits only sharp lifts; the local deletion test is stated for descent towers only; canonical comparisons are pinned only at the base level, which holds by rigidity of saturated blowups over the base. No file changed, so no recompile."
+ }
+}

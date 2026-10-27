@@ -201,7 +201,30 @@
   "def-wf-tensor-product"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.stalk_frobenius_tateTwistSheaf",
+     "module": "WeilConjectures.WeilSheaf.StalkTateTwist",
+     "lines": [
+      73,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-cyclotomic",
  "split_report": {
@@ -270,5 +293,25 @@
   "group": "NL",
   "result": "pass",
   "note": "Re-delivery repairs the live item module's reference to the undeclared wfTateTwistLocalModel (Q13's helper was in the reverted def-wf-tate-twist change; Q12's WfTateTwist does not declare it). The helper is rationalWeilLine at pbcFiniteField E: the same integral root lattice and signedLineMaps that WfTateTwist.lineMap is HEq-pinned to, i.e. the node's 'integral twist lattice followed by rationalization'. Not hollow; isomorphic to Q13's passed helper. Added stmt_dep def-weil-frobenius-coefficient-twists is a definition node whose declaration is used. Dependency node files are identical to live; the item node differs only in lean and stmt_deps; statement verbatim; all clauses match (all m, all closed points, universal ι/hι, H^0 endomorphism = Nat.card^(-m) • 𝟙); edge cases m=0, ±1, |m|≥2, degree d≥2, empty X₀, ℓ=2 and ramified E hold; sorry only; docstrings with 8 proof steps; both report sections present. No compile (no file changed). Advisory: no Lean bridge from WfTateTwist.weilLine to rationalWeilLine (proof step 7 via a theorem node); def-wf-tate-twist and def-weil-frobenius-coefficient-twists overlap (pre-existing); redundant public import of WfTateTwist."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For every $m\\in\\mathbf Z$ and every closed point $x$ of $X_0$, the\ngeometric Frobenius $\\tau_m$ on $\\Lambda_X(m)_{\\bar x}$ is\n$Q_x^{-m}\\mathrm{id}$, where $Q_x=|\\kappa(x)|$.",
+  "proof": [
+   {
+    "text": "On $\\mu_{\\ell^n}$ the geometric Frobenius, i.e. the Weil structure $\\tau_1$ of\n$\\Lambda_X(1)$ given by the strict arrow of [lem-wf-tate-twist-compatibility], acts by raising to the\ninverse $q$-th power, hence on the stalk of $\\cO_{E,X}(1)$ at $\\bar x$, the free rank-one module\n$\\mathbf Z_\\ell(1)\\otimes_{\\mathbf Z_\\ell}\\cO_E$ with\n$\\mathbf Z_\\ell(1)=\\varprojlim_n\\mu_{\\ell^n}(k)$, the local Frobenius at $x$ is\nmultiplication by $Q_x^{-1}$; inverting $\\ell$, passing to\n$\\Qlb$, and the tensor/dual constructions of [def-wf-tate-twist] then give\n$Q_x^{-m}$ on $\\Lambda_X(m)_{\\bar x}$.",
+    "uses": [
+     "lem-wf-tate-twist-compatibility",
+     "def-wf-tate-twist"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

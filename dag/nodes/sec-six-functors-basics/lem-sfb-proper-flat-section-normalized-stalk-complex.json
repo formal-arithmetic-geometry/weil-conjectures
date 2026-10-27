@@ -1,0 +1,190 @@
+{
+ "id": "lem-sfb-proper-flat-section-normalized-stalk-complex",
+ "kind": "statement",
+ "title": "Section-normalized finite free complex over a proper-flat base stalk",
+ "statement": "Let S be locally Noetherian and quasi-compact [pqf-def-locnoeth], f:X to S a proper scheme morphism [def-pc-scheme, def-weil-proper-morphism], F an invertible module [def-sc-invertible-module] flat over S in the stalkwise sense [def-weil-pbc-flat-ring-map], and s a point of S. Put R=O_(S,s). There exists a bounded finite free R-module cochain complex C [def-pc-derived-category, def-weil-pbc-free-module] with additive isomorphisms H^0(C) to (f_*F)_s, H^0(C tensor k(s)) to the actual fibre sections, and H^1(C tensor k(s)) to H^1(X_s,F_s) [def-pc-scheme-fibre, def-weil-residue-field, pqf-def-cohomology]. Residue cohomology and its reduction map are the scalar-extension/restriction unit constructions [lem-sfb-local-residue-cohomology-lifting]. For every open U containing s and section t' of F on f^(-1)U, reduction of the inverse image of the germ of t' under the first isomorphism, followed by the second isomorphism, equals the actual tensor pullback of t' to the fibre [def-pc-module-pullback], restricted to the whole fibre using s in U. No H^1-vanishing hypothesis is present.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK, lemma-perfect-direct-image and remark-explain-perfect-direct-image; perfect.tex Tag 0B91(2); cohomology.tex Tag 08HY"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sc-invertible-module",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module",
+  "lem-sfb-local-residue-cohomology-lifting"
+ ],
+ "proof": [
+  {
+   "text": "Work on an affine neighbourhood of s. Properness, local Noetherianity and [pqf-lem-lft-fp-locnoeth] give finite presentation. The local rank-one trivializations of F give quasi-coherence and finite presentation. Apply the proper-flat perfect-direct-image argument [lem-pc-rf-perfect-base-change] and the bounded projective local model [def-pc-perfect-complex]. Localize its terms at s: finite projective modules over the local ring are free. Keep this one derived-model isomorphism fixed throughout the comparisons.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-sbc-locally-finite-presentation",
+    "def-sc-invertible-module",
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  },
+  {
+   "text": "Exactness of tilde and its affine sections unit identify model cohomology with the direct-image cohomology. Exactness of stalks gives the zeroth cohomology identification with (f_*F)_s. Bounded flat derived pullback is termwise tensor pullback. The normalized tilde-pullback isomorphism and canonical perfect base change identify residue cohomology with fibre cohomology in degrees zero and one. Use the natural module/source cohomology comparison to bridge the source affine higher-direct-image H model to the moduleCohomology occurring in the statement. Restriction of scalars is exact and leaves the underlying additive cohomology groups unchanged.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pc-derived-direct-image",
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  },
+  {
+   "text": "For a representative section t' on f^(-1)U, the cohomology unit sends its cycle z to 1 tensor z. The unit-normalized tilde comparison has precisely that formula. The canonical derived module base-change map is the mate followed by the derived-to-ordinary comparison. Evaluate the mate by the pullback of the counit, then evaluate the section-normalized tensor adjunction. The result is tensorPullbackSection of t', restricted to the whole fibre via the fibreHomeo containment proof. Thus the displayed compatibility holds with the same chosen model and the actual pullback of the original section.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-scheme-derived-mate-evaluation",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, counit definition of the mate; schemes.tex Tag 01I9; sheaves.tex 0096"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-perfect-complex",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-derived-direct-image",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-sc-module-cohomology-source-comparison",
+  "def-pc-derived-module-base-change-map",
+  "lem-pc-scheme-derived-mate-evaluation",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK, lemma-perfect-direct-image and remark-explain-perfect-direct-image; perfect.tex Tag 0B91(2); cohomology.tex Tag 08HY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section normalized bounded finite free stalk complex computing coherent cohomology and canonical fibre base change for a proper flat coherent sheaf",
+   "results": "Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.stalkIso, sheafifyStalkIso and Flat.stalkMap. These compute individual stalks, not proper cohomology/base change.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism flat coherent module bounded finite free complex computes stalk and fibre cohomology compatibly with actual section restriction",
+   "results": "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap and morphism flatness criteria; no compatible cohomology model.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj; perfect.*baseChange|baseChange.*perfect in Mathlib/AlgebraicGeometry",
+   "results": "Scheme morphism lifting, cover and stalk results; no coherent derived proper base-change model. The adopted PerfectBaseChange theorem is noncanonical on cohomology, as its docstring explicitly records.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatFibreSectionLifting",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proper-flat-fibre-section-lifting",
+   "place": "Supporting finite-complex section-lifting argument, steps 2-7; the inherited unit route and statement are unchanged.",
+   "via": [
+    "lem-sfb-proper-flat-fibre-section-lifting",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSectionNormalizedStalkComplex",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_section_normalized_stalk_complex",
+  "statement": "theorem exists_section_normalized_stalk_complex {X S : Scheme.{u}} (f : X ⟶ S)\n    [IsLocallyNoetherian S] [CompactSpace S] [IsProper f]\n    (F : X.Modules) [F.IsInvertible]\n    (hflat : ∀ x : X, Module.Flat (S.presheaf.stalk (f x))\n      ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) (s : S) :\n    ∃ (C : CochainComplex (ModuleCat.{u} (S.presheaf.stalk s)) ℤ) (a b : ℤ),\n      C.IsStrictlyGE a ∧ C.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Free (S.presheaf.stalk s) (C.X i)) ∧\n      (∀ i : ℤ, Module.Finite (S.presheaf.stalk s) (C.X i)) ∧\n      ∃ (e₀ : C.homology 0 ≃+\n          ((RingedSpace.moduleStalkFunctor S.toRingedSpace s).obj ((pushforward f).obj F)))\n        (eF₀ : C.residueComplex.homology 0 ≃+ Γ((tensorPullback (f.fiberι s)).obj F, ⊤))\n        (eF₁ : C.residueComplex.homology 1 ≃+\n          ((RingedSpace.moduleCohomology (f.fiber s).toRingedSpace 1).obj\n            ((tensorPullback (f.fiberι s)).obj F))),\n        ∀ (U : S.Opens) (hs : s ∈ U) (t' : Γ(F, f ⁻¹ᵁ U)),\n          eF₀ (C.residueCohomologyMap 0 (e₀.symm\n            (TopCat.Presheaf.germ ((pushforward f).obj F).val.presheaf U s hs t'))) =\n          ((tensorPullback (f.fiberι s)).obj F).val.map\n            (homOfLE (fun x _ ↦ Eq.mpr\n              (congrArg (fun y : S ↦ y ∈ U) (f.fiberHomeo s x).property) hs)).op\n            (tensorPullbackSection (f.fiberι s) F (f ⁻¹ᵁ U) t')",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSectionNormalizedStalkComplex.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

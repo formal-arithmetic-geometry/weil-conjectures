@@ -1,0 +1,239 @@
+{
+ "id": "lem-weil-pbc-directed-pairs-colimit-transitivity",
+ "kind": "statement",
+ "title": "Transitivity of colimits over directed pair systems",
+ "statement": "Let $\\mathcal C$ be a category, with colimits understood as in [def-weil-pbc-category-colimit]. Let $I$ and $K_i$ for $i\\in I$ be small nonempty directed preordered sets. Suppose $P=\\{(i,k):i\\in I,\\ k\\in K_i\\}$ has a preorder $\\preceq$ such that (a) $(i,k)\\preceq(j,l)$ implies $i\\le j$; (b) $k\\le l$ in $K_i$ implies $(i,k)\\preceq(i,l)$; and (c) for every $i\\le j$ and $k\\in K_i$ some $l\\in K_j$ satisfies $(i,k)\\preceq(j,l)$. Let $D:P\\to\\mathcal C$ and $B:I\\to\\mathcal C$ be functors. Suppose maps $b_{ik}:D(i,k)\\to B_i$ satisfy $B(i\\le j)b_{ik}=b_{jl}D((i,k)\\preceq(j,l))$ for every relation in $P$, and that for each $i$ the maps $(b_{ik})_{k\\in K_i}$ exhibit $B_i$ as the colimit of $D$ restricted along $K_i\\to P$, $k\\mapsto(i,k)$. If $(L,(c_i)_i)$ is a colimit cocone of $B$, then $(L,(c_i b_{ik})_{(i,k)\\in P})$ is a colimit cocone of $D$. Thus the canonical comparison $\\varinjlim_PD\\to\\varinjlim_IB$ is an isomorphism whenever the right-hand colimit exists.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final equality colim A_ik = colim A_i = A; general categorical comparison for its directed pairs (the argument implicit in that equality, reconstructed by Q27)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write $d_{qp}=D(p\\preceq q)$ and $B_{ji}=B(i\\le j)$, with composition read right to left. The dependent union $P$ is small. Condition (a) makes the projection $P\\to I$ monotone, and (b) makes each inclusion $K_i\\to P$ monotone, hence a functor of the associated thin categories. For $p=(i,k)\\preceq q=(j,l)$, compatibility gives $(c_jb_{jl})d_{qp}=c_jB_{ji}b_{ik}=c_ib_{ik}$. Thus the proposed legs form a cocone on $D$ by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  },
+  {
+   "text": "Let $(M,(a_{ik}))$ be an arbitrary cocone on $D$. Its restriction along $K_i\\to P$ is a cocone, since condition (b) supplies each required pair relation. The assumed fiber colimit and [def-weil-pbc-category-colimit] give a unique $u_i:B_i\\to M$ with $u_ib_{ik}=a_{ik}$ for all $k\\in K_i$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  },
+  {
+   "text": "Fix $i\\le j$. For each $k\\in K_i$, condition (c) supplies $l\\in K_j$ with $p=(i,k)\\preceq q=(j,l)$. The given compatibility and the cocone equation for $a$ imply $u_jB_{ji}b_{ik}=u_jb_{jl}d_{qp}=a_{jl}d_{qp}=a_{ik}=u_ib_{ik}$. Both $u_jB_{ji}$ and $u_i$ therefore factor the same cocone on the $i$th fiber; uniqueness in [def-weil-pbc-category-colimit] gives $u_jB_{ji}=u_i$. This proves compatibility without choosing transition functors between the fibers.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  },
+  {
+   "text": "The compatible family $(u_i)$ is a cocone on $B$ with vertex $M$. Since $(L,(c_i))$ is a colimit of $B$, [def-weil-pbc-category-colimit] gives a unique $u:L\\to M$ with $uc_i=u_i$. Consequently $u(c_ib_{ik})=u_ib_{ik}=a_{ik}$, so $u$ factors the arbitrary cocone on $D$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  },
+  {
+   "text": "Suppose $v:L\\to M$ also satisfies $v(c_ib_{ik})=a_{ik}$ for every pair. For fixed $i$, the maps $vc_i$ and $u_i$ agree after every $b_{ik}$, so fiber-colimit uniqueness in [def-weil-pbc-category-colimit] gives $vc_i=u_i$. Base-colimit uniqueness then gives $v=u$. Thus the cocone of step 1 has the full existence and uniqueness property of a colimit of $D$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  },
+  {
+   "text": "Existence of the base colimit therefore provides a colimit of $D$. Put $s_{(i,k)}=c_ib_{ik}$. If $(C,(t_p))$ is a chosen colimit of $D$, its universal property gives $f:C\\to L$ with $ft_p=s_p$. The colimit property just proved for $L$ gives $g:L\\to C$ with $gs_p=t_p$. Then $(gf)t_p=gs_p=t_p$ and $(fg)s_p=ft_p=s_p$ for every $p$. Uniqueness in [def-weil-pbc-category-colimit] gives $gf=1_C$ and $fg=1_L$. The canonical comparison $f$ is thus an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed colimit equality; explicit universal-property argument using Categories, Tag 002F, definition-colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, final displayed equality, expanded using Categories Tag 002F (definition-colimit)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]terated[Cc]olimit|[Cc]olimit.*[Gg]rothendieck|[Cc]olimit.*[Ff]iber",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean (searched CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck-construction colimit theorems require a specified Cat-valued functor and transition functors on fibers; the stated arbitrary pair relation does not supply them, so no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimit over a directed preorder equals iterated colimit over directed fibers of a monotone projection",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Grothendieck",
+   "results": "2 hits: CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone, CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck-construction colimit theorems require a specified Cat-valued functor and transition functors on fibers; the stated arbitrary pair relation does not supply them, so no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*[Ff]iber|isColimit.*[Ff]ibre|fiberwiseColimit",
+   "results": "5 hits: 55, 95, 107, 108, 111 (searched CategoryTheory/Limits/Shapes/Grothendieck.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck-construction colimit theorems require a specified Cat-valued functor and transition functors on fibers; the stated arbitrary pair relation does not supply them, so no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between directed preorders with directed fibers and lifts of upper indices computes colimits by colimits over its fibers",
+   "results": "8 hits: CategoryTheory.Functor.IsLocallyDirected, CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone, CategoryTheory.IsFiltered.exists_directed, CategoryTheory.Functor.exists_map_eq_of_isLocallyDirected, CategoryTheory.Functor.IsWellOrderContinuous.nonempty_isColimit, CategoryTheory.Functor.IsLocallyDirected.cond, Preorder.instHasColimitsOfShape, Preorder.colimitCoconeOfIsLUB",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck-construction colimit theorems require a specified Cat-valued functor and transition functors on fibers; the stated arbitrary pair relation does not supply them, so no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of colimits along a monotone map of preorders whose exact fibers are nonempty directed and can lift every increase in the base",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone, CategoryTheory.Functor.IsWellOrderContinuous.nonempty_isColimit, CategoryTheory.Functor.isColimitOfIsWellOrderContinuous', CategoryTheory.Functor.isColimitOfIsWellOrderContinuous, CategoryTheory.Limits.hasColimitsOfShape_of_isSuccLimit', CategoryTheory.TransfiniteCompositionOfShape.ici_isColimit, CategoryTheory.Limits.instHasIterationOfShapeOfHasColimitsOfSize, CategoryTheory.Limits.HasIterationOfShape.hasColimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck-construction colimit theorems require a specified Cat-valued functor and transition functors on fibers; the stated arbitrary pair relation does not supply them, so no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*[Ff]iber|isColimit.*[Ff]ibre|fiberwiseColimit|[Ii]terated[Cc]olimit",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck results require Cat-valued transition functors; Fubini requires a fixed product index; Cofan.isColimitTrans concerns discrete coproducts. None supplies the arbitrary pair preorder and upper-lift hypothesis as a one-line specialization. Other hits concern ordered transfinite iteration or colimits in a preorder target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimit over a directed preorder computed by first taking colimits over directed fibers and then over the base",
+   "results": "8 hits: CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit, CategoryTheory.Limits.colimitFiberwiseColimitIso, CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone, CategoryTheory.Limits.fiberwiseColimCompColimIso, CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone, CategoryTheory.Limits.fiberwiseColim, FirstOrder.Language.DirectLimit, Ring.DirectLimit.commRing",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck results require Cat-valued transition functors; Fubini requires a fixed product index; Cofan.isColimitTrans concerns discrete coproducts. None supplies the arbitrary pair preorder and upper-lift hypothesis as a one-line specialization. Other hits concern ordered transfinite iteration or colimits in a preorder target."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Grothendieck",
+   "results": "2 hits: CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone, CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck results require Cat-valued transition functors; Fubini requires a fixed product index; Cofan.isColimitTrans concerns discrete coproducts. None supplies the arbitrary pair preorder and upper-lift hypothesis as a one-line specialization. Other hits concern ordered transfinite iteration or colimits in a preorder target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit over a preorder of pairs is the colimit over the base of the colimits over its directed fibers when every base inequality admits an upper lift",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone, CategoryTheory.Limits.Types.isColimitOfMulticoequalizerDiagram', CategoryTheory.Limits.Cofan.isColimitTrans, Preorder.colimitCoconeOfIsLUB, Preorder.colimitCoconeOfIsLUB_isColimit, Preorder.instHasColimitsOfShape, CategoryTheory.Limits.Multicofork.isColimitToLinearOrder, CategoryTheory.SmallObject.SuccStruct.Iteration.isColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck results require Cat-valued transition functors; Fubini requires a fixed product index; Cofan.isColimitTrans concerns discrete coproducts. None supplies the arbitrary pair preorder and upper-lift hypothesis as a one-line specialization. Other hits concern ordered transfinite iteration or colimits in a preorder target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal property of iterated colimits for a monotone projection with directed fibers and upper lifts, without chosen transition functors on the fibers",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.isColimit, CategoryTheory.SmallObject.SuccStruct.isColimitIterationCocone, CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.functor, CategoryTheory.SmallObject.SuccStruct.Iteration.obj_limit, CategoryTheory.SmallObject.SuccStruct.iterationCocone, CategoryTheory.SmallObject.SuccStruct.iteration, CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone, CategoryTheory.SmallObject.SuccStruct.transfiniteCompositionOfShapeιIteration_isColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck results require Cat-valued transition functors; Fubini requires a fixed product index; Cofan.isColimitTrans concerns discrete coproducts. None supplies the arbitrary pair preorder and upper-lift hypothesis as a one-line specialization. Other hits concern ordered transfinite iteration or colimits in a preorder target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Current main-20261015 blueprint ancestor lemma-weil-pbc-h1-constructible-representation, blueprint_update.proof[1], beginning \"The finite-pushforward lemma gives a monomorphism\". Via the recorded finite-pushforward and integral-approximation chain, this realizes the colimit-transitivity subargument of Stacks Properties Tag 0817, final equality colim A_ik = colim A_i = A (parent lem-weil-pbc-integral-algebra-directed-colimit-finite, proof step 4).",
+   "via": [
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-directed-pairs-colimit-transitivity",
+  "worker": "stage1",
+  "summary": "Q110 repair of returned head 973b60ea17b: reapplies the retained six-step split to the current unsplit DAG record and rechecks the current colimit-definition statement and all six verbatim citations. Makes the monotone projection and fiber inclusions explicit in step 1 and writes both inverse-comparison leg equations in step 6. Retains the exact statement, route, source, inherited Q27 searches and actual Q110 search log. No new nodes, no extra colimit-existence assumption, and no Lean attachment.",
+  "blueprint": "Serves the finite-pushforward monomorphism paragraph (blueprint_update.proof[1]) of lemma-weil-pbc-h1-constructible-representation via the existing via chain; explicitly proves the directed-pair colimit comparison used in parent proof step 4 and the last equality in Stacks Tag 0817."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-04983d6f8",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-04983d6f8 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a re-delivery of the PASSed head 973b60ea17b6, sent again after the landing refused it because the side completion was not promoted to the live DAG. I compared the two item records field by field: only proof steps 1 and 6 and the split_report differ. Step 1 now states explicitly that P→I and K_i→P are monotone. Step 6 now names the legs t_p and s_p and checks (gf)t_p=t_p and (fg)s_p=s_p. The mathematics is the same. The statement, stmt_deps and proof_deps (def-weil-pbc-category-colimit), the source, chapter and unit are unchanged, and there are no new nodes. All six steps are correct from the cocone and colimit clauses of the cited definition. Step 1: c_j b_jl d_qp = c_j B_ji b_ik = c_i b_ik. Steps 2 and 3: with l from (c), u_j B_ji b_ik = a_jl d_qp = a_ik, so fiber uniqueness gives u_j B_ji = u_i. Steps 4 and 5: existence and uniqueness through L. Step 6: the canonical comparison is an isomorphism. Condition (c) is essential: with I={0<1}, discrete P and one-point sets, the P-colimit has 2 points and the base colimit 1. Small cases also hold: singleton I, singleton fibers, a larger relation inside a fiber, and non-antisymmetric preorders. Parent step 4 applies the item to the P of lem-weil-pbc-kernel-ideal-directed-pairs, which supplies (a), (b) and (c) exactly. The source is Stacks Properties Tag 0817, properties.tex 3424-3495, whose final display colim A_ik = colim A_i = A assumes this transitivity without proof. No duplicate: lem-pc-colimit-fubini covers products only, lem-coef-cartesian-grothendieck-colimit-formula is infinity-categorical and needs transition functors, and Mathlib's Grothendieck and Fubini results need transition functors or a product shape. No SGA source, no tool_uses, no changes. Maintainer note: this is a promotion-loop re-delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectedPairsColimitTransitivity",
+  "declaration": "CategoryTheory.Limits.directedPairs_colimit_transitivity",
+  "file": "lean/Sheaf/CategoryTheory/DirectedPairsColimitTransitivity.lean",
+  "statement": "theorem directedPairs_colimit_transitivity {C : Type u} [Category.{v} C] {I : Type wI} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] {K : I → Type wK} [∀ i, Preorder (K i)] [∀ i, Nonempty (K i)] [∀ i, IsDirected (K i) (· ≤ ·)] [Preorder (Σ i, K i)] (hproj : Monotone (fun p : Σ i, K i ↦ p.1)) (hinc : ∀ i, Monotone (Sigma.mk i : K i → Σ j, K j)) (hlift : ∀ (i j : I), i ≤ j → ∀ k : K i, ∃ l : K j, (⟨i, k⟩ : Σ r, K r) ≤ ⟨j, l⟩) (D : (Σ i, K i) ⥤ C) (B : I ⥤ C) (b : ∀ i, (hinc i).functor ⋙ D ⟶ (Functor.const (K i)).obj (B.obj i)) (hcompat : ∀ (p q : Σ i, K i) (h : p ≤ q), D.map (homOfLE h) ≫ (b q.1).app q.2 = (b p.1).app p.2 ≫ B.map (homOfLE (hproj h))) (hfiber : ∀ i, IsColimit (Cocone.mk (B.obj i) (b i))) (c : Cocone B) (hc : IsColimit c) : ∃ a : D ⟶ (Functor.const (Σ i, K i)).obj c.pt, (∀ p : Σ i, K i, a.app p = (b p.1).app p.2 ≫ c.ι.app p.1) ∧ Nonempty (IsColimit (Cocone.mk c.pt a)) ∧ ∀ (d : Cocone D) (hd : IsColimit d), IsIso (hd.desc (Cocone.mk c.pt a))",
+  "branch": "sheaf-dag",
+  "by": "Q131",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-125fa22d8",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Every hypothesis and clause of the node maps to one Lean binder or conjunct: arbitrary preorder on Σ i, K i; (a) hproj, (b) hinc, (c) hlift as an existential with no chosen transitions; hcompat over every pair relation; hfiber; base colimit c/hc; conclusion pins every leg to b_ik ≫ c_i, states IsColimit, and states IsIso of hd.desc for any colimit d of D. No extra assumptions; universes independent; the six proof steps are correct; condition (c) is needed (counterexample I={0<1}). Snapshot node differs from side-live only in lean; the lean record is complete and its statement verbatim. Source properties.tex 3424-3495 Tag 0817 checked. Imports traced: neither Mathlib.CategoryTheory.Sigma.Basic nor Mathlib.Data.Sigma.Order is imported, so the local preorder is the only one used; advisory for citers that import them. Docstrings with source place, blueprint id and all six steps; no defs; proof is sorry; lines within 100 characters; no duplicate in Mathlib, Sheaf or WeilConjectures. No recompile since no file changed; the worker's report says it compiled cleanly. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261023T110203-L-3664357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Limits.directedPairs_colimit_transitivity"
+  ],
+  "sorry_after": []
+ }
+}

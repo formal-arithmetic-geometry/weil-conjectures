@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-space-proper-support-closed-operations",
+ "kind": "statement",
+ "title": "Finite unions and closed subsets of relatively proper supports on spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Y$ be locally of finite type on etale scheme charts. Use the point spaces with their atlas topology [def-a1-space-point-topology]. A closed subspace is a representable closed immersion, tested on schemes [def-weil-closed-immersion]. Proper means separated (closed relative diagonal), quasi-compact, locally of finite type and universally closed, meaning closed on point spaces after every algebraic-space base change. For a closed subset $T\\subseteq|X|$, its reduced induced closed subspace is the closed subspace with point set $T$ and reduced etale scheme charts. Say that $T$ is proper over $Y$ when this reduced induced subspace is proper over $Y$. Then this is equivalent both to the existence of some closed subspace with point set $T$ proper over $Y$, and to every closed subspace with that point set being proper over $Y$. If $T$ is proper over $Y$ and $T^{\\prime}\\subseteq T$ is closed in $|X|$, then $T^{\\prime}$ is proper over $Y$. For every finite family of closed subsets $T_1,\\ldots,T_n$ proper over $Y$, including the empty family, $\\bigcup_{j=1}^n T_j$ is proper over $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 0CZC (lemma-closed-proper-over-base), 0CZE (lemma-closed-closed-proper-over-base), 0CZH (lemma-union-closed-proper-over-base); reduced induced subspaces: spaces-properties.tex Tag 047X (definition-reduced-induced-space)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Every closed subspace $W\\hookrightarrow X$ is locally of finite type over $Y$: its inclusion is proper by [lem-sfb-space-closed-subspace-proper], hence locally of finite type, and composition with $f$ preserves local finite type by [lem-sfb-stack-finite-type-calculus], specialized to algebraic spaces. Also, [lem-sfb-space-reduced-closed-support] supplies every reduced induced closed subspace used below, including its closed embedding and its point-space identification. No Noetherian hypothesis is needed.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZC (lemma-closed-proper-over-base), local finite type requirement; spaces-morphisms.tex Tags 04XZ and 03XG; spaces-properties.tex Tag 03IQ"
+   }
+  },
+  {
+   "text": "Fix $T$ and any closed structure $Z\\hookrightarrow X$ on $T$. Let $R_Z\\hookrightarrow Z$ be the reduced induced subspace on all of $|Z|$, by [lem-sfb-space-reduced-closed-support]. Its composite into $X$ is a closed immersion by [lem-sfb-stack-closed-immersion-calculus], specialized to spaces. It has reduced charts and point image $T$, so uniqueness in [lem-sfb-space-reduced-closed-support] identifies it, over $X$, with the reduced induced structure $R_T\\hookrightarrow X$. Thus $R_T\\hookrightarrow Z$ is a thickening: a closed immersion inducing a homeomorphism on point spaces. Apply [lem-sfb-space-thickening-topological-properties] with source thickening $R_T\\hookrightarrow Z$ and target thickening $\\mathrm{id}_Y$. The maps $R_T\\to Y$ and $Z\\to Y$ have simultaneously each of separatedness, quasi-compactness and universal closedness. Both are locally of finite type by step 1. Therefore $R_T\\to Y$ is proper if and only if $Z\\to Y$ is proper. Since $R_T$ itself is a closed structure on $T$, this proves all three equivalent formulations, including the existential and universal ones.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-stack-closed-immersion-calculus",
+    "lem-sfb-space-thickening-topological-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZC (lemma-closed-proper-over-base), reduction proof of structure independence; spaces-more-morphisms.tex Tag 09ZY (lemma-thicken-property-morphisms), parts (3), (4), (6)"
+   }
+  },
+  {
+   "text": "For $T\\prime\\subseteq T$ closed, let $Z=R_T$, which is proper over $Y$. The inverse image of $T\\prime$ in $|Z|$ is closed. Give it its reduced induced structure $W\\hookrightarrow Z$ by [lem-sfb-space-reduced-closed-support]. This inclusion is proper by [lem-sfb-space-closed-subspace-proper], so $W\\to Y$ is proper by [lem-sfb-space-proper-composition]. Its composite into $X$ is a closed immersion by [lem-sfb-stack-closed-immersion-calculus], and has point image $T\\prime$. Step 2 therefore proves that $T\\prime$ is proper over $Y$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition",
+    "lem-sfb-stack-closed-immersion-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZE (lemma-closed-closed-proper-over-base), filling the omitted proof"
+   }
+  },
+  {
+   "text": "For a nonempty finite family set $T=\\bigcup_iT_i$, a closed set, and let $Z=R_T$ and $Z_i=R_{T_i}$. Put $W_i=Z_i\\times_XZ$. By the arbitrary-base-change assertion of [lem-sfb-space-reduced-closed-support], both $W_i\\to Z_i$ and $W_i\\to Z$ are closed immersions, and the latter has point image the inverse image of $T_i$ in $|Z|$. In particular these images cover $|Z|$. Do not assert that $W_i$ is reduced. Since $Z_i\\to Y$ is proper, [lem-sfb-space-closed-subspace-proper] and [lem-sfb-space-proper-composition] make $W_i\\to Y$ proper.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZH (lemma-union-closed-proper-over-base), closed component supports; spaces-properties.tex Tag 03IQ and its closed-pullback support statement"
+   }
+  },
+  {
+   "text": "Form $D=\\coprod_iW_i$ using [lem-trf-algebraic-space-coproduct]; finitely many chosen atlases have a scheme coproduct in the fixed site, so its size hypothesis holds. The scheme-test partition and cartesian squares in [lem-trf-fppf-sheaf-coproduct-partition] identify the summands with disjoint clopen subspaces and show that this decomposition persists after any base change: apply the partition to every scheme test of that base change. In particular point spaces are disjoint topological unions. The map $D\\to Y$ is proper, directly from the four defining conditions. It is locally of finite type: a disjoint union of atlases of the $W_i$ gives chart maps locally equal to those of $W_i\\to Y$; apply [lem-sfb-space-local-properties-chart-test]. Its diagonal on the clopen blocks $W_i\\times_YW_j$ is empty if $i\\ne j$ and is $\\Delta_{W_i/Y}$ if $i=j$. On scheme tests these are closed immersions, so the diagonal is a closed immersion (closedness and surjectivity of the defining ring-sheaf quotient are local on this clopen partition). Over an affine test the source is a finite disjoint union of quasi-compact point spaces, hence quasi-compact by taking the union of finitely many finite subcovers. After any base change the image of a closed set is the finite union of its closed images from the proper summands, hence closed.",
+   "uses": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZH (lemma-union-closed-proper-over-base), finite disjoint union of proper sources; spaces.tex Tags 02WQ and 0F15, with componentwise verification of properness"
+   }
+  },
+  {
+   "text": "The component maps $W_i\\to Z$ induce $a:D\\to Z$. It is surjective because their point images cover $|Z|$. It is universally closed: after every algebraic-space base change to $Z$, the source remains the finite disjoint union of the base changes of $W_i$; those maps are closed immersions by [lem-sfb-stack-closed-immersion-calculus] and hence proper by [lem-sfb-space-closed-subspace-proper]. The image of a closed subset is the finite union of the resulting closed images. Surjectivity persists under arbitrary base change by the fibre-product point-surjectivity assertion in [lem-a1-space-point-open-calculus].",
+   "uses": [
+    "lem-sfb-stack-closed-immersion-calculus",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZH (lemma-union-closed-proper-over-base), universally closed covering of the union; spaces-properties.tex Tag 03H4"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-relative-uc-surjection-separated] applied over $B=Y$ to $a:D\\to Z$, the properness of $D\\to Y$ implies that $Z\\to Y$ is separated. For an affine scheme $A\\to Y$, the continuous surjection $|D\\times_YA|\\to|Z\\times_YA|$ has quasi-compact source, so its target is quasi-compact: pull back any open cover and push its finite subcover down using surjectivity. Thus $Z\\to Y$ is quasi-compact. For an arbitrary space $Y\\prime\\to Y$ and closed $C\\subseteq|Z\\times_YY\\prime|$, continuity of point maps from [lem-a1-space-point-open-calculus] makes $a_{Y\\prime}^{-1}(C)$ closed. Surjectivity gives the equality of point images $(Z\\times_YY\\prime\\to Y\\prime)(C)=(D\\times_YY\\prime\\to Y\\prime)(a_{Y\\prime}^{-1}(C))$. The right side is closed by properness of $D\\to Y$. Hence $Z\\to Y$ is universally closed. Together with local finite type from step 1 these conditions prove $Z\\to Y$ proper, which is exactly properness of $T$.",
+   "uses": [
+    "lem-sfb-space-relative-uc-surjection-separated",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZH (lemma-union-closed-proper-over-base), descent from the finite union of sources; spaces-morphisms.tex Tags 05Z2(4) and 08AJ (lemma-image-proper-is-proper), with the closed-image argument written out"
+   }
+  },
+  {
+   "text": "For the empty family the union is empty. The empty sheaf coproduct represents the empty scheme, as its scheme-test sections are exactly those given for the empty index set in [lem-trf-fppf-sheaf-coproduct-partition]. It is a reduced closed subspace of $X$, hence is the reduced induced structure on the empty closed set by [lem-sfb-space-reduced-closed-support]. The map from the empty space to $Y$ is a closed immersion on every scheme test, and therefore proper by [lem-sfb-space-closed-subspace-proper]. This proves the empty-family clause; the same arguments permit empty summands and repeated $T_i$.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZH (lemma-union-closed-proper-over-base), empty-family case; spaces.tex Tag 0F15"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-relative-uc-surjection-separated",
+  "lem-sfb-space-thickening-topological-properties",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 0CZC, 0CZE and 0CZH. Structure independence uses the equivalent reduction argument via Tag 09ZY; the omitted closed-subset proof and the componentwise finite-union and closed-image arguments are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|union.*(isProper|IsProper)|isProper.*union|closed.*subset.*proper",
+   "results": "Read 12 hits: Mathlib/Topology/Maps/Proper/Basic.lean, Mathlib/Topology/Maps/Proper/Basic.lean, Mathlib/Topology/MetricSpace/ShrinkingLemma.lean, Mathlib/Topology/MetricSpace/ShrinkingLemma.lean, Mathlib/Topology/MetricSpace/Bounded.lean, Mathlib/Topology/MetricSpace/Bounded.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: topological proper maps, finite closed unions and scheme IsProper lemmas do not give the algebraic-space proper-support assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subsets proper over a base for algebraic spaces are closed under finite union and taking smaller closed subsets",
+   "results": "Read 8 hits: isClosed_biUnion_finset, Set.Finite.isClosed_biUnion, TopologicalSpace.Closeds.isClosed, TopologicalSpace.Closeds, isClosed_sUnion, TopologicalSpace.Closeds.isClosed_subsets_of_isClosed, ProperSpace.of_isClosed, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: topological proper maps, finite closed unions and scheme IsProper lemmas do not give the algebraic-space proper-support assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "Read 12 hits: AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper. ",
+   "date": "2026-10-23",
+   "verdict": "no match: topological proper maps, finite closed unions and scheme IsProper lemmas do not give the algebraic-space proper-support assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of algebraic spaces finite unions of closed subsets proper over the base and closed subsets of them are proper over the base",
+   "results": "Read 8 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: topological proper maps, finite closed unions and scheme IsProper lemmas do not give the algebraic-space proper-support assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of a closed subset of an algebraic space is independent of its nilpotent scheme structure and preserved by finite unions and closed subsets",
+   "results": "Read 8 hits: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme or abstract derived-category results do not give this algebraic-space statement."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|union.*(isProper|IsProper)|isProper.*union|closed.*subset.*proper",
+   "results": "Read 12 hits: Mathlib/Topology/Maps/Proper/Basic.lean, Mathlib/Topology/Maps/Proper/Basic.lean, Mathlib/Topology/MetricSpace/ShrinkingLemma.lean, Mathlib/Topology/MetricSpace/ShrinkingLemma.lean, Mathlib/Topology/MetricSpace/Bounded.lean, Mathlib/Topology/MetricSpace/Bounded.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean. Scheme declarations and topological statements only; candidate sources Proper.lean, Separated.lean and UniversallyClosed.lean were inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, their ideal supports, or topological proper spaces; none proves all algebraic-space clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subsets proper over a base for algebraic spaces are closed under finite unions and taking smaller closed subsets",
+   "results": "Read 8 hits: isClosed_biUnion_finset, Set.Finite.isClosed_biUnion, TopologicalSpace.Closeds.isClosed, AlgebraicGeometry.IsProper.toUniversallyClosed, TopologicalSpace.Closeds, TopologicalSpace.Closeds.isClosed_subsets_of_isClosed, isClosed_sUnion, ProperSpace.of_isClosed. Scheme declarations and topological statements only; candidate sources Proper.lean, Separated.lean and UniversallyClosed.lean were inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, their ideal supports, or topological proper spaces; none proves all algebraic-space clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "Read 12 hits: AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper. Scheme declarations and topological statements only; candidate sources Proper.lean, Separated.lean and UniversallyClosed.lean were inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, their ideal supports, or topological proper spaces; none proves all algebraic-space clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of an algebraic space closed support is independent of its thickening and stable under finite union",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.IdealSheafData.support_sSup, AlgebraicGeometry.Scheme.IdealSheafData.support_iSup, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff. Scheme declarations and topological statements only; candidate sources Proper.lean, Separated.lean and UniversallyClosed.lean were inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, their ideal supports, or topological proper spaces; none proves all algebraic-space clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of algebraic spaces finite unions of relatively proper closed subsets and closed subsets are proper over the base",
+   "results": "Read 8 hits: AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion. Scheme declarations and topological statements only; candidate sources Proper.lean, Separated.lean and UniversallyClosed.lean were inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, their ideal supports, or topological proper spaces; none proves all algebraic-space clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-noetherian-tensor-perfect",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: proper-support finite union, passage to closed subsets and independence of closed-subspace structure in the 0DKJ application.",
+   "via": [
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-support-closed-operations",
+  "worker": "stage1",
+  "summary": "Checked all clauses against Stacks 0CZC/0CZE/0CZH and 047X; retained the statement. Reused reduced closed supports, thickenings, proper closed embeddings, proper composition and coproduct infrastructure. Isolated only relative separatedness descent (05Z2(4)); the existing 05Z2 node gives only absolute separatedness. Supplied the omitted closed-subset proof, finite-union four-property argument, arbitrary-base-change closed-image equality, and empty-family case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: proper-support finite union, passage to closed subsets and independence of closed-subspace structure in the 0DKJ application.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Existence of finite disjoint unions is a generic algebraic-space construction, not a replacement for the direct-image route; no node of this unit states it."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "The cartesian clopen component partitions give base-change decompositions for the finite disjoint union; no node of this unit states this sheaf construction."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Steps 6 and 7 take from its statement only the generic point-space facts that |A x_B C| -> |A| x_|B| |C| is surjective (so surjectivity of a persists under base change) and that morphisms of algebraic spaces induce continuous point maps; no node of this unit states them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-397007af4",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-397007af4 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and Stacks 0CZC/0CZE/0CZH, 05Z2 and 09ZY in full. The item matches 0CZC+0CZE+0CZH, and the empty family is trivially true. Step 2 replaces the source's scheme-theoretic union with 09ZY(3,4,6) for the thickening R_T into Z over id_Y; this is valid, with local finite type from step 1. Step 3 fills the omitted 0CZE proof correctly. Steps 4-7 work over Y, not S: W_i = Z_i x_X Z (not claimed reduced), D = coproduct of the W_i proper over Y, a: D -> Z surjective and universally closed, then the new 05Z2(4) node, plus quasi-compactness and closed-image descent. Step 8 handles the empty case. I confirmed the S/Y slip in the 0CZH proof (f = id on A1_k). The new node lem-sfb-space-relative-uc-surjection-separated is exactly 05Z2(4): it is statement-only, self-contained, and searched with grep, LeanSearch, Loogle and LeanFinder. It is not a duplicate: lem-sfb-space-uc-surjection-separation is the absolute (1)/(2) case and the pbc nodes are for schemes. Fix: lem-a1-space-point-open-calculus (unit sk-p-real-rankin, outside this unit's route) is used in steps 6-7 but was not declared; I added it to split_report.tool_uses, as the 58 other sfb citers declare it. I accept it and the two declared trf coproduct tool uses. Batch-5: every flagged citation is a generic algebraic-space or sheaf foundation reaching sec-trace-formula only through def-trf-algebraic-space; none is part of the trace formula or Poincare duality or their proofs. There is no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSupportClosedOperations",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_support_closed_operations",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSupportClosedOperations.lean",
+  "statement": "theorem proper_support_closed_operations {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocally (@LocallyOfFiniteType) f) : (∀ (T : TopologicalSpace.Closeds (Point X.obj.obj)) (R : ClosedSubspace X), IsReduced (R.val : AlgebraicSpace S) → pointImage R.val.arrow.hom.hom = (T : Set (Point X.obj.obj)) → (MapIsProper (R.val.arrow ≫ f) ↔ ∃ D : ClosedSubspace X, pointImage D.val.arrow.hom.hom = (T : Set (Point X.obj.obj)) ∧ MapIsProper (D.val.arrow ≫ f)) ∧ (MapIsProper (R.val.arrow ≫ f) ↔ ∀ D : ClosedSubspace X, pointImage D.val.arrow.hom.hom = (T : Set (Point X.obj.obj)) → MapIsProper (D.val.arrow ≫ f))) ∧ (∀ (T T' : TopologicalSpace.Closeds (Point X.obj.obj)) (R R' : ClosedSubspace X), T' ≤ T → IsReduced (R.val : AlgebraicSpace S) → pointImage R.val.arrow.hom.hom = (T : Set (Point X.obj.obj)) → IsReduced (R'.val : AlgebraicSpace S) → pointImage R'.val.arrow.hom.hom = (T' : Set (Point X.obj.obj)) → MapIsProper (R.val.arrow ≫ f) → MapIsProper (R'.val.arrow ≫ f)) ∧ (∀ (n : ℕ) (T : Fin n → TopologicalSpace.Closeds (Point X.obj.obj)) (R : Fin n → ClosedSubspace X), (∀ i : Fin n, IsReduced ((R i).val : AlgebraicSpace S) ∧ pointImage (R i).val.arrow.hom.hom = (T i : Set (Point X.obj.obj)) ∧ MapIsProper ((R i).val.arrow ≫ f)) → ∀ C : ClosedSubspace X, IsReduced (C.val : AlgebraicSpace S) → pointImage C.val.arrow.hom.hom = ⋃ i : Fin n, (T i : Set (Point X.obj.obj)) → MapIsProper (C.val.arrow ≫ f))",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The reduced induced structure is quantified by its defining reducedness and point image, using the existing existence-and-uniqueness theorem. All three clauses use the same canonical reduced object up to its unique subobject equality. Added only three already-landed statement dependencies for their existing notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cd5c8222",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_dep records, the module, the report, and the side-live sources of MapIsLocally/MapIsProper (sep ∧ qc ∧ lft ∧ univ-closed on points), ClosedSubspace, AlgebraicSpace.IsReduced, pointImage, exists_unique_reduced_closed_subspace. Clauses match Stacks 0CZC (reduced ⇔ ∃D ⇔ ∀D with arbitrary non-reduced D), 0CZE (T' ≤ T) and 0CZH (Fin n union, n = 0 included). The reduced induced structure is quantified by reducedness and point image; the landed existence-and-uniqueness theorem makes it non-vacuous and canonical. Only hypothesis: local finite type on étale charts. Single universe u. No algebraic-space proper-support duplicate (grep of side-live finds only scheme ClosedSubsetProperOverBase/HasSupportProperOver and CoherentAdicHasProperSupport). Node differs from live only in lean and 3 added landed, used stmt_deps; statement verbatim; proof-dep imports exist; sorry only; docstrings carry the source, blueprint and 8 steps; report has Worker report and Second reading sections. No files changed, no compile."
+ }
+}

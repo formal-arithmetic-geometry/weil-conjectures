@@ -1,0 +1,201 @@
+{
+ "id": "lem-sp-open-scalar-restricted-transpose-expansion",
+ "kind": "statement",
+ "title": "Open counit expansion of a restricted scalar transpose",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. All schemes are separated of finite type over $k$, and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\varphi:A\\to B$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$, and choose $N=\\ell^n\\geq1$ annihilating both. On either the ordinary etale or pro-etale site let $\\mathcal C_{T,R}=D^b_{ctf}(T,R)$ mean the full category of constant-$R$ module complexes with bounded constructible cohomology and finite Tor amplitude: tensor with any degree-zero module sheaf has cohomology in one fixed finite interval [def-weil-pbc-derived-categories, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude, det-sp-et-proet-adjunction-transfer]. Write $T_T=-\\otimes^L_{A_T}B_T$ [det-sp-scalar-extension-functor, lem-pur-derived-change-of-rings].\nLet $f:X\\to Y$ be any separated finite-type morphism and $j:U\\hookrightarrow X$ a quasi-compact open immersion; put $g=fj$ [def-weil-open-immersion]. Choose compactifications with separated finite-type middle schemes [def-weil-compactifications-refinements]. On the pro-etale finite-Tor categories write $F_{h,R}=Rh_{!,R}\\dashv G_{h,R}=h_R^!$ with counit $\\epsilon_{h,R}$, for $h=f,g$ and $R=A,B$ [sk-prop-sf-rf-shriek-preservation]. Let $J_R=Dj_{!,R}\\dashv U_R=j_R^*$ have its actual open counit $v_R$ [det-sf-mate-open-restriction], and use the canonical adjunction-preserving composition and refinement comparisons $F_{g,R}=F_{f,R}J_R$, $G_{g,R}=U_RG_{f,R}$ [def-weil-pbc-composite-adjunction, lem-sp-et-proet-coefficient-compatibility]. Let $b_f:T_YF_{f,A}\\xrightarrow{\\sim}F_{f,B}T_X$ and $b_j:T_XJ_A\\xrightarrow{\\sim}J_BT_U$ be the specified proper-counit/open-tensor maps [det-sp-reduction-direct-image], using the identity proper compactification to normalize $b_j$. Let $a_j:T_UU_A\\xrightarrow{\\sim}U_BT_X$ be the canonical scalar/restriction isomorphism [def-sp-constant-scalar-pullback-comparison].\nFix $K\\in\\mathcal C_{Y,A}$, put $M=G_{f,A}K$ and $L=U_AM$, and let $r:T_XM\\to G_{f,B}T_YK$ be any morphism satisfying\n$$\\epsilon_{f,B,T_YK}\\circ F_{f,B}(r)=T_Y(\\epsilon_{f,A,K})\\circ b_f(M)^{-1}.$$\nDefine $d=U_B(r)\\circ a_{j,M}:T_UL\\to G_{g,B}T_YK$ and its counit transpose $\\tau=\\epsilon_{g,B,T_YK}\\circ F_{g,B}(d)$. Then\n$$v_{B,T_XM}\\circ J_B(a_{j,M})=T_X(v_{A,M})\\circ b_j(L)^{-1},$$\nand\n$$\\begin{aligned}\n\\tau\n&=\\epsilon_{f,B,T_YK}\\circ F_{f,B}(r)\\circ F_{f,B}\\bigl(v_{B,T_XM}\\circ J_B(a_{j,M})\\bigr)\\\\\n&=T_Y(\\epsilon_{f,A,K})\\circ b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))\\circ F_{f,B}(b_j(L)^{-1}).\n\\end{aligned}$$\nBoth lines for $\\tau$ are morphisms $F_{g,B}T_UL\\to T_YK$. The assertion uses the actual open counit and the named scalar/restriction map; it assumes neither invertibility of $r$ nor smoothness of $f$, nor flatness of $B$ over $A$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality: actual open-counit scalar equation and naturality at the restricted candidate before use of the composition square (returned proof steps 2 and 3)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-et-proet-adjunction-transfer",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-open-immersion",
+  "def-weil-compactifications-refinements",
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-sf-mate-open-restriction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "det-sp-reduction-direct-image",
+  "def-sp-constant-scalar-pullback-comparison",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved openScalarIso_unit in OpenScalarExchange for the specified canonical comparison of composite left adjoints [def-sp-open-scalar-operations]. In a general square of adjunctions, apply the B open Hom equivalence to the desired counit equation. Its left side transposes to a_j, by the triangle identity. The right side transposes, using the unit equation, to S_U(eta_A) followed by a_j at J_A U_A M and U_B S_X(v_A). Naturality of a_j moves v_A past a_j; the A right triangle identity cancels eta_A followed by U_A(v_A). This is the private proved helper counitOfUnit. The recorded directImageScalarPullbackIso and tensorPullbackIso are definitionally equal (private directImageTensorIso). Specialize at M=(GA.obj K).obj. This proves the first conjunct without any etale/pro-etale site transport.",
+   "uses": [
+    "def-sp-open-scalar-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition openScalarRestrictedTranspose already uses the inverse Hom equivalence for the composite adjunction coordinates [def-weil-pbc-composite-adjunction]. Apply Adjunction.homEquiv_naturality_right_symm to a_j followed by U_B(r), then Adjunction.homEquiv_counit to a_j. Preservation of composition by F_f and associativity give the first expansion. This is the private proved helper inverseTransposeExpansion.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the first conjunct into the open factor of the first expansion, distribute F_f over the resulting composite, and substitute hr for F_f(r) followed by the f counit. Associativity gives precisely the second expansion. The private proved helper mapCompSubstitute performs these substitutions in an arbitrary category. No inverse of r and no geometric or coefficient-flatness hypothesis is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-open-scalar-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality paragraph; existing canonical open-scalar unit normalization transposed directly to a counit equation, then inverse-adjunct naturality and substitution"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Expand the counit transpose of the restriction of an exceptional coefficient comparison using the actual extension by zero adjunction counit and scalar restriction isomorphism without invertibility of the exceptional mate",
+   "results": "{\"t\": \"2026-10-22T05:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"Expand the counit transpose of the restriction of an exceptional coefficient comparison using the actual extension by zero adjunction counit and scalar restriction isomorphism without invertibility of the exceptional mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.homEquiv_extendScalarsComp\"], \"digest\": \"c0ab2bdb6883b776\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T05:55:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\"], \"digest\": \"8e33c4df1a4bdb3e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|mateEquiv_hcomp|homEquiv.*counit|counit_naturality",
+   "results": "{\"t\": \"2026-10-22T05:55:48Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_counit|mateEquiv_hcomp|homEquiv.*counit|counit_naturality\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"338e03c498e260a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute the counit transpose of an open restriction of a right adjoint scalar comparison before using compatibility of the compact support composition comparison",
+   "results": "{\"t\": \"2026-10-22T05:55:49Z\", \"tool\": \"leansearch\", \"query\": \"Compute the counit transpose of an open restriction of a right adjoint scalar comparison before using compatibility of the compact support composition comparison\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In derived finite ring sheaves compute epsilon f B composed with f shriek of a scalar mate after extension by zero of its open restriction; express this as scalar epsilon f A and the open evaluation counit",
+   "results": "{\"t\": \"2026-10-22T05:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"In derived finite ring sheaves compute epsilon f B composed with f shriek of a scalar mate after extension by zero of its open restriction; express this as scalar epsilon f A and the open evaluation counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitHomEquiv_comp_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"LightCondensed.ihomPoints_symm_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"d036d5fe04c6838f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit_naturality|mateEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T07:17:21Z\", \"tool\": \"grep\", \"query\": \"comp_counit|counit_naturality|mateEquiv_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"0bae7c7d1fa30eb2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract composite counits and module scalar adjunctions do not identify the specified pro-etale open scalar maps; Basic.lean:568-582 and Mates.lean:123-132 read, Scheme.Modules restrictAdjunction is a different adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.counit_naturality",
+   "results": "{\"t\": \"2026-10-22T07:17:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.counit_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract composite counits and module scalar adjunctions do not identify the specified pro-etale open scalar maps; Basic.lean:568-582 and Mates.lean:123-132 read, Scheme.Modules restrictAdjunction is a different adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite adjunction counit expanded at restriction of a morphism and scalar compatibility of extension by zero",
+   "results": "{\"t\": \"2026-10-22T07:17:21Z\", \"tool\": \"leansearch\", \"query\": \"Composite adjunction counit expanded at restriction of a morphism and scalar compatibility of extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Adjunction.comp_counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.Adjunction.counit_naturality_assoc\"], \"digest\": \"04a1247c48796a58\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract composite counits and module scalar adjunctions do not identify the specified pro-etale open scalar maps; Basic.lean:568-582 and Mates.lean:123-132 read, Scheme.Modules restrictAdjunction is a different adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expand the counit transpose of a restricted right adjoint scalar comparison using the open extension by zero counit and naturality",
+   "results": "{\"t\": \"2026-10-22T07:17:24Z\", \"tool\": \"leanfinder\", \"query\": \"Expand the counit transpose of a restricted right adjoint scalar comparison using the open extension by zero counit and naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\"], \"digest\": \"d6bc2e618c3f3d6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract composite counits and module scalar adjunctions do not identify the specified pro-etale open scalar maps; Basic.lean:568-582 and Mates.lean:123-132 read, Scheme.Modules restrictAdjunction is a different adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived sheaves on proetale sites restriction of a scalar comparison has counit transpose obtained by composing the extension by zero evaluation counit with the original transpose",
+   "results": "{\"t\": \"2026-10-22T07:26:01Z\", \"tool\": \"leanfinder\", \"query\": \"For derived sheaves on proetale sites restriction of a scalar comparison has counit transpose obtained by composing the extension by zero evaluation counit with the original transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"Condensed.profiniteSolidCounit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.constantSheafAdj_counit_w\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\"], \"digest\": \"76d85a6970747178\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract composite counits and module scalar adjunctions do not identify the specified pro-etale open scalar maps; Basic.lean:568-582 and Mates.lean:123-132 read, Scheme.Modules restrictAdjunction is a different adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-open-exceptional-scalar-locality",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality: actual open-counit scalar equation and naturality at the restricted candidate before use of the composition square (returned proof steps 2 and 3)",
+   "via": [
+    "lem-sp-open-exceptional-scalar-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-open-scalar-restricted-transpose-expansion",
+  "worker": "stage1",
+  "summary": "Reuse the existing actual pro-etale open scalar-counit theorem; expand the composite counit, write its naturality square at arbitrary r, and substitute the assumed transpose equation. No new nodes and no statement change.",
+  "blueprint": "det-sp-reduction-exceptional, Locality paragraph: the adjunctions compose and extension by zero commutes with scalar extension. This item expands the restricted transpose before the separate coefficient/composition-square argument."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-675f79602",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-675f79602 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no changes. The delivery is one commit with the item and the report only, and creates no new nodes. Compared with the version Q04 created (runs/1/Q04__…fb8797a1bef3), the statement, stmt_deps, source and blueprint are unchanged; the item had no proof on the base, so the re-split rule does not apply. Step 1: lem-sp-open-proetale-counit-scalar states v_B∘J_B(a_j)∘b_j(U_AM)=T_X(v_A) for M∈C_{X,A}, with the same v_R (det-sf-mate-open-restriction), the same a_j and the same b_j (identity proper factor). M=G_{f,A}K lies in C_{X,A} by the stated shriek preservation. The types check, and precomposing with b_j(L)^{-1} gives the first equation. Step 2: the counit of def-weil-pbc-composite-adjunction (Stacks 0DV0 lemma-compose-counits; Mathlib comp_counit_app, Adjunction/Basic.lean:580) gives ε_g=ε_f∘F_f(v_B). The composite identification is a hypothesis of the statement. Naturality of v_B at r gives the first line for τ; I redid this computation. Step 3: substituting the hypothesis on r and Step 1 gives the second line. The intermediate objects check, r is never inverted, and the step uses neither naturality of b_f nor the content of the sibling factorization node. Edge cases checked: j=id, U=∅, A=B, Z/ℓ²→Z/ℓ (not flat), r=0. Duplicate check: the sibling lem-sp-open-scalar-inverse-transpose-factorization and lem-coef-open-scalar-adjunction-counit state different things, and the item does not restate its parent. There is no cycle, the route stays in sk-lem-sp-reduction, and no SGA is cited. Batch-5 flag: I accept the citation of lem-sp-open-proetale-counit-scalar. The trf node is reached only through det-sp-scalar-extension-functor, which is already a stmt_dep of the item on the base. The closure computed with and without the new proof_deps adds no sec-trace-formula or sec-poincare-duality node. lem-trf-site-functorial-flat-resolution is a generic fact about sites, not a step of the trace formula or of Poincaré duality."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.OpenScalarRestrictedTransposeExpansion",
+  "declaration": "AlgebraicGeometry.ProEtale.openScalarRestrictedTransposeExpansion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openScalarRestrictedTranspose",
+   "AlgebraicGeometry.ProEtale.openScalarRestrictedTransposeExpansion"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/OpenScalarRestrictedTransposeExpansion.lean",
+  "statement": "theorem openScalarRestrictedTransposeExpansion (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hℓ : ℓ ≠ p) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (n : ℕ) (_hN : 1 ≤ ℓ ^ n) (_hA : (ℓ ^ n : A) = 0) (_hB : (ℓ ^ n : B) = 0) {U X Y : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (c : Compactification f) [c.Z.Over (Spec (.of k))] [LocallyOfFiniteType (c.Z ↘ Spec (.of k))] [QuasiCompact (c.Z ↘ Spec (.of k))] [IsSeparated (c.Z ↘ Spec (.of k))] [c.i.IsOver (Spec (.of k))] [c.g.IsOver (Spec (.of k))] (hFA : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor Y A ((reductionCompactSupport A c.i c.g).obj M.obj)) (hFB : ∀ M : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor Y B ((reductionCompactSupport B c.i c.g).obj M.obj)) (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A) (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B) (adjA : (spFiniteConstructibleTor Y A).lift ((spFiniteConstructibleTor X A).ι ⋙ reductionCompactSupport A c.i c.g) hFA ⊣ GA) (adjB : (spFiniteConstructibleTor Y B).lift ((spFiniteConstructibleTor X B).ι ⋙ reductionCompactSupport B c.i c.g) hFB ⊣ GB) (K : spFiniteConstructibleTorCategory Y A) (hKB : spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj)) (hb : IsIso ((reductionDirectImageComparison φ c.i c.g).app (GA.obj K).obj)) (r : (scalarExtensionFunctor φ X).obj (GA.obj K).obj ⟶ (GB.obj ⟨(scalarExtensionFunctor φ Y).obj K.obj, hKB⟩).obj) (hr : (reductionCompactSupport B c.i c.g).map r ≫ (adjB.counit.app ⟨(scalarExtensionFunctor φ Y).obj K.obj, hKB⟩).hom = @inv _ _ _ _ ((reductionDirectImageComparison φ c.i c.g).app (GA.obj K).obj) hb ≫ (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom) : ((openExtension (A := B) j).map ((directImageScalarPullbackIso φ j).inv.app (GA.obj K).obj) ≫ (proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X B) (proEtaleConstantRing U B) (proEtaleConstantRingComparison j B)).counit.app ((scalarExtensionFunctor φ X).obj (GA.obj K).obj) = (openScalarIso φ j).inv.app ((proEtaleConstantRingDerivedPullback A j).obj (GA.obj K).obj) ≫ (scalarExtensionFunctor φ X).map ((proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X A) (proEtaleConstantRing U A) (proEtaleConstantRingComparison j A)).counit.app (GA.obj K).obj)) ∧ (openScalarRestrictedTranspose φ j (reductionCompactSupport B c.i c.g) (adjB.counit.app ⟨(scalarExtensionFunctor φ Y).obj K.obj, hKB⟩).hom r = (reductionCompactSupport B c.i c.g).map ((openExtension (A := B) j).map ((directImageScalarPullbackIso φ j).inv.app (GA.obj K).obj) ≫ (proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X B) (proEtaleConstantRing U B) (proEtaleConstantRingComparison j B)).counit.app ((scalarExtensionFunctor φ X).obj (GA.obj K).obj)) ≫ (reductionCompactSupport B c.i c.g).map r ≫ (adjB.counit.app ⟨(scalarExtensionFunctor φ Y).obj K.obj, hKB⟩).hom) ∧ (openScalarRestrictedTranspose φ j (reductionCompactSupport B c.i c.g) (adjB.counit.app ⟨(scalarExtensionFunctor φ Y).obj K.obj, hKB⟩).hom r = (reductionCompactSupport B c.i c.g).map ((openScalarIso φ j).inv.app ((proEtaleConstantRingDerivedPullback A j).obj (GA.obj K).obj)) ≫ (reductionCompactSupport B c.i c.g).map ((scalarExtensionFunctor φ X).map ((proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X A) (proEtaleConstantRing U A) (proEtaleConstantRingComparison j A)).counit.app (GA.obj K).obj)) ≫ @inv _ _ _ _ ((reductionDirectImageComparison φ c.i c.g).app (GA.obj K).obj) hb ≫ (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three equations are stated in the stipulated adjunction-preserving composition coordinates F_g=J followed by F_f and G_g=G_f followed by restriction. The helper defines tau by the actual open inverse Hom equivalence followed by F_f and its counit, exactly the composite-adjunction inverse Hom equivalence. J is the normalized ringed open extension; reductionOpenModel identifies the recorded sectionwise extension with these coordinates, and b_j is the prescribed openScalarIso there. The named scalar/restriction map is directImageScalarPullbackIso.inv; b_f is exactly reductionDirectImageComparison. Membership and invertibility certificates only make the recorded full-category adjunction and its specified inverse well typed. No arbitrary scalar map, smoothness, flatness or invertibility of r is assumed. The added landed dependency owns the already existing intrinsic finite-Tor full category, avoiding its duplication."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0efbe7ff7",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause match: setting, hypotheses hFA/hFB/hKB/hb (hb follows from reductionDirectImage_isIso), arbitrary GA/GB adjunctions, r with the exact counit equation, a_j = directImageScalarPullbackIso.inv (direction checked), b_j = openScalarIso (reductionOpenScalarIso is openScalarIso conjugated by reductionOpenModel), b_f = reductionDirectImageComparison, actual localized open counit; tau helper = composite-adjunction inverse Hom equivalence with real data; the three conjuncts match the node's equations. No smoothness/flatness/invertibility of r; edge cases U empty, phi=id, non-flat, n=0, r=0 covered; statement verbatim, docstrings OK, one sorry. Advisory: reductionCompactSupport/reductionDirectImageComparison (owner def-sp-reduction-direct-image-comparison), openExtension/openScalarIso (def-sp-open-scalar-operations), proEtaleRingDerivedOpenAdjunction (no definition owner) are reached via the stage-1 theorem stmt_dep det-sp-reduction-direct-image; proof_dep lem-sp-open-proetale-counit-scalar is in ULift fixed-module coordinates, so stage 3 needs its _transport; some imports unused. No fixes; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-0cd48",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261024T190053-L-3905073",
+  "kind": "interface",
+  "note": "independent cc review: delivered OpenScalarRestrictedTransposeExpansion.lean and node lem-sp-open-scalar-restricted-transpose-expansion against the clone's module (statement/def byte-identical), the unit sk-lem-sp-reduction (realized empty), the transitive import graph and #print axioms of the proof's dependencies"
+ }
+}

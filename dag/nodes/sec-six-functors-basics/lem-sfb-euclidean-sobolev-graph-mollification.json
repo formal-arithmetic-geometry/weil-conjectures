@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-euclidean-sobolev-graph-mollification",
+ "kind": "statement",
+ "title": "Euclidean weak Sobolev graphs and smoothing with controlled support",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $m\\geq1$, $r\\geq0$ and $s\\geq0$ be integers. Let $L^2(\\mathbf R^m,\\mathbf R^r)$ mean Lebesgue-measurable functions modulo almost-everywhere equality with finite integral of the squared Euclidean norm. Let $\\mathcal D'(\\mathbf R^m,\\mathbf R^r)$ mean componentwise continuous linear functionals on compactly supported smooth scalar test functions, with their usual test-function topology. Integration against test functions defines an injective linear map $L^2(\\mathbf R^m,\\mathbf R^r)\\to\\mathcal D'(\\mathbf R^m,\\mathbf R^r)$; $L^2$ convergence implies convergence against every test function. Define $W^{s,2}$ to consist of $f\\in L^2$ for which each distributional derivative $\\partial^\\alpha f$, $|\\alpha|\\leq s$, is represented by an $L^2$ function, where $\\langle\\partial^\\alpha f,\\varphi\\rangle=(-1)^{|\\alpha|}\\int f\\,\\partial^\\alpha\\varphi$. The inner product $\\sum_{|\\alpha|\\leq s}\\int\\langle\\partial^\\alpha f,\\partial^\\alpha g\\rangle$ makes $W^{s,2}$ a Hilbert space, including $W^{0,2}=L^2$. Its derivative graph is closed: if $f_n\\in W^{s,2}$ and $\\partial^\\alpha f_n\\to g_\\alpha$ in $L^2$ for every $|\\alpha|\\leq s$, then $g_0\\in W^{s,2}$ and $\\partial^\\alpha g_0=g_\\alpha$. If $K\\subset\\Omega\\subset\\mathbf R^m$, with $K$ compact and $\\Omega$ open, and $f\\in W^{s,2}$ vanishes almost everywhere off $K$, there exist a compact $K'$ with $K\\subseteq K'\\subset\\Omega$ and $f_n\\in C_c^\\infty(\\Omega,\\mathbf R^r)$ all supported in $K'$ such that $\\|f_n-f\\|_{W^{s,2}}\\to0$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Sobolev setup, completion/weak-derivative realization; supporting Euclidean closed-graph and support-controlled smoothing argument. Supplemental online Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, (2.1) and the integer-order description; the support-controlled smoothing detail is supplied by the agent. WANTED locally; supplemental source read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "For a compactly supported smooth scalar test $\\varphi$, continuity and compact support make $\\varphi$ square integrable: apply [lem-sfb-continuous-compact-support-integrable] to $|\\varphi|^2$, viewed as complex valued. By [lem-sfb-real-l2-hilbert-pairing], each component obeys $|\\int f_j\\varphi|\\leq\\|f_j\\|_2\\|\\varphi\\|_2$. This defines a representative-independent linear functional. On tests supported in a fixed compact $C$ the bound $\\|\\varphi\\|_2\\leq\\operatorname{vol}(C)^{1/2}\\sup_C|\\varphi|$ proves continuity for the usual test-function topology (the locally convex inductive-limit topology of the fixed-compact-support spaces). The same estimate gives convergence against each test under $L^2$ convergence. Also $\\int_C|f_j|\\leq\\|f_j\\|_2\\operatorname{vol}(C)^{1/2}$, by scalar Cauchy–Schwarz with $1_C$, so $f_j$ is locally integrable. If all tests pair to zero, apply [lem-sfb-smooth-test-ae-separation] on $U=\\mathbf R^m$ to the complex-valued function $f_j+0i$. It vanishes almost everywhere. There are finitely many components, so $f=0$ almost everywhere. Thus the distribution map is injective, including the zero-rank case.",
+   "uses": [
+    "lem-sfb-real-l2-hilbert-pairing",
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-smooth-test-ae-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "Suppose $\\partial^\\alpha f_n\\to g_\\alpha$ in $L^2$, including $f_n\\to g_0$. For each test $\\varphi$, scalar Cauchy–Schwarz from [lem-sfb-real-l2-hilbert-pairing] passes to the limit in the defining identity and gives $\\int (g_\\alpha)_j\\varphi=(-1)^{|\\alpha|}\\int (g_0)_j\\partial^\\alpha\\varphi$. Here $\\partial^\\alpha\\varphi$ is again a compactly supported smooth test. Therefore $g_\\alpha$ represents $\\partial^\\alpha g_0$, so $g_0\\in W^{s,2}$. Uniqueness follows from step 1. This proves the asserted closed graph.",
+   "uses": [
+    "lem-sfb-real-l2-hilbert-pairing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "Distributional differentiation and the injection are linear, hence $W^{s,2}$ is a vector space and its derivative graph is a linear subspace of the finite product indexed by $\\{\\alpha\\in\\mathbf N^m:|\\alpha|\\leq s\\}$. Pull back the sum of the $L^2$ inner products of [lem-sfb-real-l2-hilbert-pairing]. It is positive definite because the summand $\\alpha=0$ has squared norm $\\|f\\|_2^2$. If $(f_n)$ is Cauchy for the sum norm, every derivative sequence is Cauchy in $L^2$, so it has a limit $g_\\alpha$ by that node's completeness. Step 2 identifies these as derivatives of $g_0$; the finite sum of their squared errors tends to zero. This proves completeness and the Hilbert assertion. At $s=0$ the sole derivative is the identity, giving $W^{0,2}=L^2$ with its original norm.",
+   "uses": [
+    "lem-sfb-real-l2-hilbert-pairing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "If $K$ is empty, then $f=0$ in $L^2$; take $K'=\\varnothing$ and all approximants zero. Otherwise, for each $a\\in K$ choose $r_a>0$ with $\\overline B(a,3r_a)\\subset\\Omega$, and take a finite cover of $K$ by $B(a_i,r_i)$. Set $\\delta=\\min_i r_i>0$ and $K'=\\bigcup_i\\overline B(a_i,2r_i)$. These are finitely many compact Euclidean balls inside $\\Omega$. If $y\\in K$ and $|z|\\leq\\delta$, choose $i$ with $|y-a_i|<r_i$; then $|y+z-a_i|<2r_i$, so $K+\\overline B(0,\\delta)\\subset K'$. By [lem-sfb-euclidean-smooth-ball-bump] with center $0$ and radii $1/2,1$, choose $0\\leq\\beta\\leq1$, smooth, equal to one on $\\overline B(0,1/2)$ and supported in $\\overline B(0,1)$. Its integral $c$ is finite by [lem-sfb-continuous-compact-support-integrable] (embed the real function in $\\mathbf C$) and positive since $\\beta=1$ on a ball of positive measure. Set $\\rho=\\beta/c$ and $\\rho_\\epsilon(z)=\\epsilon^{-m}\\rho(z/\\epsilon)$. Thus $\\rho$ is a nonnegative integrable unit-mass kernel for the later approximate-identity application; each $\\rho_\\epsilon$ is smooth with support in $\\overline B(0,\\epsilon)$.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-ball-bump",
+    "lem-sfb-continuous-compact-support-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "For $\\epsilon>0$ put $f_\\epsilon(x)=\\int\\rho_\\epsilon(x-y)f(y)\\,dy$. Step 1 gives local integrability of $f$, so [lem-sfb-euclidean-smooth-kernel-convolution] makes this an everywhere-defined smooth function. Its first derivative differentiates the kernel. Iterating that same formula with the compact smooth scalar kernels $\\partial^\\gamma\\rho_\\epsilon$ gives, by induction on $|\\alpha|$, $\\partial^\\alpha f_\\epsilon(x)=\\int(\\partial^\\alpha\\rho_\\epsilon)(x-y)f(y)\\,dy$: the base is the defining integral, and one more coordinate derivative differentiates $\\partial^\\gamma\\rho_\\epsilon$. Every derivative kernel is smooth with support in the original compact support, so the cited lemma applies at each induction step.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-kernel-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "Write $g_\\alpha$ for the $L^2$ representative of $\\partial^\\alpha f$. In its defining weak identity use the test $y\\mapsto\\rho_\\epsilon(x-y)$. Its $y$ derivative is $(-1)^{|\\alpha|}(\\partial^\\alpha\\rho_\\epsilon)(x-y)$, so the two signs cancel and step 5 yields $\\partial^\\alpha f_\\epsilon(x)=\\int\\rho_\\epsilon(x-y)g_\\alpha(y)\\,dy$. The change $z=x-y$ identifies this integral with $A_\\epsilon g_\\alpha$ of [lem-sfb-l2-compact-kernel-approximation]. In particular it is in $L^2$. These classical derivatives also are distributional derivatives: componentwise apply [lem-sfb-scalar-integrable-integration-by-parts], embedding real scalars in $\\mathbf C$, once for each coordinate derivative and moving it onto the test. All products in that lemma are smooth with compact support from the test or its derivative, hence integrable by [lem-sfb-continuous-compact-support-integrable]. Repeating produces exactly $(-1)^{|\\alpha|}$. Consequently $f_\\epsilon\\in W^{s,2}$, with all its weak derivatives represented by the displayed convolutions.",
+   "uses": [
+    "lem-sfb-l2-compact-kernel-approximation",
+    "lem-sfb-scalar-integrable-integration-by-parts",
+    "lem-sfb-continuous-compact-support-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "For $0<\\epsilon\\leq\\delta$ and $x\\notin K'$, one has $\\rho_\\epsilon(x-y)=0$ for every $y\\in K$, by the buffer inclusion of step 4. For almost every $y\\notin K$ one has $f(y)=0$. Thus the integrand defining $f_\\epsilon(x)$ vanishes almost everywhere and $f_\\epsilon(x)=0$. Since $K'$ is closed, the topological support of $f_\\epsilon$ is contained in $K'$. Restriction to $\\Omega$ is therefore in $C_c^\\infty(\\Omega,\\mathbf R^r)$, with extension by zero equal to this same globally smooth function.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  },
+  {
+   "text": "Take $\\epsilon_n=\\delta/(n+1)$ for $n\\geq1$. Apply [lem-sfb-l2-compact-kernel-approximation] to the single kernel $\\rho$ of step 4 and separately to each $g_\\alpha$, $|\\alpha|\\leq s$. By step 6, $\\|\\partial^\\alpha f_{\\epsilon_n}-g_\\alpha\\|_2\\to0$. There are only finitely many such multi-indices, hence $\\|f_{\\epsilon_n}-f\\|_{W^{s,2}}^2=\\sum_{|\\alpha|\\leq s}\\|\\partial^\\alpha f_{\\epsilon_n}-g_\\alpha\\|_2^2\\to0$. Step 7 supplies the common compact support $K'\\subset\\Omega$. The argument also applies at $s=0$; at $r=0$ every vector and every approximant is zero.",
+   "uses": [
+    "lem-sfb-l2-compact-kernel-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-l2-hilbert-pairing",
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-smooth-test-ae-separation",
+  "lem-sfb-euclidean-smooth-ball-bump",
+  "lem-sfb-euclidean-smooth-kernel-convolution",
+  "lem-sfb-l2-compact-kernel-approximation",
+  "lem-sfb-scalar-integrable-integration-by-parts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Sobolev setup; WANTED locally. Supplemental Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3, integer-order description following (2.1), read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Closed-graph and controlled-support details supplied by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth compactly supported functions are dense in W s 2 Euclidean Sobolev weak derivative norm and L2 embeds injectively into distributions",
+   "results": {
+    "t": "2026-10-24T03:03:27Z",
+    "tool": "leansearch",
+    "query": "Smooth compactly supported functions are dense in W s 2 Euclidean Sobolev weak derivative norm and L2 embeds injectively into distributions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "HasCompactSupport.toSchwartzMap",
+     "MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le",
+     "HasCompactSupport.exist_eLpNorm_sub_le_of_continuous",
+     "MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le"
+    ],
+    "digest": "4f02f457a229c265"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp approximation and pointwise bump-convolution limits do not assert a closed weak-derivative graph or simultaneous approximation of all derivatives with a common support inside a prescribed open set."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mollifier\"",
+   "results": {
+    "t": "2026-10-24T03:03:27Z",
+    "tool": "loogle",
+    "query": "\"mollifier\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp approximation and pointwise bump-convolution limits do not assert a closed weak-derivative graph or simultaneous approximation of all derivatives with a common support inside a prescribed open set."
+  },
+  {
+   "tool": "grep",
+   "query": "mollif|weakDeriv|weak_deriv|convolution.*tendsto|tendsto.*convolution",
+   "results": {
+    "t": "2026-10-24T03:03:27Z",
+    "tool": "grep",
+    "query": "mollif|weakDeriv|weak_deriv|convolution.*tendsto|tendsto.*convolution",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean"
+    ],
+    "digest": "23321412c924b348"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp approximation and pointwise bump-convolution limits do not assert a closed weak-derivative graph or simultaneous approximation of all derivatives with a common support inside a prescribed open set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Euclidean functions with square integrable weak derivatives the Sobolev graph norm is complete and convolution with smooth mollifiers approximates every derivative in L2",
+   "results": {
+    "t": "2026-10-24T03:03:28Z",
+    "tool": "leanfinder",
+    "query": "For Euclidean functions with square integrable weak derivatives the Sobolev graph norm is complete and convolution with smooth mollifiers approximates every derivative in L2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "MeasureTheory.eLpNormLESNormFDerivOneConst",
+     "MeasureTheory.eLpNormLESNormFDerivOfEqInnerConst",
+     "MeasureTheory.SNormLESNormFDerivOfEqConst_def",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv",
+     "MeasureTheory.eLpNormLESNormFDerivOfLeConst",
+     "hasContDiffBump_of_innerProductSpace"
+    ],
+    "digest": "5c9942ef1e096bf9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp approximation and pointwise bump-convolution limits do not assert a closed weak-derivative graph or simultaneous approximation of all derivatives with a common support inside a prescribed open set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An L2 function with all distribution derivatives up to integer s in L2 is a closed graph Hilbert space and compactly supported such functions are approximable by smooth functions with slightly larger support",
+   "results": {
+    "t": "2026-10-24T03:05:36Z",
+    "tool": "leanfinder",
+    "query": "An L2 function with all distribution derivatives up to integer s in L2 is a closed graph Hilbert space and compactly supported such functions are approximable by smooth functions with slightly larger support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "Continuous.exists_contDiff_approx",
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq",
+     "ContDiffMapSupportedIn.structureMapLM",
+     "HasCompactSupport.toSchwartzMap",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "SchwartzMap.denseRange_toLpCLM"
+    ],
+    "digest": "ed512d41652e35c8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth Lp approximation and pointwise bump-convolution limits do not assert a closed weak-derivative graph or simultaneous approximation of all derivatives with a common support inside a prescribed open set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph of square integrable weak partial derivatives is closed and compactly supported Sobolev functions can be mollified with support in a fixed open neighborhood",
+   "results": {
+    "t": "2026-10-24T03:29:27Z",
+    "tool": "leanfinder",
+    "query": "The graph of square integrable weak partial derivatives is closed and compactly supported Sobolev functions can be mollified with support in a fixed open neighborhood",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TestFunction.ofSupportedInLM",
+     "ExistsContDiffBumpBase.u",
+     "ExistsContDiffBumpBase.w_compact_support",
+     "ExistsContDiffBumpBase.u_compact_support",
+     "MeasureTheory.Lp.dense_hasCompactSupport_contDiff",
+     "exists_contDiff_tsupport_subset",
+     "exists_smooth_tsupport_subset",
+     "MeasureTheory.MemLp.exist_eLpNorm_sub_le"
+    ],
+    "digest": "94e8f6dad224bc0e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier-defined MemSobolev and Sobolev inequalities do not give this weak derivative graph, exact derivative-sum Hilbert norm and controlled-support approximation. The smooth Lp density declaration supplies no simultaneous weak derivative approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak Sobolev derivatives form a complete Hilbert graph and converge under smooth convolution in L2",
+   "results": {
+    "t": "2026-10-24T03:29:24Z",
+    "tool": "leansearch",
+    "query": "Weak Sobolev derivatives form a complete Hilbert graph and converge under smooth convolution in L2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner",
+     "HasCompactSupport.hasDerivAt_convolution_right",
+     "HasCompactSupport.hasFDerivAt_convolution_right",
+     "MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one",
+     "MeasureTheory.hasFDerivAt_convolution_right_with_param",
+     "HasCompactSupport.hasFDerivAt_convolution_left",
+     "HasCompactSupport.hasDerivAt_convolution_left",
+     "MeasureTheory.lintegral_pow_le_pow_lintegral_fderiv"
+    ],
+    "digest": "e15856ed7b8a2b76"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier-defined MemSobolev and Sobolev inequalities do not give this weak derivative graph, exact derivative-sum Hilbert norm and controlled-support approximation. The smooth Lp density declaration supplies no simultaneous weak derivative approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": {
+    "t": "2026-10-24T03:29:25Z",
+    "tool": "loogle",
+    "query": "\"Sobolev\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TemperedDistribution.MemSobolev",
+     "TemperedDistribution.MemSobolev.mono",
+     "TemperedDistribution.memSobolev_fun_zero",
+     "TemperedDistribution.MemSobolev.lineDerivOp",
+     "TemperedDistribution.MemSobolev.laplacian",
+     "TemperedDistribution.MemSobolev.neg",
+     "TemperedDistribution.MemSobolev.sub",
+     "TemperedDistribution.MemSobolev.add"
+    ],
+    "digest": "9f33c41d8fc07c0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier-defined MemSobolev and Sobolev inequalities do not give this weak derivative graph, exact derivative-sum Hilbert norm and controlled-support approximation. The smooth Lp density declaration supplies no simultaneous weak derivative approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|weakDeriv|weak_deriv|mollif",
+   "results": {
+    "t": "2026-10-24T03:29:24Z",
+    "tool": "grep",
+    "query": "Sobolev|weakDeriv|weak_deriv|mollif",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean"
+    ],
+    "digest": "67f8c3876330793a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier-defined MemSobolev and Sobolev inequalities do not give this weak derivative graph, exact derivative-sum Hilbert norm and controlled-support approximation. The smooth Lp density declaration supplies no simultaneous weak derivative approximation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bundle-sobolev-rellich",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean weak Sobolev graphs and smoothing with controlled support.",
+   "via": [
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-euclidean-sobolev-graph-mollification",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Prove distribution injection by Cauchy–Schwarz and existing test separation; pass defining identities to L2 limits; establish the Hilbert structure by coordinatewise completeness; construct a compact buffer and normalized existing bump; move all weak derivatives through the explicit convolution and use one ordinary L2 approximate-identity tool. Two new Mathlib leaves and one statement-only analytic node.",
+  "blueprint": "The inherited ancestor query returns null. This remains a supporting analytic descendant of det-thm-sf-ctf-stability-direct-images proof (3), through bundle Sobolev Rellich: Demailly course §2 p.3 integer-order Hilbert Sobolev description. Steps 1–3 realize its weak-derivative graph and completeness; steps 4–8 supply the explicit support-controlled smoothing needed by lem-sfb-bundle-sobolev-rellich. No change of unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-97fc75532",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-97fc75532 (reviewer sub-agent of L); spot-checked: Read the item and three new nodes in full, plus the four cited nodes: continuous-compact-support-integrable, smooth-test-ae-separation, euclidean-smooth-ball-bump and scalar-integrable-integration-by-parts. All four are Mathlib leaves in the unit sk-thm-sf-ctf-stability, so there is no route issue and no tool_uses. This is a first split (the base node had no proof), not a 10-21 re-split. Statement and stmt_deps are unchanged, proof_deps equals the union of uses, and there is no SGA. Mathlib leaves checked: (1) the kernel-convolution leaf is HasCompactSupport.hasFDerivAt_convolution_right (ContDiff/Convolution.lean:63-65), contDiff_convolution_right (423-428) and convolutionExists_right (Convolution.lean:319-325), with L(a)(t)=t•a; local integrability matches through locallyIntegrable_iff:332. It is not a duplicate of the planar parametric convolution node. (2) The Hilbert-pairing leaf uses L2.inner_def:137, integrable_inner:172, innerProductSpace:190, Lp.instCompleteSpace:378 and norm_inner_le_norm:453. The existing lem-sfb-l2-product-integrable gives only finiteness of the integral, not the inequality. (3) The approximation node is statement-only and true (classical L2 approximate identity via Minkowski and continuity of translations). It is strictly smaller than the item, Mathlib has only pointwise versions, and there is no DAG duplicate. Steps 1-8 check out: the Cauchy-Schwarz test bound, injectivity by separation applied to f_j+0i, the closed graph, completeness, the buffer K+B(0,δ)⊂K' via |y+z-a_i|<2r_i, the normalised bump meeting the approximation node's hypotheses, the induced derivative kernels, the sign cancellation in ∂^α f_ε = A_ε g_α, the integration-by-parts hypotheses (compact support from the test), support in K' for ε≤δ, and finite-sum convergence. Edge cases tested: s=0, r=0, K empty, K null, Ω=R^m. The Demailly PDF is WANTED and the proof is correctly marked by:agent. No changes."
+ }
+}

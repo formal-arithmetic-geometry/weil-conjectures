@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-finite-groupoid-almost-invariant-function",
+ "kind": "statement",
+ "title": "Almost invariant functions at generic groupoid orbits",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are finite and of finite presentation [def-weil-finite-integral-morphism, def-weil-pbc-scheme-conventions]. For $x\\in U$ write $O(x)=t(s^{-1}(\\{x\\}))$ for its orbit; arrows can be compared and composed after extending their residue fields to a common field. Let $x_1,\\ldots,x_m\\in U$, with $m\\geq0$, have orbits consisting of generic points [def-sc-generic-point] of irreducible components [def-weil-irreducible-components] of $U$. Let $A$ be a commutative ring, let $j:U\\to\\operatorname{Spec}A$ be an immersion [def-weil-affine-spectrum, def-weil-closed-immersion], and let $I\\subseteq A$ be an ideal such that $j(U)\\cap V(I)=\\varnothing$ and $V(I)\\cup j(U)$ is closed in $\\operatorname{Spec}A$. Then there is $h\\in I$ for which $j^{-1}D(h)$ is an affine open subscheme containing every $x_i$ and satisfying $s^{-1}(j^{-1}D(h))=t^{-1}(j^{-1}D(h))$. Here $V(I)$ is the set of prime ideals containing $I$ and $D(h)$ the set of primes not containing $h$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABF (lemma-find-almost-invariant-function), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If $m=0$, take $h=0\\in I$: its inverse-image principal open is empty, hence affine (the spectrum of the zero ring), and both inverse images under $s,t$ are empty. Henceforth $m>0$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), empty-list case, made explicit"
+   }
+  },
+  {
+   "text": "The structure map of $\\operatorname{Spec}A$ is separated by lem-weil-pbc-affine-source-morphism-separated. Composing it with the immersion $j$ is separated by lem-trf-immersion-over-separated-base, so $U$ is quasi-separated by lem-pc-separated-quasi-separated. Apply lem-sfb-finite-groupoid-generic-affine-flat-thickening with the given finite-presentation hypotheses and generic orbits. Obtain invariant affine $V\\subseteq U$ and an invariant affine thickening $V'\\hookrightarrow V$ of finite presentation containing the marked points, with restricted source and target finite locally free. Write $B=\\Gamma(V',\\mathcal O_{V'})$.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-trf-immersion-over-separated-base",
+    "lem-pc-separated-quasi-separated",
+    "lem-sfb-finite-groupoid-generic-affine-flat-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), first sentence: invariant affine pair from Tag 0ABC"
+   }
+  },
+  {
+   "text": "Put $C=V(I)\\cup j(U)$, closed by hypothesis. The subspace $j(U)=C\\setminus V(I)$ is open in $C$, and $j$ is a homeomorphism onto its image. Thus $j(V)$ is open in $C$ and $Z=C\\setminus j(V)=V(I)\\cup j(U\\setminus V)$ is closed in $\\operatorname{Spec}A$. Choose its vanishing ideal $K$ and put $J=I\\cap K$. Since $V(I)\\subseteq Z$, the prime-ideal identity $V(I\\cap K)=V(I)\\cup V(K)$ gives $V(J)=Z$. Consequently $J\\subseteq I$, $j(V)\\cap V(J)=\\varnothing$, and $V(J)\\cup j(V)=C$. These same assertions hold for $j(V')=j(V)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), boundary ideal J, with closedness and containment written out"
+   }
+  },
+  {
+   "text": "Every orbit of a marked point is finite, since $s$ has finite fibres. Let $F$ be their finite union. Invariance of $V$ puts $F$ inside $V$. The arrows restricted to $V'$ have the same underlying points as the arrows restricted to $V$: the ideals pulled back from the thickening vanish in every residue field, hence their sum does also. Thus the restricted orbits are the original ones. For each $y\\in F$, its image prime $\\mathfrak p_{j(y)}$ does not contain $J$, since $j(y)\\notin V(J)$. Prime avoidance gives $f\\in J$ outside all these primes. Hence the restriction $b=j^\\sharp(f)\\in B$ is nonzero at every point of every marked orbit.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-sfb-finite-groupoid-generic-affine-flat-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), choice of f by Algebra Tag 00DS"
+   }
+  },
+  {
+   "text": "The arrow scheme $R'$ is affine because $s'$ is finite and $V'$ is affine. Form $g=N_{s'}(t'{}^\\sharp(b))\\in B$ using lem-pd-finite-locally-free-norm-charts. By lem-a1-affine-groupoid-invariant-norm, $s'{}^\\sharp(g)=t'{}^\\sharp(g)$, so $D_{V'}(g)$ is invariant. On each finite-free chart the norm-prime criterion says $g(y)\\ne0$ exactly when $b(t'(r))\\ne0$ for every point $r$ above $y$ under $s'$. Our choice of $f$ therefore gives $g(x_i)\\ne0$. The identity arrow at any $y$ is one of these points, so $g(y)\\ne0$ implies $b(y)\\ne0$: $D_{V'}(g)\\subseteq D_{V'}(b)$. This also covers nonreduced fibres and varying local rank.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-pd-finite-locally-free-norm-charts",
+    "lem-a1-affine-groupoid-invariant-norm",
+    "lem-pd-finite-free-norm-prime-criterion",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), norm and determinant trick, with the nonvanishing test made explicit"
+   }
+  },
+  {
+   "text": "Let $\\varphi:A\\to B$ be induced by $j|_{V'}$, so $b=\\varphi(f)$ and $(V')_b=(j|_{V'})^{-1}D_A(f)$. The morphism $(V')_b\\to D_A(f)$ is an immersion: write $j$ as a closed immersion $U\\to O$ followed by an open $O\\subseteq\\operatorname{Spec}A$. Since $j$ is a homeomorphism onto its image, $j(V)=j(U)\\cap O_1$ for an open $O_1\\subseteq O$, so $V\\to O\\cap O_1$ is a closed immersion (both defining conditions are local on the target). With the closed immersion $V'\\to V$ this gives a closed immersion $V'\\to O\\cap O_1$ by lem-weil-pbc-closed-immersion-comp; restrict it over $O\\cap O_1\\cap D_A(f)$ and follow it by the open immersion into $D_A(f)$. Its image is $C\\cap D_A(f)$, since $f\\in J$ vanishes on $V(J)$ and $C=V(J)\\cup j(V')$. It is closed. Hence the morphism is a closed immersion by lem-weil-pbc-immersion-closed-image-closed-immersion. Its affine description gives a surjection $A_f\\to B_b$, using the principal-open section formula. Lift $g/1\\in B_b$ to $a/f^k$ with $a\\in A$, $k\\geq0$. Equality of fractions gives some $\\ell\\geq0$ with $b^\\ell(\\varphi(a)-b^kg)=0$ in $B$. Thus $\\varphi(f^\\ell a)=b^{k+\\ell}g$. Set $h=f^{\\ell+1}a\\in J\\subseteq I$ and $n=k+\\ell+1>0$. Then $\\varphi(h)=b^ng$, and $D_A(h)\\subseteq D_A(f)$.",
+   "uses": [
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), clearing denominators in f^n g, retaining the possible localization kernel"
+   }
+  },
+  {
+   "text": "Let $W=j^{-1}D_A(h)$. Since $h\\in J$ and $V(J)$ contains $j(U\\setminus V)$, $W\\subseteq V$. On $V'$, the equality $\\varphi(h)=b^ng$ gives $W\\cap V'=D_{V'}(b)\\cap D_{V'}(g)=D_{V'}(g)$ by the inclusion proved above. The thickening identifies $|V'|=|V|$, and the arrow thickening identifies $|R'|=|R_V|$. Therefore the invariance of $D_{V'}(g)$ gives $s^{-1}(W)=t^{-1}(W)$ on $R_V$. Outside $R_V$ neither endpoint lies in $V$, by invariance of $V$, so the equality holds on all $R$. Equal underlying opens have equal open subschemes. The marked points belong to $W$. Finally $W$ is the principal open of the restriction of $j^\\sharp(h)$ on the affine scheme $V$, hence is affine by lem-weil-pbc-affine-open-section-vanishing-prime. This proves every assertion on the original $U$, without changing its scheme structure.",
+   "uses": [
+    "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABF (lemma-find-almost-invariant-function), return from the thickening and identify j^{-1}D(h)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-trf-immersion-over-separated-base",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-prime-avoidance",
+  "def-weil-finite-integral-morphism",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-a1-affine-groupoid-invariant-norm",
+  "lem-pd-finite-free-norm-prime-criterion",
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABF (lemma-find-almost-invariant-function), with explicit empty case, boundary-ideal construction, denominator clearing and return from the thickening."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite finitely presented scheme groupoid immersed in an affine scheme a boundary ideal contains a function whose principal open is invariant affine and contains prescribed generic orbits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).I₀ = ι\", \"doc\": \"Given a commutative ring $ R $, an index type $ \\\\iota $, and a function $ s: \\\\iota \\\\to R $, if the ideal generated by the image of $ s $ equals the entire ring $ R $, then the index set $ I_0 $ of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (x : ↥(AlgebraicGeometry.Spec R)),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).idx x =\\n    have this := ⋯;\\n    this.choose\", \"doc\": \"If the ideal generated by a set $\\\\{s_i\\\\}$ in a commutative ring $R$ equals the entire ring $R$, then for every prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R)$, there exists an index $i$ such tha\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).f i =\\n    AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (↑R) (Localization.Away (s i))))\", \"doc\": \"Given a commutative ring $ R $, elements $ s_i $ indexed by $ ι $, and the condition that the ideal generated by $ \\\\{s_i\\\\} $ equals $ R $, the affine open cover's morphism for each index $ i $ is indu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  ↑((AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).X i) = Localization.Away (s i)\", \"doc\": \"For a commutative ring $ R $ and a family of elements $ s_i $ indexed by $ i : ι $, if the ideal generated by $ \\\\{s_i\\\\} $ equals the entire ring $ R $, then the $ i $-th open set in the constructed af\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.Scheme.Hom.opensRange (I.glueDataObjMap ⋯) =\\n    (TopologicalSpace.Opens.map (I.glueDataObjι V).base).obj\\n      ((TopologicalSpace.Opens.map (↑V).ι.base).obj (X.\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f \\\\in \\\\Gamma(V, \\\\mathcal{O}_X)$, the image of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.IsOpenImmersion (I.glueDataObjMap ⋯)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f$ of the structure sheaf over $V$, the morphism induced by the inclusion $D(f) \\\\subseteq V$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{R : CommRingCat} →\\n  {ι : Type u_1} → (s : ι → ↑R) → Ideal.span (Set.range s) = ⊤ → (AlgebraicGeometry.Spec R).AffineOpenCover\", \"doc\": \"Given a commutative ring $ R $ and a set of elements $\\\\{s_i\\\\}$ whose ideal span is the unit ideal (i.e., $\\\\langle s_i \\\\rangle = R$), the localization morphisms $\\\\operatorname{Spec}(R_{s_i}) \\\\to \\\\opera\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (I.glueDataObjι U).base) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.IsAffineOpen.isoSpec ⋯).inv.base) ''\\n      PrimeSpectrum.zeroLocus ↑(I.ideal U)\", \"doc\": \"For a scheme $ X $ with ideal sheaf data $ \\\\mathcal{I} $ and an affine open subset $ U \\\\subseteq X $, the image of the morphism $ \\\\mathcal{I}.\\\\text{glueDataObj}\\\\iota(U) $ coincides with the preimage u\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Find an almost invariant function in a boundary ideal nonzero at finitely many generic point orbits of a finite scheme groupoid",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsInvariant.isInvariant\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} {inst : CommSemiring A} {inst_1 : Semiring B} {inst_2 : Algebra A B}\\n  {inst_3 : Group G} {inst_4 : MulSemiringAction G B} [self : Algebra.IsInvariant A B G] (b : B),\\n  (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"If an element $ b \\\\in B $ is invariant under the action of every element $ g \\\\in G $, then there exists an element $ a \\\\in A $ such that $ \\\\text{algebraMap}(A, B)(a) = b $. This characterizes the inva\"}\n  {\"name\": \"Algebra.isInvariant_iff\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ (A : Type u_1) (B : Type u_2) (G : Type u_3) [inst : CommSemiring A] [inst_1 : Semiring B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B],\\n  Algebra.IsInvariant A B G ↔ ∀ (b : B), (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"An algebra $ B $ over a commutative semiring $ A $ is invariant under the action of a group $ G $ if and only if every element $ b \\\\in B $ fixed by all $ g \\\\in G $ (i.e., $ g \\\\cdot b = b $) can be exp\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"groupHomology.IsBoundary₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \"(x : G × G →₀ A) : Prop\", \"doc\": \"The proposition that a finite support function $ x : G \\\\times G \\\\to_0 A $ is a boundary, meaning there exists a finite support function $ y : G \\\\times G \\\\times G \\\\to_0 A $ such that $ x $ equals the b\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.congr\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{s : Set H} {x : H} {f g : H → H'} (h : f =ᶠ[𝓝 x] g) (hP : P f s x) : P g s x\", \"doc\": \"If two functions $ f $ and $ g $ are eventually equal in a neighborhood of $ x $, and if a local invariant property $ P $ holds for $ f $ at $ x $ with respect to a set $ s $, then $ P $ also holds fo\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_congr_of_eventuallyEq_of_mem\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(h : LiftPropWithinAt P g s x) (h₁ : g' =ᶠ[𝓝[s] x] g) (h₂ : x ∈ s) : LiftPropWithinAt P g' s x\", \"doc\": \"If a function $ g $ satisfies a local invariant property $ P $ at a point $ x $ within a set $ s $, and another function $ g' $ agrees with $ g $ on a neighborhood of $ x $ within $ s $, then $ g' $ a\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.congr'\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{s : Set H} {x : H} {f g : H → H'} (h : f =ᶠ[𝓝 x] g) (hP : P g s x) : P f s x\", \"doc\": \"If two functions $ f $ and $ g $ agree on a neighborhood of $ x $, and a local invariant property $ P $ (under homeomorphisms in the structure groupoid) holds for $ g $ at $ x $, then $ P $ also holds\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"basicOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "almost.*invariant|invariant.*function|groupoid.*[Nn]orm",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite finitely presented scheme groupoid on a quasi affine scheme admits invariant principal affine open from boundary ideal containing generic orbits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (s : Set ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  Ideal.span s = ⊤ → (∀ i ∈ s, AlgebraicGeometry.IsAffineOpen (X.basicOpen i)) → AlgebraicGeometry.IsAffine X\", \"doc\": \"Let $X$ be a scheme. If there exists a finite set of global sections $\\\\{f_i\\\\}$ of the structure sheaf $\\\\mathcal{O}_X$ such that the ideal generated by these sections is the unit ideal (i.e., $\\\\langle \"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (s : Set ↑(X.presheaf.obj (Opposite.op U))),\\n  Ideal.span s = ⊤ → (∀ i ∈ s, AlgebraicGeometry.IsAffineOpen (X.basicOpen i)) → AlgebraicGeometry.IsAffineOpen U\", \"doc\": \"Let $ U $ be an open subset of a scheme $ X $. If there exists a set $ S $ of sections over $ U $ such that the ideal generated by $ S $ is the unit ideal in the ring of sections $ \\\\Gamma(U, \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (x : ↥(AlgebraicGeometry.Spec R)),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).idx x =\\n    have this := ⋯;\\n    this.choose\", \"doc\": \"If the ideal generated by a set $\\\\{s_i\\\\}$ in a commutative ring $R$ equals the entire ring $R$, then for every prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R)$, there exists an index $i$ such tha\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  ↑((AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).X i) = Localization.Away (s i)\", \"doc\": \"For a commutative ring $ R $ and a family of elements $ s_i $ indexed by $ i : ι $, if the ideal generated by $ \\\\{s_i\\\\} $ equals the entire ring $ R $, then the $ i $-th open set in the constructed af\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).I₀ = ι\", \"doc\": \"Given a commutative ring $ R $, an index type $ \\\\iota $, and a function $ s: \\\\iota \\\\to R $, if the ideal generated by the image of $ s $ equals the entire ring $ R $, then the index set $ I_0 $ of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [X.IsQuasiAffine] → X.OpenCover\", \"doc\": \"Given a quasi-affine scheme $X$, this function constructs an open cover of $X$ consisting of basic open subsets $X_f$ (for sections $f$ of the structure sheaf) that collectively cover the entire topol\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{R : CommRingCat} →\\n  {ι : Type u_1} → (s : ι → ↑R) → Ideal.span (Set.range s) = ⊤ → (AlgebraicGeometry.Spec R).AffineOpenCover\", \"doc\": \"Given a commutative ring $ R $ and a set of elements $\\\\{s_i\\\\}$ whose ideal span is the unit ideal (i.e., $\\\\langle s_i \\\\rangle = R$), the localization morphisms $\\\\operatorname{Spec}(R_{s_i}) \\\\to \\\\opera\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).f i =\\n    AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (↑R) (Localization.Away (s i))))\", \"doc\": \"Given a commutative ring $ R $, elements $ s_i $ indexed by $ ι $, and the condition that the ideal generated by $ \\\\{s_i\\\\} $ equals $ R $, the affine open cover's morphism for each index $ i $ is indu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Almost invariant functions for a finite scheme groupoid and a closed boundary",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.mk\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"∀ {H : Type u_1} {H' : Type u_3} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace H'] {G : StructureGroupoid H}\\n  {G' : StructureGroupoid H'} {P : (H → H') → Set H → H → Prop},\\n  (∀ {s : Set H} {x : H} {u : Set H} {f : H → H'}, IsOpen u → x ∈ u → (P f s x ↔ P f (s ∩ u) x)) →\\n    (∀ {s : Set H}\", \"doc\": \"A property $ P $ of triples $(f,s,x)$, where $ f:H\\\\to H' $, $ s\\\\subseteq H $, and $ x\\\\in H $, is a local invariant property under structure groupoids $ G $ and $ G' $ if it satisfies: (1) locality wit\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.congr\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{s : Set H} {x : H} {f g : H → H'} (h : f =ᶠ[𝓝 x] g) (hP : P f s x) : P g s x\", \"doc\": \"If two functions $ f $ and $ g $ are eventually equal in a neighborhood of $ x $, and if a local invariant property $ P $ holds for $ f $ at $ x $ with respect to a set $ s $, then $ P $ also holds fo\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{H : Type u_1} →\\n  {H' : Type u_3} →\\n    [inst : TopologicalSpace H] →\\n      [inst_1 : TopologicalSpace H'] → StructureGroupoid H → StructureGroupoid H' → ((H → H') → Set H → H → Prop) → Prop\", \"doc\": \"A proposition asserting a condition on a continuous map between topological spaces $H$ and $H'$, a subset of $H$, and an element of $H$, which must hold under the structure groupoids of $H$ and $H'$. \"}\n  {\"name\": \"MulAction.aestabilizer\", \"module\": \"Mathlib.MeasureTheory.Group.AEStabilizer\", \"type\": \"(s : Set α) : Subgroup G\", \"doc\": \"Given a group $G$ acting on a measurable space $\\\\alpha$ equipped with a measure $\\\\mu$ invariant under the action, and a measurable set $s \\\\subseteq \\\\alpha$, this subgroup of $G$ consists of all elemen\"}\n  {\"name\": \"Algebra.IsInvariant.mk\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} [inst : CommSemiring A] [inst_1 : Semiring B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B],\\n  (∀ (b : B), (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b) → Algebra.IsInvariant A B G\", \"doc\": \"If every element of $ B $ invariant under the action of $ G $ is in the image of the algebra map $ A \\to B $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $.\"}\n  {\"name\": \"StructureGroupoid.isLocalStructomorphWithinAt_localInvariantProp\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"[ClosedUnderRestriction G] : LocalInvariantProp G G (IsLocalStructomorphWithinAt G)\", \"doc\": \"If a structure groupoid $ G $ is closed under restriction, then the property of a function being a local structomorphism within a set at a point is a local invariant property with respect to $ G $. Th\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.congr_nhdsWithin'\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{s : Set H} {x : H} {f g : H → H'} (h1 : f =ᶠ[𝓝[s] x] g) (h2 : f x = g x) (hP : P g s x) : P f s x\", \"doc\": \"If two functions $ f $ and $ g $ agree on a neighborhood of $ x $ within the set $ s $, and if the local invariant property $ P $ holds for $ g $ at $ x $, then $ P $ also holds for $ f $ at $ x $. Fo\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_congr_of_eventuallyEq_of_mem\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(h : LiftPropWithinAt P g s x) (h₁ : g' =ᶠ[𝓝[s] x] g) (h₂ : x ∈ s) : LiftPropWithinAt P g' s x\", \"doc\": \"If a function $ g $ satisfies a local invariant property $ P $ at a point $ x $ within a set $ s $, and another function $ g' $ agrees with $ g $ on a neighborhood of $ x $ within $ s $, then $ g' $ a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"basicOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "almost.*invariant|groupoid.*[Nn]orm",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"205\", \"text\": \"      1. `A p` is almost invariant under the ergodic map `y ↦ p • y`\"}\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"206\", \"text\": \"      2. `B p` is almost invariant under the ergodic map `y ↦ p • y + 1/p`\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Ergodic.lean\", \"line\": \"131\", \"text\": \"/-- For a quasi-ergodic map, sets that are almost invariant (rather than strictly invariant) are\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Ergodic.lean\", \"line\": \"138\", \"text\": \"/-- For a quasi-ergodic map, sets that are almost invariant (rather than strictly invariant) are\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/AddCircle.lean\", \"line\": \"44\", \"text\": \"/-- If a null-measurable subset of the circle is almost invariant under rotation by a family of\"}\n  {\"file\": \"Mathlib/Dynamics/BirkhoffSum/Average.lean\", \"line\": \"109\", \"text\": \"/-- Birkhoff average is \\\"almost invariant\\\" under `f`:\"}\n  {\"file\": \"Mathlib/Dynamics/BirkhoffSum/Basic.lean\", \"line\": \"95\", \"text\": \"/-- Birkhoff sum is \\\"almost invariant\\\" under `f`:\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"37\", \"text\": \"Our definition of `IsFreeGroupoid` is nonstandard. Normally one would require that functors\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"32\", \"text\": \"* `CategoryTheory.Subgroupoid.IsNormal` is the property that the subgroupoid is stable under\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"303\", \"text\": \"/-- A subgroupoid is normal if it is wide and satisfies the expected stability under conjugacy. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"307\", \"text\": \"theorem IsNormal.conj' {S : Subgroupoid C} (Sn : IsNormal S) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"324\", \"text\": \"theorem sInf_isNormal (s : Set <| Subgroupoid C) (sn : ∀ S ∈ s, IsNormal S) : IsNormal (sInf s) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"354\", \"text\": \"  sInf {S : Subgroupoid C | (∀ c d, X c d ⊆ S.arrows c d) ∧ S.IsNormal}\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ConformalGroupoid.lean\", \"line\": \"14\", \"text\": \"In this file we define the groupoid of conformal maps on normed spaces.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-almost-invariant-function. Supporting Tag 0ABF, first paragraph: apply Tag 0ABC before choosing the boundary ideal J; final paragraph: norm and clearing denominators.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-almost-invariant-function",
+  "worker": "stage1",
+  "summary": "Read Tag 0ABF and its cited Tag 0ABC; preserve the statement. Reuse the existing determinant-trick, local norm, norm-prime, prime-avoidance, finite-fibre and immersion nodes. Add only the invariant affine generic thickening of Tag 0ABC. Spell out the boundary ideal, localization kernel and transfer from V′ to V. No Lean attachment found; all new searches logged through msearch.py.",
+  "blueprint": "Historical direct-image alteration-support branch recorded in blueprint.from: Tag 0ABF supplies the almost invariant function in the proof of Tag 0ABI. Steps 2–3 realize its affine-thickening reduction; steps 4–5 its norm; steps 6–7 its ambient function and invariant affine open. Current latest direct-images proof (3) is read as the parent route; no unit or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic A morphism with affine source is separated used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-trf-immersion-over-separated-base",
+    "why": "Generic An immersion into a separated scheme over a base is separated over that base used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic A separated morphism of schemes is quasi-separated used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic A finite morphism is separated, universally closed and has finite fibres used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic Prime avoidance used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-pd-finite-locally-free-norm-charts",
+    "why": "Generic Norm sections on local finite free affine charts used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-invariant-norm",
+    "why": "Generic The source norm of a target pullback is groupoid-invariant used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-pd-finite-free-norm-prime-criterion",
+    "why": "Generic Finite free algebra norm and primes over a prime used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "why": "Generic An immersion with closed image is a closed immersion used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic Sections over an affine open: vanishing at a point iff membership in its prime; basic opens are affine with ring the localization used with exactly its stated hypotheses in the Tag 0ABF construction; no node of this unit supplies that general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-trf-immersion-over-separated-base",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-a1-affine-groupoid-invariant-norm",
+  "lem-pd-finite-free-norm-prime-criterion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-c3f1d748e",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-c3f1d748e (reviewer sub-agent of L); spot-checked: Stopped background search: the slow python scan of node source places for 01QN/01L7/01JY/01QO was killed at its time limit. It is not needed; the earlier rg -L search over the snapshot DAG covered the same question and found no node stating 01QN (a composition of immersions is an immersion). The verdict is unchanged. I read the item and the new node in full against Stacks more-groupoids.tex: 0ABF (lemma-find-almost-invariant-function) and 0ABC (lemma-invariant-affine-open-around-generic-point). The item's statement is unchanged and matches 0ABF hypothesis by hypothesis. Step 2 obtains quasi-separatedness of U before applying 0ABC: Spec A is separated (affine-source node), j is an immersion over it (01L8), and separated implies quasi-separated. Step 3 builds J = I∩K with V(J) = V(I) ∪ j(U∖V). Step 4 uses finite fibres and ideal prime avoidance, with r ≥ 1. Step 5 meets the hypotheses of the 03BH invariant norm and the norm-prime criterion (rank 0 allowed); the identity arrow gives D(g) ⊆ D(b). Step 6's clearing of denominators keeps the localization kernel, so n > 0. Step 7 returns from V' to U through |V'| = |V| and |R'| = |R_V|, with affineness from the principal open in the affine V. Fault C1, step 6: 'this morphism is an immersion' had no cited node. FIX: the composite closed V'→V, open V ⊆ U, immersion j is written out, citing lem-weil-pbc-closed-immersion-comp (01QS, Mathlib leaf) and def-weil-open-immersion, both added to the step's uses and to proof_deps. The new node lem-sfb-finite-groupoid-generic-affine-flat-thickening is faithful to 0ABC, statement-only, and tested on m = 0, an identity groupoid over a field, k[ε]/ε² and a finite group acting across several components. It is not a duplicate: 0ABA and 03JE are ingredients of 0ABC; the 0ABI parent cites the item. Batch-5: lem-trf-immersion-over-separated-base is Stacks 01L8, a generic Mathlib-leaf fact, neither a trace-formula nor a Poincaré-duality statement nor a step of their proofs, so it is accepted. The tool_uses are generic and accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupoidAlmostInvariantFunction",
+  "declaration": "AlgebraicGeometry.finiteGroupoid_exists_almostInvariant_function",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupoidAlmostInvariantFunction.lean",
+  "statement": "theorem finiteGroupoid_exists_almostInvariant_function {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] (m : ℕ) (x : Fin m → U) (hOrbit : ∀ (k : Fin m) (y : U), y ∈ t '' (s ⁻¹' {x k}) → ∃ Z ∈ irreducibleComponents U, IsGenericPoint y Z) (A : CommRingCat.{u}) (j : U ⟶ Spec A) [IsImmersion j] (I : Ideal A) (hDisjoint : Set.range j ∩ PrimeSpectrum.zeroLocus (I : Set A) = ∅) (hClosed : IsClosed (PrimeSpectrum.zeroLocus (I : Set A) ∪ Set.range j)) : ∃ h ∈ I, IsAffineOpen (j ⁻¹ᵁ PrimeSpectrum.basicOpen h) ∧ (∀ k : Fin m, x k ∈ j ⁻¹ᵁ PrimeSpectrum.basicOpen h) ∧ s ⁻¹ᵁ (j ⁻¹ᵁ PrimeSpectrum.basicOpen h) = t ⁻¹ᵁ (j ⁻¹ᵁ PrimeSpectrum.basicOpen h)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57d3e7fc6",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read node, Stacks 0ABF/0ABC, all 7 stmt_deps records, the IsGroupoidScheme source, the module and the report. Signature matches clause by clause: IsGroupoidScheme groupoid; IsFinite + LocallyOfFinitePresentation equals 01TP finite presentation for finite maps (qc/qs automatic); Fin m list allows m=0; hOrbit covers every point of t''(s⁻¹'{x k}) as generic in an irreducible component; IsImmersion j into Spec A (mathlib_match of def-weil-closed-immersion); literal disjointness/closedness via zeroLocus; conclusion ∃ h∈I, affine j⁻¹ᵁD(h), contains all x k, s⁻¹ᵁW = t⁻¹ᵁW (R-invariance), nothing stronger. Edge cases m=0, empty U, A=0, I=⊥ are fine; no extra assumptions; universe u standard. Statement verbatim; node copy changes only lean; single sorry; source/blueprint docstrings with the 7 proof steps; proof imports exist; report has Worker report and Second reading sections. No recompile per instruction. No findings."
+ }
+}

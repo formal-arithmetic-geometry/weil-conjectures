@@ -15,76 +15,44 @@
  ],
  "proof": [
   {
-   "text": "Write $H(X,Y)=R\\operatorname{Hom}_R(X,Y)$. Apply the closed symmetric monoidal structure of [lem-sf-ringed-derived-closed-symmetric-monoidal] on the one-object site with the trivial topology and constant ring $R$. Its modules are precisely $R$-modules; this site is small. Put $A=H(L,M)$ and $B=H(K,L)$. Form $A\\otimes^L K\\otimes^L B\\to A\\otimes^L B\\otimes^L K\\to A\\otimes^L L\\to M$, swapping $K,B$ and then applying the two counits. Transpose it under $-\\otimes^L B\\dashv H(B,-)$ to obtain $e:A\\otimes^L K\\to H(B,M)$. By naturality and involutivity of the symmetry, uncurrying instead with $B$ on the left gives exactly the composite in the statement: move $B$ past $A$, then evaluate $B\\otimes^L K$, then evaluate $A\\otimes^L L$. Thus this is a specified canonical map, without choices of an inverse or of a finiteness hypothesis.",
+   "text": "The one-object ringed site with trivial topology is small and its module sheaves are $R$-modules. Apply [lem-sf-ringed-derived-closed-symmetric-monoidal] there, and specialize [lem-trf-closed-evaluation-naturality] to its derived closed structure. Its uniquely specified transpose gives $e_{K,L,M}$; its left-uncurrying equation is the composite in the statement. Its three-variable equality gives the required variances, without any finiteness or invertibility assumption.",
    "uses": [
+    "lem-trf-closed-evaluation-naturality",
     "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A67, lemma-internal-hom-evaluate; Tag 0A60, lemma-evaluate-and-more and remark-sign-explanation"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0GWJ, remark-internal-hom-monoidal, item (5) and its two-counit construction; naturality and the left-uncurrying identity are the agent expansion of this construction, also used in more-algebra.tex Tags 0A60 (lemma-evaluate-and-more) and 0A61 (remark-sign-explanation)."
    }
   },
   {
-   "text": "The closed adjunction in [lem-sf-ringed-derived-closed-symmetric-monoidal] is natural in all its variables. For $u:K\\to K'$, the two uncurried composites reduce to evaluating $f\\circ u$ on $x$, or $f$ on $u(x)$; the equality is the first-variable counit naturality. For $v:M\\to M'$, they reduce to $v\\circ h$ evaluated on $f(x)$, or $v$ applied after evaluation by $h$, which is second-variable counit naturality. For $t:L'\\to L$, both reduce to $h(t(f(x)))$: on the source $h$ is precomposed with $t$, and on the target precomposition with $H(K,t)$ reverses the direction again. These are equalities of evaluation composites supplied by naturality of the adjunction, rather than an appeal to elements of arbitrary derived objects. Transposition, a bijection, gives the required covariant $K,M$ squares and contravariant $L$ square.",
+   "text": "Choose K-injective representatives $J,I$ of $L,M$ using [prop-pur-kinjective-resolutions-exist] and a K-flat representative $P$ of $K$ using [lem-pc-kflat-resolution]. By [lem-trf-derived-evaluation-resolved-model], the canonical derived map of step 1 is exactly $Q(E_P)$ under the isomorphisms $\\lambda_P,\\rho_P$, where $E_P(h\\otimes x)(f)=(-1)^{|x||f|}h(f(x))$. This equality is for the actual unbounded total tensor and product Hom complexes.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A67, omitted functoriality argument, expanded using counit naturality"
-   }
-  },
-  {
-   "text": "Choose K-injective representatives $J,I$ of $L,M$ by [prop-pur-kinjective-resolutions-exist] and a K-flat representative $P$ of $K$ by [lem-pc-kflat-resolution]. Put $A^\\bullet=\\operatorname{Hom}^\\bullet(J,I)$. By [def-pur-derived-internal-hom], [lem-sf-ringed-derived-closed-symmetric-monoidal] (one K-flat factor and one arbitrary complex), and [lem-weil-pbc-site-derived-tensor-descent], $A^\\bullet\\otimes P$ represents $F(K)$ (use symmetry to put the K-flat representative first), and $\\operatorname{Hom}^\\bullet(\\operatorname{Hom}^\\bullet(P,J),I)$ represents $G(K)$. The chain tensor--Hom bijection [lem-sc-derived-hom-tensor-total] identifies the transpose in step 1 with\n$$E_P(h\\otimes x)(f)=(-1)^{bc}h(f(x)),\\quad |h|=a,\\ |x|=b,\\ |f|=c.$$\nThe sign comes from swapping $x,f$; the evaluation maps themselves use [def-pur-hom-complex]. In each total degree $h\\otimes x$ has finite support in the tensor direct sum, so this formula defines a map into every product component of the double Hom, even for unbounded complexes. The formula is a chain map because it is a transpose of chain evaluation; the cited chain tensor--Hom isomorphism supplies precisely compatibility with the differentials. Thus it is the chain representative of the already canonical map, with no extra descent or functorial-choice assertion.",
-   "uses": [
+    "lem-trf-derived-evaluation-resolved-model",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-hom-complex",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 0A67 and 0A60, the representative construction and remark-sign-explanation"
+    "place": "Tags 0A67 (lemma-internal-hom-evaluate), 0A60 (lemma-evaluate-and-more), and 0A61 (remark-sign-explanation): unbounded resolved representative, finite support in the tensor sum, and identification with the abstract transpose."
    }
   },
   {
-   "text": "For $F$, present any distinguished triangle by a cone triangle of K-flat complexes $P_1\\to P_2\\to C\\to P_1[1]$ using [lem-pc-kflat-cone-triangle-presentation]. Apply [lem-pc-tensor-mapping-cone-iso] with the arbitrary coefficient complex $A^\\bullet=\\operatorname{Hom}^\\bullet(J,I)$. Explicitly the cone isomorphism sends $h\\otimes(y,x)$ to $(h\\otimes y,(-1)^a h\\otimes x)$ for $|h|=a$, by [def-pc-tensor-complex-sheaves]. Its first component preserves the inclusion; its second component identifies the projection with the tensor shift map $A^\\bullet\\otimes P_1[1]\\to(A^\\bullet\\otimes P_1)[1]$, whose multiplier is $(-1)^a$. It therefore also respects the negative projection used for the connecting map in [def-weil-abstract-derived-category]. This proves exactness of $F$ with that shift comparison. For $G$, apply [lem-weil-pbc-ringed-internal-hom-exact-restriction] twice in its first variable, first with target $L$, then with target $M$. The two reversals give a covariant exact functor. Use the signed composite comparison: the two contravariant shift identifications and the sign from the reversal of triangles. This includes the customary extra minus for the shift by one.",
+   "text": "By [lem-trf-tensor-double-hom-exact-comparisons], $F$ and $G$ are exact with comparisons $\\varphi,\\psi$ represented by $\\tau,\\chi$ on these same models, including the connecting-arrow sign. Apply [lem-trf-double-hom-evaluation-shift] to $P,J,I$. Its chain-map identity $\\chi_{P,m}E_{P[m]}=E_P[m]\\tau_{P,m}$ and the representative equality of step 2 give $\\psi_{K,m}e_{K[m],L,M}=e_{K,L,M}[m]\\varphi_{K,m}$ in $D(R)$ for every $m\\in\\mathbf Z$.",
    "uses": [
-    "lem-pc-kflat-cone-triangle-presentation",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "lem-trf-tensor-double-hom-exact-comparisons",
+    "lem-trf-double-hom-evaluation-shift"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC, lemma-RHom-triangulated; more-algebra.tex Tag 064J, lemma-derived-tor-exact"
-   }
-  },
-  {
-   "text": "Check the signed comparisons on the representatives of step 3. With the Hom differential of [def-pur-hom-complex], the first-variable comparison $s_{P,m}:\\operatorname{Hom}(P[m],J)\\to\\operatorname{Hom}(P,J)[-m]$ multiplies a homogeneous map of degree $q$ by $(-1)^{mq}$ and reindexes its source. Substitution in $d(f)=d_Jf-(-1)^qfd_P$ verifies this chain identity; replacing $J$ by $I$ gives the outer comparison. Their signed composite for $G(P[m])\\to G(P)[m]$ is\n$$\\chi_{P,m}=(-1)^m s_{H(P,J),-m}\\circ H(s_{P,m},I)^{-1}.$$\nOn $g\\in G(P[m])^n$ tested at $f\\in H(P,J)^c$, this reads $(\\chi_{P,m}g)(f)=(-1)^{m(n+c)}g(f)$, where $f$ on the right is read in $H(P[m],J)^{c+m}$. Indeed the two reindexings contribute $m(c+m)+mn$, and the reversal contributes $m$; $m^2+m$ is even. Tensor shift has multiplier $(-1)^{ma}$ on $h\\otimes x$. If $x\\in P^b$, its degree in $P[m]$ is $b-m$ and $n=a+b-m$. Consequently\n$$(b-m)(c+m)+m(n+c)\\equiv bc+ma\\pmod2.$$\nThe left side is the sign of $\\chi_{P,m}E_{P[m]}$, and the right side that of $E_P[m]$ after tensor shift. Hence the shift square commutes for every integer $m$. These are the signed exactness comparisons of step 4, not unsigned reindexings. The identity passes to $D(R)$ through the representative comparisons of [def-pur-derived-internal-hom] and [lem-weil-pbc-site-derived-tensor-descent].",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A60, lemma-evaluate-and-more, remark-sign-explanation and section-sign-rules; signed double contravariant shift calculation expanding sites-cohomology.tex Tag 08JC"
+    "place": "Tags 0A60 (lemma-evaluate-and-more) and 0A61 (remark-sign-explanation), with section-sign-rules: agent expansion of the signed first-variable Hom shifts and the equality (b-m)(c+m)+m(a+b-m+c) = bc+ma modulo 2."
    }
   },
   {
-   "text": "Let $K_1\\xrightarrow{u}K_2\\xrightarrow{v}K_3\\xrightarrow{w}K_1[1]$ be distinguished. Step 4 makes its $F$ and $G$ images distinguished. Step 2 gives $G(u)e_1=e_2F(u)$ and $G(v)e_2=e_3F(v)$, and also $G(w)e_3=e_{K_1[1]}F(w)$. Write $\\varphi:F(K_1[1])\\to F(K_1)[1]$ and $\\psi:G(K_1[1])\\to G(K_1)[1]$ for step 4's comparisons. Step 5 gives $\\psi e_{K_1[1]}=e_1[1]\\varphi$, so\n$$\\psi G(w)e_3=e_1[1]\\varphi F(w).$$\nThis is exactly the square on the connecting arrows in the definition of a morphism of triangles [def-weil-triangulated-category]. Thus all three components define the asserted morphism of distinguished triangles. No argument has required $e_i$ to be invertible.",
+   "text": "For a distinguished triangle $K_1\\xrightarrow{u}K_2\\xrightarrow{v}K_3\\xrightarrow{w}K_1[1]$, step 3 makes both image triangles distinguished. Naturality from step 1 gives the squares for $u,v$ and $G(w)e_3=e_{K_1[1],L,M}F(w)$. Postcompose this last equality by $\\psi_{K_1,1}$ and use step 3 to obtain $\\psi_{K_1,1}G(w)e_3=e_1[1]\\varphi_{K_1,1}F(w)$. This is the connecting square in [def-weil-triangulated-category]; hence the three $e_i$ form the asserted morphism of distinguished triangles.",
    "uses": [
     "def-weil-triangulated-category"
    ],
@@ -96,18 +64,13 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-closed-evaluation-naturality",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-derived-evaluation-resolved-model",
   "prop-pur-kinjective-resolutions-exist",
   "lem-pc-kflat-resolution",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-sc-derived-hom-tensor-total",
-  "def-pur-hom-complex",
-  "lem-pc-kflat-cone-triangle-presentation",
-  "lem-pc-tensor-mapping-cone-iso",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-trf-tensor-double-hom-exact-comparisons",
+  "lem-trf-double-hom-evaluation-shift",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
@@ -238,11 +201,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "item": "lem-trf-derived-evaluation-canonical-map",
   "worker": "stage1",
-  "summary": "Reused existing site-level closed tensor-Hom, K-flat cone and Hom exactness nodes. Constructed the transpose, wrote counit naturality, fixed the representative formula, and checked the signed comparison for every integer shift and the connecting square. No new nodes; statement unchanged.",
-  "blueprint": "Auxiliary canonical evaluation construction beneath the semistable/duality input to lem-trf-local-term-locality, with the precise inherited ancestor chain retained. The current blueprint does not separately state this algebraic helper.",
+  "summary": "Repair of the 2026-10-22 re-split return: retain the statement verbatim; distribute old steps 1--2, 3, 4, and 5 into four independently stated unsplit tasks. Retain the full original arguments in report.md as their handoff, and leave only construction-by-specialization, model comparison, shift transport and the final triangle-square assembly here. No Lean edits or compiles.",
+  "blueprint": "Auxiliary canonical evaluation construction beneath the semistable/duality input to lem-trf-local-term-locality, with the precise inherited ancestor chain retained. The current blueprint does not separately state this algebraic helper. The four new tasks serve precisely old proof steps 1--2, 3, 4, and 5 respectively; the parent retains old step 6 as the elementary final assembly.",
   "tool_uses": [
    {
     "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
@@ -255,26 +218,6 @@
    {
     "node": "lem-pc-kflat-resolution",
     "why": "Unbounded K-flat representative of K needed for the explicit chain model."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Identifies the actual derived tensor with its K-flat model and transports the checked identity to D(R)."
-   },
-   {
-    "node": "lem-sc-derived-hom-tensor-total",
-    "why": "Chain tensor-Hom currying identifies the abstract evaluation transpose with the signed representative formula."
-   },
-   {
-    "node": "lem-pc-kflat-cone-triangle-presentation",
-    "why": "Presents arbitrary module derived triangles by K-flat cone triangles, including their connecting maps."
-   },
-   {
-    "node": "lem-pc-tensor-mapping-cone-iso",
-    "why": "Tensor-cone identification establishes exactness for F; its projection sign is computed explicitly."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Unbounded ringed-site RHom exactness in both variables, with signed comparisons, establishes exactness of the twofold contravariant functor G."
    }
   ]
  },
@@ -289,12 +232,12 @@
   "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q03-217194271",
-  "group": "Q03",
+  "reviewer": "NT-cc-O1-d7b3904b1",
+  "group": "O1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-217194271 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements, and Stacks 0A67, 0A60 with remark-sign-explanation (more-algebra.tex:18294), 08JC (sites-cohomology.tex:8948) and 064J. The statement is unchanged from Q82's unsplit node and there are no new nodes. Step 1: the closed-monoidal node supplies the small site, the one-K-flat-factor tensor, the Koszul symmetry, the adjunction and the evaluation counit, and the transpose is a specific map. Step 2: naturality of the counit gives the K, M and L squares. Step 3: I checked by hand that E(h⊗x)(f)=(-1)^{bc}h(f(x)) commutes with the differentials. Its sign matches Stacks' (-1)^{r(q+r)} and the parent pseudocoherent step 6's (-1)^{ks}. Step 4: I checked that the tensor-cone isomorphism h⊗(y,x)↦(h⊗y,(-1)^a h⊗x) is a chain isomorphism and takes the projection to the tensor shift. It only uses the stated inclusion compatibility of lem-pc-tensor-mapping-cone-iso. Step 5: s_{P,m} with (-1)^{mq} is a chain map, χ carries (-1)^{m(n+c)}, and (b−m)(c+m)+m(n+c)≡bc+ma (mod 2) holds for every integer m. Step 6: naturality applied to w and the m=1 shift square give the TR3 connecting square. Edge cases hold: R=0; degree 0; b=c=1; a=b=c=0 with m=1 (the extra reversal sign is needed); no invertibility claimed. Grepping for 0A67/0A60 finds only different maps: lem-sfb-ringed-site-duality-maps, lem-pc-perfect-rhom-tensor-comparison and the bidual nodes. No blueprint duplicate. I accept all 8 declared tool_uses as generic algebra. Advisory: step 4 names the composite shift comparison for G only briefly, but step 5 makes it explicit. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-d7b3904b1 (reviewer sub-agent of L); spot-checked: Re-split note (≥2 statement-only nodes, parent ≤3000 chars, every argument carried) is fulfilled. The item statement, stmt_deps and lean record match live byte for byte. 4 new unsplit nodes: old steps 1-2 → lem-trf-closed-evaluation-naturality (Stacks 0GWJ(5), checked at categories.tex 9616-9663); old step 3 → lem-trf-derived-evaluation-resolved-model; old step 4 → lem-trf-tensor-double-hom-exact-comparisons; old step 5 → lem-trf-double-hom-evaluation-shift. Old step 6 stays as elementary parent step 4 (TR3 third square). The parent proof is 1852 chars. Hand checks: the three-variable naturality typechecks and holds elementwise; left-uncurrying follows from the hexagon and σσ=1; E_P(h⊗x)(f)=(-1)^{bc}h(f(x)) is a chain map for the def-pur-hom-complex/def-pc-tensor sign conventions; the sign agrees with 0A61. s^V_{U,m} (with (-1)^{mq}) and τ are chain maps. The χ component sign is (-1)^{m(n+c)} as stated, and the parity identity m(a+b-m+c)+(b-m)(c+m)≡ma+bc holds for all m∈ℤ. The tensor-cone iso h⊗(y,x)↦(h⊗y,(-1)^a h⊗x) is a chain iso for the cone convention of def-weil-abstract-derived-category and matches -p after τ_1. Duplicate candidates read: lem-sf-double-hom-cone-comparison covers a single target I and m=1 only, so it is a partial tool, not a duplicate. lem-sfb-hom-kflat-chain-transpose needs a K-flat Hom source, which Hom(P,J) is not. lem-sfb-ringed-signed-bidual-localization only treats the bidual against O. The tool_uses (closed monoidal, K-injective and K-flat existence) are already maintainer-recorded and accepted. FIXes (2): resolved-model statement now cites lem-sf-ringed-derived-closed-symmetric-monoidal for its 'canonical closed structure', also added to stmt_deps (B3); shift node now names the one-object site for 'complexes of R-modules' (B2/B3). No SGA, no cycle, no target weakened.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.DerivedEvaluationCanonicalMap",
@@ -323,5 +266,16 @@
   "result": "pass",
   "note": "Item isIso_evaluation_of_isPseudoCoherent matches Stacks 0A68(2): K pseudo-coherent via one-point evaluation + IsPseudoCoherent (same encoding as landed isIso_finiteInjectiveEvaluation), L in D+ as ∃n IsGE, M a bounded complex of injectives (a>b allowed), IsIso of the canonical map via .choose of the uniquely pinned canonical-map theorem; no extra hypotheses; statements verbatim; docstrings carry source, blueprint and all 8 steps; item not on the drop lists. The canonical-map §1(B) module is legitimate: NJ's PASSed module (1df3eea78) was taken out of the 2026-10-20 landing candidate (it imported retired Sheaf HomTensorTotal/KFlatConeTrianglePresentation), the live record dangles with no file and no importers, and ND's text is equivalent to NJ's (sectL vs curry.flip, .hom of the same signed shift iso) with live WeilConjectures imports. nt_compile timed out at 60 s at load 208 (12 s CPU); lcompile.run_set(timeout=560) gave rc 0 for both files, no warnings (404.6 s / 119.2 s wall, ~46 s CPU total). Maintainer: landing overwrites NJ's dangling record by design; retry landing at lower load."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,327 @@
+{
+ "id": "lem-trf-fixed-arrow-scalar-extension-diagram",
+ "kind": "statement",
+ "title": "Coherent scalar-extension diagrams for a fixed finitely presented module arrow",
+ "statement": "Let $I$ be a small nonempty directed preorder, $A_i$ a diagram of commutative rings with transitions $a_{ji}:A_i\\to A_j$ and ring-colimit cocone $\\kappa_i:A_i\\to A$ [def-weil-pbc-category-colimit]. Fix $c\\in I$, finitely presented $A_c$-modules $P,Q$ [def-sc-finitely-presented-module], and an $A_c$-linear map $v:P\\to Q$. For $j\\ge c$ put $P_j=P\\otimes_{A_c}A_j$, $Q_j=Q\\otimes_{A_c}A_j$, $v_j=v\\otimes1$, and put $P_A=P\\otimes_{A_c}A$, $Q_A=Q\\otimes_{A_c}A$, $v_A=v\\otimes1$ [def-weil-pbc-module-tensor-product]. For $c\\le j\\le k$ specify\n$p_{kj}(x\\otimes a)=x\\otimes a_{kj}(a)$, $q_{kj}(y\\otimes a)=y\\otimes a_{kj}(a)$,\n$\\mu_j(x\\otimes a)=x\\otimes\\kappa_j(a)$, and $\\nu_j(y\\otimes a)=y\\otimes\\kappa_j(a)$.\nThese formulas define additive maps semilinear over the corresponding ring maps. They obey identities, composition, cocone compatibility, $q_{kj}v_j=v_kp_{kj}$ and $\\nu_jv_j=v_A\\mu_j$. Every $P_j,Q_j$ is finitely presented. The canonical $A_k$-linear maps $P_j\\otimes_{A_j}A_k\\to P_k$, $z\\otimes b\\mapsto b\\,p_{kj}(z)$, and $Q_j\\otimes_{A_j}A_k\\to Q_k$, $z\\otimes b\\mapsto b\\,q_{kj}(z)$, are isomorphisms. The canonical $A$-linear maps $P_j\\otimes_{A_j}A\\to P_A$, $z\\otimes b\\mapsto b\\,\\mu_j(z)$, and $Q_j\\otimes_{A_j}A\\to Q_A$, $z\\otimes b\\mapsto b\\,\\nu_j(z)$, are isomorphisms. Both pairs intertwine the scalar extensions of $v_j$ with $v_k$ and $v_A$, respectively. The specified cocones exhibit $P_A$ and $Q_A$ as colimits of the underlying abelian groups on the directed tail $I_{\\ge c}$. Every element of either limit module is represented at one stage, and two stage elements have equal images exactly when their images agree at a common later stage. The tail is small, nonempty and directed. These assertions allow zero modules, the zero map, empty finite presentations and rings with zero divisors; no flatness or Noetherian hypothesis on any $A_i$ is imposed. All sets may lie in a common sufficiently large universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix construction and clauses (1),(4),(6); Tag 046Y (lemma-mod-injective-general), first proof paragraph, the simultaneous module-arrow system. The statement isolates the fixed-stage scalar-extension realization, with its explicit maps, used in these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The upper tail J = I≥c contains c and is directed by taking an upper bound in I. Its inclusion F is final: every i has an upper bound with c, and parallel maps in the preorder agree. Apply Mathlib Functor.final_of_exists_of_isFiltered and Functor.Final.isColimitWhiskerEquiv to restrict the given ring colimit. This is the filtered dual of [lem-weil-pbc-colimit-initial-full-subcategory].",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0BUC (lemma-cofinal-in-filtered), 04E7 (lemma-cofinal), dualized as stated in the cited node"
+   }
+  },
+  {
+   "text": "For a ring triangle R→S→T whose composite is h, Mathlib ModuleCat.extendScalarsComp gives the scalarComparison isomorphism T⊗S(S⊗R P) ≅ T⊗R P. Define scalarTransition by the scalar-extension unit z↦1⊗z followed by this comparison. The unit and restricted comparison give semilinearity. The comparison on nested unit tensors gives scalarTransition(a⊗x)=g(a)⊗x. Apply this to stage transitions and cocone legs. Tensor induction, ring functoriality and cocone naturality prove identity, composition and compatibility, using [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), balanced presentation; explicit verification of the fixed-stage construction used in Tag 00QX"
+   }
+  },
+  {
+   "text": "For any $R$-algebra $B$, the formula $v_B(x\\otimes b)=v(x)\\otimes b$ is well defined by [def-weil-pbc-module-tensor-product], since $v$ is $R$-linear. It is $B$-linear by multiplication in the second factor. On $x\\otimes a\\in P_j$, both $q_{kj}v_j$ and $v_kp_{kj}$ have value $v(x)\\otimes a_{kj}(a)$, and both $\\nu_jv_j$ and $v_A\\mu_j$ have value $v(x)\\otimes\\kappa_j(a)$. Equality follows on all elements by additive generation. Thus the constructed diagrams form the stated arrow diagram.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product), 046Y (lemma-mod-injective-general), first paragraph: simultaneous module arrows"
+   }
+  },
+  {
+   "text": "For each stage equip B(j) with its B(c)-algebra structure from the specified ring map. Mathlib instFinitePresentationTensorProduct (Mathlib.Algebra.Module.FinitePresentation) directly supplies finite presentation of B(j)⊗B(c) T for T=P,Q. This is exactly the carrier and module structure of fixedArrowStage. The instance implements the ordinary finite-presentation argument of [def-sc-finitely-presented-module] and works for zero modules, empty presentations and arbitrary ring maps.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph; Tag 00DF (lemma-tensor-product-exact), Tag 00CY (lemma-flip-tensor-product)"
+   }
+  },
+  {
+   "text": "Use scalarComparison from Step 2 for each stage and limit ring triangle. For any z and b its linearity identifies the value on b⊗z with b times its value on 1⊗z, which is b times scalarTransition(z) by construction. Thus these are the specified canonical comparison isomorphisms of [def-weil-pbc-module-tensor-product], not arbitrary isomorphisms.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), explicit balanced inverse; tensor comparison underlying Tag 00QX (6)"
+   }
+  },
+  {
+   "text": "Prove scalarTransition_natural by tensor induction: on a⊗x, both sides equal g(a)⊗v(x). For scalarComparison_natural use Mathlib ModuleCat.ExtendScalars.hom_ext, which reduces to tensors 1⊗z; these give the previously proved transition naturality. This establishes the stage and limit arrow squares and both comparison intertwining identities, using [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), first paragraph; explicit naturality calculation for the tensor comparisons of Tag 00QX"
+   }
+  },
+  {
+   "text": "Build the additive functor D from the stage transitions and its cocone δ from the limit legs. Apply [lem-weil-pbc-base-change-diagram-elementwise] on the upper tail using the ring colimit from Step 1, semilinearity from Step 2 and the linear equivalences underlying the comparisons of Step 5. All tensors already have the cited theorem’s ring-first convention. It yields representatives and eventual zero. To prove the common-stage equality criterion, move two representatives to an upper bound, apply eventual zero to their difference, and use functoriality; the reverse implication is cocone naturality.",
+   "uses": [
+    "lem-weil-pbc-base-change-diagram-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits), as encapsulated by the cited elementwise comparison node"
+   }
+  },
+  {
+   "text": "To prove the colimit in abelian groups, take any abelian group $H$ and compatible additive maps $f_j:T_j\\to H$. Step 7 allows the definition $f(\\tau_j(z))=f_j(z)$ on all of $T_A$. It is well defined because equal representatives agree at a common later stage and compatibility makes their $f_j$-values equal. To check additivity, move representatives $z\\in T_j$ and $w\\in T_k$ to a common $\\ell\\ge j,k$; then $f(\\tau_j(z)+\\tau_k(w))=f_\\ell(t_{\\ell j}z+t_{\\ell k}w)=f_j(z)+f_k(w)$. A zero representative gives $f(0)=0$. Thus $f$ is additive and $f\\tau_j=f_j$. Representation of every element forces uniqueness. This is exactly the universal property of [def-weil-pbc-category-colimit] in abelian groups. Apply it for $T=P$ and for $T=Q$. All constructions use additive and balancing relations, right exactness and directedness only; neither cancellation in a ring, nonzero modules, positive presentation sizes, flatness nor a Noetherian hypothesis was used.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QX (1), details omitted after the presentation-matrix construction; Tag 00D6 (lemma-directed-colimit), universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-base-change-diagram-elementwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00QX and 046Y, fixed-stage construction; implemented via Mathlib scalar-extension composition isomorphisms, its finite-presentation tensor instance, and the existing proved elementwise base-change criterion. The common-stage and additive colimit proofs follow Tags 00D6 and 00D7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(tensor.*(directLimit|colimit)|((directLimit|colimit).*tensor)|baseChange.*[Aa]rrow)",
+   "results": "25 hits; Mathlib/Algebra/Colimit/TensorProduct.lean, Mathlib/Algebra/Colimit/TensorProduct.lean, Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean, Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean, Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean, Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean, Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fixed finitely presented module morphism induces compatible scalar extension diagrams along a directed ring system with tensor transition isomorphisms and underlying abelian group colimits",
+   "results": "8 hits; TensorProduct.toDirectLimit, ModuleCat.ExtendScalars.map', DirectLimit.instModule, DirectedSystem.rTensor, ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', DirectLimit.Module.lift, DirectedSystem.lTensor.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module.DirectLimit",
+   "results": "12 hits; TensorProduct.fromDirectLimit, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft, TensorProduct.directLimitRight, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.toDirectLimit_tmul_of, TensorProduct.directLimitLeft_tmul_of, TensorProduct.directLimitRight_tmul_of.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a linear map between finitely presented modules at one stage of a directed ring colimit, scalar extension gives a coherent diagram of arrows on the upper tail, with canonical base change isomorphisms and algebraic colimits of the underlying abelian groups",
+   "results": "8 hits; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, ModuleCat.directLimitIsColimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.colimitCocone, PresheafOfModules.isColimitColimitCocone, Submodule.FG.lTensor.directLimit_apply', ModuleCat.HasColimit.isColimitColimitCocone.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange.*(comp|trans|finitePresentation)|FinitePresentation.*(baseChange|tensor)|directLimitRight)",
+   "results": "25 hits; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend one finitely presented module arrow P to Q by tensor products to every ring on a cofinal tail; prove coherence, finite presentation, canonical transition and limit scalar extension equivalences, and elementwise filtered colimits",
+   "results": "8 hits; CommRingCat.preservesFilteredColimits_coyoneda, preservesFilteredColimits_coyoneda, isFinitelyPresentable, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.FinitePresentation.trans, ModuleCat.FilteredColimits.M.mk_surjective, CommRingCat.isFinitelyPresentable_hom.  TensorProduct.directLimitRight covers a fixed-base module direct limit, and baseChange_comp covers individual maps. Neither supplies the changing-ring arrow diagrams, all specified canonical comparisons, finite presentations and algebraic additive colimit cocones in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "directLimitRight|baseChange_comp|FinitePresentation.*baseChange|baseChange.*finitePresentation",
+   "results": "25 hits; Mathlib/RingTheory/Grassmannian.lean, Mathlib/RingTheory/RingHom/FinitePresentation.lean, Mathlib/RingTheory/RingHom/FinitePresentation.lean, Mathlib/RingTheory/RingHom/FinitePresentation.lean, Mathlib/RingTheory/RingHom/Smooth.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/TensorProduct/Maps.lean. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module.DirectLimit",
+   "results": "12 hits; TensorProduct.fromDirectLimit, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft, TensorProduct.directLimitRight, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.toDirectLimit_tmul_of, TensorProduct.directLimitLeft_tmul_of, TensorProduct.directLimitRight_tmul_of. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed finitely presented module arrow over a directed system of commutative rings gives coherent scalar extensions, canonical transitivity isomorphisms, and colimits of underlying abelian groups",
+   "results": "8 hits; ModuleCat.directLimitIsColimit, ModuleCat.directLimitCocone, ModuleCat.directLimitDiagram_obj_isModule, ModuleCat.directLimitCocone_pt_isModule, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.directLimitIsColimit_desc, Module.DirectLimit. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent base change of a module morphism along a directed system of commutative rings, with tensor transitivity and filtered colimit of additive groups",
+   "results": "8 hits; ModuleCat.FilteredColimits.colimitModule, AddGrpCat.FilteredColimits.colimitCoconeIsColimit, TensorProduct.toDirectLimit, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, AddGrpCat.FilteredColimits.colimitCocone, AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit, TensorProduct.directLimitLeft_rTensor_of. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation|baseChange",
+   "results": "16 hits; Mathlib/RingTheory/Finiteness/FiniteTypeLocal.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean. Directory: Mathlib/RingTheory/Finiteness. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a fixed linear map with each algebra in a directed ring colimit: coherent semilinear transition maps, finite presentations, scalar extension equivalences, and additive colimit cocones",
+   "results": "8 hits; TensorProduct.fromDirectLimit, TensorProduct.directLimitRight, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft, TensorProduct.directLimitLeft_rTensor_of, TensorProduct.fromDirectLimit_of_tmul, Submodule.FG.rTensor.directLimit_apply, Submodule.FG.lTensor.directLimit_apply. Read the returned hits. Fixed-base tensor/direct-limit equivalences and baseChange_comp do not supply the entire changing-ring fixed-arrow statement with its specified comparisons, finite presentations and abelian colimit universal properties in a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-module-arrow-noetherian-descent",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "In lem-trf-local-term-locality, proof (1),(2), the specialization/normal-cone route to the contracting-correspondence theorem: the algebraic 046Y helper; returned item steps 4 through 6, coherent common-tail module arrows, tensor comparisons, finite presentations and algebraic module colimits.",
+   "via": [
+    "lem-trf-local-module-arrow-noetherian-descent",
+    "lem-trf-valuation-general-mod-injective",
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fixed-arrow-scalar-extension-diagram",
+  "worker": "stage1",
+  "summary": "Gave eight explicit steps for the fixed-stage module arrow. Reused the existing tensor, finite-product, right-exactness, cofinality and elementwise base-change nodes. Wrote both canonical inverse formulas and the arrow intertwining calculation, and proved the abelian-group colimit universal property using common-stage representatives. No new nodes or statement changes.",
+  "blueprint": "The nearest blueprint ancestor is lem-trf-local-term-locality, current main-20261015 proof (1),(2): the specialization/normal-cone route. This is the algebraic fixed-stage scalar-extension helper of the existing 046Y approximation branch, as recorded in blueprint.from.place; it does not replace a geometric unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+    "why": "Generic cofinality on the directed upper tail preserves the given ring colimit; the trace-formula unit supplies no algebraic cofinality replacement."
+   },
+   {
+    "node": "def-sc-finitely-presented-module",
+    "why": "The ordinary finite free presentation definition supplies presentation matrices for P and Q; this is an algebraic tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic tensor right exactness preserves finite free presentations under arbitrary ring maps, with no flatness assumption."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-finite-product",
+    "why": "Generic finite-product tensor comparison identifies the tensor of each finite free module, including rank zero."
+   },
+   {
+    "node": "lem-weil-pbc-base-change-diagram-elementwise",
+    "why": "Generic elementwise criterion for semilinear base-change diagrams supplies representatives and eventual zero once this item has explicitly constructed its maps and comparisons."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "The ordinary balanced tensor universal property constructs all maps and proves their equalities; this is generic algebra, not a replacement of the geometric unit route."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "The ordinary colimit universal property specifies the ring and additive colimit claims."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-base-change-diagram-elementwise",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-category-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-9f3ba1bbc",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-9f3ba1bbc (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and all 7 cited statements in full. The statement is identical to the live unsplit node: only proof/proof_deps/proof_origin/status/split_report/mathlib_searches differ. Not dropped and not superseded (item, citer and elementwise dep absent from both route-pivot-dropped lists; live and side-live unsplit). No re-split note. No cycle (closure of 12 nodes excludes the item). No SGA. Stacks 00QX (algebra.tex:32427), 046Y, 00DF, 0BUC and 04E7 checked against tags/tags; proof_origin agent is appropriate. Step 1 applies colimit-initial (1) to I^op correctly. Steps 2/3/5/6 are genuinely elementary: I recomputed the R-balancing of x⊗b↦(x⊗1)⊗b and both inverse identities FG and GF. Step 4: right-exact + finite-product (t=0 allowed) + R⊗_R B≅B gives a B-presentation. Step 7 supplies exactly the hypotheses of lem-weil-pbc-base-change-diagram-elementwise and uses only its statement; the equality criterion follows by taking the difference at an upper bound. Step 8 is the Ab universal property. Edge cases: singleton tail, zero ring, v=0, m=n=0, non-flat ℤ→ℤ/2. Duplicate candidates (finite-presentation-base-change-diagram, limit-module-finite-presentation, the over-system-module-data family, limit-module-colimit-part) are existential, finite-type or local variants, not this specified-map theorem. All 7 declared tool_uses accepted as generic algebra. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FixedArrowScalarExtensionDiagram",
+  "declaration": "Module.fixedArrow_scalarExtension_diagram",
+  "declarations": [
+   "Module.fixedArrowStage",
+   "Module.fixedArrowStageTmul",
+   "Module.fixedArrowLimit",
+   "Module.fixedArrowLimitTmul",
+   "Module.fixedArrowStageArrow",
+   "Module.fixedArrowLimitArrow",
+   "Module.fixedArrow_scalarExtension_diagram"
+  ],
+  "file": "lean/Sheaf/RingTheory/FixedArrowScalarExtensionDiagram.lean",
+  "statement": "theorem fixedArrow_scalarExtension_diagram {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (B : I ⥤ CommRingCat.{u}) (A : CommRingCat.{u}) (κ : B ⟶ (Functor.const I).obj A) (hκ : Nonempty (IsColimit (Cocone.mk A κ))) (c : I) (P Q : ModuleCat.{u} (B.obj c)) [Module.FinitePresentation (B.obj c) P] [Module.FinitePresentation (B.obj c) Q] (v : P ⟶ Q) : ∃ (p : ∀ (j k : Set.Ici c) (h : j ≤ k), fixedArrowStage B c P j →ₛₗ[(B.map (homOfLE h)).hom] fixedArrowStage B c P k) (q : ∀ (j k : Set.Ici c) (h : j ≤ k), fixedArrowStage B c Q j →ₛₗ[(B.map (homOfLE h)).hom] fixedArrowStage B c Q k) (μ : ∀ j : Set.Ici c, fixedArrowStage B c P j →ₛₗ[(κ.app j.1).hom] fixedArrowLimit B A κ c P) (ν : ∀ j : Set.Ici c, fixedArrowStage B c Q j →ₛₗ[(κ.app j.1).hom] fixedArrowLimit B A κ c Q), (∀ (j k : Set.Ici c) (h : j ≤ k) (x : P) (a : B.obj j.1), p j k h (fixedArrowStageTmul B c P j x a) = fixedArrowStageTmul B c P k x ((B.map (homOfLE h)).hom a)) ∧ (∀ (j : Set.Ici c) (x : P) (a : B.obj j.1), μ j (fixedArrowStageTmul B c P j x a) = fixedArrowLimitTmul B A κ c P x ((κ.app j.1).hom a)) ∧ (∀ (j : Set.Ici c) (x : fixedArrowStage B c P j), p j j le_rfl x = x) ∧ (∀ (j k l : Set.Ici c) (hjk : j ≤ k) (hkl : k ≤ l) (x : fixedArrowStage B c P j), p k l hkl (p j k hjk x) = p j l (hjk.trans hkl) x) ∧ (∀ (j k : Set.Ici c) (h : j ≤ k) (x : fixedArrowStage B c P j), μ k (p j k h x) = μ j x) ∧ (∀ j : Set.Ici c, Module.FinitePresentation (B.obj j.1) (fixedArrowStage B c P j)) ∧ (∀ (j k : Set.Ici c) (h : j ≤ k) (x : Q) (a : B.obj j.1), q j k h (fixedArrowStageTmul B c Q j x a) = fixedArrowStageTmul B c Q k x ((B.map (homOfLE h)).hom a)) ∧ (∀ (j : Set.Ici c) (x : Q) (a : B.obj j.1), ν j (fixedArrowStageTmul B c Q j x a) = fixedArrowLimitTmul B A κ c Q x ((κ.app j.1).hom a)) ∧ (∀ (j : Set.Ici c) (x : fixedArrowStage B c Q j), q j j le_rfl x = x) ∧ (∀ (j k l : Set.Ici c) (hjk : j ≤ k) (hkl : k ≤ l) (x : fixedArrowStage B c Q j), q k l hkl (q j k hjk x) = q j l (hjk.trans hkl) x) ∧ (∀ (j k : Set.Ici c) (h : j ≤ k) (x : fixedArrowStage B c Q j), ν k (q j k h x) = ν j x) ∧ (∀ j : Set.Ici c, Module.FinitePresentation (B.obj j.1) (fixedArrowStage B c Q j)) ∧ (∀ (j k : Set.Ici c) (h : j ≤ k) (x : fixedArrowStage B c P j), q j k h (fixedArrowStageArrow B c v j x) = fixedArrowStageArrow B c v k (p j k h x)) ∧ (∀ (j : Set.Ici c) (x : fixedArrowStage B c P j), ν j (fixedArrowStageArrow B c v j x) = fixedArrowLimitArrow B A κ c v (μ j x)) ∧ (∀ (j k : Set.Ici c) (h : j ≤ k), ∃ (eP : (ModuleCat.extendScalars (B.map (homOfLE h)).hom).obj (fixedArrowStage B c P j) ≅ fixedArrowStage B c P k) (eQ : (ModuleCat.extendScalars (B.map (homOfLE h)).hom).obj (fixedArrowStage B c Q j) ≅ fixedArrowStage B c Q k), (∀ (z : fixedArrowStage B c P j) (b : B.obj k.1), eP.hom (b ⊗ₜ[B.obj j.1, (B.map (homOfLE h)).hom] z) = b • p j k h z) ∧ (∀ (z : fixedArrowStage B c Q j) (b : B.obj k.1), eQ.hom (b ⊗ₜ[B.obj j.1, (B.map (homOfLE h)).hom] z) = b • q j k h z) ∧ (ModuleCat.extendScalars (B.map (homOfLE h)).hom).map (fixedArrowStageArrow B c v j) ≫ eQ.hom = eP.hom ≫ fixedArrowStageArrow B c v k) ∧ (∀ j : Set.Ici c, ∃ (eP : (ModuleCat.extendScalars (κ.app j.1).hom).obj (fixedArrowStage B c P j) ≅ fixedArrowLimit B A κ c P) (eQ : (ModuleCat.extendScalars (κ.app j.1).hom).obj (fixedArrowStage B c Q j) ≅ fixedArrowLimit B A κ c Q), (∀ (z : fixedArrowStage B c P j) (b : A), eP.hom (b ⊗ₜ[B.obj j.1, (κ.app j.1).hom] z) = b • μ j z) ∧ (∀ (z : fixedArrowStage B c Q j) (b : A), eQ.hom (b ⊗ₜ[B.obj j.1, (κ.app j.1).hom] z) = b • ν j z) ∧ (ModuleCat.extendScalars (κ.app j.1).hom).map (fixedArrowStageArrow B c v j) ≫ eQ.hom = eP.hom ≫ fixedArrowLimitArrow B A κ c v) ∧ (∀ (H : AddCommGrpCat.{u}) (f : ∀ j : Set.Ici c, fixedArrowStage B c P j →+ H), (∀ (j k : Set.Ici c) (h : j ≤ k) (z : fixedArrowStage B c P j), f k (p j k h z) = f j z) → ∃! g : fixedArrowLimit B A κ c P →+ H, ∀ (j : Set.Ici c) (z : fixedArrowStage B c P j), g (μ j z) = f j z) ∧ (∀ x : fixedArrowLimit B A κ c P, ∃ (j : Set.Ici c) (z : fixedArrowStage B c P j), μ j z = x) ∧ (∀ (j k : Set.Ici c) (x : fixedArrowStage B c P j) (y : fixedArrowStage B c P k), μ j x = μ k y ↔ ∃ (l : Set.Ici c) (hjl : j ≤ l) (hkl : k ≤ l), p j l hjl x = p k l hkl y) ∧ (∀ (H : AddCommGrpCat.{u}) (f : ∀ j : Set.Ici c, fixedArrowStage B c Q j →+ H), (∀ (j k : Set.Ici c) (h : j ≤ k) (z : fixedArrowStage B c Q j), f k (q j k h z) = f j z) → ∃! g : fixedArrowLimit B A κ c Q →+ H, ∀ (j : Set.Ici c) (z : fixedArrowStage B c Q j), g (ν j z) = f j z) ∧ (∀ x : fixedArrowLimit B A κ c Q, ∃ (j : Set.Ici c) (z : fixedArrowStage B c Q j), ν j z = x) ∧ (∀ (j k : Set.Ici c) (x : fixedArrowStage B c Q j) (y : fixedArrowStage B c Q k), ν j x = ν k y ↔ ∃ (l : Set.Ici c) (hjl : j ≤ l) (hkl : k ≤ l), q j l hjl x = q k l hkl y) ∧ Nonempty (Set.Ici c) ∧ IsDirected (Set.Ici c) (· ≤ ·)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Scalar-extension modules, their pure tensors and arrows are named specializations of Mathlib ModuleCat.extendScalars. The tensor factors are written ring first, canonically identified with the module-first convention by TensorProduct.comm. The final clauses state the abelian-group colimit universal properties directly for the specified semilinear cocones."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8141e7c8",
+  "group": "O2",
+  "result": "pass",
+  "note": "lean.statement matches the file verbatim (script); only the lean field differs from live (live lean null, no competing module). Every node clause checked: extendScalars modules (canonical flip noted in lean.note); p/q/μ/ν fixed by pure-tensor formulas, semilinear over a_kj/κ_j; identity/composition/cocone; finite presentation of P_j,Q_j; both arrow squares; four canonical comparison isos fixed by b⊗z↦b•t(z) with intertwining; Ab.{u} colimit universal property, representatives, common-later-stage iff; tail nonempty and directed. No extra hypotheses; common universe allowed by the node. Edge cases: singleton I, c not least, zero modules, v=0, empty presentations, zero ring, non-flat maps. Imports follow the brief (public for statement, plain for 4 proof deps; side module is a module file). Docstrings with source and blueprint tags, 8-step proof docstring, sorry-only, no hollow definitions. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261023T123827-L-1260836",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-projective-order-leading-syzygies",
+ "kind": "statement",
+ "title": "Homogeneous syzygies lift leading projective-order relations",
+ "statement": "Let $k$ be a field [def-weil-field], $r\\geq0$, and let $B=k[X_0,\\ldots,X_r]$ have all variables of degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra]. Let $\\mathfrak p\\subset k[t_1,\\ldots,t_r]$ be a prime, put $L=k[t_1,\\ldots,t_r]_{\\mathfrak p}$ and $N=\\mathfrak pL$ [def-weil-pbc-localization-at-prime], and set $\\delta(\\phi)=\\phi(1,t_1,\\ldots,t_r)/1$ and $U_v=\\{\\phi\\in B_v:\\delta(\\phi)\\in N^v\\}$ for $v\\geq0$.\nLet $b\\geq0$, $e\\geq1$, and let nonzero homogeneous forms $\\phi_j\\in U_{d_j}$ have degrees $1\\leq d_j\\leq e$ for $1\\leq j\\leq b$. Suppose $\\beta_j\\in N^{e-d_j}$ and\n$$\\sum_{j=1}^b\\beta_j\\delta(\\phi_j)\\in N^{e+1}.$$\nThen there are a finite index set $V$, integers $1\\leq h_v\\leq e$, elements $a_v\\in N^{e-h_v}$, and homogeneous polynomials $C_{vj}$ such that $C_{vj}=0$ when $h_v<d_j$, $C_{vj}\\in U_{h_v-d_j}$ otherwise, and\n$$\\sum_{j=1}^b C_{vj}\\phi_j=0\\quad(v\\in V),\\qquad\n\\beta_j-\\sum_{v\\in V}a_v\\delta(C_{vj})\\in N^{e-d_j+1}\\quad(1\\leq j\\leq b).$$\nThe zero polynomial is allowed in every homogeneous component, $N^0=L$, and an empty sum is zero.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10 (1970), Lemma 17, pp.172–173, with (13.2), (14.2), (16.1)–(16.2); finite-jet form of its completed-coefficient assertion, also used in (20.4)–(20.8), pp.178–179; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival original WANTED; the local ILO PDF is ancestor motivation (VIII 2.3.13), not the text of this lemma. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-permissible-basis-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "If $b=0$, take $V=\\varnothing$. Otherwise apply [lem-trf-projective-order-triangular-coordinates], writing $c$ for its number of generators, to avoid confusing it with the given filtration level $e$. Permuting $X_1,\\ldots,X_r$ and $t_1,\\ldots,t_r$ preserves every hypothesis and conclusion, so use the resulting coordinates. Put $R=k[\\sigma_1,\\ldots,\\sigma_c]=U$, with $\\deg\\sigma_i=q_i\\ge1$. Write $\\phi_j=P_j(\\sigma)$, where $P_j\\in k[S_1,\\ldots,S_c]$ is weighted homogeneous of weight $d_j$. Indeed, separate a polynomial expression for $\\phi_j$ into weights: its weight-$d_j$ component evaluates to $\\phi_j$, and all other components evaluate to zero; algebraic independence of the $\\sigma_i$ makes those components zero. For $c=0$, $U=k$ has no nonzero positive-degree forms, so the nonempty family cannot occur.",
+   "uses": [
+    "lem-trf-projective-order-triangular-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  },
+  {
+   "text": "Use [lem-trf-projective-order-completed-normal-form] for these coordinates. Write $\\widehat N=N\\widehat L$, $\\rho_i=\\delta(\\sigma_i)$, and use its $F,\\epsilon_0,z,\\omega,\\Delta,L_0,N_0$. Here $\\epsilon_0:k\\hookrightarrow F$ is the residue-induced embedding; it need not equal the original inclusion of $k$ in $\\widehat L$. Expand\n$$\\beta_j=\\sum_{A,B,\\gamma}b_j(A,B,\\gamma)\\rho^Az^B\\omega^\\gamma,\\qquad b_j(A,B,\\gamma)\\in F.$$\nThe order formula and $\\beta_j\\in N^{e-d_j}$ imply that all coefficients of weight $q\\cdot A+|B|+|\\gamma|<e-d_j$ vanish. Let $T_j$ be the finite sum of terms of weight exactly $e-d_j$. Finiteness follows from $q_i\\ge1$, bounded $B\\in\\Delta$, and finite variable tuples. Then $\\beta_j-T_j\\in\\widehat N^{e-d_j+1}$. The cited coefficient comparison gives $\\delta(\\phi_j)-P_j^{\\epsilon_0}(\\rho)\\in\\widehat N^{d_j+1}$. Using the assumed relation, multiplication of these congruences gives\n$$\\sum_jT_jP_j^{\\epsilon_0}(\\rho)\\in\\widehat N^{e+1}.$$",
+   "uses": [
+    "lem-trf-projective-order-completed-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  },
+  {
+   "text": "Every term in the last finite sum has weight exactly $e$, and multiplication by a polynomial in $\\rho$ leaves $B\\in\\Delta$ unchanged. Thus it is already a finite normal expansion. By the order formula of [lem-trf-projective-order-completed-normal-form], a nonzero such expansion has order exactly $e$. The sum is therefore zero. For each pair $(B,\\gamma)$ occurring in the $T_j$, set $h=e-|B|-|\\gamma|$ and\n$$Q_{B\\gamma,j}(S)=\\sum_{q\\cdot A=h-d_j}b_j(A,B,\\gamma)S^A.$$\nNormal-expansion uniqueness yields the polynomial identity\n$$\\sum_jQ_{B\\gamma,j}(S)P_j^{\\epsilon_0}(S)=0\\quad\\text{in }F[S].$$\nIndeed each coefficient of $S^A$ here is precisely the coefficient of $\\rho^Az^B\\omega^\\gamma$ in the zero normal expansion. The polynomial $Q_{B\\gamma,j}$ has weight $h-d_j$, and is zero for $h<d_j$. Discard pairs for which all $Q_{B\\gamma,j}$ are zero. Every retained pair has $1\\le h\\le e$, since some $d_j\\ge1$ occurs and $|B|+|\\gamma|\\ge0$.",
+   "uses": [
+    "lem-trf-projective-order-completed-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  },
+  {
+   "text": "Descend these finitely many identities coefficientwise. For each retained $(B,\\gamma)$ choose a basis $u_1,\\ldots,u_l$ over $\\epsilon_0(k)$ of the span in $F$ of the finitely many coefficients of all its $Q_{B\\gamma,j}$. Expand uniquely\n$$Q_{B\\gamma,j}=\\sum_{\\nu=1}^lu_\\nu D_{B\\gamma\\nu,j}^{\\epsilon_0},\\qquad D_{B\\gamma\\nu,j}\\in k[S].$$\nExpansion changes only coefficients, so $D_{B\\gamma\\nu,j}$ has weight $h-d_j$ and vanishes for $h<d_j$. Inserting these expressions into the preceding polynomial identity, the coefficient of every monomial is an $\\epsilon_0(k)$-linear combination of the independent $u_\\nu$. Each of its coefficients is zero, giving $\\sum_jD_{B\\gamma\\nu,j}P_j=0$ in $k[S]$. This is just the finite coefficient calculation in [def-weil-pbc-mv-polynomial-ring]; it does not assume that $F$ contains the original coefficient field.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  },
+  {
+   "text": "Let $V$ be the finite set of triples $v=(B,\\gamma,\\nu)$ just constructed, put $h_v=e-|B|-|\\gamma|$, and set $C_{vj}=D_{B\\gamma\\nu,j}(\\sigma)$. The equality $U=k[\\sigma]$ and grading in [lem-trf-projective-order-triangular-coordinates] show $C_{vj}\\in U_{h_v-d_j}$ for $h_v\\ge d_j$; otherwise it is zero. Evaluating the polynomial identities of Step 4 gives $\\sum_jC_{vj}\\phi_j=0$. To construct coefficients in $L$, choose $\\widetilde u_\\nu\\in L_0$ with residue $u_\\nu$ under $L_0\\twoheadrightarrow L_0/N_0\\cong F$, using [lem-trf-projective-order-completed-normal-form]. In $\\widehat L_0=F[[\\omega]]$, $\\widetilde u_\\nu-u_\\nu\\in(\\omega)$. Set\n$$a_v=\\widetilde u_\\nu z^B\\omega^\\gamma\\in L.$$\nSince $z_i\\in N$ and $\\omega_i\\in N_0\\subseteq N$, this lies in $N^{|B|+|\\gamma|}=N^{e-h_v}$, and $a_v-u_\\nu z^B\\omega^\\gamma\\in\\widehat N^{e-h_v+1}$. All these choices use only residue representatives, not an unproved descent from the completion.",
+   "uses": [
+    "lem-trf-projective-order-triangular-coordinates",
+    "lem-trf-projective-order-completed-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  },
+  {
+   "text": "For $h_v\\ge d_j$, apply the coefficient comparison of [lem-trf-projective-order-completed-normal-form] to the weighted homogeneous polynomial $D_{B\\gamma\\nu,j}$ of weight $h_v-d_j$. It gives\n$$\\delta(C_{vj})-D_{B\\gamma\\nu,j}^{\\epsilon_0}(\\rho)\\in\\widehat N^{h_v-d_j+1}.$$\nBoth terms have order at least $h_v-d_j$. Thus Step 5's congruence for $a_v$ gives\n$$a_v\\delta(C_{vj})-u_\\nu z^B\\omega^\\gamma D_{B\\gamma\\nu,j}^{\\epsilon_0}(\\rho)\\in\\widehat N^{e-d_j+1}.$$\nFor $h_v<d_j$ both products are zero. Summing over $V$, Step 4's coefficient expansion reconstructs exactly $T_j$. Step 2 therefore shows $\\beta_j-\\sum_va_v\\delta(C_{vj})\\in\\widehat N^{e-d_j+1}$. This difference is in $L$, and the cited preservation of orders for $L\\to\\widehat L$ implies it belongs to $N^{e-d_j+1}$. This proves the required congruence. If every $T_j=0$, $V=\\varnothing$ works. The arguments also include zero coefficients, $h_v=d_j$ (constant polynomials), $e=1$, and empty parameter tuples.",
+   "uses": [
+    "lem-trf-projective-order-completed-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-order-triangular-coordinates",
+  "lem-trf-projective-order-completed-normal-form",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-written finite-jet adaptation of Hironaka, Certain numerical characters of singularities (1970), Lemma 17, printed pp.172–173, with (13.2), (14.2), (16.1)–(16.2). Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. The local ILO PDF is ancestor motivation only, not the source of this lemma. No Stacks tag states this specialized result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-projective-order-leading-syzygies: leading relations among dehomogenized homogeneous maximal order forms lift to homogeneous polynomial syzygies",
+   "results": "{\"t\": \"2026-10-23T21:18:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-projective-order-leading-syzygies: leading relations among dehomogenized homogeneous maximal order forms lift to homogeneous polynomial syzygies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"ProjectiveSpectrum.not_irrelevant_le\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"Ideal.span_eq_map_homogeneousSubmodule\", \"ProjectiveSpectrum.asHomogeneousIdeal\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\"], \"digest\": \"06105246ad263738\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzyg|dehomogen|homogeneous.*relation|relation.*homogeneous",
+   "results": "{\"t\": \"2026-10-23T21:18:39Z\", \"tool\": \"grep\", \"query\": \"syzyg|dehomogen|homogeneous.*relation|relation.*homogeneous\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"bd84f3d5755f41e6\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsHomogeneous\", \"LinearMap.ker\"",
+   "results": "{\"t\": \"2026-10-23T21:18:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsHomogeneous\\\", \\\"LinearMap.ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-projective-order-leading-syzygies: Relations among initial forms of dehomogenized maximal order homogeneous polynomials lift to homogeneous syzygies with higher order remainder",
+   "results": "{\"t\": \"2026-10-23T21:18:40Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-projective-order-leading-syzygies: Relations among initial forms of dehomogenized maximal order homogeneous polynomials lift to homogeneous syzygies with higher order remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.sPolynomial\", \"CategoryTheory.Projective.instSyzygies\", \"CategoryTheory.Projective.syzygies\", \"MonomialOrder.degree_sub_leadingTerm_lt_degree\", \"MonomialOrder.leadingTerm\", \"MonomialOrder.sPolynomial_leadingTerm_mul\", \"MonomialOrder.sPolynomial_leadingTerm_mul'\", \"MvPolynomial.leadingCoeff_toLex\"], \"digest\": \"a849ce86b8911431\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-projective-order-leading-syzygies: Hironaka Lemma 17 filtered relation module of the projective maximal order algebra",
+   "results": "{\"t\": \"2026-10-23T21:18:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-projective-order-leading-syzygies: Hironaka Lemma 17 filtered relation module of the projective maximal order algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal'\", \"Module.projective_of_localization_maximal\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.projective_def'\", \"Module.Projective.out\", \"Module.projective_def\", \"Module.finitePresentation_of_projective_of_exact\", \"Module.freeLocus_eq_univ_iff\"], \"digest\": \"355b080d7146eadf\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relations in the associated graded local ring of a projective point among maximal order homogeneous forms are generated by dehomogenized homogeneous polynomial relations",
+   "results": "{\"t\": \"2026-10-23T21:20:01Z\", \"tool\": \"leanfinder\", \"query\": \"Relations in the associated graded local ring of a projective point among maximal order homogeneous forms are generated by dehomogenized homogeneous polynomial relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\"], \"digest\": \"be3c8f27c089b418\"} Read the reported signatures. Hits concern ordinary homogeneous localization, projective resolution syzygies or monomial leading terms, not weighted leading relations for the maximal-projective-order subalgebra. Read the lone grep hit in Smooth/NoetherianDescent.lean:186: it is a homogeneous presentation descent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leading relations among maximal order homogeneous forms lift to homogeneous polynomial syzygies over a projective point local ring",
+   "results": "{\"t\": \"2026-10-23T22:12:49Z\", \"tool\": \"leanfinder\", \"query\": \"Leading relations among maximal order homogeneous forms lift to homogeneous polynomial syzygies over a projective point local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"Ideal.span_eq_map_homogeneousSubmodule\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\"], \"digest\": \"982a8e34c1ec4508\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-23T22:14:44Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzyg|dehomogen|homogeneous.*relation|relation.*homogeneous",
+   "results": "{\"t\": \"2026-10-23T22:14:45Z\", \"tool\": \"grep\", \"query\": \"syzyg|dehomogen|homogeneous.*relation|relation.*homogeneous\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"bd84f3d5755f41e6\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relations among initial forms of dehomogenized homogeneous maximal order polynomials lift to exact homogeneous polynomial relations",
+   "results": "{\"t\": \"2026-10-23T22:14:45Z\", \"tool\": \"leansearch\", \"query\": \"Relations among initial forms of dehomogenized homogeneous maximal order polynomials lift to exact homogeneous polynomial relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"Polynomial.homogenize_dvd\", \"Polynomial.homogenize_X_pow\", \"Polynomial.homogenize_eq_of_isHomogeneous\", \"Polynomial.homogenizeLM\", \"Polynomial.homogenize_map\", \"MvPolynomial.IsHomogeneous\", \"Polynomial.homogenizeLM_apply\"], \"digest\": \"6fe5071623804a7a\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted homogeneous polynomial relations among generators can be descended from an extension field by expanding coefficients in a vector space basis",
+   "results": "{\"t\": \"2026-10-23T22:14:45Z\", \"tool\": \"leanfinder\", \"query\": \"Weighted homogeneous polynomial relations among generators can be descended from an extension field by expanding coefficients in a vector space basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.relationOfHasCoeffs\", \"Algebra.Presentation.map_relationOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"Algebra.Presentation.HasCoeffs.relation_mem_range_map\", \"MvPolynomial.weightedDecomposition\", \"MvPolynomial.IsWeightedHomogeneous\", \"MvPolynomial.IsWeightedHomogeneous.induction_on\", \"MvPolynomial.decompose'_apply\"], \"digest\": \"843d1b5b2bd3a951\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relationOfHasCoeffs|weightedDecomposition|IsWeightedHomogeneous",
+   "results": "{\"t\": \"2026-10-23T22:17:18Z\", \"tool\": \"grep\", \"query\": \"relationOfHasCoeffs|weightedDecomposition|IsWeightedHomogeneous\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\"], \"digest\": \"11f96f3ea8c701c4\"} Inspected the returned hits: homogeneous localization/projective-spectrum membership, ordinary homogenization, weighted decomposition, and descent of an already-coefficient-defined presentation do not give maximal-projective-order syzygy lifting. RingTheory/Smooth/NoetherianDescent.lean:186 is a presentation descent calculation, not this theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-flat-chart-relation-removal",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), proof of Lemma 20, (20.3)–(20.12), pp.177–181, isolated as the ideal-intersection assertion used there; the finite-jet generation hypothesis is exactly the use of (iv) in (20.7). Q37 refinement: Lemma 17, pp.172–173, with (13.2), (14.2), (16.1)–(16.2); finite-jet form of its completed-coefficient assertion, also used in (20.4)–(20.8), pp.178–179",
+   "via": [
+    "lem-trf-normal-flat-chart-relation-removal",
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-projective-order-leading-syzygies",
+  "worker": "stage1",
+  "summary": "Checked Hironaka Lemma 17 online, including its coefficient-field caveat (16.1), and the current blueprint ancestor. Reused the existing triangular-coordinate and completed-normal-form nodes. Wrote the leading-weight extraction, coefficientwise descent of the finite relations, and explicit local-ring representatives of the completed scalar factors. No new nodes, no statement changes; no use of the sibling filtered-syzygy theorem or homogeneous approximation, so no circularity.",
+  "blueprint": "Historical alteration branch of lem-trf-local-term-locality proof (1)–(2), via the existing chain in blueprint.from.via; the finite-jet homogeneous syzygy input in Hironaka Lemma 17 used in (20.4)–(20.8). Current blueprint/latest instead presents the contracting-correspondence theorem directly; this lower algebra item refines the already-imported historical branch, without changing the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-f0b8e2368",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-f0b8e2368 (reviewer sub-agent of L); spot-checked: I read all 6 steps against the full statements of lem-trf-projective-order-triangular-coordinates and lem-trf-projective-order-completed-normal-form (both unsplit, no back-dependencies). The split adds no new nodes, and the statement is unchanged (sha1 bebbf861e5 matches 164 earlier snapshots). proof_deps equals the union of the step uses. Step 2: the leading parts T_j come from the order formula, and the product congruence holds because δφ_j=P_j(ρ) and P(ρ)-P^{ε0}(ρ)∈N̂^{d+1}. Step 3: the sum ΣT_jP_j^{ε0}(ρ) is a normal expansion of exact weight e (B stays in Δ), so it is zero, and uniqueness gives ΣQ P^{ε0}=0 in F[S]. Step 4: the descent uses an ε0(k)-basis, linear independence and injectivity of ε0, and never assumes k⊂F, consistent with Hironaka (16.1). Step 5: C_vj lies in U_{h-d_j} by U=k[σ] and the grading. Lifting u_ν to a residue representative in L_0 leaves an error in (ω), so a_v∈N^{e-h_v}. Step 6: the error terms lie in N̂^{e-d_j+1}, the sum rebuilds T_j, and order preservation of L→L̂ gives the required congruence in L. Tested cases: r=1 with p=(t); repeated forms; inseparable k=F_p(a), p=(t^p-a); e=1; h=d_j; empty V; c=0. Hironaka is not in literature, so it is marked WANTED with proof_origin agent as the brief allows; no SGA source is used. No duplicates: filtered-syzygy-lifting, homogeneous-approximation, initial-minimality and additive-generators state different results. The citer normal-flat-chart-relation-removal uses only indices with d_j≤e, which matches the hypotheses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveOrderLeadingSyzygies",
+  "declaration": "Hironaka.projective_order_leading_syzygies",
+  "file": "lean/Sheaf/RingTheory/ProjectiveOrderLeadingSyzygies.lean",
+  "statement": "theorem projective_order_leading_syzygies {k : Type u} [Field k] (r b e : ℕ) (p : PrimeSpectrum (MvPolynomial {i : Fin (r + 1) // i ≠ 0} k)) (he : 1 ≤ e) (d : Fin b → ℕ) (φ : Fin b → MvPolynomial (Fin (r + 1)) k) (hd : ∀ j : Fin b, 1 ≤ d j ∧ d j ≤ e) (hφ_ne : ∀ j : Fin b, φ j ≠ 0) (hφ : ∀ j : Fin b, InOrderSpace r p (d j) (φ j)) (β : Fin b → Localization.AtPrime p.asIdeal) (hβ : ∀ j : Fin b, β j ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ (e - d j)) (hsum : (∑ j : Fin b, β j * algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (φ j))) ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ (e + 1)) : ∃ (n : ℕ) (h : Fin n → ℕ) (a : Fin n → Localization.AtPrime p.asIdeal) (C : Fin n → Fin b → MvPolynomial (Fin (r + 1)) k), (∀ v : Fin n, 1 ≤ h v ∧ h v ≤ e) ∧ (∀ v : Fin n, a v ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ (e - h v)) ∧ (∀ (v : Fin n) (j : Fin b), (h v < d j → C v j = 0) ∧ (d j ≤ h v → InOrderSpace r p (h v - d j) (C v j))) ∧ (∀ v : Fin n, (∑ j : Fin b, C v j * φ j) = 0) ∧ (∀ j : Fin b, β j - ∑ v : Fin n, a v * algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (C v j)) ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ (e - d j + 1))",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed Hironaka.InOrderSpace (added owning definition dependency) and existing dehomogenizeX. The finite syzygy family is indexed by Fin n; all coefficients and congruences remain in the uncompleted localization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ad809996",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: delta = algebraMap ∘ dehomogenizeX k 0 (X0↦1, Xi↦ti, read); U_v = landed Hironaka.InOrderSpace (IsHomogeneous v ∧ delta ∈ N^v), owner def-trf-permissible-basis-chart-data added to stmt_deps (landed before, no cycle); N = maximalIdeal of Localization.AtPrime; all hypotheses (1≤d_j≤e, φ_j≠0, β_j∈N^(e-d_j), sum∈N^(e+1)) present, none stronger; conclusion Fin n family, 1≤h_v≤e, a_v∈N^(e-h_v), exhaustive C_vj=0 / InOrderSpace (h_v-d_j) cases, Σ C_vj φ_j=0, congruence mod N^(e-d_j+1). Edge cases b=0, r=0/p=0, e=1, constants ok. Only node changes are lean record + stmt_dep; lean.statement verbatim; single sorry, no defs; docstrings with source place and blueprint tag and 6 proof steps; report has both required sections. No fixes."
+ }
+}

@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "The scheme product $C\\times_SU$ exists by [def-pc-fibre-product]. The diagonal of $E$ is representable by [def-trf-algebraic-space]. Pulling this diagonal back along the map $C\\times_SU\\to E\\times_SE$ induced by $c$ and $u$ therefore gives a scheme representing compatible pairs of maps to $C$ and $U$ with equal composites to $E$. This representing scheme is the sheaf fibre product $C\\times_EU$, with its two projection morphisms.",
+   "text": "The representable diagonal in [def-trf-algebraic-space] is relatively representable for Yoneda. Apply Mathlib CategoryTheory.Functor.relativelyRepresentable.of_diag to c; its proof pulls the diagonal back along the map from the scheme product C ×_S U, using [def-pc-fibre-product]. The resulting representing object P over S has scheme projections p and q, obtained by Yoneda fullness, and Mathlib isPullback' gives their presheaf pullback square.",
    "uses": [
     "def-pc-fibre-product",
     "def-trf-algebraic-space"
@@ -28,12 +28,10 @@
    }
   },
   {
-   "text": "Choose representatives $a:\\operatorname{Spec}K\\to C$ and $b:\\operatorname{Spec}L\\to U$ for $x$ and $y$, with $K$ and $L$ fields [def-weil-field]. Equality of their images in $|E|$ means, by the common-field point-class relation [def-trf-algebraic-space-jointly-surjective-family], that there are a field $M$ and embeddings $K\\to M$, $L\\to M$ for which the two composites to $E$ agree. The resulting compatible pair gives, by the representing property in Step 1, a morphism $\\operatorname{Spec}M\\to C\\times_EU$ whose projections are the restrictions of $a$ and $b$; hence those projections represent $x$ and $y$. If every point of $c(C)$ lies in the image of $u$, apply this construction to each point $x$ of $C$ and a point $y$ lying over the same point of $E$. The projection then hits every underlying point of $C$, which is exactly surjectivity of a scheme morphism [def-weil-surjective-morphism].",
+   "text": "The hypothesis already supplies maps a and b from a common field spectrum [def-weil-field], a point t mapping to x and y, and equality of the composites to E. Evaluate the presheaf pullback square at this spectrum. Mathlib CategoryTheory.Limits.Types.exists_of_isPullback gives a morphism l to P whose composites with p and q are a and b. Evaluate l at t to obtain the required point; applying the two equalities of scheme morphisms at t proves the projection equations. For surjectivity, for every x choose the supplied y and common-field witness, apply this point-lifting argument, and keep the first projection equation, exactly [def-weil-surjective-morphism].",
    "uses": [
     "def-weil-field",
-    "def-trf-algebraic-space-jointly-surjective-family",
-    "def-weil-surjective-morphism",
-    "def-trf-algebraic-space"
+    "def-weil-surjective-morphism"
    ],
    "elementary": false,
    "source": {
@@ -45,14 +43,13 @@
  "proof_deps": [
   "def-pc-fibre-product",
   "def-trf-algebraic-space",
-  "def-trf-algebraic-space-jointly-surjective-family",
   "def-weil-field",
   "def-weil-surjective-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tag 03H4 (spaces-properties, lemma-points-cartesian); the common-field formulation is the point equivalence relation preceding Tag 03H4, and the final surjectivity clause is Tag 01RZ."
+  "place": "Tag 03H4 (lemma-points-cartesian), with the representable-diagonal construction implemented by Mathlib Functor.relativelyRepresentable.of_diag; the last implication is Tag 01RZ. Lean proof by H2, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -141,5 +138,26 @@
   "result": "pass",
   "note": "Read the node, all 5 stmt_deps (AlgebraicSpace, IsJointlySurjective, Field, Surjective, Scheme) and Stacks spaces-properties 03BU/03H4 with proof. The Lean matches every clause: the IsPullback square represents C x_E U by a scheme P over S; 'same image in |E|' is the common field-valued representative in Type u, equivalent to the 03BU relation and the same encoding as IsJointlySurjective; the pointwise lift and the surjectivity conjunct (AlgebraicGeometry.Surjective, for every x there is a y) are correct. Edge cases (empty C/U, E a scheme, arbitrary fields, universes) are fine; no extra assumptions; no duplicate in Mathlib or the side tree. Docstrings carry source, blueprint and proof steps; the proof is sorry only; lean.statement is verbatim; the node's only change is the lean field. nt_compile.py --json on the snapshot file exited 0 with no messages (sorry warnings are off in the live lakefile); #print axioms shows sorryAx. The second-reading section is the accepted post-2026-10-17 note. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261023T102857-L-2996425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

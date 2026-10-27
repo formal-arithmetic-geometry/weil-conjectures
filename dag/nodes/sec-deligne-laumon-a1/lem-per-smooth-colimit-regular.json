@@ -292,20 +292,37 @@
   "module": "Sheaf.RingTheory.SmoothColimitRegular",
   "declaration": "CommAlgCat.smooth_colimit_regular",
   "file": "lean/Sheaf/RingTheory/SmoothColimitRegular.lean",
-  "statement": "theorem smooth_colimit_regular (R : Type u) [CommRing R] {J : Type v} [SmallCategory J] [IsFiltered J] (A : J ⥤ CommAlgCat.{v, u} R) [HasColimit A] (hsmooth : ∀ j : J, Algebra.Smooth R (A.obj j)) (hfibre : ∀ (p : Ideal R) [p.IsPrime], IsNoetherianRing (p.Fiber (colimit A : CommAlgCat.{v, u} R))) : RingHom.IsRegular (algebraMap R (colimit A : CommAlgCat.{v, u} R))",
-  "branch": "newtargets-dag",
-  "by": "Q75",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.SmoothColimitRegular deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem smooth_colimit_regular {R : Type u} [CommRing R] {J : Type v} [SmallCategory J] [IsFiltered J] (A : J ⥤ CommAlgCat.{v, u} R) [HasColimit A] (hsmooth : ∀ j : J, Algebra.Smooth R (A.obj j)) (hfibres : ∀ (p : Ideal R) [p.IsPrime], IsNoetherianRing (p.Fiber (colimit A : CommAlgCat.{v, u} R))) : RingHom.IsRegular (algebraMap R (colimit A : CommAlgCat.{v, u} R))",
+  "branch": "sheaf-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2eb4d46c0",
-  "group": "Q75",
+  "reviewer": "NT-stage2-cc-b21944c7c",
+  "group": "Q155",
   "result": "pass",
-  "note": "Snapshot changes only the item's lean field plus the new module SmoothColimitRegular.lean; the other 1232 nodes are byte-equal to live. Read Stacks 07EP (more-algebra.tex 10457-10483). Lean matches every clause: CommRing R; SmallCategory J with IsFiltered (includes Nonempty); A : J ⥤ CommAlgCat.{v,u} R with HasColimit (the recorded dependency convention); Algebra.Smooth at every stage; IsNoetherianRing (p.Fiber (colimit A)) for every prime (κ(p)⊗B, canonically isomorphic to the node's B⊗κ(p)); conclusion RingHom.IsRegular (algebraMap R (colimit A)) = flat + Noetherian geometrically regular fibres, with test fields in Type (max u v), which holds every finite extension of κ(p). No extra assumptions (R and B not Noetherian, no injective or local transition maps). Edge cases: empty J excluded as in the source; R=0, zero fibres and both characteristics covered; universes bound with autoImplicit false. lean.statement verbatim equal to the file signature. No duplicate (Popescu modules prove the converse; field-regular-ring is the field case only). Docstrings carry source, blueprint id and all six proof steps; proof is sorry only; imports follow rule 7. nt_compile --json clean in 1.9 s, exit 0. No findings."
+  "note": "Restore of CommAlgCat.smooth_colimit_regular (Stacks 07EP); snapshot differs from live only in the item's lean field plus the module. Every clause matches the node and more-algebra.tex 10457-10483: CommRing R; SmallCategory+IsFiltered (nonempty) J; A : J ⥤ CommAlgCat.{v,u} R with HasColimit (always satisfied for v-small filtered J); Algebra.Smooth stages; IsNoetherianRing (p.Fiber colim) for all primes (κ(p)⊗B, canonical symmetry); conclusion RingHom.IsRegular = flat + Noetherian geometrically regular fibres, test fields in Type (max u v); toAlgebra_algebraMap makes the hypothesis and conclusion instances agree. No extra Noetherian/injective/local hypotheses; edge cases (empty J excluded as in source, R=0, zero fibres, both characteristics) fine; universes bound with autoImplicit false. lean.statement verbatim; dependency declarations correct; imports exist (rule 7); sorry only, no defs; docstrings carry source, blueprint id and all six steps; report has Worker report and Second reading. No duplicate in live lean. Not recompiled per instructions; no files changed. Advisory: stale lean_removed/reviewed_lean bookkeeping left in node copy; module still unreachable from targets."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/SmoothColimitRegular.lean",
+  "module": "Sheaf.RingTheory.SmoothColimitRegular",
+  "declaration": "CommAlgCat.smooth_colimit_regular",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

@@ -1,0 +1,82 @@
+{
+ "id": "lem-trf-irreducible-polynomial-quotient-field",
+ "kind": "statement",
+ "title": "An irreducible polynomial quotient over a field is a field",
+ "statement": "Let $F$ be a field and $p\\in F[T]$ a polynomial [def-weil-polynomial-ring]. Assume that $p$ is irreducible: it is nonzero, is not a unit, and in every factorization $p=gh$ one of $g,h$ is a unit. Then $F[T]/(p)$, where $(p)$ is the ideal of multiples of $p$, is a field with its natural $F$-algebra structure [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09FX, example-monogenic-extension, referring to the polynomial quotient field of example-quotient-polymial-ring (Tag 09FI)."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.instField",
+   "results": "{\"t\": \"2026-10-23T09:35:33Z\", \"tool\": \"loogle\", \"query\": \"AdjoinRoot.instField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdjoinRoot.instField\", \"AdjoinRoot.mul_div_root_cancel\", \"IntermediateField.adjoin_root_eq_top\", \"Polynomial.SplittingFieldAux.succ\", \"Polynomial.removeFactor\", \"Polynomial.SplittingFieldAux.algebra'\", \"Polynomial.natDegree_removeFactor\", \"Polynomial.natDegree_removeFactor'\"], \"digest\": \"f103c5d09bf28e5c\"}",
+   "date": "2026-10-23",
+   "verdict": "match: source declaration read and hypotheses compared"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The polynomial quotient F[T]/(p) is a field if p is irreducible over the field F",
+   "results": "{\"t\": \"2026-10-23T09:47:19Z\", \"tool\": \"leanfinder\", \"query\": \"The polynomial quotient F[T]/(p) is a field if p is irreducible over the field F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.instField\", \"AdjoinRoot.span_maximal_of_irreducible\", \"AdjoinRoot.instGroupWithZero\", \"IntermediateField.adjoin_root_eq_top\", \"AdjoinRoot.instNumberFieldRat\", \"Polynomial.SplittingField.instField\", \"Polynomial.SplittingFieldAux.field\", \"AdjoinRoot.isDomain_of_prime\"], \"digest\": \"f91a56a3324c52b2\"}",
+   "date": "2026-10-23",
+   "verdict": "match: source declaration read and hypotheses compared"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable instance instField|theorem eval₂_root",
+   "results": "{\"t\": \"2026-10-23T09:47:20Z\", \"tool\": \"grep\", \"query\": \"noncomputable instance instField|theorem eval₂_root\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"256\", \"523\"], \"digest\": \"35865c0b997e032e\"}",
+   "date": "2026-10-23",
+   "verdict": "match: source declaration read and hypotheses compared"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a polynomial ring over a field by an irreducible polynomial is a field",
+   "results": "{\"t\": \"2026-10-23T09:50:14Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of a polynomial ring over a field by an irreducible polynomial is a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.instField\", \"AdjoinRoot.instField.congr_simp\", \"IsArtinianRing.fieldOfSubtypeIsMaximal\", \"Ideal.Quotient.field.congr_simp\", \"AdjoinRoot.instGroupWithZero\", \"Ideal.Quotient.field\", \"Ideal.Quotient.maximal_ideal_iff_isField_quotient\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"0d28a0f361780497\"}",
+   "date": "2026-10-23",
+   "verdict": "match: source declaration read and hypotheses compared"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdjoinRoot.instField",
+  "file": "Mathlib/RingTheory/AdjoinRoot.lean",
+  "line": 523,
+  "how": "exact: AdjoinRoot p is defined as F[T]/(p) at lines 68-70; AdjoinRoot.instField at lines 521-539 gives its Field structure from Fact (Irreducible p). The natural coefficient algebra is the quotient algebra. Both passages read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quadratic-completion-separable-splitting",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input in the first proof of Stacks 0CBY, second paragraph: splitting the separable degree-two branch algebra; returned item steps 6-8, quadratic construction, linear substitutions, and completed-presentation base change. Field-theoretic input: Tag 09FX, example-monogenic-extension, referring to the polynomial quotient field of example-quotient-polymial-ring (Tag 09FI).",
+   "via": [
+    "lem-trf-quadratic-completion-separable-splitting",
+    "lem-trf-nodal-point-finite-separable-splitting",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

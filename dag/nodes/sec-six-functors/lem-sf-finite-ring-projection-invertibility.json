@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-finite-ring-projection-invertibility",
+ "kind": "statement",
+ "title": "Existing fixed-coordinate finite-ring projection invertibility",
+ "statement": "Let Λ be a finite commutative ring in Type (u+1), X and Y schemes in Type u, f : X → Y and c a compactification. Let K and L be objects of the unbounded pro-etale derived categories of ModuleCat Λ. Suppose K has bounded constructible etale origin and L has bounded constructible etale origin and finite Tor amplitude, using the predicates of [def-weil-pbc-constructible-complexes] and [def-kun-tor-amplitude]. Then the canonical proper/open compactification projection [def-exchange-projection], (Rf_! K) tensor L → Rf_!(K tensor Lf*L), is an isomorphism. No Tor condition on K or structure-map separatedness is required. This is the existing source theorem named in lean, with no new Lean declaration.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "First sentence, finite geometric-fiber formula; the site-comparison sentence and the finite clause of sk-thm-sf-pf-proetale.proof.md identify its pro-etale realization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Use the bounded constructible etale origins K0,L0 and their comparison isomorphisms. Boundedness of K and the second input Tor interval show that the open extension of K0 tensored with the proper-factor pullback of L0 is bounded below. The existing source proof does this with plus_derivedTensor_leftDerivedUpperStar_of_comparison; no Tor interval for K is used.",
+   "uses": [
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-ring etale proper projection theorem makes the proper-factor projection invertible. Its geometric-stalk argument is the finite formula in the unit route. The normalized proper comparison carries this map to the pro-etale proper map on the retained etale origins.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison commutes with extension by zero. Compose the proper projection with the inverse canonical open tensor projection and the compactification pullback comparison. Each factor is invertible, so their specified composite is invertible. This is exactly the already proved source theorem, not an alternative projection arrow.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-tor-amplitude",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/ProjectionFormula.lean",
+  "place": "hasProjectionFormulaOfCompactification_of_boundedConstructible; reuse of the existing complete proof, no source-library edit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula with compact supports over a finite ring, bounded constructible first input, finite Tor second input",
+   "results": "8 unrelated profinite Nobeling/cofiltered-limit results.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match; the exact existing adopted-source theorem was found by rg."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasProjectionFormulaOfCompactification",
+   "results": "0 hits; unknown identifier.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match; use the existing adopted-source theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "hasProjectionFormulaOfCompactification_of_boundedConstructible",
+   "results": "0 Mathlib hits; direct repository rg finds the existing theorem in lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/ProjectionFormula.lean.",
+   "date": "2026-10-26",
+   "verdict": "Reuse this source declaration; do not duplicate it in a new Lean module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFiniteStages",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-projection-finite-stage-laws",
+   "place": "Already proved fixed-coordinate finite-ring formula used by the finite-stage invertibility proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/ProjectionFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_boundedConstructible",
+  "statement": "theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite Λ] {f : X ⟶ Y}\n    (c : Compactification f)\n    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}\n    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}\n    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)\n    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :\n    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26",
+  "note": "Λ : Type (u+1), [CommRing Λ] and {X Y : Scheme.{u}} are the source section variables. The exact theorem already exists and its entire source module contains zero sorry tokens. No new Lean module or wrapper is introduced."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_boundedConstructible",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula",
+     "lines": [
+      261,
+      286
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T024025-L-631712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T024025-L-631712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-regular-sequence-two-chart-functions",
+ "kind": "statement",
+ "title": "Regular-sequence divisibility and functions on a two-chart scheme",
+ "statement": "Let $A$ be a commutative integral domain (a nonzero commutative ring with no zero divisors), and let $s,t\\in A$ be nonzero elements forming a regular sequence [def-weil-pbc-regular-sequence]. Write $A_s,A_t,A_{st}$ for the localizations obtained by inverting $s,t,st$ respectively [def-weil-ring-localization-away]. Let $q:Z\\to\\operatorname{Spec}A$ be a scheme morphism [def-weil-affine-spectrum], with an affine open cover $Z=U\\cup V$, and specify $A$-algebra identifications $\\Gamma(U,\\mathcal O_Z)=C\\subseteq A_s$ and $\\Gamma(V,\\mathcal O_Z)=D\\subseteq A_t$. The inclusions are injective unital $A$-algebra maps; the $A$-actions on the section rings are those of $q$ [def-weil-locally-ringed-space-morphism]. Assume that whenever $c\\in C$ and $d\\in D$ have equal restrictions on $U\\cap V$, their images in $A_{st}$ coincide. Then the coefficient map\n$$A\\longrightarrow\\Gamma(Z,\\mathcal O_Z)$$\nis an isomorphism of rings. More precisely, if the chart values of $v\\in\\Gamma(Z,\\mathcal O_Z)$ have images $a/s^r\\in A_s$ and $b/t^n\\in A_t$ with $r,n\\ge1$, there is a unique $e\\in A$ with $a=s^re$ and $b=t^ne$, and $v=q^\\sharp(e)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07DV (lemma-regular-sequence-powers); two-chart divisibility and sheaf gluing argument for resolve.tex Tag 0AGS(4), n=0, generalized to an arbitrary two-chart A-scheme"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $v\\in\\Gamma(Z,\\mathcal O_Z)$, and write its chart images as $a/s^r$ and $b/t^n$. Fraction representatives exist by the definition of localization; replacing $a/s^0$ by $sa/s$ (and similarly for $t$) ensures $r,n\\ge1$. The chart sections have equal restrictions, so the hypothesis makes their images equal in $A_{st}$. There $s$ and $t$ have inverses $t/(st)$ and $s/(st)$. Multiplying the equality by $s^rt^n$ gives equality of the images of $t^na$ and $s^rb$. The localization equality criterion gives $(st)^k(t^na-s^rb)=0$ for some $k\\ge0$. Since $A$ is a domain and $st\\ne0$, cancel $(st)^k$ to obtain $t^na=s^rb$ in $A$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DV (lemma-regular-sequence-powers), applied to the pair; explicit coefficient calculation for resolve.tex Tag 0AGS (lemma-cohomology-of-blowup), clause (4), n=0"
+   }
+  },
+  {
+   "text": "Apply the positive-powers theorem with $R=M=A$, the sequence $(s,t)$ and exponents $(r,n)$. It says that $(s^r,t^n)$ is regular. Thus multiplication by $t^n$ on $A/(s^r)$ is injective. Reducing $t^na=s^rb$ modulo $(s^r)$ gives $t^n\\bar a=0$, hence $\\bar a=0$. Membership in the principal ideal means $a=s^re$ for some $e\\in A$. Substitution gives $s^r(t^ne-b)=0$; cancel the nonzero $s^r$ to obtain $b=t^ne$. If also $a=s^re^{\\prime}$, cancellation in $s^r(e-e^{\\prime})=0$ gives $e=e^{\\prime}$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-powers",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DV (lemma-regular-sequence-powers), applied to the pair; explicit coefficient calculation for resolve.tex Tag 0AGS (lemma-cohomology-of-blowup), clause (4), n=0"
+   }
+  },
+  {
+   "text": "View $e$ as a section of $\\mathcal O_{\\operatorname{Spec}A}$ using $\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$. In $A_s$ and $A_t$ the two fraction values equal $e/1$, respectively. Because both chart identifications are injective $A$-algebra maps with the actions induced by $q$, these are exactly the images of $(q^\\sharp(e))|_U$ and $(q^\\sharp(e))|_V$. Injectivity therefore gives $v|_U=q^\\sharp(e)|_U$ and $v|_V=q^\\sharp(e)|_V$. The uniqueness clause of the sheaf axiom on $Z=U\\cup V$ gives $v=q^\\sharp(e)$. This proves surjectivity and the asserted formula for every specified positive-denominator representation.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006T (definition-sheaf), uniqueness on the two-open cover; resolve.tex Tag 0AGS(4), n=0, explicit chart argument"
+   }
+  },
+  {
+   "text": "If $q^\\sharp(e)=q^\\sharp(e^{\\prime})$, restrict to $U$ and use its $A$-algebra embedding into $A_s$. Then $e/1=e^{\\prime}/1$ in $A_s$, so $s^k(e-e^{\\prime})=0$ for some $k\\ge0$. Since $s\\ne0$ and $A$ is a domain, $e=e^{\\prime}$. Write $f=q^\\sharp$ and let $g$ send a global section to its unique coefficient from step 3. We have $f(g(v))=v$, and injectivity gives $g(f(e))=e$. For global sections $v,w$, the identities $f(g(v+w))=v+w=f(g(v)+g(w))$ and $f(g(vw))=vw=f(g(v)g(w))$ imply $g(v+w)=g(v)+g(w)$ and $g(vw)=g(v)g(w)$ by injectivity; likewise $f(g(1))=1=f(1)$ gives $g(1)=1$. Thus $g$ is an inverse ring homomorphism, proving the asserted ring isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGS (lemma-cohomology-of-blowup), clause (4), n=0; elementary domain cancellation and coefficient-ring argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-regular-sequence-powers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGS (lemma-cohomology-of-blowup), clause (4), n=0, generalized by the explicit two-chart fraction argument; the non-elementary input is algebra.tex Tag 07DV (lemma-regular-sequence-powers), and sheaf uniqueness is sheaves.tex Tag 006T (definition-sheaf)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A domain A with a regular sequence s t and an A scheme covered by two affine charts embedded in A localized at s and at t has global sections A if equal sections on the overlap have equal images in A localized at s times t",
+   "results": "{\"t\": \"2026-10-22T06:25:54Z\", \"tool\": \"leanfinder\", \"query\": \"A domain A with a regular sequence s t and an A scheme covered by two affine charts embedded in A localized at s and at t has global sections A if equal sections on the overlap have equal images in A localized at s times t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"cf0c9ac64d8d9ed7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: preservation of regular sequences by localization, localization of intersections of ideals, and qcqs denominator clearing do not assert this two-chart regular-sequence gluing theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-22T06:25:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Submonoid.LocalizationMap.map_isRegular\", \"IsLocalization.isRegular_mk'\", \"IsLocalization.injective_iff_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsRegularRing.isRegularLocalRing_localization\", \"Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal\"], \"digest\": \"ccb19a2996e91950\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: preservation of regular sequences by localization, localization of intersections of ideals, and qcqs denominator clearing do not assert this two-chart regular-sequence gluing theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*sequence.*(localiz|fraction)|localiz.*regular.*sequence|[Hh]artogs",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"grep\", \"query\": \"regular.*sequence.*(localiz|fraction)|localiz.*regular.*sequence|[Hh]artogs\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: preservation of regular sequences by localization, localization of intersections of ideals, and qcqs denominator clearing do not assert this two-chart regular-sequence gluing theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection of the localizations A_s and A_t inside A_st equals A when s t is a regular sequence in a domain",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"leansearch\", \"query\": \"Intersection of the localizations A_s and A_t inside A_st equals A when s t is a regular sequence in a domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.localized₀_inf\", \"IsLocalization.map_inf\", \"Submodule.localized'_inf\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"IsLocalization.Away.mul'\", \"IsLocalization.localization_localization_isLocalization\", \"IsLocalization.Away.mul\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"], \"digest\": \"41dbc2e2b6b3feed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: preservation of regular sequences by localization, localization of intersections of ideals, and qcqs denominator clearing do not assert this two-chart regular-sequence gluing theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a scheme with two affine charts in localizations at a regular pair of a domain equal the base ring",
+   "results": "{\"t\": \"2026-10-23T04:04:26Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a scheme with two affine charts in localizations at a regular pair of a domain equal the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"AlgebraicGeometry.IsAffineOpen.algebraMap_Spec_obj\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_to_map\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\"], \"digest\": \"9d933686047da923\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*sequence.*(localiz|fraction)|localiz.*regular.*sequence|[Hh]artogs",
+   "results": "{\"t\": \"2026-10-23T04:04:41Z\", \"tool\": \"grep\", \"query\": \"regular.*sequence.*(localiz|fraction)|localiz.*regular.*sequence|[Hh]artogs\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of A localized at s and A localized at t is A when s and t form a regular sequence in a domain",
+   "results": "{\"t\": \"2026-10-23T04:04:41Z\", \"tool\": \"leansearch\", \"query\": \"The intersection of A localized at s and A localized at t is A when s and t form a regular sequence in a domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"Submodule.localized₀_inf\", \"Submodule.localized'_inf\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"IsLocalization.map_inf\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"IsLocalization.localization_localization_isLocalization\", \"IsLocalization.Away.mul'\"], \"digest\": \"85bef858e561a2a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-23T04:04:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Submonoid.LocalizationMap.map_isRegular\", \"IsLocalization.isRegular_mk'\", \"IsLocalization.injective_iff_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsRegularRing.isRegularLocalRing_localization\", \"Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal\"], \"digest\": \"ccb19a2996e91950\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection|inter.*[Aa]way|[Aa]way.*inter|[Hh]artogs|[Ii]sRegular",
+   "results": "{\"t\": \"2026-10-23T04:04:58Z\", \"tool\": \"grep\", \"query\": \"intersection|inter.*[Aa]way|[Aa]way.*inter|[Hh]artogs|[Ii]sRegular\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"79c7fbe47a115ea9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension across a regular sequence of length two: fractions a divided by s power and b divided by t power which agree have a common coefficient in the ring",
+   "results": "{\"t\": \"2026-10-23T04:05:01Z\", \"tool\": \"leanfinder\", \"query\": \"Hartogs extension across a regular sequence of length two: fractions a divided by s power and b divided by t power which agree have a common coefficient in the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.exists_of_eq\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"IsLocalization.exists_of_eq\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\"], \"digest\": \"5368817cf5231d49\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give localization equality, regular sequences after localization, or affine basic-open sections, not the two-chart coefficient isomorphism; the powers theorem already has its own existing DAG node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-point-blowup-functions",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 9--10: powers of a regular sequence, divisibility of the chart numerators, and unique global coefficient",
+   "via": [
+    "lem-sfb-regular-point-blowup-functions",
+    "lem-sfb-point-blowdown-factorization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-sequence-two-chart-functions",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. No exact completed declaration was found in WeilConjectures. Reused the existing regular-sequence-powers node rather than creating a duplicate. Four explicit steps clear denominators using the domain hypothesis, apply regularity on A/(s^r), compare the actual coefficient map on both charts, and prove its injectivity. No new nodes are needed. Checked both positive exponents and the sheaf uniqueness clause; all citations were read and copied verbatim to citations.json. Repair of the promotion return: compared the retained delivery with the current unsplit live item and re-read all five current dependency statements; the statement, statement dependencies and blueprint provenance agree. All eight citation quotations remain exact. Retained the route and searches and expanded step 4 to exhibit both inverse identities and the ring operations explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 9--10: powers of a regular sequence, divisibility of the chart numerators, and unique global coefficient; the four steps realize the powers/divisibility and unique-global-coefficient input, without changing the higher alteration or six-functor route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-powers",
+    "why": "Generic commutative-algebra theorem that positive powers preserve regular sequences, used only to make t^n injective on A/(s^r). This is the stated source route of the item, and no statement of the six-functor unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-powers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-2162348db",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-2162348db (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; there are no new nodes. This is a re-delivery after an L promotion return. Compared with the earlier PASS head 75b1c5cd6a08, the statement, stmt_deps, proof_deps, sources and steps 1-3 are identical, and the five cited nodes and the parent lem-sfb-regular-point-blowup-functions are byte-identical. Step 4 now writes out the inverse ring homomorphism explicitly, and the split_report summary gained one paragraph about the repair. Step checks. Step 1: the r=0 case is rewritten as sa/s; in A_st, s and t are units, and the localization criterion gives (st)^k(t^n a - s^r b)=0; st is nonzero in the domain, so t^n a = s^r b. Step 2: lem-weil-pbc-regular-sequence-powers matches Stacks 07DV (algebra.tex l.16748) for any ring and module with positive exponents; clause (1) of def-weil-pbc-regular-sequence makes t^n injective on A/(s^r); this gives a = s^r e and b = t^n e, with e unique. Step 3: the chart embeddings are A-algebra maps with the action through q, so q#(e) restricts to e/1 = a/s^r on U and likewise on V; injectivity and sheaf uniqueness (Stacks 006T) give v = q#(e). Step 4: e/1 = e'/1 in A_s gives s^k(e-e')=0, so e = e' in a domain; the explicit inverse g with f(g(v))=v is additive, multiplicative and unital by injectivity of f. Small cases: the punctured plane and the cover U=V=Spec A both give Gamma = A. A=k[x] with s=t=x shows regularity is needed (1/x is not in A). A disjoint union without the overlap hypothesis shows that hypothesis is needed. An empty chart is impossible. Stacks 0AGS(4) proves its case by the exceptional-divisor filtration, so proof_origin.by=agent is correct. No SGA source is used. Accepted tool_use: lem-weil-pbc-regular-sequence-powers (sk-thm-p1, generic 07DV). Duplicate search: rg -L for regular sequence with A_{st}, two-chart or punctured, and for 07DV. It found the depth-two punctured-section nodes, the E ≅ P^1 fibre gluing node and the point-blowup chart package, none of which states this result. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSequenceTwoChartFunctions",
+  "declaration": "AlgebraicGeometry.regularSequence_twoChart_functions",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSequenceTwoChartFunctions.lean",
+  "statement": "theorem regularSequence_twoChart_functions {A : Type u} [CommRing A] [IsDomain A] (s t : A) (hs : s ≠ 0) (ht : t ≠ 0) (hreg : RingTheory.Sequence.IsRegular A [s, t]) (Z : Scheme.{u}) (q : Z ⟶ Spec (CommRingCat.of A)) (U V : Z.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hcover : U ⊔ V = ⊤) (iU : Γ(Z, U) →+* Localization.Away s) (iV : Γ(Z, V) →+* Localization.Away t) (hiU : Function.Injective iU) (hiV : Function.Injective iV) (hAU : ∀ e : A, iU (Z.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ q.appTop) e)) = algebraMap A (Localization.Away s) e) (hAV : ∀ e : A, iV (Z.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ q.appTop) e)) = algebraMap A (Localization.Away t) e) (hoverlap : ∀ (c : Γ(Z, U)) (d : Γ(Z, V)), Z.presheaf.map (homOfLE (inf_le_left : U ⊓ V ≤ U)).op c = Z.presheaf.map (homOfLE (inf_le_right : U ⊓ V ≤ V)).op d → (IsLocalization.Away.awayToAwayRight s t : Localization.Away s →+* Localization.Away (s * t)) (iU c) = (IsLocalization.Away.awayToAwayLeft t s : Localization.Away t →+* Localization.Away (s * t)) (iV d)) : Function.Bijective ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ q.appTop) ∧ ∀ (v : Γ(Z, ⊤)) (a b : A) (r n : ℕ), 1 ≤ r → 1 ≤ n → iU (Z.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op v) = IsLocalization.mk' (M := Submonoid.powers s) (Localization.Away s) a ⟨s ^ r, ⟨r, rfl⟩⟩ → iV (Z.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op v) = IsLocalization.mk' (M := Submonoid.powers t) (Localization.Away t) b ⟨t ^ n, ⟨n, rfl⟩⟩ → ∃! e : A, a = s ^ r * e ∧ b = t ^ n * e ∧ v = ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ q.appTop) e",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4a1044a9",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Clause-by-clause match. Domain + IsRegular A [s,t] + s,t≠0; Localization.Away s/t/(s*t) with canonical awayToAwayRight s t / awayToAwayLeft t s (directions checked in Away/Basic.lean:184-197); affine U,V with U⊔V=⊤; injective ring maps iU/iV tied to q via hAU/hAV (= A-algebra maps for the q-action); hoverlap over all chart sections; conclusion Bijective((ΓSpecIso A).inv ≫ q.appTop) plus ∀ v a b r n with r,n≥1 → ∃! e (a=s^r e ∧ b=t^n e ∧ v=q^♯e), equivalent to the node's uniqueness since s^r≠0 in a domain. Node differs from live only in lean; 4 stmt_dep records identical to side-live; no new nodes. lean.statement verbatim; 1 sorry; docstrings carry source/blueprint/proof. No duplicate in lean trees or Mathlib. Edge cases (zero ring, empty chart/overlap, nested opens, r=0, universe u) all as the node. Second reading in report was by the author (no sub-agents allowed); this review is the independent reading. No compile needed (no changes)."
+ }
+}

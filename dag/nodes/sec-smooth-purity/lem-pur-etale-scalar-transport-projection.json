@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-etale-scalar-transport-projection",
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-free scalar projection data for strict etale systems",
+ "statement": "For the finite-field datum, finite p-adic fields, compactification, source compact-support system and source exceptional adjoint in the scalar-extension setting, there exist the target compact-support system and exceptional adjoint, exact coefficient transports at X, Y and Z, and a compact-support transport projection whose finite-level adjunction mates are isomorphisms.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Proposition 2.29(2); geometric scalar-extension projection before exceptional transposition."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "lem-pur-coefficient-system-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite-free scalar extension compact-support system and its exceptional adjoint, then construct the three coefficient transports and the transport projection. The finite-level mates of the projection are isomorphisms by the finite coefficient comparison and the strict etale stage projection; the remaining categorical assembly is performed by the proved exceptionalTransportOfProjection theorem in the parent module.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction",
+    "lem-pur-etale-system-evaluation-bound",
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "lem-pur-strict-etale-compact-support-composition",
+    "lem-pur-strict-etale-isomorphic-stage-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 5.15 and Proposition 2.29(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-system-brown-construction",
+  "lem-pur-etale-system-evaluation-bound",
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "lem-pur-strict-etale-compact-support-composition",
+  "lem-pur-strict-etale-isomorphic-stage-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Proposition 2.29(2)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+  "declaration": "AlgebraicGeometry.strictEtaleScalarTransportProjection",
+  "file": "lean/Sheaf/Paper/EtaleCoefficientSystemAdjoint.lean",
+  "statement": "theorem strictEtaleScalarTransportProjection (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (F : Type (u + 1)) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (i : E →ₐ[Padic l] F) (SA : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) c) (GA : StrictEtaleExceptionalAdjoint _ _ c SA) : let a := strictEtaleSameIndexChange (Padic.coefficientExtensionUniformizer l E) (strictEtaleIntegerMap l i) ∃ (SB : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l F) (strictEtaleIntegerMap l i (Padic.coefficientExtensionUniformizer l E)) c) (GB : StrictEtaleExceptionalAdjoint _ _ c SB) (TX : StrictEtaleCoefficientTransport a X SA.PX SB.PX) (TY : StrictEtaleCoefficientTransport a Y SA.PY SB.PY) (TZ : StrictEtaleCoefficientTransport a c.Z SA.PZ SB.PZ), ∃ P : StrictEtaleTransportProjection a c SA SB TX TY TZ, ∀ n, IsIso (mateEquiv (GA.levelAdjunction n) (GB.levelAdjunction n) (.mk _ _ _ _ (P.level n).inv)).natTrans"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free scalar extension strict etale coefficient transport projection",
+   "results": "No direct Mathlib declaration matching the geometric construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "StrictEtaleTransportProjection",
+   "results": "No direct Mathlib declaration matching the project-specific structure."
+  },
+  {
+   "tool": "grep",
+   "query": "strictEtaleScalarTransportProjection|coefficient transport projection",
+   "results": "Searched lean/WeilConjectures and lean/Sheaf; only project declarations were found."
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-pur-etale-coefficient-system-adjoint",
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T023250-L-538296",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T023250-L-538296",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

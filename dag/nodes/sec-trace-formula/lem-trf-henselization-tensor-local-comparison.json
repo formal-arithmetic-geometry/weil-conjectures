@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-henselization-tensor-local-comparison",
+ "kind": "statement",
+ "title": "Pointed tensor localization comparison with ordinary henselization",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $\\mathfrak q\\subset B$ be a prime with inverse image $\\mathfrak p\\subset A$, and let $R$ and $H$ be ordinary henselizations of $A_{\\mathfrak p}$ and $B_{\\mathfrak q}$, respectively [def-weil-pbc-henselization-at-prime]. Their structural residue maps give canonical isomorphisms $\\kappa(\\mathfrak p)\\cong R/\\mathfrak m_R$ and $\\kappa(\\mathfrak q)\\cong H/\\mathfrak m_H$ [def-weil-pbc-localization-at-prime]. Put $C=R\\otimes_A B$, let $\\epsilon:C\\to\\kappa(\\mathfrak q)$ send $r\\otimes b$ to $\\overline r\\,\\overline b$ using $R\\to\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$, and put $\\mathfrak n=\\ker\\epsilon$ and $D=C_{\\mathfrak n}$. Then $\\mathfrak n$ is prime, its contractions to $R$ and $B$ are $\\mathfrak m_R$ and $\\mathfrak q$, and $D$ has residue field canonically $\\kappa(\\mathfrak q)$. Both $B\\to D$ and $B\\to H$ are ind-etale [def-weil-pbc-ind-etale-algebra]. If $D$ is henselian [def-weil-pbc-henselian-terminology], there is a unique local $B$-algebra isomorphism $e:D\\xrightarrow{\\sim}H$ inducing the identity of $\\kappa(\\mathfrak q)$. This isomorphism is compatible with the canonical local map $h:R\\to H$ obtained from the henselization universal property: $e(r\\otimes1)=h(r)$ after localization. Finally, put $T=R\\otimes_{A_{\\mathfrak p}}B_{\\mathfrak q}$ and let $\\mathfrak n_T$ be the kernel of its analogous residue evaluation. The maps of the two tensor factors induce a canonical isomorphism $D\\cong T_{\\mathfrak n_T}$; when $D$ is henselian, its composite with $e^{-1}$ identifies $H$ with $T_{\\mathfrak n_T}$ compatibly with $R$ and $B_{\\mathfrak q}$. No finite-type or quasi-finiteness hypothesis is imposed on $A\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WP (lemma-quasi-finite-henselization), proof, lines 43600--43615"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "First recover the structural residue identifications from the universal-property convention for henselization. For either local ring $L=A_{\\mathfrak p}$ or $L=B_{\\mathfrak q}$, put $k=L/\\mathfrak m_L$ and let $L\\to J$ be its given henselization. The field $k$ is henselian: its maximal ideal is zero, so the idempotent-lifting condition is the identity condition on every finite $k$-algebra. The universal property supplies a local map $v:J\\to k$ extending the quotient of $L$. On residue fields the structural map $i:k\\to J/\\mathfrak m_J$ and the map $\\bar v:J/\\mathfrak m_J\\to k$ satisfy $\\bar v i=1$. Both are field homomorphisms. For $x\\in J/\\mathfrak m_J$, injectivity of $\\bar v$ gives $x=i(\\bar v(x))$. Thus $i$ is an isomorphism whose inverse is $\\bar v$. Applied to $R$ and $H$ this gives precisely the claimed structural identifications.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GN (lemma-henselization), (4), and 04GQ (definition-henselization); explicit deduction from the initial local-map convention"
+   }
+  },
+  {
+   "text": "The map $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ sends $a/s$ to $f(a)/f(s)$; the denominator is invertible because $s\\notin\\mathfrak p=f^{-1}(\\mathfrak q)$. Its maximal-ideal preimage is $\\mathfrak pA_{\\mathfrak p}$, so it is local, as is its composite into $H$. The universal property of $R$ now gives the unique local map $h:R\\to H$ extending this composite. Its residue map, through step 1, is the structural inclusion $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$: the two maps agree on every fraction from $A_{\\mathfrak p}$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GS (lemma-henselian-functorial), construction of the local map on ordinary henselizations"
+   }
+  },
+  {
+   "text": "The factor residue maps agree on $A$, so the tensor-product relations give the ring map $\\epsilon(r\\otimes b)=\\bar r\\bar b$. Its kernel $\\mathfrak n$ is prime since its target is a field and $\\epsilon(1)=1$. The residue maps $R\\to\\kappa(\\mathfrak p)\\hookrightarrow\\kappa(\\mathfrak q)$ and $B\\to\\kappa(\\mathfrak q)$ have kernels $\\mathfrak m_R$ and $\\mathfrak q$, respectively, giving both contractions. Extend evaluation to $\\epsilon_D:D\\to\\kappa(\\mathfrak q)$ by $c/s\\mapsto\\epsilon(c)/\\epsilon(s)$. Its kernel is $\\mathfrak nD$, the maximal ideal of $D$. It is onto: any element of $\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$ is represented by $b/t$ with $t\\notin\\mathfrak q$, and is the image of $(1\\otimes b)/(1\\otimes t)$. Hence $D/\\mathfrak nD\\cong\\kappa(\\mathfrak q)$. In particular the induced map $B_{\\mathfrak q}\\to D$ is local and induces the identity on this residue field.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP (lemma-quasi-finite-henselization), pointed localization in the proof; Tag 00CO (definition-localization), fraction verification"
+   }
+  },
+  {
+   "text": "Apply the existing prime-henselization ind-etaleness lemma to $(A,\\mathfrak p,R)$ and $(B,\\mathfrak q,H)$. It gives ind-etaleness of the specified maps $A\\to R$ and $B\\to H$, with no finiteness hypothesis. Base change of $A\\to R$ along $A\\to B$, using stability of ind-etale maps, gives ind-etaleness of $B\\to C=R\\otimes_A B$ (interchanging tensor factors by $r\\otimes b\\mapsto b\\otimes r$).",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 04GN (lemma-henselization), (2); Tag 097J (lemma-base-change-ind-etale), base change of the specified structural map"
+   }
+  },
+  {
+   "text": "To pass from $C$ to $D$, use the small directed set of finite subsets $F\\subset C\\setminus\\mathfrak n$, with term $C_{s_F}$ where $s_F=\\prod_{s\\in F}s$. The set is nonempty and directed by union. For $F\\subset G$, write $s_G=s_Fs_{G\\setminus F}$; invertibility of $s_G$ makes $s_F$ invertible, giving the unique structural localization map, and uniqueness makes these maps compose. This diagram has colimit $C_{\\mathfrak n}$ as $C$-algebras: a compatible family into a $C$-algebra $E$ amounts exactly to its structural map making each $s\\notin\\mathfrak n$ invertible, with fraction formula $c/s\\mapsto c\\,s^{-1}$. The empty subset gives the term $C$, so these maps and their unique fraction extensions preserve the specified $C$-algebra structures. Each $C\\to C_{s_F}$ is etale and finitely presented by the existing etale-localization lemma, applied to the identity $C$-algebra. Thus this is an ind-etale presentation of $C\\to D$. Composing with the ind-etale map $B\\to C$ of step 4 proves that $B\\to D$ is ind-etale.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP (lemma-quasi-finite-henselization), proof sentence about localization as a filtered etale colimit; Tag 00U2 (lemma-etale), (1), and Tag 097K (lemma-composition-ind-etale)"
+   }
+  },
+  {
+   "text": "Now assume $D$ is henselian. Apply the prescribed-residue lifting lemma over the base ring $B$, with source algebra $D$, source prime $\\mathfrak nD$, target $H$, and residue map $\\mathrm{id}_{\\kappa(\\mathfrak q)}$. Steps 3--5 verify all its hypotheses: the source is ind-etale over $B$, both maximal ideals contract to $\\mathfrak q$, the target is henselian, and both residue fields have the specified identification. Under those structural identifications the residue maps from $B$ agree with $B\\to\\kappa(\\mathfrak q)$, so the prescribed identity is a map of $\\kappa(\\mathfrak q)$-algebras, as the lifting lemma requires. It gives a unique local $B$-algebra map $e:D\\to H$ with that residue map. Apply the same lemma with source $H$ and target $D$ to obtain $j:H\\to D$. Both composites are local $B$-algebra maps inducing the identity on the relevant residue field. Apply uniqueness once to source and target $D$, and once to source and target $H$, comparing with the identity maps. It follows that $je=1_D$ and $ej=1_H$. Thus $e$ is the asserted unique local residue-compatible $B$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 08HR (lemma-map-into-henselian-colimit) and 08HT (lemma-uniqueness-henselian), inverse-composite argument in the proof of Tag 05WP"
+   }
+  },
+  {
+   "text": "The canonical map $a:R\\to D$, $r\\mapsto(r\\otimes1)/1$, is local by the contraction computed in step 3. Consequently $ea$ and $h$ are local maps $R\\to H$. They agree on $A_{\\mathfrak p}$ because $e$ is a $B$-algebra map, and agreement on $A$ extends to its inverted denominators. The uniqueness clause in the universal property of $R$ therefore gives $ea=h$, which is the required compatibility on every $r$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GS (lemma-henselian-functorial); the factor compatibility in Tag 05WP (lemma-quasi-finite-henselization)"
+   }
+  },
+  {
+   "text": "For the final comparison, define $\\epsilon_T:T\\to\\kappa(\\mathfrak q)$ by $r\\otimes(b/t)\\mapsto\\bar r\\bar b/\\bar t$. It is balanced over $A_{\\mathfrak p}$; its kernel $\\mathfrak n_T$ is prime. The map $u:C\\to T$ sends $r\\otimes b$ to $r\\otimes(b/1)$ and satisfies $\\epsilon_Tu=\\epsilon$. Hence each $s\\notin\\mathfrak n$ becomes a unit in $T_{\\mathfrak n_T}$, giving $\\alpha:D\\to T_{\\mathfrak n_T}$ with $\\alpha(c/s)=u(c)/u(s)$. Conversely, in $D$ every $1\\otimes t$ for $t\\notin\\mathfrak q$ is invertible. Define $v:T\\to D$ by $v(r\\otimes(b/t))=((r\\otimes b)/1)((1\\otimes t)/1)^{-1}$. This is balanced over $A_{\\mathfrak p}$ since the two structural maps agree on $A$ and on inverses of $A\\setminus\\mathfrak p$. Its reduction is $\\epsilon_T$. If $z\\notin\\mathfrak n_T$, then $v(z)$ has nonzero residue, so it is a unit in the local ring $D$. Thus $v$ extends to $\\beta:T_{\\mathfrak n_T}\\to D$ by $z/w\\mapsto v(z)v(w)^{-1}$. The composite $\\beta\\alpha$ fixes $C$ and all its inverted denominators, hence is $1_D$. The composite $\\alpha\\beta$ fixes $R$, $B_{\\mathfrak q}$ and inverses of elements outside $\\mathfrak n_T$, hence fixes every tensor and every fraction, so is the identity. This proves the canonical factor-compatible isomorphism. When $D$ is henselian, $\\alpha e^{-1}:H\\to T_{\\mathfrak n_T}$ is compatible with $R$ by step 7 and with $B_{\\mathfrak q}$ since it agrees on $B$ and inverses of $B\\setminus\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP (lemma-quasi-finite-henselization), passage between the two tensor localizations; Tag 00CO (definition-localization), explicit inverse fraction maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/proetale.tex",
+  "place": "Tag 05WP (lemma-quasi-finite-henselization), pointed localization comparison in its proof, using Tag 08HR (lemma-map-into-henselian-colimit) and the inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian); the henselianity assumption here replaces the quasi-finite input of 05WP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(henselization|henselian).*(tensor|ind.etale)|(tensor|ind.etale).*(henselization|henselian)",
+   "results": "0 hits: none.  The etale/formally-etale base-change and tensor-localization hits do not assert the pointed henselian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsLocalization.AtPrime",
+   "results": "0 hits: none.  The etale/formally-etale base-change and tensor-localization hits do not assert the pointed henselian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselian localization of the tensor product with a residue preserving ind etale local algebra is the henselization of the target local ring",
+   "results": "8 hits: IsLocalization.tensorProduct_tensorProduct, Algebra.FormallyEtale.instTensorProduct, IsLocalization.tensorProduct_isLocalizedModule, Algebra.Etale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpanTarget, HenselianLocalRing.TFAE, Algebra.FormallyEtale.localization_base, HenselianLocalRing.  The etale/formally-etale base-change and tensor-localization hits do not assert the pointed henselian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale local base change with unchanged residue field gives a pointed tensor localization isomorphic to the ordinary henselization when it is henselian",
+   "results": "8 hits: Algebra.IsEtaleAt, Algebra.FormallyEtale.localization_map, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.FormallyEtale.localization_base, Algebra.Etale.baseChange, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.of_isLocalization.  The etale/formally-etale base-change and tensor-localization hits do not assert the pointed henselian comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(henselization|henselisation).*(tensor|local)|(tensor|local).*(henselization|henselisation)",
+   "results": "0 hits: . Read the actual msearch output: the hits concern root lifting, residue maps, etale base change or localization, not the ordinary pointed henselization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pointed prime localization of a tensor base change of a henselization is ind etale and is the target henselization if henselian",
+   "results": "8 hits: Algebra.Etale.baseChange, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.localization_base, Algebra.Etale.of_isLocalization_Away, IsLocalization.tensor, Algebra.etaleLocus, Algebra.FormallyEtale.of_isLocalization. Read the actual msearch output: the hits concern root lifting, residue maps, etale base change or localization, not the ordinary pointed henselization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, IsLocalization.AtPrime",
+   "results": "0 hits: . Read the actual msearch output: the hits concern root lifting, residue maps, etale base change or localization, not the ordinary pointed henselization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian localization of the base change of an ordinary henselization has a unique residue compatible local isomorphism to the henselization of the target local ring",
+   "results": "8 hits: HenselianLocalRing.TFAE, RingHom.EssFiniteType.residueFieldMap, IsLocalRing.ResidueField.algebraMap_residue, Algebra.instFormallyUnramifiedResidueField_1, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.instFormallyUnramifiedResidueField, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Ideal.ResidueField.liftₐ. Read the actual msearch output: the hits concern root lifting, residue maps, etale base change or localization, not the ordinary pointed henselization comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-henselization-quasi-finite-ring",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary henselization chain below lem-trf-local-term-locality, Tag 05WP proof: construct the pointed tensor localization, prove ind-etaleness, compare by residue-compatible henselian uniqueness, and localize the factors (returned item steps 1,4-6).",
+   "via": [
+    "lem-trf-henselization-quasi-finite-ring",
+    "lem-trf-henselization-quotient-at-prime",
+    "lem-trf-henselizations-common-normal-cover",
+    "lem-trf-artin-join-theorem-6-3"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-henselization-tensor-local-comparison",
+  "worker": "stage1",
+  "summary": "Split using existing DAG lemmas only. Recover structural residue isomorphisms from the initial local-map definition, compute the pointed prime and its residue field by fractions, use prime henselization ind-etaleness plus stability and principal localizations, construct inverse residue-compatible maps by 08HR, prove R-compatibility by initial uniqueness, and write both inverse maps for the localized tensor comparison. No statement change and no new nodes. Repair of returned head f70f255f8a3: rebased onto the current unsplit live node, re-read all eight cited live statements, and made the step-5 colimit explicitly a colimit of C-algebras. Existing searches, citations and the eight-step argument are retained. Retry after the retained repair: current-base dry run d9eba7fab77 passed; all eight current dependency statements and sixteen citation pairs were checked again. The finite-subset diagram now spells out directedness and transition-map coherence, and the lifting step explicitly checks that its prescribed residue identity is a map over the base residue field.",
+  "blueprint": "The current latest lem-trf-local-term-locality proof uses the contracting-correspondence/normal-cone route and no longer contains this historical henselization chain. This item was created below its historical auxiliary Artin-join chain; its exact surviving source is Tag 05WP, proof sentences constructing the tensor localization and comparing it by henselian uniqueness. The eight steps expand that inherited algebraic tool without replacing any current unit or chapter step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic base change and composition of ind-etale ring maps used in steps 4--5; this algebraic stability tool has no replacement among the trace-formula unit statements."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic prescribed-residue lifting and uniqueness of algebra maps (08HR) used in step 6; the unit contains no ring-theoretic lifting theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-2a794d728",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-2a794d728 (reviewer sub-agent of L); spot-checked: I read all eight steps against Stacks 05WP (algebra.tex l.43581ff) with 08HR (l.42881) and 08HT (l.42902), and against the eight cited statements, including the blueprint_update versions. The statement is true as given and the item is unchanged from live. Live is still unsplit with no repair note, so nothing supersedes this delivery. Relative to the previous delivery ad08272e, steps 5 and 6 only gain explanation, so this is not a re-push. Step 1: the residue identification follows from the initial universal property, since a field (k,0) is henselian under both the idempotent form and the updated form with the Jacobson-radical condition. Step 3: n is prime, its contractions are m_R and q, and the residue field of D is onto κ(q) via (1⊗b)/(1⊗t). Steps 4-5: B→C is ind-étale by base change of the prime-ind-étale lemma, and C→C_n by the directed system of C_{s_F}, where each term is finitely presented étale by the Mathlib leaf applied to id_C. Step 6: every 08HR hypothesis holds, including H henselian local, m_H contracting to q, nD lying over q, and τ=id a κ(q)-algebra map. The inverse j and the uniqueness of the composites give the isomorphism e and its uniqueness. Step 7: e∘a=h by the uniqueness for R, since both are local and agree on A. Step 8: the inverse fraction maps α and β are well defined and inverse to each other. Small cases checked: a field, the identity on a local ring, k→k[x] at (x) where D is not henselian, and non-injective A→B. No SGA is cited. The two off-unit tools, ind-étale stability and 08HR, are generic and declared in split_report.tool_uses. No DAG node duplicates this comparison; the nearest are pair-henselization, strict-henselization, pointed-étale-limit and the quasi-finite tensor sibling. proof_deps equals the union of the step uses. There are no new nodes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationTensorLocalComparison",
+  "declaration": "Algebra.henselization_tensor_local_comparison",
+  "declarations": [
+   "RingHom.pointedKernelLocalization",
+   "Algebra.henselization_tensor_local_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselizationTensorLocalComparison.lean",
+  "statement": "theorem henselization_tensor_local_comparison (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p] (R : Type w) [CommRing R] [Algebra (Localization.AtPrime p) R] [Algebra A R] [IsScalarTower A (Localization.AtPrime p) R] [HenselianLocalRing R] (hR : IsHenselizationAtPrime' A p R) (H : Type z) [CommRing H] [Algebra (Localization.AtPrime q) H] [HenselianLocalRing H] (hH : IsHenselizationAtPrime' B q H) [Algebra (Localization.AtPrime p) (Localization.AtPrime q)] [Localization.AtPrime.IsLiesOverAlgebra p q] : ∃ (iR : p.ResidueField ≃+* IsLocalRing.ResidueField R) (iH : q.ResidueField ≃+* IsLocalRing.ResidueField H), (∀ a : Localization.AtPrime p, iR (IsLocalRing.residue (Localization.AtPrime p) a) = IsLocalRing.residue R (algebraMap (Localization.AtPrime p) R a)) ∧ (∀ b : Localization.AtPrime q, iH (IsLocalRing.residue (Localization.AtPrime q) b) = IsLocalRing.residue H (algebraMap (Localization.AtPrime q) H b)) ∧ ∃ h : R →+* H, IsLocalHom h ∧ h.comp (algebraMap (Localization.AtPrime p) R) = (algebraMap (Localization.AtPrime q) H).comp (algebraMap (Localization.AtPrime p) (Localization.AtPrime q)) ∧ (∀ h' : R →+* H, IsLocalHom h' → h'.comp (algebraMap (Localization.AtPrime p) R) = (algebraMap (Localization.AtPrime q) H).comp (algebraMap (Localization.AtPrime p) (Localization.AtPrime q)) → h' = h) ∧ ∃ (ε : R ⊗[A] B →+* q.ResidueField) (εT : R ⊗[Localization.AtPrime p] Localization.AtPrime q →+* q.ResidueField), (∀ (r : R) (b : B), ε (r ⊗ₜ[A] b) = Ideal.ResidueField.map p q (algebraMap A B) Ideal.LiesOver.over (iR.symm (IsLocalRing.residue R r)) * algebraMap B q.ResidueField b) ∧ (∀ (r : R) (b : Localization.AtPrime q), εT (r ⊗ₜ[Localization.AtPrime p] b) = Ideal.ResidueField.map p q (algebraMap A B) Ideal.LiesOver.over (iR.symm (IsLocalRing.residue R r)) * IsLocalRing.residue (Localization.AtPrime q) b) ∧ (RingHom.ker ε).IsPrime ∧ (RingHom.ker εT).IsPrime ∧ (RingHom.ker ε).comap (TensorProduct.includeLeftRingHom : R →+* R ⊗[A] B) = IsLocalRing.maximalIdeal R ∧ (RingHom.ker ε).comap (TensorProduct.includeRight : B →ₐ[A] R ⊗[A] B).toRingHom = q ∧ ∃ (iD : IsLocalRing.ResidueField (RingHom.pointedKernelLocalization ε) ≃+* q.ResidueField) (bD : Localization.AtPrime q →+* RingHom.pointedKernelLocalization ε) (α : RingHom.pointedKernelLocalization ε ≃+* RingHom.pointedKernelLocalization εT), (∀ c : R ⊗[A] B, iD (IsLocalRing.residue (RingHom.pointedKernelLocalization ε) (algebraMap (R ⊗[A] B) (RingHom.pointedKernelLocalization ε) c)) = ε c) ∧ (∀ b : B, bD (algebraMap B (Localization.AtPrime q) b) = algebraMap (R ⊗[A] B) (RingHom.pointedKernelLocalization ε) (1 ⊗ₜ[A] b)) ∧ RingHom.IndEtaleAcrossUniverses (bD.comp (algebraMap B (Localization.AtPrime q))) ∧ RingHom.IndEtaleAcrossUniverses ((algebraMap (Localization.AtPrime q) H).comp (algebraMap B (Localization.AtPrime q))) ∧ (∀ r : R, α (algebraMap (R ⊗[A] B) (RingHom.pointedKernelLocalization ε) (r ⊗ₜ[A] 1)) = algebraMap (R ⊗[Localization.AtPrime p] Localization.AtPrime q) (RingHom.pointedKernelLocalization εT) (r ⊗ₜ[Localization.AtPrime p] 1)) ∧ (∀ b : Localization.AtPrime q, α (bD b) = algebraMap (R ⊗[Localization.AtPrime p] Localization.AtPrime q) (RingHom.pointedKernelLocalization εT) (1 ⊗ₜ[Localization.AtPrime p] b)) ∧ (HenselianLocalRing (RingHom.pointedKernelLocalization ε) → ∃ e : RingHom.pointedKernelLocalization ε ≃+* H, IsLocalHom e.toRingHom ∧ (∀ b : B, e (bD (algebraMap B (Localization.AtPrime q) b)) = algebraMap (Localization.AtPrime q) H (algebraMap B (Localization.AtPrime q) b)) ∧ (∀ d : RingHom.pointedKernelLocalization ε, iH.symm (IsLocalRing.residue H (e d)) = iD (IsLocalRing.residue (RingHom.pointedKernelLocalization ε) d)) ∧ (∀ e' : RingHom.pointedKernelLocalization ε ≃+* H, IsLocalHom e'.toRingHom → (∀ b : B, e' (bD (algebraMap B (Localization.AtPrime q) b)) = algebraMap (Localization.AtPrime q) H (algebraMap B (Localization.AtPrime q) b)) → (∀ d : RingHom.pointedKernelLocalization ε, iH.symm (IsLocalRing.residue H (e' d)) = iD (IsLocalRing.residue (RingHom.pointedKernelLocalization ε) d)) → e' = e) ∧ (∀ r : R, e (algebraMap (R ⊗[A] B) (RingHom.pointedKernelLocalization ε) (r ⊗ₜ[A] 1)) = h r) ∧ (∀ r : R, (e.symm.trans α) (h r) = algebraMap (R ⊗[Localization.AtPrime p] Localization.AtPrime q) (RingHom.pointedKernelLocalization εT) (r ⊗ₜ[Localization.AtPrime p] 1)) ∧ (∀ b : Localization.AtPrime q, (e.symm.trans α) (algebraMap (Localization.AtPrime q) H b) = algebraMap (R ⊗[Localization.AtPrime p] Localization.AtPrime q) (RingHom.pointedKernelLocalization εT) (1 ⊗ₜ[Localization.AtPrime p] b)))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The single theorem states every clause, with independently sized rings. Structural algebra instances and scalar towers encode the given canonical maps. All comparison maps are outputs characterized on the factors and residues. RingHom.pointedKernelLocalization is a transparent abbreviation for Mathlib Localization.AtPrime at the evaluation kernel, using RingHom.ker_isPrime; it introduces no alternate localization construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71ff0e29b",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Read the item (only lean changed vs live), Stacks 05WP statement and proof, IsHenselizationAtPrime', IndEtaleAcrossUniverses, Mathlib IsLiesOverAlgebra and Localization.AtPrime, and the landed quasi-finite citer. Every clause is present: canonical iR/iH fixed on residues; local unique h; ε and εT pure-tensor formulas; ker prime; contractions m_R and q; D = Localization.AtPrime (ker ε) via a transparent abbrev (not hollow); iD residue equation; bD fixed on B; B→D and B→B_q→H IndEtaleAcrossUniverses; α fixed on both factors; e only under HenselianLocalRing D, local, B-compatible, identity on κ(q), unique, e(r⊗1)=h r; e⁻¹·α compatible with R and B_q. No finite-type/quasi-finite or other extra hypothesis; universes u v w z independent. One sorry; source and blueprint docstrings with the 8 proof steps; statement verbatim; no dependency record changes; no duplicates. Not compiled because no file changed. Note: the second reading was by the same worker, as the report states."
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "id": "lem-wf-henselian-residue-lift-diagram",
+ "kind": "statement",
+ "title": "Finite residue lifts as a coherent diagram and Galois cofinality",
+ "statement": "Let $(H,\\mathfrak m,k)$ be a commutative henselian local ring [def-weil-pbc-henselian-terminology], with residue field $k=H/\\mathfrak m$ [def-weil-residue-field], and let $K/k$ be a chosen separable closure [def-pd-separable-closure]. Write $I$ for the poset of finite separable intermediate fields $k\\subset e\\subset K$, ordered by inclusion. There exist commutative $H$-algebras $B_e$, each finite as an $H$-module and etale [def-weil-etale-morphism], and $k$-algebra isomorphisms $r_e:B_e/\\mathfrak mB_e\\xrightarrow{\\sim}e$. Each $B_e$ is local with maximal ideal $\\mathfrak mB_e$, and $H\\to B_e$ is local. For each inclusion $e\\subset f$, there is exactly one $H$-algebra map $u_{ef}:B_e\\to B_f$ whose reduction, under $r_e,r_f$, is that inclusion; it is local. These maps satisfy $u_{ee}=\\mathrm{id}$ and $u_{fg}u_{ef}=u_{eg}$, and $I$ is small and directed. Any two finite etale lifts of an identified residue field $e$ admit exactly one residue-compatible $H$-algebra isomorphism. The full subposet $J\\subset I$ of finite Galois extensions of $k$ is directed and cofinal (Galois means separable and normal: the minimal polynomial over $k$ of every element splits in the extension). For any such chosen lift diagram and any commutative $H$-algebra $T$, restriction from cocones on $(B_e)_{e\\in I}$ to cocones on $(B_e)_{e\\in J}$ is a bijection. Consequently the restricted diagram has canonically the same colimit [def-weil-pbc-category-colimit], preserving the $H$-structure and the compatible residue maps to $K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BSL (remark-construct-sh-from-h), finite lifts and arrows, using Tag 04GK (lemma-henselian-cat-finite-etale); fields.tex, Tags 09DT (lemma-normal-closure) and 0EXM (lemma-normal-closure-galois), finite Galois cofinal restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "def-pd-separable-closure",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For any $H$-algebra $B$, identify $k\\otimes_H B$ with $B/\\mathfrak mB$: the maps are $\\bar h\\otimes b\\mapsto hb\\bmod\\mathfrak mB$ and $b\\bmod\\mathfrak mB\\mapsto1\\otimes b$, which are well defined and inverse by the tensor relations. Each $e\\in I$ is a finite separable extension of $k$, so [lem-weil-pbc-henselian-finite-etale-field-lift] gives a module-finite etale $H$-algebra $B_e$ with an identified fibre $r_e:B_e/\\mathfrak mB_e\\simeq e$. Choose one such pair for each $e$. This is a set-indexed choice: intermediate fields of the fixed field $K$ form a subset of its power set, so $I$ and its inclusion arrows are small.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-field-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK (lemma-henselian-cat-finite-etale), essential surjectivity; Tag 0BSL (remark-construct-sh-from-h), first sentence"
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak mB_e$ is maximal because its quotient is the nonzero field $e$. Every maximal ideal of the module-finite algebra $B_e$ contains $\\mathfrak mB_e$ by [lem-weil-pbc-finite-algebra-local-radical]; hence it equals this ideal. Thus $B_e$ is local. The composite $H\\to B_e\\to e$ is the quotient $H\\to k$ followed by the given injective inclusion $k\\hookrightarrow e$. Its kernel is $\\mathfrak m$, proving that $H\\to B_e$ is local.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL (remark-construct-sh-from-h), finite etale local extensions; maximal-ideal contraction as in Tag 04GG (lemma-characterize-henselian), proof of (9) implies (10)"
+   }
+  },
+  {
+   "text": "For $e\\subseteq f$, conjugate the field inclusion by $r_e,r_f$ to obtain the fibre map $r_f^{-1}\\circ(e\\hookrightarrow f)\\circ r_e$. The reduction bijection of [lem-weil-pbc-henselian-finite-etale-map-bijective], applied to the finite etale $H$-algebras $B_e,B_f$, gives exactly one lift $u_{ef}$. It is local: for $b\\in B_e$, the image $u_{ef}(b)$ belongs to $\\mathfrak mB_f$ exactly when the image of $r_e(\\bar b)$ in $f$ is zero; injectivity of $e\\hookrightarrow f$ makes this equivalent to $b\\in\\mathfrak mB_e$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-map-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK (lemma-henselian-cat-finite-etale), full faithfulness; Tag 0BSL (remark-construct-sh-from-h), arrows in the system"
+   }
+  },
+  {
+   "text": "Reduction commutes with composition, so $u_{ee}$ and $\\mathrm{id}_{B_e}$ reduce to the same map, and $u_{fg}\\circ u_{ef}$ and $u_{eg}$ both reduce to $e\\hookrightarrow g$. Injectivity in [lem-weil-pbc-henselian-finite-etale-map-bijective] gives the two coherence identities. For two finite etale lifts $B,B'$ with identified fibre $e$, lift the identity of $e$ in both directions by the same bijection. Their composites reduce to identities, hence are identities. The lift is therefore an isomorphism, and injectivity makes it the unique residue-compatible isomorphism. This also applies to arbitrary choices of the pairs in step 1.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-map-bijective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GK (lemma-henselian-cat-finite-etale) and 0BSL (remark-construct-sh-from-h), uniqueness from full faithfulness"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois], applied to the specified separable closure $K/k$, this extension is Galois. Given $e,f\\in I$, take the union $S$ of finite $k$-bases of $e$ and $f$, regarded as a finite subset of $K$. By [lem-weil-pbc-finite-set-in-finite-galois-subextension] there is a finite Galois intermediate field $g$ containing $S$. Since $g$ contains $k$ and these bases, it contains both $e$ and $f$. Also $k\\in J\\subseteq I$. This proves that $I$ is nonempty directed, that $J$ is directed (use the same argument for $e,f\\in J$), and that every $e\\in I$ lies below an object of $J$ (take $f=k$). In particular the upper subposet $\\{g\\in J:e\\subseteq g\\}$ is nonempty and directed; this is the required cofinality, not merely a choice of an abstract Galois extension outside $K$.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT (lemma-normal-closure), 0BMG (lemma-normal-closure-inside-normal), 0EXM (lemma-normal-closure-galois); finite Galois enclosure inside the chosen separable closure"
+   }
+  },
+  {
+   "text": "Fix a commutative $H$-algebra $T$. A cocone on $J$ is a compatible family $a_g:B_g\\to T$ of $H$-algebra maps [def-weil-pbc-category-colimit]. For $e\\in I$, choose $g\\in J$ above $e$ and set $a_e=a_g\\circ u_{eg}$. If $g'$ is another choice, take $h\\in J$ above both; cocone compatibility and the coherence identities give $a_g u_{eg}=a_h u_{gh}u_{eg}=a_hu_{eh}=a_{g'}u_{eg'}$. Thus $a_e$ is independent of the choice. For $e\\subseteq f$, choose $g\\in J$ above $f$; then $a_fu_{ef}=a_gu_{fg}u_{ef}=a_gu_{eg}=a_e$. For $e\\in J$ the choice $g=e$ gives the original $a_e$. Conversely, an $I$-cocone must satisfy this extension formula for every $e\\subseteq g$ with $g\\in J$. Extension and restriction are inverse, proving the stated bijection.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), cocone compatibility; explicit directed-cofinal extension argument using step 5"
+   }
+  },
+  {
+   "text": "The two small diagrams have colimits in commutative $H$-algebras by [lem-weil-pbc-commutative-algebras-colimits-exist]. Restrict the universal $I$-cocone to $J$. Given a $J$-cocone, step 6 extends it uniquely to $I$, and the universal $I$-property then supplies exactly one mediating $H$-algebra map. Hence the restricted cocone is a colimit by [def-weil-pbc-category-colimit]. Uniqueness of colimits gives the canonical isomorphism with any chosen $J$-colimit; its composites with the $J$-legs are the $I$-legs. These are $H$-algebra maps, so the isomorphism preserves the $H$-structure. Finally define $\\rho_e:B_e\\to K$ as quotient, then $r_e$, then $e\\hookrightarrow K$. The defining reduction of $u_{ef}$ says $\\rho_f u_{ef}=\\rho_e$. This is a cocone with vertex $K$, and the universal properties just proved show that the two induced maps to $K$ commute with the canonical colimit isomorphism. Thus the compatible residue maps are preserved as asserted.",
+   "uses": [
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 07N7 (section-colimits); Tag 0BSL (remark-construct-sh-from-h), finite-lift system; Categories Tag 002F (definition-colimit), universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-commutative-algebras-colimits-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0BSL and 04GK, with fields.tex Tags 09DT and 0EXM; explicit coherence and cocone-extension arguments written by Q107"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite separable subfields of a separable closure lift to a filtered diagram of finite local etale algebras over a henselian local ring with unique residue-compatible maps; finite Galois subfields are cofinal.",
+   "results": "[leansearch] OK 8 hit(s); IsSepClosed.lift_def; IsSepClosed.lift; separableClosure; separableClosure.isSepClosure; separableClosure.isSeparable; Algebra.FormallyEtale.of_isSeparable_aux; separableClosure.isAlgebraic; le_separableClosure",
+   "date": "2026-10-22",
+   "verdict": "no match: field embeddings and etale algebras over fields do not give the coherent henselian finite lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a functor lifting finite separable residue field extensions to finite local etale algebras over a henselian local ring, uniquely up to residue preserving isomorphism.",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.instFiniteResidueFieldOfFormallyUnramified; StandardEtalePair.instFormallyEtaleRing; RingHom.EssFiniteType.residueFieldMap; Algebra.instIsSeparableResidueFieldOfFormallyUnramified; Algebra.instFormallyUnramifiedResidueField_1; Algebra.instFormallyUnramifiedResidueField; Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: field embeddings and etale algebras over fields do not give the coherent henselian finite lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of reduction for finite etale algebras over henselian rings produces a directed local lifting system and a cofinal finite Galois subsystem.",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Etale.iff_exists_algEquiv_prod; Algebra.Etale.exists_subalgebra_fg; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; StandardEtalePair.instFormallyEtaleRing; Algebra.FormallyEtale.instForallOfFinite; Algebra.FormallySmooth.of_perfectField; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-22",
+   "verdict": "no match: field embeddings and etale algebras over fields do not give the coherent henselian finite lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: field embeddings and etale algebras over fields do not give the coherent henselian finite lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*etale|etale.*henselian|finite.*galois.*colimit",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: field embeddings and etale algebras over fields do not give the coherent henselian finite lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*etale|etale.*henselian|finite.*galois.*colimit",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale algebras over a henselian local ring are equivalent to finite etale residue field algebras and finite Galois extensions are cofinal.",
+   "results": "[leansearch] OK 8 hit(s); Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.Etale; HenselianLocalRing.TFAE; RingHom.Etale; HenselianLocalRing; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.Etale.finitePresentation; Algebra.Etale.formallyEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite separable residue field extensions of a henselian local ring form a coherent diagram of finite etale local lifts; finite Galois subfields are cofinal.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.TFAE; Field.henselian; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.instFiniteResidueFieldOfFormallyUnramified; IsLocalRing.ResidueField.finite_of_finite; Algebra.instIsSeparableResidueFieldOfFormallyUnramified; RingHom.EssFiniteType.residueFieldMap; Algebra.instFormallyUnramifiedResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finite etale lifts of residue fields over a henselian ring; full faithfulness of reduction gives identity and composition, and restricting to finite normal subfields preserves cocones.",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; StandardEtalePresentation.lift_bijective; StandardEtalePair.homEquiv_symm_apply; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Ideal.ResidueField.liftₐ; RingHom.EssFiniteType.residueFieldMap; Algebra.instFiniteResidueFieldOfFormallyUnramified; StandardEtalePair.homEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "TFAE|lift_bijective|theorem homEquiv|def homEquiv|iff_exists_algEquiv_prod",
+   "results": "[grep] OK 25 hit(s); Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/RingTheory/Invariant/Galois.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field, standard-etale-presentation and root-lifting results do not state this coherent lift diagram with Galois cocone restriction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-strict-henselization-finite-lifts",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-boundary-stalk-invariants",
+   "place": "Current ancestor proof: finite-level paragraph, 'the spectrum of a field with absolute Galois group the inertia group'; Frobenius-equivariance paragraph, 'automorphisms ... over' the henselization. Finite residue lift objects, unique arrows and finite Galois cofinal indexing from original finite-lifts steps 1, 2 and 10.",
+   "via": [
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-wf-strict-henselian-fraction-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-wf-henselian-residue-lift-diagram",
+  "worker": "stage1",
+  "summary": "Q107: retained the statement; reused existing finite etale field-lifting and Hom-bijection nodes, maximal-ideal contraction, finite Galois enclosure and colimit existence. Wrote the coherence, localness, unique-isomorphism, smallness, directedness and cocone-extension arguments explicitly. No new nodes.",
+  "blueprint": "Realizes the finite-lift component below lem-wf-boundary-stalk-invariants: current proof, finite-level paragraph on the punctured strict henselian trait and final Frobenius-equivariance paragraph on automorphisms over the henselization. Keeps the inherited ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "why": "Generic henselian finite etale field lifting from Tag 04GK supplies each object; the boundary unit has no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "why": "Generic full faithfulness of residue reduction from Tag 04GK supplies arrows and equality detection; the boundary unit does not prove this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-405af47a5",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-405af47a5 (reviewer sub-agent of L); spot-checked: I read all seven steps in full. All seven are correct and the delivery needs no fixes. Shape: one commit with the item and the report, no new nodes. The live item is still unsplit and there is no repair note, so the 2026-10-21 re-split rules do not apply. The statement is unchanged, proof_deps equals the union of uses, all search kinds are recorded and no SGA is cited. Sources checked: Stacks 0BSL and 04GK, fields.tex 0BMG and 0EXM, and the 04GG proof (9=>10). Step 1: field-lift gives B_e and r_e via k⊗B≅B/mB, and I is small because it is a set of subsets of K. Step 2: mB_e is maximal because the quotient is a field, local-radical shows it is the only maximal ideal, and H->B_e is local because H->B_e->e has kernel m. Step 3: map-bijective gives a unique u_ef, which is local because residue inclusions are injective. Step 4: functoriality and injectivity give u_ee=id, u_fg u_ef=u_eg, and the unique residue-compatible isomorphism between lifts. Step 5: K/k is Galois by separable-closure-exists-galois (2), and the finite-subset Galois-enclosure node applied to the union of bases gives a common g; so I and J are nonempty and directed and J is cofinal. Step 6: the cocone extension a_e=a_g u_eg is well defined and inverse to restriction. Step 7: colimits exist (small index), the restricted universal cocone is a J-colimit, the iso is an H-algebra map, and the residue maps satisfy ρ_f u_ef=ρ_e. Edge cases checked: H a field, k separably closed, e=f, T=0. Duplicate search found nothing; the parent cites exactly these clauses. I accept the declared tool_uses of the sk-thm-p1 nodes henselian-finite-etale-field-lift and map-bijective as generic Tag 04GK tools. Advisory only: 'separable' in the statement cites no definition node, but separability is automatic inside K."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianResidueLiftDiagram",
+  "declaration": "Algebra.exists_henselian_residue_lift_diagram",
+  "declarations": [
+   "Algebra.exists_henselian_residue_lift_diagram",
+   "Algebra.henselian_residue_lift_unique",
+   "Algebra.henselian_residue_lift_galois_cofinal",
+   "Algebra.henselian_residue_lift_galois_cocones"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselianResidueLiftDiagram.lean",
+  "statement": "theorem exists_henselian_residue_lift_diagram (H K : Type u) [CommRing H] [HenselianLocalRing H] [Field K] [Algebra (IsLocalRing.ResidueField H) K] [IsSepClosure (IsLocalRing.ResidueField H) K] : ∃ D : {e : IntermediateField (IsLocalRing.ResidueField H) K // FiniteDimensional (IsLocalRing.ResidueField H) e} ⥤ CommAlgCat.{u} H, ∃ q : ∀ e, D.obj e →+* e.val, (∀ e, Module.Finite H (D.obj e)) ∧ (∀ e, Algebra.Etale H (D.obj e)) ∧ (∀ e, Function.Surjective (q e)) ∧ (∀ e, RingHom.ker (q e) = (IsLocalRing.maximalIdeal H).map (algebraMap H (D.obj e))) ∧ (∀ e h, q e (algebraMap H (D.obj e) h) = algebraMap (IsLocalRing.ResidueField H) e.val (IsLocalRing.residue H h)) ∧ (∃ loc : ∀ e, IsLocalRing (D.obj e), (∀ e, @IsLocalRing.maximalIdeal (D.obj e) _ (loc e) = (IsLocalRing.maximalIdeal H).map (algebraMap H (D.obj e))) ∧ (∀ e, IsLocalHom (algebraMap H (D.obj e)))) ∧ (∀ {e f} (t : e ⟶ f) b, (q f ((D.map t).hom b) : K) = (q e b : K)) ∧ (∀ {e f} (t : e ⟶ f), IsLocalHom (D.map t).hom.toRingHom) ∧ (∀ {e f} (t : e ⟶ f) (g : D.obj e →ₐ[H] D.obj f), (∀ b, (q f (g b) : K) = (q e b : K)) → g = (D.map t).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four recorded theorems together render every clause: lift existence with unique local transition maps; uniqueness of identified lifts; directedness and Galois cofinality; cocone restriction and canonical colimit comparison preserving residue maps. Quotient identifications are encoded equivalently by surjective ring maps with the prescribed kernel and scalar equation. The functor carries identity and composition laws."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-143155a8e",
+  "group": "Q30",
+  "result": "pass",
+  "note": "All node clauses rendered: finite étale local lifts D : I ⥤ CommAlgCat H with residue identification q (surjective, ker = mB, scalar eq) = k-iso B/mB≃e; unique transition maps among all H-alg maps, local; functor laws; unique identified-lift iso over arbitrary finite étale B,C; IsFiltered I and J (Normal ⇒ Galois inside IsSepClosure) with cofinality; cocone-restriction bijection for every T; colimit restriction with unique leg- and ρ-compatible iso (ρ-clause implied by leg clause, uniqueness not weakened). Edge cases k sep. closed, H field, T=0, imperfect k covered. Universe u shared by H,K documented, matches parent convention. No defs, only sorry, source/blueprint docstrings, statement verbatim, only lean field changed, no name collisions. Advisory: downstream StrictHenselizationFiniteLiftSystem duplicates fields; reuse on its restatement."
+ }
+}

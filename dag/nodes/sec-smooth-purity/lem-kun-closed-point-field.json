@@ -103,7 +103,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
@@ -153,5 +164,25 @@
   "landing": "20261016T003159-L-3927115",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme of\nfinite type over a field\n$K$, and let $x\\in X$.\n\n1. **(a)** $x$ is a closed point of\n$X$ if and only if\n$\\operatorname{trdeg}_K\\kappa(x)=0$, i.e. if and only if\n$\\kappa(x)$ is finite over $K$ (Zariski's lemma: a field\nfinitely generated, as an algebra, over $K$ is finite over $K$).\n1. **(b)** If $K$ is separably closed and $x$ is closed, then\n$\\kappa(x)/K$ is finite and purely inseparable and $\\kappa(x)$ is\nseparably closed.",
+  "proof": [
+   {
+    "text": "For (a), the question is local, so replace $X$ by an affine\n$\\Spec(A)$ around $x$, $A$ a finitely generated $K$-algebra, and\n$x=\\mathfrak p$: $\\mathfrak p$ is maximal in $A$ iff\n$A/\\mathfrak p$ is a field finitely generated as a $K$-algebra, and\nby Zariski's lemma this is equivalent to $A/\\mathfrak p$ being\nfinite over $K$ (then it has Krull dimension $0$, hence\n$\\operatorname{trdeg}_K=0$ by Noether normalization; conversely\nfinite implies dimension $0$ and hence maximality of $\\mathfrak p$).\nFor (b), $\\kappa(x)$ is finite over $K$ by (a), hence purely\ninseparable by\n[lem-kun-sep-closed-finite-extension-purely-inseparable]; thus\n$\\kappa(x)$ is a finite extension of the separably closed field\n$K$ ([def-pc-separably-closed]) and is therefore separably\nclosed by [lem-kun-sep-closed-finite-extension-sep-closed].",
+    "uses": [
+     "lem-kun-sep-closed-finite-extension-purely-inseparable",
+     "def-pc-separably-closed",
+     "lem-kun-sep-closed-finite-extension-sep-closed"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

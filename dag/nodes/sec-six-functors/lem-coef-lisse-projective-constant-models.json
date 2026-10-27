@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-lisse-projective-constant-models",
+ "kind": "statement",
+ "title": "Finite projective constant models of etale lisse sheaves",
+ "statement": "Let $S$ be any scheme and $A$ a finite commutative ring. Let $L$ be an $A$-module sheaf on the small etale site of $S$ which is locally constant and whose geometric stalk at every separably closed point is a finite projective $A$-module [def-constructible-locally-constant, def-weil-pbc-geometric-stalks, det-sf-flat-model-generation]. There is an etale locally constant datum for $L$ on which every constant module model is finitely generated and projective over $A$. More precisely, on each member $U_i$ the restricted module sheaf is isomorphic to the constant sheaf of a module $P_i$, with Module.Finite A P_i and Module.Projective A P_i. The empty scheme is included.",
+ "stmt_deps": [
+  "def-constructible-locally-constant",
+  "def-weil-pbc-geometric-stalks",
+  "det-sf-flat-model-generation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+  "place": "Clause (3): the generators have L locally constant with finite projective stalks; conversion to the constant-model hypothesis of normalizedComparison."
+ },
+ "proof": [
+  {
+   "text": "Take a locally constant datum and restrict its cover to the members with nonempty underlying scheme. Every point still has a covering lift, so this is a cover; the same constant trivializations restrict to it. On an empty scheme this yields an empty cover.",
+   "uses": [
+    "def-constructible-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (3): the generators have L locally constant with finite projective stalks; conversion to the constant-model hypothesis of normalizedComparison."
+   }
+  },
+  {
+   "text": "Choose a point in each remaining member and the algebraic closure of its residue field. The moreover clause of the existing finite-values theorem gives a module isomorphism from the corresponding geometric stalk of L to the constant module for this specified datum. Use that public theorem, without accessing its private construction. Finiteness transports across its underlying equivalence, and projectivity transports across its linear equivalence; finiteness of the underlying set implies finite generation.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (3): the generators have L locally constant with finite projective stalks; conversion to the constant-model hypothesis of normalizedComparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+  "place": "Clause (3): the generators have L locally constant with finite projective stalks; conversion to the constant-model hypothesis of normalizedComparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf of modules with finite projective geometric stalks admits a cover by constant finite projective modules",
+   "results": "8 hits: LightCondMod/CompHausLike locally constant sheaf constructions, SheafOfModules.IsFiniteType and local generators, finite presentation, CondensedMod.ofSheafProfinite. None states projectivity of the constant models on a small etale site.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"Projective\"",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Pp]rojective|[Pp]rojective.*constantSheaf",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientHomChange",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Clause (3): the generators have L locally constant with finite projective stalks; conversion to the constant-model hypothesis of normalizedComparison."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseProjectiveConstantModels",
+  "file": "lean/Sheaf/Paper/LisseProjectiveConstantModels.lean",
+  "declaration": "AlgebraicGeometry.lisseProjective_constantModels",
+  "statement": "theorem lisseProjective_constantModels\n    {S : Scheme.{u}} (A : Type (u + 1)) [CommRing A] [Finite A]\n    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hL : FlatModelEtaleLisseProjective A L) :\n    ∃ d : Scheme.LocallyConstantDatum L, ∀ i : d.cover.I₀,\n      ∃ P : ModuleCat.{u + 1} A, Module.Finite A P ∧ Module.Projective A P ∧\n        Nonempty (L.over (d.cover.etalePrecoverageToEtale i) ≅\n          (constantSheaf (S.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))\n            (ModuleCat.{u + 1} A)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "independent cc review: item proof + FiniteHomEtaleIso/LisseProjectiveConstantModels against thm-coef-finite-hom plan, new sorry statements against their nodes, the 14 direct importers compiled against the delivered modules, the 5 unit-route modules still in the transitive import closure"
+ }
+}

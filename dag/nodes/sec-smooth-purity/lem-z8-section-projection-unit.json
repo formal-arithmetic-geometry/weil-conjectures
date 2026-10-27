@@ -1,0 +1,125 @@
+{
+ "id": "lem-z8-section-projection-unit",
+ "kind": "statement",
+ "title": "Section Projection Unit",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem tensor_compatibility_of_unit_law\n    {C : Type*} [Category C] [MonoidalCategory C]\n    (F : C ⥤ C) (d : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))\n    (c : F ≅ F ⋙ F) (i : F ≅ 𝟭 C)\n    (hc : ∀ X Y : C, (d.app X).app Y ≫ (c.hom.app X ⊗ₘ c.hom.app Y) =\n      c.hom.app (X ⊗ Y) ≫ F.map ((d.app X).app Y) ≫\n        (d.app (F.obj X)).app (F.obj Y))\n    (hu : ∀ X : C, c.hom.app X ≫ F.map (i.hom.app X) = 𝟙 _)\n    (X Y : C) [IsIso ((d.app X).app Y)] :\n    (d.app X).app Y ≫ (i.hom.app X ⊗ₘ i.hom.app Y) = i.hom.app (X ⊗ Y)\n\ntheorem tensor_compatibility_of_composite_section\n    {C D : Type*} [Category C] [Category D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    (F : C ⥤ D) (G : D ⥤ C) (H : C ⥤ C)\n    (dF : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))\n    (dG : (Functor.postcompose₂.obj G).obj (curriedTensor D) ⟶\n      (((Functor.whiskeringLeft₂ C).obj G).obj G).obj (curriedTensor C))\n    (dH : (Functor.postcompose₂.obj H).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ C).obj H).obj H).obj (curriedTensor C))\n    (c : H ≅ F ⋙ G) (i : H ≅ 𝟭 C) (M N : C)\n    (hc : (dH.app M).app N ≫ (c.hom.app M ⊗ₘ c.hom.app N) =\n      c.hom.app (M ⊗ N) ≫ G.map ((dF.app M).app N) ≫\n        (dG.app (F.obj M)).app (F.obj N))\n    (hi : (dH.app M).app N ≫ (i.hom.app M ⊗ₘ i.hom.app N) =\n      i.hom.app (M ⊗ N)) :\n    G.map ((dF.app M).app N) ≫ (dG.app (F.obj M)).app (F.obj N) ≫\n      ((c.symm ≪≫ i).hom.app M ⊗ₘ (c.symm ≪≫ i).hom.app N) =\n      (c.symm ≪≫ i).hom.app (M ⊗ N)\n\ntheorem unit_compatibility_of_tensor\n    {C : Type*} [Category C] [MonoidalCategory C] (F : C ⥤ C)\n    (d : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))\n    (i : F ≅ 𝟭 C) (e : F.obj (𝟙_ C) ⟶ 𝟙_ C) [IsIso e]\n    [Epi ((d.app (𝟙_ C)).app (𝟙_ C))]\n    (ht : (d.app (𝟙_ C)).app (𝟙_ C) ≫\n      (i.hom.app (𝟙_ C) ⊗ₘ i.hom.app (𝟙_ C)) = i.hom.app ((𝟙_ C) ⊗ (𝟙_ C)))\n    (he : (d.app (𝟙_ C)).app (𝟙_ C) ≫ e ▷ F.obj (𝟙_ C) ≫\n      (λ_ (F.obj (𝟙_ C))).hom = F.map (λ_ (𝟙_ C)).hom) :\n    e = i.hom.app (𝟙_ C)\n\ntheorem rightAdjointProjectionMap_flip\n    {C D : Type*} [Category C] [Category D]\n    [MonoidalCategory C] [MonoidalCategory D] [SymmetricCategory C] [SymmetricCategory D]\n    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R)\n    (d : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))\n    (hd : ∀ X Y : C, F.map (β_ X Y).hom ≫ (d.app Y).app X =\n      (d.app X).app Y ≫ (β_ (F.obj X) (F.obj Y)).hom)\n    (M : D) (L : C) :\n    ((adj.rightAdjointProjectionMap\n      (T_C := (curriedTensor D).flip) (T_D := (curriedTensor C).flip)\n      ((flipFunctor _ _ _).map d)).app M).app L =\n      (β_ L (R.obj M)).hom ≫ ((adj.rightAdjointProjectionMap d).app M).app L ≫\n        R.map (β_ M (F.obj L)).hom\n\ntheorem unit_law_of_inverse\n    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)\n    {X Y : C} {X' Y' : D} (e : X ≅ Y) (e' : X' ≅ Y')\n    (m : F.obj X ⟶ X') (n : F.obj Y ⟶ Y')\n    (h : F.map e.inv ≫ m = n ≫ e'.inv) :\n    m ≫ e'.hom = F.map e.hom ≫ n\n\ntheorem tensor_evaluation_baseChange\n    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']\n    [MonoidalCategory C] [MonoidalCategory D]\n    [MonoidalCategory C'] [MonoidalCategory D']\n    (F : C ⥤ D) (R : D ⥤ C) (F' : C' ⥤ D') (R' : D' ⥤ C')\n    (U : C ⥤ C') (V : D ⥤ D') (σ : U ⋙ F' ≅ F ⋙ V)\n    (ex : R ⋙ U ⟶ V ⋙ R')\n    (p : R ⋙ (curriedTensor C).flip ⟶\n      (Functor.postcompose₂.obj R).obj\n        ((((Functor.whiskeringLeft₂ D).obj (𝟭 D)).obj F).obj (curriedTensor D).flip))\n    (p' : R' ⋙ (curriedTensor C').flip ⟶\n      (Functor.postcompose₂.obj R').obj\n        ((((Functor.whiskeringLeft₂ D').obj (𝟭 D')).obj F').obj (curriedTensor D').flip))\n    (dU : (Functor.postcompose₂.obj U).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ C').obj U).obj U).obj (curriedTensor C'))\n    (dV : (Functor.postcompose₂.obj V).obj (curriedTensor D) ⟶\n      (((Functor.whiskeringLeft₂ D').obj V).obj V).obj (curriedTensor D'))\n    (eU : U.obj (𝟙_ C) ⟶ 𝟙_ C')\n    (L : D) (L' : D') (c : V.obj L ≅ L')\n    (τ : R.obj L ⟶ 𝟙_ C) (τ' : R'.obj L' ⟶ 𝟙_ C')\n    (ht : U.map τ ≫ eU = ex.app L ≫ R'.map c.hom ≫ τ')\n    (K : C)\n    (hp : U.map ((p.app L).app K) ≫ ex.app (F.obj K ⊗ L) ≫\n        R'.map ((dV.app (F.obj K)).app L) =\n      (dU.app K).app (R.obj L) ≫ U.obj K ◁ ex.app L ≫\n        (p'.app (V.obj L)).app (U.obj K) ≫\n          R'.map (σ.hom.app K ▷ V.obj L))\n    (hu : (dU.app K).app (𝟙_ C) ≫ U.obj K ◁ eU ≫ (ρ_ (U.obj K)).hom =\n      U.map (ρ_ K).hom)\n    [IsIso ((p.app L).app K)] [IsIso ((p'.app L').app (U.obj K))] :\n    U.map (inv ((p.app L).app K) ≫ K ◁ τ ≫ (ρ_ K).hom) =\n      ex.app (F.obj K ⊗ L) ≫\n        R'.map ((dV.app (F.obj K)).app L ≫\n          (σ.inv.app K ⊗ₘ c.hom)) ≫\n        inv ((p'.app L').app (U.obj K)) ≫ U.obj K ◁ τ' ≫ (ρ_ (U.obj K)).hom\n\ntheorem tensor_evaluation_baseChange_constant\n    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']\n    [MonoidalCategory C] [MonoidalCategory D]\n    [MonoidalCategory C'] [MonoidalCategory D']\n    (F : C ⥤ D) (R : D ⥤ C) (F' : C' ⥤ D') (R' : D' ⥤ C')\n    (U : C ⥤ C') (V : D ⥤ D') (σ : U ⋙ F' ≅ F ⋙ V)\n    (ex : R ⋙ U ⟶ V ⋙ R')\n    (p : R ⋙ (curriedTensor C).flip ⟶\n      (Functor.postcompose₂.obj R).obj\n        ((((Functor.whiskeringLeft₂ D).obj (𝟭 D)).obj F).obj (curriedTensor D).flip))\n    (p' : R' ⋙ (curriedTensor C').flip ⟶\n      (Functor.postcompose₂.obj R').obj\n        ((((Functor.whiskeringLeft₂ D').obj (𝟭 D')).obj F').obj (curriedTensor D').flip))\n    (dU : (Functor.postcompose₂.obj U).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ C').obj U).obj U).obj (curriedTensor C'))\n    (dV : (Functor.postcompose₂.obj V).obj (curriedTensor D) ⟶\n      (((Functor.whiskeringLeft₂ D').obj V).obj V).obj (curriedTensor D'))\n    (O : C) (O' : C') (eU : U.obj O ⟶ O')\n    (r : ∀ K : C, K ⊗ O ≅ K) (r' : ∀ K : C', K ⊗ O' ≅ K)\n    (L : D) (L' : D') (c : V.obj L ≅ L')\n    (τ : R.obj L ⟶ O) (τ' : R'.obj L' ⟶ O')\n    (ht : U.map τ ≫ eU = ex.app L ≫ R'.map c.hom ≫ τ')\n    (K : C)\n    (hp : U.map ((p.app L).app K) ≫ ex.app (F.obj K ⊗ L) ≫\n        R'.map ((dV.app (F.obj K)).app L) =\n      (dU.app K).app (R.obj L) ≫ U.obj K ◁ ex.app L ≫\n        (p'.app (V.obj L)).app (U.obj K) ≫\n          R'.map (σ.hom.app K ▷ V.obj L))\n    (hu : (dU.app K).app O ≫ U.obj K ◁ eU ≫ (r' (U.obj K)).hom =\n      U.map (r K).hom)\n    [IsIso ((p.app L).app K)] [IsIso ((p'.app L').app (U.obj K))] :\n    U.map (inv ((p.app L).app K) ≫ K ◁ τ ≫ (r K).hom) =\n      ex.app (F.obj K ⊗ L) ≫\n        R'.map ((dV.app (F.obj K)).app L ≫\n          (σ.inv.app K ⊗ₘ c.hom)) ≫\n        inv ((p'.app L').app (U.obj K)) ≫ U.obj K ◁ τ' ≫ (r' (U.obj K)).hom\n\ntheorem section_projection_unit\n    {C D : Type*} [Category C] [Category D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    {F : C ⥤ D} {R : D ⥤ C} {G : D ⥤ C} {S : C ⥤ D}\n    (adj : F ⊣ R) (adj' : G ⊣ S)\n    (dF : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))\n    (dG : (Functor.postcompose₂.obj G).obj (curriedTensor D) ⟶\n      (((Functor.whiskeringLeft₂ C).obj G).obj G).obj (curriedTensor C))\n    (l : F ⋙ G ≅ 𝟭 C) (M : C)\n    (hl : G.map ((dF.app M).app (𝟙_ C)) ≫\n      (dG.app (F.obj M)).app (F.obj (𝟙_ C)) ≫\n        (l.hom.app M ⊗ₘ l.hom.app (𝟙_ C)) = l.hom.app (M ⊗ 𝟙_ C)) :\n    let t := conjugateIsoEquiv (adj.comp adj') Adjunction.id l.symm\n    let pF := adj.rightAdjointProjectionMap\n      (T_C := (curriedTensor D).flip) (T_D := (curriedTensor C).flip)\n      ((flipFunctor _ _ _).map dF)\n    let pG := adj'.rightAdjointProjectionMap\n      (T_C := (curriedTensor C).flip) (T_D := (curriedTensor D).flip)\n      ((flipFunctor _ _ _).map dG)\n    (ρ_ M).inv ≫ M ◁ t.inv.app (𝟙_ C) ≫ (pF.app (S.obj (𝟙_ C))).app M ≫\n      R.map ((pG.app (𝟙_ C)).app (F.obj M) ≫\n        S.map (l.hom.app M ▷ (𝟙_ C) ≫ (ρ_ M).hom)) ≫ t.hom.app M = 𝟙 M\n\ntheorem section_projection_unit_iso\n    {C D : Type*} [Category C] [Category D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    {F : C ⥤ D} {R : D ⥤ C} {G : D ⥤ C} {S : C ⥤ D}\n    (adj : F ⊣ R) (adj' : G ⊣ S)\n    (dF : (Functor.postcompose₂.obj F).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))\n    (dG : (Functor.postcompose₂.obj G).obj (curriedTensor D) ⟶\n      (((Functor.whiskeringLeft₂ C).obj G).obj G).obj (curriedTensor C))\n    (l : F ⋙ G ≅ 𝟭 C) (M U : C) (e : U ≅ 𝟙_ C)\n    (hl : G.map ((dF.app M).app U) ≫\n      (dG.app (F.obj M)).app (F.obj U) ≫\n        (l.hom.app M ⊗ₘ l.hom.app U) = l.hom.app (M ⊗ U)) :\n    let t := conjugateIsoEquiv (adj.comp adj') Adjunction.id l.symm\n    let pF := adj.rightAdjointProjectionMap\n      (T_C := (curriedTensor D).flip) (T_D := (curriedTensor C).flip)\n      ((flipFunctor _ _ _).map dF)\n    let pG := adj'.rightAdjointProjectionMap\n      (T_C := (curriedTensor C).flip) (T_D := (curriedTensor D).flip)\n      ((flipFunctor _ _ _).map dG)\n    (ρ_ M).inv ≫ M ◁ e.inv ≫ M ◁ t.inv.app U ≫ (pF.app (S.obj U)).app M ≫\n      R.map ((pG.app U).app (F.obj M) ≫\n        S.map (l.hom.app M ▷ U ≫ M ◁ e.hom ≫ (ρ_ M).hom)) ≫\n      t.hom.app M = 𝟙 M\n\ntheorem section_projection_inverse\n    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]\n    {S : C ⥤ D} (R : D ⥤ C) (t : S ⋙ R ≅ 𝟭 C) (M : C) (V : D)\n    (p : M ⊗ R.obj (S.obj (𝟙_ C)) ⟶ R.obj V) (q : V ⟶ S.obj M)\n    [IsIso p] [IsIso q]\n    (h : (ρ_ M).inv ≫ M ◁ t.inv.app (𝟙_ C) ≫ p ≫ R.map q ≫\n      t.hom.app M = 𝟙 M) :\n    t.inv.app M ≫ R.map (inv q) ≫ inv p ≫\n      M ◁ t.hom.app (𝟙_ C) ≫ (ρ_ M).hom = 𝟙 M\n\ntheorem section_projection_inverse_iso\n    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]\n    {S : C ⥤ D} (R : D ⥤ C) (t : S ⋙ R ≅ 𝟭 C) (M U : C)\n    (e : U ≅ 𝟙_ C) (V : D)\n    (p : M ⊗ R.obj (S.obj U) ⟶ R.obj V) (q : V ⟶ S.obj M)\n    [IsIso p] [IsIso q]\n    (h : (ρ_ M).inv ≫ M ◁ e.inv ≫ M ◁ t.inv.app U ≫ p ≫ R.map q ≫\n      t.hom.app M = 𝟙 M) :\n    t.inv.app M ≫ R.map (inv q) ≫ inv p ≫\n      M ◁ t.hom.app U ≫ M ◁ e.hom ≫ (ρ_ M).hom = 𝟙 M\n\ntheorem section_integral_tensor_iso\n    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]\n    [MonoidalCategory D] {F : C ⥤ D} {R : D ⥤ C} {S : C ⥤ D}\n    (t : S ⋙ R ≅ 𝟭 C) (M U : C) (e : U ≅ 𝟙_ C) (V : D)\n    (p : M ⊗ R.obj (S.obj U) ⟶ R.obj (F.obj M ⊗ S.obj U))\n    (pV : M ⊗ R.obj V ⟶ R.obj (F.obj M ⊗ V))\n    (q : F.obj M ⊗ S.obj U ⟶ S.obj M)\n    [IsIso p] [IsIso pV] [IsIso q]\n    (δ : S.obj U ⟶ V) (τ : R.obj V ⟶ U)\n    (hp : p ≫ R.map (F.obj M ◁ δ) = (M ◁ R.map δ) ≫ pV)\n    (hδ : t.inv.app U ≫ R.map δ ≫ τ = 𝟙 U)\n    (h : t.inv.app M ≫ R.map (inv q) ≫ inv p ≫\n      M ◁ t.hom.app U ≫ M ◁ e.hom ≫ (ρ_ M).hom = 𝟙 M) :\n    t.inv.app M ≫ R.map (inv q) ≫ R.map (F.obj M ◁ δ) ≫\n      inv pV ≫ M ◁ τ ≫ M ◁ e.hom ≫ (ρ_ M).hom = 𝟙 M\n\ntheorem section_integral_tensor\n    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]\n    [MonoidalCategory D] {F : C ⥤ D} {R : D ⥤ C} {S : C ⥤ D}\n    (t : S ⋙ R ≅ 𝟭 C) (M : C) (V : D)\n    (p : M ⊗ R.obj (S.obj (𝟙_ C)) ⟶ R.obj (F.obj M ⊗ S.obj (𝟙_ C)))\n    (pV : M ⊗ R.obj V ⟶ R.obj (F.obj M ⊗ V))\n    (q : F.obj M ⊗ S.obj (𝟙_ C) ⟶ S.obj M)\n    [IsIso p] [IsIso pV] [IsIso q]\n    (δ : S.obj (𝟙_ C) ⟶ V) (τ : R.obj V ⟶ 𝟙_ C)\n    (hp : p ≫ R.map (F.obj M ◁ δ) = (M ◁ R.map δ) ≫ pV)\n    (hδ : t.inv.app (𝟙_ C) ≫ R.map δ ≫ τ = 𝟙 (𝟙_ C))\n    (h : t.inv.app M ≫ R.map (inv q) ≫ inv p ≫\n      M ◁ t.hom.app (𝟙_ C) ≫ (ρ_ M).hom = 𝟙 M) :\n    t.inv.app M ≫ R.map (inv q) ≫ R.map (F.obj M ◁ δ) ≫\n      inv pV ≫ M ◁ τ ≫ (ρ_ M).hom = 𝟙 M\n\ntheorem pasted_units_section\n    {C D : Type*} [Category C] [Category D]\n    {F : C ⥤ D} {R : D ⥤ C} {G : D ⥤ C} {S : C ⥤ D}\n    (a : F ⊣ R) (b : G ⊣ S) (l : F ⋙ G ≅ 𝟭 C)\n    {U : C} {V : D} (c : F.obj U ⟶ V) (c' : G.obj V ⟶ U)\n    (hc : G.map c ≫ c' = l.hom.app U) :\n    (a.unit.app U ≫ R.map c) ≫ R.map (b.unit.app V ≫ S.map c') =\n      (conjugateIsoEquiv Adjunction.id (a.comp b) l).hom.app U\n\ntheorem conjugate_ofNatIsoLeft\n    {C D : Type*} [Category C] [Category D] {L L' : C ⥤ D} {R : D ⥤ C}\n    (adj : L ⊣ R) (e : L ≅ L') :\n    conjugateEquiv adj (adj.ofNatIsoLeft e) e.inv = 𝟙 R\n\ntheorem conjugate_ofNatIsoLeft_reverse\n    {C D : Type*} [Category C] [Category D] {L L' : C ⥤ D} {R : D ⥤ C}\n    (adj : L ⊣ R) (e : L ≅ L') :\n    conjugateEquiv (adj.ofNatIsoLeft e) adj e.hom = 𝟙 R\n\ntheorem section_comparison_naturality\n    {C E D : Type*} [Category C] [Category E] [Category D]\n    (S : C ⥤ E) (P Q : E ⥤ C) (R : C ⥤ D)\n    (a : 𝟭 C ⟶ S ⋙ P) (a' : 𝟭 C ⟶ S ⋙ Q) (c : P ⋙ R ⟶ Q ⋙ R)\n    (hc : ∀ M, R.map (a.app M) ≫ c.app (S.obj M) = R.map (a'.app M))\n    (M : C) {V : E} (d : S.obj M ⟶ V) :\n    R.map (a.app M ≫ P.map d) ≫ c.app V =\n      R.map (a'.app M ≫ Q.map d)\n\ntheorem inverse_section_projection\n    {C : Type*} [Category C] {U V W : C}\n    (q : U ⟶ W) (q' : V ⟶ W) [IsIso q] [IsIso q']\n    (c : U ⟶ V) (h : c ≫ q' = q) : inv q ≫ c = inv q'\n\ntheorem conjugate_assoc_left\n    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]\n    {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R)\n    {L' : D ⥤ E} {R' : E ⥤ D} (b : L' ⊣ R')\n    {L'' : E ⥤ F} {R'' : F ⥤ E} (c : L'' ⊣ R'')\n    {K : C ⥤ F} {S : F ⥤ C} (d : K ⊣ S)\n    (x : K ⟶ L ⋙ L' ⋙ L'') :\n    conjugateEquiv (a.comp (b.comp c)) d x =\n      conjugateEquiv ((a.comp b).comp c) d x\n\ntheorem mate_composite_unit\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {F : C ⥤ D} {R : D ⥤ C} {G : D ⥤ E} {S : E ⥤ D}\n    {H : C ⥤ E} {T : E ⥤ C}\n    (a : F ⊣ R) (b : G ⊣ S) (q : H ⊣ T) (l : H ⟶ F ⋙ G) (L : D) :\n    R.map (b.unit.app L) ≫ (conjugateEquiv (a.comp b) q l).app (G.obj L) =\n      (mateEquiv a q (TwoSquare.mk (𝟭 C) F H G l)).natTrans.app L\n\ntheorem mate_bottom_naturality\n    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]\n    {Q : C ⥤ D} {R : D ⥤ C} {H : E ⥤ F} {T : F ⥤ E}\n    (a : Q ⊣ R) (b : H ⊣ T) {U : C ⥤ E} {V V' : D ⥤ F}\n    (c : U ⋙ H ⟶ Q ⋙ V) (d : V ⟶ V') (M : D) :\n    (mateEquiv a b (TwoSquare.mk U Q H V c)).natTrans.app M ≫ T.map (d.app M) =\n      (mateEquiv a b\n        (TwoSquare.mk U Q H V' (c ≫ Functor.whiskerLeft Q d))).natTrans.app M\n\ntheorem mate_chart_pasting\n    {C D E F G : Type*} [Category C] [Category D] [Category E] [Category F] [Category G]\n    {Q : C ⥤ D} {R : D ⥤ C} {P : E ⥤ F} {S : F ⥤ E}\n    {J : F ⥤ G} {K : G ⥤ F} {H : E ⥤ G} {T : G ⥤ E}\n    (a : Q ⊣ R) (b : P ⊣ S) (e : J ⊣ K) (h : H ⊣ T)\n    {U : C ⥤ E} {V : D ⥤ F}\n    (c : U ⋙ P ⟶ Q ⋙ V) (l : H ⟶ P ⋙ J) (M : D) :\n    (mateEquiv a b (TwoSquare.mk U Q P V c)).natTrans.app M ≫\n        S.map (e.unit.app (V.obj M)) ≫\n        (conjugateEquiv (b.comp e) h l).app (J.obj (V.obj M)) =\n      (mateEquiv a h (TwoSquare.mk U Q H (V ⋙ J)\n        (Functor.whiskerLeft U l ≫ Functor.whiskerRight c J))).natTrans.app M",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-asd-adjunction-projection-map-mate"
+ ],
+ "proof": [
+  {
+   "text": "Expand a projection as the mate of the tensor comparison. Naturality moves each unit and counit past the adjacent map; the adjunction triangles cancel the resulting pairs. Apply the section inverse-image isomorphism and its tensor compatibility to identify the composite projection with identity. Cancel the explicitly assumed projection isomorphisms to tensor the scalar section integral. For chart and bottom naturality, apply the adjunction Hom bijection, substitute the composite counit, and use naturality. All identities retain the specified maps.",
+   "uses": [
+    "lem-asd-adjunction-projection-map-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-adjunction-projection-map-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SectionProjectionUnit",
+  "file": "lean/Sheaf/CategoryTheory/SectionProjectionUnit.lean",
+  "declaration": "CategoryTheory.Adjunction.mate_chart_pasting",
+  "declarations": [
+   "CategoryTheory.Adjunction.tensor_compatibility_of_unit_law",
+   "CategoryTheory.Adjunction.tensor_compatibility_of_composite_section",
+   "CategoryTheory.Adjunction.unit_compatibility_of_tensor",
+   "CategoryTheory.Adjunction.rightAdjointProjectionMap_flip",
+   "CategoryTheory.Adjunction.unit_law_of_inverse",
+   "CategoryTheory.Adjunction.tensor_evaluation_baseChange",
+   "CategoryTheory.Adjunction.tensor_evaluation_baseChange_constant",
+   "CategoryTheory.Adjunction.section_projection_unit",
+   "CategoryTheory.Adjunction.section_projection_unit_iso",
+   "CategoryTheory.Adjunction.section_projection_inverse",
+   "CategoryTheory.Adjunction.section_projection_inverse_iso",
+   "CategoryTheory.Adjunction.section_integral_tensor_iso",
+   "CategoryTheory.Adjunction.section_integral_tensor",
+   "CategoryTheory.Adjunction.pasted_units_section",
+   "CategoryTheory.Adjunction.conjugate_ofNatIsoLeft",
+   "CategoryTheory.Adjunction.conjugate_ofNatIsoLeft_reverse",
+   "CategoryTheory.Adjunction.section_comparison_naturality",
+   "CategoryTheory.Adjunction.inverse_section_projection",
+   "CategoryTheory.Adjunction.conjugate_assoc_left",
+   "CategoryTheory.Adjunction.mate_composite_unit",
+   "CategoryTheory.Adjunction.mate_bottom_naturality",
+   "CategoryTheory.Adjunction.mate_chart_pasting"
+  ],
+  "statement": "theorem mate_chart_pasting\n    {C D E F G : Type*} [Category C] [Category D] [Category E] [Category F] [Category G]\n    {Q : C ⥤ D} {R : D ⥤ C} {P : E ⥤ F} {S : F ⥤ E}\n    {J : F ⥤ G} {K : G ⥤ F} {H : E ⥤ G} {T : G ⥤ E}\n    (a : Q ⊣ R) (b : P ⊣ S) (e : J ⊣ K) (h : H ⊣ T)\n    {U : C ⥤ E} {V : D ⥤ F}\n    (c : U ⋙ P ⟶ Q ⋙ V) (l : H ⟶ P ⋙ J) (M : D) :\n    (mateEquiv a b (TwoSquare.mk U Q P V c)).natTrans.app M ≫\n        S.map (e.unit.app (V.obj M)) ≫\n        (conjugateEquiv (b.comp e) h l).app (J.obj (V.obj M)) =\n      (mateEquiv a h (TwoSquare.mk U Q H (V ⋙ J)\n        (Functor.whiskerLeft U l ≫ Functor.whiskerRight c J))).natTrans.app M",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

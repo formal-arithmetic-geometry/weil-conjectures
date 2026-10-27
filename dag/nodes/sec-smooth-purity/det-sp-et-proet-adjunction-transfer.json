@@ -339,7 +339,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-5bb8f0ac4 (reviewer sub-agent of L); spot-checked: Read the main-20261015 blueprint statement and both proof paragraphs, the unit sk-prop-sp-et-proet, every cited statement and the statement deps; review.md records each check. The statement is the one reviewed on 2026-10-16, not weakened: the added standing setting is exactly where the Brown f^! of sk-prop-sf-existence exists. The base-change morphism c_f uses the same chosen compactification as Rf_! and Rf^et_!. Step 3 identifies the coefficient categories (p_T^*A, the constant ring, Cont(pi0|U|,A)^#, module objects vs module sheaves) without assuming it. Step 1: I checked every map of the Hom chain (alpha_X precomposition, full faithfulness on bounded objects, the etale adjunction, c_f(M)^{-1}, alpha_Y) and its naturality. Step 2: I recomputed the counit, alpha_Y(N') o E_Y(eps_{Q_Y N'}) o c_f(G Q_Y N')^{-1}, and its reduction at N'=E_Y N. That reduction needs adjoint-equivalence data, which is the standard meaning of the statement's wording and can always be chosen; remark only, no change. Step 3: the finite-discrete condensed lemma's ring-object isomorphism is the monoidal input of the scheme lemma. The clopen-fibre cover and the empty cover give the comparison with def-weil-pbc-proetale-modules, and the internal-module equivalence is exact termwise, so it descends to derived categories. Step 4 uses only clauses 1-2 of sk-prop-sf-rf-shriek-preservation; the localizing closure is full, so the Brown counit is kept. Step 5 applies the Mathlib leaf det-sp-unique-right-adjoint with the correct direction of gamma. No cycle (read-only walk of the snapshot DAG); proof_deps equals the union of uses. Accepted tool_uses: thm-weil-pbc-site-comparison (the content of the cited unit sk-prop-sf-comparison), sk-prop-sf-rf-shriek-preservation (the blueprint's restriction theorem), and the two lem-weil-pbc-finite-discrete-* ring identifications. No new nodes; no duplicate found (pur9-def-transported-adjoint defines a different functor). Edge cases f=id, empty X or Y, A=0 and A=Z/l^2 hold. No SGA source. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -361,7 +372,9 @@
    "AlgebraicGeometry.ProEtale.AdjunctionTransfer.toLocalizing",
    "AlgebraicGeometry.ProEtale.AdjunctionTransfer.localizingLowerShriek",
    "AlgebraicGeometry.ProEtale.AdjunctionTransfer.brownRestriction",
-   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProEtaleAdjunctionTransfer"
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProEtaleAdjunctionTransfer",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.etaleProEtaleAdjunctionTransferOfComparison",
+   "AlgebraicGeometry.ProEtale.AdjunctionTransfer.transportUniqueCounitIso"
   ],
   "file": "lean/Sheaf/Paper/EtaleProEtaleAdjunctionTransfer.lean",
   "statement": "theorem etaleProEtaleAdjunctionTransfer (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (c : Compactification f) (hX : ∀ K, etaleProperty A X K → proEtaleProperty A X ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K)) (hY : ∀ K, etaleProperty A Y K → proEtaleProperty A Y ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj K)) (eX : (etaleProperty A X).FullSubcategory ≌ (proEtaleProperty A X).FullSubcategory) (eY : (etaleProperty A Y).FullSubcategory ≌ (proEtaleProperty A Y).FullSubcategory) (heX : eX.functor = comparison A X hX) (heY : eY.functor = comparison A Y hY) (hEt : ∀ K, etaleProperty A X K → etaleProperty A Y ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (hPro : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (cf : etaleLowerShriek A c hEt ⋙ eY.functor ≅ eX.functor ⋙ proEtaleLowerShriek A c hPro) (_hcf : ∀ K : (etaleProperty A X).FullSubcategory, (cf.inv.app K).hom = (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map (eqToHom (congrArg (fun F ↦ (F.obj K).obj) heX)) ≫ (compactSupportSiteComparison A c).hom.app ((etaleToPlus A X).obj K) ≫ eqToHom (congrArg (fun F ↦ (F.obj ((etaleLowerShriek A c hEt).obj K)).obj) heY).symm) (G : (etaleProperty A Y).FullSubcategory ⥤ (etaleProperty A X).FullSubcategory) (adjEt : etaleLowerShriek A c hEt ⊣ G) : ∃ adjPro : proEtaleLowerShriek A c hPro ⊣ (eY.inverse ⋙ G ⋙ eX.functor), (∀ N : (etaleProperty A Y).FullSubcategory, (adjPro.counit.app (eY.functor.obj N)) = (proEtaleLowerShriek A c hPro).map (eX.functor.map (G.map (eY.unitIso.inv.app N))) ≫ cf.inv.app (G.obj N) ≫ eY.functor.map (adjEt.counit.app N)) ∧ (∀ (hLoc : ∀ K, CategoryTheory.localizingClosure (proEtaleProperty A X) K → CategoryTheory.localizingClosure (proEtaleProperty A Y) ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) (J : (CategoryTheory.localizingClosure (proEtaleProperty A Y)).FullSubcategory ⥤ (CategoryTheory.localizingClosure (proEtaleProperty A X)).FullSubcategory) (adjBrown : localizingLowerShriek A c hLoc ⊣ J), ∃ hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory, proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj), ∃! γ : (eY.inverse ⋙ G ⋙ eX.functor) ≅ brownRestriction A J hJ, ∀ N : (proEtaleProperty A Y).FullSubcategory, (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((γ.hom.app N).hom) ≫ (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom = (adjPro.counit.app N).hom)",
@@ -372,13 +385,13 @@
   "note": "Uses the ordinary constant-ring module-sheaf presentation, canonically equivalent to both the continuous-function coefficient module category and the finite-discrete internal module-object category. The exact finite-value etale constructibility predicate is used, not the different generic finitely-generated-stalk predicate. The comparison forward functors are constrained to the recorded termwise inverse images, and cf is constrained to the canonical proper-mate/open-extension compact-support comparison for the same chosen compactification. The Brown clause quantifies over its adjunction on the recorded localizing closure in this ordinary coefficient presentation, concludes finite-Tor constructible preservation, and gives the unique ambient counit-compatible natural isomorphism. No statement correction or missing mathematical notion."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V5",
-  "result": "pass",
-  "landing": "20261019T034326-L-421448",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-ecc8e",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261025T013919-L-4036767",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 3 changed defs and alias helpers vs live clone bf7884c and node lem-sp-chart-finite-ring-adjunction; reader-gate compile of 3 delivered modules + 5 direct importers (exit 0); axioms; unit sk-lem-sp-reduction realized empty"
  }
 }

@@ -1,0 +1,118 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07X4, definition-formal-objects; Tag 07X6, equation-approximation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-formal-effectivity",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The formal-object category and normalized canonical restriction in Tag 08W9.",
+   "via": [
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "def-sfb-formal-diagram-restriction",
+ "title": "Formal diagram categories and normalized restriction models",
+ "statement": "Let $p:\\mathcal F\\to\\mathcal B$ be a functor between categories, $D:I\\to\\mathcal B$ a diagram, $T\\in\\mathcal B$, and $\\iota:D\\to\\operatorname{const}_I T$ a natural transformation. Categories fibred in groupoids use the convention of [def-sfb-stable-pointed-moduli-groupoids], with universes [def-weil-size-convention]. Define $\\operatorname{FormalDiagram}(p,D)$ to be the fibre over $D$ of postcomposition $\\operatorname{Fun}(I,\\mathcal F)\\to\\operatorname{Fun}(I,\\mathcal B)$. Objects are lifts $s:I\\to\\mathcal F$ with $ps=D$, and arrows are natural transformations over the identity of $D$. A normalized restriction model consists of a functor $R:\\mathcal F_T\\to\\operatorname{FormalDiagram}(p,D)$, arrows $r_{x,i}:R(x)_i\\to x$ strongly cartesian over $\\iota_i$, with $R(x)(h)r_{x,j}=r_{x,i}$ for every $h:i\\to j$, and $R(a)_i r_{y,i}=r_{x,i}a$ for every vertical arrow $a:x\\to y$. Here $\\mathcal F_T$ is the fibre category. For a category fibred in groupoids and the positive adic diagram, these are the compatible formal systems and the cartesian characterization of their restriction functor; all automorphisms are retained.",
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of compatible formal objects in a category fibred over schemes over powers of an ideal canonical restriction functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": X.Opens ⥤ Over X\", \"doc\": \"The functor from the category of open subsets of a scheme $X$ (viewed as a preorder category) to the over category $\\\\mathcal{T}/X$, which maps each open subset $U$ to its canonical inclusion morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctor_obj_hom\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (X.restrictFunctor.obj U).hom = U.ι\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the morphism associated to $U$ by the restriction functor from the preorder category of open subsets of $X$ to the over category $\\\\mathcal{T}/X$ is the c\"}\n  {\"name\": \"HasFibers.canonical\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"(p : 𝒳 ⥤ 𝒮) : HasFibers p\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, this constructs the fibered category structure on $ p $ using the canonical fiber categories $ \\\\mathrm{Fib}(S) $ for each object $ S \\\\in \\\\mathcal{S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (restrictFunctorId.hom.app M).app U = M.presheaf.map (eqToHom (show U = 𝟙 X ''ᵁ U by simp)).op\", \"doc\": \"The restriction functor induced by the identity open immersion on a scheme $ X $ is naturally isomorphic to the identity functor on the category of sheaves of modules over $ X $. This means that restr\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictRestrictBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (r : Γ(Y, U)) :\\n  Arrow.mk (f ∣_ U ∣_ U.toScheme.basicOpen (Y.presheaf.map (eqToHom U.isOpenEmbedding_obj_top).op r)) ≅\\n    Arrow.mk (f ∣_ Y.basicOpen r)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, $U$ an open subset of $Y$, and $r \\\\in \\\\Gamma(Y, U)$ a section of the structure sheaf. This theorem establishes that there is a canonical isomorphism in the a\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (c : CategoryTheory.Limits.Cone D) →\\n    \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructor provi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": X.restrictFunctor.op ⋙ (Over.forget X).op ⋙ Scheme.Γ ≅ X.presheaf\", \"doc\": \"The composition of the opposite restriction functor from open subsets of a scheme $X$ to the over category $\\\\mathcal{T}/X$, followed by the opposite forgetful functor to topological spaces and the glo\"}\n  {\"name\": \"AlgebraicGeometry.Γ_map_morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Hom.appTop (f ∣_ U) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.app f ((AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj ⊤))\\n      (X.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $U$ be an open subset of $Y$. Let $f|_U: X|_{f^{-1}(U)} \\\\to Y|_U$ be the restriction of $f$. The theorem states that the ring homomorphism on global s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Project and DAG searches in the worker report supply the existing notions reused and the remaining missing interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal objects as fibre of functor categories over an adic tower of schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The abbreviation denotes the class of schemes equipped with a canonical morphism to a given scheme $X$, forming the over category of schemes over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Over\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The type of morphisms from a scheme $S$ to a scheme $X$ in the category of schemes, where morphisms are morphisms of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor Y.IdealSheafDataᵒᵖ (CategoryTheory.Over Y)\", \"doc\": \"For a scheme $Y$, this functor maps each ideal sheaf data $\\\\mathcal{I}$ on $Y$ to its associated closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ equipped with the canonical morphism to $Y$, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (x : ↥X) → ↥(AlgebraicGeometry.Scheme.Hom.fiber f ((CategoryTheory.ConcreteCategory.hom f.base) x))\", \"doc\": \"The function maps a point $ x $ in scheme $ X $ to the fiber of the morphism $ f $ over $ f(x) $, which is the set of all points in $ X $ mapping to $ f(x) $ under $ f $, equipped with the subspace to\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → ↥Y → AlgebraicGeometry.Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.asOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"(X S : AlgebraicGeometry.Scheme) → [X.Over S] → CategoryTheory.Over S\", \"doc\": \"Given a scheme $X$ and a scheme $S$ with a morphism $X \\\\to S$, this constructs the corresponding object $(X, f)$ in the over category $\\\\mathbf{Sch}/S$, where $f$ is the structure morphism from $X$ to \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Project and DAG searches in the worker report supply the existing notions reused and the remaining missing interface."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalRestriction|AdicFormal|adicSpecTower",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Project and DAG searches in the worker report supply the existing notions reused and the remaining missing interface."
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FormalDiagramRestriction",
+  "declaration": "CategoryTheory.FormalDiagram",
+  "declarations": [
+   "CategoryTheory.FormalDiagram",
+   "CategoryTheory.FormalRestrictionModel"
+  ],
+  "statement": "abbrev FormalDiagram (F : BasedCategory.{vC, uC} B) (D : I ⥤ B)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/FormalDiagramRestriction.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b66c08cff",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b66c08cff",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Checked against quot.tex 08KB/08W9. Hypotheses match exactly: f finitely presented (lfp+qc+qs) and separated, S locally Noetherian, A complete Noetherian local with IsAdicComplete m, a: Spec A→S, Spec(A/m)→S lft+qc. Conclusion: IsEquivalence of restriction from the CoherentModuli fibre over Spec A to FormalDiagram over the tower Spec A/m^(n+1) (actual quotient-factor transitions; NatTrans over identity, so specified transition isos and automorphisms kept). Restriction is pinned by FormalRestrictionModel: strongly cartesian arrows over the actual inclusions, transition-compatible and natural, with ∃ model + unique compatible iso, so .choose is canonical. Item statement unchanged; lean.statement verbatim; added stmt_deps used. New def-sfb-formal-diagram-restriction is real data (Fiber of whiskeringRight + structure); the existing FormalSystem defs are Spec Z / Spec R-specialized theorem locals, so no H4. def-sfb-space-coherent-moduli-groupoid is existing:true on the CoherentModuli decls, matches 08KB, no live clash. Only sorry proofs; docstrings with source/blueprint; no pro-etale. No compile (no file changed). Advisories: M1 duplicate decl listing with the coherent-stack-general record + rule-7 import of the downstream module -> move the defs into a module owned by the def node; M2 consolidate with the Artin FormalSystem defs; M3 MapIsProper owner reached only via the proper-quot convention."
+ }
+}

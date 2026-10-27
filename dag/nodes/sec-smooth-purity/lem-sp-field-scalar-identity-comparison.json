@@ -1,0 +1,121 @@
+{
+ "id": "lem-sp-field-scalar-identity-comparison",
+ "kind": "statement",
+ "title": "Identity comparison for given normalized scalar data",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, T a scheme, D_A an abelian strict coefficient tower presentation, and R_A a normalized integral reduction tower. Given any ScalarData for the identity inclusion E -> E [def-sp-field-scalar-normalized-data], there exists Identity for that datum: ordinary completed and strict-system unitors act by scalar multiplication, their derived versions satisfy the cochain counit equations, and the derived reduction square commutes. Coefficient systems and their reduction maps use [def-sp-field-scalar-system-data] and [def-sp-field-scalar-reduction-data].",
+ "stmt_deps": [
+  "def-sp-field-scalar-system-data",
+  "def-sp-field-scalar-reduction-data",
+  "def-sp-field-scalar-normalized-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraph (1), finite free scalar extension and reduction formula"
+ },
+ "proof": [
+  {
+   "text": "Residue-class normalization forces the quotient maps to be identities. The completed map is the identity by its normalized projections. Multiplication and insertion of one are inverse ordinary unitors for integral tensor. Transport the same levelwise maps through ExactExtension.level; its transition equation makes them whole-system maps. Tensor universality proves naturality and both inverse equations.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-ideal-quotient-tower-scalar-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary multiplication unitors, using invertibility of the identity scalar counit and the exact-system counit on every complex. Their defining counit equations are integral_rep and system_rep. On a common flat K-flat representative, ReductionComparison.representative reduces the reduction square to multiplication of the same coefficients. Strict tensor descent and universal derived uniqueness give the square for every derived object and roof.",
+   "uses": [
+    "lem-sp-strict-coefficient-tensor-descent",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-ideal-quotient-tower-scalar-associator",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-strict-coefficient-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraph (1), finite free scalar extension and reduction formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension of sheaves of modules, tensor associativity and identity, normalized strict coefficient systems",
+   "results": "{\"t\": \"2026-10-25T13:56:08Z\", \"tool\": \"leansearch\", \"query\": \"Exact scalar extension of sheaves of modules, tensor associativity and identity, normalized strict coefficient systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.extendScalars_assoc'\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"PresheafOfModules.Sheafify.mul_smul\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.ExtendScalars.smul_tmul\", \"ModuleCat.extendScalars_assoc_assoc\"], \"digest\": \"dfe85a1e15157b5a\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-25T13:56:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"digest\": \"ef3654c89ecf172c\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalarsId|leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-25T13:59:21Z\", \"tool\": \"grep\", \"query\": \"extendScalarsComp|extendScalarsId|leftAdjointUniq\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"697286867c4b0e20\"}",
+   "date": "2026-10-25",
+   "verdict": "Scalar functors and coherence tools only; no normalized whole-system record or field-specific theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldScalarNormalizedSystems",
+  "group": "J7",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "paragraph (1), finite free scalar extension and reduction formula",
+   "via": [
+    "lem-sp-field-scalar-normalized-systems"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldScalarIdentityComparison",
+  "file": "lean/Sheaf/Paper/FieldScalarIdentityComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_identity_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldScalar.field_scalar_identity_comparison"
+  ],
+  "statement": "theorem field_scalar_identity_comparison {l : ℕ} [Fact l.Prime] {E : Type u} [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}} {DA : SpCoefficientTowersAbelian.{u, u} l E T} {RA : SpReductionTower l E T DA} (D : ScalarData l E E (AlgHom.id (Padic l) E) T DA DA RA RA) : Nonempty (Identity D)",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7371",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T163741-L-815329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7371",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T163741-L-815329",
+  "kind": "interface",
+  "note": "independent cc review: Moved records vs published FieldScalarNormalizedSystems (identical apart from blueprint tag); item theorem signature unchanged; #print axioms on the scratch build = propext, sorryAx (only from the 3 new sorry statements), Classical.choice, Quot.sound; identity/successive statements checked for truth with arbitrary ScalarData against the pinning fields of FieldScalarSystemData/ReductionData"
+ }
+}

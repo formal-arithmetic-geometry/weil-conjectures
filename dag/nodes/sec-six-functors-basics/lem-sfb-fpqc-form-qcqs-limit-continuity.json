@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-fpqc-form-qcqs-limit-continuity",
+ "kind": "statement",
+ "title": "Sections of an fpqc form of a locally finitely presented scheme commute with qcqs affine-transition limits",
+ "statement": "Let $S$ and $A$ be affine schemes [def-pc-scheme], and let $p:A\\to S$ be flat, surjective and quasi-compact, so $\\{p\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering]. Let $F:(\\mathrm{Sch}/S)^{\\mathrm{op}}\\to\\mathrm{Sets}$ be a contravariant functor satisfying the covering equalizer condition for every fpqc covering. Suppose its restriction to $A$-schemes is represented by an $A$-scheme $P$ locally of finite presentation [def-pc-representable-functor, def-sbc-locally-finite-presentation]. Let $I$ be a small nonempty directed set and $(Z_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated $S$-schemes with affine transition morphisms [def-weil-pbc-scheme-conventions, pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with its specified projections [lem-weil-pbc-limit-affine-transition]. Then restriction induces a bijection of sets\n$$\\varinjlim_i F(Z_i)\\xrightarrow{\\sim}F(Z).$$\nHere the colimit is the filtered colimit of sets [def-weil-pbc-category-colimit]. Equivalently every section over $Z$ comes from a stage, and any two stage sections with the same restriction to $Z$ agree at a sufficiently late common stage. No quasi-compactness, quasi-separatedness or separatedness hypothesis on $P$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, implication (1) to (3), combined with the fpqc covering equalizer condition; agent extraction of the continuity assertion in Raynaud, Theorem 4.1, reduction 3, printed p.5-19."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Put $U_i=Z_i\\times_S A$ and $V_i=U_i\\times_{Z_i}U_i$, with projections $d_{1,i},d_{2,i}:V_i\\to U_i$. The affine-scheme lemma makes $S$ and $A$ quasi-compact and quasi-separated. By the morphism-permanence lemma (1), $p:A\\to S$ is quasi-compact and quasi-separated; by (3), so is $U_i\\to Z_i$, and by (2) its source $U_i$ is qcqs. Likewise $V_i\\to U_i$ is the base change of $U_i\\to Z_i$, so another application of (3) and (2) makes $V_i$ qcqs. This uses the absolute qcqs hypotheses on $Z_i$, not a separation property of $P$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, hypothesis checks for applying (1) implies (3) after the covering base change; Schemes Tags 03GI, 01KV, 01KU, 01K5."
+   }
+  },
+  {
+   "text": "Set $U=Z\\times_S A$ and $V=U\\times_ZU$. The transition $U_j\\to U_i$ is the base change of $Z_j\\to Z_i$, hence affine. Identifying $V_i$ with $Z_i\\times_S(A\\times_S A)$ by the fibre-product universal property shows that $V_j\\to V_i$ is also a base change of $Z_j\\to Z_i$, hence affine. Both systems have the required limits $U$ and $V$: a compatible family of maps $H\\to U_i$ is precisely a compatible family $H\\to Z_i$ and a single map $H\\to A$ with equal composites to $S$. The latter map is independent of $i$ since any two indices have a common upper bound. The limit property of $Z$ identifies this with a map $H\\to Z$ together with that map to $A$, hence a unique map to $U$. Replacing $A$ by $A\\times_S A$ gives the same verification for $V$. These identifications preserve all projections. Give every $U_i,U$ its projection to $A$ and every $V_i,V$ the $A$-structure through $d_1$; all transition and limit maps are $A$-morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, preparation of the two base-changed systems; Morphisms Tag 01SD and the fibre-product and limit universal properties."
+   }
+  },
+  {
+   "text": "The covering-base-change lemma makes $U_i\\to Z_i$ and $U\\to Z$ fpqc coverings, because $p$ is an fpqc covering by hypothesis. The assumed covering equalizer condition therefore identifies $F(Z_i)$ with $\\operatorname{Eq}(F(U_i)\\rightrightarrows F(V_i))$ and $F(Z)$ with $\\operatorname{Eq}(F(U)\\rightrightarrows F(V))$, the two arrows being pullback along $d_1,d_2$. In particular restriction to $U_i$ or $U$ is injective and every matching section descends uniquely. These equalizers commute with every transition and limit restriction: each square of schemes with $d_r$, for $r=1,2$, commutes by its two projections, and applying the contravariant functor $F$ gives the corresponding equality of functions.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC combined with the assumed fpqc covering equalizer condition; Topologies Tag 022D, lemma-fpqc (3)."
+   }
+  },
+  {
+   "text": "Fix the given natural bijections $\\theta_H:F(H)\\simeq\\operatorname{Mor}_A(H,P)$ on $A$-schemes. For any $A$-morphism $e:H'\\to H$, naturality says $\\theta_{H'}(F(e)(x))=\\theta_H(x)\\circ e$. This applies to both systems of Step 2. Also $P\\to A$ is locally of finite type: a finite polynomial presentation on the affine neighbourhoods in the locally-finite-presentation definition supplies finitely many algebra generators. This is the local finite type condition on those neighbourhoods. Thus the eventual-equality lemma for locally finite type morphisms applies with target $P$ and base $A$.",
+   "uses": [
+    "def-pc-representable-functor",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, (1) implies (3), interpretation as Hom sets; Morphisms Tags 01TP and 01T1 for the immediate finite-presentation to finite-type implication."
+   }
+  },
+  {
+   "text": "For $s\\in F(Z)$ let $x\\in F(U)$ be its restriction. Apply the finite-presentation map-factorization lemma to $\\theta_U(x):U\\to P$ over $A$, using Steps 1 and 2. It gives $i$ and $a_i:U_i\\to P$ over $A$ with pullback $\\theta_U(x)$. Put $x_i=\\theta_{U_i}^{-1}(a_i)$. Let $b_i=F(d_{1,i})(x_i)$ and $c_i=F(d_{2,i})(x_i)$ in $F(V_i)$. Their restrictions to $V$ agree: by Step 3 they are the two restrictions of the matching section $x$. Via $\\theta_{V_i}$ and $\\theta_V$ this is equality of the restrictions of two $A$-maps $V_i\\to P$. Apply the eventual-equality lemma to the $V_i$ system to obtain $j\\ge i$ where these maps agree. By naturality and Step 3, $x_j=x_i|_{U_j}$ now has equal restrictions along $d_{1,j},d_{2,j}$; it descends uniquely to $s_j\\in F(Z_j)$. Its pullback to $Z$ equals $s$ because both restrict to $x$ on $U$, where the equalizer map is injective. This proves existence of a stage section. We have used $\\theta$ only on $A$-morphisms of the fixed systems, not on $d_2$: $d_2$ need not respect the chosen first $A$-structure on $V_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-map-limit-factorization",
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, (1) implies (3), existence (b) on U and eventual equality (a) on V, assembled with the fpqc equalizers."
+   }
+  },
+  {
+   "text": "Suppose $s_i\\in F(Z_i)$ and $t_j\\in F(Z_j)$ have the same pullback to $Z$. Choose $k\\ge i,j$ and restrict both to $Z_k$. Their restrictions to $U_k$, interpreted by $\\theta_{U_k}$, are two $A$-maps $U_k\\to P$ with equal pullbacks to $U$. The eventual-equality lemma for the $U_i$ system gives $l\\ge k$ where the two maps, and hence the sections on $U_l$, agree. Injectivity of $F(Z_l)\\to F(U_l)$ from Step 3 implies $s_i|_{Z_l}=t_j|_{Z_l}$. This is precisely the asserted sufficiently late common-stage equality.",
+   "uses": [
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, (1) implies (3), uniqueness (a) on U, followed by separatedness in the fpqc equalizer condition."
+   }
+  },
+  {
+   "text": "The restrictions $F(Z_i)\\to F(Z)$ form a cocone and hence induce the canonical map from the colimit. For $s\\in F(Z)$ choose a representative $s_i$ from Step 5 and assign its coprojection to the colimit. Step 6 makes this independent of the choice, since two choices have equal images at a common later stage and the colimit cocone identifies them. The composite back to $F(Z)$ is the identity by Step 5. Conversely this assignment composed with restriction sends each stage section to its own coprojection; by the colimit universal property the other composite is the identity on the colimit. Thus the canonical map is a bijection. The argument used no finiteness or separation of $P$ beyond its assumed local finite presentation.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, conclusion from existence and eventual equality; the universal property of the set colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, (1) implies (3), applied twice and assembled through the fpqc covering equalizer; Topologies Tag 022D (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fpqc.*[Cc]olimit|[Cc]olimit.*fpqc|fpqc.*[Ll]imit|[Ll]imit.*fpqc",
+   "results": "{\"t\": \"2026-10-24T15:51:50Z\", \"tool\": \"grep\", \"query\": \"fpqc.*[Cc]olimit|[Cc]olimit.*fpqc|fpqc.*[Ll]imit|[Ll]imit.*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf of sets represented after a faithfully flat affine base change by a locally finitely presented scheme commutes with inverse limits of qcqs schemes with affine transitions",
+   "results": "{\"t\": \"2026-10-24T15:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf of sets represented after a faithfully flat affine base change by a locally finitely presented scheme commutes with inverse limits of qcqs schemes with affine transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"a6dffc7c3c71581d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fpqc sheaf represented by a locally finitely presented scheme after faithfully flat affine base change preserves cofiltered limits of quasi compact quasi separated schemes",
+   "results": "{\"t\": \"2026-10-24T15:52:41Z\", \"tool\": \"leansearch\", \"query\": \"An fpqc sheaf represented by a locally finitely presented scheme after faithfully flat affine base change preserves cofiltered limits of quasi compact quasi separated schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesLimits.preservesCofilteredLimits\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\"], \"digest\": \"76ffaabaa1c1afed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc form of a scheme locally of finite presentation is a limit preserving functor by its covering equalizer and filtered colimits commuting with finite limits of sets",
+   "results": "{\"t\": \"2026-10-24T15:52:42Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc form of a scheme locally of finite presentation is a limit preserving functor by its covering equalizer and filtered colimits commuting with finite limits of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet\"], \"digest\": \"d2dec64436a4d1e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*[Ff]iltered|[Ff]iltered.*preserv",
+   "results": "{\"t\": \"2026-10-24T15:53:17Z\", \"tool\": \"grep\", \"query\": \"preserv.*[Ff]iltered|[Ff]iltered.*preserv\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\"], \"digest\": \"7f268f095501bff1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not state continuity for fpqc forms."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T15:53:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"], \"digest\": \"bc57049e39f6afc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not state continuity for fpqc forms."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(limit|colimit)|(limit|colimit).*fpqc",
+   "results": "{\"t\": \"2026-10-24T16:19:38Z\", \"tool\": \"grep\", \"query\": \"fpqc.*(limit|colimit)|(limit|colimit).*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fpqc form of a locally finitely presented scheme is a limit preserving functor on quasi compact quasi separated source schemes",
+   "results": "{\"t\": \"2026-10-24T16:19:38Z\", \"tool\": \"leansearch\", \"query\": \"An fpqc form of a locally finitely presented scheme is a limit preserving functor on quasi compact quasi separated source schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"CategoryTheory.Limits.LimitPresentation.map\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\"], \"digest\": \"17a0e74bb7be71ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fpqc\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-24T16:19:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"fpqc\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf represented after faithfully flat affine base change by a locally finitely presented scheme preserves inverse limits of qcqs schemes with affine transition maps",
+   "results": "{\"t\": \"2026-10-24T16:19:39Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf represented after faithfully flat affine base change by a locally finitely presented scheme preserves inverse limits of qcqs schemes with affine transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\"], \"digest\": \"811bcf4d7ce4fad6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of limit preservation for a sheaf along an fpqc cover using the Cech equalizer and finite limits commuting with filtered colimits",
+   "results": "{\"t\": \"2026-10-24T16:20:20Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of limit preservation for a sheaf along an fpqc cover using the Cech equalizer and finite limits commuting with filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.preservesLimitsOfShape_presheafToSheaf\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"CategoryTheory.Presheaf.isSheafForIsSheafFor'\", \"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\"], \"digest\": \"c8c46333fec861bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_π_app_comp_eq_of_locallyOfFinitePresentation|exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-24T16:20:20Z\", \"tool\": \"grep\", \"query\": \"exists_π_app_comp_eq_of_locallyOfFinitePresentation|exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"bb52bd5f7ec3c8ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme Hom continuity, global sections, categorical finite presentability, or sheafification; none states continuity of a functor represented only after an fpqc cover. Hom factorization/equality inputs are reused existing DAG leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fpqc-chart-limit-spreading",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Reduction 3: descending the chosen finite-presentation open and its map into the fpqc sheaf. Supporting input to reduction 3: the assertion that the fpqc sheaf commutes with inductive limits of rings, extended to qcqs source systems for the descended chart.",
+   "via": [
+    "lem-sfb-fpqc-chart-limit-spreading",
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-fpqc-form-qcqs-limit-continuity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step proof using the covering and double-overlap qcqs inverse systems, existing Hom factorization and eventual-equality Mathlib leaves, and the assumed fpqc equalizers. Wrote out the limit universal properties and both descent directions, including the second projection A-linearity issue. No new nodes or Lean files. Repeated actual item searches with two semantic phrasings; no exact project or Mathlib attachment.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), along the inherited Raynaud Theorem 4.1 reduction-3 chart-spreading support branch. Supplies continuity needed below lem-sfb-fpqc-chart-limit-spreading. The ancestor command returns None for this inherited chain, so preserve its null from.node and existing detailed from.place/via.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic fpqc-cover pullback stability (Stacks 022D); no replacement of a unit step, used to apply the stated equalizer hypothesis."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Universal property and existence of scheme fibre products used to specify the two systems and their limits."
+   },
+   {
+    "node": "def-pc-representable-functor",
+    "why": "Natural identification of F on A-schemes with the relative Hom functor, already used in the item statement."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Definition only: finite polynomial presentations give local finite type for the eventual-equality input."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Definition and universal property of the set colimit, already in the item statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
+  "def-pc-representable-functor",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-e4eac7913",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-e4eac7913 (reviewer sub-agent of L); spot-checked: I read all seven steps of the delivered split in full; it creates no new nodes and leaves the statement and stmt_deps unchanged. Sources checked: Stacks limits.tex l.1285 (Tag 01ZC, (1)⇔(3) for directed systems of qcqs schemes with affine transitions) and topologies 022D. Mathlib checked: AffineTransitionLimit.lean l.1232 exists_π_app_comp_eq_of_locallyOfFinitePresentation (the factored map g satisfies g≫f=t_i, so it is an A-map) and l.635 exists_hom_comp_eq_comp_of_locallyOfFiniteType (needs only quasi-compact stages, cofiltered index, affine transitions). Step 1: S and A are qcqs, so p is qcqs, and the base changes U_i and V_i are qcqs. Step 2: U_j→U_i and V_j→V_i are base changes of Z_j→Z_i, hence affine; the limit argument uses directedness to make the A-component constant. Step 3: by 022D(3) the pulled-back maps are fpqc coverings and give the equalizers; {p} is an fpqc covering since p^{-1}(V) is qc and p is surjective. Step 4: lfp⇒lft is the Mathlib instance in FinitePresentation.lean l.108; accepted as elementary, but the text skips the Zariski-locality (advisory). Step 5: theta naturality is used only on A-maps, with V_i an A-scheme through d_1; d_2 is correctly not treated as an A-map; all S-structures on V_i agree. Steps 6 and 7: eventual equality plus injectivity give agreement at a late stage, and the colimit inverse is checked both ways. Edge cases checked: empty Z_i, constant system, non-separated Z_i or P. Every cited statement is a Mathlib leaf, so there is no route issue. The declared tool_uses (fpqc covering base change and four definitions) are accepted. No duplicate found by rg -L over dag/nodes. Advisory: the item statement predates this delivery and writes out 'covering equalizer condition' with no definition node."
+ }
+}

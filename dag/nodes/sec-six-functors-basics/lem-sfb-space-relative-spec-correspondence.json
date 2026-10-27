@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-space-relative-spec-correspondence",
+ "kind": "statement",
+ "title": "Affine algebraic spaces and quasi-coherent algebras via relative Spec",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Write $\\operatorname{QCAlg}(X)$ for sheaves of commutative $\\mathcal O_X$-algebras on $X_{\\mathrm{et}}$ whose underlying modules are quasi-coherent [def-trf-space-quasi-coherent-module]; arrows are $\\mathcal O_X$-algebra maps. For an affine scheme $u:U=\\operatorname{Spec}R\\to X$ which is etale, call such an algebra $\\mathcal A$ integral, finite, or finitely presented when $\\mathcal A(U)$ is respectively integral over $R$ (each element satisfies a monic polynomial), finite as an $R$-module, or isomorphic to $R[T_1,\\ldots,T_n]/(f_1,\\ldots,f_m)$ for finite $n,m$. These conditions are required for every such $U$. A morphism of spaces is affine, finite, or integral when it is representable and every scheme base change has the corresponding scheme property [pqf-def-affine-morphism, def-weil-finite-integral-morphism]. Finite presentation means quasi-compact, quasi-separated (quasi-compact relative diagonal), and locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. There is an anti-equivalence between spaces affine over $X$ and $\\operatorname{QCAlg}(X)$, sending $q:Z\\to X$ to $q_*\\mathcal O_Z$, where $(q_*\\mathcal O_Z)(U)=\\Gamma(Z\\times_XU,\\mathcal O)$. Its inverse assigns an algebra $\\mathcal A$ an affine space $\\operatorname{Spec}_X(\\mathcal A)$ with the natural identification of its direct-image algebra with $\\mathcal A$. On an affine etale chart $U$ this space is $\\operatorname{Spec}(\\mathcal A(U))$ over $U$, and an algebra map $\\mathcal A\\to\\mathcal B$ gives there the morphism $\\operatorname{Spec}(\\mathcal B(U))\\to\\operatorname{Spec}(\\mathcal A(U))$ induced by its component on $U$. The correspondence is compatible with arbitrary base change of the base space, using tensor pullback of the algebra sheaves [def-trf-space-etale-module-functors]. Under it an affine morphism is integral, finite, or of finite presentation if and only if its algebra has the corresponding property just defined.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 081V (lemma-affine-equivalence-algebras), Tag 081W (definition-relative-spec); the property tests are Tag 03WG (lemma-affine-local), Tag 0410 (lemma-finite-presentation-local), and Tag 03ZQ (lemma-integral-local), together with the scheme affine ring definitions. Finite presentation here is algebra finite presentation, not module finite presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-quasi-coherent-algebra",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:U\\to X$ with $U$ a disjoint union of affine schemes, using [lem-a1-space-affine-etale-cover]. Its relation $R=U\\times_XU$ is a scheme and presents $X$ by [lem-a1-etale-atlas-presentation]. Write $s,t:R\\to U$. By [lem-sfb-space-qcoh-groupoid-equivalence], restriction of $\\mathcal A$ gives a quasi-coherent scheme module $A_U$ with its canonical isomorphism $t^*A_U\\simeq s^*A_U$ satisfying the cocycle and identity conditions. These are algebra isomorphisms: restriction of the given unit and multiplication preserves their equations, and etale tensor pullback is restriction. Put $A_R=s^*A_U=t^*A_U$, using this isomorphism. No coherence or Noetherian assertion of the groupoid-equivalence node is used.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V (lemma-affine-equivalence-algebras), choice of presentation and pullback algebra"
+   }
+  },
+  {
+   "text": "Form the scheme relative spectra $V=\\operatorname{Spec}_U A_U$ and $W=\\operatorname{Spec}_R A_R$ by [lem-weil-pbc-affine-morphism-relative-spec]. Scheme base change [lem-weil-pbc-relative-spec-base-change] gives maps $s_V,t_V:W\\to V$ cartesian over $s,t$, hence etale. They form an equivalence relation. Indeed, over a pair of test points of $V$ an arrow determines the unique arrow of $R=U\\times_XU$, and its source and that arrow determine it uniquely by the cartesian $s$ square, proving monicity. The identity and inverse come from the identity and symmetry of the algebra descent isomorphism. On composable arrows, the two successive algebra isomorphisms equal the direct one by the cocycle; applying the scheme anti-equivalence gives composition and its associativity. Thus reflexivity, symmetry and transitivity hold on every test scheme, not merely on geometric points.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-a1-etale-atlas-presentation",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V, construction of V,W and the omitted equivalence-relation verification"
+   }
+  },
+  {
+   "text": "By [lem-trf-etale-relation-quotient], $Z=V/W$ is a space with etale surjection $V\\to Z$ and kernel pair $W$. The map $V\\to U\\to X$ equalizes $s_V,t_V$, hence induces $q:Z\\to X$. The natural map $V\\to Z\\times_XU$ is an isomorphism, as follows directly from the two kernel pairs. Locally a section $(z,u)$ lifts $z$ to $v\\in V$; the equal images of its base $u_0$ and $u$ in $X$ give the unique arrow $r:u_0\\to u$ of $R$. The cartesian square for $s_V$ lifts $(v,r)$ uniquely to $w$, whose target lies over $u$ and represents $z$. This proves local surjectivity. Two such lifts over the same $u$ differ, locally, by an arrow of $W$; its image in $R$ is the identity at $u$, so its lift is the identity and the lifts coincide. The sheaf axiom gives bijectivity on all tests and hence the isomorphism. As $V\\to U$ is affine, [lem-sfb-space-affine-locality] makes $q$ affine and representable.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V, quotient and recovery of the atlas; groupoids.tex lemma-criterion-fibre-product, with its local lifting argument written out"
+   }
+  },
+  {
+   "text": "For any affine $q:Z\\to X$, etale restriction of $q_*\\mathcal O_Z$ is the scheme direct image on $Z\\times_XU\\to U$ by [lem-trf-space-etale-module-pushforward-restriction]. It is quasi-coherent by the scheme relative-Spec theorem; quasi-coherence is local on the small etale site by its definition. For the $Z$ just constructed this restriction is identified with $A_U$ by the scheme counit. The identifications on $R$ are exactly the chosen algebra descent isomorphism, since both are induced by $s_V,t_V$. The full faithfulness in [lem-sfb-space-qcoh-groupoid-equivalence] therefore glues the module isomorphism to $\\mathcal A\\simeq q_*\\mathcal O_Z$. It is an algebra isomorphism: its unit and product equations hold on $U$ and thus on the etale site. For any affine etale chart $T\\to X$, affineness makes $Z\\times_XT$ a scheme and etale restriction identifies its direct-image algebra with $A_T$. The scheme anti-equivalence therefore identifies it with $\\operatorname{Spec}_T(A_T)=\\operatorname{Spec}(\\mathcal A(T))$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V, direct-image identification and quasi-coherent descent; Tag 081W"
+   }
+  },
+  {
+   "text": "For an algebra map $\\mathcal A\\to\\mathcal B$, the scheme anti-equivalence gives $V_B\\to V_A$ and $W_B\\to W_A$ compatible with both projections. The quotient universal property gives a unique map $Z_B\\to Z_A$ over $X$. Conversely, an $X$-map pulls back over $U$ to the corresponding unique scheme map, hence gives the algebra map on $U$. Compatibility on $R$ is precisely the descent condition for this module map; [lem-sfb-space-qcoh-groupoid-equivalence] descends it uniquely, with multiplicativity and the unit checked on $U$. Consequently these two operations on morphisms are inverse. Identities and composition agree because they agree over the atlas, so this is an anti-equivalence. For an arbitrary affine $Z\\to X$, the local scheme counits descend by this same argument to identify the reconstructed space with $Z$. The affine-chart formula for algebra maps is exactly the formula in clause (3) of [lem-weil-pbc-affine-morphism-relative-spec].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-trf-etale-relation-quotient",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V, anti-equivalence on morphisms, with the omitted descent verification made explicit"
+   }
+  },
+  {
+   "text": "Let $g:X\\prime\\to X$ be arbitrary. Its tensor pullback $g^*\\mathcal A$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent], with its tensor-pullback algebra structure. Choose an etale scheme atlas $U\\prime\\to X\\prime$. The scheme $T=U\\prime\\times_XU$ covers $U\\prime$ etale-surjectively by [lem-trf-space-fibre-products-etale-covers] and maps to $U$. On $T$, tensor pullback is the pullback of $A_U$ along this scheme map: the localized tensor comparison of [lem-trf-space-etale-module-pushforward-restriction] identifies the two paths. Scheme relative-Spec base change therefore identifies the two candidate spaces over $T$. On overlaps the maps agree because the scheme comparison is induced by the same pullback algebra map; the full faithfulness already proved then gives the same map there. Maps of sheaves glue uniquely over this etale covering, and the local inverse maps glue as well. This yields $\\operatorname{Spec}_{X\\prime}(g^*\\mathcal A)\\simeq\\operatorname{Spec}_X(\\mathcal A)\\times_XX\\prime$, naturally in algebra maps and in successive base changes, since each equality can be checked on these scheme covers.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081V, last sentence of proof; Tag 081W, base change, reduced to the scheme comparison"
+   }
+  },
+  {
+   "text": "For $P$ equal to integral or finite, the affine chart $Z\\times_XT=\\operatorname{Spec}(\\mathcal A(T))$ over affine etale $T=\\operatorname{Spec}R$ has $P$ exactly when $\\mathcal A(T)$ is respectively integral over $R$ or finite as an $R$-module, by [def-weil-finite-integral-morphism]. If $q$ has $P$, all its scheme base changes have $P$ by the scheme-test definition, giving the required conditions on every chart. Conversely those conditions on the affine components of the atlas in step 1 make $Z\\times_XU\\to U$ integral or finite: the components form an affine open covering of $U$, so apply [lem-sfb-integral-affine-cover-criterion] for integrality and [lem-weil-pbc-finite-local-on-target] for finiteness. Their affine inverse images are the already identified scheme spectra. Apply [lem-sfb-space-integral-finite-etale-locality] to deduce the scheme-test property of $q$. The same argument works for an empty atlas, so it imposes no nonemptiness restriction.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-integral-finite-etale-locality",
+    "lem-sfb-integral-affine-cover-criterion",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZQ (lemma-integral-local), equivalence (1) and (3); scheme affine ring definitions"
+   }
+  },
+  {
+   "text": "Every scheme base change of an affine $q$ is affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3). Quasi-compactness and quasi-compactness of its relative diagonal are scheme-test conditions; therefore $q$ is quasi-compact and quasi-separated. Thus finite presentation for $q$ is equivalent to local finite presentation. By [lem-sfb-space-local-properties-chart-test] this is equivalent to local finite presentation for the affine morphism over the atlas $U$, and can equally be tested using every affine etale chart $T\\to X$. If $q$ is locally of finite presentation, [lem-weil-pbc-lfp-affine-opens-finite-presentation] applied to the full affine source $\\operatorname{Spec}(\\mathcal A(T))$ and target $T$ gives finite presentation of $R\\to\\mathcal A(T)$. Conversely a finite polynomial presentation of $\\mathcal A(T)$ gives local finite presentation of this chart morphism directly by [def-sbc-locally-finite-presentation]; take the full source and target as the affine neighbourhoods at each point. Applying the chart criterion to the atlas proves the converse for $q$. This is algebra finite presentation throughout, with no assertion of module finite presentation.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0410 (lemma-finite-presentation-local); morphisms.tex Tags 01TP (definition-finite-presentation), 01TQ (lemma-locally-finite-presentation-characterize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-etale-atlas-presentation",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-relation-quotient",
+  "lem-sfb-space-affine-locality",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-integral-finite-etale-locality",
+  "lem-sfb-integral-affine-cover-criterion",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 081V proof, with the omitted relation, morphism and base-change verifications expanded; Tags 081W, 03ZQ and 0410 for the additional clauses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeSpec.*[Ee]quiv|[Ee]quiv.*relativeSpec",
+   "results": "{\"t\": \"2026-10-23T10:09:57Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|relativeSpec.*[Ee]quiv|[Ee]quiv.*relativeSpec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeSpec\"",
+   "results": "{\"t\": \"2026-10-23T10:09:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeSpec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine algebraic spaces over a base space are contravariantly equivalent to quasi coherent sheaves of algebras",
+   "results": "{\"t\": \"2026-10-23T10:09:58Z\", \"tool\": \"leansearch\", \"query\": \"Affine algebraic spaces over a base space are contravariantly equivalent to quasi coherent sheaves of algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.instIsEquivalenceOppositeCommRingCatOpRightOpΓ\", \"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.AffineScheme.instIsEquivalenceOppositeCommRingCatRightOpΓ\", \"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.AffineScheme.Spec\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineScheme.Γ\"], \"digest\": \"daf1de241375eb2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Spec gives a base change compatible anti equivalence between affine algebraic spaces over X and quasi coherent O_X algebras",
+   "results": "{\"t\": \"2026-10-23T10:09:58Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Spec gives a base change compatible anti equivalence between affine algebraic spaces over X and quasi coherent O_X algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Spec.fullyFaithful\", \"AlgebraicGeometry.Spec.homEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\"], \"digest\": \"b184d95ce8bc0bfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Spec gives an anti equivalence between affine algebraic spaces over X and quasi coherent algebra sheaves on X",
+   "results": "{\"t\": \"2026-10-23T12:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Spec gives an anti equivalence between affine algebraic spaces over X and quasi coherent algebra sheaves on X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.AffineScheme.instIsEquivalenceOppositeCommRingCatRightOpΓ\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Spec.fullyFaithful\"], \"digest\": \"c7c0686c31821e4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Spec equivalences and scheme affine base-change properties do not state this algebraic-space anti-equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeSpec\"",
+   "results": "{\"t\": \"2026-10-23T12:12:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeSpec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Spec equivalences and scheme affine base-change properties do not state this algebraic-space anti-equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeSpec.*[Ee]quiv|[Ee]quiv.*relativeSpec",
+   "results": "{\"t\": \"2026-10-23T12:12:30Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|relativeSpec.*[Ee]quiv|[Ee]quiv.*relativeSpec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Spec equivalences and scheme affine base-change properties do not state this algebraic-space anti-equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent algebras on an algebraic space correspond to affine morphisms and commute with base change",
+   "results": "{\"t\": \"2026-10-23T12:12:30Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent algebras on an algebraic space correspond to affine morphisms and commute with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"SheafOfModules.isQuasicoherent\"], \"digest\": \"f4a2bf32d374e5b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Spec equivalences and scheme affine base-change properties do not state this algebraic-space anti-equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-space-finite-presentation-limit",
+  "date": "2026-10-23",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Affine algebraic spaces and quasi-coherent algebras via relative Spec.",
+   "via": [
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-spec-correspondence",
+  "worker": "stage1",
+  "summary": "Constructed relative Spec by the scheme anti-equivalence on an etale presentation, checked the relation and recovered the quotient chart explicitly, descended the counit and morphisms, and verified arbitrary base change and all three property tests. Added only the missing general integral/finite etale-locality input. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Affine algebraic spaces and quasi-coherent algebras via relative Spec. These steps supply the relative-Spec prerequisite to the Tag 09YA construction used in det-thm-sf-ctf-stability-direct-images proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-on-target",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic scheme relative-Spec or algebraic-space atlas/descent foundation used in the Tag 081V construction; the unit has no replacement for this foundational input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-etale-atlas-presentation",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-relation-quotient",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-90e3bb00d",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-90e3bb00d (reviewer sub-agent of L); spot-checked: Read the item statement (same as the base) and all 8 steps, the new node, every cited statement, and Stacks 081V (whole proof, lines 3760-3832), 081W and 03ZQ (lines 9151-9195). Statement matches 081V/081W: commutative QCoh algebras on X_et, scheme-test affine/finite/integral, base change by tensor pullback along an arbitrary g. Finite presentation is an algebra property, as the 09YA citer uses it. Small cases fine: zero algebra gives the empty space, O_X gives X, empty X, k[T] fp not finite, an infinite integral extension, and finite but not fp over a non-coherent ring. Steps: s2 checks the source's omitted equivalence-relation verification directly (mono via R mono and W=R x_{s,U} V; e-pullback gives reflexivity; cocycle gives transitivity). s3 writes out V = Z x_X U (local lift, then injectivity via e(u)), then 03WG gives affineness. s4-s5 descend the counit, morphisms and essential surjectivity through the groupoid equivalence and the quotient universal property. s6 writes out the omitted base-change check via T = U' x_X U, the tensor-pullback comparison clause and scheme 01LX. s7 uses 02K8/01WI on the affine components plus the new node. s8: affine gives qc and separated; lfp by the chart test plus 01TQ; a non-surjective affine etale T needs the one-line U⊔T remark, no repair. New node = 03ZQ (1)<=>(3) per fixed chart, no extra hypotheses, strictly smaller than the item, and no duplicate: checked 03ZQ/081V/09YA/descending-property hits and the four-property, flat-proper-fp, proper-fpqc, qc-separated, closed-immersion, finite-space-topology, stack-affine-algebra and pbc fpqc nodes. Batch-5: every flagged trf/a1/sfb citation is a generic algebraic-space foundation (def 025Y, 02X2, 02WW, 03LX, 03FX, 0262, 03WG, 0410), none part of the trace formula or Poincare duality; accepted. tool_uses accepted as generic. No SGA, no repair note, no route change. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceRelativeSpecCorrespondence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_relative_spec_correspondence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.AffineOver",
+   "AlgebraicGeometry.AlgebraicSpace.StructureAlgebraModel",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeSpecData",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeSpecData.relativeSpec",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeSpecData.counitAlgebra",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeSpecData.chartMap",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeSpecData.HasChartFormula",
+   "AlgebraicGeometry.AlgebraicSpace.IsTensorAlgebraPullback",
+   "AlgebraicGeometry.AlgebraicSpace.IsRelativeSpecBaseChangeArrow",
+   "AlgebraicGeometry.AlgebraicSpace.space_relative_spec_correspondence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceRelativeSpecCorrespondence.lean",
+  "statement": "theorem space_relative_spec_correspondence (S : Scheme.{u}) : ∃ C : ∀ X : AlgebraicSpace S, RelativeSpecData X, (∀ X : AlgebraicSpace S, (C X).HasChartFormula) ∧ ∀ (X' X : AlgebraicSpace S) (g : X' ⟶ X) (A : X.QCAlg), ∃ (B : X'.QCAlg) (e : B.obj.toModule ≅ (moduleTensorPullback g).obj A.obj.toModule), IsTensorAlgebraPullback g A B e ∧ ∃! h : ((C X').relativeSpec B).obj.left ⟶ ((C X).relativeSpec A).obj.left, IsRelativeSpecBaseChangeArrow C g A B e h",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86b9383f8",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Item statement identical to the base; only lean and stmt_deps changed (adds the new node and the landed def-sfb-space-morphism-properties, which the tool allows). Every clause checked against the Lean: QCAlg = Under commStructureSheaf with quasi-coherent underlying module; affine-chart RingHom tests IsIntegral/Finite/FinitePresentation; IsRepresentableWith IsAffineHom/IsFinite/IsIntegralHom; f.p. = MapIsQuasiCompact + qc relative diagonal + MapIsLocallyOfFinitePresentation; anti-equivalence pinned to moduleDirectImage by chart projections and map_projection; relativeSpec/counitAlgebra; HasChartFormula with Spec.map(phi_V) in the right direction; base change along any g with the tensor algebra fixed on moduleTensorSection pure tensors and a unique cartesian comparison normalized by b(x)s -> b*h^*s. No arbitrary maps. Edge cases (empty X, zero algebra, identity g, non-surjective charts) included; no extra hypotheses. New node def-sfb-space-quasi-coherent-algebra follows the field rules; its sheaf-condition theorem is named and stated in the node. H4 search of side-live/live Lean and DAG found no duplicate. Dependency node files unchanged; docstrings and lines ok. Advisory: MapIsQuasiCompact is owned by def-sfb-proper-curve-moduli and reached through def-sfb-space-morphism-properties. No compile (no file changed)."
+ }
+}

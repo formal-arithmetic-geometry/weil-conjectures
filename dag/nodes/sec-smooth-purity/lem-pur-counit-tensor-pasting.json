@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-counit-tensor-pasting",
+ "kind": "statement",
+ "title": "Pasting two coefficient counit squares",
+ "statement": "For adjunctions L:D→C ⊣ R and J:E→D ⊣ U [lem-weil-pbc-adjunction-of-natural-bijection], coefficient endofunctors B,B1,B2, and specified left action and right strength maps whose two counit squares commute, the pasted left action and right strength commute with the actual composite counit [def-amb-affine-trace-construction]. The conclusion is equality of the expanded composites in the Lean declaration; no invertibility of the action or the counits is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "expand the composite counit. Naturality of the inner counit commutes the\nmapped outer right comparison across it. Apply the inner counit square and then\nthe outer counit square. Functoriality combines the two counit factors.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-amb-affine-trace-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-amb-affine-trace-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An iterated tensor pullback and associator source comparison intertwines the canonical projection formula for compact support with the pasted coefficient action along a tower",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*counit|counit.*projectionMap",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryAffineCounitTensorNormalization",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: composition of the explicit projective-line adjunctions and the same iterated counit for direct sums",
+   "via": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CounitTensorPasting",
+  "file": "lean/Sheaf/CategoryTheory/CounitTensorPasting.lean",
+  "declaration": "CategoryTheory.counitTensor_pasting",
+  "declarations": [
+   "CategoryTheory.counitTensor_pasting"
+  ],
+  "statement": "theorem counitTensor_pasting\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {L : D ⥤ C} {R : C ⥤ D} {J : E ⥤ D} {U : D ⥤ E}\n    (a : L ⊣ R) (j : J ⊣ U)\n    (B : C ⥤ C) (B1 : D ⥤ D) (B2 : E ⥤ E)\n    (s : ∀ M, B2.obj (U.obj M) ≅ U.obj (B1.obj M)) (K : C)\n    (c : B1.obj (R.obj K) ≅ R.obj (B.obj K))\n    (p : L ⋙ B ⟶ B1 ⋙ L)\n    (e : ∀ M : E, B1.obj (J.obj M) ⟶ J.obj (B2.obj M))\n    (ho : ∀ M : D, e (U.obj M) ≫ J.map ((s M).hom) ≫\n      j.counit.app (B1.obj M) = B1.map (j.counit.app M))\n    (hp : B.map (a.counit.app K) =\n      p.app (R.obj K) ≫ L.map c.hom ≫ a.counit.app (B.obj K)) :\n    p.app (J.obj (U.obj (R.obj K))) ≫ L.map (e (U.obj (R.obj K))) ≫\n      (J ⋙ L).map ((s (R.obj K)).hom ≫ U.map c.hom) ≫\n      (AlgebraicGeometry.Etale.affineTraceComposeAdjunction j a).counit.app (B.obj K) =\n        B.map ((AlgebraicGeometry.Etale.affineTraceComposeAdjunction j a).counit.app K)",
+  "statements": [
+   "theorem counitTensor_pasting\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    {L : D ⥤ C} {R : C ⥤ D} {J : E ⥤ D} {U : D ⥤ E}\n    (a : L ⊣ R) (j : J ⊣ U)\n    (B : C ⥤ C) (B1 : D ⥤ D) (B2 : E ⥤ E)\n    (s : ∀ M, B2.obj (U.obj M) ≅ U.obj (B1.obj M)) (K : C)\n    (c : B1.obj (R.obj K) ≅ R.obj (B.obj K))\n    (p : L ⋙ B ⟶ B1 ⋙ L)\n    (e : ∀ M : E, B1.obj (J.obj M) ⟶ J.obj (B2.obj M))\n    (ho : ∀ M : D, e (U.obj M) ≫ J.map ((s M).hom) ≫\n      j.counit.app (B1.obj M) = B1.map (j.counit.app M))\n    (hp : B.map (a.counit.app K) =\n      p.app (R.obj K) ≫ L.map c.hom ≫ a.counit.app (B.obj K)) :\n    p.app (J.obj (U.obj (R.obj K))) ≫ L.map (e (U.obj (R.obj K))) ≫\n      (J ⋙ L).map ((s (R.obj K)).hom ≫ U.map c.hom) ≫\n      (AlgebraicGeometry.Etale.affineTraceComposeAdjunction j a).counit.app (B.obj K) =\n        B.map ((AlgebraicGeometry.Etale.affineTraceComposeAdjunction j a).counit.app K)"
+  ],
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; the 5 moved defs byte-identical in OrdinaryAffineCounitTensorMaps (public re-export, 0 importers); 3 sorry holes checked against OrdinaryFiniteP1Datum.counit_normalization, derivedOpenImmersionLowerShriekProjectionMap (= adjunction projectionMap) and the canonical compact-support compositor lemmas; #print axioms of item, tower, line and the 5 categorical lemmas on a scratch build"
+ }
+}

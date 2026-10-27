@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-geometric-nodal-pinching-criterion",
+ "kind": "statement",
+ "title": "Geometric nodal-fibre criterion for smooth double-branch pinching",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X\\to S$ be proper, flat and finitely presented [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation], and let $Z,T$ be finite etale $S$-schemes [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Let $i:Z\\hookrightarrow X$ be a closed immersion into the relative smooth locus [def-weil-closed-immersion, def-sbc-smooth-morphisms], and let $j:Z\\to T$ be finite etale of constant degree two [def-pc-finite-locally-free]. Let $P\\to S$ be a proper finitely presented scheme with compatible $S$-maps $a:X\\to P$, $b:T\\to P$. Suppose that for every geometric point $\\operatorname{Spec}\\Omega\\to S$, where $\\Omega$ is algebraically closed, the square with vertices $Z_\\Omega,X_\\Omega,T_\\Omega,P_\\Omega$ is a scheme pushout [def-weil-geometric-fibre, def-weil-pbc-category-colimit]. Assume that every $X_\\Omega$ is nonempty, reduced of pure dimension one [def-pc-reduced-scheme, def-weil-pure-dimension], and that every nonsmooth closed point $x\\in X_\\Omega$ satisfies $\\widehat{\\mathcal O}_{X_\\Omega,x}\\cong\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Then every $P_\\Omega$ is nonempty, reduced of pure dimension one and has the same completed-local-ring condition at its nonsmooth closed points. Each nonclosed point of either geometric curve is smooth. The schemes $Z_\\Omega,T_\\Omega$ are finite disjoint unions of $\\operatorname{Spec}\\Omega$, and over each $t\\in T_\\Omega$ there are two distinct smooth branch points $z_1,z_2\\in X_\\Omega$. The maps identify $X_\\Omega\\setminus Z_\\Omega$ with $P_\\Omega\\setminus T_\\Omega$, preserving the old singularities there, and at $b_\\Omega(t)$ one has $$\\widehat{\\mathcal O}_{P_\\Omega,b_\\Omega(t)}\\cong\\Omega[[u]]\\times_\\Omega\\Omega[[v]]\\cong\\Omega[[u,v]]/(uv).$$ Fibres and base schemes need not be connected, the two branches may belong to the same irreducible component, and $Z=T=\\varnothing$ is permitted. No flatness of $P/S$, projective embedding, trait hypothesis, or splitting of $Z,T$ over $S$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent extraction of old step 5, through lem-trf-relative-nodal-point-pinching: Tags 0E36 (lemma-complete-local-ring-pushout), 0C1J (example-glue-points). The closed-point to all-point conversion uses the dense smooth open in lem-weil-pbc-reduced-curve-normalization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-finite-locally-free",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-category-colimit",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-points",
+  "def-sfb-nodal-geometric-fibre-local-rings"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\operatorname{Spec}\\Omega\\to S$ and abbreviate its fibres by $C=X_\\Omega$, $E=Z_\\Omega$, $F=T_\\Omega$, $Q=P_\\Omega$. Properness and finite presentation pass to $C,Q$. Finiteness and etaleness pass to $E,F$ and to $j_\\Omega:E\\to F$, and the base-changed $i$ is a closed immersion. A smooth open of $X/S$ containing $Z$ pulls back to a smooth open of $C/\\Omega$ containing $E$. These are arbitrary base changes; no flatness of $P/S$ or of the geometric point is used.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper), 01TS (lemma-base-change-finite-presentation), 01WL (lemma-base-change-finite), 02GO (lemma-base-change-etale), 01VB (lemma-base-change-smooth), 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The finite $\\Omega$-schemes $E,F$ are affine. Apply the etale-algebra decomposition to their rings and then the spectrum-of-a-product node. Every finite extension of the algebraically closed field $\\Omega$ is $\\Omega$: the minimal polynomial of each element splits and, being irreducible, is linear. Thus $E,F$ are finite disjoint unions of $\\operatorname{Spec}\\Omega$. For each $t\\in F$, fibre degree is preserved under base change from $j:Z\\to T$, so the fibre of $j_\\Omega$ over $t$ has degree two. Its etale algebra is $\\Omega^r$; its vector-space dimension is $r$, hence $r=2$. Consequently $j_\\Omega$ is surjective with exactly two distinct points over every $t$. The closed immersion into $C$ keeps these points distinct, closed and smooth.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "def-pc-finite-locally-free",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field); Tag 00ED (lemma-spec-product); morphisms.tex Tags 02GL (lemma-etale-over-field), 03J5 (lemma-characterize-universally-bounded), 03J7 (lemma-base-change-universally-bounded)."
+   }
+  },
+  {
+   "text": "The proper finite-type $\\Omega$-scheme $C$ is Noetherian, so has finitely many irreducible components. Pure dimension one implies $\\dim C\\leq1$: an irreducible closed subset lies in a component, and a chain stays in that component. The reduced-curve-normalization node therefore supplies a dense open $U\\subset C$ isomorphic to an open in a smooth $\\Omega$-scheme, so $U$ is smooth. Here is the elementary topological conversion needed for nonclosed points. If a nonclosed point $x$ were not generic in a component $D$ containing it, a strict specialization $y$ of $x$ would give the chain $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq D$, contradicting $\\dim D=1$. Every component generic point lies in $U$: otherwise the closed complement would contain that component and contain its nonempty open part outside the other finitely many components, contradicting density. Thus every nonclosed point of $C$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-pure-dimension",
+    "lem-weil-pbc-reduced-curve-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (lemma-normalization-locally-algebraic), 0B8Y (lemma-regular-point-on-curve), as used in etale-cohomology.tex Tag 0A3Q (lemma-somewhat-easier); the dimension-chain conversion is written here."
+   }
+  },
+  {
+   "text": "The pair $(C,\\varnothing)$ is a semistable multipointed $\\Omega$-curve in the precise sense required by the field pinching theorem. Its structure morphism is flat by the field-flatness node and finitely presented by step 1; its only scheme-theoretic fibre has pure dimension one. The empty marking is flat, finitely presented, etale and of pure dimension zero vacuously. Every point of $C$ is smooth or an ordinary double point: step 3 treats the nonclosed points and the hypothesis treats the remaining nonsmooth closed points. For the chosen algebraic geometric fibre in the semistability definition, an algebraic closure of the already algebraically closed $\\Omega$ is isomorphic to $\\Omega$ (every algebraic element has linear minimal polynomial). Thus this pointwise verification is exactly its geometric-fibre condition, including the stated completed-local-ring definition of an ordinary double point.",
+   "uses": [
+    "lem-pc-flat-field",
+    "def-trf-multipointed-curve",
+    "def-trf-multipointed-curve-modification",
+    "def-trf-orgogozo-induction-data",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 (lemma-complete-local-ring-pushout), hypotheses checked against the multipointed-curve definitions; conversion from the chosen algebraic closure is explicit."
+   }
+  },
+  {
+   "text": "Apply the field pinching theorem with $k=\\Omega$, reference scheme $\\operatorname{Spec}\\Omega$, $X=C$, $E=E$, $F=F$, and reference maps their structure maps. Properness, semistability, finite split branch schemes, the smooth closed immersion and surjectivity with two-point fibres were verified in steps 1--4. It supplies a pushout $Y$, a finite surjection $v:C\\to Y$, a closed immersion $F\\to Y$, the cartesian square, a complement isomorphism, pure dimension one from semistability, and at each $t\\in F$ the isomorphisms $\\widehat{\\mathcal O}_{Y,t}\\cong\\Omega[[u]]\\times_\\Omega\\Omega[[v]]\\cong\\Omega[[u,v]]/(uv)$. Both $Y$ and the given $Q$ are pushouts in all schemes. The universal property gives inverse isomorphisms $Y\\simeq Q$ commuting with both maps; their composites are identities since they restrict to identities on $C$ and $F$. Hence all these assertions hold for the specified maps to $Q$.",
+   "uses": [
+    "lem-trf-relative-nodal-point-pinching",
+    "def-trf-multipointed-curve",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 (lemma-complete-local-ring-pushout), Tag 0C1J (example-glue-points); field-level theorem lem-trf-relative-nodal-point-pinching."
+   }
+  },
+  {
+   "text": "For reducedness use the Ferrand structure-sheaf formula, verifying its extra affine-neighbourhood hypothesis first. For $t\\in F$ choose an affine open $W\\subset Q$ containing $b(t)$. Since $v:C\\to Q$ is finite, $v^{-1}W$ is affine and contains the two points above $t$; the cartesian square in step 5 identifies these with $i(j_\\Omega^{-1}(t))$. The map $j_\\Omega$ is integral, being finite. Thus the Ferrand node applies to this same diagram, and uniqueness of the pushout gives its formula on $Q$. On its simultaneous affine charts the ring is $A\\times_D B\\subset A\\times B$, where $A$ is the ring of an open in the reduced $C$, and $B$ is the ring of an open in $F$, hence a finite product of fields. Both are reduced. A nilpotent pair has zero first and second coordinate, so the subring is reduced. The affine charts cover $Q$, proving reducedness in the scheme definition.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-finite-integral-morphism",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), fibre-product structure sheaf and simultaneous affine charts."
+   }
+  },
+  {
+   "text": "Surjectivity of $C\\to Q$ and nonemptiness of $C$ imply nonemptiness of $Q$. Pure dimension one was supplied in step 5 and reducedness in step 6. Now $Q$ is proper, hence separated and of finite type, over $\\Omega$ (step 1), reduced and of pure dimension one, so the argument of step 3 applies verbatim to $Q$: it is Noetherian with finitely many components, has $\\dim Q\\le1$, the reduced-curve-normalization node gives a dense smooth open, and every nonclosed point of $Q$ is a component generic point lying in it, hence smooth. Let $q\\in Q$ be a nonsmooth closed point. If $q\\in F$, its completed ring is the one calculated in step 5. Otherwise the complement isomorphism $C\\setminus E\\simeq Q\\setminus F$ over $\\Omega$ identifies local rings, smoothness and completions, so the corresponding point $c\\in C$ is nonsmooth; by step 3 it is therefore closed in $C$, and the hypothesis gives $\\widehat{\\mathcal O}_{Q,q}\\cong\\widehat{\\mathcal O}_{C,c}\\cong\\Omega[[u,v]]/(uv)$. The argument uses no connectedness or condition on which component contains each branch. If $F$ is empty, then $E$ is empty, the pushout property identifies $Q$ with $C$, and the branch assertions are vacuous. Repeating the argument for every geometric point gives every claimed fibre assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-pure-dimension",
+    "lem-weil-pbc-reduced-curve-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0E36 (lemma-complete-local-ring-pushout), 0C1J (example-glue-points); assembly of steps 1--6, including the empty-centre case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "def-pc-finite-locally-free",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-reduced-curve-normalization",
+  "lem-pc-flat-field",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
+  "def-trf-orgogozo-induction-data",
+  "lem-trf-relative-nodal-point-pinching",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-ferrand-scheme-pushout",
+  "def-weil-finite-integral-morphism",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0E36 and 0C1J via existing lem-trf-relative-nodal-point-pinching; geometric-fibre assembly and explicit reducedness from more-morphisms.tex Tag 0E25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pinching finite etale pairs in the smooth locus of a proper family of reduced nodal curves preserves reduced pure dimensional nodal geometric fibres",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"Pinching finite etale pairs in the smooth locus of a proper family of reduced nodal curves preserves reduced pure dimensional nodal geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"87d9e6ed78310556\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and etale permanence and Weierstrass point lemmas do not establish the completed-local-ring and reducedness assertions for geometric pinching fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identifying pairs of distinct smooth points in each geometric fibre of a proper flat curve creates ordinary double points with completed local ring k[[x,y]]/(xy)",
+   "results": "{\"t\": \"2026-10-22T06:14:49Z\", \"tool\": \"leansearch\", \"query\": \"Identifying pairs of distinct smooth points in each geometric fibre of a proper flat curve creates ordinary double points with completed local ring k[[x,y]]/(xy)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.IsSmooth.mk\", \"WeierstrassCurve.Affine.Point.some.inj\", \"Algebra.smoothLocus\", \"WeierstrassCurve.Affine.Point.some.injEq\", \"Algebra.basicOpen_subset_smoothLocus_iff\"], \"digest\": \"089adea831bfa0de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and etale permanence and Weierstrass point lemmas do not establish the completed-local-ring and reducedness assertions for geometric pinching fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and etale permanence and Weierstrass point lemmas do not establish the completed-local-ring and reducedness assertions for geometric pinching fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDouble|pinch",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinaryDouble|pinch\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and etale permanence and Weierstrass point lemmas do not establish the completed-local-ring and reducedness assertions for geometric pinching fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|pinching|ordinaryDouble",
+   "results": "{\"t\": \"2026-10-23T09:42:49Z\", \"tool\": \"grep\", \"query\": \"nodal|pinching|ordinaryDouble\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general categorical pushouts or Weierstrass nonsingularity facts; none states the scheme pinching and geometric-fibre assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of a reduced curve identifying two smooth rational points has nodal completed local rings",
+   "results": "{\"t\": \"2026-10-23T09:42:50Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of a reduced curve identifying two smooth rational points has nodal completed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.Pushout'\", \"CommRingCat.isPushout_of_isLocalization\", \"CategoryTheory.IsPushout.mk\", \"Algebra.IsPushout.isAlgebraic'\", \"CommRingCat.isPushout_iff_isPushout\", \"CommRingCat.isPushout_of_isPushout\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"Algebra.isPushout_of_isLocalization\"], \"digest\": \"02fdad26f761c256\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general categorical pushouts or Weierstrass nonsingularity facts; none states the scheme pinching and geometric-fibre assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pinching\"",
+   "results": "{\"t\": \"2026-10-23T09:42:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pinching\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general categorical pushouts or Weierstrass nonsingularity facts; none states the scheme pinching and geometric-fibre assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric fibres of a nodal curve remain nodal after identifying distinct smooth points in pairs",
+   "results": "{\"t\": \"2026-10-23T09:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric fibres of a nodal curve remain nodal after identifying distinct smooth points in pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"WeierstrassCurve.Affine.nonsingular_iff_variableChange\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"WeierstrassCurve.Affine.map_nonsingular\", \"WeierstrassCurve.Jacobian.Point.nonsingular\"], \"digest\": \"21f2593a48c94b24\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general categorical pushouts or Weierstrass nonsingularity facts; none states the scheme pinching and geometric-fibre assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-etale-branch-pinching",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; old proof step 5 (etale geometric branches, smooth generic points, semistable conversion, local nodes, reducedness and nonemptiness)",
+   "via": [
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-nodal-pinching-criterion",
+  "worker": "stage1",
+  "summary": "Split into seven steps with no new nodes. Reused the existing field pinching theorem after checking all semistable-curve hypotheses, finite split geometric branch schemes and constant fibre degree two. Proved smoothness at nonclosed points using the dense smooth open of the existing reduced-curve-normalization result, and reducedness of the pushout by the Ferrand subring formula. All original assertions and inherited blueprint fields are preserved.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration branch, specifically old step 5 of lem-sfb-trait-etale-branch-pinching: split geometric branches, smooth generic points, semistable conversion, nodal local rings, reducedness and nonemptiness. Current latest blueprint read; no change of route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Arbitrary base change preserves properness and smoothness on the given smooth open. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (3) preserves finite presentation under arbitrary base change. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finite base changes remain finite and have affine source over an affine base. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Etaleness survives the geometric-point base change. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "The marked closed immersion survives base change. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Decomposes the coordinate algebras of the finite etale branch schemes. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Turns the algebra decomposition into discrete spectra with their open point subschemes. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-degree-base-change",
+    "why": "Preserves degree two at each point of the geometric branch target. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes the proper geometric curve Noetherian. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Supplies finite components for the elementary dense-open argument. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-curve-normalization",
+    "why": "Supplies a dense smooth open in the separated reduced geometric curve. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "Verifies flatness of the geometric curve as a scheme over its field. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-trf-relative-nodal-point-pinching",
+    "why": "The existing field-level pinching theorem, applied only after semistability has been checked, supplies the local branch calculation and pure dimension. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   },
+   {
+    "node": "lem-sfb-ferrand-scheme-pushout",
+    "why": "The structure-sheaf formula supplies reducedness after its affine-neighbourhood hypothesis has been verified. This is a generic geometric tool for the existing pinching route, not a replacement for a unit step; no same-unit node states this ingredient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-reduced-curve-normalization",
+  "lem-pc-flat-field",
+  "lem-trf-relative-nodal-point-pinching",
+  "lem-sfb-ferrand-scheme-pushout"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-5f8f26d01",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-5f8f26d01 (reviewer sub-agent of L); spot-checked: Read the whole first split (7 steps, no new nodes; statement verbatim from base). Stacks curves.tex 0E36 (l.2916) and 0C1J (l.2985) checked; no SGA. Every cited statement checked against its use. Step 1: proper/smooth/fp/finite/étale/closed-immersion base change, all along arbitrary base changes. Step 2: étale-algebra node + Spec of a finite product of fields, and fibre degree 2 transported by fibre-degree-base-change (Z×_T T_Ω≅Z_Ω), so exactly 2 points; char 2 is fine. Step 3: reduced-curve-normalization hypotheses all hold; chain argument and density argument correct. Step 4: semistable multipointed Ω-curve with empty marking; the closure of Ω is ≅ Ω; ODP wording is the same ring-iso phrasing as def-trf-orgogozo-induction-data. Step 5: every hypothesis of lem-trf-relative-nodal-point-pinching checked; Y≅Q by pushout uniqueness. Step 6: Ferrand integral and affine-neighbourhood hypotheses verified (v finite); chart rings reduced. FIX, step 7 only: the claim that a nonclosed point of Q corresponds to a nonclosed point of C was unjustified (the open complement iso alone does not give it), and closedness of the corresponding point of a nonsmooth closed point was taken for granted. Repaired by applying step 3's argument to Q itself (proper, reduced by step 6, pure dimension 1 by step 5): every nonclosed point of Q is smooth, and a nonsmooth closed q outside F corresponds to a nonsmooth c, which step 3 makes closed, so the hypothesis applies. Step 7's uses now list the four step-3 nodes, already in proof_deps. Edge cases: empty centres, empty base, disconnected fibres, both branches on one component. No duplicates among the lem-sfb-*pinching* nodes, persistent-node-normalization or trf closed-union-pushout. Batch-5: all 4 trf citations are generic. The multipointed definitions are 13- and 105-node closures, apart from the orgogozo stmt_dep. The orgogozo def is cited only for the ODP wording; its closure reaches the trace formula only through nearby-cycles definitions. The field pinching theorem is curve geometry; without the orgogozo dep it reaches only sk-i-curve-zero. None is part of the trace-formula or Poincaré proofs. All 14 tool_uses accepted. Maintainer remark: the parent trait-etale-branch-pinching step 3 assumes nodal fibres only over the chosen residue-field closures, while the item needs every algebraically closed Ω.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricNodalPinchingCriterion",
+  "declaration": "AlgebraicGeometry.geometric_nodal_pinching_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricNodalPinchingCriterion.lean",
+  "statement": "theorem geometric_nodal_pinching_criterion (S : Scheme.{u}) (X Z T P : Over S) [IsProper X.hom] [Flat X.hom] [LocallyOfFinitePresentation X.hom] [IsFinite Z.hom] [Etale Z.hom] [IsFinite T.hom] [Etale T.hom] [IsProper P.hom] [LocallyOfFinitePresentation P.hom] (i : Z ⟶ X) (j : Z ⟶ T) [IsClosedImmersion i.left] [Etale j.left] [j.left.IsFiniteLocallyFreeOfDegree 2] (hi : ∀ z : Z.left, i.left z ∈ X.hom.smoothLocus) (a : X ⟶ P) (b : T ⟶ P) (hab : i ≫ a = j ≫ b) (hpushout : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), IsPushout ((Over.pullback g).map i).left ((Over.pullback g).map j).left ((Over.pullback g).map a).left ((Over.pullback g).map b).left) (hX : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), Nonempty ↥(pullback (C := Scheme.{u}) X.hom g) ∧ IsReduced (pullback (C := Scheme.{u}) X.hom g) ∧ (pullback (C := Scheme.{u}) X.hom g).IsPureDimension 1 ∧ ∀ x : pullback (C := Scheme.{u}) X.hom g, x ∈ closedPoints (pullback (C := Scheme.{u}) X.hom g) → x ∉ (pullback.snd X.hom g).smoothLocus → Nonempty (NodalFiber.completedLocalRing x ≃+* NodalFiber.powerSeriesQuotient Ω)) : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), Nonempty ↥(pullback (C := Scheme.{u}) P.hom g) ∧ IsReduced (pullback (C := Scheme.{u}) P.hom g) ∧ (pullback (C := Scheme.{u}) P.hom g).IsPureDimension 1 ∧ (∀ x : pullback (C := Scheme.{u}) P.hom g, x ∈ closedPoints (pullback (C := Scheme.{u}) P.hom g) → x ∉ (pullback.snd P.hom g).smoothLocus → Nonempty (NodalFiber.completedLocalRing x ≃+* NodalFiber.powerSeriesQuotient Ω)) ∧ (∀ x : pullback (C := Scheme.{u}) X.hom g, x ∉ closedPoints (pullback (C := Scheme.{u}) X.hom g) → x ∈ (pullback.snd X.hom g).smoothLocus) ∧ (∀ x : pullback (C := Scheme.{u}) P.hom g, x ∉ closedPoints (pullback (C := Scheme.{u}) P.hom g) → x ∈ (pullback.snd P.hom g).smoothLocus) ∧ (∃ (m : ℕ) (ε : Fin m → (Over.mk (𝟙 (Spec (.of Ω))) ⟶ (Over.pullback g).obj Z)), Nonempty (IsColimit (Cofan.mk (pullback (C := Scheme.{u}) Z.hom g) (fun l ↦ (ε l).left)))) ∧ (∃ (n : ℕ) (φ : Fin n → (Over.mk (𝟙 (Spec (.of Ω))) ⟶ (Over.pullback g).obj T)), Nonempty (IsColimit (Cofan.mk (pullback (C := Scheme.{u}) T.hom g) (fun l ↦ (φ l).left)))) ∧ (∀ t : pullback (C := Scheme.{u}) T.hom g, ∃ z : Fin 2 → ↥(pullback (C := Scheme.{u}) Z.hom g), Function.Injective (fun l ↦ ((Over.pullback g).map i).left (z l)) ∧ (∀ z' : pullback (C := Scheme.{u}) Z.hom g, ((Over.pullback g).map j).left z' = t ↔ z' ∈ Set.range z) ∧ ∀ l : Fin 2, ((Over.pullback g).map i).left (z l) ∈ (pullback.snd X.hom g).smoothLocus) ∧ (∃ (U : (pullback (C := Scheme.{u}) X.hom g).Opens) (V : (pullback (C := Scheme.{u}) P.hom g).Opens) (e : U.toScheme ≅ V.toScheme), (U : Set (pullback (C := Scheme.{u}) X.hom g)) = (Set.range ((Over.pullback g).map i).left)ᶜ ∧ (V : Set (pullback (C := Scheme.{u}) P.hom g)) = (Set.range ((Over.pullback g).map b).left)ᶜ ∧ e.hom ≫ V.ι = U.ι ≫ ((Over.pullback g).map a).left ∧ e.hom ≫ V.ι ≫ pullback.snd P.hom g = U.ι ≫ pullback.snd X.hom g) ∧ (∀ t : pullback (C := Scheme.{u}) T.hom g, Nonempty (NodalFiber.completedLocalRing (((Over.pullback g).map b).left t) ≃+* ↥(pullback (CommRingCat.ofHom (PowerSeries.constantCoeff (R := Ω))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := Ω))))) ∧ Nonempty (↥(pullback (CommRingCat.ofHom (PowerSeries.constantCoeff (R := Ω))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := Ω)))) ≃+* NodalFiber.powerSeriesQuotient Ω))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79ffb0738",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only change vs live: lean record plus stmt_dep def-sfb-nodal-geometric-fibre-local-rings (landed, reviewed). Statement field verbatim in module. Every hypothesis matches the node with nothing stronger: proper/flat/lfp X; finite etale Z,T; closed immersion into X.hom.smoothLocus; j Etale + IsFiniteLocallyFreeOfDegree 2; proper lfp P without flatness; hab; IsPushout in Scheme of Over.pullback g images for all alg. closed Omega : Type u; hX nonempty/reduced/pure dim 1/node at nonsmooth closed points via NodalFiber.completedLocalRing and powerSeriesQuotient. Every conclusion clause present with the actual maps: P_Omega properties, nonclosed points smooth for both fibres, Spec Omega cofans (m,n may be 0), exactly two distinct smooth branch points over each t, complement iso commuting with a_Omega and the projections, completion at b_Omega(t) iso to the CommRingCat pullback of constantCoeff and to Omega[[u,v]]/(uv). Ring-iso wording follows the landed def node and the field-level pinching theorem. Edge cases (empty S, Z=T empty, disconnected fibres, char 2, universe u) fine. No new definitions or name clash; imports exist; docstrings carry source and blueprint id and all 7 proof steps; sorry only; no pro-etale. No file changed, so no compile."
+ }
+}

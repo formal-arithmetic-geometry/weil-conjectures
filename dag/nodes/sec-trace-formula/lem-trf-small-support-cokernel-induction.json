@@ -1,0 +1,389 @@
+{
+ "id": "lem-trf-small-support-cokernel-induction",
+ "kind": "statement",
+ "title": "The smaller-support induction step for a universally injective free submodule",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative local ring, $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ a smooth morphism [def-sbc-smooth-morphisms] of affine schemes [def-weil-affine-spectrum] with geometrically integral fibres of dimension $n\\geq0$ (each fibre remains nonzero and integral after any residue-field extension), and $\\mathfrak q\\subset B$ a prime above $\\mathfrak m$. Let $N,Q$ be finite $B$-modules and let $0\\to B^r\\xrightarrow{\\alpha}N\\to Q\\to0$ be an exact sequence, $r\\geq0$, with $\\alpha$ universally injective over $A$, meaning $L\\otimes_A\\alpha$ is injective for every $A$-module $L$. Suppose $Q_{\\mathfrak q}$ is flat over $A$, and either $(Q/\\mathfrak mQ)_{\\mathfrak q}=0$ or the dimension at $\\mathfrak q$ of the support of $Q/\\mathfrak mQ$ is $<n$ [def-kun-dimension]. Assume the following smaller-support hypothesis: for every finite $B$-module $M$ such that $M_{\\mathfrak q}$ is $A$-flat, $(M/\\mathfrak mM)_{\\mathfrak q}\\ne0$, and $\\dim_{\\mathfrak q}\\operatorname{Supp}(M/\\mathfrak mM)<n$, there exist an affine elementary etale neighbourhood $(T,t)$ of the closed point of $\\operatorname{Spec}A$ and an open neighbourhood of the marked point of $\\operatorname{Spec}(B\\otimes_A\\mathcal O_{T,t})$ on which the associated sheaf of $M\\otimes_A\\mathcal O_{T,t}$ is finitely presented and flat over $\\mathcal O_{T,t}$. Elementary etale means etale with an isomorphism of residue fields at the marked points [def-weil-etale-morphism, def-weil-residue-field]. Then there exist such $(T,t)$, $A'=\\mathcal O_{T,t}$, $B'=B\\otimes_A A'$, and $g\\in B'\\setminus\\mathfrak q'$, where $\\mathfrak q'$ is the unique point of $\\operatorname{Spec}B'$ above $\\mathfrak q$, such that $Q'_g$ and $N'_g$ are finitely presented $B'_g$-modules and flat $A'$-modules, with $N'=N\\otimes_A A'$ and $Q'=Q\\otimes_A A'$. The sequence $0\\to(B'_g)^r\\to N'_g\\to Q'_g\\to0$ is exact, and the associated sheaf of $N'$ restricted to $D(g)$ is finitely presented and flat over $A'$. If $(Q/\\mathfrak mQ)_{\\mathfrak q}=0$, one may take $A'=A$ and $Q_g=0$, without using the smaller-support hypothesis. Finite modules, finite presentation, flatness, module localization, tensor products, open subschemes and the associated sheaf have their meanings in [def-weil-finitely-generated-module, def-sc-finitely-presented-module, def-weil-pbc-flat-ring-map, def-weil-pbc-module-localization, def-weil-pbc-module-tensor-product, def-weil-open-immersion, pqf-def-coherent, def-weil-pbc-module-finite-type-presentation, def-pc-scheme-module-flat-over]. The associated sheaf of a module $M$ over a commutative ring $R$ is the quasi-coherent $\\mathcal O_{\\operatorname{Spec}R}$-module $\\widetilde M$ of [lem-weil-pbc-spec-module-tilde-sections]. Support means nonzero localizations.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, application of smaller-support induction to Q, principal-open shrinking, localization of the exact sequence and its extension argument; returned steps 8, 9 and 10, including the zero-dimensional case"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-kun-dimension",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-finitely-generated-module",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-open-immersion",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $(Q/\\mathfrak mQ)_{\\mathfrak q}=0$. Exact localization identifies this module with $Q_{\\mathfrak q}/\\mathfrak mB_{\\mathfrak q}Q_{\\mathfrak q}$. The finite module $Q_{\\mathfrak q}$ and the ideal $\\mathfrak mB_{\\mathfrak q}\\subseteq\\mathfrak qB_{\\mathfrak q}$ satisfy Nakayama over the local ring $B_{\\mathfrak q}$, so $Q_{\\mathfrak q}=0$. Choose finite generators $z_1,\\ldots,z_s$ of $Q$. By the definition of localization ($m/1=0$ iff some element of the multiplicative set kills $m$), for each $i$ some $h_i\\notin\\mathfrak q$ kills $z_i$. The product $g=\\prod_i h_i\\notin\\mathfrak q$ kills all of $Q$; for $s=0$ use $g=1$. Take the identity elementary etale neighbourhood, so $A\\prime=A$ and $Q_g=0$. The zero module is finitely presented and flat. This branch has not used induction. In the remaining steps this choice is treated together with the nonzero-fibre branch.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, zero-cokernel boundary of the induction; Algebra Tags 00CS and 00DV (lemma-NAK)"
+   }
+  },
+  {
+   "text": "If $(Q/\\mathfrak mQ)_{\\mathfrak q}\\ne0$, apply the stated smaller-support hypothesis to $M=Q$: finiteness, flatness at $\\mathfrak q$, and the strict dimension inequality are exactly the assumptions. Obtain $(T,t)$ and its open neighbourhood $V$ of the marked point. The one-step case of the pointed etale local-tower lemma identifies the fibre above $\\mathfrak q$ with $\\operatorname{Spec}\\kappa(\\mathfrak q)$; hence this marked point is the unique $\\mathfrak q\\prime$ in the statement. Choose $g\\notin\\mathfrak q\\prime$ with $D(g)\\subseteq V$ by the principal-open basis. Restriction of a local finite presentation is still a local finite presentation, directly by restricting its finite free presentation maps. Principal-open sections of the associated sheaf of $Q\\prime$ are $Q\\prime_g$ (use the associated-sections lemma with both rings equal to $B\\prime$). The affine finite-presentation equivalence therefore makes $Q\\prime_g$ finitely presented over $B\\prime_g$. Flatness over $A\\prime$ on $V$ gives flatness of these affine sections by the definition of relative flatness. Thus in both branches we now have $A\\prime$, $g$, and finitely presented, $A\\prime$-flat $Q\\prime_g$.",
+   "uses": [
+    "lem-trf-pointed-etale-local-tower-realization",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "pqf-lem-associated-sections-localize",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, application of the smaller-support hypothesis and choice of a principal open"
+   }
+  },
+  {
+   "text": "Smoothness makes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ flat. By the definition of a flat morphism each stalk $\\mathcal O_{\\operatorname{Spec}B,\\mathfrak p}$ is flat over $\\mathcal O_{\\operatorname{Spec}A,\\mathfrak p\\cap A}$, and the stalk-localization lemma identifies these stalks with $B_{\\mathfrak p}$ and $A_{\\mathfrak p\\cap A}$, compatibly with the structure map; so each $B_{\\mathfrak p}$ is flat over $A_{\\mathfrak p\\cap A}$; the affine-sections flatness criterion gives that $B$ is $A$-flat. Base change of this flat module shows $B\\prime=B\\otimes_AA\\prime$ is $A\\prime$-flat. Localizing the $B\\prime$-module $B\\prime$ preserves flatness over $A\\prime$, so $B\\prime_g$ is $A\\prime$-flat. Finally $(B\\prime_g)^r$ is $A\\prime$-flat: tensoring an injection with it is the finite direct sum of $r$ injections obtained by tensoring with $B\\prime_g$. This also covers $r=0$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-pc-affine-sections-flat-over-base",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, flatness of the localized free term"
+   }
+  },
+  {
+   "text": "Tensor the original exact sequence over $A$ with $A\\prime$. Right exactness gives exactness at $N\\prime$ and $Q\\prime$, and universal injectivity of $\\alpha$ with $L=A\\prime$ gives injectivity at $(B\\prime)^r$. Exact localization then gives $0\\to(B\\prime_g)^r\\xrightarrow a N\\prime_g\\xrightarrow v Q\\prime_g\\to0$. We will also use its universal injectivity over $A\\prime$: for any $A\\prime$-module $L$, the maps $L\\otimes_{A\\prime}(A\\prime\\otimes_A B^r)\\to L\\otimes_{A\\prime}(A\\prime\\otimes_A N)$ identify with $L\\otimes_A\\alpha$, which is injective by assumption. After localizing over $B\\prime$, injectivity persists by exact localization. The needed tensor/localization comparison sends $(l\\otimes n)/g^j$ to $l\\otimes(n/g^j)$, with inverse $l\\otimes(n/g^j)\\mapsto(l\\otimes n)/g^j$; the bilinearity and fraction relations show both maps are well-defined and inverse. Hence $L\\otimes_{A\\prime}a$ is injective for every $L$. These identifications also give $(B\\prime)^r$ as the tensor of $B^r$, coordinate by coordinate.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, base change and exact localization of the free-submodule sequence"
+   }
+  },
+  {
+   "text": "Set $R=B\\prime_g$. Exactness identifies $\\ker(v)$ with $R^r$ by $a$: every element of the kernel is $a(x)$, and $a(x)=0$ implies $x=0$. The free module $R^r$ is finitely presented by the presentation $R^0\\to R^r\\to R^r\\to0$; an isomorphism transports this presentation to $\\ker(v)$. Since $Q\\prime_g$ is finitely presented and $v$ is surjective, apply the finite-presentation-of-kernel criterion with $M=N\\prime_g$ and $P=Q\\prime_g$. It follows that $N\\prime_g$ is finitely presented over $R$.",
+   "uses": [
+    "lem-trf-module-finite-presentation-of-kernel",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, finite presentation of the middle module; Algebra Tag 0519, lemma-extension (2)"
+   }
+  },
+  {
+   "text": "Here is the flat-extension argument, written out over $A\\prime$. Put $F=(B\\prime_g)^r$, $E=N\\prime_g$, and $C=Q\\prime_g$. For an injection $u:L\\to L_1$, take $z\\in L\\otimes E$ mapping to zero in $L_1\\otimes E$. Its image in $L\\otimes C$ is zero, because $C$ is flat. Right exactness gives $y\\in L\\otimes F$ with image $z$. The image of $y$ in $L_1\\otimes F$ maps to zero in $L_1\\otimes E$, so is zero by the universal injectivity proved in step 4. Flatness of $F$ gives $y=0$, hence $z=0$. Thus $u\\otimes1_E$ is injective for every injection $u$. Tensoring is right exact, so this injectivity says that tensoring with $E$ preserves exact sequences: $N\\prime_g$ is $A\\prime$-flat. This is the elementary tensor chase for Algebra Tag 00HM, using the universal injectivity present in this item.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, flatness of the middle module; explicit form of the Algebra Tag 00HM argument"
+   }
+  },
+  {
+   "text": "On $D(g)\\cong\\operatorname{Spec}(B\\prime_g)$ the associated sheaf of $N\\prime$ has principal-open sections $(N\\prime_g)_h$ for every $h\\in B\\prime_g$, by the associated-sections localization formula. The affine finite-presentation equivalence turns finite presentation of $N\\prime_g$ into finite presentation of this sheaf. For a prime $\\mathfrak p$ of $B\\prime$ in $D(g)$, the stalk of $\\widetilde{N\\prime}$ at $\\mathfrak p$ is $N\\prime_{\\mathfrak p}=(N\\prime_g)_{\\mathfrak p}$ by the stalk-localization lemma for $\\widetilde{N\\prime}$, and the stalk of $\\mathcal O_{\\operatorname{Spec}A\\prime}$ at $\\mathfrak p\\cap A\\prime$ is $A\\prime_{\\mathfrak p\\cap A\\prime}$ by the structure-sheaf stalk lemma. Each localization $(N\\prime_g)_{\\mathfrak p}$ remains flat over $A\\prime$ by preservation of base-flatness under module localization. The flat-over-localization equivalence, with multiplicative subset $A\\prime\\setminus(\\mathfrak p\\cap A\\prime)$, then shows this stalk is flat over $A\\prime_{\\mathfrak p\\cap A\\prime}$. The stalk formulation of relative flatness proves that the sheaf is flat over $\\operatorname{Spec}A\\prime$. The exact sequence and both module properties were proved above, so all conclusions follow, including the choice $A\\prime=A$, $Q_g=0$ in the zero-fibre branch.",
+   "uses": [
+    "pqf-lem-associated-sections-localize",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "def-pc-scheme-module-flat-over",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, passage from localized modules to the associated sheaf on D(g)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-module-flat-over",
+  "def-sc-finitely-presented-module",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-smooth-flat",
+  "lem-trf-module-finite-presentation-of-kernel",
+  "lem-trf-pointed-etale-local-tower-realization",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-tensor-right-exact",
+  "pqf-lem-associated-sections-localize"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, last paragraph; zero-fibre branch from Algebra 00DV, exactness 00CS, and finite presentation 0519; flat extension 00HM written explicitly using universal injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebra local base universally injective finite free submodule finite cokernel flat smaller support induction etale neighborhood finitely presented flat middle module",
+   "results": "[leanfinder] OK 8 hit(s). Algebra.Etale; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.IsEtaleAt; Algebra.etaleLocus; Algebra.Etale.finitePresentation; Algebra.isOpen_etaleLocus; Algebra.exists_etale_of_isEtaleAt; RingHom.Etale.propertyIsLocal. The hits concern finitely presented flat modules, localization, free modules and the definition of module support dimension. None is the conditional support-induction step with elementary etale local bases, shrinking, and recovery of the middle module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.Flat",
+   "results": "[loogle] OK 6 hit(s). Module.FinitePresentation.isBaseChange_map; Module.Flat.projective_of_finitePresentation; Module.Flat.exists_factorization_of_finitePresentation; Module.Flat.exists_factorization_of_isFinitelyPresented; Module.exists_basis_of_span_of_flat; Module.isLocallyConstant_rankAtStalk. The hits concern finitely presented flat modules, localization, free modules and the definition of module support dimension. None is the conditional support-induction step with elementary etale local bases, shrinking, and recovery of the middle module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*(extension|exact)|Flat.*(extension|exact)|flat.*cokernel.*neighbo|support.*induct",
+   "results": "[grep] OK 25 hit(s). Mathlib/RingTheory/Flat/IsBaseChange.lean:60; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:30; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:33; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:241; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:253; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean:254; Mathlib/RingTheory/Flat/Equalizer.lean:39; Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:22; Mathlib/RingTheory/Flat/Basic.lean:52; Mathlib/RingTheory/Flat/Basic.lean:55; Mathlib/RingTheory/Flat/Basic.lean:322; Mathlib/RingTheory/Flat/Basic.lean:339; Mathlib/RingTheory/Flat/Basic.lean:355; Mathlib/RingTheory/Flat/CategoryTheory.lean:13; Mathlib/RingTheory/Flat/CategoryTheory.lean:15; Mathlib/RingTheory/Flat/CategoryTheory.lean:19; Mathlib/RingTheory/Flat/CategoryTheory.lean:22; Mathlib/RingTheory/Flat/CategoryTheory.lean:41; Mathlib/RingTheory/Kaehler/JacobiZariski.lean:47; Mathlib/RingTheory/Kaehler/JacobiZariski.lean:509; Mathlib/RingTheory/RamificationInertia/Basic.lean:20; Mathlib/RingTheory/RamificationInertia/Basic.lean:28; Mathlib/RingTheory/RamificationInertia/Basic.lean:77; Mathlib/RingTheory/LocalRing/Length.lean:19; Mathlib/RingTheory/LocalRing/Length.lean:103. The hits concern finitely presented flat modules, localization, free modules and the definition of module support dimension. None is the conditional support-induction step with elementary etale local bases, shrinking, and recovery of the middle module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "induction on support dimension cokernel finite free submodule finite type flat module etale neighborhood finite presentation",
+   "results": "[leansearch] OK 8 hit(s). instFinitePresentationFinsupp; Module.supportDim; Module.FinitePresentation.recOn; AlgebraicGeometry.Flat.recOn; Module.Flat.finsupp; Module.FinitePresentation.casesOn; Module.supportDim_le_ringKrullDim; Module.supportDim_le_of_injective. The hits concern finitely presented flat modules, localization, free modules and the definition of module support dimension. None is the conditional support-induction step with elementary etale local bases, shrinking, and recovery of the middle module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "given local finite presentation flatness for smaller support modules deduce for an extension by a free module after etale base change and principal localization",
+   "results": "[leanfinder] OK 8 hit(s). Module.flat_of_isLocalized_span; RingHom.Etale.ofLocalizationSpan; RingHom.finitePresentation_isLocal; RingHom.Etale.ofLocalizationSpanTarget; RingHom.finitePresentation_holdsForLocalizationAway; Algebra.Etale.finitePresentation; Algebra.FinitePresentation.of_isLocalizationAway; RingHom.finitePresentation_ofLocalizationSpanTarget. The hits concern finitely presented flat modules, localization, free modules and the definition of module support dimension. None is the conditional support-induction step with elementary etale local bases, shrinking, and recovery of the middle module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation_of_(exact|injective)|FinitePresentation.*extension|flat_of_exact",
+   "results": "OK 3 hits: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "middle module of a short exact sequence of finitely presented modules is finitely presented",
+   "results": "OK 8 hits: Module.finitePresentation_of_projective_of_exact, Module.finitePresentation_of_ker, CategoryTheory.ShortComplex.Exact.ab_finite, Module.Finite.of_exact, Module.finitePresentation_of_split_exact, Module.Presentation.ofExact_R, Module.FinitePresentation.fg_ker_iff, Module.finitePresentation_of_surjective. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Function.Exact",
+   "results": "OK 3 hits: Module.finitePresentation_of_projective_of_exact, Module.finitePresentation_of_split_exact, Module.FinitePresentation.exists_fin'. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation and flatness near a point after elementary etale local base change, using induction on smaller cokernel support",
+   "results": "OK 8 hits: Algebra.Etale.finitePresentation, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.propertyIsLocal, Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of two flat modules in a short exact sequence is flat",
+   "results": "OK 8 hits: Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension by a universally injective finite free module inherits finite presentation and relative flatness on an etale local neighbourhood from its cokernel",
+   "results": "OK 8 hits: Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.localization_base. No hit gives the conditional support-induction/etale-neighbourhood statement. The kernel finite-presentation hit is recorded separately as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-type-flat-etale-neighborhood",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 05I7 -> Proposition 05I5 algebra branch: first proof, application of smaller-support induction to Q, principal-open shrinking, localization of the exact sequence and its extension argument; returned steps 8, 9 and 10, including the zero-dimensional case",
+   "via": [
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-small-support-cokernel-induction",
+  "worker": "stage1",
+  "summary": "Read Tag 05I5 first proof and its algebra inputs. Kept the statement and support-induction route, with an explicit associated-sheaf definition reference. Separated the zero-fibre Nakayama case, applied the given smaller-support hypothesis only to Q, reused the pointed-tower unique-point lemma and principal-open/affine equivalences, justified universal exactness after base change/localization, and recovered finite presentation via one exact Mathlib kernel criterion. Wrote out the flat-extension tensor chase rather than concealing an extension lemma. No Lean attachment states the item.",
+  "blueprint": "Realizes the existing supporting Tag 05I7 -> Tag 05I5 algebra branch of lem-trf-local-term-locality, through lem-trf-flat-finite-type-flat-point-local and lem-trf-finite-type-flat-etale-neighborhood: the final smaller-support/cokernel paragraph, including its empty-support boundary. No unit route changes.",
+  "tool_uses": [
+   {
+    "node": "def-pc-scheme-module-flat-over",
+    "why": "Generic Scheme module flat over a base morphism used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "def-sc-finitely-presented-module",
+    "why": "Generic Finitely presented modules used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "def-weil-flat-morphism",
+    "why": "Generic Flat morphism of schemes used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "def-weil-pbc-flat-ring-map",
+    "why": "Generic Flat module and flat ring map used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Generic Tensor product of modules over a commutative ring used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic Localizing a flat module over an algebra used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-pc-affine-sections-flat-over-base",
+    "why": "Generic Affine sections of a relatively flat quasi-coherent module are flat used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic Smooth morphisms are flat used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic Base change of a flat module is flat used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic Localization of modules is exact used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Generic Nakayama's lemma for an ideal in the Jacobson radical used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC) used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic Basic opens form a basis of Spec A, and Spec A_f is homeomorphic to the open D(f) used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic Tensor product is right exact used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "pqf-lem-associated-sections-localize",
+    "why": "Generic Principal localization of an associated module sheaf used with the precise ring/module/affine data in this proof; this is a supporting algebra tool, and no statement of the current trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Pass from A-prime-flatness of the localized module stalk to flatness over the corresponding localized base ring in step 7; the unit has no replacement for this generic commutative-algebra equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-scheme-module-flat-over",
+  "def-sc-finitely-presented-module",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-tensor-right-exact",
+  "pqf-lem-associated-sections-localize",
+  "lem-weil-pbc-flat-over-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-7af5a00a9",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-7af5a00a9 (reviewer sub-agent of L); spot-checked: Read in full: Stacks flat.tex 05I5 (all of the first proof; the item is its last paragraph plus the empty-support case), Algebra 0519 parts 1-5, 00HM and Schemes 01I7; Mathlib FinitePresentation.lean lines 115-235 (finitePresentation_of_ker at 219-221, [Ring R] section); the item, the new node, the parent step 3 and every cited statement. The statement matches the source and the parent's use: no hypothesis added or dropped, no conclusion weakened. I re-checked all 7 steps. Step 1: Nakayama with mB_q inside qB_q, product of annihilators, s=0 case. Step 2: the d=1 pointed-tower lemma gives a unique q' that is the marked point; D(g) inside V; principal sections via the pqf lemma; finite presentation via the affine equivalence; flatness via the affine clause of def-pc-scheme-module-flat-over. Steps 3 and 4: flatness of B'_g^r and universal injectivity over A' after base change and localization. Step 5: ker v is R^r, then the new leaf. Step 6: I re-ran the 00HM chase and it is valid; no DAG node states the extension direction, so the elementary mark is acceptable. Step 7: localization keeps flatness, then the flat-over-localization lemma and the stalk criterion. New node lem-trf-module-finite-presentation-of-kernel: an exact Mathlib leaf, correct 0519(2) source, statement only, not a duplicate (the 0519 part-1 node, the fg_ker part-5 node, the universally-exact-fp-split node and the coherent-ring node all state other things); small cases checked. Off-unit generic algebra tool uses accepted. Fixes, in the item file only: (1) C1, step 1 used the localization definition (z/1=0 means some h kills z) uncited: added def-weil-pbc-module-localization. (2) C1, steps 3 and 7 used the stalk identifications O_{Spec B,p}=B_p, O_{Spec A',p∩A'}=A'_{p∩A'} and the stalk of ~N' at p equal to N'_p silently: cited the Mathlib leaves lem-weil-pbc-spec-domain-stalks-function-field and lem-weil-pbc-spec-tilde-stalk-localization and wrote the identifications into the texts. (3) B3/C4, the delivery's added reference def-weil-pbc-associated-module (the sheafified construction F_M) is not the ~M the proof and the parent use, and the comparison F_M≅~M (Schemes 01I7) has no node: the statement reference and stmt_deps now point to ~M of lem-weil-pbc-spec-module-tilde-sections (a Mathlib leaf), which is the same object up to canonical isomorphism, so the statement is not mathematically changed. proof_deps recomputed as the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmallSupportCokernelInduction",
+  "declaration": "AlgebraicGeometry.exists_smallSupport_cokernel_induction",
+  "declarations": [
+   "AlgebraicGeometry.smallSupportClosedFibre",
+   "AlgebraicGeometry.smallSupportBaseRing",
+   "AlgebraicGeometry.smallSupportSheafGoodOpen",
+   "AlgebraicGeometry.smallSupportModuleGoodPrincipal",
+   "AlgebraicGeometry.smallSupportGoodPrincipal",
+   "AlgebraicGeometry.smallSupportAwayMap",
+   "AlgebraicGeometry.smallSupportAwayFreeMap",
+   "AlgebraicGeometry.smallSupportLocalizedMap",
+   "AlgebraicGeometry.smallSupportLocalizedFreeMap",
+   "AlgebraicGeometry.smallSupportEtaleNeighborhood",
+   "AlgebraicGeometry.smallSupportCokernelConclusion",
+   "AlgebraicGeometry.exists_smallSupport_cokernel_induction",
+   "AlgebraicGeometry.exists_smallSupport_cokernel_zero"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SmallSupportCokernelInduction.lean",
+  "statement": "theorem exists_smallSupport_cokernel_induction {A B N Q : Type u} [CommRing A] [CommRing B] [IsLocalRing A] [Algebra A B] [AddCommGroup N] [AddCommGroup Q] [Module B N] [Module B Q] [Module A N] [IsScalarTower A B N] [Module.Finite B N] [Module.Finite B Q] (n r : ℕ) [SmoothOfRelativeDimension n (Spec.map (CommRingCat.ofHom (algebraMap A B)))] (hgeom : ∀ (p : PrimeSpectrum A) (K : Type (max u v)) [Field K] [Algebra A K] (ι : p.asIdeal.ResidueField →+* K), algebraMap A K = ι.comp (algebraMap A p.asIdeal.ResidueField) → IsDomain (K ⊗[A] B)) (q : PrimeSpectrum B) (hq : PrimeSpectrum.comap (algebraMap A B) q = IsLocalRing.closedPoint A) (α : (Fin r → B) →ₗ[B] N) (β : N →ₗ[B] Q) (hinj : Function.Injective α) (hexact : Function.Exact α β) (hsurj : Function.Surjective β) (hui : ∀ (L : Type (max u v)) [AddCommGroup L] [Module A L], Function.Injective ((α.restrictScalars A).lTensor L)) (hflat : @Module.Flat A (LocalizedModule q.asIdeal.primeCompl Q) _ _ (Module.compHom _ (algebraMap A B))) (hdim : q ∉ Module.support B (smallSupportClosedFibre A B Q) ∨ ∃ h : q ∈ Module.support B (smallSupportClosedFibre A B Q), topologicalKrullDimAt (⟨q, h⟩ : Module.support B (smallSupportClosedFibre A B Q)) < (n : WithBot ℕ∞)) (hind : ∀ (M : Type u) [AddCommGroup M] [Module B M] [Module.Finite B M], @Module.Flat A (LocalizedModule q.asIdeal.primeCompl M) _ _ (Module.compHom _ (algebraMap A B)) → ∀ h : q ∈ Module.support B (smallSupportClosedFibre A B M), topologicalKrullDimAt (⟨q, h⟩ : Module.support B (smallSupportClosedFibre A B M)) < (n : WithBot ℕ∞) → smallSupportEtaleNeighborhood (A := A) (M := M) q) : smallSupportCokernelConclusion (A := A) α β q",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem states the conditional smaller-support induction step. The zero-fibre theorem states the identity-base case without an induction hypothesis. Helpers are explicit quotient, tensor, localization and associated-sheaf constructions packaging this same statement; the accepted split is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9363e4e72",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read node, Stacks 05I5 first-proof induction step, all recorded dep declarations (IsFlatOver, topologicalKrullDimAt, SmoothOfRelativeDimension, Etale, residueFieldMap, tilde, IsFinitePresentation, Module.support/Flat/FinitePresentation) and the parent's scheme-level form. Only node field changed: lean; lean.statement verbatim in file. Clause check: hgeom = geometric integrality via K⊗_A B (A→κ(p) epi), hui universal injectivity, hflat, hdim on M/mM support subtype with local dim, hind = affine elementary étale nbhd (Etale, closed point, IsIso residue map, C_t model) with fp+IsFlatOver of tilde(B'⊗_B M)|_U at a prime over q (unique by unramifiedness), conclusion with unique q', g∉q', fp+A'-flat Q'_g,N'_g, sheaf clause for N' on D(g), canonical localized exact sequence; zero branch as separate theorem with A'=A, no hind. Edge cases r=0, n=0, local Q_g=0, universes (max u v test universes equivalent; Type u for C and M justified) fine. Helpers non-hollow, docstrings with source/blueprint, 7-step proof docstring, sorry only. No file changed, no compile run. Advisory only: uniqueness of q' stated as a clause; max u v test universes."
+ }
+}

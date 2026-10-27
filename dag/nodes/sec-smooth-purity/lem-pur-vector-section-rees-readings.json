@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-vector-section-rees-readings",
+ "kind": "statement",
+ "title": "The endpoint readings of a geometric Rees model",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a separated finite-type B over its ground field and a smooth separated quasi-compact closed-section pair g,s of rank d. Let F,e and a VectorReesModel be as in [lem-pur-vector-section-rees-coordinates]. Write K for the etale section invariant of the vector zero section [def-asd-vector-bundle-zero-section]. There is an isomorphism kappa from the actual family invariant to a-star K. Its readings at one and zero, followed by the canonical line-section counits, equal the actual fibre comparisons followed by the identity-base smooth section comparisons for e and the normal isomorphism, respectively. Each of the latter includes the inverse identity-pullback comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: difference coordinates and the standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-vector-section-rees-coordinates",
+  "def-asd-vector-bundle-zero-section",
+  "lem-pur-dnc-section-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Compose the inverse family isomorphism with the constant-family first projection. This makes a Cartesian square over the line projection and sends the deformation section to the bundle zero section. The inverse smooth section exchange gives kappa.",
+   "uses": [
+    "lem-pur-vector-section-rees-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each endpoint the model fibre equation identifies the composite with the bundle identity. Section-base-change composition and its identity law identify the constant square reading with the canonical line counit. Pasting the endpoint square with the vector presentation gives exactly the actual fibre comparison followed by the normalized identity-base section comparison.",
+   "uses": [
+    "lem-pur-smooth-section-exchange-composition",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-vector-section-rees-coordinates",
+  "lem-pur-smooth-section-exchange-composition",
+  "lem-pur-dnc-section-geometry"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: difference coordinates and the standard-pair DNC",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone of the zero section of a vector bundle is its pullback to the affine line",
+   "results": "8 hits concerning affine-space maps, pullback squares and topological vector bundles. No exact Rees-family theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the project Rees and section-exchange API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoIsPullback",
+   "results": "9 categorical pullback-coordinate hits; no geometric Rees-family or section-exchange normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Categorical tools suffice for pasting, not for the Rees construction."
+  },
+  {
+   "tool": "grep",
+   "query": "deformationSpace.*(Iso|iso)|zeroSection.*deformation|IsFiniteLocallyFreeOfRank.*free",
+   "results": "No Mathlib hits. Project search found the free-module frame, restrictedAffineDiagonalCoordinates, the polynomial extended-Rees equivalence, section-base-change composition, and delta_etale_reading. Blueprint searches found standard-pair clause (4) and the cited Agreement proof. No exact vector-family model with both endpoint equations exists. A later source-library search found the proved standard-pair theorem Scheme.Hom.isIso_deformationSpaceToAffineSpace; its endpoint presentations are obtained by pullback.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved standard-pair Rees isomorphism, construct actual endpoint presentations by pullback, and prove their section-exchange readings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedAffineDiagonalDncVectorCoordinates",
+  "date": "2026-10-27",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: difference coordinates and the standard-pair DNC",
+   "via": [
+    "lem-pur-restricted-affine-diagonal-dnc-vector-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorSectionReesReadings",
+  "file": "lean/Sheaf/Paper/VectorSectionReesReadings.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorSection_reesReadings",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.vectorSection_reesReadings"
+  ],
+  "statement": "theorem vectorSection_reesReadings (P : PurityFiniteSetting.{u})\n    {T B : Scheme.{u}} [IsNoetherian B] (d : ℕ)\n    (g : T ⟶ B) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]\n    (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB]\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (s : B ⟶ T) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)\n    (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (e : VectorBundleZeroSection.scheme B d F ≅ T)\n    (we : e.hom ≫ g = VectorBundleZeroSection.π B d F)\n    (ze : VectorBundleZeroSection.zero B d F ≫ e.hom = s)\n    (M : VectorReesModel d g s F e) :\n    letI := SmoothOfRelativeDimension.smooth d g\n    letI := Dnc.compactifiable P g aB\n    letI := Dnc.invertibleExponent P (g ≫ aB)\n    letI := (Etale.vectorIntegration_geometry B d F).1\n    letI := (Etale.vectorIntegration_geometry B d F).2.1\n    letI := Dnc.compactifiable P (VectorBundleZeroSection.π B d F) aB\n    let q := Scheme.Hom.normalConeProj g s\n    letI := Dnc.normalCompactifiable P d g aB s hs\n    letI : SmoothOfRelativeDimension d q :=\n      (Scheme.Hom.normalConeData d hs).smoothOfRelativeDimension_proj\n    letI := Dnc.invertibleExponent P (q ≫ aB)\n    let cS := (Etale.leftDerivedUpperStarId (ModuleCat.{u + 1} P.Coefficient) B).symm.app _ ≪≫\n      Dnc.sectionBaseChange P.Coefficient d g\n        (IsPullback.of_horiz_isIso ⟨we.trans (Category.comp_id _).symm⟩)\n        s (VectorBundleZeroSection.zero B d F) (ze.trans (Category.id_comp _).symm)\n    let cN := (Etale.leftDerivedUpperStarId (ModuleCat.{u + 1} P.Coefficient) B).symm.app _ ≪≫\n      Dnc.sectionBaseChange P.Coefficient d q\n        (IsPullback.of_horiz_isIso ⟨M.normal_proj.trans (Category.comp_id _).symm⟩)\n        s.normalConeZeroSection (VectorBundleZeroSection.zero B d F)\n          (M.normal_zero.trans (Category.id_comp _).symm)\n    let K := Etale.sectionInvariant P.Coefficient (VectorBundleZeroSection.π B d F)\n      (VectorBundleZeroSection.zero B d F)\n    ∃ κ : Dnc.familyEtale P d g aB s hs ≅\n        (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n          (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).leftDerivedFunctor.obj K,\n      ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n        (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso κ ≪≫\n          (Etale.leftDerivedUpperStarCompSectionIso _ _ _\n            (AffineSpace.oneSection_comp_over _ B)).app K =\n        Dnc.fibreOne P d g aB s hs ≪≫ cS) ∧\n      ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n        (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso κ ≪≫\n          (Etale.leftDerivedUpperStarCompSectionIso _ _ _\n            (AffineSpace.zeroSection_comp_over _ B)).app K =\n        Dnc.fibreZero P d g aB s hs ≪≫ cN)",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T021419-L-2771695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T021419-L-2771695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

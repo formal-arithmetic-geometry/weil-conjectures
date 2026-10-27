@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-etale-generic-component-lower-bound",
+ "kind": "statement",
+ "title": "Etale generic field model with ordinary and geometric component lower bounds",
+ "statement": "Let $f:X\\to S$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Suppose $S$ is irreducible [def-weil-irreducible-components] with generic point $\\eta$ [def-sc-generic-point], and put $k=\\kappa(\\eta)$ [def-weil-residue-field]. Fibres are scheme-theoretic [def-pc-scheme-fibre]. Fix a field extension $L/k$ [def-pc-field-extension] whose spectrum map $a:\\operatorname{Spec}L\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] is finite (its coordinate algebra is a finite module) and etale [def-weil-etale-morphism]. Suppose $G=X_\\eta\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ [def-pc-fibre-product] has exactly $n$ ordinary irreducible components, for an integer $n\\geq0$. There exist an irreducible scheme $T$, an etale morphism $g:T\\to S$, its generic point $\\xi$ with $g(\\xi)=\\eta$, an isomorphism $r:\\operatorname{Spec}\\kappa(\\xi)\\simeq\\operatorname{Spec}L$, and an open subset $U\\subseteq T$ containing $\\xi$, such that $r$ followed by $a$ and the canonical residue-field point of $S$ equals the canonical residue-field point of $T$ followed by $g$. For $P=X\\times_S T$, the projection $q:P\\to T$ is finite type and this compatibility identifies $P_\\xi$ with $G$. For every $t\\in U$, the ordinary fibre $P_t$ has at least $n$ irreducible components; for every field extension $K/\\kappa(t)$ the scheme $P_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}K$ also has at least $n$ irreducible components. The case $n=0$ is allowed. No geometric irreducibility of the components of $G$, flatness, or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055A (lemma-nr-geom-irreducible-components-good), proof: paragraph 2 (etale generic residue-field model) and final paragraph (ordinary lower bound and comparison with field-extended fibres); retained parent Steps 4--6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sbc-etale-generic-residue-field-model] to the irreducible base $S$ and the supplied finite etale map $a$. Obtain $T,g,\\xi,r$ and exactly the required equality of residue-field point morphisms. Here $\\xi$ is generic in the whole space $T$, so $\\overline{\\{\\xi\\}}=T$. The closure of a singleton is irreducible: if it lies in a union of two closed sets, one contains $\\xi$ and hence its closure. Thus $T$ is irreducible and nonempty [def-sc-generic-point, def-weil-irreducible-components].",
+   "uses": [
+    "lem-sbc-etale-generic-residue-field-model",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551 (lemma-make-components-generic-fibre-geometrically-irreducible), prescribed-field model in the proof"
+   }
+  },
+  {
+   "text": "Put $P=X\\times_S T$. By [def-pc-scheme-fibre, def-pc-fibre-product], $P_\\xi=(X\\times_S T)\\times_T\\operatorname{Spec}\\kappa(\\xi)$ represents pairs consisting of a map to $X$ and a map to $\\operatorname{Spec}\\kappa(\\xi)$ whose composites to $S$ agree. Composing the latter with $r$ identifies these with pairs defining $G=X_\\eta\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$, by the equality in Step 1. The inverse uses $r^{-1}$; both composites are identities by uniqueness in the pullback universal property. Hence $P_\\xi\\simeq G$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A (lemma-nr-geom-irreducible-components-good), paragraph 2, base-change identification written out"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-sfb-finite-type-composition-base-change] to $f$ and $g$. It says precisely that the projection $q:X\\times_S T\\to T$ is finite type, with no hypothesis on $g$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "The isomorphism in Step 2 gives $P_\\xi$ exactly $n$ components. Apply [lem-trf-generic-fibre-component-lower-bound] to $q$, using Step 1 for irreducibility of $T$ and Step 3 for finite type. Obtain a nonempty open $U\\subseteq T$ on which every $P_t$ has at least $n$ components. This open contains $\\xi$: otherwise its closed complement contains $\\xi$ and therefore $\\overline{\\{\\xi\\}}=T$, contradicting nonemptiness of $U$.",
+   "uses": [
+    "lem-trf-generic-fibre-component-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), as used in the final paragraph of Tag 055A"
+   }
+  },
+  {
+   "text": "For $t\\in U$ and any $K/\\kappa(t)$, apply [lem-sfb-field-extension-irreducible-components] to the $\\kappa(t)$-scheme $P_t$. It supplies a surjection from the components of $P_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}K$ onto those of $P_t$. Choose preimages of $n$ distinct components downstairs; their images are distinct, so these preimages are distinct. This proves the required lower bound for every $K$. For $n=0$ the same assertion is vacuous, and Step 4 still applies; alternatively take $U=T$ after Steps 1--3.",
+   "uses": [
+    "lem-sfb-field-extension-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 04KW (lemma-inverse-image-irreducible) and 04KX (lemma-image-irreducible), component surjection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-etale-generic-residue-field-model",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-generic-fibre-component-lower-bound",
+  "lem-sfb-field-extension-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0551 and 055A/0554; field-extension comparison by Varieties 04KW/04KX; pullback identification expanded by Q61"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"irreducibleComponents\"",
+   "results": "0 hits: . Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite separable extension of the generic residue field of an irreducible base, spread it to an etale scheme and shrink so all geometric fibres have at least as many irreducible components as the extended generic fibre",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.IsEtaleAt.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.etaleLocus, AlgebraicGeometry.Scheme.SpecToEquivOfField. Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "059643a29294719c"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|generic.*component|component.*generic",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean. Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "89dd3aa511ef976d"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale generic residue field model and lower bound for irreducible components of fibres after arbitrary field extension",
+   "results": "8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.QuasiFinite.instFiniteResidueField, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, instIsAlgebraicResidueFieldOfIsIntegral, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_isSeparable, AlgebraicGeometry.IsEtale. Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "645842fbf2bc2259"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of irreducible schemes, a finite etale generic field extension with n components has an etale neighbourhood whose ordinary and geometric fibres have at least n irreducible components",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.IsEtaleAt.comp, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.etaleLocus, Algebra.isOpen_etaleLocus, Algebra.Etale.exists_subalgebra_fg. Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "04a198ea79f75a0f"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents.*(card|le)|card.*irreducibleComponents|component.*(upper|lower)",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean. Etale algebra decompositions, residue-field finiteness, etale loci, and definitions of fibres do not provide this compatible generic model together with ordinary and field-extended component lower bounds. The grep signatures in Geometrically/Irreducible.lean and Noetherian.lean were read; finite components alone do not give the assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4aca4e68ac37d096"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale generic residue field model with ordinary and field extended fibre irreducible component lower bounds",
+   "results": "{\"t\": \"2026-10-23T22:07:46Z\", \"tool\": \"leanfinder\", \"query\": \"Etale generic residue field model with ordinary and field extended fibre irreducible component lower bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\"], \"digest\": \"152b5b9953ff8c2d\"}; Read returned types: residue-field finiteness, etale algebra decompositions, etale loci and component definitions do not assert the generic model together with the ordinary and field-extended fibre bounds.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "152b5b9953ff8c2d"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"irreducibleComponents\"",
+   "results": "{\"t\": \"2026-10-23T22:07:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"irreducibleComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: residue-field finiteness, etale algebra decompositions, etale loci and component definitions do not assert the generic model together with the ordinary and field-extended fibre bounds.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|generic.*component|component.*generic",
+   "results": "{\"t\": \"2026-10-23T22:07:47Z\", \"tool\": \"grep\", \"query\": \"irreducibleComponents|generic.*component|component.*generic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sets/OpenCover.lean\", \"Mathlib/Topology/Sets/OpenCover.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/NoetherianSpace.lean\"], \"digest\": \"4e47e46e6cc8a723\"}; Read returned types: residue-field finiteness, etale algebra decompositions, etale loci and component definitions do not assert the generic model together with the ordinary and field-extended fibre bounds.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4e47e46e6cc8a723"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale generic residue field model and lower bound for irreducible components after arbitrary field extension",
+   "results": "{\"t\": \"2026-10-23T22:07:47Z\", \"tool\": \"leansearch\", \"query\": \"Etale generic residue field model and lower bound for irreducible components after arbitrary field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"1b7456ce4f05d67a\"}; Read returned types: residue-field finiteness, etale algebra decompositions, etale loci and component definitions do not assert the generic model together with the ordinary and field-extended fibre bounds.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "1b7456ce4f05d67a"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable extension of the generic residue field spreads to an irreducible etale base on which fibre component counts are bounded below",
+   "results": "{\"t\": \"2026-10-23T22:07:50Z\", \"tool\": \"leanfinder\", \"query\": \"A finite separable extension of the generic residue field spreads to an irreducible etale base on which fibre component counts are bounded below\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Ideal.inertiaDeg_le_finrank\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\"], \"digest\": \"f223c7365e63519b\"}; Read returned types: residue-field finiteness, etale algebra decompositions, etale loci and component definitions do not assert the generic model together with the ordinary and field-extended fibre bounds.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "f223c7365e63519b"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-component-count-generic-constancy",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. This input supports the constructibility proof in 055B for the irreducible-fibre locus. More precisely: paragraph 2 (etale generic residue-field model) and final paragraph (ordinary lower bound and comparison with field-extended fibres); retained parent Steps 4--6.",
+   "via": [
+    "lem-trf-geometric-component-count-generic-constancy",
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-etale-generic-component-lower-bound",
+  "worker": "stage1",
+  "summary": "No new nodes: assembled the existing compatible prescribed-field etale model, finite-type base-change lemma, ordinary generic component lower bound and field-extension component surjection. Wrote the pullback identification and generic-point/open arguments explicitly; retained every hypothesis and the n=0 case.",
+  "blueprint": "Retains the inherited provenance through the parent generic-constancy node: 0551 model construction and the 0554 lower-bound invocation in 055A. The latest blueprint ancestor no longer displays that old semistable-alteration argument; its current contracting-correspondence text was read, and no change to that unit route is proposed.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-generic-residue-field-model",
+    "why": "Prescribed finite etale generic residue-field model used as a generic scheme tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sfb-field-extension-irreducible-components",
+    "why": "Arbitrary field-extension surjectivity on irreducible components is a generic geometry tool needed for the final comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-etale-generic-residue-field-model",
+  "lem-sfb-field-extension-irreducible-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-f4576d8b3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-f4576d8b3 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the sources: Stacks 055A (whole proof), 0554, 0551 via the model node, 04KW/04KX via lem-sfb-field-extension-irreducible-components, and 01T4 (Mathlib leaf). The statement and stmt_deps are unchanged. No repair note exists, so the re-split rule does not apply. There are no new nodes and no cycle; the item's only citer is the parent node. Step 1: the model node's generic point is generic in all of T (Lean: IsGenericPoint eta Set.univ), so T is irreducible. Step 2: the identification of P_xi with G is a correct elementary pasting of pullbacks, with r and r^{-1} and the right maps to S. Step 3: finite type is stable under base change along any g. Step 4: the same-unit node lem-trf-generic-fibre-component-lower-bound gives a nonempty open, and the step shows it contains xi. Step 5: surjectivity onto components gives a lower bound for every K, including an inseparable or transcendental K and fibres with infinitely many components. Edge cases checked: n=0, empty generic fibre, L=k, nonreduced or non-Noetherian S. Accepted tool_uses: the etale residue-field model and the field-extension component surjection, both generic scheme facts. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleGenericComponentLowerBound",
+  "declaration": "AlgebraicGeometry.etale_generic_component_lower_bound",
+  "file": "lean/Sheaf/TraceFormula/EtaleGenericComponentLowerBound.lean",
+  "statement": "theorem etale_generic_component_lower_bound {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (hS : IsIrreducible (Set.univ : Set S)) (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) {L : Type u} [Field L] (a : Spec (CommRingCat.of L) ⟶ Spec (S.residueField η)) [IsFinite a] [Etale a] (n : ℕ) (hn : Nonempty (irreducibleComponents ↥(pullback (f.fiberToSpecResidueField η) a) ≃ Fin n)) : ∃ (T : Scheme.{u}) (g : T ⟶ S) (ξ : T) (r : Spec (T.residueField ξ) ≅ Spec (CommRingCat.of L)) (U : Set T), IsIrreducible (Set.univ : Set T) ∧ Etale g ∧ IsGenericPoint ξ (Set.univ : Set T) ∧ g ξ = η ∧ IsOpen U ∧ ξ ∈ U ∧ r.hom ≫ a ≫ S.fromSpecResidueField η = T.fromSpecResidueField ξ ≫ g ∧ LocallyOfFiniteType (pullback.snd f g) ∧ QuasiCompact (pullback.snd f g) ∧ (∃ e : (pullback.snd f g).fiber ξ ≅ pullback (f.fiberToSpecResidueField η) a, e.hom ≫ pullback.fst (f.fiberToSpecResidueField η) a ≫ f.fiberι η = (pullback.snd f g).fiberι ξ ≫ pullback.fst f g ∧ e.hom ≫ pullback.snd (f.fiberToSpecResidueField η) a = (pullback.snd f g).fiberToSpecResidueField ξ ≫ r.hom) ∧ (∀ t : T, t ∈ U → ∃ ι : Fin n → irreducibleComponents ↥((pullback.snd f g).fiber t), Function.Injective ι) ∧ (∀ t : T, t ∈ U → ∀ (K : Type u) [Field K] [Algebra (T.residueField t) K], ∃ ι : Fin n → irreducibleComponents ↥(pullback ((pullback.snd f g).fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) K)))), Function.Injective ι)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34b8edc2c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read item node, module, report (Worker report + Second reading by NZ present), all 10 Mathlib-leaf stmt_dep records, proof-dep modules exists_etale_generic_residue_field_model and generic_fibre_component_lower_bound (same conventions). Clause-by-clause match: finite type = LocallyOfFiniteType+QuasiCompact; IsGenericPoint η univ; a finite+etale; G = pullback (fiberToSpecResidueField η) a; exact count as Nonempty (components ≃ Fin n); T irreducible, g etale, ξ generic, gξ=η, r: Spec κ(ξ)≅Spec L, U open ∋ ξ; compatibility verbatim; q finite type; P_ξ≅G pinned by two projection equations; injective Fin n bounds for P_t and P_t×Spec K for every field K (no separability). No extra hypotheses; n=0, empty fibre, infinite components covered; K : Type u forced by Scheme.{u} (noted). lean.statement verbatim; docstrings with source/blueprint and 5 proof steps; no defs, sorry only. No changes, no compile needed."
+ }
+}

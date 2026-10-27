@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-stratified-finite-projective-tor",
+ "kind": "statement",
+ "title": "Tor descent from stratified projective scalar charts",
+ "statement": "Let T be a Noetherian scheme, B a finite commutative ring, K a derived sheaf of B-modules on its pro-etale site, a,b integers, and S a finite constructible scheme stratification. Suppose on a finite pro-etale cover of each stratum its inverse image is isomorphic on the slice site to the constant realization of a scalar complex whose terms are projective and vanish outside [a,b]. Then K and each stratum inverse image have all-module Tor amplitude in [a,b]. The term interval need not be ordered, and empty schemes, strata and covers are allowed. The sites, Tor predicate, actual derived slice restriction and finite stratification are those of [def-weil-pbc-proetale-site], [def-weil-finite-tor-amplitude], [def-weil-pbc-derived-morphism-presheaves] and [def-constructible-stratification].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemma 6.6.10(1); Stacks Tag 06YS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Transport the slice restriction along the equivalence between the slice pro-etale site and the pro-etale site of the covering scheme. This equivalence takes the scalar constant complex to its constant complex on that scheme. Projective scalar modules are flat; sheafification of their constant presheaves is flat. The bounded flat complex therefore has Tor amplitude in its original term interval.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  },
+  {
+   "text": "For an arbitrary degree-zero sheaf N, the source-library mapDerivedCategoryUpperStarTensorSingleIso identifies each pullback tensor test with the tensor test on the pullback. Its homology comparison and the chart bound make all outside-interval homology vanish after pullback. The source-library conservative localization theorem detects their zero objects on the covering stratum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  },
+  {
+   "text": "Apply the same tensor and homology comparisons to the stratum immersions. These are quasi-compact because T and its strata are Noetherian. The source-library jointly-surjective quasi-compact pullback detection theorem, applied to the identity of each outside-interval cohomology sheaf, gives its global vanishing. This proves both the global and individual stratum Tor bounds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, finite perfect chart argument and all-module tensor descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective scalar complexes on a finite stratification imply the same Tor amplitude on all strata and the whole scheme",
+   "results": "8 hits: isZero_Tor_succ_of_projective, isZero_Tor_prime_succ_of_projective, from_singleFunctor_obj_eq_zero_of_projective, isKProjective_of_projective, and projective-dimension declarations.",
+   "date": "2026-10-24",
+   "verdict": "no match: none includes scheme pullback, slice charts and finite-stratum descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn_Q_obj_of_flat\"",
+   "results": "0 hits; local source search finds DerivedCategory.torAmplitudeIn_Q_obj_of_flat in WeilConjectures.CategoryTheory.DerivedCategory.FlatModel.",
+   "date": "2026-10-24",
+   "verdict": "partial match: computes the bound after transport to each covering scheme; descent still required."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn.*stratif|finite.*perfect.*chart",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralReductionUniformTor",
+  "date": "2026-10-24",
+  "group": "T9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-reduction-uniform-tor",
+   "place": "Tor descent from stratified projective scalar charts",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StratifiedFiniteProjectiveTor",
+  "file": "lean/Sheaf/Paper/StratifiedFiniteProjectiveTor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stratified_finite_projective_tor",
+  "statement": "theorem stratified_finite_projective_tor\n    (T : Scheme.{u}) [IsNoetherian T]\n    (B : Type (u + 1)) [CommRing B] [Finite B]\n    (K : _root_.DerivedCategory (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} B)))\n    (a b : ℤ) (S : Stratification T)\n    (hmodels : ∀ r : Fin S.n,\n      ∃ (m : ℕ) (U : Fin m → (S.domain r).ProEt)\n        (f : ∀ c : Fin m, U c ⟶ ProEt.mk (𝟙 (S.domain r)))\n        (P : Fin m → CochainComplex (ModuleCat.{u + 1} B) ℤ),\n        Presieve.ofArrows U f ∈ (ProEt.precoverage (S.domain r)).coverings _ ∧\n        ∀ c : Fin m,\n          ((P c).IsStrictlyGE a ∧ (P c).IsStrictlyLE b) ∧\n          (∀ q : ℤ, Module.Projective B ((P c).X q)) ∧\n          Nonempty\n            ((@CategoryTheory.derivedSliceRestriction.{u} (S.domain r).ProEt _\n              (essentiallySmallSelf.{0, u, u + 1} _) (ProEt.topology (S.domain r)) B _\n                (U c)).obj\n                  (((ProEtale.upperStar (ModuleCat.{u + 1} B) (S.immersion r))\n                    |>.mapDerivedCategory).obj K) ≅\n              (DerivedCategory.Q (C := Sheaf ((ProEt.topology (S.domain r)).over (U c))\n                (ModuleCat.{u + 1} B))).obj\n                  (((constantSheaf ((ProEt.topology (S.domain r)).over (U c))\n                    (ModuleCat.{u + 1} B)).mapHomologicalComplex (.up ℤ)).obj (P c)))) :\n    ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} B) T a b K ∧\n      ∀ r : Fin S.n,\n        ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} B) (S.domain r) a b\n          (((ProEtale.upperStar (ModuleCat.{u + 1} B) (S.immersion r))\n            |>.mapDerivedCategory).obj K)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-691b0",
+  "group": "T9",
+  "result": "fix",
+  "landing": "20261025T024000-L-2494315",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-691b0",
+  "group": "T9",
+  "result": "fix",
+  "landing": "20261025T024000-L-2494315",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 5 moved abbrevs vs clone bodies (verbatim, re-exported by public import); chart lemma vs item's accepted chart clause and integralPadicLocalPerfectCriterion (BS 6.6.11); node lean/proof fields vs Lean"
+ }
+}

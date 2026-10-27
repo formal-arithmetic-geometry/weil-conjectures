@@ -12,28 +12,40 @@
  ],
  "proof": [
   {
-   "text": "Put A(V)=f^{-1}Z[V] and let I be the chosen injective resolution.\nCompose the given raw morphism with F[0][q] -> Q(I)[q]. The target is K-injective,\nso fullness of localization on maps into a K-injective complex and fullness of the\nhomotopy quotient give a chain representative A(V)[0] -> I[q]. For t:V' -> V,\nprecomposition with A(t)[0] represents the restriction of the original morphism.\nApply rawRestricted_resolution_evaluation to these two chain maps and the shifted\nresolution. It identifies derived evaluation, followed by the resolution sections\ncomparison, with evaluation of the chain map at the represented identity generator.\n\nIn every degree, the inverse-image/direct-image, sheafification and free-abelian\nadjunctions followed by Yoneda identify Hom(A(V),I^n) with I^n(V times_S X).\nUnder this identification, precomposition by A(t) is exactly restriction of a\nsection: the represented map sends the identity generator at V' to the restriction\nof the generator at V. Thus the two evaluated chain maps give the same section\nafter restriction. These identifications commute with the differential, since\nthey are natural in I^n. Applying homology gives the square for the section\ncomplexes. The termwise normalizationSectionsIso and the homology/evaluation\ncomparison are natural transformations, so their naturality moves restriction to\nhomology of normalizationPresheafComplex.\n\nFinally undo the shift. The sections, localization and homology shift comparisons\ncommute with these maps by their naturality. Their factors are the ones in\nnormalizationRestrictedIso, including the augmentation comparison, so cancellation\nof the inverse augmentation recovers the displayed square for the original raw\nmorphism. A different chain representative changes the evaluated cocycle by a\nboundary; hence the equality descends to every raw class. Degree zero, identity\narrows and empty charts use the same calculation.",
+   "text": "Use fullness of localization into the shifted K-injective resolution and fullness of the homotopy quotient to write an arbitrary raw class as Q(c) followed by the inverse shifted augmentation. Naturality of localization identifies precomposition of this representative with the representative obtained by precomposing c with the single-complex map induced by the chart arrow.",
    "uses": [
-    "lem-sbc-raw-restricted-resolution-evaluation",
-    "lem-sbc-raw-restricted-homotopy-sections-iso",
-    "lem-sbc-etale-abelian-restriction-injectives",
-    "lem-weil-pbc-single-homotopy-presheaf-homology",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-raw-restricted-resolution-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image/direct-image, sheafification and free-abelian adjunctions followed by the universe-lifted Yoneda equivalence identify maps out of the pulled-back free chart with sections. Their left naturality makes precomposition by a chart map exactly restriction of sections. Apply this to the identity map to identify the restricted represented generator with the generator mapped by the free chart arrow. Naturality of the termwise sections map and the degree-zero homology isomorphism of a single complex then gives naturality of chainEvaluation directly, without the Hom complex.",
+   "uses": [
+    "lem-sbc-raw-restricted-homotopy-sections-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The naturality of the homology shift isomorphism and the termwise functor shift comparison undo the shift in that equality. Naturality of the evaluation/homology comparison moves chart restriction to homology of normalizationPresheafComplex. Finally rawRestricted_resolution_shift_square and rawRestricted_resolution_evaluation identify both evaluated representatives with the prescribed rawRestrictedCohomologyComparison followed by normalizationRestrictedIso. Extensionality gives the equality of group morphisms.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-resolution-cocycle",
+    "lem-sbc-raw-restricted-resolution-evaluation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-raw-restricted-resolution-evaluation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-raw-restricted-resolution-cocycle",
   "lem-sbc-raw-restricted-homotopy-sections-iso",
-  "lem-sbc-etale-abelian-restriction-injectives",
-  "lem-weil-pbc-single-homotopy-presheaf-homology",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sbc-raw-restricted-resolution-evaluation"
  ],
  "proof_origin": {
-  "by": "F2",
-  "document": "Stacks Project",
-  "place": "Fixed-resolution part of parent normalization proof, steps 2–4"
+  "by": "Z8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images; etale-cohomology.tex Tag 03Q8, lemma-higher-direct-images",
+  "note": "Explicit naturality on represented generators and single-complex homology, using the already stated shift square."
  },
  "mathlib_searches": [
   {
@@ -107,13 +119,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-11761",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "Z8",
   "result": "pass",
-  "landing": "20261022T011833-L-3222256",
+  "landing": "20261026T071635-L-3962289",
   "kind": "interface",
-  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

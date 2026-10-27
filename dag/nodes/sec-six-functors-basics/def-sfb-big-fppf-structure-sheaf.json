@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-big-fppf-structure-sheaf",
+ "kind": "definition",
+ "title": "The structure sheaf on the big fppf site of a scheme",
+ "statement": "Fix universes as in [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme], let $\\mathcal C_S=(\\mathit{Sch}/S)_{\\mathrm{fppf}}$ be its big fppf site [def-pc-fppf-site]. Its structure sheaf $\\mathcal O_S^{\\mathrm{fppf}}$ is the sheaf of commutative rings assigning to $v:V\\to S$ the ring $\\Gamma(V,\\mathcal O_V)$ of global regular functions. For an $S$-morphism $h:V\\to W$, restriction is the canonical pullback $h^*:\\Gamma(W,\\mathcal O_W)\\to\\Gamma(V,\\mathcal O_V)$. The same structure sheaf regarded as a sheaf of rings is obtained by forgetting commutativity, with the same sections and restrictions.",
+ "status": "split",
+ "import_flags": [],
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-pc-fppf-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DU, definition-structure-sheaf, part (1), tau = fppf; the structure sheaf assigns global regular functions to each object, with canonical pullback restrictions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The structure sheaf on the big fppf site of a scheme assigns global regular functions to every scheme over the base",
+   "results": "{\"t\": \"2026-10-24T11:26:47Z\", \"tool\": \"leansearch\", \"query\": \"The structure sheaf on the big fppf site of a scheme assigns global regular functions to every scheme over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"AlgebraicGeometry.Scheme.Γ_def\", \"AlgebraicGeometry.Scheme.Γ\", \"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.AffineScheme.Γ\", \"AlgebraicGeometry.Spec_sheaf\"], \"digest\": \"dfb1e1b7f972b764\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; the project already supplies sfbFppfStructureSheaf and sfbFppfRings in SchemeBigFppfQuasicoherentEquivalence.lean, recorded here existing:true without copying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structure sheaf on the big fppf site obtained by restricting the global sections functor to schemes over a base",
+   "results": "{\"t\": \"2026-10-24T11:26:49Z\", \"tool\": \"leanfinder\", \"query\": \"Structure sheaf on the big fppf site obtained by restricting the global sections functor to schemes over a base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.Scheme.ringCatSheaf\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.PresheafOfModules\", \"AlgebraicGeometry.Scheme.Γ\", \"AlgebraicGeometry.Scheme.Γ_def\", \"AlgebraicGeometry.Spec_sheaf\", \"AlgebraicGeometry.ΓRestrictAlgebra\"], \"digest\": \"0a3198b63ddfc0e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; the project already supplies sfbFppfStructureSheaf and sfbFppfRings in SchemeBigFppfQuasicoherentEquivalence.lean, recorded here existing:true without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*[Ss]tructure|[Ss]tructure.*fppf|isSheaf_Γ",
+   "results": "{\"t\": \"2026-10-24T11:26:49Z\", \"tool\": \"grep\", \"query\": \"fppf.*[Ss]tructure|[Ss]tructure.*fppf|isSheaf_Γ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib hits. Direct rg in WeilConjectures found no specialized declaration; direct rg in Sheaf found the exact existing sfbFppfStructureSheaf and sfbFppfRings definitions at lines 136-146. No separate definition node was found by DAG grep or blueprint_refs search."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-flat-lfp-zero-cohomology",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Scheme-local affine acyclicity input to the topology-comparison prerequisite. Supporting parasitic-kernel and parasitic-cokernel vanishing in the proof of Stacks Tag 0756. The structure ring used to state module derived evaluation in parasitic-kernel and parasitic-cokernel vanishing.",
+   "via": [
+    "lem-sfb-fppf-flat-lfp-zero-cohomology",
+    "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeBigFppfQuasicoherentEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.sfbFppfStructureSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbFppfStructureSheaf",
+   "AlgebraicGeometry.Scheme.sfbFppfRings"
+  ],
+  "statement": "def sfbFppfStructureSheaf (V : Scheme.{u}) :\n    Sheaf (fppfTopology.over V) CommRingCat.{u}",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of ceda640af9e7 requested by the maintainer: records only the existing plain definitions sfbFppfStructureSheaf and sfbFppfRings at lines 136-146. They construct the actual global-regular-functions sheaf and forget commutativity. No declaration is moved, copied, or chosen from the quasi-coherent equivalence theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9c224c1",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9c224c1",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of ceda640af9e7, which was returned only for H2 (a theorem node cited only for its plain defs). The Lean module is byte-identical (cmp), so the earlier clause-by-clause reading stands. I re-checked it: S, fppfTopology.over S, sfbFppfRings, P in ringedSiteModules.{max(u+1) w}, the Subsingleton hypothesis on flat+lfp objects, rightDerived of the composite module→abelian evaluation for all q:ℕ, and the identity conjunct. There is no extra hypothesis, w is free, the enough-injectives instance is real, the only sorry is the proof, and the docstrings are complete. The item node diff is only the stmt_dep swap to def-sfb-big-fppf-structure-sheaf plus the note. The new node is existing:true on SchemeBigFppfQuasicoherentEquivalence, records sfbFppfStructureSheaf and sfbFppfRings, cites Stacks 03DU, and its lean.statement is verbatim equal to the live source lines 136-146; both are plain defs with no .choose of the theorem. No other definition node owns them in the live DAG or blueprint index. lean.statement is a verbatim substring of the item file. No compile was run: no file changed."
+ }
+}

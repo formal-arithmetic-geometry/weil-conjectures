@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-equivariant-root-commutator-support",
+ "kind": "statement",
+ "title": "Commutator support from equivariant ordered root coordinates",
+ "statement": "Let $A$ be a nonzero commutative ring and $(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization [def-sfb-pinned-split-root-realization]. For each $c\\in\\Phi$, suppose given a group homomorphism which is a closed immersion $p_c:\\mathbf G_{a,A}\\to G$ whose differential identifies $A$ with $\\mathfrak g_c$, and which satisfies $t p_c(z)t^{-1}=p_c(c(t)z)$ on all algebra points. Here $\\mathbf G_{a,A}=\\operatorname{Spec}A[z]$ with addition, and write $U_c$ for the image of $p_c$. Let $\\Sigma=\\{c\\in\\Phi:\\lambda(c)>0\\}$ for a homomorphism $\\lambda:M\\to\\mathbf Z$ nonzero on every root. Assume that, for every enumeration of $\\Sigma$, multiplication $\\prod_{c\\in\\Sigma}U_c\\to G$ is an isomorphism onto the same subgroup $U_\\Sigma$. For distinct $a,b\\in\\Sigma$, put $I_{a,b}=\\{(i,j)\\in\\mathbf Z_{>0}^2:ia+jb\\in\\Phi\\}$. For every enumeration of $I_{a,b}$ there are coefficients $C_{i,j}\\in A$ such that for every commutative $A$-algebra $R$ and $x,y\\in R$,\n$$p_a(x)p_b(y)p_a(-x)p_b(-y)=\\prod_{(i,j)\\in I_{a,b}}p_{ia+jb}(C_{i,j}x^iy^j),$$\nwith that enumeration on the right and coefficients mapped to $R$. In particular the two root subgroups commute if $I_{a,b}=\\varnothing$. No invertibility of any integer, reducedness, connectedness or Noetherian hypothesis is imposed on $A$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 5.1.14 and its proof, printed pp.145--146; the positive-system coordinate hypothesis is the output of Theorem 5.1.13 used in that proof. Read online; WANTED archival literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this root-system/group-scheme result."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "The reduced-root condition in [def-sfb-pinned-split-root-realization] gives $\\mathbf Q a\\cap\\Phi=\\{a,-a\\}$. Since $a\\ne b$ and $\\lambda(a),\\lambda(b)>0$, the roots $a,b$ are linearly independent over $\\mathbf Q$. Thus $(i,j)\\mapsto ia+jb$ is injective and $I_{a,b}$ is finite, being injected into the finite set $\\Phi$. Every such root lies in $\\Sigma$, since $\\lambda(ia+jb)=i\\lambda(a)+j\\lambda(b)>0$. Fix the requested enumeration of $I_{a,b}$ and extend its root enumeration to an enumeration of $\\Sigma$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  },
+  {
+   "text": "Each closed immersion $p_c$ identifies $\\mathbf G_{a,A}$ with its image $U_c$: the affine description of a closed immersion in [def-weil-closed-immersion] is a quotient of coordinate rings, and [def-weil-affine-spectrum] identifies its source with that closed subscheme. Hence the assumed multiplication isomorphism gives bijections $q_R:R^\\Sigma\\to U_\\Sigma(R)$, $q_R((z_c))=\\prod_c p_c(z_c)$, natural in every $A$-algebra $R$, in the chosen order. Set $B=A[X,Y]$ [def-weil-pbc-mv-polynomial-ring] and $K=p_a(X)p_b(Y)p_a(-X)p_b(-Y)\\in U_\\Sigma(B)$. This membership uses precisely the subgroup hypothesis. Define $h_c\\in B$ by $q_B((h_c))=K$. For $X\\mapsto x,Y\\mapsto y$ in any $A$-algebra $R$, naturality and uniqueness give $q_R((h_c(x,y)))=p_a(x)p_b(y)p_a(-x)p_b(-y)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  },
+  {
+   "text": "Conjugation distributes across an ordered product, and the assumed equivariance of each $p_c$ gives $tq_R((z_c))t^{-1}=q_R((c(t)z_c))$. Applying this also to the four factors of the commutator, uniqueness of the $q_R$ coordinates gives $h_c(a(t)x,b(t)y)=c(t)h_c(x,y)$ for all $R,t,x,y$. In particular take $R=A[M][X,Y]$ and the point $t\\in D_A(M)(R)$ induced by the coefficient inclusion $A[M]\\to R$ [def-sfb-ring-diagonalizable-group]. Under $T\\simeq D_A(M)$ and $T\\subseteq G$, a point of $T(R)$ is an $A$-algebra map $A[M]\\to R$ lying in $G(R)$, and its character value $m(t)$ is the image of $e_m$ [def-sfb-pinned-split-root-realization]. Then $m(t)=e_m$ and the identity is the polynomial identity $h_c(e_aX,e_bY)=e_c h_c(X,Y)$ in $A[M][X,Y]$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  },
+  {
+   "text": "Since each $p_c$ is a group homomorphism, $p_c(0)=1$ and $p_c(-z)=p_c(z)^{-1}$. Evaluating the universal commutator at $Y=0$ or $X=0$ therefore gives the identity. Its unique $q$ coordinates are all zero, so $h_c(X,0)=0$ in $A[X]$ and $h_c(0,Y)=0$ in $A[Y]$. Write $h_c=\\sum_{i,j\\ge0}d_{c,i,j}X^iY^j$, with finitely many nonzero coefficients [def-weil-pbc-mv-polynomial-ring]. Coefficient comparison in these two evaluations gives $d_{c,i,0}=d_{c,0,j}=0$ for all $i,j\\ge0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  },
+  {
+   "text": "Compare the coefficient of $X^iY^j$ in the identity of step 3, using [def-weil-pbc-mv-polynomial-ring] and $e_ae_b=e_{a+b}$ from [def-sfb-ring-diagonalizable-group]. It gives $d_{c,i,j}e_{ia+jb}=d_{c,i,j}e_c$ in $A[M]$. If $ia+jb\\ne c$, the coefficient of the basis vector $e_{ia+jb}$ is $d_{c,i,j}$ on the left and zero on the right. Hence $d_{c,i,j}=0$ in $A$. This uses the specified free $A$-basis of the group algebra and requires neither cancellation of a scalar nor testing at field-valued points.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  },
+  {
+   "text": "By steps 4--5, only coefficients with $i,j>0$ and $c=ia+jb$ can survive. The independence proved in step 1 makes this pair unique for each $c$ [def-sfb-pinned-split-root-realization]. Thus $h_{ia+jb}=C_{i,j}X^iY^j$ with $C_{i,j}=d_{ia+jb,i,j}\\in A$, and all other $h_c$ vanish. Insert these coordinates into the universal product in step 2 and delete the factors $p_c(0)=1$. The remaining factors have the originally requested order. Evaluation $A[X,Y]\\to R$ [def-weil-pbc-mv-polynomial-ring] gives exactly the asserted identity for every $R,x,y$. If $I_{a,b}$ is empty the product is $1$, so $p_a(x)p_b(y)=p_b(y)p_a(x)$ for all such points. The chosen enumeration was arbitrary.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 5.1.14, proof, printed pp.145--146; the ordered positive-root coordinate isomorphism of Theorem 5.1.13 is assumed in the item. Universal-algebra version of the coefficient argument, written by Q87. Conrad was read online; the archival PDF in literature/ remains WANTED. The elementary coefficient calculation and functorial universal-point presentation are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Commutator of root subgroup elements in a split reductive group scheme is a product of root subgroup elements with roots i alpha plus j beta and parameters C x^i y^j",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"leanfinder\", \"query\": \"Commutator of root subgroup elements in a split reductive group scheme is a product of root subgroup elements with roots i alpha plus j beta and parameters C x^i y^j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_f_same\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.lie_h_h\"], \"digest\": \"51eaf463f79370b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"commutator\"",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"commutator\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|rootGroup|Chevalley.*commutator|commutator.*root",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"grep\", \"query\": \"rootSubgroup|rootGroup|Chevalley.*commutator|commutator.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Schreier.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Finite.lean\", \"Mathlib/GroupTheory/Focal.lean\", \"Mathlib/GroupTheory/Focal.lean\", \"Mathlib/GroupTheory/Focal.lean\"], \"digest\": \"951b70eee1740aca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley commutator formula for root groups over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T11:23:01Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley commutator formula for root groups over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.instCommutatorRing\", \"commutatorElement_def\", \"commutatorElement\", \"commutator_def\", \"Derivation.commutator_apply\", \"LieAlgebra.lieCharacter_apply_lie'\", \"RootPairing.Equiv.instSMulCommClassAut\", \"CommutatorRing\"], \"digest\": \"32257224e9ce24a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torus equivariance forces the root group commutator coordinates to be single monomials of biweight i alpha plus j beta",
+   "results": "{\"t\": \"2026-10-24T11:23:07Z\", \"tool\": \"leanfinder\", \"query\": \"Torus equivariance forces the root group commutator coordinates to be single monomials of biweight i alpha plus j beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.chainBotCoeff_if_one_zero\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.chainTopCoeff_if_one_zero\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.root_chainTopIdx\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\"], \"digest\": \"0549f50e9f9d8c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "grep",
+   "query": "lie_e_f_same|e_lie_v_ne|rootSpace_zsmul_add_ne_bot_iff_mem",
+   "results": "{\"t\": \"2026-10-24T11:24:53Z\", \"tool\": \"grep\", \"query\": \"lie_e_f_same|e_lie_v_ne|rootSpace_zsmul_add_ne_bot_iff_mem\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"4ea17f0d9989a5cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie brackets in GeckConstruction, abstract group commutators, or root strings of Killing Lie algebras; none gives root-group scheme commutator coordinates over arbitrary rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley commutator formula for root subgroup schemes over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T11:51:56Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley commutator formula for root subgroup schemes over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.commutator\", \"commutator_def\", \"LieAlgebra.instCommutatorRing\", \"Subgroup.commutator_def\", \"commutatorElement\", \"Derivation.commutator_apply\", \"Subgroup.commutator_mem_commutator\", \"CommutatorRing\"], \"digest\": \"bef755c13cb6a0fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-bracket/abstract-root-system identities and abstract group commutators do not state a polynomial root-subgroup commutator formula over arbitrary rings; geometric Chevalley hits are constructibility theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutator coordinates of root subgroups in a split reductive group scheme over an arbitrary commutative ring are monomials C x^i y^j of root weight i alpha plus j beta",
+   "results": "{\"t\": \"2026-10-24T11:51:57Z\", \"tool\": \"leanfinder\", \"query\": \"Commutator coordinates of root subgroups in a split reductive group scheme over an arbitrary commutative ring are monomials C x^i y^j of root weight i alpha plus j beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.lie_e_f_same\"], \"digest\": \"4a0b8ce309dbfffd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-bracket/abstract-root-system identities and abstract group commutators do not state a polynomial root-subgroup commutator formula over arbitrary rings; geometric Chevalley hits are constructibility theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "root.*commut|commut.*root|RootSubgroup|rootSubgroup|Chevalley",
+   "results": "{\"t\": \"2026-10-24T11:52:15Z\", \"tool\": \"grep\", \"query\": \"root.*commut|commut.*root|RootSubgroup|rootSubgroup|Chevalley\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"94219d14698fc6fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-bracket/abstract-root-system identities and abstract group commutators do not state a polynomial root-subgroup commutator formula over arbitrary rings; geometric Chevalley hits are constructibility theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torus equivariance of polynomial coordinates in ordered positive root subgroups forces a root commutator to have support only on positive combinations of the two roots",
+   "results": "{\"t\": \"2026-10-24T11:52:17Z\", \"tool\": \"leanfinder\", \"query\": \"Torus equivariance of polynomial coordinates in ordered positive root subgroups forces a root commutator to have support only on positive combinations of the two roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.add_zsmul\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.Base.pos_or_neg_of_sum_smul_root_mem\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.Base.exists_root_eq_sum_nat_or_neg\", \"RootPairing.Base.not_nonpos_iff_pos_of_sum_mem_range_root\", \"RootPairing.Base.root_add_root_mem_of_mem_of_mem\", \"RootPairing.Iic_chainTopCoeff_eq\"], \"digest\": \"b53af5461a26f591\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-bracket/abstract-root-system identities and abstract group commutators do not state a polynomial root-subgroup commutator formula over arbitrary rings; geometric Chevalley hits are constructibility theorems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-root-subgroup-weyl-calculus",
+  "date": "2026-10-24",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 4.1.4, printed pp.110,116--118; Corollary 5.1.9 and Remark 5.1.10, pp.140--142; Proposition 5.1.6 and Corollary 5.1.11, pp.138,142--143; Theorem 5.1.13 and Proposition 5.1.16, pp.143--148; Section 6.2 opening paragraph, p.198 (the fppf multiplication of two open cells). Coroots are constructed inside the rank-one centralizer in Section 4.2; self-centralizing tori are Proposition 3.1.9(2), pp.85--86; root rank is the classical root-datum rank of Section 1.3. Supporting proof input: Proposition 5.1.14 and its proof, printed pp.145--146; the positive-system coordinate hypothesis is the output of Theorem 5.1.13 used in that proof.",
+   "via": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-equivariant-root-commutator-support",
+  "worker": "stage1",
+  "summary": "Checked Conrad Proposition 5.1.14 online and expanded the full universal-coordinate proof into six elementary steps. The assumed ordered product isomorphism supplies polynomials directly at A[X,Y]; torus equivariance at the universal A[M] point and coefficient projections force the required support over every base ring. No statement change, new nodes, or Mathlib leaves. Checked axes, arbitrary enumeration, natural evaluation, nonreduced/disconnected rings, small characteristics and empty root cases.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, paragraph (3), proper/open factorization and its delegated constructibility input. This item supplies only its inherited supporting root-calculus prerequisite: Conrad Proposition 5.1.14 after the ordered-coordinate hypothesis, not a replacement of the unit route. The inherited nearest-blueprint ancestor is null (blueprint_refs.py ancestor); it is retained. Whole-blueprint searches found no equivalent root commutator statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-c12e14644",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-c12e14644 (reviewer sub-agent of L); spot-checked: Read the item in full. The live node is unsplit with the same statement, and there is no repair note, so this is not a re-split. Only split-owned fields changed: proof, proof_deps, proof_origin, split_report, status, plus 4 appended searches with real tool logs. I read the full statements of all 5 cited definitions and the parent lem-sfb-split-root-subgroup-weyl-calculus step 12. The parent uses the item with exactly its hypotheses. Conrad Prop 5.1.14 is not in literature/; WANTED is recorded and the proof is marked agent-written. I judged the proof on its own mathematics, and it is complete and correct. Step 1: reducedness (Qα∩Φ={±α}) and λ>0 make a,b independent in the free lattice M, so (i,j)↦ia+jb is injective, I_{a,b} is finite and lies in Σ. Step 2: the ordered-product isomorphism gives natural bijections q_R:R^Σ→U_Σ(R); the commutator K lies in U_Σ(A[X,Y]) because U_Σ is a subgroup; h_c comes from Yoneda. Step 3: equivariance plus uniqueness at the universal torus point A[M]→A[M][X,Y] gives h_c(e_aX,e_bY)=e_c h_c. Step 4: Y=0 or X=0 gives the identity, so h_c vanishes on both axes. Step 5: comparing coefficients in the free basis e_m kills d_{c,i,j} unless ia+jb=c; no field points or cancellation are used, so this holds over Z/4, F_2[ε] and Z×F_2. Step 6: the surviving monomials assemble in the requested order, and I_{a,b}=∅ gives commutation. Checked A1×A1, A2 elementary matrices (commutator 1+xyE13, C=1, also over F_2), and small characteristic where constants may vanish. No new nodes, no duplicate or generalization in the DAG (checked chevalley-nonopposite-exponential-commutator, chevalley-unipotent-polynomial-coordinates, unitriangular-coordinate-filtration, quasifinite-root-map-rigidity, pinned-split-root-base-change). The item's dependencies do not reach it, so there is no cycle. All dependencies are definitions, so it stays on its unit's route and no tool_uses are needed. FIX (C4): step 3 used that T(R)⊂G(R) consists of A-algebra maps A[M]→R and that the character value m(t) is the image of e_m. That is stated in def-sfb-pinned-split-root-realization, not in the cited def-sfb-ring-diagonalizable-group. Added the sentence and the citation to step 3's uses; proof_deps unchanged. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-equivariant-root-commutator-support.json.; 1 file(s) fixed by the reviewer"
+ }
+}

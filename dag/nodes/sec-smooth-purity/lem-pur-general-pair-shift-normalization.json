@@ -1,0 +1,204 @@
+{
+ "id": "lem-pur-general-pair-shift-normalization",
+ "kind": "statement",
+ "title": "Unique stagewise integer shifts with identity-normalized inclusions",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and an arbitrary scheme $Y$. The universe of $Y$ and the universe of $\\Omega$ are independent. Let $I$ be the directed poset of finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. Use the specified small coefficient models, intrinsic raw rational stages $C_E=D^b_c(Y,E)$ [def-weil-rationalization-karoubi], and the datum-free normalized scalar stage system $S$ of [lem-general-algebraically-closed-coefficient-stages]. Write $T_{EL}$ for its transition for $E\\le L$, $a_{ELM}:T_{LM}T_{EL}\\cong T_{EM}$ for its associator, and $\\sigma_{EL,n,K}:T_{EL}(K[n])\\cong(T_{EL}K)[n]$ for its fixed integral-image-normalized integer-shift comparison. Let $P=S.\\mathrm{PairCategory}$ be the category with literal objects $(E,K)$ and morphisms the classes $[L,u]$ modulo equality after common-stage transport [def-sf-directed-common-stage-data]. Write $j_E:C_E\\to P$ for the specified inclusion. No finite-field datum, geometric base-field structure, noetherian assumption, or Karoubi completion is part of this construction.\n\nGive $P$ the abelian-group Hom structure determined by the actual directed colimit [def-weil-directed-colimit-abelian-groups, lem-pur-general-pair-hom-coordinates]. There exists exactly one full coherent integer-shift structure $s$ on this fixed category [def-weil-triangulated-category] with the following properties. Every shift functor is additive, and for every $n\\in\\mathbf Z$ its object map is literally\n$$ (E,K)[n]=(E,K[n]). $$\nFor every representative $[L,u]:(E,K)\\to(F,H)$ it has the formula\n$$ [L,u][n]=[L,\\sigma_{FL,n,H}^{-1}\\circ u[n]\\circ\\sigma_{EL,n,K}]. $$\nThe formula is interpreted after the displayed object equalities, equivalently by heterogeneous equality as in the recorded declaration. There exist coherent comparisons $\\beta_{E,n,K}:j_E(K[n])\\cong(j_EK)[n]$ making every $j_E$ commute with all integer shifts, whose hom components are the identity of the displayed shifted pair. The zero and addition equations are those of coherent shift-commuting functors: the degree-zero comparison is the one induced by the two shift-zero isomorphisms, and the comparison at $n+m$ is the composite induced by those at $n,m$ and the two shift-add isomorphisms. Uniqueness is equality of the entire $\\mathrm{HasShift}$ structure, including its shift-zero and shift-add coherence data, not merely equality of the functors. The existential inclusion comparisons are constrained to the stated identity components; they are not arbitrary exactness witnesses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 definition, the clause (E,K)[1]=(E,K[1]); live GeneralAlgebraicallyClosedCoefficients.lean:508-553, full shift_existsUnique including uniqueness of coherence; live Lean: Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients.shift_existsUnique",
+  "note": "Construction material for GeneralAlgebraicallyClosedCoefficients.shift_existsUnique: shift every finite representative by the prescribed sigma conjugation. Scalar associator compatibility makes this independent of stage and respects identities/composition. Descend the stagewise shift-zero and shift-add components; their diagrams hold at a common finite stage. The colimit sum formula gives additive shifts. Stage inclusion comparisons have identity components on literal shifted pairs. These components and the CommShift zero/add equations force the zero/add isomorphisms at every pair; since every object is a pair, uniqueness concerns the entire HasShift structure. This preserves the full coherence argument rather than only equality of the functors."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-pur-general-pair-hom-coordinates",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-intrinsic-associator-shift-square], the actual intrinsic associators satisfy\n$$\\sigma_{EM,n,K}\\circ a_{ELM,K[n]}=a_{ELM,K}[n]\\circ\\sigma_{LM,n,T_{EL}K}\\circ T_{LM}(\\sigma_{EL,n,K}).$$\nThus for each integer $n$ the functors $\\Phi_E=[n]$ and comparisons $b_{EL}=\\sigma_{EL,n}$ satisfy exactly the tower equation of [lem-pur-unnormalized-pair-functor-descent]. All indices, including repetitions, are allowed; no identity normalization of $T_{EE}$ is used.",
+   "uses": [
+    "lem-pur-intrinsic-associator-shift-square",
+    "lem-pur-unnormalized-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-unnormalized-pair-functor-descent] to this family for every integer $n$. It gives a functor $Q_n:P\\to P$ with the literal object and representative formulas in the statement, and $Q_nj_E=j_E[n]$ on objects and arrows. Thus the inclusion comparison has identity components. For two arrows choose a common stage using [lem-pur-general-pair-hom-coordinates]. At that stage the formula for $Q_n$ is the additive map $u\\mapsto\\sigma_F^{-1}u[n]\\sigma_E$: additivity of the stage shift and bilinearity distribute it over $u+v$, and it sends $0$ to $0$. The cited Hom-coordinate formulas $[L,u]+[L,v]=[L,u+v]$ and $[L,0]=0$ show that every $Q_n$ is additive for exactly the specified group laws.",
+   "uses": [
+    "lem-pur-unnormalized-pair-functor-descent",
+    "lem-pur-general-pair-hom-coordinates",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+   }
+  },
+  {
+   "text": "Write $z^E_K:K[0]\\cong K$ and $c^E_{n,m,K}:K[n+m]\\cong(K[n])[m]$ for the given stage coherence. Their families are compatible transformations: the compatibility equations with a transition are precisely its CommShift zero and addition equations, supplied by [lem-general-algebraically-closed-coefficient-stages]. Apply [lem-pur-unnormalized-pair-functor-descent] to them and to their inverses. Identity/composition descent identifies their targets with $\\operatorname{id}_P$ and $Q_mQ_n$, giving natural isomorphisms\n$$z_{(E,K)}=j_E(z^E_K),\\qquad c_{n,m,(E,K)}=j_E(c^E_{n,m,K}).$$\nFor example the associativity equality at $(E,K)$ is $Q_d(c_{n,m,(E,K)})c_{n+m,d,(E,K)}=c_{m,d,Q_n(E,K)}c_{n,m+d,(E,K)}$; substitution of the displayed components and $Q_dj_E=j_E[d]$ makes both sides $j_E$ of the stage associativity equality. The two unit equalities similarly become $c_{0,n,(E,K)}=Q_n(z_{(E,K)}^{-1})$ and $c_{n,0,(E,K)}=z_{Q_n(E,K)}^{-1}$, by applying $j_E$ to the stage unit equations. The core construction [lem-pur-coherent-shift-from-core] therefore gives a full HasShift structure with these precise functors and isomorphisms.",
+   "uses": [
+    "lem-pur-unnormalized-pair-functor-descent",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-pur-coherent-shift-from-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+   }
+  },
+  {
+   "text": "Give $j_E$ the identity comparison $\\beta_{E,n,K}$. It is natural because $Q_nj_E=j_E[n]$ from [lem-pur-unnormalized-pair-functor-descent]. Its zero equation reduces to $z_{j_EK}=j_E(z^E_K)$, and its addition equation reduces to $c_{n,m,j_EK}=j_E(c^E_{n,m,K})$; these are exactly the components constructed in the preceding step. Thus these are coherent inclusion comparisons, rather than a freely chosen family of exactness witnesses.",
+   "uses": [
+    "lem-pur-unnormalized-pair-functor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+   }
+  },
+  {
+   "text": "For uniqueness take any two structures satisfying the stated conditions and identify their object maps by the required equalities. Every arrow is a representative by [lem-pur-general-pair-hom-coordinates], so the representative formula identifies their arrow maps, hence each $Q_n$. With identity inclusion comparisons, the inclusion CommShift zero equation forces $z_{(E,K)}=j_E(z^E_K)$, and its addition equation forces $c_{n,m,(E,K)}=j_E(c^E_{n,m,K})$. Every object is literally $(E,K)$ [def-sf-directed-common-stage-data], so the two natural isomorphisms agree everywhere. In the definition of HasShift as a monoidal functor, the functor on the discrete category is fixed by the $Q_n$ (its maps are forced by identities); its monoidal unit and tensorator are the inverses of $z$ and $c$. Inverses of isomorphisms are unique, and the remaining fields are proofs of equations. Thus the whole HasShift structures are equal, including the zero and addition data. The existential inclusion witnesses add no choice, since their hom components have already been forced to be identities.",
+   "uses": [
+    "lem-pur-general-pair-hom-coordinates",
+    "def-sf-directed-common-stage-data",
+    "lem-pur-coherent-shift-from-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-intrinsic-associator-shift-square",
+  "lem-pur-unnormalized-pair-functor-descent",
+  "lem-pur-general-pair-hom-coordinates",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-triangulated-category",
+  "lem-pur-coherent-shift-from-core",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 stagewise shift clause; live GeneralAlgebraicallyClosedCoefficients.lean:521-553 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean:48-243."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a directed system of additive categories with exact scalar extension, there exists a unique coherent integer shift on the finite stage pair category fixed on objects, representatives and identity inclusion comparisons",
+   "results": "8 hits: CategoryTheory.CommShift₂Setup.int, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.hasShiftMk, CategoryTheory.HasShift, CategoryTheory.ShiftMkCore, DerivedCategory.instAdditiveShiftFunctorInt, AddCommGroup.DirectLimit.directedSystem, CategoryTheory.HasShift.induced",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasShift, CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|shift_existsUnique",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered common stage category of pairs has a unique additive integer shift with identity stage inclusion shift comparisons",
+   "results": "8 hits: CategoryTheory.HasShift, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.HasShift.induced, CategoryTheory.ShiftMkCore.mk, CategoryTheory.shiftZero, CategoryTheory.ShiftMkCore.add, CategoryTheory.GradedObject.hasShift, CategoryTheory.instIsEquivalenceShiftFunctor",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unique normalized shift on a directed colimit of categories is determined on finite stage objects and morphism representatives, including its zero and addition coherence",
+   "results": "8 hits: CategoryTheory.ShiftMkCore.mk.inj, CategoryTheory.hasShiftMk, CategoryTheory.SingleFunctors.mk.inj, CategoryTheory.ShiftMkCore, CategoryTheory.CommShift₂Setup.mk.inj, CategoryTheory.TwistShiftData.mk.inj, CategoryTheory.SingleFunctors, CategoryTheory.HasShift",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique coherent integer shift on a common stage pair category normalized by identity comparisons of every stage inclusion",
+   "results": "8 hits: CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.instIsEquivalenceShiftFunctor, CochainComplex.singleFunctors, CochainComplex.instHasShiftInt, CategoryTheory.ShiftMkCore.noConfusion, CochainComplex.shiftFunctorObjXIso.congr_simp, CochainComplex.shiftFunctorObjXIso, CategoryTheory.Functor.CommShift.id",
+   "date": "2026-10-27",
+   "verdict": "no match: the generic shift-core and fully faithful induction results do not state the representative formula or normalized uniqueness on this fixed pair category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full integer shift structure on a common stage category is uniquely fixed by object and representative formulas and identity shift comparisons of inclusions",
+   "results": "8 hits: CategoryTheory.ShiftMkCore.mk.inj, CategoryTheory.CommShift₂Setup.mk.inj, CategoryTheory.hasShiftMk, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.TwistShiftData.mk.inj, CategoryTheory.ShiftMkCore, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.HasShift",
+   "date": "2026-10-27",
+   "verdict": "no match: the generic shift-core and fully faithful induction results do not state the representative formula or normalized uniqueness on this fixed pair category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 definition, the clause (E,K)[1]=(E,K[1]); live GeneralAlgebraicallyClosedCoefficients.lean:508-553, full shift_existsUnique including uniqueness of coherence",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-pair-shift-normalization",
+  "worker": "stage1",
+  "summary": "Checked the full live shift_existsUnique signature without changing the statement. Isolated intrinsic associator shift compatibility (the older coefficient version cannot be used without a bridge), a general unnormalized functor/transformation descent interface with project attachment evidence, and one Mathlib core leaf. The item constructs its shift functors and zero/add maps, checks additivity for the actual Hom colimit, and proves equality of entire HasShift structures from identity inclusion comparisons.",
+  "blueprint": "Retained order-1462 pair construction: (E,K)[1]=(E,K[1]) and common-stage representation. Steps 1-2 realize representative shift descent; step 3 realizes full zero/add coherence; steps 4-5 realize identity inclusion normalization and uniqueness retained by the live GeneralAlgebraicallyClosedCoefficients.shift_existsUnique declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e84103a1c",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e84103a1c (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, every cited statement, the Lean target (GeneralAlgebraicallyClosedCoefficients.lean:508-553), StageSystem/Functor.lean:50-260, Mathlib Shift/Basic.lean:64-87, 119-155 and 204-214, and the blueprint comparison-functor proof (det-def-sfb-filtered-two-colimit-model.proof.md:23-34). The item statement is unchanged and matches shift_existsUnique clause by clause. Step 1: the square has the same orientation as Morphism.coh with b=σ, Φ=[n]. Step 2: the descended Q_n gives the literal formulas, and it is additive because hom-coordinates gives [L,u]+[L,v]=[L,u+v] and the stage shift is additive. Step 3: compatibility of z and c with the transitions is exactly the CommShift zero/add axioms, and the three equations match ShiftMkCore assoc/zero_add/add_zero. Steps 4 and 5 are elementary: identity components force z and c at every literal pair, and HasShift is determined by ε=z⁻¹, μ=c⁻¹ plus Prop fields. New nodes: (1) the descent node agrees with Functor.lean coh/Hom.comm and has no unitor. It is not a duplicate: lem-sbc-coherent-pair-functor-descent needs U_EE=1 and b_EE=1, and the framework/pbc descent nodes assume exact or finite-field data. (2) The hasShiftMk leaf is verified at line 153 and its equations match. (3) The intrinsic associator square is a true, needed fact: the stages lemma does not state it, and lem-weil-scalar-associator-shifts concerns the old datum presentation. Each new node is strictly smaller than the item. No cycle, same unit, no tool_uses, no SGA. Advisory: the report says Lean names are seeded on the descent node, but it has no lean_audit field (maintainer may attach the sorry-free StageSystem.Morphism decls); the pre-existing sibling lem-pur-general-intrinsic-finite-field-transport repeats the uniqueness under a datum. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.shift_existsUnique",
+  "statement": "theorem shift_existsUnique :\n    ∃! s : HasShift (Pair l Ω Y) ℤ,\n      (fun [shiftInst : HasShift (Pair l Ω Y) ℤ] ↦\n        (∀ n : ℤ, (shiftFunctor (Pair l Ω Y) n).Additive) ∧\n        (∀ (n : ℤ) (A : Pair l Ω Y),\n          (shiftFunctor (Pair l Ω Y) n).obj A = shiftPair n A) ∧\n        (∀ (n : ℤ) (A B : Pair l Ω Y) (L : Index l Ω)\n          (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : StageHom A B ⟨L, hA, hB⟩),\n          HEq ((shiftFunctor (Pair l Ω Y) n).map (ofHom A B L hA hB f))\n            (ofHom (shiftPair n A) (shiftPair n B) L hA hB\n              (shiftRepresentative n A B L hA hB f))) ∧\n        ∃ c : ∀ E : Index l Ω, (inclusion E : Stage l Ω Y E ⥤ _).CommShift ℤ,\n          (fun [commInst : ∀ E : Index l Ω,\n              (inclusion E : Stage l Ω Y E ⥤ _).CommShift ℤ] ↦\n            ∀ (n : ℤ) (E : Index l Ω) (K : Stage l Ω Y E),\n              HEq (((inclusion E : Stage l Ω Y E ⥤ _).commShiftIso n).hom.app K)\n                (𝟙 ((inclusion E : Stage l Ω Y E ⥤ _).obj\n                  ((shiftFunctor (Stage l Ω Y E) n).obj K)))) (commInst := c))\n        (shiftInst := s)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing declaration at GeneralAlgebraicallyClosedCoefficients.lean:534. Section parameters bind l with Fact l.Prime, Ω : Type v with Field/Algebra/IsAlgClosure, and Y : Scheme.{u}, with independent u and v. The existential uniqueness quantifies over the entire HasShift structure; the final existential uses coherent CommShift inclusion comparisons whose hom components are constrained by HEq to the identity. Reuses the fixed quotient pair category, actual directed-colimit Hom groups, and normalized stage transitions. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa711c83f",
+  "group": "ND",
+  "result": "pass",
+  "note": "existing:true attach to GeneralAlgebraicallyClosedCoefficients.shift_existsUnique (line 534); only the lean field changed. lean.statement is byte-verbatim and the proof is sorry only. Binders: l prime, Ω : Type v algebraic closure of Padic l, Y : Scheme.{u}, universes independent, no finite-field datum/noetherian/Karoubi. Pair is the fixed stageSystem pair category with DirectLimit Hom groups; σ is stageTransitionCommShift (normalized transitionCommShift cast along the spec), orientation σ_B⁻¹∘u[n]∘σ_A. Clauses match: Additive, literal shiftPair, HEq representative formula for all L, ∃ coherent inclusion CommShift with 𝟙 components, ∃! over the whole HasShift (clauses bind the candidate via shiftInst/commInst). Edge cases n=0/negative, repeated stages, empty Y covered. Sf* variant needs a datum, so no duplicate. Stmt_dep Lean matches. Advisory: parent def-weil-algebraically-closed-coefficients still lists shift_existsUnique in declarations (dual owner, NB/NE precedent)."
+ }
+}

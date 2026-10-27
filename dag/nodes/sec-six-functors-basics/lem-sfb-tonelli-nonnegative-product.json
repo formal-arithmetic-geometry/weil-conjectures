@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-tonelli-nonnegative-product",
+ "kind": "statement",
+ "title": "Tonelli and finiteness for nonnegative integrals",
+ "statement": "Use $\\mathbf R$ [def-weil-field]. Let $(X,\\mu)$ and $(Y,\\nu)$ be sigma-finite measure spaces, and let $H:X\\times Y\\to[0,\\infty]$ be measurable up to a set of product measure zero. Nonnegative integrals, with $0\\cdot\\infty=0$, satisfy\n$$\\int_{X\\times Y}H\\,d(\\mu\\times\\nu)=\\int_X\\int_Y H(x,y)\\,d\\nu(y)\\,d\\mu(x)=\\int_Y\\int_X H(x,y)\\,d\\mu(x)\\,d\\nu(y).$$\nThe inner integral in each order is measurable up to a null set. For any measure space $(Z,\\rho)$ and nonnegative function $h:Z\\to[0,\\infty]$ measurable up to a null set, $\\int h\\,d\\rho<\\infty$ implies $h<\\infty$ almost everywhere. Nonnegative integration is monotone under almost-everywhere inequalities and commutes with multiplication by a fixed nonnegative finite scalar.",
+ "source": {
+  "document": "Mathlib/MeasureTheory/Measure/Prod.lean",
+  "place": "lintegral_prod:1006–1012, lintegral_prod_symm:1030–1034, lintegral_lintegral_swap:1068–1071; AEMeasurable.lintegral_prod_right:979. Integral/Lebesgue/Markov.lean:148–151 (ae_lt_top'); Integral/Lebesgue/Basic.lean:217–227 (lintegral_mono_ae); Integral/Lebesgue/Add.lean:400–405 (lintegral_const_mul'')."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tonelli theorem for nonnegative measurable functions on product spaces: interchange iterated integrals; finite integral gives almost everywhere finite sections",
+   "results": {
+    "t": "2026-10-24T03:55:49Z",
+    "tool": "leanfinder",
+    "query": "Tonelli theorem for nonnegative measurable functions on product spaces: interchange iterated integrals; finite integral gives almost everywhere finite sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.lintegral_lintegral_swap",
+     "MeasureTheory.lintegral_lintegral",
+     "MeasureTheory.hasFiniteIntegral_prod_iff'",
+     "MeasureTheory.lintegral_prod",
+     "MeasureTheory.hasFiniteIntegral_prod_iff",
+     "MeasureTheory.lintegral_prod_symm",
+     "MeasureTheory.lintegral_lintegral_symm",
+     "MeasureTheory.lintegral_prod_symm'"
+    ],
+    "digest": "cd60928db61b57c1"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: lintegral_prod, lintegral_prod_symm, lintegral_lintegral_swap; read their hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tonelli theorem exchanging the two integrals of a nonnegative measurable function and a finite integral implies the function is finite almost everywhere",
+   "results": {
+    "t": "2026-10-24T03:59:19Z",
+    "tool": "leansearch",
+    "query": "Tonelli theorem exchanging the two integrals of a nonnegative measurable function and a finite integral implies the function is finite almost everywhere",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.ae_lt_top",
+     "MeasureTheory.ae_lt_top'",
+     "MeasureTheory.lintegral_prod_symm'",
+     "MeasureTheory.lintegral_lintegral_mul",
+     "MeasureTheory.lintegral_lintegral_symm",
+     "MeasureTheory.lintegral_lintegral",
+     "MeasureTheory.lintegral_lintegral_swap",
+     "MeasureTheory.measure_eq_top_of_setLIntegral_ne_top"
+    ],
+    "digest": "93fdfbdaef7a77c1"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: ae_lt_top' and the Tonelli theorems; sources read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lintegral_prod\"",
+   "results": {
+    "t": "2026-10-24T03:55:47Z",
+    "tool": "loogle",
+    "query": "\"lintegral_prod\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Measurable.lintegral_prod_left",
+     "Measurable.lintegral_prod_left'",
+     "Measurable.lintegral_prod_right",
+     "Measurable.lintegral_prod_right'",
+     "MeasureTheory.lintegral_prod_le",
+     "AEMeasurable.lintegral_prod_right",
+     "AEMeasurable.lintegral_prod_right'",
+     "AEMeasurable.lintegral_prod_left"
+    ],
+    "digest": "2f7871a721a88f29"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: lintegral_prod, lintegral_prod_symm and AEMeasurable.lintegral_prod_right"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem lintegral_lintegral_swap",
+   "results": {
+    "t": "2026-10-24T04:00:12Z",
+    "tool": "grep",
+    "query": "theorem lintegral_lintegral_swap",
+    "sub": "MeasureTheory/Measure/Prod.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "1068"
+    ],
+    "digest": "317c85f78a76b2c4"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Prod.lean:1068; read the neighboring Tonelli statements at :1006,:1030"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*ae_lt_top|theorem.*lintegral.*(mono|const_mul)",
+   "results": {
+    "t": "2026-10-24T03:57:57Z",
+    "tool": "grep",
+    "query": "theorem.*ae_lt_top|theorem.*lintegral.*(mono|const_mul)",
+    "sub": "MeasureTheory/Integral/Lebesgue",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Markov.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Markov.lean",
+     "Mathlib/MeasureTheory/Integral/Lebesgue/Markov.lean"
+    ],
+    "digest": "817765a649c47a8d"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Markov.lean:148, Basic.lean:84 onward and Add.lean:400; inspected the exact statements"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem lintegral_mono_ae",
+   "results": {
+    "t": "2026-10-24T04:03:21Z",
+    "tool": "grep",
+    "query": "theorem lintegral_mono_ae",
+    "sub": "MeasureTheory/Integral/Lebesgue/Basic.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "217"
+    ],
+    "digest": "a1a9aa0b4728ee0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Integral/Lebesgue/Basic.lean:217, source read"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem AEMeasurable.lintegral_prod_right",
+   "results": {
+    "t": "2026-10-24T04:03:21Z",
+    "tool": "grep",
+    "query": "theorem AEMeasurable.lintegral_prod_right",
+    "sub": "MeasureTheory/Measure/Prod.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "972",
+     "979"
+    ],
+    "digest": "18d247a74e04d64a"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Measure/Prod.lean:972 and 979, source read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MeasureTheory.lintegral_prod, MeasureTheory.lintegral_prod_symm, AEMeasurable.lintegral_prod_right, MeasureTheory.ae_lt_top', MeasureTheory.lintegral_mono_ae, MeasureTheory.lintegral_const_mul''",
+  "file": "Mathlib/MeasureTheory/Measure/Prod.lean",
+  "line": 1006,
+  "how": "One declaration per clause, with SFinite instances supplied by sigma-finiteness: lintegral_prod at Prod.lean:1006 and lintegral_prod_symm at :1030 give the two equalities. AEMeasurable.lintegral_prod_right at :979 gives inner measurability (swap X,Y for the other order). Integral/Lebesgue/Markov.lean:148 ae_lt_top' gives finiteness almost everywhere. Integral/Lebesgue/Basic.lean:217 lintegral_mono_ae gives monotonicity. Integral/Lebesgue/Add.lean:400 lintegral_const_mul'' gives scalar homogeneity after coercing the nonnegative finite scalar to ENNReal."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-l2-compact-kernel-approximation",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean weak Sobolev graphs and smoothing with controlled support. Supporting Euclidean input: support-controlled Sobolev smoothing: apply ordinary L2 approximate identities separately to the finitely many weak derivative representatives, without any Sobolev assumption in this analytic tool. Supporting measure-theoretic input: Tonelli for k_epsilon(y) times squared translated norms, and finite moments almost everywhere.",
+   "via": [
+    "lem-sfb-l2-compact-kernel-approximation",
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

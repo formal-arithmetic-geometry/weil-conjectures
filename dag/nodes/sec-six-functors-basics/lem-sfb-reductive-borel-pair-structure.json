@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-reductive-borel-pair-structure",
+ "kind": "statement",
+ "title": "Split Borel pairs, root data and proper flag quotients",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning a smooth connected affine group scheme of finite type with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful linear representation. A torus is a group scheme becoming $\\mathbf G_m^r$ over an algebraic closure, where $\\mathbf G_m(A)=A^\\times$; split means already isomorphic to this product over $F$. A maximal torus is maximal under inclusion. A Borel subgroup is a maximal smooth connected solvable closed subgroup [def-sc-group-scheme-subgroup], with solvable meaning that its successive commutator subgroup schemes become trivial. There exist a split maximal torus $T\\subseteq G$ and a Borel subgroup $B\\supseteq T$. For every such pair, the quotient $Q=G/B$ is an $F$-scheme whose structure morphism $Q\\to\\operatorname{Spec}F$ is proper and of finite type [def-pc-morphism-conventions], and $\\pi:G\\to Q$ is a faithfully flat (flat and surjective) $B$-torsor for right multiplication, meaning that $\\pi(gb)=\\pi(g)$ and that $G\\times_FB\\to G\\times_QG$, $(g,b)\\mapsto(g,gb)$, is an isomorphism. If $U=R_u(B)$ is the largest smooth connected normal unipotent subgroup of $B$, multiplication gives $B=U\\rtimes T$; hence the projection $p:B\\to T$ is a group-scheme homomorphism, is the identity on $T$ and has kernel $U$. The nonzero $T$-characters in $\\operatorname{Lie}(G)$ form a finite reduced crystallographic root datum $(X,\\Phi,X_*,\\Phi^\\vee)$, with $X=X^*(T)=\\operatorname{Hom}(T,\\mathbf G_m)$, $X_*=\\operatorname{Hom}(\\mathbf G_m,T)$ and the perfect integer pairing determined by $\\chi\\circ\\nu(t)=t^{\\langle\\chi,\\nu\\rangle}$. Its roots in $\\operatorname{Lie}(B)$ form a positive system $\\Phi^+$ with a simple-root base $\\Delta$: every root has integral simple-root coefficients all of the same sign. Each root $\\alpha$ has a coroot $\\alpha^\\vee\\in X_*$ with $\\langle\\alpha,\\alpha^\\vee\\rangle=2$, and $s_\\alpha(x)=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ permutes $\\Phi$. Lie algebras here are tangent spaces at the identity, and weights are characters of the torus action, not differentials of characters. A semisimple group over $F$ is reductive, where semisimple means smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 17.6 and Theorem 17.9 (pp.353--355); Theorem 16.33(d) (pp.335--336); Definition 19.22 and the following paragraph (p.402); Theorem 21.11 and Corollary 21.12 (the root datum); 21.29--21.35 (pp.433--435); Section 18c (p.390), the map G to G/B is a B-torsor. Unipotent groups are solvable by 14.21, and the definitions in 19a--19b give semisimple implies reductive."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-pc-morphism-conventions",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth connected solvable subgroup $B_0\\subseteq G$ of largest dimension, starting with the identity subgroup. Dimensions are nonnegative integers bounded by $\\dim G$, and strict inclusions of smooth connected subgroups strictly increase dimension by [lem-sfb-solvable-normal-subgroup-products]. Thus $B_0$ is a Borel. Apply [lem-sfb-solvable-subgroup-flag-realization] to realize $B_0$ as the full scheme-theoretic stabilizer of a complete flag $\\mathcal F$ in a representation $V$. For any other flag $\\mathcal E$, its stabilizer $K$ has a smooth connected solvable reduced identity subgroup of dimension $\\dim K$, so $\\dim K\\le\\dim B_0$. By [lem-sfb-smooth-group-orbit-geometry], the orbit of $\\mathcal F$ has dimension $\\dim G-\\dim B_0$ and is of minimum dimension among all flag orbits. If its boundary were nonempty, that same node would give an orbit of strictly smaller dimension there. Hence it is closed. The flag-realization node makes this closed orbit proper and of finite type. By [lem-sfb-homogeneous-orbit-quotient-geometry] it is $G/B_0$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, first paragraph of proof, p.354; use the reduced identity stabilizer to allow nonreduced stabilizers."
+   }
+  },
+  {
+   "text": "For any Borel $B$, let $B$ act on the nonempty proper scheme $G/B_0$. By [lem-sfb-solvable-proper-fixed-point] there is a point fixed scheme-theoretically by $B$. The quotient-orbit description in [lem-sfb-homogeneous-orbit-quotient-geometry] expresses it as $gB_0$ for $g\\in G(F)$. Its stabilizer is $gB_0g^{-1}$, so $B\\subseteq gB_0g^{-1}$ as group schemes. This last group is smooth connected solvable, hence maximality of $B$ makes the inclusion equality. Conjugation identifies $G/B$ with $G/B_0$, giving properness and finite type. The homogeneous quotient node also gives faithful flatness and exactly the required right-multiplication torsor isomorphism for $H=B$.",
+   "uses": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9, last paragraph, p.354; Propositions 5.24--5.25, p.105."
+   }
+  },
+  {
+   "text": "Choose a torus $T$ of largest dimension, starting with the identity torus. By [lem-sfb-solvable-normal-subgroup-products], dimension strictly increases under a strict inclusion of tori, so $T$ is maximal. Since $F$ is already algebraically closed, the defining geometric splitting of a torus is a splitting over $F$. A split torus is smooth, connected and commutative. Among smooth connected solvable subgroups containing $T$ choose one of largest dimension. The same strict dimension argument makes it a Borel subgroup of $G$. This gives a Borel pair without requiring that the torus quotient of a prechosen Borel split first.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.12 and the paragraph following it, p.355; Definition 19.22 and its following paragraph, p.402."
+   }
+  },
+  {
+   "text": "Now fix any Borel pair $(B,T)$. The field $F$ is perfect. The successive commutator subgroups $B\\supseteq\\mathcal DB\\supseteq\\mathcal D^2B\\supseteq\\cdots$ form a finite series of closed subgroups, each normal in its predecessor with commutative quotient, so $B$ is solvable in the normal-series sense used there. Apply [lem-sfb-perfect-solvable-unipotent-torus] to the smooth connected solvable group $B$, obtaining its smooth connected normal unipotent subgroup $U$ and the torus quotient $q:B\\to D=B/U$. Every smooth unipotent subgroup of $B$ lies in $U$, so this is precisely $R_u(B)$ in the item. The torus $T$ is maximal in $B$, since any larger torus there would be a larger torus in $G$. By [lem-sfb-solvable-torus-complements], $q|_T:T\\to D$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-torus-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(a)--(d), pp.335--336; Theorem 16.27(b), p.333."
+   }
+  },
+  {
+   "text": "Define $p=(q|_T)^{-1}\\circ q:B\\to T$. It is a homomorphism and restricts to the identity on $T$. Its kernel is $U$. Multiplication $U\\times_F T\\to B$ has inverse $b\\mapsto(bp(b)^{-1},p(b))$, since $q(bp(b)^{-1})=1$. These are morphisms and mutually inverse over every $F$-algebra. Normality of $U$ gives the product rule $(u,t)(u\\prime,t\\prime)=(u(tu\\prime t^{-1}),tt\\prime)$, proving the asserted semidirect product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(d), p.336; explicit semidirect-product reconstruction from the previous step."
+   }
+  },
+  {
+   "text": "Choose split coordinates $T\\simeq\\mathbf G_m^r$. The coordinate Hopf algebra is $F[\\mathbf Z^r]$. By [lem-sfb-group-algebra-group-like-basis], its group-like elements are exactly its basis Laurent monomials. A character pulls the coordinate of $\\mathbf G_m$ back to such an element; a cocharacter pulls each coordinate back to a Laurent monomial in one variable. Thus characters and cocharacters have integer exponent vectors, hence $X\\simeq\\mathbf Z^r$ and $X_*\\simeq\\mathbf Z^r$, and composition is the dot-product pairing. In particular the pairing is perfect. Apply [lem-sfb-reductive-rank-one-reflections] to $(G,T)$. It supplies the finite nonzero weight set $\\Phi$, the coroots $\\alpha^\\vee$, and the reflections $s_\\alpha$ in a finite group $W$. Each reflection preserves $\\Phi$ because $W$ does, and its square is the identity by $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. The group generated by these reflections is a subgroup of finite $W$. The rational multiples of a root which are roots are exactly its two signs. Thus the integral perfect pairing, finite reflection group and supplied coroot identities satisfy the reduced crystallographic root-datum axioms. Central torus directions are retained in $X$ and $X_*$; the roots need not span them.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 21a and Corollary 21.12, pp.424--430; root datum axioms in Appendix C.28, pp.613--614."
+   }
+  },
+  {
+   "text": "For completeness, the root-coroot indexing and simultaneous reflection identities needed by [lem-sfb-crystallographic-positive-base] follow as follows. If $\\alpha^\\vee=\\beta^\\vee$, the two reflection formulas give $(s_\\beta s_\\alpha)^n\\alpha=\\alpha+2n(\\beta-\\alpha)$. These lie in finite $\\Phi$; torsion-freeness of $X$ forces $\\alpha=\\beta$, so the coroot map is injective. The normalizer equivariance in [lem-sfb-reductive-rank-one-reflections] gives $(s_\\alpha\\beta)^\\vee=s_\\alpha(\\beta^\\vee)$. The action on cocharacters is dual to that on characters: pairing $s_\\alpha x$ with $s_\\alpha y$ equals $\\langle x,y\\rangle$. Substituting its formula on $X$ yields $s_\\alpha y=y-\\langle\\alpha,y\\rangle\\alpha^\\vee$. Thus the two reflection permutations have the same indexing, as required.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-crystallographic-positive-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.31, p.614; equivariance of the rank-one construction in Theorem 21.11(e)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-regular-cocharacter-borel-description], our given $B$ is $P(\\lambda)$ for an integral regular cocharacter $\\lambda$. Its nonzero Lie weights are precisely $\\Phi^+=\\{\\alpha\\in\\Phi:\\langle\\alpha,\\lambda\\rangle>0\\}$. Put $f(x)=\\langle x,\\lambda\\rangle$ and let $\\Delta$ be the roots in $\\Phi^+$ not expressible as a sum of two roots in $\\Phi^+$. The preceding simultaneous-reflection construction is a finite root pairing over $\\mathbf Z$, and $f$ is an integer-linear functional nonzero on every root. Therefore [lem-sfb-crystallographic-positive-base] says that $\\Delta$ is linearly independent over $\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-crystallographic-positive-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32 and Definition 21.35, pp.434--435; Appendix C.9,C.21; Mathlib integer-valued base independence."
+   }
+  },
+  {
+   "text": "Induct on the positive integer $f(\\alpha)$ for $\\alpha\\in\\Phi^+$. If $\\alpha\\in\\Delta$, it is already a nonnegative integral sum of simple roots. Otherwise $\\alpha=\\beta+\\gamma$ with $\\beta,\\gamma\\in\\Phi^+$; their positive integer $f$-values are strictly smaller, so induction expresses both as nonnegative integral sums of $\\Delta$. Adding gives the required expression for $\\alpha$. Every root outside $\\Phi^+$ is the negative of one in it, since $f$ is nonzero on roots and $-\\alpha\\in\\Phi$. Negating the positive expression gives all coefficients nonpositive. The integral linear independence already obtained gives uniqueness, and also rational linear independence after clearing denominators. Thus $\\Delta$ is a base in the rational span of the roots, with the asserted sign convention. If $\\Phi$ is empty all these statements are vacuous and $\\Delta=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.9 and C.21, pp.609,612; the positive-integer induction is written out."
+   }
+  },
+  {
+   "text": "Finally let $G$ be semisimple in the stated sense. Any smooth connected normal unipotent subgroup $U$ is solvable by [lem-sfb-smooth-unipotent-solvable]. That node gives a series $U=U_0\\supseteq U_1\\supseteq\\cdots\\supseteq U_m=1$, each normal in its predecessor with commutative quotient. The derived subgroup of $U_i$ lies in every normal subgroup of $U_i$ with commutative quotient, so $\\mathcal D(U_i)\\subseteq U_{i+1}$; by induction $\\mathcal D^iU\\subseteq U_i$, and the successive commutator subgroups of $U$ become trivial. So $U$ is solvable in the sense of the semisimplicity hypothesis. Semisimplicity forces it to be trivial. Together with the given smoothness, connectedness, affineness and finite type, this is exactly reductivity. No assertion about characteristic-zero Lie-algebra semisimplicity is used.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, pp.284--285; definitions in Sections 19a--19b. "
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-solvable-subgroup-flag-realization",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-group-algebra-group-like-basis",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-crystallographic-positive-base",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-smooth-unipotent-solvable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 17.9 flag-orbit argument, 16.27/16.33 complements, 21.11 rank-one reflections and 21.32 cocharacters; explicit integral root-datum and positive-base assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroup of a connected reductive algebraic group over an algebraically closed field contains a split maximal torus and is a semidirect product with its unipotent radical",
+   "results": "8 hits; read: RootPairing.GeckConstruction.instHasTrivialRadical; LieAlgebra.exists_isCartanSubalgebra_engel; LieAlgebra.zeroRootSubalgebra_normalizer_eq_self; LieAlgebra.cartan_sup_iSup_rootSpace_eq_top; LieAlgebra.top_isCartanSubalgebra_of_nilpotent; LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq; LieAlgebra.IsSemisimple.booleanGenerators; LieSubalgebra.IsCartanSubalgebra.self_normalizing",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings, Lie algebras or topological closed subgroups, not Borel pairs of algebraic groups"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel_subgroup|RootDatum|split.maximal.torus",
+   "results": "2 hits; read: Mathlib/LinearAlgebra/RootSystem/Defs.lean; Mathlib/LinearAlgebra/RootSystem/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings, Lie algebras or topological closed subgroups, not Borel pairs of algebraic groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected reductive algebraic group over an algebraically closed field has a split maximal torus and a Borel subgroup",
+   "results": "8 hits; read: Field.absoluteGaloisGroup; IsSepClosed.of_isAlgClosed; ClosedSubgroup.ctorIdx; RootPairing.GeckConstruction.instHasTrivialRadical; Algebra.IsInvariant.isIntegral; ClosedSubgroup.recOn; Algebra.IsInvariant.isIntegral_of_profinite; LibraryNote.the_algebraic_hierarchy",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings, Lie algebras or topological closed subgroups, not Borel pairs of algebraic groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Subgroup\"",
+   "results": "0 hits; read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings, Lie algebras or topological closed subgroups, not Borel pairs of algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive group over an algebraically closed field there are Borel subgroups and maximal tori with a root datum",
+   "results": "8 hits; read: RootPairing.GeckConstruction.instHasTrivialRadical; RootPairing.nonempty_base; LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem; LieModule.instIsTriangularizableOfIsAlgClosed; RootPairing.GeckConstruction.cartanSubalgebra'; RootPairing.GeckConstruction.instIsIrreducible; LieAlgebra.exists_isCartanSubalgebra_engel; LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings, Lie algebras or topological closed subgroups, not Borel pairs of algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel pairs of reductive algebraic groups have proper flag quotients and reduced root data",
+   "results": "['RootPairing.IsIrreducible', 'RootPairing.IsG2.toIsIrreducible', 'RootPairing.GeckConstruction.instHasTrivialRadical', 'CategoryTheory.PreGaloisCategory.has_decomp_quotients', 'RootPairing.GeckConstruction.instIsIrreducible', 'LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem', 'RootPairing.instIsRootSystemOfNonemptyOfNeZeroOfNatOfIsIrreducible', 'RootPairing.span_orbit_eq_top']; ",
+   "date": "2026-10-23",
+   "verdict": "no match: this search concerns group-scheme structure; abstract root-pairing hits do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Subgroup\"",
+   "results": "[]; ",
+   "date": "2026-10-23",
+   "verdict": "no match: this search concerns group-scheme structure; abstract root-pairing hits do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel_subgroup|RootDatum|split.maximal.torus",
+   "results": "['Mathlib/LinearAlgebra/RootSystem/Defs.lean', 'Mathlib/LinearAlgebra/RootSystem/Defs.lean']; ",
+   "date": "2026-10-23",
+   "verdict": "no match: this search concerns group-scheme structure; abstract root-pairing hits do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected reductive algebraic group Borel subgroup maximal torus flag variety root datum",
+   "results": "['RootDatum', 'RootPairing.weylGroup', 'LieSubalgebra.root.congr_simp', 'RootPairing.RootSystem', 'LieAlgebra.IsKilling.rootSystem.congr_simp', 'LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan', 'LieAlgebra.IsKilling.corootForm_rootSystem_eq_killing', 'frattini']; ",
+   "date": "2026-10-23",
+   "verdict": "no match: this search concerns group-scheme structure; abstract root-pairing hits do not state the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-modules",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input.",
+   "via": [
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "worker": "stage1",
+  "summary": "Proved properness by the maximum-dimensional solvable flag orbit and Borel fixed points; reconstructed semidirect multiplication from a torus complement; assembled the root datum from rank-one reflections and positive bases by integer induction. Reused existing orbit, solvable dimension, unipotent radical and unipotent solvability nodes. Seven new nodes, one Mathlib leaf. Statement unchanged.",
+  "blueprint": "Inherited blueprint.from.node is null, confirmed by blueprint_refs.py ancestor. The exact inherited place and via chain are retained. Steps realize the Borel/root/flag prerequisite of rho-section-modules below det-thm-sf-ctf-stability-direct-images proof (3); whole-blueprint searches found no matching node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-c5ae02b94",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c5ae02b94 (reviewer sub-agent of L); spot-checked: I read the item, all 7 new nodes and every cited statement in full. Milne iAG checked at 17.1–17.12 (pp.352–355), 16.33 (pp.335–336), 21.10–21.12 (pp.428–430) and 21.28–21.35 (pp.433–435). The Mathlib leaf RootPairing.linearIndepOn_root_baseOf' (BaseExists.lean:69–92) specializes to R=S=ℤ: the instances, the RootPairing fields (Defs.lean:75–100) and baseOf (Indecomposable.lean:52) all match the node. Steps 1–2 follow Milne's 17.9 proof: maximum-dimensional flag stabilizer, minimal orbit closed, fixed point ⇒ conjugacy. Steps 4–5 use the 16.33(d) complement with an explicit inverse. Steps 6–7 assemble the root datum from 21.11; I checked the coroot-injectivity computation (s_β s_α)^n α = α+2n(β−α) and the dual reflection by transpose. Steps 8–9 use P(λ) from 21.29/21.32 and integer induction. All new statements were tested: nonreduced stabilizers (G_m acting by t^p, stabilizer μ_p), characteristic 2 SL2, G=1 and G a torus (Φ empty), G_a⋊G_m, and flag-realization needing faithfulness. Not duplicates: reductive-rank-one-reflections strictly extends lem-sfb-reductive-root-subgroup-parametrizations, and no node restates an item clause. No cycle; all in unit sk-thm-sf-ctf-stability. Batch-5: def-trf-scheme-cover-descent-datum (a general descent-data definition) and lem-trf-smooth-fpqc-base-descent (Mathlib smoothness descent) are generic; neither is a statement or proof step of the trace formula or Poincaré duality, so accepted. FIX (E5/C2): steps 4 and 10 switched between commutator-series and normal-series solvability without a bridge. I added the derived-series sentence (step 4) and the induction D^iU ⊆ U_i (step 10) in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reductive-borel-pair-structure.json. No statement or dependency changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelPairRootDatumNormalization",
+  "declaration": "AlgebraicGeometry.reductive_borel_pair_structure_with_geometric_coroots",
+  "declarations": [
+   "AlgebraicGeometry.reductive_borel_pair_structure_with_geometric_coroots",
+   "AlgebraicGeometry.semisimpleGroupScheme_isReductive"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelPairRootDatumNormalization.lean",
+  "statement": "theorem reductive_borel_pair_structure_with_geometric_coroots {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) : (∃ (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus iT ∧ (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) ∧ IsBorelGroupScheme iB.hom.hom ∧ ∃ j : T ⟶ B, j ≫ iB = iT) ∧ ∀ (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus iT → (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) → IsBorelGroupScheme iB.hom.hom → ∀ j : T ⟶ B, j ≫ iB = iT → (∃ (Q : Over (Spec (.of F))) (π : G.X ⟶ Q), IsProper Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ Flat π.left ∧ Surjective π.left ∧ (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π ∧ IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) ∧ (∃ (U : Grp (Over (Spec (.of F)))) (iU : U ⟶ B) (p : B ⟶ T), IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ (∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) ∧ j ≫ p = 𝟙 T ∧ IsPullback iU.hom.hom (toUnit U.X) p.hom.hom η[T.X] ∧ IsIso ((fst U.X T.X ≫ iU.hom.hom) * (snd U.X T.X ≫ j.hom.hom))) ∧ ∃ (_ : IsCommMonObj T.X) (_ : IsCommMonObj (StandardGroupSchemes.multiplicative F)) (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base), Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)) ∧ P.IsReduced ∧ aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ CategoryTheory.GrpObj.conj G.X ∧ aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ CategoryTheory.GrpObj.conj B.X ∧ (∀ α : Φ, P.root α = α.val) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) ∧ (∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) ∧ ∀ α : Φ, ∃ (n : 𝟙_ (Over (Spec (.of F))) ⟶ G.X) (s : T ≅ T), (∀ (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ s.hom.hom.hom ≫ iT.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n)⁻¹) ∧ ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), Additive.ofMul (s.hom ≫ χ.toMul) = χ - (P.toLinearMap χ (P.coroot α)) • α.val",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B) interface repair: the former RootDatum axioms, actual roots and composition pairing do not pin the coroots to the group normalizer. For GL2 one can shift the coroot (1,-1) by a central vector (c,c) while preserving all those abstract axioms. This interface retains every former clause and specifies each coroot reflection by conjugation by an actual group point (Milne 21.11(d)--(e)). The semisimple clause reuses the original theorem through the public import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-827ea86bd",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Item Lean matches node/Milne 23.1-23.5,23.9 clause by clause: u M0→M1 inj finite coker, b R1→R0, hu u(bα)=qα·α, hdual pointwise ⟨uχ,α∨⟩=q⟨χ,b(α)∨⟩ (correct transpose direction), existence (surjective, IsFinite ker, gT surjective, gT^*=u) and criteria quantified over every realization (central over all F-algebras ↔ q=1; IsIso ↔ q=1 ∧ u bijective); ExpChar p, q=p^e, char 0 forces q=1; edge cases empty roots/rank 0/SL2 Frobenius/SL2→PGL2 char 2/B-C char 2 checked; no universe restriction; sorry-only, docstrings with source and 8 steps. hcoroot is necessary: without it GL2 with shifted coroot (1+c,-1+c) and u=[[1+c,c],[0,1]] satisfies all hypotheses but has no realization. §1(B) repair of lem-sfb-reductive-borel-pair-structure: new decl = landed Q131 statement verbatim plus one true normalizer-coroot clause (Milne 21.11(d)-(e), node step 6), old module publicly imported, semisimple clause reused, live record = base, lean.note present. No name clash, lines ≤100. Advisory: Second reading by Q28 is a brief author reread; worker report has full matching. No compile run (none needed, no file changed)."
+ }
+}

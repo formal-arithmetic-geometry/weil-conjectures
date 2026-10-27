@@ -1,0 +1,130 @@
+{
+ "id": "lem-per-local-rhom-section-actions",
+ "kind": "lemma",
+ "title": "Compatibility of the concrete section equivalence with arrows and local actions",
+ "statement": "Let C,R satisfy [def-per-local-rhom-normalization-interface], let L0 be a complex, K a derived object and k0:QL0 to K an isomorphism. For the explicit presheaf and additive section equivalence of [lem-per-local-rhom-presheaf-model] and [lem-per-local-rhom-section-equivalence], derived arrows act by postcomposition after shifted restriction, local sections of R act by the specified derived multiplication transformation, and arrows V to U act by restrictHom, including its canonical resComp conjugations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8Y, 0A94, 0A95; sites-modules.tex Tag 03EI; derived.tex Tags 0147 and 0149"
+ },
+ "stmt_deps": [
+  "def-per-local-rhom-normalization-interface",
+  "lem-per-local-rhom-presheaf-model",
+  "lem-per-local-rhom-section-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "on complexes with K-injective target, lift a cohomology class to a cycle.\nThe component formula for the Hom bifunctor gives the precomposition and\npostcomposition formula for the associated local chain map. The canonical\ncohomology comparison sends that class to its localization. Multiplication by\na section multiplies every component of the family by its restriction to the\nslice object, which is precisely postcomposition with section multiplication.\nFurther restriction evaluates the same family on the composite slice object;\nthe comparison overFunctorMap is the identity on that family. The localization\nfactorizations resQ and resComp give the displayed conjugation formula.\nThe functorial K-injective resolution and the homology factorization are natural\nfor chain maps. Localization at quasi-isomorphisms then extends these equations\nto every derived arrow; changing the representative by objObjPreimageIso gives\nexactly sectionEquiv. Naturality of the descended multiplication transformation\nand the composition comparison proves the other two equations after transport.",
+   "uses": [
+    "lem-per-local-rhom-canonical-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y (equation-cohomology-hom-complex), 0A94 (lemma-RHom-into-K-injective), 0A95 (lemma-RHom-well-defined); module sheafification sites-modules.tex Tag 03EI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-local-rhom-canonical-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P5",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The local Hom comparison and its normalizations, Tags 0A8Y, 0A94 and 0A95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sheaf internal Hom on sections is natural for derived maps, local scalars, restrictions and target shifts, and its sheafification comparison preserves cycle classes",
+   "results": "CategoryTheory.Sheaf.ΓObjEquivHom_naturality; CategoryTheory.sheafHom; PresheafOfModules.sheafifyMap_val; PresheafOfModules.sheafifyMap; PresheafOfModules.sheafifyHomEquiv'; SheafOfModules.unitHomEquiv_symm_comp; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|shiftMap|mapCyclesIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalRHomCohomologicalBound",
+  "date": "2026-10-23",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 1–3 (local comparison, orthogonality and natural long exact sequences). Concrete local RHom comparison: Compatibility of the concrete section equivalence with arrows and local actions",
+   "via": [
+    "lem-per-rhom-local-cohomological-bound",
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-per-ctf-hom-universal-coefficients",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalRHomSectionActions",
+  "file": "lean/Sheaf/Algebra/Homology/LocalRHomSectionActions.lean",
+  "declaration": "CategoryTheory.LocalRHom.section_actions",
+  "declarations": [
+   "CategoryTheory.LocalRHom.section_actions"
+  ],
+  "statement": "theorem section_actions (K : D.{uC, vC, u, w} J R) (L₀ : CochainComplex (Mod.{uC, vC, u} J R) ℤ) (k₀ : DerivedCategory.Q.obj L₀ ≅ K) : let P := Model.presheaf.{uC, vC, u, w} J R L₀ let e := Sections.sectionEquiv.{uC, vC, u, w, wSlice} J R K L₀ k₀ (∀ (n : ℤ) (M N : D.{uC, vC, u, w} J R) (v : M ⟶ N) (U : C) (x : ((P n).obj M).obj (op U)), e n N U (((P n).map v).app (op U) x) = e n M U x ≫ (res.{uC, vC, u, w, wSlice} J R U).map (v⟦n⟧')) ∧ (∀ (n : ℤ) (M : D.{uC, vC, u, w} J R) (U : C) (a : R.obj.obj (op U)) (x : ((P n).obj M).obj (op U)), e n M U (a • x) = e n M U x ≫ (sectionDerivedMultiplication.{uC, vC, u, w, wSlice} J R U a).app (M⟦n⟧)) ∧ (∀ (n : ℤ) (M : D.{uC, vC, u, w} J R) (U V : C) (f : V ⟶ U) (x : ((P n).obj M).obj (op U)), e n M V (((P n).obj M).map f.op x) = restrictHom.{uC, vC, u, w, wSlice} J R f (e n M U x))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-8872d",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190546-L-4111539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-8872d",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190546-L-4111539",
+  "kind": "interface",
+  "note": "independent cc review: 8872ddfd vs PASSed 40fc7aa56 delivery (diff -r: only canonical-naturality import/helper removal, private→public lemma in unclaimed HomComplexSectionsHomotopyNaturalityOfUniverses vs live, node proof_deps, change record, report); importer HomComplexSectionsDerivedNaturalityOfUniverses compiled against delivered module"
+ }
+}

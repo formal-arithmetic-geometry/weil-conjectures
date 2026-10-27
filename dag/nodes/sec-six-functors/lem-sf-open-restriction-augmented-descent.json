@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-open-restriction-augmented-descent",
+ "kind": "statement",
+ "title": "Augmented strict restriction descent before mate identification",
+ "statement": "Fix independent site and coefficient universes, a prime l, a finite extension E of Q_l [def-weil-l-adic-coefficient-extension], an open immersion j:U→X and the actual section-normalized operations o [def-sf-integral-open-operations]. Fix SU and SX in [lem-coef-derived-system-evaluation-calculus], and a generator-normalized ordinary extension tensor comparison tensor. There exists a natural isomorphism s:star⋙SU.reduction≅SX.reduction⋙P such that every flat-term K-flat complex Q on X [def-pc-kflat-complex] restricts to a flat-term K-flat complex and admits simultaneous strict quotient presentations on X and U, both with their scalar-unit augmentations. One strict chain isomorphism from the U presentation to the restriction of the X presentation localizes to s on Q; its finite degree components are the actual finite-adjunction unit/inverse-tensor/counit word. No extension comparison r, completeness, boundedness or quasi-compactness is assumed. This statement constructs the comparison but does not identify it with any derived adjunction mate.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 06YY, 0GL1 and 0941, with sites-modules.tex Tags 03DJ and 0E8I; the strict restriction construction and its localization (original canonical restriction proof step 1 and the descent part of step 2)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-kflat-complex",
+  "def-sf-integral-open-operations"
+ ],
+ "proof": [
+  {
+   "text": "Choose the existing ordinary quotient/limit models on X and U. For each specified calculus, apply fixedDerivedComparison with the canonical constant-limit unit. Its comparison is invertible on good complexes and satisfies the finite presentation equations. The existing ordinaryAugmentedPresentation calculation gives the strict scalar-unit augmentation without a CoefficientDerivedSystemCoherence hypothesis.",
+   "uses": [
+    "lem-trf-completion-unit-ordinary-adjunction",
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-completion-unit-canonical-models",
+    "lem-sf-ordinary-reduction-augmented-computation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the full category of good complexes using preservation under the prescribed open restriction. Extend the ordinary quotient restriction isomorphism degreewise to obtain a natural chain isomorphism; its degreewise finite components are the stated ordinary finite-adjunction word.",
+   "uses": [
+    "lem-sf-open-restriction-good-complex",
+    "lem-sf-open-restriction-ordinary-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the localized chain isomorphism by the augmented computation isomorphisms and the exact-functor localization factors. Use the localization of good complexes and Localization.liftNatIso to descend to s on the ordinary derived categories. Its component equation follows from liftNatTrans_app. Cancel the two computation inverses to obtain exactly the representative square. The finite formula is the ordinary formula in each degree.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-ordinary-adjunction",
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-trf-completion-unit-canonical-models",
+  "lem-sf-ordinary-reduction-augmented-computation",
+  "lem-sf-open-restriction-good-complex",
+  "lem-sf-open-restriction-ordinary-quotient",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0941 and 0GL1; B7 implements the augmented computation and localization steps, isolating ordinary quotient restriction and preservation of good complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subsite commutes with derived scalar extension with strict quotient tower representatives and scalar-unit augmentations",
+   "results": "8 hits, including PresheafOfModules.restrictScalarsObj and ModuleCat.Tilde.toOpen; none supplies augmented strict-system descent.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv_counit and unit_mateEquiv. These supply formal mate identities; they do not construct the strict comparison or its representative counit square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*(tensor|scalar)|mateEquiv_counit; augmented restriction; ordinaryReductionAugmentedComputation; blueprint restriction quotient/restriction counit",
+   "results": "Mathlib search returns scalar and localization APIs. Local Sheaf/WeilConjectures search finds OpenSemilinearReductionDescent (extension direction, with extra coherence), OrdinaryReductionAugmentedComputation (requires a supplied coherence record), and OpenRoosRestrictionDescent (completion, importing this item through IntegralOpenReductionComparison). None has this statement; blueprint searches find no exact duplicate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalOpenRestrictionModel",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open-factor strict restriction and quotient-augmentation descent.",
+   "via": [
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenRestrictionAugmentedDescent",
+  "file": "lean/Sheaf/Paper/OpenRestrictionAugmentedDescent.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.openRestrictionAugmentedDescent",
+  "statement": "theorem openRestrictionAugmentedDescent\n    (tensor : TensorComparison l E j o) :\n    ∃ s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o,\n      (∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n    (hQ : integralOperationsGoodComplex l E X Q),\n    ∃ (hRes : integralOperationsGoodComplex l E U\n        (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q))\n      (CX : CochainComplex (coefficientSequenceModules l E X) ℤ)\n      (CU : CochainComplex (coefficientSequenceModules l E U) ℤ)\n      (eX : SX.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj CX)\n      (eU : SU.reduction.obj (DerivedCategory.Q.obj\n        (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q)) ≅ DerivedCategory.Q.obj CU)\n      (κX : ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj CX ≅\n          ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj Q)\n      (κU : ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E U n).mapHomologicalComplex (.up ℤ)).obj CU ≅\n          ((scalarReductionExtension l E U n).mapHomologicalComplex (.up ℤ)).obj\n            (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q))\n      (f : CU ≅ ((systemRestriction l E j o).mapHomologicalComplex (.up ℤ)).obj CX),\n      CoefficientReductionPresentation l E X SX.toCoefficientDerivedSystemReduction\n        Q hQ.1 CX eX κX ∧\n      AugmentedPresentation l E X SX Q CX eX κX ∧\n      CoefficientReductionPresentation l E U SU.toCoefficientDerivedSystemReduction\n        (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q) hRes.1 CU eU κU ∧\n      AugmentedPresentation l E U SU\n        (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q) CU eU κU ∧\n      (SU.reduction.map ((restriction l E j o).mapDerivedCategoryFactors.hom.app Q) ≫\n        eU.hom ≫ DerivedCategory.Q.map f.hom =\n      s.hom.app (DerivedCategory.Q.obj Q) ≫ (P l E j o).map eX.hom ≫\n        (systemRestriction l E j o).mapDerivedCategoryFactors.hom.app CX) ∧\n      (∀ (n : ℕ) (i : ℤ),\n        (coefficientSequenceEvaluation l E U n).map (f.hom.f i) ≫\n          ((o.finite n).unitIso.app _ ≪≫\n    (o.finite n).inverse.mapIso\n      ((o.transportEvaluation n).app ((systemRestriction l E j o).obj (CX.X i))).symm ≪≫\n    (o.finite n).inverse.mapIso\n      ((SemilinearSections.evaluation.{t+1, t, max u (t+1)}\n        ((ProEt.topology X).over (openObject j))\n        (fun k ↦ (rings l E X k).over (openObject j))\n        (fun k ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}\n          (openObject j)).map (transitions l E X k)) n).mapIso\n        (o.systems.counitIso.app _)) ≪≫\n    (o.finite n).inverse.mapIso ((o.openSystems.restrictionEvaluation n).app (CX.X i))).hom ≫\n          (finiteRestriction l E j o n).map ((κX n).hom.f i) =\n        (κU n).hom.f i ≫ (((o.finite n).toAdjunction.comp\n          (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}\n            (rings l E X n) (openObject j))).unit.app _ ≫\n    (finiteRestriction l E j o n).map\n      ((tensor.ordinary n).inv.app ((restriction l E j o).obj (Q.X i))) ≫\n    (finiteRestriction l E j o n).map\n      ((scalarReductionExtension l E X n).map\n        ((ordinaryAdjunction l E j o).counit.app (Q.X i))))))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T222759-L-695215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T012812-L-2333234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

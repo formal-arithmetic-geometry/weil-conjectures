@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-smooth-group-congruence-flat-scalar-extension",
+ "kind": "statement",
+ "title": "Flat scalar extension and conjugation on a smooth group congruence module",
+ "statement": "Let $A$ be a commutative ring, $J\\subseteq A$ an ideal with $J^2=0$, and $G\\to\\operatorname{Spec}A$ a smooth affine group scheme of finite presentation [def-weil-affine-spectrum, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Its identity, multiplication and inverse satisfy the diagrams of [def-sc-group-scheme] over $\\operatorname{Spec}A$. For an $A$-algebra $B$ put $K_B=\\ker(G(B)\\to G(B/JB))$. Give $K_B$ its $B/JB$-module structure from [lem-sfb-group-space-square-zero-kernel-module], with multiplication of points as addition; regard it also as a $B$-module annihilated by $JB$. Set $M=K_A$. Here flatness of $B$ means that $-\\otimes_A B$ preserves exact sequences of $A$-modules, and tensor products have the meaning of [def-weil-pbc-module-tensor-product]. For every flat commutative $A$-algebra $B$, the map\n$$E_B:M\\otimes_A B\\longrightarrow K_B,\\qquad m\\otimes b\\longmapsto b\\cdot(m\\text{ extended to }B)$$\nis an isomorphism of $B$-modules. It is natural for every $A$-algebra homomorphism $B\\to B'$ between flat $A$-algebras, including homomorphisms that are not flat: under $E_B,E_{B'}$ the map on points is $m\\otimes b\\mapsto m\\otimes b'$, where $b'$ is the image of $b$. At $B=A$ this identifies $m\\otimes1$ with $m$. For every commutative $A$-algebra $B$ and every $g\\in G(B)$, conjugation $k\\mapsto gkg^{-1}$ on $K_B$ is a $B$-linear automorphism, natural for homomorphisms of $A$-algebras. No field or noetherian hypothesis, and no finite-generation hypothesis on $J$, is imposed.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Proof of Corollary B.2.6, printed p.287, identification of the congruence kernel with the quasi-coherent Lie module and identification of conjugation with the adjoint action. Agent explicit flat-scalar-extension formulation of that identification."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "lem-sfb-group-space-square-zero-kernel-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}C$, and let $\\epsilon:C\\to A$ be the identity point, using [def-weil-affine-spectrum]. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], $C$ is a finitely presented $A$-algebra. Thus [lem-sfb-ring-finite-presentation-differentials] gives a finite presentation $C^u\\to C^v\\to\\Omega_{C/A}\\to0$. Set $P=\\Omega_{C/A}\\otimes_{C,\\epsilon}A$. Applying [lem-weil-pbc-tensor-right-exact] to that presentation gives $A^u\\to A^v\\to P\\to0$, so $P$ is finitely presented over $A$. The identifications $C^v\\otimes_C A=A^v$ send each basis tensor $e_i\\otimes a$ to $ae_i$; they require no flatness.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-ring-finite-presentation-differentials",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RY, lemma-differentials-finitely-presented; Tag 00DF, lemma-tensor-product-exact. The affine finite-presentation input is Morphisms Tag 01TQ."
+   }
+  },
+  {
+   "text": "For any $A$-algebra $B$, write $I=JB$ and $\\epsilon_B:C\\to A\\to B$. Products of generators $jb$ of $I$ vanish in pairs, hence $I^2=0$. The canonical module identification in [lem-sfb-group-space-square-zero-kernel-module] and the difference formula in [lem-sfb-space-square-zero-lift-linearization] have the following explicit affine form:\n$$\\chi_B:K_B\\xrightarrow{\\sim}\\operatorname{Hom}_A(P,I),\\qquad \\chi_B(k)(dc\\otimes a)=a\\bigl(k^\\sharp(c)-\\epsilon_B(c)\\bigr).$$\nHere the target is a $B$-module by multiplication in $I$. Indeed $D=k^\\sharp-\\epsilon_B$ is additive, vanishes on $A$, and satisfies $D(cc')=\\epsilon_B(c)D(c')+\\epsilon_B(c')D(c)$ because $D(c)D(c')=0$. The universal property in [def-weil-pbc-kahler-differentials], followed by the tensor universal property in [def-weil-pbc-module-tensor-product], identifies such $D$ with the displayed $A$-linear maps. Conversely $h:P\\to I$ gives the algebra map $c\\mapsto\\epsilon_B(c)+h(dc\\otimes1)$: its multiplicativity is precisely the same expansion with the quadratic term zero. These constructions are inverse. This is the cited sheaf difference derivation on affine coordinates; equality of its formulas on $dc$ identifies its scalar operations with those of the module structure specified in the item. The cited kernel theorem identifies point multiplication with addition. In particular $M=K_A\\cong\\operatorname{Hom}_A(P,J)$.",
+   "uses": [
+    "lem-sfb-group-space-square-zero-kernel-module",
+    "lem-sfb-space-square-zero-lift-linearization",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 and 04D0, lemma-difference-derivation and lemma-action-by-derivations; equation-D. Agent affine expansion of these identifications."
+   }
+  },
+  {
+   "text": "Now assume $B$ is flat. Tensor the injection $J\\hookrightarrow A$ with $B$: by the exactness convention in the statement the map $J\\otimes_A B\\to A\\otimes_A B=B$ is injective, and its image is exactly the ideal $JB$ (its pure tensors have images $jb$, which generate that ideal). Thus\n$$\\lambda_B:J\\otimes_A B\\xrightarrow{\\sim}JB,\\qquad j\\otimes b\\mapsto jb.$$\nApply [lem-weil-pbc-flat-base-change-hom-finitely-presented] with source module $P$, target module $J$, and ring map $A\\to B$. Its hypotheses hold by step 1 and the assumed flatness. After swapping tensor factors it gives an isomorphism\n$$\\operatorname{Hom}_A(P,J)\\otimes_A B\\xrightarrow{\\sim}\\operatorname{Hom}_B(P\\otimes_A B,J\\otimes_A B).$$\nCompose with $\\lambda_B$ and the tensor adjunction $\\operatorname{Hom}_B(P\\otimes_A B,JB)=\\operatorname{Hom}_A(P,JB)$. Explicitly this last adjunction sends $f$ to $p\\mapsto f(p\\otimes1)$, with inverse $h\\mapsto(p\\otimes b\\mapsto bh(p))$. The resulting isomorphism is $h\\otimes b\\mapsto(p\\mapsto b\\,h(p))$.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 087R, lemma-pseudo-coherence-and-base-change-ext (1). The image calculation uses the stated definition of flatness."
+   }
+  },
+  {
+   "text": "Under $\\chi_A$ and $\\chi_B$ the isomorphism of step 3 is exactly $E_B$. To verify this and all the asserted naturality, let $\\varphi:B\\to B'$ be any $A$-algebra map. It takes $JB$ into $JB'$ and satisfies\n$$\\chi_{B'}(k_{B'})(dc\\otimes1)=\\varphi(k^\\sharp(c)-\\epsilon_B(c))=\\varphi(\\chi_B(k)(dc\\otimes1)).$$\nThe same holds for every $p\\in P$ by additivity and $A$-linearity. Consequently the point map is $\\varphi$-semilinear in these module coordinates, with no flatness assumption on $\\varphi$. In particular extension of $m\\in M$ corresponds to $p\\mapsto\\chi_A(m)(p)$ viewed in $JB$. Thus $b$ times that point corresponds to $p\\mapsto b\\chi_A(m)(p)$, proving the formula for $E_B$ and its balancedness. For flat $B,B'$ the two composites on $m\\otimes b$ both give the point with coordinates $p\\mapsto\\varphi(b)\\chi_A(m)(p)$; the tensor generators of [def-weil-pbc-module-tensor-product] give equality everywhere. At $B=A$, $\\chi_A(E_A(m\\otimes1))=\\chi_A(m)$, so injectivity gives the required normalization.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0618, lemma-difference-derivation: explicit coefficient-map calculation using the difference derivations of step 2."
+   }
+  },
+  {
+   "text": "Finally fix any $B$ and $g\\in G(B)$. Work with the $B$-group $G_B$, whose $B$-points are canonically $G(B)$. Its conjugation map $u=\\operatorname{Int}(g)$ is a morphism over $\\operatorname{Spec}B$, fixes the identity, and has inverse $\\operatorname{Int}(g^{-1})$, by the multiplication and inverse diagrams in the hypothesis. Apply [lem-sfb-space-square-zero-lift-linearization] with base $S=\\operatorname{Spec}B$, $X=Y=G_B$, $T=\\operatorname{Spec}B$, $T_0=\\operatorname{Spec}(B/JB)$ and $a$ the identity section. It says that $k\\mapsto gkg^{-1}=u\\circ k$ acts on difference derivations by the $B/JB$-linear map $D\\mapsto D\\circ u^\\sharp$. The module identification of [lem-sfb-group-space-square-zero-kernel-module] is the same one as for $G$ on these test schemes: a map into $G_B$ is the pair of its map into $G$ and its fixed structure map into $\\operatorname{Spec}B$, so its difference derivation is the one in step 2. Hence conjugation is $B/JB$-linear and therefore $B$-linear on $K_B$. Applying the inverse conjugation proves invertibility. For any $\\varphi:B\\to B'$, functoriality of multiplication and inverse gives $(gkg^{-1})_{B'}=g_{B'}k_{B'}g_{B'}^{-1}$, proving naturality, also when $B$ or $B'$ is not flat.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-sfb-group-space-square-zero-kernel-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04D0, lemma-action-by-derivations; functorial difference formula. This realizes the linear conjugation assertion in Conrad, Corollary B.2.6, proof, printed p.287."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sfb-ring-finite-presentation-differentials",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-sfb-group-space-square-zero-kernel-module",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0618 and 04D0, combined with Algebra Tags 00RY and 00DF, Morphisms Tag 01TQ and More on Algebra Tag 087R; explicit affine proof of the supporting congruence-module assertions in Conrad Corollary B.2.6, printed p.287, read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine group scheme the square zero congruence kernel is a module compatible with flat scalar extension and conjugation is linear",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.ker_infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), P.infinitesimal.ker = P.ker.cotangentIdeal\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the kernel of the infinitesimal extension $ P_{\\text{infinitesimal}} $ coincides with the cotangent ideal of the\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.Extension.h1Cotangentι_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (self : ↥P.cotangentComplex.ker), Algebra.Extension.h1Cotangentι self = ↑self\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 $ (defined as the kernel of the cotangent complex map $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R} $) to the cotange\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebra-extension cotangent modules, individual algebra lifts, abstract group cohomology, adjunction conjugate maps, or manifold Lie theory; none states flat scalar extension of a group-scheme congruence module with its linear conjugation action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of reduction modulo a square zero ideal of a smooth group scheme is naturally its Lie algebra tensor the ideal with adjoint conjugation action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\\n  (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I)) : Derivation R A I\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n  {\"name\": \"LieAlgebra.IsExtension.ker_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Extension\", \"type\": \"∀ {R : Type u_1} {N : Type u_2} {L : Type u_3} {M : Type u_4} {inst : CommRing R} {inst_1 : LieRing L}\\n  {inst_2 : LieAlgebra R L} {inst_3 : LieRing N} {inst_4 : LieAlgebra R N} {inst_5 : LieRing M}\\n  {inst_6 : LieAlgebra R M} {i : N →ₗ⁅R⁆ L} (p : L →ₗ⁅R⁆ M) [self : LieAlgebra.IsExtension i p], i.ke\", \"doc\": \"In a Lie algebra extension over a commutative ring $ R $, the kernel of the injective homomorphism $ \\\\phi: N \\\\to L $ is the trivial submodule $ \\\\{0\\\\} $.\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": (ad R L).ker = LieModule.ker R L L\", \"doc\": \"The kernel of the adjoint representation of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ coincides with the kernel of its self-module action, i.e., $\\\\ker(\\\\mathrm{ad}) = \\\\ker(\\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieHom.ker\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": LieIdeal R L\", \"doc\": \"The kernel of a Lie algebra homomorphism $ f: L \\\\to L' $ over a commutative ring $ R $ is the Lie ideal of $ L $ consisting of all elements $ x \\\\in L $ such that $ f(x) = 0 $. This is defined as the p\"}\n  {\"name\": \"LieModule.ker.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) (M : Type w) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.ker R L M = LieModule.ker R L M\", \"doc\": \"For any commutative ring $ R $, Lie algebra $ L $ over $ R $, and Lie module $ M $ over $ L $, the kernel of the Lie module action homomorphism is equal to itself, i.e., $\\\\ker(L \\\\to \\\\mathfrak{gl}(M)) \"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": LinearMap.ker (mk (P := P)) = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \": S ⊗[P] Ω[P⁄R] →ₗ[P] RingHom.ker (algebraMap P S)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebra-extension cotangent modules, individual algebra lifts, abstract group cohomology, adjunction conjugate maps, or manifold Lie theory; none states flat scalar extension of a group-scheme congruence module with its linear conjugation action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Lie\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebra-extension cotangent modules, individual algebra lifts, abstract group cohomology, adjunction conjugate maps, or manifold Lie theory; none states flat scalar extension of a group-scheme congruence module with its linear conjugation action"
+  },
+  {
+   "tool": "grep",
+   "query": "squareZero|square_zero|ker.*[Ll]ie|[Ll]ie.*ker",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Probability/Independence/Kernel/Indep.lean\", \"line\": \"13\", \"text\": \"# Independence of families of sets with respect to a kernel and a measure\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"276\", \"text\": \"is *slightly* weaker than `source_subset_preimage_source`: the latter implies that\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"596\", \"text\": \"is *slightly* weaker than `source_subset_preimage_source`: the latter implies that\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Disintegration/Unique.lean\", \"line\": \"151\", \"text\": \"/-- For `fst κ a`-almost all `b`, the conditional kernel `Kernel.condKernel κ` applied to `(a, b)`\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Disintegration/Unique.lean\", \"line\": \"152\", \"text\": \"is equal to the conditional kernel of the measure `κ a` applied to `b`. -/\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Disintegration/CDFToKernel.lean\", \"line\": \"218\", \"text\": \"/-- This property implies `IsRatCondKernelCDF`. The measurability, integrability and integral\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Composition/ParallelComp.lean\", \"line\": \"16\", \"text\": \"Two kernels `κ : Kernel α β` and `η : Kernel γ δ` can be applied in parallel to give a kernel\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Order/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Anatole Dedecker, Yaël Dillies\"}\n  {\"file\": \"Mathlib/Probability/Kernel/CondDistrib.lean\", \"line\": \"319\", \"text\": \"/-- For almost every `a : α`, the `condDistrib Y X μ` kernel applied to `X a` and a measurable set\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/Basic.lean\", \"line\": \"26\", \"text\": \"and `Mathlib/RingTheory/Derivation/ToSquareZero.lean` for\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/Basic.lean\", \"line\": \"27\", \"text\": \"- `derivationToSquareZeroEquivLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"16\", \"text\": \"- `derivationToSquareZeroOfLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"24\", \"text\": \"section ToSquareZero\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"48\", \"text\": \"def derivationToSquareZeroOfLift [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"73\", \"text\": \"theorem derivationToSquareZeroOfLift_apply [IsScalarTower R A B] (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"75\", \"text\": \"    (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x :=\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Poisson.lean\", \"line\": \"310\", \"text\": \"**Derivative of the Herglotz–Riesz kernel integral**: if `f` is circle integrable and `w` lies\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Quasiconvex.lean\", \"line\": \"4\", \"text\": \"Authors: Yaël Dillies, Antoine Chambert-Loir, Anatole Dedecker\"}\n  {\"file\": \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\", \"line\": \"23\", \"text\": \"* `DividedPowers.OfSquareZero.dividedPowers` : given an ideal `I` such that `I^2 =0`, this is\"}\n  {\"file\": \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\", \"line\": \"194\", \"text\": \"namespace OfSquareZero\"}\n  {\"file\": \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\", \"line\": \"209\", \"text\": \"end OfSquareZero\"}\n  {\"file\": \"Mathlib/Algebra/Group/Irreducible/Lemmas.lean\", \"line\": \"4\", \"text\": \"Authors: Johannes Hölzl, Jens Wagemaker, Yaël Dillies\"}\n  {\"file\": \"Mathlib/Algebra/Group/Irreducible/Defs.lean\", \"line\": \"4\", \"text\": \"Authors: Johannes Hölzl, Jens Wagemaker, Yaël Dillies\"}\n  {\"file\": \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"line\": \"65\", \"text\": \"    rw [mk_ker, LiesOver.over (P := P) (p := p)]\"}\n  {\"file\": \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"line\": \"1392\", \"text\": \"    mem_ker_iff S, Submodule.mem_top, true_implies]\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebra-extension cotangent modules, individual algebra lifts, abstract group cohomology, adjunction conjugate maps, or manifold Lie theory; none states flat scalar extension of a group-scheme congruence module with its linear conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal points of a smooth group over arbitrary rings commute with flat base change and form a linear representation under conjugation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type (max w v)\", \"doc\": \"The cotangent space of an algebra extension $ S $ over a base ring $ R $ is defined as the tensor product of $ S $ with the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ R $. This constructio\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"Algebra.Extension.instAddCommGroupCotangent\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → AddCommGroup P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, the cotangent module of the kernel ideal $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $, defined as th\"}\n  {\"name\": \"Algebra.Extension.instAddCommGroupH1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → {P : Algebra.Extension R S} → AddCommGroup P.H1Cotangent\", \"doc\": \"For a commutative ring extension $ S $ over $ R $, the first cotangent cohomology module $ H^1 $ (defined as the quotient $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ of the kernel of the canonical homomorphism $ \\\\phi\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  KaehlerDifferential.cotangentComplexBaseChange R\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern algebra-extension cotangent modules, individual algebra lifts, abstract group cohomology, adjunction conjugate maps, or manifold Lie theory; none states flat scalar extension of a group-scheme congruence module with its linear conjugation action"
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroEquivLift|baseChange|conjug",
+   "results": "[grep] OK 2 hit(s): Mathlib/RingTheory/Derivation/Basic.lean:27 (overview); Mathlib/RingTheory/Derivation/ToSquareZero.lean:116, derivationToSquareZeroEquivLift. Source lines 48--68 and 112--125 read.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra-lifts/derivations equivalence supplies neither flat tensor comparison of the group congruence module nor conjugation linearity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Lie\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Lie\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the group-scheme congruence module scalar-extension and conjugation theorem. Square-zero algebra lift/derivation equivalences are individual ingredients only; their source Mathlib/RingTheory/Derivation/ToSquareZero.lean:44-128 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine group scheme the square zero congruence kernel commutes with flat scalar extension and conjugation acts linearly",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T05:02:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth affine group scheme the square zero congruence kernel commutes with flat scalar extension and conjugation acts linearly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"KaehlerDifferential.endEquivAuxEquiv\", \"KaehlerDifferential.End_equiv_aux\", \"Algebra.Extension.H1Cotangent.map_apply_coe\", \"toAlgHom_comp_sectionOfRetractionKerToTensorAux\", \"retractionKerToTensorEquivSection\", \"retractionKerCotangentToTensorEquivSection\"], \"digest\": \"861cf786c2e6f01a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the group-scheme congruence module scalar-extension and conjugation theorem. Square-zero algebra lift/derivation equivalences are individual ingredients only; their source Mathlib/RingTheory/Derivation/ToSquareZero.lean:44-128 was read."
+  },
+  {
+   "tool": "grep",
+   "query": "congruence|squareZero|square_zero",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-24T05:02:24Z\", \"tool\": \"grep\", \"query\": \"congruence|squareZero|square_zero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the group-scheme congruence module scalar-extension and conjugation theorem. Square-zero algebra lift/derivation equivalences are individual ingredients only; their source Mathlib/RingTheory/Derivation/ToSquareZero.lean:44-128 was read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of reduction modulo a square zero ideal of a smooth group scheme is its Lie algebra tensored with the ideal, compatible with conjugation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T05:02:25Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of reduction modulo a square zero ideal of a smooth group scheme is its Lie algebra tensored with the ideal, compatible with conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationOfSectionOfKerSqZero.congr_simp\", \"LieAlgebra.IsExtension.ker_eq_bot\", \"derivationToSquareZeroOfLift\", \"Algebra.Extension.ker_infinitesimal\", \"LieHom.ker\", \"derivationToSquareZeroEquivLift\", \"Algebra.Extension.Cotangent.ker_mk\", \"derivationOfSectionOfKerSqZero\"], \"digest\": \"0fad5946fa1962e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the group-scheme congruence module scalar-extension and conjugation theorem. Square-zero algebra lift/derivation equivalences are individual ingredients only; their source Mathlib/RingTheory/Derivation/ToSquareZero.lean:44-128 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal points of a smooth affine group over a square zero extension commute with flat base change and form a linear representation under conjugation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T05:06:09Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal points of a smooth affine group over a square zero extension commute with flat base change and form a linear representation under conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.toInfinitesimal\", \"Algebra.Extension.infinitesimal\", \"Algebra.Extension.H1Cotangent\", \"derivationToSquareZeroEquivLift\", \"Algebra.Extension.cotangentComplex\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"derivationToSquareZeroEquivLift_apply_coe_apply\"], \"digest\": \"6655f9e14a320d7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the group-scheme congruence module scalar-extension and conjugation theorem. Square-zero algebra lift/derivation equivalences are individual ingredients only; their source Mathlib/RingTheory/Derivation/ToSquareZero.lean:44-128 was read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-infinitesimal-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2)); Supporting proof of Proposition 3.1.9: Proposition 2.1.2, printed pp.56-60 (normalizer); Lemma 2.2.4, printed pp.64-66 (centralizer and Lie invariants); Corollary B.2.7 and the Laurent-character description of split-torus automorphisms (open-and-closed action-matrix loci). These are structural inputs to Proposition 3.1.9, not an openness conclusion. Infinitesimal step in the centralizer/normalizer proof: Conrad Corollary B.2.6 and Remark B.2.4, conjugacy of two lifts of a torus homomorphism. Supporting flat scalar extension and conjugation linearity of the congruence module, before the degree-one Laurent-coefficient calculation.",
+   "via": [
+    "lem-sfb-split-torus-infinitesimal-conjugacy",
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-group-congruence-flat-scalar-extension",
+  "worker": "stage1",
+  "summary": "Q86: explicit affine difference-derivation proof, finite cotangent presentation, flat tensor identification of the ideal, existing flat Hom base-change leaf, coefficientwise naturality and linearization of conjugation. No new nodes, no statement change, no Lean written or compiled. Existing item search records retained and fresh logged searches appended.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, specifically the split-torus infinitesimal-conjugacy prerequisite named in blueprint.from.place. The latest unit text is read as context; no route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine criterion for a locally finitely presented scheme morphism, applied to the whole affine group; this supplies the coordinate algebra finite presentation and replaces no unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-03e45859e",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-03e45859e (reviewer sub-agent of L); spot-checked: PASS. Only the item's proof fields changed (compared with the live copy). The item was unsplit before; its statement and stmt_deps are byte-identical, and there are no new nodes. This is a first split, not a re-split. The statement is true and I tested it on small cases: J=0, B=0, G_a, G_m, GL_n, and the non-flat map A[t]->A between flat algebras. Its only citer, lem-sfb-split-torus-infinitesimal-conjugacy, uses it exactly as stated: Laurent algebras are free, M tensor C_d, naturality under substitution, linear conjugation. Step 1: the Mathlib leaves 01TQ, 00RY and 00DF give that C is finitely presented over A, Omega_{C/A} is finitely presented, and so is P = e^*Omega. Step 2: the step proves the bijection between the kernel K_B and A-derivations C->JB itself. The group law and scalars come from the linearization lemma's formula delta(k) = k^sharp - e^sharp. Since both delta and chi_B are bijections, the global-sections map between them is linear and bijective. The kernel-module statement only says 'canonical'; its proof step 1 shows that this is the linearization lemma's delta at the identity. I accept this and it is not a new fault. Step 3: the item's own flatness convention implies def-weil-pbc-flat-ring-map, so lem-weil-pbc-flat-base-change-hom-finitely-presented (087R) applies with M=P and N=J, with no finiteness of J needed. I checked the composite through J tensor B = JB and the tensor-Hom adjunction. Step 4 is elementary as marked: naturality is semilinear in coordinates, and E_B and the normalization at B=A are as stated. Step 5: I checked the linearization lemma with S=T=Spec B, X=Y=G_B, T_0=Spec(B/JB) and u=Int(g); identifying G_B over Spec B with G over Spec A is restriction of derivations from C tensor B to C. Batch-5 finding: lem-sfb-space-square-zero-lift-linearization reaches def-trf-algebraic-space only as the general definition of an algebraic space. That is no step of the trace formula or of Poincare duality, and the base stmt_dep kernel-module lemma already reaches it, so it is outside the assumed statements. Sources: I read Stacks spaces-more-morphisms.tex lines 3689 and 3748 (0618/04D0). Conrad B.2.6 is not local (WANTED), and proof_origin is correctly agent. No SGA is used. Route: the same unit sk-thm-sf-ctf-stability plus Mathlib leaves and definitions; no cycle. I found no duplicate in dag/nodes."
+ }
+}

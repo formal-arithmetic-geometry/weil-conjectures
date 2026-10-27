@@ -1,0 +1,294 @@
+{
+ "id": "lem-zl-open-shriek-weight-preservation",
+ "kind": "statement",
+ "title": "Open compact-support extension preserves mixed upper weights",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a separated finite-type $k_0$-scheme $S_0$ put $S=S_0\\times_{k_0}k$. Use the common-stage coefficient category $D^b_c(S,\\Qlb)$ and its constructible heart [def-weil-constructible-heart]. Weil objects and equivariant morphisms are fixed pairs as in [def-weil-weil-sheaf-complex]. Mixed upper bounds and $D_{\\le w}(S_0)$ have the meanings of [def-weil-punctual-weights; def-weil-complex-weights].\n\nLet $j_0:U_0\\hookrightarrow X_0$ be an open immersion [def-weil-open-immersion] of separated finite-type $k_0$-schemes, let $j$ be its base change to $k$, and use the compact-support functor $Rj_!$ of [def-weil-integral-rational-qbar-compact-support] and its restriction to constructible hearts, $j_!F:=\\mathcal H^0(Rj_!(F[0]))$ for the standard cohomology functor $\\mathcal H^0$ [prop-constructible-truncations], with their induced Weil structures. For every $w\\in\\mathbf R$:\n1. If a constructible Weil sheaf $F$ on $U_0$ is $\\iota$-mixed of weights at most $w$, then $j_!F$ is $\\iota$-mixed of weights at most $w$.\n2. If $L\\in D_{\\le w}(U_0)$, then $Rj_!L\\in D_{\\le w}(X_0)$.\nThese assertions allow the zero sheaf and repeated terms in a mixed filtration.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2: extension by zero of the target open restriction; old step 3."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-open-immersion",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-constructible-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a mixed filtration $0=F_0\\subset\\cdots\\subset F_m=F$ with $Q_r=F_r/F_{r-1}$ punctually $\\iota$-pure of weight $v_r\\le w$, as in [def-weil-punctual-weights]. By [lem-zl-extension-by-zero-punctual], the very rational/common-stage compact-support functor in the statement sends heart objects to heart objects and induces the exact functor $j_!$ on constructible Weil sheaves. Apply it to every inclusion and quotient sequence. Part (a) of [lem-sp-exact-functor-preserves-homology] gives monomorphisms $j_!F_r\\hookrightarrow j_!F$ and identifications $j_!F_r/j_!F_{r-1}\\simeq j_!Q_r$ compatible with the quotient maps. Thus these objects form a finite filtration of $j_!F$, starting at zero and ending at $j_!F$. All maps commute with Weil structures because this is the exact functor on Weil sheaves asserted in the cited extension lemma.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-zl-extension-by-zero-punctual",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: extension by zero of the target open restriction; old step 3."
+   }
+  },
+  {
+   "text": "Each $j_!Q_r$ is punctually $\\iota$-pure of weight $v_r$ by [lem-zl-extension-by-zero-punctual]. More explicitly, at a closed point in $U_0$ its coefficient fibre and local geometric Frobenius are those of $Q_r$; the residue field is unchanged by the open inclusion. Outside $U_0$ the fibre is zero and has no eigenvalues. Hence the filtration from Step 1 has pure quotients of weights $v_r\\le w$ and proves assertion (1) by [def-weil-punctual-weights]. Purity is invariant under the displayed Weil-equivariant quotient isomorphisms: an intertwining isomorphism and its inverse carry nonzero eigenvectors to nonzero eigenvectors with the same eigenvalue. If $m=0$, exactness gives $j_!F=0$. Repeated terms remain permitted; their zero quotients satisfy every punctual purity condition vacuously.",
+   "uses": [
+    "lem-zl-extension-by-zero-punctual",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: extension by zero of the target open restriction; old step 3."
+   }
+  },
+  {
+   "text": "Let $L\\in D_{\\le w}(U_0)$. The bounded standard t-structure of [prop-constructible-truncations] gives integers $a\\le b$ bounding its underlying object. Apply [lem-sfb-bounded-postnikov-extension-generation] with $n=b-a+1$. Write $L_0=0$, $L_n\\simeq L$, with underlying distinguished triangles $L_t\\to L_{t+1}\\to\\mathcal H^{a+t}(L)[-a-t]\\to L_t[1]$. These can be taken to be the canonical truncation tower. Its objects and first two arrows lift to fixed pairs: for $g=g_U$, use the canonical comparisons $Lg^*\\tau^{\\le r}\\simeq\\tau^{\\le r}Lg^*$ from [prop-constructible-truncations], followed by $\\tau^{\\le r}(\\theta_L)$. The canonical truncation maps commute with these structures, since their comparisons are characterized by the truncation adjunctions and hence commute with the maps to $L$ [lem-weil-heart-short-exact-triangles](1). The factor carries exactly the induced cohomology Weil structure specified in [def-weil-complex-weights]. Only the underlying triangles are asserted distinguished; [def-weil-weil-sheaf-complex] requires no triangulation of fixed pairs.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-sfb-bounded-postnikov-extension-generation",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-complex-weights",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Propositions 1.3.3, 1.3.5 and 1.3.13, pp. 29-35; finite cohomology tower, applied to the standard constructible t-structure"
+   }
+  },
+  {
+   "text": "For $r=a+t$, put $A=\\mathcal H^r(L)$. By [def-weil-complex-weights], $A$ is mixed of weights at most $w+r$. Apply assertion (1), already proved for every real bound, to obtain that $B=j_!A$ has this same bound. The heart-preservation assertion of [lem-zl-extension-by-zero-punctual] identifies $Rj_!(A[0])$ with $B[0]$. The shift comparison of [lem-zl-field-shriek-lower-bound] therefore gives $Rj_!(A[-r])\\simeq B[-r]$. These comparisons carry the induced Weil structures: $Rj_!$ lifts to Weil complexes compatibly with the forgetful functor, its Weil isomorphism is built from the exchange map $\\operatorname{Ex}_!$, and its comparison isomorphisms are morphisms of Weil complexes [prop-weil-operations]; $\\operatorname{Ex}_!$ is a natural isomorphism of exact functors, so it commutes with the natural shift comparison. From $H^s(K)=H^0(K[s])$ in [lem-weil-heart-short-exact-triangles](1), $B[-r]$ has cohomology $B$ in degree $r$ and zero otherwise, since $B$ is in the heart. Thus it belongs to $D_{\\le w}(X_0)$: the only possibly nonzero cohomology sheaf has the required bound $w+r$, and zero sheaves have the empty mixed filtration. This proves the bound for every image factor of the tower.",
+   "uses": [
+    "def-weil-complex-weights",
+    "lem-zl-extension-by-zero-punctual",
+    "lem-zl-field-shriek-lower-bound",
+    "prop-weil-operations",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: extension by zero of the target open restriction; old step 3."
+   }
+  },
+  {
+   "text": "Apply $Rj_!$ to the underlying tower triangles, using its triangulated exactness from [lem-zl-field-shriek-lower-bound]. The image first two arrows are morphisms of fixed pairs because $Rj_!$ lifts to a functor on Weil complexes that commutes with the forgetful functor [prop-weil-operations]. Induct on $t$ with claim $Rj_!L_t\\in D_{\\le w}(X_0)$. For $t=0$, the exact functor sends zero to zero, whose cohomology sheaves have empty mixed filtrations [def-weil-punctual-weights; def-weil-complex-weights]. At the induction step, the first image term satisfies the claim by induction, and the third image term does by Step 4. Apply [lem-zl-complex-extension] to these first two equivariant arrows and their underlying distinguished triangle to obtain the claim for $Rj_!L_{t+1}$. At $t=n$ the Weil-equivariant endpoint identification gives $Rj_!L\\in D_{\\le w}(X_0)$, proving (2). The bounds also hold for $L=0$ and for an empty source; the same zero-object argument applies.",
+   "uses": [
+    "lem-zl-field-shriek-lower-bound",
+    "prop-weil-operations",
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights",
+    "lem-zl-complex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: extension by zero of the target open restriction; old step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "lem-zl-extension-by-zero-punctual",
+  "lem-sp-exact-functor-preserves-homology",
+  "prop-constructible-truncations",
+  "lem-sfb-bounded-postnikov-extension-generation",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-complex-weights",
+  "def-weil-weil-sheaf-complex",
+  "lem-zl-field-shriek-lower-bound",
+  "prop-weil-operations",
+  "lem-zl-complex-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2, extension-by-zero paragraph; pure-filtration argument expanded, with BBD 1.3.13 finite cohomology devissage for the complex assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves mixed upper weight bounds of constructible Weil sheaves and R j shriek preserves the corresponding complex weight bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"TopCat.Presheaf.isSheaf_of_isOpenEmbedding\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/Sites\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : TopCat} {f : X ⟶ Y} {F : TopCat.Presheaf C Y}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)),\\n  F.IsSheaf → TopCat.Presheaf.IsSheaf (⋯.functor.op.comp F)\", \"doc\": \"If $ F $ is a sheaf on a topological space $ Y $ and $ f : X \\to Y $ is an open embedding, then the presheaf on $ X $ obtained by composing the opposite of the open map functor induced by $ f $ with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → LightCondSet\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract complex extension and module/sheaf functors do not construct the Weil compact-support comparison or mixed weight filtration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero of a filtration by punctually pure sheaves preserves mixed weights at most w",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"HomologicalComplex.extend_exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] (K : HomologicalComplex C c) (e : c.Embedding c') (j' : ι\", \"doc\": \"Given a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms and a shape embedding $ e : \\\\iota \\\\to \\\\iota' $, if the embedding's index map $ e.f $ does not hit an index $ j' \\\\in \"}\n  {\"name\": \"HomologicalComplex.isSupported_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c'),\\n  K.IsSupported e ↔ ∀ (i' : ι'), (∀ (i : ι), e.f i ≠ i\", \"doc\": \"For any category $\\\\mathcal{C}$ with zero morphisms, a homological complex $K$ with shape $c'$ is supported by an embedding $e: c \\\\to c'$ if and only if for every index $i' \\\\in \\\\iota'$, if $i'$ is not \"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_forall_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M}, F.Stable → F.N 0 ≤ F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ and another filtration $\\\\{I'^n M\\\\}$ with $I^0 M \\\\subseteq I'^0 M$, there exists an integer $n_0$ such that for all $n \\\\geq 0$, the inclusion $I\"}\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n  {\"name\": \"HomologicalComplex.IsSupportedOutside.exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : HomologicalComplex C c'} {e : c.Embedding c'}, K.IsSupportedOutside e → ∀ (i : ι), K.ExactAt (e.f i)\", \"doc\": \"If a homological complex $ K $ in a category with zero morphisms is supported outside the image of an embedding $ e: c \\to c' $ between complex shapes, then $ K $ is exact at every index in the image o\"}\n  {\"name\": \"HomologicalComplex.exactAt_of_isSupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [K.IsSupported e] (i' : ι'), (∀ (i : ι), e.f i ≠ i') → \", \"doc\": \"If a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms is supported by an embedding $ e $ from a complex shape $ c $ to $ c' $, and if an index $ i' \\\\in \\\\iota' $ satisfies $ \"}\n  {\"name\": \"HomologicalComplex.IsSupported.exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  {inst : CategoryTheory.Category.{v_1, u_3} C} {inst_1 : CategoryTheory.Limits.HasZeroMorphisms C}\\n  {K : HomologicalComplex C c'} {e : c.Embedding c'} [self : K.IsSupported e] (i' : ι'),\\n  (∀ (i : ι), e.f i\", \"doc\": \"Given categories $\\\\mathcal{C}$ with zero morphisms, complex shapes $c : \\\\text{ComplexShape}(\\\\iota)$ and $c' : \\\\text{ComplexShape}(\\\\iota')$, and a homological complex $K$ in $\\\\mathcal{C}$ supported by \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract complex extension and module/sheaf functors do not construct the Weil compact-support comparison or mixed weight filtration"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"derivedLowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract complex extension and module/sheaf functors do not construct the Weil compact-support comparison or mixed weight filtration"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost.*[Ee]xtensionByZero|mixed.*weight.*shriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract complex extension and module/sheaf functors do not construct the Weil compact-support comparison or mixed weight filtration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion compact support functor preserves mixed weights of Weil sheaves and complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": Opens X ⥤ Opens Y\", \"doc\": \"Given sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$ and a morphism $f : X \\\\to Y$ that is an open immersion, this functor maps the category of open subsets of $X$ to the category of open sub\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : AlgebraicGeometry.PresheafedSpace C} →\\n      (f : X ⟶ Y) →\\n        [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] →\\n          CategoryTheory.Functor (TopologicalSpace.Opens ↑↑X) (TopologicalSpace.Opens ↑↑Y)\", \"doc\": \"Given a category $\\\\mathcal{C}$, presheafed spaces $X$ and $Y$ over $\\\\mathcal{C}$, and a morphism $f : X \\\\to Y$ that is an open immersion, this constructs the functor from the category of open subsets \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_of_le\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq V $ are open subsets of $ X $, then the image of $ U $ under the functor induced by $ f $ satisfies $ f(U) \\\\subseteq f(V) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X.Opens ⥤ Y.Opens\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the functor maps each open subset $ U \\\\subseteq X $ to its image $ f(U) \\\\subseteq Y $, which is open because $ f $ is an open map. Morphisms between op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : LocallyRingedSpace} (f : X ⟶ Y) [H : LocallyRingedSpace.IsOpenImmersion f] : Opens X ⥤ Opens Y\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of locally ringed spaces, the functor maps each open subset $ U \\\\subseteq X $ to its image $ f(U) \\\\subseteq Y $, which is open because $ f $ is an open map. Morphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_mono\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{U V : X.Opens} (e : U ≤ V) : f ''ᵁ U ≤ f ''ᵁ V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the induced functor on open subsets preserves inclusion, i.e., if $ U \\\\subseteq V $ are open subsets of $ X $, then $ f(U) \\\\subseteq f(V) $ as open sub\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": X ≅ Y.restrict H.base_open\", \"doc\": \"Given an open immersion $ f : X ⟶ Y $ between sheafed spaces over a category $\\\\mathcal{C}$, this constructs an isomorphism from $X$ to the restriction of $Y$ to the open subset defined by the image of\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract complex extension and module/sheaf functors do not construct the Weil compact-support comparison or mixed weight filtration"
+  },
+  {
+   "tool": "grep",
+   "query": "tExact.*[Hh]eart|[Hh]eart.*tExact|isTExact|tExact_iff",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated functor of bounded t structures is t exact if it sends the heart into the heart",
+   "results": "8 hits; CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsHomological.mk, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.exactFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, Functor",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between bounded t-structures which sends the heart into the heart is t-exact and commutes with cohomology",
+   "results": "8 hits; CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|extensionByZero",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil sheaf mixed weight filtration extension by zero open immersion",
+   "results": "8 hits; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"extensionByZero\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves mixed upper weights for constructible Weil sheaves and complexes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrict_obj, TopCat.Presheaf.isSheaf_of_isOpenEmbedding, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general functor, homological-functor or scheme restriction declarations do not state preservation of common-stage Weil mixed weights; auxiliary heart-test searches also gave no matching t-exactness criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 2: extension by zero of the target open restriction; old step 3.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-open-shriek-weight-preservation",
+  "worker": "stage1",
+  "group": "Q39",
+  "summary": "No statement change and no new nodes. Extend the pure-quotient filtration using the existing exact common-stage open extension lemma, then apply exact compact support to the finite canonical cohomology tower and use extension closure of complex upper weights. Keep all triangles in the underlying common-stage coefficient categories and construct the induced fixed-pair structures by canonical truncation comparisons. No Lean written or compiled.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction, Part 2: the sentence that open extension by zero preserves the upper complex bound because stalks and pure-quotient filtrations extend by zero. The finite cohomology tower supplies the omitted passage from heart exactness to complexes.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-extension-by-zero-punctual",
+    "why": "Exactness and punctual purity of the same common-stage open compact-support functor; a coefficient-operation tool, not a replacement for open-closed reduction."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "The generic exact-functor result carries subobjects and quotients of a finite filtration; the unit has no separate categorical transport lemma."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "The bounded standard t-structure and its compatibility with Frobenius supply the canonical equivariant truncation tower."
+   },
+   {
+    "node": "lem-sfb-bounded-postnikov-extension-generation",
+    "why": "The generic finite ordered cohomology tower supplies the induction for bounded complexes; no different geometric reduction is used."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Truncation adjunctions and the formula H^i(K)=H^0(K[i]) justify the fixed-pair truncation maps and the cohomology of shifted heart objects."
+   },
+   {
+    "node": "lem-zl-field-shriek-lower-bound",
+    "why": "Only triangulated exactness and the natural shift comparison of the recorded common-stage compact-support functor are used; no lower-bound theorem about weights is used."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "The Weil lift of the compact-support functor and the Weil-equivariance of its comparison isomorphisms (exchange map Ex_!) make the image tower arrows morphisms of fixed pairs; the unit has no node stating these lifts."
+   },
+   {
+    "node": "lem-zl-complex-extension",
+    "why": "Extension closure for underlying distinguished triangles of fixed pairs is a generic weight tool for the finite induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-extension-by-zero-punctual",
+  "lem-sp-exact-functor-preserves-homology",
+  "prop-constructible-truncations",
+  "lem-sfb-bounded-postnikov-extension-generation",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-zl-field-shriek-lower-bound",
+  "prop-weil-operations",
+  "lem-zl-complex-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-13e109be9",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-13e109be9 (reviewer sub-agent of L); spot-checked: I read the item, the source and every cited statement. The split adds no new nodes and does not change the statement. Source: Part 2 of the main-20261015 proof of lem-zl-morphism-open-closed-reduction (j'_{0!} keeps stalks on V_0, is zero elsewhere, and extends filtrations by zero). Steps 1-2: lem-zl-extension-by-zero-punctual states that the same common-stage Rj_! preserves the heart, that the induced j_! is exact, the fibres and Frobenius compatibility, and preservation of purity. Part (a) of lem-sp-exact-functor-preserves-homology carries the nested subobjects and quotients, so the filtration and its pure quotients transfer and clause (1) holds; the m=0 case and repeated terms are covered. Step 3: the Postnikov tower of lem-sfb-bounded-postnikov-extension-generation (n=b-a+1, L_t=tau^{<=a+t-1}L) is indexed correctly, and the truncations lift equivariantly through the automorphism comparisons in prop-constructible-truncations. Step 4 sign: H^r(L) has bound w+r, and B[-r] has its only cohomology in degree r, so the bound fits. Step 5: induction with lem-zl-complex-extension; it uses only the underlying triangles. Fault C4, repaired: in Steps 4-5 the Weil-equivariance of Rj_! and of its comparisons was credited to prop-functor-package, whose statement has no Weil lift. I replaced it with prop-weil-operations, which states the lift, its compatibility with For and Ex_!, and that the comparisons are morphisms of Weil complexes. I updated uses, proof_deps and tool_uses; there is no cycle, and the parent already cites this node. Batch-5: def-weil-local-frobenius-trace, reached through lem-zl-extension-by-zero-punctual, is a general definition. lem-pod-texact-truncation-comparison, reached through lem-zl-complex-extension, is generic t-structure algebra (t-exact exact functors commute with truncations). Neither belongs to the proof of the trace formula or of Poincare duality, and both are already in the parent's closure, so I accepted them. Advisory: clause (1) is the case g=j of lem-zl-quasi-finite(2), which is off the unit route and was missed by the report. This is not a fault, because the item already exists and steps 1-2 are short. Small cases checked: F=0, U empty, j=id, a sheaf in degree r, repeated terms. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

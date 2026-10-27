@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-smooth-space-affine-infinitesimal-lift",
+ "kind": "statement",
+ "title": "Smooth algebraic spaces lift affine first order tests",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a smooth morphism of algebraic spaces over $S$ [def-trf-algebraic-space], where smoothness is tested on etale scheme charts [def-sbc-smooth-morphisms]. Let $j:T_0\\hookrightarrow T$ be a first order thickening of affine $S$-schemes [def-sbc-first-order-thickening], so its defining ideal sheaf has square zero. Given morphisms $a_0:T_0\\to X$ and $b:T\\to Y$ over $S$ with $f\\circ a_0=b\\circ j$, there exists a morphism $a:T\\to X$ over $S$ satisfying $f\\circ a=b$ and $a\\circ j=a_0$. No separatedness or quasi-compactness hypothesis on $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04AM (lemma-smooth-formally-smooth), implication (1) to (2), with definition-formally-smooth (Tag 060G): global lifting for affine first order test thickenings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-first-order-thickening",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness implies local finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to the space map $f$ (space maps are representable by spaces). Apply [lem-sfb-space-infinitesimal-lift-pseudotorsor] to $f,j,a_0,b$. It supplies the quasi-coherent Zariski module $H$ on $T$, the sheaf $\\mathcal L$ of the specified lifts on $T_{\\mathrm{et}}$, and its simply transitive $H_{\\mathrm{et}}$-action wherever a lift exists. At this point no existence has been inferred from the action.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, definition of the sheaf of lifts and translation module; Tags 061A, 061C, 061D"
+   }
+  },
+  {
+   "text": "Form $Z=X\\times_YT$, with projection $p:Z\\to T$, and $c_0=(a_0,j):T_0\\to Z$. The fibre product exists as an algebraic space by [lem-trf-space-fibre-products-etale-covers]. The arbitrary-base-change law in [lem-sfb-stack-chartwise-smooth-etale-calculus] makes $p$ smooth. Choose a representable surjective etale scheme chart $q:U\\to Z$ from [def-trf-algebraic-space]. The same calculus says that $q$ is smooth and that $p q:U\\to T$ is smooth, now a morphism of schemes. Its scheme formal smoothness is therefore available from [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, part (I); spaces-morphisms.tex Tags 03ZE, 03ZF"
+   }
+  },
+  {
+   "text": "Pull back $q$ along $c_0$. By [lem-trf-space-fibre-products-etale-covers], $W_0=T_0\\times_ZU\\to T_0$ is a surjective etale morphism of schemes, with a specified map $r_0:W_0\\to U$ over $T$. By [sbc-lem-thickening-etale-site], there is an etale scheme $W\\to T$ and an isomorphism $W\\times_TT_0\\cong W_0$ over $T_0$; the covering condition is preserved, so $W\\to T$ is surjective. Choose an affine open cover $\\{W_i\\}$ of $W$. These are etale over $T$ and jointly cover it. Set $W_{i0}=W_i\\times_TT_0$ and restrict $r_0$ through the displayed isomorphism.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "sbc-lem-thickening-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, part (I), expanded using the etale-cover lifting argument in Tag 04CY (lemma-etale-on-top), (4)"
+   }
+  },
+  {
+   "text": "Each $W_{i0}\\hookrightarrow W_i$ is a first order thickening of affine schemes: on $W_i=\\operatorname{Spec}A$, the pullback of the defining ideal of $j$ generates an ideal $J\\subseteq A$ and $J^2=0$, since a product of two generators comes from $\\mathcal I^2=0$. The closed subscheme is $\\operatorname{Spec}(A/J)$. Apply scheme formal smoothness of $p q:U\\to T$ from [def-sbc-smooth-morphisms] to $r_0|_{W_{i0}}:W_{i0}\\to U$ and $W_i\\to T$. This gives $r_i:W_i\\to U$ over $T$ restricting to $r_0$. The composite $a_i:W_i\\xrightarrow{r_i}U\\xrightarrow{q}Z\\to X$ satisfies $fa_i=b|_{W_i}$ because $p q r_i$ is the structural map to $T$; on $W_{i0}$ it equals $a_0$ because $q r_0=c_0\\operatorname{pr}_{T_0}$. Thus $a_i\\in\\mathcal L(W_i)$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, part (I), scheme formal smoothness on affine members of the lifted etale cover"
+   }
+  },
+  {
+   "text": "The covering and sections just constructed make $\\mathcal L$ locally nonempty. Together with the simply transitive action from [lem-sfb-space-infinitesimal-lift-pseudotorsor], they identify $\\mathcal L$ as an $H_{\\mathrm{et}}$-torsor in the precise sense of [def-sc-gm-torsor]. The module $H$ is quasi-coherent and $T$ is affine, so [lem-sc-etale-affine-qcoherent] with $q=1$ gives $H^1(T_{\\mathrm{et}},H_{\\mathrm{et}})=0$. By [lem-sc-torsor-h1], the isomorphism class of $\\mathcal L$ is the zero class and $\\mathcal L$ is isomorphic to the trivial torsor $H_{\\mathrm{et}}$. The image of its global zero section is an element $a\\in\\mathcal L(T)$. By the defining formula for $\\mathcal L$, it is an $S$-morphism $T\\to X$ with $fa=b$ and $a j=a_0$. The argument has used no separatedness or quasi-compactness of $f$.",
+   "uses": [
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "def-sc-gm-torsor",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, part (II); sites-cohomology.tex Tag 03AJ; etale-cohomology.tex Tag 03P2 and coherent.tex Tag 01XB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-thickening-etale-site",
+  "def-sbc-first-order-thickening",
+  "def-sc-gm-torsor",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04AM (lemma-smooth-formally-smooth), smooth implies formally smooth, torsor argument (I) and (II)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms of algebraic spaces lift maps across a square zero thickening of affine schemes",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.FormallySmooth",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.FormallySmooth'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|formally_smooth",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"58\", \"text\": \"  refine Algebra.Smooth.of_formallySmooth_fiber fun p hp ↦ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"59\", \"text\": \"  rw [← RingHom.formallySmooth_algebraMap]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"60\", \"text\": \"  refine RingHom.Smooth.formallySmooth ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"246\", \"text\": \"lemma formallySmooth_stalkMap_iff {f : X ⟶ Y} {x : X} (U : Y.Opens)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"250\", \"text\": \"    (f.stalkMap x).hom.FormallySmooth ↔\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"258\", \"text\": \"  trans Algebra.FormallySmooth (Localization.AtPrime p) (Localization.AtPrime q)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"259\", \"text\": \"  · rw [← formallySmooth_algebraMap]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"260\", \"text\": \"    exact RingHom.FormallySmooth.respectsIso.arrow_mk_iso_iff\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism of algebraic spaces is formally smooth for affine first order thickenings",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinitesimal lifting criterion for smooth algebraic spaces gives global lifts when the test thickening is affine",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_lift",
+   "sub": "",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] {B : Type u_1} [CommRing B] [Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|formallySmooth|square.zero",
+   "sub": "AlgebraicGeometry/Morphisms/Smooth.lean",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"246\", \"line\": \"lemma formallySmooth_stalkMap_iff {f \", \"text\": \" X ⟶ Y} {x : X} (U : Y.Opens)\"}\n  {\"file\": \"250\", \"line\": \"    (f.stalkMap x).hom.FormallySmooth ↔\", \"text\": \"\"}\n  {\"file\": \"258\", \"line\": \"  trans Algebra.FormallySmooth (Localization.AtPrime p) (Localization.AtPrime q)\", \"text\": \"\"}\n  {\"file\": \"259\", \"line\": \"  · rw [← formallySmooth_algebraMap]\", \"text\": \"\"}\n  {\"file\": \"260\", \"line\": \"    exact RingHom.FormallySmooth.respectsIso.arrow_mk_iso_iff\", \"text\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.FormallySmooth.exists_lift concerns affine ring algebras; smooth scheme charts do not give global affine-test lifting for arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global lifts of affine infinitesimal test schemes for smooth algebraic spaces from vanishing of first cohomology of the derivation sheaf",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness.",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "worker": "stage1",
+  "summary": "Followed the Stacks 04AM derivation-torsor proof, making etale-local lifts explicitly through a smooth scheme chart and a lifted cover. Reused the general chartwise calculus and existing thickening invariance, affine etale vanishing and torsor classification. Added only the locally finitely presented algebraic-space pseudo-torsor input, which asserts no existence. Corrected the source proof typo Omega_{X/S} to the relative Omega_{X/Y} without changing the item statement.",
+  "blueprint": "The ancestor command returns None, matching the inherited null from.node. The inherited place and via chain trace the direct-image alteration prerequisite to Tag 0CXU: smooth affine first-order lifting. The five steps supply exactly that prerequisite through the 04AM torsor proof.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product and etale-cover base-change laws needed to form Z and W_0; no replacement of the unit alteration route."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic lifting of an etale covering across a square-zero thickening, used to produce local lifts; no node in this unit supplies the site equivalence."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine vanishing for the quasi-coherent derivation module on the test scheme; no curve or coefficient finiteness hypothesis is used."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic torsor classification for arbitrary abelian etale sheaves, applied only to the translation sheaf; no finite-constant-group replacement is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "sbc-lem-thickening-etale-site",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-bd0e7e255",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-bd0e7e255 (reviewer sub-agent of L); spot-checked: Read all of: 04AM (converse direction, parts I and II), 060G, 061A, 061C, 061D, 05ZF and 04CY(4); the item; the new node; and every cited node's statement. The item statement is unchanged against live and side-live, and the item is still unsplit live. The source typo (Ω_{X/S} where Ω_{X/Y} is meant) is real; counterexample: the identity map of Spec k[x1,x2,…]. Proof steps: 1. the calculus gives smooth ⇒ locally finitely presented, then the new node applies. 2. Z=X×_Y T exists (02X2); base change, étale⇒smooth and composition make pq:U→T a smooth scheme map. 3. The étale-cover clause makes W0=T0×_Z U → T0 a surjective étale scheme cover; the thickening site isomorphism lifts it to W→T; take affine pieces W_i. 4. W_i0=Spec(A/IA) is a square-zero affine thickening over T; scheme formal smoothness gives r_i; checked f a_i=b|W_i and a_i|W_i0=a0∘pr. 5. This gives a torsor in the sense of def-sc-gm-torsor (any abelian G); H^1(T_et,H_et)=0 (affine T, quasi-coherent H); torsor-H1 then gives a global lift. New node lem-sfb-space-infinitesimal-lift-pseudotorsor: the 061A/061C special case 061D with B=Y; local finite presentation is kept for quasi-coherence (05ZF plus 03M1(6)); no existence of lifts is asserted. Tested on f=id, A^1_Y, T empty and I=0. It generalises the scheme-only lem-per-etale-local-lift-torsor-quasi-coherent, which is needed because Z is only a space, so it is not a duplicate; it does not restate the item. FIX: the new node's statement now defines I_et via [def-sc-etale-qcoherent-module] and cites the stmt_dep def-weil-sheaf-of-modules-category, which no sentence cited; the meaning is unchanged. Batch-5 flags are generic: def-trf-algebraic-space is a general definition, and the 02X2/041F fibre products and étale covers are not steps of the trace formula or Poincaré duality. The 4 tool_uses are generic and accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSpaceAffineInfinitesimalLift",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smooth_affine_infinitesimal_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSpaceAffineInfinitesimalLift.lean",
+  "statement": "theorem smooth_affine_infinitesimal_lift {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocally (@Smooth) f) (T₀ T : Over S) [IsAffine T₀.left] [IsAffine T.left] (j : T₀ ⟶ T) (hj : IsFirstOrderThickening j.left) (a₀ : yoneda.obj T₀ ⟶ X.obj.obj) (b : yoneda.obj T ⟶ Y.obj.obj) (hcomm : a₀ ≫ f.hom.hom = yoneda.map j ≫ b) : ∃ a : yoneda.obj T ⟶ X.obj.obj, a ≫ f.hom.hom = b ∧ yoneda.map j ≫ a = a₀",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed generic compatible-etale-chart predicate MapIsLocally applied to Mathlib Smooth; its owning definition node is added to stmt_deps. Test maps are natural transformations out of yoneda on Over S, hence are precisely S-morphisms, without a representability hypothesis on f."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9be47ed37",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, Stacks 04AM/060G/definition-formally-smooth-etale-unramified, MapIsLocally/IsEtale/AlgebraicSpace/IsFirstOrderThickening sources. All clauses match: MapIsLocally(@Smooth) = all-chart-pairs smoothness (equivalent by lemma-local-source-target), affine Over S tests, closed immersion with ker^2=⊥, yoneda maps over S, commuting square, ∃ a with a≫f=b ∧ j≫a=a₀; no extra hypotheses; single universe u. Item differs from live only in lean + added landed stmt_dep def-sfb-space-morphism-properties (allowed); dep nodes byte-identical; statement verbatim; one sorry; docstrings with source, blueprint tag and 5 proof steps; private imports exist. SpaceMapIsSmooth is only space→scheme, not a duplicate. Second reading is a self-check, present. No recompile (no change)."
+ }
+}

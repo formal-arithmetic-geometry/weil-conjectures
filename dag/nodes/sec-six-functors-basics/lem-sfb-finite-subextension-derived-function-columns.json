@@ -1,0 +1,450 @@
+{
+ "id": "lem-sfb-finite-subextension-derived-function-columns",
+ "kind": "statement",
+ "title": "Finite-subextension-valued derived function columns with normalized scalar comparison",
+ "statement": "Fix a prime $\\ell$, a norm-topological algebraic closure $\\Omega/\\mathbf Q_\\ell$ and a finite intermediate field $E$. Work on the small coherent profinite site in [def-weil-size-convention], with ordinary internal modules and ordinary derived categories [sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Put $A(S)=C(S,E)$, $B(S)=C(S,\\Omega)$ [def-sfb-continuous-map-condensed-ring], and\n$$C(S)=\\{f\\in C(S,\\Omega): f(S)\\subset F\\text{ for one finite }E\\subseteq F\\subseteq\\Omega\\}$$\n[sk-def-sfb-qlbar-condensed]. Let $c:C\\to B$ be inclusion. For a profinite set $P$ let $A[P]$ be the free internal $A$-module on $S\\mapsto C(S,P)$, and set $H_P(M)=R\\underline{\\operatorname{Hom}}_A(A[P],M[0])$, deriving internal Hom in its second variable. All modules over $A\\to R$ are restricted to $A$ when used in $H_P$. For $d\\geq0$ write $V_F=F^d$ with its finite product norm topology.\n\nThe free module $A[P]$ is canonically the sheafification of $S\\mapsto\\bigoplus_{S\\to P}A(S)$ and the slice extension by zero $j_{P!}A_P$. It is flat, and for $R=\\underline F,C,B$ the generator map gives $R\\otimes_A^L A[P]\\simeq R[P]$. The derived scalar-Hom adjunction identifies $H_P(R^d)$ with restricted $R\\underline{\\operatorname{Hom}}_R(R[P],R^d[0])$, normalized by evaluation.\n\nLet $U_F(P)(S)=C(S\\times P,V_F)$ and let $U_{\\mathrm{fin}}(P)(S)$ be the continuous $\\Omega^d$-valued functions on $S\\times P$ whose image lies in one $V_F$ for the entire function. The canonical ordinary-to-derived maps give isomorphisms\n$$U_F(P)[0]\\xrightarrow{\\sim}H_P((\\underline F)^d),\\qquad U_{\\mathrm{fin}}(P)[0]\\xrightarrow{\\sim}H_P(C^d)$$\nin $D(\\operatorname{Mod}_A)$ for every finite $F\\supseteq E$. Moreover $C^d=\\operatorname{colim}_{F\\supseteq E}(\\underline F)^d$ and $U_{\\mathrm{fin}}(P)=\\operatorname{colim}_{F\\supseteq E}U_F(P)$ as $A$-module sheaves, with these latter colimits computed sectionwise. These identifications are natural in $P$, finite coefficient inclusions, and continuous matrix multiplication over $E$ on the parameter spaces. If $U_B(P)(S)=C(S\\times P,\\Omega^d)$, the map $H_P(c^d)$ composed with the displayed $C$-comparison equals $U_{\\mathrm{fin}}(P)[0]\\hookrightarrow U_B(P)[0]\\to H_P(B^d)$, where the last arrow is the canonical resolution comparison. No invertibility of this last arrow is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic input; old item steps 2–3. Auxiliary sources: Stacks Tag 03EV (sites-modules-lemma-j-shriek-flat) and Tag 0GN3 (sites-cohomology-lemma-colim-global), read in the local source. Finite complete-field acyclicity is a separate existing input."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-condensed-free-linearization-tensor] to the representable condensed set $h_P(S)=C(S,P)$. It identifies $A[P]$, preserving generalized generators, with the sheafification of $S\\mapsto\\bigoplus_{S\\to P}A(S)$. This is precisely the presentation of $j_{P!}A_P$ in [lem-pc-sites-modules-j-shriek-flat], with $U=P$. That node makes it a flat section-module sheaf. The exact tensor equivalence of [lem-pe-internal-section-tensor-comparison] preserves and reflects flat modules, so $A[P]$ is flat also in the stipulated internal-module category. These identifications are canonical, since their maps and inverse maps preserve each generator $[t]$.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV, lemma-j-shriek-flat (2), and its displayed direct-sum presentation; generator identification by the existing free-linearization node."
+   }
+  },
+  {
+   "text": "Flatness also makes $A[P][0]$ K-flat: for an acyclic complex $T$, tensor each exact sequence $0\\to Z^nT\\to T^n\\to Z^{n+1}T\\to0$ with $A[P]$; the resulting kernels and images coincide, so $T\\otimes_A A[P][0]$ is acyclic. This is the test in [def-pc-kflat-complex], transported internally by [lem-pe-internal-section-tensor-comparison]. Consequently K-flat scalar extension in [lem-sfb-internal-section-scalar-adjunction] computes $R\\otimes_A^L A[P]$ by $R\\otimes_A A[P]$. For every $R$-module $N$, the ordinary extension/restriction adjunction of that same node and the free adjunction [def-sfb-condensed-free-module-adjunction] identify maps from this tensor to $N$ with maps $h_P\\to|N|$. Thus it is $R[P]$: the forward map sends $r\\otimes[t]$ to $r[t]$, and the inverse is the $R$-linear map sending $[t]$ to $1\\otimes[t]$. Their composites fix all free generators. This works for $R=\\underline F,C,B$ without flatness of $A\\to R$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "def-sfb-condensed-free-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV (exact tensor), followed by the elementary single-flat-complex K-flat test and extension/free adjunction computation; scalar adjunction Tag 03CZ."
+   }
+  },
+  {
+   "text": "Transport to section-ring modules by [lem-sfb-profinite-free-hom-resolution-evaluation] and [lem-sfb-internal-section-scalar-adjunction]. The former identifies internal tensor and its Hom right adjoint with the sectionwise tensor and slice Hom, while the latter identifies derived scalar extension and exact restriction, including their units. Apply [lem-sfb-dc-hom-scalar-adjunction] with $K=A[P][0]$, coefficient map $A\\to R$, and $N=R^d[0]$. Using Step 2 gives the asserted identification of $H_P(R^d)$ with restricted $R\\underline{\\operatorname{Hom}}_R(R[P],R^d[0])$. The cited isomorphism is normalized by restricted evaluation and the scalar unit; on generators its transpose is $r\\otimes[t]\\mapsto r f(t)$. Thus it is the required scalar-Hom comparison, rather than an arbitrarily chosen isomorphism of these objects.",
+   "uses": [
+    "lem-sfb-profinite-free-hom-resolution-evaluation",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom, equation-internal-hom; the normalized change-of-rings consequence is the existing dc-hom-scalar-adjunction node."
+   }
+  },
+  {
+   "text": "For each finite $F\\supseteq E$, apply [lem-sfb-normed-scalar-profinite-hom-acyclic] with its field named $F$, a finite norm-topological extension of $\\mathbf Q_\\ell$. It gives the canonical isomorphism from $C(-\\times P,F)[0]$ to the derived internal Hom over $\\underline F$. Take its $d$-fold finite direct sum. This computes the rank-$d$ comparison: a finite direct sum of injective resolutions is an injective resolution, since Hom into that sum is the finite product of the corresponding exact Hom functors. Free Hom and its augmentation are additive, and $C(S\\times P,F^d)=C(S\\times P,F)^d$ coordinatewise. Restrict to $A$ and use Step 3. Its evaluation normalization identifies this arrow with the canonical ordinary-to-derived map $U_F(P)[0]\\to H_P((\\underline F)^d)$. The underived evaluation and the resolution augmentation in [lem-sfb-profinite-free-hom-resolution-evaluation] fix exactly this map: by that node, $H_P((\\underline F)^d)$ is represented by $J^\\bullet=\\underline{\\operatorname{Hom}}_A(A[P],I^\\bullet)$ for a nonnegative injective resolution $(\\underline F)^d\\to I^\\bullet$. Each $J^n$ is injective, since $\\underline{\\operatorname{Hom}}_A(A[P],-)$ is right adjoint to the exact functor $-\\otimes_AA[P]$ (Step 1). Hence a derived map $X[0]\\to J^\\bullet$ from an $A$-module $X$ is a chain map, i.e. a module map $X\\to\\ker(J^0\\to J^1)=\\underline{\\operatorname{Hom}}_A(A[P],(\\underline F)^d)$, and two such derived maps agree once their degree-zero module maps agree. For $d=0$ all complexes in this argument are zero.",
+   "uses": [
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03F9 (lemma-cech-vanish-collection), 03FD (lemma-cohomology-modules-abelian-agree) and 08J7; finite complete-field input and generator-normalized Hom comparison as in the cited finite-field node."
+   }
+  },
+  {
+   "text": "The finite subextensions containing $E$ form a nonempty directed set: $E$ is an object and a common upper bound is their finite compositum [sk-def-sfb-qlbar-condensed]. It is small in the fixed coefficient universe. Coordinatewise, a member of $C(S)^d$ has its finitely many coordinates in finite fields; their compositum with $E$ puts the entire tuple in one $F^d$. Conversely every such tuple belongs to $C(S)^d$. Hence $C^d$ is the sectionwise union of $(\\underline F)^d$. Likewise $U_{\\mathrm{fin}}(P)(S)$ is exactly the union of $U_F(P)(S)$, by its defining single-field condition. Each $U_F(P)$ is a sheaf by the underived evaluation in [lem-sfb-profinite-free-hom-resolution-evaluation]. Both unions are sheaves: for a finite cover choose one compositum containing the fields of all the finitely many local sections and glue in that fixed-field sheaf; matching and uniqueness are unchanged because all inclusions are injective. Thus both displayed unions have the sheaf-colimit universal property, with no further sheafification. This also covers empty tests, empty $P$, and $d=0$.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+    "place": "Subring and Sheaf paragraphs: finite composita and finite jointly surjective covers; the same finite-gluing argument for vector-valued product-parameter functions."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-profinite-derived-functions-filtered-colimit] with its base ring $R=A$, parameter $P$, and diagram $M_F=(\\underline F)^d$. The diagram is small and filtered by Step 5, so its canonical coprojection-induced map $\\operatorname{colim}_F H_P(M_F)\\to H_P(C^d)$ is an isomorphism. The left colimit here is the exact filtered-colimit functor on compatible complexes, as specified in that node. Therefore the colimit of the isomorphisms in Step 4 is an isomorphism from $(\\operatorname{colim}_F U_F(P))[0]$ to $\\operatorname{colim}_F H_P(M_F)$. Step 5 identifies its source with $U_{\\mathrm{fin}}(P)[0]$. Compose the two arrows. For each $F$ this composite equals the canonical comparison for $C^d$ after the inclusion of $U_F(P)$, by naturality of the localization unit [def-sfb-right-derived-single-unit]. Both the composite and the specified arrow go from $U_{\\mathrm{fin}}(P)[0]$ to $H_P(C^d)$, which [lem-sfb-profinite-free-hom-resolution-evaluation] represents by $\\underline{\\operatorname{Hom}}_A(A[P],I^\\bullet)$ for a nonnegative injective resolution $C^d\\to I^\\bullet$. As in Step 4, such derived maps correspond bijectively to module maps $U_{\\mathrm{fin}}(P)\\to\\underline{\\operatorname{Hom}}_A(A[P],C^d)$. The two module maps agree on every $U_F(P)$, hence on their colimit $U_{\\mathrm{fin}}(P)$ in the abelian category (Step 5). So the composite is the specified ordinary-to-derived arrow, which is therefore invertible in the ordinary derived category.",
+   "uses": [
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "def-sfb-right-derived-single-unit",
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GN3, lemma-colim-global, in the existing derived-functions filtered-colimit formulation; assembly uses exact filtered colimits and the original coefficient coprojections."
+   }
+  },
+  {
+   "text": "Use the evaluation model of [lem-sfb-profinite-free-hom-resolution-evaluation]: for a nonnegative $A$-injective resolution $M\\to I$, the comparison is $M(S\\times P)[0]\\to I(S\\times P)$. Restriction by $u:S'\\to S$ and $v:P'\\to P$ is precomposition by $u\\times v$, which commutes with the augmentation and differential. A coefficient inclusion is postcomposition with its module map; the canonical comparison commutes with it by [def-sfb-right-derived-single-unit]. For a continuous matrix $(a_{ij})$ over $E$ on a parameter test, both routes send $f$ to $((s,p)\\mapsto\\sum_j a_{ij}(s,p)f_j(s,p))$ (pull the matrix back to $S\\times P$ if it is defined on $S$). Indeed every $I^n(S\\times P)$ is an $A(S\\times P)$-module, and its differential and augmentation are linear over this ring; matrix multiplication therefore gives the same chain map on this model and commutes with maps of resolutions. Its entries lie in $E\\subset F$, so it preserves each finite-field column and their union. This proves the asserted naturalities for the canonical arrows; the inverses of their isomorphisms satisfy the same squares.",
+   "uses": [
+    "lem-sfb-profinite-free-hom-resolution-evaluation",
+    "def-sfb-right-derived-single-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, injective Hom complex; direct restriction and matrix-linearity check in the existing free-generator evaluation model."
+   }
+  },
+  {
+   "text": "Finally apply naturality of [def-sfb-right-derived-single-unit] to $c^d:C^d\\to B^d$ for the additive functor $\\underline{\\operatorname{Hom}}_A(A[P],-)$. If $\\eta_M$ denotes this canonical unit, it says $H_P(c^d)\\eta_{C^d}=\\eta_{B^d}\\,\\underline{\\operatorname{Hom}}_A(A[P],c^d)$. By [lem-sfb-profinite-free-hom-resolution-evaluation], the underived map on the right sends a finite-subextension-valued function on $S\\times P$ to the identical function considered as $\\Omega^d$-valued. It is exactly $U_{\\mathrm{fin}}(P)\\hookrightarrow U_B(P)$. Step 6 identifies $\\eta_{C^d}$ with the displayed isomorphism, and the resolution-augmentation clause of the same evaluation node identifies $\\eta_{B^d}$ with the last arrow in the question. This is the asserted equality of derived morphisms; no argument here requires $\\eta_{B^d}$ to be invertible.",
+   "uses": [
+    "def-sfb-right-derived-single-unit",
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, injective Hom complex and its augmentation; elementary naturality square for the actual localization unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-free-linearization-tensor",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pc-kflat-complex",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-sfb-profinite-free-hom-resolution-evaluation",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-normed-scalar-profinite-hom-acyclic",
+  "sk-def-sfb-qlbar-condensed",
+  "lem-sfb-profinite-derived-functions-filtered-colimit",
+  "def-sfb-right-derived-single-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient-topology auxiliary input; assembly from the existing flatness, finite-field column, scalar-adjunction and filtered-continuity nodes. Not a verbatim proof in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite set P the derived internal Hom from the free condensed E module on P to the union of finite extensions of Q ell is the filtered union of finite extension valued continuous functions",
+   "results": {
+    "t": "2026-10-22T11:24:31Z",
+    "tool": "leanfinder",
+    "query": "For a profinite set P the derived internal Hom from the free condensed E module on P to the union of finite extensions of Q ell is the filtered union of finite extension valued continuous functions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "e6dbbf82c7dd0ce0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LightCondensed.ihomPoints is underived and over a constant ring; profiniteFree and profiniteSolid construct modules but do not compute derived functions for finite-subextension-valued norm coefficients. Locally constant functions and cofiltered finite quotients have different coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ihom\"",
+   "results": {
+    "t": "2026-10-22T11:24:31Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"ihom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "ed01e2d53d4a8e34"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LightCondensed.ihomPoints is underived and over a constant ring; profiniteFree and profiniteSolid construct modules but do not compute derived functions for finite-subextension-valued norm coefficients. Locally constant functions and cofiltered finite quotients have different coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Profinite).*(filteredColimit|internalHom|derivedHom)|(derivedHom|filteredColimit).*(Condensed|Profinite)",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "grep",
+    "query": "(Condensed|Profinite).*(filteredColimit|internalHom|derivedHom)|(derivedHom|filteredColimit).*(Condensed|Profinite)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LightCondensed.ihomPoints is underived and over a constant ring; profiniteFree and profiniteSolid construct modules but do not compute derived functions for finite-subextension-valued norm coefficients. Locally constant functions and cofiltered finite quotients have different coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal functions on profinite sets with finite subextension valued algebraic ell adic coefficients",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "leansearch",
+    "query": "Derived internal functions on profinite sets with finite subextension valued algebraic ell adic coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyConstant.freeOfProfinite",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Condensed.lanSheafProfinite",
+     "ProfiniteAddGrp.ofFiniteAddGrp",
+     "ProfiniteAddGrp.casesOn",
+     "profiniteToCondensed",
+     "ProfiniteGrp.toLimit_fun"
+    ],
+    "digest": "4151d472d6f9be3b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LightCondensed.ihomPoints is underived and over a constant ring; profiniteFree and profiniteSolid construct modules but do not compute derived functions for finite-subextension-valued norm coefficients. Locally constant functions and cofiltered finite quotients have different coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of a free profinite condensed module commutes with filtered colimits of complete finite dimensional local field coefficient modules",
+   "results": {
+    "t": "2026-10-22T11:24:53Z",
+    "tool": "leanfinder",
+    "query": "Derived internal Hom of a free profinite condensed module commutes with filtered colimits of complete finite dimensional local field coefficient modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat",
+     "LightCondensed.ihom_map_val_app"
+    ],
+    "digest": "ccc311e0bf456202"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LightCondensed.ihomPoints is underived and over a constant ring; profiniteFree and profiniteSolid construct modules but do not compute derived functions for finite-subextension-valued norm coefficients. Locally constant functions and cofiltered finite quotients have different coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Profinite).*(derivedHom|internalHom|filteredColimit)|(derivedHom|internalHom).*(Condensed|Profinite)",
+   "results": {
+    "t": "2026-10-23T04:13:59Z",
+    "tool": "grep",
+    "query": "(Condensed|Profinite).*(derivedHom|internalHom|filteredColimit)|(derivedHom|internalHom).*(Condensed|Profinite)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits. LightCondensed.ihomPoints is underived for a constant coefficient ring; Condensed.profiniteFree/free and SheafOfModules.free construct free objects without the stated derived norm-coefficient computation; profiniteSolid is a different construction; locally constant free modules and profinite-category constructors do not give the clauses of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived functions on profinite sets with coefficients in finite extensions of the l adic numbers",
+   "results": {
+    "t": "2026-10-23T04:14:00Z",
+    "tool": "leansearch",
+    "query": "Derived functions on profinite sets with coefficients in finite extensions of the l adic numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteAddGrp.noConfusionType",
+     "LocallyConstant.freeOfProfinite",
+     "ProfiniteAddGrp.ofFiniteAddGrp",
+     "ProfiniteAddGrp.recOn",
+     "ProfiniteAddGrp.casesOn",
+     "Condensed.locallyConstantPresheaf",
+     "Profinite.hasColimits",
+     "profiniteToCondensed"
+    ],
+    "digest": "7cf195601e24b677"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits. LightCondensed.ihomPoints is underived for a constant coefficient ring; Condensed.profiniteFree/free and SheafOfModules.free construct free objects without the stated derived norm-coefficient computation; profiniteSolid is a different construction; locally constant free modules and profinite-category constructors do not give the clauses of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ihom\"",
+   "results": {
+    "t": "2026-10-23T04:14:00Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"ihom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "ed01e2d53d4a8e34"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits. LightCondensed.ihomPoints is underived for a constant coefficient ring; Condensed.profiniteFree/free and SheafOfModules.free construct free objects without the stated derived norm-coefficient computation; profiniteSolid is a different construction; locally constant free modules and profinite-category constructors do not give the clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a free profinite condensed module to finite subextension valued l adic continuous functions is concentrated in degree zero",
+   "results": {
+    "t": "2026-10-23T04:14:04Z",
+    "tool": "leanfinder",
+    "query": "Derived internal Hom from a free profinite condensed module to finite subextension valued l adic continuous functions is concentrated in degree zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "Condensed.profiniteSolidCounit"
+    ],
+    "digest": "d2b9a8e8aced40ab"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits. LightCondensed.ihomPoints is underived for a constant coefficient ring; Condensed.profiniteFree/free and SheafOfModules.free construct free objects without the stated derived norm-coefficient computation; profiniteSolid is a different construction; locally constant free modules and profinite-category constructors do not give the clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free sheaf of modules on a representable is flat and derived internal functions commute with filtered unions of complete normed coefficient fields",
+   "results": {
+    "t": "2026-10-23T04:14:05Z",
+    "tool": "leanfinder",
+    "query": "A free sheaf of modules on a representable is flat and derived internal functions commute with filtered unions of complete normed coefficient fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.free",
+     "Condensed.free",
+     "SheafOfModules.mapFree",
+     "LightCondensed.free",
+     "SheafOfModules.freeFunctor",
+     "SheafOfModules.freeFunctor_obj",
+     "SheafOfModules.generatorsOfIsCokernelFree",
+     "SheafOfModules.freeCofan"
+    ],
+    "digest": "912962848b265bf4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits. LightCondensed.ihomPoints is underived for a constant coefficient ring; Condensed.profiniteFree/free and SheafOfModules.free construct free objects without the stated derived norm-coefficient computation; profiniteSolid is a different construction; locally constant free modules and profinite-category constructors do not give the clauses of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-algcl-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient topology: old item steps 2–3, free profinite generators, finite complete columns and the filtered finite-subextension column.",
+   "via": [
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-subextension-derived-function-columns",
+  "worker": "stage1",
+  "group": "Q53",
+  "summary": "Statement unchanged. Eight-step assembly from existing DAG inputs: free/slice flatness; single-flat-complex K-flat test and generator base change; normalized scalar-Hom adjunction; finite complete-field columns and finite ranks; sectionwise finite-field unions; derived filtered continuity; parameter/matrix naturality; the actual coefficient-unit square. No new nodes, no claim of norm-algebraic-closure column acyclicity, no Lean writing or compiling.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), arithmetic coefficient-topology obligation below the open-direct-image route, specifically the parent finite-subextension column task. Whole-blueprint searches for profinite/functions/derived and filtered/profinite/Hom return no matching imported node. The ancestor command returns no ancestor; the inherited null from.node and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic representable slice-extension flatness (Stacks 03EV), applied with U=P; no geometric unit route is replaced."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact tensor equivalence transports flatness and the single-complex K-flat test between internal and section modules; no unit-local node gives this comparison."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Definition of the acyclic-total-tensor test used for the elementary single-flat-module argument."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic internal/section scalar adjunction and its K-flat derived transport, preserving the generator unit."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic evaluation-normalized derived change-of-rings Hom adjunction for arbitrary coefficient maps; needed also for B without a flatness assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pc-kflat-complex",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-34b0b991f",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-34b0b991f (reviewer sub-agent of L); spot-checked: Read the item in full, all 12 cited statements, the main-20261015 direct-images paragraph (3) and the Q̄_ℓ definition. There are no new nodes, the statement is unchanged, there is no re-split note and no SGA is cited. Steps 1-2: the free-linearization node gives E_A(A[P]) as the sheafification of the direct sum over S→P of A(S). That is exactly the 03EV presentation of j_{P!}, so A[P] is flat, and the flat/K-flat tests carry over through the internal-section comparison. K-flatness of A[P][0] and R⊗A[P]≅R[P] follow by Yoneda through the free adjunction, with no flatness assumption on A→R. Step 3: dc-hom-scalar-adjunction applies with K=A[P][0] and N=R^d[0]. Step 4: the normed-field node is applied only to finite F with the norm topology, never to Ω or B. Step 5: the unions over finite subextensions are directed, and finite covers make the sectionwise unions sheaves. Step 6: filtered continuity is applied with R=A and M_F=F^d. Steps 7-8: the naturalities hold by unit naturality and the evaluation model, and B is never inverted. Small cases checked: d=0, P=∅, P a point, F=E, and a continuous Ω-valued function of unbounded degree, which lies in B but in no finite F. FIX in the item file (Steps 4 and 6 only): Step 6 justified agreement of the two derived maps by 'the colimit universal property', which colimits in the derived category do not have, and Step 4 stated the normalization without a reason. I replaced both with the argument: Hom(A[P],I^•) has injective terms, because Hom(A[P],−) is right adjoint to the exact functor −⊗A[P]. So derived maps from a degree-zero object into it are module maps into H^0 and are fixed by their restriction to each U_F(P). I added the evaluation node to Step 6's uses; it was already in proof_deps. Accepted tool_uses: 03EV flatness, the internal-section tensor comparison, the internal scalar adjunction and the dc-hom scalar adjunction, all generic. Batch-5 check: lem-sfb-condensed-free-linearization-tensor reaches lem-trf-free-module-sheaf-universal-property. That node is Stacks 04BL, the universal property of the free module sheaf on any site. It is a general definition-level fact, not part of the trace-formula or Poincaré-duality proofs, so it does not trigger a RETURN. Advisory: the statement leaves P being in the site's universe implicit.; 1 file(s) fixed by the reviewer"
+ }
+}

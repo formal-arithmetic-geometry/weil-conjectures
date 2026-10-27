@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-compatible-regular-local-field-presentations",
+ "kind": "statement",
+ "title": "Compatible polynomial-local regular presentations over a field",
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be commutative local $k$-algebras essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra], and let $f:A\\to B$ be a local $k$-algebra homomorphism, meaning $f(\\mathfrak m_A)\\subseteq\\mathfrak m_B$. There exist regular local $k$-algebras $(R,\\mathfrak m_R)$ and $(S,\\mathfrak m_S)$ [def-weil-regular-scheme], both essentially of finite type over $k$, surjective local $k$-algebra maps $q:R\\twoheadrightarrow A$ and $v:S\\twoheadrightarrow B$, and a flat local $k$-algebra map $u:R\\to S$ [def-weil-pbc-flat-ring-map] such that $vu=fq$. Moreover, $F=S/\\mathfrak m_RS$ is a regular local $k$-algebra essentially of finite type over $k$. No flatness of $f$, completeness of $A,B$, or separability of their residue fields is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QM (definition-essentially-finite-p-t), localization of a finite type algebra, and Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), polynomial regularity. Agent-formulated simultaneous polynomial-local presentation: take R a localized finite polynomial algebra surjecting onto A and S a localization of R[Y_1,...,Y_m] surjecting onto B; the closed fibre is a localized polynomial algebra over the residue field of R."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-essentially-finite-type-algebra] and [def-weil-pbc-finite-type-algebra], choose a finite type $k$-algebra $C$, a multiplicative subset $W$, an identification $A=W^{-1}C$, and generators $c_1,\\ldots,c_n$ of $C$. Let $P=k[X_1,\\ldots,X_n]$ and let $a:P\\to A$ send $X_i$ to $c_i/1$, using [def-weil-pbc-mv-polynomial-ring]. Every element of $A$ is $a(h)/a(t)$ for some $h,t\\in P$ with $a(t)$ a unit: lift the numerator in $C$ and its denominator in $W$ along the polynomial surjection. Put $\\mathfrak p=a^{-1}(\\mathfrak m_A)$ and $R=P_{\\mathfrak p}$. For $t\\notin\\mathfrak p$, $a(t)$ is a unit in the local ring $A$, so $q(h/t)=a(h)a(t)^{-1}$ is well defined by the fraction relation of [def-weil-pbc-localization-at-prime]. It is surjective by the preceding fraction description. Its inverse image of $\\mathfrak m_A$ is exactly $\\mathfrak pR=\\mathfrak m_R$, because its denominators are units. Thus $q$ is local.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QM (definition-essentially-finite-p-t), Tag 00F3 (definition-finite-type), and Tag 00CO (definition-localization); direct fraction construction."
+   }
+  },
+  {
+   "text": "Apply the same finite type and localization definitions to $B$: choose a finite type $k$-algebra $C'$, denominators $W'$, and generators $b_1,\\ldots,b_m$ of $C'$, regarded as elements of $B$. Put $D=P[Y_1,\\ldots,Y_m]=k[X,Y]$, and define $b:D\\to B$ by $X_i\\mapsto f(a(X_i))$ and $Y_j\\mapsto b_j$, using polynomial evaluation [def-weil-pbc-mv-polynomial-ring]. Set $Q=b^{-1}(\\mathfrak m_B)$ and $S=D_Q$ [def-weil-pbc-localization-at-prime]. The formula $v(h/t)=b(h)b(t)^{-1}$ defines a local map $S\\to B$: $t\\notin Q$ has unit image, and $v^{-1}(\\mathfrak m_B)=QS$. Every element of $B$ is a fraction of polynomials in the $b_j$ with denominator from $W'$, so this formula is surjective even without the $X$ variables.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00QM (definition-essentially-finite-p-t), 00F3 (definition-finite-type), and 00CO (definition-localization); simultaneous polynomial evaluation."
+   }
+  },
+  {
+   "text": "Locality of $f$ implies $f^{-1}(\\mathfrak m_B)=\\mathfrak m_A$: it gives one inclusion, and an element outside $\\mathfrak m_A$ is a unit, whose image remains a unit. Consequently $Q\\cap P=\\mathfrak p$. Hence inclusion $P\\hookrightarrow D$ induces $u:R\\to S$, $h/t\\mapsto h/t$. The maximal ideals are $\\mathfrak pR$ and $QS$ by [def-weil-pbc-localization-at-prime]; the equality of contractions proves that $u$ is local. On every fraction $h/t\\in R$, both $vu$ and $fq$ have value $f(a(h))f(a(t))^{-1}$, proving $vu=fq$. All maps fix $k$ by their formulas.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), universal fraction formulas; locality of the given homomorphism."
+   }
+  },
+  {
+   "text": "The rings $R=P_{\\mathfrak p}$ and $S=D_Q$ are regular local by [lem-weil-pbc-polynomial-ring-field-regular-ring], applied to the $n$ and $n+m$ variable polynomial rings over $k$. They are essentially of finite type over $k$ by [def-weil-pbc-essentially-finite-type-algebra], since $P$ and $D$ are finite type polynomial algebras.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), regularity of every prime localization; Tag 00QM."
+   }
+  },
+  {
+   "text": "Put $E=R[Y_1,\\ldots,Y_m]$. It is the localization of $D$ at $U=P\\setminus\\mathfrak p$: a polynomial in $Y$ with finitely many fractional coefficients is written with one common denominator in $U$, and equality is detected after multiplying by a further element of $U$. Since $U\\cap Q=\\varnothing$, let $Q_E$ be the inverse image of $QS$ in $E$. The formulas $E\\to S$, $h/t\\mapsto h/t$, and $D_Q\\to E_{Q_E}$, $h/s\\mapsto(h/1)/(s/1)$, identify $S=E_{Q_E}$: for $h/t\\in E$, membership in $Q_E$ is $h\\in Q$, so the displayed maps invert precisely the required denominators and their composites fix all fractions. These are the fraction constructions in [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), iterated localization; explicit common-denominator and inverse formulas."
+   }
+  },
+  {
+   "text": "The monomial expansion in [def-weil-pbc-mv-polynomial-ring] identifies $E$ with the free $R$-module on the monomials in $Y$. Thus $R\\to E$ is flat by the free-module clause of [lem-weil-pbc-projective-module-flat]. The map $E\\to E_{Q_E}=S$ is flat by [lem-weil-pbc-localization-flat]. Their composite is the map $u$ already constructed, so [lem-weil-pbc-flat-ring-map-comp] proves that $u$ is flat.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051G (lemma-local-artinian-characterize-flat), proof opening sentence on free/projective flatness; Tag 00HT (lemma-flat-localization), (1); Tag 00HC (lemma-composition-flat)."
+   }
+  },
+  {
+   "text": "Let $K=R/\\mathfrak m_R=\\kappa(\\mathfrak p)$, a field by [def-weil-pbc-localization-at-prime]. The coefficient-reduction map $E\\to K[Y]$ is surjective and has kernel $\\mathfrak m_RE$: reduce each of the finitely many coefficients, and a polynomial reduces to zero exactly when all its coefficients lie in $\\mathfrak m_R$ [def-weil-pbc-mv-polynomial-ring]. Locality of $u$ gives $\\mathfrak m_RE\\subset Q_E$. Apply [lem-weil-pbc-localization-at-prime-of-quotient] to $E$, this ideal, and $Q_E$. Writing $\\overline Q_E=Q_E/\\mathfrak m_RE$, it gives\n$$F=S/\\mathfrak m_RS\\cong K[Y]_{\\overline Q_E}.$$\nHere $\\overline Q_E$ is prime and proper because $Q_E$ is. Therefore [lem-weil-pbc-polynomial-ring-field-regular-ring], now over the possibly inseparable field extension $K/k$, proves that $F$ is regular local.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient), prime-local form; Tag 00OQ (proposition-finite-gl-dim-polynomial-ring)."
+   }
+  },
+  {
+   "text": "Finally $\\mathfrak m_RS=\\mathfrak pS$, since $\\mathfrak m_R=\\mathfrak pR$ [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-localization-at-prime-of-quotient] also to $D$, the ideal $\\mathfrak pD\\subset Q$, and $Q$: it identifies $F$ with $(D/\\mathfrak pD)_{Q/\\mathfrak pD}$. The $k$-algebra $D/\\mathfrak pD$ is finite type, generated by the residue classes of the finitely many $X_i,Y_j$, by [def-weil-pbc-finite-type-algebra]. Consequently its localization $F$ is essentially of finite type over $k$ by [def-weil-pbc-essentially-finite-type-algebra]. This verifies the last required clause without requiring finite generation of $K$ as a $k$-algebra.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); Tag 00F3 (definition-finite-type); Tag 00QM (definition-essentially-finite-p-t)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Direct simultaneous polynomial-local construction from 00QM and 00F3, using 00OQ for regularity, 00CT for the closed fibre, and 00HT/00HC for flatness. No complete-local or Cohen presentation is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism of local algebras essentially of finite type over a field has compatible surjective regular local polynomial presentations with flat map and regular closed fibre",
+   "results": "{\"t\": \"2026-10-23T18:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"A local homomorphism of local algebras essentially of finite type over a field has compatible surjective regular local polynomial presentations with flat map and regular closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingHom.IsStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"671d066264dbfcb6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Smoothness, localization and essentially-finite-type results do not construct the compatible surjective regular-local presentations with regular closed fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Present a local homomorphism of essentially finite type field algebras by a map of localized polynomial rings with regular closed fibre",
+   "results": "{\"t\": \"2026-10-23T18:11:36Z\", \"tool\": \"leansearch\", \"query\": \"Present a local homomorphism of essentially finite type field algebras by a map of localized polynomial rings with regular closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"RingHom.finiteType_ofLocalizationSpanTarget\", \"RingHom.finiteType_localizationPreserves\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.localization_away_map_finite\", \"RingHom.localization_away_map_finiteType\", \"RingHom.finiteType_holdsForLocalizationAway\", \"RingHom.finiteType_isLocal\"], \"digest\": \"9a5aacd32bf3add2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Smoothness, localization and essentially-finite-type results do not construct the compatible surjective regular-local presentations with regular closed fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsLocalization.AtPrime",
+   "results": "{\"t\": \"2026-10-23T18:11:36Z\", \"tool\": \"loogle\", \"query\": \"Algebra.EssFiniteType, IsLocalization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Smoothness, localization and essentially-finite-type results do not construct the compatible surjective regular-local presentations with regular closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "EssFiniteType|regular.*[Ff]ib[er]+|[Ff]ib[er]+.*regular",
+   "results": "{\"t\": \"2026-10-23T18:11:36Z\", \"tool\": \"grep\", \"query\": \"EssFiniteType|regular.*[Ff]ib[er]+|[Ff]ib[er]+.*regular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"b7af324fb7393e5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Smoothness, localization and essentially-finite-type results do not construct the compatible surjective regular-local presentations with regular closed fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local polynomial presentation of a pair of local algebras over a field by regular local rings",
+   "results": "{\"t\": \"2026-10-23T18:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"Local polynomial presentation of a pair of local algebras over a field by regular local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.localizationAway\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt\"], \"digest\": \"7e6dadddd464fdf0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Smoothness, localization and essentially-finite-type results do not construct the compatible surjective regular-local presentations with regular closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*presentation|presentation.*regular",
+   "results": "{\"t\": \"2026-10-23T18:57:51Z\", \"tool\": \"grep\", \"query\": \"regular.*presentation|presentation.*regular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization maps or smoothness results, not the simultaneous surjective regular-local presentations; the construction and compatibility still require the proof below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible localized polynomial presentations of two local algebras over a field for a local homomorphism",
+   "results": "{\"t\": \"2026-10-23T18:57:51Z\", \"tool\": \"leansearch\", \"query\": \"Compatible localized polynomial presentations of two local algebras over a field for a local homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.instIsLocalHomRingHomAlgebraMap\", \"IsLocalization.map\", \"IsLocalization.mapₐ\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"IsLocalization.Away.awayToAwayLeft_eq\", \"IsLocalization.Away.mapₐ\", \"IsLocalization.Away.mapₐ_apply\", \"RingHom.finitePresentation_localizationPreserves\"], \"digest\": \"a2ec6ae9869aec1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization maps or smoothness results, not the simultaneous surjective regular-local presentations; the construction and compatibility still require the proof below."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-23T18:57:51Z\", \"tool\": \"loogle\", \"query\": \"Algebra.EssFiniteType, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization maps or smoothness results, not the simultaneous surjective regular-local presentations; the construction and compatibility still require the proof below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local map of local algebras essentially of finite type over a field admits compatible surjections from localized polynomial regular local rings with flat local connecting map and regular closed fibre",
+   "results": "{\"t\": \"2026-10-23T18:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"A local map of local algebras essentially of finite type over a field admits compatible surjections from localized polynomial regular local rings with flat local connecting map and regular closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.Smooth.ofLocalizationSpanTarget\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\"], \"digest\": \"ae0cda6a4c57ed90\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization maps or smoothness results, not the simultaneous surjective regular-local presentations; the construction and compatibility still require the proof below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a local algebra homomorphism between essentially finite type algebras to localizations of a polynomial ring inclusion over a field",
+   "results": "{\"t\": \"2026-10-23T18:58:30Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a local algebra homomorphism between essentially finite type algebras to localizations of a polynomial ring inclusion over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.liftAlgHom\", \"IsFractionRing.liftAlgHom\", \"Algebra.Generators.compLocalizationAwayAlgHom\", \"localizationAlgebra\", \"IsLocalization.Away.mapₐ\", \"AlgHom.IsArithFrobAt.localize\", \"Algebra.Extension.localization\", \"Algebra.Generators.compLocalizationAwayAlgHom_toAlgHom_toComp\"], \"digest\": \"412df83fcda5e561\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization maps or smoothness results, not the simultaneous surjective regular-local presentations; the construction and compatibility still require the proof below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-local-ci-source-fibre",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Compatible polynomial-local regular presentations over a field.",
+   "via": [
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compatible-regular-local-field-presentations",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Wrote the simultaneous polynomial evaluations and prime contractions, the flat localized polynomial connecting map, and both closed-fibre quotient descriptions. Reused existing Mathlib leaves for polynomial regularity, free flatness, localization flatness, flat composition and quotient localization; no new nodes. Checked every cited statement and small cases; searched whole DAG, latest blueprint and upstream Lean.",
+  "blueprint": "Supports the inherited from.place: the ordinary local-ring comparison under the etale-chart branch serving direct-images proof (3) of det-thm-sf-ctf-stability-direct-images. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) and the unit/chapter. blueprint_refs ancestor is None; retained the inherited null ancestor and via chain. Searches compatible polynomial, regular local, polynomial regular, 00QM and 00OQ found no equivalent blueprint statement; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-b9c85d87d",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-b9c85d87d (reviewer sub-agent of L); spot-checked: Read the item in full, all 12 cited nodes (all Mathlib leaves), and the Stacks tags 00QM, 00F3, 00OQ, 00CT, 00HT and 00HC (labels checked in tags/tags). The delivery is 1 commit containing only the item and its report, with no new nodes. Compared with live (still unsplit), only status/proof/proof_deps/proof_origin/mathlib_searches/split_report change; the statement, stmt_deps and blueprint are unchanged. There is no repair note, so this is not a re-split. Steps checked: (1) A=W^{-1}C, lifting c/w to a(h)/a(t) gives q: k[X]_p→A, surjective and local; (2) b: k[X,Y]→B with Y alone giving surjectivity of v: D_Q→B; (3) a local map gives f^{-1}(m_B)=m_A and b|P=f∘a, so Q∩P=p, u is local and vu=fq; (4) R and S are regular local because the polynomial lemma covers every prime; (5) S=E_{Q_E} with E=R[Y]=U^{-1}D, an elementary iterated localization; (6) free, then localization, then composition gives u flat; (7) ker(E→K[Y])=m_R E ⊆ Q_E and the quotient-localization lemma give F≅K[Y]_{Q̄}, regular over any field K; (8) F≅(D/pD)_{Q/pD} is essentially of finite type, without assuming K is of finite type over k. Edge cases: A=B=k; A=k with B=k(t); nonflat k[ε]/ε²→k; inseparable residue fields. Duplicates checked: lem-trf-compatible-polynomial-fraction-presentations, lem-trf-essentially-finite-type-ci-kernel-invariance and lem-trf-flat-lci-presentation-base-change do not state this. No SGA citation and no tool_uses needed. Inherited blueprint.from.node=null comes from the creating item and is not this delivery's fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompatibleRegularLocalFieldPresentations",
+  "declaration": "Algebra.exists_compatible_regular_local_field_presentations",
+  "file": "lean/Sheaf/RingTheory/CompatibleRegularLocalFieldPresentations.lean",
+  "statement": "theorem exists_compatible_regular_local_field_presentations (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] [IsLocalRing A] [EssFiniteType k A] (B : Type w) [CommRing B] [Algebra k B] [IsLocalRing B] [EssFiniteType k B] (f : A →ₐ[k] B) [IsLocalHom f.toRingHom] : ∃ (R S : Type (max u v w)) (_ : CommRing R) (_ : CommRing S) (_ : Algebra k R) (_ : Algebra k S) (_ : IsRegularLocalRing R) (_ : IsRegularLocalRing S), EssFiniteType k R ∧ EssFiniteType k S ∧ ∃ (q : R →ₐ[k] A) (v : S →ₐ[k] B) (u : R →ₐ[k] S), Function.Surjective q ∧ IsLocalHom q.toRingHom ∧ Function.Surjective v ∧ IsLocalHom v.toRingHom ∧ u.toRingHom.Flat ∧ IsLocalHom u.toRingHom ∧ v.comp u = f.comp q ∧ IsRegularLocalRing (S ⧸ (IsLocalRing.maximalIdeal R).map u.toRingHom) ∧ EssFiniteType k (S ⧸ (IsLocalRing.maximalIdeal R).map u.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de5395f50",
+  "group": "Q07",
+  "result": "pass",
+  "note": "First delivery: one new module with theorem Algebra.exists_compatible_regular_local_field_presentations (proof sorry only); node changed only by its lean record (existing:false). Every hypothesis and conclusion clause matches the node: Field k; A, B CommRing/Algebra k/IsLocalRing/EssFiniteType in independent universes; f with IsLocalHom; R, S IsRegularLocalRing and EssFiniteType; q, v surjective and local; u RingHom.Flat and local; v.comp u = f.comp q; closed fibre S ⧸ (maximalIdeal R).map u regular local and EssFiniteType k. No extra assumptions. Witness universe max u v w loses no case (ULift). lean.statement matches the file verbatim. Proof steps and edge cases (A=B=k, k→k(t), non-flat k[ε]/ε²→k, inseparable residue fields) checked. Docstrings carry source places and the blueprint tag; IsRegularScheme dependency module publicly imported. No duplicate in Mathlib or the project (only the consumer's proof docstring mentions the node). Report has both required sections. No findings; not recompiled since no file changed (worker compiles clean)."
+ }
+}

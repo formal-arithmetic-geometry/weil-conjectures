@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-simple-bruhat-double-coset-product",
+ "kind": "statement",
+ "title": "Simple Bruhat double-coset multiplication",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup, and with every surjective homomorphism from a semisimple group having finite central kernel an isomorphism. Solvable means that successive scheme-theoretic commutator subgroups become trivial, and central means commuting after every scalar extension. Fix a split maximal torus $T\\subseteq B\\subseteq G$, with $B$ a Borel subgroup, and use $Q=G/B$, the roots $\\Phi$, positive roots $\\Phi^+$ and simple roots $\\alpha_1,\\ldots,\\alpha_r$ of [lem-sfb-reductive-borel-pair-structure]. Put $W=N_G(T)(F)/T(F)$ and choose representatives $n_w$ as in [lem-sfb-bruhat-longest-cell-charts]. Write $s_i=s_{\\alpha_i}$ for the reflections of [lem-sfb-reductive-rank-one-reflections], and $\\ell(w)$ for the minimum number of simple reflections with product $w$. For every algebraically closed extension $K/F$ put $D_w(K)=B(K)n_wB(K)\\subseteq G(K)$. Products of subsets mean $A A\\prime=\\{aa\\prime:a\\in A,a\\prime\\in A\\prime\\}$. For every $i$ and $w\\in W$ one has $D_{s_i}(K)D_w(K)=D_{s_iw}(K)$ if $\\ell(s_iw)=\\ell(w)+1$, and $D_{s_i}(K)D_w(K)=D_{s_iw}(K)\\cup D_w(K)$ if $\\ell(s_iw)=\\ell(w)-1$. These are the only two possible length cases. For any nonempty reduced expression $w=s_{i_1}\\cdots s_{i_m}$ it follows that $D_{s_{i_1}}(K)\\cdots D_{s_{i_m}}(K)=D_w(K)$. There is no characteristic restriction; the empty reduced word represents $1$ and $D_1(K)=B(K)$.",
+ "source": {
+  "document": "literature/brion-kumar-frobenius-splitting.pdf",
+  "place": "Milne iAG2017 Proposition 21.75 (T3), printed p.448, and rank-one root-group calculation; Brion--Kumar Section 2.1 equation (4), printed p.62, including the paragraph on reduced products at the start of Section 2.2, p.64. Primary author-hosted PDF read online; local PDF WANTED.",
+  "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/fbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], semisimplicity implies reductivity. By [lem-sfb-weyl-reflection-realization], $W$ acts faithfully on $E=\\operatorname{span}_{\\mathbf Q}\\Phi$ and equals its root-reflection group. Extend $E$ to $E_{\\mathbf R}$ and average any positive definite inner product over finite $W$. Every $s_\\alpha$ is then orthogonal: its $+1$ hyperplane is perpendicular to its $-1$ line $\\mathbf R\\alpha$, so its given coroot formula is the orthogonal reflection formula. The simple roots are a real basis of $E_{\\mathbf R}$ by their rational independence and the integral sign expansions in the Borel-pair statement. Thus [lem-sfb-simple-root-reflection-generation] says every $w$ has a simple-reflection word; its least length exists. For simple $\\alpha$, the reflection changes only the $\\alpha$ coefficient of a root's simple-root expansion. A positive root $\\beta\\ne\\alpha$ has a positive coefficient elsewhere (reducedness excludes other multiples of $\\alpha$), hence $s_\\alpha\\beta$ is positive and differs from $\\alpha$. Since $s_\\alpha^2=1$, it permutes $\\Phi^+\\setminus\\{\\alpha\\}$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-simple-root-reflection-generation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.37--21.39, pp.435--436; Appendix C.19--C.22, pp.611--612."
+   }
+  },
+  {
+   "text": "Fix $s=s_\\alpha$. Reversing a word shows $\\ell(w^{-1})=\\ell(w)$, and appending $s$ shows $|\\ell(sw)-\\ell(w)|\\le1$. If $w^{-1}\\alpha$ is negative, apply [lem-sfb-root-sign-word-deletion] to a shortest word for $w^{-1}$ and the positive root $\\alpha$. The preceding step verified its sign-partition and simple-reflection hypotheses. Deleting one letter gives a word of length $\\ell(w)-1$ for $w^{-1}s$, so $\\ell(sw)=\\ell(w)-1$. If $w^{-1}\\alpha$ is positive, $(sw)^{-1}\\alpha=-w^{-1}\\alpha$ is negative. Apply the just proved implication to $sw$, obtaining $\\ell(w)=\\ell(sw)-1$. Thus precisely the stated two cases occur, and they correspond respectively to positive and negative $w^{-1}\\alpha$. This also treats $w=1$.",
+   "uses": [
+    "lem-sfb-root-sign-word-deletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10--C.11, p.610; explicit exchange-to-length argument."
+   }
+  },
+  {
+   "text": "Work on $K$-points. By [lem-sfb-reductive-root-subgroup-parametrizations], conjugation by any $n_w$ sends $U_\\beta$ onto $U_{w\\beta}$: the conjugate is smooth connected, is normalized by $T$, and has tangent weight $w\\beta$, so uniqueness in that statement applies. Its torus-action formula holds over every $F$-algebra, hence over $K$. Choose $v_\\alpha$ from [lem-sfb-opposite-root-sl2-parametrizations], and put $u_\\pm(a)=v_\\alpha(x_\\pm(a))$, $h(a)=v_\\alpha(\\operatorname{diag}(a,a^{-1}))$ and $n=v_\\alpha(\\left(\\begin{smallmatrix}0&-1\\\\1&0\\end{smallmatrix}\\right))$. Matrix multiplication gives $n=x_+(-1)x_-(1)x_+(-1)$ before applying $v_\\alpha$. The torus-action formula on $u_\\pm$ therefore gives $tnt^{-1}=h(\\alpha(t))n$. Hence $ntn^{-1}=t h(\\alpha(t))^{-1}$; on characters this is $\\chi\\mapsto\\chi-\\langle\\chi,\\alpha^\\vee\\rangle\\alpha$, so $n$ represents $s$ by faithfulness in [lem-sfb-weyl-reflection-realization]. Also $n^2=h(-1)\\in T$, and $nU_\\alpha n^{-1}=U_{-\\alpha}$. Replacing a chosen representative by $n$ changes no double coset, since representatives differ by $T(F)\\subseteq B(K)$.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-opposite-root-sl2-parametrizations",
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b)--(e), pp.429--430; 21.24, p.432; rank-one matrices."
+   }
+  },
+  {
+   "text": "Write $B_K=B(K)$ and $U_\\beta=U_\\beta(K)$ in this and the next steps. By [lem-sfb-borel-root-product-coordinates] and $B=U\\rtimes T$ from [lem-sfb-reductive-borel-pair-structure], we may write $B_K=V U_\\alpha T(K)$, where $V$ is the ordered product of the other positive root groups; no assertion that $V$ is a subgroup is needed. The first step shows $s$ permutes these other positive roots, so the preceding conjugation calculation gives $nVn^{-1}\\subseteq B_K$. Consequently $$D_sD_w=B_K n B_K n_w B_K\\subseteq B_K U_{-\\alpha} n n_w B_K.$$ The reverse inclusion holds since $U_{-\\alpha}=nU_\\alpha n^{-1}$, whence every $u n$ with $u\\in U_{-\\alpha}$ lies in $nB_K$. This proves equality. The product is invariant under left and right multiplication by $B_K$, and contains $n n_w$, so it always contains $D_{sw}$.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.75 (T3), p.448; Theorem 21.68 and Remark 21.69, pp.445--446."
+   }
+  },
+  {
+   "text": "Suppose $w^{-1}\\alpha\\in\\Phi^+$. For $x=n n_w$, conjugating $U_{-\\alpha}$ by $x^{-1}$ gives $U_{w^{-1}\\alpha}\\subseteq B_K$. Thus the previous equality becomes $$D_sD_w=B_K U_{-\\alpha}xB_K=B_K xB_K=D_{sw}.$$ Here the containment of a positive root group in $B_K$ is exactly the positive-root inclusion of [lem-sfb-borel-root-product-coordinates]. By the length criterion this is the required increasing case.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.75 (T3), p.448, positive-root case."
+   }
+  },
+  {
+   "text": "Suppose $w^{-1}\\alpha\\in-\\Phi^+$. For $a\\ne0$, direct multiplication in $\\operatorname{SL}_2(K)$ gives $$x_-(a)=x_+(a^{-1})\\left(\\begin{smallmatrix}0&-1\\\\1&0\\end{smallmatrix}\\right)\\operatorname{diag}(a,a^{-1})x_+(a^{-1}).$$ Apply [lem-sfb-opposite-root-sl2-parametrizations]. Since $u_+(a^{-1}),h(a)\\in B_K$, $n$ normalizes $T$, $n^2\\in T$, and $nU_\\alpha n^{-1}=U_{-\\alpha}$, it follows that $$u_-(a)n n_w\\in B_K U_{-\\alpha} n_w.$$ But $n_w^{-1}U_{-\\alpha}n_w=U_{-w^{-1}\\alpha}\\subseteq B_K$, so this lies in $D_w$. For $a=0$ the element lies in $D_{sw}$. The parametrization $u_-:K\\to U_{-\\alpha}(K)$ is bijective. Therefore the product equality above yields $D_sD_w\\subseteq D_{sw}\\cup D_w$. It contains $D_{sw}$ already; taking $a=1$ supplies a point of $D_w$, and its left/right $B_K$ invariance supplies all of $D_w$. This proves equality and, by the length criterion, the decreasing case, in every characteristic.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.75 (T3), p.448, negative-root case; explicit SL2 identity repairs the omitted final w."
+   }
+  },
+  {
+   "text": "For a reduced word $w=s_{i_1}\\cdots s_{i_m}$, every suffix is reduced: otherwise a shorter suffix word prefixed by the same letters would shorten the original word. Induct on $m\\ge1$. For $m=1$ the product is $D_w$ by definition. For $m>1$, the suffix $v=s_{i_2}\\cdots s_{i_m}$ has length $m-1$ and its double-coset product equals $D_v$ by induction. Since $\\ell(s_{i_1}v)=\\ell(v)+1$, the increasing formula gives $D_{s_{i_1}}D_v=D_w$. Finally any representative $n_1$ lies in $T(F)$, so $D_1=B_K$. This specifies the empty-word convention as the identity of the algebra of $B_K$-bi-invariant subsets (namely $B_K$), without identifying it with the singleton identity in the full subset monoid. For the rank-zero group there are no simple reflections and only this last assertion remains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Reduced-product consequence of Proposition 21.75, with explicit suffix induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-simple-root-reflection-generation",
+  "lem-sfb-root-sign-word-deletion",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-opposite-root-sl2-parametrizations",
+  "lem-sfb-borel-root-product-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.75 (T3), p.448; Appendix C.10--C.22, pp.610--612; explicit rank-one matrices and exchange-to-length assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of a simple Bruhat double coset by any double coset is one or two double cosets according to root sign",
+   "results": "OK: 8 hits; DoubleCoset.doubleCoset, DoubleCoset.mk_out_eq_mul, DoubleCoset.doubleCoset_eq_image2, DoubleCoset.doubleCoset_union_leftCoset, DoubleCoset.doubleCoset_union_rightCoset, DoubleCoset.mem_doubleCoset, DoubleCoset.eq, Finset.mulETransformLeft",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define double cosets or abstract Coxeter length; none gives the algebraic-group multiplication law"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"doubleCoset\"",
+   "results": "OK: 12 hits; DoubleCoset.Quotient, DoubleCoset.setoid, DoubleCoset.doubleCoset, DoubleCoset.instInhabitedQuotientCoeSubgroup, DoubleCoset.mk, DoubleCoset.quotToDoubleCoset, DoubleCoset.right_bot_eq_right_quot, DoubleCoset.doubleCoset_eq_image2",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define double cosets or abstract Coxeter length; none gives the algebraic-group multiplication law"
+  },
+  {
+   "tool": "grep",
+   "query": "TitsSystem|BNPair|Bruhat|doubleCoset",
+   "results": "OK: 5 hits; Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean; directory Mathlib/GroupTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define double cosets or abstract Coxeter length; none gives the algebraic-group multiplication law"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one multiplication rule for Borel double cosets in a reductive algebraic group",
+   "results": "OK: 8 hits; DoubleCoset.mem_doubleCoset, InnerProductSpace.rankOne_comp_rankOne, DoubleCoset.doubleCoset_eq_of_mem, DoubleCentralizer.mul_snd, InnerProductSpace.inner_right_rankOne_apply, Subfield.relrank_inf_mul_relrank, CosetSpace.borelSpace, Matrix.rank_mul_le",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define double cosets or abstract Coxeter length; none gives the algebraic-group multiplication law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal parabolic subgroup double coset multiplication and the Bruhat decomposition",
+   "results": "OK: 8 hits; DoubleCoset.mk_out_eq_mul, DoubleCoset.doubleCoset_union_rightCoset, DoubleCoset.doubleCoset_union_leftCoset, DoubleCoset.rel_iff, DoubleCoset.eq, DoubleCoset.mk, DoubleCoset.mem_doubleCoset, DoubleCoset.mem_doubleCoset_self",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define double cosets or abstract Coxeter length; none gives the algebraic-group multiplication law"
+  },
+  {
+   "tool": "grep",
+   "query": "inversion|length|simple.*positive|positive.*simple",
+   "results": "OK: 20 hits; Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Chain.lean, Mathlib/LinearAlgebra/RootSystem/Chain.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weyl group length increases under a simple reflection exactly when the inverse sends the simple root to a positive root",
+   "results": "OK: 8 hits; CoxeterSystem.IsLeftDescent, CoxeterSystem.isLeftDescent_iff, CoxeterSystem.length_mul_simple, CoxeterSystem.length_simple_mul, CoxeterSystem.not_isLeftDescent_iff, CoxeterSystem.isLeftDescent_inv_iff, CoxeterSystem.IsRightDescent, CoxeterSystem.length_mul_simple_ne",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite reduced root datum the length of a Weyl group element is the number of positive roots it sends to negative roots",
+   "results": "OK: 8 hits; RootPairing.RootPositiveForm.rootLength, RootPairing.RootPositiveForm.rootLength_reflectionPerm_self, RootPairing.RootPositiveForm.rootLength_lt_of_pairingIn_notMem, RootPairing.Base.IsPos.reflectionPerm, RootPairing.RootPositiveForm.rootLength_le_of_pairingIn_eq, RootPairing.Base.height, CoxeterSystem.length, RootPairing.Base.height_reflectionPerm_self",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing, \"length\"",
+   "results": "OK: 8 hits; RootPairing.RootPositiveForm.rootLength, RootPairing.RootPositiveForm.rootLength_pos, RootPairing.RootPositiveForm.rootLength_reflectionPerm_self, RootPairing.RootPositiveForm.algebraMap_rootLength, RootPairing.RootPositiveForm.rootLength_le_of_pairingIn_eq, RootPairing.RootPositiveForm.rootLength_lt_of_pairingIn_notMem, RootPairing.pairingIn_pairingIn_mem_set_of_length_eq, RootPairing.pairingIn_pairingIn_mem_set_of_length_eq_of_ne",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a base of a finite root system a simple reflection is a left descent exactly when the inverse Weyl element takes its simple root to a negative root",
+   "results": "OK: 8 hits; CoxeterSystem.isLeftInversion_simple_iff_isLeftDescent, CoxeterSystem.IsLeftDescent, RootPairing.Base.IsPos.reflectionPerm, CoxeterSystem.isLeftDescent_inv_iff, CoxeterSystem.isRightDescent_inv_iff, CoxeterSystem.IsRightDescent, CoxeterSystem.isLeftDescent_iff_not_isLeftDescent_mul, CoxeterSystem.isLeftDescent_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inversion\", \"RootPairing\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bruhat multiplication of Borel double cosets by a simple reflection in a reductive algebraic group",
+   "results": "OK: 8 hits; DoubleCoset.mk_out_eq_mul, DoubleCoset.doubleCoset_union_leftCoset, CoxeterSystem.simple_mul_simple_cancel_right, DoubleCoset.doubleCoset_union_rightCoset, CoxeterSystem.isRightDescent_iff_not_isRightDescent_mul, CoxeterSystem.IsReflection, RootPairing.weylGroup.induction, RootPairing.weylGroup.induction'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "grep",
+   "query": "TitsSystem|BNPair|Bruhat|doubleCoset",
+   "results": "OK: 5 hits; Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean, Mathlib/GroupTheory/DoubleCoset.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"doubleCoset\"",
+   "results": "OK: 12 hits; DoubleCoset.Quotient, DoubleCoset.setoid, DoubleCoset.doubleCoset, DoubleCoset.instInhabitedQuotientCoeSubgroup, DoubleCoset.mk, DoubleCoset.quotToDoubleCoset, DoubleCoset.right_bot_eq_right_quot, DoubleCoset.doubleCoset_eq_image2",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication of Borel double cosets by simple reflections gives one or two Bruhat cells",
+   "results": "OK: 8 hits; DoubleCoset.doubleCoset, CoxeterSystem.length_simple_mul, CoxeterSystem.length_simple_mul_ne, CoxeterSystem.length_mul_simple, DoubleCoset.doubleCoset_eq_image2, CoxeterSystem.simple, CoxeterSystem.IsRightDescent, DoubleCoset.mem_doubleCoset",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract double-coset definitions, root squared lengths/positivity or abstract Coxeter descents do not supply this algebraic-group product law"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-schubert-closure-cell-geometry",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Opposite Schubert divisors form the degree-dual Picard basis. Supporting Bruhat closure order and complementary tangent spaces of the ordinary and opposite cells, before the Picard argument. Supporting rank-one multiplication of double cosets, used in the proper-gallery closure proof.",
+   "via": [
+    "lem-sfb-schubert-closure-cell-geometry",
+    "lem-sfb-opposite-schubert-picard-basis",
+    "lem-sfb-fundamental-flag-boundary-sections",
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simple-bruhat-double-coset-product",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused root-sign deletion, simple generation, Weyl realization, root subgroup uniqueness and the opposite-root SL2 map; wrote out the length criterion, both inclusions, nonzero rank-one term, and reduced-suffix induction. No new nodes. Milne final T3 display has an omitted w, repaired explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Opposite Schubert divisors form the degree-dual Picard basis. Supporting Bruhat closure order and complementary tangent spaces of the ordinary and opposite cells, before the Picard argument. Supporting rank-one multiplication of double cosets, used in the proper-gallery closure proof. Realizes the inherited rank-one Bruhat multiplication prerequisite; current latest direct-image proof (3) is unchanged. The ancestor command returns None for this inherited chain; retain its recorded place/via."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-2d9933970",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-2d9933970 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It has no new nodes. The statement and stmt_deps are identical to the live node, which is still unsplit, and no re-split note applies. I read the 7 cited nodes in full; all are split nodes of unit sk-thm-sf-ctf-stability, with no cycle and no SGA citation. Source: Milne iAG2017 Prop. 21.75 at printed p.448. The reported typo is real: Milne's last display drops the factor w (it should read ⊆ BwB), and the proof does not rely on that line. The delivery proves both set equalities, where Milne's T3 gives only an inclusion. Step 1: the W-averaged form makes each s_α an orthogonal reflection, so the hypotheses of the generation lemma hold; 'simple-root base' is read as a basis. Step 2: root-sign-word-deletion gives the length dichotomy. Step 3: I checked n=x+(-1)x-(1)x+(-1) and t n t^-1 = h(α(t)) n by hand, and faithfulness of W on E identifies n with s_α. Step 4: I checked B n B n_w B = B U_{-α} n n_w B in both directions. Step 6: I checked the matrix identity x-(a) = x+(1/a)·[[0,-1],[1,0]]·diag(a,1/a)·x+(1/a); it needs no characteristic restriction. Step 7: induction on reduced words, with D_1=B. Small cases (SL2 with w=1 and w=s, characteristic 2, rank 0) are consistent. A DAG search for Bruhat / double coset / Tits found no duplicate. Batch-5 check: the four flagged citations reach sec-trace-formula only through general facts (Stacks 021O fppf base change, split-torus smoothness, f.g. torsion-free groups are free). These are not part of the trace formula or Poincaré duality, so the citations are accepted. Minor: source.document still names the Brion–Kumar PDF, which is not available locally. That field is inherited, and proof_origin now points to Milne, so no fix is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SimpleBruhatDoubleCosetProduct",
+  "declaration": "AlgebraicGeometry.simple_bruhat_double_coset_product",
+  "declarations": [
+   "AlgebraicGeometry.simpleBruhatWordLength",
+   "AlgebraicGeometry.simpleBruhatDoubleCoset",
+   "AlgebraicGeometry.simple_bruhat_double_coset_product"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SimpleBruhatDoubleCosetProduct.lean",
+  "statement": "theorem simple_bruhat_double_coset_product {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : IsSemisimpleGroupScheme G.X) (hsc : ∀ (G' : Over (Spec (.of F))) [GrpObj G'], IsSemisimpleGroupScheme G' → ∀ (f : G' ⟶ G.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (g : StandardGroupSchemes.affine F A ⟶ G'), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (D : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (base : D.Base) (hred : D.IsReduced) (hroot : ∀ α : Φ, D.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (D.toLinearMap χ ν)) (hΦ : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, base.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (act : RankOneRoots.Weyl iT →* Aut T) (hact : ∀ (n : RankOneRoots.normalizer iT) (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n.val)⁻¹) (s : base.support → RankOneRoots.Weyl iT) (hs : ∀ (α : base.support) (χ : RankOneRoots.Character T), (act (s α)).inv ≫ χ = (D.reflection α.val (Additive.ofMul χ)).toMul) (n : RankOneRoots.Weyl iT → RankOneRoots.normalizer iT) (hn : ∀ w, QuotientGroup.mk (n w) = w) (K : Type u) [Field K] [Algebra F K] [IsAlgClosed K] : (∀ (α : base.support) (w : RankOneRoots.Weyl iT), (simpleBruhatWordLength s (s α * w) = simpleBruhatWordLength s w + 1 ∨ simpleBruhatWordLength s (s α * w) + 1 = simpleBruhatWordLength s w) ∧ (simpleBruhatWordLength s (s α * w) = simpleBruhatWordLength s w + 1 → simpleBruhatDoubleCoset iT iB (n (s α)) (StandardGroupSchemes.affine F K) * simpleBruhatDoubleCoset iT iB (n w) (StandardGroupSchemes.affine F K) = simpleBruhatDoubleCoset iT iB (n (s α * w)) (StandardGroupSchemes.affine F K)) ∧ (simpleBruhatWordLength s (s α * w) + 1 = simpleBruhatWordLength s w → simpleBruhatDoubleCoset iT iB (n (s α)) (StandardGroupSchemes.affine F K) * simpleBruhatDoubleCoset iT iB (n w) (StandardGroupSchemes.affine F K) = simpleBruhatDoubleCoset iT iB (n (s α * w)) (StandardGroupSchemes.affine F K) ∪ simpleBruhatDoubleCoset iT iB (n w) (StandardGroupSchemes.affine F K))) ∧ (∀ l : List base.support, l ≠ [] → l.length = simpleBruhatWordLength s (l.map s).prod → (l.map (fun α ↦ simpleBruhatDoubleCoset iT iB (n (s α)) (StandardGroupSchemes.affine F K))).prod = simpleBruhatDoubleCoset iT iB (n (l.map s).prod) (StandardGroupSchemes.affine F K)) ∧ simpleBruhatDoubleCoset iT iB (n 1) (StandardGroupSchemes.affine F K) = (RankOneRoots.pointImage iB (StandardGroupSchemes.affine F K) : Set _)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual normalizer quotient and Borel pointImage. The two real helper definitions belong to this node: minimum simple-word length and specialization of Mathlib doubleCoset. The decrease condition is written ℓ(sw)+1=ℓ(w), avoiding truncated natural subtraction; the separate D(1)=B clause gives the empty reduced-word convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-395461bfc",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Lean exact against node and Milne 21.75 (T3): binders verbatim from the landed bottSamelson_gallery_geometry and the outputs of the Borel-pair, Bruhat-chart and rank-one-reflection lemmas; D_w(K) = Mathlib doubleCoset on pointImage iB with representative n w; simpleBruhatWordLength is a real least-word-length definition with no generation hypothesis; decrease written ℓ(sw)+1=ℓ(w); dichotomy as a disjunction; reduced words are nonempty ordered lists; D(n 1)=B is a separate clause; edge cases w=1, rank 1 with w=s, rank 0 and any characteristic are covered; no duplicate definitions; statement field verbatim; docstrings carry source, blueprint and proof steps; one sorry. Sole fault H11: the second reading is a same-worker self-check. FIX: fixes/lem-sfb-simple-bruhat-double-coset-product.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean changed, no compile run."
+ }
+}

@@ -149,7 +149,32 @@
   "item": "lem-weil-pbc-tor-long-exact-first-variable",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Module.exists_free_resolution_ses_split"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Module.exists_free_resolution_ses_split",
+     "module": "WeilConjectures.Algebra.Homology.FreeResolutionSesSplit",
+     "lines": [
+      271,
+      403
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -187,5 +212,31 @@
   "landing": "20261012T095905-L-317701",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring and $0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0$ a short exact sequence of $R$-modules ($u$ injective, $\\ker v=\\operatorname{im}u$, $v$ surjective). Then there exist chain complexes of free $R$-modules $F_\\bullet$, $F'_\\bullet$, $F''_\\bullet$ (indexed by $n\\ge0$, differentials $d,d',d''$) with $R$-linear augmentations $\\varepsilon:F_0\\to Q$, $\\varepsilon':F'_0\\to Q'$, $\\varepsilon'':F''_0\\to Q''$ such that the three augmented complexes $\\cdots\\to F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\varepsilon}Q\\to0$, $\\cdots\\to F'_1\\to F'_0\\xrightarrow{\\varepsilon'}Q'\\to0$, $\\cdots\\to F''_1\\to F''_0\\xrightarrow{\\varepsilon''}Q''\\to0$ are exact (free resolutions), together with morphisms of complexes $\\alpha:F_\\bullet\\to F'_\\bullet$, $\\beta:F'_\\bullet\\to F''_\\bullet$ ($d'_n\\alpha_n=\\alpha_{n-1}d_n$, $d''_n\\beta_n=\\beta_{n-1}d'_n$) satisfying $\\varepsilon'\\alpha_0=u\\varepsilon$ and $\\varepsilon''\\beta_0=v\\varepsilon'$, and, for every $n\\ge0$, $R$-linear maps $\\pi_n:F'_n\\to F_n$ and $s_n:F''_n\\to F'_n$ (not required to commute with the differentials) with $\\beta_n\\alpha_n=0$, $\\pi_n\\alpha_n=\\mathrm{id}_{F_n}$, $\\beta_ns_n=\\mathrm{id}_{F''_n}$ and $\\alpha_n\\pi_n+s_n\\beta_n=\\mathrm{id}_{F'_n}$. In particular $0\\to F_n\\xrightarrow{\\alpha_n}F'_n\\xrightarrow{\\beta_n}F''_n\\to0$ is split exact for every $n$.",
+  "proof": [
+   {
+    "text": "*Step 1 (one stage).* For a short exact sequence $0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0$, let $P$ and $T$ be the free modules on the sets $Q$ and $Q''$, with surjections $\\eta:P\\to Q$, $\\theta:T\\to Q''$, and choose a linear lift $\\lambda:T\\to Q'$ of $\\theta$ (send each basis element to a preimage under $v$). Define $\\mu:P\\oplus T\\to Q'$ by $\\mu(x,z)=u(\\eta(x))+\\lambda(z)$; it is surjective. Then $0\\to P\\to P\\oplus T\\to T\\to0$ is split exact, with $\\mu(x,0)=u(\\eta(x))$ and $v(\\mu(x,z))=\\theta(z)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2 (kernels).* The maps $x\\mapsto(x,0)$ and $(x,z)\\mapsto z$ restrict to a short exact sequence $0\\to\\ker\\eta\\to\\ker\\mu\\to\\ker\\theta\\to0$: injectivity is clear; if $(x,0)\\in\\ker\\mu$ then $\\eta(x)=0$ by injectivity of $u$, giving exactness in the middle; and for $z\\in\\ker\\theta$, exactness of the original sequence gives $a\\in Q$ with $u(a)=-\\lambda(z)$, and choosing $x$ with $\\eta(x)=a$ gives $(x,z)\\in\\ker\\mu$ over $z$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3 (recursion).* Apply Step 1 to the original sequence and then recursively to the kernel sequence of Step 2. In degree $n$ this gives $F_n=P$, $F'_n=P\\oplus T$, $F''_n=T$ of the $n$-th stage, with differentials the next-stage surjection followed by the kernel inclusion; their ranges and kernels agree with the kernels of the previous stage, so the three augmented complexes are exact. The inclusion and projection are chain maps, the augmentation squares commute by the formulas in Step 1, and the first projection $\\pi_n$ and second inclusion $s_n$ give the splittings, with the four identities checked on components.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

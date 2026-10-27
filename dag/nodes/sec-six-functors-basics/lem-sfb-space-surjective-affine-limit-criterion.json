@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-space-surjective-affine-limit-criterion",
+ "kind": "statement",
+ "title": "Surjectivity of the affine-limit comparison implies local finite presentation for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. For every small nonempty directed set $I$, let $(T_i)_{i\\in I}$ be an inverse system of affine $S$-schemes with limit $T=\\varprojlim_i T_i$ [lem-weil-pbc-limit-affine-transition]. Suppose that for every such system the canonical map of sets\n$$\\operatorname{colim}_i\\operatorname{Mor}_S(T_i,X)\\longrightarrow\\operatorname{Mor}_S(T,X)\\times_{\\operatorname{Mor}_S(T,Y)}\\operatorname{colim}_i\\operatorname{Mor}_S(T_i,Y)$$\nis surjective. Here the colimits are filtered colimits of sets [def-weil-pbc-category-colimit], and the maps to $\\operatorname{Mor}_S(T,Y)$ are composition with $f$ and restriction to $T$. Then $f$ is locally of finite presentation: for every surjective etale scheme chart $V\\to Y$ and every surjective etale scheme chart $U\\to X\\times_Y V$, the scheme morphism $U\\to V$ is locally of finite presentation [def-sbc-locally-finite-presentation]. No quasi-compactness, quasi-separatedness, or injectivity of the comparison map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0CM6 (lemma-surjection-is-enough); etale chart formulation: spaces-morphisms.tex Tag 03XP (definition-locally-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix arbitrary surjective etale scheme charts $g:V\\to Y$ and $h:U\\to Z=X\\times_YV$. The sheaf fibre product $Z$ is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Write $r:U\\to V$ and $q:U\\to X$ for the projections of $h$. To test $r$, fix an inverse system of affine $V$-schemes $(T_i)$ with limit $T$, structural maps $b_i:T_i\\to V$, and a $V$-map $a:T\\to U$. These are also $S$-schemes and $S$-maps; put $x=q\\circ a$ and denote the limit projections by $p_i$. Thus $f\\circ x=g\\circ b_i\\circ p_i$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+   }
+  },
+  {
+   "text": "The pair $(x,[g\\circ b_i])$ belongs to the fibre product in the hypothesis. Surjectivity supplies a class represented by $c_l:T_l\\to X$ restricting to $x$, with $[f\\circ c_l]=[g\\circ b_i]$. By [lem-weil-pbc-filtered-colimit-sets-elementwise], choose a common later index $j\\ge i,l$ where $f\\circ c_j=g\\circ b_j$. The pair $z_j=(c_j,b_j):T_j\\to Z$ is therefore defined, and its restriction is exactly $h\\circ a$, since both its $X$- and $V$-components agree.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+   }
+  },
+  {
+   "text": "Form $E=T_j\\times_ZU$. By [lem-trf-space-representable-etale-scheme-tests], $E$ is a scheme and $e:E\\to T_j$ is etale: it is the scheme test of the representable etale map $h$ along $z_j$. In particular $e$ is locally of finite presentation by [def-weil-etale-morphism]. The equality $z_j\\circ p_j=h\\circ a$ gives a $T_j$-map $s:T\\to E$ with components $(p_j,a)$. No quasi-compactness of $E$ or $U$ is needed.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+   }
+  },
+  {
+   "text": "Use the tail $k\\ge j$ as a system of affine $T_j$-schemes. Its limit is $T$, by the open-subscheme clause of [lem-weil-pbc-limit-affine-transition] with the open equal to all of $T_j$. The forward implication of [lem-sfb-scheme-affine-limit-lfp-criterion], applied to $e:E\\to T_j$, and representatives from [lem-weil-pbc-filtered-colimit-sets-elementwise], descend $s$ to a $T_j$-map $s_k:T_k\\to E$. Let $a_k:T_k\\to U$ be its second projection. Then $a_k\\circ p_k=a$ and $r\\circ a_k=b_j\\circ(T_k\\to T_j)=b_k$. Thus the descended map is over $V$, not merely over $S$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-sfb-scheme-affine-limit-lfp-criterion",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+   }
+  },
+  {
+   "text": "For every affine inverse system over $V$, every $a\\in\\operatorname{Mor}_V(T,U)$ has now been lifted to a stage. Apply [lem-sfb-scheme-surjective-affine-limit-criterion] with base $V$ to deduce that $r:U\\to V$ is locally of finite presentation. The charts $V$ and $U$ were arbitrary, so this is exactly the chart condition asserted for $f$. Only surjectivity was used for $f$; the bijective scheme criterion in the preceding step was applied solely to the already etale morphism $E\\to T_j$.",
+   "uses": [
+    "lem-sfb-scheme-surjective-affine-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-sfb-scheme-surjective-affine-limit-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0CM6 (lemma-surjection-is-enough), atlas reduction and two successive stage lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|limit.preserving|fibred in groupoids|fibered in groupoids",
+   "results": "Logged 4 hits; top results: Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space over a scheme is locally of finite presentation if maps from directed affine limits always descend to a finite stage, with no uniqueness assumption",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, RingHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.locallyOfFinitePresentation_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"FinitePresentation\"",
+   "results": "Logged 0 hits; none. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of categories fibred in groupoids representable by algebraic spaces is locally of finite presentation if and only if it is limit preserving on objects",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "surjection_is_enough|surjectiv.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*surjectiv",
+   "results": "Logged 6 hits; top results: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces, surjectivity alone of the relative comparison map from filtered colimits of points on affine schemes implies local finite presentation",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|limit.preserving|fibred in groupoids|fibered in groupoids",
+   "results": "Logged 4 hits; top results: Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of algebraic spaces, surjectivity alone of the relative comparison map from filtered colimits of points on affine schemes implies local finite presentation",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, CategoryTheory.MorphismProperty.isFinitelyPresentable, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.epi_f. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\"",
+   "results": "Logged 12 hits; top results: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff, AlgebraicGeometry.locallyOfFinitePresentation_comp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFinitePresentation|[Ff]inite[Pp]resentation.*[Cc]olimit|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "Logged 25 hits; top results: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|surjection_is_enough|surjective.*affine.*limit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"FinitePresentation\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces surjectivity of the relative affine inverse limit comparison on points implies local finite presentation",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-105. The hits give the scheme affine-open definition, forward finite-presentation consequences, or flat descent, not the surjective affine-limit converse for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-lfp-object-limit-test",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the local finite presentation input in the first paragraph, obtained from the existing curve limit-preservation theorem rather than duplicated as a curve-specific lemma. Substep: Relative object descent characterizes representable local finite presentation. Geometric input to the reverse implication: Stacks 0CM6, surjectivity of the relative affine-limit comparison for algebraic spaces.",
+   "via": [
+    "lem-sfb-representable-lfp-object-limit-test",
+    "lem-sfb-stack-limit-preserving-lfp",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-surjective-affine-limit-criterion",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CM6 via arbitrary etale charts. Descended the X-point using the assumed surjection, made the base equality hold at a common stage, and lifted the chart point using the scheme criterion on the etale pullback E -> T_j. Added the missing scheme surjectivity criterion 0CM0 as one statement-only node; retained all existing statement and search records.",
+  "blueprint": "The inherited supporting branch of det-thm-sf-ctf-stability-direct-images, proof (3), through the curve-stack local finite presentation input: geometric implication in representable object descent (0CM6). The current latest blueprint retains this direct-images proof at sk-thm-sf-ctf-stability-direct-images.proof.md. The blueprint ancestor tool returns None for this created chain, retained exactly.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products for the chart target Z; no node of this unit replaces the sheaf fibre-product construction."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representable-etale base-change test makes E a scheme etale over T_j; used as a black box in the chart lift."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-19732ec11",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-19732ec11 (reviewer sub-agent of L); spot-checked: I read Stacks 0CM6 (spaces-limits l.585-640) and 0CM0 (limits l.1463-1525) in full. The item's statement and stmt_deps are byte-identical to live (live is still unsplit, no repair note). The item matches 0CM6, with lfp in the 03XP form for every pair of étale charts.\nStep 1: lem-trf-space-fibre-products-etale-covers gives that Z=X×_Y V is an algebraic space. f q a = g r a = g b_i p_i holds.\nStep 2: the elementwise colimit lemma, clauses (1) and (2), gives a common stage j≥i,l with f c_j = g b_j before z_j=(c_j,b_j) is formed. z_j p_j = h a holds.\nStep 3: lem-trf-space-representable-etale-scheme-tests says scheme-source fibre products over a space are schemes, so E=T_j×_Z U is a scheme. E→T_j is étale by the representable-étale definition in def-trf-algebraic-space, and lfp because def-weil-etale-morphism defines étale as lfp+flat+unramified. s=(p_j,a) exists.\nStep 4: the tail k≥j has limit T by the open-subscheme clause with U_0=T_j. The forward direction of the 01ZC node (no qc/qs hypotheses) descends s to s_k. a_k=pr_U s_k satisfies a_k p_k=a and r a_k = b_k; I checked this computation.\nStep 5: the new node with base V applies, and the charts were arbitrary. Using the scheme base change E→T_j instead of 04AK for h is a faithful expansion of the same step.\nNew node lem-sfb-scheme-surjective-affine-limit-criterion is exactly 0CM0 (tag/label checked). It is statement-only and self-contained, with 5 searches recorded. It is not a duplicate of 01ZC or 04AK/06BC (both need bijectivity), 06CX, 00QO or 07SX/084S. It is the input Stacks itself cites, not a restated clause. Small cases: U=∅ holds; Spec k[x_1,x_2,...] fails the hypothesis, as it must.\nRoute: limit-affine-transition is Lean-proved, the elementwise lemma is a Mathlib leaf. The declared tool_uses are the same two trf space lemmas as on the reviewed sibling lem-sfb-space-relative-affine-limit-criterion; accepted.\nBatch 5: lem-trf-space-fibre-products-etale-covers (02X2) and lem-trf-space-representable-etale-scheme-tests (03EC/025W) are generic algebraic-space foundations. Beyond def-trf-algebraic-space, already a stmt_dep on base, their closures add only atlas, sheaf-pullback and surjective/étale permanence nodes: no Poincaré duality node, no trace transport, no trf theorem. So they are outside both assumptions; flags accepted.\nNo SGA. tools/review_split.py does not follow the snapshot's chapter symlinks (every cite came out \"no such node\"), so I checked cited-id existence by hand. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSurjectiveAffineLimitCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.locallyOfFinitePresentation_of_affine_limit_comparison_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSurjectiveAffineLimitCriterion.lean",
+  "statement": "theorem locallyOfFinitePresentation_of_affine_limit_comparison_surjective {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hsurj : ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S), (∀ i : Iᵒᵖ, IsAffine (D.obj i).left) → ∀ (c : Cone D), IsLimit c → ∀ (x : X.obj.obj.obj (op c.pt)) (y : colimit (D.rightOp ⋙ Y.obj.obj)), (f.hom.hom.app (op c.pt)) x = (colimit.desc (D.rightOp ⋙ Y.obj.obj) (Y.obj.obj.mapCocone (coconeRightOpOfCone c))) y → ∃ z : colimit (D.rightOp ⋙ X.obj.obj), (colimit.desc (D.rightOp ⋙ X.obj.obj) (X.obj.obj.mapCocone (coconeRightOpOfCone c))) z = x ∧ (colim.map (Functor.whiskerLeft D.rightOp f.hom.hom)) z = y) : ∀ (V : Over S) (g : yoneda.obj V ⟶ Y.obj.obj), IsEtale g → IsSurjective g → ∀ (U : Over S) (h : yoneda.obj U ⟶ Limits.pullback f.hom.hom g), IsEtale h → IsSurjective h → ∀ r : U ⟶ V, h ≫ Limits.pullback.snd f.hom.hom g = yoneda.map r → LocallyOfFinitePresentation r.left",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78a047a15",
+  "group": "Q91",
+  "result": "fix",
+  "note": "Lean statement matches node and Stacks 0CM6/03XP clause by clause: directed nonempty I:Type u (preorder convention), affine D : Iᵒᵖ ⥤ Over S, any IsLimit cone, compatible pair via colimit.desc of the restriction cocone, ∃ z with both images = exact surjectivity onto the fibre product (no injectivity), conclusion LocallyOfFinitePresentation r.left for every surjective étale chart g of Y and h of X ×_Y V, r fixed by its Yoneda equation; edge cases (empty I excluded, empty spaces, singleton I) fine; record differs from live only by lean, statement verbatim, docstrings/source/blueprint/proof steps present, sorry only, no defs. Only fault H11: second reading was a self-audit → FIX fixes/lem-sfb-space-surjective-affine-limit-criterion.report.md (worker report verbatim + independent second reading). Advisory: def-sfb-space-morphism-properties MapIsLocallyOfFinitePresentation not cited; item states the equivalent surjective-chart form inline per its node. No Lean changed, no compile run."
+ }
+}

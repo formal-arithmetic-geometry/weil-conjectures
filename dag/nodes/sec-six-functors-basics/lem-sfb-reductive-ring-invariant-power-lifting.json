@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-reductive-ring-invariant-power-lifting",
+ "kind": "statement",
+ "title": "Reductive group schemes have universal invariant power lifting",
+ "statement": "Let $R$ be a commutative ring and $G\\to\\operatorname{Spec}R$ a smooth affine finitely presented group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-affine-spectrum], with the group-object diagrams interpreted over $\\operatorname{Spec}R$. Finite presentation means locally finite presentation, quasi-compactness and quasi-separatedness. Suppose every geometric fibre is connected [def-weil-connected-scheme] and has no nontrivial smooth connected normal unipotent subgroup; over its algebraically closed residue field, unipotent means that all matrices in a faithful finite-dimensional representation are unipotent. For every commutative $R$-algebra $R'$, put $G'=G\\times_R R'$ [def-pc-base-change] and $C'=\\Gamma(G',\\mathcal O_{G'})$. For every equivariant surjective homomorphism $u:E\\twoheadrightarrow F$ of commutative $R'$-algebras with $G'$-actions, and every $b\\in F^{G'}$, there exist $N\\geq1$ and $a\\in E^{G'}$ with $u(a)=b^N$. An action here is an algebra coaction $\\rho_E:E\\to E\\otimes_{R'}C'$ (and similarly for $F$) satisfying the counit and coassociativity identities from multiplication and identity in $G'$, and $E^{G'}=\\{e\\in E:\\rho_E(e)=e\\otimes1\\}$; equivariance means $(u\\otimes1)\\rho_E=\\rho_Fu$. The algebras $E,F$ are arbitrary, without finite-generation or flatness assumptions.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme",
+  "def-pc-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-ring-algebra-coaction",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "First work over a DVR $A$ with algebraically closed residue field and a split semisimple simply connected $H$. Fix a finite free rational module $V$ and primitive $v\\in V^H$. Apply [lem-sfb-dvr-primitive-endomorphism-detector] to get $W,\\phi$. Since $\\phi(v)$ is invariant and the invariant endomorphisms are precisely scalars, write $\\phi(v)=c\\,\\mathrm{id}_W$. Its nonzero reduction implies $c\\notin\\mathfrak m$: otherwise every matrix entry would reduce to zero. Thus $c$ is a unit. Indeed a nonunit generates a proper ideal contained in the unique maximal ideal of the local ring. Replace $\\phi$ by $c^{-1}\\phi$, obtaining $\\phi(v)=\\mathrm{id}_W$.",
+   "uses": [
+    "lem-sfb-dvr-primitive-endomorphism-detector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 9.7.5, final paragraph, printed pp.527--528; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+   }
+  },
+  {
+   "text": "Choose a basis of $W$, of rank $d>0$. Put $f=\\det\\circ\\phi$. The determinant formula [def-weil-pbc-matrix-determinant] shows that $f$ is a degree-$d$ polynomial in the linear coordinate forms of $\\phi$, hence an element of $\\operatorname{Sym}^d_A(V^\\vee)$. For every commutative $A$-algebra $D$ and $h\\in H(D)$, equivariance gives $\\phi_D(hx)=h\\phi_D(x)h^{-1}$. The square-matrix specialization of [lem-weil-pbc-cauchy-binet] gives $\\det(hTh^{-1})=\\det(h)\\det(T)\\det(h^{-1})=\\det(T)$, because applying the same formula to $hh^{-1}=I$ gives $\\det(h)\\det(h^{-1})=1$. These are polynomial identities, including on the universal point of the affine space of $V$, so they say that $f$ is invariant as a coaction, not merely invariant on $A$-points. Finally $f(v)=\\det I=1$. This proves the primitive-polynomial hypothesis of the next step.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-cauchy-binet"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 9.7.5, determinant construction, printed p.528; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+   }
+  },
+  {
+   "text": "The group $H$ is smooth, hence flat by [sbc-lem-smooth-criterion]. Apply [lem-sfb-dvr-primitive-polynomial-lifting-criterion] to the primitive-polynomial property just proved. It gives $P(A,H)$: every equivariant module surjection onto the trivial module $A$ lifts $1$ in some positive symmetric degree, with arbitrary source module. We have proved this for every split semisimple simply connected group over every DVR with algebraically closed residue field. This is exactly the premise of [lem-sfb-reductive-symmetric-power-dvr-reduction]. Its conclusion gives $P(R,G)$ for the group in the item. The hypothesis on its geometric unipotent radical, the smoothness, affineness and finite presentation are precisely those in that node.",
+   "uses": [
+    "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+    "sbc-lem-smooth-criterion",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Lemma 9.2.5 and Theorem 9.7.5, printed pp.522--523,527--528; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+   }
+  },
+  {
+   "text": "Fix a commutative $R$-algebra $R\\prime$, an equivariant surjective homomorphism $u:E\\twoheadrightarrow F$ of commutative $R\\prime$-algebras with $G\\prime=G\\times_R R\\prime$-actions, and $b\\in F^{G\\prime}$. Put $C=\\Gamma(G,\\mathcal O_G)$. By [lem-weil-pbc-fibre-product-affine-spectra], $C\\prime=R\\prime\\otimes_R C$. The tensor universal property [def-weil-pbc-module-tensor-product] identifies $E\\otimes_{R\\prime}(R\\prime\\otimes_R C)$ with $E\\otimes_R C$: the map sends $e\\otimes(r\\prime\\otimes c)$ to $r\\prime e\\otimes c$, with inverse $e\\otimes c\\mapsto e\\otimes(1\\otimes c)$. The same formulas work for $F$. They transfer the coaction identities and equivariance directly on pure tensors, and identify the two definitions of invariance. Regard $E,F$ as rational $G$-modules over $R$. The ring $C$ is flat over $R$ by [sbc-lem-smooth-criterion, lem-weil-pbc-flat-morphism-affine-criterion]. Define the $R$-module $M=\\{(e,r)\\in E\\oplus R:u(e)=rb\\}$. It is the kernel of the equivariant linear map $(e,r)\\mapsto u(e)-rb$. By [lem-weil-pbc-flat-tensor-exact], tensoring this kernel sequence with $C$ is exact, so the diagonal coaction on $E\\oplus R$ restricts to $M$; coassociativity follows by the same injectivity after tensoring twice, and counit by the inclusion. Projection $\\lambda:M\\to R$ is equivariant and surjective: choose $e_0$ with $u(e_0)=b$, and $(re_0,r)$ lifts $r$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Lemma 9.2.5(5) implies (3), via Lemma 4.1.8, printed pp.503--504,522; restriction of scalars makes arbitrary R-prime explicit; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+   }
+  },
+  {
+   "text": "Apply $P(R,G)$ from step 3 to $\\lambda$ to obtain $N\\geq1$ and invariant $q\\in\\operatorname{Sym}^N_R M$ with $\\operatorname{Sym}^N(\\lambda)(q)=1$. The map $t:M\\to E$, $(e,r)\\mapsto e$, induces an algebra homomorphism $\\widetilde t:\\operatorname{Sym}_R M\\to E$ by [lem-weil-pbc-symmetric-algebra-universal-property]. It is equivariant: the two algebra maps to $E\\otimes_R C$ agree on every generator by equivariance of $t$, so the uniqueness clause proves equality. Consequently $a=\\widetilde t(q)$ is invariant. On a degree-$N$ product $(e_1,r_1)\\cdots(e_N,r_N)$, $u\\widetilde t$ takes value $\\prod_i u(e_i)=\\prod_i(r_i b)=(\\prod_i r_i)b^N$. Such products span degree $N$ by [lem-weil-pbc-symmetric-algebra-graded], so linearity gives $u(a)=b^N\\operatorname{Sym}^N(\\lambda)(q)=b^N$. Step 4 identifies this invariance with $G\\prime$-invariance, completing every base-change case. Neither $E,F$ nor $M$ needed to be finite or flat.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Lemma 4.1.8, (5) implies (3), printed pp.503--504; Lemma 9.2.5, printed p.522; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-primitive-endomorphism-detector",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-cauchy-binet",
+  "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+  "sbc-lem-smooth-criterion",
+  "lem-sfb-reductive-symmetric-power-dvr-reduction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Alper Theorem 9.7.5 and Lemma 9.2.5; local copy WANTED, primary journal PDF read online. Determinant and pullback-module assembly expanded by Q135."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?reductive|adequately.?affine|power.?reductive",
+   "results": "{\"t\": \"2026-10-24T04:57:05Z\", \"tool\": \"grep\", \"query\": \"geometrically.?reductive|adequately.?affine|power.?reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Abstract-group invariants, Frobenius powers, and lifting algebra homomorphisms do not establish geometric reductivity of a group scheme over a ring.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group schemes are geometrically reductive invariant powers lift under surjective equivariant algebra maps",
+   "results": "{\"t\": \"2026-10-24T04:57:05Z\", \"tool\": \"leansearch\", \"query\": \"Reductive group schemes are geometrically reductive invariant powers lift under surjective equivariant algebra maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.extendScalarsOfSurjective\", \"AlgHom.liftOfSurjective.congr_simp\", \"Representation.linHom.mem_invariants_iff_comm\", \"Algebra.IsInvariant.isInvariant\", \"Algebra.IsInvariant.mk\", \"Rep.quotientToInvariantsFunctor_map_hom\", \"Representation.Coinvariants.lift.congr_simp\", \"AlgHom.liftOfSurjective\"], \"digest\": \"9c03a7364ceff19f\"}; Abstract-group invariants, Frobenius powers, and lifting algebra homomorphisms do not establish geometric reductivity of a group scheme over a ring.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariant\"",
+   "results": "{\"t\": \"2026-10-24T04:57:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isEmpty_eq_false\", \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isValidForSlice'\", \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.partialMatch\", \"Std.Iterators.Types.Attach.invariant\", \"Std.Do.StringInvariant\", \"Std.Do.StringSliceInvariant\", \"Std.Do.WhileInvariant\", \"Std.Do.Invariant\"], \"digest\": \"90be1f36757d5c5b\"}; Abstract-group invariants, Frobenius powers, and lifting algebra homomorphisms do not establish geometric reductivity of a group scheme over a ring.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme over any ring has power lifting of invariant elements along every equivariant surjection of commutative algebras after arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T04:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme over any ring has power lifting of invariant elements along every equivariant surjection of commutative algebras after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"IsPurelyInseparable.algebraMap_elemReduct_eq\", \"IsPurelyInseparable.algebraMap_elemReduct_eq'\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PerfectRing.ofSurjective\", \"Algebra.IsGeometricallyReduced\", \"PerfectRing.lift_aux\", \"Algebra.isReduced_of_isGeometricallyReduced\"], \"digest\": \"f307b31c2e5b5734\"}; Abstract-group invariants, Frobenius powers, and lifting algebra homomorphisms do not establish geometric reductivity of a group scheme over a ring.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive smooth affine group over a commutative ring has universally power surjective invariants for equivariant algebra quotients",
+   "results": "{\"t\": \"2026-10-24T04:59:11Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive smooth affine group over a commutative ring has universally power surjective invariants for equivariant algebra quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Representation.Coinvariants.mk_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"IsArithFrobAt.exists_of_isInvariant\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"FixedPoints.toAlgAut_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\"], \"digest\": \"af0eb48b5564acb8\"}; Abstract-group invariants, Frobenius powers, and lifting algebra homomorphisms do not establish geometric reductivity of a group scheme over a ring.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive group schemes over arbitrary rings lift positive powers of invariants along surjective equivariant algebra homomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.algebraMap_elemReduct_eq'\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (K : Type u_2) {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable K L] (p : ℕ) [ExpChar K p] (a : L),\\n  (algebraMap K L) (IsPurelyInseparable.elemReduct K a) = a ^ p ^ IsPurelyInseparable.elemExponent K a\", \"doc\": \"For a field $ K $ with exponential characteristic $ p $, and an element $ a $ in a purely inseparable extension $ L $, the image of the element $ \\\\mathrm{elemReduct}_K(a) $ under the canonical algebra\"}\n  {\"name\": \"PerfectRing.lift_aux\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : CommSemiring K] [inst_1 : CommSemiring L] (i : K →+* L) (p : ℕ) [IsPRadical i p]\\n  (x : L), ∃ y, i y.2 = x ^ p ^ y.1\", \"doc\": \"For every element $ x $ in $ L $, there exists a natural number $ n $ and an element $ k $ in $ K $ such that $ i(k) = x^{p^n} $, where $ i : K \\\\to L $ is a ring homomorphism satisfying the $ p $-radi\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_elemReduct_eq\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (K : Type u_2) {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable K L] (a : L),\\n  (algebraMap K L) (IsPurelyInseparable.elemReduct K a) = a ^ ringExpChar K ^ IsPurelyInseparable.elemExponent K a\", \"doc\": \"For any element $ a $ in the field extension $ L $ over $ K $, the image of the canonical embedding of the reduced element of $ a $ into $ L $ is equal to $ a $ raised to the power of the exponential \"}\n  {\"name\": \"AlgHom.IsArithFrobAt.apply_of_pow_eq_one\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {φ : S →ₐ[R] S}\\n  {Q : Ideal S},\\n  φ.IsArithFrobAt Q → ∀ [IsDomain S] {ζ : S} {m : ℕ}, ζ ^ m = 1 → ↑m ∉ Q → φ ζ = ζ ^ Nat.card (R ⧸ Ideal.under R Q)\", \"doc\": \"Let $\\\\varphi: S \\\\to S$ be an arithmetic Frobenius endomorphism at an ideal $Q \\\\subseteq S$ over $R$, and let $\\\\zeta \\\\in S$ satisfy $\\\\zeta^m = 1$ for some natural number $m$ not contained in $Q$. Then \"}\n  {\"name\": \"IsPRadical.pow_mem'\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} {inst : CommSemiring K} {inst_1 : CommSemiring L} {i : K →+* L} {p : ℕ}\\n  [self : IsPRadical i p] (x : L), ∃ n y, i y = x ^ p ^ n\", \"doc\": \"For any commutative semirings $ K $ and $ L $, a ring homomorphism $ i : K \\\\to L $, and a natural number $ p $, if $ i $ satisfies the $ p $-radical condition, then for every element $ x \\\\in L $, ther\"}\n  {\"name\": \"IsPRadical.pow_mem\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : CommSemiring K] [inst_1 : CommSemiring L] (i : K →+* L) (p : ℕ) [IsPRadical i p]\\n  (x : L), ∃ n y, i y = x ^ p ^ n\", \"doc\": \"For any element $x$ in $L$, there exists a natural number $n$ and an element $y$ in $K$ such that the image of $y$ under the homomorphism $i$ equals $x^{p^n}$, i.e., $i(y) = x^{p^n}$.\"}\n  {\"name\": \"PerfectionMap.surjective\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₂}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R},\\n  PerfectionMap p π →\\n    ∀ (f : ℕ → R), (∀ (n : ℕ), f (n + 1) ^ p = f n) → ∃ x, ∀ (n : ℕ), π ((\", \"doc\": \"Let $ p $ be a prime number, $ R $ a commutative semiring of characteristic $ p $, and $ P $ a perfect ring of characteristic $ p $. For any ring homomorphism $ \\\\pi: P \\\\to R $ satisfying the perfectio\"}\n  {\"name\": \"smul_eq_self_of_preimage_zpow_eq_self\", \"module\": \"Mathlib/Dynamics/FixedPoints/Prufer\", \"type\": \"∀ {G : Type u_1} [inst : CommGroup G] {n : ℤ} {s : Set G},\\n  (fun x => x ^ n) ⁻¹' s = s → ∀ {g : G} {j : ℕ}, g ^ n ^ j = 1 → g • s = s\", \"doc\": \"Let $ G $ be a commutative group, $ n \\\\in \\\\mathbb{Z} $, and $ s \\\\subseteq G $. If the preimage of $ s $ under the map $ x \\\\mapsto x^n $ equals $ s $ itself, then for any $ g \\\\in G $ and $ j \\\\in \\\\mathb\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract group actions, reduced rings, or symmetric algebra constructions; none states this group-scheme invariant lifting result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reductivity over a base ring implies universal adequate surjectivity of invariant rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_1) {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [Algebra.IsGeometricallyReduced k A], IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [i\", \"doc\": \"Let $ A \\\\subseteq B $ be commutative rings with $ B $ equipped with a profinite group $ G $-action preserving the $ A $-algebra structure. For a prime ideal $ Q \\\\subseteq B $ lying over $ P = Q \\\\cap A\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] [Algebra.IsInvariant A B G\", \"doc\": \"The group homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the group of $A/p$-algebra automorphisms of the quotient ring $B/P$ is surjective. This means ever\"}\n  {\"name\": \"Algebra.isGeometricallyReduced_iff\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  Algebra.IsGeometricallyReduced k A ↔ IsReduced (TensorProduct k (AlgebraicClosure k) A)\", \"doc\": \"For a field $ k $ and a $ k $-algebra $ A $, the algebra $ A $ is geometrically reduced over $ k $ (i.e., $ A \\\\otimes_k L $ is reduced for every field extension $ L/k $) if and only if the tensor prod\"}\n  {\"name\": \"FixedPoints.toAlgAut_surjective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G],\\n  Function.Surjective ⇑(MulSemiringAction.toAlgAut G (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"For any finite group $ G $ acting on a field $ F $, the canonical group homomorphism from $ G $ to the group of $ R $-algebra automorphisms of $ F $ induced by the multiplicative semiring action is su\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_injective\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A] {B : Type u_3}\\n  [inst_3 : Ring B] [inst_4 : Algebra k B] (f : A →ₐ[k] B),\\n  Function.Injective ⇑f → ∀ [Algebra.IsGeometricallyReduced k B], Algebra.IsGeometricallyReduced k A\", \"doc\": \"If there exists an injective algebra homomorphism from a ring $ A $ to a ring $ B $ over a field $ k $, and $ B $ is geometrically reduced over $ k $, then $ A $ is also geometrically reduced over $ k\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract group actions, reduced rings, or symmetric algebra constructions; none states this group-scheme invariant lifting result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract group actions, reduced rings, or symmetric algebra constructions; none states this group-scheme invariant lifting result"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*reductiv|power.?reductiv|adequately.?affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract group actions, reduced rings, or symmetric algebra constructions; none states this group-scheme invariant lifting result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group schemes invariant powers lift over any base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.instPowInt\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": Pow (SpecialLinearGroup R V) ℤ\", \"doc\": \"For any element $ x $ in the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any integer $ n $, the integer power $ x^n $ is also an element of $ \\\\text{SL}(V) $. This follows b\"}\n  {\"name\": \"SpecialLinearGroup.instPowNat\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": Pow (SpecialLinearGroup R V) ℕ\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $R$ is equipped with a canonical exponentiation operation to natural number powers. For any element $x \\\\in \\\\text{SL}(V)$ and natural num\"}\n  {\"name\": \"Polynomial.X_pow_mem_lifts\", \"module\": \"Mathlib.Algebra.Polynomial.Lifts\", \"type\": \"(f : R →+* S) (n : ℕ) : (X ^ n : S[X]) ∈ lifts f\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ and any natural number $ n $, the polynomial $ X^n $ in $ S[X] $ belongs to the subsemiring $ \\\\text{lifts}\\\\, f $ consisting of polynomials with coefficients in\"}\n  {\"name\": \"LinearEquiv.baseChange_zpow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(f : M ≃ₗ[R] M) (n : ℤ) : (f ^ n).baseChange R A M M = f.baseChange R A M M ^ n\", \"doc\": \"For any linear equivalence $ f: M \\\\to M $ over a semiring $ R $, integer $ n $, and ring homomorphism $ R \\\\to A $, the base change of the $ n $-th power of $ f $ to a module over $ A $ satisfies $ (f^\"}\n  {\"name\": \"IsGroupLikeElem.pow\", \"module\": \"Mathlib.RingTheory.Bialgebra.GroupLike\", \"type\": \"{n : ℕ} (ha : IsGroupLikeElem R a) : IsGroupLikeElem R (a ^ n)\", \"doc\": \"For any natural number $ n $ and a group-like element $ a $ in a coalgebra over a commutative semiring $ R $, the element $ a^n $ obtained by raising $ a $ to the $ n $-th power is also group-like.\"}\n  {\"name\": \"PerfectRing.lift_aux\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"(x : L) : ∃ y : ℕ × K, i y.2 = x ^ p ^ y.1\", \"doc\": \"For every element $ x $ in $ L $, there exists a natural number $ n $ and an element $ k $ in $ K $ such that $ i(k) = x^{p^n} $, where $ i : K \\\\to L $ is a ring homomorphism satisfying the $ p $-radi\"}\n  {\"name\": \"PowerBasis.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.PowerBasis\", \"type\": \"∀ {S : Type u_2} [inst : Ring S] {A : Type u_4} [inst_1 : CommRing A] [inst_2 : Algebra A S] {S' : Type u_7}\\n  [inst_3 : Ring S'] [inst_4 : Algebra A S'] (pb pb_1 : PowerBasis A S) (e_pb : pb = pb_1) (y y_1 : S') (e_y : y = y_1)\\n  (hy : (Polynomial.aeval y) (minpoly A pb.gen) = 0), pb.lift y hy = pb\", \"doc\": \"Given two equal power bases $\\\\{1, \\\\alpha, \\\\alpha^2, \\\\dots\\\\}$ and $\\\\{1, \\\\alpha', \\\\alpha'^2, \\\\dots\\\\}$ for an $A$-algebra $S$, and elements $y, y' \\\\in S'$ satisfying $\\\\minpoly_A(\\\\alpha)(y) = 0$ and $\\\\min\"}\n  {\"name\": \"Algebra.IsInvariant.charpoly_mem_lifts\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Fintype G] (b : B) : charpoly G b ∈ Polynomial.lifts (algebraMap A B)\", \"doc\": \"For any finite group $G$ and element $b \\\\in B$, the characteristic polynomial $\\\\operatorname{charpoly}(G, b)$ belongs to the subsemiring of $B[X]$ consisting of polynomials whose coefficients lie in t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract group actions, reduced rings, or symmetric algebra constructions; none states this group-scheme invariant lifting result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-dvr-reductive-linear-affine-quotient",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf.",
+   "via": [
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-ring-invariant-power-lifting",
+  "worker": "stage1",
+  "summary": "Split the ring theorem into the conditional DVR reduction, the corrected primitive-polynomial criterion and the integral endomorphism detector. Expanded scalar normalization, determinant invariance, restriction of scalars under arbitrary base change and the pullback-module construction for arbitrary algebra quotients. Preserved the item statement. Reported the false injection-only formulation in the printed criterion; the new criterion requires primitive vectors. No Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. This supplies the ring-level reductivity prerequisite below the projective quotient and alteration input in direct-image proof (3). The ancestor command returns None, so inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-universal-property",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Generic commutative algebra or scheme smoothness/tensor tool; the unit contains no substitute for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-7acb64552",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-7acb64552 (reviewer sub-agent of L); spot-checked: Read Alper (journal PDF fetched, printed pp.521-528): 9.2.5 (1)-(5)/(5')-(7''), Rem 9.2.4/9.2.7, Props 9.3.1/9.5.1, Def 9.7.1, Lemmas 9.7.2/9.7.4, Thm 9.7.5 with full proof. The item's statement matches 9.7.5 + 9.2.5(2)<=>(3) + 9.3.1(i). The reported source errors are confirmed: (7'') with an injection fails for A=k[[t]], v=t; 9.7.2(2) fails for v=0; 9.7.4(2) has a char typo. The primitive-vector corrections keep exactly what the final paragraph of 9.7.5 uses. Step 1: φ(v)=c·id with nonzero reduction, so c is a unit. Step 2: det∘φ ∈ Sym^d(V^∨), d=rk W>0, invariant via Cauchy-Binet on the universal point, f(v)=1; elementary, OK. Step 3: smooth gives flat (sbc-lem-smooth-criterion); the criterion's P(A,H) matches the reduction's P verbatim; the reduction's conclusion is the item's hypothesis exactly. Step 4: C'=R'⊗C, E⊗_{R'}C' ≅ E⊗_R C, C flat; M=ker(E⊕R→F), and flat-tensor-exact gives the restricted coaction and coassociativity; λ is onto. Step 5: Sym universal property and grading give u(t̃q)=b^N. New nodes: the detector (Seshadri Properties I/II, integral; field-only nodes are not duplicates) and the criterion (local finiteness + resolution property over a DVR + dualizing) are true and tested on trivial H, V=0, v=t. The reduction node is conditional, strictly smaller and true. Not a relabelling. FIX: the reduction node's premise asked only for smooth geometric fibres of a flat H, while the detector needs H smooth; steps 1/3 bridged this without a citation. Rewrote the reduction premise as 'H smooth over Spec A [def-sbc-smooth-morphisms], geometric fibres connected [def-weil-connected-scheme] ...'. The statement stays true, the premise is only weakened, and the two classes now coincide. Note for the reduction's future worker: Alper's splitting uses SGA3 XXII 2.3, which the route lock forbids, so cite non-SGA literature. Accepted generic tool_uses: sbc-lem-smooth-criterion and the lem-weil-pbc-* algebra nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveRingInvariantPowerLifting",
+  "declaration": "AlgebraicGeometry.reductive_ring_invariant_power_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveRingInvariantPowerLifting.lean",
+  "statement": "theorem reductive_ring_invariant_power_lifting (R : CommRingCat.{u}) (G : Grp (Over (Spec R))) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] (hgeom : ∀ (Ω : Type u) [Field Ω] [Algebra R Ω] [IsAlgClosed Ω], ReductiveTorusCentralizer.IsReductive (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R Ω)))).mapGrp).obj G)) (R' : CommRingCat.{u}) [Algebra R R'] (E : Type v) [CommRing E] [Algebra R' E] (F : Type w) [CommRing F] [Algebra R' F] (ρE : AffineGroupAction.Coaction R' (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).mapGrp).obj G) E) (ρF : AffineGroupAction.Coaction R' (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).mapGrp).obj G) F) (f : E →ₐ[R'] F) (hf : Function.Surjective f) (heq : f.toLinearMap.rTensor Γ((((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).mapGrp).obj G).X.left, ⊤) ∘ₗ ρE.map.toLinearMap = ρF.map.toLinearMap ∘ₗ f.toLinearMap) (b : F) (hb : ρF.map b = b ⊗ₜ[R'] 1) : ∃ (N : ℕ) (a : E), 1 ≤ N ∧ ρE.map a = a ⊗ₜ[R'] 1 ∧ f a = b ^ N",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04e198897",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement unchanged; item gains only lean plus stmt_deps on the new def-sfb-ring-algebra-coaction and the landed reductive-terminology def. Clause check: Grp(Over(Spec R)) with Smooth, IsAffineHom, LFP, QC, QS on G.X.hom; hgeom applies IsReductive to every algebraically closed Ω:Type u; IsUnipotent includes Smooth, so 'smooth' unipotent subgroup is kept; the other IsReductive parts follow from base change. G' is Over.pullback.mapGrp (project convention); C' is the canonical Hopf structure via affineCoordinateHopfAlgebra. AlgebraCoaction counit and coassoc are correct (right coaction). heq, hb and the conclusion (1≤N, invariant a, f a=b^N) match the node. E, F unrestricted in universes v, w; R' shares u with R (fibre-product convention). New node justified: live HopfAction.AlgebraCoaction and RelativeHopf.Coaction are field-only, no Mathlib comodule-algebra, no name clash in side-live. Helpers are real (inferInstanceAs, canonical instance). Docstrings and blueprint tags present; one sorry; lean.statement verbatim; report sections present. Edge cases R=0, trivial group, b=0, N=0, char p, torus/Ga checked. No compile run (no file changed)."
+ }
+}

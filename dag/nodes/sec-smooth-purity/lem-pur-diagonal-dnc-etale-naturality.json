@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-diagonal-dnc-etale-naturality",
+ "kind": "statement",
+ "title": "The four-factor diagonal orientation commutes with etale correspondences",
+ "statement": "Fix P and finite-type k-target Y. Let f:X→Y and g:Z→Y be separated quasi-compact smooth maps of pure dimension d, with Noetherian schemes and compactifications. Choose normalized diagonal charts C and E on the same affine target open V. Let j:U→X and v:U→Z be separated quasi-compact etale maps of finite type, U Noetherian, v g=j f, and both composites compactifiable. For any open O of U and actual lifts jO:O→f^{-1}V and vO:O→g^{-1}V commuting with inclusions, the two local inverse DNC orientations agree under the specified pullback comparisons, the canonical finite Tate comparisons for any normalized t, and the source-etale dualizing locality for any normalized compact-support datum N. The attached Lean equation specifies each endpoint and conjugation. No affine counit, P1 datum or orientation realization is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sp-etale-compact-support-normalization",
+  "def-pur-purity-base-change-sources"
+ ],
+ "proof": [
+  {
+   "text": "On self-products first base-change the diagonal along the etale map and then restrict the other factor. Remove the complementary clopen components of the centre. The conormal map fixes the ordered differences and induces the coefficientwise Rees map. DNC family normalization and uniqueness give the delta square.",
+   "uses": [
+    "lem-pur-affine-target-diagonal-dnc",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose vector models and common local frames. Apply BetaNormalized and vector integration base change. Linear trace invariance eliminates dependence on the frames and gives the beta square.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement",
+    "cor-pur-vector-bundle-purity",
+    "def-amb-vector-integration",
+    "lem-amb-linear-trace-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the self-product and section squares for alpha and the target-open square for rho. The canonical sum-extension counit gives the locality maps. Multiply the four equations; site composition and coefficient pullbacks give exactly restrictionAlong. Compare after shifting the rank-one source to the heart and use sheaf-Hom descent. Empty opens and rank zero use zero objects and the empty tensor.",
+   "uses": [
+    "lem-asd-tensor-mate-etale-precomp",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-dnc-etale-naturality-twist-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--3 and categorical cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The DNC diagonal orientation is natural under an etale correspondence and is the integration counit on affine projection",
+   "results": "8 hits concerning scheme diagonals and affine coordinate maps; no DNC orientation or counit identity.",
+   "date": "2026-10-26",
+   "verdict": "No matching normalization/naturality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "2 hits; Iso.inv_hom_id supplies structural cancellation, not the geometric identity.",
+   "date": "2026-10-26",
+   "verdict": "Use for assembly, not a geometric replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalAffineMate|BetaNormalized|dncInvariance",
+   "results": "msearch: 0 Mathlib hits. Project rg found DiagonalDncChartNormalization and ChartDncVectorFactors, which depend on the assigned item via PurityDiagonalDualizingObject. Independent finite-ring section normalization is available but not the local four-factor identity. Blueprint searches affine counit, diagonal etale, agreement model, projection purity agreement: no duplicate; etale correspondence matched only torsor H1.",
+   "date": "2026-10-26",
+   "verdict": "No independent matching declaration; the two geometric steps are stated separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalAffineCounitRestriction",
+  "date": "2026-10-26",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": [
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalDncEtaleNaturality",
+  "file": "lean/Sheaf/Paper/DiagonalDncEtaleNaturality.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalDncEtaleNaturality",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.diagonalDncEtaleNaturality"
+  ],
+  "statement": "theorem diagonalDncEtaleNaturality (P : PurityFiniteSetting.{u})\n    {X Z Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) (g : Z ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    [SmoothOfRelativeDimension d g]\n    [IsNoetherian X] [IsNoetherian Z] [IsNoetherian Y]\n    [HasCompactification f] [HasCompactification g]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (C : OrientationRefinement.Chart P f aY d V)\n    (E : OrientationRefinement.Chart P g aY d V)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    (U : Scheme.{u}) [IsNoetherian U]\n    (j : U ⟶ X) [Etale j] [IsSeparated j] [LocallyOfFiniteType j] [QuasiCompact j]\n    (v : U ⟶ Z) [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]\n    (w : v ≫ g = j ≫ f)\n    [HasCompactification (j ≫ f)] [HasCompactification (v ≫ g)]\n    (O : U.Opens) (jO : O.toScheme ⟶ (f ⁻¹ᵁ V.1).toScheme)\n    (vO : O.toScheme ⟶ (g ⁻¹ᵁ V.1).toScheme)\n    (hj : jO ≫ (f ⁻¹ᵁ V.1).ι = O.ι ≫ j)\n    (hv : vO ≫ (g ⁻¹ᵁ V.1).ι = O.ι ≫ v) :\n    let νU := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory\n    let T := OrientationRefinement.pull P O.ι\n    let cj := OrientationCounit.restrictionAlong P j (f ⁻¹ᵁ V.1) O jO hj\n    let cv := OrientationCounit.restrictionAlong P v (g ⁻¹ᵁ V.1) O vO hv\n    let a :=\n      (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t j (P.diagonalExponent_isUnit (f ≫ aY)) d).hom ≫\n      (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t v (P.diagonalExponent_isUnit (g ≫ aY)) d).inv\n    let b := (P.diagonalEtaleLocality N v g).hom ≫\n      (P.diagonalDualizingCongr w).hom ≫ (P.diagonalEtaleLocality N j f).inv\n    T.map (νU.map a) ≫\n        (cv.app (P.diagonalTwistEtale Z d)).inv ≫\n        (OrientationRefinement.pull P vO).map\n          (OrientationCounit.localInverse P d g aY V E).hom ≫\n        (cv.app (P.diagonalOrdinaryDualizing g)).hom ≫ T.map (νU.map b) =\n      (cj.app (P.diagonalTwistEtale X d)).inv ≫\n        (OrientationRefinement.pull P jO).map\n          (OrientationCounit.localInverse P d f aY V C).hom ≫\n        (cj.app (P.diagonalOrdinaryDualizing f)).hom",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b655",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261026T023000-L-510496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T183446-L-3735280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-native-direct-image-sections",
+ "kind": "statement",
+ "title": "Native direct image is identity on sections",
+ "statement": "Fix a prime l and a NativeRings(l) system as in [def-sf-locally-finite-adic-compact-support-data]. For every scheme morphism $g:U\\to V$ there is a unique natural isomorphism adicLowerStar(l,g) followed by sections(l,V) ≅ sections(l,U) followed by the ordinary ringed-module direct image along g and NativeRings.pull(g). On every module M, every pro-etale test object W over V and every section m, its hom component sends m to the very same element (the displayed HEq normalization). No finiteness or nonemptiness hypotheses are imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8; lem-sf-native-compact-support-geometry proof step 2, identity-on-sections direct image; Stacks Tag 03D6"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data"
+ ],
+ "proof": [
+  {
+   "text": "The lax tensorator of sheaf-compose followed by sheaf-to-presheaf agrees with the objectwise tensorator followed by the vector-space sheafification tensorator. Evaluating this formula on an integer pure tensor shows that the section ring-module scalar action of an adic module is its native sectionAct.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the internal module pushforward action. Naturality of the section tensorator and the sheaf-pushforward tensorator formula show that sectionAct on the pushforward is sectionAct of the source module with scalars restricted along adicConstantSheafToLowerStar. The ringed direct image has the same underlying section groups and acts by restriction along the adjunct of NativeRings.pull. Pointwise extensionality and pull_normalized identify these two scalar maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity natural transformations of underlying section groups are now linear in both directions. Package them as module-sheaf morphisms and a natural isomorphism in the module variable. The hom component satisfies the stated HEq by reflexivity. Uniqueness is extensionality in module, test object and section, using eq_of_heq on the normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Direct-image clause of the assigned native geometry proof; explicit tensorator calculation rather than transport of condensed coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal module direct image agrees with sectionwise ringed sheaf direct image, with identity on underlying sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app, AlgebraicGeometry.Scheme.Modules.Hom.id_app, AlgebraicGeometry.StructureSheaf.comap_id', AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Hom.appIso, SheafOfModules.pushforwardId, SheafOfModules.id_val",
+   "date": "2026-10-27",
+   "verdict": "Generic sectionwise pushforward declarations only; specialize the existing project tensorator formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module direct image agrees with sectionwise ringed sheaf direct image, with identity on underlying sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, SheafOfModules.pushforwardSections_coe, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.toSheaf_map_val, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-27",
+   "verdict": "Generic sectionwise pushforward declarations only; specialize the existing project tensorator formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.pushforward|sheafPushforwardContinuousCompSheafComposeIso",
+   "results": "19 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-27",
+   "verdict": "Generic sectionwise pushforward declarations only; specialize the existing project tensorator formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportGeometry",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Bhatt--Scholze Section 6.8; second step of lem-sf-native-compact-support-geometry, identity on direct-image sections",
+   "via": [
+    "lem-sf-native-compact-support-geometry",
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeDirectImageSections",
+  "file": "lean/Sheaf/Paper/NativeDirectImageSections.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_direct_image_sections",
+  "statement": "theorem native_direct_image_sections [N : NativeRings.{u} l]\n    {U V : Scheme.{u}} (g : U ⟶ V) :\n    ∃! c : ProEtale.adicLowerStar l g ⋙ sections l V ≅ sections l U ⋙\n        proEtaleRingModuleDirectImage g (ringSheaf l V) (ringSheaf l U) (N.pull g),\n      ∀ (M : ProEtale.AdicSheaf l U) (W : V.ProEtᵒᵖ)\n        (m : ((sections l V).obj ((ProEtale.adicLowerStar l g).obj M)).val.obj W),\n        HEq (((c.hom.app M).val.app W) m) m",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T034727-L-3679526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T034727-L-3679526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

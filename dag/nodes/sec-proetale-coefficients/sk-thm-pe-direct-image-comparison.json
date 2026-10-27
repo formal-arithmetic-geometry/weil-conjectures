@@ -175,7 +175,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-b9a147ca1 (reviewer sub-agent of L); spot-checked: Read the full item, six proof steps, all 18 dependencies, current blueprint route, cited literature, and edge cases. The canonical mate, arbitrary discrete coefficient exactness, bounded-below comparison, classicality transfer, and coherence are supported; no new nodes or duplicates. Review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison",
   "declaration": "AlgebraicGeometry.ProEtale.directImageComparison",
@@ -207,5 +218,32 @@
   "landing": "20261019T093448-L-2314816",
   "kind": "interface",
   "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g\\colon X\\to Y$ be a morphism of schemes. Base change of site objects gives\nthe commutative square of topoi\n\n$$\n\\begin{array}{ccc}\nX_{\\Proet}&\\xrightarrow{\\ \\nu_X\\ }&X_{\\Et}\\\\\n{\\scriptstyle g_{\\Proet}}\\downarrow&&\\downarrow{\\scriptstyle g_{\\Et}}\\\\\nY_{\\Proet}&\\xrightarrow{\\ \\nu_Y\\ }&Y_{\\Et}\n\\end{array}\n$$\n\nand an isomorphism $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ of functors\n$\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda)$; since all four functors are\nexact, it is also an isomorphism of functors\n$D(Y_{\\Et},\\Lambda)\\to D(X_{\\Proet},\\Lambda)$.\n\nIf $g$ is quasi-compact and quasi-separated, the canonical natural\ntransformation of functors $D^+(X_{\\Et},\\Lambda)\\to D^+(Y_{\\Proet},\\Lambda)$\n\n$$\n\\nu_Y^*Rg_{\\Et,*}K\\longrightarrow Rg_{\\Proet,*}\\nu_X^*K\n$$\n\nis an isomorphism for $K\\in D^+(X_{\\Et},\\Lambda)$. It is the base-change\nmorphism of right derived functors built from the adjunctions $\\nu^*\\dashv\\nu_*$\nand natural in $K$. In particular $Rg_{\\Proet,*}$ carries a bounded-below complex\n$\\nu_X^*K$ of étale origin to the complex $\\nu_Y^*Rg_{\\Et,*}K$ of étale origin, so\nby [sk-cor-pe-classical-derived] direct image of a bounded-below classical\npro-étale complex is classical.",
+  "proof": [
+   {
+    "text": "The isomorphism $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ is\n[lem-weil-pbc-comparison-pullback]. The map of the theorem is adjoint to the\ncomposite of $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ with the counit of the\nadjunction $g_{\\Et}^*\\dashv Rg_{\\Et,*}$ between $D^+(Y_{\\Et},\\Lambda)$ and\n$D^+(X_{\\Et},\\Lambda)$; equivalently, it is the base-change morphism induced by\nthe underived mate $\\nu_Y^*g_{\\Et,*}\\to g_{\\Proet,*}\\nu_X^*$. To show it is an isomorphism, work over an affine open\nof $Y$ and evaluate on the covering basis $V=\\varprojlim_iV_i$, with $V_i$ affine\nand étale over $Y$. For a sheaf $F$ the map in degree $q$ is the continuity map\n\n$$\n\\varinjlim_iH^q_{\\Et}(X\\times_YV_i,F)\\longrightarrow H^q_{\\Et}(X\\times_YV,F).\n$$",
+    "uses": [
+     "lem-weil-pbc-comparison-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $g$ is quasi-compact and quasi-separated, so are its base changes, and the\nmap is an isomorphism by Stacks Project, Tag 03Q6\n([lemma-weil-pbc-etale-cohomology-continuity]). Bounded-below resolutions, or\nthe convergent hypercohomology spectral sequences, extend this from sheaves to\n$K$; see Stacks Project, Tag 09A6. In\n[prop-weil-pbc-comparison-direct-image] this is organized as follows: the\nunderived mate is an isomorphism on the basis by the same continuity of\nsections, and pulled-back étale injectives are acyclic for $g_{\\Proet,*}$ by the\ncontinuity of cohomology. The assertion on classical complexes follows because,\nby [sk-cor-pe-classical-derived], every bounded-below classical complex is of the\nform $\\nu_X^*K$.",
+    "uses": [
+     "lemma-weil-pbc-etale-cohomology-continuity",
+     "prop-weil-pbc-comparison-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+ "kind": "statement",
+ "title": "Prime-to-characteristic torsion kernels of smooth diagonalizable groups are finite and schematically dense",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $D$ be a smooth affine $F$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms] of finite type [def-weil-finite-type-morphism]. Suppose $D\\simeq\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$, where $F[M]$ has basis $e_m$, product $e_me_{m'}=e_{m+m'}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$ [def-weil-affine-spectrum]. Put $p=1$ in characteristic zero and $p=\\operatorname{char}F$ otherwise. For each positive integer $n$ coprime to $p$, let $D[n]$ be the closed subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion] given on every commutative $F$-algebra $A$ by $D[n](A)=\\{d\\in D(A):d^n=1\\}$. Then $D[n]$ is a finite disjoint union of copies of $\\operatorname{Spec}F$; the finite group $H_n=D[n](F)$ has positive order $c_n=|H_n|$ coprime to $p$. The family of closed immersions $D[n]\\hookrightarrow D$ is schematically dense: every closed subscheme $Z\\subseteq D$ through which all these immersions factor is $D$ itself. In particular, every regular function in $F[M]$ vanishing at all points of all $H_n$ is zero. No connectedness of $D$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.3 and Remark 12.5, printed pp.231–232 (finite kernels over an algebraically closed field); Theorem 12.32, printed p.242 (smooth-case schematic density); applied in Proposition 15.3, printed p.303. No Stacks tag for this diagonalizable-group theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sbc-finitely-generated-abelian-group-structure], choose $M\\simeq\\mathbf Z^r\\oplus\\bigoplus_{i=1}^s\\mathbf Z/d_i\\mathbf Z$, with $d_i\\geq1$; a finite direct sum is a finite product. By [lem-sfb-diagonalizable-group-geometric-criteria] this identifies $D$ as an $F$-group scheme with $\\mathbf G_m^r\\times\\prod_i\\mu_{d_i}$. In positive characteristic the same cited statement says smoothness excludes every nonzero element of $M$ annihilated by a power of $p$. If $p\\mid d_i$, the class of $d_i/p$ in the $i$th cyclic factor is a nonzero element killed by $p$, a contradiction. Hence every $d_i$ is coprime to $p$; in characteristic zero this is automatic because $p=1$. Put $d=\\prod_i d_i$, with empty product $1$. Then $d\\geq1$ is coprime to $p$. All later constructions take place in this group-scheme product, so the chosen isomorphism preserves multiplication, kernels and their inclusions.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-sfb-diagonalizable-group-geometric-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3 and Remark 12.5, printed pp.231–232."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ coprime to $p$ and put $g_i=\\gcd(d_i,n)$. The defining equations in [def-sc-gm-ga] show\n$$D[n]=\\mu_n^r\\times\\prod_i\\mu_{g_i}.$$\nIndeed for a unit $x$ in any commutative $F$-algebra, $x^{d_i}=x^n=1$ implies $x^{g_i}=1$: write $g_i=a d_i+b n$ with integers $a,b$ and use inverse powers. Conversely $g_i\\mid d_i,n$ implies both equations. These are identities for arbitrary algebras, including nonreduced ones: the equations $x^{d_i}-1,x^n-1$ and $x^{g_i}-1$ generate the same ideal in $F[x,x^{-1}]$, since the quotient by the first two makes $x^{g_i}=1$, and each of the first two is a multiple of the third. Thus the displayed equality identifies the closed subgroup schemes and their inclusions, rather than only their $F$-points. The affine interpretation of these equations is [def-weil-affine-spectrum, def-weil-closed-immersion].",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3 and the kernel calculation implicit in Theorem 12.32, printed pp.231–232,242; the Bezout calculation is elementary."
+   }
+  },
+  {
+   "text": "For each $a\\in\\{n,g_1,\\ldots,g_s\\}$, $a$ is invertible in $F$. Algebraic closedness [def-weil-algebraic-closure] splits $T^a-1$ by repeated removal of a linear factor. Apply [lem-sfb-split-binomial-root-torsor] with its exponent set to $a$ and its binomial constant and chosen root both set to $1$. Its cardinality assertion and final factorization give $a$ distinct roots and\n$$T^a-1=\\prod_{\\zeta\\in\\mu_a(F)}(T-\\zeta).$$\nFor distinct roots, $(T-\\zeta)$ and $(T-\\eta)$ are comaximal because their difference is the nonzero scalar $\\eta-\\zeta$. Their intersection equals their product: for comaximal $I,J$, $x\\in I\\cap J$ and $1=i+j$ give $x=xi+xj\\in IJ$; a product of ideals comaximal with $J$ is comaximal with $J$ by multiplying the expressions for $1$. Induction handles the finite family. Therefore [lem-pc-crt-ideal-quotient-product] identifies $F[T]/(T^a-1)$ with $F^{\\mu_a(F)}$ by evaluations. Apply [lem-weil-pbc-finite-affine-coproduct-spectrum] to obtain $\\mu_a\\simeq\\coprod_{\\mu_a(F)}\\operatorname{Spec}F$. Taking the finite products in step 2 yields a disjoint union indexed by $\\mu_n(F)^r\\times\\prod_i\\mu_{g_i}(F)$: on coordinate algebras [lem-weil-pbc-fibre-product-affine-spectra], the tensor of $F^E$ and $F^{E'}$ is $F^{E\\times E'}$, via $x\\otimes y\\mapsto(x_e y_f)_{e,f}$, with inverse $z\\mapsto\\sum_{e,f}z_{e,f}\\delta_e\\otimes\\delta_f$, where $\\delta_e$ is the coordinate idempotent. These maps are multiplicative and inverse on the idempotents, whose sums are $1$; their algebra-map construction uses [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Consequently\n$$c_n=|D[n](F)|=n^r\\prod_i g_i\\geq1,$$\nwhich is coprime to $p$. This proves the finite-kernel and order assertions, including $n=1$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-split-binomial-root-torsor",
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3, Remark 12.5 and Theorem 12.32, printed pp.231–232,242; CRT: Stacks Tag 00DT, algebra.tex, lemma-chinese-remainder."
+   }
+  },
+  {
+   "text": "Write $N=\\prod_i\\mu_{d_i}$ and\n$$B=F[u_1,\\ldots,u_s]/(u_i^{d_i}-1)_i,\\qquad L=B[t_1^{\\pm1},\\ldots,t_r^{\\pm1}].$$\nFor $s=0$ set $B=F$. Here $L$ means the algebra of finite sums $\\sum_{v\\in\\mathbf Z^r}b_vt^v$ with coefficientwise addition and $t^vt^w=t^{v+w}$. The product presentation of step 1 and [lem-weil-pbc-fibre-product-affine-spectra] identify $F[M]$ with $L$: the cyclic basis elements give the bounded powers of the $u_i$, while the free basis elements give $t^v$. Whenever $d\\mid n$, every $u_i$ already has $n$th power $1$, so step 2 identifies $D[n]\\hookrightarrow D$ with the quotient\n$$q_n:L\\longrightarrow L/J_n,\\qquad J_n=(t_1^n-1,\\ldots,t_r^n-1).$$\nThere is a $B$-algebra identification $L/J_n=B[t_1,\\ldots,t_r]/(t_j^n-1)_j$: the variables on the right are units with inverses $t_j^{n-1}$, giving inverse maps on the displayed generators. Successive applications of [lem-weil-pbc-monic-quotient-free], with the previously adjoined variables as coefficient ring, give a free $B$-basis\n$$\\{t^v:0\\leq v_j<n\\text{ for all }j\\}$$\nfor this quotient. Thus a polynomial in that exponent box maps to zero only if every $B$-coefficient is zero. For $r=0$, $L=B$, $J_n=0$ and the basis consists of $1$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.33, printed p.243: explicit coordinate quotient for multiples of the finite-factor order, with the monic-quotient basis spelling out its joint-injectivity argument."
+   }
+  },
+  {
+   "text": "Let $f\\in L$ have $q_n(f)=0$ for every positive $n$ coprime to $p$ and divisible by $d$ (the $n$ for which step 4 identifies $q_n$ with restriction to $D[n]$). If $f\\ne0$, its Laurent support is finite and nonempty. Choose $n=d(1+kp)$ with $k\\geq0$ large enough that $n$ exceeds the difference between the largest and smallest exponent of this support in every free coordinate. Such $n$ are unbounded, divisible by $d$, and coprime to $p$ (also when $p=1$). Multiplying $f$ by the monomial whose exponents are the negatives of these coordinate minima puts its support in the box $0\\leq v_j<n$, preserving a nonzero coefficient. Its image under $q_n$ is still zero, contrary to the free $B$-basis of step 4. Hence $f=0$. For $r=0$ there are no coordinate bounds and $q_n$ is already the identity. This proves joint injectivity using only prime-to-$p$ multiples of $d$; no inference from the unrestricted family of all integers is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.32–12.33, printed pp.242–243: finite-support completion of the coordinate argument, restricted to prime-to-characteristic multiples."
+   }
+  },
+  {
+   "text": "If $Z\\subseteq D=\\operatorname{Spec}L$ is closed, [def-weil-closed-immersion] writes it as $\\operatorname{Spec}(L/I)$ over $D$. If every $D[n]\\hookrightarrow D$ factors through $Z$, then by [def-weil-affine-spectrum] the coordinate map $L\\to\\mathcal O(D[n])$ factors through $L/I$, so it annihilates $I$; for $n$ coprime to $p$ and divisible by $d$ this map is $q_n$ by step 4. Step 5 gives $I=0$, whence $Z=D$. Finally, by the evaluation identifications in step 3, $\\mathcal O(D[n])=F^{H_n}$ and the restriction of a regular function has coordinates its values at the points of $H_n$. If all those values vanish for every allowed $n$, its restriction to every $D[n]$ is zero, in particular its image under $q_n$ is zero whenever $d\\mid n$, and step 5 makes the function zero. The proof treats all finite factors of $D$ and never assumes connectedness.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.32, printed p.242; affine ideal formulation and the reduced finite kernels of Proposition 12.3 and Remark 12.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-algebraic-closure",
+  "lem-sfb-split-binomial-root-torsor",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.3 and Remark 12.5, printed pp.231–232; Theorems 12.32–12.33, printed pp.242–243. Source decomposition route with explicit Bezout, CRT and finite-support details, retaining only prime-to-characteristic multiples."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*(Zariski|[Dd]ense)|([Dd]ense|Zariski).*torsion|diagonalizable",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, ordered-topological density, number fields and finite-field sums do not state finite etale torsion and schematic density for smooth diagonalizable group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The union of prime to characteristic torsion subgroups of a smooth group of multiplicative type is schematically dense",
+   "results": "8 hits: AddCommGroup.torsion, AddSubgroup.torsionBy, NumberField.Units.torsion, Subgroup.dense_of_not_isolated_one, Subgroup.dense_iff_ne_zpowers, CommGroup.primaryComponent, IsTorsion.addSubgroup, ProfiniteGrp.denseRange_toLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, ordered-topological density, number fields and finite-field sums do not state finite etale torsion and schematic density for smooth diagonalizable group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZariskiDense\", \"torsion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, ordered-topological density, number fields and finite-field sums do not state finite etale torsion and schematic density for smooth diagonalizable group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The torsion points of order coprime to the field characteristic are Zariski dense in a split algebraic torus times a finite etale diagonalizable group",
+   "results": "8 hits: NumberField.InfinitePlace.denseRange_algebraMap_pi, NumberField.InfiniteAdeleRing.denseRange_algebraMap, NumberField.Units.torsionOrder_ne_zero, NumberField.Units.torsionOrder_pos, NumberField.Units.closure_fundSystem_sup_torsion_eq_top, NumberField.mixedEmbedding.fundamentalCone.torsion_unitSMul_mem_integerSet, AddCircle.denseRange_zsmul_iff, NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, ordered-topological density, number fields and finite-field sums do not state finite etale torsion and schematic density for smooth diagonalizable group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(dense|Dense)|((dense|Dense).*torsion)|IsZariskiDense.*(pow|order)|schematicallyDense.*torsion",
+   "results": "3 hits: Mathlib/Analysis/Convex/Extreme.lean, Mathlib/Analysis/Convex/Segment.lean, Mathlib/Analysis/Convex/Segment.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract torsion groups, ordered-topological density, number fields and finite-field sums do not state finite etale torsion and schematic density for smooth diagonalizable group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|torsion.*(dense|Dense)|schematicallyDense.*torsion",
+   "results": "4 hits: Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general reduced/smooth schemes, unrelated linear-algebra diagonalization, or abstract and analytic torsion/density; none states the finite-kernel and schematic-density assertions for diagonalizable group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to characteristic torsion points are schematically dense in a smooth group of multiplicative type and their kernels are finite etale",
+   "results": "8 hits: AddCircle.finite_torsion, AlgebraicGeometry.IsEtale.instIsSmooth, AddSubgroup.torsionBy, AlgebraicGeometry.Scheme.Etale, AddCircle.finite_torsion_of_isSMulRegular, Subfield.fintypeBot, Algebra.smoothLocus, AddCommGroup.torsion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general reduced/smooth schemes, unrelated linear-algebra diagonalization, or abstract and analytic torsion/density; none states the finite-kernel and schematic-density assertions for diagonalizable group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"IsReduced\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general reduced/smooth schemes, unrelated linear-algebra diagonalization, or abstract and analytic torsion/density; none states the finite-kernel and schematic-density assertions for diagonalizable group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime to characteristic torsion kernels of a smooth diagonalizable group scheme over an algebraically closed field are finite reduced and schematically dense",
+   "results": "8 hits: AlgebraicGeometry.IsReduced, Algebra.IsGeometricallyReduced, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, PerfectRing.ofFiniteOfIsReduced, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general reduced/smooth schemes, unrelated linear-algebra diagonalization, or abstract and analytic torsion/density; none states the finite-kernel and schematic-density assertions for diagonalizable group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an algebraically closed field the union of the n torsion subschemes of a torus times a finite diagonalizable reduced group is Zariski dense when n is coprime to the characteristic",
+   "results": "8 hits: ax_grothendieck_zeroLocus, ProfiniteGrp.denseRange_toLimit, NumberField.Units.closure_fundSystem_sup_torsion_eq_top, NumberField.InfinitePlace.denseRange_algebraMap_pi, AddCircle.dense_addSubgroup_iff_ne_zmultiples, NumberField.InfiniteAdeleRing.denseRange_algebraMap, AddCircle.denseRange_zsmul_iff, NumberField.Units.instFintypeSubtypeUnitsRingOfIntegersMemSubgroupTorsion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general reduced/smooth schemes, unrelated linear-algebra diagonalization, or abstract and analytic torsion/density; none states the finite-kernel and schematic-density assertions for diagonalizable group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-diagonal-additive-crossed-vanishing",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: The general complement theorem supplies the section; the item explicitly constructs the inverse multiplication map and projection. In the maximal-torus argument, compare the section furnished by the given torus over its image with the restriction of a section over the whole diagonal quotient; Milne Theorem 16.27(a). Conjugacy induction, the additive crossed-homomorphism step (Milne 16.27(a), using 15.3 with smooth D as in 16.29). Supporting input in Milne 15.3: the finite prime-to-characteristic kernels and their schematic density (12.3, 12.5, 12.32).",
+   "via": [
+    "lem-sfb-smooth-diagonal-additive-crossed-vanishing",
+    "lem-sfb-triangular-quotient-section-conjugacy",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+  "worker": "stage1",
+  "summary": "Six-step proof using the existing diagonalizable-group geometric criteria and existing algebra leaves; no new nodes. All finite components are retained; kernels are computed over arbitrary algebras, and prime-to-characteristic schematic density is proved by a finite Laurent-support bound over the finite-factor coefficient algebra. Statement and statement dependencies unchanged.",
+  "blueprint": "The inherited creation chain serves det-thm-sf-ctf-stability-direct-images, proof (3), via its alteration/moduli/solvable-group input and Milne Proposition 15.3. This split realizes exactly its finite-kernel and smooth-density prerequisite through Milne 12.3,12.5,12.32, with the coordinate argument of 12.33. Current latest blueprint checked; no blueprint node states this lemma. The existing null from.node and full via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-70fe9ff9f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-70fe9ff9f (reviewer sub-agent of L); spot-checked: I read the whole item: its statement and all 6 steps against Milne iAG2017 Theorem 12.32 (p.242), Theorem 12.33 (p.243) and Proposition 15.3 (p.303), and every cited statement. Statement unchanged, no new nodes, no SGA, no tool_uses. Step 1: lem-sbc-finitely-generated-abelian-group-structure plus the diagonalizable geometric criteria; smoothness rules out p | d_i. Step 2: Bezout gives an ideal equality, so D[n] = μ_n^r × ∏μ_{gcd(d_i,n)} as schemes. Step 3: split-binomial with a=α=1, CRT with an inline proof that intersection = product, the coproduct spectrum and the tensor of finite products give c_n = n^r ∏g_i, prime to p. Step 4: L = B[t^±] and O(D[n]) = L/J_n for d | n; repeated monic-quotient freeness gives a box basis (Milne 12.33). Step 5: n = d(1+kp) plus a support shift gives joint injectivity. Step 6: the affine closed-immersion argument gives I = 0, hence density and the pointwise test. Small cases checked: M=0, μ_2 in char 3, G_m×μ_3 in char 7, r=0. One repair, to proof text only: step 5 assumed q_n(f)=0 for every n prime to p, but step 6 only supplies it for d | n, the only n where q_n is the restriction to D[n] (for d ∤ n, O(D[n]) = L/(J_n+(u^n−1))). Steps 5 and 6 now restrict to n prime to p with d | n, which is all the argument uses. Not a duplicate: lem-sfb-torus-torsion-joint-injectivity covers all n, not the prime-to-p family. Maintainer note: the existing CRT node's source tag 00U3 should be 00DT.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalPrimeToTorsionDensity",
+  "declaration": "AlgebraicGeometry.smooth_diagonal_primeToTorsion_density",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalPrimeToTorsionDensity.lean",
+  "statement": "theorem smooth_diagonal_primeToTorsion_density (F : Type u) [Field F] [IsAlgClosed F] (D : Grp (Over (Spec (.of F)))) [IsAffine D.X.left] [Smooth D.X.hom] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] (M : Type u) [AddCommGroup M] [AddGroup.FG M] (e : D ≅ diagonalizableGroup F M) : (∀ n : ℕ, 0 < n → n.Coprime (ringExpChar F) → ∃ c : ℕ, 0 < c ∧ c.Coprime (ringExpChar F) ∧ Nat.card (𝟙_ (Over (Spec (.of F))) ⟶ torsionSubgroupScheme D.X n) = c ∧ Nonempty (torsionSubgroupScheme D.X n ≅ ∐ fun _ : Fin c ↦ 𝟙_ (Over (Spec (.of F))))) ∧ (∀ (Z : Scheme.{u}) (i : Z ⟶ D.X.left), IsClosedImmersion i → (∀ n : ℕ, 0 < n → n.Coprime (ringExpChar F) → ∃ j : (torsionSubgroupScheme D.X n).left ⟶ Z, j ≫ i = (torsionSubgroupScheme.ι D.X n).left) → IsIso i) ∧ (∀ f : AddMonoidAlgebra F M, (∀ n : ℕ, 0 < n → n.Coprime (ringExpChar F) → ∀ x : 𝟙_ (Over (Spec (.of F))) ⟶ torsionSubgroupScheme D.X n, (Spec.preimage (x.left ≫ (torsionSubgroupScheme.ι D.X n).left ≫ e.hom.hom.hom.left)).hom f = 0) → f = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1acfd1ede",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Every node clause and hypothesis is rendered exactly. D[n] is the upstream torsionSubgroupScheme = GrpObj.ker (𝟙 ^ n), with no commutativity added. Clause 1: positive prime-to-p c equal to the rational-point count, with D[n] ≅ ∐ Fin c of Spec F. Clause 2: closed immersions through which all allowed D[n] factor are isomorphisms. Clause 3: Spec.preimage evaluation via e, in the correct direction. Record diff vs side-live: only lean added and stmt_dep def-sfb-diagonalizable-group (landed by Q34). lean.statement verbatim. Edge cases char 0, n=1, M=0, r=0, smooth μ_d, empty or nonreduced Z, single universe u all covered. No new defs, one sorry, docstrings carry source, blueprint id and the 6 steps; report has both sections. No duplicate found. No file changed, so no compile."
+ }
+}

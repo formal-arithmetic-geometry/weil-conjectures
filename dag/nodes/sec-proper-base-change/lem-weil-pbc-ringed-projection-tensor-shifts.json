@@ -8,9 +8,11 @@
   "def-weil-pbc-ringed-projection-restriction-data"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0FNH, item-shift-tensor; sites-cohomology.tex Tag 07A4, compatibility of derived pullback and tensor product."
+  "by": "worker",
+  "group": "A4",
+  "date": "2026-10-22",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/more-algebra.tex; lean/WeilConjectures/Mathlib/Algebra/Homology/BifunctorShift.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Shift/CommShift.lean",
+  "place": "Tags 07A4 and 0FNH. Reuse the proved general total-bifunctor comparison shift instances; transport through the specified representatives and extend by essential surjectivity of flat-term K-flat representatives, rather than tensor-model rigidity."
  },
  "mathlib_match": null,
  "status": "split",
@@ -38,14 +40,23 @@
  "statement": "Fix a universe u, categories C,D with objects in Type (u+1) and morphisms in Type u, Grothendieck topologies J,K, ring sheaves R on J and S on K valued in CommRingCat (u+1), and a site functor F:C to D. Let o:Operation F R S be exact, and let a,b be the resolving tensor models of [def-weil-pbc-ringed-projection-restriction-data], with normalized shifts sa,sb. Given an ordinary tensor comparison mu satisfying its pure-unit equation and an already constructed TensorComparison t for o.leftModel, normalized on every resolving pair, both TensorComparisonShifts equations hold for the canonical exact-derived shift. Only the two shift squares are asserted: no ordinary, chain or derived comparison is constructed.",
  "proof": [
   {
-   "text": "Package the two shift squares as equalities of natural transformations on the product of derived categories. Use cochain tensor model rigidity with arbitrary target category Der S to test equality on flat-term K-flat pairs.",
+   "text": "Use the pure-unit equation and the module adjunction to prove naturality of the supplied ordinary tensor isomorphisms, testing on pure tensors. Package them as a natural isomorphism of curried bifunctors. Apply the proved source-library mapBifunctorComparisonNatTrans construction. Pullback is a left adjoint, so this chain comparison is invertible; its inverse agrees with the prescribed totalMap, as checked on each coproduct inclusion.",
    "uses": [
-    "lem-sf-cochain-tensor-model-rigidity"
+    "def-weil-pbc-ringed-projection-restriction-data",
+    "lem-pur-independent-ringed-tensorator-existence"
    ],
    "elementary": false
   },
   {
-   "text": "At each resolving pair use the supplied tensor shift normalization fields, the representative equation of t at the original and shifted pairs, and the exact-derived factors shift equation. Naturality moves the factor identifications past the comparison; cancel the representative isomorphisms and shifted images.",
+   "text": "For each fixed resolving complex, package the tensor representative isomorphisms as a natural isomorphism in the other resolving complex. The supplied first and second normalization equations prove that these natural isomorphisms commute with integer shifts. The same normalization fields imply shift stability of the resolving subcategories. The source-library commShift_mapBifunctorComparisonNatTrans_app and flipApp instances give both chain comparison squares, with the canonical unsigned first shift and Koszul-signed second shift.",
+   "uses": [
+    "def-weil-pbc-ringed-projection-restriction-data",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the representative equation of t by cancelling the inverse chain comparison and the target representative inverse. For a fixed resolving argument, its resulting square expresses the restriction of t as a conjugate of the localized chain comparison by representative and exact-derived factor isomorphisms. Every other edge commutes with shifts, including the exact-derived factor map; hence the restricted t does too.",
    "uses": [
     "def-weil-pbc-ringed-projection-restriction-data",
     "lem-weil-pbc-exact-functor-derived-factorization"
@@ -53,18 +64,22 @@
    "elementary": false
   },
   {
-   "text": "Test the remaining chain squares on every direct-sum tensor inclusion. The inverse ordinary comparison is natural by adjunction and the pure-unit formula. The first-variable square has coefficient one; the second-variable square has coefficient (-1)^(np) on both sides, preserved by additive pullback. The direct-sum universal property gives both chain equalities. Localize and use faithfulness to finish on all derived pairs. Zero shifts, empty sites and zero coefficient rings require no separate assumptions.",
+   "text": "The resolving subcategory followed by Q is essentially surjective: take a flat-term K-flat resolution of a complex representative of each derived object, transfer tensorRight exactness to site flatness through siteSheafTensorRightIso, and localize the quasi-isomorphism. NatTrans.CommShift.of_whiskerLeft therefore extends each restricted shift square to the whole varying derived category. Finally transport the fixed resolving argument to an arbitrary derived object along its representative isomorphism; naturality of t and the bifunctor shift structure preserves the square. Read off the two component equations. This argument needs no bound, nonzero ring, or nonempty site.",
    "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "lem-weil-pbc-total-tensor-integer-shifts"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-cochain-tensor-model-rigidity",
   "def-weil-pbc-ringed-projection-restriction-data",
+  "lem-pur-independent-ringed-tensorator-existence",
+  "lem-weil-pbc-total-tensor-integer-shifts",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-total-tensor-integer-shifts"
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "lean": {
   "existing": false,
@@ -112,11 +127,23 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-755fa",
-  "group": "C2",
-  "result": "fix",
-  "landing": "20261022T023434-L-822000",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T032513-L-2033021",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean/DAG vs heads 870ff0b861f1 and b43e339e3348 (byte-identical; b43e PASSed with 9 importers compiled); Data block vs live item module (identical); change-record Users vs live transitive importer closure (1890 modules)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

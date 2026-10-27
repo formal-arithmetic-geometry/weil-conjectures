@@ -169,7 +169,18 @@
   "lem-weil-pbc-w-localization-points"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -219,5 +230,37 @@
   "landing": "20261015T154205-L-162574",
   "kind": "interface",
   "note": "independent Codex review: Delivered RetainedLocalizationProperties proof and DAG metadata matched the stated node; delivered module and all three direct importers compiled cleanly."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a ring and $J\\subset R$ an ideal, and let $R_{[J]}$ be as in\n[def-weil-pbc-retained-localization].\n\n1. The map $R\\to R_{[J]}$ is ind-Zariski [def-weil-pbc-ind-etale-algebra], and\n   $\\operatorname{Spec}R_{[J]}$ is w-local [def-weil-pbc-w-local].\n2. If $V(J)$ consists of closed points of $\\operatorname{Spec}R$, then the\n   closed points of $\\operatorname{Spec}R_{[J]}$ are exactly the points of\n   $V(JR_{[J]})$, the map $V(JR_{[J]})\\to V(J)$ is bijective, and\n   $R/J\\to R_{[J]}/JR_{[J]}$ is an isomorphism.\n3. Let $A$ be a w-local ring, $I\\subset A$ an ideal with $V(I)$ the set of closed\n   points of $\\operatorname{Spec}A$, and $B$ an $A$-algebra such that for every\n   prime $\\mathfrak q$ of $B$ over a maximal ideal $\\mathfrak m$ of $A$ the residue\n   field extension $\\kappa(\\mathfrak q)/\\kappa(\\mathfrak m)$ is algebraic. Then the\n   closed points of $\\operatorname{Spec}B_{[IB]}$ are exactly the points of\n   $V(IB_{[IB]})$. If moreover $A\\to B$ is faithfully flat, so is\n   $A\\to B_{[IB]}$.",
+  "proof": [
+   {
+    "text": "*1.* The map $R^w\\to R_{[J]}$ is a localization, hence ind-Zariski, and\n$R\\to R^w$ is ind-Zariski by [lem-weil-pbc-w-localization-points]; compose\nusing [lem-weil-pbc-ind-etale-stability]. The spectrum of $R_{[J]}$ is\nidentified with the set of points of the w-local space\n$\\operatorname{Spec}R^w$ that generalize a point of the closed set\n$V(JR^w)$. In a w-local space this set is closed, and a closed subspace of a\nw-local space is w-local.",
+    "uses": [
+     "lem-weil-pbc-w-localization-points",
+     "lem-weil-pbc-ind-etale-stability"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*2.* By [lem-weil-pbc-w-localization-points], $V(JR^w)$ maps bijectively to\n$V(J)$ and $R/J\\cong R^w/JR^w$. A prime of $R^w$ containing $JR^w$ lies over a\nmaximal ideal of $R$ and has the same residue field, since $R\\to R^w$\nidentifies local rings; as in 3 below it is therefore maximal. These primes survive in\n$R_{[J]}$ and are the points of $V(JR_{[J]})$; they are closed, and every\npoint of $\\operatorname{Spec}R_{[J]}$ generalizes one of them, so they are\nexactly the closed points. Finally $R^w/JR^w\\to R_{[J]}/JR_{[J]}$ is the\nlocalization of $R^w/JR^w$ at elements that are already units, hence an\nisomorphism.",
+    "uses": [
+     "lem-weil-pbc-w-localization-points"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*3.* A prime $\\mathfrak q$ of $B$ containing $IB$ lies over a maximal ideal\n$\\mathfrak m$ of $A$; since $B/\\mathfrak q$ is a domain containing the field\n$\\kappa(\\mathfrak m)$ whose fraction field is algebraic over it, $B/\\mathfrak q$\nis a field and $\\mathfrak q$ is maximal. So $V(IB)$ consists of closed points\nand 2 applies to $J=IB$. If $A\\to B$ is faithfully flat, then\n$A\\to B_{[IB]}$ is flat by 1, and every maximal ideal $\\mathfrak m\\supset I$ of\n$A$ is the image of a prime of $B$ containing $IB$, which by 2 is the image\nof a point of $\\operatorname{Spec}B_{[IB]}$. Since flat maps satisfy going\ndown and every prime of $A$ lies in a maximal ideal, $\\operatorname{Spec}\nB_{[IB]}\\to\\operatorname{Spec}A$ is surjective.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

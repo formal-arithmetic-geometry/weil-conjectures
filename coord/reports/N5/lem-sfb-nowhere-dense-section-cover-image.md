@@ -1,0 +1,27 @@
+# Worker report: lem-sfb-nowhere-dense-section-cover-image
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-nowhere-dense-section-cover-image.json` (statement, split; not a Mathlib match), `citations.json`, and this report. No new nodes, no Mathlib leaves. Searches are logged in `searches.jsonl`.
+2. Attachments: none. Searched the project under `lean/WeilConjectures/` for the exact blueprint tag and for nowhere-dense, closed-section and section-cover notions. No declaration states this item. The nearby `Topology/StratificationDense.lean` proves finite unions but not the section-cover result.
+3. WANTED: none.
+4. The original node had no proof. Its statement is correct and unchanged. The delivery uses the final finite closed section-cover paragraph of Tag 03HX and writes out its argument, including the finite-union step; it does not need the earlier reduction for a general finite morphism.
+5. Nothing remains unfinished in the split. The maintainer's independent review and downstream formalization remain.
+
+## Review by N5
+
+I read Stacks `morphisms.tex`, Tag 03HX (`lemma-image-nowhere-dense-finite`), especially the finite closed section-cover paragraph and the subsequent contradiction argument, and `topology.tex`, Tag 03HO (`lemma-nowhere-dense`). There are no new nodes requiring separate sources. I also read the current latest blueprint's `det-thm-sf-ctf-stability-direct-images` proof (3), the unit and chapter records, GOAL.md, the stage-1 contract, and delivery-errors B--E. The inherited blueprint ancestry has a null root, which `blueprint_refs.py ancestor` confirms; I preserved it rather than inventing a root and kept its explicit place and via chain. Blueprint searches for nowhere, nowhere dense, section cover and 03HX found no equivalent blueprint statement. DAG searches by these terms and by Tags 03HX/03HW found the parent finite-image node, which depends on this item, rather than an available prerequisite.
+
+Step 1 cites the actual statement of `def-weil-closed-immersion`: its homeomorphism onto a closed subset gives precisely the topology on each C_j. The inverse morphism to q i_j gives the inverse continuous map on spaces, so no unproved scheme theorem is imported here. A cap C_j is closed, and its image under the displayed homeomorphism is closed. The finite union identity uses the supplied cover, not a surjectivity assumption on q. In particular the empty index set is harmless: W and A are empty, even if X is nonempty. The finite-locally-free definition was read and remains a statement dependency; the stronger section-cover hypotheses already provide all the topology needed for this proof.
+
+Step 2 again uses exactly the closed-image clause of the closed-immersion definition, quoted verbatim in citations.json. The shrinking induction is the substantive argument of this item, not an invocation of an auxiliary lemma or a restatement of a clause in a new node. I wrote its invariant and both alternatives: if V meets C_j in a proper closed subset, the open difference is nonempty; otherwise V is contained in C_j. Earlier containment/disjointness decisions survive every shrinking. This step is marked non-elementary. It is below 2000 characters and contains no omitted comparison theorem.
+
+Step 3 uses the same cited closed subsets. The essential equality is proved pointwise: for j in I_1, injectivity on C_j implies C_j cap q^{-1}(h_1(V)) = V. The other C_j miss V. The finite cover now gives V = q^{-1}(U) minus the union indexed by I_2. Thus V is open in W and contradicts the hypothesis on A. This uses neither flatness nor an unjustified assumption that an individual section is open. The openness and uniqueness calculation is elementary from the data established in steps 1--2.
+
+Step 4 uses the already constructed homeomorphisms to pull an open subset of E_j back into B_j. I wrote the two-closed-subsets argument of Tag 03HO in full, followed by finite induction. It requires no new node: removing one closed subset from an open subset leaves an open subset of the other, forcing emptiness in two lines. The proof handles zero sections, repeated sections, coincident sections on an open subset, nonreduced schemes and disconnected bases. It uses no irreducibility, Noetherianity, separatedness or positive rank assumption.
+
+I checked that every external citation in every step has a verbatim statement quote in citations.json. All other assertions are the displayed finite-set manipulations and definitions. No statement-only node, duplicate, elementary auxiliary node, self-clause node, cycle, or off-unit theorem has been introduced. The proof uses the section-cover paragraph rather than citing its parent finite-image theorem, which would make a cycle.
+
+The exact item was searched using LeanFinder (two phrasings), Loogle, LeanSearch and the pinned Mathlib grep. Generic inducing-map lemmas require the map itself to induce the topology, which q need not do; generic closed-map results prove only closedness. The finite-union searches were also read: online Loogle returns `IsNowhereDense.union`, but the pinned Mathlib has no such declaration; the project proves it at `WeilConjectures/Topology/StratificationDense.lean:50` and finite indexed unions at line 67. I did not claim that online hit as a pinned Mathlib leaf. The elementary closed-set specialization stays in step 4. All searches in the node either are retained original records or exact executed queries in this sandbox's log.
+
+## Not duplicates
+
+No new nodes were created.

@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-tame-fixed-summand-preparation",
+ "kind": "statement",
+ "title": "Prime-to-ell tame factors and the continuous fixed summand",
+ "statement": "Fix distinct primes $p,\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ with its extended norm topology, and a finite intermediate field $E$. For $F=E,\\Omega$ use the all-continuous ring $C_F(S)=C(S,F)$ [def-sfb-continuous-map-condensed-ring] and internal modules [sk-def-sfb-module-objects]. Let $r\\geq0$, put $L=\\mathbf Z_\\ell^r$ and $H=(\\prod_{q\\ne p,\\ell}\\mathbf Z_q)^r$ with the product topology, where $q$ ranges over primes and $\\mathbf Z_q=\\varprojlim_n\\mathbf Z/q^n\\mathbf Z$. Every finite continuous quotient group of $H$ has order prime to $\\ell$.\n\nLet $M$ be a finite-dimensional norm-topological $E$-vector space with a jointly continuous $E$-linear $H\\times L$-action $\\rho$ whose $H$-image $Q$ is finite of order prime to $\\ell$. Put $e=|Q|^{-1}\\sum_{h\\in Q}h$ and $N=M^H=\\{v:\\rho(h)v=v\\text{ for all }h\\in H\\}$. Then $e$ is a continuous $E$-linear idempotent with image $N$, it commutes with the $L$-action, and $M=N\\oplus\\ker e$ is a topological direct sum. In a basis adapted to this decomposition, $e$ has matrix $\\operatorname{diag}(1,0)$. The subspace $N$ is a finite-dimensional continuous $L$-representation.\n\nFor $F=E,\\Omega$ set $M_F(S)=C(S,F\\otimes_E M)$ and $N_F(S)=C(S,F\\otimes_E N)$, using finite-dimensional product norm topologies and the section realizations of [def-sfb-continuous-representation-condensation]. The pointwise extension $e_F$ is a continuous internal idempotent, and the inclusion of $N_F$ identifies it with both $\\operatorname{im}e_F$ and the internal $H$-invariants $(M_F)^H$ of [def-sfb-condensed-action-module]. These identifications preserve the residual $L$-action, are natural in continuous equivariant $E$-linear maps, and commute with $E\\to\\Omega$ [def-sfb-continuous-map-condensed-ring-map] via $m\\mapsto1\\otimes m$. If $r=0$, then $H=L=1$, $e=1$ and $N=M$; zero-dimensional $M$ is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; former proof step 1 and the finite-quotient argument at the start of step 2; agent extraction from the previously delivered proof, not an analytic theorem asserted by the blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-continuous-representation-condensation",
+  "def-sfb-condensed-action-module",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Let $a:H\\twoheadrightarrow T$ be a continuous homomorphism to a finite discrete group. Its kernel is an open neighbourhood of zero. By the product topology and the displayed inverse-limit definition of each $\\mathbf Z_q$, this neighbourhood contains the simultaneous zero fibre of finitely many residue coordinates $(i,q,n)$. For repeated coordinates with the same $(i,q)$ retain the largest exponent. Thus there is a homomorphism $b:H\\to B=\\prod_{(i,q)\\in J}\\mathbf Z/q^{n_{i,q}}\\mathbf Z$, with $J$ finite, such that $\\ker b\\subseteq\\ker a$. On $A=b(H)\\subseteq B$, define $c(b(h))=a(h)$. The kernel inclusion makes $c$ well-defined, and $c:A\\twoheadrightarrow T$ is surjective. This is a direct use of the neighbourhood basis of the specified inverse-limit/product topology; surjectivity of $b$ onto $B$ is not needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; finite-cylinder reduction of the finite-quotient assertion"
+   }
+  },
+  {
+   "text": "Choose one representative in each coset of $A$ in $B$ and in each fibre of $c:A\\to T$. Translation gives bijections $B\\cong(B/A)\\times A$ and $A\\cong T\\times\\ker c$. Consequently $|B|=[B:A]|\\ker c||T|$, so $|T|$ divides $|B|=\\prod_{(i,q)\\in J}q^{n_{i,q}}$. Every $q$ in this product differs from $\\ell$. A prime dividing a finite product divides a factor, and $\\ell\\nmid q^{n_{i,q}}$; hence $\\ell\\nmid |T|$. This proves the first assertion, including the empty-coordinate product $B=1$. The coset counts are justified by the displayed translation bijections, rather than an uncited group-order theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; explicit finite-set counting after the cylinder reduction"
+   }
+  },
+  {
+   "text": "The finite $H$-image $Q$ carries a continuous quotient map from $H$. Indeed, choose a finite basis of $M$; the matrix entries of $\\rho(h)$ are continuous functions of $h$, by evaluating the jointly continuous action at each basis vector and then applying the $E$-linear coordinate maps. These coordinate maps are continuous by [lem-sfb-finite-dimensional-linear-map-continuous], applied over the finite extension $E/\\mathbf Q_\\ell$ to the finite-dimensional Hausdorff norm-topological space $M$. Conversely, reconstruction from coordinates is a finite sum of scalar multiples of basis vectors, hence continuous by the topological vector-space operations. Thus any such basis identifies the given topology on $M$ with the product topology on its coordinates; this also applies to the adapted basis constructed in step 5. For a matrix $A$ in the finite image and each different matrix $B$, choose an entry where they differ and an open neighbourhood of that entry of $A$ excluding the corresponding entry of $B$. The finite intersection of the inverse images of these neighbourhoods is open and meets $Q$ exactly in $A$. Thus the finite matrix image has the discrete subspace topology; this also covers rank zero, when the image is a singleton. This proves continuity to the discrete $Q$. The action descends algebraically to $Q\\times L$, because $H$ and $L$ commute and the kernel of $H\\to Q$ acts trivially. It is jointly continuous: for fixed $q$ choose a lift $h_q$; on the open slice $\\{q\\}\\times L\\times M$ its action is $(l,v)\\mapsto\\rho(h_q,l)v$, a restriction of the given action. Finally $M^Q=M^H=N$, since $H\\to Q$ is onto.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; descent of the given action to its finite matrix image"
+   }
+  },
+  {
+   "text": "The groups $(\\mathbf Z/\\ell^n\\mathbf Z)^r$, indexed by positive integers with reduction transitions, have compatible-family limit $L$ with its specified product topology. By [lem-dl-a1-finite-group-limit-profinite], $L$ is compact Hausdorff and totally disconnected; kernels of finitely many residue coordinates give an open-normal identity neighbourhood basis. Thus $L$ is a profinite group, as required below. Apply [lem-sfb-finite-averaging-condensed-invariant-summand] to $W=M$ with this $Q\\times L$-action. Its hypotheses hold: $Q$ is finite discrete, its order is prime to $\\ell$ by assumption (also by steps 1–3), and the coefficient fields, norm topologies and continuous action are exactly those in its statement. It gives the continuous $L$-equivariant projection $e=|Q|^{-1}\\sum_q\\rho(q)$ with image $N=M^Q$ and identity restriction to $N$. Therefore $e^2=e$ and $e$ commutes with $L$. It also supplies, for both $F=E,\\Omega$, the homeomorphism $F\\otimes_E N\\xrightarrow{\\sim}(F\\otimes_E M)^Q$ induced by the invariant inclusion, and its internal realization $N_F\\xrightarrow{\\sim}(M_F)^Q$.",
+   "uses": [
+    "lem-dl-a1-finite-group-limit-profinite",
+    "lem-sfb-finite-averaging-condensed-invariant-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; finite averaging applied to the descended action"
+   }
+  },
+  {
+   "text": "Put $K=\\ker e$. The maps $N\\times K\\to M$, $(n,k)\\mapsto n+k$, and $M\\to N\\times K$, $v\\mapsto(ev,(1-e)v)$, are inverse continuous linear maps: $e^2=e$ gives the stated codomains and both inverse identities, and continuity into the subspaces follows from the subspace topology. This proves the topological direct sum. From a finite spanning list $(v_j)$ of $M$ [def-weil-finite-dimensional-subspace], the lists $(ev_j)$ and $((1-e)v_j)$ span $N$ and $K$. In each list delete a vector whenever it lies in the span of its predecessors; span is unchanged and the final lists are independent, hence bases. Their concatenation is a basis of $M$ by the direct-sum identities, and the matrix of $e$ in it is $\\operatorname{diag}(1,0)$. The $L$-action preserves $N$ because it commutes with $e$; its restriction $L\\times N\\to N$ is continuous by the subspace topology. Thus $N$ is a finite-dimensional continuous $L$-representation.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; explicit splitting, adapted basis and residual representation"
+   }
+  },
+  {
+   "text": "First, the tensor-extended $H\\times L$-action on $F\\otimes_E M$ is jointly continuous for either $F$: by the argument of step 3, applied to $(h,l)\\mapsto\\rho(h,l)v_j$ and the $E$-linear coordinate maps, continuous by [lem-sfb-finite-dimensional-linear-map-continuous], the matrix entries $a_{ij}(h,l)\\in E\\subseteq F$ of $\\rho(h,l)$ in the basis $(v_j)$ are continuous. In the product topology of the basis $(v_j\\otimes1)$ the action is $((h,l),\\sum_jc_jv_j\\otimes1)\\mapsto\\sum_{i,j}a_{ij}(h,l)c_j\\,v_i\\otimes1$, a finite sum of products of continuous functions in the topological field $F$. The same holds for $N$ with its restricted $L$-action. Hence [def-sfb-continuous-representation-condensation] supplies the section realizations $M_F$ and $N_F$ used below. Extend the adapted basis to $F$ using [def-weil-vector-space-scalar-extension]. The tensor extension of $e$ has the same matrix $\\operatorname{diag}(1,0)$ in the finite-dimensional product norm topology, so is continuous for either $F$, and is still idempotent. By [def-sfb-continuous-representation-condensation], postcomposition defines its internal $C_F$-linear endomorphism $e_F$ on $M_F$. The invariant inclusion and the projection onto its first coordinates give inverse sectionwise identifications of $N_F$ with the image of $e_F$: a section fixed by $e_F$ has zero complementary coordinates, and its remaining coordinates are continuous. The construction commutes with restriction along every continuous map of test spaces, so these are internal module maps. The $L$-equivariance follows from $e\\rho(l)=\\rho(l)e$ and the same tensor identity.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-sfb-continuous-representation-condensation",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; tensor matrix and sectionwise image of the continuous internal projector"
+   }
+  },
+  {
+   "text": "Use the definition of internal invariants in [def-sfb-condensed-action-module]. For a profinite $S$, a section $x:S\\to F\\otimes_E M$ which is internally $H$-fixed has $x(s)$ fixed by every $h\\in H$: pull back along $s:*\\to S$ and use the constant generalized element $h$ on $*$. Conversely, if every $x(s)$ is $H$-fixed, then for every $u:T\\to S$ and $g:T\\to H$ the equality $\\rho_F(g(t))x(u(t))=x(u(t))$ holds for every $t$, so $g\\cdot u^*x=u^*x$ as continuous maps. Pointwise $H$-fixed equals pointwise $Q$-fixed by surjectivity. The homeomorphism in step 4 therefore identifies this space of sections precisely with $C(S,F\\otimes_E N)=N_F(S)$; continuity into the invariant subspace is measured with its subspace topology. These identifications are the actual invariant inclusions, commute with restrictions, and retain the residual $L$-action. Together with step 6 this identifies $N_F$ with both internal objects claimed.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-finite-averaging-condensed-invariant-summand"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; generalized-element test for H-invariants and identification of the two images"
+   }
+  },
+  {
+   "text": "For an $H\\times L$-equivariant continuous $E$-linear map $f:M\\to M'$, the finite $H$-images need not coincide. Use the common image $R$ of $H\\to Q_M\\times Q_{M'}$. Both component quotient maps are continuous by step 3, so their product is continuous; the same map with codomain its image $R$ is continuous by the subspace topology. The finite product and its subspace $R$ are discrete. Steps 1–2 give $|R|$ prime to $\\ell$. Each projection $R\\twoheadrightarrow Q_M$ or $Q_{M'}$ has fibres given by translates of its kernel. Hence the average over $R$ acting on either representation is its original average: each summand is repeated $|\\ker(R\\to Q)|$ times and $|R|=|\\ker(R\\to Q)||Q|$. Now $f$ intertwines each $R$-operator, so summing gives $e'f=fe$. Alternatively the naturality clause of [lem-sfb-finite-averaging-condensed-invariant-summand] applies to this common $R$. Restriction of $f$ to invariants and tensoring therefore commute with all inclusions and retractions; postcomposition realizes these same equalities internally [def-sfb-continuous-representation-condensation]. This proves naturality even when the finite image changes.",
+   "uses": [
+    "lem-sfb-finite-averaging-condensed-invariant-summand",
+    "def-sfb-continuous-representation-condensation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; common finite image for naturality in arbitrary equivariant maps"
+   }
+  },
+  {
+   "text": "For the continuous coefficient inclusion $E\\to\\Omega$ [def-sfb-continuous-map-condensed-ring-map], the finite-sum formula gives $e_\\Omega(1\\otimes v)=1\\otimes e_E(v)$, as also asserted by [lem-sfb-finite-averaging-condensed-invariant-summand]. Tensor insertion commutes with the invariant inclusion, with $1-e$, and with the restricted equivariant maps. Applying these identities pointwise proves the coefficient squares for both the image and invariant identifications; all preserve $L$. If $r=0$, the empty products $H,L$ are trivial, $Q=1$, the average is the identity and $N=M$; each inclusion and projection is then the identity under the canonical tensor-unit identification. If $M=0$ or $N=0$, the corresponding basis and section coordinates are empty and the same formulas apply. On the empty profinite test set every continuous-function module has its unique zero section. No completeness of $\\Omega$ is used.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "lem-sfb-finite-averaging-condensed-invariant-summand"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted tame-boundary fixed-summand preparation; coefficient identity and degenerate cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "lem-sfb-finite-averaging-condensed-invariant-summand",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-scalar-extension",
+  "def-sfb-continuous-representation-condensation",
+  "def-sfb-condensed-action-module",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), analytic tame-boundary context. The displayed finite-product group assertion is proved by finite-cylinder reduction and explicit coset counting; the fixed summand uses the existing finite-averaging node. The blueprint does not itself supply this analytic proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(averag|Reynolds|finite_quotient|quotient.*[Pp]rime)",
+   "results": "11 hits: Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Maschke.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"invariants\"",
+   "results": "12 hits: Representation.invariants, Representation.invariants_eq_top, Representation.invariants_eq_inter, Representation.mem_invariants, Representation.mem_invariants_iff_of_forall_mem_zpowers, Representation.mem_linHom_invariants_iff_isIntertwining, Representation.le_comap_invariants, Representation.toInvariants",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous finite dimensional representation fixed summand under finite group averaging commutes with norm topological scalar extension",
+   "results": "8 hits: Rep.norm, Rep.norm_comm_apply, Representation.averageMap, Representation.norm_self_apply, Representation.averageMap_invariant, Rep.normNatTrans_app, Representation.norm_ofDistribMulAction_eq, Representation.norm",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Averaging over a finite prime to ell image of a continuous representation splits the fixed subspace and its condensed continuous function modules; finite quotients of a product of q adic integers away from ell have order prime to ell",
+   "results": "8 hits: Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, IsArithFrobAt.exists_of_isInvariant, LocallyConstant.freeOfProfinite, Profinite.NobelingProof.Nobeling_aux, Representation.isProj_averageMap, arithFrobAt, Ideal.Quotient.stabilizerHom_surjective_of_profinite, IsArithFrobAt.arithFrobAt",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of q adic integer groups away from ell is pro prime to ell, and a finite image Reynolds projection commutes with continuous function condensation and extension of scalars",
+   "results": "8 hits: WittVector.factorPowSucc_comp_fontaineThetaModPPow, AdicCompletion.pi_apply_coe, PadicInt.zmod_cast_comp_toZModPow, PadicInt.cast_toZModPow, WittVector.factorPowSucc_fontaineThetaModPPow_eq, BDeRhamPlus, Profinite.NobelingProof.πs', Profinite.NobelingProof.CC_comp_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "grep",
+   "query": "averageMap|isProj_averageMap",
+   "results": "5 hits: 129, 132, 134, 135, 138",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary averaging is in Representation.isProj_averageMap, but no hit states the pro-prime quotient assertion together with the topological scalar-extended internal fixed summand"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"averageMap\"",
+   "results": "4 hits: Representation.averageMap, Representation.isProj_averageMap, Representation.averageMap_invariant, Representation.averageMap_id",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotients of a product of q adic integers away from ell have order prime to ell; averaging a finite image continuous linear action splits its fixed subspace and scalar extended continuous function modules",
+   "results": "8 hits: arithFrobAt, BDeRhamPlus, IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Ideal.Quotient.stabilizerHom_surjective_of_profinite, cyclotomicCharacter.toFun_apply, IsPrimitiveRoot.finite_quotient_toInteger_sub_one, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "averageMap|isProj_averageMap",
+   "results": "7 hits: Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous representation of a product of q adic integers away from ell has a finite image averaging projection onto invariants compatible with scalar extension",
+   "results": "8 hits: Representation.isProj_averageMap, ContinuousLinearMap.proj, AdicCompletion.pi, PadicInt.mahlerEquiv, Padic.adicCompletionEquiv, PadicInt.adicCompletionIntegersEquiv, PadicInt.mahlerTerm, IntermediateField.botContinuousSMul",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite continuous quotient of an infinite product of pro q groups for primes q different from ell has order not divisible by ell",
+   "results": "8 hits: not_dvd_card_sylow, CommGroup.primaryComponent.isPGroup, CommGroup.primaryComponent, IsPGroup.orderOf_coprime, IsPGroup.to_quotient, IsPGroup.coprime_card_of_ne, card_sylow_modEq_one, IsPGroup.nonempty_fixed_point_of_prime_not_dvd_card",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "profinite.*(quotient|[Pp]Group)|finite.*quotient.*[Pp]rime|tame.*fixed|continuous.*invariant",
+   "results": "23 hits: Mathlib/Dynamics/Ergodic/RadonNikodym.lean, Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean, Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean, Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Topology/Algebra/Ring/Compact.lean, Mathlib/Topology/Algebra/Ring/Compact.lean, Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Extend.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the averaging hits concern algebraic projections, and the other hits do not state the finite-product quotient assertion together with the norm-topological internal fixed summand and its two compatibility clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-inertia-continuous-koszul",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declaration": "Representation.isProj_averageMap",
+  "file": "Mathlib/RepresentationTheory/Invariants.lean",
+  "how": "Lines 129-145 define the average and prove its algebraic projection property. They do not give the product-group quotient calculation, the continuous splitting over both norm-topological fields, or the sectionwise internal invariant identification."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; former proof step 1 and the finite-quotient argument at the start of step 2",
+   "via": [
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-tame-fixed-summand-preparation",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported/maintainer fields. Wrote finite-cylinder and coset-counting steps for finite quotients of H; descended the action continuously to its finite image; reused the existing finite-averaging invariant-summand node; gave explicit topological direct-sum maps and an adapted basis; checked generalized-element H-invariants, naturality through a common finite image, and the literal coefficient insertion square. No new nodes and no new Mathlib leaves. Repair of returned head cc3477d36b7: rebased by the delivery overlay onto the current live DAG, reread every cited statement and rechecked all twelve quotations; expanded the finite-image discreteness and common-image continuity arguments. The statement, route, searches and dependencies are retained. Current repair addresses returned branch head 161c63d0092 (11:00 UTC): compared all live cited statements with the retained fingerprints (none changed); initial rebase dry run passed at c707d21c96d. Step 3 now proves the coordinate homeomorphism in both directions, explicitly linking the given topology to the adapted product coordinates used downstream.",
+  "blueprint": "Realizes paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, below its open-coefficient preservation assertion: the finite-quotient and fixed-summand preparation extracted as the first step of lem-sfb-tame-inertia-continuous-koszul. The nearest recorded blueprint ancestor is null in the live DAG, retained as given; blueprint searches for fixed summand, averaging and finite quotient found no statement of this item. No change of chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-ce1ad65c6",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-ce1ad65c6 (reviewer sub-agent of L); spot-checked: Third delivery of this split. The two earlier heads, cc3477d3 and 161c63d0, both got FIX from the reader, and landing refused both with 'side completion never promoted; L promotes it' (live coord/returns/NA.md:72). Live and side-live still have the item unsplit and there is no repair note. The delivery has 0 new nodes; statement, deps, source, unit and blueprint fields are byte-identical to 161c63d0, and proof_deps equals the union of all uses. No SGA source; every step's source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). I re-read all 8 cited statements and their SHA-256 values match the report's fingerprints. The hypotheses of lem-sfb-finite-averaging-condensed-invariant-summand hold: Q finite discrete of order prime to ell, L profinite (via lem-dl-a1-finite-group-limit-profinite, index = positive integers), and a continuous Q×L action on a finite-dimensional norm-topological E-space. The continuity leaf is used only over the complete field E. I checked all nine steps. Steps 1-2: the open kernel contains a finite cylinder, and the coset counts show |T| divides a product of powers of primes q≠ell. Step 3: this head adds that rebuilding a vector from its coordinates is continuous, so the given topology equals the coordinate topology; this is correct. The open-singleton argument and joint continuity on the open q-slices are also correct. Steps 5, 7, 8 (average over the common image R, equal fibre counts) and 9 are correct. Checked r=0, M=0, N=0, the empty test set and Z/3 acting by ζ3. FIX: step 6 is again the pre-fix text. def-sfb-continuous-representation-condensation gives realizations only for jointly continuous actions, and step 6 never shows that the scalar-extended H×L action on Ω⊗M is jointly continuous; Ω is not complete, so the continuity leaf cannot be applied over Ω. I re-applied the 161c63d0 step-6 text verbatim: the matrix entries lie in E and are continuous by the step-3 argument, so the action is a finite sum of products in the topological field F. lem-sfb-finite-dimensional-linear-map-continuous is added to the step's uses; it is already in proof_deps, so the union is unchanged. Step 3 keeps this head's new text. Maintainer note: each re-delivery is rebuilt from the pre-fix sandbox and loses the FIX; L should promote the side completion or keep the fixes/ file.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-strict-etale-transport-associator",
+ "kind": "statement",
+ "title": "Tensor-unit-normalized associators on ordinary strict coefficient systems",
+ "statement": "Let a:O1→O2 and b:O2→O3 be coefficient changes with arbitrary commutative rings, elements and monotone index maps as in [def-pur-strict-etale-coefficient-transport-interfaces]. On a scheme T fix strict evaluation records P1,P2,P3 [def-per-strict-etale-system-interfaces] and coefficient transports U12,U23,U13, where U13 is along a.comp b. There exists a natural isomorphism e:U12.ordinary ⋙ U23.ordinary ≅ U13.ordinary such that for each coefficient level n and strict system M, the successive underlying tensor units of U12 at r23(n) and U23 at n, followed by the underlying additive-sheaf map of e_M at level n, equal the tensor unit of U13 at n. This conclusion concerns only ordinary strict systems; it asserts no derived associator or geometric square.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2); tensor/adjunction normalization underlying the coefficient composition step."
+ },
+ "stmt_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "At coefficient level n compose the two scalar-extension adjunctions. Restriction along b_n followed by a_(r23 n) agrees, by the identity on underlying sections, with restriction along their composite. The units are insertion of 1 in the successive tensor factors. The unique comparison of the left adjoints thus identifies their composite unit with the direct unit. Conjugate by the evaluation isomorphisms of U12,U23,U13 to obtain levelwise isomorphisms.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient transition squares commute: the two maps have the same value on every quotient generator, namely the image of that generator under the corresponding coefficient ring map. To check compatibility of the levelwise comparison with a successor map, precompose both sides with the successive tensor units. Substitute the transition equations of the transports and the composite-unit equation from the first step. Both sides become the transition of the original system followed by the unit at level n. Injectivity of the tensor Hom transpose identifies the two maps. Apply the same argument to the inverses.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible levelwise isomorphisms define an isomorphism of ordinary strict systems. Naturality follows levelwise from naturality of the adjunction comparison and of the three evaluation isomorphisms. The composite-unit equation is exactly its defining normalization. The same construction works when index values repeat, a map is the identity, a coefficient ring is zero, or T is empty.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Interface-level tensor/adjunction argument underlying Construction 4.1 and the coefficient comparisons in Construction 5.15; generalization to the arbitrary normalized records of the assigned item, not a verbatim theorem of Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of scalar extension functors on sheaves normalized by the adjunction unit",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalars_id_comp, ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no statement for the specified strict-system transport records.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; ordinary module scalar composition is an ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of extension of scalars for sheaves of modules normalized by tensor adjunction units",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; SheafOfModules.restrictScalars; unitHomEquiv_comp_apply; no strict-system normalized comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|siteCoefficientTensor.*[Cc]omp; rg for StrictEtaleTransportComposition and tensor associators in both source roots and dag/nodes",
+   "results": "The interfaces define the data and normalization but assert no existence. CoefficientTensorOrdinaryCoherence gives same-ring quotient transitions only. SystemLevelLeftExtensionTheory uses arbitrary ring diagrams but a different system interface. The existing item is the sole compact-support cocycle.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Blueprint searches coefficient transport, tensor associator, inverse image coefficient, strict tensor found no matching blueprint statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictEtaleCompactSupportComposition",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Coefficient compatibility of exceptional inverse image: the compatible coefficient operations in the earlier adic-stage route, specifically composition of scalar and reindexing maps before passage to a limit. The latest blueprint has replaced the adic construction by condensed Brown representability; this worker preserves the assigned strict-system lemma and its unit route. This node isolates tensor-unit-normalized associators on ordinary strict coefficient systems.",
+   "via": [
+    "lem-pur-strict-etale-compact-support-composition",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictEtaleTransportAssociator",
+  "file": "lean/Sheaf/Paper/StrictEtaleTransportAssociator.lean",
+  "declaration": "AlgebraicGeometry.strictEtaleOrdinaryTransportAssociator_exists",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleOrdinaryTransportAssociator_exists"
+  ],
+  "statement": "theorem strictEtaleOrdinaryTransportAssociator_exists\n    {O₁ O₂ O₃ : Type (u + 1)} [CommRing O₁] [CommRing O₂] [CommRing O₃]\n    {ell₁ : O₁} {ell₂ : O₂} {ell₃ : O₃} {phi₁₂ : O₁ →+* O₂} {phi₂₃ : O₂ →+* O₃}\n    {r₁₂ r₂₃ : ℕ →o ℕ}\n    {a : StrictEtaleCoefficientChange O₁ O₂ ell₁ ell₂ phi₁₂ r₁₂}\n    {b : StrictEtaleCoefficientChange O₂ O₃ ell₂ ell₃ phi₂₃ r₂₃}\n    {T : Scheme.{u}}\n    {P₁ : StrictEtaleEvaluation T O₁ ell₁}\n    {P₂ : StrictEtaleEvaluation T O₂ ell₂}\n    {P₃ : StrictEtaleEvaluation T O₃ ell₃}\n    (U₁₂ : StrictEtaleCoefficientTransport a T P₁ P₂)\n    (U₂₃ : StrictEtaleCoefficientTransport b T P₂ P₃)\n    (U₁₃ : StrictEtaleCoefficientTransport (a.comp b) T P₁ P₃) :\n    ∃ ordinary : U₁₂.ordinary ⋙ U₂₃.ordinary ≅ U₁₃.ordinary,\n      ∀ n M,\n        (U₁₂.unit (r₂₃ n)).app M ≫ (U₂₃.unit n).app (U₁₂.ordinary.obj M) ≫\n          (SheafOfModules.toSheaf.{u + 1} _).map\n            ((coefficientEvaluation (J := T.smallEtaleTopology)\n              (O := O₃) (ell := ell₃) n).map (ordinary.hom.app M)) =\n          (U₁₃.unit n).app M",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T001058-L-4167053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T001058-L-4167053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

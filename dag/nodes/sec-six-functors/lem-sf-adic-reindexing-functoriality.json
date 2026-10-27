@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-adic-reindexing-functoriality",
+ "kind": "statement",
+ "title": "Functoriality of normalized realization reindexing",
+ "statement": "Fix a prime l, a finite-field datum D and an arbitrary FamilyCore C [def-sf-adic-realization-isomorphism-data]. Assume its ordinary module identity and composition act as the identity on all sections, its common-stage comparison satisfies integralRealizationAgreement at every integral finite-field representative, and its source identity is a unit for the specified common-stage pullback composition. Then its realization comparison satisfies the identity and composition equations of Family, with the specified source identity, ordinary module compositors and actual common-stage pullback composition. No construction of FamilyCore and no tensor or Hom compatibility is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; arbitrary scheme-isomorphism reindexing, including semilinear Frobenius; old step 12; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "For the identity, substitute integralRealizationAgreement. The ordinary identity\nis fixed on sections, the completion-unit map is the identity under the specified\npullback identity, and the scalar and realization isomorphisms cancel. The source identity\nis fixed by its unit equation for the specified composition. For composition substitute\nthe same integral formula for each of the three comparisons. The entire-cone composition\nlaw for the specified completion units identifies their inverse factors; the balanced\nscalar cochain composition law and the sectionwise ordinary compositor identify the\nremaining factors. These are identities of derived maps, not merely of reductions.\nThe finite scalar square then transports both equalities through raw rationalization.\nEvery common-stage object has a finite integral representative up to the canonical\nstage and localization isomorphisms; naturality transports the equalities along these\nisomorphisms. The intermediate scalar comparisons cancel, giving exactly the displayed\nidentity and composition equations.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-integral-inverse-image-comparison-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-integral-inverse-image-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 8. Not claimed verbatim in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural monoidal transformation commutes with internal Hom evaluation transpose",
+   "results": "Eight hits including CategoryTheory.ihom.ev_naturality and CategoryTheory.NatTrans.IsMonoidal. These concern generic closed monoidal categories, not the native adic/common-stage normalized maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "Eight hits, including Scheme.Modules.pullbackId, pullbackCongr, restrictFunctorIsoPullback and comapIso identities. None states native adic realization normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom|homEquiv_naturality_left_symm",
+   "results": "25 hits for generic adjunction naturality; no coefficientBaseChangeHom in Mathlib. Native adic comparisons are in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationIsomorphismNormalization",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation with no imported blueprint ancestor; lem-sf-adic-realization-isomorphism-normalization proof steps 8",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingFunctoriality",
+  "file": "lean/Sheaf/Paper/AdicReindexingFunctoriality.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_functoriality",
+  "statement": "theorem normalized_reindexing_functoriality\n    (C : FamilyCore l D)\n    (h_moduleId_sections : ∀ (T : GeometricSpace D) (M : modules l T.base.left (C.data\n      T).realization)\n          (U : T.base.left.ProEtᵒᵖ)\n          (x : ((modulePull l T.base.left (𝟙 _) (C.ring T T (Iso.refl _))).obj M).val.obj U),\n        HEq (((C.moduleId T).hom.app M).val.app U x) x)\n    (h_moduleComp_sections : ∀ (T U V : GeometricSpace D)\n          (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left)\n          (M : modules l V.base.left (C.data V).realization) (W : T.base.left.ProEtᵒᵖ)\n          (x : ((modulePull l T.base.left (g ≪≫ h).hom\n            (C.ring T V (g ≪≫ h))).obj M).val.obj W),\n        HEq (((C.moduleComp T U V g h).hom.app M).val.app W x) x)\n    (h_integral_normalization : ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n          (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)),\n        letI := (C.data T).units\n        letI := (C.data U).units\n        integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization\n          (C.ring T U g) E (C.integral T U g E) (C.comparison T U g))\n    (h_sourceId_unit : ∀ (T : GeometricSpace D)\n          (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left),\n        letI := (C.data T).units\n        HEq\n          ((pullbackTensorCommonComposition l (PadicAlgCl l)\n              (𝟙 T.base.left) (𝟙 T.base.left) M).hom ≫\n            (C.sourceId T).hom.app\n              ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))\n          (𝟙 ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))) :\n    (∀ (T : GeometricSpace D)\n      (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left),\n    letI := (C.data T).units\n    (C.comparison T T (Iso.refl _)).hom.app M ≫\n      (Functor.mapDerivedCategoryNatIso (C.moduleId T) ≪≫\n        Functor.mapDerivedCategoryIdIso _).hom.app\n          ((ordinary l T.base.left (C.data T).realization).obj M) =\n    (ordinary l T.base.left (C.data T).realization).map ((C.sourceId T).hom.app M))\n    ∧ (∀ (T U V : GeometricSpace D)\n      (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left)\n      (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) V.base.left),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    letI := (C.data V).units\n    (C.comparison T V (g ≪≫ h)).hom.app M ≫\n      (Functor.mapDerivedCategoryNatIso (C.moduleComp T U V g h) ≪≫\n        Functor.mapDerivedCategoryCompIso _ _).hom.app\n          ((ordinary l V.base.left (C.data V).realization).obj M) =\n    (ordinary l T.base.left (C.data T).realization).map\n        (pullbackTensorCommonComposition l (PadicAlgCl l) h.hom g.hom M).hom ≫\n      (C.comparison T U g).hom.app\n        ((commonStageDerivedPullback l (PadicAlgCl l) h.hom).obj M) ≫\n      (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.comparison U V h).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+ }
+}

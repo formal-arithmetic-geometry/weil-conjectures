@@ -39,6 +39,13 @@
  ],
  "proof": [
   {
+   "text": "Use the reconstruction-model and coefficient-encoding setup of [lem-pur-compact-support-condensed-realization-setup]. Its strict tower, raw and restricted support functors, coefficient maps, scalar presentation, section maps, and encoding mate are the actual declarations used below; no existence of an IntegralModel or simultaneous ComparisonFamily is assumed by its data definitions.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization-setup"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Write $B_T=\\widehat R_T$ and $P_R^0=Rg_{*,R}j_{!,R}$. Finite type over $k$ gives noetherianity and finite dimension; $\\overline X$ is also finite type since $g$ is proper. Thus $j$ is quasi-compact, all three schemes are noetherian of finite dimension, and $\\ell$ is invertible. The quotients $R/t^n$ are finite and perfect over $R$ by [lem-weil-pbc-standard-quotients-perfect], so they meet the adic hypotheses used below. The coefficient inverse-image identifications commute with every quotient. Apply [lem-cbc-integral-compact-support-uniform-restriction] to $c$: it gives an exact $R$-linear $P_R^0:\\mathcal I_X(R)\\to\\mathcal I_Y(R)$. Apply it also to $j$, compactified by $j$ followed by the proper identity of $\\overline X$. Hence $j_{!,R}K\\in\\mathcal I_{\\overline X}(R)$ and is complete. Here $j_!$ is exact sheafified open extension and proper image is derived separately.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
@@ -111,12 +118,13 @@
    }
   },
   {
-   "text": "For finite $E\\subset F$, [lem-weil-pbc-condensed-flat-coefficient-calculus] says that $F_T^c$ is finite free over $E_T^c$. Their inverse-image identifications are the coefficient-category composition identifications. Apply [lem-sp-finite-free-direct-image-coherence] to $g$: its specified counit transpose is the proper coefficient isomorphism. Follow it by the normalized open scalar isomorphism of [lem-sf-open-tensor-normalization]. The result is exactly the canonical $T_{E,F}^YP_E^c\\xrightarrow{\\sim}P_F^cT_{E,F}^X$. The finite-direct-sum invertibility argument is an input theorem here, rather than an inline lemma.",
+   "text": "For finite $E\\subset F$, [lem-weil-pbc-condensed-flat-coefficient-calculus] says that $F_T^c$ is finite free over $E_T^c$. Their inverse-image identifications are the coefficient-category composition identifications. Apply [lem-sp-finite-free-direct-image-coherence] to $g$: its specified counit transpose is the proper coefficient isomorphism. Follow it by the normalized open scalar isomorphism of [lem-sf-open-tensor-normalization]. The result is exactly the canonical $T_{E,F}^YP_E^c\\xrightarrow{\\sim}P_F^cT_{E,F}^X$. The finite-direct-sum invertibility argument is an input theorem here, rather than an inline lemma. The formal auxiliary fieldScalar_preserves applies [lem-weil-pbc-bounded-constructible-exact-scalar-extension] directly to the actual coefficientMap(fieldMap), using fieldExtension_flat and the input full-subcategory membership proof. No separate stratum construction or Noetherian hypothesis is needed for this auxiliary. D2 proves finiteProjection_isIso directly: install the E-algebra structure on F from the given embedding, choose a finite E-basis, and use continuity of its Q_l-linear coordinate maps. The pointwise coordinate and reconstruction maps give inverse finite-biproduct maps on continuous coefficient presheaves in universe u. Transport the finite-free isomorphism through sheafification. After reindexing its finite coproduct into universe u+1, apply the proved source-library finitePush_of_pointCopower criterion to the actual fieldMap and the proper map c.g. This criterion identifies the proper counit transpose itself as an isomorphism, on every ambient input. The normalized open factor is already an isomorphism, so their defined composite is invertible. No finite-subfield replacement of E or F is used.",
    "uses": [
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
     "def-weil-pbc-condensed-e-module-category",
     "lem-sp-finite-free-direct-image-coherence",
-    "lem-sf-open-tensor-normalization"
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
    ],
    "elementary": false,
    "source": {
@@ -203,13 +211,14 @@
    }
   },
   {
-   "text": "For the mixed square with $a$, the ring square $B_T\\to\\widehat S_T$, $B_T\\to E_T^c$, $\\widehat S_T\\to F_T^c$, $E_T^c\\to F_T^c$ commutes by [lem-weil-pbc-continuous-coefficient-realizations]. Apply [lem-pur-ringed-coefficient-projection-cocycle] to it. The proper comparison in $J$ preserves the adjunction counit by [lem-weil-pbc-condensed-e-realization], so its proper factors are exactly these coefficient transposes; the open factors are the normalized comparisons of Step 4. Step 11 gives the $q$ square. Substituting these three squares in the displayed definition of $a$ in Step 5 gives compatibility of the integral comparison after rationalization with $a$ and with the condensed coefficient comparison. Localization preserves the equalities by [prop-weil-pbc-rational-transport]. This argument uses the entire commuting ring square, including ramified reductions through Step 11.",
+   "text": "For the mixed square with $a$, the ring square $B_T\\to\\widehat S_T$, $B_T\\to E_T^c$, $\\widehat S_T\\to F_T^c$, $E_T^c\\to F_T^c$ commutes by [lem-weil-pbc-continuous-coefficient-realizations]. Apply [lem-pur-ringed-coefficient-projection-cocycle] to it. The proper comparison in $J$ preserves the adjunction counit by [lem-weil-pbc-condensed-e-realization], so its proper factors are exactly these coefficient transposes; the open factors are the normalized comparisons of Step 4. Step 11 gives the $q$ square. Substituting these three squares in the displayed definition of $a$ in Step 5 gives compatibility of the integral comparison after rationalization with $a$ and with the condensed coefficient comparison. Localization preserves the equalities by [prop-weil-pbc-rational-transport]. This argument uses the entire commuting ring square, including ramified reductions through Step 11. The section/encoding auxiliary constructions and the invertibility of their scalar mate are supplied by [lem-pur-compact-support-condensed-realization-setup].",
    "uses": [
     "lem-weil-pbc-continuous-coefficient-realizations",
     "lem-pur-ringed-coefficient-projection-cocycle",
     "lem-weil-pbc-condensed-e-realization",
     "lem-sf-open-tensor-normalization",
-    "prop-weil-pbc-rational-transport"
+    "prop-weil-pbc-rational-transport",
+    "lem-pur-compact-support-condensed-realization-setup"
    ],
    "elementary": false,
    "source": {
@@ -218,13 +227,11 @@
    }
   },
   {
-   "text": "For $E\\subset\\Omega$ use the small filtered poset of finite $H\\subset\\Omega$ containing $E$. It is final in all finite intermediate fields by taking composita. For $L\\in\\mathcal C_E^c(X)$, [lem-weil-pbc-condensed-coefficient-complex-presentation] gives simultaneous coefficient complexes and their actual cocone maps. Choose a lower cohomological bound $a$ for $L$. Exact finite and $\\Omega$ scalar extension and exact $j_!$ keep that bound. Open extension commutes with the coefficient colimit since it is a left adjoint. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to $g$, which is proper and hence qcqs, in the $E^c$-module category. Coefficient restriction commutes with proper image and reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Thus the colimit of Step 6's isomorphisms gives an isomorphism $T_{E,\\Omega}^YP_E^cL\\to P_\\Omega^cT_{E,\\Omega}^XL$. The presentation theorem identifies the cocone maps under coefficient transposition, so this is the canonical projection map. Throughout $\\Omega^c$ is the finite-subfield-valued coefficient ring, and only bounded-below continuity has been applied.",
+   "text": "For the closure projection, first extend the bounded constructible E-input K by zero along the fixed compactification open. The actual open functor preserves bounded constructibility by [lem-sfb-dc-open-lower-shriek-preserves]. The intermediate and target schemes are noetherian: the intermediate is proper over the finite-type base. Apply [lem-pur-omega-proper-coefficient-projection] to the actual proper map g and this extended input. This makes the proper component of condensedProjection(omegaMap a,c) invertible. Unfold its defining pasteScalar: its other factors are the functor associators and the image of the canonical open scalar isomorphism, so the displayed compact-support component is a composition of invertible arrows. The filtered coefficient-complex and bounded-below continuity argument for the proper factor is isolated in that strictly smaller new node; neither the open factor nor a compactification occurs in its statement. The auxiliary omegaScalar_preserves remains the direct application of [lem-weil-pbc-bounded-constructible-exact-scalar-extension] to coefficientMap(omegaMap), with omegaExtension_flat, preserving the original boundedConstructible predicate.",
    "uses": [
-    "lem-weil-pbc-condensed-coefficient-complex-presentation",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-pur-omega-proper-coefficient-projection",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
    ],
    "elementary": false,
    "source": {
@@ -233,11 +240,13 @@
    }
   },
   {
-   "text": "Every $\\mathcal C_\\Omega^c(X)$ object is $T_{E,\\Omega}^XL$ by [prop-weil-pbc-qbar-condensed-two-colimit]. Step 13 identifies its image under the actual ambient composite with $T_{E,\\Omega}^YP_E^cL$, which belongs to $\\mathcal C_\\Omega^c(Y)$ by the scalar-preservation clause and Step 5. The coefficient cocycle with target $\\Omega$ is the arbitrary-ring cocycle of Step 9, so direct and successive coefficient maps agree. For arbitrary morphisms choose a common finite field using the two-colimit's morphism clause. Naturality there gives naturality of the result; independence follows because two finite representatives agree after further extension, again by that node. This also preserves identities.",
+   "text": "Every $\\mathcal C_\\Omega^c(X)$ object is $T_{E,\\Omega}^XL$ by [prop-weil-pbc-qbar-condensed-two-colimit]. Step 13 identifies its image under the actual ambient composite with $T_{E,\\Omega}^YP_E^cL$, which belongs to $\\mathcal C_\\Omega^c(Y)$ by the scalar-preservation clause and Step 5. The coefficient cocycle with target $\\Omega$ is the arbitrary-ring cocycle of Step 9, so direct and successive coefficient maps agree. For arbitrary morphisms choose a common finite field using the two-colimit's morphism clause. Naturality there gives naturality of the result; independence follows because two finite representatives agree after further extension, again by that node. This also preserves identities. For the auxiliary omegaSupport_preserves, D2 uses a shorter proved source-library route: regard f as a morphism over Spec(k), and use c.overI and c.overG. Exact open extension preserves bounded constructibility by [lem-sfb-dc-open-lower-shriek-preserves]; derived direct image for the finite-valued algebraic-closure coefficient preserves it by [lem-sfb-dc-lower-star-preserves]. Their composite is definitionally the original compactification functor. This auxiliary therefore needs neither a descended presentation nor omegaProjection_isIso. The preceding descent argument remains the plan for the other closure comparison and naturality obligations.",
    "uses": [
     "prop-weil-pbc-qbar-condensed-two-colimit",
     "lem-pur-ringed-coefficient-projection-cocycle",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus"
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-sfb-dc-lower-star-preserves"
    ],
    "elementary": false,
    "source": {
@@ -313,20 +322,22 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-coef-semilinear-derived-sections",
   "lem-kun-dimension-finite-type",
+  "lem-pur-compact-support-condensed-realization-setup",
   "lem-pur-completed-coefficient-pushforward-comparison",
   "lem-pur-ringed-coefficient-projection-cocycle",
   "lem-pur-ringed-refinement-coefficient-square",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-sf-open-tensor-normalization",
   "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sfb-dc-lower-star-preserves",
+  "lem-sfb-dc-open-lower-shriek-preserves",
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-sfb-successive-derived-quotient-normalization",
   "lem-sp-finite-free-direct-image-coherence",
   "lem-sp-strict-tower-arithmetic-restriction",
   "lem-weil-compact-support-reduction-tower-functor",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
   "lem-weil-pbc-condensed-e-realization",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
@@ -345,12 +356,13 @@
   "lem-weil-proetale-countable-products-exact",
   "prop-weil-pbc-direct-image-limits",
   "prop-weil-pbc-qbar-condensed-two-colimit",
-  "prop-weil-pbc-rational-transport"
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-omega-proper-coefficient-projection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "6.7.2, 6.7.6–6.7.17, 6.8.14–6.8.15 motivate this assembly of ordinary derived coefficient and compactification statements; the condensed realization assertion is agent-formulated."
+  "place": "6.7.2, 6.7.6–6.7.17, 6.8.14–6.8.15 motivate this assembly of ordinary derived coefficient and compactification statements; the condensed realization assertion is agent-formulated. Y5 partial proof: coefficient-map continuity, finite-valued image, internal-ring structure, and identity/composition laws are proved pointwise. The remaining plan is retained. J1 partial proof: constructible preservation is reduced to the existing general exact scalar-extension theorem; the section-ring map is the existing reconstructed map, with sectionwise uniqueness; the encoding scalar map is invertible by the inverse-mate theorem for equivalences. All other proof steps remain the plan for the original remaining holes. The setup prefix has been moved without changing public names, signatures or definition bodies to Sheaf.Paper.CompactSupportCondensedRealizationSetup after profiling and local elaboration improvements still left the monolithic file above 60 seconds. D2 partial proof: finiteProjection_isIso is obtained from a universe-general continuous finite-basis construction and the proved source finitePush_of_pointCopower criterion; omegaSupport_preserves is the composite of existing bounded-constructible open-extension and direct-image preservation. No public statement or definition is changed, and the remaining proof plan is retained. G2 partial decomposition: omegaProjection_isIso is proved by applying the proper coefficient comparison to the bounded constructible open extension and pasting with the existing canonical open scalar isomorphism. The remaining proper filtered-continuity step is the new node lem-pur-omega-proper-coefficient-projection; the other four holes and their original proof plans remain unchanged. This closes one upper hole and adds one strictly smaller hole (net zero), without changing public definitions or statements."
  },
  "mathlib_searches": [
   {
@@ -752,59 +764,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-6a75ca605 (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps, both new nodes, every cited statement (44 proof_deps and 12 stmt_deps), unit sk-thm-purity-transport, Bhatt–Scholze 6.7.2/6.7.6–6.7.8/6.7.14–6.7.17/6.8.14–6.8.15 and Stacks 0D6E/07A7/0E46/0E47. The statement and stmt_deps match the side-project base exactly, and the master BoundedConstructible.lean composite i_! ⋙ Rp_* (lines 336–341) matches P_E^c. The coefficient categories (completed Ŕ-modules versus condensed E^c-modules) are related only through J. Steps checked: complete input for the direct-image projection isomorphism; the triangle identity α R(q)=b; open normalization with g=id for B→A_n, B→E^c and E^c→F^c; ramification t=uv^e giving the S/v^{en} levels (case e=2, n=1 checked); exact-product limit and arithmetic restriction; qcqs continuity under a common lower bound; two-colimit descent; the refinement square Q=(j_1,j_2,1_X,u) with étale-origin invertibility. uses equal proof_deps, no cycle, no missing or merged citation. New nodes: the cocycle node is the horizontal composition of ringed-topos base change maps (true; identity and non-flat cases checked). The refinement-square node is true because s is clopen (q is separated) and adjuncts reduce both sides to the same map. Neither duplicates the finite-ring, étale or finite-free predecessors (lem-sp-finite-free-direct-image-coherence, lem-fix-direct-image-scalar-exchange, lem-sf-proper-open-coefficient-refinement, lem-sp-refinement-coefficient-mate), and both are needed for the non-free maps in Steps 10–16. Neither restates a clause of the item. The added generic tool uses are accepted. FIX: rewrote source.place of lem-pur-ringed-coefficient-projection-cocycle to cite Stacks Tag 0E47 (remark-compose-base-change-horizontal) with 07A7, which states its identity, instead of only 0D6E. Minor and left as is: Step 7 cites lem-sfb-successive-derived-quotient-normalization without needing it. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.CompactSupportCondensedRealization",
   "declaration": "WeilConjectures.compactSupport_condensedRealization",
   "declarations": [
-   "WeilConjectures.CompactSupportCondensedRealization.strictTower",
-   "WeilConjectures.CompactSupportCondensedRealization.rawSupport",
-   "WeilConjectures.CompactSupportCondensedRealization.IntegralModel",
-   "WeilConjectures.CompactSupportCondensedRealization.integralSupport",
-   "WeilConjectures.CompactSupportCondensedRealization.reconstructedSystem",
-   "WeilConjectures.CompactSupportCondensedRealization.limitPresentation",
-   "WeilConjectures.CompactSupportCondensedRealization.alpha",
-   "WeilConjectures.CompactSupportCondensedRealization.coefficientEmbedding_continuous",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRingMap",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldMap",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_isMonHom",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldExtension_flat",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaEmbedding_continuous",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaEmbedding_finiteValued",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaRingMap",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaMap",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaMap_isMonHom",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaExtension_flat",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_id",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_comp",
-   "WeilConjectures.CompactSupportCondensedRealization.omegaMap_comp",
-   "WeilConjectures.CompactSupportCondensedRealization.integralSupport_additive",
-   "WeilConjectures.CompactSupportCondensedRealization.integralSupport_linear",
-   "WeilConjectures.CompactSupportCondensedRealization.rationalSupport",
-   "WeilConjectures.CompactSupportCondensedRealization.base_noetherian",
-   "WeilConjectures.CompactSupportCondensedRealization.base_dimension",
-   "WeilConjectures.CompactSupportCondensedRealization.base_primeUnit",
-   "WeilConjectures.CompactSupportCondensedRealization.RealizationAt",
-   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport_subsingleton",
-   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport_nonempty",
-   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport",
-   "WeilConjectures.CompactSupportCondensedRealization.scalarPresentation",
-   "WeilConjectures.CompactSupportCondensedRealization.integralScalar",
-   "WeilConjectures.CompactSupportCondensedRealization.integralReduction",
-   "WeilConjectures.CompactSupportCondensedRealization.pasteReductionComparison",
-   "WeilConjectures.CompactSupportCondensedRealization.integralReductionScalar",
-   "WeilConjectures.CompactSupportCondensedRealization.IsIntegralScalarSquare",
-   "WeilConjectures.CompactSupportCondensedRealization.sectionFieldMap_existsUnique",
-   "WeilConjectures.CompactSupportCondensedRealization.sectionFieldMap",
-   "WeilConjectures.CompactSupportCondensedRealization.realizedFieldMap",
-   "WeilConjectures.CompactSupportCondensedRealization.realizedCoefficient_square",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingDerived",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingDerived_isEquivalence",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingRestriction_existsUnique",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingRestriction",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingScalarMap",
-   "WeilConjectures.CompactSupportCondensedRealization.encodingScalarMap_isIso",
-   "WeilConjectures.CompactSupportCondensedRealization.latticeScalar",
    "WeilConjectures.CompactSupportCondensedRealization.fieldScalar",
    "WeilConjectures.CompactSupportCondensedRealization.omegaScalar",
    "WeilConjectures.CompactSupportCondensedRealization.CoefficientData",
@@ -852,5 +827,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Re-delivery of 695e0022 (RETURN: theorem stmt_dep lem-fix-operation-reduction used only for the plain structure OperationScalarTransport). The fix adds def node def-pur-operation-scalar-transport with existing:true on the unchanged live BasicOperationsCoefficientReduction; the recorded statement is verbatim (one occurrence) and the node statement matches the ordinary/tensor/derived/counit fields with no existence claim. The item stmt_deps replace the theorem with that node. The three Lean modules are byte-identical to the returned head; the CondensedERealization dependency replacement is dropped and the live module is used; dependency records equal live side. Independent re-read found no extra hypotheses; P_R, alpha and a are actual constructions; the finite scalar comparison is pinned by whole-system and rationalized squares; every theorem is sorry; nothing is dropped by the route pivot; no duplicate notion. nt_compile --json on all three modules is clean: 20.0/13.0/33.8 s. Advisories: integralOrdinaryTensorSection is owned by a lemma node outside the def node's deps (inherited); projection-iso and refinement clauses are separate sorry theorems; the source path uses main-20261015."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T112345-L-1575430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

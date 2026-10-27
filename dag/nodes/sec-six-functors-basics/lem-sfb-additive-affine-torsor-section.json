@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-additive-affine-torsor-section",
+ "kind": "statement",
+ "title": "Additive group torsors over an affine scheme have a section",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be any commutative $k$-algebra, and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $\\mathbf G_{a,k}=\\operatorname{Spec}k[t]$ with addition [def-sc-gm-ga]. Let $P\\to S$ be a faithfully flat surjective morphism of finite presentation [def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation], equipped with a right $\\mathbf G_{a,k}$-action over $S$ for which $(p,a)\\mapsto(p,p+a)$ is an isomorphism $P\\times_k\\mathbf G_{a,k}\\simeq P\\times_SP$ [def-pc-fibre-product]. Then there is an $S$-section $e:S\\to P$ of $P\\to S$. No Noetherian, reducedness, finite-type-over-$k$, or perfectness hypothesis is imposed on $A$ or $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 2.72, printed p.61, the additive torsor assertion for an arbitrary k-algebra R_0, using the exact faithfully flat additive Cech complex."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sfb-split-solvable-right-torsors"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:P\\to S$. By the definition of fppf coverings, the given flat, surjective, finite-presentation map is an fppf singleton covering; it is fpqc by [lem-trf-fppf-covering-is-fpqc]. Apply [lem-galois-fpqc-singleton-affine-refinement] to obtain an affine fpqc cover $q:U=\\operatorname{Spec}B\\to S$ and an $S$-map $h:U\\to P$. The affine flatness criterion and the flat-surjective-spectrum criterion show that $A\\to B$ is faithfully flat. Thus $h$ is an actual local point of the torsor over a faithfully flat algebra, as required in Milne's argument. This also allows $A=0$: then $S$ is empty and the unique map $S\\to P$ already is a section.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), 022E (lemma-fpqc-affine); the affine ring criteria are Morphisms Tag 01U5 and Algebra Tag 00HQ."
+   }
+  },
+  {
+   "text": "On $U_2=U\\times_SU$ let $h_1,h_2$ be the two pullbacks of $h$. Apply the inverse of the torsor isomorphism from the hypothesis to $(h_1,h_2)$. Its second component is the unique morphism $c:U_2\\to\\mathbf G_{a,k}$ with $h_2=h_1+c$. By [lem-weil-pbc-fibre-product-affine-spectra], $U_2=\\operatorname{Spec}(B\\otimes_AB)$ and the triple product has coordinate ring $B\\otimes_AB\\otimes_AB$. Morphisms from these affine $k$-schemes to $\\operatorname{Spec}k[t]$ correspond to elements of their coordinate rings: the ring map is determined by the image of $t$, and conversely polynomial evaluation gives that map. The group law in [def-sc-gm-ga] is addition of these elements. On the triple product the action law gives $h_3=(h_1+c_{12})+c_{23}=h_1+(c_{12}+c_{23})$, while $h_3=h_1+c_{13}$. Uniqueness in the torsor isomorphism gives $c_{23}-c_{13}+c_{12}=0$ as an equality in the triple tensor ring. This is precisely the degree-one cocycle equation.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 2.72, printed p.61: additive torsors and the faithfully flat additive Cech complex."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-cech-exact] with the faithfully flat map $A\\to B$ and the $A$-module $M=A$. Under the canonical identifications $A\\otimes_AB=B$ and $A\\otimes_AB\\otimes_AB=B\\otimes_AB$, exactness at $B\\otimes_AB$ says that there is $b\\in B$ with $c=1\\otimes b-b\\otimes1$; the next differential is exactly $c\\mapsto c_{23}-c_{13}+c_{12}$. Regard $b$ as a morphism $U\\to\\mathbf G_{a,k}$ by polynomial evaluation, and define $t=h-b:U\\to P$ using the given action and the inverse in [def-sc-gm-ga]. On $U_2$ write $b_1=b\\otimes1$, $b_2=1\\otimes b$. Then $t_2=h_2-b_2=h_1+c-b_2=h_1-b_1=t_1$. Every equality uses the action law, with the displayed coboundary formula fixing the sign. Thus $t$ is a matching morphism on the fpqc cover $q$.",
+   "uses": [
+    "lem-pc-cech-exact",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023M (lemma-ff-exact), applied in degree one with M=A; Milne Example 2.72, printed p.61."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the fpqc singleton $q:U\\to S$, target scheme $P$, and the matching map $t$. It gives a unique morphism $e:S\\to P$ with $e\\circ q=t$. Since the action is over $S$, we have $f\\circ t=q$. Hence $(f\\circ e)\\circ q=q=\\operatorname{id}_S\\circ q$. The uniqueness clause of the same descent statement, now with target $S$, implies $f\\circ e=\\operatorname{id}_S$. Therefore $e$ is the required $S$-section. All inputs above apply to arbitrary commutative $A$ and use no finiteness, reducedness, Noetherian or perfectness assumption beyond the hypotheses stated for $f$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), existence and uniqueness of morphisms from matching maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "lem-pc-cech-exact",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 2.72, printed p.61: additive torsors and the faithfully flat additive Cech complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every fppf torsor under the additive group over an affine scheme has a section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern pointwise additive torsors, affine-space constructors or flat morphisms, not sections of fppf scheme torsors on an affine base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent additive cocycles vanish over affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern pointwise additive torsors, affine-space constructors or flat morphisms, not sections of fppf scheme torsors on an affine base"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\", \"affine\"",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"AffineMap.instAddTorsor\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \" {k : Type u_1} {V1 : Type u_2} {P1 : Type u_3} {V2 : Type u_4} {P2 : Type u_5} [Ring k] [AddCommGroup V1] [Module k V1] [AddTorsor V1 P1] [AddCommGroup V2] [Module k V2] [AddTorsor V2 P2] : AddTorsor (P1 →ᵃ[k] V2) (P1 →ᵃ[k] P2)\", \"doc\": \"The space of affine maps from `P1` to `P2` is an affine space over the space of affine maps\\nfrom `P1` to the vector space `V2` corresponding to `P2`.\"}\n  {\"name\": \"AffineSubspace.toAddTorsor\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineSubspace.Basic\", \"type\": \" {k : Type u_1} {V : Type u_2} {P : Type u_3} [Ring k] [AddCommGroup V] [Module k V] [AddTorsor V P] (s : AffineSubspace k P) [Nonempty ↥s] : AddTorsor ↥s.direction ↥s\", \"doc\": \"\"}\n  {\"name\": \"AffineSubspace.toNormedAddTorsor\", \"module\": \"Mathlib.Analysis.Normed.Group.AddTorsor\", \"type\": \" {V : Type u_2} {P : Type u_3} [SeminormedAddCommGroup V] [PseudoMetricSpace P] [NormedAddTorsor V P] {R : Type u_6} [Ring R] [Module R V] (s : AffineSubspace R P) [Nonempty ↥s] : NormedAddTorsor ↥s.direction ↥s\", \"doc\": \"A nonempty affine subspace of a `NormedAddTorsor` is itself a `NormedAddTorsor`.\"}\n  {\"name\": \"ContinuousAffineMap.instAddTorsor\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \" {R : Type u_1} {V : Type u_2} {W : Type u_3} {P : Type u_4} {Q : Type u_5} [Ring R] [AddCommGroup V] [Module R V] [TopologicalSpace P] [AddTorsor V P] [AddCommGroup W] [Module R W] [TopologicalSpace Q] [AddTorsor W Q] [TopologicalSpace W] [IsTopologicalAddGroup W] [IsTopologicalAddTorsor Q] : AddTo\", \"doc\": \"The space of continuous affine maps from `P` to `Q` is an affine space over the space of\\ncontinuous affine maps from `P` to `W`.\"}\n  {\"name\": \"AffineSubspace.instIsTopologicalAddTorsorSubtypeMemSubmoduleDirection\", \"module\": \"Mathlib.Topology.Algebra.AffineSubspace\", \"type\": \" {R : Type u_1} {V : Type u_2} {P : Type u_3} [Ring R] [AddCommGroup V] [Module R V] [TopologicalSpace P] [AddTorsor V P] [TopologicalSpace V] [IsTopologicalAddTorsor P] {s : AffineSubspace R P} [Nonempty ↥s] : IsTopologicalAddTorsor ↥s\", \"doc\": \"\"}\n  {\"name\": \"Convexity.IsAffineConvexSpace.ofAddTorsor\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.AffineSpace\", \"type\": \" {R : Type u_1} {V : Type u_2} {P : Type u_3} [Ring R] [PartialOrder R] [IsStrictOrderedRing R] [AddCommGroup V] [Module R V] [AddTorsor V P] : Convexity.IsAffineConvexSpace R V P\", \"doc\": \"\"}\n  {\"name\": \"AddTorsor.convexCombination_eq_affineCombination\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.AffineSpace\", \"type\": \" {R : Type u_1} {V : Type u_2} {P : Type u_3} [Ring R] [PartialOrder R] [IsStrictOrderedRing R] [AddCommGroup V] [Module R V] [AddTorsor V P] [Convexity.ConvexSpace R P] [Convexity.IsAffineConvexSpace R V P] (s : Convexity.StdSimplex R P) : Convexity.sConvexComb s = (Finset.affineCombination R s.wei\", \"doc\": \"**Alias** of `AddTorsor.sConvexComb_eq_affineCombination`.\\n\\n---\\n\\n`ConvexSpace.sConvexComb` in an affine space is the affine combination.\"}\n  {\"name\": \"AddTorsor.sConvexComb_eq_affineCombination\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.AffineSpace\", \"type\": \" {R : Type u_1} {V : Type u_2} {P : Type u_3} [Ring R] [PartialOrder R] [IsStrictOrderedRing R] [AddCommGroup V] [Module R V] [AddTorsor V P] [Convexity.ConvexSpace R P] [Convexity.IsAffineConvexSpace R V P] (s : Convexity.StdSimplex R P) : Convexity.sConvexComb s = (Finset.affineCombination R s.wei\", \"doc\": \"`ConvexSpace.sConvexComb` in an affine space is the affine combination.\"}\n  {\"name\": \"AddTorsor.iConvexComb_eq_affineCombination\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.AffineSpace\", \"type\": \" {R : Type u_1} {V : Type u_2} {P : Type u_3} {I : Type u_4} [Ring R] [PartialOrder R] [IsStrictOrderedRing R] [AddCommGroup V] [Module R V] [AddTorsor V P] [Convexity.ConvexSpace R P] [Convexity.IsAffineConvexSpace R V P] (s : Convexity.StdSimplex R I) (f : I → P) : Convexity.iConvexComb s f = (Fin\", \"doc\": \"\"}\n  {\"name\": \"ContinuousAffineMap.instIsTopologicalAddTorsor\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap.Topology\", \"type\": \" {R : Type u_1} {V : Type u_2} {W : Type u_3} {P : Type u_5} {Q : Type u_6} [NormedField R] [AddCommGroup V] [Module R V] [TopologicalSpace V] [AddTorsor V P] [TopologicalSpace P] [AddCommGroup W] [Module R W] [TopologicalSpace W] [AddTorsor W Q] [TopologicalSpace Q] [IsTopologicalAddTorsor P] [IsTo\", \"doc\": \"\"}\n  {\"name\": \"ContinuousAffineMap.instNormedAddTorsor\", \"module\": \"Mathlib.Analysis.Normed.Affine.ContinuousAffineMap\", \"type\": \" {𝕜 : Type u_1} {V : Type u_3} {W : Type u_4} {Q : Type u_6} [SeminormedAddCommGroup V] [SeminormedAddCommGroup W] [NontriviallyNormedField 𝕜] [NormedSpace 𝕜 V] [NormedSpace 𝕜 W] [PseudoMetricSpace Q] [NormedAddTorsor W Q] : NormedAddTorsor (V →ᴬ[𝕜] W) (V →ᴬ[𝕜] Q)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern pointwise additive torsors, affine-space constructors or flat morphisms, not sections of fppf scheme torsors on an affine base"
+  },
+  {
+   "tool": "grep",
+   "query": "GaTorsor|additive.*torsor|torsor.*additive|amitsur.*exact|exact.*amitsur",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/Analysis/Normed/Affine/AddTorsor.lean\", \"line\": \"19\", \"text\": \"This file contains lemmas about normed additive torsors over normed spaces.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Group/AddTorsor.lean\", \"line\": \"15\", \"text\": \"# Torsors of additive normed group actions.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Group/AddTorsor.lean\", \"line\": \"17\", \"text\": \"This file defines torsors of additive normed group actions, with a\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Group/AddTorsor.lean\", \"line\": \"31\", \"text\": \"/-- A `NormedAddTorsor V P` is a torsor of an additive seminormed group\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Intrinsic.lean\", \"line\": \"13\", \"text\": \"This file defines the intrinsic frontier, interior and closure of a set in a normed additive torsor.\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Basic.lean\", \"line\": \"191\", \"text\": \"@[to_additive /-- A product of `AddTorsor`s is an `AddTorsor`. -/]\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Basic.lean\", \"line\": \"261\", \"text\": \"/-- In the special case of additive commutative groups (as opposed to just additive torsors),\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Basic.lean\", \"line\": \"270\", \"text\": \"@[to_additive /-- Pullback of an add torsor along an injective map. -/]\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Basic.lean\", \"line\": \"281\", \"text\": \"@[to_additive /-- Pushforward of an add torsor along a surjective map. -/]\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"13\", \"text\": \"This file defines torsors of additive and multiplicative group actions.\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"24\", \"text\": \"Affine spaces are a motivating example of additive torsors. Additional simply transitive\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"35\", \"text\": \"* `p₁ -ᵥ p₂` is a notation for `VSub.vsub`, the difference between two points in an additive torsor\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"84\", \"text\": \"@[to_additive /-- An `AddGroup G` is a torsor for itself.-/]\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"93\", \"text\": \"@[to_additive (attr := simp) /-- Simplify subtraction for a torsor for an `AddGroup G` over\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"96\", \"text\": \"@[to_additive /-- Fibers of a quotient covering map by an additive group G is a G-torsor. -/]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Torsor.lean\", \"line\": \"15\", \"text\": \"This file defines topological torsors of additive and multiplicative groups, that is, torsors where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Torsor.lean\", \"line\": \"25\", \"text\": \"/-- A topological torsor over a topological additive group is a torsor where `+ᵥ` and `-ᵥ` are\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Torsor.lean\", \"line\": \"80\", \"text\": \"@[to_additive /-- The underlying group of a topological additive torsor is a topological additive\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Torsor.lean\", \"line\": \"141\", \"text\": \"@[to_additive instIsTopologicalAddTorsorProd]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ProperAction/Torsor.lean\", \"line\": \"21\", \"text\": \"@[to_additive /-- If `P` is a topological additive torsor over `V`, the additive action of `V` on\"}\n  {\"file\": \"Mathlib/Algebra/Notation/Defs.lean\", \"line\": \"64\", \"text\": \"  type-dependent, but it is intended to be used for additive torsors. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/NormedSpace.lean\", \"line\": \"435\", \"text\": \"Future: this could be generalised to functions into additive torsors over abelian Lie groups.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/NormedSpace.lean\", \"line\": \"448\", \"text\": \"Future: this could be generalised to functions into additive torsors over abelian Lie groups.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern pointwise additive torsors, affine-space constructors or flat morphisms, not sections of fppf scheme torsors on an affine base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every additive group scheme torsor over an affine scheme is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G : outParam (Type u_1)) → Type u_2 → [AddGroup G] → Type (max u_1 u_2)\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.noConfusion\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{P : Sort u} →\\n  {G : Type u_1} →\\n    {P_1 : Type u_2} →\\n      {inst : AddGroup G} →\\n        {t : AddTorsor G P_1} →\\n          {G' : Type u_1} →\\n            {P' : Type u_2} →\\n              {inst' : AddGroup G'} →\\n                {t' : AddTorsor G' P'} → G = G' → P_1 = P' → inst ≍ inst' → t ≍ t' → Ad\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.noConfusionType\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"Sort u →\\n  {G : Type u_1} →\\n    {P : Type u_2} →\\n      [inst : AddGroup G] →\\n        AddTorsor G P → {G' : Type u_1} → {P' : Type u_2} → [inst' : AddGroup G'] → AddTorsor G' P' → Sort u\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.nonempty\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"∀ {G : outParam (Type u_1)} {P : Type u_2} {inst : AddGroup G} [self : AddTorsor G P], Nonempty P\", \"doc\": \"Any additive torsor for an additive group is non-empty, meaning the underlying type must contain at least one element.\"}\n  {\"name\": \"AddTorsor.mk\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{G : outParam (Type u_1)} →\\n  {P : Type u_2} →\\n    [inst : AddGroup G] →\\n      [toAddAction : AddAction G P] →\\n        [toVSub : VSub G P] →\\n          [nonempty : Nonempty P] →\\n            (∀ (p₁ p₂ : P), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁) → (∀ (g : G) (p : P), (g +ᵥ p) -ᵥ p = g) → AddTorsor G P\", \"doc\": \"Given an additive group $ G $, a non-empty type $ P $ with an additive action of $ G $ and a vector subtraction operation, if for all $ p_1, p_2 \\\\in P $, $ (p_1 - p_2) + p_2 = p_1 $ and for all $ g \\\\i\"}\n  {\"name\": \"AddTorsor.subsingleton_iff\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G P : Type*) [AddGroup G] [AddTorsor G P] : Subsingleton G ↔ Subsingleton P\", \"doc\": \"For an additive group $ G $ and an additive torsor $ P $ over $ G $, $ G $ is a subsingleton if and only if $ P $ is a subsingleton.\"}\n  {\"name\": \"addGroupIsAddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G : Type*) [AddGroup G] : AddTorsor G G\", \"doc\": \"For any additive group $G$, the group $G$ acts freely and transitively on itself via its addition operation, making $G$ an additive torsor for itself. This is established by defining vector subtractio\"}\n  {\"name\": \"AddTorsor.toAddAction\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{G : outParam (Type u_1)} → {P : Type u_2} → {inst : AddGroup G} → [self : AddTorsor G P] → AddAction G P\", \"doc\": \"Given an additive torsor $P$ for an additive group $G$, this constructs the additive monoid action of $G$ on $P$ by restricting the torsor's free and transitive group action to the additive monoid str\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern pointwise additive torsors, affine-space constructors or flat morphisms, not sections of fppf scheme torsors on an affine base"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-solvable-torsors-and-variety",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Zariski splitting of solvable torsors and the underlying solvable variety. Supporting lemma: Example 2.72, printed p.61, the additive torsor assertion for an arbitrary k-algebra R_0, using the exact faithfully flat additive Cech complex.",
+   "via": [
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-affine-torsor-section",
+  "worker": "stage1",
+  "summary": "Q06 checked Milne Example 2.72 and Stacks 022C, 022E, 01U5, 00HQ, 023M and 023Q. Wrote the additive difference cocycle, its coboundary with explicit sign, the corrected local section, and descent including the section equation. Reused existing DAG lemmas throughout; no new nodes and no statement change. Searched upstream declarations and Mathlib; no exact attachment or Mathlib match.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) branch through split solvable torsors; specifically Milne Example 2.72 used in lem-sfb-split-solvable-torsors-and-variety. The latest blueprint direct-images proof (3) and unit were read. The inherited from.node is null because the created.item chain ends at the module item Sheaf.SixFunctors.CtfStabilityDirectImages; its explicit place and via lineage are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic comparison of covering notions turns the hypothesis into an fpqc cover. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-galois-fpqc-singleton-affine-refinement",
+    "why": "Generic affine refinement supplies an affine cover and a map into P without assuming P affine. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine criterion converts scheme flatness into flatness of A to B. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "why": "Generic ring criterion supplies faithful flatness from flatness and surjectivity. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic tensor description of affine fibre products identifies the Cech coordinate rings and projections. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-pc-cech-exact",
+    "why": "Generic exactness of the faithfully flat Amitsur complex supplies the primitive of the additive cocycle. The unit does not replace this general descent/algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic morphism descent glues the corrected local point and proves the section equation by uniqueness. The unit does not replace this general descent/algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-cech-exact",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-ef1c8c310",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-ef1c8c310 (reviewer sub-agent of L); spot-checked: Stage-1 split of lem-sfb-additive-affine-torsor-section with no new nodes and no statement or stmt_deps change. Source: Milne iAG2017 Def 2.66, Ex 2.67 and Ex 2.72 (printed pp.60-61). The item is exactly the G_a case of Ex 2.72; finite presentation supplies the local point that Milne assumes. Step 1: def-pc-fppf-site, then 022C (fppf covering is fpqc), then 022E refinement (S affine, no hypothesis on P, m=0 allowed), then 01U5 and 00HQ give A->B faithfully flat. Step 2: the difference cocycle c comes from the inverse torsor iso and k-morphisms to Spec k[t] are ring elements; the cocycle identity c13=c12+c23 holds as an identity of morphisms, so it is valid over non-reduced A. Step 3: lem-pc-cech-exact with M=A gives c=1⊗b-b⊗1. I re-derived the sign: t=h-b satisfies t2=h1+c-b2=h1-b1=t1. Step 4: 023Q existence (target P) gives e, and uniqueness (target S) gives f∘e=id. Small cases checked: A=0, the trivial torsor (sign confirmed), k[ε]/ε², char p. Duplicate search found nothing that states the item (fppf qcoh-acyclic, Cech-vanishing and relative-torsor nodes are different statements). The citer split-solvable-torsors uses the statement as stated. Batch-5: lem-trf-fppf-covering-is-fpqc is the generic Stacks 022C mathlib leaf with definition-only deps, not part of the trace formula or Poincaré duality statements or proofs, so it is accepted. All seven tool_uses are accepted as generic descent/algebra tools. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveAffineTorsorSection",
+  "declaration": "AlgebraicGeometry.additive_affine_torsor_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveAffineTorsorSection.lean",
+  "statement": "theorem additive_affine_torsor_section {k : Type u} [Field k] (A : Type u) [CommRing A] [Algebra k A] (P : RepresentedRightTorsor (Grp.mk (StandardGroupSchemes.additive k)) (StandardGroupSchemes.affine k A)) : ∃ e : StandardGroupSchemes.affine k A ⟶ P.space, e ≫ P.projection = 𝟙 (StandardGroupSchemes.affine k A)",
+  "branch": "sheaf-dag",
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87a5b5d0c",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Clause-by-clause match against RepresentedRightTorsor (SplitSolvableTorsorDefinitions.lean:49-61): flat/surjective/lfp+qc+qs, right action laws, IsPullback(fst, action, proj, proj) = (p,a)->(p,p+a) iso and action over S; G_a = additive k with pinned additiveGroup; S = affine k A; conclusion e ≫ proj = 𝟙 (S-section, no uniqueness). No extra hypotheses; the shared universe comes from the recorded Spec interface. Edge cases A=0, trivial torsor, nonreduced, char p, non-affine P covered. Item diff vs live: lean record + stmt_dep def-sfb-split-solvable-right-torsors (landed, reviewed 2026-10-23, acyclic); statement unchanged; lean.statement verbatim; one sorry theorem, no defs; docstrings carry source, blueprint and 4 proof steps; report sections present. No duplicate found; no competing landing. Advisory: plain Mathlib imports for proof_deps without lean records. No files changed, no compile run."
+ }
+}

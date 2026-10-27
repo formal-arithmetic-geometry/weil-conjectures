@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-derived-scalar-canonical-exact-structures",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Scalar-mate subargument of direct-image proof paragraph (3): Canonical exact structures and shift compatibility of the restricted scalar mate",
+   "via": [
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical exact structures and shift compatibility of the restricted scalar mate",
+ "statement": "Let $f:Z\\to T$ be a morphism of schemes and let $a:A\\to B$ be a homomorphism of commutative ring sheaves on $T_{\\mathrm{proet}}$. Put $A_Z=f^{-1}A$, $B_Z=f^{-1}B$ and $a_Z=f^{-1}a$. Use module sheaves and ordinary unbounded derived categories. Let $t,z$ be signed-total tensor presentations on $D(A)$ and $D(A_Z)$, respectively. Let $T_T,T_Z$ be the canonical derived scalar extensions for $a,a_Z$, and let $r_T$ be scalar restriction. Use the normalized scalar/tensor identifications and the prescribed geometric adjunction mate $\\beta$ [lem-sfb-derived-scalar-tensor-identification]. Write $F=T_T\\circ Rf_{*,A}$ and $H=Rf_{*,B}\\circ T_Z$. There exist coherent integer shift structures on the two tensor bifunctors, normalized on flat-term K-flat representatives by the signed-total shifts (including the unsigned first-factor shift), a shift on $Rf_{*,A}$ compatible with the fixed geometric pullback shift and its adjunction, and shift structures on $r_TF$ and $r_TH$, such that the specified sourceIso and targetIso commute with shifts, both restricted functors are triangulated, and the prescribed restricted scalar mate $r_T\\beta$ commutes with every integer shift [def-weil-triangulated-category]. These are exactly CanonicalTensorShifts and the CommShift structures in the attached declaration. This asserts neither the projection equality nor any isomorphism-locus closure; those are separate arguments.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-four-corners",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct a normalized global tensor model on each native pro-etale site using tensorModelWithShifts_nonempty. Its TensorShifts fields give MateCanonicalShiftData by canceling the shifted inverse representative. The resolving descent bijection lifts the isomorphism from the prescribed representative of t (respectively z) to this model. Apply mateTensorShiftOfIso and mateCanonicalShiftTransport to transfer coherent tensor shifts and both signed representative normalizations to t and z. These are private proved helpers normalized_global and native_shifts in the attached module.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-global-model",
+    "lem-weil-pbc-proetale-projection-global-comparison",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the fixed exact-derived pullback shift and install Adjunction.rightAdjointCommShift and commShift_of_leftAdjoint. Apply the native first-variable projection theorem at P=Q(coefficientComplex a) to get exact projection functors and the shift-compatible transformation pi with its prescribed projection components.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sfb-proetale-projection-first-variable-exact",
+    "lem-sfb-derived-scalar-tensor-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the two projection functor shifts backwards along sourceIso and targetIso using Functor.CommShift.ofIso. Its compatibility theorem gives CommShift for the inverse isomorphisms, hence also the forward isomorphisms. Functor.isTriangulated_of_iso transports both exactness statements. The scalar projection normalization and cancellation of the two component isomorphisms prove that restricted beta equals sourceIso.hom followed by pi followed by targetIso.inv. Closure of CommShift under composition gives the final assertion, with no invertibility of beta.",
+   "uses": [
+    "lem-sfb-derived-scalar-projection-normalization",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-global-model",
+  "lem-weil-pbc-proetale-projection-global-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sfb-proetale-projection-first-variable-exact",
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-sfb-derived-scalar-projection-normalization",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0B56: construct normalized tensor shifts, use the native first-variable projection argument, and transport exactness and shift compatibility through the prescribed scalar tensor isomorphisms (H1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar extension and direct image comparison commutes with shifts as a natural transformation between exact functors",
+   "results": "CategoryTheory.NatTrans.CommShiftCore.shift_app_comm; CategoryTheory.NatTrans.CommShift.shift_comm; CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized unbounded derived sheaf-ring comparison; ordinary maps and generic shift infrastructure do not supply its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar tensor comparison is compatible with the canonical shifts on derived categories",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Tor_map",
+   "date": "2026-10-27",
+   "verdict": "No exact match. The project already defines the scalar adjunctions and tensor presentations; this node isolates their remaining compatibility calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(projection|shift)|projection.*scalar|tensor.*(changeOfRings|restrictScalars)",
+   "results": "Broad Mathlib grep returned 25 hits, including Algebra/Algebra/Epi.lean, RingTheory/PicardGroup.lean, RingTheory/Localization/BaseChange.lean and RingTheory/IsTensorProduct.lean. These concern ordinary linear tensor maps. Targeted grep of Mathlib sheaf modules, DerivedCategory and Adjunction found no normalized derived scalar projection/shift comparison. Project and DAG matches are the parent and its constant/condensed specializations; isoLocus supplies only categorical closure.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Blueprint search for scalar projection normalization returned zero nodes; the parent supplies precisely the argument split here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarMateExactStructures",
+  "file": "lean/Sheaf/Paper/DerivedScalarMateExactStructures.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarMate_canonical_exact_structures",
+  "statement": "theorem scalarMate_canonical_exact_structures\n    {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (t : ProEtaleTensorModel T A) (z : ProEtaleTensorModel Z (inverseRing f A)) :\n    (∃ (_ : (Functor.curryObj t.tensor).CommShift₂Int)\n        (_ : (Functor.curryObj z.tensor).CommShift₂Int)\n        (_ : (push f A).CommShift ℤ)\n        (_ : ((push f A ⋙ proEtaleRingDerivedExtension a) ⋙\n          (restriction a).mapDerivedCategory).CommShift ℤ)\n        (_ : ((proEtaleRingDerivedExtension (inverseMap f a) ⋙ push f B) ⋙\n          (restriction a).mapDerivedCategory).CommShift ℤ),\n      CanonicalTensorShifts t ∧ CanonicalTensorShifts z ∧\n      (adjunction f A).CommShift ℤ ∧\n      NatTrans.CommShift (sourceIso f a t).hom ℤ ∧\n      NatTrans.CommShift (targetIso f a z).hom ℤ ∧\n      ((push f A ⋙ proEtaleRingDerivedExtension a) ⋙\n        (restriction a).mapDerivedCategory).IsTriangulated ∧\n      ((proEtaleRingDerivedExtension (inverseMap f a) ⋙ push f B) ⋙\n        (restriction a).mapDerivedCategory).IsTriangulated ∧\n      NatTrans.CommShift (Functor.whiskerRight (beta f a)\n        (restriction a).mapDerivedCategory) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "worker": "stage3",
+  "summary": "Extract a strictly smaller part of the already reviewed scalar-mate plan. No hypothesis is added, no canonical map is changed, and no thickness conclusion is assumed.",
+  "blueprint": "Retain the original small-pro-etale scalar-comparison argument used in the direct-image step (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d53ab",
+  "group": "H6",
+  "result": "fix",
+  "landing": "20261027T050605-L-241597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T064453-L-2184180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

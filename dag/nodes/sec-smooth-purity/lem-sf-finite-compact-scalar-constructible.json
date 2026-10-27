@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-finite-compact-scalar-constructible",
+ "kind": "statement",
+ "title": "Invertibility of the intrinsic compact scalar transpose on bounded constructible input",
+ "statement": "Let A and B be finite commutative rings, phi:A -> B a ring homomorphism, and c=(j,p) a compactification [def-weil-compactifications-refinements] of f:X -> Y with c.Z and Y Noetherian. Define the intrinsic scalar mate as the scalar-adjunction transpose of the specified compact-support restriction comparison [def-finite-compact-scalar-transport-data]. If K in D(X_proet,A) [def-weil-pbc-proetale-modules] has intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf] supported in finitely many degrees, and K tensor_A^L B has cohomology supported in finitely many degrees, then this intrinsic scalar mate at K is invertible. No constructibility of the scalar extension and no flatness of phi are assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "def-finite-compact-scalar-transport-data",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Finite cohomological support has a lower and an upper bound, also when it is empty. Apply the finite-ring essential-image criterion to choose a bounded constructible etale antecedent G and its intrinsic realization isomorphism eG to K. The antecedent is used only up to that isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Let GB be the actual etale derived scalar extension of G. The specified siteScalarIso followed by scalar extension of eG identifies the intrinsic realization of GB with the scalar extension of K. Transport a cohomological interval along this isomorphism and reflect it using the interval equivalence of the finite-ring comparison theorem. Thus GB is bounded below, and G already is bounded below.",
+   "uses": [
+    "def-finite-compact-scalar-transport-data",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Expand the scalar transpose using its unit equation. Apply intrinsicCompactScalarIsoOfOrigin_hom with G and GB regarded as D+ objects and the identity scalar comparison. Its right side is the hom of an explicitly constructed isomorphism, so the intrinsic scalar mate at the realization of G is invertible.",
+   "uses": [
+    "lem-finite-compact-support-scalar-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Naturality at eG identifies the mate at K, composed with the scalar compact-support image of eG, with the known invertible mate followed by compact support of scalar extension of eG. These other factors are isomorphisms. Cancel them to obtain invertibility at K.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-finite-compact-scalar-transport-data",
+  "lem-finite-compact-support-scalar-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Invertibility of the intrinsic compact scalar transpose on bounded constructible input; explicit refinement of the assigned node proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with proper direct image on bounded constructible etale complexes over finite coefficient rings",
+   "results": "8 results: ordinary ModuleCat extension/restriction/coextension adjunctions, localization linear equivalences, formal etaleness and AlgHom.extendScalars. None supplies the intrinsic compact scalar mate or the system evaluation square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support scalar change is an isomorphism for bounded constructible finite coefficient sheaves",
+   "results": "8 results on condensed module solidification and locally constant module realization; no compact-support scalar evaluation result.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans.app",
+   "results": "12 generic natural-isomorphism and naturality results, including NatIso.hom_app_isIso and NatTrans.isIso_iff_isIso_app. These supply isomorphism calculus only.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Ss]calar|[Ss]calar.*compact",
+   "results": "8 Mathlib hits concern compact spectra, Haar scalars and derivatives. No sheaf comparison. Project search finds proved FiniteCompactSupportScalarTransport and generic SemilinearSections.evaluation_mate but no intrinsic bounded-constructible specialization or unconditional systemCompactScalar evaluation square. Whole-blueprint search returns 0 matching nodes.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing transport and calculus; new specialization and evaluation square needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportSystemScalarFiniteInvertible",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support and final paragraphs: Invertibility of the intrinsic compact scalar transpose on bounded constructible input",
+   "via": [
+    "lem-sf-compact-support-system-scalar-finite-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactScalarConstructible",
+  "file": "lean/Sheaf/Paper/FiniteCompactScalarConstructible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.intrinsicCompactScalar_isIso_of_constructible",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteCompactScalar.intrinsicCompactScalar_isIso_of_constructible",
+   "AlgebraicGeometry.Scheme.FiniteCompactScalar.intrinsicCompactScalar"
+  ],
+  "statement": "theorem intrinsicCompactScalar_isIso_of_constructible {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) [IsNoetherian c.Z] [IsNoetherian Y] (K : proEtaleDerivedCategory X A) (hK : Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj K)}) (hc : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X A ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) i).obj K)) (hS : Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X B)) i).obj ((pbcDerivedExtend (scalarRingMap φ X)).obj K))}) : IsIso ((intrinsicCompactScalar φ c).app K)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T034734-L-3680588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T034734-L-3680588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

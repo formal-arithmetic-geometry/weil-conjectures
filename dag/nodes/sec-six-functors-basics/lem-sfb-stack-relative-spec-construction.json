@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-stack-relative-spec-construction",
+ "kind": "statement",
+ "title": "Relative spectra of quasi-coherent algebras over algebraic stacks",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal Z$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack], and let $\\mathcal C$ be a quasi-coherent commutative $\\mathcal O_{\\mathcal Z}$-algebra [def-sfb-stack-quasi-coherent-algebra]. Schemes, algebraic spaces and $2$-fibre products use [def-pc-scheme, def-trf-algebraic-space, def-sfb-stable-pointed-moduli-groupoids]. Define a fibred groupoid $V$ whose objects over a scheme $T$ are pairs $(z,\\alpha)$ with $z\\in\\mathcal Z(T)$ and an $\\mathcal O_T$-algebra map $\\alpha:z^*\\mathcal C\\to\\mathcal O_T$; its arrows are arrows of $\\mathcal Z$ compatible with these algebra maps. Then $V$ is an algebraic stack, and the projection $q:V\\to\\mathcal Z$ is representable by schemes and affine: for every scheme $u:T\\to\\mathcal Z$, the $2$-fibre product $V\\times_{\\mathcal Z}T$ is the scheme $\\underline{\\operatorname{Spec}}_T(u^*\\mathcal C)$ obtained by gluing $\\operatorname{Spec}((u^*\\mathcal C)(U))$ over affine opens $U\\subseteq T$ [def-weil-affine-spectrum, pqf-def-affine-morphism]. Formation of $V$, including this identification, commutes with arbitrary base change of algebraic stacks by tensor pullback of $\\mathcal C$. The tautological map induces an isomorphism of quasi-coherent algebras $\\mathcal C\\xrightarrow{\\sim}q_{\\mathrm{QCoh},*}\\mathcal O_V$, where the right adjoint has the meaning and smooth-test interpretation of [lem-sfb-stack-affine-algebra-direct-image]. Consequently $\\Gamma(\\mathcal Z,\\mathcal C)\\xrightarrow{\\sim}\\Gamma(V,\\mathcal O_V)$ is the ring map induced by the tautological evaluation. The construction is contravariantly functorial in algebra maps. If $\\mathcal Z$ is an algebraic space, $V$ is an algebraic space and is its relative spectrum $\\operatorname{Spec}_{\\mathcal Z}(\\mathcal C)$ in the sense of [lem-sfb-space-relative-spec-correspondence]. No finiteness, flatness or reducedness hypothesis on $\\mathcal C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LX (lemma-spec-properties), together with morphisms.tex Tag 01SA (lemma-affine-equivalence-algebras); extension by scheme tests to stacks uses algebraic.tex Tag 05UM (lemma-representable-morphism-to-algebraic). Algebraic-space case: spaces-morphisms.tex Tag 081V (lemma-affine-equivalence-algebras), Tag 081W (definition-relative-spec)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "lem-sfb-stack-affine-algebra-direct-image",
+  "lem-sfb-space-relative-spec-correspondence"
+ ],
+ "proof": [
+  {
+   "text": "For an object $z\\in\\mathcal Z(T)$ write $C_z$ for its ordinary quasi-coherent algebra on $T$. The scheme-test restriction theorem identifies $C_z$ and all its algebra operations with the restriction of $\\mathcal C$: its fully faithful tensor-compatible comparison carries the multiplication and unit to the ordinary ones. For an arrow $z'\\to z$ over $h:T'\\to T$ it gives $h^*C_z\\simeq C_{z'}$, with identity and composition compatibility. Pull a pair $(z,\\alpha)$ back to $(z',h^*\\alpha)$, identifying $h^*\\mathcal O_T$ with $\\mathcal O_{T'}$. The compatible arrows define a category fibred in groupoids $V$: a cartesian lift in $\\mathcal Z$ with this pulled-back algebra map is a lift in $V$, and the unique factorization of arrows in $\\mathcal Z$ also preserves these algebra maps. Forgetting $\\alpha$ defines $q$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WI (lemma-characterize-quasi-coherent), 06WK (lemma-quasi-coherent), 06WH (lemma-pullback-quasi-coherent); fibred-category pullback of the evaluation data"
+   }
+  },
+  {
+   "text": "Fix $u:T\\to\\mathcal Z$ and let $A=C_u$. The scheme anti-equivalence gives an affine $p:X=\\underline{\\operatorname{Spec}}_T(A)\\to T$ with $A\\simeq p_*\\mathcal O_X$, whose inverse image over an affine open $U$ is $\\operatorname{Spec}(A(U))$. For any $h:W\\to T$, scheme relative-Spec base change identifies $X\\times_TW$ with $\\underline{\\operatorname{Spec}}_W(h^*A)$. A $T$-map $W\\to X$ is exactly a section of this base change. Apply the fully faithful anti-equivalence over $W$ to this section: the identity $W\\to W$ corresponds to $\\mathcal O_W$, so sections correspond bijectively to $\\mathcal O_W$-algebra maps $h^*A\\to\\mathcal O_W$. Both directions are the section maps specified by the anti-equivalence. Under a further pullback they pull back that same algebra map, since the canonical scheme base-change comparison is defined by the structure-sheaf map. Thus the bijection is natural in $W$ and the universal section map is the displayed $A\\simeq p_*\\mathcal O_X$. This derives the needed universal property rather than assuming that an anti-equivalence restricted to affine objects already states it for an arbitrary $W$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LX (lemma-spec-properties), 01LW (definition-relative-spec), 01LT (lemma-spec-affine); morphisms.tex Tag 01SA (lemma-affine-equivalence-algebras)"
+   }
+  },
+  {
+   "text": "Over a scheme $W$, an object of $V\\times_{\\mathcal Z}T$ is $((z,\\alpha),h:W\\to T,\\theta:z\\xrightarrow{\\sim}h^*u)$. Use $\\theta$ and the scheme-test tensor comparison to carry $\\alpha$ to $\\beta:h^*C_u\\to\\mathcal O_W$. Conversely $(h,\\beta)$ gives the object $((h^*u,\\beta),h,1)$. Every original object has a unique arrow to this normalized object compatible with its specified $\\theta$; two normalized objects have an arrow over the identity of $W$ exactly when $h$ and $\\beta$ agree, and then the arrow is the identity. These operations commute with pullbacks by the composition compatibility in step 1. Step 2 therefore gives an equivalence over $T$ with the discrete fibred groupoid of the scheme $X$. In particular no stabilizers of $\\mathcal Z$ survive this fibre product: the isomorphism $\\theta$ is part of its data.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "The pair functor in section-spec and Tag 01LX; algebraic.tex Tag 05UN (lemma-open-fibred-category-is-algebraic), scheme-test hypothesis"
+   }
+  },
+  {
+   "text": "Step 3 proves representability by schemes, and the scheme projections are affine by step 2. Regard those schemes as algebraic spaces. The representable-source algebraicity theorem applies to the morphism of fibred categories $q$ and the algebraic target $\\mathcal Z$, giving that $V$ is an algebraic stack; its statement explicitly requires no prior stack hypothesis on $V$. Only its first assertion is used, so neither local finite presentation of $q$ nor of $\\mathcal Z$ is needed. The affine-chart descriptions in step 2 are exactly the requested gluing description.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-representable-source-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic), applying Tag 05UM (lemma-representable-morphism-to-algebraic)"
+   }
+  },
+  {
+   "text": "Let $b:\\mathcal Z'\\to\\mathcal Z$ be any map of algebraic stacks. An object of $V\\times_{\\mathcal Z}\\mathcal Z'$ is a pair $(z',\\alpha)$ after eliminating its specified isomorphism as in step 3; now $\\alpha:(z')^*b^*\\mathcal C\\to\\mathcal O_T$. This is precisely the construction for $(\\mathcal Z',b^*\\mathcal C)$, since scheme-test restriction identifies precomposition with tensor pullback. The two equivalences are inverse on normalized objects and on their arrows. On a scheme $T\\to\\mathcal Z'$ the resulting scheme identification is the one of step 2 for the same evaluation map. After a further scheme base change it is the canonical scheme relative-Spec comparison, not an independently chosen isomorphism. For an algebra map $\\varphi:\\mathcal C\\to\\mathcal D$, send $(z,\\alpha:z^*\\mathcal D\\to\\mathcal O_T)$ to $(z,\\alpha\\circ z^*\\varphi)$. Identity and composition hold by substitution, and this operation commutes with the preceding base-change equivalence.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LS (lemma-spec-base-change), Tag 01LX (lemma-spec-properties); stacks-sheaves.tex Tag 06WH (lemma-pullback-quasi-coherent)"
+   }
+  },
+  {
+   "text": "At an object $(z,\\alpha)$ of $V$, evaluate a section of $C_z$ by $\\alpha$. Compatibility of the arrows of $V$ makes these maps a morphism of algebra sheaves $q^*\\mathcal C\\to\\mathcal O_V$; the scheme-test comparison identifies its source with the stated tensor pullback. Since $q$ is now an affine map of algebraic stacks, the algebra adjunction gives $\\eta:\\mathcal C\\to B:=q_{\\mathrm{QCoh},*}\\mathcal O_V$. On a smooth scheme test $u:T\\to\\mathcal Z$, the direct-image theorem identifies $B_u$ with $p_*\\mathcal O_X$ for the affine scheme $X$ of step 2. Under this comparison the adjunct of evaluation is the universal algebra map $C_u\\to p_*\\mathcal O_X$, hence the isomorphism of the scheme anti-equivalence. In particular $\\eta_u$ is an isomorphism of ordinary quasi-coherent algebras on every such smooth test.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stack-affine-algebra-direct-image",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX (lemma-spec-properties)(3); stacks-cohomology.tex Tags 077A (proposition-direct-image-quasi-coherent), 0GQQ (lemma-direct-image-quasi-coherent-over-flat)"
+   }
+  },
+  {
+   "text": "To pass from smooth tests to the big-site sheaf, choose a smooth surjective scheme atlas $a:U\\to\\mathcal Z$. For any object $z:T\\to\\mathcal Z$, the algebraic space $P=T\\times_{\\mathcal Z}U$ has an etale scheme cover $\\{W_i\\to P\\}$. Base-change and composition of smooth and surjective representable morphisms make $\\{W_i\\to T\\}$ a jointly surjective smooth family. The map $\\eta$ restricted to each $W_i$ is the tensor pullback of the isomorphism $\\eta_a$ along $W_i\\to U$, by scheme-test restriction. The same holds on $W_i\\times_TW_j$ by pulling back from $W_i$. Apply smooth-cover section descent on the scheme $T$ to the two quasi-coherent algebras $C_z$ and $B_z$ (viewed on its big fppf site by the slice comparison). Their section rings are the equalizers on this family, and $\\eta$ gives isomorphisms of all the displayed rings and the overlap rings. It therefore gives a bijection $\\mathcal C(z)=\\Gamma(T,C_z)\\to B(z)=\\Gamma(T,B_z)$. This holds for every $z$, and the inverses commute with restrictions because $\\eta$ does. Thus $\\eta$ is an isomorphism of algebra sheaves. This argument also covers the empty scheme and uses no quasi-compactness of the atlas or of the relations.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-smooth-cover-section-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076S (lemma-map-from-quasi-coherent), smooth-cover descent of sections; Tag 06WK (lemma-quasi-coherent), cartesian scheme restrictions"
+   }
+  },
+  {
+   "text": "Taking global sections of $\\eta$ and then using the natural ring isomorphism $\\Gamma(\\mathcal Z,q_{\\mathrm{QCoh},*}\\mathcal O_V)\\simeq\\Gamma(V,\\mathcal O_V)$ gives the asserted isomorphism. It is the tautological evaluation map: the adjunct was defined in step 6 by the evaluation at every pair $(z,\\alpha)$, and the global-section comparison is the one from this adjunction. Multiplication and algebra maps are preserved by that comparison; its naturality and the substitution formula in step 5 give the claimed functoriality also for global sections.",
+   "uses": [
+    "lem-sfb-stack-affine-algebra-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 077A (proposition-direct-image-quasi-coherent), adjunction; Tag 0GQR (remark-direct-image-quasi-coherent-tensor)"
+   }
+  },
+  {
+   "text": "Finally suppose $\\mathcal Z$ is an algebraic space. An automorphism of $(z,\\alpha)$ in $V(T)$ projects to an automorphism of $z$, hence is the identity, because the space has discrete fibre groupoids. The algebraic-setoid theorem identifies $V$ with an algebraic space. Its morphism to $\\mathcal Z$ is affine by step 3. On an affine etale chart $u:T\\to\\mathcal Z$, step 2 identifies its structure algebra with $C_u$ by the tautological map. The scheme Zariski/etale quasi-coherent equivalence identifies this with the restriction of the algebra on $\\mathcal Z_{\\mathrm{et}}$; restriction to affine etale charts and their arrows gives the same section maps. Thus $q_*\\mathcal O_V$ on that site is the given algebra. The algebraic-space anti-equivalence identifies this affine space with $\\operatorname{Spec}_{\\mathcal Z}(\\mathcal C)$ and identifies the arrow associated to $\\varphi$ with $\\operatorname{Spec}(\\varphi_T)$ on every affine etale chart, as in step 5. All previous arguments applied to arbitrary quasi-coherent algebras and arbitrary tensor pullbacks, so no finite generation, flatness, or reducedness restriction has entered.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-algebraic-setoid-space",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04SZ (proposition-algebraic-stack-no-automorphisms); spaces-morphisms.tex Tags 081V (lemma-affine-equivalence-algebras), 081W (definition-relative-spec)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-stack-representable-source-algebraic",
+  "lem-sfb-stack-affine-algebra-direct-image",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-cover-section-descent",
+  "lem-sfb-algebraic-setoid-space",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01LX/01SA, extended by the explicit scheme-test argument with 05UN/05UM, 06WK and 076S; no single cited source states the full stack version."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative spectrum construction on an algebraic stack has affine projection and pushforward structure algebra equal to the given quasi coherent algebra",
+   "results": "{\"t\": \"2026-10-23T12:56:30Z\", \"tool\": \"leansearch\", \"query\": \"Relative spectrum construction on an algebraic stack has affine projection and pushforward structure algebra equal to the given quasi coherent algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\"], \"digest\": \"dc97a2a1ad52de6a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Spec\", \"Algebra\"",
+   "results": "{\"t\": \"2026-10-23T12:56:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Spec\\\", \\\"Algebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"spectrum.subset_subalgebra\", \"spectrum.preimage_algebraMap\", \"spectrum.algebraMap_mem\", \"spectrum.of_algebraMap_mem\", \"spectrum.algebraMap_mem_iff\", \"SpectrumRestricts.algebraMap_image\", \"SpectrumRestricts.of_subset_range_algebraMap\", \"QuasispectrumRestricts.of_subset_range_algebraMap\"], \"digest\": \"17cc36888a2d8f26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on algebraic stacks correspond to affine representable morphisms via relative spectrum",
+   "results": "{\"t\": \"2026-10-23T12:56:31Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent algebras on algebraic stacks correspond to affine representable morphisms via relative spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.essImage_Spec\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.AffineScheme.Spec_full\", \"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.isAffine_affineScheme\"], \"digest\": \"a63e64cd06495614\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|relativeSpec|relative_spec|affine_equivalence_algebras",
+   "results": "{\"t\": \"2026-10-23T13:00:33Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|relativeSpec|relative_spec|affine_equivalence_algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Spec represents maps from a scheme into an algebraic stack with an algebra homomorphism from the pulled back quasi coherent algebra to its structure sheaf",
+   "results": "{\"t\": \"2026-10-23T13:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Spec represents maps from a scheme into an algebraic stack with an algebra homomorphism from the pulled back quasi coherent algebra to its structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Spec\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.Spec.preimage\", \"AlgebraicGeometry.Spec.map\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"AlgebraicGeometry.Spec.homEquiv\"], \"digest\": \"e5332347c9d158fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|relativeSpec|relative_spec",
+   "results": "{\"t\": \"2026-10-23T14:13:53Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|relativeSpec|relative_spec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Spec\", \"Algebra\"",
+   "results": "{\"t\": \"2026-10-23T14:13:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Spec\\\", \\\"Algebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"spectrum.subset_subalgebra\", \"spectrum.preimage_algebraMap\", \"spectrum.algebraMap_mem\", \"spectrum.of_algebraMap_mem\", \"spectrum.algebraMap_mem_iff\", \"SpectrumRestricts.algebraMap_image\", \"SpectrumRestricts.of_subset_range_algebraMap\", \"QuasispectrumRestricts.of_subset_range_algebraMap\"], \"digest\": \"17cc36888a2d8f26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum of a quasi coherent algebra over an algebraic stack is representable affine and compatible with base change",
+   "results": "{\"t\": \"2026-10-23T14:13:54Z\", \"tool\": \"leanfinder\", \"query\": \"Relative spectrum of a quasi coherent algebra over an algebraic stack is representable affine and compatible with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.AffineScheme.Spec_full\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.Scheme.Spec\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.AffineScheme.Spec\", \"AlgebraicGeometry.instCategoryAffineScheme\", \"AlgebraicGeometry.AffineSpace\"], \"digest\": \"89c31369597a793f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Spec of a quasi coherent algebra on an algebraic stack represents algebra homomorphisms to the structure sheaf",
+   "results": "{\"t\": \"2026-10-23T14:15:56Z\", \"tool\": \"leansearch\", \"query\": \"Relative Spec of a quasi coherent algebra on an algebraic stack represents algebra homomorphisms to the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"AlgebraicGeometry.Spec.fullyFaithful\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace\", \"AlgebraicGeometry.instFullOppositeCommRingCatLocallyRingedSpaceToLocallyRingedSpace\", \"AlgebraicGeometry.toSpecΓ\"], \"digest\": \"f9f4a040a62358fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine morphisms over an algebraic stack correspond contravariantly to quasi coherent commutative algebras",
+   "results": "{\"t\": \"2026-10-23T14:15:58Z\", \"tool\": \"leanfinder\", \"query\": \"Affine morphisms over an algebraic stack correspond contravariantly to quasi coherent commutative algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty_apply\", \"AlgebraicGeometry.instCategoryAffineScheme\", \"AlgebraicGeometry.AffineScheme.Γ\"], \"digest\": \"d76ee7ac97785c19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem homEquiv|def homEquiv|Spec.full|ΓIsEquiv|instHasAffinePropertyIsAffineHomIsAffine",
+   "results": "{\"t\": \"2026-10-23T14:50:51Z\", \"tool\": \"grep\", \"query\": \"theorem homEquiv|def homEquiv|Spec.full|ΓIsEquiv|instHasAffinePropertyIsAffineHomIsAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"159536772bb5c519\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme spectra or spectral theory, not relative spectra over algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-relative-spectrum",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: Alper Lemma 5.2.11 applied to the integral-closure algebra on the target stack. Relative-spectrum input: representability, algebraicity, base change and the structure-algebra identification before applying power lifting.",
+   "via": [
+    "lem-sfb-adequate-relative-spectrum",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-relative-spec-construction",
+  "worker": "stage1",
+  "summary": "Proved the fibred-pair construction by deriving its scheme-test universal property from existing scheme relative-Spec nodes, explicitly normalizing 2-fibre-product objects, and applying representable-source algebraicity. Proved arbitrary base change and contravariant functoriality on objects and arrows. Constructed the tautological algebra map via the affine QCoh adjunction and verified its invertibility on all big-site objects using smooth section descent, without assuming a smooth-only comparison holds on arbitrary tests. Identified the algebraic-space case via trivial stabilizers and the existing space anti-equivalence. No statement change and no new nodes; no source declaration states the entire item.",
+  "blueprint": "Realizes the relative-spectrum prerequisite already recorded in blueprint.from.place for the det-thm-sf-ctf-stability-direct-images direct-image branch. Read the current latest sk-thm-sf-ctf-stability unit and direct-images.proof.md (3); this is the generic algebraic-stack construction needed below the recorded alteration/moduli chain, not a replacement of the unit route. Full blueprint searches for relative spectrum, quasi coherent, and representable algebraic give no duplicate. Retained the inherited null ancestor and via list returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic scheme affine-algebra anti-equivalence and its explicit affine charts, used on each scheme test; the unit has no substitute for this scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Canonical arbitrary scheme base change with its algebra map, used to derive the scheme-test universal property and identify the stack comparison; generic scheme tool."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of ordinary quasi-coherent scheme algebras with their etale chart restrictions in the final space identification; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-ef913fade",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-ef913fade (reviewer sub-agent of L); spot-checked: First split of an unsplit node with no proof: there is no repair note, and live/side-live are still unsplit. Statement, stmt_deps and blueprint are unchanged; there are no new nodes, no SGA citation and no cycle; proof_deps equals the union of the steps' uses. Read against Stacks 01LX (1)-(3), 05UN (no stack hypothesis on the source), 04SZ and 076S. Step 1: unique factorization preserves α by the composition compatibility of the restriction node. Step 2: T-maps W→X are sections of Spec_W(h^*A) by relative-spec base change, and clause (3) over W with id_W ↔ O_W turns them into algebra maps h^*A→O_W. Step 3: normalizing the triples via θ is elementary, and Z's stabilizers are kept (C=O_Z gives V≅Z). Step 4: representable-source-algebraic needs no stack hypothesis on V. Step 5: base change follows from the precomposition = tensor-pullback clause, and functoriality is α∘z^*φ. Step 6: the adjunct of evaluation is identified on smooth tests. I checked the direct-image node, whose construction is B(x)=Γ(V_x,A_x) with graph-evaluation adjunction; the identification is read off its 'characterized by' clause, an advisory point only. Step 7: atlas, étale cover W_i of T×_Z U, smooth jointly surjective W_i→T, then smooth-cover section descent on T. This correctly avoids needing the comparison on non-smooth tests. Step 8: natural global-section isomorphism. Step 9: trivial automorphisms give a space via the setoid lemma, then the Zariski/étale equivalence and the space relative-spec anti-equivalence. Edge cases: C=0, C=O_Z, Z an affine scheme, non-flat base change, non-quasi-compact atlas, empty T. No duplicate in the DAG; the parent is lem-sfb-adequate-relative-spectrum. Tool uses accepted as generic scheme tools: the two lem-weil-pbc relative-spec nodes and lem-trf-scheme-zariski-etale-quasi-coherent-equivalence. Batch 5: all six flagged citations reach only general definitions (def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-scheme-algebraic-space) or a generic scheme qcoh comparison, so none is part of the trace formula or Poincaré duality."
+ }
+}

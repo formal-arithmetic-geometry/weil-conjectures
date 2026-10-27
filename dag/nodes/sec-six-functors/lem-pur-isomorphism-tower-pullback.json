@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-isomorphism-tower-pullback",
+ "kind": "statement",
+ "title": "Isomorphism inverse image preserves the tower domain, normalization and strict roots",
+ "statement": "Fix the coefficient and normalized tower presentations [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers, def-pur-tower-geometric-purity-data]. For every scheme T and isomorphism g:T to T, inverse image preserves uniformly bounded constructible finite-Tor towers, with the same bounds, and preserves normalized towers. For every normalized Tate-tower presentation w and root-line coordinates r, there is a strict Roots comparison along g. The normalization is the scalar restriction/root restriction equation, before localization, at every positive quotient level. No normalization is required for the constructible finite-Tor preservation assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "stmt_deps": [
+  "def-pur-tower-geometric-purity-data",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "Use the sectionwise inverse-image equivalence of a scheme isomorphism on every coefficient ring. The constant-section comparison is fixed, and the inverse equivalence commutes with each quotient transition.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  },
+  {
+   "text": "Apply exact inverse image to flat K-flat representatives and their scalar-extension tensors. Etale origin and constructibility are invariant under the site equivalence. Cohomology and Tor intervals stay the same at every coefficient level. Thus the uniform constructible finite-Tor domain is preserved. The canonical reduction arrows are transported to the canonical reduction arrows and hence normalization is preserved.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-kflat-descent",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  },
+  {
+   "text": "Use restriction of actual root sections and of scalars on the strict tower, and its inverse along g inverse. These commute with quotient and power transitions. Transport through the supplied w and r identifications. The unit comparison is the fixed constant-section comparison. This gives exactly Roots, including degree zero and empty sites.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-tower-geometric-purity-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-scalar-kflat-descent",
+  "sk-def-sp-normalized-towers",
+  "def-pur-tower-geometric-purity-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image by a scheme isomorphism preserves constructible finite Tor coefficient towers and the quotient reduction normalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.Scheme.Hom.inv_image; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Hom.preimageIso; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along a scheme isomorphism preserves uniform constructible finite Tor towers, normalization and the root-line comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.affineAnd_respectsIso; AlgebraicGeometry.IsFinite.instOfIsIsoScheme; AlgebraicGeometry.IsProper.instRespectsIsoScheme; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.sourceAffineLocally_respectsIso; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTower|TowerPurity|orientation.*retagging|coefficient.*tower",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1 (purity square) and Step 5 (coefficient transports)",
+   "via": [
+    "lem-pur-tower-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIsomorphismPullback",
+  "file": "lean/Sheaf/Paper/TowerIsomorphismPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpGeometricPurity.isomorphism_tower_pullback",
+  "statement": "theorem isomorphism_tower_pullback {T : AlgebraicGeometry.Scheme.{u}} (g : T ⟶ T) [IsIso g] : ∃ hp : ∀ K : SpTowerCalculus.C l E b q T, spConstructibleTorTowers l E T (q.abelian T) ((SpTowerCalculus.etalePullback l E b o q g).obj K.obj), (∀ K : SpTowerCalculus.C l E b q T, IsSpNormalizedTower l E T (q.abelian T) K.obj → IsSpNormalizedTower l E T (q.abelian T) ((SpTowerCalculus.etalePullback l E b o q g).obj K.obj)) ∧ ∀ (w : SpChartAdmissibility.Twists l E T) (r : SpCoordinateAdjunction.RootLines l E T), Nonempty (Roots l E b o g w r)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "independent cc review: TowerGeometricPurityData vs published item prefix (verbatim); item theorem+Conclusion byte-identical; 3 sorried holes vs pinned Twists/RootLines/CoefficientPullback/TensorData; scratch --all build + #print axioms (propext, sorryAx, Classical.choice, Quot.sound)"
+ }
+}

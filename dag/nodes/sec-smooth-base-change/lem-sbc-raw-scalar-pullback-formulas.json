@@ -101,17 +101,7 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean",
-  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_pullback_formulas",
-  "statement": "theorem rawModuleScalar_pullback_formulas\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    (rawModuleClassMorphism Λ k G (q : ℤ) U A\n      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =\n      moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) ((freeSheaf Λ S).obj U) ≫\n      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map\n        (rawModuleClassMorphism Λ k G (q : ℤ) U B z) ≫\n        moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ∧\n    (∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj\n        (op U)),\n      rawAbelianClassMorphism (A.hom ≫ k)\n        (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n        (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x) =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map\n        (rawAbelianClassMorphism (B.hom ≫ k)\n          (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B) q U x) ≫\n      abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n        (q : ℤ) A B f)",
-  "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-21",
-  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged. The coefficient factor is also presented at the named raw-complex endpoints by moduleCoefficientFactorNative, which returns the canonical factor itself."
- },
+ "lean": null,
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -123,16 +113,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-aa2a9",
-  "group": "V3",
+  "reviewer": "C-80e7b",
+  "group": "K4",
   "result": "fix",
-  "landing": "20261021T061739-L-1825145",
+  "landing": "20261025T095554-L-3447682",
   "kind": "interface",
-  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+  "note": "independent cc review: K4 80e7 retirement of RawModuleScalarSourceFactors + PullbackFormulas + PullbackAbelianFormula vs clone 66b1ce0e (no remaining importers/citers; WC abelian theorem statement equal after unfolding identity rawAbelianClassMorphism and forget abbrev; G2 04fdc95 precedent); 4 delivered modules + importer RawModuleScalarSourceClassFormula compiled rc=0"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-21",
   "by": "V3 stage 2",

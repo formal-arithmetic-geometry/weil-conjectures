@@ -1,0 +1,117 @@
+{
+ "id": "def-pur-clopen-completed-tower-restriction",
+ "kind": "definition",
+ "title": "Canonical exact restriction of completed coefficient towers",
+ "status": "split",
+ "statement": "Fix a purity datum $P$ [def-pur-conventions], schemes $X,U$ and an open immersion $j:U\\to X$ [def-weil-open-immersion]. Define ordinary completed-coefficient restriction to be the existing exact functor of [def-pur-open-completed-restriction-data], presented on the global completed-module category. Define its strict-tower extension by pointwise postcomposition on $\\mathbb N^{op}$ diagrams, with the pointwise additive, finite-limit and finite-colimit structures, and define its exact derived localization on the ordinary derived categories of strict completed-module towers. Name the positive coefficient datum at sequence index $n$ by replacing the level of $P$ by $n+1$, leaving its other data unchanged. These are actual functors and exact localizations, not a choice of lifts of diagrams in the derived category.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-open-immersion",
+  "def-pur-open-completed-restriction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility sentence, finite-clopen expansion: retained old step 8 and the system reduction portion of step 9."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact ordinary completed module restriction extended pointwise to strict coefficient towers and derived localization",
+   "results": "OK 8 hits: IsAdicComplete.StrictMono.extend, of_lift, lift, extend_eq, factorPow_comp_extend, of_comp_lift; AdicCompletion.map_exact and module. These concern algebraic completion, not the strict-tower restriction functor.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of completed sheaf modules extends pointwise to strict towers and localizes to derived categories",
+   "results": "OK 8 hits: ModuleCat.Tilde.toOpen and tildeInModuleCat; SheafOfModules.restrictScalars, hasLimit, hasLimitsOfShape, sheafificationCompPullback, hasLimitsOfSize; CategoryTheory.Sheaf.ΓRes. None names the pointwise completed-coefficient strict-tower restriction/localization; the general functor APIs are reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*tower.*restrict|restrict.*completed.*tower in Mathlib CategoryTheory",
+   "results": "OK 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "clopenCompletedTowerRestriction|clopenCompletedTowerOrdinary in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search completed tower restriction",
+   "results": "No hits; blueprint_refs 0 matching blueprint nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-system-integral-realization",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence, finite-clopen system-transport expansion, retained old steps 8-9.",
+   "via": [
+    "lem-pur-clopen-system-integral-realization",
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.ClopenCompletedTowerRestriction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerRestriction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.clopenRealizationLevel",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedOrdinary",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedOrdinaryAdditive",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedOrdinaryLimits",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedOrdinaryColimits",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerOrdinary",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerAdditive",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerLimits",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerColimits",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletedTowerRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenCompletedTowerRestriction.lean",
+  "statement": "def clopenCompletedTowerRestriction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {Xi X : Scheme.{u}} (j : Xi ⟶ X) [IsOpenImmersion j] : coefficientSequenceRestrictedDerived.{u, u} l E X ⥤ coefficientSequenceRestrictedDerived.{u, u} l E Xi",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "Re-delivery after 86cf RETURN; all 4 points repaired. (1) DU commutation: ordinaryScalarRestriction is fixed on sections via the recorded evaluations, lift.moduleUnderlying and the graph-coprojection setRestriction.sheafIso (HEq section types are propositionally equal via coefficientSequenceRestriction_evaluation, so the clause is not vacuous); scalarRestriction_normalized fixes it on every CX.sequence.derived.functor.obj (Q.obj H); reductionRestriction_normalized = red(kappa) ≫ purAdicPullbackReduction. (2) finiteEvaluation/finiteEvaluationI/restriction.evaluation are each equal to the explicit composites clopenCanonicalFiniteEvaluation/clopenCanonicalRestrictionEvaluation; restrictionDerived is fixed by IsClopenRestrictionDerivedNormalized and its ordinary part by sections. (3) The theorem stmt_dep is replaced by existing:true def-pur-open-completed-restriction-data. (4) strict-system-support is dropped and its record untouched. Hypotheses, edge cases (I empty, empty components, n=0 gives exponent 1, Y not separated), universes, verbatim statement, docstrings and single sorry are OK. FIX: new node def-pur-clopen-system-realization-data cited theorem lem-sfb-proetale-object-inverse-image-restriction only for the structure ProEtaleObjectRestrictionComparison; swapped to its def owner def-pe-proetale-object-restriction-comparison-data (on base, no cycle) in stmt_deps and the inline citation; fixes/def-pur-clopen-system-realization-data.json. No Lean change, no compile. Advisory: purAdicPullbackReduction/FinitePullbackPresentation are double-listed with def-pur-adic-purity-objects (avoids a genuine cycle); some declarations used come from owner nodes outside stmt_deps; the second reading is a self-check."
+ }
+}

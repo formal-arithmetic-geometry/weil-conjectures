@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-punctured-neighborhood-inverse-limit",
+ "kind": "statement",
+ "title": "Explicit punctured-neighborhood inverse limit",
+ "statement": "Let T be spectral and Z closed with compact complement. Compact open neighborhoods of Z with reverse inclusion are nonempty and directed. Their punctures are spectral compact open subspaces, the transition inclusions are spectral, compatible tuples identify uniquely with the punctured generalizations of Z, and the induced initial topology is their subspace topology. Consequently the punctured generalizations are spectral.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 0A31, 0902 and 0A2Z; punctured compact-open inverse-limit construction"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram",
+  "lem-weil-pbc-open-system-restriction-presentation",
+  "lem-weil-pbc-punctured-neighborhood-spectral-system"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the existing punctured-neighborhood spectral system and its index. Its nonempty and directed theorems provide the instances. Present its stages as ambient Opens and its maps through OpenSystem.inclusionOfLE; the subtype inclusions agree definitionally. Reuse its stage spectrality, spectral transition maps, compatible-tuple limit, initial topology and spectrality of the punctured generalizations. Compactness of an ambient punctured open follows by quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-spectral-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-punctured-neighborhood-spectral-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 0A31, 0902 and 0A2Z; punctured compact-open inverse-limit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf on an open subspace; inverse image adjunction composition constant diagram colimit",
+   "results": "Scheme restriction and section isomorphisms; sheafAdjunctionContinuous and colimConstAdj. No normalized open-subspace cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "reuse adjunction and colimit API; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology on an intersection of compact open subspaces of a spectral space is the directed colimit",
+   "results": "Condensed locally constant diagram colimits, no sheaf cohomology match. Loogle coconePointUniqueUpToIso finds colimit uniqueness component equations.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|open)|IsOpenEmbedding.*cohomology; spectralSpace; leftAdjointUniq",
+   "results": "Found Mathlib open-embedding spectralSpace and adjunction uniqueness; project general spectral-limit lifting and object localization AddEquiv, but not the required comparison square.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing general dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured-neighborhood class-lifting proof: explicit geometry, restriction coefficients, and canonical map comparison in steps 1 through 5",
+   "via": [
+    "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodInverseLimit",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodInverseLimit.lean",
+  "declaration": "TopCat.puncturedNeighborhood_inverseLimit",
+  "statement": "theorem puncturedNeighborhood_inverseLimit (Z : Set T) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) : SpectralSpace (puncturedGeneralizations Z)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25",
+  "declarations": [
+   "TopCat.puncturedStageOpen",
+   "TopCat.puncturedStageOpen_antitone",
+   "TopCat.puncturedStageOpen_contains",
+   "TopCat.puncturedStageOpen_compact",
+   "TopCat.puncturedStageOpen_spectral",
+   "TopCat.puncturedStageMap",
+   "TopCat.puncturedStageProjection",
+   "TopCat.puncturedStageMap_spectral",
+   "TopCat.puncturedStageProjection_limit",
+   "TopCat.puncturedStageProjection_initial",
+   "TopCat.puncturedNeighborhood_inverseLimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,454 @@
+{
+ "id": "lem-sfb-single-degree-coefficient-cone-cancellation",
+ "kind": "statement",
+ "title": "Single-degree cancellation of a finite coefficient cone obstruction",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $D\\to A$ a homomorphism of commutative rings, and $S$ a commutative finite type $D$-algebra, with a fixed surjection $Q_D=D[x_1,\\ldots,x_s]\\twoheadrightarrow S$, $s\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Put $S_A=S\\otimes_D A$ and $Q_A=A[x_1,\\ldots,x_s]$. Use ordinary module derived categories [def-weil-abstract-derived-category]. Let $K\\in D(S_A)$ and let $L\\in D(S)$ have cohomology zero outside a finite interval and finitely generated over $S$ in each degree [def-weil-finitely-generated-module]. Suppose given $\\gamma:L\\to\\operatorname{Res}_S^{S_A}K$. Derived tensor products are computed by K-flat resolutions [def-pc-module-kflat-complex]. Write $\\gamma_Q$ for restriction to $Q_D$ and let\n$$\\theta_Q:Q_A\\otimes_{Q_D}^{\\mathbf L}\\operatorname{Res}_{Q_D}^S L\\xrightarrow{1\\otimes\\gamma_Q}Q_A\\otimes_{Q_D}^{\\mathbf L}\\operatorname{Res}_{Q_D}^{S_A}K\\xrightarrow{\\mu_K}\\operatorname{Res}_{Q_A}^{S_A}K$$\nbe the derived extension--restriction counit composite in $D(Q_A)$; $\\mu_K$ comes from the given scalar action. Let $C_Q$ be its cone [def-weil-triangulated-category]. If $n\\in\\mathbf Z$, $H^i(C_Q)=0$ for all $i>n$, and $H^n(C_Q)$ is a finitely generated $Q_A$-module, then there exist a commutative finite type $D$-algebra $D'$, a factorization $D\\to D'\\to A$, and $L'\\in D(S')$, $S'=S\\otimes_D D'$, with bounded finitely generated cohomology over $S'$, together with $\\gamma':L'\\to\\operatorname{Res}_{S'}^{S_A}K$, such that the cone of\n$$A\\otimes_{D'}^{\\mathbf L}L'\\xrightarrow{1\\otimes\\gamma'}A\\otimes_{D'}^{\\mathbf L}K\\xrightarrow{\\mu_K}K$$\nin $D(S')$ has $H^i=0$ for every $i\\geq n$. In the last display tensor retains the $S'$-action and $\\mu_K$ is induced by the given ordinary $A$-action. No map of rings is assumed flat. No pseudo-coherence of $K$, compatibility map from $L$ to $L'$, or conclusion in degrees below $n$ is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated single-degree prerequisite for affine descente in the unnumbered Kiehl paragraph after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. This paragraph does not state or prove the cancellation assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, primary descente proof WANTED; no numbered theorem is attributed to it."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pc-module-kflat-complex",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Spec}S$ and use the dg coefficient realization of [def-sfb-dg-coefficient-realization], with $\\mathcal B=\\mathcal O_Y\\otimes_D R_A$, $T=\\Phi_D$, and $\\widehat K$. Transfer $L,K,\\gamma$ to the affine scheme module categories. The affine derived equivalence and the dg comparison identify $f=\\nu_D(\\gamma):T(L)\\to\\widehat K$ with precisely $\\theta_Q$ after restriction along $Q_D\\otimes_D R_A\\to\\mathcal B$ and the equivalence to $D(Q_A)$. Thus $C=\\operatorname{Cone}(f)$ has zero underlying cohomology above $n$, and its degree $n$ cohomology is the specified finite $Q_A$-module. These are comparisons of the actual action counits and cones. We use the same symbols for modules and their affine realizations.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-dg-coefficient-realization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  },
+  {
+   "text": "The finite-type Noetherian permanence theorem makes $S$ Noetherian. The Noetherian pseudo-coherence criterion applies to $L$, which has bounded finite cohomology. By the definition of ring pseudo-coherence choose a bounded-above finite-free $S$-complex $F$ representing $L$. Let $E=\\sigma_{\\ge n}F$ be the brutal truncation: it has the same terms and differentials in degrees at least $n$ and zero terms below $n$. It is a bounded finite-free complex, and its inclusion in $F$ is a chain map. Put $N=F/E$, which has zero terms above $n-1$. The degreewise short exact sequence gives a distinguished triangle $E\\to L\\to N\\to E[1]$. In particular $E$ is built from finitely many shifts of finite free $S$-modules by its finite brutal filtration.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E (lemma-Noetherian-pseudo-coherent), clause (2); brutal truncation and the short-exact-sequence triangle of derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)."
+   }
+  },
+  {
+   "text": "The dg comparison makes $T$ exact. Its underlying functor is $A\\otimes_D^{\\mathbf L}-$, with the $S$-action retained: this is the $E=D$ case of that comparison followed by the affine pullback/tensor identifications. Derived extension preserves an upper cohomological bound, so $UT(N)$ has no cohomology above $n-1$. Also $T(E)$ is perfect over $\\mathcal B$: apply $T$ to the finite filtration in step 2; $T(S)=\\mathcal B$, and perfection over $\\mathcal B$ is closed under finite sums, shifts and cones by its definition.",
+   "uses": [
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "def-sfb-dg-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  },
+  {
+   "text": "Set $f_E:T(E)\\to\\widehat K$ equal to $f\\circ T(E\\to L)$ and put $C_E=\\operatorname{Cone}(f_E)$. Apply TR4 to $T(E)\\to T(L)\\to\\widehat K$. Since the cone of the first arrow is $T(N)$, it gives a distinguished triangle $T(N)\\to C_E\\to C\\to T(N)[1]$. Forgetting dg actions preserves this triangle. Its long exact cohomology sequence and step 3 give $H^i(UC_E)\\cong H^i(UC)$ for every $i\\ge n$. The same argument after the polynomial dg restriction gives $Q_A$-linear isomorphisms. Consequently $H^i(UC_E)=0$ for $i>n$ and $H^n(UC_E)$ has a finite list $z_1,\\ldots,z_r$ of $Q_A$-generators. The dg comparison says its action factors through $S_A$, so this list also generates over $S_A$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR4, and Tag 05RS (lemma-cohomology-homological); agent application to the dg coefficient comparison."
+   }
+  },
+  {
+   "text": "Use the affine derived equivalence to represent $UC_E$ by an $S$-complex. Choose cycles representing the finitely many $z_j$. Sending the standard basis vectors to these cycles defines a chain map $S^r[-n]\\to UC_E$ and hence a morphism $a$ in $D(\\mathcal O_Y)$. By the adjunction $T\\dashv U$ supplied by the dg comparison, its transpose is $q:P\\to C_E$, where $P=T(S^r[-n])=\\mathcal B^r[-n]$. The transpose is extension followed by the dg action; therefore $H^n(Uq)$ sends each unit basis vector to $z_j$. Since $R_A$ has zero positive terms, $U\\mathcal B$ does also. Its degree-zero cohomology is $\\widetilde{S_A}$: the quotient by the degree-zero boundaries is $S\\otimes_D(R_A^0/\\operatorname{im}d^{-1})=S\\otimes_D A$. Thus $H^i(UP)=0$ for $i>n$ and $H^n(UP)=\\widetilde{S_A}^{\\,r}$; $H^n(Uq)$ is surjective.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "def-sfb-dg-coefficient-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  },
+  {
+   "text": "Let $V=\\operatorname{Cone}(q)$. The long exact sequence of $P\\to C_E\\to V$ shows $H^i(UV)=0$ for $i\\ge n$: at $n$ use the surjection in step 5 and $H^{n+1}(UP)=0$; above $n$ both adjacent cohomology groups of $C_E$ and $P[1]$ are zero. Write $\\delta:C_E\\to T(E)[1]$ for the connecting arrow of $f_E$. Form the homotopy pullback of $\\widehat K\\to C_E$ along $q$, or equivalently apply TR4 to $q:P\\to C_E$ and $\\delta:C_E\\to T(E)[1]$. It gives an object $H$, a map $u:H\\to\\widehat K$, and triangles $T(E)\\to H\\to P\\to T(E)[1]$ and $H\\xrightarrow{u}\\widehat K\\to V\\to H[1]$. Signs are those of the chosen cone triangles; replacing an attaching map by its negative, if required by rotation, leaves its image unchanged. The first triangle makes $H$ perfect over $\\mathcal B$; the second gives $H^i(Uu)$ an isomorphism for $i>n$ and a surjection for $i=n$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, TR4 applied to q and the connecting arrow; Tag 05RS. This is one cone attachment, not a claim of functorial cones in a bare triangulated category."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-coefficient-arrow-finite-realization] to $Y=\\operatorname{Spec}S$, the perfect object $H$, the arrow $u$, and $m=n$. The scheme $Y$ is separated and finite type over $\\operatorname{Spec}D$: it is a closed subscheme of affine $s$-space via the given presentation. Step 6 verifies its cohomological surjectivity hypothesis. Obtain a finite type $D$-algebra $D'$ factoring to $A$, an object $G$ with bounded coherent cohomology on $Y_{D'}$, a map $\\gamma':G\\to R\\pi_{D'*}K$, and $\\sigma:H\\to\\Phi_{D'}G$ with $\\nu_{D'}(\\gamma')\\sigma=u$ and $H^i(U\\sigma)$ surjective for $i\\ge n$. This is the existing finite-factorization statement, with its forward arrow and upper-surjectivity clause; no factorization is being taken from its proof.",
+   "uses": [
+    "lem-sfb-perfect-coefficient-arrow-finite-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  },
+  {
+   "text": "Put $v=U\\nu_{D'}(\\gamma')$. For $i=n$, $H^i(v)H^i(U\\sigma)=H^i(Uu)$ is surjective, so $H^n(v)$ is surjective. For $i>n$ the composite is an isomorphism and $H^i(U\\sigma)$ is surjective. Its kernel is contained in the kernel of the composite and hence zero. Thus $H^i(U\\sigma)$ is an isomorphism, and so is $H^i(v)=H^i(Uu)H^i(U\\sigma)^{-1}$. The cohomology long exact sequence now gives $H^i(\\operatorname{Cone}(v))=0$ for all $i\\ge n$: the adjacent terms are the cokernel of $H^i(v)$ and the kernel of $H^{i+1}(v)$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS and Definition 0147; elementary kernel/cokernel argument for the forward finite factorization."
+   }
+  },
+  {
+   "text": "Identify $Y_{D'}=\\operatorname{Spec}S'$ and let $L'=R\\Gamma(Y_{D'},G)$ under the affine derived equivalence. The ring $S'$ is finite type over the Noetherian ring $D$, so it is Noetherian. Coherence is equivalent to quasi-coherence of finite type on this affine Noetherian scheme; the affine finite-type criterion then makes each $H^i(L')$ a finite $S'$-module, with the bounds of $G$. The affine equivalence and t-exact affine pushforward identify $\\gamma'$ with a map $L'\\to\\operatorname{Res}_{S'}^{S_A}K$. The dg comparison identifies $v$ with the pushforward to $Y$ of the stipulated action-normalized sheaf arrow. The affine pullback/tensor formulas identify that arrow with $A\\otimes_{D'}^{\\mathbf L}L'\\xrightarrow{1\\otimes\\gamma'}A\\otimes_{D'}^{\\mathbf L}K\\xrightarrow{\\mu_K}K$. Indeed their adjoint transposes both apply the given $\\gamma'$ and then multiplication by the actual $A$-action; uniqueness in the derived adjunction fixes the map. Affine pushforward detects cohomological bounds, so step 8 gives the required cone vanishing in $D(S')$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sc-affine-derived-pushforward-t-exact",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  },
+  {
+   "text": "The construction works for $r=0$: take $P=0$, so $V=C_E$ and the same triangles and factorization apply. It also works when $E=0$ (if $n$ exceeds the upper support of $F$), for $K=0$, for $s=0$, and for the zero ring. The argument uses only upper bounds under derived tensor; it never assumes flatness or discards negative Tor groups. No map from $L$ to the final $L'$ was required; the auxiliary perfect object is the one to which the finite-factorization theorem applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly for the affine prerequisite of the unnumbered Kiehl paragraph after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); uses the existing dg coefficient comparison and finite coherent factorization, not a theorem asserted by that paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dg-coefficient-realization",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-dg-coefficient-realization-comparison",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-perfect-coefficient-arrow-finite-realization",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "lem-pc-ringed-spaces-derived-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent proof of the affine cancellation prerequisite for the unnumbered Kiehl paragraph following Tag 0CSD; finite perfect dg approximation and one cone attachment, followed by the existing forward finite coherent factorization. Supporting Stacks sources: more-algebra Tag 066E; derived Tags 0145, 0152, 05RS. Kiehl primary descente proof remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficient.*(cancel|obstruct)|[Cc]one.*[Ff]inite|pseudo.?coher",
+   "results": "{\"t\": \"2026-10-23T20:49:37Z\", \"tool\": \"grep\", \"query\": \"coefficient.*(cancel|obstruct)|[Cc]one.*[Ff]inite|pseudo.?coher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/Condensed/Light/Sequence.lean\"], \"digest\": \"ffcf146086b165ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a bounded coherent model over a Noetherian ring, improve its nonflat derived scalar action map to a complex by killing its finite top cone cohomology after descending finitely many coefficients",
+   "results": "{\"t\": \"2026-10-23T20:49:37Z\", \"tool\": \"leansearch\", \"query\": \"Given a bounded coherent model over a Noetherian ring, improve its nonflat derived scalar action map to a complex by killing its finite top cone cohomology after descending finitely many coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Module.Flat.rTensor_shortComplex_exact\", \"CochainComplex.mappingCone.inr_descCochain\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"CochainComplex.mappingCone\", \"Module.Flat.lTensor_shortComplex_exact\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\"], \"digest\": \"986f84be67e52095\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-23T20:49:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.mappingCocone_triangle_distinguished\", \"DerivedCategory.mappingCone_triangle_distinguished\"], \"digest\": \"fe3c235d59037ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One degree improvement of a derived coefficient approximation: cancel a finitely generated top cohomology group of the cone by a bounded coherent complex after a finite Noetherian algebra extension",
+   "results": "{\"t\": \"2026-10-23T20:49:38Z\", \"tool\": \"leanfinder\", \"query\": \"One degree improvement of a derived coefficient approximation: cancel a finitely generated top cohomology group of the cone by a bounded coherent complex after a finite Noetherian algebra extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective_aux\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CochainComplex.IsKInjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"440bd52b62345369\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar coefficient descent of a single collection of cone cycles improves a bounded coherent approximation by one cohomological degree, preserving a fixed finite type algebra action",
+   "results": "{\"t\": \"2026-10-23T20:53:16Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scalar coefficient descent of a single collection of cone cycles improves a bounded coherent approximation by one cohomological degree, preserving a fixed finite type algebra action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.I\", \"CochainComplex.HomComplex.Cochain.InductionUp.limitSequence\", \"CochainComplex.HomComplex.Cochain.InductionUp.sequence_eqUpTo\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.isLE_iff\", \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\"], \"digest\": \"82ea8e44200fc5fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Single degree cancellation of finite top cone cohomology by descending a bounded coherent module complex to a finite Noetherian coefficient algebra, with nonflat derived tensor and finite type algebra action",
+   "results": "{\"t\": \"2026-10-24T03:00:15Z\", \"tool\": \"leanfinder\", \"query\": \"Single degree cancellation of finite top cone cohomology by descending a bounded coherent module complex to a finite Noetherian coefficient algebra, with nonflat derived tensor and finite type algebra action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.cm5b\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.isLE_iff\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.isGE_iff\"], \"digest\": \"c3804aba66a56097\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T03:00:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(cancel|descen)|[Dd]escente|pseudo.?coher",
+   "results": "{\"t\": \"2026-10-24T03:00:15Z\", \"tool\": \"grep\", \"query\": \"coefficient.*(cancel|descen)|[Dd]escente|pseudo.?coher\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Core.lean\", \"Mathlib/RingTheory/Extension/Presentation/Core.lean\"], \"digest\": \"6998ae3cfb507289\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend finite top cohomology obstruction of nonflat derived scalar extension retaining a finite type algebra action",
+   "results": "{\"t\": \"2026-10-24T03:00:16Z\", \"tool\": \"leansearch\", \"query\": \"Descend finite top cohomology obstruction of nonflat derived scalar extension retaining a finite type algebra action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"AlgHom.extendScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Algebra.QuasiFinite.of_restrictScalars\", \"Subalgebra.restrictScalars_top\", \"Algebra.FiniteType.of_restrictScalars_finiteType\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"Algebra.Extension.cotangentComplex\"], \"digest\": \"23c1661fd87f8161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximation of a complex with finite top cohomology over a polynomial algebra by a bounded coherent complex at a finite coefficient stage, preserving a quotient algebra action and the derived extension restriction counit",
+   "results": "{\"t\": \"2026-10-24T03:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Approximation of a complex with finite top cohomology over a polynomial algebra by a bounded coherent complex at a finite coefficient stage, preserving a quotient algebra action and the derived extension restriction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CochainComplex.cm5b\", \"Algebra.Generators.cotangentRestrict\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"76b263a22a337b4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]one.*(counit|coefficient)|[Ss]pread.*(cycle|cohomology)|[Cc]oefficient.*[Ss]pread",
+   "results": "{\"t\": \"2026-10-24T03:05:02Z\", \"tool\": \"grep\", \"query\": \"[Cc]one.*(counit|coefficient)|[Ss]pread.*(cycle|cohomology)|[Cc]oefficient.*[Ss]pread\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/SheafCondition/EqualizerProducts.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/EqualizerProducts.lean\", \"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"89be5f291d2a7f76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient spreading of finitely many derived cone cohomology classes with a fixed quotient polynomial algebra module action",
+   "results": "{\"t\": \"2026-10-24T03:05:03Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient spreading of finitely many derived cone cohomology classes with a fixed quotient polynomial algebra module action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.finite_coeffs\", \"Polynomial.finite_range_coeff\", \"module_finite_of_liesOver\", \"Algebra.SubmersivePresentation.finite_coeffs\", \"Derivation.mapCoeffs\", \"Derivation.mapCoeffs_apply\", \"Differential.mapCoeffs\", \"Differential.implicitDeriv\"], \"digest\": \"d88a8d86c9c5a27d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"counit\"",
+   "results": "{\"t\": \"2026-10-24T03:05:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite list of cycles in the cone of a nonflat derived coefficient comparison into an ordinary coherent module cone over a finite coefficient algebra stage",
+   "results": "{\"t\": \"2026-10-24T03:05:04Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a finite list of cycles in the cone of a nonflat derived coefficient comparison into an ordinary coherent module cone over a finite coefficient algebra stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreservesFiniteLimitsOfFlat.lift\", \"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"CochainComplex.cm5b.i\", \"CochainComplex.mappingCone.decomp_from\", \"CochainComplex.cm5b.p\", \"Module.Flat.tfae_equational_criterion\", \"localCohomology\"], \"digest\": \"3163dcf48fa389eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread finitely many cohomology classes of a derived scalar extension counit cone to classes in an ordinary module cone after a finite type Noetherian coefficient enlargement, with an epimorphism of the old cone in a prescribed upper range",
+   "results": "{\"t\": \"2026-10-24T03:05:05Z\", \"tool\": \"leanfinder\", \"query\": \"Spread finitely many cohomology classes of a derived scalar extension counit cone to classes in an ordinary module cone after a finite type Noetherian coefficient enlargement, with an epimorphism of the old cone in a prescribed upper range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"CochainComplex.cm5b\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"groupCohomology.cochainsMap_f_map_epi\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.ProjectiveResolution.extMk_surjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"d53294250715cc19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "grep",
+   "query": "octahed|mappingCone.*triangle|triangle.*mappingCone",
+   "results": "{\"t\": \"2026-10-24T03:05:35Z\", \"tool\": \"grep\", \"query\": \"octahed|mappingCone.*triangle|triangle.*mappingCone\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\"], \"digest\": \"3f038dafc3389cff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cone cycle cell attachment compatibility with derived scalar extension restriction counit and the octahedral distinguished triangle",
+   "results": "{\"t\": \"2026-10-24T03:05:36Z\", \"tool\": \"leansearch\", \"query\": \"Cone cycle cell attachment compatibility with derived scalar extension restriction counit and the octahedral distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"HomotopicalAlgebra.AttachCells.cell\", \"CategoryTheory.Adjunction.functorialityCounit'\", \"HomotopicalAlgebra.AttachCells.mk\", \"CategoryTheory.Adjunction.functorialityCounit'_app_hom\", \"CategoryTheory.Adjunction.functorialityCounit\"], \"digest\": \"df8bcc9316960806\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"triangle\"",
+   "results": "{\"t\": \"2026-10-24T03:05:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\", \\\"triangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangle\", \"CochainComplex.mappingCone.triangle_obj₁\", \"CochainComplex.mappingCone.triangle_obj₂\", \"CochainComplex.mappingCone.triangle_obj₃\", \"CochainComplex.mappingCone.triangleh\", \"CochainComplex.mappingCone.triangle_mor₁\", \"CochainComplex.mappingCone.triangle_mor₂\", \"HomotopyCategory.mappingCone_triangleh_distinguished\"], \"digest\": \"e09d3eb5de6f7938\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class of the cone of L to restricted K defines a finite free module cell attachment to L; applying nonflat derived coefficient extension and its scalar action counit gives the distinguished triangle of the two comparison cones",
+   "results": "{\"t\": \"2026-10-24T03:05:39Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomology class of the cone of L to restricted K defines a finite free module cell attachment to L; applying nonflat derived coefficient extension and its scalar action counit gives the distinguished triangle of the two comparison cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.i\", \"CochainComplex.cm5b.p\", \"CochainComplex.cm5b\", \"CochainComplex.cm5b.fac\", \"CochainComplex.cm5b.i_f_comp_assoc\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.i_f_comp\", \"CochainComplex.cm5b.fac_assoc\"], \"digest\": \"3f76b29e2732128c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pushout of a map L to K by cycles in its cone, and the cofiber triangle after an exact derived functor with a counit to K",
+   "results": "{\"t\": \"2026-10-24T03:05:40Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy pushout of a map L to K by cycles in its cone, and the cofiber triangle after an exact derived functor with a counit to K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangleh\", \"CochainComplex.mappingCone.mapTrianglehIso\", \"HomotopyCategory.mappingCone_triangleh_distinguished\", \"HomotopyCategory.Pretriangulated.distinguished_cocone_triangle\", \"CochainComplex.mappingCone.trianglehMapOfHomotopy\", \"CochainComplex.cm5b.homotopyEquiv\", \"HomotopyCategory.mappingConeCompTriangleh_distinguished\", \"CochainComplex.mappingConeCompTriangleh\"], \"digest\": \"70fb509d971cce57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give ordinary cones, factorization or scalar/polynomial algebra, not the nonflat finite coefficient cancellation statement or its action-normalized finite coherent realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-affine-coefficient-window-lift",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Affine algebra prerequisite, retaining the prescribed finite type algebra action and the derived scalar-action map. Single-degree algebra prerequisite: finite top-cone obstruction cancellation after enlarging the coefficient algebra.",
+   "via": [
+    "lem-sfb-relative-affine-coefficient-window-lift",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-single-degree-coefficient-cone-cancellation",
+  "worker": "stage1",
+  "group": "O2",
+  "summary": "Statement unchanged. Reused the existing dg coefficient comparison and forward upper-epimorphic finite coherent factorization. Constructed a perfect dg approximation by a finite-free truncation of L and one attachment of the finite top obstruction generators. Explicitly proved the forward factorization gives the required cone cutoff, and transferred the actual action counit back to D(S′). No new nodes.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited Kiehl descente / relative affine coefficient window prerequisite. This supplies its one-degree cancellation input without changing the unit or chapter route. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-sc-affine-derived-pushforward-t-exact",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic Noetherian algebra, affine derived comparison, cohomological-bound or triangle tool; used only to construct and read the affine dg coefficient approximation. No node of this unit replaces this generic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "lem-sf-derived-homology-long-exact",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "lem-pc-ringed-spaces-derived-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-c44d49350",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-c44d49350 (reviewer sub-agent of L); spot-checked: I read the item in full. It is one commit with only the item and its report; there are no new nodes and no repair note, the statement and stmt_deps are unchanged, there is no SGA, and proof_deps equals the union of the step uses. Source: the only text after perfect.tex 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general) is 'See Kiehl', so the proof is correctly marked as by agent with Kiehl WANTED; 066E is more-algebra lemma-Noetherian-pseudo-coherent. I read the full statements of the cited unit nodes def-sfb-dg-coefficient-realization, lem-sfb-dg-coefficient-realization-comparison and lem-sfb-perfect-coefficient-arrow-finite-realization, and they supply exactly what each step takes: polynomial restriction to D(Q_A) of Phi_D, K-hat and normalized cones; exact T left adjoint to U with the transpose being extension then action; Uν_E = Rp_*θ; and the forward σ with ν(γ')σ = u and upper surjectivity. Checks by step: (2) 066E gives a finite-free F, its brutal truncation E is bounded and N lives in degrees ≤ n−1. (3) The upper-bound clause (a) needs no flatness, and T(E) is perfect by cone closure. (4) TR4 gives H^i(C_E) ≅ H^i(C) for i ≥ n. (5) H^0(B) = S⊗_D A; H^n(Uq) is onto by H^0(B)-linearity, which the step leaves implicit but is standard. (6) I checked H as fib(K-hat ⊕ P → C_E): it gives the triangles T(E)→H→P and H→K-hat→V, H is perfect, and u is an isomorphism above n and onto at n. (7) All hypotheses of the cited node hold: Spec S is separated and of finite type, and m = n. (8) The kernel/cokernel argument gives the cone vanishing for i ≥ n. (9) The transfer to D(S') uses affine pushforward t-exactness and the adjoint uniqueness of the scalar-action map. Edge cases checked: r = 0, E = 0, K = 0, s = 0, negative n, and the nonflat case D = k[t], S = A = k. A traversal of 1030 reachable nodes finds no cycle. The argument mirrors steps 8–10 of the landed global-witness binary patching node, which cites the same perfect-coefficient node; the item is its affine base case, not a duplicate. The eleven declared off-unit generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SingleDegreeCoefficientConeCancellation",
+  "declaration": "ModuleCat.singleDegreeCoefficientConeCancellation",
+  "declarations": [
+   "ModuleCat.coefficientConeRestrictionSquareIso",
+   "ModuleCat.singleDegreeCoefficientConeCancellation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SingleDegreeCoefficientConeCancellation.lean",
+  "statement": "theorem singleDegreeCoefficientConeCancellation (D A S : Type u) [CommRing D] [CommRing A] [CommRing S] [IsNoetherianRing D] [Algebra D A] [Algebra D S] [Algebra.FiniteType D S] (s : ℕ) (q : MvPolynomial (Fin s) D →ₐ[D] S) (hq : Function.Surjective q) (K : DerivedCategory (ModuleCat.{u} (S ⊗[D] A))) (L : DerivedCategory (ModuleCat.{u} S)) (hL : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} S) i).obj L)) (hLfinite : ∀ i : ℤ, Module.Finite S ((DerivedCategory.homologyFunctor (ModuleCat.{u} S) i).obj L)) (γ : L ⟶ (derivedRestrictScalars (Algebra.TensorProduct.includeLeftRingHom : S →+* S ⊗[D] A)).obj K) (T_Q : DerivedCategory (ModuleCat.{u} (MvPolynomial (Fin s) D ⊗[D] A))) (η_Q : (derivedRestrictScalars q.toRingHom).obj L ⟶ (derivedRestrictScalars (Algebra.TensorProduct.includeLeftRingHom : MvPolynomial (Fin s) D →+* MvPolynomial (Fin s) D ⊗[D] A)).obj T_Q) (hη_Q : IsDerivedBaseChange η_Q) (θ_Q : T_Q ⟶ (derivedRestrictScalars (Algebra.TensorProduct.map q (AlgHom.id D A)).toRingHom).obj K) (hθ_Q : η_Q ≫ (derivedRestrictScalars (Algebra.TensorProduct.includeLeftRingHom : MvPolynomial (Fin s) D →+* MvPolynomial (Fin s) D ⊗[D] A)).map θ_Q ≫ (coefficientConeRestrictionSquareIso q.toRingHom (Algebra.TensorProduct.includeLeftRingHom : S →+* S ⊗[D] A) (Algebra.TensorProduct.includeLeftRingHom : MvPolynomial (Fin s) D →+* MvPolynomial (Fin s) D ⊗[D] A) (Algebra.TensorProduct.map q (AlgHom.id D A)).toRingHom (Algebra.TensorProduct.map_comp_includeLeftRingHom q (AlgHom.id D A)).symm).inv.app K = (derivedRestrictScalars q.toRingHom).map γ) (C_Q : DerivedCategory (ModuleCat.{u} (MvPolynomial (Fin s) D ⊗[D] A))) (ι_Q : (derivedRestrictScalars (Algebra.TensorProduct.map q (AlgHom.id D A)).toRingHom).obj K ⟶ C_Q) (δ_Q : C_Q ⟶ T_Q⟦(1 : ℤ)⟧) (hC_Q : Triangle.mk θ_Q ι_Q δ_Q ∈ distTriang _) (n : ℤ) (hupper : ∀ i : ℤ, n < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (MvPolynomial (Fin s) D ⊗[D] A)) i).obj C_Q)) (hfinite : Module.Finite (MvPolynomial (Fin s) D ⊗[D] A) ((DerivedCategory.homologyFunctor (ModuleCat.{u} (MvPolynomial (Fin s) D ⊗[D] A)) n).obj C_Q)) : ∃ (D' : Type u) (_ : CommRing D') (_ : Algebra D D') (_ : Algebra D' A) (_ : IsScalarTower D D' A), Algebra.FiniteType D D' ∧ ∃ (L' : DerivedCategory (ModuleCat.{u} (S ⊗[D] D'))) (γ' : L' ⟶ (derivedRestrictScalars (Algebra.TensorProduct.map (AlgHom.id D S) (IsScalarTower.toAlgHom D D' A)).toRingHom).obj K), (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (S ⊗[D] D')) i).obj L')) ∧ (∀ i : ℤ, Module.Finite (S ⊗[D] D') ((DerivedCategory.homologyFunctor (ModuleCat.{u} (S ⊗[D] D')) i).obj L')) ∧ ∃ (T' : DerivedCategory (ModuleCat.{u} A)) (η' : (derivedRestrictScalars (Algebra.TensorProduct.includeRight : D' →ₐ[D] S ⊗[D] D').toRingHom).obj L' ⟶ (derivedRestrictScalars (algebraMap D' A)).obj T'), IsDerivedBaseChange η' ∧ ∃ (θ' : T' ⟶ (derivedRestrictScalars (Algebra.TensorProduct.includeRight : A →ₐ[D] S ⊗[D] A).toRingHom).obj K) (C' : DerivedCategory (ModuleCat.{u} A)) (ι' : (derivedRestrictScalars (Algebra.TensorProduct.includeRight : A →ₐ[D] S ⊗[D] A).toRingHom).obj K ⟶ C') (δ' : C' ⟶ T'⟦(1 : ℤ)⟧), (η' ≫ (derivedRestrictScalars (algebraMap D' A)).map θ' = (derivedRestrictScalars (Algebra.TensorProduct.includeRight : D' →ₐ[D] S ⊗[D] D').toRingHom).map γ' ≫ (coefficientConeRestrictionSquareIso (Algebra.TensorProduct.includeRight : D' →ₐ[D] S ⊗[D] D').toRingHom (Algebra.TensorProduct.map (AlgHom.id D S) (IsScalarTower.toAlgHom D D' A)).toRingHom (algebraMap D' A) (Algebra.TensorProduct.includeRight : A →ₐ[D] S ⊗[D] A).toRingHom (congrArg AlgHom.toRingHom (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id D S) (IsScalarTower.toAlgHom D D' A)))).hom.app K) ∧ Triangle.mk θ' ι' δ' ∈ distTriang _ ∧ ∀ i : ℤ, n ≤ i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj C')",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical polynomial tensor presentation Q_D tensor_D A is used for Q_A, via tensor symmetry and MvPolynomial.algebraTensorAlgEquiv. IsDerivedBaseChange and the transpose equations fix the actual extension/action composites. The final retained-action cone bound is tested after exact faithful forgetting to A-modules, which detects precisely the same cohomology vanishing. No flatness or coherence hypothesis on K is added. The auxiliary restriction-square isomorphism is the canonical identity-on-elements transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c79ec544",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Clause-by-clause match. Q_A is presented canonically as Q_D⊗_D A. T_Q and T' are pinned by IsDerivedBaseChange, θ_Q and θ' by their transposes (Res_q γ and Res_{D'} γ' via the canonical restriction-square iso), so these are the actual counit composites, not free arrows. The cone vanishing for i≥n is tested in D(A), equivalent to the node's S'-linear cone because forgetting the S'-action does not change the underlying complexes. The tensor is over D', so the non-flat case is kept. coefficientConeRestrictionSquareIso is real canonical data; no duplicate helper and no name clash in live lean. lean.statement is verbatim in the file; private imports = recorded proof_dep modules; first delivery, live has no lean record. Pilot gates met: proof only sorry, docstrings with source place, blueprint id and all 10 steps, no added hypotheses, no pro-étale substitute. Edge cases s=0, zero rings, K=L=0, all n covered. No recompile since nothing changed; compile evidence is the worker's. Advisories: FiniteType D S redundant given hq; single universe u (D' can be taken in it); Tag 05G3 is a loose helper citation."
+ }
+}

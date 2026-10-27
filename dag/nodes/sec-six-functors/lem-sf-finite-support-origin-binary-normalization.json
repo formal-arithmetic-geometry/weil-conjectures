@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-finite-support-origin-binary-normalization",
+ "kind": "statement",
+ "title": "Binary finite support normalization in the canonical origin category",
+ "statement": "Fix a finite operation stage S [def-sf-operation-stages]. Restrict inverse coefficient realization to bounded constructible objects, obtaining originInclusion into the full bounded-below etale-origin category; existence of the property is [lem-weil-pbc-finite-ring-constructible-derived-origin]. For a quasi-compact f and compactification c, originSupportComparison is the explicit support realization followed by [def-sf-origin-candidate-comparison] to the canonical compactification. For two quasi-compact maps f,g and arbitrary cf,cg,cfg, applying originInclusion to the inverse S.finite.composition and then originSupportComparison for fg equals the two successive originSupportComparisons followed by the canonical originComposition [thm-sf-comp-composition]. This statement is binary, tensor-free, and makes no projection or three-map associativity assertion.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-origin-candidate-comparison",
+  "thm-sf-comp-composition"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition and coherence sentence, realized using the specified finite operation normalizations."
+ },
+ "proof": [
+  {
+   "text": "Construct originInclusion and originSupportComparison from the fixed inverse realization and its bounded etale-origin property, exactly as before. At each constructible input, choose a bounded-below etale witness inside the proof. Regard the canonical realized etale witness as a retained RefinementFiniteLevelOrigin and use coefficient units and counits to construct the input isomorphism required by finiteCompositionNormalization.",
+   "uses": [
+    "lem-sf-finite-realization-etale-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic proved transport_normalization calculation cancels coefficient equivalence units and counits in the finiteCompositionNormalization field of the operation datum. It identifies the two fixed-scalar support comparisons with the candidate compositor. To identify the witnessed compositor, evaluate lem-sf-finite-support-candidate-composition at the retained etale input and use its naturality to transport across refinementFixedWitnessIso.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sf-finite-support-candidate-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the faithful origin inclusion to natural transformations. Its image of originSupportComparison is its fixed-scalar comparison followed by towerCandidateComparison, by the preimage construction. Use the interchange law for whiskering to move the first support comparison through the second candidate comparison. The proved supportComparison_candidate_path calculation groups the three candidate factors and cancels the final inverse comparison. Combine it with the coefficient normalization in the functor category, before evaluating any concrete derived morphism. Faithfulness returns the required equality in the origin category.",
+   "uses": [
+    "def-sf-origin-candidate-comparison",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-realization-etale-origin",
+  "def-sf-operation-stages",
+  "lem-sf-finite-support-candidate-composition",
+  "def-sf-origin-candidate-comparison",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Binary normalization proof: coefficient-equivalence cancellation, fixed-scalar candidate evaluation, and natural-transformation whiskering."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of conjugated projection formula and binary compact support compositor under equivalence",
+   "results": "Eight condensed-set or profinite naturality/projection facts; none about derived compact support.",
+   "date": "2026-10-26",
+   "verdict": "No exact result; use the existing project constructions and generic naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality; CategoryTheory.Functor.pentagon",
+   "results": "NatTrans.naturality gives formal input naturality; Functor.pentagon concerns the functor associator, not the prescribed compact-support compositor.",
+   "date": "2026-10-26",
+   "verdict": "Use formal naturality and functoriality for the transport; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "composition.*projection|projection.*composition; finiteCompositionNormalization; component_naturality",
+   "results": "No Mathlib compact-support result. The source project has proper/open triangle laws and origin associativity. CompactSupportProjectionFiniteStages has a private input-naturality proof, but importing that parent would create a cycle.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the private naturality argument in a lower module; use existing triangle and canonical-origin statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionTransport",
+  "date": "2026-10-26",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition and coherence sentence, realized using the specified finite operation normalizations.",
+   "via": [
+    "lem-sf-finite-projection-composition-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSupportOriginComparison",
+  "file": "lean/Sheaf/Paper/FiniteSupportOriginComparison.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.originSupportComparison_composition",
+  "statement": "theorem originSupportComparison_composition (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [QuasiCompact f.hom.left] [QuasiCompact g.hom.left]\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (cfg : Compactification (f ≫ g).hom.left) :\n    letI := cf.hasCompactification\n    letI := cg.hasCompactification\n    letI := cfg.hasCompactification\n    letI : HasCompactification (f.hom.left ≫ g.hom.left) := cfg.hasCompactification\n    letI : QuasiCompact (f ≫ g).hom.left :=\n      inferInstanceAs (QuasiCompact (f.hom.left ≫ g.hom.left))\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    Functor.whiskerRight (S.finite.composition f g cf cg cfg).inv\n        (originInclusion (C := C) (E := E) (n := n) (hn := hn) Z) ≫\n      (originSupportComparison S (f ≫ g) cfg).hom =\n    Functor.whiskerLeft (S.finite.support f cf) (originSupportComparison S g cg).hom ≫\n      Functor.whiskerRight (originSupportComparison S f cf).hom\n        (originCompactSupport\n          (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) g.hom.left) ≫\n      Functor.whiskerLeft (originInclusion (C := C) (E := E) (n := n) (hn := hn) X)\n        (originComposition\n          (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))\n          f.hom.left g.hom.left).hom",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.originInclusion",
+   "WeilConjectures.CompactSupportFiniteProjection.inverseConjugation",
+   "WeilConjectures.CompactSupportFiniteProjection.originSupportComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.originSupportComparison_composition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T183654-L-3761937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T235839-L-1460477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

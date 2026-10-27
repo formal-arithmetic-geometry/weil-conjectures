@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-smooth-open-deformation-lift",
+ "kind": "statement",
+ "title": "A deformation of one affine open extends across a smooth affine open",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $A'\\twoheadrightarrow A$ be a surjective homomorphism of finite-dimensional commutative $k$-algebras, each augmented to $k$ with augmentation kernel its unique maximal ideal, respecting the augmentations. Let $X$ be a $k$-scheme [def-pc-scheme] with an affine open covering $X=U\\cup V$ such that $U\\cap V$ is affine and both $U$ and $U\\cap V$ are smooth over $k$ [def-sbc-smooth-morphisms]. Let $Y\\to\\operatorname{Spec}A$ be flat [def-weil-flat-morphism] with a specified special-fibre isomorphism $Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k\\cong X$ [def-pc-fibre-product]. For an open $W\\subseteq X$, let $Y_W$ be the open subscheme corresponding to $W$ under the homeomorphism of underlying spaces of this nilpotent special fibre. Suppose a flat $A'$-scheme $Z$ and an $A$-isomorphism $e:Z\\times_{\\operatorname{Spec}A'}\\operatorname{Spec}A\\cong Y_V$ are given. Then there are a flat $A'$-scheme $Y'$, an $A$-isomorphism $\\alpha:Y'\\times_{\\operatorname{Spec}A'}\\operatorname{Spec}A\\cong Y$, and an $A'$-isomorphism $\\gamma:Y'_V\\cong Z$ such that $e\\circ\\gamma_A=\\alpha|_{Y_V}$. Here $Y'_V$ is the corresponding open under the special-fibre identification induced by $\\alpha$, and $\\gamma_A$ denotes reduction to $A$. Empty opens are allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZN, lemma-glueing-smooth, second assertion specialized to U_1 smooth (hence a local complete intersection); Situation situation-glueing, and Example example-schemes. The commutative reduction equation is the lifting condition in the definition of smooth morphism of deformation categories."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $W=U\\cap V$ and $J=\\ker(A\\to k)$, $J^\\prime=\\ker(A^\\prime\\to k)$, $K=\\ker(A^\\prime\\to A)$. A descending chain of ideals in either finite-dimensional $k$-algebra stabilizes because its dimensions stabilize, so both rings are Artinian local. Thus $J$ and $J^\\prime$ are nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent], and $K\\subseteq J^\\prime$ is nilpotent too. Locally a special fibre is the closed subscheme $\\operatorname{Spec}(B/JB)$, so [def-sbc-first-order-thickening] identifies its underlying space with that of the original scheme. The same holds with $J^\\prime$. Hence all opens indexed by $U,V,W$ in $Y$ and $Z$ exist uniquely. Restrictions of $Y$ and $Z$ to these opens are flat: their local rings and their structural local homomorphisms are unchanged, so the defining stalk condition [def-weil-flat-morphism] is unchanged.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-sbc-first-order-thickening",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for a smooth U_1; constructive affine version of its proof; Situation situation-glueing; lemma-open"
+   }
+  },
+  {
+   "text": "For a $k$-scheme $T$, write $T_B=T\\times_k\\operatorname{Spec}B$. Apply [lem-sfb-affine-smooth-trivialization-lift] with $R=A$, $I=J$, the quotient identified with $k$ by the augmentation $A/J\\cong k$, $T=U$, $D=Y_U$, and with $\\theta_0$ the specified special-fibre identification. It gives an $A$-isomorphism $a:Y_U\\xrightarrow{\\sim}U_A$ inducing that identification on the special fibre. Since it induces the identity on the labelled open $U$ of $X$, its restriction is an isomorphism $a_W:Y_W\\xrightarrow{\\sim}W_A$.",
+   "uses": [
+    "lem-sfb-affine-smooth-trivialization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for a smooth U_1; constructive affine version of its proof; smoothness of the affine U_1 supplies a trivial deformation"
+   }
+  },
+  {
+   "text": "Take $L=U_{A^\\prime}$. The projection $L\\to\\operatorname{Spec}A^\\prime$ is smooth by clause (2) of [lem-pc-proper-base-change], and flat by [lem-pc-smooth-flat]. The inclusion $W\\subseteq U$ base changes to an open immersion $W_{A^\\prime}\\subseteq L$ by [lem-weil-pbc-open-immersion-base-change]. Let $E=Z_W$, the open of $Z$ labelled by $W$ through the special-fibre identification induced by $e$. By the same open-base-change statement, $E_A$ is an open of $Z_A$. Its underlying open is the one labelled by $W$, since reduction modulo the nilpotent $K$ is a homeomorphism as in step 1; thus $e$ restricts to an isomorphism $E_A\\xrightarrow{\\sim}Y_W$. In particular $\\beta_0=a_W\\circ e|_{E_A}:E_A\\xrightarrow{\\sim}W_A$ is a specified $A$-isomorphism.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for a smooth U_1; constructive affine version of its proof; lemma-glueing, the two open pieces"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-smooth-trivialization-lift] again, now with $R=A^\\prime$, $I=K$, the quotient $R_0=A^\\prime/K$ identified with $A$ by the given surjection, $T=W$, $D=E$, and $\\theta_0=\\beta_0$. Its hypotheses hold: $K$ is nilpotent, $W$ is smooth affine by assumption, and $E$ is flat by the restriction calculation in step 1. It gives $b:E\\xrightarrow{\\sim}W_{A^\\prime}$ with $b_A=a_W\\circ e|_{E_A}$. Set $\\varphi=b^{-1}:W_{A^\\prime}\\xrightarrow{\\sim}E$. The specified reduction, rather than just an arbitrary isomorphism of the two lifts, will ensure compatibility with $Y$.",
+   "uses": [
+    "lem-sfb-affine-smooth-trivialization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for a smooth U_1; constructive affine version of its proof; lifting the overlap identification"
+   }
+  },
+  {
+   "text": "Glue $L$ and $Z$ along their opens $W_{A^\\prime}$ and $E$ using $\\varphi$ and $\\varphi^{-1}$, by [lem-weil-pbc-glue-schemes]. For two pieces the gluing identities are $\\varphi^{-1}\\varphi=\\mathrm{id}$ and $\\varphi\\varphi^{-1}=\\mathrm{id}$, so these data satisfy every cocycle identity, even when an open is empty. Obtain open immersions $\\iota_L:L\\to Y^\\prime$ and $\\iota_Z:Z\\to Y^\\prime$ covering $Y^\\prime$, with intersection exactly their specified opens and $\\iota_L|_{W_{A^\\prime}}=\\iota_Z\\varphi$. Their structural maps to $\\operatorname{Spec}A^\\prime$ agree because $b$ is an $A^\\prime$-isomorphism; they glue by [lem-weil-pbc-scheme-morphism-gluing]. This map $Y^\\prime\\to\\operatorname{Spec}A^\\prime$ is flat: at every point its local structural homomorphism is that in one of the flat open pieces $L,Z$, and [def-weil-flat-morphism] is a condition on precisely these local homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYZ, lemma-glueing, proof constructing the quasi-inverse from two overlapping deformations"
+   }
+  },
+  {
+   "text": "After base change to $A$, the two open copies still form an open cover by [lem-weil-pbc-open-immersion-base-change]; they cover since every point of a fibre product projects to one of the two original opens. On these pieces define maps to $Y$ by $a^{-1}:L_A=U_A\\to Y_U\\subseteq Y$ and $e:Z_A\\to Y_V\\subseteq Y$. They agree along the overlap: for $\\varphi_A=b_A^{-1}$ the equality $b_A=a_W e|_{E_A}$ gives $e\\varphi_A=a_W^{-1}$. Thus [lem-weil-pbc-scheme-morphism-gluing] gives an $A$-map $\\alpha:Y^\\prime_A\\to Y$. For the inverse, the chart maps are $\\iota_{L,A}a:Y_U\\to Y^\\prime_A$ and $\\iota_{Z,A}e^{-1}:Y_V\\to Y^\\prime_A$. On $Y_W$, the equality $b_A=a_W e$ gives $\\varphi_A a_W=e^{-1}|_{Y_W}$; hence $\\iota_{L,A}a_W=\\iota_{Z,A}\\varphi_A a_W=\\iota_{Z,A}e^{-1}|_{Y_W}$ by the reduced gluing relation. They give a map $Y\\to Y^\\prime_A$. Its two composites with $\\alpha$ restrict to identities on the respective open covers, and the uniqueness clause of the same cited node makes them identities globally. The glued maps are over $A$: composing either map with the structural morphism agrees with the corresponding structural morphism on both charts, hence globally by the same uniqueness clause. Hence $\\alpha$ is an $A$-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYZ, lemma-glueing, proof; explicit verification of the special-fibre and reduction identifications"
+   }
+  },
+  {
+   "text": "By [def-sbc-first-order-thickening], reduction of $Y^\\prime$ modulo the nilpotent $J^\\prime$ is a homeomorphism, so each open of its special fibre specifies a unique open subscheme of $Y^\\prime$. On the open copy $\\iota_Z(Z)$, the special-fibre identification induced by $\\alpha$ is the given identification of $Z_k$ with $V$, because $\\alpha\\iota_{Z,A}=e$. Hence $\\iota_Z(Z)=Y^\\prime_V$. Define $\\gamma:Y^\\prime_V\\xrightarrow{\\sim}Z$ as the inverse of this open-copy isomorphism. Restricting $\\alpha\\iota_{Z,A}=e$ and composing with $\\gamma_A$ gives $e\\circ\\gamma_A=\\alpha|_{Y_V}$. If $V$ or $W$ is empty the same formulas use the unique empty-scheme maps; if $U$ is empty the construction is simply $Z$.",
+   "uses": [
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for a smooth U_1; constructive affine version of its proof; the compatibility required by smoothness of the restriction functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-flat-morphism",
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "lem-sfb-affine-smooth-trivialization-lift",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DZN and 0DYZ: explicit smooth-affine marked-trivialization specialization of the gluing proof, replacing its abstract deformation-category fibre-product argument by affine rigidity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme covered by two affine opens with smooth affine intersection, a deformation of one open extends if the other open is smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (i : X.affineCover.I₀), X.affineOpenCover.f i = X.affineCover.f i\", \"doc\": \"For any scheme $ X $ and any index $ i $ in the zeroth component of its affine cover, the morphism from the affine open cover at $ i $ is equal to the morphism from the affine cover at $ i $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.AffineOpenCover) (j : 𝒰.I₀), 𝒰.openCover.f j = 𝒰.f j\", \"doc\": \"For any scheme $X$ and an affine open cover $\\\\mathcal{U}$ of $X$, the morphism $\\\\mathcal{U}.\\\\text{openCover}.f(j)$ associated with the open cover is equal to the morphism $\\\\mathcal{U}.f(j)$ from the a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of the restriction map of deformation functors across an affine smooth open complement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|Deformation|glueing.*smooth|gluing.*smooth",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing infinitesimal deformations of schemes on two affine opens with smooth overlap",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": Scheme\", \"doc\": \"Given gluing data $ D $ for schemes, the glued scheme is defined as the colimit (multicoequalizer) of the diagram constructed from $ D $, which identifies overlapping open subsets via specified isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"(toGlueData : CategoryTheory.GlueData AlgebraicGeometry.Scheme) →\\n  (∀ (i j : toGlueData.J), AlgebraicGeometry.IsOpenImmersion (toGlueData.f i j)) → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"A constructor for gluing data of schemes, taking gluing data in the category of schemes and a proof that all transition morphisms between objects in the diagram are open immersions.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": GlueData\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{P : Sort u} →\\n  {t t' : AlgebraicGeometry.LocallyRingedSpace.GlueData} →\\n    t = t' → AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType P t t'\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": Scheme.GlueData.{u}\", \"doc\": \"This constructs gluing data for schemes using pullbacks associated to an open cover $\\\\mathcal{U}$ of a scheme $X$ and morphisms $f: X \\\\to Z$, $g: Y \\\\to Z$. The data includes: (1) an index set $J = \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsIso 𝒰.fromGlued\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap"
+  },
+  {
+   "tool": "grep",
+   "query": "deform|infinitesimal|nilpot|lift",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"451\", \"line\": \"  refine inv 𝒰.ulift.fromGlued ≫ ?_\", \"text\": \"\"}\n  {\"file\": \"462\", \"line\": \"  rw [← cancel_epi 𝒰.ulift.fromGlued]\", \"text\": \"\"}\n  {\"file\": \"474\", \"line\": \"  refine Cover.hom_ext (𝒰.ulift.pullback₁ (𝒰.f x)) _ _ fun i ↦ ?_\", \"text\": \"\"}\n  {\"file\": \"476\", \"line\": \"    PreZeroHypercover.pullback₁_X, ulift_X, ulift_f, PreZeroHypercover.pullback₁_f]\", \"text\": \"\"}\n  {\"file\": \"477\", \"line\": \"  simp_rw [pullback.condition_assoc, ← ulift_f, ← ι_fromGlued, Category.assoc, glueMorphisms,\", \"text\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: gluing already supplied schemes does not construct compatible lifts of the smooth open and its overlap",
+   "subdirectory": "AlgebraicGeometry/Gluing.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a prescribed deformation of one affine open across another smooth affine open when the intersection is smooth affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (i : X.affineCover.I₀), X.affineOpenCover.f i = X.affineCover.f i\", \"doc\": \"For any scheme $ X $ and any index $ i $ in the zeroth component of its affine cover, the morphism from the affine open cover at $ i $ is equal to the morphism from the affine cover at $ i $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝓤 : X.OpenCover) → 𝓤.affineRefinement.openCover ⟶ 𝓤\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs a morphism from the affine refinement of $\\\\mathcal{U}$ to $\\\\mathcal{U}$ itself. The affine refinement is an open cov\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.AffineOpenCover) (j : 𝒰.I₀), 𝒰.openCover.f j = 𝒰.f j\", \"doc\": \"For any scheme $X$ and an affine open cover $\\\\mathcal{U}$ of $X$, the morphism $\\\\mathcal{U}.\\\\text{openCover}.f(j)$ associated with the open cover is equal to the morphism $\\\\mathcal{U}.f(j)$ from the a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and gluing declarations do not construct compatible infinitesimal lifts on the smooth open and overlap"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and gluing declarations do not construct compatible infinitesimal lifts on the smooth open and overlap"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|Deformation|glueing.*smooth|gluing.*smooth",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and gluing declarations do not construct compatible infinitesimal lifts on the smooth open and overlap"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing infinitesimal deformations of schemes on two affine opens with smooth overlap",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-curve-formal-lifting",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Gluing part of the formal-lifting input: proof of Stacks 0DZP, application of lemma-glueing-smooth to U_1 smooth and U_12 smooth.",
+   "via": [
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-open-deformation-lift",
+  "worker": "stage1",
+  "summary": "Gave a constructive seven-step gluing proof, keeping the statement and imported metadata. Added one unsplit affine marked-trivialization lifting lemma; reused existing Artinian nilpotence, smooth base change, smooth-flatness, open base change and gluing nodes. Checked prescribed reduction maps and empty opens. Actual Mathlib searches and verbatim citation quotes are in the sandbox. Repair after returned head b041514131a: compared the retained delivery with the current unsplit shared node, re-read every cited statement, retained its unchanged hypotheses and route, and made the over-A verification of the reduction isomorphism explicit. Revalidated against the current server DAG rather than the retired side completion. Further repair of latest returned head 0415345e888 (12:13 UTC): explicitly identified the reduced overlap using open base change and nilpotence, named the gluing chart maps, and cited the finite-order-thickening statement again when identifying the final V-open. Retained the approved statement and one supporting lemma; current-DAG comparison and literal citation audit are recorded in the report. Repair of returned head 66a5c6e2d3a: re-read the current live statements and the new same-tag coefficient-lifting node, documented why it does not replace the affine marked-trivialization input, and explicitly identified the quotient rings in both applications of that input. Retained all prior arguments, searches and provenance; delivery is rebuilt on current origin/sheaf-dag. Current-return repair: rechecked the live-DAG dependency statements and wrote the inverse-chart overlap equation explicitly before regluing the reduction isomorphism.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Gluing part of the formal-lifting input: proof of Stacks 0DZP, application of lemma-glueing-smooth to U_1 smooth and U_12 smooth.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2) supplies smoothness of the trivial A-prime deformation of U. This is a generic base-change tool; no node of this unit states its scheme-theoretic assertion."
+   },
+   {
+    "node": "def-sbc-first-order-thickening",
+    "why": "Its explicit affine nilpotent-quotient description identifies the underlying spaces and hence the labelled opens; this is a generic scheme notion, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "def-sbc-first-order-thickening"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-b0b62695e",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-b0b62695e (reviewer sub-agent of L); spot-checked: Fourth push of the same split; the earlier heads were returned at landing over side-completion promotion, not on the mathematics. Compared with head 66a5c6e2: the new node lem-sfb-affine-smooth-trivialization-lift is identical. The item changed only in three places: the TeX now reads ^\\prime instead of \\prime; steps 2 and 4 name the quotient identifications A/J≅k and A'/K≅A; step 6 writes out the inverse-chart overlap equation φ_A a_W = e^{-1}|_{Y_W}. All three are correct. The statement and metadata are unchanged, and no re-split note applies. Source: examples-defos 0DZN (lemma-glueing-smooth), second assertion with U_1 smooth, plus situation-glueing, 0DYZ and lemma-affine. The source's T Def_{P12}=0 fibre-product argument is replaced by explicit affine rigidity, an equivalent route. More-morphisms 06AD supports the new node. No SGA is used. Step checks: (1) finite-dimensional ⇒ Artinian local, so J, J' and K⊆J' are nilpotent by the Artinian nilpotence lemma; thickening clause (3) gives the homeomorphism; flatness is stalkwise, so it holds on opens. (2) New node with R=A, T=U, D=Y_U gives a and a_W. (3) Clause (2) of lem-pc-proper-base-change, smooth⇒flat and open base change give L and β_0 = a_W e|. (4) New node with R=A', I=K, T=W, D=E gives b with b_A = a_W e; direction checked. (5) Two-piece gluing with trivial cocycle; structure maps glue; flat stalkwise. (6) eφ_A = a_W^{-1} glues α; the inverse charts agree on Y_W; uniqueness gives both composites = id and over-A. (7) ι_Z(Z) = Y'_V and γ = ι_Z^{-1} give e∘γ_A = α|. Edge cases: empty U (Y'=Z), empty V (Y'=U_{A'}), empty W (disjoint union), U=V and A'=A all work; V need not be smooth. New node is true: D is affine by 06AD (I·O_D is nilpotent); the formally smooth lift goes along the nilpotent IC; flat Nakayama gives coker = ker = 0 with no finiteness. Tested on empty T, R=0 and I=0; flatness is necessary (Spec k ⊂ Spec k[ε] has no lift). It is statement-only, self-contained, has real searches, and does not restate the item. Searched with rg -L, not a duplicate of: thickening-affine-scheme, smooth-space-affine-infinitesimal-lift, affine-isolated-deformation-lift, smooth-open-coefficient-lift, chart-log-smooth-deformation-calculus, isolated-lci-curve-unobstructed. Accepted tool_uses: lem-pc-proper-base-change clause (2) (unit sk-thm-picard-rr) as generic smooth base change; def-sbc-first-order-thickening, a definition. Maintainer note: the existing unsplit node lem-sfb-smooth-open-coefficient-lift (NN) generalizes the item with Λ=k. Both nodes predate this delivery, so it is not a delivery fault. That node could reuse the new affine-trivialization node, or the two could be merged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothOpenDeformationLift",
+  "declaration": "AlgebraicGeometry.exists_smooth_open_deformation_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothOpenDeformationLift.lean",
+  "statement": "theorem exists_smooth_open_deformation_lift (k A A' : Type u) [Field k] [CommRing A] [CommRing A'] [Algebra k A] [Algebra k A'] [FiniteDimensional k A] [FiniteDimensional k A'] [IsLocalRing A] [IsLocalRing A'] (ε : A →ₐ[k] k) (ε' : A' →ₐ[k] k) (hε : RingHom.ker ε.toRingHom = IsLocalRing.maximalIdeal A) (hε' : RingHom.ker ε'.toRingHom = IsLocalRing.maximalIdeal A') (q : A' →ₐ[k] A) (hq : Function.Surjective q) (haug : ε.comp q = ε') (X : Over (Spec (CommRingCat.of k))) (U V : X.left.Opens) (hcover : U ⊔ V = ⊤) (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hUV : IsAffineOpen (U ⊓ V)) (hsU : Smooth (U.ι ≫ X.hom)) (hsUV : Smooth ((U ⊓ V).ι ≫ X.hom)) (Y : Over (Spec (CommRingCat.of A))) [Flat Y.hom] (φ : (Over.pullback (Spec.map (CommRingCat.ofHom ε.toRingHom))).obj Y ≅ X) (YV : Y.left.Opens) (hYV : pullback.fst Y.hom (Spec.map (CommRingCat.ofHom ε.toRingHom)) ⁻¹ᵁ YV = φ.hom.left ⁻¹ᵁ V) (Z : Over (Spec (CommRingCat.of A'))) [Flat Z.hom] (e : (Over.pullback (Spec.map (CommRingCat.ofHom q.toRingHom))).obj Z ≅ Over.mk (YV.ι ≫ Y.hom)) : ∃ Y' : Over (Spec (CommRingCat.of A')), Flat Y'.hom ∧ ∃ α : (Over.pullback (Spec.map (CommRingCat.ofHom q.toRingHom))).obj Y' ≅ Y, ∃ Y'V : Y'.left.Opens, pullback.fst Y'.hom (Spec.map (CommRingCat.ofHom q.toRingHom)) ⁻¹ᵁ Y'V = α.hom.left ⁻¹ᵁ YV ∧ ∃ γ : Over.mk (Y'V.ι ≫ Y'.hom) ≅ Z, ((Over.pullback (Spec.map (CommRingCat.ofHom q.toRingHom))).mapIso γ).hom ≫ e.hom ≫ Over.homMk YV.ι = (Over.pullback (Spec.map (CommRingCat.ofHom q.toRingHom))).map (Over.homMk Y'V.ι) ≫ α.hom",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0d3e7079",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read the node, the Stacks source (situation-glueing, lemma-glueing-smooth 0DZN), the 5 stmt_dep records (Field, Scheme, Smooth, Flat, pullback; all Mathlib existing:true), the module and report.md. Every clause matches: augmented finite-dim local algebras with kernel = maximal ideal; surjective q with ε∘q=ε'; affine U, V, U∩V covering X; U and U∩V smooth; Y flat with k-iso φ; YV labelled by an inverse-image equation (unique, adds no hypothesis); Z flat with e over A; conclusion ∃Y' flat, α over A, Y'V labelled through α, γ over A', and e∘γ_A=α|Y_V stated after the monomorphic open inclusion (equivalent). Edge cases: empty opens and X, q=id, any characteristic; the single universe u is forced by Spec. Only the lean field changed against live; the statement is verbatim in the file; docstrings carry source and blueprint; proof only sorry; no definitions; both report sections present. No findings; not recompiled (no file changed)."
+ }
+}

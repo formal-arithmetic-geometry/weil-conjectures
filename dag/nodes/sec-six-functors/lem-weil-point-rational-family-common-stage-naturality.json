@@ -1,0 +1,246 @@
+{
+ "id": "lem-weil-point-rational-family-common-stage-naturality",
+ "kind": "statement",
+ "title": "Same-stage naturality and descent of a scalar-compatible rational point family",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All coefficient fields below are finite intermediate extensions of $\\Omega/\\mathbf Q_\\ell$, with valuation rings and uniformizers [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, and let $g:s\\to s$ be a scheme automorphism [def-weil-scheme-morphism-properties]. On the small pro-etale site [def-weil-pbc-proetale-site], put $\\mathcal C_E^{\\rm int}=D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], $\\mathcal C_E=D^b_c(s,E)$, the raw rationalization [def-weil-rationalization-karoubi], and $P_E=Lg_E^*$ with its specified integral, rational and common-stage actions [def-weil-derived-pullback-tensor-hom]. Let $F_E^{\\rm int}=\\Gamma(s,-)$ and $F_E=\\operatorname{Fib}_s:\\mathcal C_E\\to D^b_{\\rm fd}(E)$ be the specified point-section functors [def-weil-finite-coefficient-point], and put $H_E=F_EP_E$.\n\nFor $E\\subseteq L$, write $S_{L/E}K=K\\otimes_E L$ for rational scalar extension and $T_{L/E}A=A\\otimes_E L$ on point complexes [def-weil-point-fd-qlbar-category]. Let $\\bar\\alpha_{E,L,K}:S_{L/E}P_EK\\xrightarrow{\\sim}P_LS_{L/E}K$ and $\\bar\\varphi_{E,L,K}:F_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}F_EK$ be precisely the rationalizations of the specified completed pullback and sections comparisons [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension]. Define\n$$b_{E,L,K}=\\bar\\varphi_{E,L,P_EK}\\circ F_L(\\bar\\alpha_{E,L,K}^{-1}):H_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}H_EK.$$\n\nSuppose that, for every finite $E$, maps $t_{E,K}:F_EK\\to H_EK$ form a natural transformation on $\\mathcal C_E$, and suppose they satisfy\n$$b_{E,L,K}t_{L,S_{L/E}K}=T_{L/E}(t_{E,K})\\bar\\varphi_{E,L,K}.$$\nAssume the unit and tower equations for $b$ with the specified source and point-complex associators, and that for a representative $u:S_{L/E}K\\to S_{L/E'}K'$ the two specified common-stage functor actions are represented by\n$$A_L(u)=\\bar\\varphi_{E',L,K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1},\\qquad B_L(u)=b_{E',L,K'}H_L(u)b_{E,L,K}^{-1},$$\nwith scalar transport of these arrows equal to the corresponding formulas at every larger field. Use the literal common-stage source and target categories [def-weil-algebraically-closed-coefficients, def-weil-point-fd-qlbar-category]. Put $t^L_{E,K}=T_{L/E}(t_{E,K})$, with the prescribed unit identifications when $L=E$.\n\nFor every representative $u$ the equation\n$$B_L(u)t^L_{E,K}=t^L_{E',K'}A_L(u)$$\nholds in $D(L)$ over that very same $L$. Applying $-\\otimes_L N$ and the source and target associators to this equality gives the equality for $u_N$ for every finite $N\\supseteq L$. If $[L,u]=[L',v]$, then at some common finite $N$ their transported equations have identical left and right sides. Consequently the finite-stage classes $[E,t_{E,K}]$ define a natural transformation $\\operatorname{Fib}_s\\Rightarrow\\operatorname{Fib}_s\\circ Lg^*$ with these components and this same-stage naturality. There is no requirement that the maps $t_{E,K}$ be isomorphisms, that coefficient transitions on morphisms be injective, or that the rational family have an integral lift.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, Weil II, (1.1.3), p. 150; (1.1.7), pp. 150-151 gives the point-transport context only. Original coefficient-descent proof steps 6-7: naturality in D(L) and representative independence by extension to a common field. The completed pro-etale normalization and explicit formulas are an agent-written argument, not assertions attributed to Deligne."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-qlbar-category",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition",
+  "def-sf-point-fibre-tensor-system"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L\\supseteq E,E'$ and write $X=S_{L/E}K$, $Y=S_{L/E'}K'$, $t_X=t_{L,X}$, $t_Y=t_{L,Y}$, $\\varphi=\\bar\\varphi_{E,L,K}$, $\\varphi'=\\bar\\varphi_{E',L,K'}$, $b=b_{E,L,K}$ and $b'=b_{E',L,K'}$. The assumed scalar equations say $t^L_{E,K}=bt_X\\varphi^{-1}$ and $t^L_{E',K'}=b't_Y(\\varphi')^{-1}$. Naturality of the supplied transformation $t_L$ at the actual arrow $u:X\\to Y$ says $H_L(u)t_X=t_YF_L(u)$. Substitution and cancellation give, entirely in $D(L)$,\n$$B_L(u)t^L_{E,K}=b'H_L(u)b^{-1}bt_X\\varphi^{-1}=b'H_L(u)t_X\\varphi^{-1}=b't_YF_L(u)\\varphi^{-1}=t^L_{E',K'}A_L(u).$$\nOnly the comparison isomorphisms were inverted; neither $t_X$ nor $t_Y$ was inverted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.3), printed p. 150, supplies the coefficient-limit context; (1.1.7), pp. 150-151, supplies the point-transport context. Agent-written verification of original coefficient-descent steps 6-7, from the explicit hypotheses and the two common-stage category definitions; the displayed conjugation argument is not attributed to Deligne."
+   }
+  },
+  {
+   "text": "For $N\\supseteq L$ put $U=T_{N/L}$ and use the target associators $c$ of [def-weil-point-fd-qlbar-category]. For each endpoint $(E,K)$ let $c_F:T_{N/L}T_{L/E}F_EK\\to T_{N/E}F_EK$ and $c_H:T_{N/L}T_{L/E}H_EK\\to T_{N/E}H_EK$ be their components, with primes at $(E',K')$. Naturality of $c$ at the morphism $t_{E,K}$ gives $c_HU(t^L_{E,K})c_F^{-1}=t^N_{E,K}$, and likewise at the other endpoint. The assumed scalar transport of the two functor actions gives $c_F'U(A_L(u))c_F^{-1}=A_N(u_N)$ and $c_H'U(B_L(u))c_H^{-1}=B_N(u_N)$, where $u_N$ uses the prescribed source associators. Apply the functor $U$ to Step 1, postcompose with $c_H'$ and precompose with $c_F^{-1}$. Inserting $c_H^{-1}c_H$ and $(c_F')^{-1}c_F'$ gives exactly $B_N(u_N)t^N_{E,K}=t^N_{E',K'}A_N(u_N)$. This also covers $N=L$ by the unit equations.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.3), printed p. 150, supplies the coefficient-limit context; (1.1.7), pp. 150-151, supplies the point-transport context. Agent-written verification of original coefficient-descent steps 6-7, from the explicit hypotheses and the two common-stage category definitions; the displayed conjugation argument is not attributed to Deligne."
+   }
+  },
+  {
+   "text": "If $[L,u]=[L',v]$ in the literal source category, [def-weil-algebraically-closed-coefficients] gives some finite $N\\supseteq L,L'$ with $u_N=v_N$ as arrows between the same extended endpoints. Step 2 takes both equations to this $N$. The two equations now have left sides $B_N(u_N)t^N_{E,K}$ and $B_N(v_N)t^N_{E,K}$, which are identical, and right sides $t^N_{E',K'}A_N(u_N)$ and $t^N_{E',K'}A_N(v_N)$, which are identical. By the target equality rule in [def-weil-point-fd-qlbar-category] these represent the same equality of morphism classes. No implication from equality at $N$ back to equality at $L$ or $L'$ is used.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.3), printed p. 150, supplies the coefficient-limit context; (1.1.7), pp. 150-151, supplies the point-transport context. Agent-written verification of original coefficient-descent steps 6-7, from the explicit hypotheses and the two common-stage category definitions; the displayed conjugation argument is not attributed to Deligne."
+   }
+  },
+  {
+   "text": "At the object $(E,K)$ take the component $[E,t_{E,K}]$, using the prescribed unit identifications. More explicitly its representative between $T_{E/E}F_EK$ and $T_{E/E}H_EK$ is $\\iota_{E,H_EK}^{-1}t_{E,K}\\iota_{E,F_EK}$. The transition formula and naturality of the tower and unit isomorphisms in [def-weil-point-fd-qlbar-category] identify its representative at $L$ with $t^L_{E,K}$. Composition of classes is composition at a common field by that same definition. Thus for any $[L,u]$ the naturality square of these components is represented by precisely the two composites in Step 1; those composites are equal over $L$. Step 3 makes this independent of its representative. Components and this square for every arrow are the data of the required natural transformation between the two specified functors. The argument used only the supplied rational family and functor laws; it requires no integral lift and no injectivity of transition maps.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.3), printed p. 150, supplies the coefficient-limit context; (1.1.7), pp. 150-151, supplies the point-transport context. Agent-written verification of original coefficient-descent steps 6-7, from the explicit hypotheses and the two common-stage category definitions; the displayed conjugation argument is not attributed to Deligne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.3), printed p. 150, supplies the coefficient-limit context; (1.1.7), pp. 150-151, supplies the point-transport context. Agent-written verification of original coefficient-descent steps 6-7, from the explicit hypotheses and the two common-stage category definitions; the displayed conjugation argument is not attributed to Deligne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar compatible natural transformations between rational point sections and pullback sections descend to common finite coefficient categories, naturality holds over the same representative field",
+   "results": "AlgebraicGeometry.AffineSpace.comp_homOfVector; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.Scheme.evaluation_naturality_apply; AlgebraicGeometry.Scheme.evaluation_naturality; AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit maps and tensor congruence identities do not state naturality over the original finite field for the specified rational point functors and prescribed comparison conjugations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Limits.colimit",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit maps and tensor congruence identities do not state naturality over the original finite field for the specified rational point functors and prescribed comparison conjugations."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*[Nn]at|[Nn]at[Tt]rans.*[Dd]irect.*[Cc]olim|[Nn]at[Tt]rans.*[Ff]iltered.*[Cc]olim",
+   "results": "0 hits; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit maps and tensor congruence identities do not state naturality over the original finite field for the specified rational point functors and prescribed comparison conjugations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between compatible functors on filtered categories descend to a common stage category without requiring injective transition maps",
+   "results": "0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given coherent scalar comparison isomorphisms phi and b and natural t with b t equals tensor t phi, conjugated arrows A and B satisfy B t equals t A over the original coefficient field",
+   "results": "TensorProduct.AlgebraTensorModule.congr_mul; TensorProduct.congr_mul; TensorProduct.AlgebraTensorModule.congr_trans; TensorProduct.congr_congr; TensorProduct.AlgebraTensorModule.congr; TensorProduct.AlgebraTensorModule.congr_tmul; TensorProduct.AlgebraTensorModule.congr_eq; TensorProduct.congr",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit maps and tensor congruence identities do not state naturality over the original finite field for the specified rational point functors and prescribed comparison conjugations."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp",
+   "results": "196; 218; 400; 426; subdirectory Algebra/Colimit/Module.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit maps and tensor congruence identities do not state naturality over the original finite field for the specified rational point functors and prescribed comparison conjugations."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*[Nn]at|[Nn]at[Tt]rans.*[Cc]olim|[Cc]olim.*[Nn]at[Tt]rans",
+   "results": "25 hits; Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Sites/Plus.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Limits.lean, Mathlib/CategoryTheory/Limits/Final.lean; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible natural transformations descend through a filtered common stage category and satisfy naturality at the original representative stage",
+   "results": "8 hits; CategoryTheory.NatTrans.naturality', CategoryTheory.NatTrans.ofSequence_app, CategoryTheory.Subfunctor.nat_trans_naturality, MonCat.FilteredColimits.cocone_naturality, CategoryTheory.NatTrans.ofSequence, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.NatTrans.mk, CategoryTheory.IndParallelPairPresentation.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of natural transformations compatible with scalar extension descends to a common finite coefficient stage category by conjugation with scalar comparison isomorphisms",
+   "results": "8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalarsComp, ModuleCat.CoextendScalars.map'",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|structure NatTrans",
+   "results": "5 hits; 16, 19, 50, 53, 56; subdirectory CategoryTheory/NatTrans.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a naturality square by coherent comparison isomorphisms gives a natural transformation on a filtered union of categories, with equality before taking the colimit",
+   "results": "8 hits; CategoryTheory.SmallObject.ιFunctorObj_naturality_assoc, CategoryTheory.SmallObject.ιFunctorObj_naturality, CategoryTheory.NonemptyParallelPairPresentationAux.hf, CategoryTheory.NonemptyParallelPairPresentationAux.hg, CategoryTheory.ι_colimitCompWhiskeringRightIsoColimitComp_hom, CategoryTheory.preservesColimitNatIso, CategoryTheory.Limits.ι_colimitCompWhiskeringLeftIsoCompColimit_hom, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and extension-of-scalars coherence hits give elementary ingredients, not this specified common-stage rational family or its representative descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-transformation-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The first cohomology-transport arrow of def-weil-global-geometric-frobenius, via def-weil-frobenius-cohomology-transport and def-weil-frobenius-point-transport: original point-naturality proof step 6 (all rational morphism tensors) and step 9 (the actual point/pullback common-stage conjugations and independence of representatives). Original coefficient-descent proof steps 6-7: naturality in D(L) and representative independence by extension to a common field.",
+   "via": [
+    "lem-weil-point-transformation-coefficient-descent",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-point-rational-family-common-stage-naturality",
+  "worker": "stage1",
+  "summary": "Q09 writes the same-field conjugation calculation, transports it with explicitly typed point associators, applies eventual equality of source representatives, and assembles the literal target-class components. Statement unchanged; no new nodes: all steps are substitutions, functor laws or the two cited definitions.",
+  "blueprint": "The first transport arrow in def-weil-global-geometric-frobenius, via its recorded coefficient-descent ancestry: original coefficient-descent steps 6-7, same-stage naturality and equivalent representative independence. The current blueprint definition specifies the transport arrow but supplies no proof of this auxiliary assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-e714ec7ed",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-e714ec7ed (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes, and the statement, stmt_deps, created and blueprint fields are unchanged. All typings check: b: H_L S_{L/E}K -> T_{L/E}H_EK; both sides of the scalar equation are F_L S_{L/E}K -> T_{L/E}H_EK. B_L(u) unwinds to Fib(ᾱ'^{-1} P_L(u) ᾱ), so it is exactly the action of Fib_s∘Lg^*, not a free arrow. Step 1: I recomputed B t^L = b' H(u) t_X φ^{-1} = b' t_Y F(u) φ^{-1} = t'^L A; only b and φ are cancelled, never t. Step 2: naturality of c in def-weil-point-fd-qlbar-category at t, the action-transport hypothesis, and the N = L case via c_{L/L/E} = ι. Step 3: the source definition's 'agree after extension to a common field' rule, with the target equality rule used only forward. Step 4: the representative ι^{-1} t ι transports to T_{L/E}(t) = t^L by the unit equation, and composition is at a common stage. All four steps are genuinely elementary from explicit hypotheses and the two common-stage definitions; proof_deps equals the union of uses. Only definitions are cited (no off-unit tool, no tool_uses). There is no circularity: the parent coefficient-descent step 2 cites the item, not the reverse. The source is Weil II (1.1.3)/(1.1.7) as context only, with proof_origin agent; no SGA. There is no 2026-10-21 re-split note (the item was created 2026-10-22). Edge cases t=0, non-invertible t, L=E and N=L are covered."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointRationalFamilyCommonStageNaturality",
+  "declaration": "WeilConjectures.PointRationalFamily.rational_family_common_stage_naturality",
+  "declarations": [
+   "WeilConjectures.PointRationalFamily.rationalPullback",
+   "WeilConjectures.PointRationalFamily.commonPullback",
+   "WeilConjectures.PointRationalFamily.pullbackObject",
+   "WeilConjectures.PointRationalFamily.rationalB",
+   "WeilConjectures.PointRationalFamily.RationalFamily",
+   "WeilConjectures.PointRationalFamily.RationalCompatible",
+   "WeilConjectures.PointRationalFamily.pullbackComparison",
+   "WeilConjectures.PointRationalFamily.stageB",
+   "WeilConjectures.PointRationalFamily.stageComponent",
+   "WeilConjectures.PointRationalFamily.componentAt",
+   "WeilConjectures.PointRationalFamily.fibreArrow",
+   "WeilConjectures.PointRationalFamily.pullbackArrow",
+   "WeilConjectures.PointRationalFamily.pointClass",
+   "WeilConjectures.PointRationalFamily.fibreClass",
+   "WeilConjectures.PointRationalFamily.pullbackClass",
+   "WeilConjectures.PointRationalFamily.pointTransport",
+   "WeilConjectures.PointRationalFamily.CommonNormalized",
+   "WeilConjectures.PointRationalFamily.rationalFamilyNaturalityLeft",
+   "WeilConjectures.PointRationalFamily.rationalFamilyNaturalityRight",
+   "WeilConjectures.PointRationalFamily.rational_family_common_stage_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/PointRationalFamilyCommonStageNaturality.lean",
+  "statement": "theorem rational_family_common_stage_naturality [IsIso g] (t : RationalFamily D l hl Ω g) (ht : RationalCompatible D l hl Ω g t) (hunit : ∀ (E : Index l Ω) (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) (Spec (.of D.k))), HEq ((rationalB D l hl g _ _ (AlgHom.id ℚ_[l] (Coefficient.{u} l Ω E)) K).hom.hom ≫ (DerivedCategory.fieldScalarUnit (Coefficient.{u} l Ω E)).hom.app _) ((pointRationalFibre D l hl (Coefficient.{u} l Ω E)).map ((rationalPullback D l hl g (Coefficient.{u} l Ω E)).map ((sfRationalScalarUnit l (Coefficient.{u} l Ω E) (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))).hom.app K))).hom) (htower : ∀ (E L N : Index l Ω) (h : E ≤ L) (k : L ≤ N) (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) (Spec (.of D.k))), HEq ((pointRationalFibre D l hl (Coefficient.{u} l Ω N)).map ((rationalPullback D l hl g (Coefficient.{u} l Ω N)).map ((sfRationalScalarComp l _ _ (coefficientInclusion l Ω E L h) (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) _ (coefficientInclusion l Ω L N k)).hom.app K)) ≫ (rationalB D l hl g _ _ ((coefficientInclusion l Ω L N k).comp (coefficientInclusion l Ω E L h)) K).hom) ((rationalB D l hl g _ _ (coefficientInclusion l Ω L N k) ((sfRationalScalarExtension l _ (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) _ (coefficientInclusion l Ω E L h)).obj K)).hom ≫ (DerivedCategory.pointFdScalarExtension (coefficientInclusion l Ω L N k).toRingHom).map (rationalB D l hl g _ _ (coefficientInclusion l Ω E L h) K).hom ≫ (pointFibreFdTensorTower (coefficientInclusion l Ω E L h).toRingHom (coefficientInclusion l Ω L N k).toRingHom).hom.app _)) (hactions : ∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : A.toStage hA ⟶ B.toStage hB), HEq ((pointQbarFibre D l hl Ω).map (StageSystem.PairCategory.mkHom L hA hB f)) (fibreClass D l hl Ω A B L hA hB f) ∧ HEq ((commonPullback D l hl Ω g ⋙ pointQbarFibre D l hl Ω).map (StageSystem.PairCategory.mkHom L hA hB f)) (pullbackClass D l hl Ω g A B L hA hB f) ∧ ∀ (N : Index l Ω) (h : L ≤ N), HEq (pointTransport l Ω (pointQbarFibreObj D l hl Ω A) (pointQbarFibreObj D l hl Ω B) L N hA hB h (fibreArrow D l hl Ω A B L hA hB f)) (fibreArrow D l hl Ω A B N (hA.trans h) (hB.trans h) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr h f)) ∧ HEq (pointTransport l Ω (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g A)) (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g B)) L N hA hB h (pullbackArrow D l hl Ω g A B L hA hB f)) (pullbackArrow D l hl Ω g A B N (hA.trans h) (hB.trans h) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr h f))) : (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : A.toStage hA ⟶ B.toStage hB), rationalFamilyNaturalityLeft D l hl Ω g t A B L hA hB f = rationalFamilyNaturalityRight D l hl Ω g t A B L hA hB f ∧ ∀ (N : Index l Ω) (h : L ≤ N), pointTransport l Ω (pointQbarFibreObj D l hl Ω A) (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g B)) L N hA hB h (rationalFamilyNaturalityLeft D l hl Ω g t A B L hA hB f) = rationalFamilyNaturalityLeft D l hl Ω g t A B N (hA.trans h) (hB.trans h) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr h f) ∧ pointTransport l Ω (pointQbarFibreObj D l hl Ω A) (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g B)) L N hA hB h (rationalFamilyNaturalityRight D l hl Ω g t A B L hA hB f) = rationalFamilyNaturalityRight D l hl Ω g t A B N (hA.trans h) (hB.trans h) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr h f)) ∧ (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (L M : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (hA' : A.stage ≤ M) (hB' : B.stage ≤ M) (f : A.toStage hA ⟶ B.toStage hB) (v : A.toStage hA' ⟶ B.toStage hB'), StageSystem.PairCategory.mkHom L hA hB f = StageSystem.PairCategory.mkHom M hA' hB' v → ∃ (N : Index l Ω) (hL : L ≤ N) (hM : M ≤ N), HEq ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hL f) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hM v) ∧ HEq (rationalFamilyNaturalityLeft D l hl Ω g t A B N (hA.trans hL) (hB.trans hL) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hL f)) (rationalFamilyNaturalityLeft D l hl Ω g t A B N (hA'.trans hM) (hB'.trans hM) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hM v)) ∧ HEq (rationalFamilyNaturalityRight D l hl Ω g t A B N (hA.trans hL) (hB.trans hL) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hL f)) (rationalFamilyNaturalityRight D l hl Ω g t A B N (hA'.trans hM) (hB'.trans hM) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr hM v))) ∧ ∃ τ : pointQbarFibre D l hl Ω ⟶ commonPullback D l hl Ω g ⋙ pointQbarFibre D l hl Ω, CommonNormalized D l hl Ω g t τ",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "R1 repair: canonical helper composites are stated in the owning item module under the fresh PointRationalFamily namespace; no import of the downstream PointTransformationCoefficientDescent module. R2: record both landed statement dependencies for scalar unit/composition and finite-point invertibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-296470527",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Re-delivery fixes return 330b19f7. R1: downstream PointTransformationCoefficientDescent import removed; its 17 helpers are restated here under WeilConjectures.PointRationalFamily, bodies identical (normalized diff), and the side-live import closure has no cycle. R2: stmt_deps gain only landed lem-weil-scalar-extension-composition and def-sf-point-fibre-tensor-system (owner of finiteFieldSpecCoefficientPrimeInvertible); node delta vs live = lean + those 2. Mechanical theorem-stmt_dep finding: sfRationalScalarComp/Unit are .exists.choose of sfRationalScalar*_existsUnique, objects the theorem constructs and the node requires (specified source associators) -> PASS. Signature unchanged except namespace; clauses re-checked (b with ᾱ⁻¹, scalar equation, unit/tower/actions, same-stage equality, common-N independence, CommonNormalized τ); no IsIso/injectivity/integral-lift assumption; 1 sorry; 20/20 declarations; statement verbatim; docstrings OK; no compile (no FIX). Advisory: downstream helper copies should become aliases of this owner at stage 3."
+ }
+}

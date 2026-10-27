@@ -93,15 +93,15 @@ theorem exists_unique_invertibleTensorScalarExtensionData
     intro T β r
     induction r using Nat.twoStepInduction with
     | zero => simpa only [ScalarExtensionTensorCore.power, scalarTensorPowerMap,
-        scalarTensorPower, Category.comp_id, ScalarExtensionTensorCore.unitComparison]
+        scalarTensorPower_zero, Category.comp_id, ScalarExtensionTensorCore.unitComparison]
         using scalarExtensionTowerUnit.{uC, vC, u} α β
     | one => simp only [ScalarExtensionTensorCore.power, scalarTensorPowerMap,
-        scalarTensorPower, Iso.refl_hom, scalarExtension_map_id,
+        scalarTensorPower_one, Iso.refl_hom, scalarExtension_map_id,
         Category.id_comp, Category.comp_id]
     | more r _ ih =>
       simp only [ScalarExtensionTensorCore.power, scalarTensorPowerMap,
         Iso.trans_hom, Functor.mapIso_hom, scalarExtension_map_comp]
-      dsimp only [scalarTensorPower]
+      simp only [scalarTensorPower_succ]
       simp only [Category.assoc]
       slice_lhs 2 3 =>
         rw [(afterCore T β).first_natural (e.power M (r + 1)).hom

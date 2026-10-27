@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-overlapping-open-irreducible-intervals",
+ "kind": "statement",
+ "title": "Irreducible-closed intervals across two overlapping open subspaces",
+ "statement": "Let $X$ be a topological space, and let $U,V\\subseteq X$ be open subsets, all subsets carrying their subspace topologies [def-kun-subspace-topology]. Let $Z\\subseteq Z'$ be irreducible closed subsets of $V$ [def-weil-irreducible-components], and assume $Z\\cap U\\ne\\varnothing$. Put $W=U\\cap V$, $C=\\overline{Z\\cap W}^{\\,U}$, and $C'=\\overline{Z'\\cap W}^{\\,U}$, where the superscript specifies the ambient space of closure. Then $C\\subseteq C'$ are irreducible closed subsets of $U$, with $C\\cap W=Z\\cap W$ and $C'\\cap W=Z'\\cap W$. Define $[Z,Z']_V$ to be all irreducible closed subsets $D$ of $V$ with $Z\\subseteq D\\subseteq Z'$, ordered by inclusion, and define $[C,C']_U$ analogously. The formulas $F(D)=\\overline{D\\cap W}^{\\,U}$ and $G(E)=\\overline{E\\cap W}^{\\,V}$ define inverse inclusion-preserving bijections $F:[Z,Z']_V\\longrightarrow[C,C']_U$ and $G:[C,C']_U\\longrightarrow[Z,Z']_V$, taking endpoints to endpoints. They identify each of these entire intervals with the interval of irreducible closed subsets of $W$ between $Z\\cap W$ and $Z'\\cap W$, by intersection with $W$. They induce length-preserving inverse bijections on finite strict chains with these endpoints, and on saturated chains with these endpoints. Length means number of strict inclusions; saturated means no irreducible closed subset can be inserted between two adjacent members. Thus the two intervals have the same attainable strict-chain lengths and the same attainable saturated-chain lengths. No affineness, separation, sobriety, or Noetherian hypothesis is imposed on $X,U,V,W$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 02I2 (lemma-catenary), restriction/closure correspondence in the proof, applied to W inside V and inside U and restricted to the full endpoint intervals."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "By [def-kun-subspace-topology], $W=U\\cap V$ is open both in $U$ and in $V$, and either iterated subspace topology on $W$ has opens $O\\cap W$ for $O$ open in $X$. Set $A=Z\\cap W$ and $B=Z'\\cap W$. Since $Z\\subseteq V$, $Z\\cap U=A\\ne\\varnothing$; also $B\\supseteq A$. Apply [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] to $W\\subseteq V$: $A\\subseteq B$ are irreducible closed in $W$, with closures $Z,Z'$ in $V$. Apply its inverse for $W\\subseteq U$: their closures $C\\subseteq C'$ are irreducible closed in $U$, and $C\\cap W=A$, $C'\\cap W=B$.",
+   "uses": [
+    "def-kun-subspace-topology",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2 (lemma-catenary), proof: restriction/closure bijection; details of the endpoint intervals and chains supplied here."
+   }
+  },
+  {
+   "text": "Let $J$ consist of the irreducible closed subsets $T$ of $W$ with $A\\subseteq T\\subseteq B$. The correspondence [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] for $W\\subseteq V$ restricts to $r_V:[Z,Z']_V\\to J$, $D\\mapsto D\\cap W$. Every such $D$ meets $W$ since it contains $Z$, and its intersection lies between $A,B$. Conversely $s_V(T)=\\overline T^{\\,V}$ lies between $\\overline A^{\\,V}=Z$ and $\\overline B^{\\,V}=Z'$. The cited inverse identities give $s_V(r_V(D))=D$ and $r_V(s_V(T))=T$ for every $D,T$ in these full intervals. Both maps preserve inclusion.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2 (lemma-catenary), proof: restriction/closure bijection; details of the endpoint intervals and chains supplied here."
+   }
+  },
+  {
+   "text": "For $W\\subseteq U$, [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] likewise restricts to $r_U:[C,C']_U\\to J$ with inverse $s_U(T)=\\overline T^{\\,U}$. Every $E$ in this interval meets $W$ since $E\\supseteq C$ and $C\\cap W=A\\ne\\varnothing$; conversely closure in $U$ sends $A\\subseteq T\\subseteq B$ into $C\\subseteq s_U(T)\\subseteq C'$. The cited inverse identities give $s_U(r_U(E))=E$ and $r_U(s_U(T))=T$ on these full intervals. Hence $F=s_Ur_V$ and $G=s_Vr_U$ have the asserted formulas, with $F(D)\\cap W=D\\cap W$ and $G(E)\\cap W=E\\cap W$. Explicitly $GF=s_Vr_Us_Ur_V=s_Vr_V=1$ and $FG=s_Ur_Vs_Vr_U=s_Ur_U=1$. Both preserve inclusion; $F(Z)=C$, $F(Z')=C'$ and the inverse identities give the reverse endpoint equalities.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2 (lemma-catenary), proof: restriction/closure bijection; details of the endpoint intervals and chains supplied here."
+   }
+  },
+  {
+   "text": "For a finite strict chain $Z=D_0\\subsetneq\\cdots\\subsetneq D_n=Z'$, apply $F$ termwise. Inclusion is preserved, and equality of two images would give equality of the original terms after applying $G$. Hence the image is a strict chain from $C$ to $C'$ with exactly $n$ inclusions. Termwise $G$ reverses this construction, giving inverse length-preserving bijections, including the one-term chains when the endpoints coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2 (lemma-catenary), proof: restriction/closure bijection; details of the endpoint intervals and chains supplied here."
+   }
+  },
+  {
+   "text": "An insertion $F(D_i)\\subsetneq E\\subsetneq F(D_{i+1})$ automatically lies in $[C,C']_U$ and yields $D_i\\subsetneq G(E)\\subsetneq D_{i+1}$ by the inverse inclusion-preserving bijection. Conversely any insertion between $D_i,D_{i+1}$ maps by $F$ to an insertion between their images. Thus a chain has no allowable insertion exactly when its image has none. Restricting the preceding inverse chain maps gives the asserted saturated-chain bijections and equality of attainable lengths. The adjacency argument also applies if chains with other index sets are allowed. All applications used only openness and the stated nonempty intersection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2 (lemma-catenary), proof: restriction/closure bijection; details of the endpoint intervals and chains supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 02I2 (lemma-catenary), proof; explicit expansion of the omitted interval and chain arguments, using the existing single-open Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two overlapping open subspaces U and V of X, irreducible closed subsets Z contained in Zprime in V meeting U determine order isomorphic entire intervals in U by restriction and closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"module\": \"Mathlib/Topology/Sets/Closeds\", \"type\": \"(α : Type u_2) →\\n  [inst : TopologicalSpace α] → TopologicalSpace.IrreducibleCloseds α ≃o { x // IsIrreducible x ∧ IsClosed x }\", \"doc\": \"There is an order isomorphism between the type of irreducible closed subsets of a topological space and the subtype of sets that are both closed and irreducible, preserving the inclusion order. This c\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"module\": \"Mathlib/Topology/Sets/Closeds\", \"type\": \"(α : Type u_2) →\\n  [inst : TopologicalSpace α] → TopologicalSpace.IrreducibleCloseds α ≃o { x // IsClosed x ∧ IsIrreducible x }\", \"doc\": \"The canonical order isomorphism between the type of irreducible closed subsets of a topological space $\\\\alpha$ and the subtype of subsets of $\\\\alpha$ that are both closed and irreducible, preserving t\"}\n  {\"name\": \"AlgebraicGeometry.opensRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → (↑U).Opens ≃ { V // V ≤ U }\", \"doc\": \"For a scheme $X$ and an open subset $U$ of $X$, there is a canonical equivalence between the open subsets of $U$ and the open subsets of $X$ contained in $U$. This equivalence arises from the open imm\"}\n  {\"name\": \"PrespectralSpace.opensEquiv\", \"module\": \"Mathlib/Topology/Spectral/Prespectral\", \"type\": \"{X : Type u_1} →\\n  [inst : TopologicalSpace X] →\\n    [PrespectralSpace X] → TopologicalSpace.Opens X ≃o Order.Ideal (TopologicalSpace.CompactOpens X)\", \"doc\": \"For any prespectral space $ X $, there is an order-preserving bijection between the open sets of $ X $ and the order ideals of its compact open subsets. This equivalence maps each open set $ U $ to th\"}\n  {\"name\": \"irreducibleComponentsEquivOfIsPreirreducibleFiber\", \"module\": \"Mathlib/Topology/Irreducible\", \"type\": \"{X : Type u_1} →\\n  {Y : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      [inst_1 : TopologicalSpace Y] →\\n        (f : X → Y) →\\n          Continuous f →\\n            IsOpenMap f →\\n              (∀ (x : Y), IsPreirreducible (f ⁻¹' {x})) →\\n                Function.Surjective f → ↑(irreducibleComponen\", \"doc\": \"Given topological spaces $X$ and $Y$, if $f : X \\to Y$ is a continuous, open, and surjective map such that every fiber $f^{-1}(\\\\{y\\\\})$ is preirreducible, then there exists an order isomorphism between \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictRestrictComm\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (U V : X.Opens) → ↑((TopologicalSpace.Opens.map U.ι.base).obj V) ≅ ↑((TopologicalSpace.Opens.map V.ι.base).obj U)\", \"doc\": \"For any scheme $X$ and open subsets $U,V \\\\subseteq X$, the scheme obtained by restricting $X$ first to $U$ and then to $V$ is isomorphic to the scheme obtained by restricting $X$ first to $V$ and then\"}\n  {\"name\": \"irreducibleSetEquivPoints\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"{α : Type u_1} →\\n  [inst : TopologicalSpace α] → [QuasiSober α] → [inst_2 : T0Space α] → TopologicalSpace.IrreducibleCloseds α ≃o α\", \"doc\": \"In a quasi-sober topological space satisfying the T₀ separation axiom, there exists a canonical order isomorphism between the set of irreducible closed subsets and the underlying space's points. This \"}\n  {\"name\": \"TopologicalSpace.Opens.infLELeft_apply_mk\", \"module\": \"Mathlib/Topology/Category/TopCat/Opens\", \"type\": \"∀ {X : TopCat} (U V : TopologicalSpace.Opens ↑X) (x : ↑X) (m : x ∈ U ⊓ V), (U.infLELeft V) ⟨x, m⟩ = ⟨x, ⋯⟩\", \"doc\": \"For open subsets $U$ and $V$ of a topological space $X$, the morphism $\\\\inf\\\\leq\\\\text{Left}: U \\\\cap V \\\\to U$ maps each element $x \\\\in U \\\\cap V$ (with a proof of membership $m$) to the same element $x$ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete overlap interval comparison: orderIsoOfIsOpenEmbedding supplies the existing single-open correspondence; restricting two such correspondences to full endpoint intervals and proving the explicit inverse and saturated-chain clauses remains an argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An order isomorphism on irreducible closed subsets between fixed endpoints in two open subspaces preserves length and saturation of chains",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"module\": \"Mathlib/Topology/Sets/Closeds\", \"type\": \"(α : Type u_2) →\\n  [inst : TopologicalSpace α] → TopologicalSpace.IrreducibleCloseds α ≃o { x // IsClosed x ∧ IsIrreducible x }\", \"doc\": \"The canonical order isomorphism between the type of irreducible closed subsets of a topological space $\\\\alpha$ and the subtype of subsets of $\\\\alpha$ that are both closed and irreducible, preserving t\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"module\": \"Mathlib/Topology/Sets/Closeds\", \"type\": \"(α : Type u_2) →\\n  [inst : TopologicalSpace α] → TopologicalSpace.IrreducibleCloseds α ≃o { x // IsIrreducible x ∧ IsClosed x }\", \"doc\": \"There is an order isomorphism between the type of irreducible closed subsets of a topological space and the subtype of sets that are both closed and irreducible, preserving the inclusion order. This c\"}\n  {\"name\": \"irreducibleComponentsEquivOfIsPreirreducibleFiber\", \"module\": \"Mathlib/Topology/Irreducible\", \"type\": \"{X : Type u_1} →\\n  {Y : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      [inst_1 : TopologicalSpace Y] →\\n        (f : X → Y) →\\n          Continuous f →\\n            IsOpenMap f →\\n              (∀ (x : Y), IsPreirreducible (f ⁻¹' {x})) →\\n                Function.Surjective f → ↑(irreducibleComponen\", \"doc\": \"Given topological spaces $X$ and $Y$, if $f : X \\to Y$ is a continuous, open, and surjective map such that every fiber $f^{-1}(\\\\{y\\\\})$ is preirreducible, then there exists an order isomorphism between \"}\n  {\"name\": \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is order isomorphic to the order dual of its irreducible closed subsets. This isomorphism\"}\n  {\"name\": \"PrespectralSpace.opensEquiv\", \"module\": \"Mathlib/Topology/Spectral/Prespectral\", \"type\": \"{X : Type u_1} →\\n  [inst : TopologicalSpace X] →\\n    [PrespectralSpace X] → TopologicalSpace.Opens X ≃o Order.Ideal (TopologicalSpace.CompactOpens X)\", \"doc\": \"For any prespectral space $ X $, there is an order-preserving bijection between the open sets of $ X $ and the order ideals of its compact open subsets. This equivalence maps each open set $ U $ to th\"}\n  {\"name\": \"irreducibleSetEquivPoints\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"{α : Type u_1} →\\n  [inst : TopologicalSpace α] → [QuasiSober α] → [inst_2 : T0Space α] → TopologicalSpace.IrreducibleCloseds α ≃o α\", \"doc\": \"In a quasi-sober topological space satisfying the T₀ separation axiom, there exists a canonical order isomorphism between the set of irreducible closed subsets and the underlying space's points. This \"}\n  {\"name\": \"IsHomeomorph.topologicalKrullDim_eq\", \"module\": \"Mathlib/Topology/KrullDimension\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] (f : X → Y),\\n  IsHomeomorph f → topologicalKrullDim X = topologicalKrullDim Y\", \"doc\": \"If two topological spaces are homeomorphic, then their topological Krull dimensions are equal. Specifically, for a homeomorphism $ f : X \\\\to Y $, the Krull dimension of $ X $ coincides with that of $ \"}\n  {\"name\": \"Flag.map\", \"module\": \"Mathlib/Order/Preorder/Chain\", \"type\": \"{α : Type u_1} → {β : Type u_2} → [inst : Preorder α] → [inst_1 : Preorder β] → α ≃o β → Flag α ≃ Flag β\", \"doc\": \"Given an order isomorphism $ e : \\\\alpha \\\\simeq_\\\\leq \\\\beta $ between preorders $ \\\\alpha $ and $ \\\\beta $, this constructs a bijection between the flags of $ \\\\alpha $ and $ \\\\beta $. The mapping sends eac\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete overlap interval comparison: orderIsoOfIsOpenEmbedding supplies the existing single-open correspondence; restricting two such correspondences to full endpoint intervals and proving the explicit inverse and saturated-chain clauses remains an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.IrreducibleCloseds, OrderIso",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \" (α : Type u_2) [TopologicalSpace α] : TopologicalSpace.IrreducibleCloseds α ≃o { x // IsIrreducible x ∧ IsClosed x }\", \"doc\": \"The equivalence `IrreducibleCloseds α ≃ { x : Set α // IsIrreducible x ∧ IsClosed x }` is an\\norder isomorphism.\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \" (α : Type u_2) [TopologicalSpace α] : TopologicalSpace.IrreducibleCloseds α ≃o { x // IsClosed x ∧ IsIrreducible x }\", \"doc\": \"The equivalence `IrreducibleCloseds α ≃ { x : Set α // IsClosed x ∧ IsIrreducible x }` is an\\norder isomorphism.\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \" {α : Type u_2} {β : Type u_3} [TopologicalSpace α] [TopologicalSpace β] (f : β → α) (h : Topology.IsOpenEmbedding f) : TopologicalSpace.IrreducibleCloseds β ≃o ↑{V | (f ⁻¹' ↑V).Nonempty}\", \"doc\": \"Given `f : U → X` a continuous open embedding, the irreducible closeds of `U` are order isomorphic\\nto the irreducible closeds of `X` nontrivially intersecting the range of `f`.\"}\n  {\"name\": \"irreducibleSetEquivPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \" {α : Type u_1} [TopologicalSpace α] [QuasiSober α] [T0Space α] : TopologicalSpace.IrreducibleCloseds α ≃o α\", \"doc\": \"The closed irreducible subsets of a sober space bijects with the points of the space.\"}\n  {\"name\": \"coe_irreducibleEquivPoints_symm_apply\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \" {α : Type u_1} [TopologicalSpace α] [QuasiSober α] [T0Space α] (x : α) : ↑(irreducibleSetEquivPoints.symm x) = closure {x}\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" (R : Type u) [CommSemiring R] : PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ\", \"doc\": \"Zero loci of prime ideals are closed irreducible sets in the Zariski topology and any closed\\nirreducible set is a zero locus of some prime ideal.\"}\n  {\"name\": \"PrimeSpectrum.zeroLocusEquivIrreducibleCloseds\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (I : Set R) : ↑(PrimeSpectrum.zeroLocus I) ≃o (TopologicalSpace.IrreducibleCloseds ↑(PrimeSpectrum.zeroLocus I))ᵒᵈ\", \"doc\": \"Zero loci of prime ideals are closed irreducible sets in the Zariski topology and any closed\\nirreducible set is a zero locus of some prime ideal.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete overlap interval comparison: orderIsoOfIsOpenEmbedding supplies the existing single-open correspondence; restricting two such correspondences to full endpoint intervals and proving the explicit inverse and saturated-chain clauses remains an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "orderIsoOfIsOpenEmbedding|orderIso.*Icc|Icc.*orderIso",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Order/ModularLattice.lean\", \"line\": \"37\", \"text\": \"- `infIccOrderIsoIccSup` gives an order isomorphism between the intervals\"}\n  {\"file\": \"Mathlib/Order/ModularLattice.lean\", \"line\": \"226\", \"text\": \"def infIccOrderIsoIccSup (a b : α) : Icc (a ⊓ b) a ≃o Icc b (a ⊔ b) where\"}\n  {\"file\": \"Mathlib/Order/ModularLattice.lean\", \"line\": \"250\", \"text\": \"def infIccOrderIsoIccSup' (a b : α) : Icc (a ⊓ b) b ≃o Icc a (a ⊔ b) :=\"}\n  {\"file\": \"Mathlib/Order/ModularLattice.lean\", \"line\": \"251\", \"text\": \"  (OrderIso.setCongr _ _ (by rw [inf_comm])).trans <| (infIccOrderIsoIccSup b a).trans <|\"}\n  {\"file\": \"Mathlib/Order/ModularLattice.lean\", \"line\": \"255\", \"text\": \"  StrictMono.of_domRestrict (infIccOrderIsoIccSup a b).symm.strictMono\"}\n  {\"file\": \"Mathlib/Topology/KrullDimension.lean\", \"line\": \"77\", \"text\": \"  rw [← coheight_orderIso (orderIsoOfIsOpenEmbedding f hf) Z]\"}\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"line\": \"457\", \"text\": \"@[simps] def OrderIso.setIsotypicComponents :\"}\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"line\": \"472\", \"text\": \"  refine ⟨fun h ↦ ⟨OrderIso.setIsotypicComponents.symm ⟨m, h⟩, ⟨?_, ?_⟩⟩, ?_⟩\"}\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"line\": \"474\", \"text\": \"  · convert! Subtype.ext_iff.mp (OrderIso.setIsotypicComponents.right_inv ⟨m, h⟩).symm\"}\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"line\": \"475\", \"text\": \"    simp [sSup_image, OrderIso.setIsotypicComponents, OrderIso.symm]\"}\n  {\"file\": \"Mathlib/Algebra/Order/Field/Pointwise.lean\", \"line\": \"32\", \"text\": \"theorem smul_Icc : r • Icc a b = Icc (r * a) (r * b) := (OrderIso.mulLeft₀ r hr).image_Icc a b\"}\n  {\"file\": \"Mathlib/Topology/Sets/Closeds.lean\", \"line\": \"515\", \"text\": \"def orderIsoOfIsOpenEmbedding (f : β → α) (h : IsOpenEmbedding f) :\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean\", \"line\": \"864\", \"text\": \"def sinOrderIso : Icc (-(π / 2)) (π / 2) ≃o Icc (-1 : ℝ) 1 :=\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean\", \"line\": \"868\", \"text\": \"theorem coe_sinOrderIso_apply (x : Icc (-(π / 2)) (π / 2)) : (sinOrderIso x : ℝ) = sin x :=\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean\", \"line\": \"871\", \"text\": \"theorem sinOrderIso_apply (x : Icc (-(π / 2)) (π / 2)) : sinOrderIso x = ⟨sin x, sin_mem_Icc x⟩ :=\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean\", \"line\": \"34\", \"text\": \"  Subtype.val ∘ IccExtend (neg_le_self zero_le_one) sinOrderIso.symm\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean\", \"line\": \"58\", \"text\": \"  simpa [arcsin, IccExtend_of_mem _ _ hx, -OrderIso.apply_symm_apply] using\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean\", \"line\": \"72\", \"text\": \"    sinOrderIso.symm.strictMono.strictMonoOn_IccExtend _\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean\", \"line\": \"80\", \"text\": \"  (Subtype.mono_coe _).comp <| sinOrderIso.symm.monotone.IccExtend _\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean\", \"line\": \"94\", \"text\": \"  continuous_subtype_val.comp sinOrderIso.symm.continuous.Icc_extend'\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"line\": \"702\", \"text\": \"theorem valueGroupOrderIso_restrict (x : adicCompletion K v) :\"}\n  {\"file\": \"Mathlib/Algebra/Order/Group/Pointwise/Interval.lean\", \"line\": \"570\", \"text\": \"  (OrderIso.mulRight₀ c h).image_Icc a b\"}\n  {\"file\": \"Mathlib/Algebra/Order/Group/Pointwise/Interval.lean\", \"line\": \"611\", \"text\": \"  (OrderIso.mulLeft₀ a h).image_Icc b c\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean\", \"line\": \"460\", \"text\": \"        exact ((OrderIso.funUnique (Fin 1) ℝ).symm.preimage_Icc a b).symm\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"201\", \"text\": \"    (OrderIso.funUnique (Fin 1) ℝ).symm.preimage_Icc _ _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete overlap interval comparison: orderIsoOfIsOpenEmbedding supplies the existing single-open correspondence; restricting two such correspondences to full endpoint intervals and proving the explicit inverse and saturated-chain clauses remains an argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For open subsets U and V with an irreducible closed set Z of V meeting U, closure in U of intersection defines an order isomorphism on all irreducible closed intervals above Z",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit; no absence verdict is inferred from this service."
+  },
+  {
+   "tool": "grep",
+   "query": "orderIsoOfIsOpenEmbedding|closure_image_preimage|preimage_closure_image",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"501\", \"line\": \"  rw [← A.isClosed.closure_eq, hf.closure_eq_preimage_closure_image, h_images_eq,\", \"text\": \"\"}\n  {\"file\": \"502\", \"line\": \"    ← hf.closure_eq_preimage_closure_image, B.isClosed.closure_eq]\", \"text\": \"\"}\n  {\"file\": \"515\", \"line\": \"def orderIsoOfIsOpenEmbedding (f \", \"text\": \" β → α) (h : IsOpenEmbedding f) :\"}\n  {\"file\": \"517\", \"line\": \"  toFun T \", \"text\": \"= ⟨map f h.continuous T, nonempty_preimage_closure_image h.continuous T T.2.nonempty⟩\"}\n  {\"file\": \"524\", \"line\": \"    simp [h.isOpenMap.preimage_closure_image h.injective h.continuous _ V.isClosed]\", \"text\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete overlap interval comparison: orderIsoOfIsOpenEmbedding supplies the existing single-open correspondence; restricting two such correspondences to full endpoint intervals and proving the explicit inverse and saturated-chain clauses remains an argument."
+  },
+  {
+   "tool": "grep",
+   "query": "orderIsoOfIsOpenEmbedding|overlap.*[Ii]rreducible|[Ii]rreducible.*overlap",
+   "results": "{\"t\": \"2026-10-22T11:04:15Z\", \"tool\": \"grep\", \"query\": \"orderIsoOfIsOpenEmbedding|overlap.*[Ii]rreducible|[Ii]rreducible.*overlap\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/KrullDimension.lean\", \"Mathlib/Topology/Sets/Closeds.lean\"], \"digest\": \"a8fef93669745908\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full overlap statement; the single-open order isomorphism is already the cited Mathlib leaf. OrderIso.Icc supplies only an abstract interval construction, not the topological comparison or the chain clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intervals of irreducible closed subsets in overlapping open subspaces are order isomorphic by closure of intersection",
+   "results": "{\"t\": \"2026-10-22T11:04:15Z\", \"tool\": \"leansearch\", \"query\": \"Intervals of irreducible closed subsets in overlapping open subspaces are order isomorphic by closure of intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrderIso.Icc\", \"irreducibleComponentsEquivOfIsPreirreducibleFiber\", \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"IsIrreducible\", \"infIccOrderIsoIccSup\", \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"infIooOrderIsoIooSup\", \"TopologicalSpace.IrreducibleCloseds.is_closed'\"], \"digest\": \"0d1f8143bc14ac43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full overlap statement; the single-open order isomorphism is already the cited Mathlib leaf. OrderIso.Icc supplies only an abstract interval construction, not the topological comparison or the chain clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.IrreducibleCloseds, OrderIso",
+   "results": "{\"t\": \"2026-10-22T11:04:15Z\", \"tool\": \"loogle\", \"query\": \"TopologicalSpace.IrreducibleCloseds, OrderIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding\", \"irreducibleSetEquivPoints\", \"coe_irreducibleEquivPoints_symm_apply\", \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"PrimeSpectrum.zeroLocusEquivIrreducibleCloseds\"], \"digest\": \"2cd5c47b9bcf9550\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full overlap statement; the single-open order isomorphism is already the cited Mathlib leaf. OrderIso.Icc supplies only an abstract interval construction, not the topological comparison or the chain clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Overlapping open subsets give order isomorphic intervals of irreducible closed subsets by intersection and closure, preserving saturated chain lengths",
+   "results": "{\"t\": \"2026-10-22T11:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"Overlapping open subsets give order isomorphic intervals of irreducible closed subsets by intersection and closure, preserving saturated chain lengths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"irreducibleSetEquivPoints\", \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"topologicalKrullDim\", \"PrespectralSpace.opensEquiv\", \"PrimeSpectrum.zeroLocusEquivIrreducibleCloseds\", \"irreducibleComponentsEquivOfIsPreirreducibleFiber\"], \"digest\": \"5852307a3db5b10b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full overlap statement; the single-open order isomorphism is already the cited Mathlib leaf. OrderIso.Icc supplies only an abstract interval construction, not the topological comparison or the chain clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two open embeddings from a common intersection transfer full inclusion intervals of irreducible closed subsets and finite maximal chains by closure",
+   "results": "{\"t\": \"2026-10-22T11:04:52Z\", \"tool\": \"leanfinder\", \"query\": \"Two open embeddings from a common intersection transfer full inclusion intervals of irreducible closed subsets and finite maximal chains by closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpenEmbedding.generalizingMap\", \"Topology.IsOpenEmbedding.prespectralSpace\", \"Topology.IsOpenEmbedding.quasiSober\", \"Topology.IsOpenEmbedding.quasiSeparatedSpace\", \"JacobsonSpace.of_isOpenEmbedding\", \"TopologicalSpace.Opens.isOpenEmbedding_of_le\", \"QuasiSeparatedSpace.of_isOpenEmbedding\", \"TopologicalSpace.Opens.infLELeft_apply_mk\"], \"digest\": \"066f3f794e9ff26a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full overlap statement; the single-open order isomorphism is already the cited Mathlib leaf. OrderIso.Icc supplies only an abstract interval construction, not the topological comparison or the chain clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-catenary-affine-open-cover",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited excellence-locality support below lem-trf-local-term-locality: the universal-catenarity affine-cover subargument, through lem-trf-catenary-affine-open-cover. Extracts its former Steps 3 and 4 and the interval-chain and saturation comparison of Step 5.",
+   "via": [
+    "lem-trf-catenary-affine-open-cover",
+    "lem-trf-universally-catenary-affine-cover",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-trf-projective-inseparable-spread-normalization",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-overlapping-open-irreducible-intervals",
+  "worker": "stage1",
+  "summary": "Q122 repair of the return at c696535f8ce: compared the retained split with the current unsplit repository item, re-read every current statement dependency and proof dependency, and retained the approved five-step route and all recorded searches. Step 3 now explicitly gives both restricted U-side inverse identities and the intersection identities for F and G, in addition to the existing V-side identities, composite cancellations, and endpoint checks. The statement and provenance are unchanged; the existing single-open Mathlib correspondence is used twice, with no new nodes. Delivery is rebased onto the current DAG by the required delivery tool.",
+  "blueprint": "Supports the inherited excellence/local universal-catenarity subargument below lem-trf-local-term-locality through lem-trf-catenary-affine-open-cover: the former overlap Steps 3 and 4 and the interval-chain/saturation comparison in Step 5. The current main-20261015 local-term proof has no direct duplicate of this topological tool."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-5db6bb58d",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-5db6bb58d (reviewer sub-agent of L); spot-checked: This is the third delivery of the same split. Readers approved the earlier heads be0b2c44a1cf and c696535f8ce1, but landing refused both because the side completion was not promoted. Compared with c696535f8ce1, only Step 3 of the item changed, adding the U-side identities s_U r_U=1 and r_U s_U=1 and the identities F(D)∩W=D∩W and G(E)∩W=E∩W, plus the split_report text. Statement, stmt_deps, proof_deps, source and blueprint are identical. There are 0 new nodes, no tool_uses and no repair note. I re-read the full proof myself. Stacks topology.tex lemma-catenary, lines 1547-1563 (Tag 02I2 confirmed in tags/tags), gives only the single-open closure bijection and says 'Details omitted'. I read the statements of the leaf lem-weil-pbc-open-subspace-irreducible-closed-correspondence (its only hypothesis is that U is open), def-kun-subspace-topology and def-weil-irreducible-components. Step 1 applies the leaf to W inside V and inside U; Z∩U=Z∩W≠∅ holds because Z⊆V. Steps 2 and 3 give bijections onto the whole interval J, since every D contains Z and every E contains C, which meets W; then F=s_U r_V and G=s_V r_U cancel to the identity. Steps 4 and 5 are elementary arguments for strict and saturated chains, and any inserted set automatically lies in the interval. proof_deps equal the union of the uses and there is no cycle. The parent lem-trf-catenary-affine-open-cover uses exactly these clauses. Edge cases checked: Z=Z', U=V, an indiscrete space and a Sierpinski space, which shows the nonempty hypothesis is needed. rg -L found no duplicate and no SGA source is used. Maintainer note: if landing refuses this head again over promotion, the fault is in landing, not in this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.OverlappingOpenIrreducibleIntervals",
+  "declaration": "TopologicalSpace.IrreducibleCloseds.overlappingOpenIrreducibleIntervals",
+  "file": "lean/Sheaf/Topology/OverlappingOpenIrreducibleIntervals.lean",
+  "statement": "theorem overlappingOpenIrreducibleIntervals {X : Type u} [TopologicalSpace X] (U V : Opens X) (Z Z' : IrreducibleCloseds V) (hZZ' : Z ≤ Z') (hmeet : ((Z : Set V) ∩ Subtype.val ⁻¹' (U : Set X)).Nonempty) : ∃ (C C' : IrreducibleCloseds U) (hCC' : C ≤ C') (A B : IrreducibleCloseds ↥(U ⊓ V)) (hAB : A ≤ B), (C : Set U) = closure (Subtype.val ⁻¹' (Subtype.val '' (Z : Set V))) ∧ (C' : Set U) = closure (Subtype.val ⁻¹' (Subtype.val '' (Z' : Set V))) ∧ (A : Set ↥(U ⊓ V)) = (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.2⟩ : V)) ⁻¹' (Z : Set V) ∧ (B : Set ↥(U ⊓ V)) = (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.2⟩ : V)) ⁻¹' (Z' : Set V) ∧ (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.1⟩ : U)) ⁻¹' (C : Set U) = A ∧ (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.1⟩ : U)) ⁻¹' (C' : Set U) = B ∧ ∃ (e : Set.Icc Z Z' ≃o Set.Icc C C') (rV : Set.Icc Z Z' ≃o Set.Icc A B) (rU : Set.Icc C C' ≃o Set.Icc A B), (∀ D : Set.Icc Z Z', ((e D).val : Set U) = closure (Subtype.val ⁻¹' (Subtype.val '' (D.val : Set V)))) ∧ (∀ E : Set.Icc C C', ((e.symm E).val : Set V) = closure (Subtype.val ⁻¹' (Subtype.val '' (E.val : Set U)))) ∧ (∀ D : Set.Icc Z Z', ((rV D).val : Set ↥(U ⊓ V)) = (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.2⟩ : V)) ⁻¹' (D.val : Set V)) ∧ (∀ E : Set.Icc C C', ((rU E).val : Set ↥(U ⊓ V)) = (fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.1⟩ : U)) ⁻¹' (E.val : Set U)) ∧ (∀ T : Set.Icc A B, ((rV.symm T).val : Set V) = closure ((fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.2⟩ : V)) '' (T.val : Set _))) ∧ (∀ T : Set.Icc A B, ((rU.symm T).val : Set U) = closure ((fun x : ↥(U ⊓ V) ↦ (⟨x.val, x.property.1⟩ : U)) '' (T.val : Set _))) ∧ (∀ D : Set.Icc Z Z', rU (e D) = rV D) ∧ e ⟨Z, le_rfl, hZZ'⟩ = ⟨C, le_rfl, hCC'⟩ ∧ e ⟨Z', hZZ', le_rfl⟩ = ⟨C', hCC', le_rfl⟩ ∧ e.symm ⟨C, le_rfl, hCC'⟩ = ⟨Z, le_rfl, hZZ'⟩ ∧ e.symm ⟨C', hCC', le_rfl⟩ = ⟨Z', hZZ', le_rfl⟩ ∧ (∀ (saturated : Bool) (n : ℕ), ∃ ec : {s : RelSeries {p : Set.Icc Z Z' × Set.Icc Z Z' | if saturated then p.1 ⋖ p.2 else p.1 < p.2} // s.head.val = Z ∧ s.last.val = Z' ∧ s.length = n} ≃ {s : RelSeries {p : Set.Icc C C' × Set.Icc C C' | if saturated then p.1 ⋖ p.2 else p.1 < p.2} // s.head.val = C ∧ s.last.val = C' ∧ s.length = n}, (∀ s, (ec s).val.toList = s.val.toList.map e) ∧ (∀ t, (ec.symm t).val.toList = t.val.toList.map e.symm))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-109d3bbfe",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Lean statement exact against node and Stacks 02I2 (lemma-catenary, topology.tex 1547-1563): U V : Opens X, Z≤Z' IrreducibleCloseds V, hmeet Z∩U≠∅; C,C' pinned as closures in U of Z∩W; A,B = Z∩W, Z'∩W with C∩W=A, C'∩W=B; e/e.symm pinned by closure formulas, rV/rU by intersection and inverse closure, rU∘e=rV, four endpoint equalities; per-n RelSeries (< or ⋖) equivalences given termwise by e/e.symm (covering in the full interval = node's saturation). No extra hypotheses, single universe, lean.statement verbatim, no defs/new nodes, sorry only, docstrings with source and blueprint. Only fault H11: the second reading was a worker self-check. Fixed via fixes/lem-trf-overlapping-open-irreducible-intervals.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, no compile."
+ }
+}

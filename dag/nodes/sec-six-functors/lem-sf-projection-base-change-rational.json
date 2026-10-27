@@ -1,0 +1,256 @@
+{
+ "id": "lem-sf-projection-base-change-rational",
+ "kind": "statement",
+ "title": "Projection base change at rational coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, an integer $n\\ge1$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ containing $E$. Let $S$ be a six-functor datum at these coefficients [def-sf-datum], with the specified operation and comparison data [def-fix-six-functor-datum].\n\nWork at $\\Lambda=E$ in the raw rationalized integral categories $D^b_c(T,E)$ [def-weil-rationalization-karoubi].\n\nLet\n$$\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\\end{array}$$\nbe a Cartesian square of finite-type $k$-schemes. Assume $f$ is separated, and supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ open, $p$ proper and $pj=f$, together with its Cartesian base change $c'=(j',p')$; all squares and factorizations are part of the specified compactified square. No separatedness of $g$ or of the structure morphisms is assumed. Write $U_u=Lu^*$, $F=Rf_!^c$, $F'=Rf'_!^{c'}$, and $P_f(K,L)=\\operatorname{PF}_{f,K,L}^c$, using the datum's recorded projection components [def-sf-constructible-projection-mates, def-exchange-projection]. Let $e_M:U_gFM\\to F'U_{g'}M$ be the specified compact-support exchange, with only the datum's endpoint identifications. Let $\\mu_u(A,B):U_u(A\\otimes B)\\xrightarrow{\\sim}U_uA\\otimes U_uB$ be the canonical normalized tensor-pullback comparison [def-pur-completed-pullback-tensor-comparison], and let $\\kappa_L:U_{g'}U_fL\\xrightarrow{\\sim}U_{f'}U_gL$ be the inverse pullback compositor to $U_{fg'}L$, transport through $fg'=gf'$, then the pullback compositor to $U_{f'}U_gL$. Tensor and pullback at $R$ are completed, at $E$ rationalized, and at $\\overline{\\mathbf Q}_\\ell$ represented over a common finite field. For the inputs specified below, the following equality holds:\n$$\\begin{aligned}\nF'\\bigl((1\\otimes\\kappa_L)\\circ\\mu_{g'}(K,U_fL)\\bigr)\\circ e_{K\\otimes U_fL}\\circ U_g(P_f(K,L))\n={}&P_{f'}(U_{g'}K,U_gL)\\circ(e_K\\otimes1)\\circ\\mu_g(FK,L).\n\\end{aligned}$$\nBoth sides have source $U_g(FK\\otimes L)$ and target $F'(U_{g'}K\\otimes U_{f'}U_gL)$, using exactly the specified maps, rather than independently chosen isomorphisms.\n\nHere $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_c(Y,\\Lambda)$ are arbitrary; no extra second-input Tor hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: proper/open factor square, rational coefficient specialization of the displayed square",
+  "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+  "line": 586,
+  "declaration": "WeilConjectures.sixFunctorProjection_baseChange_rational",
+  "note": "Construction material for a future worker, not a proof certification: retain the exact compactification and all endpoint conjugations in the source header below. At integral coefficients prove an equality of completed arrows before evaluation, not by assuming finite evaluations are faithful. The open-factor equation gives the completed domains and monoidality; transpose the proper-factor routes using the counit/mate identity, then paste. Rationalization transports the completed equation; the algebraically closed component must be represented over one common finite coefficient field, with the specified scalar transition cocycle. Do not reduce a field object. Refinement comparisons retain the actual exchange and projection maps.\n\nExact source docstring (unproved source):\n/-- The displayed base-change square for the rational projection transformation.\nSource: current blueprint prop-sf-pf-coherence, displayed square\n(blueprint: prop-sf-pf-coherence).\nProof: choose the compactification retained in Q. Apply the open-factor equation\nof lem-sf-pf-open-base-change-square. The proper-factor equation is the counit\nprojection/mate identity lem-sp-categorical-projection-mate-square, since the\ncanonical pullback square comparison is monoidal. The pasting lemma\nlem-sf-pf-compactification-pasting gives the two displayed composites. At integral\ncoefficients this is an equality of completed arrows before finite evaluation;\nrationalization and common-stage inclusion preserve the equality. The recorded\nrefinement comparisons remove dependence on the chosen compactification. -/\n\nVerbatim retained old parent argument, in source order:\nChoose $f=pj$ and its Cartesian base change; by [def-exchange-projection] $\\operatorname{PF}^c=R(\\gamma_j)\\pi_p$ and $\\operatorname{Ex}_!^c=R'(\\beta)e$. Apply [lem-sf-pf-open-base-change-square] with $M=j_!K$, $Q=M\\otimes FL$: it supplies all completed constructible domains, monoidality of $\\theta:F'G\\cong HF$, and the open-factor equality. The ordinary adjunctions are [fix-prop-adjunctions](1). The proper exchange $e$ is their specified mate of $\\theta$ by [def-exchange-projection, fix-lem-exchanges], and $\\pi_p$ is the counit projection. Apply [lem-sp-categorical-projection-mate-square] with its adjunctions $Lp^*\\dashv Rp_*$, $Lp'^*\\dashv Rp'_*$, $N_D=G$, $N_C=H$, $\\alpha=\\theta$, $\\varphi=\\mu_F$, $\\varphi'=\\mu_{F'}$, $m_C=\\mu_H$, $m_D=\\mu_G$; its hypothesis ComparisonCompatible is the monoidality equation just cited. Its conclusion is $R'(d)e_QG(\\pi_{p;M,L})=\\pi_{p';HM,GL}(e_M\\otimes1)\\mu_{G;RM,L}$ with $d=(1\\otimes\\theta_L^{-1})\\mu_H$, the proper-factor hypothesis of [lem-sf-pf-compactification-pasting]; the open one is the equality above. That pasting identity gives the displayed square: its target comparison is $La^*JFL\\cong J'HFL\\to J'F'GL\\cong Lf'^*GL$. Refinement compatibility and square naturality in [fix-lem-exchanges](1),(4), with projection compatibility from step 1, remove the compactification choice; the naturality clause of the pasting lemma gives naturality in the morphism data. At finite coefficients apply [lem-sf-finite-base-change-transport]: its proof identifies each constructible-coordinate route under faithful realization, substitutes the existing fixed-scalar diamond equality, cancels the common target isomorphism, and reflects equality through the full inclusion. This retains the proper/open mate calculation and adds no separatedness of the horizontal map.\n\nExact sorried source theorem header:\ntheorem sixFunctorProjection_baseChange_rational (S : SixFunctorDatum D C E n hn) :\n    ∀ (Q : SixFunctorCompactifiedSquare D)\n      [IsSeparated Q.f.hom.left]\n      (K : sfRationalConstructibleCategory C.l E Q.X.obj.left)\n      (L : sfRationalConstructibleCategory C.l E Q.Y.obj.left),\n      (S.higher.rational.pull Q.g).map ((S.higher.rationalExchange Q).projectionComponent K L) ≫\n        sixFunctorProjectionExchange (S.higher.rationalExchange Q)\n          (((S.higher.rationalTensor Q.X).obj K).obj ((S.higher.rational.pull Q.f).obj L)) ≫\n        (S.higher.rational.support Q.f' Q.compactification').map\n          ((sixFunctorProjectionRationalMu S Q.g' K\n            ((S.higher.rational.pull Q.f).obj L)).hom ≫\n            ((S.higher.rationalTensor Q.X').obj ((S.higher.rational.pull Q.g').obj K)).map\n              (((S.higher.rational.pullComposition Q.g' Q.f).inv.app L) ≫\n                eqToHom (congrArg\n                  (fun f ↦ (S.higher.rational.pull f).obj L) Q.squareComm) ≫\n                (S.higher.rational.pullComposition Q.f' Q.g).hom.app L)) =\n      (sixFunctorProjectionRationalMu S Q.g\n        ((S.higher.rational.support Q.f Q.compactification).obj K) L).hom ≫\n        ((S.higher.rationalTensor Q.Y').map\n          (sixFunctorProjectionExchange (S.higher.rationalExchange Q) K)).app\n            ((S.higher.rational.pull Q.g).obj L) ≫\n        (S.higher.rationalExchange (compactSupportProjectionSquare Q.f'\n          Q.compactification')).projectionComponent\n          ((S.higher.rational.pull Q.g').obj K) ((S.higher.rational.pull Q.g).obj L)"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, rational specialization via existing completed integral arrow identity and supplied comparison data"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For rational l-adic constructible derived sheaves the canonical compact support projection formula commutes with Cartesian base change and monoidal pullback comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.map_η_comp_η\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_η_comp_η_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] {Z\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] {Z\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : F\", \"doc\": \"An adjunction of monoidal functors lifts to an adjunction of their lifts to additive\\nmonoid objects.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : F\", \"doc\": \"An adjunction of monoidal functors lifts to an adjunction of their lifts to monoid objects.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon_counit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_counit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection|compactSupportProjection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for rational l-adic coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.ranCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \": L.ran ⋙ (whiskeringLeft C D H).obj L ⟶ (𝟭 (C ⥤ H))\", \"doc\": \"The counit of the right Kan extension of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ along a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, defined as the natural transformation $ \\\\varepsilon : L \\\\cir\"}\n  {\"name\": \"CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(F : C ⥤ H) [HasPointwiseRightKanExtension L F] :\\n  (RightExtension.mk _ (L.ranCounit.app F)).IsPointwiseRightKanExtension\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ and the existence of a pointwise right Kan extension along $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the counit $ \\\\varepsilon : L \\\\circ \\\\text{Ran}_L F \\\\R\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"CategoryTheory.Functor.rightKanExtensionCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \": L ⋙ rightKanExtension L F ⟶ F\", \"doc\": \"The counit (ε) of the right Kan extension of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ along a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, defined as the natural transformation $ \\\\varepsilon : L \"}\n  {\"name\": \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \": (L.rightKanExtension F).IsRightKanExtension (L.rightKanExtensionCounit F)\", \"doc\": \"The counit natural transformation $\\\\varepsilon : L \\\\circ \\\\text{Ran}_L F \\\\Rightarrow F$ of the right Kan extension of a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$ along $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$\"}\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.counitCoequalises\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \"(h : ∀ X : B, RegularEpi (adj₁.counit.app X)) (X : B) :\\n  IsColimit (Cofork.ofπ (adj₁.counit.app X) (adj₁.counit_naturality _))\", \"doc\": \"Given categories $\\\\mathcal{B}$ and $\\\\mathcal{C}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{B}$ and $U : \\\\mathcal{B} \\\\to \\\\mathcal{C}$ forming an adjunction $F \\\\dashv U$ with counit $\\\\epsilon$, if $\\\\epsil\"}\n  {\"name\": \"Prod.counit_comp_inl\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \": counit ∘ₗ inl R A B = counit\", \"doc\": \"The composition of the counit map with the left injection into the product module equals the counit map itself, i.e., $\\\\epsilon \\\\circ \\\\iota_\\\\ell = \\\\epsilon$, where $\\\\epsilon: A \\\\to R$ is the counit an\"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.counitCoequalizerOfReflectsCoequalizer\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \"(B : D) [ReflectsColimit (parallelPair (F.map (G.map (adj.counit.app B))) (adj.counit.app (F.obj (G.obj B)))) G] :\\n  IsColimit (counitCofork (adj := adj) B)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ with counit $ \\\\epsilon $, if $ G $ reflects colimits of the parallel pair $ F(G(\\\\epsilon_B)) $ and $ \"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for rational l-adic coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"Profinite.NobelingProof.CC_comp_zero\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n  (y : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord \", \"doc\": \"The ℤ-linear map from the space of locally constant ℤ-valued functions on $ C $ to the space of locally constant ℤ-valued functions on $ C' $, defined as the difference between the ℤ-linear map induce\"}\n  {\"name\": \"CompHausLike.LocallyConstant.incl_of_counitAppApp\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  {S : CompHausLike P} {Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))}\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}]\\n  (f : LocallyConstant (↑S.toTop) (Y.obj (Opposite\", \"doc\": \"For a compact Hausdorff-like space $S$, a finite-product-preserving functor $Y$ from the opposite category of compact Hausdorff-like spaces to types, and a locally constant function $f:S\\\\to Y(\\\\text{PU\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rational l-adic projection formula commutes with Cartesian compact support base change",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 8, \"names_or_files\": [\"Profinite.NobelingProof.coe_πs'\", \"Profinite.NobelingProof.πs'_apply_apply\", \"Profinite.NobelingProof.coe_πs\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.projRestricts_eq_comp\", \"Profinite.NobelingProof.projRestricts_comp_projRestrict\", \"Profinite.NobelingProof.CC_comp_zero\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized integral projection map base change square with pullback tensor comparison",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 8, \"names_or_files\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction projection formula base change",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 0, \"names_or_files\": [], \"note\": \"loogle: Unknown identifier `projection`\"}",
+   "date": "2026-10-27",
+   "verdict": "invalid query: loogle: Unknown identifier `projection`; replaced by a valid comma-separated identifier query"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*base.*change|base.*change.*projection",
+   "results": "{\"subdirectory\": \"Mathlib/CategoryTheory\", \"ok\": true, \"hits\": 0, \"names_or_files\": [], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "invalid search directory: Mathlib prefix was repeated; rerun with CategoryTheory (separate logged entry)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational compact support projection formula Cartesian base change",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 8, \"names_or_files\": [\"IsBaseChange.basis_repr_comp\", \"IsBaseChange.pi\", \"IsBaseChange.finsuppPow\", \"IsBaseChange.toDual_apply\", \"IsBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"IsBaseChange.finitePow\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization of integral projection formula preserves base change equality",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 8, \"names_or_files\": [\"IsLocalization.tensor\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"IsLocalizedModule.isBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"IsLocalization.Away.tensorEquiv\", \"RingHom.IsStableUnderBaseChange.isLocalization_map\", \"RingHom.IsStableUnderBaseChange.localizationPreserves\", \"instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|BeckChevalley",
+   "results": "{\"subdirectory\": \"CategoryTheory\", \"ok\": true, \"hits\": 0, \"names_or_files\": [], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*base.*change|base.*change.*projection",
+   "results": "{\"subdirectory\": \"CategoryTheory\", \"ok\": true, \"hits\": 0, \"names_or_files\": [], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "{\"subdirectory\": \"\", \"ok\": true, \"hits\": 12, \"names_or_files\": [\"CategoryTheory.Adjunction.map_η_comp_η\", \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"CategoryTheory.Adjunction.map_η_comp_η_assoc\", \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"CategoryTheory.Adjunction.mapAddMon\", \"CategoryTheory.Adjunction.mapMon\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: returned results do not state the canonical rational compact-support projection/base-change equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-coherence",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.sixFunctorProjection_baseChange_rational",
+   "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+   "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "line": 586,
+   "quarantine_file": "quarantine/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "quarantine_line": 586,
+   "statement": "theorem sixFunctorProjection_baseChange_rational (S : SixFunctorDatum D C E n hn) :\n    ∀ (Q : SixFunctorCompactifiedSquare D)\n      [IsSeparated Q.f.hom.left]\n      (K : sfRationalConstructibleCategory C.l E Q.X.obj.left)\n      (L : sfRationalConstructibleCategory C.l E Q.Y.obj.left),\n      (S.higher.rational.pull Q.g).map ((S.higher.rationalExchange Q).projectionComponent K L) ≫\n        sixFunctorProjectionExchange (S.higher.rationalExchange Q)\n          (((S.higher.rationalTensor Q.X).obj K).obj ((S.higher.rational.pull Q.f).obj L)) ≫\n        (S.higher.rational.support Q.f' Q.compactification').map\n          ((sixFunctorProjectionRationalMu S Q.g' K\n            ((S.higher.rational.pull Q.f).obj L)).hom ≫\n            ((S.higher.rationalTensor Q.X').obj ((S.higher.rational.pull Q.g').obj K)).map\n              (((S.higher.rational.pullComposition Q.g' Q.f).inv.app L) ≫\n                eqToHom (congrArg\n                  (fun f ↦ (S.higher.rational.pull f).obj L) Q.squareComm) ≫\n                (S.higher.rational.pullComposition Q.f' Q.g).hom.app L)) =\n      (sixFunctorProjectionRationalMu S Q.g\n        ((S.higher.rational.support Q.f Q.compactification).obj K) L).hom ≫\n        ((S.higher.rationalTensor Q.Y').map\n          (sixFunctorProjectionExchange (S.higher.rationalExchange Q) K)).app\n            ((S.higher.rational.pull Q.g).obj L) ≫\n        (S.higher.rationalExchange (compactSupportProjectionSquare Q.f'\n          Q.compactification')).projectionComponent\n          ((S.higher.rational.pull Q.g').obj K) ((S.higher.rational.pull Q.g).obj L)",
+   "proposed_module": "Sheaf.Paper.ProjectionBaseChangeRational",
+   "status": "sorried",
+   "note": "Exact source allocation only; not a verified attachment or a separately extracted module. Source proof contains sorry; no compilation performed."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph: proper/open factor square, rational coefficient specialization of the displayed square",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "Let $Q_T:D^b_c(T,R)\\to D^b_c(T,E)$ be raw scalar localization. By [def-weil-rationalization-karoubi] its objects are unchanged, so the given $K,L$ have integral objects $K_0,L_0$ with $Q_XK_0=K$, $Q_YL_0=L$; no lattice-existence or idempotent-splitting assertion is needed. Apply [lem-coef-integral-residue-tor] to $L_0$ on $Y$: the coefficient datum is the same, $L_0$ is derived-complete bounded constructible, and $\\ell\\ne p$. Its conclusion gives the uniform finite-reduction Tor interval required by the integral base-change statement. There is no corresponding restriction to check on $K_0$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Rational specialization of the base-change paragraph: choose integral objects in the raw scalar localization and check the integral second-input domain"
+   }
+  },
+  {
+   "text": "Use precisely the supplied compactified Cartesian square, unchanged over $R$, and apply [lem-sf-projection-base-change-integral] to $K_0,L_0$. Its hypotheses require separatedness only of $f$ and the uniform Tor condition established in step 1; they permit the given arbitrary $g$ and nonseparated structure morphisms. Denote its left and right composites by $A_0,B_0$. It gives $A_0=B_0$ in the completed integral category on $Y'$, with the specified projection, exchange, tensor-pullback comparison and inverse/composite pullback comparison. This is an integral arrow equality, not an inference from its finite evaluations; the existing integral node carries the unit's open-factor, proper-mate and pasting calculation.",
+   "uses": [
+    "lem-sf-projection-base-change-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph, open/proper factor and pasting calculation, supplied by the existing integral-stage node"
+   }
+  },
+  {
+   "text": "Identify the primitive maps under $Q_T$ before comparing composites. By [def-weil-derived-pullback-tensor-hom] and [def-weil-integral-rational-qbar-compact-support] the rational pullback, tensor and compact-support functors are the integral operations on objects of the raw localization, with morphisms tensored with $E$; by [lem-fix-operation-reduction] rationalization commutes with these operations and with ordinary direct image, preserving the units, counits and tensor associativity maps constructing projection and exchange. Hence the comparisons $Q_VLu^*\\cong Lu^*Q_W$, $Q_WRu_*\\cong Ru_*Q_V$, $Q_Wj_!\\cong j_!Q_V$ and $Q_W(M\\otimes N)\\cong Q_WM\\otimes Q_WN$ are these canonical identifications, and their identity and composition cocycles hold. The (A5) clause of [def-sf-datum] refers to the coefficient comparison data of [def-exchange-projection], which states that at the rational stage the adjunction units and counits, the pullback-composition and tensor-pullback isomorphisms and the open-immersion maps $\\beta,\\gamma$ are the rationalizations of the integral maps; for the canonical $\\mu_u$ used here, [def-pur-completed-pullback-tensor-comparison] likewise defines its rational hom and inverse as the localizations of the integral ones. Thus the comparisons meet the primitive-map intertwining hypotheses of [lem-sf-pf-coefficient-realization-transport], for $T_T=Q_T$ on the displayed bounded integral domains. That lemma identifies the images of $\\pi_p,e_p,\\operatorname{PF}^c,\\operatorname{Ex}_!^c$ and their whiskered base-change routes with the specified rational maps. It uses the same $c,c'$ and the datum's endpoint comparisons; it chooses no new exchange isomorphism.",
+   "uses": [
+    "def-sf-datum",
+    "def-exchange-projection",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-sf-pf-coefficient-realization-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Rational specialization: primitive-map normalization and comparison-functor transport of the two base-change routes"
+   }
+  },
+  {
+   "text": "Write $A_E,B_E$ for the two composites in the statement. With $s_0,t_0$ the common endpoints of $A_0,B_0$, let $c_s:Q_{Y'}s_0\\xrightarrow{\\sim}s_E$ and $c_t:Q_{Y'}t_0\\xrightarrow{\\sim}t_E$ be the composite endpoint comparisons of step 3. The transport lemma gives $c_tQ_{Y'}(A_0)=A_Ec_s$ and $c_tQ_{Y'}(B_0)=B_Ec_s$. Functoriality applied to step 2 and cancellation of $c_s$ give $A_E=B_E$. In the target comparison $\\kappa_L$, localization sends the inverse integral compositor to its inverse (apply the functor to both inverse identities), sends the square-equality transport to the same transport, and sends the final compositor to the recorded one; hence the target is exactly $F'(U_{g'}K\\otimes U_{f'}U_gL)$. The rational category has no extra objects by step 1, so this proves the assertion for all given $K,L$, without adding a Tor condition or reducing a field-coefficient object.",
+   "uses": [
+    "lem-sf-pf-coefficient-realization-transport",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Rational specialization: apply scalar localization to the completed equality and cancel the common endpoint comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction",
+  "lem-sf-pf-coefficient-realization-transport",
+  "lem-sf-projection-base-change-integral"
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-projection-base-change-rational",
+  "worker": "stage1",
+  "summary": "NX: statement unchanged. Four-step rationalization proof from the existing integral base-change node, after discharging its uniform second-input Tor condition by the existing residue-Tor lemma. Explicit primitive-map and endpoint transport identifies the exact normalized rational arrows. No new nodes and no Lean writing or compilation. Prior inherited Mathlib search records retained; NX queries are appended from searches.jsonl.",
+  "blueprint": "Realizes the rational coefficient specialization of the base-change paragraph of prop-sf-pf-coherence: the existing integral-stage node carries the open-factor/proper-mate/pasting calculation; raw scalar localization and the supplied primitive-map comparisons carry that completed equality to the exact rational square.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic coefficient-domain lemma supplies the uniform finite-reduction Tor bound for the integral object representing arbitrary rational L; it does not replace the geometric open/proper proof."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic compatibility of operation comparisons with rationalization, units and counits verifies the hypotheses of coefficient-realization transport."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NX-a2d08bb5f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-a2d08bb5f (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged in substance, sits parallel to the integral node, and matches the sorried Lean header (arbitrary K and L, specified compactification, normalized mu, kappa). There are no new nodes. Step 1: def-weil-rationalization-karoubi says the rational category has the same objects, and the 'Consequently D^b_c=D^b_ctf' clause of lem-coef-integral-residue-tor discharges the integral node's uniform Tor predicate on L0. ell is invertible on Y. That lemma's unit is outside the route, so its tool use is accepted. Step 2: lem-sf-projection-base-change-integral is applied to the same square; it needs separatedness only of f, and there is no cycle (it is unsplit). Step 4: the cancellation of c_s and the kappa normalization are elementary and correct. Fault (C4/E5) in step 3: it took the compositor, square, beta and gamma intertwining from 'the same recorded comparison data in (A5)' without citing def-exchange-projection. That node states that at the rational stage the units, counits, compositors, tensor-pullback maps, beta and gamma are rationalizations of the integral maps. def-weil-derived-pullback-tensor-hom and def-weil-integral-rational-qbar-compact-support make the rational operations the integral ones on objects, so the comparisons are identities and the cocycles are trivial. Fixed in fixes/dag/nodes/sec-six-functors/lem-sf-projection-base-change-rational.json: step 3 text rewritten, three definitions added to its uses, proof_deps set to the union of uses. The tool use of lem-fix-operation-reduction is on route through sk-prop-sf-pf-reduction; the declaration is harmless. Checked cases: K=0 or L=0, torsion objects, g=id, f proper, f an open immersion, nonseparated g.; 1 file(s) fixed by the reviewer"
+ }
+}

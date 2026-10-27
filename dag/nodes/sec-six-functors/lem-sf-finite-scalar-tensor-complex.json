@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-complex",
+ "kind": "statement",
+ "title": "The specified scalar realization preserves ordinary and signed-total tensors",
+ "statement": "For a finite commutative ring R and scheme T, the specified associated-module realization [def-weil-proetale-inverse-image] has the ordinary tensor isomorphism constructed from the fixed-scalar sheafification tensorator and the module-sheafification tensor comparison normalized on pure tensors. Applying the signed total construction gives a natural tensor isomorphism of cochain functors. Define also the class of fixed-scalar complexes that are categorically K-flat and flat in every degree.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary tensor isomorphism of the specified scalar realization by composing the fixed-scalar sheafification tensorator, the sheafification counit, and the module-sheafification tensor comparison normalized on pure tensors. Form its signed total by mapBifunctorComparisonNatTrans.",
+   "uses": [
+    "lem-sf-proetale-sheafification-tensor-comparison",
+    "lem-pc-total-bifunctor-comparison-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-sheafification-tensor-comparison",
+  "lem-pc-total-bifunctor-comparison-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "The specified scalar realization preserves ordinary and signed-total tensors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorComplex",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorComplex.lean",
+  "declaration": "WeilConjectures.finiteScalarOrdinaryTensorIso",
+  "statement": "def finiteScalarOrdinaryTensorIso\n    (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R] :\n    tensor _ ⋙ (sfIntrinsicModuleEquivalence T R).functor ≅\n      ((sfIntrinsicModuleEquivalence T R).functor.prod\n        (sfIntrinsicModuleEquivalence T R).functor) ⋙\n          @tensor (proEtaleRingModules T (proEtaleConstantRing T R)) _\n            (SheafOfModules.monoidalCategory (proEtaleConstantRing T R))",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarCountableColimits",
+   "WeilConjectures.finiteScalarTensorTotal",
+   "WeilConjectures.finiteScalarIntrinsicCountableColimits",
+   "WeilConjectures.finiteScalarFunctorAdditive",
+   "WeilConjectures.finiteScalarFunctorEquivalence",
+   "WeilConjectures.finiteScalarFixedTensorPreadditive",
+   "WeilConjectures.finiteScalarFlatRepresentatives",
+   "WeilConjectures.finiteScalarModuleSheafificationUnit_isIso",
+   "WeilConjectures.finiteScalarPresheafMonoidal",
+   "WeilConjectures.finiteScalarCurryTensorIso",
+   "WeilConjectures.finiteScalarUncurryPostcomposeIso",
+   "WeilConjectures.finiteScalarUncurryPostcomposeIso_hom_app",
+   "WeilConjectures.finiteScalarLaxTensorNatTrans",
+   "WeilConjectures.finiteScalarOrdinaryTensorIso",
+   "WeilConjectures.finiteScalarTotalTensorIsoOfOrdinary",
+   "WeilConjectures.finiteScalarTotalTensorIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

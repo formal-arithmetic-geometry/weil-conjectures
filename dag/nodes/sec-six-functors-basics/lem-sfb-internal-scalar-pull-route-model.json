@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-internal-scalar-pull-route-model",
+ "kind": "statement",
+ "title": "The normalized scalar route computes the common ordinary tensor model",
+ "statement": "Let a:Λ→Λ′, f:X→Y, D,V,L,B be as in [def-sfb-internal-derived-scalar-comparisons]. Choose tX with TensorNormalized on X and lam:D_Y L_S≅L_R D_X with PullNormalized; no Y tensor presentation is used. For every homotopy complex P let b,c,T_P,C_P be the explicit comparisons of [def-sfb-internal-scalar-tensor-pull-models]. Then b at D_Y(Qh P), followed by V_X(lam.hom), tX.derived at L_R(Qh P), and T_P, equals C_P. No K-flatness or flatness of a is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-scalar-tensor-pull-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalar_pull_tensor_counit to replace the X normalized presentation and model target by the restricted X scalar counit, exact restriction factor and ordinary X tensor presentation.",
+   "uses": [
+    "new-sfb-internal-scalar-pull-tensor-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Use PullNormalized for lam and the exact restriction/pullback counit square. Naturality moves the Y scalar counit through the restriction/pullback comparison; functoriality combines the ordinary restriction and scalar pullback comparisons.",
+   "uses": [
+    "lem-sfb-internal-scalar-restriction-mate-normalization",
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Apply scalar_ordinary_tensor_pull_model for the native pullback tensorator. Functoriality of Qh and naturality of the exact pullback counit move the Y tensor presentation to the source. The tensorPresentation_app equation identifies the defining counit in scalarTensorPullModelMap. Associativity and functoriality finish.",
+   "uses": [
+    "new-sfb-internal-scalar-ordinary-tensor-pull-model",
+    "new-integral-residue-scalar-counit-model",
+    "def-sfb-internal-scalar-tensor-pull-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-sfb-internal-scalar-pull-tensor-counit",
+  "lem-sfb-internal-scalar-restriction-mate-normalization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "new-sfb-internal-scalar-ordinary-tensor-pull-model",
+  "new-integral-residue-scalar-counit-model",
+  "def-sfb-internal-scalar-tensor-pull-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "The three planned steps are formalized: the X tensor-counit calculation, exact restriction/scalar counits, and native ordinary tensor compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of a derived tensor product computes extension of scalars and is compatible with the tensor comparison for exact pullback",
+   "date": "2026-10-26",
+   "results": "8 hits, including CategoryTheory.Adjunction.derivedε, ModuleCat.ExtendRestrictScalarsAdj.counit_app and coalgebra tensor counit declarations.",
+   "verdict": "No internal module tensor model square. Use the existing project tensor-model API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedNatTrans\"",
+   "date": "2026-10-26",
+   "results": "8 hits for leftDerivedNatTrans and its id, fac, app, comp and reassociated equations.",
+   "verdict": "Generic derived uniqueness ingredients only; no normalized tensor/pullback model square."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelRoute_fac|tensorModelTarget_isIso|scalar.*pull.*route.*model",
+   "date": "2026-10-26",
+   "results": "0 hits in Mathlib. Local rg found the generic Functor.tensorModelRoute_fac and tensorModelTarget_isIso in IntegralResidueTensorModel, plus residue-specialized route computations.",
+   "verdict": "Reuse the common model construction. The scalar route for arbitrary normalized comparisons still needs the counit calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarTensorPullNormalization",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps.",
+   "via": [
+    "lem-sfb-internal-scalar-tensor-pull-normalization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalScalarPullRouteModel",
+  "file": "lean/Sheaf/Paper/InternalScalarPullRouteModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalar_pull_route_model",
+  "statement": "theorem scalar_pull_route_model (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (tX : TensorNormalization a X)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)\n    (hX : TensorNormalized a X tX) (hlam : PullNormalized a f lam)\n    (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :\n    (scalarTensorRestrictPullIso a f).hom.app ((D a Y).obj (DerivedCategory.Qh.obj P)) ≫\n        (V a X).map (lam.hom.app (DerivedCategory.Qh.obj P)) ≫\n        tX.derived.hom.app ((L Λ f).obj (DerivedCategory.Qh.obj P)) ≫\n        scalarTensorPullModelTarget a f P = scalarTensorPullModelMap a f P",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T003052-L-144301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

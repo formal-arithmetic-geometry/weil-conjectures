@@ -1,0 +1,187 @@
+{
+ "id": "lem-sfb-proetale-derived-restriction-closed",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+   "via": [
+    "lem-sfb-internal-derived-closed-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical closed mate and braiding of condensed derived restriction",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $f:Y\\to X$ a weakly étale morphism of schemes. Assume the canonical coefficient pullback map is invertible [sk-def-sfb-condensed-ring, def-weil-pbc-proetale-site, sk-def-sfb-pulled-back-coefficients]. Equip the actual left-derived internal-module pullback $F=\\mathbf Lf^*$ with its existing canonical monoidal structure [lem-sfb-derived-pullback-strong-monoidal]. For arbitrary unbounded derived modules $K,N$, the canonical internal-Hom comparison $F(R\\mathcal Hom(K,N))\\to R\\mathcal Hom(FK,FN)$, namely ihomComparison, is invertible. Its actual tensorator satisfies $\\mu_{K,N}; F(\\beta_{K,N})=\\beta_{FK,FN};\\mu_{N,K}$, where composition is read in diagrammatic order and $\\beta$ denotes the native derived Koszul braiding.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-sfb-native-derived-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Weakly-etale localization identifies the target site with the slice. Transport the action through the canonical coefficient isomorphism. The exact section equivalence commutes with this restriction on sections and their actions.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-proetale-pullback-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  },
+  {
+   "text": "On the slice, exact restriction preserves K-injective representatives and the internal Hom complex. Its tensor and Hom comparisons preserve the actual counit for arbitrary unbounded inputs. Transport these comparisons through the normalized section equivalence.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB, lemma-restriction-RHom-to-U."
+   }
+  },
+  {
+   "text": "The derived-counit characterization identifies the transported tensor comparison with the existing K-flat pullback tensorator. Koszul interchange commutes with termwise restriction and descends to the stated braiding equation. The counit identity says that the transported Hom isomorphism is the canonical mate ihomComparison, proving its invertibility.",
+   "uses": [
+    "lem-sfb-derived-pullback-strong-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-coef-evaluation-transpose-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-proetale-pullback-internal-hom",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-evaluation-transpose-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of sheaves of modules to an object of a site preserves unbounded derived internal Hom and its tensor evaluation counit",
+   "results": "CategoryTheory.Sheaf.ΓRes, SheafOfModules.restrictScalars, SheafOfModules.evaluation, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instAdditiveRestrictScalars, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.toOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "c6634dc0805a9bf3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly etale derived inverse image preserves the canonical internal Hom comparison for arbitrary unbounded complexes and the Koszul braiding",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "1bfe04b754edb18c"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|leftDerived.*Braided|CoreMonoidal",
+   "results": "Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these general constructions do not give the stated normalized comparison",
+   "digest": "6557349df9d17b01"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalDerivedClosedLocalization",
+  "date": "2026-10-24",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleDerivedRestrictionClosed",
+  "file": "lean/Sheaf/Paper/ProEtaleDerivedRestrictionClosed.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proetale_derived_restriction_closed",
+  "statement": "theorem proetale_derived_restriction_closed\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]\n    {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]\n    [IsIso (condensedPullbackHom Λ.X f)] :\n    let d := nativeDerivedRestrictionData Λ f\n    let F := d.functor\n    letI := d.monoidal\n    (∀ K N : DerivedCategory (Internal Λ.X X),\n      IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app N)) ∧\n    (∀ K N : DerivedCategory (Internal Λ.X X),\n      Functor.LaxMonoidal.μ F K N ≫ F.map (β_ K N).hom =\n        (β_ (F.obj K) (F.obj N)).hom ≫ Functor.LaxMonoidal.μ F N K)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proetale-derived-restriction-closed",
+  "worker": "stage3",
+  "summary": "A strict part of the assigned theorem, with its own sourced comparison argument. Searched Mathlib by three kinds and checked against the constant-coefficient restriction theorem and existing section comparison.",
+  "blueprint": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-proetale-pullback-internal-hom",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-derived-pullback-strong-monoidal",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   },
+   {
+    "node": "lem-coef-evaluation-transpose-coherence",
+    "why": "Generic tensor/closed comparison on ringed sites or internal modules; it supplies the comparison calculation and does not replace the finite-free local-model and cover-detection route of this unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

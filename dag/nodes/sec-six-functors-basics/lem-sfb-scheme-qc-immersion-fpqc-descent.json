@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-scheme-qc-immersion-fpqc-descent",
+ "kind": "statement",
+ "title": "Quasi-compact scheme immersions descend over faithfully flat affine bases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $p:V\\to U$ be a flat surjective morphism of affine $S$-schemes [def-weil-flat-morphism, def-weil-surjective-morphism, def-weil-affine-spectrum], and let $f:X\\to U$ be a morphism of schemes. If $X\\times_UV\\to V$ [def-pc-fibre-product] is a quasi-compact immersion, then $f$ is a quasi-compact immersion. Immersion means a factorization as a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion]; quasi-compact means that inverse images of affine opens are quasi-compact [def-weil-pbc-quasi-compact-scheme]. No Noetherian or finite-presentation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02L8 (lemma-descending-property-quasi-compact-immersion), descent implication for the singleton fpqc covering by a flat surjective affine-to-affine map."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $X'=X\\times_UV$ and write $f':X'\\to V$. Affine schemes are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Consequently $p$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). The immersion $f'$ is separated by [lem-weil-pbc-separated-cancellation](a). Apply [lem-weil-pbc-fpqc-descend-quasi-compact] and [lem-weil-pbc-fpqc-descend-separated] to the given flat surjective $p$: $f$ is quasi-compact and separated.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "lem-weil-pbc-fpqc-descend-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L8, lemma-descending-property-quasi-compact-immersion, proof; scheme-image base change expanded using the dense case of Tag 081I."
+   }
+  },
+  {
+   "text": "Form $f=i\\circ a$ with $a:X\\to Z=\\operatorname{SIm}(f)$ and $i:Z\\hookrightarrow U$ using [lemma-nagata-scheme-image-ideal-qc]. This also gives injectivity of $\\mathcal O_Z\\to a_*\\mathcal O_X$. The affine description of closed immersions [def-weil-closed-immersion] makes $Z$ affine because $U$ is affine. The scheme $X$ is quasi-compact by step 1 and [lem-weil-pbc-qcqs-morphism-permanence](2). Since $Z$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], part (1) of the same permanence node makes $a$ quasi-compact. It is separated by [lem-weil-pbc-separated-cancellation](b), applied to $i\\circ a=f$, and hence quasi-separated by [lem-pc-separated-quasi-separated]. The injectivity above and the kernel definition [def-nagata-scheme-theoretic-image] say that $a$ has scheme-theoretic image $Z$.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L8, lemma-descending-property-quasi-compact-immersion, proof; scheme-image base change expanded using the dense case of Tag 081I."
+   }
+  },
+  {
+   "text": "Let $Z'=Z\\times_UV$, with $i':Z'\\to V$ and $q:Z'\\to Z$. Base change of the closed immersion $i$ is closed by [lem-weil-pbc-closed-immersion-base-change], so $Z'$ is affine by the affine description in [def-weil-closed-immersion]. The map $q$ is flat and surjective by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-surjective-base-change]. Fibre-product associativity [def-pc-fibre-product] identifies $X\\times_ZZ'$ with $X'$ and gives $f'=i'\\circ b$, where $b:X'\\to Z'$ is the base change of $a$. It is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply the dense-case statement of [lemma-nagata-dense-flat-pullback] to the quasi-compact quasi-separated $a$ and flat $q$: $b$ has scheme-theoretic image $Z'$. Since $b$ is quasi-compact, [def-nagata-scheme-theoretic-image] identifies its kernel ideal with the actual sheaf kernel, so $\\mathcal O_{Z'}\\to b_*\\mathcal O_{X'}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-dense-flat-pullback",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L8, lemma-descending-property-quasi-compact-immersion, proof; scheme-image base change expanded using the dense case of Tag 081I."
+   }
+  },
+  {
+   "text": "For every affine open $W\\subseteq V$, the factorization $f'=i'\\circ b$ gives\n$$\\mathcal O_V(W)\\longrightarrow\\mathcal O_{Z'}((i')^{-1}W)\\lhook\\joinrel\\longrightarrow\\mathcal O_{X'}((f')^{-1}W),$$\nwhere the second arrow is injective by step 3. Thus the kernel of the composite equals that of the first arrow. By [lem-weil-pbc-scheme-image-qc-kernel](1), applied to quasi-compact $f'$, these are exactly the ideals on $W$ of $\\operatorname{SIm}(f')$ and $Z'$. Equality on the affine basis identifies the closed subschemes over $V$, since by the affine description of closed immersions [def-weil-closed-immersion] each is $\\operatorname{Spec}$ of the quotient by this ideal over every affine open $W$. Their factor maps agree, since a closed immersion is a monomorphism (the uniqueness clause of [lem-weil-pbc-scheme-image-qc-kernel]). Therefore $b$ identifies with the canonical factor of $f'$ through its image. By [lemma-nagata-immersion-open-in-scheme-image], this factor is an open immersion, since $f'$ is a quasi-compact immersion.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L8, lemma-descending-property-quasi-compact-immersion, proof; scheme-image base change expanded using the dense case of Tag 081I."
+   }
+  },
+  {
+   "text": "Apply [lem-galois-open-immersion-affine-descent] to $a:X\\to Z$ and $q:Z'\\to Z$. Both $Z$ and $Z'$ are affine (steps 2--3), $q$ is flat and surjective, and the second projection of the pullback of $a$ along $q$ is $b$, an open immersion by step 4. Thus $a$ is an open immersion. Both $a$ and the closed immersion $i$ are immersions by [def-weil-closed-immersion] (use the identity as the other factor); their composite $f=i\\circ a$ is an immersion by [lem-weil-pbc-proper-fp-permanence](e). Step 1 already proved that $f$ is quasi-compact. This proves both requested properties without a Noetherian or finite-presentation hypothesis.",
+   "uses": [
+    "lem-galois-open-immersion-affine-descent",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L8, lemma-descending-property-quasi-compact-immersion, proof; scheme-image base change expanded using the dense case of Tag 081I."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "def-weil-closed-immersion",
+  "lem-pc-separated-quasi-separated",
+  "def-nagata-scheme-theoretic-image",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-fibre-product",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-galois-open-immersion-affine-descent",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02L8 (lemma-descending-property-quasi-compact-immersion), proof, specialized to the given singleton affine covering; flat scheme-image comparison via Tag 081I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact immersion of schemes descends along a faithfully flat affine base change",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: FlatDescent supplies open-immersion descent; the general scheme descent criterion still requires a nontrivial affine descent proof for immersions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of quasi compact locally closed immersions between schemes",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: FlatDescent supplies open-immersion descent; the general scheme descent criterion still requires a nontrivial affine descent proof for immersions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"Flat\"",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: FlatDescent supplies open-immersion descent; the general scheme descent criterion still requires a nontrivial affine descent proof for immersions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact immersion morphisms of schemes descend by faithfully flat quasi compact base change",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: FlatDescent supplies open-immersion descent; the general scheme descent criterion still requires a nontrivial affine descent proof for immersions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsImmersion.*[Dd]escen|[Dd]escen.*IsImmersion|quasi.compact immersion",
+   "results": "1 hits; declarations/files: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: FlatDescent supplies open-immersion descent; the general scheme descent criterion still requires a nontrivial affine descent proof for immersions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasi-compact-immersion-locality",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections. Supporting input: Tag 0424 proof, final invocation of scheme descent 02L8 after representability is established.",
+   "via": [
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-qc-immersion-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Split the singleton affine case of Stacks 02L8 through the existing scheme-image, dense flat pullback, and open-immersion descent nodes. Kept the statement unchanged; expanded the image comparison from the actual dense-case statement of the cited node. No new nodes.",
+  "blueprint": "Realizes the supporting scheme-descent input in the inherited blueprint.from.place: Tag 0424 proof, final invocation of scheme descent 02L8 after representability. Entire local proof follows Stacks 02L8. Whole-blueprint searches for 02L8, immersion and scheme-theoretic image found no duplicate of the item. The inherited ancestor chain ends in a missing blueprint ancestor (from.node null); preserved its concrete place and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic separatedness descent used in the first paragraph of Stacks 02L8; this unit contains no replacement for scheme fpqc descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c1763ef61",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c1763ef61 (reviewer sub-agent of L); spot-checked: I read Stacks 02L8 (descent.tex) and 081I (morphisms.tex) in full, plus all 18 cited statements. The item statement is unchanged and correct: it is the singleton-affine-cover case of 02L8, in the form the parent space-level locality node uses. No new nodes; no duplicate found in the DAG (rg for 02L8, the label and 'quasi-compact immersion'); no Mathlib match (FlatDescent has descent for open immersions but none for IsImmersion). Step 1: p is qc (V affine, U quasi-separated, permanence (1)) and f' is separated (cancellation (a)); the qc and separated descent nodes need exactly flat, surjective and qc. Step 2: f=i∘a with Z=SIm(f) affine; a is qcqs (permanence (2),(1), cancellation (b), separated⇒qs); injectivity of O_Z→a_*O_X gives SIm(a)=Z. Step 3: Z' is affine and q flat surjective by base change; the fibre-product pasting is elementary; dense-flat-pullback is used only in its dense form, with all hypotheses met; b qc ⇒ O_Z'→b_*O_X' injective. Step 4: kernels agree on affine W via scheme-image-qc-kernel (1); mono-ness identifies b with f'^im; open-in-image applies to the qc immersion f'. Step 5: affine open-immersion descent (Mathlib leaf) applies on the affine bases Z, Z'; the composite open-then-closed is handled correctly by permanence (e). Edge cases checked: empty U, empty X, nonreduced closed subschemes, a qc open immersion with nonclosed image. qc descent, separated descent and dense flat pullback are Lean-closed in slopmaster2. The declared tool use lem-weil-pbc-fpqc-descend-separated is accepted. from.node null is inherited from the base. FIX: step 4 now cites def-weil-closed-immersion (affine description) for 'equal ideals on the affine basis ⇒ same closed subscheme' and adds it to the step's uses; it was already in proof_deps. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scheme-qc-immersion-fpqc-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactImmersionAffineDescent",
+  "declaration": "AlgebraicGeometry.quasiCompactImmersion_of_flat_surjective_affine_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactImmersionAffineDescent.lean",
+  "statement": "theorem quasiCompactImmersion_of_flat_surjective_affine_baseChange {S U V X : Scheme.{u}} [IsAffine U] [IsAffine V] (sU : U ⟶ S) (sV : V ⟶ S) (p : V ⟶ U) (_hp : p ≫ sU = sV) [Flat p] [Surjective p] (f : X ⟶ U) [QuasiCompact (pullback.snd f p)] [IsImmersion (pullback.snd f p)] : QuasiCompact f ∧ IsImmersion f",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-213b79f34",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02L8 (singleton fpqc cover V→U, U,V affine): IsAffine U/V, S-morphism p (sU,sV,_hp), Flat p, Surjective p, arbitrary f, hypotheses on pullback.snd f p (= X×_U V→V), conclusion QuasiCompact f ∧ IsImmersion f; Mathlib notions = stmt_dep records (isImmersion_iff_exists, quasiCompact_iff_forall_isAffineOpen); no Noetherian/fp hypothesis; single universe needed for pullback; edge cases (empty U/X, p=id, non-closed open immersion, non-reduced) covered. No existing descent statement in Mathlib/side-live (FlatDescent only open immersions). Proof is sorry, no defs; docstrings carry source, blueprint id and all 5 proof steps; plain imports are proof_dep modules present in side-live; lean.statement verbatim, item changed only in lean; live lean null (not superseded). No compile needed (no file changed)."
+ }
+}

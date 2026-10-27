@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-proper-homogeneous-torus-fixed-bound",
+ "kind": "statement",
+ "title": "Dimension lower bound on torus fixed points of a proper homogeneous space",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $H\\subseteq G$ be a closed subgroup scheme [def-sc-group-scheme-subgroup], not necessarily smooth, connected or normal. Let $X=G/H$ be the separated finite-type $F$-scheme representing the fppf sheaf quotient of right cosets [lem-sfb-homogeneous-orbit-quotient-geometry], and assume that $X$ is proper over $F$ [def-weil-proper-morphism]. Let $S\\subseteq G$ be a torus: a closed subgroup scheme isomorphic to $\\mathbf G_{m,F}^{r}$ for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Give $X$ the left $S$-action induced by multiplication on $G$. Write $d=\\dim X$ for its Krull dimension [def-kun-topological-krull-dimension]. There are at least $d+1$ distinct points $x\\in X(F)$ fixed scheme-theoretically by $S$: for every commutative $F$-algebra $A$ and every $s\\in S(A)$ one has $s\\cdot x_A=x_A$. No finiteness assumption on the set of fixed points is imposed, and $S$ need not be a maximal torus. The case $G=H$, $X=\\operatorname{Spec}F$, is included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 20.12, printed p.411, following Proposition 20.11, printed pp.410--411; the projective orbit realization used there is Theorem 7.18."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "def-weil-proper-morphism",
+  "def-sc-gm-ga",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-chevalley-scheme-line-stabilizer], choose a nonzero finite-dimensional representation $V$ of $G$ and a line $L$ whose stabilizer is exactly $H$ on every $F$-algebra. By [lem-sfb-homogeneous-orbit-quotient-geometry] the map $gH\\mapsto gL$ identifies $X$ with the reduced orbit of $[L]$ in $\\mathbf P(V)$; [lem-sfb-smooth-group-orbit-geometry] says that this orbit is locally closed. Thus this is a $G$-equivariant immersion $i:X\\to\\mathbf P(V)$, not merely a bijection on points. Projective space is separated by [lem-weil-pbc-projective-space-proj-separated]. Since $X$ is proper over $F$, [lem-weil-pbc-proper-over-separated] makes $i$ proper; [lem-weil-pbc-proper-immersion-closed] then makes it a closed immersion. In particular $X$ is nonempty (it contains the coset of $1$) and is a closed $S$-stable subscheme of this projective representation.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 20.12, printed p.411; Theorem 7.18 and its proof, printed p.143; Proposition 7.17, printed p.143."
+   }
+  },
+  {
+   "text": "We prove the projective estimate needed here by induction on $N=\\dim_F V-1$, simultaneously for every nonzero $S$-representation $V$ of this dimension and every nonempty closed $S$-stable subscheme $Z\\subseteq\\mathbf P(V)$: $Z$ has at least $\\dim Z+1$ distinct scheme-theoretically $S$-fixed $F$-points. Nonreduced $Z$ are allowed. By [lem-sfb-projective-hilbert-polynomial-dimension], $\\dim Z$ is the degree of its nonzero Hilbert polynomial, hence a finite nonnegative integer. We will also use $\\dim\\mathbf P^m_F=m$: its degree-$a$ homogeneous monomials form a basis of size $\\binom{a+m}{m}$, a polynomial in $a$ of degree $m$, so the same cited theorem gives the equality. For $N=0$, the single standard chart in [lem-weil-pbc-projective-space-standard-charts] is $\\operatorname{Spec}F$. Its only nonempty closed subscheme is itself, since a field has only the ideals $0,F$. The projective action on a one-dimensional representation is trivial over every algebra, so its unique point proves the base case.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-dimension",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.11, printed pp.410--411; induction reformulated on the ambient projective dimension so that reducible and nonreduced hyperplane sections require no component-invariance lemma."
+   }
+  },
+  {
+   "text": "Suppose $N\\geq1$ and assume the induction assertion in ambient dimension $N-1$. Use [lem-sfb-split-torus-representation-weight-decomposition] to choose an $S$-eigenbasis $e_0,\\ldots,e_N$ with characters $\\chi_i$. Use the separating-cocharacter clause of [lem-sfb-projective-torus-fixed-weight-schemes] to choose $\\lambda:\\mathbf G_m\\to S$ such that different occurring characters have different integer weights $m_\\chi$ under $\\lambda$. Number the basis so $m_0$ is minimal. Put $W=\\langle e_1,\\ldots,e_N\\rangle$ and $Q=\\mathbf P(W)=\\{z_0=0\\}\\subseteq\\mathbf P(V)$. Both $W$ and $Q$ are $S$-stable. On the standard charts this hyperplane is obtained by imposing the equation $z_0/z_j=0$ for $j\\ne0$, so it is a closed subscheme isomorphic to $\\mathbf P^{N-1}_F$; these chart descriptions are those of [lem-weil-pbc-projective-space-standard-charts]. Let $Y=Z\\times_{\\mathbf P(V)}Q$, with its scheme-theoretic intersection structure. It is a closed $S$-stable subscheme of $\\mathbf P(W)$.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-projective-torus-fixed-weight-schemes",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.11, printed pp.410--411; Theorem 12.12, pp.234--235, and Lemma 13.51, p.274."
+   }
+  },
+  {
+   "text": "If $|Z|\\subseteq|Q|$, then $|Y|=|Z|$ with the same topology, hence $\\dim Y=\\dim Z$ by [def-kun-topological-krull-dimension]. Apply the induction hypothesis to $Y\\subseteq\\mathbf P(W)$; its $\\dim Z+1$ fixed points give that many fixed points in $Z$ by the equivariant inclusion. This uses the intersection $Y$, not an unjustified factorization of a possibly nonreduced $Z$ through $Q$. Otherwise $U=Z\\setminus|Q|$ is a nonempty open subset of the finite-type $F$-scheme $Z$. The density assertion of [lem-sc-lft-over-field-jacobson-space], applied to the closed subset $Z$ of itself, gives a closed point of $Z$ in $U$. By [lem-weil-pbc-closed-point-residue-field-base] its residue field is $F$, so choose $z=[e_0+\\sum_{i=1}^N a_i e_i]\\in U(F)$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.11, printed p.411, the hyperplane-containment case and the choice of a point outside it; nonreduced containment handled by the scheme-theoretic intersection."
+   }
+  },
+  {
+   "text": "On the chart $D_+(z_0)$ of [lem-weil-pbc-projective-space-standard-charts], define $\\gamma:\\mathbf A^1_F\\to D_+(z_0)$ by the polynomial coordinates $z_i/z_0\\mapsto a_i t^{m_i-m_0}$. All exponents are nonnegative. On $\\mathbf G_m$ this is $\\lambda(t)z$ by the eigenbasis formula of [lem-sfb-split-torus-representation-weight-decomposition], so it factors through $Z$ there. The pullback of every equation of $Z\\cap D_+(z_0)$ is a polynomial zero in $F[t,t^{-1}]$, hence zero in $F[t]$ since localization of this domain is injective. Thus $\\gamma$ factors through $Z$ on all of $\\mathbf A^1$. Its value $p=\\gamma(0)$ has $z_0=1$ and only coordinates of weight $m_0$ possibly nonzero. Separation of the weights says these coordinates all have character $\\chi_0$. Consequently, for every $F$-algebra $A$ and $s\\in S(A)$ the vector representing $p_A$ is multiplied by the unit $\\chi_0(s)$. Its line is unchanged; the equivariant closed inclusion then gives $s p_A=p_A$ in $Z(A)$. Hence $p$ is scheme-theoretically fixed and lies outside $Y$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.11, printed p.411, the nonnegative-weight affine-chart limit, expanded explicitly in polynomial coordinates."
+   }
+  },
+  {
+   "text": "Write $d_Z=\\dim Z$. If $d_Z=0$, the point $p$ already supplies the required $d_Z+1=1$ fixed point. If $d_Z\\geq1$, step 2 gives $\\dim Q=N-1$; apply [lem-sfb-projective-closed-intersection-dimension] to the two nonempty closed subsets $|Z|,|Q|$ of $\\mathbf P^N_F$. Its hypothesis is $d_Z+(N-1)\\geq N$, and its conclusion is that $Y$ is nonempty with $\\dim Y\\geq d_Z-1$. The induction hypothesis in ambient dimension $N-1$ supplies at least $\\dim Y+1\\geq d_Z$ distinct fixed $F$-points in $Y$. Adding $p\\notin Y$ proves the induction step. This constructs only the required finite list, whether or not the entire fixed set is finite.",
+   "uses": [
+    "lem-sfb-projective-closed-intersection-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.11, printed p.411; its use of Lemma 20.10 is supplied by Stacks Tag 0B2R, varieties-lemma-intersection-in-projective-space."
+   }
+  },
+  {
+   "text": "Apply the established induction assertion to the closed $S$-stable image $i(X)$ in step 1. A closed immersion identifies its source with its scheme-theoretic image and preserves the topology, so its dimension is $d$. The equivariant identification carries the $d+1$ distinct fixed $F$-points back to $X$, and the equalities after every algebra extension carry back with them. This gives exactly the stated scheme-theoretic fixedness. Nothing required maximality of $S$, smoothness of $H$, or finiteness of the fixed set. When $S$ is trivial all the character weights coincide, and the same coordinate construction is constant; when $G=H$ the estimate reduces to the unique point of $\\operatorname{Spec}F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 20.12, printed p.411, final application of the projective estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-projective-torus-fixed-weight-schemes",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-projective-closed-intersection-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 20.12 and Proposition 20.11, printed pp.410--411; the same hyperplane/extra-fixed-point proof, with induction on ambient dimension, explicit polynomial limit, and the existing Stacks 0B2R intersection theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixedPoints|fixedLocus|[Tt]orus|[Tt]ori",
+   "results": "{\"t\": \"2026-10-23T22:26:43Z\", \"tool\": \"grep\", \"query\": \"fixedPoints|fixedLocus|[Tt]orus|[Tt]ori\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Modules/Presheaf.lean\"], \"digest\": \"652e54164d4a30de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torus acting on a projective variety has at least dim X plus one fixed points",
+   "results": "{\"t\": \"2026-10-23T22:26:43Z\", \"tool\": \"leansearch\", \"query\": \"A torus acting on a projective variety has at least dim X plus one fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.fixedPoints\", \"AddAction.fixedPoints\", \"AddAction.mem_fixedPoints\", \"MulAction.mem_fixedPoints_iff_card_orbit_eq_one\", \"AddAction.sum_card_fixedBy_eq_card_orbits_mul_card_addGroup\", \"MulAction.nontrivial_of_fixedPoints_ne_univ\", \"AddAction.mem_fixedPoints_iff_card_orbit_eq_one\", \"AddAction.fixedBy\"], \"digest\": \"cf9fc52af6606ff8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\"",
+   "results": "{\"t\": \"2026-10-23T22:26:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddAction.fixedPoints\", \"MulAction.fixedPoints\", \"FixedPoints.submonoid\", \"FixedPoints.subgroup\", \"FixedPoints.subgroup_toSubmonoid\", \"AddAction.mem_fixedPoints\", \"MulAction.mem_fixedPoints\", \"AddAction.mem_fixedPoints'\"], \"digest\": \"57d58a9419f05f9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus acting on a complete homogeneous variety G over P has at least dimension plus one distinct fixed points",
+   "results": "{\"t\": \"2026-10-23T22:26:45Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus acting on a complete homogeneous variety G over P has at least dimension plus one distinct fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.rank_le_card\", \"FixedPoints.finrank_le_card\", \"MulAction.nontrivial_of_fixedPoints_ne_univ\", \"MulAction.IsPreprimitive.isMultiplyPreprimitive\", \"FixedPoints.finrank_eq_card\", \"MulAction.IsPreprimitive.is_two_motive_of_is_motive\", \"MulAction.IsPreprimitive.is_two_preprimitive\", \"MulAction.IsPreprimitive.is_two_pretransitive\"], \"digest\": \"b98dae14f1facbe4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of a projective variety is strictly smaller than the number of torus fixed points for a linear action",
+   "results": "{\"t\": \"2026-10-23T22:26:46Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension of a projective variety is strictly smaller than the number of torus fixed points for a linear action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.rank_le_card\", \"FixedPoints.finrank_le_card\", \"Projectivization.card\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Projectivization.card''\", \"Projectivization.card_of_finrank_two\", \"Projectivization.card'\", \"Projectivization.card_of_finrank\"], \"digest\": \"4524d3413aca6441\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b([Tt]orus|[Tt]ori|fixedPoints|fixedLocus)\\b",
+   "results": "{\"t\": \"2026-10-23T22:27:29Z\", \"tool\": \"grep\", \"query\": \"\\\\b([Tt]orus|[Tt]ori|fixedPoints|fixedLocus)\\\\b\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MulAction.fixedPoints is a set definition; FixedPoints.rank_le_card and finrank_le_card bound a field-extension degree for a finite group action; Projectivization.card counts all lines over finite fields. None relates scheme Krull dimension to fixed points of an algebraic torus. The precise AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b([Tt]orus|[Tt]ori|fixedPoints|fixedLocus)\\b",
+   "results": "{\"t\": \"2026-10-23T23:32:33Z\", \"tool\": \"grep\", \"query\": \"\\\\b([Tt]orus|[Tt]ori|fixedPoints|fixedLocus)\\\\b\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no algebraic-geometric torus/fixed-locus declaration in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torus action on projective variety at least dimension plus one distinct fixed points",
+   "results": "{\"t\": \"2026-10-23T23:32:33Z\", \"tool\": \"leansearch\", \"query\": \"Torus action on projective variety at least dimension plus one distinct fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddAction.sum_card_fixedBy_eq_card_orbits_mul_card_addGroup\", \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\", \"AddAction.fixedPoints\", \"MulAction.fixedPoints\", \"MulAction.nontrivial_of_fixedPoints_ne_univ\", \"AddAction.mem_fixedPoints\", \"MulAction.mem_fixedPoints_iff_card_orbit_eq_one\", \"MulAction.sum_card_fixedBy_eq_card_orbits_mul_card_group\"], \"digest\": \"f5fad944c760591f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern fixed subfields of finite group actions, set-theoretic fixed points, or projectivization cardinalities over finite fields; none gives a Krull-dimension lower bound for fixed points of a scheme torus action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\"",
+   "results": "{\"t\": \"2026-10-23T23:32:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddAction.fixedPoints\", \"MulAction.fixedPoints\", \"FixedPoints.submonoid\", \"FixedPoints.subgroup\", \"FixedPoints.subgroup_toSubmonoid\", \"AddAction.mem_fixedPoints\", \"MulAction.mem_fixedPoints\", \"AddAction.mem_fixedPoints'\"], \"digest\": \"57d58a9419f05f9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern fixed subfields of finite group actions, set-theoretic fixed points, or projectivization cardinalities over finite fields; none gives a Krull-dimension lower bound for fixed points of a scheme torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split algebraic torus acting on a proper homogeneous space has at least dimension plus one scheme theoretic fixed points",
+   "results": "{\"t\": \"2026-10-23T23:32:34Z\", \"tool\": \"leanfinder\", \"query\": \"A split algebraic torus acting on a proper homogeneous space has at least dimension plus one scheme theoretic fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.rank_le_card\", \"FixedPoints.finrank_le_card\", \"MulAction.nontrivial_of_fixedPoints_ne_univ\", \"FixedPoints.finrank_eq_card\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\"], \"digest\": \"967d72d91fb647cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern fixed subfields of finite group actions, set-theoretic fixed points, or projectivization cardinalities over finite fields; none gives a Krull-dimension lower bound for fixed points of a scheme torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a linear action of an algebraic torus on a closed projective subscheme the number of fixed rational points is greater than its Krull dimension",
+   "results": "{\"t\": \"2026-10-23T23:36:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a linear action of an algebraic torus on a closed projective subscheme the number of fixed rational points is greater than its Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.rank_le_card\", \"FixedPoints.finrank_le_card\", \"FixedPoints.finrank_eq_card\", \"ChevalleyThm.numBound\", \"Projectivization.card''\", \"Projectivization.card_of_finrank\", \"Projectivization.card_of_finrank_two\", \"Projectivization.card\"], \"digest\": \"7102788db2d6d302\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern fixed subfields of finite group actions, set-theoretic fixed points, or projectivization cardinalities over finite fields; none gives a Krull-dimension lower bound for fixed points of a scheme torus action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-flag-curve",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Theorem 20.16, (a) implies (c), printed pp.412--413. Torus fixed-point estimate in Theorem 20.16 (b) implies (c), supplied by Corollary 20.12 (printed p.411).",
+   "via": [
+    "lem-sfb-rank-one-flag-curve",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-homogeneous-torus-fixed-bound",
+  "worker": "stage1",
+  "summary": "Verified Milne Corollary 20.12 including nonsmooth scheme stabilizers using Theorem 4.27/Remark 4.30 and Theorem 7.18. Reused the live quotient, orbit, weight, cocharacter, projective-dimension and projective-intersection nodes. Wrote the full hyperplane induction and polynomial contraction in the item, including the nonreduced containment case and scheme-theoretic fixedness. No new nodes, no Lean attachment, and no change to the statement or statement dependencies.",
+  "blueprint": "Retains the inherited support chain from det-thm-sf-ctf-stability-direct-images (3) through the rank-one flag-curve input: Theorem 20.16 (b) implies (c), using Corollary 20.12. The latest blueprint direct-images proof (3) and unit/chapter were read. The ancestor command returns None for this inherited chain, so the existing from.node/via/place are preserved; whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic projective chart coordinates used to construct the polynomial contraction and identify the coordinate hyperplane; this unit has no separate standard-chart theorem."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic algebraically closed residue-field theorem turns a closed point in the nonempty finite-type open chart into an F-point; the unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-fdf62cf36",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-fdf62cf36 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements and the Milne source. The source is iAG2017, Lemma 20.10, Prop 20.11 and Cor 20.12 (printed pp.410-411), with Thm 7.18 on printed p.143. The proof follows Milne's hyperplane induction plus a limit point, with the induction restated on the ambient dimension. Step 1: Chevalley's line stabilizer equals H on every algebra and matches G_x in the orbit-quotient node, the orbit is locally closed, and a proper map to separated P(V) that is an immersion is a closed immersion (01NH, 01W6, 01IQ). Step 2: the induction claim is explicit (D4), dim is finite by the Hilbert-polynomial node, and dim P^m = m. Step 3: the separating cocharacter clause applies, since the weight node gives nonzero pieces with distinct characters. Step 4: the case |Z| inside |Q| uses Y = Z x_P Q, so no false factorisation of a nonreduced Z (E3); the F-point comes from Jacobson density (0478) and the residue field (01TB). Step 5: the polynomial limit gamma is a genuine morphism to Z because F[t] injects into F[t,1/t]; p = gamma(0) carries only character chi_0, so it is fixed after every algebra extension, and p is not in Y. Step 6: 0B2R is applied with r = d_Z, s = N-1, which is valid exactly when d_Z >= 1; d_Z = 0 is handled separately. Step 7 transports back to X. proof_deps equals the union of the uses, and each step's bracket citations equal its uses. No SGA. Edge cases: r = 0, G = H, sharp G_m on P^n, nonreduced Z, infinite fixed locus. No duplicate in dag/nodes: the extreme-weight chart needs smooth X with finite fixed points, flag-torus is G/B only. 0 new nodes and the statement is unchanged. Accepted tool_uses: standard-charts (generic P^n coordinates) and closed-point-residue (a Mathlib leaf). Batch-5: the three reached sec-trace-formula nodes are generic tools, not part of the trace-formula or Poincare-duality proof. They are vector-subspace-complement (linear algebra leaf), rational-sequence forward difference (elementary) and free projective bundle Proj Sym = P^r_S (scheme comparison). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ProperHomogeneousTorusFixedBound",
+  "declaration": "AlgebraicGeometry.proper_homogeneous_torus_fixed_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ProperHomogeneousTorusFixedBound.lean",
+  "statement": "theorem proper_homogeneous_torus_fixed_bound {F : Type u} [Field F] [IsAlgClosed F] (G H : Over (Spec (.of F))) [GrpObj G] [GrpObj H] [IsAffine G.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (iH : H ⟶ G) [IsClosedSubgroupScheme iH] (X : Over (Spec (.of F))) [IsProper X.hom] (q : G ⟶ X) (ηq : coequalizer (yoneda.map (fst G H)) (yoneda.map (lift (fst G H) (snd G H ≫ iH) ≫ μ[G])) ⟶ yoneda.obj X) (hηq : coequalizer.π _ _ ≫ ηq = yoneda.map q) (hquot : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj X ⟶ Z.obj ↦ ηq ≫ f)) (S : Grp (Over (Spec (.of F)))) (iS : S.X ⟶ G) [IsClosedSubgroupScheme iS] (hsplit : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) [ModObj S.X X] (haction : (𝟙 S.X ⊗ₘ q) ≫ γ[S.X, X] = (iS ⊗ₘ 𝟙 G) ≫ μ[G] ≫ q) : ∃ (d : ℕ) (x : Fin (d + 1) → (𝟙_ (Over (Spec (.of F))) ⟶ X)), topologicalKrullDim X.left = (d : WithBot ℕ∞) ∧ Function.Injective x ∧ ∀ (j : Fin (d + 1)) (A : Type u) [CommRing A] [Algebra F A] (s : StandardGroupSchemes.affine F A ⟶ S.X), s • (toUnit (StandardGroupSchemes.affine F A) ≫ x j) = toUnit (StandardGroupSchemes.affine F A) ≫ x j",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing splitTorus of the additional landed statement dependency def-sfb-tori-multiplicative-type. The quotient is specified by the recorded homogeneous-quotient sheafification interface; haction specifies precisely its induced left S-action. The conclusion supplies the actual finite Krull dimension and an injective list of d+1 universally fixed rational points, without assuming the fixed set finite."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e80268ca",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read the item, all 12 stmt_dep records, the delivered module, the report and the declarations used (IsClosedSubgroupScheme extends IsMonHom plus closed immersion; splitTorus; exists_homogeneous_fppf_quotient; Hom.smul; topologicalKrullDim). Every clause matches: G smooth connected affine of finite type (LocallyOfFiniteType+QuasiCompact); H any closed subgroup, its affineness and finite type implied, not added; X pinned by the dependency's own coset coequalizer and fppf sheafification universal property; IsProper X; S closed subgroup isomorphic in Grp to splitTorus F r, r>=0; ModObj action pinned by haction s.q(g)=q(s g), which exists, so not vacuous; conclusion gives a finite d = topologicalKrullDim, an injective Fin (d+1) list of F-points, each fixed by S(A) for every F-algebra A in Type u. Edge cases G=H, r=0, infinite fixed locus, nonreduced H, zero algebra all covered. lean.statement verbatim; stmt_deps gain only the landed def-sfb-tori-multiplicative-type (allowed); no defs; single sorry; docstrings carry source, blueprint id and 7 steps; no duplicate found in the live Lean trees; report sections present (the second reading is the same worker's, labelled as such). Not recompiled per instruction; no fixes."
+ }
+}

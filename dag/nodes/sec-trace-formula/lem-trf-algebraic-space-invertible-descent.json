@@ -12,114 +12,69 @@
   "def-trf-algebraic-space",
   "def-sc-invertible-module",
   "def-pc-module-pullback",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sfb-ordinary-etale-identification"
  ],
  "proof": [
   {
-   "text": "Work on the small site $F_{\\mathrm{et}}$ with its structure sheaf as defined in [def-trf-algebraic-space], choosing a small skeleton and a universe containing $I$ and $I\\times I$ as in [def-weil-size-convention]. By [lem-trf-scheme-etale-invertible-comparison], set $L_i=A_{V_i}(M_i)$; these are line modules. Its pullback compatibility turns $\\alpha_{ij}$ into isomorphisms $a_{ij}:L_j|_{R_{ij}}\\to L_i|_{R_{ij}}$ on the small etale site of $R_{ij}$. The same compatibility for composition identifies the ordinary triple-pullback equation with $a_{ik}=a_{ij}a_{jk}$ and identifies diagonal restriction with the identity. No strict identification of distinct iterated module pullbacks is being assumed.",
+   "text": "From the scheme-test joint-surjectivity hypothesis obtain CoversTop V. Indeed, on every T the sieve of arrows whose domains map to some V_i is jointly surjective: use the specified representing pullback and its point over each x. Base change of the etale chart makes its projection etale, and the representing Yoneda map gives the site arrow. All arrows between site objects are etale by the scheme-test comparison lemma. Hence this sieve is in the generating precoverage and in the etale topology. This is the private Lean lemma atlas_coversTop.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-size-convention",
-    "lem-trf-scheme-etale-invertible-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tags 03DX, 05VG and 03LC, comparison and pullback compatibility"
-   }
-  },
-  {
-   "text": "For each test scheme $W\\to F$ put $W_i=W\\times_F V_i$ and $W_{ij}=W\\times_F V_i\\times_F V_j$. These are schemes by the representable diagonal; they are etale test objects over the appropriate $V_i$ and $R_{ij}$ by the base-change meaning of etaleness in [def-trf-algebraic-space]. Define set-valued presheaves $H_i(W)=L_i(W_i)$ and $K_{ij}(W)=L_i(W_{ij})$, with restrictions induced by fibre products. They are sheaves: a covering $\\{W_b\\to W\\}$ pulls back to coverings of $W_i$ and $W_{ij}$, and their double intersections are the corresponding pullbacks of $W_b\\times_WW_c$. Consequently the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology](1) for $L_i$ is exactly that for $H_i$ or $K_{ij}$. This verification does not require $F$ to be a scheme or a terminal object of $F_{\\mathrm{et}}$.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR (lemma-glue-sheaves), component sheaves in the compatible-tuples construction"
-   }
-  },
-  {
-   "text": "There are two natural maps $\\prod_i H_i\\rightrightarrows\\prod_{i,j}K_{ij}$, with coordinates $s_i|_{W_{ij}}$ and $a_{ij}(s_j|_{W_{ij}})$. Apply [lem-weil-pbc-site-sheaf-sets-limits-sectionwise](1) on $F_{\\mathrm{et}}$ first to the discrete index categories $I$ and $I\\times I$, then to the finite parallel-pair diagram. Its small-index hypothesis holds in the universe fixed in Step 1. The equalizer is a sheaf with the explicit values\n$$M(W)=\\{(s_i)\\in\\prod_i L_i(W_i):s_i|_{W_{ij}}=a_{ij}(s_j|_{W_{ij}})\\text{ for every }i,j\\}.$$\nRestrictions act coordinatewise; their compatibility with these equations follows from naturality of $a_{ij}$.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR (lemma-glue-sheaves), compatible-tuples formula; Tag 00W2 (lemma-limit-sheaf) for its sheaf property"
-   }
-  },
-  {
-   "text": "Give $M(W)$ coordinatewise addition and inverse, and let $b\\in\\mathcal O_F(W)$ act on its $i$th coordinate by the restriction of $b$ to $W_i$. Each $a_{ij}$ is linear over $\\mathcal O_F(W_{ij})$, so the compatibility equations are closed under these operations and contain zero. All abelian-group and module laws hold coordinatewise because they hold in $L_i(W_i)$. For $W'\\to W$ the restriction is semilinear, since restriction in each $L_i$ is semilinear over the induced restriction of functions. Thus the sheaf of sets in Step 3 is a sheaf of $\\mathcal O_F$-modules in precisely the sectionwise sense of [def-weil-sheaf-of-modules-category].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, compatible-tuples construction with module operations; Modules on Sites Tag 03CV (definition-sheaf-modules)"
-   }
-  },
-  {
-   "text": "For an etale $W\\to V_a$ let $d_a:W\\to W_a$ be its graph over $F$. Define $e_{a,W}:M(W\\to F)\\to L_a(W)$ by $e_{a,W}((s_i))=d_a^*s_a$. For $y\\in L_a(W)$ define $i_{a,W}(y)$ by coordinates $s_i=a_{ia}(y|_{W_i})$, evaluating $a_{ia}$ using the map $W_i\\to R_{ia}$ furnished by its $V_i$-projection and $W_i\\to W\\to V_a$. On $W_{ij}$ the cocycle gives $a_{ij}(s_j|)=a_{ij}a_{ja}(y|)=a_{ia}(y|)=s_i|$, so this is a tuple in $M(W)$. Both formulas are linear. For $h:W'\\to W$ over $V_a$, the graph equation $h_a d'_a=d_a h$ proves restriction compatibility of $e_a$; naturality of $a_{ia}$ proves it coordinatewise for $i_a$. Hence these formulas define module-sheaf maps on $(V_a)_{\\mathrm{et}}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, explicit graph evaluation and inverse for the local gluing isomorphisms"
-   }
-  },
-  {
-   "text": "The composite $e_ai_a$ is identity because $a_{aa}$ restricts to identity along the diagonal of $V_a$. For a compatible tuple $s$ and any $i$, pull its $(i,a)$ equation back along $W_i\\to W_{ia}$ whose $a$-coordinate is the given $W\\to V_a$. This yields $s_i=a_{ia}((d_a^*s_a)|_{W_i})$, so $i_ae_a$ is identity too. Thus $e_a:q_a^*M\\simeq L_a$. For a test scheme $W\\to R_{ab}$, pull the $(a,b)$ tuple equation back along the graph $W\\to W_{ab}$ of both structural maps: it becomes $e_a=a_{ab}e_b$. This proves that the local identifications induce exactly the prescribed transition isomorphisms, including self-overlaps; $a_{aa}$ was used as identity only on its diagonal.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, explicit verification of the inverse and of transition compatibility"
-   }
-  },
-  {
-   "text": "Choose Zariski trivializing covers of each $M_a$, as permitted by [def-sc-invertible-module]. By [lem-trf-scheme-etale-invertible-comparison], their associated etale modules are trivial with structure-module identification $A(\\mathcal O)\\simeq\\mathcal O$. For any test object $W\\to F$, the schemes $W_a$ cover $W$; further pullback of the trivializing covers covers each $W_a$. The composition-of-coverings axiom [def-weil-pbc-sites-and-cohomology](1) gives a covering of $W$ on which $M$ is the structure module, using $e_a$ from Step 6. Thus $M$ is a line module as defined in [def-trf-algebraic-space]. The same comparison equivalence interprets $e_a$ as $q_a^*M\\simeq M_a$ in ordinary invertible modules, and its faithfulness makes the transition identity of Step 6 the original $\\alpha_{ab}$.",
-   "uses": [
-    "def-sc-invertible-module",
-    "lem-trf-scheme-etale-invertible-comparison",
-    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-space-representable-etale-scheme-tests",
     "def-trf-algebraic-space"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 060X (lemma-finite-locally-free-descends), etale-local rank-one specialization; here verified directly with local frames"
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03EC and 03ED, small etale-site coverings"
    }
   },
   {
-   "text": "Finally let $M,N$ be any line modules on $F$, and let compatible ordinary module maps on the $V_i$ be given. Full faithfulness and pullback compatibility of [lem-trf-scheme-etale-invertible-comparison] turn them into maps $g_i:M|_{V_i}\\to N|_{V_i}$ agreeing on every overlap. For $s\\in M(W)$ put $t_i=g_i(s|_{W_i})\\in N(W_i)$. Agreement and naturality give $t_i|_{W_{ij}}=t_j|_{W_{ij}}$. The sheaf axiom [def-weil-pbc-sites-and-cohomology](1) yields a unique $t\\in N(W)$ restricting to all $t_i$; set $g_W(s)=t$. For $W'\\to W$, both restrictions of this formula have the same values on all $W'_i$, so separatedness makes $g$ natural. Additivity and $\\mathcal O_F(W)$-linearity follow by the same uniqueness, applied to $s+s'$ and $bs$. For $W\\to V_i$, restrict the defining equality on $W_i$ along its graph $W\\to W_i$; this gives $g_W(s)=g_i(s)$. A second global map with the same restrictions agrees on every $W_i$ and hence on $W$ by separatedness. This proves surjectivity and injectivity of the asserted restriction map.",
+   "text": "Apply the ordinary atlas tuple realization to M_i and the transition, diagonal and cocycle fields of D. It gives N and natural linear identifications e_i inducing exactly D.transition. This step requires no covering assumption and asserts no local freeness.",
    "uses": [
-    "lem-trf-scheme-etale-invertible-comparison",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-trf-ordinary-atlas-tuple-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ (lemma-glue-maps), sectionwise amalgamation, with linearity and ordinary-module interpretation made explicit"
+    "place": "Tag 04TR, compatible-tuples realization and graph isomorphisms"
+   }
+  },
+  {
+   "text": "For each arrow U to T in the sieve of Step 1, choose a chart lift U to V_i. Apply the ordinary-identification local-frame lemma to M_i and e_i on U. Bind these covering sieves to the covering sieve of Step 1. Grothendieck-topology covering composition makes the bound sieve cover T. An arrow in it factors through one of the chosen local-frame sieves, and the associated trivialization has precisely its domain as its restriction object. This proves IsLineModule N without changing its definition.",
+   "uses": [
+    "lem-trf-ordinary-etale-identification-local-frames",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 060X, rank-one local-freeness descent, covering composition"
+   }
+  },
+  {
+   "text": "For arbitrary module sheaves P,Q, forget the local maps to additive sheaf maps. Their common-test-object compatibility makes them a compatible family of sections of Mathlib presheafHom. Q.isSheaf.hom and FamilyOfElementsOnObjects.IsCompatible.existsUnique_section glue them across CoversTop V. The equivalence presheafHomSectionsEquiv gives the global additive natural map. Its scalar-linearity is checked after restriction to the covering sieve and follows from local linearity, semilinear restrictions and sheaf separatedness. Bundle it as a module map. The section equation gives every local restriction, and separatedness proves uniqueness. This is the complete private Lean proof atlas_hom_descent; invertibility of P and Q is not needed.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ (lemma-glue-maps), implemented by Mathlib sheafHom/CoversTop and local linearity"
    }
   }
  ],
  "proof_deps": [
+  "lem-trf-space-representable-etale-scheme-tests",
   "def-trf-algebraic-space",
-  "def-weil-size-convention",
-  "lem-trf-scheme-etale-invertible-comparison",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "def-weil-sheaf-of-modules-category",
-  "def-sc-invertible-module"
+  "lem-trf-ordinary-atlas-tuple-realization",
+  "lem-trf-ordinary-etale-identification-local-frames",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 04TR (lemma-glue-sheaves) and 04TQ (lemma-glue-maps), compatible-tuples proof on test schemes; compare spaces-descent.tex Tag 04W8, etale special case, and descent.tex Tags 03DX/03LC/05VG."
+  "place": "Tags 04TR and 04TQ; ordinary tuple realization and local frames split off, with explicit CoversTop construction, covering composition and complete morphism gluing in Lean."
  },
  "mathlib_searches": [
   {
@@ -268,47 +223,36 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-algebraic-space-invertible-descent",
   "worker": "stage1",
-  "summary": "Kept the imported statement. Constructed its module by sectionwise compatible tuples and proved its local identifications, cocycle, rank-one locality and the full morphism bijection. Reused sectionwise sheaf limits and introduced only the scheme Zariski/small-etale invertible-module comparison as a statement-only input; searched the DAG, current blueprint, project declarations and Mathlib.",
+  "summary": "Q134 repair of the human re-split return: the statement is unchanged. Extracted old steps 2-4 into the statement-only fibre-product tuple-module construction and old steps 5-6 into statement-only natural graph evaluation, inverse and overlap identification. These handle arbitrary local modules without a joint-surjectivity assumption and neither asserts line-module descent or its morphism bijection. Kept old steps 1, 7 and 8 in the short assembly; the full original eight arguments and allocation are preserved verbatim in report.md. Two independent new stage-1 items are available. Rebased after the L landing refusal (side completion not promoted to the live queue DAG): re-read every current cited statement and checked all eleven citation quotes, retaining the two extracted arguments. Assembly Steps 2 and 3 now explicitly identify the module/universe and diagonal/cocycle hypotheses inherited from Step 1. The retained original eight-step proof equals the current read-only DAG proof; no statement or dependency migration is required. On the renewed current-DAG check, Step 2 now displays the actual section formula and coordinatewise restrictions supplied by the new construction statement, so the assembly no longer leaves its section model implicit. Current-dispatch repair: checked the newly landed 00W2 nodes on kernel-pair quasi-compactness and finite epimorphic-cover calculus; neither states the tuple-module construction, and report.md now records both comparisons. Step 3 explicitly records the transition-defined inverse supplied by the graph lemma. Repair on 2026-10-23: compared the retained split with the current DAG and re-read every cited statement. The current 00W2 kernel-relation node is about representability of an atlas kernel pair, not a module equalizer; its comparison is added to Not duplicates. Step 3 now explicitly applies graph evaluation to Step 2's specified tuple sheaf, and Step 4 explicitly names invertibility as the source of Zariski frames. Retained both extracted arguments, all logged searches and original proof text.",
   "blueprint": "Serves the inherited polarized-scheme descent input to the descent sentence of lem-trf-local-term-locality, through the unchanged via chain: construct the descended polarization and its compatible morphisms.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "why": "Generic small limits of sheaves are computed sectionwise; used only for products and an equalizer on the algebraic-space etale site. No node of this unit supplies this site-theoretic tool."
-   }
-  ]
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q12-578e1b348",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q134-95f66a16b",
+  "group": "Q134",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-578e1b348 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. Stacks 04W8/060X, 03DX(2)/05VG/03LC(1), and 04TR/04TQ/00W2 support the eight-step construction and new comparison. Edge cases, duplicates, dependencies and route restrictions checked. Added only missing merged_into and empty lean_audit metadata in the corrected new-node JSON under fixes/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-95f66a16b (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no fixes. This is the fifth push of the same human re-split from 2026-10-21. The four earlier heads (b5226166, 3ae26801, 076a4921, a2f200c2) all passed and were then refused at landing because the side completion had not been promoted to the live DAG. Compared with a2f200c2, both new nodes are byte-identical, and also identical to b5226166. In the item, only two steps changed: Step 3 now says \"Step 2's tuple sheaf\" and Step 4 says \"each invertible M_a\". The split_report summary was extended. The statement, stmt_deps and proof_deps are unchanged. In live and side-live the item is still split with its old 8-step proof, and neither new id exists there. Allocation: old step 1 is Step 1, verbatim. Old steps 2-4 are the new node lem-trf-space-etale-module-tuple-sheaf. Old steps 5-6 are the new node lem-trf-space-etale-tuple-graph-isomorphisms. Old steps 7 and 8 are Steps 4 and 5, verbatim. Nothing was shortened. The new nodes are comparable in size (about 2087 and 1361 characters), and the assembly is 2974 characters. Checks: node 1 is correct with arbitrary linear a_ij, because an equalizer of sheaves is a sheaf (00W2) and linear a_ij give a submodule with semilinear restriction. Node 2 is also correct. The graph map d_a=(1,t) makes e∘j=1 hold by the diagonal identity. For j∘e=1, pull the (i,a) equation back along W_i→W_ia. For the transition, pull back along (1,u,v):W→W_ab, which also covers self-overlaps with two different lifts. Neither node restates a clause of the parent. Steps 1, 4 and 5 use only the statements of def-trf-algebraic-space, lem-trf-scheme-etale-invertible-comparison, def-sc-invertible-module and def-weil-pbc-sites-and-cohomology(1). Sources: Stacks sites.tex 04TR l.5848 gives the tuple formula and omits exactly these checks; I also read 04TQ and 00W2. No SGA is cited. Duplicate search (grep -R over the snapshot, live and side-live) found no new candidates since the base. I also read glue-sheaves-of-modules, sc-glue-component-transition-cocycle, fppf-scheme-data-sheaf-gluing and module-local-model-gluing-data; these cover topological spaces, Zariski cocycles and fppf scheme descent data, so none duplicates the new nodes. The parent keeps the maintainer tool_uses field; I accept that. Maintainer note: these are landing refusals of an unchanged split. Please promote the side completion so the loop stops."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent",
   "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_lineModule_of_etale_descent",
   "declarations": [
-   "AlgebraicGeometry.AlgebraicSpace.ordinaryEtaleSectionRestriction",
-   "AlgebraicGeometry.AlgebraicSpace.atlasTransitionOn",
-   "AlgebraicGeometry.AlgebraicSpace.atlasTransitionOver",
-   "AlgebraicGeometry.AlgebraicSpace.OrdinaryEtaleIdentification",
    "AlgebraicGeometry.AlgebraicSpace.InvertibleAtlasDescentDatum",
    "AlgebraicGeometry.AlgebraicSpace.exists_lineModule_of_etale_descent"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceInvertibleDescent.lean",
-  "statement": "theorem exists_lineModule_of_etale_descent {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type u} (V : I → F.EtaleSite) (hjoint : ∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj.obj) (x : T.left), ∃ (i : I) (U : Over S) (p : U ⟶ T) (r : yoneda.obj U ⟶ yoneda.obj (V i).obj.left), IsPullback r (yoneda.map p) (V i).obj.hom a ∧ ∃ y : U.left, p.left.base y = x) (R : I → I → Over S) (p₁ : ∀ i j : I, R i j ⟶ (V i).obj.left) (p₂ : ∀ i j : I, R i j ⟶ (V j).obj.left) (hR : ∀ i j : I, IsPullback (yoneda.map (p₁ i j)) (yoneda.map (p₂ i j)) (V i).obj.hom (V j).obj.hom) (M : ∀ i : I, (F.etaleForget.obj (V i)).Modules) (hM : ∀ i : I, Scheme.Modules.IsInvertible (M i)) (D : InvertibleAtlasDescentDatum (fun i ↦ (V i).obj.left) R p₁ p₂ M) : (∃ (N : F.Modules), F.IsLineModule N ∧ ∃ (e : ∀ i : I, OrdinaryEtaleIdentification F (V i) N (M i)), ∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j) (r : T.obj.left ⟶ R i j) (h₁ : r ≫ p₁ i j = a.hom.left) (h₂ : r ≫ p₂ i j = b.hom.left) (s : ((tensorPullback (F.etaleForget.map b)).obj (M j)).val.obj (op ⊤)), (e i).app T a (((atlasTransitionOver (M i) (M j) (p₁ i j) (p₂ i j) (D.transition i j) r a.hom.left b.hom.left h₁ h₂).hom.app ⊤) s) = (e j).app T b s) ∧ (∀ (P Q : F.Modules), F.IsLineModule P → F.IsLineModule Q → ∀ (g : ∀ i : I, (F.etalePullback (V i)).obj P ⟶ (F.etalePullback (V i)).obj Q), (∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j), (g i).val.app (op (Over.mk a)) = (g j).val.app (op (Over.mk b))) → ∃! f : P ⟶ Q, ∀ i : I, (F.etalePullback (V i)).map f = g i)",
+  "statement": "theorem exists_lineModule_of_etale_descent\n    {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type u} (V : I → F.EtaleSite)\n    (hjoint : ∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj.obj) (x : T.left),\n      ∃ (i : I) (U : Over S) (p : U ⟶ T)\n        (r : yoneda.obj U ⟶ yoneda.obj (V i).obj.left),\n        IsPullback r (yoneda.map p) (V i).obj.hom a ∧\n          ∃ y : U.left, p.left.base y = x)\n    (R : I → I → Over S)\n    (p₁ : ∀ i j : I, R i j ⟶ (V i).obj.left)\n    (p₂ : ∀ i j : I, R i j ⟶ (V j).obj.left)\n    (hR : ∀ i j : I, IsPullback (yoneda.map (p₁ i j)) (yoneda.map (p₂ i j))\n      (V i).obj.hom (V j).obj.hom)\n    (M : ∀ i : I, (F.etaleForget.obj (V i)).Modules)\n    (hM : ∀ i : I, Scheme.Modules.IsInvertible (M i))\n    (D : InvertibleAtlasDescentDatum (fun i ↦ (V i).obj.left) R p₁ p₂ M) :\n    (∃ (N : F.Modules), F.IsLineModule N ∧\n      ∃ (e : ∀ i : I, OrdinaryEtaleIdentification F (V i) N (M i)),\n        ∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j)\n          (r : T.obj.left ⟶ R i j)\n          (h₁ : r ≫ p₁ i j = a.hom.left) (h₂ : r ≫ p₂ i j = b.hom.left)\n          (s : ((tensorPullback (F.etaleForget.map b)).obj (M j)).val.obj (op ⊤)),\n          (e i).app T a\n            (((atlasTransitionOver (M i) (M j) (p₁ i j) (p₂ i j) (D.transition i j)\n              r a.hom.left b.hom.left h₁ h₂).hom.app ⊤) s) = (e j).app T b s) ∧\n    (∀ (P Q : F.Modules), F.IsLineModule P → F.IsLineModule Q →\n      ∀ (g : ∀ i : I, (F.etalePullback (V i)).obj P ⟶ (F.etalePullback (V i)).obj Q),\n        (∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j),\n          (g i).val.app (op (Over.mk a)) = (g j).val.app (op (Over.mk b))) →\n        ∃! f : P ⟶ Q, ∀ i : I, (F.etalePullback (V i)).map f = g i)",
   "branch": "newtargets-dag",
-  "by": "Q76",
-  "date": "2026-10-17",
+  "by": "O2",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Retains ordinary Scheme.Modules.IsInvertible local modules and the specified ordinary tensor-pullback overlap isomorphisms. OrdinaryEtaleIdentification is the sectionwise linear/natural form of the localized-site isomorphism with the ordinary associated etale module. InvertibleAtlasDescentDatum bundles exactly the overlap isomorphisms, diagonal identity and triple cocycle; its tests range over all schemes over the base. The final conjunct is full faithfulness, stated as unique gluing of compatible localized module maps. All transport helpers have explicit data from the existing canonical tensor-pullback units and composition isomorphisms; no inverse equivalence or unrelated global extensions are assumed."
+  "note": "Section 1(B) repair explicitly requested by L on immutable head 52152add7c20 (H2/H12). The prior record bundled generic ordinary-etale identification and overlap-transport definitions with the invertible-descent theorem, leaving no definition node owning the generic notions. Move ordinaryEtaleSectionRestriction, atlasTransitionOn, atlasTransitionOver and OrdinaryEtaleIdentification, unchanged in full names/signatures/data, into the new definition-node module Sheaf.AlgebraicGeometry.OrdinaryEtaleIdentification. This module now publicly imports that module and drops its copies; it retains the identical InvertibleAtlasDescentDatum and exists_lineModule_of_etale_descent statements with the same postponed proof. Maintenance records the new definition owner in stmt_deps; the natural-language statement and proof fields are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -318,5 +262,26 @@
   "result": "pass",
   "note": "Statement, dependencies, helpers, docstrings, edge cases, source alignment, route-pivot compliance, report sections, and per-file compilation all checked; no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083228-L-2301471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

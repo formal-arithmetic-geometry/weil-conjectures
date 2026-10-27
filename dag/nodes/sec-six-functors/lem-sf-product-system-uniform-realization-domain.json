@@ -1,0 +1,432 @@
+{
+ "id": "lem-sf-product-system-uniform-realization-domain",
+ "kind": "statement",
+ "title": "Uniform domain bounds for actual product compactification systems",
+ "statement": "Fix distinct primes $p,\\ell$, $q=p^a$ with $a\\ge1$, $k=\\overline{\\mathbf F_q}$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, uniformizer $t$ and $A_n=R/t^n$, $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f=aj:X\\to B$, $g=bk:Y\\to B$, $h=dl:W\\to B$ be compactifications of separated finite-type morphisms of separated finite-type $k$-schemes [def-weil-compactifications-refinements]. Take $K,L,M$ in their integral $D^b_{ctf}(-,R)$ categories, meaning derived-complete bounded constructible objects whose derived reductions have Tor amplitudes in fixed finite intervals independent of $n$ [def-weil-finite-tor-amplitude, def-weil-derived-complete-integral-detailed]. Let their actual strict reduction systems, with the actual quotient transitions, be used in the simultaneous operations of [lem-coef-semilinear-derived-sections].\nThe ring $R$ is Noetherian, $t$ is a non-zero-divisor, $R\\cong\\lim_nR/t^n$ and every $A_n$ is finite. Every scheme in the finite two- and three-factor product compactification diagrams is Noetherian, every indicated open is quasi-compact and every indicated base-changed or composite proper map is proper.\nConsider any finite well-typed expression in the given actual reductions, system inverse image, derived system tensor, open extension and proper system direct image along these diagrams [def-sf-integral-system-expression-domain]. All intermediate systems are normalized: $N_m\\otimes^L_{A_m}A_n\\cong N_n$. They have constructible levels with bounded cohomological and Tor intervals independent of $n$ and bounded etale-origin witnesses. Quantitatively, inverse image preserves a Tor interval $[u,v]$, tensor of intervals $[u,v]$ and $[u',v']$ gives $[u+u',v+v']$, open extension preserves cohomological and Tor intervals, and a proper map with source dimension at most $d$ sends $[u,v]$ to $[u,v+2d]$. One may take $d=0$ for an empty source. These rules give common finite bounds for the finitely many intermediate expressions, including all those in the open-product and compactification calculation, at every quotient level.\nFor every such system $N$ on a scheme $Z$, the simultaneous etale/pro-etale comparison $\\nu_{A,Z}^*\\dashv R\\nu_{A,Z,*}$ of [lem-pur-coefficient-system-derived-comparison] has invertible counit $\\nu_{A,Z}^*R\\nu_{A,Z,*}N\\to N$; the system $R\\nu_{A,Z,*}N$ is bounded below and normalized. Thus compatible etale-origin presentations exist for the actual system. The bounded witnesses initially supplied at separate levels need not carry transition maps. Consequently the hypotheses on all intermediate objects in [lem-sf-integral-compactification-system-realization] hold for these product compactification expressions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok (system/limit foundation); common-bound and coherent-origin hypotheses for the blueprint proper-reduction sentence, an agent-formulated obligation."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-semilinear-derived-sections",
+  "def-sf-integral-system-expression-domain",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof": [
+  {
+   "text": "The local-field DVR theorem makes $R$ a principal ideal domain contained in $E$, and its chosen uniformizer $t$ is nonzero. Thus multiplication by $t$ is injective. The PID theorem gives Noetherianity. The valued-DVR quotient theorem gives finiteness of every $A_n$, and the profinite-tower theorem identifies the actual reduction map $R\\to\\lim_nA_n$ as a ring isomorphism. These establish the coefficient hypotheses, including regularity and completeness, of the system comparison used below.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1; coefficient prerequisites are the existing local-field and profinite-tower statements (agent assembly)."
+   }
+  },
+  {
+   "text": "For each compactification, its proper factor is finite type by the definition of properness; its ambient scheme is finite type over $k$ by composition. Every two- or three-factor diagram scheme is an iterated fibre product of these schemes and the original schemes over $B$. Finite-type stability under base change and composition therefore makes each diagram scheme finite type over $k$. The indicated proper arrows are base changes or composites of the proper factors, so properness stability gives their properness. The inverse-image arrows used in the calculation are the indicated separated finite-type projections and their composites. Apply finite-type-over-Noetherian to their structure maps to $\\operatorname{Spec}k$, a Noetherian affine scheme.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), 01T6 (lemma-finite-type-noetherian), 01W5 and 01W6 (proper base change and composition)."
+   }
+  },
+  {
+   "text": "Choose a finite Noetherian affine cover of each diagram scheme, using its local Noetherianity and quasi-compactness. The underlying affine spaces are Noetherian, and the finite-union theorem makes the entire underlying space Noetherian. The compact-subsets theorem now makes every indicated open, and its intersection with any affine open of its target, quasi-compact; the latter is precisely quasi-compactness of the open immersion. The finite-type dimension theorem supplies a nonnegative integer $d_Z$ bounding each source dimension. If the source is empty choose $d_Z=0$. These choices involve only the finite geometric diagram and never $n$.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-kun-finite-union-noetherian",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 0053 (lemma-finite-union-Noetherian) and 04ZA (lemma-Noetherian-quasi-compact); finite dimension as in lem-kun-dimension-finite-type."
+   }
+  },
+  {
+   "text": "Induct on the syntax tree of the finite expression. For a system $N$, the induction property is: its actual transition-adjoints are invertible, its levels are constructible with a common finite Tor interval $I_N=[u_N,v_N]$, and hence with that same cohomological interval. The cohomological assertion follows by testing the Tor condition against the degree-zero coefficient unit. For each input, the integral finite-Tor definition supplies $I_N$ independent of $n$, and the derived-complete constructible definition supplies constructible reductions. The strict reduction-system construction and successive scalar-association theorem identify the actual adjoint transition as\n$$(K\\otimes^L_{\\widehat R}A_m)\\otimes^L_{A_m}A_n\\xrightarrow{\\sim}K\\otimes^L_{\\widehat R}A_n.$$\nThe theorem also identifies the composite quotient units and their cocycles. Thus this is normalization of the given strict reduction system, rather than a choice of unrelated level isomorphisms.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Derived change of rings and its association; agent induction on the expression trees of def-sf-integral-system-expression-domain."
+   }
+  },
+  {
+   "text": "For an inverse-image constructor, apply pullback Tor-amplitude preservation at each finite quotient. The interval stays $[u,v]$ and the levels remain constructible. For a tensor constructor, apply finite-Tor tensor closure to its two inputs: the output is constructible with interval $[u+u',v+v']$. The whole-system tensor/pullback closure theorem proves normalization for these actual operations. In particular the tensor adjoint is scalar reassociation followed by $\\alpha^P_{m,n}\\otimes\\alpha^Q_{m,n}$, and the inverse-image adjoint is the inverse image of the input adjoint under scalar association. Both are invertible and retain the actual quotient cocycles. All hypotheses on the scheme arrows were established in steps 2 and 3.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-pur-system-normalized-tensor-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; finite-level bounds follow the blueprint pullback and tensor proofs cited in report.md."
+   }
+  },
+  {
+   "text": "For an open-extension constructor, finite-level open finite-Tor closure preserves constructibility and the cohomological and Tor intervals. Apply the ringed open tensor comparison to $B_X=(A_m)_X$, $M=N_m$ and the degree-zero $B_X$-module $(A_n)_X$. It identifies\n$$(J_jN)_m\\otimes^L_{A_m}A_n\\cong j_!(N_m\\otimes^L_{A_m}A_n).$$\nFollowing this by $j_!(\\alpha^N_{m,n})$ is the actual output transition-adjoint: restriction to the open is the input adjoint, and the open tensor comparison is normalized to the identity there. The whole-system version of the same theorem and the evaluation calculus identify these maps with the strict system transitions, including quotient composition. Hence this constructor preserves normalization as well as the interval.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/lem-trf-open-ctf.proof.md",
+    "place": "Exact extension, constructible stratification and tensor formula; actual system normalization uses the ringed open tensor theorem."
+   }
+  },
+  {
+   "text": "For a proper-image constructor $S_rN$, the evaluation calculus gives $e_nS_rN\\cong Rr_{*,n}N_n$. The pro-etale finite direct-image theorem applies to the separated finite-type proper map with the fixed source bound $d$. It gives constructible output levels with Tor interval $[u,v+2d]$, uniformly in $n$. Testing against the coefficient unit gives the same cohomological interval. To check normalization, first choose bounded etale origins for $N_m$ and $N_n$ by finite-ring constructible derived origin. That theorem preserves cohomological intervals. The normalized input identifies $N_m\\otimes^L_{A_m}A_n$ with $N_n$, so this scalar extension is also bounded below, as required by the proper scalar comparison theorem.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-proetale.proof.md",
+    "place": "Finite-level direct-image constructibility and Tor bound; bounded etale origins use Stacks 09AL, lemma-compare-constructible-derived."
+   }
+  },
+  {
+   "text": "More explicitly, for $m\\ge n$ the actual proper-output transition-adjoint is\n$$ (Rr_{*,m}N_m)\\otimes^L_{A_m}A_n\\xrightarrow{b_{m,n}}Rr_{*,n}(N_m\\otimes^L_{A_m}A_n)\\xrightarrow{Rr_{*,n}(\\alpha^N_{m,n})}Rr_{*,n}N_n.$$\nThis is the transition formula in the semilinear evaluation calculus. The first arrow is exactly its coefficient projection mate, so the proper etale-origin scalar-isomorphism theorem makes it invertible; the second is invertible by the induction hypothesis. The scalar theorem's etale hypothesis is valid: choose a bounded origin $E_e$ of $N_m$ and use the comparison Tor-interval theorem to transfer its finite Tor interval to the etale site. Its scalar extension by the degree-zero sheaf $A_n$ has cohomology in $[u,v]$, by that Tor condition. Thus both etale objects required by the scalar theorem are bounded below. Properness and finite coefficient rings are already established, and no flatness of $A_m\\to A_n$ is asserted. This proves normalization for the actual proper system.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; transport and identification of the actual mate as in the cited proper scalar theorem."
+   }
+  },
+  {
+   "text": "The base and all constructors now prove the induction property for every subtree. At every level of every intermediate system, finite-ring constructible derived origin supplies a bounded constructible etale witness in the same cohomological interval. These witnesses have not been given transitions. For any fixed finite collection of expressions, collect the finitely many intervals attached recursively to all their subtrees. Their minimum lower endpoint and maximum upper endpoint give common finite cohomological and Tor bounds, independent of $n$; each proper contribution $2d_Z$ is fixed before the recursion. This includes all subtrees in the two- and three-factor compactification calculation, with the open intermediate of every $S_pJ_j$ counted separately.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sf-integral-system-expression-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; elementary finite minimum/maximum assembly of the induction bounds."
+   }
+  },
+  {
+   "text": "Fix an intermediate system $N$ on $Z$ with the common lower bound $c$. System cohomology is levelwise, so $H^i(N)=0$ for $i<c$: every evaluation is zero in that degree. Hence $N\\in D^+(\\mathscr S_A(Z_{\\mathrm{proet}}))$. For every $n$, finite-ring site comparison is fully faithful on $D^+$, and step 9 gives $N_n$ in its essential image. Apply the coefficient-system derived comparison to $u=\\nu_Z$, $O=R$, $\\lambda=t$; step 1 checked regularity and completeness. Its counit\n$$\\nu_{A,Z}^*R\\nu_{A,Z,*}N\\longrightarrow N$$\nis invertible, and $R\\nu_{A,Z,*}N$ is bounded below and normalized. Evaluation of this single etale system and its counit supplies origins compatible with the actual quotient transitions. Thus no transition maps between the independently chosen witnesses of step 9 have been assumed or lifted by a faithfulness assertion.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Finite-ring fully faithful comparison; whole-system adjunction and normalized descent are the agent-formulated coefficient-system comparison theorem, not an assertion of Tag 0941."
+   }
+  },
+  {
+   "text": "The finite-expression domain requires normalization, common constructible cohomological and Tor bounds, and compatible bounded-below etale origins for every intermediate system. Steps 4--9 supply the first conditions and step 10 supplies the compatible origins. Together with the coefficient and geometric conditions of steps 1--3 these are precisely the intermediate-object hypotheses stated in the integral compactification system-realization theorem. In particular they apply to the actual open-product and compactification expressions. This proves the claimed applicability without using realization to prove its own domain conditions.",
+   "uses": [
+    "def-sf-integral-system-expression-domain",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Sentence 'after reduction to proper f,g by the independence of the compactification': agent verification of its integral intermediate domains."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-integers-profinite-tower",
+  "def-weil-compactifications-refinements",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-kun-finite-union-noetherian",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-kun-dimension-finite-type",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-trf-open-ctf",
+  "lem-sf-open-tensor-normalization",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-exc-comparison-tor-interval",
+  "def-sf-integral-system-expression-domain",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Integral uniform-domain prerequisite for the proper-reduction sentence; assembled from the cited existing finite-level and actual-system theorems. Tag 0941 is only a foundation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform constructible cohomology and Tor amplitude bounds for strict finite reduction systems under pullback tensor open extension and proper direct image",
+   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.exists_map_preimage_le_map_preimage, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.free_internallyProjective_iff_tensor_condition, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, LightCondensed.free_internallyProjective_iff_tensor_condition', CochainComplex.cm5b.instIsStrictlyGEI. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s) . Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOrigin|torAmplitude|TorAmplitude|normalized.*system",
+   "results": "[grep] OK 0 hit(s) . Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded etale origin of normalized coefficient towers remains coherent with uniform intervals under finite compactification expressions",
+   "results": "[leansearch] OK 8 hit(s) ContinuousMap.instCompleteSpaceOfCompactlyCoherentSpace, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instForallOfFinite, ZLattice.exists_forall_abs_repr_le_norm, BoundedContinuousFunction.norm_mkOfCompact, complete_of_compact, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, totallyBounded_Icc. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image adds twice the source dimension to a Tor interval uniformly over quotient coefficient rings",
+   "results": "[leanfinder] OK 8 hit(s) Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_supportDim, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank, Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes, Ideal.rank_pow_quot_aux, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_add_length_eq_supportDim_of_isRegular. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform constructible Tor amplitude bounds for normalized coefficient systems under pullback tensor extension by zero and proper pushforward",
+   "results": "{\"t\": \"2026-10-22T12:02:46Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform constructible Tor amplitude bounds for normalized coefficient systems under pullback tensor extension by zero and proper pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.isGE_Q_obj_iff\", \"chevalley_mvPolynomial_mvPolynomial\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"4d81dd1fd28b611b\"}. Read returned signatures: these give general derived-category bounds or unrelated geometric/condensed results, not the whole-system constructible uniform-domain assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|normalized.*system|system.*normalized",
+   "results": "{\"t\": \"2026-10-22T12:03:04Z\", \"tool\": \"grep\", \"query\": \"TorAmplitude|normalized.*system|system.*normalized\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned signatures: these give general derived-category bounds or unrelated geometric/condensed results, not the whole-system constructible uniform-domain assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible etale origins for normalized systems of finite quotient coefficient sheaves preserved by proper direct image",
+   "results": "{\"t\": \"2026-10-22T12:03:05Z\", \"tool\": \"leansearch\", \"query\": \"Bounded constructible etale origins for normalized systems of finite quotient coefficient sheaves preserved by proper direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsProper\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"2a9691c48c83cc2f\"}. Read returned signatures: these give general derived-category bounds or unrelated geometric/condensed results, not the whole-system constructible uniform-domain assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-22T12:03:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned signatures: these give general derived-category bounds or unrelated geometric/condensed results, not the whole-system constructible uniform-domain assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-open-product-diagram-normalization",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Proof sentence 'after reduction to proper f,g by the independence of the compactification': Uniform domain bounds for actual product compactification systems",
+   "via": [
+    "lem-sf-integral-open-product-diagram-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-product-system-uniform-realization-domain",
+  "worker": "stage1",
+  "summary": "Reused existing coefficient, geometry, finite-Tor, normalized-system and site-comparison statements; proved the actual expression-domain claim by structural induction and simultaneous counit descent. No statement change and no new nodes.",
+  "blueprint": "lem-sf-kunneth-coherence proof: 'after reduction to proper f,g by the independence of the compactification'; steps 1-3 verify coefficient/geometric hypotheses, 4-9 establish every finite-expression intermediate bound and normalization, and 10-11 establish coherent origins and realization applicability.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Generic $\\cO_E$ is the profinite limit of its finite quotients $\\cO_E/\\pi_E^n$ used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic Pullback preserves finite Tor amplitude used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic The derived tensor product on the finite-Tor subcategories used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-pur-system-normalized-tensor-closure",
+    "why": "Generic Normalized semilinear systems are closed under tensor and inverse image used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Generic Extension by zero preserves constructibility and Tor amplitude used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Generic The pro-étale direct image for all finite-Tor objects used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic Constructible derived comparison for arbitrary finite rings used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "why": "Generic Proper scalar comparison is invertible on bounded etale-origin inputs used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Generic Site comparison preserves and detects Tor intervals used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic Coherent integral realization of compactification expressions and their maps used for the integral expression-domain induction; this supplies a coefficient, geometric, finite-level or system input rather than replacing any Kunneth coherence step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-trf-open-ctf",
+  "lem-sf-open-tensor-normalization",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-exc-comparison-tor-interval",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-5e5c0f2ad",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-5e5c0f2ad (reviewer sub-agent of L); spot-checked: I read the whole 11-step split and every cited statement. The delivery adds no new nodes and keeps the statement. The item is still unsplit in live and side-live, has no repair note and has no cycle. proof_deps equals the union of the step uses, and nothing cites SGA. Step 1 gets the hypotheses of the system comparison node from the cited statements: R=O_E is a PID with t≠0, so it is Noetherian; each A_n is finite; and R≅lim A_n by the profinite-tower node. Steps 2–3 get finite type and properness from 01T3/01T4/01T6 and the proper base-change and composition leaves. A Noetherian space makes every open quasi-compact (04ZA), and dimension is finite with d=0 for an empty source. Step 4: R_W is (Q⊗B_n) for a flat-term K-flat Q, and successive scalar extension makes the actual transition-adjoints isomorphisms. Testing Tor against A_n gives the cohomological interval. Step 5: pullback keeps the Tor interval because the projections are separated and finite type, tensor gives [u+u',v+v'], and both normalizations come from lem-pur-system-normalized-tensor-closure. Step 6: γ of the open tensor node holds for an arbitrary N, j^*γ is the identity and j_! is fully faithful, so the output adjoint is j_!(α)∘γ. Steps 7–8: proper image gives Tor [u,v+2d] by cor-sf-direct-image-ctf-proetale. The transition b_{m,n} in the semilinear-sections node is the same mate as χ in proetale-scalar-mate-normalization, so the 0F0G scalar isomorphism applies to an étale origin E_e of N_m. Its hypothesis that H_e lies in D^+ is checked correctly through lem-exc-comparison-tor-interval, which matters because A_n is not of finite Tor dimension over A_m. Step 9 takes common bounds over a fixed finite collection and counts the hidden open intermediates. Step 10: N lies in D^+, ν^* is fully faithful on D^+, and each N_n has an étale origin. The system comparison node then gives an invertible counit and a bounded-below normalized Rν_*N, so the origins are compatible with the transitions and no arrows are lifted. Step 11 is a correct elementary unpacking of def-sf-integral-system-expression-domain. Edge cases n=1, m=n, empty sources, identity maps and repeated tensors are fine. Every off-route citation is declared in tool_uses as a generic tool, and I accept them all. The unsplit lem-sf-integral-refinement-diagram-admissibility is a sibling for J/S refinement diagrams, not a duplicate. Batch-5 flag on lem-fix-proper-etale-origin-scalar-isomorphism: I walked its closure directly. Its only sec-trace-formula and sec-poincare-duality nodes are def-pod-ring-scalar-extension, the 0DV5 lisse-module and local-constancy nodes, 01KU, schematic density, an affine-limit Mathlib leaf, 04VH and 02UP. All are generic and none is a step of the trace formula or of Poincaré duality, so I accept the citation."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProductSystemUniformRealizationDomain",
+  "declaration": "WeilConjectures.IntegralSystemRealization.productSystemUniformRealizationDomain",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.domainProEtaleRingSheafify",
+   "WeilConjectures.IntegralSystemRealization.domainIntegers",
+   "WeilConjectures.IntegralSystemRealization.domainUniformizer",
+   "WeilConjectures.IntegralSystemRealization.domainQuotientMap",
+   "WeilConjectures.IntegralSystemRealization.domainProSystemDerived",
+   "WeilConjectures.IntegralSystemRealization.domainProLevelDerived",
+   "WeilConjectures.IntegralSystemRealization.DomainSystemPresentation",
+   "WeilConjectures.IntegralSystemRealization.DomainSiteComparison",
+   "WeilConjectures.IntegralSystemRealization.DomainSiteComparison.descends",
+   "WeilConjectures.IntegralSystemRealization.ProductVertex",
+   "WeilConjectures.IntegralSystemRealization.Expression.inProductDiagram",
+   "WeilConjectures.IntegralSystemRealization.Expression.torBounds",
+   "WeilConjectures.IntegralSystemRealization.Expression.boundedSystems",
+   "WeilConjectures.IntegralSystemRealization.domainFiniteQuotient",
+   "WeilConjectures.IntegralSystemRealization.DomainInterval",
+   "WeilConjectures.IntegralSystemRealization.OpenIntervalPreservation",
+   "WeilConjectures.IntegralSystemRealization.productSystemUniformRealizationDomain"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProductSystemUniformRealizationDomain.lean",
+  "statement": "theorem productSystemUniformRealizationDomain (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) : IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧ (∀ x : Padic.coefficientExtensionIntegers l E, Padic.coefficientExtensionUniformizer l E * x = 0 → x = 0) ∧ Function.Injective (fun (x : Padic.coefficientExtensionIntegers l E) (n : ℕ) ↦ Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x) ∧ (∀ y : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1), (∀ n : ℕ, Padic.coefficientExtensionTransition l E (n + 1) (y (n + 1)) = y n) → ∃ x : Padic.coefficientExtensionIntegers l E, ∀ n : ℕ, Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x = y n) ∧ (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1))) ∧ ∀ o : Operations l E, ∃ C : ∀ Z : Scheme.{u}, DomainSiteComparison l E Z, ∀ (B : Over (Spec (CommRingCat.of D.k))) [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] (X : ULift.{u} (Fin 3) → Over B.left) (_hX : ∀ i, IsSeparated (X i).hom ∧ LocallyOfFiniteType (X i).hom ∧ QuasiCompact (X i).hom) (c : ∀ i : ULift.{u} (Fin 3), Compactification (X i).hom) (K : ∀ i, Integral l E (X i).left) (_hK : ∀ i, finiteTorConstructibleIntegral l E (X i).left (K i)), (∀ (S : Finset (ULift.{u} (Fin 3))) (W : Over B.left), ProductVertex X c S W → IsNoetherian W.left ∧ (∃ m : ℕ, topologicalKrullDim W.left ≤ (m : WithBot ℕ∞)) ∧ ∀ U : W.left.Opens, IsCompact (U : Set W.left)) ∧ (∀ {S T : Finset (ULift.{u} (Fin 3))} {V W : Over B.left}, ProductVertex X c S V → ProductVertex X c T W → ∀ j : V.left ⟶ W.left, IsOpenImmersion j → QuasiCompact j) ∧ OpenIntervalPreservation l E o X c ∧ ∀ d : Scheme.{u} → ℕ, (∀ (S : Finset (ULift.{u} (Fin 3))) (W : Over B.left), ProductVertex X c S W → topologicalKrullDim W.left ≤ (d W.left : WithBot ℕ∞)) → ∀ a b : ULift.{u} (Fin 3) → ℤ, (∀ i, a i ≤ b i ∧ ∀ n : ℕ, HasProEtaleTorAmplitude (X i).left (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E (X i).left n).obj (K i)) (a i) (b i)) → ∀ es : List (Σ W : Over B.left, Expression B.left (ULift.{u} (Fin 3)) X W), (∀ e ∈ es, e.2.inProductDiagram c) → (∀ e ∈ es, e.2.geometric ∧ e.2.domain l E o K) ∧ ∃ lower upper : ℤ, lower ≤ upper ∧ ∀ z ∈ es.flatMap (fun e ↦ e.2.boundedSystems l E o K a b d), Good l E z.1.1.left z.1.2 ∧ DomainInterval l E z.1.1.left z.1.2 z.2.1 z.2.2 ∧ DomainInterval l E z.1.1.left z.1.2 lower upper ∧ (C z.1.1.left).descends l E z.1.2",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer fix (cc second reader of Q133 94085e4e): (1) the completeness clause no longer uses Padic.coefficientExtensionPositiveLimit, a definition owned by the theorem node lem-sfb-integers-profinite-tower that the item does not cite in stmt_deps; it now states inline that the actual reduction map x ↦ (x mod t^(n+1))_n is injective and onto the compatible families for Padic.coefficientExtensionTransition (equivalent to the former ring isomorphism agreeing with the quotient maps); IntegersProfiniteTower becomes a plain proof-dependency import and CoefficientExtensionFinite (def-weil-l-adic-coefficient-extension) is imported publicly. (2) The node's quantitative rule 'a proper map with source dimension at most d sends [u,v] to [u,v+2d]' is stated for every dimension bound d on the diagram vertices (∀ d, dims ≤ d → …) instead of for one existentially chosen d; finite dimensionality of each vertex is kept as ∃ m. Empty vertices have dimension ⊥, so d = 0 is allowed there. All other clauses unchanged.",
+  "fixed_by": "NT-stage2-cc-94085e4e3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94085e4e3",
+  "group": "Q133",
+  "result": "fix",
+  "note": "Read node (11 steps), all stmt_deps' Lean (Expression/Good/Origins, Operations pinned via Direct/Open adjunctions, CoefficientSystemDerivedImage pinned by transpose), report and module. Maths correct: tensor [a+a',b+b'], proper +2dim (l≠p), exact j_!, hidden compact-support open included, geometric holds for arbitrary maps between vertices, counit IsIso/descends on the pinned presentation is invariant under isomorphism. F1 (H2/H4 owner): Padic.coefficientExtensionPositiveLimit is a theorem-node def (lem-sfb-integers-profinite-tower), not cited → stated inline as the reduction map being injective and onto compatible families; IntegersProfiniteTower is now a plain import, CoefficientExtensionFinite public. F2 (H3): node's rule [u,v+2d] for any source bound d was stated with an existential d → now ∀ d with vertex dims ≤ d, keeping ∃ m finite dimension (d=0 allowed for empty sources since dim ∅=⊥). Advisories: finiteCoefficientIntrinsicDerivedComparison / CoefficientSystem*Image / integralCoefficientSheaf come in through cited dependency interfaces; ∃C after ∀o; properness carried by data; short second reading. Fixed module compiled clean with nt_compile --json: 20.0 s, exit 0."
+ }
+}

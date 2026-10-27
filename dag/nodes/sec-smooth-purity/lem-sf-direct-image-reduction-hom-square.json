@@ -1,0 +1,323 @@
+{
+ "id": "lem-sf-direct-image-reduction-hom-square",
+ "kind": "statement",
+ "title": "Normalized direct-image/reduction square on adjunction Hom groups",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $f:Z\\to X$ be a morphism of schemes on which $\\ell$ is invertible. Use the small pro-etale sites [def-weil-pbc-proetale-site] and the completed coefficient sheaves $R_W=\\varprojlim_n(A_n)_W$ for $W=Z,X$ [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded module derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $F=Rf_{*,R}$ for ordinary completed-ring direct image, $F_n=Rf_{*,A_n}$ for finite direct image, $K_n=K\\otimes^L_{R_W}(A_n)_W$, and $\\operatorname{Res}_{W,n}$ for restriction along $R_W\\to(A_n)_W$ [def-weil-pbc-proetale-operations, def-weil-integral-derived-reduction, def-pc-sheaf-restrict-scalars]. Let $c_{W,K,n}:K\\to\\operatorname{Res}_{W,n}K_n$ be the actual scalar-adjunction unit [lem-weil-derived-scalar-extension-restriction-adjunction].\n\nLet $\\alpha_{n,M}:F\\operatorname{Res}_{Z,n}M\\xrightarrow{\\sim}\\operatorname{Res}_{X,n}F_nM$ be the normalized derived-composition comparison, coherent for all quotient restrictions, of [lem-pur-completed-coefficient-pushforward-comparison]. Let $P$ be derived $t$-complete [def-weil-derived-complete], and let $\\beta_{n,P}:(FP)_n\\xrightarrow{\\sim}F_nP_n$ be the canonical projection-formula comparison of [prop-weil-pbc-direct-image-limits], using this coefficient identification. For $m\\in\\mathbf Z$, transport shifts through these exact functors.\n\nFor every $M\\in D(Z_{\\mathrm{proet}},A_n)$ and $u:P_n[m]\\to M$ one has the equality in the completed-ring derived category on $X$\n$$\n \\alpha_{n,M}\\circ F(\\operatorname{Res}_{Z,n}(u)\\circ c_{Z,P[m],n})\n =\\operatorname{Res}_{X,n}(F_n(u)\\circ\\beta_{n,P[m]})\\circ c_{X,FP[m],n}.\n$$\nThus under the two extension/restriction adjunction bijections, the map $h\\mapsto\\alpha_{n,M}F(h)$ is exactly $u\\mapsto F_n(u)\\circ\\beta_{n,P[m]}$. For every derived-complete $Q$, these identifications with $M=Q_n$ commute with the transitions $\\operatorname{Res}_{Z,n+1}Q_{n+1}\\to\\operatorname{Res}_{Z,n}Q_n$ and their image transitions on $X$. No full faithfulness of restriction of scalars is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Integral-stage paragraph, extension/restriction Hom identifications and transition compatibility; returned proof step 6, using the normalized comparisons of steps 4-5"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-integral-derived-reduction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=P[m]$ and suppress the canonical exact-functor shift identifications. The finite quotient sheaves are finite rings by the coefficient datum in the statement, so [lem-weil-pbc-profinite-coefficient-inverse-image] identifies their inverse images, the completed rings, and their projection maps. Thus its hypotheses give the ring-sheaf-change square. By [lem-weil-pbc-ring-sheaf-change-adjunction], its direct-image comparison is $d=\\alpha_n^{-1}$ and respects the geometric derived adjunctions. Write $\\pi_{n,T}:\\operatorname{Res}_{X,n}(FT)_n\\to F\\operatorname{Res}_{Z,n}T_n$ for the completed-ring projection mate. Then $\\pi_{n,T}=\\alpha_{n,T_n}^{-1}\\operatorname{Res}_{X,n}(\\beta_{n,T})$: both maps have geometric adjoint equal to the geometric counit at $T$ tensored with the finite coefficient identity, using the coefficient-change counit compatibility just cited. The scalar tensor/pullback identification is the one in that ring-sheaf square. The last paragraph of [prop-weil-pbc-direct-image-limits] specifies this same mate as evaluation of its derived strict-tower morphism. This checks the normalization, rather than choosing an isomorphism merely because the two objects agree.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition. Agent specialization to the integral-stage paragraph of prop-sf-closed-unit-all-stages.proof.md."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-augmented-diagram-projection-mate] with source $Z$, target $X$, rings $R_Z,R_X$, and algebra tower $((A_n)_X)_n$; the preceding coefficient identities identify its pulled-back tower with $((A_n)_Z)_n$. Evaluate $h_Ti_{X,FT}=F^{\\rm Tow}(i_{Z,T})\\chi_T$ at $n$. Evaluations of $\\chi_T$ are identities by [lem-weil-pbc-constant-tower-pushforward-normalization]. The augmentations evaluate to the actual scalar units $c$ of [lem-weil-derived-scalar-extension-restriction-adjunction]. Hence $\\pi_{n,T}c_{X,FT,n}=F(c_{Z,T,n})$. Step 1 and composition with $\\alpha_{n,T_n}$ give $\\operatorname{Res}_{X,n}(\\beta_{n,T})c_{X,FT,n}=\\alpha_{n,T_n}F(c_{Z,T,n})$.",
+   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition. Agent specialization to the integral-stage paragraph of prop-sf-closed-unit-all-stages.proof.md."
+   }
+  },
+  {
+   "text": "For $u:T_n\\to M$, naturality of the coefficient comparison [lem-pur-completed-coefficient-pushforward-comparison] gives $\\alpha_{n,M}F(\\operatorname{Res}_{Z,n}u)=\\operatorname{Res}_{X,n}(F_nu)\\alpha_{n,T_n}$. Compose with $F(c_{Z,T,n})$ and use Step 2. Functoriality yields exactly $\\alpha_{n,M}F(\\operatorname{Res}_{Z,n}(u)c_{Z,T,n})=\\operatorname{Res}_{X,n}(F_n(u)\\beta_{n,T})c_{X,FT,n}$. In an adjunction the transpose of $u$ is restriction of $u$ composed with its unit. The two bijections of [lem-weil-derived-scalar-extension-restriction-adjunction] therefore identify the two Hom maps as asserted.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition. Agent specialization to the integral-stage paragraph of prop-sf-closed-unit-all-stages.proof.md."
+   }
+  },
+  {
+   "text": "For $M=Q_n$, write $s_Z:\\operatorname{Res}_{Z,n+1}Q_{n+1}\\to\\operatorname{Res}_{Z,n}Q_n$ for the quotient transition of [def-weil-integral-reduction-tower], and $s_X$ for the corresponding finite-direct-image transition after restriction to $R_X$. Quotient coherence in [lem-pur-completed-coefficient-pushforward-comparison] says $s_X\\alpha_{n+1,Q_{n+1}}=\\alpha_{n,Q_n}F(s_Z)$. Thus for every $h:T\\to\\operatorname{Res}_{Z,n+1}Q_{n+1}$, $\\alpha_{n,Q_n}F(s_Zh)=s_X\\alpha_{n+1,Q_{n+1}}F(h)$. This is the required commuting Hom square before scalar transposition. To specify its finite-coefficient transition, let $r_Z:D(A_n)\\to D(A_{n+1})$ be restriction along $A_{n+1}\\to A_n$. Let $a_{K}:K_{n+1}\\to r_ZK_n$ be the quotient scalar unit followed by the normalized successive-reduction isomorphism. By [lem-sfb-successive-derived-quotient-normalization], $\\operatorname{Res}_{Z,n+1}(a_K)c_{Z,K,n+1}=c_{Z,K,n}$. If $u:T_{n+1}\\to Q_{n+1}$ transposes to $h$, its transition $v:T_n\\to Q_n$ is uniquely characterized by $r_Z(v)a_T=a_Qu$, using [lem-pur-sheaf-ring-derived-coefficient-adjunction] for the quotient scalar adjunction. Therefore $\\operatorname{Res}_{Z,n}(v)c_{Z,T,n}=s_Zh$. The identical formula on $X$, and the displayed commuting square, prove compatibility under both adjunction bijections. No full faithfulness of restriction is used.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition. Agent specialization to the integral-stage paragraph of prop-sf-closed-unit-all-stages.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-reduction-tower",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Integral-stage paragraph: the two extension/restriction Hom identifications and their compatibility with finite direct image and quotient transitions. Uses the existing augmented diagram projection mate (Stacks 0B56 refinement)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction extension restriction adjunction identifies the pushforward map on Hom with the finite coefficient pushforward map, compatibly with quotient transition maps",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, PresheafOfModules.pushforward_map_app_apply'",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_id, CategoryTheory.Adjunction.homEquiv_symm_id",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*homEquiv|homEquiv.*reduction|pushforward.*restriction",
+   "results": "[grep] OK 0 hit(s); no declarations returned",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A direct image and coefficient reduction comparison preserve the scalar adjunction unit and its natural Hom bijection",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit, PresheafOfModules.sheafificationAdjunction, CategoryTheory.Adjunction.homEquiv, CategoryTheory.ihom.coev, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension adjoint transpose of a derived direct image of a morphism into a finite reduction equals the finite direct image of its transpose",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_apply|pushforwardPushforwardAdj_unit_app_val_app",
+   "results": "[grep] OK 13 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:298, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:83, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:89, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:122, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:124, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:124, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:133, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:966, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:973, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:1009, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:183, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:140",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adjunction formulas and underived module pushforwards do not state the normalized completed derived-direct-image square with all quotient transitions",
+   "directory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*homEquiv|homEquiv.*reduction|augmented.*projection",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_apply",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Adjunction.homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula mate for scalar reduction commutes with the adjunction unit and derived pushforward",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived direct image comparison with coefficient restriction preserves the scalar extension adjunction Hom bijection and reduction units",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_apply|conjugateEquiv.*unit|unit.*conjugateEquiv",
+   "results": "[grep] OK 12 hit(s); Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility",
+   "directory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula natural transformation on a tower of coefficient algebras carries the quotient augmentation to the direct image of the quotient augmentation",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Generators.CotangentSpace.fst_compEquiv, IsAdicComplete.mkₐ_comp_liftAlgHom, Ideal.to_quotient_square_comp_toCotangent, Algebra.Generators.CotangentSpace.fst_compEquiv_apply, AdicCompletion.transitionMapₐ, Algebra.SubmersivePresentation.sectionCotangent_comp, Algebra.PreSubmersivePresentation.ofHasCoeffs_map, Algebra.Generators.CotangentSpace.compEquiv_symm_inr",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction formulas, underived sheaf constructions and ring/normalization results do not state the completed-coefficient derived projection square with quotient transition compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-closed-unit-all-stages",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Integral-stage paragraph, extension/restriction Hom identifications and transition compatibility; returned proof step 6, using the normalized comparisons of steps 4-5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-direct-image-reduction-hom-square",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies unchanged. No new nodes: existing augmented-diagram projection mate yields the unit equation, then naturality proves the Hom identity; quotient coherence and explicit scalar transposition prove the tower compatibility. Checked the coefficient-category and direction conventions and searched upstream Lean and Mathlib.",
+  "blueprint": "prop-sf-closed-unit-all-stages.proof.md, Integral stage: extension/restriction Hom identifications and direct-image bijection compatibly with transitions, using exactly its direct-image/projection route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-integral-reduction-tower",
+    "why": "Definition of the actual quotient transitions and scalar augmentation; this is notation, not a change of proof route."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "The normalized natural coefficient comparison and its coherence for quotient restrictions, explicitly required in the item statement."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic balanced successive scalar extension and unit-composition formula; fixes the finite Hom transition without assuming full faithfulness."
+   },
+   {
+    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "why": "The scalar Hom bijections and their actual unit maps, already explicitly required in the statement."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "Generic strict-tower augmentation equation for the counit-tensor projection mate; evaluates to the scalar-unit equation needed here."
+   },
+   {
+    "node": "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "why": "Identifies evaluations of the constant-tower comparison with identities, so the augmented equation gives the actual scalar units."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Canonical completed and finite coefficient pullback square for an arbitrary scheme morphism; the unit does not supply this generic coefficient theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic comparison of geometric derived adjunctions under identified coefficient restriction; needed to fix the counit normalization of the finite projection mate."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "The specified strict-tower projection mate and its finite-level evaluation, already explicitly required in the item statement."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Scalar adjunction for the nonflat ring-sheaf map A_(n+1) -> A_n; the completed-to-finite adjunction in the item alone does not state this more general instance."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-integral-reduction-tower",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N6-a01f5c138",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a01f5c138 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement and stmt_deps are unchanged, there are no new nodes, no repair note and no SGA. I checked the source in the main-20261015 integral-stage paragraph of prop-sf-closed-unit-all-stages and in Stacks 07A6, 0D6E and 0B56. Step 1: the projection equation of profinite-coefficient-inverse-image (A_n is finite) is the hypothesis of ring-sheaf-change-adjunction. Its d equals alpha^{-1}, since both come from the same two factorizations. Both maps have the same adjoint, the counit tensored with the coefficient identity, and direct-image-limits says its finite maps are evaluations of the diagram mate. The adic datum fits: O_E is Noetherian and t^n-quotients are finite and perfect. Step 2: evaluate the augmented-mate equation at n. chi evaluates to the identity, the augmentation i_T evaluates to the scalar unit c, and naturality of beta_n gives the G^Tow evaluation. The result is pi c_X = F(c_Z), with no perfectness needed. Step 3 is naturality of alpha plus the transpose formula; no full faithfulness is used. Step 4: s_Z is Res(a_Q) by the representative formula of successive-quotient-normalization. The nonflat quotient adjunction gives Res(v)c_n = s_Z h, quotient coherence of alpha gives the square, and injectivity of the transpose gives F_n(v)beta_n. Edge cases (n=1, zero objects, f=id, shifts) pass. No duplicates found among the cbc reduction-unit node, complete-direct-image-reduction, target-augmentation and the sibling scalar comparison. There is no cycle, proof_deps equals the union of the uses, and I accept the ten tool_uses as generic normalization tools. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImageReductionHomSquare",
+  "declaration": "WeilConjectures.DirectImageReductionHom.hom_square",
+  "declarations": [
+   "WeilConjectures.DirectImageReductionHom.restrictionIso",
+   "WeilConjectures.DirectImageReductionHom.scalarAdjunction",
+   "WeilConjectures.DirectImageReductionHom.finiteImage",
+   "WeilConjectures.DirectImageReductionHom.alpha",
+   "WeilConjectures.DirectImageReductionHom.geometricPull",
+   "WeilConjectures.DirectImageReductionHom.geometricOrdinaryAdjunction",
+   "WeilConjectures.DirectImageReductionHom.geometricPull_additive",
+   "WeilConjectures.DirectImageReductionHom.completedPull_limits",
+   "WeilConjectures.DirectImageReductionHom.completedPull_colimits",
+   "WeilConjectures.DirectImageReductionHom.finitePull_limits",
+   "WeilConjectures.DirectImageReductionHom.finitePull_colimits",
+   "WeilConjectures.DirectImageReductionHom.geometricAdjunction_existsUnique",
+   "WeilConjectures.DirectImageReductionHom.completedGeometricAdjunction",
+   "WeilConjectures.DirectImageReductionHom.finiteGeometricAdjunction",
+   "WeilConjectures.DirectImageReductionHom.ordinaryTensorPull",
+   "WeilConjectures.DirectImageReductionHom.ordinaryTensorPullComplex",
+   "WeilConjectures.DirectImageReductionHom.scalarCochainCounit",
+   "WeilConjectures.DirectImageReductionHom.tensorPull_existsUnique",
+   "WeilConjectures.DirectImageReductionHom.tensorPull",
+   "WeilConjectures.DirectImageReductionHom.beta",
+   "WeilConjectures.DirectImageReductionHom.restrictedModelIso",
+   "WeilConjectures.DirectImageReductionHom.representativeTransition",
+   "WeilConjectures.DirectImageReductionHom.quotientLeg",
+   "WeilConjectures.DirectImageReductionHom.transition",
+   "WeilConjectures.DirectImageReductionHom.imageTransition",
+   "WeilConjectures.DirectImageReductionHom.homTransition",
+   "WeilConjectures.DirectImageReductionHom.hom_square",
+   "WeilConjectures.DirectImageReductionHom.transition_representation",
+   "WeilConjectures.DirectImageReductionHom.hom_square_transitions"
+  ],
+  "file": "lean/Sheaf/Paper/DirectImageReductionHomSquare.lean",
+  "statement": "theorem hom_square (_hZ : IsUnit (l : Γ(Z, ⊤))) (_hX : IsUnit (l : Γ(X, ⊤))) (P : DerivedCategory (scalarReductionSource l E Z)) (_hP : IsDerivedCompleteUnrestricted l E Z P) (m : ℤ) (n : ℕ) : IsIso (beta l E f D n (P⟦m⟧)) ∧ ∀ (M : DerivedCategory (scalarReductionTarget l E Z n)) (u : (scalarReductionDerivedExtension l E Z n).obj (P⟦m⟧) ⟶ M), D.completedImage.functor.map ((scalarAdjunction l E Z D.source.toSiteCoefficientData n).unit.app (P⟦m⟧) ≫ (D.source.V n).functor.map u) ≫ (alpha l E f D n).hom.app M = (scalarAdjunction l E X D.target.toSiteCoefficientData n).unit.app (D.completedImage.functor.obj (P⟦m⟧)) ≫ (D.target.V n).functor.map (beta l E f D n (P⟦m⟧) ≫ (finiteImage l E f D n).map u) ∧ D.completedImage.functor.map ((scalarAdjunction l E Z D.source.toSiteCoefficientData n).homEquiv _ _ u) ≫ (alpha l E f D n).hom.app M = (scalarAdjunction l E X D.target.toSiteCoefficientData n).homEquiv _ _ (beta l E f D n (P⟦m⟧) ≫ (finiteImage l E f D n).map u)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repaired returned H3/H4: beta is now the geometric mateEquiv of the completed and finite geometric derived adjunctions and tensorPull. The geometric adjunctions are uniquely normalized against the recorded right-derived units and the ordinary module adjunction; tensorPull is uniquely normalized by ordinary coefficient balancing and the scalar-extension universal counits on all cochain representatives. Neither alpha nor a scalar-derived unit enters beta or tensorPull. The unchanged Hom equations are asserted for this independent geometric counit/tensor mate. The canonical reduction-tower normalization and both transition squares remain explicit. Independent site/coefficient universes are retained using the existing module-pullback-existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9982faec9",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Re-delivery of the H3/H4 return of e1369e672a59. Diff vs the returned snapshot: only beta and its helpers changed; alpha, scalarAdjunction, the transitions, transition_representation and hom_square_transitions are byte-identical and were accepted before. beta is now the mateEquiv of the completed and finite geometric derived adjunctions (Mathlib SheafOfModules.pullback along the unique structureMap and finiteStructure, with homEquiv fixed by an ∃! against the ordinary adjunction and RightImage.unit) applied to tensorPull. tensorPull is fixed by an ∃! counit equation on every cochain complex over the conjugate of the sectionwise-identity ordinary square, using unit-normalized scalar adjunctions. This is the Stacks 0B56 counit/tensor projection map of prop-weil-pbc-direct-image-limits. Neither alpha nor the scalar unit occurs in it, so Res(beta)c_X = alpha F(c_Z) is real content. Exactness instances are true via profinite-coefficient-inverse-image. IsIso holds by perfectness of A_n. lean.statement is verbatim; the declaration list equals the file's 29 declarations; stmt_deps are unchanged; no new nodes; all proofs are sorry with docstrings; universes t,u independent; edge cases n=0, zero objects, f=id, all shifts. Advisory maintainer note: the public import PullbackExistsOfUniverses is owned by lem-pur-ringed-site-module-pullback-exists-universes, which is not in stmt_deps; it is used only as the IsRightAdjoint instance for Mathlib pullback. No compile: no file changed."
+ }
+}

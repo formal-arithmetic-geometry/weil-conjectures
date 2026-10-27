@@ -1,0 +1,329 @@
+{
+ "id": "lem-sf-proper-self-exchange-forget-supports",
+ "kind": "statement",
+ "title": "Proper self-product exchange commutes with the canonical forget-supports isomorphisms",
+ "statement": "Let $A$ be a finite commutative ring and $f:X\\to S$ a proper morphism of arbitrary schemes. Work in the ordinary unbounded small-etale derived categories of $A$-modules [def-asd-ordinary-finite-p1-arrows]. Put $U=X\\times_S X$, $p=\\operatorname{pr}_1$, $v=\\operatorname{pr}_2$, and write $F_h=Lh^*$, $R_h=Rh_*$, $R_h^!=Rh_!$ (the superscript here denotes compact supports, not the exceptional inverse image). Let $c_h:R_h^!\\xrightarrow{\\sim}R_h$ be the canonical proper forget-supports comparison [def-sp-unbounded-proper-shriek-star-comparison]. Let $\\beta_f:F_fR_f^!\\xrightarrow{\\sim}R_p^!F_v$ be the compact-support exchange of the flipped self-pullback square [def-sf-supported-diagonal-calculus], and let $E_f:F_fR_f\\to R_pF_v$ be its canonical ordinary exchange [def-kun-unbounded-exchange]. For every $K\\in D(X_{\\mathrm{et}},A)$ one has, in application order,\n$$\\beta_f(K);c_p(F_vK)=F_f(c_f(K));E_f(K).$$\nEquivalently, since ordinary exchange is invertible for finite coefficients [lem-kun-proper-base-change-torsion-ring],\n$$\\beta_f(K)^{-1};F_f(c_f(K))=c_p(F_vK);E_f(K)^{-1}.$$\nBoth equations concern the actual chosen-compactification maps; no boundedness, finite-type base, nonempty-base or trace hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "def-sf-supported-diagonal-calculus",
+  "def-kun-unbounded-exchange",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write the hom of the proper forget-supports isomorphism using rightDerivedLowerShriekIsoRightDerivedLowerStar_hom and rightDerivedLowerShriekToLowerStarComp_comp_eq. It is precisely R(c.g)_* of the open comparison followed by rightDerivedLowerStarCompHom, for the chosen compactification c. This is the private proved helper proper_hom_app.",
+   "uses": [
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image."
+   }
+  },
+  {
+   "text": "Use rightDerivedLowerShriekBaseChangeMap_eq to express the chosen exchange through the base-changed compactification. Substitute the preceding hom formula. The proved source identity rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar absorbs the comparison with the chosen output compactification. The remaining equation is exactly rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app_comp_toLowerStar. That proved source identity already performs the open counit calculation, naturality, and vertical pasting, so no separate general composition-normalization statement is required. This gives the private helper proper_exchange for any Cartesian square with both vertical arrows proper. The private helpers give each substitution an explicit typed interface. proper_exchange_transport_raw and proper_exchange_transport_ordinary perform equality and heterogeneous-equality substitution before specializing the functors, avoiding reduction through the derived-category localization while preserving the actual maps.",
+   "uses": [
+    "lem-sf-proper-refinement-forget-supports",
+    "def-sp-unbounded-proper-shriek-star-comparison",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image."
+   }
+  },
+  {
+   "text": "Specialize proper_exchange to the flipped self-product square. The first projection is proper by proper base change. By definition SfDiagonalKernel.exchangeFirst is asIso of the compact-support exchange, and CoordinateTrace.exchange1 is asIso of the ordinary exchange, using the finite-coefficient proper-base-change instance. Their hom components are the exchange maps just used. The ordinaryFinitePullback functors are definitionally the same left-derived inverse images. This proves the forward equation without extra hypotheses.",
+   "uses": [
+    "def-sf-supported-diagonal-calculus",
+    "def-kun-unbounded-exchange",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-proper-base-change",
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image."
+   }
+  },
+  {
+   "text": "Precompose the desired inverse equation with the hom of SfDiagonalKernel.exchangeFirst at K. Cancel its hom-inverse pair, substitute the forward equation, and cancel the hom-inverse pair of CoordinateTrace.exchange1. This proves the second conjunct. These are isomorphism cancellation identities, valid also for empty schemes and zero coefficients.",
+   "uses": [
+    "def-sf-supported-diagonal-calculus",
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-sf-proper-refinement-forget-supports",
+  "def-kun-unbounded-exchange",
+  "def-sf-supported-diagonal-calculus",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-proper-base-change",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\"; the proper forget-supports comparison implicit in passing to the ordinary direct image.",
+  "why": "Specialize the already proved source-library compactification exchange and refinement identities, rather than rebuilding their mate and composition calculations; derive the inverse identity by categorical cancellation. Written by X5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper forget supports isomorphism commutes with compact support base change on unbounded derived etale module sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pushforwardCongr",
+     "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "SheafOfModules.pushforwardNatIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper forget supports natural transformation intertwines compact support base change with ordinary derived base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CompactlyGenerated.compactlyGeneratedToTop",
+     "CategoryTheory.Limits.natTransIntoForgetCompFiberwiseColimit",
+     "LightCondensed.forget_map_val_app",
+     "CategoryTheory.Under.mapForget",
+     "CategoryTheory.Pseudofunctor.CoGrothendieck.map_comp_forget",
+     "CategoryTheory.BasedNatTrans.forgetful",
+     "CompHausLike.hasForget₂",
+     "CompactlyGenerated.fullyFaithfulCompactlyGeneratedToTop"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"counit\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*[Ss]upport|[Bb]ase[Cc]hange.*counit|upperStarInvIsoLowerStarHom",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/LinearAlgebra/Finsupp/Pi.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper forget supports isomorphism intertwines compact support base change and ordinary unbounded derived etale exchange",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.isSupported_of_iso",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "CondensedMod.IsSolid.isIso_solidification_map",
+     "HomologicalComplex.isSupported_iff_of_quasiIso",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "SheafOfModules.pushforwardCongr"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper forget supports natural transformation commutes with derived base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.leftDerivedNatTrans_app",
+     "CategoryTheory.Pseudofunctor.CoGrothendieck.map_comp_forget",
+     "LightCondensed.forget_map_val_app",
+     "CategoryTheory.BasedNatTrans.forgetful",
+     "CategoryTheory.Under.mapForget",
+     "CategoryTheory.Functor.rightDerivedNatTrans_app",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "CategoryTheory.Functor.rightDerivedNatTrans"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"counit\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*[Ss]upport|[Bb]ase[Cc]hange.*counit|derivedOpenImmersionLowerShriekToLowerStar",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/LinearAlgebra/Finsupp/Pi.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state this normalized derived compactification comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-p1-projection-trace-transport-false-tail",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First triangle, sentence \"the exchange map is obtained from the same pullback counits on the Cartesian square\": normalization of the proper forget-supports map through the actual compactification comparisons.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-proper-self-exchange-forget-supports",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Expanded the open/proper exchange and both chosen compactification maps, derived the open forget-support square by transposition from the existing open unit-mate identity, wrote the full naturality/pasting calculation, and isolated only proper-refinement forget-support compatibility as a new statement-only node.",
+  "blueprint": "First triangle, sentence \"the exchange map is obtained from the same pullback counits on the Cartesian square\": normalization of the proper forget-supports map through the actual compactification comparisons. The imported created.item chain terminates at a module name, so blueprint_refs.py ancestor returns None; the inherited null ancestor and exact latest-source place are retained.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-asd-open-base-change-unit-mate",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic ordinary unbounded module-sheaf adjunction/composition tool for the same canonical counit calculation; it introduces no exceptional adjunction, trace, purity, or changed geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Properness of p is stability of proper morphisms under arbitrary scheme base change; no smaller geometric hypothesis is introduced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-13d40e7fe",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-13d40e7fe (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, the new node lem-sf-proper-refinement-forget-supports and every cited statement in full, plus the source sentence: thm-amb-p1-adjunction.proof.md, first triangle, 'same pullback counits on the Cartesian square'. The item statement is unchanged; coefficients are ordinary small-étale constant-A modules throughout. Step 2's expansion matches the Lean definitions: LowerShriekBaseChange.lean:119-167 gives β = E_r(J);R_{r'}(b) followed by rightDerivedLowerShriekIso; LowerShriekIndependenceUnbounded.lean:110-225 gives ρ as unit, then inverse refinement open base change, then compositor, with I = ρ_{infFst};ρ_{infSnd}^{-1}; LowerShriekToLowerStar.lean:131-182 gives γ; exchangeFirst uses the flipped square (top snd = v). Step 3: I recomputed the transposition from lem-asd-open-base-change-unit-mate, inverting B so that c^{-1} = θ; it is correct and elementary. Step 4: line 4 is mate-pasting clause (2) with κ conjugation via lem-sfb-derived-composition-adjunction-normalization; clause 3 of the same cited node is also needed, a wording point only. Steps 5 and 6: p is proper by base change and j' is quasi-compact; the inf squares over U are Cartesian (isPullback_infFst/Snd); E_f is invertible by the torsion proper base change; I checked the inverse form algebraically. New node: statement-only and self-contained. It is true: after transposition it reduces to the unit-mate equation for the Cartesian square (1_T, j_c, j_d, q). The Cartesian hypothesis is necessary, and γ_c is invertible because j_c is clopen. I tested the identity, empty and zero-ring cases and the report's two-component example. It is strictly smaller than the item. It is not a duplicate of lem-asd-open-support-refinement-exchange, lem-pur-etale-graph-refinement-normalization, lem-sfb-exact-compactification-unit-refinement, lem-cbc-normalized-proper-open-geometric-normalization, lem-sf-unbounded-compact-support-proper-composition or lem-asd-proper-ordered-projection-exchange. I accept the generic tool_uses. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSelfExchangeForgetSupports",
+  "declaration": "AlgebraicGeometry.Etale.proper_self_exchange_forget_supports",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSelfExchangeForgetSupports.lean",
+  "statement": "theorem proper_self_exchange_forget_supports (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (K : DerivedCategoryModule A X) : ((SfDiagonalKernel.exchangeFirst A f).hom.app K ≫ (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) (pullback.fst f f)).hom.app ((ordinaryFinitePullback A (pullback.snd f f)).obj K) = (ordinaryFinitePullback A f).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f).hom.app K) ≫ (CoordinateTrace.exchange1 A f K).hom) ∧ ((SfDiagonalKernel.exchangeFirst A f).inv.app K ≫ (ordinaryFinitePullback A f).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f).hom.app K) = (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) (pullback.fst f f)).hom.app ((ordinaryFinitePullback A (pullback.snd f f)).obj K) ≫ (CoordinateTrace.exchange1 A f K).inv)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78a93c6b1",
+  "group": "NB",
+  "result": "pass",
+  "note": "Clause-by-clause match. A:Type(u+1) CommRing Finite; arbitrary Scheme.{u} with IsProper f; every unbounded K; p=pullback.fst, v=pullback.snd. beta=SfDiagonalKernel.exchangeFirst (asIso rightDerivedLowerShriekBaseChangeMap on the flipped square). c_h=rightDerivedLowerShriekIsoRightDerivedLowerStar. E_f=CoordinateTrace.exchange1=asIso derivedBaseChangeMap on the same flipped square, orientation f*Rf_*->Rfst_*snd* correct; the cited torsion-ring theorem is stated on derivedBaseChangeMap. Both conjuncts typed correctly; inverses are canonical asIso inverses. Node changed only in lean; statement verbatim; proof sorry; docstrings carry source, blueprint id and the 6 proof steps; lines <=100; report has Worker report and Second reading by NB. Advisory: exchange1's owner def-sfb-etale-coordinate-trace-data is not an item stmt_dep. It is the recorded ModuleCat rendering of def-kun-unbounded-exchange and is already a transitive dependency via exchangeFirst's type, so this is not H4. Advisory: some plain proof-dependency imports are unneeded for the statement. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T013005-L-2356698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

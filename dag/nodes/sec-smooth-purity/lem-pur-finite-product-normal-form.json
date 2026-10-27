@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-finite-product-normal-form",
+ "kind": "statement",
+ "title": "Tensor normal form for two evaluation arrows",
+ "statement": "Fix the finite coefficient setting P and ordinary intrinsic unbounded categories D(P,T) of [def-pur-finite-proper-product-maps]. Let a:Y→B and b:Z→B be scheme morphisms, and choose sB:B→Spec(k) and sZ:Z→Spec(k). Take F,G∈D(P,B), H∈D(P,Y), J∈D(P,Z), and arbitrary arrows e:P_a F→H and d:P_b G→J. Pulling back mu_b followed by (1 tensor d), applying mu_t, and then (theta_a,b;P_r(e)) tensor 1 after comp_t,b equals pairEvaluation(e,d), with precisely the structural maps sB,sZ and t;sZ used in the construction. The statement retains all canonical source comparisons and does not involve direct image, exchange or projection. Here r and t are the two projections of Y×_B Z.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-finite-proper-product-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the tensor comparison to move d through mu_t. Combine tensor maps by bifunctoriality. Use the canonical tensor composition identity for t and b. Expand theta and cancel comp_t,b against its inverse. The two remaining components are precisely those of pairEvaluation.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-finite-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-finite-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit realization/mate or signed symmetry calculation in the cited proper-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the ordinary external product defined by exchange and projection is the tensor of pullback counits and is invariant under swapping the factors",
+   "results": "8 hits including CategoryTheory.MonoidalCategory.externalProductSwap, externalProductFlip and frobeniusMorphism_mate. They concern abstract external products or cartesian closed functors, not the specified intrinsic derived comparisons and transported direct-image compositor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For arbitrary evaluation arrows under scheme pullback, the external tensor evaluation map commutes with swapping the two fiber product projections and signed tensor symmetry",
+   "results": "8 hits including TensorProduct.lift_comp_comm_eq, LinearMap.rTensor_comm, LinearMap.lTensor_comm, and AlgebraicGeometry.Scheme.Pullback.t_fst_snd. These give algebraic tensor symmetry or scheme projection equalities, not the normalized unbounded derived comparison equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProductSwap|braiding_naturality|conjugateEquiv_counit|comp_homEquiv",
+   "results": "25 hits including module braiding naturality, Adjunction.comp_homEquiv at Basic.lean:584 and conjugateEquiv_counit at Mates.lean:285. Local rg finds no pairEvaluation or finiteProductEvaluationSwap declaration; abstract braiding naturality alone does not identify these concrete intrinsic pullback comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProductTranspose",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, symmetry of the actual finite external product: the signed tensor-of-evaluations interchange calculation after taking ordinary adjoints.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProductNormalForm",
+  "file": "lean/Sheaf/Paper/FiniteProductNormalForm.lean",
+  "declaration": "WeilConjectures.FiniteProperProduct.finiteProductNormalForm",
+  "statement": "theorem finiteProductNormalForm (P : PurityFiniteSetting.{u})\n    {B Y Z : Scheme.{u}} (a : Y ⟶ B) (b : Z ⟶ B)\n    (sB : B ⟶ Spec (.of P.field.k)) (sZ : Z ⟶ Spec (.of P.field.k))\n    (F G : D P B) (H : D P Y) (J : D P Z)\n    (e : (pull P a).obj F ⟶ H) (d : (pull P b).obj G ⟶ J) :\n    (comp P (pullback.snd a b) b).hom.app ((tensor P B).obj (F, G)) ≫\n        (pull P (pullback.snd a b)).map\n          ((mu P b sZ sB F G).hom ≫ (tensor P Z).map (Prod.mkHom (𝟙 _) d)) ≫\n        (mu P (pullback.snd a b) (pullback.snd a b ≫ sZ) sZ _ J).hom ≫\n        (tensor P (pullback a b)).map (Prod.mkHom\n          ((theta P a b).hom.app F ≫ (pull P (pullback.fst a b)).map e) (𝟙 _)) =\n      pairEvaluation P a b sB sZ F G H J e d",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
+ }
+}

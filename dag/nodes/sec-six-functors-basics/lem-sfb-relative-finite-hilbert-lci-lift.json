@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-relative-finite-hilbert-lci-lift",
+ "kind": "statement",
+ "title": "Compatible affine square-zero lifts in the unramified lci Hilbert locus",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $F:\\mathcal X\\to\\mathcal Y$ be a morphism of stacks in groupoids on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-sfb-stable-pointed-moduli-groupoids]: isomorphism presheaves are sheaves and object descent is effective. Suppose $F$ is representable by algebraic spaces [def-trf-algebraic-space], meaning that for every $S$-scheme $T$ and $y\\in\\mathcal Y(T)$, $\\mathcal X\\times_{\\mathcal Y}h_T$ is an algebraic space $X_y$ over $T$. Assume each $X_y\\to T$ is flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Fix $d\\geq1$ and let $p_d:\\mathcal L_d(F)\\to\\mathcal Y$ be the restricted forgetful functor [def-sfb-relative-finite-hilbert-groupoids]. For every first order thickening $i:T_0\\hookrightarrow T'$ of affine $S$-schemes [def-sbc-first-order-thickening], object $\\xi_0\\in\\mathcal L_d(F)(T_0)$, object $y'\\in\\mathcal Y(T')$, and isomorphism $\\gamma:p_d(\\xi_0)\\xrightarrow{\\sim}y'|_{T_0}$, there are $\\xi'\\in\\mathcal L_d(F)(T')$ and isomorphisms $a:\\xi'|_{T_0}\\xrightarrow{\\sim}\\xi_0$, $b:p_d(\\xi')\\xrightarrow{\\sim}y'$ satisfying $b|_{T_0}=\\gamma\\circ p_d(a)$. In particular the finite locally free scheme of $\\xi'$ has degree $d$ and its base change is the specified finite locally free scheme of $\\xi_0$. No surjectivity of $F$ is required.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\xi_0=(Z_0\\xrightarrow{p_0}T_0,y_0,x_0,\\alpha_0)$. Using $\\gamma:y_0\\simeq y'|_{T_0}$, replace the isomorphism component by $\\beta_0=\\alpha_0\\circ(\\gamma|_{Z_0})^{-1}$. The representing space $X'=X_{y'}$ has reduction $X_0=T_0\\times_{T'}X'$, and $(x_0,\\beta_0)$ defines $u_0:Z_0\\to X_0$. This is unramified lci because it is the same Hilbert object after the given target isomorphism. By the Hilbert definition $p_0$ is finite locally free of degree $d$, hence flat and finite. Finiteness means affine, so $Z_0$ is affine over the affine $T_0$.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D9 (lemma-lci-formally-smooth), reduction to the relative algebraic space; target isomorphism made explicit."
+   }
+  },
+  {
+   "text": "Let $J$ be the ideal of $T_0\\subset T'$ and $j:X_0\\hookrightarrow X'$ its pullback. Since $X'\\to T'$ is flat, the square-zero flatness criterion identifies $\\mathcal C_{X_0/X'}$ canonically with the tensor pullback of $J$ to $X_0$. A closed immersion is formally unramified since it is a monomorphism, and $u_0$ is formally unramified by the universal-conormal result. Apply affine lci conormal splitting to $Z_0\\to X_0\\to X'$. Set $A=p_0^*J$ and $Q=\\mathcal C_{Z_0/X_0}$. It gives $E=\\mathcal C_{Z_0/X'}\\simeq A\\oplus Q$, with $A\\to E$ the canonical conormal map. Pullback in two stages agrees with $p_0^*J$: on local tensors, $a\\otimes(b\\otimes t)\\mapsto ab\\otimes t$, inverse $a\\otimes t\\mapsto a\\otimes(1\\otimes t)$.",
+   "uses": [
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-affine-lci-conormal-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D8 (lemma-lci-unobstructed), first and final paragraphs; conormal transitivity and flat base-change identification."
+   }
+  },
+  {
+   "text": "The composite $Z_0\\to X'$ is formally unramified: two maps to $Z_0$ over $X'$ have equal composites to $X_0$ because $X_0\\to X'$ is a monomorphism, and equality of their reductions then forces equality by formal unramifiedness of $u_0$. Take its universal first-order thickening $Z_0\\hookrightarrow W$ over $X'$, with ideal $E$. On its common etale topos with $Z_0$, put $H=s(Q)\\subset E=A\\oplus Q$. Since $E^2=0$, the $\\mathcal O_W$ action on $E$ factors through $\\mathcal O_{Z_0}$, so $H$ is an ideal of $\\mathcal O_W$. The quotient $B=\\mathcal O_W/H$ is a ring sheaf in an extension $0\\to E/H\\to B\\to\\mathcal O_{Z_0}\\to0$, with square-zero quasi-coherent kernel $E/H\\simeq A$. The scheme square-zero chart construction applied to this extension constructs a scheme $Z'$ with first-order closed immersion $Z_0\\hookrightarrow Z'$ and identifies its entire etale ring sheaf with $B$.",
+   "uses": [
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-scheme-etale-square-zero-chart-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D8 (lemma-lci-unobstructed), middle paragraph, realizing its quotient ring sheaf by the scheme-chart construction of Tag 05YV."
+   }
+  },
+  {
+   "text": "The identified etale topoi of $W$, $Z_0$ and $Z'$ give a ringed-topos morphism from $Z'$ to $W$ with ring map the quotient $\\mathcal O_W\\to B$. It is local: a local section of a ring with square-zero ideal is invertible exactly when its residue is, since if $ab=1+t$ with $t^2=0$ then $b(1-t)$ is an inverse of $a$. Apply space ringed-etale reconstruction to obtain a map $c:Z'\\to W$. Work absolutely over $\\operatorname{Spec}\\mathbf Z$ using change-base-to-integers, which preserves the etale ringed sites. The composite $c|_{Z_0}$ and the original inclusion into $W$ induce the same ringed-topos map, so reconstruction's faithfulness makes them equal. Give $Z'$ the $S$-structure obtained by composing $c$ with $W\\to S$. Set $u'=(W\\to X')c$ and $p'=(X'\\to T')u'$. Thus $u'$ really extends $u_0$, and its map on ideals is the quotient $E\\to E/H$.",
+   "uses": [
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D8 (lemma-lci-unobstructed), quotient construction; spaces-properties.tex Tag 04KL (theorem-fully-faithful) supplies the space morphism from its ringed-topos map."
+   }
+  },
+  {
+   "text": "The canonical map $p_0^*J\\to\\mathcal C_{Z_0/Z'}$ for the composite $p':Z'\\to X'\\to T'$ is the canonical inclusion $A\\xrightarrow{\\lambda}E$ followed by $E\\to E/H$. In the chosen splitting this is $a\\mapsto(a,0)\\bmod(0,Q)$, hence an isomorphism. Since $p_0$ is flat, the square-zero flatness criterion applied to $(Z_0\\subset Z')\\to(T_0\\subset T')$ proves both that $p'$ is flat and that the canonical map $Z_0\\to T_0\\times_{T'}Z'$ is an isomorphism. This proves the prescribed reduction as a scheme-theoretic fibre product, rather than merely equality of the underlying spaces.",
+   "uses": [
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-affine-lci-conormal-splitting",
+    "lem-sfb-space-universal-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D8 (lemma-lci-unobstructed), last paragraph: the retained conormal summand and the flatness criterion."
+   }
+  },
+  {
+   "text": "The constructed $Z'$ is already a scheme. Apply finite-locally-free deformation to $p':Z'\\to T'$ and its now-identified reduction $p_0$. It is finite locally free of degree $d$. In particular no lci claim about $u'$ or algebraicity of $\\mathcal X$ or $\\mathcal Y$ was needed to obtain the degree.",
+   "uses": [
+    "lem-sfb-finite-locally-free-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D8 (lemma-lci-unobstructed), final sentence, after scheme realization of the quotient."
+   }
+  },
+  {
+   "text": "By representability and the definition of the relative Hilbert groupoid, $u':Z'\\to X_{y'}$ corresponds to $(x',\\alpha':y'|_{Z'}\\simeq F(x'))$. Thus $\\eta=(Z'\\to T',y',x',\\alpha')$ is an object of $\\mathcal H_d(F)(T')$. Apply the lci-open-locus theorem to $\\eta$, obtaining $T^\\circ\\subset T'$. Its restriction to $T_0$ is the object of Step 1, so $T_0\\to T'$ factors through $T^\\circ$. A square-zero ideal lies in every prime, hence $|T_0|=|T'|$. Consequently the open $T^\\circ$ contains every point of $T'$ and equals $T'$. Thus $\\eta$ lies in $\\mathcal L_d(F)(T')$; put $\\xi'=\\eta$.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-relative-finite-hilbert-lci-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D9 (lemma-lci-formally-smooth), final paragraph using Tag 06CL."
+   }
+  },
+  {
+   "text": "The isomorphism $Z_0\\simeq T_0\\times_{T'}Z'$ and the reduction of $u'$ supply the scheme and $x$ components of $a:\\xi'|_{T_0}\\simeq\\xi_0$. Choose its $y$ component to be $\\gamma^{-1}$. The defining arrow equation in the Hilbert groupoid holds because the reduced isomorphism component was chosen as $\\beta_0=\\alpha_0\\circ(\\gamma|_{Z_0})^{-1}$ in Step 1. Take $b:p_d(\\xi')\\simeq y'$ to be the identity. Then $\\gamma\\circ p_d(a)=\\gamma\\circ\\gamma^{-1}=1=b|_{T_0}$. These are precisely the required compatible isomorphisms. Surjectivity of $F$ has not been used.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06D9 (lemma-lci-formally-smooth), compatibility of the lifted object, with the given target isomorphism explicitly restored."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-affine-lci-conormal-splitting",
+  "lem-sfb-finite-locally-free-deformation",
+  "lem-sfb-relative-finite-hilbert-lci-open",
+  "lem-sfb-scheme-etale-square-zero-chart-construction",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+  "lem-sfb-space-square-zero-flatness-criterion",
+  "lem-sfb-space-universal-conormal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tags 06D8 (lemma-lci-unobstructed), conormal-splitting construction in full, and 06D9 (lemma-lci-formally-smooth), assembly through the open lci locus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unramified local complete intersection locus in the finite Hilbert stack is formally smooth on objects for a flat morphism",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.smoothLocus_eq_univ_iff, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsSmooth, Algebra.basicOpen_subset_smoothLocus_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and scheme smoothness do not give compatible deformations of finite locally free lci subschemes of an arbitrary flat space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free unramified lci scheme in a flat algebraic space lifts across an affine square zero thickening of the base",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and scheme smoothness do not give compatible deformations of finite locally free lci subschemes of an arbitrary flat space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unramified local complete intersection locus in the finite Hilbert stack is formally smooth on objects for a flat morphism",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.smoothLocus, Algebra.unramifiedLocus, AlgebraicGeometry.IsSmooth.casesOn, Algebra.FormallyEtale.iff_unramified_and_smooth, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and scheme smoothness do not give compatible deformations of finite locally free lci subschemes of an arbitrary flat space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and scheme smoothness do not give compatible deformations of finite locally free lci subschemes of an arbitrary flat space"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lci.*(lift|smooth)|unobstructed",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and scheme smoothness do not give compatible deformations of finite locally free lci subschemes of an arbitrary flat space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness on objects of the unramified lci locus of the relative finite Hilbert stack for a flat locally finitely presented map",
+   "results": "8 hits; Algebra.Smooth.formallySmooth, Algebra.smoothLocus, Algebra.Smooth.mk, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, Algebra.FormallySmooth.casesOn, RingHom.Smooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring formal smoothness and unramifiedness do not provide compatible finite Hilbert-stack lifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Smooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring formal smoothness and unramifiedness do not provide compatible finite Hilbert-stack lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal smoothness on objects of the unramified lci locus of the relative finite Hilbert stack for a flat locally finitely presented map",
+   "results": "8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.smoothLocus_eq_univ_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring formal smoothness and unramifiedness do not provide compatible finite Hilbert-stack lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible lifts of finite locally free unramified local complete intersection subschemes across an affine square zero thickening",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring formal smoothness and unramifiedness do not provide compatible finite Hilbert-stack lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lci.*(lift|smooth)|unobstructed",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring formal smoothness and unramifiedness do not provide compatible finite Hilbert-stack lifts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed).",
+   "via": [
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-finite-hilbert-lci-lift",
+  "worker": "stage1",
+  "summary": "Retained the statement. Expanded Tag 06D8 inside the proof of 06D9: split conormal transitivity, quotient the universal thickening by the complement, verify the canonical ideal map, and infer the cartesian flat lift; then preserve fixed degree, use the open lci locus, and restore the given target isomorphism. Three smaller statement-only space/deformation inputs; no Mathlib leaves or project attachment.",
+  "blueprint": "The inherited from.place records the historical direct-image alteration/moduli quotient route. blueprint_refs.py ancestor returns None. The current latest sk-thm-sf-ctf-stability direct-images proof (3) remains the route context; this split refines only its inherited generic algebraicity prerequisite, using criteria.tex 06D8/06D9. Whole-blueprint searches for Hilbert, conormal, unramified lci, universal thickening and nilpotent deformation found no equivalent blueprint node. New from.node remains null exactly as the ancestor tool reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-b0946bd01",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-b0946bd01 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the statement of every cited node, against Stacks 06D8/06D9, 0606/0607/0608/04GA, 06CB/06CC, 06BH and 06AG(23). The item statement and stmt_deps are byte-identical to the base copy, and the γ-form of 06D9 is at least as strong as the source. There is no cycle (BFS from all deps never reaches the item) and no SGA. Step by step: step 2 uses 06BH (1)⇒(2) for (X_0⊂X')→(T_0⊂T') and the affine 06CB/06CC splitting. Step 3: H=s(Q) is an ideal since E²=0, and B=O_W/H has quasi-coherent square-zero kernel ≅ p_0^*J, so the scheme chart construction applies. Step 4: O_W→B is local (inverse b(1−t)); reconstruction with change-base gives c, and faithfulness gives c|Z_0=k. Step 5: the composite ideal map is (a,0) mod Q, an isomorphism, so 06BH (2)⇒(1) gives a flat lift and the cartesian square. Step 6 is 06AG(23). Step 7: the open lci locus contains |T_0|=|T'|, so it is all of T'. Step 8: the arrow equation holds with b-component γ^{-1} and b=id. The new nodes are true statement-only tools, smaller than the item and not duplicates (existing universal-thickening nodes are scheme-only; the deformation nodes lack finite or degree conclusions). Small cases checked: d=0, identity maps, closed immersions, and the non-flat counterexample. Batch-5: the three def-trf citations are general definitions (algebraic space, quasi-coherent module, étale module functors) outside both assumptions, and the five flagged sfb lemmas reach sec-trace-formula only through them, so I accept them. tool_uses [] is correct. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFiniteHilbertLciLift",
+  "declaration": "AlgebraicGeometry.RelativeFiniteHilbert.exists_compatible_lci_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFiniteHilbertLciLift.lean",
+  "statement": "theorem exists_compatible_lci_lift {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (F : BasedFunctor X Y) (hX : IsFppfModuliStack X) (hY : IsFppfModuliStack Y) (hF : IsRepresentableByAlgebraicSpaces F) (R : ∀ (T : Over S) (y : Functor.Fiber Y.p T), Representative (F := F) T y) (hflat : FlatLfp R) (d : ℕ+) (ξ₀ : Lci (d := d) hX hY hF R hflat) (T' : Over S) (i : ξ₀.obj.T ⟶ T') [IsAffine ξ₀.obj.T.left] [IsAffine T'.left] (hi : IsFirstOrderThickening i.left) (y' : Functor.Fiber Y.p T') (γ : ξ₀.obj.y.val ⟶ y'.val) (hγ : Y.p.IsHomLift i γ) : ∃ (ξ' : Lci (d := d) hX hY hF R hflat) (a : ξ₀.obj ⟶ ξ'.obj) (b : ξ'.obj.y.val ≅ y'.val), (base (F := F) (d := d)).IsHomLift i a ∧ Y.p.IsHomLift (𝟙 T') b.hom ∧ a.b ≫ b.hom = γ",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded total Hilbert category and its full lci subcategory. Cartesian arrows encode the specified pullback isomorphisms: gamma lifts i, a lifts i, b is vertical, and a.b followed by b.hom is gamma. The cartesian scheme square and degree d are retained in the existing Hilbert object and Hom structures. No statement correction or extra mathematical hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a263b5398",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the item node (only lean differs from the live copy; the statement and stmt_deps are unchanged), the delivered module, report.md (it has a Worker report and a Second reading by NA), the RelativeFiniteHilbertGroupoids Lean (Hom with IsPullback cartesian field, base, target, Lci full subcategory, FlatLfp, IsLciObject), IsFppfModuliStack (fibred in groupoids plus fppf descent) and IsFirstOrderThickening (closed immersion with ker^2 = ⊥). Every hypothesis matches the node with nothing stronger: fppf stacks, hF and R, FlatLfp, d : ℕ+, IsAffine on T0 and T', the first-order thickening; no surjectivity, Noetherian or finiteness assumption. γ given as an arrow over i equals the node's isomorphism, since every arrow over i is cartesian in a fibred groupoid. The lift a : ξ0 ⟶ ξ' over i carries the cartesian scheme square, the x/y components and the α-square; degree comes from ξ'.finite. Derived a.b ≫ b.hom = γ ⇔ i*b = γ_node ∘ p_d(a_node), the node's equation and orientation. Edge cases: d = 1 allowed and d = 0 excluded, empty base, identity thickening, non-finitely-generated ideal, independent universes. lean.statement appears verbatim in the file; docstrings carry 06D8/06D9, the blueprint id and the 8-step proof; the only proof is sorry; no new defs, so nothing hollow; no pro-étale substitute; no duplicate or superseding record in side-live; the plain proof-only imports exist. No compile, since no file was changed; the worker reports a clean scompile."
+ }
+}

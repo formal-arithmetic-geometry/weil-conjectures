@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-integral-projection-factor-data",
+ "kind": "definition",
+ "title": "Proper and open factors in datum coordinates",
+ "statement": "Let \\(D\\) be a finite-field datum, \\(B(X)\\) a category for every six-functor space \\(X\\) over \\(D\\), \\(S\\) a six-functor push stage on \\(B\\), and \\(T_X:B(X)\\to[B(X),B(X)]\\) the curried tensor functors. Let \\(Q\\) be a compactified square and \\(A\\) exchange data for \\((S,T,Q)\\), as in [def-sf-operation-stages]. For \\(K\\in B(Q.X)\\) and \\(L\\in B(Q.Y)\\), define \\(\\mathrm{first}(A,K,L)\\) as the source equality transport, tensor of the specified compact-support identification, and the proper adjunction projection mate. Define \\(\\mathrm{second}(A,K,L)\\) as proper image of the open projection, the inverse compact-support identification, and the target equality transport. Their intermediate object is \\(A.\\mathrm{properPush}(T_{\\bar X}(A.\\mathrm{openExtension}(K),A.\\mathrm{properPull}(L)))\\). The projection component of \\(A\\) equals first followed by second. All transports and operations are the specified data, with no new choice. Two commutative coefficient squares paste along such a factorization: given a functor F between any categories and composable arrows a,b,c,s,p,q,m,t with the indicated endpoints, if s followed by p is F(a) followed by m, m followed by q is F(b) followed by t, and a followed by b is c, then s followed by p followed by q is F(c) followed by t. This last assertion uses only associativity and functoriality in arbitrary categories.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square. Proper/open factor decomposition, C9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction projection formula compatibility reduction tensor comparison counit",
+   "results": "Eight general monoidal-adjunction results, including Adjunction.map_μ_comp_counit_app_tensor. None compares this normalized datum with its strict coefficient system.",
+   "date": "2026-10-27",
+   "verdict": "Use generic adjunction calculus; no matching normalized coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula is a composite of the right adjoint projection map and the direct image of an open projection isomorphism",
+   "results": "Eight geometric gluing, restriction, inducing-map and fiber-bundle results; none is a coefficient projection-factor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch Mathlib: zero hits. Local source search finds GeneratorReductionStatement, OpenTensorReductionSquare, and IntegralProjectionOperationPresentation. The first two use ordinary/completed expression coordinates; the last supplies an existential arrow isomorphism, not the explicit coordinate maps here. Blueprint searches for projection coefficient and proper counit find no duplicate factor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Existing modules provide the generic mates and normalizations, not these two squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionReductionNormalization",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The single-compactification projection-generator square, without the refinement assertions. Separate proper counit factor and open tensor factor.",
+   "via": [
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionFactorData",
+  "file": "lean/Sheaf/Paper/IntegralProjectionFactorData.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.ProjectionFactors.first",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.first",
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.second",
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.factorization",
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.paste"
+  ],
+  "statement": "def first :\n    ((T Q.Y).obj ((S.support Q.f Q.compactification).obj K)).obj L ⟶\n      A.stage.properPush.obj\n        ((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj\n          (A.stage.properPull.obj L))",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T222608-L-672305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T222608-L-672305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

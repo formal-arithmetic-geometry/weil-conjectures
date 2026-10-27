@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-quotient-representatives",
+ "kind": "statement",
+ "title": "Finite quotient compatibility on flat K-flat pullback tensor pairs",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme morphism $f:X\\to Y$ with $\\ell$ invertible on both schemes, and integers $0\\leq n\\leq m$. Write $A_j=\\mathcal O_E/\\varpi_E^{j+1}$. Use the intrinsic finite pullbacks $F_j$, tensors $T_{W,j}$ and canonical comparisons $\\mu_j$ of [def-pur-finite-pullback-tensor-construction], and the quotient extensions $Q_W:D(W,A_m)\\to D(W,A_n)$, their universal K-flat model counits and normalized tensor comparisons $\\tau_W$ of [lem-coef-derived-system-evaluation-calculus]. Let $c$ be an ordinary comparison from pullback at m followed by quotient extension over X to quotient extension over Y followed by pullback at n. Assume c preserves the actual iterated adjunction-unit sections of [def-weil-proetale-inverse-image]: the quotient unit applied to the inverse-image unit of x maps to the inverse-image unit of the quotient unit of x. Let cc be a cochain comparison with degree-i component c at the degree-i term of every complex. Assume a function good witnesses that the level-m pullback preserves K-flat complexes. Let $e:F_m Q_X\\simeq Q_Y F_n$ satisfy the full K-flat counit square: for every K-flat R, e at Q(R), followed by F_n of the quotient model over Y and the level-n exact-pullback factorization, equals Q_X of the level-m factorization followed by the quotient model over X on the pulled-back R and the derived quotient of cc at R. For flat-term K-flat complexes P,Q of normalized A_m-module sheaves on Y [def-sfb-proetale-tensor-model], put M=Q_Y(P), N=Q_Y(Q), where Q_Y here denotes derived localization. Then, in traversal order, $$Q_X(\\mu_m(M,N))\\,\\tau_X(F_mM,F_mN)\\,T_{X,n}(e_M,e_N)=e_{T_{Y,m}(M,N)}\\,F_n(\\tau_Y(M,N))\\,\\mu_n(Q_YM,Q_YN).$$ Only these representative pairs are asserted. There is no boundedness, constructibility, quotient-flatness or nonzero-object hypothesis. The chosen evaluation calculus is the one of [def-pur-completed-pullback-tower-core].",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "def-sfb-proetale-tensor-model",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof by flat-term K-flat total tensors; Tag 06YY for derived coefficient change. The finite quotient compatibility calculation in the docstring of canonicalFinitePullbackTensor_quotient."
+ },
+ "proof": [
+  {
+   "text": "Use the specified flat-term K-flat P and Q to compute the derived tensor by the ordinary direct-sum total tensor. The tensor total is again K-flat. The exact inverse images and the quotient K-flat models give the displayed localization factorization maps.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "def-pur-finite-pullback-tensor-construction",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary comparison c preserves the iterated inverse-image and quotient unit sections by hc. Its cochain comparison cc has precisely these components by hcc. On a total summand of bidegree (i,j), both routes send 1 tensor f*(x tensor y) to f*(1 tensor x) tensor f*(1 tensor y). The quotient tensor normalization and the ordinary pullback tensor normalization give these formulas. Balancing, module sheafification and the total-summand inclusions determine the ordinary chain maps, so the two maps agree, with their same signed differential.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-weil-proetale-inverse-image",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived quotient to this equality. Use he to replace the cochain quotient/pullback map by e, conjugated by the universal quotient model counits and exact-pullback factorization maps. Naturality of the tensor models cancels the intermediate comparisons. The remaining equality is exactly the required square on the objects Q(P), Q(Q); no extension to arbitrary derived objects is asserted here.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-construction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof by flat-term K-flat total tensors; Tag 06YY for derived coefficient change. The finite quotient compatibility calculation in the docstring of canonicalFinitePullbackTensor_quotient."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived pullback tensor comparison commutes with quotient change of coefficients on flat K-flat complexes",
+   "results": "8 hits, including flat tensor preservation of finite limits, DerivedCategory.quotientCompQhIso, and exact functor shift compatibility. None states the prescribed quotient square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor pullback comparison commutes with quotient change of rings on K-flat representatives",
+   "results": "8 hits on Kaehler differentials, tensor equalizers and kernels, and tensor products with quotient modules. No derived ringed-site normalization square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality in Mathlib.CategoryTheory.NatTrans supports descent after the representative calculation, but does not prove the generator calculation.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor.*quotient|quotient.*tensor.*pullback",
+   "results": "msearch Mathlib grep: 0 hits. Local project searches found the parent square, quotient normalization, quotient-operation adjunct factorizations and tensor coherence, but no statement of this specific finite square on representative pairs. Blueprint search for quotient pullback tensor: 0 matching nodes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate representative square."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The sentence \"These actions commute with finite reduction and scalar extension to Qlb\": the finite quotient compatibility of the normalized tensor/pullback comparison.",
+   "via": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorQuotientRepresentatives.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_quotient_representatives",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensor_quotient_representatives"
+  ],
+  "statement": "theorem finitePullbackTensor_quotient_representatives {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    {m n : ℕ} (h : n ≤ m)\n    (c : sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f ⋙\n        coefficientFiniteQuotientExtension l E X h ≅\n      coefficientFiniteQuotientExtension l E Y h ⋙\n        sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)\n    (hc : ∀ (M : normalizedDVRModules l E Y m) (U : Y.ProEt)\n        (x : M.val.obj (Opposite.op U)),\n        (c.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj U))\n          (coefficientFiniteQuotientUnitSection l E X h\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f).obj M)\n            (Opposite.op ((proEtaleBaseChange f).obj U))\n            (((sfIntrinsicConstantModuleAdjunction f\n              (finiteCoefficientRing l E (m + 1))).unit.app M).val.app (Opposite.op U) x)) =\n        ((sfIntrinsicConstantModuleAdjunction f\n          (finiteCoefficientRing l E (n + 1))).unit.app\n            ((coefficientFiniteQuotientExtension l E Y h).obj M)).val.app (Opposite.op U)\n          (coefficientFiniteQuotientUnitSection l E Y h M (Opposite.op U) x))\n    (cc : (sfIntrinsicPullback\n        (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex (.up ℤ) ⋙\n        (coefficientFiniteQuotientExtension l E X h).mapHomologicalComplex (.up ℤ) ≅\n      (coefficientFiniteQuotientExtension l E Y h).mapHomologicalComplex (.up ℤ) ⋙\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex (.up ℤ))\n    (hcc : ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ) (i : ℤ),\n      (cc.hom.app P).f i = c.hom.app (P.X i))\n    (good : ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (R := integralCoefficientCommRingSheaf l E Y m) P →\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (R := integralCoefficientCommRingSheaf l E X m)\n        (((sfIntrinsicPullback\n          (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex (.up ℤ)).obj P))\n    (e : finiteDerivedPullback l E m f ⋙ coefficientFiniteQuotientDerived l E X h ≅\n      coefficientFiniteQuotientDerived l E Y h ⋙ finiteDerivedPullback l E n f)\n    (he : ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (J := ProEt.topology Y) (R := integralCoefficientCommRingSheaf l E Y m) P),\n        e.hom.app (DerivedCategory.Q.obj P) ≫\n          (finiteDerivedPullback l E n f).map\n            (coefficientFiniteQuotientModel l E Y h P hP).hom ≫\n          (sfIntrinsicPullback\n            (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =\n        (coefficientFiniteQuotientDerived l E X h).map\n          ((sfIntrinsicPullback\n            (finiteCoefficientRing l E (m + 1)) f).mapDerivedCategoryFactors.hom.app P) ≫\n          (coefficientFiniteQuotientModel l E X h _\n            (good P hP)).hom ≫\n          DerivedCategory.Q.map (cc.hom.app P))\n    (P Q : CochainComplex (normalizedDVRModules l E Y m) ℤ)\n    (hP : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y m) P)\n    (hQ : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y m) Q) :\n    let M := DerivedCategory.Q.obj P\n    let N := DerivedCategory.Q.obj Q\n    (coefficientFiniteQuotientDerived l E X h).map\n      ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f m hX hY) M N).hom ≫\n      ((pullbackTensorCalculus l E X).quotientCalculus.tensor h).hom.app\n        ((finiteDerivedPullback l E m f).obj M,(finiteDerivedPullback l E m f).obj N) ≫\n      (finiteIntrinsicDerivedTensor l E X n).map\n        (Prod.mkHom (e.hom.app M)\n          (e.hom.app N)) =\n    e.hom.app\n      ((finiteIntrinsicDerivedTensor l E Y m).obj (M,N)) ≫\n      (finiteDerivedPullback l E n f).map\n        (((pullbackTensorCalculus l E Y).quotientCalculus.tensor h).hom.app (M,N)) ≫\n      ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY)\n        ((coefficientFiniteQuotientDerived l E Y h).obj M)\n        ((coefficientFiniteQuotientDerived l E Y h).obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T134952-L-3649747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T134952-L-3649747",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

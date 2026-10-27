@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-group-rational-divisorial-indeterminacy",
+ "kind": "statement",
+ "title": "Divisorial indeterminacy of rational maps into group varieties",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a nonempty integral separated finite-type $k$-scheme [def-pc-integral-scheme, def-weil-pbc-scheme-conventions] smooth over $k$ [def-sbc-smooth-morphisms], and let $G$ be a smooth connected separated finite-type $k$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-pbc-scheme-conventions]. Let $U\\subseteq X$ be a dense open subscheme and $f:U\\to G$ a $k$-morphism. Define the open subset\n$$D=\\bigcup\\{V\\subseteq X\\text{ open}:U\\subseteq V\\text{ and there is a }k\\text{-morphism }F_V:V\\to G\\text{ with }F_V|_U=f\\}.$$\nThen either $D=X$, or there exist $r\\geq1$ and nonempty irreducible closed subsets $Z_1,\\ldots,Z_r$ of $X$, with generic points $z_i$, such that\n$$X\\setminus D=\\bigcup_{i=1}^r Z_i,\\qquad \\dim\\mathcal O_{X,z_i}=1\\quad(1\\leq i\\leq r).$$\nHere generic means that the closure of $\\{z_i\\}$ equals $Z_i$, and dimension is Krull dimension [def-weil-pbc-krull-dimension-ring]. Thus a nonempty indeterminacy locus is a finite union of prime divisors; properness of $G$ is not assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "8.17, printed p.152; proof in literature/milne-abelian-varieties_AV.pdf, Chapter I, Lemma 3.3, printed pp.17–18. The union is the maximal domain of the rational map represented by (U,f)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X\\times_kX$. It is smooth: an affine first-order lifting problem for $Y$ is a pair of lifting problems for $X$, solved separately and paired by the fibre-product property. The locally finite presentation clause follows on affine charts by tensoring presentations: use both finite lists of generators and both finite lists of relations. The same chart description gives a finite affine cover of $Y$ from a finite affine cover of $X$. Thus $X$ and $Y$ are quasi-compact. Apply [lem-trf-smooth-geometrically-normal] over $k$ to $X$ and $Y$: both are regular, normal and reduced. Regularity includes local Noetherianity [def-weil-regular-scheme], so both are Noetherian. Their stalks are UFDs by [lem-trf-regular-local-regular-ring-ufd]; its extra regular-ring hypothesis holds because every prime localization of a stalk is the stalk at a generization, hence regular.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fibre-product",
+    "lem-trf-smooth-geometrically-normal",
+    "def-weil-regular-scheme",
+    "lem-trf-regular-local-regular-ring-ufd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); regular-local UFD input is Tag 0AG0 (more-algebra.tex, lemma-regular-local-UFD); the product lifting and presentation arguments are written out."
+   }
+  },
+  {
+   "text": "The underlying space of the Noetherian scheme $Y$ is Noetherian: a descending chain of closed subsets has a minimal member by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Hence by [lem-trf-normal-topologically-noetherian-components], $Y$ is a finite disjoint union of open-and-closed integral schemes. Since $X$ is irreducible, its image under $\\Delta$ is irreducible and lies in one component $W$; thus $\\Delta:X\\to W$ is defined. The open scheme $W$ is Noetherian with UFD stalks. Set $H_0=W\\cap(U\\times_kU)$ and $\\phi(x,y)=f(x)f(y)^{-1}$ on $H_0$. It is nonempty since it contains $\\Delta(U)$, hence dense in the integral $W$. Apply [lem-sfb-group-difference-diagonal-domain] with $\\Omega=W$, obtaining $b:B\\to G$ with $\\Delta^{-1}B=D$ and $b\\Delta=e$ on $D$. Its definition of $D$ allows domains not containing $U$: these give the same union as the item, since any such map glues with $f$ on $U$ by [lem-weil-pbc-scheme-morphism-gluing].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "def-pc-fibre-product",
+    "lem-sfb-group-difference-diagonal-domain",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.3, p.17, difference-map argument; for the product component use Stacks Tag 0357 (properties.tex, lemma-normal-locally-finite-nr-irreducibles)."
+   }
+  },
+  {
+   "text": "Choose an affine open $T=\\operatorname{Spec}A\\subseteq G$ containing the identity point $e$, with $A$ a finitely generated $k$-algebra, using the finite-type affine charts. Put $H=\\phi^{-1}(T)\\subseteq H_0$ and $h=\\phi|_H:H\\to T$. Since $\\phi\\Delta=e$ on $U$ by the group identities [def-sc-group-scheme], $H$ contains $\\Delta(U)$, so it is a dense open of $W$. Define $E$ as the union of the extension domains of $h$ as a map into $T$, exactly as in [lem-sfb-factorial-affine-rational-poles]. That node applies: $W$ is nonempty integral, Noetherian with UFD stalks, $H$ is dense, and $A$ is finitely generated. Obtain an effective Cartier divisor $P$ on $W$ with $|P|=W\\setminus E$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sc-group-scheme",
+    "lem-sfb-factorial-affine-rational-poles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.3, pp.17–18, affine coordinates near e and their polar divisors."
+   }
+  },
+  {
+   "text": "We claim $\\Delta^{-1}(E)=D$. If $x\\in D$, then $\\Delta(x)\\in B$ and $b(\\Delta(x))=e$ by [lem-sfb-group-difference-diagonal-domain]. Restrict $b$ to the open $b^{-1}(T)$ in $B$; it extends $h$ on its intersection with $H$, so $\\Delta(x)\\in E$. Conversely, a $T$-valued representative on an open $N\\subseteq W$ composed with $T\\hookrightarrow G$ agrees with $\\phi$ on $N\\cap H$. The open $H$ is dense in $W$ and hence in $N\\cap H_0$. This intersection is reduced, and $G$ is separated over $k$, so [lem-sfb-relative-separated-dominant-ext] extends that equality to $N\\cap H_0$. Thus $N$ is a domain in the definition of $B$. Consequently $E\\subseteq B$, giving $\\Delta^{-1}E\\subseteq\\Delta^{-1}B=D$.",
+   "uses": [
+    "lem-sfb-group-difference-diagonal-domain",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.3, pp.17–18, criterion for regularity at a diagonal point, with the affine-chart comparison made explicit."
+   }
+  },
+  {
+   "text": "Let $Q=X\\times_W P$ be the closed subscheme of $X$ defined by pulling back the local equations of $P$ [def-pc-fibre-product]. It is an effective Cartier divisor. Indeed, on a nonempty open $L\\subseteq W$ where $P$ is cut out by a non-zero-divisor $t$, its inverse image in $X$ is either empty or an open containing the generic point of $X$. The generic point belongs to $U\\subseteq D=\\Delta^{-1}E$, so the image of $t$ at this generic point is a unit, in particular nonzero. On the integral open $\\Delta^{-1}L$, the pulled-back section therefore has nonzero germ in every local domain: a zero germ would give zero at the generic point. It is a non-zero-divisor in each stalk, which is exactly the effective Cartier condition [def-pc-divisor-line-bundle]. Moreover $|Q|=\\Delta^{-1}|P|=X\\setminus D$. This also covers unit equations and the empty divisor.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-integral-scheme",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO (lemma-pullback-effective-Cartier-defined), case (3); the integral-source local-equation proof is written out, with no flatness claim about the diagonal."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-factorial-cartier-prime-decomposition] to $Q$ on $X$, whose Noetherianity and UFD stalks were established in step 1. Its finite integral effective Cartier components have underlying nonempty irreducible closed subsets $Z_1,\\ldots,Z_r$ and generic points $z_i$ with $\\dim\\mathcal O_{X,z_i}=1$. Their union is $|Q|=X\\setminus D$: on stalks the product of the component ideals is a unit exactly when every factor is a unit. If $Q$ is empty, $D=X$. Otherwise the union is nonempty and at least one component occurs, so $r\\geq1$. These are precisely the alternatives and the dimension assertion in the item.",
+   "uses": [
+    "lem-sfb-factorial-cartier-prime-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCP (lemma-effective-Cartier-divisor-is-a-sum) and 0BCN (lemma-effective-Cartier-codimension-1 (2)); Milne AV, Lemma 3.3, final conclusion on p.18."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "lem-trf-smooth-geometrically-normal",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-local-regular-ring-ufd",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-sfb-group-difference-diagonal-domain",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "lem-sfb-factorial-affine-rational-poles",
+  "lem-sfb-relative-separated-dominant-ext",
+  "def-pc-integral-scheme",
+  "def-pc-divisor-line-bundle",
+  "lem-sfb-factorial-cartier-prime-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 3.3, printed pp.17–18; follows the difference-map/polar-divisor route, making the arbitrary-field product component and diagonal Cartier pullback explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The indeterminacy locus of a rational map from a smooth variety to a connected algebraic group is empty or pure codimension one",
+   "results": "{\"t\": \"2026-10-23T14:42:09Z\", \"tool\": \"leanfinder\", \"query\": \"The indeterminacy locus of a rational map from a smooth variety to a connected algebraic group is empty or pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap_domain\"], \"digest\": \"502d5301d99985ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define rational maps, their maximal domains and representatives; none constrains the codimension of indeterminacy for a group target. OrderOfVanishing and AlgebraicCycle mention codimension but have no group-target theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map to a group variety on a nonsingular variety fails to extend only along a union of prime divisors",
+   "results": "{\"t\": \"2026-10-23T14:42:10Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map to a group variety on a nonsingular variety fails to extend only along a union of prime divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\"], \"digest\": \"d251ab89b76464d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define rational maps, their maximal domains and representatives; none constrains the codimension of indeterminacy for a group target. OrderOfVanishing and AlgebraicCycle mention codimension but have no group-target theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational maps from smooth varieties to algebraic groups have divisorial indeterminacy locus",
+   "results": "{\"t\": \"2026-10-23T14:42:06Z\", \"tool\": \"leansearch\", \"query\": \"Rational maps from smooth varieties to algebraic groups have divisorial indeterminacy locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"27edd71d7e38b1e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define rational maps, their maximal domains and representatives; none constrains the codimension of indeterminacy for a group target. OrderOfVanishing and AlgebraicCycle mention codimension but have no group-target theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-23T14:22:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define rational maps, their maximal domains and representatives; none constrains the codimension of indeterminacy for a group target. OrderOfVanishing and AlgebraicCycle mention codimension but have no group-target theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "indeterminacy|codimension|GroupScheme",
+   "results": "{\"t\": \"2026-10-23T14:42:06Z\", \"tool\": \"grep\", \"query\": \"indeterminacy|codimension|GroupScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define rational maps, their maximal domains and representatives; none constrains the codimension of indeterminacy for a group target. OrderOfVanishing and AlgebraicCycle mention codimension but have no group-target theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The indeterminacy locus of a rational map from a smooth variety to an algebraic group has pure codimension one",
+   "results": "{\"t\": \"2026-10-23T18:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"The indeterminacy locus of a rational map from a smooth variety to an algebraic group has pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\"], \"digest\": \"cf211d4562df0553\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only rational-map domain and representative APIs and general cycle codimension definitions were found, not group-target divisorial indeterminacy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map into a group variety is defined away from a finite union of prime divisors on a nonsingular scheme",
+   "results": "{\"t\": \"2026-10-23T18:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map into a group variety is defined away from a finite union of prime divisors on a nonsingular scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\"], \"digest\": \"fb3127c4b150f09e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only rational-map domain and representative APIs and general cycle codimension definitions were found, not group-target divisorial indeterminacy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divisorial indeterminacy of rational maps to smooth algebraic groups",
+   "results": "{\"t\": \"2026-10-23T18:08:34Z\", \"tool\": \"leansearch\", \"query\": \"Divisorial indeterminacy of rational maps to smooth algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.recOn\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\"], \"digest\": \"15301f73952cf8b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only rational-map domain and representative APIs and general cycle codimension definitions were found, not group-target divisorial indeterminacy."
+  },
+  {
+   "tool": "grep",
+   "query": "indeterminacy|codimension|GroupScheme",
+   "results": "{\"t\": \"2026-10-23T18:08:33Z\", \"tool\": \"grep\", \"query\": \"indeterminacy|codimension|GroupScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only rational-map domain and representative APIs and general cycle codimension definitions were found, not group-target divisorial indeterminacy."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-weil-extension-to-abelian-variety",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: 8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target. Sublemma: Milne 8.17, divisorial indeterminacy for a smooth source and a group target, combined with 8.16 in 8.18.",
+   "via": [
+    "lem-sfb-weil-extension-to-abelian-variety",
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-rational-divisorial-indeterminacy",
+  "worker": "stage1",
+  "summary": "Retained the statement and followed Milne AV I Lemma 3.3. Split off the difference-map diagonal extension criterion and the general factorial affine-target polar-locus lemma. Work on the integral open component of X times X containing its diagonal, identify the affine extension locus along the diagonal, pull its Cartier complement back using integral stalks, and apply the existing finite prime-decomposition node. No properness or geometric integrality was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: 8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target. Sublemma: Milne 8.17, divisorial indeterminacy for a smooth source and a group target, combined with 8.16 in 8.18. Realizes the divisorial-indeterminacy prerequisite of the Weil extension theorem below det-thm-sf-ctf-stability-direct-images, proof (3); the current latest blueprint route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic smooth-over-field regularity, normality and reducedness; the unit has no general-dimensional substitute."
+   },
+   {
+    "node": "lem-trf-regular-local-regular-ring-ufd",
+    "why": "Closed general commutative-algebra input: regular local regular rings are UFDs."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic topology of normal schemes, used only to select the integral component of the product containing the diagonal."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "General scheme-morphism gluing, a Mathlib leaf, identifies the two definitions of the maximal domain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-regular-local-regular-ring-ufd",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-106b766f3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-106b766f3 (reviewer sub-agent of L); spot-checked: I read Milne AV I Lemma 3.3 (printed pp.17-18) and the item, both new nodes and every cited statement. The item statement is unchanged and is the scheme form of iAG 8.17. Steps: 1) Y=X×X is smooth (lifting definition plus tensored presentations), regular, normal and Noetherian, with UFD stalks; the extra regular-ring hypothesis of 0AG0 holds via generizations. 2) The integral component W containing Δ(X); the difference node is applied with Ω=W, and gluing shows its D equals the item's D. 3) An affine chart T around e; all hypotheses of the pole lemma checked. 4) Δ^{-1}E=D in both directions, the reverse one via separated-target dense equality on reduced N∩H_0. 5) The Cartier pullback is nonzero at the generic point because η∈U⊆D (elementary). 6) Prime decomposition gives the two alternatives with dim 1. New nodes are true: the difference-domain criterion via fpqc descent along pr_1 (023Q), and the factorial affine-target polar locus via algebraic Hartogs plus UFD height-one primes being principal. They are tested on small cases, are not clauses of the item, and rg -L found no duplicate. Batch-5: the closures of lem-trf-smooth-geometrically-normal (056T), lem-trf-regular-local-regular-ring-ufd (0AG0) and lem-trf-normal-topologically-noetherian-components (0357) contain no trace-formula or PD theorem; they are generic tool uses and accepted. FIX (C1): step 2 applied 0357, which needs a Noetherian underlying space, with no node supplying it. I added the existing Mathlib leaf lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (01OZ) to the text, uses and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupRationalDivisorialIndeterminacy",
+  "declaration": "AlgebraicGeometry.group_rational_divisorial_indeterminacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupRationalDivisorialIndeterminacy.lean",
+  "statement": "theorem group_rational_divisorial_indeterminacy (k : Type u) [Field k] (X : Over (Spec (.of k))) [IsIntegral X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth X.hom] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (U : X.left.Opens) (hU : Dense (U : Set X.left)) (f : U.toScheme ⟶ G.left) (hf : f ≫ G.hom = U.ι ≫ X.hom) (D : X.left.Opens) (hD : D = sSup {V : X.left.Opens | ∃ hUV : U ≤ V, ∃ F : V.toScheme ⟶ G.left, F ≫ G.hom = V.ι ≫ X.hom ∧ X.left.homOfLE hUV ≫ F = f}) : D = ⊤ ∨ ∃ r : ℕ, 1 ≤ r ∧ ∃ (Z : Fin r → Set X.left) (z : Fin r → X.left), (D : Set X.left)ᶜ = ⋃ i, Z i ∧ ∀ i, (Z i).Nonempty ∧ IsIrreducible (Z i) ∧ IsClosed (Z i) ∧ closure ({z i} : Set X.left) = Z i ∧ ringKrullDim (X.left.presheaf.stalk (z i)) = 1",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b5398305",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Only change: lean record + new module (one sorry, no defs). The Lean matches the node clause by clause: Field k; X : Over Spec k with IsIntegral, relative IsSeparated/LOFT/QC/Smooth; G GrpObj on Over Spec k (def-sc-group-scheme record) + Smooth/ConnectedSpace/separated/finite type, no properness; U dense open, f a k-morphism; D pinned by an exact sSup equation of opens V ⊇ U carrying a k-extension F with homOfLE ≫ F = f; conclusion D=⊤ ∨ ∃ r≥1, Z, z with Dᶜ=⋃Z i, each Z i nonempty, irreducible, closed, closure{z i}=Z i, ringKrullDim stalk=1. ⋃ precedence 60 checked. No extra assumptions; edge cases U=X, dim 0, empty U OK; universe u bound. Proof-only imports = recorded proof-dep modules. No duplicate in side-live Sheaf/WeilConjectures. Docstrings: source places + blueprint id + 6 steps; statement field verbatim (checked by script). Report has Worker report and Second reading sections. No compile needed (no file changed)."
+ }
+}

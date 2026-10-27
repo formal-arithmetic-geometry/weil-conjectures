@@ -1,0 +1,119 @@
+{
+ "id": "def-sp-composition-orientation-arrow-data",
+ "kind": "definition",
+ "title": "Specified finite and tower composite orientation arrow data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, composable quasi-compact compactifiable scheme morphisms $f:X\\to Y$, $g:Y\\to Z$, and chosen open/proper factorizations of $f,g,h=gf$. Use the strict ordinary tower operations, ordered shifted Tate lines and specified diagonal purity data of [def-sp-tower-gamma-data], and the given adjunction pairs of [def-sp-adjoint-compositor-data]. Define $\\omega_g=G_g A_Z$ in the uniform constructible tower category and $\\rho=t_{f,\\omega_g}$. For a supplied exceptional compositor $c:G_h\\simeq G_fG_g$ and a proof that $\\rho$ is invertible, define $\\mu=c_1$ followed by $\\rho^{-1}$. At a finite coefficient ring $A$, define the canonical exceptional compositor as the unique right-adjoint comparison of the proper/open compact-support compositor, the tensor mate and $\\rho_A,\\mu_A$ by the same counit construction, using the ordinary finite maps and ordered Tate lines of [def-pur-finite-smooth-canonical-maps]. Define the shifted-Tate splitting $L_h\\simeq f^*L_g\\otimes L_f$ recursively by the canonical coefficient pullback comparison, unitors and tensor associator, including the zero-dimensional cases. For a supplied tower splitting, define TowerSplitNormalized to assert that its finite comparison square is this finite splitting, using the normalized root, coefficient, pullback and tensor words of [def-sp-p1-level-words]. These are definitions of specified arrows and their finite normalization predicate, not a composition-equality or existence assertion.",
+ "stmt_deps": [
+  "def-sp-tower-gamma-data",
+  "def-sp-adjoint-compositor-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-sp-p1-level-words"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.md",
+  "place": "Displayed definitions of rho, mu and the shifted-Tate splitting; existing Lean helper definitions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical shifted Tate tensor splitting and counit normalized composite exceptional orientation arrows",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Adjunction.CommShift.CompatibilityCounit; lTensor.inverse_of_rightInverse; AlgHom.tensorEqualizer; CategoryTheory.ShortComplex.Splitting.ofHasBinaryBiproduct; CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s; CategoryTheory.ShortComplex.Splitting.ofIso_s; HomologicalComplex.rightUnitor'; CochainComplex.mappingConeHomOfDegreewiseSplitIso. No composite orientation definitions.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, DerivedCategory.homologyFunctor",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite smooth purity tower orientation maps exact finite evaluation and concentration in a shifted rank one Tate line",
+   "results": "[leanfinder] OK 8 hit(s): NumberField.mixedEmbedding.fundamentalCone.prod_deriv_expMap_single; exteriorPower.pairingDual_apply_apply_eq_one; Orientation.map_apply; Profinite.NobelingProof.GoodProducts.square_commutes; AdicCompletion.transitionMap_comp_eval; NumberField.mixedEmbedding.fundamentalCone.abs_det_fderiv_expMapBasis; NumberField.mixedEmbedding.fundamentalCone.completeFamily; Algebra.Generators.CotangentSpace.exact. No corresponding definition.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep: tower.*orientation|orientation.*evaluation, CategoryTheory; rg towerRho|TowerSplitNormalized|towerMu dag/nodes; rg finiteLineSplit|finiteMu|finiteRho|towerMu|towerRho|TowerSplitNormalized lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search \"composition orientation arrows\"",
+   "results": "[grep] OK 0 hit(s). Blueprint search: 0 blueprint nodes match. Only det-sp-composition-factors node mentions these helpers; no independent definition node carries them. Existing definitions are in lean/Sheaf/Paper/SmoothPurityCompositionFactors.lean: finiteRho 65, finiteMu 70, finiteLineSplit 77, towerRho 287, towerMu 292, TowerSplitNormalized 319. No corresponding WeilConjectures definition (towerMul hits are unrelated lattice multiplication).",
+   "date": "2026-10-26",
+   "verdict": "reuse existing Sheaf helper definitions; no redeclaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "date": "2026-10-26",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), definitions of the two tower orientation arrows and shifted-Tate splitting",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCompositionFactors",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerMu",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.finiteCompositor",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.finiteTensor",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.finiteRho",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.finiteMu",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.finiteLineSplit",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerTensorF",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerTensorG",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerTensorH",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerOmegaG",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerRho",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerMu",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.TowerSplitNormalized"
+  ],
+  "statement": "def towerMu (hR : IsIso (towerRho l E b o q jf pf jg pg d e wf wg Pf Pg af ag))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Existing data-only helpers are reused without copying or invoking finite/towers, the downstream composition-equality theorems in the same module. The definition node gives these already-published notions their own DAG interface. No new Lean module for this node."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1c2516e5",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1c2516e5",
+  "group": "NA",
+  "result": "pass",
+  "note": "All node hypotheses are in the Lean and none is stronger; the hypothesis set, including the alpha/_ha/_hc pinning of c, is identical to the landed parent towers. Every conclusion clause is present: rho invertible; Phi = mu a_h and Psi = f*a_g ⊗ a_f with s pinned by TowerSplitNormalized; finite evaluations via finiteMu, finiteLineSplit and the hcomp comparison; degree -2(d+e) concentration with rank-one finite evaluations; reductions for all m<=n. TowerOrientationLevel copies tower-gamma FiniteLevels, so the existential finite orientations are pinned by OrientationNormalized. New existing:true node def-sp-composition-orientation-arrow-data re-exports the parent's helpers without copying (the parent is downstream); H12 fields OK; the reverse import is omitted per rule 7 and listed in lean.note. lean.statement is verbatim, lines <=100, docstrings carry the source and 6 proof steps, sorry only. Edge cases d=e=0, empty X, n=0, ramified E OK. Advisory: owners of dualizingWord (def-sp-tensor-transpose-evaluation-words) and SpTowerShriek (def-sp-tower-shriek-data) are uncited. No compile run (no change); worker reports a clean scompile."
+ }
+}

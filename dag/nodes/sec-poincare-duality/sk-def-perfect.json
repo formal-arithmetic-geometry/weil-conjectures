@@ -345,7 +345,32 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-poincare-duality",
  "unit": "sk-def-perfect",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.IsDualizable"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.IsDualizable",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic",
+     "lines": [
+      62,
+      67
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-def-perfect",
@@ -449,5 +474,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-ef665a5c4 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 23 proof dependencies, the HRS source (Def 3.3, Lemma 5.3, Prop 5.5, Lemma 5.6, Remark 5.7, Thm 4.13) and the main-20261015 blueprint text. Live sk-def-perfect is still imported and there is no repair note, so this is not superseded. Both faults of the Q01 4118947 return are repaired. Fault 1: Step 4 makes the integral inclusion strong monoidal through lem-fix-constructible-tensor-completion (BS 6.5.5), and checks that the dual lies in D^b_c by the stratified-perfect characterization (ii)⇒(i) before lifting. Step 5 uses the symmetric strong monoidal J, reflecting duals through the condensed local-model lemma (HRS 4.13, X Noetherian), field splitting and a finite subcover. Step 6 handles non-Noetherian qcqs covering domains with the new node, Λ=O_E, t=ϖ; fullness and faithfulness lift the local sum-of-shifts iso, and localized idempotents split as matrices on E_U^m. Step 7 descends the dual data and the two triangle equations to one finite stage of the directed Hom colimits. Steps 8-9 give R_Ω as a fully faithful, essentially surjective monoidal equivalence: fullness from the descent node, faithfulness from field splitting plus injectivity of ⊗Ω. Fault 2: the pod-conventions field node is gone; Steps 1-2 use Stacks 0FNS for any commutative ring and the field splitting. The new node lem-pod-condensed-localization-hom is HRS Prop 5.5 at the level of Hom groups (localization is flat). It needs only qcqs, claims no essential surjectivity, and is true; I tested Y=∅, Λ=0, t=1, t nilpotent, M=Z/ℓ and profinite π0. It is statement-only, has complete deps and six searches, and blueprint.from is correct. It is not a duplicate: the rational realization and tensor-comparison nodes are Noetherian-only, and the other candidates are a degree-0 term comparison and a thick evaluation lemma. It does not restate a clause of the item. Batch-5: I recomputed every flagged closure. The trf/pod nodes reached are generic (geometric-morphism definition and inverse-image exactness, a localization Mathlib leaf, Henselian smooth lifting, field linear algebra, abstract derived squares, j_! base change, integral pullback-comparison coherence, constructible truncations). None is a step of the trace formula or of PD, and perfectness is a general definition, so all are accepted. No cycle; the in_cycle import flag is stale. No SGA. The unit realized fields are correct. I accept all 17 generic tool_uses. Advisories: the 'restricts to finite-Tor subcategories' sentence is ambiguous; the common-stage constraints are transported stage constraints. Downstream sk-lem-finite and sk-thm-sf-dual-perfect remain applicable. Details are in review.md; no fixes were written."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic",
+  "declaration": "CategoryTheory.IsDualizable",
+  "statement": "def IsDualizable (X : C) : Prop",
+  "branch": "slopmaster2",
+  "by": "Q02",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Section 1(B): no Lean binding was recorded. The defining notion is the universal Prop-valued existence of a right dual, not a chosen dual or an ordinary discrete-field sheaf model. Apply this existing predicate to the actual coefficient categories and their recorded tensor/unit, or to the ordinary module derived category for perfect point complexes. The local-model and point-realization descriptions use their separately recorded constructions; no private definition of perfectness is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-060354c41",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps, live decls (SixFunctorOrientation + components, sfOrientationReducedLine, SixFunctorClosedDomain/sixFunctorDomainHom, CoefficientClosedStructure, ringedSiteBidual/DualEvaluation, IsDualizable, SixFunctorOperationDatum). Hypotheses match (separated, SmoothOfRelativeDimension d, arbitrary Y, compactification coordinate as in the dep, all four stages, perfect = IsDualizable on the finite-Tor domain). theta.inv pinned to the canonical evaluation transpose composed with gamma, equal to the node's twist-iso∘RHom(K,γ⁻¹); naturality direction correct; anti-equivalence tied to the actual H(-,W); biduality equation checked true by hand via symmetric coherence (2d even). Records: item lean only, statement verbatim; §1(B) existing:true bindings for sk-def-perfect (IsDualizable) and sk-def-sf-operations (SixFunctorOperationDatum, same decl as def-fix-six-functor-datum), both previously null, with notes. Imports = stmt_dep modules + proof_dep modules per brief. Edge cases K=0, d=0, empty X, n=1, odd shifts, arbitrary Y ok. No compile (no change). Advisories: author self-check second reading; unused etale twist-interchange import / non-stmt_dep ringedSiteDualEvaluation; invertibleHomComparison analogue on MonoidalClosed; inline H(K,1)=sixFunctorCoefficientDual."
  }
 }

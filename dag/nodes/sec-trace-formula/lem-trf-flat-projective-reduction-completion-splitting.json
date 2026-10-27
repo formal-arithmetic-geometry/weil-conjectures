@@ -13,64 +13,32 @@
  ],
  "proof": [
   {
-   "text": "Write $K_n=K/I^nK$, $E_n=E/I^nE$ and $M_n=M/I^nM$. For each $n\\ge1$, apply [lem-weil-pbc-flat-quotient-tensor-injective] to the given short exact sequence and $N=R/I^n$, using the assumed flatness of its last term $M$. Identify each tensor product with its quotient using clause (1) of [lem-weil-pbc-tensor-over-quotient-ring]. On $\\bar r\\otimes x$ the identification is $rx\\bmod I^nL$, so the resulting maps are precisely the maps $u_n:K_n\\to E_n$, $v_n:E_n\\to M_n$ induced by $u,v$. Hence $0\\to K_n\\xrightarrow{u_n}E_n\\xrightarrow{v_n}M_n\\to0$ is short exact. Evaluation on representatives shows these maps commute with reduction from level $n+1$ to level $n$.",
+   "text": "Put $A_n=R/I^n$ and $L_n=L/I^nL$ for $L=K,E,M$, with reduction maps $q_n^L$. Apply [lem-trf-adic-quotient-projective-short-exact] to the given $u,v$. Its hypotheses are exactly the given short exact sequence, flatness of $M$ and projectivity of $M/IM$. Thus every $0\\to K_n\\xrightarrow{u_n}E_n\\xrightarrow{v_n}M_n\\to0$ is exact with $u_n$ injective, $v_n$ surjective and $M_n$ projective over $A_n$, and the displayed reduction squares commute.",
    "uses": [
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "lem-weil-pbc-tensor-over-quotient-ring"
+    "lem-trf-adic-quotient-projective-short-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05D3, first paragraph; Tag 00HL, exactness after tensoring with a flat last term; Tag 00DF, quotient tensor identification."
+    "place": "Tag 05D3, lemma-split-completed-sequence, quotient exactness and projectivity of the quotients."
    }
   },
   {
-   "text": "For every $n\\ge1$ set $A_n=R/I^n$ and let $J_n$ be the image of $I$ in $A_n$. By [lem-weil-pbc-flat-module-quotient-flat], $M_n$ is flat over $A_n$. Products of $n$ elements of $J_n$ vanish, so $J_n^n=0$. The scalar action gives $J_nM_n=IM/I^nM$, and the maps $[m]\\mapsto[m]$ in both directions identify $M_n/J_nM_n$ with $M/IM$, and $A_n/J_n$ with $R/I$. The maps are well-defined because their kernels before taking the second quotient are respectively $IM/I^nM$ and $I/I^n$. Under these identifications the reduction of $M_n$ is projective by hypothesis: its lifting property transports across these isomorphisms by composing the given map with the isomorphism and the resulting lift with its inverse [def-weil-pbc-projective-module]. Thus [lem-trf-local-nilpotent-projective-flat-lift] applied to $(A_n,J_n,M_n)$ makes every $M_n$ projective over $A_n$.",
+   "text": "Apply [lem-trf-adic-projective-compatible-sections] to the original surjection $v:E\\to M$. Step 1 supplies its hypothesis that every $M_n$ is projective over $A_n$. It provides $A_n$-linear sections $s_n:M_n\\to E_n$ for all $n\\ge1$, with $v_ns_n=\\mathrm{id}_{M_n}$ and $q_n^Es_{n+1}=s_nq_n^M$. These are the sections of the very quotient maps of Step 1, since both nodes define $v_n([e])=[v(e)]$.",
    "uses": [
-    "lem-weil-pbc-flat-module-quotient-flat",
-    "def-weil-pbc-projective-module",
-    "lem-trf-local-nilpotent-projective-flat-lift"
+    "lem-trf-adic-projective-compatible-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05D3, invocation of Tag 05CG (lemma-lift-projective); Tag 00HI for quotient flatness; Tags 05CE and 05CF for the projective lifting property."
+    "place": "Tag 05D3, lemma-split-completed-sequence, induction of compatible sections."
    }
   },
   {
-   "text": "The projective lifting property [def-weil-pbc-projective-module], applied to $\\mathrm{id}_{M_1}$ and the surjection $v_1$ of Step 1, gives an $A_1$-linear section $s_1:M_1\\to E_1$. We construct compatible $A_n$-linear sections $s_n$ inductively. Fix $n\\ge1$ and a section $s_n$, and form the submodule $P=\\{e\\in E\\mid e\\bmod I^nE\\in\\operatorname{im}(s_n)\\}$, the inverse image of the submodule $\\operatorname{im}(s_n)$ under the quotient map.",
+   "text": "For a compatible family $(m_n)\\in\\widehat M$ define $s((m_n))=(s_n(m_n))$. Step 2 gives $q_n^E(s_{n+1}(m_{n+1}))=s_n(q_n^M(m_{n+1}))=s_n(m_n)$, so this is a compatible family in $\\widehat E$. Each $s_n$ is $A_n$-linear, hence $R$-linear; componentwise operations therefore make $s$ $R$-linear. At every level $v_ns_n=\\mathrm{id}_{M_n}$, so $\\widehat v\\circ s=\\mathrm{id}_{\\widehat M}$ and $\\widehat v$ is surjective.",
    "uses": [
-    "def-weil-pbc-projective-module"
+    "lem-trf-adic-projective-compatible-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05D3, construction of the initial section and definition of P_{n+1}; Tags 05CE and 05CF."
-   }
-  },
-  {
-   "text": "The restriction $v:P\\to M$ is surjective. Indeed, given $m\\in M$, choose $e_0\\in E$ representing $s_n(m\\bmod I^nM)$. Since $v_ns_n=\\mathrm{id}$, $d=m-v(e_0)$ lies in $I^nM$. Write $d=\\sum_j a_jm_j$ with $a_j\\in I^n$, and choose $e_j\\in E$ with $v(e_j)=m_j$ using the original surjectivity of $v$. Then $p=e_0+\\sum_j a_je_j$ has $v(p)=m$ and $p\\bmod I^nE=s_n(m\\bmod I^nM)$, so $p\\in P$. Since $v(I^{n+1}P)\\subseteq I^{n+1}M$, it induces an $A_{n+1}$-linear surjection $\\pi:P/I^{n+1}P\\to M_{n+1}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05D3, the surjectivity assertion marked details omitted, expanded by finite sums defining I^nM."
-   }
-  },
-  {
-   "text": "By Step 2, $M_{n+1}$ is projective over $A_{n+1}$. Apply [def-weil-pbc-projective-module] to lift $\\mathrm{id}_{M_{n+1}}$ through $\\pi$, obtaining a section $t:M_{n+1}\\to P/I^{n+1}P$. Inclusion $P\\subseteq E$ induces $j:P/I^{n+1}P\\to E_{n+1}$, because $I^{n+1}P\\subseteq I^{n+1}E$. Set $s_{n+1}=jt$. Since $v_{n+1}j=\\pi$, this is a section. To check compatibility, for $y\\in M_{n+1}$ represent $t(y)$ by $p\\in P$. There is $w\\in M_n$ with $p\\bmod I^nE=s_n(w)$. Applying $v_n$ gives $w=v(p)\\bmod I^nM=y\\bmod I^nM$, using $\\pi t=\\mathrm{id}$. Thus reducing $s_{n+1}(y)$ to $E_n$ gives exactly $s_n(y\\bmod I^nM)$. Inductively choosing these sections yields a compatible family $(s_n)_{n\\ge1}$.",
-   "uses": [
-    "def-weil-pbc-projective-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05D3, choice of t and definition of s_{n+1}; the compatibility check is expanded; Tags 05CE and 05CF."
-   }
-  },
-  {
-   "text": "For a compatible family $(m_n)\\in\\widehat M$ define $s((m_n))=(s_n(m_n))$. Step 5 shows this is a compatible family in $\\widehat E$. Each $s_n$ is $A_n$-linear, hence $R$-linear, so componentwise operations make $s$ $R$-linear. At every level $v_ns_n=\\mathrm{id}_{M_n}$, whence $\\widehat v\\circ s=\\mathrm{id}_{\\widehat M}$ and $\\widehat v$ is surjective.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
@@ -78,8 +46,10 @@
    }
   },
   {
-   "text": "Finally $\\widehat u$ is injective because each $u_n$ is injective by Step 1. If $e=(e_n)\\in\\ker(\\widehat v)$, Step 1 gives a unique $k_n\\in K_n$ with $u_n(k_n)=e_n$. Write $a_n:K_{n+1}\\to K_n$ and $b_n:E_{n+1}\\to E_n$ for reduction. Then $u_n(a_n(k_{n+1}))=b_n(u_{n+1}(k_{n+1}))=b_n(e_{n+1})=e_n=u_n(k_n)$. Injectivity of $u_n$ gives $a_n(k_{n+1})=k_n$. Thus $(k_n)\\in\\widehat K$ maps to $e$. Conversely $v_nu_n=0$ at every level, so $\\widehat v\\widehat u=0$. Therefore $\\operatorname{im}(\\widehat u)=\\ker(\\widehat v)$. Together with Step 6 this gives every conclusion.",
-   "uses": [],
+   "text": "If $\\widehat u(k)=0$ for $k=(k_n)\\in\\widehat K$, then $u_n(k_n)=0$ for every $n$; Step 1 gives $k_n=0$ for every $n$, hence $k=0$. Thus $\\widehat u$ is injective. If $e=(e_n)\\in\\ker(\\widehat v)$, Step 1 gives a unique $k_n\\in K_n$ with $u_n(k_n)=e_n$. Write $a_n:K_{n+1}\\to K_n$ and $b_n:E_{n+1}\\to E_n$ for reduction. Then $u_n(a_n(k_{n+1}))=b_n(u_{n+1}(k_{n+1}))=b_n(e_{n+1})=e_n=u_n(k_n)$. Injectivity of $u_n$ gives $a_n(k_{n+1})=k_n$. Thus $(k_n)\\in\\widehat K$ maps to $e$. Conversely $v_nu_n=0$ at every level, so $\\widehat v\\widehat u=0$. Therefore $\\operatorname{im}(\\widehat u)=\\ker(\\widehat v)$. Together with Step 3 this gives every conclusion.",
+   "uses": [
+    "lem-trf-adic-quotient-projective-short-exact"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
@@ -88,11 +58,8 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projective-module",
-  "lem-trf-local-nilpotent-projective-flat-lift",
-  "lem-weil-pbc-flat-module-quotient-flat",
-  "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-tensor-over-quotient-ring"
+  "lem-trf-adic-quotient-projective-short-exact",
+  "lem-trf-adic-projective-compatible-sections"
  ],
  "proof_origin": {
   "by": "document",
@@ -220,20 +187,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-projective-reduction-completion-splitting",
   "worker": "stage1",
-  "summary": "Read Tag 05D3 and retained its statement. Reused existing tensor exactness, quotient tensor identification, quotient-flatness and nilpotent projectivity lifting nodes. Expanded the omitted finite-sum correction proving surjectivity from P, checked compatibility of the inductively chosen sections, and proved completion exactness directly componentwise. No new nodes are needed.",
-  "blueprint": "The historical supporting Tag 05D3 input of Tag 05DK/05DP in the ancestry of lem-trf-local-term-locality is realized by quotient exactness, projectivity of the quotients, induction of compatible sections, and componentwise passage to completions. The inherited chapter, unit and ancestry are retained.",
+  "summary": "Repair of the landing return at 179bd4756c4: retained the approved two-child split, compared it field by field with the current DAG and its seven preserved proof steps, and re-read both child statements and all six existing algebra inputs. The mandatory initial delivery-tool rebase passed preflight at db4e164dde9. Both children remain absent from the live DAG; the released repair note still requires them. Made completed injectivity explicit coordinate by coordinate and refreshed the report for this returned head. All statements, actual search records, source citations, historical arguments and maintainer-owned metadata are retained. Former Steps 1–2 and 3–5 remain assigned to two comparable statement-only jobs; the parent assembles their conclusions.",
+  "blueprint": "Retains the historical supporting Tag 05D3 input of Tag 05DK/05DP in the ancestry of lem-trf-local-term-locality. The new quotient-tower lemma realizes the quotient exactness and nilpotent-projectivity part; the compatible-section lemma realizes the induction and its omitted finite-sum correction; the parent explicitly assembles the compatible families.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q25-344b6f490",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q43-80f67c78d",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-344b6f490 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, unit/chapter route, all five cited node statements, and Stacks Tag 05D3 in full. Steps 1–7 are mathematically valid with hypotheses checked; the omitted surjectivity argument is correctly expanded; quotient maps, compatible splittings, completion exactness, edge cases, searches, duplicate checks, route, and citations all pass. No new nodes or repairs are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-80f67c78d (reviewer sub-agent of L); spot-checked: This is the fourth head of the 2026-10-21 work-spreading re-split; ca5cac3fa79, 7c3f5932fbb and 179bd4756c4 all PASSed and were then refused at landing as side-completion integration refusals. Nothing has superseded it: in clones/live and side-live the item still has the old 7-step proof and neither child exists. A JSON diff against the 179bd snapshot shows both new nodes byte-identical. In the item only split_report and the first sentence of Step 4 changed. That sentence now proves injectivity of û coordinate by coordinate (û(k)=0 gives u_n(k_n)=0 for all n, hence k_n=0 by child A), which is correct. I re-read Stacks algebra.tex Tag 05D3 (lemma-split-completed-sequence) in full. All six cited input statements are identical to live: def-weil-pbc-flat-ring-map, def-weil-pbc-projective-module, lem-weil-pbc-flat-quotient-tensor-injective, lem-weil-pbc-tensor-over-quotient-ring(1), lem-weil-pbc-flat-module-quotient-flat and lem-trf-local-nilpotent-projective-flat-lift. Node A (lem-trf-adic-quotient-projective-short-exact) is true: levelwise exactness comes from M flat, and M_n is projective because J_n^n=0, M_n is flat over A_n, M_n/J_nM_n ≅ M/IM, and the nilpotent lift applies. Its hypotheses are exactly the item's. Node B (lem-trf-adic-projective-compatible-sections) is true: given s_n, the inverse image P surjects onto M by the finite-sum correction, projectivity of M_{n+1} gives the lift t, and s_1 exists. It needs no flatness. I tested I=0, I=R, R=0, K=0, M=0 and n=1. The 4-step parent assembly (about 1.9k characters) is correct step by step, and former Steps 1-7 are fully allocated. Neither child restates a parent clause. An rg -L duplicate scan (05D3 and phrase searches) found only lem-trf-completion-flat-mittag-leffler, which is not a duplicate. No SGA, no tool_uses, no cycle, and metadata is unchanged. No fixes."
  },
  "lean": {
   "existing": false,
@@ -253,5 +220,16 @@
   "result": "pass",
   "note": "Clause-by-clause check of Module.flat_projective_reduction_completion_splitting against the node and Stacks 05D3: hypotheses hu/hv/h_exact, Module.Flat R M and Module.Projective (R⧸I) (M⧸I•⊤) (recorded dependency declarations); completions are AdicCompletion with AdicCompletion.map (level n=0 is the zero module, so this matches n≥1); all four conclusions present; s is R-linear, compared via restrictScalars; no extra hypotheses; four independent universes; edge cases I=⊥, I=⊤ and zero modules covered. lean.statement matches the file exactly; the only node change is the lean record; sorry-only proof; docstrings give source and blueprint id; imports are what the statement uses plus the proof-dependency modules (Flat.Equalizer, Flat.Stability, TensorProduct.Quotient, Sheaf.RingTheory.ProjectiveOfFlatOfNilpotentQuotient); lines at most 92 characters; no duplicate in Mathlib or side Lean. nt_compile.py --json: rc=0 in 2.2 s with no errors or warnings, and a control compile with a deliberate error confirmed the compiler runs. Report has Worker report and Second reading sections. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

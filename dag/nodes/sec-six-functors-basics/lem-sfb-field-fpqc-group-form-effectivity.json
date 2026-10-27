@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-field-fpqc-group-form-effectivity",
+ "kind": "statement",
+ "title": "Effective field descent of fpqc locally schematic group forms",
+ "statement": "Let $k$ be a field [def-weil-field] and $S=\\operatorname{Spec}k$ [def-weil-affine-spectrum]. Let $G$ be a contravariant group-valued functor on $S$-schemes, whose underlying set-valued functor satisfies the fpqc covering equalizer condition [def-weil-pbc-fpqc-covering]. Suppose there is an fpqc morphism $T\\to S$ such that $G_T$ is represented by a separated group scheme locally of finite presentation over $T$ [def-pc-representable-functor, def-sbc-locally-finite-presentation]. A group scheme has multiplication, identity and inversion satisfying the group identities, and separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Then $G$ is represented by a separated group scheme locally of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism]. Neither smoothness, reducedness, commutativity, quasi-compactness, nor a finite-type hypothesis on $T$ is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "4.1, printed pp.54-55, field case of Theorem 4.A (the dimension-zero reduction); primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf read online, local archive WANTED. This is field descent only, not Theorem 4.A over a trait. Stacks spaces-more-groupoids.tex Tag 0B8F, lemma-group-space-scheme-locally-finite-type-over-k, is the algebraic-space version, not by itself effectivity of the specified fpqc scheme datum."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $P/T$ for the representing group scheme. The fpqc map $T\\to\\operatorname{Spec}k$ is surjective, so choose a point $t$ and put $L=\\kappa(t)$. Pulling $P$ back along $\\operatorname{Spec}L\\to T$ represents $G_L$ by a separated locally finitely presented group scheme $H/L$: use base-change permanence for separation and local finite presentation. Thus $H$ is locally of finite type. The map $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is fpqc by the field-extension lemma. The two identifications of the pullbacks of $H$ with $G_{L\\otimes_k L}$ give, by Yoneda, a group isomorphism between these pullbacks. Their identifications on the triple product give the cocycle identity, again by Yoneda. This is the canonical descent datum $d$ on $H$.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-base-change",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.1, field case; explicit reduction to a residue-field cover and canonical descent datum"
+   }
+  },
+  {
+   "text": "Apply the component-quotient lemma to $H/L$, obtaining $q:H\\to E$ with $E/L$ separated etale and $q$ quasi-compact. Apply its isomorphism-compatibility clause over $B=\\operatorname{Spec}(L\\otimes_k L)$ to $d$. It induces a descent isomorphism on $E$, and functoriality in compositions gives its cocycle on the triple product. The etale-fibre lemma writes $E$ as a disjoint union of spectra of finite separable extensions of $L$. On each such open piece the map to $\\operatorname{Spec}L$ is finite type with one-point fibre, hence quasi-finite by definition. Thus $E/L$ is locally quasi-finite, and separated locally quasi-finite fpqc effectivity gives a $k$-scheme $Q$ with $Q_L\\simeq E$ carrying this datum. Etaleness descends along the field-extension fpqc cover, so $Q/k$ is etale. No finiteness of the number of components of $H$ is used.",
+   "uses": [
+    "lem-sfb-lft-group-etale-component-quotient",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-galois-fpqc-descend-etale",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tags 0APK and 0AP9, followed by descent.tex Tag 02VN; component functor supplied by the auxiliary lemma"
+   }
+  },
+  {
+   "text": "The compatible quotient maps induce a natural transformation $c:G\\to h_Q$. Explicitly, for a $k$-scheme $V$ and $g\\in G(V)$, its restriction to $V_L$ is a morphism $V_L\\to H$. Compose with $q$ and identify $E=Q_L$ to obtain a morphism $V_L\\to Q$. On $V_L\\times_V V_L$ the two maps agree, by the equivariance of $q$ under $d$ from the preceding step. Representable fpqc descent therefore glues them to a unique morphism $c(g):V\\to Q$. Uniqueness gives naturality in $V$, and after base change to $L$ this transformation is exactly $q$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q: morphism gluing; application to the equivariant quotient map"
+   }
+  },
+  {
+   "text": "Because $Q$ is etale over $k$, the etale-fibre lemma writes it as a disjoint union $Q=\\coprod_{a\\in A}Q_a$, where $Q_a=\\operatorname{Spec}k_a$ for a finite separable extension $k_a/k$. Each $Q_a$ is open and closed and finite over $k$. Define $G_a=G\\times_{h_Q}h_{Q_a}$. For a section $g\\in G(V)$ its inverse image in $G_a$ is represented by the open subscheme $c(g)^{-1}(Q_a)$ of $V$. These opens cover $V$, so the $G_a$ are open subfunctors covering $G$. Over $L$ the functor $G_a$ is represented by $X_a=q^{-1}((Q_a)_L)$. The scheme $(Q_a)_L$ is affine (the spectrum of the finite $L$-algebra $k_a\\otimes_k L$), hence quasi-compact; quasi-compactness of $q$ makes $X_a$ quasi-compact. It is an open subscheme of $H$, and the ample-open lemma gives a finite-type $L$-scheme $X_a$ carrying an ample invertible module.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-lft-group-etale-component-quotient",
+    "lem-sfb-lft-group-quasicompact-open-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL; finite component preimages, and the auxiliary ample-open lemma"
+   }
+  },
+  {
+   "text": "The datum $d$ preserves each $X_a$: its composite with $q$ respects the datum of $E=Q_L$, while $(Q_a)_L$ is the pullback of the fixed open $Q_a\\subseteq Q$. Restrict $d$ to $X_a$ and apply field ample-scheme datum effectivity. This gives a $k$-scheme $Y_a$ with $(Y_a)_L\\simeq X_a$ inducing the restricted datum; that theorem requires no descent datum on the ample module. We check that $Y_a$ represents $G_a$. For every $V/k$, both $h_{Y_a}(V)$ and $G_a(V)$ are the equalizer of their restriction maps over $V_L\\rightrightarrows V_L\\times_V V_L$. For $h_{Y_a}$ this is representable fpqc descent; for $G_a$ it follows directly from the fpqc sheaf condition on $G$ and the same condition on $h_Q,h_{Q_a}$ (fibre products preserve equalizers). The isomorphism over $L$ and its compatibility with the datum identify these equalizer diagrams. They give the required natural bijection $h_{Y_a}(V)\\simeq G_a(V)$.",
+   "uses": [
+    "lem-sfb-field-ample-scheme-datum-effectivity",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Theorem 1 proof, first paragraph, printed p.160; explicit equalizer identification of each descended piece"
+   }
+  },
+  {
+   "text": "The fpqc sheaf $G$ is a Zariski sheaf. The preceding steps give a set-indexed covering of it by representable open subfunctors $G_a$. The schemes criterion therefore represents $G$ by a $k$-scheme $Y$. Yoneda transfers the natural multiplication, identity and inversion of $G$ to morphisms of schemes on $Y$; the group identities hold since they hold on every test scheme. Its pullback $Y_L$ represents $G_L$ and is consequently isomorphic as a group scheme to $H$. Finally separation and local finite type descend along the flat, surjective, quasi-compact morphism $\\operatorname{Spec}L\\to\\operatorname{Spec}k$. Hence $Y$ is the required separated locally finite type group scheme.",
+   "uses": [
+    "lem-pc-schemes-criterion",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ; descent.tex Tags 02KU and 02KX, and Yoneda for the group structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "lem-pc-yoneda",
+  "lem-sfb-lft-group-etale-component-quotient",
+  "lem-a1-separated-lqf-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-lft-group-quasicompact-open-ample",
+  "lem-sfb-field-ample-scheme-datum-effectivity",
+  "lem-pc-schemes-criterion",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "4.1, field case of Theorem 4.A; agent assembly using the etale component quotient and ample finite-type pieces. Primary scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent of a locally finite type group scheme over an arbitrary field without smoothness",
+   "results": "{\"t\": \"2026-10-24T14:26:13Z\", \"tool\": \"leanfinder\", \"query\": \"Effective fpqc descent of a locally finite type group scheme over an arbitrary field without smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"0fef7aa11d4a11e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group valued fpqc sheaf over a field which becomes a locally finite type separated group scheme on a faithfully flat cover is a scheme",
+   "results": "{\"t\": \"2026-10-24T14:26:14Z\", \"tool\": \"leansearch\", \"query\": \"A group valued fpqc sheaf over a field which becomes a locally finite type separated group scheme on a faithfully flat cover is a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"smoothSheafCommGroup\", \"SheafOfModules.IsFiniteType.mk\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"48a7bdd99fb101fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"descent\"",
+   "results": "{\"t\": \"2026-10-24T14:26:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*descent|descent.*group|group.*representab",
+   "results": "{\"t\": \"2026-10-24T14:26:14Z\", \"tool\": \"grep\", \"query\": \"group.*descent|descent.*group|group.*representab\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat form over a field of a group scheme locally of finite type is representable without a smoothness or quasi compactness assumption",
+   "results": "{\"t\": \"2026-10-24T14:35:39Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat form over a field of a group scheme locally of finite type is representable without a smoothness or quasi compactness assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\"], \"digest\": \"82c2f1f177a6e30a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*group|group.*fpqc|group.*form.*field",
+   "results": "{\"t\": \"2026-10-24T14:39:27Z\", \"tool\": \"grep\", \"query\": \"fpqc.*group|group.*fpqc|group.*form.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"descent\"",
+   "results": "{\"t\": \"2026-10-24T15:39:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local Zariski representability and sheaf subcanonicity do not supply fpqc effectivity of locally algebraic group forms."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*group|group.*fpqc|group.*form.*field",
+   "results": "{\"t\": \"2026-10-24T15:39:12Z\", \"tool\": \"grep\", \"query\": \"fpqc.*group|group.*fpqc|group.*form.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local Zariski representability and sheaf subcanonicity do not supply fpqc effectivity of locally algebraic group forms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent of a separated group scheme locally of finite type over a field is representable by a scheme",
+   "results": "{\"t\": \"2026-10-24T15:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"Effective fpqc descent of a separated group scheme locally of finite type over a field is representable by a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"a545bc7b5602541f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local Zariski representability and sheaf subcanonicity do not supply fpqc effectivity of locally algebraic group forms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of groups over a field which becomes a locally finite type separated group scheme after a field extension is representable",
+   "results": "{\"t\": \"2026-10-24T15:39:12Z\", \"tool\": \"leansearch\", \"query\": \"A sheaf of groups over a field which becomes a locally finite type separated group scheme after a field extension is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"SheafOfModules.IsFiniteType.mk\", \"CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable\", \"SheafOfModules.IsFiniteType\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.sheaf\"], \"digest\": \"90b627823da20024\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local Zariski representability and sheaf subcanonicity do not supply fpqc effectivity of locally algebraic group forms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every faithfully flat field form of a locally algebraic group is a scheme without smoothness or quasi compactness",
+   "results": "{\"t\": \"2026-10-24T15:39:14Z\", \"tool\": \"leanfinder\", \"query\": \"Every faithfully flat field form of a locally algebraic group is a scheme without smoothness or quasi compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsReduced\"], \"digest\": \"cf82ae4902e9028f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local Zariski representability and sheaf subcanonicity do not supply fpqc effectivity of locally algebraic group forms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-component-minimal-envelope",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Anantharaman 4.1 field case needed before 4.2 Step 5: represent the special and generic group fibres of the component-envelope construction.",
+   "via": [
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-fpqc-group-form-effectivity",
+  "worker": "stage1",
+  "summary": "Reduced the fpqc cover to a residue-field cover, descended the intrinsic etale component scheme, descended finite-component preimages using ample scheme effectivity, and glued. Two auxiliary statements address the non-quasi-compact component quotient and ampleness on arbitrary quasi-compact group opens. No smoothness or finite-type hypothesis has been added. All cited statements and source hypotheses were checked.",
+  "blueprint": "The inherited ancestry has from.node=null. This realizes the recorded Anantharaman 4.1 field-effectivity prerequisite to 4.2 Step 5 in the trait component-envelope argument; it does not replace any unit-level route. Whole imported-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic field-extension covering fact used to replace the original cover by a field."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic base-change, Yoneda, or representable sheaf descent tool; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme-theoretic base-change, Yoneda, or representable sheaf descent tool; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Generic scheme-theoretic base-change, Yoneda, or representable sheaf descent tool; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-a1-separated-lqf-fpqc-effective-descent",
+    "why": "Generic effectivity for separated locally quasi-finite descent data, used only for the etale component scheme."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic fpqc descent of etaleness after the component scheme exists."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme-theoretic base-change, Yoneda, or representable sheaf descent tool; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic classification of etale schemes over a field used for the component pieces."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic gluing of a Zariski sheaf from represented open subfunctors."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic fpqc descent of separatedness after representability."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic fpqc descent of local finite type after representability."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Definition used with the explicit discrete etale-field decomposition to check local quasi-finiteness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "lem-pc-yoneda",
+  "lem-a1-separated-lqf-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-pc-schemes-criterion",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "pqf-def-quasifinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-1ee129cb1",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-1ee129cb1 (reviewer sub-agent of L); spot-checked: PASS. I read the item, its 6-step proof, both new unsplit nodes and the statement of every cited node; nothing was changed. Item: an fpqc group sheaf G over a field k that becomes a separated locally finitely presented group scheme on an fpqc cover is a separated locally finite type group scheme over k. This is the field case of Anantharaman 4.1, the statement is not weakened, and it had no proof on the base, so this is a first split rather than a re-split. Step 1 passes to the residue field L of a point of T; separation and local finite presentation pass by base change, Spec L→Spec k is an fpqc cover, and Yoneda gives the descent datum and its cocycle. Step 2 moves the datum to the component scheme E using the iso-compatibility clause over Spec(L⊗L). By the etale-fibre lemma E is a disjoint union of spectra of finite separable fields, so it is separated and locally quasi-finite; the separated locally quasi-finite effectivity node then gives Q, and etaleness descends to Q. Step 3 glues the maps V_L→Q by representable fpqc descent, using equivariance of q. Step 4 writes Q as a disjoint union of Spec k_a; X_a = q^{-1}((Q_a)_L) is quasi-compact because k_a⊗L is finite over L and q is quasi-compact, and the ample-open node gives finite type plus an ample module. Step 5 applies field ample-scheme datum effectivity and identifies the two equalizer diagrams. Step 6 checks hypotheses (1) and (2a)-(2c) of the schemes criterion (Stacks 01JJ), gets the group structure by Yoneda, and descends separation and local finite type. New node 1 (etale component quotient): true. H^0 is open and of finite type (Stacks 0B7R), the quotient is etale over k (Stacks 0DU1, 06PH), and q is an fppf H^0-torsor. I proved the clause Hom_B(E_B,Z)≅Hom_B(H_B,Z) for every etale Z/B myself, including non-separated Z: the equalizer is open because Z/B is unramified, and fibrewise closed because the H^0 fibres are connected. It is not a duplicate: lem-sfb-algebraic-scheme-etale-components covers finite type only, and the coset-space node works over a DVR and gives an algebraic space. New node 2 (ample module on a quasi-compact open): true. Over an algebraic closure the open meets finitely many translates of H^0, each quasi-projective by Stacks 0BF7, and existence of an ample module descends (Stacks 0BDC, lem-sfb-ample-existence-field-extension). It strictly generalizes lem-sfb-finite-type-group-ample-line. Neither node restates a clause of the item. Edge cases checked: trivial group, infinite constant group, alpha_p over an imperfect field, transcendental L, empty open. Batch-5 flags: lem-trf-quasi-affine-canonical-affine-embedding (reached through the separated locally quasi-finite effectivity node) is the generic fact that a quasi-affine scheme embeds openly into Spec Γ; lem-trf-invertible-affine-limit-descent (reached through ample-scheme datum effectivity) is generic limit descent of invertible modules. Neither is part of the trace formula or Poincare duality, so both are accepted. The listed generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldFpqcGroupFormEffectivity",
+  "declaration": "AlgebraicGeometry.exists_groupScheme_of_fpqc_form",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldFpqcGroupFormEffectivity.lean",
+  "statement": "theorem exists_groupScheme_of_fpqc_form {k : Type u} [Field k] (G : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u}) (hG : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k))) (G ⋙ forget GrpCat)) {T : Scheme.{u}} (t : T ⟶ Spec (.of k)) [Flat t] [Surjective t] [QuasiCompact t] (hlocal : ∃ P : Grp (Over T), IsSeparated P.X.hom ∧ LocallyOfFinitePresentation P.X.hom ∧ Nonempty (yonedaGrp.obj P ≅ (Over.map t).op ⋙ G)) : ∃ P : Grp (Over (Spec (.of k))), IsSeparated P.X.hom ∧ LocallyOfFiniteType P.X.hom ∧ Nonempty (yonedaGrp.obj P ≅ G)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-145699ada",
+  "group": "NU",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k, G : (Over Spec k)ᵒᵖ ⥤ GrpCat.{u} with fpqcTopology.over sheaf condition on G ⋙ forget, fpqc t (Flat/Surjective/QuasiCompact), group-valued yonedaGrp iso to (Over.map t).op ⋙ G with IsSeparated + LocallyOfFinitePresentation, conclusion IsSeparated + LocallyOfFiniteType + yonedaGrp iso to G; no extra hypotheses, single universe u. Advisory A1: QuasiCompact t is the literal fpqc reading and equivalent in strength over a field (restrict to an affine open). Node diff vs side-live only in lean; lean.statement verbatim; recorded deps (GrpObj/Grp, RepresentableBy via yonedaGrp, fpqcPrecoverage, IsSeparated/IsClosedImmersion, LFP/LFT) used; source/blueprint docstrings and the 6-step proof present; sorry only; no new defs; proof-import modules exist; report has Worker report + Second reading by NU. No compile needed (no changes)."
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-coef-etale-open-localization-mate",
+ "kind": "statement",
+ "title": "The right mate of exact open localization is the inverse restriction localization factor.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let A be an arbitrary commutative ring and j:U→X an open immersion. Between the adjunction obtained by applying the ordinary open adjunction degree by degree to cochain complexes and the fixed derived open adjunction, the exact open localization comparison defines a square with the localization functors Q as horizontal sides. Its right mate is the square defined by the inverse exact localization factor for upperStar along j.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 1: the exact open adjunction unit and localization factors. Stacks 0E8I, 03DI, 03EK and 06YY."
+ },
+ "proof": [
+  {
+   "text": "On a cochain representative of a homotopy-category object, the exact derived adjunction unit formula says that its unit followed by the two exact factorization maps is the localization of the ordinary cochain unit. The quotient factor isomorphisms are identities on the underlying objects, so the homotopy exact factors on the quotient object equal the cochain exact factors.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the unit identity characterizing the mate with the upperStar factorization isomorphism. Its inverse and hom cancel, and the resulting identity is precisely the first step. Cancel that isomorphism and use injectivity of the adjunction hom equivalence to identify the mate.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-coef-etale-open-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 1: the exact open adjunction unit and localization factors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates commute with passage to cochain complexes and localization to the derived category, including the scalar extension unit representative",
+   "results": "Adjunction.derived_unit, derivedη_fac_app and localization_unit_app; these provide generic unit formulas, not the stated normalization of the fixed etale comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate of the exact localization comparison is the inverse restriction localization factor, and left adjoint uniqueness is compatible with cochain complexes",
+   "results": "Adjunction.localization_counit_app, Localization.ε_app and derivedε_fac_app; generic localization formulas only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv|mapHomologicalComplex_unit_app_f|localization_unit_app",
+   "results": "Mathlib CategoryTheory.Adjunction.Mates, Unique and CompositionIso; Localization.Adjunction.localization_unit_app. These prove the categorical ingredients; the fixed etale comparison is not stated there.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenExtensionNormalization",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof step 1: the exact open adjunction unit and localization factors.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenLocalizationMate",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenLocalizationMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenLocalizationMate",
+  "statement": "theorem etaleOpenLocalizationMate\n    (A : Type (u + 1)) [CommRing A]\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    mateEquiv\n      ((openImmersionLowerShriekUpperStarAdjunction\n      (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ))\n      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)\n      (TwoSquare.mk _ _ _ _\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.hom) =\n      TwoSquare.mk _ _ _ _\n        (upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.inv",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

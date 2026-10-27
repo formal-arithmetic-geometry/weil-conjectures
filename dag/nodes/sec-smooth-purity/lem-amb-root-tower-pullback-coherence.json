@@ -1,0 +1,322 @@
+{
+ "id": "lem-amb-root-tower-pullback-coherence",
+ "kind": "statement",
+ "title": "Canonical root tower pullback and tensor coherence",
+ "statement": "Fix a prime $\\ell$ and a scheme $T$ on which $\\ell$ is invertible [def-pc-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site] use the root sheaves $M_{s,T}=\\mu_{\\ell^s,T}^{\\mathrm{pro}}$ with transitions $u\\mapsto u^\\ell$ [def-pur-roots-of-unity-sheaf], and let $L_T=\\varprojlim_{s\\geq1}M_{s,T}$ with projections $p_{s,T}$ [def-pur-sheaf-inverse-limit]. Put $Z_T=(\\mathbf Z_\\ell)_T$ and $R_{s,T}=(\\mathbf Z/\\ell^s)_T$, with constant sheaves [def-weil-pbc-constant-sheaf] and $\\ell$-adic integers [def-weil-l-adic-numbers]. The $Z_T$-action on $L_T$ is $(a x)_s=x_s^{a\\bmod\\ell^s}$, extended from constant scalars by sheafification. Use ordinary sheaf tensors [def-pur-sheaf-tensor-product].\n\nFor a scheme morphism $v:T'\\to T$ between such schemes, let $v^{-1}$ be pro-etale inverse image [def-weil-proetale-inverse-image], and let $c^v_s:v^{-1}M_{s,T}\\to M_{s,T'}$ be the canonical root map adjoint to pullback of units [def-pur-roots-of-unity-inverse-image]. Identify inverse images of constant rings with the target constant rings. The maps $c^v_s$ are semilinear for these ring maps, commute with power transitions, and obey identity and composition: $c^{\\mathrm{id}}_s=\\mathrm{id}$ and $c^{v\\circ w}_s=c^w_s\\,w^{-1}c^v_s$ under canonical inverse-image comparisons for $T''\\xrightarrow{w}T'\\xrightarrow{v}T$.\n\nThere is a unique $Z_{T'}$-linear map $c^v_L:v^{-1}L_T\\to L_{T'}$ with\n$$p_{s,T'}c^v_L=c^v_s\\,v^{-1}p_{s,T}\\qquad(s\\geq1).$$\nThese maps obey $c^{\\mathrm{id}}_L=\\mathrm{id}$ and $c^{v\\circ w}_L=c^w_L\\,w^{-1}c^v_L$ under the same comparisons.\n\nFor any commutative $\\mathbf Z_\\ell$-algebra $B$, set $H_T=L_T\\otimes_{Z_T}B_T$. Under canonical ordinary tensor pullback identifications, $c^v_L\\otimes1$ induces the $B_{T'}$-linear map $h_v:v^*H_T\\to H_{T'}$, given by $x\\otimes b\\mapsto c^v_L(x)\\otimes b$. These maps obey identity and composition: $h_{\\mathrm{id}}=\\mathrm{id}$ and $h_{v\\circ w}=h_w\\,w^*h_v$. For every $r\\geq1$ with $\\ell^rB=0$, put $D_{r,T}=M_{r,T}\\otimes_{R_{r,T}}B_T$ and define $\\alpha_{r,T}:H_T\\to D_{r,T}$ by $x\\otimes b\\mapsto p_{r,T}(x)\\otimes b$. Then the specified maps satisfy\n$$\\alpha_{r,T'}h_v=(c^v_r\\otimes1)v^*\\alpha_{r,T}.$$\nThis assertion does not assume that $\\alpha_{r,T}$ or $c^v_s$ is invertible and does not identify $v^{-1}L_T$ with an inverse limit.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; agent extraction of returned root-projection reduction steps 6-9, with canonical root adjuncts and the inverse-limit cone as in thm-amb-vector-bundle-purity proof paragraph 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-l-adic-numbers",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-twist-sheaves",
+  "def-pur-inverse-image-tensor-hom-sections",
+  "lem-pur-roots-of-unity-inverse-image-iso"
+ ],
+ "proof": [
+  {
+   "text": "The constant sheaf adjunction, composed with the given inverse-image adjunction, is the constant sheaf adjunction on the target because base change preserves a terminal object. Uniqueness of left adjoints gives an isomorphism. Its adjunct agrees with the specified constant direct-image map on the constant presheaf, so the actual constant inverse-image map is invertible. Sheafification uniqueness also proves naturality in the coefficient ring and the identity and composition laws for these direct-image maps.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 00WX and 03CB; constant sheaf adjunction and uniqueness."
+   }
+  },
+  {
+   "text": "Use the finite-root inverse-image theorem for transition compatibility and inverse-image semilinearity. For the finite direct-image maps, evaluate the specified root-section equivalence: their values are pullback of units along the fibre-product projection. Pullback of units respects the identity and composition comparisons by the fibre-product projection identities. The normalized constant finite-ring action makes every additive map between such modules linear; apply this to the direct-image root map.",
+   "uses": [
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-twist-sheaves",
+    "lem-pur-torsion-sheaf-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03CB; root maps on units and normalized finite torsion actions."
+   }
+  },
+  {
+   "text": "Compose each pulled-back limit projection with the compatible finite-root comparison. This is a cone over the target root tower, and its limit lift defines the root comparison. Take its adjunct to obtain c. The lift projection equations give c_projection; adjunction and the limit universal property give c_unique. Evaluate these equations on sections. Joint injectivity of limit projections, the finite identity/composition equations, and naturality of the projections prove the identity and composition equations for c. The recorded componentwise action and naturality of coefficient reduction prove its constant Z_l semilinearity.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-twist-sheaves",
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CO/03DB; universal property of the root inverse limit."
+   }
+  },
+  {
+   "text": "Construct h directly in its displayed adjunct form. The semilinear map c sends x to the pure target tensor 1 tensor c(x); the coefficient naturality square makes this a linear map into the restriction of the direct-image tensor module. The scalar-extension universal property extends it uniquely. Its value on b tensor x is rho_B(b) tensor c(x). Equality of abelian sheaf maps out of scalar extension is detected on these original pure sections, by tensor generation before sheafification. Apply this test, coefficient identity/composition, root identity/composition, and restriction naturality to prove the all-section identity/composition equations.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-twist-sheaves",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK; scalar-extension universal property and pure-section formulas."
+   }
+  },
+  {
+   "text": "If l^(r+1) kills B, the algebra map from Z_l to B kills the kernel of reduction to Z/l^(r+1). Its descended map is the unique ZMod cast homomorphism. The root projection is semilinear for this reduction, so scalar extension gives alpha with the prescribed pure formula. Construct d by the same scalar-extension lift applied to the finite direct-image root map. Both sides of the reduction square agree on every original pure section by c_projection, and scalar-extension extensionality gives equality of module morphisms.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-twist-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK; scalar factorization, finite tensor lift and projection square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-twist-sheaves",
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-pur-sheaf-inverse-limit",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Direct-image adjunct proof: constant sheaf adjunction, finite-root unit pullback, root limit cone, and scalar-extension universal properties (Tags 00WX, 03CB, 03CO/03DB and 03EK)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|TateModule|proetale",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\"], \"digest\": \"84fa54c7562a05b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites.",
+   "sub": "NumberTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical morphism from inverse image of a Tate root inverse limit to root inverse limit compatible with projections and composition",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Pi.isoLimit_inv_π_assoc\", \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"CategoryTheory.preservesLimitIso_inv_π\", \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π_assoc\", \"Profinite.isIso_asLimitCone_lift\", \"LightProfinite.proj_comp_transitionMap'\", \"CategoryTheory.liftedLimitMapsToOriginal_inv_map_π\", \"LightProfinite.proj_comp_transitionMap\"], \"digest\": \"e1d819ffef6b85c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limit.lift\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DirectLimit.lift\", \"DirectLimit.lift_injective\", \"DirectLimit.lift_def\", \"DirectLimit.lift₂\", \"DirectLimit.lift₂_def\", \"DirectLimit.lift₂_def₂\", \"DirectLimit.lift_one\", \"DirectLimit.lift_zero\"], \"digest\": \"8992156a25877835\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of inverse limit roots of unity canonical map from cone finite root maps semilinear identity composition",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"restrictRootsOfUnity_coe_apply\", \"ProfiniteGrp.toLimit_fun\", \"cyclotomicCharacter.toZModPow_toFun\", \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"ProfiniteGrp.toLimit\", \"LightProfinite.proj_comp_transitionMap\", \"cyclotomicCharacter.toFun_apply\", \"InfiniteGalois.algEquivToLimit\"], \"digest\": \"ac31e7b9e3bf2b9d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "grep",
+   "query": "TateModule|rootsOfUnity|proetale",
+   "results": "{\"t\": \"2026-10-22T07:51:22Z\", \"tool\": \"grep\", \"query\": \"TateModule|rootsOfUnity|proetale\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses.",
+   "sub": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a sheaf inverse limit of roots of unity has a canonical map to the inverse limit compatible with tensor and composition",
+   "results": "{\"t\": \"2026-10-22T07:51:23Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of a sheaf inverse limit of roots of unity has a canonical map to the inverse limit compatible with tensor and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitRight_symm_of_tmul\", \"CategoryTheory.GrothendieckTopology.isoSheafify_inv\", \"SheafOfModules.hasLimit\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"PresheafOfModules.limitPresheafOfModules\", \"CategoryTheory.GrothendieckTopology.sheafifyCompIso\", \"CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift\", \"CategoryTheory.isoSheafify_inv\"], \"digest\": \"37d6d3cb2afcca4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "{\"t\": \"2026-10-22T07:51:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"rootsOfUnity\", \"rootsOfUnity_one\", \"rootsOfUnity_zero\", \"rootsOfUnity_inf_rootsOfUnity\", \"rootsOfUnity_eq_ker\", \"ker_zpowGroupHom_eq_rootsOfUnity\", \"rootsOfUnity_le_of_dvd\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\"], \"digest\": \"b3162e76aceb5175\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback morphism for an inverse limit tower of roots of unity coherent with composition and tensor coefficient reduction",
+   "results": "{\"t\": \"2026-10-22T07:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical pullback morphism for an inverse limit tower of roots of unity coherent with composition and tensor coefficient reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"LightProfinite.proj_comp_transitionMap\", \"LightProfinite.proj_comp_transitionMapLE'\", \"LightProfinite.proj_comp_transitionMap'\", \"LightProfinite.proj_comp_transitionMapLE\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"InfiniteGalois.proj_of_le\", \"PadicInt.lift_spec\"], \"digest\": \"f6cc40b808c9edb2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limit.post\"",
+   "results": "{\"t\": \"2026-10-22T07:52:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"limit.post\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.postcomposeHomEquiv\", \"CategoryTheory.Limits.IsLimit.postcomposeInvEquiv\", \"CategoryTheory.Limits.colimit.post\", \"CategoryTheory.Limits.limit.post\", \"CategoryTheory.Limits.limit.post_π\", \"CategoryTheory.Limits.colimit.post_desc\", \"CategoryTheory.Limits.limit.post_π_assoc\", \"CategoryTheory.Limits.colimit.post_post\"], \"digest\": \"c814b022a8ce8649\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image functor has canonical comparison to limit of image diagram; compatible maps of sheaves induce maps after extension of scalars",
+   "results": "{\"t\": \"2026-10-22T07:52:22Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image functor has canonical comparison to limit of image diagram; compatible maps of sheaves induce maps after extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.createsLimit\", \"SheafOfModules.evaluationPreservesLimit\", \"SheafOfModules.mapFree\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc\", \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"SheafOfModules.hasLimit\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend\", \"SheafOfModules.hasLimitsOfShape\"], \"digest\": \"18fa53a2b9ddbf15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|restrictRootsOfUnity",
+   "results": "{\"t\": \"2026-10-22T07:59:25Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity|restrictRootsOfUnity\", \"sub\": \"RingTheory/RootsOfUnity\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean\", \"Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean\", \"Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean\", \"Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean\", \"Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean\", \"Mathlib/RingTheory/RootsOfUnity/Complex.lean\", \"Mathlib/RingTheory/RootsOfUnity/Complex.lean\", \"Mathlib/RingTheory/RootsOfUnity/Complex.lean\"], \"digest\": \"756e53b0319f27bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned results concern finite roots in rings, abstract limit comparisons, or existence of module-sheaf limits; none gives all the pro-etale root, scalar, tensor and reduction coherence clauses.",
+   "sub": "RingTheory/RootsOfUnity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-tate-root-projection-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Proof paragraph 1, the Tate coefficient in the vector-bundle integration formula; returned root-projection reduction steps 6-9: root adjunct composition, limit cone, tensor square and coherence.",
+   "via": [
+    "lem-amb-tate-root-projection-reduction",
+    "lem-amb-finite-tate-site-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-amb-root-tower-pullback-coherence",
+  "worker": "stage1",
+  "summary": "Q128 retains the statement and all imported metadata; proves the finite-root compositor on actual inverse-image generators, constructs the limit map sectionwise without commuting inverse image with infinite limits, and verifies tensor identity/composition and reduction by the existing normalized tensor comparison and adjoint test. Reuses existing nodes throughout; no new nodes.",
+  "blueprint": "thm-amb-vector-bundle-purity proof paragraph 1, the globally normalized coefficient entering the integration formula; via finite Tate site descent and root-projection reduction, the returned root-projection steps 6-9. The present eight steps supply their root adjunct, limit cone and ordinary tensor coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Makes the prescribed small-site inverse image geometric; this is a generic site tool, not a purity argument."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Gives canonical constant-ring identification compatible with composition for arbitrary small geometric morphisms."
+   },
+   {
+    "node": "lem-pur-roots-of-unity-inverse-image-iso",
+    "why": "Uses only clauses 1 and 2, transition compatibility and semilinearity; no root-map invertibility."
+   },
+   {
+    "node": "lem-trf-site-inverse-image-composition-generators",
+    "why": "Normalizes the canonical inverse-image compositor on colimit generators, and detects equality for abelian sheaves on arbitrary small sites."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Supplies the normalized ordinary tensor isomorphism at independent universes."
+   },
+   {
+    "node": "lem-pur-inverse-image-tensor-adjoint-test",
+    "why": "Detects equality on original tensor-unit sections, including the iterated-comparison formula without assuming generation of target sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-roots-of-unity-inverse-image-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-5d973dc51",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-5d973dc51 (reviewer sub-agent of L); spot-checked: FIX: I read the whole delivery (0 new nodes; statement unchanged against the live unsplit node; the 4 original searches kept and 7 appended; proof_deps equals the union of uses). Corrected node: fixes/dag/nodes/sec-smooth-purity/lem-amb-root-tower-pullback-coherence.json. Repairs: (1) C4/E5, step 1: step 2 uses root-lemma clause 2 (semilinearity over the structure map c^f_{Z/N}=ε∘f^{-1}ρ) together with the lem-pe-constant-left-module isomorphism, and nothing said the two agree. Added: both send each constant to itself and v^{-1}A_T is the sheafified constant presheaf, so they are equal. (2) C1, step 8: the finite pullback identification v^*D_r ≅ v^{-1}M_r⊗B' and its value on pure tensors need lem-pur-independent-inverse-image-tensor-comparison with R=R_{r,T}. Added that citation and the explicit application; elementary set to false. Checks: step 3's nested-generator computation (ψ^♯pr_U^♯φ^♯pr_V^♯u equals pullback along W→T''×_TV→V, via pr∘(id×φ)=φ∘pr_U) against the normalization and equality detection of lem-trf-site-inverse-image-composition-generators; step 2's exponent well-definedness; step 7's δ unit-image formula from κ with φ=ψ=id, and the iterated adjoint-test evaluation (c^v_L(v^{-1}x) is an original section over T'×_TV). Edge cases: T empty, B=0, r=1, v=id, B=Z_ℓ. Duplicate candidates: lem-pur-tate-inverse-limit-base-change assumes isomorphisms β_r; lem-pur-integral-twist-line-inverse-image(2) has no composition laws and no tensor square; neither is a duplicate. Stacks 03EL source read; no SGA. Tool uses accepted as generic sheaf tools: left-exact-site, constant-left-module, site-composition generators.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AmbRootTowerPullbackCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.ambRootTowerPullbackCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ambRootCommRingSheafify",
+   "AlgebraicGeometry.Scheme.ambRootRingSheafify",
+   "AlgebraicGeometry.Scheme.ambRootAbSheafify",
+   "AlgebraicGeometry.Scheme.ambRootHasLimit",
+   "AlgebraicGeometry.Scheme.ambRootAction",
+   "AlgebraicGeometry.Scheme.ambRootScalar",
+   "AlgebraicGeometry.Scheme.ambRootTensor",
+   "AlgebraicGeometry.Scheme.ambRootTensorPure",
+   "AlgebraicGeometry.Scheme.ambRootFiniteScalar",
+   "AlgebraicGeometry.Scheme.ambRootFiniteTensor",
+   "AlgebraicGeometry.Scheme.ambRootFinitePure",
+   "AlgebraicGeometry.Scheme.AmbRootConstantIso",
+   "AlgebraicGeometry.Scheme.AmbRootTransition",
+   "AlgebraicGeometry.Scheme.AmbRootFiniteSemilinear",
+   "AlgebraicGeometry.Scheme.AmbRootLawRootId",
+   "AlgebraicGeometry.Scheme.AmbRootLawRootComp",
+   "AlgebraicGeometry.Scheme.AmbRootLawCProjection",
+   "AlgebraicGeometry.Scheme.AmbRootLawCUnique",
+   "AlgebraicGeometry.Scheme.AmbRootLawCLinear",
+   "AlgebraicGeometry.Scheme.AmbRootLawCId",
+   "AlgebraicGeometry.Scheme.AmbRootLawCComp",
+   "AlgebraicGeometry.Scheme.AmbRootLawHPure",
+   "AlgebraicGeometry.Scheme.AmbRootLawHId",
+   "AlgebraicGeometry.Scheme.AmbRootLawHComp",
+   "AlgebraicGeometry.Scheme.AmbRootLawAlphaPure",
+   "AlgebraicGeometry.Scheme.AmbRootLawDPure",
+   "AlgebraicGeometry.Scheme.AmbRootLawSquare",
+   "AlgebraicGeometry.Scheme.AmbRootTowerPullbackCoherenceData",
+   "AlgebraicGeometry.Scheme.AmbRootTowerPullbackCoherence",
+   "AlgebraicGeometry.Scheme.ambRootTowerPullbackCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/AmbRootTowerPullbackCoherence.lean",
+  "statement": "theorem ambRootTowerPullbackCoherence : Nonempty (AmbRootTowerPullbackCoherence.{u} l)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion structure specifies every map by its projection or pure-tensor adjunct formula; identity and composition are expressed with the canonical fibre-product maps. The root limit and scalar action reuse the landed def-pur-twist-sheaves interface. Positive level s is represented by s+1. No preservation of infinite limits or invertibility of root/reduction maps is assumed. Performance repair: the coherence record is parameterized by its two tensor modules and pure-section functions; each law is a named proposition used without expansion during record generation. AmbRootTowerPullbackCoherence abbreviates specialization to the original constructions. All 20 field equations retain their original mathematical type. Four proved canonical-instance facts cache sheafification and the root-tower limit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11496992a",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Every clause matches the node: ℓ-invertibility as an Invertible instance (no stronger hypothesis); L_T = purTwistZlOne with limit.π; the constant ℤ_ℓ action restricted from purTwistZlAction along purTwistZlCompletionMap; constant_iso of the actual structure maps; root_transition/root_linear restate root-lemma clauses 1-2; root_id/root_comp, c_id/c_comp, h_id/h_comp in direct-image adjunct form with Over.pullbackId/pullbackComp; c fixed by c_projection + c_unique (uniqueness among all additive maps, stronger but true) + c_linear; h, alpha and d fixed by pure-tensor formulas; the square is the exact adjunct; hB covers r≥1 via the unique ZMod.castHom; no IsIso on alpha, c_s or c_L and no limit preservation. Mechanical finding on theorem stmt_dep lem-pur-roots-of-unity-inverse-image-iso: the statement uses proEtaleRootsOfUnityInverseImageAction = (existsUnique_proEtaleRootsOfUnityInverseImageAction …).exists.choose, an object constructed by that theorem's module, so the statement genuinely depends on it → PASS on that point. Added stmt_deps (def-pur-twist-sheaves, def-pur-inverse-image-tensor-hom-sections, the root lemma) own the declarations used and create no cycle; lean.statement is verbatim; 9 declarations listed; no name clash on live. Parent ambTate* defs are O_E/ϖ^n specialisations, not duplicates. Edge cases checked: T empty, B=0, r=s=0, v=id, B=ℤ_ℓ; universes as in proEtaleConstantRing. Advisory only: non-stmt_dep owners of torsionSheafModuleStructure and purTwistZlCompletionMap; redundant public imports. No file changed, so no compile; relies on the worker's clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-69af2",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261024T191301-L-292404",
+  "kind": "interface",
+  "note": "independent cc review: head 69af Lean/node byte-identical to 1b22 (FIX); record AmbRootTowerPullbackCoherence abbrev of AmbRootTowerPullbackCoherenceData vs old 20-field structure, verbatim; change record now carries 1b22's correction; importer AmbTateRootProjectionReduction compiled unchanged against the fixed module"
+ }
+}

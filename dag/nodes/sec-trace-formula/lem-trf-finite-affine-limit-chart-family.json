@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-finite-affine-limit-chart-family",
+ "kind": "statement",
+ "title": "Finite affine chart families with fixed presentations along an affine inverse limit",
+ "statement": "Let $I$ be a nonempty directed set, $(S_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism], and $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Fix $i_0\\in I$, quasi-compact quasi-separated $S_{i_0}$-schemes $X_0,Y_0$, and a morphism $f_0:X_0\\to Y_0$ over $S_{i_0}$ which is locally of finite presentation [def-sbc-locally-finite-presentation]. For $i\\geq i_0$ define $X_i,Y_i,f_i$ by base change to $S_i$, and define $X,Y,f$ by base change to $S$ [def-pc-fibre-product]. There exist a finite affine open cover $Y_0=\\bigcup_aV_{a,0}$, affine opens $W_{a,0}\\subseteq S_{i_0}$ containing the image of $V_{a,0}$, and finite affine open covers $f_0^{-1}(V_{a,0})=\\bigcup_bU_{ab,0}$, with the following properties.\nFor each $a$ write $W_{a,0}=\\operatorname{Spec}R_{a,0}$, and let $W_{a,i}$ and $W_a$ be its inverse images in $S_i$ and $S$. These opens are affine; their coordinate rings $R_{a,i}$ form a directed system with the restriction-induced transition maps, and $W_a=\\operatorname{Spec}R_a$ for $R_a=\\varinjlim_{i\\geq i_0}R_{a,i}$ [def-weil-pbc-category-colimit]. There are fixed commutative $R_{a,0}$-algebras $B_{a,0},C_{ab,0}$ and $R_{a,0}$-algebra maps $\\varphi_{ab,0}:B_{a,0}\\to C_{ab,0}$ of finite presentation [def-weil-pbc-finitely-presented-algebra]. Put $B_{a,i}=R_{a,i}\\otimes_{R_{a,0}}B_{a,0}$ and $C_{ab,i}=R_{a,i}\\otimes_{R_{a,0}}C_{ab,0}$. The inverse-image opens $V_{a,i},U_{ab,i}$ identify with $\\operatorname{Spec}B_{a,i},\\operatorname{Spec}C_{ab,i}$ and their restricted morphism identifies with $\\operatorname{Spec}(1\\otimes\\varphi_{ab,0})$. The same assertion holds at the limit, replacing $R_{a,i}$ by $R_a$. Each arrow identification consists of source and target isomorphisms making the morphism square commute. For every $i\\geq i_0$, $Y_i=\\bigcup_aV_{a,i}$ and $f_i^{-1}(V_{a,i})=\\bigcup_bU_{ab,i}$; the corresponding opens also cover at the limit. Empty source covers are allowed. No finite presentation of $B_{a,0}$ over $R_{a,0}$ is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C3L (lemma-descend-syntomic), first paragraph and affine reduction; affine limit description in lemma-directed-inverse-system-has-limit and lemma-directed-inverse-system-affine-schemes-has-limit; chart tensor description in Schemes lemma-open-fibre-product and lemma-fibre-product-affine-schemes, with Morphisms lemma-locally-finite-presentation-characterize."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $y_0:Y_0\\to S_{i_0}$ for the structure map. For each point $y\\in Y_0$, choose an affine open $W_y\\subseteq S_{i_0}$ containing $y_0(y)$, and then an affine open $V_y$ containing $y$ inside the open $y_0^{-1}(W_y)$, using the affine-open basis twice. These $V_y$ cover $Y_0$. Quasi-compactness of $Y_0$ selects finitely many of them; label them $V_{a,0}$ and retain their associated $W_{a,0}$. This proves the required target/base incidence without requiring $Y_0\\to S_{i_0}$ to be of finite presentation. If $Y_0$ is empty, take the empty family.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), first proof paragraph; Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Apply clause (1) of qcqs morphism permanence to $f_0$: its source $X_0$ is quasi-compact and its target $Y_0$ is quasi-separated, so $f_0$ is quasi-compact. Each $V_{a,0}$ is quasi-compact because it is affine. The quasi-compact-inverse-image lemma therefore makes $f_0^{-1}(V_{a,0})$ quasi-compact. Apply the finite-affine-cover lemma to this open subscheme to choose $U_{ab,0}$, with finitely many $b$ for each $a$. An affine open of an open subscheme is an affine open of $X_0$. An empty inverse image can have no source charts.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), first proof paragraph; Schemes Tags 03GI (lemma-quasi-compact-permanence), 01K4 (lemma-quasi-compact-affine)"
+   }
+  },
+  {
+   "text": "Fix the canonical affine identifications with coordinate rings $R_{a,0}=\\Gamma(W_{a,0},\\mathcal O)$, $B_{a,0}=\\Gamma(V_{a,0},\\mathcal O)$, and $C_{ab,0}=\\Gamma(U_{ab,0},\\mathcal O)$. The restricted structure maps give their $R_{a,0}$-algebra structures. The restricted $f_0$ induces $\\varphi_{ab,0}:B_{a,0}\\to C_{ab,0}$; it respects $R_{a,0}$ because $f_0$ is over $S_{i_0}$. The affine-opens finite-presentation lemma applied to the locally finitely presented $f_0$ says precisely that each $\\varphi_{ab,0}$ is finitely presented. The spectrum functor identifies the restricted morphisms with the spectrum maps of these ring maps. One $B_{a,0}$ is fixed for all $b$, including when there are no $b$; no finite presentation over $R_{a,0}$ is used.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ (lemma-locally-finite-presentation-characterize), (1) implies (2); Schemes affine-open convention following Definition 01IJ"
+   }
+  },
+  {
+   "text": "For $i\\geq i_0$, affineness of $S_i\\to S_{i_0}$ makes $W_{a,i}$ affine by definition. The affine-transition limit lemma makes $S\\to S_{i_0}$ affine and identifies $W_a$ as the inverse limit of the $W_{a,i}$. Define $R_{a,i}=\\Gamma(W_{a,i},\\mathcal O)$. For $j\\geq i\\geq i_0$, restricting $S_j\\to S_i$ gives $W_{a,j}\\to W_{a,i}$, hence $R_{a,i}\\to R_{a,j}$; functoriality of pullback on sections gives identities and composition. The tail $i\\geq i_0$ is nonempty and directed: it contains $i_0$ and an upper bound of two of its elements still lies in the tail. The affine case of the same limit lemma therefore gives $W_a\\cong\\operatorname{Spec}R_a$, where $R_a=\\varinjlim_{i\\geq i_0}R_{a,i}$, with the indicated projections induced by the colimit maps. Use the coordinate-ring affine identifications throughout.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX (lemma-directed-inverse-system-has-limit), (1),(2), and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+   }
+  },
+  {
+   "text": "Let $T\\to S_{i_0}$ be either $S_i\\to S_{i_0}$ or $S\\to S_{i_0}$, and write $A=R_{a,i}$ or $R_a$. Apply the affine-chart base-change isomorphism to $Z=Y_0$, $V=V_{a,0}$, $W=W_{a,0}$ and the fixed $R_{a,0}$-algebra $B_{a,0}$. It gives the inverse-image target open as $\\operatorname{Spec}(A\\otimes_{R_{a,0}}B_{a,0})$, with both projections specified. Apply it again to $Z=X_0$, $V=U_{ab,0}$ and $C_{ab,0}$ to obtain the source isomorphism. Under these isomorphisms the candidate $\\operatorname{Spec}(1\\otimes\\varphi_{ab,0})$ has the required composites to $V_{a,0}$ and to the inverse image of $W_{a,0}$: on rings it sends $1\\otimes b$ to $1\\otimes\\varphi_{ab,0}(b)$ and $a\\otimes1$ to $a\\otimes1$. The actual restriction of $f_T$ has the same two composites by the base-change square. The target open is their fibre product, so its universal property makes these arrows equal. Thus the chosen source and target isomorphisms give the commuting morphism square for every stage and for the limit, using the same $B_{a,0},C_{ab,0},\\varphi_{ab,0}$.",
+   "uses": [
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes), including the projections"
+   }
+  },
+  {
+   "text": "Let $p_Y:Y_T\\to Y_0$ and $p_X:X_T\\to X_0$ denote the projections. Inverse images commute with unions, so $Y_T=p_Y^{-1}(\\bigcup_aV_{a,0})=\\bigcup_aV_{a,T}$. Since $p_Y\\circ f_T=f_0\\circ p_X$, one has $f_T^{-1}(V_{a,T})=p_X^{-1}(f_0^{-1}(V_{a,0}))=\\bigcup_b p_X^{-1}(U_{ab,0})=\\bigcup_bU_{ab,T}$. This proves both cover assertions for $T=S_i$ and $T=S$. If an original inverse image is empty, its pullback is empty and the same union equality holds for the empty source family.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), first proof paragraph, pulled-back covers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C3L (lemma-descend-syntomic), finite affine reduction; expanded using Tags 01IT, 03GI, 01K4, 01TQ, 01YX, 01YW, 01JR and 01I4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*affine.*cover|affine.*cover.*finite|affine.*tensor",
+   "results": "{\"t\": \"2026-10-22T06:11:33Z\", \"tool\": \"grep\", \"query\": \"finite.*affine.*cover|affine.*cover.*finite|affine.*tensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"0d6ce4291fee0b93\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover, affine-limit, and local finite-presentation hits give components, but no declaration gives the simultaneous finite source/target/base chart family with fixed tensor presentations at every stage and the limit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine chart presentations of a locally finitely presented morphism compatible with an inverse limit of schemes with affine transitions",
+   "results": "{\"t\": \"2026-10-22T06:11:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine chart presentations of a locally finitely presented morphism compatible with an inverse limit of schemes with affine transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.AffineScheme.hasLimits\"], \"digest\": \"28ba11d7802cadbd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover, affine-limit, and local finite-presentation hits give components, but no declaration gives the simultaneous finite source/target/base chart family with fixed tensor presentations at every stage and the limit."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "{\"t\": \"2026-10-22T06:11:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"], \"digest\": \"52d6242fe4437032\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover, affine-limit, and local finite-presentation hits give components, but no declaration gives the simultaneous finite source/target/base chart family with fixed tensor presentations at every stage and the limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism between quasi compact quasi separated schemes has finitely many affine source target base triples whose pullbacks along an affine inverse system have fixed tensor product coordinate presentations",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented morphism between quasi compact quasi separated schemes has finitely many affine source target base triples whose pullbacks along an affine inverse system have fixed tensor product coordinate presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"e58360431477b616\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover, affine-limit, and local finite-presentation hits give components, but no declaration gives the simultaneous finite source/target/base chart family with fixed tensor presentations at every stage and the limit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finite affine open covers of source and target over affine opens of a base and identify their inverse limit coordinates as tensor products",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"Choose finite affine open covers of source and target over affine opens of a base and identify their inverse limit coordinates as tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"37478b6779188c44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover, affine-limit, and local finite-presentation hits give components, but no declaration gives the simultaneous finite source/target/base chart family with fixed tensor presentations at every stage and the limit."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*affine.*cover|affine.*cover.*finite|affine.*tensor",
+   "results": "{\"t\": \"2026-10-23T09:53:39Z\", \"tool\": \"grep\", \"query\": \"finite.*affine.*cover|affine.*cover.*finite|affine.*tensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"8ac12d6d6c0113fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine-cover components, affine-transition limits, local finite presentation or generic base-change properties; none states the entire finite chart family with fixed common target algebras and all tensor arrow identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine charts of a morphism compatible with base change and affine inverse limits",
+   "results": "{\"t\": \"2026-10-23T09:53:39Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine charts of a morphism compatible with base change and affine inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineSpace.map\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk\"], \"digest\": \"653dcfbe20f6319d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine-cover components, affine-transition limits, local finite presentation or generic base-change properties; none states the entire finite chart family with fixed common target algebras and all tensor arrow identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "{\"t\": \"2026-10-23T09:53:39Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"], \"digest\": \"52d6242fe4437032\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine-cover components, affine-transition limits, local finite presentation or generic base-change properties; none states the entire finite chart family with fixed common target algebras and all tensor arrow identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite compatible affine source target and base covers for a locally finitely presented morphism along an inverse limit with affine transitions",
+   "results": "{\"t\": \"2026-10-23T09:53:48Z\", \"tool\": \"leanfinder\", \"query\": \"Finite compatible affine source target and base covers for a locally finitely presented morphism along an inverse limit with affine transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\"], \"digest\": \"dcde2bffd6faf752\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine-cover components, affine-transition limits, local finite presentation or generic base-change properties; none states the entire finite chart family with fixed common target algebras and all tensor arrow identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finite affine open covers of source and target over affine opens of a base and identify all base changed morphisms with a fixed tensor product ring map",
+   "results": "{\"t\": \"2026-10-23T09:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"Choose finite affine open covers of source and target over affine opens of a base and identify all base changed morphisms with a fixed tensor product ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.of_source_openCover\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.HasRingHomProperty.iff_of_source_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top\"], \"digest\": \"bb1a0fac53c996bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine-cover components, affine-transition limits, local finite presentation or generic base-change properties; none states the entire finite chart family with fixed common target algebras and all tensor arrow identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-intersection-fibres-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation used below lem-trf-nodal-etale-chart. Stacks 0CBY first proof first paragraph reduces to a finite-type integer model; its use of 0C5F requires syntomic (flat with local complete intersection fibres) descent, the first sentence of the 0C5F proof. Extracted obligation: old proof steps 1--2: finite affine triples and their uniform ring-colimit presentations, with all pulled-back covers.",
+   "via": [
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-affine-limit-chart-family",
+  "worker": "stage1",
+  "summary": "Expanded the finite affine reduction of Stacks 0C3L using existing DAG statements only. Verified quasi-compactness of f_0 from qc source and qs target, fixed canonical chart rings so all source charts share one target algebra, obtained base-chart ring colimits from 01YX/01YW, and checked arrow squares using projection formulas and the fibre-product universal property. Empty covers and zero rings are included. No statement change and no new nodes.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation used below lem-trf-nodal-etale-chart. Stacks 0CBY first proof first paragraph reduces to a finite-type integer model; its use of 0C5F requires syntomic (flat with local complete intersection fibres) descent, the first sentence of the 0C5F proof. Extracted obligation: old proof steps 1--2: finite affine triples and their uniform ring-colimit presentations, with all pulled-back covers. The six steps realize the finite affine chart and fixed-presentation obligation of the ancestor's historical nodal approximation branch; the current blueprint contracting-correspondence argument is not replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic existence and open-restriction formula for affine-transition limits, used to identify the base chart coordinate colimit; no same-unit statement provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-563101b70",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-563101b70 (reviewer sub-agent of L); spot-checked: Stage-1 split of lem-trf-finite-affine-limit-chart-family: no new nodes, and the statement is byte-identical to live and side-live, where the item is still unsplit. There is no re-split note and no SGA citation. Source checked: Stacks 0C3L (limits.tex lemma-descend-syntomic), first proof paragraph: finite affine Y_{j,0} over affines S_{j,0}, then finite affine covers of f_0^{-1}Y_{j,0}. Tag-label pairs 01YW/01YX/01TQ confirmed in tags/tags. Each step uses what its cited statements actually say. S1: affine-opens basis applied twice, then a finite subcover from quasi-compactness. S2: qcqs permanence (1) gives f_0 quasi-compact (X_0 qc, Y_0 qs), so the preimage of an affine is qc and has a finite affine cover; no affine intersections are assumed. S3: canonical Γ-identifications; lfp-affine-opens gives φ finitely presented; one B_{a,0} serves every b. S4: affine transitions make W_{a,i} affine; the limit-affine-transition open clause plus its affine clause on the directed tail give R_a = colim R_{a,i}. S5: affine-chart-base-change-iso (Lean-closed) applied to both source and target, hypotheses verified; the arrow square follows from projection composites and the fibre-product universal property. S6: elementary union and inverse-image computation. Edge cases tested: empty covers, zero rings, constant system, non-separated Y_0, and B not finite type over R. No duplicate of the item in the DAG (nagata morphism-descent and qc-open-chart nodes differ). Accepted tool_use: lem-weil-pbc-limit-affine-transition (sk-thm-p1 generic limit lemma; already a stmt_dep). No changes."
+ }
+}

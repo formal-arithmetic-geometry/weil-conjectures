@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-domain-generic-local-fibre-bound",
+ "kind": "statement",
+ "title": "Generic dimension bounds every local field-fibre dimension of a finite type domain",
+ "statement": "Let $A\\subset D$ be integral domains, with $D$ finite type over $A$ [def-weil-pbc-finite-type-algebra], and put $K=\\operatorname{Frac}(A)$ and $F=D\\otimes_AK$ [def-weil-pbc-module-tensor-product], with the usual algebra tensor multiplication. Then $F$ is a nonzero finite type $K$-domain. There is a finite integer $d\\ge0$ such that $d=\\dim F=\\operatorname{trdeg}_K\\operatorname{Frac}(F)$ [def-weil-pbc-krull-dimension-ring, def-kun-transcendence-degree], and $\\dim_P\\operatorname{Spec}F=d$ for every prime $P$ of $F$ [def-weil-affine-spectrum, def-kun-topological-dimension-at-point]. For every prime $\\mathfrak p\\subset A$, write $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] and $E=D\\otimes_A\\kappa(\\mathfrak p)$. The algebra $E$ is finite type over $\\kappa(\\mathfrak p)$, and for every prime $Q\\subset E$ the local dimension $n=\\dim_Q\\operatorname{Spec}E$ is a finite nonnegative integer satisfying $d\\le n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), first dimension inequality; its proof uses the domain generic point and upper semicontinuity. The argument applies to any domain base and any residue-field fibre."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite $A$-algebra generators $z_1,\\ldots,z_r$ of $D$. For any $A$-algebra field $c$, every tensor is a finite sum $\\sum_i d_i\\otimes\\lambda_i$; expressing each $d_i$ as a polynomial in the $z_j$ shows that the $z_j\\otimes1$ generate $D\\otimes_Ac$ over $c$. Thus both $F$ and $E$ are finite type. The generic-fibre localization lemma identifies $K\\otimes_AD$ with $(A\\setminus\\{0\\})^{-1}D$, a nonzero domain. The factor swap $a\\otimes z\\mapsto z\\otimes a$ identifies it with $F$. Moreover $D\\to F$ is injective: $z/1=0$ implies $sz=0$ for some nonzero $s\\in A$, hence $z=0$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), generic fibre; Tag 00DK (lemma-tensor-localization)"
+   }
+  },
+  {
+   "text": "Apply the finite-type domain dimension theorem to the $K$-domain $F$: $d=\\dim F=\\operatorname{trdeg}_K\\operatorname{Frac}(F)$ is finite and nonnegative. At every prime $P\\subset F$, the component formula says $\\dim_P\\operatorname{Spec}F=\\max_{\\mathfrak r\\subseteq P\\text{ minimal}}\\dim(F/\\mathfrak r)$. Since $F$ is a domain, its unique minimal prime is $(0)$; the maximum is $\\dim(F/(0))=d$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P0 (lemma-dimension-prime-polynomial-ring); Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field)"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\subset A$ and a prime $Q\\subset E$. The component formula for the finite type $\\kappa(\\mathfrak p)$-algebra $E$ says that $n=\\dim_Q\\operatorname{Spec}E$ is a finite nonnegative integer. The fibre-prime bijection sends $Q$ to its contraction $\\mathfrak q\\subset D$, with $\\mathfrak q\\cap A=\\mathfrak p$; its inverse identifies $Q$ with the fibre prime used in the definition of $\\dim_{\\mathfrak q}(D/A)$. Thus $\\dim_{\\mathfrak q}(D/A)=n$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field); Tag 00E6 (remark-fundamental-diagram); Tag 00QD (definition-relative-dimension)"
+   }
+  },
+  {
+   "text": "Apply the bounded-fibre-dimension neighbourhood theorem to the finite type map $A\\to D$ and $\\mathfrak q$: there is an open $V\\subseteq\\operatorname{Spec}D$ containing $\\mathfrak q$ on which every local fibre dimension is at most $n$. Choose a basic open $\\mathfrak q\\in D(g)\\subseteq V$. Since $g\\notin\\mathfrak q$, we have $g\\ne0$; hence the zero prime of the domain $D$ belongs to $D(g)$. The bound therefore holds at $(0)\\in\\operatorname{Spec}D$.",
+   "uses": [
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, proof, first inequality, using Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs) and Tag 00E0 (lemma-Zariski-topology)"
+   }
+  },
+  {
+   "text": "The contraction of $(0)\\subset D$ to $A$ is $(0)$ since $A\\subset D$. Here $A_{(0)}=K$ and $(0)A_{(0)}=0$, so the residue field is $K$ and the fibre ring is $F$. Its zero prime contracts to $(0)\\subset D$ by the injection of step 1; uniqueness in the fibre-prime bijection identifies it with the fibre point for $(0)\\subset D$. Its local dimension is $d$ by step 2. Consequently the bound of step 4 is $d\\le n$. If $E$ has no prime, the pointwise assertion is vacuous.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, proof, first inequality; Tag 00E6 (remark-fundamental-diagram)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK, proof, first inequality, expanded using Tags 00P0, 00OT, 00E6, 00QH and 00E0; this inequality needs only a domain base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type domain containing a domain A the local dimension at every point of a residue field fibre is at least the dimension of the generic fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p = Module.finrank p.asIdeal.ResidueField (TensorProduct R p.asIdeal.ResidueField M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ (converted to a natural number) equals the finite ra\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"IsLocalRing.finrank_quotient_map\", \"module\": \"Mathlib/RingTheory/LocalRing/Quotient\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [Module.Finite R S] [Module.Free R S],\\n  Module.finrank (R ⧸ IsLocalRing.maximalIdeal R) (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) =\\n    Module.finrank R S\", \"doc\": \"For any commutative ring $ R $, an $ R $-algebra $ S $, and an ideal $ \\\\mathfrak{p} $ of $ R $, the finite rank of $ S $ as an $ R $-module is equal to the finite rank of the quotient module $ S/\\\\math\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Ideal.inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"{R : Type u} → [inst : CommRing R] → {S : Type v} → [inst_1 : CommRing S] → Ideal R → Ideal S → [Algebra R S] → ℕ\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and ideals $ p \\\\subseteq R $, $ P \\\\subseteq S $, the inertia degree is defined as the finite rank of the quotient ring $ S/P $ as a module over $ R/p $ if the p\"}\n  {\"name\": \"Ideal.inertiaDeg_algebraMap\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  [inst_3 : P.LiesOver p] [p.IsMaximal], p.inertiaDeg P = Module.finrank (R ⧸ p) (S ⧸ P)\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and ideals $ p \\\\subseteq R $, $ P \\\\subseteq S $ such that $ P $ lies over the maximal ideal $ p $, the inertia degree of $ p $ and $ P $ is equal to the finite \"}\n  {\"name\": \"Algebra.Presentation.localizationAway_dimension_zero\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S], (Algebra.Presentation.localizationAway S r).dimension = 0\", \"doc\": \"The algebra presentation obtained by localizing a commutative semiring $ S $ at the powers of an element $ r $ has dimension zero, meaning the number of generators equals the number of relations in th\"}\nRank-at-stalk and residue degree hits concern module dimensions, not local topological dimensions of algebra fibres. trdeg_lt_aleph0 gives finiteness only, not the generic-to-local comparison. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Algebra.FiniteType",
+   "results": "[loogle] OK 0 hit(s)\nRank-at-stalk and residue degree hits concern module dimensions, not local topological dimensions of algebra fibres. trdeg_lt_aleph0 gives finiteness only, not the generic-to-local comparison. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(fiber|fibre).*dim|dim.*(fiber|fibre).*generic",
+   "results": "[grep] OK 0 hit(s)\nRank-at-stalk and residue degree hits concern module dimensions, not local topological dimensions of algebra fibres. trdeg_lt_aleph0 gives finiteness only, not the generic-to-local comparison. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuity bounds generic fibre dimension by local dimension of each special fibre of an integral affine scheme",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\nservice unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transcendence degree of a dominant finite type domain over the fraction field of a domain is bounded by the local topological dimension of every nonempty field fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [alg : Algebra.IsAlgebraic R S] [inst_3 : IsDomain S] [inst_4 : FaithfulSMul R S] (σ : Type u),\\n  Module.rank (FractionRing (MvPolynomial σ R)) (FractionRing (MvPolynomial σ S)) =\\n    Cardinal.lift.{u,\", \"doc\": \"The rank of the fraction ring of the multivariate polynomial ring over $ S $, considered as a module over the fraction ring of the multivariate polynomial ring over $ R $, is equal to the lift of the \"}\n  {\"name\": \"trdeg_lt_aleph0\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis\", \"type\": \"∀ {R : Type u_1} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsDomain R]\\n  [fin : Algebra.FiniteType R S], Algebra.trdeg R S < Cardinal.aleph0\", \"doc\": \"If $ R $ is a domain and $ S $ is a finitely generated $ R $-algebra, then the transcendence degree of $ S $ over $ R $ is finite.\"}\n  {\"name\": \"Algebra.IsAlgebraic.lift_rank_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (R' : Type u_4) (S : Type u) [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R R'] [IsFractionRing R R'] [FaithfulSMul R S] [Algebra.IsAlgebraic R S]\\n  [NoZeroDivisors S] (S' : Type v) [inst_9 : CommRing S'] [inst_10 : Alge\", \"doc\": \"If $ S $ is the fraction ring of $ R $ and $ S' $ is the fraction ring of $ R' $, then the universe-lifted cardinal ranks of the modules $ S $ over $ R $ and $ S' $ over $ R' $ are equal, i.e., $\\\\text\"}\n  {\"name\": \"Algebra.IsAlgebraic.rank_fractionRing_polynomial\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [alg : Algebra.IsAlgebraic R S] [inst_3 : IsDomain S] [inst_4 : FaithfulSMul R S],\\n  Module.rank (FractionRing (Polynomial R)) (FractionRing (Polynomial S)) = Module.rank R S\", \"doc\": \"The rank of the fraction ring of $ S[X] $ over the fraction ring of $ R[X] $ is equal to the rank of $ S $ over $ R $, i.e., $\\\\operatorname{rank}_{\\\\operatorname{FractionRing}(R[X])}(\\\\operatorname{Frac\"}\n  {\"name\": \"Algebra.IsAlgebraic.trdeg_le_cardinalMk\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis\", \"type\": \"∀ (R : Type u_1) {A : Type w} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (s : Set A)\\n  [NoZeroDivisors A] [alg : Algebra.IsAlgebraic (↥(Algebra.adjoin R s)) A], Algebra.trdeg R A ≤ Cardinal.mk ↑s\", \"doc\": \"If the subalgebra generated by adjoining a set $ s $ to $ R $ is algebraic over $ A $, then the transcendence degree of $ A $ over $ R $ is less than or equal to the cardinality of $ s $, i.e., $\\\\oper\"}\n  {\"name\": \"Algebra.IsAlgebraic.rank_fractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (S : Type u) [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : FaithfulSMul R S] [Algebra.IsAlgebraic R S] [inst_5 : IsDomain S],\\n  Module.rank (FractionRing R) (FractionRing S) = Module.rank R S\", \"doc\": \"If $ S $ is an integral domain, then the rank of the fraction ring of $ S $ as a module over the fraction ring of $ R $ is equal to the rank of $ S $ as a module over $ R $. This equality holds becaus\"}\n  {\"name\": \"MvRatFunc.rank_eq_max_lift\", \"module\": \"Mathlib/FieldTheory/MvRatFunc/Rank\", \"type\": \"∀ {σ : Type u} {F : Type v} [inst : Field F] [Nonempty σ],\\n  Module.rank F (FractionRing (MvPolynomial σ F)) =\\n    max (max (Cardinal.lift.{u, v} (Cardinal.mk F)) (Cardinal.lift.{v, u} (Cardinal.mk σ))) Cardinal.aleph0\", \"doc\": \"The rank of the fraction field of the multivariate polynomial ring $ F[\\\\sigma] $ over a field $ F $, indexed by a non-empty type $ \\\\sigma $, as an $ F $-module is equal to the supremum of the cardinal\"}\n  {\"name\": \"lift_trdeg_add_le\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental\", \"type\": \"∀ {R : Type u_3} {S : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R A] [inst_5 : Algebra S A] [IsScalarTower R S A] [Nontrivial R]\\n  [FaithfulSMul R S] [FaithfulSMul S A],\\n  Cardinal.lift.{v, u} (Algebra.trdeg R S) +\", \"doc\": \"For a non-trivial commutative ring $ R $ and algebras $ S $ and $ A $ over $ R $ with faithful scalar multiplication, the sum of the transcendence degrees $ \\\\operatorname{trdeg}(R,S) $ and $ \\\\operator\"}\nRank-at-stalk and residue degree hits concern module dimensions, not local topological dimensions of algebra fibres. trdeg_lt_aleph0 gives finiteness only, not the generic-to-local comparison. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(fiber|fibre).*dim|dim.*(fiber|fibre).*generic",
+   "results": "0 hits. . Read the returned signatures: these do not state the full generic-to-local fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the generic fibre of a finite type domain over an integral domain is at most the local dimension of every special fibre",
+   "results": "8 hits. trdeg_lt_aleph0, Ring.krullDimLE_of_isLocalization_maximal, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, IsDedekindRing.toDimensionLEOne, IsDedekindDomainInv.dimensionLEOne, Algebra.IsStandardSmooth.relativeDimension. Read the returned signatures: these do not state the full generic-to-local fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Algebra.FiniteType",
+   "results": "0 hits. . Read the returned signatures: these do not state the full generic-to-local fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective finite type homomorphism of integral domains the dimension of the generic fibre is bounded by the local topological dimension at every point of each residue field fibre",
+   "results": "8 hits. lift_trdeg_le_of_injective, trdeg_le_of_injective, Ideal.inertiaDeg_le_finrank, Algebra.QuasiFinite.finite_fiber, RingHom.EssFiniteType.residueFieldMap, Algebra.IsStandardSmoothOfRelativeDimension.out, Module.rankAtStalk_eq, IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg. Read the returned signatures: these do not state the full generic-to-local fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper semicontinuity of local fibre dimension for finite type ring maps implies specialization cannot decrease dimension from the generic point of an integral source",
+   "results": "8 hits. AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.Flat.generalizingMap. Read the returned signatures: these do not state the full generic-to-local fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-domain-fibre-dimensions",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Re-split of the valuation-domain dimension argument: old proof steps 1–2 (generic dimension and the lower bound). This split realizes its generic-fibre lower-bound subargument by Tag 00QH and the zero prime of the domain.",
+   "via": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-domain-generic-local-fibre-bound",
+  "worker": "stage1",
+  "summary": "NC expanded the first dimension inequality of 00QK over an arbitrary domain base. All ingredients already exist: finite-type generation after tensoring is written out, 00P0 and 00OT compute generic and local dimensions, 00E6 identifies the fibre points, and 00QH bounds dimensions on an open containing the zero prime. No new nodes and no statement change.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), auxiliary nearby-cycle/semistable-alteration branch recorded in blueprint.from.via: generic-to-special dimension lower bound inside the 00QK valuation-domain calculation. The current latest blueprint is read; this algebra is auxiliary DAG detail, not an explicit assertion of the blueprint text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Field-algebra dimension/trdeg is the generic dimension calculation in 00QK; the trace-formula unit has no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "The 00OT component formula gives generic pointwise equidimensionality and finiteness of local special-fibre dimensions; used only as a field-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "why": "Tag 00QH is explicitly the lower-bound input of 00QK; its algebraic neighbourhood statement is a generic tool, not a change to the trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-d7050b53f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-d7050b53f (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 proof_deps and 7 stmt_deps statements, and Stacks algebra.tex 00QH (l.31308) and 00QK (l.31380; its first inequality is the item); tags checked in tags/tags. The statement and stmt_deps are byte-identical to the Q55-created unsplit node, compared against earlier Q55 run snapshots. The item is not a re-split order, has no new nodes, and proof_deps equals the union of uses. Step 1: f.t. of D⊗c comes from the pure-tensor and generator clauses. generic-fibre-localization (hypothesis holds since A⊂D) gives F=S^{-1}D, a nonzero domain. D→F is injective. Step 2: 00P0 node with k=K gives d=dim F=trdeg, finite; the 00OT minimal-prime formula with the unique minimal prime (0) gives dim_P Spec F=d. Step 3: 00OT gives n finite for E. The fibre-prime bijection's inverse ker ψ_q is exactly the Q' in the 00QH node's definition of dim_q(D/A), so dim_q(D/A)=n. Step 4: 00QH with d:=n gives V∋q. The basic-open basis gives q∈D(g)⊆V; g≠0, so (0)∈D(g). Step 5 (elementary): κ((0))=K, so the fibre ring is F. The zero prime of F contracts to 0, so injectivity of the bijection makes it the fibre point, and d≤n; the claim is vacuous if E has no primes. No valuation, Noetherian or flatness input is used. Edge cases: field, polynomial ring, A[1/a] (empty fibres), and A=k[s,t], D=k[s,t,u]/(su−t) (d=0<n=1), all consistent. No duplicates: the zl field-case component bound, the pbc 00QH openness variants, the uniform fibre bound and the valuation-dependent parent and sibling nodes each say something different. No Mathlib match. tool_uses accepted: lem-weil-pbc-finite-type-domain-dimension-trdeg, -dimension-at-point-components and -fibre-dimension-bounded-open-upstairs are generic commutative algebra from sk-thm-p1, which is off the sk-i-curve-zero route. No SGA. Advisory: split_report.blueprint names the 'latest' snapshot rather than main-20261015."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DomainGenericLocalFibreBound",
+  "declaration": "Algebra.domain_generic_local_fibre_bound",
+  "file": "lean/Sheaf/RingTheory/DomainGenericLocalFibreBound.lean",
+  "statement": "theorem domain_generic_local_fibre_bound {A : Type u} {D : Type v} [CommRing A] [CommRing D] [IsDomain A] [IsDomain D] [Algebra A D] (hAD : Function.Injective (algebraMap A D)) (hft : (algebraMap A D).FiniteType) : IsDomain (FractionRing A ⊗[A] D) ∧ Algebra.FiniteType (FractionRing A) (FractionRing A ⊗[A] D) ∧ ∃ d : ℕ, ringKrullDim (FractionRing A ⊗[A] D) = (d : WithBot ℕ∞) ∧ Algebra.trdeg (FractionRing A) (FractionRing (FractionRing A ⊗[A] D)) = (d : Cardinal) ∧ (∀ P : PrimeSpectrum (FractionRing A ⊗[A] D), topologicalKrullDimAt P = (d : WithBot ℕ∞)) ∧ ∀ p : PrimeSpectrum A, Algebra.FiniteType p.asIdeal.ResidueField (p.asIdeal.Fiber D) ∧ ∀ Q : PrimeSpectrum (p.asIdeal.Fiber D), ∃ n : ℕ, topologicalKrullDimAt Q = (n : WithBot ℕ∞) ∧ d ≤ n",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce13e2951",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 00QK first inequality (via 00QH) clause by clause: domains A,D with injective algebraMap and RingHom.FiniteType; F=FractionRing A ⊗[A] D (canonical comm swap documented); IsDomain+FiniteType as conclusions; ∃ d:ℕ chosen before p,Q with ringKrullDim=d, trdeg K Frac F=d, topologicalKrullDimAt P=d ∀P; ∀p FiniteType κ(p) (p.asIdeal.Fiber D) and ∀Q ∃n:ℕ topologicalKrullDimAt Q=n ∧ d≤n. Dep declarations are the recorded ones (topologicalKrullDimAt=iInf over open nbhds; Ideal.Fiber=κ(p)⊗D). Universes u,v independent, autoImplicit false. lean.statement verbatim in file; node differs from live only in lean field. Edge cases: empty fibres vacuous, field base, strict jump d=0<n=1, non-closed Q. No duplicate found in project/Mathlib. Docstrings carry source, blueprint tag and 5 proof steps; proof only sorry; report has Worker report and Second reading sections (second reading is a self-reread, advisory). Not recompiled per instructions; no files changed."
+ }
+}

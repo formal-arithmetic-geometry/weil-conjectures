@@ -17,6 +17,7 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
 import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # The rank-one derived difference model for countable ind-unipotent modules
 

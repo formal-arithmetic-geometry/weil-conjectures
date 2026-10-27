@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-strict-coordinates-existence",
+ "kind": "statement",
+ "title": "Constant-section coordinates and operations before three-index coherence",
+ "statement": "For every prime ell and finite extension E of Q_ell, there exist Base b and Operations o on the actual ell-power strict quotient towers [def-sp-tower-shriek-data]. For every scheme T, there is SemilinearDerivedSectionsData s on its actual coefficient sheaves and adjacent quotient maps whose systems field equals b.calculus T [lem-coef-semilinear-derived-sections]. This asserts coordinate and operation existence only; it does not assert scalar/tensor composition or coefficient-mate composition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply strictBaseCoordinates. The ramification equation, quotient finiteness, additive identity-on-sections rebundling and the retained semilinear derived-sections calculi are constructed there; retain the same Base b and witnesses s.",
+   "uses": [
+    "lem-sp-strict-base-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strictGeometricCoordinates to b to obtain the geometric family and its ordinary inverse-image compositor, with the evaluation equation for its exact termwise localization. Define Operations.comp to be precisely that localization; comp_termwise is reflexivity.",
+   "uses": [
+    "lem-sp-strict-geometric-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every open immersion apply strictOpenTensorCoordinates to that particular geometry. Retain its Open record. Form the specified tensor-unit inverse-pullback arrow and transpose through its actual derived open adjunction; this arrow is invertible. Define openTensor as the inverse of asIso of that transpose. The homEquiv apply_symm_apply identity proves openTensor_mate. Assemble Operations and retain the base calculus witnesses.",
+   "uses": [
+    "lem-sp-strict-open-tensor-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-strict-base-coordinates",
+  "lem-sp-strict-geometric-coordinates",
+  "lem-sp-strict-open-tensor-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent D8",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2): explicit base construction; geometric transport and open-support steps isolated; operations assembled by exact localization and the specified invertible adjunction transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict quotient coefficient towers ringed sequence site geometric operations normalized derived inverse image direct image",
+   "results": "LeanFinder returned scheme-normalization declarations and Scheme.Modules.pseudofunctor_mapComp_inv_tau_r, not these actual strict quotient systems.",
+   "date": "2026-10-27",
+   "verdict": "No statement match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "module sheaves on sequence site strict varying ring systems derived operations",
+   "results": "LeanSearch returned SheafOfModules.mk, SheafOfModules.hom_ext and basic module-sheaf declarations. They provide rebundling tools but not simultaneous normalized tower operations.",
+   "date": "2026-10-27",
+   "verdict": "No statement match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor.*[Cc]omposition|coefficientMate.*[Cc]omposition; coefficientPullback.*compos; strict.*coordinates",
+   "results": "No matching theorem in Mathlib or the adopted source library. SemilinearDerivedCalculus and SemilinearGeometryDerived expose the needed representative/transpose laws, but not these composition assertions. Whole-blueprint searches for coefficient scalar tensor composition, coefficient pullback composition, and strict quotient coordinates returned zero matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "New step needed; existing definitions and actual maps are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictSystemGeometricRealization",
+  "date": "2026-10-27",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps",
+   "via": [
+    "lem-sp-strict-system-geometric-realization",
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictCoordinatesExistence",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictCoordinatesExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictCoordinatesExistence",
+  "statement": "theorem strictCoordinatesExistence :\n    ∃ b : Base l E, ∃ _o : Operations l E b,\n      ∀ T : Scheme.{u},\n        ∃ s : SemilinearSections.SemilinearDerivedSectionsData.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology T) (B l E T) (tau l E T),\n          s.systems = b.calculus T",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261027T034819-L-3689166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T050549-L-238104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

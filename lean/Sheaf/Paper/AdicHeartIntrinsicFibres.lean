@@ -8,36 +8,9 @@ module
 public import Sheaf.Paper.AdicHeartPullbackFibres
 public import Sheaf.Paper.CompletedCoefficientPresentationTransport
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Sheaf.CategoryTheory.SemilinearScalarLocalization
-import Sheaf.CategoryTheory.StageSystemFunctorDescent
-import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
-import Sheaf.Paper.CoefficientHeartClosure
-import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.Paper.CompletedPullbackTriangles
-import Sheaf.Paper.ContinuousAffineEtaleLattice
-import Sheaf.Paper.ContinuousRationalDerivedRealization
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.GaloisLisseRepresentations
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.IntegralPullbackCompletedComparison
-import Sheaf.Paper.IntegralTStructure
-import Sheaf.Paper.IntrinsicQbarCategory
-import Sheaf.Paper.LisseCompletedSystemComparison
-import Sheaf.Paper.LisseIntegralSmallCoefficients
-import Sheaf.Paper.LisseTensorScalarExtension
-import Sheaf.Paper.LocalizedTStructure
-import Sheaf.Paper.PbcDescentFunctors
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.AdicFiniteFiberCocone
+import WeilConjectures.CategoryTheory.StageSystem.Const
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
-import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Adic coefficient fibres in the intrinsic coefficient presentation
 
@@ -288,7 +261,19 @@ comparison. Its finite-stage comparisons are exactly those displayed here. -/
 theorem sfAdicCommonFiber_exists :
     ∃ F : generalAlgebraicallyClosedConstructibleCategory l Qbar W ⥤
       ModuleCat.{max (u + 1) v} Qbar, SfAdicCommonFiberSpec l W x Qbar F := by
-  sorry
+  classical
+  let G := fun L : Padic.FiniteCoefficientFields l Qbar ↦
+    sfAdicRationalFiber l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W x
+  have hG (L : Padic.FiniteCoefficientFields l Qbar) :=
+    (sfAdicRationalFiber_existsUnique l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W x).exists.choose_spec
+  obtain ⟨β, hβ⟩ := sfAdicFiniteFiberCocone l W x Qbar G hG
+  let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l Qbar W
+  let Φ := fun L : Padic.FiniteCoefficientFields l Qbar ↦ G L ⋙
+    ModuleCat.extendScalars (sfAdicCoefficientEmbedding.{u} l Qbar L)
+  change ∃ F : S.PairCategory ⥤ ModuleCat.{max (u + 1) v} Qbar,
+    ∀ L, Nonempty (S.ι L ⋙ F ≅ Φ L)
+  exact ⟨S.descFunctor Φ β hβ, fun L ↦ ⟨S.ιCompDescFunctorIso Φ β hβ L⟩⟩
 
 
 variable {k : Type u} [Field k] [Fact (IsUnit (l : k))]

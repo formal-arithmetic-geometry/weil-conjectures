@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-semilinear-scalar-ordinary-alpha-normalization",
+ "kind": "lemma",
+ "title": "Canonical normalization of ordinary scalar alpha",
+ "statement": "For any normalized OrdinaryScalarComparison D over a compatible coefficient system, the ordinary strict-tower transformation D.alpha of every commutative proper/quasi-compact-open square equals the canonical towerAlpha, the termwise image of singleAlpha. No cartesian hypothesis is imposed.",
+ "stmt_deps": [
+  "lem-sf-semilinear-scalar-ordinary-comparison",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03DI; intrinsic proper/open alpha word, Tag 0F7B"
+ },
+ "proof": [
+  {
+   "text": "Identify cartesian beta by injectivity of its open-adjunction transpose. Identify the clopen-to-direct map as the transpose of the inverse open unit, then cancel its isomorphism to identify pi. Whiskering the unit-normalized open compositor gives the single-level compositor; equality transport is checked by substitution. Substitute these four identities into alpha_eq and use functoriality of whiskering to identify the resulting five-factor word with termwise singleAlpha, which defines towerAlpha. This comparison is made on ordinary systems before localization.",
+   "uses": [
+    "lem-sf-semilinear-scalar-ordinary-comparison",
+    "def-cbc-strict-tower-ordinary-proper-open-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-semilinear-scalar-ordinary-comparison",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03DI; normalization step of lem-sf-semilinear-scalar-derived-comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary alpha natural transformation of a normalized scalar restriction package equals the canonical termwise proper open alpha on strict towers",
+   "results": "Eight hits concerning individual module scalar restriction maps and ModuleCat restrictScalars compositors; none states this proper/open normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "Eight hits in Mathlib.CategoryTheory.Adjunction.CompositionIso: the compositor and its hom, inverse component and conjugate formulas. These support the compositor normalization but do not state the package-alpha equality.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "towerAlpha|scalarOrdinaryAlpha",
+   "results": "No Mathlib hits. Local library search finds towerAlpha and the alpha_eq package field, but no theorem identifying them.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarDerivedComparison",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-semilinear-scalar-derived-comparison",
+   "place": "Proof step 6: identify ordinary alpha with the canonical tower word before localization",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearScalarOrdinaryAlphaNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearScalarOrdinaryAlphaNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.scalarOrdinaryAlphaNormalization",
+  "statement": "theorem scalarOrdinaryAlphaNormalization (D : OrdinaryScalarComparison R φ B ψ)\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    D.alpha k r p i h = StrictTower.towerAlpha B k r p i h",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T202735-L-2747266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T202735-L-2747266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

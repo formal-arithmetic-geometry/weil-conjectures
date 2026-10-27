@@ -16,23 +16,14 @@ public import Sheaf.Paper.CondensedModuleDerivedPushpull
 public import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 public import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.AlgebraicGeometry.WContractibleAffineCover
-import Sheaf.RingTheory.IndEtaleStability
-import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
-import Sheaf.RingTheory.ProEtale.HenselianClosedLift
-import Sheaf.AlgebraicGeometry.CondensedHenselianLisseRigidity
-import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
-import Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits
-import Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact
-import Sheaf.Topology.WLocalComponents
 import Sheaf.Paper.CoefficientHeartStratificationDefs
 import Sheaf.Topology.ContinuousMapCondensedRing
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.Paper.IntegralLisseClosedBaseChange
+import Sheaf.Paper.ParameterRootIntegralNilFibre
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.RingTheory.Spectrum.Prime.RingHom
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 
 /-! # Coordinate faces of the unpunctured compatible-root tower
 
@@ -48,6 +39,7 @@ canonical pullback comparison, hence the adjunct of the pulled-back counit.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
 
 universe u
 
@@ -88,7 +80,42 @@ the image of t_j with x_(j,1), a generator of the displayed root ideal. The span
 universal property gives the asserted containment. This includes J empty. -/
 theorem baseIdeal_le (J : Finset (Fin r)) :
     baseIdeal t J ≤ (rootIdeal p t J).comap (algebraMap R (tameRootAlgebra p t)) := by
-  sorry
+  apply Ideal.span_le.mpr
+  rintro a ⟨j, hj, rfl⟩
+  let n : TameRootOrder p := ⟨1, Nat.zero_lt_one, Nat.coprime_one_left p⟩
+  have heq : Ideal.Quotient.mk (Ideal.span (tameRootRelations p t))
+      (MvPolynomial.X (j, n)) = algebraMap R (tameRootAlgebra p t) (t j) := by
+    apply sub_eq_zero.mp
+    change Ideal.Quotient.mk (Ideal.span (tameRootRelations p t)) _ -
+      Ideal.Quotient.mk (Ideal.span (tameRootRelations p t)) (MvPolynomial.C (t j)) = 0
+    rw [← map_sub]
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    apply Ideal.subset_span
+    exact Or.inl ⟨j, n, by simp [n]⟩
+  change algebraMap R (tameRootAlgebra p t) (t j) ∈ rootIdeal p t J
+  rw [← heq]
+  exact Ideal.subset_span ⟨j, hj, n, rfl⟩
+
+private theorem root_power (j : Fin r) (n : TameRootOrder p) :
+    (Ideal.Quotient.mk (Ideal.span (tameRootRelations p t))
+      (MvPolynomial.X (j, n))) ^ n.val = algebraMap R (tameRootAlgebra p t) (t j) := by
+  apply sub_eq_zero.mp
+  change (Ideal.Quotient.mk (Ideal.span (tameRootRelations p t))
+    (MvPolynomial.X (j, n))) ^ n.val -
+      Ideal.Quotient.mk (Ideal.span (tameRootRelations p t)) (MvPolynomial.C (t j)) = 0
+  rw [← map_pow, ← map_sub]
+  apply Ideal.Quotient.eq_zero_iff_mem.mpr
+  exact Ideal.subset_span (Or.inl ⟨j, n, rfl⟩)
+
+private theorem rootIdeal_le_prime (J : Finset (Fin r))
+    (x : PrimeSpectrum (tameRootAlgebra p t))
+    (hx : baseIdeal t J ≤ x.asIdeal.comap (algebraMap R (tameRootAlgebra p t))) :
+    rootIdeal p t J ≤ x.asIdeal := by
+  apply Ideal.span_le.mpr
+  rintro z ⟨j, hj, n, rfl⟩
+  apply x.isPrime.mem_of_pow_mem n.val
+  rw [root_power]
+  exact hx (Ideal.subset_span ⟨j, hj, rfl⟩)
 
 /-- The structural projection of the coordinate face, induced by the actual quotient map.
 Source: direct-image proof (3), q_J (blueprint: lem-sfb-root-tower-coordinate-face). -/
@@ -103,6 +130,22 @@ Source: direct-image proof (3), g_J (blueprint: lem-sfb-root-tower-coordinate-fa
 def baseInclusion (J : Finset (Fin r)) : Spec (.of (R ⧸ baseIdeal t J)) ⟶ Spec (.of R) :=
   Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (baseIdeal t J)))
 
+private theorem inclusion_range (J : Finset (Fin r)) :
+    Set.range (inclusion p t J) =
+      (Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p t)))) ⁻¹'
+        Set.range (baseInclusion t J) := by
+  change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (rootIdeal p t J))) =
+    (PrimeSpectrum.comap (algebraMap R (tameRootAlgebra p t))) ⁻¹'
+      Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (baseIdeal t J)))
+  rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective,
+    range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective,
+    Ideal.mk_ker, Ideal.mk_ker]
+  ext x
+  change rootIdeal p t J ≤ x.asIdeal ↔
+    baseIdeal t J ≤ x.asIdeal.comap (algebraMap R (tameRootAlgebra p t))
+  exact ⟨fun hx ↦ (baseIdeal_le p t J).trans (Ideal.comap_mono hx),
+    rootIdeal_le_prime p t J x⟩
+
 /-- The profinite test scheme, using the recorded functor X[-].
 Source: direct-image proof (3), T[P] (blueprint: lem-sfb-root-tower-coordinate-face). -/
 abbrev test (X : Scheme.{u}) (P : Profinite.{u}) := (profiniteToProEtOf X).obj P
@@ -114,6 +157,48 @@ def testMap {X Y : Scheme.{u}} (f : X ⟶ Y) (P : Profinite.{u}) :
     (test X P).left ⟶ (test Y P).left :=
   pullback.lift (pullback.fst _ _) ((test X P).hom ≫ f)
     (specULiftZIsTerminal.hom_ext _ _)
+
+private theorem testMap_snd {X Y : Scheme.{u}} (f : X ⟶ Y) (P : Profinite.{u}) :
+    testMap f P ≫ (test Y P).hom = (test X P).hom ≫ f := by
+  exact pullback.lift_snd _ _ _
+
+private theorem testMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (P : Profinite.{u}) : testMap f P ≫ testMap g P = testMap (f ≫ g) P := by
+  apply pullback.hom_ext
+  · simp [testMap, Category.assoc]
+  · change (testMap f P ≫ testMap g P) ≫ (test Z P).hom =
+      testMap (f ≫ g) P ≫ (test Z P).hom
+    rw [Category.assoc, testMap_snd, ← Category.assoc, testMap_snd, testMap_snd,
+      Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem testMap_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (P : Profinite.{u}) : IsPullback (testMap f P) (test X P).hom (test Y P).hom f := by
+  have h : IsPullback
+      (pullback.fst (profiniteToProEt.obj P).hom (toSpecZ X))
+      (pullback.snd (profiniteToProEt.obj P).hom (toSpecZ X))
+      (profiniteToProEt.obj P).hom (f ≫ toSpecZ Y) := by
+    rw [comp_toSpecZ]
+    exact IsPullback.of_hasPullback _ _
+  have hf : testMap f P ≫ pullback.fst (profiniteToProEt.obj P).hom (toSpecZ Y) =
+      pullback.fst (profiniteToProEt.obj P).hom (toSpecZ X) := pullback.lift_fst _ _ _
+  rw [← hf] at h
+  have hh := h.of_right (testMap_snd f P)
+    (IsPullback.of_hasPullback (profiniteToProEt.obj P).hom (toSpecZ Y))
+  exact hh
+
+private theorem testMap_closed {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsClosedImmersion f] (P : Profinite.{u}) : IsClosedImmersion (testMap f P) :=
+  MorphismProperty.of_isPullback (testMap_pullback f P).flip
+    (inferInstance : IsClosedImmersion f)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem testMap_range {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (P : Profinite.{u}) :
+    Set.range (testMap f P) = (test Y P).hom ⁻¹' Set.range f := by
+  have hh := Scheme.image_preimage_eq_of_isPullback (testMap_pullback f P).flip
+    (Set.univ : Set X)
+  simpa only [Set.preimage_univ, Set.image_univ] using! hh
 
 /-- The full test-tower structural projection.
 Source: direct-image proof (3), q_P (blueprint: lem-sfb-root-tower-coordinate-face). -/
@@ -137,7 +222,13 @@ profinite fibre product commutes with testMap by the pullback projection equatio
 theorem square (J : Finset (Fin r)) (P : Profinite.{u}) :
     testMap (inclusion p t J) P ≫ towerProjection p t P =
       faceProjection p t J P ≫ baseInclusion t J := by
-  sorry
+  have h : inclusion p t J ≫
+      Spec.map (CommRingCat.ofHom (algebraMap R (tameRootAlgebra p t))) =
+      projection p t J ≫ baseInclusion t J := by
+    simp only [inclusion, projection, baseInclusion, ← Spec.map_comp]
+    congr 1
+  dsimp only [towerProjection, faceProjection]
+  rw [← Category.assoc, testMap_snd, Category.assoc, h, Category.assoc]
 
 /-- Nested faces enlarge both displayed ideals.
 Source: direct-image proof (3), successive coordinate restriction
@@ -146,7 +237,13 @@ Proof: every parameter generator, respectively root generator, indexed by J is a
 indexed by J' when J is contained in J'. Apply monotonicity of ideal span. -/
 theorem ideals_mono {J J' : Finset (Fin r)} (h : J ⊆ J') :
     baseIdeal t J ≤ baseIdeal t J' ∧ rootIdeal p t J ≤ rootIdeal p t J' := by
-  sorry
+  constructor
+  · apply Ideal.span_mono
+    rintro a ⟨j, hj, rfl⟩
+    exact ⟨j, h hj, rfl⟩
+  · apply Ideal.span_mono
+    rintro a ⟨j, hj, n, rfl⟩
+    exact ⟨j, h hj, n, rfl⟩
 
 /-- Successive restriction between base coordinate faces is the quotient factor map.
 Source: direct-image proof (3), nested g_J
@@ -175,7 +272,24 @@ theorem nested_square {J J' : Finset (Fin r)} (h : J ⊆ J') (P : Profinite.{u})
       nestedBase p t h ≫ baseInclusion t J = baseInclusion t J' ∧
       testMap (nestedFace p t h) P ≫ testMap (inclusion p t J) P =
         testMap (inclusion p t J') P := by
-  sorry
+  have hb : nestedBase p t h ≫ baseInclusion t J = baseInclusion t J' := by
+    simp only [nestedBase, baseInclusion, ← Spec.map_comp]
+    congr 1
+  have he : nestedFace p t h ≫ inclusion p t J = inclusion p t J' := by
+    simp only [nestedFace, inclusion, ← Spec.map_comp]
+    congr 1
+  have hs : nestedFace p t h ≫ projection p t J =
+      projection p t J' ≫ nestedBase p t h := by
+    simp only [nestedFace, projection, nestedBase, ← Spec.map_comp]
+    congr 1
+    apply CommRingCat.hom_ext
+    apply Ideal.Quotient.ringHom_ext
+    ext a
+    rfl
+  refine ⟨?_, hb, ?_⟩
+  · dsimp only [faceProjection]
+    rw [← Category.assoc, testMap_snd, Category.assoc, hs, Category.assoc]
+  · rw [testMap_comp, he]
 
 /-- Profinite test maps commute with the face square on the entire test schemes.
 Source: direct-image proof (3), naturality in P and profinite families
@@ -193,7 +307,12 @@ theorem profinite_square (J : Finset (Fin r)) {P' P : Profinite.{u}} (f : P' ⟶
           testMap (inclusion p t J) P =
         testMap (inclusion p t J) P' ≫
           ((profiniteToProEtOf (Spec (.of (tameRootAlgebra p t)))).map f).left := by
-  sorry
+  constructor
+  · simp [towerProjection, test, profiniteToProEtOf]
+  constructor
+  · simp [faceProjection, test, profiniteToProEtOf]
+  · apply pullback.hom_ext <;>
+      simp [testMap, test, profiniteToProEtOf, Category.assoc]
 
 section Coefficients
 
@@ -388,7 +507,7 @@ theorem exchange_naturality {X' X Y' Y : Scheme.{u}}
     (h : e ≫ q = q' ≫ g) {K L : DerivedCategory (Modules Λ X)} (f : K ⟶ L) :
     (upper Λ g).map ((lower Λ q).map f) ≫ (exchange Λ e q' q g h).app L =
       (exchange Λ e q' q g h).app K ≫ (lower Λ q').map ((upper Λ e).map f) := by
-  sorry
+  exact (exchange Λ e q' q g h).naturality f
 
 /-- The comparison on a cartesian pro-etale base change is the localization isomorphism.
 It is the same mate used in beta, so exchange_cube gives compatibility with beta on
@@ -430,7 +549,38 @@ theorem fibreInclusion_properties (J : Finset (Fin r)) (P : Profinite.{u}) :
       IsClosedImmersion (testMap (inclusion p t J) P) ∧
       IsClosedImmersion (fibreInclusion p t J P) ∧
       Surjective (fibreInclusion p t J P) := by
-  sorry
+  have hb : IsClosedImmersion (baseInclusion t J) := by
+    exact IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have hi : IsClosedImmersion (inclusion p t J) := by
+    exact IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have he := testMap_closed (inclusion p t J) P
+  have hf : IsClosedImmersion (pullback.fst (towerProjection p t P)
+      (baseInclusion t J)) := by infer_instance
+  have hcomp : fibreInclusion p t J P ≫
+      pullback.fst (towerProjection p t P) (baseInclusion t J) =
+        testMap (inclusion p t J) P := pullback.lift_fst _ _ _
+  have hc : IsClosedImmersion (fibreInclusion p t J P ≫
+      pullback.fst (towerProjection p t P) (baseInclusion t J)) := hcomp.symm ▸ he
+  refine ⟨hb, he, IsClosedImmersion.of_comp_isClosedImmersion
+    (fibreInclusion p t J P) (pullback.fst _ _), ⟨?_⟩⟩
+  intro z
+  have hz : (pullback.fst (towerProjection p t P) (baseInclusion t J)) z ∈
+      Set.range (testMap (inclusion p t J) P) := by
+    rw [testMap_range, inclusion_range]
+    change towerProjection p t P
+        ((pullback.fst (towerProjection p t P) (baseInclusion t J)) z) ∈
+      Set.range (baseInclusion t J)
+    exact ⟨(pullback.snd (towerProjection p t P) (baseInclusion t J)) z,
+      congrArg (fun f ↦ f z) (pullback.condition (f := towerProjection p t P)
+        (g := baseInclusion t J)).symm⟩
+  obtain ⟨w, hw⟩ := hz
+  refine ⟨w, (Scheme.Hom.isClosedEmbedding
+    (pullback.fst (towerProjection p t P) (baseInclusion t J))).injective ?_⟩
+  change (fibreInclusion p t J P ≫
+    pullback.fst (towerProjection p t P) (baseInclusion t J)) w = _
+  rw [hcomp]
+  exact hw
+
 
 /-- Pullback of a module to the actual profinite test scheme, placed in degree zero.
 Source: direct-image proof (3), N_P[0]

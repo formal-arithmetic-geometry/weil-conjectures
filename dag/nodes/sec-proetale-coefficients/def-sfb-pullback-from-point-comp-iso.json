@@ -206,7 +206,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-8b7ae9c9f (reviewer sub-agent of L); spot-checked: Read the full item, all three steps, cited statements, current blueprint route and master construction. Comparison direction, abelian coefficient category, naturality and inverse equations agree; identity, empty-scheme and zero-object cases pass. No new nodes, cycles, missing mathematical citations or target weakening. Accepted tool uses are documented in review.md. The report incorrectly says unit metadata is absent; the snapshot contains it, with no effect on this split."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.upperStarFromPointComp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      504,
+      511
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": true,
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
@@ -224,5 +249,21 @@
   "group": "N8",
   "result": "pass",
   "note": "Existing-declaration delivery: node lean -> AlgebraicGeometry.ProEtale.upperStarFromPointComp (side ModuleObject/Basic.lean:344-348), statement field verbatim. Body = associator ≪≫ isoWhiskerLeft pointUpperStar ((upperStarComp Ab f (toSpecZ Y)).symm ≪≫ eqToIso (congrArg upperStar (comp_toSpecZ f))), exactly the node's composite and direction f^*∘p_Y^* ≅ p_X^*, built from the recorded dependency declarations upperStar/upperStarFromPoint/upperStarComp and comp_toSpecZ (sk-def record sfbPullbackFromPoint is an abbrev of upperStarFromPoint). Arbitrary f : X ⟶ Y in Scheme.{u}, Ab.{u+1}, no extra hypotheses or universe restriction; identity/empty/zero/non-finite cases covered. nt_compile --json probe: #check/#print match, rfl against the node composite accepted, axioms propext/Classical.choice/Quot.sound only (no sorryAx). The commit touches only the node lean record and the report; no duplicate declaration. The second reading holds the standard post-10-17 text. Cosmetic only: the report names the sk-def umbrella declaration 'pullback_from_point' instead of sfbPullbackFromPoint."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes, and let $p_X^*$, $p_Y^*$ be as\nin [def-sfb-upper-star-from-point]. The natural isomorphism\n$$\nf^*\\circ p_Y^*\\ \\cong\\ p_X^*\n$$\nof functors $\\Sh(*_{\\mathrm{proét}},\\Ab)\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ is\ndefined as the composite\n$$\nf^*\\circ\\pi_Y^*\\circ p^*\\ \\cong\\ (\\pi_Y\\circ f)^*\\circ p^*=\\pi_X^*\\circ p^*.\n$$\nThe first step is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of\n[def-sfb-finite-upper-star-comp], whiskered by $p^*$. The equality\nholds because $\\pi_Y\\circ f=\\pi_X$, as $\\Spec\\Z$ is terminal.",
+  "proof": [
+   {
+    "text": "Both steps are natural isomorphisms, and so is their composite.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

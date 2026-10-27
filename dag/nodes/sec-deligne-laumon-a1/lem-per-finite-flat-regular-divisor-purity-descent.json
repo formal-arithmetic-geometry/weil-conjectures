@@ -24,85 +24,219 @@
  ],
  "proof": [
   {
-   "text": "Apply the strict-local complement criterion [lem-per-divisor-purity-strict-local-criterion]. To prove purity of $(X,D)$, fix a geometric point $\\bar x\\to D$, pass to the strict henselization $S=X_{(\\bar x)}$, and write $U=S\\setminus(D\\times_XS)$. The strict-localization Cartesian identification for the closed immersion [lem-trf-closed-immersion-strict-localization-cartesian] identifies this divisor with the pullback of $D$ and reduces the desired assertion to $H^q(U_{\\mathrm{et}},A)=0$ for $q\\ge2$.",
+   "text": "We compute at arbitrary geometric points of the two given regular pairs $(X,D)$ and $(Y,D')$. Write either pair as $(W,Z)$, choose $\\bar w\\to Z$, and put $S=W_{(\\bar w)}=\\operatorname{Spec}R$, $E=Z\\times_WS$, $U=S\\setminus E$. By [lem-exc-affine-strict-local-ring-comparison], $R$ is the algebraic strict henselization of $\\mathcal O_{W,w}$. Thus it is strictly henselian, Noetherian and regular by [lem-sc-strict-henselization-noetherian, lem-sc-strict-henselization-regular]. Choose a divisor equation $f$ on an affine chart containing $w$, and let $t\\in R$ be its image. The structural map is flat by [lem-sbc-affine-strict-henselization-structural-flat]. Applying the injective-tensor definition [def-weil-pbc-flat-ring-map] to multiplication by the nonzerodivisor $f$ shows that multiplication by $t$ on $R$ is injective. The tensor identifications are $R\\otimes_BB=R$ on this chart $\\operatorname{Spec}B$. The closed-localization comparison [lem-trf-closed-immersion-strict-localization-cartesian] identifies $R/(t)$ with the strict-local ring of $Z$; the same affine comparison and regularity lemmas, applied to $\\mathcal O_{Z,w}$, make this quotient regular. We have $t\\in\\mathfrak m_R$, $\\ell\\in R^\\times$, and $U=\\operatorname{Spec}R[1/t]$.",
    "uses": [
-    "lem-per-divisor-purity-strict-local-criterion",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "def-weil-pbc-flat-ring-map",
     "lem-trf-closed-immersion-strict-localization-cartesian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Proposition 3.4.2 and Proposition 3.4.3, printed pp.245–246."
+    "place": "XVI Proposition 3.4.3, strict localization; Stacks 06LN and 05WS. The nonzerodivisor argument applies the injective-tensor definition, not the excluded lci calculus."
    }
   },
   {
-   "text": "Put $Y_S=Y\\times_XS$. By [lem-trf-finite-base-strict-localization], $Y_S$ is a finite disjoint union of the strict localizations $Y_{(\\bar y_a)}$ at geometric points above $\\bar x$. These are regular Noetherian by [lem-sc-strict-henselization-regular, lem-sc-strict-henselization-noetherian]. The closed-immersion comparison [lem-trf-closed-immersion-strict-localization-cartesian] identifies $D'\\times_Y Y_{(\\bar y_a)}$ with $D'_{(\\bar y_a)}$. The closed subsets defined by a Cartier ideal and its radical are equal; thus $V=Y_S\\times_SU$ is the disjoint union of the complements of these divisors. The map $g:V\\to U$ remains finite locally free of rank $d$: on affine charts its algebra is $B\\otimes_R R'$ by [lem-weil-pbc-fibre-product-affine-spectra], with a finite free rank-$d$ module locally by [lem-pc-flf-properties]; tensoring its local basis gives a rank-$d$ basis after every base change. The rank agreement is also [lem-weil-pbc-finite-flat-rank-iso](2). The divisor's reduction is used only to identify its underlying closed set, never to assert it commutes with arbitrary base change.",
+   "text": "Both $R$ and $R/(t)$ are domains by [lem-sc-regular-local-domain]; hence $(t)$ is a proper prime ideal and $t\\ne0$. Put $B=R[1/t]$. The fraction description [def-weil-ring-localization-away] makes $R\\to B$ injective and $B$ a nonzero domain. Its zero prime belongs to every nonempty basic open, so $U$ is connected and nonempty. For $v=x/t^a\\in B^\\times$ write $v^{-1}=y/t^b$; then $xy=t^{a+b}$. Induction on $N$ proves that $xy=t^N$ implies $x=ut^c$ for a unit $u$ and $0\\le c\\le N$: for $N=0$, $xy=1$; for $N>0$, primality of $(t)$ puts $t$ in one factor, cancel it and apply induction. Thus $v=ut^m$, $m=c-a\\in\\mathbf Z$. If $ut^m=u't^{m'}$ with $m>m'$, then $u'=ut^{m-m'}\\in(t)$, a contradiction; exchanging the roles treats $m<m'$. Equality of exponents gives $u=u'$. Therefore $B^\\times=R^\\times\\times t^{\\mathbf Z}$ as a group, and multiplication adds the displayed exponents.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, low-degree algebra; Stacks 00NP (algebra-lemma-regular-domain). The unit calculation is a direct induction using primality."
+   }
+  },
+  {
+   "text": "The group $R^\\times$ is $\\ell$-divisible. For $u\\in R^\\times$, $X^\\ell-u$ reduces to a separable polynomial over the separably closed residue field: its derivative is nonzero at every root because $u$ and $\\ell$ are units. It has a simple nonzero residue root; [lem-weil-pbc-henselian-local-root-lifting] lifts it to $a\\in R$ with $a^\\ell=u$. The lift is a unit with inverse $a^{\\ell-1}u^{-1}$. Also [lem-sbc-strict-local-roots-of-unity] supplies a generator $\\zeta\\in\\mu_\\ell(R)$, whose distinct powers have unit differences. Successively dividing by monic factors and cancelling these unit differences proves $X^\\ell-1=\\prod_{a=0}^{\\ell-1}(X-\\zeta^a)$. On any etale test scheme $T\\to S$, a root $y$ equals exactly one $\\zeta^a$ locally: the opens where every $y-\\zeta^b$, $b\\ne a$, is a unit cover $T$, are disjoint, and the product identity forces $y=\\zeta^a$ there. Conversely such locally constant choices glue. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], $a\\mapsto\\zeta^a$ identifies $A_S$ with $\\mu_{\\ell,S}$, and likewise on $U$ and every further pullback. Since $U$ is connected, its locally constant $A$-valued maps are constant. Thus $H^0(U,A)=A$ and the restriction $\\mu_\\ell(R)\\to H^0(U,\\mu_\\ell)$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, degree zero and roots-of-unity trivialization; Stacks 04GF/04GG, 03P5 and section-kummer."
+   }
+  },
+  {
+   "text": "Every line bundle $L$ on $U=\\operatorname{Spec}B$ is trivial. It is quasi-coherent and Zariski locally free of rank one [def-sc-invertible-module]. Put $P=\\Gamma(U,L)$; [lem-weil-pbc-affine-tilde-gamma-adjunction] gives $\\widetilde P\\simeq L$. Refine local trivializations to basic opens $D(b_i)$. Affine quasi-compactness [lem-weil-pbc-affine-scheme-qcqs] gives a finite subcover; the $b_i$ generate the unit ideal, since a maximal ideal containing them all would be an uncovered point. By [lem-weil-pbc-spec-module-tilde-sections], $P_{b_i}\\simeq B_{b_i}$. The finite basic-open criterion [lem-sc-affine-standard-cover-finite-projective] makes $P$ finite projective. At each prime one $b_i$ is invertible, so $P$ has local rank one everywhere. The algebraic result [lem-trf-regular-local-pic-zero], applied to the regular local ring $R$ and element $t$, now gives $P\\simeq B$. Applying tilde and [lem-weil-pbc-spec-tilde-free-module] in rank one gives $L\\simeq\\mathcal O_U$. Thus $\\operatorname{Pic}(U)=0$, without assuming $B$ is local.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-affine-standard-cover-finite-projective",
+    "lem-trf-regular-local-pic-zero",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, degree-one input reconstructed from Stacks 0AFZ (more-algebra-lemma-regular-local-Pic-zero), 01HV/01IA and 00NX."
+   }
+  },
+  {
+   "text": "Hilbert 90 on arbitrary schemes [thm-sc-hilbert-90] identifies $H^1(U,\\mathbf G_m)$ with $\\operatorname{Pic}(U)$, hence it is zero. Use the Kummer sequence [lem-amb-kummer-any-base] on $U$ (where $\\ell$ is a unit). Clause 2 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder], specialized to $\\mathrm{id}_U$, gives the exact segment\n$$B^\\times\\xrightarrow{(-)^\\ell}B^\\times\\xrightarrow\\delta H^1(U,\\mu_\\ell)\\to0.$$\nBy Steps 2 and 3, its cokernel is $\\mathbf Z/\\ell\\mathbf Z$, with the exponent of $t$ modulo $\\ell$ as coordinate: the $R^\\times$ factor has zero cokernel. Thus $\\kappa(t)=\\delta(t)$ freely generates the $A$-module $H^1(U,A(1))$. Explicitly $ut^m$ maps to $m\\kappa(t)$, because $u$ is an $\\ell$-th power. Together with Step 3 this supplies both low degrees, with the actual Kummer generator.",
+   "uses": [
+    "thm-sc-hilbert-90",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, low-degree computation; Stacks 03P8 (theorem-hilbert-90) and 03PL (lemma-kummer-sequence)."
+   }
+  },
+  {
+   "text": "Return to the original pair $(W,Z)$ and let $j:W-Z\\hookrightarrow W$, $i:Z\\hookrightarrow W$. Apply [lem-exc-closed-support-triangle] to $A_W(1)$, then the cohomology exact sequence [lem-sf-derived-homology-long-exact] and exact geometric stalks [prop-weil-pbc-geometric-stalks-exact]. The closed stalk of the first term is the stalk on $Z$ by [lemma-openclosed-stalk-lowerstar]. The immersion $j$ is qcqs: on each affine divisor chart its inverse image is the affine principal open $D(f)$; these charts give the local quasi-compactness and quasi-separatedness conditions. Thus [prop-weil-pbc-strict-henselization-stalk-formula] identifies the third term in degree $q$ with $H^q(U,A(1))$, for the $U$ of Step 1. The middle term has only degree zero, $\\mu_\\ell(R)$, and restriction to $H^0(U,A(1))$ is the isomorphism of Step 3. The exact sequence gives\n$$\\mathcal H^m(i^!A_W(1))_{\\bar w}=0\\ (m\\le1),\\qquad \\mathcal H^m(i^!A_W(1))_{\\bar w}\\simeq H^{m-1}(U,A(1))\\ (m\\ge2).$$\nThese latter identifications are the localization connecting maps. In particular the twist-shifted target has no negative stalk cohomology, degree zero $A\\kappa(t)$, and degree $r>0$ equal to $H^{r+1}(U,A(1))$. No exchange theorem for $i^!$ under strict localization is assumed.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-openclosed-stalk-lowerstar",
+    "prop-weil-pbc-strict-henselization-stalk-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, reconstruct the strict-local test using Stacks 0A45 and 03Q9 (theorem-higher-direct-images)."
+   }
+  },
+  {
+   "text": "We check the actual map's degree-zero generator, rather than just the rank of its target. By the $c=1$ clause of [lem-per-regular-immersion-class-calculus] (with $n=1$, $\\Lambda_1=A$) the divisor map of the statement is the $Ri_*\\dashv i^!$ transpose of the map $c_{Z,A}$ of [lem-asd-ordinary-supported-kummer], i.e. of the supported Kummer class of $\\mathcal O_W(Z)$ with its canonical off-divisor frame; its defining relative extension and coefficient splice are [def-asd-ordinary-supported-kummer-boundary]. On a principal chart its global frame is $e=f^{-1}$, while its canonical off-divisor section is $s=1=f e$. Thus in the frame torsor $s=f\\cdot e$. Apply [lem-pur-principal-torsor-yoneda-sign] with $G=\\mathbf G_m$, $g=f$ and the Kummer coefficient sequence. It identifies this very relative extension's splice with $-\\partial\\delta(f)$ under the supported-Hom identification [lem-amb-closed-support-hom]. The sign depends only on the fixed extension convention and is a unit. The formula first restricts to etale divisor charts by that node's naturality. Under the canonical strict-local restriction of Step 6, clause 3 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] sends $\\delta(f)$ to $\\delta(t)=\\kappa(t)$; the localization connecting map is precisely the map used in Step 6. Thus the original class sends $1$ to $-\\kappa(t)$ under that identification. Exact forgetting and the scalar-root map in the boundary definition leave this generator unchanged for $A=\\mathbf F_\\ell$. Hence the degree-zero stalk map is an isomorphism, including $\\ell=2$. This uses the permitted principal-torsor formula, with no appeal to the excluded supported-Yoneda node.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-ordinary-supported-kummer",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-pur-principal-torsor-yoneda-sign",
+    "lem-amb-closed-support-hom",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 2.1 and Proposition 3.4.2; Stacks 03PL, sites-cohomology 03AJ, derived 06XU, and the existing generic principal-frame signed formula."
+   }
+  },
+  {
+   "text": "For both given pairs and every geometric point of their divisors, Steps 1–7 now compute the cohomology of the actual class map. The source has only degree zero; the map in degree zero is an isomorphism; its target has no negative degrees. It is an isomorphism on all stalk cohomology precisely when $H^q(U,A(1))=0$ for all $q\\ge2$. The root-of-unity trivialization of Step 3 identifies this with $H^q(U,A)=0$. Apply [lem-weil-pbc-derived-stalk-conservative] to these bounded-below class maps on $Z$. Therefore the assumed isomorphism for $(Y,D')$ implies vanishing on every one of its strict-local complements. Conversely, to prove the desired isomorphism for $(X,D)$ it suffices to show vanishing on all its strict-local complements. This implication has been proved from the localization sequence and the low-degree calculation in the preceding steps; it cites no excluded criterion.",
+   "uses": [
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.2, conclude the explicit stalk calculation by conservativity."
+   }
+  },
+  {
+   "text": "Fix now $\\bar x\\to D$ and the corresponding $S,U$ from Step 1 for $(X,D)$. By [lem-trf-finite-base-strict-localization],\n$$Y\\times_XS\\simeq\\coprod_a Y_{(\\bar y_a)},$$\nwhere the index set is the finite set of geometric points of $Y_{\\bar x}$. Every $\\bar y_a$ is in the underlying set of $D'$ because that set is the inverse image of $D$. By [lem-trf-closed-immersion-strict-localization-cartesian], $D'\\times_YY_{(\\bar y_a)}=D'_{(\\bar y_a)}$ as closed schemes. Their underlying sets are also the inverse images of $D$; hence\n$$V:=Y\\times_XU\\simeq\\coprod_a\\bigl(Y_{(\\bar y_a)}-D'_{(\\bar y_a)}\\bigr).$$\nStep 8 applied to the assumed pure pair $(Y,D')$ makes each summand's $H^q(-,A)$ zero for $q\\ge2$. A sheaf on a finite disjoint union is a tuple of sheaves; monomorphisms and their lifts into injectives are componentwise. Thus a tuple of injective resolutions is an injective resolution on the union. Its section complex is their finite product, whose kernels and images are componentwise. The definition [def-weil-pbc-etale-cohomology] then gives $H^q(V,A)=0$ for $q\\ge2$.",
    "uses": [
     "lem-trf-finite-base-strict-localization",
-    "lem-sc-strict-henselization-regular",
-    "lem-sc-strict-henselization-noetherian",
     "lem-trf-closed-immersion-strict-localization-cartesian",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.4.3, finite strict-local decomposition; Stacks 05WR, 0GIP and 03QP."
+   }
+  },
+  {
+   "text": "Write $g:V\\to U$. It is finite locally free of rank $d$. Indeed, [lem-pc-flf-properties] gives finite free charts of rank $d$ for $f_*\\mathcal O_Y$, and [lem-weil-pbc-fibre-product-affine-spectra] describes every affine base change by tensor product; tensoring the chart basis gives a basis of the same rank. These chart algebras are flat and finitely presented (their multiplication table on a finite basis gives finitely many algebra generators and relations), so satisfy [def-pc-finite-locally-free] also after any etale base change $W_0\\to U$. Use [lem-pd-finite-locally-free-norm-charts] on $g_{W_0}$ to define the norm $N_{W_0}(b)$ of a section $b$ of its structure sheaf. Norms commute with maps of etale test schemes: on a finite free affine chart the multiplication matrix becomes its coefficientwise image after scalar extension, and its determinant polynomial does likewise. The uniqueness and scalar-extension characterization in [lem-a1-principal-free-algebra-determinant-norm] make these equalities independent of bases and charts; sheaf equality glues them. Thus these norms have the restriction compatibility needed for a map on small-etale sheaves.",
+   "uses": [
     "lem-pc-flf-properties",
-    "lem-weil-pbc-finite-flat-rank-iso"
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-finite-locally-free",
+    "lem-pd-finite-locally-free-norm-charts",
+    "lem-a1-principal-free-algebra-determinant-norm"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Proposition 3.4.3 p.246; Stacks Tags 03QP (finite strict-local decomposition), 06LJ (Noetherian strict henselization), 06LN (regularity), 02KD (lemma-base-change-finite-locally-free)."
+    "place": "XVI Lemma 3.4.4, reconstruct the splitting by the determinant norm of Stacks 0BD2 (divisors-lemma-finite-locally-free-has-norm)."
    }
   },
   {
-   "text": "Apply [lem-per-divisor-purity-strict-local-criterion] to the original regular pair $(Y,D')$. The assumed isomorphism implies $H^q(Y_{(\\bar y_a)}\\setminus D'_{(\\bar y_a)},A)=0$ for every $q\\ge2$ and every $a$. Step 2 identifies these opens with the components of $V$. Sheaves and injective resolutions on a finite disjoint union are componentwise: sections are the finite product of sections and the category is the product of the component categories. Finite products of vector spaces preserve exact sequences, so taking cohomology of those resolutions gives $H^q(V,A)=\\prod_aH^q(Y_{(\\bar y_a)}\\setminus D'_{(\\bar y_a)},A)=0$.",
+   "text": "On every rank-$d$ chart, multiplication matrices satisfy $M_{bc}=M_bM_c$ and $M_1=I_d$. By [lem-sfb-matrix-cramer-determinant-identities], norms satisfy $N(bc)=N(b)N(c)$ and $N(1)=1$. Units therefore have unit norms. If $b^\\ell=1$, then $N(b)^\\ell=N(b^\\ell)=1$, so we get a sheaf homomorphism $N:g_*\\mu_{\\ell,V}\\to\\mu_{\\ell,U}$. For a section $a\\in\\mu_\\ell(W_0)$ the multiplication matrix of its pullback is $aI_d$, with determinant $a^d$. Hence the composite of pullback and norm is the $d$-th power map. Transport using $1\\mapsto\\zeta$ from Step 3 to obtain an additive map $\\tau:g_*A_V\\to A_U$ with $\\tau\\eta=d\\,\\mathrm{id}$, where $\\eta:A_U\\to g_*A_V$ is the pullback unit. Any additive map between groups killed by the prime $\\ell$ commutes with multiplication by integers modulo $\\ell$, so this map is $A$-linear. Since $\\ell\\nmid d$, $d^{-1}\\tau$ is a retraction of $\\eta$. This uses the original finite-free rank, not a degree of the reduced inverse image.",
    "uses": [
-    "lem-per-divisor-purity-strict-local-criterion"
+    "lem-sfb-matrix-cramer-determinant-identities"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Proposition 3.4.3, strict-henselian reduction, printed p.246."
+    "place": "XVI Lemma 3.4.4, scalar composite; determinant norm and scalar-matrix computation in Stacks 0BD2."
    }
   },
   {
-   "text": "For the finite locally free map $g:V\\to U$, the weighted trace theorem [lem-pur-quasifinite-flat-weighted-trace] supplies a trace $\\tau:g_*g^*A\\to A$ whose composite with the unit $A\\to g_*g^*A$ is multiplication by $d$. Since $\\ell\\nmid d$, multiplication by $d$ is invertible on $A$, so the unit is a split monomorphism. The finite-pushforward derived-sections comparison [lem-trf-derived-sections-finite-pushforward-modules] identifies $R\\Gamma(U,g_*A)$ with $R\\Gamma(V,A)$; applying cohomology therefore makes $H^q(U,A)\\to H^q(V,A)$ injective for every $q$. The vanishing from Step 3 forces $H^q(U,A)=0$ for $q\\ge2$.",
+   "text": "Finite direct image is exact [lemma-weil-pbc-finite-direct-image-exact], so $Rg_*A_V=g_*A_V$. Under the canonical Leray isomorphism $R\\Gamma(U,Rg_*A_V)\\simeq R\\Gamma(V,A_V)$ of [lem-weil-pbc-derived-leray-composition], pullback is $H^q(R\\Gamma(U,\\eta))$. Applying $R\\Gamma(U,-)$ and then $H^q$ to $(d^{-1}\\tau)\\eta=\\mathrm{id}$ supplies a left inverse. Thus $H^q(U,A)\\to H^q(V,A)$ is injective for every $q\\ge0$. Step 9 makes the target zero for $q\\ge2$, so the source vanishes in those degrees. Since $\\bar x$ was arbitrary, Step 8 proves the desired isomorphism of the Kummer class map on $D$. If $D$ is empty, its derived category is zero and the conclusion holds immediately. The norm calculation applies to ramified and inseparable finite locally free maps, so no generic-etaleness hypothesis has been introduced.",
    "uses": [
-    "lem-pur-quasifinite-flat-weighted-trace",
-    "lem-trf-derived-sections-finite-pushforward-modules"
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-derived-leray-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Proposition 3.4.3 and Lemma 3.4.4, printed p.246."
-   }
-  },
-  {
-   "text": "The vanishing in Step 4 holds for every geometric point of $D$. Applying the strict-local complement criterion [lem-per-divisor-purity-strict-local-criterion] gives that the Kummer class map $A_D\\to i^!A_X(1)[2]$ is an isomorphism, as required.",
-   "uses": [
-    "lem-per-divisor-purity-strict-local-criterion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI Proposition 3.4.3, printed p.246."
+    "place": "XVI Proposition 3.4.3, final injectivity and descent; Stacks 03QP and the Leray comparison."
    }
   }
  ],
  "proof_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-pc-finite-locally-free",
+  "def-sc-invertible-module",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-ring-localization-away",
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "lem-amb-closed-support-hom",
+  "lem-amb-kummer-any-base",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-exc-closed-support-triangle",
   "lem-pc-flf-properties",
-  "lem-per-divisor-purity-strict-local-criterion",
-  "lem-pur-quasifinite-flat-weighted-trace",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-pur-principal-torsor-yoneda-sign",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-sc-regular-local-domain",
   "lem-sc-strict-henselization-noetherian",
   "lem-sc-strict-henselization-regular",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-matrix-cramer-determinant-identities",
   "lem-trf-closed-immersion-strict-localization-cartesian",
-  "lem-trf-derived-sections-finite-pushforward-modules",
   "lem-trf-finite-base-strict-localization",
+  "lem-trf-regular-local-pic-zero",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-derived-leray-composition",
+  "lem-weil-pbc-derived-stalk-conservative",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-flat-rank-iso"
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-sc-hilbert-90"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI Proposition 3.4.3 and Lemma 3.4.4, printed pp.245–246."
+  "place": "ILO XVI Propositions 3.4.2 and 3.4.3, printed pp.245–246; direct strict-local localization and Kummer calculation, with determinant norm replacing the excluded trace reference."
  },
  "mathlib_searches": [
   {
@@ -139,6 +273,41 @@
    "results": "{\"t\": \"2026-10-18T20:44:40Z\", \"tool\": \"leansearch\", \"query\": \"A finite locally free map of degree prime to ell descends etale cohomological purity of regular divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.IsEtaleAt.comp\", \"Algebra.FormallyEtale.of_isSeparable\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale\"], \"digest\": \"b113ee67d5d068bb\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected returned signatures; algebraic smoothness, nonzerodivisors, and adjoining-root infrastructure do not state this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular divisor etale purity descends along a finite locally free cover of degree prime to ell",
+   "results": "{\"t\": \"2026-10-24T12:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"Regular divisor etale purity descends along a finite locally free cover of degree prime to ell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"53231767558cc966\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; etale algebra loci, descent of morphism properties, arithmetic norms and cotangent injectivity do not state derived divisor purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity|Gysin|finite_flat_regular_divisor",
+   "results": "{\"t\": \"2026-10-24T12:15:37Z\", \"tool\": \"grep\", \"query\": \"purity|Gysin|finite_flat_regular_divisor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; etale algebra loci, descent of morphism properties, arithmetic norms and cotangent injectivity do not state derived divisor purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular divisor etale purity descends along a finite flat cover with degree invertible in the coefficient field",
+   "results": "{\"t\": \"2026-10-24T12:15:38Z\", \"tool\": \"leansearch\", \"query\": \"Regular divisor etale purity descends along a finite flat cover with degree invertible in the coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.IsEtaleAt.comp\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"1e9becd887c8f8cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; etale algebra loci, descent of morphism properties, arithmetic norms and cotangent injectivity do not state derived divisor purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-24T12:15:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; etale algebra loci, descent of morphism properties, arithmetic norms and cotangent injectivity do not state derived divisor purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of etale cohomology pullback for finite locally free maps of degree prime to ell using the norm on roots of unity",
+   "results": "{\"t\": \"2026-10-24T12:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of etale cohomology pullback for finite locally free maps of degree prime to ell using the norm on roots of unity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.rootsOfUnityMapQuot_injective\", \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.Extension.h1Cotangentι_injective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"IsPRadical.injective_comp_of_perfect\", \"AlgHom.IsArithFrobAt.restrict_injective\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\"], \"digest\": \"599d06ba143ab25b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; etale algebra loci, descent of morphism properties, arithmetic norms and cotangent injectivity do not state derived divisor purity."
   }
  ],
  "mathlib_match": null,
@@ -169,91 +338,178 @@
   "same_as": [],
   "is": null
  },
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/FiniteFlatRegularDivisorPurityDescent.lean",
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatRegularDivisorPurityDescent",
+  "declaration": "AlgebraicGeometry.Etale.finite_flat_regular_divisor_purity_descent",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.FiniteFlatRegularDivisorPurityDescent deleted (dead: no target reaches it); this node is not reached either."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-finite-flat-regular-divisor-purity-descent",
   "worker": "stage1",
-  "summary": "Split the divisor descent proof into the strict-local complement criterion, finite strict-local base change, componentwise vanishing, and the prime-to-ell weighted-trace injection. Reused the existing finite strict-localization decomposition and weighted trace/derived sections nodes; statement unchanged.",
-  "blueprint": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, specifically ILO XVI Proposition 3.4.3 (pp.245–246), with Proposition 3.4.2 as the complement criterion and Lemma 3.4.4 as the trace splitting.",
+  "summary": "Repair of 3e98444bb83: restored all preserved statement dependencies. Reproved strict-local geometry, low-degree Kummer cohomology and the localization test in explicit steps using permitted generic inputs; replaced the excluded supported-Yoneda comparison by the already existing generic principal-torsor formula. Reused the correct determinant-norm retraction. No new nodes or excluded proof inputs.",
+  "blueprint": "Historical regular-divisor purity input beneath the finite-coefficient duality route: ILO XVI Proposition 3.4.2 supplies the direct strict-local calculation and Proposition 3.4.3 supplies finite-flat descent. The proof does not re-enter the excluded Artin–Gabber closure.",
   "tool_uses": [
    {
-    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
-    "why": "Generic closed-immersion strict-local Cartesian comparison; identifies the strict-local divisor without changing the ILO XVI 3.4.3 route. The perverse unit supplies no replacement for this tool."
+    "node": "lem-a1-principal-free-algebra-determinant-norm",
+    "why": "Constructing the determinant norm from a principal free cover (Steps 10). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-trf-finite-base-strict-localization",
-    "why": "Generic finite-morphism decomposition over a strict local base; supplies the components used in ILO XVI 3.4.3. The perverse unit supplies no replacement for this tool."
+    "node": "lem-amb-closed-support-hom",
+    "why": "Closed support as a relative section complex (Steps 7). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-trf-derived-sections-finite-pushforward-modules",
-    "why": "Generic finite-pushforward Leray comparison for ordinary etale module sheaves; turns the sheaf trace retraction into a cohomology injection. The perverse unit supplies no replacement for this tool."
+    "node": "lem-amb-kummer-any-base",
+    "why": "The Kummer sequence on an arbitrary base (Steps 5). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-pur-quasifinite-flat-weighted-trace",
-    "why": "Generic weighted trace for finite flat maps, including inseparable ones; its finite locally free degree identity is precisely the input of ILO XVI Lemma 3.4.4. The perverse unit supplies no replacement for this tool."
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients (Steps 7). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-weil-pbc-finite-flat-rank-iso",
-    "why": "Generic constant-rank preservation under base change. The perverse unit supplies no replacement for this tool."
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Affine-chart comparison of geometric and algebraic strict local rings (Steps 1). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-weil-pbc-fibre-product-affine-spectra",
-    "why": "Generic affine base-change tensor-algebra calculation. The perverse unit supplies no replacement for this tool."
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Closed-support triangle before restriction (Steps 6). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
-    "node": "lem-sc-strict-henselization-regular",
-    "why": "Generic regularity of strict henselizations; needed for the geometric local schemes in ILO XVI 3.4.3. The perverse unit supplies no replacement for this tool."
+    "node": "lem-pc-flf-properties",
+    "why": "The module $f_*\\mathcal{O}_X$ of a finite locally free morphism (Steps 10). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-pd-finite-locally-free-norm-charts",
+    "why": "Norm sections on local finite free affine charts (Steps 10). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-pur-principal-torsor-yoneda-sign",
+    "why": "A globally framed relative torsor gives the inverse-section pushout (Steps 7). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Flatness of the canonical affine strict henselization structural ring map (Steps 1). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Roots of unity in a strict local ring (Steps 3). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "A finite standard-open free cover makes a module finite projective (Steps 4). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Regular local rings are domains (Steps 2). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    },
    {
     "node": "lem-sc-strict-henselization-noetherian",
-    "why": "Generic Noetherianity of strict henselizations; applies without excellence. The perverse unit supplies no replacement for this tool."
+    "why": "Strict henselization preserves Noetherianity of local rings (Steps 1). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Strict henselization preserves regular local rings (Steps 1). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Strict localization of a closed subscheme is the base change of the ambient strict localization (Steps 1, 9). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Finite base change of strict localizations along a finite morphism (Steps 9). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-trf-regular-local-pic-zero",
+    "why": "Picard group of a regular-local localization vanishes (Steps 4). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Sections of a constant etale sheaf are locally constant maps (Steps 3). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-weil-pbc-derived-leray-composition",
+    "why": "Derived Leray composition (Steps 12). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Conservativity of geometric stalks on the derived category (Steps 8). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "A local ring is henselian (idempotent lifting) iff simple roots of monic polynomials lift (Steps 3). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Pullback maps form a morphism of long exact cohomology sequences (Steps 5, 7). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Stalks of $i_*$ on $Z$ (Steps 6). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exactness of finite direct image (Steps 12). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Strict-henselization stalk formula (Steps 6). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
+   },
+   {
+    "node": "thm-sc-hilbert-90",
+    "why": "Hilbert 90 for a scheme (Steps 5). The unit has no replacement for this generic interface; the strict-local purity calculation itself is proved here, and no trace-formula or duality assumption is used."
    }
   ]
  },
  "tool_uses": [
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "lem-amb-closed-support-hom",
+  "lem-amb-kummer-any-base",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-exc-closed-support-triangle",
+  "lem-pc-flf-properties",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-pur-principal-torsor-yoneda-sign",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
   "lem-trf-closed-immersion-strict-localization-cartesian",
   "lem-trf-finite-base-strict-localization",
-  "lem-trf-derived-sections-finite-pushforward-modules",
-  "lem-pur-quasifinite-flat-weighted-trace",
-  "lem-weil-pbc-finite-flat-rank-iso",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-sc-strict-henselization-regular",
-  "lem-sc-strict-henselization-noetherian"
+  "lem-trf-regular-local-pic-zero",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-derived-leray-composition",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-sc-hilbert-90"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q52-c3c7a3d4d",
-  "group": "Q52",
+  "reviewer": "NT-cc-Q28-c067fa9c9",
+  "group": "Q28",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-c3c7a3d4d (reviewer sub-agent of L); spot-checked: Read ILO XVI 3.4.2–3.4.4 (printed pp.245–246, pdf pp.249–250), the item, the new node and every cited statement. The item matches 3.4.3 hypothesis by hypothesis and is unchanged. New node lem-per-divisor-purity-strict-local-criterion is ILO 3.4.2 and is true: strictly henselian regular S, f prime, H^q_D = H^{q-1}(U) for q>=2, and H^1(U,mu_l) = Z/l is generated by the Kummer class. It is statement-only, needs no cases split out (D empty and traits both check), is not an item clause, and duplicates nothing (compared with the 3.4.5, 3.2.4, 3.5.5, 3.5.7, trait-test and costalk nodes; absolute purity would be circular). Steps 1–5 are sound. Step 2 uses the 03QP/05WR finite strict-local splitting, 06LJ/06LN, setwise D' = f^{-1}D, and rank d preserved by base change. Step 3 applies the criterion on (Y,D') and the product over components. Step 4 uses the weighted trace's rank-r identity (finite locally free, Noetherian U and V) and the finite-pushforward RGamma to get a split injection into 0. Step 5 is the converse. Batch-5 flags were checked on each node's own closure and all are generic Stacks algebra or sheaf theory: class-calculus is already a base stmt_dep; the weighted trace reaches only pod 008B/0DV5/01KU and trf 02UP; the cartesian node is 05WS; finite-pushforward is 03QP/08J6; finite-base is 05WR/0GIP/092Y. None of them reaches a thm-pod, thm-trf, sk-thm node or a target. Accepted. No SGA in item or new-node sources. The eight generic tool_uses are accepted."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FiniteFlatRegularDivisorPurityDescent",
-  "declaration": "AlgebraicGeometry.Etale.finite_flat_regular_divisor_purity_descent",
-  "declarations": [
-   "AlgebraicGeometry.Etale.purityClosedClassTranspose",
-   "AlgebraicGeometry.Etale.purityCartierSupportedClass",
-   "AlgebraicGeometry.Etale.purityCartierClassMap",
-   "AlgebraicGeometry.Etale.purityReducedInverseImage",
-   "AlgebraicGeometry.Etale.purityReducedInverseImageι",
-   "AlgebraicGeometry.Etale.finite_flat_regular_divisor_purity_descent"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatRegularDivisorPurityDescent.lean",
-  "statement": "theorem finite_flat_regular_divisor_purity_descent (ℓ : ℕ) (hℓ : ℓ.Prime) {Y X D : Scheme.{u}} [IsNoetherian Y] [IsNoetherian X] (hY : IsRegularScheme Y) (hX : IsRegularScheme X) (hℓY : IsUnit (ℓ : Γ(Y, ⊤))) (hℓX : IsUnit (ℓ : Γ(X, ⊤))) (f : Y ⟶ X) (d : ℕ) [f.IsFiniteLocallyFreeOfDegree d] (hd : 0 < d) (hℓd : ¬ ℓ ∣ d) (i : D ⟶ X) [IsClosedImmersion i] (hD : IsRegularScheme D) (hI : i.ker.IsInvertible) (hD' : IsRegularScheme (purityReducedInverseImage f i)) (hI' : (purityReducedInverseImageι f i).ker.IsInvertible) (hpure : IsIso (purityCartierClassMap ℓ hℓ (purityReducedInverseImageι f i) hI' hℓY)) : IsIso (purityCartierClassMap ℓ hℓ i hI hℓX)",
-  "branch": "newtargets-dag",
-  "by": "Q35",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.FiniteFlatRegularDivisorPurityDescent deleted (dead: no target reaches it); this node is not reached either."
- },
- "reviewed_lean": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-7c180b283",
-  "group": "Q35",
-  "result": "pass",
-  "note": "Re-delivery fixes the 1f7ae2a4 RETURN: H2 removed the lem-asd-etale-finite-twist-pullback stmt_dep; H13 no longer delivers EtaleFiniteTwistPullback.lean or its Q03 record; H4 deleted the four punctual-purity duplicates (owned by landed def-per-punctual-purity). The theorem matches ILO XVI 3.4.3 clause by clause: ℓ prime, ULift ZMod ℓ, regular Noetherian X,Y, ℓ a unit, IsFiniteLocallyFreeOfDegree d with d>0 and ℓ∤d, regular Cartier D via i.ker.IsInvertible, D' = nilradical subscheme of the pullback with regular Cartier hypotheses, IsIso of the transpose of the unique SupportedKummerBoundary class (the c=1 class of the class-calculus node) from (Y,D') to (X,D); no generic-étale assumption; lean.statement verbatim. Mechanical finding: lem-exc-closed-ambient (rightAdjoint of its IsLeftAdjoint instance) and lem-asd-ordinary-supported-kummer (Classical.choose of its ∃!) are genuine; both modules contain only theorems, so PASS on that point. §1(B) helper ordinary_supported_kummer_uniqueBoundary is the exact existence+uniqueness clause, with a sorry and a docstring. nt_compile --json at load ~61-79 clean: Kummer 24.1 s, RegularImmersionClassCalculus 42.8 s, item 37.3 s. Advisories: the Kummer record's by changed Q39→Q35 (provenance only); supportedExactDerivedMap belongs to def-asd-ordinary-supported-kummer-system, which is reached only through the cited Kummer node."
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-c067fa9c9 (reviewer sub-agent of L); spot-checked: Read the whole item: the unchanged statement, all 12 steps, and every cited statement. Checked against ILO XVI 3.4.2/3.4.3/3.4.4 (printed pp. 245-246). The statement matches 3.4.3 and is byte-equal to the live node, as are stmt_deps, source and blueprint, as the repair note requires. The previous return is repaired: none of the three excluded criterion, low-kummer and lci nodes is cited. The proof_deps closure (11 930 nodes) reaches no node of route-pivot-dropped.txt. The full closure reaches only def-per-rational-direct-image-family, the pre-existing exclusion that the Q91 audit already lists, through a stmt_dep. No cycle, no new nodes, no SGA (the SGA 4 XVII trace is replaced by a determinant norm). The steps are correct: strict localization with t a nonzerodivisor (Step 1); B^x = R^x x t^Z (Step 2); A = mu_ell and H^0 (Step 3); Pic(U)=0 with the hypotheses of 0AFZ checked (Step 4); H^1 generated by kappa(t) via Hilbert 90 and Kummer (Step 5); the localization sequence gives H^m(i^!)=0 for m<=1 and H^{m-1}(U) for m>=2 (Step 6); the degree-0 generator is -kappa(t) by the principal-torsor sign node (Step 7); conservativity in both directions (Step 8); the fibre over x-bar is a disjoint union of strict localizations (Step 9); the norm gives tau eta = d and a retraction since ell does not divide d, tested on d=1, split, inseparable and ell=2 (Steps 10-12). Batch-5: lem-trf-closed-immersion-strict-localization-cartesian (05WS), lem-trf-finite-base-strict-localization (05WR/03QP) and lem-trf-regular-local-pic-zero (0AFZ) are generic algebra, outside the trace-formula and Poincare-duality assumptions; there is no nt-assume node in the closure. FIX (C4): Step 7 attributed 'the divisor map is the transpose of c_D' to lem-asd-ordinary-supported-kummer; that is the c=1 clause of lem-per-regular-immersion-class-calculus, an in-unit node already in stmt_deps. It is now cited in Step 7 and added to proof_deps; the corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/. Advisory, not a fault: the A-module versus abelian derived-category compatibility in Step 6 is the ambient convention. The 27 declared tool_uses are accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ }
 }

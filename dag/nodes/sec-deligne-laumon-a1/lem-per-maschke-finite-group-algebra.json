@@ -1,0 +1,84 @@
+{
+ "id": "lem-per-maschke-finite-group-algebra",
+ "kind": "statement",
+ "title": "Maschke semisimplicity for a finite group algebra",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a finite group, and assume $|G|\\cdot1_k\\ne0$. The group algebra $k[G]$, the $k$-vector space with basis $[g]$ and bilinear multiplication $[g][h]=[gh]$, is semisimple: its regular left module is a sum of simple left ideals, where simple [def-weil-pbc-simple-module] means nonzero with no nonzero proper submodule.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, representation lifting before equation (5). Maschke input, verified in Mathlib/RepresentationTheory/Maschke.lean:140-169."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-simple-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maschke theorem group algebra of a finite group over a field of characteristic zero is a semisimple ring",
+   "results": "{\"t\": \"2026-10-24T00:27:36Z\", \"tool\": \"leanfinder\", \"query\": \"Maschke theorem group algebra of a finite group over a field of characteristic zero is a semisimple ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Rep.instProjective\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"Rep.instInjective\", \"FDRep.simple_iff_char_is_norm_one\", \"FDRep.simple_iff_end_is_rank_one\", \"IsSemisimpleRing.moduleEnd\"], \"digest\": \"86c493041d6c068c\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MonoidAlgebra.Submodule.instIsSemisimpleModule, specialized to the regular module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maschke finite group algebra semisimple ring",
+   "results": "{\"t\": \"2026-10-24T00:28:09Z\", \"tool\": \"leansearch\", \"query\": \"Maschke finite group algebra semisimple ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"IsSemisimpleRing\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"IsSemisimpleModule\", \"IsSemisimpleRing.isSemisimpleModule\", \"Module.projective_of_isSemisimpleRing\", \"Module.projective_of_semisimple_ring\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\"], \"digest\": \"aa04e92261ca2678\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MonoidAlgebra.Submodule.instIsSemisimpleModule, specialized to the regular module."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, IsSemisimpleRing",
+   "results": "{\"t\": \"2026-10-24T00:27:34Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, IsSemisimpleRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MonoidAlgebra.Submodule.instIsSemisimpleModule, specialized to the regular module."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsSemisimpleModule|instance.*IsSemisimpleRing",
+   "results": "{\"t\": \"2026-10-24T00:28:39Z\", \"tool\": \"grep\", \"query\": \"instance.*IsSemisimpleModule|instance.*IsSemisimpleRing\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Maschke.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"fb2f4fc21242f726\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MonoidAlgebra.Submodule.instIsSemisimpleModule, specialized to the regular module."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MonoidAlgebra.Submodule.instIsSemisimpleModule",
+  "file": "Mathlib/RepresentationTheory/Maschke.lean",
+  "line": 168,
+  "how": "specializes in one line: take V = MonoidAlgebra k G in the instance at lines 168-169. The surrounding hypotheses at lines 140-143 are Field k, Finite G, Group G and NeZero (Nat.card G : k), exactly the assumptions here. IsSemisimpleRing is semisimplicity of the regular module."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-cyclotomic-field-brauer-splitting",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, second assertion and its proof, printed p.138, equations (4)--(5), followed by the localization of Lambda in 1.3, printed pp.139--140. Specifically: Gabber preparation second assertion: integral representation lifting before equation (5). Auxiliary field-splitting input: Maschke input, verified in Mathlib/RepresentationTheory/Maschke.lean:140-169.",
+   "via": [
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

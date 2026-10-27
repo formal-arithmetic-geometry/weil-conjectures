@@ -1,0 +1,240 @@
+{
+ "id": "lem-zl-proetale-coefficient-slice-closed-comparison",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Closed slice comparison with transported pro-etale coefficients",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $u:U\\to X$ be an object of its small pro-etale site [def-weil-pbc-proetale-site]. Use its canonical site equivalence $U_{\\mathrm{proet}}\\simeq X_{\\mathrm{proet}}/U$ [lem-weil-proetale-weakly-etale-localization] and the natural inverse-image identification $\\delta_G:u^{-1}G\\xrightarrow{\\sim}G|_U$ for sheaves of sets, abelian groups and rings [lem-sfb-proetale-object-inverse-image-restriction]. Let $\\mathcal O$ and $\\mathcal B$ be arbitrary sheaves of commutative rings on $X_{\\mathrm{proet}}$ and $U_{\\mathrm{proet}}$, respectively, and let $c:u^{-1}\\mathcal O\\xrightarrow{\\sim}\\mathcal B$ be a ring isomorphism. Set $b=c\\circ\\delta_{\\mathcal O}^{-1}:\\mathcal O|_U\\xrightarrow{\\sim}\\mathcal B$. Let $r:D(\\mathcal O)\\to D(\\mathcal O|_U)$ be exact derived slice restriction [def-weil-pbc-ringed-derived-restriction, def-pur-localized-ringed-site], and let $E_b:D(\\mathcal O|_U)\\to D(\\mathcal B)$ be the termwise scalar-transport equivalence, which leaves underlying abelian sheaves unchanged and replaces an action by $s\\cdot m=b^{-1}(s)m$. Put $F=Lu^*:D(\\mathcal O)\\to D(\\mathcal B)$ for the exact module inverse image defined using $c$ [def-weil-pbc-proetale-operations]. All these are ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nThe maps $\\delta_G$, with these actions, induce a natural isomorphism $F\\xrightarrow{\\sim}E_b\\circ r$. This isomorphism identifies the canonical strong symmetric monoidal tensor and unit comparisons of $F$ with those of slice restriction followed by scalar transport. Use the ordinary derived tensor, internal Hom $H$ and tensor--Hom transposition $\\operatorname{tr}$ of [lem-sf-ringed-derived-closed-symmetric-monoidal], and write $H_{\\mathcal B},\\operatorname{tr}_{\\mathcal B}$ for the corresponding structures over $\\mathcal B$. There is a natural isomorphism\n$$h_{L,M}:F H(L,M)\\xrightarrow{\\sim}H_{\\mathcal B}(FL,FM),$$\nwhich under $F\\cong E_b r$ is the scalar transport of the canonical slice internal-Hom comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Write $\\rho_{L,M}:F(L\\otimes^{\\mathbf L}M)\\xrightarrow{\\sim}FL\\otimes^{\\mathbf L}FM$ for the canonical tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and $\\sigma$ for the Koszul symmetry. For all $A,L,M\\in D(\\mathcal O)$ and $g:A\\otimes^{\\mathbf L}L\\to M$, the following identities hold:\n$$F(\\operatorname{ev}_{L,M})\\circ\\rho_{H(L,M),L}^{-1}=\\operatorname{ev}_{FL,FM}\\circ(h_{L,M}\\otimes1),$$\n$$\\operatorname{tr}_{\\mathcal B}(F(g)\\circ\\rho_{A,L}^{-1})=h_{L,M}\\circ F(\\operatorname{tr}(g)),$$\n$$\\rho_{M,L}\\circ F(\\sigma_{L,M})=\\sigma_{FL,FM}\\circ\\rho_{L,M}.$$\nNo constancy of $\\mathcal O$, boundedness of complexes, quasi-compactness or bound on irreducible components is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.5 proof, monoidality and commutation with inner homomorphisms; coefficient-action identification and normalized closed comparison extracted from returned locality proof Steps 3 and 4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized ordinary comparison by the map/pullback module adjunction and uniqueness of the left adjoint. Use the separate monoidal descent theorem with that ordinary comparison to obtain chain, K-flat, tensor, unit and symmetry data.",
+   "uses": [
+    "lem-zl-proetale-slice-ordinary-comparison",
+    "lem-zl-proetale-slice-monoidal-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar restriction along b inverse is an equivalence, hence so is its exact derived functor. For any strong tensor equivalence F, the closed mate is invertible: on Hom out of F(A) its postcomposition is the composite of the source closed bijection, full faithfulness, tensor comparison and target closed bijection. Essential surjectivity and Yoneda yield invertibility. Apply to scalar transport. The normalized restriction mate is invertible by the separate slice-closed-mates lemma. Naturality packages both into natural isomorphisms.",
+   "uses": [
+    "lem-zl-proetale-slice-closed-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the invertible comparison on tensor factors in the normalized tensor square to put it in the direction of scalarBaseChangeHom_tower. The generic closed-mate composition formula (proved here by transposition and naturality, reusing the private argument of ScalarHomComparisonTower), applied to restriction, scalar transport and the ordinary comparison, gives hom_transport. Every factor is an isomorphism, so the pullback mate is invertible. Package it as the required natural Hom isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The closed adjunction says that uncurrying the transpose of any arrow returns that arrow. Applied to transported evaluation this proves the evaluation equation. Naturality of the tensor comparison and the source uncurry identity prove the transpose equation. Combine them with the monoidal descent symmetry equation and all retained normalizations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-proetale-slice-closed-mates",
+  "lem-zl-proetale-slice-monoidal-descent",
+  "lem-zl-proetale-slice-ordinary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9, 08JB, 0FPT; assembly by closed adjunction, equivalence and the existing scalar-Hom tower law."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of module sheaves along an object of a site with isomorphic coefficient rings preserves derived internal Hom and tensor Hom transposes under slice restriction",
+   "results": "8 hits: SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackComp; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived pullback, sheaf Hom or unrelated transpose formulas; none gives the derived closed comparison with coefficient transport and its evaluation/transpose identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction to a slice site commutes with internal Hom evaluation and the tensor Hom adjunction after transport along an isomorphism of ring sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackIso; CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived pullback, sheaf Hom or unrelated transpose formulas; none gives the derived closed comparison with coefficient transport and its evaluation/transpose identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived pullback, sheaf Hom or unrelated transpose formulas; none gives the derived closed comparison with coefficient transport and its evaluation/transpose identities"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*restrict|restrict.*internalHom|transpose.*restrict|restrict.*transpose",
+   "results": "14 hits: Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/MeasureTheory/VectorMeasure/Integral.lean; Mathlib/MeasureTheory/VectorMeasure/Integral.lean; Mathlib/MeasureTheory/VectorMeasure/Integral.lean; Mathlib/MeasureTheory/VectorMeasure/Integral.lean; Mathlib/MeasureTheory/VectorMeasure/Integral.lean; Mathlib/MeasureTheory/VectorMeasure/SetIntegral.lean; Mathlib/MeasureTheory/VectorMeasure/SetIntegral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived pullback, sheaf Hom or unrelated transpose formulas; none gives the derived closed comparison with coefficient transport and its evaluation/transpose identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of unbounded derived sheaves to an object of a ringed site commutes with internal Hom and tensor Hom transpose",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes; PresheafOfModules.restrictScalarsObj; SheafOfModules.restrictScalars; PresheafOfModules.restrictScalars; CategoryTheory.sheafHom; ModuleCat.Tilde.toOpen_res; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.restrictScalars_obj_val",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived pullback, sheaf Hom or unrelated transpose formulas; none gives the derived closed comparison with coefficient transport and its evaluation/transpose identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction to a slice ringed site with isomorphic coefficients preserves internal Hom evaluation and tensor Hom transpose",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pullback, evaluation or restriction results, or unrelated transpose results; no arbitrary-coefficient unbounded derived closed slice comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*restrict|restrict.*internalHom|transpose.*restrict|restrict.*transpose",
+   "results": "14 hits: Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/Algebra/Lie/SkewAdjoint.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/SetIntegral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pullback, evaluation or restriction results, or unrelated transpose results; no arbitrary-coefficient unbounded derived closed slice comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of unbounded derived module sheaves to a slice site commutes with internal Hom and evaluation",
+   "results": "8 hits: SheafOfModules.evaluation, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_apply, AlgebraicGeometry.Scheme.Modules.restrict, CategoryTheory.Sheaf.ΓRes",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pullback, evaluation or restriction results, or unrelated transpose results; no arbitrary-coefficient unbounded derived closed slice comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pullback, evaluation or restriction results, or unrelated transpose results; no arbitrary-coefficient unbounded derived closed slice comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal pullback to a localized ringed site is compatible with derived internal Hom after change of coefficients by a ring sheaf isomorphism",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pullback, evaluation or restriction results, or unrelated transpose results; no arbitrary-coefficient unbounded derived closed slice comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-lisse-proetale-locality",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3, pullback paragraph before (3.1); Definition 3.3 and Lemma 4.5, lisse assertion. Extracted Lemma 4.5 proof, monoidality and commutation with inner homomorphisms; coefficient-action identification and normalized closed comparison extracted from returned locality proof Steps 3 and 4.",
+   "via": [
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-proetale-coefficient-slice-closed-comparison",
+  "worker": "stage1",
+  "summary": "Q132 reuses existing inverse-image, scalar-isomorphism, and normalized slice comparison nodes. Explicit action and pure-tensor formulas identify the canonical monoidal structure; scalar transport preserves the Hom complex and its tensor-Hom bijection, giving all three identities. No new nodes and no statement change.",
+  "blueprint": "prop-zl-smooth-proper-relative-purity, Step 3 relative duality; through the recorded ancestry to HRS Lemma 4.5, monoidality and commutation with internal Hom for pro-etale locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the pro-etale site with the slice; generic site tool, not a replacement of the relative-purity route."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Supplies the natural inverse-image/restriction isomorphism on abelian and ring sheaves."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic normalized tensor/action isomorphism for an invertible ring-sheaf map; no such scalar calculation is specific to this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat preservation and canonical derived tensor comparison for ringed topoi."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic exact slice theorem with the canonical evaluation and Koszul normalizations, needed for the coefficient-locality argument."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ordinary unbounded ringed-site closed structure and its specified counit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-762ee4b16",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-762ee4b16 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement (16 nodes) in full. It is a first split with no new nodes and no change to the statement or stmt_deps. The source matches: HRS Lemma 4.5 proof, 'j* monoidal ... commutes with inner homomorphisms'. Checks: (1) The Step 1 balancing holds because b^{-1}c=δ_O, and the inverse composite is the identity because cδ_O^{-1}b^{-1}=1. (2) The tensor transport t is well-defined because b(a)x=ax, and the unit map a↦b(a) is B-linear. (3) Both routes give b^{-1}(st)(δm⊗δn) and a⊗s↦c(a)s. (4) E preserves K-injectives by transporting homotopies, and E Hom^•_R=Hom^•_B(E-,E-) on the nose. (6)/(7) The evaluation, transpose and symmetry identities follow from the slice node and naturality of α, ρ and t; I checked them line by line. Edge cases checked: U=X, a nontrivial coefficient automorphism, O=0, empty U, shifts. Duplicates ruled out: lem-weil-proetale-derived-restriction-closed-monoidal is about native A-valued sheaves; lem-proetale-pullback-internal-hom, new-proetale-derived-module-pullback-monoidal and lem-weil-pbc-etale-pullback-internal-hom cover other settings. I accept the six declared generic tool_uses. FIX (C4): Step 5 identifies the Step 4 Hom-complex map with the closed comparison using ev(f⊗x)=f(x) on models. That model formula is not in the statement of lem-sf-ringed-derived-closed-symmetric-monoidal, which only names ev as the counit; it is the representative normalization of def-coef-ringed-tensor-hom-model. I added that citation to step 5's text and uses and to proof_deps (no cycle); the corrected item is at fixes/dag/nodes/sec-zeta-weil/. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientSliceClosedComparison",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCoefficientSliceClosedComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientSliceClosedComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCoefficientSliceClosedComparison.lean",
+  "statement": "theorem proEtaleCoefficientSliceClosedComparison {X : Scheme.{u}} (U : X.ProEt)\n    (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj O ≅ B)\n    (delta : ProEtaleObjectRestrictionComparison U CommRingCat.{u + 1})\n    (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))\n    (SR : CoefficientClosedStructure (proEtaleCoefficientHom U.left (proEtaleSliceRing U O)))\n    (SB : CoefficientClosedStructure (proEtaleCoefficientHom U.left B))\n    (T : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology X) O S)\n    (TR : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology U.left)\n      (proEtaleSliceRing U O) SR)\n    (TB : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology U.left) B SB)\n    (beta : @SymmetricCategory (DerivedCategory (proEtaleRingModules X O)) _ S.monoidal)\n    (betaB : @SymmetricCategory (DerivedCategory (proEtaleRingModules U.left B)) _ SB.monoidal)\n    (_coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) O S T beta)\n    (_coherenceB : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology U.left) B SB TB betaB) :\n    ∃ d : ProEtaleCoefficientSliceComparison.Data U O B c delta S SR SB T TR TB,\n      ProEtaleCoefficientSliceComparison.Normalized U O B c delta S SR SB T TR TB d ∧\n      CoefficientClosedComparisonLaws S SB (proEtaleRingDerivedPullback U.hom O B c)\n        (ProEtaleCoefficientSliceComparison.rho U O B c S SB T TB)\n        d.homComparison beta betaB",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All ordinary and derived comparisons are normalized on the distinguished inverse-image sections, actual pure total-tensor generators and the exact localization square. Closed comparisons are fixed by transported evaluation; the theorem includes evaluation, transpose and Koszul symmetry identities. The two additional statement dependencies are existing published presentation and scalar-restriction interfaces; no mathematical statement is changed. All helper definitions have real data; the exactness assertion and main theorem are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d59a1f7a0",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Item changes only lean + 2 added landed def-node stmt_deps (def-coef-ringed-tensor-hom-model, def-sfb-scalar-hom-comparison-data, both used); statement unchanged; lean.statement verbatim; all decls listed with source/blueprint docstrings; only sorrys are proEtaleSliceModuleRestriction_exact and the main theorem. Clause check: delta is a subsingleton structure (coprojection/sheafIso_inv pin it); b=(delta.sheafIso.app O).symm≪≫c points O|U→B; E=scalarRestriction b.inv (action via b⁻¹); F=recorded proEtaleRingModulePullback/DerivedPullback; α pinned by distinguished section (normalized adjunction unit + initial index point); r/E tensor chains pinned on pure generators, derived rho by K-flat square; units pinned by sections (bδ_O=c); h/restrictionHom/scalarHom pinned as evaluation transposes, hom_transport = α_H≫E(η)≫e≫H_B(α_L,α_M⁻¹) (directions checked); Laws = node's three identities with ≫ reversal; beta/betaB pinned Koszul by RingedDerivedTensorCoherence; universes (u+1,u,u+1) consistent, no extra hypotheses. Edge cases U=X, empty U, O=0, nontrivial c, unbounded OK. Advisory: A1 local slice restriction duplicates unowned proEtaleSliceModules (proved _exact) in lem-per-proetale-scalar-slice-comparison module → recommend existing:true def node; A2 stage-1 theorem stmt_deps supply interfaces; A3 restriction/slice-Hom deps used in transported/characterized form. No file changed, no compile run (worker: scompile clean 29.7/24.0 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eb4d4",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T190843-L-114045",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone node lean.statement (whitespace only); moved decls vs def-zl-proetale-slice-comparison-data declarations (full cover); Normalized old vs TensorNormalized-factored body (defeq by iota); sorry lemmas vs HRS 4.5 / Stacks 03EL, 07A4, 08JB; private helpers vs ScalarHomComparisonTower/RingIsomorphismTensorTransport statements (no word-for-word match)"
+ }
+}

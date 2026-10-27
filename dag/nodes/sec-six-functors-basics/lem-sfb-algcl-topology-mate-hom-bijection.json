@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-algcl-topology-mate-hom-bijection",
+ "kind": "statement",
+ "title": "Hom action of the normalized algebraic-closure topology-change counit mate",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended $\\ell$-adic norm topology. Schemes are separated and finite type over $k$ and morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. For a profinite set $S$ put\n$$C(S)=\\{a\\in C(S,\\Omega):a(S)\\subset F\\text{ for some finite intermediate field }\\mathbf Q_\\ell\\subset F\\subset\\Omega\\},\\qquad B(S)=C(S,\\Omega).$$\nHere $C$ is the finite-subextension-valued condensed ring [sk-def-sfb-qlbar-condensed], $B$ uses ALL norm-continuous maps [def-sfb-continuous-map-condensed-ring], and $c:C\\to B$ is inclusion. Put $R_W=p_W^*R$ for every coefficient ring $R$ [sk-def-sfb-pulled-back-coefficients]. Use ordinary unbounded derived categories of internal module objects and their derived geometric adjunctions [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Let $D^b_c(W,R)$ be the full subcategory of complexes with bounded constructible cohomology, where constructible means finite constant local models on finite constructible locally closed stratifications [sk-def-sfb-constructible]. Write $J_W=B_W\\otimes^L_{C_W}-$ for the actual K-flat derived extension [sk-def-sfb-derived-extension-of-scalars].\n\nLet $f:Z\\to T$ be any morphism, let $L\\in D^b_c(Z,C)$, and assume $P=Rf_{*,C}L\\in D^b_c(T,C)$. For every $M\\in D^b_c(T,C)$ one has $f_C^*M\\in D^b_c(Z,C)$. For an arbitrary $V\\in D(T,C)$, let\n$$\\sigma_V:f_B^*J_TV\\xrightarrow{\\sim}J_Zf_C^*V$$\nbe the canonical pullback/tensor comparison, normalized on flat-term K-flat representatives by the balanced coequalizer map preserving insertion of the scalar unit [lem-sfb-kflat-scalar-comparison-normalization]. Put $Q=Rf_{*,B}J_ZL$ and define $\\chi_L:J_TP\\to Q$ to be the adjunct of $J_Z\\varepsilon_L\\circ\\sigma_P$, where $\\varepsilon_L:f_C^*P\\to L$ is the counit. Postcomposition with this specified map is a bijection\n$$\\operatorname{Hom}_B(J_TM,J_TP)\\xrightarrow{\\ \\chi_L\\circ-\\ }\\operatorname{Hom}_B(J_TM,Q).$$\nPrecisely, this function equals the composite of the following bijections in the ambient derived categories:\n$$\\operatorname{Hom}_B(J_TM,J_TP)\\cong\\operatorname{Hom}_C(M,P)\\cong\\operatorname{Hom}_C(f_C^*M,L)\\cong\\operatorname{Hom}_B(J_Zf_C^*M,J_ZL)\\cong\\operatorname{Hom}_B(J_TM,Q).$$\nThe first and third are inverse or forward scalar-extension maps on Hom, the second is the $C$-geometric adjunction, and the last is precomposition with $\\sigma_M$ followed by the $B$-geometric adjunction. In particular for every $u:M\\to P$, this composite sends $J_Tu$ to $\\chi_L\\circ J_Tu$. The claim imposes neither properness of $f$, constructibility of $Q$, nor flatness of $c$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change input: returned proof step 4, Hom-adjunction calculation identifying the actual canonical counit mate Agent-extracted obligation from the returned six-step proof; no independent reference claimed."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sfb-algcl-topology-inclusion",
+  "def-sfb-algcl-topology-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-internal-scalar-pullback-normalization to the actual inclusion C→B. Its comparison b is PullNormalized. The proved normalized_inverse calculation in the module of lem-sfb-normalized-scalar-restriction-push identifies b.inv with the inverse scalar-adjunction mate of scalarRestrictionPull.inv. The inverse of scalarRestrictionPull is exactly algClTopologyDerivedAction: invert its three canonical whiskered comparison factors. Thus the specified theta is b.inv and is invertible. The section derived-category instances used to instantiate the normalization theorem are the canonical Grothendieck-abelian localizations; they add no hypothesis.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-normalized-scalar-restriction-push"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact geometric pullback is computed termwise by the canonical leftDerivedUpperStarIsoMapDerivedCategory comparison. Its boundedness and homology comparison are lem-weil-pbc-exact-functor-bounded-below. Use the existing stratification argument as a proved private helper: pull back the witnessing finite locally closed stratification, use new-unbounded-pullback-finite-constant-local-model on each stratum, and transport along upperStar composition. This argument preserves the exact finite-constant-model notion for arbitrary commutative condensed coefficients. Apply it to every homology object, and use the isomorphism invariance of det-def-sfb-constructible-tor-amplitude. This proves f_C^*M bounded constant-model constructible. Finite-type separated schemes over the field are qcqs, including empty schemes.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-constructible-algcl-topology-comparison on T and Z. Compose fully faithful Hom equivalences of the full inclusions and the restricted scalar extension. Their forward maps are exactly J_T.map and J_Z.map. Equiv.ofBijective therefore supplies eT and eZ with the specified forward maps. Compose eT inverse, the inverse C-geometric Hom equivalence, eZ, precomposition with sigma_M, and the B-geometric Hom equivalence; all five functions are equivalences.",
+   "uses": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For u:M→P use the counit formula of lem-weil-pbc-adjunction-of-natural-bijection. Functoriality of J_Z and naturality of sigma rewrite sigma_M followed by J_Z(f_C^*(u) followed by epsilon_L) as f_B^*(J_T(u)) followed by sigma_P and J_Z(epsilon_L). Mathlib Adjunction.homEquiv_naturality_left identifies its B-adjunct with J_T(u) followed by the specified chi. For arbitrary v substitute u=eT.symm(v) and use eT.apply_symm_apply. Hence postcomposition with chi is exactly the composite equivalence of the previous step, giving bijectivity and both displayed formulas without additional hypotheses.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-normalized-scalar-restriction-push",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sfb-constructible-algcl-topology-comparison",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); Hom calculation implemented by P7 using existing scalar normalization and Mathlib naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(mate|conjugateEquiv).*(isIso|is_iso)|(isIso|is_iso).*(mate|conjugateEquiv)",
+   "results": "10 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of right adjoints along equivalences of full subcategories identifies the counit mate via Hom adjunction bijections",
+   "results": "8 hits: CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app, CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app, CategoryTheory.Adjunction.mkOfHomEquiv_counit_app, CategoryTheory.Adjunction.adjunctionOfEquivRight, CategoryTheory.Adjunction.rightAdjointOfEquiv_map, CategoryTheory.Adjunction.adjunctionOfEquivRight_unit_app, CategoryTheory.Adjunction.rightAdjointOfEquiv_obj, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of left adjoints with fully faithful equivalences on full subcategories has an invertible right adjoint counit mate whenever both endpoints belong to these subcategories",
+   "results": "8 hits: CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv, CategoryTheory.CommSq.right_adjoint, CategoryTheory.CommSq.left_adjoint, CategoryTheory.CommSq.rightAdjointLiftStructEquiv, CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(mateEquiv|fullyFaithful|FullyFaithful).*homEquiv|homEquiv.*(mateEquiv|fullyFaithful|FullyFaithful)",
+   "results": "4 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom bijections for a right adjoint coefficient change counit mate induced by fully faithful scalar extension on constructible subcategories and natural pullback tensor comparison",
+   "results": "8 hits: CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.bijection, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: restriction of adjunctions assumes both comparison isomorphisms, and conjugateEquiv_iso concerns adjunctions on the same categories; neither proves this specified normalized geometric mate Hom identity on restricted scalar-extension images in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_symm|homEquiv_counit|homEquiv_naturality_right",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas only; these do not supply the constructible topology-change full faithfulness or the specified normalized geometric comparison in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas only; these do not supply the constructible topology-change full faithfulness or the specified normalized geometric comparison in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom bijections for the counit mate of a natural invertible comparison of left adjoints and fully faithful functors on full subcategories",
+   "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas only; these do not supply the constructible topology-change full faithfulness or the specified normalized geometric comparison in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction Hom equivalence inverse of a morphism equals left adjoint applied to the morphism followed by counit; naturality under precomposition",
+   "results": "8 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.counit_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas only; these do not supply the constructible topology-change full faithfulness or the specified normalized geometric comparison in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived coefficient change counit mate acts bijectively on Hom from scalar extended constructible complexes by geometric adjunction and naturality of pullback tensor comparison",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε_fac_app, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas only; these do not supply the constructible topology-change full faithfulness or the specified normalized geometric comparison in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-proper-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3), proper coefficient-change input: Hom calculation for the canonical topology-change counit mate (returned parent proof step 4)",
+   "via": [
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-algcl-topology-mate-hom-bijection",
+  "worker": "stage1",
+  "summary": "Four-step categorical proof retaining the exact statement and the actual K-flat scalar extension. Reuses topology-comparison full faithfulness and bounded-constructible pullback preservation, then writes the counit/naturality calculation identifying the specified mate. No new nodes.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images: the proper coefficient-change Hom-adjunction input, not a new finiteness or topology-comparison proof.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Exactness of geometric pullback of module objects for an arbitrary commutative condensed ring (here C); generic coefficient-layer fact, no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic: the derived functor of an exact functor is computed termwise; used to read Lf_C^* termwise."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic: cohomology commutes with an exact functor applied termwise, giving H^q(Lf_C^*M)=f_C^*H^q(M) and boundedness."
+   },
+   {
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Inverse image preserves finite-constant-local-model constructibility for the finite-subextension ring C on qcqs schemes; the unit's route does not replace this generic pullback fact."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic K-flat normalization of the actual pullback/tensor natural comparison, identifying the specified sigma and its naturality; no node of this unit supplies this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-51661f87d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-51661f87d (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes, statement and stmt_deps byte-identical to side-live (the item is unsplit live and on side-live, there is no repair note, no SGA source, and it is not superseded). One fault, in step 1 (C3/E1, wrong notion): lem-sfb-dc-upper-star-preserves gives constructibility in the sense of sk-def-sfb-bounded-constructible (locally finitely presented over the ring object, def-sfb-constructible-module). The item's D^b_c, which the topology comparison needs, is that of sk-def-sfb-constructible (finite constant local models over Λ(*)). For C the two notions differ: coker(a), a(s)=s, is locally finitely presented but has no constant model near 0. FIX (fixes/dag/nodes/sec-six-functors-basics/<item>.json): step 1 now cites det-prop-sfb-module-pullback-exact-main + module-derived-pushpull + lem-weil-pbc-exact-functor-derived-functor/-bounded-below for H^q(Lf^*M)=f^*H^q(M), then lem-sfb-pullback-constant-model-constructible. That node covers qcqs schemes and its Q̄_ℓ is exactly the finite-subextension ring C. proof_deps recomputed; the upper-star tool_use replaced by four generic declared tool_uses. Steps 2-4 checked: the topology comparison gives full faithfulness on D^b_c for the exact C, B and K-flat J. σ has the direction of the normalization's χ_h, is invertible without flatness and natural. Φ^{-1}(u)=ε_L∘f^*u (homEquiv_counit). The naturality square has the right direction. The transpose square with k=id gives χ_L∘J_Tu=H(J_Tu), and surjectivity of J_T on Hom finishes. Small cases checked: f=id, M=0 or L=0, empty Z. Not weakened. Batch-5 flag: topology-comparison is already in the batch-5 closure, because the parent proper-scalar-comparison cites it directly. The trf node (normal Noetherian space ⇒ finitely many disjoint clopen normal integral components) is generic topology, not part of the trace formula or Poincaré duality. Accepted. The new step-1 citations are already in the closure and none has the item in its closure, so there is no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlgClTopologyMateHomBijection",
+  "declaration": "AlgebraicGeometry.ProEtale.algClTopologyMate_hom_bijection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.algClTopologyDerivedAction",
+   "AlgebraicGeometry.ProEtale.algClTopologyPullbackTheta",
+   "AlgebraicGeometry.ProEtale.algClTopologyPullbackTheta_isIso",
+   "AlgebraicGeometry.ProEtale.algClTopologyPullbackSigma",
+   "AlgebraicGeometry.ProEtale.algClTopologyCounitMate",
+   "AlgebraicGeometry.ProEtale.algClTopologyMate_hom_bijection"
+  ],
+  "file": "lean/Sheaf/Paper/AlgClTopologyMateHomBijection.lean",
+  "statement": "theorem algClTopologyMate_hom_bijection (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (Z T : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] (f : Z ⟶ T) (L : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) Z.left) (hP : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) T.left ((CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) f.left).obj L.obj)) (M : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) T.left) : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) Z.left ((CondensedRing.moduleObjectDerivedPullback (Profinite.padicAlgClRingObj ℓ) f.left).obj M.obj) ∧ ∃ (eT : (M.obj ⟶ (CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) f.left).obj L.obj) ≃ ((algClTopologyScalarExtension ℓ T.left).obj M.obj ⟶ (algClTopologyScalarExtension ℓ T.left).obj ((CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) f.left).obj L.obj))) (eZ : ((CondensedRing.moduleObjectDerivedPullback (Profinite.padicAlgClRingObj ℓ) f.left).obj M.obj ⟶ L.obj) ≃ ((algClTopologyScalarExtension ℓ Z.left).obj ((CondensedRing.moduleObjectDerivedPullback (Profinite.padicAlgClRingObj ℓ) f.left).obj M.obj) ⟶ (algClTopologyScalarExtension ℓ Z.left).obj L.obj)), (∀ u, eT u = (algClTopologyScalarExtension ℓ T.left).map u) ∧ (∀ v, eZ v = (algClTopologyScalarExtension ℓ Z.left).map v) ∧ Function.Bijective (fun v : (algClTopologyScalarExtension ℓ T.left).obj M.obj ⟶ (algClTopologyScalarExtension ℓ T.left).obj ((CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) f.left).obj L.obj) ↦ v ≫ algClTopologyCounitMate ℓ f.left L.obj) ∧ (∀ v, v ≫ algClTopologyCounitMate ℓ f.left L.obj = (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) f.left).homEquiv _ _ ((algClTopologyPullbackSigma ℓ f.left).hom.app M.obj ≫ eZ ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).homEquiv _ _ |>.symm (eT.symm v)))) ∧ (∀ u : M.obj ⟶ (CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj ℓ) f.left).obj L.obj, (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) f.left).homEquiv _ _ ((algClTopologyPullbackSigma ℓ f.left).hom.app M.obj ≫ (algClTopologyScalarExtension ℓ Z.left).map ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).homEquiv _ _ |>.symm u)) = (algClTopologyScalarExtension ℓ T.left).map u ≫ algClTopologyCounitMate ℓ f.left L.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q153",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The chosen algebraic closure is the existing PadicAlgCl model with its extended norm, as in the recorded topology comparison. eT and eZ are ambient Hom equivalences whose forward maps are exactly scalar extension; their inverses are thus determined. The full four-stage function and its value on J(u) are stated explicitly. No properness, constructibility of Q, or coefficient flatness hypothesis is introduced. The four canonical theta/sigma helpers are owned as additional declarations in this item module. The original KFlatScalarComparisonNormalization module and its complete node record are left unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c860e9b8",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Re-delivery after c3145 RETURN; both faults repaired. (1) lem-sfb-constructible-algcl-topology-comparison removed from stmt_deps (kept in proof_deps); stmt_deps now cite def-sfb-algcl-topology-inclusion plus new def-sfb-algcl-topology-scalar-extension (existing:true on unchanged ConstructibleAlgClTopologyComparison, statement substring of live abbrev line 85, matches J_X=leftDerived extendScalars along p_X^*c, no other owner). (2) kflat-normalization record absent from delivery so landed record untouched; the 4 θ/σ helpers moved byte-identically (diffed vs c3145, only blueprint tags differ) into the item module and listed in lean.declarations; imports = union of former compiled files. Mathematics re-checked: σ=(asIso ScalarPullback.mate(action square)).symm with action built only from canonical leftDerived≅mapDerivedCategory and derivedComapUpperStarIso, direction f_B^*J_T→J_Zf_C^*; χ=homEquiv_B(σ_P≫J_Zε_L); eT/eZ forward maps pinned to J.map; four-stage composite and J_Tu clause correct; no properness/Q-constructibility/flatness/universe restriction; statement verbatim and all declarations present; two sorries (theorems only). Advisory: owners of derivedComapUpperStarIso/leftDerivedUpperStarIsoMapDerivedCategory not in stmt_deps; ModuleRingedToposDerivedComparison import serves θ_isIso plan but lem-pd-module-ringed-topos-derived-comparison not in proof_deps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T041235-L-1108777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

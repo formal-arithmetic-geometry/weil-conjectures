@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-published-system-ambient-coherence",
+ "kind": "statement",
+ "title": "Ambient tensor composition in the published sequence categories",
+ "statement": "Let F be a finite-field datum, l a prime different from F.p, and E a finite extension of Q_l. For composable morphisms f:X→Y and g:Y→Z in Spaces F, and arbitrary unbounded sequence objects M,N over Z, the actual ambient sequence pullbacks and comparisons recorded in publishedSystemAmbientData satisfy Qf(mu_g);mu_f(Qg M,Qg N);T_X(b_M,b_N) = b_(T_Z(M,N));mu_(fg), where b:Qg⋙Qf≅Qfg is the recorded ambient compositor. This contains no published-comparison or Compositors identification. [def-sf-ambient-proper-open-calculus] [def-sf-published-system-ambient-presentation]",
+ "stmt_deps": [
+  "def-sf-ambient-proper-open-calculus",
+  "def-sf-published-system-ambient-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; final sequence-site conjunct of ambientPullbackTensorCoherence, with the published system tensor models."
+ },
+ "proof": [
+  {
+   "text": "Install a Fintype structure on the finite base field. Its cardinality is p^a; charP_of_card_eq_prime_pow gives characteristic p. Algebra.ringChar_eq transfers this to the algebraic closure, so l≠p supplies l≠ringChar(F.k).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The defining properties of X,Y,Z in Spaces F supply locally finite-type and quasi-compact structure maps. Apply ambientPullbackTensorCoherence with s=none and with the systemClosed structures and systemTensorModel models of pullbackTensorCalculus. Take its last conjunct and evaluate at M,N. The ambient package records exactly its pullbacks, tensor comparisons and derived compositor.",
+   "uses": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "def-sf-published-system-ambient-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "def-sf-published-system-ambient-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; final sequence-site conjunct of ambientPullbackTensorCoherence, with the published system tensor models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image tensor comparison respects composition of scheme morphisms",
+   "results": "8 hits, including Scheme.Modules.pullbackComp, conjugateEquiv_pullbackComp_inv and pseudofunctor_mapComp_inv_τl.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scheme-module composition; use the existing project ambient derived theorem for sequence objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "charP_of_card_eq_prime_pow",
+   "results": "1 hit: charP_of_card_eq_prime_pow in Mathlib.Algebra.CharP.CharAndCard.",
+   "date": "2026-10-27",
+   "verdict": "Used to obtain the characteristic hypothesis from the finite-field datum."
+  },
+  {
+   "tool": "grep",
+   "query": "ambientPullbackTensorCoherence|publishedSystemAmbientCoherence",
+   "results": "msearch grep returned 0 hits. Repository rg finds ambientPullbackTensorCoherence in Sheaf.Paper.AmbientPullbackTensorCoherence.",
+   "date": "2026-10-27",
+   "verdict": "Specialize the existing project theorem; this helper adds no proof obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PublishedSystemTensorComposition",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence of fix-prop-projection-formula, via ambient proper/open pasting: Specializing the ambient tensor composition equation to actual sequence objects",
+   "via": [
+    "lem-sf-published-system-tensor-composition",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PublishedSystemAmbientCoherence",
+  "file": "lean/Sheaf/SixFunctors/PublishedSystemAmbientCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.publishedSystemAmbientCoherence",
+  "statement": "theorem publishedSystemAmbientCoherence (F : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∀ {X Y Z : Spaces F} (f : X ⟶ Y) (g : Y ⟶ Z)\n      (M N : WeilConjectures.coefficientSequenceDerived l E Z.obj.left),\n      ((WeilConjectures.publishedSystemAmbientData l E).pull f.hom.left).map\n          (((WeilConjectures.publishedSystemAmbientData l E).tensor g.hom.left).hom.app (M, N)) ≫\n        ((WeilConjectures.publishedSystemAmbientData l E).tensor f.hom.left).hom.app\n          (((WeilConjectures.publishedSystemAmbientData l E).pull g.hom.left).obj M,\n            ((WeilConjectures.publishedSystemAmbientData l E).pull g.hom.left).obj N) ≫\n        (WeilConjectures.pullbackTensorCalculus l E X.obj.left).systemClosed.tensor.map\n          (Prod.mkHom\n            (((WeilConjectures.publishedSystemAmbientData l E).comp\n              f.hom.left g.hom.left).hom.app M)\n            (((WeilConjectures.publishedSystemAmbientData l E).comp\n              f.hom.left g.hom.left).hom.app N)) =\n      ((WeilConjectures.publishedSystemAmbientData l E).comp f.hom.left g.hom.left).hom.app\n          ((WeilConjectures.pullbackTensorCalculus l E Z.obj.left).systemClosed.tensor.obj (M, N)) ≫\n        ((WeilConjectures.publishedSystemAmbientData l E).tensor\n          (f.hom.left ≫ g.hom.left)).hom.app (M, N)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (only explicit .{u} universe annotations, same elaborated type) and vs SystemTensorComposition; 2 new sorry identifications vs Compositors (sections/conjugate/pullComp_model) and ambient pushComp/comp/derivedComp/tensorData normalizations; node records vs Lean; direct importer AmbientProperOpenPasting compiled against the 6 delivered modules (rc 0); #print axioms (transport sorry-free, sorryAx only from the 2 new holes and upstream holes)"
+ }
+}

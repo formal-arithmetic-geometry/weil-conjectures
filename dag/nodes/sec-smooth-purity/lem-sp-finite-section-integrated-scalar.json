@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-finite-section-integrated-scalar",
+ "kind": "statement",
+ "title": "Scalar compatibility of integrated smooth-section specialization",
+ "statement": "Let A,B be finite commutative rings with φ:A→B, and let M,N>0 satisfy M dividing N, N A=0 and M B=0. Let S be Noetherian with N and M invertible, and let g:V→S be a compactifiable separated quasi-compact smooth morphism of pure relative dimension d with closed section s and its finite-ring Geometry witness [lem-trf-finite-ring-section-deformation]. Supply the canonical Cartesian cone-to-conormal-bundle squares and family isomorphisms κ_A and κ_B normalized at one [def-pur-finite-smooth-canonical-maps]. Let t be the root-power, generator and derived-counit normalized coefficient-line comparison from exponent N to exponent M [def-pur-finite-smooth-coefficient-arrows]. Write ψ_A and ψ_B for integratedSpecialization, zero specialization followed by the inverse cone-to-bundle section mate and the inverse bundle-integration adjunct [lem-sp-finite-section-integrated-specialization-base-change]. Then Q_S(ψ_A) ≫ (t.tensorPower d).hom = q_(g,s) ≫ ψ_B, where q_(g,s) is the actual exceptional coefficient section map [def-pur-dnc-coefficient-section-maps]. There is no diagonal factor or smooth orientation in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation, deformation and vector integration factors; general-ring proof (2)"
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "lem-sp-finite-section-integrated-specialization-base-change",
+  "def-pur-dnc-coefficient-section-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized zero-fibre specialization coefficient square, separately from bundle integration. Since N kills A it also kills B under φ; no change-of-exponent condition enters specialization.",
+   "uses": [
+    "lem-sp-finite-section-specialization-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply section_scalar_base_change to the canonical bundle-to-cone Cartesian square over the identity of S. Smoothness of the normal projection follows by pullback from the Rees projection, and the cone-to-bundle isomorphism transfers it to the bundle projection. The homogeneous cone comparison respects the zero section. The identity-pullback scalar coherence equation converts its section square into q_bundle≫normalSectionMap_B=Q(normalSectionMap_A)≫q_normal. This is the proved private normalSectionMap_scalar helper.",
+   "uses": [
+    "lem-pur-section-scalar-base-change",
+    "lem-pur-etale-scalar-pullback-identity-normalization",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the root-power-normalized scalar square for the bundle zero-section adjunct to the conormal bundle. It compares the adjunct at exponent N over A with the adjunct at exponent M over B through t.tensorPower d.",
+   "uses": [
+    "lem-sp-finite-bundle-section-adjoint-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired equality with the B bundleSectionAdjoint followed by normalSectionMap_B; both are invertible. Replace the tensor-comparison/adjunct composite by the scalar adjunct square. Replace the next bundle/cone composite by normalSectionMap_scalar. Functoriality combines the three A factors, and integratedSpecialization_normalization identifies their composite with specialization_A. The zero-fibre scalar square gives q_(g,s)≫specialization_B; the B normalization equation restores the postcomposed right side. Cancel the two invertible B maps. No inverse coefficient map, orientation, or diagonal factor is assumed.",
+   "uses": [
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-section-specialization-scalar",
+  "lem-pur-section-scalar-base-change",
+  "lem-pur-etale-scalar-pullback-identity-normalization",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-sp-finite-bundle-section-adjoint-scalar",
+  "lem-sp-finite-section-integrated-specialization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: separate specialization and bundle-adjunct squares, proved cone square and categorical cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integrated specialization of a closed section of a smooth scheme morphism commutes with finite coefficient ring change and Kummer root power comparison",
+   "results": "Eight hits, concerning integral morphisms and scheme base change; no derived section-integration comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to normal bundle specialization followed by inverse vector bundle integration commutes with change of finite coefficients",
+   "results": "Eight hits; smooth manifold/vector bundle coordinate formulae, no etale sheaf integration.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integratedSpecialization|finiteSmoothDiagonalFactor|section_scalar_base_change",
+   "results": "No Mathlib or adopted WeilConjectures hits. Project search found the geometric base-change version of integratedSpecialization, common-exponent orientation reduction, and uniformizer/pro-etale diagonal factor reduction. None has the required ordinary scalar section square at the two independently specified exponents.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOrientationReduction",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (1) finite orientations and (3) coefficient compatibility",
+   "via": [
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSectionIntegratedScalar",
+  "file": "lean/Sheaf/Paper/FiniteSectionIntegratedScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.integratedSpecialization_scalar",
+  "statement": "theorem integratedSpecialization_scalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (hMN : M ∣ N)\n    (hA : (N : A) = 0) (hB : (M : B) = 0)\n    {V S : Scheme.{u}} [IsNoetherian S]\n    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g]\n    [HasCompactification g] [IsSeparated g] [QuasiCompact g]\n    (s : S ⟶ V) [IsClosedImmersion s]\n    [FiniteRingSectionDeformation.Geometry d g s] (hs : s ≫ g = 𝟙 S)\n    (sq : IsPullback\n      ((reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso d g s).hom)\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1)) (𝟙 S))\n    (sq' : IsPullback\n      ((reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso d g s).hom)\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1)) (𝟙 S))\n    (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (M : Γ(S, ⊤)))\n    (κ : NoetherianSectionSpecialization.family A g s ≅\n      (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj\n        (sectionInvariant A g s))\n    (κ' : NoetherianSectionSpecialization.family B g s ≅\n      (ordinaryFinitePullback B (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj\n        (sectionInvariant B g s))\n    (hκ : NoetherianSectionSpecialization.Normalized A g s hs κ)\n    (hκ' : NoetherianSectionSpecialization.Normalized B g s hs κ')\n    (t : CoefficientLineComparison φ N M hA hB S) :\n    (ordinaryScalar φ S).map\n        (integratedSpecialization A d g s hs sq N hN hA hS κ) ≫\n        (t.tensorPower d).hom =\n      WeilConjectures.DncCoefficientTransport.sectionMap φ g s ≫\n        integratedSpecialization B d g s hs sq' M hM hB hS' κ'",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T034742-L-3681791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T103455-L-1086018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

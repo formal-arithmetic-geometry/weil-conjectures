@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-affine-section-ideal-twist-h1-vanishing",
+ "kind": "statement",
+ "title": "An affine nonzero section gives vanishing of ideal twists on a proper integral curve",
+ "statement": "Let $k$ be a field [def-weil-field], let $C$ be an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension], and let $\\mathcal N$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Let $n\\ge1$ be an integer and let $s\\in\\Gamma(C,\\mathcal N^{\\otimes n})$ be a nonzero global section whose nonvanishing open $C_s$ [def-weil-pbc-ample-invertible-module] is affine. For every quasi-coherent sheaf of ideals $\\mathcal I\\subseteq\\mathcal O_C$ [pqf-def-coherent], there exists an integer $E\\ge1$ such that $H^1(C,\\mathcal I\\otimes_{\\mathcal O_C}\\mathcal N^{\\otimes En})=0$. Cohomology is as in [pqf-def-cohomology], and tensor products and powers are as in [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=\\mathcal N^{\\otimes n}$ and $F_e=\\mathcal I\\otimes L^{\\otimes e}$ for $e\\ge0$, with $F_0=\\mathcal I$. By [lem-trf-proper-field-invertible-coherent], $C$ is Noetherian and $\\mathcal O_C$ is coherent. By [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2), the quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_C$ is coherent. In a local trivialization of $\\mathcal N$, every $F_e$ identifies with $\\mathcal I$, so it is coherent. The same trivializations show that $L$ and its powers are invertible. Also $C$ is quasi-compact, being Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], since it is locally Noetherian.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  },
+  {
+   "text": "On a nonempty affine trivializing open $V=\\operatorname{Spec}A$, the section $s$ has a coefficient $a\\in A$, and $A$ is a domain. This coefficient is nonzero: if $s$ vanished on $V$, any other nonempty affine trivializing open $W$ would meet $V$ by irreducibility; choose a nonempty basic open $D(f)\\subseteq W\\cap V$. Its coefficient $b$ would have $b/1=0$ in the localization at $f\\ne0$, forcing $b=0$ in the domain. Such $W$ cover $C$, contradicting $s\\ne0$. Thus $a\\ne0$ on every $V$. On $V$, the map $u_e:F_e\\to F_{e+1}$ given by tensoring with $s$ is multiplication by $a$ on the ideal $\\mathcal I(V)\\subseteq A$, which is injective since $A$ is a domain; it is an isomorphism on $D(a)$. These local calculations prove that $u_e$ is injective everywhere and an isomorphism over $C_s$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  },
+  {
+   "text": "Let $Q_e=\\operatorname{Coker}(u_e)$. It is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1), and its support is contained in the closed subset $Z=C\\setminus C_s$. The subset $Z$ is proper: on any nonempty affine trivializing open the nonzero coefficient $a$ has the generic prime $(0)$ in $D(a)$, so $C_s\\ne\\varnothing$. To check the dimension bound even without assuming the support closed, take any strict chain $Y_0\\subsetneq Y_1$ of nonempty irreducible relatively closed subsets of $\\operatorname{Supp}(Q_e)$. Their closures in $C$ are irreducible closed subsets contained in $Z$; they remain distinct because intersecting each closure with $\\operatorname{Supp}(Q_e)$ recovers $Y_i$. Appending $C$ gives a chain of length two in the irreducible space $C$, contradicting $\\dim C=1$. Thus $\\dim\\operatorname{Supp}(Q_e)\\le0$.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-kun-topological-krull-dimension",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-coherent-zero-dimensional-support] to each $Q_e$ on the locally Noetherian scheme $C$ to obtain $H^1(C,Q_e)=0$. The short exact sequence $0\\to F_e\\xrightarrow{u_e}F_{e+1}\\to Q_e\\to0$ gives, by [pqf-def-cohomology], the exact segment $H^1(C,F_e)\\to H^1(C,F_{e+1})\\to H^1(C,Q_e)$. Thus every transition $H^1(u_e)$ is surjective, and their composite $T_e:H^1(C,\\mathcal I)\\to H^1(C,F_e)$ is surjective as well. These are $k$-linear maps, obtained by applying the derived global-section functor to $\\mathcal O_C$-linear maps. The cohomology in the vanishing node is the same right-derived module global sections as in [pqf-def-cohomology].",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  },
+  {
+   "text": "For every $\\xi\\in H^1(C,\\mathcal I)$ apply [lem-sc-section-affine-open-kills-cohomology] with $X=C$, the invertible module $L=\\mathcal N^{\\otimes n}$, the given $s$, $F=\\mathcal I$, and $p=1$. The scheme is quasi-compact and quasi-separated by step 1, $C_s$ is affine by hypothesis, and $\\mathcal I$ is quasi-coherent. We obtain $e(\\xi)\\ge0$ with $T_{e(\\xi)}(\\xi)=0$: the composite $u_{e-1}\\cdots u_0$ is precisely tensoring with $s^{\\otimes e}$, as is checked in each trivialization by multiplication by $a^e$.",
+   "uses": [
+    "lem-sc-section-affine-open-kills-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  },
+  {
+   "text": "By [lem-pc-coherent-hi] applied to $C\\to\\operatorname{Spec}k$ and the coherent ideal $\\mathcal I$, the vector space $V=H^1(C,\\mathcal I)$ is finite-dimensional; a field is Noetherian since its only ideals are $0$ and $k$. Choose a finite basis $v_1,\\ldots,v_r$. Choose annihilating exponents $e_i$ as in step 5 and put $E=\\max(1,e_1,\\ldots,e_r)$, taking $E=1$ if $r=0$. For each $i$, functoriality factors $T_E$ through $T_{e_i}$, so $T_E(v_i)=0$. Every vector is a linear combination of the $v_i$, hence $T_E=0$. Since $T_E$ is surjective by step 4, its target $H^1(C,F_E)$ is zero. Finally $F_E\\cong\\mathcal I\\otimes\\mathcal N^{\\otimes En}$ by grouping the tensor factors, which gives the assertion with $E\\ge1$.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "pqf-def-cohomology",
+  "lem-sc-section-affine-open-kills-cohomology",
+  "lem-pc-coherent-hi",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an integral proper curve a nonzero section of an invertible sheaf with affine nonvanishing locus implies every quasi coherent ideal has zero first cohomology after a positive tensor twist",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n\nThe hits concern structure-sheaf sections killed after localization, vanishing ideals, or cotangent modules; none gives vanishing of the entire twisted H1 group of an ideal.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let L have a nonzero section s on a proper integral one dimensional scheme with X_s affine. For any ideal I some positive e satisfies H1 of I tensor L to the e is zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"Rep.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : Rep k G) [CategoryTheory.Projective Y] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (((Rep.Tor k G (n + 1)).obj X).obj Y)\", \"doc\": \"For any representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, if $Y$ is a projective object in the category $\\\\text{Rep}(k, G)$, then the $(n+1)$-th Tor functor $\\\\text{Tor}_{n+1}^{kG}\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] [inst_6 : Algebra P A]\\n  [IsScalarTower R P A],\\n  Function.Surjective ⇑(algebraMap P A) →\\n    (Function.Injective ⇑(\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ P $, and a $ P $-algebra $ A $ with a scalar tower structure over $ R $, if the canonical algebra map $ P \\to A $ is surjective, then the injectivity \"}\n\nThe hits concern structure-sheaf sections killed after localization, vanishing ideals, or cotangent modules; none gives vanishing of the entire twisted H1 group of an ideal.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"cohomology\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry'\n\nInvalid namespace-only identifier in this query; this is not evidence of absence. A corrected substring query was run as well.",
+   "date": "2026-10-22",
+   "verdict": "invalid query; corrected query below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero section with affine nonvanishing locus on a proper integral curve kills H1 of every ideal after tensoring by a positive power of the line bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme.{u}} {U : TopologicalSpace.Opens X} (hU : IsCompact U.carrier) (hU' : IsQuasiSeparated U.carrier)\\n  {f s : Γ(X, U)} (hf : f |_ X.basicOpen s = 0) : ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme.{u}) {U : X.Opens} (hU : IsCompact U.1) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} [CompactSpace X] [QuasiSeparatedSpace X] {f s : Γ(X, ⊤)} (hf : f |_ X.basicOpen s = 0) :\\n  ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : Ideal ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  ↑(AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop I).support = X.zeroLocus ↑I\", \"doc\": \"For a scheme $X$ and an ideal $I$ in the global sections of its structure sheaf, the support of the ideal sheaf constructed from $I$ coincides with the zero locus of $I$, i.e., the set of points in $X\"}\n  {\"name\": \"ModuleCat.Tilde.smul_stalk_no_nonzero_divisor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"{x : PrimeSpectrum R} (r : x.asIdeal.primeCompl) (st : (tildeInModuleCat M).stalk x) (hst : r.1 • st = 0) : st = 0\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the spectrum of a commutative ring $R$, let $\\\\widetilde{M}$ denote the sheaf associated to an $R$-module $M$. If $r \\\\in R \\\\setminus \\\\mathfrak{p}$ (i.e., $r$ lies in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) (U : X.affineOpens) : (I.support : Set X) ∩ U = X.zeroLocus (U := U.1) (I.ideal U) ∩ U\", \"doc\": \"For a scheme $X$ with an ideal sheaf data $I$ and an affine open subset $U$ of $X$, the intersection of the support of $I$ with $U$ coincides with the zero locus of the ideal $I(U)$ in the ring of sec\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n\nThe hits concern structure-sheaf sections killed after localization, vanishing ideals, or cotangent modules; none gives vanishing of the entire twisted H1 group of an ideal.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(cohomology|vanish)|section.*kills|affine.*(cohomology|H¹)|H1.*(ideal|tensor)",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"33\", \"text\": \"* `ProjectiveSpectrum.vanishingIdeal t`: The vanishing ideal of a subset `t` of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"92\", \"text\": \"quotient ring `A` modulo the prime ideal `x`. In this manner, `vanishingIdeal t` is exactly the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"93\", \"text\": \"ideal of `A` consisting of all \\\"functions\\\" that vanish on all of `t`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"141\", \"text\": \"  simpa [show I.toIdeal ≤ (vanishingIdeal t).toIdeal ↔ I ≤ vanishingIdeal t from Iff.rfl] using!\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"148\", \"text\": \"theorem subset_vanishingIdeal_zeroLocus (s : Set A) : s ⊆ vanishingIdeal (zeroLocus 𝒜 s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"233\", \"text\": \"    rwa [← PrimeSpectrum.vanishingIdeal_singleton, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"112\", \"text\": \"  rw [← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, PrimeSpectrum.vanishingIdeal_singleton]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"441\", \"text\": \"  rw [← PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical, PrimeSpectrum.mem_vanishingIdeal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal`: The vanishing ideal of a set.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"597\", \"text\": \"        rwa [← PrimeSpectrum.zeroLocus_span, ← Ideal.map, vanishingIdeal_zeroLocus_eq_radical,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"613\", \"text\": \"  simp only [le_def, vanishingIdeal_ideal, ← PrimeSpectrum.subset_zeroLocus_iff_le_vanishingIdeal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"626\", \"text\": \"lemma gc : @GaloisConnection X.IdealSheafData (Closeds X)ᵒᵈ _ _ (support ·) (vanishingIdeal ·) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"629\", \"text\": \"lemma vanishingIdeal_antimono {S T : Closeds X} (h : S ≤ T) : vanishingIdeal T ≤ vanishingIdeal S :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"169\", \"text\": \"    (vanishingIdeal Z).map f = vanishingIdeal (.closure (f '' Z)) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"120\", \"text\": \"      rw [map_vanishingIdeal, ← le_support_iff_le_vanishingIdeal]\"}\n\nThe hits concern structure-sheaf sections killed after localization, vanishing ideals, or cotangent modules; none gives vanishing of the entire twisted H1 group of an ideal. Search directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(cohomology|vanish)|section.*kills|affine.*H1|H1.*tensor",
+   "results": "Actual search returned 15 hits; top results: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean.  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero section with affine complement on a proper integral curve gives vanishing of first cohomology of high ideal twists",
+   "results": "Actual search returned 8 hits; top results: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Algebra.FormallySmooth.subsingleton_h1Cotangent, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.component_nontrivial, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.RingedSpace.zeroLocus_singleton.  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"tensor\"",
+   "results": "Actual search returned 0 hits; top results: .  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a proper integral curve a nonzero section of a line bundle with affine nonvanishing locus implies eventual vanishing of H1 of each ideal tensored with powers of that line bundle",
+   "results": "Actual search returned 8 hits; top results: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top.  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.*vanish|vanish.*Serre|cohomology.*(ample|twist)|IsAmple.*(cohomology|vanish)",
+   "results": "Actual search returned 0 hits; top results: .  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective transition maps on first cohomology of ideal sheaf twists and eventual annihilation by a section force a sufficiently high twist to have zero cohomology",
+   "results": "Actual search returned 8 hits; top results: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.zero_of_zero_cover.  Read the results: these concern localized structure-sheaf sections, vanishing ideals or cotangent H1, not eventual vanishing of ideal-twist sheaf cohomology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-integral-curve-ample-degree",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). Extracted supporting argument: Tag 0B5X, lemma-ample-curve, proof, third paragraph beginning We will show: injective ideal-twist maps, zero-dimensional cokernels, surjections on H1 and finite-basis annihilation (varieties.tex lines 10038-10066).",
+   "via": [
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-section-ideal-twist-h1-vanishing",
+  "worker": "stage1",
+  "summary": "Kept the statement and all metadata; wrote the injective ideal-twist sequence, the elementary dimension-zero support argument, and the surjection/finite-basis assembly following Tag 0B5X. Reused the existing Noetherian coherence, zero-support vanishing, class-annihilation and proper finiteness nodes; no new nodes are needed. Checked zero ideal, zero initial H1, singular integral curves and exponents zero versus positive. No exact completed project declaration or Mathlib match found.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry through lem-trf-proper-integral-curve-ample-degree and its fibrewise ampleness-to-projectivity supporting input. Realizes specifically varieties.tex Tag 0B5X, lemma-ample-curve, third proof paragraph (ideal-twist injections, cokernel support, surjective H1 transitions and finite-basis annihilation). The newest blueprint ancestor is read from literature/blueprint/latest; no change to its contracting-correspondence route is asserted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Coherence of the quasi-coherent ideal in the structure sheaf, and of each coherent cokernel; these are generic Noetherian coherence inputs, not an alternative proof route."
+   },
+   {
+    "node": "lem-sfb-coherent-zero-dimensional-support",
+    "why": "Tag 0B3J gives vanishing of H1 of the coherent cokernels supported on the section zero locus, exactly as requested by the source proof."
+   },
+   {
+    "node": "lem-sc-section-affine-open-kills-cohomology",
+    "why": "Tag 01XR gives eventual annihilation of each H1 class by powers of the given affine-open section; this generic tool is explicitly invoked in Tag 0B5X."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Tag 02O5 supplies finite-dimensionality of H1 of a coherent ideal on a proper scheme over the field; no node of this unit replaces this generic finiteness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "lem-sc-section-affine-open-kills-cohomology",
+  "lem-pc-coherent-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-cea0197e2",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-cea0197e2 (reviewer sub-agent of L); spot-checked: I read Stacks 0B5X (varieties.tex lemma-ample-curve, proof, third paragraph, lines 10038-10066) and checked the cited Stacks statements of 01XR (coherent.tex 4709) and 0B3J (2488). The delivery is one commit with the item and report and no new nodes. The item statement, stmt_deps, source and blueprint are identical to live, where the node is still unsplit; it is not a re-split and cites no SGA. The six steps carry every argument of the source. Step 2 writes out 'torsion free' as an elementary domain/irreducibility argument, which I checked, including nonvanishing on every chart. Step 3 shows the cokernel support lies in C minus C_s, which is a proper subset, and bounds its dimension by 0 through the closure chain; this is correct. Step 4 applies coherent-zero-dimensional-support plus the long exact sequence in pqf-def-cohomology, so the H^1 maps are surjective. Step 5 applies 01XR with p=1 and L=N^n; the composite u's equal tensoring with s^e. Step 6 uses lem-pc-coherent-hi over Spec k for finite dimension and takes E=max(1,e_i). Edge cases checked: I=0, H^1(I)=0, e_i=0, and P^1 with O(-d). The only citer, lem-trf-proper-integral-curve-ample-degree step 4, uses exactly this statement. I found no duplicate in the DAG and accept the four generic tool_uses. FIX (C1): step 1 derived quasi-separatedness from the affine-intersection characterization (01KO) without a node, while the convention node defines it by the diagonal. The fix cites the existing Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated (01OY) in step 1 and proof_deps (fixes/dag/nodes/sec-trace-formula/lem-trf-affine-section-ideal-twist-h1-vanishing.json); nothing else changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AffineSectionIdealTwistH1Vanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_ideal_tensorPow_h1_isZero_of_affine_nonvanishing",
+  "file": "lean/Sheaf/TraceFormula/AffineSectionIdealTwistH1Vanishing.lean",
+  "statement": "theorem exists_ideal_tensorPow_h1_isZero_of_affine_nonvanishing {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = (1 : WithBot ℕ∞)) (N : C.Modules) [N.IsInvertible] (n : ℕ) (hn : 1 ≤ n) (s : (N.tensorPow n).val.presheaf.obj (op ⊤)) (hs : s ≠ 0) (U : C.Opens) (hU : (U : Set C) = nonvanishingLocus (N.tensorPow n) s) (hAffine : IsAffineOpen U) (I : C.IdealSheafData) (hI : I.toModules.IsQuasicoherent) : ∃ E : ℕ, 1 ≤ E ∧ IsZero ((RingedSpace.moduleCohomology C.toRingedSpace 1).obj (I.toModules ⊗ N.tensorPow (E * n)))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-713fe01e4",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause: k field, C integral/proper over Spec k/topKrullDim=1, N invertible, n≥1, s≠0 global section of tensorPow n, C_s as open U with exact set equality to recorded nonvanishingLocus + IsAffineOpen, arbitrary IdealSheafData with toModules (canonical kernel ideal subsheaf; hI redundant but harmless), conclusion ∃E≥1 with IsZero H^1(I⊗N^{E*n}) via recorded moduleCohomology; tensor instance = SheafOfModules.monoidalCategory X.sheaf, same construction as recorded def-pur instance. Only lean field changed vs live; statement verbatim in file; docstrings carry source/blueprint/six steps; sorry only; no new defs; universes match citer proper_integral_curve_isAmple_iff_degree_pos; edge cases I=0, H^1=0, empty C excluded. No findings."
+ }
+}

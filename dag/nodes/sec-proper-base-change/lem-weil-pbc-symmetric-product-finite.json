@@ -215,7 +215,40 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.isFinite_symmetricProduct",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct",
+     "lines": [
+      109,
+      126
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct",
+     "lines": [
+      146,
+      163
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -260,5 +293,25 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For every scheme $S$ and every $n\\geq0$, the symmetric-product morphism\n$\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ of\n[def-weil-pbc-symmetric-product-morphism] is finite.",
+  "proof": [
+   {
+    "text": "Induction on $n$; $\\sigma_0$ is an isomorphism. By construction\n$\\sigma_{n+1}=\\mu\\circ\\mathbf P^1_{\\sigma_n}$, where $\\mathbf P^1_{\\sigma_n}$ is a base\nchange of $\\sigma_n$, hence finite by induction, and $\\mu$ is the multiplication\nmorphism of [lem-weil-pbc-symmetric-product-properties]. A composite of finite\nmorphisms is finite, so it remains to see that $\\mu$ is finite. Its source\n$\\mathbf P^1\\times\\mathbf P^n$ is proper and its target is separated over the base,\nso $\\mu$ is proper. It is quasi-finite: over an algebraically closed field a\nnonzero binary form of degree $n+1$ has only finitely many linear factors up to\nscalars, and the cofactor of degree $n$ is then determined. A proper\nquasi-finite morphism is finite ([cor-pqf-proper-quasifinite-finite]). (On the\nchart where all $y_i$ are invertible this is the classical statement that\n$z_i=x_i/y_i$ is a root of $T^n-e_1T^{n-1}+\\cdots+(-1)^ne_n$ over the elementary\nsymmetric functions.)",
+    "uses": [
+     "lem-weil-pbc-symmetric-product-properties",
+     "cor-pqf-proper-quasifinite-finite"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

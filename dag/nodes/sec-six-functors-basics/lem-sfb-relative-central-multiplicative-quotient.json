@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-relative-central-multiplicative-quotient",
+ "kind": "statement",
+ "title": "Relative quotient by a central subgroup of multiplicative type",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is an $S$-scheme with multiplication, identity and inverse satisfying the group diagrams, as in [def-sfb-ring-diagonalizable-group]. A reductive $S$-group is a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] group whose geometric fibres are connected [def-weil-connected-scheme] and have no nontrivial smooth connected normal unipotent closed subgroup. Unipotent means that in a faithful matrix representation every geometric point is a unipotent matrix. The centre $Z(G)$ is the subgroup functor of points commuting with all points after every algebra extension. A torus over $S$ is an $S$-group scheme which, locally for faithfully flat finitely presented coverings of $S$, is isomorphic to a finite product of copies of $\\mathbf G_{m}$. A maximal torus is a closed subgroup [def-weil-closed-immersion] which is a torus over $S$ and which on every geometric fibre is maximal among subgroups isomorphic to a product of multiplicative groups; $\\mathbf G_{m,S}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Let $G$ be reductive and let $C\\hookrightarrow G$ be a closed central subgroup scheme of multiplicative type: fppf-locally on $S$, $C$ is isomorphic to $D(N)=\\operatorname{Spec}\\mathcal O_S[N]$ for a finitely generated abelian group $N$ [def-sfb-ring-diagonalizable-group]. Fppf coverings are faithfully flat finitely presented coverings. The fppf sheaf quotient $Q=G/C$, defined by sheafifying $U\\mapsto G(U)/C(U)$, is represented by a reductive $S$-group. The quotient map $p:G\\to Q$ has kernel $C$, is faithfully flat and finitely presented, and is a $C$-torsor: $(g,c)\\mapsto(g,gc)$ is an isomorphism $G\\times_S C\\simeq G\\times_QG$. The centre of $Q$ is the fppf quotient $Z(G)/C$. The map $T\\mapsto T/C$ is a bijection from maximal tori of $G$ to maximal tori of $Q$, with inverse given by scheme-theoretic inverse image along $p$; every maximal torus of $G$ contains $C$. Quotient formation, the quotient map, this centre identification and the torus correspondence commute with arbitrary base change on $S$. No smoothness of $C$ and no restriction on residue characteristic are assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 3.3.1(2) and the quotient discussion in Lemma 3.3.2, printed pp.96--98; Corollary 3.3.5 and proof, printed pp.100--101; quotient interpreted as the represented fppf quotient, so its pullback remains that quotient and the quotient map is a torsor. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag supplies the reductive centre and maximal-torus assertions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-reductive-quotient-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-affine-multiplicative-quotient] to $(G,C)$: centrality implies normality. It gives the represented quotient $Q$, its smoothness, affineness, finite presentation, connected geometric fibres and the faithfully flat finitely presented map $p$ with kernel $C$. On each geometric fibre the same quotient theorem identifies $p_{\\bar s}$ as a faithfully flat homomorphism. Apply [lem-sfb-field-reductive-quotient] to it: $G_{\\bar s}$ is reductive, hence so is $Q_{\\bar s}$. Thus $Q$ is reductive.",
+   "uses": [
+    "lem-sfb-relative-affine-multiplicative-quotient",
+    "lem-sfb-field-reductive-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.2 and Section 1.1, pp.10--11,97--98."
+   }
+  },
+  {
+   "text": "The torsor isomorphism in [lem-sfb-relative-affine-multiplicative-quotient] has the asserted formula: if $p(g)=p(h)$ then $g^{-1}h$ lies in the scheme-theoretic kernel $C$, and $(g,h)\\mapsto(g,g^{-1}h)$ is its inverse. These formulas are morphisms and inverse on all test schemes, not just on geometric points. The theorem also identifies every pullback $G_{S\\prime}\\to Q_{S\\prime}$ as the represented fppf quotient by $C_{S\\prime}$.",
+   "uses": [
+    "lem-sfb-relative-affine-multiplicative-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.2; explicit kernel and torsor calculation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-relative-reductive-centre-weight-kernel] applied to the reductive groups $G$ and $Q$ over the given Noetherian affine base, both centres are closed of multiplicative type and commute with arbitrary base change. Apply [lem-sfb-relative-central-multiplicative-preimage] to $p$ and $D=Z(Q)$: $E=p^{-1}Z(Q)$ is central in $G$, so $E\\subseteq Z(G)$. Conversely, a section of $Z(G)$ maps into $Z(Q)$: after any further base change a point of $Q$ fppf-locally lifts to $G$, where the commutator is the identity. Thus $E=Z(G)$ as subgroup functors. Every section of $Z(Q)$ fppf-locally lifts to $E$, and two lifts differ by $C$. Therefore $Z(Q)=Z(G)/C$ as represented fppf sheaves.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-reductive-centre-weight-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), Theorem 3.3.4 and Corollary 3.3.5, pp.96--101."
+   }
+  },
+  {
+   "text": "We will use self-centralization also over the base: for a maximal torus $T$ of $G$, the inner $T$-action has fixed group $K=C_G(T)$, smooth affine of finite presentation by [lem-sfb-relative-torus-automorphism-fixed-group]. On each geometric fibre [lem-sfb-reductive-torus-self-centralizer] says $K_{\\bar s}=T_{\\bar s}$. The torus $T$ is flat and of finite presentation over $S$, $K$ is of finite type over $S$, so $T\\to K$ is locally of finite presentation by [lem-a1-map-over-base-finite-presentation]; as all its geometric fibres are isomorphisms, [lem-sfb-flat-geometric-fibre-open-criterion] makes $T\\to K$ an isomorphism. Consequently $Z(G)\\subseteq C_G(T)=T$, so $C\\subseteq T$. The identical argument applies to every maximal torus of $Q$.",
+   "uses": [
+    "lem-sfb-relative-torus-automorphism-fixed-group",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-flat-geometric-fibre-open-criterion",
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.2.4, Lemma B.3.1 and self-centralization used before Corollary 3.3.5."
+   }
+  },
+  {
+   "text": "For any torus $T\\subseteq G$ containing $C$, fppf-locally write $T=D(M)$ with $M=\\mathbf Z^r$ and also split $C$. The inclusion is, after further Zariski localization, dual to a surjection $M\\twoheadrightarrow N$, by [lem-sfb-relative-diagonalizable-character-duality]. Put $L=\\ker(M\\to N)$. The same node gives $T/C=D(L)$; [lem-weil-subgroup-finite-free-abelian-group-free] makes $L$ free of finite rank, so this quotient is a torus. Its map into $Q$ is monic: fppf-locally lift two sections to $T$, and equal images differ by $C$. It is a closed immersion by [lem-sfb-affine-multiplicative-type-monomorphism-closed]. Moreover $p^{-1}(T/C)=T$: lift a section of $T/C$ locally to $t\\in T$; any other lift differs from $t$ by $C\\subseteq T$.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-weil-subgroup-finite-free-abelian-group-free",
+    "lem-sfb-affine-multiplicative-type-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5 proof, pp.100--101; Appendix B character duality."
+   }
+  },
+  {
+   "text": "Now let $T$ be maximal in $G$ and put $R=T/C$. Conjugation of $G$ factors through $Q$: a local lift of $q\\in Q$ acts by conjugation, independently of the lift because $C$ is central, and these local morphisms glue uniquely. Restrict to the torus $R$. Its fixed subgroup in $G$ is $C_G(T)=T$ from step 4. On a geometric fibre, apply [lem-sfb-torus-equivariant-quotient-fixed-surjectivity] to the equivariant surjection $G_{\\bar s}\\to Q_{\\bar s}$. Its fixed-group kernel is $C_{\\bar s}$ because the action fixes $C$. Hence $C_{Q_{\\bar s}}(R_{\\bar s})=T_{\\bar s}/C_{\\bar s}=R_{\\bar s}$ as fppf sheaves. Every larger torus centralizes $R_{\\bar s}$ and is therefore contained in $R_{\\bar s}$. This proves maximality of $T/C$ in $Q$.",
+   "uses": [
+    "lem-sfb-torus-equivariant-quotient-fixed-surjectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5, pp.100--101; using the fixed-group surjectivity explicitly instead of the phrase classical theory."
+   }
+  },
+  {
+   "text": "Conversely let $U$ be a maximal torus of $Q$, and restrict the just constructed conjugation action of $Q$ on $G$ to $U$. Let $H=G^U$. By [lem-sfb-relative-torus-automorphism-fixed-group], $H$ is smooth affine of finite presentation with connected geometric fibres and is reductive. The action fixes $C$, so $C\\subseteq H$ centrally. The restriction $p|_H$ has image in $C_Q(U)=U$ by step 4 for $Q$. Applying [lem-sfb-relative-affine-multiplicative-quotient] to $(H,C)$ gives a smooth affine quotient $H/C$ and a natural monomorphism $j:H/C\\to U$: its kernel is trivial by the same local-lift calculation as in step 5.",
+   "uses": [
+    "lem-sfb-relative-torus-automorphism-fixed-group",
+    "lem-sfb-relative-affine-multiplicative-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5 proof, p.101: the fixed group and the map j."
+   }
+  },
+  {
+   "text": "On every geometric fibre, [lem-sfb-torus-equivariant-quotient-fixed-surjectivity] gives the fppf quotient $G_{\\bar s}^U/C_{\\bar s}=Q_{\\bar s}^U=U_{\\bar s}$. The base-change assertions of [lem-sfb-relative-torus-automorphism-fixed-group] and [lem-sfb-relative-affine-multiplicative-quotient] identify this map with $j_{\\bar s}$. The source $H/C$ is smooth and thus flat and of finite presentation over $S$, and $U$ is of finite type over $S$, so $j$ is locally of finite presentation by [lem-a1-map-over-base-finite-presentation]. Therefore [lem-sfb-flat-geometric-fibre-open-criterion] proves $j$ an isomorphism. Consequently $H=p^{-1}U$: if $p(g)\\in U$, lift $p(g)$ fppf-locally to $h\\in H$ using $H/C=U$; then $gh^{-1}\\in C\\subseteq H$. This is equality on all test schemes.",
+   "uses": [
+    "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+    "lem-sfb-relative-torus-automorphism-fixed-group",
+    "lem-sfb-relative-affine-multiplicative-quotient",
+    "lem-sfb-flat-geometric-fibre-open-criterion",
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5 proof, p.101; Lemma B.3.1, p.288."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-central-multiplicative-preimage] to the faithfully flat map $H\\to U$ with kernel $C$ and central multiplicative subgroup $D=U$ of $U$. Its preimage is all of $H$, so $H$ is of multiplicative type (and central in itself). It is smooth with connected geometric fibres by step 7. Hence [lem-sfb-smooth-connected-multiplicative-torus] makes $H$ a torus over $S$.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-smooth-connected-multiplicative-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2) and Corollary 3.3.5 proof, pp.96--101; Appendix B torus-recognition criterion."
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar s$, let a torus $V\\subseteq G_{\\bar s}$ contain $H_{\\bar s}$. It contains $C_{\\bar s}$, and the character calculation of step 5 makes $V/C_{\\bar s}$ a torus subgroup of $Q_{\\bar s}$ containing $U_{\\bar s}$. By maximality of $U_{\\bar s}$, it equals $U_{\\bar s}$. The inverse-image calculation in step 5 then gives $V=p^{-1}U_{\\bar s}=H_{\\bar s}$. Thus $H$ is maximal in $G$. Steps 5 and 8 give both inverse identities $p^{-1}(T/C)=T$ and $(p^{-1}U)/C=U$, proving the stated bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5 proof, p.101; direct use of the preceding steps."
+   }
+  },
+  {
+   "text": "All constructions are canonical on test schemes. Quotient and torsor formation commute with arbitrary base change by [lem-sfb-relative-affine-multiplicative-quotient]; centres do so by [lem-sfb-relative-reductive-centre-weight-kernel]. Therefore the equality $p^{-1}Z(Q)=Z(G)$ and its quotient identification pull back to the same equality and identification. The quotient $T/C$ also pulls back by [lem-sfb-relative-diagonalizable-character-duality], as may be checked on its fppf splitting charts. Scheme-theoretic inverse image is a fibre product, hence pulls back to inverse image; fixed groups pull back by [lem-sfb-relative-torus-automorphism-fixed-group]. Finally geometric-fibre maximality is preserved by base change, by its geometric definition (or the self-centralizer test in step 6). Thus the two inverse maps on maximal tori are natural for every $S\\prime\\to S$, including non-Noetherian and nonreduced $S\\prime$. No step required $C$ smooth.",
+   "uses": [
+    "lem-sfb-relative-affine-multiplicative-quotient",
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-relative-torus-automorphism-fixed-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5 and the base-change clauses of its quotient, centre and fixed-group inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-affine-multiplicative-quotient",
+  "lem-sfb-field-reductive-quotient",
+  "lem-sfb-relative-central-multiplicative-preimage",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "lem-sfb-relative-torus-automorphism-fixed-group",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+  "lem-sfb-smooth-connected-multiplicative-torus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly from the stated general lemmas, following Corollary 3.3.5; external source read online but not archived locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reductive|schematic.?cent|central.*quotient",
+   "results": "{\"t\": \"2026-10-24T07:45:01Z\", \"tool\": \"grep\", \"query\": \"reductive|schematic.?cent|central.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central multiplicative type subgroup quotient of reductive group schemes is reductive and maximal tori correspond",
+   "results": "{\"t\": \"2026-10-24T07:45:01Z\", \"tool\": \"leansearch\", \"query\": \"Central multiplicative type subgroup quotient of reductive group schemes is reductive and maximal tori correspond\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Con.Quotient\", \"Subgroup.IsComplement'.QuotientMulEquiv\", \"nilpotent_quotient_of_nilpotent\", \"QuotientGroup.quotientMulEquivOfEq\", \"Subgroup.center.smulCommClass_right\", \"Subgroup.center.isMulCommutative\", \"QuotientGroup.instLocallyCompactSpace\", \"QuotientAddGroup.fintype\"], \"digest\": \"a1ba8ba58bd3478f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GroupScheme",
+   "results": "{\"t\": \"2026-10-24T07:45:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central quotient of a reductive group scheme by a torus is represented and its centre is the quotient of the centre",
+   "results": "{\"t\": \"2026-10-24T07:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"A central quotient of a reductive group scheme by a torus is represented and its centre is the quotient of the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"QuotientGroup.comap_comap_center\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\"], \"digest\": \"35570a973c31490d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Subgroup.center, QuotientGroup.mk",
+   "results": "{\"t\": \"2026-10-24T07:46:29Z\", \"tool\": \"loogle\", \"query\": \"Subgroup.center, QuotientGroup.mk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Subgroup.quotientCenterEmbedding_apply\", \"Matrix.ProjectiveSpecialLinearGroup.toPGL_mk\", \"Matrix.ProjectiveSpecialLinearGroup.smul_proj_mk\", \"PSL.iwasawaT_map_conj\"], \"digest\": \"6c66e58745fd7f9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme modulo a central subgroup of multiplicative type has centre quotient and maximal tori correspond by inverse image",
+   "results": "{\"t\": \"2026-10-24T07:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme modulo a central subgroup of multiplicative type has centre quotient and maximal tori correspond by inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"QuotientGroup.comap_comap_center\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"upperCentralSeriesStep_eq_comap_center\", \"Subgroup.val_centerUnitsEquivUnitsCenter_apply_coe\", \"Subgroup.centerUnitsEquivUnitsCenter\", \"QuotientAddGroup.comap_comap_center\"], \"digest\": \"6b4537ae407bb774\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie-algebra kernels, abstract-group centres and quotients, or unrelated adjunctions; none gives the relative scheme-theoretic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|reductive|normal.*quotient",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|reductive|normal.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GroupScheme",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group scheme central quotient centre and maximal tori under arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T08:27:39Z\", \"tool\": \"leansearch\", \"query\": \"Reductive group scheme central quotient centre and maximal tori under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.center\", \"Set.center_units_subset\", \"ConjAct.fixedPoints_eq_center\", \"Subgroup.centerCongr\", \"nilpotent_center_quotient_ind\", \"CommGroup.center_eq_top\", \"Subgroup.center.isMulCommutative\", \"QuotientAddGroup.comap_comap_center\"], \"digest\": \"cffca0fd8d75e54a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity and centres and maximal tori of a reductive group scheme modulo a central subgroup of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T08:27:45Z\", \"tool\": \"leanfinder\", \"query\": \"Reductivity and centres and maximal tori of a reductive group scheme modulo a central subgroup of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"upperCentralSeriesStep_eq_comap_center\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"4fb1efa73b910eff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-central-quotient",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type.",
+   "via": [
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "worker": "stage1",
+  "summary": "Q39 separates seven general prerequisites from an explicit eleven-step quotient, centre and torus-correspondence argument. Checked nonsmooth multiplicative kernels and arbitrary base change; kept the imported statement. Reused existing centre, character duality, field self-centralizer, closed monomorphism and finite-free subgroup statements. Reviewer FIX: the new fibral-isomorphism node duplicated the existing lem-sfb-flat-geometric-fibre-open-criterion (EGA IV 17.9.5) and was dropped; steps 4 and 8 cite that node with Stacks 02FV.",
+  "blueprint": "Latest blueprint direct-images proof (3), inherited alteration/moduli/reductive prerequisite chain; blueprint ancestor is null as reported by blueprint_refs.py, preserved rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-subgroup-finite-free-abelian-group-free",
+    "why": "The character kernel L in a finite-rank lattice is free of finite rank. This generic integral algebra fact is not another route through the six-functor argument; no same-unit node gives it."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Stacks 02FV permanence: a morphism from a locally finitely presented S-scheme to a locally finite type S-scheme is locally of finite presentation, needed for the hypothesis of the fibral isomorphism criterion in steps 4 and 8; generic scheme fact, no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-a1-map-over-base-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-8d4dbdf60",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-8d4dbdf60 (reviewer sub-agent of L); spot-checked: I read in full the item, its 11 steps, all 7 new nodes and every cited statement. The Conrad source is not archived locally and I could not open it. I checked the field inputs against Milne iAG 13.9, 17.38/17.40 and 17.59, and the relative inputs against EGA IV 17.9.5 and SGA3-type standard results. The statement is unchanged from the base node and nothing is weakened. I tested C=G=Gm, central mu_p in SL_p and C=1. Steps 1-11 hold. Finite presentation of C and normality from centrality are checked. Step 3 shows Z(G)=p^-1 Z(Q) in both directions. Step 4: self-centralization via the fixed group and the fibral criterion. Step 5: character duality gives T/C=D(L) with L free, and the monomorphism lemma gives a closed immersion. Step 6: G^R=T, and the fixed-group surjectivity node gives maximality. Steps 7-10: H=G^U, H/C is isomorphic to U, H=p^-1 U, and the preimage and recognition nodes make H a maximal torus. Step 11 uses each node's own base-change clause. All six kept new nodes are true and are not duplicates. The relative torus fixed-group node generalizes existing embedded split-torus and mu_n nodes, and that generalization is needed because T/C and U act without being embedded or split. C5: lem-sfb-fibral-isomorphism-flat-source duplicates the existing reviewed same-unit node lem-sfb-flat-geometric-fibre-open-criterion (EGA IV 17.9.5) up to Stacks 02FV. The FIX drops it, makes steps 4 and 8 cite that node plus lem-a1-map-over-base-finite-presentation (02FV, declared as a generic tool_use), and updates proof_deps; the corrected item is in fixes/. No cycle. Batch-5: the reaches to lem-trf-artin-approximation-etale-local-map, split-lattice-torus-projection, fppf-covering-is-fpqc and fppf-covering-base-change go through generic commutative-algebra and site lemmas, none of them steps of the trace formula or Poincare duality, so all are accepted. The subgroup-finite-free tool use is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeCentralMultiplicativeQuotient",
+  "declaration": "AlgebraicGeometry.RelativeReductive.relative_central_multiplicative_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeCentralMultiplicativeQuotient.lean",
+  "statement": "theorem relative_central_multiplicative_quotient (A : Type u) [CommRing A] [Nontrivial A] [IsNoetherianRing A] (G C : Grp (Over (Spec (.of A)))) (c : C ⟶ G) (hG : IsReductive G) (hc : IsClosedImmersion c.hom.hom.left) (hcentral : IsCentral c) (hC : IsMultiplicativeType C) : ∃ (Q : Grp (Over (Spec (.of A)))) (p : G ⟶ Q) (ZG ZQ : Grp (Over (Spec (.of A)))) (zG : ZG ⟶ G) (zQ : ZQ ⟶ Q) (cZ : C ⟶ ZG) (pZ : ZG ⟶ ZQ), cZ ≫ zG = c ∧ pZ ≫ zQ = zG ≫ p ∧ IsReductive Q ∧ IsFppfGroupQuotient c p ∧ Flat p.hom.hom.left ∧ Surjective p.hom.hom.left ∧ LocallyOfFinitePresentation p.hom.hom.left ∧ QuasiCompact p.hom.hom.left ∧ IsCentre zG ∧ IsCentre zQ ∧ IsFppfGroupQuotient cZ pZ ∧ HasMaximalTorusCorrespondence c p ∧ ∀ (S' : Scheme.{u}) (f : S' ⟶ Spec (.of A)), IsReductive ((Over.pullback f).mapGrp.obj Q) ∧ IsFppfGroupQuotient ((Over.pullback f).mapGrp.map c) ((Over.pullback f).mapGrp.map p) ∧ Flat (((Over.pullback f).mapGrp.map p).hom.hom.left) ∧ Surjective (((Over.pullback f).mapGrp.map p).hom.hom.left) ∧ LocallyOfFinitePresentation (((Over.pullback f).mapGrp.map p).hom.hom.left) ∧ QuasiCompact (((Over.pullback f).mapGrp.map p).hom.hom.left) ∧ IsCentre ((Over.pullback f).mapGrp.map zG) ∧ IsCentre ((Over.pullback f).mapGrp.map zQ) ∧ IsFppfGroupQuotient ((Over.pullback f).mapGrp.map cZ) ((Over.pullback f).mapGrp.map pZ) ∧ HasMaximalTorusCorrespondence ((Over.pullback f).mapGrp.map c) ((Over.pullback f).mapGrp.map p)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87067f2e4",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read the item, the new def node def-sfb-relative-reductive-quotient-terminology, both modules and the reused owners (IsFppfGroupQuotient, IsRelativeTorus, field ReductiveTorusCentralizer.IsReductive/IsMaximalTorus, IsUnipotent incl. Smooth, ringDiagonalizableGroup, fppfPrecoverage). Hypotheses match the node with nothing stronger: nonzero Noetherian A; G reductive; C closed, central, fppf-locally D(N) with N finitely generated. Conclusion covers the represented reductive quotient with kernel and torsor, p flat+surjective+lfp+qc, Z(Q)=Z(G)/C via IsCentre on all further test schemes, maximal-torus correspondence (both directions, cartesian inverse image, C⊆T), and pullback of the same data along every S'→S. Edge cases C=1, C=G=Gm, mu_p in char p, empty, non-Noetherian and nonreduced S', rank-0 tori: ok. 7 defs real, no sorry; only the theorem proof is sorry; docstrings give source and blueprint. Statements verbatim; item differs from live only in lean and the added stmt_dep. No relative duplicate in the project. Q137 parallel delivery of the same item not landed: second lander rebinds. No file changed, so no compile; the delivery records a clean compile and an OK dry run."
+ }
+}

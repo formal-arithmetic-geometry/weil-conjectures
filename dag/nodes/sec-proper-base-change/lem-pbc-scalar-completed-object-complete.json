@@ -1,0 +1,122 @@
+{
+ "id": "lem-pbc-scalar-completed-object-complete",
+ "kind": "statement",
+ "title": "Scalar tensor of a completion output is complete",
+ "statement": "For a prime l, finite extensions E and F of Q_l with a specified Q_l-algebra embedding i : E → F, a scheme W with no geometric restrictions, and K in the actual completed-coefficient ambient derived category for E [lem-pbc-scalar-tensor-construction], scalar tensor of the canonical source completion reflection of K [lem-weil-pbc-ringed-topoi-module-adjunction] is intrinsically complete for the target coefficient datum. This asserts only completeness of this particular object, not a comparison of completion functors or any unit equation.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, lemma-derived-completion-koszul; the concrete finite-free scalar argument of lem-weil-pbc-finite-free-completion-transport, steps 2--3 (agent specialization)."
+ },
+ "stmt_deps": [
+  "lem-pbc-scalar-tensor-construction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Transport the coefficient map, fixed by all residue projections, through pbcCompletedComparison. Finite freeness of the integer extension gives the finite-free basis of the actual completed coefficient sheaf by the continuous-section and quotient-limit construction.",
+   "uses": [
+    "lem-pbc-scalar-tensor-construction",
+    "lem-weil-completed-integral-finite-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source completion output is intrinsically complete by reflection. Apply the finite-free coordinate argument: after scalar restriction its scalar tensor is a finite direct sum of this output, hence source-complete. Exact scalar restriction detects completeness for the image of the source parameter. That parameter is a unit times a positive power of the target uniformizer; the unit-power criterion identifies this with target completeness. Transport through the intrinsic Cech/Koszul presentation comparison. Zero objects and the empty scheme satisfy the same reflection and finite-sum argument.",
+   "uses": [
+    "lem-weil-pbc-finite-free-completion-transport",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-scalar-tensor-construction",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-pbc-finite-free-completion-transport",
+  "lem-weil-pbc-completed-fiber-cech-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E; extracted completeness-only step of the existing ambient scalar-completion argument, strictly below its natural comparison and normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free extension of scalars commutes with derived completion and derived direct image",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.congr",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for intrinsic completeness in these actual coefficient categories; ordinary adic completion and abstract adjunction facts only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for intrinsic completeness in these actual coefficient categories; ordinary adic completion and abstract adjunction facts only."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(transport|iso)|finiteFree.*(isIso|completion)",
+   "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for intrinsic completeness in these actual coefficient categories; ordinary adic completion and abstract adjunction facts only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free scalar extension and restriction preserve derived completeness of sheaves",
+   "results": "PresheafOfModules.restrictScalarsObj (Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings); SheafOfModules.restrictScalars and restrictScalars_obj_val (Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings); ModuleCat.extendRestrictScalarsAdj, restrictCoextendScalarsAdj and their Hom equivalences (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); ModuleCat.preservesFiniteLimits_extendScalars_of_flat (Mathlib.Algebra.Category.ModuleCat.Descent). These construct ordinary restriction and adjunctions, with no derived completeness conclusion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarAmbientOperations",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-scalar-ambient-operation-comparisons",
+   "place": "Step 2: the two completeness hypotheses needed for the scalar/reflector Hom construction."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcScalarCompletedObjectComplete",
+  "file": "lean/Sheaf/Paper/PbcScalarCompletedObjectComplete.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcScalarCompletedObjectComplete",
+  "statement": "theorem pbcScalarCompletedObjectComplete (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :\n    PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)\n      ((pbcEmbeddingAmbientTensor l E F i W).obj\n        ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T034658-L-3673605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T034658-L-3673605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

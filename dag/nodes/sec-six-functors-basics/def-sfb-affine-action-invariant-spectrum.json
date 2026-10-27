@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-affine-action-invariant-spectrum",
+ "kind": "definition",
+ "title": "Invariant ring and canonical invariant-spectrum map of an affine scheme action",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $E$ a commutative $k$-algebra, and $H$ a group scheme over $k$ [def-sc-group-scheme] with a left action $a:H\\times_k U\\to U$ on $U=\\operatorname{Spec}E$ [def-weil-affine-spectrum]. Scheme products and their projections are [def-pc-fibre-product]. Let $\\iota_E:E\\to\\Gamma(U,\\mathcal O_U)$ be the canonical coordinate identification. Set $\\rho=(a\\circ\\mathrm{swap})^*\\circ\\iota_E$ and $j=\\operatorname{pr}_U^*\\circ\\iota_E$, maps from $E$ to $\\Gamma(U\\times_kH,\\mathcal O)$. Define the actual subring $E^H=\\{e\\in E:\\rho(e)=j(e)\\}$ as the ring equalizer. Constants lie in this subring because both morphisms are over $k$; restrict the specified map $k\\to E$ to $k\\to E^H$. Define the $k$-scheme $Y=\\operatorname{Spec}(E^H)$ with that structural map and $q:U\\to Y$ to be $\\operatorname{Spec}$ of the inclusion $E^H\\hookrightarrow E$, as a morphism over $k$. No smoothness, affineness or finite-type hypothesis on $H$, finite-type hypothesis on $E$, or finite generation of $E^H$ is part of these constructions.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Situation situation-quotient-stack and Proposition 04WM: the action and projection of the scheme action groupoid; the affine coordinate equalizer and Spec inclusion are their coordinate constructions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The invariant subring of an algebraic group scheme action is the equalizer of the coaction and inclusion and gives a canonical map of spectra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsInvariantSubring.mk\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \"∀ {M : Type u_1} {R : Type u_2} [inst : Monoid M] [inst_1 : Ring R] [inst_2 : MulSemiringAction M R] {S : Subring R},\\n  (∀ (m : M) {x : R}, x ∈ S → m • x ∈ S) → IsInvariantSubring M S\", \"doc\": \"If for every $ m \\\\in M $ and every $ x \\\\in S $, the scalar multiplication $ m \\\\cdot x $ remains in $ S $, then $ S $ is an invariant subring under the action of $ M $.\"}\n  {\"name\": \"IsInvariantSubring\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \"(M : Type u_1) → {R : Type u_2} → [inst : Monoid M] → [inst_1 : Ring R] → [MulSemiringAction M R] → Subring R → Prop\", \"doc\": \"A subring $ S $ of a ring $ R $ equipped with a multiplicative semiring action of a monoid $ M $ is invariant if for all $ m \\\\in M $ and $ s \\\\in S $, the scalar multiplication $ m \\\\cdot s $ remains in\"}\n  {\"name\": \"IsInvariantSubring.subtypeHom\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \": U →+*[M] R'\", \"doc\": \"The canonical ring homomorphism from an $M$-invariant subring $U$ of a ring $R'$ to $R'$, which preserves both the ring structure (addition, multiplication, identities) and the scalar multiplication b\"}\n  {\"name\": \"IsInvariantSubring.coe_subtypeHom\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \": (IsInvariantSubring.subtypeHom M U : U → R') = Subtype.val\", \"doc\": \"The canonical ring homomorphism from an $ M $-invariant subring $ U $ of a ring $ R' $ to $ R' $, which preserves the monoid action, is equal to the inclusion map sending each element of $ U $ to itse\"}\n  {\"name\": \"FixedPoints.subalgebra\", \"module\": \"Mathlib.Algebra.Algebra.Subalgebra.Operations\", \"type\": \": Subalgebra A B\", \"doc\": \"Given a commutative semiring $ A $, a ring $ B $ with an $ A $-algebra structure, and a monoid $ G $ acting on $ B $ via a multiplicative semiring action that commutes with $ A $-scalar multiplication\"}\n  {\"name\": \"Algebra.IsInvariant.mk\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} [inst : CommSemiring A] [inst_1 : Semiring B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B],\\n  (∀ (b : B), (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b) → Algebra.IsInvariant A B G\", \"doc\": \"If every element of $ B $ invariant under the action of $ G $ is in the image of the algebra map $ A \\to B $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $.\"}\n  {\"name\": \"IsInvariantSubring.coe_subtypeHom'\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \": ((IsInvariantSubring.subtypeHom M U) : U →+* R') = U.subtype\", \"doc\": \"The canonical ring homomorphism from an $M$-invariant subring $U$ to the ring $R'$, which preserves both ring operations and the monoid action, coincides with the standard inclusion map of $U$ into $R\"}\n  {\"name\": \"IsInvariantSubring.rec\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \"{M : Type u_1} →\\n  {R : Type u_2} →\\n    [inst : Monoid M] →\\n      [inst_1 : Ring R] →\\n        [inst_2 : MulSemiringAction M R] →\\n          {S : Subring R} →\\n            {motive : IsInvariantSubring M S → Sort u} →\\n              ((smul_mem : ∀ (m : M) {x : R}, x ∈ S → m • x ∈ S) → motive ⋯) → (t : Is\", \"doc\": \"Given a type family over invariant subrings, if we can define a function for the case where the invariant subring is constructed using the scalar multiplication membership property, then this recursor\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has abstract group invariants but not this scheme-action construction. Reuse the existing project equalizer and spectrum without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant ring of a group scheme acting on an affine scheme as equalizer of action and projection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.invariantsFunctor_obj_carrier\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  ↑((Rep.invariantsFunctor k G).obj A) = { x // ∀ (g : G), (A.ρ g) x = x }\", \"doc\": \"The carrier of the invariants functor applied to a representation $ A $ is the set of elements $ x $ in $ A $ such that $ \\\\rho(g)(x) = x $ for all $ g \\\\in G $, where $ \\\\rho $ denotes the representatio\"}\n  {\"name\": \"Algebra.isInvariant_iff\", \"module\": \"Mathlib/RingTheory/Invariant/Defs\", \"type\": \"∀ (A : Type u_1) (B : Type u_2) (G : Type u_3) [inst : CommSemiring A] [inst_1 : Semiring B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B],\\n  Algebra.IsInvariant A B G ↔ ∀ (b : B), (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"An algebra $ B $ over a commutative semiring $ A $ is invariant under the action of a group $ G $ if and only if every element $ b \\\\in B $ fixed by all $ g \\\\in G $ (i.e., $ g \\\\cdot b = b $) can be exp\"}\n  {\"name\": \"Algebra.IsInvariant.isInvariant\", \"module\": \"Mathlib/RingTheory/Invariant/Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} {inst : CommSemiring A} {inst_1 : Semiring B} {inst_2 : Algebra A B}\\n  {inst_3 : Group G} {inst_4 : MulSemiringAction G B} [self : Algebra.IsInvariant A B G] (b : B),\\n  (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"If an element $ b \\\\in B $ is invariant under the action of every element $ g \\\\in G $, then there exists an element $ a \\\\in A $ such that $ \\\\text{algebraMap}(A, B)(a) = b $. This characterizes the inva\"}\n  {\"name\": \"FixedPoints.subring\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Operations\", \"type\": \"(B : Type u_2) → [inst : Ring B] → (G : Type u_3) → [inst_1 : Monoid G] → [MulSemiringAction G B] → Subring B\", \"doc\": \"The subring of elements in $ B $ that are fixed by the action of a monoid $ G $, meaning for every $ g \\\\in G $ and $ b $ in the subring, $ g \\\\cdot b = b $. This subring is formed by the intersection o\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} [inst : CommSemiring k] [inst_1 : Group G] [inst_2 : AddCommMonoid V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.invariants.carrier = ⋂ g, Function.fixedPoints ⇑(ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"Rep.invariantsFunctor\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.Functor (Rep k G) (ModuleCat k)\", \"doc\": \"The functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of $ k $-modules, which sends each representation to its submodule of $ G $-invariant el\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (B : Type u_2) (G : Type u_3) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [Algebra.IsInvariant A B G] [Finite G], Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"Rep.toInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a commutative ring $ k $, group $ G $, $ k $-module $ V $, representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S $ of $ G $, this constructs the representation of $ G $ on \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has abstract group invariants but not this scheme-action construction. Reuse the existing project equalizer and spectrum without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "affineInvariants|affineInvariantSpectrum|affineInvariantProjection",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has abstract group invariants but not this scheme-action construction. Reuse the existing project equalizer and spectrum without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "Project and DAG rg for affineInvariants|affineInvariantSpectrum|affineInvariantProjection; blueprint_refs.py search invariant ring",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:77:def affineInvariants : Subring E :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:125:Apply it to the equalizer equation defining affineInvariants. -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:126:theorem affineInvariants_mem_iff [IsAffineHom G.hom] (x : E) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:127:    x ∈ affineInvariants k E G ↔\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:135:theorem affineInvariants_constants_mem (c : k) : algebraMap k E c ∈ affineInvariants k E G := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:140:def affineInvariantConstants : k →+* affineInvariants k E G :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:141:  (algebraMap k E).codRestrict _ (affineInvariants_constants_mem k E G)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:145:def affineInvariantSpectrum : Over (Spec (.of k)) :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:152:theorem affineInvariantProjection_over :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:153:    Spec.map (CommRingCat.ofHom (affineInvariants k E G).subtype) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:154:      (affineInvariantSpectrum k E G).hom = (affineActionScheme k E).hom := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:159:def affineInvariantProjection : affineActionScheme k E ⟶ affineInvariantSpectrum k E G :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:160:  Over.homMk (Spec.map (CommRingCat.ofHom (affineInvariants k E G).subtype))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:161:    (affineInvariantProjection_over k E G)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:304:        (discreteModuli (yoneda.obj (affineInvariantSpectrum k E G))),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:306:        (discreteModuliMap (yoneda.map (affineInvariantProjection k E G)))) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:308:          (discreteModuli (yoneda.obj (affineInvariantSpectrum k E G))),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean:310:          (discreteModuliMap (yoneda.map (affineInvariantProjection k E G)))) →\n\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-affine-action-stack-presentation.json\n\n0 blueprint nodes match 'invariant ring'\n",
+   "date": "2026-10-24",
+   "verdict": "The existing declarations belong to the presentation theorem node; no definition node owns this invariant construction. Add an existing:true definition record, with no Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-affine-action-stack-presentation",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. The actual invariant equalizer, restricted constants and its canonical spectrum map.",
+   "via": [
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineActionStackPresentation",
+  "declaration": "AlgebraicGeometry.SchemeAction.affineInvariants",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.affineCoordinateCoaction",
+   "AlgebraicGeometry.SchemeAction.affineCoordinateInclusion",
+   "AlgebraicGeometry.SchemeAction.affineInvariants",
+   "AlgebraicGeometry.SchemeAction.affineInvariantConstants",
+   "AlgebraicGeometry.SchemeAction.affineInvariantSpectrum",
+   "AlgebraicGeometry.SchemeAction.affineInvariantProjection"
+  ],
+  "statement": "def affineInvariants : Subring E",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Reuse the plain coordinate equalizer, constants, spectrum and projection already public in the presentation module; no smoothness or finite-type assumptions occur on these definitions, and no theorem conclusion is used as input."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd05d9af8",
+  "group": "Q87",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd05d9af8",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the landing refusal of 3e9143 (duplicate affineInvariantConstants/affineInvariantSpectrum vs the Q11-landed AffineActionStackPresentation). The local invariant helpers are removed; the module publicly imports AffineActionStackPresentation and uses affineInvariantSpectrum/affineInvariantProjection (Over.homMk Spec.map subtype = Spec(E^H↪E)). All other clauses are byte-identical and lean.statement is verbatim. The reused defs (eqLocus of (a∘swap)^* vs pr_U^*, codRestrict constants, Spec) carry only Field/CommRing/Algebra/GrpObj/ModObj binders, no smooth/finite-type ones; this equalizer equals the node's E^H via inversion. New def node def-sfb-affine-action-invariant-spectrum: existing:true on the unchanged live module; statement matches the 6 declarations; record statement verbatim; def-only stmt_deps; no other def owner; no DAG/import cycle. Live item still split and unlanded; 9 base stmt_deps kept. Substance re-checked: no smoothness, no f.g. of E^H; algebraic/qc/qs/affine diagonal over k; π representable, flat, lfp, surjective; open and surjective after any base change; φ pinned by 2-iso, qcqs; edge cases E=0, trivial H, α_p/μ_p covered; sorry only; Worker report and Second reading present. No file changed, no compile."
+ }
+}

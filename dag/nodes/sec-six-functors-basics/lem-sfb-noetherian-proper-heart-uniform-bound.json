@@ -75,37 +75,86 @@
  },
  "proof": [
   {
-   "text": "Properness and quasi-compactness of the Noetherian target give one finite bound r for geometric fibre dimensions. Work locally on a finite affine cover of Y; finitely many generators for affine charts of the proper morphism give such a bound, stable under field extension.",
+   "text": "Y is Noetherian and p is proper, so Z is Noetherian and p is quasi-compact of finite type. [lem-fin-finite-type-fibre-dimension-bound] bounds the dimensions of all fibres of p by one natural number d. Invariance of the dimension of a finite-type scheme under the field extension from the residue field to its algebraic closure [lem-sf-field-extension-dimension-upper-bound] turns this into the same bound d for every geometric fibre.",
    "uses": [
-    "lem-fin-finite-type-fibre-dimension-bound"
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-sf-field-extension-dimension-upper-bound"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proper torsion cohomological-dimension theorem to the reductions of constructible integral lattices. The torsion bound is 2r. Integral proper pushforward is derived complete; its Milnor sequence gives the uniform bound 2r+1. For rational coefficients invert ell. For the algebraic closure descend finite local presentations to finite coefficient fields, then pass to the filtered colimit. The bound is unchanged by coefficient isomorphisms and by finite coefficient extensions. This is the proper case of Bhatt--Scholze 6.7.1--6.7.2 and 6.8.15, so no excellence or finite-type structure map to k is needed. To compare an abstract finite normed extension E with the embedded presentation, choose a Q_ell-embedding into the algebraic closure; uniqueness of the extended absolute value makes it isometric. It identifies the unit ball with the induced valuation ring, and continuous-function sheaf functoriality transports the coefficient ring and all module-object functors. This covers the explicit unit-ball constructor too.",
-   "uses": [],
+   "text": "Constructible bound for a finite embedded integral model O_F. Apply [lem-sfb-integral-proper-constructible-heart-bound] in its Noetherian form: its base field is used only to make the source Noetherian. Derived completeness of the image comes from the integral direct-image limits and the residue criterion, and the finite reductions have the proper torsion bound 2d by [lem-sfb-integral-proper-reduction-bound] over a Noetherian source. Milnor gives Rp_*(N[0]) in degrees at most 2d+1 for every constructible N.",
+   "uses": [
+    "lem-sfb-integral-proper-constructible-heart-bound",
+    "lem-sfb-integral-proper-reduction-bound"
+   ],
    "elementary": false
   },
   {
-   "text": "Over these coefficient rings, constructible module objects form a coherent abelian subcategory on a Noetherian scheme. Its ambient filtered-colimit closure is replete and closed under kernels, cokernels, extensions and coproducts. Hence it contains the Serre coproduct closure. Bounded-below qcqs continuity commutes higher direct images with those filtered colimits, extending the bound from constructibles to their ind closure. Restrict it to P_Z. Empty fibres and zero modules satisfy the same bound.",
+   "text": "Constructible bound for a finite embedded field F and for the finite-subextension-valued Qbar. Apply both clauses of [det-proper-heart-bound-rational] in their Noetherian form: an F-constructible module is the localization of a glued integral model, and a Qbar-constructible module descends to a finite field by [det-lem-coefficient-finite-descent-objects] over a Noetherian scheme. Both give vanishing of R^q p_* above 2d+1 for constructible inputs.",
    "uses": [
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-weil-pbc-integral-constructible-serre",
-    "lem-weil-pbc-condensed-constructible-serre"
+    "det-proper-heart-bound-rational",
+    "det-lem-coefficient-finite-descent-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The weak Serre coproduct closure lies in the ind-constructibles. For F and Qbar: finite presentation and essential smallness give canonical presentations; the kernel/cokernel comparison, extension closure and finite-subcoproduct presentations give all closure operations. For O_F: [lem-sfb-integral-ind-heart-closure] over a Noetherian scheme, whose Ext continuity is [det-lem-int-ext-continuity] over a Noetherian scheme. Minimality of the closure and the constructibility comparison conclude.",
+   "uses": [
+    "det-ind-heart-full-faithfulness",
+    "det-lem-coefficient-heart-closure",
+    "det-lem-coefficient-heart-small",
+    "det-ind-heart-canonical-presentation",
+    "det-ind-heart-kernels-cokernels",
+    "det-ind-heart-filtered-colimits",
+    "det-ind-heart-extensions",
+    "lem-sfb-integral-ind-heart-closure",
+    "det-lem-int-ext-continuity",
+    "lem-sfb-adic-constructibility-predicate-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent a closure object by a small filtered diagram of constructibles. Single followed by derived pushforward and cohomology preserves filtered colimits by the bounded-below qcqs comparison. All stages vanish above 2d+1, so the colimit does. This gives the bound 2d+1 for the three model coefficients.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a finite embedded field model by taking the range of an algebra embedding into PadicAlgCl. Uniqueness of the norm makes it isometric. Restrict to the specified unit ball and postcompose continuous sections to construct the coefficient isomorphism. Exact inverse scalar restriction preserves constructibility and the weak Serre coproduct closure. Derived pushforward and degree-zero comparisons transport the bound; faithful exact restriction reflects it. The arbitrary embedded integral constructor uses its induced norm.",
+   "uses": [
+    "lem-sfb-normed-coefficient-realization",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-sf-field-extension-dimension-upper-bound",
+  "lem-sfb-integral-proper-constructible-heart-bound",
+  "lem-sfb-integral-proper-reduction-bound",
+  "det-proper-heart-bound-rational",
+  "det-lem-coefficient-finite-descent-objects",
+  "det-ind-heart-full-faithfulness",
+  "det-lem-coefficient-heart-closure",
+  "det-lem-coefficient-heart-small",
+  "det-ind-heart-canonical-presentation",
+  "det-ind-heart-kernels-cokernels",
+  "det-ind-heart-filtered-colimits",
+  "det-ind-heart-extensions",
+  "lem-sfb-integral-ind-heart-closure",
+  "det-lem-int-ext-continuity",
+  "lem-sfb-adic-constructibility-predicate-comparison",
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-integral-constructible-serre"
+  "lem-sfb-normed-coefficient-realization",
+  "lem-weil-pbc-module-constructible-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "The amplitude clause, and the final passage from constructible sheaves to their filtered colimits; proper Noetherian specialization of Bhatt--Scholze 6.7.2 and 6.8.15."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+  "place": "L, 2026-10-25 (coord/changes/L-weak-serre-detour-reroute.md): the blueprint route of sk-lem-proper-heart-bound (torsion bound 2d, Milnor 2d+1, rationalization and Qbar, filtered colimits), run over a Noetherian base. The earlier qcqs weak-Serre / torsion-cd detour is no longer used."
  },
  "blueprint": {
   "is": null,
@@ -137,14 +186,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C5",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261020T051052-L-1550627",
-  "kind": "interface",
+  "landing": "20261023T135030-L-2827885",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-nilpotent-tower-monomorphism-rigidity",
+ "kind": "statement",
+ "title": "A finite-type monomorphism containing an entire nilpotent tower is an isomorphism",
+ "statement": "Use schemes [def-pc-scheme], affine spectra [def-weil-affine-spectrum], and locally finite type morphisms [def-weil-finite-type-morphism], in the universes of [def-weil-size-convention]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels consist of nilpotent elements, and put $A=\\varprojlim_n A_n$. Let $T$ be a scheme and let $h:T\\to\\operatorname{Spec}A$ be a monomorphism, meaning that for every scheme $B$ the map $\\operatorname{Hom}(B,T)\\to\\operatorname{Hom}(B,\\operatorname{Spec}A)$ is injective. Assume $h$ is locally of finite type. If for every $n\\geq1$ the canonical map $\\operatorname{Spec}A_n\\to\\operatorname{Spec}A$ factors through $h$, Then $h$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0CTJ (lemma-monomorphism-isomorphism)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}A$, $S_n=\\operatorname{Spec}A_n$, and write $i_n:S_n\\to S$ for the canonical maps. Choose factorizations $a_n:S_n\\to T$ with $h a_n=i_n$. They are unique since $h$ is a monomorphism. For each transition $r_n:S_n\\to S_{n+1}$, the equality $h a_{n+1}r_n=i_n=h a_n$ gives $a_{n+1}r_n=a_n$. Here the direction of $r_n$ is opposite to that of $A_{n+1}\\twoheadrightarrow A_n$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ (lemma-monomorphism-isomorphism)"
+   }
+  },
+  {
+   "text": "Write $\\pi_n:A\\to A_n$ for the projections. Each $\\pi_n$ is surjective: lift an element successively to $A_{n+1},A_{n+2},\\ldots$ and use its images for the earlier coordinates. We also need that every $u\\in A$ with $\\pi_1(u)=1$ is a unit. Inductively $u_n=\\pi_n(u)$ is a unit: given $u_n^{-1}$, lift it to $v\\in A_{n+1}$; then $u_{n+1}v=1+e$ for a nilpotent element $e$ of the transition kernel. If $e^N=0$, multiplication by $\\sum_{j=0}^{N-1}(-e)^j$ corrects $v$ to an inverse of $u_{n+1}$. The inverses $u_n^{-1}$ are compatible because a ring map preserves inverses and inverses are unique. Thus $(u_n^{-1})_n\\in A$ is the inverse of $u$. This uses elementwise nilpotence only, not a uniform nilpotence exponent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, last paragraph; More on Algebra Tag 0CT7 (lemma-limit-henselian), first proof paragraph, with its unit argument written out"
+   }
+  },
+  {
+   "text": "Every open subset $U\\subseteq S$ containing $i_1(S_1)$ equals $S$. Indeed write $U=\\bigcup_\\lambda D(f_\\lambda)$ in the Zariski topology. Pullback to $S_1$ gives a cover by $D(\\pi_1(f_\\lambda))$, since a prime contains $f_\\lambda$ in its inverse image exactly when it contains $\\pi_1(f_\\lambda)$. By the unit-ideal criterion in the cited node there are finitely many coefficients $b_j\\in A_1$ with $\\sum_j b_j\\pi_1(f_j)=1$. Lift the coefficients using Step 2 and put $c=\\sum_j\\widetilde b_j f_j$. Then $\\pi_1(c)=1$, so $c$ is a unit by Step 2. A prime containing all the $f_j$ contains $c$; consequently $S=D(c)\\subseteq\\bigcup_jD(f_j)\\subseteq U$. This proves the required assertion about opens without invoking the stronger henselian-pair conclusion.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, final assertion about opens; Tag 0CT7, first proof paragraph; Algebra Tag 00E0 (lemma-Zariski-topology), unit-ideal criterion"
+   }
+  },
+  {
+   "text": "For each transition, surjectivity gives the positive-power condition with exponent $1$, and its kernel consists of nilpotents. Thus the spectrum homeomorphism node applies to $A_{n+1}\\to A_n$: every $r_n$ is surjective on points. Step 1 now gives $a_n(S_n)=a_{n+1}(S_{n+1})$ for all $n$. Their common image $K=a_1(S_1)$ is quasi-compact: an open cover pulls back along the continuous map $a_1$ to an open cover of the quasi-compact affine scheme $S_1$, hence has a finite subcover on $K$. Cover $K$ by affine opens of $T$ using the affine-basis node and choose a finite subcover. Let $T'$ be their union and $k:T'\\hookrightarrow T$ its open immersion. Each chosen affine is quasi-compact by the affine qcqs node, so their finite union is quasi-compact. Since each $a_n$ has image in $T'$, restriction of its locally ringed-space map gives $a'_n:S_n\\to T'$ with $k a'_n=a_n$; these maps remain compatible.",
+   "uses": [
+    "lem-pur-all-element-powers-spectrum-homeomorphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, first proof paragraph; Algebra Tag 0BR8 (lemma-powers); Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Let $q=h k:T'\\to S$. It is a monomorphism, since $h$ and the open inclusion $k$ cancel morphisms. It is locally of finite type by the following explicit restriction argument. For each affine open $V=\\operatorname{Spec}R$ in $S$, cover $h^{-1}(V)$ by $\\operatorname{Spec}C$ with $C$ a finitely generated $R$-algebra. The basic-open-basis node covers $T'\\cap\\operatorname{Spec}C$ by $D(b)$ contained in that intersection. The principal-localization open-immersion node identifies each $D(b)$ with $\\operatorname{Spec}C_b$. If $c_1,\\ldots,c_r$ generate $C$ over $R$, the fraction description of localization shows that $c_1,\\ldots,c_r,b^{-1}$ generate $C_b$ over $R$. This is the required affine cover for $q$. Apply the monomorphism-composite node with $f=q$ and $g=\\mathrm{id}_S$; it says exactly that $q$ is separated and quasi-finite at every point. The affine qcqs node makes $S$ quasi-compact and quasi-separated. Since $T'$ is quasi-compact, clause (1) of the qcqs-permanence node makes $q$ quasi-compact. Together with local finite type this makes $q$ of finite type, by the cited definition. All hypotheses of the Zariski-main factorization node are now available.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-trf-monomorphism-finite-type-composite-lqf",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, second proof paragraph; Morphisms Tag 0CT8 (lemma-monomorphism-loc-finite-type-loc-quasi-finite)"
+   }
+  },
+  {
+   "text": "By Zariski main choose $T'\\xrightarrow{j}W\\xrightarrow{p}S$ with $j$ a quasi-compact open immersion, $p$ finite, and $p j=q$. A finite morphism is affine by the finite-morphism definition; since $S$ is affine, $W$ is affine. Write $W=\\operatorname{Spec}B$. The maps $b_n=j a'_n:S_n\\to W$ correspond to compatible ring homomorphisms $\\beta_n:B\\to A_n$, by the affine-spectrum correspondence. If $\\alpha:A\\to B$ corresponds to $p$, then $\\beta_n\\alpha=\\pi_n$ for every $n$.",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, Zariski-main factorization and displayed ring diagram; More on Morphisms Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite)"
+   }
+  },
+  {
+   "text": "The compatible homomorphisms $\\beta_n$ define $\\beta:B\\to A$ explicitly by $\\beta(b)=(\\beta_n(b))_n$. Ring operations are coordinatewise, so this is a ring homomorphism. Its composite $\\beta\\alpha$ has all coordinates equal to those of the identity of $A$, hence is the identity. By affine-spectrum functoriality, $\\beta$ gives $g:S\\to W$ with $p g=\\mathrm{id}_S$ and $g i_n=b_n=j a'_n$ for all $n$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, displayed ring diagram and the morphism from S to W"
+   }
+  },
+  {
+   "text": "Form $P=T'\\times_{W,g}S$ with projections $e:P\\to T'$ and $v:P\\to S$. Base change of the open immersion $j$ makes $v$ an open immersion, so it identifies $P$ with an open subset $U\\subseteq S$. The equality $j a'_1=g i_1$ from Step 7 gives a map $S_1\\to P$ whose composite with $v$ is $i_1$, by the fibre-product universal property. Thus $i_1(S_1)\\subseteq U$, and Step 3 yields $U=S$. The definition of open immersion therefore makes $v$ an isomorphism. Let $s'=e v^{-1}:S\\to T'$. Since $j e=g v$ and $p j=q$, we have $q e=p g v=v$, whence $q s'=\\mathrm{id}_S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, final paragraph: open pullback containing the stage spectra"
+   }
+  },
+  {
+   "text": "Put $s=k s':S\\to T$. Then $h s=q s'=\\mathrm{id}_S$. Moreover $h(s h)=(h s)h=h=h\\mathrm{id}_T$, so monicity of $h$ gives $s h=\\mathrm{id}_T$. Thus $s$ is a two-sided inverse of $h$, proving the assertion for the original, possibly non-quasi-compact $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0CTJ, first paragraph reduction and final conclusion, with monomorphism cancellation explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-ring-localization-away",
+  "thm-pqf-zmt-factorization",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0CTJ (lemma-monomorphism-isomorphism)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme monomorphism to the spectrum of an inverse limit of surjective rings with nil kernels is an isomorphism if every ring quotient spectrum factors through it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it is both an open immersion and a surjective morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} [Finite ι] (R : ι → CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any finite index set $\\\\iota$ and a family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ \"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] [AlgebraicGeometry.Surjective f]\\n  [AlgebraicGeometry.IsReduced Y], CategoryTheory.IsIso f\", \"doc\": \"If $ f: X \\\\to Y $ is a closed immersion of schemes, the underlying map is surjective, and $ Y $ is a reduced scheme, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [AlgebraicGeometry.IsClosedImmersion f],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    CategoryTheory.IsIso f\", \"doc\": \"If a morphism of schemes is a closed immersion and the induced map on global sections is injective, then the morphism is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [inst : AlgebraicGeometry.IsClosedImmersion i₁]\\n  [AlgebraicGeometry.IsClosedImmersion i₂]\\n  (h : AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂),\\n  CategoryTheory.IsIso (AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Given two closed immersions $i_1: Z_1 \\\\to X$ and $i_2: Z_2 \\\\to X$ into a scheme $X$ with equal kernel ideal sheaves ($i_1.\\\\ker = i_2.\\\\ker$), the morphism $\\\\mathrm{lift}(i_1, i_2)$ constructed by facto\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism hits require additional flatness, reducedness or other hypotheses not present here; none gives inverse-ring monomorphism rigidity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism locally of finite type containing all nilpotent approximations of an inverse limit affine scheme is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"Profinite.isIso_asLimitCone_lift\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": IsIso ((limitConeIsLimit.{u, u} X.diagram).lift X.asLimitCone)\", \"doc\": \"For any profinite space $X$, the canonical morphism from the cone exhibiting $X$ as the inverse limit of its discrete quotients to the limit cone in the category of profinite spaces is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": HasRingHomProperty (@LocallyOfFiniteType) RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsIso f] : IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism hits require additional flatness, reducedness or other hypotheses not present here; none gives inverse-ring monomorphism rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Monomorphism, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Monomorphism'",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism hits require additional flatness, reducedness or other hypotheses not present here; none gives inverse-ring monomorphism rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "monomorphism.*(limit|isomorph)|limit.*monomorphism|henselian.*(mono|open)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"line\": \"206\", \"text\": \"instance [Limits.HasPullbacks C] : (alternatingFaceMapComplex C).PreservesMonomorphisms where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"line\": \"37\", \"text\": \"instance : MorphismProperty.IsStableUnderFilteredColimits.{u, u} (monomorphisms SSet.{u}) where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"line\": \"39\", \"text\": \"    change (monomorphisms (_ ⥤ _)).IsStableUnderColimitsOfShape J\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Lattice.lean\", \"line\": \"75\", \"text\": \"/-- The pullback of a monomorphism along itself is isomorphic to the top object. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"line\": \"76\", \"text\": \"  /-- Every monomorphism in `C` induces an isomorphism on a direct summand (G3). -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Simple.lean\", \"line\": \"53\", \"text\": \"/-- An object is simple if monomorphisms into it are (exclusively) either isomorphisms or zero. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Simple.lean\", \"line\": \"57\", \"text\": \"/-- A nonzero monomorphism to a simple object is an isomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Simple.lean\", \"line\": \"62\", \"text\": \"    [F.PreservesMonomorphisms] [F.PreservesZeroMorphisms] [F.ReflectsIsomorphisms] [F.Faithful]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"87\", \"text\": \"lemma jointlyReflectMonomorphisms [∀ i, PreservesLimitsOfShape WalkingCospan (F i)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean\", \"line\": \"24\", \"text\": \"* if `f` is both a strong epimorphism and a monomorphism, then it is an isomorphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean\", \"line\": \"127\", \"text\": \"/-- A strong epimorphism that is a monomorphism is an isomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean\", \"line\": \"128\", \"text\": \"@[to_dual /-- A strong monomorphism that is an epimorphism is an isomorphism. -/]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"line\": \"14\", \"text\": \"# The mapping cone of a monomorphism, up to a quasi-isomorphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean\", \"line\": \"21\", \"text\": \"* A pullback cone is a limit iff its composition with a monomorphism is a limit. This is available\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean\", \"line\": \"904\", \"text\": \"/-- The equalizer morphism in any limit cone is a monomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean\", \"line\": \"1154\", \"text\": \"/-- A coequalizer that is a monomorphism is an isomorphism. -/\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"31\", \"text\": \"if `f` is a monomorphism which is a quasi-isomorphism in degrees `≤ n₀` and\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"33\", \"text\": \"where `ι` is a monomorphism that is a quasi-isomorphism in degrees `≤ n₁`,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"215\", \"text\": \"Given a monomorphism `f : K ⟶ L` that is a quasi-isomorphism in degrees `< n`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"218\", \"text\": \"`ι f n : K ⟶ mid f n` is a monomorphism which is a quasi-isomorphism\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"419\", \"text\": \"/-- The category of factorisations of `f` as a monomorphism that is a quasi-isomorphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Images.lean\", \"line\": \"463\", \"text\": \"/-- The image of a monomorphism is isomorphic to the source. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean\", \"line\": \"160\", \"text\": \"`KernelFork.ofι i _` is a limit cone when we know that `i` is a monomorphism. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean\", \"line\": \"450\", \"text\": \"/-- When `g` is a monomorphism, the kernel of `f ≫ g` is isomorphic to the kernel of `f`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean\", \"line\": \"513\", \"text\": \"/-- The kernel of a monomorphism is isomorphic to the zero object -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism hits require additional flatness, reducedness or other hypotheses not present here; none gives inverse-ring monomorphism rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal detection of isomorphisms for finite type monomorphisms over complete inverse limit rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.ext_of_iInf\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  ⨅ i, I ^ i = ⊥ →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quo\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ I $ is an ideal in $ B $ such that the intersection of all powers $ I^n $ is trivial (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n = 0 $), then any two $ R $-\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι],\\n  Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"Given a finite index type $\\\\iota$ and a commutative ring $R$ with ideal $I$, the canonical linear map from the tensor product of the $I$-adic completion of $R$ with the product module $\\\\iota \\\\to R$ to\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_comp_injective_of_small\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] [Small.{w, u} A],\\n  Algebra.FormallyUnramified R A ↔\\n    ∀ ⦃B : Type w⦄ [inst_4 : CommRing B] [inst_5 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Injective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"For a small type $ A $, an $ R $-algebra $ A $ is formally unramified over $ R $ if and only if for every commutative $ R $-algebra $ B $ and every square-zero ideal $ I $ of $ B $, the induced map fr\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism hits require additional flatness, reducedness or other hypotheses not present here; none gives inverse-ring monomorphism rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type monomorphism to the spectrum of an inverse limit of surjective rings with nil kernels is an isomorphism when every stage factors through it",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec (Mathlib/AlgebraicGeometry/PointsPi), AlgebraicGeometry.Flat.isIso_of_surjective_of_mono (Mathlib/AlgebraicGeometry/Morphisms/FlatMono), AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType (Mathlib/AlgebraicGeometry/AffineTransitionLimit).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require flatness, a finite morphism, an immersion into a product spectrum, reducedness, or concern equality of maps along scheme limits; none states the nil-kernel inverse-ring rigidity assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require flatness, a finite morphism, an immersion into a product spectrum, reducedness, or concern equality of maps along scheme limits; none states the nil-kernel inverse-ring rigidity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme monomorphism containing every infinitesimal thickening in an inverse ring limit is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Flat.isIso_of_surjective_of_mono (Mathlib.AlgebraicGeometry.Morphisms.FlatMono), AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme (Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective), AlgebraicGeometry.FormallyUnramified (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified), AlgebraicGeometry.IsPreimmersion.instMonoScheme (Mathlib.AlgebraicGeometry.Morphisms.Preimmersion).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require flatness, a finite morphism, an immersion into a product spectrum, reducedness, or concern equality of maps along scheme limits; none states the nil-kernel inverse-ring rigidity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*(tower|monomorphism)|monomorphism.*(nilpotent|inverse limit)",
+   "results": "[grep] OK 0 hit(s); subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require flatness, a finite morphism, an immersion into a product spectrum, reducedness, or concern equality of maps along scheme limits; none states the nil-kernel inverse-ring rigidity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme monomorphism over a complete ring containing all nilpotent quotients is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec (Mathlib/AlgebraicGeometry/PointsPi), AlgebraicGeometry.Flat.isIso_of_surjective_of_mono (Mathlib/AlgebraicGeometry/Morphisms/FlatMono), AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite), AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits require flatness, a finite morphism, an immersion into a product spectrum, reducedness, or concern equality of maps along scheme limits; none states the nil-kernel inverse-ring rigidity assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tag 0CTJ (lemma-monomorphism-isomorphism).",
+   "via": [
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-tower-monomorphism-rigidity",
+  "worker": "stage1",
+  "summary": "Split Tag 0CTJ along its quasi-compact neighbourhood and Zariski-main proof; reused existing nodes for every non-elementary input, wrote the inverse-limit unit calculation and the section cancellation explicitly, and retained the statement. No new nodes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, paragraph 3 beginning Proper direct image: supporting algebraization chain through the coherent-family stack and flat proper-support inverse effectivity; precisely Tag 0CXB final use of Tag 0CTJ. The inherited blueprint.from.node is null; blueprint_refs.py ancestor confirms None.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-monomorphism-finite-type-composite-lqf",
+    "why": "Generic scheme monomorphism theorem, specialized with g the identity; provides separatedness and pointwise quasi-finiteness. The same-unit node is phrased for algebraic spaces; this exact scheme statement avoids an extra representable-space comparison."
+   },
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Generic Zariski-main finite factorization over a qcqs base, exactly the 05K0 input cited in 0CTJ; no same-unit scheme node states this finite factorization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "thm-pqf-zmt-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-dc0b2d46f",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-dc0b2d46f (reviewer sub-agent of L); spot-checked: I read the item and checked it against Stacks flat.tex 0CTJ. The statement is unchanged and matches the source (elementwise nilpotent kernels, surjective transitions, a locally finite type monomorphism). There are no new nodes and no re-split note. The item is still unsplit in live and side-live, so no other group has superseded it. I checked each of the 9 steps against the cited statements. 1: a_n unique and compatible by monicity, r_n direction correct. 2: pi_n surjective; 1+ker made of units via the geometric series, elementwise only. 3: basic-open cover, finite unit-ideal equation in A_1, lifted c with pi_1 c=1 is a unit, so S=D(c). This replaces 0CT7 correctly. 4: all-element-powers homeomorphism (d=1) makes the r_n surjective, so the common image K is quasi-compact and lies in a finite affine T'. 5: q is locally of finite type via D(b)=Spec C_b; the trf node with g=id gives separated and quasi-finite at every point; qcqs permanence (1) makes q quasi-compact, so of finite type. 6: ZMT hypotheses met exactly (the 20261023 blueprint_update only adds a finite-presentation clause); W affine via finite implies affine; beta_n alpha=pi_n. 7: beta coordinatewise, p g=id, g i_n=b_n. 8: base change of the open immersion, i_1 factors, Step 3 gives v an iso, q s'=id. 9: cancelling h gives s h=id with T not quasi-compact. Edge cases checked: A_1=0, constant tower, k[[t]], non-uniform exponent. No SGA citation; 0CTJ is cited only by the item, its parent and one other citer, so there is no duplicate. Accepted tool_uses: thm-pqf-zmt-factorization (generic 05K0), and the batch-5 flag lem-trf-monomorphism-finite-type-composite-lqf. That node is pure scheme theory (Stacks 01T8/02GE/02V5/01L3) and is the only trf node in its 65-node closure. Neither assumption gives it, and citing the trace-formula leaf could not supply it, so I accept it as generic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NilpotentTowerMonomorphismRigidity",
+  "declaration": "AlgebraicGeometry.isIso_of_nilpotentTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/NilpotentTowerMonomorphismRigidity.lean",
+  "statement": "theorem isIso_of_nilpotentTower (D : ℕᵒᵖ ⥤ CommRingCat.{u}) (hsurj : ∀ n : ℕ, Function.Surjective (D.map (homOfLE (Nat.le_succ n)).op).hom) (hnil : ∀ (n : ℕ) (x : D.obj (op (n + 1))), (D.map (homOfLE (Nat.le_succ n)).op).hom x = 0 → IsNilpotent x) {T : Scheme.{u}} (h : T ⟶ Spec (limit D)) [Mono h] [LocallyOfFiniteType h] (hfactor : ∀ n : ℕ, ∃ a : Spec (D.obj (op n)) ⟶ T, a ≫ h = Spec.map (limit.π D (op n))) : IsIso h",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b25743294",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Q67 lem-sfb-nilpotent-tower-monomorphism-rigidity b257: only lean delta vs side-live; item not landed elsewhere; statement verbatim in file. Checked against Stacks flat.tex 0CTJ: D : ℕᵒᵖ ⥤ CommRingCat.{u} (op n = A_{n+1}), hsurj/hnil on successor transitions (correct direction, elementwise IsNilpotent = locally nilpotent kernels), limit D with limit.π, h : T ⟶ Spec (limit D) [Mono h] [LocallyOfFiniteType h], hfactor ∃ per n with the canonical Spec.map (limit.π), conclusion IsIso h. No extra hypotheses (no QuasiCompact/Noetherian/Nontrivial/universe equality). Edge cases A_1=0, constant tower, k[[t]], non-nilpotent nil ideals, non-qc T covered. stmt_deps used as recorded; proof-dep imports match live records/mathlib_match (MonomorphismFiniteTypeComposite, QuasiFiniteFactorization exist, same universe). No existing declaration found (own rg). Docstrings with source + blueprint, nine steps with correct diagrammatic orders; only sorry; no hollow defs. Not recompiled (no changes); worker compile clean."
+ }
+}

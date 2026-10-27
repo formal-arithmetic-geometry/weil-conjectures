@@ -14,59 +14,44 @@
  ],
  "proof": [
   {
-   "text": "Pull back local regular equations and the pole extension. The pulled equations are regular by the Cartier hypothesis. The assignment t inverse↦(g*t) inverse and pullback of units glue, since changes by units are respected. The finite-stalk formula identifies the closed exchange with identity on the supported constant stalks and zero elsewhere.",
+   "text": "Construct one simultaneous OrdinaryFiniteTwistTransport from etaleFiniteTwistPullback: take the degree-one line maps, their roots inclusion equations, and pure tensor normalization. This construction is independent of the Cartier immersion and square.",
    "uses": [
-    "def-sp-cartier-pole-boundary",
-    "def-pc-divisor-line-bundle",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-asd-etale-finite-twist-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality of the relative boundary and derived scalar extension proves the ordinary Ext square. One normalized roots transport works for all schemes: its root inclusion and pure tensor equations fix its components. Uniqueness of the relative boundary identifies both ordinary classes with the canonical ones.",
+   "text": "Apply finite base change to the closed immersion and compose with the constant inverse-image isomorphism to show that supportedConstantExchange is invertible. The closed-exchange comparison identity expresses pullback of the supported source comparison followed by geoCartierExchange as a composite of isomorphisms. Cancel the source comparison to obtain invertibility of the actual pro-etale exchange.",
    "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lemma-weil-pbc-finite-exchange",
+    "lem-sfb-cartier-closed-exchange-comparison",
+    "lem-sfb-geo-cartier-source-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
-   }
+   "elementary": false
   },
   {
-   "text": "Comparison preserves inverse-image commutation and counits. The adjunct of closed exchange is inverse-image commutation followed by the pulled counit. Adjunction injectivity therefore identifies its comparison with the actual geoCartierExchange. Transport the ordinary square and its invertibility through the supported comparison isomorphisms. Identity and empty pullbacks give identity and zero maps respectively.",
+   "text": "Apply supported_kummer_boundary_pullback to geoCartierEtaleClass and its boundary specifications for the given normalized transport. Apply exact comparison inverse image to this Ext square. Naturality of Ext under the inverse-image comparison isomorphism identifies the two iterated exact-functor maps. Precompose with the inverse source comparison; the closed-exchange comparison identity and the inverse identities cancel both supported-source comparisons. Associativity of Ext composition then gives the required square for geoCartierCanonicalClass and the specified geoCartierLinePullback.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "def-sfb-geo-cartier-canonical-class"
+    "lem-asd-supported-kummer-boundary-pullback",
+    "def-sfb-geo-cartier-canonical-etale",
+    "def-sfb-geo-cartier-canonical-class",
+    "lem-sfb-cartier-closed-exchange-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-cartier-pole-boundary",
-  "def-pc-divisor-line-bundle",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-asd-ordinary-supported-kummer",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-thm-pe-direct-image-comparison",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-sfb-cartier-closed-exchange-comparison",
+  "lem-sfb-geo-cartier-source-comparison",
+  "lem-asd-supported-kummer-boundary-pullback",
+  "def-sfb-geo-cartier-canonical-etale",
   "def-sfb-geo-cartier-canonical-class"
  ],
  "proof_origin": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "Paragraph 6 and paragraph 1: pullback of the pole boundary and counit mates",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Opening comparison paragraph and final naturality paragraph; equality of the specified closed-exchange mates",
   "by": "agent"
  },
  "mathlib_searches": [
@@ -139,13 +124,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3bab2",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261021T134548-L-1367600",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094424-L-224191",
   "kind": "interface",
-  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

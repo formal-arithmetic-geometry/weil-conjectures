@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-tower-class-line-pullback-horizontal",
+ "kind": "statement",
+ "title": "Horizontal compatibility of normalized finite root-line comparisons",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X,Y, f:X→Y and normalized tower Geometry g with Base b [def-sp-tower-shriek-data]. Let cY,cX be Chern data [def-sp-tower-class-chern]. Suppose for every n a finite-line isomorphism delta_n from the actual constant-ring inverse image of finiteLine(cY,n) to finiteLine(cX,n) is given [def-sp-tower-class-diagonal, def-cbc-strict-constant-tower-operations], and its ordinary finite adjunct sends each a tensor z to the actual constant direct-image image of a tensor restrictRoot(z) [def-sp-tower-class-pullback]. Conjugate delta_n by lineEvaluation on X and Y and g.ordinaryPullEvaluation, obtaining d_n between the evaluations of g.pull(lineModule(cY)) and lineModule(cX). Then for every n≤m, transition_X(n≤m) followed by restriction of d_n equals d_m followed by transition_X(n≤m). This asserts the horizontal equation for already given finite comparisons; it constructs neither those comparisons nor a system isomorphism.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "def-cbc-strict-constant-tower-operations",
+  "def-sp-tower-class-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension of the roots tower; horizontal transition calculation of lem-sfb-tower-class-line-pullback-existence"
+ },
+ "proof": [
+  {
+   "text": "Use naturality of the scalar-extension sheafification unit and the transition equation of rootForget. Under lineEvaluation the actual transition sends a tensor a tensor z at level m to coefficientMap(h)(a) tensor z^(l^(m-n)) at level n. Tensor induction and the sheafification universal property determine this map from the displayed generators. This computes the transition for each of cY and cX.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-diagonal",
+    "lem-sp-tower-line-evaluation-universal",
+    "lem-sp-finite-tate-line-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport g.generic.ordinaryPullTransition through g.coefficients, g.transitions and the ordinary pull-evaluation equalities. Transpose the square with the finite adjunctions and test on pure tensors. Substitute the assumed normalized finite formulas. The coefficient parts agree by naturality of the constant direct-image map under the quotient map; the roots agree because the global-sections projection map preserves powers. Tensor induction and sheafification give equality of morphisms. Cancel the evaluation isomorphisms to obtain the horizontal square. The argument includes empty charts and m=n.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "def-coef-semilinear-geometry-derived",
+    "def-cbc-strict-constant-tower-operations",
+    "def-sp-tower-class-pullback",
+    "lem-sp-finite-tate-line-universal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "lem-sp-tower-line-evaluation-universal",
+  "lem-sp-finite-tate-line-universal",
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-geometry-derived",
+  "def-cbc-strict-constant-tower-operations",
+  "def-sp-tower-class-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2); detailed horizontal calculation in the assigned parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a roots of unity sheaf is the roots of unity sheaf and commutes with extension of scalars",
+   "results": "8 hits: restrictions of roots of unity under multiplicative equivalences and cyclotomic character formulas. None treats coefficient-system horizontal equations.",
+   "date": "2026-10-27",
+   "verdict": "No matching system theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_pow\"",
+   "results": "12 hits including map_pow, MonoidHom.map_pow, RingHom.map_pow, and RingEquiv.map_pow. These give the root-factor calculation but not the sheafified system square.",
+   "date": "2026-10-27",
+   "verdict": "Generic power compatibility only; no normalized finite-line transition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*pullback|pullback.*scalarExtension",
+   "results": "0 hits. Local rg also found no lineEvaluation transition compatibility; existing generic systemIsoOfEvaluation_exists assumes exactly the equation needed here.",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized horizontal calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible coefficient level morphisms of sheaves of modules on a sequence site assemble into a morphism of systems",
+   "results": "8 hits including SheafOfModules.Presentation.map_π_eq, SheafOfModules.Hom, sectionsMap, Hom.val, PresheafHom.IsSheafFor.app_cond and sectionsFunctor_map. None provides horizontal compatibility of root-line transport.",
+   "date": "2026-10-27",
+   "verdict": "Existing local systemIsoOfEvaluation_exists assembles already horizontal morphisms; it does not prove this equation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassLinePullbackExistence",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Scalar extension of the root tower in classes (2), horizontal compatibility required for root-line transport",
+   "via": [
+    "lem-sfb-diagonal-trace-geometric-model-existence",
+    "lem-sfb-tower-class-line-pullback-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassLinePullbackHorizontal",
+  "file": "lean/Sheaf/Paper/TowerClassLinePullbackHorizontal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.linePullback_components_horizontal",
+  "statement": "theorem linePullback_components_horizontal\n    {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X)\n    (δ : ∀ n : ℕ,\n      (proEtaleConstantRingPullback (SpTowerShriek.R l E n) f).obj\n        (finiteLine l E Y n) ≅ finiteLine l E X n)\n    (hδ : ∀ (n : ℕ) (U : Y.ProEtᵒᵖ)\n      (a : (SpTowerShriek.B l E Y n).obj.obj U)\n      (z : (Scheme.proEtaleRootsOfUnitySheaf Y (l ^ (n + 1))).obj.obj U),\n      (((proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f).homEquiv _ _)\n        (δ n).hom).val.app U\n          (Scheme.tateFiniteTensor Y l (FiniteRing l E n) n (finiteScalar l E n)\n            U.unop a z) =\n        Scheme.tateFiniteTensor X l (FiniteRing l E n) n (finiteScalar l E n)\n          (chart f U).unop\n          ((Scheme.proEtaleConstantDirectImageMap.{u, u + 2} f CommRingCat.{u + 1}\n            (CommRingCat.of (FiniteRing l E n))).hom.app U a)\n          (restrictRoot l f n U z)) :\n    let d := fun n ↦ (g.ordinaryPullEvaluation n).app (lineModule l E cY) ≪≫\n      (proEtaleConstantRingPullback (SpTowerShriek.R l E n) f).mapIso\n        (lineEvaluation l E cY n) ≪≫ δ n ≪≫ (lineEvaluation l E cX n).symm\n    ∀ {m n : ℕ} (h : n ≤ m),\n      (SemilinearSections.transition.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology X) (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n          (g.pull.obj (lineModule l E cY)) ≫\n        (SemilinearSections.res.{u + 1, u, u + 1}\n          (SemilinearSections.coefficientMap.{u + 1, u, u + 1}\n            (Scheme.ProEt.topology X) (SpTowerShriek.B l E X)\n            (SpTowerShriek.tau l E X) h)).map (d n).hom =\n      (d m).hom ≫ (SemilinearSections.transition.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology X) (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n          (lineModule l E cX)",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T034654-L-3673013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T034654-L-3673013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

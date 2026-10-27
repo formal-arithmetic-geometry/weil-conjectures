@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-system-compositor-finite-word-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the compatible system compositor with a supplied origin",
+ "statement": "Let C_n be commutative rings in universe u+1 with arbitrary quotient transition maps tau_n, and use the actual semilinear derived system categories and proper/open operations [def-pur-system-compatible-compositor-words]. Let X,V,XB,Y,YB,Z be Noetherian schemes (quasi-compact schemes with locally Noetherian affine coordinate rings) in universe u [def-weil-scheme-morphism-properties], j:X→V, b:V→XB and i:Y→YB quasi-compact open immersions, q:V→Y, p:XB→YB and s:YB→Z proper, and let b,p,q,i form a Cartesian square with a specified equality b≫p=q≫i [def-pc-fibre-product]. Fix n with C_n finite, a system M on X and a scalar etale-origin witness w for compositorLevel(X,n)(M), whose coefficient carrier is C_n and whose scalar homomorphism is identity [def-cbc-finite-constant-coefficient-transport]. Then compositorFiniteSource(w).hom followed by evaluation of compatibleCompositorWord(j,b,q,p,i,s) at M equals HD_Z applied to coherenceEtaleCompositor in the compactifications (j,q),(i,s),(j≫b,p≫s), at w.origin.L, followed by compositorFiniteTarget(w).hom [def-pur-chosen-compactification-compositors, def-pur-finite-site-tower-etale-coordinates, def-pur-compatible-triangle-compactifications]. This is an equation of the specified maps for a supplied origin; it asserts neither existence of a geometric triangle nor existence of origins nor invertibility on a constructible domain.",
+ "stmt_deps": [
+  "def-pur-system-compatible-compositor-words",
+  "def-pc-fibre-product",
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-pur-chosen-compactification-compositors",
+  "def-pur-finite-site-tower-etale-coordinates",
+  "def-pur-compatible-triangle-compactifications",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, four displayed identifications; Zheng Lemma 4.10 for simultaneous section evaluation; parent normalization proof Steps 4--6"
+ },
+ "proof": [
+  {
+   "text": "Apply gamma_finite to J_j M. The canonical open comparison applied to the supplied scalar etale origin gives an origin for its evaluated open extension, retaining the same finite coefficient carrier and identity scalar map. Its source and target comparisons are precisely the prescribed composites of evaluation and finite scalar comparisons.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite clopen-mate site transport equation compares the normalized intrinsic mate with its etale mate through the canonical open comparison and counit-normalized proper comparison. The proper/open coefficient mate equation compares the open-adjunct interchange through the very same comparisons. Their etale maps have the same K-injective resolution normalization, so cancel the invertible comparisons to identify the finite intrinsic mate with the interchange used in FiniteSiteTower.",
+   "uses": [
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of the proper and open compositors is the normalized finite compositor. Check their adjunction transposes: the system evaluation comparisons preserve the unit and counit, while the underlying section maps for composite inverse image are the same canonical pullback-pasting maps. Equality of transposes gives equality of the compositors. Whisker these equations with the mate equation, use naturality in the supplied originIso, and cancel adjacent inverse comparison pairs.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-site tower paste now identifies the evaluated three-factor word with AE transported by the canonical support comparisons. Its etale_compositor_normalization and finite compact-site coherence identify AE with coherenceEtaleCompositor in compactificationF j q, compactificationG s i and compactificationGF j b p s i q sq. Expanding the canonical support comparisons and reassociating gives exactly the displayed equality. Identity factors obey the same normalized unit equations; if an open is empty, extension is zero and the comparison equations hold by uniqueness of maps on zero objects.",
+   "uses": [
+    "lem-sp-finite-site-tower-paste",
+    "lem-sp-finite-compact-site-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-finite-site-tower-paste",
+  "lem-sp-proper-open-coefficient-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, four displayed identifications, extended to semilinear system evaluation through the prescribed adjunction mates"
+ },
+ "status": "split",
+ "import_flags": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived compact support compositor compatible compactification proper open mate evaluation",
+   "results": "8 hits: CompactlySupportedContinuousMap.comp, CompactlySupportedContinuousMap.compLeft, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun, CompactlySupportedContinuousMap.comp_assoc, CompactlySupportedContinuousMap.compLinearMap, CompactlySupportedContinuousMap.compLeft_apply, HasCompactSupport.comp_left, CompactlySupportedContinuousMap.coe_compLeft; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified finite evaluation equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso.comp_isIso",
+   "results": "3 hits: CategoryTheory.IsIso.comp_isIso, CategoryTheory.IsIso.inv_comp, CategoryTheory.IsIso.inv_comp_assoc; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified finite evaluation equation."
+  },
+  {
+   "tool": "grep",
+   "query": "compositor.*normal|gamma_finite",
+   "results": "0 hits: ; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified finite evaluation equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation derived direct image open extension composition comparison natural transformation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.evaluation_naturality_assoc, CategoryTheory.evaluation, TopCat.Presheaf.comp_app, CategoryTheory.evaluationUncurried, CategoryTheory.eval_app, PresheafOfModules.evaluation, CategoryTheory.Limits.coprodComparisonNatTrans, AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply; ",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified finite evaluation equation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemCompatibleCompositorNormalization",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Old Step 5: identify the compatible compactification compositor with its finite proper/open word; parent normalization Steps 4--6",
+   "via": [
+    "lem-pur-system-compatible-compositor-normalization",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemCompositorFiniteWordEvaluation",
+  "file": "lean/Sheaf/Paper/SystemCompositorFiniteWordEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.systemCompositorFiniteWordEvaluation",
+  "statement": "theorem systemCompositorFiniteWordEvaluation\n    {X V XB Y YB Z : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian V] [IsNoetherian XB]\n    [IsNoetherian Y] [IsNoetherian YB] [IsNoetherian Z]\n    (j : X ⟶ V) (b : V ⟶ XB) (q : V ⟶ Y) (p : XB ⟶ YB)\n    (i : Y ⟶ YB) (s : YB ⟶ Z)\n    [IsOpenImmersion j] [IsOpenImmersion b] [IsOpenImmersion i]\n    [QuasiCompact j] [QuasiCompact b] [QuasiCompact i]\n    [IsProper q] [IsProper p] [IsProper s]\n    (sq : IsPullback b q p i) (h : b ≫ p = q ≫ i)\n    (n : ℕ) [Finite (C n)] (M : Derived C τ X)\n    (w : StrictTower.ScalarEtaleOrigin (C n) X ((compositorLevel C τ X n).obj M))\n    (hC : w.Λ = (C n : Type (u + 1))) (hφ : HEq w.φ (RingHom.id (C n))) :\n    (compositorFiniteSource C τ j q i s n M w).hom ≫\n        (compositorLevel C τ Z n).map ((compatibleCompositorWord C τ j b q p i s h).app M) =\n      (StrictTower.HD (C n) Z w.Λ w.φ).map\n        ((coherenceEtaleCompositor w.Λ\n          (FiniteSiteTower.compactificationF j q)\n          (FiniteSiteTower.compactificationG s i)\n          (FiniteSiteTower.compactificationGF j b p s i q sq)).hom.app w.origin.L) ≫\n        (compositorFiniteTarget C τ j b p s n M w).hom",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-910bd",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T213034-L-277426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-910bd",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T213034-L-277426",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new finite-word sorry lemma read against lem-pur-system-compatible-compositor-normalization / new node and Stacks 0F7J; moved defs diffed verbatim against live; importers RamifiedScalarSystemTranspose and SystemCompositorRefinementSquare compiled against the delivered modules"
+ }
+}

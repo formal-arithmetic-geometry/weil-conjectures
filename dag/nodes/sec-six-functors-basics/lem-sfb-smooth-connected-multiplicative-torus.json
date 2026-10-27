@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-smooth-connected-multiplicative-torus",
+ "kind": "statement",
+ "title": "Smooth connected groups of multiplicative type are tori",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme has multiplication, identity and inverse satisfying the group diagrams; a homomorphism respects them. A group of multiplicative type of finite presentation is an fppf-local form of $D(M)=\\operatorname{Spec}\\mathcal O_S[M]$ for a finitely generated abelian group $M$, with $e_m\\mapsto e_m\\otimes e_m$ as comultiplication [def-sfb-ring-diagonalizable-group]. Fppf means faithfully flat and locally of finite presentation [def-pc-fppf-site]. A torus is an fppf-local form of $\\mathbf G_m^r$ for a finite integer $r\\geq0$, where $\\mathbf G_m(U)=\\Gamma(U,\\mathcal O_U)^\\times$. Let $P\\to S$ be a group of multiplicative type of finite presentation. If $P\\to S$ is smooth [def-sbc-smooth-morphisms] and every geometric fibre of $P\\to S$ is connected [def-weil-connected-scheme], then $P$ is a torus. More explicitly, there is an fppf covering of $S$ on which $P$ is isomorphic to $\\mathbf G_m^{r_i}$ for finite ranks $r_i$. This permits disconnected or nonreduced bases and requires geometric connectedness of the whole fibre, not merely of its identity component.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Appendix B, Proposition B.3.4 and its character-sheaf description of tori; smooth connected diagonalizable fibres have torsion-free character groups. This is the relative torus-recognition criterion, not a definition of tori. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-relative-torus",
+  "def-sfb-relative-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "By the multiplicative-type hypothesis choose an fppf covering $\\{U_i\\to S\\}$ and group isomorphisms $P_{U_i}\\simeq D_{U_i}(M_i)$ with each $M_i$ finitely generated; the covering convention is [def-pc-fppf-site]. Discard empty members. Fix one remaining $U=U_i$ and write $M=M_i$. Choose a point $u\\in U$, an affine open $V=\\operatorname{Spec}R$ containing it, and an algebraic closure $\\Omega$ of $\\kappa(u)$ [def-weil-algebraic-closure, def-weil-geometric-point]. The composite $\\operatorname{Spec}\\Omega\\to U\\to S$ is a geometric point of $S$. On $V$, the splitting has coordinate algebra $R[M]$ [def-sfb-ring-diagonalizable-group]. The affine fibre-product formula and tensor universal property identify its pullback with $\\operatorname{Spec}\\Omega[M]$: the inverse algebra maps are $a\\otimes\\sum_m r_me_m\\mapsto\\sum_m a\\bar r_me_m$ and $\\sum_m a_me_m\\mapsto\\sum_m a_m\\otimes e_m$. Their composites fix the displayed generators. Thus the geometric fibre of $P$ at this composite is $D_\\Omega(M)$, not a different fibre of a quotient or of an identity component.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1--12.2 and Remark 12.6, printed pp.231--232; explicit extension-of-scalars calculation over R. Stacks 01I4, schemes-lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "Smoothness of $P\\to S$ gives geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced]. Therefore $D_\\Omega(M)$ is reduced, and $A=\\Omega[M]$ has no nonzero nilpotents by [lem-weil-pbc-affine-scheme-reduced-iff]. It is connected because every geometric fibre of $P\\to S$ is assumed connected. Suppose $\\operatorname{char}\\Omega=p>0$ and $M$ has an element $m$ of finite order $n>1$ divisible by $p$. Then $a=(n/p)m$ has order $p$. In the basis of [def-sfb-ring-diagonalizable-group], $z=e_a-e_0$ is nonzero, whereas the characteristic-$p$ binomial identity gives $z^p=e_{pa}-e_0=0$, a contradiction. Consequently no finite-order element of $M$ has order divisible by the residue characteristic. This step is applied to the original smooth morphism $P\\to S$; it assumes no reducedness of $S$ or of the splitting cover.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal, with morphisms.tex Tag 01VB, lemma-base-change-smooth; schemes.tex Tag 01J2, lemma-affine-reduced. The nilpotent calculation expands Milne Remark 12.5, p.232."
+   }
+  },
+  {
+   "text": "If $m\\in M$ has order $n>1$, Step 2 ensures that $n$ is invertible in $\\Omega$ (also automatic in characteristic zero). Set $b=n^{-1}\\sum_{j=0}^{n-1}e_{jm}\\in A$. Each residue class modulo $n$ occurs exactly $n$ times among the sums of two such indices, so $b^2=n^{-2}n\\sum_j e_{jm}=b$. The $n$ basis elements are distinct. The coefficient of $e_m$ is $n^{-1}\\ne0$, proving both $b\\ne0$ and $b\\ne1$. By [lem-weil-pbc-spec-clopen-idempotent], $D(b)$ and $D(1-b)$ are complementary clopens. Neither is empty: under its bijection, the empty set corresponds to $0$ and the whole spectrum to $1$. This contradicts connectedness [def-weil-connected-scheme]. Thus $M$ is torsion-free. These are explicit basis and idempotent calculations, not an appeal to a torus-recognition theorem.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition; elementary averaging-idempotent calculation expanding Milne Remark 12.5, printed p.232."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fg-torsionfree-group-free] to this finitely generated torsion-free $M$. Choose its finite basis $b_1,\\ldots,b_r$. On every affine open $\\operatorname{Spec}B\\subset U$, the inverse algebra maps $B[M]\\rightleftarrows B[x_1^{\\pm1},\\ldots,x_r^{\\pm1}]$ send $e_{\\sum_j n_jb_j}\\mapsto\\prod_jx_j^{n_j}$ and $\\prod_jx_j^{n_j}\\mapsto e_{\\sum_j n_jb_j}$. Unique expression in the basis makes them well defined; addition of exponents proves multiplicativity. They preserve coproduct, counit and antipode on each basis monomial [def-sfb-ring-diagonalizable-group]. The affine-spectrum construction therefore makes them inverse group-scheme maps [def-weil-affine-spectrum]; the tensor-product and affine-product formulas identify the Laurent spectrum with $\\mathbf G_{m,B}^{r}$. Here, for every $B$-scheme $T$, the Spec--global-sections bijection [lem-a1-locally-ringed-space-affine-adjunction] identifies $B$-morphisms $T\\to\\operatorname{Spec}B[x^{\\pm1}]$ with $B$-algebra maps $B[x^{\\pm1}]\\to\\Gamma(T,\\mathcal O_T)$, i.e. with units $\\Gamma(T,\\mathcal O_T)^\\times$ (image of $x$), naturally in $T$, and the coproduct $x\\mapsto x\\otimes x$ with multiplication of units; so $\\operatorname{Spec}B[x^{\\pm1}]$ represents $\\mathbf G_{m,B}$ as a group functor. These formulas fix coefficients and commute with restriction, so define inverse maps of the corresponding algebra sheaves on $U$, giving $D_U(M)\\simeq\\mathbf G_{m,U}^{r}$. Composing with the given splitting gives $P_U\\simeq\\mathbf G_{m,U}^{r}$. Perform this construction for every nonempty covering member. The original fppf cover thus proves exactly the stated torus property, with ranks allowed to vary. Rank zero uses $B[0]=B$ and the empty product; if $S$ is empty the empty covering suffices.",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free",
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-affine-spectrum",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1--12.2 and Proposition 12.3, printed pp.231--232; coefficientwise extension of the displayed Hopf algebra isomorphisms to arbitrary base rings. Stacks 01I4, schemes-lemma-fibre-product-affine-schemes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-connected-scheme",
+  "lem-trf-fg-torsionfree-group-free",
+  "def-weil-affine-spectrum",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Examples 12.1--12.2, Proposition 12.3 and Remark 12.5, printed pp.231--232; agent-written relative assembly using Stacks 01I4, 01VB, 056T, 01J2 and 00EE. The local character group is tested on a geometric fibre and a basis then splits the entire covering member."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"centralizer\"",
+   "results": "{\"t\": \"2026-10-24T08:27:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"centralizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|reductive|multiplicative.?type",
+   "results": "{\"t\": \"2026-10-24T08:39:24Z\", \"tool\": \"grep\", \"query\": \"torus|reductive|multiplicative.?type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\"",
+   "results": "{\"t\": \"2026-10-24T08:39:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftRightAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.rightAnnihilatorUSize\", \"UnitAddTorus\", \"UnitAddTorus.mFourierCoeff\", \"UnitAddTorus.mFourier\", \"UnitAddTorus.measurableEquivPiIoc\", \"UnitAddTorus.lintegral_preimage\"], \"digest\": \"7bd74e45ead7d160\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group scheme with commutative reductive fibres is a torus",
+   "results": "{\"t\": \"2026-10-24T08:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine group scheme with commutative reductive fibres is a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\"], \"digest\": \"d4d0dddcaac3b342\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented multiplicative type group scheme is a torus if smooth with connected geometric fibres",
+   "results": "{\"t\": \"2026-10-24T08:48:22Z\", \"tool\": \"leansearch\", \"query\": \"A finitely presented multiplicative type group scheme is a torus if smooth with connected geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"Monoid.IsTorsion\", \"instFiniteMultiplicative\", \"AddGroup.fg_iff_mul_fg\", \"UnitAddTorus\", \"Multiplicative.fintype\"], \"digest\": \"69d5c83001633d0f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme of multiplicative type with geometrically connected fibres is a torus",
+   "results": "{\"t\": \"2026-10-24T08:48:24Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme of multiplicative type with geometrically connected fibres is a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.IsAffine\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"LieGroup\", \"instLieGroupOfTopWithTopENat\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsAffineTerminalScheme\"], \"digest\": \"6fa239320c4bfad8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|multiplicative.?type|torus",
+   "results": "{\"t\": \"2026-10-24T09:26:12Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|multiplicative.?type|torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are smoothness/base-change, analytic tori, Lie groups or representation theory; none is the relative multiplicative-type torus criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\"",
+   "results": "{\"t\": \"2026-10-24T09:26:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftRightAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.rightAnnihilatorUSize\", \"UnitAddTorus\", \"UnitAddTorus.mFourierCoeff\", \"UnitAddTorus.mFourier\", \"UnitAddTorus.measurableEquivPiIoc\", \"UnitAddTorus.lintegral_preimage\"], \"digest\": \"7bd74e45ead7d160\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are smoothness/base-change, analytic tori, Lie groups or representation theory; none is the relative multiplicative-type torus criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme of multiplicative type with connected geometric fibres is a torus",
+   "results": "{\"t\": \"2026-10-24T09:26:13Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme of multiplicative type with connected geometric fibres is a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"LieGroup\", \"instLieGroupOfTopWithTopENat\", \"AlgebraicGeometry.AffineSpace\", \"Units.instLieGroupModelWithCornersSelf\", \"instLieGroupOfNatWithTopENat\", \"instLieGroupOfSomeENatTopOfLEInfty\"], \"digest\": \"40c8c93b6ee4873a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are smoothness/base-change, analytic tori, Lie groups or representation theory; none is the relative multiplicative-type torus criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented multiplicative type group scheme is a torus if smooth with connected geometric fibres",
+   "results": "{\"t\": \"2026-10-24T09:26:46Z\", \"tool\": \"leansearch\", \"query\": \"A finitely presented multiplicative type group scheme is a torus if smooth with connected geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"Monoid.IsTorsion\", \"instFiniteMultiplicative\", \"AddGroup.fg_iff_mul_fg\", \"UnitAddTorus\", \"Multiplicative.fintype\"], \"digest\": \"69d5c83001633d0f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are smoothness/base-change, analytic tori, Lie groups or representation theory; none is the relative multiplicative-type torus criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected diagonalizable algebraic group is isomorphic to a product of multiplicative groups",
+   "results": "{\"t\": \"2026-10-24T09:27:30Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected diagonalizable algebraic group is isomorphic to a product of multiplicative groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Prod.instLieGroup\", \"Prod.instLieAddGroup\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing\", \"Units.instLieGroupModelWithCornersSelf\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\"], \"digest\": \"88f6fdb45f092da7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are smoothness/base-change, analytic tori, Lie groups or representation theory; none is the relative multiplicative-type torus criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Smooth connected groups of multiplicative type are tori. Appendix B, Proposition B.3.4 and its character-sheaf description of tori; smooth connected diagonalizable fibres have torsion-free character groups. This is the relative torus-recognition criterion, not a definition of tori.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-connected-multiplicative-torus",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing smooth-geometrically-reduced, affine-reducedness, clopen-idempotent and finite-free-abelian-group nodes. The proof explicitly excludes characteristic torsion by a nilpotent and all remaining torsion by an averaging idempotent, then writes the integral-basis Hopf algebra isomorphism over every splitting-cover member. No new nodes; no Lean or build operations.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting the inherited alteration and relative reductive-group prerequisites through the existing blueprint.from.via chain. This item realizes the last recorded prerequisite, 'smooth connected groups of multiplicative type are tori'. blueprint_refs.py ancestor prints None, so from.node remains null; from.place already records the exact inherited supporting place. Whole-blueprint searches for multiplicative type, diagonalizable, torus and torsion-free found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Step 2 takes only its statement (a smooth morphism has geometrically reduced fibres, Stacks 01VB+056T) as a generic black box for the smooth morphism P->S; unit sk-thm-sf-ctf-stability and the units it cites contain no node giving fibrewise geometric reducedness of smooth morphisms, and the unit route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-482f5aa3d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-482f5aa3d (reviewer sub-agent of L); spot-checked: Read in full: one commit with the item and its report; no new nodes; no repair note, so this is not a re-split order. Statement unchanged and true. Both hypotheses are needed: mu_p in char p is connected but not smooth; mu_l for l != p is smooth but not connected. Edge cases checked: M=0, empty S, disconnected S with varying ranks, nonreduced S, mixed characteristic. Source checked: Milne iAG2017 printed p.232 (Prop 12.3 proof, Lemma 12.4, Remarks 12.5-12.6). Step 1: geometric fibre is Spec Omega[M] via the affine fibre-product and tensor leaves; inverse maps correct. Step 2: smooth implies geometrically reduced fibres, then for a of order p, z=e_a-e_0 is a nonzero nilpotent. Step 3: the averaging element b=n^{-1} sum e_{jm} is an idempotent other than 0 and 1, so the clopen bijection contradicts connectedness; elementary, accepted. Step 4: the finite Z-basis gives the monomial Hopf isomorphism over every affine open, glued on U. FIX 1: step 4 identifies Spec B[x^{+-1}] with G_m(T)=Gamma(T,O_T)^x for non-affine T, which def-weil-affine-spectrum does not give; added the Mathlib leaf lem-a1-locally-ringed-space-affine-adjunction to the step's text, uses and proof_deps. FIX 2: sbc-lem-smooth-geometrically-reduced (unit sk-def-smooth, not reached by the transitive uses of sk-thm-sf-ctf-stability) is a generic black-box tool use that was not declared; accepted and declared in split_report.tool_uses. Batch-5 check: lem-trf-fg-torsionfree-group-free is the Mathlib leaf Module.basisOfFiniteTypeTorsionFree' (finitely generated torsion-free abelian groups are free). It is pure algebra, neither assumed by nor a step of the trace formula or Poincare duality; accepted. Duplicate search: lem-sfb-diagonalizable-group-geometric-criteria, lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density, lem-trf-lattice-torus-coordinates-action and def-sfb-tori-multiplicative-type are all field-level; no relative torus-recognition node exists.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothConnectedMultiplicativeTorus",
+  "declaration": "AlgebraicGeometry.smooth_connected_multiplicativeType_isRelativeTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothConnectedMultiplicativeTorus.lean",
+  "statement": "theorem smooth_connected_multiplicativeType_isRelativeTorus {S : Scheme.{u}} (P : Grp (Over S)) [LocallyOfFinitePresentation P.X.hom] [QuasiCompact P.X.hom] (hP : IsRelativeMultiplicativeType P) [Smooth P.X.hom] (hconn : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), ConnectedSpace (pullback P.X.hom s : Scheme.{u})) : IsRelativeTorus P.X",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-211ac2337",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause: arbitrary S : Scheme.{u}, P : Grp (Over S), LFP+QC (Mathlib's finite-presentation convention, both implied by hP), hP : IsRelativeMultiplicativeType, [Smooth], whole geometric fibres connected over all alg. closed Ω : Type u, conclusion landed IsRelativeTorus P.X (fppf cover, varying ranks). New def-sfb-relative-multiplicative-type is a real Prop: affine fppf cover with Grp-isos to ringDiagonalizableGroup (R i) M, M f.g.; matches Conrad B.1.1; no duplicate (existing multiplicative-type/diagonalizable defs are field-only). Item node changed only by lean + 2 used stmt_deps; both lean.statement fields verbatim; def-sfb-relative-torus unchanged. Only sorry; docstrings have source, blueprint tag, 4 proof steps; one universe; no extra assumptions. Edge cases (empty S, rank 0, disconnected/nonreduced base, mu_p, mu_n) OK. No file changed, so no compile. Advisory: prose does not bracket-cite the two added stmt_deps."
+ }
+}

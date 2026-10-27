@@ -4,6 +4,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.Paper.AdicResidueLiftComparisons
+import Sheaf.Paper.AdicResidueVanishingSuccessor
+import Sheaf.Paper.AdicCompleteReductionCone
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Derived Nakayama on localized completed coefficient sites
 
@@ -16,10 +20,90 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 universe u v
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+/-- The universal scalar extension inherits exactness from the cochain model. -/
+private theorem extension_exact
+    {C : Type*} [SmallCategory C] {S : GrothendieckTopology C}
+    {R B : Sheaf S CommRingCat} (q : R ⟶ B) :
+    ∃ _s : (ConstantCompletion.extend q).CommShift ℤ,
+      (ConstantCompletion.extend q).IsTriangulated := by
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod B)
+  obtain ⟨E, hobj, hmap, hpres, F, hpw, ε, hu, htri, hc⟩ :=
+    (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel q).some
+  have hE : E = ConstantCompletion.change q := CategoryTheory.Functor.ext hobj (fun _ _ f ↦ hmap f)
+  subst E
+  let := hu
+  let : (ConstantCompletion.extend q).IsLeftDerivedFunctor
+      (ConstantCompletion.extendComparison q)
+      (HomologicalComplex.quasiIso (ConstantCompletion.Mod R) (.up ℤ)) :=
+    (ConstantCompletion.derivedExtension q).universal
+  let e : F ≅ ConstantCompletion.extend q :=
+    Functor.leftDerivedUnique (ConstantCompletion.extend q) F ε
+      (ConstantCompletion.extendComparison q)
+      (HomologicalComplex.quasiIso (ConstantCompletion.Mod R) (.up ℤ))
+  obtain ⟨sF, hF⟩ := htri
+  let := sF
+  let := hF
+  let s := Functor.CommShift.ofIso e ℤ
+  have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofIso_compatibility e ℤ
+  exact ⟨s, Functor.isTriangulated_of_iso e⟩
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+/-- Completeness, defined by vanishing of exact internal Hom tests, is closed under cones. -/
+private theorem complete_cone
+    {C : Type*} [SmallCategory C] {S : GrothendieckTopology C}
+    {R B : Sheaf S CommRingCat} (q : R ⟶ B)
+    (T : Triangle (ConstantCompletion.D R))
+    (hT : T ∈ distTriang (ConstantCompletion.D R))
+    (h₁ : ConstantCompletion.IsComplete q T.obj₁)
+    (h₂ : ConstantCompletion.IsComplete q T.obj₂) :
+    ConstantCompletion.IsComplete q T.obj₃ := by
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod R)
+  let (U : C) := HasDerivedCategory.standard (ConstantCompletion.Mod (R.over U))
+  intro U f hf
+  let L := (DerivedCategory.singleFunctor _ 0).obj
+    (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))
+  let H := (Functor.curry.obj (derivedInternalHom (S.over U) (R.over U))).obj (op L)
+  obtain ⟨s, hH⟩ := (ringedInternalHom_exact (S.over U) (R.over U)).1 L
+  let := s
+  let := hH
+  let : (ringedDerivedRestriction R U).CommShift ℤ := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let : (ringedDerivedRestriction R U).IsTriangulated := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let G := ringedDerivedRestriction R U ⋙ H
+  exact Pretriangulated.Triangle.isZero₃_of_isZero₁₂ _ (G.map_distinguished T hT)
+    (h₁ U f hf) (h₂ U f hf)
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+/-- Reconstruction from the quotient tower detects zero once all reductions vanish. -/
+private theorem complete_zero_of_reductions
+    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
+    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)
+    (M : AdicResidueLocalDerived.{u, v} X J U)
+    (hM : ConstantCompletion.IsComplete (adicResidueLocalProjection X J U 0) M)
+    (hz : ∀ n, IsZero ((adicResidueLocalReduction X J U n).obj M)) : IsZero M := by
+  obtain ⟨F, c, eM, e, adj, hc, hleg, hstep⟩ :=
+    adicResidue_complete_reduction_cone X J U M hM
+  have hF (n : ℕ) : IsZero (F.obj (op n)) := by
+    let q := adicResidueLocalProjection X J U n
+    have hres : (ConstantCompletion.dres q).Additive := by
+      dsimp only [ConstantCompletion.dres, siteDerivedRestrictScalars]
+      infer_instance
+    exact ((ConstantCompletion.dres q).map_isZero (hz n)).of_iso (e n)
+  have hc0 : IsZero c.pt := (IsZero.iff_id_eq_zero _).2
+    (hc.hom_ext_zero (fun n g ↦ (hF n).eq_of_tgt g 0)
+      (fun n g ↦ (hF n).eq_of_tgt g 0) (𝟙 c.pt))
+  exact hc0.of_iso eM.symm
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Residue reduction detects isomorphisms between locally complete objects on a slice.
 Source: Stacks Project, proetale.tex, Tag 09C6, final step; Algebraization, Tags 099M and
 099F, derived Nakayama.
@@ -44,6 +128,22 @@ theorem adicResidue_isIso_of_residue
     (_hM : CategoryTheory.ConstantCompletion.IsComplete
       (adicResidueLocalProjection.{u, v} X J U 0) M)
     (f : T ⟶ M) (_hf : IsIso ((adicResidueLocalReduction.{u, v} X J U 0).map f)) : IsIso f := by
-  sorry
+  let R := adicResidueLocalReduction.{u, v} X J U 0
+  obtain ⟨sR, hR⟩ := extension_exact (adicResidueLocalProjection.{u, v} X J U 0)
+  let : R.CommShift ℤ := sR
+  let : R.IsTriangulated := hR
+  obtain ⟨Q, g, h, htriangle⟩ := Pretriangulated.distinguished_cocone_triangle f
+  let Δ := Triangle.mk f g h
+  have hQ : ConstantCompletion.IsComplete (adicResidueLocalProjection X J U 0) Q :=
+    complete_cone _ Δ htriangle _hT _hM
+  have hQ0 : IsZero (R.obj Q) :=
+    Pretriangulated.Triangle.isZero₃_of_isIso₁ _ (R.map_distinguished Δ htriangle) _hf
+  have hz : ∀ n, IsZero ((adicResidueLocalReduction X J U n).obj Q) := by
+    intro n
+    induction n with
+    | zero => exact hQ0
+    | succ n hn => exact adicResidue_vanishing_successor X J U Q n hQ0 hn
+  exact (Δ.isZero₃_iff_isIso₁ htriangle).1
+    (complete_zero_of_reductions X J U Q hQ hz)
 
 end AlgebraicGeometry.Scheme

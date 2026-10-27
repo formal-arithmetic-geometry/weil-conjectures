@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-dvr-rho-section-modules",
+ "kind": "statement",
+ "title": "Integral rho section modules are nonzero finite free rational representations",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with maximal ideal $\\mathfrak m$ and algebraically closed residue field $\\kappa=A/\\mathfrak m$. Let $H$ be a smooth affine finitely presented group scheme over $\\operatorname{Spec}A$ [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-affine-spectrum], with the group-object diagrams over this base. Suppose $H$ is split semisimple simply connected: its geometric fibres are connected and have no nontrivial smooth connected solvable normal subgroup, every central isogeny onto such a fibre from a connected semisimple group is an isomorphism, and choose a split maximal torus $T\\subseteq H$ and a Borel subgroup scheme $B\\supseteq T$. Here a central isogeny is a surjective group homomorphism with finite central kernel; solvable means that the iterated derived subgroups eventually become trivial; a split torus is a group scheme isomorphic to a product of copies of $\\mathbf G_m$; maximal tori and Borel subgroup schemes have, on each geometric fibre, a maximal torus and a maximal smooth connected solvable subgroup, respectively. Write $\\mathbf G_m(C)=C^\\times$ for every commutative $A$-algebra $C$. A character is a homomorphism of group schemes to $\\mathbf G_m$. Let $\\Phi^+$ be the positive roots determined by $B$, namely the nonzero characters occurring in the adjoint $T$-action on $\\operatorname{Lie}(B)$; the latter is the tangent module at the identity, defined by dual-number points reducing to the identity. In the character lattice $X^*(T)$, addition means multiplication of character values. There exist a character $\\rho$ with $2\\rho=\\sum_{\\alpha\\in\\Phi^+}\\alpha$ and an extension $\\widetilde\\rho:B\\to\\mathbf G_m$ trivial on the unipotent radical of $B$. For every such choice define the actual modules as follows. This radical is the subgroup whose geometric fibres are the largest smooth connected normal unipotent subgroups; unipotent means that all geometric points become unipotent matrices in a faithful linear representation. For every integer $m\\ge1$, put $$W_m=\\{f\\in A[H]:f(gb)=\\widetilde\\rho(b)^m f(g)\\text{ for all commutative }A\\text{-algebras }C,\\ g\\in H(C),\\ b\\in B(C)\\}.$$ Evaluation of $f$ means pullback of the regular function along its $C$-point. Use the left-translation action $(h f)(g)=f(h^{-1}g)$. A rational $H$-module is an $A$-module $M$ with an $A$-linear coaction $M\\to M\\otimes_A A[H]$ satisfying the counit and coassociativity identities, where $A[H]=\\Gamma(H,\\mathcal O_H)$ is the coordinate Hopf algebra. Its invariants are $M^H=\\{x:\\rho_M(x)=x\\otimes1\\}$. Equivariant maps commute with coactions; tensor products have diagonal coaction. These identities are tested after every commutative $A$-algebra extension, not just on $A$-points. For every $m\\ge1$, left translation gives $W_m$ a rational $H$-module structure, and its underlying $A$-module is finite free of positive rank. Here finite free of positive rank means admitting a basis indexed by a finite nonempty set.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Section 9.7, the construction of W_(m rho) immediately preceding Lemma 9.7.2, printed p.526, and the finite-free section modules used in Theorem 9.7.5, printed p.527. Integral rho character and section-module input, not a field specialization. Local PDF WANTED; primary published PDF and arXiv HTML read online.",
+  "url": "https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $A$ is a PID, hence Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Apply [lem-sfb-local-borel-quotient-geometry] to the given pair: semisimple geometric fibres are reductive, by [lem-sfb-smooth-unipotent-solvable], a connected normal smooth unipotent subgroup is solvable. It gives $B=T\\ltimes U$, $p:B\\to T$, and the proper flag torsor $\\pi:H\\to Q$. Identify $T$ with $\\mathbf G_m^r$. Its characters are the monomials with integer exponents: the group-like elements of $A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ are single monomials, since coefficient comparison in $\\Delta(f)=f\\otimes f$ makes their coefficients orthogonal idempotents and $A$ is local. Thus restriction $X^*(T)\\to X^*(T_\\kappa)$ is an isomorphism. The cited geometry identifies the positive roots in this lattice with those on the closed fibre. Apply [lem-sfb-rho-section-modules] to the semisimple simply connected group $H_\\kappa$; its half-sum character lifts uniquely to $\\rho$ on $T$, and $2\\rho=\\sum_{\\alpha\\in\\Phi^+}\\alpha$ because restriction is injective. Set $\\widetilde\\rho=\\rho\\circ p$. Any extension trivial on $U$ equals this one by $B=T\\ltimes U$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sfb-local-borel-quotient-geometry",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-smooth-unipotent-solvable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  },
+  {
+   "text": "Fix $m\\ge1$ and write $\\psi=\\widetilde\\rho^m$. On the torsor overlap $H\\times_QH=H\\times_AB$, descend the trivial line on $H$ with multiplier $\\psi(b)$ from $g$ to $gb$. The cocycle equation is $\\psi(bb')=\\psi(b)\\psi(b')$. By [lem-pc-fpqc-descent] this is effective and descends to an invertible quasi-coherent sheaf $L$ on $Q$. By [lem-sc-etale-qcoherent-descent-fpqc-sections], a section of this line is exactly a regular function satisfying $f(gb)=\\psi(b)f(g)$ on the overlap. Consequently the pullback-and-trivialization map identifies $\\Gamma(Q,L)$ with the actual submodule $W_m$ of the question, with the positive exponent as written. The identities are scheme identities: testing the universal point of the affine scheme $H\\times_AB$ gives equality of regular functions, and conversely such equality pulls back along every algebra-valued point.",
+   "uses": [
+    "lem-sfb-local-borel-quotient-geometry",
+    "lem-pc-fpqc-descent",
+    "lem-sc-etale-qcoherent-descent-fpqc-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  },
+  {
+   "text": "The scheme $Q$ is of finite type over the Noetherian ring $A$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The invertible sheaf $L$ is coherent: on an affine trivializing open $\\operatorname{Spec}D$ its sections are $D$; kernels of maps from finite free modules to $D$ are finite by [lem-weil-pbc-noetherian-submodule-finite], since $D$ is Noetherian. This is the local coherent-module condition. Apply [lem-pc-coherent-hi] to the proper map $Q\\to\\operatorname{Spec}A$ and $L$. Its affine-base clause gives finite generation of $\\Gamma(Q,L)$ over $A$, hence of $W_m$.",
+   "uses": [
+    "lem-sfb-local-borel-quotient-geometry",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  },
+  {
+   "text": "Put $R=A[H]$ and $D=A[B]$. Smoothness of $H/A$ implies flatness by [sbc-lem-smooth-criterion], and the affine criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes $R$ a flat $A$-module. By [lem-trf-flat-module-torsionfree-domain], $R$ is torsion-free. Its submodule $W_m$ is torsion-free as well: $aw=0$ in $W_m$ implies $aw=0$ in $R$ and hence $w=0$ for $a\\ne0$. Finite generation from Step 3 now permits [lem-sc-dvr-fg-torsionfree-free], so $W_m$ is finite free. This step does not assert that reduction of invariants modulo the maximal ideal is exact.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  },
+  {
+   "text": "The regular right action $r:H\\times_AB\\to H$ gives the $A$-linear difference map\n$$d:R\\to R\\otimes_AD,\\qquad d(f)=r^*f-f\\otimes\\psi.$$\nHere $\\psi\\in D^\\times$ is the character's regular function. Universal affine points identify $W_m=\\ker d$. Let $K=\\operatorname{Frac}(A)$ and let $E$ be an algebraic closure of $K$. First tensor the exact sequence $0\\to W_m\\to R\\xrightarrow{d}R\\otimes_AD$ with $K$, then tensor over $K$ with $E$. These operations preserve the kernel by [lem-weil-pbc-flat-tensor-exact]: $K$ is flat by [lem-weil-pbc-localization-flat] and $E$ is flat over $K$ by [lem-weil-pbc-module-over-field-flat]. On affine coordinate algebras these tensors are the coordinate algebras and right-action map of $H_E,B_E$. By the base compatibility and positive-root assertion of [lem-sfb-local-borel-quotient-geometry], $\\rho_E$ is the half-sum for the chosen Borel. Thus $W_m\\otimes_AE$ is exactly the module of [lem-sfb-rho-section-modules] for $H_E$ and is nonzero. A zero $W_m$ would have zero tensor product, so $W_m\\ne0$. In a finite free module a basis indexed by the empty set gives the zero module; hence the basis in Step 4 is nonempty.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-local-borel-quotient-geometry",
+    "lem-sfb-rho-section-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  },
+  {
+   "text": "Define $c:R\\to R\\otimes_AR$ by pullback along $H\\times_AH\\to H$, $(g,h)\\mapsto h^{-1}g$, with $g$ the function variable and $h$ the acting variable. For $w\\in W_m$,\n$$w(h^{-1}gb)=\\psi(b)w(h^{-1}g),$$\nso $(d\\otimes1)c(w)=0$, after the indicated ordering of tensor factors. Since the second $R$ is flat by Step 4, [lem-weil-pbc-flat-tensor-exact] identifies $\\ker(d\\otimes1)$ with $W_m\\otimes_AR$ inside $R\\otimes_AR$. Therefore $c$ restricts to an $A$-linear map $c_m:W_m\\to W_m\\otimes_AR$. Evaluation at $h=1$ gives its counit identity. For the coassociativity identity the two pullbacks at $(g,h,k)$ both give $w((hk)^{-1}g)=w(k^{-1}h^{-1}g)$, so they agree already as functions on $H^3$. The inclusions of $W_m$ into $R$ remain injective after tensoring with one or two copies of the flat module $R$, again by the cited exactness result, so these identities in $R$ restrict to the identities in $W_m$. This is the required rational coaction, and its point formula is precisely $(h w)(g)=w(h^{-1}g)$. All these calculations are regular-function identities on affine products and therefore hold after every commutative $A$-algebra extension.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-local-borel-quotient-geometry",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-pc-fpqc-descent",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-pc-coherent-hi",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-module-over-field-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Section 9.7, before Lemma 9.7.2 (printed p.526), used in Theorem 9.7.5 (p.527); agent-written integral justification using the cited Borel geometry and descent inputs. Local Alper PDF WANTED; author/publisher PDF read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a split semisimple simply connected group over a discrete valuation ring, induced rho weight section modules are nonzero finite free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.Weight.instFinite\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian module over a commutative ring $ R $, and $ L $ is a nilpotent Lie ring acting on $ M $, then the set of weights $ \\\\text{Weight}(R, L, M) $ is finite.\"}\n  {\"name\": \"LieModule.zero_lt_finrank_genWeightSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"If the generalized weight space associated to a weight function $\\\\chi : L \\\\to R$ in a Lie module $M$ is non-trivial (i.e., not equal to the zero submodule), then its finite rank as an $R$-module is st\"}\n  {\"name\": \"LieModule.finite_genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian $ R $-module over a nilpotent Lie algebra $ \\\\mathfrak{g} $, then the set of weight functions $ \\\\chi : \\\\mathfrak{g} \\\\to R $ for which the generalized weight space $ \\\\text{Gen}_\"}\n  {\"name\": \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"For a Noetherian module $ M $ over a commutative ring $ R $, and for any element $ x $ in a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $ acting on $ M $, the set of scalars $ \\\\chi \\\\in R $ for whi\"}\n  {\"name\": \"LieModule.Weight.exists_ne_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), ∃ x ∈ LieModule\", \"doc\": \"For any weight $\\\\chi$ of a Lie module $M$ over a nilpotent Lie ring $L$ over a commutative ring $R$, the generalized weight space associated with $\\\\chi$ contains at least one non-zero element, i.e., $\"}\n  {\"name\": \"LieModule.Weight.genWeightSpace_ne_bot'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (self : LieModule.Weight R L M), LieModule.ge\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"LieModule.Weight.genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), LieModule.genWe\", \"doc\": \"For any weight $\\\\chi$ in a Lie module $M$ over a nilpotent Lie ring $L$, the generalized weight space associated to $\\\\chi$ is not equal to the trivial submodule $\\\\{0\\\\}$, i.e., $\\\\text{genWeightSpace}_M\"}\n  {\"name\": \"LieModule.chainTop_isNonZero'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Given a torsion-free commutative domain $ R $, a nilpotent Lie algebra $ L $ over $ R $, and a torsion-free Noetherian Lie module $ M $ over $ L $, if $ \\\\alpha: L \\\\to R $ is a non-zero linear function\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group representations, Lie algebra weights, ordinary free modules, or unrelated topology; none states the integral group-scheme assertion for these semi-invariant regular-function modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Induced\", \"Module\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"ModuleTopology.eq_coinduced_of_surjective\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \" {R : Type u_1} [τR : TopologicalSpace R] [Ring R] {A : Type u_3} [AddCommGroup A] [Module R A] [TopologicalSpace A] [IsModuleTopology R A] {B : Type u_4} [AddCommGroup B] [Module R B] {φ : A →ₗ[R] B} (hφ : Function.Surjective ⇑φ) : moduleTopology R B = TopologicalSpace.coinduced (⇑φ) inferInstance\", \"doc\": \"\"}\n  {\"name\": \"ModuleTopology.eq_coinduced_of_surjectiveₛₗ\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \" {R : Type u_1} {S : Type u_2} [τR : TopologicalSpace R] [τS : TopologicalSpace S] [Ring R] [Ring S] {A : Type u_3} [AddCommGroup A] [Module R A] [TopologicalSpace A] [IsModuleTopology R A] {B' : Type u_5} [AddCommGroup B'] [Module S B'] {σ : R →+* S} (hσ : IsOpenQuotientMap ⇑σ) (φ : A →ₛₗ[σ] B') (h\", \"doc\": \"\"}\n  {\"name\": \"TopModuleCat.coinduced\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Basic\", \"type\": \" {R : Type u} [Ring R] [TopologicalSpace R] {M : ModuleCat R} {I : Type u_1} {X : I → TopModuleCat R} (f : (i : I) → (X i).toModuleCat ⟶ M) : TopModuleCat R\", \"doc\": \"The coinduced topology on `M` from a family of continuous linear maps into `M`, which is the\\nfinest topology that makes it into a topological module and makes every map continuous.\"}\n  {\"name\": \"TopModuleCat.induced\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Basic\", \"type\": \" {R : Type u} [Ring R] [TopologicalSpace R] {M : ModuleCat R} {I : Type u_1} {X : I → TopModuleCat R} (f : (i : I) → M ⟶ (X i).toModuleCat) : TopModuleCat R\", \"doc\": \"The induced topology on `M` from a family of continuous linear maps from `M`, which is the\\ncoarsest topology that makes every map continuous.\"}\n  {\"name\": \"TopModuleCat.fromInduced\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Basic\", \"type\": \" {R : Type u} [Ring R] [TopologicalSpace R] {M : ModuleCat R} {I : Type u_1} {X : I → TopModuleCat R} (f : (i : I) → M ⟶ (X i).toModuleCat) (i : I) : TopModuleCat.induced f ⟶ X i\", \"doc\": \"The maps from the induced topology as homs in `TopModuleCat R`.\"}\n  {\"name\": \"TopModuleCat.toCoinduced\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Basic\", \"type\": \" {R : Type u} [Ring R] [TopologicalSpace R] {M : ModuleCat R} {I : Type u_1} {X : I → TopModuleCat R} (f : (i : I) → (X i).toModuleCat ⟶ M) (i : I) : X i ⟶ TopModuleCat.coinduced f\", \"doc\": \"The maps into the coinduced topology as homs in `TopModuleCat R`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group representations, Lie algebra weights, ordinary free modules, or unrelated topology; none states the integral group-scheme assertion for these semi-invariant regular-function modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|BorelWeil|Borel.Weil|rho.*weight",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group representations, Lie algebra weights, ordinary free modules, or unrelated topology; none states the integral group-scheme assertion for these semi-invariant regular-function modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral highest weight induced modules over a discrete valuation ring are finite free",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.free_of_finite_type_torsion_free'\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"[Module.Finite R M] [IsTorsionFree R M] : Module.Free R M\", \"doc\": \"Every finitely generated torsion-free module over a principal ideal domain (PID) is a free module.\"}\n  {\"name\": \"Module.free_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.FinitePresentation R M] (H : Function.Injective ((𝔪).subtype.rTensor M)) : Module.Free R M\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the natural linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to R \\\\otimes_R M \\\\cong M $ indu\"}\n  {\"name\": \"ZLattice.module_free\", \"module\": \"Mathlib.Algebra.Module.ZLattice.Basic\", \"type\": \"[IsZLattice K L] : Module.Free ℤ L\", \"doc\": \"Every ℤ-lattice in a normed vector space over a normed field is a free ℤ-module.\"}\n  {\"name\": \"Valuation.HasExtension.instIsTorsionFreeInteger\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"[IsDomain R] [IsTorsionFree R A] : IsTorsionFree vR.integer vA.integer\", \"doc\": \"If $ R $ is an integral domain and torsion-free as an $ A $-module, then the valuation rings associated to valuations $ v_R $ and $ v_A $ are torsion-free modules over their respective valuation rings\"}\n  {\"name\": \"PadicInt.instIsDiscreteValuationRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsDiscreteValuationRing ℤ_[p]\", \"doc\": \"The ring of p-adic integers $\\\\mathbb{Z}_p$ is a discrete valuation ring. This means it is a commutative integral domain with a discrete valuation, characterized by having a unique non-zero maximal ide\"}\n  {\"name\": \"Module.IsReflexive.of_finite_of_free\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Module.Finite R M] [Free R M] : IsReflexive R M\", \"doc\": \"Every finite free module over a commutative semiring is reflexive, meaning the canonical evaluation map from the module to its double dual is an isomorphism of modules.\"}\n  {\"name\": \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"{S : Type*} [CommRing S] [Algebra R S] {I : Ideal S} [hI₁ : Module.Finite R I] [hI₂ : IsTorsionFree R I] : Free R I\", \"doc\": \"Every finitely generated torsion-free module over a principal ideal domain is free. Specifically, if $ R $ is a commutative ring that is a principal ideal ring, and $ I $ is an ideal of an $ R $-algeb\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": IsDiscreteValuationRing 𝒪[K]\", \"doc\": \"For any non-Archimedean local field $ K $ equipped with a valuative relation and topological structure, the subring $ \\\\mathcal{O}_K $ consisting of elements with valuation $ \\\\leq 1 $ forms a discrete \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group representations, Lie algebra weights, ordinary free modules, or unrelated topology; none states the integral group-scheme assertion for these semi-invariant regular-function modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of dominant homogeneous line bundles on a split flag scheme over a local ring are finite free and nonzero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"A morphism in the category of commutative rings that maps the localization of a graded ring $ A $ at the submonoid generated by powers of a homogeneous element $ f $ to the global sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              TopCat.LocalPredicate fun x => HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.toI\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring, where sections over open sets are functions expressible as homogeneous fractions $ r/s $ with common denominator $ s $ (homogeneous of \"}\n  {\"name\": \"AlgebraicGeometry.sectionInBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (x : ↑(ProjectiveSpectrum.top 𝒜)) →\\n                (f : HomogeneousLocalization.NumDenSa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a point $x$ in its projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, this defines a section over the basic open set $D_+(f.\\\\text{den})$ (where $f$ is a homogeneous lo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              TopCat.PrelocalPredicate fun x => HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.\", \"doc\": \"A prelocal predicate on the projective spectrum of a graded ring, where a function defined on an open set satisfies the predicate if it can be expressed as a homogeneous fraction $ r/s $ with common d\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {U : TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜)} →\\n                ((x : ↥U) → Ho\", \"doc\": \"A function $ f $ defined on an open set $ U $ of the projective spectrum is a section of the structure sheaf if there exists a degree $ i $, homogeneous elements $ r, s $ of degree $ i $ in the graded\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this defines a ring homomorphism from the localization $A_f$ to the sections of the structure sheaf over the basic open set $D_+(f) \\\\subs\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group representations, Lie algebra weights, ordinary free modules, or unrelated topology; none states the integral group-scheme assertion for these semi-invariant regular-function modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|BorelWeil|Borel.Weil|rho.*section",
+   "results": "Actual search: 14 hits; Mathlib/Topology/Constructions/SumProd.lean, Mathlib/Topology/Constructions/SumProd.lean, Mathlib/Topology/ExtremallyDisconnected.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Defs/Filter.lean, Mathlib/Topology/Defs/Filter.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract group representations, Lie algebras/root pairings, module topology or unrelated geometry; none gives the relative group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral induced representations of a split semisimple group scheme are finite free highest weight modules",
+   "results": "Actual search: 8 hits; Representation.IndV, Rep.ind, Representation.ind, Representation.IndV.mk, Representation.finsupp, Rep.finsupp, Representation.toInvariants, Rep.coindToInd.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract group representations, Lie algebras/root pairings, module topology or unrelated geometry; none gives the relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split simply connected semisimple group over a DVR, the regular functions with prescribed Borel rho character form a nonzero finite free rational comodule",
+   "results": "Actual search: 8 hits; LieModule.exists_isRegular, FDRep.simple_iff_char_is_norm_one, LieModule.exists_isRegular_of_finrank_le_card, groupCohomology.Hilbert90.aux_ne_zero, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, LieAlgebra.exists_isRegular_of_finrank_le_card, LieAlgebra.exists_isRegular",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract group representations, Lie algebras/root pairings, module topology or unrelated geometry; none gives the relative group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Induced\", \"Module\"",
+   "results": "Actual search: 6 hits; ModuleTopology.eq_coinduced_of_surjective, ModuleTopology.eq_coinduced_of_surjectiveₛₗ, TopModuleCat.coinduced, TopModuleCat.induced, TopModuleCat.fromInduced, TopModuleCat.toCoinduced",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract group representations, Lie algebras/root pairings, module topology or unrelated geometry; none gives the relative group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-primitive-endomorphism-detector",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Section 9.7, the construction of W_(m rho) immediately preceding Lemma 9.7.2, printed p.526, and the finite-free section modules used in Theorem 9.7.5, printed p.527. Integral rho character and section-module input, not a field specialization.",
+   "via": [
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-rho-section-modules",
+  "worker": "stage1",
+  "summary": "Proved the integral assertion via the proper Borel quotient, fpqc descent of the character line, proper coherent finiteness, torsion-free DVR freeness, flat generic-field kernel comparison, and explicit restriction of the regular Hopf coaction. Reused field rho sections only after geometric scalar extension; no closed-fibre base-change theorem is assumed. One new statement-only relative Borel geometry input.",
+  "blueprint": "Supporting integral representation-theoretic input along the recorded direct-image alteration route: the construction before Alper Lemma 9.7.2 and the finite-free module used in Theorem 9.7.5. The current blueprint direct-image proof (3) uses compactification; the inherited historical alteration prerequisite is retained at node level.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic FPQC descent for quasi-coherent modules applied with the hypotheses checked in the proof; the unit supplies no replacement for this algebraic/descent input."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "why": "Generic FPQC descent of sections of a quasi-coherent pullback applied with the hypotheses checked in the proof; the unit supplies no replacement for this algebraic/descent input."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic Coherence and finiteness of higher direct images applied with the hypotheses checked in the proof; the unit supplies no replacement for this algebraic/descent input."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic Smoothness by flatness and smooth fibres applied with the hypotheses checked in the proof; the unit supplies no replacement for this algebraic/descent input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-pc-coherent-hi",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-b9fcb2145",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-b9fcb2145 (reviewer sub-agent of L); spot-checked: I read the item's six steps and the new unsplit node lem-sfb-local-borel-quotient-geometry in full, with every cited statement. The mathematics is correct; the one FIX is a wording repair to the new node. Fault and fix (B2/B3): the new node said 'form a positive system in the root system of H', using two terms it never defines. I rewrote that sentence: Phi = nonzero weights in Lie(H), Phi+ = nonzero weights in Lie(B), Phi = Phi+ ⊔ (−Phi+), and restriction X*(T) ≅ X*(T_s̄) carries both sets onto the corresponding weight sets of every geometric fibre. This is exactly what steps 1 and 5 use. No other field changed; the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-local-borel-quotient-geometry.json. Sources: neither Alper §9.7 (pp.526–527) nor Conrad's Reductive group schemes 5.2.3/5.2.5/5.2.8/5.2.11/5.2.13 is in literature/, so I checked against the standard relative theory. Over any base, B ⊇ split T gives B = T ⋉ R_u(B) and H/B smooth proper with an fppf B-torsor, compatible with base change, and the roots are constant. No SGA source is cited. I checked the sign of the exponent on SL2 over a DVR: rho = 1 and W_m = degree-m forms in the first column, free of rank m+1. The inverse exponent would give zero. Trivial group: W_m = A. H = T in the new node: U = 1 and Q = S. Steps: (1) PID ⇒ Noetherian. Unipotent ⇒ solvable makes the fibres reductive; the gap between that node's series notion of solvable and the item's derived-series notion is elementary. Group-likes in A[Z^r] are monomials because A is local, so ρ from the field node on H_κ (κ algebraically closed) lifts uniquely; ρ̃ = ρ∘p is unique by T ⋉ U. (2) π is fpqc because H is affine and π is quasi-compact and faithfully flat. The cocycle is ψ(bb') = ψ(b)ψ(b'); descent of the line and of its sections identifies Γ(Q,L) with W_m. (3) Q is Noetherian and L coherent; lem-pc-coherent-hi gives finite H^0. (4) Smooth ⇒ flat ⇒ torsion-free; finitely generated torsion-free over a DVR ⇒ free. (5) Flat base change to Frac(A) and its algebraic closure preserves the kernel; the field node gives nonvanishing on the geometric generic fibre, so the basis is nonempty. (6) The coaction lands in W_m⊗R because R is flat, and the counit and coassociativity identities hold. Checked: there is no cycle and the new node is no duplicate. The closest existing nodes are over a field, or over a ring but without the quotient (relative-dynamic-subgroups, local-quotient-points, local-gauss-atlas). It restates no clause of the item. I accept the 4 tool_uses (fpqc descent of modules, descent of sections, lem-pc-coherent-hi, smooth criterion) as generic black boxes. Batch-5: lem-sfb-rho-section-modules reaches lem-trf-split-lattice-torus-projection, which is torus smoothness over a field. lem-sfb-smooth-unipotent-solvable and lem-pc-coherent-hi reach only definitions: def-trf-scheme-cover-descent-datum and def-trf-schematically-dense-open. lem-trf-flat-module-torsionfree-domain is a Mathlib commutative-algebra leaf. None is a step of the trace formula or of Poincaré duality, so no assumption leaf is needed.; 1 file(s) fixed by the reviewer"
+ }
+}

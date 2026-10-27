@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-section-tensor-right-computation",
+ "kind": "statement",
+ "title": "Section localization of right tensor computation with a degree-zero coefficient",
+ "statement": "Let Λ and Λ′ be commutative condensed rings, a : Λ → Λ′ a morphism, and T a scheme. Use the internal and section module categories, the exact section equivalence E and its derived equivalence F from [def-pd-section-derived-tensor-data]. Write B₀ for the restricted regular Λ′ coefficient and B = Q(single₀ B₀) as in [def-sfb-internal-derived-scalar-comparisons]. Let αP : F(QP) ≅ Q(EP) be the fixed section localization comparison, θ the fixed derived tensor comparison, q the normalized section tensor representative map of [def-pd-section-derived-realization], and σ : E(single₀ B₀) ≅ single₀(E B₀) the canonical single-complex comparison. For every unbounded internal cochain complex P, the path θ followed by section tensor of αP and (αsingle ≫ Qσ), then q and the section single-factor total comparison, equals F applied to the internal localization tensor map followed by the internal single-factor comparison, then α on the termwise right-tensor complex and Q of the termwise ordinary right-tensor comparison. The right comparison is the degreewise ordinaryTensorComparison from [def-pd-proetale-section-module-functors]. No K-flatness or termwise flatness is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), scalar reduction comparison; extracted tensor/scalar part of lem-sfb-section-tensor-conjugate-computation step 1. Stacks sites-modules.tex section-tensor-product (03EK); sites-cohomology.tex definition-K-flat and lemma-derived-base-change (06YN, 06YY), and lemma-adjoint (07A6)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization",
+  "def-pd-proetale-section-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Apply the formula for the inverse single-factor comparison in each degree. The chosen total comparison’s summand equation identifies the unique right-degree-zero summand with the ordinary tensor comparison. Its right-variable naturality commutes with the single-object identification. Naturality of the sum injections and the canonical map-complex/single comparison cancel these identifications. Cancel the two single-factor isomorphisms to obtain the ordinary right-tensor square.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the representative clause of tensor_representatives on P and single₀ B₀. Compose with θ and the tensor of the two localization factors and cancel their inverses. Factor the coefficient comparison through αsingle and Qσ; naturality of q moves Qσ to the ordinary total tensor. Substitute the preceding single-factor square and the naturality of the section localization comparison. This gives the claimed equality without any flatness hypothesis.",
+   "uses": [
+    "def-pd-section-derived-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "def-pd-section-derived-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Agent-written categorical verification of the scalar/tensor representative normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of conjugated derived tensor comparisons with K flat computation under exact equivalence",
+   "results": "Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact and exactness characterizations; no exact section comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "Functor.mapHomologicalComplexCompIso and its component formulas; generic complex composition API.",
+   "date": "2026-10-26",
+   "verdict": "Useful generic API, not the section tensor or scalar computation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor.*[Cc]om|[Tt]ensor.*[Ss]calar.*[Nn]ormal",
+   "results": "Five unrelated scalar tensor commutation hits in Mathlib RingTheory. Local rg additionally found the proved WeilConjectures.Algebra.Homology.BifunctorSingleComparison.mapBifunctorComparison_single₂, which is used for the tensor single-factor square.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; source-library generic single-factor comparison reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionTensorConjugateComputation",
+  "date": "2026-10-26",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Integral proof paragraph (1), compatibility of coefficient reduction with derived tensor; original conjugate-computation proof step 1.",
+   "via": [
+    "lem-sfb-section-tensor-conjugate-computation",
+    "lem-sfb-section-tensor-normalization-transport",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionTensorRightComputation",
+  "file": "lean/Sheaf/Paper/SectionTensorRightComputation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.section_tensor_right_computation",
+  "statement": "theorem section_tensor_right_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})\n    (P : CochainComplex (Modules Λ T) ℤ) :\n    (ModuleRingedComparison.tensorComparison Λ T).hom.app (DerivedCategory.Q.obj P, B a T) ≫\n        (ModuleRingedComparison.tensor Λ T).map\n          (Prod.mkHom (ModuleRingedComparison.sectionLocalizationComparison Λ T P).hom\n            (sectionScalarCoefficient a T).hom) ≫\n        (ModuleRingedComparison.qTensor Λ T).app\n          ((((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex\n            (.up ℤ)).obj P),\n            (CochainComplex.singleFunctor _ 0).obj\n              ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T))) ≫\n        DerivedCategory.Q.map (CochainComplex.mapBifunctorSingle₂Iso\n          (curriedTensor (ModuleRingedComparison.modules Λ T))\n          ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T))\n          (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex\n            (.up ℤ)).obj P)).hom =\n      (ModuleRingedComparison.derivedEquivalence Λ T).functor.map\n        (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := Modules Λ T)) P\n          ((CochainComplex.singleFunctor _ 0).obj (B₀ a T)) ≫\n            DerivedCategory.Q.map (singleTensor a T P).hom) ≫\n        (sectionTensorRightLocalization a T P).hom",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T024232-L-650396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T024232-L-650396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-pointwise-versal-lifting",
+ "kind": "definition",
+ "title": "Artinian versality at a field-valued point",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], let $p:\\mathcal F\\to\\mathit{Sch}/S$ be a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids], let $U/S$ be a scheme, and let $x\\in\\mathcal F(U)$. For a field $K$ [def-weil-field] and a morphism $\\alpha:\\operatorname{Spec}K\\to U$ [def-weil-affine-spectrum], define versality at $\\alpha$ by the following lifting property. For every surjection $q:A'\\twoheadrightarrow A$ of commutative Artinian local rings, every surjection $r:A\\twoheadrightarrow K$, every $s':\\operatorname{Spec}A'\\to S$, every $S$-map $a:\\operatorname{Spec}A\\to U$ for the structural map $\\operatorname{Spec}q$ followed by $s'$ such that $a\\circ\\operatorname{Spec}r=\\alpha$, every $\\eta\\in\\mathcal F(\\operatorname{Spec}A')$, and every specified isomorphism $\\eta|_A\\cong a^*x$, there exist an $S$-map $b:\\operatorname{Spec}A'\\to U$ restricting to $a$ and an isomorphism $\\eta\\cong b^*x$ restricting to that specified isomorphism. Artinian means descending chains of ideals stabilize; local means there is a unique maximal ideal. The residue identifications are those induced by $r$ and $rq$; no section of either residue map is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XF (definition-versal), equation-hat-x; formal-defos.tex definition-smooth-morphism; Tag 07XG for the extended field-valued point."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Versality lifting condition for an object of a fibred groupoid at a field valued point",
+   "results": "8 hits: CategoryTheory.Localization.Lifting, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift, Manifold.LiftSourceTargetPropertyAt, StructureGroupoid.LocalInvariantProp.liftPropAt_chart, CategoryTheory.Localization.Lifting.mk, HasFibers.homLift, StructureGroupoid.LocalInvariantProp.liftPropWithinAt_univ, StructureGroupoid.LocalInvariantProp.liftPropAt. None defines the specified Artinian lifting condition.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal versality at a point of a category fibred in groupoids persists after finite residue field extension",
+   "results": "8 hits about residue fields and formal smoothness of rings: Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, Algebra.instFormallyUnramifiedResidueField_1, Algebra.instFiniteResidueFieldOfFormallyUnramified, Scheme.instIsPreimmersionFromSpecResidueField, Algebra.instFormallyUnramifiedResidueField, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Scheme.instIsOverMapHomCommRingCatResidueFieldCongr, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "results": "12 hits on OreLocalization and AddOreLocalization universal homomorphisms, their commutes, unique and apply lemmas; no deformation versality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|\\bversal\\b|IsFiberedInGroupoids",
+   "results": "msearch Mathlib: RingTheory/Extension/Cotangent/Basic.lean:36 (informal versal extensions) and CategoryTheory/Limits/WeakLimits/Basic.lean:15,194 (weak universal properties). Project searches \\b[Vv]ersal|\\b[Vv]ersality|Schlessinger|FibredGroupoid|FiberedGroupoid in lean/WeilConjectures and lean/Sheaf find ProperCurveFamily.IsVersalAt (only proper curves), StackVersal.FormalObject.IsVersal (complete formal rings) and ArtinDeformation.IsVersal (formal objects); none gives the field-valued-point predicate for a general fibred groupoid. IsFibredInGroupoids exists and is reused. DAG grep and blueprint_refs search pointwise versality: no definition node; blueprint_refs search versal has only unrelated substring results and existing formal-ring material.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse CFG and add field-point lifting predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-pointwise-versal-field-extension",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 07XG: the source and target Artinian lifting predicates at the residue point and its finite field extension.",
+   "via": [
+    "lem-sfb-artin-pointwise-versal-field-extension",
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointwiseVersalLifting",
+  "declaration": "CategoryTheory.IsVersalAtField",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointwiseVersalLifting.lean",
+  "statement": "def IsVersalAtField {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) {U : Over S} (x : Functor.Fiber F.p U) (K : Type u) [Field K] (α : Spec (.of K) ⟶ U.left) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5111f171",
+  "group": "Q05",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5111f171",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Item Lean matches node and Stacks 07XG clause by clause: Noetherian R, IsFibredInGroupoids F, RS hypothesis as total-category IsPushout over a square-zero affine pushout (checked equivalent to the restriction equivalence both ways; arbitrary R-algebras, same encoding as algebraicModuliStack_rimSchlessinger), U locally of finite type, finite-type point (LFT∧QC), any finite L/κ(u₀) without separability, conclusion IsVersalAtField at Spec L→Spec κ→U. New def node def-sfb-pointwise-versal-lifting (IsVersalAtField) matches its node text and 07XF (unmarked form equivalent), real Prop, docstrings ok; no duplicate (ArtinCriterion.IsVersalAt is theorem-owned, Spec ℤ, residue point only; formal-object and proper-curve versality differ). lean.statement verbatim for both records; statement unchanged; stmt_deps add only the two Lean-used def nodes; proof only sorry; universes bound; edge cases L=κ, B=L, B'=B, inseparable L, empty U ok. No file changed, no compile. Advisory: report omits the ArtinCriterion.IsVersalAt special case."
+ }
+}

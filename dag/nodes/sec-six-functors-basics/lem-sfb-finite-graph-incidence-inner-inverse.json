@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-finite-graph-incidence-inner-inverse",
+ "kind": "statement",
+ "title": "Integral inner inverse of a finite graph incidence map",
+ "statement": "Let $V,E$ be finite sets and let $s,t:E\\to V$ satisfy $s(e)\\ne t(e)$ for every $e\\in E$. Parallel edges are permitted, and the graph need not be connected or nonempty. For a finite set $S$, write $\\mathbf Z^S$ for the free $\\mathbf Z$-module [def-weil-pbc-free-module] of integer-valued functions on $S$, with standard vectors $b_u$. Let $\\partial:\\mathbf Z^E\\to\\mathbf Z^V$ be the $\\mathbf Z$-linear map determined by $\\partial(b_e)=b_{t(e)}-b_{s(e)}$. There exists a $\\mathbf Z$-linear map $r:\\mathbf Z^V\\to\\mathbf Z^E$ such that $\\partial\\circ r\\circ\\partial=\\partial$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Define a relation on $V$ by $u\\sim v$ if there is $c\\in\\mathbf Z^E$ with $\\partial c=b_v-b_u$. This is an equivalence relation: $0$ witnesses $u\\sim u$; if $c$ witnesses $u\\sim v$, then $-c$ witnesses $v\\sim u$; if $c,d$ witness $u\\sim v$ and $v\\sim w$, then $c+d$ witnesses $u\\sim w$, since $(b_v-b_u)+(b_w-b_v)=b_w-b_u$. For every edge $e$, the vector $b_e$ witnesses $s(e)\\sim t(e)$ by the defining formula for $\\partial$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written elementary integral-lattice auxiliary motivated by Tag 0C1M, lemma-glue-points, units-sequence proof; the graph argument is not asserted in that source."
+   }
+  },
+  {
+   "text": "For each equivalence class $C$ choose a representative $a_C\\in C$, choosing once per class. For every $v\\in C$, the defining condition $a_C\\sim v$ supplies a vector $p_v\\in\\mathbf Z^E$ with $\\partial p_v=b_v-b_{a_C}$; choose one such vector. These choices use only the existential condition defining $\\sim$. In particular $s(e)$ and $t(e)$ have the same chosen representative for each edge. No representatives are requested when $V$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written elementary integral-lattice auxiliary motivated by Tag 0C1M, lemma-glue-points, units-sequence proof; the graph argument is not asserted in that source."
+   }
+  },
+  {
+   "text": "Define $r:\\mathbf Z^V\\to\\mathbf Z^E$ by the finite-sum formula $r(x)=\\sum_{v\\in V}x(v)p_v$. Finite distributivity gives $r(x+y)=r(x)+r(y)$ and $r(nx)=n r(x)$ for every $n\\in\\mathbf Z$, so this is a $\\mathbf Z$-linear map. The coordinate expansion in the standard basis [def-weil-pbc-free-module] gives $r(b_v)=p_v$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written elementary integral-lattice auxiliary motivated by Tag 0C1M, lemma-glue-points, units-sequence proof; the graph argument is not asserted in that source."
+   }
+  },
+  {
+   "text": "Fix $e\\in E$, and let $C$ be the common class of $s(e)$ and $t(e)$. Then $\\partial r\\partial(b_e)=\\partial(p_{t(e)}-p_{s(e)})=(b_{t(e)}-b_{a_C})-(b_{s(e)}-b_{a_C})=b_{t(e)}-b_{s(e)}=\\partial(b_e)$. For $z=\\sum_{e\\in E}z(e)b_e$, linearity gives $\\partial r\\partial(z)=\\sum_e z(e)\\partial r\\partial(b_e)=\\sum_e z(e)\\partial(b_e)=\\partial(z)$. The standard-basis expansion [def-weil-pbc-free-module] therefore proves $\\partial\\circ r\\circ\\partial=\\partial$, including the empty sum when $E$ is empty.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written elementary integral-lattice auxiliary motivated by Tag 0C1M, lemma-glue-points, units-sequence proof; the graph argument is not asserted in that source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent-written elementary integral-lattice auxiliary motivated by Tag 0C1M, lemma-glue-points, units-sequence proof; the graph argument is not asserted in that source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "incidence|spanningForest|spanningTree",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"grep\", \"query\": \"incidence|spanningForest|spanningTree\", \"sub\": \"Combinatorics\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Hypergraph/Basic.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Basic.lean\", \"Mathlib/Combinatorics/SimpleGraph/Basic.lean\"], \"digest\": \"6aef7484594e3564\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of an oriented graph incidence matrix over the integers is a direct summand and its boundary map has a generalized inverse",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"leansearch\", \"query\": \"The image of an oriented graph incidence matrix over the integers is a direct summand and its boundary map has a generalized inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.incMatrix\", \"SimpleGraph.lapMatrix\", \"SimpleGraph.incMatrix_apply'\", \"SimpleGraph.incMatrix_transpose_mul_diag\", \"SimpleGraph.incMatrix_apply_eq_one_iff\", \"SimpleGraph.incMatrix_mul_transpose\", \"SimpleGraph.adjMatrix\", \"SimpleGraph.sum_incMatrix_apply\"], \"digest\": \"fa987ddaaf11a91a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"generalizedInverse\"",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearMap\\\", \\\"generalizedInverse\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integer incidence map of a finite graph has a generalized inverse r such that boundary r boundary equals boundary",
+   "results": "{\"t\": \"2026-10-23T13:25:27Z\", \"tool\": \"leanfinder\", \"query\": \"The integer incidence map of a finite graph has a generalized inverse r such that boundary r boundary equals boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.incMatrix_transpose_mul_diag\", \"SimpleGraph.incMatrix_mul_transpose_apply_of_adj\", \"SimpleGraph.incMatrix_mul_transpose\", \"SimpleGraph.incMatrix_apply_mul_incMatrix_apply\", \"SimpleGraph.incMatrix\", \"SimpleGraph.incMatrix_mul_transpose_diag\", \"SimpleGraph.sum_incMatrix_apply_of_mem_edgeSet\", \"SimpleGraph.mem_ker_toLin'_lapMatrix_of_connectedComponent\"], \"digest\": \"dd5f62b09d0814de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented|TODO|def incMatrix",
+   "results": "{\"t\": \"2026-10-23T13:26:10Z\", \"tool\": \"grep\", \"query\": \"oriented|TODO|def incMatrix\", \"sub\": \"Combinatorics/SimpleGraph/IncMatrix.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"39\", \"41\", \"42\", \"58\"], \"digest\": \"fe3e56dd4e423f91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"incMatrix\"",
+   "results": "{\"t\": \"2026-10-23T13:26:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"incMatrix\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SimpleGraph.incMatrix\", \"SimpleGraph.incMatrix_apply\", \"SimpleGraph.incMatrix_of_notMem_incidenceSet\", \"SimpleGraph.incMatrix_of_mem_incidenceSet\", \"SimpleGraph.incMatrix_apply'\", \"SimpleGraph.incMatrix_apply_eq_zero_iff\", \"SimpleGraph.incMatrix_apply_eq_one_iff\", \"SimpleGraph.sum_incMatrix_apply\"], \"digest\": \"065696742d0e2168\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Oriented incidence matrices of finite multigraphs over the integers admit a split image, equivalently a map r with d r d = d",
+   "results": "{\"t\": \"2026-10-23T13:26:12Z\", \"tool\": \"leanfinder\", \"query\": \"Oriented incidence matrices of finite multigraphs over the integers admit a split image, equivalently a map r with d r d = d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.incMatrix_transpose_mul_diag\", \"SimpleGraph.incMatrix_mul_transpose_apply_of_adj\", \"SimpleGraph.incMatrix_mul_transpose\", \"SimpleGraph.lapMatrix\", \"SimpleGraph.incMatrix\", \"SimpleGraph.incMatrix_mul_transpose_diag\", \"SimpleGraph.incMatrix_apply_mul_incMatrix_apply\", \"SimpleGraph.det_lapMatrix_eq_zero\"], \"digest\": \"f3c33453db9c60e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.*incidence|incidence.*(split|range|image)|generalizedInverse",
+   "results": "{\"t\": \"2026-10-23T13:30:19Z\", \"tool\": \"grep\", \"query\": \"oriented.*incidence|incidence.*(split|range|image)|generalizedInverse\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no oriented incidence splitting or inner-inverse result in LinearAlgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integer linear map whose columns are differences of standard basis vectors admits an inner inverse r with d r d = d",
+   "results": "{\"t\": \"2026-10-23T14:10:46Z\", \"tool\": \"leanfinder\", \"query\": \"An integer linear map whose columns are differences of standard basis vectors admits an inner inverse r with d r d = d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.TransvectionStruct.inv_i\", \"Matrix.TransvectionStruct.inv_mul\", \"Matrix.TransvectionStruct.inv\", \"Matrix.TransvectionStruct.mul_inv\", \"Matrix.TransvectionStruct.inv_j\", \"Matrix.TransvectionStruct.inv_c\", \"Matrix.TransvectionStruct.reverse_inv_prod_mul_prod\", \"Matrix.TransvectionStruct.prod_mul_reverse_inv_prod\"], \"digest\": \"217993b34e37ddfd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: transvection inverse identities concern invertible square elementary matrices, not a possibly rectangular graph boundary map; read Matrix/Transvection.lean:154-192."
+  },
+  {
+   "tool": "grep",
+   "query": "generalizedInverse|innerInverse|TransvectionStruct.inv_mul",
+   "results": "{\"t\": \"2026-10-23T14:14:24Z\", \"tool\": \"grep\", \"query\": \"generalizedInverse|innerInverse|TransvectionStruct.inv_mul\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state an integral inner inverse for the graph boundary map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite directed multigraph the incidence homomorphism between free abelian groups has a linear generalized inverse",
+   "results": "{\"t\": \"2026-10-23T14:14:25Z\", \"tool\": \"leansearch\", \"query\": \"For a finite directed multigraph the incidence homomorphism between free abelian groups has a linear generalized inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.map\", \"FreeAbelianGroup.liftAddEquiv_symm_apply\", \"FreeAddGroup.lift_symm_apply\", \"AddHom.inverse\", \"FreeAbelianGroup.map\", \"LinearPMap.inverse\", \"Finsupp.toFreeAbelianGroup\", \"LinearPMap.mem_inverse_graph\"], \"digest\": \"07b6e500a728f103\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-group maps and lift universal properties do not prove an incidence inner inverse; LinearPMap.inverse is a partial map, not a total linear map with the required identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"generalizedInverse\"",
+   "results": "{\"t\": \"2026-10-23T14:14:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearMap\\\", \\\"generalizedInverse\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state an integral inner inverse for the graph boundary map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The oriented incidence boundary of a finite graph over the integers has a split image and a map r satisfying boundary r boundary equals boundary",
+   "results": "{\"t\": \"2026-10-23T14:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"The oriented incidence boundary of a finite graph over the integers has a split image and a map r satisfying boundary r boundary equals boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.dart_fst_fiber\", \"SimpleGraph.Dart.edge_fiber\", \"CompositionAsSet.toComposition_boundaries\", \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE\", \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryLE\", \"ComplexShape.Embedding.AreComplementary.Boundary.snd\", \"ComplexShape.Embedding.AreComplementary.Boundary.exists₁\", \"ComplexShape.Embedding.AreComplementary.Boundary.fst\"], \"digest\": \"8044189ace3857f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state an integral inner inverse for the graph boundary map."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|oriented|TODO",
+   "results": "{\"t\": \"2026-10-23T14:15:11Z\", \"tool\": \"grep\", \"query\": \"incidence|oriented|TODO\", \"sub\": \"Combinatorics/SimpleGraph/IncMatrix.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"15\", \"19\", \"34\", \"37\"], \"digest\": \"a9edcf620f20a8d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph/IncMatrix.lean:13-58 defines the unoriented incidence matrix; it does not provide the required signed multigraph boundary splitting."
+  },
+  {
+   "tool": "grep",
+   "query": "namespace TransvectionStruct|theorem inv_mul|def inv",
+   "results": "{\"t\": \"2026-10-23T14:15:11Z\", \"tool\": \"grep\", \"query\": \"namespace TransvectionStruct|theorem inv_mul|def inv\", \"sub\": \"LinearAlgebra/Matrix/Transvection.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"154\", \"181\", \"191\"], \"digest\": \"4870ca765258b7bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Matrix/Transvection.lean:181-192 proves invertibility of a square transvection matrix, not the claimed identity for an arbitrary graph incidence map."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, \"inverse\"",
+   "results": "{\"t\": \"2026-10-23T14:15:12Z\", \"tool\": \"loogle\", \"query\": \"LinearMap, \\\"inverse\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.inverse\", \"LinearMap.surjective_comp_left_of_exists_rightInverse\", \"LinearMap.ker_eq_bot_of_inverse\", \"LinearMap.range_eq_ker_of_leftInverse\", \"LinearEquiv.ofLeftInverse\", \"LinearEquiv.ofLeftInverse_apply\", \"LinearEquiv.ofLeftInverse_symm_apply\", \"Finsupp.leftInverse_lcomapDomain_mapDomain\"], \"digest\": \"94ccd93210ad0e77\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.inverse requires a two-sided set inverse; the splittingOfFunOnFintypeSurjective result requires surjectivity. Neither hypothesis holds for a general graph boundary. No hit provides the requested integral inner inverse."
+  },
+  {
+   "tool": "grep",
+   "query": "def inverse|leftInverse_splittingOfFunOnFintypeSurjective|def splittingOfFunOnFintypeSurjective",
+   "results": "{\"t\": \"2026-10-23T14:17:08Z\", \"tool\": \"grep\", \"query\": \"def inverse|leftInverse_splittingOfFunOnFintypeSurjective|def splittingOfFunOnFintypeSurjective\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearPMap.lean\", \"Mathlib/LinearAlgebra/Finsupp/Pi.lean\", \"Mathlib/LinearAlgebra/Finsupp/Pi.lean\", \"Mathlib/LinearAlgebra/Finsupp/Pi.lean\"], \"digest\": \"40a274fb1451c29a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearPMap.inverse is partial; splittingOfFunOnFintypeSurjective and its identity require surjectivity onto a full function module. A nonempty graph boundary is not surjective onto its vertex module, so these do not give a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graph-cycle-character-quotient",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online. Supporting algebra for the gluing-scalar kernel: evaluation on integral graph cycles, with signed graph-automorphism compatibility. Integral input: a linear inner inverse of the incidence map, before dualizing into arbitrary commutative coefficients.",
+   "via": [
+    "lem-sfb-finite-graph-cycle-character-quotient",
+    "lem-sfb-nodal-component-picard-gluing",
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-graph-incidence-inner-inverse",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied an elementary four-step construction over the integers. The relation that a vertex difference is a boundary is explicitly proved to be an equivalence relation; class representatives and witnessed lifts give a finite-sum linear map, and cancellation on each edge gives the inner-inverse identity. No spanning-forest, torsion-freeness, projectivity or connectedness theorem is used. No new nodes are needed. Checked empty graphs, isolated vertices, parallel edges and disconnected graphs.",
+  "blueprint": "Realizes the integral-incidence auxiliary of lem-sfb-finite-graph-cycle-character-quotient used in the nodal gluing-scalar kernel, ultimately serving det-thm-sf-ctf-stability-direct-images proof (3). Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; the graph construction is an agent-written lower-level auxiliary, not a claim that this blueprint passage states it. The ancestor command returns node=None for the inherited creation chain, which is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-32fee92e3",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-32fee92e3 (reviewer sub-agent of L); spot-checked: Read the item, def-weil-pbc-free-module (basis definition, Mathlib leaf), the parent lem-sfb-finite-graph-cycle-character-quotient (its steps 1, 3 and 4 use only r with ∂r∂=∂, which the delivered statement gives) and Stacks curves.tex 3105-3147 (Tag 0C1M lemma-glue-points). The Stacks lemma only motivates the node and does not state a graph-incidence result; the proof is correctly marked agent-written. Against clones/live and side-live the base was unsplit with an empty proof. The statement, stmt_deps, source and blueprint fields are unchanged, and all 8 base search records are kept. There is no repair note and no supersession. Step checks: (1) b_v-b_u in im ∂ is an equivalence relation via the witnesses 0, -c and c+d, and each edge relates its endpoints. (2) One representative per class and a lift p_v with ∂p_v=b_v-b_{a_C} are chosen over finite sets, and both endpoints of an edge share a_C. (3) r(x)=Σ x(v)p_v is linear with r(b_v)=p_v. (4) ∂r∂(b_e)=(b_t-b_a)-(b_s-b_a)=∂b_e, with the signs right, and this extends to all of Z^E by basis expansion. All steps are genuinely elementary and the proof is complete over Z without spanning forests or torsion-freeness. Edge cases checked: V empty, E empty, an isolated vertex, a single edge, a directed triangle, parallel edges and disconnected graphs. No new nodes, no duplicate in the DAG (rg -L on inner inverse, incidence and spanning forest), no cycle and no off-route statement use, so tool_uses is empty. Searches cover all three kinds. No SGA. One minor point: the report mentions citations.json and searches.jsonl, which are not in the delivery; they are worker-side files and need no change. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.FiniteGraphIncidenceInnerInverse",
+  "declaration": "FiniteGraphCycleCharacter.exists_incidence_innerInverse",
+  "file": "lean/Sheaf/Combinatorics/FiniteGraphIncidenceInnerInverse.lean",
+  "statement": "theorem exists_incidence_innerInverse {V : Type u} {E : Type v} [Finite V] [Finite E] (s t : E → V) (_hne : ∀ e : E, s e ≠ t e) (d : (E → ℤ) →ₗ[ℤ] (V → ℤ)) (hd : ∀ e : E, d ((Pi.basisFun ℤ E) e) = (Pi.basisFun ℤ V) (t e) - (Pi.basisFun ℤ V) (s e)) : ∃ r : (V → ℤ) →ₗ[ℤ] (E → ℤ), d ∘ₗ r ∘ₗ d = d",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The binder d is the incidence map uniquely characterized by hd on the standard basis of the finite function module. This avoids redefining the boundary helper already in the downstream character-quotient module, and avoids importing that downstream consumer."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f2e4b6b4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read node (only lean record new vs side-live), stmt_dep def-weil-pbc-free-module, delivered module, downstream FiniteGraphCycleCharacterQuotient (owns boundary := Pi.basisFun.constr of b_t - b_s). Clauses: [Finite V][Finite E] independent universes, s t : E → V, no-loop hypothesis kept, parallel edges allowed; d binder with hd on Pi.basisFun pins d uniquely (Basis.ext/constr), so it is neither an arbitrary map nor an extra hypothesis, and avoids a duplicate boundary def and an import cycle; conclusion ∃ r, d ∘ₗ r ∘ₗ d = d is exactly the node. Edge cases V/E empty, isolated vertices, disconnected graphs covered. lean.statement verbatim; docstrings carry source, blueprint tag and 4 proof steps; sorry only; no name collision; no hollow defs; report has Worker report and Second reading by NQ (self-pass, disclosed). Not recompiled (no change)."
+ }
+}

@@ -122,7 +122,18 @@
   "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-cor-sf-direct-image-ctf",
  "split_report": {
@@ -203,5 +214,37 @@
   "landing": "20261019T112450-L-3942606",
   "kind": "interface",
   "note": "independent cc review: item comparison_torAmplitudeIn_iff proved via source torAmplitudeIn_mapDerivedCategory_iff + hasTorAmplitudeIn_iff_torAmplitudeIn + new proved intrinsic transport chain (3 new nodes); unclaimed ProEtaleFiniteModuleIntrinsicComparison exact proved with private helpers; all axiom-clean, 5 modules + 27 direct importers compile; unit realized empty so no bypass"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a finite commutative ring, $T$ a scheme, and\n$\\nu_T:T_{\\Proet}\\to T_{\\Et}$ the comparison morphism of sites. The derived\ncategories are the ordinary ones of [def-weil-pbc-derived-categories]. Let\n$K\\in D(T_{\\Et},A)$ and let $a\\leq b$ be integers.\n\n1. If $K$ has Tor amplitude in $[a,b]$ on the étale site, then $\\nu_T^*K$\nhas Tor amplitude in $[a,b]$ on the pro-étale site\n([def-weil-finite-tor-amplitude]). If moreover $K$ is bounded constructible\n[def-weil-pbc-constructible-complexes], then $\\nu_T^*K$ is bounded\nconstructible on $T_{\\Proet}$, so $\\nu_T^*$ carries\n$D^b_{\\mathrm{ctf}}(T_{\\Et},A)$ into $\\Dctf(T,A)$.\n2. Conversely, if $\\nu_T^*K$ has Tor amplitude in $[a,b]$, then $K$ has Tor\namplitude in $[a,b]$ on the étale site.\n\nIn other words, $K$ has Tor amplitude in $[a,b]$ if and only if $\\nu_T^*K$\nhas Tor amplitude in the same interval.",
+  "proof": [
+   {
+    "text": "*(1).* We record the bounded-flat-model argument. If $K$ has\nTor amplitude $[a,b]$, take a bounded-above flat\nresolution $P$ with $P^q=0$ for $q>b$.\nSuch a resolution is constructed by free module sheaves\non site objects, successively covering cycles and kernels.\nIt is exact in degrees below $a$. Put\n$Q=\\operatorname{coker}(P^{a-1}\\to P^a)$.\nFor every module sheaf $N$, the flat resolution ending\nin $P^a\\to Q$ computes\n\n$$\n\\operatorname{Tor}_1(Q,N)\n=\\mathcal H^{a-1}(P\\otimes N)=0,\n$$\n\nby [def-weil-finite-tor-amplitude]. Hence $Q$\nis flat, and $[Q\\to P^{a+1}\\to\\cdots\\to P^b]$\nis a flat representative of $K$ in precisely this interval.\nBy [lem-exc-constant-inverse-image-flat], its termwise\npullback is still flat. Exactness in\n[prop-weil-pbc-site-comparison-finite-level] makes it\na representative of $\\nu_T^*K$. Tensoring this bounded\nflat complex with any pro-etale module sheaf gives no\ncohomology outside $[a,b]$, proving the first assertion.\nIf $K$ is moreover bounded constructible, then $\\nu_T^*K$ is bounded\nconstructible on $T_{\\Proet}$ by [lem-sf-proetale-constructible-origin].",
+    "uses": [
+     "def-weil-finite-tor-amplitude",
+     "lem-exc-constant-inverse-image-flat",
+     "prop-weil-pbc-site-comparison-finite-level",
+     "lem-sf-proetale-constructible-origin"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2).* For the converse, testing $\\nu_T^*K$ with the coefficient\nring first gives its cohomological bound $[a,b]$.\nExactness of $\\nu_T^*$ and the sheaf unit isomorphism\nin [prop-weil-pbc-site-comparison-finite-level] make\n$\\nu_T^*$ conservative on sheaves, hence give the same\ncohomological bound for $K$. Take a bounded-above flat\nresolution of $K$ and of an arbitrary etale module\nsheaf $N$. Their pullbacks remain flat by\n[lem-exc-constant-inverse-image-flat].\nExact inverse image commutes with ordinary tensor and\nthe direct sums in these resolutions, giving\n\n$$\n\\nu_T^*(K\\otimes_A^LN)\n=\\nu_T^*K\\otimes_A^L\\nu_T^*N\n$$\n\nfor the derived tensor in [def-weil-derived-tensor].\nThe right side has the stipulated Tor bound. Conservativity\non its cohomology sheaves gives that bound on the left\nbefore pullback as well. This applies to every $N$,\nproving the converse. The derived comparison used here\nis the ordinary one of [thm-weil-pbc-site-comparison].",
+    "uses": [
+     "prop-weil-pbc-site-comparison-finite-level",
+     "lem-exc-constant-inverse-image-flat",
+     "def-weil-derived-tensor",
+     "thm-weil-pbc-site-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

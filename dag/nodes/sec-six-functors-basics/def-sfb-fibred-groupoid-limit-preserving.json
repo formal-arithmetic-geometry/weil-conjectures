@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-fibred-groupoid-limit-preserving",
+ "kind": "definition",
+ "title": "Directed affine limit preservation for categories fibred in groupoids",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $\\mathcal F$ be a category fibred in groupoids over $\\mathit{Sch}/S$ [def-sfb-stable-pointed-moduli-groupoids]. For $T/S$, write $\\mathcal F(T)$ for its fibre groupoid. We say that $\\mathcal F$ is limit preserving if for every nonempty small directed inverse system $(T_i)$ of affine $S$-schemes with affine limit $T$, the natural functor $2\\operatorname{colim}_i\\mathcal F(T_i)\\to\\mathcal F(T)$ is an equivalence. Explicitly: every object over $T$ is pulled back from a stage; every arrow between two stage objects pulled back to $T$ is pulled back from a common later stage, compatibly with the specified pullback identifications; and if two stage arrows become equal over $T$, they become equal at a later stage. No descent for coverings is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XL (definition-limit-preserving), and the following explicit description of the Hom and object conditions; used in Tag 07XX (lemma-implies-smooth)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category fibred in groupoids preserving directed affine limits equivalence two colimit fibers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.preservesLimitsOfShape_colim_grothendieck\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Grothendieck\", \"type\": \"[HasColimitsOfShape C H] [HasLimitsOfShape J H] [∀ c, HasColimitsOfShape (↑(F.obj c)) H]\\n  [PreservesLimitsOfShape J (colim (J := C) (C := H))] [∀ c, PreservesLimitsOfShape J (colim (J := F.obj c) (C := H))] :\\n  PreservesLimitsOfShape J (colim (J := Grothendieck F) (C := H))\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, if $\\\\mathcal{C}$ admits all colimits of diagrams shaped like $H$, each category $F(X)$ for $X \\\\in \\\\mathcal{C}$ admits c\"}\n  {\"name\": \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"module\": \"Mathlib.CategoryTheory.Limits.IsLimit\", \"type\": \"{D : Type u₄} [Category.{v₄} D] {G : K ⥤ D} (h : Cocone G ≌ Cocone F) {c : Cocone G} :\\n  IsColimit (h.functor.obj c) ≃ IsColimit c\", \"doc\": \"Given an equivalence between the categories of cocones for diagrams $F$ and $G$, this establishes a bijection between colimit cocones for $F$ and colimit cocones for $G$. Specifically, a cocone $c$ fo\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.preservesColimit_iff\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.FunctorCategory.PreservesLimits\", \"type\": \"(F : K ⥤ J) (G : J ⥤ C) : preservesColimit F G ↔ PreservesColimit F G\", \"doc\": \"For functors $ F : K \\\\to J $ and $ G : J \\\\to C $, the property that $ G $ preserves colimits of diagrams factoring through $ F $ is equivalent to the proposition $ \\\\text{preservesColimit}\\\\, F\\\\, G $.\"}\n  {\"name\": \"CategoryTheory.createsColimitsOfShapeOfEquiv\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \"{J' : Type w₁} [Category.{w'₁} J'] (e : J ≌ J') (F : C ⥤ D) [CreatesColimitsOfShape J F] : CreatesColimitsOfShape J' F\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an equivalence $e : \\\\mathcal{J} \\\\simeq \\\\mathcal{J}'$ between indexing categories, and a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that creates colimit\"}\n  {\"name\": \"CategoryTheory.createsLimitsOfShapeOfEquiv\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \"{J' : Type w₁} [Category.{w'₁} J'] (e : J ≌ J') (F : C ⥤ D) [CreatesLimitsOfShape J F] : CreatesLimitsOfShape J' F\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}$ and a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that creates limits of shape $\\\\mathcal{J}$, if there exists an equivalence $e : \\\\mathcal{J}' \\\\simeq \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Limits.IsColimit.ofWhiskerEquivalence\", \"module\": \"Mathlib.CategoryTheory.Limits.IsLimit\", \"type\": \"{s : Cocone F} (e : K ≌ J) (P : IsColimit (s.whisker e.functor)) : IsColimit s\", \"doc\": \"Given a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, a cocone $ s $ over $ F $, and an equivalence $ e : \\\\mathcal{K} \\\\simeq \\\\mathcal{J} $, if the whiskered cocone $ s $ composed with $ e.\\\\text{functor\"}\n  {\"name\": \"CategoryTheory.Limits.hasColimit_equivalence_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"(e : K ≌ J) [HasColimit F] : HasColimit (e.functor ⋙ F)\", \"doc\": \"Given an equivalence of categories $ \\\\mathcal{K} \\\\simeq \\\\mathcal{J} $ and a functor $ F: \\\\mathcal{J} \\\\to \\\\mathcal{C} $ that has a colimit, the composition of the equivalence's forward functor with $ F\"}\n  {\"name\": \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Grothendieck\", \"type\": \"{c : Cocone G} (hc : IsColimit c) : IsColimit (coconeFiberwiseColimitOfCocone c)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a functor $G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H}$, if $c$ is a colimit cocone for $G$, then the cocone constructe\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: no arbitrary-base directed-affine limit-preservation predicate for a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category fibred in groupoids limit preserving objects isomorphisms equalities descend directed affine limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          {J : Type w} →\\n            [inst_2 : CategoryTheory.Category.{w', w} J] →\\n              (F : CategoryTheory.F\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}$, a small category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that preserves the limit of $F\"}\n  {\"name\": \"CategoryTheory.CategoryOfElements.CreatesLimitsAux.isValidLift\", \"module\": \"Mathlib/CategoryTheory/Limits/Elements\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {A : CategoryTheory.Functor C (Type w)} →\\n      {I : Type u₁} →\\n        [inst_1 : CategoryTheory.Category.{v₁, u₁} I] →\\n          [inst_2 : Small.{w, u₁} I] →\\n            (F : CategoryTheory.Functor I A.Elements) →\\n              [inst_\", \"doc\": \"The isomorphism asserting that applying the projection functor $\\\\pi_A$ to the lifted cone constructed from $F$ yields a cone isomorphic to the limit cone of the composition $F \\\\circ \\\\pi_A$, establishi\"}\n  {\"name\": \"CategoryTheory.Limits.fiberwiseColimitLimitIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {H : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} H] →\\n        {J : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} J] →\\n            {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n              (K\", \"doc\": \"Given categories $\\\\mathcal{C}$, $\\\\mathcal{H}$, and $J$, a functor $F: \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a functor $K: J \\\\to [\\\\text{Grothendieck}(F), \\\\mathcal{H}]$, if each fiber category $F(c)$ admit\"}\n  {\"name\": \"CategoryTheory.instIsIsoPost\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J]\\n  (F : CategoryTheory.Functor J C) [inst_3 : CategoryTheory.Limits.PreservesLimit F G]\\n\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a limit in $ \\\\mathcal{C} $, and a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the canonical morphism $ G(\\\\lim F) \\\\to \\\\lim (G \\\\circ F) $ induce\"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant\", \"type\": \"∀ {J : Type u_1} {C : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C] {F : CategoryTheory.Functor J C} {i₀ : J},\\n  F.IsEventuallyConstantTo i₀ →\\n    ∀ [CategoryTheory.IsCofiltered J] {c : CategoryTheory.Limits.Cone F} (hc : CategoryTheory.Lim\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a functor that is eventually constant at an object $ i_0 \\\\in \\\\mathcal{C} $, and $ c $ is a limit cone over $ F $, then for every object $ j \\\\in \\\\mathcal{C} $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: no arbitrary-base directed-affine limit-preservation predicate for a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "(Fibered|Fibred).*(LimitPreserv)|(LimitPreserv).*(Fibered|Fibred)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match: no arbitrary-base directed-affine limit-preservation predicate for a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "ObjectsDescend|ArrowsDescend|ArrowEqualitiesDescend|IsLimitPreserving (project Lean and DAG); blueprint_refs.py search \"limit preserving\"",
+   "results": "Project Lean: AlgebraicGeometry.ArtinCriterion.ObjectsDescend, ArrowsDescend, ArrowEqualitiesDescend and IsLimitPreserving in Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion, restricted to Spec (ULift Z). No match in WeilConjectures. DAG: existing lemma nodes describe limit preservation inline, but no definition node for this general notion. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "arbitrary-base interface missing; existing integer-base predicate cannot be applied over Spec R"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-infinitesimal-smoothness",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "import_flags": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: last sentence, application of lemma-implies-smooth; the target fibred groupoid limit-preservation hypothesis in Tag 07XX",
+   "via": [
+    "lem-sfb-artin-representable-infinitesimal-smoothness",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibredGroupoidLimitPreserving",
+  "declaration": "CategoryTheory.FibredGroupoidLimit.IsLimitPreserving",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibredGroupoidLimitPreserving.lean",
+  "statement": "def IsLimitPreserving {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.FibredGroupoidLimit.Object",
+   "CategoryTheory.FibredGroupoidLimit.Lift",
+   "CategoryTheory.FibredGroupoidLimit.ObjectsDescend",
+   "CategoryTheory.FibredGroupoidLimit.ArrowsDescend",
+   "CategoryTheory.FibredGroupoidLimit.ArrowEqualitiesDescend",
+   "CategoryTheory.FibredGroupoidLimit.IsLimitPreserving"
+  ],
+  "note": "General-base version of the existing integer-base ArtinCriterion limit-preservation interface. The three real predicates express precisely essential surjectivity, fullness, and faithfulness; their helper fibre/arrow abbreviations use Mathlib directly."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c64b8cab",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c64b8cab",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Item matches node and Stacks 07XX/equation-smooth clause by clause: Noetherian R, fibred groupoid F (IsFibredInGroupoids), full 2-colimit equivalence (IsLimitPreserving = ess.surj ∧ full ∧ faithful), U LocallyOfFiniteType+QuasiCompact, x as based functor from h_U (2-Yoneda, not stronger), IsRepresentableByAlgebraicSpaces, lifting over all surjections of Artinian local R-algebras with residue K via rho (c over Spec q = given iso, b over Spec q = a' lifts a, vertical d with x.map b ≫ d = c = extension), conclusion ModuliSpaceTest @Smooth (all T,y, étale charts). New def node def-sfb-fibred-groupoid-limit-preserving faithfully renders Tag 07XL; not hollow; only Lean analogue is the Spec(ULift ℤ)-only ArtinCriterion.IsLimitPreserving, which it generalises; no DAG duplicate. Statements verbatim, stmt_deps additions used, plain imports = recorded proof-dep modules, docstrings with source/blueprint and 7 proof steps, sorry only. Advisory: integer-base copy could become an abbrev of the general def. No compile (no changes)."
+ }
+}

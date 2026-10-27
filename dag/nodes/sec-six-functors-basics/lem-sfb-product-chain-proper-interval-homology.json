@@ -12,91 +12,54 @@
  ],
  "proof": [
   {
-   "text": "Use $C(P)=C(P;\\mathbf Q)$ from [lem-sfb-poset-augmented-chain-prism]. The complex in the statement is precisely $C(T_m)$. Alternating deletion squares to zero: deleting positions $a<b$ in the two orders has coefficients $(-1)^{a+b-1}$ and $(-1)^{a+b}$; in degree one the two augmentations cancel. If monotone maps $f\\leq g$ are compared by that lemma, then for a cycle $z$ one has $(g_*-f_*)z=d(hz)$, so they induce equal homology maps. If an induced map factors through the one-element poset $\\{e\\}$, its homology map is zero: $C(\\{e\\})$ is $\\mathbf Q\\xrightarrow{1}\\mathbf Q$ in degrees $0,-1$ and zero elsewhere, so every cycle there is a boundary. These observations apply also in degree $-1$.",
+   "text": "Identify $A(m)$ with $C(T_m;\\mathbf Q)$ [def-sfb-augmented-poset-chains] by sending each strict-chain basis vector to the identical list basis vector and the empty generator to the empty generator. The inverse sends those lists back; both commute with alternating deletion and augmentation, and lower terms are zero. If $m_j\\geq2$, [lem-sfb-product-interval-nullhomotopy] supplies $dt+td=\\operatorname{id}$ for $R=\\mathbf Q$. For any cycle $z$ in any integer degree this gives $z=d(tz)$, hence its class in $\\ker d/\\operatorname{im}d$ [def-weil-pbc-module-chain-complex-homology] is zero. This proves the non-Boolean clause.",
    "uses": [
-    "lem-sfb-poset-augmented-chain-prism",
+    "def-sfb-augmented-poset-chains",
+    "lem-sfb-product-interval-nullhomotopy",
     "def-weil-pbc-module-chain-complex-homology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Q98 re-split assembly; the detailed arguments are assigned to the named new nodes."
    }
   },
   {
-   "text": "Suppose $m_j\\geq2$ and put $e=(0,\\ldots,1,\\ldots,0)$ with $1$ in coordinate $j$. This is a vertex of $T_m$. Define $u:T_m\\to T_m$ by $u(v)_j=\\max(v_j,1)$ and $u(v)_i=v_i$ for $i\\ne j$. This is monotone and nonzero. If $u(v)=m$, then $\\max(v_j,1)=m_j\\geq2$ forces $v_j=m_j$; all other coordinates are also those of $m$, contradicting $v\\ne m$. Thus $u$ stays in $T_m$. Pointwise $\\mathrm{id}\\leq u$ and $c_e\\leq u$, where $c_e$ is the constant map at $e$. By [lem-sfb-poset-augmented-chain-prism], their induced maps on cycles differ by boundaries. Consequently $H_k(\\mathrm{id})=H_k(u)=H_k(c_e)=0$, the last equality following from factorization through $\\{e\\}$ as in step 1. Hence all $H_k(A(m))$ vanish.",
+   "text": "Suppose every $m_i\\in\\{0,1\\}$. Put $E=\\{i:m_i=1\\}$ and $s=|E|\\geq1$, since $m\\ne0$. Send a vector $x\\leq m$ to $\\{i:x_i=1\\}$, with inverse the indicator vector; this order bijection identifies $T_m$ with $P_E=\\{S:\\varnothing\\ne S\\subsetneq E\\}$. On strict-chain bases and the empty chain the two inverse maps commute with every deletion; they therefore induce inverse maps on kernels modulo images, giving $A(m)\\cong B_E=C(P_E;\\mathbf Q)$ [def-sfb-augmented-poset-chains]. Induct on $s$ with the claim for every finite set $E$ of size $s$. If $s=1$, the poset is empty, so $B_E$ is $\\mathbf Q$ in degree $-1$ and zero otherwise, with zero differentials. Its homology is $\\mathbf Q$ in degree $-1=s-2$ and zero elsewhere by [def-weil-pbc-module-chain-complex-homology].",
    "uses": [
-    "lem-sfb-poset-augmented-chain-prism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
-   }
-  },
-  {
-   "text": "Now every $m_i\\in\\{0,1\\}$. Discarding the zero coordinates identifies $[0,m]$ with the inclusion poset of subsets of $E=\\{i:m_i=1\\}$, and identifies $T_m$ with $P_E=\\{S:\\varnothing\\ne S\\subsetneq E\\}$. The induced bijection of chain bases respects deletion and the empty chain, hence is a chain isomorphism. Put $B_E=C(P_E)$. Induct on $s=|E|\\geq1$. If $s=1$, $P_E$ is empty, so $B_E$ is $\\mathbf Q$ in degree $-1$ only; its homology is exactly as asserted. Degrees below $-1$ always have zero homology by the definition of $H_k$ [def-weil-pbc-module-chain-complex-homology].",
-   "uses": [
+    "def-sfb-augmented-poset-chains",
     "def-weil-pbc-module-chain-complex-homology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Q98 re-split assembly; the detailed arguments are assigned to the named new nodes."
    }
   },
   {
-   "text": "For $s\\geq2$, choose $a\\in E$, put $v=E\\setminus\\{a\\}$, and let $D=P_E\\setminus\\{v\\}$ with its induced order. The map $u:D\\to D$, $S\\mapsto S\\cup\\{a\\}$, is well defined: if its value were $E$, then either $S=E$ or $S=v$, both excluded; its value contains $a$ and so cannot be $v$. It is monotone, $\\mathrm{id}_D\\leq u$, and $c_{\\{a\\}}\\leq u$. The vertex $\\{a\\}$ belongs to $D$ also for $s=2$. Apply [lem-sfb-poset-augmented-chain-prism] and the singleton calculation of step 1: the identity on every $H_k(C(D))$ equals a map factoring through $C(\\{\\{a\\}\\})$ and is zero. Thus $C(D)$ is acyclic, including in degree $-1$.",
+   "text": "For $s\\geq2$ choose $a\\in E$ and set $v=E\\setminus\\{a\\}$, so $|v|=s-1\\geq1$. Use the quotient-induced derived isomorphism of [lem-sfb-boolean-coatom-excision-derived], whose per-degree consequence [lem-sfb-boolean-coatom-excision-homology] is $H_n(B_E)\\cong H_{n-1}(B_v)$ for every integer $n$. The induction hypothesis for $v$ says the latter vanishes unless $n-1=(s-1)-2=s-3$, equivalently $n=s-2$, and has dimension one there. For $s=2$ this uses the singleton base case in degree $n-1=-1$, hence gives the nonzero group in degree $n=0$; for every $s$ the isomorphism preserves zero spaces and dimensions in all integer degrees. This proves the inductive step. The chain identification of step 2 proves the Boolean clause with arbitrary zero coordinates, and step 1 supplies all remaining cases: a natural coordinate outside $\\{0,1\\}$ is at least $2$.",
    "uses": [
-    "lem-sfb-poset-augmented-chain-prism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
-   }
-  },
-  {
-   "text": "The inclusion of chain bases defines $C(D)\\hookrightarrow B_E$, identity in degree $-1$. Let $V=B_E/C(D)$, degree by degree, with the induced differential. A basis of $V_n$ for $n\\geq0$ consists of the chains containing $v$. Since $v$ is a maximal element of $P_E$, these are exactly $[S_0<\\cdots<S_{n-1}<v]$, with $\\varnothing\\ne S_i\\subsetneq v$; for $n=0$ this means $[v]$. Thus there are basis bijections $V_n\\cong(B_v)_{n-1}$ for all $n$, where $B_v=C(P_v)$ and the empty chain corresponds to $[v]$. The spaces $V_{-1}$ and $(B_v)_{-2}$ are both zero. Deleting the final $v$ gives a chain in $D$, hence zero in $V$; every other deletion keeps its original sign. Therefore these bijections identify the differential of $V$ with that of $B_v$ shifted one degree (without a sign change). In particular cycles and boundaries correspond, and $H_n(V)\\cong H_{n-1}(B_v)$ directly by the quotient definition [def-weil-pbc-module-chain-complex-homology].",
-   "uses": [
-    "def-weil-pbc-module-chain-complex-homology"
+    "lem-sfb-boolean-coatom-excision-derived",
+    "lem-sfb-boolean-coatom-excision-homology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
-   }
-  },
-  {
-   "text": "The degreewise exact sequence $0\\to C(D)\\to B_E\\to V\\to0$ gives the segment $H_n(C(D))\\to H_n(B_E)\\to H_n(V)\\to H_{n-1}(C(D))$ by [lem-weil-pbc-complex-ses-homology-long-exact]. To apply its cochain convention, replace a chain complex $K$ by the integer cochain complex $K^{-q}$; $H^q$ is then $H_{-q}$. The category is rational vector spaces, an abelian module category, and short exactness holds in each degree by the explicit quotient construction of step 5, including $0\\to\\mathbf Q\\xrightarrow{1}\\mathbf Q\\to0$ in degree $-1$. Both outside homology groups vanish by step 4, so exactness makes $H_n(B_E)\\to H_n(V)$ an isomorphism for every integer $n$.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain; apply after reversal of the integer grading."
-   }
-  },
-  {
-   "text": "Since $|v|=s-1\\geq1$, the inductive hypothesis gives $H_j(B_v)=0$ except at $j=s-3$, where it is one-dimensional over $\\mathbf Q$. Steps 5 and 6 identify $H_n(B_E)$ with $H_{n-1}(B_v)$, so its only nonzero degree is $n=s-2$ and its dimension is one. This proves the induction and, through step 3, the Boolean clause for all nonzero $m$, including zero coordinates. Together with step 2 it proves every case of the statement.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint."
+    "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Q98 re-split assembly; the detailed arguments are assigned to the named new nodes."
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-poset-augmented-chain-prism",
+  "def-sfb-augmented-poset-chains",
+  "lem-sfb-product-interval-nullhomotopy",
   "def-weil-pbc-module-chain-complex-homology",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
+  "lem-sfb-boolean-coatom-excision-derived",
+  "lem-sfb-boolean-coatom-excision-homology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Source paragraph supplies only the motivation; the proof here is a new finite-chain argument, using Stacks 019S prism input and 0117."
+  "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Re-split of the retained seven-step finite-chain argument; contextual blueprint motivation only."
  },
  "mathlib_searches": [
   {
@@ -199,19 +162,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-product-chain-proper-interval-homology",
   "worker": "stage1",
-  "summary": "Q21 retains the statement and supplies an explicit join contraction for non-Boolean products, followed by coatom deletion, a quotient basis calculation and induction for Boolean products. One general augmented-poset prism node is created; the long exact sequence is an existing Mathlib leaf. The source does not assert the combinatorial lemma; the proof is marked agent-written.",
-  "blueprint": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Steps 1–2 give the contractible multidegrees; steps 3–7 give the squarefree multidegrees. The ancestor command returns None for this existing imported-ancestry chain; the inherited null from.node is retained."
+  "summary": "Q98 repairs the human-requested re-split: two substantial independent tasks (explicit product null-homotopy and derived Boolean coatom excision), plus its required separate homology consequence, are new statement-only unsplit nodes. The unchanged parent statement is assembled by cycle-to-boundary evaluation, the Boolean basis identification and cardinality induction. All seven original arguments are preserved verbatim and mapped to their new owners in report.md. Returned-delivery repair: rebased the retained split onto the current shared DAG after the side-completion promotion refusal; re-read every external statement dependency, retained the current statement and all live review/Lean metadata, and refreshed the verbatim augmented-chain citation evidence. Final promotion-return repair audit: rebuilt the parent from the current read-only DAG baseline, made the induction uniformly quantify over finite active sets, and made the natural-number case exhaustion explicit; all external citation statements were re-read and checked verbatim. Latest landing-return repair (returned head 0398b276896): refreshed the current-DAG baseline after passing dry run 92965039cbc, revalidated all external statements and all citation quotes, and made the inverse maps on homology in the Boolean reduction explicit. Repair of landing return for head 3f1ac525cd8 (2026-10-23): refreshed from the current DAG after first dry run 0dd6703fe2a; compared every parent field and all retained citation-statement snapshots, re-read all five external interfaces, and specified the inverse strict-chain/list basis maps and their compatibility with augmentation in step 1. Statement, dependencies and live Lean/review metadata are preserved. Repair of the landing return for head 53759233623 (2026-10-23): rebased the split fields on the current DAG after dry run 2bfc5c6860a, compared all eight retained statement snapshots with the current or delivered interfaces (no changes), re-read all five external statements and the sources, and checked all seven citation quotes. The assembly now spells out the size-two Boolean induction step and its degree-zero conclusion. All other live fields and the unchanged statement are preserved.",
+  "blueprint": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. The ancestor command still returns None; null ancestry and the inherited via chain are retained. No chapter or unit route changes."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q21-e77a4c266",
-  "group": "Q21",
+  "reviewer": "NT-cc-Q98-16b470f89",
+  "group": "Q98",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-e77a4c266 (reviewer sub-agent of L); spot-checked: I read the item, its new node lem-sfb-poset-augmented-chain-prism and every cited statement in full. The cited statements are def-weil-pbc-module-chain-complex-homology and lem-weil-pbc-complex-ses-homology-long-exact, both Mathlib leaves. I also read Stacks 019S/019Y/0117 at their labels and blueprint main-20261015 direct-images paragraph (3). That paragraph is motivation only, so proof_origin agent and the WANTED note are correct. The item statement is unchanged and true. My own exact rational rank check of m=(1),(2),(3),(1,1),(2,1),(1,1,1),(2,2),(0,1,1),(1,1,1,1),(3,1),(2,1,1),(0,2) matches it: Boolean m gives Q only in degree s-2 (degree -1 when s=1), and every other m is acyclic. The new node is true and general, not a clause of the item and not a duplicate. It is the standard prism identity on augmented normalized strict poset chains: degree 0 gives dh0[x]=[g(x)]-[f(x)], degree -1 gives 0=0, and empty P is fine. The nearest nodes, simplicial-homotopy-free-chain-homotopy (unnormalized, no augmentation, needs a Delta[1] homotopy) and cbc-normalized-alternating (a different normalization), do not give it in one line. Its searches are recorded in all three kinds, and the bad Loogle query is honestly marked unavailable. Step 1: acyclicity of C({e}) and equality on homology for comparable maps. Step 2: u(v)_j=max(v_j,1) is a valid map T_m->T_m because m_j>=2. Step 4: the coatom deletion map S->S∪{a} is valid and {a} lies in D for s>=2. Step 5: the quotient V is identified with B_v shifted by one, without a sign; checked at n=0 and n=1. Step 6: the long exact sequence is re-indexed correctly (chain to cochain). Step 7: the induction degree is right. The result fits the parent's use with n=sum m_i. There are no SGA citations, no route departures, no tool_uses and no fixes. The inherited from.node=null is a base-era ancestry fact."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-16b470f89 (reviewer sub-agent of L); spot-checked: PASS. Sixth Q98 push. The earlier heads (d32f, 279a, 0398, 3f1a, 5375) passed review and were refused at landing as unpromoted side completions, which is not a mathematical fault. Against 537592336230 the three new nodes are byte-identical. The item changes only in step 3, which now spells out s=2: the singleton base case in degree -1 gives H_0(B_E)=Q. The item statement and statement_deps equal live. Live and side-live still hold the old Q21 seven-step split, and none of the new ids exists, so the delivery is not superseded. Re-split note: 3 statement-only unsplit nodes; the parent proof is 624/768/854 = 2246 characters, with uses equal to proof_deps. Every old step has an owner: steps 1-2 go to the null-homotopy node, steps 4-6 to the derived excision node, the per-degree consequence is its own node (derived-form rule, brief-stage1 l.60), and steps 3 and 7 form the parent assembly. Null-homotopy, checked against the prism node (h_{-1}=0): degree n>=1 gives id - c_e*, with c_e*=0 there; degree 0 gives [x]-[e]+[e]; degree -1 gives d[e]=[∅]. e and u stay in T because m_j>=2. Derived excision: S∪{a} is never E or v; {a} lies in D when |E|=2; v is maximal; theta=(-1)^n·(drop v) commutes with -d; (ΣB_v)ˇ = B̌_v[1] as in def-weil-abstract-derived-category; p is a quasi-isomorphism by the LES leaf since C(D) is acyclic. Homology node: H^{-n} gives H_{n-1}(B_v). Item small cases m=(1),(1,1),(2),(1,1,1) agree with the statement. rg -L found no duplicate (lem-trf-coefficient-bar-prism-homotopy is a different object). The source is blueprint main-20261015 direct-images paragraph (3), contextual only, with the WANTED reference flagged. No SGA in any source. No fixes and no tool_uses. Maintainer: this is the same promotion loop as the earlier heads."
  },
  "lean": {
   "module": "Sheaf.Combinatorics.ProductChainProperIntervalHomology",
@@ -241,5 +204,17 @@
   "group": "Q12",
   "result": "pass",
   "note": "Clause-by-clause match: the vertex set {v ≤ m, v ≠ 0, v ≠ m} (coordinatewise order), strict chains as Fin n ↪o order embeddings with the n=0 empty chain giving Q in degree -1, alternating deletion via succAboveOrderEmb with (-1)^a (degree 0 = augmentation), extend along n ↦ n-1 giving zero below -1 and d_{-1}=0; the non-Boolean clause gives IsZero for all k∈ℤ; the Boolean clause gives IsZero for k ≠ s-2 (in ℤ) and finrank ℚ = 1. Edge cases m=(1),(0,1),(2),(1,1),(1,1,1) are consistent. The lean.statement matches the file verbatim, only lean changed versus the live node, all 9 declarations are listed, docstrings are complete with the 7-step proof, boundary_squared is a named sorry'd theorem (not hollow), no line is over 100 characters, nothing is auto-implicit, and three kinds of search are recorded. Advisory: the future Lean for the prism node lem-sfb-poset-augmented-chain-prism (claimed by NM) will overlap complex = C(T_m;Q); the non-public HomologySequence import is only for the proof. No compile, since no file was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,277 @@
+{
+ "id": "lem-pur-finite-setting-comparison-hypotheses",
+ "kind": "statement",
+ "title": "Finite-stage geometric and coefficient hypotheses for ordinary exceptional comparison",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions]: $k$ is the fixed algebraic closure of a finite field of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism [def-weil-scheme-morphism-properties]. Neither scheme is required to be separated over $k$.\n\nThe schemes $X,Y$ are Noetherian, quasi-compact and quasi-separated. There is a compactification $c=(j,r)$ with $j:X\\hookrightarrow\\overline X$ a quasi-compact open immersion, $r:\\overline X\\to Y$ proper and $rj=f$ [def-weil-compactifications-refinements]. For every such compactification, $\\overline X$ is a finite-type Noetherian $k$-scheme and there is an integer $D\\geq0$ with $\\dim\\overline X\\leq D$ [def-kun-topological-krull-dimension]. If $\\overline X$ is empty, $D=0$ is allowed.\n\nThe ring $A$ is finite and the positive integer $N=\\ell^n$ satisfies $NA=0$; $N$ is invertible on every $k$-scheme. These conclusions also hold for every separated finite-type $k$-morphism obtained by a Cartesian base change between finite-type $k$-schemes [def-weil-pbc-cartesian-square]. In particular, when $f$ is smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], the Noetherian, finite coefficient, invertible annihilator and compactifiability hypotheses for the ordinary etale smooth tensor theorem hold, as do the finite-dimensional compactification hypotheses for the bounded-below etale-origin exceptional Hom comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "First paragraph, sentence “Work at a finite coefficient stage” and application of thm-asd-smooth-tensor and thm-sf-ambient-adjoint-class; inherited proof Step 1, geometric and coefficient hypothesis verification"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-cartesian-square",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian: its only ideals are $(0)$ and $(1)$. Thus $\\operatorname{Spec}k$ is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms of $X$ and $Y$. Both schemes are Noetherian, hence locally Noetherian and quasi-compact by the definition in that lemma. Apply [lem-weil-pbc-locally-noetherian-quasi-separated] to obtain quasi-separatedness of both. These applications require no separatedness of either structure morphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex, Tag 01OY (lemma-locally-Noetherian-quasi-separated)"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-compactification] after Step 1 has supplied compactness and quasi-separatedness of Y. For every compactification c, properness of c.g gives local finite type and quasi-compactness by [def-weil-proper-morphism]. Compose with aY by [lem-sfb-finite-type-composition-base-change]. The same argument as Step 1 gives Noetherianity of c.Z. The existing Compactification.quasiCompact_openImmersion lemma gives quasi-compactness of c.i directly from quasi-compactness of f: its proof uses QuasiCompact.of_comp on c.i followed by c.g, whose composite is f.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0F41 (theorem-nagata); morphisms.tex Tags 01W1 and 01T3; schemes.tex Tag 03GI"
+   }
+  },
+  {
+   "text": "Apply the recorded declaration AlgebraicGeometry.exists_topologicalKrullDim_le of [lem-kun-dimension-finite-type] directly to c.g followed by aY. Its conclusion is exactly a natural-number upper bound on topologicalKrullDim c.Z of [def-kun-topological-krull-dimension]. It already includes the empty scheme, where the dimension is bottom. No translation from a separate scheme dimension is needed.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Statement; existing source declaration AlgebraicGeometry.exists_topologicalKrullDim_le, WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:212–223"
+   }
+  },
+  {
+   "text": "Apply Padic.finite_coefficientExtensionRing, the finite-ring interface recorded on [def-weil-l-adic-coefficient-extension], at the given positive level. For annihilation, unfold the recorded coefficient data, and use [lem-weil-l-adic-extension-integers-dvr] to identify its maximal ideal by absolute value less than one and its uniformizer span with that ideal. By spectralNorm_extends of [lem-weil-l-adic-extension-absolute-value] and Padic.norm_p_lt_one of [def-weil-l-adic-numbers], ell belongs to the maximal ideal. Ideal.pow_mem_pow puts ell^n in its nth power, which is the defining coefficient ideal. Ideal.Quotient.eq_zero_iff_mem makes the natural-number cast zero in A. Finally nsmul_eq_mul gives ell^n times every a equal to zero. This uses no ramification divisibility hypothesis.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-numbers",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, finite coefficient stage; coefficient facts as stated in def-weil-l-adic-coefficient-extension and its cited valuation and quotient lemmas"
+   }
+  },
+  {
+   "text": "The prime ell is at least one, so ell^n is at least one. For any k-scheme T, apply the existing coefficientPrime_isUnit_stalk theorem of [def-pur-conventions], whose proof uses characteristic p and ell different from p, at every point of T. Raise those units to the nth power. The ringed-space theorem isUnit_of_isUnit_germ proves that the section ell^n is a unit. This also applies to the empty scheme, since the sheaf unit criterion has no nonemptiness hypothesis.",
+   "uses": [
+    "def-pur-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, finite coefficient stage; elementary characteristic-p verification of invertibility"
+   }
+  },
+  {
+   "text": "The chosen Cartesian square identifies f′ with its specified isomorphism to the pullback followed by pullback.snd f g. The base-change and composition instances of [lem-pod-separated-finite-type-base-change] and [lem-sfb-finite-type-composition-base-change] supply separatedness, local finite type and quasi-compactness of f′, and local finite type and quasi-compactness of f′ followed by aY′. Apply the same private geometric lemma implementing Steps 1--3 to this composite and aY′. The coefficient conclusions of Steps 4--5 are unchanged. The smooth specialization needs no additional construction.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU (lemma-separated-permanence), (3); morphisms.tex Tags 01T3 and 01T4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers",
+  "def-weil-proper-morphism",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "Finite-stage hypothesis verification, implemented using existing Noetherianity instances, NagataCompactification, Compactification.quasiCompact_openImmersion, exists_topologicalKrullDim_le, finite_coefficientExtensionRing, the recorded DVR properties, and the stalk unit criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism between finite type schemes over an algebraic closure of a finite field has a finite dimensional compactification, and a finite l-adic coefficient quotient is annihilated by an integer invertible on these schemes",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFiniteType, AlgebraicGeometry.IsProper",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsFiniteType'; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: invalid identifier; corrected Loogle query also run"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?smooth|compactification.*[dD]im|annihilat.*[uU]niformizer",
+   "results": "1 hits: Mathlib/Topology/Compactification/OnePoint/Sphere.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional compactification of a separated finite type morphism and an invertible annihilator of a finite l-adic coefficient ring",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification of a separated finite type morphism over a field has a noetherian finite dimensional proper part; the quotient of a finite extension valuation ring by a uniformizer power has prime power torsion",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, finite_of_algHom_finiteType_of_isJacobsonRing, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsProper",
+   "results": "7 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.eq_valuativeCriterion",
+   "date": "2026-10-22",
+   "verdict": "no match: properness implies local finite type, but these declarations give neither Nagata existence nor the coefficient annihilator and dimension bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over a field is Noetherian of finite dimension and a separated finite type morphism admits a compactification; finite l-adic coefficient quotients have an invertible prime-power annihilator",
+   "results": "8 hits: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsArtinianScheme.finite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.IsNoetherian.noetherianSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the combined compactification, finite-dimension and coefficient-annihilator assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|finite_quotient_maximalIdeal_pow|annihilat.*uniformizer",
+   "results": "0 hits:  (grep restricted to Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the combined compactification, finite-dimension and coefficient-annihilator assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated finite type morphism between finite type schemes over a field has finite dimensional Noetherian compactifications and finite l-adic coefficients admit an invertible annihilator",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.mk, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the combined compactification, finite-dimension and coefficient-annihilator assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsProper",
+   "results": "7 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.eq_valuativeCriterion",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the combined compactification, finite-dimension and coefficient-annihilator assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification over a noetherian base combined with a finite dimension bound over a field and prime power torsion of quotients of rings of integers in finite extensions of p-adic fields",
+   "results": "8 hits: IsDedekindDomain.FiniteAdeleRing, IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion, IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion, IsDedekindDomain.HeightOneSpectrum.adicCompletion, IsDedekindDomain.instTopologicalSpaceFiniteAdeleRing, IsDedekindDomain.FiniteAdeleRing.instIsTopologicalRing, IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the combined compactification, finite-dimension and coefficient-annihilator assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-cohomological-smoothness",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "First paragraph, sentence “Work at a finite coefficient stage” and application of thm-asd-smooth-tensor and thm-sf-ambient-adjoint-class; inherited proof Step 1, geometric and coefficient hypothesis verification",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-setting-comparison-hypotheses",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused existing Noetherianity, quasi-separatedness, Nagata, finite-type permanence, dimension, valuation and finite-quotient nodes. Wrote the ell^n annihilation and characteristic-p invertibility arguments explicitly and checked arbitrary finite-type base changes without absolute separatedness. No new nodes.",
+  "blueprint": "First paragraph of main-20261015 thm-pur-cohomological-smoothness.proof.md: Work at a finite coefficient stage, and geometric/coefficient hypotheses for thm-asd-smooth-tensor and thm-sf-ambient-adjoint-class.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Nagata existence for separated finite-type morphisms to qcqs targets supplies the compactification; the unit does not prove this general geometric tool."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Restriction of the coefficient absolute value identifies the norm of ell; this is a valuation tool, not a replacement of the smooth-purity route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The DVR, maximal-ideal and finite-residue-field assertions are the coefficient input; the unit contains no alternative coefficient-field construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-8dc394e17",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-8dc394e17 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. The statement is unchanged from base and there are no new nodes. I checked the item against the actual hypotheses of both targets. thm-asd-smooth-tensor needs a finite commutative A, an integer N with NA=0, a Noetherian base on which N is invertible, and a compactifiable f in the sense of def-asd-compactifiable (open immersion plus proper); the item supplies all of these. thm-sf-ambient-adjoint-class needs a compactification as in def-weil-compactifications-refinements with an integer bound on dim of the compactification; the item supplies this for every compactification. The coefficient ring is A_{E,n} of def-pur-conventions throughout. Neither target nor the parent is reachable from the item's dependencies, so there is no cycle. Step 1: Spec k is Noetherian; 01T6 and 01OY give Noetherian and quasi-separated without any separatedness. Step 2: Nagata (0F41, base only qcqs) gives the compactification; proper implies finite type, composition makes the compactification finite type over k and Noetherian, and permanence (03GI) makes j quasi-compact. Step 4: |l|=1/l<1 puts l in m_E=(uniformizer); then l=uniformizer*b gives l^n=0 in A, and the finite-quotients lemma gives finiteness. I tested this on E=Q_l, a totally ramified E and an unramified E. Step 5 is elementary since l differs from p. Step 6 uses base-change permanence (01KU, 01T3, 01T4) and repeats Steps 1-3. One repair, in Step 3: lem-kun-dimension-finite-type bounds kundim, which is defined in def-kun-dimension, but the step identified it with def-kun-topological-krull-dimension without citing def-kun-dimension. I rewrote Step 3 to cite def-kun-dimension and state the identification (the same supremum over chains), and added def-kun-dimension to the step's uses and to proof_deps. The fix is the whole node file at fixes/dag/nodes/sec-smooth-purity/. I accept the declared tool uses (Nagata, the absolute-value lemma and the DVR lemma). There are no SGA citations and no repair note for this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityFiniteSettingComparisonHypotheses",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_setting_comparison_hypotheses",
+  "file": "lean/Sheaf/Paper/PurityFiniteSettingComparisonHypotheses.lean",
+  "statement": "theorem finite_setting_comparison_hypotheses (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (aX : X ⟶ Spec (CommRingCat.of P.field.k)) (aY : Y ⟶ Spec (CommRingCat.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (_hf : f ≫ aY = aX) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : IsNoetherian X ∧ CompactSpace X ∧ QuasiSeparatedSpace X ∧ IsNoetherian Y ∧ CompactSpace Y ∧ QuasiSeparatedSpace Y ∧ (∃ c : Compactification f, QuasiCompact c.i) ∧ (∀ c : Compactification f, QuasiCompact c.i ∧ LocallyOfFiniteType (c.g ≫ aY) ∧ QuasiCompact (c.g ≫ aY) ∧ IsNoetherian c.Z ∧ ∃ D : ℕ, topologicalKrullDim c.Z ≤ (D : WithBot ℕ∞)) ∧ Finite P.Ring ∧ 1 ≤ P.coefficients.l ^ P.level ∧ (∀ a : P.Ring, (P.coefficients.l ^ P.level) • a = 0) ∧ (∀ (T : Scheme.{u}) (_aT : T ⟶ Spec (CommRingCat.of P.field.k)), IsUnit ((P.coefficients.l ^ P.level : ℕ) : Γ(T, ⊤))) ∧ (∀ (X' Y' : Scheme.{u}) (aY' : Y' ⟶ Spec (CommRingCat.of P.field.k)) [LocallyOfFiniteType aY'] [QuasiCompact aY'] (g : Y' ⟶ Y) (_hg : g ≫ aY = aY') (g' : X' ⟶ X) (f' : X' ⟶ Y') (_sq : ChosenCartesianSquare g' f' f g), IsSeparated f' ∧ LocallyOfFiniteType f' ∧ QuasiCompact f' ∧ LocallyOfFiniteType (f' ≫ aY') ∧ QuasiCompact (f' ≫ aY') ∧ IsNoetherian X' ∧ CompactSpace X' ∧ QuasiSeparatedSpace X' ∧ IsNoetherian Y' ∧ CompactSpace Y' ∧ QuasiSeparatedSpace Y' ∧ (∃ c : Compactification f', QuasiCompact c.i) ∧ (∀ c : Compactification f', QuasiCompact c.i ∧ LocallyOfFiniteType (c.g ≫ aY') ∧ QuasiCompact (c.g ≫ aY') ∧ IsNoetherian c.Z ∧ ∃ D : ℕ, topologicalKrullDim c.Z ≤ (D : WithBot ℕ∞)))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c09868f21",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Clause-by-clause match. PurityFiniteSetting gives k = algebraic closure of F_q, l≠p, finite E, n≥1, A = O_E/ϖ^n, no e∣n hypothesis. Hypotheses: aX/aY finite type over k, f separated finite type k-morphism, no separatedness over k. Conclusions: Noetherian/qc/qs for X and Y; a Compactification exists with QuasiCompact i; for every compactification, finite type over k via c.g≫aY, Noetherian, ∃ D:ℕ with topologicalKrullDim ≤ D (empty ⇒ ⊥); Finite A, ℓ^n•a=0, IsUnit ℓ^n in Γ(T,⊤) for every k-scheme T; the geometric conclusions repeated for every ChosenCartesianSquare base change over a finite-type Y'. The smooth 'in particular' clause is a correct specialization covering the thm-asd-smooth-tensor and ambient-adjoint hypotheses. All clauses true (01T6/01OY/0F41/03GI/01KU, exists_topologicalKrullDim_le). Statement verbatim; node differs from live only in lean; 7 stmt_deps read; citers use the item only in proofs; sorry only; docstrings OK. Advisory: Compactification is owned by def-nagata-compactification (not a stmt_dep, but the base of the cited Refinement); unused proof-plan imports. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261023T103415-L-3133770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

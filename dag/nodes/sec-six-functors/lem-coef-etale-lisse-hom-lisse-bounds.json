@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-etale-lisse-hom-lisse-bounds",
+ "kind": "statement",
+ "title": "Finite-free lisse sheaves are site-perfect, flat and constructible",
+ "statement": "Fix l, E, n and A as in [def-weil-l-adic-coefficient-extension], a scheme S and a sheaf L of A-modules on S_et that is etale locally isomorphic to a constant sheaf A^t (t≥0 depending on the member of the covering) [def-sf-finite-free-hom-evaluation-coordinates]. Then the degree-zero complex L[0] in the unbounded derived category [def-weil-pbc-derived-categories] is site-perfect [def-sf-etale-site-perfect-complex], has Tor amplitude in [0,0] [def-kun-tor-amplitude], and is bounded constructible [def-weil-pbc-constructible-complexes].",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-derived-categories",
+  "def-sf-finite-free-hom-evaluation-coordinates",
+  "def-sf-etale-site-perfect-complex",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "On each member of the covering the restriction of L[0] is isomorphic to the single complex of the constant sheaf A^t, a bounded complex whose terms are retracts of finite free constant sheaves; this is the site-perfectness witness of [def-sf-etale-site-perfect-complex].",
+   "uses": [
+    "def-sf-etale-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "Every geometric point lifts to a member of the covering; there the stalk of L is A^t, which is flat. Hence L is flat, and a flat sheaf placed in degree zero has Tor amplitude [0,0] [def-kun-tor-amplitude].",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "L is locally constant with finite stalks, hence constructible [def-weil-pbc-etale-constructible-sheaf]; a single constructible sheaf is bounded constructible.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-site-perfect-complex",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etaleLisseHomLisseBounds",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category coefficient Hom",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseHomLisseBounds",
+   "results": "Only this local declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Lisse Hom reduction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "declaration": "WeilConjectures.etaleLisseHomLisseBounds",
+  "statement": "theorem etaleLisseHomLisseBounds (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (S : Scheme.{u}) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) (htriv : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : U.I₀, ∃ t : ℕ, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (U.f i)).obj L ≅ (lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (U.X i)).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Fin t → ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))) : Etale.DerivedCategory.IsSitePerfect ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S 0 0 ((_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S ((_root_.DerivedCategory.singleFunctor _ 0).obj L)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-relative-split-torus-laurent-model",
+ "kind": "definition",
+ "title": "Integral Laurent split-torus model, projection and coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $n\\in\\mathbf N$ and let $B$ be any scheme [def-pc-scheme]. Define the integral Laurent algebra $L_n=\\mathbf Z[\\mathbf Z^n]$, whose elements are finite sums $\\sum_v a_v e^v$ for $v\\in\\mathbf Z^n$, with $e^v e^w=e^{v+w}$. Use the canonical universe lift of $\\mathbf Z$ when needed. Give $L_n$ the Hopf structure $\\Delta(e^v)=e^v\\otimes e^v$, $\\epsilon(e^v)=1$ and $\\iota(e^v)=e^{-v}$. Define the integral split model $G_{n,\\mathbf Z}$ to be its affine spectrum [def-weil-affine-spectrum], as a commutative group scheme over $\\operatorname{Spec}\\mathbf Z$ via this Hopf structure. Define $G_{n,B}$ to be its group-scheme base change [def-pc-base-change] along the unique $B\\to\\operatorname{Spec}\\mathbf Z$. Write $p_{n,B}:G_{n,B}\\to\\operatorname{Spec}L_n$ for the projection to the integral model. For $i\\in\\{0,\\ldots,n-1\\}$, define its Laurent coordinate $x_i\\in\\Gamma(G_{n,B},\\mathcal O)$ as the pullback along $p_{n,B}$ of the global section corresponding to $e^{\\delta_i}\\in L_n$, where $\\delta_i$ is the $i$th standard basis vector. These constructions include $n=0$ with its empty coordinate family and impose no affineness, reducedness, connectedness or nonemptiness assumption on $B$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022U, example-multiplicative-group: integral Laurent Hopf model and arbitrary base change; finite products. See also Milne, Algebraic Groups (2017), Examples 12.1--12.2 and Remark 12.6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The split torus of rank n over a scheme is obtained by base change from the spectrum of the integral Laurent group algebra with its Hopf structure",
+   "results": "{\"t\": \"2026-10-24T11:28:42Z\", \"tool\": \"leansearch\", \"query\": \"The split torus of rank n over a scheme is obtained by base change from the spectrum of the integral Laurent group algebra with its Hopf structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.antipode_T\", \"MonoidAlgebra.instHopfAlgebraStruct\", \"LaurentPolynomial.instBialgebra\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.instCoalgebra\", \"LaurentPolynomial.comul_C_mul_T\", \"MonoidAlgebra.instHopfAlgebra\"], \"digest\": \"b1ceb6a8beab3685\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing Mathlib Hopf algebra ingredients; the exact integral Laurent model, projection and coordinates are already defined in Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf and are reused unchanged."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T11:28:43Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.instHopfAlgebra\", \"AddMonoidAlgebra.instHopfAlgebraStruct\", \"AddMonoidAlgebra.antipode_single\"], \"digest\": \"f7720370b782e99f\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing Mathlib Hopf algebra ingredients; the exact integral Laurent model, projection and coordinates are already defined in Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf and are reused unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "LaurentAlgebra|integerModel|integralProjection (Mathlib/AlgebraicGeometry)",
+   "results": "{\"t\": \"2026-10-24T11:28:43Z\", \"tool\": \"grep\", \"query\": \"LaurentAlgebra|integerModel|integralProjection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing Mathlib Hopf algebra ingredients; the exact integral Laurent model, projection and coordinates are already defined in Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf and are reused unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n LaurentAlgebra|integerModel|integralProjection lean/WeilConjectures lean/Sheaf; rg -l RelativeSplitTorus\\.(LaurentAlgebra|integerModel|model|integralProjection|coordinate) dag/nodes; blueprint_refs.py search Laurent",
+   "results": "No relative split-torus integral-model declaration in WeilConjectures. Sheaf/AlgebraicGeometry/RelativeSplitTorusMatrixSheaf.lean defines LaurentAlgebra at 46, integerModel at 51, model at 57, integralProjection at 62, coordinate at 69. Only the matrix-sheaf theorem node records that module. Blueprint search: def-sc-gm-ga and prop-duality-reciprocity, neither the relative integral coordinate interface. Existing def-sfb-relative-split-torus records AlgebraicGeometry.relativeSplitTorus, a base change from the global-sections algebra, not this integral model/projection/coordinate interface.",
+   "date": "2026-10-24",
+   "verdict": "Add a definition-node owner for the unchanged existing five declarations, as explicitly requested in return H2; do not copy or redefine them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-character-reconstruction",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral Laurent split model and its coordinates used to normalize relative characters, evaluation and base change.",
+   "via": [
+    "lem-sfb-relative-torus-character-reconstruction",
+    "lem-sfb-generic-toric-abstract-good-reduction",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf",
+  "declaration": "AlgebraicGeometry.RelativeSplitTorus.model",
+  "declarations": [
+   "AlgebraicGeometry.RelativeSplitTorus.LaurentAlgebra",
+   "AlgebraicGeometry.RelativeSplitTorus.integerModel",
+   "AlgebraicGeometry.RelativeSplitTorus.model",
+   "AlgebraicGeometry.RelativeSplitTorus.integralProjection",
+   "AlgebraicGeometry.RelativeSplitTorus.coordinate"
+  ],
+  "statement": "def model (B : Scheme.{u}) (n : ℕ) : CommGrp (Over B)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Return H2 repair: records the five existing plain definitions in their unchanged owning module. None is selected from matrix_sheaf_classification; the theorem remains only a proof dependency of reconstruction. No Lean declaration is moved, copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4bda66e6",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4bda66e6",
+  "group": "NY",
+  "result": "pass",
+  "note": "The H2 return f0a2f5276586 is repaired. The new def node def-sfb-relative-split-torus-laurent-model is existing:true on the unchanged module Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf (LaurentAlgebra, integerModel, model, integralProjection, coordinate); its lean.statement is verbatim live line 57 and its text matches each def. It replaces the theorem lem-sfb-relative-split-torus-matrix-sheaf in the stmt_deps of the item and of def-sfb-relative-character-duality-data (TeX too); the theorem stays in proof_deps. The advisory direct def-sfb-relative-torus edge was dropped. The item statement is verbatim unchanged vs live; stmt_deps add only the two new def nodes. Both Lean files are byte-identical to the returned delivery (sha256 49eb4d87…, 9e15df09…). Independent re-read of DualityData against every clause: lattice, torus, characters, equivalence, representability with the non-invertible units comparison, both evaluation maps, base-change naturality and coherence, local_split for every f, smooth/affine/faithfully flat/finite presentation, geometric fibres. Edge cases rank 0, empty base, varying ranks, any characteristic; universe u only; no hollow defs; sorry only; docstrings and blueprint tags present. No competing owner of the module. No compile: no file changed."
+ }
+}

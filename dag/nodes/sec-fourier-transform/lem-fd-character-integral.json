@@ -1,0 +1,104 @@
+{
+ "id": "lem-fd-character-integral",
+ "kind": "statement",
+ "title": "The integral of a linear character",
+ "statement": "Let $\\psi:k_0\\to\\Lambda^\\times$ be a nontrivial additive character, with\n$\\Lambda=E\\supset\\mu_p$ or $\\Lambda=\\overline{\\mathbf Q}_\\ell$, let $\\Omega$ be\nan algebraically closed field containing $k_0$, and let\n$\\lambda:\\mathbf A^r_\\Omega\\to\\mathbf A^1_\\Omega$ be a linear form. Write\n$\\lambda^*\\mathcal L_\\psi$ for the pullback of the Artin–Schreier sheaf of\n[def-fd-artin-schreier-sheaf] along $\\mathbf A^r_\\Omega\\xrightarrow{\\lambda}\n\\mathbf A^1_\\Omega\\to\\mathbf A^1_{k_0}$. Then\n\n$$\n R\\Gamma_c(\\mathbf A^r_\\Omega,\\lambda^*\\mathcal L_\\psi)\n \\simeq\n \\begin{cases}\n \\Lambda(-r)[-2r],&\\lambda=0,\\\\\n 0,&\\lambda\\ne0,\n \\end{cases}\n$$\n\nwhere for $\\lambda=0$ (so $\\lambda^*\\mathcal L_\\psi=\\Lambda$, trivialized by\n[lem-wft-as-unit-trivialization]) the isomorphism is the vector-bundle trace\n$\\operatorname{tr}:R\\Gamma_c(\\mathbf A^r_\\Omega,\\Lambda)(r)[2r]\\to\\Lambda$ of\n[thm-pur-vector-bundle-thom] for the trivial bundle over $\\operatorname{Spec}\\Omega$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-fourier-transform/sk-lem-wft-character-integral/lem-fd-character-integral.md",
+  "place": "node lem-fd-character-integral, order 3943"
+ },
+ "stmt_deps": [
+  "def-fd-artin-schreier-sheaf",
+  "lem-wft-as-unit-trivialization",
+  "thm-pur-vector-bundle-thom"
+ ],
+ "proof": [
+  {
+   "text": "*The constant sheaf on the line.* The vector-bundle trace of\n[thm-pur-vector-bundle-thom] for the trivial line bundle\n$p:\\mathbf A^1_\\Omega\\to\\operatorname{Spec}\\Omega$ is an isomorphism\n$R\\Gamma_c(\\mathbf A^1_\\Omega,\\Lambda)\\simeq\\Lambda(-1)[-2]$. A translation\n$\\tau$ of $\\mathbf A^1_\\Omega$ is an automorphism over $\\operatorname{Spec}\\Omega$,\nso it preserves the trace: the trace of the line is the smooth trace of $p$\n([sk-def-sp-trace]), and by transitivity\n([sk-prop-sp-trace-composition]) for $p=p\\circ\\tau$, with $\\tau$ étale of\nrelative dimension $0$ and trace the identity, one has\n$\\operatorname{Tr}_p\\circ Rp_!(\\tau^*)=\\operatorname{Tr}_p$; since the\ncohomology is concentrated in the single degree $2$, $\\tau$ acts on it as\nthe identity.",
+   "uses": [
+    "thm-pur-vector-bundle-thom",
+    "sk-def-sp-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*A nontrivial character on the line.* Fix a nontrivial\n$\\Psi:\\mathbf F_p\\to\\Lambda^\\times$ and let\n$\\pi:\\mathbf A^1_u\\to\\mathbf A^1_x$, $u\\mapsto u^p-u$, be the covering of\n[lem-fd-as-cover-affine-line] (over $\\Omega$). It is finite étale, so\n$R\\pi_!=\\pi_*$ is exact ([lem-fd-finite-pushforward-cohomology] (2)), and\n$R\\Gamma_c(\\mathbf A^1_x,\\pi_*\\Lambda)\\cong R\\Gamma_c(\\mathbf A^1_u,\\Lambda)\n\\cong\\Lambda(-1)[-2]$, equivariantly for the deck translations\n$\\sigma_b$, $b\\in\\mathbf F_p$. The decomposition\n$\\pi_*\\Lambda=\\bigoplus_\\chi\\mathcal L_\\chi$ of [lem-fd-as-characters] is the\ndecomposition by the idempotents $e_\\chi$ of the deck action, so\n$R\\Gamma_c(\\mathbf A^1_x,\\mathcal L_\\chi)=e_\\chi R\\Gamma_c(\\mathbf A^1_u,\\Lambda)$.\nThe deck translations act trivially by the previous step, and on a trivial\nrepresentation $e_\\chi$ acts by $\\frac1p\\sum_b\\chi(-b)=0$ for $\\chi\\neq1$\n(orthogonality). Hence $R\\Gamma_c(\\mathbf A^1_\\Omega,\\mathcal L_\\Psi)=0$ for\nthe summand $\\mathcal L_\\Psi=e_\\Psi\\pi_*\\Lambda$.",
+   "uses": [
+    "lem-fd-as-cover-affine-line",
+    "lem-fd-finite-pushforward-cohomology",
+    "lem-fd-as-characters"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*All nonzero linear forms on the line.* Let $\\lambda(x)=cx$ with\n$c\\in\\Omega^\\times$. Write $\\psi(z)=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}(az))$\nwith $a\\in k_0^\\times$ ([lem-wft-as-comparison] (1)). By\n[lem-wft-as-comparison] (2) for the function $x$, $\\mathcal L_\\psi$ is the\n$\\Psi$-summand of the $\\mathbf F_p$-covering of $ax$, so\n$\\lambda^*\\mathcal L_\\psi$ is the $\\Psi$-summand of the covering of $acx$,\nwhich is $\\mu^*\\mathcal L_\\Psi$ for the automorphism $\\mu:x\\mapsto acx$ of\n$\\mathbf A^1_\\Omega$. Hence\n$R\\Gamma_c(\\mathbf A^1_\\Omega,\\lambda^*\\mathcal L_\\psi)\\cong\nR\\Gamma_c(\\mathbf A^1_\\Omega,\\mathcal L_\\Psi)=0$.",
+   "uses": [
+    "lem-wft-as-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Higher dimension.* For $\\lambda\\neq0$ choose linear coordinates\n$(t,s)\\in\\mathbf A^1\\times\\mathbf A^{r-1}$ with $\\lambda=t$; then\n$\\lambda^*\\mathcal L_\\psi=\\mathcal L_{\\psi,t}\\boxtimes\\Lambda$, and the\nKünneth isomorphism of [lem-wft-kunneth-compatibilities] (1) over\n$S=\\operatorname{Spec}\\Omega$ gives\n$R\\Gamma_c(\\mathbf A^r,\\lambda^*\\mathcal L_\\psi)\\cong\nR\\Gamma_c(\\mathbf A^1,\\mathcal L_{\\psi,t})\\otimes R\\Gamma_c(\\mathbf A^{r-1},\\Lambda)=0$.\nFor $\\lambda=0$ the sheaf is $\\Lambda$ (via [lem-wft-as-unit-trivialization]),\nand $r$ applications of the Künneth isomorphism give\n$\\Lambda(-1)[-2]^{\\otimes r}=\\Lambda(-r)[-2r]$; by\n[lem-wft-kunneth-compatibilities] (3) (or the compatibility of the\nvector-bundle trace with direct sums in [thm-pur-vector-bundle-thom]) the\nproduct of the $r$ traces of the line is the trace of $\\mathbf A^r_\\Omega$.",
+   "uses": [
+    "lem-wft-kunneth-compatibilities",
+    "lem-wft-as-unit-trivialization",
+    "thm-pur-vector-bundle-thom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Coefficients.* The computation is made with $\\Lambda=E$; extension of\nscalars to $\\overline{\\mathbf Q}_\\ell$ commutes with $R\\Gamma_c$ and with the\ntraces ([sk-prop-sfb-finite-extension-compatibility]), which gives the case\n$\\Lambda=\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "thm-pur-vector-bundle-thom",
+  "sk-def-sp-trace",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-finite-pushforward-cohomology",
+  "lem-fd-as-characters",
+  "lem-wft-as-comparison",
+  "lem-wft-kunneth-compatibilities",
+  "lem-wft-as-unit-trivialization",
+  "lem-fd-character-orthogonality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-fourier-transform/sk-lem-wft-character-integral/lem-fd-character-integral.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3943,
+ "blueprint_uses": [
+  "def-fd-artin-schreier-sheaf",
+  "lem-wft-as-comparison",
+  "lem-fd-as-cover-affine-line",
+  "lem-fd-as-characters",
+  "lem-fd-finite-pushforward-cohomology",
+  "thm-pur-vector-bundle-thom",
+  "lem-wft-kunneth-compatibilities",
+  "sk-prop-sfb-finite-extension-compatibility",
+  "lem-wft-as-unit-trivialization",
+  "lem-fd-character-orthogonality",
+  "sk-def-sp-trace",
+  "sk-prop-sp-trace-composition"
+ ],
+ "uses_not_cited": [
+  "lem-fd-character-orthogonality"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "lem-fd-character-integral",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-lem-wft-character-integral"
+}

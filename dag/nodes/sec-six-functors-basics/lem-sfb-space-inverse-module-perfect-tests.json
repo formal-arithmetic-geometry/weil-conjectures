@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-space-inverse-module-perfect-tests",
+ "kind": "statement",
+ "title": "Perfect tensor tests of an infinitesimal proper-support inverse system",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Regard $M_n$ as a module on $X$ by direct image along $X_n\\hookrightarrow X$; the given transition isomorphisms followed by quotient maps define its inverse-system maps. The symbol $R\\varprojlim_{D_{\\mathrm{QCoh}}}M_n$ denotes the homotopy inverse limit in this full derived subcategory: it fits into the product triangle $K\\to\\prod_{n\\geq1}M_n\\xrightarrow{1-\\mathrm{shift}}\\prod_{n\\geq1}M_n\\to K[1]$, with products taken in $D_{\\mathrm{QCoh}}$ and projections $q_n:K\\to M_n$ induced by the first arrow. Here the shift has $n$th component equal to the transition map composed with the $(n+1)$st projection. Let $K$ be this homotopy inverse limit [lem-sfb-space-inverse-module-derived-limit]. For every perfect $E\\in D(\\mathcal O_X)$, meaning etale locally a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package], the object $R\\Gamma(X,K\\otimes^{\\mathbf L}_{\\mathcal O_X}E)$ is perfect in $D(A)$ [def-pc-perfect-ring-complex]: it is isomorphic to a bounded complex of finitely generated projective $A$-modules. Derived tensor is computed with K-flat resolutions [def-pc-kflat-complex], and $R\\Gamma$ is the right derived global sections functor [def-pur-ringed-site-zeroth-hypercohomology].",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect, clause (1), perfectness assertion; Situation 0CX4, situation-existence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-perfect-ring-complex",
+  "def-pc-kflat-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-perfect-tensor-test",
+  "def-sfb-space-derived-module-calculus",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Put $i_n:X_n\\hookrightarrow X$, $f_n:X_n\\to\\operatorname{Spec}A_n$, $E_n=Li_n^*E$, and $C_n=R\\Gamma(X_n,M_n\\otimes^{\\mathbf L}E_n)$. Derived pullback preserves perfectness: on each strict-perfect chart its terms and retraction maps pull back as in [lem-weil-pbc-strict-perfect-ringed-pullback-model]. The morphisms $f_n$ are finitely presented: base-changing a finite presentation on scheme charts gives a finite presentation with the same generators and relations. Their relative diagonals are base changes of the closed diagonal of $X/A$, so they remain separated. Apply [lem-sfb-space-module-proper-carrier-support] to replace the given proper carrier by proper scheme-theoretic support. The module $M_n$ in degree zero now satisfies every coefficient hypothesis of [lem-sfb-proper-support-tensor-perfect]. Thus $Rf_{n,*}(M_n\\otimes^{\\mathbf L}E_n)$ is perfect and quasi-coherent. The small-etale/Zariski equivalence [lem-sfb-scheme-derived-etale-qcoh-comparison] and perfectness detection [lem-sfb-etale-detects-perfect] give a Zariski-perfect complex on $\\operatorname{Spec}A_n$. By [lem-pc-perfect-affine-bounded-projective] and [lem-pc-affine-qcoh-derived-equivalence], its derived sections $C_n$ are represented by a bounded finite-projective $A_n$-complex. Derived sections of $Rf_{n,*}$ equal derived sections on $X_n$ by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition].",
+   "uses": [
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, finite-level perfectness; spaces-perfect.tex Tag 0A1P, lemma-base-change-tensor-perfect."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, apply [lem-sfb-space-flat-complex-base-change] to $f_n$, $E_n$ and the degree-zero complex $M_n$, with base change $\\operatorname{Spec}A_{n-1}\\to\\operatorname{Spec}A_n$. The qcqs hypotheses hold since $f_n$ is separated and finitely presented; the coefficient is base-flat by assumption. Since $X_n$ is quasi-compact by [lem-sfb-space-fp-qcqs-source], the perfect $E_n$ has quasi-coherent cohomology by [lem-sfb-space-perfect-uniform-tor], so $E_n\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X_n})$ as that statement requires. Its ordinary pullback is $M_{n-1}$ by the specified transition isomorphism. Pullback composition identifies the perfect factor with $E_{n-1}$. Hence the base-change morphism identifies the derived pullback of $Rf_{n,*}(E_n\\otimes^{\\mathbf L}M_n)$ with $Rf_{n-1,*}(E_{n-1}\\otimes^{\\mathbf L}M_{n-1})$. Under [lem-sfb-scheme-derived-etale-qcoh-comparison], the affine tensor formula [lem-pc-affine-derived-pullback-tensor-tilde] and the quasi-inverse [lem-pc-affine-qcoh-derived-equivalence] identify this with $C_n\\otimes^{\\mathbf L}_{A_n}A_{n-1}\\xrightarrow{\\sim}C_{n-1}$. These are the scalar-extension adjuncts of the maps induced by the actual transition $M_n\\to M_{n-1}$: the exchange map in the cited base-change statement is defined by that pullback counit, followed by the specified coefficient quotient. No flatness of $X_n/A_n$ or of $A_{n-1}$ over $A_n$ is used. The composition comparisons used here respect units and counits by [lem-sfb-space-derived-etale-chart-calculus].",
+   "uses": [
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-perfect-uniform-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, compatibility under base change; spaces-perfect.tex Tag 0A1P and its base-change input."
+   }
+  },
+  {
+   "text": "Let $F_n=i_{n,*}M_n$ in degree zero. A closed immersion is affine, so [lem-sfb-space-affine-module-higher-image-vanishing] gives $Ri_{n,*}M_n\\simeq F_n$. The space $X$ is quasi-compact by [lem-sfb-space-fp-qcqs-source], so $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ by [lem-sfb-space-perfect-uniform-tor]; $i_n$ is affine, hence quasi-compact and separated. By [lem-sfb-space-qcqs-derived-projection-formula], $F_n\\otimes^{\\mathbf L}E\\simeq Ri_{n,*}(M_n\\otimes^{\\mathbf L}E_n)$. Apply derived sections and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to obtain $T_E(F_n)\\simeq C_n$ as objects of $D(A)$, with $C_n$ restricted from $A_n$. These identifications commute with the transition maps: $i_{n-1}=i_n\\circ(X_{n-1}\\hookrightarrow X_n)$, and both sides apply derived sections to the coefficient quotient $M_n\\to M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ and the identity on $E$; the projection morphism is explicitly the counit-mate in the cited statement. Thus this is an isomorphism of towers, not just separate isomorphisms of objects. The composition comparisons used here respect units and counits by [lem-sfb-space-derived-etale-chart-calculus].",
+   "uses": [
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-perfect-uniform-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, identification of X and X_n tests; spaces-perfect.tex Tag 08IN, lemma-cohomology-base-change."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-fp-qcqs-source], $X$ is qcqs, since its base is affine. The given $K$ is the homotopy inverse limit of the tower $F_n$ in $D_{\\mathrm{QCoh}}$ by [lem-sfb-space-inverse-module-derived-limit]. Apply [lem-sfb-space-perfect-tensor-test-holim] to this tower and $E$. It gives $R\\Gamma(X,K\\otimes^{\\mathbf L}E)\\simeq R\\varprojlim_n T_E(F_n)$. The tower identifications of Step 3 identify the latter with $R\\varprojlim_n C_n$ in $D(A)$. In particular, this argument never replaces a product in $D_{\\mathrm{QCoh}}$ by an ambient product.",
+   "uses": [
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-perfect-tensor-test-holim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, preservation of derived limits by the perfect test functor."
+   }
+  },
+  {
+   "text": "Every $C_n$ is perfect by Step 1 and the reduction adjuncts are isomorphisms by Step 2. The ring maps are surjective with locally nilpotent kernels exactly as required by [lem-sfb-perfect-inverse-ring-reconstruction]. Therefore $R\\varprojlim_nC_n$ is perfect over $A$. Transport its bounded finite-projective representative through the derived isomorphism of Step 4. This proves that $R\\Gamma(X,K\\otimes^{\\mathbf L}E)$ is perfect for the arbitrary perfect $E$ originally chosen.",
+   "uses": [
+    "lem-sfb-perfect-inverse-ring-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, application of more-algebra.tex Tag 0CQG, lemma-Rlim-perfect-gives-perfect."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-proper-support-tensor-perfect",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-etale-detects-perfect",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-space-flat-complex-base-change",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "lem-sfb-space-perfect-tensor-test-holim",
+  "lem-sfb-perfect-inverse-ring-reconstruction",
+  "lem-sfb-space-perfect-uniform-tor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect, proof translated from global Hom to tensor by Tag 08JJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an infinitesimal inverse system of flat finitely presented modules with proper support, derived global sections of the derived inverse limit tensored with any perfect complex are perfect",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, Condensed.instAB4StarCondensedMod, localCohomology.diagram, localCohomology.ofDiagram, LightCondensed.free_internallyProjective_iff_tensor_condition, localCohomology, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-limit and ordinary sheaf-limit declarations, condensed free modules and CochainComplex.plus closure do not assert perfectness of these derived tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect tensor tests of the homotopy inverse limit of compatible flat finitely presented sheaves with proper support are perfect complexes over the inverse limit ring",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-limit and ordinary sheaf-limit declarations, condensed free modules and CochainComplex.plus closure do not assert perfectness of these derived tensor tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of an infinitesimal compatible proper support flat family tensor a perfect complex are perfect over the inverse limit base ring",
+   "results": "8 hits: AlgebraicGeometry.preservesLimit_rightOp_Γ, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, SheafOfModules.hasLimit, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.Scheme.Modules.instHasLimits, AlgebraicGeometry.preservesColimit_Γ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-limit and ordinary sheaf-limit declarations, condensed free modules and CochainComplex.plus closure do not assert perfectness of these derived tensor tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"limit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-limit and ordinary sheaf-limit declarations, condensed free modules and CochainComplex.plus closure do not assert perfectness of these derived tensor tests."
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|rlim|inverseLimit|IsPerfect",
+   "results": "1 hits: Mathlib/Algebra/Homology/CochainComplexPlus.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-limit and ordinary sheaf-limit declarations, condensed free modules and CochainComplex.plus closure do not assert perfectness of these derived tensor tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"limit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf and scheme limits, condensed tensor statements and field perfection do not assert perfectness of these formal tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the infinitesimal inverse limit of flat finitely presented sheaves with proper support tensor a perfect complex are perfect",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf and scheme limits, condensed tensor statements and field perfection do not assert perfectness of these formal tensor tests."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|[Pp]erfect.*[Cc]omplex|[Dd]erived.*[Ll]imit",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf and scheme limits, condensed tensor statements and field perfection do not assert perfectness of these formal tensor tests."
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|rlim|inverseLimit|[Pp]erfect.*[Cc]omplex",
+   "results": "1 hits: Mathlib/Algebra/Homology/CochainComplexPlus.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf and scheme limits, condensed tensor statements and field perfection do not assert perfectness of these formal tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support flat coherent sheaves on infinitesimal thickenings give perfect global tensor tests on the formal derived inverse limit",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.tfae_equational_criterion, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf and scheme limits, condensed tensor statements and field perfection do not assert perfectness of these formal tensor tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-polynomial-model",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family effectivity prerequisite: spaces-flat.tex Tag 0CX7, proof invoking Tag 0CX6 (lemma-compute-against-perfect), tensor-test clause (1).",
+   "via": [
+    "lem-sfb-space-inverse-module-polynomial-model",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-perfect-tests",
+  "worker": "stage1",
+  "summary": "Read Stacks 0CX4--0CX6, 0A1P, 08JJ and 0CQG. Split finite-level perfectness and canonical base-change compatibility from reconstruction over locally nilpotent inverse ring towers and preservation of the D_QCoh homotopy limit by tensor tests. Reused all existing geometric, support and affine-comparison nodes; added only two generic statement-only prerequisites. The statement is unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited coherent-family effectivity prerequisite, spaces-flat.tex 0CX6: finite-level perfect objects, compatible base changes, inverse-ring reconstruction, exact product-preserving perfect tests. Existing blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor; its complete inherited via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "Generic Specified strict-perfect models under arbitrary ringed-topos derived pullback tool in the Stacks 0CX6 tensor-test argument; the current constructibility unit supplies no replacement for this structural input."
+   },
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Generic Perfect objects on an affine scheme are bounded finite projective complexes tool in the Stacks 0CX6 tensor-test argument; the current constructibility unit supplies no replacement for this structural input."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Derived quasi-coherent modules on an affine scheme tool in the Stacks 0CX6 tensor-test argument; the current constructibility unit supplies no replacement for this structural input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images tool in the Stacks 0CX6 tensor-test argument; the current constructibility unit supplies no replacement for this structural input."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic Affine computation of derived pullback and derived tensor product tool in the Stacks 0CX6 tensor-test argument; the current constructibility unit supplies no replacement for this structural input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-3796e9851",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-3796e9851 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 0CX4/0CX5/0CX6 and 0CQG. Statement: the item is the perfectness half of 0CX6(1), unchanged. Its hypotheses match 0CX4 (locally nilpotent kernels, X separated and finitely presented, F_n finitely presented, A_n-flat, with proper support). Steps: step 1 uses carrier→scheme-theoretic support (0CZI), then 0A1P, then 071Q/08HG/08EB/06Z0, giving perfect C_n. Step 2 is 0A1K base change, whose exchange map is the one of the actual transitions. Step 3 is 073H plus the 08IN projection formula, giving an isomorphism of towers. Step 4 applies the holim node to the D_QCoh tower defining K. Step 5 applies the 0CQG reconstruction with all stages perfect. The proof is complete. New nodes: lem-sfb-perfect-inverse-ring-reconstruction is exactly 0CQG alternative (2)(a) and is true. It is not a duplicate: lem-weil-pbc-rlim-perfect-complete is the adic/K_1 case (09AW), and lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction needs nilpotent kernels and only gives pseudo-coherence. lem-sfb-space-perfect-tensor-test-holim is true: T_E = RHom(E^∨,-) (08JJ) preserves D_QCoh products on qcqs X, and the exact functor carries the Roos triangle. It is not a clause of the item; the sibling perfect-test-reduction contains the item and is correctly not cited. FIX (C1): 0A1K in step 2 and 08IN in step 3 need E_n and E in D_QCoh, and nothing cited said that perfect objects have quasi-coherent cohomology. I added [lem-sfb-space-fp-qcqs-source] and [lem-sfb-space-perfect-uniform-tor] to both steps and the latter to proof_deps; there is no cycle. Batch 5: all flagged closures reach sec-trace-formula only through the general foundations def-trf-algebraic-space, def-trf-space-quasi-coherent-module and lem-trf-zariski-etale-functor-comparison-square (03FH/03LC), so they are outside the assumed trace-formula and Poincaré statements; accepted. Tool uses (strict-perfect pullback, 0D6E, 08EB, 06Z0, 08DW) are generic and accepted. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModulePerfectTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModule_perfectTensorTest",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModulePerfectTests.lean",
+  "statement": "theorem inverseModule_perfectTensorTest (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) [HasDerivedCategory.{w} X.SmallModules] (f : X ⟶ schemeSpace (inverseModuleSpec c.pt)) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) (hq : ∀ n : ℕ, X.derivedQCohProperty (inverseModuleDerivedTerm f (inverseModuleTest c n) (M n))) [HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))] (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ) (E : X.DerivedModules) (hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E) : DerivedCategory.IsPerfectRingComplex ((perfectTensorTest c.pt (inverseModuleSpec c.pt) (Iso.refl _) X f E).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses perfectTensorTest owned by def-sfb-space-perfect-tensor-test, reusing its existing declaration in SpacePerfectTensorTestHolim. Indices are shifted by one. The quasi-coherence and product certificates are supplied by inverseModuleDerivedLimit; K and its defining triangle are arbitrary specified choices. Definition owners for DerivedQCoh and IsDerivedLimitTriangle are also cited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4687dec4f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery of returned 401e1dff652b: Lean module byte-identical to the one already found mathematically correct; item diff vs live only adds stmt_deps def-sfb-space-perfect-tensor-test (new), def-sfb-space-derived-module-calculus, def-weil-derived-limit and the lean record; statement, proof and proof_deps unchanged. The previous H2/H12 finding (theorem node lem-sfb-space-perfect-tensor-test-holim in stmt_deps) is repaired. New node def-sfb-space-perfect-tensor-test attaches the existing perfectTensorTest (SpacePerfectTensorTestHolim.lean:37-44) as existing:true; the signature matches verbatim and the node statement (T_E(K)=RGamma_{X,A}(K tensor^L E) on D_QCoh) matches the body. Not hollow, not a duplicate, and all its stmt_deps landed by 2026-10-23. Re-checked IsDerivedLimitTriangle (Triangle.mk p (1-shift) delta distinguished) and IsPerfectRingComplex (bounded finite projective complex up to iso). hq/HasProduct are exactly the certificates proved by the cited derived-limit theorem, which the node text cites for K. Universes u, w free; edge cases (zero ring, empty X, E=0) covered. Docstrings, source places and the 5 proof steps are present, and the report has the Worker report and Second reading sections. Advisory: the existing decl's docstring still tags the holim node. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-proper-schematic-image",
+ "kind": "statement",
+ "title": "Proper schematic image of a proper algebraic-space family",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $T$ [def-trf-algebraic-space], and let $p:X\\to T$, $q:Y\\to T$, and $h:X\\to Y$ satisfy $qh=p$. Assume that $p$ is proper and $q$ is separated and locally of finite type, with these properties as in [def-sfb-space-morphism-properties]. There exist an algebraic space $Z$ over $T$, a closed immersion $i:Z\\hookrightarrow Y$, and a morphism $u:X\\to Z$ over $T$ with $h=iu$, such that $Z\\to T$ is proper and the point map $|u|:|X|\\to|Z|$ is surjective. Moreover $Z$ is the smallest closed subspace of $Y$ through which $h$ factors (its scheme-theoretic image): for every closed subspace $W\\hookrightarrow Y$ through which $h$ factors, the inclusion $Z\\hookrightarrow Y$ factors through $W$. Here closed immersion means representable with every scheme base change a closed immersion [def-weil-closed-immersion], and point spaces and their maps are those of [def-a1-space-point-topology]. No Noetherian, reducedness, flatness, or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0AGD, lemma-scheme-theoretic-image-is-proper; the smallest-closed-subspace characterization is Tag 082X, lemma-scheme-theoretic-image, used in that lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-proper-cancellation] to $h:X\\to Y$ and $q:Y\\to T$: their composite is the proper map $p$, and $q$ is separated. Thus $h$ is proper, in particular of finite type. We may use algebraic-stack statements for these spaces: regard their sheaves as discrete fibred groupoids as in [def-sfb-stack-qcqs-morphism]. Descent of objects is precisely sheaf descent, and scheme tests of the diagonal are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]; a representable surjective etale scheme atlas is a smooth atlas by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Thus these are algebraic (indeed Deligne--Mumford) stacks, and $h$ is representable by algebraic spaces. The stack and space finite-type notions agree by [lem-sfb-stack-finite-type-calculus], whose ordinary algebraic-space quasi-compactness tests every quasi-compact algebraic space; hence $X\\times_YC$ is quasi-compact for every quasi-compact algebraic space $C\\to Y$. For a scheme $T\\to Y$ and a quasi-compact space $C\\to T$ one has $X_T\\times_TC=X\\times_YC$, so every scheme base change $h_T$ is quasi-compact as a morphism of algebraic spaces in the sense of [def-sfb-stack-qcqs-morphism]. By (i)$\\Rightarrow$(ii) of [lem-sfb-representable-stack-quasicompact-tests], $h$ is quasi-compact as a stack morphism in the convention of [def-sfb-stack-qcqs-morphism]: $X\\times_Y\\mathcal V$ is quasi-compact for every quasi-compact algebraic stack $\\mathcal V\\to Y$. The point topologies agree by [lem-sfb-stack-point-topology].",
+   "uses": [
+    "lem-sfb-space-proper-cancellation",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "lem-sfb-stack-point-topology",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), giving the quasi-compactness of h used in the proof of Tag 0AGD; discrete-stack convention for applying the already existing schematic-image theorem"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-schematic-image-qc] to the quasi-compact morphism $h$ of step 1. It supplies a closed subspace $i:Z\\hookrightarrow Y$, given on etale scheme charts by the quasi-coherent ideal $\\mathcal I=\\ker(\\mathcal O_Y\\to h_*\\mathcal O_X)$, a factorization $h=iu$, minimal among all closed subspaces through which $h$ factors, and identifies $|Z|$ with the closure of $|h|(|X|)$. By [lem-sfb-space-ideal-closed-subspace-correspondence], closed subspaces given by quasi-coherent ideals are exactly the subfunctors whose inclusion is representable by closed immersions of schemes [def-weil-closed-immersion], by an inclusion-reversing bijection; so $i$ is a closed immersion in the sense of the statement, and the minimality just quoted is minimality among all such closed immersions $W\\hookrightarrow Y$ through which $h$ factors, with their full ideal structure. Put $r=q i:Z\\to T$; then $ru=p$, so the factorization is over $T$. This is a scheme-theoretic factorization, not a factorization inferred merely from point-set containment.",
+   "uses": [
+    "lem-sfb-stack-schematic-image-qc",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image) and 082Z (lemma-quasi-compact-scheme-theoretic-image), used in Tag 0AGD"
+   }
+  },
+  {
+   "text": "Step 1 makes $h$ universally closed by the definition in [def-sfb-space-morphism-properties], hence $|h|(|X|)$ is closed in $|Y|$. Its closure is therefore itself. The equality from step 2 gives $|i|(|Z|)=|h|(|X|)$. A closed immersion has injective point map by [lem-sfb-stack-closed-immersion-calculus], in the compatible topology of step 1. For $z\\in|Z|$, choose $x\\in|X|$ with $|h|(x)=|i|(z)$; then $|i|(|u|(x))=|i|(z)$ implies $|u|(x)=z$. Thus $|u|$ is surjective.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-stack-closed-immersion-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0AGD (lemma-scheme-theoretic-image-is-proper), closed plus dense implies surjective, with Tag 04NX (lemma-universally-closed-permanence) for closedness of the image"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is proper by [lem-sfb-space-closed-subspace-proper], hence separated and locally of finite type by [def-sfb-space-morphism-properties]. Its composite $r=q i$ is separated by [lem-sfb-space-separated-fp-composition], since $q$ is separated. Both $i$ and $q$ are locally of finite type, so $r$ is locally of finite type by the composition clause of [lem-sfb-stack-finite-type-calculus], whose statement identifies the stack and algebraic-space notions. No finite-presentation property of $i$ is used.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-stack-finite-type-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0AGD, hypotheses for Tag 08AJ (lemma-image-proper-is-proper); finite type requires quasi-compactness, established separately in step 6"
+   }
+  },
+  {
+   "text": "For every algebraic space $T^{\\prime}\\to T$, use the sheaf fibre products [lem-trf-space-fibre-products-etale-covers] to put $X^{\\prime}=X\\times_TT^{\\prime}$ and $Z^{\\prime}=Z\\times_TT^{\\prime}$. The map $u^{\\prime}:X^{\\prime}\\to Z^{\\prime}$ is the base change of $u$, and is point-surjective by the fibre-product point-image formula of [lem-a1-space-point-open-calculus]. The map $p^{\\prime}:X^{\\prime}\\to T^{\\prime}$ is proper by [lem-sfb-space-proper-base-change]. If $C\\subseteq|Z^{\\prime}|$ is closed, continuity of $|u^{\\prime}|$ makes $D=|u^{\\prime}|^{-1}(C)$ closed. Surjectivity gives $|r^{\\prime}|(C)=|p^{\\prime}|(D)$, which is closed because $p^{\\prime}$ is universally closed. Thus $r$ is universally closed by [def-sfb-space-morphism-properties].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-proper-base-change",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 08AJ (lemma-image-proper-is-proper), proof: surjectivity after base change and image of an inverse-image closed subset"
+   }
+  },
+  {
+   "text": "For every quasi-compact algebraic space $A\\to T$, the all-test quasi-compactness clause in [lem-sfb-stack-finite-type-calculus] gives quasi-compact $X_A$, since $p$ is of finite type. Choose a surjective etale atlas $W\\to X_A$ with $W$ a quasi-compact scheme, as in [def-sfb-stack-qcqs-morphism]. Its point map is surjective and continuous by [lem-a1-space-point-open-calculus]. Hence the composite $|W|\\to|Z_A|$ is surjective and continuous by step 5. An open cover of $|Z_A|$ pulls back to an open cover of $W$; a finite subcover exists by [def-weil-pbc-quasi-compact-scheme], and surjectivity makes the corresponding opens cover $|Z_A|$. Thus $|Z_A|$ is quasi-compact, and [lem-sfb-qc-space-affine-etale-atlas] supplies an affine etale atlas, so $Z_A$ is quasi-compact as an algebraic space. Since this holds for every $A$, $r$ is quasi-compact. Together with steps 4 and 5, [def-sfb-space-morphism-properties] makes $r$ proper. Steps 2 and 3 give minimality, factorization and surjectivity.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-a1-space-point-open-calculus",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 08AJ (lemma-image-proper-is-proper), finite-type qualification, and Tag 0AGD (lemma-scheme-theoretic-image-is-proper), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-cancellation",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-sfb-stack-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-schematic-image-qc",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-proper-base-change",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sfb-qc-space-affine-etale-atlas"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0AGD (lemma-scheme-theoretic-image-is-proper), using 082X/082Z, 04NX and the proof of 08AJ; existing stack schematic-image theorem specialized to spaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper algebraic space mapping over a scheme to a separated locally finite type algebraic space has proper scheme theoretic image and surjects onto that image",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"image\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticImage|scheme.theoretic.image|AlgebraicSpace",
+   "results": "[grep] OK 7 hit(s); Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:21, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:661, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:664, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:708, Mathlib/AlgebraicGeometry/AffineScheme.lean:1240, Mathlib/AlgebraicGeometry/AffineScheme.lean:1246, Mathlib/AlgebraicGeometry/AffineScheme.lean:1258",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The schematic image of a map from a proper algebraic space into a separated locally finite type space is proper and the map onto it is surjective",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic image of a universally closed morphism of algebraic spaces is closed and proper over the base",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.UniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schemeTheoreticImage|scheme.theoretic.image",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometric declarations concern schemes, not arbitrary algebraic spaces; inspected Subscheme.lean:658-730 and Morphisms/Proper.lean:38-48"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic image of a morphism of algebraic spaces from a proper space to a separated locally finite type target is proper",
+   "results": "8 hits: AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometric declarations concern schemes, not arbitrary algebraic spaces; inspected Subscheme.lean:658-730 and Morphisms/Proper.lean:38-48"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.Hom.image",
+   "results": "1 hits: AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometric declarations concern schemes, not arbitrary algebraic spaces; inspected Subscheme.lean:658-730 and Morphisms/Proper.lean:38-48"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper algebraic space mapping over a scheme to a separated locally finite type algebraic space has a proper scheme theoretic image and surjects onto it",
+   "results": "8 hits: AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometric declarations concern schemes, not arbitrary algebraic spaces; inspected Subscheme.lean:658-730 and Morphisms/Proper.lean:38-48"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic image of a universally closed morphism of algebraic spaces is a closed subspace proper over the base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometric declarations concern schemes, not arbitrary algebraic spaces; inspected Subscheme.lean:658-730 and Morphisms/Proper.lean:38-48"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-finite-image-neighbourhood",
+  "date": "2026-10-23",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Pointed morphisms of relative abelian spaces are homomorphisms. Finite closed image over a neighbourhood, used to apply universal global functions without assuming a scheme target. Construction of the proper schematic image before the finite-fibre and open-neighbourhood arguments in Stacks 0AEJ.",
+   "via": [
+    "lem-sfb-proper-space-finite-image-neighbourhood",
+    "lem-sfb-relative-abelian-pointed-rigidity",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-schematic-image",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0AGD, 082X, 082Z, 04NX and 08AJ. Reused proper cancellation and the more general existing stack schematic-image theorem; wrote out the closed-plus-dense surjectivity argument and the closed-set calculation after every base change, and established quasi-compactness separately because the target is only locally of finite type. No new node and no statement change.",
+  "blueprint": "Supports the inherited prerequisite at blueprint.from.place for det-thm-sf-ctf-stability-direct-images (3). The latest blueprint proof (3) has a shorter direct-image route and no longer displays the old alteration/moduli chain; this helper retains its inherited role without changing either unit or chapter. Steps 1-3 construct the proper-family image, and steps 4-6 prove properness as needed before the finite-image neighbourhood argument.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of sheaf fibre products of algebraic spaces with their universal property, and algebraic-space scheme tests of the diagonal, used for the base changes of steps 1 and 5; generic foundation, no node of this unit provides it and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point-image formula for fibre products, surjectivity on points of representable surjective maps, and continuity of point maps of algebraic spaces, used for surjectivity of u after base change and for quasi-compactness of the image; generic algebraic-space point calculus that no node of this unit states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-745b7bd4b",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-745b7bd4b (reviewer sub-agent of L); spot-checked: Not superseded: the live node is still unsplit and there is no repair note. The delivery is a six-step split with no new nodes and no statement change. Read against Stacks 0AGD (spaces-morphisms l.8015) and 08AJ (l.7994). The hypotheses match, with B specialized to the scheme T, and minimality follows 082X. Two citation faults, both repaired. (1) C4, step 1: the step took 'h is quasi-compact in the stack convention' from lem-sfb-stack-finite-type-calculus. That node's stack quasi-compactness is the affine point-space test, but lem-sfb-stack-schematic-image-qc needs the def-sfb-stack-qcqs-morphism convention, which tests against every quasi-compact stack. Repair: the ordinary all-test quasi-compactness from finite-type-calculus, plus X_T×_T C=X×_Y C, gives (i) of lem-sfb-representable-stack-quasicompact-tests (same unit); its (i)⇒(ii) is exactly the needed convention. The step's source place is changed from 04NX to 073B. (2) C1/C4, step 2: the schematic-image node gives a closed subspace defined by a quasi-coherent ideal on étale charts. The item and the closed-immersion calculus of step 3 need a representable closed immersion, and the item's minimality ranges over those. Repair: cite lem-sfb-space-ideal-closed-subspace-correspondence, an inclusion-reversing bijection with a factorization criterion, so both the closed-immersion property and minimality carry over. Steps 3–6 are correct. Step 3: closed image plus injective |i| gives a surjective |u|. Step 4: separated composition clause and the lft composition clause for DM stacks. Step 5: the closed-set argument of 08AJ after an arbitrary base change, with surjectivity from the point-image formula. Step 6: |Z_A| is quasi-compact as a continuous image, which for affine A is the def-sfb-proper-curve-moduli convention. Edge cases checked: X empty, h a closed immersion, a non-quasi-compact Y, and non-Noetherian T. Tool uses accepted: lem-trf-space-fibre-products-etale-covers and lem-a1-space-point-open-calculus, both generic foundations; the copied 'why' of the second is rewritten. All 13 batch-5 flags reach sec-trace-formula only through the definition def-trf-algebraic-space or the generic fibre-product lemma, so none is a trace-formula or Poincaré-duality step. No SGA citation and no cycle. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-proper-schematic-image.json; 1 file(s) fixed by the reviewer"
+ }
+}

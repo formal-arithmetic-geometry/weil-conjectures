@@ -1,0 +1,530 @@
+{
+ "id": "lem-sfb-dedekind-invariant-component-ample-test",
+ "kind": "statement",
+ "title": "Strict-local invariant connected pieces detect ampleness over a Dedekind base",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension at most one, put $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum], and put $K=\\operatorname{Frac}D$. Let $H\\to S$ be a smooth separated group scheme of finite type with geometrically connected fibres [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-connected-scheme]. A group scheme has multiplication, inverse and identity satisfying the group identities (the relative version of [def-sc-group-scheme]); separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Let $X\\to S$ be smooth, separated and of finite type, with an action $a:H\\times_SX\\to X$ satisfying unit and associativity [def-pc-fibre-product], and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Consider all flat morphisms $T=\\operatorname{Spec}R\\to S$ [def-weil-flat-morphism] for which either $R$ is a separably closed field [def-pc-separably-closed], or $R$ is a strictly henselian discrete valuation ring [def-sc-discrete-valuation-ring]. Here strictly henselian means that the residue field is separably closed and every simple residue root of a monic polynomial lifts to a root in $R$. For such $T$, consider every nonempty connected open and closed subscheme $Y\\subseteq X_T$ [def-weil-open-immersion] such that $Y\\to T$ is surjective, $Y$ is invariant under $H_T$, and its generic fibre is geometrically connected. Invariant means the restricted action $H_T\\times_TY\\to X_T$ factors through $Y$; geometrically connected means connected after every extension of the fraction field of $R$ [def-pc-geometrically-irreducible]. Write $L_Y$ for the tensor pullback of $L$ to $Y$ [def-pc-module-pullback]. If $L_Y$ is ample [def-weil-pbc-ample-invertible-module] for every one of these tests, then $L$ is ample on $X$. The empty $X$ is allowed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial strict-local and connected-component reductions; standalone agent formulation, including generic-only components. Local-to-global ingredients: Stacks Tags 09MT (limits.tex, lemma-limit-ample), 0D2P (descent.tex, lemma-descending-property-ample), and 01VK (morphisms.tex, lemma-ample-over-affine). Local BLR PDF WANTED; online primary scan read.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-geometrically-irreducible",
+  "def-weil-flat-morphism",
+  "def-pc-separably-closed",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is empty, it is quasi-compact and the pointwise ampleness condition is vacuous, so the conclusion follows. Henceforth fix a prime $\\mathfrak p$ of $D$, and put $A=D_{\\mathfrak p}$. The morphism $\\operatorname{Spec}A\\to S$ is flat by localization flatness and the affine flatness criterion. If $\\mathfrak p=0$, then $A=K$ is a field. If $\\mathfrak p\\ne0$, the chain $0\\subsetneq\\mathfrak p$ and the dimension bound show that $D$ has dimension one and $\\mathfrak p$ is maximal; the Dedekind localization theorem makes $A$ a DVR. We will prove ampleness after this localization and then descend it to a neighbourhood of $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-dedekind-localization-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Choose a faithfully flat affine extension $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ as follows. For $A=K$, take a separable closure $B=K^{\\mathrm{sep}}$; the field-extension fpqc theorem applies. For a DVR $A$, choose a geometric point $\\bar x$ of $\\operatorname{Spec}A$ over its closed point and take $B=\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}A,\\bar x}$. The strict-henselization local-structure theorem says $B$ is local and strictly henselian, i.e. henselian with separably closed residue field; the strict-henselization DVR theorem, for this same ring, says $A\\to B$ is flat local and $B$ is a DVR. The henselian root-lifting equivalence turns the idempotent-lifting form of henselian into the lifting of simple residue roots of monic polynomials, so $B$ is strictly henselian in the sense of the statement. A flat local map is faithfully flat and therefore surjective on spectra. Since both spectra are affine, this is a one-member fpqc cover: over any affine open of the target its inverse image is affine and maps onto that open. Composition of flat morphisms makes $T=\\operatorname{Spec}B\\to S$ flat, so $T$ is among the tests in the hypothesis. Write $Z=X_T$, $G=H_T$, and $M=L|_Z$. Base change preserves smoothness, separatedness and finite type, and tensor pullback preserves invertibility.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-sc-strict-henselization-dvr",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-fpqc-covering",
+    "lem-pc-flat-compose",
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "The scheme $T$ is Noetherian and normal. For a field this is immediate. For a DVR its ideals are principal, hence finitely generated; its dimension is one and its maximal ideal has one generator, so the regular-local/normal equivalence makes $B$ integrally closed. The local rings of its spectrum are $B$ and its fraction field, hence normal. The finite-type Noetherian theorem makes $Z$ Noetherian, and smooth ascent makes $Z$ normal. The normal-component theorem now gives finitely many pairwise disjoint clopen integral normal subschemes $C_i$ covering $Z$. They are exactly its nonempty connected components. Each is smooth and finite type over $T$ (restriction to a clopen in a Noetherian scheme); smoothness gives flatness and local finite presentation, so its structural map is open. For a trait, its nonempty image is therefore either all of $T$ or just its generic point. In the latter case, writing $\\pi$ for a uniformizer, $C_i$ is entirely contained in $Z_{B[1/\\pi]}$ and is a smooth separated finite-type scheme over $F=\\operatorname{Frac}B$.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-trf-normal-topologically-noetherian-components",
+    "def-weil-open-immersion",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Every $C_i$ is $G$-invariant. Indeed, for $z\\in C_i$ with image $t\\in T$, restrict the action to $G_{\\kappa(z)}\\to Z$. Its source is connected because the fibres of $H$ are geometrically connected and $\\kappa(z)$ extends $\\kappa(t)$. The image is connected and contains $z$ by the unit identity. It therefore lies in the connected component $C_i$. Every point of $G\\times_TC_i$ lies over some such $z$, so the whole restricted action has image in $C_i$. By the definition of open subscheme, a morphism whose point image lies in this open factors uniquely through it. The identical argument applies to the clopen connected components after any field base change. Geometric connectedness of the fibres persists under base change simply because the defining quantifier already allows every field extension.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "First consider any separably closed field $B$ with a flat map $T\\to S$, not just the field chosen in step 2. For the decomposition of $Z=X_T$ from step 3, each $C_i$ is a nonempty smooth $B$-scheme. The density of separable closed points supplies a closed point with finite separable residue extension of $B$, which equals $B$ since $B$ is separably closed. Thus $C_i$ has a $B$-rational point. Since $C_i$ is connected, the connected-rational-point theorem makes it geometrically connected. It is surjective over $T$, and invariant by step 4, so the testing hypothesis gives $M|_{C_i}$ ample. Apply the finite-coproduct ampleness theorem with $Y_i=C_i$ and the isolated-point index set empty: $M$ is ample on $Z$. This includes $Z=\\varnothing$, with both index sets empty.",
+   "uses": [
+    "lem-pc-dense-separable-points",
+    "def-pc-separably-closed",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-trf-finite-coproduct-ample-with-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Now let $B$ be the strict henselian DVR of step 2 and take a component $C_i$ meeting the closed fibre. By step 3 it is smooth, finite type and surjective over $T$. The strict-local section-existence theorem supplies a section $T\\to C_i$; only its assertion $C_i(T)\\ne\\varnothing$ is used. Its generic restriction is an $F$-rational point of $(C_i)_F$. Moreover $(C_i)_F=C_i\\cap Z_{B[1/\\pi]}$ is a nonempty open subscheme of the integral $C_i$, hence is integral and connected: every two of its nonempty opens are nonempty opens of an irreducible space and intersect. The connected-rational-point theorem therefore makes $(C_i)_F$ geometrically connected. Together with step 4 this verifies every hypothesis on a test $Y=C_i$ over $T$; the assumed test ampleness gives $M|_{C_i}$ ample.",
+   "uses": [
+    "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+    "def-pc-integral-scheme",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For a component $C_i$ missing the closed fibre, regard it as a clopen subscheme of $Z_F$ as in step 3. Choose a separable closure $\\Omega/F$. The composite $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}F\\to T\\to S$ is flat: the field-extension theorem, localization flatness, the affine criterion and composition prove this. Step 5, which was proved for every flat separably closed field test, makes $L|_{X_\\Omega}$ ample. The inclusion $(C_i)_\\Omega\\to X_\\Omega$ is clopen and therefore affine by the closed-embedding theorem. Affine pullback of an ample module gives ampleness on $(C_i)_\\Omega$. Descend along the one-member fpqc field cover $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}F$, using the relative-ampleness descent theorem, to obtain ampleness on $C_i$. Here, and below, apply this spaces theorem to schemes via the Zariski/etale quasi-coherent equivalence: it identifies line modules, tensor pullbacks and their comparisons. For an affine target, the definition in that theorem identifies relative ampleness with absolute ampleness: the whole target is one of its affine opens, and conversely inverse images of other affine opens are affine pullbacks, so preserve ampleness.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-pc-flat-compose",
+    "lem-trf-closed-embedding-affine",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Steps 6 and 7 prove ampleness on every $C_i$ for the strict henselian DVR case. The finite-coproduct ampleness theorem, with no isolated-point summands, proves $M$ ample on all of $Z$. Together with step 5, this proves ampleness after the fpqc affine extension $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ in both cases of step 2. Relative-ampleness fpqc descent, with the scheme/site identification and affine-target argument of step 7, gives $L_A$ ample on $X_A$. This holds for every prime $\\mathfrak p$ of $D$.",
+   "uses": [
+    "lem-trf-finite-coproduct-ample-with-points",
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For the fixed $\\mathfrak p$, write $D_{\\mathfrak p}=\\varinjlim_{f\\notin\\mathfrak p}D_f$, indexed by divisibility, with initial object $f=1$. The localization-colimit and spectrum-limit theorems identify $\\operatorname{Spec}D_{\\mathfrak p}$ with the inverse limit of these principal opens. The fibre-product limit theorem then identifies $X_A$ with the inverse limit of $X_{D_f}$. All transition maps are affine: those between the bases are maps of affine schemes, and the source transitions are their base changes. Each $X_{D_f}$ is Noetherian, since its base is Noetherian and its structural map is finite type; it is also separated, hence quasi-separated. Thus the qcqs hypotheses of ample affine-limit descent hold. By step 8 the limit pullback $L_A$ is ample, so that theorem gives some $f\\notin\\mathfrak p$ for which $L|_{X_{D_f}}$ is ample. This is a neighbourhood of the base point, rather than just a fibrewise assertion.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-trf-ample-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT, lemma-limit-ample; applied to the principal-neighbourhood limit in the first paragraph of BLR 6.4 Proposition 2."
+   }
+  },
+  {
+   "text": "The principal neighbourhoods supplied by step 9 for all primes cover $S$. Choose finitely many, since $S$ is affine and quasi-compact. They form an fpqc cover: their inclusions are flat localization maps, and on any affine open $V$ their intersections with $V$ are quasi-compact opens of the Noetherian scheme $S$, hence have finite affine covers whose images cover $V$. On each covering member, $L$ is absolutely and hence relatively ample by the affine-target argument of step 7. Relative-ampleness fpqc descent gives $L$ relatively ample over $S$; since $S$ itself is affine, its defining condition applied to the whole $S$ says exactly that $L$ is ample on $X$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2, proof, printed pp.153–154 (PDF pp.159–160), initial local and component reductions; primary online scan read, local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-sc-strict-henselization-dvr",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-flat-compose",
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-trf-normal-topologically-noetherian-components",
+  "def-weil-open-immersion",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "lem-pc-dense-separable-points",
+  "def-pc-separably-closed",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-finite-coproduct-ample-with-points",
+  "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+  "def-pc-integral-scheme",
+  "lem-trf-closed-embedding-affine",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-trf-ample-affine-limit-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Explicit assembly following the initial reductions of BLR 6.4 Proposition 2, pp.153–154, with the generic-only case restarted over a separable closure. BLR read online; local PDF WANTED. Existing Stacks descent and component lemmas supply the detailed inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ample.*(hensel|locali)|relative.*ample|IsAmple",
+   "results": "{\"t\": \"2026-10-24T08:50:30Z\", \"tool\": \"grep\", \"query\": \"ample.*(hensel|locali)|relative.*ample|IsAmple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T08:50:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness can be checked after strict localization of the base and on the finitely many connected components",
+   "results": "{\"t\": \"2026-10-24T08:50:31Z\", \"tool\": \"leansearch\", \"query\": \"Relative ampleness can be checked after strict localization of the base and on the finitely many connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.casesOn\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"RingHom.FormallyUnramified.propertyIsLocal\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"OfLocalizationMaximal\", \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\"], \"digest\": \"c1c1139bb1ee6439\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf descends from strict henselizations of all local rings of the base",
+   "results": "{\"t\": \"2026-10-24T08:50:32Z\", \"tool\": \"leanfinder\", \"query\": \"An ample invertible sheaf descends from strict henselizations of all local rings of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.sourceAffineLocally_isLocal\", \"AlgebraicGeometry.affineAnd_isLocal\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\"], \"digest\": \"a0cf2116d1626e53\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative ampleness of a line bundle on a smooth scheme is detected on connected components over strict henselian local traits and separably closed generic fields",
+   "results": "{\"t\": \"2026-10-24T08:50:33Z\", \"tool\": \"leanfinder\", \"query\": \"Relative ampleness of a line bundle on a smooth scheme is detected on connected components over strict henselian local traits and separably closed generic fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\"], \"digest\": \"ea4b4ad90cda2a96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness of a line bundle on a smooth separated finite type scheme over an affine Dedekind base can be tested on invariant connected clopen pieces with geometrically connected generic fibre after flat strictly henselian trait or separably closed field base changes",
+   "results": "{\"t\": \"2026-10-24T08:59:20Z\", \"tool\": \"leanfinder\", \"query\": \"Ampleness of a line bundle on a smooth separated finite type scheme over an affine Dedekind base can be tested on invariant connected clopen pieces with geometrically connected generic fibre after flat strictly henselian trait or separably closed field base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.HasRingHomProperty.iff_of_source_openCover\"], \"digest\": \"92e2cbe201409b14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; affine basic-open/local-property, ring Picard-group, and ordinary square/smoothness results do not state this scheme-action or ampleness reduction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected|GeometricallyConnected|IsNormal|irreducibleComponents",
+   "results": "{\"t\": \"2026-10-24T09:32:05Z\", \"tool\": \"grep\", \"query\": \"geometricallyConnected|GeometricallyConnected|IsNormal|irreducibleComponents\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"5b123e391d2e0495\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth scheme over a strictly henselian discrete valuation ring with nonempty special fibre has geometrically connected generic fibre",
+   "results": "{\"t\": \"2026-10-24T09:32:05Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth scheme over a strictly henselian discrete valuation ring with nonempty special fibre has geometrically connected generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"572d47f17b4fcc17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T09:32:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite type scheme over a strictly henselian discrete valuation ring has finitely many integral clopen connected components; each component meeting the closed fibre has geometrically connected generic fibre",
+   "results": "{\"t\": \"2026-10-24T09:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth finite type scheme over a strictly henselian discrete valuation ring has finitely many integral clopen connected components; each component meeting the closed fibre has geometrically connected generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"7dc7a1c13d5e04d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "{\"t\": \"2026-10-24T09:33:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample.*hensel|ample.*locali",
+   "results": "{\"t\": \"2026-10-24T09:33:10Z\", \"tool\": \"grep\", \"query\": \"IsAmple|ample.*hensel|ample.*locali\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness on a smooth separated finite type scheme over an affine Dedekind base is detected on invariant connected components over strict henselian discrete valuation rings and separably closed fields",
+   "results": "{\"t\": \"2026-10-24T09:33:10Z\", \"tool\": \"leanfinder\", \"query\": \"Ampleness on a smooth separated finite type scheme over an affine Dedekind base is detected on invariant connected components over strict henselian discrete valuation rings and separably closed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"3abc47548958d82e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\"",
+   "results": "{\"t\": \"2026-10-24T09:34:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyConnected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected\", \"AlgebraicGeometry.GeometricallyConnected\", \"AlgebraicGeometry.instSurjectiveOfGeometricallyConnected\", \"AlgebraicGeometry.GeometricallyConnected.eq_geometrically\", \"AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace\", \"AlgebraicGeometry.GeometricallyConnected.mk\", \"AlgebraicGeometry.geometricallyConnected_iff\", \"AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField\"], \"digest\": \"4a9e1be6c72e7ce6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth scheme with a section over a strictly henselian trait has integral total space and geometrically connected generic fibre",
+   "results": "{\"t\": \"2026-10-24T09:34:19Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth scheme with a section over a strictly henselian trait has integral total space and geometrically connected generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\"], \"digest\": \"9e12093ddcbdf70e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf descends from local strict henselian Dedekind tests on invariant geometrically connected components",
+   "results": "{\"t\": \"2026-10-24T09:35:18Z\", \"tool\": \"leansearch\", \"query\": \"An ample invertible sheaf descends from local strict henselian Dedekind tests on invariant geometrically connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"0eaa3169222865f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; smoothness, integrality, finite fibres, component definitions and general morphism descent do not assert invariant-component ampleness detection. No Mathlib ampleness declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dedekind-action-boundary-ampleness",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 10.1, proof of Proposition 4, printed p.291 (PDF p.297), first sentence; preceding discussion printed p.290 and 6.4 Theorem 1 for the affine-neighbourhood input. Boundary ampleness criterion used in 6.4 Theorem 1, separated from both the construction of the affine complement and finite-set prime avoidance. Auxiliary to the boundary ampleness proof: Strict-local invariant connected pieces detect ampleness over a Dedekind base.",
+   "via": [
+    "lem-sfb-dedekind-action-boundary-ampleness",
+    "lem-sfb-neron-lft-finite-set-affine",
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-invariant-component-ample-test",
+  "worker": "stage1",
+  "summary": "Proved the strict-local invariant-component ampleness test using existing DAG statements only. Explicitly separate components meeting the closed fibre from generic-only components; handle the latter by a separably closed generic field test and fpqc descent. Verify invariance pointwise on connected orbits, then use normal clopen components, section existence and rational-point geometric connectedness. Finish by strict-local descent, principal-neighbourhood limit descent and a finite fpqc open cover. No statement correction and no new nodes.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability.proof.md, proper/open direct image paragraph: the open coefficient route through admissible direct image and finite-flat Neron lft descent; specifically the BLR 6.4 Proposition 2 local/component reductions used by boundary ampleness. The supplied from.node is null (ancestor command confirms); preserved.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Generic Ample invertible module on a scheme (absolute ampleness) input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic A field extension gives an fpqc singleton cover of spectra input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic: the strict henselization colimit O^sh at a geometric point is a strictly henselian local ring; used in step 2 for the strict henselization of the DVR localization, the same object as in lem-sc-strict-henselization-dvr; no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic: Stacks 04GG equivalence of idempotent-lifting and simple-root-lifting henselian; needed in step 2 to put the strict henselization among the statement's tests, whose strictly henselian condition is stated by root lifting; no node of this unit gives it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Generic Strict henselization at a point with DVR local ring input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic Proper and smooth morphisms are stable under base change input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic Pullback and tensor product of invertible modules, and their fibres input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic A Noetherian local ring of dimension one is regular iff it is a normal domain input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic Normal schemes with Noetherian underlying space have open integral components input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic Density of rationally defined closed points input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic A connected scheme with a rational point is geometrically connected input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-trf-finite-coproduct-ample-with-points",
+    "why": "Generic Ampleness on a finite disjoint union with integral point summands input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic Pullback of an ample invertible module input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic A localization is the filtered colimit of the principal localizations input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic Fibre products commute with limits along affine transition morphisms input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   },
+   {
+    "node": "lem-trf-ample-affine-limit-descent",
+    "why": "Generic Ampleness descends to a stage of an affine transition limit input in the BLR local/component ampleness reduction; this unit has no replacement for this scheme/ring/limit tool, and no unit-level proof route is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-sc-strict-henselization-dvr",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-pc-dense-separable-points",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-finite-coproduct-ample-with-points",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-trf-ample-affine-limit-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-73c0237e2",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-73c0237e2 (reviewer sub-agent of L); spot-checked: I read the item and all 40 cited statements in full, and the source, BLR 6.4 Prop 2 pp.153-154 (online-scan text). The 10 steps follow BLR's reductions: local to strictly henselian, then connected components, then surjective, then sections and a geometrically connected generic fibre. The generic-only components are handled explicitly through a separable-closure field test plus fpqc descent (step 7), and the passage to global uses Stacks 09MT and 0D3C. The statement was tested on: X empty, D a field, a component with empty special fibre, and H trivial. A field test that is flat over S must lie over the generic point, so the tests are exactly what BLR needs. No duplicate node exists (rg for 6.4 Prop 2, 0D2P and 09MT finds only the parent, the BLR 6.5 node and the neron-lft node). One fault, repaired, in step 2. First, it took 'local, strictly henselian' from lem-weil-pbc-strict-henselization-triples, which is about the triples colimit C, and 'flat local, DVR' from lem-sc-strict-henselization-dvr, which is about O^sh_{Y,x}; no cited node identifies the two constructions (C4). Second, the item's tests define strictly henselian by lifting simple roots of monic polynomials, but the step never cited the 04GG equivalence with the idempotent-lifting definition (C1). The fix sets B=O^sh_{Spec A,x} and replaces triples with lem-weil-pbc-strict-henselization-local-structure (04HX) and lem-weil-pbc-henselian-local-root-lifting (04GG). Step 2 uses, proof_deps and tool_uses are updated; nothing else changed. Batch-5: lem-trf-normal-topologically-noetherian-components (0357), lem-trf-finite-coproduct-ample-with-points (01PS), lem-sfb-space-relative-ampleness-fpqc-descent (0D3C; it reaches the trace-formula chapter only through the general definition def-trf-algebraic-space), lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX/05VG) and lem-trf-ample-affine-limit-descent (09MT) are generic Stacks lemmas. Their full closures (60, 108, 1593, 981 and 189 nodes) reach no nt-assume leaf, no nt-target, no sk-thm-trace-transport and no blueprint-imported statement of sec-trace-formula or sec-poincare-duality, and none reaches the item; they are accepted. All off-unit tool_uses are accepted as generic tools. There is no SGA reference.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DedekindInvariantComponentAmpleTest",
+  "declaration": "AlgebraicGeometry.isAmple_of_dedekind_invariant_component_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/DedekindInvariantComponentAmpleTest.lean",
+  "statement": "theorem isAmple_of_dedekind_invariant_component_tests (D : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (hdim : ringKrullDim D ≤ 1) (H X : Over (Spec (.of D))) [GrpObj H] [ModObj H X] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [GeometricallyConnected H.hom] [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (L : X.left.Modules) [L.IsInvertible] (hfield : ∀ (R : Type u) [Field R] [IsSepClosed R] (t : Spec (.of R) ⟶ Spec (.of D)) [Flat t] (Y : Over (Spec (.of R))) (j : Y ⟶ (Over.pullback t).obj X) [IsOpenImmersion j.left], IsClosed (Set.range j.left) → ConnectedSpace Y.left → Surjective Y.hom → GeometricallyConnected Y.hom → (∃ b : (Over.pullback t).obj H ⊗ Y ⟶ Y, (𝟙 ((Over.pullback t).obj H) ⊗ₘ j) ≫ Functor.LaxMonoidal.μ (Over.pullback t) H X ≫ (Over.pullback t).map (γ[H,X]) = b ≫ j) → @IsAmple Y.left ((tensorPullback (j.left ≫ pullback.fst X.hom t)).obj L) ((invertible_pullback_tensor (j.left ≫ pullback.fst X.hom t)).1 L).2) (htrait : ∀ (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R], IsSepClosed (IsLocalRing.ResidueField R) → (∀ f : Polynomial R, f.Monic → ∀ a₀ : R, f.eval a₀ ∈ IsLocalRing.maximalIdeal R → IsUnit (f.derivative.eval a₀) → ∃ a : R, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R) → ∀ (t : Spec (.of R) ⟶ Spec (.of D)) [Flat t] (Y : Over (Spec (.of R))) (j : Y ⟶ (Over.pullback t).obj X) [IsOpenImmersion j.left], IsClosed (Set.range j.left) → ConnectedSpace Y.left → Surjective Y.hom → GeometricallyConnected (pullback.snd Y.hom (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) → (∃ b : (Over.pullback t).obj H ⊗ Y ⟶ Y, (𝟙 ((Over.pullback t).obj H) ⊗ₘ j) ≫ Functor.LaxMonoidal.μ (Over.pullback t) H X ≫ (Over.pullback t).map (γ[H,X]) = b ≫ j) → @IsAmple Y.left ((tensorPullback (j.left ≫ pullback.fst X.hom t)).obj L) ((invertible_pullback_tensor (j.left ≫ pullback.fst X.hom t)).1 L).2) : IsAmple X.left L",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-96d7db010"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96d7db010",
+  "group": "Q129",
+  "result": "fix",
+  "note": "Read the node, all 16 stmt_dep records, BLR 6.4 Prop 2 (pp.153-154), report.md and the module. Every clause matches: Dedekind base; H a GrpObj, smooth, separated and of finite type with GeometricallyConnected H.hom; action as ModObj in cartesian Over S; L invertible; hfield and htrait split the flat tests; Y an open immersion with closed range, ConnectedSpace, surjective, geometrically connected generic fibre; invariance via the canonical comparison mu of Over.pullback; L_Y ample implies IsAmple X.left L. Edge cases (empty X, D a field, trivial H, generic-only components) and universes are fine. FIX (H2): htrait used IsStrictlyHenselianLocalRing, owned by the uncited def-weil-pbc-henselian-terminology, while the node defines strict henselianity in its own monic-root wording (step 2 cites 04GG). The fix writes that wording out in Lean: IsSepClosed (ResidueField R) plus monic simple-root lifting, the body of Mathlib HenselianLocalRing; imports adjusted; lean-record.json gives the statement verbatim. nt_compile of the fixed file rc 0 in 2.4 s; axioms propext, sorryAx, Classical.choice, Quot.sound; refit_record and check_lean_text clean. Notes only: ModObj owner pur713-def-modules uncited (no landed ModObj user cites it); invertible_pullback_tensor appears only as a Prop proof argument; the second-reading section records that no independent reading took place."
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-normal-scalar-extension-geometric-orbits",
+ "kind": "statement",
+ "title": "Geometric orbit lifting through a finite normal scalar extension",
+ "statement": "Let $e\\subseteq F\\subseteq K$ be fields with $K/e$ finite and normal: every minimal polynomial over $e$ of an element of $K$ splits into linear factors in $K[T]$. Let $J$ and $\\Gamma$ be finite groups, let $\\rho:J\\to\\operatorname{Aut}_e(F)$, $r:\\Gamma\\twoheadrightarrow J$, and $\\alpha:\\Gamma\\to\\operatorname{Aut}_e(K)$ be homomorphisms such that $\\alpha(\\gamma)|_F=\\rho(r(\\gamma))$ and\n$$\\alpha(\\ker r)=\\operatorname{Aut}_F(K).$$\nLet $V$ be a finite-type $F$-scheme with a left $J$-action semilinear for $\\rho$, using the convention that $j$ acts on $\\operatorname{Spec}F$ by $\\operatorname{Spec}(\\rho(j)^{-1})$. Let $B$ be an $e$-scheme and $v:V\\to B$ a $J$-invariant $e$-morphism. Put $W=V\\times_F K$ and give $W$ the diagonal $\\Gamma$-action from $r$ on $V$ and $\\alpha$ on $K$. For every geometric point $b:\\operatorname{Spec}\\Omega\\to B$, where $\\Omega$ is algebraically closed, put $V_b=V\\times_B\\operatorname{Spec}\\Omega$ and $W_b=W\\times_B\\operatorname{Spec}\\Omega$. If the underlying points of $V_b$ form a nonempty single $J$-orbit, then every point $x\\in V_b$ is $\\Omega$-rational, meaning its structural residue map $\\Omega\\to\\kappa(x)$ is an isomorphism. For each such $x$, the points of the fibre of $W_b\\to V_b$ over $x$ identify with the field embeddings $\\beta:K\\hookrightarrow\\Omega$ extending the scalar map $F\\to\\Omega$ of $x$, by the evaluation maps $\\Omega\\otimes_{F,x}K\\to\\Omega$, $z\\otimes k\\mapsto z\\beta(k)$. This set is nonempty. For $\\gamma\\in\\ker r$, its action on these embeddings is $\\beta\\mapsto\\beta\\circ\\alpha(\\gamma)^{-1}$. The underlying points of $W_b$ form a nonempty single $\\Gamma$-orbit. No separability, reducedness, faithfulness of either action, or normality of $F/e$ is assumed. Fields and finite extensions use [def-weil-field], [def-pc-field-extension], [def-pc-field-tower]; schemes, finite type, fibre products, geometric points and residue fields use [def-pc-scheme], [def-weil-finite-type-morphism], [def-pc-fibre-product], [def-weil-geometric-point], [def-weil-residue-field].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150, geometric-orbit clause for (2.b); agent elaboration, former steps 7–8 of lem-sfb-common-field-semilinear-induction. Supporting Stacks results: Tag 00FV (theorem-nullstellensatz (1)), Tag 09HN (lemma-normal-goes-up), Tag 0BR4 (lemma-normal-embeddings-differ-by-aut)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "First $v$ is locally of finite type, even though $B$ is arbitrary. For an affine open $T=\\operatorname{Spec}R\\subset B$ and an affine open $U=\\operatorname{Spec}A\\subset v^{-1}(T)$, [lem-weil-pbc-lft-affine-pairs] applied to $V\\to\\operatorname{Spec}F$ makes $A$ a finitely generated $F$-algebra. Since $F/e$ is finite (an $e$-linearly independent subset of $F$ remains one in the finite-dimensional $e$-space $K$), an $e$-basis of $F$, together with these algebra generators, generates $A$ as an $e$-algebra. The same elements generate $A$ over $R$, because $e\\to A$ factors through $R$. Applying the affine-pairs criterion to $v$ and then [lem-weil-pbc-lft-base-change] shows that $V_b\\to\\operatorname{Spec}\\Omega$ is locally of finite type. Only local finite type, not quasi-compactness of $v$, is needed.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T2 (lemma-locally-finite-type-characterize), 01T8 (lemma-permanence-finite-type), 01T4 (lemma-base-change-finite-type); explicit affine-generator argument"
+   }
+  },
+  {
+   "text": "The finite group $J$ acts transitively on the nonempty set $|V_b|$, so this set is finite. A scheme is $T_0$: if two points specialize to each other, an affine open containing either contains both, since opens are stable under generization. On that affine, specialization means inclusion of prime ideals (the closure of $\\{\\mathfrak p\\}$ is $V(\\mathfrak p)$), so mutual specialization gives equality [def-weil-affine-spectrum]. Among the finitely many nonempty point closures choose one minimal under inclusion, say $\\overline{\\{x_0\\}}$. If $y$ lies in it, then $\\overline{\\{y\\}}\\subseteq\\overline{\\{x_0\\}}$, so minimality and $T_0$ give $y=x_0$. Thus $x_0$ is closed. Each $j$ acts by a homeomorphism, so transitivity makes every point closed. The closed-point residue theorem [lem-weil-pbc-closed-point-residue-field-base], applied to the locally finite-type $\\Omega$-scheme from step 1, now gives the structural isomorphism $\\Omega\\xrightarrow{\\sim}\\kappa(x)$ for every $x$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV (theorem-nullstellensatz (1)); closed-point consequence as stated in lem-weil-pbc-closed-point-residue-field-base; finite T0 argument written out"
+   }
+  },
+  {
+   "text": "The universal property [def-pc-fibre-product] identifies $W_b$ with $V_b\\times_{\\operatorname{Spec}F}\\operatorname{Spec}K$, compatibly with its projection and the diagonal action: both objects parameterize a map to $V$, a map to $\\operatorname{Spec}K$ agreeing over $F$, and a map to $\\operatorname{Spec}\\Omega$ agreeing over $B$. Fix $x\\in V_b$. By [lem-weil-pbc-fibre-product-points], the points over $x$ identify with the primes of $\\kappa(x)\\otimes_F K=\\Omega\\otimes_{F,x}K=:A_x$, using the structural isomorphism of step 2. Equivalently, pulling back further to $\\operatorname{Spec}\\kappa(x)$ gives the affine scheme $\\operatorname{Spec}A_x$ by [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JT (lemma-points-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); associativity verified by universal property"
+   }
+  },
+  {
+   "text": "Choose a finite $F$-basis $(k_i)$ of $K$; such a basis exists since an $F$-linearly independent set in $K$ is $e$-linearly independent. The elements $1\\otimes k_i$ span $A_x$ over $\\Omega$: expand each $k$ in that basis and use the balancing relation. Thus for any prime $\\mathfrak p\\subset A_x$, the domain $D=A_x/\\mathfrak p$ is a finite-dimensional $\\Omega$-vector space. For $0\\ne d\\in D$, multiplication by $d$ is an injective linear endomorphism and hence surjective, so $D$ is a field. Linear dependence of $1,d,d^2,\\ldots$ makes every $d$ algebraic over $\\Omega$. Applying [lem-weil-pbc-algebraic-over-algebraically-closed-subfield] shows that the structural map $\\Omega\\to D$ is surjective, and it is injective because $D$ is a nonzero field. Therefore it is an isomorphism. This argument allows nilpotents in $A_x$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GQ (definition-algebraically-closed), 09GR (lemma-algebraically-closed); elementary finite-dimensional quotient argument"
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak p$ of $A_x$, compose $A_x\\to A_x/\\mathfrak p$ with the inverse of the structural isomorphism in step 4 to obtain an $\\Omega$-algebra homomorphism $q:A_x\\to\\Omega$. Its restriction $\\beta(k)=q(1\\otimes k)$ is a unital field homomorphism $K\\hookrightarrow\\Omega$ extending the scalar map of $x$, and $q(z\\otimes k)=z\\beta(k)$. Conversely this evaluation formula is balanced over $F$, additive and multiplicative, so any such embedding defines a surjective homomorphism with prime kernel. These constructions are inverse: a homomorphism to $\\Omega$ with a given kernel is unique since the induced map from $A_x/\\mathfrak p$, already equal to $\\Omega$ through its structural map, is forced to be its inverse. Finally [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] applies to the algebraic extension $K/F$ and the scalar embedding $F\\to\\Omega$, giving an embedding $\\beta$ and therefore a point over every $x$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GU (lemma-map-into-algebraic-closure); tensor evaluation and kernel inverse written out"
+   }
+  },
+  {
+   "text": "Let $\\gamma\\in\\ker r$. It acts identically on $V_b$, including the residue field at $x$, and on the scalar factor by $\\operatorname{Spec}(\\alpha(\\gamma)^{-1})$. Consequently on $A_x$ its pullback is $z\\otimes k\\mapsto z\\otimes\\alpha(\\gamma)^{-1}(k)$. For the point with evaluation $q_\\beta$, its image has prime kernel equal to that of $q_\\beta$ composed with this pullback. On a pure tensor this composite is $z\\beta(\\alpha(\\gamma)^{-1}(k))$, so step 5 identifies its embedding with $\\beta\\circ\\alpha(\\gamma)^{-1}$, as asserted. The inverse in this formula is required by the given left-action convention; the $\\Omega$ factor is fixed because the action is taken over $b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, diagram (2.b); agent computation from the specified action convention"
+   }
+  },
+  {
+   "text": "The finite degree of $K/e$ makes each $k\\in K$ algebraic over $e$: the powers $1,k,\\ldots,k^{[K:e]}$ are linearly dependent. Thus [lem-weil-pbc-normal-extension-normal-over-intermediate] applies to $e\\subseteq F\\subseteq K$ and makes $K/F$ algebraic normal, with no separability required. Fix $x$ and two of its embeddings $\\beta_1,\\beta_2$. The existing normal-embedding lemma [lem-sfb-normal-embeddings-automorphism-transitive] gives $\\sigma\\in\\operatorname{Aut}_F(K)$ with $\\beta_2=\\beta_1\\circ\\sigma$. The hypothesis $\\alpha(\\ker r)=\\operatorname{Aut}_F(K)$ supplies $\\gamma\\in\\ker r$ with $\\alpha(\\gamma)=\\sigma^{-1}$. Step 6 then shows that $\\gamma$ carries the point of $\\beta_1$ to the point of $\\beta_2$. Thus the kernel is transitive on each nonempty scalar fibre.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-normal-over-intermediate",
+    "lem-sfb-normal-embeddings-automorphism-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09HN (lemma-normal-goes-up), 0BR4 (lemma-normal-embeddings-differ-by-aut)"
+   }
+  },
+  {
+   "text": "There is a point of $W_b$ by nonemptiness of $V_b$ and step 5. Given $y_1,y_2\\in W_b$, write $x_i$ for their projections. Choose $j\\in J$ with $jx_1=x_2$ and choose $\\delta\\in\\Gamma$ with $r(\\delta)=j$. The diagonal projection is equivariant, so $\\delta y_1$ and $y_2$ lie over $x_2$. By step 7 some $\\gamma\\in\\ker r$ satisfies $\\gamma\\delta y_1=y_2$. Hence all points form a single $\\Gamma$-orbit. Every construction used only normality and finite degree, and all arguments concerned prime kernels rather than a reduced or separable tensor decomposition; no faithfulness or normality of $F/e$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, geometric-orbit clause of diagram (2.b); explicit orbit assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-sfb-normal-embeddings-automorphism-transitive",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-normal-extension-normal-over-intermediate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150: agent elaboration of scalar-fibre orbit argument using the cited Stacks lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite normal scalar extension of a scheme preserves transitivity of geometric fibres under compatible automorphisms containing the relative Galois group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"finGaloisGroupMap\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {L₁ L₂ : (FiniteGaloisIntermediateField k K)ᵒᵖ} →\\n            (L₁ ⟶ L₂) → ((Opposite.unop L₁).finGaloisGroup ⟶ (Opposite.unop L₂).finGaloisGroup)\", \"doc\": \"For finite Galois intermediate fields $L_1$ and $L_2$ in a Galois extension $K/k$, this constructs a group homomorphism from $\\\\text{Gal}(L_1/k)$ to $\\\\text{Gal}(L_2/k)$ by restricting automorphisms of \"}\n  {\"name\": \"finGaloisGroupMap.map_comp\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  {L₁ L₂ L₃ : (FiniteGaloisIntermediateField k K)ᵒᵖ} (f : L₁ ⟶ L₂) (g : L₂ ⟶ L₃),\\n  finGaloisGroupMap (CategoryTheory.CategoryStruct.comp f g) =\\n    CategoryTheory.CategoryStruct.comp (finGaloisGroupMap f) (fi\", \"doc\": \"For any composable morphisms $f: L₁ ⟶ L₂$ and $g: L₂ ⟶ L₃$ in the opposite category of finite Galois intermediate fields, the Galois group homomorphism induced by the composition $f ∘ g$ equals the co\"}\n  {\"name\": \"IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"∀ (K₁ : Type u_6) (K₂ : Type u_7) {F : Type u_8} {K₃ : Type u_9} [inst : Field F] [inst_1 : Field K₁]\\n  [inst_2 : Field K₂] [inst_3 : Field K₃] [inst_4 : Algebra F K₁] [inst_5 : Algebra F K₂] [inst_6 : Algebra F K₃]\\n  [inst_7 : Algebra K₁ K₂] [inst_8 : Algebra K₁ K₃] [inst_9 : Algebra K₂ K₃] [inst_1\", \"doc\": \"For normal field extensions $K_1$ and $K_2$ of $F$, the composition of the restriction homomorphism from $\\\\text{Gal}(K_3/F)$ to $\\\\text{Gal}(K_2/F)$ followed by restriction to $\\\\text{Gal}(K_1/F)$ equal\"}\n  {\"name\": \"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K),\\n  x ∈ L.toIntermediateField → Infin\", \"doc\": \"For an infinite Galois extension $ K/k $, the automorphism of $ K $ induced by an element $ g $ in the profinite Galois group $ \\\\text{Gal}(K/k) $ (defined as the inverse limit of finite Galois groups)\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"galRestrict'_comp\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) {K : Type u_2} {L : Type u_3} {L₂ : Type u_4} {L₃ : Type u_5} (B : Type u_6) (B₂ : Type u_7)\\n  (B₃ : Type u_8) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : CommRing B₃]\\n  [inst_4 : Algebra A B] [inst_5 : Algebra A B₂] [inst_6 : Algebra A B₃] [inst_7 : F\", \"doc\": \"For K-algebra homomorphisms $\\\\sigma : L \\\\to L_2$ and $\\\\sigma' : L_2 \\\\to L_3$, the restriction of their composition $\\\\sigma' \\\\circ \\\\sigma$ to the integral closure of $A$ in $L$ equals the composition o\"}\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"Normal.algHomEquivAut_symm_apply\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"∀ (F : Type u_1) [inst : Field F] (K₁ : Type u_3) [inst_1 : Field K₁] [inst_2 : Algebra F K₁] (E : Type u_6)\\n  [inst_3 : Field E] [inst_4 : Algebra F E] [inst_5 : Algebra E K₁] [inst_6 : IsScalarTower F E K₁]\\n  [inst_7 : Normal F E] (σ : Gal(E/F)), (Normal.algHomEquivAut F K₁ E).symm σ = (IsScalarTo\", \"doc\": \"For a normal field extension $ E/F $, the inverse of the canonical bijection between the Galois group $ \\\\text{Gal}(E/F) $ and the set of $ F $-algebra homomorphisms $ E \\\\to K_1 $ maps each automorphis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of geometric scalar extension correspond to embeddings of a normal field and form one automorphism orbit without separability",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"galLiftEquiv_apply\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"Field.embProdEmbOfIsAlgebraic\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          (K : Type w) →\\n            [inst_3 : Field K] →\\n              [inst_4 : Algebra F K] →\\n                [inst_5 : Algebra E K] →\\n                  [IsScalarTower F E K] → [Alge\", \"doc\": \"Under the scalar tower condition where $ E $ is an algebraic extension of $ F $ and $ K $ is an algebraic extension of $ E $, there is a bijection between the set of pairs consisting of an $ F $-embed\"}\n  {\"name\": \"IsPurelyInseparable.bijective_comp_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E]\\n  (L : Type u_2) [inst_4 : Field L] [PerfectField L], Function.Bijective fun f => f.comp (algebraMap F E)\", \"doc\": \"Given a purely inseparable field extension $ E/F $ and a perfect field $ L $, the function mapping each ring homomorphism $ f : E \\to L $ to its composition with the canonical algebra homomorphism $ F \"}\n  {\"name\": \"galLiftEquiv\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given a commutative ring $ A $ with fraction field $ K $, and algebraic extensions $ L $, $ L_2 $ of $ K $, if $ B $, $ B_2 $ are the integral closures of $ A $ in $ L $, $ L_2 $ respectively under sc\"}\n  {\"name\": \"galRestrict\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"A group isomorphism between the Galois group $ \\\\text{Gal}(L/K) $ and the group of $ A $-algebra automorphisms of $ B $, constructed by restricting automorphisms of $ L $ to the integral closure $ B $ \"}\n  {\"name\": \"AlgHom.card\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ (F : Type u_1) (E : Type u_2) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [inst_3 : FiniteDimensional F E] [Algebra.IsSeparable F E] (K : Type u_3) [inst_5 : Field K] [IsAlgClosed K]\\n  [inst_7 : Algebra F K], Fintype.card (E →ₐ[F] K) = Module.finrank F E\", \"doc\": \"Let $ E $ be a finite free $ F $-module and $ K $ an algebraically closed field. The cardinality of the set of $ F $-algebra homomorphisms from $ E $ to $ K $ equals the finite rank of $ E $ over $ F \"}\n  {\"name\": \"IsPurelyInseparable.bijective_restrictDomain\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [IsPurelyInseparable F E]\\n  (R : Type u_1) (L : Type u_2) [inst_4 : CommSemiring R] [inst_5 : Algebra R F] [inst_6 : Algebra R E]\\n  [inst_7 : Field L] [PerfectField L] [inst_9 : Algebra R L] [inst_10 : IsScalarTow\", \"doc\": \"Given a scalar tower $ R \\to F \\to E $, where $ L $ is a perfect field equipped with an $ R $-algebra structure, the restriction map from $ R $-algebra homomorphisms $ E \\to L $ to $ R $-algebra homomorp\"}\n  {\"name\": \"AlgHom.normal_bijective\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] (E : Type u_3)\\n  [inst_3 : Field E] [inst_4 : Algebra F E] [inst_5 : Algebra K E] [IsScalarTower F K E] [h : Normal F E]\\n  (ϕ : E →ₐ[F] K), Function.Bijective ⇑ϕ\", \"doc\": \"Let $ E $ be a normal field extension of $ F $. Then every $ F $-algebra homomorphism $ \\\\phi : E \\\\to K $ to any field $ K $ is bijective, i.e., both injective and surjective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isPretransitive\", \"Ideal\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Ideal.isPretransitive_of_isGaloisGroup\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (G : Type u_3) [Group G] [Finite G] [MulSemiringAction G B] [IsGaloisGroup G A B] : MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive|normal.*orbit|orbit.*normal|embedding.*[Ff]iber",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"40\", \"text\": \"/-- `f.fiberι y : f.fiber y ⟶ X` is the embedding of the scheme-theoretic fiber into `X`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"104\", \"text\": \"  .trans (f.fiberι y).isEmbedding.toHomeomorph (.setCongr (f.range_fiberι y))\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitive finite group action on geometric scheme fibre lifts after normal field extension",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal scalar extension and compatible finite group actions preserve transitivity on geometric fibres of finite type schemes",
+   "results": "{\"t\": \"2026-10-22T11:07:25Z\", \"tool\": \"leanfinder\", \"query\": \"Normal scalar extension and compatible finite group actions preserve transitivity on geometric fibres of finite type schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\"], \"digest\": \"b6977b6d22b8ba30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; field embedding transitivity is reused through its existing DAG leaf, while Galois prime-transitivity, categorical actions and elliptic-curve orbits do not give every scheme and rational-point clause under the present possibly inseparable hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit|isPretransitive|normal.*scalar",
+   "results": "{\"t\": \"2026-10-22T11:07:59Z\", \"tool\": \"grep\", \"query\": \"orbit|isPretransitive|normal.*scalar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"f1e68e0497cf49be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; field embedding transitivity is reused through its existing DAG leaf, while Galois prime-transitivity, categorical actions and elliptic-curve orbits do not give every scheme and rational-point clause under the present possibly inseparable hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre of normal scalar extension finite group action transitive on points",
+   "results": "{\"t\": \"2026-10-22T11:07:59Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibre of normal scalar extension finite group action transitive on points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"Sylow.isPretransitive_of_finite\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"IsGalois.of_fixed_field\", \"MulAction.IsQuasiPreprimitive.isPretransitive_of_normal\", \"CategoryTheory.PreGaloisCategory.autMulFiber\"], \"digest\": \"682f67e143669898\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; field embedding transitivity is reused through its existing DAG leaf, while Galois prime-transitivity, categorical actions and elliptic-curve orbits do not give every scheme and rational-point clause under the present possibly inseparable hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal.algHomEquivAut",
+   "results": "{\"t\": \"2026-10-22T11:07:59Z\", \"tool\": \"loogle\", \"query\": \"Normal.algHomEquivAut\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Normal.algHomEquivAut\", \"Normal.algHomEquivAut_apply\", \"Normal.algHomEquivAut_symm_apply\"], \"digest\": \"64181e1f5faad159\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; field embedding transitivity is reused through its existing DAG leaf, while Galois prime-transitivity, categorical actions and elliptic-curve orbits do not give every scheme and rational-point clause under the present possibly inseparable hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of tensor product of normal finite field extension with algebraically closed field form one automorphism orbit",
+   "results": "{\"t\": \"2026-10-22T11:08:06Z\", \"tool\": \"leanfinder\", \"query\": \"Points of tensor product of normal finite field extension with algebraically closed field form one automorphism orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLiftEquiv\", \"galLiftEquiv_apply\", \"Normal.algHomEquivAut\", \"Algebra.isInvariant_of_isGalois'\", \"AlgHom.normal_bijective\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IsGaloisGroup.to_isFractionRing\"], \"digest\": \"02700495983667c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; field embedding transitivity is reused through its existing DAG leaf, while Galois prime-transitivity, categorical actions and elliptic-curve orbits do not give every scheme and rational-point clause under the present possibly inseparable hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-field-semilinear-induction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "X 2.3 Step 2, printed p.150, geometric-orbit clause for (2.b); agent elaboration, former steps 7–8 of lem-sfb-common-field-semilinear-induction. Supporting Stacks results: Tag 00FV (theorem-nullstellensatz (1)), Tag 09HN (lemma-normal-goes-up), Tag 0BR4 (lemma-normal-embeddings-differ-by-aut).",
+   "via": [
+    "lem-sfb-common-field-semilinear-induction",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-scalar-extension-geometric-orbits",
+  "worker": "stage1",
+  "summary": "Rebased the retained Q130 split returned at bdacb651cd8 onto the current live unsplit item. Re-read every statement dependency and all eleven proof citations; all retained citation quotes still equal the current statements. Preserved the mathematical statement, eight-step route, provenance and recorded searches. Made the affine T0 argument and finite-degree algebraicity needed for the normal-tower application explicit. No new nodes, attachments or Mathlib leaves.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). These steps elaborate the geometric-orbit clause of ILO X 2.3 Step 2 and former steps 7–8 of lem-sfb-common-field-semilinear-induction; the existing from chain and place are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-19aa08977",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-19aa08977 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a re-delivery of bdacb651, which was PASSed on 2026-10-22; that landing was refused as a side-completion promotion failure, not a mathematical return. The item is still unsplit with an empty proof in both clones/live and clones/side-live, so no other group has taken it over. The delivery has no new nodes. The statement is byte-identical to the live one. Against the old head, only the texts of steps 2 and 7 changed; stmt_deps, proof_deps, uses and sources are unchanged. All 11 cited mathlib leaves and the 10 stmt_deps have the same statement in the snapshot and in live, and proof_deps equals the union of the step uses. I read all 8 steps. Step 1: 01T2 gives A finitely generated over F; F/e is finite inside K, so A is finitely generated over R; 01T4 handles base change for arbitrary B. Step 2: the new T0 wording is correct (an affine open contains generizations, and the closure of {p} is V(p)); a finite transitive T0 space has all points closed; the closed-point residue lemma applies with Omega algebraically closed and local finite type. Step 3: fibre-product associativity, then the fibre-points lemma with kappa(s)=F gives Spec(Omega tensor_F K). Step 4: a finite-dimensional domain over Omega is Omega (09GQ). Step 5: the prime/embedding bijection is inverse both ways; existence is 09GU. Step 6: gamma.p = phi^-1(p), so beta goes to beta o alpha(gamma)^-1, which is a left action. Step 7: the new algebraicity sentence supplies the 09HN hypothesis; 0BR4 needs no separability; alpha(gamma)=sigma^-1. Step 8: lift through r, then correct in the fibre. Edge cases checked: trivial groups, purely inseparable K/F with nonreduced A_x, separable K/F, non-faithful actions, arbitrary B. Duplicate search found nothing. No SGA source and no tool_uses. Maintainer note: side-promotion refusal loop; please land or promote."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalScalarExtensionGeometricOrbits",
+  "declaration": "AlgebraicGeometry.NormalScalarExtension.geometric_orbits",
+  "declarations": [
+   "AlgebraicGeometry.NormalScalarExtension.fibreScalar",
+   "AlgebraicGeometry.NormalScalarExtension.scalarFibre",
+   "AlgebraicGeometry.NormalScalarExtension.fibreMap",
+   "AlgebraicGeometry.NormalScalarExtension.diagonalMap",
+   "AlgebraicGeometry.NormalScalarExtension.geometric_orbits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalScalarExtensionGeometricOrbits.lean",
+  "statement": "theorem geometric_orbits {e F K : Type u} [Field e] [Field F] [Field K] [Algebra e F] [Algebra F K] [Algebra e K] [IsScalarTower e F K] [Module.Finite e K] [Normal e K] {J : Type v} [Group J] [Finite J] {Γ : Type w} [Group Γ] [Finite Γ] (ρ : J →* (F ≃ₐ[e] F)) (r : Γ →* J) (hr : Function.Surjective r) (α : Γ →* (K ≃ₐ[e] K)) (hc : ∀ γ : Γ, Spec.map (CommRingCat.ofHom (algebraMap F K)) ≫ Spec.map (CommRingCat.ofHom (ρ (r γ)).symm.toRingHom) = Spec.map (CommRingCat.ofHom (α γ).symm.toRingHom) ≫ Spec.map (CommRingCat.ofHom (algebraMap F K))) (hk : ∀ τ : K ≃ₐ[e] K, (∃ γ : Γ, r γ = 1 ∧ α γ = τ) ↔ ∀ t : F, τ (algebraMap F K t) = algebraMap F K t) (V : Scheme.{u}) (p : V ⟶ Spec (.of F)) [LocallyOfFiniteType p] [QuasiCompact p] (a : J →* Aut V) (hs : ∀ j : J, (a j).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (ρ j).symm.toRingHom)) (B : Scheme.{u}) (s : B ⟶ Spec (.of e)) (v : V ⟶ B) (he : v ≫ s = p ≫ Spec.map (CommRingCat.ofHom (algebraMap e F))) (hv : ∀ j : J, (a j).hom ≫ v = v) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ B) (hn : Nonempty ↥(pullback v b)) (ht : ∀ x y : ↥(pullback v b), ∃ j : J, fibreMap a v hv b j x = y) : (∀ x : ↥(pullback v b), ∃ i : CommRingCat.of Ω ≅ (pullback v b).residueField x, i.hom = Spec.preimage ((pullback v b).fromSpecResidueField x ≫ pullback.snd v b) ∧ ∃ E : {β : K →+* Ω // ∀ t : F, β (algebraMap F K t) = (Spec.preimage ((pullback v b).fromSpecResidueField x ≫ fibreScalar p v b) ≫ i.inv) t} ≃ {y : scalarFibre K p v b // pullback.fst (fibreScalar p v b) (Spec.map (CommRingCat.ofHom (algebraMap F K))) y = x}, Nonempty {β : K →+* Ω // ∀ t : F, β (algebraMap F K t) = (Spec.preimage ((pullback v b).fromSpecResidueField x ≫ fibreScalar p v b) ≫ i.inv) t} ∧ (∀ β, ∃ t : Spec (.of Ω) ⟶ scalarFibre K p v b, t ≫ pullback.fst (fibreScalar p v b) (Spec.map (CommRingCat.ofHom (algebraMap F K))) = Spec.map i.inv ≫ (pullback v b).fromSpecResidueField x ∧ t ≫ pullback.snd (fibreScalar p v b) (Spec.map (CommRingCat.ofHom (algebraMap F K))) = Spec.map (CommRingCat.ofHom β.val) ∧ t ≫ pullback.fst (fibreScalar p v b) (Spec.map (CommRingCat.ofHom (algebraMap F K))) ≫ pullback.snd v b = 𝟙 (Spec (.of Ω)) ∧ (E β).val = t (IsLocalRing.closedPoint Ω)) ∧ (∀ (γ : Γ) (_ : r γ = 1) β₁, ∃ β₂, β₂.val = β₁.val.comp (α γ).symm.toRingHom ∧ (E β₂).val = diagonalMap ρ r α p a hs hc v hv b γ (E β₁).val)) ∧ Nonempty (scalarFibre K p v b) ∧ (∀ y₁ y₂ : scalarFibre K p v b, ∃ γ : Γ, diagonalMap ρ r α p a hs hc v hv b γ y₁ = y₂)",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The chosen W_b is the canonically isomorphic iterated pullback with the geometric base change first. The evaluation bijection is characterized by its projections to V_b, Spec K and Spec Ω; under the tensor-product universal property these are exactly z ⊗ k ↦ z β(k). All induced action maps are constructed using pullback.map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dd852ed4",
+  "group": "NS",
+  "result": "pass",
+  "note": "First Lean delivery (live lean=null; only lean field differs). Statement verbatim. Hypotheses exact: hc Spec square ⇔ α|F=ρ∘r; hk ↔ gives both inclusions of α(ker r)=Aut_F(K); LOFT+QC=finite type; Aut mul = g.trans f so a is a left action, hs uses ρ⁻¹ per node; Ω:Type u forced by B:Scheme.{u}. Conclusions: residue iso hom pinned to Spec.preimage(fromSpecResidueField≫snd) (same as Mathlib residueFieldIsoBase); embedding subtype F→κ(x)→Ω; E pinned via unique t with projections Spec i.inv≫fromSpecResidueField x and Spec β (consistent); kernel formula β∘α(γ)⁻¹ checked against diagonalMap; nonempty single Γ-orbit via pullback.map diagonalMap. W_b model (V×_BΩ)×_F K canonically iso, accepted. Edge cases: inseparable K/F, trivial groups, non-faithful, arbitrary B. Helpers are real pullbacks/maps, docstrings with source+blueprint, only sorry, no duplicate found. No compile (no file changed)."
+ }
+}

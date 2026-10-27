@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-total-derived-normalized-comparisons",
+ "kind": "lemma",
+ "title": "Normalized comparisons for the total-derived open adjunction",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and a field k of positive characteristic different from ell. The compactification composites and total derived open adjunctions of [def-sfb-integral-compact-support-interface], with integral coefficient O_E, admit one comparison family satisfying identity, cocycle, and normalization against every boundary-preserving refinement. This is the total-derived normalization of [det-sf-comp-coherence-cocycle].",
+ "stmt_deps": [
+  "def-sfb-integral-compact-support-interface",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-sf-comp-coherence-cocycle"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Final paragraph, comparison, composition and base-change normalization."
+ },
+ "proof": [
+  {
+   "text": "Restrict the canonical compactification comparison family from Loc(Dctf) to Loc(Dbc) using localizingClosure_ctf_equals_bc for O_E. Whiskering preserves its identity and cocycle equations.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r:c→d choose a dense refinement a:w→c using the common dense refinement of c with itself. Apply canonical comparison normalization to a and a followed by r. The refinement-component composition law and cancellation of the invertible component for a give phi(c,d) rho_r = id.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-refinement total normalization lemma to obtain e and identify rho_r with the inverse of refinementIso(e). The cancellation equation identifies phi(c,d) with this isomorphism. Assemble the per-morphism families by choice.",
+   "uses": [
+    "lem-sfb-boundary-refinement-total-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-sf-comp-coherence-cocycle",
+  "det-nagata-refinement-common-dense",
+  "lem-sfb-boundary-refinement-total-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Final comparison paragraph; total-derived normalization of one boundary refinement. M6: restricted canonical family and dense-refinement cancellation."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLocalizingCompactSupport",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-brown-construction",
+   "place": "Final paragraph, comparison, composition and base-change normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-brown",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralNormalizedComparisons",
+  "file": "lean/Sheaf/SixFunctors/IntegralNormalizedComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.normalizedComparisons",
+  "statement": "theorem normalizedComparisons\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    : ∃ φ : Comparisons (Profinite.padicIntegersRingObj ℓ E.val) k,\n      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),\n    φ f c c = Iso.refl _) ∧\n      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d e : Compactifications k f),\n    φ f c d ≪≫ φ f d e = φ f c e) ∧\n      (∀ {X Y : Spaces k} (f : X ⟶ Y) (c d : Compactifications k f)\n    (r : c.obj.Refinement d.obj)\n    (_boundary : r.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange)\n    (K : (localizing (Profinite.padicIntegersRingObj ℓ E.val) X.obj.left).FullSubcategory),\n      ∃ e : (extend (Profinite.padicIntegersRingObj ℓ E.val) d.obj.i).obj K.obj ≅\n          (push (Profinite.padicIntegersRingObj ℓ E.val) r.hom).obj ((extend\n            (Profinite.padicIntegersRingObj ℓ E.val) c.obj.i).obj K.obj),\n        (openAdjunction (Profinite.padicIntegersRingObj ℓ E.val) d.obj.i).homEquiv _ _ e.hom ≫\n            refinementRestriction (Profinite.padicIntegersRingObj ℓ E.val) r K.obj =\n              (openAdjunction (Profinite.padicIntegersRingObj ℓ E.val) c.obj.i).unit.app K.obj ∧\n          (φ f c d).app K = refinementIso (Profinite.padicIntegersRingObj ℓ E.val) r K.obj e)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|[Ll]ocalizing|[Cc]onstructible",
+   "results": {
+    "hits": 11,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Small.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image of integral constructible sheaves preserves coproducts on the localizing closure and is independent of compactification",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.coproduct",
+     "CompHausLike.instPreservesFiniteCoproductsTopCatCompHausLikeToTopOfHasExplicitFiniteCoproducts",
+     "AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace",
+     "AlgebraicGeometry.Scheme.Hom.support_ker",
+     "HasCompactSupport.comp_isClosedEmbedding",
+     "CompHausLike.instPreservesFiniteCoproductsToCompHausLike",
+     "CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'",
+     "CondensedSet.LocallyConstant.functorFullyFaithful"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral compactly supported pushforward on pro etale derived categories of constructible sheaves is independent of compactification and commutes with composition and base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "SheafOfModules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+     "PresheafOfModules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|lowerShriek|[Bb]rown|[Cc]ompactification",
+   "results": {
+    "hits": 3,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type scheme morphism the derived compactly supported pushforward is proper pushforward of extension by zero and satisfies a canonical composition law independent of the chosen compactification",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.Scheme.Hom.comp_appLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor of extension by zero followed by proper direct image preserves arbitrary coproducts on the triangulated subcategory generated by bounded constructible complexes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.isHomological_of_localization",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "No match for this item. LeanFinder returns generic exact-functor derived-category constructions; grep returns the pro-etale site, integral coefficient sheaf, localizing-subcategory import, and unrelated compact-support integration facts. Read ExactFunctor.lean:34-108 and ElladicCohomology.lean:48-67; none constructs compact-support direct image or its comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Pp]ush|[Pp]ush.*compactSupport|LocalizingSubcategory|ProEtale",
+   "results": {
+    "hits": 13,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "No match for this item. LeanFinder returns generic exact-functor derived-category constructions; grep returns the pro-etale site, integral coefficient sheaf, localizing-subcategory import, and unrelated compact-support integration facts. Read ExactFunctor.lean:34-108 and ElladicCohomology.lean:48-67; none constructs compact-support direct image or its comparison maps."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49558",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T163606-L-709450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261026T070312-L-3532293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

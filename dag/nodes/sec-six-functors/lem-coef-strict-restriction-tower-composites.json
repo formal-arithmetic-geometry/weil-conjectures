@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-strict-restriction-tower-composites",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-flat-cokernel",
+   "place": "Identification of the completed strict tower maps with finite semilinear composites",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict composites in a system of restriction functors",
+ "statement": "Let R_j be sheaves of rings, q_(m,n):R_m→R_n for n≤m with the composition law, and A a ring sheaf with compatible maps p_j:A→R_j. Use the canonical restriction comparisons of [def-coef-normalized-dvr-tower]. For complexes P_j of R_j-modules and semilinear successor maps g_j:P_(j+1)→Res(P_j), construct their finite composites recursively. Restrict P_j along p_j, insert zero at level zero, and form the actual inverse sequence by the completed successor maps. Its map from exponent n+k+2 to n+1 equals the completed restriction of the finite composite P_(n+k+1)→Res(P_n), followed by the canonical comparison. The coefficient data, finite composites and strict tower are actual constructions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Strict finite-model composite maps, before the scalar-cokernel calculation"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Construct restriction comparisons from coefficient composition equalities. Eliminate those equalities and check the corresponding comparison maps on complexes by reflexivity; this proves their associativity.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the coefficient sheaves as parameters and store their quotient and projection maps and composition laws. Also record the completed restriction comparisons with their equality to the canonical ones, so their terms are shared with the actual tower. Lift restriction to functors on complexes. Rewriting the comparison certificates in abstract coefficient data reduces coherence to the first step. In abstract categories, naturality and that coherence identify restriction of a finite composite with composition of the restricted maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define finite composites recursively at the abstract functor level. Insert the zero object and form the actual inverse sequence. Induction on the number of successors, with the functor composition law and the preceding naturality identity, identifies every tower map. Specialize this proved construction to coefficient sheaves and cochain complexes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Generic strict restriction-tower construction and naturality of composite maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of restriction of scalars functors on complexes is coherent and semilinear successor chain maps form a strict inverse sequence",
+   "results": "8 hits: HomologicalComplex.restrictionMap_f', HomologicalComplex.restrictionMap_comp, ComplexShape.Embedding.homRestrict_f, HomologicalComplex.restriction.sc'Iso_inv_τ₁, ModuleCat.restrictScalarsComp'_inv_app, HomologicalComplex.restriction.sc'Iso, HomologicalComplex.restriction_d_eq_assoc, HomologicalComplex.restriction.sc'Iso_hom_τ₁",
+   "date": "2026-10-25",
+   "verdict": "The required generic tools exist, but no complete theorem for coherent sheaf restriction towers was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexCompIso\"",
+   "results": "4 hits: CategoryTheory.Functor.mapHomologicalComplexCompIso, CategoryTheory.Functor.mapHomologicalComplexCompIso_hom_app_f, CategoryTheory.Functor.mapHomologicalComplexCompIso_inv_app_f, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpHomMapHomologicalComplexCompIso",
+   "date": "2026-10-25",
+   "verdict": "The required generic tools exist, but no complete theorem for coherent sheaf restriction towers was found."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*comp|ofOpSequence_map_homOfLE_succ",
+   "results": "25 hits: Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+   "date": "2026-10-25",
+   "verdict": "The required generic tools exist, but no complete theorem for coherent sheaf restriction towers was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRFlatCokernel",
+  "date": "2026-10-26",
+  "group": "W6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictRestrictionTower",
+  "file": "lean/Sheaf/Paper/StrictRestrictionTower.lean",
+  "declaration": "WeilConjectures.SheafRestrictionTowerData.tower_map",
+  "statement": "theorem tower_map (n k : ℕ) :\n    (syst.tower P g).map\n      (homOfLE (Nat.succ_le_succ (Nat.le_add_right n (k + 1)))).op =\n    ((SheafOfModules.restrictScalars (syst.projection (n + (k + 1)))).mapHomologicalComplex\n       (.up ℤ)).map (syst.finiteMap P g n k) ≫\n      (Functor.mapHomologicalComplexCompIso\n        (syst.completedComp (Nat.le_add_right n (k + 1))) (.up ℤ)).hom.app (P n)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.normalizedDVRRestrictionComp",
+   "WeilConjectures.normalizedDVRRestrictionComp_assoc_complex",
+   "WeilConjectures.StrictRestrictionData",
+   "WeilConjectures.StrictRestrictionData.finiteMap",
+   "WeilConjectures.StrictRestrictionData.finiteMap_succ",
+   "WeilConjectures.StrictRestrictionData.object",
+   "WeilConjectures.StrictRestrictionData.step",
+   "WeilConjectures.StrictRestrictionData.tower",
+   "WeilConjectures.StrictRestrictionData.tower_map",
+   "WeilConjectures.SheafRestrictionTowerData",
+   "WeilConjectures.SheafRestrictionTowerData.finiteComp",
+   "WeilConjectures.SheafRestrictionTowerData.completedComp",
+   "WeilConjectures.SheafRestrictionTowerData.complexData",
+   "WeilConjectures.SheafRestrictionTowerData.finiteMap",
+   "WeilConjectures.SheafRestrictionTowerData.finiteMap_succ",
+   "WeilConjectures.SheafRestrictionTowerData.complex",
+   "WeilConjectures.SheafRestrictionTowerData.step",
+   "WeilConjectures.SheafRestrictionTowerData.step_succ",
+   "WeilConjectures.SheafRestrictionTowerData.tower",
+   "WeilConjectures.SheafRestrictionTowerData.tower_map"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd8a3",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T121136-L-2760628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd8a3",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T121136-L-2760628",
+  "kind": "interface",
+  "note": "independent cc review: normalizedDVR_flat_cokernel proof + StrictRestrictionTower against nodes lem-coef-normalized-dvr-flat-cokernel / lem-coef-strict-restriction-tower-composites; Dl adaptation against published (published >120s NOT compiled, delivered 14.3s); BoundedFreeCone FAIL re-checked via rebuilt chain Tower→FlatCokernel→Roos→BoundedFreeCone all OK"
+ }
+}

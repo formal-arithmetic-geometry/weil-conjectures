@@ -5,6 +5,7 @@ Authors: SHEAF groups Q35 and U7
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
 public import Sheaf.Paper.WitnessCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective

@@ -169,30 +169,42 @@
    "CategoryTheory.ringed_sheaf_slice_adjunction"
   ],
   "file": "lean/Sheaf/CategoryTheory/RingedSheafSliceAdjunction.lean",
-  "statement": "theorem ringed_sheaf_slice_adjunction\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :\n    Nonempty (RingedSheafSliceAdjunctionData R A)",
+  "statement": "theorem ringed_sheaf_slice_adjunction {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) : Nonempty (RingedSheafSliceAdjunctionData R A)",
   "branch": "newtargets-dag",
-  "by": "NF",
-  "date": "2026-10-17",
+  "by": "Q01",
+  "date": "2026-10-23",
   "existing": false,
-  "note": "Section 1(B): the published RingedSheafSliceAdjunctionData had localization.modules ⊣ pullback. The direct image j_A* is right adjoint to restriction j_A^*, so that field had the opposite direction and asserted a false adjunction for an infinite sheaf over the point. This module retains the existing element-site construction, fibre equivalence, canonical rings, module restriction and extension-by-zero data, and changes only that field to pullback ⊣ localization.modules, with its proof explanation. It now states the dependency node as written: j_A! ⊣ j_A^* ⊣ j_A*. No natural-language node field is changed. U3: existing construction declarations are moved verbatim to Sheaf.CategoryTheory.RingedSheafSliceConstruction and publicly re-exported; their types and names are unchanged. The existence theorem is proved from three fully proved supporting constructions using canonical Mathlib adjoints; no sorry remains in the delivery."
+  "note": "S3 stage-3 interface repair: record pullback_eq : pullback = elementModulePullback R A, as required by the existing canonical restriction statement and the Q01 comparison interface. The existing complete existence proof is preserved and supplies rfl for the additional field. No new sorry. See coord/changes/S3-canonical-slice-module-pullback.md.",
+  "fixed_by": "NT-stage2-cc-976787c11"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-cc-df44a1f7d",
-  "group": "NF",
-  "result": "pass",
-  "note": "Clause-by-clause match: RingedToposMorphism direction (S=R'), [e.inverse.IsEquivalence][IsIso e.ringMap] only; module equivalence pinned to e via pushforward≅e.modules, underlying, structural; mapDerivedCategory derived equivalence with unit/counit; K-injectives both ways; slices pinned by sliceTopos/sliceSets/sliceStructural; restrictions, RHom, localization fields; localTests iff via landed IsLocallyDerivedRingedIdealComplete for all unbounded N and every mono ideal with I=F(I'). §1(B) repairs correct and unused elsewhere: localization_modules j_*⊣j^* (false) -> j^*⊣j_*; exists_localizedSheavesOverRepresentable generalized from Precoverage+HasPullbacks to GrothendieckTopology. stmt_deps additions correct. No hollow defs, only sorry, docstrings ok, single universe u per convention. nt_compile --json on 3 files rc=0, no errors (2.7/5.4/26.1 s). Remarks only: Nonempty-packaged isos, siteObject pinned via restrictions, Q23 lean note on slice node replaced."
+  "reviewer": "NT-stage2-cc-976787c11",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Item correct; the three H3 points of the dea2 RETURN are resolved. (1) The set restriction map is the inverse mate of an explicit identity on sections, and the product clause uses theta, both fibre_iso and the Mathlib prodComparison. (2) The slice RingedToposMorphism is the unique structure with every data field pinned to the unit-induced element functor, the coefficient map a_W, the transposed structural map, the pushforward modules and the identity underlying iso. Theta is pinned by the global unit. (3) beta is the identity on sections via HEq, lambda is its mate, and mu^-1 equals the inverse mate of the identity-on-sections square (the localization-adjunction detour cancels). Fault fixed: the §1(B) dependency module RingedSheafSliceAdjunction (NF, stage-3 proved) added pullback_eq and replaced the published ringed_sheaf_slice_adjunction proof with sorry. fixes/RingedSheafSliceAdjunction.lean = live text + `pullback_eq : pullback = elementModulePullback R A := by rfl`; the proof body is byte-identical to live and the module has no sorry. No other live module builds the structure literal. nt_compile --json of the fixed dependency (7.7 s) and the unchanged item (34.8 s): the tool printed only timings, no errors or warnings. Advisories: the dependency record's lean.note still says the proof is postponed (the maintainer may correct it); sliceSetPullbackMap/sliceModulePullbackMap are owned by slice-*-pullback-isIso theorem nodes outside stmt_deps; the PreservesFiniteLimits L hypothesis is redundant; the slice arguments of mu are vacuous."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-39026",
-  "group": "U3",
+  "reviewer": "COMPILER",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261019T112542-L-3954694",
+  "landing": "20261024T191008-L-206118",
   "kind": "interface",
-  "note": "independent cc review: Delivered item + 4 new modules (compiled clean, axioms propext/choice/Quot.sound) against live clone: moved element-site decls byte-identical, RingedSheafSliceAdjunctionData unchanged, both direct importers (RingedPresentationTransport, OrientedProperFibreExchange) compile; bypassed nodes not in unit realized"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

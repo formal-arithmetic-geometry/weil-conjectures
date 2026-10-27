@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-etale-bounded-flat-complex",
+ "kind": "definition",
+ "title": "Bounded flat complex on the small etale site",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring in universe $u+1$, $X$ a scheme in universe $u$, and $P$ a cochain complex of sheaves of $R$-modules on $X_{\\mathrm{et}}$ in the ordinary derived-module setting [def-weil-pbc-derived-categories]. For arbitrary integers $a,b$, say that $P$ is a bounded flat complex in $[a,b]$ if $P^q$ is a zero object whenever $q<a$ or $b<q$, and every $P^q$ is flat, meaning that tensoring with it is exact [def-pc-flat-sheaf-modules]. No assumption $a\\le b$ is imposed; when $a>b$ all terms must be zero.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
+  "place": "AlgebraicGeometry.Etale.IsBoundedFlatComplex and its full ambient binders; thm-coef-finite-hom proof paragraphs 2–3"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSitePerfect|IsBoundedFlatComplex|bounded.*flat.*complex [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "{\"t\": \"2026-10-22T12:04:07Z\", \"tool\": \"grep\", \"query\": \"IsSitePerfect|IsBoundedFlatComplex|bounded.*flat.*complex\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complex of flat sheaves of modules on the small etale site",
+   "results": "{\"t\": \"2026-10-22T12:04:08Z\", \"tool\": \"leansearch\", \"query\": \"Bounded complex of flat sheaves of modules on the small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"Module.Flat.rTensor_shortComplex_exact\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.hasLimit\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"Module.Flat.lTensor_shortComplex_exact\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.hasLimitsOfShape\"], \"digest\": \"553caeb1be88e838\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complex of flat sheaves of modules with terms zero outside a finite integer interval",
+   "results": "{\"t\": \"2026-10-22T12:05:21Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded complex of flat sheaves of modules with terms zero outside a finite integer interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"HomologicalComplex.IsStrictlySupportedOutside\", \"HomologicalComplex.IsSupportedOutside\", \"CochainComplex.IsStrictlyGE\", \"HomologicalComplex.IsStrictlySupportedOutside.isZero\", \"CochainComplex.isStrictlyLE_iff\", \"HomologicalComplex.isZero_iff_isStrictlySupported_and_isStrictlySupportedOutside\", \"CochainComplex.IsGE\"], \"digest\": \"37bc2985fcbdf087\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsSitePerfect|IsBoundedFlatComplex lean/WeilConjectures lean/Sheaf; rg -l IsSitePerfect|IsBoundedFlatComplex dag/nodes; blueprint_refs.py search bounded flat",
+   "results": "Upstream Derived/Finiteness/FlatModel.lean:47 defines IsBoundedFlatComplex. Sheaf consumers use it; lem-sf-flat-model owns only theorems. No definition node owns the predicate.",
+   "date": "2026-10-22",
+   "verdict": "Create only an existing:true owning definition record; no new Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-etale-lisse-hom-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "The bounded-flat representative in the finite-free local Hom calculation",
+   "via": [
+    "lem-coef-etale-lisse-hom-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel",
+  "declaration": "AlgebraicGeometry.Etale.IsBoundedFlatComplex",
+  "statement": "def IsBoundedFlatComplex (a b : ℤ)\n    (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) : Prop",
+  "branch": "slopmaster2",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing upstream definition. The ambient binders are universe u, (Λ : Type (u + 1)) [CommRing Λ] and {X : Scheme.{u}}. Its body is termwise categorical flatness and IsZero outside [a,b]. The symmetric sheaf tensor makes its two-sided ObjectProperty.flat the usual exactness of tensoring. No proof of the flat-model theorem is used by this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after the 20565c32 RETURN (H2, three ownership points), all repaired. (1) The item and def-sf-finite-free-hom-local-calculation cite the existing:true owner def-pur-etale-scalar-pullback-iso instead of the theorem lem-pur-etale-scalar-mate-projection. (2) lem-sf-flat-model is replaced by the new existing:true def-sf-etale-bounded-flat-complex; its statement matches FlatModel.lean IsBoundedFlatComplex (Λ in u+1, X in u, arbitrary a,b, IsZero outside, flat terms), and the local-calculation module adds the public import, the only Lean change. (3) New existing:true def-sf-etale-site-perfect-complex matches SitePerfect.lean IsSitePerfect (étale cover, per-member bounds, retracts of constant Fin m → Λ, L f^* K ≅ Q P). No other DAG node owns either declaration (scan of live and side-live). New nodes' stmt_deps equal their citations; lean.statement fields are verbatim. The item changes only lean and stmt_deps (adds 6 def nodes, loses none, adds no theorem). The other changed dep records equal side-live (Q84/Y7 base movement). Theorem and coordinate modules are byte-identical to the returned head, whose mathematics was checked clause by clause and re-read: index shift, projective L, Tor intervals [a,b+2dX+1] and [a-2dS,b+2dX+1+2dS], both ctf endpoints, IsIso of the canonical etaleFiniteHomCanonical, local evaluation identity including t=0, restriction square. sorry only in the theorem; no hollow defs; no pro-étale substitute. Not compiled (no file changed). Advisory: Lean-file source.document on the ownership nodes; the item imports the old Hom/change-of-rings modules, which the rebound Q84 modules re-export; the unused inherited def-weil-site-perfect-complex stmt_dep; the second reading was by the same worker."
+ }
+}

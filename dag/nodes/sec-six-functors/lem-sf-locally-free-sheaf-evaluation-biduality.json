@@ -1,0 +1,245 @@
+{
+ "id": "lem-sf-locally-free-sheaf-evaluation-biduality",
+ "kind": "statement",
+ "title": "Ordinary locally finite-free sheaf evaluation and biduality",
+ "statement": "Let $(\\mathcal C,J)$ be a site small in the coefficient universe [def-weil-size-convention], $R$ any sheaf of commutative rings, and $M$ an $R$-module sheaf [def-weil-sheaf-of-modules-category]. Suppose there is a small family of objects $(U_i)_{i\\in I}$ such that, for every $V\\in\\mathcal C$, the sieve of arrows $W\\to V$ with $W$ admitting a morphism to some $U_i$ is covering. Suppose that on each slice $\\mathcal C/U_i$ there is an isomorphism $M|_{U_i}\\cong(R|_{U_i})^{\\oplus r_i}$ with $r_i\\geq0$ finite, allowed to vary with $i$. Write $D_R(M)=\\mathcal Hom_R(M,R)$ using the slice-Hom of [def-pur-sheaf-hom]. There is a natural module-sheaf map\n$$\\delta_M:M\\longrightarrow D_R^2(M),\\qquad \\delta_M(x)_V(\\lambda)=\\lambda(x|_V)$$\nfor every $x\\in M(U)$, $V\\to U$, and local functional $\\lambda$. Formation of $D_R$, $D_R^2$ and $\\delta_M$ commutes with restriction to any slice, with coefficients restricted to that slice. For every module map $f:M\\to N$, $D_R^2(f)\\delta_M=\\delta_N f$ (the same evaluation map for arbitrary $N$).\n\nThe dual $D_R(M)$ is finite free of rank $r_i$ on the same slices, and $\\delta_M$ is an isomorphism of $R$-module sheaves. More precisely, for each chosen local basis $e_1,\\ldots,e_{r_i}$, let $e_j^*$ be the coordinate functionals. On every further slice the dual-basis coordinate isomorphism sends $\\lambda$ to $(\\lambda(e_j))_j$, and the restriction of $\\delta_M^{-1}$ is\n$$\\eta\\longmapsto\\sum_{j=1}^{r_i}\\eta(e_j^*)e_j.$$\nThese formulas are compatible with further restriction, including the empty sum at rank zero. No global rank bound, points of the site, or global finite-free retract of $M$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "First sentence (finite-free evaluation is the identity) and last sentence (locality and restriction); ordinary ringed-site formulation using Stacks sites-modules.tex Tag 0E8H, lemma-internal-hom-restriction, and sites.tex Tag 04TQ, lemma-glue-maps."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restriction identification sectionwise using PresheafOfModules.restrictOverHomObjFwd and restrictOverHomObjBwd, induced by the iterated-slice equivalence. Their existing inverse laws give evaluationOverHomIso. Apply it twice to obtain bidualOverIso; the inverse precomposition is exactly the double-dual restriction identification.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8H, lemma-internal-hom-restriction; internal-Hom definition in Section 04TT; relocalization Tag 03EH in sites.tex."
+   }
+  },
+  {
+   "text": "The evaluation formula is definitional. Expand both sides of the restriction identity sectionwise and apply congrArg to restrictOverHomObjFwd_bwd at the identity slice object. This identifies the evaluation on the two equivalent iterated slices. Naturality in M is the existing proved bidual_naturality theorem.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT (slice-Hom rule and evaluation), Tag 03EM, lemma-internal-hom; Tag 03CV, definition-sheaf-modules."
+   }
+  },
+  {
+   "text": "Compose evaluationOverHomIso with precomposition by the chosen trivialization inverse and the existing homObjFreeUnitIso. Expand its projection using the finite biproduct comparison and homObjUnitIso; this coordinate is the local functional evaluated on the restricted basis section. Naturality of the basis inclusion identifies that section with the restriction of localBasisSection.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "First sentence: finite-free coordinate identification; ordinary slice-Hom expansion from sites-modules.tex Section 04TT."
+   }
+  },
+  {
+   "text": "The identity sum_freeπ_ιFree, conjugated by the trivialization, gives the expansion of every section in the local basis. Apply it to the image of a bidual section under the global inverse. Evaluating the inverse identity on each restricted coordinate functional identifies the coefficients with eta(e_j^*). Identity restrictions and restrictOver_hom_app_congr identify the slice components. Finite sums include rank zero without a separate assumption.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "First sentence: P to its bidual is the identity in finite-free coordinates; last sentence: stable under restriction."
+   }
+  },
+  {
+   "text": "Construct M.IsFiniteLocallyFree from the given trivializations and covering by isFiniteLocallyFree_of_exists_over_iso_free. Apply the already proved isIso_bidual, which establishes sectionwise finite-free bijectivity and descends the underlying abelian-sheaf isomorphism. The categorical inverse supplies a module-sheaf morphism and both inverse identities.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps; its covering-sieve form is the existing Mathlib leaf lem-sfb-sheaf-cover-local-isomorphism (CategoryTheory.Sheaf.isIso_of_coversTop)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "First sentence (finite-free dual coordinates and bidual evaluation), last sentence (restriction and locality). Uses the already proved source biduality and internal-Hom-free API; explicit coordinate expansion and restriction calculation by A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsReflexive|evalEquiv|bidual|dual_dual",
+   "results": "none; Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: module reflexivity and free-sheaf generators do not supply the slice-Hom dual and global cover descent for an arbitrary locally finite-free ringed-site sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally free finite rank sheaf of modules on a ringed site is reflexive by evaluation and its dual is locally free",
+   "results": "Module.IsReflexive; LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive; Module.IsReflexive.of_finite_of_free; Module.Dual.instIsReflecive; Module.IsReflexive.bijective_dual_eval'; Module.bijective_dual_eval; Module.IsReflexive.mk; Module.instIsReflexiveOfFiniteOfProjective",
+   "date": "2026-10-22",
+   "verdict": "no match: module reflexivity and free-sheaf generators do not supply the slice-Hom dual and global cover descent for an arbitrary locally finite-free ringed-site sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.evalEquiv",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: module reflexivity and free-sheaf generators do not supply the slice-Hom dual and global cover descent for an arbitrary locally finite-free ringed-site sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite free sheaf of modules over an arbitrary commutative ring sheaf has locally finite free dual and its evaluation into the double dual is an isomorphism",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.free; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.mapFree",
+   "date": "2026-10-22",
+   "verdict": "no match: module reflexivity and free-sheaf generators do not supply the slice-Hom dual and global cover descent for an arbitrary locally finite-free ringed-site sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules trivialized by finite free modules on a covering has dual basis local inverses for the bidual evaluation which glue globally",
+   "results": "SheafOfModules.freeSection; SheafOfModules.GeneratingSections.π; SheafOfModules.freeHomEquiv; SheafOfModules.LocalGeneratorsData.generators; SheafOfModules.QuasicoherentData.localGeneratorsData_generators; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.sectionMap_freeMap_freeSection; SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-22",
+   "verdict": "no match: module reflexivity and free-sheaf generators do not supply the slice-Hom dual and global cover descent for an arbitrary locally finite-free ringed-site sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|reflexiv|homObjFree|overHomObj",
+   "results": "0 hits; Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state slice-Hom biduality with local dual bases and cover descent for arbitrary ringed-site sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally free sheaf finite rank double dual evaluation isomorphism internal Hom",
+   "results": "Module.IsReflexive.of_finite_of_free; dualTensorHomEquivOfBasis; Module.evalEquiv_apply; Module.evalEquiv_toLinearMap; Module.Dual.instIsReflecive; Module.apply_evalEquiv_symm_apply; Module.IsReflexive; Module.Dual.eval_comp_comp_evalEquiv_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state slice-Hom biduality with local dual bases and cover descent for arbitrary ringed-site sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, IsIso",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-22",
+   "verdict": "unavailable: the Loogle index rejected the identifier; this is not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite free sheaf of modules on a ringed site is reflexive under double internal Hom evaluation",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_comp_apply; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.freeHomEquiv_freeMap",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state slice-Hom biduality with local dual bases and cover descent for arbitrary ringed-site sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|homObj|eval",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state slice-Hom biduality with local dual bases and cover descent for arbitrary ringed-site sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "loogle: unknown identifier 'SheafOfModules.homObj'",
+   "date": "2026-10-22",
+   "verdict": "unavailable: the Loogle index rejected the identifier; this is not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a sheaf trivialized by finite bases on slices has the same local bases and bidual evaluation is invertible",
+   "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.LocalGeneratorsData.I; CategoryTheory.evalEquiv; CategoryTheory.evalEquiv_symm_apply; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.generators; SheafOfModules.LocalGeneratorsData.X",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state slice-Hom biduality with local dual bases and cover descent for arbitrary ringed-site sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-lisse-biduality",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sf-hom-finite-projective.proof.md: first sentence, the finite-free bidual evaluation is the identity, and last sentence, locality and restriction. This ordinary ringed-site expansion serves lem-sf-weil-lisse-biduality via its finite-free calculation and globalization; computed ancestor is null because its maintainer-created chain terminates with created.item=null.",
+   "via": [
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-locally-free-sheaf-evaluation-biduality",
+  "worker": "stage1",
+  "summary": "Expanded the ordinary ringed-site finite-free calculation: explicit slice identifications, evaluation and naturality, dual-basis coordinates, inverse and restriction, then the existing covering-sieve isomorphism criterion. Statement unchanged; no new nodes. Project biduality declarations cover part but not the complete explicit-formula statement.",
+  "blueprint": "Steps 1-2 realize restriction/naturality in the last sentence of lem-sf-hom-finite-projective.proof.md; steps 3-4 expand its first sentence finite-free bidual identity; step 5 realizes locality with the existing cover criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-b4ed103c3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b4ed103c3 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report only. No new nodes, statement and stmt_deps unchanged, proof_deps equal to the union of the step uses. The item is still unsplit with 0 steps in both clones/live and clones/side-live, and there is no repair note for it, so no supersession and no re-split order. Sources read: blueprint lem-sf-hom-finite-projective.proof.md (first sentence: finite-free bidual is the identity; last sentence: local and stable under restriction), Stacks 0E8H sites-modules.tex:3775, 04TQ sites.tex:5638, 03EH/03EM/04TT/03CV checked through tags/tags, and Mathlib Sheaf.isIso_of_coversTop at LocalProperties.lean:33-38. Steps checked by hand. Step 1: relocalization from def-pur-localized-ringed-site plus def-pur-sheaf-hom identifies D and D² on slices. Step 2: naturality of δ(x), R(V)-linearity in λ, R(U)-linearity in x, and D²(f)δ_M = δ_N f for arbitrary N, all by direct computation. Step 3: coordinates λ↔(λ(e_j)), with the inverse a↦Σ b_j a_j|_W linear and natural, so D(M)|_{U_i} is free of rank r_i with basis e_j^*. Step 4: recomputed δ(sη)=η using naturality of η and commutativity of R(W), and s(δx)=x; rank 0 gives empty sums. Step 5: the covering hypothesis is exactly that of the leaf lem-sfb-sheaf-cover-local-isomorphism with A=Ab, R-linearity of the global inverse follows from injectivity of δ_V, and uniqueness of inverses gives the basis-independent formula. Edge cases (r=0, r=1, zero ring, varying ranks, empty family) are fine. Duplicate search: lem-sf-hom-finite-projective and lem-pod-finite-projective-tensor-hom cover only specific Λ settings; lem-sfb-ringed-site-perfect-duality is derived RHom and needs a separate ordinary/derived comparison; no duplicate. B10: the project Lean SheafOfModules.isIso_bidual (Bidual.lean:140) gives IsIso only, under extra instances, so it is not an exact attachment. The route is fine: only definitions plus a Mathlib-leaf tool, no tool_uses needed. Advisory: from.place was rewritten (harmless); lem-sf-hom-finite-projective could later cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.LocallyFreeEvaluationBiduality",
+  "declaration": "SheafOfModules.locallyFreeEvaluationBiduality",
+  "declarations": [
+   "SheafOfModules.evaluationOverHomIso",
+   "SheafOfModules.bidualOverIso",
+   "SheafOfModules.localBasisSection",
+   "SheafOfModules.localCoordinateFunctional",
+   "SheafOfModules.locallyFreeEvaluationBiduality"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/LocallyFreeEvaluationBiduality.lean",
+  "statement": "theorem locallyFreeEvaluationBiduality (M : CategoryTheory.ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) {I : Type u} (U : I → C) (hU : J.CoversTop U) (r : I → ℕ) (e : ∀ i, M.over (U i) ≅ free (ULift.{u} (Fin (r i)))) : (∀ (T : C) (x : M.val.obj (op T)) (V : Over T) (φ : (homObj (R := R) M (unit _)).val.obj (op V.left)), ((bidual (R := R) M).val.app (op T) x).app (op V) φ = φ.app (op (Over.mk (𝟙 V.left))) (M.val.map V.hom.op x)) ∧ (∀ T : C, (bidual (R := R) M).over T ≫ (bidualOverIso (R := R) M T).hom = bidual (R := R.over T) (M.over T)) ∧ (∀ (N : CategoryTheory.ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) (f : M ⟶ N), bidual (R := R) M ≫ homObjMap (R := R) (homObjMap (R := R) f (𝟙 _)) (𝟙 _) = f ≫ bidual (R := R) N) ∧ (∃ s : homObj (R := R) (homObj (R := R) M (unit _)) (unit _) ⟶ M, bidual (R := R) M ≫ s = 𝟙 M ∧ s ≫ bidual (R := R) M = 𝟙 _ ∧ ∀ (i : I) (b : M.over (U i) ≅ free (ULift.{u} (Fin (r i)))), (∃ d : (homObj (R := R) M (unit _)).over (U i) ≅ free (ULift.{u} (Fin (r i))), ∀ (V : Over (U i)) (φ : (homObj (R := R) M (unit _)).val.obj (op V.left)) (j : ULift.{u} (Fin (r i))), freeSectionsLinearEquiv (ULift.{u} (Fin (r i))) (op V) (d.hom.val.app (op V) φ) j = φ.app (op (Over.mk (𝟙 V.left))) (M.val.map V.hom.op (localBasisSection (R := R) b j))) ∧ (∀ (V : Over (U i)) (η : (homObj (R := R) (homObj (R := R) M (unit _)) (unit _)).val.obj (op V.left)), s.val.app (op V.left) η = ∑ j : ULift.{u} (Fin (r i)), η.app (op (Over.mk (𝟙 V.left))) ((homObj (R := R) M (unit _)).val.map V.hom.op (localCoordinateFunctional (R := R) b j)) • M.val.map V.hom.op (localBasisSection (R := R) b j)))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published slice-Hom, bidual and restriction isomorphism. The additional definitions compose the canonical double-dual restriction identification and extract the basis vectors and coordinate functionals of a supplied trivialization. The theorem includes evaluation, restriction, arbitrary-map naturality, local dual coordinates and a global two-sided inverse with the finite dual-basis formula on every further slice; no uniform rank or points are assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e655e9b1",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Node unchanged except lean (diffed vs side-live); no supersession. lean.statement verbatim, single sorry, 4 declarations recorded. Hypotheses match node: C:Type u small site, R:Sheaf J CommRingCat.{u} with no extra instances (sheafify instances inferred from imports), M ringedSiteModules.{u}, I:Type u, J.CoversTop U = covering-sieve condition, e : M.over (U i) ≅ free (ULift (Fin (r i))) with varying ranks, no bound/Nonempty. Conclusion clauses all present and pinned: evaluation formula for upstream SheafOfModules.bidual; slice compatibility via canonical bidualOverIso (overHomObjIso twice, R.over T); naturality for arbitrary N; two-sided inverse s; for every trivialization b of rank r_i, dual coordinate iso d fixed by λ↦(λ(e_j|V))_j through freeSectionsLinearEquiv; inverse formula Σ η(e_j^*|V)•e_j|V at every V over U_i. Helpers are real canonical data (e_j = ιFree j ≫ b.inv at 1; e_j^* = b.hom ≫ freeπ j), with source/blueprint docstrings and 5-step proof docstring. Edge cases r=0, varying ranks, empty I, zero ring OK. No H4 duplicate (isIso_bidual only IsIso). Advisory: def-pur-localized-ringed-site used in statement but only a proof_dep (stage-1 choice). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261024T184530-L-3063305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

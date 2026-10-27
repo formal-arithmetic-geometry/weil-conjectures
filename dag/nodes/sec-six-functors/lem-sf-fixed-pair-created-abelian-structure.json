@@ -1,0 +1,191 @@
+{
+ "id": "lem-sf-fixed-pair-created-abelian-structure",
+ "kind": "statement",
+ "title": "Created limits, colimits and abelian structure on fixed pairs",
+ "statement": "Fix a universe $\\mathcal V$. Let $\\mathcal A$ be an abelian category [def-sp-abelian] with $\\mathcal V$-small morphism sets and all $\\mathcal V$-small limits and colimits, and let $T:\\mathcal A\\to\\mathcal A$ be an additive autoequivalence. Let $\\mathcal B=\\mathcal A^T$ be the fixed-pair category and $U:\\mathcal B\\to\\mathcal A$ its forgetful functor [def-weil-endofunctor-fixed-pair-category]. Then $\\mathcal B$ is abelian, with addition of morphisms inherited from $\\mathcal A$, and $U$ creates all $\\mathcal V$-small limits and colimits. More precisely, for a small diagram $(X_i,\\theta_i)$, its limit has carrier $V=\\lim_iX_i$ and structure $TV\\cong\\lim_iTX_i\\xrightarrow{\\lim_i\\theta_i}V$; its colimit has carrier $W=\\operatorname{colim}_iX_i$ and structure $TW\\cong\\operatorname{colim}_iTX_i\\xrightarrow{\\operatorname{colim}_i\\theta_i}W$. The projections, respectively coprojections, with these structures form universal cones, respectively cocones, in $\\mathcal B$. In particular zero objects, finite biproducts, kernels and cokernels have their underlying constructions in $\\mathcal A$. A morphism in $\\mathcal B$ is monic, epic, or invertible if and only if its underlying morphism has that property. The underlying inverse of an invertible commuting morphism is a commuting morphism. Thus $U$ is additive, faithful, exact and conservative, and reflects exactness of sequences.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean",
+  "place": "IsoAlgebra.abelian and forget finite limits/colimits, lines 119-143; Endofunctor/IsoAlgebra.lean Autoequivalence, plus the dual limit construction; returned item steps 1-2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing IsoAlgebra preadditive, additive-forgetful, faithful and reflects-isomorphisms instances for the fixed-pair category [def-weil-endofunctor-fixed-pair-category]. The existing IsoAlgebra.abelian instance supplies the abelian structure [def-sp-abelian], since the autoequivalence preserves finite limits and colimits by [lem-galois-equivalence-preserves-limits]. Its finite-limit and finite-colimit preservation instances give preservation of finite biproducts. Functor.map_add identifies inherited addition on carriers.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary limiting cone c of the underlying diagram D, define alpha to be IsLimit.conePointsIsoOfNatIso for the T-image cone and c, using the structure natural isomorphism. The T-image cone is limiting by [lem-galois-equivalence-preserves-limits]. Its projection formula makes every c.π_j an intertwining morphism [def-weil-endofunctor-fixed-pair-category]. For every fixed-pair cone s, lift its carrier cone using c; after composing with each c.π_j, the required intertwining square reduces to the square for s.π_j. The limit hom-ext principle proves the square. Faithfulness transfers factorization and uniqueness, giving a lifted limiting cone with exactly the stipulated carrier and projections, including for an empty diagram. Apply createsLimitOfReflectsIso to these lifts to obtain creation of all limits of the specified size.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Dually, for an arbitrary colimiting cocone c define alpha by IsColimit.coconePointsIsoOfNatIso for the T-image cocone and c. Its coprojection equation makes the ambient coprojections intertwine [def-weil-endofunctor-fixed-pair-category]. Descend every carrier cocone through c; test the intertwining square on T of each coprojection. The preserved colimit [lem-galois-equivalence-preserves-limits] gives hom-ext, reducing the square to that of each input coprojection. Faithfulness transfers the universal property. These lifts have the exact displayed comparison structure and original carrier coprojections, even for the empty diagram. Apply createsColimitOfReflectsIso to obtain creation of all colimits of the specified size.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every fixed-pair morphism, the existing finite-limit and finite-colimit preservation of the forgetful functor preserve monos and epis; faithfulness reflects them. Reflection of isomorphisms gives the isomorphism equivalence. For the explicit inverse square, postcompose both proposed maps with the invertible carrier f, replace theta_X followed by f using its intertwining equation [def-weil-endofunctor-fixed-pair-category], and simplify T(inv f) followed by T(f) to the identity. Finally apply ShortComplex.exact_map_iff_of_faithful: the abelian structure [def-sp-abelian] supplies homology, and the additive exact forgetful functor preserves left and right homology and faithfully reflects vanishing.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-galois-equivalence-preserves-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Preadditive/EndoFunctor.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Limits/IsLimit.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+  "place": "Existing IsoAlgebra.abelian and finite-(co)limit preservation instances; explicit lifted universal cones/cocones following ForgetCreatesLimits and ForgetCreatesColimits, using conePointsIsoOfNatIso_hom_comp and comp_coconePointsIsoOfNatIso_hom; exact_map_iff_of_faithful. Complete Lean proof by H3, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive autoequivalence of an abelian complete cocomplete category has an abelian category of fixed pairs and the forgetful functor creates limits and colimits",
+   "results": "CategoryTheory.abelianOfEquivalence; CategoryTheory.Abelian.freyd_mitchell; CategoryTheory.abelianOfAdjunction; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux; AddCommGrpCat.leftExactFunctorForgetEquivalence; CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor; AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux; CategoryTheory.Abelian.FreydMitchell.functor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible algebras of an endofunctor inherit kernels cokernels and reflect isomorphisms",
+   "results": "CategoryTheory.Endofunctor.Algebra.forget_reflects_iso; CategoryTheory.AbelianOfAdjunction.hasKernels; CategoryTheory.Limits.instIsIsoKernelComparison; CategoryTheory.ObjectProperty.le_kernel_of_isoModSerre_isInvertedBy; CategoryTheory.Limits.PreservesKernel.iso; CategoryTheory.Limits.kernel_map_comp_preserves_kernel_iso_inv; CategoryTheory.Limits.PreservesKernel.of_iso_comparison; CategoryTheory.Abelian.isoModSerre_kernel_eq_inverseImage_isomorphisms",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "algEquivIsoAlgebraIso; algEquivIsoAlgebraIso_hom; algEquivIsoAlgebraIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|IsIsoStr|CreatesLimits.*[Aa]lgebra",
+   "results": "Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive autoequivalence of an abelian complete cocomplete category has an abelian category of fixed pairs and the forgetful functor creates limits and colimits",
+   "results": "AddMonCat.forget_createsLimits; AddCommMonCat.forget_createsLimits; AddGrpCat.forget_createsLimit; AddCommMonCat.forget_createsLimitsOfSize; AddGrpCat.forget_createsLimitsOfShape; AddGrpCat.Forget₂.createsLimit; AddCommGrpCat.forget_createsLimit; AddCommGrpCat.forget_createsLimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|IsIsoStr|forgetCreatesLimits",
+   "results": "Mathlib/CategoryTheory/Monad/Limits.lean; Mathlib/CategoryTheory/Monad/Limits.lean; Mathlib/CategoryTheory/Monad/Limits.lean; Mathlib/CategoryTheory/Monad/Limits.lean; Mathlib/CategoryTheory/Monad/Limits.lean; Mathlib/CategoryTheory/Limits/MorphismProperty.lean; Mathlib/CategoryTheory/Limits/MorphismProperty.lean; Mathlib/CategoryTheory/Limits/MorphismProperty.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the complete fixed-pair theorem; ordinary endofunctor algebras allow noninvertible structure, and general abelian-transfer criteria require additional arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of invertible algebras of an additive equivalence of an abelian category is abelian and its forgetful functor creates limits and colimits",
+   "results": "CategoryTheory.abelianOfEquivalence; AddGrpCat.Forget₂.createsLimit; AddCommGrpCat.Forget₂.createsLimit; CategoryTheory.Algebra.forget_additive; CategoryTheory.abelianOfAdjunction; CategoryTheory.Endofunctor.Algebra.forget_reflects_iso; Module.Invertible.algEquivOfRing; CategoryTheory.Idempotents.KaroubiKaroubi.equivalence.additive_inverse",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the complete fixed-pair theorem; ordinary endofunctor algebras allow noninvertible structure, and general abelian-transfer criteria require additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed pairs of an additive autoequivalence form an abelian category whose forgetful functor creates all small limits and colimits",
+   "results": "CategoryTheory.abelianOfEquivalence; CategoryTheory.AsSmall.instAdditiveDown; CategoryTheory.AsSmall.instAdditiveUp; CategoryTheory.AsSmall.abelian; CategoryTheory.Abelian.nonPreadditiveAbelian; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux; CategoryTheory.Abelian.freyd_mitchell; AddCommGrpCat.leftExactFunctorForgetEquivalence",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the complete fixed-pair theorem; ordinary endofunctor algebras allow noninvertible structure, and general abelian-transfer criteria require additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of objects X with an isomorphism T X to X for an exact endofunctor: kernels cokernels and abelian structure",
+   "results": "CategoryTheory.Functor.exact_tfae; CategoryTheory.Abelian.ofCoimageImageComparisonIsIso; CategoryTheory.ExactFunctor; CategoryTheory.IsGrothendieckAbelian; CategoryTheory.AdditiveFunctor.ofExact_obj_fst; CategoryTheory.LeftExactFunctor.ofExact_obj; CategoryTheory.abelianOfAdjunction; CategoryTheory.ExactFunctor.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the complete fixed-pair theorem; ordinary endofunctor algebras allow noninvertible structure, and general abelian-transfer criteria require additional arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent returned proof steps 1-2: Created limits, colimits and abelian structure on fixed pairs; open-immersion comparison for package clause (2), following inherited provenance.",
+   "via": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-fixed-pair-created-abelian-structure",
+  "worker": "stage1",
+  "group": "Q150",
+  "summary": "Expanded all clauses into explicit universal-property and cancellation arguments. Reused the existing equivalence-preserves-limits-and-colimits leaf. No new node: all other arguments are calculations from fixed pairs and the normal-mono/normal-epi definition of abelianness, written in full. Proved the normal mono and epi axioms directly instead of silently invoking the coimage-image criterion. The statement is unchanged.",
+  "blueprint": "Inherited blueprint.from.node is null, as confirmed by blueprint_refs ancestor. This is the categorical tool extracted from returned parent steps 1-2, supplying the abelian and created-(co)limit input for the open-immersion comparison in six-operations package clause (2). Whole-blueprint searches for fixed pairs and fixed-pair found only geometric specializations, no equivalent general statement. No chapter or unit is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-b5f0537fc",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-b5f0537fc (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all 3 cited nodes (def-sp-abelian, def-weil-endofunctor-fixed-pair-category, lem-galois-equivalence-preserves-limits from Stacks 0038), the parent citer and the Lean sources. There are no new nodes and the statement is unchanged; no re-split note exists and no SGA source is cited. I redid every identity in the 11 steps. Steps 3-6: both cone/cocone families are cones/cocones (alpha/beta, gamma/delta); the inverse identities follow from uniqueness of factorization through V and TV, respectively W and TW. Equivariance in step 6 is tested against the correct family T(j_i). Uniqueness of the lifted structure and reflection, via step 2, are proved. Step 7: zero object and the biproduct injections' squares (using T(0)=0), plus kernels and cokernels. Step 8: mono/epi go both ways without assuming B is abelian. Steps 9-10: the normal-mono and normal-epi axioms of def-sp-abelian, with the cancellation arguments; T(f)=theta_Y^-1 f theta_X is epic. Step 11: exactness through the kernel lift t from image to kernel, and step 2. Only steps 1-2 are marked elementary, correctly. All other facts come from the 3 cited statements; no coimage-image criterion is used. Small cases: A=Ab with T=id gives Z[t,t^-1]-modules, and the empty diagram works. No duplicate: the other fixed-pair nodes either assume these properties or are specialized. The equivalence leaf is a Mathlib leaf, so no tool_uses is needed. Advisory: source.place still names Endofunctor/IsoAlgebra.lean, which is absent from the live tree; the correct place is only in proof_origin."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairCreatedAbelianStructure",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairCreatedAbelianStructure",
+  "file": "lean/Sheaf/CategoryTheory/FixedPairCreatedAbelianStructure.lean",
+  "statement": "theorem fixedPairCreatedAbelianStructure {A : Type u} [Category.{v} A] [Abelian A] [LocallySmall.{w} A] [HasLimitsOfSize.{w, w} A] [HasColimitsOfSize.{w, w} A] (T : A ⥤ A) [T.Additive] [T.IsEquivalence] : Nonempty (Abelian (IsoAlgebra T)) ∧ (∀ (X Y : IsoAlgebra T) (f g : X ⟶ Y), (f + g).hom.f = f.hom.f + g.hom.f) ∧ Nonempty (CreatesLimitsOfSize.{w, w} (forget T)) ∧ Nonempty (CreatesColimitsOfSize.{w, w} (forget T)) ∧ (∀ (J : Type w) [Category.{w} J] (D : J ⥤ IsoAlgebra T) (c : Cone (D ⋙ forget T)) (t : IsLimit c), ∃ (α : T.obj c.pt ≅ c.pt) (π : (Functor.const J).obj (mk c.pt α) ⟶ D), α = IsLimit.conePointsIsoOfNatIso (isLimitOfPreserves T t) t (Functor.isoWhiskerLeft D (strNatIso T)) ∧ (∀ j : J, (π.app j).hom.f = c.π.app j) ∧ Nonempty (IsLimit (Cone.mk (mk c.pt α) π))) ∧ (∀ (J : Type w) [Category.{w} J] (D : J ⥤ IsoAlgebra T) (c : Cocone (D ⋙ forget T)) (t : IsColimit c), ∃ (α : T.obj c.pt ≅ c.pt) (ι : D ⟶ (Functor.const J).obj (mk c.pt α)), α = IsColimit.coconePointsIsoOfNatIso (isColimitOfPreserves T t) t (Functor.isoWhiskerLeft D (strNatIso T)) ∧ (∀ j : J, (ι.app j).hom.f = c.ι.app j) ∧ Nonempty (IsColimit (Cocone.mk (mk c.pt α) ι))) ∧ PreservesFiniteLimits (forget T) ∧ PreservesFiniteColimits (forget T) ∧ PreservesFiniteBiproducts (forget T) ∧ (∀ (X Y : IsoAlgebra T) (f : X ⟶ Y), (Mono f ↔ Mono ((forget T).map f)) ∧ (Epi f ↔ Epi ((forget T).map f)) ∧ (IsIso f ↔ IsIso ((forget T).map f))) ∧ (∀ (X Y : IsoAlgebra T) (f : X ⟶ Y) [IsIso ((forget T).map f)], T.map (inv ((forget T).map f)) ≫ X.str.hom = Y.str.hom ≫ inv ((forget T).map f)) ∧ (forget T).Additive ∧ (forget T).Faithful ∧ (forget T).ReflectsIsomorphisms ∧ (∀ S : ShortComplex (IsoAlgebra T), (S.map (forget T)).Exact ↔ S.Exact)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0da34a55e",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Every hypothesis matches the node (abelian A, LocallySmall.{w}, HasLimitsOfSize/HasColimitsOfSize.{w,w}, T additive + IsEquivalence), on the recorded IsoAlgebra T / forget T. Conclusions: Nonempty Abelian (preadditive structure unique given biproducts) plus inherited addition; Nonempty CreatesLimitsOfSize/CreatesColimitsOfSize.{w,w}; explicit lifts with α pinned to conePointsIsoOfNatIso/coconePointsIsoOfNatIso via strNatIso (directions TV→V, TW→W checked) and exact carrier and (co)projections; finite limit/colimit/biproduct preservation; mono/epi/iso iff; inverse square direction correct; Additive/Faithful/ReflectsIsomorphisms; ShortComplex exact iff. Empty J and T=identity covered. Statement verbatim; only lean field changed; single sorry theorem; docstrings carry source, blueprint tag and 11 steps; no lines over 100; item unbound live. Advisories: short self second-reading, strNatIso from IsoAlgebra.lean outside the dep record module, plain Adjunction.Limits import possibly redundant. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261024T185946-L-3796254",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

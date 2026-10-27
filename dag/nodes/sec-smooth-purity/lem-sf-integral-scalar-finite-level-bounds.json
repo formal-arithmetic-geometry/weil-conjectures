@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-integral-scalar-finite-level-bounds",
+ "kind": "statement",
+ "title": "Uniform constructible bounds for finite scalar tensor levels",
+ "statement": "Let E and L be finite extensions of Q_l with an embedding E -> L and Y any scheme. Use the completed coefficient sheaves and scalar tensor complexes of [def-weil-integral-scalar-extension]. Let P be a K-flat complex of completed O_E-module sheaves with flat terms, the good class of [lem-pur-integral-operations-well-defined]. Fix integers r <= s. Suppose the derived residue reduction Q(P) tensor^L k_E is bounded constructible [def-weil-finite-torsion-constructibility] and has cohomological support contained in [r,s] [def-weil-cohomological-support]. Then for every n >= 0 the finite target scalar tensor complex P tensor (O_L/pi_L^(n+1)) has bounded constructible cohomology over that quotient, and its cohomological support is contained in the same [r,s]. No completeness of P or higher source reduction hypothesis is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1; finite residue extension and uniformizer filtration argument of lem-weil-integral-scalar-extension-constructible, steps 1 and 3--5, serving the final paragraph of def-weil-rationalization-karoubi."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit target power-ideal filtration and integralScalarResidueLayers_bounds. Its successive layer tensors have constructible homology and vanish outside [r,s]; the filtration is antitone, begins at the whole quotient module, and ends at zero.",
+   "uses": [
+    "lem-sf-integral-scalar-residue-layers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply filteredCoefficientTensor_constructible_bounds to this filtration. The flat-term hypothesis is exactly P.property.2. Take the theorem's conclusion for the whole regular coefficient module.",
+   "uses": [
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use integralScalarRegularTensorComparison to transfer constructibility and vanishing to derived cohomology of integralScalarFiniteComplex. Nonvanishing degrees must lie in [r,s], by contradiction with vanishing outside this interval. Their set is finite since it is a subset of the finite integer interval. This proves intrinsicFiniteTorsionConstructible and precisely the requested support bound.",
+   "uses": [
+    "lem-sf-integral-scalar-regular-tensor-comparison",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-scalar-residue-layers",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-integral-scalar-regular-tensor-comparison",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "T9: the original uniformizer filtration argument made into Lean; only the residue-layer comparison remains postponed. Explicit power filtration, generic filtered tensor application, constructibility transport and finite support assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite residue field extension preserves constructible cohomology and normalized DVR tower effectivity",
+   "results": "Residue field finiteness and discrete valuation ring geometry results; no sheaf constructibility or tower effectivity theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite residue field scalar extension cohomological bounds; normalized quotient tower effective derived limit",
+   "results": "Generic algebra, local rings and condensed objects; none states either needed comparison for the pro-etale coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "Generic derived functor universal properties only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]calar|[Ss]calar.*constructible; finite.*[Ll]evel.*bounds|[Ss]calar.*effectivity",
+   "results": "No Mathlib scalar-constructibility match. Project FiniteFieldSheafScalarExtension and FilteredCoefficientTensorBounds supply parts of the finite-filtration argument; NormalizedDVREffectivity and StrictRoosDerivedLimitComparison supply the abstract effectivity pieces. No existing theorem connects these to the actual integralScalarFiniteComplex on arbitrary good representatives. CoefIntegralFiniteExtension adds finite-type geometric hypotheses and depends on the parent.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarExtensionConstructible",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "Proposition 3.5.1; finite residue extension and uniformizer filtration argument of lem-weil-integral-scalar-extension-constructible, steps 1 and 3--5, serving the final paragraph of def-weil-rationalization-karoubi.",
+   "via": [
+    "lem-weil-integral-scalar-extension-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarFiniteLevelBounds",
+  "file": "lean/Sheaf/Paper/IntegralScalarFiniteLevelBounds.lean",
+  "declaration": "WeilConjectures.integralScalarFiniteLevel_bounds",
+  "statement": "theorem integralScalarFiniteLevel_bounds\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (r s : ℤ) (hrs : r ≤ s)\n    (h₁ : intrinsicFiniteTorsionConstructible l E 1 (by omega) Y\n      ((integralDerivedReduction l E Y D hl 0).obj (DerivedCategory.Q.obj P.obj)))\n    (hbound : ∀ i : ℤ,\n      i ∈ proEtaleCohomologicalSupport\n        ((integralDerivedReduction l E Y D hl 0).obj (DerivedCategory.Q.obj P.obj)) →\n      r ≤ i ∧ i ≤ s) :\n    ∀ n : ℕ,\n      intrinsicFiniteTorsionConstructible l L (n + 1)\n        (Nat.succ_le_succ (Nat.zero_le n)) Y\n        (DerivedCategory.Q.obj ((integralScalarFiniteComplex l E L ι Y n).obj P.obj)) ∧\n      ∀ i : ℤ,\n        i ∈ proEtaleCohomologicalSupport\n          (DerivedCategory.Q.obj ((integralScalarFiniteComplex l E L ι Y n).obj P.obj)) →\n        r ≤ i ∧ i ≤ s",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T180812-L-4035762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T213321-L-320271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

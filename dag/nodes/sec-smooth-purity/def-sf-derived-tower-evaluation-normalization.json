@@ -1,0 +1,116 @@
+{
+ "id": "def-sf-derived-tower-evaluation-normalization",
+ "kind": "definition",
+ "title": "Derived strict-tower evaluation comparisons, normalization and computing class",
+ "status": "split",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], let $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N^{\\mathrm{op}},\\mathcal A)$ be the category of strict towers [def-weil-inverse-system], and use unbounded derived categories and localization functors $Q_{\\mathcal A},Q_{\\mathcal B},Q_{\\operatorname{Tow}(\\mathcal A)},Q_{\\operatorname{Tow}(\\mathcal B)}$ [def-weil-abstract-derived-category], with independent morphism universe bounds. The index $n\\in\\mathbf N$ denotes positive level $n+1$. Write $e_n^{\\mathcal A}$ for ordinary evaluation, $E_n^{\\mathcal A}=D(e_n^{\\mathcal A})$ for its exact derived descent, and $\\lambda^{\\mathcal A}_{n,P}:E_n^{\\mathcal A}(Q_{\\operatorname{Tow}(\\mathcal A)}P)\\xrightarrow{\\sim}Q_{\\mathcal A}(P_n)$ for the canonical localization factor. For an additive functor $F:\\mathcal A\\to\\mathcal B$, let $F^{\\operatorname{Tow}}$ be its levelwise extension and $C(F)$ its termwise action on cochain complexes. Define $\\iota_{F,n}:C(F^{\\operatorname{Tow}})C(e_n^{\\mathcal B})\\xrightarrow{\\sim}C(e_n^{\\mathcal A})C(F)$ by the degreewise identity (composition here is in Lean order). For arbitrary functors $L:D(\\mathcal A)\\to D(\\mathcal B)$ and $L_t:D(\\operatorname{Tow}(\\mathcal A))\\to D(\\operatorname{Tow}(\\mathcal B))$, define $\\operatorname{Comparison}(L,L_t,n)$ to be the type of natural isomorphisms $v:L_t E_n^{\\mathcal B}\\xrightarrow{\\sim}E_n^{\\mathcal A}L$, again in Lean composition order. Given natural transformations $\\epsilon:Q_{\\mathcal A}L\\to C(F)Q_{\\mathcal B}$, $\\tau:Q_{\\operatorname{Tow}(\\mathcal A)}L_t\\to C(F^{\\operatorname{Tow}})Q_{\\operatorname{Tow}(\\mathcal B)}$ and any predicate $\\mathrm{good}$ on tower complexes, define $\\operatorname{IsNormalizedOn}(F,L,L_t,\\epsilon,\\tau,\\mathrm{good},n,v)$ to mean that for every tower complex $P$ satisfying $\\mathrm{good}(P)$ the following equation holds (the symbol $\\gg$ means first the left arrow, then the right arrow):\n$$v_{Q_{\\operatorname{Tow}(\\mathcal A)}P}\\gg L(\\lambda^{\\mathcal A}_{n,P})\\gg\\epsilon_{P_n}=E_n^{\\mathcal B}(\\tau_P)\\gg\\lambda^{\\mathcal B}_{n,C(F^{\\operatorname{Tow}})P}\\gg Q_{\\mathcal B}(\\iota_{F,n,P}).$$\nFor $a\\le b$, define $\\operatorname{derivedTransition}(a,b)$ to be the natural transformation $E_b^{\\mathcal A}\\to E_a^{\\mathcal A}$ obtained by localization of the termwise ordinary evaluation transformation induced by the unique arrow $\\operatorname{op}b\\to\\operatorname{op}a$; this includes $a=b$.\n\nIn a chosen common universe $u$, for a small site $\\mathcal C$ with object type in $\\mathrm{Type}\\,u$ and a sheaf of commutative rings $R$ with values in $\\mathrm{CommRingCat}_u$, let $\\operatorname{Modules}(R)$ be the existing category of sheaves of modules [def-weil-sheaf-of-modules-category] over the underlying sheaf of rings of $R$. For $P\\in\\mathrm{CoCh}(\\operatorname{Tow}(\\operatorname{Modules}(R)))$, define $\\operatorname{IsGoodTower}(R,P)$ to mean that for every $k\\in\\mathbf N$ the evaluated complex $P_k$ is K-flat [def-pc-kflat-complex] and for every $k\\in\\mathbf N$ and $q\\in\\mathbf Z$ its term $P_k^q$ is flat [def-pc-flat-sheaf-modules]. These are definitions only: no universality, resolution, existence or uniqueness theorem is asserted.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization Step 6 through immersion-comparison Step 1 and exact-pullback normalization: definitions of normalized evaluation and the objectwise K-flat flat-term class; Stacks derived.tex Tag 06XN (lemma-find-existence-computes, dual), Tag 05RU (definition-unbounded-derived-category), and sites-modules.tex Tag 03DA (lemma-abelian). Definitions extracted from the existing module, without its existence theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsNormalizedOn|IsGoodTower|evaluationComplexIso|derivedTransition",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "Reuse the six existing definitions in Sheaf.Paper.DerivedTowerEvaluationNormalization. Mathlib supplies generic exact localization and counits, not this normalization predicate and its module-specific computing class."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit normalization predicate for a natural isomorphism between derived evaluation of a strict tower and evaluation followed by a left derived functor on a class of complexes",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_unitor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, HomologicalComplex.forgetEval",
+   "date": "2026-10-22",
+   "verdict": "Reuse the six existing definitions in Sheaf.Paper.DerivedTowerEvaluationNormalization. Mathlib supplies generic exact localization and counits, not this normalization predicate and its module-specific computing class."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app",
+   "date": "2026-10-22",
+   "verdict": "Reuse the six existing definitions in Sheaf.Paper.DerivedTowerEvaluationNormalization. Mathlib supplies generic exact localization and counits, not this normalization predicate and its module-specific computing class."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedTowerPullback.(Modules|Comparison|IsNormalizedOn|IsGoodTower|evaluationComplexIso|derivedTransition) in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search tower evaluation",
+   "results": "The six declarations occur in Sheaf.Paper.DerivedTowerEvaluationNormalization and the theorem record lem-cbc-derived-tower-evaluation-normalization. No separate definition node owns them. No corresponding declaration in WeilConjectures. Blueprint search: 0 matching nodes.",
+   "date": "2026-10-22",
+   "verdict": "Attach the existing definitions to a new definition node; do not duplicate their Lean code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exact-pullback-tower-counit-comparison",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization Step 6 via immersion-comparison Step 1; old normalization proof Steps 1-3: exact derived counits, levelwise comparison and normalized evaluations; normalization predicate and canonical evaluation transitions",
+   "via": [
+    "lem-sf-exact-pullback-tower-counit-comparison",
+    "lem-sf-exact-pullback-counit-normalization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedTowerEvaluationNormalization",
+  "declaration": "CategoryTheory.DerivedTowerPullback.IsNormalizedOn",
+  "declarations": [
+   "CategoryTheory.DerivedTowerPullback.Modules",
+   "CategoryTheory.DerivedTowerPullback.evaluationComplexIso",
+   "CategoryTheory.DerivedTowerPullback.derivedTransition",
+   "CategoryTheory.DerivedTowerPullback.Comparison",
+   "CategoryTheory.DerivedTowerPullback.IsNormalizedOn",
+   "CategoryTheory.DerivedTowerPullback.IsGoodTower"
+  ],
+  "statement": "def IsNormalizedOn (F : A ⥤ B) [F.Additive]\n    (L : DerivedCategory A ⥤ DerivedCategory B)\n    (Lt : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory (ℕᵒᵖ ⥤ B))\n    (ε : (DerivedCategory.Q (C := A)) ⋙ L ⟶\n      F.mapHomologicalComplex (.up ℤ) ⋙ (DerivedCategory.Q (C := B)))\n    (τ : (DerivedCategory.Q (C := ℕᵒᵖ ⥤ A)) ⋙ Lt ⟶\n      ((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ) ⋙\n        (DerivedCategory.Q (C := ℕᵒᵖ ⥤ B)))\n    (good : CochainComplex (ℕᵒᵖ ⥤ A) ℤ → Prop) (n : ℕ)\n    (v : Comparison (A := A) (B := B) L Lt n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Independent H2/H3 return on immutable head 06b022261c90: these are plain definitions formerly listed only on lem-cbc-derived-tower-evaluation-normalization. Attach them without changing or copying the existing module. No use of exists_unique_normalized_evaluation enters their definitions; the theorem remains a proof dependency of the item."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10e1db2de",
+  "group": "Q22",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10e1db2de",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H3 RETURN on 06b022261c90. The Lean signature is byte-identical, and four unused proof imports were removed. stmt_deps now cite def-sbc-tower-derived-evaluation-interchange (landed, reviewed pass) and the new existing:true def-sf-derived-tower-evaluation-normalization in place of the two theorem nodes. The new node's six declarations, read in the live DerivedTowerEvaluationNormalization.lean, are plain definitions matching its prose: Comparison direction, the IsNormalizedOn equation, derivedTransition by liftNatTrans, IsGoodTower = IsAcyclicTensorKFlat (def-pc-kflat-complex) and SheafOfModules.IsFlat (def-pc-flat-sheaf-modules). Its signature is verbatim in the file, its fields match the Q38 precedent, and its stmt_deps exist. The item's lean.statement is verbatim. The earlier clause-by-clause and edge-case review still applies. The live item is still open, so not superseded. No compile run (no changed file). Advisory: the module docstrings still tag the cbc theorem, as in the accepted Q38 precedent."
+ }
+}

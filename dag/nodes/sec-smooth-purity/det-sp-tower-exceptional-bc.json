@@ -32,132 +32,90 @@
   "prop-coef-integral-exceptional-adjoint",
   "det-sp-integral-adjunction-bijection",
   "det-sp-normalized-equivalence",
-  "det-sp-integral-direct-image-tower"
+  "det-sp-integral-direct-image-tower",
+  "def-sp-exceptional-bc-integral-comparisons",
+  "def-sp-exceptional-bc-integral-maps",
+  "def-sp-tower-mate-data"
  ],
  "proof": [
   {
-   "text": "Put $F_f=Rf_{!,\\bullet}$ and $G_f=f^!_\\bullet$. The pullback compactification $c'$ exists by [def-cbc-compact-support-square]; [lem-sbc-smooth-relative-dimension-permanence](1) makes $f'$ smooth of the same relative dimension $d$. All four schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to their structure maps over the field $k$ (a field has only the ideals $0,(1)$). Their finite levels have etale-origin witnesses by [lem-weil-pbc-finite-ring-constructible-derived-origin], since $A_n$ is finite. Uniform cohomological bounds make each tower bounded below in the ordinary tower derived category, whose cohomology is levelwise [det-sp-coefficient-towers-abelian]. Pullback along $u,v$ preserves the finite constructible Tor interval by [lem-sf-pullback-tor-amplitude], and the cohomological interval by exactness [prop-weil-pbc-proetale-constant-exact]. Consequently it preserves the stated tower category. The tensor-pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the coefficient quotient, identifies pullback of $C_n\\otimes^L_{A_n}A_m\\to C_m$ with the reduction map of the pulled-back tower. These identifications are natural in the quotient, so pullback also preserves normalized towers.",
+   "text": "Apply [lem-sp-ctf-tower-pullback-reconstruction] to $u,v$ and all four schemes: the tower inputs are bounded below with finite etale-origin evaluations, and pullback preserves their uniform ctf bounds and normalization. The pullback compactification exists by [def-cbc-compact-support-square]; $f'$ has relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence](1).",
    "uses": [
+    "lem-sp-ctf-tower-pullback-reconstruction",
     "def-cbc-compact-support-square",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "det-sp-coefficient-towers-abelian",
-    "lem-sf-pullback-tor-amplitude",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sbc-smooth-relative-dimension-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(1)–(3): geometric and coefficient domains"
+    "place": "Paragraphs (1)–(3), re-split assembly step 1"
    }
   },
   {
-   "text": "Use the specified actual tower exchange of [det-sp-tower-shriek-levels](2b), constructed from the proper counit mate and open extension for $c,c'$. Step 1 supplies its bounded-below input and an etale-origin witness at every finite level; compatible choices of these witnesses are unnecessary. This gives the isomorphism $\\beta_{f,\\bullet}:v^*_\\bullet F_f\\xrightarrow{\\sim}F_{f'}u^*_\\bullet$, whose evaluations are the finite compact-support exchanges. The same statement's clause (1) identifies $F_f$ and $F_{f'}$ with the compactification operations used in [det-sp-tower-gluing]. That adjunction makes these functors defined on the tower ctf categories. Thus the ambient exchange restricts to the functors in clause (1) of the item.",
+   "text": "The actual compactification exchange of [det-sp-tower-shriek-levels](2b) applies to these inputs. Its ctf restriction and finite evaluations are those of [lem-sp-tower-mate-evaluation-reduction]. This proves clause (1), with the tower adjunctions of [det-sp-tower-gluing].",
    "uses": [
     "det-sp-tower-shriek-levels",
+    "lem-sp-tower-mate-evaluation-reduction",
     "det-sp-tower-gluing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(1): compactification exchange and its finite evaluations"
+    "place": "Paragraphs (1)–(3), re-split assembly step 2"
    }
   },
   {
-   "text": "For a tower $K$ on $Y$, define $q_K=v^*_\\bullet(\\varepsilon_{f,K})\\,\\beta_{f,\\bullet}(G_fK)^{-1}:F_{f'}u^*_\\bullet G_fK\\to v^*_\\bullet K$. Its unique transpose under $F_{f'}\\dashv G_{f'}$ of [det-sp-tower-gluing] is $e_K$, and explicitly $e_K=G_{f'}(q_K)\\eta_{f',u^*G_fK}$. Naturality of $\\beta$, the counit, and the unit makes this family natural. The evaluation comparisons in [det-sp-tower-gluing](3) and [det-sp-tower-shriek-levels](1),(2) carry this formula to $G_{f',n}(v_n^*\\varepsilon_{f,n}\\,\\beta_{f,n}^{-1})\\eta_{f',n}$; this is the finite counit transpose, with the adjunction normalization in the item. Its invertibility is [lem-pur-smb-extraordinary], applied at $A_n=\\mathcal O_E/\\varpi_E^{en}$, where $\\ell$ is a unit times $\\varpi_E^e$. It applies to $K_n$ in the finite ctf category, the same global field and smooth morphism, and arbitrary $v$. Hence each evaluation of the already constructed tower map $e_K$ is invertible. Clause (3) of [det-sp-tower-shriek-levels] implies $e_K$ is invertible. This uses evaluation conservativity only after constructing $e_K$ by an actual tower adjunction.",
+   "text": "Construct $q_K=v_\\bullet^*\\varepsilon_{f,K}\\circ\\beta(G_fK)^{-1}$ and its transpose $e_K$ under the adjunction for $f'$. By [lem-sp-tower-mate-evaluation-reduction], $e$ is natural and evaluates to the finite counit transpose. Each evaluation is invertible by [lem-pur-smb-extraordinary], with $A_n=\\mathcal O_E/\\varpi_E^{en}$ since $\\ell$ is a unit times $\\varpi_E^e$. Its hypotheses are the same smooth square and finite ctf input. Conservativity [det-sp-tower-shriek-levels](3) makes this already constructed tower map invertible.",
    "uses": [
-    "det-sp-tower-gluing",
-    "det-sp-tower-shriek-levels",
-    "lem-pur-smb-extraordinary"
+    "lem-sp-tower-mate-evaluation-reduction",
+    "lem-pur-smb-extraordinary",
+    "det-sp-tower-shriek-levels"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(2): transpose construction, evaluation and invertibility"
+    "place": "Paragraphs (1)–(3), re-split assembly step 3"
    }
   },
   {
-   "text": "Write $T_{nm}=-\\otimes^L_{A_n}A_m$, $r=r^K_{n,m}:T_{nm}K_n\\to K_m$ and $P=u^*G_fK$, $Q=G_{f'}v^*K$. By [det-sp-tower-gluing](3), their reductions are $r^P_{n,m}=u_m^*G_{f,m}(r)\\,u_m^*c^f_{n,m}(K_n)$ and $r^Q_{n,m}=G_{f',m}(v_m^*r)\\,c^{f'}_{n,m}(v_n^*K_n)$, after the pullback/tensor identifications of Step 1. Apply the second identity of [det-sp-mixed-base-change] to the actual, possibly nonflat quotient $A_n\\to A_m$. Composing that identity with $G_{f',m}(v_m^*r)$ and using naturality of $e_{f,m}$ gives\n$$\\begin{aligned}\nr^Q_{n,m}\\,T_{nm}(e_{f,n}(K_n))\n&=G_{f',m}(v_m^*r)\\,e_{f,m}(T_{nm}K_n)\\,u_m^*c^f_{n,m}(K_n)\\\\\n&=e_{f,m}(K_m)\\,u_m^*G_{f,m}(r)\\,u_m^*c^f_{n,m}(K_n)\n=e_{f,m}(K_m)\\,r^P_{n,m}.\n\\end{aligned}$$\nThis is the claimed reduction square; no equality of derived tower maps is inferred from equality of their evaluations. For normalized input $K$, [det-sp-tower-gamma](3) makes $G_fK$ normalized, and Step 1 makes $P$ normalized. The square just proved and the invertibility of both horizontal maps make each reduction of $Q$ invertible. The ctf bounds of $Q$ already follow from Step 1 and the tower adjunction.",
+   "text": "The explicit reduction equation of [lem-sp-tower-mate-evaluation-reduction] proves compatibility including the input transition for every quotient $A_n\\to A_m$. For normalized $K$, [det-sp-tower-gamma](3) and Step 1 normalize $u_\\bullet^*G_fK$. The reduction square and invertibility of $e_n,e_m$ then make every reduction of $G_{f'}v_\\bullet^*K$ invertible. This proves clause (2).",
    "uses": [
-    "det-sp-tower-gluing",
-    "det-sp-mixed-base-change",
+    "lem-sp-tower-mate-evaluation-reduction",
     "det-sp-tower-gamma"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(2): explicit mixed reduction square and normalized subcategory"
+    "place": "Paragraphs (1)–(3), re-split assembly step 4"
    }
   },
   {
-   "text": "Now put $E=\\mathbf Q_\\ell$, write $r_T=\\operatorname{red}_T$ and $L_T=R\\varprojlim$, and use the equivalence [det-sp-normalized-equivalence]. Its Noetherian hypothesis holds by Step 1. For $K\\in\\Dbc(Y,\\mathbf Z_\\ell)$, [det-sp-integral-adjunction-bijection] gives the normalized tower $G_fr_YK$, the integral object $H_fK=L_XG_fr_YK$, the comparison $r_XH_fK\\simeq G_fr_YK$, and $Rf_{!,\\mathbf Z_\\ell}\\dashv H_f$ with its unit and counit transported from the tower adjunction. The right adjoint $f^!_{\\mathbf Z_\\ell}$ of [prop-coef-integral-exceptional-adjoint] is for the same compact-support functor: [det-sp-integral-direct-image-tower](2) identifies that functor with $L_YF_fr_X$. Thus [det-sp-unique-right-adjoint] gives the unique counit-preserving identification $f^!_{\\mathbf Z_\\ell}\\simeq H_f$, and likewise for $f'$. Use these identifications throughout the remaining calculation; they transport the adjunctions, not merely their objects.",
+   "text": "For $E=\\mathbf Q_\\ell$, [lem-sp-integral-exceptional-mate-transport] identifies the integral right adjoints counit-preservingly and supplies the whole-tower comparisons $a_K,b_K$. Reconstruct $t_K=e_{r_YK}$ by its displayed formula for $T_K$; this is $R\\varprojlim e_{r_YK}$ under those comparisons. The unit comparisons are isomorphisms and a functor sends inverse pairs to inverse pairs, so $T_K$ is invertible. The defining transpose equation for $e$ is exactly that lemma's hypothesis. Its integral counit equation makes $T_K$ the claimed integral exceptional transpose, for precisely the coefficient-transported $\\beta_{f,\\mathbf Z_\\ell}$ specified in the unchanged statement. This proves clause (3).",
    "uses": [
-    "det-sp-normalized-equivalence",
-    "det-sp-integral-adjunction-bijection",
-    "prop-coef-integral-exceptional-adjoint",
-    "det-sp-integral-direct-image-tower",
-    "det-sp-unique-right-adjoint"
+    "lem-sp-integral-exceptional-mate-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(3): integral adjunction and its counit-preserving normalization"
-   }
-  },
-  {
-   "text": "For a morphism $h:U\\to V$, put $C_K=h_\\bullet^*r_VK$. Step 1 shows that $C_K$ is a normalized constructible tower for $K\\in\\Dbc(V,\\mathbf Z_\\ell)$, using [det-sp-normalized-equivalence] for $r_VK$. By the definition [def-pur-integral-derived-operations], completed pullback is $h^*_{\\mathbf Z_\\ell}K=L_UC_K$: apply termwise finite pullback to the single reduction complex and then take total derived inverse limit, with its quotient transitions. The reconstruction equivalence therefore shows directly that this pullback is constructible and gives an isomorphism of actual derived towers\n$$r_Uh^*_{\\mathbf Z_\\ell}K=r_UL_UC_K\\xrightarrow{\\epsilon^{r,L}_{C_K}}C_K=h_\\bullet^*r_VK.$$\nThis is the counit of [det-sp-normalized-equivalence], natural in the entire tower, rather than a lift inferred from individual reductions. Together with Step 5, for $h=u,v$ this supplies\n$$a_K:r_{X'}(u_{\\mathbf Z_\\ell}^*f^!_{\\mathbf Z_\\ell}K)\\xrightarrow{\\sim}u_\\bullet^*G_fr_YK=P_K,\\qquad b_K:r_{X'}((f')^!_{\\mathbf Z_\\ell}v_{\\mathbf Z_\\ell}^*K)\\xrightarrow{\\sim}G_{f'}v_\\bullet^*r_YK=Q_K.$$\nApply $L_{X'}$ to $e_{r_YK}:P_K\\xrightarrow{\\sim}Q_K$ and conjugate by these isomorphisms and the reconstruction units. This constructs a natural integral isomorphism $E_K$ with $r_{X'}E_K=b_K^{-1}e_{r_YK}a_K$. A functor takes an inverse pair to an inverse pair, so $E_K$ is invertible. This is precisely $R\\varprojlim e_{f,\\bullet}(r_YK)$ under the specified reconstruction identifications.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "det-sp-normalized-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(3): pullback reductions and reconstruction of the isomorphism"
-   }
-  },
-  {
-   "text": "Identify its transpose without commuting a Hom set with an infinite limit. For $M\\in\\Dbc(X,\\mathbf Z_\\ell)$, [det-sp-integral-direct-image-tower](2) and Step 6 identify the reductions of $v_{\\mathbf Z_\\ell}^*Rf_{!,\\mathbf Z_\\ell}M$ and $R(f')_{!,\\mathbf Z_\\ell}u_{\\mathbf Z_\\ell}^*M$ with $v_\\bullet^*F_fr_XM$ and $F_{f'}u_\\bullet^*r_XM$. Both towers are normalized by [det-sp-tower-gamma](3) and Step 1. By the item's statement, $\\beta_{f,\\mathbf Z_\\ell}(M)$ is the reconstruction of $\\beta_{f,\\bullet}(r_XM)$ through the equivalence [det-sp-normalized-equivalence], under these identifications: full faithfulness of $r_{Y'}$ on $\\Dbc(Y',\\mathbf Z_\\ell)$ gives a unique integral arrow with that reduction, and it is invertible because $\\beta_{f,\\bullet}$ is (Step 2). This is the coefficient transport by which the source's proof, paragraph (3), reads the integral compact-support exchange. The Hom bijections of [det-sp-integral-adjunction-bijection] send an integral arrow to its reduced arrow with these operation comparisons inserted, and send the integral counit to the tower counit. Consequently reduction of the integral transpose $\\varepsilon_{f',v^*K}\\,R(f')_!(E_K)$ is exactly\n$$\\varepsilon_{f',\\bullet}\\,F_{f'}(e_{r_YK})=v_\\bullet^*(\\varepsilon_{f,\\bullet})\\,\\beta_{f,\\bullet}(G_fr_YK)^{-1},$$\nby the defining transpose equation of Step 3. The right side is the reduction of $v_{\\mathbf Z_\\ell}^*(\\varepsilon_{f,\\mathbf Z_\\ell})\\,\\beta_{f,\\mathbf Z_\\ell}(f^!_{\\mathbf Z_\\ell}K)^{-1}$ by Step 5 and the just specified reconstruction of $\\beta$. Faithfulness of $r_{Y'}$ in [det-sp-normalized-equivalence] proves equality of these integral arrows. Thus $E_K$ is exactly the exceptional base-change counit transpose, proving clause (3) with its stated normalization.",
-   "uses": [
-    "det-sp-integral-direct-image-tower",
-    "det-sp-tower-gamma",
-    "det-sp-normalized-equivalence",
-    "det-sp-integral-adjunction-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-    "place": "(3): explicit reduction of the transpose, using full faithfulness rather than levelwise faithfulness"
+    "place": "Paragraphs (1)–(3), re-split assembly step 5"
    }
   }
  ],
  "proof_deps": [
+  "lem-sp-ctf-tower-pullback-reconstruction",
   "def-cbc-compact-support-square",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "det-sp-coefficient-towers-abelian",
-  "lem-sf-pullback-tor-amplitude",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "det-sp-tower-shriek-levels",
+  "lem-sp-tower-mate-evaluation-reduction",
   "det-sp-tower-gluing",
   "lem-pur-smb-extraordinary",
-  "det-sp-mixed-base-change",
   "det-sp-tower-gamma",
-  "det-sp-normalized-equivalence",
-  "det-sp-integral-adjunction-bijection",
-  "prop-coef-integral-exceptional-adjoint",
-  "det-sp-integral-direct-image-tower",
-  "det-sp-unique-right-adjoint",
-  "def-pur-integral-derived-operations"
+  "lem-sp-integral-exceptional-mate-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
-  "place": "Paragraphs (1)–(3), expanded with precise coefficient domains and an explicit reduction-square and integral-transpose calculation"
+  "place": "Paragraphs (1)–(3); same accepted proof route distributed by the released stage-1 repair order of 2026-10-22"
  },
  "mathlib_searches": [
   {
@@ -256,13 +214,24 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-purity-bc",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "det-sp-tower-exceptional-bc",
   "worker": "stage1",
-  "summary": "Retained all three conclusions and made the standing Cartesian-square, finite-field, smoothness and coefficient domains explicit. Reused only existing nodes. Constructed the actual tower mate before evaluating; cited finite canonical exceptional invertibility separately from the mixed identity; wrote the reduction square including the input transition. Reconstructed the integral arrow and computed its transpose through the fully faithful reduction equivalence. No faithfulness of finite-level evaluation or automatic preservation of invertibility by taking mates is assumed. Integral f! is identified with H counit-preservingly, rather than silently identifying coefficient models. The integral pullback comparison is constructed using the reconstruction counit on an actual normalized tower, avoiding a lift from finite-level maps.",
-  "blueprint": "The seven steps expand the three paragraphs (1) compactification tower exchange, (2) counit transpose and mixed reduction compatibility, and (3) normalized-tower reconstruction of integral exceptional base change. This realizes the tower-base-change portion of unit sk-prop-sp-purity-bc step 1; it does not change the unit route or claim the unit statement.",
+  "summary": "Released stage-1 re-split: statement and statement dependencies unchanged. Three independent statement-only tasks extract uniform tower pullback and its reconstruction counit, actual mate evaluation/reduction, and integral counit-preserving adjunction transport. The assembly retains finite exceptional invertibility, evaluation conservativity, normalization and functorial preservation of inverses. The report retains all seven previous arguments verbatim and maps each to its replacement task.",
+  "blueprint": "Paragraph (1): assembly steps 1–2; paragraph (2): steps 3–4; paragraph (3): step 5. This remains the tower base-change part of unit sk-prop-sp-purity-bc step 1.",
   "tool_uses": [
    {
     "node": "lem-sbc-smooth-relative-dimension-permanence",
@@ -319,11 +288,35 @@
   "det-sp-unique-right-adjoint"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q107-2ef059d96",
-  "group": "Q107",
+  "reviewer": "NT-cc-Q129-1e4d318e5",
+  "group": "Q129",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-2ef059d96 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the source tower lemma, paragraphs (1)-(3), the unit sk-prop-sp-purity-bc, and every cited node statement. The repaired statement is self-contained and not weakened: the smooth square comes from the unit, k is the closure of a finite field as in def-pur-conventions and both citers, v is arbitrary, and the coefficient categories are kept apart. The counterexample showing smoothness is needed (closed immersion of the origin into A^1) checks out. Steps 1-6 are correct. Step 2: shriek-levels (2b) has the right hypotheses. Step 3: the transpose is built before it is evaluated; lem-pur-smb-extraordinary, whose step 6 shows its canonical comparison is the counit transpose, makes each level invertible, and conservativity is used only on that constructed map. Step 4: I recomputed the reduction square from the mixed identity (2) and naturality. Steps 5-6: the two right adjoints are for the same integral Rf_! (direct-image-tower (2) and the def-weil-integral definition agree), so the unique counit-preserving comparison applies; completed pullback is the limit of the pulled-back tower, and the counit of the normalized equivalence gives the comparison. FIX (E5/C4-type): clause (3) named 'the integral exceptional base change' without fixing the integral compact-support exchange beta_Zl, and step 7 defined it inside the proof by tower reconstruction. The DAG has a separate def-cbc-completed-exchange-map and no node equating the two. Following source paragraph (3) and def-pur-conventions (integral versions are coefficient transports), I wrote this into clause (3): beta_Zl is the unique integral map whose reduction is beta_bullet(red_X M), via det-sp-normalized-equivalence and det-sp-integral-direct-image-tower, both added to stmt_deps (already proof deps, so no cycle). Step 7 now uses that and says why the map exists and is unique. Comparison with def-cbc-completed-exchange-map is not claimed and no citer needs it. Also noted: the report misses the citer thm-pur-weil-equivariance-of-purity-and-trace; its use of the tower clauses is compatible. Accepted tool uses: lem-sf-pullback-tor-amplitude and prop-coef-integral-exceptional-adjoint. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-1e4d318e5 (reviewer sub-agent of L); spot-checked: Re-split checked against the live 7-step proof, which was reviewed 2026-10-17, is still live and is not superseded. The statement and stmt_deps are byte-identical. All seven old steps are retained verbatim in the report. Each old argument is now either a clause of a new node or an explicit sentence in the assembly. A = pullback domains, étale origin, Tor and cohomology intervals, tensor-pullback, and α as the reconstruction counit κ. B = e=G'(q)η, finite evaluation, and the r^P/r^Q reduction square through the second identity of det-sp-mixed-base-change plus naturality (recomputed). C = counit-preserving δ via det-sp-unique-right-adjoint, T=ι^{-1}L(b^{-1}ta)ι, and the transpose-reduction implication by faithfulness. The assembly keeps three things: smb-extraordinary at O_E/ϖ^{en} with shriek-levels(3) conservativity applied after construction, normalization via gamma(3)+A, and inverse pairs. The assembly is 2271 characters. The three nodes (2568/3157/4126 characters) are comparable and none restates the item, since B and C exclude invertibility. Small cases checked: n=m, v=id, t=0, K=0, empty schemes, d=0. No duplicate candidates: lem-pur-integral-operations-preserve-constructible is only a partial overlap with A, and lem-pod-integral-pullback-system-comparison, lem-fd-whole-tower-integral-pullback-comparison, gluing, mixed-base-change, adjunction-bijection and purity-bc-factors all differ. Batch-5 finding: every listed citation is a det-sp tower node already in the item's reviewed closure; det-sp-reduction-exceptional is a stmt_dep of gluing. The reached trf/pod nodes (right-fraction calculus, Leray chain formula, functorial flat resolution, ϖ-regularity) are generic and are not trace-formula or Poincaré-duality steps, so they are accepted. Tool use lem-sbc-smooth-relative-dimension-permanence is accepted. The other split_report tool_uses are now uncited by the item; this is advisory, and the workers on A and C should declare them. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerExceptionalBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.tower_exceptional_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.IsLimitRealization",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.IntegralConclusion",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.tower_exceptional_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerExceptionalBaseChange.lean",
+  "statement": "theorem tower_exceptional_base_change (k : FiniteFieldDatum.{u}) (_hne : l ≠ k.p) (x : SpTowerShriek.OpenExchange l E b o) (X Y X' Y' : Over (Spec (CommRingCat.of k.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] (f : X ⟶ Y) (v : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y') (sq : IsPullback u'.left f'.left f.left v.left) (d : ℕ) [SmoothOfRelativeDimension d f.left] (c : Compactification f.left) : ∃ a : SpTowerMate.Data l E b o q sq c, ∃ hb : IsIso (SpTowerMate.beta l E b o q a x), ∃ hfinite : ∀ (n : ℕ) (K : spFiniteConstructibleTorCategory Y.left (SpTowerShriek.R l E n)), IsIso ((SpTowerMate.finiteExchange l E b (sq := sq) (c := c) n).app ((a.levels.right n).obj K).obj), SpTowerMate.Laws l E b o q a x hb hfinite ∧ IsIso (SpTowerMate.mate l E b o q a x hb) ∧ (∀ K : SpTowerCalculus.C l E b q Y.left, IsSpNormalizedTower l E Y.left (q.abelian Y.left) K.obj → IsSpNormalizedTower l E X'.left (q.abelian X'.left) (((SpTowerMate.U l E b o q a).obj (a.right.obj K)).obj) ∧ IsSpNormalizedTower l E X'.left (q.abelian X'.left) ((a.right'.obj ((SpTowerMate.V l E b o q a).obj K)).obj)) ∧ (Module.finrank (Padic l) E = 1 → ∀ [∀ z : X.left, Invertible (l : X.left.residueField z)] [∀ z : Y.left, Invertible (l : Y.left.residueField z)] [∀ z : X'.left, Invertible (l : X'.left.residueField z)] [∀ z : Y'.left, Invertible (l : Y'.left.residueField z)], ∃ s : IntegralData l E b o q a, IntegralConclusion l E b o q a s x hb)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Uses the actual published compactification exchange and counit mate, with finite evaluation and reduction laws. Integral comparisons are pinned by the whole-tower reconstruction counit and the ordinary section-normalized coefficient comparisons; reconstruction is the inverse on Hom sets of the fully faithful reduction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d8c9b7a",
+  "group": "NH",
+  "result": "fix",
+  "note": "Re-delivery after 6d49 landing refusal (duplicate completionMap_isIso). b1d8 drops the lean/Sheaf/SixFunctors overrides; main already has the correct import order (TensorAdjunctionReductionSquares imports GeneratorReductionStatement, which declares the lemma at line 197). The three Lean modules, the item node and both integral def nodes are byte-identical to 4e17/6d49 (cmp/diff -rq), so the 4e17 maths review carries over; re-read confirms faithful hypotheses, pinned clauses (1)-(3), edge cases, one sorry, docstrings. The re-delivery dropped the accepted 6d49 H12 fix: def-sp-tower-mate-data stmt_deps again lack the owners det-sp-tower-shriek-levels, det-sp-mixed-base-change, det-sp-scalar-extension-functor, def-sp-reduction-direct-image-comparison, det-sp-reduction-exceptional, def-weil-pbc-cartesian-square (uses re-counted by grep). Re-applied fixes/def-sp-tower-mate-data.json (identical to the accepted 6d49 fix; bracketed citations = stmt_deps; all on main; no cycle). prop-coef-integral-exceptional-adjoint rebind target exists (IntegralExceptionalAdjoint.lean:585), unused by the item. JSON-only fix, so no compile; report gives server compiles 20.2/48.2/58.6 s."
  }
 }

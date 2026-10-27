@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-pseudocoherent-point-fibre-line",
+ "kind": "statement",
+ "title": "Recognizing shifted line modules from derived geometric point fibres",
+ "statement": "Let $X$ be an algebraic space over a scheme [def-trf-algebraic-space]. Let $E\\in D(\\mathcal O_X)$, the derived category of module sheaves on its small etale site [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. Assume $E$ is pseudo-coherent and locally bounded below: on each sufficiently small etale affine scheme chart $U=\\operatorname{Spec}R\\to X$ it corresponds to a pseudo-coherent object of $D(R)$ [def-pc-ring-pseudo-coherent-complex] whose cohomology vanishes below some integer depending on $U$. Fix $m\\in\\mathbf Z$. Assume for every geometric point $x:\\operatorname{Spec}\\Omega\\to X$ that $Lx^*E\\simeq\\Omega[m]$ in $D(\\Omega)$; here $Lx^*$ is derived tensor pullback, so this condition is on derived fibres, not ordinary cohomology fibres. Then $L=H^{-m}(E)$ is a line module on $X_{\\mathrm{et}}$ and the cohomological truncation comparison is a canonical isomorphism\n$$E\\simeq L[m]\\quad\\text{in }D(\\mathcal O_X).$$\nA line module means an $\\mathcal O_X$-module etale locally isomorphic to $\\mathcal O_X$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYP (lemma-lift-bounded-pseudo-coherent-to-perfect), with ranks d_i=0 except d_{-m}=1; geometric residue extensions detect these ranks. Apply on etale affine charts. The local-ring model is Tag 0BCC (lemma-lift-pseudo-coherent-from-residue-field)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Work on one of the sufficiently small etale affine charts $U=\\operatorname{Spec}R\\to X$ in the hypothesis. Let $K\\in D(R)$ be its corresponding pseudo-coherent, bounded-below complex, and choose a bounded-above finite-free representative $P^\\bullet$. This is precisely the meaning of the chart correspondence in the statement: take associated quasi-coherent sheaves and then their small-etale associated sheaves. [lem-pc-affine-qcoh-derived-equivalence] gives the affine association, and [lem-sfb-scheme-etale-module-exact-finiteness-comparison] gives exactness of the second association in the ambient module category. Thus this termwise realization preserves quasi-isomorphisms and computes $E|_U$. For any $\\mathfrak p\\in\\operatorname{Spec}R$, choose an algebraic closure $\\Omega$ of $\\kappa(\\mathfrak p)$. The composite $\\operatorname{Spec}\\Omega\\to U\\to X$ is a geometric point. The finite-free model computes its derived fibre by $P^\\bullet\\otimes_R\\Omega$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $Lx^*$ and $Lx_U^*$, for $x_U:\\operatorname{Spec}\\Omega\\to U$, are computed by applying module pullback to K-flat resolutions with flat terms. Take one, $Q^\\bullet\\to E$, on $X_{\\mathrm{et}}$; its restriction $Q^\\bullet|_U$ is K-flat by [lem-sfb-ringed-site-restriction-kflat], with flat terms since restriction is exact and commutes with tensor products, and $x^*Q^\\bullet=x_U^*(Q^\\bullet|_U)$ because $x$ factors through $U$. The realization $\\widetilde P^\\bullet$ of $P^\\bullet$ is bounded above with free terms, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]; it is quasi-isomorphic to $Q^\\bullet|_U$, and both compute $Lx_U^*(E|_U)$, so $Lx^*E\\simeq x_U^*\\widetilde P^\\bullet=P^\\bullet\\otimes_R\\Omega$. Consequently the hypothesis says $P^\\bullet\\otimes_R\\Omega\\simeq\\Omega[m]$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, applied to the affine chart complex; Tag 0BCC explains the residue ranks."
+   }
+  },
+  {
+   "text": "Put $C^\\bullet=P^\\bullet\\otimes_R\\kappa(\\mathfrak p)$. Tensor with $\\Omega$ is exact, since $\\Omega$ is a vector space over $\\kappa(\\mathfrak p)$ and hence free. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain $H^i(C^\\bullet)\\otimes_{\\kappa(\\mathfrak p)}\\Omega\\cong H^i(C^\\bullet\\otimes_{\\kappa(\\mathfrak p)}\\Omega)$. The ordinary chain isomorphism $(p\\otimes t)\\otimes z\\mapsto p\\otimes tz$, inverse $p\\otimes z\\mapsto(p\\otimes1)\\otimes z$, identifies the right complex with $P^\\bullet\\otimes_R\\Omega$. Every $C^i$ is finite-dimensional, so its subquotient $H^i(C^\\bullet)$ is finite-dimensional. A basis of that vector space extends to a basis after tensoring with $\\Omega$. The fibre hypothesis therefore gives $d_i=0$ for $i\\ne-m$ and $d_{-m}=1$. This uses derived fibres throughout, without identifying them with ordinary fibres of $H^i(K)$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, applied to the affine chart complex; Tag 0BCC explains the residue ranks."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-pseudocoherent-residue-model] to $K$, $\\mathfrak p$, and $a=-m$. Its bounded-below hypothesis holds on this chart, and step 2 verifies the residue-cohomology lower bound. It yields $f\\notin\\mathfrak p$ and a finite-free representative of $K\\otimes_R^{\\mathbf L}R_f$ whose ranks are the $d_i$. Every term except degree $-m$ is therefore zero, and that term is $R_f$. Both adjacent differentials are zero, so the representative is the one-term complex $R_f[m]$. Hence $K\\otimes_R^{\\mathbf L}R_f\\simeq R_f[m]$. The opens $D(f)$ obtained for all primes cover $U$.",
+   "uses": [
+    "lem-sfb-bounded-pseudocoherent-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, applied to the affine chart complex; Tag 0BCC explains the residue ranks."
+   }
+  },
+  {
+   "text": "Realize these one-term models on $D(f)_{\\mathrm{et}}$. Restricting the termwise realization of $P^\\bullet$ to $D(f)$ gives the termwise realization of $P^\\bullet_f=P^\\bullet\\otimes_RR_f$, since $\\widetilde M|_{D(f)}=\\widetilde{M_f}$ and the small-etale associated sheaf is computed by pullback to each etale $D(f)$-scheme; and $P^\\bullet\\otimes_RR_f$ computes $K\\otimes^{\\mathbf L}_RR_f$ because $P^\\bullet$ is K-flat [lem-pc-module-bounded-flat-kflat]. The affine equivalence [lem-pc-affine-qcoh-derived-equivalence] sends $R_f[m]$ to $\\mathcal O_{D(f)}[m]$; the exact comparison [lem-sfb-scheme-etale-module-exact-finiteness-comparison] sends it to the same one-term structure-sheaf complex on the small etale site. Thus $E|_{D(f)}\\simeq\\mathcal O_{D(f)}[m]$. Restriction to any object of a localized site is exact on underlying abelian sheaves by [lem-weil-pbc-site-restriction-exact], hence also on module sheaves since kernels and cokernels carry the induced module action. [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^i(E)|_{D(f)}\\cong H^i(E|_{D(f)})$. It follows that $H^i(E)|_{D(f)}=0$ for $i\\ne-m$, and $H^{-m}(E)|_{D(f)}\\cong\\mathcal O_{D(f)}$. Taking all these refinements of all affine charts is a covering of $X_{\\mathrm{et}}$. A sheaf vanishing on this covering vanishes globally: after base change to any object, every section restricts to zero on a cover and is zero by separatedness of the sheaf. Therefore $H^i(E)=0$ for $i\\ne-m$, and $L=H^{-m}(E)$ is a line module by its definition.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE, lemma-equivalence-quasi-coherent-limits (5), on the small etale site; affine realization Tag 06Z0 and restriction exactness as in sites-modules.tex."
+   }
+  },
+  {
+   "text": "Put $r=-m$. Use the canonical truncation comparison $u:\\tau_{\\le r}E\\to E$ and the projection $v:\\tau_{\\le r}E\\to H^r(E)[-r]$ from [lem-weil-pbc-truncation-triangle]. Step 4 says that $u$ and $v$ induce isomorphisms on every cohomology sheaf: in degree $r$ both induce the identity on $H^r(E)$, and in every other degree all groups are zero. By [lem-weil-pbc-unbounded-derived-iso-cohomology] both are isomorphisms in the derived category. Define the comparison to be $v\\circ u^{-1}:E\\xrightarrow{\\sim}H^r(E)[-r]=L[m]$. It is canonical because $u$ and $v$ are the canonical truncation maps; no trivializations of the local line modules are glued or chosen in this comparison.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; two canonical truncation maps when cohomology is supported in degree r."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-bounded-pseudocoherent-residue-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYP on each etale affine chart, followed by the canonical truncation maps of derived.tex Tag 08J5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally bounded below pseudo coherent complex whose derived residue field fibres have dimension one in a fixed degree is a shifted invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure single-object lemmas assume concentration already and do not detect it or rank one from derived geometric point fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognizing a complex as a line bundle shifted by testing derived tensor with every residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}\n  {\"name\": \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) [hK : K.IsKProjective] (n : ℤ),\\n  ((CategoryTheory.shiftFunctor (CochainComplex C ℤ) n).obj K).IsKProjective\", \"doc\": \"If a cochain complex $ K $ with integer indices is K-projective, then the complex obtained by shifting $ K $ by any integer $ n $ is also K-projective. This shift operation adjusts the indexing by $ n\"}\n  {\"name\": \"CochainComplex.isKProjective_shift_iff\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (n : ℤ),\\n  ((CategoryTheory.shiftFunctor (CochainComplex C ℤ) n).obj K).IsKProjective ↔ K.IsKProjective\", \"doc\": \"For any cochain complex $ K $ in an abelian category and any integer $ n $, the shifted complex $ K[n] $ is K-projective if and only if $ K $ is K-projective. The shift operation reindexes the complex\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.instLinearShiftFunctorInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C] (n : ℤ),\\n  CategoryTheory.Functor.Linear R (CategoryTheory.shiftFunctor (DerivedCategory C) n)\", \"doc\": \"For any integer $n$ and semiring $R$, the shift functor by $n$ in the derived category of an abelian category $\\\\mathcal{C}$ is $R$-linear. This means the functor preserves the $R$-module structure on \"}\n  {\"name\": \"DerivedCategory.instLinearSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C] (n : ℤ),\\n  CategoryTheory.Functor.Linear R (DerivedCategory.singleFunctor C n)\", \"doc\": \"For each integer $ n $, the single-term complex functor from an abelian category $ \\\\mathcal{C} $ to its derived category, which maps objects to chain complexes concentrated in degree $ n $, is $ R $-l\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure single-object lemmas assume concentration already and do not detect it or rank one from derived geometric point fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure single-object lemmas assume concentration already and do not detect it or rank one from derived geometric point fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oherent|[Pp]seudo[Cc]oherence|[Ii]nvertible.*[Cc]omplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure single-object lemmas assume concentration already and do not detect it or rank one from derived geometric point fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally bounded below pseudo coherent complex whose derived residue field fibres have dimension one in a fixed degree is a shifted invertible sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n] : ∃ (Y : C), Nonempty (X ≅ (singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyLE n), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_shift\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] (a n' : ℤ) (h : a + n' = n) : (K⟦a⟧).IsStrictlyGE n'\", \"doc\": \"If a cochain complex $ K $ is strictly supported in degrees $ \\\\geq n $, then shifting $ K $ by an integer $ a $ results in a complex $ K[a] $ that is strictly supported in degrees $ \\\\geq n' $, where $\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(K : CochainComplex C ℤ) (n : ℤ) : (Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure single-object lemmas assume concentration already and do not detect it or rank one from derived geometric point fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below pseudo coherent complex has near a prime a bounded finite free model with ranks the dimensions of derived residue field cohomology",
+   "results": "8 hits; Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.isLE_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oherent|[Mm]inimal[Ff]ree|[Rr]esidue.*[Cc]omplex",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below pseudo coherent complex has near a prime a bounded finite free model with ranks the dimensions of derived residue field cohomology",
+   "results": "8 hits; Module.rankAtStalk_eq, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.QuasiFinite.finite_fiber, Module.rankAtStalk_eq_finrank_of_free, CochainComplex.isZero_of_isGE, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_eq_finrank_tensorProduct, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent bounded below complex locally admits a minimal finite free complex with ranks given by Betti numbers at a residue field",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b, DerivedCategory.isGE_Q_obj_iff, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.isGE_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally bounded below pseudo coherent complex whose geometric derived fibres are one dimensional in degree minus m is canonically a line bundle shifted by m",
+   "results": "8 hits; DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-relative-dualizing-line",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Recognizing shifted line modules from derived geometric point fibres.",
+   "via": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pseudocoherent-point-fibre-line",
+  "worker": "stage1",
+  "summary": "Read Tags 0BYP and 0BCC and split into affine K-flat fibre computation, residue dimension detection after a field extension, the general finite-free local-model criterion, local line recognition with exact chart comparison, and canonical truncation. One new general ring theorem; all chart and truncation tools reused. Retained the computed null blueprint ancestor because the creation chain is broken; the exact intended blueprint proof place is recorded textually. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Recognizing shifted line modules from derived geometric point fibres. Local algebra input: Stacks 0BYP, before recognizing the relative dualizing complex as a shifted line.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General affine/derived/abelian-site foundation used exactly as stated in the proof; no own-unit node supplies this generic tool. This does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site foundation (derived pullback computed on flat-term K-flat resolutions; restriction to a localized site preserves K-flatness), used exactly as stated to compute the derived geometric fibre through an etale chart; added by the stage-1 reviewer."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic ringed-site foundation (derived pullback computed on flat-term K-flat resolutions; restriction to a localized site preserves K-flatness), used exactly as stated to compute the derived geometric fibre through an etale chart; added by the stage-1 reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-site-restriction-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-0fd131348",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-0fd131348 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, every cited statement, and Stacks more-algebra 0BYP (lemma-lift-bounded-pseudo-coherent-to-perfect, l.20000) and 0BCC (l.19548). New node lem-sfb-bounded-pseudocoherent-residue-model: matches 0BYP hypothesis by hypothesis (pseudo-coherent, bounded below, d_i=0 for i<a, giving f∉p and a finite-free complex of ranks d_i over R_f). It is statement-only, self-contained, has five recorded searches, and is not a duplicate. Ruled out: lem-sc-perfect-local-pseudocoherent-free-model (0BCC, local ring only), lem-sc-perfect-finite-free-residue-model (0BCD, assumes perfect), lem-weil-pbc-pseudocoherent-maximal-fibre-perfect (068V, no local model), lem-sc-pseudo-coherent-lift-stably-free-complex (0BCB) and lem-sf-shifted-etale-lines-locality (constant A-sheaves). The item statement is unchanged, and its citer nodal-relative-dualizing-line (m=1) is consistent with it. Tested: empty X, a field, K=R[m], and a two-term complex (correctly excluded by the derived-fibre hypothesis). Steps 2, 3 and 5 are correct: exact base change of field scalars via 010N gives d_i; 0BYP with a=-m gives R_f[m]; the truncation inclusion and projection via 08J5 plus the 05RT cohomology criterion give a canonical comparison with no gluing. FIX for two citation/E5 gaps in the item. (1) Step 1 computed Lx^*E by P⊗Ω without justifying the passage through the chart. It now cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback (Lu^* is computed on flat-term K-flat resolutions) and lem-sfb-ringed-site-restriction-kflat (0E8K, restriction keeps K-flatness), so x^*Q=x_U^*(Q|_U) and both K-flat models compute Lx_U^*(E|_U). (2) Step 4's 'Realize' left out why E|_D(f) corresponds to K⊗^L R_f. It now says that the restriction of the termwise realization is the realization of P_f, and that P⊗R_f computes K⊗^L R_f by lem-pc-module-bounded-flat-kflat. proof_deps were recomputed as the union of the step uses and two generic tool_uses entries were added; all steps stay under 2000 characters. Other-unit generic foundations are accepted as tool_uses. The tool-computed blueprint from.node=null was retained. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentPointFibreLine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pseudoCoherent_pointFibre_line",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentPointFibreLine.lean",
+  "statement": "theorem pseudoCoherent_pointFibre_line {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] [∀ (Ω : Type u) [Field Ω] (b : Spec (.of Ω) ⟶ S), HasDerivedCategory.{wPoint} (schemeSpace (Over.mk b)).SmallModules] (E : X.DerivedModules) (m : ℤ) (hpc : X.IsPseudoCoherent E) (hbelow : ∀ V : X.SmallEtaleModel, ∃ R : Sieve V, R ∈ X.smallEtaleModelTopology V ∧ ∀ (U : X.SmallEtaleModel) (f : U ⟶ V), R f → ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((SheafOfModules.overFunctor X.smallStructureRings U).obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj E))) (hfibre : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : schemeSpace (Over.mk b) ⟶ X), Nonempty ((derivedTensorPullback x).obj E ≅ (schemeSpace (Over.mk b)).derivedStructure⟦m⟧)) : X.IsLineModule (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules (-m)).obj E)) ∧ Nonempty (E ≅ ((DerivedCategory.singleFunctor X.SmallModules 0).obj ((DerivedCategory.homologyFunctor X.SmallModules (-m)).obj E))⟦m⟧) ∧ ∀ P : CochainComplex X.SmallModules ℤ, Nonempty (DerivedCategory.Q.obj P ≅ E) → IsIso (DerivedCategory.Q.map (P.ιTruncLE (-m))) ∧ ∃! j : P.truncLE (-m) ⟶ (CochainComplex.singleFunctor X.SmallModules (-m)).obj (P.homology (-m)), j.f (-m) ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) (-m) (P.homology (-m))).hom = (P.truncLEXIsoCycles (-m)).hom ≫ P.homologyπ (-m) ∧ IsIso (DerivedCategory.Q.map j)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already published equivalent small affine ringed model, its pseudo-coherence predicate and canonical total left derived tensor pullback. The algebraically closed field is represented by schemeSpace(Spec Ω), whose etale module topos is Ω-modules. The final clause specifies the canonical truncation roof on every cochain representative, including the unique projection characterized by its cycles-to-cohomology component. Added only already landed definition dependencies; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbbca1fe2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause check of pseudoCoherent_pointFibre_line against the node and Stacks 0BYP/08J5. Pseudo-coherence uses the landed space predicate IsPseudoCoherent, equivalent on affine charts to pseudo-coherence in D(R); hbelow gives a cover-local lower bound that may vary by chart; hfibre uses derivedTensorPullback x into schemeSpace(Spec Ω) and derivedStructure⟦m⟧ (=Ω[m]) for all algebraically closed Ω : Type u; conclusions are IsLineModule after smallModuleEquivalence.inverse, E ≅ single0(H^{-m}E)⟦m⟧, and a canonical truncation roof (Q.map ιTruncLE iso plus a unique j with cycles→homology component, identical to the j of the landed truncation_triangle, with Q.map j iso). Edge cases (empty X, E=0, m of either sign, varying bounds, independent universes u/w/wPoint) checked. Node changed only in stmt_deps (+5 landed definition nodes, all used, no cycle) and the lean record; dependency records identical to live; lean.statement verbatim; no definitions, axioms or proofs beyond sorry; docstrings carry source, blueprint tag and proof steps 1-5; no name clash; proof-dependency imports exist. Not recompiled because no file changed."
+ }
+}

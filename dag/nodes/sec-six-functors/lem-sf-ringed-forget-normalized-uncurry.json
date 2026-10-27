@@ -1,0 +1,162 @@
+{
+ "id": "lem-sf-ringed-forget-normalized-uncurry",
+ "kind": "lemma",
+ "title": "Normalized derived uncurrying from the fixed representative squares",
+ "statement": "Let $(C,R)$ and $(C',R')$ be small ringed sites with independent universes [def-weil-size-convention], with module categories $\\mathcal B,\\mathcal A$ and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $U:\\mathcal B\\to\\mathcal A$ be exact additive, preserving small products and K-injective complexes; write $F=D(U)$. Give it the coherent underived tensor and Hom comparisons preserving canonical evaluation [def-sf-ringed-forget-tensor-transposition-data]. Fix the closed adjunctions and their evaluation-normalized tensor models [def-coef-ringed-tensor-hom-model, lem-sf-ringed-derived-closed-symmetric-monoidal]. Fix a tensor-only comparison $m$ with its summand and flat-term K-flat representative squares [lem-sf-ringed-forget-tensor-descent]; assume termwise $U$ preserves flat-term K-flat complexes. Let $\\chi$ be the fixed two-injective Hom comparison [lem-sf-ringed-forget-two-injective-hom]. For every $M,K,L\\in D(\\mathcal B)$ and $f:M\\to H_{\\mathcal B}(K,L)$, one has $\\operatorname{uncurry}_{\\mathcal A}(\\chi_{K,L}F(f))=F(\\operatorname{uncurry}_{\\mathcal B}(f))\\mu_{M,K}^{-1}$. This is only the normalized uncurrying equation, with the existing tensor comparison as input.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-forget-tensor-descent",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "definition-derived-tor (06YU), section-hom-complexes (08J9); the internal-Hom/evaluation/transposition paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md, expanded by the owning node steps cited below."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved representative-evaluation equation to flat-term K-flat P and K-injective I, with the fixed tensor and Hom comparisons. That equation was obtained from actual chain uncurrying, normalized Hom models and the supplied tensor representative square. Use the natural tensor and Hom isomorphisms as the generic comparison data.",
+   "uses": [
+    "lem-sf-ringed-forget-representative-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary derived K,L choose a flat-term K-flat P mapping isomorphically to K and a K-injective I isomorphic to L. Naturality of evaluation and of both comparison isomorphisms transports representative evaluation compatibility to K,L.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-slice-evaluation-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary M and f, write inverse transpose as tensoring with f followed by evaluation. The generic transposition calculation uses naturality of the tensor comparison and the evaluation equation from the previous step. Apply the target transpose equivalence injectively to conclude the required normalized uncurry identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-representative-evaluation",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-slice-evaluation-coherence",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "definition-derived-tor (06YU), section-hom-complexes (08J9); the internal-Hom/evaluation/transposition paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md, expanded by the owning node steps cited below. Evaluation-first proof, using the already proved generic model and naturality helpers from the slice-evaluation modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor preserving tensor products and internal Hom on module sheaves induces derived tensor comparison compatible with the normalized tensor Hom adjunction and double duality",
+   "results": "{\"t\": \"2026-10-26T15:58:32Z\", \"tool\": \"leansearch\", \"query\": \"An exact functor preserving tensor products and internal Hom on module sheaves induces derived tensor comparison compatible with the normalized tensor Hom adjunction and double duality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exactFunctor\", \"ModuleCat.monoidalClosedHomEquiv\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.FunctorToTypes.adj\", \"CategoryTheory.FunctorToTypes.functorHomEquiv\", \"CategoryTheory.expComparison\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"16ed4f6507f2c1d0\"}; No matching derived comparison theorem. Adjunction naturality and tensor functoriality cover the formal identities only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"Iso\"",
+   "results": "{\"t\": \"2026-10-26T15:57:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapBifunctor\\\", \\\"Iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.mapBifunctorMapMapIso\", \"CategoryTheory.GradedObject.instIsIsoMapBifunctorMapMap\", \"CategoryTheory.GradedObject.mapBifunctorMapMapIso_hom\", \"CategoryTheory.GradedObject.mapBifunctorMapMapIso_inv\", \"CategoryTheory.GradedObject.mapBifunctorComp₁₂MapObjIso\", \"CategoryTheory.GradedObject.mapBifunctorComp₂₃MapObjIso\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₁₂MapObjIso_inv\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₂₃MapObjIso_inv\"], \"digest\": \"d60eb189e3591ec0\"}; No matching derived comparison theorem. Adjunction naturality and tensor functoriality cover the formal identities only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving coproducts and flat K flat complexes extends its tensor comparison uniquely to derived tensors with unit associativity and symmetry coherence",
+   "results": "{\"t\": \"2026-10-26T15:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"An exact additive functor preserving coproducts and flat K flat complexes extends its tensor comparison uniquely to derived tensors with unit associativity and symmetry coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Tor'\"], \"digest\": \"2a2960ff9534ac6c\"}; No matching derived comparison theorem. Adjunction naturality and tensor functoriality cover the formal identities only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*[Ii]so|[Ii]so.*mapBifunctor|homEquiv.*naturality",
+   "results": "{\"t\": \"2026-10-26T15:57:13Z\", \"tool\": \"grep\", \"query\": \"mapBifunctor.*[Ii]so|[Ii]so.*mapBifunctor|homEquiv.*naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\"], \"digest\": \"ef9f8bc0a4904352\"}; No matching derived comparison theorem. Adjunction naturality and tensor functoriality cover the formal identities only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorTransposition",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom/evaluation/transposition paragraph; Normalized derived uncurrying from the fixed representative squares",
+   "via": [
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedForgetNormalizedUncurry",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetNormalizedUncurry.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_normalized_uncurry",
+  "declarations": [
+   "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_normalized_uncurry"
+  ],
+  "statement": "theorem ringed_forget_normalized_uncurry\n    (m : TensorComparison.{c, v, r, d, vd, s, wb, wa}\n      J R J' R' U u SB TB βB cB SA TA βA cA)\n    (_preserves_flat_models :\n      ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,\n        P.IsKFlatIndependentCoefficients →\n        (∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r} (R := R) (P.X p)) →\n        CochainComplex.IsKFlatIndependentCoefficients (R := R')\n        ((U.mapHomologicalComplex (.up ℤ)).obj P) ∧\n          ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{d, vd, max d vd s, max d vd s}\n            (R := R') (U.obj (P.X p)))\n    (M K L : DerivedCategory (RingedTensorModules.{c, v, r} J R))\n    (f : M ⟶ (derivedInternalHomOfUniverses.{c, v, r, wb} J R).obj (op K, L)) :\n    (SA.transpose (U.mapDerivedCategory.obj M) (U.mapDerivedCategory.obj K)\n        (U.mapDerivedCategory.obj L)).symm\n        (U.mapDerivedCategory.map f ≫ χ.derived.hom.app (op K, L)) =\n      m.derived.inv.app (M, K) ≫\n        U.mapDerivedCategory.map ((SB.transpose M K L).symm f)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e9b03",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T180957-L-3422968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222709-L-683575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

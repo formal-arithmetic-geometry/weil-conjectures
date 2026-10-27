@@ -1,0 +1,149 @@
+{
+ "id": "lem-per-varying-site-free-evaluation-coherence",
+ "kind": "statement",
+ "title": "Coherence of the explicit free evaluation transitions",
+ "statement": "Let $I$ be a small category in the universes of [def-weil-size-convention], and $D$ a coherent diagram of sites [def-per-coherent-site-diagram]. Let $Q_a\\dashv P_a$ be the actual abelian inverse and direct images with the mate unitors and compositors of [def-per-varying-site-abelian-systems]. Fix $i\\in I$ and $A\\in\\operatorname{Ab}(D_i)$. Put $E_j=\\bigoplus_{t:j\\to i}Q_tA$, with coprojections $\\iota_t$. Define $\\lambda_c:Q_cE_j\\to E_k$ for $c:k\\to j$ by the preserved coproduct universal property, with $Q_c(\\iota_t)\\lambda_c=\\operatorname{comp}_{c,t}\\iota_{c\\mathbin{\\gg}t}$ (written in Lean composition order). Then $\\lambda_{1_j}=\\operatorname{unit}_j(E_j)$ and $\\operatorname{comp}_{a,b}(E_l)\\lambda_{a\\mathbin{\\gg}b}=Q_a(\\lambda_b)\\lambda_a$ for $a:j\\to k,b:k\\to l$. Moreover, for every $a:j\\to i$, $Q_a(\\operatorname{unit}_i(A)^{-1}\\iota_{1_i})\\lambda_a=\\iota_a$. These assertions include empty sums and arbitrary endomorphisms. All sums are the categorical coproducts of [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 09WG, lemma-restriction-to-components-site, proof of (5)-(6), generalized to the stipulated coherent diagram; identity and cocycle checks expanded by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-per-coherent-site-diagram",
+  "def-per-varying-site-abelian-systems",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Each Q is left adjoint to the stipulated P, so its images of the coprojections are a coproduct. Define lambda by that coproduct universal property; its equation on every summand is abelianFreeTransition_ι.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct-image comparisons satisfy the pseudofunctor pentagon and unit triangles on sections. Their adjunction mates satisfy the analogous laws. Test the identity and composition equations for lambda on every iterated image of a coprojection. Both sides select the same composite-arrow label; the mate pentagon and triangles identify the preceding maps.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the defining summand equation to the identity summand and cancel the mapped inverse unitor using the other mate unit triangle. This proves the normalized identity-generator equation.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 09WG, lemma-restriction-to-components-site, proof of (5)-(6), generalized to the stipulated coherent diagram; identity and cocycle checks expanded by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on compatible systems over varying categories has adjoints given by coproducts and products over arrows",
+   "results": "{\"t\": \"2026-10-26T08:18:02Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on compatible systems over varying categories has adjoints given by coproducts and products over arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.evaluationIsRightAdjoint\", \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"CategoryTheory.evaluationRightAdjoint\", \"CategoryTheory.evaluationRightAdjoint_obj_obj\", \"CategoryTheory.evaluationLeftAdjoint\"], \"digest\": \"1716c2b82b24107b\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|isColimitOfHasCoproductOfPreservesColimit",
+   "results": "{\"t\": \"2026-10-26T08:19:39Z\", \"tool\": \"grep\", \"query\": \"leftAdjointCompIso|isColimitOfHasCoproductOfPreservesColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"8ae5002d642a7899\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent inverse image functors preserve coproducts and the arrow indexed coproduct construction satisfies identity and composition laws",
+   "results": "{\"t\": \"2026-10-26T08:24:15Z\", \"tool\": \"leansearch\", \"query\": \"Coherent inverse image functors preserve coproducts and the arrow indexed coproduct construction satisfies identity and composition laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive\", \"CategoryTheory.Limits.comp_preservesFiniteCoproducts\", \"CategoryTheory.Limits.PreservesFiniteCoproducts\", \"CategoryTheory.Limits.FormalCoproduct.category\", \"CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits\", \"CategoryTheory.Functor.sum'\", \"CategoryTheory.Limits.PreservesCoproduct.inv_hom\", \"CategoryTheory.Limits.PreservesCoproduct.iso\"], \"digest\": \"1aa5ebdd93750b79\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteEvaluationAdjoints",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve: 'That assertion is proved by the argument of Step 2 with f_! replaced by f_*'. In the inherited refinement through the punctual/completion and derived-sections continuity tools, this is the free/cofree evaluation input for compatible varying-site resolutions. Here: the free arrow-indexed transition construction and its coherence checks.",
+   "via": [
+    "lem-per-varying-site-evaluation-adjoints",
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.VaryingSiteFreeEvaluationCoherence",
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteFreeEvaluationCoherence.lean",
+  "declaration": "CategoryTheory.CoherentSitePseudofunctor.abelianFreeEvaluation_coherence",
+  "declarations": [
+   "CategoryTheory.CoherentSitePseudofunctor.abelianFreeFamily",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianFreeTransition",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianFreeTransition_ι",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianFreeEvaluation_coherence"
+  ],
+  "statement": "theorem abelianFreeEvaluation_coherence (i : I) (A : D.abelianFibre i) : (∀ j : I, D.abelianFreeTransition i A (𝟙 j) = (D.abelianInverseId j).hom.app (D.abelianFreeFamily i A j)) ∧ (∀ {j k l : I} (a : j ⟶ k) (b : k ⟶ l), (D.abelianInverseComp a b).hom.app (D.abelianFreeFamily i A l) ≫ D.abelianFreeTransition i A (a ≫ b) = (D.abelianInverse a).map (D.abelianFreeTransition i A b) ≫ D.abelianFreeTransition i A a) ∧ (∀ (j : I) (a : j ⟶ i), (D.abelianInverse a).map ((D.abelianInverseId i).inv.app A ≫ Sigma.ι (fun t : i ⟶ i ↦ (D.abelianInverse t).obj A) (𝟙 i)) ≫ D.abelianFreeTransition i A a = Sigma.ι (fun t : j ⟶ i ↦ (D.abelianInverse t).obj A) a)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T092003-L-3391722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T092003-L-3391722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-per-normal-commuting-weight-induction",
+ "kind": "statement",
+ "title": "Character eigenspaces and induction from the stabilizer for a normal subgroup with commuting image",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-algebraic-closure], let $G$ be a finite group, and let $\\rho:G\\to\\operatorname{GL}_F(V)$ be a representation on a nonzero finite-dimensional $F$-vector space with no nonzero proper $G$-invariant subspace. Let $A\\trianglelefteq G$ be a normal subgroup such that $\\rho(a)\\rho(b)=\\rho(b)\\rho(a)$ for all $a,b\\in A$; $A$ itself need not be abelian. For a homomorphism $\\chi:A\\to F^\\times$ put\n$$V_\\chi=\\{v\\in V:\\rho(a)v=\\chi(a)v\\text{ for every }a\\in A\\},\\qquad X=\\{\\chi:V_\\chi\\ne0\\}.$$\nThe set $X$ is finite and nonempty, and $V=\\bigoplus_{\\chi\\in X}V_\\chi$ as $F$-vector spaces. The rule $(g\\chi)(a)=\\chi(g^{-1}ag)$ defines a transitive action of $G$ on $X$, with $\\rho(g)V_\\chi=V_{g\\chi}$. For each $\\chi\\in X$ let $T_\\chi=\\{g\\in G:g\\chi=\\chi\\}$. Then $A\\leq T_\\chi$, the restricted action on $V_\\chi$ is an irreducible $T_\\chi$-representation, and the canonical map\n$$\\operatorname{Ind}_{T_\\chi}^G V_\\chi\\longrightarrow V,\\qquad [g]\\otimes v\\longmapsto\\rho(g)v$$\nis an isomorphism of $G$-representations. Here induction is the quotient of $F[G]\\otimes_F V_\\chi$ by the relations $[gt]\\otimes v=[g]\\otimes\\rho(t)v$, with left translation on $[g]$, and $F[G]$ has basis $[g]$ indexed by $G$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, representation lifting before equation (5), motivation only; this representation-theoretic argument is supplied by the agent. WANTED: Serre, Linear Representations of Finite Groups, Part II section 8.5, Theorem 16 and its proof. No Stacks tag is asserted for this finite-group representation fact."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-commuting-endomorphisms-common-eigenvector] to the finite family $(\\rho(a))_{a\\in A}$: the operators commute by hypothesis, $A$ is finite as a subgroup of $G$, and $V$ is nonzero and finite-dimensional over the algebraically closed field $F$. Obtain $v\\ne0$ and scalars $c_a$ with $\\rho(a)v=c_av$. Since $\\rho(a)$ is invertible, $c_a\\ne0$. The equations $\\rho(1)v=v$ and $\\rho(ab)v=\\rho(a)\\rho(b)v=c_ac_bv$, together with $v\\ne0$, give $c_1=1$ and $c_{ab}=c_ac_b$. Thus $\\chi_0(a)=c_a$ is a homomorphism $A\\to F^\\times$ and $v\\in V_{\\chi_0}$; in particular $X\\ne\\varnothing$.",
+   "uses": [
+    "lem-sfb-commuting-endomorphisms-common-eigenvector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.11, printed p.327, common-eigenvector argument; forming the character from its eigenvalues is the explicit agent calculation here."
+   }
+  },
+  {
+   "text": "Normality ensures $g^{-1}ag\\in A$, so $g\\chi$ is a character. For $g,h\\in G$ and $a\\in A$, $((gh)\\chi)(a)=\\chi(h^{-1}g^{-1}agh)=(g(h\\chi))(a)$, and $1\\chi=\\chi$. If $w\\in V_\\chi$, then $\\rho(a)\\rho(g)w=\\rho(g)\\rho(g^{-1}ag)w=\\chi(g^{-1}ag)\\rho(g)w$. Hence $\\rho(g)V_\\chi\\subseteq V_{g\\chi}$; applying the same calculation to $g^{-1}$ gives equality. Invertibility preserves nonzero subspaces, so this action restricts to $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "For $a,b\\in A$ and $c\\in F$, commutativity gives $(\\rho(b)-c\\,\\mathrm{id})^n\\rho(a)=\\rho(a)(\\rho(b)-c\\,\\mathrm{id})^n$ by induction on $n$. Thus $\\rho(a)$ preserves every maximal generalized eigenspace of $\\rho(b)$. Apply [lem-per-compatible-generalized-weight-independence] with $K=F$, $M=V$, $I=A$ and $f_a=\\rho(a)$. For any character $\\chi$, its ordinary eigenspace $V_\\chi$ is contained in $W_{\\lambda_\\chi}$, where $\\lambda_\\chi(a)$ is the scalar underlying $\\chi(a)$ (take exponent $1$ in each generalized-eigenspace equation). Distinct characters give distinct functions $\\lambda_\\chi$. Therefore a finite relation among vectors from distinct $V_\\chi$ is a relation in distinct independent $W_{\\lambda_\\chi}$ and all its components vanish. This proves independence of the character eigenspaces.",
+   "uses": [
+    "lem-per-compatible-generalized-weight-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "Let $O=G\\chi_0$, a finite nonempty orbit because $G$ is finite, and put $S=\\sum_{\\eta\\in O}V_\\eta$. Step 2 shows $\\rho(g)S=S$ for every $g\\in G$, and Step 1 gives $S\\ne0$. Irreducibility forces $S=V$. If $\\psi\\in X\\setminus O$ and $0\\ne w\\in V_\\psi$, write $w=\\sum_{\\eta\\in O}w_\\eta$ using $S=V$. Independence from Step 3 applied to $w-\\sum w_\\eta=0$ gives $w=0$, a contradiction. Hence $X=O$, so $X$ is finite and the action is transitive. The spanning equality and independence say precisely $V=\\bigoplus_{\\eta\\in X}V_\\eta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "Fix $\\chi\\in X$ and write $T=T_\\chi$. The action law makes $T$ a subgroup: $1\\chi=\\chi$, and if $t\\chi=\\chi$ and $u\\chi=\\chi$, then $(tu^{-1})\\chi=\\chi$. For $a,b\\in A$, the homomorphism law gives $\\chi(a^{-1}ba)=\\chi(a)^{-1}\\chi(b)\\chi(a)=\\chi(b)$ in the abelian group $F^\\times$. Thus $A\\leq T$, without requiring $A$ abelian. By Step 2, $\\rho(t)V_\\chi=V_\\chi$ for $t\\in T$, so restriction defines the asserted $T$-representation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "Choose representatives $R$ for the left cosets $gT$ with the identity representing $T$. The map $r\\mapsto r\\chi$ bijects $R$ with $X$: transitivity gives surjectivity, and $r\\chi=s\\chi$ is equivalent to $s^{-1}r\\in T$. Let $0\\ne U\\subseteq V_\\chi$ be a $T$-invariant subspace. Then $L=\\sum_{r\\in R}\\rho(r)U$ is $G$-invariant: writing $gr=st$ with $s\\in R,t\\in T$ gives $\\rho(g)\\rho(r)U=\\rho(s)\\rho(t)U=\\rho(s)U$. Thus $L=V$ by irreducibility. Each $\\rho(r)U$ lies in $V_{r\\chi}$. Independence, as established using [lem-per-compatible-generalized-weight-independence] in Step 3, implies $L\\cap V_\\chi=U$: in an expression for a vector of the intersection, all components with $r\\ne1$ vanish. Since $L=V$, this yields $U=V_\\chi$. The restricted representation is nonzero by $\\chi\\in X$ and has no nonzero proper invariant subspace.",
+   "uses": [
+    "lem-per-compatible-generalized-weight-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "The rule $[g]\\otimes w\\mapsto\\rho(g)w$ is $F$-bilinear before passing to the tensor product, and $\\rho(gt)w=\\rho(g)\\rho(t)w$ shows that it annihilates every defining induction relation. It therefore defines a linear map $\\Phi:\\operatorname{Ind}_T^G V_\\chi\\to V$. It is $G$-equivariant because $\\Phi([hg]\\otimes w)=\\rho(h)\\rho(g)w$. Its image contains $\\rho(r)V_\\chi=V_{r\\chi}$ for every $r\\in R$ and hence spans $V$ by Step 4. Thus $\\Phi$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  },
+  {
+   "text": "For $x\\in V$, use the unique decomposition $x=\\sum_{r\\in R}x_r$ with $x_r\\in V_{r\\chi}$ from Step 4, whose uniqueness follows from [lem-per-compatible-generalized-weight-independence] as in Step 3. Define $\\Psi(x)=\\sum_{r\\in R}[r]\\otimes\\rho(r^{-1})x_r$ in the induction quotient; Step 2 puts every coefficient in $V_\\chi$. Uniqueness of the components shows that they depend linearly on $x$, so $\\Psi$ is linear and $\\Phi\\Psi(x)=\\sum_r x_r=x$. For a generating tensor $[g]\\otimes w$, write $g=rt$ with $r\\in R,t\\in T$. The only component of $\\rho(g)w$ is in $V_{r\\chi}$, so $\\Psi\\Phi([g]\\otimes w)=[r]\\otimes\\rho(t)w=[rt]\\otimes w=[g]\\otimes w$ by the defining relation. These tensors span the quotient, hence $\\Psi\\Phi=\\mathrm{id}$. This proves that the specified canonical $G$-equivariant map is an isomorphism.",
+   "uses": [
+    "lem-per-compatible-generalized-weight-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-compatible-generalized-weight-independence",
+  "lem-sfb-commuting-endomorphisms-common-eigenvector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, representation-lifting context only. Agent-written auxiliary representation argument; the missing Serre source is recorded in report.md.",
+  "note": "Uses the existing common-eigenvector theorem (Milne Lemma 16.11) and the Mathlib compatibility-independence theorem. No semisimplicity or Maschke theorem is invoked. Serre is unavailable; Gabber supplies context only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representation of a finite group with a normal subgroup acting by commuting operators decomposes into character eigenspaces and is induced from the stabilizer of a weight",
+   "results": "{\"t\": \"2026-10-24T02:09:01Z\", \"tool\": \"leanfinder\", \"query\": \"A representation of a finite group with a normal subgroup acting by commuting operators decomposes into character eigenspaces and is induced from the stabilizer of a weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Rep.toCoinvariantsKer\", \"Rep.toCoinvariants\", \"Representation.toInvariants\", \"Rep.quotientToInvariants\", \"Representation.quotientToInvariants\", \"Rep.indToCoindAux\", \"Rep.quotientToInvariantsFunctor_obj_V\"], \"digest\": \"ffb05c7c3490abec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned invariant and coinvariant functors, induction constructions and character criteria do not state the character-weight decomposition, transitive action or stabilizer induction isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible representation with abelian normal image is induced from an irreducible representation of a character stabilizer Clifford imprimitivity theorem",
+   "results": "{\"t\": \"2026-10-24T02:09:28Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible representation with abelian normal image is induced from an irreducible representation of a character stabilizer Clifford imprimitivity theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IsIrreducible\", \"Rep.toInvariants\", \"FDRep.simple_iff_char_is_norm_one\", \"Representation.IsIrreducible.toIsSimpleOrder\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"Representation.toInvariants\", \"Rep.coindToInd_of_support_subset_orbit\", \"FDRep.char_orthonormal\"], \"digest\": \"68f59c2c4aa509d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned invariant and coinvariant functors, induction constructions and character criteria do not state the character-weight decomposition, transitive action or stabilizer induction isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, \"eigenspace\"",
+   "results": "{\"t\": \"2026-10-24T02:09:01Z\", \"tool\": \"loogle\", \"query\": \"Representation, \\\"eigenspace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned invariant and coinvariant functors, induction constructions and character criteria do not state the character-weight decomposition, transitive action or stabilizer induction isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace|isotypic|stabilizer|ind.*restrict",
+   "results": "{\"t\": \"2026-10-24T02:09:00Z\", \"tool\": \"grep\", \"query\": \"weightSpace|isotypic|stabilizer|ind.*restrict\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Continuous/TopRep.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/Continuous/Basic.lean\", \"Mathlib/RepresentationTheory/Continuous/Basic.lean\"], \"digest\": \"b86e13c26e4ea987\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned invariant and coinvariant functors, induction constructions and character criteria do not state the character-weight decomposition, transitive action or stabilizer induction isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford theory irreducible representation induced from inertia subgroup of a linear character of a normal subgroup",
+   "results": "{\"t\": \"2026-10-24T02:09:00Z\", \"tool\": \"leansearch\", \"query\": \"Clifford theory irreducible representation induced from inertia subgroup of a linear character of a normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IndV\", \"AddSubgroup.inertia\", \"Representation.toInvariants\", \"AddSubgroup.subgroupOf_inertia\", \"Rep.toInvariants\", \"Rep.indFunctor_obj\", \"Representation.ind\", \"Representation.ind_apply\"], \"digest\": \"9f18e9cc18ea8ecb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned invariant and coinvariant functors, induction constructions and character criteria do not state the character-weight decomposition, transitive action or stabilizer induction isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace|inertia|imprimitivity|stabilizer",
+   "results": "{\"t\": \"2026-10-24T02:58:32Z\", \"tool\": \"grep\", \"query\": \"weightSpace|inertia|imprimitivity|stabilizer\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: invariant and coinvariant constructions, definitions of induction and irreducibility, character orthogonality and ind/coind equivalences do not assert transitivity of character weights or induction from their stabilizer. The independent eigenspace ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, \"ind\"",
+   "results": "{\"t\": \"2026-10-24T02:58:33Z\", \"tool\": \"loogle\", \"query\": \"Representation, \\\"ind\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Representation.coindV\", \"Representation.coind\", \"Representation.coind'\", \"Representation.coe_coindV\", \"Representation.mem_coindV\", \"Representation.coindMap\", \"Representation.coindMap_coe_apply_apply\", \"Representation.coindMap_coe_apply\"], \"digest\": \"cde8ed3dd04f040d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: invariant and coinvariant constructions, definitions of induction and irreducibility, character orthogonality and ind/coind equivalences do not assert transitivity of character weights or induction from their stabilizer. The independent eigenspace ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible representation of a finite group with commuting normal subgroup image is induced from the stabilizer of a character eigenspace",
+   "results": "{\"t\": \"2026-10-24T02:58:34Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible representation of a finite group with commuting normal subgroup image is induced from the stabilizer of a character eigenspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Rep.toCoinvariantsKer\", \"Rep.toCoinvariants\", \"Representation.toInvariants\", \"Rep.quotientToInvariants\", \"Representation.IsIrreducible\", \"Representation.quotientToInvariants\", \"FDRep.simple_iff_char_is_norm_one\"], \"digest\": \"cde56b267bc8fda7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: invariant and coinvariant constructions, definitions of induction and irreducibility, character orthogonality and ind/coind equivalences do not assert transitivity of character weights or induction from their stabilizer. The independent eigenspace ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford imprimitivity theorem irreducible group representation is induced from the inertia subgroup of a one dimensional constituent of a normal subgroup",
+   "results": "{\"t\": \"2026-10-24T03:00:43Z\", \"tool\": \"leansearch\", \"query\": \"Clifford imprimitivity theorem irreducible group representation is induced from the inertia subgroup of a one dimensional constituent of a normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.toInvariants\", \"Representation.IndV\", \"Representation.IsIrreducible\", \"Rep.toInvariants\", \"CliffordAlgebra.induction\", \"AddSubgroup.inertia\", \"Representation.ind\", \"Representation.IndV.mk\"], \"digest\": \"72c85dd6b2540933\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: invariant and coinvariant constructions, definitions of induction and irreducibility, character orthogonality and ind/coind equivalences do not assert transitivity of character weights or induction from their stabilizer. The independent eigenspace ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character weight decomposition of irreducible representation for an abelian normal subgroup and induction from the weight stabilizer",
+   "results": "{\"t\": \"2026-10-24T03:00:45Z\", \"tool\": \"leanfinder\", \"query\": \"Character weight decomposition of irreducible representation for an abelian normal subgroup and induction from the weight stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Rep.indToCoindAux\", \"Representation.toInvariants\", \"Rep.coindToInd_apply\", \"FDRep.char_orthonormal\", \"Rep.coindToInd_of_support_subset_orbit\", \"Rep.indToCoind\", \"Rep.indToCoindAux_mul_fst\"], \"digest\": \"3a4a2c6641ec30cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: invariant and coinvariant constructions, definitions of induction and irreducibility, character orthogonality and ind/coind equivalences do not assert transitivity of character weights or induction from their stabilizer. The independent eigenspace ingredient is separately recorded as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elementary-group-monomial",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 (duality input) of lem-per-artin-gabber-affine-curve, through the inherited auxiliary cyclotomic splitting route: Expose X Proposition 1.2, printed p.138, representation lifting before equation (5). This auxiliary representation-theoretic input is not proved by the current blueprint paragraph. Specifically: WANTED: Serre, Linear Representations of Finite Groups, Part II section 8.5, Theorem 16 (monomiality for nilpotent groups), and Chapter 10 elementary groups. The assertion is representation-level monomiality for one irreducible of a nilpotent group, not integral generation for an arbitrary finite group. Auxiliary input to the monomiality argument: Character eigenspaces and induction from the stabilizer for a normal subgroup with commuting image.",
+   "via": [
+    "lem-per-elementary-group-monomial",
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normal-commuting-weight-induction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Common eigenvector and irreducibility yield spanning by one finite orbit; generalized-eigenspace independence supplies directness. Explicit conjugation, translated-subspace and quotient-inverse calculations prove transitivity, stabilizer irreducibility and the specified induction isomorphism. One new Mathlib leaf; the common-eigenvector result is reused.",
+  "blueprint": "Proof Step 3 (duality input) of lem-per-artin-gabber-affine-curve, through the inherited auxiliary cyclotomic splitting route: Expose X Proposition 1.2, printed p.138, representation lifting before equation (5). This auxiliary representation-theoretic input is not proved by the current blueprint paragraph. Specifically: WANTED: Serre, Linear Representations of Finite Groups, Part II section 8.5, Theorem 16 (monomiality for nilpotent groups), and Chapter 10 elementary groups. The assertion is representation-level monomiality for one irreducible of a nilpotent group, not integral generation for an arbitrary finite group. Auxiliary input to the monomiality argument: Character eigenspaces and induction from the stabilizer for a normal subgroup with commuting image. Eight steps supply this inherited auxiliary weight-induction input, not a replacement of the unit route. The latest blueprint paragraph gives no representation-theoretic proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-commuting-endomorphisms-common-eigenvector",
+    "why": "Common eigenvector for a finite family of commuting endomorphisms over any algebraically closed field; a generic linear-algebra input not supplied by this perverse-sheaf unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-commuting-endomorphisms-common-eigenvector"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-5c63610cb",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-5c63610cb (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, and checked all 8 steps. The math is correct; I accept it with one record fix. (1) Statement unchanged; I checked it independently. It is a left action, rho(g)V_chi=V_{g chi}, and F[G]⊗_{F[T]}V_chi uses left translation. Tested on G=A=1, S3 with C3, Q8 with its center, and A=G nonabelian with a 1-dim rho. Step 1: the common-eigenvector hypotheses hold (finite index set A, F algebraically closed, V nonzero and finite-dimensional, commuting operators); c_1=1, c_ab=c_a c_b and c_a≠0 give chi_0. Step 3: preservation holds because rho(a) commutes with (rho(b)-c)^n; V_chi⊆W_{lambda_chi} and chi↦lambda_chi is injective, so independence follows. Step 4: the orbit sum is G-stable and nonzero, hence equals V; independence rules out weights outside the orbit, so X is finite and the action transitive. Step 6: L∩V_chi=U via the bijection R→X, so V_chi is T-irreducible. Steps 7-8: Phi is well defined, equivariant and surjective; the inverse Psi checked on [rt]⊗w. No re-split note applies; the base item was statement-only. The Gabber Exposé X p.138 (PDF p.144) source is context only; Serre is recorded as WANTED; no SGA is cited. (2) New leaf lem-per-compatible-generalized-weight-independence: Module.End.independent_iInf_maxGenEigenspace_of_forall_mapsTo, Pi.lean:90-92, read; a field is a domain and vector spaces are torsion-free, and the preservation hypothesis is exact. Fault B6/B8: the node's finite-sum form needs iSupIndep_iff_finsetSum_eq_zero_imp_eq_zero (DFinsupp.lean:581-583), which the record did not name. FIX: added it to mathlib_match.how and source.place in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-compatible-generalized-weight-independence.json. Searched dag/nodes for duplicates: lem-sfb-character-eigenspaces-independent (group schemes), lem-sfb-generalized-eigenspace-direct-sum (one operator), nilpotent Lie weight decomposition, normal-subgroup-character-inversion. None duplicates the leaf or the item. The leaf is not a clause of the item; the parent elementary-group-monomial uses the item's full conclusion. (3) Tool use accepted: lem-sfb-commuting-endomorphisms-common-eigenvector, a generic linear-algebra black box. (4) Batch 5: its closure reaches lem-trf-vector-space-quotient-dimension, a Mathlib rank-nullity leaf (Submodule.finrank_quotient_add_finrank) used only for subspace finiteness. It is general linear algebra, outside both the trace-formula and Poincaré-duality assumptions and not a step of their proofs, so it is no reason to return.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.NormalCommutingWeightInduction",
+  "declaration": "Representation.normal_commuting_weight_induction",
+  "file": "lean/Sheaf/RepresentationTheory/NormalCommutingWeightInduction.lean",
+  "statement": "theorem normal_commuting_weight_induction {F : Type u} [Field F] [IsAlgClosed F] [CharZero F] {G : Type v} [Group G] [Finite G] {V : Type w} [AddCommGroup V] [Module F V] [FiniteDimensional F V] [Nontrivial V] (ρ : Representation F G V) [IsIrreducible ρ] (A : Subgroup G) [A.Normal] (hcomm : ∀ a b : A, Commute (ρ a.val) (ρ b.val)) : ∃ E : (A →* Fˣ) → Submodule F V, (∀ χ : A →* Fˣ, E χ = ⨅ a : A, Module.End.eigenspace (ρ a.val) (χ a : F)) ∧ {χ : A →* Fˣ | E χ ≠ ⊥}.Finite ∧ {χ : A →* Fˣ | E χ ≠ ⊥}.Nonempty ∧ DirectSum.IsInternal (fun χ : {χ : A →* Fˣ | E χ ≠ ⊥} ↦ E χ.val) ∧ ∃ α : MulAction G {χ : A →* Fˣ | E χ ≠ ⊥}, (∀ (g : G) (χ : {χ : A →* Fˣ | E χ ≠ ⊥}) (a : A), (α.smul g χ).val a = χ.val (MulAut.conjNormal g⁻¹ a)) ∧ (∀ χ ψ : {χ : A →* Fˣ | E χ ≠ ⊥}, ∃ g : G, α.smul g χ = ψ) ∧ (∀ (g : G) (χ : {χ : A →* Fˣ | E χ ≠ ⊥}), (E χ.val).map (ρ g) = E (α.smul g χ).val) ∧ ∀ χ : {χ : A →* Fˣ | E χ ≠ ⊥}, ∃ T : Subgroup G, (∀ g : G, g ∈ T ↔ α.smul g χ = χ) ∧ A ≤ T ∧ ∃ σ : Representation F T (E χ.val), (∀ (t : T) (x : E χ.val), (σ t x : V) = ρ t.val (x : V)) ∧ IsIrreducible σ ∧ ∃ e : Equiv (ind T.subtype σ) ρ, ∀ (g : G) (x : E χ.val), e (IndV.mk T.subtype σ g⁻¹ x) = ρ g (x : V)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4eb7e305b",
+  "group": "Q92",
+  "result": "pass",
+  "note": "All hypotheses match the node (alg. closed char-0 F, finite G, nonzero f.d. V, IsIrreducible ρ, A normal with commuting image, A not assumed abelian). Every conclusion clause is present, with E, the action, T, σ and e each pinned by formulas. conjNormal g⁻¹ a = g⁻¹ag. Mathlib's IndV convention, read via [g]:=mk(g⁻¹), gives the node's relation [gt]⊗x=[g]⊗σ(t)x and left translation, so e(mk g⁻¹ x)=ρ g x is the canonical map. Statement field is verbatim. Item node equals live except the lean field; stmt_deps unchanged; no defs, no hollow content, docstrings carry the source and 8 proof steps; imports are statement or proof-dep imports. No duplicate in Mathlib or live Sheaf. Edge cases checked; universes independent. No compile run (no file changed)."
+ }
+}

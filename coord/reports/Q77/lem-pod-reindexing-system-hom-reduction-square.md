@@ -1,0 +1,59 @@
+# Q77 stage-1 delivery
+
+## Files written
+
+- `dag/nodes/sec-poincare-duality/lem-pod-reindexing-system-hom-reduction-square.json`: statement, unchanged; split into nine proof steps using existing nodes. Its inherited searches are retained, with five newly executed logged searches appended. No Mathlib match for the complete system comparison.
+- `citations.json`: one checked verbatim quotation for every step/node citation.
+- `report.md`: this report.
+
+There are **0 new nodes and 0 Mathlib leaves**. Auxiliary preparation scripts and `searches.jsonl` are sandbox working records, not additional DAG nodes.
+
+## Attachments
+
+None. Searched `lean/WeilConjectures/` for the exact blueprint tag and for reindexing, strict-system Hom and reduction/Hom terminology. The ordinary constant-coefficient reduction declarations in `SixFunctors/Etale/Derived/IntegralCoefficients.lean` do not state the actual varying-coefficient-system comparison, evaluation normalization and commuting square. In particular `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_derivedHom` ends in `sorry`. The closed second-variable reduction theorem immediately above it still does not state this item. Neither provides an attachment.
+
+## WANTED
+
+None. The source blueprint and Stacks files needed for this agent refinement are present.
+
+## What required attention
+
+The item was statement-only, with no earlier sandbox split or report and no released repair note found. The current main-20261015 proof Step 5 says coefficient transport follows from the same operations; it does not itself prove the required simultaneous system square. The existing system-calculus nodes specify actual maps, which lets this split supply the missing argument without creating duplicate lemmas. The statement, its hypotheses, source and blueprint ancestry are retained. No mathematical dispute or change to the unit or chapter is needed.
+
+A principal distinction in this proof is between Hom sheaves **on the sequence site**, whose relabeling is available for arbitrary system inputs, and finite-level evaluations of that Hom, whose formula requires a cartesian first input. The proof never identifies the former with termwise Hom for noncartesian inputs. The ambient beta square is proved by uncurrying maps in the derived system category. It neither inverts beta for arbitrary inputs nor tests equality by finite evaluations.
+
+## Unfinished work
+
+None for this one-level split. The existing dependency nodes retain their own states and proofs. No Lean was written and no compiler, Lake or local DAG/preflight checker was run.
+
+## Searches and duplicate check
+
+Read the current item, its two named system-calculus dependencies, its parent automorphism-Hom split and the sibling resolution/evaluation statements. Searched the whole DAG for the relevant reindexing and ringed-equivalence terminology and for Stacks tags 0GMX, 0D6D and 0FPI. Ran `tools/blueprint_refs.py ancestor` and whole-blueprint searches for `system internal`, `coefficient systems` and `reindexing`. The nearest ancestor remains `prop-pod-dual-tate-data-compatibility`, via `lem-pod-derived-automorphism-hom-evaluation`. None of the blueprint search hits states the item, so `same_as` remains empty. The generic exact-monoidal-equivalence, K-injective-adjoint, ringed pullback/Hom, composition and sequence-adjunction results already exist and are cited rather than recreated.
+
+Executed the required msearch commands in this sandbox: LeanFinder for the system comparison; Loogle `SheafOfModules, Equivalence`; grep `derived.*internalHom|internalHom.*reduc|semilinear.*system`; LeanSearch for derived system Hom and reduction; and a second LeanFinder phrasing about exact symmetric monoidal equivalences and K-injective resolutions. Read the returned types. They concern ordinary sheaf Hom, condensed closed categories, monoidal sheafification or Tor. None gives this comparison on ordinary derived categories of varying-ring systems, including beta and unit/counit normalization. Every new search entry is copied from the actual log; no failed service is recorded as a negative mathematical result.
+
+## Not duplicates
+
+No new nodes. The finite/completed-ring sibling `lem-pod-reindexing-hom-resolution-model` is not applied to the sequence site, since its statement only quantifies over finite quotient and completed coefficient sheaves on scheme sites. Instead the proof constructs sequence-site relabeling explicitly and applies existing generic ringed-site tools with their actual hypotheses. The sibling evaluation lemma is used only at its specified finite or completed coefficient rings.
+
+## Review by Q77
+
+I read the main-20261015 proposition proof in full, especially Step 5 and the evaluation in Step 2, the chapter record sec-poincare-duality and unit sk-def-weil. This is an agent-written refinement of that transport step, as `proof_origin.by` records, not a claim that Stacks states the complete system theorem. I read Stacks sites-modules.tex Remark 0GMX (`remark-pullback-internal-hom`, starting at line 3787), whose construction is pullback of maps on localized sites. I also read sites-cohomology.tex's Hom construction, 0A95 context and 08J9 (`lemma-internal-hom`), 07A4 (`lemma-pullback-tensor-product`), 0D6D (`lemma-derived-pullback-composition`), 07A6 (`lemma-adjoint`) and 0FPI (`lemma-adjoints-push-pull-compatibility`). The sequence and total-limit model is the specified one from the existing 0941-based nodes. These are construction anchors; none is misquoted as the full enhancement. No SGA source is used.
+
+Step 1 uses the statement of `lem-weil-proetale-isomorphism-inverse-image` for the cover-preserving site equivalence and compatibility with every ring homomorphism, and `lem-coef-semilinear-derived-sections` for the actual abelian category of ringed sequence modules and componentwise exactness. Taking the product with the unchanged index gives the explicit inverse equivalence. The coefficient identifications therefore commute with the quotient maps, and passage to the completed ring respects every projection. This is a direct construction from the two cited statements.
+
+Step 2 uses `lem-sfb-exact-monoidal-equivalence-total-kflat`, which really states preservation of K-flatness and signed total tensors under an additive exact symmetric monoidal equivalence. I checked its additional countable-coproduct and tensor hypotheses using the ordinary closed adjunction in `lem-pc-sheaf-modules-tensor-closed` on the small sequence site. `lem-weil-pbc-right-adjoint-preserves-kinjective` has the exact-adjoint hypothesis needed here: both relabelings have an exact quasi-inverse, so the lemma applies in both directions. This is not an application of an ordinary injective-resolution lemma to unbounded K-injectives. Descent to derived categories follows by localization of the explicit inverse functors and their unit/counit.
+
+Step 3 cites `def-pur-sheaf-hom` for the slice-morphism description and `def-pur-hom-complex` for the actual products and differential. I checked that the relabeling induces an equivalence on the entire localized **sequence** site, including horizontal arrows, not merely at fixed coefficient level. It carries compatible families and restriction maps to compatible families and has an explicit inverse. `def-pur-derived-internal-hom` specifies the K-injective model, and `lem-pur-rhom-well-defined` supplies quasi-isomorphism invariance. The isomorphism is therefore independent of the target resolution and of the first representative. No claim about evaluated injectives is necessary.
+
+Step 4 uses `lem-coef-ringed-pullback-hom-evaluation-comparison`, which states both the evaluation-defined comparison and its evaluation/transposition identities for arbitrary small ringed topoi. Its representative normalization agrees with the product-Hom comparison just constructed: the same component is evaluated at the same local section. `lem-sf-ringed-derived-closed-symmetric-monoidal` supplies the full tensor-Hom bijection, not merely a fully faithful Yoneda embedding. Thus uncurrying is injective for actual derived-system maps.
+
+Step 5 reads exactly the cartesian-first-input clause and the entire transition formula from `lem-coef-semilinear-derived-sections`; I checked its quantifier allowing arbitrary second input. `lem-pod-reindexing-evaluation-shift-composition` is applied only at the finite coefficient ring to identify the unique comparison with c0. Each arrow of the reduction word is accounted for: scalar extension by balancing, inverse first-input transition by the inverse equations, evaluation by Step 4 and the second-input transition by relabeling. No flatness of B_m to B_n is assumed. The m=n case gives the ordinary identity transition. This also shows why an isomorphism claim for the second-input transition is unnecessary.
+
+Step 6 uses `lem-coef-sequence-projection-derived-adjunction` for R=Lp*, and `lem-sfb-ringed-derived-monoidal-comparisons` for the monoidal composition and 2-isomorphism comparisons of the genuinely commuting ringed square. I checked the square's structural ring maps: both are the same quotient projections, so its 2-isomorphism satisfies the required ring condition. The same sibling evaluation lemma is applied here over the completed ring, where its statement permits arbitrary ordinary unbounded ambient complexes. No use is made of its parent's restricted constructible or completed-tensor comparison.
+
+Step 7 uses the calculus node for the specified beta and normalized reduction objects, and the semilinear node for their identification with the ringed-system Hom. Both statements were opened and read. The ringed pullback/Hom node gives beta's defining evaluation equation. Uncurrying with the closed-adjunction node gives the same explicit map D tensor P to R_X F N along either route. The equality of tensor identifications is precisely the monoidal square established in Step 6. This comparison takes place before level evaluation, with beta allowed to be noninvertible. I verified the source and target of both paths, including the contravariant first Hom input.
+
+Step 8 uses `lem-coef-sequence-pushforward-limit-projections` for the specified total limit and projections, the site equivalence for ordinary limit preservation, and `lem-coef-sequence-adjunction-cochain-transposes` for its explicit unit and counit chain maps. I checked that the resolution is K-injective in the **system category** and that its transported system remains so by Step 2. In particular the proof does not assume the scalar-restricted tower or an evaluated component is K-injective. Reindexing the cited formulas gives equal strict system chain maps, including their transitions; it does not recover equality from their derived evaluations. Step 9 then only applies the already specified functor L_X to equal arrows.
+
+I checked delivery-errors B through E against these steps: no new statement-only nodes to audit, no circular citation of the parent or of the item, no imported fields discarded, no tag treated as an uncited theorem, no hidden clause transferred into a new node and no additional geometric, constructibility, Tor-amplitude or coefficient-flatness hypothesis. Existing off-unit statements are explicitly declared as generic tools in `split_report.tool_uses`. I corrected the first draft to cite the ordinary sheaf tensor-Hom adjunction when verifying the coproduct hypothesis in Step 2. Every proof step is below 2000 characters, and every cited node has a verbatim quote in citations.json. Checked g=id, zero first or second system, shifts/unbounded Hom products, m=n, and noncartesian second inputs. These produce the expected identity/zero formulas and preserve the stated domain restrictions. There is no statement change and no unresolved mathematical gap claimed as elementary.

@@ -1,0 +1,288 @@
+{
+ "id": "lem-trf-simplicial-reversal-extra-degeneracies-homotopy",
+ "kind": "statement",
+ "title": "Ordinal reversal transports extra degeneracies and reverses homotopy endpoints",
+ "statement": "Let $\\mathcal C$ be an ordinary category, and use simplicial objects as in [def-weil-pbc-simplicial-object] and combinatorial homotopies with the endpoint and prism conventions of [lem-coef-simplicial-extra-degeneracy-prism]. For an order-preserving map $\\alpha:[m]\\to[n]$, set $r(\\alpha)(j)=n-\\alpha(m-j)$. This defines an involutive functor $r:\\Delta\\to\\Delta$. Write $W^r=W\\circ r^{\\mathrm{op}}$ for a simplicial object $W$; it has $W^r_n=W_n$, faces $d_i^r=d_{n-i}$ on degree $n$, and degeneracies $s_i^r=s_{n-i}$ on degree $n$. For $q_n:[n]\\to[0]$ one has $r(q_n)=q_n$.\nLet $p:W\\to\\operatorname{const}Y$ be an augmentation and suppose maps $t_{-1}:Y\\to W_0$, $t_n:W_n\\to W_{n+1}$ satisfy\n$$p_0t_{-1}=1_Y,\\quad d_{n+1}t_n=1_{W_n},\\quad d_0t_0=t_{-1}p_0,$$\n$$d_it_{n+1}=t_nd_i\\quad(0\\leq i\\leq n+1),\\qquad s_it_n=t_{n+1}s_i\\quad(0\\leq i\\leq n),\\quad n\\geq0.$$\nThen the same maps are left extra-degeneracy data for $p^r:W^r\\to\\operatorname{const}Y$ in exactly the sense of [lem-coef-simplicial-extra-degeneracy-prism]. A simplicial section $a^r$ of $p^r$ becomes a section $a$ of $p$ with the same degree components; in particular $W^r(q_n)t_{-1}=W(q_n)t_{-1}$.\nMore generally, let $A,B$ be simplicial objects in $\\mathcal C$, $f,g:A\\to B$ simplicial maps, and $H$ a combinatorial homotopy from $f^r$ to $g^r$. Then $\\widetilde H_j^n=H_{n-j}^n$ for $0\\leq j\\leq n$ is a combinatorial homotopy from $g$ to $f$. All these operations commute with natural maps of the supplied diagrams and with evaluation in a parameter functor category.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial). Returned proof steps 6 and 7: involution of the simplex category, conversion of right to left extra degeneracies, unchanged section, and all endpoint/face/degeneracy identities of the transported prism homotopy."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-coef-simplicial-extra-degeneracy-prism"
+ ],
+ "proof": [
+  {
+   "text": "Use the functor definition of simplicial objects in [def-weil-pbc-simplicial-object]. If $j\\leq k$ then $m-k\\leq m-j$, hence $n-\\alpha(m-j)\\leq n-\\alpha(m-k)$, so $r(\\alpha)$ is monotone. For $\\beta:[n]\\to[\\ell]$, substitution gives $r(\\beta\\alpha)(j)=\\ell-\\beta(\\alpha(m-j))=r(\\beta)(r(\\alpha)(j))$. Also $r(1_{[n]})(j)=j$ and $r(r(\\alpha))(j)=\\alpha(j)$. Thus $r$ is an involutive functor, and precomposition defines $W^r$ and takes natural transformations to natural transformations.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "The coface $\\delta_i:[n-1]\\to[n]$ omits $i$. Its reversal is the increasing injection omitting $n-i$, so $r(\\delta_i)=\\delta_{n-i}$. The codegeneracy $\\sigma_i:[n+1]\\to[n]$ repeats $i$; its reversal repeats $n-i$, so $r(\\sigma_i)=\\sigma_{n-i}$. Applying the face and degeneracy definitions of [def-weil-pbc-simplicial-object] proves $d_i^r=d_{n-i}$ and $s_i^r=s_{n-i}$ on degree $n$. Finally $r(q_n)(j)=0-q_n(n-j)=0$, so $r(q_n)=q_n$. Reversal fixes the constant functor and leaves the degree components of every natural transformation unchanged; in particular $p_n^r=p_n$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "Check the left extra-degeneracy equations displayed in [lem-coef-simplicial-extra-degeneracy-prism] with $Z=W^r$, $e=p^r$, and $h=t$. The augmentation equation is $p_0t_{-1}=1$. Since $t_n$ lands in degree $n+1$, $d_0^rt_n=d_{n+1}t_n=1$, and $d_1^rt_0=d_0t_0=t_{-1}p_0$. For $0\\leq i\\leq n+1$, put $k=n+1-i$, which lies in the same range. On the two relevant degrees, $d_{i+1}^rt_{n+1}=d_kt_{n+1}=t_nd_k=t_nd_i^r$. These are all the required face equations.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq n$, put $k=n-i$. The degeneracy on the target of $t_n$ has degree $n+1$, whereas that on its source has degree $n$. Consequently $s_{i+1}^rt_n=s_kt_n=t_{n+1}s_k=t_{n+1}s_i^r$. This gives every degeneracy equation in [lem-coef-simplicial-extra-degeneracy-prism]. Together with the preceding step it proves that exactly the supplied maps give left extra-degeneracy data, without imposing any additional relation on the $t_n$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "Let $a^r$ be any simplicial section of $p^r$. For any $\\alpha:[m]\\to[n]$, naturality of $a^r$ at $r(\\alpha)$ says $W^r(r(\\alpha))a_n^r=a_m^r$. Involution identifies the left operator with $W(\\alpha)$, so the same components define a natural transformation $a$ to $W$. The equality $p_na_n=1_Y$ is the unchanged section equality. In particular, the explicit section in [lem-coef-simplicial-extra-degeneracy-prism] has components $W^r(q_n)t_{-1}=W(r(q_n))t_{-1}=W(q_n)t_{-1}$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "For the homotopy calculation, write $D_i,S_i$ for operators on the reversed objects, reserving $d_i,s_i$ for the original objects, and set $k=n-j$. The maps $\\widetilde H_j^n=H_k^n$ have the required type $A_n\\to B_{n+1}$. The endpoint equations of [lem-coef-simplicial-extra-degeneracy-prism] give $d_0\\widetilde H_0^n=D_{n+1}H_n^n=f_n$ and $d_{n+1}\\widetilde H_n^n=D_0H_0^n=g_n$. These are precisely the endpoints for a homotopy from $g$ to $f$ under the stated convention, including when $n=0$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "Check the two strict face cases using the identities in [lem-coef-simplicial-extra-degeneracy-prism]. If $i<j$, then $n+1-i>k+1$ and $d_i\\widetilde H_j^n=D_{n+1-i}H_k^n=H_k^{n-1}D_{n-i}=\\widetilde H_{j-1}^{n-1}d_i$. If $i>j+1$, then $n+1-i<k$ and $d_i\\widetilde H_j^n=D_{n+1-i}H_k^n=H_{k-1}^{n-1}D_{n+1-i}=\\widetilde H_j^{n-1}d_{i-1}$. These cases require $n\\geq1$ and their inequalities ensure the displayed degree-$(n-1)$ homotopy indices exist. For the middle equation, $j<n$ gives $1\\leq k\\leq n$; the original middle equation at index $k-1$ is $D_kH_k^n=D_kH_{k-1}^n$. Since $d_{j+1}=D_k$ in degree $n+1$, this is $d_{j+1}\\widetilde H_{j+1}^n=d_{j+1}\\widetilde H_j^n$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "For degeneracies, $s_i\\widetilde H_j^n=S_{n+1-i}H_k^n$. If $i\\leq j$, then $n+1-i>k$, so the second degeneracy equation in [lem-coef-simplicial-extra-degeneracy-prism] makes this $H_k^{n+1}S_{n-i}=\\widetilde H_{j+1}^{n+1}s_i$. If $i>j$, then $n+1-i\\leq k$, so its first degeneracy equation makes this $H_{k+1}^{n+1}S_{n+1-i}=\\widetilde H_j^{n+1}s_{i-1}$. Here the $S$ on the right acts on $A_n$, which is why its reversed index is $n$ minus its index. Both formulas hold for the full range $0\\leq i\\leq n+1$, with the respective inequalities. This verifies every homotopy identity.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  },
+  {
+   "text": "Finally all constructions are natural in the supplied diagrams. For a compatible pair $u:W\\to W'$ and $v:Y\\to Y'$, the equations $u_0t_{-1}=t'_{-1}v$ and $u_{n+1}t_n=t'_nu_n$ remain the very same equations after reversal. For a compatible map of homotopy diagrams $u:A\\to A'$, $v:B\\to B'$ with $v_{n+1}H_j^n=H_j'^nu_n$, replacing $j$ by $n-j$ gives $v_{n+1}\\widetilde H_j^n=\\widetilde H_j'^nu_n$. For the explicit sections, naturality of $u$ gives $u_nW(q_n)t_{-1}=W'(q_n)u_0t_{-1}=W'(q_n)t'_{-1}v$. In a parameter functor category each component is a natural transformation, and evaluation preserves its compositions and identities by definition. Thus evaluating $W\\circ r^{\\mathrm{op}}$, the unchanged $t_n$, the sections, or $H_{n-j}^n$ gives exactly the construction on the evaluated diagram. This proves the asserted compatibilities without a choice of pointwise homotopies.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence, in Situation 08N9; explicit agent-written index-reversal calculation supplementing the source. Homotopy and extra-degeneracy conventions: the statement of lem-coef-simplicial-extra-degeneracy-prism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-coef-simplicial-extra-degeneracy-prism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08ND (lemma-standard-simplicial-homotopy), second homotopy equivalence; explicit ordinal and prism-index computations, using the stated Mathlib prism conventions. Stacks supplies the application, not this reversal calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reversing the ordinal indices of a simplicial homotopy swaps its endpoints and converts right extra degeneracies to left extra degeneracies",
+   "results": "{\"t\": \"2026-10-22T06:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"Reversing the ordinal indices of a simplicial homotopy swaps its endpoints and converts right extra degeneracies to left extra degeneracies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm_h\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm\", \"SSet.Truncated.HomotopicR.symm\", \"CategoryTheory.ShortComplex.Homotopy.op_h₀\", \"SSet.Truncated.HomotopicL.symm\", \"CategoryTheory.ShortComplex.Homotopy.op_h₂\", \"HomotopicalAlgebra.PathObject.RightHomotopy.symm\", \"CategoryTheory.ShortComplex.Homotopy.unop_h₀\"], \"digest\": \"547e9d368c91e4d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.opFunctor and its face/degeneracy formulas in Mathlib/AlgebraicTopology/SimplicialObject/Op.lean:36,55,60 give reversal of simplicial objects, but not conversion of right extra degeneracies or endpoint-reversing transport of Homotopy. Homotopy in Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean:48 has no reversal construction in that file. Hits for chain-complex and path homotopy symmetry have different objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial homotopy on the opposite simplicial object gives a homotopy with reversed endpoints on the original object",
+   "results": "{\"t\": \"2026-10-22T06:44:11Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial homotopy on the opposite simplicial object gives a homotopy with reversed endpoints on the original object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Homotopy.unop\", \"CochainComplex.homotopyUnop\", \"Path.Homotopy.symm\", \"Path.Homotopy.symm₂\", \"Homotopy.symm\", \"CategoryTheory.ShortComplex.Homotopy.op\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm\", \"SimplicialObject.opFunctor\"], \"digest\": \"ec2230015c4b0f8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.opFunctor and its face/degeneracy formulas in Mathlib/AlgebraicTopology/SimplicialObject/Op.lean:36,55,60 give reversal of simplicial objects, but not conversion of right extra degeneracies or endpoint-reversing transport of Homotopy. Homotopy in Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean:48 has no reversal construction in that file. Hits for chain-complex and path homotopy symmetry have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"rev\"",
+   "results": "{\"t\": \"2026-10-22T06:43:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"rev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Homotopy.prevD_chainComplex\", \"Homotopy.prevD_zero_cochainComplex\", \"Homotopy.prevD_succ_cochainComplex\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\"], \"digest\": \"0fe2560a68b86ad5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.opFunctor and its face/degeneracy formulas in Mathlib/AlgebraicTopology/SimplicialObject/Op.lean:36,55,60 give reversal of simplicial objects, but not conversion of right extra degeneracies or endpoint-reversing transport of Homotopy. Homotopy in Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean:48 has no reversal construction in that file. Hits for chain-complex and path homotopy symmetry have different objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "rev|reverse|opHomotopy [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"grep\", \"query\": \"rev|reverse|opHomotopy\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"b3feccbf23890d96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.opFunctor and its face/degeneracy formulas in Mathlib/AlgebraicTopology/SimplicialObject/Op.lean:36,55,60 give reversal of simplicial objects, but not conversion of right extra degeneracies or endpoint-reversing transport of Homotopy. Homotopy in Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean:48 has no reversal construction in that file. Hits for chain-complex and path homotopy symmetry have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinal reversal of simplicial objects transports an extra degeneracy and reverses the endpoints of a combinatorial simplicial homotopy",
+   "results": "{\"t\": \"2026-10-23T14:13:25Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinal reversal of simplicial objects transports an extra degeneracy and reverses the endpoints of a combinatorial simplicial homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.opFunctor\", \"SSet.op_σ\", \"SimplicialObject.opFunctor_obj_δ\", \"SimplicialObject.opFunctor_obj_σ\", \"SimplicialObject.opEquivalence\", \"SimplexCategory.rev\", \"SSet.op_δ\", \"SimplexCategory.rev_map_σ\"], \"digest\": \"ed10f34cd1521101\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: SimplexCategory.rev and SimplicialObject.opFunctor give reversal and operator formulas (Rev.lean:34,46,52,60,64,71; Op.lean:36,55,60,66), but not right-extra-degeneracy transport or endpoint-reversing combinatorial Homotopy. Read Homotopy.lean:48-67 and ExtraDegeneracy.lean:72-83. ShortComplex/CochainComplex and Kan path homotopies are different notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Homotopy, \"op\"",
+   "results": "{\"t\": \"2026-10-23T14:13:25Z\", \"tool\": \"loogle\", \"query\": \"SimplicialObject.Homotopy, \\\"op\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialObject.Homotopy'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid identifier query; no mathematical absence inferred; corrected with the quoted-name Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "opFunctor|rev|Homotopy",
+   "results": "{\"t\": \"2026-10-23T14:13:25Z\", \"tool\": \"grep\", \"query\": \"opFunctor|rev|Homotopy\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\"], \"digest\": \"4cc48c85a95abd43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: SimplexCategory.rev and SimplicialObject.opFunctor give reversal and operator formulas (Rev.lean:34,46,52,60,64,71; Op.lean:36,55,60,66), but not right-extra-degeneracy transport or endpoint-reversing combinatorial Homotopy. Read Homotopy.lean:48-67 and ExtraDegeneracy.lean:72-83. ShortComplex/CochainComplex and Kan path homotopies are different notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial homotopy on opposite simplicial objects reverses endpoints by reversing the prism indices",
+   "results": "{\"t\": \"2026-10-23T14:13:25Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial homotopy on opposite simplicial objects reverses endpoints by reversing the prism indices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"CategoryTheory.ShortComplex.Homotopy.op\", \"SimplicialObject.opFunctor\", \"SSet.op_δ\", \"SSet.op_map\", \"CochainComplex.homotopyUnop\", \"SSet.opFunctor\", \"SimplicialObject.opEquivalence\"], \"digest\": \"d53af4134552888c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: SimplexCategory.rev and SimplicialObject.opFunctor give reversal and operator formulas (Rev.lean:34,46,52,60,64,71; Op.lean:36,55,60,66), but not right-extra-degeneracy transport or endpoint-reversing combinatorial Homotopy. Read Homotopy.lean:48-67 and ExtraDegeneracy.lean:72-83. ShortComplex/CochainComplex and Kan path homotopies are different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Combinatorial simplicial homotopy symmetry under the simplex category reversal involution",
+   "results": "{\"t\": \"2026-10-23T14:14:04Z\", \"tool\": \"leanfinder\", \"query\": \"Combinatorial simplicial homotopy symmetry under the simplex category reversal involution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicR.symm\", \"SSet.Truncated.HomotopicL.symm\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm_h\", \"CategoryTheory.ShortComplex.Homotopy.unop_h₁\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm\", \"CochainComplex.homotopyOpEquiv\", \"CategoryTheory.ShortComplex.Homotopy.unop_h₂\", \"CategoryTheory.ShortComplex.Homotopy.symm\"], \"digest\": \"06a91a30ebc5ecdf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: SimplexCategory.rev and SimplicialObject.opFunctor give reversal and operator formulas (Rev.lean:34,46,52,60,64,71; Op.lean:36,55,60,66), but not right-extra-degeneracy transport or endpoint-reversing combinatorial Homotopy. Read Homotopy.lean:48-67 and ExtraDegeneracy.lean:72-83. ShortComplex/CochainComplex and Kan path homotopies are different notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"rev\"",
+   "results": "{\"t\": \"2026-10-23T14:14:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"rev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Homotopy.prevD_chainComplex\", \"Homotopy.prevD_zero_cochainComplex\", \"Homotopy.prevD_succ_cochainComplex\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\"], \"digest\": \"0fe2560a68b86ad5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: SimplexCategory.rev and SimplicialObject.opFunctor give reversal and operator formulas (Rev.lean:34,46,52,60,64,71; Op.lean:36,55,60,66), but not right-extra-degeneracy transport or endpoint-reversing combinatorial Homotopy. Read Homotopy.lean:48-67 and ExtraDegeneracy.lean:72-83. ShortComplex/CochainComplex and Kan path homotopies are different notions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-adjunction-standard-simplicial-homotopy",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Re-split auxiliary: Returned proof steps 6 and 7: involution of the simplex category, conversion of right to left extra degeneracies, unchanged section, and all endpoint/face/degeneracy identities of the transported prism homotopy.",
+   "via": [
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-simplicial-reversal-extra-degeneracies-homotopy",
+  "worker": "stage1",
+  "summary": "Wrote nine explicit elementary index-calculation steps, preserving the statement. Checked all seven prism homotopy equations, both extra-degeneracy families, arbitrary sections, and compatibility with diagram maps and evaluation. Existing Mathlib leaves supply only definitions and conventions, not an unstated reversal theorem. No new nodes needed.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Re-split auxiliary: Returned proof steps 6 and 7: involution of the simplex category, conversion of right to left extra degeneracies, unchanged section, and all endpoint/face/degeneracy identities of the transported prism homotopy. Realizes the auxiliary right-to-left extra-degeneracy and endpoint-reversal calculation for the standard-resolution proof. The current latest blueprint locality proof uses Varshavsky; no claim is made that it explicitly contains this auxiliary calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-45184cef7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-45184cef7 (reviewer sub-agent of L); spot-checked: Read all nine steps of the item and checked them by hand against the statements of def-weil-pbc-simplicial-object and lem-coef-simplicial-extra-degeneracy-prism. Statement and stmt_deps are identical to the base, the base proof was empty, and there is no repair note, so this is an ordinary split with no new nodes. Indices: r(delta_i)=delta_{n-i} and r(sigma_i)=sigma_{n-i} (script check, n<=7). The right-data hypotheses (exactly those of lem-trf-comonad-counit-section-right-degeneracies) become the prism node's left data: D_0 on degree n+1 is d_{n+1}, D_1 on degree 1 is d_0, and k=n+1-i resp. n-i stay in range. Sections transfer through r^2=id and r(q_n)=q_n. In the transformed homotopy the endpoints swap (g to f, matching parent step 5). The strict face cases, the middle equation (original at k-1, 1<=k<=n) and both degeneracy cases each map to the opposite original case, and an independent script found every identity matched for n=0..11. Mathlib Op.lean:36-60 (opFunctor, delta i to delta i.rev) agrees with the conventions. Stacks lemma-standard-simplicial-homotopy (simplicial.tex:6729) is only the application, so proof_origin agent is correct. Route: only a definition and a Mathlib leaf are used, so no tool_uses. proof_deps equals the union of the step uses. Duplicate audit (rev/opFunctor/reversal/extra degeneracy over dag/nodes): the only nearby statement, lem-cbc-opposite-interval-internal-hom, is about simplicial sets and internal Fun(Delta^1,E), so it is not a duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialReversalTransport",
+  "declaration": "CategoryTheory.SimplicialObject.exists_extraDegeneracy_ordinalReverse",
+  "declarations": [
+   "CategoryTheory.SimplicialObject.Augmented.ordinalReverse",
+   "CategoryTheory.SimplicialObject.ordinalReverse_terminal",
+   "CategoryTheory.SimplicialObject.exists_extraDegeneracy_ordinalReverse",
+   "CategoryTheory.SimplicialObject.exists_section_of_ordinalReverse",
+   "CategoryTheory.SimplicialObject.exists_homotopy_of_ordinalReverse",
+   "CategoryTheory.SimplicialObject.ordinalReverse_extraDegeneracy_naturality",
+   "CategoryTheory.SimplicialObject.ordinalReverse_homotopy_naturality",
+   "CategoryTheory.SimplicialObject.ordinalReverse_section_naturality",
+   "CategoryTheory.SimplicialObject.ordinalReverse_whiskering",
+   "SimplexCategory.rev",
+   "SimplexCategory.rev_map_apply",
+   "SimplexCategory.rev_map_rev_map",
+   "SimplexCategory.rev_map_δ",
+   "SimplexCategory.rev_map_σ",
+   "SimplexCategory.revCompRevIso",
+   "SimplicialObject.opFunctor",
+   "SimplicialObject.opObjIso",
+   "SimplicialObject.opFunctor_obj_δ",
+   "SimplicialObject.opFunctor_obj_σ",
+   "SimplicialObject.opFunctor_map_app",
+   "SimplicialObject.opFunctorCompOpFunctorIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialReversalTransport.lean",
+  "statement": "theorem exists_extraDegeneracy_ordinalReverse (X : Augmented C) (t' : X.right ⟶ X.left _⦋0⦌) (t : ∀ n : ℕ, X.left _⦋n⦌ ⟶ X.left _⦋n + 1⦌) (hε : t' ≫ X.hom.app (op ⦋0⦌) = 𝟙 X.right) (hlast : ∀ n : ℕ, t n ≫ X.left.δ (Fin.last (n + 1)) = 𝟙 (X.left _⦋n⦌)) (hfirst : t 0 ≫ X.left.δ 0 = X.hom.app (op ⦋0⦌) ≫ t') (hδ : ∀ (n : ℕ) (i : Fin (n + 2)), t (n + 1) ≫ X.left.δ i.castSucc = X.left.δ i ≫ t n) (hσ : ∀ (n : ℕ) (i : Fin (n + 1)), t n ≫ X.left.σ i.castSucc = X.left.σ i ≫ t (n + 1)) : ∃ ed : Augmented.ExtraDegeneracy X.ordinalReverse, ed.s' = t' ∧ (∀ n : ℕ, ed.s n = t n) ∧ (∀ n : ℕ, ed.section_.app (op ⦋n⦌) = t' ≫ X.left.map (SimplexCategory.isTerminalZero.from ⦋n⦌).op) ∧ (∀ (D : Type u') [Category.{v'} D] (F : C ⥤ D), (ed.map F).s' = F.map t' ∧ (∀ n : ℕ, (ed.map F).s n = F.map (t n)) ∧ (∀ n : ℕ, (ed.map F).section_.app (op ⦋n⦌) = F.map (t' ≫ X.left.map (SimplexCategory.isTerminalZero.from ⦋n⦌).op)))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly realize all clauses. The imported Mathlib reversal declarations in declarations provide the ordinal formula, involution, degree objects, faces, degeneracies and unchanged arrow components; the new module provides right-to-left extra-degeneracy transport, unchanged sections, endpoint-reversing homotopy transport, naturality and evaluation compatibility. All data of the new augmentation helper are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28bea8348",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node (9 steps), both stmt_deps, module, report, and Mathlib Homotopy/ExtraDegeneracy/Op/Rev/Augmented.whiskeringObj. Hypotheses hε/hlast/hfirst/hδ/hσ match the node's index ranges exactly. Reversed data satisfy ExtraDegeneracy via δ^r_i=δ_{i.rev}, using (i.succ).rev=(i.rev).castSucc. Section clause holds since rev fixes the map to [0]. K : Homotopy g f with K.h i = H.h i.rev has endpoints swapped (g to f, Mathlib convention as in the prism dep), and the middle identity maps to the original. Naturality/whiskering clauses are true and pinned by components. ordinalReverse has real data. All sorry, docstrings OK, statement verbatim, independent universes, n=0 checked, no duplicate found in Mathlib or the side-live trees. No changes, so no compile run."
+ }
+}

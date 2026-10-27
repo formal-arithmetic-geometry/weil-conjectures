@@ -1,0 +1,195 @@
+# global build 2026-10-26T11:15:20Z of 90f1928b08: Sheaf.Paper.IsomorphismComparisonScalarExtension failed
+error: Sheaf/Paper/IsomorphismComparisonScalarExtension.lean:1545:42: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ≫ 𝟙 ?m.757
+in the target expression
+  (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app P.obj ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E g P.obj) ≫
+        (integralDerivedPullbackComparison l E g).inv.app P ≫
+          (integralDerivedPullback l E g).map
+            (𝟙 (DerivedCategory.Q.obj ((integralOperationsGoodComplex l E Y).ι.obj P))) =
+    (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app P.obj ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E g P.obj) ≫
+        (integralDerivedPullbackComparison l E g).inv.app P
+
+l : ℕ
+inst✝⁷ : Fact (Nat.Prime l)
+E : Type u
+inst✝⁶ : Field E
+inst✝⁵ : Algebra ℚ_[l] E
+inst✝⁴ : FiniteDimensional ℚ_[l] E
+L : Type u
+inst✝³ : Field L
+inst✝² : Algebra ℚ_[l] L
+inst✝¹ : FiniteDimensional ℚ_[l] L
+ι : E →ₐ[ℚ_[l]] L
+X Y : Scheme
+g : X ⟶ Y
+inst✝ : IsIso g
+hX : ∀ (x : ↥X), IsUnit ↑l
+hY : ∀ (y : ↥Y), IsUnit ↑l
+hstrict :
+  ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ),
+    ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (ComplexShape.up ℤ)).map
+          (inverseImageRoosComparisonComplex l E g P) ≫
+        scalarPullbackChain l E L ι g P =
+      (NatIso.mapHomologicalComplex (isomorphismScalarTensor l E L ι g) (ComplexShape.up ℤ)).hom.app P ≫
+        inverseImageRoosComparisonComplex l L g
+          (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+K : DerivedCategory (integralTowerModules l E Y)
+κE : inverseImageIntegralDerived l E g ⟶ integralDerivedPullback l E g
+hκE :
+  ∀ (N : DerivedCategory (integralTowerModules l E Y)), κE.app N = inverseImagePullbackComparisonDerived l E g hX hY N
+hresE :
+  ∀ (K : CochainComplex (integralTowerModules l E Y) ℤ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+    (q : P.obj ⟶ K) [inst : QuasiIso q],
+    κE.app (DerivedCategory.Q.obj K) = inverseImagePullbackComparison l E g hX hY K P q
+κL : inverseImageIntegralDerived l L g ⟶ integralDerivedPullback l L g
+hκL :
+  ∀ (N : DerivedCategory (integralTowerModules l L Y)), κL.app N = inverseImagePullbackComparisonDerived l L g hX hY N
+hresL :
+  ∀ (K : CochainComplex (integralTowerModules l L Y) ℤ) (P : (integralOperationsGoodComplex l L Y).FullSubcategory)
+    (q : P.obj ⟶ K) [inst : QuasiIso q],
+    κL.app (DerivedCategory.Q.obj K) = inverseImagePullbackComparison l L g hX hY K P q
+FX : integralTowerModules l E X ⥤ integralTowerModules l L X := integralOrdinaryScalar l E L ι X
+FY : integralTowerModules l E Y ⥤ integralTowerModules l L Y := integralOrdinaryScalar l E L ι Y
+GE : integralTowerModules l E Y ⥤ integralTowerModules l E X := inverseImageIntegralModules l E g
+Gₗ : integralTowerModules l L Y ⥤ integralTowerModules l L X := inverseImageIntegralModules l L g
+α : integralDerivedPullback l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L g :=
+  (scalarPullbackOrdinary l E L ι g).hom
+b : inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ inverseImageIntegralDerived l L g :=
+  (isomorphismScalarTensorDerived l E L ι g).hom
+A : inverseImageIntegralDerived l E g ⋙ FX.mapDerivedCategory ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L g :=
+  Functor.whiskerRight κE FX.mapDerivedCategory ≫ α
+B : inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  FY.mapDerivedCategory ⋙ integralDerivedPullback l L g :=
+  b ≫ FY.mapDerivedCategory.whiskerLeft κL
+P : (integralOperationsGoodComplex l E Y).FullSubcategory
+Q : HomologicalComplex (integralTowerModules l L Y) (ComplexShape.up ℤ) :=
+  (FY.mapHomologicalComplex (ComplexShape.up ℤ)).obj P.obj
+Qgood : (integralOperationsGoodComplex l L Y).FullSubcategory := { obj := Q, property := ⋯ }
+⊢ (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app P.obj ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E g P.obj) ≫
+        (integralDerivedPullbackComparison l E g).inv.app P ≫
+          (integralDerivedPullback l E g).map
+            (𝟙 (DerivedCategory.Q.obj ((integralOperationsGoodComplex l E Y).ι.obj P))) =
+    (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app P.obj ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E g P.obj) ≫
+        (integralDerivedPullbackComparison l E g).inv.app P
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    integralDerivedPullbackComparison l E g
+  has type
+    @Iso ((integralOperationsGoodComplex l E Y).FullSubcategory ⥤ DerivedCategory (integralTowerModules l E X))
+      Functor.category (integralOperationsGoodLocalization l E Y ⋙ integralDerivedPullback l E g)
+      (integralOperationsPullbackOnGood l E g)
+  but is expected to have type
+    @Iso ((integralOperationsGoodComplex l E Y).FullSubcategory ⥤ DerivedCategory (integralTowerModules l E X))
+      Functor.category (((integralOperationsGoodComplex l E Y).ι ⋙ DerivedCategory.Q) ⋙ integralDerivedPullback l E g)
+      ((integralOperationsGoodComplex l E Y).ι ⋙ integralOperationsPullbackComplexFunctor l E g ⋙ DerivedCategory.Q)
+  in the application
+    (integralDerivedPullbackComparison l E g).inv
+error: Sheaf/Paper/IsomorphismComparisonScalarExtension.lean:1554:42: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ≫ 𝟙 ?m.858
+in the target expression
+  (inverseImageIntegralModules l L g).mapDerivedCategoryFactors.hom.app Q ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l L g Q) ≫
+        (integralDerivedPullbackComparison l L g).inv.app { obj := Q, property := ⋯ } ≫
+          (integralDerivedPullback l L g).map
+            (𝟙 (DerivedCategory.Q.obj ((integralOperationsGoodComplex l L Y).ι.obj { obj := Q, property := ⋯ }))) =
+    (inverseImageIntegralModules l L g).mapDerivedCategoryFactors.hom.app Q ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l L g Q) ≫
+        (integralDerivedPullbackComparison l L g).inv.app { obj := Q, property := ⋯ }
+
+l : ℕ
+inst✝⁷ : Fact (Nat.Prime l)
+E : Type u
+inst✝⁶ : Field E
+inst✝⁵ : Algebra ℚ_[l] E
+inst✝⁴ : FiniteDimensional ℚ_[l] E
+L : Type u
+inst✝³ : Field L
+inst✝² : Algebra ℚ_[l] L
+inst✝¹ : FiniteDimensional ℚ_[l] L
+ι : E →ₐ[ℚ_[l]] L
+X Y : Scheme
+g : X ⟶ Y
+inst✝ : IsIso g
+hX : ∀ (x : ↥X), IsUnit ↑l
+hY : ∀ (y : ↥Y), IsUnit ↑l
+hstrict :
+  ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ),
+    ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (ComplexShape.up ℤ)).map
+          (inverseImageRoosComparisonComplex l E g P) ≫
+        scalarPullbackChain l E L ι g P =
+      (NatIso.mapHomologicalComplex (isomorphismScalarTensor l E L ι g) (ComplexShape.up ℤ)).hom.app P ≫
+        inverseImageRoosComparisonComplex l L g
+          (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+K : DerivedCategory (integralTowerModules l E Y)
+κE : inverseImageIntegralDerived l E g ⟶ integralDerivedPullback l E g
+hκE :
+  ∀ (N : DerivedCategory (integralTowerModules l E Y)), κE.app N = inverseImagePullbackComparisonDerived l E g hX hY N
+hresE :
+  ∀ (K : CochainComplex (integralTowerModules l E Y) ℤ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+    (q : P.obj ⟶ K) [inst : QuasiIso q],
+    κE.app (DerivedCategory.Q.obj K) = inverseImagePullbackComparison l E g hX hY K P q
+κL : inverseImageIntegralDerived l L g ⟶ integralDerivedPullback l L g
+hκL :
+  ∀ (N : DerivedCategory (integralTowerModules l L Y)), κL.app N = inverseImagePullbackComparisonDerived l L g hX hY N
+hresL :
+  ∀ (K : CochainComplex (integralTowerModules l L Y) ℤ) (P : (integralOperationsGoodComplex l L Y).FullSubcategory)
+    (q : P.obj ⟶ K) [inst : QuasiIso q],
+    κL.app (DerivedCategory.Q.obj K) = inverseImagePullbackComparison l L g hX hY K P q
+FX : integralTowerModules l E X ⥤ integralTowerModules l L X := integralOrdinaryScalar l E L ι X
+FY : integralTowerModules l E Y ⥤ integralTowerModules l L Y := integralOrdinaryScalar l E L ι Y
+GE : integralTowerModules l E Y ⥤ integralTowerModules l E X := inverseImageIntegralModules l E g
+Gₗ : integralTowerModules l L Y ⥤ integralTowerModules l L X := inverseImageIntegralModules l L g
+α : integralDerivedPullback l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L g :=
+  (scalarPullbackOrdinary l E L ι g).hom
+b : inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ inverseImageIntegralDerived l L g :=
+  (isomorphismScalarTensorDerived l E L ι g).hom
+A : inverseImageIntegralDerived l E g ⋙ FX.mapDerivedCategory ⟶
+  integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L g :=
+  Functor.whiskerRight κE FX.mapDerivedCategory ≫ α
+B : inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ⟶
+  FY.mapDerivedCategory ⋙ integralDerivedPullback l L g :=
+  b ≫ FY.mapDerivedCategory.whiskerLeft κL
+P : (integralOperationsGoodComplex l E Y).FullSubcategory
+Q : HomologicalComplex (integralTowerModules l L Y) (ComplexShape.up ℤ) :=
+  (FY.mapHomologicalComplex (ComplexShape.up ℤ)).obj P.obj
+Qgood : (integralOperationsGoodComplex l L Y).FullSubcategory := { obj := Q, property := ⋯ }
+hkE :
+  κE.app (DerivedCategory.Q.obj P.obj) =
+    GE.mapDerivedCategoryFactors.hom.app P.obj ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E g P.obj) ≫
+        (integralDerivedPullbackComparison l E g).inv.app P
+⊢ (inverseImageIntegralModules l L g).mapDerivedCategoryFactors.hom.app Q ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l L g Q) ≫
+        (integralDerivedPullbackComparison l L g).inv.app { obj := Q, property := ⋯ } ≫
+          (integralDerivedPullback l L g).map
+            (𝟙 (DerivedCategory.Q.obj ((integralOperationsGoodComplex l L Y).ι.obj { obj := Q, property := ⋯ }))) =
+    (inverseImageIntegralModules l L g).mapDerivedCategoryFactors.hom.app Q ≫
+      DerivedCategory.Q.map (inverseImageRoosComparisonComplex l L g Q) ≫
+        (integralDerivedPullbackComparison l L g).inv.app { obj := Q, property := ⋯ }
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    integralDerivedPullbackComparison l L g
+  has type
+    @Iso ((integralOperationsGoodComplex l L Y).FullSubcategory ⥤ DerivedCategory (integralTowerModules l L X))
+      Functor.category (integralOperationsGoodLocalization l L Y ⋙ integralDerivedPullback l L g)
+      (integralOperationsPullbackOnGood l L g)
+  but is expected to have type
+    @Iso ((integralOperationsGoodComplex l L Y).FullSubcategory ⥤ DerivedCategory (integralTowerModules l L X))
+      Functor.category (((integralOperationsGoodComplex l L Y).ι ⋙ DerivedCategory.Q) ⋙ integralDerivedPullback l L g)
+      ((integralOperationsGoodComplex l L Y).ι ⋙ integralOperationsPullbackComplexFunctor l L g ⋙ DerivedCategory.Q)
+  in the application
+    (integralDerivedPullbackComparison l L g).inv
+error: Lean exited with code 1

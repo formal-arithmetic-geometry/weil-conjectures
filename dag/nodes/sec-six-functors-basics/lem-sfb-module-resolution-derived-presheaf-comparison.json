@@ -1,0 +1,529 @@
+{
+ "id": "lem-sfb-module-resolution-derived-presheaf-comparison",
+ "kind": "statement",
+ "title": "Module injective resolutions compute derived abelian presheaf inclusion",
+ "statement": "Let $\\mathcal C$ be a small site in the common sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and $R$ a sheaf of commutative rings. Use ordinary $R$-module sheaves [def-weil-sheaf-of-modules-category]. Write $U:\\operatorname{Mod}(R)\\to\\operatorname{Ab}(\\mathcal C)$ for forgetting scalars, $\\operatorname{PAb}(\\mathcal C)=\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\operatorname{Ab})$, and $\\iota:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{PAb}(\\mathcal C)$ for inclusion, right adjoint to abelian sheafification [def-weil-pbc-sheafification]. The three abelian categories have enough injectives [def-sp-injective-resolutions]. Write $Q$ for localization of complexes at quasi-isomorphisms and $D^+$ for the full bounded-below derived category [def-weil-abstract-derived-category]. Compute $R\\iota$ on bounded-below abelian injective resolutions, with its canonical natural comparison $\\alpha_L:Q(\\iota L)\\to R\\iota(QL)$.\nFor every $M\\in\\operatorname{Mod}(R)$ there exists a degreewise monomorphic quasi-isomorphism $r:M[0]\\to I^\\bullet$ with injective module terms and $I^n=0$ for $n<0$. For every such $r$, the terms $UI^n$ are $\\iota$-acyclic, meaning $R^q\\iota(UI^n)=0$ for $q>0$, and the comparison\n$$c_r=(R\\iota(Q(Ur)))^{-1}\\circ\\alpha_{UI}:Q(\\iota UI^\\bullet)\\xrightarrow{\\sim}R\\iota(UM[0])$$\nis an isomorphism in $D^+(\\operatorname{PAb}(\\mathcal C))$.\nFor any nonnegative abelian injective resolution $s:UM[0]\\to J^\\bullet$, there exists a chain map $b:UI^\\bullet\\to J^\\bullet$ satisfying $b\\circ Ur=s$. Any two such maps are homotopic; $\\iota b$ is a quasi-isomorphism and, under the injective-resolution identification $Q(\\iota J^\\bullet)\\cong R\\iota(UM[0])$, its derived image is $c_r$.\nIf $f:M\\to N$ is a module map and $r':N[0]\\to I'^\\bullet$ is another resolution of this kind, there exists a chain map $\\widetilde f:I^\\bullet\\to I'^\\bullet$ with $\\widetilde f\\circ r=r'\\circ f[0]$, any two lifts are homotopic, and\n$$c_{r'}\\circ Q(\\iota U\\widetilde f)=R\\iota(Uf[0])\\circ c_r.$$\nFor $f=\\mathrm{id}_M$ this identifies the comparisons for any two choices of resolution. Under the kernel identifications induced by $Ur$ and the abelian resolution augmentation, $H^0(c_r)$ is the identity of $\\iota UM$. No finite-product, subcanonical, flatness or finite-cover hypothesis is imposed. No assertion that $UI^n$ is injective as an abelian sheaf is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), acyclicity proof; derived.tex Tag 015E (lemma-leray-acyclicity), Tag 013P (lemma-morphisms-lift), Tag 013S (lemma-morphisms-equal-up-to-homotopy). Agent formulation as a normalized isomorphism of derived presheaves."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing Grothendieck-abelian instance on ordinary module sheaves and enough injectives [prop-pur-kinjective-resolutions-exist, lem-sp-grothendieck-enough-injectives]. Abelian sheaves also have enough injectives [lem-weil-pbc-site-sheaves-enough-injectives]. For M take Mathlib injectiveResolution M and its integer extension I.cochainComplex with augmentation I.ι'. The negative objects are zero, all terms injective, and the augmentation a quasi-isomorphism. Its degree-zero component is monic by InjectiveResolution.ι'_f_zero; every other component has zero source. This constructs exists_resolution.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting scalars U preserves finite limits and finite colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful], so preserves monomorphisms and quasi-isomorphisms. Inclusion ι preserves finite limits by [lem-weil-pbc-presheaf-finite-limits-objectwise]. Evaluation E_W on abelian presheaves is exact by objectwise limits and colimits [lem-weil-pbc-presheaf-colimits-sectionwise]. Consequently R^q(ι ⋙ E_W)(A) is naturally isomorphic to (R^qι(A))(W): compute both on the same injective resolution and commute the exact E_W with homology (Functor.rightDerivedCompObjIso). By [lem-sc-site-cohomology-right-derived-sections] the former is H^q(W,A). For injective modules I, [lem-sc-injective-module-abelian-acyclic-zariski] makes these groups zero in positive degree. Objectwise zero implies zero presheaf; hence every UI^n is ι-right-acyclic.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing acyclic-unit theorem [src-right-derived-functor-plus-acyclic-unit] directly to UI. The given α_UI is invertible, and its composite with Rι(Q(Ur)) inverse is exactly comparison ι (Ur). This proves module_resolution_derived_presheaf_comparison without resolving UI again. The same theorem on any supplied abelian injective resolution J gives invertibility of comparison ι s, because injective abelian objects are right-acyclic.",
+   "uses": [
+    "src-right-derived-functor-plus-acyclic-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a commutative square r ≫ t = f ≫ r' of bounded-below complexes with quasi-isomorphisms r,r', naturality of rightDerivedFunctorPlusUnit and functoriality of Q and Rι yield Q(ιt) ≫ c_r' = c_r ≫ Rι(Qf). The localization of r is precisely qIso r hom: fully faithful inclusion in the unbounded derived category reduces this to the definition of Qh. Cancel Rι(qIso r') hom to verify the equation using only naturality and inverse identities. This is the proved private comparison_naturality helper.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the degreewise monomorphic quasi-isomorphism Ur and target J in [lem-weil-pbc-lift-along-injective-quasi-iso] to obtain strict b with Ur ≫ b = s. Any two such b are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Two-out-of-three makes b a quasi-isomorphism. Its source and target have inclusion-acyclic terms, so [lem-weil-pbc-leray-acyclicity-quasi-iso] makes ιb a quasi-isomorphism. For arbitrary bounded-below bounds use their minimum. Apply the naturality helper with f=id to obtain Q(ιb) ≫ c_s = c_r. This proves all clauses of abelian_resolution_comparison.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a module map f, apply the same strict lift lemma to r and f[0] ≫ r', now in module sheaves. Homotopy uniqueness follows from the same bounded-below injective-target theorem. Apply U to the strict square and then the comparison_naturality helper to prove module_map_comparison for every lift. For identity_comparison specialize f=id. The lift is a quasi-isomorphism by its augmentation equation; U preserves it by exactness, and ι preserves it by [lem-weil-pbc-leray-acyclicity-quasi-iso] since both forgotten resolutions have acyclic terms. Simplify the naturality formula on the identity.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-isomorphism between complexes zero below zero, the short complex at degree zero has zero incoming differential. Any left exact additive functor preserves its left homology: Functor.preservesLeftHomology_of_zero_f identifies it with the preserved kernel. Thus ιUr and ιs induce H0 isomorphisms. Transport to derived homology using homologyFunctorObjQIso_hom_naturality. Write a=H0(Q(ιUr)), a'=H0(Q(ιs)), c=H0(c_r), c'=H0(c_s). The strict lift equation and Q(ιb) ≫ c_s = c_r give a ≫ c = a' ≫ c'. Set e_r=(singleH0(U ⋙ ι,M)) inverse followed by asIso a, and e=(singleH0(U ⋙ ι,M)) inverse followed by asIso a' and H0(asIso c_s). Their homs are exactly the two prescribed augmentation identifications. Cancel e hom to deduce e_r hom ≫ c ≫ e inv = id. This proves degreeZero_normalization. The kernel preservation uses the already cited exactness of U and finite-limit preservation of ι.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "S7 Lean proof: Tags 013K, 013P, 013S, 015E and 05TD; sites-cohomology.tex 01FT and 03FD. Reuses the existing acyclic-unit theorem directly; all six theorem bodies completed without new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "acyclic|rightDerived|injective",
+   "results": {
+    "t": "2026-10-22T06:08:55Z",
+    "tool": "grep",
+    "query": "acyclic|rightDerived|injective",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean"
+    ],
+    "digest": "6bffb6f208538058"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Underlying abelian sheaves of injective module sheaves form an acyclic resolution for the inclusion of sheaves into presheaves",
+   "results": {
+    "t": "2026-10-22T06:08:56Z",
+    "tool": "leansearch",
+    "query": "Underlying abelian sheaves of injective module sheaves form an acyclic resolution for the inclusion of sheaves into presheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.of",
+     "CategoryTheory.InjectiveResolution.instHasInjectiveResolutions",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.InjectiveResolution.instHasInjectiveResolution",
+     "AlgebraicGeometry.Scheme.Modules.presheaf",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf",
+     "CategoryTheory.injectiveResolution",
+     "SheafOfModules.toSheaf"
+    ],
+    "digest": "db65aaff6827ec5b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": {
+    "t": "2026-10-22T06:08:56Z",
+    "tool": "loogle",
+    "query": "\"rightDerived\", \"sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module sheaf M on a ringed site and an injective resolution I, the underlying abelian presheaf complex of I canonically computes the right derived inclusion of UM into presheaves, naturally and independently of resolutions",
+   "results": {
+    "t": "2026-10-22T06:09:06Z",
+    "tool": "leanfinder",
+    "query": "For a module sheaf M on a ringed site and an injective resolution I, the underlying abelian presheaf complex of I canonically computes the right derived inclusion of UM into presheaves, naturally and independently of resolutions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+     "CategoryTheory.InjectiveResolution.of",
+     "CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self"
+    ],
+    "digest": "70e765fc049e32ca"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical natural derived presheaf comparison from a bounded below injective module resolution after forgetting scalars, with homotopy independence and augmentation normalization",
+   "results": {
+    "t": "2026-10-22T06:09:42Z",
+    "tool": "leanfinder",
+    "query": "Canonical natural derived presheaf comparison from a bounded below injective module resolution after forgetting scalars, with homotopy independence and augmentation normalization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc"
+    ],
+    "digest": "3061937447caf46f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|toRightDerivedZero|IsAcyclic",
+   "results": {
+    "t": "2026-10-22T06:11:19Z",
+    "tool": "grep",
+    "query": "isoRightDerivedObj|toRightDerivedZero|IsAcyclic",
+    "sub": "CategoryTheory/Abelian",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean"
+    ],
+    "digest": "5e445de0413a214b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj\"",
+   "results": {
+    "t": "2026-10-22T06:11:20Z",
+    "tool": "loogle",
+    "query": "\"isoRightDerivedObj\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc"
+    ],
+    "digest": "803b99466257f5b2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: InjectiveResolution.of constructs resolutions inside one abelian category; isoRightDerivedObj and toRightDerivedZero compute degreewise functors for injective resolutions in that same category. They do not show that module injectives become acyclic for abelian sheaf inclusion, or give the asserted cross-category derived-presheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying abelian presheaf of a module injective resolution computes the total derived inclusion of abelian sheaves into presheaves naturally",
+   "results": {
+    "t": "2026-10-22T11:19:55Z",
+    "tool": "leanfinder",
+    "query": "Underlying abelian presheaf of a module injective resolution computes the total derived inclusion of abelian sheaves into presheaves naturally",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.instIsIsoToRightDerivedZero'"
+    ],
+    "digest": "c4b8ab4aa68c4596"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": {
+    "t": "2026-10-22T11:19:56Z",
+    "tool": "loogle",
+    "query": "\"rightDerived\", \"sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|RightDerived|acyclic",
+   "results": {
+    "t": "2026-10-22T11:19:56Z",
+    "tool": "grep",
+    "query": "rightDerived|RightDerived|acyclic",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf injective resolution computes the derived presheaf inclusion of its underlying abelian sheaf",
+   "results": {
+    "t": "2026-10-22T11:19:56Z",
+    "tool": "leansearch",
+    "query": "A module sheaf injective resolution computes the derived presheaf inclusion of its underlying abelian sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution",
+     "CategoryTheory.InjectiveResolution.of",
+     "CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc",
+     "CategoryTheory.InjectiveResolution.instHasInjectiveResolution",
+     "CategoryTheory.injectiveResolution",
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.InjectiveResolution.ι"
+    ],
+    "digest": "70852beea8c2a662"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf of modules over a variable ring sheaf is acyclic for inclusion of underlying abelian sheaves into presheaves",
+   "results": {
+    "t": "2026-10-22T11:21:10Z",
+    "tool": "leanfinder",
+    "query": "An injective sheaf of modules over a variable ring sheaf is acyclic for inclusion of underlying abelian sheaves into presheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instIsLocallyInjectiveToSheafify",
+     "SheafOfModules.instAbelian",
+     "PresheafOfModules.injective_of_mono",
+     "PresheafOfModules.IsLocallyInjective",
+     "Module.injective_object_of_injective_module",
+     "Module.injective_module_of_injective_object",
+     "CochainComplex.cm5b.I_X",
+     "CochainComplex.cm5b.instInjectiveXIntI"
+    ],
+    "digest": "f46f01f97087a17e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|toRightDerivedZero|rightAcyclic",
+   "results": {
+    "t": "2026-10-22T11:21:10Z",
+    "tool": "grep",
+    "query": "isoRightDerivedObj|toRightDerivedZero|rightAcyclic",
+    "sub": "CategoryTheory/Abelian",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+     "Mathlib/CategoryTheory/Abelian/RightDerived.lean"
+    ],
+    "digest": "5e445de0413a214b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct injective resolutions or compute individual right-derived degrees in one category; none states the total derived-presheaf comparison after forgetting a variable ring-sheaf action, its strict lifts, and its normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-representable-derived-functions-model",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image and arithmetic coefficient comparison, via the finite-stage coefficient-topology comparison: continuity of derived functions on profinite parameters. The derived-sections model needed before applying finite-cover cohomological continuity. Returned proof steps 1, 5-6 and 8, and the presheaf degree-zero part of step 9.",
+   "via": [
+    "lem-sfb-free-representable-derived-functions-model",
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the proof using existing generic resolution, exact-forgetting and ringed-site acyclicity nodes. Wrote out objectwise presheaf acyclicity, strict augmentation lifts, the derived comparison formula, resolution naturality and the degree-zero kernel calculation. No new nodes. Project Lean searches found no exact attachment; all recorded Mathlib hits are partial ingredients. Repair of returned head baf8dcb0625: compared the retained delivery with the current unsplit live node, re-read all twelve cited node statements, and verified that every retained full-statement citation still equals the current statement. Rebased delivery packaging onto the current DAG; recorded the side-completion promotion return and revalidation in report.md.",
+  "blueprint": "The inherited from.node is null (confirmed by blueprint_refs ancestor). Retains its precise from.place and via chain: paragraph (3) of the ctf-stability route, open direct image and arithmetic coefficient comparison, via the derived-functions model; realizes that model's former steps 1, 5-6, 8 and the presheaf H0 clause of step 9. Whole-blueprint searches for module resolution derived presheaf and presheaf inclusion found no same statement.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Only its small ringed-site Grothendieck-abellianness clause, to justify enough injectives for ordinary R-module sheaves; no replacement of the coefficient-comparison route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives existence theorem applied to the module category; this is a category-theoretic prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic small-site abelian-sheaf existence theorem, also applied to the trivial topology for presheaves."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its exact-forgetting clause preserves augmentation monomorphisms, quasi-isomorphisms and kernels for a variable ring sheaf."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Despite the filename, its statement is the general ringed-site object-section acyclicity needed to show inclusion-acyclicity."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic homotopy uniqueness of maps into bounded-below injective complexes."
+   },
+   {
+    "node": "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "why": "Generic Leray acyclicity preservation theorem for the abelian sheaf inclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-ab36510a7",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-ab36510a7 (reviewer sub-agent of L); spot-checked: Pass. This delivery repeats the mathematics of baf8dcb0625b, which was reviewed PASS but refused at landing because the queue still saw the item as unsplit. Against that earlier head only split_report changed (new date and repair summary). In the live and side-live clones the item is still unsplit with no proof, so no other group has split it. Its statement matches live. There is no re-split repair note for this item and no new nodes. I re-read all 12 cited statements in full and each still matches live word for word. Steps: (1) Mod(R) is Grothendieck so it has enough injectives; Ab(C) has enough injectives by the 00VH node; presheaves are the sheaves for the single-isomorphism topology, which I checked is a valid 00VH topology. (2) The resolution node (1) gives the resolution, U is exact and ι is left exact. (3) Kernels and cokernels are taken objectwise, so R^qι(A)(W)=H^q(W,A) by def-weil-pbc-sites-and-cohomology(2). (4) The injective-module acyclicity node holds for any ringed site, so the UI^n are ι-acyclic without assuming they are injective. (5) All hypotheses of the lift, homotopy-uniqueness and Leray (a=0) nodes are met. (6) and (8) I recomputed: d_s Q(ιb)=c_r and c_{r'}Q(ιUf~)=T(h)c_r. (7) The module lift holds. (9) b^0Ur^0=s^0 gives H^0(c_r)=id. proof_deps is the union of the step uses, with no cycle. Sources read: Stacks sites-cohomology l.1862 (03FD) and derived.tex 015E/013P/013S. No SGA. Small cases checked: M=0, the zero ring, R=Z, the trivial topology, the empty site and the non-flat constant Z/2 sheaf. No duplicate of this comparison found. The 7 declared generic cross-unit tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleResolutionDerivedPresheafComparison",
+  "declaration": "CategoryTheory.ModuleResolutionDerivedPresheaf.module_resolution_derived_presheaf_comparison",
+  "declarations": [
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.qIso",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.comparison",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.single",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.singleH0",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.ring",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.moduleEnoughInjectives",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.forget",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.Resolution",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.singleMap",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.underlyingQuasiIso",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.exists_resolution",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.module_resolution_derived_presheaf_comparison",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.abelian_resolution_comparison",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.module_map_comparison",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.identity_comparison",
+   "CategoryTheory.ModuleResolutionDerivedPresheaf.degreeZero_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleResolutionDerivedPresheafComparison.lean",
+  "statement": "theorem module_resolution_derived_presheaf_comparison (M : ringedSiteModules.{u} (ring J R)) (r : Resolution (single M)) : (∀ n : ℤ, (sheafToPresheaf J AddCommGrpCat.{u}).rightAcyclic ((forget J R).obj (r.complex.obj.X n))) ∧ IsIso (comparison (sheafToPresheaf J AddCommGrpCat.{u}) ((forget J R).mapCochainComplexPlus.map r.augmentation))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six theorem declarations together state every clause of the node. The main declaration gives inclusion-acyclicity and the canonical derived-category comparison; companions give existence, comparison with every abelian resolution, lift uniqueness, naturality, resolution independence, and augmentation-normalized H0. Resolution retains arbitrary Z-indexed supplied complexes. Helpers are transparent uses of existing constructions and the explicit canonical comparison, not arbitrary maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0757263a7",
+  "group": "NO",
+  "result": "pass",
+  "note": "First S2 delivery; only lean differs from live; record complete and statement verbatim. comparison = Mathlib rightDerivedFunctorPlusUnit followed by the inverse of RF(qIso r); qIso.hom = Plus.Q.map r, so the map is canonical. Main theorem: termwise rightAcyclic (q+1, no injectivity claimed) and IsIso c_r for every r. Abelian-resolution lift/homotopy/quasi-iso/Q(ιb)≫d_s=c_r, module-map naturality for every lift (order checked), identity case and degree-zero normalization with both identifications fixed to the augmentation maps all match the node. The Resolution structure is exactly the node's four conditions on ℤ-indexed complexes. No extra hypotheses or universe equalities; edge cases checked; defs real; all theorems sorry; docstrings and imports OK. Maintainer note: rightAcyclic is def-sp-acyclic's recorded declaration, which the node defines inline; adding it to stmt_deps is optional."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T071157-L-126423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

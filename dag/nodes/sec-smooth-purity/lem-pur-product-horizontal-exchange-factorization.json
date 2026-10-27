@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-product-horizontal-exchange-factorization",
+ "kind": "statement",
+ "title": "Horizontal factorization of the specified product exchange",
+ "statement": "For compactifications cf,cg, finite commutative A and every unbounded derived object M on X, the specified B0 equals P_k(A0) followed by rho_F followed by R_v(beta). The objects and all compositors are those of def-pur-product-exchange-coordinate-data. No boundedness or proper exchange invertibility is assumed.",
+ "stmt_deps": [
+  "def-pur-product-exchange-coordinate-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "proof": [
+  {
+   "text": "Apply ordinary horizontal mate pasting to the proper factor cf.g with base maps cg.g and cg.i. The canonical pullback isomorphisms and cg.comm identify the rectangle with base change by g, giving proper exchange along g as P_k(A0) followed by exchange for the open square.",
+   "uses": [
+    "lem-pur-relative-compact-support-pasting",
+    "def-exchange-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalized restriction to identify that second exchange with rho_F. Expand compactification-relative exchange. Its last factor is R_v of canonical open base change; the open-unit normalization and pullback compositor identify that factor with beta.",
+   "uses": [
+    "lem-pur-product-open-adjunction-normalization",
+    "lem-sf-open-tensor-normalization",
+    "def-exchange-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-pur-product-open-adjunction-normalization",
+  "lem-pur-relative-compact-support-pasting",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived open restriction equals base change exchange and proper open interchange is its inverse open adjunction mate",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction and IsProper.instMorphismRestrict. These concern ordinary scheme modules or geometry, not the specified unbounded pro-etale maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of an inverse open restriction isomorphism commutes with the counit and computes compactly supported pushforward composition",
+   "results": "8 hits, including Scheme.Modules.restrictAdjunction_counit_app_app and SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. No matching pro-etale comparison or compactification-coordinate formula.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hit, CategoryTheory.Adjunction.homEquiv_counit. Used for the elementary adjunction argument, but does not identify independently specified geometric comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction API only"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|towerOpenUnit|counit_naturality",
+   "results": "25 Mathlib hits for generic adjunction counit naturality, no project-specific comparisons. Searches of lean/WeilConjectures and lean/Sheaf found RelativeCompactSupportPasting, ProEtaleCompositionTowerNormalization, ProEtaleCompositionTowerFormula and ProperOpenProjectionMate; their interfaces do not state the explicit product-coordinate identifications. blueprint_refs searches: open counit (2 unrelated blueprint nodes), horizontal exchange (0), composition coordinate (0).",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductExchangeCounitCoordinates",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Symmetry paragraph, reduction to proper maps, expanded by product-coordinate node Steps 3--8; Stacks Tags 09BN, 0E47 and 0F7J.",
+   "via": [
+    "lem-pur-product-exchange-counit-coordinates",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductHorizontalExchangeFactorization",
+  "file": "lean/Sheaf/Paper/ProductHorizontalExchangeFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ProductExchangeCoordinates.productHorizontalExchangeFactorization",
+  "statement": "theorem productHorizontalExchangeFactorization\n    {B X Z : Scheme.{u}} {f : X ⟶ B} {g : Z ⟶ B}\n    (cf : Compactification f) (cg : Compactification g)\n    (A : Type u) [CommRing A] [Finite A]\n    (M : ProperOpenDerived (ULift.{u + 1} A) X) :\n    B0 cf cg A M =\n      (ProperOpenPull (ULift.{u + 1} A) cg.i).map (A0 cf cg A M) ≫\n        (rho A (pullback.snd cf.g g) (i cf cg) cg.i\n          (pullback.snd cf.g cg.g) (square cf cg)).hom.app (F cf cg A M) ≫\n        (ProperOpenPush (ULift.{u + 1} A) (pullback.snd cf.g g)).map\n          (beta cf cg A M).hom",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1a8c",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T204401-L-2949505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 23 moved decls verbatim vs clone; 3 new sorry statements vs original Equations/alpha conjuncts and proEtaleCompositionTowerFormula generality; item node fields vs live node"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-etale-brown-coefficient-coherence",
+ "kind": "statement",
+ "title": "Unit and cocycle for normalized Brown coefficient projections",
+ "statement": "Let O, t, c, S and B be as above [lem-pur-etale-system-brown-construction, def-pur-etale-brown-projection-realization]. Write F_n for finite compact support and T^W_{m,n} for the specified derived quotient scalar extension. The inverse coefficient projection pi_{m,n}: F_n T^X_{m,n} ≅ T^Y_{m,n} F_m respects canonical tensor units and associators: pi_{n,n} followed by the target unit is F_n of the source unit; and F_n of the source associator followed by pi_{r,n} equals pi_{m,n} at T^X_{r,m}, followed by T^Y_{m,n} of pi_{r,m}, followed by the target associator. All equations hold on arbitrary unbounded derived inputs, including repeated indices and nonflat quotient maps.",
+ "stmt_deps": [
+  "lem-pur-etale-system-brown-construction",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized inverse-image tensor coherence to the proper image and the open inverse image separately. These are statements only about inverse image, the chosen scalar models, their canonical unit and their balanced associator.",
+   "uses": [
+    "lem-pur-strict-etale-inverse-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the proper factor, use mate_comp_iff and mate_unit_iff, proved in the module from mateEquiv_vcomp and the local mate_whisker_normalized calculation (the elementary whiskering proof from ExactScalarMatePasting). properMate identifies the resulting right mates with properProjection.inv. Cancel the invertible projection components to get the forward proper unit and cocycle. For the open factor, openMate identifies the mates of openProjection.hom with the inverse inverse-image comparisons. Invert the inverse-image unit and cocycle squares, then apply the reverse implications of the same two proved mate equivalences. This proves the open unit and cocycle.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand projection_def componentwise: projection_hom is the proper direct image of openProjection followed by properProjection. For the unit, substitute the proper unit, combine the two direct-image maps, and substitute the open unit. For composition, substitute the open cocycle inside the direct-image map and then the proper cocycle. Naturality of properProjection moves it past openProjection, giving the required two-projection word. This is done in Lean on arbitrary derived objects, without any realization or faithfulness assertion.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-etale-inverse-tensor-coherence",
+  "lem-pur-etale-system-brown-construction",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.16: paste the proper and open coefficient comparisons. B4 proves the formal mate transport and pasting, leaving only normalized inverse-image tensor coherence."
+ },
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv|mateEquiv_vcomp|isGE_iff_orthogonal",
+   "results": {
+    "ok": true,
+    "n_hits": 14,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+     "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates preserve coefficient tensor unit and associativity and evaluation transitions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.leftAdjointMate_comp_evaluation_assoc",
+     "CategoryTheory.leftAdjointMate",
+     "CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc",
+     "CategoryTheory.rightAdjointMate",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+     "CategoryTheory.rightAdjointMate_comp_evaluation",
+     "CategoryTheory.FunctorToTypes.adj",
+     "CategoryTheory.rightAdjointMate_comp_evaluation_assoc"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemEvaluationBound",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before derived inverse limit; Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument.",
+   "via": [
+    "lem-pur-etale-system-evaluation-bound",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownCoefficientCoherence",
+  "file": "lean/Sheaf/Paper/EtaleBrownCoefficientCoherence.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownCoefficientCoherence",
+  "statement": "theorem etaleBrownCoefficientCoherence :\n    (∀ (n : ℕ) P,\n      (B.projection (Nat.le_refl n)).hom.app P ≫\n        (S.PY.derivedUnit n).hom.app ((S.levelFunctor n).obj P) =\n      (S.levelFunctor n).map ((S.PX.derivedUnit n).hom.app P)) ∧\n    (∀ {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n ≤ m) P,\n      (S.levelFunctor n).map ((S.PX.derivedAssoc h₁ h₂).hom.app P) ≫\n        (B.projection (h₂.trans h₁)).hom.app P =\n      (B.projection h₂).hom.app ((S.PX.scalar h₁).derived.obj P) ≫\n        (S.PY.scalar h₂).derived.map ((B.projection h₁).hom.app P) ≫\n        (S.PY.derivedAssoc h₁ h₂).hom.app ((S.levelFunctor r).obj P))",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T005401-L-3474615",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T112317-L-1570105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

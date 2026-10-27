@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-integral-blowup-chart-density",
+ "kind": "statement",
+ "title": "Integral blowup charts and density of the center complement",
+ "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme] and $\\mathcal I\\subseteq\\mathcal O_T$ a nonzero quasi-coherent ideal of finite type [pqf-def-coherent]. Let $b:B=\\operatorname{Bl}_{\\mathcal I}(T)\\to T$ be the ordinary glued blowup [def-nagata-global-blowup], and put $U=T\\setminus V(\\mathcal I)$, where $V(\\mathcal I)=\\{t\\mid\\mathcal I_t\\ne\\mathcal O_{T,t}\\}$. Then $U$ is a nonempty dense integral open subscheme. For every nonempty affine open $V=\\operatorname{Spec}A\\subseteq T$, the ideal $I=\\Gamma(V,\\mathcal I)$ is nonzero. For every choice $I=(f_0,\\ldots,f_r)$, the restriction $b^{-1}(V)\\to V$ identifies over $V$ with $\\operatorname{Proj}(\\mathcal R_A(I))=\\operatorname{Bl}_I(V)$ [def-nagata-affine-blowup], and is covered by the affine open subschemes $C_i=\\operatorname{Spec}(A[I/f_i])$ [def-nagata-blowup-chart-ring]. These identifications respect restriction to smaller affine opens. A zero generator gives the empty chart; if $f_i\\ne0$, $A[I/f_i]\\subseteq A_{f_i}$ is a nonzero domain and $C_i\\cap b^{-1}(U)=D_{C_i}(f_i)$ is a nonempty dense principal open. At least one such nonempty chart occurs over every nonempty $V$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 052R (lemma-blowup-domain); divisors.tex Tag 02ND (lemma-blow-up-integral-scheme), proof through Tag 0804 (lemma-blowing-up-affine); the chartwise density argument used in returned Steps 1 and 2."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-nagata-affine-blowup",
+  "def-nagata-blowup-chart-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-scheme-ideal-generic-stalk] to the nonzero quasi-coherent ideal $\\mathcal I$ on $T$. It gives $I=\\Gamma(V,\\mathcal I)\\ne0$ for every nonempty affine open $V$, and $\\mathcal I_\\eta=\\mathcal O_{T,\\eta}$ at the generic point $\\eta$. These are exactly clauses (a), (b), and (d) of that lemma; no Noetherian hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02ND (lemma-blow-up-integral-scheme), nonzero ideal hypothesis; generic-ideal input expanded by the cited node"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $V(\\mathcal I)$ is closed, so $U$ is open. Step 1 puts $\\eta$ in $U$, making $U$ nonempty and dense, since $\\overline{\\{\\eta\\}}=T$. Finally $U$ is integral: it is nonempty, and every nonempty affine open in $U$ is also an affine open in $T$, with the same structure ring, hence a domain by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02ND (lemma-blow-up-integral-scheme), center-complement argument; affine zero-locus description supplied by cited node"
+   }
+  },
+  {
+   "text": "Fix a nonempty affine $V\\subseteq T$. Use the cover comparison of [prop-nagata-global-blowup-cover-independent] to include $V$ in the chosen affine cover. The gluing datum [def-nagata-global-blowup-glue-data] uses the local schemes $\\mathsf B_W(\\mathcal I)$ and their inverse images of $W\\cap W\\prime$. The gluing theorem [lem-weil-pbc-glue-schemes] therefore embeds each local scheme as an open of $B$, with intersection exactly the prescribed overlap. The image of $\\mathsf B_V(\\mathcal I)$ is $b^{-1}(V)$: one containment follows from its structure map to $V$; for the other, represent $x\\in b^{-1}(V)$ in any local piece $\\mathsf B_W(\\mathcal I)$. Since $b(x)\\in W\\cap V$, that representative is in the prescribed overlap with $\\mathsf B_V(\\mathcal I)$, hence in its image. By [def-nagata-global-blowup-local-model] and [def-nagata-affine-blowup], this gives the required isomorphism over $V$ with $\\operatorname{Bl}_I(V)=\\operatorname{Proj}(\\mathcal R_A(I))$. The argument is about the glued scheme and its open pieces, not merely a bijection of underlying sets.",
+   "uses": [
+    "prop-nagata-global-blowup-cover-independent",
+    "def-nagata-global-blowup-glue-data",
+    "lem-weil-pbc-glue-schemes",
+    "def-nagata-global-blowup-local-model",
+    "def-nagata-affine-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-global-blowup-cover-independent.proof.md",
+    "place": "Gluing, (2), and (3); equivalently Stacks divisors.tex Tag 0804 (lemma-blowing-up-affine), first assertion"
+   }
+  },
+  {
+   "text": "The identifications in step 3 respect smaller affine opens. Include both affine opens in the gluing cover of step 3. On a common basic affine refinement $D(s)$, [prop-nagata-affine-blowup-restrict] gives the isomorphisms $r_{i,s}$ and $r_{j,s}$ over the localized base. By [def-nagata-global-blowup-overlap-basic-map], the overlap map is $\\omega_{ij,s}=r_{j,s}\\circ r_{i,s}^{-1}$. Thus $\\omega_{ij,s}\\circ r_{i,s}=r_{j,s}$. Composing this equality with the local embeddings into $B$ shows that the two comparisons from the blowup over $D(s)$ to $B$ agree. The uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] makes the comparisons equal on the whole inverse image of the smaller affine open, since these basic refinements cover it. This is the required restriction compatibility; no affineness of an intersection of affine opens is assumed.",
+   "uses": [
+    "prop-nagata-affine-blowup-restrict",
+    "def-nagata-global-blowup-overlap-basic-map",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-global-blowup-cover-independent.proof.md",
+    "place": "Gluing along common affine refinements; restriction maps as in prop-nagata-affine-blowup-restrict"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-quasi-coherent-finite-type-affine](a), the finite-type hypothesis on $\\mathcal I$ implies that $I=\\Gamma(V,\\mathcal I)$ is a finitely generated $A$-module, hence a finitely generated ideal. For any chosen generating family $I=(f_0,\\ldots,f_r)$, apply [prop-nagata-affine-blowup-chart-cover] to the affine blowup in step 3. It supplies the finite open cover by $C_i=\\operatorname{Spec}(A[I/f_i])$ over $V$. These are the chart algebras of [def-nagata-blowup-chart-ring], with their canonical $A$-algebra structure. The chart isomorphism [prop-nagata-affine-blowup-chart] is over $\\operatorname{Spec}A$, so the map from each chart to $V$ is induced by that structure map.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "prop-nagata-affine-blowup-chart",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine), affine blowup-algebra covering"
+   }
+  },
+  {
+   "text": "If $f_i=0$, then $A_{f_i}$ is the zero ring, because making $0$ invertible forces $1=0$. Its unital $A$-subalgebra $A[I/f_i]$ from [def-nagata-blowup-chart-ring] is therefore the zero ring. Its spectrum is empty, since the zero ring has no proper prime ideal. This proves the zero-generator clause, rather than silently omitting zero generators.",
+   "uses": [
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07Z3 (lemma-affine-blowup), description of the chart algebra; zero-denominator case"
+   }
+  },
+  {
+   "text": "If $f_i\\ne0$, $A$ is a domain by [def-pc-integral-scheme]. The localization $A_{f_i}$ is a nonzero domain: $1/1=0$ would imply $f_i^n=0$ for some $n$, and $(a/f_i^m)(c/f_i^n)=0$ implies $f_i^Nac=0$, hence $a=0$ or $c=0$. The unital subalgebra $R_i=A[I/f_i]\\subseteq A_{f_i}$ of [def-nagata-blowup-chart-ring] is consequently a nonzero domain, and the image of $f_i$ in it is nonzero by the same fraction criterion.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052R (lemma-blowup-domain), explicit fraction argument"
+   }
+  },
+  {
+   "text": "Write $R_i=A[I/f_i]$. In $R_i$ each generator satisfies $f_j=f_i(f_j/f_i)$, and $f_i\\in I$; hence $IR_i=(f_i)$. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $U\\cap V=\\operatorname{Spec}A\\setminus V(I)$. Under the chart map, a prime $\\mathfrak q\\subset R_i$ lies over this open exactly when its contraction to $A$ does not contain $I$, equivalently $IR_i\\not\\subseteq\\mathfrak q$. As $IR_i=(f_i)$, this is exactly $f_i\\notin\\mathfrak q$. Thus, as open subschemes, $C_i\\cap b^{-1}(U)=D_{C_i}(f_i)$. Here the prime contraction description is the definition of the affine spectrum map [def-weil-affine-spectrum]; the equal open subsets carry the same restricted structure sheaf.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07Z3 (lemma-affine-blowup), assertion (2), with its elementary proof written out"
+   }
+  },
+  {
+   "text": "For $f_i\\ne0$, step 7 makes the image of $f_i$ a non-zero-divisor in $R_i$. Apply [lem-pc-principal-open-dense-of-nonzerodivisor] to obtain density of $D_{C_i}(f_i)$. This open is nonempty because the zero ideal is prime in the nonzero domain $R_i$ and does not contain $f_i$. Finally $I\\ne0$ from step 1 implies some generator $f_i$ is nonzero; its chart and principal open are nonempty. This works over every nonempty affine $V$ and completes all clauses.",
+   "uses": [
+    "lem-pc-principal-open-dense-of-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02ND (lemma-blow-up-integral-scheme), chartwise density, using algebra.tex Tag 052R (lemma-blowup-domain)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "def-nagata-global-blowup-overlap-basic-map",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "lem-pc-principal-open-dense-of-nonzerodivisor",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "prop-nagata-affine-blowup-chart",
+  "prop-nagata-affine-blowup-chart-cover",
+  "prop-nagata-affine-blowup-restrict",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02ND (lemma-blow-up-integral-scheme) and 0804 (lemma-blowing-up-affine), using algebra.tex Tags 052R and 07Z3; gluing expanded against the current main-20261015 blueprint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern domains of rational maps, section domains, function fields or basic-open covers, not the blowup chart cover with the stated ideal and dense-complement identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The charts of a blowup of an integral scheme are domains and the inverse image of the complement of its center is dense",
+   "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.Hom.denseRange, Manifold.IsImmersionAtOfComplement.domChart, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; digest 338083e2ac293bd0",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern domains of rational maps, section domains, function fields or basic-open covers, not the blowup chart cover with the stated ideal and dense-complement identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsDomain\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern domains of rational maps, section domains, function fields or basic-open covers, not the blowup chart cover with the stated ideal and dense-complement identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral scheme and a nonzero finite type ideal sheaf the ordinary blowup has domain affine charts whose center complement is dense",
+   "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.instIsDominantιCoborderRange, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE; digest d129c726094d52bb",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern domains of rational maps, section domains, function fields or basic-open covers, not the blowup chart cover with the stated ideal and dense-complement identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero ideal in an integral scheme remains nonzero on every nonempty affine open and blowup charts are subrings of its function field with dense principal open complement",
+   "results": "8 hits; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; digest 00b8db099f276b50",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern domains of rational maps, section domains, function fields or basic-open covers, not the blowup chart cover with the stated ideal and dense-complement identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowingUp|blowUp|BlowUp",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: no blowup geometry in Mathlib; the hits are general affine, ideal-sheaf, Proj cover, or integral-scheme interfaces and do not give every clause of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The blowup of an integral scheme has domain affine charts A[I/a] with dense principal open D(a)",
+   "results": "8 hits; AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap; digest c58cd52dc121ffcd",
+   "date": "2026-10-22",
+   "verdict": "no match: no blowup geometry in Mathlib; the hits are general affine, ideal-sheaf, Proj cover, or integral-scheme interfaces and do not give every clause of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"IsIntegral\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: no blowup geometry in Mathlib; the hits are general affine, ideal-sheaf, Proj cover, or integral-scheme interfaces and do not give every clause of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of an integral scheme along a nonzero quasi-coherent ideal is covered by affine domains and the complement of the exceptional divisor is dense",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, AlgebraicGeometry.Scheme.affineBasisCoverOfAffine, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop; digest a8e93fb2f7a14625",
+   "date": "2026-10-22",
+   "verdict": "no match: no blowup geometry in Mathlib; the hits are general affine, ideal-sheaf, Proj cover, or integral-scheme interfaces and do not give every clause of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero quasi-coherent ideal on an integral scheme is nonzero on every nonempty affine open and its blowup charts are subalgebras of localizations",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem; digest eb93a9fb3fa156a7",
+   "date": "2026-10-22",
+   "verdict": "no match: no blowup geometry in Mathlib; the hits are general affine, ideal-sheaf, Proj cover, or integral-scheme interfaces and do not give every clause of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-blowup-projective-geometry",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary finite-type blowup geometry in steps 8 and 12 of the one-curve resolution. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Re-split of the integral-blowup geometry input: Tag 052R (lemma-blowup-domain); divisors.tex Tag 02ND (lemma-blow-up-integral-scheme), proof through Tag 0804 (lemma-blowing-up-affine); the chartwise density argument used in returned Steps 1 and 2.",
+   "via": [
+    "lem-sfb-integral-blowup-projective-geometry",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-blowup-chart-density",
+  "worker": "stage1",
+  "summary": "All clauses are proved using existing DAG tools: nonzero generic ideals, gluing and affine restriction, chart cover, fraction-domain calculation, ideal extension and principal-open density. No new nodes or statement corrections. Zero generators, unit ideals and non-Noetherian/nonseparated bases were checked. Repair of the returned side-completion delivery: rebased through the delivery tool onto the current live DAG, re-read every cited statement, and expanded step 4 to show cancellation of the restriction isomorphisms in each overlap map.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary finite-type blowup geometry in steps 8 and 12 of the one-curve resolution. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Re-split of the integral-blowup geometry input: Tag 052R (lemma-blowup-domain); divisors.tex Tag 02ND (lemma-blow-up-integral-scheme), proof through Tag 0804 (lemma-blowing-up-affine); the chartwise density argument used in returned Steps 1 and 2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "General quasi-coherent ideal lemma supplies nonzero affine sections and the unit generic stalk; it is a tool for integral blowup geometry, not a replacement of the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "General affine description of the zero locus identifies the center complement; the current unit does not supply an affine ideal-sheaf interface."
+   },
+   {
+    "node": "lem-pc-principal-open-dense-of-nonzerodivisor",
+    "why": "General ring-spectrum density lemma applies after the explicit blowup chart calculation; it changes no unit-level route."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Cover comparison permits inclusion of the specified affine in the gluing cover; step 3 proves its desired local identification using gluing."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-restrict",
+    "why": "The existing affine restriction isomorphism checks compatibility on basic refinements."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Existing finite-generator affine chart cover is the general blowup tool needed here."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "General affine finite-type criterion supplies finite generation of the ideal of sections, without a Noetherian hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-pc-principal-open-dense-of-nonzerodivisor",
+  "prop-nagata-global-blowup-cover-independent",
+  "prop-nagata-affine-blowup-restrict",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-7215ee95d",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-7215ee95d (reviewer sub-agent of L); spot-checked: Read in full: the item and all 9 steps (0 new nodes) and all 19 cited statements, against Stacks 052R, 07Z3, 0804 and 02ND. The only change from a8ced29abcb8, which was returned for a promotion landing refusal and not for its mathematics, is step 4: it now derives omega_{ij,s} o r_{i,s} = r_{j,s} from the overlap definition and makes the two comparisons equal on b^{-1}(W) by uniqueness of morphism gluing. This is correct. Statement, stmt_deps and blueprint are unchanged. Step checks: (1) the generic-stalk lemma (a)<=>(b)<=>(d) gives Gamma(V,I) != 0 and I_eta = O_eta. (2) The affine zero set shows V(I) is closed; U contains eta, so it is dense, and it is integral by the definition through affine opens. (3) The image of B_V is b^{-1}(V) by gluing clause (2) and the glue-data overlaps; this is proved, not read off the legacy cover-comparison statement. (5) The finite-type affine lemma (a) makes I finitely generated; the chart cover and the chart iso over Spec A follow. (6) and (7) are elementary 052R fraction arguments. (8) IR_i = (f_i) and contraction give C_i ∩ b^{-1}(U) = D(f_i). (9) Density for a nonzerodivisor; nonempty via the prime (0). Edge cases: field, unit ideal, a zero generator, non-Noetherian/nonseparated T. No duplicate found; the per-chapter twin has no chart-density child. The parent's step 1 uses exactly these clauses. The 7 generic tool_uses are accepted. No SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralBlowupChartDensity",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.integral_blowup_chart_density",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralBlowupChartDensity.lean",
+  "statement": "theorem integral_blowup_chart_density {T : Scheme.{u}} [IsIntegral T] (I : T.IdealSheafData) (hI : I ≠ ⊥) (hfinite : I.toModules.IsFiniteType) : Nonempty I.support.compl ∧ Dense (I.support.compl : Set T) ∧ IsIntegral (Scheme.Opens.toScheme (X := T) I.support.compl) ∧ ∀ (V : T.affineOpens), Nonempty V.1 → I.ideal V ≠ ⊥ ∧ IsPullback (I.blowupNatTrans.app V) (I.blowupι V) V.1.ι I.blowupMap ∧ I.blowupMap ⁻¹ᵁ V.1 = (I.blowupι V).opensRange ∧ (∀ (W : T.affineOpens) (hWV : W ≤ V), I.blowupFunctor.map (homOfLE hWV) ≫ I.blowupι V = I.blowupι W) ∧ ∀ (r : ℕ) (f : Fin (r + 1) → I.ideal V), Ideal.span (Set.range fun i ↦ (f i : Γ(T, V.1))) = I.ideal V → (⨆ i, (AffineBlowup.chartRingι (I.ideal V) (f i).2).opensRange) = ⊤ ∧ (∀ i : Fin (r + 1), AffineBlowup.chartRingι (I.ideal V) (f i).2 ≫ AffineBlowup.toSpec (I.ideal V) = Spec.map (CommRingCat.ofHom (algebraMap Γ(T, V.1) (AffineBlowup.chartRing (I.ideal V) (f i))))) ∧ (∀ i : Fin (r + 1), ((f i : Γ(T, V.1)) = 0 → IsEmpty (Spec (.of (AffineBlowup.chartRing (I.ideal V) (f i))))) ∧ ((f i : Γ(T, V.1)) ≠ 0 → IsDomain (AffineBlowup.chartRing (I.ideal V) (f i)) ∧ (AffineBlowup.chartRingι (I.ideal V) (f i).2 ≫ I.blowupι V) ⁻¹ᵁ (I.blowupMap ⁻¹ᵁ I.support.compl) = PrimeSpectrum.basicOpen (algebraMap Γ(T, V.1) (AffineBlowup.chartRing (I.ideal V) (f i)) (f i)) ∧ (PrimeSpectrum.basicOpen (algebraMap Γ(T, V.1) (AffineBlowup.chartRing (I.ideal V) (f i)) (f i)) : Set (PrimeSpectrum (AffineBlowup.chartRing (I.ideal V) (f i)))).Nonempty ∧ Dense (PrimeSpectrum.basicOpen (algebraMap Γ(T, V.1) (AffineBlowup.chartRing (I.ideal V) (f i)) (f i)) : Set (PrimeSpectrum (AffineBlowup.chartRing (I.ideal V) (f i)))))) ∧ (∃ i : Fin (r + 1), (f i : Γ(T, V.1)) ≠ 0 ∧ Nonempty (Spec (.of (AffineBlowup.chartRing (I.ideal V) (f i)))))",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36a493953",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Lean-only delivery: the node equals live except for the lean record; lean.statement appears verbatim in the file. Every clause checked against upstream declarations: I.support is the node's V(I); I≠⊥ and toModules.IsFiniteType (quasi-coherence is built into IdealSheafData, no stronger hypotheses); U is nonempty, dense and integral; I.ideal V≠⊥ for nonempty affine V; the identification over V is the IsPullback with blowupNatTrans (toSpec≫isoSpec.inv) plus b⁻¹V = opensRange blowupι; restriction uses the canonical blowupFunctor.map; for any Fin(r+1) generating family: the chartRingι charts cover and lie over V via Spec.map algebraMap, a zero generator gives an empty Spec, a nonzero one gives IsDomain chartRing with (chart≫blowupι)⁻¹(b⁻¹U) = basicOpen f_i, nonempty and dense; a nonempty chart exists. Edge cases: unit ideal, zero/repeated generators, r=0, empty W; single universe u. No hollow definitions, only sorry; source, blueprint and 9-step docstrings present; both report sections present. No duplicate in Sheaf, WeilConjectures or Mathlib. chartRingι is canonical (θ_a then chart) and accepted with the same stmt_deps in two landed items. Not compiled: no change was needed. No findings."
+ }
+}

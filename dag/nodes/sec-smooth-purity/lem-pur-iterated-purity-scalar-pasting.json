@@ -1,0 +1,379 @@
+{
+ "id": "lem-pur-iterated-purity-scalar-pasting",
+ "kind": "statement",
+ "title": "Scalar pasting for twisted pullback composition and iterated purity",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Fix distinct primes $p,\\ell$, an integer $a\\geq1$, and $k=\\overline{\\mathbf F}_{p^a}$ [def-pur-conventions]. Let $E\\subset L$ be finite extensions of $\\mathbf Q_\\ell$ inside a fixed algebraic closure. Let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes. Their composite $gf=g\\circ f$ has pure relative dimension $d+e$ [lem-sbc-smooth-relative-dimension-permanence]. For $R=E,L$, use $\\mathcal C_R(W)=D^b_c(W,R)$ [def-weil-pbc-rational-category], the derived operations [def-weil-derived-pullback-tensor-hom, def-weil-exceptional-inverse-image], and twists [def-coefficient-twists-detailed]. Write $T_W=T_{L/E,W}$ for scalar extension [prop-weil-pbc-scalar-extension]. For $h=f,g,gf$ put $H_{h,R}=Lh_R^*(-)(d_h)[2d_h]$ and $G_{h,R}=Rh_R^!$, with $d_f=d,d_g=e,d_{gf}=d+e$. Use the rationalizations $\\gamma_{h,R}:H_{h,R}\\xrightarrow{\\sim}G_{h,R}$ of the simultaneous integral purity family of [lem-pur-adic-purity-scalar-naturality], as in [thm-pur-rational-and-qbar-purity]. Let $a_{h,M}:T_{\\mathrm{source}(h)}H_{h,E}M\\xrightarrow{\\sim}H_{h,L}T_{\\mathrm{target}(h)}M$ and $b_{h,M}:T_{\\mathrm{source}(h)}G_{h,E}M\\xrightarrow{\\sim}G_{h,L}T_{\\mathrm{target}(h)}M$ be the rationalized comparisons in that integral statement; $b$ is the specified adjoint transpose of the inverse compact-support coefficient comparison followed by the scalar-extended counit. Let $u^R_K:H_{gf,R}K\\xrightarrow{\\sim}H_{f,R}H_{g,R}K$ be the canonical pullback-composition, twist-addition and shift comparison. Set $q^R_K=\\gamma_{f,R,G_{g,R}K}\\circ H_{f,R}(\\gamma_{g,R,K})$.\n\nFor $K\\in\\mathcal C_E(Z)$ define\n$$A_K=H_{f,L}(a_{g,K})\\circ a_{f,H_{g,E}K},\\qquad \\beta_K=G_{f,L}(b_{g,K})\\circ b_{f,G_{g,E}K}.$$\nThen the canonical twisted pullback compositor and the horizontally composed purity transformation satisfy\n$$A_K\\circ T_X(u^E_K)=u^L_{T_ZK}\\circ a_{gf,K},$$\n$$\\beta_K\\circ T_X(q^E_K)=q^L_{T_ZK}\\circ A_K.$$\nThe first equality is between maps from $T_XH_{gf,E}K$ to $H_{f,L}H_{g,L}T_ZK$; the second is between maps from $T_XH_{f,E}H_{g,E}K$ to $G_{f,L}G_{g,L}T_ZK$. Both hold naturally in $K$, with the identity-extension, successive coefficient-extension tensor-associator and shift identifications specified for $a,b$ in [lem-pur-adic-purity-scalar-naturality] and for $T$ in [prop-weil-pbc-scalar-extension].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+  "place": "Composition-coherence transport paragraph; returned item steps 4–5: twisted-compositor coefficient square and horizontal pasting of the two purity squares; agent extraction of the returned item argument"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-weil-pbc-rational-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-rational-and-qbar-purity",
+  "def-pur-rational-scalar-comparison-data",
+  "def-pur-rational-twisted-pullback-compositor"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pur-rational-normalized-purity-diagrams] for the domains and the rationalized natural comparisons, not for the desired pasting equations. Every integral representative lies in the uniform finite-Tor domain; all intermediate $H$ and $G$ expressions and their comparison maps are therefore defined. Its single-morphism equation gives, for $h=f,g,gf$ and any input $M$,\n$$b_{h,M}T(\\gamma_{h,E,M})=\\gamma_{h,L,TM}a_{h,M}.$$\nIt also gives naturality in $M$ and the stated unit, successive-extension and shift laws for these very $a,b$. No comparison with a separately chosen purity family or exceptional scalar map is made.",
+   "uses": [
+    "lem-pur-rational-normalized-purity-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "Write $P_{h,R}=Lh_R^*$ for the completed pullback of [def-weil-derived-pullback-tensor-hom] occurring in $H_{h,R}$, $v^R:P_{gf,R}\\to P_{f,R}P_{g,R}$ for its canonical compositor, and $p_h:TP_{h,E}\\to P_{h,L}T$ for the pullback constituent of $a$. Apply [lem-trf-integral-pullback-comparison-realization] with $h=f$, $k=g$. Its specified pullback scalar comparisons are the choices of the comparisons of [lem-pur-integral-operations-scalar-extension] from which $a$ is built, for the strict-tower scalar extension, and its compositor $c^E$ is the limit of the termwise finite composition maps, which [lem-pur-completed-operation-tower-substitution] identifies with the canonical compositor $v^E$; likewise for $L$. It gives, as an equality of whole quotient diagrams before realization and then after rationalization,\n$$P_{f,L}(p_{g,K})p_{f,P_{g,E}K}T_X(v^E_K)=v^L_{T_ZK}p_{gf,K}.$$\nBy [lem-pur-adic-purity-scalar-naturality], $a$ is expressed for the ordinary derived-tensor presentation $C=T$ (before rationalization) through the natural completion isomorphism $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison]. Replacing every strict-tower extension by $C$ conjugates both sides by $\\chi$; by naturality of $\\chi$ the inner $\\chi$ factors cancel, so the equation holds for the constituents of $a$ and the $T$ of [prop-weil-pbc-scalar-extension]. The pullback comparisons of [prop-weil-pbc-scalar-extension] belong to the PBC completed pullback, a different functor, and are not used. That proposition is used only for $T$. Its hypotheses hold: separated finite-type $k$-schemes are noetherian and finite-dimensional, and $\\ell$ is invertible on them since $\\ell\\ne p$.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-adic-purity-scalar-naturality",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "The tensor/pullback constituents can be combined with the coefficient comparisons on the specified completed models. Indeed [lem-pur-cochain-pullback-tensor-coherence] gives both the monoidality equation for a composite pullback and the scalar square for its tensor comparison, including inverses. At a quotient level its scalar square sends a generalized tensor $b\\otimes(x\\otimes y)$ on either route to $(b\\otimes x)\\otimes(1\\otimes y)$. Thus it remains the same equality after any tensor reassociation. [lem-pur-normalized-scalar-comparison-realization] identifies the actual completed scalar comparisons with the total-limit images of these whole-system maps. [lem-pur-completed-operation-tower-substitution] identifies the tensor associators, symmetry and pullback compositor, including substitution into a larger expression, with their whole-system counterparts. Apply the limit functor to the equality and conjugate by those natural identifications; this proves equality for the actual completed maps. Rationalization preserves this equality. This uses equality in the derived category of whole systems before the limit, never detection of an integral equality by individual reductions. The comparisons of [lem-pur-normalized-scalar-comparison-realization] are those of the strict-tower scalar extension. Conjugation by the natural completion isomorphism $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison], through which $a$ and $T$ are expressed, carries the equality to that ordinary derived-tensor presentation, since each inner $\\chi$ cancels against its inverse by naturality.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "Check the Tate-line constituents explicitly. The first-twist pullback sends an inverse-image root system to its pulled-back root system, with coefficients unchanged; its coefficient square is clause 4 of [lem-pur-integral-twist-line-inverse-image]. The scalar maps on powers are the tensor-power maps of [lem-weil-integral-twist-base-change]. The recursively associated nonnegative powers therefore send\n$$(l_1\\otimes\\cdots\\otimes l_{d+e})\\otimes b\\ \\longmapsto\\ (l_{d+1}\\otimes\\cdots\\otimes l_{d+e}\\otimes1)\\otimes(l_1\\otimes\\cdots\\otimes l_d\\otimes b)$$\non both routes after splitting into the ordered blocks $e,d$. In this formula the symbols in the output are understood in the scalar-extended lines; moving $b$ to either block is the balanced tensor relation. The zero block is the coefficient unit. For the recursion, the zero case is scalar multiplication, the one case is the first-line square, and each successor is that square tensored with the preceding case followed by the tensor comparison. Its compatibility with reassociation and block symmetry is exactly the cochain coherence of [lem-pur-cochain-pullback-tensor-coherence]. Pulling a root system first along $g$ and then along $f$ gives the same system as along $gf$; this also proves the composition law for the line maps. These are statements about the specified tensor/roots maps, so the realization identifications of Step 3 apply to their composites.",
+   "uses": [
+    "lem-pur-integral-twist-line-inverse-image",
+    "lem-weil-integral-twist-base-change",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "There is no omitted shift sign in the preceding squares. By [lem-pur-derived-tensor-additive-constraints], on K-flat representatives the tensor-shift comparison $K[r]\\otimes L[s]\\to(K\\otimes L)[r+s]$ multiplies the degree-$i$ summand by $(-1)^{si}$, and symmetry has sign $(-1)^{ij}$. Every shifted Tate block here has an even shift $2d$ or $2e$ and its unshifted line has degree zero. Consequently all signs introduced by moving these blocks are $1$, including $(-1)^{(2d)(2e)}$. Tensor reassociation is unsigned. Coefficient extension acts in degree zero, so it commutes termwise with these reindexings. [lem-weil-completed-scalar-chain-shift], whose quotient-tensor comparison $b_P$ is the chain-level form of the completion isomorphism $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison], identifies that termwise comparison with the specified completed scalar shift on the Roos cone; its second-coordinate sign $(-1)^{2d}$ or $(-1)^{2e}$ is also $1$. The same calculation with an additional input shift by $1$ has the same sign on both sides because the Tate shifts remain even. Thus the equations are compatible with the canonical input shift as well.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-weil-completed-scalar-chain-shift",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "Expand $u$ into its canonical factors: shift reassociation, pullback composition and the ordered twist splitting, tensor reassociation, inverse Tate pullback in the $e$ block, inverse tensor-pullback comparison, the two inverse shift reassociations, and the intermediate realization unit. This is the finite-level prescription of [def-pur-composition-comparisons]; [lem-pur-completed-operation-tower-substitution] gives its specified completed realization. The geometric pullback factor commutes with scalars by Step 2, the tensor factors by Step 3, the line splitting and pullback factors by Step 4, and the shift factors by Step 5. Inverse factors commute as well, by multiplying each square by its two inverses. Paste these squares in the displayed order. Internal scalar comparisons cancel in consecutive squares; the initial vertical arrow is $a_{gf,K}$ and the final vertical arrow is $H_{f,L}(a_{g,K})a_{f,H_{g,E}K}=A_K$. The resulting boundary equation is\n$$A_KT_X(u^E_K)=u^L_{T_ZK}a_{gf,K}.$$\nThis is a calculation for the canonical $u$, not an endpoint isomorphism chosen using purity.",
+   "uses": [
+    "def-pur-composition-comparisons",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "Suppress coefficient and object subscripts only in this calculation; every $T$ is on the displayed output scheme. Expand $\\beta$ and $q$ and use the $f$-purity square of Step 1 at $G_{g,E}K$. Naturality of $a_f$ at $\\gamma_{g,E,K}$ then gives\n$$\\begin{aligned}\n\\beta T(q^E)\n&=G_{f,L}(b_g)\\gamma_{f,L,T_YG_{g,E}K}a_{f,G_{g,E}K}T_XH_{f,E}(\\gamma_{g,E,K})\\\\\n&=G_{f,L}(b_g)\\gamma_{f,L,T_YG_{g,E}K}H_{f,L}(T_Y\\gamma_{g,E,K})a_{f,H_{g,E}K}.\n\\end{aligned}$$\nNaturality of $\\gamma_{f,L}$ at $b_{g,K}:T_YG_{g,E}K\\to G_{g,L}T_ZK$ moves $G_{f,L}(b_g)$ to the right as $H_{f,L}(b_g)$. Apply the $g$-purity square of Step 1 inside $H_{f,L}$. The last expression is\n$$\\gamma_{f,L,G_{g,L}T_ZK}H_{f,L}(\\gamma_{g,L,T_ZK})H_{f,L}(a_{g,K})a_{f,H_{g,E}K}=q^L_{T_ZK}A_K.$$\nAll uses of naturality and both purity squares are supplied by [lem-pur-rational-normalized-purity-diagrams]. Functoriality and associativity justify the regrouping, so this proves the second equation with exactly the stated source and target.",
+   "uses": [
+    "lem-pur-rational-normalized-purity-diagrams"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  },
+  {
+   "text": "Finally all constructions above are natural in $K$, so the component equalities are natural-transformation equalities. For successive coefficient extensions, denote a comparison for a functor $F$ by $w_F:T F_E\\to F_L T$. Horizontal composition is $w_{FG}=F_L(w_G)w_FG_E$; substitute the two tower equations for $w_F,w_G$, and use naturality of $w_F$ at $w_G$ to move the middle factors. Their product is the tower equation for $w_{FG}$ with the input and output tensor associators. Apply this first to $A$ and then to $\\beta$, using the tower laws of [lem-pur-rational-normalized-purity-diagrams] and the scalar associators of [prop-weil-pbc-scalar-extension]. The intermediate associators cancel. Step 6 is a pasting of the same canonical tensor maps, hence is preserved under this substitution; Step 7 is a pasting of naturality and the single-purity squares, whose tower laws are already included in that node. For identity extensions each factor is the unit comparison, giving the identity boundary squares. For shifts substitute the shift laws of that node into Step 7; in Step 6 use the even-shift calculation of Step 5. This verifies the asserted identity, tower and shift identifications without an extra coherence assumption.",
+   "uses": [
+    "lem-pur-rational-normalized-purity-diagrams",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+    "place": "Composition-coherence transport paragraph; expanded agent calculation of the twisted compositor and horizontal purity pasting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rational-normalized-purity-diagrams",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-adic-purity-scalar-naturality",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-weil-integral-twist-base-change",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-weil-completed-scalar-chain-shift",
+  "def-pur-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+  "place": "Composition-coherence transport paragraph; expanded proof using existing normalized tensor, pullback and purity statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tate.*comp|purity.*scalar|scalar.*purity",
+   "results": "{\"t\": \"2026-10-22T06:03:55Z\", \"tool\": \"grep\", \"query\": \"Tate.*comp|purity.*scalar|scalar.*purity\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/Skeletal.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/CodiscreteCategory.lean\", \"Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/Cat.lean\"], \"digest\": \"a561ca620235c89b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension respects the composition of shifted Tate twisted pullbacks and the pasted smooth purity naturality square",
+   "results": "{\"t\": \"2026-10-22T06:03:56Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension respects the composition of shifted Tate twisted pullbacks and the pasted smooth purity naturality square\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whisker\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"whisker\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib.Tactic.BicategoryLike.MonadNormalizeNaturality.mkNaturalityWhiskerLeft\", \"Mathlib.Tactic.BicategoryLike.MonadNormalizeNaturality.mkNaturalityWhiskerRight\", \"Mathlib.Tactic.Monoidal.naturality_whiskerLeft\", \"Mathlib.Tactic.Monoidal.naturality_whiskerRight\", \"Mathlib.Tactic.Bicategory.naturality_whiskerLeft\", \"Mathlib.Tactic.Bicategory.naturality_whiskerRight\", \"CategoryTheory.Oplax.OplaxTrans.whiskerLeft_naturality_naturality\", \"CategoryTheory.Oplax.OplaxTrans.whiskerLeft_naturality_naturality_assoc\"], \"digest\": \"dd5c237ad289a2a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted smooth pullback composition and horizontal composition of purity isomorphisms commute with coefficient field extension",
+   "results": "{\"t\": \"2026-10-22T06:04:06Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted smooth pullback composition and horizontal composition of purity isomorphisms commute with coefficient field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\"], \"digest\": \"0ac0317d5112c299\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|TateTwist",
+   "results": "{\"t\": \"2026-10-22T06:04:48Z\", \"tool\": \"grep\", \"query\": \"purity|TateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "{\"t\": \"2026-10-22T06:04:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullbackComp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.Limits.pullbackComparison_comp_fst\", \"CategoryTheory.Limits.pullbackComparison_comp_snd\", \"CategoryTheory.Limits.pullbackComparison_comp_fst_assoc\", \"CategoryTheory.Limits.pullbackComparison_comp_snd_assoc\", \"CategoryTheory.Limits.map_lift_pullbackComparison\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\", \"CategoryTheory.Limits.pullbackComparison_comp\"], \"digest\": \"17dcd99b56b16ddb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar naturality square for a composite of two smooth purity transformations and Tate twisted pullbacks",
+   "results": "{\"t\": \"2026-10-22T06:04:59Z\", \"tool\": \"leanfinder\", \"query\": \"The scalar naturality square for a composite of two smooth purity transformations and Tate twisted pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\"], \"digest\": \"18f10008fe7109b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback, categorical pullback and whiskering naturality do not give the canonical Tate-twisted derived compositor and its coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|TateTwist",
+   "results": "{\"t\": \"2026-10-22T06:57:36Z\", \"tool\": \"grep\", \"query\": \"purity|TateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with the Tate twisted smooth pullback compositor and the horizontal composite of purity isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:57:36Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension commutes with the Tate twisted smooth pullback compositor and the horizontal composite of purity isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.map_tmul\", \"PolynomialLaw.comp_toFun'\", \"AlgHom.extendScalars\", \"AlgEquiv.extendScalarsOfSurjective\", \"PresheafOfModules.pullback\", \"TrivSqZeroExt.isScalarTower\", \"Algebra.Extension.isScalarTower\", \"PadicComplex.instIsScalarTowerPadicPadicAlgCl\"], \"digest\": \"0f7c2b9c96266fab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-22T06:57:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"NatTrans\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.NatTrans.naturality_assoc\", \"CategoryTheory.NatTrans.naturality_map\", \"CategoryTheory.NatTrans.naturality_map_assoc\", \"CategoryTheory.NatTrans.naturality_inv\", \"CategoryTheory.NatTrans.naturality_inv_assoc\", \"CategoryTheory.NatTrans.app_naturality\", \"CategoryTheory.NatTrans.naturality_app\"], \"digest\": \"1bd3f94063ab0ce6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension respects composition of derived pullbacks with Tate twists and even shifts, and the horizontal composite of smooth purity natural transformations",
+   "results": "{\"t\": \"2026-10-22T06:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension respects composition of derived pullbacks with Tate twists and even shifts, and the horizontal composite of smooth purity natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullback_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\"], \"digest\": \"231e13a3dfcc9389\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent monoidal pullback comparisons and coefficient change preserve tensor powers of a line and their composite shifted functors",
+   "results": "{\"t\": \"2026-10-22T06:59:31Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent monoidal pullback comparisons and coefficient change preserve tensor powers of a line and their composite shifted functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.commShiftPullback\", \"CategoryTheory.NatTrans.PullbackShift.natIsoComp\", \"CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"CategoryTheory.Functor.commShiftPullback_iso_eq\", \"CategoryTheory.pullbackShiftIso\", \"CategoryTheory.pullbackShiftFunctorAdd'_hom_app\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\"], \"digest\": \"389cd7dd297768ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|tensor.*associator",
+   "results": "{\"t\": \"2026-10-22T06:59:31Z\", \"tool\": \"grep\", \"query\": \"pullbackComp|tensor.*associator\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"3fa5879d9cb3ee08\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module pullback, scalar extension, or abstract naturality/shift calculus; they do not state the Tate-twisted derived compositor and simultaneous purity-pasting equations of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-composition-comparison-scalar-compatibility",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Composition-coherence transport paragraph; returned item steps 4–5: twisted-compositor coefficient square and horizontal pasting of the two purity squares",
+   "via": [
+    "lem-pur-composition-comparison-scalar-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-iterated-purity-scalar-pasting",
+  "worker": "stage1",
+  "summary": "Expanded the twisted pullback compositor into its normalized pullback, tensor, ordered Tate-power and even-shift factors; proved its coefficient square by pasting their explicit squares, then proved horizontal purity pasting by two naturality moves and the single-morphism purity squares. Reused existing whole-system realization and line-comparison nodes, with no new nodes and no statement change.",
+  "blueprint": "prop-pur-rational-purity-trace-coherence.proof.md, composition-coherence transport paragraph, and sk-thm-purity-transport Step 3: scalar-extension transport of the canonical composition diagram.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-pur-normalized-scalar-comparison-realization",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-pur-integral-twist-line-inverse-image",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-weil-integral-twist-base-change",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "def-pur-composition-comparisons",
+    "why": "Generic normalized pullback/tensor, twist-line or scalar/shift calculus used to check a constituent square; it does not replace the purity-transport route."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified pullback scalar comparisons of the framework completed pullback and their composition equation (Step 2); generic coefficient-change coherence, no node of sk-thm-purity-transport states it; added by the maintainer reader."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Natural ordinary-to-strict-tower completion isomorphism chi through which a and T are expressed (Steps 2, 3, 5); generic presentation comparison; added by the maintainer reader."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Existence of the integral pullback/tensor scalar comparisons whose specified choices constitute a (Step 2); generic operation-scalar calculus of another unit; added by the maintainer reader."
+   },
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "Read for the presentation (through chi) in which a is expressed (Step 2); already a statement dependency of the item; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-weil-integral-twist-base-change",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-weil-completed-scalar-chain-shift",
+  "def-pur-composition-comparisons",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-adic-purity-scalar-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-bb48242b6",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-bb48242b6 (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps, 0 new nodes, statement and stmt_deps unchanged, base had no proof), all 10 cited statements, the parent's old steps 4-5 in the live Q68 report, and the main-20261015 prop-pur-rational-purity-trace-coherence proof paragraph. The live item is still unsplit and has no repair note of its own; it is not on the drop list; no SGA source is cited. Step 7 recomputed: f-square, then naturality of a_f, then naturality of gamma_f at b_g, then the g-square, giving q^L A. The intermediate objects are typed correctly. Step 6: the eight factors of u match def-pur-composition-comparisons. Step 5: the 2d and 2e shifts are even and the lines sit in degree 0, so all signs are +1. Edge cases checked: E=L, d=0 or e=0, identity maps, K=0, empty schemes. Fault 1 (C4/E6): Step 2 used prop-weil-pbc-scalar-extension's composition clause, which concerns the PBC completed pullback (def-weil-pbc-completed-pullback). H uses the framework Lf^* (def-weil-derived-pullback-tensor-hom), and a is built from the lem-pur-integral-operations-scalar-extension comparisons via chi. Fixed: Step 2 now cites lem-trf-integral-pullback-comparison-realization, which states this exact equation with tower-identified compositors, and conjugates by chi. Fault 2 (C3): Steps 3 and 5 prove strict-tower-presented squares but a and T are in the chi-presentation, and the bridge lem-weil-finite-free-completed-scalar-comparison was not cited. Fixed by citing it and adding the conjugation sentence. proof_deps and tool_uses updated. Batch 5: the tower-substitution path ends at lem-pod-derived-exact-square-composition, a generic lemma that derived functors of exact functors paste the same way. It is neither assumption nor a step of the proof of Poincare duality or the trace formula: accepted. The added trf citation is a generic coherence (accepted before at Q60) and adds 0 nodes to the closure. No cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IteratedPurityScalarPasting",
+  "declaration": "WeilConjectures.IteratedPurityScalarPasting.iteratedPurityScalarPasting",
+  "declarations": [
+   "WeilConjectures.IteratedPurityScalarPasting.Family",
+   "WeilConjectures.IteratedPurityScalarPasting.family_existsUnique",
+   "WeilConjectures.IteratedPurityScalarPasting.family",
+   "WeilConjectures.IteratedPurityScalarPasting.Coherent",
+   "WeilConjectures.IteratedPurityScalarPasting.SingleCoherent",
+   "WeilConjectures.IteratedPurityScalarPasting.u",
+   "WeilConjectures.IteratedPurityScalarPasting.q",
+   "WeilConjectures.IteratedPurityScalarPasting.A",
+   "WeilConjectures.IteratedPurityScalarPasting.beta",
+   "WeilConjectures.IteratedPurityScalarPasting.Result",
+   "WeilConjectures.IteratedPurityScalarPasting.iteratedPurityScalarPasting"
+  ],
+  "file": "lean/Sheaf/Paper/IteratedPurityScalarPasting.lean",
+  "statement": "theorem iteratedPurityScalarPasting : Result D C f g d e Sf Sg Sc If Ig Ic",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0ffc1514",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN bda5 (H13/H4+H2). Both Interface modules deleted; the item imports landed RationalScalarComparisonData + AdicPurityScalarNaturality and every referenced name resolves (Data.lean H:131 G:143 T:148 b:155 coefficientTranspose:228 SourceLocalizationNormalization:360; AdicPurityScalarNaturalityData Field:57 Data:733 composeShift:466). stmt_deps: the theorem lem-pur-rational-scalar-comparison-identification is replaced by def-pur-rational-scalar-comparison-data; relative to live only that node and the new compositor node are added; the item changes only lean and stmt_deps. Compositor module and node byte-identical to bda5 (previously judged sound: real data, node factor order, no purity). Item module diff is only the namespace swap. Re-checked q/A/beta order, both pasting equations with sources and targets, gamma/a/b pinning, edge cases (E=L, towers, d=0/e=0, identity morphisms, empty schemes, K=0, shifts), universe u, verbatim lean.statement, lines <=100, sorry only in theorems. Advisory: Data/Field are owned by def-pur-adic-purity-scalar-naturality-data, reached via the genuinely text-cited theorem lem-pur-adic-purity-scalar-naturality, as in landed siblings. No compile run (no file changed)."
+ }
+}

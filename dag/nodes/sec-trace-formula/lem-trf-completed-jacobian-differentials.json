@@ -18,42 +18,43 @@
  ],
  "proof": [
   {
-   "text": "By [lem-trf-completion-kahler-differential-comparison](i) the universal derivation $d$ has a unique continuous extension $\\widehat d:\\widehat A\\to\\Omega_{A/k}\\otimes_A\\widehat A$. The composite $\\widehat d\\circ\\sigma:F\\to\\Omega_{A/k}\\otimes_A\\widehat A$ is a $k$-derivation (σ is a $k$-algebra map and the target is an $F$-module through σ), so by the universal property of $\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials] it factors through $\\Omega_{F/k}$, which is $0$ by [lem-trf-separable-field-differentials-vanish]. Hence $\\widehat d\\circ\\sigma=0$, and the map $\\widehat d$ of the statement exists and is the continuous extension of (i).",
+   "text": "Apply the completion/Kähler comparison with the canonical residue field of the localization. The canonical k-algebra equivalence S/p ≃ residueField(A) transports the coefficient section and its residue identity. Tensor symmetry gives the written order Ω[A/k] tensor Ahat. Transport continuous differentials along the coefficient-field equivalence. The comparison sends D(x) to the continuous F-derivation on every x, hence D vanishes on σ(F). Its uniqueness clause gives uniqueness in the stated tensor order.",
    "uses": [
     "lem-trf-completion-kahler-differential-comparison",
-    "lem-trf-separable-field-differentials-vanish",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), polynomial Jacobian presentation in the algebraically closed proof paragraph; auxiliary completed-presentation comparison extending that argument via continuous differentials, with the finite-separable k-algebra coefficient section of Varieties Tag 0C52 (lemma-complete-local-ring-structure-as-algebra). The completed comparison is not a separate assertion of 0C4D."
+   }
+  },
+  {
+   "text": "Identify the given power-series quotient with the completion using its surjective algebra map and kernel. The variable ideal is the maximal ideal: the coefficient criterion at exponent one says membership is exactly vanishing of the constant coefficient, while invertibility is equivalent to a nonzero constant coefficient. A surjective map between local rings maps maximal ideal to maximal ideal. The maximal ideal of the noetherian completion is the extension of that of A. Thus the two differential inverse systems have the same ideals; continuity is not needed for this algebraic identification.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), polynomial Jacobian presentation in the algebraically closed proof paragraph; auxiliary completed-presentation comparison extending that argument via continuous differentials, with the finite-separable k-algebra coefficient section of Varieties Tag 0C52 (lemma-complete-local-ring-structure-as-algebra). The completed comparison is not a separate assertion of 0C4D."
+   }
+  },
+  {
+   "text": "Apply the formal-power-series continuous-differential presentation. Shift its inverse system indexed by r≥0 to the comparison system indexed by r+1: the omitted zeroth term is zero because the quotient by I^0 is the zero ring. Transport coefficientwise along the quotient algebra equivalence. Its induced semilinear equivalence sends the span of the Jacobian relation columns to the range of the displayed Jacobian matrix, so it descends to the required cokernel equivalence.",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-differentials",
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, algebraically closed Jacobian paragraph, with finite-separable coefficient-field descent and More Algebra Tag 0C34."
+    "place": "Tag 0C4D (lemma-nodal), polynomial Jacobian presentation in the algebraically closed proof paragraph; auxiliary completed-presentation comparison extending that argument via continuous differentials, with the finite-separable k-algebra coefficient section of Varieties Tag 0C52 (lemma-complete-local-ring-structure-as-algebra). The completed comparison is not a separate assertion of 0C4D."
    }
   },
   {
-   "text": "By [lem-trf-completion-kahler-differential-comparison](ii) there is an $\\widehat A$-linear isomorphism $\\Phi:\\Omega_{A/k}\\otimes_A\\widehat A\\to\\widehat\\Omega_{\\widehat A/F}$ onto the module of continuous $F$-differentials (defined there as $\\varprojlim_r\\Omega_{(\\widehat A/\\mathfrak m^r\\widehat A)/F}$, $F$ acting through $\\sigma$), with $\\Phi(\\widehat d(x))=\\widehat{\\mathrm d}_F(x)$ for all $x\\in\\widehat A$, in particular for the images of the $t_i$.",
-   "uses": [
-    "lem-trf-completion-kahler-differential-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, passage from the local algebra to its completed power-series presentation."
-   }
-  },
-  {
-   "text": "Let $\\pi:D=F[[t_1,\\ldots,t_n]]\\to\\widehat A$ be the given surjection, so $\\widehat A\\cong R=D/(f_1,\\ldots,f_s)$ as $F$-algebras. The ideal $\\pi(\\mathfrak n)$, $\\mathfrak n=(t_1,\\ldots,t_n)$, is $\\mathfrak m\\widehat A$: by continuity each $\\pi(t_i)$ is topologically nilpotent, hence lies in the maximal ideal $\\mathfrak m\\widehat A$, and $\\widehat A/\\pi(\\mathfrak n)$ is a nonzero quotient of $D/\\mathfrak n=F$, hence equals $F=\\widehat A/\\mathfrak m\\widehat A$ (elementary). So the two inverse systems defining continuous $F$-differentials agree, and [lem-trf-formal-power-series-continuous-differentials] gives an isomorphism $\\Psi$ from the cokernel of the Jacobian map $\\widehat A^{\\oplus s}\\to\\widehat A^{\\oplus n}$ to $\\widehat\\Omega_{\\widehat A/F}$ with $\\Psi(e_i)=\\widehat{\\mathrm d}_F(t_i)$.",
-   "uses": [
-    "lem-trf-formal-power-series-continuous-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, polynomial Jacobian presentation in the algebraically closed proof paragraph, extended to the completed coefficient-field presentation."
-   }
-  },
-  {
-   "text": "The composite $\\Phi^{-1}\\circ\\Psi$ is an $\\widehat A$-linear isomorphism from the Jacobian cokernel to $\\Omega_{A/k}\\otimes_A\\widehat A$, and by Steps 2 and 3 it sends the class of $e_i$ to $\\Phi^{-1}(\\widehat{\\mathrm d}_F(t_i))=\\widehat d(t_i)$. It is therefore the map of the statement, which is an isomorphism.",
+   "text": "Compose the transported Jacobian presentation with the inverse of the completion comparison and tensor symmetry. On each standard basis vector the presentation gives the continuous differential of its variable image, and the comparison identifies this with D of that image. Every finite coordinate vector is the sum of its coordinates times these basis vectors, proving the stated equality of linear maps.",
    "uses": [
     "lem-trf-formal-power-series-continuous-differentials",
     "lem-trf-completion-kahler-differential-comparison",
@@ -62,7 +63,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, conclusion of the Jacobian presentation paragraph."
+    "place": "Tag 0C4D (lemma-nodal), polynomial Jacobian presentation in the algebraically closed proof paragraph; auxiliary completed-presentation comparison extending that argument via continuous differentials, with the finite-separable k-algebra coefficient section of Varieties Tag 0C52 (lemma-complete-local-ring-structure-as-algebra). The completed comparison is not a separate assertion of 0C4D."
    }
   }
  ],
@@ -71,12 +72,14 @@
   "def-weil-pbc-module-tensor-product",
   "lem-trf-completion-kahler-differential-comparison",
   "lem-trf-formal-power-series-continuous-differentials",
-  "lem-trf-separable-field-differentials-vanish"
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "X5",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0C4D Jacobian presentation paragraph, with Algebra Tags 00RS/00RU/00RX and More Algebra Tag 0C34."
+  "place": "Recorded auxiliary completed comparison; Lean transport of residue fields, tensor order, inverse-limit indexing and Jacobian quotients. The maximal-ideal identification uses local-ring surjectivity and the proved power-series coefficient criterion."
  },
  "mathlib_searches": [
   {
@@ -184,5 +187,26 @@
   "result": "pass",
   "note": "Statement, dependencies, canonical constructions, source attribution, docstrings, universes, edge cases, and verbatim signature checked. Immutable module compiles cleanly through scompile.py; no substantive defects found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ed037",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261024T191714-L-470873",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompletedJacobianDifferentials.lean vs clones/live and node lem-trf-completed-jacobian-differentials; change records vs interface diff; module plus 3 direct importers compiled in sandbox; #print axioms (sorryAx only via the sorried completion_kahler_differential_comparison dependency)"
+ }
 }

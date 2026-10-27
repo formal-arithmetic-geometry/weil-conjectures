@@ -1,0 +1,152 @@
+{
+ "id": "lem-trf-ordinary-etale-identification-local-frames",
+ "kind": "statement",
+ "title": "Local frames from an ordinary etale identification",
+ "statement": "Let S be a scheme [def-pc-scheme], F an algebraic space with its small etale site and structure sheaf [def-trf-algebraic-space], V an object of that site, N an F-module sheaf, and L an ordinary invertible module on the underlying scheme of V [def-sc-invertible-module]. Suppose e is an ordinary etale identification of L with N over V [def-sfb-ordinary-etale-identification]. For every site object T and arrow a:T to V, there is a covering sieve R on T such that for every arrow f:U to T in R, N restricted to the localized site over U is isomorphic to its structure module. There is no atlas, overlap datum, joint-surjectivity assumption, or assertion of global local freeness outside V.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank-one local frames; spaces-descent.tex Tag 060X."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-sfb-ordinary-etale-identification"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary pullback of L to the underlying scheme of T is invertible. Choose its Zariski trivializing opens. As scheme opens are etale, these give a jointly surjective etale covering of T, hence a covering in the small site. The same construction handles an empty T.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG, rank-one finite-local-freeness comparison"
+   }
+  },
+  {
+   "text": "Over each trivializing open U and every further test W to U, pull back the ordinary frame, use the canonical tensor-unit comparison, and compose with e.app. Naturality of e and the unit-normalized composition maps make the linear equivalences and their inverses natural. Thus they give an isomorphism of module sheaves with the localized structure module. Every arrow of the generated covering sieve factors through a trivializing open, so pull back the same frame along that factorization.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "def-sfb-ordinary-etale-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03LC and 05VG; spaces-descent.tex Tag 060X, rank-one case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-trf-algebraic-space",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "def-sfb-ordinary-etale-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank-one local frames; spaces-descent.tex Tag 060X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules on a ringed site is locally free of rank one when its restriction is naturally identified with an ordinary invertible sheaf on an etale scheme chart",
+   "results": "8 hits: Scheme.Modules, SheafOfModules, LocalGeneratorsData, free, iotaFree, IsFiniteType.mk, tildeInModuleCat, pullbackObjFreeIso_hom_naturality_assoc. None supplies the ordinary tensor-section identification or the atlas tuple construction.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"over\"",
+   "results": "12 hits, including over, overFunctor, overMap, overPullback, Hom.over, overMapUnitIso and overFunctorMap. These supply localized module restrictions but no ordinary atlas realization or local-frame comparison.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*descent|descent.*invertible; OrdinaryEtaleIdentification; local_frames; compatible tuples",
+   "results": "msearch grep returned 0 hits for invertible descent. Local rg inspected WeilConjectures/AlgebraicGeometry, Sheaf/AlgebraicGeometry and Mathlib/Algebra/Category/ModuleCat/Sheaf. EtaleModuleTupleSheaf and EtaleTupleGraphIsomorphisms handle abstract localized modules with section universe max (u + 1) v, not the ordinary-to-localized realization at section universe u. SchemeEtaleInvertibleComparison concerns a scheme small etale site, not the localized algebraic-space site. SpaceQcohGroupoidEquivalence records identifications but provides neither of these conclusions. Blueprint local-frames search had no hit; compatible-tuples search had one unrelated open-curve residue-sequence hit, hence no matching blueprint assertion.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; reuse existing constructions in the proof plan"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary invertible module on an etale chart naturally identifies a module sheaf with the structure sheaf on a covering by local frames",
+   "results": "8 hits: ModuleCat.Tilde.isUnit_toStalk, tilde, tildeInType, Tilde.exists_const, the module structure on tilde sections, tildeInModuleCat, Tilde.const, QuasicoherentData.localGeneratorsData_generators. No localized algebraic-space identification or local-frame theorem.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: descend the polarization to the quotient (Stacks 04W8). The ordinary atlas realization and local-frame steps of invertible descent.",
+   "via": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEtaleIdentificationLocalFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEtaleIdentificationLocalFrames.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ordinary_etale_identification_local_frames",
+  "statement": "theorem ordinary_etale_identification_local_frames\n    {S : Scheme.{u}} (F : AlgebraicSpace S) (V : F.EtaleSite)\n    (N : F.Modules) (L : (F.etaleForget.obj V).Modules)\n    (hL : Scheme.Modules.IsInvertible L) (e : OrdinaryEtaleIdentification F V N L)\n    (T : F.EtaleSite) (a : T ⟶ V) :\n    ∃ R : Sieve T, R ∈ F.etaleTopology T ∧\n      ∀ (U : F.EtaleSite) (f : U ⟶ T), R f →\n        Nonempty ((F.etalePullback U).obj N ≅\n          SheafOfModules.unit (F.structureSheaf.over U))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083228-L-2301471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083228-L-2301471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

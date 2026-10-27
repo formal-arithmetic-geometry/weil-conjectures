@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-torsion-cd-ind-finite-heart",
+ "kind": "statement",
+ "title": "Torsion dimension bound for ind-finite constructible hearts",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime ℓ and a commutative condensed coefficient ring Λ isomorphic to one of A, Z_ℓ, O_E, Q_ℓ or E, using all continuous functions, where A is a finite discrete commutative ring killed by a power of ℓ and E/Q_ℓ is finite [sk-def-localizing-closure]. Let X be affine [def-pc-scheme], d a natural number, and suppose every affine etale V → X [def-weil-etale-morphism] has torsion etale cohomological dimension at most d [def-sc-etale-torsion-cd], for locally torsion sheaves without a common annihilator. Use the fixed small pro-etale site and universe [def-weil-pbc-proetale-site, def-weil-size-convention] and ordinary uncompleted internal module derived sections [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. If M is an ambient small filtered colimit of finite constructible complex hearts [def-sfb-finite-constructible-complex-heart-presentations], then H^q(RΓ(X,M[0]))=0 for every integer q>d+2. Empty X and the zero coefficient ring are included. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), including global sections; combined with the existing finite-heart coefficient estimate."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-weil-etale-morphism",
+  "def-sc-etale-torsion-cd",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-sfb-finite-constructible-complex-heart-presentations",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For each finite-heart stage choose its finite constructible complex. Apply the finite-heart cohomological bound at the identity affine pro-etale test object and transport along upperStarId and the given heart isomorphism.",
+   "uses": [
+    "lem-sfb-finite-constructible-complex-heart-cd"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply condensedModuleSections_ind_isZero to the finite-heart property. The finite stages all have zero q-th derived sections cohomology, so filtered continuity makes the colimit cohomology zero.",
+   "uses": [
+    "lem-sfb-condensed-sections-ind-vanishing"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-constructible-complex-heart-cd",
+  "lem-sfb-condensed-sections-ind-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), including global sections; combined with the existing finite-heart coefficient estimate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived global sections vanishes on filtered colimits if it vanishes on every degree zero module in the diagram",
+   "results": "8 hits: DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.IsKInjective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-25",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.ind",
+   "results": "0 hits: ; loogle: unknown identifier 'ObjectProperty.ind'",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|singleObjHomologySelfIso|ind_inverseImage",
+   "results": "23 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete coefficient constructible sheaves on a qcqs scheme generate a weak Serre coproduct hull contained in filtered colimits of finite constructible complex hearts, and derived sections preserve the resulting uniform vanishing bound",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.instHasFiniteCoproducts, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.instHasColimitsOfSize, CategoryTheory.Sheaf.instHasFiniteColimits, SheafOfModules.GeneratingSections.IsFiniteType, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-25",
+   "verdict": "Only generic sheaf colimits and finite-type definitions were found, not the finite coefficient Serre-to-ind presentation or its cohomological bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-topological-serre-transfer",
+   "place": "Finite discrete coefficient branch and conditional ind-finite-heart assembly",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TorsionCdIndFiniteHeart",
+  "file": "lean/Sheaf/Paper/TorsionCdIndFiniteHeart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.torsionCd_indFiniteHeart_cohomology_vanishes",
+  "statement": "theorem torsionCd_indFiniteHeart_cohomology_vanishes\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ :\n      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)\n          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),\n        Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))))\n    (X : Scheme.{u}) [IsAffine X] (d : ℕ)\n    (hcd : ∀ (V : Scheme.{u}) (v : V ⟶ X) [IsAffine V] [Etale v],\n      V.HasTorsionEtaleCohomologicalDimensionLE d)\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hM : indFiniteConstructibleComplexHearts Λ X M)\n    (q : ℤ) (hq : (d : ℤ) + 2 < q) :\n    IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n        ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime ℓ and a commutative condensed coefficient ring Λ isomorphic to one of A, Z_ℓ, O_E, Q_ℓ, E, or the norm-topological algebraic closure of Q_ℓ, using all continuous functions, where A is a finite discrete commutative ring killed by a power of ℓ and E/Q_ℓ is finite [sk-def-localizing-closure]. Let X be affine [def-pc-scheme], d a natural number, and suppose every affine etale V → X [def-weil-etale-morphism] has torsion etale cohomological dimension at most d [def-sc-etale-torsion-cd], for locally torsion sheaves without a common annihilator. Use the fixed small pro-etale site and universe [def-weil-pbc-proetale-site, def-weil-size-convention] and ordinary uncompleted internal module derived sections [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. If M is an ambient small filtered colimit of finite constructible complex hearts [def-sfb-finite-constructible-complex-heart-presentations], then H^q(RΓ(X,M[0]))=0 for every integer q>d+2. Empty X and the zero coefficient ring are included. No Noetherian hypothesis is imposed.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-finite-coefficient-serre-cd",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ }
+}

@@ -37,7 +37,8 @@ import all Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import all Sheaf.Paper.FiniteCoefficientIntrinsicConstructibility
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import all Sheaf.Paper.ContinuousConstructibleIntegralTransport
-import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import all Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import Sheaf.Paper.CondensedFiniteFreeTensorExact
 import all Sheaf.Paper.ContinuousConstructibleIntegralGluing
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
@@ -46,7 +47,6 @@ import all Sheaf.Paper.CoefficientHeartLisseRestriction
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Integral generators and their finite reductions

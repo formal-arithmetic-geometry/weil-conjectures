@@ -18,82 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Work on the big fppf site fixed in the statement. The hypothesis on $p$ is a representable map of sheaves, with the meaning of [def-trf-algebraic-space]. The scheme $R$ represents $h_U\\times_Xh_U$, as supplied by [lem-trf-space-fibre-products-etale-covers]. Apply [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] to the finite pullback diagram: for every $S$-scheme $T$, $R(T)=\\{(a,b)\\in U(T)^2:p_T(a)=p_T(b)\\}$. The scheme fibre-product property [def-pc-fibre-product] identifies $(U\\times_SU)(T)$ with $U(T)^2$. Thus $(s,t)$ identifies $R(T)$ with this subset. Equality in $X(T)$ is reflexive, symmetric and transitive, so these subsets are equivalence relations, compatible with restriction in $T$. This proves precisely the equivalence-relation assertion.",
+   "text": "Apply [lem-a1-representable-etale-kernel-relation] to X.obj, the atlas p, and the supplied representative R. Representability follows from the etale scheme tests by forgetting the etale property. The sectionwise bijections identify a section r with (r followed by s, r followed by t). Their injectivity proves that prod.lift s t is mono, and their surjectivity proves that the represented relation is precisely equality of p-images. Retain the supplied equivalence relation and the four projection properties.",
    "uses": [
-    "def-trf-algebraic-space",
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "def-pc-fibre-product"
+    "lem-a1-representable-etale-kernel-relation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 0262 (lemma-space-presentation), first paragraph; sectionwise limits are Sites Tag 00W2 (lemma-limit-sheaf)"
-   }
+   "elementary": false
   },
   {
-   "text": "Test $p:h_U\\to X$ against the scheme map $p:h_U\\to X$ itself. By the definition of representable surjective etale in [def-trf-algebraic-space], the resulting projection $U\\times_XU\\to U$ is a surjective etale scheme morphism. This is one of $s,t$. Interchanging the two factors, by $(a,b)\\mapsto(b,a)$ in the preceding description, identifies the other projection with the same base change. Consequently both $s$ and $t$ are surjective etale. This uses the scheme-test definition directly, so no extra separation, finiteness or quasi-compactness hypothesis is required.",
+   "text": "Regard the atlas as a sheaf morphism p′ from the subcanonical representable h_U to X.obj. Apply [lem-a1-representable-etale-fppf-local-lifting] to obtain local surjectivity and an epimorphism. Let q:h_U to Q be the actual presheaf coequalizer projection followed by eta. Equal p-images are represented by a section of R by step 1, so the coequalizer condition implies equal q-images. Descend q to the presheaf image of p′: at an image element choose any preimage and apply q; fiberwise constancy makes this independent of the preimage and proves naturality. The explicit subsheaf sheafification extends this map to the sheaf image. Local surjectivity makes the inclusion of this image into X.obj an isomorphism. Its inverse followed by the extension gives b:X.obj to Q with p′ followed by b equal to q. This is the direct image-and-sheafification argument of Sites Tag 086K, valid without sheafification of every small-valued presheaf.",
    "uses": [
-    "def-trf-algebraic-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 0262 (lemma-space-presentation), second sentence of proof, with surjectivity from the same scheme test"
-   }
-  },
-  {
-   "text": "Let $T\\to S$ be an object of the big fppf site and $\\xi\\in X(T)$. By [def-trf-algebraic-space], the pullback $V=T\\times_{\\xi,X,p}U$ is a scheme and $v:V\\to T$ is surjective etale. The definition [def-weil-etale-morphism] makes $v$ flat and locally of finite presentation; hence the singleton $\\{v:V\\to T\\}$ is an fppf covering by [def-pc-fppf-site]. The second projection $a:V\\to U$ satisfies $p\\circ a=\\xi|_V$ by the defining pullback equality. Thus every section of $X$ lifts locally to $h_U$. Both $h_U$ and $X$ are the sheaves in the given representable map, so [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] applies and proves that $p$ is an epimorphism in this category of sheaves of sets.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-etale-morphism",
-    "def-pc-fppf-site",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 0262 (lemma-space-presentation), third paragraph; Topologies Tag 021M (definition-fppf-covering), Sites Tags 00WM/00WN (definition-sheaves-injective-surjective, lemma-mono-epi-sheaves)"
-   }
-  },
-  {
-   "text": "The sheaf $h_R$ with its two projections is the kernel pair of the epimorphism $p$, by step 1. Apply [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer] to $\\mathcal P=h_U$, $\\mathcal F=X$ and $K=h_R$. Its hypotheses are exactly the sheaf pullback of step 1 and the epimorphism of step 3. It follows that for every sheaf $H$ and map $b:h_U\\to H$ with $b\\circ s=b\\circ t$, there is a unique map $c:X\\to H$ with $c\\circ p=b$.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+    "lem-a1-representable-etale-fppf-local-lifting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 086K (lemma-coequalizer-surjection), applied as in the last sentence of spaces.tex Tag 0262"
+    "place": "Tag 086K, lemma-coequalizer-surjection, proof via the presheaf image and its sheafification."
    }
   },
   {
-   "text": "Write $P(T)=U(T)/R(T)$ and let $q:h_U\\to Q=P^\\#$ be the quotient map followed by the sheafification unit. Restrictions preserve the relation in step 1, so $P$ is a presheaf. For every sheaf $H$, a map $b:h_U\\to H$ equalizing $s,t$ descends uniquely to $P\\to H$: on each $T$ send $[a]$ to $b_T(a)$. This is well-defined because $b_T(a)=b_T(a')$ whenever $(a,a')\\in R(T)$, and it is natural because $b$ is natural; conversely every map $P\\to H$ has this property. By the universal property [def-weil-pbc-sheafification], these maps are in bijection with maps $Q\\to H$. Therefore $(Q,q)$ has the same coequalizer property as $(X,p)$ in step 4. Taking $H=X$ gives the specified map $\\alpha:Q\\to X$ with $\\alpha q=p$, and taking $H=Q$ in step 4 gives $\\beta:X\\to Q$ with $\\beta p=q$. Now $\\alpha\\beta p=p$, so uniqueness for $(X,p)$ gives $\\alpha\\beta=1_X$; likewise $\\beta\\alpha q=q$, so uniqueness for $(Q,q)$ gives $\\beta\\alpha=1_Q$. Thus the canonical map $\\alpha$ is an isomorphism and its equality $\\alpha q=p$ gives the required identification of quotient maps.",
+   "text": "Let alpha be the already defined etaleAtlasPresentationMap. The inverse hom-set bijection in [def-weil-pbc-sheafification] gives eta followed by alpha equal to the presheaf coequalizer descent of p. Precomposing with the coequalizer projection gives q followed by alpha equal to p′. Thus p′ followed by b followed by alpha equals p′, and cancellation of the epimorphism gives b followed by alpha equal to the identity. To prove alpha followed by b equal to the identity, use injectivity of the given hom-set map h_eta Q and then the presheaf coequalizer hom-ext principle. The resulting equality is q followed by alpha followed by b equals q, which follows from the two factorizations. These inverse identities give the required IsIso instance, and the factorization is exactly the final clause of the statement.",
    "uses": [
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WH (proposition-sheafification-adjoint), universal property; identifies the presheaf-quotient formulation with the coequalizer of spaces.tex Tag 0262"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-trf-algebraic-space",
-  "lem-trf-space-fibre-products-etale-covers",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "def-pc-fibre-product",
-  "def-weil-etale-morphism",
-  "def-pc-fppf-site",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-a1-representable-etale-kernel-relation",
+  "lem-a1-representable-etale-fppf-local-lifting",
   "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces.tex",
-  "place": "Tag 0262 (lemma-space-presentation), complete proof; its Sites Tag 086K invocation is explicit in step 4, and step 5 expands the equivalent quotient-sheaf formulation by Sites Tag 00WH (proposition-sheafification-adjoint)."
+  "place": "Tag 0262, lemma-space-presentation, with the explicit presheaf-image descent of Sites Tag 086K and the specified sheafification universal property of Sites Tag 00WH. Lean assembly and the image-descent private helper written by group X2, 2026-10-26."
  },
  "mathlib_searches": [
   {
@@ -199,28 +157,22 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-etale-atlas-presentation",
   "worker": "stage1",
-  "summary": "Retained the statement and prior Mathlib searches. Expanded Stacks 0262 into the sectionwise kernel relation, scheme-test permanence, explicit fppf local lift, and the existing Mathlib epi/kernel-pair coequalizer interfaces. Identified the specified sheafified quotient by its universal property with explicit inverse identities. Reused the whole DAG; no new nodes and no Lean work.",
-  "blueprint": "Auxiliary presentation branch below lem-a1-affine-hc0, through the recorded representability and open-image ancestors: realizes the U/R presentation invoked by Stacks 03BZ in the 03XW open-subspace argument. Does not change the rank-bound unit or its cohomological route.",
-  "tool_uses": [
-   {
-    "node": "lem-trf-space-fibre-products-etale-covers",
-    "why": "Generic algebraic-space fibre-product existence and scheme-test representability tool; the rank-bound unit has no such representability interface. It supplies the scheme R already named in the item, without replacing the unit route."
-   }
-  ]
+  "summary": "Repair of the released human re-split order: preserve the statement and statement dependencies verbatim; add three comparable statement-only unsplit nodes for old steps 1-2, step 3, and step 5. Reuse the existing kernel-pair effectiveness Mathlib leaf for old step 4. All five old arguments are mapped and preserved verbatim in report.md; the parent now assembles the interfaces in four short steps. Searches are genuine msearch records; no Lean writing or compilation. Landing-return repair: compared the retained baseline and split against the current live item, re-read every current cited statement, revalidated all four verbatim citation quotes, and reviewed the two new same-tag topos nodes; neither subsumes the geometric kernel-relation task. Added explicit duplicate distinctions and current-return review in report.md; deliver.py rebases this preserved split onto freshly fetched sheaf-dag.",
+  "blueprint": "Auxiliary presentation branch below lem-a1-affine-hc0, through the recorded representability and open-image ancestors: realizes the U/R presentation invoked by Stacks 03BZ in the 03XW open-subspace argument. Does not change the rank-bound unit or its cohomological route. New nodes retain the exact existing ancestor and add this item to its via chain; their from.place identifies the extracted argument."
  },
  "tool_uses": [
   "lem-trf-space-fibre-products-etale-covers"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NZ-bebd23801",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q12-b000bf7f5",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-bebd23801 (reviewer sub-agent of L); spot-checked: I read the whole item, all 5 steps, every cited node's statement, and the sources at the cited places: spaces.tex Tag 0262 (lemma-space-presentation) with its full proof, and sites.tex 086K with its proof; the labels for 00W2, 00WH, 00WM and 00WN were checked in tags/tags. The statement matches 0262 (1)-(3). It adds two things, both correct: s and t are surjective (base change of the surjective atlas), and the quotient is written as the sheafification of U(T)/R(T), which step 5 proves equal to the coequalizer by the universal property only. Steps: (1) the sectionwise kernel pair, via the limits-sectionwise lemma on a finite pullback and def-pc-fibre-product. (2) s and t are surjective etale by testing p against p in def-trf-algebraic-space, then swapping the factors. (3) V=T x_X U -> T is surjective etale, so flat and lfp, so a singleton fppf covering; with the local lifts, the epi/locally-surjective lemma makes p an epimorphism. (4) The 086K Mathlib leaf applies, its hypotheses being the epi of step 3 and the sheaf kernel pair of step 1. (5) alpha/beta inverse argument, correct. That h_U and h_R are fppf sheaves is presupposed by def-trf-algebraic-space, as in Stacks. Edge cases checked: identity atlas, X disjoint-union X, no global lift, empty space. No new nodes. grep found no duplicate of 0262: the nearest nodes are lem-trf-etale-relation-quotient (02WW, the converse), lem-trf-etale-relation-restriction-quotient and lem-trf-etale-affine-quotient-representable. I accept the tool_use lem-trf-space-fibre-products-etale-covers: it is a generic fibre-product interface and the parent node already has the same tool use accepted. No SGA; the unit route is unchanged. FIX (B5): step 3's source.place cited Topologies 'Tag 021L (definition-fppf-covering)', but 021L is topologies-section-fppf and the definition is 021M. Corrected in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-etale-atlas-presentation.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-b000bf7f5 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The released human re-split note (2026-10-22, keep_plan) reopens the item. The live and side-live item is still the old 5-step proof of 3524 characters and none of the new ids is live, so nothing supersedes this delivery. All four node files are identical to the earlier delivery 0206e571d614 except split_report; this head is that delivery rebased after the landing refusal, and I reviewed it again from the start. The item changes only proof, proof_deps, proof_origin and split_report; statement, stmt_deps, tool_uses and lean are verbatim. Every old argument becomes a node or an existing leaf. Old steps 1-2 (sectionwise kernel pair, equivalence relation, s and t surjective etale by testing p against p and swapping the factors) become lem-a1-representable-etale-kernel-relation. Old step 3 (V, singleton fppf cover, lift, epi) becomes lem-a1-representable-etale-fppf-local-lifting. Old step 4 was already only the Mathlib leaf for Sites 086K and is kept as assembly step 3. Old step 5 (descent through the classes, sheafification bijection, alpha/beta inverse identities) becomes lem-a1-specified-sheafified-relation-coequalizer. The three statements are 1076, 908 and 1446 characters and the assembly is 1407. Sources read: spaces.tex 0262 statement and full proof, sites.tex 086K, and the labels 021M, 00W2, 00WH, 00WM, 00WN and groupoids definition-quotient-sheaf. No SGA is cited. Each assembly step matches the cited statement's hypotheses: X is an fppf sheaf; (h_R,h_s,h_t) is the sheaf kernel pair by hypothesis; the epi comes from step 2; and the node's specified sheafification is exactly the universal property of def-weil-pbc-sheafification. The final map alpha satisfies alpha∘q=p, so it is the canonical map. All three new statements are true. I tested them on the identity atlas, X⊔X, the empty atlas, a section with no global lift, and the diagonal and indiscrete relations; the injectivity hypothesis in the third node is not needed but is harmless. B1-B9 hold: each node is unsplit with no proof, self-contained, has a correct tag and label, fresh id, ancestor lem-a1-affine-hc0 with via [item, ...], and three kinds of search; the isColimitSheafifyCocone candidate needs HasWeakSheafify for all presheaves, so it is not a one-line specialization. There are no duplicates. The trf etale-relation-quotient, representable-etale-quotient-presentation and etale-relation-kernel-pair nodes are the converse direction: they start from a given etale scheme relation and are in another unit. No generic 'sheafified quotient is a coequalizer' node exists. The route stays in sk-p-real-rankin with no new tool_uses, and the accepted tool_use lem-trf-space-fibre-products-etale-covers stays only in stmt_deps."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -245,5 +197,26 @@
   "existing": false,
   "note": "The canonical comparison is constructed by the inverse sheafification hom-set bijection applied to the presheaf coequalizer descent of p. Q and its unit are specified by the universal property at this quotient presheaf, preserving the published small-valued algebraic-space interface on the big fppf site. The representing scheme R is an arbitrary supplied representative, expressed by its Yoneda pullback square."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T083449-L-2361181",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,136 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26; original coefficient-stage construction steps 1--4; scalar-mates steps 1 and 5"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves constructible finite Tor complexes and normalized integral scalar restriction",
+   "results": "RestrictScalars, ModuleCat.extendRestrictScalarsAdj, AlgHom.extendScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.restrictCoextendScalarsAdj, Module.RestrictScalars.normedSpaceOrig, instSeminormedAddCommGroupRestrictScalars.",
+   "date": "2026-10-27",
+   "verdict": "Generic ordinary scalar algebra and adjunction results; no finite-Tor sheaf-derived restriction or geometric mate invertibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves constructible finite Tor complexes and normalized integral scalar restriction",
+   "results": "Eight results about algebraic tensor base change and flatness (Algebra.Extension.tensorH1Cotangent, RingHom.finite_isStableUnderBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, and related declarations); none constructs the geometric derived scalar restrictions.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf-derived scalar restriction or geometric mate invertibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the counit equation in the assembly proof, but neither scalar preservation nor invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ring_scalar_mates|CounitQNormalized|ScalarIdentity",
+   "results": "The server grep search returned zero hits; the local rg reads found the assembly statements and definitions, and the existing finite/system interfaces.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of either proposed smaller statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingScalarMates",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-ring-endpoint-scalar-restrictions",
+ "title": "Shift-compatible normalized endpoint scalar restrictions",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p and a finite-type D.k-scheme W, without structural separatedness [def-sf-ring-stage-assembly-data, def-sf-constructible-exceptional-assembly-data]. For all actual ring coefficient changes a with Allowed(a), choose exact additive scalar functors between the recorded finite-Tor categories on W. For finite targets they are literal restrictions of ambient derived extension and their realization is eqToIso of the inclusion equality. For completed-inclusion generators they are literal restrictions of the published strict-tower scalar extension and their inverse realization is the published completedScalarComparison on every input. Every scalar realization commutes with integer shifts for the canonical full-inclusion and universal scalar-counit shifts. These choices use only W and the coefficient map and require no compactification, operation or adjunction. For every actual identity coefficient map $a:s\\to s$, equality $h_W:a_W=1$ on every scheme, and Allowed witness, the chosen restriction carries a ScalarIdentity datum normalized by the actual equality and the ambient multiplication tensor unitor.",
+ "proof": [
+  {
+   "text": "For finite-to-finite changes apply finite scalar preservation to flat representatives; for an integral reduction use the defining finite reduction and its common Tor interval. For any other allowed map with finite target, scalar tensor associativity reduces to these cases. The literal ObjectProperty lift gives the required inclusion equality and its literal realization.",
+   "uses": [
+    "lem-sf-exceptional-finite-scalar-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a completed-inclusion generator use the published strict-tower extension. The finite-free completed scalar comparison proves that it is realized by ordinary derived extension, with inverse realization exactly chi. The common Tor bounds are unchanged at the ramified cofinal levels and then at every further quotient. Constructibility is affine-local, so finite type does not require W to be separated.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on Allowed for preservation at integral targets, using tensor multiplication for identities and tensor associativity for composites. Choose the literal finite lift at every finite target and the published strict-tower lift at each completed generator. Full inclusion transports the universal scalar-counit shift and reflects additivity and distinguished triangles, giving exact restrictions and shift-compatible realizations. Zero objects and exponent one obey the same constructions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every actual identity map, including composite Allowed witnesses, lift its coefficient-map equality followed by the ambient multiplication tensor unitor through the fully faithful endpoint inclusion. The component map/preimage equality proves ScalarIdentity normalization. This depends on neither an exceptional operation nor a compactification.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-finite-scalar-mates",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26; original coefficient-stage construction steps 1--4; the corresponding scalar-restriction or geometric-invertibility part of the original plan, with the categorical assembly removed."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Coefficient-stage construction: endpoint restriction step 1 and normalized identities (step 5)",
+   "via": [
+    "lem-sf-ring-scalar-mates-for-realized-operations",
+    "lem-sf-ring-stage-assembly",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingEndpointScalarRestrictions",
+  "file": "lean/Sheaf/Paper/RingEndpointScalarRestrictions.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_ring_endpoint_scalar_restrictions",
+  "statement": "theorem exists_ring_endpoint_scalar_restrictions\n    (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p) (W : Scheme.{max u v})\n    [W.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))] :\n    ∃ scalar : ∀ {s t : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)),\n      Allowed l a → Scalar.{u, v} l Ω a W,\n    ∃ finiteScalar_eq : ∀ {s : RingStage.{max u v} l} (E : FieldStage.{max u v} l) (n : ℕ+)\n      (a : PurCompactSupport.Change (s.coefficients l)\n        ((RingStage.finite E n).coefficients l))\n      (ha : Allowed l (s := s) (t := .finite E n) a),\n      (scalar a ha).functor ⋙ RingStage.inclusion.{u, v} l Ω W (.finite E n) =\n        RingStage.inclusion.{u, v} l Ω W s ⋙ pbcDerivedExtend (a.map W),\n    (∀ {s : RingStage.{max u v} l} (E : FieldStage.{max u v} l) (n : ℕ+)\n      (a : PurCompactSupport.Change (s.coefficients l)\n        ((RingStage.finite E n).coefficients l))\n      (ha : Allowed l (s := s) (t := .finite E n) a),\n      (scalar a ha).realization = eqToIso (finiteScalar_eq E n a ha)) ∧\n    (∀ (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier),\n      (scalar (s := .integral E) (t := .integral L)\n        (PurCompactSupport.completedChange l E.carrier L.carrier i)\n        (Allowed.integral E L i)).functor ⋙\n          RingStage.inclusion.{u, v} l Ω W (.integral L) =\n        RingStage.inclusion.{u, v} l Ω W (.integral E) ⋙\n          integralScalarExtensionOfUniverses l E.carrier L.carrier i W) ∧\n    (∀ (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)\n      (K : C.{u, v} l Ω W (.integral E)),\n      HEq ((scalar (s := .integral E) (t := .integral L)\n        (PurCompactSupport.completedChange l E.carrier L.carrier i)\n        (Allowed.integral E L i)).realization.inv.app K)\n        ((completedScalarComparison l E.carrier L.carrier i W).app K.obj)) ∧\n    (∀ {s t : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))\n      (ha : Allowed l a), (scalar a ha).realization.hom.CommShift ℤ) ∧\n    (∀ {s : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l))\n      (h : ∀ T : Scheme.{max u v}, a.map T = 𝟙 _) (ha : Allowed l a),\n      Nonempty (ScalarIdentity.{u, v} l Ω h W (scalar a ha)))",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T103451-L-1084652",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T103451-L-1084652",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-adequate-relative-spectrum",
+ "kind": "statement",
+ "title": "Relative spectra preserve adequate moduli spaces",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space], and let $\\mathcal B$ be a quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebra [def-sfb-stack-quasi-coherent-algebra]. Use a common ambient universe $\\mathcal U$ for schemes and the chart algebras: for every object $x$ of $\\mathcal X$ over a $\\mathcal U$-small scheme, the ring $\\mathcal B(x)$ is $\\mathcal U$-small (up to canonical size transport). Sites and compatible section families may live in a larger universe, as in [def-weil-size-convention]. The direct image $\\phi_*\\mathcal B$ is a quasi-coherent $\\mathcal O_Y$-algebra. For a quasi-coherent algebra $\\mathcal C$ on an algebraic stack or algebraic space $Z$, the relative spectrum $\\underline{\\operatorname{Spec}}_Z\\mathcal C$ means the functor of $\\mathcal O_T$-algebra homomorphisms $u^*\\mathcal C\\to\\mathcal O_T$ over objects $u:T\\to Z$; on a scheme chart it is obtained by gluing affine spectra. These relative spectra are algebraic stacks, and the canonical map\n$$\\underline{\\operatorname{Spec}}_{\\mathcal X}\\mathcal B\\longrightarrow\\underline{\\operatorname{Spec}}_Y(\\phi_*\\mathcal B),$$\ninduced by evaluation $\\phi^*\\phi_*\\mathcal B\\to\\mathcal B$, is an adequate moduli space. No finite-generation, flatness, or reducedness condition on $\\mathcal B$ is required. Algebraic stacks and spaces use [def-sfb-algebraic-moduli-stack, def-trf-algebraic-space].",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28, and its use in Lemma 8.3.1, printed p.39. Read primary PDF online; local literature PDF WANTED.",
+  "url": "https://arxiv.org/pdf/1005.2398v3"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-sfb-space-relative-spec-correspondence",
+  "def-sfb-stack-relative-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\phi_*\\mathcal B$. The qcqs hypothesis in [def-sfb-adequate-moduli-space] permits [lem-sfb-stack-qcqs-algebra-direct-image]; its smooth-test formula, restricted to etale scheme tests of $Y$, identifies its quasi-coherent algebra with the direct image in the statement. Apply [lem-sfb-stack-relative-spec-construction] to obtain $q:V=\\operatorname{Spec}_{\\mathcal X}\\mathcal B\\to\\mathcal X$ affine and $p:Z=\\operatorname{Spec}_Y\\mathcal C\\to Y$ an affine algebraic space. The evaluation $\\phi^*\\mathcal C\\to\\mathcal B$, followed on $V$ by the tautological evaluation to $\\mathcal O_V$, gives $h:V\\to Z$ over $Y$ by the defining functor of $Z$. Thus $p h=\\phi q$, and $h$ is exactly the map in the statement.",
+   "uses": [
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-stack-relative-spec-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28; read online https://arxiv.org/pdf/1005.2398v3, local PDF WANTED. Expanded using the cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Choose an affine etale scheme cover $W_i\\to Y$. Base change of the relative spectra in [lem-sfb-stack-relative-spec-construction] gives $V_i=\\operatorname{Spec}_{\\mathcal X_i}\\mathcal B_i$ and $Z_i=\\operatorname{Spec}_{W_i}\\mathcal C_i$, with $h_i:V_i\\to Z_i$, where $\\mathcal X_i=\\mathcal X\\times_YW_i$ and the subscript denotes tensor restriction. Such restrictions of quasi-coherent algebras are legitimate by [lem-sfb-stack-quasi-coherent-scheme-restriction]. The etale-test formula of [def-sfb-stack-quasi-coherent-algebra] identifies $\\mathcal C_i$ with $(\\phi_i)_*\\mathcal B_i$: on a scheme etale over $W_i$ the two values are sections over the same test stack. The composite test is etale by [lem-trf-space-chartwise-etale-permanence]. By [lem-sfb-adequate-moduli-etale-locality], $\\phi_i$ is adequate. Write $R_i=\\Gamma(W_i,\\mathcal C_i)$. Then $Z_i=\\operatorname{Spec}R_i$, and the structure-algebra and global-section identifications of [lem-sfb-stack-relative-spec-construction] give $R_i\\simeq\\Gamma(\\mathcal X_i,\\mathcal B_i)\\simeq\\Gamma(V_i,\\mathcal O_{V_i})$. The pullback of $h_i$ on global functions is this isomorphism: $c\\in R_i$ is sent to its restriction to $\\mathcal X_i$ followed by tautological evaluation on $V_i$.",
+   "uses": [
+    "lem-sfb-stack-relative-spec-construction",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-adequate-moduli-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28; read online https://arxiv.org/pdf/1005.2398v3, local PDF WANTED. Expanded using the cited Stacks inputs."
+   }
+  },
+  {
+   "text": "For the affine criterion we must check qcqs of $h_i$, rather than infer it from a desired moduli property. The morphism $\\phi_i$ is qcqs by [def-sfb-adequate-moduli-space]. The morphisms $q_i:V_i\\to\\mathcal X_i$ and $W_i\\to\\operatorname{Spec}k$ are affine (the first by [lem-sfb-stack-relative-spec-construction], the second because $W_i$ is an affine $k$-scheme). The affine and composition clauses of [lem-sfb-stack-qcqs-composition-affine] make $V_i$ qcqs over $k$. Hence [lem-sfb-stack-affinization-qcqs] applies to $V_i$. The map $h_i$ of the preceding step, after the displayed identification $R_i\\simeq\\Gamma(V_i,\\mathcal O)$, is its canonical affinization map: on every scheme object its algebra map is restriction of these global functions, as follows from the explicit evaluation description of $h_i$. The uniqueness clause of that node identifies these maps, so its qcqs conclusion proves $h_i$ qcqs.",
+   "uses": [
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-stack-relative-spec-construction",
+    "lem-sfb-stack-qcqs-composition-affine",
+    "lem-sfb-stack-affinization-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28; read online https://arxiv.org/pdf/1005.2398v3, local PDF WANTED. Expanded using the cited Stacks inputs."
+   }
+  },
+  {
+   "text": "Let $\\mathcal D\\twoheadrightarrow\\mathcal E$ be any surjection of quasi-coherent algebras on $V_i$ and let $t\\in\\Gamma(V_i,\\mathcal E)$. Since $q_i$ is affine, [lem-sfb-stack-affine-algebra-direct-image] gives a surjection $(q_i)_*\\mathcal D\\twoheadrightarrow(q_i)_*\\mathcal E$ of quasi-coherent algebras on $\\mathcal X_i$ and natural ring identifications of its global sections with those on $V_i$. Apply the affine-target criterion of [lem-sfb-adequate-moduli-etale-locality] to the adequate $\\phi_i:\\mathcal X_i\\to W_i$ and the section corresponding to $t$. It yields $N>0$ and a section of $(q_i)_*\\mathcal D$ mapping to the $N$th power of that section. Transfer it back through the ring identifications to obtain $s\\in\\Gamma(V_i,\\mathcal D)$ mapping to $t^N$. Those identifications preserve multiplication and powers, as the affine-direct-image node explicitly states. This argument quantifies over every algebra on $V_i$; none is assumed to be pulled back from $\\mathcal X_i$.",
+   "uses": [
+    "lem-sfb-stack-affine-algebra-direct-image",
+    "lem-sfb-adequate-moduli-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28; read online https://arxiv.org/pdf/1005.2398v3, local PDF WANTED. Expanded using the cited Stacks inputs."
+   }
+  },
+  {
+   "text": "The affine-target criterion of [lem-sfb-adequate-moduli-etale-locality], applied to $h_i:V_i\\to\\operatorname{Spec}R_i$, now uses exactly its qcqs property from step 3, the structural ring isomorphism from step 2 and the power lifts from step 4. It gives adequacy of every $h_i$. The family $Z_i=Z\\times_YW_i\\to Z$ is an etale cover by [lem-trf-space-chartwise-etale-permanence]. Each $h_i$ is qcqs, so [lem-sfb-stack-etale-local-qcqs-homeomorphism] first gives qcqs of $h$. Etale locality of [lem-sfb-adequate-moduli-etale-locality] then gives adequacy of $h$. Quasi-coherence of $\\mathcal C$ and algebraicity of both relative spectra were already proved in step 1. The construction and all cited inputs allowed arbitrary $\\mathcal B$, so no finite-generation, flatness or reducedness hypothesis entered.",
+   "uses": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Lemma 5.2.11, printed p.28; read online https://arxiv.org/pdf/1005.2398v3, local PDF WANTED. Expanded using the cited Stacks inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-stack-qcqs-algebra-direct-image",
+  "lem-sfb-stack-relative-spec-construction",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-adequate-moduli-etale-locality",
+  "lem-sfb-stack-qcqs-composition-affine",
+  "lem-sfb-stack-affinization-qcqs",
+  "lem-sfb-stack-affine-algebra-direct-image",
+  "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Expansion of Alper arXiv:1005.2398v3 Lemma 5.2.11 (read online, local PDF WANTED), using Stacks 01LX, 05UM, 077A, 0GQQ and 0GQY via the cited DAG nodes. Affine-chart power-lifting proof written by N6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent algebra on an algebraic stack with an adequate moduli space its relative spectrum has an adequate moduli space given by the relative spectrum of the direct image algebra",
+   "results": "{\"t\": \"2026-10-23T10:59:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi coherent algebra on an algebraic stack with an adequate moduli space its relative spectrum has an adequate moduli space given by the relative spectrum of the direct image algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.essImage_Spec\", \"AlgebraicGeometry.Spec\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"b520750da75a38f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Spec of a quasi coherent algebra over an adequate moduli space is again an adequate moduli space",
+   "results": "{\"t\": \"2026-10-23T11:08:16Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Spec of a quasi coherent algebra over an adequate moduli space is again an adequate moduli space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instCategoryAffineScheme\"], \"digest\": \"ba6938c15a292bb0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative spectrum of an algebra on an algebraic stack with adequate moduli space has adequate moduli space",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"leansearch\", \"query\": \"Relative spectrum of an algebra on an algebraic stack with adequate moduli space has adequate moduli space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.AffineScheme\", \"spectrum.algebraMap_mem\", \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.Spec\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_toSheafedSpace\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\"], \"digest\": \"44450101f24bee87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"adequate\"",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|relativeSpec|relative.*Spec",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|relativeSpec|relative.*Spec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"3524b485b867a860\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequate|relativeSpec|relative.*spectrum",
+   "results": "{\"t\": \"2026-10-23T12:55:31Z\", \"tool\": \"grep\", \"query\": \"adequate|relativeSpec|relative.*spectrum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism to an adequately affine algebraic stack has an adequate relative affinization",
+   "results": "{\"t\": \"2026-10-23T12:55:31Z\", \"tool\": \"leansearch\", \"query\": \"An affine morphism to an adequately affine algebraic stack has an adequate relative affinization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffine_of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.AffineTargetMorphismProperty\"], \"digest\": \"547153d18ab5d2ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T12:55:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"adequate\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative spectrum of a quasi coherent algebra on an algebraic stack preserves adequate moduli spaces",
+   "results": "{\"t\": \"2026-10-23T12:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"The relative spectrum of a quasi coherent algebra on an algebraic stack preserves adequate moduli spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isAffine_affineScheme\"], \"digest\": \"13a2d4c8867ee003\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every adequate moduli morphism X to Y and arbitrary quasi coherent algebra B the map Spec_X B to Spec_Y of its direct image is an adequate moduli morphism",
+   "results": "{\"t\": \"2026-10-23T13:15:09Z\", \"tool\": \"leanfinder\", \"query\": \"For every adequate moduli morphism X to Y and arbitrary quasi coherent algebra B the map Spec_X B to Spec_Y of its direct image is an adequate moduli morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"AlgebraicGeometry.HasAffineProperty\", \"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.isAffineHom_of_isAffine\"], \"digest\": \"239d8ce5b94d6c9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned scheme affine-spectrum, affine-morphism and ring-spectrum hits; none states a relative spectrum over an algebraic stack or adequate moduli spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-integral-comparison-finite",
+  "date": "2026-10-23",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: Alper Lemma 5.2.11 applied to the integral-closure algebra on the target stack.",
+   "via": [
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-relative-spectrum",
+  "worker": "stage1",
+  "summary": "Expanded Alper Lemma 5.2.11 into relative-spectrum construction, affine etale localization, qcqs of the canonical affinization, arbitrary-algebra power lifting through affine pushforward, and etale descent. Reused existing direct-image, affinization and adequacy-criterion nodes. One new general relative-spectrum construction input; no new adequacy clause. Statement unchanged.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), and the retained from.place chain to the integral-comparison input. The moduli input is below the unit route; no change of unit or chapter. Whole-blueprint searches adequate, relative spectrum and relative spectrum algebraic stack found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale-cover base change and composition for the affine chart cover; the unit has no replacement for this algebraic-space site calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-2823c2057",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-2823c2057 (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 15 cited statements, which match live. Source: Alper arXiv:1005.2398v3 Lemma 5.2.11 (primary-PDF text); the item restates it exactly and the statement is unchanged from live, where the item is still unsplit; there is no repair note or competing split. Stacks tags 01LX, 05UM and 081V/081W checked in the tex. Step 1: the qcqs direct image of lem-sfb-stack-qcqs-algebra-direct-image, restricted to etale tests, is the def's φ_*; h is built from the defining functor through the counit. Step 2: after base change, C_i=(φ_i)_*B_i by evaluating on etale tests; φ_i is adequate by etale locality; R_i≅Γ(X_i,B_i)≅Γ(V_i,O). Step 3: V_i is qcqs over k (affine, then qcqs, then affine); h_i agrees with the affinization a_{V_i} on every scheme object, so uniqueness gives h_i qcqs; there is no circularity. Step 4: (q_i)_* preserves surjections and Γ isomorphisms, and the affine criterion for φ_i covers all algebras, so power lifts hold on V_i. Step 5: the affine criterion gives h_i adequate; h is qcqs by the etale-local lemma and adequate by etale locality. New node lem-sfb-stack-relative-spec-construction (Spec of a quasi-coherent algebra over an algebraic stack) is true; tested with C=0, C=O, the dual numbers, a non-finite-type Sym, and Z=BG_m. It is not a duplicate: existing relative-Spec nodes have space bases or a specific integral algebra. It does not restate an adequacy clause of the item. FIX (B3): its clause 'its usual relative spectrum' had no defining node, and step 1 relies on it, so it now cites lem-sfb-space-relative-spec-correspondence, also added to stmt_deps; no cycle. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-relative-spec-construction.json. Batch-5 flags: lem-trf-space-chartwise-etale-permanence is generic etale-covering calculus (03FR-03FV), accepted as a tool_use. The other flags reach only def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-projective-bundle-morphism (definitions) or lem-trf-affine-pushforward-quasi-coherent-quotient (generic affine scheme exactness). None is part of the trace formula or Poincare duality, so all are accepted. No SGA citation anywhere.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateRelativeSpectrum",
+  "declaration": "CategoryTheory.adequate_relative_spectrum",
+  "declarations": [
+   "CategoryTheory.ModuliDirectImageAlgebraModel",
+   "CategoryTheory.moduliImageRelativeSpecData",
+   "CategoryTheory.moduliImageRelativeSpectrum",
+   "CategoryTheory.IsModuliRelativeSpecEvaluation",
+   "CategoryTheory.adequate_relative_spectrum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateRelativeSpectrum.lean",
+  "statement": "theorem adequate_relative_spectrum {k : Type u} [Field k]\n    (F : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k))))\n    (hF : IsAlgebraicModuliStack F) (Y : AlgebraicSpace (Spec (CommRingCat.of k)))\n    (φ : BasedFunctor F (discreteModuli Y.obj.obj))\n    (hφ : IsAdequateModuliSpace F hF Y φ)\n    (B : ModuliAlgebraSheaf F hF.1.1) (hB : IsQuasicoherentModuliAlgebra B)\n    (hsmall : ∀ x : F.obj, Small.{u} (B.right.obj.obj (op x))) :\n    ∃ (M : ModuliDirectImageAlgebraModel hF.1.1 Y φ B)\n      (hV : IsAlgebraicModuliStack (moduliRelativeSpectrum B))\n      (h : BasedFunctor (moduliRelativeSpectrum B)\n        (discreteModuli (moduliImageRelativeSpectrum M).obj.left.obj.obj)),\n      IsModuliRelativeSpecEvaluation φ B M h ∧\n        IsAdequateModuliSpace (moduliRelativeSpectrum B) hV\n          (moduliImageRelativeSpectrum M).obj.left h",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Dependency ownership repair requested in the return of Q40 head 31e8e3ab4dd8: the five general relative-spectrum definitions were recorded under this adequate-moduli theorem, so using them alone forced an invalid theorem statement dependency. They are moved verbatim (only blueprint docstring ownership changes) to Sheaf.AlgebraicGeometry.StackRelativeSpectrum, owned by def-sfb-stack-relative-spectrum. This module publicly imports that owner and retains its direct-image model, image relative spectrum, evaluation condition and adequate_relative_spectrum theorem unchanged. Only this lean record is changed; all mathematical and dependency fields stay as on main."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-239125e52",
+  "group": "Q61",
+  "result": "pass",
+  "note": "All clauses match: field, IsAdequateModuliSpace hyp, QC algebra B, direct-image model tied to moduliDirectImage by natural ring isos with structure compatibility, functor-of-points source (ModuliAlgebraPoint on the full slice with retraction equation), algebraicity of the source, target = relativeSpec from the correspondence, evaluation clause pinning h (discrete target), adequacy conclusion. Mechanical theorem-stmt_dep finding: the statement uses Classical.choose of space_relative_spec_correspondence (an object the theorem constructs, normalized RelativeSpecData), so PASS on that point. Statement_change hsmall (Small.{u} chart rings) is justified by the polynomial-algebra counterexample, keeps v,w independent, and both citers (closed-substack quotient algebra, integral-closure subalgebra) hold. Only sorry in the theorem; docstrings, H8 proof steps, verbatim statement and bound universes ok; no H4 duplicate found. Advisories: stage-3 adequacy over larger-universe algebras on the source; QCAlg owner reached indirectly. No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q61 stage 2",
+  "old_statement": "Let $k$ be a field [def-weil-field], let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space], and let $\\mathcal B$ be a quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebra [def-sfb-stack-quasi-coherent-algebra]. The direct image $\\phi_*\\mathcal B$ is a quasi-coherent $\\mathcal O_Y$-algebra. For a quasi-coherent algebra $\\mathcal C$ on an algebraic stack or algebraic space $Z$, the relative spectrum $\\underline{\\operatorname{Spec}}_Z\\mathcal C$ means the functor of $\\mathcal O_T$-algebra homomorphisms $u^*\\mathcal C\\to\\mathcal O_T$ over objects $u:T\\to Z$; on a scheme chart it is obtained by gluing affine spectra. These relative spectra are algebraic stacks, and the canonical map\n$$\\underline{\\operatorname{Spec}}_{\\mathcal X}\\mathcal B\\longrightarrow\\underline{\\operatorname{Spec}}_Y(\\phi_*\\mathcal B),$$\ninduced by evaluation $\\phi^*\\phi_*\\mathcal B\\to\\mathcal B$, is an adequate moduli space. No finite-generation, flatness, or reducedness condition on $\\mathcal B$ is required. Algebraic stacks and spaces use [def-sfb-algebraic-moduli-stack, def-trf-algebraic-space].",
+  "what": "The recorded algebra-sheaf interface has coefficients in max (u+1) v w, whereas its algebraic stacks and spaces are tested only by Scheme.{u}. Quasi-coherence alone does not bound the cardinality of an algebra: over Spec k the polynomial algebra on a set larger than universe u is quasi-coherent, but its affine spectrum cannot be represented by a Scheme.{u}. Taking spectra therefore requires the ordinary common ambient-universe convention for schemes and chart algebras. The correction states exactly that size convention; it imposes no finiteness, flatness or reducedness. The already landed relative-Spec correspondence is added to name the target construction already present in the old statement.",
+  "source": {
+   "document": "literature/stacks-project/constructions.tex; Alper arXiv:1005.2398v3",
+   "place": "Constructions, situation-relative-spec, equation-spec, lemma-spec-affine, lemma-spec and definition-relative-spec (Tags 01LL--01LX); Alper Lemma 5.2.11, printed p.28, interpreted in a common ambient universe."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-adequate-closed-substack-affinization",
+    "holds": true,
+    "note": "The algebra is a quotient of O_X by a quasi-coherent ideal; its values are small in the scheme universe, so the relative-spectrum application still holds."
+   },
+   {
+    "id": "lem-sfb-adequate-integral-comparison-finite",
+    "holds": true,
+    "note": "The integral-closure algebra is formed inside the finite-type scheme-test rings in the normalization construction; these are small in the scheme universe. Its relative-spectrum application still holds."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-sfb-adequate-moduli-space",
+   "def-sfb-stack-quasi-coherent-algebra",
+   "def-sfb-algebraic-moduli-stack",
+   "def-trf-algebraic-space"
+  ]
+ }
+}

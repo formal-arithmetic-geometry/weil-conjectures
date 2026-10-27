@@ -1,0 +1,88 @@
+# Stage-1 delivery: lem-sfb-relative-picard-cube-face-detection
+
+## Files written
+
+All node paths are under dag/nodes/sec-six-functors-basics/ in this sandbox.
+
+- lem-sfb-relative-picard-cube-face-detection.json: statement, unchanged; split into twelve proof steps, no Mathlib match.
+- lem-sfb-geometric-semiabelian-split-quotient.json: new statement-only prerequisite, unsplit, no Mathlib match.
+- lem-sfb-split-torus-torsor-line-pullback.json: new statement-only prerequisite, unsplit, no Mathlib match.
+- lem-sfb-normal-base-fibrewise-line-locality.json: new statement-only prerequisite, unsplit, no Mathlib match.
+- citations.json: one verbatim statement quotation for each step/node citation.
+- report.md: this report. Searches and their raw answers are retained in searches.jsonl and search-results/; search_plan.py and write_split.py record the sandbox preparation.
+
+## Attachments
+
+None. The item tag and geometric notions were searched in lean/WeilConjectures/, including cube-face detection, semiabelian groups, torus quotients and Picard triviality. No project declaration proves this assertion. Existing Mathlib ring Picard groups, abstract group quotients and ordinary smooth-morphism results do not state it or the three new prerequisites. Every new node has the actual leanfinder, loogle, grep and leansearch queries run through msearch.py; each has a second semantic phrasing. Results were read, including the ring Picard-group candidates. No leaf was declared merely from a name match. No Lean was written or compiler invoked.
+
+## Sources wanted
+
+WANTED: Moret-Bailly, Pinceaux de varietes abeliennes, Asterisque 129 (1985), I 2.6, for lem-sfb-relative-picard-cube-face-detection. The inherited item references this source but its PDF is absent. This delivery gives an agent proof of the geometric Picard assertion rather than citing the parent cubical-equivalence node circularly.
+
+WANTED: Lan, revised thesis, Proposition 3.2.3.1, for lem-sfb-relative-picard-cube-face-detection, to check the inherited bibliographic confirmation of the two base/group hypotheses. This absent document is not treated as a proof that was read.
+
+WANTED: Conrad, Semistable Reduction for Abelian Varieties (2011 notes), Theorem 3.1, printed pp.7--8, for lem-sfb-geometric-semiabelian-split-quotient. I read the primary online PDF at https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf, particularly the theorem asserting descent of the torus and abelian quotient over arbitrary imperfect fields. There is no local PDF and none was downloaded. Milne's local iAG2017 Theorem 12.18(d) and Definition 12.14 supply separable splitting of a torus.
+
+WANTED: EGA II, projective-bundle invertible-sheaf formula, for lem-sfb-split-torus-torsor-line-pullback. Stacks Tag 0BD9, divisors-lemma-extend-invertible-module, was read locally and supplies extension across the torus-bundle boundary, but does not itself give the projective-bundle Picard formula. The new node explicitly identifies this as an extracted consequence, not the verbatim content of 0BD9.
+
+WANTED: an explicit reference for the arbitrary-normal-base version of fibrewise line-bundle locality, for lem-sfb-normal-base-fibrewise-line-locality. Stacks Tag 0BD7, divisors-lemma-in-image-pullback, was read in full and assumes integral locally Noetherian base. The new prerequisite explicitly states its stronger non-Noetherian scope and is marked as agent-stated, not as a quotation of 0BD7.
+
+## Faults found and scope retained
+
+The item's imported statement was not changed. In particular the proper case still allows nonreduced and disconnected bases, and the semiabelian case still allows arbitrary normal non-Noetherian bases and imperfect residue fields. The item had no proof. The parent already delegates the geometric theorem of the cube to it, so applying the parent's cubical rigidification would be circular. I supplied the geometric argument instead.
+
+Two tempting shortcuts were rejected: triviality after algebraic closure does not itself give compatible descent data, and the Noetherian hypothesis of 0BD7 cannot silently be dropped. The first is resolved in steps 3, 4 and 10 by normalizing to fixed face sections and invoking the existing relative unit theorem. The second is isolated in its own general smooth-family locality prerequisite. No uniqueness clause is added to that prerequisite, since arbitrary smooth connected families can have nonconstant units.
+
+In the proper case the Picard locus is proved open scheme-theoretically through its representing property, not merely from set-theoretic containment. Its closedness and connected-fibre argument do not require the base to be reduced.
+
+## Work left to later items
+
+The item itself has a complete assembly proof relative to the cited nodes. The three new prerequisites are deliberately statement-only, awaiting their own stage-1 work; they are not presented as proved. For their later workers the intended arguments are as follows.
+
+For geometric semiabelian splitting, Conrad Theorem 3.1 descends the geometric torus and its abelian quotient to the original field, even when the field is imperfect. A torus splits over a finite separable extension by Milne 12.18(d); take its finite normal closure. The quotient sequence is faithfully flat, and subtraction in the group identifies the self-fibre product with the torus action. This is a field-group structure lemma independent of the cube assertion.
+
+For split-torus pullback, a split torus torsor is given by a tuple of line bundles. Compactify its product of punctured line bundles into the product over X of their projective-line bundles. This compactification is regular since X is smooth over a field. By 0BD9 a line on the open torsor extends. Repeated use of the projective-bundle Picard formula expresses its class as a pullback from X times powers of the relative O(1)'s. The tautological coordinates trivialize those powers on the open torus bundle. This proves surjectivity of pullback, not injectivity; nontrivial base line classes can die after pullback to their punctured total spaces.
+
+For normal-base locality, work at a point with the normal local domain R. Smoothness and geometrically connected fibres give geometrically integral fibres. Write R as a filtered union of normal finitely generated Z-subalgebras: normalize finite-type domain subalgebras in their fraction fields, whose normalizations are finite and lie in R by integral closedness. Descend the finitely presented smooth separated family and the invertible module. Geometric integrality of fibres of a flat finitely presented morphism descends at a sufficiently late model; the generic-fibre trivialization is finite data and also descends after enlarging the model (include its finitely many coefficients and denominators). Apply 0BD7 at that normal Noetherian integral model, and pull its base line back. Finite-presentation descent from Spec R to an open neighbourhood of the point gives the stated Zariski locality. These approximation and fibre-property descent inputs are substantive obligations for splitting this new node; this report does not treat them as elementary or claim that they occur in the statement of 0BD7. The fibrewise hypothesis in the new node ensures generic-fibre triviality after localizing at each point, and no section or group structure is used in this general prerequisite.
+
+## Not duplicates
+
+lem-sfb-split-torus-torsor-line-pullback vs lem-sfb-smooth-dvr-generic-line-extension: both cite 0BD9, but the existing statement extends a line from the generic fibre of a smooth DVR scheme to its total space; the new statement concerns surjectivity of Picard pullback for a split-torus torsor over a smooth field scheme. Extension alone does not give that Picard computation.
+
+lem-sfb-normal-base-fibrewise-line-locality vs lem-sfb-local-generic-unit-factorization: both cite 0BD7, but the existing statement factors units for a flat local homomorphism of Noetherian normal domains with integral fibres; the new statement concerns invertible sheaves and locality on arbitrary normal scheme bases, with no Noetherian assumption. It is not a specialization of the local unit-factorization statement.
+
+lem-sfb-split-torus-torsor-line-pullback vs lem-sfb-projective-picard-identity-representability: a whole-file keyword/tag search also encountered this existing representability statement; it is about the Picard identity component for a projective smooth field scheme, not line pullback along a torus torsor.
+
+lem-sfb-normal-base-fibrewise-line-locality vs lem-sfb-regular-group-rigidified-line-extension: the existing extension statement has a regular locally Noetherian base and group/rigidification data; it does not give the new arbitrary-normal-base smooth-family locality statement. Neither the regular vertical-divisor node nor proper relative Picard representability supplies this generality.
+
+lem-sfb-geometric-semiabelian-split-quotient vs lem-sfb-semiabelian-cubical-rigidification: the existing node is the parent, about cubical structures on line bundles; the new node is a field-group structure theorem independent of line bundles. It is neither a clause nor a restatement of the parent or the current item.
+
+The whole DAG and whole blueprint were searched by cube, semiabelian, torus, torus torsor, Picard, normal base, triviality, geometric integrality, and the tags 0BD7/0BD9. The proper field cube theorem exists and is cited; it was not recreated. The current latest blueprint's direct-image proof (3), its section/unit/chapter records, and the item's inherited ancestry were read. The nearest imported ancestor returned by blueprint_refs.py is null, so its existing null root and full via chain are preserved rather than inventing an imported node. The new nodes serve the inherited alteration/moduli/Picard prerequisite of direct-image constructibility, not an alternative unit route.
+
+## Review by Q23
+
+I checked delivery-errors B--E against the node files and sources. Each new statement introduces its objects, states the base assumptions explicitly and has empty proof/proof_deps, rather than concealing a proof inside its statement. Each is a reusable lower-level geometric assertion: none assumes the triple group product with three trivial faces. Face cancellation, choice of sections and gluing remain steps of the item, not new nodes. All searches were run, their returned types read and their exact query strings retained. The only shared-source-tag pairs found are distinguished above. Blueprint same_as is empty because no imported statement gives the new assertions.
+
+Step 1 uses the actual base-change and composition clauses of lem-sfb-stack-chartwise-smooth-etale-calculus, lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition and lem-weil-pbc-proper-composition. I found and added the initially missing lem-weil-pbc-flat-lfp-open, whose statement really does give openness after base change. A projection is surjective by its section; connected fibres then make images of a clopen partition disjoint and open. The normal-base generic-geometry core is applied only over a field, which is integral and normal, and over its extensions, so all its assumptions hold. This gives geometric integrality without imposing normality on the original proper-case base.
+
+Step 2 uses precisely the final unit-factorization conclusion of lem-sfb-relative-group-unit-axis-factorization. That statement is written for repeated powers of ONE group, whereas our factors differ. The displayed r and its section a reduce to the repeated power of H=G1 x G2 x G3, whose hypotheses were checked in step 1. Properness handles branch (a), reducedness from normality branch (b). Quotients of generating sections are units by the invertible-module definition. Thus neither arbitrary-family unit constancy nor the disputed converse of a cubical theorem is being assumed.
+
+Steps 3 and 4 cite only the line-module and tensor-pullback definitions. I checked the ratios at the identity: both adjustment functions have value d_i, so division by d_i produces exactly the chosen axis sections. In the inclusion-exclusion formula restriction to face j pairs every term indexed by I not containing j with I union {j}, leaving f_j. These are explicit rank-one-module calculations, not an unproved face-extension theorem. Their compatibility with every base change is directly visible from their pullback formulas.
+
+Step 5 cites four separate statements, read individually. lem-sc-proper-flat-global-sections supplies the universal structure-sheaf pushforward for the proper flat finitely presented geometrically reduced connected families. The diagonal lemma gives the representing immersion for an arbitrary finite locally free module; its descended module has rank one because there is a section. The closed-locus lemma additionally needs geometrically integral fibres, established in step 1. The product-open lemma additionally needs BOTH trivial identity slices and the trivial fibre at c; all three are supplied here. These are exactly Stacks 0E0L, 0BDP, 0BF0 and 0BF3 (their local statements/proofs were read). Factoring U through the representing immersion is what proves openness with its scheme structure.
+
+Step 6 uses that same representing property, not merely the locus's set of points. The third face factors e3 through it. Every connected fibre meets the clopen locus at the identity, so it is the entire fibre. Since this is now an open subscheme with all points, it equals G3 scheme-theoretically. Pullback along (e1,e2,id) kills the descended line because that map lies in a trivial face. No nilpotent-free base assumption was introduced in branch (a).
+
+Step 7 uses the full new field splitting assertion and the full new torus-torsor Picard surjectivity assertion. Their source scope was checked as described above: geometric semiabelian over arbitrary fields, then split tori over a finite Galois extension, then a smooth separated finite-type quotient. Product torsor structure follows by multiplying the given action/fibre-product isomorphisms and using the cited base-change/composition calculus. This does not assert that a general semiabelian group is proper or that Picard pullback is injective.
+
+Step 8 is the explicit eight-factor alternating tensor calculation from invertible modules and functorial tensor pullback. I checked the cancellation on each face and the identity q z_I = z_I q; this uses that the quotient maps preserve identities. Every nonempty z_I on the original product factors through a face with trivial M. It follows that pulling back C(N) recovers M_K; it is not necessary to descend the original face trivializations to N.
+
+Step 9 uses lem-sc-general-theorem-of-cube exactly as stated: the first two abelian varieties are proper and geometrically integral, the third connected, and the third restriction occurs at its K-rational identity. The first two full slice restrictions are supplied by step 8. I read the local Stacks cube proof, Tag 0BF4, as well as the cited node. The argument does not replace this proper theorem by an unwritten nonproper cube theorem.
+
+Step 10 uses part (1) of lem-exc-finite-galois-tensor-decomposition, which explicitly identifies K tensor_k K with the product indexed by Galois automorphisms. The normalized section is invariant by step 2, so its overlap comparisons agree, not just its isomorphism class. lem-pc-fpqc-descent explicitly states equivalence/full faithfulness and descent of compatible trivializations; these supply descent of the section AND inverse. I checked finiteness, separability and normality of K/k so that there is no inseparable overlap with nilpotents hidden in this step.
+
+Step 11 uses the new locality statement with the exact hypotheses it states: S normal, P smooth separated finitely presented, fibres nonempty geometrically connected, and M trivial over each original residue field by steps 7--10. The new node does not assume Noetherianity or a group law. The identity section then trivializes the base line by the tensor-pullback definition. I have explicitly separated this general locality obligation from 0BD7's narrower Noetherian statement.
+
+Step 12 glues equal generating sections, not arbitrary local trivializations. Their quotient is one by step 2 because their face values were normalized in step 4. The sheaf axiom glues the sections and local inverses. All these are consequences of the invertible-module definition. The empty base, rank-zero tori, trivial group factors, split torus over a field and proper abelian fibres were tested: the formulas still hold, and a trivial factor already makes one face the entire product. For the new torus lemma, rank zero reduces to identity pullback and a punctured line bundle shows why injectivity must not be asserted. For the field lemma, imperfect fields specifically require torus descent before separable splitting; ordinary perfect-field Chevalley alone would not suffice. For locality, X=S and a pulled-back base line give the expected local conclusion; a nonreduced base is excluded in that lemma and cannot be smuggled into branch (b).
+
+Every cited node's statement was opened and the part used appears verbatim in citations.json. Every proof step is under 2000 characters. Non-elementary steps cite nodes; the elementary steps carry the actual coordinate/tensor/gluing arguments. Off-unit citations are generic tool uses, each recorded in split_report.tool_uses; none replaces a step of the fixed unit route. There is no prohibited SGA citation. No repository, launcher, coordination file or Lean file was written.

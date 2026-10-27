@@ -1,0 +1,127 @@
+{
+ "id": "def-fd-raw-localization-scalar-data",
+ "kind": "definition",
+ "title": "Presentations and components for raw scalar localization",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a noetherian finite-dimensional scheme $T$ on which $\\ell$ is invertible. Use the integral and raw rational categories and scalar extensions of [def-weil-rationalization-karoubi, def-weil-pbc-rational-category, prop-weil-pbc-scalar-extension, def-weil-algebraically-closed-coefficients], with the integral and rational stage equivalences of [def-fd-coefficient-comparison-datum]. Write $U,C$ for completed and ordinary integral transitions, $S,P$ for the specified raw rational transitions, and $I,J$ for the supplied integral and rational identifications. A RationalFamily is the supplied family $J$ presented on the named framework stages, with HEq fixing both its functors and their shift isomorphisms. RawComparison is a family $j_{L/E}:S_{L/E}J_L\\cong J_EP_{L/E}$. For a chain $E\\subseteq L\\subseteq M\\subseteq N$, fourComparison is the three consecutive inverse comparisons, namely $j_{N/M}$ followed by $P_{N/M}(j_{M/L})$ and $P_{N/M}P_{M/L}(j_{L/E})$. leftContraction and rightContraction are the two composites of the framework associator along this chain. Integral associators and units include the actual coefficient inclusion equality transports. These are the same definitions formerly in the scalar coherence module, with all names, types, shifts and component formulas unchanged.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; agent-written auxiliary extraction from lem-fd-completion-inverse-scalar-coherence, Old proof steps 7–8: semilinear raw localization and the two four-field contractions"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-per-common-stage-shift-structures",
+  "def-fd-integral-scalar-shift-structures"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Existing raw-localization scalar coherence argument, extracted steps 1–3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of semilinear natural isomorphisms preserves exactness shifts and scalar extension cocycles",
+   "results": "CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Free.ext; LinearMap.extendScalarsOfIsLocalizationEquiv. These do not identify the specified raw scalar functors and integral components.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison satisfying a three field scalar extension cocycle gives both four field associator contractions by naturality",
+   "results": "ModuleCat.extendScalars_assoc_assoc and monoidal associator naturality lemmas. They apply to module categories or monoidal categories, not the two recorded raw constructible scalar systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionNatIso|associator_cocycle; rg RawComparison|rawLocalization in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib/Algebra/Ring/Associator.lean associator_cocycle concerns ring associators; project SemilinearScalarLocalization gives generic extension, and GeneralAlgebraicallyClosedCoefficients.associator_cocycle gives the needed framework pentagon. No existing theorem supplies the specialized descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdRawLocalizationScalarCoherence",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient comparison argument attached to the trace function; raw localization steps 1–3",
+   "via": [
+    "lem-fd-raw-localization-scalar-coherence",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdRawLocalizationScalarData",
+  "file": "lean/Sheaf/Paper/FdRawLocalizationScalarData.lean",
+  "declaration": "WeilConjectures.FdRawLocalization.U",
+  "declarations": [
+   "WeilConjectures.FdRawLocalization.U",
+   "WeilConjectures.FdRawLocalization.uCommShift",
+   "WeilConjectures.FdRawLocalization.C",
+   "WeilConjectures.FdRawLocalization.integralAssoc",
+   "WeilConjectures.FdRawLocalization.integralUnit",
+   "WeilConjectures.FdRawLocalization.scalar",
+   "WeilConjectures.FdRawLocalization.scalarCommShift",
+   "WeilConjectures.FdRawLocalization.assoc",
+   "WeilConjectures.FdRawLocalization.unit",
+   "WeilConjectures.FdRawLocalization.P",
+   "WeilConjectures.FdRawLocalization.I",
+   "WeilConjectures.FdRawLocalization.suppliedJ",
+   "WeilConjectures.FdRawLocalization.RationalFamily",
+   "WeilConjectures.FdRawLocalization.J",
+   "WeilConjectures.FdRawLocalization.RawComparison",
+   "WeilConjectures.FdRawLocalization.fourComparison",
+   "WeilConjectures.FdRawLocalization.leftContraction",
+   "WeilConjectures.FdRawLocalization.rightContraction"
+  ],
+  "statement": "abbrev U {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e86cc",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261025T180803-L-4034382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e86cc",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261025T180803-L-4034382",
+  "kind": "interface",
+  "note": "independent cc review: item statement+docstring byte-identical to clone; 18 moved defs verbatim vs clone; descent hole = item hypotheses + first 6 conclusion clauses verbatim (true iff reviewed item); scratch compile Data+Descent+item exit 0, axioms only sorryAx from descent; no importers; unit realized empty"
+ }
+}

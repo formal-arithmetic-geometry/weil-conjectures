@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-finite-presented-groupoid-rank-filtration",
+ "kind": "statement",
+ "title": "Finite-presentation refinement of invariant rank stratification",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme], with $s,t:R\\to U$ finite [def-weil-finite-integral-morphism] and of finite presentation [def-weil-pbc-scheme-conventions]. There exist closed subschemes [def-weil-closed-immersion] $U=Z_0\\supseteq Z_1\\supseteq\\cdots$ such that $\\bigcap_{n\\geq0}|Z_n|=\\varnothing$, every $Z_n\\hookrightarrow U$ is of finite presentation, and $s^{-1}(Z_n)=t^{-1}(Z_n)$ as closed subschemes of $R$. For each $r\\geq1$ the source projection $R\\times_{s,U}D_r\\to D_r$, where $D_r=Z_{r-1}\\setminus Z_r$ with its open subscheme structure [def-weil-open-immersion, def-pc-fibre-product], is finite locally free of degree $r$ [def-pc-finite-locally-free]. No Noetherian or quasi-compactness hypothesis on $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABB (lemma-finite-flat-over-almost-dense-subscheme-addendum), proof, first paragraph: the invariant filtration of Tag 0AB9 has finitely presented closed immersions."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=s_*\\mathcal O_R$. It is finite-type quasi-coherent and $s$ is affine by [def-weil-finite-integral-morphism]. Form $I_n=\\operatorname{Fit}_n(E)$ and its closed subscheme $Z_n$ using [lem-trf-fitting-ideal-sheaf-pullback]. Locally, for a surjection $A^m\\twoheadrightarrow E(V)$ on $V=\\operatorname{Spec}A$, $I_n(V)$ consists of the $(m-n)$-minors of kernel rows, with unit ideal for $n\\geq m$. Laplace expansion expresses each size $k$ minor as a sum of entries times size $k-1$ minors, so $I_n\\subseteq I_{n+1}$ and $Z_{n+1}\\subseteq Z_n$ as closed subschemes. Every point has an affine neighbourhood with a finite such generating family by [lem-weil-pbc-quasi-coherent-finite-type-affine](a). On it $I_m=\\mathcal O$, hence $Z_m$ is empty there. Thus $\\bigcap_{n\\geq0}|Z_n|=\\varnothing$, without a global generator bound.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, first paragraph; divisors.tex 05P8(1), with the affine minor construction 0C3C."
+   }
+  },
+  {
+   "text": "The identity section satisfies $se=\\mathrm{id}_U$ by [def-a1-groupoid-scheme], so on every affine $V=\\operatorname{Spec}A\\subset U$ the structure map $A\\to B=E(V)$ has a retraction $B\\to A$ and is injective. Choose $m$ generators $b_j$ of $B$. Any $m$ kernel rows give a square matrix $N$ with $N(b_j)_j=0$. Multiplying by its adjugate shows $\\det(N)b_j=0$ for every $j$, hence $\\det(N)$ annihilates $1_B$, since the $b_j$ generate $B$. Injectivity of $A\\to B$ gives $\\det(N)=0$. All generating minors of $I_0$ therefore vanish. The affine description in [lem-trf-fitting-ideal-sheaf-pullback] gives $I_0=0$ and $Z_0=U$. This also handles an empty affine open (its ring is zero).",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-fitting-ideal-sheaf-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, omitted detail establishing Z_0=U; replace the printed O_S summand by O_U."
+   }
+  },
+  {
+   "text": "Let $P=R\\times_{s,U,t}R$ and $Q=R\\times_{s,U,s}R$, both over $R$ by the second projections $p_2,q_2$. The first clause of [lem-a1-groupoid-source-pullback-translation] gives an isomorphism $F:P\\xrightarrow{\\sim}Q$ over $R$, $F(a,b)=(c(a,b),b)$, with inverse $(d,b)\\mapsto(c(d,i(b)),b)$. We use this clause without any local-freeness assumption. Apply [lem-weil-pbc-affine-pushforward-base-change](2) to $s$ along $t$ and along $s$. It identifies $t^*E$ with $p_{2,*}\\mathcal O_P$ and $s^*E$ with $q_{2,*}\\mathcal O_Q$. Pullback of functions along the displayed isomorphism over $R$ identifies these two direct-image algebras, hence $t^*E\\cong s^*E$ as $\\mathcal O_R$-modules.",
+   "uses": [
+    "lem-a1-groupoid-source-pullback-translation",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, comparison through the two lower Cartesian squares of more-groupoids.tex equation-diagram; groupoids.tex 02YE and coherent.tex 02KG."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fitting-ideal-sheaf-pullback] to $s,t$ and $E$: the closed subschemes $s^{-1}(Z_n)$ and $t^{-1}(Z_n)$ are respectively the closed Fitting subschemes for $s^*E$ and $t^*E$. Under the isomorphism of Step 3, a generating surjection to one module becomes a generating surjection to the other with exactly the same kernel, so their kernel-minor ideals agree on every affine open. Their defining ideals, and therefore their closed subschemes of $R$, are equal. This is scheme-theoretic invariance, even for nonreduced $U$.",
+   "uses": [
+    "lem-trf-fitting-ideal-sheaf-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, invariance paragraph; divisors.tex 0C3D, using invariance of kernel presentations under a module isomorphism."
+   }
+  },
+  {
+   "text": "Fix $r\\geq1$ and put $W_r=U\\setminus|Z_r|$. By [lem-trf-fitting-ideal-generate-locally](1), $E|_{W_r}$ is locally generated by at most $r$ sections. The subscheme $D_r=Z_{r-1}\\setminus|Z_r|$ is the closed subscheme of $W_r$ defined by $I_{r-1}|_{W_r}$: on affine charts both descriptions are the quotient by this ideal followed by restriction to the open complement. By [lem-trf-fitting-ideal-sheaf-pullback] for the open inclusion $W_r\\to U$, this ideal is $\\operatorname{Fit}_{r-1}(E|_{W_r})$. Its image after pullback to $D_r$ is zero, since its elements map to zero in the quotient rings. Apply [lem-sfb-bounded-generators-fitting-pullback-criterion] to $E|_{W_r}$ and $D_r\\to W_r$. Thus $E|_{D_r}$, meaning ordinary pullback, is locally free of constant rank $r$.",
+   "uses": [
+    "lem-trf-fitting-ideal-generate-locally",
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "lem-sfb-bounded-generators-fitting-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, last paragraph; divisors.tex 05P8(3), via 0C3G / more-algebra.tex 07ZD."
+   }
+  },
+  {
+   "text": "Put $f_r:R\\times_{s,U}D_r\\to D_r$. By [lem-weil-pbc-affine-morphism-permanence](1), $f_r$ is affine. By [lem-weil-pbc-affine-pushforward-base-change](2), $f_{r,*}\\mathcal O\\cong E|_{D_r}$. Choose an affine open cover $(V_a=\\operatorname{Spec}A_a)$ of $D_r$ trivializing this rank-$r$ module (Step 5). Affineness gives $f_r^{-1}(V_a)=\\operatorname{Spec}B_a$; taking sections of the trivialization gives an $A_a$-module basis of $B_a$ with $r$ elements. By [lem-weil-pbc-finite-free-algebra-spectrum], $f_r$ over $V_a$ is finite, flat and locally of finite presentation. At every $v\\in V_a$, [lem-pc-finite-affine-fibre-sections] identifies its fibre algebra with $B_a\\otimes_{A_a}\\kappa(v)\\cong\\kappa(v)^r$, as $\\kappa(v)$-vector spaces, so its degree is $r$. The open inclusions $V_a\\to D_r$ are etale by [lem-weil-pbc-open-immersion-etale] and cover $D_r$. Apply [lem-weil-pbc-finite-locally-free-degree-etale-descent] to conclude that $f_r$ is finite locally free of degree $r$. This includes empty $D_r$ with its empty cover. Steps 1--5 supply the descending filtration, empty intersection and invariance assertions; finite presentation of its closed immersions is established in Steps 7--8 below.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-pc-finite-affine-fibre-sections",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, final sentence; morphisms.tex 02KA and 02KB, and coherent.tex 02KG."
+   }
+  },
+  {
+   "text": "For each affine open $V=\\operatorname{Spec}A\\subset U$, finiteness of $s$ identifies $s^{-1}(V)=\\operatorname{Spec}B$ with $B=E(V)$ finite as an $A$-module, by [def-weil-finite-integral-morphism]. Since $s$ is of finite presentation, it is locally of finite presentation. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to these two affine opens: $B$ is finitely presented as an $A$-algebra. By [lem-weil-pbc-finite-algebra-presentation-module-presentation], $B$ is finitely presented as an $A$-module. In the sense of [def-sc-finitely-presented-module], choose an exact sequence $A^p\\to A^m\\to B\\to0$ with $p,m$ finite. Its relation vectors $v_1,\\ldots,v_p\\in A^m$ generate the kernel $K$ of $A^m\\to B$. These choices are made separately on each affine open; no global finite presentation or bound on $p,m$ is asserted.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0564 (lemma-finite-finitely-presented-extension), applied to M=S; Morphisms Tag 01TQ (lemma-locally-finite-presentation-characterize). This checks the finite-presentation input implicit in More on Groupoids Tag 0ABB."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and an affine $V$ as in Step 7. By [lem-trf-fitting-ideal-sheaf-pullback], $I_n|_V$ is associated to the ideal generated by all $(m-n)$-minors of rows in $K$. For $n<m$, write $k=m-n$ and let $P$ be the $p\\times m$ matrix of rows $v_j$. Every minor of $k$ arbitrary rows $w_a=\\sum_j c_{aj}v_j$ expands, by determinant multilinearity in its $k$ rows, as a sum over $(j_1,\\ldots,j_k)$ of $\\prod_a c_{a j_a}$ times the same-column determinant of $(v_{j_1},\\ldots,v_{j_k})$. Repeated indices give zero; distinct indices give, up to sign, $k$-minors of $P$. Conversely those minors are among the defining minors because each $v_j\\in K$. Thus the ideal is generated by the finitely many $k$-minors of $P$ (zero if $k>p$). For $n\\geq m$ it is the unit ideal, generated by $1$. Therefore $I_n$ is locally generated by finitely many sections on $U$. Its quasi-coherence and its role as the defining ideal of $Z_n$ come from [lem-trf-fitting-ideal-sheaf-pullback]. Apply [lem-trf-closed-immersion-finite-presentation-ideal]: $Z_n\\hookrightarrow U$ is of finite presentation for every $n$. This is a local assertion about the ideal, and that cited criterion already includes quasi-compactness and quasi-separatedness of the closed immersion; it requires neither property of $U$. Together with Steps 1--6 this proves every clause.",
+   "uses": [
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "lem-trf-closed-immersion-finite-presentation-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0C3E (lemma-fitting-ideal-of-finitely-presented) and 05P8 (lemma-locally-free-rank-r-pullback), final assertion, using More on Algebra Tag 07ZA(4) (lemma-fitting-ideal-basics), whose finite-matrix argument is written here, and Morphisms Tag 01TV (lemma-closed-immersion-finite-presentation); this is the first paragraph of More on Groupoids Tag 0ABB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-trf-fitting-ideal-sheaf-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-a1-groupoid-scheme",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-sfb-bounded-generators-fitting-pullback-criterion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "def-sc-finitely-presented-module",
+  "lem-trf-closed-immersion-finite-presentation-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tags 0AB9 (lemma-finite-stratify) and 0ABB (lemma-finite-flat-over-almost-dense-subscheme-addendum), first paragraph; finite presentation expanded through Algebra 0564, Divisors 0C3E and Morphisms 01TV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]itting|[Gg]roupoid.*[Ss]cheme",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"60\", \"text\": \"  have h : Codisjoint (rootSpace H 0) (LieModule.posFittingComp R H L) :=\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"61\", \"text\": \"    (LieModule.isCompl_genWeightSpace_zero_posFittingComp R H L).codisjoint\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"62\", \"text\": \"  replace h : Codisjoint (H : Submodule R L) (LieModule.posFittingComp R H L : Submodule R L) := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"66\", \"text\": \"  suffices this : ∀ m₀ ∈ H, ∀ m₁ ∈ LieModule.posFittingComp R H L, killingForm R L m₀ m₁ = 0 by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"69\", \"text\": \"  exact killingForm_eq_zero_of_mem_zeroRoot_mem_posFitting R L H (le_zeroRootSubalgebra R L H h₀) h₁\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"33\", \"text\": \"  * `LieModule.posFittingCompOf`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"34\", \"text\": \"  * `LieModule.posFittingComp`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"36\", \"text\": \"  * `LieModule.iInf_lowerCentralSeries_eq_posFittingComp`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"37\", \"text\": \"  * `LieModule.isCompl_genWeightSpace_zero_posFittingComp`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"377\", \"text\": \"/-- See also `LieModule.iInf_lowerCentralSeries_eq_posFittingComp`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"195\", \"text\": \"Fitting decomposition of `M` are orthogonal w.r.t. `B`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"196\", \"text\": \"lemma eq_zero_of_mem_genWeightSpace_mem_posFitting [LieRing.IsNilpotent L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"198\", \"text\": \"    {m₀ m₁ : M} (hm₀ : m₀ ∈ genWeightSpace M (0 : L → R)) (hm₁ : m₁ ∈ posFittingComp R L M) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"210\", \"text\": \"  suffices ∀ (x : L) m, m ∈ posFittingCompOf R M x → B m₀ m = 0 by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"216\", \"text\": \"  obtain ⟨m, rfl⟩ := (mem_posFittingCompOf R x m₁).mp hm₁ k\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"314\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"323\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Images.lean\", \"line\": \"692\", \"text\": \"/-- An image map is a morphism `image f → image g` fitting into a commutative square and satisfying\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"117\", \"text\": \"/-- To give a morphism in the over category, it suffices to give an arrow fitting in a commutative\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"726\", \"text\": \"/-- To give a morphism in the under category, it suffices to give a morphism fitting in a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented groupoid scheme admits an invariant closed rank filtration by closed immersions of finite presentation whose source on each successive stratum is finite locally free of that rank",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fitting ideals of a finitely presented finite scheme groupoid define invariant finitely presented closed rank strata",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"FGAlgCatSkeleton.I\", \"module\": \"Mathlib.Algebra.Category.CommAlgCat.FiniteType\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : FGAlgCatSkeleton R) → Ideal (MvPolynomial (Fin self.n) R)\", \"doc\": \"For a commutative ring $ R $ and an object in the skeleton category of finitely generated commutative $ R $-algebras with invariant $ n $, this is an ideal in the multivariate polynomial ring $ R[x_1,\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsLocallyConstant (fun x : freeLocus R M ↦ rankAtStalk M x.1)\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"Module.Grassmannian.mk\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {M : Type v} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {k : ℕ} →\\n            (toSubmodule : Submodule R M) →\\n              Module.Finite R (M ⧸ toSubmodule) →\\n                Module.Projective R (M ⧸ toSubmodule) →\\n      \", \"doc\": \"Given a submodule $ P $ of the $ R $-module $ M $, this constructor forms an element of the Grassmannian $ \\text{Gr}(k,M) $ by verifying: (1) the quotient module $ M/P $ is finitely generated, (2) $ M/\"}\n  {\"name\": \"Ideal.finrank_eq_finrank\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"[Finite ι] (b : Basis ι R S) (I : Ideal S) (hI : I ≠ ⊥) : Module.finrank R (restrictScalars R I) = Module.finrank R S\", \"doc\": \"Let $ S $ be an $ R $-module with a finite basis indexed by $ \\\\iota $, and let $ I $ be a nonzero ideal of $ S $. Then the finite rank of $ I $ as an $ R $-module (via restriction of scalars from $ S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(Z : Closeds X) : IdealSheafData X\", \"doc\": \"Given a scheme $X$ and a closed subset $Z \\\\subseteq X$, this defines the corresponding vanishing ideal sheaf, denoted $\\\\mathcal{I}_Z$. This is a sheaf of ideals of the structure sheaf $\\\\mathcal{O}_X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]itting|[Gg]roupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented finite source and target of an internal groupoid give finitely presented invariant closed strata with finite locally free maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|finite.*groupoid|groupoid.*finite",
+   "results": "{\"t\": \"2026-10-23T13:35:44Z\", \"tool\": \"grep\", \"query\": \"fittingIdeal|finite.*groupoid|groupoid.*finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|groupoid.*(stratif|rank)",
+   "results": "{\"t\": \"2026-10-23T13:35:44Z\", \"tool\": \"grep\", \"query\": \"Fitting|groupoid.*(stratif|rank)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\"], \"digest\": \"cd40a0527d5bbbfc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant finite presentation rank stratification of a finite groupoid scheme",
+   "results": "{\"t\": \"2026-10-23T13:35:45Z\", \"tool\": \"leansearch\", \"query\": \"Invariant finite presentation rank stratification of a finite groupoid scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.rank\", \"SheafOfModules.Presentation.IsFinite.mk\", \"Group.rank_spec\", \"Matroid.InvariantCardinalRank\", \"Module.isLocallyConstant_rankAtStalk\", \"Group.rank_le\", \"AddGroup.rank\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"76171178b3d07a39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T13:35:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented groupoid scheme has an invariant closed Fitting rank filtration by finitely presented closed immersions",
+   "results": "{\"t\": \"2026-10-23T13:35:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite finitely presented groupoid scheme has an invariant closed Fitting rank filtration by finitely presented closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Ideal.Filtration.submodule_fg_iff_stable\", \"Ideal.Filtration.Stable.of_le\", \"Ideal.Filtration.Stable.bounded_difference\"], \"digest\": \"236b92676938187e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fitting ideals of finitely presented source algebras give scheme theoretic invariant finite locally free strata of a groupoid",
+   "results": "{\"t\": \"2026-10-23T13:35:47Z\", \"tool\": \"leanfinder\", \"query\": \"Fitting ideals of finitely presented source algebras give scheme theoretic invariant finite locally free strata of a groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Module.isOpen_freeLocus\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"Algebra.isOpen_unramifiedLocus\"], \"digest\": \"c3040b57a052bc63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Lie-theoretic Fitting decompositions, ideal-power filtrations, finite morphisms, group ranks or openness of flat/free loci; none supplies invariant Fitting rank strata of scheme groupoids or this finite-presentation refinement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+  "date": "2026-10-23",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-almost-invariant-function. Supporting Tag 0ABF, first paragraph: apply Tag 0ABC before choosing the boundary ideal J; final paragraph: norm and clearing denominators. The affine invariant pair V′ ⊂ V with finite locally free restricted arrows. Supporting Tag 0ABC via Tag 0ABB: finite presentation of the invariant rank filtration used before choosing the open thickening.",
+   "via": [
+    "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+    "lem-sfb-finite-groupoid-almost-invariant-function",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-presented-groupoid-rank-filtration",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0ABB against 0AB9 and 05P8. Constructed the Fitting filtration explicitly rather than taking an unspecified existential filtration. Reused existing translation, Fitting, affine and finite-free nodes. Added the finite-algebra-to-finite-module-presentation argument and the explicit finite-minor computation, followed by the existing closed-immersion finite-presentation criterion. No statement change, no new nodes; all searches are logged. Empty schemes, nonreduced bases, nonflat sources, and unbounded ranks checked.",
+  "blueprint": "The recorded ancestry supports det-thm-sf-ctf-stability-direct-images proof (3), via the invariant affine groupoid prerequisite (Stacks 0ABC) and 0ABB. The latest blueprint retains the proper/open direct-image reduction. This item realizes precisely the 0ABB first-paragraph finite-presentation prerequisite already recorded in from.place. Whole-blueprint searches found no matching node. Preserve from.node=null exactly as blueprint_refs.py ancestor reports for this existing chain; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fitting-ideal-sheaf-pullback",
+    "why": "Generic Fitting ideal construction, affine realization and arbitrary pullback, needed for the 0AB9 proof; the unit does not supply a different Fitting construction."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic finite-generation-on-affines criterion used to obtain a local, not global, generator bound."
+   },
+   {
+    "node": "lem-a1-groupoid-source-pullback-translation",
+    "why": "Use only its hypothesis-free source-pullback isomorphism, not its finite-locally-free rank consequence; the unit has no groupoid Cartesian-square lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Use the arbitrary affine structure-algebra base-change isomorphism, not a cohomology theorem; the unit has no such algebra comparison."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-generate-locally",
+    "why": "Generic bounded-generator locus for a finite-type quasi-coherent module, as in Divisors 05P8(2); no corresponding unit lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic stability of affineness under arbitrary base change, used only to check the hypothesis of the affine structure-algebra criterion; no alternative construction of the unit is involved."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic finite-free algebra theorem, applied to the structure algebra on each trivializing affine open; it supplies finite, flat and locally finitely presented without Noetherianity."
+   },
+   {
+    "node": "lem-pc-finite-affine-fibre-sections",
+    "why": "Generic fibre tensor comparison identifies the degree on each affine trivializing open with the r-element basis rank."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic fact that each open trivializing chart is etale, checking the covering hypothesis of degree descent."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "why": "Generic descent of the fixed-degree morphism property from the trivializing open cover, used as an etale cover; no unit route is replaced."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Generic closed-immersion criterion translating the finite relation-matrix computation into finite presentation, with no Noetherian or quasi-compact base hypothesis; no lemma of the unit replaces this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fitting-ideal-sheaf-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "lem-trf-closed-immersion-finite-presentation-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-01ee48ee0",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-01ee48ee0 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full. It is a 0-new-node split with the statement unchanged, sourced from Stacks 0ABB first paragraph and 0AB9 (more-groupoids.tex 2421-2452 and 2546ff), read at the cited places. Indexing Z_n=V(Fit_n) and D_r=Z_{r-1}\\Z_r matches 05P8/0AB9. Step checks: S1 Laplace monotonicity and local generator bound (pbc-qc-finite-type-affine (a)) give the empty intersection. S2 adj(N)N=det·I with split-injective A→B gives Fit_0=0 (fills 0AB9's 'details omitted'); m=0 edge case checked. S3 groupoid translation F(a,b)=(c(a,b),b) (hypothesis-free clause) and affine pushforward base change (2) give t*E≅s*E. S4 Fitting pullback clause gives scheme-theoretic invariance. S5 generate-locally(1) on W_r plus the bounded-generators criterion with r≥1 give E|D_r locally free of rank r. S6 finite-free spectrum, fibre sections and open-étale degree descent give degree r (roundabout but valid). S7 01TQ and 0564 Mathlib leaf give an fp module A^p→A^m→B→0. S8 multilinear expansion makes the k-minors of the finite relation matrix generate I_n, and 01TV gives fp of Z_n. Tested on: identity groupoid, constant group of order d, the non-flat A⊕A/(x) example (Fit_1=(x)), empty and zero rings, and non-qc U with unbounded ranks. The duplicate candidate lem-sfb-finite-groupoid-invariant-rank-filtration (0AB9) is existential and cannot give the fp clause, so re-proving it for the explicit Fitting filtration is justified; advisory only. Batch-5 flags: the closures of trf fitting-ideal-sheaf-pullback, fitting-ideal-generate-locally, closed-immersion-finite-presentation-ideal and sfb bounded-generators-fitting-pullback-criterion contain only minor-ideal and Fitting linear algebra plus the 01TV criterion (unit sk-i-curve-zero). These are generic foundations, not steps of the trace formula or Poincaré duality, so all four are accepted. Tool_uses are generic tools and accepted. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentedGroupoidRankFiltration",
+  "declaration": "AlgebraicGeometry.groupoid_exists_finitePresentation_rank_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentedGroupoidRankFiltration.lean",
+  "statement": "theorem groupoid_exists_finitePresentation_rank_filtration {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] : ∃ J : ℕ → U.IdealSheafData, J 0 = ⊥ ∧ Monotone J ∧ (⋂ n : ℕ, ((J n).support : Set U)) = ∅ ∧ (∀ n : ℕ, LocallyOfFinitePresentation (J n).subschemeι ∧ QuasiCompact (J n).subschemeι ∧ QuasiSeparated (J n).subschemeι) ∧ (∀ n : ℕ, (J n).comap s = (J n).comap t) ∧ ∀ n : ℕ, (pullback.snd s ((Scheme.Opens.ι ((J n).subschemeι ⁻¹ᵁ (J (n + 1)).support.compl)) ≫ (J n).subschemeι)).IsFiniteLocallyFreeOfDegree (n + 1)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Closed subschemes are represented by Mathlib IdealSheafData, with Z_n = (J n).subscheme. Monotone ideals give descending closed subschemes; equality of comap ideals is scheme-theoretic invariance. Finite morphisms are already quasi-compact and quasi-separated, so their finite-presentation hypothesis is rendered by LocallyOfFinitePresentation; all three finite-presentation conditions on the closed immersions are stated explicitly. Degree r >= 1 is indexed by r = n + 1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0e373bf5",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node unchanged except the new lean record, and no prior live Lean record. Statement verbatim in file; single sorry theorem, no definitions. Clause check against node and Stacks 0AB9/0ABB (more-groupoids.tex 2421-2560): IsGroupoidScheme with c : pullback s t; IsFinite s,t plus LFP s,t, where qc/qs follow from finiteness, so no stronger hypothesis; closed subschemes as IdealSheafData; Z0=U as J 0 = bot; descending as Monotone J; empty intersection of supports; LFP, QC and QS of each subschemeι; scheme-theoretic invariance as IdealSheafData.comap s = comap t; for r=n+1, pullback.snd s over the open D_r inside Z_{r-1} is IsFiniteLocallyFreeOfDegree (FiberDegree class: finite, flat, LFP, fibre degree). Single universe Scheme.{u}; nothing assumed on U. Edge cases checked: empty scheme, identity groupoid, constant group, nonreduced U, non-qc U with unbounded ranks. No duplicate: AffineGroupoidInvariantRankStrata needs affine and flat input; sibling 0AB9 node has no Lean record and no finite-presentation clause. All imports exist in side-live; docstrings carry source place and blueprint id; report sections present. Not recompiled per the 2026-10-21 rule; no file changed. Advisory only: some plain proof-plan imports may be unneeded."
+ }
+}

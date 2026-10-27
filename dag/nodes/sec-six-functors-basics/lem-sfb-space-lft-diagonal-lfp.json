@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-space-lft-diagonal-lfp",
+ "kind": "statement",
+ "title": "The diagonal of a locally finite type algebraic-space morphism is locally finitely presented",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], and with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $f:X\\to Y$ be locally of finite type, meaning locally of finite type on compatible etale scheme charts [def-weil-finite-type-morphism]. Then the relative diagonal $\\Delta_f:X\\to X\\times_YX$ is locally of finite presentation, with local finite presentation tested on compatible etale scheme charts [def-sbc-locally-finite-presentation]. No quasi-compactness, quasi-separatedness, separatedness, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 084P (lemma-diagonal-morphism-finite-type), first assertion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=X\\times_YX$ and let $p_2:P\\to X$ be the second projection. Choose a surjective etale scheme atlas $v:V\\to Y$, put $X_V=X\\times_YV$, and choose a surjective etale scheme atlas $u:U\\to X_V$, using [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. The composite $a:U\\to X_V\\to X$ is surjective etale by [lem-trf-space-representable-etale-scheme-tests]. Write $h:U\\to V$ for the chart map. The chart criterion [lem-sfb-space-local-properties-chart-test] applied to $f$ gives that $h$ is locally of finite type.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 084P (lemma-diagonal-morphism-finite-type), first assertion; expansion of the base-change input using Tags 03XH and 03MJ."
+   }
+  },
+  {
+   "text": "Base change the atlas $u$ along $h:U\\to V$. This gives a surjective etale scheme chart $R=U\\times_VU\\to X_V\\times_VU=X\\times_YU=P\\times_{X,p_2}U$, by [lem-trf-space-fibre-products-etale-covers]. The equalities follow on each scheme test by dropping the repeated $V$-coordinate and, in the last expression, the second $X$-coordinate determined by $a:U\\to X$. The map $R\\to U$ is the second projection, hence a scheme base change of $h$ and locally of finite type by [lem-weil-pbc-lft-base-change]. With target atlas $a:U\\to X$ and source atlas $R\\to P\\times_XU$, [lem-sfb-space-local-properties-chart-test] proves that $p_2$ is locally of finite type.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XH (lemma-base-change-finite-type), locally finite type clause; applied in Tag 084P to the second projection."
+   }
+  },
+  {
+   "text": "The identity $1_X$ is locally of finite presentation: take the target atlas $a:U\\to X$ above and the identity atlas of $X\\times_XU=U$. The resulting scheme chart map is $1_U$. At any point of $U$, take the same affine open on source and target; its ring map is $A\\to A=A[\\ ]/(0)$, a presentation with zero generators and zero relations [def-sbc-locally-finite-presentation]. Thus [lem-sfb-space-local-properties-chart-test] gives the claim for $1_X$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 084P (lemma-diagonal-morphism-finite-type), the identity morphism input."
+   }
+  },
+  {
+   "text": "For every scheme test, $\\Delta_f$ sends a section $x$ to $(x,x)$, so $p_2\\circ\\Delta_f=1_X$. Apply [lem-sfb-space-relative-lfp-permanence] with its maps $X\\xrightarrow{\\Delta_f}P\\xrightarrow{p_2}X$. The composite is locally of finite presentation by step 3, and the second map is locally of finite type by step 2. Its conclusion is exactly local finite presentation of $\\Delta_f$. None of these steps requires quasi-compactness, quasi-separatedness, separation or a Noetherian base.",
+   "uses": [
+    "lem-sfb-space-relative-lfp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 084P (lemma-diagonal-morphism-finite-type), application of Tag 05WT (lemma-finite-presentation-permanence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-lft-base-change",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-space-relative-lfp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 084P (lemma-diagonal-morphism-finite-type), first assertion, expanding the local finite type base-change input (Tag 03XH) through compatible scheme charts (Tag 03MJ)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a locally finite type morphism of algebraic spaces is locally of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if a morphism $ f : X \\to Z $ is locally of finite presentation, then the second projection morphism $ \\text{snd} : X \\times_Z Y \\to Y $ of the pullback of $ f $ and any morphi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is locally of finite presentation, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $f$ is locally of finite type, then the second projection morphism $X \\\\times_S Y \\\\to Y$ of the pullback is also locally of fin\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"Given morphisms $ f : X \\to S $ and $ g : Y \\to S $ of schemes, if $ g $ is locally of finite type, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is also locally of fi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space morphism locally of finite type its relative diagonal is locally finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if a morphism $ f : X \\to Z $ is locally of finite presentation, then the second projection morphism $ \\text{snd} : X \\times_Z Y \\to Y $ of the pullback of $ f $ and any morphi\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is locally of finite presentation, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $f$ is locally of finite type, then the second projection morphism $X \\\\times_S Y \\\\to Y$ of the pullback is also locally of fin\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsLocallyNoetherian Y] [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.LocallyOfFinitePresentation f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]iagonal.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Dd]iagonal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a locally finite type morphism of algebraic spaces is locally of finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a locally finite type morphism of algebraic spaces is locally of finite presentation",
+   "results": "OK 8 hits: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometry declarations are for schemes, not algebraic spaces; base change and separatedness hits do not assert the requested diagonal result. The grep found no algebraic-space or diagonal finite-presentation declaration in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space morphism locally of finite type its relative diagonal is locally finitely presented",
+   "results": "OK 8 hits: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometry declarations are for schemes, not algebraic spaces; base change and separatedness hits do not assert the requested diagonal result. The grep found no algebraic-space or diagonal finite-presentation declaration in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]iagonal.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Dd]iagonal",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometry declarations are for schemes, not algebraic spaces; base change and separatedness hits do not assert the requested diagonal result. The grep found no algebraic-space or diagonal finite-presentation declaration in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a locally finite type morphism of algebraic spaces is locally of finite presentation",
+   "results": "OK 8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometry declarations are for schemes, not algebraic spaces; base change and separatedness hits do not assert the requested diagonal result. The grep found no algebraic-space or diagonal finite-presentation declaration in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"LocallyOfFinitePresentation\"",
+   "results": "OK 3 hits: AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: all returned geometry declarations are for schemes, not algebraic spaces; base change and separatedness hits do not assert the requested diagonal result. The grep found no algebraic-space or diagonal finite-presentation declaration in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-eventual-monomorphism",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: the graph into the limit becomes a monomorphism at a finite stage; Tag 0828(4), middle paragraph: the diagonal of A to a fixed Z_0 is locally of finite presentation by Tag 084P.",
+   "via": [
+    "lem-sfb-space-eventual-monomorphism",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-lft-diagonal-lfp",
+  "worker": "stage1",
+  "summary": "Preserved the statement of Tag 084P, first assertion. Reused the existing general algebraic-space local finite presentation cancellation theorem, chart criterion, atlas calculus and scheme local finite type base change. Wrote the compatible atlases for the projection, the identity presentation and the diagonal composition explicitly. No new nodes. Noted the source proof's finite-type/local-finite-type typo without changing the item statement.",
+  "blueprint": "The inherited from.place ends with Tag 0828(4), middle paragraph, where the diagonal is locally of finite presentation by 084P. Steps 1-2 realize its base-change local finite type input, step 3 the identity input, and step 4 the application of 05WT. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md (of det-thm-sf-ctf-stability-direct-images), proof (3): this is the supporting approximation input along the existing alteration branch. The whole-blueprint diagonal search and searches for 05WT and 03XH found no duplicate statement. blueprint_refs.py ancestor reports null; retain the inherited from.node=null and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products and base change of surjective etale covers, needed to construct compatible atlases; not a trace-formula argument."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic composition of representable surjective etale maps, used only to obtain the atlas U to X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-b075e874d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b075e874d (reviewer sub-agent of L); spot-checked: I read the whole item and its 4 steps; the delivery has no new nodes. The statement is identical to the live base (still unsplit there) and is exactly Stacks 084P's first assertion (spaces-morphisms.tex l.5640-5645): f lft implies Delta_f: X -> X x_Y X lfp, with no qc or qs hypothesis. Step 1: the atlas u: U -> X_V and the composite a: U -> X are surjective etale by the composition and base-change clauses of trf representable-tests; the chart test gives h: U -> V lft. Step 2: I recomputed P x_{X,p2} U = X x_Y U = X_V x_V U and R = U x_V U as the base change of u (fibre-products family clause). R -> U is the scheme base change of h along h, so the pbc 01T4 leaf applies verbatim, and the chart test gives p2 lft. Step 3: 1_X is lfp via the identity chart and the n=m=0 presentation in def-sbc. Step 4: 05WT node with Delta_f, p2 and Z=X; its hypotheses are exactly steps 3 and 2. The report's source-error note is correct: the 084P proof says the projection is 'finite type' where only 'locally finite type' holds (counterexample: infinite disjoint union over Spec k). Duplicate search found nothing: 084P/diagonal-lfp hits are only fp-etale-presentation-criterion, diagonal-locally-finite-type (03HK, weaker), nagata scheme fp diagonal, and the parent. Batch-5: representable-tests (03EC) is generic space calculus. Chart-test (03MJ) and relative-lfp-permanence (05WT) reach only def-trf-algebraic-space, a general definition. None is part of the trace formula or Poincare duality, so all are accepted, and the worker's tool_uses are accepted too. No SGA. Edge cases checked: X empty, f=1, schemes, non-qc unions, and a closed immersion that is not lfp."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLftDiagonalLfp",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.diagonal_locallyOfFinitePresentation_of_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLftDiagonalLfp.lean",
+  "statement": "theorem diagonal_locallyOfFinitePresentation_of_locallyOfFiniteType {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocally (@LocallyOfFiniteType) f) : MapIsLocallyOfFinitePresentation (Y := ⟨Limits.pullback f.hom f.hom, (fibreProduct_isAlgebraicSpace X X Y f f).1⟩) (ObjectProperty.homMk (Limits.pullback.diagonal f.hom))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing all-compatible-etale-chart predicates. The target is the canonical sheaf pullback, bundled using fibreProduct_isAlgebraicSpace, and the map is its canonical diagonal. Adds the already-landed definition node def-sfb-space-morphism-properties to stmt_deps; no statement correction or new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4da2a327",
+  "group": "NP",
+  "result": "pass",
+  "note": "Theorem diagonal_locallyOfFinitePresentation_of_locallyOfFiniteType states Stacks 084P first assertion exactly (spaces-morphisms.tex l.5630-5636). Hypothesis MapIsLocally (@LocallyOfFiniteType) f and conclusion MapIsLocallyOfFinitePresentation use the landed Q104 def-sfb chart predicates, whose definition was read. Target is the sheaf Limits.pullback f.hom f.hom bundled by the Prop fibreProduct_isAlgebraicSpace(.1). Map is the canonical ObjectProperty.homMk (pullback.diagonal f.hom). No qc/qs/Noetherian/universe hypotheses; second (fp) assertion correctly omitted. Node diff vs side-live: only added stmt_dep def-sfb-space-morphism-properties (landed, used). lean.statement verbatim in file. Docstring cites exactly the union of the 4 proof steps' uses. Only sorry, no defs. Private import is the proof-dep module. No duplicate found (03HK diagonal-lft node is weaker and unrecorded). Edge cases empty X, f=1, schemes, non-qc unions OK. No recompile per instructions; worker compile clean."
+ }
+}

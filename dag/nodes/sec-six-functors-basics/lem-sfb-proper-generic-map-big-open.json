@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-proper-generic-map-big-open",
+ "kind": "statement",
+ "title": "Proper generic morphisms extend to a fibrewise dense big open",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, with fraction field $E$, and let $T$ be a nonempty open subscheme of $\\operatorname{Spec}D$ [def-pc-scheme, def-weil-affine-spectrum, def-weil-pbc-krull-dimension-ring]. Let $X$ be an affine scheme smooth over $T$ [def-sbc-smooth-morphisms], and let $Y\\to T$ be proper [def-weil-proper-morphism]. Write $X_E=X\\times_T\\operatorname{Spec}E$ and $Y_E=Y\\times_T\\operatorname{Spec}E$ [def-pc-base-change]. For every $E$-morphism $f_E:X_E\\to Y_E$, there are an open subscheme $V\\subseteq X$ and a $T$-morphism $v:V\\to Y$ such that $V\\times_T\\operatorname{Spec}E=X_E$, $v_E=f_E$, and $V$ contains every point $x\\in X$ satisfying $\\dim\\mathcal O_{X,x}\\leq1$. Moreover $V_t$ is dense in $X_t$ for every $t\\in T$, where $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$ and $V_t=V\\times_T\\operatorname{Spec}\\kappa(t)$ [def-weil-residue-field]. No group structure or smoothness on $Y$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "1.2 Proposition 8, proof before the invocation of Weil extension, printed p.15 (PDF p.21), affine source and arbitrary proper target; local spreading is 1.2 Lemma 5. Primary-source scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; project copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The empty source is settled by $V=\\varnothing$. Otherwise $T$ is normal: its stalks are localizations of the normal domain $D$. Smooth normal ascent makes $X$ normal. Smoothness gives flatness and local finite presentation, hence local finite type. Since $T$ is locally Noetherian, so is $X$; since $X$ is affine it is Noetherian. Its underlying space is therefore Noetherian (a finite union of spectra of Noetherian rings), and so is every subspace; hence $X$ and each of its quasi-compact opens have finitely many irreducible components. By the normal-components lemma, $X$ is the disjoint union of its finitely many clopen irreducible components $C$, each an integral scheme with integrally closed local rings. The structure map $a:X\\to T$ is open. Therefore every nonempty open $W\\subseteq C$ meets $X_E$: the nonempty open $a(W)$ of the integral scheme $T$ contains its generic point. In particular $C_E$ is nonempty and dense in $C$, and the generic point $\\eta_C$ of $C$ lies over the generic point of $T$ (otherwise its image would be a closed singleton, whereas $a(C)$ is open).",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-pc-smooth-flat",
+    "pqf-lem-locnoeth-lft",
+    "pqf-def-locnoeth",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sfb-normal-locally-finite-components",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F (lemma-normal-local-smooth); with Properties Tag 0357 and Morphisms Tags 01T6, 01UA"
+   }
+  },
+  {
+   "text": "Fix a component $C$ and put $K=k(C)$. The canonical morphism $\\operatorname{Spec}K\\to C$ factors through $C_E$, since $\\eta_C$ lies over the generic point of $T$. Compose with $f_E$ to obtain a $T$-morphism $b_C:\\operatorname{Spec}K\\to Y$. For any $z\\in C_E$, the canonical morphism $c_z:\\operatorname{Spec}\\mathcal O_{X,z}\\to X$ factors through $X_E$ (with $c_\\eta:\\operatorname{Spec}E\\to T$ the canonical morphism at $\\eta$): by the bijection between morphisms from the spectrum of a local ring and pairs (point, local homomorphism), $a\\circ c_z$ and $c_\\eta\\circ\\operatorname{Spec}(a^\\sharp_z)$ both correspond to $(\\eta,a^\\sharp_z:\\mathcal O_{T,\\eta}=E\\to\\mathcal O_{X,z})$, so they are equal, and the fibre-product property gives the factorization. Composing with $f_E$ gives $\\varphi_z:\\operatorname{Spec}\\mathcal O_{X,z}\\to Y$. Its restriction to $\\operatorname{Spec}K$ is $b_C$, using the canonical fraction-field identification for stalks of an integral scheme.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-pc-base-change",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX6, lemma-morphism-defined-local-ring, setup of the local spreading argument"
+   }
+  },
+  {
+   "text": "For each $x\\in C\\setminus C_E$ with $\\dim\\mathcal O_{X,x}\\leq1$, put $A=\\mathcal O_{X,x}$. It is a Noetherian normal local domain. Its dimension is not zero: a zero-dimensional local domain is a field, so $x$ would be the generic point of $C$, which is already in $C_E$. Thus $\\dim A=1$, and the one-dimensional normal local ring theorem makes $A$ a discrete valuation ring, in particular a valuation ring. Its fraction field is canonically $K$. The composite $\\operatorname{Spec}K\\to\\operatorname{Spec}A\\to X$ is the canonical morphism of $C$ at $\\eta_C$, since both send the point to $\\eta_C$ and induce the identity of $\\mathcal O_{X,\\eta_C}=K$ (part (2) of the canonical-morphism lemma at the generic point of $\\operatorname{Spec}A$), hence agree under the local-spectrum bijection; so the square over $T$ commutes. Apply the proper valuative existence criterion to $b_C:\\operatorname{Spec}K\\to Y$ and the canonical map $\\operatorname{Spec}A\\to T$. It gives a $T$-morphism $\\varphi_x:\\operatorname{Spec}A\\to Y$ restricting to $b_C$.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, (5) implies (1); valuative step in BLR 1.2 Proposition 8, printed p.15"
+   }
+  },
+  {
+   "text": "Apply local-ring spreading to every $\\varphi_z$ of step 2 and every $\\varphi_x$ of step 3. The source is locally Noetherian, and $Y\\to T$ is locally of finite type because it is proper. We obtain an open neighbourhood $W_p\\subseteq C$ of each selected point $p$ and a $T$-morphism $h_p:W_p\\to Y$ whose pullback to $\\operatorname{Spec}\\mathcal O_{X,p}$ is $\\varphi_p$. Its pullback to $\\operatorname{Spec}K$ is therefore $b_C$. On $(W_p)_E$, compare $(h_p)_E$ with $f_E|_{(W_p)_E}$. This source is integral: on affine charts its rings are localizations of domains, with fraction field $K$. Their maps agree after the dense generic-point morphism $\\operatorname{Spec}K\\to(W_p)_E$. The relative separated-target equality theorem gives equality on $(W_p)_E$. Here properness supplies separatedness over $T$; the comparison is made over $T$, so absolute separatedness of $Y$ is unnecessary.",
+   "uses": [
+    "lem-sfb-local-ring-map-spread",
+    "def-weil-proper-morphism",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sfb-relative-separated-dominant-ext",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c); Schemes Tag 01KM for equality"
+   }
+  },
+  {
+   "text": "On an overlap $W_p\\cap W_q$ inside the same component, both morphisms restrict on its generic fibre to $f_E$, by step 4. If the overlap is nonempty, its generic fibre has dense image in it by step 1. The overlap is reduced, being open in an integral component. The relative separated-target equality theorem applied to this dense-image morphism gives $h_p|_{W_p\\cap W_q}=h_q|_{W_p\\cap W_q}$. Empty overlaps require no argument, and opens in distinct components are disjoint. Glue the $h_p$ to a morphism $v:V\\to Y$ on $V=\\bigcup_pW_p$. Their structure-map equalities glue as well, so $v$ is over $T$. By construction $V$ contains all of $X_E$ and every point with local dimension at most one; step 4 gives $v_E=f_E$ and $V_E=X_E$.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM, lemma-where-are-they-equal; open-cover gluing of morphisms"
+   }
+  },
+  {
+   "text": "It remains to check density in each closed fibre. Fix a point $t\\in T$ other than the generic point $\\eta$; since $D$ is a one-dimensional domain, $t$ is a maximal ideal $\\mathfrak m_t$ of $D$. Fix a generic point $\\xi$ of an irreducible component of $X_t$. The local ring $R=\\mathcal O_{T,t}=D_{\\mathfrak m_t}$ is a discrete valuation ring; choose a uniformizer $\\pi$. Put $A=\\mathcal O_{X,\\xi}$, a Noetherian local ring. The fibre-stalk quotient identifies $A/\\pi A$ with $\\mathcal O_{X_t,\\xi}$. The latter has only one prime ideal: $\\xi$ is a generic point, so it has no proper generalizations in the fibre, and the canonical local spectrum has precisely those generalizations as image. Consequently the maximal ideal of $A$ is the only prime containing $\\pi$, hence is minimal over $(\\pi)$. Krull's principal ideal height bound gives height at most one. The localization dimension formula identifies this height with $\\dim A$, so $\\xi\\in V$ by step 5.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-krull-principal-ideal-height-bound",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 00KV (lemma-minimal-over-1); Schemes Tag 0HA1 (lemma-local-ring-fibre)"
+   }
+  },
+  {
+   "text": "For $t\\neq\\eta$, step 6 puts every component generic point of $X_t$ in $V_t$. The closure of $V_t$ therefore contains each irreducible component, and hence is all of $X_t$. For the generic point $t=\\eta$, $V_t=X_t$ by step 5. These exhaust the points of $T$, since $D$ is a one-dimensional domain. Empty fibres satisfy density automatically. This proves the final clause without any group structure or smoothness on the proper target.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary closure argument after the principal ideal height bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-pc-smooth-flat",
+  "pqf-lem-locnoeth-lft",
+  "pqf-def-locnoeth",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-pc-base-change",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sfb-local-ring-map-spread",
+  "def-weil-proper-morphism",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BX6 (local spreading), the valuative argument of Tag 0BX7 (lemma-extend-across); assembled componentwise with BLR 1.2 Proposition 8, printed p.15, and Algebra Tags 00PD, 00KV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre morphism from a smooth affine scheme over a Dedekind domain to a proper scheme extends to an open containing every codimension one point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness extends a generic fibre map to a fibrewise dense open containing all points of local dimension at most one in a smooth scheme over a Dedekind base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"IsProperMap\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \"{X : Type u_1} → {Y : Type u_2} → [TopologicalSpace X] → [TopologicalSpace Y] → (X → Y) → Prop\", \"doc\": \"A function $ f : X \\\\to Y $ between topological spaces is proper if for every compact subset $ K \\\\subseteq Y $, the preimage $ f^{-1}(K) $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsProper f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsProper f) →\\n        ([toIsSeparated : AlgebraicGeometry.IsSeparated f] →\\n            [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f] →\\n            \", \"doc\": \"This function allows defining functions on the type of proper morphisms $ f: X \\\\to Y $ of schemes by specifying their behavior when $ f $ is separated, universally closed, and locally of finite type. \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"RationalMap\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*valuation|valuation.*extend|RationalMap.*proper|proper.*RationalMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map on a regular noetherian scheme into a proper relative target is defined at all height one points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.RationalMap Y → X.Opens\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this function returns the supremum (union) of all open subsets of $X$ where partial maps equivalent to $f$ are defined. This constructs the maximal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.PartialMap Y → X.RationalMap Y\", \"doc\": \"Given a partial map $f$ between schemes $X$ and $Y$, this function constructs the corresponding rational map by taking the equivalence class of $f$ under the relation where two partial maps are identi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → [AlgebraicGeometry.IsReduced X] → [Y.IsSeparated] → X.RationalMap Y → X.PartialMap Y\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, this function constructs a representative partial map defined on a dense open subset of $ X $ that represents the eq\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} {x : ↥X},\\n  x ∈ f.domain ↔ ∃ g, x ∈ g.domain ∧ g.toRationalMap = f\", \"doc\": \"For a rational map $ f $ between schemes $ X $ and $ Y $, an element $ x $ belongs to the domain of $ f $ if and only if there exists a partial map $ g $ from $ X $ to $ Y $ such that $ x $ lies in th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures provide rational-map representatives, spreading from a stalk or function field, smoothness, dominance, or the properness criterion; none states the required extension on a codimension-one neighbourhood or the relative group extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the generic fibre of a smooth scheme over a Dedekind domain into a proper scheme extends over every point of codimension at most one",
+   "results": "8 hits; AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.ValuativeCommSq.i₁, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give rational-map representatives, valuative criteria, or partial-map restrictions, not this fibrewise dense extension with all codimension-one points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational maps from a normal noetherian scheme to a proper scheme are defined at every codimension one point",
+   "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.PartialMap.noConfusionType, AlgebraicGeometry.Scheme.RationalMap.mem_domain, AlgebraicGeometry.Scheme.RationalMap.IsOver.mk, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.domain, AlgebraicGeometry.Scheme.RationalMap.IsOver, AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give rational-map representatives, valuative criteria, or partial-map restrictions, not this fibrewise dense extension with all codimension-one points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"IsProper\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give rational-map representatives, valuative criteria, or partial-map restrictions, not this fibrewise dense extension with all codimension-one points."
+  },
+  {
+   "tool": "grep",
+   "query": "extend_across|codimension.*proper|proper.*codimension|RationalMap.*IsProper",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give rational-map representatives, valuative criteria, or partial-map restrictions, not this fibrewise dense extension with all codimension-one points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper relative target admits extension of a rational map across height one points of a regular source, on an open dense in every fibre",
+   "results": "8 hits; AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.toPartialMap",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give rational-map representatives, valuative criteria, or partial-map restrictions, not this fibrewise dense extension with all codimension-one points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-scheme-neron-property",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.2 Proposition 8 and its proof (printed p.15, PDF p.21); the abelian scheme on the dense open in 1.4 Theorem 3 is already a Néron model there; 1.2 Proposition 8, proof before the invocation of Weil extension, printed p.15 (PDF p.21), affine source and arbitrary proper target; local spreading is 1.2 Lemma 5.",
+   "via": [
+    "lem-sfb-abelian-scheme-neron-property",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-generic-map-big-open",
+  "worker": "stage1",
+  "summary": "Componentwise normal geometry, proper valuative extensions at vertical dimension-one stalks, and local spreading construct compatible neighbourhood maps. Dense-image separated-target equality handles both generic-fibre comparison and overlaps; principal ideal height bounds place all fibre generic points in the assembled open. All dependencies reused; no new nodes, statement unchanged.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); its inherited provenance is BLR 1.2 Proposition 8 before Weil extension. Steps 1–5 realize its rational extension at codimension at most one, and steps 6–7 its fibrewise density argument. The latest sk-thm-sf-ctf-stability unit is read as the surrounding six-functor route; this auxiliary extension argument changes no unit step.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme/algebra tool: Locally Noetherian schemes. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme/algebra tool: The canonical morphism Spec O_{Y,y} -> Y is flat and identifies local rings. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "Generic scheme/algebra tool: Base change along $T$, geometric fibres. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic scheme/algebra tool: One-dimensional normal local rings. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic scheme/algebra tool: Existence part of the proper valuative criterion. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic scheme/algebra tool: The local ring of a scheme-theoretic fibre is a quotient of the local ring. Used exactly as its quoted statement; the six-functor stability unit contains no replacement for this auxiliary geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-pc-base-change",
+  "lem-sc-normal-dim1-dvr",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-933da373c",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-933da373c (reviewer sub-agent of L); spot-checked: First split of an unsplit Q68 node (not a re-split); no new nodes; statement unchanged and matches what the citer lem-sfb-abelian-scheme-neron-property step 2 uses. I read the full proof against Stacks 0BX7/0BX6 (morphisms.tex), 00PD, 00KV and 0357. Normality comes from smooth ascent over normal T and the components are integral. Openness of a gives density of C_E. Vertical dim-1 stalks are DVRs, so the valuative existence criterion applies, then local spreading (source locally Noetherian, Y lft) and relative-separated dominant equality on generic fibres and overlaps, then gluing. Fibre generic points have dim O ≤ 1 by fibre-stalk-quotient plus Krull's principal ideal theorem. Small cases checked: X empty, T={η}, empty fibres, disconnected X, P^1 with a codim-2 indeterminacy. Three fixes, in the corrected item JSON only. (1) C7/batch-5: step 1 cited lem-trf-normal-topologically-noetherian-components, a sec-trace-formula node. It is Properties 0357, generic and outside both assumptions, but the item's own unit has lem-sfb-normal-locally-finite-components, so step 1 now cites that plus the Mathlib leaf lem-sc-noetherian-finite-irreducible-components. The trf cite is removed from uses, proof_deps and tool_uses. (2) C1: steps 2 and 3 used the 'morphisms from Spec of a local ring ↔ (point, local hom)' bijection for the factorization through X_E and for the valuative square, without citing it. They now cite lem-weil-pbc-morphism-from-spec-local-ring and spell the equality out. (3) E1 edge case: step 6 said 'closed point t' and claimed O_{T,t} is a DVR, which fails for T={η}. Steps 6 and 7 now say t≠η, a maximal ideal of D. The remaining tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperGenericMapBigOpen",
+  "declaration": "AlgebraicGeometry.proper_generic_map_big_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGenericMapBigOpen.lean",
+  "statement": "theorem proper_generic_map_big_open (D : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (hD : ringKrullDim D = 1) (E : Type u) [Field E] [Algebra D E] [IsFractionRing D E] (T : (Spec (.of D)).Opens) (hT : Nonempty T) (η : Spec (.of E) ⟶ T.toScheme) (hη : η ≫ T.ι = Spec.map (CommRingCat.ofHom (algebraMap D E))) (X Y : Over T.toScheme) [IsAffine X.left] [Smooth X.hom] [IsProper Y.hom] (fE : (Over.pullback η).obj X ⟶ (Over.pullback η).obj Y) : ∃ (V : X.left.Opens) (v : Over.mk (V.ι ≫ X.hom) ⟶ Y), IsIso (((Over.pullback η).map (Over.homMk V.ι rfl : Over.mk (V.ι ≫ X.hom) ⟶ X)).left) ∧ (Over.pullback η).map v = (Over.pullback η).map (Over.homMk V.ι rfl : Over.mk (V.ι ≫ X.hom) ⟶ X) ≫ fE ∧ (∀ x : X.left, ringKrullDim (X.left.presheaf.stalk x) ≤ 1 → x ∈ V) ∧ ∀ t : T.toScheme, Dense ((X.hom.fiberι t) ⁻¹' (V : Set X.left))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a8396751",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Single theorem proper_generic_map_big_open (sorry), no defs/new nodes; node record unchanged except lean block, statement verbatim. Clause-by-clause matches node: D Noetherian integrally closed dim-1 domain, E fraction field, T nonempty open, η uniquely pinned by hη (canonical, no extra assumption), X affine smooth / Y proper in Over T, X_E/Y_E via Over.pullback (def-pc-base-change convention), V_E=X_E as IsIso of base-changed V.ι, v_E=f_E restriction equation, dim O_{X,x}≤1 → x∈V, fibrewise density via Mathlib fiberι preimage. Edge cases (X empty, empty fibres, T={η}, disconnected X, dim-0 stalks, non-group targets, single universe u) fine. Docstrings carry BLR 1.2 Prop 8 source and blueprint tag and all 7 proof steps; imports exist in side-live; no existing equivalent found. No findings."
+ }
+}

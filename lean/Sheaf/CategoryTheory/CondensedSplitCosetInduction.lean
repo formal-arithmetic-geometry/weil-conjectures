@@ -13,6 +13,7 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.Topology.Algebra.Group.Quotient
 import Sheaf.CategoryTheory.InternalActionSitePresentation
 import Sheaf.CategoryTheory.CondensedProductActionInflation
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Condensed induction along a split profinite coset projection
 

@@ -1,0 +1,161 @@
+{
+ "id": "lem-a1-balanced-finite-tower-quotient-comparison",
+ "kind": "statement",
+ "title": "Normalized quotient comparison and ordinary finite evaluations",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf{Q}_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be any morphism of schemes [def-weil-scheme-morphism-properties]. On the small pro-etale site of $W$, write $R_W=\\varprojlim_n S_{W,n}$ and $S_{W,n}=(A/t^{n+1})_W$ with their specified projections and quotient transitions [def-weil-completed-integral-coefficients]. The scheme and coefficient universes are independent. Use the functors $G$, $F_W$ (reductions), $H_W$ (koszuls), $D_g$ (diagramPull), $B_g$ (finite), and the predicates BalancedNormalization, QuotientUnitNormalization, KoszulNormalization, ReductionNormalization, with their literal section formulas, from [def-a1-finite-pullback-strict-tower-data]. These act on all unbounded cochain complexes of $R_W$-module sheaves; tensor products are the sheafified tensor and their signed direct-sum totalization [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. There exists a natural isomorphism $C:F_Y\\mathbin{\\ggg}D_g\\cong B_g$ satisfying QuotientUnitNormalization. For each $n$, there exists a unique natural isomorphism $e_n:O_{Y,n}\\mathbin{\\ggg}G\\cong O^g_n$, where $O_{Y,n}$ is ordinary reduction restricted along the completed projection and $O^g_n$ is its ordinary finite pullback, satisfying OrdinaryNormalization and PublishedCompatibility [def-a1-completed-pullback-universe-transport-data]. Moreover, for every good complex $P$ (K-flat with flat terms [def-a1-flat-term-kflat-complex]), there exists a strict tower isomorphism $r:P\\otimes S_{Y,\\bullet}\\cong\\operatorname{OrdRed}(P)$ satisfying ReductionNormalization, and in every degree $i$ the level-$n$ component of $C_P$ equals $G(r_{n}^{i})$ followed by $(e_n)_{P^i}$. PublishedCompatibility is literal sectionwise conjugation to completedReductionOrdinaryComparison through a unique PublishedOrdinaryTransport for every supplied coefficient and module transport.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 1, 2, 4, 5 and ordinary-comparison part of step 8."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-a1-finite-pullback-strict-tower-data",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-completed-pullback-universe-transport-data",
+  "def-a1-flat-term-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The uniformizer is given by compatible constant residues. The coefficient map preserves it by equality of all limit projections. The specified completed coefficient resolution identifies each finite projection with the cokernel of the appropriate uniformizer power. Exact module inverse image preserves this cokernel. Hence the coefficient square identifies with the square of actual principal sheaf quotients.",
+   "uses": [
+    "def-sp-completed-uniformizer-section",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalized inverse-image tensor comparison and the principal ideal-quotient scalar associator to construct C. Compose with coefficient association to the finite target. Its local quotient-unit formula is b times the finite generator. The associator and projection transition equations give naturality in P and strict compatibility with the recorded tower transitions.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pur-ideal-quotient-tower-scalar-associator",
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module-level construction gives e_n. Quotient residues lift locally; restriction of pullback adjunction units and pure tensors locally generate. Therefore the unit formula determines e_n uniquely, by sheaf separation. The canonical comparison between total tensor with a degree-zero quotient and ordinary termwise scalar extension gives r: on the degree-i summand it sends x tensor z to the recorded tensor section z tensor x. Tensor balancing and the direct-sum universal property construct its inverse and prove chain and tower naturality. Both C and G(r) followed by e_n agree on these generators, so they are equal in every degree.",
+   "uses": [
+    "def-a1-finite-pullback-strict-tower-data",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ordinary-finite-evaluation-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary PublishedCoefficients and SectionTransport, transport the source and target tensor presentations by the supplied additive equivalences and coefficient ring equivalences. Define the source transport on a pulled quotient-unit generator by source_unit, and define the target transport on a finite tensor by target_tensor. Balancing follows from structural and projection compatibility of PublishedCoefficients; restrictions commute by the transport naturality. Inverse section equivalences give inverses. Local tensor generation proves uniqueness of both transports. On the same generators the published normalized ordinary comparison has the e_n formula, so sheaf separation gives the required literal conjugation on every section. This proves PublishedCompatibility.",
+   "uses": [
+    "def-a1-completed-pullback-universe-transport-data",
+    "def-a1-integral-completed-pullback-interfaces",
+    "lem-weil-pbc-ordinary-finite-evaluation-transition",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-completed-uniformizer-section",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pur-ideal-quotient-tower-scalar-associator",
+  "lem-pur-strict-coefficient-comparison-calculus",
+  "def-a1-integral-finite-pullback-tower",
+  "def-a1-finite-pullback-strict-tower-data",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition",
+  "def-a1-completed-pullback-universe-transport-data",
+  "def-a1-integral-completed-pullback-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 1, 2, 4, 5 and ordinary-comparison part of step 8. Explicit extraction by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of restricted quotient module agrees with finite coefficient pullback, with normalized sectionwise universe transport",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.comap_liftQ\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : Submodule R M)\\n  {R₂ : Type u_3} {M₂ : Type u_4} [inst_3 : Ring R₂] [inst_4 : AddCommGroup M₂] [inst_5 : Module R₂ M₂] {τ₁₂ : R →+* R₂}\\n  (q : Submodule R₂ M₂) (f : M →ₛₗ[τ₁₂] M₂) (h : p ≤ f.ker),\\n  \", \"doc\": \"Given a linear map $ f : M → M_2 $ between modules over semirings with a ring homomorphism $ τ: R → R_2 $, a submodule $ p $ contained in the kernel of $ f $, and a submodule $ q $ of $ M_2 $, the pre\"}\n  {\"name\": \"Submodule.Quotient.restrictScalarsEquiv_symm_mk\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_3)\\n  [inst_3 : Ring S] [inst_4 : SMul S R] [inst_5 : Module S M] [inst_6 : IsScalarTower S R M] (P : Submodule R M)\\n  (x : M), (Submodule.Quotient.restrictScalarsEquiv S P).symm (Submodule.Quo\", \"doc\": \"Given a scalar tower $ S \\\\to R \\\\to M $, an $ R $-submodule $ P \\\\subseteq M $, and its restriction $ P_{\\\\text{restricted}} $ as an $ S $-submodule, the inverse of the linear equivalence between quotien\"}\n  {\"name\": \"SModEq.comap\", \"module\": \"Mathlib/LinearAlgebra/SModEq/Basic\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {x y : M} {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] (V : Submodule R N) {f : M →ₗ[R] N},\\n  f x ≡ f y [SMOD V] → x ≡ y [SMOD Submodule.comap f V]\", \"doc\": \"For a linear map $ f : M \\\\to N $, if $ f(x) \\\\equiv f(y) \\\\mod V $, then $ x \\\\equiv y \\\\mod f^{-1}(V) $.\"}\n  {\"name\": \"Submodule.Quotient.restrictScalarsEquiv_mk\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_3)\\n  [inst_3 : Ring S] [inst_4 : SMul S R] [inst_5 : Module S M] [inst_6 : IsScalarTower S R M] (P : Submodule R M)\\n  (x : M), (Submodule.Quotient.restrictScalarsEquiv S P) (Submodule.Quotient\", \"doc\": \"For any element $x$ in the module $M$, the scalar restriction equivalence between the quotient $S$-modules $M/P_{\\\\text{restricted}}$ and $M/P$ maps the equivalence class $[x]$ in $M/P_{\\\\text{restricte\"}\n  {\"name\": \"Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} {M₂ : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : AddCommGroup M₂]\\n  [inst_3 : Module R M] [inst_4 : Module R M₂] (r : R) (rs : List R) (f : M →ₗ[R] M₂),\\n  ↑(Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner M₂ r rs) ∘ₗ\\n      (Ideal.ofList (r \", \"doc\": \"For any linear map $ f: M \\\\to M_2 $ between modules over a semiring $ R $, the quotient module equivalence between successive quotients by scalar multiplication ideals commutes with the induced linear\"}\n  {\"name\": \"Module.Relations.Solution.fromQuotient_toQuotient\", \"module\": \"Mathlib/Algebra/Module/Presentation/Basic\", \"type\": \"∀ {A : Type u} [inst : Ring A] {relations : Module.Relations A} {M : Type v} [inst_1 : AddCommGroup M]\\n  [inst_2 : Module A M] (solution : relations.Solution M) (x : relations.G →₀ A),\\n  solution.fromQuotient (relations.toQuotient x) = solution.π x\", \"doc\": \"For any finite support function $ x : G \\to_0 A $, the composition of the canonical quotient map from the free $ A $-module on generators $ G $ to the quotient module (defined by relations $ R $) follo\"}\n  {\"name\": \"Submodule.comap_map_mkQ\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p p' : Submodule R M),\\n  Submodule.comap p.mkQ (Submodule.map p.mkQ p') = p ⊔ p'\", \"doc\": \"For any module $M$ over a ring and submodules $p$ and $p'$ of $M$, the preimage under the quotient map $M \\\\to M/p$ of the image of $p'$ is equal to the sum of $p$ and $p'$, i.e., $\\\\operatorname{comap}\"}\n  {\"name\": \"Submodule.map_liftQ\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : Submodule R M)\\n  {R₂ : Type u_3} {M₂ : Type u_4} [inst_3 : Ring R₂] [inst_4 : AddCommGroup M₂] [inst_5 : Module R₂ M₂] {τ₁₂ : R →+* R₂}\\n  [inst_6 : RingHomSurjective τ₁₂] (f : M →ₛₗ[τ₁₂] M₂) (h : p ≤\", \"doc\": \"For a surjective ring homomorphism $\\\\tau_{12}$, a $\\\\tau_{12}$-linear map $f : M \\\\to M_2$ with submodule $p \\\\subseteq \\\\ker(f)$, and a submodule $q \\\\subseteq M/p$, the image of $q$ under the induced quo\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tensorQuotientEquiv",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"TensorProduct.tensorQuotientEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \" {R : Type u_1} (M : Type u_2) {N : Type u_3} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] (n : Submodule R N) : TensorProduct R M (N ⧸ n) ≃ₗ[R] TensorProduct R M N ⧸ (TensorProduct.map LinearMap.id n.subtype).range\", \"doc\": \"Let `M, N` be `R`-modules, `n ≤ N` be an `R`-submodule. Then we have a linear isomorphism between\\ntensor products of the quotient and the quotient of the tensor product:\\n`M ⊗[R] (N ⧸ n) ≃ₗ[R] (M ⊗[R] \"}\n  {\"name\": \"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \" {R : Type u_1} {M : Type u_2} {N : Type u_3} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] (n : Submodule R N) (x : M) (y : N) : (TensorProduct.tensorQuotientEquiv M n) (x ⊗ₜ[R] Submodule.Quotient.mk y) = Submodule.Quotient.mk (x ⊗ₜ[R] y)\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \" {R : Type u_1} {M : Type u_2} {N : Type u_3} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] (n : Submodule R N) (x : M) (y : N) : (TensorProduct.tensorQuotientEquiv M n).symm (Submodule.Quotient.mk (x ⊗ₜ[R] y)) = x ⊗ₜ[R] Submodule.Quotient.mk y\", \"doc\": \"\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorQuotientEquiv|quotientTensorEquiv",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"line\": \"23\", \"text\": \"- `TensorProduct.quotientTensorQuotientEquiv`:\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"line\": \"25\", \"text\": \"- `TensorProduct.quotientTensorEquiv`:\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"line\": \"27\", \"text\": \"- `TensorProduct.tensorQuotientEquiv`:\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"line\": \"56\", \"text\": \"noncomputable def quotientTensorQuotientEquiv (m : Submodule R M) (n : Submodule R N) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"line\": \"87\", \"text\": \"lemma quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\", \"line\": \"91\", \"text\": \"  (commRight R S p.ResidueField).symm.trans <| (tensorQuotientEquiv S _ S _).trans <|\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"line\": \"332\", \"text\": \"  let e : H ⊗[R] M ≃ₗ[R] _ := TensorProduct.quotientTensorEquiv _ _\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"96\", \"text\": \"    (Algebra.TensorProduct.tensorQuotientEquiv _ _ _ _).trans\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Quotient.lean\", \"line\": \"98\", \"text\": \"noncomputable def tensorQuotientEquiv (I : Ideal T) :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Quotient.lean\", \"line\": \"104\", \"text\": \"  .ofLinearEquiv (AlgebraTensorModule.tensorQuotientEquiv (R := R) S T A I ≪≫ₗ g) rfl <| by\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Quotient.lean\", \"line\": \"110\", \"text\": \"      AlgebraTensorModule.tensorQuotientEquiv_apply_tmul, ← Ideal.Quotient.mk_eq_mk,\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Quotient.lean\", \"line\": \"115\", \"text\": \"lemma tensorQuotientEquiv_apply_tmul (I : Ideal T) (a : A) (t : T) :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Quotient.lean\", \"line\": \"116\", \"text\": \"    tensorQuotientEquiv (R := R) S T A I (a ⊗ₜ t) = a ⊗ₜ[R] t :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"564\", \"text\": \"      tensorQuotientTensorEquiv (R'' := R'') e\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BalancedFiniteTowerGeneratorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 03EL, lemma-tensor-product-pullback; balanced coefficient-square and fixed-generator strict-tower refinement, old proof steps 6-7. Refinement here: Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 1, 2, 4, 5 and ordinary-comparison part of step 8.",
+   "via": [
+    "lem-a1-balanced-finite-tower-generator-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BalancedFiniteTowerQuotientComparison",
+  "file": "lean/Sheaf/Paper/BalancedFiniteTowerQuotientComparison.lean",
+  "declaration": "WeilConjectures.BalancedFiniteTower.quotient_comparison_with_ordinary_evaluations",
+  "statement": "theorem quotient_comparison_with_ordinary_evaluations :\n    ∃ c : reductions l E Y ⋙ diagramPull l E g ≅ finite l E g,\n      QuotientUnitNormalization l E g c ∧\n      (∀ n : ℕ, ∃! e : ordinaryReduction l E Y n ⋙ pull l E g ≅ ordinaryFinite l E g n,\n        OrdinaryNormalization l E g n e ∧ PublishedCompatibility l E g n e ∧\n        ∀ (P : CochainComplex (Modules l E Y) ℤ),\n        integralOperationsGoodComplex l E Y P →\n          ∃ r : tensorReduction l E Y P ≅ ((reductionComplex l E Y).obj P).asFunctor,\n            ReductionNormalization l E Y P r ∧ ∀ i : ℤ,\n              (((c.hom.app P).app (op n)).f i) =\n                (pull l E g).map (((r.hom.app (op n)).f i)) ≫\n                  (e.hom.app (P.X i)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

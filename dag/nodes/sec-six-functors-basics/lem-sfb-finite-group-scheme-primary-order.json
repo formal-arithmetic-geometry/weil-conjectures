@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-finite-group-scheme-primary-order",
+ "kind": "statement",
+ "title": "Prime-to-characteristic primary order of a finite commutative group scheme",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a finite commutative $k$-group scheme [def-sc-group-scheme]. Put $N=\\dim_k\\Gamma(G,\\mathcal O_G)$, the scheme-theoretic order, and let $\\ell$ be a prime different from $\\operatorname{char}k$. Write $e=v_\\ell(N)$, where the integer valuation is [def-weil-l-adic-numbers]. Then $N\\geq1$, the group $G(k)$ is finite, and its subgroup\n$$G(k)[\\ell^\\infty]=\\{x\\in G(k):\\ell^n x=0\\text{ for some }n\\geq0\\}$$\nhas cardinality $\\ell^e$. For every integer $n\\geq\\max(1,e)$ one has\n$$\\#\\{x\\in G(k):\\ell^n x=0\\}=\\ell^e.$$\nNo reducedness or etaleness hypothesis on $G$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.3, printed p.210 (connected-etale splitting over a perfect field), Corollary 11.30 and Corollary 11.31, printed pp.220–221 (connected order and characteristic zero smoothness); primary subgroup cardinality is the finite abelian group consequence. This is the finite-group-scheme input in Milne AV I proof of Proposition 10.20, printed p.52."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local–constant product decomposition to $G$. With $C$ its identity component, $d=\\dim_k\\Gamma(C,\\mathcal O_C)$ and $H=G(k)$ of cardinality $q$, it gives a finite connected commutative group scheme $C$, a finite group $H$, $d,q\\geq1$, and $N=dq$. In particular $N\\geq1$.",
+   "uses": [
+    "lem-sfb-finite-commutative-group-local-constant-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+   }
+  },
+  {
+   "text": "In characteristic $p>0$, $C\\to\\operatorname{Spec}k$ is flat by the field-flatness lemma. The connected finite-order theorem therefore gives $d=p^r$ for some $r\\geq0$. As $\\ell\\ne p$, $d$ is prime to $\\ell$. In characteristic zero, apply the prime-to-characteristic etaleness theorem to $G$ (its characteristic-zero clause imposes no divisibility restriction). The finite-etale-points theorem then gives $q=N$. Thus in either characteristic $v_\\ell(q)=v_\\ell(N)=e$: in the positive-characteristic case remove the factor $p^r$ from $N=p^r q$.",
+   "uses": [
+    "lem-pc-flat-field",
+    "lem-sc-connected-finite-order",
+    "lem-sc-fg-order-prime-etale",
+    "lem-sc-finite-etale-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+   }
+  },
+  {
+   "text": "Put $P=\\{x\\in H:\\ell^a x=0\\text{ for some }a\\geq0\\}$. It contains zero. If $\\ell^a x=0$ and $\\ell^b y=0$, then $\\ell^{a+b}(x+y)=0$; also $\\ell^a(-x)=0$. Hence $P$ is a subgroup, using commutativity of $H$. Every subgroup all of whose elements are killed by some power of $\\ell$ is contained in $P$, by the displayed definition. Thus $P$ is maximal among such subgroups.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+   }
+  },
+  {
+   "text": "Use multiplicative notation for the same abstract group $H$ and subgroup $P$. Step 3 verifies exactly the elementwise prime-power and maximality hypotheses of the Sylow-cardinality lemma. That lemma gives $|P|=\\ell^{v_\\ell(q)}=\\ell^e$ by step 2. The definition of $P$ is precisely $G(k)[\\ell^\\infty]$.",
+   "uses": [
+    "lem-sfb-sylow-subgroup-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+   }
+  },
+  {
+   "text": "The finite-group cardinal-annihilator lemma applied to $P$ shows that $\\ell^e x=0$ for every $x\\in P$. For $n\\geq\\max(1,e)$, multiply this equality by $\\ell^{n-e}$ to obtain $\\ell^n x=0$. Conversely, an element killed by $\\ell^n$ belongs to $P$, taking $a=n$ in its definition. Hence $\\{x\\in G(k):\\ell^n x=0\\}=P$, and its cardinality is $\\ell^e$. This also handles $e=0$: $P$ has one element, which is zero.",
+   "uses": [
+    "lem-sfb-finite-additive-group-card-annihilator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-commutative-group-local-constant-product",
+  "lem-pc-flat-field",
+  "lem-sc-connected-finite-order",
+  "lem-sc-fg-order-prime-etale",
+  "lem-sc-finite-etale-points",
+  "def-sc-group-scheme",
+  "lem-sfb-sylow-subgroup-cardinality",
+  "lem-sfb-finite-additive-group-card-annihilator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.3, printed p.210, Corollaries 11.30-11.31, printed p.220; elementary finite abelian group assembly using Sylow.card_eq_multiplicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The prime to characteristic part of the order of a finite group scheme over an algebraically closed field equals that of its group of points",
+   "results": "8 hits; prime_dvd_char_iff_dvd_card, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, IsPGroup.iff_card, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, charP_of_card_eq_prime, CharP.addOrderOf_one, IsAlgClosed.perfectRing, FiniteField.card",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract finite groups and finite fields do not compare the rank of a possibly nonreduced finite group scheme with its geometric points",
+   "digest": "6cf0b1fae821c0b3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite commutative group scheme over an algebraically closed field has the same ell primary order as its rational points when ell differs from the characteristic",
+   "results": "8 hits; prime_dvd_char_iff_dvd_card, Field.nonempty_iff, Fintype.isPrimePow_card_of_field, charP_of_card_eq_prime_pow, ZModModule.isPGroup_multiplicative, Fintype.nonempty_field_iff, FiniteField.card', FiniteField.card",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract finite groups and finite fields do not compare the rank of a possibly nonreduced finite group scheme with its geometric points",
+   "digest": "b50f0c247d287b6b"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*order|order.*connected|groupScheme|GroupScheme",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract finite groups and finite fields do not compare the rank of a possibly nonreduced finite group scheme with its geometric points",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract finite groups and finite fields do not compare the rank of a possibly nonreduced finite group scheme with its geometric points",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The primary torsion subgroup of rational points of a finite commutative group scheme has cardinality equal to the prime power part of its scheme theoretic order for a prime invertible in the field",
+   "results": "8 hits; AddCircle.card_torsion_le_of_isSMulRegular, AddCircle.card_addOrderOf_eq_totient, NumberField.Units.torsionOrder, AddCircle.card_torsion_le_of_isSMulRegular_int, card_addOrderOf_eq_totient_aux₂, ModN.natCard_eq, NumberField.Units.even_torsionOrder, NumberField.Units.torsionOrder_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract finite groups and finite fields do not compare the rank of a possibly nonreduced finite group scheme with its geometric points",
+   "digest": "052968a015ee6ed3"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*order|order.*connected|groupScheme|GroupScheme",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups or finite fields and do not compare nonreduced group-scheme order with rational points",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group scheme over an algebraically closed field has order equal to its number of rational points times a power of the characteristic exponent",
+   "results": "8 hits; Group.exponent_dvd_nat_card, Group.exponent_dvd_card, IsCyclic.iff_exponent_eq_card, IsAddCyclic.of_exponent_eq_card, AddGroup.exponent_dvd_card, IsZGroup.exponent_eq_card, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.orderOf_frobeniusAlgHom",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups or finite fields and do not compare nonreduced group-scheme order with rational points",
+   "digest": "44160a467cd23d5b"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups or finite fields and do not compare nonreduced group-scheme order with rational points",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite commutative group scheme over an algebraically closed field the prime to characteristic primary part of its scheme theoretic order equals the cardinality of the primary torsion subgroup of rational points",
+   "results": "8 hits; CommGroup.coe_primaryComponent, card_addOrderOf_eq_totient_aux₂, card_dvd_exponent_nsmul_rank', ModN.natCard_eq, AddCircle.card_addOrderOf_eq_totient, card_dvd_exponent_nsmul_rank, card_dvd_exponent_pow_rank, card_dvd_exponent_pow_rank'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups or finite fields and do not compare nonreduced group-scheme order with rational points",
+   "digest": "78eb74921072642f"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-tate-valuation",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, proof of Proposition 10.20, printed p.52, first display (isogeny case); positive-dimensional kernels and Tate rank give the non-isogeny case, as detailed in the report. Finite-group input to the first equality on Milne AV I p.52: the ell-primary part of the scheme kernel order is measured by its points.",
+   "via": [
+    "lem-sfb-abelian-degree-tate-valuation",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-group-scheme-primary-order",
+  "worker": "stage1",
+  "summary": "Reused the local–constant product decomposition, connected finite-order theorem, characteristic-zero etaleness and finite-etale point count. Identified the primary subgroup as a maximal elementwise ell-subgroup and used one new Mathlib Sylow-cardinality leaf. Stabilization follows by the existing finite-group annihilator. No statement changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, proof of Proposition 10.20, printed p.52, first display (isogeny case); positive-dimensional kernels and Tate rank give the non-isogeny case, as detailed in the report. Finite-group input to the first equality on Milne AV I p.52: the ell-primary part of the scheme kernel order is measured by its points.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-connected-finite-order",
+    "why": "Connected order in positive characteristic is the finite-group-scheme structural input; no node of the item unit replaces this statement."
+   },
+   {
+    "node": "lem-sc-fg-order-prime-etale",
+    "why": "Its characteristic-zero clause supplies etaleness for the finite group scheme; no node of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-connected-finite-order",
+  "lem-sc-fg-order-prime-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-25abe261e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-25abe261e (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, Milne iAG Prop 11.3 and Cor 11.30–11.31, and Mathlib Sylow.lean 52-55 and 761-767 plus PGroup.lean 24-27. The base was unsplit with no proof, and the statement is unchanged. Step 1: the local-constant product gives N=dq, H finite, d,q≥1. Step 2: in char p, flat-field plus connected-order give d=p^r, prime to ℓ; in char 0, the étaleness clause plus finite-etale-points (Lean-closed) with k'=k give q=N. In both cases v_ℓ(q)=e. Step 2 cites flat-field for G's flatness but its text names only C, which is cosmetic. Steps 3-5: the ℓ-power torsion P is a maximal ℓ-subgroup, Sylow cardinality gives ℓ^e, and the annihilator leaf gives the n-torsion equality, including e=0. The new leaf lem-sfb-sylow-subgroup-cardinality is exactly Sylow.mk plus card_eq_multiplicity with Finite and Fact p.Prime, a one-line specialization. An rg -L sylow search found no duplicate; the existing nodes cover conjugacy or prime index only. Tested on trivial G, α_p, μ_p (e=0), (Z/ℓ)^2 and S_3. Accepted tool_uses: lem-sc-connected-finite-order and lem-sc-fg-order-prime-etale, both generic finite-group-scheme black boxes. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupSchemePrimaryOrder",
+  "declaration": "AlgebraicGeometry.finite_commutative_group_scheme_primary_order",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupSchemePrimaryOrder.lean",
+  "statement": "theorem finite_commutative_group_scheme_primary_order {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsCommMonObj G] [IsFinite G.hom] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) : 1 ≤ G.hom.finrankΓ ∧ Finite (𝟙_ (Over (Spec (.of k))) ⟶ G) ∧ Nat.card (CommGroup.primaryComponent (𝟙_ (Over (Spec (.of k))) ⟶ G) ℓ) = ℓ ^ padicValNat ℓ G.hom.finrankΓ ∧ ∀ n : ℕ, max 1 (padicValNat ℓ G.hom.finrankΓ) ≤ n → Nat.card {x : 𝟙_ (Over (Spec (.of k))) ⟶ G // x ^ (ℓ ^ n) = 1} = ℓ ^ padicValNat ℓ G.hom.finrankΓ",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90533336a",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Item diff vs live = added lean record only (all fields, statement verbatim, lines <=100); deps unchanged; no new nodes. Every clause matches: k {Type u} Field+IsAlgClosed; G Over(Spec k) GrpObj+IsCommMonObj+IsFinite (def-sc-group-scheme convention); N=G.hom.finrankΓ; ℓ prime with ℓ≠ringChar k (char 0 included); e=padicValNat; N≥1 and Finite G(k) are conclusions; G(k)=𝟙_⟶G as in card_points_eq_finrankΓ; CommGroup.primaryComponent carrier = {g | ∃k, g^(ℓ^k)=1}; ∀ n≥max 1 e count of x^(ℓ^n)=1. True via G=G°×constant, |G°|=p^r or étale in char 0; checked trivial, α_p/μ_p, (ℤ/ℓ)^2, e=0. Plain imports = proof_dep modules (GroupScheme.Finite, Sylow, OrderOfElement), not H9. Docstrings carry source, blueprint id and 5 proof steps; single sorry; no duplicate in Sheaf/WeilConjectures/Mathlib. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-finite-type-image-immediate-boundary-point",
+ "kind": "statement",
+ "title": "Immediate image generalization of a missing closed boundary point",
+ "statement": "Let $k$ be a field [def-weil-field], let $Y$ be an affine scheme locally of finite type over $k$, let $X$ be a scheme locally of finite type over $k$, and let $f:X\\to Y$ be a quasi-compact $k$-morphism [def-pc-scheme, def-weil-finite-type-morphism]. Let $Z\\subseteq |X|$ be any closed subset. If $f(Z)$ is not closed in $|Y|$, there exist points $y,t\\in Y$ and $x\\in Z$ such that $y$ is closed in $Y$, $y\\in\\overline{f(Z)}\\setminus f(Z)$, $f(x)=t$, and $t\\ne y$ specializes to $y$ with no intervening point. The extension $\\kappa(x)/\\kappa(t)$ is finite [def-weil-residue-field]. With its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme], $T=\\overline{\\{t\\}}\\subseteq Y$ is an integral affine scheme of finite type over $k$ [def-pc-integral-scheme], has generic point $t$, contains $y$ as a closed point, and satisfies $\\dim\\mathcal O_{T,y}=1$ [def-weil-pbc-krull-dimension-ring]. The canonical map $\\operatorname{Spec}\\kappa(x)\\to X$ [def-pc-scheme-fibre] has image $x$ and its composite with $f$ is the canonical map through $t\\in T\\subseteq Y$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, paragraph beginning Assume S and Y affine, and the definition of T in the following paragraph; specialize to S=Spec k. The closed-boundary-point choice uses constructibility and the Jacobson property as in the same proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}R$. By [lem-weil-pbc-lft-affine-pairs], $R$ is a finite type $k$-algebra. For every affine open $V=\\operatorname{Spec}B$ in $X$, that same criterion makes $B$ a finite type $k$-algebra, hence a finite type $R$-algebra through $f$: any finite set generating $B$ over $k$ also generates it over $R$, because $f$ is a $k$-morphism. The criterion therefore makes $f$ locally of finite type. With its assumed quasi-compactness, $f$ is finite type. Since $Y$ is affine and $f$ is quasi-compact, $X$ is quasi-compact; thus $X$ and $Y$ are finite type over $k$. A field is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] makes both schemes Noetherian. In particular $Y$ is locally Noetherian. Apply [pqf-lem-lft-fp-locnoeth] to make $f$ locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T2 (lemma-locally-finite-type-characterize), 01T6 (lemma-finite-type-noetherian); Tag 01TX for finite presentation over a locally Noetherian base."
+   }
+  },
+  {
+   "text": "The affine charts of $X$ have Noetherian coordinate rings by [lem-weil-pbc-finite-type-algebra-noetherian], applied to their finite type $k$-algebras from step 1. Their topological spaces are Noetherian by [lem-sc-affine-noetherian-underlying-space]. A finite such cover exists since $X$ is quasi-compact; a descending chain of closed subsets stabilizes on each chart, hence on $X$. Thus $Z$ is constructible by [def-weil-constructible-subset]. The target $Y$ is affine, hence quasi-compact and quasi-separated. Apply [lem-weil-pbc-chevalley-constructible-image] to $f$ and $Z$ to see that $E=f(Z)$ is constructible.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-chevalley-constructible-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054J (lemma-chevalley); Algebra Tag 00FN (lemma-Noetherian-permanence); Topology Tag 005L."
+   }
+  },
+  {
+   "text": "The nonclosedness of $E$ says that $D=\\overline E\\setminus E$ is nonempty. It is constructible by the Boolean-algebra and Noetherian clauses of [def-weil-constructible-subset]; $Y$ is topologically Noetherian by the same affine argument as step 2. Express $D$ as a finite union of locally closed sets and choose a nonempty piece $W=O\\cap F$, where $O$ is open and $F$ is closed in $Y$. By [lem-sc-lft-over-field-jacobson-space], the closed points of $Y$ lying in $F$ are dense in $F$. They meet the nonempty relatively open subset $W$ of $F$. Choose such a point $y$. Then $y$ is closed in $Y$ and lies in $\\overline E\\setminus E$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV (lemma-essentially-finite-type-criterion-universally-closed), paragraph Assume S and Y affine; Morphisms Tag 02J6(1), with the closed-boundary-point choice expanded."
+   }
+  },
+  {
+   "text": "The affine scheme $Y$ is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-weil-pbc-spectral-proconstructible-closure-specialization] to the one-member family consisting of $E$ and the point $y\\in\\overline E$. Obtain $e\\in E$ generalizing $y$; it differs from $y$. Put $A=\\mathcal O_{Y,y}$ and let $c:\\operatorname{Spec}A\\to Y$ be [lem-weil-pbc-spec-local-ring-canonical-morphism]. This morphism identifies $A$ with $R_{\\mathfrak m_y}$ and its image with the generalizations of $y$. Hence $e$ is in its image. The ring $R$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], so $A$ is Noetherian by [lem-weil-pbc-localization-noetherian]. It is a nonzero local ring, since it has the residue field $\\kappa(y)$. By [lem-weil-pbc-localization-spectrum-embedding], $c$ is a homeomorphism onto its image, and its closed point maps to $y$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, intersection with the local spectrum; nonemptiness expanded using Topology Tag 0903(1); Algebra Tags 00FN and 00E3."
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{Spec}A\\setminus\\{\\mathfrak m_A\\}$. The inverse image $c^{-1}(E)$ is constructible by [lem-pur-scheme-constructible-preimage]; it is nonempty by step 4 and misses $\\mathfrak m_A$ since $y\\notin E$. Restricting to the open subspace $P$ preserves constructibility by [lem-weil-pbc-constructible-open-restriction]. By [def-weil-constructible-subset], choose a nonempty locally closed piece $W$ of this inverse image in $P$. Apply [lem-sfb-punctured-local-spectrum-closed-points] to the nonzero Noetherian local ring $A$ and $W$. Obtain a point $u\\in W$ closed in $P$, and set $t=c(u)\\in E$. Every prime of a local ring is contained in its maximal ideal, so $u$ specializes to $\\mathfrak m_A$. Closedness of $u$ in $P$ excludes any distinct specialization there. The embedding of step 4 therefore shows that $t\\ne y$ specializes to $y$ with no intervening point of $Y$: every intervening point would still generalize $y$, hence lie in that embedding's image.",
+   "uses": [
+    "lem-pur-scheme-constructible-preimage",
+    "lem-weil-pbc-constructible-open-restriction",
+    "def-weil-constructible-subset",
+    "lem-sfb-punctured-local-spectrum-closed-points",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, choice of t in the punctured local spectrum; Morphisms Tag 02J6(4), Topology Tag 005X."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset R$ be the prime of $t$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $\\overline{\\{t\\}}=V(\\mathfrak p)$. By [lem-weil-pbc-reduced-induced-closed-subscheme], its reduced induced scheme is $T=\\operatorname{Spec}(R/\\mathfrak p)$. The quotient is a domain, since $\\mathfrak p$ is prime, and is a finite type $k$-algebra, generated by the images of generators of $R$. Thus $T$ is integral, affine, and finite type, with generic point $t$, and $y$ is still closed in $T$. Its generalizations of $y$ are precisely $y$ and $t$. Indeed, a point of $T$ is a specialization of $t$; any such point generalizing $y$ would intervene between $t$ and $y$. Hence the generalization chains starting at $y$ have maximum length one. Apply [lem-sc-scheme-stalk-dimension-generalization-chains] to $T,y$ to obtain $\\dim\\mathcal O_{T,y}=1$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, paragraph defining T; Schemes Tags 01J3--01J4; Properties Tag 02IZ (lemma-codimension-local-ring)."
+   }
+  },
+  {
+   "text": "Give $Z$ its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its affine charts are quotients of the affine charts of $X$, hence finite type over $k$ and, by the same generator argument as step 1, over $Y$. Thus $g:Z\\to Y$ is locally of finite type by [lem-weil-pbc-lft-affine-pairs]. Since $t\\in f(Z)$, its fibre $Z_t$ is nonempty by [def-pc-scheme-fibre]. It is locally of finite type over $K=\\kappa(t)$ by [lem-weil-pbc-lft-base-change]. Choose a nonempty affine open $V=\\operatorname{Spec}B$ in $Z_t$. Then $B$ is a finite type $K$-algebra by the affine-pairs criterion. Choose a maximal ideal of this nonzero ring by [lem-weil-pbc-proper-ideal-contained-in-maximal], giving a closed point $v\\in V$. Apply [lem-kun-closed-point-field](a) to the finite type $K$-scheme $V$: its residue field is finite over $K$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TF (lemma-closed-point-fibre-locally-finite-type), proof by an affine chart and the Hilbert Nullstellensatz; as used in Tag 0GWV."
+   }
+  },
+  {
+   "text": "Let $z\\in Z$ be the image of $v$ and $x\\in X$ its image. Thus $x\\in Z$ and $f(x)=t$. The open immersion $V\\hookrightarrow Z_t$ induces an isomorphism on residue fields by [lem-weil-pbc-residue-field-point-naturality]. The fibre stalk quotient of [lem-sbc-scheme-fibre-stalk-quotient] identifies $\\mathcal O_{Z_t,v}$ with $\\mathcal O_{Z,z}/\\mathfrak m_t\\mathcal O_{Z,z}$. Passing to residue fields gives $\\kappa(v)=\\kappa(z)$: the ideal being divided out lies in the maximal ideal, and quotienting once more by that maximal ideal is the original residue field. These are identifications over $K$, since the quotient is induced by the fibre projection and structure map. The closed immersion $Z\\hookrightarrow X$ induces $\\kappa(x)\\cong\\kappa(z)$ by [lem-weil-pbc-closed-immersion-residue-field-iso]. Consequently $\\kappa(x)/\\kappa(t)$ is finite. Finally [def-pc-scheme-fibre] gives the canonical point map $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ with image $x$. Naturality [lem-weil-pbc-residue-field-point-naturality] gives $fj_x=j_t\\operatorname{Spec}(\\kappa(t)\\to\\kappa(x))$. Applying the same naturality to $T\\hookrightarrow Y$ at its generic point $t$, and using the residue-field isomorphism for that closed immersion, identifies $j_t$ with its canonical factorization through $T$. This is the required compatibility.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), Tag 01K1, and the residue-field naturality diagram after Tag 01J9; final generic-point map in the proof of Limits Tag 0GWV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-sfb-punctured-local-spectrum-closed-points",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-base-change",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV, lemma-essentially-finite-type-criterion-universally-closed, proof: paragraph Assume S and Y affine and definition of T; S=Spec k, with the constructible/Jacobson selections and fibre residue identifications expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed boundary point of a finite type scheme morphism image has an immediate generalization in the image with a finite residue field lift",
+   "results": "{\"t\": \"2026-10-23T19:17:35Z\", \"tool\": \"leanfinder\", \"query\": \"A closed boundary point of a finite type scheme morphism image has an immediate generalization in the image with a finite residue field lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\"], \"digest\": \"28dcf32943e76071\"}; No match. The hits describe closed-point residue-field maps, Jacobson fibres, or finite residue extensions under an already supplied quasi-finite hypothesis. None selects an immediate generalization inside a prescribed closed-subset image at a missing boundary point. The second semantic phrasing likewise supplies no such selection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"residueField\"",
+   "results": "{\"t\": \"2026-10-23T19:17:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Specializes\\\", \\\"residueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. The hits describe closed-point residue-field maps, Jacobson fibres, or finite residue extensions under an already supplied quasi-finite hypothesis. None selects an immediate generalization inside a prescribed closed-subset image at a missing boundary point. The second semantic phrasing likewise supplies no such selection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "immediate.*special|special.*immediate|boundary.*(finite|residue)|exists.*[Cc]losed.*[Ff]iber",
+   "results": "{\"t\": \"2026-10-23T19:17:31Z\", \"tool\": \"grep\", \"query\": \"immediate.*special|special.*immediate|boundary.*(finite|residue)|exists.*[Cc]losed.*[Ff]iber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. The hits describe closed-point residue-field maps, Jacobson fibres, or finite residue extensions under an already supplied quasi-finite hypothesis. None selects an immediate generalization inside a prescribed closed-subset image at a missing boundary point. The second semantic phrasing likewise supplies no such selection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Find a point in a finite type image immediately specializing to a missing closed boundary point with finite residue field extension",
+   "results": "{\"t\": \"2026-10-23T19:17:32Z\", \"tool\": \"leansearch\", \"query\": \"Find a point in a finite type image immediately specializing to a missing closed boundary point with finite residue field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.specializes_closedPoint\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"IsLocalRing.closedPoint\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"OnePoint.instFintype\"], \"digest\": \"116b7d613a6cd568\"}; No match. The hits describe closed-point residue-field maps, Jacobson fibres, or finite residue extensions under an already supplied quasi-finite hypothesis. None selects an immediate generalization inside a prescribed closed-subset image at a missing boundary point. The second semantic phrasing likewise supplies no such selection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a constructible image near a missing closed point choose an immediate specialization and a closed point of its fibre with finite residue extension",
+   "results": "{\"t\": \"2026-10-23T19:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"In a constructible image near a missing closed point choose an immediate specialization and a closed point of its fibre with finite residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"IsLocalRing.specializes_closedPoint\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"3b0677b30d46fc78\"}; No match. The hits describe closed-point residue-field maps, Jacobson fibres, or finite residue extensions under an already supplied quasi-finite hypothesis. None selects an immediate generalization inside a prescribed closed-subset image at a missing boundary point. The second semantic phrasing likewise supplies no such selection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "immediate.*special|boundary.*(finite|residue)|isClosed_singleton_iff_locallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T20:28:11Z\", \"tool\": \"grep\", \"query\": \"immediate.*special|boundary.*(finite|residue)|isClosed_singleton_iff_locallyOfFiniteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"cbe5c445d2c457e1\"}; Read the returned hits: residue-point naturality, closed-point criteria, generalizing maps, and Chevalley constructibility supply individual inputs only; none selects the required immediate image generalization and finite lift.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism has an immediate generalization in its image specializing to a missing closed boundary point",
+   "results": "{\"t\": \"2026-10-23T20:28:11Z\", \"tool\": \"leansearch\", \"query\": \"A finite type morphism has an immediate generalization in its image specializing to a missing closed boundary point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"IsClosedMap.specializingMap\"], \"digest\": \"692c7e1ffff42185\"}; Read the returned hits: residue-point naturality, closed-point criteria, generalizing maps, and Chevalley constructibility supply individual inputs only; none selects the required immediate image generalization and finite lift.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"residueField\"",
+   "results": "{\"t\": \"2026-10-23T20:28:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Specializes\\\", \\\"residueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: residue-point naturality, closed-point criteria, generalizing maps, and Chevalley constructibility supply individual inputs only; none selects the required immediate image generalization and finite lift.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism has an immediate image generalization at a missing closed boundary point with finite residue field lift",
+   "results": "{\"t\": \"2026-10-23T20:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism has an immediate image generalization at a missing closed boundary point with finite residue field lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\"], \"digest\": \"36f91215c95d8611\"}; Read the returned hits: residue-point naturality, closed-point criteria, generalizing maps, and Chevalley constructibility supply individual inputs only; none selects the required immediate image generalization and finite lift.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible subset of a variety with nonclosed image choose a missing closed point and a codimension one generization in the image",
+   "results": "{\"t\": \"2026-10-23T20:29:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a constructible subset of a variety with nonclosed image choose a missing closed point and a codimension one generization in the image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"PrimeSpectrum.BasicConstructibleSetData\", \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"PrimeSpectrum.ConstructibleSetData\", \"PrimeSpectrum.exists_constructibleSetData_iff\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\"], \"digest\": \"a90f11353bc5c3c8\"}; Read the returned hits: residue-point naturality, closed-point criteria, generalizing maps, and Chevalley constructibility supply individual inputs only; none selects the required immediate image generalization and finite lift.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-curve-universal-closedness-test",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. Proof of this prerequisite: Tag 0GWX reduces to Tag 0GWV, applied both to f and to its diagonal; this node is the universal-closedness criterion, including its affine-space test formulation. Supporting input: Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, paragraph beginning Assume S and Y affine, and the definition of T in the following paragraph; specialize to S=Spec k. The closed-boundary-point choice uses constructibility and the Jacobson property as in the same proof.",
+   "via": [
+    "lem-sfb-normal-curve-universal-closedness-test",
+    "lem-sfb-properness-normal-curve-local-test",
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-type-image-immediate-boundary-point",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 0GWV image-boundary argument in eight steps. Checked the affine/local finite type and Noetherian hypotheses, justified the missing closed point and the nonempty constructible local image, used the punctured-local closed-point theorem (reviewer FIX: new generic statement-only node lem-sfb-punctured-local-spectrum-closed-points, replacing a citation of a node dropped on 2026-10-19), and verified the finite fibre residue field and canonical point-map compatibility. Statement unchanged; the worker created no new node, the reviewer added the one generic node named above.",
+  "blueprint": "Realizes the inherited blueprint.from.place supporting input for det-thm-sf-ctf-stability-direct-images, proof (3), through the chain recorded in blueprint.from.via: 0GWV boundary point and definition of T. Latest direct-images proof read; no alternative route introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Supplies a generalization in a constructible subset at a closure point, used only to justify nonemptiness in the local spectrum in step 4."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Identifies the local spectrum and its generalizations in step 4; this is a generic scheme-localization tool, not a change to the 0GWV route."
+   },
+   {
+    "node": "lem-sfb-punctured-local-spectrum-closed-points",
+    "why": "Stacks 02J6(4) punctured-spectrum closed-point selection, explicitly used by Stacks 0GWV in step 5; generic commutative algebra created by the reviewer, since the earlier per-chapter copy left the DAG with the 2026-10-19 Artin-Gabber route drop and no unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Supplies the actual affine quotient scheme structures on Z and T in steps 6--7, as explicitly requested by 0GWV."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Supplies the Hilbert Nullstellensatz finite-residue-field criterion on an affine fibre chart in step 7; it is a generic algebraic geometry tool."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identifies the fibre residue field with the original point residue field in step 8 through the canonical stalk quotient."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Transfers the residue field from the reduced closed subscheme to X and identifies the generic point field of T in step 8."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sfb-punctured-local-spectrum-closed-points",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-kun-closed-point-field",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-7590a637f",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-7590a637f (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged vs side-live base, 8 steps. It follows Stacks 0GWV, the paragraphs 'Assume S and Y affine' and 'Denote T' over S=Spec k, which I read in limits.tex along with 02J6(4) in morphisms.tex and 005X in topology.tex; no SGA. The maths is sound: lft-affine-pairs, then finite type and Noetherian, lfp, Chevalley, and E constructible. The Jacobson density gives a closed y in the closure of E minus E. Proconstructible specialization plus the local-ring canonical morphism and localization embedding set up A=O_{Y,y}. The punctured-spectrum closed point u gives an immediate t, since intervening points lie in the embedded image. T=Spec(R/p) has only y and t as generalizations of y, so dim O_{T,y}=1 by the chains node. An affine fibre chart, a maximal ideal and kun-closed-point-field(a) give a finite residue extension. Fibre-stalk quotient, open naturality and closed-immersion residue isomorphisms give the field identifications and the canonical-map compatibility. Small cases checked: G_m in A^1, L[u,u^-1] over A^1_k with L/k finite, G_m x A^1 over A^1, and empty X or Z. Mechanical finding: step 5 cited lem-per-punctured-local-closed-points. It is dropped (route-pivot-dropped.txt line 1827, section 2026-10-19 artin-gabber) and its module is dropped too; it also pulls in dropped 02IG and partial-parameters nodes. The use is justified at a named step: Stacks 0GWV itself cites 02J6(4) there, and it is ordinary commutative algebra, none of the forbidden tools. But no live node states it, and rerouting through live Jacobson/dimension nodes still needs the dropped 02IG input. FIX: new generic statement-only node lem-sfb-punctured-local-spectrum-closed-points (unsplit; source 02J6(4)/02IM/005X; created.item = this item; Mathlib searches recorded, no match since Mathlib's JacobsonSpace API assumes the property). The item's step 5, uses, proof_deps and tool_uses now cite it, and the dropped id appears nowhere. Maintainer may instead un-drop the old node and merge the new one into it. Item and citer normal-curve-universal-closedness-test are live; the fixed closure has no other dropped ids. Other off-unit tool_uses are generic and accepted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeImageImmediateBoundaryPoint",
+  "declaration": "AlgebraicGeometry.finiteTypeImage_immediateBoundaryPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeImageImmediateBoundaryPoint.lean",
+  "statement": "theorem finiteTypeImage_immediateBoundaryPoint (k : Type u) [Field k] (X Y : Scheme.{u}) [IsAffine Y] (p : X ⟶ Spec (CommRingCat.of k)) (q : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType p] [LocallyOfFiniteType q] (f : X ⟶ Y) [QuasiCompact f] (hfk : f ≫ q = p) (Z : Set X) (hZ : IsClosed Z) (himage : ¬ IsClosed (f '' Z)) : ∃ (y t : Y) (x : X) (hxt : f x = t), x ∈ Z ∧ IsClosed ({y} : Set Y) ∧ y ∈ closure (f '' Z) ∧ y ∉ f '' Z ∧ t ≠ y ∧ t ⤳ y ∧ (∀ z : Y, t ⤳ z → z ⤳ y → z = t ∨ z = y) ∧ (f.residueFieldMap x).hom.Finite ∧ ∃ I : Y.IdealSheafData, I = Scheme.IdealSheafData.vanishingIdeal ⟨closure ({t} : Set Y), isClosed_closure⟩ ∧ IsIntegral I.subscheme ∧ IsAffine I.subscheme ∧ LocallyOfFiniteType (I.subschemeι ≫ q) ∧ QuasiCompact (I.subschemeι ≫ q) ∧ ∃ (tT yT : I.subscheme) (htT : I.subschemeι tT = t), I.subschemeι yT = y ∧ IsGenericPoint tT (Set.univ : Set I.subscheme) ∧ IsClosed ({yT} : Set I.subscheme) ∧ ringKrullDim (I.subscheme.presheaf.stalk yT) = 1 ∧ Set.range (X.fromSpecResidueField x) = {x} ∧ X.fromSpecResidueField x ≫ f = Spec.map (@inv _ _ _ _ (I.subschemeι.residueFieldMap tT) (Scheme.Hom.isIso_residueFieldMap_of_isClosedImmersion I.subschemeι tT) ≫ (Y.residueFieldCongr (htT.trans hxt.symm)).hom ≫ f.residueFieldMap x) ≫ I.subscheme.fromSpecResidueField tT ≫ I.subschemeι",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b54c9183",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 0GWV (closed y in closure(f(Z)) minus f(Z); t in f(Z) with immediate specialization to y over all of Y; x in Z with f x = t and finite residue map; T = vanishingIdeal of closure{t}, a real reduced-induced construction, integral, affine, finite type via I.subschemeι ≫ q, generic point t, y closed in T, stalk Krull dim 1; range of fromSpecResidueField = {x}; final equation is the canonical map, types checked). Theorem stmt_dep lem-weil-pbc-closed-immersion-residue-field-iso: its IsIso conclusion is the explicit argument of inv, Mathlib only has the open-immersion instance, and the module has no plain defs, so the statement genuinely depends on the conclusion: PASS on this point. lean.statement verbatim; universes bound; no hollow defs; sorry only; source/blueprint docstrings and 8-step plan present; no pro-etale; no extra assumptions. Not recompiled (no file changed); worker reports a clean compile."
+ }
+}

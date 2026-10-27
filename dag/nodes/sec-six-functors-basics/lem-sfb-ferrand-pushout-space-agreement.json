@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-ferrand-pushout-space-agreement",
+ "kind": "statement",
+ "title": "Ferrand scheme pushouts are pushouts of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $i:Z\\hookrightarrow X$ and $j:Z\\to T$ be morphisms of $S$-schemes, with $i$ a closed immersion [def-weil-closed-immersion] and $j$ integral [def-weil-finite-integral-morphism]. Suppose that for every $t\\in T$ there is an affine open $U\\subseteq X$ containing $i(j^{-1}(\\{t\\}))$. Let $P$, with maps $a:X\\to P$ and $b:T\\to P$, be a pushout of this diagram in schemes [def-weil-pbc-category-colimit]. Regard these schemes as algebraic spaces [def-trf-algebraic-space]. Then the same cocone is a pushout in algebraic spaces over $S$: for every algebraic space $H/S$, every pair $f:X\\to H$, $g:T\\to H$ with $fi=gj$ admits a unique $h:P\\to H$ satisfying $ha=f$ and $hb=g$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral; hypotheses are more-morphisms.tex, situation-pushout-along-closed-immersion-and-integral."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-ferrand-scheme-pushout] with exactly the stated closed-immersion, integrality and fibre-neighbourhood hypotheses. Its scheme pushout is uniquely isomorphic to the given $P$, compatibly with $a,b,i,j$, by [def-weil-pbc-category-colimit]: the maps supplied in both directions compose to the identity because they agree on both legs. This also identifies their structure maps to $S$. Thus the quotient-space description in that node makes $a$ and $b$ jointly surjective. The given scheme pushout is also a pushout among $S$-schemes: for compatible $S$-maps into an $S$-scheme $H$, the scheme extension is over $S$, since its composite to $S$ and the structure map of $P$ agree after $a$ and $b$ and hence are equal by uniqueness.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral, proof via Tag 07SX, lemma-colimit-agrees"
+   }
+  },
+  {
+   "text": "Let $q:U\\to P$ be any etale morphism from a scheme. The converse assertion of [lem-sfb-ferrand-etale-scheme-patching] says that $U$ is the scheme pushout of $U\\times_PX$ and $U\\times_PT$ along $U\\times_PZ$. Its assertion explicitly allows nonseparated and non-quasi-compact $q$. The same uniqueness argument as in step 1, now applied to maps to $S$, makes this a pushout of $S$-schemes. Thus every etale base change satisfies hypothesis (ii) of [lem-sfb-scheme-colimit-upgrade-space-targets].",
+   "uses": [
+    "lem-sfb-ferrand-etale-scheme-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral, proof via Tag 07SX, lemma-colimit-agrees"
+   }
+  },
+  {
+   "text": "Take a compatible family of etale schemes over the three vertices of the span $X\\leftarrow Z\\to T$, with separated structure maps. Its cartesian transition squares identify its $Z$-component with both $X'\\times_XZ$ and $T'\\times_TZ$, giving their specified isomorphism $\\phi$. Apply the forward assertion of [lem-sfb-ferrand-etale-scheme-patching]. It supplies the scheme $P'$ etale over $P$ and canonical isomorphisms of its three pullbacks with these components, respecting $\\phi$ and the projections. Therefore it supplies an isomorphism of the entire compatible family with the pullback family; this is precisely the essential-image condition (iii) of the colimit criterion.",
+   "uses": [
+    "lem-sfb-ferrand-etale-scheme-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral, proof via Tag 07SX, lemma-colimit-agrees"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-colimit-upgrade-space-targets] with base $S$ and the finite span category having objects $Z,X,T$ and two nonidentity arrows $Z\\to X,Z\\to T$. This category is small in the fixed universe; step 1 gives its scheme colimit and joint surjectivity, step 2 gives the colimits after every etale scheme base change, and step 3 gives descent of every separated etale compatible family. The conclusion of that node identifies maps $P\\to H$ bijectively with compatible families into any algebraic space $H/S$. For a span such a family is exactly a pair $f:X\\to H$, $g:T\\to H$ with $fi=gj$ (the $Z$-map is their common composite), so the bijection gives the required existence and uniqueness of $h$.",
+   "uses": [
+    "lem-sfb-scheme-colimit-upgrade-space-targets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral, proof via Tag 07SX, lemma-colimit-agrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-ferrand-etale-scheme-patching",
+  "lem-sfb-ferrand-scheme-pushout",
+  "lem-sfb-scheme-colimit-upgrade-space-targets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0EDP, lemma-pushout-along-closed-immersion-and-integral, proof via Tag 07SX, lemma-colimit-agrees"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pushout of schemes along a closed immersion and an integral morphism is also the pushout in algebraic spaces",
+   "results": "{\"t\": \"2026-10-24T11:43:34Z\", \"tool\": \"leanfinder\", \"query\": \"A pushout of schemes along a closed immersion and an integral morphism is also the pushout in algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instMapDescScheme\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\"], \"digest\": \"075097cfcfa5ff46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Ferrand pushout of schemes agrees with the pushout of algebraic spaces",
+   "results": "{\"t\": \"2026-10-24T11:43:30Z\", \"tool\": \"leansearch\", \"query\": \"A Ferrand pushout of schemes agrees with the pushout of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"Algebra.IsAlgebraic.instIsPushout\", \"Algebra.IsAlgebraic.instIsPushout_1\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"instIsPushout\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"Algebra.IsPushout\"], \"digest\": \"2480f320d716f9ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout, \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T11:43:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsPushout, \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout|pushout.*(closed|integral)|Ferrand",
+   "results": "{\"t\": \"2026-10-24T11:43:29Z\", \"tool\": \"grep\", \"query\": \"IsPushout|pushout.*(closed|integral)|Ferrand\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"7ba3cb7d30386e13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern scheme pullbacks, ring pushouts, open gluing or unrelated scheme properties; none has the algebraic-space pushout universal property stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|[Ee]tale.*[Pp]ushout|[Pp]ushout.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|[Ee]tale.*[Pp]ushout|[Pp]ushout.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale site of the pushout of schemes along a closed immersion and an integral morphism is described by compatible etale schemes",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"leansearch\", \"query\": \"The etale site of the pushout of schemes along a closed immersion and an integral morphism is described by compatible etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"8aff18134c837097\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.IsPushout",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale schemes on a Ferrand pushout are glued from compatible separated etale schemes on the two components",
+   "results": "{\"t\": \"2026-10-24T12:03:38Z\", \"tool\": \"leanfinder\", \"query\": \"Etale schemes on a Ferrand pushout are glued from compatible separated etale schemes on the two components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData\"], \"digest\": \"c21c33d4d92d23e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|gluing",
+   "results": "{\"t\": \"2026-10-24T12:06:29Z\", \"tool\": \"grep\", \"query\": \"pushout|gluing\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme pushout along a closed immersion and an integral map is also a pushout for algebraic space targets",
+   "results": "{\"t\": \"2026-10-24T12:06:29Z\", \"tool\": \"leansearch\", \"query\": \"A scheme pushout along a closed immersion and an integral map is also a pushout for algebraic space targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\"], \"digest\": \"38a92d7b1e454c61\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale covers of a scheme obtained by pinching are equivalent to pairs of separated etale covers agreeing on the closed subscheme",
+   "results": "{\"t\": \"2026-10-24T12:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"Separated etale covers of a scheme obtained by pinching are equivalent to pairs of separated etale covers agreeing on the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"07099dc87aa6c805\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-space-closure-thickenings-scheme",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited trait schematicity input: the closed gluing in Anantharaman Proposition 1.3.2 must have its universal property also for algebraic-space targets.",
+   "via": [
+    "lem-sfb-trait-space-closure-thickenings-scheme",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ferrand-pushout-space-agreement",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0EDP and its Situation against the unchanged statement. Reused the Ferrand scheme pushout and general 07SX criterion, and isolated the missing etale scheme patching unit/counit as one statement-only node. Checked arbitrary etale base change, separated-family effectivity, the finite index category, and the relative-over-S universal property.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited trait schematicity input: the closed gluing in Anantharaman Proposition 1.3.2 must have its universal property also for algebraic-space targets. Steps 1-4 supply this inherited trait-gluing prerequisite via scheme construction, etale patching and 07SX. The current ancestor command returns None; retain the inherited from.node and via, and the concrete place in det-thm-sf-ctf-stability-direct-images proof (3)."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-f796ec02a",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-f796ec02a (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-ferrand-etale-scheme-patching and the statement of every cited node in full. Stacks sources: 0EDP and the Situation at more-morphisms l.19708, 07SX (l.117), 0ECK (l.19876) and 0ECL (l.19946), all confirmed in tags/tags. The item statement is unchanged and matches 0EDP hypothesis by hypothesis. The split follows the Stacks proof of 0EDP exactly: the existing 0E25 node, the existing 07SX upgrade node and one new 0ECK/0ECL node. Step 1 gets joint surjectivity from the quotient-topology clause of the 0E25 node, and its uniqueness argument shows P is also a colimit over S. Steps 2 and 3 supply (ii) and (iii) of the 07SX node. In step 3, phi comes from the two cartesian identifications. Step 4 applies the 07SX node to the finite span category. The new node's forward clause is 0ECK plus the étale case of the first paragraph of 0ECL; separated étale implies locally quasi-finite, j' is integral by base change and h is separated étale. Its converse extends the 0ECL counit to non-separated, non-quasi-compact étale U. I checked the worker's Zariski argument: affine U_alpha mapping into affine opens are separated over P, their overlaps are open in U_alpha and so separated and étale, the counit applies to each, and morphisms glue. The new node is self-contained and statement-only, with notions cited and searches recorded. Edge cases tested: Z empty, i the identity, non-nilpotent pinching, doubled origin. Duplicate search with rg -L for 0ECK, 0ECL, 0EDP, 07SX, 0E25, Ferrand, pinch and space pushouts found about 14 candidates, including scheme-infinitesimal-etale-patching (thickening only), scheme-pushout-flat-patching (thickening only) and fibre-product-algebra-etale (affine algebra only). None is a duplicate or a generalization. Both cited theorem nodes are in the item's unit, so no tool_uses are needed. Batch-5 check: lem-sfb-scheme-colimit-upgrade-space-targets reaches only def-trf-algebraic-space. That is the general definition of an algebraic space, already a stmt_dep of the item, and not part of the trace formula or Poincaré duality, so the citation is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FerrandPushoutSpaceAgreement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ferrand_pushout_space_agreement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FerrandPushoutSpaceAgreement.lean",
+  "statement": "theorem ferrand_pushout_space_agreement (S : Scheme.{u}) (Z X T P : Over S) (i : Z ⟶ X) (j : Z ⟶ T) (a : X ⟶ P) (b : T ⟶ P) [IsClosedImmersion i.left] [IsIntegralHom j.left] (hAffine : ∀ t : T.left, ∃ U : X.left.Opens, IsAffineOpen U ∧ ∀ z : Z.left, j.left z = t → i.left z ∈ U) (hPushout : IsPushout i.left j.left a.left b.left) : ∀ (H : AlgebraicSpace S) (f : yoneda.obj X ⟶ H.obj.obj) (g : yoneda.obj T ⟶ H.obj.obj), yoneda.map i ≫ f = yoneda.map j ≫ g → ∃! h : yoneda.obj P ⟶ H.obj.obj, yoneda.map a ≫ h = f ∧ yoneda.map b ≫ h = g",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf919ab9b",
+  "group": "O1",
+  "result": "pass",
+  "note": "Statement matches Stacks 0EDP and the Situation at more-morphisms l.19708 clause by clause. i closed immersion, j integral with no finiteness, hAffine equals condition (3). IsPushout is the pushout in Scheme; asking for P, a, b over S adds nothing since a scheme pushout's map to S is unique. Maps into H are Yoneda on Over S, the same convention as AlgebraicSpace.lean (H.obj.obj : (Over S)ᵒᵖ ⥤ Type u); there is no other scheme-to-space embedding. Conclusion ∃! h with ha=f and hb=g. Edge cases covered: Z empty, i or j identity, empty fibres, non-Noetherian, nonseparated H, any universe u. No duplicate found. lean.statement is verbatim in the file, longest line 92. Proof only sorry; docstrings carry source, blueprint id and all 4 steps. Plain import of the proof dep FerrandSchemePushout follows brief §3 rule 7. No change made, so no compile run. No findings."
+ }
+}

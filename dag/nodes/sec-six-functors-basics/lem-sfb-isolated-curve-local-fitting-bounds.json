@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-isolated-curve-local-fitting-bounds",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. New supporting lemma: Tag 0E7Y, first and final paragraphs, using Algebra Tags 00OU, 00RT, 00RV, Morphisms Tags 02NM, 045U and More on Algebra Tag 07ZA; finite-jet Fitting calculation after the CM dimension partition is constructed.",
+   "via": [
+    "lem-sfb-isolated-curve-local-fitting-criterion",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Local differential Fitting bounds on finite jets of pure pieces",
+ "statement": "Let k be a field [def-weil-field], X a proper scheme [def-weil-proper-morphism] over k, and p a finite injective list of closed points outside which X is smooth [def-sbc-smooth-morphisms]. Let B_i be local flat essentially finite type [def-weil-pbc-essentially-finite-type-algebra] k[[t]]-algebras with compatible k-algebra structures. Let pi_i be finite generating surjections onto Omega_{B_i/k[[t]]}, and suppose t^E lies in the presentation Fitting ideal [lem-trf-fitting-ideal-independence-base-change] with index dim O_{X,p_i} plus trdeg_k kappa(p_i). Suppose g:Y to Spec k[[t]] is flat [def-weil-flat-morphism], locally finitely presented [def-sbc-locally-finite-presentation] and H-projective [def-kun-projective], with special fibre identified over k with X, and scalar-compatible stalk isomorphisms from every jet at the image of p_i to B_i/(t^{n+1}). Given two proper open pieces U_i of Y whose special fibres are pure [def-weil-pure-dimension] of dimension i.val, the specified positive jet n=E+1 of each piece has t^E as a global section of its i.val-th differential Fitting ideal [def-trf-fitting-ideal-sheaf]. No partition, Cohen--Macaulayness, or generic-smoothness conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7Y, final paragraph; More on Algebra Tag 07ZA and Algebra Tags 00OU, 00RT, 00RV"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-pc-fibre-product",
+  "def-weil-pure-dimension",
+  "def-trf-fitting-ideal-sheaf",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-sfb-isolated-curve-formal-lifting",
+  "lem-sfb-proper-formal-curve-algebraization"
+ ],
+ "proof": [
+  {
+   "text": "At any marked closed point on the d-dimensional part, choose a finite-type affine neighbourhood. The closed-point local dimension theorem gives dim O_{X,p_i}=d; Zariski lemma makes the residue extension finite, so its transcendence degree is zero. Thus the index in the supplied local Fitting bound is d. The supplied exponent E is uniform. Take n=E+1, so n is positive and n-1=E, including E=0 and an empty marked list.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-closed-point-dimension-local-ring",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7Y, lemma-smoothing-proper-curve-isolated-lci, proof"
+   }
+  },
+  {
+   "text": "For the n-th jet of each U_d, the given j_{n-1} is the special-fibre inclusion: its composite with the closed immersion to Y is specified, and that closed immersion is a monomorphism. At a marked point the supplied scalar-compatible local ring isomorphism identifies the relative differential stalk with Omega_{(B_i/t^n)/(R/t^n)}. Differential base change identifies this with Omega_{B_i/R} tensor_{B_i} (B_i/t^n). Presentation independence, localization and arbitrary base change for Fitting ideals carry the local bound to this stalk. As n-1=E, this proves membership of t^{n-1} directly.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-trf-fitting-ideal-generate-locally",
+    "lem-sc-relative-differentials-affine-sections",
+    "lem-sbc-affine-module-germ-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7Y, lemma-smoothing-proper-curve-isolated-lci, proof"
+   }
+  },
+  {
+   "text": "Off the marked points the unique special fibre is smooth. The flat, locally finitely presented infinitesimal family is therefore smooth there by the smoothness-by-fibres criterion. Its only fibre has local dimension d, so its relative differentials are locally free of rank d. Their d-th Fitting ideal is the unit ideal, by a rank-d free presentation and presentation independence. Thus t^{n-1} belongs to the differential Fitting ideal stalk at every unmarked closed point as well.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-trf-fitting-ideal-generate-locally"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7Y, lemma-smoothing-proper-curve-isolated-lci, proof"
+   }
+  },
+  {
+   "text": "Each jet is Noetherian, since R/(t^n) is finite-dimensional over k and the jet is finite type over it. Its differential Fitting ideal is coherent. The image of t^{n-1} in the coherent quotient O/I vanishes at every closed point by the preceding two steps. The support of this image is closed; a nonempty closed subset of a Noetherian space has a closed point, so this support is empty. Hence the image section is zero and t^{n-1} is a global section of I. This gives exactly idealOfOpens top membership. Empty pieces have zero section rings and satisfy all clauses vacuously. No generic-fibre smoothness theorem is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-trf-fitting-ideal-sheaf",
+    "lem-trf-fitting-ideal-generate-locally"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7Y, lemma-smoothing-proper-curve-isolated-lci, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-sbc-affine-module-germ-localization",
+  "sbc-lem-smooth-criterion",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-trf-fitting-ideal-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7Y, final paragraph; More on Algebra Tag 07ZA and Algebra Tags 00OU, 00RT, 00RV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local Fitting bounds at exceptional closed points give a global parameter power in the differential Fitting ideal of a finite thickening of a proper pure-dimensional curve",
+   "date": "2026-10-23",
+   "results": "8 hits, including IsLocalRing.closedPoint, IsLocalRing.specializes_closedPoint, PowerSeries.IsWeierstrassDivisorAt and finite presentation of differentials for formally smooth algebras.",
+   "verdict": "No match: these do not assert global ideal membership on the finite jet."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local bounds for the Fitting ideal of Kahler differentials imply a finite-jet global bound on a pure-dimensional proper curve",
+   "date": "2026-10-23",
+   "results": "8 hits, including KaehlerDifferential.finite, KaehlerDifferential.ideal_fg, and standard smooth algebra basis criteria.",
+   "verdict": "No match: finite generation does not assert the required global parameter-power bound."
+  },
+  {
+   "tool": "grep",
+   "query": "fitting.*stalk|stalk.*fitting|fitting.*jet",
+   "date": "2026-10-23",
+   "results": "0 hits.",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IsolatedLCICurveSmoothing",
+  "date": "2026-10-23",
+  "group": "F9"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IsolatedCurveLocalFittingBounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedCurveLocalFittingBounds.lean",
+  "declaration": "AlgebraicGeometry.isolated_curve_local_fitting_bounds",
+  "statement": "theorem isolated_curve_local_fitting_bounds\n    (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsProper f]\n    (r : ℕ) (p : Fin r → X) (hp : Function.Injective p)\n    (hclosed : ∀ i, IsClosed ({p i} : Set X))\n    (hsmooth : ∀ x ∉ Set.range p, ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f))\n    (B : Fin r → Type u) [∀ i, CommRing (B i)] [∀ i, IsLocalRing (B i)]\n    [∀ i, Algebra (PowerSeries k) (B i)] [∀ i, Algebra k (B i)]\n    [∀ i, IsScalarTower k (PowerSeries k) (B i)]\n    [∀ i, Module.Flat (PowerSeries k) (B i)]\n    [∀ i, Algebra.EssFiniteType (PowerSeries k) (B i)]\n    (ex : ℕ) (m : Fin r → ℕ)\n    (π : ∀ i, (Fin (m i) → B i) →ₗ[B i] KaehlerDifferential (PowerSeries k) (B i))\n    (hπ : ∀ i, Function.Surjective (π i))\n    (hbound : ∀ i,\n      let : Algebra k (X.presheaf.stalk (p i)) :=\n        (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ ⊤ le_top ≫\n          X.presheaf.germ ⊤ (p i) trivial).hom.toAlgebra)\n      (algebraMap (PowerSeries k) (B i) PowerSeries.X) ^ ex ∈\n        (π i).presentationFittingIdeal\n          ((WithBot.unbotD 0 (ringKrullDim (X.presheaf.stalk (p i)))).toNat +\n            (Algebra.trdeg k (IsLocalRing.ResidueField (X.presheaf.stalk (p i)))).toNat))\n    (Y : Scheme.{u}) (g : Y ⟶ Spec (.of (PowerSeries k)))\n    [Flat g] [LocallyOfFinitePresentation g] [IsHProjective g]\n    (e : pullback g (Spec.map (CommRingCat.ofHom\n      (PowerSeries.constantCoeff (R := k)))) ≅ X)\n    (he : e.hom ≫ f = pullback.snd g (Spec.map (CommRingCat.ofHom\n      (PowerSeries.constantCoeff (R := k)))))\n    (j : ∀ n, X ⟶ pullback g (formalCurveBaseι k n))\n    (hj : ∀ n, j n ≫ pullback.fst g (formalCurveBaseι k n) =\n      e.inv ≫ pullback.fst g (Spec.map (CommRingCat.ofHom\n        (PowerSeries.constantCoeff (R := k)))))\n    (h : ∀ i n,\n      (pullback g (formalCurveBaseι k n)).presheaf.stalk (j n (p i))\n        ≃+* (B i ⧸ Ideal.span\n          {(algebraMap (PowerSeries k) (B i) PowerSeries.X) ^ (n + 1)}))\n    (hscalar : ∀ i n a, h i n (isolatedCurveScalarToStalk\n      (pullback.snd g (formalCurveBaseι k n)) (j n (p i))\n      (Ideal.Quotient.mk _ a)) = Ideal.Quotient.mk _ (algebraMap _ _ a))\n    (U : Fin 2 → Y.Opens)\n    (hproper : ∀ i, IsProper ((U i).ι ≫ g))\n    (hpure : ∀ i, (pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n      (PowerSeries.constantCoeff (R := k))))).IsPureDimension i.val) :\n    ∀ i,\n        (pullback.snd ((U i).ι ≫ g) (Scheme.powerSeriesJetBaseMap k (ex + 1))).appTop\n          ((Scheme.ΓSpecIso (.of ((PowerSeries k) ⧸\n            Ideal.span {(PowerSeries.X : PowerSeries k) ^ (ex + 1)}))).inv\n            (Ideal.Quotient.mk _ ((PowerSeries.X : PowerSeries k) ^ ex))) ∈\n        (Scheme.Modules.fittingIdealSheaf\n          (pullback.snd ((U i).ι ≫ g)\n            (Scheme.powerSeriesJetBaseMap k (ex + 1))).relativeDifferentials\n          i.val).idealOfOpens ⊤",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-23"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isolated-curve-local-fitting-bounds",
+  "worker": "stage3",
+  "summary": "Only the final finite-jet Fitting calculation remains; the criterion and its CM partition are proved in this packet.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. New supporting lemma: Tag 0E7Y, first and final paragraphs, using Algebra Tags 00OU, 00RT, 00RV, Morphisms Tags 02NM, 045U and More on Algebra Tag 07ZA",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic Local dimension of a pure-dimensional locally algebraic open input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "Generic Dimension at a closed point of a finite type algebra over a field is the dimension of the local ring input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-independence-base-change",
+    "why": "Generic Fitting ideals of a finite module: independence of generators and base change input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-generate-locally",
+    "why": "Generic Fitting subscheme complement is the bounded-generator locus input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic Smoothness by flatness and smooth fibres input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Generic Relative differentials of a smooth morphism are locally free of rank d input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "def-trf-fitting-ideal-sheaf",
+    "why": "Generic Fitting ideal sheaf of a finite-type quasi-coherent module input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261023T231145-L-3553832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261023T231145-L-3553832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

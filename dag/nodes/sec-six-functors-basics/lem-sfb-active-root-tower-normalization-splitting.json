@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-active-root-tower-normalization-splitting",
+ "kind": "statement",
+ "title": "A punctured active-root tower splitting trivializes a finite normalization after strict localization",
+ "statement": "Let $p$ be a positive prime and let $B$ be a commutative Noetherian $\\mathbf F_p$-algebra [def-weil-pbc-noetherian-ring]. Choose $t_1,\\ldots,t_r\\in B$, $r\\geq0$, with $f=\\prod_i t_i$ (empty product $1$) having injective multiplication on $B$. For each positive $m$ prime to $p$, put\n$$C_m=B[x_1,\\ldots,x_r]/(x_i^m-t_i)_i,$$\nand assume $C_m$ is normal, meaning that every prime localization is an integrally closed domain [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-normal-ring]. Let $D$ be a finite $B[1/f]$-algebra etale over $B[1/f]$, and put $D_m=D\\otimes_{B[1/f]}C_m[1/f]$ and $E_m=\\operatorname{IntCl}_{C_m}(D_m)$, the integral closure of $C_m$ in $D_m$ [def-weil-pbc-finite-etale-category, def-weil-ring-localization-away, def-weil-pbc-module-tensor-product, def-weil-pbc-integral-closure].\nFix a geometric point $\\bar v$ of $\\operatorname{Spec}B$, with image $v$, and let $A=\\mathcal O_{\\operatorname{Spec}B,\\bar v}^{\\mathrm{sh}}$ with its structural map from $B$ [def-sc-ring-strict-henselization]. Set $I=\\{i:t_i(v)=0\\}$ and\n$$T_m=A[z_i:i\\in I]/(z_i^m-t_i)_{i\\in I},\\qquad Q_m=T_m[1/f].$$\nThe image of each inactive $t_j$ is a unit in $A$, so $Q_m$ also denotes the localization at $\\prod_{i\\in I}t_i$. Use transitions $z_{i,m}\\mapsto z_{i,m'}^{m'/m}$ for $m\\mid m'$ and let $Q_\\infty=\\varinjlim_{(m,p)=1}Q_m$ [def-weil-pbc-category-colimit]. Suppose a nonnegative integer $d$ and a $Q_\\infty$-algebra isomorphism\n$$\\theta_\\infty:D\\otimes_{B[1/f]}Q_\\infty\\simeq Q_\\infty^{d}$$\nare given. Then there is a positive $m$ prime to $p$ and a $Q_m$-algebra isomorphism $\\theta_m:D\\otimes_{B[1/f]}Q_m\\simeq Q_m^d$ whose scalar extension to $Q_\\infty$ is exactly $\\theta_\\infty$.\nFor this $m$, let $S_m=A\\otimes_B C_m$, with the $T_m$-algebra map $z_i\\mapsto x_i$ for active $i$. Scalar extension of $\\theta_m$ gives an $S_m[1/f]$-algebra isomorphism $D_m\\otimes_{C_m}S_m\\simeq S_m[1/f]^d$. The integral closure of $S_m$ in $S_m[1/f]$ is the structural image of $S_m$, and this splitting restricts to an $S_m$-algebra isomorphism\n$$E_m\\otimes_B A\\simeq S_m^{d}.$$\nConsequently the actual normalization $\\operatorname{Spec}E_m$ becomes a trivial finite etale cover of $\\operatorname{Spec}S_m$ after base change along $\\operatorname{Spec}A\\to\\operatorname{Spec}B$. No regularity of $A$, Galois group, invertible cover degree, or choice of roots of unity is assumed. Empty covers, $d=0$, and $r=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM, lemma-descend-finite-presentation, morphism and equality clauses for the punctured active-root system; Tag 0CBF, algebra.tex lemma-integral-closure-commutes-colim-smooth, for the two ind-etale integral-closure comparisons. Finite-data elaboration of ILO IX Proposition 2.1 proof, printed pp.133-134; returned proof steps 6-9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-integral-closure",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-simultaneous-root-tower",
+  "def-sfb-parameter-root-algebra",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "The small-model affine-chart theorem, applied to the identity chart of Spec B and the prescribed presentation e, gives B -> A ind-etale. Transfer the local-ring structure of the chosen strict-henselization ring to A via full faithfulness of Spec. The small-to-full comparison and the closed-point theorem show that the closed point of Spec A maps to v. Hence a parameter outside the specified active set has image outside the maximal ideal of A and is a unit.",
+   "uses": [
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-closed-fiber-backward",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Etaleness gives finite presentation of D. Apply the specified active-root splitting descent theorem to obtain m, theta_m and its required agreement with theta at infinity.",
+   "uses": [
+    "lem-sfb-active-root-specified-splitting-descent",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-sfb-active-root-normalization-pushout-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Apply the already proved flat root-tower nonzerodivisor theorem with the identity flat map B -> B, the set of all positive orders, and the identity flat map out of its ring colimit. Its finite-stage conjunct gives regularity of f on C_m, including r=0. Apply the punctured-stage integral-closure theorem with this regularity, the normality hypothesis at m, and B -> A ind-etale.",
+   "uses": [
+    "lem-sfb-flat-root-tower-nonzerodivisor",
+    "lem-sfb-root-stage-puncture-ind-etale-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Apply fixed-stage normalization restriction to theta_m, using the puncture injection and the characterization of integral elements just obtained. It supplies k, its coefficient and root equations, Theta and epsilon with the actual ambient-inclusion equality. Combine these witnesses with theta_m and its colimit equation, and insert the separately obtained integral-closedness conjunct. This is exactly the original conclusion.",
+   "uses": [
+    "lem-sfb-active-root-stage-normalization-restriction",
+    "def-sfb-active-root-normalization-pushout-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-active-root-normalization-pushout-data",
+  "lem-sfb-active-root-specified-splitting-descent",
+  "lem-sfb-active-root-stage-normalization-restriction",
+  "lem-sfb-flat-root-tower-nonzerodivisor",
+  "lem-sfb-root-stage-puncture-ind-etale-integral-closure",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-closed-fiber-backward",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+  "place": "Tags 05N9/01ZM, 034M and 0CBF, decomposed into finite descent, punctured-stage integral closure and fixed-stage normalization restriction. Regularity uses the existing proved flat root-tower theorem; strict localization uses the small-model comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(root|Kummer).*(strictHensel|integralClosure)|(strictHensel|integralClosure).*(root|Kummer)",
+   "results": "{\"t\": \"2026-10-22T11:32:36Z\", \"tool\": \"grep\", \"query\": \"(root|Kummer).*(strictHensel|integralClosure)|(strictHensel|integralClosure).*(root|Kummer)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\"], \"digest\": \"39226559053d91fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale field decompositions, smooth integral-closure comparisons, or polynomial splitting; none supplies this root-tower descent and strict-local normalization statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite root tower splitting descends and integral closure becomes a product over a strict henselization",
+   "results": "{\"t\": \"2026-10-22T11:32:37Z\", \"tool\": \"leansearch\", \"query\": \"Finite root tower splitting descends and integral closure becomes a product over a strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegral.minpoly_splits_tower_top\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"IsIntegral.minpoly_splits_tower_top'\", \"Polynomial.exists_finset_of_splits\", \"Polynomial.IsSplittingField.IsScalarTower.splits\", \"Ring.instIsIntegrallyClosedNormalClosure\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"Ring.instFiniteNormalClosure_1\"], \"digest\": \"1a0ae16a67df27c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale field decompositions, smooth integral-closure comparisons, or polynomial splitting; none supplies this root-tower descent and strict-local normalization statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-22T11:32:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale field decompositions, smooth integral-closure comparisons, or polynomial splitting; none supplies this root-tower descent and strict-local normalization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure in a split finite product after ind etale base change and descent of isomorphisms along filtered colimits of rings",
+   "results": "{\"t\": \"2026-10-22T11:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure in a split finite product after ind etale base change and descent of isomorphisms along filtered colimits of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.comp\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"113360e401ba1b73\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale field decompositions, smooth integral-closure comparisons, or polynomial splitting; none supplies this root-tower descent and strict-local normalization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale algebra split over the prime to p root tower has a specified splitting descending to a finite root level and its integral closure splits after strict henselization",
+   "results": "{\"t\": \"2026-10-22T11:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"A finite etale algebra split over the prime to p root tower has a specified splitting descending to a finite root level and its integral closure splits after strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"StandardEtalePresentation\"], \"digest\": \"5f0c902bc8a85b76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale field decompositions, smooth integral-closure comparisons, or polynomial splitting; none supplies this root-tower descent and strict-local normalization statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-root-etale-extension",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited finite-cover Kummer input: Tag 01ZM, lemma-descend-finite-presentation, morphism and equality clauses for the punctured active-root system; Tag 0CBF, algebra.tex lemma-integral-closure-commutes-colim-smooth, for the two ind-etale integral-closure comparisons. Finite-data elaboration of ILO IX Proposition 2.1 proof, printed pp.133-134; returned proof steps 6-9.",
+   "via": [
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-active-root-tower-normalization-splitting",
+  "worker": "stage1",
+  "summary": "Nine steps, no new nodes: descend the specified map and inverse, enforce both inverse equations, use iterated monic coordinates to preserve the nonzerodivisor, and apply existing ind-etale integral-closure base change twice. Statement unchanged; no regularity or normalization-finiteness assumption added.",
+  "blueprint": "Inherited main-20261015 det-thm-sf-ctf-stability-direct-images clause (3), open direct image: finite Kummer-cover input, via the existing tame-root chain; realizes the active finite-data normalization argument of the parent proof, steps 6–9. No blueprint node states this result.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "def-weil-pbc-finitely-presented-algebra",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "def-weil-geometric-point",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "def-weil-pbc-ind-etale-algebra",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "def-weil-pbc-integral-closure",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   },
+   {
+    "node": "def-weil-pbc-finite-etale-category",
+    "why": "Generic algebra or strict-localization tool for the active-root normalization argument; the unit gives no substitute for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-etale-ring-base-change",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-de3f6cf24",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-de3f6cf24 (reviewer sub-agent of L); spot-checked: I read the item, the report, the cited node statements, ILO IX 2.1 (printed pp.133-134) and Stacks 0CBF/05N9/034M/04HX in full. The statement and stmt_deps are identical to live and side-live, which are still unsplit. There are no new nodes. This is the old steps 6-9 node of the reviewed Q66 re-split, and the parent's step 3 uses exactly E_m⊗A≅S_m^d. Steps 1-3: the finite presentation of D⊗Q_1 and Q_1^d, the descent of θ_∞ and its inverse by 05N9 clause (2), and the inverse equations by clause (3) at level a are all correct; the directed set and the power transitions are well defined, and d=0 is handled. Step 4: the iterated monic basis makes f a nonzerodivisor on C_m. Step 5: the affine-chart theorem with the algebraically-closed geometric point plus tensor-colimit and etale base change give C_m→S_m ind-etale. Step 6: 034M and the 0CBF node with ambient C_m[1/f] show S_m integrally closed in S_m[1/f] with injective structure map. Step 7: the second 0CBF application gives E_m⊗_B A; Q_m→S_m[1/f] is compatible over B[1/f]. Step 8: the coordinatewise closure argument with ∏(X−s_j) is correct, and correctly marked elementary. Edge cases B=0 (vacuous), r=0, I=∅ and d=0 are all fine. No SGA is used. The 11 declared tool_uses are generic and accepted. Maintainer note: blueprint.from.node=null is inherited from the parent chain."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ActiveRootTowerNormalizationSplitting",
+  "declaration": "Algebra.ActiveRootNormalization.activeRootTower_normalization_splitting",
+  "declarations": [
+   "Algebra.ActiveRootNormalization.activeRootTower_normalization_splitting"
+  ],
+  "file": "lean/Sheaf/RingTheory/ActiveRootTowerNormalizationSplitting.lean",
+  "statement": "theorem activeRootTower_normalization_splitting (p : ℕ) (hp : p.Prime) (B : Type u) [CommRing B] [Algebra (ZMod p) B] [IsNoetherianRing B] (r : ℕ) (t : Fin r → B) (hf : Function.Injective (fun b : B ↦ (∏ i, t i) * b)) (hnormal : ∀ (m : ℕ+) (_hm : Nat.Coprime (m : ℕ) p) (q : Ideal (pthRootAlgebra m r B t)) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)) (D : Under (CommRingCat.of (Localization.Away (∏ i, t i)))) (hfinite : D.hom.hom.Finite) (hetale : D.hom.hom.Etale) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ Spec (.of B)) (A : Type u) [CommRing A] [Algebra B A] (e : Spec (.of A) ≅ Scheme.strictHenselizationScheme v) (he : Spec.map (CommRingCat.ofHom (algebraMap B A)) = e.hom ≫ Scheme.strictHenselizationStructuralMap v) (s : ℕ) (active : Fin s ↪ Fin r) (hactive : ∀ i : Fin r, i ∈ Set.range active ↔ t i ∈ (v (IsLocalRing.closedPoint Ω)).asIdeal) (d : ℕ) (theta : extend D (activeColimit (A := A) t active p) ≅ diagonal (activeColimit (A := A) t active p).right d) : (∀ i : Fin r, i ∉ Set.range active → IsUnit (algebraMap B A (t i))) ∧ ∃ m : RootTowerIndex {n : ℕ+ | Nat.Coprime (n : ℕ) p}, ∃ theta_m : extend D ((activeDiagram (A := A) t active p).obj m) ≅ diagonal ((activeDiagram (A := A) t active p).obj m).right d, (∀ (x : D.right) (j : Fin d), (colimit.ι (activeDiagram (A := A) t active p) m).right (theta_m.hom.right (extendInclusion D _ x) j) = theta.hom.right (extendInclusion D _ x) j) ∧ ∃ k : (activeDiagram (A := A) t active p).obj m ⟶ strictPunctureOverBase (A := A) t m.1, (∀ a : A, k.right (activeInclusion (A := A) t active p m (algebraMap A _ a)) = (strictPuncture (A := A) t m.1).hom ((strictStage (A := A) t m.1).hom a)) ∧ (∀ i : Fin s, k.right (activeInclusion (A := A) t active p m (simultaneousRoot (fun i ↦ algebraMap B A (t (active i))) m.1 i)) = (strictPuncture (A := A) t m.1).hom (strictStageMap (A := A) t m.1 (simultaneousRoot t m.1 (active i)))) ∧ (∀ x : asAlgebra (strictPuncture (A := A) t m.1), IsIntegral (strictStage (A := A) t m.1).right x ↔ ∃ a : (strictStage (A := A) t m.1).right, (strictPuncture (A := A) t m.1).hom a = x) ∧ ∃ Theta : strictAmbient (A := A) t m.1 D ≅ (Under.map (strictPuncture (A := A) t m.1).hom).obj (diagonal (strictPuncture (A := A) t m.1).right d), (∀ (x : D.right) (j : Fin d), Theta.hom.right (strictAmbientInclusion (A := A) t m.1 D x) j = k.right (theta_m.hom.right (extendInclusion D _ x) j)) ∧ ∃ epsilon : strictClosure (A := A) t m.1 D ≅ diagonal (strictStage (A := A) t m.1).right d, ((Under.pushout (strictStageMap (A := A) t m.1)).map (closureInclusion (ambient t m.1 D))).right ≫ Theta.hom.right = epsilon.hom.right ≫ diagonalLocalization (strictPuncture (A := A) t m.1) d",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1993fdb53",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Read node, 14 stmt_dep records, side-live sources (pthRootAlgebra, SimultaneousRootTower, strictHenselizationScheme/StructuralMap) and Mathlib Under.pushout. Every hypothesis matches the node with nothing stronger: Noetherian F_p-algebra, injective multiplication by f, inline normality of C_m for all m prime to p, finite etale D, algebraically closed geometric point, A pinned to strictHenselizationScheme by the iso and he, active set exact. Q_m/Q_inf come from the recorded simultaneousRootDiagram; theta_m agrees with theta_inf on D (so it is the scalar extension); k is pinned on A and the active roots; S_m is integrally closed in S_m[1/f]; Theta is pinned on D; epsilon restricts Theta on the actual E_m. Edge cases r=0, I empty, d=0, B=0, m=1 covered. lean.statement verbatim, 23 declarations exact, +5 landed stmt_deps used, imports exist, docstrings ok, no hollow defs, single sorry. Advisories: def-sc-ring-strict-henselization kept while the Lean uses the geometric O^sh (canonically equal, 04HX); monic-quotient proof dep has no Lean yet. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-878fc",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T081159-L-1853738",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); 22 relocated defs vs original (verbatim); 3 new sorry statements vs their nodes and Stacks 05N9/034M/0CBF; item node proof_deps vs Lean proof"
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "id": "lem-trf-line-quotient-pullback-charts",
+ "kind": "statement",
+ "title": "Fraction charts under arbitrary pullback",
+ "statement": "Let $h:T\\to S$ and $u:T'\\to T$ be arbitrary morphisms of schemes [def-pc-scheme], $\\mathcal E$ quasi-coherent [pqf-def-coherent], $L$ invertible [def-sc-invertible-module], and $q:h^*\\mathcal E\\to L$ an epimorphism. Let $\\psi$ be its graded extension and $F:T\\to\\operatorname{Proj}_S\\operatorname{Sym}(\\mathcal E)$ a morphism satisfying all homogeneous fraction charts [lem-trf-line-quotient-homogeneous-fraction-map]. Let $\\psi'$ be any graded extension of the normalized pulled quotient $u^*q$ [def-trf-line-quotient-chart-inverse-data]. Then $\\psi'$ satisfies all homogeneous fraction charts for $u;F$. Furthermore, on every affine refinement $W'$ over $W$, all homogeneous coefficients and generator coefficients are images under $u.\\mathrm{appLE}$. No flatness or finite-generation hypothesis is imposed. The coefficient conclusion consists of the homogeneous coefficient equation and the degree-one generator coefficient equation on every affine refinement; construction of the canonical map of away localizations is proved separately in the importing inverse theorem.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "def-trf-line-quotient-chart-inverse-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the section-normalized adjunction of [def-pc-module-pullback] and its left-adjoint uniqueness equation to evaluate the composite comparison on 1 tensor m. Naturality and restriction then identify the image under lineQuotientPullback with the pullback of q(m). Pullback carries a free frame to a free frame: compare normalized tensor pullback with the usual pullback and transport the free-generator unit theorem. Multiplying the desired generator-coefficient equality by that frame reduces it to this section equation. No flatness is used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-local-free-generator",
+    "def-trf-line-quotient-chart-inverse-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+   }
+  },
+  {
+   "text": "In a free frame, the coefficients of a graded line map extend to a unital ring homomorphism from the symmetric algebra. Use the already proved coefficient-ring helpers of [lem-trf-graded-line-homogeneous-fraction-atlas] and the defining coefficient equations of [lem-trf-line-quotient-homogeneous-fraction-map]. Its scalar value is h.appLE, by the degree-zero unit and scalar axioms. Its value on every symmetric generator is the quotient generator coefficient. The first step and composition of appLE therefore identify the pulled coefficient ring map with u.appLE composed with the original coefficient ring map. Induction on scalars, symmetric generators, products and sums proves equality of these ring maps; evaluation on every homogeneous element is the homogeneous coefficient conclusion.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-trf-graded-line-homogeneous-fraction-atlas",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+   }
+  },
+  {
+   "text": "For an affine refinement W prime over W and b in O(W), the square of canonical maps from Spec O(W prime)[1/u*b] and Spec O(W)[1/b] commutes, using the canonical Localization.awayMap. This follows from Spec functoriality, the affine appLE square and the localization scalar formula. Pullback preserves invertibility by [lem-weil-pbc-invertible-pullback-tensor], and preserves epimorphisms because the normalized tensor pullback is a left adjoint. Apply [lem-trf-line-quotient-homogeneous-fraction-map] to the pulled quotient and use its extension uniqueness to obtain fraction charts for psi prime and some F prime.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+   }
+  },
+  {
+   "text": "Around each point of T prime choose an affine base U, a trivializing affine W in h inverse U, and an affine W prime in u inverse W. Use the actual pulled frame. The generator-cover clause for F prime supplies a denominator nonvanishing at the point. The two coefficient identities identify its chart ring map with Localization.awayMap composed with the chart ring map for F: they agree on every homogeneous fraction, and these fractions exhaust the homogeneous localization. The commuting affine square in the previous step identifies the restrictions of F prime and u;F. The corresponding localization morphism is an open immersion whose range is this generator open. Equality on these neighbourhoods gives F prime = u;F by [lem-weil-pbc-scheme-morphism-gluing]. Substitute in the fraction-chart predicate and combine with the coefficient equations.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-local-free-generator",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-trf-line-quotient-chart-inverse-data",
+  "def-weil-affine-spectrum",
+  "lem-trf-graded-line-homogeneous-fraction-atlas",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01O4; normalized section calculation, symmetric-algebra ring-map induction and comparison on generator localization charts (R3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projective bundle homogeneous fraction chart morphisms commute with arbitrary base change and localization maps",
+   "results": "{\"t\": \"2026-10-23T11:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Projective bundle homogeneous fraction chart morphisms commute with arbitrary base change and localization maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap\", \"IsLocalization.Away.tensorEquiv\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\"], \"digest\": \"38a69b6042766c8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective bundle homogeneous fraction chart morphisms commute with arbitrary base change and localization maps",
+   "results": "{\"t\": \"2026-10-23T11:29:49Z\", \"tool\": \"leanfinder\", \"query\": \"Projective bundle homogeneous fraction chart morphisms commute with arbitrary base change and localization maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\"], \"digest\": \"f5295211f024352d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"grep\", \"query\": \"HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero occurrences in Mathlib; these fraction-chart predicates are project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LineQuotientChartInversePullback",
+  "date": "2026-10-23",
+  "group": "G3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9. Intermediate Fraction charts under arbitrary pullback.",
+   "via": [
+    "lem-trf-line-quotient-chart-inverse-pullback",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientPullbackCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientPullbackCharts.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.lineQuotient_pullback_charts",
+  "statement": "theorem lineQuotient_pullback_charts {S T T' : Scheme.{u}} (h : T ⟶ S) (u : T' ⟶ T) (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q] (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L) (hψ : ψ.ExtendsLineQuotient h E L q) (F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) (hcharts : ψ.HasQuotientFractionCharts h E L q F) (ψ' : RelativeGradedLineMap (u ≫ h) (SymmetricAlgebraSheaf.gradedAlgebraData E) ((tensorPullback u).obj L)) (hψ' : ψ'.ExtendsLineQuotient (u ≫ h) E _ (lineQuotientPullback h u E L q)) : ψ'.HasQuotientFractionCharts (u ≫ h) E _ (lineQuotientPullback h u E L q) (u ≫ F) ∧ (∀ (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1) (l : Γ(L, W.1)), IsFreeGenerator l → ∀ (W' : T'.affineOpens) (hWW' : W'.1 ≤ u ⁻¹ᵁ W.1) (hW'U : W'.1 ≤ (u ≫ h) ⁻¹ᵁ U.1), (∀ (d : ℕ) (z : (SymmetricAlgebraSheaf.gradedAlgebraData E).grading U d), ψ'.quotientCoefficient U W' hW'U (((tensorPullback u).obj L).val.map (homOfLE hWW').op (tensorPullbackSection u L W.1 l)) d z = u.appLE W.1 W'.1 hWW' (ψ.quotientCoefficient U W hWU l d z)) ∧ ∀ m : Γ(E, U.1), quotientGeneratorCoefficient (u ≫ h) E ((tensorPullback u).obj L) (lineQuotientPullback h u E L q) U W' hW'U (((tensorPullback u).obj L).val.map (homOfLE hWW').op (tensorPullbackSection u L W.1 l)) m = u.appLE W.1 W'.1 hWW' (quotientGeneratorCoefficient h E L q U W hWU l m))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T112420-L-1581900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

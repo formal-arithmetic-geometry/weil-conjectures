@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-finite-field-hom-etale-witness",
+ "kind": "statement",
+ "title": "Finite-field internal Hom has a bounded etale model with its Tor interval",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting] which is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism]. Let $A$ be a finite field of characteristic $\\ell$ with its discrete condensed structure [sk-def-sfb-condensed-ring], and let $A_X=p_X^*\\underline A$ [sk-def-sfb-pulled-back-coefficients], identified with the constant ring sheaf. Let $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. Work in ordinary unbounded derived categories of module sheaves and with ambient relative derived internal Hom [sk-def-sfb-derived-tensor-hom]. Let $C_P,C_Q\\in D^b_c(X_{\\mathrm{ét}},A)$ be bounded étale complexes whose cohomology sheaves admit finite constructible locally closed stratifications with locally constant finite-dimensional $A$-values [def-pe-etale-constructible-module]. Set $P=\\nu_X^*C_P$, $Q=\\nu_X^*C_Q$ and $J=R\\mathcal Hom_{A_X}(P,Q)$.\n\nThe complexes $P,Q,J$ have bounded cohomology constructible in the finite constant local-model sense [sk-def-sfb-constructible]. There exists a bounded cochain complex $D^\\bullet$ of étale $A$-module sheaves, with constructible finite-dimensional cohomology, and an isomorphism in the derived category\n$$\\nu_X^*D^\\bullet\\simeq J.$$\nMoreover, for every cohomological interval $[a,b]$, $a\\le b$, containing the cohomology of $J$, this same $D^\\bullet$ has Tor amplitude in $[a,b]$: for every degree-zero étale $A$-module sheaf $N$ one has\n$$H^q(D^\\bullet\\otimes_A^L N)=0\\qquad(q\\notin[a,b]).$$\nIn particular $D^\\bullet$ has finite Tor amplitude. The ground field $k$ need not be finite, perfect or separably closed, and neither input is assumed site-perfect.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.13 with finite-field coefficient ring and zero ideal, Definition 6.5.1 and Lemma 6.3.16; agent extraction of etale descent, bounded representative and the field Tor interval.",
+  "external": [
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived"
+   },
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.proof.md",
+    "place": "Tor amplitude is detected; the field interval is lem-sfb-constant-field-tor-bounds."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-pe-etale-constructible-module",
+  "sk-def-sfb-constructible",
+  "lem-sf-finite-discrete-normalized-encoding"
+ ],
+ "proof": [
+  {
+   "text": "The field $A$ is Noetherian: its only ideals are $(0)$ and $(1)$. The assumed qcqs hypotheses therefore allow the constructible comparison theorem [sk-thm-pe-constructible-comparison] with coefficients $A$. Its forward bounded-constructible equivalence sends $C_P,C_Q$ to $P,Q$. More explicitly, exactness of $\\nu_X^*$ [det-pe-classical-sheaves-modules] and [lem-weil-pbc-exact-functor-complex-cohomology] give $H^q(P)\\cong\\nu_X^*H^q(C_P)$ and the analogous formula for $Q$, so their cohomological bounds are preserved. The sheaf part of the comparison theorem makes these cohomology sheaves constructible. That theorem's constructibility is local on $X$; to get the single finite stratification required for qcqs $X$, choose a finite affine open cover $U_1,\\dots,U_n$ with stratifications $U_i=\\coprod_aZ_{ia}$ and use the strata $Z_{ia}\\cap(U_i\\setminus\\bigcup_{j<i}U_j)$. They are locally closed in $X$, hence constructible, because $X$ is of finite type over a field and so Noetherian, as remarked in [sk-def-sfb-constructible]. A local model restricts to each smaller stratum, since pulling back $\\Lambda_U\\otimes P$ gives the same form. For $A_X$ the constant field sheaf, the local models of [sk-def-sfb-constructible] agree with locally constant finite-dimensional $A$-values: a finite-dimensional vector space is $A^r$, whose scalar extension is $A_X^r$, and every finitely presented $A$-module is finite-dimensional. Thus this is exactly the finite constant local-model constructibility required in the conclusion.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AI (lemma-compare-constructible) and 09AL (lemma-compare-constructible-derived); exact comparison on modules, Tag 099V (lemma-compare-derived)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-field-internal-hom-finiteness] to these $P,Q$. Its hypotheses are precisely the given prime $\\ell$, arbitrary characteristic-$p$ base field $k$ with $p\\ne\\ell$, separated finite-type $X$, finite field $A$ of characteristic $\\ell$, and the bounded finite constant local-model inputs established in step 1. It follows that the ambient relative internal Hom $J=R\\mathcal Hom_{A_X}(P,Q)$ is bounded and constructible in the same sense. This application requires neither site-perfect inputs nor a restriction on the ground field beyond the stated characteristic.",
+   "uses": [
+    "lem-sfb-finite-field-internal-hom-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13 with R=A and ideal m=0, as extracted in the cited finite-field coefficient lemma; Definition 6.5.1."
+   }
+  },
+  {
+   "text": "Apply essential surjectivity of the bounded constructible derived equivalence in [sk-thm-pe-constructible-comparison] to $J$. The hypotheses remain qcqs $X$ and discrete Noetherian $A$, and step 2 supplies the target object's bounded constructibility. We obtain $C\\in D^b_c(X_{\\mathrm{ét}},A)$ and an isomorphism $e:\\nu_X^*C\\xrightarrow{\\sim}J$. Over the finite field $A$, finite type of each local module means finite-dimensionality. This uses only the comparison theorem's stated equivalence; it does not assert that inverse image commutes with internal Hom.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, bounded constructible restriction (cf. Tag 099V)."
+   }
+  },
+  {
+   "text": "Choose integers $u\\le v$ containing the cohomology of $C$. Apply [lem-sfb-bounded-representative] in the abelian category of étale $A$-module sheaves. It gives a cochain complex $D^\\bullet$ zero outside $[u,v]$ and an isomorphism $d:Q(D^\\bullet)\\xrightarrow{\\sim}C$ in the derived category. The isomorphism identifies $H^q(D^\\bullet)$ with $H^q(C)$, so these sheaves are constructible with finite-dimensional local values. Composing $\\nu_X^*d$ with $e$ gives $\\nu_X^*D^\\bullet\\simeq J$. Fix this $D^\\bullet$ and these isomorphisms before choosing an interval in the next step.",
+   "uses": [
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "place": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, lines 180–187; existing Mathlib leaf lem-sfb-bounded-representative."
+   }
+  },
+  {
+   "text": "Let $a\\le b$ be any integers with $H^q(J)=0$ outside $[a,b]$. The constant-field result [lem-sfb-constant-field-tor-bounds], applied to $J$ with $\\kappa=A$, says that $J$ has Tor amplitude in this same interval against every degree-zero pro-étale $A_X$-module. Since $e$ is an isomorphism, tensoring it with any test module gives an isomorphism on tensor products and hence on cohomology; thus $\\nu_X^*C$ has Tor amplitude in $[a,b]$. Apply the reflection direction of [det-pe-finite-tor-comparison-noetherian] to $C\\in D^b_c(X_{\\mathrm{ét}},A)$: $X$ is qcqs and $A$ is discrete Noetherian, exactly its assumptions. It gives $H^q(C\\otimes_A^L N)=0$ for every degree-zero étale module $N$ and $q\\notin[a,b]$. Tensoring $d:Q(D^\\bullet)\\simeq C$ with $N$ identifies these groups with $H^q(D^\\bullet\\otimes_A^L N)$. This proves the required interval for the fixed $D^\\bullet$. Since step 2 supplies at least one finite cohomological interval for $J$, it also proves finite Tor amplitude.",
+   "uses": [
+    "lem-sfb-constant-field-tor-bounds",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.proof.md",
+    "place": "Paragraph Tor amplitude is detected, plus the field calculation of lem-sfb-constant-field-tor-bounds; Stacks Tag 09C2, lemma-describe-constructible-complexes, final proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-sheaves-modules",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sfb-bounded-representative",
+  "lem-sfb-constant-field-tor-bounds",
+  "lem-sfb-finite-field-internal-hom-finiteness",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-constructible",
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assembly of Lemma 6.7.13 (finite field and zero ideal), Stacks 09AL, the existing bounded-representative Mathlib leaf and the existing field/Noetherian-comparison Tor interval statements; the same etale model is fixed before the universal interval assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For bounded constructible etale complexes over a finite field of coefficients invertible on a finite type scheme the proetale internal Hom has a bounded constructible etale representative of finite Tor amplitude",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.instCategoryEtale; Algebra.FormallyEtale.instForallOfFinite; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scheme etale morphisms, underived sheaf Hom or general derived categories; none proves constructible pro-etale internal-Hom finiteness with an etale finite-Tor representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent and finite Tor dimension of derived internal Hom of finite field constructible proetale sheaves",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.instForallOfFinite; Algebra.Etale.exists_subalgebra_fg; Algebra.FormallyEtale.comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scheme etale morphisms, underived sheaf Hom or general derived categories; none proves constructible pro-etale internal-Hom finiteness with an etale finite-Tor representative."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scheme etale morphisms, underived sheaf Hom or general derived categories; none proves constructible pro-etale internal-Hom finiteness with an etale finite-Tor representative."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|etale|proetale).*(internalHom|derivedHom)|(internalHom|derivedHom).*(constructible|etale|proetale)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scheme etale morphisms, underived sheaf Hom or general derived categories; none proves constructible pro-etale internal-Hom finiteness with an etale finite-Tor representative."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of bounded constructible finite field sheaves descends to a bounded etale complex with finite Tor amplitude",
+   "results": "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; CategoryTheory.sheafHom; AlgebraicGeometry.Scheme.Modules.Hom; DerivedCategory; SheafOfModules.Hom; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.IsGrothendieckAbelian.hasExt; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scheme etale morphisms, underived sheaf Hom or general derived categories; none proves constructible pro-etale internal-Hom finiteness with an etale finite-Tor representative."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|etale|proetale).*(internalHom|derivedHom)|(internalHom|derivedHom).*(constructible|etale|proetale)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived condensed/sheaf structures or general derived-category existence, not constructible internal-Hom finiteness and an etale Tor witness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of bounded constructible finite field sheaves descends to a bounded etale complex with finite Tor amplitude",
+   "results": "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; CategoryTheory.sheafHom; AlgebraicGeometry.Scheme.Modules.Hom; DerivedCategory; SheafOfModules.Hom; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.IsGrothendieckAbelian.hasExt; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived condensed/sheaf structures or general derived-category existence, not constructible internal-Hom finiteness and an etale Tor witness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived condensed/sheaf structures or general derived-category existence, not constructible internal-Hom finiteness and an etale Tor witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible etale complexes over a finite coefficient field are closed under derived internal Hom and descend from the proetale site",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived condensed/sheaf structures or general derived-category existence, not constructible internal-Hom finiteness and an etale Tor witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible finite field coefficient sheaves on a proetale site has a bounded constructible etale model with the same Tor interval",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafProfinite; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived condensed/sheaf structures or general derived-category existence, not constructible internal-Hom finiteness and an etale Tor witness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-general-lfp-hom-finiteness",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves.proof.md, integral paragraph after reduction modulo the uniformizer: finite-coefficient internal-Hom finiteness, followed by etale descent, a bounded representative, and the field Tor interval needed for the residue witness.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-finiteness",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-field-hom-etale-witness",
+  "worker": "stage1 Q81",
+  "summary": "Kept the complete statement and hypotheses unchanged. Split into comparison of inputs, the existing finite-field internal-Hom finiteness theorem, etale descent, a bounded representative and exact Tor-interval reflection. All required facts already have nodes; created no nodes. Checked cited statements, source passages, small cases, search hits and absence of a dependency path back to this item. Fixed one model before the quantification over intervals.",
+  "blueprint": "The finite-coefficient assertion in lem-sfb-dc-hom-preserves.proof.md is realized by steps 1–2 through the allowed Bhatt–Scholze route. Steps 3–4 expose the etale witness implicit in Definition 6.5.1 / Stacks 09AL. Step 5 realizes the residue-field finite Tor witness using the field interval calculation and the Tor-amplitude-detected paragraph of sk-cor-pe-finite-tor-comparison-noetherian.proof.md. The existing null ancestor and via chain are retained (blueprint_refs.py ancestor reports None). Whole-blueprint searches for internal Hom, Tor amplitude and bounded etale model give no exact duplicate of the full witness statement.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic comparison equivalence supplies constructibility of inverse images and descent of the resulting bounded object; it is the etale/pro-etale comparison tool in the finite residue witness, not a substitute finiteness theorem."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic exact inverse image on modules justifies termwise cohomology comparison for the inputs."
+   },
+   {
+    "node": "lem-sfb-constant-field-tor-bounds",
+    "why": "Generic constant-field cohomology/Tor interval equivalence supplies the residue field calculation for an already bounded Hom; it adds no geometric finiteness route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic interval reflection for the actual comparison functor passes the precise Tor interval to the fixed etale antecedent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-pe-constructible-comparison",
+  "det-pe-classical-sheaves-modules",
+  "lem-sfb-constant-field-tor-bounds",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-e21e8da45",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-e21e8da45 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, together with the sources: Bhatt–Scholze Def. 6.5.1 and Lemma 6.7.13 with its proof, Stacks 09AL and the describe-constructible-complexes lemma, and the blueprint proof of lem-sfb-dc-hom-preserves. The live node is still unsplit and has the same statement and stmt_deps. The item is not dropped. It is a fresh child of the NY re-split, so a first split with 0 new nodes is allowed. No SGA is cited. The statement is true: over a field, Tor amplitude equals cohomological amplitude. Small cases checked: X empty, P=0, A[0] against A[m], and a nonperfect k. Step 1: I checked every hypothesis of the comparison theorem (qcqs X; a field is Noetherian). Exactness of nu^* and the Mathlib cohomology leaf are used correctly. Gap (one sentence, repaired): the comparison node's constructibility is local on X, while sk-def-sfb-constructible for qcqs X needs one global finite stratification. The FIX adds the refinement over a finite affine cover, with strata Z_ia ∩ (U_i \\ ∪_{j<i} U_j); these are constructible because X is Noetherian, and local models restrict to the smaller strata. Step 2: lem-sfb-finite-field-internal-hom-finiteness matches every hypothesis, including arbitrary k and the same ambient RHom. Step 3: essential surjectivity of D^b_c(X_et) ≃ D^b_c(X_proet); it does not assume that nu^* commutes with RHom, which only k = F̄_q nodes give. Step 4: Mathlib leaf exists_iso_Q_obj_of_isGE_of_isLE, with D fixed before the interval is chosen. Step 5: constant-field-tor-bounds with kappa = A applied to J; the interval transfers through e and then through d; det-pe-finite-tor-comparison-noetherian reflects the exact interval. No duplicate: cor-sf-hom-ctf-proetale-unconditional, lem-weil-finite-duality-site-comparison and lem-coef-finite-hom-site-descent all need k = F̄_q. I accept the 4 declared tool uses (étale/pro-étale comparison, Tor reflection, field Tor bounds) as generic. Batch-5 flag: the citation of lem-sfb-finite-field-internal-hom-finiteness is accepted. It is Deligne-type RHom finiteness, which is neither the trace formula, Poincaré duality, nor a proof step of either. The trf node reached, lem-trf-proetale-pullback-stalk-coherence, is generic coherence of stalks under pullback. det-sf-flat-model-generation is already in the batch-5 closure without the item: I walked from both targets with trf/pd and sk-thm-trace-transport cut. The item adds only the 5 sfb finite-field nodes. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-field-hom-etale-witness.json (step 1 text only).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFieldHomEtaleWitness",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteField_hom_etale_witness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteFieldFixedToInternal",
+   "AlgebraicGeometry.ProEtale.finiteFieldEtalePullback",
+   "AlgebraicGeometry.ProEtale.finiteFieldEtaleInternalHom",
+   "AlgebraicGeometry.ProEtale.finiteField_hom_etale_witness"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFieldHomEtaleWitness.lean",
+  "statement": "theorem finiteField_hom_etale_witness (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (A : Type u) [Field A] [Finite A] [CharP A l] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [CompactSpace X] [QuasiSeparatedSpace X] (C_P C_Q : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A)))) (hP_bounded : DerivedCategory.TStructure.t.bounded C_P) (hQ_bounded : DerivedCategory.TStructure.t.bounded C_Q) (hP_cons : ∀ q : ℤ, Scheme.IsAffineLocallyConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor _ q).obj C_P)) (hQ_cons : ∀ q : ℤ, Scheme.IsAffineLocallyConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor _ q).obj C_Q)) : constantModelBoundedConstructible (finiteFieldCondensedRing A) X ((finiteFieldEtalePullback A X).obj C_P) ∧ constantModelBoundedConstructible (finiteFieldCondensedRing A) X ((finiteFieldEtalePullback A X).obj C_Q) ∧ constantModelBoundedConstructible (finiteFieldCondensedRing A) X (finiteFieldEtaleInternalHom A X C_P C_Q) ∧ ∃ D : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) ℤ, (∃ m n : ℤ, m ≤ n ∧ D.IsStrictlyGE m ∧ D.IsStrictlyLE n) ∧ (∀ q : ℤ, Scheme.IsAffineLocallyConstructibleEtaleModuleSheaf (D.homology q)) ∧ Nonempty ((finiteFieldEtalePullback A X).obj (DerivedCategory.Q.obj D) ≅ finiteFieldEtaleInternalHom A X C_P C_Q) ∧ (∀ a b : ℤ, a ≤ b → (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (finiteFieldEtaleInternalHom A X C_P C_Q))) → ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) (q : ℤ), q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((Etale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).obj (DerivedCategory.Q.obj D)).obj ((DerivedCategory.singleFunctor _ 0).obj N)))) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) (q : ℤ), q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (((Etale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).obj (DerivedCategory.Q.obj D)).obj ((DerivedCategory.singleFunctor _ 0).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The retained fixed-scalar interface of def-pe-etale-constructible-module is used with ULift A, and the canonical module comparison is transported to the ambient internal-module category through the recorded normalized Encoding. The normalization fixes the ring isomorphism on all constant scalar sections and fixes both forward functors; inverse equivalences are consequently unique up to natural isomorphism. No arbitrary comparison map or site-perfectness assumption is supplied. The bounded witness is outside the universal quantification over cohomological intervals."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53b3b2674",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_deps and their declarations in source (IsAffineLocallyConstructibleEtaleModuleSheaf, comparisonUpperStar = recorded proEtaleSiteComparison sheafPullback, Etale.derivedTensor, constantModelBoundedConstructible, finiteFieldCondensedRing, FiniteDiscreteOrdinary.Encoding/fixedDerived/encoding_exists), the report and the module. Every hypothesis and conclusion clause matches the node (qcqs, finite type, separated over an arbitrary char-p k with p != l; finite field A; bounded constructible C_P, C_Q; P, Q, J constantModel-bounded-constructible; strictly bounded D with constructible cohomology; derived iso nu^*D = J; the same D before the interval quantifier with unrestricted N; final finite-Tor clause). No stronger assumptions and no universe restriction. Edge cases checked: empty X, zero inputs, a=b. Mechanical finding: the statement uses Classical.choice of encoding_exists, a genuine use of the theorem's conclusion; the choice is canonical (ringIso pinned by normalization out of a sheafification, forward functors pinned, inverse unique up to iso, all clauses iso-invariant), so PASS on that point. Not hollow, only the theorem is sorry, docstrings and blueprint ids present, lean.statement verbatim, no name collision in the live tree, report sections present. Advisory: Etale.derivedTensor has no stmt_dep node. No file changed, so no compile reproduced; the worker reports a clean compile."
+ }
+}

@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-normalization-jet-codimension",
+ "kind": "statement",
+ "title": "Uniform codimension bound for normalization jets",
+ "statement": "Let $k$ be algebraically closed [def-weil-field], $r\\ge2$, and let $D\\subset\\mathbf P^{r-1}_k$ be a nonempty reduced closed subscheme of pure dimension one [def-pc-reduced-scheme, def-weil-closed-immersion, def-weil-pure-dimension]. Put $L=\\mathcal O_D(1)$ [def-pc-projective-space-twist] and let $\\nu:\\coprod_{i=1}^s C_i\\to D$ be the disjoint union of the normalizations of its reduced irreducible components [def-sc-normalization]. The $C_i$ are smooth proper connected curves. Put $L_i=\\nu^*L|_{C_i}$ and $e_i=\\deg L_i>0$ [def-pc-degree-line-bundle]. Fix finite sets $S_i$ of distinct closed points of $C_i$. For integers $m\\ge1$ and $n_q\\ge0$ satisfying $\\sum_{q\\in S_i}n_q\\le me_i$ for every $i$, let $U_{m,n}\\subset H^0(D,L^{\\otimes m})$ consist of sections whose pullbacks have order at least $n_q$ at every $q$ [def-sc-ringed-space-module-cohomology, def-sc-divisor]. An order is measured in the discrete valuation local ring after a local trivialization of the line bundle; the zero germ has infinite order. There is a real constant $C\\ge0$, depending on $D,L$ and the sets $S_i$ but not on $m$ or the tuple $n$, such that\n$$\\dim_k H^0(D,L^{\\otimes m})-\\dim_k U_{m,n}\\ \\ge\\ \\sum_{i=1}^s\\sum_{q\\in S_i}n_q-C.$$\nThe sets $S_i$ may be empty and several points in a given $S_i$ may map to the same point of $D$.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2, Theorem 8 proof of step (4), printed pp.14--15, Riemann--Roch dimension estimate, extended to simultaneous jets. Supporting Stacks places: curves.tex Tag 0BS6 (lemma-rr); varieties.tex Tag 0C1R (lemma-prepare-delta-invariant). Local PDF WANTED; source read online at https://arxiv.org/pdf/0810.2340. Agent formulation of the supporting estimate."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pure-dimension",
+  "def-pc-projective-space-twist",
+  "def-sc-normalization",
+  "def-pc-degree-line-bundle",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-divisor",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\widetilde D=\\coprod_i C_i$. The given embedding makes $D$ projective, hence proper by [lem-pc-projective-proper]. Apply [lem-trf-reduced-curve-normalization-genus] to this nonempty proper reduced pure one-dimensional scheme: the component list is finite, $\\nu$ is finite, and its components are smooth proper connected curves, without requiring $D$ connected. By [lem-trf-normalization-singular-skyscraper] there is an exact sequence $0\\to\\mathcal O_D\\to\\nu_*\\mathcal O_{\\widetilde D}\\to Q\\to0$ with $Q$ coherent and supported on finitely many closed points. Define $\\delta=\\dim_kH^0(D,Q)$, finite by [lem-pc-chi-zero-dim-support]. For each $i$ let $Z_i=\\nu(C_i)$ be the corresponding irreducible component of $D$ with its reduced induced structure; since $D$ has pure dimension one, $Z_i$ is an integral closed one-dimensional subscheme of $\\mathbf P^{r-1}_k$, and $C_i\\to Z_i$ is its normalization. Both $\\mathcal O_D(1)$ and $\\mathcal O_{Z_i}(1)$ are restrictions of $\\mathcal O_{\\mathbf P^{r-1}}(1)$ (same gluing data on the standard opens), so $L_i$ is the pullback of $\\mathcal O_{Z_i}(1)$ to the normalization of $Z_i$, and [lem-sfb-integral-curve-span-degree-rigidity] gives that $e_i=\\deg L_i$ is a positive integer, as the statement asserts.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-normalization-singular-skyscraper",
+    "lem-pc-chi-zero-dim-support",
+    "lem-sfb-integral-curve-span-degree-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "normalization: Tag 0C1R, lemma-prepare-delta-invariant; finite-support cohomology: Tag 0AYT, lemma-chi-tensor-finite"
+   }
+  },
+  {
+   "text": "For every $m\\ge1$, tensor the sequence of step 1 by $L^{\\otimes m}$. This is exact: on any open trivializing the line it is the original sequence, and exactness is local. On such an open multiplication by the chosen frame identifies $L^{\\otimes m}\\otimes\\nu_*\\mathcal O_{\\widetilde D}$ with $\\nu_*\\nu^*L^{\\otimes m}$; on overlaps both identifications change by multiplication by the same transition unit, so they glue. Thus sections give an injection $\\rho_m:H_m=H^0(D,L^{\\otimes m})\\hookrightarrow T_m=\\bigoplus_iH^0(C_i,L_i^{\\otimes m})$, and $T_m/\\rho_m(H_m)$ injects into $H^0(D,Q\\otimes L^{\\otimes m})$, by the left-exact part of [pqf-def-cohomology]. The equality between sections upstairs and sections of a direct image is its definition, and sections of a finite disjoint union are the component tuples by the sheaf axiom. By [lem-pc-chi-zero-dim-support], $\\dim_kH^0(D,Q\\otimes L^{\\otimes m})=\\delta$. Hence $\\dim H_m\\ge\\dim T_m-\\delta$, uniformly in $m$.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "finite-support twist invariance: Tag 0AYT, lemma-chi-tensor-finite"
+   }
+  },
+  {
+   "text": "Write $g_i=\\dim_kH^1(C_i,\\mathcal O_{C_i})$. By [lem-sc-global-functions], $H^0(C_i,\\mathcal O_{C_i})=k$. Coherent cohomology on each proper curve is finite by [lem-pc-coherent-hi] and is zero in degrees above one by [lem-sc-noetherian-cohomology-above-dimension]; its Noetherian and integral hypotheses follow from [lem-sc-smooth-connected-curve-local-rings]. Consequently $\\chi(C_i,\\mathcal O_{C_i})=1-g_i$. Degree is the difference of Euler characteristics by [def-pc-degree-line-bundle], and tensor additivity [lem-trf-curve-degree-tensor-additive], iterated $m$ times, gives $\\deg(L_i^{\\otimes m})=me_i$. Thus $h^0(C_i,L_i^{\\otimes m})=me_i+1-g_i+h^1(C_i,L_i^{\\otimes m})\\ge me_i+1-g_i$. In particular all components of $T_m$ are finite-dimensional, and step 2 then also shows $H_m$ finite-dimensional.",
+   "uses": [
+    "lem-sc-global-functions",
+    "lem-pc-coherent-hi",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS6, lemma-rr, line-bundle Euler estimate (here directly from the Euler-characteristic definition of degree)"
+   }
+  },
+  {
+   "text": "For each $i$, put $B_i=\\sum_{q\\in S_i}n_q[q]$ and $N_i=\\deg B_i=\\sum_{q\\in S_i}n_q$. Apply [lem-sfb-smooth-curve-section-degree-cap] with $A=L_i$, its integer $m$ equal to the present $m$, its integer $q=1$, and effective divisor $B_i$. It identifies the vanishing subspace $W_{i,m,n}$ with $H^0(C_i,L_i^{\\otimes m}(-B_i))$ and bounds its dimension by $\\max\\{me_i-N_i+1,0\\}=me_i-N_i+1$, since the hypothesis of the item is $N_i\\le me_i$. The zero divisor is explicitly allowed by that node. Set $W_{m,n}=\\bigoplus_iW_{i,m,n}\\subseteq T_m$; then $\\dim W_{m,n}\\le\\sum_i(me_i-N_i+1)$.",
+   "uses": [
+    "lem-sfb-smooth-curve-section-degree-cap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS, lemma-grd-inequalities; tensor/divisor degrees: varieties.tex Tags 0AYX and 0AYY"
+   }
+  },
+  {
+   "text": "By the definition of $U_{m,n}$, the injection $\\rho_m$ identifies it with $\\rho_m(H_m)\\cap W_{m,n}$. Therefore $\\dim U_{m,n}\\le\\dim W_{m,n}$. Combining steps 2--4 gives $\\dim H_m-\\dim U_{m,n}\\ge\\sum_i(me_i+1-g_i)-\\delta-\\sum_i(me_i-N_i+1)=\\sum_iN_i-(\\delta+\\sum_i g_i)$. Take the nonnegative integer $\\delta+\\sum_i g_i$ as the required real $C$. It is independent of $m,n$ and even of the sets $S_i$. Empty marking sets give $B_i=0$, while points with the same image in $D$ remain distinct in their respective normalization divisors, so neither allowed case changes the argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Assembly of the normalization and smooth-curve estimates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-normalization-singular-skyscraper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-sfb-integral-curve-span-degree-rigidity",
+  "pqf-def-cohomology",
+  "lem-sc-global-functions",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-pc-degree-line-bundle",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sfb-smooth-curve-section-degree-cap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent assembly of Tag 0C1R, lemma-prepare-delta-invariant; Tag 0AYT, lemma-chi-tensor-finite; curves.tex Tag 0CCS, lemma-grd-inequalities. This supplies the simultaneous-jet extension of Morrison Theorem 8 step (4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced projective curve, normalization jet conditions of total order at most m times the component degree have codimension at least their total order minus a fixed constant",
+   "results": "8 hits: WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one, PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top, WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one, PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top, PowerSeries.degree_weierstrassMod_lt, PowerSeries.IsWeierstrassDivisionAt.degree_lt, PowerSeries.IsWeierstrassFactorization.degree_eq_coe_lift_order_map",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass polynomials, Weierstrass preparation, complexity bounds, convex ample sets, or vanishing of affine sections; none is a normalization jet codimension estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch on normalized components bounds the codimension of simultaneous prescribed jets of sections of powers of an ample line bundle",
+   "results": "8 hits: ChevalleyThm.degBound, ChevalleyThm.numBound, AmpleSet.of_one_lt_codim, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, ChevalleyThm.MvPolynomialC.numBound_succ, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass polynomials, Weierstrass preparation, complexity bounds, convex ample sets, or vanishing of affine sections; none is a normalization jet codimension estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"codim\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass polynomials, Weierstrass preparation, complexity bounds, convex ample sets, or vanishing of affine sections; none is a normalization jet codimension estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz.*jet|jet.*normaliz|vanishing.*codim|codim.*vanishing",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass polynomials, Weierstrass preparation, complexity bounds, convex ample sets, or vanishing of affine sections; none is a normalization jet codimension estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Codimension of sections of a line bundle vanishing at several points on the normalization of a projective reduced curve",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_def, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, analyticOrderNatAt, AlgebraicGeometry.Proj.sub_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass polynomials, Weierstrass preparation, complexity bounds, convex ample sets, or vanishing of affine sections; none is a normalization jet codimension estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle of nonnegative degree d on a smooth proper connected curve over an algebraically closed field has at most d plus one independent global sections",
+   "results": "8 hits: ChevalleyThm.degBound, WeierstrassCurve.natDegree_Φ_le, ChevalleyThm.numBound, WeierstrassCurve.natDegree_ΨSq_le, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ₄_le, WeierstrassCurve.natDegree_preΨ'_pos",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finrank\", \"degree\"",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Hom.residueDegree_eq_finrank",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "h0_le|finrank.*(degree|deg)|degree.*finrank|Riemann.Roch|riemannRoch",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of global sections of a line bundle of nonnegative degree d on a proper smooth curve is at most d+1",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, IsLocalFrameOn.fintype_of_finiteDimensional, Algebra.IsStandardSmooth.relativeDimension, WeierstrassCurve.natDegree_preΨ_le, minpoly.degree_le, IsDedekindDomain.HeightOneSpectrum.intValuation_le_one, Algebra.IsStandardSmoothOfRelativeDimension.out, IsLocalFrameOn.fintypeOfFiniteDimensional",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a linear series g_d^r on a proper integral algebraic curve with constant global functions, its dimension r is at most its degree d",
+   "results": "8 hits: ChevalleyThm.degBound, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_preΨ_le, ChevalleyThm.MvPolynomialC.degBound, WeierstrassCurve.natDegree_preΨ₄_le, WeierstrassCurve.natDegree_ΨSq_le, WeierstrassCurve.natDegree_Ψ₂Sq_le",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz.*jet|jet.*normaliz|vanishing.*codim|codim.*vanishing",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite normalization of a reduced projective curve changes the rank of jet evaluation on global sections of line bundle powers by a bounded constant",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Polynomial.degree_normalize",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"finrank\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced projective curve the codimension of sections vanishing to prescribed orders on normalization branches is at least the sum of those orders minus a constant independent of the tensor power",
+   "results": "8 hits: PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime, Ideal.rank_pow_quot_aux, PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime, WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one, PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top, PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top, WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned types; polynomial degree, relative normalization, residue degree and power-series ideal ranks do not state this projective-curve section estimate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singular-point-jet-weight-bounds",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED. Supporting input: Section 3.2, Theorem 8 proof of step (4), printed pp.14--15, Riemann--Roch dimension estimate, extended to simultaneous jets. Supporting Stacks places: curves.tex Tag 0BS6 (lemma-rr); varieties.tex Tag 0C1R (lemma-prepare-delta-invariant).",
+   "via": [
+    "lem-sfb-singular-point-jet-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalization-jet-codimension",
+  "worker": "stage1",
+  "summary": "Split using the existing normalization quotient, finite-support twist invariance, Euler-characteristic degree, and smooth-curve section-degree cap. No new nodes; explicit constant delta plus the sum of component genera. The statement is unchanged.",
+  "blueprint": "Inherited direct-images proof (3) alteration/moduli chain, specifically Morrison Section 3.2 Theorem 8 step (4), printed pp.14--15: uniform dimension loss under normalization branch vanishing. The current blueprint has no standalone jet estimate; blueprint.from.node remains inherited null.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-trf-normalization-singular-skyscraper",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic normalization, finite-support coherent cohomology, or smooth-curve degree tool used in the supporting jet estimate; it does not replace a step of the six-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-normalization-singular-skyscraper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-sc-global-functions",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-trf-curve-degree-tensor-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-36dc6388d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-36dc6388d (reviewer sub-agent of L); spot-checked: I read the item, all 12 cited statements, the parent's use of the item, and the Stacks sources: varieties 0C1R (lemma-prepare-delta-invariant, l.8819), 0AYT, 0AYX/0AYY, and curves 0BS6/0CCS. Morrison is not available locally; it stays WANTED and the proof is marked agent. The statement is identical to live, where the item is still unsplit, there is no repair note, and no SGA is used. The estimate is true with C = delta + sum g_i. I tested a smooth conic (the bound is an equality), a nodal cubic (codimension 1 >= 2 - 1, which shows C >= delta is needed), empty S_i, n = 0 and N_i = m e_i. Step 1: the hypotheses of the genus lemma and the skyscraper lemma hold, and the skyscraper lemma's componentwise normalization is the same nu as the item's. Step 2: the twisted sequence and frame identification are elementary, pqf-def-cohomology gives left exactness, and chi-zero-dim-support (3) and (2) give h0(Q tensor L^m) = delta. Step 3: global-functions, coherent-hi and above-dimension vanishing apply (Noetherian from local-rings), chi(O) = 1 - g, and 0AYX additivity gives deg L^m = m e with the same chi degree convention, so h0 >= m e + 1 - g. Step 4: the section-degree cap (already reviewed PASS) with q=1 and B=B_i gives the vanishing space and h0 <= m e - N + 1. Step 5: U = rho^-1(W), and the arithmetic is correct. One gap: the statement asserts e_i = deg L_i > 0 and no step proved it. FIX: step 1 now applies lem-sfb-integral-curve-span-degree-rigidity (same unit, unsplit, no proof deps, so no cycle) to Z_i = nu(C_i), an integral closed 1-dimensional subscheme of P^{r-1} with O_D(1)|Z_i = O_Zi(1). Its statement says e is a positive integer. The node is added to the step's uses and to proof_deps; nothing else changed. Tool uses are generic and accepted. Batch-5: the two trf normalization lemmas (0C1R type) and degree additivity (0AYX) are generic coherent geometry. global-functions, coherent-hi and the section cap reach trf only through the definition def-trf-schematically-dense-open or 0AYX. None is the trace formula, Poincare duality or a step of their proofs, so all are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationJetCodimension",
+  "declaration": "AlgebraicGeometry.normalization_jet_codimension",
+  "declarations": [
+   "AlgebraicGeometry.normalizationJetBranch",
+   "AlgebraicGeometry.normalizationJetBranchMap",
+   "AlgebraicGeometry.normalizationJetSections",
+   "AlgebraicGeometry.normalizationJetDegree",
+   "AlgebraicGeometry.normalization_jet_codimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationJetCodimension.lean",
+  "statement": "theorem normalization_jet_codimension (k : Type u) [Field k] [IsAlgClosed k] (r : ℕ) (hr : 2 ≤ r) (D : Scheme.{u}) [IsReduced D] [Nonempty D] (i : D ⟶ ℙ(ULift.{u} (Fin r); Spec (.of k))) [IsClosedImmersion i] (hpure : D.IsPureDimension 1) (S : ∀ Z : irreducibleComponents D, Finset {q : normalizationJetBranch D Z // IsClosed ({q} : Set (normalizationJetBranch D Z))}) : (∀ Z : irreducibleComponents D, Smooth (normalizationJetBranchMap D Z ≫ i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) ∧ IsProper (normalizationJetBranchMap D Z ≫ i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) ∧ IsConnectedCurve (normalizationJetBranchMap D Z ≫ i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) ∧ 0 < normalizationJetDegree k (i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) (ProjectiveSpace.twistRestrict i 1) Z) ∧ ∃ c : ℝ, 0 ≤ c ∧ ∀ (m : ℕ), 1 ≤ m → ∀ (n : ∀ Z : irreducibleComponents D, {q : normalizationJetBranch D Z // IsClosed ({q} : Set (normalizationJetBranch D Z))} → ℕ), (∀ Z : irreducibleComponents D, ((∑ q ∈ S Z, n Z q) : ℤ) ≤ m * normalizationJetDegree k (i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) (ProjectiveSpace.twistRestrict i 1) Z) → ∃ U : Submodule k (normalizationJetSections k (i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) ((ProjectiveSpace.twistRestrict i 1).tensorPow m)), (∀ s, s ∈ U ↔ ∀ (Z : irreducibleComponents D), ∀ q ∈ S Z, ((Scheme.Modules.pullback (normalizationJetBranchMap D Z)).obj ((ProjectiveSpace.twistRestrict i 1).tensorPow m)).presheaf.germ ⊤ q.val trivial (AlgebraicGeometry.pullbackΓ (normalizationJetBranchMap D Z) ((ProjectiveSpace.twistRestrict i 1).tensorPow m) s) ∈ (IsLocalRing.maximalIdeal ((normalizationJetBranch D Z).presheaf.stalk q.val)) ^ n Z q • (⊤ : Submodule ((normalizationJetBranch D Z).presheaf.stalk q.val) (((Scheme.Modules.pullback (normalizationJetBranchMap D Z)).obj ((ProjectiveSpace.twistRestrict i 1).tensorPow m)).presheaf.stalk q.val))) ∧ (Module.finrank k (normalizationJetSections k (i ≫ (ℙ(ULift.{u} (Fin r); Spec (.of k)) ↘ Spec (.of k))) ((ProjectiveSpace.twistRestrict i 1).tensorPow m)) : ℝ) - (Module.finrank k U : ℝ) ≥ (∑ᶠ Z : irreducibleComponents D, ((∑ q ∈ S Z, n Z q) : ℝ)) - c",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f48a4e261",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: alg. closed k, P^{r-1} as ℙ(ULift (Fin r)), reduced nonempty closed D of pure dim 1, branches = summands of recorded reducedNormalization/fromReducedNormalization, smooth/proper/IsConnectedCurve and 0<deg asserted as conclusions, Finset of closed points, ∃ c≥0 after S and before m,n, ℤ bound Σn≤m·deg, U fixed by an iff stalk condition m_q^n•⊤ on the pullbackΓ germ (order ≥ n, zero germ passes), real finrank inequality with finsum over components. Snapshot node differs from live only in lean and in an added landed stmt_dep def-weil-pbc-reduced-normalization; statement field verbatim. Helpers non-hollow; docstrings and 5 proof steps present; no jet/vanishing-order duplicate found; edge cases (empty S, n=0, N=me, coincident images, r=2, disconnected D) fine. Advisory: def-sc-divisor stmt_dep unused in Lean; IsConnectedCurve/Smooth come from generic non-stmt_dep declarations. No compile (no file changed); worker compile clean."
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-adic-immersion-module-normalization",
+ "kind": "statement",
+ "title": "Ordinary module inverse-image normalization on the AsSmall slice",
+ "statement": "Let i:S→X be an immersion [def-weil-closed-immersion, def-weil-open-immersion] of schemes [def-pc-scheme], A a commutative ring, I an ideal, and U an object of S.ProEt. Let N_X send modules over the completed coefficient ring on X to the AsSmall model by proEtaleModuleToModel followed by scalar restriction along the inverse canonical completed-ring normalization [lem-sfb-completion-normalization]. Let T_i be ConstantCompletion.pull for sfbImmersionAlgebra(i) and its finite-projection completedMap [def-sfb-adic-immersion-completed-model]. Let B be the completed coefficient ring on the model of S, V=up(U), and R the underlying ring sheaf of the actual inverse-image completed coefficient ring. There exists an additive equivalence e:Mod(B|V)≌Mod(R|U) and a natural isomorphism of ordinary module functors N_X then T_i then restriction to V then e ≅ actual proEtaleRingModulePullback then restriction to U. No derived category or complex is asserted; no Noetherian, completeness, perfectness, or nonemptiness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sfb-completion-normalization",
+  "def-sfb-adic-immersion-completed-model"
+ ],
+ "proof": [
+  {
+   "text": "Use preservation of countable limits by the transported immersion inverse image to prove that the fixed finite-projection completedMap is invertible. Scalar extension along this isomorphism is naturally isomorphic to scalar restriction along its inverse: both are left adjoint to restriction along the original map. The scalar restriction equivalence is constructed by the identity-site ringed equivalence.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build an algebraic inverse-image presentation from the actual source site to the actual target site by composing sectionwise AsSmall restriction, scalar transport through the source completed-ring normalization, the specified algebraic immersion inverse image, scalar transport through the inverse completedMap, and sectionwise transport back. Verify the operation graphs of the composite by applying the graph equations of its two factors successively. The underlying set-sheaf functor is naturally the actual immersion inverse image, since the AsSmall transports cancel.",
+   "uses": [
+    "lem-sfb-completion-normalization",
+    "def-sfb-adic-immersion-completed-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved algebraic comparison to this presentation and the algebraic presentation of the actual pro-etale module inverse image. The conversion to the independent-universe presentation only conjugates by ULift. This gives a ring-sheaf isomorphism q and an additive semilinear natural isomorphism. Regard the latter as a linear map into restriction along q, and reflect its invertibility through the underlying abelian-sheaf functor. Whisker by restriction along q inverse and cancel the scalar equivalence. Finally compare the actual module inverse image and the actual ring-module pullback along the identity coefficient isomorphism by uniqueness of left adjoints to their common sectionwise direct image.",
+   "uses": [
+    "lem-pur-site-algebraic-composition-unit",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Over.postEquiv to AsSmall on the slice at U. The dense-subsite ringed equivalence gives modules over the model slice equivalent to modules over the restriction of the transported coefficient ring. Compose with scalar restriction along the inverse of q restricted to U. These forward functors are sectionwise module restriction and scalar restriction, hence additive. Their square with overFunctor commutes on sections and linear maps; whiskering the global comparison with slice restriction gives exactly the required natural isomorphism.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-equivalence",
+    "lem-pur-native-ringed-restriction-slices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-completion-normalization",
+  "def-sfb-adic-immersion-completed-model",
+  "lem-pur-site-algebraic-composition-unit",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-native-ringed-restriction-equivalence",
+  "lem-pur-native-ringed-restriction-slices"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module, lemma-adjoint-pullback-pushforward-modules, lemma-push-pull-composition-modules; Stacks Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze Lemma 6.5.8"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module, lemma-adjoint-pullback-pushforward-modules and lemma-push-pull-composition-modules; explicit operation-graph comparison and identity-site scalar equivalences, with AsSmall slice transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules on equivalent sites induces an equivalence of derived categories commuting with restriction to slice sites",
+   "results": "Equivalence.sheafCongr and its transport isomorphisms; no module normalization for these fixed coefficient maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the site equivalence, then scalar equivalence; remaining comparison is project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence and its unit/counit component formulas.",
+   "date": "2026-10-26",
+   "verdict": "These construct the module equivalence, but do not identify the fixed algebraic and geometric inverse images."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory; constantSheaf.*(Pullback|pullback)|pullback.*constantSheaf",
+   "results": "Mathlib CategoryTheory/Sites/ConstantSheaf.lean:158 gives constant-object commutation. Project ExactFunctor.lean gives Equivalence.mapDerivedCategory. No fixed completed module comparison.",
+   "date": "2026-10-26",
+   "verdict": "The derived formalities are existing proved APIs; the two ordinary module comparisons are separate obligations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of sites and an isomorphism of coefficient sheaves induce an equivalence of categories of module sheaves compatible with inverse image and restriction to a slice",
+   "results": "Equivalence.sheafCongr and IsDenseSubsite.sheafEquiv give the site equivalence; neither states the comparison for the specified normalized completed module pullback.",
+   "date": "2026-10-26",
+   "verdict": "No complete match; use the listed constituent APIs and state only the missing ordinary module comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionSliceComparison",
+  "date": "2026-10-26",
+  "group": "Y5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The local completed-coefficient identification underlying the comparison of constructible adic categories; ordinary module transport before localization, as in Bhatt--Scholze Lemma 6.5.8.",
+   "via": [
+    "lem-sfb-adic-immersion-slice-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionModuleNormalization",
+  "file": "lean/Sheaf/Paper/AdicImmersionModuleNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_moduleNormalization",
+  "statement": "theorem sfbImmersion_moduleNormalization\n    {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    {A : Type (u + 1)} [CommRing A] (I : Ideal A) (U : S.ProEt) :\n    let R := (adicLisseForget S).obj\n      ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj (adicLisseCompletedRing X I))\n    let B := ConstantCompletion.completed (proEtaleModelTopology S) A I\n    let V := (AsSmall.up : S.ProEt ⥤ proEtaleSiteModel S).obj U\n    ∃ e : ConstantCompletion.Mod (B.over V) ≌ SheafOfModules.{u + 1} (R.over U),\n      e.functor.Additive ∧\n      Nonempty (sfbImmersionNormalizeModules X I ⋙ sfbImmersionCompletedPullModules i I ⋙\n          SheafOfModules.overFunctor (siteModuleRings B) V ⋙ e.functor ≅\n        proEtaleRingModulePullback i (adicLisseCompletedRing X I)\n          ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj\n            (adicLisseCompletedRing X I)) (Iso.refl _) ⋙ SheafOfModules.overFunctor R U)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261026T024244-L-653309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261026T071508-L-3941557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

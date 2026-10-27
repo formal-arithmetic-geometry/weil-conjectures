@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-integral-compactification-ordinary-scalar-action",
+ "kind": "statement",
+ "title": "Local scalar compatibility of the ordinary direct-image underlying comparison",
+ "statement": "Fix a prime l, a finite extension E/Q_l and its valuation ring R [def-weil-l-adic-coefficient-extension]. For a scheme morphism f : V → T, let C_V and C_T be sfCbcModelModules, and let d be constantDirectUnderlying [lem-sf-constant-semilinear-generator-comparison]. For every constant-R module sheaf M on V, every object W of the opposite small model of T, every local scalar r in sfCbcModelRing T R evaluated at W, and every section x of C_T(f_* M) at W, d_M^{-1}(r • x) = r • d_M^{-1}(x). Here the target action is the action on the representing module right adjoint (sfCbcMorphism f).modulePush applied to C_V M; the source action is the original sectionwise constant-coefficient module direct image [def-cbc-strict-constant-tower-operations] followed by C_T. This only asserts compatibility of this already defined underlying comparison with the one scalar operation, not existence, naturality, additivity, invertibility or uniqueness of a module comparison.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-sf-constant-semilinear-generator-comparison",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7, lemma-pullback-module and lemma-adjoint-pullback-pushforward-modules; specialization of the section-normalization clause of def-sf-integral-compactification-ordinary-site-transport."
+ },
+ "proof": [
+  {
+   "text": "Use the defining module Hom-bijection equation of constantDirectUnderlying and the generalized-section scalar identity of the algebraic inverse image. Transposing multiplication shows that its hom respects the action through the adjunct coefficient map. On sfCbcModelModules applied to the original direct image the action is through the same coefficient map: both maps agree after precomposition with the constant-presheaf sheafification unit, hence agree by the sheafification adjunction. Apply the inverse comparison and its two inverse identities to obtain the stated formula. No nonzero or inhabited-section hypothesis is used.",
+   "uses": [
+    "lem-sf-constant-semilinear-generator-comparison",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constant-semilinear-generator-comparison",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7, scalar action and the tensor/restriction Hom bijection."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of underlying direct images of module sheaves commutes with multiplication by sections of the constant ring sheaf after transporting along an equivalence of sites",
+   "results": "SheafOfModules.pushforwardNatIso_hom, pushforwardNatTrans_app_val_app, pushforwardNatIso, pushforwardComp; these concern the sectionwise pushforward, not the chosen representing right adjoint.",
+   "date": "2026-10-26",
+   "verdict": "No existing specialization to the Hom-normalized constantDirectUnderlying comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique natural isomorphism between module direct image and transport to equivalent small site normalized identity on sections",
+   "results": "SheafOfModules.pushforwardCongr, pushforwardNatIso, pushforwardSections_unitHomEquiv, Equivalence.transportIsoSheafToPresheaf.",
+   "date": "2026-10-26",
+   "verdict": "The generic sectionwise comparisons do not identify the scalar action under constantDirectUnderlying."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Adjunction.rightAdjointUniq and its homEquiv, unit, counit equations.",
+   "date": "2026-10-26",
+   "verdict": "Can compare right adjoints after a module pullback comparison, but does not supply the local scalar equation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg ordinaryDirectUnderlying|constantDirectUnderlying|ordinaryDirectModel lean/WeilConjectures lean/Sheaf; msearch grep directUnderlying|rightAdjointUniq|pushforwardCongr",
+   "results": "Only ConstantSemilinearGeneratorComparison states constantDirectUnderlying; OrdinaryCoordinates contains the upper existence-uniqueness hole. Mathlib has pushforwardCongr and rightAdjointUniq; neither proves this specialized formula.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration of the local scalar compatibility."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralCompactificationBridgeOrdinaryCoordinates",
+  "date": "2026-10-26",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Normalized trace comparison: local scalar action in the small-site transport used in the integral compactification comparison.",
+   "via": [
+    "def-sf-integral-compactification-ordinary-site-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralCompactificationOrdinaryScalarAction",
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationOrdinaryScalarAction.lean",
+  "declaration": "WeilConjectures.IntegralCompactificationBridge.ordinaryDirectUnderlying_smul",
+  "statement": "theorem ordinaryDirectUnderlying_smul {V T : Scheme.{u}} (f : V ⟶ T)\n    (M : ProEtale.StrictTower.Modules (ULift.{u + 1} (constantRing l E)) V)\n    (W : (proEtaleSiteModel T)ᵒᵖ)\n    (r : (sfCbcModelRing T (constantRing l E)).obj.obj W)\n    (x : ((sfCbcModelModules T (constantRing l E)).obj\n      ((ProEtale.StrictTower.moduleDirectImage\n        (ULift.{u + 1} (constantRing l E)) f).obj M)).val.obj W) :\n    ((constantDirectUnderlying l E f).inv.app\n      ((sfCbcModelModules V (constantRing l E)).obj M)).hom.app W (r • x) =\n      r • (show (((sfCbcMorphism f).modulePush\n          (ULift.{u + 1} (constantRing l E))).obj\n            ((sfCbcModelModules V (constantRing l E)).obj M)).val.obj W from\n        ((constantDirectUnderlying l E f).inv.app\n          ((sfCbcModelModules V (constantRing l E)).obj M)).hom.app W x)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7042",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T203854-L-2866211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7042",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T203854-L-2866211",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module + new ScalarAction module + importer IntegralCompactificationBridgeCoordinates compiled together in sandbox; def node vs live (only proof fields); new lemma vs constantDirectUnderlying Hom-normalization (Stacks 03D7); unit realized (empty)"
+ }
+}

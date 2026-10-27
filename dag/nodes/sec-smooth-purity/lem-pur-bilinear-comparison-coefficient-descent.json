@@ -1,0 +1,399 @@
+{
+ "id": "lem-pur-bilinear-comparison-coefficient-descent",
+ "kind": "statement",
+ "title": "Bilinear comparison descent through rationalization and common coefficient fields",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Index by finite intermediate extensions $\\mathbf Q_\\ell\\subseteq E\\subset\\Omega$, with valuation ring $R_E=\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. For each $E$ let $\\mathcal C_E,\\mathcal D_E$ be $R_E$-linear categories [def-weil-linear-category]. Suppose they have scalar-extension functors $S^C_{L/E},S^D_{L/E}$, linear through $R_E\\to R_L$, with specified identity and tower natural isomorphisms satisfying the unit and associativity cocycles. Let $U_E,V_E:\\mathcal C_E\\times\\mathcal C_E\\to\\mathcal D_E$ be separately $R_E$-linear bifunctors. Supply natural isomorphisms\n$$\\lambda^U_{L/E}:S^D_{L/E}U_E\\cong U_L(S^C_{L/E},S^C_{L/E}),\\qquad\\lambda^V_{L/E}:S^D_{L/E}V_E\\cong V_L(S^C_{L/E},S^C_{L/E})$$\nobeying the identity and tower cocycles. Suppose natural isomorphisms $\\eta_E:U_E\\cong V_E$ satisfy\n$$\\lambda^V_{L/E}\\,S^D_{L/E}(\\eta_E)=\\eta_L\\,\\lambda^U_{L/E}.$$\n\nUse raw rationalizations with the same objects and Hom modules tensored over $R_E$ with $E$ [def-weil-linear-scalar-localization]. There are unique separately $E$-linear extensions of $U_E,V_E$ with morphism action\n$$\\overline U_E(u\\otimes a,v\\otimes b)=U_E(u,v)\\otimes ab$$\nand the analogous formula for $V_E$, extended additively. The components $\\eta_E\\otimes1$, with inverses $\\eta_E^{-1}\\otimes1$, are a natural isomorphism on these rationalizations, and the scalar square above remains an equality. No Hom module is required to be torsion-free.\n\nFor either family $\\mathcal A=\\mathcal C,\\mathcal D$, define the common-stage category to have objects $(E,A)$ and Hom groups\n$$\\operatorname{Hom}((E,A),(E',A'))=\\varinjlim_{L\\supset E,E'}\\operatorname{Hom}_{\\mathcal A_L[1/\\varpi_L]}(S^A_{L/E}A,S^A_{L/E'}A'),$$\nwith composition at a common stage and equality after passage to a further stage, as in [def-weil-algebraically-closed-coefficients]. The extensions of $U,V$ induce bifunctors on these common-stage categories: on objects their coefficient field is $K=E_1E_2$, and on arrows they use the given $\\lambda$ to identify the source and target at a common field. They carry a natural isomorphism with the following specified representative. For inputs $(E_1,A),(E_2,B)$ put $A_K=S^C_{K/E_1}A$, $B_K=S^C_{K/E_2}B$. At every $L\\supset K$, its representative from $S^D_{L/K}\\overline U_K(A_K,B_K)$ to $S^D_{L/K}\\overline V_K(A_K,B_K)$ is\n$$ (\\overline\\lambda^V_{L/K})^{-1}\\,\\overline\\eta_{L;S^C_{L/K}A_K,S^C_{L/K}B_K}\\,\\overline\\lambda^U_{L/K}.$$\nIts inverse is the analogous conjugate of $\\overline\\eta_L^{-1}$. These classes are independent of the field and of arrow representatives; different initial common fields are compared at a further common extension. These constructions preserve identities, vertical composition, and whiskering in each variable by scalar-compatible linear functors or separately linear bifunctors. Thus every finite well-typed equation between such composites descends, including supplied associativity, signed symmetry, action-unit, pullback-composition and scalar-extension equations. No idempotent completion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "Common-stage Hom colimit and finite field of definition, together with def-weil-rationalization-karoubi.md, displayed Hom tensor E definition; bilinear transformation and equation descent elaborating returned proof steps 11-12 (agent argument)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Factor each integral bifunctor arrow map into its two slots to obtain integralHom, using separate linearity and bilinear composition. Apply TensorProduct.lift and LinearMap.baseChange to that bilinear map, then AlgebraTensorModule.distribBaseChange.symm and TensorProduct.curry. The resulting explicit rawHom has the product-of-scalars pure-tensor formula. Tensor induction proves composition and uniqueness without Hom injectivity. Store the bilinear map as rawHomLinear; rawHom evaluates its two toFun projections directly. Its proved zero, addition, scalar and pure-tensor formulas give the same bilinearity API with fewer elaborator coercion searches.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (section-tensor-product, lemma-tensor-product) and 05G3 (definition-base-change); apply the bilinear module base-change assertion of the cited node"
+   }
+  },
+  {
+   "text": "Use the actual ScalarLocalization category [def-weil-linear-scalar-localization]. Tensor induction in the four input arrows reduces preservation of composition to the pure-tensor composition formula and U.map_comp. Identities follow from U.map_id. Tensor induction together with separate linearity proves uniqueness of the functor with the prescribed object and pure-tensor action. Its composition is the uniquely determined bilinear extension proved in [lem-weil-linear-scalar-localization-category], which remains a transitive dependency. The private tensorComp function evaluates the existing curried composition map directly; its proved zero, addition and pure-tensor laws preserve exactly that composition while avoiding repeated coercion synthesis. The helper simp rules are local.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "lem-weil-linear-scalar-localization-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Displayed Hom tensor E definition; agent bifunctor calculation"
+   }
+  },
+  {
+   "text": "Put $\\bar\\eta_{A,B}=\\eta_{A,B}\\otimes1$. For $f\\otimes a:A\\to A'$ and $g\\otimes b:B\\to B'$, its naturality square is precisely the integral equality $V_E(f,g)\\eta_{A,B}=\\eta_{A',B'}U_E(f,g)$ tensored with $ab$. Additivity in each input extends this to all arrows. The two inverse equations are $(\\eta^{-1}\\eta)\\otimes1=1\\otimes1$ and $(\\eta\\eta^{-1})\\otimes1=1\\otimes1$. Thus these are actual natural isomorphisms even when localization kills nonzero integral morphisms.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Raw Hom localization; naturality and inverse equations on pure tensors"
+   }
+  },
+  {
+   "text": "Construct the integer-ring inclusion as the field inclusion restricted to the recorded valuation subrings [def-weil-l-adic-coefficient-extension]. The larger spectral absolute value restricts to the smaller one by uniqueness [lem-weil-l-adic-extension-absolute-value]; the DVR membership characterization [lem-weil-l-adic-extension-integers-dvr] then proves preservation of integers. This is the same restriction map as integralScalarIntegerInclusion, without importing its geometric scalar-extension development. Extend each transition functor semilinearly by [lem-pur-semilinear-scalar-localization], taking $R=R_E$, $S=R_L$, $t=\\varpi_E$, $u=\\varpi_L$. The image of $t$ is nonzero, hence invertible in $L$; $R_E[1/t]=E$ and $R_L[1/u]=L$ by [lem-weil-l-adic-integers-localization-uniformizer]. The cited semilinear lemma extends their unit and tower isomorphisms with their equations. For a scalar comparison $\\lambda^U$, naturality on $f\\otimes a,g\\otimes b$ follows by multiplying its integral naturality equality by the image of $ab$ in $L$; extend by sums. Its inverse is localized in the same way. The identity and tower equations for $\\lambda^U,\\lambda^V$, and the square $\\lambda^V S^D(\\eta)=\\eta\\lambda^U$, are equalities of components; tensor each equality with $1$. We henceforth omit bars on the rationalized functors and comparisons.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Scalar extension after rationalization; semilinear extension and componentwise comparison equations"
+   }
+  },
+  {
+   "text": "Finite intermediate extensions have their finite compositum as upper bound by [def-weil-finite-subextension-directed-set]. For the abstract directed preorder use the already proved StageSystem.PairCategory calculus in WeilConjectures.CategoryTheory.StageSystem.Basic: exists_mkHom_eq gives representatives, mkHom_tr transports them, and mkHom_eq_mkHom_iff gives eventual equality. These facts apply directly to the common-stage quotient used in the statements.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "Use the adopted StageSystem quotient calculus. Form the product stage system and its two projection morphisms. Its pair-category diagonal into the product of pair categories is fully faithful: represent two arrows at common upper stages for surjectivity, and combine their eventual-equality stages for injectivity. Choose at join(i,j) the two transported objects; full faithfulness lifts conjugation by isoToStage to a functor pairing. Compose pairing with the stage-system morphism furnished by the bilinear family. Its arrow formula is exactly endpoint-conjugated U_L(f,g), by mapAt and the two associators. The quotient calculus proves all representative and category laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "Let $x=((E,A),(F,B))$, $K=EF$, and $W_x=U_K(S^C_{K/E}A,S^C_{K/F}B)$. For $L\\supset K$ define the endpoint identification\n$$d^U_{L,x}=U_L(a^C_{L,K,E,A},a^C_{L,K,F,B})\\lambda^U_{L/K;S^C_{K/E}A,S^C_{K/F}B}:S^D_{L/K}W_x\\xrightarrow{\\sim}U_L(S^C_{L/E}A,S^C_{L/F}B).$$\nDefine $d^V$ by replacing $U$ with $V$. Given $x'$ with output field $K'$ and input arrows represented by $f,g$ over $L\\supset K,K'$, prescribe the image arrow to be\n$$(d^U_{L,x'})^{-1}U_L(f,g)d^U_{L,x}.$$\nSuch an $L$ exists by [def-weil-finite-subextension-directed-set]. These formulas give the claimed compositum object map and completely typed arrow representatives.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "For the resulting functor, pairing_map follows by applying the faithful diagonal and the common-stage isoToStage formulas. The family stage-system morphism sends this representative by mapAt, giving endpoint U_L(f,g) endpoint inverse. StageSystem.tr_tr, mkHom_comp_mkHom and the eventual equality criterion already imply the required tower and transport independence. No separate direct-limit construction is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "If either input representative changes, the old and new representatives become equal at a common stage; for the two inputs take a further compositum of their equality stages. The transport equality in step 8 then makes the two output representatives equal. This is exactly the StageSystem.PairCategory.mkHom_eq_mkHom_iff equality criterion; no transition map has to be injective. On identity arrows the output formula is $d^{-1}1d=1$. For composable pairs represented together, its composite is $d_{x''}^{-1}U(f',g')d_{x'}d_{x'}^{-1}U(f,g)d_x=d_{x''}^{-1}U(f'f,g'g)d_x$. These calculations prove functoriality of both descended bifunctors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "For $x$ as above let $e_x=\\eta_{K;S^C_{K/E}A,S^C_{K/F}B}$. The scalar square at $K\\subset L$ says\n$$S^D_{L/K}(e_x)=(\\lambda^V_{L/K})^{-1}\\eta_{L;S^C_{L/K}S^C_{K/E}A,S^C_{L/K}S^C_{K/F}B}\\lambda^U_{L/K}.$$\nThis is exactly the representative requested in the statement. Naturality of $\\eta_L$ with the two $a^C$ components further identifies it with\n$$(d^V_{L,x})^{-1}\\eta_{L;S^C_{L/E}A,S^C_{L/F}B}d^U_{L,x}.$$\nThe class can be defined using $L=K$, with the unit comparisons; all larger $L$ represent that same class because their formulas are $S^D_{L/K}(e_x)$. Replacing $\\eta$ by its inverse gives its inverse class; their products are identities. No assertion of literal equality of differently typed endpoints is made.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "For an input pair arrow $(f,g)$ represented at $L$, multiply its $V$-image by the component of step 10. Cancelling the adjacent $d^V_{L,x}(d^V_{L,x})^{-1}$ gives\n$$(d^V_{L,x'})^{-1}V_L(f,g)\\eta_{L,x_L}d^U_{L,x}=(d^V_{L,x'})^{-1}\\eta_{L,x'_L}U_L(f,g)d^U_{L,x},$$\nby the rational naturality proved in step 3. Insert $d^U_{L,x'}(d^U_{L,x'})^{-1}$ to obtain the other naturality composite. Step 8 and the existing StageSystem eventual-equality criterion show this same equation is independent of arrow representatives. If a different initial common field $K_1$ is used for the output object, compare at $M\\supset K,K_1$. The canonical comparison from the $K$-output to the $K_1$-output is represented by $(d^U_{M,x,K_1})^{-1}d^U_{M,x,K}$, and similarly for $V$. Step 8 makes these independent of $M$. Multiplying them through the component formula cancels $d$ and proves that the two components agree under these comparisons. Their identities, inverses and cocycles also follow by cancelling the middle $d d^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "For localized transformations identities and vertical composition are preserved because $(\\theta\\eta)\\otimes1=(\\theta\\otimes1)(\\eta\\otimes1)$. For whiskering by a linear functor, or in either slot of a separately linear bifunctor, step 1 gives the same identity by setting all unchanged scalar factors to $1$; thus applying a functor to a transformation component commutes with extension. For common-stage components write each transformation in the form $d_{\\mathrm{out}}^{-1}\\eta_Ld_{\\mathrm{in}}$ from step 10. Vertical composition cancels the intermediate $d_{\\mathrm{in}}d_{\\mathrm{in}}^{-1}$. Whiskering gives the same formula: apply the stage functor (in the specified slot) to the three factors and compose its scalar comparison with those of that slot. Its comparison naturality moves that scalar comparison across $\\eta_L$, leaving just the outside identifications. In an output slot this is an equality: for $F$ with comparison $\\mu$, $F_L(d_{\\mathrm{out}})\\mu$ and $F_L(d_{\\mathrm{in}})\\mu$ are the $d$'s of $FU,FV$ for $\\lambda^{FU}=F_L(\\lambda^U)\\mu$. In an input slot the two objects differ: $U$ of the descended $F(E,A)=(E,F_EA)$ has $K$-object $U_K(S_{K/E}F_EA,B_K)$, the family $U(F-,-)$ has $U_K(F_KS_{K/E}A,B_K)$. Identify them by the class represented at $L$ by $(d^{U(F,1)}_{L,x})^{-1}U_L(\\mu_{L/E,A},1)d^U_{L,x_F}$. It is independent of $L$ by step 8 and the tower equation for $\\mu$. Since $F$ sends $f$ to $\\mu^{-1}F_L(f)\\mu$, it is natural, and the whiskered components agree after conjugation by it. This also covers nested bifunctors, using the supplied tower equations to identify their chosen common fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  },
+  {
+   "text": "Apply StageSystem.PairCategory.mkHom_eq_mkHom_iff to the two supplied representatives at L: equality of their images after a common further stage gives equality of the two quotient classes. After vertical composition or whiskering the previous component formulas give the specified representatives, so the same criterion applies to every finite well-typed equation. The finite compositum upper bound is supplied by [def-weil-finite-subextension-directed-set].",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Common-stage Hom formula; agent verification for the abstract linear categories of this statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-linear-scalar-localization-category",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "Stage-3 proof by K8: explicit tensor base change for rawHom, and product-stage-system diagonal plus the adopted StageSystem quotient calculus for common-stage descent; component normalization retained for all comparisons and whiskering clauses. The coefficient restriction map is constructed directly using uniqueness of the spectral norm and the DVR membership formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between bilinear functors descend through raw scalar localization and filtered common coefficient field categories preserving equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Localization.functor_linear_iff\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D] {E : Type u_1}\\n  [inst_4 : CategoryTheory.Category.{v_1, u_1} E] (L : CategoryTheory.Functor C D)\\n\", \"doc\": \"Given categories $ C $, $ D $, $ E $, a localization functor $ F : C \\to D $ with respect to a morphism property $ P $, and functors $ G : C \\to E $, if there exists a lifting $ L $ of $ G $ through $ F\"}\n  {\"name\": \"ModuleCat.localizedModule_functor_map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Localization\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : Small.{v, u} R] (S : Submonoid R) {X Y : ModuleCat R} (f : X ⟶ Y),\\n  (ModuleCat.localizedModule_functor S).map f = ModuleCat.localizedModuleMap S f\", \"doc\": \"For any small commutative ring $ R $, submonoid $ S $, and $ R $-module homomorphism $ f : X \\\\to Y $, the localization functor from $ R $-modules to $ R_S $-modules acts on morphisms by mapping $ f $ \"}\n  {\"name\": \"CategoryTheory.Localization.linear\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"(R : Type w) →\\n  [inst : Ring R] →\\n    {C : Type u₁} →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₁} C] →\\n        {D : Type u₂} →\\n          [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n            [inst_3 : CategoryTheory.Preadditive C] →\\n              [inst_4 : CategoryTheory.Preadditive D] →\", \"doc\": \"Given a ring $ R $, a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, and a localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a morphism property $ W $, thi\"}\n  {\"name\": \"CategoryTheory.Localization.instLinearLocalization'Q'\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"∀ (R : Type w) [inst : Ring R] {C : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_2 : CategoryTheory.Preadditive C] (W : CategoryTheory.MorphismProperty C) [inst_3 : CategoryTheory.Linear R C]\\n  [inst_4 : W.HasLocalization] [inst_5 : CategoryTheory.Preadditive W.Localization'] [inst\", \"doc\": \"Given a ring $ R $, a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, and a localization $ \\\\mathcal{C}[W^{-1}] $ with respect to a morphism property $ W $, the localized category \"}\n  {\"name\": \"CategoryTheory.Localization.functor_linear\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"∀ (R : Type w) [inst : Ring R] {C : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Preadditive D] (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProp\", \"doc\": \"Given a ring $ R $, an $ R $-linear preadditive category $ \\\\mathcal{C} $, and a localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a morphism property $ W $, the category $ \\\\math\"}\n  {\"name\": \"CategoryTheory.Localization.instLinearLocalizationQ\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"∀ (R : Type w) [inst : Ring R] {C : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_2 : CategoryTheory.Preadditive C] (W : CategoryTheory.MorphismProperty C) [inst_3 : CategoryTheory.Linear R C]\\n  [inst_4 : CategoryTheory.Preadditive W.Localization] [inst_5 : W.Q.Additive], CategoryTh\", \"doc\": \"Given a ring $ R $ and a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, the localization of $ \\\\mathcal{C} $ at a morphism property $ W $ inherits an $ R $-linear category structu\"}\n  {\"name\": \"CategoryTheory.Localization.instLinearLocalization'\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"(R : Type w) →\\n  [inst : Ring R] →\\n    {C : Type u₁} →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₁} C] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [CategoryTheory.Linear R C] →\\n              [inst_4 : W.HasLocalization] →\\n  \", \"doc\": \"Given a ring $ R $, a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, and a localization $ \\\\mathcal{C}[W^{-1}] $ with respect to a morphism property $ W $, this instance endows th\"}\n  {\"name\": \"CategoryTheory.Localization.instLinearLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/Linear\", \"type\": \"(R : Type w) →\\n  [inst : Ring R] →\\n    {C : Type u₁} →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₁} C] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [CategoryTheory.Linear R C] →\\n              [inst_4 : CategoryTheory.Preaddit\", \"doc\": \"Given a ring $ R $ and a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, the localization of $ \\\\mathcal{C} $ at a morphism property $ W $ inherits an $ R $-linear category structu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Linear\", \"NatTrans\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.appLinearMap\", \"module\": \"Mathlib.CategoryTheory.Linear.FunctorCategory\", \"type\": \" {R : Type u_1} [Semiring R] {C : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_2} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Preadditive D] [CategoryTheory.Linear R D] {F G : CategoryTheory.Functor C D} (X : C) : (F ⟶ G) →ₗ[R] F.obj X ⟶ G.obj X\", \"doc\": \"Application of a natural transformation at a fixed object,\\nas group homomorphism\"}\n  {\"name\": \"CategoryTheory.NatTrans.appLinearMap_apply\", \"module\": \"Mathlib.CategoryTheory.Linear.FunctorCategory\", \"type\": \" {R : Type u_1} [Semiring R] {C : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_2} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Preadditive D] [CategoryTheory.Linear R D] {F G : CategoryTheory.Functor C D} (X : C) (α : F ⟶ G) : (CategoryTheory.NatTrans.appLinearMap X) α = α.\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*[Nn]at|[Nn]at.*scalarExtension|[Bb]ilinear.*[Ll]ocaliz|[Ll]ocaliz.*[Bb]ilinear",
+   "results": "[grep] OK 0 hit(s) ; scope Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bilinear natural isomorphisms descend to rationalized linear categories and filtered colimits of coefficient categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Free.ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Adjunctions\", \"type\": \"{F G : Free R C ⥤ D} [F.Additive] [F.Linear R] [G.Additive] [G.Linear R] (α : embedding R C ⋙ F ≅ embedding R C ⋙ G) :\\n  F ≅ G\", \"doc\": \"Given a commutative ring $ R $, a category $ \\\\mathcal{C} $, and an $ R $-linear preadditive category $ \\\\mathcal{D} $, if two additive $ R $-linear functors $ F, G : \\\\text{Free}_R(\\\\mathcal{C}) \\\\to \\\\mat\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": IsColimit (colimitCocone F)\", \"doc\": \"For a ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, the filtered colimit cocone $ (\\\\varinjlim F, \\\\iota) $ satisfies the universal propert\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \": IsStableUnderFilteredColimits.{w, w'} (isomorphisms C)\", \"doc\": \"In any category $\\\\mathcal{C}$, the property of being an isomorphism is stable under filtered colimits. That is, for any filtered diagram $D$ in $\\\\mathcal{C}$, if every morphism in $D$ is an isomorphis\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": Cocone F\", \"doc\": \"For a ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, this constructs the cocone for the filtered colimit of $ F $ in the category of $ R $\"}\n  {\"name\": \"CategoryTheory.Mat_.embeddingLiftIso\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Mat\", \"type\": \"(F : C ⥤ D) [Functor.Additive F] : embedding C ⋙ lift F ≅ F\", \"doc\": \"For a preadditive category $\\\\mathcal{C}$ and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ to a preadditive category $\\\\mathcal{D}$ with finite biproducts, the composition of the embedding func\"}\n  {\"name\": \"CategoryTheory.Limits.HasBiproductsOfShape.colimIsoLim\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Biproducts\", \"type\": \"[HasBiproductsOfShape J C] : colim (J := Discrete J) (C := C) ≅ lim\", \"doc\": \"In a category $\\\\mathcal{C}$ with zero morphisms and biproducts indexed by a type $J$, the colimit functor and limit functor for diagrams $\\\\mathrm{Discrete}(J) \\\\to \\\\mathcal{C}$ are naturally isomorphic\"}\n  {\"name\": \"CategoryTheory.Functor.ratLinear\", \"module\": \"Mathlib.CategoryTheory.Linear.LinearFunctor\", \"type\": \": F.Linear ℚ\", \"doc\": \"The functor $ F $ preserves the $ \\\\mathbb{Q} $-module structure on hom-sets and the $ \\\\mathbb{Q} $-bilinearity of composition, making it compatible with the linear structure on the categories.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient compatible family of two variable natural isomorphisms defines an independent natural transformation in the common finite field colimit with conjugated components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GradedObject.mapBifunctorObjSingle₀ObjIso\", \"module\": \"Mathlib/CategoryTheory/GradedObject/Unitor\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {I : Type u_3} →\\n      {J : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n            [inst_2 : Zero I] →\\n              [inst_3 : DecidableEq I] →\\n                [inst_4 : Categ\", \"doc\": \"Given a bifunctor constructed from a functor $ F : \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \\\\mathcal{C}_3] $, the single graded object functor at index 0, and an index pair $ (0, j) \\\\in I \\\\times J $, this is\"}\n  {\"name\": \"CategoryTheory.GradedObject.mapBifunctorObjObjSingle₀Iso\", \"module\": \"Mathlib/CategoryTheory/GradedObject/Unitor\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {I : Type u_3} →\\n      {J : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n            [inst_2 : Zero I] →\\n              [inst_3 : DecidableEq I] →\\n                [inst_4 : Categ\", \"doc\": \"Given a bifunctor constructed from $ F : \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \\\\mathcal{C}_3] $, a graded object $ X $ in $ \\\\mathcal{C}_1 $ indexed by $ J $, and a graded object $ Y $ in $ \\\\mathcal{C}_2 $\"}\n  {\"name\": \"CategoryTheory.GradedObject.mapBifunctorLeftUnitor_inv_naturality\", \"module\": \"Mathlib/CategoryTheory/GradedObject/Unitor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {I : Type u_3} {J : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : Zero I] [inst_3 : DecidableEq I]\\n  [inst_4 : CategoryTheory.Limits.HasInitial C] (F : CategoryTheory.Functor C (CategoryTheory.Funct\", \"doc\": \"For a bifunctor constructed from a functor $ F : \\\\mathcal{C} \\\\to [\\\\mathcal{D}, \\\\mathcal{D}] $, a function $ p : I \\\\times J \\\\to J $ satisfying $ p(0, j) = j $, and objects $ X \\\\in \\\\mathcal{C} $, $ Y \\\\i\"}\n  {\"name\": \"CategoryTheory.GradedObject.mapBifunctorRightUnitor_inv_naturality\", \"module\": \"Mathlib/CategoryTheory/GradedObject/Unitor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {I : Type u_3} {J : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : Zero I] [inst_3 : DecidableEq I]\\n  [inst_4 : CategoryTheory.Limits.HasInitial C] (F : CategoryTheory.Functor D (CategoryTheory.Funct\", \"doc\": \"Given a bifunctor $ F : \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \\\\mathcal{C}_3] $, a function $ p : J \\\\times I \\\\to J $ satisfying $ p(j, 0) = j $, a $ J $-graded object $ X $ in $ \\\\mathcal{C}_1 $, and an ind\"}\n  {\"name\": \"CategoryTheory.Iso.map_hom_inv_id_eval_app\", \"module\": \"Mathlib/CategoryTheory/GradedObject\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {E : Type u_3} {J : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Category.{v_3, u_3} E]\\n  {X Y : CategoryTheory.GradedObject J C} (e : X ≅ Y) (F : CategoryTheory.Functor C (CategoryT\", \"doc\": \"For any isomorphism $ e : X \\\\cong Y $, functor $ F : \\\\mathcal{C} \\\\to [\\\\mathcal{D}, \\\\mathcal{E}] $, index $ j : J $, and object $ Y : \\\\mathcal{D} $, the composition of $ F $ applied to $ e.\\\\text{hom}(j\"}\n  {\"name\": \"CategoryTheory.Iso.map_inv_hom_id_eval_app\", \"module\": \"Mathlib/CategoryTheory/GradedObject\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {E : Type u_3} {J : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Category.{v_3, u_3} E]\\n  {X Y : CategoryTheory.GradedObject J C} (e : X ≅ Y) (F : CategoryTheory.Functor C (CategoryT\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ in a category $ \\\\mathcal{C} $, any functor $ F: \\\\mathcal{C} \\\\to [\\\\mathcal{D}, \\\\mathcal{E}] $, and for all $ j \\\\in J $ and $ Y \\\\in \\\\mathcal{D} $, the composition $ \"}\n  {\"name\": \"CategoryTheory.GradedObject.mapBifunctorLeftUnitor_naturality\", \"module\": \"Mathlib/CategoryTheory/GradedObject/Unitor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {I : Type u_3} {J : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : Zero I] [inst_3 : DecidableEq I]\\n  [inst_4 : CategoryTheory.Limits.HasInitial C] (F : CategoryTheory.Functor C (CategoryTheory.Funct\", \"doc\": \"For a bifunctor constructed from a functor $ F : \\\\mathcal{C} \\\\to [\\\\mathcal{D}, \\\\mathcal{D}] $, a function $ p : I \\\\times J \\\\to J $ satisfying $ p(0, j) = j $, and objects $ X \\\\in \\\\mathcal{C} $, $ Y \\\\i\"}\n  {\"name\": \"localCohomology.diagramComp\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v v')} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        {E : Type v'} →\\n          [inst_2 : CategoryTheory.SmallCategory E] →\\n            (I' : CategoryTheory.Functor E D) →\\n              (I : CategoryTheory.Functor D (Ideal R)) \", \"doc\": \"For any natural number $i$, the local cohomology diagram of the composition of functors $I' \\\\circ I$ at level $i$ is naturally isomorphic to the composition of the opposite functor of $I'$ with the lo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*[Nn]at|[Bb]ilinear.*[Ll]ocaliz|commonStage",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: component evaluation, localization lifting or fixed-ring module colimits do not state the combined raw bilinear Hom-tensor and coherent varying-field pair-category theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a separately linear bifunctor to Hom tensor coefficient fields and descend its natural transformations to a directed common stage category",
+   "results": "Hits: CategoryTheory.functorCategoryLinear, CategoryTheory.FunctorToTypes.adj, ModuleCat.coextendScalars, CategoryTheory.Monoidal.FunctorCategory.tensorHom, CategoryTheory.Free.ext, ModuleCat.MonoidalCategory.tensorLift, CategoryTheory.FunctorToTypes.functorHomEquiv, ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: component evaluation, localization lifting or fixed-ring module colimits do not state the combined raw bilinear Hom-tensor and coherent varying-field pair-category theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Linear\", \"NatTrans\"",
+   "results": "Hits: CategoryTheory.NatTrans.appLinearMap, CategoryTheory.NatTrans.appLinearMap_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: component evaluation, localization lifting or fixed-ring module colimits do not state the combined raw bilinear Hom-tensor and coherent varying-field pair-category theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear functors and compatible natural isomorphisms extend to scalar localized categories and common stage coefficient categories",
+   "results": "Hits: CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.lift₂_iso_hom_app_app₂, CategoryTheory.Localization.lift₂_iso_hom_app_app₁, CategoryTheory.Localization.lift₂NatTrans_app_app, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: component evaluation, localization lifting or fixed-ring module colimits do not state the combined raw bilinear Hom-tensor and coherent varying-field pair-category theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of bilinear maps between Hom modules preserves naturality equations in a filtered colimit of linear categories",
+   "results": "Hits: ModuleCat.FilteredColimits.colimitSMulAux, ModuleCat.FilteredColimits.colimit_smul_mk_eq, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.CoextendScalars.map'_hom_apply_apply, ModuleCat.FilteredColimits.colimitSMulAux_eq_of_rel, ModuleCat.CoextendScalars.map', ModuleCat.FilteredColimits.ι_colimitDesc_assoc, ModuleCat.HasColimit.coconePointSMul_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: component evaluation, localization lifting or fixed-ring module colimits do not state the combined raw bilinear Hom-tensor and coherent varying-field pair-category theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-pullback-tensor-iso",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: the rational and Qlbar comparison in theta_{K(m)}; returned comparison proof steps 11-12, raw rationalization and common-field descent.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-bilinear-comparison-coefficient-descent",
+  "worker": "stage1",
+  "summary": "Explicit tensor-Hom construction and common-stage conjugation proof; reused the bilinear module base-change Mathlib leaf and semilinear scalar-localization theorem. No new nodes. Clarified finite fields to finite intermediate extensions, since Omega has characteristic zero. No injectivity, additive-category, triangulated or Karoubi assumptions were added.",
+  "blueprint": "def-weil-frobenius-coefficient-twists: coefficient-extension compatibility (recorded Clause 5 ancestor elaboration through lem-pur-derived-pullback-tensor-iso); supplies raw rational and common-field comparison descent.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear raw Hom-localization and comparison-equation tool, used only for the transition functors; the unit has no replacement for this scalar-localization algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-7de4fcf85",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-7de4fcf85 (reviewer sub-agent of L); spot-checked: I read the item in full, all 9 cited statements and the main-20261015 source for def-weil-algebraically-closed-coefficients and def-weil-rationalization-karoubi. The delivery has no new nodes. The only statement change is 'finite fields E⊂Ω' → 'finite intermediate extensions Q_ℓ⊆E⊂Ω'. It is faithful because Ω has characteristic 0 and contains no finite field; stmt_deps are unchanged. No SGA is cited. I recomputed the steps. Step 1: bilinearity from U(f,g)=U(1,g)U(f,1). Steps 2-3: multilinearity, so pure tensors suffice, and torsion Hom modules are harmless. Step 4: semilinear extension with ϖ_E nonzero in L; bilinear λ-naturality on pure tensors. Step 6: transport is transitive by the associator cocycle plus naturality, and the unit cocycle gives identity transport. Step 8: the identity d_M a^D = U_M(h)λ_{M/L}S(d_L) holds by λ-naturality, the input cocycles and the λ tower cocycle. Step 10: the scalar square gives exactly the stated representative S_{L/K}(e_x). Steps 11 and 13 also check out. FIX: step 12 said input-slot whiskering gives 'the same formula'. In fact U of the descended F has K-object U_K(S_{K/E}F_EA,B_K), while the family U(F-,-) has U_K(F_KS_{K/E}A,B_K). I added the identifying class (d^{U(F,1)})^{-1}U_L(μ,1)d^U_{x_F}, its independence of L (step 8 plus the μ tower equation) and its naturality. I also made the output-slot equality F(d)μ=d^{FU} explicit. There are no duplicates: lem-sbc-coherent-pair-functor-descent is unary, additive and has strict units; lem-fd-common-stage-comparison-descent and the sf common tensor records are unary or specific settings. Tool use accepted: lem-pur-semilinear-scalar-localization (sk-thm-purity-transport), a generic semilinear localization black box. Advisory: 'scalar-compatible linear functors' is inherited wording without a formal definition, and blueprint.from.place still cites 'Clause 5', inherited from Q111.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BilinearCoefficientDescent",
+  "declaration": "CategoryTheory.BilinearCoefficientDescent.bilinear_comparison_coefficient_descent",
+  "declarations": [
+   "CategoryTheory.BilinearCoefficientDescent.IsSeparatelyLinear",
+   "CategoryTheory.BilinearCoefficientDescent.IsRawExtension",
+   "CategoryTheory.BilinearCoefficientDescent.raw_extension_existsUnique",
+   "CategoryTheory.BilinearCoefficientDescent.raw",
+   "CategoryTheory.BilinearCoefficientDescent.raw_comparison",
+   "CategoryTheory.BilinearCoefficientDescent.raw_transformation_existsUnique",
+   "CategoryTheory.BilinearCoefficientDescent.rawTransformation",
+   "CategoryTheory.BilinearCoefficientDescent.raw_equations",
+   "CategoryTheory.BilinearCoefficientDescent.raw_whisker_output",
+   "CategoryTheory.BilinearCoefficientDescent.raw_whisker_input",
+   "CategoryTheory.BilinearCoefficientDescent.raw_additive",
+   "CategoryTheory.BilinearCoefficientDescent.Units",
+   "CategoryTheory.BilinearCoefficientDescent.Family",
+   "CategoryTheory.BilinearCoefficientDescent.HasUnitComparison",
+   "CategoryTheory.BilinearCoefficientDescent.Transformation",
+   "CategoryTheory.BilinearCoefficientDescent.output",
+   "CategoryTheory.BilinearCoefficientDescent.endpoint",
+   "CategoryTheory.BilinearCoefficientDescent.IsDescent",
+   "CategoryTheory.BilinearCoefficientDescent.descent_existsUnique",
+   "CategoryTheory.BilinearCoefficientDescent.descend",
+   "CategoryTheory.BilinearCoefficientDescent.transformation_existsUnique",
+   "CategoryTheory.BilinearCoefficientDescent.descendTransformation",
+   "CategoryTheory.BilinearCoefficientDescent.descent_equations",
+   "CategoryTheory.BilinearCoefficientDescent.change_common_field",
+   "CategoryTheory.BilinearCoefficientDescent.finite_equation_descent",
+   "CategoryTheory.BilinearCoefficientDescent.whisker_output",
+   "CategoryTheory.BilinearCoefficientDescent.whisker_input_left",
+   "CategoryTheory.BilinearCoefficientDescent.whisker_input_right",
+   "CategoryTheory.BilinearCoefficientDescent.IsRationalSystem",
+   "CategoryTheory.BilinearCoefficientDescent.rational_system_existsUnique",
+   "CategoryTheory.BilinearCoefficientDescent.IsRationalFamily",
+   "CategoryTheory.BilinearCoefficientDescent.rational_comparison",
+   "CategoryTheory.BilinearCoefficientDescent.Integers",
+   "CategoryTheory.BilinearCoefficientDescent.integersCommRing",
+   "CategoryTheory.BilinearCoefficientDescent.integersAlgebra",
+   "CategoryTheory.BilinearCoefficientDescent.uniformizer",
+   "CategoryTheory.BilinearCoefficientDescent.integerInclusion_mem",
+   "CategoryTheory.BilinearCoefficientDescent.integerInclusion",
+   "CategoryTheory.BilinearCoefficientDescent.coefficient_hypotheses",
+   "CategoryTheory.BilinearCoefficientDescent.compositum_upper",
+   "CategoryTheory.BilinearCoefficientDescent.coefficientDirected",
+   "CategoryTheory.BilinearCoefficientDescent.bilinear_comparison_coefficient_descent",
+   "CategoryTheory.BilinearCoefficientDescent.Units.unit",
+   "CategoryTheory.BilinearCoefficientDescent.Units.left",
+   "CategoryTheory.BilinearCoefficientDescent.Units.right",
+   "CategoryTheory.BilinearCoefficientDescent.Units.mk",
+   "CategoryTheory.BilinearCoefficientDescent.Family.U",
+   "CategoryTheory.BilinearCoefficientDescent.Family.comparison",
+   "CategoryTheory.BilinearCoefficientDescent.Family.tower",
+   "CategoryTheory.BilinearCoefficientDescent.Family.mk",
+   "CategoryTheory.BilinearCoefficientDescent.Transformation.app",
+   "CategoryTheory.BilinearCoefficientDescent.Transformation.square",
+   "CategoryTheory.BilinearCoefficientDescent.Transformation.mk",
+   "CategoryTheory.BilinearCoefficientDescent.withObjects",
+   "CategoryTheory.BilinearCoefficientDescent.withObjects_eq",
+   "CategoryTheory.BilinearCoefficientDescent.raw_spec",
+   "CategoryTheory.BilinearCoefficientDescent.raw_obj",
+   "CategoryTheory.BilinearCoefficientDescent.rawTransformation_app",
+   "CategoryTheory.BilinearCoefficientDescent.descend_spec",
+   "CategoryTheory.BilinearCoefficientDescent.descend_obj",
+   "CategoryTheory.BilinearCoefficientDescent.descendTransformation_app",
+   "CategoryTheory.BilinearCoefficientDescent.Units.unit_mk",
+   "CategoryTheory.BilinearCoefficientDescent.Family.U_mk",
+   "CategoryTheory.BilinearCoefficientDescent.Family.comparison_mk",
+   "CategoryTheory.BilinearCoefficientDescent.Transformation.app_mk",
+   "CategoryTheory.BilinearCoefficientDescent.Integers_eq",
+   "CategoryTheory.BilinearCoefficientDescent.uniformizer_mem",
+   "CategoryTheory.BilinearCoefficientDescent.uniformizer_val",
+   "CategoryTheory.BilinearCoefficientDescent.integerInclusion_apply",
+   "CategoryTheory.BilinearCoefficientDescent.FamilyTower",
+   "CategoryTheory.BilinearCoefficientDescent.TransformationSquare",
+   "CategoryTheory.BilinearCoefficientDescent.UnitLaws",
+   "CategoryTheory.BilinearCoefficientDescent.UnitComparisons",
+   "CategoryTheory.BilinearCoefficientDescent.isSeparatelyLinear_iff",
+   "CategoryTheory.BilinearCoefficientDescent.isRawExtension_iff",
+   "CategoryTheory.BilinearCoefficientDescent.isDescent_iff",
+   "CategoryTheory.BilinearCoefficientDescent.isRationalSystem_iff",
+   "CategoryTheory.BilinearCoefficientDescent.isRationalFamily_iff"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BilinearCoefficientDescent.lean",
+  "statement": "theorem bilinear_comparison_coefficient_descent {A : Padic.FiniteCoefficientFields l Ω → Type u} [∀ E, Category.{v} (A E)] [∀ E, Preadditive (A E)] [∀ E, Linear (Integers l Ω E) (A E)] {B : Padic.FiniteCoefficientFields l Ω → Type u'} [∀ E, Category.{v'} (B E)] [∀ E, Preadditive (B E)] [∀ E, Linear (Integers l Ω E) (B E)] (S : StageSystem A) (T : StageSystem B) [∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L), (S.T h).Additive] [∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L), (T.T h).Additive] (semiS : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), ScalarLocalization.IsSemilinear (integerInclusion l Ω h) (S.T h)) (semiT : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), ScalarLocalization.IsSemilinear (integerInclusion l Ω h) (T.T h)) (uS : Units S) (uT : Units T) (U V : Family S S T) (hU : ∀ E, IsSeparatelyLinear (Integers l Ω E) (U.U E)) (hV : ∀ E, IsSeparatelyLinear (Integers l Ω E) (V.U E)) (unitU : HasUnitComparison U uS uS uT) (unitV : HasUnitComparison V uS uS uT) (η : Transformation U V) [∀ E, IsIso (η.app E)] : ∃ (Q : StageSystem (fun E ↦ ScalarLocalization (Integers l Ω E) (A E) (uniformizer l Ω E))) (P : StageSystem (fun E ↦ ScalarLocalization (Integers l Ω E) (B E) (uniformizer l Ω E))) (F G : Family Q Q P) (e : Transformation F G) (uQ : Units Q) (uP : Units P), IsRationalSystem (uniformizer l Ω) (integerInclusion l Ω) (fun h ↦ (coefficient_hypotheses l Ω).2.2.1 _ _ h) S semiS Q ∧ IsRationalSystem (uniformizer l Ω) (integerInclusion l Ω) (fun h ↦ (coefficient_hypotheses l Ω).2.2.1 _ _ h) T semiT P ∧ IsRationalFamily U hU F ∧ IsRationalFamily V hV G ∧ HasUnitComparison F uQ uQ uP ∧ HasUnitComparison G uQ uQ uP ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (X : A E), HEq ((uQ.unit E).hom.app ⟨X⟩) ((1 : Localization.Away (uniformizer l Ω E)) ⊗ₜ[Integers l Ω E] (uS.unit E).hom.app X)) ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (X : B E), HEq ((uP.unit E).hom.app ⟨X⟩) ((1 : Localization.Away (uniformizer l Ω E)) ⊗ₜ[Integers l Ω E] (uT.unit E).hom.app X)) ∧ ∃ he : ∀ E, IsIso (e.app E), (∀ (E : Padic.FiniteCoefficientFields l Ω) (X Y : A E), HEq ((e.app E).app (⟨X⟩, ⟨Y⟩)) ((1 : Localization.Away (uniformizer l Ω E)) ⊗ₜ[Integers l Ω E] (η.app E).app (X, Y)) ∧ HEq ((@inv _ _ _ _ (e.app E) (he E)).app (⟨X⟩, ⟨Y⟩)) ((1 : Localization.Away (uniformizer l Ω E)) ⊗ₜ[Integers l Ω E] (inv (η.app E)).app (X, Y))) ∧ IsIso (descendTransformation F G e (Padic.finiteCoefficientCompositum l Ω) ((compositum_upper l Ω).1) ((compositum_upper l Ω).2))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The owning-node module proves all twenty original theorem clauses with unchanged theorem signatures. Units is an equivalent subtype; Family and Transformation are structures with compact internal fields and wrappers preserving their named API. UnitLaws, FamilyTower and TransformationSquare name the same coherence equations. Five proposition structures have proved iff lemmas equating their clauses to the original specifications. Private rawHomLinear stores the actual tensor-base-change map; rawHom evaluates it as a plain function with six bilinearity lemmas and the pure-tensor formula. Integer instances are explicit canonical subring structures; Integers_eq identifies the same subring, uniformizer_val and integerInclusion_apply give the exact original field actions. withObjects supplies the prescribed object fields and is proved equal to the uniquely chosen functor. The three returned public imports are retained for downstream declarations. No consumer or adopted source declaration changes. See the K8 change record. The private tensorComp function similarly evaluates the existing scalar-localized composition with proved zero, addition and pure-tensor laws. Private simp rules are local.",
+  "fixed_by": "NT-stage2-cc-9bcba4ac5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bcba4ac5",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Read item, 4 stmt_dep records, upstream StageSystem/PairCategory/Morphism, ScalarLocalization/semilinear and coefficient-field decls, full module. Units, λ tower/unit cocycles, η square, raw ∃! extension, rational system/family pins, IsDescent arrow formula, transformation representative at every L, change_common_field, equations and output whiskering match the node. H3: whisker_input_left/right left eU/eV as free isos (for iso η the square is then automatic), so 'preserve whiskering' was unpinned; fixed by pinning components at every L to d^{UF}⁻¹∘U_L(β,1)∘d^U (right slot: (1,β)) via eqToHom of hU/hV, as in node step 12. Fixed module compiled once with nt_compile --json: 22.7 s, clean. Advisories: compositum_upper restates proved finiteCoefficientFields_properties.1; General import publicly brings the recorded Sf module; nested bifunctor whiskering left to iterated slot statements."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-09187",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T070219-L-3467120",
+  "kind": "interface",
+  "note": "independent cc review: 20 published theorem signatures vs delivered (identical); changed defs vs change record (equivalent, iff/eq lemmas); integerInclusion vs integralScalarIntegerInclusion (same codRestrict); sole importer WeilTensorComparisonRationalDescent compiled against delivered olean (41.5 s, ok); #print axioms all 20 theorems: propext/choice/Quot.sound only"
+ }
+}

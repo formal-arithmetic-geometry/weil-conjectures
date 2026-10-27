@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-full-root-rotation-torsor",
+ "kind": "statement",
+ "title": "Compatible root rotations give the full profinite torsor comparison",
+ "statement": "Let $p$ be prime, let $H$ be a nonzero commutative ring of characteristic $p$, let $I$ be a finite set and $t_i\\in H$ for $i\\in I$. Suppose there are primitive roots $\\zeta_n\\in H$ for all positive integers $n$ prime to $p$, satisfying $\\zeta_m^{m/n}=\\zeta_n$ for $n\\mid m$, and with $\\zeta_n^a-\\zeta_n^b$ a unit whenever $a,b$ are distinct residues modulo $n$. Put $f=\\prod_i t_i$ (empty product $1$), $J=(t_i)_i$, $H_n=H[x_i]_{i\\in I}/(x_i^n-t_i)_i$ and $H_\\infty=\\varinjlim_{(n,p)=1}H_n$, with transitions $x_{i,n}\\mapsto x_{i,m}^{m/n}$. Write $U^\\circ=\\operatorname{Spec}H[1/f]$, $T=\\operatorname{Spec}H_\\infty$ and $T^\\circ=\\operatorname{Spec}H_\\infty[1/f]$ [def-weil-affine-spectrum, def-weil-ring-localization-away, def-sfb-full-parameter-root-tower]. Let $G=(\\prod_{q\\ne p}\\mathbf Z_q)^I$, with $q$ over primes and its profinite product topology, and let $G_n=(\\mathbf Z/n)^I$.\nRoot rotations $x_{i,n}\\mapsto\\zeta_n^{a_i}x_{i,n}$ define compatible actions of $G_n$ on $\\operatorname{Spec}H_n$. There is a topological group identification $G\\cong\\varprojlim_{(n,p)=1}G_n$ with the ordinary residue projections. For $T_n^\\circ=\\operatorname{Spec}H_n[1/f]$, the actual comparisons\n$$T_n^\\circ[G_n]\\xrightarrow{\\sim}T_n^\\circ\\times_{U^\\circ}T_n^\\circ,\\quad(x,a)\\mapsto(x,\\zeta_n^a x),$$\nare scheme isomorphisms, commute with power transitions, and induce the scheme isomorphism\n$$T^\\circ[G]\\xrightarrow{\\sim}T^\\circ\\times_{U^\\circ}T^\\circ,\\quad(x,g)\\mapsto(x,gx).$$\nHere $X[P]$ denotes the inverse limit of finite disjoint unions [def-sfb-profinite-test-objects], and fibre products are [def-pc-fibre-product]. The quotient map sending every root to zero defines $i:\\operatorname{Spec}(H/J)\\to T$, fixed by all root rotations. All these maps commute with ring homomorphisms preserving the parameters and compatible roots. For $I=\\varnothing$, $T=\\operatorname{Spec}H$, $G=1$ and $i$ is the identity. Empty punctured loci are allowed; no existence of residual charts or lisse extension of an initially given sheaf is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-sfb-full-parameter-root-tower",
+  "def-sfb-profinite-test-objects",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For each tame $n$, define the $H$-algebra automorphism $r_{n,a}$ on the quotient generators by $x_{i,n}\\mapsto\\zeta_n^{a_i}x_{i,n}$. It preserves the relations because $(\\zeta_n^{a_i}x_{i,n})^n=t_i$, is independent of residue representatives, and has inverse $r_{n,-a}$. Composition adds labels. If $n\\mid m$, then $(\\zeta_m^{a_i}x_{i,m})^{m/n}=\\zeta_n^{a_i}x_{i,m}^{m/n}$, so reduction of labels intertwines the power transitions. The quotient and colimit presentations in [def-sfb-full-parameter-root-tower] therefore give the stated compatible actions on every finite spectrum and on $T$. Contravariance causes no order ambiguity because the label groups are abelian.",
+   "uses": [
+    "def-sfb-full-parameter-root-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+   }
+  },
+  {
+   "text": "Write $N_p=\\{n>0:(n,p)=1\\}$ and $L=\\varprojlim_{n\\in N_p}\\mathbf Z/n$, with residue transitions and the subspace topology from the product of discrete rings. For $(z_q)_{q\\ne p}$, CRT [lem-pc-crt-ideal-quotient-product], applied to the prime-power ideals of $\\mathbf Z$, gives the unique $a_n\\in\\mathbf Z/n$ whose residue at $q^{v_q(n)}$ is $\\rho_{v_q(n)}(z_q)$. The compatibility in [lem-exc-padic-residue-universal-property] and CRT uniqueness imply $a_m\\bmod n=a_n$ for $n\\mid m$. Conversely the projections $L\\to\\mathbf Z/q^b$ form compatible ring homomorphisms; that same residue universal property supplies a unique $L\\to\\mathbf Z_q$. CRT uniqueness and separation by all $\\rho_b$ show these two constructions are inverse ring homomorphisms. Every forward coordinate depends on finitely many continuous residue maps: each residue fibre is a coset of $q^b\\mathbf Z_q$, open by the norm criterion in the residue node (a sufficiently small norm ball is contained in it). For the inverse, equality of the $q^b$ coordinates bounds the norm of the difference by $q^{-b}$, which proves continuity into each $\\mathbf Z_q$. This gives the required topological group identification after taking the finite product over $I$, with precisely the ordinary residue projections; $n=1$ uses the singleton residue ring.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT, lemma-chinese-remainder; agent-written prime-power reconstruction using the cited adic residue universal property"
+   }
+  },
+  {
+   "text": "Put $A=H[1/f]$ and $B_n=H_n[1/f]$. The universal property of localization gives $\\varinjlim_n B_n=H_\\infty[1/f]$: a compatible family of maps $H_n[1/f]\\to C$ is exactly a compatible family $H_n\\to C$ whose common image of $f$ is invertible, hence exactly a map $H_\\infty[1/f]\\to C$. The directed index $N_p$ is nonempty and multiplication supplies upper bounds. Thus [lem-weil-pbc-spec-colimit-limit] identifies its scheme limit $\\varprojlim_n T_n^\\circ$ canonically with $T^\\circ$, preserving the root coordinates and projections. No injectivity of ring transitions or nonemptiness of the puncture is needed.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; localization universal-property calculation"
+   }
+  },
+  {
+   "text": "Choose an enumeration $I\\simeq\\{1,\\ldots,r\\}$ and apply [lem-sfb-compatible-kummer-tower-cech] to $H$ and these $r$ parameters. Its hypotheses are exactly the primitive-root compatibility and unit-difference hypotheses here; it allows arbitrary characteristic-$p$ rings and $r=0$. Its displayed finite comparisons are the maps $(x,a)\\mapsto(x,\\zeta_n^a x)$, and its transition clause is for the same power maps and residue reductions as above. Its infinite comparison, with the topological identification of step 2 and the canonical scheme limit of step 3, is precisely $T^\\circ[G]\\simeq T^\\circ\\times_{U^\\circ}T^\\circ$. The notation $X[P]$ agrees with [def-sfb-profinite-test-objects]. Relabelling the parameters changes none of the formulas, since every generator retains its own label.",
+   "uses": [
+    "lem-sfb-compatible-kummer-tower-cech",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+   }
+  },
+  {
+   "text": "Let $q:H\\to H/J$ be the quotient homomorphism. At every $n$, the assignment $h\\mapsto q(h)$ and $x_{i,n}\\mapsto0$ respects $x_{i,n}^n=t_i$, since $n>0$ and $q(t_i)=0$. These homomorphisms $H_n\\to H/J$ are compatible: $0^{m/n}=0$ for $n\\mid m$, because $m/n>0$. The colimit presentation [def-sfb-full-parameter-root-tower] yields a homomorphism $e:H_\\infty\\to H/J$. By [def-weil-affine-spectrum] its spectrum is $i:\\operatorname{Spec}(H/J)\\to T$. For each rotation, $e(r_{n,a}(x_{i,n}))=q(\\zeta_n^{a_i})\\,0=0=e(x_{i,n})$, and constants are fixed. Equality on generators at every stage gives $e\\circ r_g=e$, hence $g\\circ i=i$.",
+   "uses": [
+    "def-sfb-full-parameter-root-tower",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+   }
+  },
+  {
+   "text": "For a ring map $\\phi:H\\to H^\\prime$ preserving the listed data, define $H_n\\to H_n^\\prime$ by $h\\mapsto\\phi(h)$ and $x_{i,n}\\mapsto x_{i,n}^\\prime$. The relations and power transitions agree term by term; moreover $\\phi(\\zeta_n^{a_i})x_{i,n}^\\prime=(\\zeta_n^\\prime)^{a_i}x_{i,n}^\\prime$, so these maps commute with rotations, then with the induced colimit maps and localizations. The comparison naturality is the base-change clause of [lem-sfb-compatible-kummer-tower-cech]. Since $\\phi(J)\\subseteq J^\\prime$, the induced quotient map sends $q(h)$ to $q^\\prime(\\phi(h))$; the two composites $H_\\infty\\to H^\\prime/J^\\prime$ agree on constants and send every root to zero. This proves naturality of $i$ too. Step 2 depends only on $p,I$ and is unchanged by $\\phi$.",
+   "uses": [
+    "def-sfb-full-parameter-root-tower",
+    "def-weil-ring-localization-away",
+    "lem-sfb-compatible-kummer-tower-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, every $H_n=H$ and every transition is the identity, while $f=1$ and $J=0$. Thus $H_\\infty=H$, $G=1$, $e$ is the identity, and all comparisons reduce to the identity comparison. If the puncture is empty, the comparison node already allows its zero localization rings; none of steps 1 or 5 localizes at $f$, so the fixed boundary map still exists. These constructions give only the maps claimed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-full-parameter-root-tower",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-exc-padic-residue-universal-property",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-sfb-compatible-kummer-tower-cech",
+  "def-sfb-profinite-test-objects",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8. Agent-written root algebra and inverse-limit calculation. Existing compatible Kummer comparison reused; boundary and residue calculations written out by Q16."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tame.*(lattice|lisse)|lattice.*sheaf|Kummer.*reduction",
+   "results": "{\"t\": \"2026-10-22T05:57:38Z\", \"tool\": \"grep\", \"query\": \"tame.*(lattice|lisse)|lattice.*sheaf|Kummer.*reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"18b367d4468d0d0e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*torsor|root.*torsor|torsor.*root",
+   "results": "{\"t\": \"2026-10-22T05:57:38Z\", \"tool\": \"grep\", \"query\": \"Kummer.*torsor|root.*torsor|torsor.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimitiveRoot\", \"IsTorsor\"",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrimitiveRoot\\\", \\\"IsTorsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer root towers are profinite torsors by compatible root rotations",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"leansearch\", \"query\": \"Kummer root towers are profinite torsors by compatible root rotations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"adjoinRootXPowSubCEquiv.congr_simp\", \"Polynomial.SplittingFieldAux.scalar_tower'\", \"instIsScalarTowerCyclotomicField\", \"adjoinRootXPowSubCEquiv_root\", \"autAdjoinRootXPowSubC_root\", \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"InfiniteGalois.profiniteGalGrp\", \"Polynomial.instIsScalarTowerElemRootSet\"], \"digest\": \"a227ae38fb2c7254\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full prime to p parameter root tower with compatible roots of unity is a torsor under a product of q adic integers",
+   "results": "{\"t\": \"2026-10-22T05:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"The full prime to p parameter root tower with compatible roots of unity is a torsor under a product of q adic integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun_apply\", \"RingOfIntegers.ZModXQuotSpanEquivQuotSpan\", \"cyclotomicCharacter\", \"IsPrimitiveRoot.adjoinEquivRingOfIntegersOfPrimePow_symm_apply\", \"IsPrimitiveRoot.adjoinEquivRingOfIntegersOfPrimePow_apply\", \"cyclotomicCharacter.toZModPow_toFun\", \"RingOfIntegers.ZModXQuotSpanEquivQuotSpanPair\"], \"digest\": \"5a687c53aec9f592\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer cover root rotations identify the fibre product with the cover times its roots of unity group compatibly with inverse limits",
+   "results": "{\"t\": \"2026-10-22T05:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer cover root rotations identify the fibre product with the cover times its roots of unity group compatibly with inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"autAdjoinRootXPowSubC\", \"autAdjoinRootXPowSubCHom\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"autEquivRootsOfUnity_smul\", \"autAdjoinRootXPowSubCEquiv_root\", \"autEquivRootsOfUnity_apply_rootOfSplit\", \"autAdjoinRootXPowSubCEquiv\", \"autAdjoinRootXPowSubC_root\"], \"digest\": \"1004b871b126505a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*torsor|root.*torsor|torsor.*root",
+   "results": "{\"t\": \"2026-10-22T06:56:42Z\", \"tool\": \"grep\", \"query\": \"Kummer.*torsor|root.*torsor|torsor.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible root covers have a profinite torsor comparison and a fixed zero section on the parameter boundary",
+   "results": "{\"t\": \"2026-10-22T06:56:42Z\", \"tool\": \"leansearch\", \"query\": \"Compatible root covers have a profinite torsor comparison and a fixed zero section on the parameter boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"RootPairing.restrictScalars_coe_root\", \"Profinite.asLimitConeIso\", \"Profinite.isoAsLimitConeLift\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_I₀\", \"RootPairing.ext_iff\", \"CategoryTheory.MorphismProperty.IsLocalAtSource.iff_of_zeroHypercover\", \"CategoryTheory.Precoverage.mem_iff_exists_zeroHypercover\"], \"digest\": \"bd4209ddbcd74504\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field Kummer automorphisms, spectrum fibres and general profinite limits do not state this scheme comparison and fixed boundary map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimitiveRoot\", \"IsTorsor\"",
+   "results": "{\"t\": \"2026-10-22T06:56:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrimitiveRoot\\\", \\\"IsTorsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible prime to p parameter root rotations identify the punctured tower fibre square with the tower times the product of q adic integers",
+   "results": "{\"t\": \"2026-10-22T06:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible prime to p parameter root rotations identify the punctured tower fibre square with the tower times the product of q adic integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.preimageHomeomorphFiber\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"Polynomial.fiberEquivQuotient\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"RingOfIntegers.ZModXQuotSpanEquivQuotSpanPair\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_symm_apply_coe_asIdeal\", \"RingOfIntegers.ZModXQuotSpanEquivQuotSpan\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\"], \"digest\": \"642a3035106f686a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field Kummer automorphisms, spectrum fibres and general profinite limits do not state this scheme comparison and fixed boundary map"
+  },
+  {
+   "tool": "grep",
+   "query": "autAdjoinRootXPowSubCEquiv|autEquivRootsOfUnity",
+   "results": "{\"t\": \"2026-10-22T06:57:11Z\", \"tool\": \"grep\", \"query\": \"autAdjoinRootXPowSubCEquiv|autEquivRootsOfUnity\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\"], \"digest\": \"4aed567338b2fb4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field Kummer automorphisms, spectrum fibres and general profinite limits do not state this scheme comparison and fixed boundary map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine Kummer root algebra fibre square splits as disjoint copies indexed by residues, naturally in all roots",
+   "results": "{\"t\": \"2026-10-22T06:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"The affine Kummer root algebra fibre square splits as disjoint copies indexed by residues, naturally in all roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rootOfSplitsXPowSubC\", \"autEquivRootsOfUnity_apply_rootOfSplit\", \"rootOfSplitsXPowSubC_pow\", \"adjoinRootXPowSubCEquiv_root\", \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"adjoinRootXPowSubCEquiv\", \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"autAdjoinRootXPowSubC\"], \"digest\": \"b59dcc7d997ac4bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field Kummer automorphisms, spectrum fibres and general profinite limits do not state this scheme comparison and fixed boundary map"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-root-tower-extension",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary extension expansion: returned proof step 6 (ratios, Chinese remainders and affine limits) and the root-to-zero/fixed-boundary argument in step 8.",
+   "via": [
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-full-root-rotation-torsor",
+  "worker": "stage1",
+  "summary": "Reuse the existing compatible Kummer tower Cech comparison instead of duplicating its finite and profinite torsor clauses. Spell out the residue-limit topological identification with CRT and adic residue tools, identify the localized tower limit, and construct and check the fixed root-to-zero boundary map and its naturality. No statement changes or new nodes.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), tame-boundary expansion: root rotations, finite CRT/profinite comparisons, and the root-to-zero fixed boundary map; steps 1–4 realize former step 6 and steps 5–7 the boundary part of former step 8.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-padic-residue-universal-property",
+    "why": "Generic adic residue reconstruction and norm-topology criterion, used only for the prescribed prime-to-p deck group; no coefficient or purity argument is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-padic-residue-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-414a0b7c2",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-414a0b7c2 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement and the main-20261015 direct-images proof. Paragraph (3) there is only the direct-image route, so proof_origin by=agent is correct. The statement and stmt_deps are unchanged from the earlier unsplit version, which had no proof. There is no re-split note, no SGA citation and no cycle: the 205-node closure of lem-sfb-compatible-kummer-tower-cech does not contain the item. Step 1: checked the rotation relations, independence of representatives, the inverse, and that (ζ_m^a x)^{m/n}=ζ_n^a x^{m/n} intertwines the transitions. Step 2: the CRT leaf (Ideal.quotientInfRingEquivPiQuotient) and the padic residue leaf (lift, uniqueness, separation, the norm criterion that makes q^bZ_q open) give exactly the inverse ring isomorphisms and continuity in both directions; n=1 is trivial. Step 3: colim H_n[1/f]=H_∞[1/f] by the localization universal property; N_p is directed; spec-colimit-limit gives T° as the limit in schemes. Step 4: lem-sfb-compatible-kummer-tower-cech has the same hypotheses, the same finite and infinite comparisons, and the transition and base-change clauses. I checked that this cited node is true (CRT over Y^n-1, whose roots have unit differences, plus cofinality of the Γ_n). Citing it is the right move, not D1/D2, because the item keeps its own content in steps 2, 3, 5 and 6. Step 5: the root-to-zero map is valid because n>0 and m/n>0, and e∘r=e. Step 6: naturality comes from the cited base-change clause and φ(J)⊆J'. Step 7: I=∅ and empty punctures. Edge cases checked: t=0, t a unit, nilpotent t, H/J=0, and k[x^{1/n}] with t=0. Duplicate search found nothing for the CRT identification or the root-to-zero map; tame-roots-product, root-tower-boundary-acyclicity and strict-local-root-torsor-unique state other things. The declared tool_use of lem-exc-padic-residue-universal-property, a Mathlib leaf, is accepted. Minor and not a fault: def-sfb-full-parameter-root-tower gives only the quotient presentation, but the item defines the colimit H_∞ itself. Maintainer note: the unsplit Q15 Čech node carries almost all of this item's torsor content, so its own split must not cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FullRootRotationTorsor",
+  "declaration": "AlgebraicGeometry.ProEtale.fullRootRotationTorsor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.fullRootOrderNeZero",
+   "AlgebraicGeometry.ProEtale.ParameterRootStage",
+   "AlgebraicGeometry.ProEtale.parameterRootStageCommRing",
+   "AlgebraicGeometry.ProEtale.parameterRootStageAlgebra",
+   "AlgebraicGeometry.ProEtale.parameterRootStageRoot",
+   "AlgebraicGeometry.ProEtale.ParameterRootLabels",
+   "AlgebraicGeometry.ProEtale.ParameterRootResidueLimit",
+   "AlgebraicGeometry.ProEtale.ParameterRootBase",
+   "AlgebraicGeometry.ProEtale.ParameterRootStageAway",
+   "AlgebraicGeometry.ProEtale.FullParameterRootAway",
+   "AlgebraicGeometry.ProEtale.ParameterRootBoundary",
+   "AlgebraicGeometry.ProEtale.rootTest",
+   "AlgebraicGeometry.ProEtale.rootTestProjection",
+   "AlgebraicGeometry.ProEtale.rootTestSlice",
+   "AlgebraicGeometry.ProEtale.rootTestMap",
+   "AlgebraicGeometry.ProEtale.FullRootRotationData",
+   "AlgebraicGeometry.ProEtale.FullRootRotationBaseChange",
+   "AlgebraicGeometry.ProEtale.fullRootRotationTorsor"
+  ],
+  "file": "lean/Sheaf/Paper/FullRootRotationTorsor.lean",
+  "statement": "theorem fullRootRotationTorsor (p : ℕ) (hp : p.Prime) {I H : Type u} [Fintype I] [CommRing H] [Nontrivial H] [CharP H p] (t : I → H) (ζ : TameRootOrder p → H) (hζ : ∀ n, IsPrimitiveRoot (ζ n) n.val) (hcompat : ∀ (n m : TameRootOrder p), n.val ∣ m.val → ζ m ^ (m.val / n.val) = ζ n) (hunit : ∀ (n : TameRootOrder p) (a b : ZMod n.val), a ≠ b → IsUnit (ζ n ^ a.val - ζ n ^ b.val)) : ∃ D : FullRootRotationData p t ζ, ∀ (K : Type u) [CommRing K] [Nontrivial K] [CharP K p] (s : I → K) (η : TameRootOrder p → K) (_hη : ∀ n, IsPrimitiveRoot (η n) n.val) (_hcompat : ∀ (n m : TameRootOrder p), n.val ∣ m.val → η m ^ (m.val / n.val) = η n) (_hunit : ∀ (n : TameRootOrder p) (a b : ZMod n.val), a ≠ b → IsUnit (η n ^ a.val - η n ^ b.val)) (φ : H →+* K) (_ht : ∀ i, φ (t i) = s i) (_hroots : ∀ n, φ (ζ n) = η n) (E : FullRootRotationData p s η), Nonempty (FullRootRotationBaseChange D E φ)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem existentially supplies canonical rotations, finite and profinite comparison isomorphisms, the fixed boundary map and naturality; their generator equations are fields of the conclusion, never hypotheses. Finite stages are the inline MvPolynomial I H quotient by the simultaneous root relations; full stages use the recorded FullParameterRootAlgebra."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba94d1c2f",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 9fcd8fc04b20: applies option (b) exactly. ParameterRootStage is now inline as MvPolynomial I H ⧸ span(X i^n - C(t i)) and the generator is mk (X i); the StrictLocalPrimeToPKummerSplitting import is dropped; stmt_deps are the 5 live-base defs; only the lean field differs from the live node; lean.statement is verbatim. Module diff vs the prior head touches only the stage quotient. Dependency declarations re-read (FullParameterRootAlgebra/tameRootAlgebra relations, fullParameterRoot, ParameterRootDeckGroup, TameRootOrder, profiniteToProEtOf/profiniteToScheme, pullback). Substance unchanged and re-verified: hypotheses match the node with no extras; rotations, residue homeomorphism, finite/full comparisons (fst + slice snd), boundary and base-change maps all pinned; rotation_transition direction consistent with comparison_transition under Spec contravariance; empty I, n=1 and zero localizations covered; common universe u is forced. Gates: no hollow defs, source/blueprint docstrings, 7-step proof docstring, single sorry, lines ≤100, no SGA, no name collisions in side-live. Advisory: unused stage-3 plain imports. No compile run (no file changed); worker reports a clean scompile and deliver2 dry run OK."
+ }
+}

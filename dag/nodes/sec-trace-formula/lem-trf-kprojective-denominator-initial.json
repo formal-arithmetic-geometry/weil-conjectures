@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-kprojective-denominator-initial",
+ "kind": "statement",
+ "title": "K-projective identity denominators are initial with essential value",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with homotopy category $K(\\mathcal A)$ and derived localization $Q_h:K(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category]. Let $P$ be a K-projective complex: every chain map from $P$ to a complex with zero cohomology in every degree is chain homotopic to zero, where a chain homotopy has the formula $f-g=d h+h d$. Let $S/P$ be the cofiltered category whose objects are quasi-isomorphisms $s:Y\\to P$ in $K(\\mathcal A)$, and whose arrows $s\\to s'$ are maps $u:Y\\to Y'$ with $s'u=s$ [def-pur-saturated-triangulated-localization]. Then $1_P$ is an initial object of $S/P$. More explicitly, for every $s$ there is a unique $t_s:P\\to Y$ with $s t_s=1_P$; it satisfies $Q_h(t_s)=Q_h(s)^{-1}$ and $u t_s=t_{s'}$ for every arrow $u:s\\to s'$. For any category $\\mathcal H$ and any functor $F:K(\\mathcal A)\\to\\mathcal H$, the denominator diagram $G:S/P\\to\\mathcal H$, $G(s:Y\\to P)=F(Y)$, is essentially constant with value $F(P)$ [def-pc-essentially-constant-pro-diagram]. It has a witnessing cone $u_s=F(t_s)$ whose leg at $1_P$ is $1_{F(P)}$, a retraction $r=1_{F(P)}$ at stage $1_P$, and common stage $1_P$ for every denominator in the factorization criterion of that definition.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S8 and 05S9, situation-derived-functor and definition-right-derived-functor-defined; K-projective initial-denominator argument expanding the returned proof, Step 3. The unique-section and common-stage assertions are the agent-written expansion retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [
+  {
+   "text": "For a denominator $s:Y\\to P$, localization makes $Q_h(s)$ invertible. Apply the Hom bijection to the K-projective source $P$ and target $Y$: there is a unique $t_s:P\\to Y$ with $Q_h(t_s)=Q_h(s)^{-1}$. Functoriality gives $Q_h(s t_s)=1_{Q_hP}=Q_h(1_P)$; injectivity of the same bijection with target $P$ gives $s t_s=1_P$. Conversely, any section $v$ has $Q_h(v)=Q_h(s)^{-1}$ by cancellation of the invertible $Q_h(s)$, hence $v=t_s$ by injectivity with target $Y$. Only $P$, not $Y$, needs to be K-projective.",
+   "uses": [
+    "lem-coef-kprojective-derived-hom-bijection",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S8 and 05S9, situation-derived-functor and definition-right-derived-functor-defined; agent-written K-projective denominator argument using the Hom bijection stated in lem-coef-kprojective-derived-hom-bijection."
+   }
+  },
+  {
+   "text": "By the definition of arrows in $S/P$, a morphism $1_P\\to s$ is precisely a section of $s$. Step 1 therefore proves initiality. For an arrow $u:s\\to s\\prime$, the relation $s\\prime u=s$ gives $s\\prime(u t_s)=s t_s=1_P$, so uniqueness gives $u t_s=t_{s\\prime}$. Also $t_{1_P}=1_P$. For completeness, this initial object itself witnesses cofilteredness: it gives a nonempty category and a common source for every pair of objects; for parallel arrows $a,b:s\\to s\\prime$, both $a t_s$ and $b t_s$ equal $t_{s\\prime}$, so precomposition with $t_s:1_P\\to s$ equalizes them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S8 and 05S9, situation-derived-functor and definition-right-derived-functor-defined; agent-written K-projective denominator argument using the Hom bijection stated in lem-coef-kprojective-derived-hom-bijection."
+   }
+  },
+  {
+   "text": "Fix any functor $F$ as in the statement and set $u_s=F(t_s):F(P)\\to F(Y)$. Functoriality and Step 2 give $F(u)u_s=F(u t_s)=F(t_{s\\prime})=u_{s\\prime}$, so these legs form a cone over $G$. At $j_0=1_P$, its leg is $F(1_P)=1_{F(P)}$. In the pro-diagram criterion take $r=1_{F(P)}$. For each denominator $s$, take $k=1_P$, the arrow $k\\to j_0$ to be the identity and $k\\to s$ to be $t_s$. The required transition factorization is exactly $G(t_s)=F(t_s)=u_s\\,r\\,G(1_{1_P})$, and $r u_{j_0}=1_{F(P)}$. Together with the cofilteredness just checked, these are every clause of essential constancy with the asserted value and common stage.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PU, definition-essentially-constant-diagram (2); explicit substitution of the identity stage in its two conditions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kprojective-derived-hom-bijection",
+  "def-weil-abstract-derived-category",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05S8 and 05S9 set up the denominator diagram; the dual of lemma-injective-acyclic motivates the construction. The unbounded K-projective Hom-bijection input is the existing Mathlib leaf; the unique-section argument and explicit witnesses for Categories Tag 05PU(2) are written out by Q85."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsKProjective|initial [sub=Algebra/Homology/DerivedCategory/KProjective.lean]",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"grep\", \"query\": \"IsKProjective|initial\", \"sub\": \"Algebra/Homology/DerivedCategory/KProjective.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"39\", \"45\", \"48\", \"51\", \"62\"], \"digest\": \"6922932e97683b39\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.IsKProjective.Qh_map_bijective (Algebra/Homology/DerivedCategory/KProjective.lean:43-48) gives the Hom bijection already represented by an existing DAG leaf. The new claim also proves unique sections in S/P, initiality, their compatibility, and an explicit essentially-constant cone for every F; these require the separate denominator argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\"",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"e0ddf9103d922dcb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.IsKProjective.Qh_map_bijective (Algebra/Homology/DerivedCategory/KProjective.lean:43-48) gives the Hom bijection already represented by an existing DAG leaf. The new claim also proves unique sections in S/P, initiality, their compatibility, and an explicit essentially-constant cone for every F; these require the separate denominator argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The identity denominator at a K-projective complex is initial and any functor on its incoming quasi-isomorphisms has an essentially constant pro diagram",
+   "results": "{\"t\": \"2026-10-22T06:44:04Z\", \"tool\": \"leansearch\", \"query\": \"The identity denominator at a K-projective complex is initial and any functor on its incoming quasi-isomorphisms has an essentially constant pro diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.mk.injEq\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.recOn\", \"CategoryTheory.ProjectiveResolution.self_π\", \"CochainComplex.IsKProjective.mk\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.isKProjective_of_iso\"], \"digest\": \"9cca3fd31481e09a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.IsKProjective.Qh_map_bijective (Algebra/Homology/DerivedCategory/KProjective.lean:43-48) gives the Hom bijection already represented by an existing DAG leaf. The new claim also proves unique sections in S/P, initiality, their compatibility, and an explicit essentially-constant cone for every F; these require the separate denominator argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a K-projective complex the identity quasi-isomorphism is initial in its category of incoming quasi-isomorphisms in the homotopy category",
+   "results": "{\"t\": \"2026-10-22T06:44:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a K-projective complex the identity quasi-isomorphism is initial in its category of incoming quasi-isomorphisms in the homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.iso\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"HomotopyEquiv.isKProjective\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", \"CategoryTheory.projectiveResolutions\", \"CochainComplex.IsKProjective.Qh_map_bijective\"], \"digest\": \"e49682e7d9ec3f48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.IsKProjective.Qh_map_bijective (Algebra/Homology/DerivedCategory/KProjective.lean:43-48) gives the Hom bijection already represented by an existing DAG leaf. The new claim also proves unique sections in S/P, initiality, their compatibility, and an explicit essentially-constant cone for every F; these require the separate denominator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|IsInitial|[Ee]ssentiallyConstant [sub=Algebra/Homology/DerivedCategory]",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"Qh_map_bijective|IsInitial|[Ee]ssentiallyConstant\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"444bbe4702a33b29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.IsKProjective.Qh_map_bijective (Algebra/Homology/DerivedCategory/KProjective.lean:43-48) gives the Hom bijection already represented by an existing DAG leaf. The new claim also proves unique sections in S/P, initiality, their compatibility, and an explicit essentially-constant cone for every F; these require the separate denominator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|IsInitial|[Ee]ssentiallyConstant [sub=Algebra/Homology/DerivedCategory]",
+   "results": "{\"t\": \"2026-10-23T04:18:28Z\", \"tool\": \"grep\", \"query\": \"Qh_map_bijective|IsInitial|[Ee]ssentiallyConstant\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"f753cb774dd510ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The identity denominator of a K-projective complex is initial and its incoming quasi-isomorphism diagram is essentially constant",
+   "results": "{\"t\": \"2026-10-23T04:18:28Z\", \"tool\": \"leansearch\", \"query\": \"The identity denominator of a K-projective complex is initial and its incoming quasi-isomorphism diagram is essentially constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKProjective.mk\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.IsKProjective.recOn\", \"HomotopyEquiv.isKProjective\", \"CategoryTheory.ProjectiveResolution.mk.injEq\"], \"digest\": \"ce3c8129c84defee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\"",
+   "results": "{\"t\": \"2026-10-23T04:18:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"e0ddf9103d922dcb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-projective complex is an initial object in its category of incoming quasi-isomorphisms in the homotopy category and any functor gives an essentially constant pro diagram",
+   "results": "{\"t\": \"2026-10-23T04:18:40Z\", \"tool\": \"leanfinder\", \"query\": \"A K-projective complex is an initial object in its category of incoming quasi-isomorphisms in the homotopy category and any functor gives an essentially constant pro diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.projectiveResolutions\", \"CategoryTheory.ProjectiveResolution.iso\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\"], \"digest\": \"4219fba75cc68779\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ssentiallyConstant|[Ii]sEssentiallyConstant|isInitial.*[Oo]ver|[Ii]sInitial.*quasi [sub=CategoryTheory]",
+   "results": "{\"t\": \"2026-10-23T04:29:24Z\", \"tool\": \"grep\", \"query\": \"[Ee]ssentiallyConstant|[Ii]sEssentiallyConstant|isInitial.*[Oo]ver|[Ii]sInitial.*quasi\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInitial\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T04:29:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInitial\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Under.equivalenceOfIsInitial_inverse_map\", \"CategoryTheory.GradedObject.mapBifunctorObjObjSingle₀IsInitial\", \"CategoryTheory.GradedObject.mapBifunctorObjSingle₀ObjIsInitial\"], \"digest\": \"0e44a13b56966683\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every functor from a category with an initial object is an essentially constant pro-object with value at the initial object",
+   "results": "{\"t\": \"2026-10-23T04:29:28Z\", \"tool\": \"leanfinder\", \"query\": \"Every functor from a category with an initial object is an essentially constant pro-object with value at the initial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial\", \"CategoryTheory.Functor.initial_const_initial\", \"CategoryTheory.Functor.initial_fromPUnit_of_isInitial\", \"CategoryTheory.Functor.initial_const_of_isInitial\", \"CategoryTheory.Functor.initial_of_isCofiltered_pUnit\", \"CategoryTheory.WithInitial.liftToInitial_obj\", \"CategoryTheory.initial_fromInitialModel\", \"CategoryTheory.WithInitial.liftToInitialUnique\"], \"digest\": \"01bee0e8287bd44d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective Hom-bijection hit is already lem-coef-kprojective-derived-hom-bijection, which Step 1 cites. Other hits concern K-projectivity, resolutions, or initial functors; none states the unique denominator sections together with the explicit essential pro-diagram value and witnesses for arbitrary F."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-above-acyclic-derived-computation",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Extracted supporting argument: returned Step 3, unique denominator sections and essential constancy.",
+   "via": [
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-kprojective-denominator-initial",
+  "worker": "stage1",
+  "summary": "Retained the statement and expanded the denominator argument using the existing unbounded K-projective Hom-bijection Mathlib leaf. Proved section existence, uniqueness, localization formula, initiality, compatibility, cofilteredness and the full explicit pro-diagram criterion. No new nodes or Lean writes.",
+  "blueprint": "Realizes the existing blueprint.from.place auxiliary derived-computation branch below lem-trf-local-term-locality, specifically the returned Step 3 of lem-trf-bounded-above-acyclic-derived-computation: unique denominator sections and essential constancy. The inherited chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-a886cf93e",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a886cf93e (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged from base and there are no new nodes. The item is still unsplit with no proof in clones/live and side-live, and there is no re-split note. Step 1 uses lem-coef-kprojective-derived-hom-bijection (Mathlib Qh_map_bijective, DerivedCategory/KProjective.lean:43-48, read; same K-projective definition), always with source P. Surjectivity onto Q_h(s)^{-1} gives t_s, injectivity with target P gives s t_s = 1, and injectivity with target Y gives uniqueness of sections. This is correct, and Q_h(s) is invertible by def-weil-abstract-derived-category. Step 2 is elementary: initiality, u t_s = t_{s'}, and cofilteredness all follow from the item's own definition of arrows. Step 3 is elementary: the cone F(t_s), j0 = 1_P, r = 1 and k = 1_P substitute into every clause of Stacks 05PU(2) (categories.tex l. 2928-2955), with arrow directions checked against def-pc-essentially-constant-pro-diagram. This matches 05S9(2) (derived.tex l. 4552-4558). Edge cases checked: P = 0, s = 1_P, and acyclic non-contractible Y. The proof needs no hypothesis on F or Y. A rg -L search found no duplicate node, and the creating parent's Step 2 uses exactly the essential value F(P) and the identity leg. No SGA source is cited. The route is unchanged and the only theorem cited is a Mathlib leaf. proof_deps equals the union of uses. A minor report inaccuracy (the report mentions citations.json and searches.jsonl, which are not committed) is not a fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.KProjectiveDenominatorInitial",
+  "declaration": "CochainComplex.IsKProjective.denominator_initial",
+  "declarations": [
+   "CochainComplex.identityQuasiIsoDenominator",
+   "CochainComplex.quasiIsoDenominatorDiagram",
+   "CochainComplex.IsKProjective.denominator_initial"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/KProjectiveDenominatorInitial.lean",
+  "statement": "theorem IsKProjective.denominator_initial {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (P : CochainComplex A ℤ) [P.IsKProjective] : IsCofiltered ((HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).Over ⊤ ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P)) ∧ ∃ h : IsInitial (identityQuasiIsoDenominator P), (∀ s : (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).Over ⊤ ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P), (h.to s).left ≫ s.hom = 𝟙 _ ∧ ∀ t : (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P ⟶ s.left, t ≫ s.hom = 𝟙 _ → t = (h.to s).left) ∧ (∀ s : (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).Over ⊤ ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P), DerivedCategory.Qh.map (h.to s).left = (Localization.isoOfHom DerivedCategory.Qh (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) s.hom s.prop).inv) ∧ (∀ (s s' : (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).Over ⊤ ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P)) (a : s ⟶ s'), (h.to s).left ≫ a.left = (h.to s').left) ∧ ∀ (H : Type uH) (_ : Category.{vH} H) (F : HomotopyCategory A (ComplexShape.up ℤ) ⥤ H), IsEssentiallyConstantProDiagram (quasiIsoDenominatorDiagram P F) (F.obj ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P)) ∧ ∃ (c : (Functor.const ((HomotopyCategory.quasiIso A (ComplexShape.up ℤ)).Over ⊤ ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P))).obj (F.obj ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P)) ⟶ quasiIsoDenominatorDiagram P F) (r : F.obj ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P) ⟶ F.obj ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P)), (∀ s, c.app s = F.map (h.to s).left) ∧ c.app (identityQuasiIsoDenominator P) = 𝟙 _ ∧ r = 𝟙 _ ∧ c.app (identityQuasiIsoDenominator P) ≫ r = 𝟙 _ ∧ ∀ s, (quasiIsoDenominatorDiagram P F).map (h.to s) = (quasiIsoDenominatorDiagram P F).map (𝟙 (identityQuasiIsoDenominator P)) ≫ r ≫ c.app s",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two transparent helper definitions construct the actual identity object and the forgetful denominator diagram using the dependency’s MorphismProperty.Over interface. Initiality supplies the unique sections; all localization, naturality and identity-stage essential-constancy witnesses are included."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c989db9fd",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Clause-by-clause match of CochainComplex.IsKProjective.denominator_initial to the node: Abelian A, HasDerivedCategory.{w}, [P.IsKProjective] (Mathlib class = node's homotopy-to-zero definition), S/P = quasiIso.Over ⊤ (quotient.obj P), the same interface as def-pur-saturated-triangulated-localization; IsCofiltered; ∃ IsInitial of the identity denominator; unique section (∀ t in K(A)); Qh.map t_s = (isoOfHom Qh quasiIso s).inv; naturality t_s ≫ a.left = t_s'; ∀ H F: IsEssentiallyConstantProDiagram of the dep's inline diagram with value F(P), plus explicit c.app s = F.map t_s, identity leg, r = 𝟙, retraction and k = j₀ = 1_P factorization in the dep predicate's order. Helpers have real data (Over.mk 𝟙 id_mem; Over.forget ⋙ Over.forget ⋙ F); no duplicate in Mathlib or side-live WeilConjectures/Sheaf; lean.statement verbatim; autoImplicit off; only sorry; source and blueprint docstrings present; node unchanged except lean; report has Worker report and Second reading (an in-thread reread, labelled as such). Edge cases P=0, s=1_P, acyclic Y checked. No compile run (no file changed); worker reports a clean scompile and a successful dry run. No findings."
+ }
+}

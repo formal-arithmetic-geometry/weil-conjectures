@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-block-open-extension-transitions",
+ "kind": "statement",
+ "title": "Horizontal compatibility of normalized block open-extension components",
+ "statement": "Let J be a Grothendieck topology on an essentially small category C, B an inverse sequence of commutative ring sheaves with transitions τ, t a finite-block monotone surjection, U an object, and R the actual repetition package of [lem-pur-system-block-constructions]. Let Q be a functor on the open-slice systems which reindexes every presheaf restriction by t, with natural component evaluation isomorphisms q_m equal to identity on sections. Let O and OD be ordinary open extension/restriction adjunction data of [lem-coef-semilinear-derived-sections] for B and the repeated coefficients, with restriction evaluations equal to identity on sections. For an open system P, define d_m from the OD extension evaluation, j! applied to q_m, the inverse O extension evaluation at t(m), and the inverse R evaluation. Then d_m commutes with every horizontal transition m→n (n≤m), using restriction of scalars along the repeated coefficient map. The statement is about these explicit component maps, before assembly into a system map.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, ordinary levelwise operations; agent finite-block open-localization consequence, with Stacks sites-modules.tex Tags 03DI--03DJ."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-block-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized unit_evaluation field of OpenSystems and the identity-on-sections restriction evaluations to identify each evaluated system unit with the ordinary localized module adjunction unit. Maps from the evaluated extension are determined by these unit sections: precompose with the inverse extension evaluation, apply the injective ordinary adjunction Hom equivalence, and test sections on the slice.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-open-system-unit-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the inverse repetition and extension evaluation factors in the four-factor component comparison. Naturality of the ordinary localized adjunction unit for q_m, together with the previous unit equations, shows that d_m sends the repeated system unit applied to x to the original system unit applied to q_m(x), after the repetition evaluation. Its identity-on-sections formula gives the corresponding heterogeneous equality before transport.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-block-constructions",
+    "lem-pur-open-system-unit-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Test the required horizontal equality on the repeated system unit at m. Naturality of that unit moves the source horizontal map to Q(P). Apply the component unit formula at n. On the other side apply that formula at m and use repeat_restrictions to reindex the target horizontal map, then naturality of the original system unit. The hQ and identity-on-sections q_m formulas identify the two remaining sections of P. The injectivity from the first step concludes the equality, without any flatness assumption or joint faithfulness of derived evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-block-constructions",
+    "lem-pur-open-system-unit-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-block-constructions",
+  "lem-pur-open-system-unit-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Stacks sites-modules.tex, lemma-extension-by-zero (Tags 03DI--03DJ); direct proof by injectivity of the ordinary localized adjunction Hom equivalence and naturality of the two system units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for sheaves of modules commutes with restriction of scalars and componentwise reindexing of inverse systems",
+   "results": "8 hits: restriction-of-scalars definitions and component formulas, LinearMap.restrictScalars_zero, and the ordinary module extension/restriction unit. None states horizontal compatibility of normalized open-system component evaluations.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hits: SheafOfModules.overFunctor, overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv. These give restriction functors, not this extension-transition equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*transition|localizedSystemExtension",
+   "results": "2 Mathlib hits, both tactic environment extension comments. Local project search found SequenceOpenCoefficientConstruction and RingedOpenScalarLimitCoherence for coefficient comparison and no existing statement of the block extension component transition equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemBlockRepetition",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before inverse limits; open-localization consequence of lem-pur-system-block-repetition, proof step 4.",
+   "via": [
+    "lem-pur-system-block-repetition",
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BlockOpenExtensionTransitions",
+  "file": "lean/Sheaf/Paper/BlockOpenExtensionTransitions.lean",
+  "declaration": "WeilConjectures.SemilinearSections.blockOpenExtensionComponent_transition",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.blockOpenExtensionComponent",
+   "WeilConjectures.SemilinearSections.blockOpenExtensionEvaluationIso",
+   "WeilConjectures.SemilinearSections.blockOpenExtensionEvaluationIso_hom",
+   "WeilConjectures.SemilinearSections.blockOpenExtensionComponent_transition"
+  ],
+  "statement": "theorem blockOpenExtensionComponent_transition\n    (hQ : ∀ (M : Systems (J.over U) (openRings.{c, v, r} J B U)\n        (openTransitions.{c, v, r} J B τ U))\n      {V W : (ℕ × Over U)ᵒᵖ} (f : V ⟶ W),\n      HEq (fun x ↦ (Q.obj M).val.map f x)\n        (fun x ↦ M.val.map ((blockSite (C := Over U) t.index).map f.unop).op x))\n    (hqev : ∀ (m : ℕ) M V x, HEq (((qev m).hom.app M).val.app V x) x)\n    (hO : ∀ (n : ℕ) N V x,\n      HEq (((O.restrictionEvaluation n).hom.app N).val.app V x) x)\n    (hOD : ∀ (n : ℕ) N V x,\n      HEq (((OD.restrictionEvaluation n).hom.app N).val.app V x) x)\n    (P : Systems (J.over U) (openRings.{c, v, r} J B U)\n      (openTransitions.{c, v, r} J B τ U)) {m n : ℕ} (h : n ≤ m) :\n    (transition J (blockCoefficients B t) (blockTransitions J B τ t) h).app\n        (OD.extension.obj (Q.obj P)) ≫\n      (res (coefficientMap J (blockCoefficients B t) (blockTransitions J B τ t) h)).map\n        (blockOpenExtensionComponent J B τ t U R Q qev O OD P n).hom =\n    (blockOpenExtensionComponent J B τ t U R Q qev O OD P m).hom ≫\n      (transition J (blockCoefficients B t) (blockTransitions J B τ t) h).app\n        (R.repetition.obj (O.extension.obj P))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T012821-L-2335438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T034811-L-3687939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

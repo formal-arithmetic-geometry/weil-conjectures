@@ -1,0 +1,131 @@
+{
+ "id": "lem-per-rational-continuous-ordinary-pullback",
+ "kind": "statement",
+ "title": "Normalized ordinary rational pullback and integral tensor balance before completion",
+ "statement": "For a prime l, a finite extension E of Q_l, bases X,Y and normalized realizations aX,aY of [def-per-continuous-rational-realization-data], and any scheme morphism g:X to Y, the ordinary rational ringed pullback admits its canonical continuous-function coefficient map and completed-integral coefficient square, an additive ordinary functor and normalized universal cochain computation counit that is invertible on K-flat complexes, and the balanced integral-to-rational ordinary and derived tensor comparisons. The ordinary comparison is fixed on every pure section with arbitrary rational scalar; the complex comparison is termwise that map and its derived comparison satisfies the computation-counit equation on flat-term K-flat representatives. Precisely these data form OrdinaryPullback. No preservation by completed pullback, no comparison of raw rational realization functors, and no completion-unit equation is asserted. The record depends only on the two completed-to-rational coefficient homomorphisms, not on the realization functors J or their essential images.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, pp. 62; coefficient normalization from Lemma 6.8.2; ordinary tensor and computation-counit part of lem-per-rational-continuous-pullback-transport. Stacks sites-modules.tex Tags 03EL, 03EK and sites-cohomology.tex Tags 06YY, 0G7E."
+ },
+ "proof": [
+  {
+   "text": "Use the canonical continuous coefficient pullback map, adjunct to precomposition with the pullback projection. The finite quotient isomorphisms are unique since they preserve constants and their sections are locally constant. The inverse integral normalization on every positive quotient then uniquely fixes the completed integral comparison. Test the completed coefficient map on these quotients, and compose its square with the normalized inclusion in rational continuous functions. This gives coefficient, normalized, and square.",
+   "uses": [
+    "def-sfb-continuous-coefficient-pullback-maps",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the inserted identity scalar extension by the multiplication and insertion-of-one maps in the scalar-unit normalization theorem. Whisker this natural isomorphism with coefficient extension, apply it termwise, and compose it with the original inverse-image computation isomorphism and scalar-extension counit. The K-flat resolving-class universal property identifies the result with the given derivedPull, normalized on all complexes. Exact geometric inverse image preserves K-flat complexes, so the counit computes on them.",
+   "uses": [
+    "lem-pur-inverse-image-scalar-unit-normalization",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary balanced comparison of rational-realization pullback comparison, transported through the normalized integral coefficient identifications and identity-tensor cancellation. Flatten e tensor (b tensor m) to eb tensor m; the inverse inserts one. The coefficient square verifies balance and the section equation for every scalar. Apply the same maps termwise; their component formula gives balanceComplex_components. Compute derived tensor on flat-term K-flat representatives. Its universal comparison gives ambient and the equality of the termwise map with the three computation counits gives ambient_normalization. This step uses no completed pullback or raw rational-functor descent.",
+   "uses": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-pur-inverse-image-scalar-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-coefficient-pullback-maps",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-inverse-image-scalar-unit-normalization",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, pp. 62; coefficient normalization from Lemma 6.8.2; ordinary tensor and computation-counit part of lem-per-rational-continuous-pullback-transport. Stacks sites-modules.tex Tags 03EL, 03EK and sites-cohomology.tex Tags 06YY, 0G7E."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of module sheaves has a computation counit normalized by cancellation of identity scalar extension and a balanced scalar extension comparison",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, pullbackComp, pullback_comp_id, pullback_id_comp, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, PullbackConstruction.adjunction, pullbackIso. These give ordinary pullback infrastructure, not this coefficient presentation and its cochain counit normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project normalization and derived tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv. Ordinary functor comparisons only.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for normalized rational coefficients and the specified derived computation counit."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalPull|IsNormalizedPullCounit",
+   "results": "0 Mathlib hits. Local project search finds RationalRealizationPullbackComparison and ProEtaleInverseImageScalarUnitNormalization; their conventions must be transported.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project declarations; no exact Mathlib theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalContinuousPullbackTransport",
+  "date": "2026-10-27",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-continuous-pullback-transport",
+   "place": "Ordinary coefficient square, identity-tensor cancellation, universal computation counit, and ordinary/derived integral tensor balance, before the completion step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousOrdinaryPullback",
+  "file": "lean/Sheaf/Paper/RationalContinuousOrdinaryPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousOrdinaryPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.OrdinaryPullback",
+   "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousOrdinaryPullback"
+  ],
+  "statement": "theorem rationalContinuousOrdinaryPullback {X Y : Base.{u} l}\n    (g : X.scheme ⟶ Y.scheme) (aX : At l E X) (aY : At l E Y) :\n    Nonempty (OrdinaryPullback l E g (aX.integralIso.hom ≫ aX.inclusion)\n      (aY.integralIso.hom ≫ aY.inclusion))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T094440-L-229163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T094440-L-229163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

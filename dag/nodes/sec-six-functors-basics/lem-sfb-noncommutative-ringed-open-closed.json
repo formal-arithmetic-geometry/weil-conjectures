@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-noncommutative-ringed-open-closed",
+ "kind": "statement",
+ "title": "Underived pro-etale open/closed operations on module objects over a noncommutative ring object",
+ "statement": "Let $X$ be a scheme, $i:Z\\hookrightarrow X$ a closed immersion and $j:V\\hookrightarrow X$ its complementary quasi-compact open immersion [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Use small pro-etale sites and universes as in [def-weil-pbc-proetale-site, def-weil-size-convention], and give each category of abelian sheaves the sheafified tensor product [sk-def-sfb-sheaf-tensor]. Let $B$ be a ring object of $\\operatorname{Sh}(X_{\\mathrm{proet}},\\mathrm{Ab})$ [sk-def-sfb-ring-object], not necessarily commutative, and write $\\operatorname{Mod}_B$ for its category of left module objects [sk-def-sfb-module-objects]; it is abelian, with kernels and cokernels computed on the underlying abelian sheaves [lem-sfb-modobj-abelian]. Put $B_Z=i^*B$ and $B_V=j^*B$, the ring objects obtained by abelian inverse image [def-weil-proetale-inverse-image]. Use the module operations of [def-sf-proetale-ring-sheaf-operations]: for $f=i,j$, $f^*:\\operatorname{Mod}_B\\to\\operatorname{Mod}_{f^*B}$ applies the abelian inverse image to a module object and its action; $f_*$ applies the abelian direct image and restricts scalars along the adjunction unit $B\\to f_*f^*B$; the adjunction $f^*\\dashv f_*$ is the lift of the abelian one. Let $j_!:\\operatorname{Mod}_{B_V}\\to\\operatorname{Mod}_B$, with its adjunction $j_!\\dashv j^*$, be the lift of the abelian extension by zero along $V$ [def-weil-extension-by-zero-presheaf] and of its adjunction.\n\nThese additive functors have the canonical adjunctions $i^*\\dashv i_*$ and $j_!\\dashv j^*\\dashv j_*$. Their units and counits forget to those of the corresponding abelian sheaf adjunctions. The functors $i^*,j^*,i_*,j_!$ are exact, meaning preserving finite limits and finite colimits. The canonical counits $i^*i_*\\to1$ and $j^*j_*\\to1$ and the canonical unit $1\\to j^*j_!$ are invertible. One has $j^*i_*=0$ and $i^*j_!=0$. The actual adjunction counit and unit give a natural short exact sequence\n$$0\\longrightarrow j_!j^*M\\xrightarrow{\\epsilon_M}M\\xrightarrow{\\eta^i_M}i_*i^*M\\longrightarrow0.$$\nFor $\\eta^j:1\\to j_*j^*$ the actual open adjunction unit, $j^*\\eta^j_M$ is invertible. The pair $(j^*,i^*)$ detects zero module objects and reflects monomorphisms. All assertions remain valid after composing $i^*$ and $j^*$ with the equivalences $\\operatorname{Mod}_{B_Z}\\simeq\\operatorname{Mod}_{R_Z}$ and $\\operatorname{Mod}_{B_V}\\simeq\\operatorname{Mod}_{R_V}$ given by restriction of scalars along specified ring-object isomorphisms $R_Z\\cong B_Z$ and $R_V\\cong B_V$ [sk-def-sfb-change-of-scalars], with the adjunctions transported along these equivalences. No commutativity of $B$, and no quasi-compactness, quasi-separatedness or Noetherian hypothesis on $X$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open), applied to underlying abelian sheaves and lifted to left module objects over an arbitrary ring object (the module-object operations of def-sf-proetale-ring-sheaf-operations). Extension by zero: sites-modules.tex Tag 0F6Z (lemma-restrict-back). Compare lem-sf-ring-sheaf-closed-localization, which states part of this for qcqs X."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-abelian",
+  "def-weil-proetale-inverse-image",
+  "def-sf-proetale-ring-sheaf-operations",
+  "def-weil-extension-by-zero-presheaf",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical abelian module-object instances and exact conservative forgetful functors. The existing mapMod and mapModLeft exactness instances lift exact inverse image and exact open extension without a separate kernel/cokernel-action construction.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-modobj-forget-faithful",
+    "lem-sfb-finite-upper-star-exact",
+    "lem-sfb-finite-extension-by-zero-exact",
+    "def-sfb-modobj-transport-adjunction",
+    "def-sfb-modobj-linearization-transport-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply abelian_closed_support and abelian_closed_counit directly, rather than identifying integer modules with abelian sheaves. Lift their zero detection and closed counit through the faithful conservative module forgetful functor. Open restriction of closed direct image vanishes because the base changes are empty. Exact restrictions applied to kernels and cokernels therefore jointly reflect isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sf-proetale-ring-sheaf-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open extension unit is invertible by full faithfulness of abelian extension and the defining Hom equivalence of mapModLeftAdjunction. Adjunction transposition and open restriction of closed direct image give both the other vanishing and the zero composite of the actual open counit and closed unit.",
+   "uses": [
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "def-sfb-modobj-linearization-transport-adjunction",
+    "lem-sfb-open-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual counit-unit short complex becomes short exact under both restrictions: the triangle identities make one arrow invertible, and the other endpoint is zero. Joint reflection of short exactness proves the original sequence short exact. For an epimorphism on the closed piece, exact inverse image and the invertible closed counit make the closed restriction of its pushed-forward cokernel zero. Open restriction also vanishes. Zero detection kills this cokernel, so closed direct image preserves epimorphisms, hence finite colimits since it is an additive right adjoint.",
+   "uses": [
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open abelian direct-image counit is invertible, using the canonical comparison of upperStar with open restriction and the counit of restriction/direct image. Reflect this through forgetting to obtain the module counit. The open triangle identity makes open restriction of the module unit invertible. Joint zero detection is already proved; applying it to kernels gives joint reflection of monomorphisms.",
+   "uses": [
+    "def-sfb-finite-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit and counit of mapModAdjunction forget to the original abelian maps by its existing normalization lemmas. For mapModLeftAdjunction the defining Hom equivalence applied to identities gives the same normalization. Thus all six required original equalities hold.",
+   "uses": [
+    "def-sfb-modobj-transport-adjunction",
+    "def-sfb-modobj-linearization-transport-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove a generic transport lemma for the assertion bundle along additive equivalences of the two coefficient categories. Exactness and vanishings transport functorially. The transported localization sequence is isomorphic to the original one, using jE applied to the inverse equivalence unit at jL M and iR applied to the equivalence unit at iL M. The transported open counit and triangle identity imply invertibility of the restricted transported unit. Faithfulness of the equivalences transfers zero detection and monomorphism reflection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For ringSheafScalarEquivalence, restriction along the ring isomorphism and its inverse has identity underlying maps. Expand the adjointified equivalence unit: every constituent comapId, comapCongr and comapComp comparison has identity carrier, so the unit and its inverse do too; the counit and its inverse have the same property. Expand the three composite adjunction units and counits. The inserted comparisons disappear on carriers, yielding exactly the six abelian maps. Apply the generic transport lemma to finish the coefficient-identified assertion bundle.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-forget-faithful",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-sfb-finite-extension-by-zero-exact",
+  "def-sfb-modobj-transport-adjunction",
+  "def-sfb-modobj-linearization-transport-adjunction",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-proetale-abelian-closed-counit",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "def-sf-proetale-ring-sheaf-operations",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-sfb-open-projection-formula",
+  "lem-weil-pbc-jointly-reflect-short-exact",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09BN, 09AH; E7 Lean proof reuses the direct abelian closed-support/counit interface and the existing localization argument in ProEtaleRingSheafClosedLocalization without its unused qcqs assumptions; generic equivalence transport is proved in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|extensionByZero|extension_by_zero",
+   "results": "No hits. ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization sequence for sheaves of left modules over a noncommutative ring sheaf on the proetale site with closed immersion and quasi compact complementary open immersion",
+   "results": "Hits: LocalizedModule.map_exact, IsLocalizedModule.map_exact, exact_of_isLocalized_span, ModuleCat.localizedModule_functor_map_exact, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "Hits: PresheafOfModules.sheafificationAdjunction, SheafOfModules.overMapPushforwardAdj, SheafOfModules.overPushforwardOverAdj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary noncommutative ring sheaf on the small proetale site an open immersion with closed complement gives exact extension by zero and closed direct image and the module localization short exact sequence",
+   "results": "Hits: Profinite.NobelingProof.succ_exact, exact_of_isLocalized_maximal, exact_of_isLocalized_span, exact_of_localized_maximal, IsLocalizedModule.map_exact, LocalizedModule.map_exact, exact_of_localized_span, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|extensionByZero|extension_by_zero",
+   "results": "No hits. ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed direct image form a short exact localization sequence of left module sheaves over any ring on a scheme proetale topos",
+   "results": "Hits: Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Scheme.Modules.instAbelian, IsLocalizedModule.map_exact, instAbelianCondensedMod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, LocalizedModule.map_exact, exact_of_isLocalized_span, LightCondensed.instIsGrothendieckAbelianLightCondMod ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open closed localization for internal left modules over an arbitrary noncommutative ring object in abelian sheaves on the small proetale site of a scheme",
+   "results": "Hits: instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, CondensedMod.IsSolid, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, instAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat. Read the returned types: these cover site definitions, ordinary module localization, generic ringed-site adjunctions or condensed-category abelianity, not this full pro-etale internal-module localization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|extensionByZero|extension_by_zero",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. Read the returned types: these cover site definitions, ordinary module localization, generic ringed-site adjunctions or condensed-category abelianity, not this full pro-etale internal-module localization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization short exact sequence of sheaves of modules over a noncommutative ring on the proetale site",
+   "results": "Hits: IsLocalizedModule.map_exact, LocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact, AlgebraicGeometry.Scheme.Modules, ModuleCat.Tilde.openToLocalization, exact_of_isLocalized_span, TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf, RingHom.Etale.ofLocalizationSpanTarget. Read the returned types: these cover site definitions, ordinary module localization, generic ringed-site adjunctions or condensed-category abelianity, not this full pro-etale internal-module localization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "Hits: PresheafOfModules.sheafificationAdjunction, SheafOfModules.overMapPushforwardAdj, SheafOfModules.overPushforwardOverAdj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction. Read the returned types: these cover site definitions, ordinary module localization, generic ringed-site adjunctions or condensed-category abelianity, not this full pro-etale internal-module localization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for an open subtopos and closed direct image give exact functors on internal modules over a monoid in abelian sheaves",
+   "results": "Hits: Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CompHausLike.LocallyConstantModule.functor, instAbelianLightCondMod, LightCondensed.instCountableAB4StarLightCondMod. Read the returned types: these cover site definitions, ordinary module localization, generic ringed-site adjunctions or condensed-category abelianity, not this full pro-etale internal-module localization assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-formal-closed-support-adjunction",
+  "date": "2026-10-25",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-formal-closed-support",
+   "place": "Proof first paragraph: exact closed pushforward and localization; adjunction paragraph and fiber paragraph use the open and closed units, for arbitrary condensed coefficients",
+   "via": [
+    "lem-route-formal-closed-support-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "review_fix": "NX reader 2026-10-25: restated in the internal module-object presentation used by the item (and its Lean FormalSupportModules = Mod over a MonObj), instead of sectionwise sheaves of left modules over a sheaf of rings; the internal/sectionwise equivalence is in the DAG only for commutative rings.",
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-noncommutative-ringed-open-closed",
+  "worker": "stage1",
+  "group": "NB",
+  "summary": "Retained the full arbitrary-scheme, noncommutative internal-module statement. Eight explicit steps reuse the existing commutative ringed theorem only at integer coefficients to obtain the abelian localization data, then lift adjunctions, exactness and the actual maps through existing generic module-object results. Proved detection and scalar-isomorphism transport directly. No new nodes.",
+  "blueprint": "sk-lem-formal-closed-support, proof first paragraph (exact closed functors and localization), adjunction paragraph (vanishing and actual adjunctions), and fiber paragraph (actual open unit).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf tensor and abelianity theorem for the site; not a replacement for any support-unit step."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic internal-module categorical tool used to assemble the underived support data."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Its constant-integer case supplies underlying abelian localization on arbitrary schemes; the support unit has no separate abelian localization theorem."
+   },
+   {
+    "node": "lem-sfb-open-projection-formula",
+    "why": "Generic abelian open-extension projection formula needed to apply the module-action adjunction lift."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic exactness-lifting theorem for internal module categories; used after proving the underlying functors exact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-open-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NB-d9c904a45",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-d9c904a45 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 8 steps. Read every cited statement, including the ones behind the module operations (def-sf-proetale-ring-sheaf-operations, modobj transport/linearization adjunctions, open projection formula, exact-lift node, sfb upper/lower star and extension by zero). Also read Stacks proetale 09AA l.4945, 09BM l.5020, 09BN l.5117 and 09AH l.5135, the blueprint unit sk-lem-formal-closed-support-adjunction with its proof, and the Lean ProEtaleRingSheafOperations.lean lines 38-75. No new nodes were delivered and the statement is unchanged. The item's hypotheses agree with the sources: closed immersion, quasi-compact open complement, no qcqs condition on X. There is no cycle. Steps 1, 3, 4, 7 and 8 are correct. Step 3: the projection-formula map is exactly the one of the has-projection-formula definition, and the mate condition holds. Step 8: restriction along an isomorphism is an isomorphism of categories and needs no commutativity. Edge cases checked: Z empty, V empty, B=0, a matrix ring, X not quasi-compact. Three faults, repaired: (1) C4, step 2: lem-weil-pbc-proetale-ringed-open-closed gives only abstract isomorphisms i^{-1}i_*≅id and j^{-1}j_!≅id, not that the actual counit and unit are invertible, which steps 2 and 5 claimed. (2) Step 2 identified integer-module sheaves with abelian sheaves by an imprecise argument (sections of the constant sheaf Z are not just integers), and silently identified the weil-family inverse image and extension by zero with the sfb-family functors used by the operations. It now argues by initiality of Z_X and writes out the Kan-extension identifications. (3) E5, step 6: it asserted without argument that the actual counit j^*j_*→1 is the identity, and the cited restriction formula is only an unspecified isomorphism. It now builds a natural iso j^*j_*≅1 and applies the lemma below. I added a statement-only node, lem-sfb-adjunction-abstract-iso-unit-counit (status unsplit, created.item = this item; Mathlib candidate isIso_unit_of_iso and isIso_counit_of_iso, Monad/Adjunction.lean:113 and :142). It says that in any adjunction an abstract iso RL≅1 makes the unit invertible and LR≅1 makes the counit invertible. A DAG search found only weaker or converse nodes. Steps 5 and 6 now cite it and proof_deps were recomputed. Accepted tool_uses: the five generic nodes listed in split_report.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoncommutativeRingedOpenClosed",
+  "declaration": "AlgebraicGeometry.ProEtale.noncommutative_ringSheaf_open_closed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ringSheafOpenClosedAssertions",
+   "AlgebraicGeometry.ProEtale.ringSheafScalarEquivalence",
+   "AlgebraicGeometry.ProEtale.noncommutative_ringSheaf_open_closed"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NoncommutativeRingedOpenClosed.lean",
+  "statement": "theorem noncommutative_ringSheaf_open_closed {X Z V : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (_hV : Set.range j = (Set.range i)ᶜ) (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] : ringSheafOpenClosedAssertions (ringSheafInverseImage i B) (ringSheafDirectImage i B) (ringSheafInverseImage j B) (ringSheafDirectImage j B) (ringSheafOpenExtension j B) (ringSheafAdjunction i B) (ringSheafAdjunction j B) (ringSheafOpenAdjunction j B) ∧ (∀ M, ((ringSheafAdjunction i B).unit.app M).hom = (upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app M.X) ∧ (∀ N, ((ringSheafAdjunction i B).counit.app N).hom = (upperStarLowerStarAdjunction Ab.{u + 1} i).counit.app N.X) ∧ (∀ M, ((ringSheafAdjunction j B).unit.app M).hom = (upperStarLowerStarAdjunction Ab.{u + 1} j).unit.app M.X) ∧ (∀ N, ((ringSheafAdjunction j B).counit.app N).hom = (upperStarLowerStarAdjunction Ab.{u + 1} j).counit.app N.X) ∧ (∀ N, ((ringSheafOpenAdjunction j B).unit.app N).hom = (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit.app N.X) ∧ (∀ M, ((ringSheafOpenAdjunction j B).counit.app M).hom = (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).counit.app M.X) ∧ (∀ (RZ : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) [MonObj RZ] (RV : Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) [MonObj RV] (eZ : RZ ≅ (upperStar Ab.{u + 1} i).obj B) [IsMonHom eZ.hom] (eV : RV ≅ (upperStar Ab.{u + 1} j).obj B) [IsMonHom eV.hom], ringSheafOpenClosedAssertions (ringSheafInverseImage i B ⋙ (ringSheafScalarEquivalence eZ).functor) ((ringSheafScalarEquivalence eZ).inverse ⋙ ringSheafDirectImage i B) (ringSheafInverseImage j B ⋙ (ringSheafScalarEquivalence eV).functor) ((ringSheafScalarEquivalence eV).inverse ⋙ ringSheafDirectImage j B) ((ringSheafScalarEquivalence eV).inverse ⋙ ringSheafOpenExtension j B) ((ringSheafAdjunction i B).comp (ringSheafScalarEquivalence eZ).toAdjunction) ((ringSheafAdjunction j B).comp (ringSheafScalarEquivalence eV).toAdjunction) ((ringSheafScalarEquivalence eV).symm.toAdjunction.comp (ringSheafOpenAdjunction j B)) ∧ (∀ M, (((ringSheafAdjunction i B).comp (ringSheafScalarEquivalence eZ).toAdjunction).unit.app M).hom = (upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app M.X) ∧ (∀ N, (((ringSheafAdjunction i B).comp (ringSheafScalarEquivalence eZ).toAdjunction).counit.app N).hom = (upperStarLowerStarAdjunction Ab.{u + 1} i).counit.app N.X) ∧ (∀ M, (((ringSheafAdjunction j B).comp (ringSheafScalarEquivalence eV).toAdjunction).unit.app M).hom = (upperStarLowerStarAdjunction Ab.{u + 1} j).unit.app M.X) ∧ (∀ N, (((ringSheafAdjunction j B).comp (ringSheafScalarEquivalence eV).toAdjunction).counit.app N).hom = (upperStarLowerStarAdjunction Ab.{u + 1} j).counit.app N.X) ∧ (∀ N, (((ringSheafScalarEquivalence eV).symm.toAdjunction.comp (ringSheafOpenAdjunction j B)).unit.app N).hom = (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit.app N.X) ∧ (∀ M, (((ringSheafScalarEquivalence eV).symm.toAdjunction.comp (ringSheafOpenAdjunction j B)).counit.app M).hom = (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).counit.app M.X))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The assertion bundle expands all localization conclusions for the specified canonical adjunctions and for their explicit coefficient transports. The scalar equivalence uses restriction along an isomorphism and its inverse, without commutativity. No extra hypothesis on the ambient scheme. Reviewer FIX (2026-10-25): the transported conjunct now also states that the units and counits of the three transported adjunctions forget to the abelian units and counits, as the node says all assertions remain valid after the coefficient transport.",
+  "fixed_by": "NT-stage2-cc-a6c0f15af"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6c0f15af",
+  "group": "NH",
+  "result": "fix",
+  "note": "Read the item node, the 8 proof steps, the Lean module, ProEtaleRingSheafOperations (side-live 4c76), Mod.comapComp/comapId/comapCongr (Iso.refl carriers), the existing qcqs ringSheaf_closed_localization and the NX consumer's citing steps. Hypotheses match the node (closed i, open quasi-compact j, range complement, arbitrary MonObj B, no qcqs or commutativity). Every clause is present: additivity; finite limits and colimits for i^*, j^*, i_*, j_!; closed counit, open counit and extension unit invertible; both vanishings; SES with the actual counit and unit; j^*η^j iso; joint zero detection and mono reflection; six forget clauses. The scalar equivalence is a genuine comap e.hom/e.inv construction with no commutativity. FIX (H3): the transported conjunct dropped the unit/counit forget clauses that the node's 'all assertions remain valid' requires. Added six transported .hom clauses for the composite adjunctions, plus one docstring clause; the lean-record statement is verbatim from the file. The fixed file compiled clean with nt_compile --json (4.0 s); a broken control fails. Advisory: uncited abelian adjunction owners (upperStarLowerStarAdjunction, openImmersionLowerShriekUpperStarAdjunction) are the building blocks of the cited operations definition; the theorem stmt_dep lem-sfb-modobj-abelian comes from the landed node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261025T122820-L-1809373",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

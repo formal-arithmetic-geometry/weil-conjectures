@@ -1,0 +1,413 @@
+{
+ "id": "lem-sf-ramified-reduction-comparison-square",
+ "kind": "statement",
+ "title": "The mixed ramified-extension and quotient-reduction square",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $X,V,Z$ be separated finite-type $k$-schemes, $f:V\\to X$ separated of finite type, and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-scheme-morphism-properties]. On ordinary small etale derived categories use $Rf_{*,R}$, $G_R=Ri_R^!$ right adjoint to $i_{*,R}$, and $\\omega_R=a_{X,R}^{\\times}R$, where $a_X:X\\to\\operatorname{Spec}k$ and $a_{X,R}^{\\times}$ is right adjoint to the compact-support functor defined by a fixed compactification [def-weil-pbc-derived-categories, lem-exc-closed-ambient, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Write $H_R(K,M)=R\\mathcal Hom_R(K,M)$ and $D_RK=H_R(K,\\omega_R)$ [def-pur-derived-internal-hom, lem-weil-duality-pairing].\n\nLet $E\\subset L$ be finite extensions of $\\mathbf Q_\\ell$, with valuation rings $\\mathcal O_E,\\mathcal O_L$, uniformizers $\\varpi_E,\\varpi_L$, and ramification index $e\\ge1$ [def-weil-l-adic-coefficient-extension]. For $1\\le m\\le n$ put $A_t=\\mathcal O_E/\\varpi_E^t$, $B_t=\\mathcal O_L/\\varpi_E^t\\mathcal O_L=\\mathcal O_L/\\varpi_L^{et}$ for $t=m,n$. The horizontal coefficient maps are $a_t:A_t\\to B_t$ and the vertical ones are the quotient maps $q_A:A_n\\to A_m$, $q_B:B_n\\to B_m$. Assume the finite-free bases of $B_t/A_t$ are reductions of a single $\\mathcal O_E$-basis of $\\mathcal O_L$. Put $R_A=-\\otimes^L_{A_n}A_m$, $R_B=-\\otimes^L_{B_n}B_m$, and $T_t=-\\otimes^L_{A_t}B_t$. There is a canonical identification\n$$B_n\\otimes^L_{A_n}A_m\\cong B_m,\\qquad R_BT_n\\cong T_mR_A,$$\nwith balancing formula $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$ on K-flat representatives. For a coefficient map $a:R\\to S$ put $T_a=-\\otimes_R^LS$. Let $c_a:T_aRf_{*,R}\\to Rf_{*,S}T_a$ be the extended inverse-image counit transpose; let $b_a:T_aG_R\\to G_ST_a$ be the extended exceptional counit transpose using the inverse closed-direct-image comparison; and let $u_a:T_a\\omega_R\\to\\omega_S$ be the extended structure-morphism compact-support counit transpose. The compact-support comparison is the proper projection comparison composed with open extension by zero. Let $v_a:T_aH_R(K,M)\\to H_S(T_aK,T_aM)$ be the transpose of extended evaluation. Set $\\beta_a=H_S(1,u_a)\\circ v_{a;K,\\omega_R}$ for Verdier duality. All these are the specified morphisms, with balanced tensor associators understood.\n\nFor bounded constructible finite-Tor inputs (on $V$ for direct image and on $X$ for the other operations), all five mixed reduction squares commute. Here finite Tor means a finite interval bounding tensor with every degree-zero module sheaf; bounded constructibility is [def-weil-pbc-constructible-complexes]. Explicitly, for $Q_R=Rf_{*,R},G_R$, or $D_R$ and the corresponding one-input map $h_a=c_a,b_a$, or $\\beta_a$,\n$$h_{q_B;T_nK}\\circ R_B(h_{a_n;K})=h_{a_m;R_AK}\\circ T_m(h_{q_A;K}).$$\nFor internal Hom the same equation holds with both inputs $K,M$ extended or reduced; for $u$ it holds with the coefficient unit reduced along the square. The vertical maps are exactly the quotient comparisons of [lem-coef-finite-direct-image, lem-coef-finite-closed-shriek, lem-coef-finite-dualizing, thm-coef-finite-hom, cor-coef-finite-verdier]; the etale closed map is the counit-defined recovery of [lem-coef-finite-etale-descent]. The squares preserve evaluation and its double-dual transpose. All dual inputs and dualizing objects appearing in the quotient comparisons are bounded constructible finite-Tor. The same square is asserted on the finite-coefficient pro-etale realization, using the transported exceptional functor [def-weil-exceptional-inverse-image], constructibility [def-weil-finite-torsion-constructibility], and Tor amplitude [def-weil-finite-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 3: a quotient followed by extension, with dual-input typing and all five mate squares; returned proof steps 11-15"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-finite-direct-image",
+  "lem-coef-finite-closed-shriek",
+  "lem-coef-finite-dualizing",
+  "thm-coef-finite-hom",
+  "cor-coef-finite-verdier",
+  "lem-coef-finite-etale-descent",
+  "def-coef-finite-coefficient-stages"
+ ],
+ "proof": [
+  {
+   "text": "Put $d=q_Ba_n=a_mq_A:A_n\\to B_m$ and $S=T_d$. The equality of ring maps is equality on the image of every element of $\\mathcal O_E$. Apply the canonical derived pullback composition of [lem-sfb-ringed-derived-monoidal-comparisons] to identity geometric morphisms with these coefficient maps. It identifies both $R_BT_n$ and $T_mR_A$ with $S$, compatibly with tensors and units. On flat-term K-flat representatives, [lem-pur-kflat-change-of-rings] allows successive extension to compute these functors; the maps are multiplication of the coefficient factors. In particular $((p\\otimes a)\\otimes b)\\mapsto p\\otimes a b$ on the $A_m$ path, and $((p\\otimes b_n)\\otimes b_m)\\mapsto p\\otimes q_B(b_n)b_m$ on the $B_n$ path. Since $B_n$ is free over $A_n$, its degree-zero complex computes $B_n\\otimes^L_{A_n}A_m$; quotienting its reduced basis identifies this with $B_m$. Thus these are the stipulated balanced identifications, not choices of endpoint isomorphisms.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 1"
+   }
+  },
+  {
+   "text": "All four rings are allowable finite stages: $A_t=A_{E,t}$ and $B_t=A_{L,et}$, with $em\\le en$. The horizontal functors preserve bounded constructibility and every Tor interval by [lem-sf-finite-free-derived-scalar-calculus]; the vertical ones do so by [lem-coef-finite-hom-domain-calculus], applied over $E$ and over $L$. For each of the four coefficients, [lem-weil-verdier-preservation-strata] applies to this separated finite-type $X/k$ and carries every finite-Tor constructible input to a finite-Tor constructible dual. Apply it also to the coefficient unit: $R\\mathcal Hom_R(R_X,\\omega_R)=\\omega_R$, since Hom from the rank-one unit is identity. This proves that all $\\omega_R$, duals, repeated duals and their reductions used below meet the quotient lemmas' input hypotheses; no smoothness or site-perfectness is assumed.",
+   "uses": [
+    "lem-sf-finite-free-derived-scalar-calculus",
+    "lem-coef-finite-hom-domain-calculus",
+    "lem-weil-verdier-preservation-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 2"
+   }
+  },
+  {
+   "text": "For direct image apply the successive-coefficient equation of [lem-coef-finite-direct-image] to the two chains $A_n\\to B_n\\to B_m$ and $A_n\\to A_m\\to B_m$. Every algebra in either chain is finite as a module over its predecessor, and the starting $K$ is bounded constructible finite-Tor on $V$. The two composites are therefore both $c_{d;K}$ under step 1. This is exactly the asserted $c$ square. The cited equation explicitly permits an intermediate ring not presented as $A_{E,r}$, so it applies to the first chain. It also applies with $f=i$ and with $f$ the proper map in the fixed compactification; these versions will be used below.",
+   "uses": [
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 3"
+   }
+  },
+  {
+   "text": "Write the fixed structure compactification as $X\\xrightarrow j\\overline X\\xrightarrow p\\operatorname{Spec}k$ and $F_R=Rp_{*,R}j_{!,R}$. For an etale finite-Tor constructible $N$, exact $j_!$ is bounded constructible by [lem-fin-extension-by-zero] applied to its finitely many cohomology sheaves. Its Tor interval is unchanged: the projection identity $j_!(N\\otimes^Lj^*W)=j_!N\\otimes^LW$ of [lem-coef-etale-open-tensor], for degree-zero $W$, reduces this to exactness of $j_!$. Thus step 3 applies to $p$ and $j_!N$. Denote its coefficient projection by $c^p_a$ and the open scalar comparison by $z_a$. The compact comparison is $C_a=Rp_{*,S}(z_a)\\circ c^p_a$. The successive-scalar identity for $z$ in the same open-tensor node and that for $c^p$ in step 3 give, by naturality, $C_b\\circ T_bC_a=C_{ba}$ for each of our two coefficient chains. Hence the two mixed compact-support paths are the same $C_d$. Their inverses have the corresponding reversed equation. The horizontal maps are the same finite-sum normalized comparisons by [lem-sf-finite-free-image-comparison], and the vertical compact maps are the quotient tensor comparisons of [lem-fix-compact-support-coefficient-change].",
+   "uses": [
+    "lem-fin-extension-by-zero",
+    "lem-coef-etale-open-tensor",
+    "lem-sf-finite-free-image-comparison",
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 4"
+   }
+  },
+  {
+   "text": "For closed exceptional image let $I_R=i_{*,R}$ and write $c_a:T_aI_R\\to I_ST_a$ for its ordinary coefficient comparison. By [lem-coef-finite-etale-descent], applied also with equal quotient levels to type $G_RK$, the objects $G_RK$, its quotient reduction, and $G_ST_aK$ in a vertical comparison are bounded constructible finite-Tor, and the etale vertical $b$ is the specified exceptional-counit transpose. Horizontal $b$ is the same counit construction by [lem-sf-finite-free-exceptional-mate]. For any one of the two chains $R\\xrightarrow a S\\xrightarrow b U$, [lem-weil-pbc-mate-pasting] applied to the inverse $c$ squares says the transpose of $b_{b;T_aK}\\circ T_b(b_{a;K})$ is\n$$T_bT_a(\\varepsilon_{R,K})\\circ T_b(c_{a;G_RK}^{-1})\\circ c_{b;T_aG_RK}^{-1}.$$\nStep 3 identifies its last two factors with $c_{ba;G_RK}^{-1}$. Both mixed paths consequently have transpose $S(\\varepsilon_{A_n,K})\\circ c_{d;G_{A_n}K}^{-1}$ under $I_{B_m}\\dashv G_{B_m}$ and are equal. The pro-etale vertical maps in this recovery are exactly [lem-coef-finite-closed-shriek], not separately chosen isomorphisms.",
+   "uses": [
+    "lem-coef-finite-etale-descent",
+    "lem-sf-finite-free-exceptional-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-finite-closed-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 5"
+   }
+  },
+  {
+   "text": "For the dualizing object use $F_R\\dashv a_{X,R}^{\\times}$ and its counit $\\varepsilon_R:F_R\\omega_R\\to R$. Its unit-valued transpose defining $u_a$ is $T_a\\varepsilon_R\\circ C_{a;\\omega_R}^{-1}$ followed by $T_aR\\cong S$. Exactly the pasting formula of step 5, now for $C$ and the compact adjunction, gives for either two-arrow chain the transpose\n$$T_bT_a\\varepsilon_R\\circ T_b(C_{a;\\omega_R}^{-1})\\circ C_{b;T_a\\omega_R}^{-1},$$\nfollowed by $T_bT_aR\\cong U$. Step 4 and the unit compatibility of step 1 turn this into $T_{ba}\\varepsilon_R\\circ C_{ba;\\omega_R}^{-1}$ and the canonical unit map. Hence both paths have the same transpose and the $u$ square commutes. At the vertical arrows these are precisely the isomorphisms of [lem-coef-finite-dualizing], whose statement specifies this transpose. Its hypotheses hold at $E$ with $(n,m)$ and at $L$ with $(en,em)$ by step 2.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 6"
+   }
+  },
+  {
+   "text": "For internal Hom let $R\\xrightarrow a S\\xrightarrow b U$ be either chain, put $H_R=R\\mathcal Hom_R(K,M)$, and let $w=v_{b;T_aK,T_aM}\\circ T_b(v_{a;K,M})$. The defining transpose equation gives\n$$\\operatorname{ev}_U\\circ(w\\otimes1)=T_b\\operatorname{ev}_S\\circ(T_bv_a\\otimes1)=T_bT_a\\operatorname{ev}_R.$$\nThe first equality is the definition of $v_b$, precomposed with $T_bv_a\\otimes1$; the second is the functorial image of the defining equation for $v_a$. Monoidality and composition compatibility in [lem-sfb-ringed-derived-monoidal-comparisons] supply exactly these identifications with both inputs extended. The closed tensor-Hom bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal] is injective, so $w$ is the single transpose for $ba$. Both chains have the same $d$ and the same pairing $S\\operatorname{ev}_{A_n}$, proving the $v$ square. At each vertical arrow [thm-coef-finite-hom] identifies its comparison with exactly this transpose and proves invertibility; at the horizontal arrows [lem-sf-ringed-finite-free-hom-base-change] does so for arbitrary inputs. Thus the calculation also applies to the dualizing and dual inputs of step 2.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "thm-coef-finite-hom",
+    "lem-sf-ringed-finite-free-hom-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 7"
+   }
+  },
+  {
+   "text": "Expand $\\beta_a=H_S(1,u_a)v_a$. Naturality of $v_b$ in its second input moves $T_bH_S(1,u_a)$ past $v_b$, so the composite Verdier comparison along $a,b$ is\n$$H_U(1,u_b\\circ T_bu_a)\\,v_{b;T_aK,T_a\\omega_R}\\,T_bv_{a;K,\\omega_R}.$$\nStep 7 replaces the last two factors by the evaluation transpose for $ba$; step 6 replaces the first target map by $u_{ba}$. For the two chains these are identical, proving the $\\beta$ square. The vertical identification is the finite Verdier comparison: [lem-coef-finite-target-change-coherence] applied to the quotient dualizing family gives exactly $H(1,u)v$, and [cor-coef-finite-verdier] is that evaluation-compatible comparison. The hypotheses on its target family are supplied by step 2 and the quotient cocycle in [lem-coef-finite-dualizing].",
+   "uses": [
+    "lem-coef-finite-target-change-coherence",
+    "cor-coef-finite-verdier",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 8"
+   }
+  },
+  {
+   "text": "For every edge $a:R\\to S$, the defining equation of $v_a$ and $\\beta_a=H(1,u_a)v_a$ give $\\operatorname{ev}_{S,T_aK}(\\beta_{a;K}\\otimes1)=u_aT_a(\\operatorname{ev}_{R,K})$. It holds also at $D_RK$, by step 2. Apply [lem-coef-finite-bidual-transpose] to these two equations: $\\beta_{a;D_RK}T_a\\delta_{R,K}=D_S(\\beta_{a;K})\\delta_{S,T_aK}$. Thus every edge respects the double-dual transpose, as well as evaluation. Pasting the edge equations and using the already proved $u,v,\\beta$ squares proves preservation by the mixed square itself. The tensor symmetry is the signed symmetry in the cited lemma, which scalar extension preserves, so this argument does not suppress a sign or assume a biduality isomorphism.",
+   "uses": [
+    "lem-coef-finite-bidual-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 9"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sf-finite-free-etale-proetale-transport] at levels $n$ and $m$: it identifies the horizontal $c,b,u,v,\\beta$ with their named pro-etale maps, and identifies the quotient maps at $(n,m)$ over $E$ and $(en,em)$ over $L$. It expressly carries counit, evaluation and double-dual equations and the mixed square to the named square on the other site. Consequently applying the comparison functors to steps 3--9 proves all five pro-etale squares and their pairing compatibilities. The exceptional functor here is the transported constructible one. The etale closed vertical arrow was already identified in step 5, so no ambient unbounded pro-etale exceptional adjunction is invoked.",
+   "uses": [
+    "lem-sf-finite-free-etale-proetale-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 3, quotient followed by extension: 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sf-finite-free-derived-scalar-calculus",
+  "lem-coef-finite-hom-domain-calculus",
+  "lem-weil-verdier-preservation-strata",
+  "lem-coef-finite-direct-image",
+  "lem-fin-extension-by-zero",
+  "lem-coef-etale-open-tensor",
+  "lem-sf-finite-free-image-comparison",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-coef-finite-etale-descent",
+  "lem-sf-finite-free-exceptional-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-coef-finite-closed-shriek",
+  "lem-coef-finite-dualizing",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "thm-coef-finite-hom",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-coef-finite-target-change-coherence",
+  "cor-coef-finite-verdier",
+  "lem-coef-finite-bidual-transpose",
+  "lem-sf-finite-free-etale-proetale-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 3: explicit counit/evaluation transposes for the mixed square; assembly from existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ramified coefficient extension at levels en commutes with derived coefficient reduction for direct image closed exceptional dualizing internal Hom and Verdier dual",
+   "results": "8 hits. CategoryTheory.Abelian.Ext.mapExactFunctor_hom; localCohomology.diagram; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Abelian.Ext.mapExactFunctor; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits. CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso; CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]amifi.*[Cc]oeff|[Cc]oeff.*[Rr]educt|[Mm]ate.*[Pp]ast",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ramified coefficient extension at levels en commutes with derived coefficient reduction for direct image closed exceptional dualizing internal Hom and Verdier dual",
+   "results": "8 hits. CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.rightDerivedDesc; Module.Dual.baseChange_baseChange; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; localCohomology.diagramComp; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified; Module.DualBases.coeffs_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed square finite free extension of discrete valuation quotient rings and quotient scalar reduction commutes by counit and evaluation mates",
+   "results": "8 hits. AdicCompletion.eval_comp_of; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; Algebra.Generators.CotangentSpace.fst_compEquiv; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.factor_eval_eq_evalₐ; AdicCompletion.factor_evalₐ_eq_eval; AdicCompletion.factorₐ_evalₐ_one; Profinite.NobelingProof.GoodProducts.square_commutes",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]amifi.*[Cc]oeff|[Cc]oeff.*[Rr]educt|[Mm]ate.*[Pp]ast",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar adjunction and general mate infrastructure do not state the five derived etale/pro-etale comparison squares with their normalized maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension commutes with quotient reduction for direct image exceptional inverse image dualizing complex internal Hom and Verdier duality",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.homEquiv, DerivedCategory.quotientCompQhIso, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar adjunction and general mate infrastructure do not state the five derived etale/pro-etale comparison squares with their normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar adjunction and general mate infrastructure do not state the five derived etale/pro-etale comparison squares with their normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of scalar extension functors gives equal counit transpose and evaluation comparison maps under derived tensor reassociation",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendScalars_comp_id, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar adjunction and general mate infrastructure do not state the five derived etale/pro-etale comparison squares with their normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension commutes with quotient reduction for direct image exceptional inverse image dualizing complex internal Hom and Verdier duality",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-22",
+   "verdict": "no match: module scalar adjunction and general mate infrastructure do not state the five derived etale/pro-etale comparison squares with their normalized maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof paragraph 3: a quotient followed by extension, with dual-input typing and all five mate squares; returned proof steps 11-15",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ramified-reduction-comparison-square",
+  "worker": "stage1",
+  "summary": "Retained the statement and ramified indexing. Proved the mixed square using scalar reassociation, existing direct-image coefficient transitivity, inverse-comparison mate pasting for closed and compact adjoints, and explicit evaluation transposes for Hom and Verdier duality. Checked every dual input is finite-Tor constructible and transported the actual maps to the pro-etale realization. No new nodes.",
+  "blueprint": "lem-coef-finite-free-extension.proof.md paragraph 3, sentence beginning For two field extensions, or a quotient followed by extension: steps 1--8 give the five equalities; step 9 realizes evaluation and double-dual compatibility; step 10 realizes finite-site transport.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical derived scalar reassociation and its monoidal normalization for arbitrary coefficient maps; not a geometric replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flat scalar extension needed to compute the balanced representative maps for the two paths."
+   },
+   {
+    "node": "lem-coef-finite-hom-domain-calculus",
+    "why": "Quotient reduction preserves constructible finite-Tor inputs over each coefficient field."
+   },
+   {
+    "node": "lem-weil-verdier-preservation-strata",
+    "why": "The existing finite-stage Verdier preservation theorem types duals and the dualizing object used as quotient inputs."
+   },
+   {
+    "node": "lem-coef-finite-direct-image",
+    "why": "The existing coefficient-chain equation for the canonical counit map proves the direct-image square and its proper/closed specializations."
+   },
+   {
+    "node": "lem-fin-extension-by-zero",
+    "why": "Constructibility of ordinary etale extension by zero in the fixed compactification."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Open tensor comparison and its successive-scalar normalization needed for compact support."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Identifies the quotient compact-support comparison with the tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Abstract mate-pasting calculus turns inverse left-adjoint comparisons into the two successive exceptional transposes."
+   },
+   {
+    "node": "lem-coef-finite-closed-shriek",
+    "why": "Specifies the named pro-etale closed quotient arrow and its finite-Tor outputs."
+   },
+   {
+    "node": "lem-coef-finite-dualizing",
+    "why": "Specifies the quotient dualizing counit transpose and its cocycle."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Ambient closed tensor-Hom adjunction supplies uniqueness of the evaluation transpose."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Existing finite-coefficient theorem used as a tool for the specified comparison map."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Identifies horizontal Hom arrows with the evaluation-transpose isomorphisms without site-perfectness."
+   },
+   {
+    "node": "lem-coef-finite-target-change-coherence",
+    "why": "Identifies the vertical target-changing Hom comparison with H(1,u)v."
+   },
+   {
+    "node": "cor-coef-finite-verdier",
+    "why": "Names the vertical finite Verdier arrow and its evaluation/double-dual compatibility."
+   },
+   {
+    "node": "lem-coef-finite-bidual-transpose",
+    "why": "Formal evaluation-to-double-dual transpose identity, with the signed tensor symmetry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-kflat-change-of-rings",
+  "lem-coef-finite-hom-domain-calculus",
+  "lem-weil-verdier-preservation-strata",
+  "lem-coef-finite-direct-image",
+  "lem-fin-extension-by-zero",
+  "lem-coef-etale-open-tensor",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-coef-finite-closed-shriek",
+  "lem-coef-finite-dualizing",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "thm-coef-finite-hom",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-coef-finite-target-change-coherence",
+  "cor-coef-finite-verdier",
+  "lem-coef-finite-bidual-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-71132dfbd",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-71132dfbd (reviewer sub-agent of L); spot-checked: Read the source (lem-coef-finite-free-extension.proof.md, paragraph 3, the 'quotient followed by extension' sentence), the parent's old steps 11-15 from the Q33 report, the unit sk-thm-sf-compatibility and the full statement of all 22 cited nodes. The statement and stmt_deps are unchanged from creation. There are no new nodes and I found no re-split note for this item. Each old argument is carried by a more detailed step. I re-derived the main calculations. Step 1: B_n⊗A_m equals O_L/(varpi_E^m) equals B_m; for e=2, n=2, m=1 this is O_L/varpi_L^4 → O_L/varpi_L^2. Both paths are (id,d) under the monoidal comparisons of lem-sfb-ringed-derived-monoidal-comparisons, which assume no flatness. Step 2: lem-weil-verdier-preservation-strata applied to the unit R_X gives omega in D^b_ctf over E at (n,m) and over L at (en,em). Step 3: lem-coef-finite-direct-image's chain equation explicitly allows an intermediate ring B that is not of the form A_{E,m}. Step 4: the Tor interval of j_!N follows from the projection identity; C_b T_bC_a = C_ba by naturality. Step 5: the mate-pasting composite is T_bT_a ε ∘ T_b c_a^{-1} ∘ c_b^{-1}, and etale-descent at m=n gives G_RK in D^b_ctf. Step 8: naturality of v_b in its second input gives H(1,u_b T_bu_a) v_b T_bv_a. Step 9: the hypotheses of the bidual-transpose lemma hold at K and at D_RK. Step 10: the transport node identifies the named maps themselves, not just their endpoints. Edge cases checked: m=n, e=1, a point, K=0, the non-flat quotient Z/l^2→Z/l. No cycle: the closure of the deps reaches neither the item nor its parent. uses equal proof_deps. Steps are under 1200 characters. No SGA. No duplicate found (comparison-transitivity covers finite-free maps only; ramified-pullback-tower is a different statement). Accepted tool use: lem-weil-verdier-preservation-strata, off-route, for typing. The other declared tool uses are on route or generic. Advisories: (a) the statement of lem-fix-compact-support-coefficient-change does not name its map as Rp_*(β_j)χ_p, which step 4 relies on; its proof does, and the item statement fixes that composite. (b) cor-coef-finite-verdier says only that it carries evaluation, so step 8 identifies it with H(1,u)v through uniqueness of transposes. (c) The single-basis hypothesis in the item statement is unused. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RamifiedReductionComparisonSquare",
+  "declaration": "WeilConjectures.RamifiedReduction.ramified_reduction_comparison_square",
+  "declarations": [
+   "WeilConjectures.RamifiedReduction.level",
+   "WeilConjectures.RamifiedReduction.horizontal",
+   "WeilConjectures.RamifiedReduction.reduction",
+   "WeilConjectures.RamifiedReduction.closedArrow",
+   "WeilConjectures.RamifiedReduction.omegaArrow",
+   "WeilConjectures.RamifiedReduction.squareIso",
+   "WeilConjectures.RamifiedReduction.Pairings",
+   "WeilConjectures.RamifiedReduction.Squares",
+   "WeilConjectures.RamifiedReduction.ramified_reduction_comparison_square"
+  ],
+  "file": "lean/Sheaf/Paper/RamifiedReductionComparisonSquare.lean",
+  "statement": "theorem ramified_reduction_comparison_square (D₀ : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D₀.p) (E L : Type (u + 1)) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (m n : ℕ+) (hmn : (m : ℕ) ≤ (n : ℕ)) (e : ℕ+) (_he : Ideal.span ({strictEtaleIntegerMap l ι (Padic.coefficientExtensionUniformizer l E)} : Set (Padic.coefficientExtensionIntegers l L)) = Ideal.span {Padic.coefficientExtensionUniformizer l L ^ (e : ℕ)}) (rank : ℕ) (_basis : @Module.Basis (Fin rank) (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionIntegers l L) inferInstance inferInstance (strictEtaleIntegerMap l ι).toAlgebra.toModule) {V X Z : Scheme.{u}} [V.Over (Spec (.of D₀.k))] [X.Over (Spec (.of D₀.k))] [Z.Over (Spec (.of D₀.k))] [IsSeparated (V ↘ Spec (.of D₀.k))] [LocallyOfFiniteType (V ↘ Spec (.of D₀.k))] [QuasiCompact (V ↘ Spec (.of D₀.k))] [IsSeparated (X ↘ Spec (.of D₀.k))] [LocallyOfFiniteType (X ↘ Spec (.of D₀.k))] [QuasiCompact (X ↘ Spec (.of D₀.k))] [IsSeparated (Z ↘ Spec (.of D₀.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D₀.k))] [QuasiCompact (Z ↘ Spec (.of D₀.k))] (f : V ⟶ X) [f.IsOver (Spec (.of D₀.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of D₀.k))] (c : Compactification (X ↘ Spec (.of D₀.k))) : ∃ h : (reduction (level ι n) m hmn).ringMap.comp (horizontal ι n).ringMap = (horizontal ι m).ringMap.comp (reduction (baseStage (l := l) (E := E) n) m hmn).ringMap, ∀ pro : Bool, ∃ (μ : ∀ {s t : Stage l E} (a : Arrow s t), TensorComparison pro a.ringMap X) (σ : ∀ s : Stage l E, tensor pro s.ring X ≅ (tensor pro s.ring X).flip), (∀ {s t : Stage l E} (a : Arrow s t), NormalizedTensor pro a.ringMap X (μ a)) ∧ (∀ s : Stage l E, NormalizedSymmetry pro s.ring X (σ s)) ∧ Squares pro (horizontal ι n) (reduction (baseStage n) m hmn) (reduction (level ι n) m hmn) (horizontal ι m) h f i c (μ (horizontal ι n)) (μ (reduction (baseStage n) m hmn)) (μ (reduction (level ι n) m hmn)) (μ (horizontal ι m)) ∧ Pairings pro (horizontal ι n) c (μ (horizontal ι n)) (σ (baseStage n)) (σ (level ι n)) ∧ Pairings pro (horizontal ι m) c (μ (horizontal ι m)) (σ (baseStage m)) (σ (level ι m)) ∧ Pairings pro (reduction (baseStage n) m hmn) c (μ (reduction (baseStage n) m hmn)) (σ (baseStage n)) (σ (baseStage m)) ∧ Pairings pro (reduction (level ι n) m hmn) c (μ (reduction (level ι n) m hmn)) (σ (level ι n)) (σ (level ι m)) ∧ (∀ s : Stage l E, (s = baseStage n ∨ s = baseStage m ∨ s = level ι n ∨ s = level ι m) → Sites.Ctf pro s.ring X (omega pro s.ring c) ∧ ∀ K : D pro s.ring X, Sites.Ctf pro s.ring X K → Sites.Ctf pro s.ring X ((Sites.dual pro s.ring c).obj (op K)))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39527cd25",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-push of PASSed head 0842038b3cbf after a landing refusal on five inherited DAG cycles. Item Lean module (sha256 92351b2d) and node JSON are byte-identical to that head; only report audit sections changed, plus base-side changes to lem-pur-derived-change-of-rings (A4 landing, equal to side-live) and the blueprint-index header. BFS over all 28349 side-live nodes: no stmt_dep or proof_dep (including the added landed def-coef-finite-coefficient-stages) reaches the item, so the cycles are gone. Reread the Lean against the node: B_t = O_L/ϖ_E^t; squareIso is the published Sites.comp through d; five Squares with correct orientation; μ/σ pinned by NormalizedTensor/NormalizedSymmetry; four edge Pairings; Ctf typing of ω and duals at four corners; ∀ pro covers the pro-étale realization; hypotheses no stronger; universe Type(u+1) as parent. Only sorry is the theorem; docstrings carry source, blueprint id and 10 steps; statement verbatim; 9 declarations listed; framework decls present live. No file changed, so no compile; report records a passing deliver2 --no-push dry run on 32388e08c30. Advisories: parent-module import forced by the cycle; added stmt_dep not cited in TeX; _basis/_he unused."
+ }
+}

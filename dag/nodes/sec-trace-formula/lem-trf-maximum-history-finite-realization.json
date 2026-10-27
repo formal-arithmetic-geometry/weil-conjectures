@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-maximum-history-finite-realization",
+ "kind": "statement",
+ "title": "Finite labeled realization of a terminating maximum-center rule",
+ "statement": "Let $V$ be a totally ordered set with least element $\\bot$, and fix a resolution invariant calculus $\\nu$ on all embedded rational pairs, including finite disjoint unions [def-trf-resolution-invariant-calculus-data]. Thus an initial pair $A=(X\\hookrightarrow P)$ has $X$ reduced and $P$ smooth, separated and of finite type over $\\mathbf Q$ [def-trf-labeled-embedded-resolution]. Consider admissible histories and maximum extensions [def-trf-admissible-embedded-history]. The following rule determines, up to the canonical isomorphisms of ordinary blowups, a finite history $T_\\nu(A)$ for every $A$: start with the empty history; stop if the current strict transform is regular; otherwise extend by the ordinary ambient blowup at the reduced full maximum locus of $\\nu$, taking scheme-theoretic strict transform. No exceptional-divisor cleanup is performed. This is a realization of the specified calculus, not an existence assertion for a calculus.\n\nWrite $m_i>\\bot$ for the maximum before its $i$th extension and label that extension by $m_i$ in the common ordered set $L=(V\\setminus\\{\\bot\\})^{\\mathrm{op}}$. The active labels form a finite strictly increasing sequence in $L$. Every center is contained in the current strict transform, is nonempty, regular and nowhere dense there, with coherent ideals on the ambient and strict-transform schemes. All intermediate pairs are embedded rational pairs, and the last strict transform is regular. The history stops at its first regular stage. Empty and regular inputs have length zero. On a finite disjoint union, each extension uses the full maximum over the entire union in this same value set. For every lower cut of $L$, take the stage after exactly the active labels in that cut; this gives the finite labeled tower of [def-trf-labeled-embedded-resolution], with unit center ideal and identity transition at every inactive label. The realization retains all center ideals and their chronological order, including an ideal whose intrinsic blowup is an identity. No well-foundedness of $V$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII 2.3.1, 2.3.4--2.3.5 and 2.3.11--2.3.13, printed pp.91--94; conditional history argument extracted from lem-trf-embedded-resolution-ambient-comparison, old Steps 1--2: realize the maximum-center recursion, terminate it, and index it by the reverse invariant order. BMT Theorem 6.1 Addendum and section 6.3 are the underlying detailed reference, archival copy WANTED; no Stacks tag states this conditional resolution-history lemma."
+ },
+ "stmt_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-admissible-embedded-history"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-maximum-history-chronology] to the supplied calculus and pair. Its proved dependent-recursion argument gives a finite stopped chronology, positive reverse-order maximum labels, and all intermediate and center geometry.",
+   "uses": [
+    "lem-trf-maximum-history-chronology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-trf-maximum-history-lower-cut-tower] to that supplied chronology. Assemble its diagrams, cut index, initial identifications and retained center equations with the chronology fields to construct MaximumHistoryRealization, with no choice of a new history in a definition.",
+   "uses": [
+    "lem-trf-maximum-history-lower-cut-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any other realization with length s, forget labels and cuts in both realizations to obtain maximum segments. Apply [lem-trf-maximum-history-common-stage] at the shorter length. If r<s, regularity of the length-r endpoint transfers to the other segment at r, contradicting its nonregular source of the next extension. The case s<r is symmetric. Hence s=r and the existential length is unique.",
+   "uses": [
+    "lem-trf-maximum-history-common-stage"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The separate theorem maximumHistoryRealization_comparison remains to be proved. Its planned argument is unchanged: For completeness compare two choices of representatives in this recursion. Inductively identify their entire histories, beginning with the identity on $A$. This gives the smooth ambient comparison over the identity initial pair allowed by the history definition, with no deletions: every center is nonempty. The calculus smooth-value clause identifies their current functions, hence their greatest values and full maximum loci. Their reduced center ideals agree: on each affine open a reduced closed subscheme with support $Z$ has the radical ideal of $Z$. The ambient centers agree as well, by their closed immersions through $X_i$. The center ideal is coherent, hence of finite type, so its extended ideal on each of the two blowups is invertible [thm-nagata-blowup-principalizes-center]; for this same ideal the ordinary blowup universal property therefore gives inverse canonical comparison maps; the two composites are identities by uniqueness. The strict-transform definition identifies the next strict transforms, since an isomorphism carries the same open subscheme to the same scheme-theoretic closure. This extends the history identification and preserves all recorded ideals. The regularity test is invariant under these isomorphisms, so both histories stop at the same index. This proves the asserted determination up to canonical blowup identifications.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history",
+    "thm-nagata-blowup-universal-property",
+    "def-nagata-strict-transform",
+    "thm-nagata-blowup-principalizes-center"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.1--2.1.4, pp.86--87, and 2.3.4, pp.91--92; canonical comparison induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-maximum-history-chronology",
+  "lem-trf-maximum-history-lower-cut-tower",
+  "lem-trf-maximum-history-common-stage",
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "thm-nagata-blowup-universal-property",
+  "def-nagata-strict-transform",
+  "thm-nagata-blowup-principalizes-center"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.1.1--2.1.4 and 2.3.1--2.3.5, 2.3.11--2.3.13; U4 formalizes termination and chronological geometry, assembles the lower-cut construction, and proves length uniqueness from common-stage regularity; the separate canonical comparison proof remains open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-maximum-history-finite-realization: A terminating maximum stratum invariant on finite embedded blowup histories gives a finite tower with strictly decreasing invariant labels and regular final scheme",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-maximum-history-finite-realization: A terminating maximum stratum invariant on finite embedded blowup histories gives a finite tower with strictly decreasing invariant labels and regular final scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Flag.isMax_coe\", \"Fin.instMax_mathlib\", \"LinearLocallyFiniteOrder.isMax_of_succFn_le\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AkraBazziRecurrence.max_bi\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"Hyperreal.coe_max\", \"IsMaxOn.isExtr\"], \"digest\": \"4bff12eeb1393947\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-finite-realization: A terminating maximum stratum invariant on finite embedded blowup histories gives a finite tower with strictly decreasing invariant labels and regular final scheme",
+   "results": "{\"t\": \"2026-10-22T06:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-finite-realization: A terminating maximum stratum invariant on finite embedded blowup histories gives a finite tower with strictly decreasing invariant labels and regular final scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.exists_map_eq_top\"], \"digest\": \"3da03e862abcd069\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-finite-realization: Realize a no infinite chain maximum center rule as finite ordinary blowup histories, label by the order dual invariant, stop at the first regular transform",
+   "results": "{\"t\": \"2026-10-22T06:10:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-finite-realization: Realize a no infinite chain maximum center rule as finite ordinary blowup histories, label by the order dual invariant, stop at the first regular transform\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_seq_forall_proj_of_forall_finite\", \"Module.exists_ltSeries_support_isMaximal_last_of_ltSeries_support\", \"LTSeries.exists_relSeries_covBy\", \"Dynamics.netMaxcard_finite_iff\", \"LTSeries.exists_relSeries_covBy_and_head_eq_bot_and_last_eq_bot\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"SetRel.FiniteDimensional.exists_longest_relSeries\", \"RelSeries.longestOf\"], \"digest\": \"2969fdad8ed43bf7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone",
+   "results": "{\"t\": \"2026-10-23T09:17:22Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; generic order-dual, order-series, simplicial admissibility and complex-shape results do not state the conditional embedded blowup realization; blowup and resolution source searches have zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A terminating maximum stratum rule on admissible embedded blowup histories has a finite realization labeled by the order dual invariant",
+   "results": "{\"t\": \"2026-10-23T09:17:22Z\", \"tool\": \"leansearch\", \"query\": \"A terminating maximum stratum rule on admissible embedded blowup histories has a finite realization labeled by the order dual invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrderDual.finite\", \"isMax_ofDual_iff\", \"OrderDual.instInf\", \"OrderDual.instLocallyFiniteOrderBot\", \"instBoundedSpaceOrderDual\", \"HahnEmbedding.Partial.exists_isMax\", \"Finset.Ici_toDual\", \"HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum\"], \"digest\": \"7d57fd7b38705c45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; generic order-dual, order-series, simplicial admissibility and complex-shape results do not state the conditional embedded blowup realization; blowup and resolution source searches have zero hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T09:17:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; generic order-dual, order-series, simplicial admissibility and complex-shape results do not state the conditional embedded blowup realization; blowup and resolution source searches have zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A terminating maximum stratum rule on admissible embedded blowup histories has a finite realization labeled by the order dual invariant",
+   "results": "{\"t\": \"2026-10-23T09:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"A terminating maximum stratum rule on admissible embedded blowup histories has a finite realization labeled by the order dual invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.IsAdmissible.getElemAsFin\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.MaxProducts\", \"LTSeries.exists_relSeries_covBy\", \"ComplexShape.Embedding.mem_next\", \"ComplexShape.Embedding.mem_prev\", \"ComplexShape.Embedding.IsTruncGE\"], \"digest\": \"eab32bcb7493accd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; generic order-dual, order-series, simplicial admissibility and complex-shape results do not state the conditional embedded blowup realization; blowup and resolution source searches have zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "No infinite sequence of successive nonterminal extensions implies that recursive choice of an available extension reaches a terminal finite history",
+   "results": "{\"t\": \"2026-10-23T09:18:36Z\", \"tool\": \"leanfinder\", \"query\": \"No infinite sequence of successive nonterminal extensions implies that recursive choice of an available extension reaches a terminal finite history\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Computation.Terminates.term\", \"Computation.terminates_of_mem\", \"Turing.eval_maximal₁\", \"Turing.mem_eval\", \"Computation.exists_results_of_mem\", \"Computation.terminates_iff\", \"ContextFreeGrammar.derives_nonterminal\", \"Turing.eval_maximal\"], \"digest\": \"11a778a1d744230e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned computation and Turing-machine lemmas assume an encoded computation or a terminating evaluation; none supplies this embedded blowup realization, its center ideals or synchronization labels"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-embedded-resolution-ambient-comparison",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Re-split of lem-trf-embedded-resolution-ambient-comparison, old Steps 1--2: realize the maximum-center recursion, terminate it, and index it by the reverse invariant order.",
+   "via": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-maximum-history-finite-realization",
+  "worker": "stage1",
+  "summary": "Q59: realized the supplied calculus directly, with explicit admissibility/geometry induction, dependent-choice termination contradiction, canonical representative comparison, reverse-order labels and prefix-count lower-cut diagrams. Reused all needed nodes; no new lemma or strengthened hypothesis. The invariant order need not be well founded.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality through embedded-resolution-ambient-comparison, old Steps 1--2; newest blueprint removes that historical resolution detour from its direct local-term proof, but this assigned conditional supporting lemma is retained and proved on its stated route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-4a001df80",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-4a001df80 (reviewer sub-agent of L); spot-checked: FIX for two missing citations (C1/C4). Read the delivery in full. The item is unsplit on live and has no repair note, so this is not a re-split order. The statement and stmt_deps are identical to live. There are no new nodes. Read ILO VIII 2.1.4–2.1.8 and 2.3.1–2.3.13 (towers keep their centers; resolution towers have nowhere-dense centers and a regular end; automorphisms of a blowup are trivial; disjoint-union synchronization; cleanup removed). Checked every cited statement (calculus-data, admissible-history, labeled-resolution; Nagata universal property, strict transform and Cartier iso via blueprint_update). Steps 1, 2, 4, 5 and 6 are correct. Step 1: induction with base and step; a greatest value exists because the image is finite. Step 2: dependent choice contradicts the termination clause; V need not be well-founded; the empty scheme is vacuously regular. Step 4: progress gives m_{i+1}<m_i only when i+1<r, so the labels increase in (V∖⊥)^op. Step 5: in a lower cut the active labels form a prefix; the unit ideal gives an identity blowup and strict transform. Step 6: centers are retained. Edge cases tested: empty input, regular input, r=1, dense non-well-founded V, a disjoint union with different maxima, empty and full cuts. Nagata nodes are Lean-closed tools, the defs are in the same unit, and the parent's sibling nodes (smooth-deletion, intrinsic-cocycle) are not duplicated. FIX 1 (Step 3): using the blowup universal property in both directions needs the extended center ideal on each blowup to be invertible, and no node was cited for this. Added thm-nagata-blowup-principalizes-center; the center is coherent, so finite type holds. FIX 2 (Step 2): added def-weil-regular-scheme. proof_deps is now the union of the uses. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MaximumHistoryFiniteRealization",
+  "declaration": "AlgebraicGeometry.maximumHistory_finite_realization",
+  "declarations": [
+   "AlgebraicGeometry.MaximumHistoryRealization",
+   "AlgebraicGeometry.maximumHistory_finite_realization",
+   "AlgebraicGeometry.maximumHistoryRealization_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MaximumHistoryFiniteRealization.lean",
+  "statement": "theorem maximumHistory_finite_realization {V : Type w} [LinearOrder V] [OrderBot V] (ν : ResolutionInvariantCalculus.{u} V) (A : EmbeddedResolutionPair.{u}) : ∃! r : ℕ, Nonempty (MaximumHistoryRealization ν A r)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "MaximumHistoryRealization bundles exactly the finite history, maximum labels, and lower-cut tower asserted by this lemma; the second theorem states uniqueness of the canonical compatible blowup comparisons and equality of labels. No independent resolution assignment or existence of a calculus is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c070e21a",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Node diff vs live: only lean changed; lean.statement is the same text as the file signature. Clause-by-clause: MaximumHistoryRealization reuses the dependency declarations EmbeddedResolutionHistory/Extension/IsMaximumStep/Admissible/LabeledEmbeddedResolutionTower/IsRegularScheme. Covered: empty start, maximum extensions, nonregular before stop, finalRegular, labels in OrderDual{v//v≠⊥} tied to IsGreatest and StrictMono, centerGeometry = maximumGeometry, intermediate embedded-pair geometry, empty/regular input r=0, cutIndex by ncard of active labels with natural isos to the reindexed final history, unit ideal and identity at inactive labels, all ideals retained. ∃! r plus a comparison theorem with unique normalized ambient/intrinsic isos fixed by blowup uniqueness. Provable from maximumExists/termination/strictProgress/intrinsicValues; no well-foundedness; universes u,w independent. Edge cases r=0, empty X, V={⊥}, infinite cuts, disjoint unions checked. No hollow definition, only sorry proofs, docstrings carry source, blueprint id and proof steps, lines ≤100. Advisories: redundant derivable fields; IsRegularScheme via re-export of the cited labeled-resolution dependency (def-weil-regular-scheme in proof_deps); imports for future proofs. No compile run (no change); worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092748-L-3463822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

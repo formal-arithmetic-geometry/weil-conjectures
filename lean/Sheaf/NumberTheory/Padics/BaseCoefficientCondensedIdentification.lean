@@ -6,6 +6,16 @@ Authors: SHEAF group N7
 module
 
 public import Sheaf.Topology.ProfiniteCondensedRing
+public import Mathlib.NumberTheory.Padics.Complex
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.NumberTheory.Padics.PadicNumbers
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.NumberTheory.Padics.Extension
 
 /-!
 # Condensed realizations of the base p-adic coefficients

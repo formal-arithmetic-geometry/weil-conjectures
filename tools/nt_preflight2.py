@@ -46,6 +46,8 @@ def graph_findings(delivery, before=None):
     else:
         deps = list(node.get("stmt_deps") or [])
         node["stmt_deps"] = deps + [d for d in delivery.get("added_deps", []) if d not in deps]
+        # 2026-10-25 (deliverfix): a delivered stmt_deps removal is landed too; validate the graph with it
+        node["stmt_deps"] = [d for d in node["stmt_deps"] if d not in (delivery.get("removed_deps") or [])]
     after[item] = node
     changed = {item}
     for nid, extra in delivery["new"].items():
@@ -54,9 +56,10 @@ def graph_findings(delivery, before=None):
     for nid, extra in delivery["deps"].items():
         if nid not in before:
             return [f"deps: {nid}: dependency node disappeared; rebase the delivery"]
-        after[nid] = dict(before[nid], lean=extra["node"]["lean"])
+        after[nid] = dict(before[nid], lean=extra["node"]["lean"], **copy.deepcopy(extra.get("dep_fields") or {}))
         changed.add(nid)
-    return nt_incremental2.local_findings(after, changed)
+    # 2026-10-25 (deliverfix): a cycle that already exists on the base never blocks the delivery
+    return nt_incremental2.local_findings(after, changed, before)
 
 
 def main():

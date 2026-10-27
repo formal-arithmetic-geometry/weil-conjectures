@@ -14,6 +14,9 @@ import all Sheaf.Paper.CoefficientHeartLisseRestriction
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Mathlib.AlgebraicGeometry.QuasiAffine
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Proper direct image for the continuous-map algebraic-closure coefficient

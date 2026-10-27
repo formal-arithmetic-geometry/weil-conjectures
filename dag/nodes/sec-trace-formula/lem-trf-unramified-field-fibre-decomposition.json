@@ -16,10 +16,11 @@
  ],
  "proof": [
   {
-   "text": "Assume $f:X\\to\\operatorname{Spec}k$ is unramified. Choose an affine open cover $X=\\bigcup_a U_a$, with $U_a\\cong\\operatorname{Spec}C_a$, using the local affineness in the definition of a scheme. Restriction to an open subscheme preserves unramifiedness, so every $U_a\\to\\operatorname{Spec}k$ is unramified. The affine unramified-algebra decomposition supplies a finite set of fields $L_{a,1},\\ldots,L_{a,n_a}$, each finite separable over $k$, and a $k$-algebra isomorphism $C_a\\cong\\prod_{j=1}^{n_a}L_{a,j}$. The empty product is allowed for empty affine charts.",
+   "text": "Assume f : X → Spec k is unramified. For each point x choose an affine open immersion a : Spec C → X containing x, using Scheme.exists_Spec_apply_eq. Equip C with the k-algebra structure corresponding under Spec.preimage to a ≫ f. Local finite type and formal unramifiedness restrict along the open immersion by Mathlib locality; the diagonal characterization gives the hypotheses of the affine unramified-algebra decomposition. Obtain a k-algebra equivalence e : C ≃ Π_j L_j, with each L_j finite separable over k.",
    "uses": [
     "def-pc-scheme",
-    "lem-weil-pbc-unramified-base-change-open",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
     "lem-weil-pbc-unramified-algebra-over-field-product"
    ],
    "elementary": false,
@@ -29,7 +30,7 @@
    }
   },
   {
-   "text": "Fix $x\\in X$ and choose $a$ with $x\\in U_a$. Apply the finite-product-spectrum statement to the decomposition in step 1. Its distinct projection kernels exhaust the primes, so exactly one factor index $j$ corresponds to $x$. The morphism $\\operatorname{Spec}L_{a,j}\\to\\operatorname{Spec}(\\prod_jL_{a,j})\\cong U_a$ identifies its source with the open subscheme whose underlying set is $\\{x\\}$. Since $U_a$ is open in $X$, this is also the open subscheme $X_x=X|_{\\{x\\}}$ of $X$. The identification is over $k$: the composite of the structure map $k\\to C_a\\cong\\prod_jL_{a,j}$ with projection to $L_{a,j}$ is precisely that factor's $k$-algebra structure, and taking spectra reverses these composites. Thus $X_x\\cong\\operatorname{Spec}L_x$ over $k$ for the finite separable extension $L_x=L_{a,j}$.",
+   "text": "The map b = Spec(e) is an isomorphism. Pull a point above x back along b. The finite-product-spectrum theorem identifies its prime ideal with the kernel of exactly one factor projection and places it in the image of the open immersion q : Spec L_j → Spec(Π_j L_j). Thus c = q ≫ b ≫ a is an open immersion with image {x}. It is over k: the algebra-equivalence identity e(algebraMap k C r) = algebraMap k (Π_j L_j) r, evaluated at j, identifies c ≫ f with Spec(algebraMap k L_j) by contravariant functoriality.",
    "uses": [
     "lem-weil-pbc-spec-finite-product-fields",
     "def-weil-affine-spectrum",
@@ -42,7 +43,7 @@
    }
   },
   {
-   "text": "The open subschemes $X_x$ from step 2, indexed by the underlying set of points of $X$, are pairwise disjoint and cover $X$. This gives the required disjoint union as schemes, not just as spaces: for every open $V\\subseteq X$, the sheaf axiom on the disjoint cover $V=\\coprod_{x\\in V}\\{x\\}$ identifies $\\mathcal O_X(V)$ with $\\prod_{x\\in V}\\mathcal O_X(\\{x\\})$, with coordinate restriction maps. These are exactly the sections and restriction maps on the disjoint union of the $X_x$, so its evident bijection to $X$ identifies both the topology and the structure sheaf. All identifications are over $k$ by step 2. If $X$ is empty, use the empty index set; no finiteness of the full point set is required.",
+   "text": "Choose these finite separable fields L_x and open immersions c_x for all points x. Their ranges {x} are pairwise disjoint, so Mathlib isOpenImmersion_sigmaDesc makes Sigma.desc c an open immersion. Its range is all of X, since each x lies in the range of c_x; hence it is an isomorphism by isIso_of_isOpenImmersion_of_opensRange_eq_top. The coproduct injection identities and the compatibility of each c_x with the structure morphism prove the required compatibility over k. This construction also applies when X is empty and imposes no finiteness on its point set.",
    "uses": [
     "def-pc-scheme"
    ],
@@ -53,11 +54,10 @@
    }
   },
   {
-   "text": "Conversely, let $X\\cong\\coprod_{i\\in I}\\operatorname{Spec}L_i$ over $k$, with every $L_i/k$ finite separable. Each $\\operatorname{Spec}L_i\\to\\operatorname{Spec}k$ is etale by the finite-separable-extension theorem. By the definition of etale, this morphism is unramified. The affine unramifiedness criterion therefore says that $k\\to L_i$ is of finite type and has $\\Omega_{L_i/k}=0$.",
+   "text": "Conversely, given the coproduct presentation over k, each field extension has an etale algebra structure by Algebra.Etale.of_finite_of_isSeparable. RingHom.etale_algebraMap and HasRingHomProperty.Spec_iff show that its structure morphism is etale. The given compatibility over k identifies these with the restrictions of e.hom ≫ f to the coproduct summands.",
    "uses": [
     "lem-weil-pbc-finite-separable-extension-etale",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine"
+    "def-weil-etale-morphism"
    ],
    "elementary": false,
    "source": {
@@ -66,8 +66,10 @@
    }
   },
   {
-   "text": "The summands $\\operatorname{Spec}L_i$ are affine open subschemes covering $X$, and the target $\\operatorname{Spec}k$ is affine. Step 4 supplies on each chart the finite-type ring map with zero differentials required by the affine-cover formulation of unramifiedness in the definition. Consequently $X\\to\\operatorname{Spec}k$ is unramified. For $I=\\varnothing$, the pointwise condition (unramified at every point of $X$) is vacuous, so the same implication includes the empty scheme.",
+   "text": "Apply Mathlib IsZariskiLocalAtSource.of_openCover to sigmaOpenCover to deduce that e.hom ≫ f is etale. Compose with e.inv to obtain that f is etale. The etale instances give local finite type and formal unramifiedness; the diagonal characterization gives an open-immersion diagonal. The cover-local proof also includes an empty coproduct.",
    "uses": [
+    "def-pc-scheme",
+    "def-weil-etale-morphism",
     "def-weil-unramified-morphism"
    ],
    "elementary": true,
@@ -79,19 +81,18 @@
  ],
  "proof_deps": [
   "def-pc-scheme",
-  "lem-weil-pbc-unramified-base-change-open",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
   "lem-weil-pbc-unramified-algebra-over-field-product",
   "lem-weil-pbc-spec-finite-product-fields",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-finite-separable-extension-etale",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
-  "def-weil-unramified-morphism"
+  "def-weil-etale-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02G7 (lemma-unramified-over-field), proof of (1), expanded on affine charts using Algebra Tags 00UW, 00U3, 00ED and the existing affine decomposition nodes"
+  "place": "Tag 02G7 (lemma-unramified-over-field), proof of (1), affine expansion through finite-product field spectra; Mathlib disjoint-open coproduct and source-local etale APIs implement the gluing and converse."
  },
  "mathlib_searches": [
   {
@@ -239,5 +240,26 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 02G7(1) (morphisms.tex 7789-7821) clause by clause: explicit structure map f : X ⟶ Spec k (allowed form), unramified as the recorded inline LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f), ↔, I : Type u with no size constraint, L i fields with Algebra k, Module.Finite and Algebra.IsSeparable, iso from the Mathlib scheme coproduct ∐ Spec L i to X, each summand's map to Spec k equal to Spec.map of algebraMap. Edge cases (empty X, infinite I, universe u sufficiency, char p, inseparable, nonreduced) all correct. No definitions, sorry-only proof (axioms: propext, sorryAx, choice, Quot.sound). Docstrings give source place, blueprint id and all 5 proof steps. Imports are the statement's needs plus exactly the proof_dep modules. Node differs from base only in lean; lean.statement verbatim. No duplicate in Mathlib or side tree. nt_compile.py clean (rc 0, 3.4 s); a probe with a deliberate error confirms messages surface. Second-reading section is the pipeline-wide 2026-10-17 stub (508 packets), not a fault. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261023T123442-L-1190956",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

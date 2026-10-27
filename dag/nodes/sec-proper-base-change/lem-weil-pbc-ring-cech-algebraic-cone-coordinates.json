@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-ring-cech-algebraic-cone-coordinates",
+ "kind": "statement",
+ "title": "Ordered coordinates of an algebraic localization cone",
+ "statement": "Let A be a commutative ring, r a natural number, f:Fin(r+1) to A, and S=A[1/f(0)]. Define M(0)=A and M(q+1)=the product, over increasing embeddings t:Fin(q+1) into Fin r, of A[1/product_i f((t i).succ)]. Let d_n:M(n) to M(n+1) be A-linear maps, and l_qtj the A-algebra maps from the localization at the face product to the localization at the full tail product. Assume d_0 is diagonal localization and d_(q+1) has the alternating face-sum formula with l_qtj. Then the modules M(q+1) times (S tensor_A M(q)) have A-linear equivalences E_q to the product indexed by increasing embeddings Fin(q+1) into Fin(r+1) of localization at the corresponding full f-product. There exist full-list face A-algebra maps l′ such that E_0(d_0 x,1 tensor x) is diagonal localization of x, and E_(q+1)(d_(q+1)u,1 tensor u-(id_S tensor d_q)v) is the alternating full-list face sum of E_q(u,v). This is purely a statement of module algebra, with no complexes, sheaves, augmentation, or tensor totalization.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996; assigned proof step 2 and ordered-subset part of step 3; more-algebra.tex section-alternating-cech, defining differential formula"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the explicit ringCechConeEquiv of [lem-weil-pbc-ring-cech-cone-linear-equiv] for every degree. It constructs the equivalences from the zero-containing subset partition, finite-product tensor distribution and localization at a product.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose ringCechFace as the full-list face maps. Each given tail face algebra map l equals the corresponding canonical map by localization uniqueness. By hd0 and hd the supplied differentials therefore equal ringCechDifferential, using extensionality and equality of each alternating-sum term.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv",
+    "lem-weil-pbc-ring-cech-cone-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After substituting the canonical differentials, use ringCechConeEquiv_d_zero for the augmented identity and ringCechConeEquiv_d for the later identity. Evaluate at each requested subset and expand ringCechDifferential_succ to obtain the original face sum.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-cech-cone-linear-equiv",
+  "lem-weil-pbc-ring-cech-cone-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "section-alternating-cech, defining differential formulas and localization base change",
+  "note": "Complete proof; both supporting modules are fully proved, with no new sorry dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A localization tensor a localization away g is localization away the product, Cech complex subsets contain zero",
+   "results": "8 hits: IsLocalization.tensorProduct_tensorProduct, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.rTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.Away.mul_of_associated, IsLocalization.mk'_tmul, IsLocalizedModule.prodMap, IsLocalizedModule.map_lTensor",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered localization Cech complex is the mapping cone of localization at the first generator with subsets partitioned by containing zero",
+   "results": "8 hits: CochainComplex.cm5b.i, CochainComplex.cm5b.p, CochainComplex.cm5b.I, HomotopyCategory.composableArrowsFunctor_obj, HomologicalComplex.evalCompCoyonedaCorepresentative, CochainComplex.mappingCone, HomologicalComplex.homotopyCofiber.X, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  },
+  {
+   "tool": "grep",
+   "query": "piRight|Away.mul|ιTensorObj_d",
+   "results": "25 hits: Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/GroupTheory/MonoidLocalization/Away.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingCechCoordinateTensorStep",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-ring-cech-coordinate-tensor-step, Tag 0996; assigned proof step 2 and ordered-subset part of step 3; more-algebra.tex section-alternating-cech, defining differential formula. The inherited ancestry has null node; blueprint_refs.py ancestor also returns None.",
+   "via": [
+    "lem-weil-pbc-ring-cech-coordinate-tensor-step",
+    "lem-weil-pbc-ring-tensor-cech-coordinates",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingCechAlgebraicConeCoordinates",
+  "file": "lean/Sheaf/Paper/RingCechAlgebraicConeCoordinates.lean",
+  "declaration": "CategoryTheory.ringCechAlgebraicCone_coordinates",
+  "statement": "theorem ringCechAlgebraicCone_coordinates (A : CommRingCat.{u}) (r : ℕ)\n    (f : Fin (r + 1) → A)\n    (d : ∀ n : ℕ, ringCechTailTerm A r (fun i ↦ f i.succ) n →ₗ[A]\n      ringCechTailTerm A r (fun i ↦ f i.succ) (n + 1))\n    (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n      Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i)).succ) →ₐ[A]\n        Localization.Away (∏ i, f (t i).succ))\n    (hd₀ : ∀ (x : A) (t : Fin 1 ↪o Fin r),\n      d 0 x t = algebraMap A (Localization.Away (∏ i, f (t i).succ)) x)\n    (hd : ∀ (q : ℕ) (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))\n      (t : Fin (q + 2) ↪o Fin r),\n      d (q + 1) x t = ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n        l q t j (x ((Fin.succAboveOrderEmb j).trans t))) :\n    let M := ringCechTailTerm A r (fun i ↦ f i.succ)\n    let S := Localization.Away (f 0)\n    ∃ (E : ∀ q : ℕ, (M (q + 1) × (S ⊗[A] M q)) ≃ₗ[A]\n        ((t : Fin (q + 1) ↪o Fin (r + 1)) → Localization.Away (∏ i, f (t i))))\n      (l' : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin (r + 1)) (j : Fin (q + 2)),\n        Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n          Localization.Away (∏ i, f (t i))),\n      (∀ (x : A) (t : Fin 1 ↪o Fin (r + 1)),\n        E 0 (d 0 x, 1 ⊗ₜ[A] x) t =\n          algebraMap A (Localization.Away (∏ i, f (t i))) x) ∧\n      (∀ (q : ℕ) (x : M (q + 1)) (y : S ⊗[A] M q)\n        (t : Fin (q + 2) ↪o Fin (r + 1)),\n        E (q + 1) (d (q + 1) x,\n          1 ⊗ₜ[A] x - TensorProduct.map (LinearMap.id : S →ₗ[A] S) (d q) y) t =\n          ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n            l' q t j (E q (x, y) ((Fin.succAboveOrderEmb j).trans t)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringCechAlgebraicCone_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T104422-L-813305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aeb05",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T121118-L-2751194",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new fully-proved modules/nodes vs node statements and clone; ringCechTailTerm relocation vs change record; importer RingCechCoordinateTensorStep compiled against delivery (exit 0); axioms clean"
+ }
+}

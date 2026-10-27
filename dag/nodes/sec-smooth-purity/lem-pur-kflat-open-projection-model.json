@@ -1,0 +1,330 @@
+{
+ "id": "lem-pur-kflat-open-projection-model",
+ "kind": "statement",
+ "title": "K-flat open tensor map computes the derived coefficient projection",
+ "statement": "Let $j:U\\hookrightarrow P$ be an open immersion of schemes and let $A\\to B$ be a unital map of finite commutative rings [def-weil-pbc-scheme-conventions]. Use ordinary small etale module derived categories and localization $\\ell$ from integer cochain complexes [def-weil-pbc-derived-categories]. Write $T_W=-\\otimes_A^LB_W$ and $\\operatorname{Res}_W$ for exact restriction of scalars [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Fix $L\\in D(P_{\\mathrm{et}},A)$ such that $L$, $Rj_{*,A}j^*L$, $T_PL$, $T_PRj_{*,A}j^*L$ and $Rj_{*,B}j^*T_PL$ are bounded below.\n\nChoose a complex $I$ with $\\ell I\\simeq L$, a flat-term K-flat quasi-isomorphism $Q\\to B_P[0]$ [lem-pc-kflat-resolution], and an $A$-linear quasi-isomorphism $a:N=\\operatorname{Tot}(Q\\otimes_A I)\\to J$, where total tensor is [def-pc-tensor-complex-sheaves]. Assume the canonical right-derived comparison maps for $j^*I$ and $j^*J$ are invertible:\n$$\\ell(j_*j^*I)\\xrightarrow{\\sim}Rj_{*,A}j^*(\\ell I),\\qquad\\ell(j_*j^*J)\\xrightarrow{\\sim}Rj_{*,A}j^*(\\ell J).$$\nThese are the canonical comparisons of [lem-sp-etale-derived-chain-transpose], not arbitrarily chosen isomorphisms. Set $C=j_*j^*I$, $C'=j_*j^*J$. With the ordinary counit $\\varepsilon^0$ of $j^*\\dashv j_*$ and the canonical cochain tensor comparison $c$ [lem-pur-cochain-pullback-tensor-coherence], let $v:Q\\otimes C\\to C'$ be the ordinary adjunct of\n$$h=j^*a\\,c_{Q,I}^{-1}(1\\otimes\\varepsilon^0_{j^*I})c_{Q,C}.$$\n\nThe flat-term K-flat tensor comparison, signed symmetry putting $B$ second, augmentation and normalized scalar/tensor isomorphism give a canonical isomorphism $e_N:\\ell N\\xrightarrow{\\sim}\\operatorname{Res}_P(T_PL)$ [lem-weil-pbc-kflat-fixed-tensor-triangulated, lem-pur-derived-change-of-rings]. Set $e_J=e_N(\\ell a)^{-1}$. The same tensor comparison applied to $C$ and the canonical direct-image computations give isomorphisms\n$$\\sigma:\\ell(Q\\otimes C)\\xrightarrow{\\sim}\\operatorname{Res}_P(T_PRj_{*,A}j^*L),\\qquad\\tau:\\ell C'\\xrightarrow{\\sim}\\operatorname{Res}_P(Rj_{*,B}j^*T_PL),$$\nwhere the target uses $e_J$ and the canonical bounded-below direct-image/restriction and inverse-image/restriction comparisons [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Under these specified identifications,\n$$\\tau\\,\\ell(v)=\\operatorname{Res}_P(\\beta_{j^*L})\\,\\sigma,$$\nwhere $\\beta_{j^*L}:T_PRj_{*,A}j^*L\\to Rj_{*,B}T_Uj^*L\\simeq Rj_{*,B}j^*T_PL$ is the coefficient projection defined as the scalar mate of the derived counit [lem-pur-etale-scalar-mate-projection]. More precisely, before the scalar comparisons, the derived transpose of $\\ell(v)$ is\n$$(\\varepsilon_{j,j^*L}\\otimes^L1_{B_U})\\,c^{\\mathrm{der}}_{Rj_*j^*L,B_P},$$\nso $\\ell(v)$ is exactly the canonical projection-formula morphism $\\mathrm{PF}_j(j^*L,B_P)$ [def-kun-projection-formula-map]. The equalities are natural on the stated domain with these representing identifications. No strict $B$-module structure on $Q,I,J$ and no preservation of injectives by restriction of scalars is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPI, label lemma-adjoints-push-pull-compatibility, the canonical derived counit square; agent-written tensor/scalar specialization of the Locality comparison, extracted from returned lem-pur-etale-kflat-support-comparison Steps 1, 6 and 7. Full argument and additional sources retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sp-etale-derived-chain-transpose",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-kun-projection-formula-map",
+  "def-pur-etale-kflat-support-data",
+  "def-pur-kflat-open-model-maps"
+ ],
+ "proof": [
+  {
+   "text": "Write $b:Q\\to B_P[0]$ for the augmentation and $d_X:\\ell(Q\\otimes X)\\cong(\\ell X)\\otimes_A^LB_P$ for the fixed-factor tensor identification, with $B$ placed second. The fixed-K-flat tensor lemma applies to every complex $X$, not just K-flat $X$. Its naturality identifies $\\ell(1_Q\\otimes t)$ with $(\\ell t)\\otimes^L1_B$. To check the normalization against scalar extension, choose a flat-term K-flat resolution $R\\to X$. The maps $Q\\otimes R\\to Q\\otimes X$ and $Q\\otimes R\\to B_P\\otimes R$ are quasi-isomorphisms, by K-flatness of $Q$ and $R$, respectively. On $R$, scalar extension is represented by $R\\otimes B_P$, and the ordinary restricted scalar extension is the sheaf tensor product. Thus augmentation and signed symmetry give the stated $e_N$; doing this for $C$ and composing with the assumed canonical comparison $\\alpha_I:\\ell C\\cong Rj_*j^*L$ gives $\\sigma$. The construction on the common resolution is natural, so these identifications use the specified augmentation and not an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A4 (lemma-pullback-tensor-product); fixed-factor normalization"
+   }
+  },
+  {
+   "text": "Under $d_X$, localization of $c_{Q,X}:j^*(Q\\otimes X)\\cong j^*Q\\otimes j^*X$ is the canonical derived tensor/pullback comparison, with the corresponding signed interchange of the factors. Here is the representative check also when $X$ is not K-flat. Choose $R\\to X$ as in Step 1. Pullback preserves flat-term K-flat complexes, so $j^*Q$ and $j^*R$ are valid tensor representatives. On $(Q,R)$ the representative square defining the derived tensor/pullback isomorphism is exactly the localization of the ordinary comparison $c_{Q,R}$. Naturality of $c$ gives its commuting square for $R\\to X$; the two tensor maps across that square are invertible after localization because $Q$ and $j^*Q$ are K-flat. Cancel these maps. This proves the same representative square for $(Q,X)$. Compatibility with $b:Q\\to B_P[0]$ and the signed symmetry follows from naturality and the signed-symmetry equation for $c$. The representative-descent lemma ensures that this is the specified canonical derived comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, proof on K-flat representatives"
+   }
+  },
+  {
+   "text": "Let $\\alpha_J:\\ell C'\\to Rj_*\\ell(j^*J)$ be the canonical comparison, assumed invertible. Apply the chain-transpose lemma with $M=Q\\otimes C$, $K=j^*J$, and $f=v$. Since $v$ was defined as the ordinary adjunct of $h$, the derived transpose of $\\alpha_J\\ell(v)$ is precisely $\\ell(h)$. Also the same lemma with $K=j^*I$ and $f=1_C$ gives the concrete counit equation $\\varepsilon_{j,j^*L}\\,j^*(\\alpha_I)=\\ell(\\varepsilon^0_{j^*I})$, with the representing identification $\\ell I\\cong L$ understood. Both assertions apply to arbitrary complexes; neither uses injectivity or an acyclicity claim beyond the comparison isomorphisms explicitly assumed in the item.",
+   "uses": [
+    "lem-sp-etale-derived-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI, label lemma-adjoints-push-pull-compatibility, canonical counit square"
+   }
+  },
+  {
+   "text": "Undo the target replacement by $j^*(\\ell a)^{-1}$ and then identify $\\ell N$ with $\\operatorname{Res}_P(T_PL)$ using $e_N$. In the transpose, the initial factor $j^*\\ell(a)$ in $\\ell(h)$ cancels with $j^*(\\ell a)^{-1}$. The remaining expression, in $Q$-first coordinates, is\n$$\\ell(c_{Q,I}^{-1})\\,\\ell(1_Q\\otimes\\varepsilon^0_{j^*I})\\,\\ell(c_{Q,C}).$$\nStep 2 identifies the first and last factors with the tensor/pullback comparisons. Step 1 identifies the middle factor with tensoring the ordinary counit by $B$. Step 3 identifies that ordinary counit, after $\\alpha_I$, with the derived counit. Moving $B$ second uses the same signed symmetry on both source and target; its compatibility with $c$ removes any extra sign. Consequently the normalized derived transpose is exactly\n$$(\\varepsilon_{j,j^*L}\\otimes^L1_{B_U})c^{\\mathrm{der}}_{Rj_*j^*L,B_P}.$$\nThis calculation also explains why the target uses $e_J=e_N(\\ell a)^{-1}$ rather than an independently chosen identification.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-sp-etale-derived-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPI and 07A4, tensoring the canonical counit square"
+   }
+  },
+  {
+   "text": "By the definition of the projection-formula morphism, the expression in Step 4 is the transpose defining $\\mathrm{PF}_j(j^*L,B_P[0])$. The derived adjunction is a bijection on Hom sets, so equality of these transposes implies equality of the morphisms. Explicitly the target identification before changing coefficients is $Rj_*(j^*e_J)\\alpha_J$; the source identification is $\\sigma$ followed by the scalar/tensor identification. Thus the localization of the specified map $v$ is the canonical projection-formula morphism under precisely the identifications in the statement.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-sp-etale-derived-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI, canonical derived adjunct; projection formula defined by its transpose"
+   }
+  },
+  {
+   "text": "Apply the scalar-mate projection lemma with $f=j$ and its object $J=j^*L$. Its three bounded-below hypotheses hold: $j^*L$ and $T_Uj^*L=j^*T_PL$ are bounded below since exact pullback is termwise, while $T_PRj_{*,A}j^*L$ is bounded below by assumption. The additional assumed bound on $Rj_{*,B}j^*T_PL$ puts the direct-image/restriction comparison on its stated bounded-below domain. That lemma identifies this very projection-formula map with $\\operatorname{Res}_P(\\beta_{j^*L})$. The canonical direct-image and inverse-image/restriction comparisons identify $Rj_*(j^*e_J)\\alpha_J$ with the stated $\\tau$. Combining with Step 5 proves $\\tau\\ell(v)=\\operatorname{Res}_P(\\beta_{j^*L})\\sigma$. All equations used above are natural in chain maps and in the localized tensor variables, and adjunction transposition is natural; hence the equality is natural whenever the specified representing identifications are used. No step equips $J$ with a strict $B$-action or asserts that restriction preserves injectives.",
+   "uses": [
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI, scalar-mate specialization; bounded-below coefficient comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-sp-etale-derived-chain-transpose",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPI and 07A4: agent-written fixed-K-flat tensor specialization of the canonical counit comparison, followed by existing scalar-mate identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localized chain adjunct from tensor of an open direct image to an injective replacement is the canonical derived projection formula map after restriction of coefficient scalars",
+   "results": "[leanfinder] OK 8 hit(s); IsLocalizedModule.map_lTensor; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; ModuleCat.Tilde.openToLocalization; ModuleCat.Tilde.toOpen; IsLocalizedModule.mapExtendScalars; IsLocalizedModule.mapExtendScalars_apply_apply; Module.FinitePresentation.linearEquivMapExtendScalars; Module.FinitePresentation.linearEquivMapExtendScalars_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit computes this specified open cochain tensor map as a derived coefficient projection; generic derived adjunction is only an ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Computing derived adjunction transpose on K flat tensor and K injective models identifies the cochain tensor pushforward comparison with the coefficient change projection",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Rep.Tor_map; CategoryTheory.Tor'; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit computes this specified open cochain tensor map as a derived coefficient projection; generic derived adjunction is only an ingredient"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit computes this specified open cochain tensor map as a derived coefficient projection; generic derived adjunction is only an ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|derived.*counit",
+   "results": "[grep] OK 3 hit(s); Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:198; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:203; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:205",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit computes this specified open cochain tensor map as a derived coefficient projection; generic derived adjunction is only an ingredient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localized chain adjunct from tensor of an open direct image to an injective replacement is the canonical derived projection formula map after restriction of coefficient scalars",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Adjunction.derived; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; PresheafOfModules.instIsRightAdjointPushforward; ModuleCat.Tilde.toOpen; IsLocalization.instIsLocalizedModuleTensorProductMap; ModuleCat.Tilde.openToLocalization; ModuleCat.RestrictionCoextensionAdj.app'",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit computes this specified open cochain tensor map as a derived coefficient projection; generic derived adjunction is only an ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localized chain adjunct from tensor of an open direct image to an injective replacement is the canonical derived projection formula map after restriction of coefficient scalars",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.toOpen, IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ, IsLocalizedModule.mapExtendScalars_apply_apply, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunction, generic derived adjunction or Tor naturality does not identify the specified open tensor chain map with the coefficient projection"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|derived.*counit",
+   "results": "3 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunction, generic derived adjunction or Tor naturality does not identify the specified open tensor chain map with the coefficient projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunction, generic derived adjunction or Tor naturality does not identify the specified open tensor chain map with the coefficient projection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Computing the derived projection formula morphism using a K flat coefficient resolution and a cochain adjunction transpose",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Adjunction.derivedε, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.Adjunction.derivedη, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunction, generic derived adjunction or Tor naturality does not identify the specified open tensor chain map with the coefficient projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Computing derived adjunction transpose on K flat tensor and K injective models identifies the cochain tensor pushforward comparison with the coefficient change projection",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Tor'_map_app, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.Tor', SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunction, generic derived adjunction or Tor naturality does not identify the specified open tensor chain map with the coefficient projection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-kflat-support-comparison",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity, proof Steps 1–2; Locality closed-factor coefficient comparison. Tag 0FPI, label lemma-adjoints-push-pull-compatibility, the canonical derived counit square; agent-written tensor/scalar specialization of the Locality comparison, extracted from returned lem-pur-etale-kflat-support-comparison Steps 1, 6 and 7. Full argument and additional sources retained in report.md.",
+   "via": [
+    "lem-pur-etale-kflat-support-comparison",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-kflat-open-projection-model",
+  "worker": "stage1",
+  "summary": "NM checked Stacks 0FPI and 07A4, the exact statements of every cited node, representative signs and normalization, boundedness and absence of cycles. Six-step proof reuses existing generic tools; no new nodes and no statement change. No exact project or Mathlib attachment found.",
+  "blueprint": "Finite-coefficient prerequisite of purity transport and thm-pur-rational-and-qbar-purity Steps 1–2: identifies the Locality open factor on K-flat models. Retains the imported null blueprint ancestor and complete via chain, as printed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Computes tensor with the fixed K-flat coefficient resolution on arbitrary complexes; the purity transport unit supplies no such general tensor computation."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides resolutions used solely to check representative normalization of the fixed-factor tensor map."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes the specified scalar extension on K-flat representatives."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Normalizes the underlying A-module of ordinary scalar extension as a sheaf tensor."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Verifies that pulled-back tensor representatives remain K-flat."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Supplies the chain comparison and its naturality and signed symmetry, not an alternative purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies the canonical derived tensor/pullback comparison to be computed."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "why": "Supplies its normalization and uniqueness on tensor representatives."
+   },
+   {
+    "node": "lem-sp-etale-derived-chain-transpose",
+    "why": "Computes the canonical derived transpose of an actual chain adjunct and the counit square."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Defines the target canonical projection morphism by its transpose."
+   },
+   {
+    "node": "lem-pur-etale-scalar-mate-projection",
+    "why": "Identifies that projection morphism with restriction of the coefficient mate."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Supplies bounded-below restriction/direct-image comparisons without injective preservation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact termwise inverse image preserves the bounded-below domain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-sp-etale-derived-chain-transpose",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-3fd9fc38a",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-3fd9fc38a (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, statement and stmt_deps unchanged from side-live, and the item is still unsplit in live and side-live with no repair note, so the re-split rules do not apply. All six steps check against the exact statements of the 13 cited nodes. Step 1: the fixed-factor tensor lemma applies to every complex X; on a flat-term K-flat resolution R→X, Q⊗R→Q⊗X is a quasi-isomorphism because Q is K-flat and Q⊗R→B⊗R because R is; derived change of rings plus the change-of-rings tensor comparison then give e_N. Step 2: pullback preserves K-flatness with no flatness of A→B, and the cancellation argument is valid. Step 3: the chain-transpose lemma gives f^♭=h for f=v and the counit equation for f=1. Step 4: the three factors assemble to α_{E,K} with E=j^*L, K=B_P, with no stray sign. Step 5: def-kun-projection-formula-map defines PF as the adjoint of α_{E,K}, so equal transposes give equal maps. Step 6: the scalar-mate lemma's three bounded-below hypotheses hold through exact j^* and the assumed bounds, and its U(β)=PF conclusion with the bounded-below restriction comparisons gives τℓ(v)=Res(β)σ. Edge cases checked: j=id, U empty, A=B, and Z/4→Z/2 (no flatness of the coefficient map needed). Stacks 0FPI, 07A4 and 06YS labels confirmed in tags/tags, and 0FPI read. No cycle, no SGA, no duplicate node. I accept the 13 declared tool_uses as generic black-box uses; 3 are outside the unit route: lem-sp-etale-derived-chain-transpose, lem-sbc-canonical-restrict-scalars-functor-comparisons, and the definition def-kun-projection-formula-map. Maintainer notes: (a) Step 2 uses the fact that the canonical comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback is the localized ordinary comparison on K-flat pairs. That comes from the node's construction (proof step 5), not its statement; the cited descent-representatives uniqueness pins it, and lem-kun-inverse-image-monoidal's proof relies on the same fact. It would be cleaner stated in that node's statement. (b) Step 6's compatibility of Res(j^*T_P≅T_Uj^*) with c^der holds by the scalar-mate lemma's construction. (c) coord/dag-sync.md is absent from the snapshot. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurKFlatOpenProjectionModel",
+  "declaration": "AlgebraicGeometry.Etale.KFlatOpenProjection.computes_coefficient_projection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.coefficientProjection",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.boundedDomain",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.computes_coefficient_projection"
+  ],
+  "file": "lean/Sheaf/Paper/PurKFlatOpenProjectionModel.lean",
+  "statement": "theorem computes_coefficient_projection (φ : A →+* B) (j : U ⟶ P) (Q I J : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) (b : Q ⟶ (CochainComplex.singleFunctor _ 0).obj (scalarCoefficientSheaf φ P)) [QuasiIso b] (L : DerivedCategoryModule A P) (eI : _root_.DerivedCategory.Q.obj I ≅ L) (a : Q ⊗ I ⟶ J) [QuasiIso a] [IsIso ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorUnitQ (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj I))] [IsIso ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorUnitQ (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj J))] [Finite A] [Finite B] [IsOpenImmersion j] (_hflat : ∀ n : ℤ, ObjectProperty.flat (Q.X n)) (_hDomain : boundedDomain φ j L) : ∃ modelTensorIdentification : _root_.DerivedCategory.Q.obj (Q ⊗ I) ≅ ((derivedTensor (ModuleCat.{u + 1} A) P).obj L).obj (scalarCoefficient φ P), modelTensorIdentification = KFlatSupportComparison.tensorModel φ Q b hQ I L eI ≪≫ (scalarTensorIso φ P).app L ∧ ∃ modelScalarIdentification : _root_.DerivedCategory.Q.obj (Q ⊗ I) ≅ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj ((scalarExtension φ P).obj L), modelScalarIdentification = KFlatSupportComparison.tensorModel φ Q b hQ I L eI ∧ ∃ replacementScalarIdentification : _root_.DerivedCategory.Q.obj J ≅ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj ((scalarExtension φ P).obj L), replacementScalarIdentification = (asIso (_root_.DerivedCategory.Q.map a)).symm ≪≫ modelScalarIdentification ∧ ∃ replacementTensorIdentification : _root_.DerivedCategory.Q.obj J ≅ ((derivedTensor (ModuleCat.{u + 1} A) P).obj L).obj (scalarCoefficient φ P), replacementTensorIdentification = (asIso (_root_.DerivedCategory.Q.map a)).symm ≪≫ modelTensorIdentification ∧ ∃ projectionSourceIdentification : _root_.DerivedCategory.Q.obj (Q ⊗ openComplex j I) ≅ ((derivedTensor (ModuleCat.{u + 1} A) P).obj (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L))).obj (scalarCoefficient φ P), projectionSourceIdentification = KFlatSupportComparison.tensorModel φ Q b hQ (openComplex j I) (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L)) (directImageIdentification j I L eI) ≪≫ (scalarTensorIso φ P).app (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L)) ∧ ∃ scalarSourceIdentification : _root_.DerivedCategory.Q.obj (Q ⊗ openComplex j I) ≅ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj ((scalarExtension φ P).obj (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L))), scalarSourceIdentification = projectionSourceIdentification ≪≫ (scalarTensorIso φ P).symm.app (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L)) ∧ ∃ projectionTargetIdentification : _root_.DerivedCategory.Q.obj (openComplex j J) ≅ R(lowerStar (ModuleCat.{u + 1} A) j).obj (((derivedTensor (ModuleCat.{u + 1} A) U).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L)).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj (scalarCoefficient φ P))), projectionTargetIdentification = asIso ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorUnitQ (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj J)) ≪≫ R(lowerStar (ModuleCat.{u + 1} A) j).mapIso ((pullbackRepresentativeIso j J).symm ≪≫ L(upperStar (ModuleCat.{u + 1} A) j).mapIso (replacementTensorIdentification) ≪≫ leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) j L (scalarCoefficient φ P)) ∧ ∃ scalarTargetNormalization : _root_.DerivedCategory.Q.obj (openComplex j J) ⟶ R(lowerStar (ModuleCat.{u + 1} A) j).obj ((Sheaf.derivedRestrictScalars U.smallEtaleTopology φ).obj (L(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj L))), scalarTargetNormalization = (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorUnitQ (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj J) ≫ R(lowerStar (ModuleCat.{u + 1} A) j).map ((pullbackRepresentativeIso j J).inv ≫ L(upperStar (ModuleCat.{u + 1} A) j).map (replacementScalarIdentification).hom ≫ (scalarRestrictionPullbackIso φ j).hom.app ((scalarExtension φ P).obj L)) ∧ IsIso ((scalarRestrictionDirectImageMap φ j).app (L(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj L))) ∧ (∃! τ : _root_.DerivedCategory.Q.obj (openComplex j J) ≅ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj (R(lowerStar (ModuleCat.{u + 1} B) j).obj (L(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj L))), (τ.hom ≫ (scalarRestrictionDirectImageMap φ j).app (L(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj L)) = scalarTargetNormalization) ∧ (_root_.DerivedCategory.Q.map (ordinaryMap j Q I J a) ≫ τ.hom = (scalarSourceIdentification).hom ≫ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map (coefficientProjection φ j L))) ∧ (_root_.DerivedCategory.Q.map (ordinaryMap j Q I J a) ≫ (projectionTargetIdentification).hom = (projectionSourceIdentification).hom ≫ ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app (L(upperStar (ModuleCat.{u + 1} A) j).obj L)).app (scalarCoefficient φ P)) ∧ (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).homEquiv _ _).symm ((projectionSourceIdentification).inv ≫ _root_.DerivedCategory.Q.map (ordinaryMap j Q I J a) ≫ (projectionTargetIdentification).hom) = ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) j).app (R(lowerStar (ModuleCat.{u + 1} A) j).obj (L(upperStar (ModuleCat.{u + 1} A) j).obj L))).app (scalarCoefficient φ P) ≫ ((derivedTensor (ModuleCat.{u + 1} A) U).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).counit.app (L(upperStar (ModuleCat.{u + 1} A) j).obj L))).app (L(upperStar (ModuleCat.{u + 1} A) j).obj (scalarCoefficient φ P))) ∧ (∀ (L' : DerivedCategoryModule A P), boundedDomain φ j L' → ∀ (k : L ⟶ L'), (scalarExtension φ P).map (R(lowerStar (ModuleCat.{u + 1} A) j).map (L(upperStar (ModuleCat.{u + 1} A) j).map k)) ≫ coefficientProjection φ j L' = coefficientProjection φ j L ≫ R(lowerStar (ModuleCat.{u + 1} B) j).map (L(upperStar (ModuleCat.{u + 1} B) j).map ((scalarExtension φ P).map k)))",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11fce0d9e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: 5 bounded-below hyps (boundedDomain), K-flat termwise-flat augmentation b, IsIso of the canonical rightDerivedFunctorUnitQ comparisons, ordinaryMap = tensorAdjunct (δ, 1◁ε, μ, F a) = adjunct of h, e_N/e_J/σ pinned to tensorModel and scalarTensorIso, τ unique via canonical scalarRestrictionDirectImageMap (IsIso asserted), τℓv=σRes(β), PF clause, derived transpose = c^der≫ε⊗1 matching rightDerivedLowerStarProjectionMap, β naturality. Checked τ clause is consistent with PF clause via scalarMate_restrict_eq_projection + scalar_tensor_pullback_square. Edge cases j=id, U=∅, L=0, zero rings, non-flat φ OK. Item changed only lean/stmt_deps (added new node + landed def-pur-etale-kflat-support-data); statements verbatim; one sorry; new def node real data, fields OK. Advisory: KFlatOpenProjection.coefficientProjection is the L-form of KFlatSupportComparison.coefficientProjection (D-form), isomorphic, not a different notion. No fixes, no compile."
+ }
+}

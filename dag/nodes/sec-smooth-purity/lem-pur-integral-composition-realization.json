@@ -1,0 +1,97 @@
+{
+ "id": "lem-pur-integral-composition-realization",
+ "kind": "statement",
+ "title": "Composition of the realized integral purity maps",
+ "statement": "The original composition_realization declarations of integral counit realization, with their unchanged hypotheses and conclusions: the actual integral total-limit purity maps satisfy the composition factor equation, with the prescribed whole-tower compositor and finite Tate splitting.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Purity transport Steps 1--4; relocation of the existing composition_realization declarations"
+ },
+ "stmt_deps": [
+  "def-pur-tower-composition-reassociation",
+  "def-sp-composition-orientation-arrow-data",
+  "def-sp-adjoint-compositor-data",
+  "def-sp-integral-reconstruction-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "For the composition_realization clause, apply the whole-tower composition theorem det-sp-composition-factors to the prescribed compositor and its counit equation. Retain its normalized Tate splitting and its gamma identity. Apply the coordinate inverse functor and the total-limit functor to that identity by congrArg. This gives the displayed equality of actual realized morphisms, without requiring faithfulness of any level evaluation.",
+   "uses": [
+    "det-sp-composition-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1--2, composition compatibility under realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-composition-factors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Existing complete Lean combination proof, relocated by J3 to keep every file below the compilation bound; no hypothesis, conclusion or public declaration name changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral_stage|coefficient_stage|condensed_stage|chart_realization|composition_realization",
+   "results": "Mathlib grep returned zero hits. The existing declarations and their proof arguments are retained from TransportIntegralCounitRealization. This node records relocation, not a new mathematical assertion.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Purity transport Steps 1--4; relocation of the existing composition_realization declarations",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportIntegralCompositionRealization",
+  "file": "lean/Sheaf/Paper/TransportIntegralCompositionRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.Coherence.composition_realization",
+  "statement": "theorem composition_realization (D : WeilConjectures.FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]\n    [QuasiCompact (Z ↘ Spec (.of D.k))]\n    [(jf ≫ pf).IsOver (Spec (.of D.k))] [(jg ≫ pg).IsOver (Spec (.of D.k))]\n    [IsSeparated (jf ≫ pf)] [IsSeparated (jg ≫ pg)]\n    [SmoothOfRelativeDimension d (jf ≫ pf)] [SmoothOfRelativeDimension e (jg ≫ pg)]\n    (hcomp : (jf ≫ pf) ≫ (jg ≫ pg) = jh ≫ ph)\n    (z : SpTowerCalculus.FiniteCoordinates l E)\n    (pres : SpTowerCalculus.Preservation l E D.k b o q)\n    (cal : SpTowerCalculus.Calculus l E D.k b o q z pres)\n    (alpha : TowerAdjointCompositor.left l E b o q Pf ⋙\n      TowerAdjointCompositor.left l E b o q Pg ≅ TowerAdjointCompositor.left l E b o q Ph)\n    (_ha : ∀ M, (alpha.hom.app M).hom =\n      (cal.composition.composition (jf ≫ pf) (jg ≫ pg) (jh ≫ ph) hcomp\n        (SpTowerGamma.factorization jf pf) (SpTowerGamma.factorization jg pg)\n        (SpTowerGamma.factorization jh ph)).hom.app M)\n    (_hc : ∀ K,\n      (TowerAdjointCompositor.left l E b o q Pf ⋙\n        TowerAdjointCompositor.left l E b o q Pg).map (c.hom.app K) ≫\n          (Pf.adj.comp Pg.adj).counit.app K =\n        alpha.hom.app (Ph.right.obj K) ≫ Ph.adj.counit.app K) :\n  ∃ s : SpTowerGamma.orderedLine l E b X wh (d + e) ≅\n      (SpTowerShriek.tensor l E b X).obj\n        ((SpTowerShriek.pull l E b (o.geometry (jf ≫ pf))).obj\n          (SpTowerGamma.orderedLine l E b Y wg e),\n          SpTowerGamma.orderedLine l E b X wf d),\n    TowerSplitNormalized l E b o q jf pf jg pg jh ph d e wf wg wh Pf Pg Ph af ag ah s ∧\n    ∀ K : SpTowerCalculus.C l E b q Z,\n      (SpIntegralAdjunction.limit l E X (q.abelian X) RX NX).map\n        ((SpTowerCalculus.realization l E b X (q.abelian X)).inverse.map\n          (SpTowerGamma.gamma l E b o q (SpTowerGamma.factorization jh ph) wh (d + e)\n            ah.tensorX ah.tensorY Ph.closed Ph.right Ph.adj ah.unit_mem ah.orientation\n            K (ah.tensor_mem K) (ah.projection_iso K) ≫\n            (SpTowerGamma.realization l E b q X).map (c.hom.app K))) =\n      (SpIntegralAdjunction.limit l E X (q.abelian X) RX NX).map\n        ((SpTowerCalculus.realization l E b X (q.abelian X)).inverse.map\n          ((SpTowerShriek.tensor l E b X).map (Prod.mkHom (𝟙 _) s.hom) ≫\n          (towerReassociate l E b o jf pf jg pg jh ph hcomp\n            ((SpTowerGamma.realization l E b q Z).obj K)\n            (SpTowerGamma.orderedLine l E b Y wg e)\n            (SpTowerGamma.orderedLine l E b X wf d)).hom ≫\n          (SpTowerShriek.tensor l E b X).map\n            (Prod.mkHom\n              ((SpTowerShriek.pull l E b (o.geometry (jf ≫ pf))).map\n                (SpTowerGamma.gamma l E b o q (SpTowerGamma.factorization jg pg) wg e\n                  ag.tensorX ag.tensorY Pg.closed Pg.right Pg.adj ag.unit_mem ag.orientation\n                  K (ag.tensor_mem K) (ag.projection_iso K))) (𝟙 _)) ≫\n          SpTowerGamma.gamma l E b o q (SpTowerGamma.factorization jf pf) wf d\n            af.tensorX af.tensorY Pf.closed Pf.right Pf.adj af.unit_mem af.orientation\n            (Pg.right.obj K) (af.tensor_mem (Pg.right.obj K))\n            (af.projection_iso (Pg.right.obj K))))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "id": "def-pur-roos-coordinate-shift-formula",
+ "kind": "definition",
+ "title": "Signed coordinate normalization predicate for a strict Roos shift",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be an abelian category with countable products. For a complex $N$ of strict towers use the product complex $P(N)=\\prod_nN_n$, the map $1-s$ and the existing functor $C(N)=\\operatorname{Cone}(1-s)[-1]$ [def-weil-strict-roos-model]. Let $\\pi_{N,q,n}:P(N)^q\\to N_n^q$ be its product projections, and write $v_{N,q}:C(N)^q\\to P(N)^q$ and $u_{N,q}:C(N)^q\\to P(N)^{q-1}$ for its unshifted and shifted product coordinates. Given a coherent integer-shift structure $c$ on this fixed functor [def-weil-triangulated-category], define ShiftFormula(c) to mean the following two projection equations for every $N$, all $r,q\\in\\mathbf Z$ and every $n\\in\\mathbf N$. After the canonical cochain reindexing identifications, the degree-$q$ component of $c_{N,r}:C(N[r])\\to C(N)[r]$ followed by $v_{N,q+r}$ and $\\pi_{N,q+r,n}$ equals $v_{N[r],q}$ followed by $\\pi_{N[r],q,n}$ and the degree-$q$ shift identification of $N_n$. The same composite with $u_{N,q+r}$ and $\\pi_{N,q+r-1,n}$ equals $(-1)^r$ times the composite with $u_{N[r],q}$ and $\\pi_{N[r],q-1,n}$ followed by the degree-$(q-1)$ shift identification of $N_n$. Equivalently in the coordinate order (unshifted product, shifted product), the comparison is $(b,a)\\mapsto(b,(-1)^ra)$. This names a predicate on a supplied coherent shift; it asserts no existence of such a shift or any derived-limit comparison.",
+ "stmt_deps": [
+  "def-weil-strict-roos-model",
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 011G and 014E: cochain shift and mapping-cone coordinates; current blueprint maps-used coefficient-comparison sentence and item proof step 4."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict finite coefficient tensor tower, signed right tensor shift formula, Roos cone coordinate shift formula, and simultaneous direct image resolution shift models",
+   "results": "8 hits: CochainComplex.instAdditiveIntShiftFunctor; CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift; CochainComplex.HomComplex.Cochain.rightUnshift; CochainComplex.instLinearIntShiftFunctor; CochainComplex.instLinearHomologicalComplexIntUpShiftFunctor; CochainComplex.mappingCone.shiftIso; CochainComplex.HomComplex.Cochain.δ_rightUnshift; CochainComplex.mappingCone.shiftTriangleIso.",
+   "date": "2026-10-24",
+   "verdict": "Generic shift and cone tools only; reuse the existing project definition, without its module theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict finite coefficient tensor tower, signed right tensor shift formula, Roos cone coordinate shift formula, and simultaneous direct image resolution shift models",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; CategoryTheory.CommShift₂Setup.int_z; CategoryTheory.Tor; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; CategoryTheory.Tor'; CategoryTheory.CommShift₂Setup.int_ε; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X.",
+   "date": "2026-10-24",
+   "verdict": "No exact finite quotient tower or representative normalization interface; reuse the existing project definition."
+  },
+  {
+   "tool": "grep",
+   "query": "BasicSystemImageShiftModels|integralOperationsTensorTowerFunctor|integralCompletedTensorFiniteShiftFormula|RoosConeCalculus",
+   "results": "msearch.py: 0 Mathlib hits. rg in lean/WeilConjectures: no declarations. rg in lean/Sheaf: exact definitions in BasicSystemShiftResolutionCalculus.lean, IntegralOperationsWellDefined.lean, CompletedTensorShiftRight.lean, and RoosConeCalculus.lean. Declaration-ownership scan of all dag/nodes/*/def-*.json: no definition node owns these four interfaces. blueprint_refs.py searches for BasicSystemImageShiftModels, integralOperationsTensorTowerFunctor, RoosConeCalculus and integralCompletedTensorFiniteShiftFormula each returned 0 blueprint matches.",
+   "date": "2026-10-24",
+   "verdict": "Existing plain project definitions have only theorem-node ownership; add definition-only existing:true records as requested by the maintainer."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-basic-realization-shift-square",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Tags 011G and 014E: cochain shift and mapping-cone coordinates; current blueprint maps-used coefficient-comparison sentence and item proof step 4.",
+   "via": [
+    "lem-pur-basic-realization-shift-square",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RoosConeCalculus",
+  "declaration": "CategoryTheory.RoosConeCalculus.ShiftFormula",
+  "declarations": [
+   "CategoryTheory.RoosConeCalculus.π",
+   "CategoryTheory.RoosConeCalculus.v",
+   "CategoryTheory.RoosConeCalculus.ucoord",
+   "CategoryTheory.RoosConeCalculus.ShiftFormula"
+  ],
+  "statement": "def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only ownership of existing published plain declarations, requested in the independent H2 return of 0b498621b411. No Lean source is copied or changed, no existence theorem conclusion is invoked to state the consumer, and no new data is selected."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-943cc42f7",
+  "group": "Q05",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-943cc42f7",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Re-delivery after H2 return 0b49: Lean byte-identical (sha d84082b1), item changes only stmt_deps. Three theorem stmt_deps (basic-system-shift-resolution-calculus, open-semilinear-tensor-model, pe-roos-cone-calculus) are replaced by def-sf-open-semilinear-tensor-model-data, def-a1-flat-term-kflat-complex, def-a1-integral-finite-pullback-tower and four new existing:true def owners (basic-system-image-shift-models, roos-coordinate-shift-formula, integral-finite-tensor-tower, integral-finite-tensor-right-shift-formula). Each new node's TeX matches the published Lean body (c_a = S_p(Qa) then inverse derived unit with 3-conjunct predicate; (b,a)->(b,(-1)^r a); R/t^{n+1} total tensor with unique generator transition; (-1)^{ri} with (i,j)->(i,j+r)). All declarations resolve, no live def owner duplicates them, all stmt_deps exist. FIX: def-pur-roos-coordinate-shift-formula lean.statement was truncated at ':=' ('def ShiftFormula (cs : (roosF (A'); fixes/def-pur-roos-coordinate-shift-formula.json gives the verbatim signature 'def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop', no other change. Item mathematics re-read: all clauses and edge cases OK; proper conjunct d=𝟙 advisory only. No compile (JSON-only fix)."
+ }
+}

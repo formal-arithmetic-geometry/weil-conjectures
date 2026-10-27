@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-vector-normalized-trace-cartesian",
+ "kind": "statement",
+ "title": "Normalized compact-support vector trace in a Cartesian presentation",
+ "statement": "Use the fixed finite-coefficient setting P [def-pur-diagonal-orientation-refinement-data]. Let B,B′ be Noetherian finite-type k-schemes and F,F′ rank-d locally free modules. For a Cartesian map v:E(F′)→E(F) over b:B′→B preserving zero, put T_X=A_X(d)[2d] in the ordered diagonal-exponent presentation [def-amb-vector-integration-charts]. Let c_f be its normalized finite Tate pullback comparison. The actual trace τ_F:Rπ_!T_E→1_B is Rπ_!(c_π^{-1}) followed by vectorBundleIntegration [def-amb-vector-integration] and the specified singleFunctorObjUnitIso. Define τ_F′ similarly. Then the compact-support exchange on T_E, followed by Rπ′_!(c_v) and τ_F′, equals b*(τ_F) followed by the actual monoidal unit pullback comparison. No linearity is required. This is an equality before transposition or restriction to a section.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-orientation-refinement-data",
+  "def-amb-vector-integration-charts",
+  "def-amb-vector-integration"
+ ],
+ "proof": [
+  {
+   "text": "Apply vectorBundleNormalized at the positive diagonal exponent to obtain gamma, its integration normalization, and invertibility. Apply vectorIntegrationCounit_baseChange to obtain gamma prime on the given Cartesian presentation and its exceptional exchange equation. Evaluate that equation on the tensor unit, using constructibleFiniteTor_tensorUnit.",
+   "uses": [
+    "lem-pur-normalized-vector-purity-bundle",
+    "lem-pur-normalized-vector-purity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+   }
+  },
+  {
+   "text": "Apply vector_normalized_unit_adjunct to gamma and gamma prime. It evaluates normalization at the tensor unit and uses ordinary projection right unitality to identify the source-unit-adjusted components with the Brown adjuncts of the actual integration maps.",
+   "uses": [
+    "lem-pur-vector-normalized-unit-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+   }
+  },
+  {
+   "text": "The composition-unit law for derived inverse image identifies the pullback-unit comparisons around the Cartesian square. Naturality and right unitality of tensor pullback then give the source-unit equation for purityBundleBaseChangeAssociator. Combine that equation with naturality of gamma prime for the base pullback-unit isomorphism and the exceptional exchange equation at the unit. This yields the square for the two Brown adjuncts on the bundle coefficient, with its specified coefficient comparison.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+   }
+  },
+  {
+   "text": "Apply the inverse Hom equivalence to the adjunct square. Use mateEquiv_counit and naturality of inverse compact-support exchange to identify the left side with inverse exchange followed by pullback of integration. Cancel inverse exchange. Finally apply orderedTatePullbackSquare around the projection square and naturality of compact-support exchange to replace both bundle-pulled coefficients by the total-space Tate coefficients. This is exactly the displayed equality. No rank, nonemptiness, or positive-level case split is used.",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-pur-ordered-tate-pullback-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-vector-purity-bundle",
+  "lem-pur-normalized-vector-purity-base-change",
+  "lem-pur-vector-normalized-unit-adjunct",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-kun-tensor-unit",
+  "lem-amb-mate-unit-counit",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pur-ordered-tate-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition.",
+  "note": "M6: the unit identification is proved in VectorNormalizedUnitAdjunct; the item proves the source-unit square, mate-counit transposition and Tate coefficient transport using proved private helpers. The calculation is cached in a private theorem over abstract finite coefficients before specialization to P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback comparisons of tensor powers of a finite etale Tate line respect composition of scheme morphisms",
+   "results": "8 generic pullback-comparison hits, including CategoryTheory.Over.pullbackComp; no ordered finite Tate transport theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib result; the coefficient construction is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate of vector bundle integration is compatible with Cartesian base change and restriction to the zero section",
+   "results": "8 differential-geometric vector-bundle hits; no etale integration theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching etale compact-support or Tate comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationBaseCoefficientPullback|sectionBaseChange",
+   "results": "msearch Mathlib grep: 0 hits. Repository search: VectorTraceGeometricDescent proves the canonical linear pullback trace square; SfP1ChartExchange has a private shifted-line composition proof; OrderedTateExactOpenComposition is only for nested opens.",
+   "date": "2026-10-26",
+   "verdict": "No existing arbitrary commutative-square coefficient comparison or zero-preserving Cartesian trace equation with these exact normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorZeroSectionIntegrationBaseChange",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Compatibility paragraph: base change of the normalized trace and transposition; zero-section normalization of the vector-purity proposition.",
+   "via": [
+    "lem-pur-vector-zero-section-integration-base-change",
+    "lem-pur-diagonal-orientation-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorNormalizedTraceCartesian",
+  "file": "lean/Sheaf/Paper/VectorNormalizedTraceCartesian.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrientationRefinement.vector_normalized_trace_cartesian",
+  "statement": "theorem vector_normalized_trace_cartesian (P : PurityFiniteSetting.{u})\n    (B B' : Scheme.{u}) [IsNoetherian B] [IsNoetherian B']\n    (aB : B ⟶ Spec (.of P.field.k)) (aB' : B' ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    [LocallyOfFiniteType aB'] [QuasiCompact aB']\n    (d : ℕ) (F : B.Modules) (F' : B'.Modules)\n    [F.IsFiniteLocallyFreeOfRank d] [F'.IsFiniteLocallyFreeOfRank d]\n    (b : B' ⟶ B)\n    (v : VectorBundleZeroSection.scheme B' d F' ⟶ VectorBundleZeroSection.scheme B d F)\n    (sq : IsPullback v (VectorBundleZeroSection.π B' d F')\n      (VectorBundleZeroSection.π B d F) b)\n    (hz : VectorBundleZeroSection.zero B' d F' ≫ v =\n      b ≫ VectorBundleZeroSection.zero B d F) :\n    letI := (Etale.vectorIntegration_geometry B d F).1\n    letI := (Etale.vectorIntegration_geometry B d F).2.1\n    letI := (Etale.vectorIntegration_geometry B' d F').1\n    letI := (Etale.vectorIntegration_geometry B' d F').2.1\n    letI := Dnc.compactifiable P (VectorBundleZeroSection.π B d F) aB\n    letI := Dnc.compactifiable P (VectorBundleZeroSection.π B' d F') aB'\n    let t := purityTwistTransport P.Coefficient P.diagonalExponent\n      (pow_pos P.coefficients.prime.out.pos P.level) P.diagonalExponent_annihilates\n    let c (T S : Scheme.{u}) (f : T ⟶ S) (aS : S ⟶ Spec (.of P.field.k)) :=\n      Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t f (P.diagonalExponent_isUnit aS) d\n    let π := VectorBundleZeroSection.π B d F\n    let π' := VectorBundleZeroSection.π B' d F'\n    let L := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) π\n    let L' := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) π'\n    let τ := L.map (c _ _ π aB).inv ≫\n      Etale.vectorBundleIntegration P.diagonalExponent\n        (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n        P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d F ≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B).hom\n    let τ' := L'.map (c _ _ π' aB').inv ≫\n      Etale.vectorBundleIntegration P.diagonalExponent\n        (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n        P.diagonalExponent_annihilates B' (P.diagonalExponent_isUnit aB') d F' ≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B').hom\n    (Etale.rightDerivedLowerShriekBaseChangeMap P.Coefficient sq).app\n        (Etale.affineLinearBaseCoefficient P.Coefficient P.diagonalExponent\n          P.diagonalExponent_annihilates (VectorBundleZeroSection.scheme B d F) d) ≫\n      L'.map (c _ _ v (π ≫ aB)).hom ≫ τ' =\n    (Etale.ordinaryFinitePullback P.Coefficient b).map τ ≫\n      (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} P.Coefficient) b).hom",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T201126-L-3364166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T012907-L-2344628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

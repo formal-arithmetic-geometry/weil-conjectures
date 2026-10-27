@@ -1,0 +1,134 @@
+{
+ "id": "def-pur-affine-diagonal-integration-constructions",
+ "kind": "definition",
+ "title": "Ordered affine diagonal coordinates and presented integration",
+ "statement": "For a scheme Y and d≥0 use the ordered affine tower X→Y of [def-sbc-affine-space]. Construct the differences p₂*x_i−p₁*x_i in its self-product, their unique diagonal-ideal lifts and degree-one homogeneous classes on the actual normal cone [def-pur-normal-bundle]. These give the displayed normal coordinates. The product y coordinates and translated y−x coordinates give isomorphisms over X, the latter taking the diagonal to zero. In the finite setting [def-pur-conventions], construct the presented integration transpose from the ordered counit [lem-amb-affine-space-top-trace], the canonical coefficient and compact-support comparisons [def-amb-vector-integration], and the counit-transposed dualizing base-change map [def-pur-co-smoothness]. Construct integration by the inverse exceptional Hom bijection, the ordered root-power comparison and normalized Tate restriction. All these are the existing explicit constructions, relocated without changing their data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-amb-vector-integration",
+  "lem-pur-vector-integration-site-comparison",
+  "def-exchange-projection",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "thm-amb-vector-bundle-purity",
+  "def-pur-co-smoothness",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-affine-diagonal-graded-coordinates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space integration trace commutes with base change and diagonal restriction of its exceptional transpose",
+   "results": "LinearMap.trace_baseChange and algebraic field trace lemmas; no etale exceptional transpose or DNC normalization theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone of the diagonal of affine space is the constant standard pair after translation by the tautological section",
+   "results": "AffineSpace, AffineSpace.over, homOfVector, isoOfIsAffine_inv_over and polynomial coordinate maps; no statement of the required derived map equalities.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|diagonal.*dnc across Mathlib, WeilConjectures and Sheaf; blueprint_refs search diagonal trace restriction and diagonal dnc normalization",
+   "results": "Only the existing parent orientation module and unrelated trace-diagonal constructions; no matching split statement. The two blueprint searches each returned zero matches.",
+   "date": "2026-10-25",
+   "verdict": "new step statements needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "group": "P2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalIntegrationConstructions",
+  "file": "lean/Sheaf/Paper/AffineDiagonalIntegrationConstructions.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalSpace",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalSpace",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalProjection",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalDifferences",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalDifference_lift",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalDifferenceLift",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalNormalFunction",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalNormalCoordinates",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalNormalCoordinates_spec",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalProductCoordinates",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalProductCoordinates_spec",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalPresentedTranspose",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalPresentedIntegration",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalTranslatedCoordinates",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalTranslatedCoordinates_spec",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalProjection_smooth",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalPowerComparison",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalTateRestriction"
+  ],
+  "statement": "abbrev affineDiagonalSpace (Y : Scheme.{u}) (d : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6f558",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163943-L-914488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6f558",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163943-L-914488",
+  "kind": "interface",
+  "note": "independent cc review: the item theorem and AffineDiagonalIntegrationConclusion against the clone (byte-identical); the moved declarations against the old item (verbatim); the two new step statements against conjuncts 1-5 and 6 of the conclusion; the item node fields against the assembly proof"
+ }
+}

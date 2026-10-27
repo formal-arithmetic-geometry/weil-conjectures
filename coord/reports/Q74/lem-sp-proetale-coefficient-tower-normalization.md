@@ -1,0 +1,56 @@
+# Q74: lem-sp-proetale-coefficient-tower-normalization
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/lem-sp-proetale-coefficient-tower-normalization.json — statement, split into seven steps; not a Mathlib leaf. The original statement and all maintainer-owned fields are retained.
+- No new nodes, no Mathlib leaves, and no unit realization file: the item is an auxiliary node, not its unit's statement.
+- citations.json — 22 step/node entries with contiguous verbatim quotations from the cited statements.
+- searches.jsonl — five new searches actually run through msearch.py; their queries, results and verdicts are appended to the item's inherited searches. report.md is this report. write_split.py is a sandbox-only preparation script.
+
+## Attachments
+
+None. Searches by the exact blueprint tag and coefficient-tower/associator terminology in lean/WeilConjectures found no declaration proving the item. The nearby chosen finite-coefficient alpha is in lean/Sheaf/SecSmoothPurity/ScalarExtensionFunctor.lean, lines 2007 onward (scalarExtensionFunctor_composition_existsUnique and scalarExtensionFunctor_composition), and its normalized construction is in lean/Sheaf/Paper/AdicCoefficientDatum.lean, line 1657 onward. These were read to identify the chosen map; neither is an attachment for this full item, and the latter is private. Completed/rational scalar associators are different objects and do not prove this finite constant-ring statement.
+
+## WANTED
+
+None. All documents needed for the split are present.
+
+## What was wrong and what changed
+
+The item was statement-only, with no proof. Its statement is correct; no STATEMENT-DISPUTED correction is needed. It is not enough to say that constant rings pull back to constant rings, or that there exists some coherent associator. The maps must be the adjoints of the specified constant-section maps, and the associator must be the prescribed alpha. The new proof spells out the two coefficient squares and the actual action/tensor transports. It identifies alpha using the already existing same-unit node lem-sp-scalar-associator-conjugate and the general uniqueness of the unit-preserving left-adjoint comparison. It does not appeal to a construction hidden in the proof of a cited node.
+
+The current blueprint files read were the unit sk-lem-sp-reduction/_section.md, det-sp-reduction-direct-image, and det-sp-scalar-extension-functor in literature/blueprint/main-20261015/blueprint/sec-smooth-purity/. The chapter and unit DAG records were read as well. The unit's first step ends with compatibility under a second coefficient map; that is precisely the route this auxiliary split serves. There is no route departure and no SGA source.
+
+## Unfinished work
+
+None for this stage-1 split. Existing dependencies remain separate DAG work; no Lean proof or compilation is claimed.
+
+## Not duplicates
+
+No new nodes were created. The whole DAG and blueprint searches found the constant-ring comparison, normalized successive-extension comparison, and chosen-associator conjugate already available. In particular prop-weil-pbc-proetale-constant-ring-map, lem-sfb-successive-derived-quotient-normalization and lem-sp-scalar-associator-conjugate are reused rather than restated. Blueprint searches for “constant ring”, “scalar extension”, “inverse image of a constant” and “successive derived” were read; the etale-only lem-kun-pullback-constant does not state the pro-etale tower item. No blueprint node found states this whole normalization assertion in a different form, so same_as remains [].
+
+## Review by Q74
+
+I read the sources with the seven steps and each cited node's statement open. The literature inputs are Sites Tag 0H7J (example-constant-sheaf), Tag 00WH (proposition-sheafification-adjoint), and Cohomology on Sites Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), and 07A6 (lemma-adjoint). I checked the tag-to-label table; this corrected the draft's overlong label for 07A6 to lemma-adjoint. The source marks the composition as canonical identification of derived functors; the section normalization and comparison with the chosen alpha are the agent argument, so proof_origin.by is agent. No new node requires another source review.
+
+Step 1 uses the full statement of prop-weil-pbc-proetale-constant-ring-map, not just the existence of an unspecified constant-sheaf isomorphism. Its statement explicitly names the adjoint map and identifies it with the c in def-weil-proetale-inverse-image, and it covers the actual coefficient sheaves of def-weil-pbc-proetale-modules. The finite discrete hypotheses hold for A, B and C. This avoids conflating the coefficient presheaf involving connected components with a different ring object.
+
+Step 2 uses def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification and def-weil-proetale-inverse-image. Their statements provide the constant presheaf, unique extension to a sheaf, and the adjunction defining c. The proof computes the two direct-image maps on every constant generator and then takes their adjuncts. Thus the commuting coefficient square is proved, rather than assumed from an unrelated pullback theorem.
+
+Step 3 reads the formulas in def-weil-pbc-proetale-operations against the c and rho of def-weil-proetale-inverse-image. The transport m tensor r to c^{-1}(r)m is in that definition's statement, as is the direct-image action through rho. No tensor/pullback comparison for an arbitrary ringed topos is asserted here: these are precisely identified-coefficient actions and their defined derived operations.
+
+Step 4 is an elementary application of the commuting square: the balancing relation is written explicitly, with inverse coefficient transport. The flat and K-flat definitions cited in this step really are definitions of exactness of tensor and acyclic-complex tensor tests, respectively. Ring-isomorphism relabelling supplies inverse equivalences of the testing objects and changes no underlying abelian complex, so those tests transfer. The general derived-change-of-rings statement then computes the transported functors on these representatives. This is transport along ring isomorphisms, not an assumption that A to B is flat.
+
+Step 5 uses the existence statement of lem-pc-kflat-resolution for arbitrary unbounded complexes. The ringed-topos K-flat pullback lemma is applied to identity inverse image with structural map A_T to B_T, not to an unjustifiably flat coefficient map. Its statement gives both K-flatness and flat terms after the first extension. The derived-change-of-rings statement computes both functors; the successive-normalization statement explicitly gives the balanced derived isomorphism and its inverse on these same models. The site is small in the stipulated skeleton/universe convention, as its statement requires. No bounded tensor-total interchange or finite projective resolution is used.
+
+Step 6 is the essential equality check. The general derived coefficient adjunction states the actual extension/restriction adjunction and its representative normalization. The successive-normalization statement supplies the composite-unit equation for tau. The same-unit lem-sp-scalar-associator-conjugate states a fact about the inverse *prescribed* scalarExtensionFunctor_composition, not about some possible associator: its right conjugate is canonical restriction composition. The conjugate definition states bijectivity and compatibility with inversion, and the uniqueness lemma states exactly the unit equation used to conclude equality. With L1 successive extension and L2 direct extension, delta has direction direct restriction to successive restriction. This direction is inverse to the conjugate of alpha^{-1}; checking it prevents an erroneous inverse in the equality. The composite unit is written explicitly. Both maps solve the same unit equation, so uniqueness proves equality on the full unbounded category. This argument does not need to extract a K-flat formula from the proof, rather than the statement, of det-sp-scalar-extension-functor.
+
+Step 7 checks both inverse equations and C-linearity explicitly on balanced tensors; the unchanged final coefficient factor supplies the C-action. The two expressions for a coefficient-tower morphism are written down and equal by its commuting square. Derived naturality and independence of the model are already in the statement of the cited successive-normalization node, so this step does not smuggle in a resolution-descent lemma. Naturality transfers to the actual alpha by Step 6.
+
+I checked delivery-errors B through E point by point. B1–B3 and B9: there are no new statement-only nodes, missing definitions, duplicates or new ancestor records to justify; the item keeps its statement dependencies and has its blueprint ancestry and split report. B4–B8: TeX is written once, each source has its actual tag and label, and no false Mathlib leaf or fabricated search is recorded. B10: the upstream attachment search found no full match. C1–C4: every non-elementary input is a cited existing statement, with 22 verbatim citations; the constant-ring naturality and scalar transports are written as elementary calculations. C5–C8: the existing nodes are reused; the generic off-unit tools are declared only in split_report.tool_uses with their purpose. D1–D5: no clause has been moved into a fresh node, no proof uses the item itself, and the actual coefficient and unit equations are supplied instead of “by compatibility”. Each step has fewer than 2000 characters, and none hides a separate comparison lemma: the non-elementary comparisons are existing nodes. E1–E7: all small-site, flat-term and coefficient hypotheses were checked; objects and actions stay in the indicated uncompleted module derived categories, and no source statement had to be weakened.
+
+For edge cases I checked zero complexes, either scheme empty, identity coefficient maps, and the zero final ring. The inverse formulas reduce correctly to the unitor or the unique zero map where appropriate. I also checked the nonflat map A=Z/ell^2 to B=C=F_ell: for N=F_ell its usual infinite-left free resolution is allowed, its first tensor is K-flat over B, and the second identity extension changes none of the displayed formulas. Thus neither finite projective dimension nor boundedness has been imported implicitly. The proof uses no invertibility of ell on a scheme, no connectedness and no nonemptiness.
+
+The actual Mathlib hits were read. ConstantSheaf.lean lines 140–158 concern a dense-subsite equivalence and explicitly leave general pullback commutation as TODO; ChangeOfRings.lean lines 984–1010 give ordinary ModuleCat extension composition. The natural-language hits were constant-sheaf definitions, free-sheaf formulas, unrelated polynomial identities and abstract Tor functors. None states this full pro-etale coefficient transport plus the prescribed unbounded derived normalization. I retained the inherited searches, added only the five queries actually logged for Q74, and recorded no service failure as an absence verdict.
+
+Server review_split already passed with zero new nodes and declared generic tool uses. The full deliver.py --no-push check is the final mechanical gate before direct delivery.

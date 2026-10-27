@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+ "kind": "statement",
+ "title": "Descended finite etale complexes and algebraic stalk reduction isomorphisms",
+ "statement": "Let $X$ be a locally Noetherian quasi-compact scheme, let $d$ be an adic coefficient datum on $A$, and let $M$ be a derived module over its completed coefficient sheaf, with coefficient isomorphisms $\\varphi_n$ compatible with the quotient maps and completed scalar map [def-weil-pbc-adic-coefficient-datum, def-weil-pbc-complete-coefficient-datum, def-weil-pbc-intrinsic-koszul-completion, def-weil-abstract-derived-category]. Assume the finite quotient constant functors preserve zero maps and $M$ has uniform finite-perfect quotient models [lem-weil-pbc-residue-perfect-finite-quotient-models, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. There is an etale cover $\\{V_i\\to X\\}$ and on each chart algebraic levels $F_{i,n}$, each perfect, and consecutive scalar-extension isomorphisms [def-sfb-module-derived-scalar-comparisons] $F_{i,n+1}\\otimes^L A/I^{n+1}\\simeq F_{i,n}$ [def-weil-pbc-finite-perfect-adic-tower-data, def-pc-perfect-ring-complex]. Each $V_i$ is connected and has a chosen ordinary point $v_i$ [def-weil-connected-scheme]. For every $n$ there is a bounded etale complex $L_{i,n}$ with finite locally constant cohomology over $\\operatorname{ULift}(A/I^{n+1})$ [def-weil-pbc-etale-site, def-constructible-locally-constant]. Write $E_{i,n}$ for its exact derived stalk at the geometric point given by an algebraic closure of $\\kappa(v_i)$ [def-weil-pbc-geometric-stalks]. For every etale $U\\to V_i$, a supplied isomorphism $L_{i,n}|_U\\simeq\\underline{E_{i,n}}_U$ transports, along every $X$-etale arrow $W\\to U$, to an isomorphism between the actual finite quotient $M_n|_W$ and finite coefficient constant realization of $F_{i,n}|_W$ [def-weil-pbc-ringed-site-derived-restriction, def-weil-pbc-site-comparison-morphism]. The data do not supply such an etale stalk isomorphism or a covering on which one exists, nor compatible markings or a common pro-etale cover. The adjoint transitions, their normalization proofs and all marking sieves are constructed in the parent, not supplied here.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse, the paragraph constructing normalized algebraic M_n before taking their limit; Tags 09AL, 09B1 and 094G."
+ },
+ "stmt_deps": [
+  "def-constructible-locally-constant",
+  "def-pc-perfect-ring-complex",
+  "def-sfb-module-derived-scalar-comparisons",
+  "def-weil-abstract-derived-category",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Pull the uniform model sieve back from the categorical terminal object to the identity X-etale chart. For each x choose a model chart over x and a connected open neighborhood of its lifted point inside an affine neighborhood. Locally Noetherian connected components are open. Pulling back the model sieve preserves all uniform bounds. These point-indexed charts give an etale cover; empty X gives the empty cover.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply single finite-level etale descent separately at every n on each connected chart and choose its data inside this proof. Define E_n to be the small algebraic fibre; its perfectness is a field of these data.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-etale-level-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply consecutive stalk reduction to the two supplied level records. Its proof uses finite-ring local constancy to obtain a nonempty common constant-model chart, then scalar balancing of those two actual quotient models. This constructs the asserted pairwise scalar-extension isomorphisms without descending quotient arrows or choosing simultaneous markings.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-stalk-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the recorded connectedness, point, etale levels, bounds and lisse cohomology. Compose any supplied isomorphism to the actual stalk with the constant image of the recorded stalk-to-algebra isomorphism. The single-level transport field then gives exactly the original transport conclusion for every further W.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-etale-level-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-etale-level-data",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-finite-perfect-adic-etale-level-descent",
+  "lem-weil-pbc-finite-perfect-adic-stalk-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6: single finite-level descent, connected local constancy, and local scalar balancing; Noetherian connected open refinements. Pairwise isomorphisms suffice; adjoint transition assembly remains in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible finite quotient diagram descends to the etale site and its geometric stalk is a normalized algebraic tower of perfect complexes",
+   "results": "8 hits: etale sites, affine transition limits and normalization; no derived quotient diagram or stalk tower extraction.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use project finite coefficient comparison and stalk APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite locally constant sheaves over a finite ring on a connected scheme is etale locally isomorphic to its geometric stalk",
+   "results": "8 hits, including Scheme.smallEtaleTopology, Scheme.etaleTopology and module rank-at-stalk results; no derived stalk extraction.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match. The project finiteRing_derived_local_constancy supplies the separate local constancy step in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sieve.ofArrows",
+   "results": "12 hits including Sieve.ofArrows, mem_ofArrows_iff, ofArrows_mk and the factorization functions.",
+   "date": "2026-10-27",
+   "verdict": "Use ofArrows and mem_ofArrows_iff in the parent covering-sieve assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRing_derived_local_constancy|FinitePerfectAdic.*stalk",
+   "results": "msearch grep returned 0 Mathlib hits. Local rg found the existing parent, FinitePerfectAdicTowerExtraction, finite-ring local constancy and finite coefficient comparison; no declaration constructs the new data.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of the extraction data; retain existing finite-ring local constancy in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicStalkModels",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, normalized algebraic quotient diagram before local finite-level trivialization.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-stalk-models",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicEtaleStalkData",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicEtaleStalkData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_etale_stalk_data",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicEtaleStalkData",
+   "AlgebraicGeometry.Scheme.finitePerfectAdic_etale_stalk_data"
+  ],
+  "statement": "theorem finitePerfectAdic_etale_stalk_data (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X] {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms] (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n) (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ) (M : DerivedCategory (CompletedAdicModules X d)) (hmodels : HasUniformFinitePerfectModels X d φ M) : ∃ 𝒱 : Cover.{t} etalePrecoverage X, ∀ i : 𝒱.I₀, ∃ E : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))), (∀ n : ℕ, DerivedCategory.IsPerfect (E n)) ∧ (∀ n : ℕ, Nonempty ((ConstantScalarRealization.moduleDerivedExtension (Ideal.Quotient.factorPowSucc d.ideal (n + 1))).obj (E (n + 1)) ≅ E n)) ∧ Nonempty (FinitePerfectAdicEtaleStalkData X d φ M (𝒱.etalePrecoverageToEtale i) E)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T064446-L-2181137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5024d",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T094358-L-219792",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules vs node statements/Stacks 09C6/09AL; moved finitePerfectAdicEtaleStalk vs clone (verbatim); importer FinitePerfectAdicStalkModels compiled against delivered set OK"
+ }
+}

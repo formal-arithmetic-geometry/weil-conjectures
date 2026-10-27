@@ -1,0 +1,151 @@
+{
+ "id": "lem-pod-completed-kflat-transport",
+ "kind": "statement",
+ "title": "Completed coefficient reindexing preserves K-flat representatives",
+ "statement": "Let l be prime, E a finite extension of Q_l, g : X ≅ Y a scheme isomorphism, and F its recorded completed coefficient module inverse image [def-sf-adic-closed-reindexing-maps, def-weil-proetale-iso-sectionwise-inverse-image]. For every flat-term complex P of completed coefficient modules on Y that is K-flat against all acyclic complexes, the termwise complex F(P) is K-flat against all acyclic completed coefficient complexes on X [def-coef-semilinear-system-models]. No residue-characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, completed coefficient reindexing; Stacks Modules on Sites Tags 03EL and 07A4, and Cohomology on Sites Tag 06YP."
+ },
+ "stmt_deps": [
+  "def-sf-adic-closed-reindexing-maps",
+  "def-coef-semilinear-system-models",
+  "def-weil-proetale-iso-sectionwise-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The completed inverse image is the exact additive equivalence already constructed from the inverse site equivalence and inverse completed coefficient map, as in the already proved podCompletedInverseImage_equivalence. Exactness of each direction preserves and reflects acyclicity.",
+   "uses": [
+    "def-sf-adic-closed-reindexing-maps",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ordinary natural tensor comparison to each total summand. The coproduct universal property gives the signed-total comparison. This is exactly the existing exactTensorTotalIso helper used for semilinear tensor evaluation: naturality intertwines both differentials, additivity preserves the sign, and the right adjoint ensures preservation of the coproducts.",
+   "uses": [
+    "lem-pod-completed-ordinary-tensor",
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an acyclic complex Z on X, use the inverse equivalence to obtain an acyclic VZ on Y. K-flatness of P makes (VZ) tensor P acyclic. Exact reindexing preserves this acyclicity, and the signed-total comparison followed by the termwise counit identifies its image with Z tensor FP. Transporting acyclicity along this isomorphism proves the assertion. This also handles zero complexes and the empty site.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sf-adic-closed-reindexing-maps",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-pod-completed-ordinary-tensor",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, completed coefficient reindexing; Stacks Modules on Sites Tags 03EL and 07A4, and Cohomology on Sites Tag 06YP. Formal specialization of the existing normalized pairing and signed total-tensor construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaves preserves tensor products and internal Hom and induces an equivalence of derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, DerivedCategory.instLinearCochainComplexIntQ, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, DerivedCategory.instLinear, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsEquivalence",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.IsEquivalence'",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorComparisonModel",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence preserves derived internal Hom tensor evaluation and coefficient reduction",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_tensor, Rep.MonoidalClosed.linearHomEquivComm, ModuleCat.ihom_ev_app, Rep.MonoidalClosed.linearHomEquiv, Rep.MonoidalClosed.linearHomEquivComm_symm_hom, Rep.homEquiv, CategoryTheory.tensorLeftHomEquiv, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact equivalence preserves K injective complexes and K flat complexes",
+   "results": "8 hits: HomotopyEquiv.isKInjective, HomotopyEquiv.isKProjective, CategoryTheory.Equivalence.enoughInjectives_iff, CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence, CochainComplex.isKInjective_iff_of_iso, CategoryTheory.Equivalence.map_injective_iff, CochainComplex.isKProjective_of_iso, CochainComplex.isKInjective_of_iso",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q",
+   "results": "12 hits: DerivedCategory.Q, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.Q_obj_single_obj",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparisonModel_unique|isKFlat_ringedToposPullback|isoSectionwiseModuleInverseImage",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact completed-coefficient normalized tensor transport statement; generic categorical constructions and the existing project tensor APIs are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReindexingSystemHomReductionSquare",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: the ambient completed-coefficient tensor comparison in proof step 6 of lem-pod-reindexing-system-hom-reduction-square."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompletedKFlatTransport",
+  "file": "lean/Sheaf/Paper/PodCompletedKFlatTransport.lean",
+  "declaration": "WeilConjectures.podCompletedKFlatTransport",
+  "statement": "theorem podCompletedKFlatTransport (P : CochainComplex (integralTowerModules l E Y) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheafUnrestricted l E Y) P) (_hflat : flatTerms.{u + 1, u, u} (Scheme.ProEt.topology Y) (completedIntegralCommRingSheafUnrestricted l E Y) P) : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) (((podCompletedModuleInverseImage l E g).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T131502-L-2944222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T131502-L-2944222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

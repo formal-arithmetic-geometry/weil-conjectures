@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+ "kind": "statement",
+ "title": "Flat standard cotangent models for ring sheaves and strict functoriality",
+ "statement": "Let $T$ be a topological space and $\\mathcal A\\to\\mathcal B$ a map of sheaves of commutative rings. Use sheaf modules [def-weil-sheaf-of-modules-category] and their derived categories [def-weil-abstract-derived-category]. Let $P_\\bullet=P^{\\mathrm{std}}_\\bullet(\\mathcal B/\\mathcal A)$ be the sheaf standard polynomial resolution and put $K_{\\mathcal B/\\mathcal A}=s(\\Omega^1_{P_\\bullet/\\mathcal A}\\otimes_{P_\\bullet}\\mathcal B)$, with $s(M)^{-n}=M_n$, alternating-face differential and zero positive terms, as in [lem-trf-affine-cotangent-comparison]. For every $t\\in T$ and $n\\geq0$, the stalk $K^{-n}_t$ is the free $\\mathcal B_t$-module on the polynomial variables of $P^{\\mathrm{std}}_n(\\mathcal B_t/\\mathcal A_t)$. Every term of $K$ is flat [def-pc-flat-sheaf-modules] and $K$ is K-flat [def-pc-kflat-complex]. Thus for every ring-sheaf map $\\mathcal B\\to\\mathcal C$, $K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal C$ represents $L_{\\mathcal B/\\mathcal A}\\otimes^{\\mathbf L}_{\\mathcal B}\\mathcal C$.\nFor a commutative square $(\\mathcal A\\to\\mathcal B)\\to(\\mathcal A'\\to\\mathcal B')$, the standard map sends coefficients by $\\mathcal A\\to\\mathcal A'$ and a free generator $[b]$ to $[b']$ in degree zero, and iterates this rule at each higher polynomial level. It commutes with all faces, degeneracies and augmentations, and induces $\\mathrm dp\\otimes r\\mapsto\\mathrm d(p')\\otimes r'$ on $K$. These chain maps preserve identities and composition strictly. After tensoring coefficients, they represent the canonical derived functoriality arrows. They commute with open restriction and with the inverse-image comparisons of [lem-trf-affine-cotangent-comparison]. For consecutive maps $\\mathcal B\\to\\mathcal C\\to\\mathcal D$ over $\\mathcal A$, the maps from $K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal D$ to $K_{\\mathcal D/\\mathcal A}$ agree with their composites through $K_{\\mathcal C/\\mathcal A}\\otimes_{\\mathcal C}\\mathcal D$, using $(v\\otimes c)\\otimes d\\mapsto v\\otimes cd$; the same compatibility holds after continuous inverse image.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SR (definition-standard-resolution-sheaves-rings), 08SS (definition-cotangent-complex-morphism-sheaves-rings and subsequent commutative-square maps), 08SV (lemma-pullback-cotangent-morphism-topoi), 08T4 (lemma-triangle-ringed-spaces, flatness observation); K-flatness from sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-trf-affine-cotangent-comparison",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "def-coef-semilinear-system-models",
+  "def-trf-cotangent-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Form the standard polynomial resolution sectionwise on the open-set site. By [lem-trf-cotangent-resolution-coherence] it has evaluation faces, unit degeneracies and augmentation. By [lem-trf-affine-cotangent-comparison], sheafifying its differential complex gives exactly the sheaf complex in the statement. Thus its term in degree $-n$ is $\\Omega^1_{P_n/\\mathcal A}\\otimes_{P_n}\\mathcal B$, its differential is the alternating sum of the faces, and its positive terms vanish. The simplicial identities make consecutive alternating sums zero: the terms with indices $i<j$ cancel against the terms obtained using $d_i d_j=d_{j-1}d_i$. The image of this actual complex in $D(\\mathcal B)$ is $L_{\\mathcal B/\\mathcal A}$ by the displayed definition in the affine-comparison statement.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-affine-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SR (definition-standard-resolution-sheaves-rings) and 08SS (definition-cotangent-complex-morphism-sheaves-rings)"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$. Let $i_t:\\{t\\}\\to T$ be the continuous inclusion. Inverse image along $i_t$ is the stalk functor, so apply [lem-trf-affine-cotangent-comparison] to this map and to its displayed standard construction. The following degreewise calculation specifies the comparison on actual complexes, without inferring a termwise isomorphism from an isomorphism in a derived category. More explicitly, the stalk of a free sheaf algebra $\\mathcal R[\\mathcal E]$ is $\\mathcal R_t[\\mathcal E_t]$: a polynomial uses finitely many coefficients and variable labels, so they have representatives on one common neighbourhood; equality of two such polynomials is witnessed after shrinking once for their finitely many coefficients and label identifications. Iterate this argument to identify $(P_n)_t$ with $P_n^{\\mathrm{std}}(\\mathcal B_t/\\mathcal A_t)$, including its labelled variables. The comparison for differentials in [lem-trf-topos-inverse-image-differentials] sends $(\\mathrm dp)_t$ to $\\mathrm d(p_t)$, and [lem-pc-ringed-space-module-stalk-tensor] gives\n$$(K^{-n})_t\\cong\\Omega^1_{P_n^{\\mathrm{std}}(\\mathcal B_t/\\mathcal A_t)/\\mathcal A_t}\\otimes_{P_n^{\\mathrm{std}}(\\mathcal B_t/\\mathcal A_t)}\\mathcal B_t.$$\nAll these are isomorphisms of modules in the specified degree, with the stated ring actions.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SV (lemma-pullback-cotangent-morphism-topoi), 08T0 (lemma-stalk-cotangent-complex); sites-modules.tex Tag 08TQ and modules.tex Tag 01CB"
+   }
+  },
+  {
+   "text": "Write $P_n^{\\mathrm{std}}(\\mathcal B_t/\\mathcal A_t)=\\mathcal A_t[x_e\\mid e\\in E_{n,t}]$, where $E_{0,t}$ is the underlying set of $\\mathcal B_t$ and $E_{n,t}$ for $n>0$ is the underlying set of $P_{n-1}^{\\mathrm{std}}(\\mathcal B_t/\\mathcal A_t)$. Apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] with $R=\\mathcal A_t$, $P=P_n^{\\mathrm{std}}$ and $S=\\mathcal B_t$ via the augmentation. Its scalar-extension clause is written with the coefficient factor first. The swap $\\omega\\otimes b\\mapsto b\\otimes\\omega$ and its reverse respect the balancing relations since $P$ is commutative. Under this swap $\\mathrm dx_e\\otimes1$ corresponds to $1\\otimes\\mathrm dx_e$. Thus that clause identifies the module of step 2 with $\\bigoplus_{e\\in E_{n,t}}\\mathcal B_t\\,\\mathrm dx_e$. This proves exactly the asserted stalk basis in every nonpositive degree, without any finiteness assumption on the variable set.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential basis and extension of coefficients"
+   }
+  },
+  {
+   "text": "Each stalk module just obtained is flat: tensoring any module $M$ by $\\bigoplus_{E_{n,t}}\\mathcal B_t$ gives the finitely supported families $\\bigoplus_{E_{n,t}}M$. A sequence of these families is exact whenever the original sequence is exact, since kernels are coordinatewise and an element with finite support can be lifted one coordinate at a time with the same finite support. For a short exact sequence of $\\mathcal B$-module sheaves, [lem-weil-pbc-module-stalk-exact] makes its stalk sequence exact; [lem-pc-ringed-space-module-stalk-tensor] identifies the stalks after tensoring with $K^{-n}$ with the tensor of that sequence by the free stalk module. The resulting sheaf sequence is exact by the converse stalk criterion in [lem-weil-pbc-module-stalk-exact]. Therefore tensoring by $K^{-n}$ is exact, which is flatness by [def-pc-flat-sheaf-modules]. The positive zero terms have the same property.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 05NE (lemma-flat-stalks-flat), forward proof from flat stalks, with the free-module coordinate argument written out"
+   }
+  },
+  {
+   "text": "The complex $K$ is bounded above by $0$, and step 4 proves that all its terms are flat. Apply [lem-pc-bounded-above-flat-kflat-site] to the open-set site of $T$ and its ring sheaf $\\mathcal B$. Its hypotheses are exactly these two properties, so $K$ is K-flat. No lower bound on $K$ is needed.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); the existing node cites this lemma with a stale numerical tag 06YS"
+   }
+  },
+  {
+   "text": "For any ring-sheaf map $\\mathcal B\\to\\mathcal C$, apply clause (2) of [lem-pur-derived-change-of-rings] on the same open-set site. Use the identity quasi-isomorphism $K\\to K$ as the K-flat resolution, justified by step 5. Write $Q_{\\mathcal C}$ for passage from complexes to $D(\\mathcal C)$. The node gives the canonical comparison isomorphism $\\theta_K:L\\varphi^*Q_{\\mathcal B}(K)\\xrightarrow{\\sim}Q_{\\mathcal C}(K\\otimes_{\\mathcal B}\\mathcal C)$, with the direction prescribed in its clause (2). Step 1 identifies $Q_{\\mathcal B}(K)$ with $L_{\\mathcal B/\\mathcal A}$, so this is exactly the required derived scalar-extension representation. No flatness of $\\mathcal C$ over $\\mathcal B$ is assumed. The representative also has flat terms by step 4, meeting the flat-term hypothesis of Stacks 06YY as well as the K-flat hypothesis of the cited node.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-affine-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), with identity underlying topos"
+   }
+  },
+  {
+   "text": "Let $(\\alpha,\\beta):(\\mathcal A\\to\\mathcal B)\\to(\\mathcal A'\\to\\mathcal B')$ be the given square. On sectionwise standard resolutions put $t_{-1}=\\beta$ and define $t_0$ by $a\\mapsto\\alpha(a)$, $[b]\\mapsto[\\beta(b)]$; recursively $t_n:\\mathcal A[UP_{n-1}]\\to\\mathcal A'[UP'_{n-1}]$ sends $[p]\\mapsto[t_{n-1}(p)]$. The ring-square maps of [lem-trf-cotangent-resolution-coherence] give exactly these maps, commuting with all faces, degeneracies and augmentations. They commute with restriction because restriction is another square of rings and those ring-square maps compose strictly. Sheafify using the sectionwise construction of [lem-trf-affine-cotangent-comparison]. This produces the asserted maps on sheaf resolutions. For an identity square the recursion fixes coefficients and variables. For two squares the recursive composite sends $[p]$ to $[t'_{n-1}t_{n-1}(p)]$, which is the direct recursion for the composite square. Uniqueness of polynomial maps with specified coefficients and generator values proves strict equality before and after sheafification.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-affine-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SS, commutative-square construction immediately after definition-cotangent-complex-morphism-sheaves-rings; Tag 08QL (section-functoriality)"
+   }
+  },
+  {
+   "text": "In degree $-n$ send $\\mathrm dp\\otimes r$ to $\\mathrm d(t_n p)\\otimes\\beta(r)$. This is well defined by the presentation of differentials in [def-weil-pbc-kahler-differentials]: additivity and Leibniz relations map to those same relations in the target, and the differential of a source coefficient maps to the differential of its image in $\\mathcal A'$, which is zero. The balancing relation $q\\,\\mathrm dp\\otimes r=\\mathrm dp\\otimes\\epsilon(q)r$ is respected since $\\epsilon't_n=\\beta\\epsilon$. Commutation with each face in step 7 gives commutation with the alternating differential. For two squares, both composite maps send a generating expression $\\mathrm dp\\otimes r$ to $\\mathrm d(t'_nt_np)\\otimes\\beta'\\beta(r)$; for the identity square this is $\\mathrm dp\\otimes r$. Hence the induced semilinear chain maps preserve identities and composition strictly.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SS, maps on differentials following equation-commutative-square-sheaves; algebra.tex Tag 07BK (definition-differentials)"
+   }
+  },
+  {
+   "text": "Linearize the semilinear chain map of step 8 to a $\\mathcal B\\prime$-linear map $f:K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal B\\prime\\to K_{\\mathcal B\\prime/\\mathcal A\\prime}$, sending $(\\mathrm dp\\otimes r)\\otimes c$ to $\\mathrm d(t_n p)\\otimes\\beta(r)c$. Set $\\mathcal C=\\mathcal B\\prime$ in step 6. The represented derived arrow is precisely $Q_{\\mathcal B\\prime}(f)\\circ\\theta_K$, with source $L_{\\mathcal B/\\mathcal A}\\otimes^{\\mathbf L}_{\\mathcal B}\\mathcal B\\prime$ and target $L_{\\mathcal B\\prime/\\mathcal A\\prime}$. The canonical cotangent functoriality arrow is defined by this same map of standard differential models: this is the sheaf construction in [lem-trf-affine-cotangent-comparison], and sectionwise it is the standard square map of [lem-trf-cotangent-resolution-coherence]. Clause (2) of [lem-pur-derived-change-of-rings] supplies exactly the canonical $\\theta_K$, so the displayed composite represents that arrow with its prescribed comparison, not just an abstractly isomorphic source. The coefficient in its pure-tensor formula lies in $\\mathcal B\\prime$ throughout.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SS, functoriality after the definition; sites-cohomology.tex Tags 06YT and 06YY, computation on K-flat models"
+   }
+  },
+  {
+   "text": "The inverse-image and open-restriction comparisons of [lem-trf-affine-cotangent-comparison] are natural in the sheaf-ring map. Their normalization on differentials is fixed by [lem-trf-topos-inverse-image-differentials]: the inverse image of $\\mathrm dp$ goes to the differential of the inverse image of $p$. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] with $R=P_n$, $S=u^{-1}P_n$, $c=\\mathrm{id}$, $M=\\Omega^1_{P_n/\\mathcal A}$ and $N=\\mathcal B$ (the last a $P_n$-module via augmentation). It identifies $u^{-1}(M\\otimes_{P_n}\\mathcal B)$ with $u^{-1}M\\otimes_{u^{-1}P_n}u^{-1}\\mathcal B$ by the pure-tensor formula. The differential comparison identifies the first factor over $u^{-1}P_n$. On a free-algebra generator, the polynomial comparison sends the inverse image of $[p]$ to the variable labelled by the inverse image of $p$: this is its defining free-algebra universal property. Consequently both orders of applying inverse image and step 7 send each variable $[p]$ to $[u^{-1}(t_np)]$, and both orders for step 8 send $u^{-1}(\\mathrm dp\\otimes r)$ to $\\mathrm d(u^{-1}(t_np))\\otimes u^{-1}(\\beta(r))$. Polynomial maps are determined by variables and coefficients, while differential tensor modules are generated locally by these expressions; hence the comparison squares commute as chain maps. Taking an open inclusion proves the open-restriction assertion as well.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SV (lemma-pullback-cotangent-morphism-topoi); sites-modules.tex Tag 08TQ (lemma-pullback-differentials)"
+   }
+  },
+  {
+   "text": "For $\\mathcal B\\xrightarrow{j}\\mathcal C\\xrightarrow{k}\\mathcal D$ over $\\mathcal A$, write $h:K_{\\mathcal B/\\mathcal A}\\to K_{\\mathcal C/\\mathcal A}$ and $g:K_{\\mathcal C/\\mathcal A}\\to K_{\\mathcal D/\\mathcal A}$ for the semilinear maps. Step 8 says the direct map is $gh$. The reassociation $((v\\otimes c)\\otimes d)\\mapsto v\\otimes k(c)d$ has inverse $v\\otimes d\\mapsto(v\\otimes1)\\otimes d$; both formulas respect balancing, and their composites are identities by the balancing relation. On $v=\\mathrm dp\\otimes r$, the route through $K_{\\mathcal C/\\mathcal A}\\otimes_{\\mathcal C}\\mathcal D$ sends $((v\\otimes c)\\otimes d)$ to $gh(v)\\,k(c)d$. The direct route sends its reassociated tensor to that same expression. This proves the required equality on generators and hence on the complexes. Applying the comparisons of step 10 gives precisely the same formula with $u^{-1}j,u^{-1}k$ and inverse-image sections, so the equality also holds after every continuous inverse image. Step 9 identifies these equalities with the canonical derived arrows.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SS and 08SV, strict composition and its inverse-image compatibility, expanded on balanced tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SR, 08SS, 08SV, 08T4, together with modules.tex Tag 05NE, algebra.tex Tag 00RX and sites-cohomology.tex Tags 06YQ, 06YT, 06YY; generator and balanced-tensor verifications expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The standard simplicial polynomial cotangent complex for a map of sheaves of rings is a bounded above complex with flat terms and is K flat, with strictly functorial resolution maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of polynomial differential resolution gives flat stalk modules and a K flat model of derived scalar extension, compatible with composition of ring squares",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {φ : S ⟶ F.op.comp R} [self : PresheafOfModules.HasDi\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^\\\\mathrm{op}\\\\to\\\\mathbf{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, a presheaf of commutative ri\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"KFlat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Ff]lat|[Ff]lat.*cotangent|standardResolution",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"33\", \"text\": \"Putting this material together allows us to define `Rep.standardResolution`, the\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"60\", \"text\": \"* `Rep.standardResolution`\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"324\", \"text\": \"def standardResolution : ProjectiveResolution (Rep.trivial k G k) where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"331\", \"text\": \"def standardResolution.extIso (V : Rep k G) (n : ℕ) :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"334\", \"text\": \"  (standardResolution k G).isoExt n V\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"23\", \"text\": \"- `Ideal.tensorCotangentEquiv`: When `T` is `R`-flat, `tensorCotangentHom` is an isomorphism.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"42\", \"text\": \"if `T` is `R`-flat (`tensorCotangentHom_injective_of_flat`). -/\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"86\", \"text\": \"/-- If `T` is a flat `R`-module, the canonical map `tensorCotangentHom R T I` is injective. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"87\", \"text\": \"lemma tensorCotangentHom_injective_of_flat [Module.Flat R T] :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"110\", \"text\": \"/-- If `T` is a flat `R`-module, the base change of the cotangent space of `I` is linearly\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"23\", \"text\": \"- `Algebra.Extension.tensorCotangentOfFlat`: If `T` is flat over `R`, there is a `T`-linear\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"25\", \"text\": \"- `Algebra.Extension.tensorH1CotangentOfFlat`: If `T` is flat over `R`, there is a `T`-linear\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"27\", \"text\": \"- `Algebra.tensorH1CotangentOfFlat`: Flat base change commutes with `H1Cotangent`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"108\", \"text\": \"noncomputable def tensorCotangentOfFlat [Module.Flat R T] :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"118\", \"text\": \"lemma tensorCotangentOfFlat_tmul [Module.Flat R T] (t : T) (x : P.Cotangent) :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"38\", \"text\": \"`Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat`. Globally, this extends\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"43\", \"text\": \"The exactness lemma is `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`.\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"47\", \"text\": \"The flatness assumption in `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"563\", \"text\": \"lemma H1Cotangent.exact_liftBaseChange_map_of_flat [Module.Flat S T] :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"565\", \"text\": \"  Generators.H1Cotangent.exact_liftBaseChange_map_of_flat'\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"246\", \"text\": \"    apply Module.Flat.lTensor_preserves_injective_linearMap _ h1Cotangentι_injective\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"77\", \"text\": \"  · have : Subsingleton (T ⊗[R] H1Cotangent R S) := (tensorH1CotangentOfFlat R S T).subsingleton\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"78\", \"text\": \"    exact Module.FaithfullyFlat.lTensor_reflects_triviality R T (H1Cotangent R S)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat standard polynomial resolution model for the cotangent complex of sheaves of rings, natural under maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"instR\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Module R ↥(KaehlerDifferential.ideal R S).cotangentIdeal\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ as an $ R $-algebra, the cotangent ideal $ \\\\mathfrak{I}/\\\\mathfrak{I}^2 $ (where $ \\\\mathfrak{I} $ is the Kähler differential ideal in $ S \\\\otimes_R S $)\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": Type _\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  cotangentComplexBaseChange R S P.Ring A =\\n    AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R] ∘ₗ\\n      P.cotangentComplex.baseChange A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A))\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|cotangent.*[Ff]lat|[Ff]lat.*cotangent",
+   "results": "{\"t\": \"2026-10-22T06:46:20Z\", \"tool\": \"grep\", \"query\": \"standardResolution|cotangent.*[Ff]lat|[Ff]lat.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\"], \"digest\": \"adedbc225f0fc02e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary presheaf differentials, naive conormal differential maps, or projective resolutions of representations; none gives the full sheaf standard simplicial cotangent model and its flatness/coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial flat standard simplicial polynomial resolution computes the cotangent complex of sheaves of rings",
+   "results": "{\"t\": \"2026-10-22T06:46:21Z\", \"tool\": \"leansearch\", \"query\": \"Functorial flat standard simplicial polynomial resolution computes the cotangent complex of sheaves of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.projectiveResolutions\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.flat_of_preservesFiniteLimits\", \"Algebra.Smooth.flat\", \"CategoryTheory.flat_iff_lan_flat\", \"SSet.toTop\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"bf1e47aa50ed2d8c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary presheaf differentials, naive conormal differential maps, or projective resolutions of representations; none gives the full sheaf standard simplicial cotangent model and its flatness/coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of commutative rings the standard simplicial polynomial cotangent complex is termwise flat and K flat and its canonical ring square maps compose strictly",
+   "results": "{\"t\": \"2026-10-22T06:46:28Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of commutative rings the standard simplicial polynomial cotangent complex is termwise flat and K flat and its canonical ring square maps compose strictly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.Generators.H1Cotangent.δ\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.Presentation.differentials.comm₁₂\", \"Algebra.Extension.CotangentSpace.map_cotangentComplex\"], \"digest\": \"3250f73ed07da876\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary presheaf differentials, naive conormal differential maps, or projective resolutions of representations; none gives the full sheaf standard simplicial cotangent model and its flatness/coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*[Cc]otangent|[Cc]otangent.*simplicial|[Kk]Flat",
+   "results": "{\"t\": \"2026-10-22T06:46:58Z\", \"tool\": \"grep\", \"query\": \"simplicial.*[Cc]otangent|[Cc]otangent.*simplicial|[Kk]Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary presheaf differentials, naive conormal differential maps, or projective resolutions of representations; none gives the full sheaf standard simplicial cotangent model and its flatness/coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of the alternating differential complex of the iterated free algebra resolution commutes with stalks and inverse image and computes derived tensor products",
+   "results": "{\"t\": \"2026-10-22T06:47:09Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafification of the alternating differential complex of the iterated free algebra resolution commutes with stalks and inverse image and computes derived tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"tensorKaehlerQuotKerSqEquiv\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\"], \"digest\": \"8ce164bfdd6d87f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary presheaf differentials, naive conormal differential maps, or projective resolutions of representations; none gives the full sheaf standard simplicial cotangent model and its flatness/coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-cotangent-transitivity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison; finer split of existing proof: Steps 1, 2 and 9: flat sheaf standard models and their strictly compatible maps",
+   "via": [
+    "lem-sfb-scheme-cotangent-transitivity",
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split into eleven steps: actual standard complex, termwise stalk comparison and polynomial basis, coordinatewise stalk flatness, bounded-above K-flatness and derived scalar extension, recursive strict square maps, differential maps, canonical derived arrows, inverse-image compatibility and explicit coefficient-composition calculation. Reused existing nodes throughout; no new nodes. Repair of returned head ed6d794417f: re-read the current cited statements and checked every retained quotation; made the degreewise stalk argument independent of any derived-only comparison, and specified the polynomial coefficient ring and both modules in the inverse-image tensor application. Repair of returned head 9d04689e892 (12:46 UTC): rebased the owned split fields over the current shared item, re-read all eleven cited proof statements and checked all 21 quotations; wrote the tensor-factor swap in the scalar-extension basis application and verified the flat-term hypothesis in the cited derived-pullback source. Repair of returned head 041d0b25868: rebuilt over the current item; re-read all cited statements, especially the changed derived-change-of-rings record (statement unchanged); specified its canonical comparison direction in step 6 and the exact localized-chain-map composite in step 9. Preserved the statement, prior proof arguments, citations and actual search records.",
+  "blueprint": "The inherited ancestry has from.node=null (blueprint_refs.py ancestor confirms this). This split realizes the inherited place: lem-sfb-scheme-cotangent-transitivity steps 1, 2 and 9, flat sheaf standard models and strictly compatible maps, as prerequisites of the marked-dualizing route through det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches for cotangent, standard resolution, polynomial differential found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Generic ring-level standard polynomial resolution and its strict square maps; needed to sheafify the prescribed construction, not a replacement of the alteration route. No node specific to this unit gives this general input."
+   },
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "Generic construction and natural sheafification, stalk and inverse-image comparisons of the same standard cotangent model. No node specific to this unit gives this general input."
+   },
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "Generic universal-derivation comparison under inverse image, needed to pin down the actual degreewise map. No node specific to this unit gives this general input."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flatness criterion for arbitrary ringed sites, applied with upper bound zero. No node specific to this unit gives this general input."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of scalar extension on the same site, with no coefficient-flatness assumption. No node specific to this unit gives this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic natural tensor comparison for inverse image, applied with identity coefficient map. No node specific to this unit gives this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-f157ccc4f",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-f157ccc4f (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with no new nodes, the unchanged item and its 11 steps, and every cited statement. This is the fourth delivery of the same split. ed6d7944, 9d04689e and 041d0b25 were PASSed by readers and returned only because the landing refused to promote a side completion. The item is still unsplit in live and side-live with no repair note. Its statement and stmt_deps are unchanged, and all 14 cited statements have identical hashes in the snapshot, live and side-live. Compared with 041d, only steps 6 and 9 and the summary changed. Step 6 names theta_K: L phi^* Q_B(K) -> Q_C(K tensor_B C). This is the canonical map of clause (2) of lem-pur-derived-change-of-rings ('inverse of the map induced by the resolution') with the resolution id_K, in the direction the clause gives. K-flatness comes from step 5, and no flatness of C over B is needed. Step 9 is Q(f) composed with theta_K, where f linearizes dp tensor r tensor c to d(t_n p) tensor beta(r)c. Stacks 08SS defines the canonical arrow by these standard maps, so no isomorphism is freely chosen. I rechecked the other steps. Step 2: termwise stalk identification A_t[E_t]. Step 3: the any-variables Kähler basis with the swap. Step 4: flatness at stalks via the iff in clause (5) of module-stalk-exact. Step 5: bounded above by 0 with flat terms, so K-flat. Steps 7-8: strict t_n, well defined since epsilon' t_n = beta epsilon and d(alpha a) = 0. Step 10: pullback-tensor with R=P_n, S=u^{-1}P_n, c=id. Step 11: both routes give gh(v)k(c)d. Edge cases checked: empty T, zero rings, infinite variable sets, the identity square, A=B, and a non-flat C. Batch-5 finding: lem-trf-cotangent-resolution-coherence (Stacks 08PM/08QL ring standard resolution) and lem-trf-topos-inverse-image-differentials (08TP/08TQ) are general foundations, not part of the trace formula or Poincaré duality. Their transitive closures (468 and 144 nodes) contain only bar-resolution, derived-category and free-module lemmas and reach no trace-formula, Poincaré or assumption node, so I accept both citations. No duplicates. No SGA is cited. I accept the six generic tool_uses. Maintainer notes: lem-pc-bounded-above-flat-kflat-site cites tag 06YS where it should be 06YQ. This is the fourth delivery that is the same in substance after promotion refusals; the promotion or landing path needs maintainer action."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.StandardSheafCotangentFlatModel",
+  "declaration": "TopCat.SheafCotangent.exists_flatFunctorialModel",
+  "declarations": [
+   "TopCat.SheafCotangent.standardVariables",
+   "TopCat.SheafCotangent.standardVariable",
+   "TopCat.SheafCotangent.variableDifferential",
+   "TopCat.SheafCotangent.standardSheafComplex",
+   "TopCat.SheafCotangent.scalarExtensionSection",
+   "TopCat.SheafCotangent.StandardPolynomialMap",
+   "TopCat.SheafCotangent.StandardLinearization",
+   "TopCat.SheafCotangent.standardDerivedArrow",
+   "TopCat.SheafCotangent.inverseStandardMap",
+   "TopCat.SheafCotangent.StandardSheafFunctoriality",
+   "TopCat.SheafCotangent.StandardScalarFunctoriality",
+   "TopCat.SheafCotangent.FlatFunctorialModel",
+   "TopCat.SheafCotangent.exists_flatFunctorialModel"
+  ],
+  "file": "lean/Sheaf/Topology/StandardSheafCotangentFlatModel.lean",
+  "statement": "theorem exists_flatFunctorialModel (C : Coherence.{u}) (S : Comparison C) : Nonempty (FlatFunctorialModel C S)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Structured assertion on the existing normalized sheaf cotangent models. Stalk bases are normalized on differential variables; flatness and K-flatness use the recorded predicates. Standard polynomial maps, linearizations and inverse-image squares retain generator formulas. The canonical derived arrow is the actual extension counit followed by localization of the normalized chain map. All helper data are explicit; nothing is chosen from a mere existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ceb6e6a7b",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of dd0bc11b81a7. The delta is exactly the requested repair: stmt_dep lem-pur-derived-change-of-rings replaced by def-sfb-derived-change-of-rings-cochain-model (existing:true, on base); landed def-trf-cotangent-resolution-data added (previous advisory); import OrdinaryDerivedChangeOfRings replaced by DerivedChangeOfRingsCochainModel; the Nonempty-copy field StandardScalarFunctoriality.extension removed. Against side-live only stmt_deps and lean differ; lean.statement is verbatim. Independent clause-by-clause re-read: stalk_basis pinned to comparison.inv(1⊗dX_e) with n=0 labels B_t; positive_zero; IsFlatOnSite and IsKFlat; represents = IsIso of the universal counit D.ε on K (E pinned by obj_eq/map_eq, no flatness of C); polynomial and chain maps pinned by standardSquareMap/chain_generator with strict id/comp; linearization determined on local pure tensors; standardDerivedArrow = ε ≫ Q(map); inverse_naturality; successive_tensor true (more general than over A, advisory). Edge cases and universes OK; sole sorry is the theorem proof; docstrings present. Item not superseded in live/side-live. No compile: no file changed; worker compile 39.3 s/46.0 s recorded. Maintainer note: lem-pc-bounded-above-flat-kflat-site cites 06YS, should be 06YQ."
+ }
+}

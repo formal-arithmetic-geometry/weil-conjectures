@@ -1,0 +1,328 @@
+{
+ "id": "lem-trf-point-quotient-augmentation-diagram",
+ "kind": "statement",
+ "title": "Whole-cone section normalization of the quotient augmentation",
+ "statement": "Let $k$ be an algebraically closed field, $s=\\operatorname{Spec}k$, $\\ell$ a prime invertible in $k$, and $E/\\mathbf Q_\\ell$ a finite extension with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-algebraic-closure, def-weil-affine-spectrum, def-weil-l-adic-coefficient-extension]. On the small pro-etale site put $R_s=\\varprojlim_n(A_n)_s$ and use unbounded derived categories of module sheaves [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients, def-weil-abstract-derived-category]. Write $\\Gamma$ for exact final-object sections, regarded as an $\\mathcal O_E$-module functor [lem-weil-point-proetale-sections-exact]. For a strict tower $Z$ with transitions $t_n$, use\n$$H(Z)^i=\\prod_nZ_n^{i-1}\\oplus\\prod_nZ_n^i,\\qquad d(b,a)=(-db-(1-s_Z)a,da),\\qquad s_Z((z_n))=(t_nz_{n+1}),$$\nand diagonal product maps on strict tower morphisms [def-weil-strict-roos-model]. The symbol $c_Z:\\Gamma H(Z)\\to H(\\Gamma Z)$ means the canonical product comparison on both displayed coordinates, not a chosen filler of a triangle.\n\nLet $K\\in D(R_s)$ be arbitrary and $q:P\\to K$ a flat-term K-flat representative [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Put $T(P)_n=\\operatorname{Res}_n(P\\otimes_{R_s}(A_n)_s)$, $D(P)_n=\\Gamma T(P)_n$, with actual quotient transitions, and $r_n(x)=x\\otimes1$ [def-pur-sheaf-tensor-product, def-pc-sheaf-restrict-scalars, def-weil-integral-scalar-extension]. Write $\\mathsf C(K)=K\\otimes_{\\mathcal O_E}\\mathcal O_E$ for the identity-extension strict quotient-completion functor of [def-weil-integral-scalar-extension], and $\\chi_K:K\\to\\mathsf C(K)$ for its quotient-augmentation map, represented by $P\\to H(T(P))$, $x\\mapsto(0,(r_nx)_n)$. Its representative comparison $\\iota_{K,P,q}:\\mathsf C(K)\\xrightarrow{\\sim}H(T(P))$ is the specified localization comparison, including the map induced by $q$.\n\nThe degreewise maps $a_P:\\Gamma P\\to H(D(P))$, $a_P(z)=(0,(\\Gamma(r_n)z)_n)$, are chain maps and natural for every chain map between flat-term K-flat complexes. The chain functor $P\\mapsto H(D(P))$ sends quasi-isomorphisms between those complexes to quasi-isomorphisms, and hence descends after localization. There are isomorphisms\n$$m_{K,P,q}:\\Gamma\\mathsf C(K)\\xrightarrow{\\sim}H(D(P)),\\qquad m_{K,P,q}=c_{T(P)}\\Gamma(\\iota_{K,P,q}),$$\nsatisfying the equality of whole derived arrows\n$$m_{K,P,q}\\Gamma(\\chi_K)\\Gamma(q)=[a_P].$$\nFor a chain map $u:P\\to P'$ representing a derived morphism $f:K\\to K'$ (so $q'u=fq$ after localization), the map induced by $\\Gamma\\mathsf C(f)$ under these comparisons is exactly $[H((\\Gamma(u\\otimes1))_n)]$, diagonal on both product coordinates. This computation extends to roofs of such chain maps: the comparisons commute with every derived morphism and agree under the specified comparison between any two representatives of the same $K$. Moreover $H(D(P))$ is a derived limit [def-weil-derived-limit] of the entire strict tower $\\Gamma(\\operatorname{Res}_n(K\\otimes^L_{R_s}(A_n)_s))$, with the quotient transitions computed on the single $P$. No completeness, constructibility or cohomological boundedness assumption on $K$ is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), quotient tower and normalized completion augmentation; extracted original item steps 1-6 and the reduction half of step 8. Agent-formulated representative lemma; supporting Stacks Tag 0941, sites-cohomology.tex, label lemma-derived-limit-is-ok (the canonical coordinate refinement is additional)."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-strict-roos-model",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-point-section-scalar-functors",
+  "def-trf-completed-scalar-identity-unit",
+  "def-sf-strict-roos-functor",
+  "def-a1-flat-term-kflat-complex",
+  "def-trf-integral-scalar-tower-functors"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural product comparison on strict Roos cocones using the generic additive cone and shift comparisons proved in ExactProductFunctorRoosChainMaps. Final-object sections and restriction of scalars preserve countable products. The comparison commutes with 1-s. Its two shifted cone coordinates are the actual product comparisons; prove naturality by their joint monicity and naturality of product comparison.",
+   "uses": [
+    "lem-cbc-exact-product-functor-roos-chain-maps",
+    "def-sf-strict-roos-functor",
+    "def-weil-point-section-scalar-functors",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  },
+  {
+   "text": "Compose the existing completedScalarIdentityUnit with exact termwise sections and the preceding natural comparison. Naturality follows from the two natural transformations. Integral scalar extension preserves quasi-isomorphisms on good complexes, and exact sections preserve them; conjugating by the cone comparison gives the required quasi-isomorphism.",
+   "uses": [
+    "def-trf-completed-scalar-identity-unit",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  },
+  {
+   "text": "Whisker the specified scalar-extension comparison by derived sections, compose its factors isomorphism and the localized cone comparison. This gives the natural representative comparison; the definition of model is its transport along q.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-trf-integral-scalar-tower-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  },
+  {
+   "text": "The good-complex inclusion followed by Q is a localization, as proved in FiniteFreeCompletedScalarComparison. Descend the localized chain unit uniquely along this localization, using its existing localization_descent_with_comparison lemma. Its representative normalization is exactly the first equation for chi. Naturality of chi and of the exact-sections factors comparison gives the entire augmentation equation.",
+   "uses": [
+    "def-trf-completed-scalar-identity-unit",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  },
+  {
+   "text": "Apply naturality of the representative comparison to the chain-map equation and transport along q and q prime. For roofs apply that naturality to both legs and compose the displayed roof equation; no cancellation of individual product projections is used.",
+   "uses": [
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  },
+  {
+   "text": "Use the generic roos_derivedLimit theorem already proved in IntegralOperationsWellDefined for the strict tower after sections. Module categories have exact countable products; derivedCategory_countableProducts_core supplies the derived products for the specified small-Hom localization moduleQ. This gives the distinguished derived-limit triangle for the entire tower.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), quotient-completion realization; Stacks Tag 0941, lemma-derived-limit-is-ok; agent-written coordinate refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-exact-product-functor-roos-chain-maps",
+  "def-sf-strict-roos-functor",
+  "def-weil-point-section-scalar-functors",
+  "def-trf-completed-scalar-identity-unit",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-integral-scalar-extension",
+  "def-trf-integral-scalar-tower-functors",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-limit",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), quotient-completion realization; supporting Stacks Tag 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok). S6 stage 3 route: reuse the existing generic cone comparisons, localization descent and Roos derived-limit proofs; explicit whole-coordinate and categorical transport calculations, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical quotient augmentation of a K-flat complex of completed proetale modules has zero shifted coordinate after exact point sections and descends naturally to derived completion",
+   "results": "8 hits: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Extension.formallySmooth_iff_split_injection, BDeRhamPlus, AdicCompletion.flat_of_isNoetherian, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.Extension.exact_cotangentComplex_toKaehler; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections identify the normalized derived completeness unit with the strict homotopy inverse limit augmentation of the entire reduction tower independently of resolutions",
+   "results": "8 hits: AlgebraicTopology.DoldKan.N₁_iso_normalizedMooreComplex_comp_toKaroubi, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.Idempotents.DoldKan.hη, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f, CategoryTheory.Abelian.LeftResolution.chainComplexXIso; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapHomologicalComplexIso",
+   "results": "5 hits: CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex, CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex_assoc; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*[Cc]omplet|[Cc]ompletion.*[Aa]ugment",
+   "results": "0 hits: ; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact point sections of a derived complete sheaf complex identify the canonical quotient augmentation with the normalized Roos cone augmentation",
+   "results": "8 hits: CategoryTheory.Sheaf.coneΓ, CategoryTheory.ShortComplex.Splitting.ofExactOfSection, CategoryTheory.ShortComplex.Exact.gIsCokernel, HasDerivedCategory.standard, CategoryTheory.ShortComplex.Exact.isLimitImage, DerivedCategory.triangleOfSESIso, CochainComplex.augmentTruncate, CategoryTheory.Sheaf.coneΓ_pt; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapHomologicalComplexIso|def mapDerivedCategoryFactors|def coneΓ",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Ordinary cones and exact-functor localization do not assert the normalized entire quotient-augmentation diagram with completed coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*[Cc]omplet|[Cc]ompletion.*[Aa]ugment",
+   "results": "Hits: . General cone/localization or flat-module results do not state the whole normalized quotient-completion diagram over completed pro-etale coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient completion augmentation is natural under change of K-flat representative and exact global sections preserve its normalized homotopy limit cone coordinates",
+   "results": "Hits: HomotopyCategory.homotopyOutMap, ComplexShape.quotient_isLocalization, instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences, HomotopyCategory.homologyFunctorFactors, instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, HomologicalComplexUpToQuasiIso.quotientCompQhIso. General cone/localization or flat-module results do not state the whole normalized quotient-completion diagram over completed pro-etale coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapHomologicalComplexIso",
+   "results": "Hits: CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex, CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex_assoc. General cone/localization or flat-module results do not state the whole normalized quotient-completion diagram over completed pro-etale coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact global sections compare the strict Roos cone of the entire derived reduction tower with the quotient completion augmentation on K-flat representatives",
+   "results": "Hits: CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, Profinite.NobelingProof.succ_exact, localCohomology.diagram, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ. General cone/localization or flat-module results do not state the whole normalized quotient-completion diagram over completed pro-etale coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the strict quotient tower completion functor and natural comparison with exact product preserving global sections",
+   "results": "Hits: CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.Localization.HasProductsOfShapeAux.compLimitFunctorIso, CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app, CategoryTheory.Localization.qCompEquivalenceFromModelFunctorIso, CategoryTheory.Localization.fac, CategoryTheory.Localization.compUniqFunctor, CategoryTheory.RanIsSheafOfIsCocontinuous.fac'. General cone/localization or flat-module results do not state the whole normalized quotient-completion diagram over completed pro-etale coefficient sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-sections-completion-cone",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), quotient tower and normalized completion augmentation; extracted original item steps 1-6 and the reduction half of step 8",
+   "via": [
+    "lem-trf-point-sections-completion-cone",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-quotient-augmentation-diagram",
+  "worker": "stage1",
+  "group": "Q77",
+  "summary": "Unchanged statement. Reused existing generic K-flat localization, scalar-extension and strict-limit results; wrote the quotient augmentation, two-coordinate chain comparison and roof cancellation explicitly. No new nodes. Checked citations, signs, unbounded inputs and absence of circular dependencies.",
+  "blueprint": "Clause (3) of prop-trf-rational-frobenius-integral-model: expands the quotient tower and normalized completion augmentation extracted via lem-trf-point-sections-completion-cone and lem-trf-integral-point-transport-tower-realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "The generic identity-field scalar-extension theorem gives quasi-isomorphism invariance and its specified localization comparison on all unbounded inputs. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact evaluation on an algebraically closed point supplies preservation of quasi-isomorphisms. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Sectionwise exact countable products supply the canonical coordinate comparison and the strict-limit hypothesis. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-strict-roos-homotopy-functor",
+    "why": "The generic signed Roos homotopy formula supplies homotopy invariance before localization. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its first assertion identifies the localization of flat-term K-flat homotopy complexes with the full derived category. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "The generic exact-product-functor theorem supplies the normalized whole-tower derived-limit comparison for sections. No node in sk-d-weil supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Its Roos triangle for the total derived limit makes the identified cone H(D(P)) a derived limit in the sense of def-weil-derived-limit. No node in sk-d-weil supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-f0475c04a",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-f0475c04a (reviewer sub-agent of L); spot-checked: One fault, repaired; no new nodes. Status: the item is a new node from Q133's re-split of lem-trf-point-sections-completion-cone. It is still unsplit in the base and in clones/live and side-live, and the snapshot has no repair note for it, so this is an ordinary one-level split. The statement and stmt_deps are byte-identical to base. Sources: I read blueprint main-20261015 prop-trf-rational-frobenius-integral-model clause (3) and Stacks 0941 (sites-cohomology.tex:5067). I read all 7 steps against the full statements of every cited node. Step 1: the cone differential (−db−(1−s)a, da) and t_n r_{n+1}=r_n give a chain map, and the step is correctly elementary. Step 2: the well-defined node's clause (1) applies with Y=s and L=E (ρ_m=π_m), and sections on Spec of an algebraically closed field are exact. Step 3: products are sectionwise, so c is an isomorphism and intertwines the transitions. Step 4: the Roos homotopy formula holds (h⊗1 commutes with the transitions); only the first assertion of the K-flat localization node is used; the localization universal property (1),(2) does the descent. Step 5: ιχ[q]=[v_P] is the definition of χ in the statement; c on Γ(v_P) gives a_P. Step 6: naturality and roof cancellation; morphisms in D between K-flat complexes are roofs. Step 7: lem-cbc applies with F=Γ to O_E-modules on the one-object site; the coordinate change (x,y)=(a,−b) checked. Edge cases: K=0, L=E, and incomplete K (no invertibility of χ is claimed). No duplicate among strict-quotient-unit-*, point-integral-completed-tensor-comparisons, completed-model-sections-transport or perfect-tensor-roos-completion. No cycle. No SGA. I accept the declared tool_uses. FIX (C1/C4 in Step 7): the step concluded 'derived limit [def-weil-derived-limit]' without citing lem-weil-pbc-ringed-strict-tower-homotopy-limit, which supplies the Roos triangle with products in D(O_E). It also attributed the level identification Γ Res_n(K⊗^L A_n) to Step 2 instead of def-weil-integral-scalar-extension. Both are now cited; uses, proof_deps and a tool_uses entry for the ringed tower node are added in fixes/dag/nodes/sec-trace-formula/lem-trf-point-quotient-augmentation-diagram.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointQuotientAugmentationDiagram",
+  "declaration": "WeilConjectures.PointQuotientAugmentation.pointQuotientAugmentationDiagram",
+  "declarations": [
+   "WeilConjectures.PointQuotientAugmentation.sections",
+   "WeilConjectures.PointQuotientAugmentation.reductions",
+   "WeilConjectures.PointQuotientAugmentation.sectionRoos",
+   "WeilConjectures.PointQuotientAugmentation.roosSections",
+   "WeilConjectures.PointQuotientAugmentation.sectionsRoos",
+   "WeilConjectures.PointQuotientAugmentation.moduleQ",
+   "WeilConjectures.PointQuotientAugmentation.sectionsLimits",
+   "WeilConjectures.PointQuotientAugmentation.sectionsColimits",
+   "WeilConjectures.PointQuotientAugmentation.derivedSections",
+   "WeilConjectures.PointQuotientAugmentation.factors",
+   "WeilConjectures.PointQuotientAugmentation.completion",
+   "WeilConjectures.PointQuotientAugmentation.completedSections",
+   "WeilConjectures.PointQuotientAugmentation.augmentation",
+   "WeilConjectures.PointQuotientAugmentation.model",
+   "WeilConjectures.PointQuotientAugmentation.RoosCoordinates",
+   "WeilConjectures.PointQuotientAugmentation.pointQuotientAugmentationDiagram"
+  ],
+  "file": "lean/Sheaf/Paper/PointQuotientAugmentationDiagram.lean",
+  "statement": "theorem pointQuotientAugmentationDiagram (_hl : IsUnit (l : k)) : ∃ c : roosSections l E k ≅ sectionsRoos l E k, RoosCoordinates (pointIntegralSections l E k) c ∧ (∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory) (v : P.obj ⟶ P'.obj), (sections l E k).map v ≫ augmentation l E k c P'.obj = augmentation l E k c P.obj ≫ (sectionRoos l E k).map v) ∧ (∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory) (v : P.obj ⟶ P'.obj), QuasiIso v → QuasiIso ((sectionRoos l E k).map v)) ∧ (∃ e : ((integralOperationsGoodComplex l E (Spec (.of k))).ι ⋙ DerivedCategory.Q) ⋙ completedSections l E k ≅ (integralOperationsGoodComplex l E (Spec (.of k))).ι ⋙ sectionRoos l E k ⋙ moduleQ l E, ∀ P : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory, e.app P = model l E k c (DerivedCategory.Q.obj P.obj) P (Iso.refl _)) ∧ ∃ χ : 𝟭 _ ⟶ completion l E k, (∀ P : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory, χ.app (DerivedCategory.Q.obj P.obj) ≫ (integralScalarExtensionComparisonOfUniverses l E E (AlgHom.id ℚ_[l] E) (Spec (.of k))).hom.app P = DerivedCategory.Q.map ((completedScalarIdentityUnit l E (Spec (.of k))).app P.obj)) ∧ (∀ (K : DerivedCategory (integralTowerModules l E (Spec (.of k)))) (P : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ K), (derivedSections l E k).map q.hom ≫ (derivedSections l E k).map (χ.app K) ≫ (model l E k c K P q).hom = (factors l E k).hom.app P.obj ≫ (moduleQ l E).map (augmentation l E k c P.obj)) ∧ (∀ (K K' : DerivedCategory (integralTowerModules l E (Spec (.of k)))) (f : K ⟶ K') (P P' : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ K) (q' : DerivedCategory.Q.obj P'.obj ≅ K') (v : P.obj ⟶ P'.obj), q.hom ≫ f = DerivedCategory.Q.map v ≫ q'.hom → (model l E k c K P q).inv ≫ (completedSections l E k).map f ≫ (model l E k c K' P' q').hom = (moduleQ l E).map ((sectionRoos l E k).map v)) ∧ (∀ (K K' : DerivedCategory (integralTowerModules l E (Spec (.of k)))) (f : K ⟶ K') (P P' R : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ K) (q' : DerivedCategory.Q.obj P'.obj ≅ K') (s : R.obj ⟶ P.obj) (v : R.obj ⟶ P'.obj), QuasiIso s → DerivedCategory.Q.map s ≫ q.hom ≫ f = DerivedCategory.Q.map v ≫ q'.hom → (moduleQ l E).map ((sectionRoos l E k).map s) ≫ (model l E k c K P q).inv ≫ (completedSections l E k).map f ≫ (model l E k c K' P' q').hom = (moduleQ l E).map ((sectionRoos l E k).map v)) ∧ (∀ P : (integralOperationsGoodComplex l E (Spec (.of k))).FullSubcategory, ∃ hprod : HasProduct (fun n : ℕ ↦ (moduleQ l E).obj (((reductions l E k).obj P.obj ⋙ sections l E k).obj (op n))), @IsDerivedLimit _ _ _ _ _ _ _ _ hprod (fun n ↦ (moduleQ l E).map (((reductions l E k).obj P.obj ⋙ sections l E k).map (homOfLE (Nat.le_succ n)).op)) ((moduleQ l E).obj ((sectionRoos l E k).obj P.obj)))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740ef618",
+  "group": "ND",
+  "result": "pass",
+  "note": "Second re-delivery after RETURN 677d8cb2e92f (H2 ownership). Lean module byte-identical (sha256 a9b038e5…); item node differs only in stmt_deps: theorem lem-weil-finite-free-completed-scalar-comparison replaced by new def-trf-completed-scalar-identity-unit, and def-trf-integral-scalar-tower-functors added. Both new nodes are existing:true on unchanged modules (live = side-live). Unit node matches completedScalarIdentityUnit_existsUnique (l.1071): zero mappingCocone.snd, fst/π_n = integralScalarTensorSection … 1 x, unique .choose, any P, independent universes; statement verbatim l.1115-1117. Tower node matches integralScalarRho/OrdinaryLevel/Level/TensorSection/Transition_existsUnique/TowerFunctor/ComplexFunctor/OnGood (l.259-650); statement verbatim l.631-633. Its theorem stmt_dep lem-pur-derived-change-of-rings is accepted: derivedChangeRingIndependentCoefficients is tagged to it, and the parent def-weil-integral-scalar-extension and about 20 def nodes cite it the same way. Acyclic: neither new node reaches the item; no missing records; no other def owner; no parallel collision. Item math unchanged from the prior clause-by-clause check (RoosCoordinates, a_P, χ pin, m = cΓ(ι), whole-arrow/chain/roof/descent/IsDerivedLimit; edge cases K=0, n=1, non-invertible χ). Report sections present; only sorry is the main theorem. Advisories: intermediate helpers (QuotientMap, Reduction*, OrdinaryLevel, completedScalarRoosEndomorphism) stay listed only under the theorem node; branch field sheaf-dag. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bd095",
+  "group": "S6",
+  "result": "fix",
+  "landing": "20261024T191045-L-237706",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointQuotientAugmentationDiagram.lean vs published clones/live module (elaborated type hashes of all 12 public decls, proof-erased) and node lem-trf-point-quotient-augmentation-diagram vs its Lean proof and brief-stage1 field format"
+ }
+}

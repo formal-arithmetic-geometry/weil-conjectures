@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-abel-differential-boundary",
+ "kind": "statement",
+ "title": "Infinitesimal divisor-to-Picard map and its kernel",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $C/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective], let $P\\in C(k)$, and fix a Jacobian $(J,\\varphi)$ [def-sc-jacobian]. For an integer $r\\geq0$, let $H_r$ represent the effective divisors of degree $r$ [thm-pc-hilb-curves], and let $a_r:H_r\\to J$ be the morphism sending $D$ to $[\\mathcal O_C(D-rP)]$, constructed from [lem-sc-hilb-to-pic-morphism] and tensoring with $\\mathcal O_C(-rP)$ [def-sc-divisor]. For every effective divisor $D$ of degree $r$, the tangent space [def-sc-scheme-tangent-space] $T_{H_r/k,D}$ identifies with $H^0(C,\\mathcal O_D(D))$, where $\\mathcal O_D(D):=\\mathcal O_C(D)/\\mathcal O_C$. Under the identification $T_{J/k,0}\\simeq H^1(C,\\mathcal O_C)$ obtained from the Picard tangent space [lem-sc-pic-tangent-space] through $\\varphi$, followed by translation from $a_r(D)$ to $0$, the differential of $a_r$ is the connecting map of $0\\to\\mathcal O_C\\to\\mathcal O_C(D)\\to\\mathcal O_D(D)\\to0$, up to the sign convention for connecting maps. In particular the sequence of $k$-vector spaces\n$$0\\longrightarrow k\\longrightarrow H^0(C,\\mathcal O_C(D))\\longrightarrow T_{H_r/k,D}\\xrightarrow{\\mathrm da_r}T_{J/k,a_r(D)}$$\nis exact, with cohomology in the sense of [pqf-def-cohomology], and $\\dim_k\\ker(\\mathrm da_r)_D=h^0(C,\\mathcal O_C(D))-1$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Theorem 5.1(b), pp.101–103, especially the kernel-dimension computation at the end of p.103; the boundary-map formulation is the first-order local-equation refinement of that computation (explained in report.md), with Picard tangent space from Proposition 2.1, pp.90–91."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-jacobian",
+  "thm-pc-hilb-curves",
+  "lem-sc-hilb-to-pic-morphism",
+  "def-sc-divisor",
+  "def-sc-scheme-tangent-space",
+  "pqf-def-cohomology",
+  "lem-sc-pic-tangent-space"
+ ],
+ "proof": [
+  {
+   "text": "First [lem-pc-projective-proper] makes $C$ proper. By [lem-sc-smooth-connected-curve-local-rings] it is Noetherian and integral; with the given point $P$, [prop-pc-xk-integral] gives geometric integrality, so the hypotheses of the Hilbert and Picard statements are satisfied (an algebraically closed field is separably closed). A degree-$r$ effective divisor is an effective Cartier divisor by [thm-pc-hilb-curves]. Use [lem-pc-divisor-line-bundle-agrees-sc] to identify its valuation-defined module with the dual of its Cartier ideal. Thus the local rational functions, the Hilbert universal divisor line bundle, and the Picard class in this proof refer to the same invertible module.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "prop-pc-xk-integral",
+    "thm-pc-hilb-curves",
+    "lem-pc-divisor-line-bundle-agrees-sc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9I proposition-hilb-d and Tag 0BA0 lemma-picard-pieces, with the existing divisor-convention comparison."
+   }
+  },
+  {
+   "text": "Put $A=k[\\epsilon]/(\\epsilon^2)$ and $\\mathcal I=\\mathcal O_C(-D)$. By [lem-sc-divisor-module-local], choose affine opens $U_i$ where $\\mathcal I=(f_i)$ and $\\mathcal O_C(D)=f_i^{-1}\\mathcal O_{U_i}$, with $f_i$ a non-zero-divisor. By the representing Hilbert functor and the dual-number definition of tangent vectors, a tangent vector at $D$ is a finite locally free degree-$r$ closed subscheme of $C_A$ reducing to $D$. Apply [lem-sfb-finite-embedded-dual-number-graphs]: these are exactly maps $h:\\mathcal I\\to\\mathcal O_C/\\mathcal I$. Locally send $h$ to $h(f_i)/f_i$ modulo $\\mathcal O_C$. This gives a sheaf isomorphism $\\mathcal H om(\\mathcal I,\\mathcal O_C/\\mathcal I)\\simeq\\mathcal O_C(D)/\\mathcal O_C$: if $f_j=u_{ij}f_i$, linearity gives $h(f_j)=u_{ij}h(f_i)$, so the fractions agree; locally its inverse sends $g_i/f_i$ to the map $f_i\\mapsto g_i\\bmod f_i$. Global sections give the asserted tangent identification. The scalar and two-parameter formulas in the graph lemma agree with the tangent operations, so it is $k$-linear, including $D=0$.",
+   "uses": [
+    "lem-sc-divisor-module-local",
+    "def-pc-hilb-functor",
+    "thm-pc-hilb-curves",
+    "def-sc-scheme-tangent-space",
+    "lem-sfb-finite-embedded-dual-number-graphs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III Proposition 2.1 and Theorem 5.1(b), pp.90–91 and 101–103; agent local-equation refinement of the boundary-map assertion."
+   }
+  },
+  {
+   "text": "For $s\\in H^0(C,\\mathcal O_D(D))$, refine $\\{U_i\\}$ (the restricted $f_i$ remain local equations) so that each $s|_{U_i}$ lifts, which is possible because $\\mathcal O_C(D)\\to\\mathcal O_D(D)$ is an epimorphism of sheaves, and choose representatives $q_i=g_i/f_i\\in\\mathcal O_C(D)(U_i)$. Its graph ideal is generated locally by $F_i=f_i+\\epsilon g_i$: indeed $af_i+\\epsilon b$ belongs to the graph iff $b-ag_i$ is divisible by $f_i$. This generator is a non-zero-divisor, since $F_i(a+\\epsilon b)=0$ first gives $f_i a=0$, then $f_i b=0$. On overlaps $q_j-q_i\\in\\mathcal O_C$, and $F_j=u_{ij}(1+\\epsilon(q_j-q_i))F_i$. Thus the transition ratios for $\\mathcal O(D_A)$ relative to $p^*\\mathcal O(D)$ are $1+\\epsilon(q_j-q_i)$ (or their inverses if frames are ordered oppositely), by the dual-ideal definition of the divisor line bundle. The Hilbert-to-Picard morphism on $A$-points is the class of this very divisor line bundle, not merely its closed-fibre class: if $x:\\operatorname{Spec}A\\to H_r$ is the tangent vector, then $\\gamma_r\\circ x$ corresponds by Yoneda to the pullback of $[\\mathcal O(D_r)]$, the pullback of the universal subscheme is $D_A$ by the definition of the representing isomorphism, and the pullback of a local generator of the universal ideal generates the ideal of $D_A$, hence is a unit multiple of the non-zero-divisor $F_i$; so the pulled-back invertible ideal maps isomorphically onto $\\mathcal I_{D_A}$, and dualizing gives $\\mathcal O(D_A)$. Translation by $-a_r(D)$ tensors with $p^*\\mathcal O_C(-D+rP)$; the fixed $-rP$ twist cancels, leaving $\\mathcal O(D_A)\\otimes p^*\\mathcal O(-D)$. Apply [lem-sfb-split-thickening-picard-cocycle] and the representing group isomorphism of [def-sc-jacobian]: the translated differential corresponds to the image of the additive cocycle $(q_j-q_i)$ in $H^1(C,\\mathcal O_C)$, up to the single sign convention just specified.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-sfb-split-thickening-picard-cocycle",
+    "def-sc-jacobian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III Proposition 2.1 and Theorem 5.1(b), pp.90–91 and 101–103; agent local-equation refinement of the boundary-map assertion."
+   }
+  },
+  {
+   "text": "The local lifts $q_i$ are lifts of the same section $s$ of $\\mathcal O_D(D)$ for the short exact module-sheaf sequence $0\\to\\mathcal O_C\\to\\mathcal O_C(D)\\to\\mathcal O_D(D)\\to0$. The statement of [lem-sc-boundary-cech-compatibility] sends precisely the differences $q_j-q_i$ under the canonical Cech comparison to its connecting class $\\delta(s)$. Therefore the differential computed in the preceding step is $\\delta$, up to the allowed sign. This proves the map comparison, not just equality of dimensions or kernels.",
+   "uses": [
+    "lem-sc-boundary-cech-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B8S, lemma-boundary-derivation-over-cup-product, local-lift calculation; sign fixed by the cited node."
+   }
+  },
+  {
+   "text": "Let $i:D\\hookrightarrow C$. Locally multiplication by $f_i$ identifies $\\mathcal O_C(D)/\\mathcal O_C$ with $i_*i^*\\mathcal O_C(D)$, since $f_i^{-1}\\mathcal O/(\\mathcal O)\\simeq\\mathcal O/(f_i)$. Apply [lem-sfb-closed-immersion-cokernel-cohomology] to $0\\to\\mathcal O_C\\to\\mathcal O_C(D)\\to i_*i^*\\mathcal O_C(D)\\to0$: its specified boundary gives an exact sequence of $k$-vector spaces starting with $0\\to H^0(C,\\mathcal O_C)\\to H^0(C,\\mathcal O_C(D))\\to H^0(C,\\mathcal O_D(D))\\to H^1(C,\\mathcal O_C)$. By [lem-sc-global-functions] its first nonzero term is $k$ (projective implies proper, and the smooth curve satisfies the lemma's final clause). Substituting Steps 2–4 gives the displayed exact sequence; changing the final map's sign does not change its kernel.",
+   "uses": [
+    "lem-sfb-closed-immersion-cokernel-cohomology",
+    "lem-sc-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III Proposition 2.1 and Theorem 5.1(b), pp.90–91 and 101–103; agent local-equation refinement of the boundary-map assertion."
+   }
+  },
+  {
+   "text": "The invertible module $\\mathcal O_C(D)$ is coherent on the Noetherian curve: on each trivializing affine its module is free of rank one. Hence [lem-pc-curve-coherent-finiteness] makes $V=H^0(C,\\mathcal O_C(D))$ finite dimensional. Step 5 identifies $\\ker(\\mathrm da_r)_D$ with the image of $V$, whose kernel is the embedded one-dimensional subspace of constants. Choosing a basis of that subspace and extending it to a basis of $V$ gives a basis of the quotient, so $\\dim_k\\ker(\\mathrm da_r)_D=\\dim_kV-1=h^0(C,\\mathcal O_C(D))-1$.",
+   "uses": [
+    "lem-pc-curve-coherent-finiteness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III Proposition 2.1 and Theorem 5.1(b), pp.90–91 and 101–103; agent local-equation refinement of the boundary-map assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "prop-pc-xk-integral",
+  "thm-pc-hilb-curves",
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "lem-sc-divisor-module-local",
+  "def-pc-hilb-functor",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-finite-embedded-dual-number-graphs",
+  "def-pc-divisor-line-bundle",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sfb-split-thickening-picard-cocycle",
+  "def-sc-jacobian",
+  "lem-sc-boundary-cech-compatibility",
+  "lem-sfb-closed-immersion-cokernel-cohomology",
+  "lem-sc-global-functions",
+  "lem-pc-curve-coherent-finiteness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Proposition 2.1 and Theorem 5.1(b), pp.90–91, 101–103; agent-written local-equation refinement using Stacks 0CZV, 0C6R and the existing Cech boundary theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The differential of the Abel morphism from the Hilbert scheme of divisors to the Picard scheme is the connecting map H0 O_D(D) to H1 O_C",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  (S : Type u₂) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u₃) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] → [IsScalarTower R S T] → Algebra.H1C\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R) {X Y : Dᵒᵖ} (f : X ⟶ Y) (x : ↑(R.obj X)),\\n  (ModuleCat.Hom.hom ((PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').map f))\\n      (CommRingCat.KaehlerDiffer\", \"doc\": \"For any morphism $ f: X \\to Y $ in the opposite category $ \\\\mathcal{D}^{\\\\text{op}} $ and any element $ x $ in the ring $ R(X) $, the differential of $ x $ followed by the morphism-induced map $ (\\\\text{\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent-complex connecting maps and tangent bundles of differential manifolds do not compute the tangent map of a curve divisor Hilbert-to-Picard morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent space to a Hilbert scheme of effective divisors on a smooth curve is H0 of the normal line bundle and the Abel map differential is the boundary map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"hfdifferential\", \"module\": \"Mathlib.Geometry.Manifold.DerivationBundle\", \"type\": \"{f : C^∞⟮I, M; I', M'⟯} {x : M} {y : M'} (h : f x = y) : PointDerivation I x →ₗ[𝕜] PointDerivation I' y\", \"doc\": \"Let $f: M \\\\to M'$ be a smooth map between manifolds over a field $\\\\mathbb{K}$, and let $x \\\\in M$. The differential of $f$ at $x$ is the $\\\\mathbb{K}$-linear map from the space of point derivations at $\"}\n  {\"name\": \"TangentSpace.vectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": VectorBundle 𝕜 E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a vector bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is indu\"}\n  {\"name\": \"TangentSpace.fiberBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": FiberBundle E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a fiber bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is induc\"}\n  {\"name\": \"tangentMap\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Defs\", \"type\": \"(f : M → M') : TangentBundle I M → TangentBundle I' M'\", \"doc\": \"The function $ \\\\text{tangentMap} $ assigns to each tangent vector $ (x, v) $ in the tangent bundle of $ M $ the pair $ (f(x), Df_x(v)) $, where $ Df_x $ is the Fréchet derivative of $ f $ at $ x $. Th\"}\n  {\"name\": \"tangentMapWithin_univ\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Basic\", \"type\": \": tangentMapWithin I I' f univ = tangentMap I I' f\", \"doc\": \"For manifolds $ M $ and $ M' $ modeled on $ I $ and $ I' $, and a differentiable function $ f: M \\\\to M' $, the tangent map restricted to the universal subset of $ M $ coincides with the standard tange\"}\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"tangentMap_chart\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Tangent\", \"type\": \"{p q : TangentBundle I M} (h : q.1 ∈ (chartAt H p.1).source) :\\n  tangentMap I I (chartAt H p.1) q =\\n    (TotalSpace.toProd _ _).symm ((chartAt (ModelProd H E) p : TangentBundle I M → ModelProd H E) q)\", \"doc\": \"For any points $p, q$ in the tangent bundle $TM$ of a manifold $M$ modeled on a normed vector space $E$ with corners structure $I$, if the base point of $q$ lies in the domain of the local chart at $p\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent-complex connecting maps and tangent bundles of differential manifolds do not compute the tangent map of a curve divisor Hilbert-to-Picard morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent-complex connecting maps and tangent bundles of differential manifolds do not compute the tangent map of a curve divisor Hilbert-to-Picard morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*tangent|picard.*tangent|Abel.*differential|normal.*bundle",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent-complex connecting maps and tangent bundles of differential manifolds do not compute the tangent map of a curve divisor Hilbert-to-Picard morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal divisor deformation induces the connecting homomorphism of zero to O to O(D) to O_D(D) on Picard tangent spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  (S : Type u₂) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u₃) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] → [IsScalarTower R S T] → Algebra.H1C\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"derivationQuotKerSq_mk\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] [inst_5 : Algebra R S] [inst_6 : IsScalarTower R P S] (x : P),\\n  (derivationQuotKerSq R P S) ((Ideal.Quotient.mk (RingHom.ker (algebraMap P S\", \"doc\": \"An $ R $-linear derivation from $ R $ to the tensor product of $ S $ with the module of Kähler differentials $ \\\\Omega_{P/R} $, where the target module is constructed as the quotient of $ P $ by the sq\"}\n  {\"name\": \"Algebra.Extension.toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.CotangentSpace →ₗ[S] Ω[S⁄R]\", \"doc\": \"The linear map from the cotangent space of the algebra extension to the module of Kähler differentials $\\\\Omega_{S/R}$, induced by the base change isomorphism for Kähler differentials that identifies $\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {M : Type u_1}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [inst_6 : IsScalarTower R S M]\\n  (D : Derivation R S M) (x : ↥(KaehlerDifferential.ideal R S)),\\n  D.liftKaehlerDifferent\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the cotangent module $ I/I^2 $ inherits the structure of an additive commutative group from $ R $. This quotient module, formed by taking the ideal $ I\"}\n  {\"name\": \"derivationQuotKerSq\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (P : Type u_2) →\\n    (S : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"An R-linear derivation from R to the tensor product of S with the module of Kähler differentials $\\\\Omega_{P/R}$, where the target module is constructed as the quotient of P by the square of the kernel\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent-complex connecting maps and tangent bundles of differential manifolds do not compute the tangent map of a curve divisor Hilbert-to-Picard morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential of the Abel map from effective curve divisors to Jacobian is the cohomology boundary H0 O_D(D) to H1 O",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  (S : Type u₂) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u₃) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] → [IsScalarTower R S T] → Algebra.H1C\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι) (P : Algebra.G\", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological connecting maps, cotangent complexes and elliptic-curve point class maps do not state the divisor Hilbert-to-Picard tangent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent space Hilbert scheme divisor normal sheaf and Abel Jacobi differential connecting homomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.δ\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \": S.X₃.homology i ⟶ S.X₁.homology j\", \"doc\": \"Given a short exact sequence $ S $ of homological complexes in an abelian category $ \\\\mathcal{C} $, indices $ i, j $ with a relation $ i \\\\to j $ in the complex shape, this morphism $ \\\\delta $ maps the\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \": Q.toExtension.H1Cotangent →ₗ[T] T ⊗[S] Ω[S⁄R]\", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \"(f : Hom Q' Q) (x) : δ Q P (Extension.H1Cotangent.map f.toExtensionHom x) = δ Q' P' x\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δ\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \": δ Q P = δ Q P'\", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \"(x : Q.ker) (hx) : δ Q P ⟨.mk x, hx⟩ = δAux R Q x.1\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \"(x : Q.toExtension.H1Cotangent) (y) (hy : Extension.Cotangent.map (ofComp Q P).toExtensionHom y = x.1) (z)\\n  (hz :\\n    (Extension.CotangentSpace.map (toComp Q P).toExtensionHom).liftBaseChange T z =\\n      (Q.comp P).toExtension.cotangentComplex y) :\\n  δ Q P x = P.toExtension.toKaehler.baseChange T z\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \": H1Cotangent S T →ₗ[T] T ⊗[S] Ω[S⁄R]\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ.congr_simp\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P P_1 : Algebra.Generators R\", \"doc\": \"For algebra extensions $ R \\\\to S \\\\to T $ with compatible scalar tower structures, if two algebra generator structures $ P $ and $ P_1 $ over $ R $ for $ S $ are equal, then the connecting homomorphism\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological connecting maps, cotangent complexes and elliptic-curve point class maps do not state the divisor Hilbert-to-Picard tangent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological connecting maps, cotangent complexes and elliptic-curve point class maps do not state the divisor Hilbert-to-Picard tangent comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*tangent|picard.*tangent|Abel.*differential|normal.*sheaf",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"line\": \"16\", \"text\": \"in an abelian category `C` with `Eᵣ`-pages defined from `r₀ : ℤ` having differentials\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean\", \"line\": \"28\", \"text\": \"noncomputable instance : IsNormalEpiCategory (PresheafOfModules.{v} R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean\", \"line\": \"33\", \"text\": \"noncomputable instance : IsNormalMonoCategory (PresheafOfModules.{v} R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean\", \"line\": \"342\", \"text\": \"/-- `@[simp]`-normal form of `toSheafify_app_apply`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"70\", \"text\": \"def normalizationDiagramMap : Y.presheaf ⟶ f.normalizationDiagram where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"224\", \"text\": \"  f.normalization.presheaf.mapIso (eqToIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"237\", \"text\": \"  change _ = f.normalization.presheaf.map (eqToHom (by simp [fromNormalization_preimage])).op ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"269\", \"text\": \"    ← cancel_mono (((normalizationOpenCover f).X ⟨U, hU⟩).presheaf.map (eqToHom H).op)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"470\", \"text\": \"        f.normalization.presheaf.map (eqToHom h₂).op ≫\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological connecting maps, cotangent complexes and elliptic-curve point class maps do not state the divisor Hilbert-to-Picard tangent comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-abel-image-geometry",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Proof prerequisite: Chapter III Theorem 5.1(b), pp.101–103, especially the kernel-dimension computation at the end of p.103; the boundary-map formulation is the first-order local-equation refinement of that computation (explained in report.md), with Picard tangent space from Proposition 2.1, pp.90–91.",
+   "via": [
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abel-differential-boundary",
+  "worker": "stage1",
+  "summary": "Checked Milne III Proposition 2.1 and Theorem 5.1(b), and Stacks 0CZV and 0C6R. Wrote an explicit graph-ideal and transition-unit proof of the boundary comparison, cited the existing module Cech boundary and closed-immersion cohomology sequences, and extracted only the general deformation and infinitesimal Picard input as two statement-only nodes. Kept the statement unchanged.",
+  "blueprint": "Realizes the inherited Abel-geometry prerequisite of the direct-image alteration route: the infinitesimal Abel map and kernel calculation in the Milne III 5.1(b) supporting input. The blueprint ancestor tool prints None; preserve the inherited null ancestor and full via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-divisor-module-local",
+    "why": "Local frames of divisor modules identify Hom(I,O_D) with the quotient normal module. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-morphism",
+    "why": "The represented morphism is induced on every test scheme by the universal divisor line bundle. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-sc-boundary-cech-compatibility",
+    "why": "General module-sheaf Cech boundary calculation, with the actual local lifts of Step 3. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Constants are all global functions on the proper smooth connected curve. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-pc-curve-coherent-finiteness",
+    "why": "Finite dimensionality of coherent cohomology makes the final dimension computation finite. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "thm-pc-hilb-curves",
+    "why": "Hilbert representation identifies tangent points with the divisor families in Step 1. No node of the six-functor stability unit supplies this generic algebraic-geometry fact."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projectivity supplies properness for the global-functions theorem. Used as a general tool, not to replace a unit-route step."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Smooth connected curve gives Noetherian integrality for the divisor conventions. Used as a general tool, not to replace a unit-route step."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Geometric integrality checks the Hilbert and Picard hypotheses. Used as a general tool, not to replace a unit-route step."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-agrees-sc",
+    "why": "Identifies the rational-function and Cartier-ideal meanings of O(D). Used as a general tool, not to replace a unit-route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-divisor-module-local",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-boundary-cech-compatibility",
+  "lem-sc-global-functions",
+  "lem-pc-curve-coherent-finiteness",
+  "thm-pc-hilb-curves",
+  "lem-pc-projective-proper",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "prop-pc-xk-integral",
+  "lem-pc-divisor-line-bundle-agrees-sc"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-9ccf33a68",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-9ccf33a68 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: Milne III Prop 2.1 and Thm 5.1(b) on pp.101–103, Stacks 0CZV and 0C6R. The statement is unchanged against live and side-live, where the item is still unsplit; there is no repair note. Step 1: the hypotheses chain holds. C is proper (H-projective over a field), Noetherian and integral, so a def-pc smooth projective curve, and geometrically integral via the point P; this covers thm-pc-hilb-curves, lem-sc-hilb-to-pic-morphism, lem-sc-pic-tangent-space and def-sc-jacobian. Step 2: the identification Hom(I,O/I)≅O(D)/O, h↦h(f_i)/f_i, is well defined, its inverse is correct, and the graph lemma's λ and two-parameter clauses give linearity. Step 3: I checked the generator F_i=f_i+εg_i of the graph ideal, that it is a non-zero-divisor, and the overlap identity F_j=u_ij(1+ε(q_j−q_i))F_i. The rP twist cancels. Step 4: lem-sc-boundary-cech-compatibility takes differences of lifts to ∂(s), with the sign allowed by the statement. Step 5: i_*i^*O(D)=O(D)/O canonically, c^0 is the identity, and lem-sc-global-functions gives H^0=k. Step 6 uses coherent finiteness and is elementary. New node lem-sfb-finite-embedded-dual-number-graphs: true (ideal check, flatness criterion, finite flat over A so free of rank r; edge cases Z empty and I=0), general, not a duplicate. New node lem-sfb-split-thickening-picard-cocycle: true for any X by 0C6R (the split thickening lifts units, 1+εc), and its pinning clause matches the 1+εg_ij construction in the proof of lem-sc-pic-tangent-space; not a duplicate. Batch-5: prop-pc-xk-integral, lem-sc-global-functions, def-sc-picard-functor and lem-sc-pic-tangent-space are generic curve and Picard facts or definitions, outside the trace-formula and Poincaré-duality assumptions; they reach sec-trace-formula only through the definition def-trf-schematically-dense-open. Accepted. The ten declared tool_uses are generic and accepted. FIX, Step 3 text only: (a) the lifts q_i on the affine U_i needed the uncited vanishing H^1(U_i,O)=0, so I refined the cover instead (the quotient map is an epimorphism of sheaves); (b) the claim that γ_r on A-points gives the class of O(D_A) is now argued: Yoneda pullback, the pulled-back local generator is a unit multiple of the non-zero-divisor F_i, so the pulled-back ideal is I_{D_A}, then dualize. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-abel-differential-boundary.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelDifferentialBoundary",
+  "declaration": "AlgebraicGeometry.abelDifferential_boundary",
+  "declarations": [
+   "AlgebraicGeometry.abelDifferentialTangent",
+   "AlgebraicGeometry.abelDifferentialCoefficient",
+   "AlgebraicGeometry.abelDifferentialDivisor",
+   "AlgebraicGeometry.abelDifferentialDeformation",
+   "AlgebraicGeometry.abelDifferentialInclusion",
+   "AlgebraicGeometry.abelDifferentialSequence",
+   "AlgebraicGeometry.abelDifferential_boundary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelDifferentialBoundary.lean",
+  "statement": "theorem abelDifferential_boundary {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [IsHProjective (C ↘ Spec (.of k))] (P : Spec (.of k) ⟶ C) (hP : P ≫ (C ↘ Spec (.of k)) = 𝟙 _) (J : Over (Spec (.of k))) [GrpObj J] (hJ : @IsJacobian k _ C (C ↘ Spec (.of k)) _ _ _ (@GeometricallyIntegral.of_isSepClosed k _ C inferInstance _ inferInstance (IsConnectedCurve.connectedSpace' (C ↘ Spec (.of k)))) J _) (eJ : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) (heJ : IsPicardZeroMul (C ↘ Spec (.of k)) eJ) (N : C.Pic) (hN : Nonempty ((fromSkeleton C.Modules).obj N.val ≅ P.ker.toModules)) (r : ℕ) (H : Over (Spec (.of k))) (eH : (hilbertPresheaf (C ↘ Spec (.of k)) r).RepresentableBy H) (a : H ⟶ J) (ha : ∀ (T : Over (Spec (.of k))) (z : T ⟶ H), ∃ (L : (pullback (C ↘ Spec (.of k)) T.hom).Pic) (hL : L * Scheme.Pic.map (pullback.fst (C ↘ Spec (.of k)) T.hom) (N ^ r) ∈ (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).obj (op T)), Nonempty ((fromSkeleton _).obj L.val ≅ (eH.homEquiv z).val.toModulesᵛ) ∧ eJ.homEquiv (z ≫ a) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).toFunctor).app (op T) ⟨L * Scheme.Pic.map (pullback.fst (C ↘ Spec (.of k)) T.hom) (N ^ r), hL⟩) (d : 𝟙_ (Over (Spec (.of k))) ⟶ H) : ∃ (rho : tangentSpaceAt H d ≃ abelDifferentialTangent k H (d.left (IsLocalRing.closedPoint k))) (rhoJ : tangentSpaceAt J (d ≫ a) ≃ abelDifferentialTangent k J ((d ≫ a).left (IsLocalRing.closedPoint k))) (da : abelDifferentialTangent k H (d.left (IsLocalRing.closedPoint k)) →ₗ[k] abelDifferentialTangent k J ((d ≫ a).left (IsLocalRing.closedPoint k))) (alpha : abelDifferentialTangent k H (d.left (IsLocalRing.closedPoint k)) ≃ₗ[k] (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).X₃.H 0) (tau : abelDifferentialTangent k J ((d ≫ a).left (IsLocalRing.closedPoint k)) ≃ₗ[k] tangentSpaceAt J η[J]) (beta : tangentSpaceAt J η[J] ≃ₗ[k] (Scheme.Modules.unit C).H 1) (hs : (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).ShortExact), (∀ v : tangentSpaceAt H d, (rho v).val = abelDifferentialCoefficient k H (d.left (IsLocalRing.closedPoint k)) ≫ inv (Scheme.dualNumbersToSpec (.of k)) ≫ v.val.left) ∧ (∀ v : tangentSpaceAt J (d ≫ a), (rhoJ v).val = abelDifferentialCoefficient k J ((d ≫ a).left (IsLocalRing.closedPoint k)) ≫ inv (Scheme.dualNumbersToSpec (.of k)) ≫ v.val.left) ∧ (∀ v : tangentSpaceAt H d, da (rho v) = rhoJ ⟨v.val ≫ a, (Category.assoc _ _ _).symm.trans (congrArg (fun q ↦ q ≫ a) v.property)⟩) ∧ (∀ v : tangentSpaceAt J (d ≫ a), (tau (rhoJ v)).val = v.val * (CartesianMonoidalCategory.toUnit _ ≫ (d ≫ a))⁻¹) ∧ (∀ (v : tangentSpaceAt J η[J]) (L : (pullback (C ↘ Spec (.of k)) (Scheme.dualNumbersOver (Spec (.of k))).hom).Pic) (hL : L ∈ (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).obj (op (Scheme.dualNumbersOver (Spec (.of k))))), eJ.homEquiv v.val = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).toFunctor).app (op (Scheme.dualNumbersOver (Spec (.of k)))) ⟨L, hL⟩ → beta v = Sheaf.H.map C.dualNumbersUnitsRetract 1 (Scheme.Pic.toH1UnitsDualNumbers C (Scheme.Pic.map (Scheme.isPullback_dualNumbersProj (C ↘ Spec (.of k))).isoPullback.hom L))) ∧ (∃ sign : ℤ, (sign = 1 ∨ sign = -1) ∧ ∀ v, beta (tau (da v)) = sign • Scheme.Modules.H.δ hs 0 (alpha v)) ∧ (∃ c : k →ₗ[k] (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d).toModulesᵛ.H 0, (∀ t : k, Scheme.Modules.H.zeroLinearEquiv _ (c t) = (abelDifferentialInclusion (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).app ⊤ (Scheme.globalSectionsRingHom k t)) ∧ Function.Injective c ∧ Function.Exact c (fun z ↦ alpha.symm (Scheme.Modules.H.map (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).g 0 z)) ∧ Function.Exact (fun z ↦ alpha.symm (Scheme.Modules.H.map (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).g 0 z)) da) ∧ Module.finrank k (LinearMap.ker da) = Module.finrank k ((abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d).toModulesᵛ.H 0) - 1 ∧ (∀ (v : tangentSpaceAt H d) (U : C.Opens) (s : (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d).toModules.val.obj (op U)) (_hsfree : Scheme.Modules.IsFreeGenerator s) (t : (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d).toModulesᵛ.val.obj (op U)), (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).g.app U t = (abelDifferentialSequence (abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d)).X₃.presheaf.map (homOfLE le_top).op (Scheme.Modules.H.zeroLinearEquiv _ (alpha (rho v))) → (abelDifferentialDeformation (C ↘ Spec (.of k)) r H eH v.val).idealOfOpens U = Ideal.span {TrivSqZeroExt.inl ((abelDifferentialDivisor (C ↘ Spec (.of k)) r H eH d).toModulesι.app U s) + TrivSqZeroExt.inr (t.app (op (Over.mk (𝟙 U))) s)})",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six concrete helper constructions specify the actual divisor ideal, coefficient transport, k-module carrier and quotient sequence. The theorem characterizes all tangent comparisons, including the local graph and canonical Picard units formulas. The existing natural module-cohomology/source comparison identifies the H model used here with pqf-def-cohomology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3460b604a",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery of cfc325934a3d (RETURN H2+H9). Diff vs prior snapshot: only the unused public import of ModuleCohomologySourceComparison is removed and lem-sc-module-cohomology-source-comparison is dropped from stmt_deps; signature and helpers byte-identical. stmt_deps (11), statement, proof and proof_deps equal the side-live base; lean.statement verbatim in file; no other dag records in the delivery. Re-read independently: IsJacobian is a Prop whose represents field is ∃φ with IsPicardZeroMul, so eJ/heJ are the fixed φ; ha pins a_r = [dual Hilbert ideal ⊗ N^r] with N = P.ker on all test schemes; rho/rhoJ/da/tau pinned by morphism formulas; beta pinned via the units retraction a+εb↦a⁻¹b (a homomorphism; sheafification bijective over k[ε]); alpha pinned by the local graph ideal f+ε t(s) (well-defined mod O, matches Step 3); one ±1 sign for all v; injectivity + 2 exactness clauses; finrank ker = h0−1. Edge cases r=0, genus 0, char 2, non-reduced D, U=∅, single universe all OK. Six helpers carry real data, proof is sorry only, docstrings present, no name clashes in side-live. Advisory: O(D) uses the dual-ideal convention (def-pc-divisor-line-bundle, outside stmt_deps). No file changed, nothing compiled."
+ }
+}

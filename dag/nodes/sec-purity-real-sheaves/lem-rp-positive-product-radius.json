@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Write $a_{j,0}=1$. Fix $j\\in J$ and $n\\ge0$. By degreewise local finiteness in [d-real-series], choose a finite subset $S\\subset J$ containing $j$ and every factor with a nonzero positive-degree coefficient of degree at most $n$. The coefficient of $t^n$ in $F$ is that in $\\prod_{i\\in S}f_i$. In the coefficient expansion, the term choosing degree $n$ in factor $j$ and degree zero in every other factor is $a_{j,n}$; all other terms are nonnegative. Thus $0\\le a_{j,n}\\le A_n$. This also gives $A_n\\ge0$ (and $A_0=1$).",
+   "text": "Fix a factor j and a degree n. Choose the finite set S in the local finiteness hypothesis. Products of the factors have nonnegative coefficients by induction using the antidiagonal formula for multiplication, and constant coefficient one. If j is in S, write the product as f_j times the product over S\\{j}; the antidiagonal term (n,0) is a_{j,n}, and all other terms are nonnegative. If j is absent and n>0, local finiteness forces a_{j,n}=0. At degree zero both constant coefficients are one. Thus 0 ≤ a_{j,n} ≤ A_n, and all A_n are nonnegative, in the conventions of [d-real-series].",
    "uses": [
     "d-real-series"
    ],
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "For every $0\\le t<R$ and fixed $j$, step 1 gives $0\\le a_{j,n}t^n\\le A_nt^n$. Apply [lem-rp-nonnegative-summable-comparison] with $I=\\mathbf N$, $u_n=a_{j,n}t^n$, and $v_n=A_nt^n$, summable by step 2. Thus $\\sum_n|a_{j,n}|t^n$ converges for every such $t$. By the supremum definition of radius in [d-real-series], $R(f_j)\\ge R$. For $R=\\infty$ this means convergence at every finite $t\\ge0$. If $R=0$, the radius bound is automatic and the disc is empty.",
+   "text": "By [d-real-series], nonnegative complex coefficients have norm equal to their real part, so step 2 gives summability of ∑ ‖A_n‖ t^n. The proved source-library PowerSeries.le_radius_of_summable and ENNReal.le_of_forall_nnreal_lt give R ≤ radius(F), including R=0 and R=∞. The coefficient inequalities in step 1 give ‖a_{j,n}‖ ≤ ‖A_n‖. Apply the proved PowerSeries.radius_le_radius_of_norm_coeff_le, whose proof uses [lem-rp-nonnegative-summable-comparison], to get radius(F) ≤ radius(f_j). Compose the inequalities.",
    "uses": [
     "lem-rp-nonnegative-summable-comparison",
     "d-real-series"
@@ -51,23 +51,14 @@
    }
   },
   {
-   "text": "For the last assertion write $P=P_j=\\sum_{k=0}^d p_kt^k$ and $f_j=\\sum_{n\\ge0}b_nt^n$ with $b_n=a_{j,n}\\ge0$. By the coefficientwise product convention in [d-real-series], $Pf_j=1$ says $\\sum_{k=0}^{\\min(d,m)}p_kb_{m-k}=\\delta_{m,0}$. Put $s_N(z)=\\sum_{n=0}^N b_nz^n$. For $N\\ge d$, multiply these coefficient equations by $z^m$ and sum over $0\\le m\\le N$. Rearranging this finite sum gives $1=\\sum_{k=0}^d p_kz^k s_{N-k}(z)$.",
+   "text": "For f_j=P⁻¹ and P(0)=1, the constant coefficient of P is nonzero. Apply the already proved PowerSeries.eval_ne_zero_of_lt_radius_inv from WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius. A point z in the disc of radius R has ‖z‖ < R ≤ radius(f_j)=radius(P⁻¹) by step 3. The cited theorem evaluates the absolutely convergent Cauchy product P P⁻¹=1 at z; if P(z)=0 this would give 0=1. This implements the unit route that a zero cannot cancel the numerator one.",
    "uses": [
     "d-real-series"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
-    "place": "## Proof, last sentence: expand the inverse-polynomial identity"
-   }
-  },
-  {
-   "text": "Suppose $P(z)=0$ with $|z|<R$. Subtract $P(z)s_N(z)=0$ from step 4 and use the triangle inequality to obtain $1\\le\\sum_{k=0}^d |p_k||z|^k\\sum_{n=N-k+1}^N b_n|z|^n$, where the inner sum is empty for $k=0$. Step 3 gives convergence of the real series $\\sum_n b_n|z|^n$. For each fixed $k$ its displayed tail tends to zero, being a difference of two partial sums with the same limit. There are only finitely many $k$, so the right side tends to zero, contradicting $1\\le0$. Thus $P(z)\\ne0$ throughout the disc; this also covers $P=1$ and $z=0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
-    "place": "## Proof, last sentence: finite-tail contradiction prevents cancellation of numerator 1"
+    "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-lem-wrp-positive-euler/lem-rp-positive-product-radius.proof.md",
+    "place": "Final sentence: a zero of the polynomial is a pole of its reciprocal."
    }
   }
  ],
@@ -78,8 +69,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
-  "place": "## Proof, coefficient domination and inverse-polynomial argument; analytic input replaced by Mathlib Taylor convergence and comparison test"
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-lem-wrp-positive-euler/lem-rp-positive-product-radius.proof.md",
+  "place": "Coefficient domination and radius comparison; Taylor convergence replaces Cauchy estimates, and the proved source-library inverse-polynomial theorem supplies the no-cancellation conclusion by an absolutely convergent Cauchy product."
  },
  "mathlib_searches": [
   {
@@ -198,7 +189,18 @@
   "d-real-series"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-p-real-rankin",
  "split_report": {
@@ -234,5 +236,15 @@
   "group": "Q78",
   "result": "pass",
   "note": "Statement, hypotheses, conclusions, dependencies, docstrings, edge cases, report sections, route-pivot status, and scompile evidence all checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261024T185932-L-3784817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

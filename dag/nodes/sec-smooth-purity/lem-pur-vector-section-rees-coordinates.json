@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-vector-section-rees-coordinates",
+ "kind": "statement",
+ "title": "Rees family and endpoint presentations from a global affine frame",
+ "statement": "Let B be Noetherian, g:T→B separated and quasi-compact smooth of rank d, and s a closed section [lem-pur-dnc-section-geometry]. Let F be locally free of rank d [def-asd-vector-bundle-zero-section], c:E(F)≅A^d_B a global frame over B preserving zero, and e:E(F)≅T over B sending zero to s. There exists a source presentation e-prime:E(F)≅T over B preserving zero and a VectorReesModel for e-prime: an isomorphism E(F)≅N_s over B preserving zero, a section-preserving family isomorphism E(F)×_B A1_B≅D_sT over A1_B, and equations identifying its two endpoint inclusions with e-prime followed by the actual one-fibre inclusion and the normal isomorphism followed by the actual zero-fibre inclusion. The constant-family maps are the explicit pullback lifts vectorReesFibre and vectorReesZero.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.md",
+  "place": "Clause (4), the standard pair; framewise relative-spectrum Rees computation"
+ },
+ "stmt_deps": [
+  "lem-pur-dnc-section-geometry",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof": [
+  {
+   "text": "Identify (T,s) with the standard affine pair using e inverse followed by c. Apply the coefficientwise etale Rees comparison to this isomorphism. Its pullback square makes the family map an isomorphism, compatible with projection and augmentation. Compose with the published standard-pair deformationSpaceToAffineSpace isomorphism.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the global frame c to the affine line and compose with the inverse deformation coordinates. This constructs the family isomorphism over the line preserving its section. Take pullbacks at one and zero. Uniqueness of Cartesian cones supplies e-prime and the normal isomorphism with their actual endpoint equations. Pullback extensionality proves the zero equations, using the section identities and vectorReesZero. The same constructions cover rank zero and empty bases.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-rees-base-change-etale",
+  "lem-pur-dnc-section-geometry",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.md",
+  "place": "Clause (4), the standard pair; framewise relative-spectrum Rees computation",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone of the zero section of a vector bundle is its pullback to the affine line",
+   "results": "8 hits concerning affine-space maps, pullback squares and topological vector bundles. No exact Rees-family theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the project Rees and section-exchange API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoIsPullback",
+   "results": "9 categorical pullback-coordinate hits; no geometric Rees-family or section-exchange normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Categorical tools suffice for pasting, not for the Rees construction."
+  },
+  {
+   "tool": "grep",
+   "query": "deformationSpace.*(Iso|iso)|zeroSection.*deformation|IsFiniteLocallyFreeOfRank.*free",
+   "results": "No Mathlib hits. Project search found the free-module frame, restrictedAffineDiagonalCoordinates, the polynomial extended-Rees equivalence, section-base-change composition, and delta_etale_reading. Blueprint searches found standard-pair clause (4) and the cited Agreement proof. No exact vector-family model with both endpoint equations exists. A later source-library search found the proved standard-pair theorem Scheme.Hom.isIso_deformationSpaceToAffineSpace; its endpoint presentations are obtained by pullback.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved standard-pair Rees isomorphism, construct actual endpoint presentations by pullback, and prove their section-exchange readings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedAffineDiagonalDncVectorCoordinates",
+  "date": "2026-10-27",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: difference coordinates and the standard-pair DNC",
+   "via": [
+    "lem-pur-restricted-affine-diagonal-dnc-vector-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorSectionReesCoordinates",
+  "file": "lean/Sheaf/Paper/VectorSectionReesCoordinates.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorSection_reesCoordinates",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.vectorReesFibre",
+   "WeilConjectures.PurityFiniteSetting.vectorReesZero",
+   "WeilConjectures.PurityFiniteSetting.VectorReesModel",
+   "WeilConjectures.PurityFiniteSetting.vectorSection_reesCoordinates"
+  ],
+  "statement": "theorem vectorSection_reesCoordinates {T B : Scheme.{u}} [IsNoetherian B] (d : ℕ)\n    (g : T ⟶ B) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]\n    (s : B ⟶ T) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)\n    (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (c : VectorBundleZeroSection.scheme B d F ≅ AffineSpace (ULift.{u} (Fin d)) B)\n    (wc : c.hom ≫ (AffineSpace (ULift.{u} (Fin d)) B ↘ B) =\n      VectorBundleZeroSection.π B d F)\n    (zc : VectorBundleZeroSection.zero B d F ≫ c.hom =\n      AffineSpace.zeroSection (ULift.{u} (Fin d)) B)\n    (e : VectorBundleZeroSection.scheme B d F ≅ T)\n    (we : e.hom ≫ g = VectorBundleZeroSection.π B d F)\n    (ze : VectorBundleZeroSection.zero B d F ≫ e.hom = s) :\n    ∃ (e' : VectorBundleZeroSection.scheme B d F ≅ T)\n      (_we' : e'.hom ≫ g = VectorBundleZeroSection.π B d F)\n      (_ze' : VectorBundleZeroSection.zero B d F ≫ e'.hom = s),\n      Nonempty (VectorReesModel d g s F e')",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T021419-L-2771695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T021419-L-2771695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

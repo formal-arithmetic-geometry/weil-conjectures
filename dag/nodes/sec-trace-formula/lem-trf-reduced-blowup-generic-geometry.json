@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-reduced-blowup-generic-geometry",
+ "kind": "statement",
+ "title": "Generic geometry of an ordinary blowup of a reduced scheme",
+ "statement": "Let $S$ be a reduced scheme of finite type over $\\mathbf Q$ [def-pc-reduced-scheme, def-weil-finite-type-morphism], and let $J\\subseteq\\mathcal O_S$ be a coherent quasi-coherent ideal [pqf-def-coherent]. Suppose $U=S\\setminus V(J)$ is dense in every irreducible component [def-weil-irreducible-components]. For the ordinary blowup $b:W=\\operatorname{Bl}_J(S)\\to S$ [def-nagata-global-blowup], $W$ is reduced, locally Noetherian with finitely many irreducible components [pqf-def-locnoeth], and of finite type over $\\mathbf Q$, and $b$ is proper [def-weil-proper-morphism] and surjective [def-weil-surjective-morphism]. The restriction $b^{-1}U\\to U$ is an isomorphism and $b^{-1}U$ is dense in every irreducible component of $W$. The map $b$ induces a bijection of generic points [def-sc-generic-point], with isomorphic residue fields, between the irreducible components of $W$ and those of $S$. Equivalently, corresponding reduced components are birational, meaning isomorphic on dense open subschemes. The empty scheme and the unit ideal are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII 2.1.1--2.1.3 and 2.2.1--2.2.3 (printed pp.86--87,90); ordinary-blowup input to the normalized-blowup argument of lem-trf-local-term-locality proof (1)--(2). Stacks Tags 0808 (divisors.tex, lemma-blow-up-reduced-scheme), 0BFM (lemma-blow-up-and-irreducible-components), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), 02NS (lemma-blowing-up-projective)."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-generic-point",
+  "pqf-def-locnoeth",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Coherence of $J$ implies finite type by [pqf-def-coherent]. Apply [lemma-nagata-blowup-proper] to obtain properness of $b$. In particular $b$ is of finite type by [def-weil-proper-morphism]. Composing with $S\\to\\operatorname{Spec}\\mathbf Q$ using [lem-sfb-finite-type-composition-base-change] gives that $W$ is of finite type over $\\mathbf Q$. The spectrum of $\\mathbf Q$ is locally Noetherian: its ring is a field, whose only ideals are zero and the unit ideal. Thus [pqf-lem-locnoeth-lft] applies to both $S$ and $W$, giving local Noetherianity. Both have finite affine covers by [def-weil-finite-type-morphism]; refine these by Noetherian affine neighbourhoods and take a finite subcover using quasi-compactness. Each member has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. A descending chain of closed subsets stabilizes on each member, hence globally after the maximum of finitely many stabilization indices. Thus both underlying spaces are Noetherian and have finitely many components by [lem-sc-noetherian-finite-irreducible-components]. Every subset of either space is quasi-compact by [lem-sfb-noetherian-space-compact-subsets]; in particular the open immersion $j:U\\hookrightarrow S$ is quasi-compact (apply this to its intersection with each affine open). It is quasi-separated since its diagonal is an isomorphism.",
+   "uses": [
+    "pqf-def-coherent",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-finite-type-morphism",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02NS (divisors.tex, lemma-blowing-up-projective), 01T3 (lemma-composition-finite-type), 01T6 (lemma-finite-type-noetherian); properties.tex Tag 01OZ (lemma-Noetherian-topology)"
+   }
+  },
+  {
+   "text": "Since components cover $S$ by [lem-sc-irreducible-components-cover], the hypothesis on every component implies that $U$ is dense in $S$. At every point of $U=S\\setminus V(J)$ the stalk of $J$ is the unit ideal, so $J|_U=\\mathcal O_U$. By [thm-nagata-global-blowup-complement], $V=b^{-1}U\\to U$ is an isomorphism. Apply [lemma-nagata-reduced-dense-image-schematic] to the reduced scheme $S$ and the quasi-compact, quasi-separated dense open immersion $j$ verified in Step 1. Its scheme-theoretic image is $S$. Since $j$ is quasi-compact, [def-nagata-scheme-theoretic-image] identifies its image ideal with the actual kernel of $\\mathcal O_S\\to j_*\\mathcal O_U$; this kernel is therefore zero. Thus $j$ is scheme-theoretically dense in the precise injectivity sense of [def-nagata-scheme-theoretically-dense-open].",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "def-nagata-scheme-theoretic-image",
+    "def-nagata-scheme-theoretically-dense-open",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056D (lemma-reduced-scheme-theoretically-dense); divisors.tex Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), clause (1)"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-admissible-blowup-preserves-density] to $j$ and $J$: quasi-compactness, schematic density, finite type of $J$, and $J|_U=\\mathcal O_U$ have all been checked. It gives injectivity of $\\mathcal O_W\\to k_*\\mathcal O_V$, where $k:V\\hookrightarrow W$, by [def-nagata-scheme-theoretically-dense-open]. The open $V$ is quasi-compact by Step 1. This also implies topological density: a nonempty open $T\\subset W$ disjoint from $V$ would force $\\mathcal O_W|_T$ to inject into the zero sheaf, impossible at a point of $T$ since its local ring has a proper maximal ideal.",
+   "uses": [
+    "lemma-nagata-admissible-blowup-preserves-density",
+    "def-nagata-scheme-theoretically-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor); the schematic-density argument from its effective Cartier exceptional divisor"
+   }
+  },
+  {
+   "text": "The open $U$ is reduced: its local rings are the corresponding local rings of $S$. Thus $V\\cong U$ is reduced by [def-pc-reduced-scheme]. For any open $T\\subseteq W$, let $s\\in\\mathcal O_W(T)$ satisfy $s^n=0$ with $n\\ge1$. Its restriction to $T\\cap V$ is nilpotent and hence zero. The injectivity in Step 3 forces $s=0$. Every ring of sections of $W$ is therefore reduced, which is the equivalent criterion in [def-pc-reduced-scheme].",
+   "uses": [
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056E (lemma-reduced-subscheme-closure), proof by restricting nilpotent sections to the schematically dense reduced open"
+   }
+  },
+  {
+   "text": "Here is the finite-component argument in full. In either $X=S$ or $X=W$, let $C$ be a component and remove the union of all other components. This is an open subset of $X$, nonempty because a maximal irreducible subset cannot be covered by finitely many other closed components. A dense open $O$ meets this open, so $C\\cap O$ is nonempty; it is an open subset of the irreducible space $C$, hence dense and irreducible. Its closure in $X$ is $C$. By [lem-sc-irreducible-components-cover], components cover $X$, and every irreducible subset of $O$ has irreducible closure contained in a component of $X$; maximality now shows that the components of $O$ are exactly the distinct $C\\cap O$. Apply this with $O=U$ and $O=V$, dense by hypothesis and Step 3. The isomorphism $V\\cong U$ matches these components, and taking closures gives a bijection between the components of $W$ and $S$. In particular $V$ is dense in every component of $W$. By [lem-sc-scheme-sober] each component has a unique generic point. This point belongs to any nonempty open subset of the component (otherwise its whole closure would be in the closed complement). Thus all these generic points lie in $V$ or $U$, and the isomorphism matches them. The component bijection is the map induced by $b$: continuity gives $b(\\overline{\\{\\xi\\}})\\subseteq\\overline{\\{b(\\xi)\\}}$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-sc-scheme-sober",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BFM (lemma-blow-up-and-irreducible-components); finite-component topological argument using the dense open of Steps 2--3"
+   }
+  },
+  {
+   "text": "At corresponding generic points $\\xi\\in V$ and $\\eta=b(\\xi)\\in U$, the map of local rings induced by $b$ is an isomorphism because $V\\to U$ is an isomorphism and open restriction does not change local rings. Quotienting by the maximal ideals gives the asserted isomorphism $\\kappa(\\eta)\\to\\kappa(\\xi)$ by [def-weil-residue-field]. For corresponding components $C'\\subset W$, $C\\subset S$, the isomorphism $V\\to U$ identifies $C'\\cap V$ with $C\\cap U$. Equip components with their reduced induced structures. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme], applied inside the two isomorphic opens, shows that this is an isomorphism of the reduced component opens. They are dense by Step 5, proving the stated birationality.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01J4 (definition-reduced-induced-scheme); divisors.tex Tag 0BFM"
+   }
+  },
+  {
+   "text": "Properness makes the image $b(W)$ closed by [def-weil-proper-morphism] (take the identity base change). It contains $U$ by Step 2. Since $U$ is dense in $S$, this closed image is all of $S$, which is surjectivity by [def-weil-surjective-morphism]. If $S$ is empty the finite covers, components and generic-point sets above are empty and surjectivity is vacuous. If $J=\\mathcal O_S$, then $U=S$ and Step 2 identifies the whole blowup with $S$; all assertions follow as well.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), properness and closed-image argument; Tag 02OS, unit-ideal case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-scheme-theoretically-dense-open",
+  "lem-sc-irreducible-components-cover",
+  "lemma-nagata-admissible-blowup-preserves-density",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-weil-residue-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Assembly from Tags 02OS, 02NS, 0808, 0BFM, with morphisms.tex Tags 01T3, 01T6, 056D, 056E and schemes.tex Tag 01J3; the reducedness argument is written out using existing schematic-density nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up.*(reduced|generic|birational)|(?:reduced|generic|birational).*blow.?up",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-reduced-blowup-generic-geometry: A blow up along an ideal avoiding all generic points has the same irreducible components and is an isomorphism off the center",
+   "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"reduced\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-reduced-blowup-generic-geometry: Blowup of a reduced finite type scheme along a nowhere dense coherent ideal is reduced proper surjective birational and preserves generic points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsReduced",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-reduced-blowup-generic-geometry: The Rees algebra blowup of a reduced scheme has no nilpotents, is proper for finitely generated ideals, and induces a bijection on generic points not in the center",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced",
+   "date": "2026-10-22",
+   "verdict": "no match: relative morphism normalization and general scheme-property results do not state this absolute normalized-blowup assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, generic open immersion or general reduced-scheme declarations do not assert the ordinary-blowup package."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up.*(reduced|generic|birational)|(?:reduced|generic|birational).*blow.?up",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, generic open immersion or general reduced-scheme declarations do not assert the ordinary-blowup package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-reduced-blowup-generic-geometry: blowup of reduced finite type scheme is reduced proper and birational when the center avoids generic points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, generic open immersion or general reduced-scheme declarations do not assert the ordinary-blowup package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-reduced-blowup-generic-geometry: blowup reduced scheme isomorphism away from center generic points",
+   "results": "8 hits; AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced.recOn, AlgebraicGeometry.IsReduced.casesOn, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.isReduced_of_isIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, generic open immersion or general reduced-scheme declarations do not assert the ordinary-blowup package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-reduced-blowup-generic-geometry: Rees algebra Proj preserves reducedness and components away from the exceptional Cartier divisor",
+   "results": "8 hits; AlgebraicGeometry.Proj, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, generic open immersion or general reduced-scheme declarations do not assert the ordinary-blowup package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalized-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO Expose VIII 2.1.1--2.1.3 and 2.2.1--2.2.3 (printed pp.86--87,90); ordinary-blowup input to the normalized-blowup argument of lem-trf-local-term-locality proof (1)--(2). Stacks Tags 0808 (divisors.tex, lemma-blow-up-reduced-scheme), 0BFM (lemma-blow-up-and-irreducible-components), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), 02NS (lemma-blowing-up-projective).",
+   "via": [
+    "lem-trf-normalized-blowup-calculus",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-blowup-generic-geometry",
+  "worker": "stage1",
+  "summary": "Q158 preserves the statement and supplies seven proof steps using existing DAG results only. Schematic density of the reduced complement proves reducedness by injectivity on sections; finite-component topology supplies the generic bijection, dense component opens and residue-field clause. No new nodes are needed.",
+  "blueprint": "Ordinary-blowup input in the inherited chain serving lem-trf-local-term-locality proof (1)--(2), via lem-trf-normalized-blowup-calculus. Current latest locality proof has no direct blowup assertion; the ILO VIII 2.1 input is below its imported specialization route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-f973f625c",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-f973f625c (reviewer sub-agent of L); spot-checked: I read the item and all 21 cited statements in full. The delivery is a single commit with no new nodes and an unchanged statement; the only stmt_dep added is def-weil-residue-field, which the residue-field clause needed. All seven steps are correct and every hypothesis is checked. Step 1: S and W are Noetherian spaces via finite Noetherian affine covers, so j is quasi-compact and quasi-separated. Step 2: reduced S plus dense j gives SIm(j)=S, so O_S→j_*O_U is injective because j is quasi-compact. Step 3: the admissible-blowup density lemma applies with all four hypotheses verified, and topological density follows. Step 4: W is reduced by the injectivity on sections, which is genuinely elementary. Step 5: the finite-component argument is checked: the components of a dense open O are exactly the C∩O, and the homeomorphism V≅U matches the generic points. Step 6: residue fields agree, and the reduced component opens are identified by the uniqueness clause (3) of lem-weil-pbc-reduced-induced-closed-subscheme; the step is terse but elementary. Step 7: surjectivity follows from closed image plus density. The statement agrees with Stacks 0808 and 0BFM (divisors.tex). I tested the empty scheme, the unit ideal, Spec Q[x,y]/(xy) with centre (x,y), and the excluded zero-ideal and non-reduced cases. A search for 0808/0BFM/blowup+reduced found no duplicate: the integral, proper-over-a-field and excellent blowup nodes are all narrower. The other-unit Nagata, sc and sfb tools are generic, for the maintainer to record as tool_uses; there is no SGA. review_split.py reports 'no such node' only because it does not follow the chapter symlinks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedBlowupGenericGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.reducedBlowup_generic_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedBlowupGenericGeometry.lean",
+  "statement": "theorem reducedBlowup_generic_geometry (S : Scheme.{u}) (q : S ⟶ Spec (.of (ULift.{u} ℚ))) [IsReduced S] [LocallyOfFiniteType q] [QuasiCompact q] (J : S.IdealSheafData) (hJ : RingedSpace.IsCoherent S.toRingedSpace J.toModules) (hcentre : ∀ C ∈ irreducibleComponents S, Dense {x : C | x.1 ∈ J.support.compl}) : IsReduced J.blowup ∧ IsLocallyNoetherian J.blowup ∧ (irreducibleComponents J.blowup).Finite ∧ LocallyOfFiniteType (J.blowupMap ≫ q) ∧ QuasiCompact (J.blowupMap ≫ q) ∧ IsProper J.blowupMap ∧ Surjective J.blowupMap ∧ IsIso (J.blowupMap ∣_ J.support.compl) ∧ (∀ C ∈ irreducibleComponents J.blowup, Dense {x : C | J.blowupMap x.1 ∈ J.support.compl}) ∧ Set.BijOn J.blowupMap (genericPoints J.blowup) (genericPoints S) ∧ (∀ x ∈ genericPoints J.blowup, IsIso (J.blowupMap.residueFieldMap x)) ∧ (∀ (C : TopologicalSpace.Closeds J.blowup) (D : TopologicalSpace.Closeds S), (C : Set J.blowup) ∈ irreducibleComponents J.blowup → (D : Set S) ∈ irreducibleComponents S → (∃ x : J.blowup, IsGenericPoint x (C : Set J.blowup) ∧ IsGenericPoint (J.blowupMap x) (D : Set S)) → ∃ (V : (vanishingIdeal C).subscheme.Opens) (U : (vanishingIdeal D).subscheme.Opens), Dense (V : Set (vanishingIdeal C).subscheme) ∧ Dense (U : Set (vanishingIdeal D).subscheme) ∧ ∃ e : V.toScheme ≅ U.toScheme, e.hom ≫ U.ι ≫ (vanishingIdeal D).subschemeι = V.ι ≫ (vanishingIdeal C).subschemeι ≫ J.blowupMap)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Coherence of the ideal module is expressed by AlgebraicGeometry.RingedSpace.IsCoherent from WeilConjectures.AlgebraicGeometry.Coherent: finite type and finite-type kernels of all finite-free maps on every open (Stacks 01BV). The live pqf-def-coherent record's Q25 primary declaration Scheme.Modules.IsQuasiCoherentFiniteType records only quasi-coherence and finite type; it does not express that full coherence clause. This item imports and uses the existing full-coherence definition directly, with J.toModules supplied by WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module. The pqf-def-coherent record and its Q25 declaration are preserved, as required by return H13; no dependency record replacement or duplicate definition is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-627601d04",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of 6ce721f2a13d. All 10 dependency records in the snapshot, including pqf-def-coherent, are byte-identical to side-live, so the Q25 rebind is gone. The item node differs from live only in its lean record. The added lean.note explains that coherence uses upstream RingedSpace.IsCoherent (01BV) on J.toModules while the Q25 IsQuasiCoherentFiniteType record is preserved. The item module is byte-identical to the returned head (sha256 58ed22c0...) and lean.statement appears verbatim in it. Statement re-checked against the node and Stacks 0808/0BFM/02OS/02NS. Hypotheses: reduced S; finite type via q to Spec ULift Q; coherent J; density of the complement in each component. Conclusions: reduced, locally Noetherian, finitely many components and finite type over Q; the actual blowupMap is proper and surjective; an isomorphism over the complement whose preimage is dense in each component; BijOn on genericPoints; IsIso of residueFieldMap; a b-compatible dense-open isomorphism of the reduced induced components. Edge cases: empty S and unit ideal allowed, zero ideal on nonempty S excluded as in the source. Docstrings, sorry-only proof and both report sections are fine; no extra hypotheses, no pro-etale substitute. No compile, since no file was changed. Advisory: the live pqf-def-coherent record is weaker than 01BV; this is documented in the lean.note."
+ }
+}

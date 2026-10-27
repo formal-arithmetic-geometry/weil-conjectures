@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-localized-shifted-roof",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The generic localization and shifted-composition cancellation in step 4 of lem-sfb-internal-bar-character-roof-cup, under the paragraph (3) open-direct-image input.",
+   "via": [
+    "lem-sfb-internal-bar-character-roof-cup",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Localized shifted roof with a specified endpoint identification",
+ "statement": "Let C,D be categories with integer shifts and Q:C\\to D a functor equipped with its specified shift comparison. Let e:X\\to Y be a morphism such that Q(e) is invertible, and let s:Z\\simeq Q(Y). For an integer q and F:X\\to X[q], define the localized shifted roof at Z as the actual composite, in diagrammatic order: s.hom, Q(e)^{-1}, Q(F;e[q]), the comparison Q(Y[q])\\simeq Q(Y)[q], and s.inv[q]. This merely packages the canonical shifted localization construction of [def-weil-abstract-derived-category]; it chooses no new data. Its proved API identifies the empty roof with the zero-shift identity and preserves shifted composition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "The generic localization and shifted-composition cancellation in step 4 of lem-sfb-internal-bar-character-roof-cup, under the paragraph (3) open-direct-image input."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ShiftedHom.map_comp|map_mk₀|map_naturality",
+   "results": "Mathlib.CategoryTheory.Shift.ShiftedHom defines the shifted map and proves its compatibility with composition and the zero-shift embedding. No named wrapper for the displayed augmentation-and-endpoint roof exists.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing ShiftedHom API to prove the two equations of this concrete wrapper."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShiftedHom\", \"map\"",
+   "results": "ShiftedHom.map, map_mk₀, map_comp, map_naturality, map_naturality_1, map_naturality_2 and additive/linear compatibility lemmas.",
+   "date": "2026-10-26",
+   "verdict": "These provide the algebra, but do not define the augmented roof with the chosen endpoint identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor commuting with integer shifts preserves compositions of shifted morphisms and conjugation by an isomorphism preserves their finite ordered composites",
+   "results": "Functor.map_shiftFunctorComm_hom_app, Functor.commShiftMapCochainComplex, NatTrans.CommShift.whiskerRight, Functor.CommShift.comp, ShiftedHom.map and Functor.CommShift.ofComp.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing shift-compatible map and ShiftedHom.map_comp; there is no named duplicate of the explicit augmented roof with endpoint comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarCharacterRoofCup",
+  "date": "2026-10-26",
+  "group": "S1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalShiftedRoof",
+  "file": "lean/Sheaf/CategoryTheory/InternalShiftedRoof.lean",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.localizedShiftedRoof",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.localizedShiftedRoof",
+   "CategoryTheory.CondensedDerivedRestriction.localizedShiftedRoof_comp",
+   "CategoryTheory.CondensedDerivedRestriction.localizedShiftedRoof_zero",
+   "CategoryTheory.CondensedDerivedRestriction.orderedShiftedArrows",
+   "CategoryTheory.CondensedDerivedRestriction.localizedShiftedRoof_ordered"
+  ],
+  "statement": "def localizedShiftedRoof\n    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]\n    (Q : C ⥤ D) [Q.CommShift ℤ] {X Y : C} {Z : D}\n    (e : X ⟶ Y) [IsIso (Q.map e)] (s : Z ≅ Q.obj Y) (q : ℤ)\n    (F : X ⟶ X⟦q⟧) : Z ⟶ Z⟦q⟧",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-26",
+  "note": "Includes the original orderedShiftedArrows definition, moved verbatim and publicly reexported by InternalBarCharacterRoofCup; all three roof API equations are proved. Only the new localizedShiftedRoof wrapper is irreducible."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0c7a8",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T082912-L-2235193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0c7a8",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T082912-L-2235193",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, InternalShiftedRoof and InternalBarCharacterLiftNormalization against the clone item 6e74685 and node lem-sfb-internal-bar-character-roof-cup; new lemma = item's degree-one conjunct; axioms checked by #print axioms; 3 modules compiled with lcompile --all"
+ }
+}

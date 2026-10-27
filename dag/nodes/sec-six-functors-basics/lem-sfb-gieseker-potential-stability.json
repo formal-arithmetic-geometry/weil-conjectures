@@ -1,0 +1,452 @@
+{
+ "id": "lem-sfb-gieseker-potential-stability",
+ "kind": "statement",
+ "title": "Potential stability and the balanced subcurve inequality",
+ "statement": "Let $g\\geq2$ and $d>9(g-1)$ be integers, put $r=d+1-g$ and $P(m)=dm+1-g$. There is an integer $M(g,d)$, independent of the field, such that the following holds for every algebraically closed field $k$ [def-weil-field] and every $m\\geq M(g,d)$. If a connected closed subscheme $C\\subset\\mathbf P^{r-1}_k$ with Hilbert polynomial $P$ has semistable $m$th Hilbert point for the linearization of [lem-sfb-hilbert-plucker-pgl-linearization], then $C$ is a reduced curve of pure dimension one, all its singularities are ordinary nodes, and every genus-zero component of its normalization has at least two node branches. A node has completed local ring $k[[u,v]]/(uv)$. The hyperplane module $L=\\mathcal O_C(1)$ embeds $C$ nondegenerately by its complete linear system, with $h^0(C,L)=r$ and $h^1(C,L)=0$. Let $\\omega_C$ be the dualizing line of [lem-sfb-nodal-log-canonical-reconstruction] with no markings. For every nonempty proper reduced union $Y$ of irreducible components of $C$, let $k_Y$ be the number of nodes at which $Y$ meets the reduced union of the remaining components. Then\n$$\\left|\\deg_Y L-\\frac{d}{2g-2}\\deg_Y\\omega_C\\right|\\leq\\frac{k_Y}{2}.$$\nHere $\\deg_Y$ is the sum of line-bundle degrees on the normalized components in $Y$ [def-pc-degree-line-bundle]. In particular, a smooth rational component meeting its complement in exactly two points has $\\deg L=1$.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-pc-projective-space-twist",
+  "def-weil-closed-immersion",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-normalization",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $h=g-1>0$, $r=d-h$ and $t=d/r$. Then $r>0$, $d\\ge10$, and $1<t<9/8<8/7$. Use [lem-sfb-bounded-hilbert-weight-polynomials] with $B=4$, obtaining $A,m_0$. Increase $m_0$ to the uniform Hilbert-embedding bound of [lem-sfb-hilbert-plucker-pgl-linearization]. Choose an integer $M\\ge m_0$ with $M>2rA$. This depends only on $g,d$, since $P,r,B$ do. For any $m\\ge M$ with semistable Hilbert point and any one of these weighted flags, the two inequalities in the weight lemma give\n$$a_F\\le t\\sum_iw_i+\\frac{A-h\\sum_iw_i/r}{m}\\le t\\sum_iw_i+A/m.$$\nThe difference $a_F-t\\sum_iw_i$ lies in $(2r)^{-1}\\mathbf Z$. Since $A/m<1/(2r)$, it follows that $a_F\\le t\\sum_iw_i$. This conclusion holds simultaneously for all these flags on every curve in question. Denote it by (*).",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-sfb-hilbert-plucker-pgl-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.1 Proposition 1 and Lemma 2; uniformization for Section 3.2 Theorem 8"
+   }
+  },
+  {
+   "text": "The weight lemma gives $\\dim C=1$. A field is Noetherian, and a projectively embedded scheme is finite type; [lem-weil-pbc-finite-type-over-noetherian] therefore makes $C$ Noetherian. It has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. A zero-dimensional irreducible component would be a closed isolated point: it cannot meet another irreducible component without being contained in it. Connectedness and $\\dim C=1$ rule this out. Thus $D=C_{\\mathrm{red}}$ is a connected reduced curve of pure dimension one. The identification of coordinate Hilbert polynomial with Euler polynomial in [lem-sfb-flat-projective-hilbert-polynomial-locality], applied over $\\operatorname{Spec}k$, gives $\\chi(C,\\mathcal O_C(n))=dn+1-g$ for every integer $n$.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sfb-flat-projective-hilbert-polynomial-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, proof of Theorem 8, printed pp.14--15"
+   }
+  },
+  {
+   "text": "Suppose a nonzero space $W$ of linear forms vanishes on $D$. Give it weight zero and its quotient weight one, so $s=\\dim(k^r/W)<r$. The ideal of $D$ in $C$ is the nilradical. It is nilpotent: on a finite affine cover, finitely many nilpotent generators admit a common exponent, and the maximum of these finitely many exponents gives $N^q=0$. A nonzero restricted degree-$n$ monomial therefore has fewer than $q$ factors from $W$, so its weight is at least $n-q+1$. Thus\n$$w_F(n)\\ge(n-q+1)P(n),\\qquad a_F\\ge d.$$\nBut (*) gives $a_F\\le ds/r<d$, a contradiction. Hence $D$ is nondegenerate. No bound on $q$ is needed: uniformity in $m$ already came from the bounded-weight lemma.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof step (1), nilpotent-support flag"
+   }
+  },
+  {
+   "text": "If the generic multiplicity along a reduced component of degree $e\\ge1$ exceeded one, the component-projection lemma would give a zero/one flag with $s\\le e+1$ and $a_F\\ge2e+1/2$. Its hypotheses hold by steps 1--3. The inequality\n$$2e+\\tfrac12-\\tfrac87(e+1)=\\tfrac67e-\\tfrac9{14}>0\\quad(e\\ge1)$$\ncontradicts (*) and $t<8/7$. Thus $C$ is generically reduced. If now a reduced component of degree $e\\le3$ were not rational normal, the other projection estimate would give $s\\le e$ and $a_F\\ge e+1/2$. Since $e+1/2-(8/7)e=1/2-e/7\\ge1/14>0$, this again contradicts (*). Consequently every such component is rational normal. These estimates concern component degrees on normalization, as specified in the cited lemma. Finally $\\deg_C L=P(1)-P(0)=d$ in the Euler-degree convention. The component formula [lem-trf-degree-weighted-irreducible-components] now has all multiplicities one. Each component normalization is a smooth proper integral curve and is finite birational by [lem-trf-reduced-curve-normalization-genus]. The degree-one pullback formula [lem-sfb-proper-curve-bundle-pullback-degree] identifies its hyperplane degree with the component's Euler-degree. Consequently the sum of the normalized component degrees of $D$ is $d$, also before the finite-length nilradical is eliminated.",
+   "uses": [
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-sfb-proper-curve-bundle-pullback-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof steps (2)--(3)"
+   }
+  },
+  {
+   "text": "Apply the jet-weight lemma to $C$. Its generically reduced and nondegenerate hypotheses and its low-degree prerequisite were proved above. A ramified normalized branch would give $a_F\\ge8$ with $\\sum w_i\\le7$, contradicting (*) and $7t<8$. A point of multiplicity at least three would give $a_F\\ge3/2$ and $\\sum w_i=1$, contradicting $t<8/7$. Finally a nonnodal double point, after all normalization maps are unramified, would give $a_F\\ge7/2$ with $\\sum w_i\\le3$, contradicting $3t<24/7<7/2$. Thus every singularity of $D$ is an ordinary node, with the completed local ring in the statement. This includes double points with a tangent line component; their coefficient is $7/2$, so they cannot be discarded using only the larger coefficient for the other tangent case.",
+   "uses": [
+    "lem-sfb-singular-point-jet-weight-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof steps (4)--(6)"
+   }
+  },
+  {
+   "text": "The hyperplane line on $D$ is very ample, since the reduced closed subscheme still embeds in projective space. If $H^1(D,L)$ were nonzero, [lem-sfb-nodal-special-clifford-subcurve] would supply a connected subcurve $Y$ with $e=\\deg_Y L\\ge2$ and $h^0(Y,L)\\le e/2+1$. If $Y=D$, nondegeneracy gives $r\\le h^0(D,L)\\le d/2+1$, contrary to $r=d+1-g$ and $d>2g$. Suppose $Y$ is proper instead. It meets its complement, since $D$ is connected. Choose one such boundary branch on a normalized complementary component. Its hyperplane degree is a positive integer by [lem-trf-fibre-degree-ample-criterion], because it is the pullback of an ample line. For the selected single branch, the degree condition in [lem-sfb-subcurve-span-weight-bound] holds. That lemma and (*) yield\n$$e+\\tfrac12\\le t\\,h^0(Y,L)\\le t(e/2+1).$$\nBut $e+1/2-(8/7)(e/2+1)=3e/7-9/14\\ge3/14>0$ for $e\\ge2$. This contradiction proves $H^1(D,L)=0$.",
+   "uses": [
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-sfb-subcurve-span-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof step (7), Clifford support argument"
+   }
+  },
+  {
+   "text": "Let $N=\\ker(\\mathcal O_C\\to\\mathcal O_D)$. It is coherent, since $C$ is Noetherian, and its stalks vanish at every generic point by generic reducedness. Its closed support is therefore zero-dimensional, a finite set of closed points. By [lem-sfb-coherent-zero-dimensional-support], both $N\\otimes\\mathcal O_C(1)$ and $N$ have no higher cohomology, and zero global sections would force either to be zero. Tensor the reduction sequence by the invertible hyperplane line; this preserves exactness, as checked in any local trivialization. Cohomology across the closed immersion $D\\to C$ is identified by [lem-weil-pbc-affine-morphism-cohomology-edge]. The long exact sequence and step 6 give $H^1(C,\\mathcal O_C(1))=0$. Vanishing in degrees at least two follows from [lem-sc-noetherian-cohomology-above-dimension], since $\\dim C=1$. Thus the Euler polynomial at $1$ gives $h^0(C,\\mathcal O_C(1))=P(1)=r$.",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof step (8), first half: finite support of the nilradical"
+   }
+  },
+  {
+   "text": "The same long exact sequence now gives\n$$h^0(D,L)=r-h^0(C,N\\otimes\\mathcal O_C(1)).$$\nNondegeneracy of $D$ means exactly that restriction of the $r$-dimensional space of ambient linear forms to $D$ is injective. Therefore $h^0(D,L)\\ge r$, forcing $h^0(C,N\\otimes\\mathcal O_C(1))=0$. Global generation in [lem-sfb-coherent-zero-dimensional-support] gives $N\\otimes\\mathcal O_C(1)=0$, hence $N=0$ after tensoring with the inverse line. Thus $C=D$ is reduced, pure one-dimensional and nodal. Ambient linear forms inject into the $r$-dimensional $H^0(C,L)$ and so give an isomorphism. This proves completeness, nondegeneracy, $h^0=r$ and $h^1=0$.",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof step (8), second half: eliminate embedded nilpotents by dimensions"
+   }
+  },
+  {
+   "text": "For each nonempty proper reduced union $Y$ and its reduced complement $Z$, [lem-trf-nodal-subcurve-boundary] says that their intersection is precisely a finite reduced set of boundary nodes and that each has one smooth branch there on either side. Apply [lem-sfb-gieseker-component-interpolation] to the reduced complete nonspecial embedding obtained in step 8 and the inequalities (*) from step 1. For each normalized component $E$ of $Z$, its degree is at least the number $b_E$ of its boundary branches, or it is a rational normal component of degree $b_E-1$. In the latter case positivity of the hyperplane degree gives $b_E\\ge2$. Thus all the hypotheses of [lem-sfb-subcurve-span-weight-bound] hold with every boundary branch chosen. It gives a zero/one flag with\n$$\\deg_YL+\\tfrac{k_Y}{2}\\le a_F\\le t s\\le t h^0(Y,L|_Y).$$\nThere is no connectedness requirement on $Y$ in that weight estimate.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-sfb-gieseker-component-interpolation",
+    "lem-sfb-subcurve-span-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof steps (9)--(10), full-boundary span flag"
+   }
+  },
+  {
+   "text": "For any such $Y$, let $K$ be the kernel of the surjection $L\\to i_*(L|_Y)$ for its closed immersion $i:Y\\to C$. This kernel is coherent, and [lem-sc-noetherian-cohomology-above-dimension] gives $H^2(C,K)=0$. The exact cohomology sequence and $H^1(C,L)=0$ then give $H^1(C,i_*L|_Y)=0$. Apply [lem-weil-pbc-affine-morphism-cohomology-edge] to $i$ to obtain $H^1(Y,L|_Y)=0$. Also $H^q(Y,L|_Y)=0$ for $q\\ge2$ by the same dimension-vanishing statement. Hence $h^0(Y,L|_Y)=\\chi(Y,L|_Y)$. This holds separately on each connected component if $Y$ is disconnected.",
+   "uses": [
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-weil-pbc-affine-morphism-cohomology-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 proof step (10), nonspecial restrictions to subcurves"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-normalization-quotient] separately to each connected component of $Y$. Tensor its exact sequence by $L|_Y$. Local trivializations identify the resulting middle term with the finite direct image of the pulled-back line and the last term with one one-dimensional fibre per internal node. The quotient has the same Euler characteristic before and after twisting. Euler additivity [lem-pc-euler-additive] and the affine cohomology comparison for the finite normalization [lem-weil-pbc-affine-morphism-cohomology-edge] therefore give\n$$\\chi(Y,L|_Y)-\\chi(Y,\\mathcal O_Y)=\\sum_{E\\subset\\widetilde Y}\\bigl(\\chi(E,L|_E)-\\chi(E,\\mathcal O_E)\\bigr)=\\deg_Y L.$$\nThe last equality is exactly [def-pc-degree-line-bundle] on each smooth normalized component. Combining with step 10 gives $h^0(Y,L|_Y)=\\deg_YL+\\chi(Y,\\mathcal O_Y)$.",
+   "uses": [
+    "lem-trf-nodal-normalization-quotient",
+    "lem-pc-euler-additive",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 step (10): normalization computation of subcurve Euler characteristic"
+   }
+  },
+  {
+   "text": "Let $v_Y$ be the number of components of $Y$, $e_Y^{\\mathrm{int}}$ its internal-node count (a self-node counts once), and $g_E$ the genera of its normalized components. Summing [lem-trf-nodal-curve-normalization-euler] over the connected components gives\n$$\\chi(Y,\\mathcal O_Y)=v_Y-e_Y^{\\mathrm{int}}-\\sum_Eg_E.$$\nThe unmarked degree formula of [lem-sfb-nodal-log-canonical-reconstruction] gives, on the same components of the whole nodal curve $C$,\n$$w_Y:=\\deg_Y\\omega_C=\\sum_E(2g_E-2+\\text{node branches on }E)\n=-2\\chi(Y,\\mathcal O_Y)+k_Y.$$\nEach internal node contributes two branches, each boundary node one. For $Y=C$, the same count and $\\chi(C,\\mathcal O_C)=P(0)=1-g$ give $w_C=2g-2$. The dualizing-line lemma applies over $\\operatorname{Spec}k$ with no markings: projectivity, connectedness, reducedness, purity and nodality were proved, and a finite-type scheme over a field is finitely presented and flat over that field.",
+   "uses": [
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-sfb-nodal-log-canonical-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3 equation (6); component degree and Euler normalization formulas"
+   }
+  },
+  {
+   "text": "Write $l_Y=\\deg_YL$ and $\\chi_Y=\\chi(Y,\\mathcal O_Y)$. Substitute step 11 in step 9 and multiply by $r>0$:\n$$r(l_Y+k_Y/2)\\le d(l_Y+\\chi_Y).$$\nSince $d-r=g-1=h$ and $\\chi_Y=(k_Y-w_Y)/2$ from step 12, this rearranges to\n$$h l_Y\\ge (d/2)w_Y-(h/2)k_Y,$$\nso $l_Y-dw_Y/(2h)\\ge-k_Y/2$. This is an exact inequality: the integral-gap argument in step 1 removed the finite-$m$ error before we used any subcurve.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 step (10) and Section 3.3 equation (6), lower bound"
+   }
+  },
+  {
+   "text": "The component-degree definition is additive on complementary unions, so $l_Z=d-l_Y$ and $w_Z=2g-2-w_Y$; the equality $l_C=d$ also follows by applying step 11's normalization computation to $C$ and using $P(1)-P(0)=d$. The same boundary nodes give $k_Z=k_Y$. Apply step 13 to $Z$ and substitute these three identities. This yields $l_Y-dw_Y/(2g-2)\\le k_Y/2$. Together the two bounds are exactly the asserted absolute-value inequality, including when $Y$ or $Z$ is disconnected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3 equation (6), complementary subcurve upper bound"
+   }
+  },
+  {
+   "text": "Consider an irreducible component whose normalization has genus zero, and let $b$ count all node branches on that normalization. Its positive integral hyperplane degree is $l\\ge1$ by [lem-trf-fibre-degree-ample-criterion], and its dualizing degree is $-2+b$ by [lem-sfb-nodal-log-canonical-reconstruction]. If $C$ is irreducible, the Euler/branch computation of step 12 gives $b=2g\\ge4$. If the component is proper and $b\\le1$, it has no self-node and hence is smooth; its boundary count is $b$ (and connectedness in fact gives $b\\ge1$). The balanced inequality on that component would then give\n$$\\left|l-\\frac d{2g-2}(-2+b)\\right|\\le b/2,$$\nwhich is impossible since $l\\ge1$ and $-2+b\\le-1$. Thus every genus-zero normalized component has at least two node branches. Finally for a smooth rational component meeting its complement in two points, there are no internal self-nodes, $b=k=2$, and the dualizing degree is zero. The inequality gives $|l|\\le1$, and positivity gives $l=1$.",
+   "uses": [
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-sfb-nodal-log-canonical-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 Definition 7 and its paragraph on rational chains, derived from the subcurve inequality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sfb-flat-projective-hilbert-polynomial-locality",
+  "lem-sfb-component-projection-weight-bounds",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-sfb-singular-point-jet-weight-bounds",
+  "lem-sfb-nodal-special-clifford-subcurve",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-sfb-subcurve-span-weight-bound",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-sfb-gieseker-component-interpolation",
+  "lem-trf-nodal-normalization-quotient",
+  "lem-pc-euler-additive",
+  "def-pc-degree-line-bundle",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-sfb-nodal-log-canonical-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.1 Proposition 1 and Lemma 2; Section 3.2 Theorem 8 proof steps (1)--(10); Section 3.3 equation (6). Source read online; local PDFs missing, numerical helper statements exposed for later splitting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gieseker potential stability theorem semistable Hilbert point of a connected curve of degree greater than 9 times g minus 1 implies nodal semistable curve and balanced subcurve degree inequality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.isMinimal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsMinimal R W ↔\\n    MaximalFor (fun C => WeierstrassCurve.IsIntegral R\", \"doc\": \"A Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $ is minimal if and only if the constant function $ 1 $ is the maximal element among all variable changes $ C $\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ), (W.ΨSq n).natDegree ≤ n.natAbs ^ 2 - 1\", \"doc\": \"The cosine of $\\\\pi$ radians is equal to $-1$, i.e., $\\\\cos(\\\\pi) = -1$.\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass minimality and polynomial degree estimates do not imply the potential-stability properties or balanced subcurve inequality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert semistability forces a curve to be reduced nodal linearly normal nonspecial with balanced multidegrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"{R : Type u} → [CommRing R] → WeierstrassCurve R → Prop\", \"doc\": \"A predicate on a Weierstrass curve over a commutative ring $ R $, asserting that the curve is elliptic.\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W : WeierstrassCurve.Affine R} (x y : R),\\n  W.Nonsingular x y ↔ W.Equation x y ∧ (W.a₁ * y ≠ 3 * x ^ 2 + 2 * W.a₂ * x + W.a₄ ∨ y ≠ -y - W.a₁ * x - W.a₃)\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if and only if it satisfies the Weierstrass equation $y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6$ and at least on\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.Affine.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → R → R → Prop\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if it satisfies the Weierstrass equation $W.Equation(x, y)$ and at least one of the partial derivative evaluations $W\"}\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_iff'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W : WeierstrassCurve.Affine R} (x y : R),\\n  W.Nonsingular x y ↔ W.Equation x y ∧ (W.a₁ * y - (3 * x ^ 2 + 2 * W.a₂ * x + W.a₄) ≠ 0 ∨ 2 * y + W.a₁ * x + W.a₃ ≠ 0)\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if it satisfies the Weierstrass equation $y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6$ and at least one of the fol\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass minimality and polynomial degree estimates do not imply the potential-stability properties or balanced subcurve inequality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Semistable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass minimality and polynomial degree estimates do not imply the potential-stability properties or balanced subcurve inequality."
+  },
+  {
+   "tool": "grep",
+   "query": "potential.*stab|Gieseker|semistab|balanced.*subcurve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass minimality and polynomial degree estimates do not imply the potential-stability properties or balanced subcurve inequality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potential stability theorem for Hilbert semistable curves and the basic subcurve degree inequality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.hilbertPoly\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) : (d : ℕ) → F[X]\", \"doc\": \"For a polynomial $ p $ and natural number $ d $, the Hilbert polynomial is defined recursively as the sum over the support of $ p $ of $ (\\\\text{coefficient of } p \\\\text{ at } i) \\\\cdot \\\\text{preHilbert\"}\n  {\"name\": \"Polynomial.hilbertPoly_zero_right\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) : hilbertPoly p 0 = 0\", \"doc\": \"For any polynomial $ p $, the Hilbert polynomial evaluated at degree 0 is zero, i.e., $ H(p, 0) = 0 $.\"}\n  {\"name\": \"Polynomial.degree_mono\", \"module\": \"Mathlib.Algebra.Polynomial.Degree.Definitions\", \"type\": \"[Semiring S] {f : R[X]} {g : S[X]} (h : f.support ⊆ g.support) : f.degree ≤ g.degree\", \"doc\": \"If the support of a polynomial $ f $ is contained within the support of another polynomial $ g $, then the degree of $ f $ is less than or equal to the degree of $ g $.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(n : ℤ) : (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ₄_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(h : (2 : R) ≠ 0) : 0 < W.preΨ₄.natDegree\", \"doc\": \"If $2 \\\\neq 0$ in the ring $R$, then the natural degree of the fourth pre-division polynomial $\\\\Psi_4$ associated with a Weierstrass curve over $R$ is positive.\"}\n  {\"name\": \"Polynomial.degreeLE_mono\", \"module\": \"Mathlib.RingTheory.Polynomial.Basic\", \"type\": \"{m n : WithBot ℕ} (H : m ≤ n) : degreeLE R m ≤ degreeLE R n\", \"doc\": \"For any semiring $ R $ and extended natural numbers $ m $ and $ n $ (with a bottom element $\\\\bot$), if $ m \\\\leq n $, then the submodule of polynomials in $ R[X] $ with degree at most $ m $ is containe\"}\n  {\"name\": \"WeierstrassCurve.isMinimal_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsMinimal R W ↔\\n    MaximalFor (fun C => WeierstrassCurve.IsIntegral R\", \"doc\": \"A Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $ is minimal if and only if the constant function $ 1 $ is the maximal element among all variable changes $ C $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_Ψ₂Sq_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \": W.Ψ₂Sq.natDegree ≤ 3\", \"doc\": \"The natural degree of the second division polynomial $Ψ₂Sq = 4X^3 + b_2 X^2 + 2b_4 X + b_6$ for a Weierstrass curve over a commutative ring $R$ is at most 3, where $b_2, b_4, b_6$ are coefficients der\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass minimality and polynomial degree estimates do not imply the potential-stability properties or balanced subcurve inequality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert semistability of high degree projective curves forces nodal reduced curves and the balanced subcurve inequality",
+   "results": "{\"t\": \"2026-10-22T05:42:44Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert semistability of high degree projective curves forces nodal reduced curves and the balanced subcurve inequality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.nonsingular_zero\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.nonsingular_iff\", \"WeierstrassCurve.Projective.nonsingular_iff_of_Y_eq_negY\", \"WeierstrassCurve.Affine.nonsingular_iff\"], \"digest\": \"87639f7adfcf1503\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass results, elementary polynomial Hilbert transforms and balanced binary trees do not state Gieseker potential stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Semistable\"",
+   "results": "{\"t\": \"2026-10-22T05:43:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass results, elementary polynomial Hilbert transforms and balanced binary trees do not state Gieseker potential stability."
+  },
+  {
+   "tool": "grep",
+   "query": "Gieseker|potential.*stabil|Hilbert.*semistab|balanced.*subcurve",
+   "results": "{\"t\": \"2026-10-22T05:43:11Z\", \"tool\": \"grep\", \"query\": \"Gieseker|potential.*stabil|Hilbert.*semistab|balanced.*subcurve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass results, elementary polynomial Hilbert transforms and balanced binary trees do not state Gieseker potential stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert semistability and the balanced degree inequality for nodal curves",
+   "results": "{\"t\": \"2026-10-22T05:43:12Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert semistability and the balanced degree inequality for nodal curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ordnode.Valid'.balance'_lemma\", \"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\", \"Polynomial.natDegree_hilbertPoly_of_ne_zero_of_rootMultiplicity_lt\", \"Polynomial.natDegree_hilbertPoly_of_ne_zero\", \"Polynomial.hilbertPoly_smul\"], \"digest\": \"732ccfe31fa4ee2e\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass results, elementary polynomial Hilbert transforms and balanced binary trees do not state Gieseker potential stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Asymptotically semistable Hilbert points of curves have balanced multidegrees and nonspecial complete embeddings",
+   "results": "{\"t\": \"2026-10-22T05:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"Asymptotically semistable Hilbert points of curves have balanced multidegrees and nonspecial complete embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\"], \"digest\": \"8dabcae46147e1d7\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic Weierstrass results, elementary polynomial Hilbert transforms and balanced binary trees do not state Gieseker potential stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online.",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "worker": "stage1",
+  "summary": "Split through bounded-weight Hilbert polynomials, explicit component and jet estimates, Clifford support, nilradical elimination, component interpolation and the span flag. Seven statement-only generic prerequisites; reused nodal boundary, normalization Euler, coherent dimension vanishing and dualizing degree nodes. Preserved the item statement. Repaired the source arithmetic equivalence by using the actual implication d>9(g-1) gives d/r<9/8<8/7.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Item is a created prerequisite with no imported ancestor (ancestor command prints None); steps realize the potential-stability input to the ten-canonical construction, following Morrison steps (1)--(10).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-fibre-degree-ample-criterion",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-quotient",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-nodal-curve-normalization-euler",
+    "why": "Generic scheme/coherent-cohomology or nodal-normalization input; its full statement supplies the fact used in the indicated proof step. No step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Generic multiplicity, normalization or coherent-cohomology fact used to compare normalized component degree with the coefficient of the Hilbert polynomial; no constructibility-unit argument is replaced."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Generic multiplicity, normalization or coherent-cohomology fact used to compare normalized component degree with the coefficient of the Hilbert polynomial; no constructibility-unit argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-nodal-normalization-quotient",
+  "lem-pc-euler-additive",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-reduced-curve-normalization-genus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-70a173072",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-70a173072 (reviewer sub-agent of L); spot-checked: Read Morrison arXiv:0810.2340 in full where relevant (§2.1 Prop 1/Lemma 2, §3.2 Def 7/Thm 8 steps (1)-(10), cusp and tangent-line tacnode calculations, §3.3 (6)) and Stacks 0B3J. The item statement is unchanged from the Q15 base. All 15 steps check against the cited statements. Step 1: the half-integral gap 1/(2r) and M>2rA give the exact (*) a_F<=t·Σw. Steps 4-6: the margins 6e/7-9/14, 1/14, 7t<8, 3t<24/7<7/2 and 3e/7-9/14 hold. Steps 7-8: nilradical elimination via 0B3J/089W/02UZ. Steps 9-14: 0E38 boundary, interpolation, span bound, 0C1R Euler and dualizing degrees; the arithmetic hl>=dw/2-hk/2 and the complement argument re-derived. Step 15: b=2g in the irreducible case; components with b<=1 excluded; two-point rational component has degree 1. The 7 statement-only nodes were tested. Projection bounds: 2e+1/2 via the dim V_j count, edge case X=2Y excluded by d/r<8/7 plus nondegeneracy. Jet bounds: t/2, the cusp 8, tacnode 4, and 7/2 with a tangent line. Span bound: the rational-normal exception holds because e+1 points span P^e, so W vanishes on E. The Clifford support subcurve is valid because s|_Y is a nonzerodivisor of ω_Y⊗L_Y^{-1}. Interpolation = Morrison step (9) with Y and complement swapped. 0B3J is verbatim. No duplicates; lem-pc-zero-support-finite-scheme is related only (advisory). The batch-5 flags (00K1, 0AYW, 0AYZ/0AB6, 0B5Y, 0E38, 0C1R, normalization δ-formula) and their closures are generic Stacks curve and scheme facts, outside both assumptions, so accepted. Tool_uses accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GiesekerPotentialStability",
+  "declaration": "AlgebraicGeometry.gieseker_potential_stability",
+  "declarations": [
+   "AlgebraicGeometry.GiesekerPotentialStabilityConclusion",
+   "AlgebraicGeometry.HilbertPointRepresents",
+   "AlgebraicGeometry.gieseker_potential_stability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GiesekerPotentialStability.lean",
+  "statement": "theorem gieseker_potential_stability (g d n : ℕ) (hg : 2 ≤ g) (hd : 9 * (g - 1) < d) (hn : n + 2 = d + 1 - g) : ∃ M : ℕ, ∀ (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) (i : C ⟶ ℙ(HilbertPlucker.Coordinates n; Spec (.of k))), IsClosedImmersion i → ConnectedSpace C → i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k)) = f → ∀ (P : NumericalHilbertPolynomial), P.1 = Polynomial.C (d : ℚ) * Polynomial.X + Polynomial.C (1 - (g : ℚ)) → ProjectiveHilbertPolynomial.IsCoordinatePolynomial k (n + 1) i P.1 → ∀ (D : HilbertPlucker.Hilbert k n P) (m : ℕ), M ≤ m → ∀ (E : HilbertPlucker.Presentation D m) (x : PGLLinearization.fieldTest k k ⟶ D.H), HilbertPointRepresents C i D x → x.left (IsLocalRing.closedPoint k) ∈ E.semistable → ∃ (_lfp : LocallyOfFinitePresentation f), Nonempty (@GiesekerPotentialStabilityConclusion k _ g d n C f _lfp i)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion structure packages exactly the potential-stability clauses; the helper predicate identifies the given curve with the pullback of the recorded universal Hilbert ideal. No mathematical notion is replaced or selected from an existence theorem. Natural parameters cover the positive integer range forced by the degree and genus hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d88c9154",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Clause-by-clause check of gieseker_potential_stability against the node. Hypotheses: ∃M comes before the field; the curve is the given embedded subscheme; the Hilbert polynomial uses the recorded IsCoordinatePolynomial plus P.1=dX+1-g; HilbertPointRepresents ties C to the pulled-back universal ideal, and E.semistable is pinned by semistable_points to the dependency's SL/PGL semistability, so quantifying over every presentation is not stronger. Conclusion clauses all present: reduced and pure dimension 1; nodes via AdicCompletion ≃+* k[[u,v]]/(uv); hyperplane equal to the pullback of O(1); complete nondegenerate system as a coordinate-section bijection; h0=n+2=r; H1 Subsingleton; omega pinned by the landed NodalDualizingDatum; irreducible components enumerated exactly once; genus-zero components have at least two node branches; balanced inequality via markedNodalComponentDegree with k_Y the actual intersection count; smooth genus-0 two-point component has degree 1. Edge cases: g=2, d=10 gives r=9; any characteristic; empty curve excluded; irreducible curve vacuous; self-nodes counted correctly; single universe. lean.statement verbatim, three declarations recorded, one sorry, docstrings carry the source place and all 15 steps; only the lean field changed; not yet landed. Advisory: NodalDualizingDatum, markedNodalComponentDegree/Genus, IsPureDimension and smoothLocus come from owner nodes outside stmt_deps, reached via the base-era theorem stmt_dep lem-sfb-nodal-log-canonical-reconstruction; stage 2 cannot add them. No compile, since no file was changed."
+ }
+}

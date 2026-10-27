@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-l2-inverse-fourier-test-duality",
+ "kind": "statement",
+ "title": "Inverse Plancherel transform tested against Schwartz functions",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and Lebesgue measure on $\\mathbf R^m$, $m\\geq1$. Let $L^2$ mean measurable square-integrable complex functions modulo almost-everywhere equality. Let $\\mathcal S$ be the Schwartz class of smooth complex functions $\\phi$ such that $\\sup_x\\|x\\|^k\\|D^n\\phi(x)\\|<\\infty$ for all integers $k,n\\geq0$. Write $\\mathcal F_2$ for the continuous $L^2$ extension of $\\mathcal F\\phi(\\xi)=\\int e^{-2\\pi i x\\cdot\\xi}\\phi(x)\\,dx$ on $\\mathcal S$, and $\\mathcal G_2$ for its inverse. Then $\\mathcal G_2\\mathcal F_2 u=u$ for every $u\\in L^2$. For every $v\\in L^2$, every measurable representative $v_0$ of $v$, every measurable representative $w_0$ of $\\mathcal G_2v$, and every $\\phi\\in\\mathcal S$, one has $$\\int\\phi(x)w_0(x)\\,dx=\\int (\\mathcal G\\phi)(\\xi)v_0(\\xi)\\,d\\xi,\\qquad (\\mathcal G\\phi)(\\xi)=\\int e^{2\\pi i x\\cdot\\xi}\\phi(x)\\,dx.$$ Here the inverse transform on Schwartz functions is the displayed integral.",
+ "source": {
+  "document": "Mathlib/Analysis/Fourier/LpSpace.lean",
+  "place": "MeasureTheory.Lp.instFourierPair, lines 81-82; MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq, lines 132-139, evaluated on a Schwartz test function. Evaluation formulas in Mathlib/Analysis/Distribution/TemperedDistribution.lean:169-177, 506."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The L2 inverse Fourier transform satisfies the Schwartz test function identity integral phi times inverse Fourier v equals integral inverse Fourier phi times v",
+   "results": "{\"t\": \"2026-10-24T03:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"The L2 inverse Fourier transform satisfies the Schwartz test function identity integral phi times inverse Fourier v equals integral inverse Fourier phi times v\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integral_fourierInv_mul_eq\", \"SchwartzMap.integral_fourierInv_smul_eq\", \"SchwartzMap.integral_bilin_fourierInv_eq\", \"SchwartzMap.integral_fourier_mul_eq\", \"SchwartzMap.integral_fourier_smul_eq\", \"SchwartzMap.instFourierInvPair\", \"SchwartzMap.integral_bilin_fourier_eq\", \"SchwartzMap.integral_bilin_fourierIntegral_eq\"], \"digest\": \"30610c87929968b1\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq. specializes in one line per clause: the inverse law is MeasureTheory.Lp.instFourierPair at LpSpace.lean:81-82. For the integral identity apply congrArg (fun T => T phi) to MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139 and simplify with TemperedDistribution.fourierInv_apply at Mathlib/Analysis/Distribution/TemperedDistribution.lean:506 and MeasureTheory.Lp.toTemperedDistribution_apply at that file:169-177. These are evaluation formulas, not another comparison theorem. Changing the chosen measurable representatives is integral_congr_ae. The Schwartz inverse integral is the defining inverse Fourier transform; complex multiplication is scalar multiplication. All these source statements were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The L2 inverse Fourier transform agrees with the inverse Fourier transform of tempered distributions",
+   "results": "{\"t\": \"2026-10-24T03:22:31Z\", \"tool\": \"leansearch\", \"query\": \"The L2 inverse Fourier transform agrees with the inverse Fourier transform of tempered distributions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq\", \"MeasureTheory.Lp.fourier_toTemperedDistribution_eq\", \"TemperedDistribution.fourierInv_apply\", \"TemperedDistribution.fourierTransformInv_toTemperedDistributionCLM_eq\", \"Real.fourierIntegralInv\", \"TemperedDistribution.fourierInv_toTemperedDistributionCLM_eq\", \"SchwartzMap.fourier_inversion\", \"MeasureTheory.Lp.instFourierPairInv\"], \"digest\": \"74514e098a40f9ae\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq. specializes in one line per clause: the inverse law is MeasureTheory.Lp.instFourierPair at LpSpace.lean:81-82. For the integral identity apply congrArg (fun T => T phi) to MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139 and simplify with TemperedDistribution.fourierInv_apply at Mathlib/Analysis/Distribution/TemperedDistribution.lean:506 and MeasureTheory.Lp.toTemperedDistribution_apply at that file:169-177. These are evaluation formulas, not another comparison theorem. Changing the chosen measurable representatives is integral_congr_ae. The Schwartz inverse integral is the defining inverse Fourier transform; complex multiplication is scalar multiplication. All these source statements were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toTemperedDistribution\", \"fourier\"",
+   "results": "{\"t\": \"2026-10-24T03:19:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"toTemperedDistribution\\\", \\\"fourier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"TemperedDistribution.fourierInv_toTemperedDistributionCLM_eq\", \"TemperedDistribution.fourier_toTemperedDistributionCLM_eq\", \"TemperedDistribution.fourierMultiplierCLM_toTemperedDistributionCLM_eq\", \"MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq\", \"MeasureTheory.Lp.fourier_toTemperedDistribution_eq\"], \"digest\": \"433e2665b0ac441f\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq. specializes in one line per clause: the inverse law is MeasureTheory.Lp.instFourierPair at LpSpace.lean:81-82. For the integral identity apply congrArg (fun T => T phi) to MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139 and simplify with TemperedDistribution.fourierInv_apply at Mathlib/Analysis/Distribution/TemperedDistribution.lean:506 and MeasureTheory.Lp.toTemperedDistribution_apply at that file:169-177. These are evaluation formulas, not another comparison theorem. Changing the chosen measurable representatives is integral_congr_ae. The Schwartz inverse integral is the defining inverse Fourier transform; complex multiplication is scalar multiplication. All these source statements were read."
+  },
+  {
+   "tool": "grep",
+   "query": "fourierInv_toTemperedDistribution_eq|instance instFourierPair|theorem toTemperedDistribution_apply|theorem fourierInv_apply",
+   "results": "{\"t\": \"2026-10-24T03:23:22Z\", \"tool\": \"grep\", \"query\": \"fourierInv_toTemperedDistribution_eq|instance instFourierPair|theorem toTemperedDistribution_apply|theorem fourierInv_apply\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Fourier/LpSpace.lean\"], \"digest\": \"a8065669d7512c03\"}",
+   "date": "2026-10-24",
+   "verdict": "match: MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq. specializes in one line per clause: the inverse law is MeasureTheory.Lp.instFourierPair at LpSpace.lean:81-82. For the integral identity apply congrArg (fun T => T phi) to MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139 and simplify with TemperedDistribution.fourierInv_apply at Mathlib/Analysis/Distribution/TemperedDistribution.lean:506 and MeasureTheory.Lp.toTemperedDistribution_apply at that file:169-177. These are evaluation formulas, not another comparison theorem. Changing the chosen measurable representatives is integral_congr_ae. The Schwartz inverse integral is the defining inverse Fourier transform; complex multiplication is scalar multiplication. All these source statements were read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq",
+  "file": "Mathlib/Analysis/Fourier/LpSpace.lean",
+  "line": 132,
+  "how": "specializes in one line per clause: the inverse law is MeasureTheory.Lp.instFourierPair at LpSpace.lean:81-82. For the integral identity apply congrArg (fun T => T phi) to MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq at LpSpace.lean:132-139 and simplify with TemperedDistribution.fourierInv_apply at Mathlib/Analysis/Distribution/TemperedDistribution.lean:506 and MeasureTheory.Lp.toTemperedDistribution_apply at that file:169-177. These are evaluation formulas, not another comparison theorem. Changing the chosen measurable representatives is integral_congr_ae. The Schwartz inverse integral is the defining inverse Fourier transform; complex multiplication is scalar multiplication. All these source statements were read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fourier-moment-representative",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces. Supporting Fourier argument: The inverse-Fourier moment argument for (2.1), including identification with the original almost-everywhere class. Supporting Fourier-representative input: Inverse Plancherel transform tested against Schwartz functions.",
+   "via": [
+    "lem-sfb-fourier-moment-representative",
+    "lem-sfb-bundle-sobolev-embedding",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

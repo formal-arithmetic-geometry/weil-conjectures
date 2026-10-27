@@ -1,0 +1,137 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Localization (099R), comparison (099Y, 099V, 09AL); constant-coefficient module sheafification, sites-modules.tex Tags 03CY and 093J."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03CY, 093J and 099R: fixed-scalar equivalence on the slice, exact derived functors and constant realizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a localized ringed site with constant coefficients have an equivalent derived category to module valued sheaves and constant complexes agree",
+   "results": "8 hits: constantSheaf, Sheaf.isConstant_iff_mem_essImage, isConstant_of_iso, isConstant_iff_of_equivalence, SheafOfModules and its constructor. No derived ringed-slice coordinate comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project exact derived functors and module sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: restriction functor, additivity, object and map formulas.",
+   "date": "2026-10-27",
+   "verdict": "These provide scalar restriction; construct the slice and constant-complex comparisons from them."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory",
+   "results": "0 Mathlib hits. Project ExactFunctor.lean supplies Equivalence.mapDerivedCategory and the induced equivalence instance.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project exact-equivalence construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicEtaleLevelDescent",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-etale-level-descent",
+   "place": "Single finite-level descent, coefficient-coordinate and bounded-origin steps",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+    "lem-weil-pbc-finite-perfect-adic-stalk-models",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-coefficient-slice-derived-coordinates",
+ "title": "Derived isomorphism classes in fixed slice coordinates",
+ "statement": "Let X be any scheme, B any commutative ring in its universe, R a commutative ring sheaf on X_proet, psi:constant(B)->R an isomorphism and W an X-etale chart. Two R-derived objects have isomorphic actual restrictions to the ringed slice at W [def-weil-pbc-ringed-derived-restriction] if and only if their images under the exact fixed-coordinate chart restriction [def-weil-pbc-finite-coefficient-slice-restriction] are isomorphic. In addition this restriction of scalar extension of every constant derived B-complex is the constant complex on W.left of its universe lift [def-weil-pbc-finite-perfect-adic-etale-level-data]. No boundedness, finiteness, local models or existence of etale origin is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-finite-perfect-adic-etale-level-data"
+ ],
+ "proof": [
+  {
+   "text": "On the slice compose the locally bijective constant-section map with psi. Restriction along it is fully faithful. For essential surjectivity, express a fixed-module sheaf as a module presheaf over the constant ring and sheafify along this map. Its unit is invertible because the underlying additive presheaf already is a sheaf.",
+   "uses": [
+    "new-lem-pur-intrinsic-lisse-fixed",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this exact equivalence with the concrete weakly etale slice equivalence. Its composite with module-slice restriction is the fixed-coordinate functor, with identity comparisons on sections and maps. Passing to derived categories and using the factors isomorphism identifies representative-based restriction. Map isomorphisms forward and use preimageIso for the converse.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-finite-coefficient-slice-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-complex clause is the derived scalar-cancellation and constant-sheafification comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-derived-constant-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-finite-coefficient-derived-constant-coordinates",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-proetale-weakly-etale-localization",
+  "new-lem-pur-intrinsic-lisse-fixed"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSliceDerivedCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSliceDerivedCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_slice_derived_coordinates",
+  "statement": "theorem finiteCoefficient_slice_derived_coordinates\n    (X : Scheme.{t}) (B : Type t) [CommRing B]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})\n    (ψ : adicConstantRing X B ⟶ R) (hψ : IsIso ψ) (W : X.Etale) :\n    let R₀ := (sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R\n    let H := finiteCoefficientSliceRestriction X B R ψ W\n    (∀ K J : DerivedCategory (SheafOfModules.{t + 1} R₀),\n      Nonempty (ringedSiteDerivedRestrictionOfUniverses R₀ ((toProEt X).obj W) K ≅\n        ringedSiteDerivedRestrictionOfUniverses R₀ ((toProEt X).obj W) J) ↔\n      Nonempty (H.mapDerivedCategory.obj K ≅ H.mapDerivedCategory.obj J)) ∧\n    ∀ F : DerivedCategory (ModuleCat.{t} B), Nonempty\n      (H.mapDerivedCategory.obj ((completedAdicDerivedChange X ψ).obj\n        ((finitePerfectAdicDerivedConstant X B).obj F)) ≅\n      (constantSheaf (ProEt.topology W.left)\n        (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapDerivedCategory.obj\n          ((finitePerfectAdicAlgebraLift B).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

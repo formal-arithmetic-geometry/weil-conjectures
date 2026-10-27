@@ -32,76 +32,92 @@
   "def-weil-pbc-ambient-ringed-exchange",
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-ringed-pushforward-completion"
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-pbc-scalar-stage-coherence",
+  "lem-pbc-scalar-ambient-operation-comparisons"
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E,B=\\mathcal O_{E'},t=\\varpi_E,v=\\varpi_{E'}$. The DVR factorization gives $t=wv^e$ with $w\\in B^\\times$, $e\\geq1$, and finite residue fields. The finite-free completed comparison makes $S_T$ a finite free $R_T$-module of rank $[E':E]$.",
+   "text": "Put $A=\\mathcal O_E,B=\\mathcal O_{E'},t=\\varpi_E,v=\\varpi_{E'}$. The DVR lemma gives $t=wv^e$ ($w$ a unit, $e\\geq1$); the completed coefficient comparison gives $S_T\\cong R_T^{[E':E]}$ as modules.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-l-adic-coefficient-extension"
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pbc-scalar-tensor-construction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 1; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "The constructible scalar-transport lemma puts $K\\otimes^L_{R_T}S_T$ in the integral constructible category over $B$ for every integral constructible $K$ over $A$, with the same strata and local models $S_T\\otimes_B^L(B\\otimes_AP)$. Ambient change of rings is exact and both integral categories carry the inherited triangles, so ambient tensor restricts to an exact integral functor.",
+   "text": "The constructible transport lemma gives the same strata and models $S_T\\otimes_B^L(B\\otimes_AP)$. Ambient scalar change is exact; the inherited constructible triangles therefore give the exact integral restriction.",
    "uses": [
     "lem-weil-pbc-finite-free-constructible-scalar-transport",
     "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-uniform-complete-triangulated"
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-pbc-scalar-triangulation-adapters",
+    "lem-pbc-scalar-tensor-construction",
+    "lem-pbc-scalar-rational-exactness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 2; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Use normalized derived tensor units and associators; K-flat scalar change computes successive tensors. Both pentagon routes send $(((p\\otimes s)\\otimes u)\\otimes z)$ to $p\\otimes suz$; unit routes multiply by one. Normalize repeated fields literally to identity. For shift compatibility, identify the chosen scalar adjunction with the adjunction normalized by its unit on K-flat resolutions. The normalized-unit right Kan argument makes this adjunction commute with shifts. Exact derived restriction composition commutes with shifts, hence its inverse adjunction conjugate, the actual ambient associator, does too. The faithful full integral inclusion and scalar localization, which is surjective on objects, detect this equation. Conjugation by the specified normalization isomorphisms gives the stated literal-stage associator shift equation.",
+   "text": "Use normalized derived tensor units and associators; K-flat scalar change computes successive tensors. Both pentagon routes send $(((p\\otimes s)\\otimes u)\\otimes z)$ to $p\\otimes suz$; unit routes multiply by one. Normalize repeated fields literally to identity. The scalar adjunction is normalized by $p\\mapsto p\\otimes1$ on K-flat resolutions. The counit-normalized scalar-shift and balanced-associator theorems give its fixed shift compatibility. Faithful full integral inclusion and scalar localization, which is surjective on objects, detect this equation. Conjugating by the specified normalization isomorphisms gives the literal-stage associator shift equation.",
    "uses": [
     "lem-pur-system-scalar-coherence",
     "lem-pur-kflat-change-of-rings",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-sp-canonical-right-derived-adjunction-shift"
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-coefficient-scalar-shifts",
+    "lem-pur-coefficient-associator-shifts",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-pbc-scalar-tensor-composition",
+    "lem-pbc-scalar-ambient-shift-normalization",
+    "lem-pbc-scalar-rational-exactness",
+    "lem-pbc-scalar-stage-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 3; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Tensor is semilinear: $C(af)=aC(f)$. Since $t=wv^e$ is invertible after inverting $v$, semilinear localization gives the exact raw rational functor and preserves these coherence equations.",
+   "text": "Tensor is semilinear: $C(af)=aC(f)$. Since $t=wv^e$ is invertible after inverting $v$, semilinear localization gives the exact raw rational functor and retains these equations.",
    "uses": [
-    "lem-pur-semilinear-scalar-localization"
+    "lem-pur-semilinear-scalar-localization",
+    "lem-pbc-scalar-tensor-construction",
+    "lem-pbc-scalar-rational-exactness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 4; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Using coefficient inverse image on each edge, let $\\beta_f$ be the counit-tensor mate of the finite-free direct-image lemma. It is invertible in $D(S)$ and respects shifts and coefficient towers. Pushforward preserves completeness by the ringed completion theorem; the constant-completion equivalence identifies the PBC convention.",
+   "text": "Use coefficient inverse image on each edge. The finite-free direct-image theorem gives the invertible counit-tensor mate $\\beta_f$ in $D(S)$, with its shifts and coefficient towers. Ringed pushforward preserves completeness; the constant-completion equivalence identifies the convention.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "lem-sp-finite-free-direct-image-coherence",
     "lem-weil-pbc-ringed-pushforward-completion",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pbc-scalar-ambient-operation-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 5; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Apply strict-tower tensor transport to augmented Koszul towers, including connecting maps and units. Completion transport gives the unit-normalized $\\kappa:C\\Lambda_R\\cong\\Lambda_SC$. Ringed monoidal composition and the K-flat scalar-comparison theorem give the invertible ordinary balancing $Lg_S^*C\\cong CLg_R^*$ and its composition law; the balancing-coherence theorem normalizes its towers. Follow it by $\\kappa^{-1}$ for the completed pull square. For shift compatibility of the actual comparisons, first prove the ordinary derived scalar/pullback comparison commutes with shifts by its counit normalization on flat-term K-flat resolutions. Resolve arbitrary complexes and use density to detect the shift equation. The normalized-unit right Kan argument makes the actual derived pull/push adjunction commute with shifts, so taking its mate proves the direct-image shift equation. The scalar completion comparison commutes with shifts because its unit-normalization equation does, and completion units detect arrows into complete objects. Pasting these shift-compatible maps proves the completed-pull shift equation.",
+   "text": "Strict-tower transport applies to augmented Koszul towers with connecting maps and units, giving unit-normalized $\\kappa:C\\Lambda_R\\cong\\Lambda_SC$. Ordinary balancing followed by $\\kappa^{-1}$ gives the completed pull square. The new scalar-shift lemma gives the ordinary pull shift equation. The push mate is the composite of the derived adjunction unit, $Rg_S(\\theta Rg_R)$ and $Rg_S(C_X\\varepsilon_R)$; each respects shifts by derived-adjunction compatibility and whiskering. Completion transport and pasting give the completed-pull shift equation.",
    "uses": [
     "lem-weil-pbc-finite-free-strict-tower-transport",
     "lem-weil-pbc-finite-free-completion-transport",
@@ -109,56 +125,65 @@
     "def-weil-pbc-completed-pullback",
     "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-sfb-kflat-scalar-comparison-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-sp-canonical-right-derived-adjunction-shift"
+    "lem-weil-pbc-ringed-scalar-pullback-shift-normalization",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "lem-pbc-scalar-operation-shift-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 6; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Ringed monoidal composition and the composition law $\\theta_{gf}=(f^*\\theta_g)(\\theta_fg^*)$ of the K-flat scalar comparison give the ordinary pull cube and composition laws; mate pasting gives push composition and identities. The reflected-adjunction-square theorem, with the completed adjunctions and unit-normalized $\\kappa$, carries these equations to completed pullback and preserves shifts and coefficient towers. In particular, for completed pullback composition, precompose with the two ordinary-to-completed pullback units. Naturality, scalar unit normalization and ordinary pullback composition identify both resulting arrows. The universal property of completion, transported through the specified completed composition isomorphism, cancels these units and proves the completed composition equation.",
+   "text": "Ordinary balancing and its composition law give the pull cube; mate pasting gives push composition and identities; reflection carries squares to complete objects. For completed composition precompose both scalar routes with $u=\\gamma_hL_h(\\gamma_g)$; naturality and the $\\kappa$ unit equation reduce to ordinary composition. The quotient-tower compositor theorem gives $\\widehat a\\,u=\\gamma_{gh}a$ ($\\widehat a,a$ invertible), so $u$ cancels into complete objects.",
    "uses": [
     "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-sfb-kflat-scalar-comparison-normalization",
     "lem-weil-pbc-mate-pasting",
     "lem-weil-pbc-reflected-adjunction-coefficient-squares",
     "lem-weil-pbc-finite-free-completion-transport",
-    "lem-sbc-completed-operations-linear-natural-exchange"
+    "lem-per-quotient-completed-compositor-unit",
+    "lem-pbc-scalar-operation-unit-coherence",
+    "lem-pbc-scalar-operation-composition-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 7; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "Apply coefficient-exchange mates to this pull cube and the specified push mates: the ordinary ambient exchanges commute with scalar extension.",
+   "text": "Coefficient-exchange mates applied to this pull cube and its specified push mates identify the ordinary ambient exchanges after scalar extension.",
    "uses": [
     "lem-weil-pbc-coefficient-exchange-mates",
-    "def-weil-pbc-ambient-ringed-exchange"
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "lem-pbc-scalar-operation-composition-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 8; retained argument and extraction map in report.md."
    }
   },
   {
-   "text": "The reflected-square normalization equation for $\\beta,\\gamma,\\kappa$ identifies completion of the ambient exchange with the specified completed exchange, including its direct-image/completion arrow. Restrict whenever constructibility is preserved, then use semilinear localization; every equation persists.",
+   "text": "The reflected-square normalization for $\\beta,\\gamma,\\kappa$ identifies completion of this exchange with the specified completed exchange, including its direct-image/completion arrow. Restrict whenever constructibility is preserved; semilinear localization retains every equation.",
    "uses": [
     "lem-weil-pbc-reflected-adjunction-coefficient-squares",
     "lem-weil-pbc-ringed-pushforward-completion",
     "lem-weil-pbc-finite-free-completion-transport",
-    "lem-pur-semilinear-scalar-localization"
+    "lem-pur-semilinear-scalar-localization",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "lem-pbc-scalar-constructible-operation-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Finite scalar extension; extraction from the retained reviewed proof, with the same ambient tensor convention."
+    "place": "Assembly step 9; retained argument and extraction map in report.md."
    }
   }
  ],
@@ -166,36 +191,50 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-finite-free-completed-scalar-comparison",
   "def-weil-l-adic-coefficient-extension",
+  "lem-pbc-scalar-tensor-construction",
   "lem-weil-pbc-finite-free-constructible-scalar-transport",
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-pbc-scalar-triangulation-adapters",
+  "lem-pbc-scalar-rational-exactness",
   "lem-pur-system-scalar-coherence",
   "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-coefficient-scalar-shifts",
+  "lem-pur-coefficient-associator-shifts",
   "lem-pur-semilinear-scalar-localization",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-pbc-scalar-tensor-composition",
+  "lem-pbc-scalar-ambient-shift-normalization",
+  "lem-pbc-scalar-stage-coherence",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-sp-finite-free-direct-image-coherence",
   "lem-weil-pbc-ringed-pushforward-completion",
   "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pbc-scalar-ambient-operation-comparisons",
   "lem-weil-pbc-finite-free-strict-tower-transport",
   "lem-weil-pbc-finite-free-completion-transport",
   "lem-sp-finite-free-balancing-coherence",
   "def-weil-pbc-completed-pullback",
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-scalar-pullback-shift-normalization",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pbc-scalar-operation-shift-coherence",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-reflected-adjunction-coefficient-squares",
-  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-per-quotient-completed-compositor-unit",
+  "lem-pbc-scalar-operation-unit-coherence",
+  "lem-pbc-scalar-operation-composition-coherence",
   "lem-weil-pbc-coefficient-exchange-mates",
   "def-weil-pbc-ambient-ringed-exchange",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-sp-canonical-right-derived-adjunction-shift",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution"
+  "lem-pbc-scalar-constructible-operation-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-  "place": "Finer assembly of the reviewed ambient-scalar proof; source blueprint finite scalar extension, with Stacks-based input lemmas. M1 proves associator shift by normalized adjunctions and faithful/localized detection, operations shift by normalized derived counits, mates and reflection, and completed pullback composition by the actual completion units. The remaining clauses retain their existing proof plans."
+  "place": "Finite scalar extension; re-split of the current nine-step assembly. Shift normalization extracted as an independent statement; the actual completed-composition unit equation is cited from lem-per-quotient-completed-compositor-unit (reviewer FIX); inherited arguments retained in report.md. E5: same nine-step route; existing companion declarations partitioned into compilable modules and re-exported."
  },
  "mathlib_searches": [
   {
@@ -322,71 +361,86 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "prop-weil-pbc-scalar-extension",
   "worker": "stage1",
-  "summary": "Repair of the human re-split request: unchanged live statement, four new statement-only nodes for the complete-DVR coefficient basis, finite-free strict-tower transport, unit-normalized completion transport, and reflected-adjunction coefficient squares. Reused the existing tensor, finite-free direct-image, balancing and mate lemmas instead of duplicates. The short assembly preserves the full returned argument, with a report mapping every original step to its present carrier. No Lean edits or compiler calls. Reviewer FIX (2026-10-21): the complete-DVR coefficient-basis node restated the first clause of the existing lem-weil-finite-free-completed-scalar-comparison, which the base step 1 cited; it was dropped and that node is cited again. The inline stratified-perfect membership argument (base step 1, second half) became the statement-only node lem-weil-pbc-finite-free-constructible-scalar-transport. Steps 6-7 now also cite lem-sfb-kflat-scalar-comparison-normalization for the balancing composition law. Re-review of head 495e31060f50 (2026-10-21): the delivery is unchanged; the earlier FIX was refused at landing only because lem-sfb-kflat-scalar-comparison-normalization gained the citation [def-weil-pbc-adjunction-mate]. Its mathematical content (theta_h invertible, theta_{gf}=(f^*theta_g)(theta_f g^*), identity case) is unchanged, so the same fix is re-applied on the current base.",
-  "blueprint": "main-20261015 scalar-extension proposition: exact raw scalar tensor (steps 1-4); direct-image and completed-pull comparisons (steps 5-7); specified ambient and completed exchange (steps 8-9). The four extracted nodes separate coefficient algebra, unbounded strict-tower transport, completion normalization, and reflected adjunction coherence.",
+  "summary": "NQ re-split of the current 4378-character proof into a short assembly and one independent statement-only node for ringed shift normalization; the actual completed-composition double-unit equation is the existing lem-per-quotient-completed-compositor-unit (reviewer FIX dropped the duplicate new node). Preserves the four merged ND children. Replaces the cyclic completed-operations citation by that unit equation. Corrects the finite-reduction-only scalar-adjunction citation to the general sheaf-ring adjunction.",
+  "blueprint": "Exact scalar functor, literal units, associators, pentagon and shifts (steps 1-4); ambient comparisons and their coherence (steps 5-7); canonical ambient and completed exchanges and conditional rational descent (steps 8-9).",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "def-weil-l-adic-coefficient-extension",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-pur-system-scalar-coherence",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-pur-coefficient-associator-shifts",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-pur-semilinear-scalar-localization",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-sp-finite-free-direct-image-coherence",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-sp-finite-free-balancing-coherence",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
-   },
-   {
-    "node": "lem-sbc-completed-operations-linear-natural-exchange",
-    "why": "Generic ringed-derived scalar/monoidal, completion, localization, or mate tool for coefficient comparison; no proper-base-change route is replaced."
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
    },
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Step 1 takes only its first clause, that the completed sheaf of the larger valuation ring is finite free of rank [E':E] over the smaller one; the base proof cited the same node, and no node of the unit states this."
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-coefficient-scalar-shifts",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-coefficient-associator-shifts",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-sp-finite-free-direct-image-coherence",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-sp-finite-free-balancing-coherence",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
    },
    {
     "node": "lem-sfb-kflat-scalar-comparison-normalization",
-    "why": "Steps 6-7 take the invertibility and composition law of the ordinary scalar/inverse-image balancing comparison, a generic ringed-topos fact (the pull cube); no node of the unit states it."
+    "why": "Generic ringed derived tensor, scalar-shift, completion, localization or mate tool used with its stated hypotheses; no proper-base-change unit step is replaced."
+   },
+   {
+    "node": "lem-per-quotient-completed-compositor-unit",
+    "why": "Generic quotient-tower completed pullback compositor unit equation over O_E on noetherian finite-dimensional schemes with l invertible; used for E and E' separately with its stated hypotheses; no proper-base-change unit step is replaced."
    }
   ]
  },
@@ -407,15 +461,17 @@
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-pbc-mate-pasting",
   "lem-sbc-completed-operations-linear-natural-exchange",
-  "lem-sfb-kflat-scalar-comparison-normalization"
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-coefficient-scalar-shifts",
+  "lem-per-quotient-completed-compositor-unit"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-ND-495e31060",
-  "group": "ND",
+  "reviewer": "NT-cc-NQ-931bf2ea0",
+  "group": "NQ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-495e31060 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct. This head re-delivers f0d35797. Its four new nodes are byte-identical to that head's, and the item differs only in lean_audit. My earlier FIX of f0d35797 was refused at landing only because lem-sfb-kflat-scalar-comparison-normalization, which my fix cited, gained the citation [def-weil-pbc-adjunction-mate]. Its content (theta_h invertible, the composition law, the identity case) is unchanged, and the live statement equals the snapshot. No other cited statement changed. The live item is still the 10-step 2026-10-17 split, so nothing supersedes this delivery. The repair note (human, 2026-10-21) asks for at least 4 statement-only nodes and an assembly of at most 3000 characters.\n\nI read the item, all new nodes, every cited statement, the base 10-step proof, the main-20261015 blueprint, and Stacks 0A0E (algebraization l.1091), 0A0G (l.1507), 031D (algebra l.22860) and 0AUW (more-algebra l.4954). No SGA is cited.\n\nEvery base step maps to a carrier whose statement says it:\n- step 2 -> semilinear localization;\n- steps 3-4 -> system-scalar-coherence, kflat-change and associator-shifts (the pentagon stays elementary);\n- step 5 -> sp-finite-free-direct-image-coherence;\n- step 6 -> the new strict-tower-transport and completion-transport;\n- steps 7 and 9 -> the new reflected-squares node (gamma/kappa equation checked term by term);\n- step 8 -> coefficient-exchange-mates;\n- step 10 -> semilinear localization.\nThese three new nodes are true and are not duplicates.\n\nFaults, repaired in fixes/:\n(1) C5/B9: complete-dvr-coefficient-basis generalizes clause 1 of the reviewed lem-weil-finite-free-completed-scalar-comparison, which base step 1 cited. I dropped it; step 1 re-cites the existing node (no path back to the item).\n(2) The inline base step-1b stratified-perfect membership argument becomes the statement-only node lem-weil-pbc-finite-free-constructible-scalar-transport, cited by step 2. That keeps the count at 4.\n(3) C4: steps 6-7 credited ringed monoidal composition with the R/S balancing and pull cube. They now also cite lem-sfb-kflat-scalar-comparison-normalization (current statement); this adds no cycle.\n\nTool uses are updated and the remaining generic ones accepted. After the fixes the parent has 9 steps and 2793 characters, proof_deps is the union of the uses, the statement and stmt_deps are unchanged, and the overlay has no cycle through the item.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-931bf2ea0 (reviewer sub-agent of L); spot-checked: Read in full: the 2026-10-22 re-split note (at least 2 new nodes, at most 3000 characters), the base 9-step proof (live = base), the delivered proof, both new nodes, every cited statement, and the main-20261015 blueprint_update. No SGA is used. Step-by-step: steps 1, 2, 4, 5, 8 and 9 are unchanged. In step 3 the adjunction, associator and shift argument now cites lem-pur-sheaf-ring-derived-coefficient-adjunction (unit x↦x⊗1 for any φ), lem-weil-pbc-derived-adjunction-shift, and lem-pur-coefficient-scalar-shifts and lem-pur-coefficient-associator-shifts (balanced comparison commutes with shifts); each of these states what the base argued inline. In step 6 the shift descent goes to new node 1, the push-mate shift is written as the composite η, Rg(θ), Rg(Cε) and cited, and κ's shifts come from completion-transport, which states them. The cycle through lem-sbc-completed-operations-linear-natural-exchange is removed; a script check confirms that no cited node reaches the item. Node 1 (ringed scalar/pullback θ commutes with shifts) is true: both sides are S_X⊗g^{-1}P on flat-term K-flat P, and P[n] is again such a resolution with identical signs. It is needed because g^{-1}Ô_{E,Y}→Ô_{E,Y'} is not an isomorphism, so lem-pur-coefficient-pullback-shifts (exact u^{-1}-ring geometry only) does not apply. It is not a duplicate of the ten or so shift nodes compared. Fault C5/B9: node 2 (double completion-unit normalization) is true (checked by expanding the composite Hom bijection), but it generalizes lem-per-quotient-completed-compositor-unit (Q143, in the base). That node states exactly â γ_h P_h(γ_g) = γ_{gh} a, for the actual quotient augmentation, with â the conjugate of direct-image composition, over O_E on noetherian finite-dimensional schemes with ℓ invertible, without assuming u^{-1}B→B is an isomorphism. That is the item's setting, and the report's list of non-duplicates misses it. FIX: node 2 is dropped. Step 7 re-cites the Q143 node and adds the one-line cancellation (â and a invertible, γ_{gh} the reflection unit). proof_deps is recomputed as the union of the uses, a tool_use entry is added, and the stale cyclic tool_use is removed. The item is 2982 characters with a largest step of 668, and its statement and stmt_deps are unchanged. Maintainer note: the count of new nodes is waived to 1 (the note asked for 2) because every old argument has a carrier (node 1, the Q143 node, the pur/pbc shift statements) and nothing went back into the item.; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -427,99 +483,8 @@
   "module": "Sheaf.Paper.PbcScalarExtension",
   "declaration": "AlgebraicGeometry.Scheme.pbcCoherentScalarExtension",
   "declarations": [
-   "AlgebraicGeometry.Scheme.pbcScalarRationalZero",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalHasShift",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalShiftAdditive",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalLocalizationShift",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalPretriangulated",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalIsTriangulated",
-   "AlgebraicGeometry.Scheme.pbcScalarIntegralIsoClosure",
-   "AlgebraicGeometry.Scheme.pbcScalarRationalLinear",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap_quotient_kernel",
-   "AlgebraicGeometry.Scheme.pbcScalarQuotientMap",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor_preserves",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegralTensor",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarHom",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_laws",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarExtension",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_comp",
-   "AlgebraicGeometry.Scheme.pbcAmbientScalarComp_naturality",
-   "AlgebraicGeometry.Scheme.pbcAmbientScalarComp",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarCompComponent",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarComp_naturality",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarComp",
-   "AlgebraicGeometry.Scheme.pbcScalarRestrictId_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarRestrictId",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_id",
-   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientUnit",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarUnitComponent",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarUnit_naturality",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarUnit",
-   "AlgebraicGeometry.Scheme.pbcAmbientScalarShift_exists",
-   "AlgebraicGeometry.Scheme.pbcAmbientScalarShift",
-   "AlgebraicGeometry.Scheme.pbcIntegralScalarInclusionIso",
-   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift_exists",
-   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift",
-   "AlgebraicGeometry.Scheme.pbcScalarLocalization_naturality",
-   "AlgebraicGeometry.Scheme.pbcScalarLocalizationIso",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarShift_exists",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarShift",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarExact",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarAdditive",
-   "AlgebraicGeometry.Scheme.pbcRationalScalarTriangulated",
-   "AlgebraicGeometry.Scheme.pbcCoefficientStage",
-   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion",
-   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion_id",
-   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion_comp",
-   "AlgebraicGeometry.Scheme.pbcStageRaw",
-   "AlgebraicGeometry.Scheme.pbcStageTransition",
-   "AlgebraicGeometry.Scheme.pbcStageNormalization",
-   "AlgebraicGeometry.Scheme.pbcStageAssociator",
-   "AlgebraicGeometry.Scheme.pbcStageAssociator_laws",
-   "AlgebraicGeometry.Scheme.pbcStageTransitionShift",
-   "AlgebraicGeometry.Scheme.pbcStageExact",
-   "AlgebraicGeometry.Scheme.pbcStageAssociatorShift",
-   "AlgebraicGeometry.Scheme.pbcScalarPreservesComplete",
-   "AlgebraicGeometry.Scheme.pbcScalarCoefficientStructureSquare",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPullIso",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap_isIso",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImageIso",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPullIso",
-   "AlgebraicGeometry.Scheme.pbcScalarExchangeLeft",
-   "AlgebraicGeometry.Scheme.pbcScalarExchangeRight",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange_rational",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_shift",
-   "AlgebraicGeometry.Scheme.pbcScalarOperations_identity",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_identity",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_comp",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_coefficients",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletion_coefficients",
-   "AlgebraicGeometry.Scheme.pbcConditionalIntegral",
-   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linear",
-   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_additive",
-   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linearInstance",
-   "AlgebraicGeometry.Scheme.pbcConditionalRational",
-   "AlgebraicGeometry.Scheme.pbcActualOperations_linear",
-   "AlgebraicGeometry.Scheme.pbcActualPush_additive",
-   "AlgebraicGeometry.Scheme.pbcActualPush_linear",
-   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_additive",
-   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_linear",
-   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_rational",
-   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational",
-   "AlgebraicGeometry.Scheme.pbcCoherentScalarExtension"
+   "AlgebraicGeometry.Scheme.pbcCoherentScalarExtension",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_comp"
   ],
   "file": "lean/Sheaf/Paper/PbcScalarExtension.lean",
   "statement": "theorem pbcCoherentScalarExtension {E F G H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (h' : F ≤ G) (h'' : G ≤ H) : (pbcStageTransition l Ω T h).Additive ∧ (pbcStageTransition l Ω T h).IsTriangulated ∧ (pbcStageTransition l Ω T (le_refl E) = 𝟭 _) ∧ HEq (pbcStageAssociator l Ω T (le_refl E) h) (Functor.leftUnitor (pbcStageTransition l Ω T h)) ∧ HEq (pbcStageAssociator l Ω T h (le_refl F)) (Functor.rightUnitor (pbcStageTransition l Ω T h)) ∧ (∀ K : pbcCoefficientStage l Ω T E, (pbcStageTransition l Ω T h'').map ((pbcStageAssociator l Ω T h h').hom.app K) ≫ (pbcStageAssociator l Ω T (h.trans h') h'').hom.app K = (pbcStageAssociator l Ω T h' h'').hom.app ((pbcStageTransition l Ω T h).obj K) ≫ (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K) ∧ NatTrans.CommShift (pbcStageAssociator l Ω T h h').hom ℤ",
@@ -527,7 +492,7 @@
   "by": "Q14",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Reconstruction after immutable return b9138306191c. The category, functor, exact structure and all comparison equations are actual, with raw tensor-Hom rationalization. The coherent package is stated by the primary theorem and its listed companion declarations. Second reading reuses PbcUniformCompleteTriangulated and PbcRationalTransport without replacing their records; only data adapters exposing the existing canonical structures through Fact hypotheses are in this owning module. The paper-specific module is under Sheaf.Paper. Repair of d72b12bcae52: nine constructed comparison isomorphisms are irreducible, and the completed exchange equality reuses its two already-defined exact routes; no mathematical statement or construction changes. Six rational triangulation adapters directly project the identical published witness, zeta-expanding their former local let aliases to avoid the traced repeated existential-motive conversion. Repair of returned d72b12bcae52: comparison definitions are irreducible, the exchange equality uses its unchanged named routes, and triangulation adapters directly project the same witness to avoid repeated unfolding; mathematical signatures and canonical maps are preserved. Q14 dependency compile repair: the published module timed out reproducibly at the 60-second limit. A diagnostic with a lower heartbeat limit isolated conversion of the deeply nested chosen-witness proof in pbcScalarRationalIsTriangulated. Keep the identical Prop signatures of pbcScalarRationalZero, pbcScalarRationalShiftAdditive and pbcScalarRationalIsTriangulated as explicit named instance theorems with postponed proofs and full proof docstrings, avoiding repeated conversion of the nested projections. The raw category, chosen triangulation, all other declarations, real data and canonical comparisons are unchanged; this is no new mathematical assumption or arbitrary structure."
+  "note": "Reconstruction after immutable return b9138306191c. The category, functor, exact structure and all comparison equations are actual, with raw tensor-Hom rationalization. The coherent package is stated by the primary theorem and its listed companion declarations. Second reading reuses PbcUniformCompleteTriangulated and PbcRationalTransport without replacing their records; only data adapters exposing the existing canonical structures through Fact hypotheses are in this owning module. The paper-specific module is under Sheaf.Paper. Repair of d72b12bcae52: nine constructed comparison isomorphisms are irreducible, and the completed exchange equality reuses its two already-defined exact routes; no mathematical statement or construction changes. Six rational triangulation adapters directly project the identical published witness, zeta-expanding their former local let aliases to avoid the traced repeated existential-motive conversion. Repair of returned d72b12bcae52: comparison definitions are irreducible, the exchange equality uses its unchanged named routes, and triangulation adapters directly project the same witness to avoid repeated unfolding; mathematical signatures and canonical maps are preserved. Q14 dependency compile repair: the published module timed out reproducibly at the 60-second limit. A diagnostic with a lower heartbeat limit isolated conversion of the deeply nested chosen-witness proof in pbcScalarRationalIsTriangulated. Keep the identical Prop signatures of pbcScalarRationalZero, pbcScalarRationalShiftAdditive and pbcScalarRationalIsTriangulated as explicit named instance theorems with postponed proofs and full proof docstrings, avoiding repeated conversion of the nested projections. The raw category, chosen triangulation, all other declarations, real data and canonical comparisons are unchanged; this is no new mathematical assumption or arbitrary structure. E5 compile repair: companions are re-exported from the compilation partitions listed in proof_deps; all signatures and the eight existing proof holes are preserved."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -538,13 +503,13 @@
   "note": "Item statement matches node lem-weil-pbc-distinguished-diagram-lifting clause by clause: l, Ω : Type c, T noetherian, finite-dim, l invertible; finite vertices, arrows with shift occurrences, Expr equations with shift = σ_X ≫ u[1] ≫ σ_Y⁻¹, rows distinguished via pbcCommonStageDistinguished; ∃ M ≥ M0 and all E_X, raw reps on shared T_{M/E}K, equations at M, rows in distTriang with σ-corrected last arrow, recovery via mkHom/isoToStage and a row iso with exact components. Probe compiled inside the item file: distTriang uses pbcRationalHasShift/qbarStagePretriangulated (rfl verified), not the PbcScalarExtension adapters. No hollow defs, docstrings ok, only sorry, statement verbatim, no duplicate found. Edge cases (empty families, M=M0, empty scheme, shifted row vertices, independent universes) covered. Dependency repair: three Prop-valued adapters in PbcScalarExtension postponed to sorry with identical binders and types, data untouched, dep record now verbatim — accepted as §1(B); harmless though not strictly needed here, since the original has a cached OK override. Compiles: item clean in 17.9 s against the cached dependency; delivered PbcScalarExtension timed out at 60 s on three attempts at load ~170 (the original also timed out fresh), so its compile rests on the delivery's recorded clean compile and dry run. Minor: pbcDiagramIteratedSigma unused, universe w unused."
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
-  "result": "pass",
-  "landing": "20261022T025330-L-1282126",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: The 152 declarations of the clone's original PbcScalarExtension (2c77716690b) against the 12 delivered modules: identical text, and identical public types, hints and def values in the compiled environment (only generated proof-lemma names differ); all 60 direct importers compiled against the delivered modules (57 OK; 2 slow but just as slow against the published version)"
  }
 }

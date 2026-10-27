@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-integral-reduction-pullback-normalization",
+ "kind": "statement",
+ "title": "Unit-normalized finite scalar extension and geometric pullback",
+ "statement": "Use the canonical coefficient and functor definitions of [sk-def-pe-derived-completion], [sk-def-sfb-module-derived-pushpull] and [sk-def-sfb-coefficient-change]. For every prime l, finite extension E of Q_l, scheme morphism j : U → X and positive quotient exponent n+1 (Lean index n), with the canonical internal coefficient rings and derived functors, A finite derived scalar/pullback comparison with the prescribed scalar-unit equation.\nSource: Stacks 06YY, 07A6; blueprint integral open direct image, Reduction paragraph\n(blueprint: lem-sfb-integral-reduction-pullback-normalization).\n\nLean statement (under the displayed l, E and j parameters):\ntheorem integral_reduction_pullback_normalization (n : ℕ) :\n    ∃ b :\n      (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙\n          AdicCompletion.derivedReduction l E U n ≅\n        AdicCompletion.derivedReduction l E X n ⋙\n          (CondensedRing.upperStar\n            (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory,\n      ∀ M : DerivedCategory (AdicCompletion.Modules l E X),\n        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map\n            ((Mod.derivedExtendMapDerivedCategoryAdjunction\n              (AdicCompletion.quotient l E X n)).unit.app M) ≫\n          (CondensedRing.derivedComapUpperStarIso\n            (DerivedNakayama.reductionRing l E (n + 1)) j).inv.app\n              ((AdicCompletion.derivedReduction l E X n).obj M) =\n        (Mod.derivedExtendMapDerivedCategoryAdjunction\n          (AdicCompletion.quotient l E U n)).unit.app\n            ((CondensedRing.upperStar\n              (DerivedNakayama.integerRing l E) j).mapDerivedCategory.obj M) ≫\n          (AdicCompletion.restrict l E U n).map (b.hom.app M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Reduction paragraph: derived finite coefficient extension commutes with geometric inverse image",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (099N)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof": [
+  {
+   "text": "Identify each component of integralReductionPullbackMap with FreeParameterEvaluation.scalarPullComparison specialized to integerRing l E, quotientRing l E (n+1), and reductionRing l E (n+1). The quotient coefficientMap is definitionally AdicCompletion.quotient. The identification follows by applying the target scalar adjunction homEquiv injectively and using Mathlib unit_mateEquiv_symm and homEquiv_unit; it identifies the specified transformation, not an unspecified isomorphism.",
+   "uses": [
+    "def-sfb-free-parameter-scalar-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarPullComparison_isIso from def-sfb-free-parameter-scalar-maps to every component. NatIso.isIso_of_isIso_app makes the specified natural transformation invertible. Take b = asIso integralReductionPullbackMap. Its hom is definitionally that inverse mate, so Mathlib unit_mateEquiv_symm proves precisely the required scalar-unit equation for every M. No flatness of reductionRing, boundedness, or geometric hypothesis on j is added.",
+   "uses": [
+    "def-sfb-free-parameter-scalar-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: derived finite coefficient extension commutes with geometric inverse image",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-free-parameter-scalar-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Reduction paragraph; use the already stated arbitrary-coefficient scalarPullComparison_isIso and the Mathlib inverse-mate unit identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension and exact inverse image commute with the extension restriction adjunction unit for sheaves of modules",
+   "results": "Eight results for ordinary scalar extension, tensor or ideal-adic constructions; none states this internal sheaf derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with exact pullback of sheaves of modules and direct image preserves derived adic completeness",
+   "results": "Eight results for ordinary pullback composition or module scalar operations; none states the derived internal comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*cone|reduction.*tower|integralReductionPullbackMap|integralFiniteProjection|integral_direct_image_reduction_tower",
+   "results": "No matches. Generic mate identities and triangle five lemma are available but do not supply coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits",
+  "date": "2026-10-25",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: derived finite coefficient extension commutes with geometric inverse image",
+   "via": [
+    "lem-sfb-internal-integral-direct-image-limits"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralReductionPullbackNormalization",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralReductionPullbackNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_reduction_pullback_normalization",
+  "statement": "theorem integral_reduction_pullback_normalization (n : ℕ) :\n    ∃ b :\n      (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙\n          AdicCompletion.derivedReduction l E U n ≅\n        AdicCompletion.derivedReduction l E X n ⋙\n          (CondensedRing.upperStar\n            (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory,\n      ∀ M : DerivedCategory (AdicCompletion.Modules l E X),\n        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map\n            ((Mod.derivedExtendMapDerivedCategoryAdjunction\n              (AdicCompletion.quotient l E X n)).unit.app M) ≫\n          (CondensedRing.derivedComapUpperStarIso\n            (DerivedNakayama.reductionRing l E (n + 1)) j).inv.app\n              ((AdicCompletion.derivedReduction l E X n).obj M) =\n        (Mod.derivedExtendMapDerivedCategoryAdjunction\n          (AdicCompletion.quotient l E U n)).unit.app\n            ((CondensedRing.upperStar\n              (DerivedNakayama.integerRing l E) j).mapDerivedCategory.obj M) ≫\n          (AdicCompletion.restrict l E U n).map (b.hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralReductionPullbackMap",
+   "AlgebraicGeometry.ProEtale.integral_reduction_pullback_normalization"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49639",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T101007-L-3646565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T122829-L-1811353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

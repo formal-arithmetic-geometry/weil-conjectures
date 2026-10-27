@@ -18,106 +18,75 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical coefficient isomorphisms of [lem-weil-pbc-continuous-coefficients-immersion-restriction] to identify $A_T$ with the continuous integral ring and $E_T$ with its sheaf localization $A_T[1/\\varpi]$. These identify the specified coefficient map, not merely the two rings. The comparison of [lem-weil-pbc-continuous-coefficient-realizations] intertwines the actual inclusion $A\\subset E$ on the internal and section-ring sides. The encoding of [def-weil-pbc-continuous-coefficient-module-encoding] identifies internal module sheaves with sectionwise modules, sends the regular module and its finite sums to the regular sheaf and its finite sums, and [lem-weil-pbc-continuous-module-encoding-scalar-extension] identifies the actual internal scalar extension with the sheafified sectionwise scalar extension along this inclusion. We may therefore calculate with $E_T\\otimes_{A_T}-$, retaining the specified internal functor when we return through the encoding.",
+   "text": "Apply [lem-weil-pbc-continuous-scalar-derived-encoding] with the specified coefficient inclusion and encodings. It identifies the actual internal and sectionwise derived scalar functors, proves their exactness on the ambient categories, and supplies the adjunction to exact restriction. Its unit formula on every representing complex is exactly the asserted derived image of $m\\mapsto1\\otimes m$.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-pbc-continuous-module-encoding-scalar-extension"
+    "lem-weil-pbc-continuous-scalar-derived-encoding"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.1 and Lemma 6.8.2; explicit module-encoding comparison"
+    "place": "Lemma 6.8.2; returned proof steps 1–3"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-scalar-localization-sheaf-exact] on the fixed small site $T_{\\mathrm{proet}}$, with $R=A_T$ and global section $s=\\varpi$. Step 1 identifies its target ring and its actual change-of-rings functor with ours. Thus ordinary scalar extension is additive and exact on all module sheaves. By [lem-weil-pbc-exact-functor-derived-factorization] its termwise functor descends to an exact triangulated functor on unbounded derived categories, with its specified shift comparison. By [lem-weil-pbc-exact-functor-derived-functor] this functor computes the total left derived scalar extension $F_T$. In particular $H^i(F_TK)=E_T\\otimes_{A_T}H^i(K)$: exactness preserves the kernels and cokernels defining cohomology. These assertions pass through the encoding because an equivalence of abelian categories preserves kernels and cokernels by their universal properties.",
+   "text": "Apply [lem-weil-pbc-integral-scalar-constructible-image]. The explicit noetherian, finite-dimensional and invertibility hypotheses on $T$ are exactly its hypotheses. Thus the same actual $F_T$ carries every integral object into $\\mathcal C_T^c(E)$, and this target has the induced full triangulated structure. Use the specified encoding to regard this restriction as a functor into the archived category. In the Lean interface the inherited target triangulation is supplied explicitly by realizationScalarTargetTriangulated: apply the continuous-field local-freeness theorem in the scheme universe, the constructible Serre argument, and bounded homology triangulated closure. This avoids the upstream finiteness-coefficient instance, whose continuous-field constructor is restricted to Type 0.",
    "uses": [
-    "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014X (lemma-additive-exact-homotopy-category) and 015F (lemma-right-derived-exact-functor); sites-modules.tex Tag 03ET (lemma-flatness-sheafification)"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the identity site and the ring map $A_T\\to E_T$. Its exact termwise restriction is right adjoint to its derived change of rings; by [lem-weil-pbc-exact-functor-derived-functor] that functor and the derived scalar extension of step 2 are both the left derived functor of the termwise scalar extension, hence canonically isomorphic, and on K-flat complexes both are computed termwise. We use the tensor symmetry to write this left adjoint with $E_T$ as the first factor. On a K-flat resolution $P\\to K$ with flat terms the cited normalization gives the unit as the class of $p\\mapsto1\\otimes p$. This is also the derived image of the termwise unit on any representing complex $K$: naturality gives the commutative square between the units at $P$ and $K$, and both vertical maps are quasi-isomorphisms by exactness of scalar extension and restriction. Hence the square identifies their classes in the derived category. This fixes the asserted ambient unit and adjunction without imposing completeness, constructibility or boundedness on either ambient variable.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), identity-topos coefficient change; normalized representative formula"
-   }
-  },
-  {
-   "text": "For $K\\in\\mathcal I_T$, apply condition (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization]. Its hypotheses hold because $T$ is Noetherian and finite dimensional and $\\ell$ is invertible, as explicitly assumed. It says that $K$ is bounded and each cohomology sheaf is locally $A_Z\\otimes_A N$ on pieces $Z$ of a finite stratification, for a finitely presented $A$-module $N$. A finite presentation $A^m\\to A^n\\to N\\to0$, tensored with $A_Z$, presents this local module as a cokernel of a map of finite free $A_Z$-modules; right exactness follows directly from the tensor universal property. The immersion coefficient identifications of [lem-weil-pbc-continuous-coefficients-immersion-restriction] give exactly the restriction rings on $Z$. Under the encoding of [def-weil-pbc-continuous-coefficient-module-encoding], these are the same finite free presentations in internal modules: an equivalence preserves cokernels by their universal property. Thus $K$ is bounded constructible in the internal local-finite-presentation sense. Step 2 gives finite-limit preservation of internal scalar extension as well. Apply [lem-weil-pbc-bounded-constructible-exact-scalar-extension] with these integral and field coefficient ring objects. It yields $F_TK\\in\\mathcal C_T^c(E)$ with exactly the archived local-finite-presentation condition. No local-freeness characterization of that condition is required.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3) and scalar-extension construction in Proposition 6.8.14(2); archived bounded constructibility as finite local presentations"
-   }
-  },
-  {
-   "text": "Use the raw Hom modules in [def-weil-pbc-rational-category] and [def-weil-linear-scalar-localization]. Define $J_T(K)=F_TK$ and $J_T(u/\\varpi^n)=\\varpi^{-n}F_T(u)$. Tensoring morphisms is $A$-linear, since $1\\otimes(au)=a(1\\otimes u)$ by balancing, and this equality persists on complexes and their localization. If $u/\\varpi^n=v/\\varpi^m$, there is $r\\geq0$ with $\\varpi^r(\\varpi^m u-\\varpi^n v)=0$. Applying $F_T$ and cancelling the invertible scalar $\\varpi^{r+m+n}$ in the target proves equality of the two proposed images. At a common denominator, additivity is the additivity of $F_T$; for composable fractions the composition formula is $\\varpi^{-m}F_T(v)\\circ\\varpi^{-n}F_T(u)=\\varpi^{-(m+n)}F_T(vu)$. The image of $1_K/1$ is $1_{F_TK}$. For $a/\\varpi^r\\in E=A[1/\\varpi]$, the same formula gives $J_T((a/\\varpi^r)w)=(a/\\varpi^r)J_T(w)$. Therefore $J_T$ is a well-defined $E$-linear functor with the stated formulas.",
-   "uses": [
-    "def-weil-pbc-rational-category",
-    "def-weil-linear-scalar-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), raw scalar-localization Hom construction; elementary fraction calculation"
-   }
-  },
-  {
-   "text": "The full integral category is closed under shifts and cones by [lem-weil-pbc-integral-stratified-perfect-characterization]. With its induced triangulated structure, apply [lem-weil-linear-scalar-localization-triangulated] to its $A$-linear shift. Every distinguished triangle in $\\mathcal R_T$ is isomorphic to the image of an integral distinguished triangle. By step 5, $J_T$ on that image agrees with $F_T$; step 2 therefore makes its image a distinguished triangle in the ambient field derived category. Step 4 places its three terms in the full constructible subcategory. The shift comparison of $F_T$ descends to $J_T$: its naturality for integral maps extends to fractions by multiplication by $\\varpi^{-n}$. The target is triangulated: since $T$ is noetherian, its underlying space is noetherian, so [lem-weil-pbc-condensed-constructible-serre] gives closure of the constructible $E_T^c$-module sheaves under kernels, cokernels and extensions, and [prop-weil-pbc-module-bounded-constructible-triangulated] makes $\\mathcal C_T^c(E)$ a full triangulated subcategory of $D(\\mathcal M_T^c(E))$. Hence $J_T$ is exact for this induced triangulated structure on $\\mathcal C_T^c(E)$.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-weil-pbc-integral-scalar-constructible-image",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
     "lem-weil-pbc-condensed-constructible-serre",
     "prop-weil-pbc-module-bounded-constructible-triangulated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05R6 (proposition-construct-localization); exactness tested on integral distinguished triangles"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.8.11(3), 6.8.14(2); returned step 4 and end of step 6"
+   }
+  },
+  {
+   "text": "By step 2 and the specified encoding, $F_T$ restricts to an additive functor $F:\\mathcal I_T\\to\\mathcal D:=\\mathcal C_T^c(E)$, and $\\mathcal R_T=\\mathcal I_T[1/\\varpi]$ has the raw Hom modules $\\Hom(K,L)\\otimes_AE$ of [def-weil-pbc-rational-category] and [def-weil-linear-scalar-localization]. $F$ is semilinear for the inclusion $\\phi:A\\to E$: $1\\otimes(au)=a(1\\otimes u)$ by balancing, on representing complexes and hence in the derived categories. Apply [lem-pur-semilinear-scalar-localization] with $R=A$, $t=\\varpi$, $S=E$, $u=\\varpi$. Since $\\varpi$ is a unit of $E$, $E\\to E[1/\\varpi]$ is an isomorphism, so the localization functor $Q_E:\\mathcal D\\to\\mathcal D[1/\\varpi]$, identity on objects and $f\\mapsto f\\otimes1$, is an isomorphism of $E$-linear categories. Put $J_T=Q_E^{-1}\\circ\\overline F$. The cited formula $\\overline F(u/\\varpi^n)=\\phi(\\varpi)^{-n}Q_E(F(u))$ gives $J_TK=F_TK$ and $J_T(u/\\varpi^n)=\\varpi^{-n}F_T(u)$, and the cited semilinearity for the induced map $A[1/\\varpi]=E\\to E[1/\\varpi]$ becomes $E$-linearity of $J_T$.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-scalar-localization",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), the functor on the raw scalar localization"
+   }
+  },
+  {
+   "text": "$\\mathcal I_T$ is closed under shifts and cones in $D(\\operatorname{Mod}(A_T))$ by [lem-weil-pbc-integral-stratified-perfect-characterization], with $A$-linear shift; $\\mathcal D$ is a full triangulated subcategory with $E$-linear shift by [lem-weil-pbc-integral-scalar-constructible-image]. By [lem-weil-pbc-continuous-scalar-derived-encoding] the ambient $F_T$ is triangulated with its termwise shift comparison, so $F$ is exact with a semilinear shift comparison. Give $\\mathcal R_T$ and $\\mathcal D[1/\\varpi]$ the triangulations of [lem-weil-linear-scalar-localization-triangulated]. The exactness clause of [lem-pur-semilinear-scalar-localization] makes $\\overline F$ exact with the localized shift comparison. A triangle of $\\mathcal D[1/\\varpi]$ is distinguished exactly when it is isomorphic to the $Q_E$-image of a distinguished triangle of $\\mathcal D$, and $Q_E$ is an isomorphism commuting with shifts; hence $Q_E^{-1}$ is exact, and so is $J_T$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-integral-scalar-constructible-image",
+    "lem-weil-pbc-continuous-scalar-derived-encoding",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); exactness of the localized functor"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "def-weil-pbc-continuous-coefficient-module-encoding",
-  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-continuous-scalar-derived-encoding",
+  "lem-weil-pbc-integral-scalar-constructible-image",
   "def-weil-pbc-rational-category",
   "def-weil-linear-scalar-localization",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
   "lem-weil-pbc-condensed-constructible-serre",
   "prop-weil-pbc-module-bounded-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Explicit scalar-extension and fraction construction following Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2); the archived module encoding and normalized derived unit use the cited generic sheaf-algebra nodes."
+  "place": "Explicit scalar-extension and fraction construction following Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2); the archived module encoding and normalized derived unit use the cited generic sheaf-algebra nodes.; D3 restores the quarantined interface after the upstream sync by proving continuous-field target triangulated closure in the scheme universe from the local-freeness and Serre arguments."
  },
  "mathlib_searches": [
   {
@@ -233,39 +202,52 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-realization-scalar-functor",
   "worker": "stage1",
-  "summary": "Preserved the statement and specified coefficient map. Six proof steps identify actual scalar localization, prove ambient exactness and normalized adjunction, establish constructibility from integral finite presentations, and construct the exact E-linear raw fraction functor. All support facts reuse existing nodes; no new nodes. All citations checked against their statements and recorded verbatim.",
+  "summary": "Repair of the human re-split return. Statement unchanged. Two independent statement-only nodes carry the ambient coefficient/derived-adjunction argument (old steps 1–3) and the integral-to-internal constructibility argument (old step 4 plus target triangulation in old step 6). The parent retains the complete fraction calculation and integral-triangle exactness argument. All old arguments are preserved verbatim in the report and assigned to the new work packages or retained parent steps. Reviewer fix (Q110 maintainer reader): the retained fraction calculation and integral-triangle exactness argument (old steps 5-6) are replaced by a citation of the existing lem-pur-semilinear-scalar-localization, which states exactly that construction and its exactness; the parent proof is now the assembly of cited nodes.",
   "blueprint": "Nearest ancestor thm-weil-pbc-finite-extension, proof opening: choose an integral lattice and rationalize. This item realizes the actual scalar functor and raw rationalization appearing in that paragraph, without asserting an equivalence or proving base change.",
   "tool_uses": [
    {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "Generic normalized ambient derived change-of-rings adjunction for an arbitrary small site and ring map; used on the identity site, with no smooth-purity or finite-field hypothesis."
-   },
-   {
     "node": "lem-weil-linear-scalar-localization-triangulated",
     "why": "Generic triangulated structure of a raw scalar localization; used only to test exactness on integral triangles, not to replace any proper-base-change step."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of a semilinear exact functor to raw scalar localizations with its fraction formula and exactness; no node of sk-thm-properbasechange states it (also used as a tool by prop-weil-pbc-scalar-extension and prop-weil-pbc-rational-transport)."
    }
   ]
  },
  "tool_uses": [
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-linear-scalar-localization-triangulated"
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-pur-semilinear-scalar-localization"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q51-ca69ba0c5",
-  "group": "Q51",
+  "reviewer": "NT-cc-Q110-01c4ad25b",
+  "group": "Q110",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-ca69ba0c5 (reviewer sub-agent of L); spot-checked: Read the whole item: 6 steps, no new nodes, statement and stmt_deps unchanged, no SGA, not in the dropped list, no re-split note. None of the 13 cited nodes reaches the item, so there are no cycles. Source check against BS 6.8.2(1)(2): O_E,X = lim O_E/ϖ^n and E_X = O_E,X[1/ℓ]. Condition (iii) of the integral characterization matches BS 6.8.10/6.8.11(3), and the item only takes the functor from BS 6.8.14(2), with no equivalence claimed. Step-by-step checks: step 1 uses the immersion-restriction isomorphisms with A_X[1/ϖ] ≅ E_X and compatibility with A→E, and the realization square that intertwines postcomposition. Step 2 uses scalar-localization-sheaf-exact on T_proet with R=A_T and s=ϖ, plus the exact-functor factorization. Step 3's K-flat unit x↦x⊗1 extends correctly to any representative, because E_T is flat and both vertical maps of the naturality square are quasi-isomorphisms. Step 4 gets lfp from a finite presentation of N tensored with A_Z on strata, and the exact-scalar-extension node needs only finite-limit preservation. Step 5's fraction well-definedness includes the extra ϖ^r for torsion. Step 6 uses distinguished triangles of R_T as images of integral ones. Two citation faults are repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-realization-scalar-functor.json. (1) Step 3 silently identified the adjunction node's Lφ* with step 2's F_D; it now cites lem-weil-pbc-exact-functor-derived-functor, since both are left derived functors of the termwise functor. (2) Step 6 asserted an 'induced triangulated structure' on C_T^c(E) without support, and the lfp class over E_T^c is not obviously closed under kernels, cokernels and extensions. It now cites lem-weil-pbc-condensed-constructible-serre (noetherian space follows from T noetherian) and prop-weil-pbc-module-bounded-constructible-triangulated, and proof_deps are updated. Neither added node reaches the item. Edge cases checked: zero, ϖ-torsion, A_T[0], shifts, ramified E. The two generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-01c4ad25b (reviewer sub-agent of L); spot-checked: Re-split delivery answering the released human note (6480 characters, 6 steps). Statement, stmt_deps and lean record match live; only proof, proof_deps and split_report changed. The item is not in the drop list, no SGA is cited, and there is no cycle (closure walk). Source checked: BS 6.8.2(1) (O_E,X = lim O_E/ϖ^n, E_X = O_E,X[1/ℓ]), 6.8.10, 6.8.11(3) (bounded with constructible cohomology) and 6.8.14(2). Only the functor is taken; no equivalence is asserted, so the target is not weakened. New node lem-weil-pbc-continuous-scalar-derived-encoding (old steps 1–3) is true: E_T = A_T[1/ϖ] is a sheaf localization, so the termwise functor computes the total derived functor on every complex, and the unit on any K follows from the K-flat naturality square. New node lem-weil-pbc-integral-scalar-constructible-image (old step 4 plus the target triangulation) is true. Condition (iii) gives a finitely presented N, tensoring needs only right exactness, and torsion A/ϖ^r and m=n=0 are fine. Serre plus prop-module-bounded-constructible-triangulated give the triangulation, after an isometric embedding of E into Q̄_ℓ. Both are statement-only, self-contained, with complete stmt_deps, logged searches and blueprint.from = thm-weil-pbc-finite-extension. They are of comparable size and not duplicates of continuous-integral-scalar-exact, module-encoding-scalar-extension, per-rational-module-realization-functor, continuous-integral-constructible-comparison or bounded-constructible-exact-scalar-extension. Parent steps 1–2 match these nodes' hypotheses exactly. One fault: old step 5 (the fraction calculation) and the exactness part of old step 6 stayed inline in the parent, although the report admits that existing lem-pur-semilinear-scalar-localization covers them. That node states the semilinear extension F̄(f/t^n)=φ(t)^{-n}Q(Ff) with its exactness, and is already a tool of prop-weil-pbc-scalar-extension and rational-transport in this unit. So the parent was more than an assembly (C5/re-split rule). FIX: steps 3–4 are rewritten to cite it with R=A, t=ϖ, S=E, u=ϖ. Q_E: D → D[1/ϖ] is an isomorphism because ϖ is a unit of E, and J_T = Q_E^{-1}∘F̄ gives the stated formulas, E-linearity and exactness. proof_deps and split_report.tool_uses are updated. The parent is now 2805 characters in 4 assembly steps.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.RealizationScalarFunctor",
   "declaration": "WeilConjectures.realization_scalar_functor",
   "declarations": [
+   "WeilConjectures.realizationScalarTargetTriangulated",
    "WeilConjectures.RealizationScalarFunctorData",
    "WeilConjectures.realization_scalar_functor"
   ],
@@ -283,5 +265,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Re-delivery of 2f2b6bfb (FIX, then returned for non-existent local-instance names in lean.declarations). The new head is the fixed module with the RealizationScalarFunctor.* helpers inlined (definitionally the same pointwise constant-section E-action and the same sectionModuleEquivalence.trans ringModuleEquivalenceOfIso encoding) and the two Prop local instances (HasSheafify, WEqualsLocallyBijective) dropped. Imports are identical to the fix, and a transitive walk finds no CondensedERealization and no module importing the item, so there is no cycle. Node is identical to side-live except the lean record. Statement is a verbatim substring of the file, declarations are exactly the 2 in the module, one sorry, docstrings carry the source and the 6 proof steps, no line over 100 characters. All clauses re-checked: hypotheses not stronger than the node, coefficient isos pinned, F = pbcDerivedExtend with the recorded adjunction, unit normalized on every complex, J pinned by integral, fractions (n≥0) and linearity, no equivalence. Edge cases and universes ok. Compile: nt_compile timed out at 60 s (load ~212); lcompile.run(timeout=560) rc 0, clean, 529 s mostly queueing; worker scompile 34.5 s / 41.0 s. If landing times out again, retry at lower load. Advisory: free CommShift fields held only by IsTriangulated (matches the recorded interface)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T113910-L-382550",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

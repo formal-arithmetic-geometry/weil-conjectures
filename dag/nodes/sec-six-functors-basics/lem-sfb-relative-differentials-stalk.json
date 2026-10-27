@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-relative-differentials-stalk",
+ "kind": "statement",
+ "title": "Stalk of relative differentials is the differential module of the local rings",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $z\\in X$, and put $s=f(z)$. Give $A=\\mathcal O_{X,z}$ its $R=\\mathcal O_{S,s}$-algebra structure through the stalk map of $f$. With the sheaf of relative differentials [def-sc-relative-differential-sheaf], module stalks [def-weil-pbc-module-stalk], and ring differentials [def-weil-pbc-kahler-differentials], there is a canonical $A$-linear isomorphism $$(\\Omega^1_{X/S})_z\\xrightarrow{\\sim}\\Omega_{A/R}.$$ It sends the germ at $z$ of $\\mathrm d_{X/S}a$, for a section $a$ of $\\mathcal O_X$ on an open neighbourhood of $z$, to $\\mathrm d_{A/R}(a_z)$. No finite-type, Noetherian, or smoothness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 08TE, lemma-stalk-module-differentials, applied to f^{-1} O_S -> O_X; scheme relative differentials are defined in morphisms.tex Tag 01UQ, definition-sheaf-differentials."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Take the stalk of the additive universal sheaf derivation, using the preservation of filtered colimits by the forgetful functor from commutative rings to abelian groups. Its value on a germ a_z is (d a)_z. Represent two stalk elements on a common neighbourhood and apply the sheaf Leibniz rule and the germ scalar formula to prove Leibniz for this additive map. A base stalk element is a germ of a base section; the germ-stalk-map identity and d_app_app show that its image has differential zero. Thus obtain a derivation of O_X,z relative to O_S,f(z).",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-module-stalk",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE, lemma-stalk-module-differentials; direct universal-property proof using sheaves.tex Tag 009C, lemma-stalk-skyscraper-adjoint. The existing field-specialized source construction is in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean, private fieldDifferentialsStalkToKaehler and its helpers."
+   }
+  },
+  {
+   "text": "For an O_X,z-module N and a derivation D of O_X,z relative to O_S,f(z), construct a sheaf derivation into the skyscraper module at z with coefficient N. On an open U it is the function sending a section a and a membership witness z in U to D(a_z). Additivity, Leibniz and restriction compatibility follow by the germ formulas. The value on f.app V b vanishes because its germ equals f.stalkMap z applied to b_f(z), on which D is zero. The source lemma derivationMk then makes it relative to the presheaf inverse image of O_S. No sheafification of that inverse image and no affine hypothesis is required.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-module-stalk",
+    "def-pc-ringed-module-skyscraper",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE, lemma-stalk-module-differentials; direct universal-property proof using sheaves.tex Tag 009C, lemma-stalk-skyscraper-adjoint. The existing field-specialized source construction is in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean, private fieldDifferentialsStalkToKaehler and its helpers."
+   }
+  },
+  {
+   "text": "The stalk-skyscraper Hom equivalence is the existing proved source declaration Scheme.Modules.skyscraperHomEquiv in WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk (the explicit scheme-module realization of the adjunction). Compose its inverse with relativeDifferentialsHomEquiv inverse, applied to the skyscraper derivation of step 2 for the universal ring derivation. This gives l:(Omega_X/S)_z -> Omega_(O_X,z/O_S,f(z)). The germ formula follows from Hom.stalkLinearMap_germ, skyscraperStalkEval_germ and relativeDifferentialsHomEquiv_symm_app_d. The same two injective Hom equivalences prove that two linear maps from the differential stalk are equal when they agree on differential germs.",
+   "uses": [
+    "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE, lemma-stalk-module-differentials; direct universal-property proof using sheaves.tex Tag 009C, lemma-stalk-skyscraper-adjoint. The existing field-specialized source construction is in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean, private fieldDifferentialsStalkToKaehler and its helpers."
+   }
+  },
+  {
+   "text": "Apply ModuleCat.Derivation.desc to the derivation of step 1 to construct r:Omega_(O_X,z/O_S,f(z)) -> (Omega_X/S)_z. The composite r l agrees with the identity on every differential germ by the formulas of steps 1 and 3, hence is the identity by the extensionality just proved. To prove l r is the identity, use CommRingCat.KaehlerDifferential.ext: every local ring element is a germ, and on its universal differential the same formulas and desc_d give equality. Consequently l is bijective, and LinearEquiv.ofBijective supplies the required linear equivalence.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-stalk",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-module-skyscraper-stalk-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE, lemma-stalk-module-differentials; direct universal-property proof using sheaves.tex Tag 009C, lemma-stalk-skyscraper-adjoint. The existing field-specialized source construction is in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean, private fieldDifferentialsStalkToKaehler and its helpers."
+   }
+  },
+  {
+   "text": "The equivalence has the required differential-germ formula by step 3. Any other equivalence with that formula has the same underlying linear map by the differential-germ extensionality from step 3; injectivity of LinearEquiv.toLinearMap gives equality. This proves existence and uniqueness without changing the theorem statement or imposing any additional hypotheses.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-module-skyscraper-stalk-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE, lemma-stalk-module-differentials; direct universal-property proof using sheaves.tex Tag 009C, lemma-stalk-skyscraper-adjoint. The existing field-specialized source construction is in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean, private fieldDifferentialsStalkToKaehler and its helpers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-module-stalk",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-ringed-module-skyscraper",
+  "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 08TE, lemma-stalk-module-differentials, proved directly from universal properties and sheaves.tex Tag 009C; generalizes the fully proved private field-stalk comparison in lean/Sheaf/AlgebraicGeometry/ConormalSequenceSmoothImmersion.lean to the actual base stalk map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*[Dd]ifferential|[Dd]ifferential.*stalk",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"differential\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the sheaf of relative differentials of a scheme morphism is canonically the Kahler differentials of its local ring map",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials', CommRingCat.KaehlerDifferential.d, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.localRingHom_comp_stalkIso, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, AlgebraicGeometry.Scheme.Hom.stalkMap, KaehlerDifferential.isLocalizedModule_map",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the sheaf of relative differentials of a scheme morphism is canonically the Kahler differentials of its local ring map",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, AlgebraicGeometry.stalkMap_toStalk_apply, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.localRingHom_comp_stalkIso_apply, ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.StructureSheaf.stalkIso_hom, AlgebraicGeometry.StructureSheaf.toPushforwardStalk",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(Kaehler|Differentials)|((Kaehler|Differentials).*stalk)|stalkIso",
+   "results": "0 hits; ; directory Mathlib/Algebra/Category/ModuleCat/Differentials",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking a germ of the universal differential identifies stalk Omega X S at x with Omega of the stalk rings",
+   "results": "8 hits; ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ, ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, AlgebraicGeometry.StructureSheaf.germ_comp_stalkToFiberRingHom, AlgebraicGeometry.StructureSheaf.toOpen_germ, ModuleCat.Tilde.toOpen_germ, AlgebraicGeometry.StructureSheaf.germ_toOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf sectionwise differentials and tilde-stalk localization are ingredients; none identifies the stalk of scheme relative differentials with the differential module of its local ring map"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Dd]ifferential|[Dd]ifferential.*stalk",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of relative differentials is the module of differentials of the local ring map",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials', AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"differential\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the sheaf of relative differentials is the Kahler differential module of the homomorphism on local rings",
+   "results": "8 hits; KaehlerDifferential.isLocalizedModule_map, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, KaehlerDifferential.isLocalizedModule_of_isLocalizedModule, KaehlerDifferential.isLocalizedModule, CommRingCat.KaehlerDifferential, PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk|localRing",
+   "results": "0 hits; ; directory Mathlib/Algebra/Category/ModuleCat/Differentials",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials of a scheme morphism commute with taking a stalk and universal derivation on germs",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_assoc, AlgebraicGeometry.Scheme.stalkMap_germ_assoc, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Hom.germ_stalkMap, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.Scheme.stalkMap_germ, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring localization, presheaf differentials or germ maps; none states the scheme differential stalk isomorphism with its derivation formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-tangent-differential-fibre-duality",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified group schemes detected by dual numbers at the identity. Supporting input: The tangent/differential comparison in moduli-curves.tex Tag 0E6G, first proof paragraph, citing varieties.tex Tag 0B2D. Stalk comparison needed to pass from the differential sheaf in the tangent/differential comparison to the local ring at the rational identity.",
+   "via": [
+    "lem-sfb-rational-tangent-differential-fibre-duality",
+    "lem-sfb-group-scheme-identity-dual-unramified",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-differentials-stalk",
+  "worker": "stage1",
+  "group": "Q04",
+  "summary": "Checked Stacks 08TE and proved its scheme specialization through the existing affine definition, tilde-stalk localization and localization of ring differentials. Wrote out the elementary change of base from C to C_p and the quotient-rule check for every local section; the generator argument proves canonicity. No new nodes, no statement change and no Lean attachment.",
+  "blueprint": "Supports the existing recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite chain via the rational tangent/differential fibre comparison. The current latest blueprint proof (3) states the compactification/direct-image reduction, not a separate differential lemma. This is an affine proof of the recorded prerequisite, with no change to the unit route. blueprint_refs.py ancestor returned None for this inherited new-target chain; its from.node and via are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-9d9b85a6d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-9d9b85a6d (reviewer sub-agent of L); spot-checked: The item statement is unchanged and is exactly Stacks modules.tex 08TE (l.4904) for O_1=f^{-1}O_S (01UQ), with no extra hypotheses. The delivery adds no new nodes and proof_deps equals the union of the step uses. Step 1: a chart U inside f^{-1}V exists; the affine-open-stalk node (c) gives A=B_q and R=C_p; locality gives p=phi^{-1}(q), which I re-derived. Step 2: def-sc-relative-differential-sheaf gives Omega|_U = (Omega_{B/C})~ with compatible derivations (matches 01UT l.6441); the tilde-stalk node gives alpha:(Omega)_z -> M_q with (db)_z -> db/1. Step 3: the Kaehler-localization Mathlib leaf (isLocalizedModule_map) gives beta. Step 4 is the elementary Leibniz argument of 00RT (1) (algebra.tex l.34078, read), giving Omega_{A/C} = Omega_{A/R}. Step 5: I recomputed the quotient-rule formula. The germs (db)_z generate the stalk, so the germ formula pins theta and makes it independent of the choices. Checked cases: id, open immersion, A^1_k at the generic point, k[eps]/eps^2 including characteristic 2, and non-injective C->B. lem-trf-affine-chart-stalk-differentials needs locally finite presentation and gives M_q, so it is not a duplicate. The parent fibre-duality node uses only the isomorphism and the germ formula. Route: every cited statement is a Mathlib leaf and the rest are definitions, so no tool_uses are needed. No SGA source, no cycle, no repair note. The null from.node is inherited from the new-target chain. Minor remark, not changed: the Leibniz rule in step 5 can be read on a distinguished affine open inside W' and U."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsStalk",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.existsUnique_relativeDifferentialsStalkEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsStalk.lean",
+  "statement": "theorem existsUnique_relativeDifferentialsStalkEquiv {X S : Scheme.{u}} (f : X ⟶ S) (z : X) : ∃! e : ((RingedSpace.moduleStalkFunctor X.toRingedSpace z).obj f.relativeDifferentials) ≃ₗ[X.presheaf.stalk z] CommRingCat.KaehlerDifferential (f.stalkMap z), ∀ (U : X.Opens) (hz : z ∈ U) (a : Γ(X, U)), e (f.relativeDifferentials.presheaf.germ U z hz (f.relativeDifferentialsDerivation.d (X := op U) a)) = CommRingCat.KaehlerDifferential.d (f := f.stalkMap z) (X.presheaf.germ U z hz a)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55b0b1e03",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Item lem-sfb-relative-differentials-stalk: theorem existsUnique_relativeDifferentialsStalkEquiv ∃! e : (RingedSpace.moduleStalkFunctor X z).obj f.relativeDifferentials ≃ₗ[O_{X,z}] CommRingCat.KaehlerDifferential (f.stalkMap z) with germ(d a) ↦ d(a_z) for all U, hz, a. Matches the node and Stacks 08TE (modules.tex l.4903); f⁻¹O_S is the presheaf pullback with the same stalk; the derivation is relative to pullbackPresheafToPresheaf; the algebra structure is (f.stalkMap z).toAlgebra; arbitrary schemes, single universe, no extra hypotheses; uniqueness = canonicity from proof step 5. Stalk carrier = M.1.presheaf stalk (Mathlib Modules/Sheaf.lean:89), same as the germs. RingedSpace.moduleStalkFunctor is used per the def-weil-pbc-module-stalk lean.note (rfl carrier): note only. Statement verbatim; proof is sorry; docstrings have source, blueprint id and 5 steps; no new defs; no duplicate (ConormalSequenceSmoothImmersion fibre comparison is field-specialised); edge cases empty X, open immersion, char 2 dual numbers ok. No recompile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T081348-L-1934764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,67 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\Lambda_X$ and $F(M)=M\\otimes_R L$. By [def-pc-flat-sheaf-modules], $F$ is exact. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this functor on the abelian category of $R$-module sheaves. For every cochain complex $C$ this gives canonical isomorphisms $H^i(F(C))\\cong H^i(C)\\otimes_R L$, natural in $C$. The total complex $C\\otimes_R L[0]$ is exactly $F(C)$: the only nonzero summand in degree $n$ has bidegree $(n,0)$ and its differential is $d_C\\otimes1$, by [def-kun-derived-tensor]. In particular this tensor is acyclic whenever $C$ is acyclic. Thus $L[0]$ is K-flat in the sense of [def-pc-kflat-complex], and has flat terms (the other terms are zero).",
+   "text": "Work directly in the existing ModuleCat-valued small-etale sheaf category and its adopted derived tensor [def-kun-derived-tensor]. Exactness of tensorRight L and the braiding give ObjectProperty.flat L. CochainComplex.kFlat_single_obj_iff_flat makes L[0] K-flat. DerivedCategory.isIso_tensorRightCounit and the monoidal quotient comparison make the canonical tensorator Q(C) tensor Q(L[0]) to Q(C tensor L[0]) invertible for every C. Collapse the signed total tensor using mapBifunctorSingle₂Iso. Compose its homology image with the exact-functor homology comparison [lem-weil-pbc-exact-functor-complex-cohomology]. Check simultaneous naturality: on the surviving (i,0) summand it is naturality of the single-object identification, and all other summands have zero source; ShortComplex.homologyMap_mapNatTrans gives naturality of exact-functor homology. Descend the resulting natural isomorphism along Q using [lem-weil-pbc-localization-universal-property]. To verify naturality for maps between flat L, restrict the two natural transformations along Q, use tensorator naturality and the cochain comparison square, and cancel the homology factorization isomorphism. Finally restrict the first variable to bounded constructible objects.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
+    "def-kun-derived-tensor",
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-kun-derived-tensor",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, applied degreewise; sites-cohomology.tex, definition-K-flat"
-   }
-  },
-  {
-   "text": "Represent $K$ by $C$, and choose a flat-term K-flat resolution $P\\to C$ using [lem-pc-kflat-resolution]. The derived tensor of [def-kun-derived-tensor] is represented by $P\\otimes_R L[0]$. Step 1 and the quasi-isomorphism give\n$$\\mathcal H^i(K\\otimes^L_\\Lambda L[0])\\cong H^i(P\\otimes_R L[0])\\cong H^i(P)\\otimes_R L\\cong\\mathcal H^i(K)\\otimes_R L.$$\nHere cohomology of a localized complex is the cohomology of that complex by [def-weil-pbc-derived-categories]. These identifications are natural on flat-term K-flat models: [lem-weil-pbc-site-derived-tensor-descent] supplies the natural tensor comparison and the equivalence between their localization and the derived category; the cohomology comparison is natural by [lem-weil-pbc-exact-functor-complex-cohomology]. Consequently the displayed comparison descends to the derived category and is natural in $K$. For a map $L\\to L'$ between flat sheaves, the maps $C^n\\otimes_R L\\to C^n\\otimes_R L'$ commute with the differentials and carry cycles to cycles and boundaries to boundaries. The comparisons induced on their cycle quotients therefore commute with this map as well, proving naturality in the flat factor.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-kun-derived-tensor",
-    "def-weil-pbc-derived-categories",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, lemma-K-flat-resolution, and 06YU, definition-derived-tor and preceding construction; natural localization comparison as in lem-weil-pbc-site-derived-tensor-descent"
+    "place": "Tag 06YU, definition-derived-tor and preceding localization construction, flat degree-zero specialization; the cycle-quotient comparison and its simultaneous naturality are the agent-extracted arguments of lem-fd-flat-constructible-tensor, returned proof steps 1-2."
    }
   },
   {
-   "text": "Fix $i$ and put $A=\\mathcal H^i(K)$. Choose the finite constructible locally closed scheme stratifications for $A$ and $L$ supplied by [def-weil-pbc-constructible-complexes] and [def-weil-pbc-etale-constructible-sheaf]. Apply [lem-weil-pbc-constructible-stratification-intersection] to them. It supplies a finite constructible stratification with strata $V_{k,l}=Z_k\\times_XW_l$ and maps to both original strata. Pullback of a locally constant sheaf is locally constant by [lemma-constructible-pullback-locally-constant], and pullback of a finite sheaf is finite by [lemma-constructible-pullback-finite]. Hence both restrictions to every $V_{k,l}$ remain finite locally constant. For their module structures we use [prop-weil-pbc-inverse-image-modules-exact]: constant coefficient rings pull back to the same constant coefficient ring, and module pullback agrees with inverse image. Thus the pulled-back local trivializations are trivializations as $\\Lambda$-modules.",
+   "text": "Unpack the stratifications of H^i(K) and L from [def-weil-pbc-etale-constructible-sheaf] and [def-weil-pbc-constructible-complexes]. Convert their finite-value trivializations to finite local constancy using [lem-weil-pbc-finite-locally-constant-module-values]. Retain the same strata, immersions and constructibility proofs as FiniteLocallyClosedStratification inputs to [lem-fd-constructible-tensor-refinement-witness], obtaining constructibility of H^i(K) tensor L. Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] and invariance of constructible sheaves under isomorphism to transport this across step 1.",
    "uses": [
     "def-weil-pbc-constructible-complexes",
     "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-constructible-pullback-finite",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-fd-constructible-tensor-refinement-witness",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement argument; the global finite-stratification form uses actual fibre-product strata"
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
    }
   },
   {
-   "text": "For each stratum immersion $v:V_{k,l}\\to X$, [lem-weil-pbc-ringed-topoi-module-pullback-tensor] applied to the induced morphism of small etale topoi gives $v^*(A\\otimes_R L)\\cong v^*A\\otimes_{\\Lambda_{V_{k,l}}}v^*L$. Its constant ring comparison and its identification of $v^*$ with inverse image are supplied by [prop-weil-pbc-inverse-image-modules-exact]. The two factors are finite locally constant by step 3. Their tensor is locally constant by [lem-weil-pbc-flc-tensor-locally-constant-part] and finite by [lem-weil-pbc-flc-tensor-finite-part]. The same finite constructible stratification therefore witnesses that $A\\otimes_R L$ is constructible by [def-weil-pbc-etale-constructible-sheaf]. Step 2 now proves constructibility of every cohomology sheaf of the derived tensor.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-flc-tensor-locally-constant-part",
-    "lem-weil-pbc-flc-tensor-finite-part",
-    "def-weil-pbc-etale-constructible-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095I, lemma-tensor-product-constructible; Tag 095D, lemma-tensor-product-locally-constant; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback"
-   }
-  },
-  {
-   "text": "If $\\mathcal H^i(K)=0$, step 2 identifies the tensor cohomology with $0\\otimes_R L=0$ (the exact functor of step 1 preserves zero). In particular, for any interval $[a,b]$ outside which the cohomology of $K$ vanishes, the tensor cohomology vanishes outside that same interval. Together with step 4 this is precisely membership in $D^b_c(X,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. The only flatness hypothesis used was flatness of $L$ in step 1; nothing imposed finite Tor amplitude on $K$.",
+   "text": "Where $\\mathcal H^i(K)=0$, step 1 identifies the tensor cohomology with $0\\otimes_{\\Lambda_X}L=0$. Thus every cohomology interval $[a,b]$ for $K$ is also one for its tensor with $L[0]$. Combining these bounds with step 2 gives membership in $D^b_c(X,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. Only $L$ was assumed flat.",
    "uses": [
     "def-weil-pbc-constructible-complexes"
    ],
@@ -89,27 +57,19 @@
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-kun-derived-tensor",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution",
-  "def-weil-pbc-derived-categories",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lemma-constructible-pullback-locally-constant",
-  "lemma-constructible-pullback-finite",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-flc-tensor-locally-constant-part",
-  "lem-weil-pbc-flc-tensor-finite-part"
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-fd-constructible-tensor-refinement-witness",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095I, lemma-tensor-product-constructible, with explicit exact-flat degree-zero cohomology computation from Homology Tag 010N and ringed-site K-flat models (Tags 06YS, 06YU); global finite stratifications retained"
+  "place": "Tags 095I and 0961; native ModuleCat-valued K-flat tensorator computation of the flat-single cohomology comparison, using Homology Tag 010N and localization as in sites-cohomology.tex Tag 06YU. Fully proved in Lean by P5, 2026-10-24."
  },
  "mathlib_searches": [
   {
@@ -182,38 +142,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-fd-flat-constructible-tensor",
   "worker": "stage1",
-  "summary": "Computed cohomology using the exact tensor functor and flat-term K-flat models, including naturality on the derived category. Reused the existing fibre-product stratification, pullback and finite/locally-constant tensor nodes to prove constructibility globally. No new node or changed statement.",
-  "blueprint": "thm-fd-transform-well-defined, first sentence and tensor clause: the rank-one lisse kernel preserves bounded constructibility. This item realizes the flat degree-zero tensor argument in the finite-ring realization accepted for the parent.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic resolution on any ringed site, needed to compute the ordinary small-etale derived tensor; no coefficient or geometric restriction is added."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic localization and natural tensor comparison for flat-term K-flat complexes, used only to establish naturality of the model computation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic ordinary module tensor comparison for a morphism of ringed topoi, used on the common strata without changing the Fourier proof route."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 re-split return: move the complete returned steps 1-2 into a statement-only ringed-site flat-tensor cohomology and naturality lemma, and steps 3-4 into a statement-only prescribed-stratification tensor-witness lemma. Keep unchanged bounds as elementary assembly. Both new tasks have independent hypotheses and can be worked in parallel. Item statement and all inherited citations/searches retained; full original arguments retained in report.",
+  "blueprint": "thm-fd-transform-well-defined, proof first sentence: tensor with the lisse rank-one kernel preserves bounded constructibility. New nodes isolate the homological and finite-stratification arguments underlying this same route.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q39-581b47b98",
-  "group": "Q39",
+  "reviewer": "NT-cc-Q12-cd397d075",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-581b47b98 (reviewer sub-agent of L); spot-checked: I read in full the item, its 5 steps, the statement of every cited node, the parent thm-fd-transform-well-defined (step 3 uses exactly this item's conclusion) and the unit sk-prop-well-defined. I checked the sources at the cited places: Stacks 095I (etale-cohomology.tex l.11991), 0961 (l.13688), 095D, and Homology 010N (homology.tex l.1545). The statement is unchanged and correct. Small cases: X empty, Lambda=0, L=0 and K=0 give zero. On a point with Lambda=Z/4, L=Lambda flat and K=Z/2[0] (infinite Tor amplitude), the tensor is Z/2[0] with the same bounds. With the non-flat L=Z/2, H^-1=Tor_1 is nonzero, so flatness is essential and the statement is sharp. Step 1: the exact-functor Mathlib leaf plus def-kun's total complex give C⊗L[0]=F(C) exactly (the sign term vanishes), so L[0] is K-flat in the def-pc-kflat-complex order and has flat terms. Step 2: the lem-pc-kflat-resolution model P has no bound condition. Naturality comes from the descent lemma, since P and L[0] both lie in P_R; it uses statements, not proofs. Step 3: the intersection node gives actual fibre-product strata Z_k×_X W_l (so the E3 containment trap is avoided). The pullback lemmas cover concrete-valued sheaves, and prop-weil-pbc-inverse-image-modules-exact (1)-(2) makes the trivializations Lambda-linear. The pseudo-functoriality mu^{-1}=pr^{-1}iota^{-1} is implicit but elementary. Step 4: the ringed-topoi tensor comparison applies with c the isomorphism from prop (1); the locally-constant and finite parts are each used once; the same stratification witnesses constructibility. Step 5 is elementary. Route: the off-unit statements are Lean-closed or Mathlib, except three, which are declared as tool_uses. I accept lem-pc-kflat-resolution, lem-weil-pbc-site-derived-tensor-descent and lem-weil-pbc-ringed-topoi-module-pullback-tensor as generic black-box tools. No new nodes and no duplicate found: lem-sfb-dc-tensor-preserves, det-lem-int-tensor-product and lem-pur-finite-tensor-constructible-cohomology have different coefficients or sites. No SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-cd397d075 (reviewer sub-agent of L); spot-checked: This answers the human's 2026-10-21 re-split note (released 2026-10-22). Live is still Q39-split and not superseded. Comparing the base proof step by step: old steps 1-2 (exact flat tensor, Tot(C⊗L[0])=F(C), L[0] K-flat with flat terms, flat-term K-flat resolution, descent, naturality in K and in L→L' through cycle quotients) are all conclusions of lem-fd-ringed-flat-single-tensor-cohomology (c^i for every complex, γ^i natural in both variables, normalization independent of the resolution). Old steps 3-4 (fibre-product refinement, finite locally constant pullbacks with Λ-linear trivializations via prop-weil-pbc-inverse-image-modules-exact (1)-(2), the pullback-tensor comparison, finite locally constant tensors, constructibility of A⊗B) are all conclusions of lem-fd-constructible-tensor-refinement-witness. Old step 5 stays in the item as an elementary step. Nothing was dropped or blurred. The two nodes are of comparable size (~1.85k chars each), independent (one has no constructibility, the other no flatness or derived objects), and neither restates the item. The item proof is a 3-step assembly of 1252 chars, and its statement is unchanged. Checks: in item step 1, c^i holds for every complex, so the def-kun representative Q(P⊗L[0]) for any K-flat P gives the isomorphism, and γ plus the descent model comparison gives naturality. Node B's hypotheses are exactly def-weil-pbc-etale-constructible-sheaf (a)/(b), and its strata agree with lem-weil-pbc-constructible-stratification-intersection, so the E3 trap does not arise. Small cases (R=0, L=0, empty X, empty strata, Z/4 with (Z/2)[0], non-flat L=Z/2) all behave as stated. Duplicate scan: lem-sf-ringed-kflat-single-tensor-comparison is the derived-form tool but has no cohomology, flat-L or K-flatness clause; lem-pc-flat-tensor-complex-cohom, lem-sfb-finite-flat-constructible-total-tensor and lem-pur-finite-tensor-constructible-cohomology have other settings. Not duplicates. Sources read: Stacks 095I (etale-cohomology.tex l.11991, common-refinement proof) and 06YU with its preceding construction (sites-cohomology.tex l.3300). No SGA. Mathlib searches of three kinds are recorded with no match, which I accept. Advisory: the merge-owned tool_uses on the item still lists three tools the new proof no longer cites."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -239,5 +182,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190553-L-4123657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

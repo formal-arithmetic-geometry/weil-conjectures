@@ -356,20 +356,37 @@
   "module": "Sheaf.AlgebraicGeometry.AlterationGeneratorsReducedBaseChange",
   "declaration": "AlgebraicGeometry.PrimeToEllAlteration.alteration_generators_reduced_baseChange",
   "file": "lean/Sheaf/AlgebraicGeometry/AlterationGeneratorsReducedBaseChange.lean",
-  "statement": "theorem alteration_generators_reduced_baseChange {S S' : Scheme.{u}} [IsReduced S] [IsReduced S'] [IsNoetherian S] [IsNoetherian S'] (h : S' ⟶ S) [Flat h] (hred : ∀ (s : S) (L : Type u) [Field L] [Algebra (S.residueField s) L] [Module.Finite (S.residueField s) L], IsReduced (pullback (h.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) L))))) (ell : ℕ) [Fact ell.Prime] : ∃ F : Alt S ⥤ Alt S', F ⋙ (ObjectProperty.ι _ : Alt S' ⥤ Over S') = (ObjectProperty.ι _ : Alt S ⥤ Over S) ⋙ Over.pullback h ∧ PreservesLimitsOfShape (Discrete PEmpty.{1}) F ∧ (∀ (T X Y P : Alt S) (f : X ⟶ T) (g : Y ⟶ T) (p : P ⟶ X) (q : P ⟶ Y), IsPullback p q f g → IsPullback (F.map p) (F.map q) (F.map f) (F.map g) ∧ ∃ j : P.obj.left ⟶ pullback f.hom.left g.hom.left, IsClosedImmersion j ∧ j ≫ pullback.fst f.hom.left g.hom.left = p.hom.left ∧ j ≫ pullback.snd f.hom.left g.hom.left = q.hom.left ∧ Set.range j = {z | ∃ c ∈ irreducibleComponents (pullback f.hom.left g.hom.left : Scheme.{u}), z ∈ c ∧ closure ((pullback.fst f.hom.left g.hom.left ≫ X.obj.hom) '' c) ∈ irreducibleComponents S}) ∧ (∀ (T : Alt S) (I : Type w) (U : I → Alt S) (f : ∀ i, U i ⟶ T), IsPrimeToEllDecomposedEtaleFamily ell U f → IsPrimeToEllDecomposedEtaleFamily ell (fun i ↦ F.obj (U i)) (fun i ↦ F.map (f i))) ∧ (∀ (T U : Alt S) (f : U ⟶ T), IsProper f.hom.left → Surjective f.hom.left → IsMaximallyPrimeToEllFinite ell f.hom.left → IsProper (F.map f).hom.left ∧ Surjective (F.map f).hom.left ∧ IsMaximallyPrimeToEllFinite ell (F.map f).hom.left)",
-  "branch": "newtargets-dag",
-  "by": "Q57",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.AlterationGeneratorsReducedBaseChange deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem alteration_generators_reduced_baseChange {S S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S'] [IsReduced S] [IsReduced S'] (h : S' ⟶ S) [Flat h] (hred : ∀ (s : S) (K : Type u) [Field K] [Algebra (S.residueField s) K] [Module.Finite (S.residueField s) K], IsReduced (pullback h (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) K)) ≫ S.fromSpecResidueField s))) (ell : ℕ) [Fact ell.Prime] : ∃ F : Alt S ⥤ Alt S', F ⋙ ObjectProperty.ι _ = ObjectProperty.ι _ ⋙ Over.pullback h ∧ (∀ T : Alt S, IsTerminal T → Nonempty (IsTerminal (F.obj T))) ∧ (∀ (P X Y Z : Alt S) (p : P ⟶ X) (q : P ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z), IsPullback p q f g → IsPullback (F.map p) (F.map q) (F.map f) (F.map g)) ∧ (∀ (X Y Z : Alt S) (f : X ⟶ Z) (g : Y ⟶ Z), ∃ (P : Alt S) (p : P ⟶ X) (q : P ⟶ Y), IsPullback p q f g ∧ ∃ j : P.obj.left ⟶ pullback f.hom.left g.hom.left, IsClosedImmersion j ∧ j ≫ pullback.fst f.hom.left g.hom.left = p.hom.left ∧ j ≫ pullback.snd f.hom.left g.hom.left = q.hom.left ∧ Set.range j = ⋃₀ {C | C ∈ irreducibleComponents ↥(pullback f.hom.left g.hom.left) ∧ ∃ η : ↥(pullback f.hom.left g.hom.left), IsGenericPoint η C ∧ closure ({(pullback.fst f.hom.left g.hom.left ≫ X.obj.hom) η} : Set S) ∈ irreducibleComponents S}) ∧ (∀ {I : Type w} {T : Alt S} (U : I → Alt S) (f : ∀ i, U i ⟶ T), IsPrimeToEllDecomposedEtaleFamily ell U f → IsPrimeToEllDecomposedEtaleFamily ell (fun i ↦ F.obj (U i)) (fun i ↦ F.map (f i))) ∧ (∀ (U T : Alt S) (f : U ⟶ T), IsProper f.hom.left → Surjective f.hom.left → IsMaximallyPrimeToEllFinite ell f.hom.left → IsProper (F.map f).hom.left ∧ Surjective (F.map f).hom.left ∧ IsMaximallyPrimeToEllFinite ell (F.map f).hom.left)",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/AlterationGeneratorsReducedBaseChange.lean",
+  "module": "Sheaf.AlgebraicGeometry.AlterationGeneratorsReducedBaseChange",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.alteration_generators_reduced_baseChange",
+  "reason": "module deleted as dead (no target reaches it; this node is not reached either); the declaration exists nowhere else in lean/, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e85a65db6",
-  "group": "Q57",
+  "reviewer": "NT-stage2-cc-56a30ba16",
+  "group": "Q148",
   "result": "pass",
-  "note": "The statement says exactly what the node says, clause by clause: reduced Noetherian S and S', flat h, the finite residue-field fibre reducedness condition hred, and a prime ell with no extra hypotheses. The functor is fixed by an equality with Over.pullback h. The conclusion covers terminal preservation, preservation of universal IsPullback cones, and a closed immersion into the ordinary pullback whose image is the union of components dominating S (with P reduced, this is the reduced dominant part). Both generator kinds are preserved, using the dependency's predicates IsPrimeToEllDecomposedEtaleFamily and IsMaximallyPrimeToEllFinite. I checked that the mathematics is true (030V plus the Mathlib flat reduced pullback instance, a going-down argument for generic points, equal supports of the dominant parts, and the prime-to-ell residue degree count). Edge cases hold: empty schemes, empty index, ell equal to a residue characteristic, non-surjective h. The conventions agree with the landed consumer RegularPairAlterationPullback. The node differs from the live one only in its lean record, and the statement matches the file verbatim. No definitions, proof only sorry, docstrings carry the source place and blueprint id, and the report has both required sections. No duplicate found in the side lean tree. nt_compile --json: clean, 2.5 s, exit 0. Advisory only: IsClosedImmersion and irreducibleComponents are not stmt_deps."
+  "note": "Re-delivery of the deleted module; only the node's lean record changed against side-live. Clause by clause against the node: reduced Noetherian S and S', flat h, hred = the fibre stays reduced after every finite extension K/κ(s) (trivial extension included, no separability), ell prime. F is fixed to ordinary base change by F ⋙ ι = ι ⋙ Over.pullback h. It preserves terminal objects and every IsPullback cone. The product clause gives a closed immersion compatible with both projections whose range is the union of the components dominating S; P is reduced because it lies in Alt S, so this is the reduced dominant part. Decomposed étale families (index I : Type w) and proper surjective maximally ell'-finite maps are preserved through the recorded PrimeToEllAlterationTopology predicates, read in full in side-live. Truth re-derived (030V plus the Mathlib flat reduced-pullback instance, flat going-down for generic points, equal supports of the dominant parts, residue-degree lifts). Edge cases checked. lean.statement is verbatim equal to the file signature (checked by script). No defs, sorry only, docstrings carry source and blueprint id, both report sections present, all imports exist, no duplicate declaration. No compile: no file changed. Advisory, not blocking: IsClosedImmersion and irreducibleComponents are not stmt_deps; the stale lean_removed record remains in the node; the module has no copyright header."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-normal-open-line-weil-dictionary",
+ "kind": "statement",
+ "title": "Weil divisor data of an invertible sheaf on an open normal affine scheme",
+ "statement": "Let $A$ be a commutative Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], and put $K=\\operatorname{Frac}(A)$. Write $H(A)$ for the nonzero prime ideals with no prime strictly between them and $(0)$ [def-trf-affine-weil-divisor-class-group]. For $\\mathfrak r\\in H(A)$, let $v_{\\mathfrak r}:K^\\times\\to\\mathbf Z$ be the normalized valuation of the discrete valuation ring $A_{\\mathfrak r}$ [def-weil-pbc-localization-at-prime, def-sc-discrete-valuation-ring]. Let $U$ be a nonempty open subscheme of $\\operatorname{Spec}A$ [def-weil-affine-spectrum, def-weil-open-immersion], and let $L$ be an invertible $\\mathcal O_U$-module [def-sc-invertible-module]. There exists a finitely supported family of integers $(d_{\\mathfrak r})_{\\mathfrak r\\in H(A)\\cap U}$ with both of the following properties. For every point $\\mathfrak t\\in U$, there exists $a_{\\mathfrak t}\\in K^\\times$ such that $d_{\\mathfrak r}=v_{\\mathfrak r}(a_{\\mathfrak t})$ for every $\\mathfrak r\\in H(A)$ contained in $\\mathfrak t$. Moreover, $L\\cong\\mathcal O_U$ if and only if there exists $a\\in K^\\times$ such that $d_{\\mathfrak r}=v_{\\mathfrak r}(a)$ for every $\\mathfrak r\\in H(A)\\cap U$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02SG (lemma-divisor-meromorphic-locally-finite), 0BE6 (definition-divisor-invertible-sheaf), and 0BE8 (lemma-normal-c1-injective), including the proof by dividing a rational section by a rational function; the local equations are the coefficients in a local frame used in definition-order-vanishing-meromorphic. Here U is Noetherian, so locally finite support is finite."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-trf-height-one-fraction-order"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}A$ and $\\eta=(0)$. By [lem-weil-pbc-spec-domain-stalks-function-field], $X$ is integral, $k(X)=K$, and its stalk at $\\mathfrak t$ is $A_{\\mathfrak t}$. The open subscheme structure of [def-weil-open-immersion] identifies $\\mathcal O_{U,\\mathfrak t}$ with the same stalk. The nonempty open $U$ is integral: its space is irreducible because any two nonempty opens in it are nonempty opens in $X$, and its restricted structure sheaf is reduced because that of $X$ is reduced. Thus it satisfies the reduced-and-irreducible characterization of [def-pc-integral-scheme], with the same generic point and function field. By [lem-sc-invertible-module-generic-stalk], $L_\\eta$ is a one-dimensional $K$-vector space, the maps $L_{\\mathfrak t}\\to L_\\eta$ are injective, and an element of $L_\\eta$ is a regular section on $U$ exactly when it belongs to every stalk image.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-open-immersion",
+    "def-pc-integral-scheme",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (lemma-meromorphic-functions-integral-scheme), and the integral case of Tag 02OZ (lemma-regular-meromorphic-section-exists)"
+   }
+  },
+  {
+   "text": "Choose a nonempty trivializing open $W\\subseteq U$ and a frame $e\\in L(W)$ using [def-sc-invertible-module]. By the basic-open basis of [lem-weil-pbc-spec-localization-away-basic-open], choose $0\\ne f\\in A$ with $D(f)\\subseteq W$. Take $s=e_\\eta\\in L_\\eta\\setminus\\{0\\}$. On $D(f)$ this chosen rational section is already a regular frame. For every $\\mathfrak r\\in H(A)\\cap U$, choose a generator $e_{\\mathfrak r}$ of $L_{\\mathfrak r}$ and write $s=b_{\\mathfrak r}(e_{\\mathfrak r})_\\eta$ with $b_{\\mathfrak r}\\in K^\\times$, using [lem-sc-invertible-module-generic-stalk].",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OZ, integral case; Tag 02SG (lemma-divisor-meromorphic-locally-finite), first sentence of proof"
+   }
+  },
+  {
+   "text": "Set $d_{\\mathfrak r}=v_{\\mathfrak r}(b_{\\mathfrak r})$. This is independent of the generator: if $e'_{\\mathfrak r}=u e_{\\mathfrak r}$ with $u\\in A_{\\mathfrak r}^\\times$, then $b'_{\\mathfrak r}=b_{\\mathfrak r}/u$. The valuation homomorphism and unit criterion of [lem-trf-normal-domain-principal-divisor-kernel] give $v_{\\mathfrak r}(u)=0$, hence equal values. The cited node applies to $A$, which is a Noetherian normal domain, and supplies exactly the normalized valuations in the statement. For $\\mathfrak r\\in D(f)$, use the frame of Step 2; its coefficient is $1$, so $d_{\\mathfrak r}=0$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02SF (definition-order-vanishing-meromorphic); Tag 02SG, proof"
+   }
+  },
+  {
+   "text": "A prime in the support therefore contains $f$. Such a prime $\\mathfrak r$ is minimal among primes containing $(f)$: a smaller prime containing $f\\ne0$ would be a nonzero prime strictly between $(0)$ and the height-one prime $\\mathfrak r$. By [lem-sc-finite-minimal-primes-over-ideal], there are only finitely many minimal primes over $(f)$ in the Noetherian ring $A$. Hence the family $(d_{\\mathfrak r})$ has finite support. This also handles $D(f)=X$, when the support is empty.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02SG, proof via components of the complement of a nonempty trivializing open; affine version using algebra.tex Tag 00FR"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak t\\in U$. Choose a frame $e$ of $L$ on an open neighbourhood $V\\subseteq U$ of $\\mathfrak t$, using [def-sc-invertible-module], and write $s=a_{\\mathfrak t}e_\\eta$, $a_{\\mathfrak t}\\in K^\\times$, using [lem-sc-invertible-module-generic-stalk]. Every $\\mathfrak r\\subseteq\\mathfrak t$ lies in $V$: indeed $\\mathfrak t$ is in the closure of $\\{\\mathfrak r\\}$ in the spectrum, so any open containing $\\mathfrak t$ contains $\\mathfrak r$. At such a height-one prime the germ of $e$ is a generator and its coefficient for $s$ is precisely $a_{\\mathfrak t}$. The generator independence in Step 3 gives $d_{\\mathfrak r}=v_{\\mathfrak r}(a_{\\mathfrak t})$. This proves the local-equation clause, including that all of its indexed primes lie in $U$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02SF, coefficient of a meromorphic section in a local frame"
+   }
+  },
+  {
+   "text": "Suppose $d_{\\mathfrak r}=v_{\\mathfrak r}(a)$ on $H(A)\\cap U$ for some $a\\in K^\\times$. Put $t=a^{-1}s\\in L_\\eta$. Fix $\\mathfrak t\\in U$ and the local frame of Step 5; the coefficient of $t$ is $c=a_{\\mathfrak t}/a$. Set $R=A_{\\mathfrak t}$. This is Noetherian by [lem-weil-pbc-localization-noetherian] and a normal domain with fraction field $K$ by [lem-weil-pbc-localization-normal-domain]. By [lem-weil-pbc-primes-of-localization](1), its height-one primes correspond to $\\mathfrak r\\in H(A)$ contained in $\\mathfrak t$: contraction preserves strict chains and zero. All these $\\mathfrak r$ lie in $U$ by Step 5. By [lem-weil-pbc-localize-localization-at-prime](1), their local rings are $A_{\\mathfrak r}$, with the same embeddings in $K$, so their normalized valuations are $v_{\\mathfrak r}$. Step 5 and the assumed equality give $v_{\\mathfrak r}(c)=0$. The unit-kernel criterion of [lem-trf-normal-domain-principal-divisor-kernel], now applied to $R$, yields $c\\in R^\\times$. Thus $t$ belongs to $L_{\\mathfrak t}$ and generates it, for every $\\mathfrak t\\in U$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8 (lemma-normal-c1-injective), proof: divide the rational section by the rational function and apply the normal-domain unit criterion locally"
+   }
+  },
+  {
+   "text": "By [lem-sc-invertible-module-generic-stalk](3), $t$ from Step 6 is the generic germ of a global regular section $\\tau\\in L(U)$. Injectivity on stalks in part (2) shows that its germ at each $\\mathfrak t$ is the generating germ already found there. The map $\\mathcal O_U\\to L$, $1\\mapsto\\tau$, is an isomorphism: on a trivializing open write $\\tau=h e$; at each point $h$ has a unit germ, hence has a local inverse (represent the inverse germ on a smaller neighbourhood and shrink until the product is $1$). These local inverses define inverses to the module map and agree on overlaps. Therefore $L\\cong\\mathcal O_U$. Conversely, if $L$ is trivial, let $e\\in L(U)$ be a global frame and write $s=a e_\\eta$ for the unique $a\\in K^\\times$, using part (1) of the same node. At every height-one prime the coefficient in this frame is $a$, and Step 3 gives $d_{\\mathfrak r}=v_{\\mathfrak r}(a)$. This proves the other implication for the same family chosen in Step 3.",
+   "uses": [
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8, conclusion of proof; Tag 0BE6 (definition-divisor-invertible-sheaf), interpreted using Tag 02SF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme",
+  "lem-sc-invertible-module-generic-stalk",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localize-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02SF, 02SG, 0BE6 and 0BE8, with the affine minimal-prime support argument and the unit criterion applied to each A_t"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal_c1|normalC1|WeilDivisor|divisor.*invertible|Pic.*Weil",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib ring Picard groups and invertible fractional ideals do not give the Weil divisor and local equations of a sheaf on a possibly non-affine open normal scheme. StructureSheaf and Tilde search hits describe fractions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a normal integral Noetherian scheme the map from the Picard group to the Weil divisor class group is injective",
+   "results": "Hits: AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.map_injective_of_isIntegral, WeierstrassCurve.Affine.Point.toClass_injective, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, CommRing.Pic.instCoeSortType, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib ring Picard groups and invertible fractional ideals do not give the Weil divisor and local equations of a sheaf on a possibly non-affine open normal scheme. StructureSheaf and Tilde search hits describe fractions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"IsIntegrallyClosed\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib ring Picard groups and invertible fractional ideals do not give the Weil divisor and local equations of a sheaf on a possibly non-affine open normal scheme. StructureSheaf and Tilde search hits describe fractions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible sheaf on an open subscheme of the spectrum of a Noetherian normal domain its Weil divisor is finite, locally principal, and a globally principal associated Weil divisor implies that the sheaf is trivial",
+   "results": "Hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ClassGroup.mk0_eq_one_iff, ClassGroup.mk_eq_one_iff, AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, ClassGroup.mk_eq_one_of_coe_ideal, AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self, ModuleCat.Tilde.isLocallyFraction_pred",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib ring Picard groups and invertible fractional ideals do not give the Weil divisor and local equations of a sheaf on a possibly non-affine open normal scheme. StructureSheaf and Tilde search hits describe fractions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a normal scheme has a Weil divisor of a rational section and zero divisor class forces a trivialization",
+   "results": "Hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib ring Picard groups and invertible fractional ideals do not give the Weil divisor and local equations of a sheaf on a possibly non-affine open normal scheme. StructureSheaf and Tilde search hits describe fractions only."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|normalC1|divisor.*[Ii]nvertible|[Pp]ic.*[Ww]eil",
+   "results": "{\"t\": \"2026-10-24T06:59:15Z\", \"tool\": \"grep\", \"query\": \"WeilDivisor|normalC1|divisor.*[Ii]nvertible|[Pp]ic.*[Ww]eil\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: StructureSheaf gives fraction descriptions; CommRing.Pic is a ring-module Picard group and ClassGroup.mk0 requires a Dedekind domain. None gives the open-scheme line-bundle dictionary, local equations and both directions of triviality. Read StructureSheaf.lean, PicardGroup.lean:440-480 and ClassGroup/Basic.lean:232-260."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of a normal Noetherian integral scheme embeds into its Weil divisor class group",
+   "results": "{\"t\": \"2026-10-24T06:59:15Z\", \"tool\": \"leansearch\", \"query\": \"The Picard group of a normal Noetherian integral scheme embeds into its Weil divisor class group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic\", \"CommRing.Pic.mk\", \"CommRing.Pic.functor\", \"CommRing.Pic.instCoeSortType\", \"ClassGroup.mk0\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"Submodule.unitsQuotEquivRelPic_apply_coe\"], \"digest\": \"1d065722a0960dd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: StructureSheaf gives fraction descriptions; CommRing.Pic is a ring-module Picard group and ClassGroup.mk0 requires a Dedekind domain. None gives the open-scheme line-bundle dictionary, local equations and both directions of triviality. Read StructureSheaf.lean, PicardGroup.lean:440-480 and ClassGroup/Basic.lean:232-260."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"divisor\"",
+   "results": "{\"t\": \"2026-10-24T06:59:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"divisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MinTropical.instNoZeroDivisorsWithTop\"], \"digest\": \"6995efd5d4d1c06d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: StructureSheaf gives fraction descriptions; CommRing.Pic is a ring-module Picard group and ClassGroup.mk0 requires a Dedekind domain. None gives the open-scheme line-bundle dictionary, local equations and both directions of triviality. Read StructureSheaf.lean, PicardGroup.lean:440-480 and ClassGroup/Basic.lean:232-260."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle on an open subset of a normal Noetherian affine scheme choose a rational section; its codimension one valuations have finite support and it is principal exactly when the line bundle is trivial",
+   "results": "{\"t\": \"2026-10-24T06:59:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a line bundle on an open subset of a normal Noetherian affine scheme choose a rational section; its codimension one valuations have finite support and it is principal exactly when the line bundle is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\"], \"digest\": \"03e4622234937395\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: StructureSheaf gives fraction descriptions; CommRing.Pic is a ring-module Picard group and ClassGroup.mk0 requires a Dedekind domain. None gives the open-scheme line-bundle dictionary, local equations and both directions of triviality. Read StructureSheaf.lean, PicardGroup.lean:440-480 and ClassGroup/Basic.lean:232-260."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal integral scheme a rational section of an invertible sheaf with zero orders at all codimension one points is an everywhere generating regular section",
+   "results": "{\"t\": \"2026-10-24T07:00:00Z\", \"tool\": \"leanfinder\", \"query\": \"On a normal integral scheme a rational section of an invertible sheaf with zero orders at all codimension one points is an everywhere generating regular section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.Scheme.mem_basicOpen_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"8245cfd872ad04d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: StructureSheaf gives fraction descriptions; CommRing.Pic is a ring-module Picard group and ClassGroup.mk0 requires a Dedekind domain. None gives the open-scheme line-bundle dictionary, local equations and both directions of triviality. Read StructureSheaf.lean, PicardGroup.lean:440-480 and ClassGroup/Basic.lean:232-260."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-principal-divisor-punctured-local-criterion",
+  "date": "2026-10-24",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current latest blueprint main-20261024, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), quasi-compact open direct images through sk-prop-open-coefficients. Supporting algebra in the historical descendant chain recorded in via: the local parafactoriality input to principal-divisor-punctured-local-criterion uses EGA IV4 21.13.14 and the line-to-Weil-divisor passage. The current blueprint does not itself state this dictionary, and ancestor lookup returns null.",
+   "via": [
+    "lem-sfb-principal-divisor-punctured-local-criterion",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-open-line-weil-dictionary",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the finite family from a chosen generic section; proved finite support using minimal primes over one denominator, local equations in a frame, and the global triviality criterion by applying the existing normal-domain unit criterion to A_t and then the existing generic-stalk intersection lemma. No new nodes or Mathlib leaves. All cited statements and the Stacks proof were read.",
+  "blueprint": "Current latest blueprint main-20261024, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), quasi-compact open direct images through sk-prop-open-coefficients. Supporting algebra in the historical descendant chain recorded in via: the local parafactoriality input to principal-divisor-punctured-local-criterion uses EGA IV4 21.13.14 and the line-to-Weil-divisor passage. The current blueprint does not itself state this dictionary, and ancestor lookup returns null.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invertible-module-generic-stalk",
+    "why": "Generic invertible-module/stalk intersection tool for an arbitrary integral scheme; the current unit supplies no such statement."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic normal-domain valuation and unit-kernel tool from Stacks 031T; no trace-formula theorem or replacement unit route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-trf-normal-domain-principal-divisor-kernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-c33b6bfed",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-c33b6bfed (reviewer sub-agent of L); spot-checked: Statement and stmt_deps are identical to the live base, where the item was unsplit, so no target is weakened. No new nodes. The 7 steps follow Stacks divisors.tex 0BE8 (l.6874; divide by f, then 031S/031T locally) and are all correct. Step 4 gets finite support because a height-one prime containing f≠0 is minimal over (f), giving finitely many by lem-sc-finite-minimal-primes-over-ideal. Step 5 uses generization stability, so every r⊆t lies in the frame neighbourhood. Step 6 identifies the height-one primes of A_t with those r⊆t in A via primes-of-localization(1) and localize-localization(1), then applies the kernel unit criterion to A_t; t=(0) is the field case the kernel node states explicitly. Step 7 builds the global section from generic-stalk(3) and proves the converse for the same family. Edge cases checked: a field, a DVR, a non-affine punctured 2-dimensional normal local ring, and a Dedekind domain with nontrivial class group. All 12 citations are live and not on route-pivot-dropped, and each one's hypotheses hold where it is used. Steps are 479–1066 characters. Batch-5 finding on lem-trf-normal-domain-principal-divisor-kernel: it is pure commutative algebra (Stacks 00PD/031S/031T; its proof_deps are only weil-pbc/sc algebra leaves). Neither the trace-formula nor the Poincaré-duality assumption gives it, and its general algebraic statement is not a step of either proof, so the citation is accepted, as in the earlier Q80 FIX. Both tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalOpenLineWeilDictionary",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.normal_open_line_weil_dictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalOpenLineWeilDictionary.lean",
+  "statement": "theorem normal_open_line_weil_dictionary {A : Type u} [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A] (U : (Spec (CommRingCat.of A)).Opens) (hU : Nonempty U) (L : U.toScheme.Modules) [L.IsInvertible] : ∃ d : {q : Ring.WeilHeightOnePrime A // q.val ∈ U} →₀ ℤ, (∀ t : PrimeSpectrum A, t ∈ U → ∃ a : (FractionRing A)ˣ, ∀ q : {q : Ring.WeilHeightOnePrime A // q.val ∈ U}, q.val.val.asIdeal ≤ t.asIdeal → d q = Ring.weilFractionOrder q.val a.val) ∧ (Nonempty (L ≅ SheafOfModules.unit U.toScheme.ringCatSheaf) ↔ ∃ a : (FractionRing A)ˣ, ∀ q : {q : Ring.WeilHeightOnePrime A // q.val ∈ U}, d q = Ring.weilFractionOrder q.val a.val)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-405cfce2a",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Noetherian IsIntegrallyClosed domain A : Type u; (FractionRing A)ˣ; H(A)=Ring.WeilHeightOnePrime; v=Ring.weilFractionOrder (normalized DVR valuation on nonzero fractions); U nonempty open of Spec A with U.toScheme; L.IsInvertible; ∃ d : {q // q ∈ U} →₀ ℤ; local clause restricted to q∈U is equivalent (opens stable under generalization); the iff with Nonempty (L ≅ unit) uses the same d. lean.statement verbatim in file; only node changes are lean + added landed stmt_dep def-trf-height-one-fraction-order; 9 dep records identical to live. Edge cases checked: field, generic point, U=Spec A, non-affine U, d=0 non-trivial. Docstrings carry Stacks 02SF/02SG/0BE6/0BE8 + blueprint id + 7 proof steps; sorry only; real Worker report and Second reading sections. No duplicate found. Q95 also delivered this item (ecc183f9), neither landed. No file changed, no compile run."
+ }
+}

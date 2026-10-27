@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-u2-chain-restriction-coherence",
+ "kind": "statement",
+ "title": "Monoidal chain comparisons for inverse coefficient restriction",
+ "statement": "For normalized ordinary transports along ring-sheaf isomorphisms, the canonical chain identity and composition comparisons of inverse restriction are monoidal for the canonical termwise strong monoidal structures. The named cochainMonoidal construction caches exactly that canonical structure. Dependencies: [lem-pur-u2-ordinary-restriction-coherence], [lem-pur-u2-monoidal-complex-comparison], [lem-sfb-termwise-strong-monoidal].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03EK and 06YP; ordinary and termwise tensor comparison coherence"
+ },
+ "stmt_deps": [
+  "lem-pur-u2-ordinary-restriction-coherence",
+  "lem-pur-u2-monoidal-complex-comparison",
+  "lem-sfb-termwise-strong-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Cache tensor existence and compatibility instances for the module-sheaf graded categories. Define cochainMonoidal as the existing canonical termwise monoidal structure.",
+   "uses": [
+    "lem-pur-u2-ordinary-restriction-coherence",
+    "lem-pur-u2-monoidal-complex-comparison",
+    "lem-sfb-termwise-strong-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EK and 06YP; ordinary and termwise tensor comparison coherence"
+   }
+  },
+  {
+   "text": "For the identity comparison check the unit in degree zero and the tensor on each total-tensor summand, using the corresponding ordinary monoidal equations and naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EK and 06YP; ordinary and termwise tensor comparison coherence"
+   }
+  },
+  {
+   "text": "Apply the general monoidal-complex-comparison theorem to the monoidal ordinary restriction compositor. Its components are definitionally those of the canonical chain compositor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EK and 06YP; ordinary and termwise tensor comparison coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-u2-ordinary-restriction-coherence",
+  "lem-pur-u2-monoidal-complex-comparison",
+  "lem-sfb-termwise-strong-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03EK and 06YP; ordinary and termwise tensor comparison coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Termwise application to cochain complexes preserves monoidal identity and composition natural transformations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      {K L : CochainComplex C ℤ} →\\n        {n : ℤ} →\\n          {D : Type u_2} →\\n            [inst_2 : CategoryTheory.Category.{v_1, u_2} D] →\\n              [inst_3 : CategoryTheory.Preadditive \", \"doc\": \"Given a functor $\\\\Phi$ between preadditive categories and cochain complexes $K,L$, this function constructs a cochain in the homomorphism complex $\\\\text{Hom}(\\\\Phi(K),\\\\Phi(L))$ by applying $\\\\Phi$ compo\"}\n  {\"name\": \"CategoryTheory.Functor.mapCochainComplexSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {D : Type u'} →\\n          [inst_3 : CategoryTheory.Category.{v', u'} D] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n    \", \"doc\": \"For a zero-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and integer $ n $, the composition of the single-term cochain complex functor at $ n $ with the induced\"}\n  {\"name\": \"CochainComplex.ofHom_f\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplex\", \"type\": \"∀ {V : Type u} [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  {α : Type u_2} [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α] [inst_4 : DecidableEq α] (X : α → V)\\n  (d_X : (n : α) → X n ⟶ X (n + 1)) (sq_X : ∀ (n : α), CategoryTheory.CategoryStruc\", \"doc\": \"Given two cochain complexes $X$ and $Y$ in a category $\\\\mathcal{V}$ with zero morphisms, indexed by a right-cancellative additive semigroup $\\\\alpha$ with multiplicative identity, and a family of morph\"}\n  {\"name\": \"CochainComplex.ConnectData.map_id\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ} (h : CochainComplex.ConnectData K L),\\n  h.map h (CategoryTheory.CategoryStruct.id K) (CategoryTheory.CategoryStruct.id L) ⋯ =\\n    CategoryThe\", \"doc\": \"The morphism between connected cochain complexes constructed from the identity maps on the chain complex $ K $ and the cochain complex $ L $ is equal to the identity morphism on the connected cochain \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map_ofHom\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_1, u_2} D]\\n  [inst_3 : CategoryTheory.Preadditive D] (f : K ⟶ L) (Φ : CategoryTheory.Functor C D) [inst_4 : Φ.Additive],\\n \", \"doc\": \"For a chain map $\\\\varphi: F \\\\to G$ between cochain complexes in a preadditive category $\\\\mathcal{C}$ and a functor $\\\\Phi: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between preadditive categories, applying $\\\\Phi$ c\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map_comp\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {F G : CochainComplex C ℤ} (K : CochainComplex C ℤ) {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_1, u_2} D]\\n  [inst_3 : CategoryTheory.Preadditive D] {n₁ n₂ n₁₂ : ℤ} (z₁ : CochainComplex.HomComp\", \"doc\": \"For additive functors $\\\\Phi$ between preadditive categories and cochains $z_1: F \\\\to G$ of degree $n_1$ and $z_2: G \\\\to K$ of degree $n_2$ with $n_1 + n_2 = n_{12}$, the image of the composition $z_1 \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map_v\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {K L : CochainComplex C ℤ} {n : ℤ} {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_1, u_2} D]\\n  [inst_3 : CategoryTheory.Preadditive D] (z : CochainComplex.HomComplex.Cochain K L n) (Φ : CategoryTh\", \"doc\": \"Given a functor $\\\\Phi$ between preadditive categories and cochain complexes $K,L$, applying $\\\\Phi$ component-wise to each morphism in a cochain $z$ of degree $n$ in the homomorphism complex $\\\\text{Hom\"}\n  {\"name\": \"groupCohomology.cochainsFunctor_map\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] {X Y : Rep k G} (f : X ⟶ Y),\\n  (groupCohomology.cochainsFunctor k G).map f = groupCohomology.cochainsMap (MonoidHom.id G) f\", \"doc\": \"For any commutative ring $k$, group $G$, and representations $X$ and $Y$ of $G$ over $k$, the cochains functor applied to a morphism $f: X \\to Y$ yields the chain map between the inhomogeneous cochain \"}",
+   "date": "2026-10-24",
+   "verdict": "The returned cochain maps and single-functor results do not assert monoidality of a compositor for total tensor. The existing termwise strong comparison formulas are used to prove it on summands."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-24",
+   "verdict": "The returned cochain maps and single-functor results do not assert monoidality of a compositor for total tensor. The existing termwise strong comparison formulas are used to prove it on summands."
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplex.*[Mm]onoidal|mapHomologicalComplex.*IsMonoidal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "The returned cochain maps and single-functor results do not assert monoidality of a compositor for total tensor. The existing termwise strong comparison formulas are used to prove it on summands."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise application to cochain complexes preserves monoidal identity and composition natural transformations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.IsMonoidal.comp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \"(τ' : F₂ ⟶ F₃) [IsMonoidal τ] [IsMonoidal τ'] : IsMonoidal (τ ≫ τ')\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, lax monoidal functors $F_1, F_2, F_3 : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and monoidal natural transformations $\\\\eta : F_1 \\\\Rightarrow F_2$ and $\\\\\"}\n  {\"name\": \"CategoryTheory.NatTrans.IsMonoidal.id\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \": IsMonoidal (𝟙 F₁)\", \"doc\": \"The identity natural transformation on a lax monoidal functor satisfies the coherence conditions to be a monoidal natural transformation, ensuring compatibility with the tensor product and unit struct\"}\n  {\"name\": \"CategoryTheory.NatTrans.IsMonoidal.tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {inst_1 : CategoryTheory.MonoidalCategory C} {D : Type u₂}\\n  {inst_2 : CategoryTheory.Category.{v₂, u₂} D} {inst_3 : CategoryTheory.MonoidalCategory D}\\n  {F₁ F₂ : CategoryTheory.Functor C D} {τ : F₁ ⟶ F₂} {inst_4 : F₁.LaxMonoidal} {inst_5 :\", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, lax monoidal functors $F_1, F_2 : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a monoidal natural transformation $\\\\eta : F_1 \\\\Rightarrow F_2$, the diagram\"}\n  {\"name\": \"groupCohomology.cochainsMap_id_comp\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"{A B C : Rep k G} (φ : A ⟶ B) (ψ : B ⟶ C) :\\n  cochainsMap (MonoidHom.id G) (φ ≫ ψ) = cochainsMap (MonoidHom.id G) φ ≫ cochainsMap (MonoidHom.id G) ψ\", \"doc\": \"For any representations $A, B, C$ of a monoid $G$ over a ring $k$, and morphisms $\\\\phi: A \\\\to B$ and $\\\\psi: B \\\\to C$, the cochain map induced by the identity monoid homomorphism on $G$ satisfies $\\\\tex\"}\n  {\"name\": \"CategoryTheory.NatTrans.IsMonoidal.unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {inst_1 : CategoryTheory.MonoidalCategory C} {D : Type u₂}\\n  {inst_2 : CategoryTheory.Category.{v₂, u₂} D} {inst_3 : CategoryTheory.MonoidalCategory D}\\n  {F₁ F₂ : CategoryTheory.Functor C D} {τ : F₁ ⟶ F₂} {inst_4 : F₁.LaxMonoidal} {inst_5 :\", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, lax monoidal functors $F_1, F_2 : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a monoidal natural transformation $\\\\eta : F_1 \\\\Rightarrow F_2$, the diagram\"}\n  {\"name\": \"CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \"(α : F ⟶ G) : IsMonoidal α\", \"doc\": \"In a Cartesian monoidal category, any natural transformation $\\\\alpha : F \\\\Rightarrow G$ between functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ automatically satisfies the coherence conditions to be a m\"}\n  {\"name\": \"CategoryTheory.Monoidal.tensorHom_app\", \"module\": \"Mathlib.CategoryTheory.Monoidal.FunctorCategory\", \"type\": \"{F G F' G' : C ⥤ D} {α : F ⟶ G} {β : F' ⟶ G'} {X} : (α ⊗ₘ β).app X = α.app X ⊗ₘ β.app X\", \"doc\": \"For natural transformations $\\\\alpha: F \\\\Rightarrow G$ and $\\\\beta: F' \\\\Rightarrow G'$ between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ where $\\\\mathcal{D}$ is a monoidal category, the component of their t\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.id_comp\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"{n : ℤ} (z₂ : Cochain F G n) : (Cochain.ofHom (𝟙 F)).comp z₂ (zero_add n) = z₂\", \"doc\": \"For any cochain $ z_2 $ of degree $ n $ from $ F $ to $ G $, composing the identity cochain of $ F $ (of degree 0) with $ z_2 $ results in $ z_2 $ itself. This uses the fact that $ 0 + n = n $ to ensu\"}",
+   "date": "2026-10-24",
+   "verdict": "The returned cochain maps and single-functor results do not assert monoidality of a compositor for total tensor. The existing termwise strong comparison formulas are used to prove it on summands."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NormalizedRingIsoDerivedTransport",
+  "date": "2026-10-24",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ring-iso-derived-transport",
+   "place": "Proof steps for normalized coefficient transport"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingIsoChainCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/RingIsoChainCoherence.lean",
+  "declaration": "SheafOfModules.RingIsoTransport.chainComp_monoidal",
+  "declarations": [
+   "SheafOfModules.RingIsoTransport.cochainMonoidal",
+   "SheafOfModules.RingIsoTransport.chainId_monoidal",
+   "SheafOfModules.RingIsoTransport.chainComp_monoidal"
+  ],
+  "statement": "theorem chainComp_monoidal {R S T : Sheaf J CommRingCat.{r}}\n    (a : R ≅ S) (b : S ≅ T)\n    (oa : RingIsoTensorTransport a.symm) (ob : RingIsoTensorTransport b.symm)\n    (oc : RingIsoTensorTransport (a ≪≫ b).symm) :\n    let : (scalarRestriction a.inv).Monoidal := oa.monoidal.toMonoidal\n    let : (scalarRestriction b.inv).Monoidal := ob.monoidal.toMonoidal\n    let : (scalarRestriction (a ≪≫ b).inv).Monoidal := oc.monoidal.toMonoidal\n    let : (scalarRestriction a.inv).IsEquivalence :=\n      oa.functor_eq ▸ oa.equivalence.isEquivalence_functor\n    let : (scalarRestriction b.inv).IsEquivalence :=\n      ob.functor_eq ▸ ob.equivalence.isEquivalence_functor\n    let : (scalarRestriction (a ≪≫ b).inv).IsEquivalence :=\n      oc.functor_eq ▸ oc.equivalence.isEquivalence_functor\n    let := cochainMonoidal a oa\n    let := cochainMonoidal b ob\n    let := cochainMonoidal (a ≪≫ b) oc\n    NatTrans.IsMonoidal (chainComp a b).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

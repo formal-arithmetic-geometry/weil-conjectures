@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-complete-local-cotangent-graded-rigidity",
+ "kind": "statement",
+ "title": "Cotangent surjectivity and graded dimensions detect complete local isomorphisms",
+ "statement": "Let $(C,\\mathfrak m)$ and $(D,\\mathfrak n)$ be commutative Noetherian local rings [def-weil-pbc-noetherian-ring] complete for their maximal ideals [def-weil-pbc-adic-completion], so $C\\cong\\varprojlim_{j\\geq1}C/\\mathfrak m^j$ and $D\\cong\\varprojlim_{j\\geq1}D/\\mathfrak n^j$. Local means having a unique maximal ideal. Fix identifications of both residue fields with a field $k$ [def-weil-field]. Let $f:C\\to D$ be a local ring homomorphism inducing the identity on $k$, where local means $f^{-1}(\\mathfrak n)=\\mathfrak m$. Assume its induced $k$-linear map $\\mathfrak m/\\mathfrak m^2\\to\\mathfrak n/\\mathfrak n^2$, $c\\bmod\\mathfrak m^2\\mapsto f(c)\\bmod\\mathfrak n^2$, is surjective. Then $f$ is surjective. If in addition, for every integer $j\\geq0$, the finite-dimensional $k$-vector spaces $\\mathfrak m^j/\\mathfrak m^{j+1}$ and $\\mathfrak n^j/\\mathfrak n^{j+1}$ have equal dimension, then $f$ is an isomorphism. Here each vector-space structure is induced by the corresponding residue-field identification and dimension is the cardinality of a basis.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06GZ (lemma-surjective-cotangent-space), conditions (1)-(2); ring-theoretic graded-dimension argument in Tag 07XH (lemma-approximate-versal), proof after the dotted-arrow construction. The latter is extracted as a base-independent ring lemma. See literature/stacks-project/artin.tex for the second cited proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\mathfrak mD$, the ideal of finite sums $\\sum_i d_i f(c_i)$ with $c_i\\in\\mathfrak m$. Locality gives $J\\subseteq\\mathfrak n$. Cotangent surjectivity says that for each $y\\in\\mathfrak n$ there is $c\\in\\mathfrak m$ with $y-f(c)\\in\\mathfrak n^2$. Thus $\\mathfrak n=J+\\mathfrak n^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GZ, lemma-surjective-cotangent-space, implication (2) to (1); absolute cotangent calculation."
+   }
+  },
+  {
+   "text": "The $D$-module $M=\\mathfrak n/J$ is finitely generated: Noetherianity gives finitely many ideal generators of $\\mathfrak n$, whose classes generate $M$. The previous equality gives $\\mathfrak nM=(\\mathfrak n^2+J)/J=M$. The Jacobson radical of $D$ is $\\mathfrak n$, since it is the intersection of its unique maximal ideal. Apply the cited Nakayama lemma with $R=D$ and $I=\\mathfrak n$ to obtain $M=0$, hence $J=\\mathfrak n$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK, part (2)."
+   }
+  },
+  {
+   "text": "Apply the complete-source surjectivity lemma to $f:C\\to D$ and $I=\\mathfrak m$. Completeness of $C$ supplies $I$-adic precompleteness. Since $ID=J=\\mathfrak n$, completeness of $D$ supplies $ID$-adic Hausdorffness: an element lying in every $\\mathfrak n^r$ maps to the zero compatible sequence and is zero by injectivity of the completion map. Finally $C\\to D/ID=D/\\mathfrak n$ is surjective, since the residue-field map is the identity on $k$. The cited lemma therefore makes $f$ surjective, proving the first assertion.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GZ, lemma-surjective-cotangent-space, completeness passage; Mathlib complete-source lemma replaces the inverse-system exactness passage."
+   }
+  },
+  {
+   "text": "Assume now equality of all graded dimensions. Surjectivity of $f$ and locality give $f(\\mathfrak m)=\\mathfrak n$: any preimage of an element of $\\mathfrak n$ lies in $\\mathfrak m=f^{-1}(\\mathfrak n)$. For $j\\geq1$, write an element of $\\mathfrak n^j$ as a finite sum of products of $j$ elements of $\\mathfrak n$ (absorb each ring coefficient in the first factor), and lift every factor to $\\mathfrak m$. This proves $f(\\mathfrak m^j)=\\mathfrak n^j$; the case $j=0$ is surjectivity of $f$. Thus $g_j:\\mathfrak m^j/\\mathfrak m^{j+1}\\to\\mathfrak n^j/\\mathfrak n^{j+1}$, $[x]\\mapsto[f(x)]$, is surjective. It is well defined since $f(\\mathfrak m^{j+1})\\subseteq\\mathfrak n^{j+1}$, and $k$-linear since $f$ induces the identity on the residue field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH, lemma-approximate-versal, graded-dimension argument after the dotted arrows; explicit maps on associated graded pieces."
+   }
+  },
+  {
+   "text": "For each $j$, set $V=\\mathfrak m^j/\\mathfrak m^{j+1}$, $W=\\mathfrak n^j/\\mathfrak n^{j+1}$ and $K_j=\\ker(g_j)$. The quotient-dimension lemma makes $K_j$ finite-dimensional, since it is a subspace of the finite-dimensional space $V$. The maps $K_j\\hookrightarrow V\\xrightarrow{g_j}W$ give a short exact sequence: the first is inclusion, the last is surjective by the previous step, and its kernel is precisely the image of the inclusion. Apply dimension additivity to obtain $\\dim_k V=\\dim_k K_j+\\dim_k W$. The assumed equality $\\dim_k V=\\dim_k W$ implies $\\dim_k K_j=0$. A zero-dimensional space has empty basis and hence is zero. Therefore every $g_j$ is injective.",
+   "uses": [
+    "lem-trf-vector-space-quotient-dimension",
+    "lem-trf-finite-dimensional-short-exact-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH, lemma-approximate-versal, equal finite lengths imply injectivity; here dimension additivity is applied directly on each graded piece."
+   }
+  },
+  {
+   "text": "If $x\\in\\ker f$, induction gives $x\\in\\mathfrak m^j$ for every $j\\geq0$. The base is $\\mathfrak m^0=C$. If $x\\in\\mathfrak m^j$, its class is killed by $g_j$, so injectivity of $g_j$ gives $x\\in\\mathfrak m^{j+1}$. Hence $x$ has zero image in every $C/\\mathfrak m^j$. The injective completion map in the definition of completeness gives $x=0$. Thus $f$ is injective and surjective. Its inverse respects addition, multiplication and the unit by applying the injective map $f$ to the corresponding identities, so $f$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH, lemma-approximate-versal, final inverse-limit isomorphism argument, written as a kernel induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-trf-finite-dimensional-short-exact-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06GZ (lemma-surjective-cotangent-space), absolute criterion, and artin.tex Tag 07XH (lemma-approximate-versal), graded-dimension argument. Nakayama plus the existing complete-source lifting lemma implement the first passage; graded injectivity and separatedness implement the second, without a coefficient field or a coefficient base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A local map of complete Noetherian local rings with isomorphic residue fields and surjective cotangent map is surjective; equal Hilbert Samuel functions imply it is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"surjective_of_isLocalization_isMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  (Rₚ : (p : Ideal R) → [p.IsMaximal] → Type u_3) [inst_3 : (p : Ideal R) → [inst : p.IsMaximal] → CommSemiring (Rₚ p)]\\n  [inst_4 : (p : Ideal R) → [inst_4 : p.IsMaximal] → Algebra R (Rₚ p)] (Sₚ \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $R$, the induced algebra map $R_{\\\\mathfrak{p}} \\\\to S_{\\\\mathfrak{p}}$ is surjective, then the algebra map $R \\\\to S$ is surjective.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R] [IsNoetherianRing R],\\n  FiniteDimensional (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"RingHom.surjective_localRingHom_iff\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {f : R →+* S} (P : Ideal S)\\n  [inst_2 : P.IsPrime],\\n  Function.Surjective ⇑(Localization.localRingHom (Ideal.comap f P) P f ⋯) ↔\\n    ∀ (s : S), ∃ x r, ∃ c ∉ P, f r ∉ P ∧ c * f r * s = c * f x\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism between commutative semirings, with prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq S $ such that $ I $ is the preimage of $ J $ under $ f $. The induced lo\"}\n  {\"name\": \"RingHom.surjective_localRingHom_of_surjective\", \"module\": \"Mathlib/RingTheory/RingHom/Surjective\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  Function.Surjective ⇑f →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime], Function.Surjective ⇑(Localization.localRingHom (Ideal.comap f P) P f ⋯)\", \"doc\": \"If $ f : R \\\\to S $ is a surjective ring homomorphism between commutative rings and $ P $ is a prime ideal in $ S $, then the induced ring homomorphism from the localization of $ R $ at the preimage of\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A],\\n  Function.Bijective ⇑(algebraMap K A)\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring, then the canonical algebra homomorphism from $ K $ to $ A $ is bijective.\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.residueFieldMap_bijective\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.SurjectiveOnStalks →\\n    ∀ (I : Ideal R) [inst_2 : I.IsPrime] (J : Ideal S) [inst_3 : J.IsPrime] (hf : I = Ideal.comap f J),\\n      Function.Bijective ⇑(Ideal.ResidueField.map I J f hf)\", \"doc\": \"Given a ring homomorphism $ f : R → S $ between commutative rings that is surjective on stalks, and prime ideals $ I ⊆ R $, $ J ⊆ S $ such that $ I $ is the preimage of $ J $ under $ f $, the induced \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the complete local ring rigidity assertion; surjective_of_mkQ_comp_surjective concerns a linear map or an already controlled extended ideal, and additional Nakayama and graded-dimension arguments are needed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism modulo maximal ideal squared and equality of dimensions of every associated graded piece detect an isomorphism of complete local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ext_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {x y : AdicCompletion I R},\\n  (∀ (n : ℕ), (AdicCompletion.evalₐ I n) x = (AdicCompletion.evalₐ I n) y) → x = y\", \"doc\": \"If two elements $x$ and $y$ in the $I$-adic completion of a commutative ring $R$ satisfy $\\\\text{eval}_\\\\mathfrak{a}(n, x) = \\\\text{eval}_\\\\mathfrak{a}(n, y)$ for all natural numbers $n$, then $x = y$. Th\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{S : Type u_5} → [inst : CommRing S] → (I : Ideal S) → [IsAdicComplete I S] → S ≃ₐ[S] AdicCompletion I S\", \"doc\": \"Given a commutative ring $ S $, an ideal $ I $, and the condition that $ S $ is $ I $-adically complete, this constructs an $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\var\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (x : S),\\n  (AdicCompletion.ofAlgEquiv I) x = (AdicCompletion.of I S) x\", \"doc\": \"For a commutative ring $ S $ and an ideal $ I $, if $ S $ is $ I $-adically complete, then the canonical $ S $-algebra homomorphism from $ S $ to its $ I $-adic completion $ \\\\varprojlim S/I^nS $ is an\"}\n  {\"name\": \"AdicCompletion.ext_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {x y : AdicCompletion I M}, x = y ↔ ∀ (n : ℕ), ↑x n = ↑y n\", \"doc\": \"Two elements in the adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ are equal if and only if their projections to each quotient module $ M/I^nM $ are equal for all natural numb\"}\n  {\"name\": \"AdicCompletion.ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {x y : AdicCompletion I M}, (∀ (n : ℕ), ↑x n = ↑y n) → x = y\", \"doc\": \"In the adic completion of an $ R $-module $ M $ with respect to an ideal $ I $, two elements $ x $ and $ y $ are equal if their projections to each quotient module $ M/I^nM $ coincide for all natural \"}\n  {\"name\": \"AdicCompletion.mk_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.evalₐ I n) x\", \"doc\": \"For any natural number $ n $ and any element $ x $ in the $ I $-adic completion of a commutative ring $ S $, the image of $ (\\\\text{ofAlgEquiv}\\\\ I)^{-1}(x) $ under the canonical quotient map $ S \\\\to S/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the complete local ring rigidity assertion; surjective_of_mkQ_comp_surjective concerns a linear map or an already controlled extended ideal, and additional Nakayama and graded-dimension arguments are needed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective\", \"IsAdicComplete\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the complete local ring rigidity assertion; surjective_of_mkQ_comp_surjective concerns a linear map or an already controlled extended ideal, and additional Nakayama and graded-dimension arguments are needed here"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mkQ_comp_surjective|cotangent.{0,50}surject|surject.{0,50}cotangent|finrank.{0,40}AssociatedGraded",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"79\", \"text\": \"lemma Cotangent.surjective_map_ofComp :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"80\", \"text\": \"    Function.Surjective (Extension.Cotangent.map (Q.ofComp P).toExtensionHom) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"82\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Extension.Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"105\", \"text\": \"    obtain ⟨⟨x, hx⟩, rfl⟩ := Extension.Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"115\", \"text\": \"    obtain ⟨⟨x : (Q.comp P).Ring, hx'⟩, rfl⟩ := Extension.Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"179\", \"text\": \"  Ideal.toCotangent_surjective _\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"321\", \"text\": \"  intro x; obtain ⟨x, rfl⟩ := (KaehlerDifferential.ideal R S).toCotangent_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"801\", \"text\": \"    obtain ⟨x, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"153\", \"text\": \"  have cotsurj : Function.Surjective mapcot := Ideal.mapCotangent_surjective_of_comap_eq surjPP' h\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"155\", \"text\": \"    Ideal.mapCotangent_ker_of_surjective surjPP' h\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"166\", \"text\": \"    rcases Ideal.toCotangent_surjective _ x with ⟨y, rfl⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"166\", \"text\": \"    rcases Ideal.toCotangent_surjective _ m with ⟨m', hm'⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"177\", \"text\": \"    rcases Ideal.toCotangent_surjective _ m with ⟨m', hm'⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"line\": \"339\", \"text\": \"    obtain ⟨x, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"line\": \"394\", \"text\": \"    obtain ⟨x, rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"line\": \"405\", \"text\": \"    obtain ⟨⟨x, hx⟩, rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"408\", \"text\": \"theorem map_surjective_of_mkQ_comp_surjective {f : M →ₗ[R] N}\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"437\", \"text\": \"theorem surjective_of_mkQ_comp_surjective [IsPrecomplete I M] [IsHausdorff I N]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"440\", \"text\": \"  obtain ⟨x', hx'⟩ := AdicCompletion.map_surjective_of_mkQ_comp_surjective h (of I N y)\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"457\", \"text\": \"  apply surjective_of_mkQ_comp_surjective (I := I) (f := fₗ)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"43\", \"text\": \"    .of_surjective _ Extension.Cotangent.mk_surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"83\", \"text\": \"  obtain ⟨(x : P.ker), rfl⟩ := Cotangent.mk_surjective x\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"118\", \"text\": \"lemma cotangentComplexAux_surjective : Function.Surjective P.cotangentComplexAux := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"130\", \"text\": \"  LinearEquiv.ofBijective _ ⟨P.cotangentComplexAux_injective, P.cotangentComplexAux_surjective⟩\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the complete local ring rigidity assertion; surjective_of_mkQ_comp_surjective concerns a linear map or an already controlled extended ideal, and additional Nakayama and graded-dimension arguments are needed here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete Noetherian local ring homomorphism is an isomorphism if surjective on cotangent spaces with equal Hilbert Samuel functions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.local_hom_TFAE\", \"module\": \"Mathlib.RingTheory.LocalRing.RingHom.Basic\", \"type\": \"(f : R →+* S) :\\n  List.TFAE\\n    [IsLocalHom f, f '' maximalIdeal R ⊆ maximalIdeal S, (maximalIdeal R).map f ≤ maximalIdeal S,\\n      maximalIdeal R ≤ (maximalIdeal S).comap f, (maximalIdeal S).comap f = maximalIdeal R]\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between local rings $ R $ and $ S $, the following are equivalent: (1) $ f $ is a local homomorphism (i.e., maps non-units to non-units), (2) the image of the m\"}\n  {\"name\": \"IsLocalRing.CotangentSpace.map_eq_top_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] {M : Submodule R (maximalIdeal R)} : M.map (maximalIdeal R).toCotangent = ⊤ ↔ M = ⊤\", \"doc\": \"In a Noetherian local ring $ R $ with maximal ideal $ \\\\mathfrak{m} $, a submodule $ M \\\\subseteq \\\\mathfrak{m} $ satisfies $ M/\\\\mathfrak{m}^2 = \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (i.e., its image in the cota\"}\n  {\"name\": \"IsLocalHom.of_comap_surjective\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.RingHom\", \"type\": \"[CommSemiring R] [CommSemiring S] (f : R →+* S) (hf : Function.Surjective (comap f)) : IsLocalHom f\", \"doc\": \"For commutative semirings $ R $ and $ S $, if a ring homomorphism $ f : R \\\\to S $ induces a surjective map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ via prime ideal preimages, then $ f $ i\"}\n  {\"name\": \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : Subsingleton (CotangentSpace R) ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ is trivial (i.e., a subsingleton) if and only if $ R $ is a field, where $ \\\\mathfrak{m} $ denotes the unique maxi\"}\n  {\"name\": \"IsLocalRing.ResidueField.map.congr_simp\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] (f f_1 : R →+* S) (e_f : f = f_1) [inst_4 : IsLocalHom f],\\n  IsLocalRing.ResidueField.map f = IsLocalRing.ResidueField.map f_1\", \"doc\": \"If two local ring homomorphisms $ f, f' : R \\to S $ between commutative local rings are equal, then the induced ring homomorphisms between their residue fields $ R/\\\\mathfrak{m}_R $ and $ S/\\\\mathfrak{m}\"}\n  {\"name\": \"IsLocalRing.of_surjective\", \"module\": \"Mathlib.RingTheory.LocalRing.RingHom.Basic\", \"type\": \"[CommSemiring R] [IsLocalRing R] [Semiring S] [Nontrivial S] (f : R →+* S) [IsLocalHom f]\\n  (hf : Function.Surjective f) : IsLocalRing S\", \"doc\": \"Let $ R $ be a commutative local semiring, $ S $ a non-trivial semiring, and $ f : R \\to S $ a surjective local ring homomorphism. Then $ S $ is a local semiring.\"}\n  {\"name\": \"IsLocalRing.CotangentSpace.span_image_eq_top_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] {s : Set (maximalIdeal R)} :\\n  Submodule.span (ResidueField R) ((maximalIdeal R).toCotangent '' s) = ⊤ ↔ Submodule.span R s = ⊤\", \"doc\": \"For a Noetherian local ring $ R $ with maximal ideal $ \\\\mathfrak{m} $, the span of the image of a subset $ S \\\\subseteq \\\\mathfrak{m} $ in the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (viewed as \"}\n  {\"name\": \"IsLocalHom.of_surjective\", \"module\": \"Mathlib.RingTheory.LocalRing.RingHom.Basic\", \"type\": \"[CommRing R] [CommRing S] [Nontrivial S] [IsLocalRing R] (f : R →+* S) (hf : Function.Surjective f) : IsLocalHom f\", \"doc\": \"If $R$ and $S$ are commutative rings with $S$ non-trivial and $R$ local, and $f : R \\\\to S$ is a surjective ring homomorphism, then $f$ satisfies the local homomorphism conditions.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the complete local ring rigidity assertion; surjective_of_mkQ_comp_surjective concerns a linear map or an already controlled extended ideal, and additional Nakayama and graded-dimension arguments are needed here"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mk_map_comp_surjective|cotangent.{0,40}surject|surject.{0,40}cotangent|finrank.{0,40}AssociatedGraded",
+   "results": "Actual search: 25 hits; top results: Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: local/formally smooth criteria and cotangent quotient maps do not state the item. The complete-source surjectivity hit needs the extended-ideal calculation and Nakayama first; associated graded injectivity still needs dimension additivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete local ring homomorphism surjective cotangent space equal Hilbert Samuel function isomorphism",
+   "results": "Actual search: 8 hits; top results: IsLocalHom.of_surjective, Function.Surjective.isLocalHom, IsLocalRing.CotangentSpace.map_eq_top_iff, surjective_of_isLocalization_of_span_eq_top, RingHom.surjective_localRingHom_iff, Ideal.cotangentEquivIdeal, IsLocalRing.of_surjective, IsLocalRing.residue_surjective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: local/formally smooth criteria and cotangent quotient maps do not state the item. The complete-source surjectivity hit needs the extended-ideal calculation and Nakayama first; associated graded injectivity still needs dimension additivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective\", \"IsAdicComplete\"",
+   "results": "Actual search: 0 hits; top results: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: local/formally smooth criteria and cotangent quotient maps do not state the item. The complete-source surjectivity hit needs the extended-ideal calculation and Nakayama first; associated graded injectivity still needs dimension additivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism of complete Noetherian local rings inducing an isomorphism on residue fields and a surjection on cotangent spaces is surjective and is injective if all graded dimensions agree",
+   "results": "Actual search: 8 hits; top results: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, surjective_of_isLocalization_isMaximal, IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.FormallySmooth.iff_injective_lTensor_residueField, IsLocalRing.finrank_cotangentSpace_eq_zero_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: local/formally smooth criteria and cotangent quotient maps do not state the item. The complete-source surjectivity hit needs the extended-ideal calculation and Nakayama first; associated graded injectivity still needs dimension additivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring map of complete local rings which is an isomorphism modulo the square of the maximal ideal and has equal dimensions on all associated graded pieces is an isomorphism",
+   "results": "Actual search: 8 hits; top results: RingHom.IsStandardSmoothOfRelativeDimension, RingHom.isStandardSmoothOfRelativeDimension_respectsIso, HenselianLocalRing, RingHom.Etale, Algebra.Etale, RingHom.FormallySmooth.holdsForLocalizationAway, IsAdicComplete.henselianRing, Algebra.IsEtaleAt. ",
+   "date": "2026-10-23",
+   "verdict": "no match: local/formally smooth criteria and cotangent quotient maps do not state the item. The complete-source surjectivity hit needs the extended-ideal calculation and Nakayama first; associated graded injectivity still needs dimension additivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-effective-versal-algebraization",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-approximate-versal after effectivity and before openness; Tag 06GZ (lemma-surjective-cotangent-space), conditions (1)-(2); ring-theoretic graded-dimension argument in Tag 07XH (lemma-approximate-versal), proof after the dotted-arrow construction. The latter is extracted as a base-independent ring lemma.",
+   "via": [
+    "lem-sfb-artin-effective-versal-algebraization",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-complete-local-cotangent-graded-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including mixed characteristic. Proved surjectivity by cotangent calculation, Nakayama on n/mD, and the existing complete-source lifting node. Proved graded surjectivity explicitly, used existing finite-dimensional subspace and short-exact dimension nodes, then killed the kernel by induction and completeness. No new nodes; no coefficient field, Krull intersection theorem, or hidden inverse-limit exactness assumption.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain reaches Tag 07XY through Artin effective versal algebraization, which uses Tag 07XH and its Tag 06GZ cotangent criterion. Steps 1-3 realize 06GZ (2) implies (1); steps 4-6 realize 07XH equal graded dimensions implies isomorphism. The current latest blueprint direct-images proof was read; this item is the ring-theoretic supporting input in its inherited chain, not a new route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "General complete-source ring-map lifting implements the completeness passage of 06GZ; no coefficient-field assumptions are introduced."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "General Nakayama applied to n/mD; the item unit has no replacement for this commutative algebra tool."
+   },
+   {
+    "node": "lem-trf-vector-space-quotient-dimension",
+    "why": "General finite-dimensional subspace clause applies to the kernel of each graded map; no geometric route is used."
+   },
+   {
+    "node": "lem-trf-finite-dimensional-short-exact-dimension",
+    "why": "General vector-space dimension additivity on each graded kernel sequence implements 07XH; no curve theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-trf-finite-dimensional-short-exact-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-62ab8bb9b",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-62ab8bb9b (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement and stmt_deps are unchanged from the base (the item is still unsplit in live and side-live), there is no repair note, and there are no new nodes. The statement is true. It is the absolute (Λ-free) version of Stacks 06GZ (2)⇒(1) combined with the rigidity argument of 07XH; I read both in formal-defos.tex and artin.tex. Step 1: n = mD + n², elementary. Step 2: Nakayama on n/mD; the Noetherian definition makes it finitely generated and the Jacobson radical is n, so the leaf statement applies exactly. Step 3: Mathlib surjective_of_mk_map_comp_surjective (Functoriality.lean:447). Precompleteness of C and n-adic Hausdorffness of D come from bijectivity of the completion map, using ID = n, and C → D/n is surjective because the residue map is the identity. Step 4: f(m^j) = n^j and g_j is k-linear, elementary. Step 5: kernels are finite-dimensional and dimension is additive on 0 → K_j → V → W → 0, so equal dimensions give K_j = 0. Step 6: kernel induction from m^0 = C, then injectivity of C → Ĉ. Edge cases checked: a field, Z_p → F_p, and k[[t]] → k[[t]]/(t²), which fails only at j = 2. No duplicates: lem-sfb-complete-local-cotangent-surjectivity requires k-algebras with a relative cotangent space. The parent's step-3 use matches the hypotheses. I accept the four tool uses as generic commutative and linear algebra (Mathlib leaves or an exact-match node). Batch-5 flag: lem-trf-vector-space-quotient-dimension (finrank_quotient_add_finrank) and lem-trf-finite-dimensional-short-exact-dimension (free_shortExact_finrank_add) are Mathlib leaves with no proof_deps and are generic linear algebra, not steps of the trace-formula or Poincaré-duality proofs, so the citations are fine. Advisory: the report mentions citations.json, which is not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalCotangentGradedRigidity",
+  "declaration": "IsLocalRing.surjective_and_isomorphism_of_cotangent_surjective_of_complete",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalCotangentGradedRigidity.lean",
+  "statement": "theorem surjective_and_isomorphism_of_cotangent_surjective_of_complete (C : Type u) (D : Type v) (k : Type w) [CommRing C] [CommRing D] [Field k] [IsNoetherianRing C] [IsNoetherianRing D] [IsLocalRing C] [IsLocalRing D] [IsAdicComplete (maximalIdeal C) C] [IsAdicComplete (maximalIdeal D) D] (eC : ResidueField C ≃+* k) (eD : ResidueField D ≃+* k) (f : C →+* D) [IsLocalHom f] (hres : eD.toRingHom.comp (ResidueField.map f) = eC.toRingHom) (hcot : Function.Surjective (Ideal.mapCotangent (maximalIdeal C) (maximalIdeal D) f.toIntAlgHom (maximalIdeal_comap f).symm.le)) : Function.Surjective f ∧ ((∀ j : ℕ, @Module.finrank k ((maximalIdeal C ^ j : Ideal C) ⧸ (maximalIdeal C • ⊤ : Submodule C (maximalIdeal C ^ j : Ideal C))) _ _ (@Module.compHom (C ⧸ maximalIdeal C) k _ _ _ inferInstance _ eC.symm.toRingHom) = @Module.finrank k ((maximalIdeal D ^ j : Ideal D) ⧸ (maximalIdeal D • ⊤ : Submodule D (maximalIdeal D ^ j : Ideal D))) _ _ (@Module.compHom (D ⧸ maximalIdeal D) k _ _ _ inferInstance _ eD.symm.toRingHom)) → ∃ e : C ≃+* D, e.toRingHom = f)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbdc8c340",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read the item node (only the lean record changed vs side-live), the 3 Mathlib-leaf stmt_deps, Stacks 06GZ/07XH and the module. lean.statement matches the file verbatim; the module is new and existing:false. Every hypothesis matches: CommRing/Noetherian/IsLocalRing/IsAdicComplete on maximal ideals; eC, eD residue identifications; IsLocalHom f ⇔ f⁻¹(n)=m; hres = identity on k; hcot = surjectivity of Ideal.mapCotangent over ℤ, the same function [c]↦[f c] as the k-linear cotangent map. Conclusions: f surjective, and ∀ j:ℕ equal finrank over k of m^j ⧸ m•⊤ (= m^j/m^(j+1), natural C/m action pulled back along eC.symm via Module.compHom, argument order checked) → ∃ e : C ≃+* D, e.toRingHom = f. No extra assumptions; universes u v w independent. Edge cases j=0, fields, ℤ_p→𝔽_p, k[[t]]→k[[t]]/(t²) all OK. No duplicate: CompleteLocalCotangentSurjectivity is the relative k-algebra criterion, and the other cotangent/graded modules are different nodes. Docstrings carry the source place, the blueprint tag and the 6 proof steps; proof is sorry only; report has both sections. No file changed and no compile run; the worker reports a clean scompile. No findings."
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-integral-completed-coherence",
+ "kind": "statement",
+ "title": "Completed images of strict integral pasting",
+ "statement": "For the same finite purity setting P, integral datum d and base S, identity completed compact-support base change obeys its equation with the specified completedPullId on K and its compact-support image; those two complete-object proofs exist. Successive underlying-scheme isomorphism base changes satisfy the equation with precisely completedPullComp and with a complete intermediate pulled-back K. For compatible compactification towers and isomorphism base change, on a complete K with retained compatible etale origins, both specified cbcTowerCompositionMap arrows are invertible, its intermediate compact-support image is complete, and its completed vertical interchange equation holds. All maps, instances and quantifiers are exactly PurIntegralCompletedCoherence d S of [def-pur-strict-integral-exchange-data]. This states only the reconstructed equations, not their strict counterparts or geometric two-factor normalization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Original normalization steps 5--6, 9--12 and 15: reconstruct strict identity, horizontal and vertical equations."
+ },
+ "stmt_deps": [
+  "def-pur-strict-integral-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "apply functorial derived inverse limit to the strict identity and horizontal\npasting equations, retaining their order. The normalized direct-image/limit and\nopen/limit comparisons commute with the quotient augmentation, so the outside\ncomparisons are exactly completedPullId and completedPullComp. Adjacent comparison\nisomorphisms cancel. Open extension and proper image preserve completeness, and\ncompleted pullback is complete by quotient reconstruction; these give the\nexistential proof arguments in the identity and horizontal clauses. They are\nproofs of properties of already specified objects, not chosen corner maps. For\nvertical pasting apply inverse limit to strict proper/open interchange and the\ncompatible-tower composition comparison. The retained compatible etale-origin\nwitnesses make both composition maps invertible. The same unit normalizations\nidentify all four outside arrows with cbcExchange and cbcTowerCompositionMap.\nNaturality cancels the intermediate reconstruction comparisons and yields the\nstated vertical equation. No origins are needed for identity or horizontal\npasting; only the vertical inversion retains them. All operations commute with\nidentity maps and zero objects, including empty schemes and empty ideal tuples.",
+   "uses": [
+    "lem-pur-integral-strict-calculus",
+    "lem-pur-integral-strict-reduction",
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-cbc-complete-proetale-composition-pasting-coherence",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Original normalization steps 5--6, 9--12 and 15: reconstruct strict identity, horizontal and vertical equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-strict-calculus",
+  "lem-pur-integral-strict-reduction",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "The blueprint constituent paragraph assembles compatibilities. These explicit strict-tower arguments expand its integral normalization steps.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural adjunction mates commute with inverse limits and tensor coefficient reduction",
+   "results": "CategoryTheory.Limits.constLimAdj, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.preservesLimitNatIso_inv_app; generic infrastructure only.",
+   "date": "2026-10-25",
+   "verdict": "no match for these specified completed coefficient and strict quotient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv variants, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-25",
+   "verdict": "no match; none specializes in one line to the specified reduction, completed pullback and proper/open maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mate|whisker Mathlib/CategoryTheory/Adjunction/Mates.lean; rg PurIntegralProperNormalization|PurIntegralStrictHorizontal|purStrictIntegral lean/Sheaf lean/WeilConjectures",
+   "results": "Mates supplies the generic bijection and pasting. PurStrictIntegralExchangeNormalization has the parent statement only; SemilinearExchangeReindexing repeats it in a parent conjunction and imports the item, so cannot supply a proof.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "date": "2026-10-25",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Original normalization steps 5--6, 9--12 and 15: reconstruct strict identity, horizontal and vertical equations.",
+   "via": [
+    "lem-pur-isomorphism-strict-integral-exchange-normalization",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralCompletedCoherence",
+  "file": "lean/Sheaf/Paper/PurIntegralCompletedCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purIntegralCompletedCoherence",
+  "statement": "theorem purIntegralCompletedCoherence (P : WeilConjectures.PurityFiniteSetting.{t}) :\n    PurIntegralCompletedCoherence (pbcIntegralDatum P.coefficients.l P.extension)\n      (Spec (.of P.field.k))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "worker": "stage3",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "summary": "Extract the indicated strict part of the integral normalization argument as one independently provable statement; keep the specified constructions and all domains.",
+  "blueprint": "Original normalization steps 5--6, 9--12 and 15: reconstruct strict identity, horizontal and vertical equations."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "independent cc review: old item module vs new PurStrictIntegralExchangeData + item (defs verbatim, statement byte-identical); delivered item node vs base node under stage3_delivery/check_statement_change; importer SemilinearExchangeReindexingData compiled with delivered modules"
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-smooth-atlas-quasicoherent-source-maps",
+ "kind": "statement",
+ "title": "Maps from a quasi-coherent module descend from a smooth atlas",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], $\\mathcal X/S$ an algebraic stack [def-sfb-algebraic-moduli-stack], and $a:U\\to\\mathcal X$ a smooth surjective scheme atlas. Put $R=U\\times_{\\mathcal X}U$, with projections $p_1,p_2$ [def-sfb-stable-pointed-moduli-groupoids]; $R$ is an algebraic space [def-trf-algebraic-space]. On the big fppf ringed site of [def-sfb-stack-quasi-coherent-algebra], let $G$ be a quasi-coherent module in the local-presentation sense [def-trf-space-quasi-coherent-module] and let $H$ be any module sheaf [def-weil-sheaf-of-modules-category]. Write $G_U,H_U$ for their small-etale restrictions [def-weil-pbc-etale-site], and $G_R,H_R$ for the restrictions along the canonical object of $\\mathcal X$ over $R$, interpreted on etale scheme charts. Tensor pullbacks are [def-pc-module-pullback, def-trf-space-etale-module-functors]. Let $c_i^H:p_i^*H_U\\to H_R$ be the canonical tensor comparisons induced by restriction. The analogous maps $c_i^G:p_i^*G_U\\to G_R$ are isomorphisms by [lem-sfb-stack-quasi-coherent-scheme-restriction], and write $\\delta_G=(c_2^G)^{-1}c_1^G$. Restriction gives a bijection from $\\operatorname{Hom}_{\\mathcal O_{\\mathcal X}}(G,H)$ to the set of maps $b:G_U\\to H_U$ satisfying $$c_1^H\\circ p_1^*b=c_2^H\\circ p_2^*b\\circ\\delta_G.$$ Thus every compatible atlas map extends uniquely to a big-fppf module map. No quasi-coherence or flat-comparison assumption is made on $H$; in particular the maps $c_i^H$ are not assumed invertible. No quasi-compactness, finiteness or Deligne--Mumford hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 076S, lemma-map-from-quasi-coherent, for a smooth atlas via Tag 04T5 (algebraic.tex, lemma-stack-presentation). The displayed equation is its commutative comparison diagram."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-pc-module-pullback",
+  "def-trf-space-etale-module-functors",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sfb-algebraic-moduli-stack], every scheme base change of the atlas is a smooth surjective algebraic-space map, whose etale scheme charts are smooth scheme maps. By [lem-pc-smooth-flat], these chart maps are flat and locally of finite presentation. Thus $a$ is representable, surjective, flat and locally of finite presentation in the chart-test convention of [lem-sfb-fppf-groupoid-stack-presentations]. Part (2) of that node supplies the self-relation groupoid $(U,R,s,t,e,i,c)$, with $s=p_1$, $t=p_2$, flat locally finitely presented projections, and an equivalence $q:[U/R]\\to\\mathcal X$ commuting with the given atlas. This keeps the actual algebraic space $R$, without replacing it by a scheme.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-pc-smooth-flat",
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to algebraic.tex Tags 04T5 (lemma-stack-presentation) and 04WY (remark-flat-fp-presentation)."
+   }
+  },
+  {
+   "text": "Transfer $G,H$ to $[U/R]$ by precomposition with $q$. Here this transport is formal: an equivalence over $S$-schemes preserves the underlying scheme of each object and arrow, hence the covering families and structure rings of [def-sfb-stack-quasi-coherent-algebra]. Precomposition with a quasi-inverse, and the unit and counit evaluated objectwise, give inverse equivalences on module sheaves and their Hom sets. Local presentations by sums of the structure sheaf are unchanged under this identification, so the transferred $G$ is quasi-coherent [def-trf-space-quasi-coherent-module]. Because $q$ commutes with the atlas and its canonical self-relation, restrictions and restriction-induced tensor comparisons are identified on every etale scheme chart of $U$ and $R$. Thus the Hom restriction map being studied becomes exactly the restriction map for this quotient presentation.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to algebraic.tex Tags 04T5 (lemma-stack-presentation) and 04WY (remark-flat-fp-presentation)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-groupoid-maps-from-quasicoherent] to this groupoid and the transferred modules $F=G,H$. Its hypotheses hold by step 1 and the quasi-coherence in step 2; its target module is arbitrary. It identifies the Hom set injectively with the atlas maps $b$ for which $$c_1^H\\circ p_1^*b\\circ(c_1^G)^{-1}=c_2^H\\circ p_2^*b\\circ(c_2^G)^{-1}:G_R\\longrightarrow H_R.$$ It also supplies invertibility of both $G$ comparisons on the algebraic space $R$. Under step 2 these are the comparisons in the question.",
+   "uses": [
+    "lem-sfb-groupoid-maps-from-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to algebraic.tex Tags 04T5 (lemma-stack-presentation) and 04WY (remark-flat-fp-presentation)."
+   }
+  },
+  {
+   "text": "Compose the equality in step 3 on the right with the isomorphism $c_1^G:p_1^*G_U\\to G_R$. This yields $$c_1^H\\circ p_1^*b=c_2^H\\circ p_2^*b\\circ(c_2^G)^{-1}\\circ c_1^G=c_2^H\\circ p_2^*b\\circ\\delta_G.$$ Conversely composing this equation with $(c_1^G)^{-1}$ recovers the equality of step 3. Therefore the two compatibility subsets coincide. The injectivity and image assertion of step 3, and the Hom identification of step 2, give precisely the claimed bijection and unique extension. Only $G$ comparisons were inverted. The presentation theorem and the groupoid Hom theorem require neither quasi-compactness nor a Deligne--Mumford condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to algebraic.tex Tags 04T5 (lemma-stack-presentation) and 04WY (remark-flat-fp-presentation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-pc-smooth-flat",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-groupoid-maps-from-quasicoherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to algebraic.tex Tags 04T5 (lemma-stack-presentation) and 04WY (remark-flat-fp-presentation)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a quasi coherent module on an algebraic stack to an arbitrary module sheaf are uniquely determined by compatible maps on a smooth atlas",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.mk.inj; SheafOfModules.QuasicoherentData.presentation; AlgebraicGeometry.Scheme.Modules.hom_ext; AlgebraicGeometry.Scheme.Modules.hom_ext_iff; SheafOfModules.QuasicoherentData.I; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData; SheafOfModules.isQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module presentations, equality of maps on scheme opens, and free-module or colimit universal properties. They do not identify maps to an arbitrary big-fppf module from a quasi-coherent source on an algebraic-stack presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a quasi coherent sheaf to any sheaf of modules on a quotient stack equals compatible Hom on its flat presentation",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.Presentation.map; SheafOfModules.Presentation.map_generators_I; SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_relations_I; SheafOfModules.QuasicoherentData.mk.inj; SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module presentations, equality of maps on scheme opens, and free-module or colimit universal properties. They do not identify maps to an arbitrary big-fppf module from a quasi-coherent source on an algebraic-stack presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homEquiv\"",
+   "results": "12 hits: PresheafOfModules.unitHomEquiv; PresheafOfModules.unitHomEquiv_apply_coe; PresheafOfModules.freeHomEquiv; PresheafOfModules.freeAdjunction_homEquiv; PresheafOfModules.ModuleColimit.homEquiv'; PresheafOfModules.ModuleColimit.homEquiv; PresheafOfModules.colimitAdjunction_homEquiv; PresheafOfModules.ModuleColimit.homEquiv_naturality_left",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module presentations, equality of maps on scheme opens, and free-module or colimit universal properties. They do not identify maps to an arbitrary big-fppf module from a quasi-coherent source on an algebraic-stack presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "map.from.quasi.coherent|AlgebraicStack|atlas.*[Mm]odule",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module presentations, equality of maps on scheme opens, and free-module or colimit universal properties. They do not identify maps to an arbitrary big-fppf module from a quasi-coherent source on an algebraic-stack presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from quasi coherent modules to arbitrary modules descend uniquely from a smooth atlas of an algebraic stack",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk; SheafOfModules.isQuasicoherent; SheafOfModules.Presentation.mk.noConfusion; SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData.casesOn; SheafOfModules.IsQuasicoherent.recOn; SheafOfModules.QuasicoherentData.mk.inj; SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module presentations, equality of maps on scheme opens, and free-module or colimit universal properties. They do not identify maps to an arbitrary big-fppf module from a quasi-coherent source on an algebraic-stack presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|atlas.*[Mm]odule|map.from.quasi.coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read Scheme.Modules.hom_ext (Modules/Sheaf.lean:136), SheafOfModules.QuasicoherentData and Presentation.map (Sheaf/Quasicoherent.lean:175-210), and PresheafOfModules.sheafifyHomEquiv' (Presheaf/Sheafify.lean:364). These give extensionality on scheme opens, local presentations and sheafification universal properties, not this Hom theorem for a smooth algebraic-stack atlas with an arbitrary target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a smooth atlas gives a bijection on maps from a quasi coherent sheaf to an arbitrary module sheaf satisfying the comparison diagram",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict_obj, ModuleCat.Tilde.res_apply, SheafOfModules.isQuasicoherent, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrict, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafifyHomEquiv', AlgebraicGeometry.Scheme.Modules.restrict_map",
+   "date": "2026-10-23",
+   "verdict": "no match: read Scheme.Modules.hom_ext (Modules/Sheaf.lean:136), SheafOfModules.QuasicoherentData and Presentation.map (Sheaf/Quasicoherent.lean:175-210), and PresheafOfModules.sheafifyHomEquiv' (Presheaf/Sheafify.lean:364). These give extensionality on scheme opens, local presentations and sheafification universal properties, not this Hom theorem for a smooth algebraic-stack atlas with an arbitrary target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homEquiv\"",
+   "results": "12 hits: PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv', PresheafOfModules.ModuleColimit.homEquiv, PresheafOfModules.colimitAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv_naturality_left",
+   "date": "2026-10-23",
+   "verdict": "no match: read Scheme.Modules.hom_ext (Modules/Sheaf.lean:136), SheafOfModules.QuasicoherentData and Presentation.map (Sheaf/Quasicoherent.lean:175-210), and PresheafOfModules.sheafifyHomEquiv' (Presheaf/Sheafify.lean:364). These give extensionality on scheme opens, local presentations and sheafification universal properties, not this Hom theorem for a smooth algebraic-stack atlas with an arbitrary target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a quasi coherent module on an algebraic stack to any module are determined by compatible maps on a smooth atlas",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.hom_ext_iff, SheafOfModules.QuasicoherentData.mk.inj, AlgebraicGeometry.Scheme.Modules.hom_ext, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: read Scheme.Modules.hom_ext (Modules/Sheaf.lean:136), SheafOfModules.QuasicoherentData and Presentation.map (Sheaf/Quasicoherent.lean:175-210), and PresheafOfModules.sheafifyHomEquiv' (Presheaf/Sheafify.lean:364). These give extensionality on scheme opens, local presentations and sheafification universal properties, not this Hom theorem for a smooth algebraic-stack atlas with an arbitrary target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a cartesian quasi coherent source on a quotient stack to an arbitrary sheaf of modules is the equalizer of the two maps on a presentation",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.map, SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map_relations_I, SheafOfModules.Presentation.mapRelations_mapGenerators",
+   "date": "2026-10-23",
+   "verdict": "no match: read Scheme.Modules.hom_ext (Modules/Sheaf.lean:136), SheafOfModules.QuasicoherentData and Presentation.map (Sheaf/Quasicoherent.lean:175-210), and PresheafOfModules.sheafifyHomEquiv' (Presheaf/Sheafify.lean:364). These give extensionality on scheme opens, local presentations and sheafification universal properties, not this Hom theorem for a smooth algebraic-stack atlas with an arbitrary target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-coherator-flat-test-restriction",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: flat-test module comparison and the tensor pairing underlying algebra multiplication; flat-test comparison: restriction of the quasi-coherator counit to a flat object, before applying it to the naive direct image. Atlas-morphism input in Tag 0778: Hom from a quasi-coherent source into an arbitrary module is the set of compatible maps on the presentation; used to identify the actual adjunction counit.",
+   "via": [
+    "lem-sfb-stack-coherator-flat-test-restriction",
+    "lem-sfb-stack-flat-module-pushforward-comparison",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-atlas-quasicoherent-source-maps",
+  "worker": "stage1",
+  "summary": "Specialized the existing flat-groupoid Hom theorem using the existing atlas presentation theorem. Wrote the module transport and the compatibility-equation calculation explicitly. No new nodes, no change to the statement; arbitrary target modules and algebraic-space relations retained.",
+  "blueprint": "The inherited Tag 0778 coherator/alteration prerequisite chain beneath det-thm-sf-ctf-stability-direct-images, direct-image clause (3), is retained. Read the current latest sk-thm-sf-ctf-stability unit and direct-images proof. This is the technical atlas-Hom input on the inherited branch, not a replacement for a unit step. blueprint_refs ancestor returns null, so the existing from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-f99395e9b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-f99395e9b (reviewer sub-agent of L); spot-checked: Read the item's statement and all 4 steps in full, each cited statement, and the sources: Stacks 076S (stacks-sheaves.tex l.2247 ff., statement and proof) and 04T5/04WY (algebraic.tex). The delivery has 0 new nodes. The statement is identical to the Q12 creation snapshot; the stmt_deps added are def-pc-module-pullback and def-trf-space-etale-module-functors, both cited in the statement text. proof_deps equal the union of the step uses, and there is no cycle. Step 1: the def-sfb-algebraic-moduli-stack atlas is smooth on étale charts, so lem-pc-smooth-flat makes it flat and lfp, which meets the hypotheses of lem-sfb-fppf-groupoid-stack-presentations (2). That node uses the DAG's étale-stack convention and handles the fppf side through 076V, so there is no étale/fppf mismatch. Its 'surjective' (field-point lifting) is the standard equivalent of the atlas definition's surjectivity. Step 2: transport along the equivalence q is formal, because covers and structure rings depend only on the underlying scheme; correctly marked elementary. Step 3: lem-sfb-groupoid-maps-from-quasicoherent is exactly 076S, with arbitrary H; I checked the orientation s=p_1, t=p_2. Step 4: right-composing with c_1^G gives c_1^H p_1^*b = c_2^H p_2^*b δ_G, the converse holds, and no c^H is inverted. Edge cases checked: G=0, H=0, identity atlas, empty stack, non-quasi-compact U, and non-invertible c^H. Duplicates: smooth-atlas-module-descent has only quasi-coherent targets and stack-lqc-coherator is a different statement, so neither duplicates the item; the item is the atlas form the parent coherator-flat-test-restriction uses with arbitrary H. Batch-5 flags: both cited nodes are general stack presentation and module-descent lemmas, reaching def-trf-algebraic-space only as a definition. Neither is the trace formula, Poincaré duality, or a step of their proofs, so both are accepted. No tool_uses; no SGA citation; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtlasQuasiCoherentSourceMaps",
+  "declaration": "CategoryTheory.smoothAtlas_quasicoherent_source_maps",
+  "declarations": [
+   "CategoryTheory.moduliEtaleChartRestriction",
+   "CategoryTheory.moduliAtlasRelationObject",
+   "CategoryTheory.ModuliAtlasMapCompatible",
+   "CategoryTheory.smoothAtlas_quasicoherent_source_maps"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtlasQuasiCoherentSourceMaps.lean",
+  "statement": "theorem smoothAtlas_quasicoherent_source_maps {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsAlgebraicModuliStack C) (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) C) (ha : IsSmoothModuliAtlas C U a) (R : AlgebraicSpace S) (e : BasedFunctor (discreteModuli R.obj.obj) (moduliTwoFiberProduct a a)) (he : e.toFunctor.IsEquivalence) (G H : ringedSiteModules.{max (u + 1) v w} (moduliModuleRings C hC.1.1)) (hG : G.IsQuasicoherent) : Function.Injective ((moduliEtaleChartRestriction hC.1.1 (AlgebraicSpace.schemeSpace U) a).map (X := G) (Y := H)) ∧ ∀ b : (moduliEtaleChartRestriction hC.1.1 (AlgebraicSpace.schemeSpace U) a).obj G ⟶ (moduliEtaleChartRestriction hC.1.1 (AlgebraicSpace.schemeSpace U) a).obj H, (∃ f : G ⟶ H, (moduliEtaleChartRestriction hC.1.1 (AlgebraicSpace.schemeSpace U) a).map f = b) ↔ ModuliAtlasMapCompatible hC.1.1 a R e G H b",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical restrictions are literal module-presheaf precomposition on the existing small-etale chart sites. Forgetting the sheaf condition is fully faithful. Compatibility is the two canonical tensor comparison squares, expressed on every local section via the tensor/direct-image adjunction, with a common map G_R to H_R; source comparison invertibility gives exactly the displayed delta_G equation. R is an algebraic-space presentation of the actual two-fibre product, never assumed a scheme."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5fe22179",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Every clause matches the node and Stacks 076S. The diagram is ∃ d : G_R→H_R with both squares stated on local sections over all charts V, W and maps f, via the adjunction p_i^* ⊣ p_{i*}; equivalent to the δ_G equation since c^G is invertible; no c^H inverted. Injective ∧ exact image = bijection. Hypotheses: IsSmoothModuliAtlas as recorded; R an algebraic space with based equivalence e to the 2-fibre product (answer independent of e); only hG (Mathlib IsQuasicoherent, same predicate as ModuliQCoh); H arbitrary; universes max(u+1) v w as in moduliModuleRings. Restriction is forget ⋙ pushforward₀ along charts ⋙ a, real data; p2 uses the comma iso in the right direction. No duplicate found in side-live Lean or the DAG. stmt_deps adds only def-trf-scheme-algebraic-space (landed 2026-10-18). Statement verbatim; only proof is sorry; docstrings carry source and blueprint tags. Notes: schemeSpace U chart site is equivalent to U.Etale; unused import Mathlib.AlgebraicGeometry.Morphisms.Smooth is harmless. No compile: no file changed."
+ }
+}

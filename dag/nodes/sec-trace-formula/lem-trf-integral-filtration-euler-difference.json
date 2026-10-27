@@ -1,0 +1,327 @@
+{
+ "id": "lem-trf-integral-filtration-euler-difference",
+ "kind": "statement",
+ "title": "Euler differences evaluated along an integral-ideal filtration on a proper curve",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme proper over $k$ [def-weil-proper-morphism] of topological Krull dimension at most one [def-kun-topological-krull-dimension], $\\mathcal N$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Suppose a finite filtration $0=\\mathcal F_0\\subseteq\\cdots\\subseteq\\mathcal F_s=\\mathcal F$ by coherent submodules [def-weil-sheaf-of-modules-category] is given, together with quotient isomorphisms $\\mathcal Q_a=\\mathcal F_a/\\mathcal F_{a-1}\\cong(h_a)_*\\mathcal I_a$, where $h_a:Z_a\\hookrightarrow X$ is a closed immersion [def-weil-closed-immersion], $Z_a$ is integral [def-pc-integral-scheme] and proper over $k$ of dimension zero or one, and $\\mathcal I_a\\subseteq\\mathcal O_{Z_a}$ is a nonzero coherent ideal. Quotients mean cokernels, and pullback and pushforward are those of modules [def-pc-module-pullback]. Write $\\mathcal L_a=h_a^*\\mathcal N$, use the sheaf tensor product [def-pur-sheaf-tensor-product], and use coherent Euler characteristics [def-pc-euler-characteristic] and degree $\\deg_k\\mathcal P=\\chi(Y,\\mathcal P)-\\chi(Y,\\mathcal O_Y)$ for invertible modules on proper $Y/k$ [def-pc-degree-line-bundle].\n\nThe modules $\\mathcal N$, $\\mathcal N\\otimes\\mathcal F_a$, $\\mathcal N\\otimes\\mathcal Q_a$, and $\\mathcal L_a\\otimes\\mathcal I_a$ are coherent, every $\\mathcal L_a$ is invertible, and all cohomology groups occurring below are finite-dimensional over $k$ and vanish in sufficiently large degrees. The canonical projection morphism\n$$\\mathcal N\\otimes(h_a)_*\\mathcal I_a\\longrightarrow(h_a)_*(\\mathcal L_a\\otimes\\mathcal I_a)$$\nis an isomorphism. For $\\mathcal G_a=\\mathcal I_a$ and for $\\mathcal G_a=\\mathcal L_a\\otimes\\mathcal I_a$, the canonical closed-pushforward comparisons $H^q(X,(h_a)_*\\mathcal G_a)\\cong H^q(Z_a,\\mathcal G_a)$ are $k$-linear, natural in module morphisms, and compare cohomology computed in structure-sheaf modules on both sides. Put $D(\\mathcal G)=\\chi(X,\\mathcal N\\otimes\\mathcal G)-\\chi(X,\\mathcal G)$ for coherent $\\mathcal G$ on $X$. Then\n$$D(\\mathcal F)=\\sum_{a=1}^sD(\\mathcal Q_a),\\qquad D(\\mathcal Q_a)=\\chi(Z_a,\\mathcal L_a\\otimes\\mathcal I_a)-\\chi(Z_a,\\mathcal I_a).$$\nFor a dimension-one $Z_a$, the ideal has generic stalk [def-weil-pbc-module-stalk] $\\mathcal O_{Z_a,\\eta_a}=\\kappa(\\eta_a)$, where $\\kappa(\\eta_a)$ is the residue field [def-weil-residue-field], hence generic rank one (the stalk has dimension one over this field), and $D(\\mathcal Q_a)=\\deg_k(\\mathcal L_a)$. For a dimension-zero $Z_a$, its space is one point, $\\mathcal L_a$ is globally trivial, and $D(\\mathcal Q_a)=0$. In particular\n$$\\chi(X,\\mathcal N\\otimes\\mathcal F)-\\chi(X,\\mathcal F)=\\sum_{a\\in\\{1,\\ldots,s\\},\\,\\dim Z_a=1}\\deg_k(h_a^*\\mathcal N).$$\nThe identities include $s=0$ and $\\mathcal F=0$, with zero Euler differences and empty sums.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0AYW (lemma-degree-in-terms-of-components), 0AYV (lemma-degree-on-proper-curve), 08AA (lemma-euler-characteristic-additive), 0AYT (lemma-chi-tensor-finite); the agent-written integral-filtration variant uses cohomology.tex Tag 02UV (lemma-cohomology-and-closed-immersions) and sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-proper-field-invertible-coherent] to $X$ and to each $Z_a$: all these schemes are Noetherian, and $\\mathcal N$ is coherent. By [lem-weil-pbc-invertible-pullback-invertible], $\\mathcal L_a=h_a^*\\mathcal N$ is invertible. The coherent-kernel/cokernel assertion [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], applied to $\\mathcal F_{a-1}\\to\\mathcal F_a$, makes $\\mathcal Q_a$ coherent. These applications use properness over the given field, not smoothness or geometric integrality.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian), 01Y0 (lemma-coherent-abelian-Noetherian); modules.tex Tag 01C8 (lemma-pullback-locally-free)."
+   }
+  },
+  {
+   "text": "For an invertible module $\\mathcal P$ and any module $\\mathcal H$, choose open neighbourhoods trivializing $\\mathcal P$ as in [def-sc-invertible-module]. On each such open, $\\mathcal P\\otimes\\mathcal H$ is $\\mathcal H$, and a sequence tensored with $\\mathcal P$ identifies with the original sequence, including its maps. Thus tensoring preserves short exact sequences. If $\\mathcal H$ is coherent, the local finite-generation and kernel conditions of [pqf-def-coherent] also hold for $\\mathcal P\\otimes\\mathcal H$, hence it is coherent. Apply this to $(\\mathcal N,\\mathcal F_a)$, $(\\mathcal N,\\mathcal Q_a)$ and $(\\mathcal L_a,\\mathcal I_a)$. In particular both $0\\to\\mathcal F_{a-1}\\to\\mathcal F_a\\to\\mathcal Q_a\\to0$ and its $\\mathcal N$-tensor are short exact coherent sequences.",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYW (lemma-degree-in-terms-of-components), proof: tensoring the coherent short exact sequence with a locally free module; local rank-one verification."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-characteristic-well-defined] on $X$ to $\\mathcal F_a$, $\\mathcal Q_a$, $\\mathcal N$, and their twists, and on each $Z_a$ to $\\mathcal I_a$, $\\mathcal L_a\\otimes\\mathcal I_a$, $\\mathcal L_a$ and $\\mathcal O_{Z_a}$. These modules are coherent by the hypotheses and steps 1--2. Each cohomology group in the asserted formulas is consequently finite-dimensional over $k$, with only finitely many nonzero degrees. Closed pushforwards appearing in comparisons are coherent by [lem-pc-closed-immersion-coherent-cohomology], so the same conclusion applies to them.",
+   "uses": [
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Justification following definition-euler-characteristic, before Tag 08AA (lemma-euler-characteristic-additive)."
+   }
+  },
+  {
+   "text": "Use the projection clause of [lem-pc-closed-immersion-coherent-cohomology] for $h_a$, $\\mathcal I_a$ and $\\mathcal N$. Composing with tensor symmetry on its source and target gives the stated map $\\mathcal N\\otimes(h_a)_*\\mathcal I_a\\to(h_a)_*(\\mathcal L_a\\otimes\\mathcal I_a)$, an isomorphism. Explicitly, on a trivializing open for $\\mathcal N$, the section map sends $n\\otimes m$ to $h_a^*n\\otimes m$ and identifies with the identity on $(h_a)_*\\mathcal I_a$. This also identifies it with the canonical projection morphism, rather than an arbitrary isomorphism. The locally Noetherian hypotheses hold by step 1.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E8 (lemma-projection-formula), locally free rank-one case; local trivialization as in the existing closed-immersion node."
+   }
+  },
+  {
+   "text": "For any coherent $\\mathcal G$ on $Z_a$, compose the canonical module-to-abelian comparison on $X$, the natural closed-embedding abelian comparison, and the inverse module-to-abelian comparison on $Z_a$. These are supplied by [lem-sc-zariski-module-abelian-cohomology-agree] and [lem-sc-cohomology-closed-immersion-pushforward]. The abelian sheaf underlying $(h_a)_*\\mathcal G$ has sections $\\mathcal G(h_a^{-1}U)$, exactly the abelian direct image. Thus the composite compares structure-sheaf-module cohomology on both sides and is natural in every module morphism. For $c\\in k$, multiplication by its structure-section is a module endomorphism of $\\mathcal G$, and its pushforward is multiplication by $c$ on $(h_a)_*\\mathcal G$, since $h_a$ is over $k$. Naturality gives $e_q(c v)=c e_q(v)$; additivity gives $k$-linearity. Take $\\mathcal G=\\mathcal I_a$ and $\\mathcal G=\\mathcal L_a\\otimes\\mathcal I_a$.",
+   "uses": [
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02UV (lemma-cohomology-and-closed-immersions); sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-additive] to each of the two short exact sequences of step 2 and subtract: $D(\\mathcal F_a)=D(\\mathcal F_{a-1})+D(\\mathcal Q_a)$. The base is $D(\\mathcal F_0)=D(0)=0$: tensor sends the zero module to zero, and all its cohomology vector spaces are zero. Induction gives $D(\\mathcal F_b)=\\sum_{a=1}^bD(\\mathcal Q_a)$ for $0\\le b\\le s$, hence the first asserted equality. Furthermore the given quotient isomorphism, the projection isomorphism of step 4, and the $k$-linear cohomology isomorphisms of step 5 identify the two finite alternating dimension sums. Therefore $D(\\mathcal Q_a)=\\chi(Z_a,\\mathcal L_a\\otimes\\mathcal I_a)-\\chi(Z_a,\\mathcal I_a)$.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AA (lemma-euler-characteristic-additive), applied successively; Tag 0AYW (lemma-degree-in-terms-of-components), Euler subtraction in its proof."
+   }
+  },
+  {
+   "text": "If $\\dim Z_a=1$, apply [lem-weil-pbc-integral-scheme-ideal-generic-stalk] to the nonzero ideal $\\mathcal I_a$. It is quasi-coherent because it is coherent on the locally Noetherian $Z_a$, by [pqf-lem-coherent-ft-locnoeth]. The result gives $(\\mathcal I_a)_{\\eta_a}=\\mathcal O_{Z_a,\\eta_a}$, a field, hence the residue field $\\kappa(\\eta_a)$, with dimension one over itself. Apply [lem-trf-curve-euler-tensor-generic-rank] with $C=Z_a$, $\\mathcal L=\\mathcal L_a$, $\\mathcal F=\\mathcal I_a$, and $r=1$. Subtracting $\\chi(Z_a,\\mathcal I_a)$ in that formula and using step 6 yields $D(\\mathcal Q_a)=\\deg_k(\\mathcal L_a)$. All hypotheses are present: $Z_a$ is integral, proper and one-dimensional, $\\mathcal I_a$ coherent, and $\\mathcal L_a$ invertible.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-trf-curve-euler-tensor-generic-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV (lemma-degree-on-proper-curve), rank-one specialization; coherent.tex Tag 01YL, nonzero integral ideals at the generic point."
+   }
+  },
+  {
+   "text": "If $\\dim Z_a=0$, [lem-sc-zero-dim-noetherian-finite-discrete] applies by step 1 and makes $|Z_a|$ finite discrete. Integrality [def-pc-integral-scheme] makes it nonempty and irreducible. A discrete irreducible nonempty space has one point: if there were two, one singleton and its complement would be disjoint nonempty opens. A trivializing neighbourhood of that point for the invertible $\\mathcal L_a$ is consequently all of $Z_a$, so $\\mathcal L_a\\cong\\mathcal O_{Z_a}$ by [def-sc-invertible-module]. Tensoring this isomorphism with $\\mathcal I_a$ gives $\\mathcal L_a\\otimes\\mathcal I_a\\cong\\mathcal I_a$, and their Euler characteristics agree. Step 6 therefore gives $D(\\mathcal Q_a)=0$. Substituting this and step 7 into the finite filtration sum leaves exactly the sum over dimension-one factors asserted in the statement. For $s=0$, the filtration forces $\\mathcal F=0$ and the base case in step 6 is the empty-sum identity; if $\\mathcal F=0$ no nonzero ideal factors can occur, since the given quotient isomorphisms would otherwise identify a zero module with a nonzero closed pushforward.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "def-pc-integral-scheme",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0); varieties.tex Tag 0AYT (lemma-chi-tensor-finite), rank-one zero-dimensional case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-pc-euler-additive",
+  "def-pc-euler-characteristic",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-trf-curve-euler-tensor-generic-rank",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0AYW, 0AYV, 08AA and 0AYT; integral-ideal filtration assembly, with canonical comparisons from Tags 02UV and 03FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle and a coherent sheaf with integral ideal filtration on a proper curve the Euler characteristic difference is the sum of degrees on the one dimensional filtration supports",
+   "results": "8 hits;  Returned names/files: Ideal.rank_pow_quot_aux, Ideal.rank_pow_quot, Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_le_ringKrullDim_add_spanFinrank, Ideal.rank_prime_pow_ramificationIdx, Ideal.finrank_quotient_eq_sum, Module.supportDim_le_supportDim_quotSMulTop_succ, Ideal.Factors.finrank_pow_ramificationIdx. Read the returned statements. The hits concern adic filtrations, regular sequences, ramification ranks, rankAtStalk for flat modules, and Euler factors of elliptic curves; none gives coherent sheaf Euler differences, closed-support cohomology comparisons, or the displayed integral-factor degree sum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic difference for tensoring a finite coherent sheaf filtration by a line bundle computed on integral closed supports and zero dimensional terms vanish",
+   "results": "8 hits;  Returned names/files: Ideal.Filtration.Stable.bounded_difference, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, CochainComplex.isStrictlyGE_iff, CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt, IsLocalFrameOn.coeff_apply_zero_at, CochainComplex.isZero_of_isStrictlyGE, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, PiTensorProduct.zero_tprodCoeff'. Read the returned statements. The hits concern adic filtrations, regular sequences, ramification ranks, rankAtStalk for flat modules, and Euler factors of elliptic curves; none gives coherent sheaf Euler differences, closed-support cohomology comparisons, or the displayed integral-factor degree sum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"euler\", \"tensor\"",
+   "results": "0 hits;  Returned names/files: . Read the returned statements. The hits concern adic filtrations, regular sequences, ramification ranks, rankAtStalk for flat modules, and Euler factors of elliptic curves; none gives coherent sheaf Euler differences, closed-support cohomology comparisons, or the displayed integral-factor degree sum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "euler|Euler|degree.{0,40}filtrat|filtrat.{0,40}degree",
+   "results": "8 hits;  Returned names/files: Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean. Read the returned statements. The hits concern adic filtrations, regular sequences, ramification ranks, rankAtStalk for flat modules, and Euler factors of elliptic curves; none gives coherent sheaf Euler differences, closed-support cohomology comparisons, or the displayed integral-factor degree sum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Devissage of Euler characteristic chi of line bundle tensor coherent module using filtration with integral ideals on closed subschemes of a proper one dimensional scheme",
+   "results": "8 hits;  Returned names/files: Ideal.rank_pow_quot_aux, Module.supportDim_add_length_eq_supportDim_of_isRegular, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Module.rankAtStalk_pi, Ideal.rank_pow_quot, Module.rankAtStalk_eq, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit. Read the returned statements. The hits concern adic filtrations, regular sequences, ramification ranks, rankAtStalk for flat modules, and Euler factors of elliptic curves; none gives coherent sheaf Euler differences, closed-support cohomology comparisons, or the displayed integral-factor degree sum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar|eulerCharacteristic|degree.{0,30}filtration",
+   "results": "Read returned hits: Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean. None states the coherent-sheaf Euler/degree filtration formula; rank-at-stalk/Picard or additive-pushforward hits cover only individual algebraic ingredients; the generic homological Euler characteristic and incidence-algebra Euler characteristic do not give the geometric theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Devissage Euler characteristic of a line bundle tensor a coherent sheaf by closed integral support filtration",
+   "results": "Read returned hits: IncidenceAlgebra.eulerChar, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, Ideal.Filtration, Ideal.Filtration.casesOn, Ideal.Filtration.noConfusionType, Ideal.Filtration.noConfusion, Ideal.Filtration.rec. None states the coherent-sheaf Euler/degree filtration formula; rank-at-stalk/Picard or additive-pushforward hits cover only individual algebraic ingredients; the generic homological Euler characteristic and incidence-algebra Euler characteristic do not give the geometric theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"euler\", \"tensor\"",
+   "results": "Read returned hits: . None states the coherent-sheaf Euler/degree filtration formula; rank-at-stalk/Picard or additive-pushforward hits cover only individual algebraic ingredients; the generic homological Euler characteristic and incidence-algebra Euler characteristic do not give the geometric theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic difference for an invertible sheaf tensor a coherent sheaf with finite filtration on proper curve is sum of degrees on integral ideal factors",
+   "results": "Read returned hits: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_baseChange, CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, Ideal.rank_pow_quot_aux, Module.rankAtStalk_eq. None states the coherent-sheaf Euler/degree filtration formula; rank-at-stalk/Picard or additive-pushforward hits cover only individual algebraic ingredients; the generic homological Euler characteristic and incidence-algebra Euler characteristic do not give the geometric theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology Euler characteristic of coherent module on a proper scheme additivity under filtration and tensor line bundle",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.add_apply, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.instIsMultiplicativeIntDegreewiseEpiWithInjectiveKernel. None states the coherent-sheaf Euler/degree filtration formula; rank-at-stalk/Picard or additive-pushforward hits cover only individual algebraic ingredients; the generic homological Euler characteristic and incidence-algebra Euler characteristic do not give the geometric theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-degree-weighted-irreducible-components",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the multiplicity-weighted reduction to reduced integral components in the proof of Stacks 0AYX (via 0AYW). Extraction: Original item proof step 1 (invertible and tensor coherence, finite Euler sums) and steps 6, 7, 8, 9 and 10: exact tensor devissage, local projection isomorphism, k-linear closed-pushforward cohomology, and evaluation on one- and zero-dimensional integral ideals.",
+   "via": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-integral-filtration-euler-difference",
+  "worker": "stage1",
+  "summary": "Eight-step assembly using existing nodes only: local exactness and coherence of an invertible twist, canonical k-linear closed-pushforward cohomology, Euler induction, and one-/zero-dimensional factor evaluation. Statement unchanged. No new nodes or Mathlib leaves.",
+  "blueprint": "Supports the inherited ampleness-to-projectivity branch of lem-trf-local-term-locality: the proper-curve degree criterion uses tensor-degree additivity, whose multiplicity devissage uses the integral-ideal Euler difference extracted here. Realizes the recorded parent extraction (old steps 1 and 6--10) via Stacks 0AYW/0AYV/08AA/0AYT. The current latest blueprint ancestor concerns contracting-correspondence locality and does not itself spell out this downstream algebraic tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-invertible",
+    "why": "Rank-one pullback preserves invertibility, used only as a general module tool. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "General coherent cokernel closure for the prescribed filtration quotients. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "General proper coherent cohomology finiteness and boundedness. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "General closed-immersion coherence and rank-one projection formula. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Canonical natural scalar-forgetting comparison for Zariski module cohomology. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-cohomology-closed-immersion-pushforward",
+    "why": "Natural abelian cohomology comparison for a closed topological embedding. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "General coherent Euler additivity for the given filtration, not a replacement of a unit step. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "General nonzero integral ideal generic-stalk calculation. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherent implies quasi-coherent on the Noetherian schemes in use. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "General dimension-zero Noetherian topology, to trivialize the line on a single-point support. No node of this unit supplies this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-zero-dim-noetherian-finite-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-a66fb0314",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-a66fb0314 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full. The delivery creates no new nodes and leaves the statement and stmt_deps unchanged; the item had no proof before. It carries no repair note and its proof closure has no cycle. Source: Stacks varieties.tex 0AYW and 0AYV, with tag labels checked against tags/tags. The item is a correct agent-written generalisation of the 0AYW induction. Step 1: proper-field-invertible-coherent on X and on each Z_a, invertible pullback, and coherent cokernel for F_{a-1}->F_a. Step 2 (elementary): an invertible twist is locally the identity, so it is exact and keeps coherence. Step 3: Euler finiteness, and closed pushforwards are coherent. Step 4: the projection clause of lem-pc-closed-immersion-coherent-cohomology. Step 5: 03FD composed with 02UV. def-sc-topological-abelian-cohomology is H(X_Zar), so the two notions match; naturality applied to multiplication by c gives k-linearity. Step 6: the first formula of 08AA plus induction on the filtration, then evaluation on Z_a. Step 7: a nonzero ideal has generic stalk equal to the field, so r=1 in lem-trf-curve-euler-tensor-generic-rank, which needs no smoothness. Step 8: zero-dimensional Noetherian implies finite discrete, and integral then gives a single point, so the line bundle is trivial and D=0. Edge cases s=0 and F=0 checked. The DAG has no duplicate of the item. All 10 tool_uses are generic tools, and I accept them. Advisory: the k-structure on Z_a is implicitly the one through X."
+ }
+}

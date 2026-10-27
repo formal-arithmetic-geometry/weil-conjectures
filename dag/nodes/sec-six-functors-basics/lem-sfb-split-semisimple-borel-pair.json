@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-split-semisimple-borel-pair",
+ "kind": "statement",
+ "title": "A split Borel pair for a semisimple group over an arbitrary field",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme], semisimple in the following sense: over an algebraic closure there is no nontrivial smooth connected solvable normal closed subgroup; solvable means that successive commutator subgroup schemes eventually become trivial. Let $T\\subseteq G$ be a split maximal torus, namely a closed subgroup isomorphic over $k$ to $\\mathbf G_m^r$ for $r\\geq0$, maximal among tori after algebraic closure, where $\\mathbf G_m(A)=A^\\times$. There exist smooth geometrically connected closed $k$-subgroups $T\\subseteq B\\subseteq G$ and $U\\subseteq B$, and a $k$-group homomorphism $p:B\\to T$, with the following properties. The group $B$ is split solvable as in [def-sfb-split-solvable-right-torsors]: it has a finite descending series of smooth connected closed subgroups normal in their predecessor, with represented fppf quotients $\\mathbf G_a$ or $\\mathbf G_m$. For every algebraically closed extension $F/k$, the subgroup $B_F$ is maximal among smooth connected solvable closed subgroups of $G_F$, and $U_F$ is its largest smooth connected normal unipotent subgroup. The group $U$ is unipotent: its geometric points are unipotent matrices in a faithful finite-dimensional matrix representation, meaning $(u-I)^N=0$ for some $N\\geq1$. The map $p$ restricts to the identity on $T$, has scheme-theoretic kernel $U$, and multiplication induces an isomorphism $U\\rtimes T\\xrightarrow{\\sim}B$, $(u,t)\\mapsto ut$, with multiplication $(u,t)(u',t')=(utu't^{-1},tt')$. All these subgroup inclusions, the projection, and this decomposition remain such after every field extension of $k$. Neither characteristic zero nor perfection nor simple connectedness is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollaries 21.30 and 21.34, printed pp.434--435; Theorem 21.32 and Corollary 21.33, pp.434--435 (geometric Borel condition); Theorem 13.33(a),(b),(e), printed pp.265--266, and the proof of 21.34 (unipotent radical and torus decomposition). Semisimple special case of the split reductive assertions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "First establish the geometric reductivity needed below. The identity of $G$ is a $k$-point, so [lem-sbc-connected-rational-point-geometrically-connected] makes $G$ geometrically connected. Over an algebraic closure $\\bar k$, the stated semisimplicity hypothesis and the last assertion of [lem-sfb-reductive-borel-pair-structure] imply that $G_{\\bar k}$ is reductive. Thus $G$ is reductive over $k$: it is smooth affine geometrically connected of finite type, and $G_{\\bar k}$ has no nontrivial smooth connected normal unipotent subgroup. Moreover [lem-sfb-geometric-neutral-reductivity-field-invariance], applied to $G$ and any algebraically closed extension $F/k$, makes $G_F$ reductive: its identity component is all of $G_F$ by geometric connectedness. All groups here are smooth affine of finite type, as required by that invariance statement.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-geometric-neutral-reductivity-field-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 19.22 and the following paragraph, p.402; Proposition 1.34, pp.16-17 (geometric connectedness); geometric-reductivity input as stated in the cited node."
+   }
+  },
+  {
+   "text": "Choose an isomorphism $T\\simeq\\mathbf G_m^r$. By [lem-sfb-affine-group-dual-number-calculus] the conjugation action of $G$ on $\\mathfrak g=\\operatorname{Lie}(G)$, a finite-dimensional tangent space, is a homomorphism of group schemes $\\operatorname{Ad}_G:G\\to\\operatorname{GL}(\\mathfrak g)$; restrict it to $T$. Apply [lem-sfb-split-torus-representation-weight-decomposition] to this representation; let $\\Phi$ be its finite set of nonzero characters. By [lem-sfb-relative-split-torus-matrix-sheaf], each $\\alpha\\in\\Phi$ is an integer row $(a_0,\\ldots,a_{r-1})$, and integer columns give cocharacters. Choose a positive integer $N$ larger than $1+\\sum_i|a_i|$ for every row in $\\Phi$ and take $\\lambda(t)=(t,t^N,\\ldots,t^{N^{r-1}})$. If $a_j$ is the last nonzero coefficient, then $|a_j|N^j\\geq N^j>\\sum_{i<j}|a_i|N^i$, so $\\langle\\alpha,\\lambda\\rangle\\ne0$. If $\\Phi$ is empty take $\\lambda=0$, including $r=0$. These are integer pairings, not their reductions in $k$. This regularity persists over every extension $L/k$. For an $L$-algebra $R$ one has $G_L(R)=G(R)$, so the bijections $E_{G,R}$ and $E_{G_L,R}$ of [lem-sfb-affine-group-dual-number-calculus] have the same target; the composite $E_{G_L,R}^{-1}E_{G,R}:\\mathfrak g\\otimes_kR\\to\\operatorname{Lie}(G_L)\\otimes_LR$ is additive, $R$-linear by the scaling clause, natural in $R$, and by the characterizing identity of $\\operatorname{Ad}$ it intertwines $\\operatorname{Ad}_G(t)$ and $\\operatorname{Ad}_{G_L}(t)$ for $t\\in T(R)$. (Over $R=L$ this is the identification $L\\otimes_k\\mathfrak g\\cong\\operatorname{Lie}(G_L)$ of [lem-sfb-affine-group-lie-tangent-calculus].) Hence the tensored weight basis diagonalizes $\\operatorname{Ad}_{G_L}|_{T_L}$ with the same monomials on the diagonal, so the nonzero weights of $T_L$ in $\\operatorname{Lie}(G_L)$ are exactly $\\Phi$, with the same integer labels.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 21.30, p.434 (choice of regular cocharacter); Theorem 12.12, pp.234-235 (weight basis); Theorem 12.9, pp.233-234 (integer characters); Section 10.19, p.192 (tangent scalar extension)."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-reductive-cocharacter-parabolic-geometry] for $G$ and this $\\lambda$. Its limit functors give smooth geometrically connected closed subgroups $B:=P_\\lambda$ and $U:=U_\\lambda$, with $U$ normal in $B$, and the evaluation homomorphism $r_\\lambda:P_\\lambda\\to Z_\\lambda$. The torus $T$ is maximal in $G$ over $k$, since it is maximal after extension to $\\bar k$ ([lem-sfb-maximal-torus-field-extension]). Since $T$ is split maximal and $\\lambda$ has nonzero pairing with every nontrivial adjoint weight, the last clause of that node gives $Z_\\lambda=T$. Set $p=r_\\lambda$ with this target. The same node says that $p|_T=\\mathrm{id}$, that its scheme-theoretic kernel is $U$, that $U$ is split unipotent, and that multiplication $U\\rtimes T\\to B$ is an isomorphism with product $(u,t)(u',t')=(utu't^{-1},tt')$. In particular these are statements on subgroup schemes and on all test algebras, not just on geometric points.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-maximal-torus-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(a),(b),(e), pp.265-266; Proposition 17.60, p.372; proof of Proposition 21.29, pp.433-434; proof of Corollary 21.34, p.435."
+   }
+  },
+  {
+   "text": "Let $F/k$ be any algebraically closed extension. Step 1 gives the reductivity of $G_F$. By [lem-sfb-maximal-torus-field-extension], $T_F$ is maximal: maximality over $\\bar k$, which is a hypothesis of the item, first implies maximality over $k$ and then over $F$. It is split by the chosen monomial-coordinate model. The cocharacter $\\lambda_F$ is regular by step 2. Therefore [lem-sfb-regular-cocharacter-borel-description] says that $P_{\\lambda_F}$ is a maximal smooth connected solvable closed subgroup of $G_F$. Formation of the limit subgroups commutes with every field extension by [lem-sfb-reductive-cocharacter-parabolic-geometry], so $P_{\\lambda_F}=B_F$. This proves precisely the required geometric Borel condition. The same base-change assertion gives $U_L=U_{\\lambda_L}$, $(Z_\\lambda)_L=T_L$, and $p_L=r_{\\lambda_L}$ for every field extension $L/k$; the semidirect-product isomorphism and all its subgroup maps extend to the identical formulas over $L$.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29 and Corollary 21.30, pp.433-434; Theorem 21.32 and Corollary 21.33, pp.434-435; Theorem 17.82, p.379; the defining limit functors of Section 13d."
+   }
+  },
+  {
+   "text": "Construct the actual split-solvable series, rather than infer it merely from solvability. In $T=\\mathbf G_m^r$ let $T_j$ be the subgroup with the first $j$ coordinates $1$, for $0\\leq j\\leq r$. Start with $B_j=p^{-1}(T_j)$; thus $B_0=B$ and $B_r=U$. The coordinate projection $p$ identifies the fppf quotient $B/U$ with $T$: $p$ has a section and two points over the same base point differ by exactly one element of $U$. Apply [lem-sfb-affine-normal-quotient-geometry] to $U\\triangleleft B$ and the subgroups $T_j$. It gives closed smooth connected inverse images $B_j=U\\rtimes T_j$. Here $T_j\\simeq\\mathbf G_m^{r-j}$ is smooth and connected: its Laurent-coordinate chart is a localization of a polynomial algebra, and its coordinate algebra is a domain. Each $B_{j+1}$ is normal in $B_j$: it is the kernel of the homomorphism given by coordinate $j+1$ of $p$. This coordinate map presents the fppf quotient $B_j/B_{j+1}=\\mathbf G_m$: on underlying schemes it is the product projection $U\\times T_{j+1}\\times\\mathbf G_m\\to\\mathbf G_m$, and two lifts with the same coordinate differ by exactly one element of its kernel. Append the split-unipotent series of $U$ from step 3, whose successive represented fppf quotients are $\\mathbf G_a$. This concatenated finite series has precisely the properties in [def-sfb-split-solvable-right-torsors]. Over any field extension the same coordinate projections and kernel identities still present these quotients. The factors of the appended series remain connected by [lem-sbc-connected-rational-point-geometrically-connected], applied to their identity sections. Smoothness is preserved by base change ([lem-pc-proper-base-change], clause (2)). Zero-length series cause no problem when $r=0$ or $U=1$.",
+   "uses": [
+    "def-sfb-split-solvable-right-torsors",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Corollary 21.34, p.435; split-series definition 6.33, pp.132-133; elementary coordinate construction; connected base change: Stacks Tag 04KV; smooth base change: Stacks Tag 01VB. Quotient correspondence: Theorem 5.55, p.113, and Proposition 5.59, p.114."
+   }
+  },
+  {
+   "text": "Finally, fix any algebraically closed extension $F/k$. First, $U$ is unipotent in the sense of a closed group immersion into the upper unitriangular group $\\mathcal U_{n,k}$: by induction along the split series $U=U_0\\supseteq\\cdots\\supseteq U_m=1$ of step 3, starting from $U_m=1\\subseteq\\mathcal U_{1,k}$ and using that $\\mathbf G_a\\to\\mathcal U_{2,k}$, $a\\mapsto\\begin{pmatrix}1&a\\\\0&1\\end{pmatrix}$, is a closed group immersion, [lem-sfb-unipotent-extension-arbitrary] applied to $U_{i+1}\\triangleleft U_i\\to\\mathbf G_a$ makes each $U_i$ unipotent. Base change of such an immersion is again one, so $U$ is unipotent in the sense of [lem-sfb-unipotent-to-multiplicative-trivial]. The group $U_F$ is smooth connected normal in $B_F$ and unipotent, by step 3 and its field-extension compatibility in step 4. If $V\\subseteq B_F$ is any smooth connected normal unipotent closed subgroup, then [lem-sfb-unipotent-to-multiplicative-trivial] applies to $p_F|_V:V\\to T_F$, because $T_F$ is a split torus and hence of multiplicative type. This homomorphism is trivial on every test algebra; consequently $V\\subseteq\\ker(p_F)=U_F$ scheme-theoretically. Thus $U_F$ is the largest such subgroup. The unipotence convention in the cited node is equivalent, for smooth groups, to the faithful-matrix geometric-point condition required in the item. It also asserts that unipotence is preserved by every field extension. Together with steps 3-5 this verifies every requested clause, over $k$ and after every field extension, without any characteristic, perfection or simple-connectedness restriction.",
+   "uses": [
+    "lem-sfb-unipotent-extension-arbitrary",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.18(a), p.284; Corollaries 14.9 and 14.12, pp.282-283; Theorem 13.33 and proof of Corollary 21.34."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-geometric-neutral-reductivity-field-invariance",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-relative-split-torus-matrix-sheaf",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "def-sfb-split-solvable-right-torsors",
+  "lem-pc-proper-base-change",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-unipotent-extension-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.30 and proof of Corollary 21.34, pp.434-435, through regular cocharacters and Theorem 13.33; geometric radical checked by Corollary 14.18(a)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split maximal torus in a semisimple algebraic group is contained in a Borel subgroup split solvable over the ground field",
+   "results": "{\"t\": \"2026-10-24T13:57:16Z\", \"tool\": \"leanfinder\", \"query\": \"A split maximal torus in a semisimple algebraic group is contained in a Borel subgroup split solvable over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieSubalgebra.IsCartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\"], \"digest\": \"6d58ae9c9695372c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-24T13:57:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|[Ss]plit.*[Ss]olvable|[Ss]plit.*[Rr]eductive",
+   "results": "{\"t\": \"2026-10-24T13:57:17Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|[Ss]plit.*[Ss]olvable|[Ss]plit.*[Rr]eductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every Borel subgroup containing a split maximal torus of a reductive algebraic group is split solvable",
+   "results": "{\"t\": \"2026-10-24T13:57:18Z\", \"tool\": \"leansearch\", \"query\": \"Every Borel subgroup containing a split maximal torus of a reductive algebraic group is split solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"subgroup_solvable_of_solvable\", \"isSolvable_of_top_eq_bot\", \"IsSolvable\", \"IsSolvable.mk\", \"IsNilpotent.to_isSolvable\", \"IsSolvable.recOn\", \"IsSolvable.solvable\", \"LieAlgebra.isSolvable_of_isNilpotent\"], \"digest\": \"a3f9f6ea6fe85f6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a split Borel subgroup containing a given split maximal torus over a non algebraically closed field",
+   "results": "{\"t\": \"2026-10-24T13:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a split Borel subgroup containing a given split maximal torus over a non algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"2e649b8b969de054\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*(torus|solvable)|torus.*Borel",
+   "results": "{\"t\": \"2026-10-24T13:58:24Z\", \"tool\": \"grep\", \"query\": \"Borel.*(torus|solvable)|torus.*Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract solvable groups, Lie Cartan subalgebras and root systems; none constructs a Borel subgroup scheme over the ground field or its split unipotent radical."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|[Ss]plit.*[Ss]olvable|[Ss]plit.*[Rr]eductive",
+   "results": "{\"t\": \"2026-10-24T14:32:45Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|[Ss]plit.*[Ss]olvable|[Ss]plit.*[Rr]eductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular cocharacter of a split reductive algebraic group defines a Borel subgroup and a split unipotent radical",
+   "results": "{\"t\": \"2026-10-24T14:32:45Z\", \"tool\": \"leansearch\", \"query\": \"A regular cocharacter of a split reductive algebraic group defines a Borel subgroup and a split unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"IsRegular\", \"LieAlgebra.isRegular_def\", \"LieAlgebra.isRegular_iff_coeff_polyCharpoly_rank_ne_zero\", \"LieAlgebra.IsRegular\", \"IsRegular.rec\", \"LieModule.IsRegular\", \"CategoryTheory.instIsRegularEpiOfIsSplitEpi\"], \"digest\": \"f17b093d3e102574\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-24T14:32:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split maximal torus in a semisimple algebraic group over any field is contained in a split Borel subgroup with unipotent radical semidirect product",
+   "results": "{\"t\": \"2026-10-24T14:32:46Z\", \"tool\": \"leanfinder\", \"query\": \"A split maximal torus in a semisimple algebraic group over any field is contained in a split Borel subgroup with unipotent radical semidirect product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\"], \"digest\": \"cf414eac2a0d2e23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*(torus|solvable)|torus.*Borel",
+   "results": "{\"t\": \"2026-10-24T14:33:28Z\", \"tool\": \"grep\", \"query\": \"Borel.*(torus|solvable)|torus.*Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocharacter parabolic subgroup of a split reductive group is the semidirect product of a split unipotent group and its centralizer torus",
+   "results": "{\"t\": \"2026-10-24T14:33:29Z\", \"tool\": \"leanfinder\", \"query\": \"A cocharacter parabolic subgroup of a split reductive group is the semidirect product of a split unipotent group and its centralizer torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"SemidirectProduct.mulEquivSubgroup\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\"], \"digest\": \"5d48dbbe5fbf36d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, root-system Lie constructions, abstract-group semidirect products, or unrelated regularity; none states this group-scheme existence and geometric base-change assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-simple-multiplicity-one-weight",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 22.2 and 22.18(b): obtain a multiplicity-one torus character before the scalar-endomorphism argument of 22.4. Supporting input: Corollaries 21.30 and 21.34, printed pp.434--435; Theorem 21.32 and Corollary 21.33, pp.434--435 (geometric Borel condition); Theorem 13.33(a),(b),(e), printed pp.265--266, and the proof of 21.34 (unipotent radical and torus decomposition). Semisimple special case of the split reductive assertions.",
+   "via": [
+    "lem-sfb-split-simple-multiplicity-one-weight",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-semisimple-borel-pair",
+  "worker": "stage1",
+  "summary": "Read Milne 13.33, 14.12/14.18, 16.63 and 21.26-21.34. Reused existing nodes for regular cocharacters, limit subgroups, reductivity and base change; constructed the split series and checked the maximal unipotent radical. No statement correction and no new nodes.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), along the existing alteration/moduli/Steinberg/highest-weight prerequisite chain recorded in blueprint.from.place; specifically the split-Borel input to the multiplicity-one argument. The latest blueprint has no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic connectedness-under-field-extension fact (Stacks 04KV), used with identity sections; no group-specific node of this unit replaces it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under base change, for the already-constructed split-series factors; a generic morphism tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-40c397041",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-40c397041 (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps in full, every cited statement, and Milne iAG2017 21.29-21.34 (pp.433-435). The route matches (regular λ, P(λ)=U(λ)⋊T, split U, Borel over k^a). No new nodes; statement and stmt_deps unchanged. Three faults repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-split-semisimple-borel-pair.json. (1) C1/C4, step 2: the weight decomposition needs a group-scheme homomorphism T→GL(Lie G), which the cited tangent-calculus node does not give. Added lem-sfb-affine-group-dual-number-calculus (Ad_G), and wrote out why the weights of T_L on Lie(G_L) equal Φ: E_{G_L,R}^{-1}E_{G,R} is R-linear, natural in R and intertwines Ad. (2) E1, step 3: the clause Z_λ=T needs T maximal over k, which was only derived in step 4; cited lem-sfb-maximal-torus-field-extension there. (3) C1, step 6: step 3 gives only split unipotence, but the item asserts matrix unipotence and step 6 uses it. Added an induction along the G_a series via lem-sfb-unipotent-extension-arbitrary (base case G_a↪U_2). Checked: regular-cocharacter inequality, the B_j=p^{-1}(T_j) series via affine-normal-quotient-geometry with G_m quotients, the cases r=0, U=1 and SL_2 in char 2, and no cycle. Accepted tool_uses: 04KV connectedness and pbc clause (2) smooth base change. Batch-5 flags: the seven flagged algebraic-group citations reach sec-trace-formula only through general fppf/fpqc covering, descent-datum and flat-tensor foundations (lem-trf-fppf-covering-base-change, -is-fpqc, def-trf-scheme-cover-descent-datum, lem-trf-smooth-fpqc-base-descent, lem-trf-flat-tensor-preserves-injection). These are not steps of the trace formula or of Poincaré duality, so they are outside the assumptions and the citations stand.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitSemisimpleBorelPair",
+  "declaration": "AlgebraicGeometry.split_semisimple_borel_pair",
+  "declarations": [
+   "AlgebraicGeometry.IsSplitSemisimpleBorelPair",
+   "AlgebraicGeometry.split_semisimple_borel_pair"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitSemisimpleBorelPair.lean",
+  "statement": "theorem split_semisimple_borel_pair {k : Type u} [Field k] (G T : Grp (Over (Spec (.of k)))) (hGsmooth : Smooth G.X.hom) (hGconnected : ConnectedSpace G.X.left) (hGaffine : IsAffine G.X.left) (hGfinite : LocallyOfFiniteType G.X.hom) (hGqc : QuasiCompact G.X.hom) (hGsemisimple : IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G).X) (iT : T ⟶ G) (hTclosed : IsClosedSubgroupScheme iT.hom.hom) (hTsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (hTmaximal : ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map iT)) : ∃ (B U : Grp (Over (Spec (.of k)))) (iB : B ⟶ G) (j : T ⟶ B) (iU : U ⟶ B) (p : B ⟶ T), IsSplitSemisimpleBorelPair iT iB j iU p ∧ ∀ (L : Type u) [Field L] [Algebra k L], IsSplitSemisimpleBorelPair ((MultiplicativeType.baseChange (K := L)).map iT) ((MultiplicativeType.baseChange (K := L)).map iB) ((MultiplicativeType.baseChange (K := L)).map j) ((MultiplicativeType.baseChange (K := L)).map iU) ((MultiplicativeType.baseChange (K := L)).map p)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd3718b8e",
+  "group": "NR",
+  "result": "pass",
+  "note": "Node changes only lean + 5 existing landed def stmt_deps (semisimple, borel, reductive-torus-centralizer, solvable-group-structure, tori-multiplicative-type). Hypotheses match recorded defs (IsSemisimpleGroupScheme over k̄: its smooth/connected/affine/f.t. clauses follow from G's; IsMaximalTorus over k̄; split torus iso in Grp, r=0 allowed). Conclusion: closed/normal/smooth/geom-connected T,B,U; j≫iB=iT; IsSplitSolvable B; IsUnipotent U; j≫p=𝟙; kernel as IsPullback; IsIso of (u,t)↦ut, matching the landed reductive_borel_pair_structure interface; ∀ alg-closed F, IsBorelGroupScheme of B_F and largest-radical factorization (U_F's own properties via the L=F instance); all properties restated for base changes of the same maps over every L. Edge cases r=0, trivial G/U, char 2, imperfect k covered. Helper predicate is a transparent conjunction with docstrings; sorry only; imports = recorded proof-dep modules; no duplicate in side-live; report sections present. Note: extensions in Type u, inherited from baseChange. Not recompiled (no file changed)."
+ }
+}

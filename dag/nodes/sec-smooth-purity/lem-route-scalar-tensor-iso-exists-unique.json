@@ -1,0 +1,285 @@
+{
+ "id": "lem-route-scalar-tensor-iso-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "via": [
+    "lem-sp-supported-etale-tensor-origin"
+   ],
+   "place": "Step 1, derived coefficient tensor in the projection map, and Step 2, representing scalar extension by an ordinary tensor complex; the present lemma supplies the canonical scalar/tensor identification used by the supported etale tensor origin."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The scalar/tensor comparison is uniquely fixed on K-flat representatives.",
+ "statement": "Let $T$ be a scheme in universe $u$ [def-pc-scheme], let $A,B$ be commutative rings in universe $u+1$, and let $\\varphi:A\\to B$ be a unital ring homomorphism. Work with ordinary module-valued sheaves on the small etale site, and their unbounded derived categories $D_A,D_B$ [def-weil-pbc-derived-categories]. Write $Q_A,Q_B$ for cochain localization. Use the existing sheafified scalar adjunction $E\\dashv U$, exact derived restriction $DU$, and the published chosen adjunction $L\\dashv DU$ [def-sp-coefficient-scalar-representatives]. Thus $L$ is the functor called scalarExtension in the published interface. Put $S=U(\\mathbf1_B)$, and let $S[0]\\in D_A$ be the degree-zero complex. The tensor products are the sheafified ordinary tensor and its fixed K-flat derived tensor [def-pur-sheaf-tensor-product; def-kun-derived-tensor].\n\nFor an $A$-module sheaf $M$, let $\\tau_M:M\\otimes_A S\\to UEM$ be the ordinary scalar unit $\\eta_M$ tensored with $S$, followed by the lax tensorator of $U$ and $U$ of the right unitor. For each cochain complex $P$, let $a_P:L(Q_AP)\\to Q_B(EP)$ be the transpose under the chosen adjunction $L\\dashv DU$ of $Q_A(\\eta_P):Q_AP\\to Q_A(UEP)$ followed by the inverse exact-restriction localization comparison [def-sp-coefficient-scalar-representatives]. Define $r_P:DU(L(Q_AP))\\to Q_A(UEP)$ by applying $DU$ to $a_P$ and then its exact-localization comparison, including the canonical termwise functor-composition identification. Define\n$$c_P:Q_AP\\otimes_A^{\\mathbf L}S[0]\\longrightarrow Q_A(P\\otimes_A S)$$\nto be the lax tensorator of $Q_A$ on $(P,S[0])$ for the derived monoidal structure of [lem-sfb-derived-monoidal], whose tensor is the fixed derived tensor above, followed by $Q_A$ of the total-tensor/single-complex identification. Here $(P\\otimes_A S)^n=P^n\\otimes_A S$ with differential $d_P^n\\otimes1$; the canonical degree-zero localization identification is understood. Let $\\tau_P:P\\otimes_A S\\to UEP$ be $\\tau$ applied degreewise.\n\nThere exists exactly one natural isomorphism\n$$e:DU\\circ L\\xrightarrow{\\sim}(-\\otimes_A^{\\mathbf L}S[0]):D_A\\longrightarrow D_A$$\nsuch that, for every integer-indexed cochain complex $P$ of $A$-module sheaves,\n$$Q_A(\\tau_P)\\circ c_P\\circ e_{Q_AP}=r_P.$$\nThe tensor functor on the right is precisely the published site-specific derivedTensor functor with second argument scalarCoefficient, identified with scalarTensorModelFunctor by unfolding their definitions. No flatness of $B$ over $A$, boundedness, finiteness, or nonempty-scheme hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "lem-sp-supported-etale-tensor-origin: the Lean of this node (its declaration uses) reaches AlgebraicGeometry.Etale.scalarTensorIso_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/EtaleDerivedScalarTensor.lean, declaration AlgebraicGeometry.Etale.scalarTensorIso_existsUnique (module Sheaf.Paper.EtaleDerivedScalarTensor, lines 279-301, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-sheaf-tensor-product",
+  "def-kun-derived-tensor",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Check the category hypotheses before using K-flat derivability. Ordinary $A$-modules form a Grothendieck abelian category [lem-weil-pbc-ring-modules-grothendieck-abelian]; their usual tensor is closed by the explicit currying bijection $\\operatorname{Hom}_A(M\\otimes_A N,P)=\\operatorname{Hom}_A(M,\\operatorname{Hom}_A(N,P))$, whose inverse is evaluation. Functorial flat resolutions of abelian groups [lem-sfb-abelian-functorial-flat-resolution] pass to $A$-modules by [lem-sfb-modobj-flat-resolutions], viewing an $A$-module as an internal module in abelian groups. Apply [lem-weil-pbc-sheaf-tensor-closed] and [lem-sfb-sheaf-functorial-flat-resolution] to the essentially small small-etale site in the coefficient universe $u+1$. Thus $C=\\operatorname{Sh}(T_{\\mathrm{et}},\\operatorname{Mod}A)$ is Grothendieck abelian, closed symmetric monoidal with additive tensor, and has functorial flat resolutions. Tensor preserves colimits by closedness. Apply [lem-sfb-kflat-derivability]: in $K(C)$ the full K-flat subcategory is a left derivability structure, and every complex admits a K-flat resolution. All later localizations and K-flatness refer to this same module-valued category; no comparison with a different coefficient category is used.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-sfb-abelian-functorial-flat-resolution",
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-kflat-derivability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Steps 1-2, coefficient tensor model; categorical prerequisites from the existing K-flat resolution route"
+   }
+  },
+  {
+   "text": "Prove the ordinary balancing assertion directly, rather than importing the downstream scalar/pullback module: specialize CategoryTheory.isIso_sheafAdjunction_unitProjection to the module scalar adjunction. Restriction preserves sheafification because it has the coextension right adjoint; the module unit projection is invertible by ModuleCat.isIso_extendRestrictScalarsAdj_unitProjection. Thus the published scalarSheafTensorTransformation is a natural isomorphism tau: tensorRight(S) ~= E followed by U, without any flatness assumption. Tensoring an acyclic K-flat complex with S is acyclic (CochainComplex.acyclic_tensorRight_of_kFlat); transport along termwise tau and reflect exactness through faithful scalar restriction. Functor.PreservesKFlatQuasiIso.mk' then proves that E preserves quasi-isomorphisms between K-flat complexes.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, ordinary balancing; the existing node also records the specified scalar-unit formula"
+   }
+  },
+  {
+   "text": "For a cochain complex P, first form the localization of the ordinary cochain-adjunction unit, composed with the inverse exact-restriction factorization. Naturality of that unit and of the factorization gives a natural transformation eta. Transpose it under the chosen derived scalar adjunction to obtain a natural transformation r, and apply exact restriction and its factorization to obtain r'. By [lem-sfb-exact-right-adjoint-kflat-representative], using the K-flat quasi-isomorphism preservation just proved, the transpose is invertible on K-flat P; hence so is r'. In each degree the cochain-adjunction unit is exactly the published composite of identity and composition identifications with the mapped ordinary unit. Consequently r'_P equals scalarRestrictedExtensionRepresentative(phi,T,P) on every complex, not only K-flat ones.",
+   "uses": [
+    "def-sp-coefficient-scalar-representatives",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, canonical K-flat computation; chosen-adjoint representative as in the existing representative node"
+   }
+  },
+  {
+   "text": "Put $H(K)=K\\otimes_A^{\\mathbf L}S[0]$. By [lem-sfb-derived-monoidal], the fixed tensor is computed by replacing either argument by a K-flat resolution and its localization is lax monoidal. Consequently its tensorator on $(P,S[0])$ is invertible if $P$ is K-flat; $S$ need not be flat. Compose it with the total-tensor/single identification to obtain exactly $c_P$ of the statement. This identification has in degree $n$ the sole summand $P^n\\otimes S$; the second differential is zero and the first is $d_P^n\\otimes1$. For a chain map $f$, its degree-$n$ map is $f^n\\otimes1$. Lax-tensorator naturality therefore says $Q_A(f\\otimes1)c_P=c_{P'}H(Q_Af)$. Thus $\\beta_P=Q_A(\\tau_P)c_P$ is a natural transformation $HQ_A\\Rightarrow Q_AV$, on cochain and homotopy categories, invertible on K-flat objects.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and its preceding construction; one-sided K-flat computation as recorded by lem-sfb-derived-monoidal"
+   }
+  },
+  {
+   "text": "Let F be the termwise functor V=E followed by U, followed by cochain localization. Apply LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure on the full K-flat subcategory of cochain complexes. The natural transformations r' and beta constructed above are invertible on every K-flat object, so both (G,r') and (H,beta) are left derived functors of F, by [lem-sfb-unary-left-derived-calculus]. This cochain formulation of the derivability criterion supplies the same universal property on all complexes and avoids a separate descent of the transformations to the homotopy category.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, dual criterion; its universal-property formulation in lem-sfb-unary-left-derived-calculus"
+   }
+  },
+  {
+   "text": "Apply Mathlib Functor.leftDerivedUnique to the two counits r' and beta obtained in Step 5. Its hom component is Functor.leftDerivedNatTrans induced by the identity of the common underived functor, so Functor.leftDerivedNatTrans_app gives e_(Q(P)) followed by beta_P = r'_P. Substitute the proved equality r'_P = scalarRestrictedExtensionRepresentative(phi,T,P). The resulting equation is precisely scalarTensorModelNormalization, and holds for every cochain complex P without cancelling either counit on non-K-flat complexes.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Universal-property argument for uniqueness of derived functors; Tag 05S9, definition-right-derived-functor, dual, with Tag 06XN"
+   }
+  },
+  {
+   "text": "For another normalized isomorphism e', both e'.hom and e.hom have the same composite with beta after whiskering by Q, by their all-complex normalization equations. Functor.leftDerived_ext for the tensor left derived functor gives equality of these natural transformations; Iso.ext gives equality of the isomorphisms. Finally transport this unique isomorphism along the inverse of eqToIso(scalarTensorFunctor_eq phi T) to the site-specific derivedTensor endpoint. The two inverse isomorphism identities show both existence with its exact published normalization and uniqueness at that endpoint.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Steps 1 and 4, canonical coefficient tensor and naturality; endpoint equality from the published scalarTensorFunctor_eq definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-kflat-derivability",
+  "lem-sfb-derived-monoidal",
+  "def-sp-coefficient-scalar-representatives",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-exact-right-adjoint-kflat-representative",
+  "lem-sfb-unary-left-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YU, 06YY and derived.tex Tag 06XN; ordinary balancing via the proved source-library sheafAdjunction unit projection, exact-right-adjoint K-flat representative via lem-sfb-exact-right-adjoint-kflat-representative, and Mathlib leftDerivedUnique/leftDerived_ext. The generic comparison calculation is adapted from the existing private tensorComparison_existsUnique and adjointTensorComparison proofs in SupportedEtaleTensorOrigin, specialized here without importing that downstream module. S4, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'scalarTensorIso_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|leftDerived_ext|isLeftDerivedFunctor_of_isLeftDerivabilityStructure",
+   "results": "{\"t\": \"2026-10-27T02:25:25Z\", \"tool\": \"grep\", \"query\": \"leftDerivedUnique|leftDerived_ext|isLeftDerivedFunctor_of_isLeftDerivabilityStructure\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"e240e458033ca6cf\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module scalar maps, generic derived-functor uniqueness and Tor APIs do not state this sheaf-valued normalized scalar/tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars restricted to the original ring is naturally isomorphic to derived tensor with the new ring",
+   "results": "{\"t\": \"2026-10-27T02:25:25Z\", \"tool\": \"leansearch\", \"query\": \"Derived extension of scalars restricted to the original ring is naturally isomorphic to derived tensor with the new ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"Derivation.restrictScalars.congr_simp\", \"Derivation.coe_restrictScalars\", \"RestrictScalars.moduleOrig\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"RestrictScalars.addEquiv\", \"Derivation.restrictScalars_apply\", \"RestrictScalars.ringEquiv\"], \"digest\": \"1cd0e80a082e2de1\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module scalar maps, generic derived-functor uniqueness and Tor APIs do not state this sheaf-valued normalized scalar/tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "{\"t\": \"2026-10-27T02:25:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftDerivedUnique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedUnique\"], \"digest\": \"efb16d79c4b912e1\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module scalar maps, generic derived-functor uniqueness and Tor APIs do not state this sheaf-valued normalized scalar/tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural isomorphism between derived scalar extension followed by restriction and derived tensor with the coefficient ring normalized by the cochain counit",
+   "results": "{\"t\": \"2026-10-27T02:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"Unique natural isomorphism between derived scalar extension followed by restriction and derived tensor with the coefficient ring normalized by the cochain counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.extendScalars_comp_id\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.extendScalars_id_comp\"], \"digest\": \"720e2d878deba4f9\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module scalar maps, generic derived-functor uniqueness and Tor APIs do not state this sheaf-valued normalized scalar/tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural cochain comparison from the derived tensor product with a sheaf in degree zero to termwise tensor is invertible on K-flat complexes",
+   "results": "{\"t\": \"2026-10-27T02:26:45Z\", \"tool\": \"leanfinder\", \"query\": \"Natural cochain comparison from the derived tensor product with a sheaf in degree zero to termwise tensor is invertible on K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctorIsoCompQ\", \"CategoryTheory.compatiblePreservingOfFlat\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Tor'\", \"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.Tor\"], \"digest\": \"d5ef6a5677794c9a\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module scalar maps, generic derived-functor uniqueness and Tor APIs do not state this sheaf-valued normalized scalar/tensor comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sp-supported-etale-tensor-origin",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.EtaleDerivedScalarTensor",
+  "file": "lean/Sheaf/Paper/EtaleDerivedScalarTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarTensorIso_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarTensorIso_existsUnique"
+  ],
+  "statement": "theorem scalarTensorIso_existsUnique\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u}) :\n    ∃! e : scalarExtension φ T ⋙ Sheaf.derivedRestrictScalars T.smallEtaleTopology φ ≅\n        (derivedTensor (ModuleCat.{u + 1} A) T).flip.obj (scalarCoefficient φ T),\n      scalarTensorModelNormalization (scalarCoefficientSheaf φ T)\n        (scalarSheafTensorTransformation φ T)\n        (e ≪≫ eqToIso (scalarTensorFunctor_eq φ T))\n        (scalarRestrictedExtensionRepresentative φ T) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-scalar-tensor-iso-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced the machine-made signature/docstring placeholder by the exact natural-language normalized existence-and-uniqueness statement. Split the proof into category prerequisites, ordinary balancing, the actual chosen-adjoint representative, the fixed tensor counit, and an explicit universal-property construction with uniqueness. Reused existing nodes throughout; no new nodes. Preserved all-complex normalization and arbitrary coefficient rings.",
+  "blueprint": "det-sp-reduction-direct-image proof Steps 1-2: identify derived coefficient extension after restriction with the actual coefficient tensor on representatives; Step 4: naturality and independence fixed by the counit, below the unchanged unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Grothendieckness of the coefficient module category used only to instantiate the sheaf and K-flat machinery."
+   },
+   {
+    "node": "lem-sfb-abelian-functorial-flat-resolution",
+    "why": "Generic coefficient-category flat resolution input; no node of the coefficient-comparison unit supplies this prerequisite."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Transfers functorial flat resolutions from abelian groups to ordinary A-modules, a categorical prerequisite only."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Supplies the actual module-valued sheaf monoidal Grothendieck structure used by the published tensor."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Transfers coefficient flat resolutions to the small-etale sheaf category."
+   },
+   {
+    "node": "lem-sfb-kflat-derivability",
+    "why": "Generic resolving-class localization input; retains the unit coefficient-tensor route."
+   },
+   {
+    "node": "lem-pur-scalar-sheaf-tensor-pullback",
+    "why": "Only its underived balancing isomorphism is used; the geometric pullback square is unnecessary."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Canonical localization factorization for exact restriction, a generic exact-functor tool."
+   },
+   {
+    "node": "lem-pur-finite-scalar-representative-invertible",
+    "why": "Existing native chosen-adjoint cochain computation on K-flat objects for arbitrary coefficient rings."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic one-sided K-flat computation for the same fixed derived monoidal tensor."
+   },
+   {
+    "node": "lem-sfb-unary-left-derived-calculus",
+    "why": "Generic counit universal-property criterion; does not replace any geometric projection or coefficient-comparison argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-kflat-derivability",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-unary-left-derived-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-0b084440b",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0b084440b (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement matches the Lean scalarTensorIso_existsUnique (EtaleDerivedScalarTensor.lean:292-301): L is pbcFixedScalarExtension, the leftAdjoint of derivedRestrictScalars; a_P and r_P are scalarExtensionRepresentative and scalarRestrictedExtensionRepresentative; tau is scalarSheafTensorMap; the normalization is quantified over ALL cochain complexes; rings are arbitrary; the endpoint is the rfl scalarTensorFunctor_eq. Nothing is weakened. Steps 1-7 check out against each cited statement. Step 1: the Grothendieck, closed and flat-resolution hypotheses feed lem-sfb-kflat-derivability. Step 2: lem-pur-scalar-sheaf-tensor-pullback gives balancing invertible without flatness. Step 3: lem-pur-finite-scalar-representative-invertible, plus the exact-functor factorization. Step 4: lem-sfb-derived-monoidal gives a one-sided K-flat tensorator; I checked that the single-complex totalization has no sign. Step 5: in lem-sfb-unary-left-derived-calculus, 'F inverts W_P' is shown through r, not by assuming E exact. Steps 6-7 are the Yoneda inverse and uniqueness from injectivity. Edge cases checked: T empty, B=0, A=B, and Z/4->F_2 (non-flat S, normalization on non-K-flat P comes from the counit). Read det-sp-reduction-direct-image Steps 1-2 (main-20261015) and Stacks 03EK and 06YY. Same unit; the 11 tool_uses are generic tools and I accept them. No cycle: the dependency closure was computed by script. No duplicate: the IntegralQuotient analogue, the representative-calculus node and the two-variable mu node are all different statements. FIX (B3): c_P uses 'the lax tensorator of Q_A', which no stmt_dep introduced. The statement now cites [lem-sfb-derived-monoidal] there and the id is added to stmt_deps (fixes/dag/nodes/sec-smooth-purity/...json); the proof is unchanged. Advisory: the Lean of lem-pur-finite-scalar-representative-invertible (finiteScalarRepresentative_isIso, existing:false) covers only the pro-etale site, while its natural-language statement, read through def-sp-coefficient-scalar-representatives, also covers the etale case this item uses. The node's stage 2 should add the etale version (provable via lem-sfb-exact-right-adjoint-kflat-representative and the private extension_preservesKFlatQuasiIso).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T084452-L-3684280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

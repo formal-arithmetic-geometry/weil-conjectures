@@ -1,0 +1,149 @@
+{
+ "id": "lem-pd-constructible-sheaf-biduality",
+ "kind": "statement",
+ "title": "Geometric condensed Verdier biduality for a constructible sheaf",
+ "statement": "Let ell be prime and k a field of positive prime characteristic different from ell. Let X and S be separated finite-type schemes over Spec k, and assume that the structure map S -> Spec k is an isomorphism. For a k-morphism a:X -> S and a constructible module sheaf M over the pulled-back condensed finite-subextension-valued algebraic-closure coefficient ring Qbar_ell, let W be the underlying ambient complex of Ra^! applied to the coefficient unit, for the specified bounded-constructible exceptional adjoint. The canonical transpose-of-evaluation map M[0] -> RHom(RHom(M[0],W),W) is an isomorphism. Only a sheaf in degree zero is asserted; no bounded complex variable is present.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.7.13 and 6.7.18--6.7.20, Proposition 6.8.14 and Remark 6.8.15; sheaf case of the coefficient-biduality paragraph of sk-prop-sf-biduality-general"
+ },
+ "stmt_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-qlbar-coefficient-ring",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof": [
+  {
+   "text": "X is excellent and carries the relative dimension function normalized by Spec k. For O_E coefficients, Lemmas 6.7.18 and 6.7.19 identify the finite reductions of exceptional pullback with finite exceptional pullback of the unit. The potential dualizing system in 6.7.20 has derived limit Omega. The base point unit and the exceptional adjunction fix its normalization.",
+   "uses": [
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dualizing-coefficient-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an integral constructible complex L, Lemma 6.7.13 gives evaluation-compatible reduction comparisons for RHom(L,Omega). Applying this twice identifies the reduction of canonical biduality with finite-stage biduality. The cone is complete with all reductions zero, so derived Nakayama, equivalently the derived-limit triangle, kills it. This is the proof of Lemma 6.7.20.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "det-pd-biduality-finite-algclosed",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Proposition 6.8.14 and its proof by finite stratification and integral lattices to represent M[0] by rationalization of an integral constructible complex at a finite coefficient field. The exceptional and internal-Hom coefficient comparisons of 6.7.13, 6.7.18 and 6.8.15 preserve evaluation, as is checked by uncurrying. They therefore transport the integral canonical biduality isomorphism to the displayed canonical map. Uniqueness of the exceptional right adjoint identifies the construction with boundedConstructibleUpperShriek, with its actual counit. These are comparisons of specified evaluation arrows, not arbitrary object isomorphisms.",
+   "uses": [
+    "det-lem-coefficient-finite-descent-objects",
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "sk-def-sfb-dc-upper-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition along the isomorphism S -> Spec k identifies its dualizing object with the normalized one. If the finite-stage proof is checked on an etale geometric cover, use evaluation-compatible base change and conservativity to descend it. Empty schemes and zero sheaves give zero objects and are covered without a positive-rank assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-coefficient-tower",
+  "lem-coef-integral-hom-reduction",
+  "det-pd-biduality-finite-algclosed",
+  "lem-weil-derived-limit-levelwise-iso",
+  "det-lem-coefficient-finite-descent-objects",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S6",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.7.13 and 6.7.18--6.7.20, Proposition 6.8.14 and Remark 6.8.15; sheaf case of the coefficient-biduality paragraph of sk-prop-sf-biduality-general"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Verdier double dual morphism of a constructible sheaf with Qbar l coefficients is an isomorphism",
+   "results": "Eight hits on ordinary module duality and unrelated double-opposite constructions; none states this derived categorical assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Verdier biduality is an isomorphism for constructible sheaves in degree zero over a field",
+   "results": "Eight hits, including DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE and condensed locally constant sheaf comparisons; no canonical derived biduality theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toIhomIhom\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|constructible.*bidual",
+   "results": "25 hits, all references to Verdier triangulated categories or generic localization infrastructure; no geometric biduality theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Verdier",
+  "date": "2026-10-25",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Lemmas 6.7.13 and 6.7.18--6.7.20, Proposition 6.8.14 and Remark 6.8.15; sheaf case of the coefficient-biduality paragraph of sk-prop-sf-biduality-general",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.ConstructibleSheafBiduality",
+  "file": "lean/Sheaf/PoincareDuality/ConstructibleSheafBiduality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_biduality_constructible_sheaf",
+  "statement": "theorem isIso_biduality_constructible_sheaf [IsIso S.hom] (a : X ⟶ S)\n    (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))\n    (hM : IsConstructibleModuleObject _ M) :\n    IsIso (toIhomIhom\n      ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj (𝟙_ _)).obj\n      ((DerivedCategory.singleFunctor _ 0).obj M))",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "The coefficient-duality route of sk-prop-sf-biduality-general; geometric sheaf case followed by finite truncation. No realized unit step is removed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T013242-L-3945229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T013242-L-3945229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,98 +17,32 @@
  ],
  "proof": [
   {
-   "text": "First record how the hypotheses pass through a flat map $A\\to B$ with $B$ Noetherian. Exactness of tensor [lem-weil-pbc-flat-tensor-exact], applied to the cycle, boundary and cohomology exact sequences of a representative complex, gives $H^i(K\\otimes_A^{\\mathbf L}B)=H^i(K)\\otimes_A B$: termwise tensor preserves acyclic complexes, so computes its derived functor. A finite generating family tensored with $1$ still generates. Hence $C_B,Z_B$ have bounded finite cohomology. The Noetherian pseudo-coherence criterion applies to $C$. The flat RHom comparison, with $E=C$ and respectively $L=Z,C$, therefore gives $R\\operatorname{Hom}_B(C_B,Z_B)=0$ and an isomorphism $R\\operatorname{Hom}_A(C,C)\\otimes_A^{\\mathbf L}B\\cong R\\operatorname{Hom}_B(C_B,C_B)$. Both targets $Z,C$ are bounded below as required.",
+   "text": "Suppose $R\\operatorname{Hom}_A(C,Z)=0$. For each maximal ideal $\\mathfrak m$, use the complete Noetherian local flat test ring $B_{\\mathfrak m}$ supplied by [lem-trf-completed-maximal-localizations-detect-zero]. Apply [lem-trf-flat-coherent-homothety-base-change] to $A\\to B_{\\mathfrak m}$. It gives $C_B,Z_B\\in D^b_{\\mathrm{fg}}(B)$, $R\\operatorname{Hom}_B(C_B,Z_B)=0$, and the actual scalar-action isomorphism $B\\cong R\\operatorname{Hom}_B(C_B,C_B)$. If $C_B=0$, represent its first Hom argument by the zero complex: the defining Hom complex [def-pur-derived-internal-hom] is zero in every degree, so $R\\operatorname{Hom}_B(C_B,C_B)=0$. The transported scalar-action isomorphism would make the complex $B[0]$ zero in $D(B)$; taking degree-zero cohomology gives the zero module $B$, hence $1_B=0_B$, contrary to the nonzero test-ring clause. Hence $C_B\\ne0$.",
    "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "lem-trf-pseudocoherent-rhom-flat-base-change"
+    "lem-trf-completed-maximal-localizations-detect-zero",
+    "lem-trf-flat-coherent-homothety-base-change",
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent flat-reduction argument; more-algebra.tex Tag 0A6A, case (3)."
+    "place": "Agent assembly of the returned flat-change and localization/completion arguments, steps 1--2 and 5--7."
    }
   },
   {
-   "text": "The latter comparison carries the scalar-action morphism to scalar action on $C_B$. To check the actual map, choose a bounded-above finite free model $P$ of $C$ using the pseudo-coherence criterion. The projective Hom model [lem-pod-projective-hom-evaluation-model] represents its derived endomorphisms by $\\operatorname{Hom}^{\\bullet}_A(P,P)$. Scalar action sends $a$ to the chain endomorphism $p\\mapsto ap$. By the stated construction of flat RHom comparison, after scalar extension this map is sent to the endomorphism $p\\otimes b\\mapsto ap\\otimes b$. Extending $B$-linearly gives exactly $p\\otimes b\\mapsto p\\otimes sb$ for a scalar $s\\in B$. Since $P\\otimes_A B$ models $C_B$, this is its scalar-action map $B\\to R\\operatorname{Hom}_B(C_B,C_B)$. Thus the scalar-action isomorphism persists under the flat change of rings.",
+   "text": "For every such $B=B_{\\mathfrak m}$ the complete-local nonzero-Hom detection lemma [lem-trf-complete-local-nonzero-rhom-detection] applies to $C_B,Z_B$ and gives $Z_B=0$. The joint zero-detection assertion of [lem-trf-completed-maximal-localizations-detect-zero] then gives $Z=0$. If $A$ is the zero ring, the latter assertion applies with no maximal ideals and still gives $Z=0$.",
    "uses": [
-    "lem-trf-pseudocoherent-rhom-flat-base-change",
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "lem-pod-projective-hom-evaluation-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent chain-model verification of homothety compatibility for the canonical map of more-algebra.tex Tag 0A6A."
-   }
-  },
-  {
-   "text": "Now suppose $(A,\\mathfrak m)$ itself is complete local. Choose $\\Omega$ from coherent duality [lem-trf-complete-local-coherent-duality], and set $W=R\\operatorname{Hom}_A(Z,\\Omega)$. The bounded clause gives $W\\in D^b_{\\mathrm{fg}}(A)$, and canonical biduality gives $Z\\cong R\\operatorname{Hom}_A(W,\\Omega)$. The tensor lemma gives $T=C\\otimes_A^{\\mathbf L}W\\in D^-_{\\mathrm{fg}}(A)$. In particular $T$ is in the unbounded coherent category on which this duality applies; no lower bound on its cohomology has been asserted.",
-   "uses": [
-    "lem-trf-complete-local-coherent-duality",
-    "lem-trf-local-derived-tensor-nonvanishing"
+    "lem-trf-complete-local-nonzero-rhom-detection",
+    "lem-trf-completed-maximal-localizations-detect-zero"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent reduction to coherent duality: Tags 0BFR and 0A7C; tensor closure from more-algebra.tex Tag 0DJE."
+    "place": "Agent assembly of returned steps 3--7: coherent duality and local tensor nonvanishing, followed by descent."
    }
   },
   {
-   "text": "On the one-object ringed site, tensor-Hom adjunction [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $R\\operatorname{Hom}_A(T,\\Omega)$ with $R\\operatorname{Hom}_A(C,R\\operatorname{Hom}_A(W,\\Omega))\\cong R\\operatorname{Hom}_A(C,Z)=0$. Biduality for $T\\in D_{\\mathrm{fg}}(A)$ gives $T\\cong R\\operatorname{Hom}_A(0,\\Omega)=0$. A local ring with a maximal ideal is nonzero. If $C=0$, its derived endomorphism object is zero, contradicting the homothety isomorphism $A\\cong R\\operatorname{Hom}_A(C,C)$. Hence $C\\ne0$. Tensor nonvanishing then gives $W=0$, and biduality for $Z$ gives $Z\\cong R\\operatorname{Hom}_A(0,\\Omega)=0$. This proves the complete-local case.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-trf-complete-local-coherent-duality",
-    "lem-trf-local-derived-tensor-nonvanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent complete-local argument using Tag 0A7C on all coherent complexes and more-algebra.tex Tag 0A65."
-   }
-  },
-  {
-   "text": "For an arbitrary Noetherian local ring $(A,\\mathfrak m)$ form $\\widehat A=\\varprojlim A/\\mathfrak m^n$. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian] and local with maximal ideal $\\mathfrak m\\widehat A$ by [lem-weil-pbc-local-completion-local-ring]. Since the Noetherian ideal $\\mathfrak m$ is finitely generated, [lem-weil-pbc-adic-completion-mod-ideal] says $\\widehat A$ is complete for that maximal ideal. The map $A\\to\\widehat A$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]. Steps 1--2 transport both hypotheses and both bounded-coherent objects to $\\widehat A$, so steps 3--4 give $Z\\otimes_A^{\\mathbf L}\\widehat A=0$.",
-   "uses": [
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-local-completion-faithfully-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent faithfully-flat completion reduction preceding application of Tag 0BFR."
-   }
-  },
-  {
-   "text": "By the cycle calculation of step 1, $H^i(Z)\\otimes_A\\widehat A=0$ for every $i$. Faithfully flat tensor detection [lem-sc-faithfully-flat-tensor-zero] implies $H^i(Z)=0$ for all $i$. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $Z\\to0$ to conclude $Z=0$. This proves the assertion for every Noetherian local ring.",
-   "uses": [
-    "lem-sc-faithfully-flat-tensor-zero",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent descent of zero cohomology along the faithfully flat completion."
-   }
-  },
-  {
-   "text": "For a general $A$ and every maximal ideal $\\mathfrak m$, the localization $A_{\\mathfrak m}$ is flat over $A$ and Noetherian by [lem-weil-pbc-localization-flat] and [lem-weil-pbc-localization-noetherian]. It is local: a fraction with numerator outside $\\mathfrak m$ is a unit, and all other fractions form the proper ideal $\\mathfrak mA_{\\mathfrak m}$. Steps 1--2 transport the hypotheses, and the local result gives $Z\\otimes_A^{\\mathbf L}A_{\\mathfrak m}=0$. The same flat cohomology calculation says $H^i(Z)_{\\mathfrak m}=0$. For each $i$ apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to $H^i(Z)\\to0$: all its maximal localizations are bijective, so $H^i(Z)=0$. The cohomological isomorphism criterion gives $Z=0$. This also covers the zero ring, since the cited maximal-localization criterion allows an empty set of maximal ideals.",
-   "uses": [
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Agent maximal-localization reduction and descent."
-   }
-  },
-  {
-   "text": "Finally let $f:X\\to Y$ be as in the statement and choose its distinguished cone triangle $X\\to Y\\to T\\to X[1]$ in the ordinary derived category [def-weil-abstract-derived-category]. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] gives short exact sequences $0\\to\\operatorname{coker}H^i(f)\\to H^i(T)\\to\\ker H^{i+1}(f)\\to0$. The kernel is finite by [lem-weil-pbc-noetherian-submodule-finite]; the cokernel is generated by the images of generators of $H^i(Y)$. Lift generators of the kernel to $H^i(T)$ and adjoin generators of the cokernel to obtain a finite generating set. The same sequence makes $H^i(T)$ zero outside a finite interval. Thus $T\\in D^b_{\\mathrm{fg}}(A)$.",
+   "text": "Finally let $f:X\\to Y$ be as in the statement and choose its distinguished cone triangle $X\\to Y\\to T\\to X[1]$ in the ordinary derived category [def-weil-abstract-derived-category]. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] gives short exact sequences $0\\to\\operatorname{coker}H^i(f)\\to H^i(T)\\to\\ker H^{i+1}(f)\\to0$. The kernel is a submodule of the finite $A$-module $H^{i+1}(X)$, so it is finite by [lem-weil-pbc-noetherian-submodule-finite] since $A$ is Noetherian; the cokernel is generated by the images of generators of $H^i(Y)$. Lift generators of the kernel to $H^i(T)$ and adjoin the images in $H^i(T)$ of generators of the cokernel to obtain a finite generating set. If the cohomology of $X,Y$ is supported in $[a_X,b_X],[a_Y,b_Y]$, respectively, the same sequence makes $H^i(T)=0$ outside $[\\min(a_Y,a_X-1),\\max(b_Y,b_X-1)]$. Thus $T\\in D^b_{\\mathrm{fg}}(A)$.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-sf-derived-homology-long-exact",
@@ -134,25 +68,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-  "lem-trf-pseudocoherent-rhom-flat-base-change",
-  "lem-pod-projective-hom-evaluation-model",
-  "lem-trf-complete-local-coherent-duality",
-  "lem-trf-local-derived-tensor-nonvanishing",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-local-completion-faithfully-flat",
-  "lem-sc-faithfully-flat-tensor-zero",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-trf-completed-maximal-localizations-detect-zero",
+  "lem-trf-flat-coherent-homothety-base-change",
+  "def-pur-derived-internal-hom",
+  "lem-trf-complete-local-nonzero-rhom-detection",
   "def-weil-abstract-derived-category",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
@@ -231,27 +154,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-semidualizing-rhom-conservative",
   "worker": "stage1",
-  "summary": "Verified the unchanged semidualizing statement and wrote a complete localization/completion proof. Reused existing flat RHom base change, tensor-Hom adjunction, and commutative-algebra tools. Added two statement-only helpers: complete-local coherent biduality (including unbounded coherent complexes) and bounded-above local tensor nonvanishing. Checked sources, hypotheses, canonical homothety compatibility, zero-ring and unbounded-Tor cases, and logged searches.",
+  "summary": "Q38 repair of the landing return at b8b588093da: compared the returned head with current server sheaf-dag at 18aeeb78a5ea4b9791cb3c9b2a4302288310092f. All existing direct proof citations and statement dependencies are unchanged; the three approved helper ids remain absent from main. Retained their statements, full continuation arguments, citations and logged searches. Step 1 now explicitly takes H^0 of B[0] to derive the contradiction to the nonzero test ring, avoiding an implicit identification of ring zero with a zero derived object. The unchanged parent statement has a four-step assembly below 3000 characters. The delivery tool rebases the split-owned fields while preserving live maintainer metadata.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "why": "The Noetherian pseudo-coherence criterion supplies the exact input to flat RHom comparison; our unit has no replacement."
-   },
-   {
-    "node": "lem-pod-projective-hom-evaluation-model",
-    "why": "The projective Hom model makes scalar-action compatibility a direct calculation on a finite free resolution; no comparison of different dualizing objects is being imported."
-   },
-   {
     "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "why": "The ordinary ringed-site tensor-Hom adjunction and exactness in either variable are generic tools; the unit supplies no alternative."
-   },
-   {
-    "node": "lem-weil-pbc-adic-completion-noetherian",
-    "why": "Noetherianity of adic completion is a generic commutative-algebra input to complete-local duality."
    }
   ]
  },
@@ -262,12 +173,12 @@
   "lem-weil-pbc-adic-completion-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q85-d62085789",
-  "group": "Q85",
+  "reviewer": "NT-cc-Q38-cbb54be93",
+  "group": "Q38",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-d62085789 (reviewer sub-agent of L); spot-checked: Full mathematical and route review completed; review written to review.md. All item steps, helper statements, cited sources, hypotheses, edge cases, base-change morphism, and coefficient category checked. No repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-cbb54be93 (reviewer sub-agent of L); spot-checked: This is the fifth push of the 2026-10-21 re-split. It was PASSed at baf24fb3d8c2, 1ba0ae25f904, a3044b31f33f and b8b588093dac, and landing keeps refusing it as 'completed in this project's DAG but not in the live DAG' (the promotion loop). Supersession: clones/live and clones/side-live still carry the base nine-step proof and none of the helper ids, so another group has not superseded it. I sorted the JSON keys and diffed against b8b5. The three new nodes are byte-identical: lem-trf-flat-coherent-homothety-base-change, lem-trf-complete-local-nonzero-rhom-detection and lem-trf-completed-maximal-localizations-detect-zero. In the item, the statement, stmt_deps, proof_deps, source, blueprint, lean record and tool_uses are unchanged. Step 1 now gets the contradiction by taking H^0 of B[0]≅0, which gives 1_B=0_B against the nonzero B_m clause; this is correct. Step 3 now says that ker H^{i+1}(f) is a submodule of the finite module H^{i+1}(X) over Noetherian A, which is exactly the hypothesis of lem-weil-pbc-noetherian-submodule-finite; this is correct. The split_report summary was reworded. I re-read on the current snapshot every cited statement (derived-internal-hom, abstract-derived-category, derived-homology-long-exact, noetherian-submodule-finite, ringed-internal-hom exactness, distinguished-cone-zero, derived-change-of-rings, flat, faithfully flat, adic completion and localization defs) and the helper inputs (complete-local-coherent-duality, local-derived-tensor-nonvanishing, pseudocoherent-rhom-flat-base-change, which is 0A6A(3)). Steps 1–4 assemble correctly, and proof_deps equals the union of the step citations. The Stacks sources were checked in earlier reviews and are unchanged: more-algebra.tex l.28820 0A6A(3), dualizing.tex 0BFR(2) and 0A7C, algebra.tex 00MC and 00HN. Edge cases: S=0, C=0, k[[t]] with C=k and Z=R, k×k, the zero ring, unbounded K, and the cone interval with X=0 and with Y=0. The duplicate sweep of nodes dated 2026-10-23 found no duplicate. No SGA is cited. Accepted tool_use: lem-weil-pbc-ringed-internal-hom-exact-restriction. No fixes. Maintainer: land or promote the delivery."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.SemidualizingRHomConservative",
@@ -287,5 +198,16 @@
   "result": "pass",
   "note": "Node fields: only lean and stmt_deps changed; the two added deps are landed and used; lean.statement verbatim in file. H3: Noetherian ring = CommRing+IsNoetherianRing; D(A) = DerivedCategory(RingSiteModules A), bottom-topology one-point site; RHom = SignedRingedHom.hom, whose homFunctor is the recorded derivedInternalHomOfUniverses; D^b_fg = bounded cohomology + Module.Finite at the point, per object; hscalar = transpose of λ_ C under the unique normalized adjunction tensorRight C ⊣ hom C (probe rfl: instance is derivedMonoidal, unit = Q(single0 A)); both conjuncts present with correct quantifiers; no dimension/local/nontrivial assumption. Edge cases: zero ring, C=0, reversed bounds, explicit universe u. H4: no semidualizing/homothety declaration in side lean; siblings have no Lean. H5/H6: no defs; sorry only (axioms propext, sorryAx, Classical.choice, Quot.sound). H8: module and theorem docstrings with source, blueprint and all 9 proof steps. H9: imports follow brief l.104 (all recorded proof-dep modules imported non-public). Report sections present. nt_compile --json on snapshot file: clean, exit 0, 3.3 s/2.9 s. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

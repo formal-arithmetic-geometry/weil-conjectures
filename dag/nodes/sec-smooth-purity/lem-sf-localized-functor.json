@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-localized-functor",
+ "kind": "statement",
+ "title": "Unique additive localization of a linear functor",
+ "statement": "Let R be a commutative ring, C and D R-linear preadditive categories [def-weil-linear-category], t an element of R, and U:C → D an additive R-linear functor. Write L_t(C), L_t(D) for the raw scalar localizations [def-weil-linear-scalar-localization], with unchanged objects and Hom groups R[1/t] tensor_R Hom. There exists a unique additive functor F:L_t(C) → L_t(D) whose object at K is U(K) and whose map on every pure tensor c tensor a is c tensor U(a), for every c in R[1/t] and every integral arrow a. The formulas use heterogeneous equality to accommodate the stated object identifications.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CV (tensor products), 00CX (universal property), applied to the rational-operation formulas in def-weil-derived-pullback-tensor-hom: Rational paragraph, formula Lf_E^*(u tensor c)=Lf^*(u) tensor c and additive extension with unchanged integral objects"
+ },
+ "stmt_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Use the semilinear extension with the identity coefficient homomorphism. Its coefficient map is the identity by uniqueness. The extension has the stated object and pure-tensor formulas. For uniqueness, use functor extensionality and induction on each tensor Hom group; additivity handles zero and sums, and the prescribed formula handles pure tensors.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "Already proved private scalar-localization calculus, extracted unchanged in argument to Sheaf.CategoryTheory.DerivedScalarLocalizationFunctor for predictable per-file compilation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unique additive extension of a linear functor to the category with morphisms tensored with a ring localization",
+   "results": "CategoryTheory.Localization.linear, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Free.liftUnique, CategoryTheory.Localization.instLinearLocalization",
+   "date": "2026-10-26",
+   "verdict": "The searches find generic localization linearity and functor extensionality, but not this normalized raw tensor formula with uniqueness among additive functors. The proof already present privately in the item is extracted here; it specializes the existing semilinear extension and proves tensor-normalized uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ext",
+   "results": "CategoryTheory.Functor.ext",
+   "date": "2026-10-26",
+   "verdict": "The searches find generic localization linearity and functor extensionality, but not this normalized raw tensor formula with uniqueness among additive functors. The proof already present privately in the item is extracted here; it specializes the existing semilinear extension and proves tensor-normalized uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "rawFunctor_existsUnique|extensionHom|extension_tmul",
+   "results": "Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/Topology/Algebra/UniformRing.lean",
+   "date": "2026-10-26",
+   "verdict": "The searches find generic localization linearity and functor extensionality, but not this normalized raw tensor formula with uniqueness among additive functors. The proof already present privately in the item is extracted here; it specializes the existing semilinear extension and proves tensor-normalized uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Rational paragraph, formula Lf_E^*(u tensor c)=Lf^*(u) tensor c and additive extension with unchanged integral objects",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedScalarLocalizationFunctor",
+  "file": "lean/Sheaf/CategoryTheory/DerivedScalarLocalizationFunctor.lean",
+  "declaration": "WeilConjectures.OperationsScalarLocalization.functor_existsUnique",
+  "statement": "theorem functor_existsUnique\n    {R : Type r} [CommRing R]\n    {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]\n    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear R D]\n    (t : R) (U : C ⥤ D) [U.Additive] [U.Linear R] :\n    ∃! F : ScalarLocalization R C t ⥤ ScalarLocalization R D t,\n      F.Additive ∧ (∀ K, F.obj K = ⟨U.obj K.obj⟩) ∧\n      (∀ (K L : C) (a : K ⟶ L) (c : Localization.Away t),\n        HEq (F.map (c ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))\n          (c ⊗ₜ[R] U.map a))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FiniteRationalDerivedOperations + 4 DerivedScalarLocalization* modules vs clone original (declaration chunks: public defs verbatim, 6 theorem proofs changed); compiled delivered set + the 2 `import all` importers in a sandbox"
+ }
+}

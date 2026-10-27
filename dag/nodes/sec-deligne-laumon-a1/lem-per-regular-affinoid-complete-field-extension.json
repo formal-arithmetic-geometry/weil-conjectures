@@ -1,0 +1,201 @@
+{
+ "id": "lem-per-regular-affinoid-complete-field-extension",
+ "kind": "statement",
+ "title": "Regular characteristic-zero affinoids remain regular after complete field extension",
+ "statement": "Let $K$ be a characteristic-zero field complete for a nontrivial discrete nonarchimedean absolute value, let $r,s\\geq0$, and let $A=K\\langle x_1,\\ldots,x_r\\rangle$ be the Tate algebra: its elements are series $\\sum_{\\nu\\in\\mathbf N^r}a_\\nu x^\\nu$ such that for each $\\epsilon>0$ only finitely many $\\nu$ satisfy $|a_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Choose $f_1,\\ldots,f_s\\in A$, put $I=(f_1,\\ldots,f_s)$ and $C=A/I$, and suppose $C$ is a regular Noetherian ring [def-weil-regular-scheme]. For every isometric field embedding $K\\hookrightarrow L$ into a complete nonarchimedean field with a real-valued absolute value, let $f_{j,L}\\in L\\langle x_1,\\ldots,x_r\\rangle$ be obtained by applying this embedding to all coefficients. Then $C_L=L\\langle x_1,\\ldots,x_r\\rangle/(f_{1,L},\\ldots,f_{s,L})$ is a regular Noetherian ring. The zero quotient and $r=0$ or $s=0$ are included.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.3.1 proof, printed p.19: regular affinoids over a perfect complete field are smooth; formulated as regularity after analytic scalar extension. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For $E\\subseteq\\{1,\\ldots,s\\}$ and $U\\subseteq\\{1,\\ldots,r\\}$ of equal size, write $I_E=(f_j:j\\in E)$ and $D_{E,U}=\\det(\\partial f_j/\\partial x_i)_{i\\in U,j\\in E}$. The derivatives preserve restricted series because $|n|\\leq1$ for integers $n$, and satisfy Leibniz coefficientwise. Put $H=\\sum_{E,U}\\overline{(I_E:I)}\\,\\bar D_{E,U}C$. Characteristic zero makes $K$ perfect: the derivative of any nonconstant irreducible polynomial is nonzero and relatively prime to that polynomial. Apply [lem-per-perfect-affinoid-local-jacobian-chart] to the given regular Noetherian $C$. For every maximal ideal $\\mathfrak m$ of $C$ it supplies $a\\in(I_E:I)$ with $\\bar a\\bar D_{E,U}\\notin\\mathfrak m$. Thus $H$ is contained in no maximal ideal.",
+   "uses": [
+    "lem-per-perfect-affinoid-local-jacobian-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof and Proposition 3.3.2 proof, printed pp.19--21; explicit coefficient-extension argument by Q63"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proper-ideal-contained-in-maximal], a proper ideal of $C$ would be contained in a maximal ideal. Hence $H=C$. Membership of $1$ in this sum of ideals means that for finitely many triples $(a_\\lambda,E_\\lambda,U_\\lambda)$ and $b_\\lambda\\in C$,\n$$1=\\sum_\\lambda b_\\lambda\\bar a_\\lambda\\bar D_{E_\\lambda,U_\\lambda},\\qquad a_\\lambda I\\subseteq I_{E_\\lambda}.$$\nThis formulation also works for $C=0$, with the empty sum.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof and Proposition 3.3.2 proof, printed pp.19--21; explicit coefficient-extension argument by Q63"
+   }
+  },
+  {
+   "text": "Fix the stated extension $K\\hookrightarrow L$. Applying the embedding to coefficients defines a homomorphism $A\\to A_L=L\\langle x\\rangle$: isometry preserves the restricted condition, and each coefficient of a product is a finite sum. Since $f_j\\mapsto f_{j,L}$, this induces $C\\to C_L$. For every $\\lambda,j$, write $a_\\lambda f_j=\\sum_{e\\in E_\\lambda}q_{\\lambda je}f_e$ in $A$. Extending these finitely many identities gives $a_{\\lambda,L}I_L\\subseteq I_{E_\\lambda,L}$. Termwise differentiation commutes with coefficient extension since integer scalars are fixed. The finite permutation formula [def-weil-pbc-matrix-determinant] therefore gives $(D_{E,U})_L=D^L_{E,U}$. Extending the identity in Step 2 now gives $1=\\sum_\\lambda b_{\\lambda,L}\\bar a_{\\lambda,L}\\bar D^L_{E_\\lambda,U_\\lambda}$ in $C_L$. Every summand belongs to its analytic Jacobian ideal $H_L$, so $H_L=C_L$. Only inclusion of extended colon elements is used, with no flatness or colon base-change equality asserted.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof and Proposition 3.3.2 proof, printed pp.19--21; explicit coefficient-extension argument by Q63"
+   }
+  },
+  {
+   "text": "Apply [lem-per-affinoid-jacobian-certificate-regular] over $L$ to the restricted series $f_{1,L},\\ldots,f_{s,L}$ and the unit certificate $H_L=C_L$ of Step 3. The absolute value on $L$ is nontrivial because it extends the nontrivial one on $K$, and it is complete and real-valued by hypothesis; discreteness of $L$ is not needed. The lemma gives exactly that $C_L$ is regular Noetherian, including the zero quotient and empty lists of equations or variables.",
+   "uses": [
+    "lem-per-affinoid-jacobian-certificate-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof and Proposition 3.3.2 proof, printed pp.19--21; explicit coefficient-extension argument by Q63"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-perfect-affinoid-local-jacobian-chart",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-pbc-matrix-determinant",
+  "lem-per-affinoid-jacobian-certificate-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.3.1 proof and Proposition 3.3.2 proof, printed pp.19--21; explicit coefficient-extension argument by Q63"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A regular Tate affinoid algebra over a complete characteristic zero nonarchimedean field remains regular after any complete valued extension",
+   "results": "{\"t\": \"2026-10-24T04:50:56Z\", \"tool\": \"leanfinder\", \"query\": \"A regular Tate affinoid algebra over a complete characteristic zero nonarchimedean field remains regular after any complete valued extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.isDomain\", \"Tilt\", \"BDeRham\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"BDeRhamPlus\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"c1d6b527f9186ae1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-24T04:50:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\"], \"digest\": \"2772f4af89b59ae3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|GeometricallyRegular",
+   "results": "{\"t\": \"2026-10-24T04:50:57Z\", \"tool\": \"grep\", \"query\": \"affinoid|TateAlgebra|GeometricallyRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular affinoid algebra over a perfect nonarchimedean complete field is geometrically regular",
+   "results": "{\"t\": \"2026-10-24T04:50:57Z\", \"tool\": \"leansearch\", \"query\": \"Regular affinoid algebra over a perfect nonarchimedean complete field is geometrically regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"RegularNormedAlgebra.casesOn\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"1d460fbe25fe61be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of a Tate algebra quotient over a characteristic zero complete discretely valued field under analytic scalar extension",
+   "results": "{\"t\": \"2026-10-24T04:52:16Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of a Tate algebra quotient over a characteristic zero complete discretely valued field under analytic scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"instCommRingBDeRhamPlus\", \"Tilt\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"63a89d11f0d09bcb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictedPowerSeries|TateAlgebra|affinoid",
+   "results": "{\"t\": \"2026-10-24T04:52:18Z\", \"tool\": \"grep\", \"query\": \"RestrictedPowerSeries|TateAlgebra|affinoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern algebraic geometric reducedness, regular sequences, Laurent completions or perfectoid rings; none states regularity of analytic scalar extensions of Tate quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular quotient of a Tate algebra over a complete characteristic zero nonarchimedean field stays regular after complete field extension",
+   "results": "{\"t\": \"2026-10-24T05:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"A regular quotient of a Tate algebra over a complete characteristic zero nonarchimedean field stays regular after complete field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"BDeRham\", \"LaurentSeries.RatFuncAdicCompl\", \"BDeRhamPlus\", \"instCommRingBDeRhamPlus\", \"Tilt.instField\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"LaurentSeries.exists_powerSeries_of_memIntegers\"], \"digest\": \"ce113f82cd09299a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|RestrictedPowerSeries",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|affinoid|RestrictedPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular characteristic zero affinoid algebras remain regular under analytic extension of scalars",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"leansearch\", \"query\": \"Regular characteristic zero affinoid algebras remain regular under analytic extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AnalyticOn.restrictScalars\", \"AnalyticOnNhd.restrictScalars\", \"Algebra.IsAlgebraic.extendScalars\", \"AnalyticAt.restrictScalars\", \"AnalyticWithinAt.restrictScalars\", \"Algebra.Unramified.baseChange\", \"charZero_of_injective_algebraMap\", \"Algebra.charZero_of_charZero\"], \"digest\": \"6e8fe80ab2f02ae8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of nonarchimedean affinoid algebras over perfect fields",
+   "results": "{\"t\": \"2026-10-24T05:17:17Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of nonarchimedean affinoid algebras over perfect fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_perfectField\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"BDeRham\", \"BDeRhamPlus\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"PreTilt\"], \"digest\": \"1d47152ee335d1d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-generic-continuous-jacobian",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proposition 3.3.1 proof, printed p.19: regular affinoids over a perfect complete field are smooth; formulated as regularity after analytic scalar extension. Supporting the inherited formal-algebraization branch of ancestor Step 3 through lem-per-regular-generic-continuous-jacobian; the latest ancestor has no separate formal-algebraization sentence.",
+   "via": [
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-affinoid-complete-field-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved scalar-extension invariance by local perfect-field Jacobian charts, a finite unit certificate, coefficientwise extension of this certificate, and the converse analytic Jacobian criterion. Two statement-only analytic inputs are new; algebraic maximal-ideal existence is reused.",
+  "blueprint": "Inherited formal-algebraization branch through regular-generic-continuous-jacobian under ancestor lem-per-artin-gabber-affine-curve Step 3; the latest ancestor has no explicit formal-algebraization sentence. The analytic regular-to-smooth input of Temkin 3.3.1 is realized by Steps 1--4."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-ed71a6377",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-ed71a6377 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, plus the cited statements: def-weil-regular-scheme, def-weil-pbc-matrix-determinant, and lem-weil-pbc-proper-ideal-contained-in-maximal (Mathlib Ideal.exists_le_maximal). Also read the citer regular-generic-continuous-jacobian and the neighbouring nodes. The item statement is byte-identical to the Q06 base, and there is no repair note, so this is a first split. Temkin 3.3.1/3.3.2 is not in literature/ and is listed as WANTED; proof_origin is agent, which is correct. Because I could not read the source, I checked the mathematics directly. Step 1: char 0 implies perfect, and perfect-affinoid-local-jacobian-chart gives a⋅D̄ ∉ 𝔪 at every maximal ideal. Step 2: the proper-ideal leaf gives H=C as a finite identity, including C=0. Step 3 (elementary): coefficient extension is a ring map, the colon relations transfer, derivatives and the Leibniz determinant commute with it, so H_L=C_L. Only colon inclusion is used. Step 4: certificate-regular applied over L, which is nontrivial because it restricts to K. New node local-jacobian-chart is true: k(𝔫) is finite separable, F[x] surjects onto T/𝔫², so 𝔫/𝔫² → k(𝔫)^r is injective. The regular quotient then gives E with I_𝔫=(f_E)_𝔫, an element a ∉ 𝔫 and a minor ∉ 𝔫. Perfectness is necessary: x^p−a over an imperfect field has no certificate. New node certificate-regular is true in every characteristic: independent df_j means the f_j are part of a regular system of parameters of T_𝔫. Edge cases B=0, r=0, s=0 are fine. Both new nodes are statement-only, self-contained, carry four search kinds, and use the item's unit. Neither is a duplicate: geometric-affinoid-jacobian-unit has the item's conclusion as its hypothesis, and the polynomial, étale and torsion Jacobian nodes differ. Neither restates the item, and there is no cycle. The route is within the unit, with Mathlib leaves only, so no tool_uses. No fixes. Maintainer note: the citer could get H_K=C directly from local-jacobian-chart plus the maximal-ideal argument, without going through this item and geometric-affinoid-jacobian-unit."
+ }
+}

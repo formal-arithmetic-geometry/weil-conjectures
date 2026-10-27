@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-finite-open-product-swap-restriction",
+ "kind": "statement",
+ "title": "Restriction of the signed transported reversed open product",
+ "statement": "Under the same finite coefficient setting and geometric hypotheses, let C=Xbar times_B Zbar, P=X times_B Z, u=j times_B k, E=r*j!M tensor t*k!N and D=p*M tensor q*N, for arbitrary unbounded derived objects M,N. These use [def-pur-conventions], [def-pc-fibre-product], [def-weil-open-immersion] and [def-sf-finite-open-tensor-operations]. Let C'=Zbar times_B Xbar and P'=Z times_B X with their actual fibre-product swaps sbar:C to C' and s:P to P'. Define T (the transportedReverse of [lem-pur-finite-open-product-swap]) by the inverse ambient swapFactors, pullback of the actual reversed comparison e_{k,j}, normalized beta for the swap square, and extension of the interior swapFactors. Let f be sigma on E followed by T followed by u! of sigma on q*N tensor p*M. Let restrictionSource:D to u*E be the tensor of the two specified open units with the canonical square and tensor/pullback identifications. Then restrictionSource followed by u*(f) equals eta^u_D. This asserts only an equality after restriction, not equality with either ambient comparison.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-sf-finite-open-tensor-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry clause (i): normalized open-product reduction; agent-formulated restriction calculation. Stacks Tag 0GL1, lemma-j-shriek-and-tensor, supplies the open projection formula."
+ },
+ "proof": [
+  {
+   "text": "Apply the two-open restriction calculation to comparison(b,a,k,j,N,M).\nThe actual fibre-product symmetries interchange both projections and give the\nCartesian square swapSquare. Expand transportedReverse: inverse swapFactors,\npullback of that reversed comparison, beta for swapSquare, and extension of the\ninterior swapFactors. Restrict this composite along u. The normalized beta\nunit equation moves the reversed open unit through the square to the u-unit.\nNaturality of pullComp and tensorPullIso, and their composition compatibility,\ncancel the inverse ambient swapFactors with the pullbacks of the reversed\nsource identifications; the interior swapFactors identify the reversed\nprojection factors with q-star N and p-star M. Thus this restriction is the\nu-unit after the reversed tensor of the same two unit identifications used in\nrestrictionSource. Pullback respects the signed braiding. Move the exterior\nsigma through tensorPullIso and those identifications by naturality, and move\nthe interior sigma through the u-unit by unit naturality. The two braidings on\nthe interior tensor are inverse by the symmetric Koszul rule: in degrees r,s\nthe sign is (-1)^(rs+sr)=1. After cancellation the source identification is\nexactly restrictionSource, followed by the u-unit on p-star M tensor q-star N,\nwhich is the displayed equation. All comparisons descend from the same K-flat\nmaps, so the calculation applies without boundedness or parity restrictions.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-pur-finite-open-product-restriction",
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i): normalized open-product reduction; agent-formulated restriction calculation. Stacks Tag 0GL1, lemma-j-shriek-and-tensor, supplies the open projection formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-open-tensor-operations",
+  "lem-pur-finite-open-product-restriction",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry clause (i): normalized open-product reduction; agent-formulated restriction calculation. Stacks Tag 0GL1, lemma-j-shriek-and-tensor, supplies the open projection formula.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The extension by zero external tensor product map restricts to the open adjunction unit and its transported signed swap has the same normalized restriction",
+   "results": "Eight actual hits: TensorProduct.map_zero_right, TensorProduct.gradedCommAux, TensorProduct.map_zero_left, TensorProduct.gradedComm_tmul_of_zero, LinearMap.rTensor_zero, Function.ExtendByZero.linearMap, CategoryTheory.ihom.coev, zero_prodMap_dualTensorHom. None concerns derived sheaves or the specified normalized product maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "12 hits: map_eta_comp_eta and epsilon_comp_map_epsilon with assoc variants, IsMonoidal unit/counit instances, mapMon and mapAddMon and their unit/counit lemmas. These assume monoidal adjunctions and do not supply the normalized extension-by-zero product restriction calculations.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek|j_shriek",
+   "results": "0 hits in Mathlib through msearch. Local blueprint_refs search for open tensor restriction returned 0 blueprint nodes. Existing TwoOpenTensorChainNormalization and SupportedTensorIsomorphismTransport were read in full: they state generic chain and transport calculations, not these projection/base-change substitutions, and import the parent module. They remain unchanged.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOpenProductSwap",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4: the open-product interchange before the signed symmetry of the actual product morphism; restriction normalization subcalculation.",
+   "via": [
+    "lem-pur-finite-open-product-swap",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteOpenProductSwapRestriction",
+  "file": "lean/Sheaf/Paper/FiniteOpenProductSwapRestriction.lean",
+  "declaration": "WeilConjectures.FiniteOpenProduct.finiteOpenProductSwapRestriction",
+  "statement": "theorem finiteOpenProductSwapRestriction (S : PurityFiniteSetting.{u})\n    (Xb Zb B X Z : Over (Spec (CommRingCat.of S.field.k)))\n    [IsSeparated Xb.hom] [LocallyOfFiniteType Xb.hom] [QuasiCompact Xb.hom]\n    [IsSeparated Zb.hom] [LocallyOfFiniteType Zb.hom] [QuasiCompact Zb.hom]\n    [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]\n    (a : Xb ⟶ B) (b : Zb ⟶ B)\n    [IsSeparated a.left] [LocallyOfFiniteType a.left] [QuasiCompact a.left]\n    [IsSeparated b.left] [LocallyOfFiniteType b.left] [QuasiCompact b.left]\n    (j : X ⟶ Xb) (k : Z ⟶ Zb) [IsOpenImmersion j.left] [IsOpenImmersion k.left]\n    (M : FiniteD S.Coefficient X.left) (N : FiniteD S.Coefficient Z.left) :\n    (restrictionSource S.Coefficient a.left b.left j.left k.left M N ≫\n      (pull S.Coefficient (productOpen a.left b.left j.left k.left)).map\n        (sigma S.Coefficient _ _ _ ≫\n        transportedReverse S.Coefficient a.left b.left j.left k.left M N ≫\n          (finiteShriek S.Coefficient (productOpen a.left b.left j.left k.left)).map\n            (sigma S.Coefficient _ ((pull S.Coefficient\n                (second (j.left ≫ a.left) (k.left ≫ b.left))).obj N)\n              ((pull S.Coefficient\n                (first (j.left ≫ a.left) (k.left ≫ b.left))).obj M))) =\n      (adj S.Coefficient (productOpen a.left b.left j.left k.left)).unit.app\n        (tensor S.Coefficient (product (j.left ≫ a.left) (k.left ≫ b.left))\n          ((pull S.Coefficient (first (j.left ≫ a.left) (k.left ≫ b.left))).obj M)\n          ((pull S.Coefficient (second (j.left ≫ a.left) (k.left ≫ b.left))).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc64",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T205537-L-3284109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc64",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T205537-L-3284109",
+  "kind": "interface",
+  "note": "independent cc review: item finiteOpenProductSwap stmt byte-identical to published; moved operations verbatim vs clone except proetSigma (matched against DerivedBraided braidingNatTrans/braidingCounit = old μ/W/τ lift); new sorries = item clauses 3,4 and consequence of 3+6; 6 direct importers compiled against sandbox build"
+ }
+}

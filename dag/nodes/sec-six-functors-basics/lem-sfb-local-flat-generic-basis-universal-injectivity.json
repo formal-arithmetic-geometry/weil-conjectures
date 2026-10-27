@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-local-flat-generic-basis-universal-injectivity",
+ "kind": "statement",
+ "title": "A generic-point flat basis becomes universally injective over a base open",
+ "statement": "Let $R\\to B$ be a flat finitely presented homomorphism of commutative rings [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra], with geometrically integral fibres, meaning that each $B\\otimes_R\\kappa(\\mathfrak s)$ remains a nonzero domain under every field extension of $\\kappa(\\mathfrak s)$. Let $\\mathfrak p\\subset R$ be prime and let $\\mathfrak q=\\mathfrak pB$ be prime with inverse image $\\mathfrak p$. Let $E$ be a finitely presented $B$-module [def-sc-finitely-presented-module], let $r\\geq0$, and fix a $B$-linear map $\\alpha:B^{\\oplus r}\\to E$ whose tensor product with $\\kappa(\\mathfrak q)$ is an isomorphism. Assume only that $E_{\\mathfrak q}$ is flat over $R_{\\mathfrak p}$. Then there is $f\\in R\\setminus\\mathfrak p$ such that $\\alpha_f:B_f^{\\oplus r}\\to E_f$ is universally injective over $R_f$: for every $R_f$-module $L$, $L\\otimes_{R_f}\\alpha_f$ is injective. Subscripts $f$ and prime ideals denote module or ring localization [def-weil-pbc-module-localization]; tensor products and residue fields are [def-weil-pbc-module-tensor-product] and [def-weil-residue-field]. Global $R$-flatness of $E$ is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IA (lemma-induction-step-fp), implication (1) to the universal-injectivity part of (2), applied at q=pB."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R_{\\mathfrak p}$, $C=(R\\setminus\\mathfrak p)^{-1}B$, $M=(R\\setminus\\mathfrak p)^{-1}E$, and $\\mathfrak m=\\mathfrak pA$. The prime $\\mathfrak q$ becomes $\\xi=\\mathfrak mC$; the hypothesis $\\mathfrak q\\cap R=\\mathfrak p$ identifies $C_\\xi=B_{\\mathfrak q}$ and $M_\\xi=E_{\\mathfrak q}$ by the fraction maps. Localization of a finite algebra presentation and a finite module presentation gives finite presentations of $C/A$ and $M/C$; exactness is [lem-weil-pbc-localization-module-exact]. Localizing the $R$-flat module $B$ preserves $R$-flatness by [lem-pc-affine-flat-module-localization-preserves-flatness]; [lem-weil-pbc-flat-over-localization] then gives $A$-flatness of $C$. Fibres of $C/A$ are the original fibres over primes contained in $\\mathfrak p$, with the same residue fields, so remain geometrically integral. The given residue-field isomorphism is unchanged. Apply [lem-trf-local-generic-basis-universal-injective] to $A\\to C$, $M$, and the specified map $\\alpha_A$, with its point $\\xi$. Its flatness hypothesis is exactly $E_{\\mathfrak q}$ flat over $R_{\\mathfrak p}$. It gives universal injectivity of $\\alpha_A$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-trf-local-generic-basis-universal-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+   }
+  },
+  {
+   "text": "Taking the testing module $A$ shows $\\alpha_A$ is injective. Localizing at $\\xi$ preserves injectivity by [lem-weil-pbc-localization-module-exact], so $\\alpha_{\\mathfrak q}$ is injective. The images of its $r$ standard vectors span $E_{\\mathfrak q}\\otimes_{B_{\\mathfrak q}}\\kappa(\\mathfrak q)$ by hypothesis. The module $E_{\\mathfrak q}$ is finite, since its finite presentation localizes. By [lem-weil-pbc-nakayama-local-generators] these vectors generate $E_{\\mathfrak q}$, so $\\alpha_{\\mathfrak q}$ is also surjective, hence an isomorphism. By [lem-weil-pbc-flat-over-localization] the assumed $R_{\\mathfrak p}$-flatness of $E_{\\mathfrak q}$ is equivalent to $R$-flatness.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+   }
+  },
+  {
+   "text": "Let $U_1=\\{t\\in\\operatorname{Spec}B:E_t\\text{ is }R\\text{-flat}\\}$ and $U_2=\\{t\\in\\operatorname{Spec}B:\\alpha_t\\text{ is an isomorphism}\\}$. By [lem-weil-pbc-openness-of-flatness], $U_1$ is open: $B/R$ and $E/B$ have the required finite presentations. To see $U_2$ is open, apply [lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads] at each of its points, with finite source $B^{\\oplus r}$ and finitely presented target $E$. It supplies $g\\notin t$ with $\\alpha_g$ bijective, hence $D(g)\\subset U_2$ by localization; these neighbourhoods cover $U_2$. Step 2 gives $\\mathfrak q\\in U_1\\cap U_2$. The spectral map $\\Phi:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is open by [lem-weil-pbc-flat-finite-presentation-open]. Thus $V=\\Phi(U_1\\cap U_2)$ is an open neighbourhood of $\\mathfrak p$. Choose $f\\notin\\mathfrak p$ with $D(f)\\subset V$, using the standard-open basis of the Zariski topology.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+    "lem-weil-pbc-flat-finite-presentation-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+   }
+  },
+  {
+   "text": "For each $\\mathfrak s\\in D(f)$ choose $t\\in U_1\\cap U_2$ over $\\mathfrak s$. The nonzero domain $F_{\\mathfrak s}=B\\otimes_R\\kappa(\\mathfrak s)$ has zero prime, whose inverse image $\\zeta_{\\mathfrak s}\\subset B$ is contained in $t$: every prime of the fibre contains its zero prime. Consequently $\\zeta_{\\mathfrak s}$ is a generalization of $t$. Opens are stable under generalization, since a standard open $D(g)$ containing $t$ also contains every subprime of $t$. Hence $\\zeta_{\\mathfrak s}\\in U_1\\cap U_2$. In particular $E_{\\zeta_{\\mathfrak s}}$ is $R$-flat and $\\alpha_{\\zeta_{\\mathfrak s}}$ is an isomorphism. It is flat over $R_{\\mathfrak s}$ by [lem-weil-pbc-flat-over-localization], because this stalk has an $R_{\\mathfrak s}$-module structure. Tensoring an isomorphism with $\\kappa(\\zeta_{\\mathfrak s})$ remains an isomorphism: tensor its inverse to obtain the inverse. These are precisely the flatness and residue-basis hypotheses at every fibre generic point over $D(f)$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-free-subtraction-flatness] to $R_f\\to B_f$, the finite $B_f$-module $E_f$, and the specified $\\alpha_f$. As in step 1, localization of the finite presentations, preservation of flatness by [lem-pc-affine-flat-module-localization-preserves-flatness] and [lem-weil-pbc-flat-over-localization], and the unchanged residue fields show that this is a flat finitely presented algebra with geometrically integral fibres. Every prime of $R_f$ corresponds to a unique $\\mathfrak s\\in D(f)$, and its fibre generic point corresponds to $\\zeta_{\\mathfrak s}$. The localization identifications send $(E_f)_{\\zeta_{\\mathfrak s}B_f}$ to $E_{\\zeta_{\\mathfrak s}}$ and the residue map to that of step 4. All hypotheses of the cited node therefore hold. Its first conclusion says that $L\\otimes_{R_f}\\alpha_f$ is injective for every $R_f$-module $L$, as required. Only flatness at the original $\\mathfrak q$ and on the explicitly constructed open $U_1$ has been used.",
+   "uses": [
+    "lem-trf-free-subtraction-flatness",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-trf-local-generic-basis-universal-injective",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-trf-free-subtraction-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IA (lemma-induction-step-fp), proof of (1) implies (2), universal-injectivity assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre basis of a finitely presented module over a flat finitely presented algebra with geometrically integral fibres becomes universally injective after shrinking the base when the module is flat at that generic point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.exists_basis_of_basis_baseChange\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M] {ι : Type u_5} (v : ι → M),\\n  LinearIndependent (IsLocalRing.ResidueField R) (⇑((TensorProduct.mk R (IsLocalRing.ResidueField R) M) 1) ∘ v) →\", \"doc\": \"Let $ R $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field $ k = R/\\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If a family of vectors $ v_i $ i\"}\n  {\"name\": \"Module.exists_basis_of_span_of_flat\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsLocalRing R]\\n  [Module.FinitePresentation R M] [Module.Flat R M] {ι : Type u} (v : ι → M),\\n  Submodule.span R (Set.range v) = ⊤ → ∃ κ a b, ∀ (i : κ), b i = v (a i)\", \"doc\": \"If $ M $ is a finitely presented flat module over a commutative semiring $ R $, and a set $ S $ spans $ M $, then there exists an index type $ \\\\kappa $, a function $ a : \\\\kappa \\\\to \\\\iota $, and a basi\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) →\\n    Nonempty (Modu\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_injective_of_flat\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Module.Flat R S],\\n  Function.Injective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the canonical map from the integral closure of $ R $ in $ B $ to the integral closure of $ S $ in $ B \\\\otimes_R S $ is injective.\"}\n  {\"name\": \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.Finite R M] [Module.Flat R M] {ι : Type u} (v : ι → M),\\n  Function.Bijective\\n      ⇑(Finsupp.linearCombination (IsLocalRing.ResidueField R)\\n          (⇑((TensorProdu\", \"doc\": \"For a finitely generated flat module $ M $ over a commutative local ring $ R $, if the linear combination map from the tensor product $ k \\\\otimes_R M $ (where $ k $ is the residue field of $ R $) to $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned local basis and module localization facts do not spread universal injectivity of this specified generic basis over a base neighbourhood; scheme UniversallyInjective is a different notion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic point flatness spreads universal injectivity of a chosen finite free basis after base localization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": HoldsForLocalizationAway Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationPrime Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned local basis and module localization facts do not spread universal injectivity of this specified generic basis over a base neighbourhood; scheme UniversallyInjective is a different notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.respectsIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is universally injective if the base change `X ×[Y] Y' ⟶ Y'`\\nalong any morphism `Y' ⟶ Y` is injective (on points).\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : @AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.Mono f] : AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" : @AlgebraicGeometry.UniversallyInjective = (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).universally\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (universally_injective : (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).universally f) : AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyInjective f] : (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).universally f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.UniversallyInjective f ↔ (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).universally f\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned local basis and module localization facts do not spread universal injectivity of this specified generic basis over a base neighbourhood; scheme UniversallyInjective is a different notion"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*injective|UniversallyInjective|generic.*basis",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned local basis and module localization facts do not spread universal injectivity of this specified generic basis over a base neighbourhood; scheme UniversallyInjective is a different notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finite free module that is an isomorphism at the generic residue field and whose target is flat there is universally injective over a base neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"The property of being universally injective is Zariski local at the target. That is, for any morphism of schemes with this property, there exists a Zariski covering of the target such that the propert\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyInjective f],\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n        Function.Injective x).universally\\n    f\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is universally injective if and only if the property of its underlying continuous map being injective is preserved under all base changes. This establishes that un\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyInjective f ↔\\n    (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n          Function.Injective x).universally\\n      f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, $ f $ is universally injective if and only if the topological property of injectivity is preserved under all base changes. This means that for every pullback\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_injective_of_flat\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Module.Flat R S],\\n  Function.Injective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the canonical map from the integral closure of $ R $ in $ B $ to the integral closure of $ S $ in $ B \\\\otimes_R S $ is injective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned local basis and module localization facts do not spread universal injectivity of this specified generic basis over a base neighbourhood; scheme UniversallyInjective is a different notion"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*inject|generic.*basis|pure.*[Mm]ono",
+   "results": "{\"t\": \"2026-10-23T22:25:03Z\", \"tool\": \"grep\", \"query\": \"universally.*inject|generic.*basis|pure.*[Mm]ono\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic fibre basis spreads to a universally injective module map on a base open",
+   "results": "{\"t\": \"2026-10-23T22:25:04Z\", \"tool\": \"leansearch\", \"query\": \"A generic fibre basis spreads to a universally injective module map on a base open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.UniversallyInjective.mk\", \"AlgebraicGeometry.universallyInjective_eq\", \"TopCat.Presheaf.stalkFunctor_map_injective_of_isBasis\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"Trivialization.basisAt\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"d896bfdedca94fbd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LinearMap.lTensor",
+   "results": "{\"t\": \"2026-10-23T22:25:04Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, LinearMap.lTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"223db9e1b90e943e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed basis at a generic fibre point of a finitely presented module flat at that point becomes universally tensor injective after shrinking the base",
+   "results": "{\"t\": \"2026-10-23T22:25:06Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed basis at a generic fibre point of a finitely presented module flat at that point becomes universally tensor injective after shrinking the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.Flat.tfae_equational_criterion\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.FaithfullyFlat\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.out\"], \"digest\": \"3fa70d932644f2f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread a pure monomorphism from a finite free module over a flat finitely presented algebra with integral fibres on an open neighborhood in the base",
+   "results": "{\"t\": \"2026-10-23T22:25:07Z\", \"tool\": \"leanfinder\", \"query\": \"Spread a pure monomorphism from a finite free module over a flat finitely presented algebra with integral fibres on an open neighborhood in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"acf4e4debd718add\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange|lTensor_preserves_injective_linearMap",
+   "results": "{\"t\": \"2026-10-23T22:27:39Z\", \"tool\": \"grep\", \"query\": \"exists_basis_of_basis_baseChange|lTensor_preserves_injective_linearMap\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\", \"Mathlib/RingTheory/Flat/IsBaseChange.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Ideal/Pure.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"54330eb3030ba83f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local free-basis results require flatness over the algebra local ring; tensor preservation assumes the testing module flat; scheme universally injective maps concern points, not arbitrary-module tensor injectivity. None spreads this prescribed module map over the base."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange",
+   "results": "{\"t\": \"2026-10-23T22:29:52Z\", \"tool\": \"grep\", \"query\": \"exists_basis_of_basis_baseChange\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"03dd078b74330a40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate source read; local basis theorem needs injectivity for the maximal ideal tensor map, whereas the item assumes only relative base flatness and seeks a base open."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata. This split realizes the generic-basis universal-injectivity subinput by the local criterion (05I3), openness (00RC, 05GF, 00I1), and globalization over the selected base open.",
+   "via": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-flat-generic-basis-universal-injectivity",
+  "worker": "stage1",
+  "summary": "Q51 follows Stacks 05IA using existing local 05I3 and globalization nodes. Preserves the statement and local-only flatness hypothesis; proves the chosen map is an isomorphism at q, constructs both open loci, shrinks the base, and checks every fibre generic point. No new nodes.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability.proof.md, proper/open direct image and compactification paragraph; inherited alteration/flattening prerequisite chain, specifically 05UF/05IA generic-basis universal injectivity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: localize finite presentations and injectivity. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: flatness survives module localization. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: compare flatness over the base and its localization. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-trf-local-generic-basis-universal-injective",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: local-base generic-basis criterion 05I3. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: surjectivity at the chosen local ring. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: the finitely presented relative module flat locus is open. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: the isomorphism locus of the specified map is open. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-finite-presentation-open",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: the flat finitely presented spectral map is open. No statement in this unit supplies this general algebraic tool."
+   },
+   {
+    "node": "lem-trf-free-subtraction-flatness",
+    "why": "Generic commutative-algebra tool for the 05IA spreading argument: globalize after all fibre generic hypotheses have been verified. No statement in this unit supplies this general algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-trf-local-generic-basis-universal-injective",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-trf-free-subtraction-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-13255134b",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-13255134b (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; there are no new nodes and no fixes. Source checked: Stacks flat.tex Tag 05IA, statement and full proof of (1)=>(2), and Tag 05I3. The item matches 05IA (1)=>(2) (universal-injectivity half) at q=pB, hypothesis by hypothesis; E_q flat over R_p is equivalent to R-flat by 00HT. Step 1: localizing at p, 00CS and 00HT carry finite presentation and flatness over, and all hypotheses of the local 05I3 node hold at xi=pB_p, so alpha_A is universally injective. Step 2: alpha_q is injective by localization and surjective by the Nakayama node, hence an isomorphism. Step 3: U_1 is open by 00RC and U_2 by 05GF applied pointwise; Phi is open by 00I1; this gives D(f). Step 4 (elementary): the fibre generic point zeta_s is a generalization of t, so it lies in U_1 and U_2. Step 5: the hypotheses of lem-trf-free-subtraction-flatness over R_f hold, and its conclusion is the item. Edge cases checked: r=0, a field base, and R=k[t], B=R[x], E=B+B/(t). Duplicate check: lem-trf-generic-basis-base-open-universal-injectivity assumes global flatness, so it is a special case of the item, not a duplicate, and it is correctly not cited. Batch-5 flags: lem-trf-local-generic-basis-universal-injective (05I3) and lem-trf-free-subtraction-flatness (05I3 + 05CL) are pure commutative algebra. Their ~900-node closure has no trace-formula statement, no Poincare node, no sk-thm-trace-transport and no nt-assume leaf; neither assumption gives these results and they are not steps of their proofs, so I accept both. The 9 off-unit citations listed in tool_uses are accepted as genuine algebra tools."
+ }
+}

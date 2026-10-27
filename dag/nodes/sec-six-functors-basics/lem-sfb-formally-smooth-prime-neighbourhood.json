@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-formally-smooth-prime-neighbourhood",
+ "kind": "statement",
+ "title": "Formal smoothness at a prime spreads to a smooth principal neighbourhood",
+ "statement": "Let $R$ be a commutative ring and $A$ a finitely presented commutative $R$-algebra [def-weil-pbc-finitely-presented-algebra]. Let $\\mathfrak q\\subset A$ be prime, and suppose the localization $A_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is formally smooth over $R$ for the $0$-adic topology [def-weil-pbc-formally-smooth-adic]. Then there exists $g\\in A\\setminus\\mathfrak q$ such that $A_g$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map]. Here $A_g$ denotes the ring of fractions with denominators in $\\{1,g,g^2,\\ldots\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BU (lemma-smooth-at-point), implication (2) implies (1), and Tag 00TB (definition-smooth-at-prime); the formally smooth localization formulation is Mathlib/RingTheory/Smooth/Locus.lean, IsSmoothAt at lines 45-47 and IsSmoothAt.exists_notMem_smooth at lines 150-157."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented algebra A over R, if its localization at a prime q is formally smooth over R then there is g outside q such that A localized at g is smooth",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.basicOpen_subset_smoothLocus_iff_smooth, RingHom.Smooth.holdsForLocalizationAway, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_smooth; source read at the recorded file and line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.IsSmoothAt.exists_notMem_smooth\"",
+   "sub": "",
+   "results": "Read 1 hits: Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_smooth; source read at the recorded file and line."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmoothAt.exists_notMem_smooth|abbrev IsSmoothAt",
+   "sub": "RingTheory/Smooth",
+   "results": "Read 3 hits: Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_smooth; source read at the recorded file and line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a finitely presented algebra is formally smooth at a prime then it is smooth on a principal open neighbourhood of that prime",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.Smooth.mk, Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.smooth_def, Algebra.Smooth.finitePresentation, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.IsSmoothAt.exists_notMem_smooth; source read at the recorded file and line."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsSmoothAt.exists_notMem_smooth",
+  "file": "Mathlib/RingTheory/Smooth/Locus.lean",
+  "line": 150,
+  "how": "exact: apply Algebra.IsSmoothAt.exists_notMem_smooth R q, lines 150-157. Its IsSmoothAt R q hypothesis is definitionally Algebra.FormallySmooth R (Localization.AtPrime q), by the abbreviation at lines 45-47, and its only other non-structural hypothesis is Algebra.FinitePresentation R A. FormallySmooth is the square-zero lifting notion, equivalently the 0-adic case of def-weil-pbc-formally-smooth-adic; the output is precisely a principal smooth localization. No Noetherian hypothesis is present."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-truncated-polynomial-sections-smooth",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field. Supporting input: Tag 02HX affine reduction, then Tag 02HT proof of (4) implies (1): deduction of smoothness from the resulting truncated sections. Supporting input: Tag 07BU (lemma-smooth-at-point), implication (2) implies (1), and Tag 00TB (definition-smooth-at-prime); the formally smooth localization formulation is Mathlib/RingTheory/Smooth/Locus.lean, IsSmoothAt at lines 45-47 and IsSmoothAt.exists_notMem_smooth at lines 150-157.",
+   "via": [
+    "lem-sfb-truncated-polynomial-sections-smooth",
+    "lem-sfb-smooth-fixed-residue-artinian-test",
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-ringed-space-derived-cup-base-change",
+ "kind": "statement",
+ "title": "Derived relative cup products commute with base change of ringed spaces",
+ "statement": "Let $X,X',Y,Y'$ be topological spaces equipped with sheaves of commutative rings, with all open-set sites small in the module universe [def-weil-size-convention]. Let $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$ be morphisms of ringed spaces with $fg'=gf'$, including equality of the ring-sheaf maps. Use module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category], derived direct images computed by K-injectives [def-pc-ringed-spaces-derived-direct-image], and $Lv^*$ computed by taking a K-flat resolution before applying $v^*M=\\mathcal O_{\\mathrm{source}}\\otimes_{v^{-1}\\mathcal O_{\\mathrm{target}}}v^{-1}M$ [def-pc-kflat-complex, def-pur-sheaf-tensor-product]. Use the canonical derived pullback-direct-image adjunctions [lem-pc-ringed-spaces-derived-adjoint-general]. For $K,L\\in D(\\mathcal O_X)$ let $c_f:Rf_*K\\otimes^{\\mathbf L}Rf_*L\\to Rf_*(K\\otimes^{\\mathbf L}L)$ be the relative cup product: its transpose is the pullback tensor comparison followed by the tensor of the two counits [def-sfb-ringed-site-module-cup-product]. Define $\\beta_M:Lg^*Rf_*M\\to Rf'_*Lg'^*M$ as the adjunct of\n$$Lf'^*Lg^*Rf_*M\\simeq Lg'^*Lf^*Rf_*M\\xrightarrow{Lg'^*\\varepsilon_M}Lg'^*M.$$\nFor every $K,L$, the following two morphisms from $Lg^*(Rf_*K\\otimes^{\\mathbf L}Rf_*L)$ to $Rf'_*(Lg'^*K\\otimes^{\\mathbf L}Lg'^*L)$ are equal in $D(\\mathcal O_{Y'})$:\n$$Rf'_*(\\mu_{g'})\\circ\\beta_{K\\otimes^{\\mathbf L}L}\\circ Lg^*(c_f)\n=c_{f'}\\circ(\\beta_K\\otimes^{\\mathbf L}\\beta_L)\\circ\\mu_g,$$\nwhere $\\mu_v:Lv^*(P\\otimes^{\\mathbf L}Q)\\simeq Lv^*P\\otimes^{\\mathbf L}Lv^*Q$ is the canonical tensor comparison. The equality is natural in both complexes, so it remains valid after a coefficient morphism $K\\otimes^{\\mathbf L}L\\to M$ and its pullback are composed with the two sides. No Cartesian, flatness, quasi-coherence, boundedness or invertibility assumption on $\\beta$ is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0H99, label lemma-base-change-cup-product; relative cup as tensor of counits in remark-cup-product; coefficient naturality is the naturality of the displayed transformations."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-sfb-ringed-space-cup-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Lf^*$, $R=Rf_*$, $B=Lg^*$, $H=Lg'^*$, $C=Lf'^*$ and $S=Rf'_*$. Write $t_V$ for the tensor comparison of a pullback $V$, and $\\theta:CB\\cong HF$ for the canonical square comparison. All tensors below are derived, and juxtaposition of maps means composition from right to left. Apply the ringed-topos projection/exchange statement to the given square of ringed spaces, using their open-set sites. Its hypotheses are precisely small sites, commutation of the square including ring maps, and the canonical derived adjunctions; its exchange map is our $\\beta$, since both transpose to $H(\\varepsilon_M)\\theta_{RM}$. Let $\\pi_{K,Q}:RK\\otimes Q\\to R(K\\otimes FQ)$ and $\\pi'$ denote its projection maps. The theorem gives, for every $Q\\in D(\\mathcal O_Y)$,\n$$S(t_H)\\beta_{K\\otimes FQ}B(\\pi_{K,Q})=S(1_{HK}\\otimes\\theta_Q)\\pi'_{HK,BQ}(\\beta_K\\otimes1_{BQ})t_B.$$\nThis orientation follows by composing the theorem's target identification $1\\otimes\\theta_Q^{-1}$ with $1\\otimes\\theta_Q$. No inverse to $\\pi$ or $\\beta$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram"
+   }
+  },
+  {
+   "text": "The relative cup product factors as\n$$c_{f,K,L}=R(1_K\\otimes\\varepsilon_L)\\pi_{K,RL}.$$\nIndeed the transpose of the right side under $F\\dashv R$ is $(1_K\\otimes\\varepsilon_L)(\\varepsilon_K\\otimes1_{FRL})t_F=(\\varepsilon_K\\otimes\\varepsilon_L)t_F$, exactly the defining transpose of the relative cup product. The natural Hom-bijection is injective, proving the factorization. The identical argument gives $c_{f',HK,HL}=S(1_{HK}\\otimes\\varepsilon'_{HL})\\pi'_{HK,SHL}$. This uses only the stated definition of each projection map and the cup definition, not any projection-formula isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram"
+   }
+  },
+  {
+   "text": "Put $Q=RL$ in Step 1 and postcompose with $S(1_{HK}\\otimes H\\varepsilon_L)$. Naturality of $\\beta$ for $1_K\\otimes\\varepsilon_L:K\\otimes FRL\\to K\\otimes L$, and naturality of $t_H$, identify its left side with $S(t_H)\\beta_{K\\otimes L}B(c_{f,K,L})$, by Step 2. Thus this side of the desired identity equals\n$$S(1_{HK}\\otimes(H\\varepsilon_L\\circ\\theta_{RL}))\\pi'_{HK,BRL}(\\beta_K\\otimes1_{BRL})t_B.$$\nThe two naturality substitutions here are $\\beta_{K\\otimes L}BR(1\\otimes\\varepsilon_L)=SH(1\\otimes\\varepsilon_L)\\beta_{K\\otimes FRL}$ and $t_H H(1\\otimes\\varepsilon_L)=(1\\otimes H\\varepsilon_L)t_H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram"
+   }
+  },
+  {
+   "text": "The defining mate equation is\n$$H\\varepsilon_L\\circ\\theta_{RL}=\\varepsilon'_{HL}\\circ C(\\beta_L).$$\nIt follows either from the transpose characterization of mates or directly by expanding the adjunct and cancelling $\\varepsilon'_{CA}C\\eta'_A=1_{CA}$. Replace the parenthesized factor of Step 3 by this expression. Naturality of $\\pi'$ in its second variable for $\\beta_L:BRL\\to SHL$ gives\n$$S(1_{HK}\\otimes C\\beta_L)\\pi'_{HK,BRL}=\\pi'_{HK,SHL}(1_{SHK}\\otimes\\beta_L).$$\nConsequently Step 3 becomes $S(1_{HK}\\otimes\\varepsilon'_{HL})\\pi'_{HK,SHL}(\\beta_K\\otimes\\beta_L)t_B$. Step 2 identifies this with $c_{f',HK,HL}(\\beta_K\\otimes\\beta_L)t_B$, the required right side.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram"
+   }
+  },
+  {
+   "text": "Every comparison and counit used above is natural, the projection maps are natural in both arguments, and the adjunction Hom-bijections are bifunctorial. Hence the equality is natural in $K,L$. For a coefficient morphism $a:K\\otimes L\\to M$, the naturality equation $\\beta_M BR(a)=SH(a)\\beta_{K\\otimes L}$ identifies the coefficient-composed first route, followed by $SH(a)S(t_H)^{-1}$, with $\\beta_M B(R(a)c_f)$. Postcomposing the established equality with that same map proves the coefficient-valued compatibility. No condition on the square beyond ringed commutation entered: arbitrary unbounded complexes, nonflat coefficient maps and noninvertible exchange maps are included.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0H99, lemma-base-change-cup-product (omitted proof), expanded using Tag 0B68, remark-cup-product; sites-cohomology.tex Tags 0B56, equation-projection-formula-map, and 0E48, remark-compatible-with-diagram",
+  "note": "Tag 0H99 omits the proof. This explicit assembly uses the existing projection/exchange theorem and expands cup as projection followed by counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|baseChange.*cup|cup.*baseChange",
+   "results": "0 hits: . Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived relative cup products commute with base change for morphisms of ringed spaces",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.mapBaseChange.congr_simp, IsBaseChange.toDual, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.mapBaseChange_tmul, AlgebraicGeometry.LocallyRingedSpace.comp_base, IsBaseChange.toDualBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\", \"baseChange\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of ringed spaces the derived direct image base change comparison is compatible with the relative cup product defined by tensoring adjunction counits",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|relativeCup",
+   "results": "0 hits: . Subdirectory: CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of ringed spaces preserves the lax monoidal cup comparison on derived global sections for arbitrary complexes",
+   "results": "8 hits: SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingedSpace\", \"baseChange\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived module adjunctions or algebraic differential base change, not this derived relative cup/base-change square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative cup product defined by derived pullback adjunction commutes with the base change comparison for ringed spaces",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: underived module pullbacks or abstract mate identities do not state the derived ringed-space relative cup/base-change equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived relative cup products for arbitrary complexes of modules on ringed spaces commute with base change",
+   "results": "8 hits: PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: underived module pullbacks or abstract mate identities do not state the derived ringed-space relative cup/base-change equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint cup comparison is preserved by the mate of a commutative square of monoidal left adjoints",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_square, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-24",
+   "verdict": "no match: underived module pullbacks or abstract mate identities do not state the derived ringed-space relative cup/base-change equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension. Supporting comparison: derived relative cup and base-change mates, before taking cohomology and composing with the coherent trace.",
+   "via": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-space-derived-cup-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks 0H99 through the existing arbitrary-ringed-topos projection/exchange identity. Proved the cup/projection factorization by transposition and wrote the counit and naturality equations used to close the square. No new nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "Supporting cup/base-change comparison in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, before coherent trace and scalar-extension compatibility. The current latest blueprint direct-image proof is unchanged by this generic tool calculation; inherited blueprint.from is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic projection/exchange identity for arbitrary ringed topoi, specialized to open-set sites; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic canonical projection map, its transpose formula and naturality; used without any projection isomorphism assumption."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical bifunctorial pullback tensor isomorphism for arbitrary ringed topoi, used for coefficient postcomposition."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint-general",
+    "why": "Unbounded canonical ringed-space pullback/direct-image Hom-bijection used to identify cups and exchange."
+   },
+   {
+    "node": "def-sfb-ringed-site-module-cup-product",
+    "why": "Existing general ringed-site definition of cup as tensor of counits; no pro-etale coefficient specialization is assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-sfb-ringed-site-module-cup-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-8ee29e8ab",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-8ee29e8ab (reviewer sub-agent of L); spot-checked: I read the full item, all six cited statements and Stacks cohomology.tex 0H99 (proof 'Omitted') and 0B68 (remark-cup-product, cup = adjoint of tensor of counits); tags 0B56 and 0E48 exist. Base and statement: the branch is one commit; the statement and stmt_deps are unchanged from the base, and the item is still unsplit on clones/live and side-live; there is no repair note, so the re-split rules do not apply. There are no new nodes and no SGA citation; proof_deps equals the union of uses, and the closure of 425 nodes has no cycle. Step 1: the exchange-tensor coherence theorem applies to ringed topoi on small sites with any ring-compatible commutation and no cartesian hypothesis. Its Ex is the mate of theta:CB->HF and transposes to H(eps)theta R, so it is the item's beta. Composing with S(1 x theta_Q) gives the displayed orientation, and I checked the targets. Step 2: R(1 x eps_L) pi_{K,RL} transposes to (eps_K x eps_L) t_F, which is the cup's defining transpose, so the factorization holds by the Hom-bijection; the same holds for f'. Step 3 (elementary): the naturality of t_H and of beta is written out explicitly and checked. Step 4: the mate transpose equation H eps_L theta_RL = eps'_HL C(beta_L) is stated in def-weil-pbc-adjunction-mate, and naturality of pi' along beta_L comes from projection-mate-exact; with Step 2 this gives c_{f'}(beta_K x beta_L) t_B. Step 5: the coefficient clause follows from invertibility of t_H and naturality of beta. No beta inverse and no flatness is used, and the zero and identity-square cases check. Duplicate search (0H99, lemma-base-change-cup-product, cup/base-change) found only special or applied nodes that cite 0H9A, so the item duplicates nothing. The declared tool_uses are generic pbc/pc coherence results and I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceDerivedCupBaseChange",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedCup_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceDerivedCupBaseChange.lean",
+  "statement": "theorem derivedCup_baseChange (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X) (_comm : g' ≫ f = f' ≫ g) : Nonempty (CupSquarePresentation f f' g g') ∧ ∀ p : CupSquarePresentation f f' g g', (∀ K L : DerivedCategory (SheafOfModules.{u} (moduleRings X)), p.cupFirst K L = p.exchangeFirstCup K L) ∧ (∀ (K L K' L' : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (a : K ⟶ K') (b : L ⟶ L'), p.gEdge.left.map (p.tensorY.map (Prod.mkHom (p.fEdge.right.map a) (p.fEdge.right.map b))) ≫ p.cupFirst K' L' = p.cupFirst K L ≫ p.f'Edge.right.map (p.tensorX'.map (Prod.mkHom (p.g'Edge.left.map a) (p.g'Edge.left.map b)))) ∧ ∀ (K L M : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (a : p.tensorX.obj (K, L) ⟶ M), p.gEdge.left.map (RingedSiteCup.relative p.fEdge p.modelY p.modelX K L ≫ p.fEdge.right.map a) ≫ p.square.exchange.app M = p.exchangeFirstCup K L ≫ p.f'Edge.right.map ((p.g'Edge.tensorComparison p.modelX p.modelX').inv.app (K, L) ≫ p.g'Edge.left.map a)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.CupSquarePresentation.cupFirst",
+   "AlgebraicGeometry.RingedSpace.CupSquarePresentation.exchangeFirstCup",
+   "AlgebraicGeometry.RingedSpace.derivedCup_baseChange"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2027158a",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read item, all 9 stmt_deps, new def node, both modules, Stacks 0H99/0B68, and the side-live RingedTensorSquarePresentation, RingedExchangeTensorCoherence, RingedSiteModuleCupProduct, AlgebraicInverseImage and derivedModulePullback_adjunction. cupFirst = Lg*(c_f)≫β_{K⊗L}≫Rf'_*(μ_g') and exchangeFirstCup = μ_g≫(β_K⊗β_L)≫c_f' match the node's arrows. β = Mathlib mate of the uniquely K-flat-pinned derivedComparison; cups = recorded RingedSiteCup.relative; tensor comparisons canonical. CupEdgeRealization pins inverse/direct/ring map/object+map formulas/Rv_* to the recorded constructions. Naturality and coefficient clauses (μ_g'⁻¹ ≫ Lg'^*a) are correct. ∀ p over presentations, including an arbitrary derivedAdjunction, is sound because ringedExchangeTensorCoherence holds for every RingedTensorSquare and the rest is formal; Nonempty is plausible given _comm. No extra hypotheses or universe equalities. New def node genuinely new (no open-site specialization in the Lean trees) and its fields meet the rules. Statements verbatim; dependency nodes unchanged; stmt_deps gain only the new def node; docstrings and 5 proof steps present; lines ≤100; only the theorem is sorry. Advisory: exchange/derivedComparison are owned by theorem lem-weil-pbc-ringed-exchange-tensor-coherence (proof_dep only), consider an existing:true def node; probably unused proof/public imports. No file changed, so no compile."
+ }
+}

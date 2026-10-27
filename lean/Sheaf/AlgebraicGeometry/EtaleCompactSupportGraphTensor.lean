@@ -6,6 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphTensorCore
 public import Sheaf.AlgebraicGeometry.EtaleSumExtensionTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 
@@ -57,6 +58,35 @@ with the displayed derived maps.
 localization presenting D(T). Their uniqueness clauses give the equality on all unbounded
 objects, with the normalized inverse comparison fixed on every homotopy representative.
 -/
+private theorem projection_transpose
+    {C D : Type*} [Category C] [Category D]
+    {P : C ⥤ D} {R : D ⥤ C} (adj : P ⊣ R)
+    (T : C ⥤ C ⥤ C) (T' : D ⥤ D ⥤ D)
+    (δ : (Functor.postcompose₂.obj P).obj T ⟶
+      (((Functor.whiskeringLeft₂ _).obj P).obj P).obj T')
+    {A B K : C} {J J' : D}
+    (q : A ⟶ (T.obj B).obj K) (t : B ⟶ R.obj J)
+    (γ : (T'.obj J).obj (P.obj K) ⟶ J') :
+    (adj.homEquiv _ _).symm
+      (q ≫ (T.map t).app K ≫
+        ((adj.rightAdjointProjectionMap δ).app J).app K ≫ R.map γ) =
+      P.map q ≫ (δ.app B).app K ≫
+        (T'.map ((adj.homEquiv _ _).symm t)).app (P.obj K) ≫ γ := by
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hγ := adj.counit.naturality γ
+  simp only [Functor.comp_map, Functor.id_map] at hγ
+  rw [hγ]
+  have hπ := adj.map_rightAdjointProjectionMap_app_app_comp_counit δ J K
+  change P.map (((adj.rightAdjointProjectionMap δ).app J).app K) ≫
+    adj.counit.app ((T'.obj J).obj (P.obj K)) =
+      (δ.app (R.obj J)).app K ≫ (T'.map (adj.counit.app J)).app (P.obj K) at hπ
+  rw [reassoc_of% hπ]
+  have hn := NatTrans.congr_app (δ.naturality t) K
+  change P.map ((T.map t).app K) ≫ (δ.app (R.obj J)).app K =
+    (δ.app B).app K ≫ (T'.map (P.map t)).app (P.obj K) at hn
+  rw [reassoc_of% hn]
+  simp only [NatTrans.comp_app, Category.assoc]
+
 theorem compactSupportGraph_tensor_evaluation
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : EtaleCompactSupportNormalization A)
@@ -94,6 +124,49 @@ theorem compactSupportGraph_tensor_evaluation
         O.map (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).map
           ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app K)) =
       d (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj (E.obj K)) := by
-  sorry
+  dsimp only
+  intro q hq
+  let O := (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+  let R := (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor
+  let E := (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory
+  let S := (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory
+  let T₀ := derivedTensor (ModuleCat.{u + 1} A) T
+  let V₀ := derivedTensor (ModuleCat.{u + 1} A) V
+  let t := (N.comparison e c).inv
+  let d : ∀ X : DerivedCategoryModule A V,
+      (upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.obj (S.obj X) ⟶ O.obj X :=
+    fun X ↦ ((derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} A) c.g).homEquiv (S.obj X) (O.obj X)).symm (t.app X)
+  let γ := ((derivedOpenImmersionLowerShriekProjectionIso
+      (ModuleCat.{u + 1} A) c.i).inv.app M).app
+      ((upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.obj K) ≫
+    O.map ((V₀.obj M).map
+      ((leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} A) c).hom.app K)) ≫
+    O.map ((V₀.obj M).map
+      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app K))
+  change _ = d ((V₀.obj M).obj (E.obj K))
+  have hc := compactSupportGraph_tensor_evaluation_core A N e c M K q hq
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g
+  have ht := projection_transpose adj
+    T₀ (derivedTensor (ModuleCat.{u + 1} A) c.Z)
+    (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) c.g) q (t.app M) γ
+  change (upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.map q ≫
+      ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) c.g).app
+        (S.obj M)).app K ≫
+      ((derivedTensor (ModuleCat.{u + 1} A) c.Z).map (d M)).app
+        ((upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.obj K) ≫ γ =
+    d ((V₀.obj M).obj (E.obj K))
+  rw [← ht]
+  have hcore :
+      q ≫ (T₀.map (t.app M)).app K ≫
+          ((adj.rightAdjointProjectionMap
+            (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) c.g)).app
+              (O.obj M)).app K ≫ R.map γ =
+        t.app ((V₀.obj M).obj (E.obj K)) := by
+    convert hc using 1
+    simp only [projectionMapOfCompactification_app_app, Functor.comp_map,
+      Functor.map_comp, Category.assoc, γ]
+    rfl
+  rw [hcore]
 
 end AlgebraicGeometry.Etale

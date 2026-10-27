@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-space-relative-perfect-base-change",
+ "kind": "statement",
+ "title": "Etale locality and base change of relative perfectness",
+ "statement": "Use schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived direct image is computed by K-injective resolutions, and derived tensor pullback by K-flat resolutions. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed; flatness and local finite presentation are tested on etale scheme charts. Let $S$ be a scheme and $f:X\\to Y$ a flat locally finitely presented morphism of algebraic spaces over $S$. An object $K\\in D(\\mathcal O_X)$ is $Y$-perfect if it is pseudo-coherent (on etale affine charts represented by bounded-above complexes of finite free modules) and locally has finite Tor amplitude over $f^{-1}\\mathcal O_Y$. The latter means locally there are integers $a\\le b$ such that tensoring $K$ over this ring sheaf, in the derived sense, with every module in degree zero has cohomology only in $[a,b]$. This property is etale local on $X$ and $Y$ and implies quasi-coherent cohomology. For any morphism of algebraic spaces $g:Y^{\\prime}\\to Y$, putting $X^{\\prime}=X\\times_Y Y^{\\prime}$ and $g^{\\prime}:X^{\\prime}\\to X$, a $Y$-perfect $K$ has $Y^{\\prime}$-perfect derived pullback $L(g^{\\prime})^*K$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0DKN, definition-relatively-perfect; 0DKQ, lemma-affine-locally-rel-perfect; 0DKT, lemma-base-change-relatively-perfect; spaces-perfect.tex Tag 08JL, lemma-pseudo-coherent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-relative-perfect-general"
+ ],
+ "proof": [
+  {
+   "text": "For a commutative chart diagram $U\\xrightarrow h V$, $U\\to X$, $V\\to Y$ with etale vertical maps, the ring $f^{-1}\\mathcal O_Y|_U$ identifies with $h^{-1}\\mathcal O_V$: etale pullback of the structure sheaf is restriction [def-trf-algebraic-space]. Pseudo-coherence is local by the stated bounded-above finite-free-model definition: restriction retains a model, and models on a covering constitute local models on $X$. The Tor condition can be tested on geometric stalks by [lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test]; restriction to charts keeps the same stalk rings by [lem-sfb-space-strict-local-flatness]. Therefore an interval valid on a chart is exactly an interval for the restricted object over the indicated inverse-image ring. Local intervals may differ from chart to chart. Coverings of charts compose to coverings, so these two local conditions can be checked on any jointly surjective etale presentation. This proves the stated etale locality on source and target.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DKQ (lemma-affine-locally-rel-perfect), locality argument, with pseudo-coherence in the local-model form of the item."
+   }
+  },
+  {
+   "text": "On a chart with finite-free model $P^\\bullet$ for $K$, each $P^i$ is quasi-coherent by its finite free presentation [def-trf-space-quasi-coherent-module]. By [lem-sfb-space-qcoh-kernels-colimits], $Z^i=\\ker d^i$, $B^i=\\operatorname{im}d^{i-1}$ and $Z^i/B^i$ are quasi-coherent, using the kernel, image and cokernel clauses. The last quotient is $H^i(K)$ on the chart. Quasi-coherence is local by its definition, hence $K$ has quasi-coherent cohomology. No coherent-kernel theorem over a Noetherian ring is being used.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JL (lemma-pseudo-coherent), calculation of cohomology from finite free local models."
+   }
+  },
+  {
+   "text": "The fibre product is an algebraic space, and etale covering presentations remain covers after pullback [lem-trf-space-fibre-products-etale-covers]. Flatness of $f'$ follows from [lem-sfb-space-flat-proper-fp-locality]. For local finite presentation, take etale scheme presentations $U\\to X$, $V\\to Y$ with a map $U\\to V$ and $U\\to X$ surjective. Such diagrams exist by [lem-sfb-space-etale-presentation-property-criterion], and $U\\to V$ is locally of finite presentation. Cover $Y'\\times_Y V$ by etale schemes $V'_j$; then $U\\times_VV'_j\\to V'_j$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence], clause (3). These are jointly surjective etale source charts of $f'$, so the same presentation criterion proves that $f'$ is locally of finite presentation. Thus relative perfectness over $Y'$ is defined with the hypotheses in force.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03MO (lemma-base-change-flat), 03XR (lemma-base-change-finite-presentation), applied on presentations."
+   }
+  },
+  {
+   "text": "Put $K'=L(g')^*K$. Choose the finite-free models for $K$ on etale charts and pull their covering back to $X'$. On any scheme chart $W$ refining a pulled-back chart $U$, a model $P^\\bullet$ is bounded above and termwise flat, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. Restriction preserves K-flat resolutions by [lem-sfb-ringed-site-restriction-kflat]. Consequently tensor pullback of this model computes $K'|_W$; the local tensor formula is precisely the pullback specified by [def-trf-space-etale-module-functors]. In degree $i$ it sends $\\mathcal O_U^{r_i}$ to $\\mathcal O_W^{r_i}$ and sends a matrix differential to the matrix obtained by applying the structure-ring map. It therefore remains bounded above and finite free. Thus $K'$ is pseudo-coherent; this proves the claim directly rather than citing a new relative-perfectness clause.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DKT (lemma-base-change-relatively-perfect); finite-free pullback calculation of pseudo-coherence, as in perfect.tex second proof of lemma-base-change-relatively-perfect."
+   }
+  },
+  {
+   "text": "Finally take any chart on which $K$ has relative Tor interval $[a,b]$. Apply [lem-sfb-space-tor-independent-relative-amplitude] to its pulled-back square: its flat-case clause applies because $f$ is flat, while $g$ remains arbitrary. It gives the same interval for $K'$ over $(f')^{-1}\\mathcal O_{Y'}$ on the pulled-back chart. These charts cover $X'$, so $K'$ locally has finite relative Tor amplitude. Together with the pseudo-coherence just proved and the flat locally finitely presented morphism $f'$, this is exactly $Y'$-perfectness. The zero complex and empty charts satisfy the same argument, with interval $[0,0]$ if needed.",
+   "uses": [
+    "lem-sfb-space-tor-independent-relative-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKD (lemma-tor-independence-and-tor-amplitude), applied locally to prove spaces-more-morphisms.tex Tag 0DKT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "lem-sfb-space-strict-local-flatness",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-tor-independent-relative-amplitude"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0DKQ and 0DKT, supplemented by spaces-perfect.tex 08JL and the direct Tor-amplitude proof 0DKD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relatively perfect complexes for flat finitely presented algebraic spaces are etale local pseudo coherent locally bounded and preserved by derived base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complexes with finite relative Tor amplitude and arbitrary base change on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relative_perfect|PseudoCoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relatively perfect complexes for flat finitely presented algebraic spaces are etale local pseudo coherent locally bounded and preserved by derived base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative perfectness of complexes on algebraic spaces is etale local and stable under arbitrary derived base change",
+   "results": "{\"t\": \"2026-10-23T11:33:47Z\", \"tool\": \"leanfinder\", \"query\": \"Relative perfectness of complexes on algebraic spaces is etale local and stable under arbitrary derived base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\"], \"digest\": \"bdd1f9d48f711e36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes with finite relative Tor amplitude are stable under arbitrary base change of flat finitely presented algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T11:33:42Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherent complexes with finite relative Tor amplitude are stable under arbitrary base change of flat finitely presented algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.locally_isStableUnderBaseChange\"], \"digest\": \"8d2996a348644b4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T11:33:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relative_perfect|PseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T11:33:42Z\", \"tool\": \"grep\", \"query\": \"relativelyPerfect|relative_perfect|PseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Etale locality and base change of relative perfectness.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-perfect-base-change",
+  "worker": "stage1",
+  "summary": "Verified the stated flat locally finitely presented hypotheses; proved locality and quasi-coherence, retained the actual finite-free pullback calculation, and isolated general stalk and relative Tor-amplitude tools. No statement change.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited marked-plurinodal/stable-curve duality prerequisites. This item supplies the relative-perfectness construction input in the inherited from.place; no unit route or coefficient category is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General K-flatness of bounded-above flat complexes on ringed sites, used to compute tensor pullback of a finite-free local model; the unit has no replacement."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Exact restriction preserves K-flat resolutions; this is a generic ringed-site tool, not a change of the geometric proof route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General existence of algebraic-space fibre products and stability of jointly surjective etale covers; no use of the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-0004997f0",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-0004997f0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources. Sources: 0DKN, 0DKQ, 0DKT (spaces-more-morphisms), 08JL, 08IP and 0DKD (spaces-perfect; I confirmed the printed f^{-1}O_{Y'} typo, and the node corrects it to (f')^{-1}O_{Y'}), 0DJJ (sites-cohomology) and 04K5. The statement is unchanged against live, which is still unsplit. There is no repair note, so this is a first one-level split and not a re-split. Steps: (1) étale locality via f^{-1}O_Y|_U = h^{-1}O_V (def-trf-algebraic-space restriction clause), the new stalk test and chart stalk rings (strict-local-flatness); correct. (2) Quasi-coherent cohomology via the finite-free model and the qcoh kernel/image/cokernel clauses; correct. (3) f' is flat by the base-change clause of flat-proper-fp-locality, and locally of finite presentation by the presentation criterion, étale source-and-target locality and qcqs-permanence (3). I checked that the pulled-back source charts U×_V V'_j are étale over X' and cover it. (4) Pseudo-coherence: the bounded-above flat model is K-flat, restriction preserves K-flat resolutions, and f^* sends O^r to O^r; correct under the item's K-flat convention. (5) The new 0DKD node applied to U×_Y Y' with h flat gives the same interval; g stays arbitrary. New nodes: both are self-contained and statement-only. Tests: Z→F_p base change; the non-Tor-independent F_p⊗^L_Z F_p case showing why that hypothesis is needed; empty spaces and the zero complex. Neither duplicates the existing candidates (lem-trf-ringed-tor-amplitude-stalk-test, lem-sf-etale-stalk-tor-test, lem-pc-tor-amplitude-open-local, lem-pc-tor-independent-perfect-tensor-base-change, lem-sfb-flat-families-tor-independent), and neither restates a clause of the item. The three declared tool_uses (bounded-above-flat K-flat, restriction K-flat, space fibre products) are generic and accepted. Batch 5: every listed citation is a general definition (def-trf-algebraic-space, def-trf-space-etale-module-functors), the generic fibre-product lemma, or reaches sec-trace-formula only through def-trf-algebraic-space or the generic lem-trf-smooth-composition. None is a trace-formula or Poincaré-duality step, so they are accepted. FIX (B3): lem-sfb-space-tor-independent-relative-amplitude used 'flat' without a definition; I added [def-weil-flat-morphism] to the statement and to stmt_deps (fixes/dag/nodes/sec-six-functors-basics/). No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativePerfectBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfectRelativeToSpace_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.perfectRelativeToSpace_quasiCoherent",
+   "AlgebraicGeometry.AlgebraicSpace.perfectRelativeToSpace_etale_local",
+   "AlgebraicGeometry.AlgebraicSpace.perfectRelativeToSpace_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativePerfectBaseChange.lean",
+  "statement": "theorem perfectRelativeToSpace_baseChange {S : Scheme.{u}} {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y') (square : IsPullback g'.hom f'.hom f.hom g.hom) (hf : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w'} X'.SmallModules] (K : X.DerivedModules) (hK : IsPerfectRelativeToSpace f K) : IsPerfectRelativeToSpace f' ((derivedTensorPullback g').obj K)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e95b9c080",
+  "group": "O3",
+  "result": "fix",
+  "note": "Item statement correct clause by clause against 0DKN/0DKQ/0DKT/08JL. Flat lfp f in all three theorems; K over the whole unbounded category; QCoh conclusion; étale-local in both directions, converse needs only source surjectivity; arbitrary g; IsPullback g'.hom f'.hom f.hom g.hom correctly oriented; conclusion Y'-perfectness of derivedTensorPullback g'. Universes w/w' free; edge cases (empty, zero complex, identity or non-flat g) covered. Item changes only lean and stmt_deps (two new nodes plus landed derived-module-calculus and morphism-properties, both used); statements verbatim. def-sfb-space-derived-tensor-pullback = Mathlib totalLeftDerived of the conjugated moduleTensorPullback, not hollow, no duplicate. H4 fixed in def-sfb-space-relative-perfect-general: chartBaseChange/Fst duplicated landed enlargedFibreProduct/Fst (def-sfb-space-sheaf-fibre-product, landed 12:14 UTC, before the 14:00 UTC base), and schemeSpace was uncited. Fix: abbrevs of the landed decls, EnlargedEtaleRingedSite import in place of the unused fibre-product import, node statement and stmt_deps now cite def-trf-scheme-algebraic-space and def-sfb-space-sheaf-fibre-product. nt_compile --json of the 3-module chain clean (10.6/11.4/16.3 s); check_new_node, check_lean_text and refit_record clean. Advisory: the QCoh clause reduces to étale descent because the landed scheme-target predicate already includes QCoh."
+ }
+}

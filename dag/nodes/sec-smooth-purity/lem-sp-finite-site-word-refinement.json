@@ -1,0 +1,263 @@
+{
+ "id": "lem-sp-finite-site-word-refinement",
+ "kind": "statement",
+ "title": "Derived finite-site word comparisons and pushed proper-refinement pasting",
+ "statement": "Let $R$ be a finite commutative ring. All schemes are Noetherian (they have finite affine covers by spectra of Noetherian rings) [def-pc-scheme, def-weil-pbc-noetherian-ring]. Work in ordinary constant-$R$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Write $N_T=\\nu_T^*$ [def-weil-pbc-site-comparison-morphism], $P_v^t=Rv_*^t$ and $J_j^t=j_!^t$ ($t=e,p$). Let $d_v:N P_v^e\\to P_v^pN$ be the specified counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate], and $e_j:N J_j^e\\to J_j^pN$ the canonical open comparison [lem-cbc-proetale-extension-zero-comparison]. Let $\\kappa^t_{b,a}:P_b^tP_a^t\\cong P_{ba}^t$ be the canonical derived direct-image compositor, normalized as the inverse adjunction conjugate of composite inverse image, and $m^t_{b,a}:J_b^tJ_a^t\\cong J_{ba}^t$ the canonical open compositor [def-weil-pbc-proetale-operations, lem-cbc-extension-zero-composition]. All equations below include canonical functor associators. \nFor $E\\in D^+(X_e,R)$, every $J_j^eE$, $NE$, and etale intermediate $P_v^eJ_j^eE$ has a cohomological lower bound; $J_j^e,J_j^p,N$ preserve any specified lower bound. The sheaf maps $e_j$ and their composition law descend termwise. Every proper map between these schemes is qcqs, so its specified $d_v$ is invertible on bounded-below etale inputs. For any open $j:X\\hookrightarrow W$ and proper $r:W\\to V$, put\n$$B_{r,j}=P_r^p(e_j)\\circ d_r(J_j^e(-)):N_VP_r^eJ_j^e\\longrightarrow P_r^pJ_j^pN_X.$$\nThis is a natural isomorphism; $(P_r^eJ_j^eE,B_{r,j}(E))$ is a bounded-below etale-origin witness for $P_r^pJ_j^pN_XE$.\nFor composable proper maps $a:A\\to B$, $b:B\\to C$, the named counit mates obey\n$$d_{ba}\\circ N_C(\\kappa^e_{b,a})=(\\kappa^p_{b,a}N_A)\\circ P_b^p(d_a)\\circ d_b(P_a^e(-)),$$\nand $d_{\\mathrm{id}}$ is the identity under the canonical unit identifications. The open maps obey the analogous equation with $e,m,J$; in particular $e_{\\mathrm{id}}$ is the identity.\nFinally, let $j_i:X\\hookrightarrow W_i$ be open, $u:W_1\\to W_2$ and $r_2:W_2\\to V$ proper, $uj_1=j_2$, $r_1=r_2u$. Let $\\alpha_u^e$ be the specified proper/open refinement map [def-weil-pbc-proper-open-comparison], and $\\alpha_u^p$ its open-adjunct pro-etale counterpart [lem-sp-refinement-coefficient-mate]. Put\n$$\\rho^t=\\kappa^t_{r_2,u}(J_{j_1}^t(-))\\circ P_{r_2}^t(\\alpha_u^t).$$\nOn $D^+(X_e,R)$ the computed maps satisfy\n$$B_{r_1,j_1}\\circ N_V(\\rho^e)=(\\rho^pN_X)\\circ B_{r_2,j_2}.$$\nThe original proper/open refinement square need not be Cartesian. No coefficient presentation or base field is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A6 (lemma-morphism-comparison), 09AF (lemma-jshriek-comparison); agent derived-compositor and pushed-refinement deduction, using more-etale.tex Tag 0F7I (lemma-shriek-well-defined)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-extension-zero-composition",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-sp-refinement-coefficient-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact extension-by-zero and comparison inverse-image instances with Functor.isGE_mapDerivedCategory_obj. Install the assumed IsGE bound locally, obtaining both etale bounds and the pro-etale bound. Every object is already typed in DerivedCategory.Plus, so no additional injective representative is needed to establish membership in the bounded-below category.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper morphisms are quasi-compact and quasi-separated by their existing instances. Apply isIso_fixedComparisonDirectImageMatePlus. Expanding the definition of finiteSiteWordComparison reduces its invertibility to composition and whiskering of these isomorphisms and the canonical open-extension isomorphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The etale normalization is the unit characterization of conjugateEquiv applied to derivedPlus_unit_comp_upperStarCompDerivedPlus. For the pro-etale normalization, conjugateEquiv_upperStarComp_hom identifies the underived unit equation. Apply derivedPlus_unit_comp_app and derivedPlus_comp_unit_app, and naturality of the right-derived lowerStarComp and its composition isomorphism. Cancellation of the canonical composition inverse gives exactly the prescribed conjugateIsoEquiv.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical proper composition and identity equations are precisely comparisonDirectImagePlus_comp and comparisonDirectImagePlus_id. The fixed mate definition unfolds to their rightDerivedFunctorPlusBaseChange map, with identical normalizations.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the ordinary open-comparison coherence equation by composing with its inverse factors. Apply mapDerivedCategoryPlusSquareIso_comp to that ordinary equation. The localization square is the inverse of properOpenSiteExtensionIso, since derived natural isomorphisms preserve inverses. Invert the resulting component isomorphism equality to obtain the required open-composition law. This is exact termwise descent, with no injective or nonzero-object assumption.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-derived-exact-square-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open identity law use the identity clause of openImmersionLowerShriekComparison_coherence. A private generic localization calculation, with explicit independent category object and morphism universe binders, proves that an ordinary exact square satisfying a unit equation satisfies the same equation after deriving: test the natural transformations on Qh, cancel the invertible factorization maps, and use the ordinary identity degreewise. Cancel the inverse of properOpenSiteExtensionIso to obtain the displayed unit law.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-derived-exact-square-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand finiteSiteEtaleRefinement, finiteSiteProEtaleRefinement and finiteSiteWordComparison. Rewrite by comparisonDirectImagePlus_comp. Move the open comparison across the pro-etale direct-image compositor by naturality, and move the etale refinement across the fixed mate by its naturality. Expanding properOpenProEtaleIsoPlus yields its three-constituent site equation directly; functoriality and cancellation of its initial open comparison give precisely the required pushed-refinement equation. No Cartesian refinement square, base field or coefficient presentation is introduced.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-proper-open-comparison-proetale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-mate-pasting",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-derived-exact-square-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-proper-open-comparison-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A6 and 09AF; more-etale.tex Tag 0F7I. Y5 formal assembly using the existing canonical direct-image coherence API, exact-square localization, unit characterizations and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant ring etale proetale derived direct image counit mate compositor compatibility and proper open refinement pasting",
+   "results": "8 hits: Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; actual answer digest 468ee9297de53aee; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp, CategoryTheory.NatIso",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|compactification|properOpen",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived site comparison commutes with direct image compositors and normalized proper refinement maps",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical right adjoint mates for etale proetale comparison respect composition and pushing forward open refinement arrows",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, Condensed.profiniteSolidCounit; actual answer digest 32c05e3774f61032; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp; actual answer digest 7deb50fb1122da8a; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|properOpen|finiteSiteWord",
+   "results": "{\"t\": \"2026-10-22T06:54:25Z\", \"tool\": \"grep\", \"query\": \"proetale|properOpen|finiteSiteWord\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full assertion: hits do not give the specified etale/proetale counit mates, bounded-below witnesses and pushed proper/open refinement equation",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison etale proetale direct image composition and extension by zero refinement",
+   "results": "{\"t\": \"2026-10-22T06:54:25Z\", \"tool\": \"leansearch\", \"query\": \"Natural comparison etale proetale direct image composition and extension by zero refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"SheafOfModules.pushforwardComp\", \"PresheafOfModules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"5b21a2925cb78d52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full assertion: hits do not give the specified etale/proetale counit mates, bounded-below witnesses and pushed proper/open refinement equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-22T06:54:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"7deb50fb1122da8a\"}",
+   "date": "2026-10-22",
+   "verdict": "generic mate-pasting match already represented by lem-weil-pbc-mate-pasting; not a match for the full geometric assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale proetale comparison for derived direct images respects composition by counit mates and proper open refinement",
+   "results": "{\"t\": \"2026-10-22T06:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale proetale comparison for derived direct images respects composition by counit mates and proper open refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux\", \"Condensed.profiniteSolidCounit\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"Condensed.profiniteSolidification\"], \"digest\": \"9accdac396494835\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full assertion: hits do not give the specified etale/proetale counit mates, bounded-below witnesses and pushed proper/open refinement equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting right adjoint mate squares gives composition compatibility of derived site change",
+   "results": "{\"t\": \"2026-10-22T06:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"Pasting right adjoint mate squares gives composition compatibility of derived site change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.sheafComposeNatTrans\", \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.toPresheafToSheafCompComposeAndSheafify\", \"CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeSheafSheafComposeNatTransPlusPlusAdjunction\"], \"digest\": \"6d10e4f1e7b8bf16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full assertion: hits do not give the specified etale/proetale counit mates, bounded-below witnesses and pushed proper/open refinement equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-compact-site-coherence",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality paragraph: adjunctions compose and transposes of composites; finite compact-site proof Steps (1, 2, 3) of lem-sp-finite-compact-site-coherence",
+   "via": [
+    "lem-sp-finite-compact-site-coherence",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-site-word-refinement",
+  "worker": "stage1",
+  "summary": "Q115 supplies an eight-step proof with no new nodes. Existing exactness and resolution lemmas give all lower bounds; canonical open comparisons descend by localization; mate-pasting gives the normalized proper compositor law; the final two steps explicitly compute the pushed-refinement equation from naturality and the existing site-refinement equation. Statement and statement dependencies unchanged.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md, Locality paragraph, adjunction composition and transposes of composites; via lem-sp-et-proet-coefficient-compatibility and lem-sp-finite-compact-site-coherence, whose Steps 1 and 2 require finite-site word comparisons and pushed refinements."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-b9f281973",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-b9f281973 (reviewer sub-agent of L); spot-checked: I read the full proof and every cited statement, and recomputed the key equations; review.md has the step-by-step checks. Q115 gives the statement-only item lem-sp-finite-site-word-refinement (created by Q19's re-split of lem-sp-finite-compact-site-coherence) an 8-step proof with no new nodes. Statement, stmt_deps and blueprint fields are byte-identical to live. The item is still unsplit on live and side-live, so nothing supersedes this delivery. It is not on the drop list, has no SGA citation and has no cycle (full-closure DFS). Every proof dep exists and is unmerged. All dependencies are on the unit's route except def-weil-pbc-direct-image (a definition) and the Mathlib leaf right-derived-plus-injective, so no tool_uses are needed. Steps 1-2: lower bounds come from the extension-by-zero exactness nodes (etale and pro-etale) and comparison-pullback-exact (2), plus exact-functor-bounded-below and an injective D+ representative with alpha_I invertible. Step 3: e_j and the open composition law descend through localization (2). Step 4: Noetherian schemes are qc (finite affine cover) and qs (01OY), so every morphism is qcqs by permanence (1), which meets the hypothesis of comparison-direct-image-canonical-mate; B is an iso and the witness is in D+. Step 5: I recomputed the d-compositor law. d_u is the mate of a_u^{-1}; mate-pasting (2) gives s_b(d_a)d_b(r_a); (3b) and (3a) with kappa equal to the inverse conjugate of the inverse-image compositors give the stated orientation. Step 6: d_id comes from a_id=1 and mate-pasting (4); e_id=e_id∘e_id plus invertibility gives e_id=1. Steps 7-8: I re-derived the naturality of d_{r2} at A and of kappa^p at e_1, then substituted the pro-etale clause of lem-sp-refinement-coefficient-mate (no cartesian hypothesis), which gives rho^p N ∘ B_{r2,j2}. Sources checked: Stacks proetale 09A6 (l.4696), 09AF (l.5076), more-etale 0F7I (l.3081), the other step tags against tags/tags, and the blueprint Locality paragraph. Edge cases checked: R=0, identity maps, negative lower bounds, the non-cartesian fold refinement Spec k⊔Spec k→Spec k, and empty X. No duplicate found: the trf and sp mate nodes are field-specialized or coefficient-change statements. Advisory: the proof is 6704 characters, but the 3000-character re-split rule binds only the parent."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSiteWordRefinement",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteSiteWordRefinement",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteSiteWordComparison",
+   "AlgebraicGeometry.ProEtale.finiteSiteEtaleRefinement",
+   "AlgebraicGeometry.ProEtale.finiteSiteProEtaleRefinement",
+   "AlgebraicGeometry.ProEtale.finiteSiteEtaleOpenComp",
+   "AlgebraicGeometry.ProEtale.finiteSiteEtaleOpenId",
+   "AlgebraicGeometry.ProEtale.finiteSiteProEtaleOpenComp",
+   "AlgebraicGeometry.ProEtale.finiteSiteProEtaleOpenId",
+   "AlgebraicGeometry.ProEtale.finiteSiteWordRefinement"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSiteWordRefinement.lean",
+  "statement": "theorem finiteSiteWordRefinement (R : Type (u + 1)) [CommRing R] [Finite R] : (∀ {X W : Scheme.{u}} [IsNoetherian X] [IsNoetherian W] (j : X ⟶ W) [IsOpenImmersion j] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) (n : ℤ), DerivedCategory.IsGE E.obj n → DerivedCategory.IsGE ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus.obj E).obj n ∧ DerivedCategory.IsGE ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E).obj n) ∧ (∀ {X W : Scheme.{u}} [IsNoetherian X] [IsNoetherian W] (j : X ⟶ W) [IsOpenImmersion j] (E : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) (n : ℤ), DerivedCategory.IsGE E.obj n → DerivedCategory.IsGE ((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus.obj E).obj n) ∧ (∀ {W V : Scheme.{u}} [IsNoetherian W] [IsNoetherian V] (r : W ⟶ V) [IsProper r], QuasiCompact r ∧ QuasiSeparated r ∧ IsIso (fixedComparisonDirectImageMatePlus R r)) ∧ (∀ {X W V : Scheme.{u}} [IsNoetherian X] [IsNoetherian W] [IsNoetherian V] (j : X ⟶ W) [IsOpenImmersion j] (r : W ⟶ V) [IsProper r], IsIso (finiteSiteWordComparison R j r)) ∧ (∀ {A B C : Scheme.{u}} [IsNoetherian A] [IsNoetherian B] [IsNoetherian C] (a : A ⟶ B) (b : B ⟶ C) [IsProper a] [IsProper b], etaleComparisonDirectImageCompIso R a b = conjugateIsoEquiv ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) b).comp (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) a)) (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) (a ≫ b)) (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} R) a b) ∧ proEtaleComparisonDirectImageCompIso R a b = conjugateIsoEquiv ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) b).comp (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) a)) (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} R) (a ≫ b)) (Functor.mapDerivedCategoryPlusNatIso (upperStarComp (ModuleCat.{u + 1} R) a b) ≪≫ Functor.mapDerivedCategoryPlusCompIso _ _)) ∧ (∀ {A B C : Scheme.{u}} [IsNoetherian A] [IsNoetherian B] [IsNoetherian C] (a : A ⟶ B) (b : B ⟶ C) [IsProper a] [IsProper b] (E : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} R))), (comparisonUpperStar (ModuleCat.{u + 1} R) C).mapDerivedCategoryPlus.map ((etaleComparisonDirectImageCompIso R a b).hom.app E) ≫ (fixedComparisonDirectImageMatePlus R (a ≫ b)).app E = (fixedComparisonDirectImageMatePlus R b).app ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} R) a).obj E) ≫ (lowerStar (ModuleCat.{u + 1} R) b).rightDerivedFunctorPlus.map ((fixedComparisonDirectImageMatePlus R a).app E) ≫ (proEtaleComparisonDirectImageCompIso R a b).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} R) A).mapDerivedCategoryPlus.obj E)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (fixedComparisonDirectImageMatePlus R (𝟙 X)).app E ≫ (Functor.rightDerivedFunctorPlusNatIso (lowerStarId (ModuleCat.{u + 1} R) X) ≪≫ Functor.rightDerivedFunctorPlusIdIso _).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E) = (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.map ((Functor.rightDerivedFunctorPlusNatIso (Etale.lowerStarId (ModuleCat.{u + 1} R) X) ≪≫ Functor.rightDerivedFunctorPlusIdIso _).hom.app E)) ∧ (∀ {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (a : X ⟶ Y) (b : Y ⟶ Z) [IsOpenImmersion a] [IsOpenImmersion b] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (comparisonUpperStar (ModuleCat.{u + 1} R) Z).mapDerivedCategoryPlus.map ((finiteSiteEtaleOpenComp R a b).hom.app E) ≫ (properOpenSiteExtensionIso R (a ≫ b)).hom.app E = (properOpenSiteExtensionIso R b).hom.app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) a).mapDerivedCategoryPlus.obj E) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} R) b).mapDerivedCategoryPlus.map ((properOpenSiteExtensionIso R a).hom.app E) ≫ (finiteSiteProEtaleOpenComp R a b).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (properOpenSiteExtensionIso R (𝟙 X)).hom.app E ≫ (finiteSiteProEtaleOpenId R X).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E) = (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.map ((finiteSiteEtaleOpenId R X).hom.app E)) ∧ (∀ {X W₁ W₂ V : Scheme.{u}} [IsNoetherian X] [IsNoetherian W₁] [IsNoetherian W₂] [IsNoetherian V] (j₁ : X ⟶ W₁) (j₂ : X ⟶ W₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (a : W₁ ⟶ W₂) [IsProper a] (r₂ : W₂ ⟶ V) [IsProper r₂] (h : j₁ ≫ a = j₂) (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (comparisonUpperStar (ModuleCat.{u + 1} R) V).mapDerivedCategoryPlus.map (finiteSiteEtaleRefinement R j₁ j₂ a r₂ h E) ≫ (finiteSiteWordComparison R j₁ (a ≫ r₂)).app E = (finiteSiteWordComparison R j₂ r₂).app E ≫ finiteSiteProEtaleRefinement R j₁ j₂ a r₂ h E)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The ordinary fixed-ring module-sheaf encoding of the recorded comparison and refinement interfaces is used on D+, the strictly full bounded-below subcategories. Helpers define the specified word map B, the two pushed-refinement components, and termwise open compositors and unit identifications. The main theorem contains the lower-bound, qcqs, invertibility, adjunction-conjugation normalization, proper/open compositor, identity and pushed-refinement clauses. All theorem proofs are postponed; every helper has real construction data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-910d76bdd",
+  "group": "Q73",
+  "result": "pass",
+  "note": "All 10 conjuncts and 7 helper defs checked against the node: d = fixedComparisonDirectImageMatePlus, the same term as d_u in lem-sp-refinement-coefficient-mate's site clause; e = properOpenSiteExtensionIso; κ = genuine rightDerivedFunctorPlusCompIso' pinned to conjugateIsoEquiv of upperStarComp (true: the underived upperStarComp is defined as that conjugate); m = termwise-descended openImmersionLowerShriekComp.symm / proEtaleOpenExtensionComp.symm; B is a named whiskered composite with IsIso; ρ and the pushed-refinement equation match with no Cartesian hypothesis; unit laws use canonical identifications. No hollow defs, one sorry, docstrings with tags/blueprint/8 steps, statement verbatim, only the lean field changed, item not superseded on side-live. Advisory: κ defs are owned by theorem prop-weil-pbc-comparison-direct-image, not a stmt_dep. No fixes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261024T022433-L-2991287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

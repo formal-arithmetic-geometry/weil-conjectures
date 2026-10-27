@@ -6,18 +6,7 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.CategoryTheory.CondensedEquivariantBarData
-import Sheaf.CategoryTheory.CondensedProductActionInflation
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
-import WeilConjectures.CategoryTheory.DoubleComplexTotal
-import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
-import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Mathlib.Algebra.Homology.ModelCategory.Injective
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.CondensedBarScalarResolutionComparison
 
 /-! # Derived internal invariants and the profinite bar calculation
 
@@ -85,6 +74,17 @@ Proof:
 theorem condensed_derived_invariant_bar (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] :
     Assertion G := by
-  sorry
+  -- The scalar-resolution assertion retains the same normalized bar models.
+  obtain ⟨h, g, _, models, scalar⟩ := condensed_bar_scalar_resolution_comparison G
+  let (A : Ring.{u}) : ActionAbelian A G := h A
+  let (A : Ring.{u}) : IsGrothendieckAbelian.{u + 1} (Equivariant A G) := g A
+  let (A : Ring.{u}) : HasDerivedCategory.{u + 2} (Equivariant A G) :=
+    HasDerivedCategory.standard (Equivariant A G)
+  let (A : Ring.{u}) : HasDerivedCategory.{u + 2} (Modules A) :=
+    HasDerivedCategory.standard (Modules A)
+  refine ⟨h, g, models, ?_⟩
+  intro A A' a
+  obtain ⟨s, c, comparison⟩ := scalar A A' a
+  exact ⟨s, comparison.map (fun x ↦ x.computation)⟩
 
 end CategoryTheory.CondensedBar

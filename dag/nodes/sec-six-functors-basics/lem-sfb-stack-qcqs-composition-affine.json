@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-stack-qcqs-composition-affine",
+ "kind": "statement",
+ "title": "Composition and affine examples of quasi-compact quasi-separated stack morphisms",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\mathcal X\\xrightarrow{f}\\mathcal Y\\xrightarrow{g}\\mathcal Z$ be morphisms of algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack]. Use quasi-compact and quasi-separated morphisms as in [def-sfb-stack-qcqs-morphism]. If $f$ and $g$ are quasi-compact and quasi-separated, then $g\\circ f$ is quasi-compact and quasi-separated. An affine morphism $q:\\mathcal A\\to\\mathcal B$ of algebraic stacks over $k$ is quasi-compact and quasi-separated; here affine means that for every scheme $T\\to\\mathcal B$, the $2$-fibre product $\\mathcal A\\times_{\\mathcal B}T$ is a scheme and its projection to $T$ has affine inverse images of affine open subsets [def-pc-scheme]. No finite-type, Noetherian or condition on the absolute diagonals is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex; literature/stacks-project/morphisms.tex",
+  "place": "Tags 050W (lemma-composition-quasi-compact), 050K (lemma-composition-separated), quasi-separated clause; 050T (lemma-characterize-representable-quasi-compact), 04YT (lemma-representable-quasi-separated-diagonal-quasi-compact); 0CHQ (definition-affine) and 01S7 (lemma-affine-separated). Affine scheme inverse images are quasi-compact by their definition."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-pc-scheme",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal T\\to\\mathcal Z$ be a quasi-compact algebraic-stack test. The stack $\\mathcal D=\\mathcal Y\\times_{\\mathcal Z}\\mathcal T$ is quasi-compact by the definition for $g$, and $\\mathcal X\\times_{\\mathcal Y}\\mathcal D$ is quasi-compact by the definition for $f$. These are algebraic stacks by the fibre-product lemma. The triples defining the products give an equivalence $\\mathcal X\\times_{\\mathcal Y}\\mathcal D\\simeq\\mathcal X\\times_{\\mathcal Z}\\mathcal T$: send $(x,(y,t,\\beta),\\alpha:f(x)\\simeq y)$ to $(x,t,\\beta\\circ g(\\alpha))$, with inverse $(x,t,\\gamma)\\mapsto(x,(f(x),t,\\gamma),\\mathrm{id})$. These functors are inverse up to the isomorphism supplied by $\\alpha$. Transporting a smooth surjective atlas along this equivalence retains its quasi-compact scheme source, so $gf$ is quasi-compact. This argument uses only quasi-compactness of $f,g$.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050W (lemma-composition-quasi-compact), omitted proof expanded using 050U (definition-quasi-compact)."
+   }
+  },
+  {
+   "text": "For the diagonal calculation, consider a morphism $p:\\mathcal U\\to\\mathcal V$ of algebraic stacks, representable by algebraic spaces, all of whose scheme tests are quasi-compact and quasi-separated algebraic-space maps. Any base change of $p$ along a morphism of algebraic stacks is a morphism of algebraic stacks by the fibre-product lemma, and is representable by the representability calculus. Each scheme test of the base change is, by associativity of triples, a scheme test of $p$ itself; hence it again has both properties. For composition, let $r:\\mathcal V\\to\\mathcal W$ be another such representable morphism of algebraic stacks. The scheme-test equivalence makes $p$ and $r$ quasi-compact stack maps. The argument of step 1 makes $rp$ quasi-compact. Representability of $rp$ and the converse scheme-test equivalence imply that every scheme test of $rp$ is quasi-compact as a space morphism.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), representable-property composition invoked in the proof; Tag 050T (lemma-characterize-representable-quasi-compact); algebraic.tex Tags 0301, 0302."
+   }
+  },
+  {
+   "text": "Keep $p,r$ as in step 2. For a scheme $T\\to\\mathcal W$ put $V_T=\\mathcal V\\times_{\\mathcal W}T$. This is an algebraic space, and $r_T:V_T\\to T$ is quasi-separated by assumption. The pullback $U_T=\\mathcal U\\times_{\\mathcal V}V_T$ is an algebraic space by the space-valued representable-pullback lemma. Every scheme base change of $p_{V_T}:U_T\\to V_T$ is a scheme test of $p$, by associativity of the displayed triples, and is therefore quasi-separated. The new space scheme-test criterion makes $p_{V_T}$ quasi-separated. Its composition with $r_T$ is quasi-separated by the space composition clause, and is exactly the scheme test of $rp$. Thus every scheme test of $rp$ has both required properties, the quasi-compact part having been proved in step 2.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), using algebraic-space Tag 03KQ (lemma-composition-separated) and 03KM (lemma-separated-local)."
+   }
+  },
+  {
+   "text": "The definition of quasi-separatedness says that $\\Delta_f$ and $\\Delta_g$ are representable and all their scheme tests are quasi-compact and quasi-separated. Put $P=\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ and $Q=\\mathcal X\\times_{\\mathcal Z}\\mathcal X$. These are algebraic stacks by the fibre-product lemma, so steps 2 and 3 apply to maps between $\\mathcal X$, $P$ and $Q$. Identity (2) of the diagonal-pullback node, applied with $u=v=f$ and $h=g$, identifies $i:P\\to Q$ as the base change of $\\Delta_g$. Step 2 gives the required properties for $i$. The factorization $\\mathcal X\\xrightarrow{\\Delta_f}P\\xrightarrow{i}Q$ sends $x$ to $(x,x,\\mathrm{id}_{gf(x)})$, hence is $\\Delta_{gf}$. Steps 2 and 3 give its representability and quasi-compact quasi-separated scheme tests. Thus $gf$ is quasi-separated, completing the composition clause.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-groupoid-diagonal-two-pullback-identities",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K (lemma-composition-separated), quasi-separated case; square of 050H (lemma-fibre-product-after-map)."
+   }
+  },
+  {
+   "text": "Let $q:\\mathcal A\\to\\mathcal B$ be affine. Every scheme test $a_T:A_T\\to T$ is an affine scheme morphism. For any quasi-compact algebraic space $C\\to T$, choose a surjective etale scheme atlas $U\\to C$ with $U$ quasi-compact. The base change $A_U\\to U$ is affine, hence quasi-compact as a scheme morphism by affine permanence. The inverse-image lemma, with the quasi-compact open $W=U$, makes $A_U$ quasi-compact. Base change of the atlas gives a representable surjective etale map $A_U\\to A_T\\times_TC$ by the space fibre-product lemma. It is therefore a quasi-compact scheme atlas of this product. This proves intrinsic algebraic-space quasi-compactness of $a_T$, including tests by nonschematic $C$. The affine-locality node makes $a_T$ separated: its further affine scheme tests have affine scheme source by affine base change, exactly that node's affine hypothesis. The separated-implies-quasi-separated clause of the new node now gives intrinsic quasi-separatedness. The representable scheme-test equivalence makes $q$ a quasi-compact stack morphism. We will also use the properties of $a_T$ just proved for any affine scheme morphism, including a closed immersion, which is affine by its affine-local definition.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "def-weil-closed-immersion",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CHQ (definition-affine), Tag 050T (lemma-characterize-representable-quasi-compact); spaces-morphisms.tex 03WG (lemma-affine-local); morphisms.tex 01S7 (lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "Fix a scheme test $T\\to\\mathcal A\\times_{\\mathcal B}\\mathcal A$, given by $(x_1,x_2,\\alpha:q(x_1)\\simeq q(x_2))$. Let $A_T=\\mathcal A\\times_{\\mathcal B}T$ using the map $q(x_1):T\\to\\mathcal B$. It is a scheme affine over $T$. The objects $(x_1,\\mathrm{id})$ and $(x_2,\\alpha^{-1})$ are sections $s_1,s_2:T\\to A_T$. The test of $\\Delta_q$ is their equality locus $T\\times_{A_T\\times_T A_T}A_T$. Indeed a lift of the stack diagonal is an isomorphism $\\beta:x_1\\simeq x_2$ satisfying $q(\\beta)=\\alpha$; this is exactly the arrow condition between those sections in the discrete algebraic space $A_T$. Sending a diagonal lift with its two identifications to their composite gives this bijection, with inverse the lift $x_1$ and the identifications $\\mathrm{id},\\beta$; these constructions commute with pullback. This is the diagonal base-change identification of the cited node. The affine scheme map $A_T\\to T$ is separated, so its diagonal is a closed immersion. Base change gives that the displayed equality locus is a scheme closed-immersed in $T$. It is affine by the closed-immersion definition, and step 5 gives intrinsic space quasi-compactness and quasi-separatedness of this test. Every scheme test of $\\Delta_q$ is therefore a space with both properties. This is exactly quasi-separatedness of $q$ in the given definition; together with step 5 it proves the affine clause.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-groupoid-diagonal-two-pullback-identities",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YT (lemma-representable-quasi-separated-diagonal-quasi-compact), scheme-test diagonal calculation; categories.tex 04YR (lemma-base-change-diagonal); morphisms.tex 01S7 (lemma-affine-separated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-affine-locality",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 050W and 050K, quasi-separated case, with scheme tests of affine morphisms from 0CHQ and the diagonal calculation of 04YT; omitted 050W argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact quasi separated morphisms of algebraic stacks are closed under composition and affine morphisms are quasi compact quasi separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The property of being a quasi-compact morphism of schemes is stable under composition; that is, the composition of two quasi-compact morphisms is again quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The quasi-compactness property of morphisms of schemes is multiplicative, meaning that the composition of two quasi-compact morphisms is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated is multiplicative: the composition of two quasi-separated morphisms of schemes is again quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.QuasiSeparated g], AlgebraicGeometry.QuasiSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two quasi-separated morphisms of schemes is quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is \\\"quasi-compact\\\" if the underlying map of topological spaces is, i.e. if the preimages\\nof quasi-compact open sets are quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.QuasiCompact f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" (X : AlgebraicGeometry.Scheme) : CompactSpace ↥X ↔ AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiCompact g] : AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] : CompactSpace ↥X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiCompact g] : AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiCompact f] : AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] : CompactSpace ↥(CategoryTheory.Limits.pullback f g)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|quasiSeparated.*[Cc]omp|quasiCompact.*[Cc]omp",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1133\", \"text\": \"  (QuasiSeparatedSpace.isRetrocompact_iff_isCompact (isClosed_zeroLocus _).isOpen_compl).mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"279\", \"text\": \"    isCompact_iff_compactSpace.mp (QuasiCompact.isCompact_preimage (f := (D.map j.hom)) _ U.2 hU)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"375\", \"text\": \"  exact QuasiCompact.compactSpace_of_compactSpace (c.π.app i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1070\", \"text\": \"    isCompact_iff_compactSpace.mp (QuasiCompact.isCompact_preimage _ U.2 hU')\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1300\", \"text\": \"        isCompact_iff_compactSpace.mp (QuasiCompact.isCompact_preimage _ (𝒱' j₁ ⊓ 𝒱' j₂).isOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"720\", \"text\": \"        X (U := f ⁻¹ᵁ U) (QuasiCompact.isCompact_preimage (f := f) _ U.1.2 U.2.isCompact)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"727\", \"text\": \"instance [QuasiCompact f] : QuasiCompact f.toImage :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"46\", \"text\": \"  QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen hU\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"82\", \"text\": \"/-- If `𝒱` is a refinement of `𝒰` such that `𝒱` is quasicompact, also `𝒰` is quasicompact. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"161\", \"text\": \"    [AlgebraicGeometry.QuasiCompact f] : QuasiCompactCover (f.cover hf).toPreZeroHypercover :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"176\", \"text\": \"instance {𝒱 : PreZeroHypercover S} [QuasiCompactCover 𝒰] : QuasiCompactCover (𝒰.sum 𝒱) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"179\", \"text\": \"instance {𝒱 : PreZeroHypercover S} [QuasiCompactCover 𝒱] : QuasiCompactCover (𝒰.sum 𝒱) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"line\": \"94\", \"text\": \"  have := QuasiCompact.compactSpace_of_compactSpace f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"line\": \"117\", \"text\": \"  have := QuasiCompact.compactSpace_of_compactSpace f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"267\", \"text\": \"lemma isImmersion_iff_exists_of_quasiCompact [QuasiCompact f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"200\", \"text\": \"        toCompactSpace := QuasiCompact.compactSpace_of_compactSpace f }\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"34\", \"text\": \"    QuasiCompactCover E.shrink ↔ QuasiCompactCover E :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"500\", \"text\": \"    [QuasiCompact iU] [QuasiSeparated iU] [QuasiCompact iV] [QuasiSeparated iV]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"59\", \"text\": \"  quasiCompact_iff_forall_isAffineOpen.mpr fun _ hU ↦ (hU.preimage f).isCompact\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"141\", \"text\": \"  · have _ : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"56\", \"text\": \"  have : QuasiCompact f := ⟨fun U hU hc ↦ hhomeo.homeomorph.isCompact_preimage.mpr hc⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"line\": \"141\", \"text\": \"  · have _ : CompactSpace X := by simpa [← quasiCompact_iff_compactSpace f] using hf.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"48\", \"text\": \"/-- A morphism is `QuasiSeparated` if diagonal map is quasi-compact. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"51\", \"text\": \"  /-- A morphism is `QuasiSeparated` if diagonal map is quasi-compact. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"52\", \"text\": \"  quasiCompact_diagonal : QuasiCompact (pullback.diagonal f) := by infer_instance\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of morphisms of algebraic stacks with quasi compact quasi separated relative diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [QuasiSeparated (f ≫ g)] : QuasiSeparated f\", \"doc\": \"If the composition of two morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-separated, then the first morphism $ f $ is quasi-separated. This means that the diagonal morphism $ X \\\\to X \\\\times_Y X $\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderComposition @QuasiSeparated\", \"doc\": \"The property of being a quasi-separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are quasi-separated morphisms of schemes, then their composition \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @QuasiCompact @QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine representable stack morphisms are quasi compact with quasi compact quasi separated diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"@AlgebraicGeometry.QuasiSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|quasiCompact_comp|quasiSeparated_comp|IsAffineHom",
+   "results": "{\"t\": \"2026-10-23T14:11:38Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|ArtinStack|quasiCompact_comp|quasiSeparated_comp|IsAffineHom\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"5f7dd0571ec5cbb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphisms of algebraic stacks are quasi separated and quasi compact; these stack morphism properties are preserved under composition",
+   "results": "{\"t\": \"2026-10-23T14:11:38Z\", \"tool\": \"leansearch\", \"query\": \"Affine morphisms of algebraic stacks are quasi separated and quasi compact; these stack morphism properties are preserved under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\"], \"digest\": \"45796a69e69fabb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T14:11:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffineHom\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"8a1b840449d11af1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of quasi compact quasi separated morphisms of algebraic stacks and affine stack morphisms are quasi compact quasi separated",
+   "results": "{\"t\": \"2026-10-23T14:11:39Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of quasi compact quasi separated morphisms of algebraic stacks and affine stack morphisms are quasi compact quasi separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.quasiCompact_comp\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_comp\"], \"digest\": \"f863c724e6b54c8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results have Scheme endpoints. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52,116-130, Affine.lean:43-59 and Separated.lean:119; no algebraic-space or algebraic-stack theorem or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequately-affine-composition",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1),(2): the quasi-compact and quasi-separated hypotheses in Definition 4.1.1",
+   "via": [
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-qcqs-composition-affine",
+  "worker": "stage1",
+  "summary": "Retained the statement and all imported metadata. Expanded quasi-compact composition by test-stack triples, proved the representable diagonal calculus from existing representability and compactness-test nodes and one new algebraic-space quasi-separatedness input, then carried out the diagonal factorization. Proved the affine clause on actual scheme tests and equality loci; no absolute diagonal, finite-type or Noetherian assumption is used. Checked every cited statement and recorded literal quotations in citations.json. On resumed review, supplied the explicit etale-atlas argument upgrading affine scheme tests to the intrinsic all-quasi-compact-space compactness predicate, citing the scheme inverse-image and space fibre-product lemmas.",
+  "blueprint": "Read the current latest sec-six-functors-basics chapter, sk-thm-sf-ctf-stability unit and direct-images proof. This is the adequate-moduli prerequisite recorded in the inherited from.place, not a replacement of the unit route. blueprint_refs.py ancestor returns None, matching the inherited null from.node. Whole-blueprint tag and concept searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Used only to base-change a representable surjective etale scheme atlas in the affine compactness argument; this generic algebraic-space tool supplies a property absent from the unit statements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-463323cca",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-463323cca (reviewer sub-agent of L); spot-checked: Read Stacks stacks-morphisms 050W, 050K, 050T, 04YT and 0CHQ, and spaces-morphisms 03KM (1)<=>(2), 03KL, 03KQ and 03KK. The item's statement is unchanged from live, where it is still unsplit; there is no repair note. Steps 1-6 are correct. Step 1: the triple equivalence X x_Y D = X x_Z T has the right orientation. Step 3: the space pullback of a scheme test is identified correctly. Step 4: clause (2) of the diagonal two-pullback lemma with u=v=f, h=g gives i, and i.Delta_f = Delta_gf. Step 5: the intrinsic quasi-compactness argument uses a qc atlas, the preimage lemma and base change of etale covers. Step 6: the equality locus of the sections (x1,id) and (x2,alpha^-1) matches the arrow condition q(v)=alpha, and closed immersions are affine. The new node is exactly the Stacks quasi-separated package for spaces and was checked on small cases. It is not a duplicate: searches by tags 03KQ/03KM/03KK/03KL/03HK and by keywords hit only the separated+fp, locally separated, qc+separated and absolute-qcqs nodes. Batch-5: def-trf-algebraic-space, def-trf-scheme-algebraic-space and def-trf-projective-bundle-morphism are general definitions, and lem-trf-space-fibre-products-etale-covers is a generic space fact. None is a step of the trace formula or Poincare duality, so all are accepted. The tool_use of lem-trf-space-fibre-products-etale-covers is accepted. FIX (two faults): (E1) step 2 applied lem-sfb-representable-stack-quasicompact-tests, which requires morphisms of algebraic stacks, without assuming it. Step 2 now assumes morphisms of algebraic stacks, step 4 states that P and Q are algebraic stacks, and both cite lem-sfb-algebraic-stack-fibre-products. (B) The new node lacked lean_audit, although the report says it was filled; it is added with state none/none.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQcqsCompositionAffine",
+  "declaration": "CategoryTheory.algebraicModuliMap_qcqs_comp",
+  "declarations": [
+   "CategoryTheory.algebraicModuliMap_qcqs_comp",
+   "CategoryTheory.algebraicModuliMap_qcqs_of_affine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQcqsCompositionAffine.lean",
+  "statement": "theorem algebraicModuliMap_qcqs_comp {k : Type u} [Field k] {X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))} {Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))} {Z : BasedCategory.{v₃, w₃} (Over (Spec (.of k)))} (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (hZ : IsAlgebraicModuliStack Z) (f : BasedFunctor X Y) (g : BasedFunctor Y Z) (hfqc : IsQuasiCompactAlgebraicModuliMap.{u, v₁, w₁, v₂, w₂, 0, 0} f) (hfqs : IsQuasiSeparatedAlgebraicModuliMap f) (hgqc : IsQuasiCompactAlgebraicModuliMap.{u, v₂, w₂, v₃, w₃, 0, 0} g) (hgqs : IsQuasiSeparatedAlgebraicModuliMap g) : IsQuasiCompactAlgebraicModuliMap.{u, v₁, w₁, v₃, w₃, 0, 0} (f.comp g) ∧ IsQuasiSeparatedAlgebraicModuliMap (f.comp g)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations respectively state the composition and affine clauses. Reuses ModuliSchemeTest from the added, already landed statement dependency to express affine scheme 2-base changes with their actual projections. Independent endpoint universes; the affine theorem allows arbitrary enlarged quasi-compact test universes. Composition uses the recorded minimal endpoint/site-bounded test universes, also used by IsAdequatelyAffineMorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15e216686",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. The composition clause uses the landed IsQuasiCompactAlgebraicModuliMap/IsQuasiSeparatedAlgebraicModuliMap. The affine clause uses ModuliSchemeTest @IsAffineHom, which keeps the real 2-base change and its projection (IsSchemeModuliBaseChange); no other stack-affine predicate exists. Composition uses the minimal (0,0) test level, which is mathematically equivalent and is the convention of the existing consumers (AdequatelyAffineMorphism:124); the affine conclusion leaves v3,w3 free. The added stmt_dep def-sfb-dm-stack-morphism-properties is landed on the base and used. lean.statement is verbatim. Node differs from live only in lean and stmt_deps. Proof steps 1-6 are in the docstrings with source and blueprint tags. Proofs are sorry only; no duplicate (AlgebraicStackQcqsPermanence is a different statement); no extra hypotheses. Not recompiled (unchanged delivery)."
+ }
+}

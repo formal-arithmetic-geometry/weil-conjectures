@@ -22,7 +22,8 @@
   "lem-sf-compact-support-restriction-of-scalars",
   "lem-sf-class-compact-support-comparison",
   "lem-pur-etale-scalar-mate-projection",
-  "lem-asd-proper-finite-coefficient-extension"
+  "lem-asd-proper-finite-coefficient-extension",
+  "def-finite-compact-scalar-transport-data"
  ],
  "proof": [
   {
@@ -30,7 +31,8 @@
    "uses": [
     "lem-asd-proper-finite-coefficient-extension",
     "lem-sf-compact-support-restriction-of-scalars",
-    "lem-pur-etale-scalar-mate-projection"
+    "lem-pur-etale-scalar-mate-projection",
+    "def-finite-compact-scalar-transport-data"
    ],
    "elementary": false
   },
@@ -43,15 +45,20 @@
    "elementary": false
   },
   {
-   "text": "For equality of maps, first factor the scalar-adjunction transpose for the compactification composite into the proper scalar transpose and proper image of the open scalar transpose, using adjunction naturality. The open unit-preserving uniqueness comparison identifies the latter with openScalarIso. On the proper factor, compute the realization/restriction squares on a K-injective B-complex and a K-injective resolution of its restriction: both defining equations give direct image of the same resolution arrow. Cancel that quasi-isomorphism. The fixed-scalar site equality is etaleProEtale_scalar_mate, applied to the bounded-below open extensions of G and GB. K-flat pure-tensor normalization identifies its etale pullback comparison with scalarPullbackIso. Whisker and cancel the site and realization units and counits to obtain exactly the asserted equality.",
+   "text": "Factor compactSiteIso into properSiteIso at the bounded-below open extension and proper image of openSiteIso. This follows by expanding the canonical D+ comparison and canceling the inclusion and realization isomorphisms.",
    "uses": [
-    "lem-sfb-etale-proetale-scalar-mate",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-sf-compact-support-restriction-of-scalars",
     "lem-sf-class-compact-support-comparison",
-    "lem-pur-etale-scalar-mate-projection"
+    "def-finite-compact-scalar-coordinates"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply openScalar_transport to G, GB and eGB. It supplies the open scalar square. Apply properScalar_transport to their exact open extensions H and HB, with eH equal to openScalarIso followed by open extension of eGB. It supplies the proper scalar square. Adjunction naturality factors the compact scalar transpose, and naturality of the proper transpose past openSiteIso pastes the two squares. The resulting composite is the explicit compact scalar isomorphism after applying the site/scalar identification and eGB at the source. Cancel that isomorphism to obtain the stated equality.",
+   "uses": [
+    "lem-finite-open-scalar-transport",
+    "lem-finite-proper-scalar-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -59,13 +66,15 @@
   "lem-sf-compact-support-restriction-of-scalars",
   "lem-pur-etale-scalar-mate-projection",
   "lem-sf-class-compact-support-comparison",
-  "lem-sfb-etale-proetale-scalar-mate",
-  "lem-weil-proetale-direct-image-restriction-of-scalars"
+  "lem-finite-open-scalar-transport",
+  "lem-finite-proper-scalar-transport",
+  "def-finite-compact-scalar-transport-data",
+  "def-finite-compact-scalar-coordinates"
  ],
  "proof_origin": {
-  "by": "agent G9",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
-  "place": "Steps 7--10: scalar-mate transport through comparison inverse image and intrinsic realization; Stacks 0GL6, 09AL and 0D6J"
+  "by": "agent R4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5 (exactness and reduction): open/proper scalar transport and explicit naturality pasting; original canonical comparison definitions retained verbatim in FiniteCompactSupportScalarTransportData"
  },
  "mathlib_searches": [
   {
@@ -131,14 +140,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G9",
-  "result": "pass",
-  "landing": "20261020T051343-L-1649440",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: intrinsicCompactScalarIsoOfOrigin_hom proof + 9 defs moved verbatim to FiniteCompactSupportScalarTransportData (public re-export) against clone item module; 4 direct importers compiled in sandbox; axioms checked"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

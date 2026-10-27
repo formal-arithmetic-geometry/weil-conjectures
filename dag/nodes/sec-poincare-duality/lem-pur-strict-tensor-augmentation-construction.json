@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-strict-tensor-augmentation-construction",
+ "kind": "statement",
+ "title": "Construction of the strict tensor quotient augmentation",
+ "status": "split",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and an arbitrary scheme T in the same universe. Use the actual completed coefficient sheaf R_T of [def-weil-completed-integral-coefficients], the ordinary signed direct-sum total tensor of [def-coef-ringed-tensor-hom-model], and the actual finite tensor tower and its Roos complex of [lem-pur-integral-operations-well-defined, def-pur-integral-derived-operations]. The quotient completion unit is natural. Whiskering it by ordinary total tensor and composing with the normalized tensor tower isomorphism gives a natural transformation from ordinary total tensor to the completed strict tensor complex. Its component at each pair of complexes is exactly IntegralAmbient.tensorOperationUnit of [lem-pur-integral-ambient-operation-models]. The map is constructed from the natural slice completion unit and normalized tensor tower isomorphism. No flatness, completeness, constructibility or invertibility assumption on ell on T is required.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "The tensor-product operation in the proof, specialized to the strict quotient completion augmentation; the representative formula of def-pur-canonical-purity-source-transports."
+ },
+ "proof": [
+  {
+   "text": "The quotient units form a natural transformation from the identity functor to the Roos complex of the quotient tower, by naturality of the slice product augmentation and zero shifted coordinate. Whisker this transformation by the ordinary total tensor functor. Compose it with the Roos image of the normalized whole-tower tensor isomorphism of lem-pur-integral-ambient-operation-models. This constructs the strict tensor augmentation functorially on every pair of complexes.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the recorded sheafification and locally bijective criterion at coefficient universe u+1 from lem-weil-integral-constructible-triangulated; this pins the universe of the ordinary total tensor and introduces no geometric hypothesis.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "The tensor-product operation in the proof, specialized to the strict quotient completion augmentation; the representative formula of def-pur-canonical-purity-source-transports."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain map from a total tensor complex into a Roos mapping cocone is determined by pure tensor values of product coordinates and its zero shifted coordinate",
+   "results": "8 hits including HomologicalComplex.ιTensorObj, HomologicalComplex.mapBifunctorMap and CochainComplex.HomComplex.Cocycle.homOf. No strict quotient tensor augmentation statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing library quotient units and tensor tower comparison; the remaining argument is formal."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "8 hits for mapping-cocone lifts and their coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the generic cone API but no normalized pro-etale tensor augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*augmentation|augmentation.*tensor",
+   "results": "The msearch Mathlib grep returned no matches; library rg found IntegralAmbient.tensorOperationUnit and tensorOperationUnit_coordinates. blueprint_refs search tensor augmentation returned zero blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing operation unit, and prove its naturality/normalization and elementary extensionality."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySourceTransports",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "The tensor product operation: strict quotient augmentation and its representative normalization",
+   "via": [
+    "def-pur-canonical-purity-source-transports"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTensorAugmentationConstruction",
+  "file": "lean/Sheaf/Paper/StrictTensorAugmentationConstruction.lean",
+  "declaration": "WeilConjectures.StrictTensorAugmentation.map",
+  "declarations": [
+   "WeilConjectures.StrictTensorAugmentation.unit_naturality",
+   "WeilConjectures.StrictTensorAugmentation.unit",
+   "WeilConjectures.StrictTensorAugmentation.map",
+   "WeilConjectures.StrictTensorAugmentation.map_app"
+  ],
+  "statement": "def map (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u}) :\n    (@coefficientTotalTensor.{u, u + 1, u} T.ProEt _ (ProEt.topology T)\n      (integralOperationsAbSheafify.{u, u} T)\n      (integralOperationsAbLocallyBijective.{u, u} T)\n      (completedIntegralCommRingSheafUnrestricted.{u, u} l E T)) ⟶\n        integralOperationsTensorComplexFunctor.{u, u} l E T",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T012827-L-2336931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T012827-L-2336931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

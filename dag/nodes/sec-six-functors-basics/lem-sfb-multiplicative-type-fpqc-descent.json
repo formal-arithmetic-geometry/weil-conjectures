@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-multiplicative-type-fpqc-descent",
+ "kind": "statement",
+ "title": "Fpqc descent of multiplicative type",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $H\\to S$ be an affine morphism [pqf-def-affine-morphism], flat [def-weil-flat-morphism] and of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Give $H$ the structure of an $S$-group scheme: multiplication, identity and inverse satisfying the group diagrams. Such a group is of multiplicative type if on an fppf covering of $S$ [def-pc-fppf-site] it is isomorphic to $D_U(M)=\\operatorname{Spec}_U\\mathcal O_U[M]$ for finitely generated abelian groups $M$, with Hopf operations as in [def-sfb-ring-diagonalizable-group]; the relative spectrum is obtained by gluing the affine group-algebra spectra. Let $\\{S_i\\to S\\}_{i\\in I}$ be an fpqc covering [def-weil-pbc-fpqc-covering]. If each $H\\times_SS_i$ is of multiplicative type, then $H$ is of multiplicative type. No Noetherian, reducedness, smoothness, connectedness or residue-characteristic hypothesis is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary B.4.2(1), printed pp.299-300; this is descent for fpqc-local forms, not assertion (2) concerning extensions. WANTED locally as literature/conrad-reductive-group-schemes.pdf; online statement and proof read. No Stacks tag states this structural result."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fppf-site",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "For an integer $n>1$ let $p_n:H\\to H$ be the scheme morphism $h\\mapsto h^n$ formed from the multiplication and diagonal, and put $P_n=H\\times_{H,p_n,e}S$. This construction does not require $H$ to be commutative. The fibre-product universal property identifies $(P_n)_T$ with the identity fibre of the power map on $H_T$, for every $T\\to S$: both represent pairs consisting of a point of $H_T$ and the equality of its $n$th power with the identity. On a split chart the Hopf formulas give $p_n^*(e_m)=e_{nm}$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  },
+  {
+   "text": "For each $i$, take an fppf splitting cover $\\{U_{ia}\\to S_i\\}$ with $H_{U_{ia}}\\simeq D_{U_{ia}}(M_{ia})$. Character duality applied to $n:M_{ia}\\to M_{ia}$ identifies $(P_n)_{U_{ia}}$ with $D_{U_{ia}}(M_{ia}/nM_{ia})$. If $m_1,\\ldots,m_d$ generate $M_{ia}$, reducing their coefficients modulo $n$ gives a surjection $\\{0,\\ldots,n-1\\}^d\\twoheadrightarrow M_{ia}/nM_{ia}$, so this quotient is finite. On every nonempty affine open $\\operatorname{Spec}A\\subset U_{ia}$, the algebra $A[M_{ia}/nM_{ia}]$ has the finite basis $\\{e_{\\bar m}\\}$. The finite-free-algebra spectrum lemma therefore makes $(P_n)_{U_{ia}}\\to U_{ia}$ finite, flat and locally of finite presentation. These properties hold on all such affine opens, as required by their local definitions. Empty opens impose no condition.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-weil-pbc-finite-free-algebra-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  },
+  {
+   "text": "An fppf covering is fpqc. Apply fpqc descent of finiteness, flatness and local finite presentation separately to $P_n\\times_SS_i\\to S_i$ along its splitting cover $\\{U_{ia}\\to S_i\\}$. This proves all three properties over every $S_i$. Apply the same three descent statements again along the given fpqc family $\\{S_i\\to S\\}$. Consequently $P_n\\to S$ is finite, flat and locally of finite presentation, for every $n>1$. Both applications concern actual base changes of the same scheme morphism by step 1; neither application assumes the cover is a singleton or that its members are Noetherian.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  },
+  {
+   "text": "Apply the finite-flat rank statement to $P_n\\to S$. It says that $s\\mapsto\\dim_{\\kappa(s)}\\Gamma((P_n)_s,\\mathcal O_{(P_n)_s})$ is locally constant. Step 1 identifies $(P_n)_s$ with $H_s[n]$, so these are exactly the functions $d_n$ required in the fibral criterion. Finiteness in step 3 also gives finiteness of each fibre, by the same rank statement's finite-dimensional fibre description.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  },
+  {
+   "text": "For every $s\\in S$, choose $i$ and $t\\in S_i$ mapping to $s$, using joint surjectivity of the fpqc covering. Choose a splitting member $U_{ia}$ and $u\\in U_{ia}$ mapping to $t$, using joint surjectivity of the fppf covering. The residue maps give $\\kappa(s)\\to\\kappa(t)\\to\\kappa(u)$. Choose an algebraic closure $\\Omega$ of $\\kappa(u)$. Restricting the splitting along $\\operatorname{Spec}\\Omega\\to U_{ia}$ gives $H_\\Omega\\simeq D_\\Omega(M_{ia})$: on affine charts the base-change identification is the explicit isomorphism $A[M_{ia}]\\otimes_A\\Omega\\simeq\\Omega[M_{ia}]$, $e_m\\otimes c\\mapsto c e_m$, respecting each Hopf operation. Thus condition (a) of the criterion holds with the algebraically closed extension $\\Omega/\\kappa(s)$. No rational point over an algebraic closure of $\\kappa(s)$, and no descent of an isomorphism along a field extension, is being assumed.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fppf-site",
+    "def-weil-residue-field",
+    "def-weil-algebraic-closure",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  },
+  {
+   "text": "The affine, flat and finite-presentation hypotheses on $H\\to S$ are the hypotheses of the item. Step 5 verifies the geometric-fibre condition of the fibral criterion, and steps 3-4 verify its finite torsion fibres and local constancy condition for every integer $n>1$. Apply that criterion with $G=H$. It supplies an fppf covering on which $H$ is diagonalizable with finitely generated character groups, precisely the asserted multiplicative-type conclusion. This also covers the empty base, when all the pointwise conditions are vacuous.",
+   "uses": [
+    "lem-sfb-multiplicative-type-fibral-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fppf-site",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "lem-sfb-multiplicative-type-fibral-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary B.4.2(1), printed pp.299-300, proof via Theorem B.4.1; explicit torsion-kernel descent argument following that criterion. Source is read online but not present under literature/; the assembly strengthens the torsion calculation to finite flat local finite presentation via existing descent lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme which becomes diagonalizable after a faithfully flat quasi compact covering is etale locally diagonalizable and splits over a strictly henselian local base",
+   "results": "{\"t\": \"2026-10-24T10:01:12Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme which becomes diagonalizable after a faithfully flat quasi compact covering is etale locally diagonalizable and splits over a strictly henselian local base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"583f003dc5b96aca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, Algebra.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.formallyEtale concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc local diagonalizability of an affine finitely presented flat group scheme implies fppf local diagonalizability",
+   "results": "{\"t\": \"2026-10-24T10:04:06Z\", \"tool\": \"leanfinder\", \"query\": \"Fpqc local diagonalizability of an affine finitely presented flat group scheme implies fppf local diagonalizability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\"], \"digest\": \"a39a3fe5baa0b8de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicative type affine group schemes descend for the fpqc topology and split etale locally",
+   "results": "{\"t\": \"2026-10-24T10:01:11Z\", \"tool\": \"leansearch\", \"query\": \"Multiplicative type affine group schemes descend for the fpqc topology and split etale locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"544d50bdb243bf55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.AffineZariskiSite, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"descent\"",
+   "results": "{\"t\": \"2026-10-24T10:01:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T10:01:10Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonalizable\"",
+   "results": "{\"t\": \"2026-10-24T10:04:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonalizable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T11:17:38Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Groups of multiplicative type descend along fpqc covers of schemes",
+   "results": "{\"t\": \"2026-10-24T11:17:38Z\", \"tool\": \"leansearch\", \"query\": \"Groups of multiplicative type descend along fpqc covers of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsTopologicalGroupMultiplicativeOfIsTopologicalAddGroup\", \"instFiniteMultiplicative\", \"instTopologicalSpaceMultiplicative\", \"MulAutMultiplicative\", \"AddGrpCat.toGrp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"Multiplicative.fintype\", \"Multiplicative.commGroup\"], \"digest\": \"a40a4b5464bd0115\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; these concern ordinary affine schemes, morphism properties and type tags, not diagonalizable group schemes or a multiplicative-type fibral criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"descent\"",
+   "results": "{\"t\": \"2026-10-24T11:17:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine flat finitely presented group scheme which is fpqc locally diagonalizable is fppf locally diagonalizable",
+   "results": "{\"t\": \"2026-10-24T11:17:40Z\", \"tool\": \"leanfinder\", \"query\": \"An affine flat finitely presented group scheme which is fpqc locally diagonalizable is fppf locally diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\"], \"digest\": \"29a5d724abfb2e55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; these concern ordinary affine schemes, morphism properties and type tags, not diagonalizable group schemes or a multiplicative-type fibral criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|IsDiagonalizable|torsion.*(rank|order)|(rank|order).*torsion",
+   "results": "{\"t\": \"2026-10-24T11:19:48Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|IsDiagonalizable|torsion.*(rank|order)|(rank|order).*torsion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine group scheme is fppf locally diagonalizable if its geometric fibres are diagonalizable and torsion orders are locally constant",
+   "results": "{\"t\": \"2026-10-24T11:19:48Z\", \"tool\": \"leansearch\", \"query\": \"An affine group scheme is fppf locally diagonalizable if its geometric fibres are diagonalizable and torsion orders are locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff'\", \"AlgebraicGeometry.affineLocally\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\"], \"digest\": \"7cc09a790732db03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; these concern ordinary affine schemes, morphism properties and type tags, not diagonalizable group schemes or a multiplicative-type fibral criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonalizable\"",
+   "results": "{\"t\": \"2026-10-24T11:19:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonalizable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibral criterion for an affine flat finitely presented group scheme to be of multiplicative type: diagonalizable geometric fibres and locally constant orders of n torsion",
+   "results": "{\"t\": \"2026-10-24T11:19:50Z\", \"tool\": \"leanfinder\", \"query\": \"Fibral criterion for an affine flat finitely presented group scheme to be of multiplicative type: diagonalizable geometric fibres and locally constant orders of n torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"ba2c88384e8d3925\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; these concern ordinary affine schemes, morphism properties and type tags, not diagonalizable group schemes or a multiplicative-type fibral criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine group scheme of finite presentation with diagonalizable geometric fibers and constant sizes of all torsion subgroups is locally a group algebra spectrum for the flat topology",
+   "results": "{\"t\": \"2026-10-24T11:20:50Z\", \"tool\": \"leanfinder\", \"query\": \"A flat affine group scheme of finite presentation with diagonalizable geometric fibers and constant sizes of all torsion subgroups is locally a group algebra spectrum for the flat topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace\"], \"digest\": \"6d430135010b8074\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; these concern ordinary affine schemes, morphism properties and type tags, not diagonalizable group schemes or a multiplicative-type fibral criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-commutative-multiplicative-extension",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Corollary B.4.2(1), printed pp.299-300; this is descent for fpqc-local forms, not assertion (2) concerning extensions.",
+   "via": [
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-type-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Retained the statement; supplied the power-fibre construction, diagonalizable torsion calculation, two successive fpqc descents, rank local constancy, geometric-point lifts and final application of one new fibral criterion. No SGA source is used.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), proper/direct-image finiteness input; the inherited supporting branch reaches Conrad Corollary B.4.2(1). Its criterion is realized by steps 1-6. blueprint_refs ancestor returns None for this inherited created-node chain; the existing null ancestor and complete via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic affine finite-free-algebra spectrum tool in step 2; the structural group argument still follows the item route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic descent of finiteness, applied twice to the torsion power fibre in step 3."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Generic descent of flatness, applied twice to the torsion power fibre in step 3."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Generic descent of local finite presentation, applied twice to the torsion power fibre in step 3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-b1bc041d9",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-b1bc041d9 (reviewer sub-agent of L); spot-checked: I read Conrad's Reductive group schemes online; it is not under literature/. The item is Cor B.4.2(1) (pp.299-300): an fppf affine group that is fpqc-locally of multiplicative type is of multiplicative type. The new node lem-sfb-multiplicative-type-fibral-criterion is the sufficiency half of Thm B.4.1 (p.297). Its hypotheses: G affine, flat and finitely presented; for each point, G becomes diagonalizable over some algebraically closed extension, which need not be algebraic (allowed by the opening of B.4); each torsion fibre G_s[n] is finite and its order d_n is locally constant. Neither the node nor the source assumes G is commutative, and G_s[n] is taken as the scheme fibre of the power map. Small cases checked: mu_p in char p, constant Z/p over Z_p (fails the fibre condition), and Conrad's DVR example (fibres fine, orders jump, so it fails). The node does not duplicate B.3.2, B.4.2(2) or the field-only definition node, and it does not restate the item. Steps 1-6 check out. (1) Fibre-product pasting identifies P_n with each fibre's n-torsion, and p_n^*e_m=e_{nm}. (2) Character duality with u=n gives D(M/nM) on nonempty affine opens, finite free by Stacks 02KB. (3) An fppf cover is fpqc (Stacks 022C); descent of finite, flat and lfp (02LA, 02L2, 02KY) is applied first along the splitting cover, then along {S_i->S}. (4) The rank node (04MH) makes d_n locally constant. (5) Joint surjectivity plus an algebraic closure of kappa(u) gives the geometric splitting. (6) The criterion applies. The item statement is unchanged and not weakened. Batch-5 check: lem-trf-fppf-covering-is-fpqc is the general topology fact Stacks 022C, not part of the trace formula or Poincare duality or their proofs. Character duality reaches the trace-formula chapter only through that same lemma. Both citations accepted. Accepted tool_uses: finite-free spectrum and the three fpqc descents. No fixes."
+ }
+}

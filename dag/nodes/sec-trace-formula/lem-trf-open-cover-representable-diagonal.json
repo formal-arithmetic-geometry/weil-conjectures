@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-open-cover-representable-diagonal",
+ "kind": "statement",
+ "title": "Representable diagonals descend along a locally covering open family",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with its big fppf site [def-pc-fppf-site] and size convention [def-weil-size-convention]. Let $F$ be a sheaf of sets and let $(F_i\\subseteq F)_{i\\in I}$ be a small family of subsheaves [def-weil-pbc-sites-and-cohomology, def-pc-subfunctor]. Write $h_T(W)=\\operatorname{Mor}_S(W,T)$ for schemes over $S$. Suppose each inclusion $F_i\\to F$ is representable by open immersions [def-trf-algebraic-space, def-weil-open-immersion]. Suppose each diagonal $F_i\\to F_i\\times F_i$ is representable, meaning that $h_T\\times_{F_i}h_{T'}$ is represented by a scheme for every pair of schemes with maps to $F_i$. Assume the family fppf locally covers $F$: for every scheme $T$ and section $a\\in F(T)$, there is an fppf covering $\\{T_\\alpha\\to T\\}$ and indices $i(\\alpha)\\in I$ for which $a|_{T_\\alpha}$ belongs to $F_{i(\\alpha)}(T_\\alpha)$. Then for every $h_T\\to F$, the open subschemes $V_i\\subseteq T$ representing $h_T\\times_FF_i$ cover $T$. For every pair $h_T\\to F$, $h_{T'}\\to F$, put $G=h_T\\times_Fh_{T'}$ and $G_i=G\\times_FF_i$. Each $G_i$ is represented by a scheme, and each inclusion $G_i\\to G$ is representable by open immersions; on every scheme test of $G$ these opens cover that scheme. The functor $G$ is represented by a scheme over $S$. Consequently the diagonal $F\\to F\\times F$ is representable. No scheme atlas of any $F_i$ and no algebraicity hypothesis on a sheaf coproduct is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, local lifts imply $T=\\bigcup V_i$, and second paragraph, $G_i=V_i\\times_{F_i}V'_i$ and gluing $G$ by Schemes Tag 01JJ; returned proof steps 3 and 5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-subfunctor",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-pc-open-subfunctor",
+  "def-pc-representable-functor",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a:h_T\\to F$ and let $V_i\\subseteq T$ represent $h_T\\times_FF_i$. By [def-pc-open-subfunctor], a morphism $b:W\\to T$ factors through $V_i$ precisely when $b^*a\\in F_i(W)$. Choose the fppf covering $\\{T_\\alpha\\to T\\}$ and indices $i(\\alpha)$ in the hypothesis. Every $T_\\alpha\\to T$ therefore factors through $V_{i(\\alpha)}$. An fppf covering is jointly surjective by [def-pc-fppf-site]: for every point $t\\in T$ choose a point above it in some $T_\\alpha$; its image lies in $V_{i(\\alpha)}$. Thus $T=\\bigcup_i V_i$. The same argument applies to every scheme and every section of $F$, including $T'$ and its opens $V'_i$.",
+   "uses": [
+    "def-pc-open-subfunctor",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first and second paragraphs of proof"
+   }
+  },
+  {
+   "text": "For fixed maps $h_T\\to F$ and $h_{T'}\\to F$, write $a,b$ for their sections and define $G(W)=\\{(u,v):u:W\\to T,\\ v:W\\to T',\\ u^*a=v^*b\\}$. The subfunctor $G_i$ consists of such pairs whose common value lies in $F_i(W)$. The representing property of $V_i$ and $V'_i$ says exactly that $u$ and $v$ then factor uniquely through these two opens. The resulting sections in $F_i(W)$ agree: they have equal images in $F(W)$, and $F_i(W)\\subseteq F(W)$ is an inclusion. Conversely, a pair of maps to $V_i,V'_i$ with equal images in $F_i(W)$ gives a pair in $G_i(W)$. These mutually inverse descriptions commute with every restriction $W_1\\to W$, since they keep the two maps and their common value. Hence $G_i\\cong h_{V_i}\\times_{F_i}h_{V'_i}$. The assumed representability of the diagonal of $F_i$, in its stated pair-of-schemes form, gives a scheme representing this functor; this proves representability of every $G_i$.",
+   "uses": [
+    "def-pc-open-subfunctor",
+    "def-pc-subfunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first and second paragraphs of proof"
+   }
+  },
+  {
+   "text": "Let $h_W\\to G$ be any scheme test, given by $(u,v)\\in G(W)$, and put $c=u^*a=v^*b\\in F(W)$. A morphism $r:Z\\to W$ belongs to $h_W\\times_G G_i$ precisely when $r^*c\\in F_i(Z)$. By [def-pc-open-subfunctor] this is equivalent to factoring through the open $O_i\\subseteq W$ representing $h_W\\times_FF_i$ along $c$. Thus $h_W\\times_GG_i\\cong h_{O_i}$ over $h_W$, so $G_i\\to G$ is representable by open immersions. Step 1 applied to $(W,c)$ gives $W=\\bigcup_iO_i$; the universal section on each $O_i$ lies in $G_i(O_i)$. This proves the required covering property on every scheme test, not only on $T$ or on the representatives of the $G_i$.",
+   "uses": [
+    "def-pc-open-subfunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first and second paragraphs of proof"
+   }
+  },
+  {
+   "text": "The Zariski topology on schemes over S is subcanonical (Mathlib Scheme.subcanonical_zariskiTopology and GrothendieckTopology.subcanonical_over), hence h_T and h_T' are Zariski sheaves. The fppf sheaf F is a Zariski sheaf by [lem-pc-zariski-coverings-are-fppf] and monotonicity of the sheaf condition [def-weil-pbc-sites-and-cohomology]. The presheaf pullback G is a Zariski sheaf because limits of sheaves are sheaves (Sheaf.Limits.isSheaf_of_isLimit / ObjectProperty.prop_of_isLimit). This packages coordinatewise gluing and separatedness in the existing Mathlib limit theorem.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), application of Schemes Tag 01JJ: verification of the Zariski sheaf hypothesis; Topologies Tag 021N (lemma-zariski-etale-smooth-syntomic-fppf)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-schemes-criterion] to $G$ on schemes over $S$ and its small family of subfunctors $(G_i)_{i\\in I}$. Its four hypotheses have now been verified: the Zariski sheaf property is Step 4; representability of each $G_i$ is Step 2; representability of each inclusion by open immersions and the covering condition are Step 3. Consequently $G=h_T\\times_Fh_{T'}$ is represented by a scheme over $S$. The index set is the original small $I$; the construction introduces no atlas of an $F_i$ and no sheaf coproduct.",
+   "uses": [
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), statement; applied in spaces.tex Tag 02WR, second paragraph"
+   }
+  },
+  {
+   "text": "Finally test $\\Delta_F:F\\to F\\times F$ against any $h_W\\to F\\times F$, corresponding to $x,y\\in F(W)$. By Step 5 choose a scheme $R$ representing $h_W\\times_{x,F,y}h_W$. Its two projections give a scheme morphism $R\\to W\\times_SW$. Form $E=R\\times_{W\\times_SW}W$, where the second map is the scheme diagonal; both products exist by [def-pc-fibre-product]. For every $Z/S$, its universal property identifies maps $Z\\to E$ with a single map $r:Z\\to W$ such that $r^*x=r^*y$: the two maps to $W$ arising from $R$ must both equal $r$. This description is natural in $Z$ and is exactly $(h_W\\times_{F\\times F}F)(Z)$. Thus $E$ represents this diagonal test and $\\Delta_F$ is representable as defined in [def-trf-algebraic-space]. In Lean this standard construction is supplied by Mathlib Functor.relativelyRepresentable.diag_of_map_from_obj: the representation of every pairwise pullback supplies its relatively representable maps, then the criterion gives the diagonal. Its existential witnesses are exactly those in def-trf-algebraic-space, with the trivial property.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "lemma-representable-diagonal, equivalence (3) implies (1), explicit diagonal-test pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-subfunctor",
+  "def-pc-fppf-site",
+  "def-pc-subfunctor",
+  "lem-pc-zariski-coverings-are-fppf",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-schemes-criterion",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K6",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR, first two proof paragraphs; existing Mathlib sheaf-limit and diagonal criteria package steps 4 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf has representable diagonal if it is covered by representable open subfunctors with representable diagonals",
+   "results": "CategoryTheory.Sheaf.isSheaf_of_isRepresentable; CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; CategoryTheory.coherentTopology.isSheaf_yoneda_obj; CategoryTheory.coherentTopology.subcanonical; CategoryTheory.Presieve.isSheafFor_arrows_iff_pullbacks; CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]iagonal|[Rr]epresentable|[Gg]lue",
+   "results": "8; 19; 20; 23; 27",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable diagonal of a sheaf is local on an open cover by subfunctors",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal; CategoryTheory.Functor.relativelyRepresentable.diag_iff; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover; AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source; CategoryTheory.Sheaf.isSheaf_of_isRepresentable; CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing scheme representations of a fibre product of two scheme maps into a sheaf along a covering by open subfunctors with representable diagonals",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'; AlgebraicGeometry.Scheme.Pullback.gluing_V; AlgebraicGeometry.Scheme.Pullback.gluing; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.Pullback.gluing_U; AlgebraicGeometry.Scheme.Cover.gluedCover_V; AlgebraicGeometry.Scheme.Pullback.gluing_f",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme local representability requires constructing the representable open cover of the fibre-product functor; generic diagonal representability equivalences do not supply this local-cover argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the local scheme representability criterion is an input, and generic diagonal tests do not prove the local covering and fibre-product assertions of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets has representable diagonal if an fppf locally covering family of open subfunctors has representable diagonals",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.diag_iff; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; CategoryTheory.Functor.relativelyRepresentable.of_diag; CategoryTheory.Sheaf.isSheaf_of_isRepresentable; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover; CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable",
+   "date": "2026-10-22",
+   "verdict": "no match: the local scheme representability criterion is an input, and generic diagonal tests do not prove the local covering and fibre-product assertions of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "diag_iff|theorem isRepresentable|representable.*diagonal",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Representability.lean (Mathlib/AlgebraicGeometry/Sites/Representability.lean:210)",
+   "date": "2026-10-22",
+   "verdict": "no match: the local scheme representability criterion is an input, and generic diagonal tests do not prove the local covering and fibre-product assertions of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a sheaf covered by relatively representable open subfunctors with representable diagonals is representable",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj; CategoryTheory.Functor.relativelyRepresentable.diag_iff; CategoryTheory.Functor.relativelyRepresentable.of_diag; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover; CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable",
+   "date": "2026-10-22",
+   "verdict": "no match: the local scheme representability criterion is an input, and generic diagonal tests do not prove the local covering and fibre-product assertions of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing the scheme fibre products of two maps to a sheaf along an open cover proves representability of its diagonal",
+   "results": "AlgebraicGeometry.Scheme.Pullback.gluing; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V; AlgebraicGeometry.Scheme.Pullback.gluedIsLimit; AlgebraicGeometry.Scheme.Pullback.diagonalCover; AlgebraicGeometry.Scheme.Pullback.diagonalCover_map; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.Pullback.gluing_U; AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange",
+   "date": "2026-10-22",
+   "verdict": "no match: the local scheme representability criterion is an input, and generic diagonal tests do not prove the local covering and fibre-product assertions of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-open-gluing",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "first paragraph, local lifts imply $T=\\bigcup V_i$, and second paragraph, $G_i=V_i\\times_{F_i}V'_i$ and gluing $G$ by Schemes Tag 01JJ; returned proof steps 3 and 5",
+   "via": [
+    "lem-trf-algebraic-space-open-gluing",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-open-cover-representable-diagonal",
+  "worker": "stage1",
+  "summary": "Expanded the first two paragraphs of Stacks 02WR without algebraic-space atlases or a sheaf-coproduct assumption. Local fppf lifts force an open cover on every scheme test; explicit pairs identify each local fibre product; Zariski gluing then represents the global fibre product. Reused the existing 01JJ criterion and covering/morphism-gluing nodes. No new nodes or statement changes.",
+  "blueprint": "Supports the historical lem-trf-local-term-locality ancestor through its existing polarized/log descent chain: the first and second paragraphs of Stacks 02WR used by lem-trf-algebraic-space-open-gluing, specifically its returned steps 3 and 5. No change to the unit or the current blueprint contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic Zariski representability criterion 01JJ applied to the explicitly constructed G_i; no such criterion in the item unit."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Generic comparison of covering families needed to use the fppf sheaf uniqueness axiom on a Zariski cover."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of maps to a scheme proves the Zariski sheaf property of the two coordinates of G."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-schemes-criterion",
+  "lem-pc-zariski-coverings-are-fppf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-0be260d8d",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-0be260d8d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 proof steps in full, every cited node's statement, and the sources: Stacks 02WR (spaces.tex l.1082, whole proof) and Schemes 01JI(3),(4) and 01JJ. This is a first split; the 2026-10-21 re-split note is on the parent lem-trf-algebraic-space-open-gluing, whose re-split created this item. The item is not on any route-pivot drop list and is still unsplit in live. Statement unchanged; stmt_deps gains the open-subfunctor, representable-functor and fibre-product definition nodes; no new nodes. The item faithfully extracts 02WR paragraphs 1-2: pair-form diagonal of F_i and fppf-local covering replace F_i algebraic, at full strength. Step 1: V_i has the 01JI (*) property, lifts factor through V_{i(a)}, joint surjectivity from def-pc-fppf-site gives T = union of V_i. Step 2: G_i = h_{V_i} x_{F_i} h_{V'_i} via injectivity F_i(W) into F(W), then the pair hypothesis. Step 3: open G_i in G and the 01JI(4) cover on every test (W,c). Step 4: Zariski sheaf via morphism gluing, Zariski coverings are fppf, and equalizer uniqueness. Step 5: 01JJ over Sch/S with the small set I. Step 6: E = R x_{W x_S W, diagonal} W represents h_W x_{FxF} F, with the correct bases. Edge cases checked: empty I, empty T, disjoint F_i, non-affine and non-reduced schemes. No duplicates: the coproduct-base-change, fppf-local-open-descent and 03FY nodes are different statements. Tool uses accepted: lem-pc-schemes-criterion, Zariski coverings are fppf, morphism gluing. Advisory: (a) the blueprint_update of lem-pc-schemes-criterion is the absolute version, so the over-S passage would be needed if it is applied; (b) parent step 2 takes the pair-form diagonal from def-trf-algebraic-space without the standard diagonal-to-pair conversion (spaces.tex l.705)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverRepresentableDiagonal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.open_cover_representable_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverRepresentableDiagonal.lean",
+  "statement": "theorem open_cover_representable_diagonal {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (I : Type u) (H : I → Subfunctor F.obj) (hH : ∀ i : I, Presheaf.IsSheaf (Scheme.fppfTopology.over S) (H i).toFunctor) (hopen : ∀ i : I, IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (H i).ι) (hdiag : ∀ (i : I) (T T' : Over S) (a : yoneda.obj T ⟶ (H i).toFunctor) (b : yoneda.obj T' ⟶ (H i).toFunctor), (Limits.pullback a b).IsRepresentable) (hlocal : ∀ (T : Over S) (a : F.obj.obj (op T)), ∃ (𝒰 : Scheme.Cover.{u} Scheme.fppfPrecoverage T.left) (k : 𝒰.I₀ → I), ∀ j : 𝒰.I₀, F.obj.map (Over.homMk (𝒰.f j) rfl : Over.mk (𝒰.f j ≫ T.hom) ⟶ T).op a ∈ (H (k j)).obj (op (Over.mk (𝒰.f j ≫ T.hom)))) : (∀ (T : Over S) (a : F.obj.obj (op T)) (V : I → T.left.Opens), (∀ (i : I) (W : Over S) (f : W ⟶ T), F.obj.map f.op a ∈ (H i).obj (op W) ↔ Set.range f.left ⊆ V i) → (⨆ i : I, V i) = ⊤) ∧ (∀ (T T' : Over S) (a : yoneda.obj T ⟶ F.obj) (b : yoneda.obj T' ⟶ F.obj), (∀ i : I, ((H i).preimage (Limits.pullback.fst a b ≫ a)).toFunctor.IsRepresentable) ∧ (∀ i : I, IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) ((H i).preimage (Limits.pullback.fst a b ≫ a)).ι) ∧ (∀ (W : Over S) (c : (Limits.pullback a b).obj (op W)) (V : I → W.left.Opens), (∀ (i : I) (Z : Over S) (f : Z ⟶ W), (Limits.pullback a b).map f.op c ∈ ((H i).preimage (Limits.pullback.fst a b ≫ a)).obj (op Z) ↔ Set.range f.left ⊆ V i) → (⨆ i : I, V i) = ⊤) ∧ (Limits.pullback a b).IsRepresentable) ∧ IsRepresentable (prod.lift (𝟙 F.obj) (𝟙 F.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fc7e67e9",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; lean.statement verbatim; module/declaration new, item not landed elsewhere. Clause-by-clause: S/F on fppfTopology.over S; I:Type u = small family (matches 01JJ criterion ι:Type u); H subfunctors + hH sheaf; hopen = def-trf IsRepresentableWith IsOpenImmersion p.left as node cites; hdiag = node's pair-form diagonal; hlocal Scheme.Cover.{u} fppfPrecoverage with over-S members (Type-u index harmless by refinement). Conclusions: V_i characterised by 01JI range criterion (unique, exist by hopen) cover T; G=Limits.pullback a b, G_i=(H i).preimage(fst≫a)=G×_F F_i; G_i representable, open in G, covering on every test (W,c); G representable; IsRepresentable(prod.lift 𝟙 𝟙) = IsAlgebraicSpace diagonal clause. Steps 1-6 match 02WR; edge cases empty I/T, a=b, nonreduced checked; no atlas/coproduct. Docstrings with source+blueprint, sorry only, no defs, report sections present. Advisory: proof-only plain import Mathlib.AlgebraicGeometry.Gluing; parent algebraicSpace_of_open_gluing has I:Type w — its stage-3 proof must restrict to the small subfamily meeting the coproduct atlas. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261023T123824-L-1260190",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

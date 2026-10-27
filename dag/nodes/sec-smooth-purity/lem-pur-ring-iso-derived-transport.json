@@ -1,0 +1,230 @@
+{
+ "id": "lem-pur-ring-iso-derived-transport",
+ "kind": "statement",
+ "title": "Normalized derived coefficient transport along a ring-sheaf isomorphism",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe [def-weil-pbc-sites-and-cohomology], and let $\\alpha:R\\xrightarrow{\\sim}S$ be an isomorphism of sheaves of commutative rings on it. Use module sheaves [def-weil-sheaf-of-modules-category], restriction of scalars [def-pc-sheaf-restrict-scalars], cochain complexes, and their ordinary unbounded derived categories [def-weil-abstract-derived-category]. Put $T_\\alpha=(\\alpha^{-1})_*:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$; on sections the $S$-action is $s\\cdot m=\\alpha^{-1}(s)m$ and on module morphisms its underlying map is unchanged.\n\nThere is an additive exact equivalence $T_\\alpha$, with inverse $\\alpha_*$, and a triangulated derived equivalence $D(T_\\alpha):D(R)\\simeq D(S)$ with a specified natural isomorphism\n$$Q_R\\,D(T_\\alpha)\\cong\\operatorname{Ch}(T_\\alpha)\\,Q_S.$$\nHere juxtaposition denotes functors in their order of application, $Q$ is localization at quasi-isomorphisms, and $\\operatorname{Ch}$ is termwise application. The displayed isomorphism also identifies the maps of localized chain maps and roofs. For $R\\xrightarrow{\\alpha}S\\xrightarrow{\\beta}T$, the composition comparison $D(T_\\beta)D(T_\\alpha)\\cong D(T_{\\beta\\alpha})$ (composition here in the usual right-to-left order) is the descent of the identity on underlying abelian complexes and satisfies the identity and three-isomorphism cocycle.\n\nUse sheaf tensor [def-pur-sheaf-tensor-product], K-flat complexes [def-pc-kflat-complex], and the K-flat derived tensor of [lem-weil-pbc-site-derived-tensor-descent]. Transport preserves flat modules and K-flat complexes. There are natural comparisons\n$$T_\\alpha M\\otimes_S T_\\alpha N\\cong T_\\alpha(M\\otimes_RN),\\qquad T_\\alpha R\\cong S,$$\nwith maps $m\\otimes n\\mapsto m\\otimes n$ and $r\\mapsto\\alpha(r)$. They descend to derived tensor products and identify associators, symmetry, units, and the preceding composition comparisons. No boundedness or constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "def-pur-section-invariant, finite-clopen expansion: transport from the restricted coefficient ring to the published component ring, retained steps 1-2 and restriction-identification part of step 5; agent coefficient-transport lemma. Stacks Tag 03D7, sites-modules-lemma-adjoint-pullback-pushforward-modules; Tag 015F, derived-lemma-right-derived-exact-functor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-flat-sheaf-modules",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous symmetric tensor localizations whose tensor bifunctors are literally the published K-flat tensor, by [lem-pur-u2-published-derived-tensor]. This constructs actual monoidal data by transport of the native tensor and uses rigidity only for its determined comparison.",
+   "uses": [
+    "lem-pur-u2-published-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each ring isomorphism choose the existing normalized ordinary inverse-restriction transport from [lem-sfb-ring-isomorphism-tensor-transport]. The exact derived functor is an equivalence by Mathlib. For the chosen tensor localizations, [lem-pur-u2-normalized-braided-derived] gives the normalized braided derived structure and monoidality of the canonical factorization.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-pur-u2-normalized-braided-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the identity-on-sections chain comparisons and exact derived unit/compositor of [lem-pur-u2-restriction-comparisons]. Their component formulas are precisely the required localization and chain specifications.",
+   "uses": [
+    "lem-pur-u2-restriction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source exact-derived compositor unit and cocycle laws specialize to inverse coefficient restriction by [lem-pur-u2-derived-restriction-cocycle]. The ordinary comparisons are identity on sections, and the displayed reassociation is identity.",
+   "uses": [
+    "lem-pur-u2-derived-restriction-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary pure-tensor and unit equations lift to total cochain complexes, and normalized factorization pastings descend their monoidality to all derived objects by [lem-pur-u2-derived-restriction-monoidal]. K-flat models and invertibility of localization tensorators give reflection of the tensor equation. Assemble the data and six named specifications without changing their statements.",
+   "uses": [
+    "lem-pur-u2-derived-restriction-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-u2-published-derived-tensor",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-pur-u2-normalized-braided-derived",
+  "lem-pur-u2-restriction-comparisons",
+  "lem-pur-u2-derived-restriction-cocycle",
+  "lem-pur-u2-derived-restriction-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/categories.tex",
+  "place": "U2, 2026-10-24: native symmetric tensor transported onto the published K-flat bifunctor; normalized braided localization; source exact-derived compositor cocycle; monoidal factorization pasting and reflection on K-flat models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of sheaves of rings induces an exact restriction of scalars equivalence on module sheaves and a tensor compatible equivalence on unbounded derived categories normalized by the localization functor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (e : C ≌ D) →\\n              (A : Type u₃\", \"doc\": \"A natural isomorphism between the composition of functors $\\\\text{Sh}(\\\\mathcal{C}, J, \\\\mathcal{A}) \\\\xrightarrow{\\\\simeq} \\\\text{Sh}(\\\\mathcal{D}, K, \\\\mathcal{A}) \\\\xrightarrow{\\\\iota} \\\\text{PSh}(\\\\mathcal{D}\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} (c : ComplexShape ι)\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"The composite of the induced functor on homological complexes from a zero-preserving functor $ F $ and the localization functor $ Q $ at quasi-isomorphisms inverts quasi-isomorphisms, meaning that eve\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') : CategoryTheory.Functor (SheafOfModules R') (SheafOfModules R)\", \"doc\": \"The restriction of scalars functor `SheafOfModules R' ⥤ SheafOfModules R`\\ninduced by a morphism of sheaves of rings `R ⟶ R'`.\"}\n  {\"name\": \"SheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') : (SheafOfModules.restrictScalars α).Additive\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.restrictScalars_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') (M' : SheafOfModules R') : ((SheafOfModules.restrictScalars α).obj M').val = (PresheafOfModules.restrictScalars α.hom).obj M'.val\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.restrictScalars_map_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') {X✝ Y✝ : SheafOfModules R'} (φ : X✝ ⟶ Y✝) : ((SheafOfModules.restrictScalars α).map φ).val = (PresheafOfModules.restrictScalars α.hom).map φ.val\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Equivalence|equivalence|Iso)|mapDerivedCategoryFactors",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"line\": \"24\", \"text\": \"* `RestrictScalars.addEquiv : RestrictScalars R S M ≃+ M`: the additive equivalence\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"line\": \"27\", \"text\": \"* `RestrictScalars.ringEquiv : RestrictScalars R S A ≃+* A`: the ring equivalence\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"line\": \"52\", \"text\": \"synonym `RestrictScalars` is essentially this equivalence.\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"line\": \"161\", \"text\": \"/-- `RestrictScalars.addEquiv` is the additive equivalence with the original module. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"544\", \"text\": \"      sheafCompose _ (ModuleCat.restrictScalars (Scheme.ΓSpecIso R).inv.hom) ≅\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"545\", \"text\": \"    sheafCompose _ (ModuleCat.restrictScalars (Scheme.ΓSpecIso S).inv.hom) ⋙\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"551\", \"text\": \"        (ModuleCat.restrictScalarsComp φ.hom ((Scheme.ΓSpecIso S).inv).hom).app _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"46\", \"text\": \"  sheafCompose _ (ModuleCat.restrictScalars (Scheme.ΓSpecIso R).inv.hom)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"47\", \"text\": \"lemma mapDerivedCategoryFactors_hom_naturality {X Y : CochainComplex C₁ ℤ} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"48\", \"text\": \"    F.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫ F.mapDerivedCategoryFactors.hom.app Y =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"49\", \"text\": \"      F.mapDerivedCategoryFactors.hom.app X ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"51\", \"text\": \"  F.mapDerivedCategoryFactors.hom.naturality f\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"69\", \"text\": \"    descShortComplex_triangleOfSESδ, F.mapDerivedCategoryFactors_hom_naturality_assoc,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"75\", \"text\": \"    ← F.mapDerivedCategoryFactors_hom_naturality_assoc, Functor.map_comp]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"96\", \"text\": \"    Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app_assoc,\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Module.lean\", \"line\": \"330\", \"text\": \"    (map S l).restrictScalars R = (IsLocalizedModule.iso S g₂).symm ∘ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"210\", \"text\": \"    (LocalizedModule.equivTensorProduct S M).symm.restrictScalars R ≪≫ₗ IsLocalizedModule.iso S f\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean\", \"line\": \"71\", \"text\": \"    restrictScalars.{v} α ⋙ toPresheaf R ≅ toPresheaf R' := Iso.refl _\"}\n  {\"file\": \"Mathlib/RingTheory/Morita/Basic.lean\", \"line\": \"115\", \"text\": \"  eqv := ModuleCat.restrictScalarsEquivalenceOfRingEquiv f.symm.toRingEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Morita/Basic.lean\", \"line\": \"116\", \"text\": \"  linear := ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear f.symm\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"112\", \"text\": \"    (restrictScalars f).ReflectsIsomorphisms :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"113\", \"text\": \"  have : (restrictScalars f ⋙ CategoryTheory.forget (ModuleCat R)).ReflectsIsomorphisms :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A change of coefficient ring by an isomorphism of ring sheaves gives inverse tensor functors on complexes compatible with quasi isomorphism localization and composition of ring isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} (c : ComplexShape ι)\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"The composite of the induced functor on homological complexes from a zero-preserving functor $ F $ and the localization functor $ Q $ at quasi-isomorphisms inverts quasi-isomorphisms, meaning that eve\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the composition of the quotient functor from the category of chain com\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the lifting condition ensures that the induced functor between deriv\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) {ι : Type u_3} {c : ComplexShape ι}\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryT\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs a morphism between the localizers of quasi-isomorphi\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.homologyFunctorFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasL\", \"doc\": \"For each index $i$, the composition of the localization functor $Q$ (inverting quasi-isomorphisms) with the homology functor on the derived category is naturally isomorphic to the original homology fu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived categories of sheaves of modules over isomorphic sheaves of rings are equivalent compatibly with tensor and the localization from cochain complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": CochainComplex C ℤ ⥤ DerivedCategory C\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n  {\"name\": \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : Ring R] → [inst_1 : Ring S] → R ≃+* S → (ModuleCat S ≌ ModuleCat R)\", \"doc\": \"Given rings $ R $ and $ S $ with a ring equivalence $ e : R ≃+* S $, the restriction of scalars functors $ \\\\text{ModuleCat}.restrictScalars(e) : \\\\text{ModuleCat}(S) \\\\to \\\\text{ModuleCat}(R) $ and $ \\\\te\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence induced by isomorphic sheaves of rings preserves K-flat tensor products with coherent normalized derived localization",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a sheaf ring isomorphism induces a symmetric monoidal equivalence of unbounded derived categories",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalars\", \"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive\", \"RestrictScalars.addEquiv\", \"ModuleCat.restrictScalarsCongr_symm\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal restriction of scalars for module sheaves over isomorphic ring sheaves and functorial derived equivalence",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars_obj_val\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"SheafOfModules.restrictScalars\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"SheafOfModules.restrictScalars_map_val\", \"CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp\", \"LightCondensed.instSymmetricCategoryLightCondMod\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-clopen-derived-decomposition",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "def-pur-section-invariant, finite-clopen expansion: transport from the restricted coefficient ring to the published component ring, retained steps 1-2 and restriction-identification part of step 5; agent coefficient-transport lemma. Stacks Tag 03D7, sites-modules-lemma-adjoint-pullback-pushforward-modules; Tag 015F, derived-lemma-right-derived-exact-functor.",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ring-iso-derived-transport",
+  "worker": "stage1",
+  "summary": "Reused the existing inverse-direction ring-isomorphism tensor theorem; constructed the specified exact derived factorization, inverse, identity and composition cocycle by localization, and checked tensor compatibility of the compositor on resolving pairs. No new nodes and no statement change.",
+  "blueprint": "def-pur-section-invariant, definition C(g,s)=Ls*Rg!Lambda and final invertibility assertion: auxiliary finite-clopen coefficient identifications, retained steps 1-2 and restriction-identification part of step 5 of lem-pur-finite-clopen-derived-decomposition.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ring-isomorphism-tensor-transport",
+    "why": "Generic ring-sheaf isomorphism transport supplies module equivalence, normalized tensor maps and K-flat preservation; the purity unit does not reprove scalar algebra."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic unbounded K-flat tensor descent and faithfulness on resolving pairs justify the specified derived comparisons; no geometric purity result is substituted."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site derived tensor constraints identify associators, units and signed symmetry for the tensor already used; it is a tool, not a replacement purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-c2bb36f94",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-c2bb36f94 (reviewer sub-agent of L); spot-checked: This is a first split of an unsplit statement-only node: no repair note, so the re-split rule does not apply. Live and side-live are both unsplit, so no other group has superseded it. The statement is byte-identical to live. It adds two stmt_deps that the statement uses: def-pc-flat-sheaf-modules and lem-sf-ringed-derived-closed-symmetric-monoidal. There are no new nodes and no cycle. Direction check: T_alpha = Res along alpha^-1, and the transport node with c=alpha^-1 gives C_c=T_alpha, inverse alpha_*, unit map alpha, and a tensor iso that step 1 inverts. Step 2 uses the exact-functor factorization leaf, and the roof formula follows by naturality. Step 3 gets the equivalence from localization clauses (2) and (3) with F1=Q Ch(alpha_* T_alpha) and tau=Q(id). Step 4: delta matches phi2^-1 tau phi1 with u=id, since alpha^-1 beta^-1 = (beta alpha)^-1; the cocycle and identity equations hold after precomposition with Q. Step 5 uses the transport node's coherent derived clause on flat-term K-flat representatives, preserved by step 1, together with the derived-tensor descent node's unique extension and the symmetric-monoidal node's (-1)^pq constraints. Step 6 checks pure tensors through the sheafified balanced universal property, the unit through r->beta(alpha(r)), and the derived level through descent uniqueness and localization (3). Advisory: step 5 leaves two points implicit, the agreement of the descent model with the one-K-flat-factor model and the reduction of associator equality to representatives; both follow from the cited unique-extension clause and essential surjectivity. Sources: Stacks 03D7 and 015F read, 03CZ/06YU/0FPT confirmed in the tag table, blueprint def-pur-section-invariant read, no SGA. Edge cases (alpha=id, nontrivial automorphism, zero ring, empty site, unbounded complexes) all pass. No duplicate found; nodes ruled out include lem-sfb-shriek-coefficient-isomorphism, lem-sf-module-object-ordinary-coefficient-equivalence and def-coef-semilinear-derived-calculus. Accepted tool_uses: the ring-isomorphism tensor transport, site-derived tensor descent and ringed derived symmetric monoidal nodes, all generic. Batch-5 flag: lem-trf-localization-essentially-surjective is a pure category-theory Mathlib leaf (every object of a localization is isomorphic to some Q(X)) and is not part of the trace-formula or Poincaré-duality proofs. It is the only such node in the closure of every cited node, so accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NormalizedRingIsoDerivedTransport",
+  "declaration": "SheafOfModules.normalized_ringIso_derived_transport",
+  "declarations": [
+   "SheafOfModules.NormalizedRingIsoDerivedData",
+   "SheafOfModules.NormalizedRingIsoLocalizationTensorSpec",
+   "SheafOfModules.NormalizedRingIsoChainSpec",
+   "SheafOfModules.NormalizedRingIsoLocalizationSpec",
+   "SheafOfModules.NormalizedRingIsoCocycleSpec",
+   "SheafOfModules.NormalizedRingIsoMonoidalSpec",
+   "SheafOfModules.NormalizedRingIsoNormalizationSpec",
+   "SheafOfModules.normalized_ringIso_derived_transport"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/NormalizedRingIsoDerivedTransport.lean",
+  "statement": "theorem normalized_ringIso_derived_transport {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C) [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [∀ R : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (scalarModules J R)] : ∃ m : ∀ R : Sheaf J CommRingCat.{r}, MonoidalCategory (DerivedCategory (scalarModules J R)), ∃ b : ∀ R : Sheaf J CommRingCat.{r}, @SymmetricCategory (DerivedCategory (scalarModules J R)) _ (m R), ∃ d : @NormalizedRingIsoDerivedData.{u, v, r, w} C _ _ J _ _ _ _ m b, NormalizedRingIsoLocalizationTensorSpec d ∧ NormalizedRingIsoChainSpec d ∧ NormalizedRingIsoLocalizationSpec d ∧ NormalizedRingIsoCocycleSpec d ∧ NormalizedRingIsoMonoidalSpec d ∧ NormalizedRingIsoNormalizationSpec d",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Normalized identity/composition and tensor/unit coherence for inverse-direction scalar restriction; canonical mapDerivedCategory and mapDerivedCategoryFactors are reused. Named predicates factor the same equations to keep elaboration below the per-file limit. No statement or accepted split changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa40c99b3",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Every clause matches the node. Directions are correct (T_a = restrictScalars a.inv; ordinary transport with c = a.symm gives inverse α_*, unit map α, μ fixing pure tensors). Derived functor and Q-comparison are Mathlib's mapDerivedCategory/mapDerivedCategoryFactors. Chain-level identity/composition maps are the identity on sections and their derived versions are pinned by conjugation with the canonical factors; both unit laws and the 3-isomorphism cocycle are stated with eqToIso reassociation. Tensor structures are not hollow: tensor_eq fixes the published K-flat bifunctor, lax braided Q with ε iso and μ iso on K-flat pairs fixes associator/unitors/symmetry, NormalizationSpec pins the braided transport via the ordinary μ/ε, MonoidalSpec makes the comparisons monoidal. Edge cases (α=id, automorphism, zero ring, empty site, unbounded complexes, independent universes) are covered; no extra hypotheses; statement verbatim; docstrings ok; only the theorem is sorry; not recompiled per the 2026-10-21 rule. Advisories: RingIsoTensorTransport owned by a theorem node that is only a proof_dep; stmt_dep lem-sf-ringed-derived-closed-symmetric-monoidal imported but unused (its universe-restricted interface is replaced by an equivalent independent-universe presentation); SiteCoveringAxioms import unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

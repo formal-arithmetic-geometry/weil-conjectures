@@ -1,0 +1,62 @@
+## Worker report
+
+Stage 2: one new module lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceH1AffineBaseChange.lean, one existing node updated in lean and by adding four landed statement dependencies. No new DAG node, dependency repair, statement correction or Mathlib leaf. The accepted five-step stage-1 proof and its review are unchanged.
+
+The module states AlgebraicGeometry.AlgebraicSpace.affine_preserves_qcqs_h1_vanishing and AlgebraicGeometry.AlgebraicSpace.affine_baseChange_global_functions. Both proofs are sorry, as stage 2 requires. There is no new definition and no data selected from a sorry existence theorem.
+
+Hypotheses and objects:
+- X, Y, X' are the existing AlgebraicSpace objects over Spec(ULift Z), the universe-correct model of the absolute base Spec Z. They are not replaced by schemes or by chosen atlases.
+- hqc is CompactSpace (Point X.obj.obj), with the existing point topology. hqs is IsAbsolutelyQuasiSeparated X, the landed affine-test criterion for quasi-compactness of the absolute diagonal.
+- hH quantifies over every F : X.Modules with Mathlib F.IsQuasicoherent. It asserts Subsingleton of Sheaf.H of (SheafOfModules.toSheaf X.structureSheaf).obj F in degree 1. This is additive-sheaf cohomology, not derived evaluation inside quasi-coherent modules and not degree-1 sections at an arbitrary chart. HasSheafify and HasExt are infrastructure parameters for precisely this Mathlib cohomology, not mathematical vanishing hypotheses. HasExt.standard supplies Ext size u+1 for this category; the existing small affine etale basis gives sheafification in section universe u. No coefficient universe is changed.
+- A and B are arbitrary CommRingCat objects in the scheme universe and phi : A -> B is an arbitrary unital ring map. Neither a field nor a nontriviality, flatness, finite-generation or Noetherian condition is imposed.
+- p is an actual map from X to the schemeSpace of Spec A. The natural transformation piA is a cone of ring homomorphisms from A to the actual diagram X.etaleForget.op followed by Scheme.Gamma. hA is its limit universal property. hp says on every etale chart T that its component is GammaSpecIso(A).inv followed by the chart map to Spec A on global functions. Together these express exactly A = Gamma(X,O_X) with p inducing the identity. A is supplied as a representative of that ring, not assumed equal to the ring of functions on any single chart. A cone and its IsLimit witness introduce no extra mathematical assumption beyond this stated definition of A.
+- f and p' form an IsPullback square with p and Yoneda of Spec.map phi. This allows every representative of the fibre product and records both actual projections. The over-base equation is the uniqueness of maps to Spec Z, via specULiftZIsTerminal.hom_ext.
+
+Conclusions, clause by clause:
+- The first theorem returns point-space quasi-compactness of Y, absolute quasi-separatedness of Y, and the same H1 vanishing for every quasi-coherent G on Y. MapIsAffine f is the existing scheme-test affine predicate.
+- The second returns MapIsAffine f, point-space quasi-compactness of X', absolute quasi-separatedness of X', and MapIsQuasiCompact of the relative pullback.diagonal of p'. The last one is over Spec B, not the absolute diagonal.
+- Its final conclusion is a cone piB from B to the actual regular-function diagram of X', a limit witness, and the formula for every projection: GammaSpecIso(B).inv followed by the pullback along the chart's composite with p'. This is the canonical map B -> Gamma(X',O_X') being an isomorphism. It does not assert the existence of an unrelated isomorphism of abstract rings. Equivalently, maps of rings into B are exactly compatible chart functions on X', with that specified unit. This is the universal-property form of the global-functions ring and requires no separate chosen global-sections object.
+
+Recorded dependency interfaces read and used:
+- Sheaf.AlgebraicGeometry.AlgebraicSpace: AlgebraicSpace, EtaleSite, etaleForget, structureSheaf and Modules, from def-trf-algebraic-space.
+- Sheaf.AlgebraicGeometry.AlgebraicSpacePointTopology: Point and pointTopologicalSpace, from def-a1-space-point-topology.
+- Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentModule: the existing slice sheafification instances and Mathlib IsQuasicoherent, from def-trf-space-quasi-coherent-module.
+- Mathlib.CategoryTheory.Sites.SheafCohomology.Basic: Sheaf.H, defined as Ext from the constant additive Z sheaf, and SheafOfModules.toSheaf. The site's definition remains def-weil-pbc-sites-and-cohomology; its recorded SiteCoveringAxioms is already imported publicly through AlgebraicSpace.
+- Mathlib.AlgebraicGeometry.GammaSpecAdjunction: Spec, Spec.map and Scheme.GammaSpecIso for the existing spectrum notion. Mathlib.AlgebraicGeometry.Limits gives specULiftZIsTerminal.
+- Sheaf.AlgebraicGeometry.AlgebraicSpaceAbsoluteQuasiSeparated: IsAbsolutelyQuasiSeparated; this landed definition node is added to stmt_deps.
+- Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineQuasiFinite: MapIsAffine; this landed definition node is added to stmt_deps. pqf-def-affine-morphism itself states the scheme predicate, so its scheme declaration is not incorrectly applied to an algebraic-space arrow.
+- Sheaf.AlgebraicGeometry.ProperCurveModuli: MapIsQuasiCompact for the actual relative diagonal; this landed notion is added to stmt_deps. No theorem about proper curves is invoked.
+- Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite: AlgebraicGeometry.AlgebraicSpace.schemeSpace, the actual represented sheaf, owned by def-trf-scheme-algebraic-space (existing: true). This landed definition node is added to stmt_deps because schemeSpace occurs in the signature. The theorem lem-trf-space-enlarged-etale-ringed-site-model remains in proof_deps for its global-sections comparison; none of its theorem statements is needed in the signatures.
+- The other recorded proof modules with Lean declarations or Mathlib matches are plain imports: AlgebraicSpaceFibreProductsEtaleCovers, Pullbacks, Morphisms.QuasiSeparated, SpaceChartLimitEnlargedSections, Modules.Tilde, ModulePullbackAffineSections, EtaleTensorSectionsSheaf, and SmallEnlargedEtaleModules. Unstated proof dependencies are named in the docstrings and are not restated here. The four added dependency nodes do not depend on this item, checked by following their DAG dependencies.
+
+Sources read: Stacks spaces-cohomology.tex, situation-vanishing (07UY), lemma-vanishing-compute (07UZ) and lemma-vanishing-base-change (07V0), statements and proofs; the latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, particularly (3); the node and chapter/unit records. The module docstrings carry all five accepted argument steps: affine H1 comparison, affine base-change geometry, the chart calculation of the associated module, the general module-sections computation, and the canonical pure-tensor/unit normalization. No source route or statement was changed.
+
+Existing-declaration searches: the project grep for the exact blueprint tag, 07V0, vanishing_base_change and both proposed full-name suffixes in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json had no hits. The msearch.py searches were actually run and their returned hits read:
+- leanfinder: "Affine morphisms of algebraic spaces preserve vanishing H1 for all quasi coherent modules and affine base change over the ring of global functions preserves that ring". Eight scheme-affine morphism/property hits, including instHasAffinePropertyIsAffineHomIsAffine and affineAnd; no algebraic-space cohomology assertion.
+- leanfinder: "A quasi compact quasi separated algebraic space with zero first cohomology for every quasi coherent sheaf remains cohomologically acyclic under an affine morphism". Eight scheme-affine/quasi-affine/limit hits; no match.
+- leansearch: "Cohomologically affine algebraic spaces and arbitrary base change of their ring of global functions". Eight hits, including IsAffine.recOn, isAffineHom_isStableUnderBaseChange, affineAnd_isStableUnderBaseChange and Scheme.Gamma_def. These are statements about schemes and affine-morphism stability, not the required algebraic-space H1/global-ring theorem.
+- loogle: "Sheaf.H". The service returned unknown identifier, so this query is unavailable as a search of that name; it is not evidence of absence. The local Mathlib source for Sheaf.H was read and is used.
+- loogle: "AlgebraicGeometry.IsAffineHom". Twelve scheme-affine definition and permanence hits; their types do not state the item. Morphisms/Affine.lean definition at line 47 and base-change instance at line 172 were read.
+- grep: "cohomologically.affine|vanishing_base_change|affine.*H1|H1.*affine", subdirectory AlgebraicGeometry. Zero Mathlib hits. All queries remain as logged by the search command; no invented search is recorded in the DAG.
+
+Edge cases: for X empty the regular-function cone has zero ring, so hA forces A to represent that zero ring; every unital map then has zero target as appropriate. B=0 gives the empty fibre product and the zero global ring, which the limit-cone conclusion includes. The identity scalar extension, nonflat quotient A -> A/I and infinitely generated polynomial extensions remain in the binders. No Nontrivial, Nonempty, flatness or finiteness assumption excludes them. The full-site global cohomology uses no terminal object of X_et, which need not exist when X is not a scheme.
+
+Validation of the original delivery: the module passed scompile.py without diagnostics beyond the expected sorry warnings. Repair validation is recorded below. The accepted stage-1 fields remain unchanged; only lean and the four added landed definition stmt_deps differ from the current base.
+
+## Review by Q68
+
+This is my own stage-2 self-check. I read the node and both signatures together, checking the absolute base, point topology, absolute versus relative diagonal, all-module H1 quantifier, full-site additive coefficient category, every affine morphism, every ring map, the direction of Spec.map and the pullback-square order. The cone normalization fixes p-sharp and p-prime-sharp on each actual chart. I checked that the IsLimit result therefore states the prescribed ring isomorphism, not merely an additive bijection. I preserved the source's generality and its zero/empty cases. I added the already landed affine and diagonal definitions rather than silently applying a scheme-only predicate to spaces. No statement dispute or missing prerequisite remains.
+
+## Second reading by Q68
+
+No independent second worker was started: this is the direct-delivery dispatch, whose independent reading is performed by the maintainer after delivery. The preceding review is explicitly my own self-check, not an independent review.
+
+## Returned delivery repair (2026-10-23 UTC)
+
+The maintainer returned immutable head 3af2476e46d0 for H2/H4. Its statement dependency lem-trf-space-enlarged-etale-ringed-site-model supplied only the definition schemeSpace, whose landed definition owner is def-trf-scheme-algebraic-space. Replaced precisely that added stmt_dep with def-trf-scheme-algebraic-space and updated lean.note and this report. The enlarged-site theorem remains in the accepted proof_deps and its proof module remains imported. The other three added dependencies remain their proper definition owners. No dependency node is rewritten.
+
+The initial repair sandbox contained only the search log, so the three delivery files were restored from the exact returned server commit before editing. Compared the returned node against the current server main branch: only lean and stmt_deps differed; the accepted statement, proof, proof_deps and all other fields agreed. Both Lean statements, their docstrings and the entire module are byte-for-byte unchanged from the independently checked returned head. The maintainer's clause-by-clause review found both statements correct, including empty spaces and zero rings.
+
+The Second reading section above describes direct dispatch honestly; it is not claimed as an independent worker review. The maintainer performs the independent review after delivery.
+
+Repair validation: scompile.py compiled the unchanged module against the live server build in sandbox mode (17.8 s) and library mode (7.3 s), with no errors or warnings. The saved lean.statement matches the first signature verbatim. A fresh server copy of the returned module was compared byte-for-byte with this delivery.

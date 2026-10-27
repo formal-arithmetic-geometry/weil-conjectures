@@ -1,0 +1,154 @@
+{
+ "id": "lem-pd-section-resolving-oplax-internal-conjugation",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Internal conjugation of resolving constraint edges and units",
+ "statement": "Let Λ be a commutative condensed ring and assume the unbounded derived section-module categories exist for every scheme. For a scheme morphism f:X→Y use the fixed section cochain tensor, transported derived tensor, localization Q, exact section pullback F, derived pullback L and its natural isomorphism ε: Q⋙L ≅ F⋙Q, binary maps s=modelTensor over Y and t=modelTensor over X, ordinary oplax tensor arrow β and scalar unit u, and localized regular-unit isomorphisms eY,eX of [def-pd-section-resolving-oplax-constraint-data]. Let μ be a natural tensor arrow L(M⊗N)→LM⊗LN and let v:LQ(1)→Q(1). Assume SectionHypotheses, namely for every flat-term K-flat pair A,B the equation μ(QA,QB)≫(εA⊗εB)≫t(FA,FB) = L(s(A,B))≫ε(A⊗B)≫Q(β(A,B)), and v=ε(1)≫Q(u). Composition here is in Lean order. Let δ be an internal derived tensor arrow and w an internal regular-unit arrow. Assume Conjugation Λ f μ v δ w: its pair equation is precisely RepresentativeEquations for the fixed internal-to-section derived equivalences G,K, inverse γ, inverse θ, and δ; its unit equation uses L(regularY).hom≫v≫regularX.inv. Then for all internal derived objects M,N,H the six InternalEdges Λ f μ δ M N H squares hold, and for all internal derived objects M the full InternalUnits Λ f μ v δ w M proposition holds. The fixed internal and section vertices are those prescribed by nested inverse θ and inverse γ, with identity transported unit comparisons, and retain their resolving normalization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization"
+ },
+ "stmt_deps": [
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the ConstraintCondition of lem-pd-section-kflat-tensor-comparison. The fixed transported monoidal structure equals the canonical equivalence transport. Inverting its prescribed oplax tensor maps gives monoidal structures on G and K with identity unit maps and lax tensor maps exactly internalModelTensor, i.e. inverse theta. Expand Conjugation to obtain the binary representative equation at every pair of internal derived objects and its regular-unit equation. No resolution compatibility theorem for gamma is needed: gamma is the fixed natural isomorphism already appearing in the definitions.",
+   "uses": [
+    "lem-pd-section-kflat-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization"
+   }
+  },
+  {
+   "text": "Prove the six edge squares generically for lax monoidal q,r and a natural tensor arrow mu. For the source associator use lax associativity for q and naturality of epsilon. For each outer splitting edge use naturality of mu along the source tensor comparison, then its binary representative equation. For each inner edge combine tensor compositions, substitute the binary equation, and use lax tensor naturality for r. For the target associator use associator naturality in epsilon and lax associativity for r. Specialize to G,K and inverse gamma with the normalized inverse theta maps; these are exactly InternalEdges.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization"
+   }
+  },
+  {
+   "text": "Compose the three left and three right SectionUnitEdges supplied by lem-pd-section-resolving-oplax-unit-models. The ordinary cochain unit identities from lem-pd-section-oplax-total-comparison identify those composites with the opposite branches; cancel the final epsilon component. Normalize the regular unit by naturality of mu along regular.hom, obtaining the ordinary unit axioms with eta = L(regularY.hom) followed by v and regularX.inv. Every section derived object is isomorphic to Q(P) for a flat-term K-flat P, by lem-pc-kflat-resolution and essential surjectivity of Q. Convert categorical tensor flatness into the site-flat predicate using siteSheafTensorRightIso from lem-weil-pbc-independent-sheaf-tensor-colimits. Transport both unit axioms along this isomorphism using the proved oplax unit invariance lemmas in WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare.",
+   "uses": [
+    "lem-pd-section-resolving-oplax-unit-models",
+    "lem-pd-section-oplax-total-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization"
+   }
+  },
+  {
+   "text": "Prove the internal unit edge squares generically. The binary Conjugation equation gives the first edges, its unit equation and lax tensor naturality give the second, and normalized lax unitors with epsilon naturality give the third and opposite branches. All vertex maps are isomorphisms because G,K are monoidal and inverse gamma is an isomorphism. The unit comparisons here are identities, so the section unit laws already proved are exactly the whole-path unit equalities at G(M). Compose the three edges on each side to obtain the remaining whole-path formulas. Assemble all twenty clauses of InternalUnits and pair them with the six InternalEdges clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-kflat-tensor-comparison",
+  "lem-pd-section-resolving-oplax-unit-models",
+  "lem-pd-section-oplax-total-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Original Steps 11–12 and extension of the unit equations along resolving localization; generic naturality and monoidal-constraint calculation; Stacks 06YS for resolving representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural resolution comparisons identify every edge in the associativity and unit diagrams of derived pullback tensor",
+   "results": "8 hits, including CategoryTheory.Limits.pullbackAssoc and pullbackAssocIsPullback; these concern categorical pullbacks and do not state the specified derived tensor representative identities. A second unit query returned CategoricalPullback rightUnitor formulas and Bimod.leftUnitorBimod, not this derived module statement.",
+   "date": "2026-10-26",
+   "verdict": "no match: project-specific prescribed representative comparisons are absent from Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate oplax monoidal functor tensor and unit maps by equivalences and natural isomorphisms preserving each diagram edge",
+   "results": "8 hits in Mathlib/CategoryTheory/Monoidal/Functor, including Equivalence.functor_map_μ_inverse_comp_counit_app_tensor and Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse; generic monoidal equivalence identities only. The initial transport query also found Functor.Monoidal.transport_δ_assoc and OplaxMonoidal.δ_natural.",
+   "date": "2026-10-26",
+   "verdict": "no match: these generic tools do not identify the specified modelTensor/epsilon vertices or resolving regular-unit edges"
+  },
+  {
+   "tool": "grep",
+   "query": "rg associator_naturality|leftUnitor_naturality|rightUnitor_naturality in Mathlib/CategoryTheory/Monoidal/Category.lean; rg μ_natural|associativity|left_unitality|right_unitality in Monoidal/Functor.lean; rg resolving_oplax|EdgeIdentification|AssociativityPaths|ResolvingClosure|modelTensor in lean/Sheaf and lean/WeilConjectures",
+   "results": "Monoidal/Category.lean:181,188,194 gives generic naturality, also used through the ordinary cochain comparison. All occurrences of these project diagram predicates were in the assigned module. Blueprint searches for resolving oplax, unit model and internal conjugation found no imported blueprint counterpart.",
+   "date": "2026-10-26",
+   "verdict": "no existing statement with these fixed comparisons; only the assigned combined theorem and generic monoidal tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxConstraintDiagrams",
+  "date": "2026-10-26",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original Steps 11–12 and extension of the unit equations along resolving localization; Seeded nt-target-poincare-isiso Step 2, through lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Steps 4–5: actual internal representative square, regular unit and cochain constraints. Old representative-square proof: Step 7: nested total eligibility and associator/unitor diagram paths.",
+   "via": [
+    "lem-pd-section-resolving-oplax-constraint-diagrams",
+    "lem-pd-section-derived-representative-square",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionResolvingOplaxInternalConjugation",
+  "file": "lean/Sheaf/Paper/SectionResolvingOplaxInternalConjugation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_internal_conjugation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_internal_conjugation"
+  ],
+  "statement": "theorem section_resolving_oplax_internal_conjugation {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f) (v : (derivedPullback Λ f).obj (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶ DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ X) ℤ))) (h : SectionHypotheses Λ f μ v) : ∀ (δ : InternalTensorArrow Λ f) (w : (internalDerivedPullback Λ f).obj (𝟙_ (DerivedCategory (internalModules Λ Y))) ⟶ 𝟙_ (DerivedCategory (internalModules Λ X))), Conjugation Λ f μ v δ w → (∀ M N H : DerivedCategory (internalModules Λ Y), InternalEdges Λ f μ δ M N H) ∧ (∀ M : DerivedCategory (internalModules Λ Y), InternalUnits Λ f μ v δ w M)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8bc46",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T023317-L-542001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T012941-L-2351095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,60 +19,58 @@
  ],
  "proof": [
   {
-   "text": "Work with the datum and coefficient category of [thm-pur-weil-equivariance-of-purity-and-trace]. For $T=X$ or $Y$, abbreviate $F_T=L\\Phi_T^*$ and $G_T=Lg_{T,\\gamma}^*$. Use the specified natural comparison $\\kappa_T:F_T\\xrightarrow{\\sim}G_T$ of [def-pur-scheme-geometric-frobenius]. At finite coefficients that definition gives it explicitly on $D(T_{\\mathrm{proet}},A)$; the argument below only uses the comparison already supplied in the statement, in its stated coefficient category. Thus its naturality, for a morphism $h:M\\to N$ in the category on $T$, is\n$$G_T(h)\\circ\\kappa_{T,M}=\\kappa_{T,N}\\circ F_T(h).$$\nBy [def-pur-compact-support-transport], for every one of the objects carrying a datum the scheme-Frobenius form is the defined map $u_M:=\\varphi_M\\circ\\kappa_{T,M}:F_T(M)\\to M$. These are the given comparisons and transported objects in the chosen coefficient category; no new comparison or coefficient-category identification is being constructed.",
+   "text": "Use the coefficient category and datum of [thm-pur-weil-equivariance-of-purity-and-trace]. For $T=X,Y$ write $F_T=L\\Phi_T^*$ and $G_T=Lg_{T,\\gamma}^*$. Take the specified natural comparison $\\kappa_T:F_T\\xrightarrow{\\sim}G_T$ of [def-pur-scheme-geometric-frobenius], in the coefficient category supplied in the statement. The definition [def-pur-compact-support-transport] identifies $u_M$ with $\\varphi_M\\circ\\kappa_{T,M}$, including for whole compact-support objects. Apply [lem-pur-natural-comparison-strict-intertwiners]: every given geometric-equivariance equality becomes $h u_M=u_NF_T(h)$, with the same lower arrow, and strict vertical maps stay invertible with inverse $\\kappa_{T,M}^{-1}\\varphi_M^{-1}$.",
    "uses": [
     "thm-pur-weil-equivariance-of-purity-and-trace",
     "def-pur-scheme-geometric-frobenius",
-    "def-pur-compact-support-transport"
+    "def-pur-compact-support-transport",
+    "lem-pur-natural-comparison-strict-intertwiners"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
-    "place": "Proof: natural comparison and precomposition of the three vertical pairs"
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
    }
   },
   {
-   "text": "For any of these morphisms $h:M\\to N$, its geometric equivariance means $h\\circ\\varphi_M=\\varphi_N\\circ G_T(h)$. Precompose this equality with $\\kappa_{T,M}$ and use the naturality identity of step 1. Associativity gives the full calculation\n$$h\\circ u_M=h\\circ\\varphi_M\\circ\\kappa_{T,M}=\\varphi_N\\circ G_T(h)\\circ\\kappa_{T,M}=\\varphi_N\\circ\\kappa_{T,N}\\circ F_T(h)=u_N\\circ F_T(h).$$\nThe bottom arrow is still $h$, the top arrow is now $F_T(h)$, and the two vertical arrows are exactly the old ones precomposed with their respective components of $\\kappa_T$. For a strict datum, the inverse of $u_M$ is $\\kappa_{T,M}^{-1}\\circ\\varphi_M^{-1}$: both inverse identities follow by associativity and cancellation of the adjacent inverse pairs. Thus the vertical isomorphisms are preserved as well as commutativity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
-    "place": "Proof: natural comparison and precomposition of the three vertical pairs"
-   }
-  },
-  {
-   "text": "Apply step 2 on $X$ with $M=Lf^*K(d)[2d]$, $N=Rf^!K$, $h=\\gamma_{f,K}$ and the data $\\varphi^{\\mathrm{pur}}_{f,K}$ and $\\varphi^!_{f,K}$. The purity square of [thm-pur-weil-equivariance-of-purity-and-trace] supplies precisely the geometric equivariance equality required by step 2. Hence\n$$\\gamma_{f,K}\\circ u_{Lf^*K(d)[2d]}=u_{Rf^!K}\\circ L\\Phi_X^*(\\gamma_{f,K}).$$\nThis is the required scheme-Frobenius purity square. If its source is written through the pullback-composition identifications, the equality $c_g\\circ(Lf^*\\kappa_Y)=(\\kappa_XLf^*)\\circ c_\\Phi$ in [def-pur-scheme-geometric-frobenius], where $c_g$ and $c_\\Phi$ are its pullback-composition identifications, ensures it uses the same specified comparison.",
+   "text": "On $X$ take $M=Lf^*K(d)[2d]$, $N=Rf^!K$, $h=\\gamma_{f,K}$. The purity square of [thm-pur-weil-equivariance-of-purity-and-trace] supplies the hypothesis of [lem-pur-natural-comparison-strict-intertwiners], hence\n$$\\gamma_{f,K}u_{Lf^*K(d)[2d]}=u_{Rf^!K}L\\Phi_X^*(\\gamma_{f,K}).$$\nFor the pullback-composition identifications, apply [lem-pur-natural-comparison-functor-transport] with $L=Lf^*$ and $c_F=c_\\Phi$, $c_G=c_g$. Its compatibility hypothesis is exactly $c_g(Lf^*\\kappa_Y)=(\\kappa_XLf^*)c_\\Phi$ of [def-pur-scheme-geometric-frobenius]. Thus the specified comparison agrees in either pullback presentation. The displayed square uses the comparison at the whole twisted and shifted source object.",
    "uses": [
     "thm-pur-weil-equivariance-of-purity-and-trace",
+    "lem-pur-natural-comparison-strict-intertwiners",
+    "lem-pur-natural-comparison-functor-transport",
     "def-pur-scheme-geometric-frobenius"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
-    "place": "Proof: natural comparison and precomposition of the three vertical pairs"
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
    }
   },
   {
-   "text": "Apply step 2 on $Y$ first with $M=Rf_!Rf^!K$, $N=K$ and $h=\\operatorname{Tr}_{f,K}$, the exceptional counit; then with $M=Rf_!Lf^*K(d)[2d]$, $N=K$ and $h=\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}$, the normalized smooth trace. Use in each case the compact-support transported datum specified in [thm-pur-weil-equivariance-of-purity-and-trace]. That theorem asserts geometric equivariance of both morphisms, including the exceptional-counit clause stated in words between its two displayed squares. Step 2 therefore yields\n$$\\operatorname{Tr}_{f,K}\\circ u_{Rf_!Rf^!K}=u_K\\circ L\\Phi_Y^*(\\operatorname{Tr}_{f,K}),\\qquad \\operatorname{Tr}^{\\mathrm{sm}}_{f,K}\\circ u_{Rf_!Lf^*K(d)[2d]}=u_K\\circ L\\Phi_Y^*(\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}).$$\nThese are the remaining two scheme-Frobenius squares. Together with step 3 they prove all three clauses, using only naturality on the category on $X$ or $Y$, without applying Cartesian base change to the scheme-Frobenius square.",
+   "text": "On $Y$ apply [lem-pur-natural-comparison-strict-intertwiners] to the exceptional counit $h=\\operatorname{Tr}_{f,K}:Rf_!Rf^!K\\to K$ and to the normalized smooth trace $h=\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}:Rf_!Lf^*K(d)[2d]\\to K$. Use the compact-support data of [def-pur-compact-support-transport]. The theorem [thm-pur-weil-equivariance-of-purity-and-trace] supplies both geometric equalities, including the counit clause stated in words. We obtain\n$$\\operatorname{Tr}_{f,K}u_{Rf_!Rf^!K}=u_KL\\Phi_Y^*(\\operatorname{Tr}_{f,K}),\\qquad \\operatorname{Tr}^{\\mathrm{sm}}_{f,K}u_{Rf_!Lf^*K(d)[2d]}=u_KL\\Phi_Y^*(\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}).$$\nTogether with the purity square these are the three required squares, each obtained by precomposing its vertical pair; no Cartesian base change for the scheme-Frobenius square is used.",
    "uses": [
+    "lem-pur-natural-comparison-strict-intertwiners",
+    "def-pur-compact-support-transport",
     "thm-pur-weil-equivariance-of-purity-and-trace"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
-    "place": "Proof: natural comparison and precomposition of the three vertical pairs"
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
    }
   }
  ],
  "proof_deps": [
   "thm-pur-weil-equivariance-of-purity-and-trace",
   "def-pur-scheme-geometric-frobenius",
-  "def-pur-compact-support-transport"
+  "def-pur-compact-support-transport",
+  "lem-pur-natural-comparison-strict-intertwiners",
+  "lem-pur-natural-comparison-functor-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
-  "place": "Entire proof, with the naturality and associativity calculation expanded"
+  "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
  },
  "mathlib_searches": [
   {
@@ -160,22 +158,33 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "prop-pur-weil-equivariance-scheme-frobenius",
   "worker": "stage1",
-  "summary": "Expanded the natural-comparison argument into a typed calculation and its three applications, citing the actual geometric-equivariance theorem and the existing definition of the scheme-Frobenius form for every object. Preserved the statement and all coefficient domains. No new nodes: naturality and the composition calculation are elementary once the supplied comparisons and geometric squares are cited. No project Lean declaration covers the item. Repair after landing refusal: re-read the current compact-support transport and scheme/geometric comparison definitions, refreshed their exact statement quotations, and wrote the f-compatibility with its explicit composition comparisons. The proof uses the natural comparisons given in the statement; it does not extend a finite-coefficient existence assertion to another category. Revalidated the retained repair against the current shared DAG after return head 96e15eb91d: all three dependency statements were read in full, all six quotations were checked, and the scheme-Frobenius domain and inverse of the precomposed vertical map are now explicit.",
-  "blueprint": "Realizes the whole proof of main-20261015 prop-pur-weil-equivariance-scheme-frobenius (order 2583): comparison of pullbacks, precomposition, and all three squares. The counit is a clause in words in the cited theorem, although only purity and smooth trace are displayed there. This is a supporting node of sk-thm-sf-package, not its key statement; no unit realization fields changed."
+  "summary": "Repair of the mandated re-split: preserve the statement and every argument of the old four-step proof, extract natural-comparison transport of strict intertwiners and compatibility with functor transport into two self-contained statement-only unsplit nodes, and retain the three explicit square applications in a short assembly. Partial Mathlib ingredients are recorded without claiming a complete match. Original proof and source-by-source review are retained in report.md.",
+  "blueprint": "Realizes the entire main-20261015 comparison/precomposition proof: first new lemma carries old steps 1–2 and the common calculation used by old steps 3–4; second new lemma carries old step 3 pullback-composition compatibility. The three application arguments stay explicit in the item."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q125-3ca755772",
-  "group": "Q125",
+  "reviewer": "NT-cc-Q148-50bb94344",
+  "group": "Q148",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-3ca755772 (reviewer sub-agent of L); spot-checked: I read the item and the four cited/defining statements in full: thm-pur-weil-equivariance-of-purity-and-trace (statement and blueprint_update), def-pur-scheme-geometric-frobenius, def-pur-compact-support-transport and def-pur-tate-datum, plus def-pur-conventions. The item statement is verbatim from main-20261015 order 2583 and master order 2239; only the order differs, and the source field cites the master file correctly. Steps: step 1 states the naturality of kappa_T : LPhi_T^* => Lg_{T,gamma}^* in the correct direction, and the definition u_N := phi_N o kappa_{T,N}, which covers every object with a datum, including Rf_!M. Step 2 is the typed chain from F_T(M) to N, with inverse kappa^{-1} o phi^{-1}. Step 3 is the purity square on X. Step 4 is the counit (stated in words) and the smooth-trace square on Y, with kappa_Y applied to each whole compact-support source. Each step is elementary from the statements, and the split writes the blueprint's precomposition proof out rather than relabelling it. No Cartesian property of the Phi-square is used. Coefficients: kappa is constructed on D(T_proet,A_{E,n}), and the higher stages come only through the conventions' transports. The proof is formal in whatever category the given kappa and geometric squares live in, and asserts no comparison theorem. Any underspecification at the higher stages belongs to the definitions, not to this split. Cases K=0, h=0, kappa=id, f=id, d=0, n=1 and empty schemes are fine. There are no new nodes. The rg search found only related nodes: prop-pur-weil-equivariance-compatibilities cites this item and is not cited back, so there is no cycle. Every citation is inside unit sk-thm-sf-package, so no tool_uses are needed. No SGA source is cited. No fixes were needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-50bb94344 (reviewer sub-agent of L); spot-checked: Re-split of prop-pur-weil-equivariance-scheme-frobenius (repair note 2026-10-22, batch5: proof was 3458 chars) meets the note. Live still holds the old 4-step split, so this delivery is not superseded; the item is on no dropped list. The statement is verbatim from main-20261015 order 2583 and unchanged. The assembly is 2244 chars in 3 steps. There are 2 statement-only unsplit new nodes of comparable size (1050/1313 chars); each records five searches over leansearch, leanfinder, loogle and grep, and the Mathlib candidate Endofunctor.Algebra.functorOfNatTrans/equivOfNatIso (Algebra.lean 152-200) is correctly described as partial. Mapping: old steps 1-2 become lem-pur-natural-comparison-strict-intertwiners (iff h·phi_M = phi_N·G(h) <=> h·u_M = u_N·F(h), inverse kappa^-1·phi^-1; both directions and both inverse identities checked by hand). Old step 3's last sentence becomes lem-pur-natural-comparison-functor-transport, checked by typing; its hypothesis c_G·L(kappa_C) = kappa_D L·c_F is exactly def-pur-scheme-geometric-frobenius's c_g(Lf^*kappa_Y) = (kappa_X Lf^*)c_Phi with L=Lf^*, c_F=c_Phi, c_G=c_g. Agreement, inverse and intertwiner clauses were verified using naturality of c_F. Old steps 3-4 remain as explicit applications to gamma_{f,K}, Tr_{f,K} and Tr^sm_{f,K}, using the theorem's squares and counit clause and def-pur-compact-support-transport's u_N = phi_N·kappa_{T,N} at whole Rf_! objects. Nothing was dropped or blurred, and neither new node restates an item clause. All substantive citations are in unit sk-thm-sf-package; the other cited nodes are definitions or mathlib. No duplicates were found by rg -L for fixed-pair, endofunctor, intertwin, natural-comparison and functorOfNatTrans. No cycle and no SGA. Small cases checked: kappa=id, L=id, h=0/id, empty categories. Nit: in node 1, h in the displayed iff is bound only by the earlier 'for each h:M->N'; the reading is unambiguous, so no fix was made."
  }
 }

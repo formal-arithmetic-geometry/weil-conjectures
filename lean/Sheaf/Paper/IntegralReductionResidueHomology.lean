@@ -425,7 +425,7 @@ private theorem integralProjection_first
   | succ n ih =>
     rw [finiteToFirstSheaf_succ, ← Category.assoc, integralProjection_succ, ih]
 
-attribute [-instance] scalarReductionSiteSmall integralCoefficientAbSheafify
+attribute [-instance] integralCoefficientAbSheafify
   integralCoefficientAbLocallyBijective
 local instance (X : AlgebraicGeometry.Scheme.{u}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=

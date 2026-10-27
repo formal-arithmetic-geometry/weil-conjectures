@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-finite-published-root-chart-power",
+ "kind": "statement",
+ "title": "Power equivariance of the published shifted finite root chart",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], its algebraically closed base field k, coefficient ring A and exponent N = ell^n. For every k-scheme T, natural numbers d,a, and primitive N-th roots zeta, eta in k with zeta = eta^a, let c_zeta(d) and c_eta(d) be the published pro-etale shifted root-power charts of [def-pur-finite-reduction-root-charts]. Then c_eta(d).hom = a^d times c_zeta(d).hom, where multiplication is repeated addition in the derived module-sheaf category. No finite-type, connectedness or boundedness hypothesis is imposed; d = 0 and empty schemes are included.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-reduction-root-charts"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, compatibility with the invertible twist by associativity of derived tensor; expanded root-chart normalization in def-pur-finite-root-tensor-presentation."
+ },
+ "proof": [
+  {
+   "text": "On constant coefficient generators, the root trivialization for zeta = eta^a is a times the root trivialization for eta, by its specified section formula and the primitive-root basis. Composing with the inverse isomorphisms shows that the inverse chart for eta is a times the inverse chart for zeta. Single-complex realization and the degree-two shift preserve the equation.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "lem-pur-primitive-root-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the ordered tensor recursion defining the published shifted chart. At zero the root-independent unit chart has scalar a^0=1. At a successor, bilinearity changes a^d to a^d*a=a^(d+1); reassociation, unit and shift factors are fixed. Exact comparison inverse image is additive, and its fixed shift comparison preserves the equation. This proves the stated equality on every T, also empty T.",
+   "uses": [
+    "def-pur-finite-reduction-chart-calculus",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-root-charts",
+  "lem-pur-primitive-root-etale-basis",
+  "def-pur-finite-reduction-chart-calculus"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "W4",
+  "date": "2026-10-25",
+  "source": "Explicit calculation of the prescribed root-chart power law from the existing section and ordered-basis normalizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of primitive root in a tensor power trivialization of a Tate twist multiplies the chart by the corresponding scalar power",
+   "results": "8 hits, all cyclotomic-character specifications for ring automorphisms and primitive roots. None concerns the finite sheaf tensor charts.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapIso\", \"trans\"",
+   "results": "2 hits: CategoryTheory.Functor.mapIso_trans and Delone.DeloneSet.mapIsometry_trans. The first only transports a known isomorphism composition.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTensorPositiveChart|finiteTensorDiagonalChart|finiteReductionEtaleRootPowerChart",
+   "results": "0 Mathlib hits. Local rg of lean/Sheaf and lean/WeilConjectures found the chart definitions and their presentation consumers but no chart power law.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing a primitive root in a tensor power Tate line trivialization multiplies its morphism by an integer power",
+   "results": "8 hits: primitive-root power equivalences, cyclotomic automorphism specifications, LinearEquiv.lTensor_zpow and rTensor_zpow. None states either sheaf-chart power law.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRootTensorPresentation",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2, compatibility with invertible twists: change of primitive-root chart in the ordered positive tensor powers.",
+   "via": [
+    "def-pur-finite-root-tensor-presentation",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePublishedRootChartPower",
+  "file": "lean/Sheaf/Paper/FinitePublishedRootChartPower.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionPowerTrivialization_pow",
+  "statement": "theorem finiteReductionPowerTrivialization_pow (P : PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] (d a : ℕ)\n    (ζ η : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent)\n    (hη : IsPrimitiveRoot η P.diagonalExponent) (h : ζ = η ^ a) :\n    (P.finiteReductionPowerTrivialization T η hη d).hom =\n      a ^ d • (P.finiteReductionPowerTrivialization T ζ hζ d).hom",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T124239-L-1958849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T124239-L-1958849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

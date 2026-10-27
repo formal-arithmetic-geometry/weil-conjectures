@@ -1,0 +1,130 @@
+{
+ "id": "lem-zl-point-scalar-punctual-spectrum",
+ "kind": "statement",
+ "title": "Punctual spectrum of a scalar local operator at a point",
+ "statement": "Fix a finite-field datum D, ell different from its characteristic, an algebraic closure Omega of Q_ell, a compatible geometric point (y,iota_y), and a raw constructible Omega-Weil sheaf F on Spec(k0). Let alpha in Omega act as its specified local Frobenius on every vector of the fibre [def-zl-point-weil-flag-data]. Then for every closed point z of Spec(k0) and every beta in the finite-presentation punctual spectrum of F [def-weil-punctual-weights], beta=alpha and the residue field at z has cardinality D.q. Alpha need not be nonzero and the fibre need not have dimension one.",
+ "stmt_deps": [
+  "def-zl-point-weil-flag-data",
+  "def-weil-punctual-weights"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration."
+ },
+ "proof": [
+  {
+   "text": "The spectrum of k0 has a unique point, whose residue field is canonically k0. Thus its cardinality is q, degree one, and every compatible residue-field embedding into k is identical.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
+   }
+  },
+  {
+   "text": "For any finite Weil presentation witnessing beta, apply the canonical scalar/cohomology comparison and the presentation isomorphism to F. Naturality of point transport and its coefficient compatibility identify the extended finite local Frobenius with the specified local operator. Carry its nonzero eigenvector to the fibre of F.",
+   "uses": [
+    "lem-zl-point-heart-finite-stage",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
+   }
+  },
+  {
+   "text": "Subtract the beta-eigenvector equation from the alpha-scalar equation. Since the transported vector is nonzero and Omega is a field, beta=alpha. A zero fibre has no nonzero eigenvector.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-point-heart-finite-stage",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "eigenvalues scalar linear map scalar multiplication finite dimensional",
+   "results": "8 hits: HasEigenvalue, exists_hasEigenvector, lsmul and spectrum lemmas, no sheaf comparison.",
+   "date": "2026-10-25",
+   "verdict": "No comparison of the finite-presentation punctual spectrum with this specified common-stage scalar local operator."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue",
+   "results": "12 hits on eigenspaces, eigenvectors and spectrum; no common-stage operator comparison.",
+   "date": "2026-10-25",
+   "verdict": "No comparison of the finite-presentation punctual spectrum with this specified common-stage scalar local operator."
+  },
+  {
+   "tool": "grep",
+   "query": "SfPunctualEigenvalue.*iso",
+   "results": "msearch grep: 0 hits. Local rg found private iso transport proofs and sfLocalFrobenius_model_conjugacy, which compares two finite models but not the specified common-stage local operator.",
+   "date": "2026-10-25",
+   "verdict": "No comparison of the finite-presentation punctual spectrum with this specified common-stage scalar local operator."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointWeilHeartFlag",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof, paragraph 7: dimension-zero Jordan filtration before gluing.",
+   "via": [
+    "lem-zl-point-weil-heart-flag"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointScalarPunctualSpectrum",
+  "file": "lean/Sheaf/Paper/PointScalarPunctualSpectrum.lean",
+  "declaration": "WeilConjectures.zl_point_scalar_punctual_spectrum",
+  "statement": "theorem zl_point_scalar_punctual_spectrum\n    (F : sfCommonStageWeilSheaf D l hl (zlPointBase D) Ω) (α : Ω)\n    (hα : ∀ v : (zlPointWeilFiber D l hl Ω y ι hι).obj F,\n      (zlPointWeilFrobenius D l hl Ω y ι hι F).hom v = α • v)\n    (z : {z : (zlPointBase D).left // z ∈ closedPoints (zlPointBase D).left})\n    (β : Ω) (hβ : SfPunctualEigenvalue D l hl Ω (zlPointBase D) F z β) :\n    β = α ∧ Nat.card ((zlPointBase D).left.residueField z.val) = D.q",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cffe2",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261025T123139-L-1837581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cffe2",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261025T123139-L-1837581",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointWeilHeartFlag(+Data, AlgebraicFlag, ScalarPunctualSpectrum) and 4 nodes against clone's PointWeilHeartFlag.lean, AdicPunctualWeights SfPunctualEigenvalue/SfIsMixedOfWeightsAtMost, LocalFrobeniusTrace Qbar vs finite closed Frobenius, item node and change record"
+ }
+}

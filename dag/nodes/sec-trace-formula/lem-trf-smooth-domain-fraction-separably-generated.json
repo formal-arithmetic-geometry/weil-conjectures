@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-smooth-domain-fraction-separably-generated",
+ "kind": "statement",
+ "title": "The fraction field of a smooth domain is separable over the base field",
+ "statement": "Let $k$ be a field, let $A$ be a nonzero commutative integral domain with a $k$-algebra structure, and let $F$ be a field of fractions of $A$: the map $A\\hookrightarrow F$ is injective and every element of $F$ is $a/b$ for $a,b\\in A$, $b\\ne0$. Give $F$ the induced $k$-algebra structure [def-pc-field-extension]. Assume $k\\to A$ is a smooth ring map [def-weil-pbc-smooth-ring-map]. Then $F/k$ is separable in the nonalgebraic sense [def-weil-pbc-separable-field-extension]: every intermediate field $k\\subseteq E\\subseteq F$ finitely generated as a field over $k$ has a transcendence basis over $k$ over which $E$ is separable algebraic.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037X, lemma-localization-smooth-separable, implication localization of a smooth algebra implies separable; also Tag 07ND, lemma-smooth-at-generic-point, forward implication with R = k and S = A."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "If $\\operatorname{char}k=0$, apply [lem-weil-pbc-char-zero-field-extension-separable] to the given field extension $F/k$; this proves exactly the desired assertion. Otherwise the characteristic of the field $k$ is a prime $p>0$. Work in this case for the remaining steps.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND, lemma-smooth-at-generic-point, forward implication, with the characteristic-zero case made explicit using Tag 00TX, lemma-characteristic-zero-local-smooth, proof, first sentence"
+   }
+  },
+  {
+   "text": "Let $L/k$ be an arbitrary field extension and set $B=L\\otimes_k A$, with multiplication $(\\lambda\\otimes a)(\\mu\\otimes b)=\\lambda\\mu\\otimes ab$. Apply clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition] to $k\\to A$ and $k\\to L$: the map $L\\to B$ is smooth. Apply [lem-sc-smooth-algebra-reduced-field] over the field $L$ to conclude that $B$ is reduced. No perfectness of $k$ or $L$ is assumed, and $B$ is not asserted to be a domain.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-sc-smooth-algebra-reduced-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND, lemma-smooth-at-generic-point, forward proof: base change to any field extension gives a smooth, hence reduced algebra; base change is Tag 00T4, lemma-base-change-smooth; reducedness is the consequence used there of Tag 00TT, lemma-characterize-smooth-over-field (also varieties.tex, Tag 056T, lemma-smooth-geometrically-normal)"
+   }
+  },
+  {
+   "text": "Put $S=A\\setminus\\{0\\}$, a multiplicative subset since $A$ is a nonzero domain. The given fractions identify $F$ with $S^{-1}A$: $a/s\\mapsto a/s\\in F$ is surjective by hypothesis and injective since $A\\hookrightarrow F$ is injective and $s\\ne0$. Apply [lem-weil-pbc-localization-tensor-over-base] with base ring $k$, algebra $A$, multiplicative subset $S$, module $M=A$ and $N=L$. It identifies $S^{-1}(A\\otimes_k L)$ with $F\\otimes_k L$ by $(a\\otimes\\lambda)/s\\mapsto(a/s)\\otimes\\lambda$. The swap $\\lambda\\otimes a\\mapsto a\\otimes\\lambda$ identifies $B$ with $A\\otimes_k L$; both maps preserve products and units, as the formulas on pure tensors show. Thus $F\\otimes_k L$ is the localization of the reduced ring $B$ at the images of $S$. Explicitly, if $(b/s)^n=0$ with $n\\ge1$, the zero criterion for fractions gives $t\\in S$ with $t b^n=0$ in $B$. Then $(tb)^n=t^{n-1}(t b^n)=0$, so $tb=0$ by reducedness of $B$, and hence $b/s=0$. Here $s,t$ act through $A\\to B$, $a\\mapsto1\\otimes a$. This proves reducedness of $F\\otimes_k L$ for every $L/k$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND, lemma-smooth-at-generic-point, forward proof, passage to the fraction field; Tag 04KN, lemma-geometrically-reduced-permanence, localization clause and its two hints written out; tensor-localization formula from Tags 00DK, lemma-tensor-localization, and 00D2, lemma-tensor-with-bimodule"
+   }
+  },
+  {
+   "text": "Now $k$ has characteristic the prime $p>0$, $F/k$ is a field extension with the specified induced structure, and step 3 proves that $F\\otimes_k L$ is reduced for every field extension $L/k$. These are precisely the hypotheses of [lem-weil-pbc-geometrically-reduced-extension-separable], so $F/k$ is separable. By clause (2) of [def-weil-pbc-separable-field-extension], this means that every intermediate field $k\\subseteq E\\subseteq F$ finitely generated over $k$ has a transcendence basis over which $E$ is separable algebraic. Together with step 1 this proves the assertion in all characteristics.",
+   "uses": [
+    "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND, lemma-smooth-at-generic-point, forward proof, last sentence; Tag 030W, lemma-characterize-separable-field-extensions, (4) implies (1); Tag 030O, definition-separable-field-extension, clause (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-geometrically-reduced-extension-separable",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07ND, lemma-smooth-at-generic-point, forward implication with R=k and S=A, used in Tag 037X, lemma-localization-smooth-separable; localization details of Tag 04KN written out using Tags 00DK and 00D2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|IsSeparableExtension|IsSeparablyGenerated",
+   "results": "{\"t\": \"2026-10-24T07:59:43Z\", \"tool\": \"grep\", \"query\": \"FormallySmooth|IsSeparableExtension|IsSeparablyGenerated\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"66316fced1223e44\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-field results prove separably generated implies formally smooth, not the converse; the fraction-ring localization hits assume algebraic separability already; perfect-field results add a hypothesis absent here"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsFractionRing",
+   "results": "{\"t\": \"2026-10-24T07:59:43Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-field results prove separably generated implies formally smooth, not the converse; the fraction-ring localization hits assume algebraic separability already; perfect-field results add a hypothesis absent here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fraction field of a smooth domain is separable as a transcendental extension of the base field",
+   "results": "{\"t\": \"2026-10-24T07:59:43Z\", \"tool\": \"leansearch\", \"query\": \"Fraction field of a smooth domain is separable as a transcendental extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.finSepDegree_eq_zero_of_transcendental\", \"FractionRing.isSeparable_of_isLocalization\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"Field.isSeparable_algebraMap\", \"IntermediateField.isSeparable_adjoin_simple_iff_isSeparable\", \"Field.sepDegree\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"IntermediateField.isSeparable_adjoin_iff_isSeparable\"], \"digest\": \"c72caf45fcc8ce39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-field results prove separably generated implies formally smooth, not the converse; the fraction-ring localization hits assume algebraic separability already; perfect-field results add a hypothesis absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a smooth domain over a field is geometrically reduced and its fraction field is separably generated",
+   "results": "{\"t\": \"2026-10-24T07:59:45Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of a smooth domain over a field is geometrically reduced and its fraction field is separably generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.localization_away\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"RingHom.isStandardSmooth_localizationPreserves\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"FractionRing.isSeparable_of_isLocalization\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"23e361cdd7d98aa0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-field results prove separably generated implies formally smooth, not the converse; the fraction-ring localization hits assume algebraic separability already; perfect-field results add a hypothesis absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a smooth algebra over an arbitrary field is a separably generated extension",
+   "results": "{\"t\": \"2026-10-24T07:59:47Z\", \"tool\": \"leanfinder\", \"query\": \"The fraction field of a smooth algebra over an arbitrary field is a separably generated extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"FractionRing.isSeparable_of_isLocalization\", \"instIsSeparableFractionRingAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyUnramified.isSeparable\", \"Algebra.FormallySmooth.of_algebraicIndependent\", \"Algebra.FormallySmooth.adjoin_of_algebraicIndependent\"], \"digest\": \"8cfa843afa5022cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-field results prove separably generated implies formally smooth, not the converse; the fraction-ring localization hits assume algebraic separability already; perfect-field results add a hypothesis absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a smooth algebra over an arbitrary field is a separably generated extension",
+   "results": "{\"t\": \"2026-10-24T08:28:30Z\", \"tool\": \"leanfinder\", \"query\": \"The fraction field of a smooth algebra over an arbitrary field is a separably generated extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"FractionRing.isSeparable_of_isLocalization\", \"instIsSeparableFractionRingAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyUnramified.isSeparable\", \"Algebra.FormallySmooth.of_algebraicIndependent\", \"Algebra.FormallySmooth.adjoin_of_algebraicIndependent\"], \"digest\": \"8cfa843afa5022cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Field.lean gives separably generated implies formally smooth; DedekindDomain/Instances.lean assumes separability of fraction fields; the perfect-field result adds a hypothesis absent here; none proves this implication"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|IsSeparableExtension|IsSeparablyGenerated",
+   "results": "{\"t\": \"2026-10-24T08:28:56Z\", \"tool\": \"grep\", \"query\": \"FormallySmooth|IsSeparableExtension|IsSeparablyGenerated\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"6145e545caeb9aac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Field.lean gives separably generated implies formally smooth; DedekindDomain/Instances.lean assumes separability of fraction fields; the perfect-field result adds a hypothesis absent here; none proves this implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fraction field of a smooth domain is separable as a transcendental extension of the base field",
+   "results": "{\"t\": \"2026-10-24T08:28:57Z\", \"tool\": \"leansearch\", \"query\": \"Fraction field of a smooth domain is separable as a transcendental extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.finSepDegree_eq_zero_of_transcendental\", \"FractionRing.isSeparable_of_isLocalization\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"Field.isSeparable_algebraMap\", \"IntermediateField.isSeparable_adjoin_simple_iff_isSeparable\", \"Field.sepDegree\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"IntermediateField.isSeparable_adjoin_iff_isSeparable\"], \"digest\": \"c72caf45fcc8ce39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Field.lean gives separably generated implies formally smooth; DedekindDomain/Instances.lean assumes separability of fraction fields; the perfect-field result adds a hypothesis absent here; none proves this implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsFractionRing",
+   "results": "{\"t\": \"2026-10-24T08:28:57Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Field.lean gives separably generated implies formally smooth; DedekindDomain/Instances.lean assumes separability of fraction fields; the perfect-field result adds a hypothesis absent here; none proves this implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a smooth domain over a field is geometrically reduced and its fraction field is separably generated",
+   "results": "{\"t\": \"2026-10-24T08:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of a smooth domain over a field is geometrically reduced and its fraction field is separably generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.localization_away\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"RingHom.isStandardSmooth_localizationPreserves\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"FractionRing.isSeparable_of_isLocalization\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"23e361cdd7d98aa0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Smooth/Field.lean gives separably generated implies formally smooth; DedekindDomain/Instances.lean assumes separability of fraction fields; the perfect-field result adds a hypothesis absent here; none proves this implication"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-separating-parameters",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proof of Theorem 2.1.8, printed p. 13, separating-transcendence-basis paragraph; smoothness-to-separability also Stacks Tag 037X, algebra-lemma-localization-smooth-separable; the characteristic-p criterion is the separating-parameter criterion quoted in that paragraph. Smoothness-to-separability input for the separating-transcendence-basis paragraph: Stacks 037X, implication from a smooth-algebra localization to a separable field extension.",
+   "via": [
+    "lem-trf-curve-separating-parameters",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-smooth-domain-fraction-separably-generated",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three notion dependencies. Followed the forward proof of Stacks 07ND: smooth field base change is reduced, then its localization F tensor L is reduced, then 030W gives separability, with the characteristic-zero case separated. All ingredients already have DAG nodes, so no nodes were created. Wrote the fraction identification, tensor multiplication compatibility and nilpotent calculation explicitly. Searched the current blueprint and project library; related finished declarations give the converse, not this item. Repeated Mathlib searches find no exact or one-line match.",
+  "blueprint": "Supporting smoothness-to-separability input in the existing blueprint.from.place: the separating-transcendence-basis paragraph in Temkin Theorem 2.1.8, beneath lem-trf-local-term-locality proof (1)--(2). Steps 2--4 realize the forward 07ND/037X argument already named there; step 1 covers its characteristic-zero case.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-algebra-reduced-field",
+    "why": "Generic affine algebra tool: smooth over a field implies reduced, applied after arbitrary field base change; the trace-formula unit does not supply this commutative-algebra result."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "why": "Generic field-theoretic criterion 030W, applied to F after the proof establishes reducedness of every tensor base change; no trace-formula unit statement provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-2ad4422f8",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-2ad4422f8 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged, and Stacks 07ND (forward direction with R=k, S=A) and 037X confirm it is true. The proof steps match the 07ND proof in algebra.tex. Step 1: the char-0 case is handled by lem-weil-pbc-char-zero-field-extension-separable, a mathlib leaf. This separate case is needed because 030W assumes char p>0. Step 2: clause (1) of lem-weil-pbc-smooth-ring-map-base-change-composition with R'=L shows L->L⊗A is smooth, and lem-sc-smooth-algebra-reduced-field then makes it reduced. The hypotheses match. Step 3: lem-weil-pbc-localization-tensor-over-base with T=A minus 0, M=A, N=L gives T^{-1}(A⊗L)≅F⊗L, and the module iso is shown to be a ring localization. The nilpotent calculation, which writes out the omitted hints of 04KN, is correct. Step 4: lem-weil-pbc-geometrically-reduced-extension-separable (030W (4)=>(1)) applies with the tensor order F⊗L, and clause (2) of def-weil-pbc-separable-field-extension gives exactly the item's conclusion. proof_deps equals the union of the step citations. Small cases agree: A=k, k[t], a finite separable field, and an inseparable non-smooth example. The off-unit tool uses lem-sc-smooth-algebra-reduced-field and lem-weil-pbc-geometrically-reduced-extension-separable are generic black boxes and I accept both. The other cited nodes have mathlib status, so they are tools, not route. There are no new nodes. An rg -L search of the DAG for 07ND/037X and fraction-field separability finds only nodes stating the converse or colimit direction (smooth-at-generic-point-over-field, lem-kun-fg-separable-smooth, new-smooth-fraction-field-localizations), so there is no duplicate. Minor points: the snapshot's review_split.py does not follow the chapter symlinks and wrongly reports every citation as missing; all eight exist and I read them. The report mentions citations.json, which is not in the commit."
+ }
+}

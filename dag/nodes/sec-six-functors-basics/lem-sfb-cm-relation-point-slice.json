@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-cm-relation-point-slice",
+ "kind": "statement",
+ "title": "Affine slice at one finite-type point of a Cohen--Macaulay relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $V,R$ be $S$-schemes. An equivalence relation $(s,t):R\\to V\\times_SV$ [def-pc-fibre-product] means that for every $S$-scheme $T$ the map on sections is injective and identifies $R(T)$ with an equivalence relation on $V(T)$. A morphism $f:X\\to Y$ is called Cohen--Macaulay here if it is flat [def-weil-flat-morphism] and every local ring of every scheme-theoretic fibre [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring], with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. Assume $s,t$ are Cohen--Macaulay and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $v\\in V$ be a finite type point, meaning that $\\operatorname{Spec}\\kappa(v)\\to V$ is of finite type [def-weil-affine-spectrum, def-weil-residue-field, def-weil-finite-type-morphism]. There are an affine $S$-scheme $A$ [def-weil-affine-spectrum], a locally finitely presented morphism $g:A\\to V$ and a point $a\\in A$ with $g(a)=v$, such that $h_A=s\\circ\\operatorname{pr}_R:A\\times_{g,V,t}R\\to V$ is flat, locally of finite presentation and locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "The relation gives a groupoid on $V$: the identity is the unique arrow with endpoints $(v,v)$, inverse reverses endpoints, and composition takes the unique arrow with the composite endpoints. These operations are natural on test schemes; [lem-pc-yoneda] realizes them as scheme morphisms. All groupoid equations hold because arrows with fixed endpoints are unique. For the stabilizer $G=V\\times_{\\Delta,V\\times_SV}R$, a $T$-point over $v_T$ is an arrow from $v_T$ to itself; the unique such arrow is its identity. Thus $G\\to V$ and the unit into $G$ are inverse morphisms (the same test-scheme argument and Yoneda). Hence $G_v\\simeq\\operatorname{Spec}\\kappa(v)$, which has one point and dimension zero [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "04MY; specialization of 04N0 to equivalence relations, trivial stabilizer"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cm-groupoid-maximal-slice] to this groupoid and $v$. Its hypotheses are precisely the Cohen--Macaulay and local finite presentation assumptions and the given finite type point. Obtain $g_0:B\\to V$, $b\\mapsto v$, with $B$ affine, $g_0$ locally finitely presented, and $h_0:B\\times_{g_0,V,t}R\\to V$ Cohen--Macaulay and locally finitely presented. At $x=(b,e(v))$ its fibre has local topological dimension $\\dim G_v=0$. In particular $h_0$ is flat, by the Cohen--Macaulay definition in the cited statement.",
+   "uses": [
+    "lem-sfb-cm-groupoid-maximal-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "04N0, first sentence, invoking 04MZ"
+   }
+  },
+  {
+   "text": "Choose affine neighbourhoods $D=\\operatorname{Spec}C$ of $x$ in the source of $h_0$ and $E=\\operatorname{Spec}K$ of $v$ in $V$, with $h_0(D)\\subseteq E$ and $K\\to C$ finitely presented [def-sbc-locally-finite-presentation]. It is finite type. The fibre of $D\\to E$ is $\\operatorname{Spec}(C\\otimes_K\\kappa(v))$ by [lem-weil-pbc-fibre-product-affine-spectra]. It is an open neighbourhood of $x$ in the fibre of $h_0$, so its dimension at $x$ is still zero: the neighbourhoods contained in this open are cofinal in all neighbourhoods of $x$. Apply [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] to $K\\to C$ at the prime of $x$. It is quasi-finite there; the affine pair $(D,E)$ therefore witnesses that $h_0$ is quasi-finite at $x$ [pqf-def-quasifinite].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "04N0, zero fibre dimension; morphisms.tex Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0)"
+   }
+  },
+  {
+   "text": "A finite presentation is in particular a finite list of algebra generators. Thus $s,t,g_0$ are locally of finite type. Apply [lem-sfb-groupoid-quasifinite-locus-descent] to $g_0$: there is an open $W\\subseteq B$ with $p^{-1}(W)$ the quasi-finite locus of $h_0$, where $p:B\\times_{g_0,V,t}R\\to B$. Since $x=(b,e(v))$ lies in this locus, $b\\in W$. The restricted saturation $h_W:W\\times_{V,t}R\\to V$ is locally quasi-finite on its entire source.",
+   "uses": [
+    "lem-sfb-groupoid-quasifinite-locus-descent",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "04N0, shrinking paragraph; 047W item (2)"
+   }
+  },
+  {
+   "text": "Choose a principal affine open $A=B_f$ with $b\\in A\\subseteq W$; principal opens form a basis of the spectrum topology [def-weil-affine-spectrum]. Let $a$ be $b$ viewed in $A$ and put $g=g_0|_A$. The map $A\\to B$ is locally finitely presented: if $B=\\operatorname{Spec}C$, its ring is $C_f=C[z]/(fz-1)$. Thus $g$ is locally finitely presented by [lem-sbc-locally-finite-presentation-composition]. The fibre-product universal property identifies $A\\times_{V,t}R$ with the open subscheme $p^{-1}(A)$ of $B\\times_{V,t}R$ [def-pc-fibre-product]. The stalk maps of $h_A=h_0|_{p^{-1}(A)}$ equal those of $h_0$, so it is flat [def-weil-flat-morphism]. Its local finite presentations persist on principal opens: adjoining $z$ and the single relation $fz-1$ to a finite presentation gives one for each such open [def-sbc-locally-finite-presentation]. Finally, [lem-weil-pbc-lqf-restriction-to-opens] applied to $h_W$ gives local quasi-finiteness of $h_A$. The affine scheme $A$ has the induced $S$-structure and $g(a)=v$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-pc-fibre-product",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lqf-restriction-to-opens"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "04N0, final shrinking; choose a principal affine neighbourhood to retain affineness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-yoneda",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-sfb-cm-groupoid-maximal-slice",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "pqf-def-quasifinite",
+  "lem-sfb-groupoid-quasifinite-locus-descent",
+  "lem-sbc-locally-finite-presentation-composition",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-lqf-restriction-to-opens"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04N0 (lemma-max-slice-quasi-finite), proof, using 04MZ and 047W(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At a finite type point of a Cohen Macaulay scheme equivalence relation there exists an affine slice whose saturation morphism is flat locally finitely presented locally quasi finite",
+   "results": {
+    "t": "2026-10-23T11:56:20Z",
+    "tool": "leanfinder",
+    "query": "At a finite type point of a Cohen Macaulay scheme equivalence relation there exists an affine slice whose saturation morphism is flat locally finitely presented locally quasi finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "Algebra.Smooth.exists_finiteType",
+     "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+     "Algebra.IsSmoothAt",
+     "AlgebraicGeometry.flat_iff",
+     "Algebra.smoothLocus",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "Algebra.isOpen_smoothLocus"
+    ],
+    "digest": "973e922a0510d947"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local transverse affine slices for a flat finitely presented groupoid with trivial stabilizers and Cohen Macaulay fibres",
+   "results": {
+    "t": "2026-10-23T11:58:31Z",
+    "tool": "leanfinder",
+    "query": "Local transverse affine slices for a flat finitely presented groupoid with trivial stabilizers and Cohen Macaulay fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "Module.isLocallyConstant_rankAtStalk",
+     "Algebra.isOpen_smoothLocus",
+     "IsQuotientCoveringMap.disjoint",
+     "IsAddQuotientCoveringMap.disjoint",
+     "Topology.IsQuotientMap.trivializationOfSMulDisjoint_source"
+    ],
+    "digest": "deae9302c9fc7477"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cohen Macaulay locally finitely presented scheme equivalence relation admits an affine locally finitely presented immersion through any finite type point with flat quasi finite saturation",
+   "results": {
+    "t": "2026-10-23T11:56:12Z",
+    "tool": "leansearch",
+    "query": "A Cohen Macaulay locally finitely presented scheme equivalence relation admits an affine locally finitely presented immersion through any finite type point with flat quasi finite saturation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsImmersion",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+     "AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType",
+     "AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion"
+    ],
+    "digest": "dc0bfc946e52575d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T11:56:12Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ohen.?[Mm]acaulay|[Mm]ax[Ss]lice|[Ss]lice.*[Gg]roupoid",
+   "results": {
+    "t": "2026-10-23T11:56:13Z",
+    "tool": "grep",
+    "query": "[Cc]ohen.?[Mm]acaulay|[Mm]ax[Ss]lice|[Ss]lice.*[Gg]roupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+   "results": {
+    "t": "2026-10-23T13:12:46Z",
+    "tool": "grep",
+    "query": "max.slice|slice.*groupoid|Cohen.?Macaulay",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine slices through finite type points of a Cohen Macaulay equivalence relation with flat locally finitely presented quasi finite saturation",
+   "results": {
+    "t": "2026-10-23T13:12:55Z",
+    "tool": "leanfinder",
+    "query": "Affine slices through finite type points of a Cohen Macaulay equivalence relation with flat locally finitely presented quasi finite saturation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsStandardSmoothOfRelativeDimension.out",
+     "Algebra.IsStandardSmooth.out",
+     "Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension",
+     "Algebra.SubmersivePresentation.isStandardSmooth",
+     "Algebra.IsStandardSmoothOfRelativeDimension",
+     "Algebra.Smooth.exists_finiteType",
+     "Algebra.QuasiFiniteAt",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg"
+    ],
+    "digest": "715762a384d3345a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine slice at a finite type point of a Cohen Macaulay equivalence relation has flat locally finitely presented locally quasi finite saturation",
+   "results": {
+    "t": "2026-10-23T13:17:31Z",
+    "tool": "leansearch",
+    "query": "An affine slice at a finite type point of a Cohen Macaulay equivalence relation has flat locally finitely presented locally quasi finite saturation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.Flat.mk",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.Flat.casesOn",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk"
+    ],
+    "digest": "62cdfb9a4045b2f0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-space-relation-slicing",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted.",
+   "via": [
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cm-relation-point-slice",
+  "worker": "stage1",
+  "summary": "Read 04N0 with 04MY, 04MZ and 04LH/047W. Added maximal CM slicing and quasi-finite-locus descent as two independent statement-only inputs; proved the equivalence-relation stabilizer is trivial, converted zero fibre dimension to quasi-finiteness, and retained affineness by a final principal-open shrink. Normalized doubled TeX backslashes without changing the statement. No project attachment or Mathlib match found.",
+  "blueprint": "Realizes the local-slice input in the existing bootstrap/curve-moduli prerequisite chain in blueprint.from.place. Read the latest sk-thm-sf-ctf-stability direct-images proof (3); no change to the chapter or unit route. The actual local proof follows Stacks 04N0.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product computation used to apply the existing ring criterion; not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Generic zero-fibre-dimension criterion at a prime, used on an affine chart of the saturation map; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic permanence of local quasi-finiteness on open sources, used only for the final affine shrink."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-lqf-restriction-to-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-7a5bfcb36",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-7a5bfcb36 (reviewer sub-agent of L); spot-checked: I read Stacks 04MY, 04MX, 04MZ, 04N0 (with proofs), 04LH and 047W(2), the item, both new nodes and every cited statement. The item statement is unchanged from the Q142 base apart from B4 backslash normalization; stmt_deps are identical. Its conclusion is 04N0 restricted to what the parent fppf-space-relation-slicing step 2 uses. Step 1: Yoneda gives the groupoid structure; G = V via e, so G_v = Spec κ(v) has dimension 0. Step 2: the maximal-slice node gives an lfp immersion from an affine B with h_0 CM + lfp and dim_x h_0^{-1}(v) = 0. Step 3: an affine lfp chart plus the affine fibre-product identification and the ring criterion (iff dim_{q̄} = 0) gives quasi-finiteness at x. Step 4: the 04LH/047W(2) descent node gives an open W with p^{-1}(W) equal to the quasi-finite locus, and b ∈ W. Step 5: a principal-open shrink restores affineness; lfp via C_f and composition, flatness by stalks, lqf by the open-restriction lemma. The new nodes are true. Maximal slice: κ(b) = κ(u), so F'_u = h^{-1}(u) and G'_u = G_u, and the affine output is valid. Locus descent: the quasi-finite locus of an lft map is open, and the statement checks on the trivial groupoid and empty B. Neither restates the item. rg -L for 04MZ, 04LH, 047W, 04N0 and lemma-local-source found only the stack/unramified 06M3 node, a different statement, so there are no duplicates. B1–B7 hold. The three declared generic tool_uses are accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayRelationPointSlice",
+  "declaration": "AlgebraicGeometry.exists_cm_relation_point_slice",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayRelationPointSlice.lean",
+  "statement": "theorem exists_cm_relation_point_slice {S : Scheme.{u}} {V R : Over S} (s t : R ⟶ V) (hinj : ∀ T : Over S, Function.Injective (fun r : T ⟶ R ↦ (r ≫ s, r ≫ t))) (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Flat s.left] [Flat t.left] (hcm_s : ∀ (v : V.left) (x : s.left.fiber v), IsNoetherianRing ((s.left.fiber v).presheaf.stalk x) ∧ (IsLocalRing.depth (R := (s.left.fiber v).presheaf.stalk x) ((s.left.fiber v).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim ((s.left.fiber v).presheaf.stalk x)) (hcm_t : ∀ (v : V.left) (x : t.left.fiber v), IsNoetherianRing ((t.left.fiber v).presheaf.stalk x) ∧ (IsLocalRing.depth (R := (t.left.fiber v).presheaf.stalk x) ((t.left.fiber v).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim ((t.left.fiber v).presheaf.stalk x)) [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] (v : V.left) [LocallyOfFiniteType (V.left.fromSpecResidueField v)] [QuasiCompact (V.left.fromSpecResidueField v)] : ∃ (A : Over S) (g : A ⟶ V) (a : A.left), IsAffine A.left ∧ LocallyOfFinitePresentation g.left ∧ g.left a = v ∧ Flat (pullback.snd g.left t.left ≫ s.left) ∧ LocallyOfFinitePresentation (pullback.snd g.left t.left ≫ s.left) ∧ Scheme.Hom.IsLocallyQuasiFinite (pullback.snd g.left t.left ≫ s.left)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12ded890f",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_dep records (unchanged vs side-live), the new module and the report, and Stacks 04MY/04N0. The statement field is verbatim. Every clause matches: relation on Over S sections (injective, Equivalence), Flat + fibre stalks Noetherian with IsLocalRing.depth = ringKrullDim for s and t, lfp s/t, finite type point as LocallyOfFiniteType ∧ QuasiCompact of fromSpecResidueField, ∃ A : Over S affine, g lfp, g a = v, saturation pullback.snd g t ≫ s Flat/lfp/IsLocallyQuasiFinite. The dropped immersion clause and clause (5) are declared in source.place. No CM predicate exists anywhere (no duplicate notion). No hollow defs; sorry only; docstrings carry the source place, blueprint id and 5-step proof; single universe u; no extra assumptions. No file changed, so no compile."
+ }
+}

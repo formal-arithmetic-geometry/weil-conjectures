@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-affine-group-dual-number-calculus",
+ "kind": "statement",
+ "title": "Scalar-extended infinitesimal points and conjugation for affine groups",
+ "statement": "Let $k$ be a field [def-weil-field] and $J$ an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with identity $e$. Put $L_J=T_{J/k,e}$ [def-sc-scheme-tangent-space]. Then $L_J$ is a finite-dimensional $k$-vector space. For every commutative $k$-algebra $R$, write $R[\\delta]=R[T]/(T^2)$, with $\\delta$ the class of $T$ [def-sc-dual-numbers], and let $p_R:R[\\delta]\\to R$ set $\\delta=0$. There are canonical bijections\n$$E_{J,R}:L_J\\otimes_k R\\xrightarrow{\\sim}\\ker(J(p_R):J(R[\\delta])\\to J(R)),$$\nwhere the kernel is the set of points reducing to the identity. For $R=k$ this is the defining identification of tangent vectors. They satisfy\n$$E_{J,R}(u+v)=E_{J,R}(u)E_{J,R}(v),\\quad E_{J,R}(0)=e,\\quad E_{J,R}(-u)=E_{J,R}(u)^{-1}.$$\nFor $a\\in R$, applying $J$ to $R[\\delta]\\to R[\\delta]$, $\\delta\\mapsto a\\delta$, sends $E_{J,R}(u)$ to $E_{J,R}(au)$. The bijections are natural under homomorphisms of commutative $k$-algebras $R\\to R'$ and homomorphisms of affine finite-type $k$-group schemes $f:J\\to J'$: their tangent maps $\\mathrm df:L_J\\to L_{J'}$ are $k$-linear, and\n$$f(E_{J,R}(u))=E_{J',R}((\\mathrm df\\otimes1)(u)).$$\nFor a closed subgroup inclusion $i:B\\hookrightarrow J$ [def-sc-group-scheme-subgroup], $\\mathrm di$ is injective and the preceding identity identifies $E_{B,R}(L_B\\otimes_k R)$ with\n$$B(R[\\delta])\\cap\\ker J(p_R)\\subseteq J(R[\\delta]).$$\nFinally there is a homomorphism of $k$-group schemes $\\operatorname{Ad}_J:J\\to\\operatorname{GL}(L_J)$, where $\\operatorname{GL}(L_J)(R)$ is the group of invertible $R$-linear maps of $L_J\\otimes_k R$, characterized for every $R$, $j\\in J(R)$ and $u\\in L_J\\otimes_k R$ by\n$$jE_{J,R}(u)j^{-1}=E_{J,R}(\\operatorname{Ad}_J(j)u).$$\nHere $j$ in $J(R[\\delta])$ is its image under $R\\hookrightarrow R[\\delta]$. For every homomorphism $f:J\\to J'$, one has\n$$(\\mathrm df\\otimes1)(\\operatorname{Ad}_J(j)u)=\\operatorname{Ad}_{J'}(f(j))((\\mathrm df\\otimes1)(u)).$$\nNo smoothness, reducedness, connectedness or characteristic-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.6 (augmentation cotangent dual), 10.11 (addition and scaling), 10.14 (subgroups), 10.18–10.21 (scalar-extended infinitesimal points and adjoint action), printed pp.188–193. The augmentation-ideal computation of 10.19 works for every commutative k-algebra R, not just finitely generated ones."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-wf-lie-algebra-derivation",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=\\operatorname{Spec}A$ and let $\\epsilon:A\\to k$, $\\Delta:A\\to A\\otimes_k A$, and $S:A\\to A$ be the counit, coproduct and antipode. The coordinate Hopf node supplies these maps and their identities, with multiplication of points given by $(x y)(a)=\\sum x(a_{(1)})y(a_{(2)})$. Apply the affine-pair criterion for locally finite type to the structure morphism, with affine opens $J$ and $\\operatorname{Spec}k$. Thus $A$ has finitely many algebra generators $c_1,\\ldots,c_m$. Put $I=\\ker\\epsilon$ and $M=I/I^2$. In tensor expressions, scalar counit values are understood via the structure map into the target algebra.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6 and 10.19, printed pp.188,192; Hopf coordinates of Chapter 3; finite generation also Stacks Tag 01T2, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "The unit splits $\\epsilon$, so every $a\\in A$ is uniquely $\\epsilon(a)1+b$ with $b\\in I$. Modulo $I^2$ the product of $(c,x)$ and $(c',x')$ is $(cc',cx'+c'x)$; hence $A/I^2=k\\oplus M$ as an augmented square-zero algebra. The elements $b_i=c_i-\\epsilon(c_i)$ generate $I$: for any polynomial $P$, the difference $P(c_1,\\ldots,c_m)-P(\\epsilon(c_1),\\ldots,\\epsilon(c_m))$ is a sum of multiples of the $b_i$, by subtracting one variable at a time. Modulo $I^2$ each multiplier may be replaced by its counit. Therefore the classes $\\bar b_i$ span $M$ over $k$, so $M$ is finite-dimensional. Apply the finite linear dual node with $V=W=M$ and $f=1_M$ to conclude that $M^*=\\operatorname{Hom}_k(M,k)$ is finite-dimensional.",
+   "uses": [
+    "lem-sfb-linear-dual-dimension-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6, formula (56), printed p.188; 10.19, printed p.192; split augmentation sequence 3.22"
+   }
+  },
+  {
+   "text": "For any commutative $k$-algebra $R$, an element $x$ of the kernel in the statement is an algebra map $A\\to R[\\delta]$ with reduction $\\epsilon_R$. Write it uniquely as $x(a)=\\epsilon(a)+\\delta d(a)$. Multiplicativity says exactly $d(ab)=\\epsilon(a)d(b)+\\epsilon(b)d(a)$, with $d$ $k$-linear and zero on $k$. Thus $d(I^2)=0$, and restriction determines $\\lambda\\in\\operatorname{Hom}_k(M,R)$. Conversely, for such $\\lambda$, put $d_\\lambda(a)=\\lambda(\\overline{a-\\epsilon(a)})$. The product formula of step 2 shows that $\\epsilon+\\delta d_\\lambda$ is a unital algebra map. These two constructions are inverse, including for the zero ring $R$. This proves a canonical bijection between the kernel and $\\operatorname{Hom}_k(M,R)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6 and 10.19, printed pp.188,192; coefficient calculation also Proposition 10.28, printed p.195"
+   }
+  },
+  {
+   "text": "For $R=k$, the kernel is the dual-number tangent set at $e$, by its definition. Its identification with $M^*$ from step 3 is linear for the tangent operations specified in that definition: the common lift of two tangent maps to the algebra with basis $1,\\delta_1,\\delta_2$ has formula $a\\mapsto\\epsilon(a)+\\delta_1d_1(a)+\\delta_2d_2(a)$; sending both variables to $\\delta$ adds the coefficients. Sending $\\delta$ to $t\\delta$ multiplies the coefficient by $t$. We consequently identify $L_J$ linearly with $M^*$, and step 2 proves its finite dimension. For a group homomorphism $f:J\\to J'$, composition of tangent maps is the tangent map of the definition, so in these coordinates it is precomposition by $f^*:A'\\to A$ on coefficient maps, which is $k$-linear.",
+   "uses": [
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6 and 10.11, printed pp.188–189; 10.19, formula (59), printed p.192"
+   }
+  },
+  {
+   "text": "The tensor–Hom node, specialized to the finite $k$-module $M$, to $P=R$ and $Q=k$, gives the isomorphism $R\\otimes_k M^*\\simeq\\operatorname{Hom}_k(M,R\\otimes_k k)$. Its projectivity hypothesis holds: remove dependent vectors from the finite spanning list of step 2 to obtain a basis; a linear map out of $M$ lifts through any surjection by choosing lifts of its finitely many basis images, which is the lifting characterization of projectivity. Tensor symmetry and the unit identification $R\\otimes_k k\\simeq R$ give\n$$\\beta_R:L_J\\otimes_k R\\xrightarrow{\\sim}\\operatorname{Hom}_k(M,R),\\qquad \\beta_R(v\\otimes r)(z)=r\\,v(z).$$\nThe symmetry and unit identifications are inverse on pure tensors, by the tensor universal property. This is $R$-linear for the scalar-extension module structure. Define $E_{J,R}(u)$ to be the map $a\\mapsto\\epsilon(a)+\\delta\\beta_R(u)(\\overline{a-\\epsilon(a)})$ of step 3. It is a bijection and for $R=k$ is precisely the tangent identification of step 4.",
+   "uses": [
+    "lem-pc-finite-projective-module-tensor-hom",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19, printed p.192: the last tensor–dual identification, made explicit by finite-projective tensor–Hom"
+   }
+  },
+  {
+   "text": "For $x_u=E_{J,R}(u)$ and $x_v=E_{J,R}(v)$, write their coefficient maps as $d_u,d_v$. Multiplying their values against $\\Delta(a)$ gives\n$$(x_u x_v)(a)=\\epsilon(a)+\\delta\\sum\\bigl(\\epsilon(a_{(1)})d_v(a_{(2)})+d_u(a_{(1)})\\epsilon(a_{(2)})\\bigr)=\\epsilon(a)+\\delta(d_u(a)+d_v(a)).$$\nHere the term in $\\delta^2$ vanishes and the two counit identities give the last equality. By the formula for $\\beta_R$, this is $E_{J,R}(u+v)$. The zero coefficient map is the identity point. Taking $v=-u$ gives the asserted inverse formula. Applying $\\delta\\mapsto a\\delta$ for $a\\in R$ replaces $d_u$ by $a d_u$, which is $\\beta_R(au)$, and proves the scaling assertion.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.11, printed p.189; scalar-extended version in 10.19, printed p.192"
+   }
+  },
+  {
+   "text": "For a $k$-algebra homomorphism $h:R\\to R'$, applying $h$ to coefficients sends $\\beta_R(v\\otimes r)(z)=r v(z)$ to $h(r)v(z)$, exactly the formula for $\\beta_{R'}((1\\otimes h)(v\\otimes r))$. Since pure tensors span, the same holds for every $u$, and the formula defining $E$ proves naturality in $R$. For $f:J\\to J'$, its pullback $f^*:A'\\to A$ preserves counits and sends $I'$ into $I$ and $(I')^2$ into $I^2$. Thus the coefficient of $f(E_{J,R}(u))$ is $d_u\\circ f^*$. On $v\\otimes r$ this is the coefficient of $(\\mathrm df(v))\\otimes r$ by step 4; tensor linearity gives $f(E_{J,R}(u))=E_{J',R}((\\mathrm df\\otimes1)u)$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19, formula (59), printed p.192"
+   }
+  },
+  {
+   "text": "For a closed subgroup $i:B\\hookrightarrow J$, the affine closed-immersion description gives $B=\\operatorname{Spec}(A/K)$; the images of the $c_i$ generate $A/K$, so steps 2–5 apply to this coordinate algebra and define $L_B$ and $E_{B,R}$ directly. Its maps on points are injective by the subgroup definition. In particular the map on tangent sets at $R=k$ is injective, hence $\\mathrm di$ is injective. Its image on scalar extension remains injective: extend a basis of the image of $\\mathrm di$ to a basis of $L_J$ and obtain a linear left inverse; tensor that left inverse with $R$. If $b\\in B(R[\\delta])$ lies in the kernel after inclusion into $J$, then $i(p_R(b))=e_J$. Injectivity of $B(R)\\to J(R)$ implies $p_R(b)=e_B$. Conversely any such $b$ is in that intersection. Apply step 7 and the two $E$ bijections to identify this intersection with the asserted image of $L_B\\otimes_k R$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14, printed p.190; scalar extension as in 10.19, printed p.192"
+   }
+  },
+  {
+   "text": "For $j\\in J(R)$, conjugation by its constant lift preserves the kernel since $p_R$ is a group homomorphism. Use the iterated coproduct $\\sum a_{(1)}\\otimes a_{(2)}\\otimes a_{(3)}$ and the inverse point $j\\circ S$. The coefficient of $j E_{J,R}(u)j^{-1}$ is\n$$D_j(d_u)(a)=\\sum j(a_{(1)})\\,d_u(a_{(2)})\\,j(S(a_{(3)})).$$\nThis follows by multiplying the three values; the middle factor is the only one with a $\\delta$ term. Because the result is a kernel point, step 3 identifies its coefficient with a functional on $M$. The displayed formula is $R$-linear in $d_u$. Conjugation by $j^{-1}$ is its inverse. Hence $C_R(j)=\\beta_R^{-1}D_j\\beta_R$ is an invertible $R$-linear map of $L_J\\otimes_k R$. For $h:R\\to R'$, the displayed finite sum is preserved by applying $h$, and the formula for $\\beta$ in step 7 proves naturality of $C_R(j)$ in $R$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.20–10.21, printed pp.192–193; explicit coordinate verification of R-linearity"
+   }
+  },
+  {
+   "text": "Put $n=\\dim L_J$. If $n>0$, choose a basis. Let $j_{\\rm univ}\\in J(A)$ be the point corresponding to $1_A:A\\to A$. The matrix $K$ of $C_A(j_{\\rm univ})$ lies in $\\operatorname{GL}_n(A)$ by step 9, and its inverse is the matrix obtained from $j_{\\rm univ}^{-1}$. The general-linear-group node therefore supplies a morphism $\\operatorname{Spec}A\\to\\operatorname{GL}_n$; explicitly its pullback sends $x_{rs}$ to $K_{rs}$ and $\\det^{-1}$ to $(\\det K)^{-1}$. For every point $j:A\\to R$, naturality in step 9 says that the image matrix is $j(K)$, precisely $C_R(j)$. Transporting the basis identifies the target with $\\operatorname{GL}(L_J)$. For $n=0$, every $L_J\\otimes_k R$ is zero and has exactly one automorphism; this functor is represented by the trivial group $\\operatorname{Spec}k$. The resulting morphism has the same characterization. Thus both cases produce a morphism inducing all $C_R$.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.20, printed p.192; algebraicity verified by the universal affine point and the determinant localization"
+   }
+  },
+  {
+   "text": "Conjugation satisfies $c_{j_1j_2}=c_{j_1}\\circ c_{j_2}$ and $c_e=1$. Transport through the $E$ bijections gives $C_R(j_1j_2)=C_R(j_1)C_R(j_2)$ and $C_R(e)=1$ for every $R$. Apply full faithfulness of Yoneda on the category of affine $k$-schemes to the representing affine schemes: these equalities on all affine points give the multiplication and unit diagrams for the morphism of step 10. It is therefore a group-scheme homomorphism $\\operatorname{Ad}_J$. The same full faithfulness shows uniqueness from its conjugation characterization and independence of the basis in step 10. The hypothesis of the cited Yoneda node is met because both $J$ and the constructed $\\operatorname{GL}(L_J)$ are affine $k$-schemes and their point functors are the representables on that category.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.20–10.21, printed pp.192–193; Stacks Tag 001P, lemma-yoneda, for passage from affine points to morphisms"
+   }
+  },
+  {
+   "text": "Finally, apply a group homomorphism $f:J\\to J'$ to $jE_{J,R}(u)j^{-1}$. The group law gives $f(j)f(E_{J,R}(u))f(j)^{-1}$. By step 7 and the definition of $\\operatorname{Ad}$, the two expressions are respectively\n$$E_{J',R}((\\mathrm df\\otimes1)(\\operatorname{Ad}_J(j)u)),\\qquad E_{J',R}(\\operatorname{Ad}_{J'}(f(j))((\\mathrm df\\otimes1)u)).$$\nThe injectivity of $E_{J',R}$ proves the final equivariance identity. Every calculation used only the square-zero relation, finite generation for $M$, and Hopf identities, so it imposed none of the extra hypotheses excluded by the statement.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.21, diagram (61) and its proof, printed pp.192–193"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-linear-dual-dimension-rank",
+  "def-weil-affine-spectrum",
+  "def-sc-dual-numbers",
+  "def-sc-scheme-tangent-space",
+  "lem-pc-finite-projective-module-tensor-hom",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193; coefficient calculation of 10.28, p.195; universal-point verification of the morphism in 10.20 made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lie.*(baseChange|tensor)|infPoints|adjointRepresentation|tangent.*[Gg]roup",
+   "results": "{\"t\": \"2026-10-23T22:25:32Z\", \"tool\": \"grep\", \"query\": \"Lie.*(baseChange|tensor)|infPoints|adjointRepresentation|tangent.*[Gg]roup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/Cone/TensorProduct.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"Mathlib/Geometry/Manifold/Riemannian/Basic.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\"], \"digest\": \"e080c76002cd1991\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent vectors of an affine group scheme after extension of scalars and conjugation action on dual numbers",
+   "results": "{\"t\": \"2026-10-23T22:25:33Z\", \"tool\": \"leansearch\", \"query\": \"Tangent vectors of an affine group scheme after extension of scalars and conjugation action on dual numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjAct.smulCommClass₀\", \"tangentConeAt_mono_field\", \"mulInvariantVectorField\", \"instAddCommGroupTangentSpace\", \"mdifferentiable_mulInvariantVectorField\", \"AffineBasis.basisOf_smul\", \"Algebra.Extension.cotangentComplex\", \"Algebra.Extension.CotangentSpace\"], \"digest\": \"2f3a5cd185d2aca2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DualNumber\", \"Group\"",
+   "results": "{\"t\": \"2026-10-23T22:25:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"DualNumber\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal points at the identity over dual numbers are the scalar extension of the tangent space of an affine algebraic group in any characteristic",
+   "results": "{\"t\": \"2026-10-23T22:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal points at the identity over dual numbers are the scalar extension of the tangent space of an affine algebraic group in any characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.infinitesimal\", \"Algebra.Extension.toInfinitesimal\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"Algebra.Extension.CotangentSpace\", \"Algebra.Extension.ker_infinitesimal\", \"Algebra.Extension.cotangentComplex\"], \"digest\": \"2c70e1f41719a4d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type affine group scheme over a field the kernel of G(R[epsilon]) to G(R) is naturally Lie(G) tensor R, with multiplication corresponding to addition and conjugation to the adjoint representation",
+   "results": "{\"t\": \"2026-10-23T22:25:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type affine group scheme over a field the kernel of G(R[epsilon]) to G(R) is naturally Lie(G) tensor R, with multiplication corresponding to addition and conjugation to the adjoint representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.ker_infinitesimal\", \"KaehlerDifferential.kerToTensor_apply\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"AlgHom.ker_kerSquareLift\", \"KaehlerDifferential.kerToTensor\", \"Algebra.Extension.Cotangent.ker_mk\", \"LieAlgebra.Extension.toKer\", \"Algebra.H1Cotangent\"], \"digest\": \"af61cc90d9af81c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "grep",
+   "query": "infPoints|adjointRepresentation|Lie.*tensor|dual.*number.*group",
+   "results": "{\"t\": \"2026-10-23T22:26:05Z\", \"tool\": \"grep\", \"query\": \"infPoints|adjointRepresentation|Lie.*tensor|dual.*number.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine finite type group scheme over a field the kernel on dual numbers is the tangent space tensor an arbitrary algebra, and conjugation gives the adjoint representation",
+   "results": "{\"t\": \"2026-10-23T22:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine finite type group scheme over a field the kernel on dual numbers is the tangent space tensor an arbitrary algebra, and conjugation gives the adjoint representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.ker_infinitesimal\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"retractionKerCotangentToTensorEquivSection\", \"KaehlerDifferential.kerCotangentToTensor\", \"Algebra.H1Cotangent\", \"Algebra.Extension.cotangentEquiv\", \"Algebra.Extension.H1Cotangent\", \"Algebra.Extension.CotangentSpace\"], \"digest\": \"017ae7dd0599bf24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned extension/cotangent, manifold Lie group and abstract Lie algebra results do not state the affine group-scheme tangent base-change and adjoint functoriality assertions; grep and Loogle have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "infPoints|adjointRepresentation|dualNumber.*[Gg]roup|tangent.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-23T22:56:21Z\", \"tool\": \"grep\", \"query\": \"infPoints|adjointRepresentation|dualNumber.*[Gg]roup|tangent.*[Bb]ase[Cc]hange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned extension/cotangent, manifold Lie group and abstract Lie algebra results do not state the affine group-scheme tangent base-change and adjoint functoriality assertions; grep and Loogle have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinitesimal kernel of points of a group scheme over dual numbers is the base change of its tangent space with the adjoint conjugation action",
+   "results": "{\"t\": \"2026-10-23T22:56:21Z\", \"tool\": \"leansearch\", \"query\": \"The infinitesimal kernel of points of a group scheme over dual numbers is the base change of its tangent space with the adjoint conjugation action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.ad_ker_eq_self_module_ker\", \"ConjAct.instGroup\", \"Algebra.Extension.infinitesimal\", \"Algebra.Extension.ker_infinitesimal\", \"ConjAct.instGroupWithZero\", \"Algebra.Extension.toInfinitesimal\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"instAddCommGroupTangentSpace\"], \"digest\": \"3daef94c6c01afcd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned extension/cotangent, manifold Lie group and abstract Lie algebra results do not state the affine group-scheme tangent base-change and adjoint functoriality assertions; grep and Loogle have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DualNumber\", \"HopfAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T22:56:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"DualNumber\\\", \\\"HopfAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned extension/cotangent, manifold Lie group and abstract Lie algebra results do not state the affine group-scheme tangent base-change and adjoint functoriality assertions; grep and Loogle have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group acts linearly on its Lie algebra by conjugating tangent vectors; the action is a morphism of group schemes in any characteristic",
+   "results": "{\"t\": \"2026-10-23T22:56:47Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group acts linearly on its Lie algebra by conjugating tangent vectors; the action is a morphism of group schemes in any characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieAlgebraGroupLieAlgebra\", \"GroupLieAlgebra\", \"LieAlgebra.ad\", \"lieAlgebraSelfModule\", \"instLieAlgebraAddGroupLieAlgebra\", \"LinearEquiv.lieConj\", \"LieAlgebra.ad_apply\", \"LieModule.toEnd_apply_apply\"], \"digest\": \"3c921ac16658eac2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned extension/cotangent, manifold Lie group and abstract Lie algebra results do not state the affine group-scheme tangent base-change and adjoint functoriality assertions; grep and Loogle have no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lie-normalizer-centralizer-invariants",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Lemma 17.47, printed p.366; normalizer representability in Section 1i, Proposition 1.79 and Corollary 1.80, printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198. Auxiliary for Lemma 17.47: Proposition 10.34 and proof, printed pp.197–198; tangent functor and adjoint action in Sections 10a–10d, printed pp.184–193. The smooth-H specialization suffices here; representability is an explicit hypothesis, not asserted in this node. Supporting calculation: Milne 10.6, 10.11, 10.14 and 10.18–10.21, before the invariant-space argument of Proposition 10.34. Split here: Milne 10.6 and 10.19 via the augmentation quotient, 10.11 via the counit identities, 10.14 via injective subgroup points, and 10.20–10.21 via conjugation coefficients and the universal affine point.",
+   "via": [
+    "lem-sfb-lie-normalizer-centralizer-invariants",
+    "lem-sfb-cartan-containing-normalizer-smooth",
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-group-dual-number-calculus",
+  "worker": "stage1",
+  "summary": "Proved all clauses by the split augmentation quotient A/I^2 = k plus I/I^2, the existing finite-projective tensor-Hom isomorphism, explicit Hopf coefficient calculations, and universal-point construction of the adjoint morphism. No new nodes: existing finite-type, Hopf, dual, tensor-Hom, general-linear and Yoneda nodes suffice. No statement correction or extra hypotheses.",
+  "blueprint": "Supports the existing provenance from det-thm-sf-ctf-stability-direct-images proof (3), through the alteration/moduli/reductivity/Milne normalizer branch already recorded in blueprint.from.place. Steps 1–5 realize Milne 10.6/10.19, step 6 realizes 10.11, steps 7–8 realize 10.14 and formula (59), steps 9–12 realize 10.20–10.21. Whole-blueprint searches for dual number, augmentation ideal, infinitesimal, cotangent, tensor Hom, adjoint and general linear yielded no duplicate of this arbitrary-characteristic affine-group statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-28933b715",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-28933b715 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged from live, which is unsplit and has no repair note, so the 2026-10-21 re-split rule does not apply. There are no new nodes. The 12 steps are each under 1000 characters, proof_deps equals the union of the step uses, and there is no SGA. Source read: Milne iAG2017 printed pp.188–193: 10.6/(56), 10.11, 10.14, 10.18–10.19/(59), 10.20–10.21/(60)(61). The item matches these clause by clause. Allowing arbitrary R instead of finitely generated R is valid because the 10.19 computation never uses finite generation, and Aut_R is what GL means. Steps 3, 6 and 9: I re-expanded the multiplicativity condition, the convolution product and the three-factor conjugation; the counit and antipode identities come from the coordinate-hopf leaf. Step 5: the tensor-hom leaf applies, since M is finite by step 2 and projective via a basis and the lifting property. Steps 7–8: f^* preserves counits, and closed-subgroup injectivity on all R-points gives injectivity of di and the scheme-theoretic intersection. Step 10: the universal point and the GL_n R-point description (which needs c>=1) build the morphism; n=0 is handled separately by Spec k. Step 11: Yoneda is applied on affine k-schemes. Step 12 is Milne's proof of (61). Every off-unit statement cited is a Mathlib leaf, so no tool_uses are needed. Duplicate search found nothing equivalent: the sec-algebraic-groups-lie-algebras nodes (lem-ag-identity-tangent-*, lem-ag-lie-identity-cotangent-dual, def-wf-lie-algebra-derivation) cover only field-valued points, characteristic 0 or matrix groups, and belong to other units. Small cases checked: Ga, Gm, GL_n, mu_p and alpha_p in characteristic p, the trivial group, R=0 and characteristic 2. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus",
+  "declaration": "AlgebraicGeometry.AffineGroupDualNumberCalculus.exists_compatible_calculus",
+  "declarations": [
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.reduction",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Kernel",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Data",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Compatible",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.exists_compatible_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupDualNumberCalculus.lean",
+  "statement": "theorem exists_compatible_calculus : ∃ D : ∀ (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom], Data G, ∀ (G H : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (f : G.X ⟶ H.X) [IsMonHom f], Compatible (D G) (D H) f",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Data and Compatible expose all clauses. The tangent module is the existing GrpObj.Lie with its base-ring module, owned by def-wf-lie-algebra-derivation and imported through Lie.Differential. Scalar extension uses Mathlib order R tensor Lie. E is normalized by the actual tangentPoint and naturality; Ad is characterized by conjugation and realized by a unique group-scheme morphism in every finite basis, including n=0. No additional geometric or characteristic hypotheses. Repair of returned dab04fad0a04: replaced the unused theorem dependency with the owning definition node and removed the unused LieIdentityTangentEquiv import; all Lean declarations are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77cd245c2",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Re-delivery of dab04fad0a04 applies the requested H2 repair exactly: stmt_deps replace the unused theorem lem-ag-lie-identity-tangent-equiv with the owning landed definition node def-wf-lie-algebra-derivation (GrpObj.Lie, instModuleLie, tangentGroup; Lie.Bracket publicly imported via Lie.Differential) and keep def-sc-general-linear-group. The Lean file is byte-identical except for the removed unused LieIdentityTangentEquiv import. Dep records equal live; the item changes only stmt_deps and lean. Clause check against the node and Milne 10.6-10.21: field k; affine G with LocallyOfFiniteType+QuasiCompact; Lie as T_e with Module.Finite; E : R⊗Lie ≃ exact kernel subtype for all k-algebras R; normalize (tangentPoint), add/zero/neg/scale/natural; differential with df⊗1; closed subgroup injective df and range = range(·≫f) ∩ ker; Ad →* GL_R(R⊗Lie) with conjugation via inlAlgHom; regular gives a unique IsMonHom ρ to GeneralLinearGroup in every ULift(Fin n) basis, consistent through the toLin'/homMulEquiv MulEquivs, n=0 included; equivariant. E and Ad are fully pinned; no hollow defs or arbitrary maps. Edge cases R=0, dim 0, α_p/μ_p, char 2 checked. Universe u is forced by the points interface. lean.statement verbatim; single sorry; docstrings carry source, blueprint and 12 steps. Advisory only: points/tangentPoint/differential have no dedicated owner record. No compile, since no file changed."
+ }
+}

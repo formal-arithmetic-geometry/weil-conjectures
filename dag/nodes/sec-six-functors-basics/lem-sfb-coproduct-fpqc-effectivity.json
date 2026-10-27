@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-coproduct-fpqc-effectivity",
+ "kind": "statement",
+ "title": "Ind-quasi-affine effectivity for a labelled coproduct over an affine fpqc chart",
+ "statement": "Let $p:V\\to X$ be a morphism of schemes with $V$ affine such that $\\{p\\}$ is an fpqc covering [def-pc-scheme, def-weil-pbc-fpqc-covering]. Let $S$ be any set in the universes of [def-weil-size-convention], put $T=\\coprod_{s\\in S}V$ [lem-weil-pbc-scheme-coproduct-family], and equip $T/V$ with any scheme descent datum over $V/X$ [def-pd-descent-datum].\n\nFor every affine open $B\\subseteq V$ and every quasi-compact open subscheme $K\\subseteq T\\times_VB=\\coprod_SB$, there is a finite subset $J\\subseteq S$ such that $K$ is contained as an open subscheme in the affine scheme $D=\\coprod_JB$. For every affine open $B'\\subseteq B$, the inverse image $K'=K\\times_BB'$ is quasi-compact and open in the affine scheme $D'=\\coprod_JB'$. In particular the morphism $K\\to B$ is quasi-affine [def-nagata-quasi-affine-morphism], with a quasi-affine scheme meaning a quasi-compact open subscheme of an affine scheme. The descent datum is effective: there exist an $X$-scheme $Y$ and an isomorphism $\\eta:Y\\times_XV\\xrightarrow{\\sim}T$ over $V$ inducing the given datum. No finiteness of $S$, quasi-compactness of $T\\to V$, or Noetherian hypothesis is imposed; empty $S$ and empty $V$ are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2), effectivity of the labelled coproduct datum; old proof step 6; Stacks Tags 0AP6 (definition-ind-quasi-affine), 0APK (lemma-ind-quasi-affine)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pd-descent-datum",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open $B\\subseteq V$, the inverse image of the $s$th open component $V\\subseteq T$ is its open restriction $B$: the open-subscheme description [def-weil-open-immersion] and fibre-product universal property [def-pc-fibre-product] identify this pullback, since a morphism into $V$ factors through $B$ exactly when its underlying image lies in $B$. These inverse images remain disjoint and cover the pullback. Hence [lem-weil-pbc-scheme-coproduct-family] identifies $T\\times_VB$ with $\\coprod_SB$: the morphism from the latter is an isomorphism on each open component, and the componentwise inverses agree on the empty overlaps.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), labelled coproducts restricted to affine opens; elementary open-subscheme pullback calculation"
+   }
+  },
+  {
+   "text": "The component intersections $K\\cap B_s$ form an open cover of $K$. By [def-weil-pbc-quasi-compact-scheme], finitely many suffice; let $J\\subseteq S$ be their finite set of labels. The union of these components is the open subscheme $D=\\coprod_JB$ by [lem-weil-pbc-scheme-coproduct-family], so the inclusion of $K$ factors as an open inclusion into $D$. Clause (4) of [lem-weil-pbc-affine-morphism-permanence] makes $D$ affine, including $J=\\varnothing$ (the spectrum of the zero ring). Thus $K$ is a quasi-compact open subscheme of an affine scheme.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite-component replacement for the infinite quasi-affine claim; finite subcover argument and finite affine coproduct"
+   }
+  },
+  {
+   "text": "For every affine open B' of B, the finite coproduct D' of copies of B' is affine by [lem-weil-pbc-affine-morphism-permanence](4). The compact open K is quasi-affine because it is an open subscheme of the affine D. The affine base B is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Thus K -> B is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), and its base change to B' has compact source by clauses (2)--(3). The coproduct pullback of step 1 and pullback pasting identify this source with an open subscheme of D', with the same labels J. Compact open subschemes of affine schemes are quasi-affine, verifying [def-nagata-quasi-affine-morphism] for K -> B.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-nagata-quasi-affine-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AP6, definition-ind-quasi-affine; relative quasi-affine-open criterion checked using finite components and affine quasi-separatedness"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-ind-quasi-affine-fpqc-effective-descent] with its covering $A\\to B$ equal to $V\\to X$ and its scheme over $A$ equal to $T\\to V$. The covering is fpqc by the hypothesis. For every affine open of $V$, every quasi-compact open of its inverse image is quasi-affine over that affine open by steps 1--3. The given scheme descent datum is the required isomorphism with its cocycle. All hypotheses of the cited theorem thus hold; it gives the $X$-scheme $Y$ and the datum-compatible isomorphism $Y\\times_XV\\xrightarrow{\\sim}T$. The proof of steps 1--3 permits $J=\\varnothing$ and arbitrary $S$. For $S=\\varnothing$ or $V=\\varnothing$ the same theorem still applies: its open condition is vacuous. No quasi-compactness of $T\\to V$ or Noetherian assumption was used.",
+   "uses": [
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine (Gabber), singleton covering"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-nagata-quasi-affine-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-a1-ind-quasi-affine-fpqc-effective-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "Proof (2), finite-component verification followed by Tag 0APK. Lean implementation by H1: finite subcover and open-immersion lifts; compactness over smaller affine opens via Mathlib quasiCompact_of_compactSpace and base-change stability."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Any descent datum on an arbitrary disjoint union of copies of an affine scheme is effective for an fpqc covering",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced, CategoryTheory.effectiveEpi_desc_iff_effectiveEpiFamily, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, CategoryTheory.precoherentEffectiveEpiFamilyCompEffectiveEpis, CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc, CategoryTheory.Functor.EffectivelyEnough.presentation, CategoryTheory.Precoherent.pullback. QuasiAffine.of_isImmersion and instIsAffineSigmaObjScheme give parts of the finite-component calculation; neither constructs effective fpqc descent of the arbitrary coproduct. Generic morphism-property descent and effective-epimorphism lemmas do not state scheme effectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"quasiAffine\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion. QuasiAffine.of_isImmersion and instIsAffineSigmaObjScheme give parts of the finite-component calculation; neither constructs effective fpqc descent of the arbitrary coproduct. Generic morphism-property descent and effective-epimorphism lemmas do not state scheme effectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?quasi.?affine|effective.*descent|descent.*effective|[Cc]oproduct.*[Qq]uasi[Aa]ffine",
+   "results": "0 hits: . QuasiAffine.of_isImmersion and instIsAffineSigmaObjScheme give parts of the finite-component calculation; neither constructs effective fpqc descent of the arbitrary coproduct. Generic morphism-property descent and effective-epimorphism lemmas do not state scheme effectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective faithfully flat descent of an ind quasi affine disjoint union of copies of the base scheme",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.IsQuasiAffine.recOn. QuasiAffine.of_isImmersion and instIsAffineSigmaObjScheme give parts of the finite-component calculation; neither constructs effective fpqc descent of the arbitrary coproduct. Generic morphism-property descent and effective-epimorphism lemmas do not state scheme effectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?quasi.?affine|effective.*descent|descent.*effective|IsAffine.*[Ss]igma",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean.  Read the returned types: affine finite coproducts cover only a supporting calculation; morphism-property descent and effective epimorphisms do not assert effectivity of a scheme descent datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fpqc descent for a scheme all of whose quasi compact open subschemes over affine base opens are quasi affine",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine.  Read the returned types: affine finite coproducts cover only a supporting calculation; morphism-property descent and effective epimorphisms do not assert effectivity of a scheme descent datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "0 hits: .  Read the returned types: affine finite coproducts cover only a supporting calculation; morphism-property descent and effective epimorphisms do not assert effectivity of a scheme descent datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any scheme descent datum on an arbitrary disjoint union of copies of an affine base is effective for an fpqc cover",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc, CategoryTheory.instEffectiveEpiDescOfEffectiveEpiFamily, CategoryTheory.Precoherent.pullback.  Read the returned types: affine finite coproducts cover only a supporting calculation; morphism-property descent and effective epimorphisms do not assert effectivity of a scheme descent datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent is effective for ind quasi affine morphisms without a quasi compactness hypothesis",
+   "results": "8 hits: AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.flat_iff.  Read the returned types: affine finite coproducts cover only a supporting calculation; morphism-property descent and effective epimorphisms do not assert effectivity of a scheme descent datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-stratified-lattice-scheme",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "(2), effectivity of the labelled coproduct datum; old proof step 6; Stacks Tags 0AP6 (definition-ind-quasi-affine), 0APK (lemma-ind-quasi-affine)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coproduct-fpqc-effectivity",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery cc0ffa508f5: retained its finite-component argument over the current unsplit live node and re-read every current statement and proof dependency. Made the affine-open restriction step explicitly check that both intersected opens are quasi-compact in the same affine ambient scheme. Revalidated the singleton fpqc effectivity substitution and all ten citation quotes. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "det-lem-stratified-lattice-scheme proof (2): effectivity of the labelled coproduct datum, using the ind-quasi-affine correction already stated by the item.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "why": "Generic Stacks Tag 0APK scheme-effectivity theorem, explicitly the source required by this unit; the unit has no separate general theorem. Its quasi-affine-open hypothesis is verified in steps 1--3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-ind-quasi-affine-fpqc-effective-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-14021a9ba",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-14021a9ba (reviewer sub-agent of L); spot-checked: This re-delivers cc0ffa508f54, which was PASSed and then refused at landing (side-completion promotion). In the live and side-live clones the item is still unsplit with an empty proof, and no repair note exists. Compared with the cc0ffa50 snapshot: the statement, stmt_deps and proof_deps are identical, steps 1, 2 and 4 are byte-identical, and there are 0 new nodes. Step 3 is only reworded to say explicitly that K and D' are quasi-compact opens of the same affine D, and the summary was rewritten. I re-read every cited statement. Step 1: the coproduct node gives disjoint covering open components, so open immersion plus fibre product give T x_V B = coprod_S B. Step 2: the quasi-compact definition gives a finite subcover, so K lies in coprod_J B, which is affine by affine-morphism-permanence (4); J empty gives Spec 0. Step 3: affine-scheme-qcqs says qc opens of an affine scheme have qc intersection, so K' = K meet D' is a qc open of the affine D' for every affine B' in B. That is def-nagata-quasi-affine-morphism. Step 4: lem-a1-ind-quasi-affine-fpqc-effective-descent applies with A=V, B=X; its hypothesis, datum format and conclusion match the item, and it puts no qc condition on T->V. Sources read: Stacks 0AP6 and 0APK (more-morphisms / more-groupoids), and blueprint main-20261015 proof (2), whose infinite quasi-affine claim is false and is already corrected by the item's ind-quasi-affine form on the unit's 0APK route. No SGA is used. I accept the declared tool use of the a1 0APK node. There is no cycle, proof_deps equals the union of the uses, and steps are under 830 characters. Edge cases checked: S empty, S infinite with V = Spec k, K empty, V empty (forces X empty). Maintainer note: this is a promotion re-delivery; nothing needs repair."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoproductFpqcEffectivity",
+  "declaration": "AlgebraicGeometry.coproduct_fpqc_effectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoproductFpqcEffectivity.lean",
+  "statement": "theorem coproduct_fpqc_effectivity {X V : Scheme.{u}} [IsAffine V] (p : V ⟶ X) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage X) (S : Type v) [Small.{u} S] (D : Over.DescentDatum p (Over.mk (Sigma.desc (fun _ : S => 𝟙 V)))) : (∀ (B : V.Opens), IsAffineOpen B → ∀ (K : (pullback (C := Scheme.{u}) (Sigma.desc (fun _ : S => 𝟙 V)) B.ι).Opens), IsCompact (K : Set (pullback (C := Scheme.{u}) (Sigma.desc (fun _ : S => 𝟙 V)) B.ι)) → ∃ (J : Finset S), IsAffine (∐ fun _ : J => B.toScheme) ∧ (∃ (j : K.toScheme ⟶ ∐ fun _ : J => B.toScheme), IsOpenImmersion j ∧ j ≫ Sigma.desc (fun s : J => B.ι ≫ Sigma.ι (fun _ : S => V) s.val) = K.ι ≫ pullback.fst (Sigma.desc (fun _ : S => 𝟙 V)) B.ι ∧ j ≫ Sigma.desc (fun _ : J => 𝟙 B.toScheme) = K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι ∧ (∀ (B' : B.toScheme.Opens), IsAffineOpen B' → IsAffine (∐ fun _ : J => B'.toScheme) ∧ CompactSpace (pullback (C := Scheme.{u}) (K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι) B'.ι) ∧ ∃ (j' : pullback (C := Scheme.{u}) (K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι) B'.ι ⟶ ∐ fun _ : J => B'.toScheme), IsOpenImmersion j' ∧ j' ≫ Sigma.desc (fun s : J => B'.ι ≫ Sigma.ι (fun _ : J => B.toScheme) s) = pullback.fst (K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι) B'.ι ≫ j ∧ j' ≫ Sigma.desc (fun _ : J => 𝟙 B'.toScheme) = pullback.snd (K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι) B'.ι)) ∧ IsQuasiAffineHom (K.ι ≫ pullback.snd (Sigma.desc (fun _ : S => 𝟙 V)) B.ι)) ∧ D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bae6c05f",
+  "group": "NB",
+  "result": "pass",
+  "note": "Only the lean field differs from side-live; the six stmt_dep records are identical; no new nodes or dep modules; the statement field is verbatim in the file; the only proof is sorry. The Lean matches the node clause by clause: IsAffine V, singleton fpqcPrecoverage, S : Type v with Small.{u} (exactly what the Scheme coproduct needs), any Over.DescentDatum on the coproduct of copies of V. For each affine B and compact open K of T x_V B: exists Finset J, the coproduct of copies of B over J is affine, and an open immersion j pinned to the canonical inclusion by two equations. For each affine B' in B, with the same J: the coproduct of copies of B' over J is affine, K' is compact and opens into it by j', pinned to j and to the projection. Then IsQuasiAffineHom (K -> B), and D.IsEffective, which includes datum compatibility. Bracketing and quantifier order checked. No extra hypotheses. The first conjunct is exactly the hV hypothesis of the reviewed isEffective_of_indQuasiAffine_fpqc (0APK), so step 4 applies. Edge cases covered: empty S, K, B, B', V; infinite S. The blueprint's false quasi-affine claim is already corrected by the node to the 0AP6 ind-quasi-affine form. Docstrings carry the source place, blueprint tag and the 4 proof steps. The two plain imports are proof imports. No duplicate statement found. No compile, since nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261023T102807-L-2974670",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

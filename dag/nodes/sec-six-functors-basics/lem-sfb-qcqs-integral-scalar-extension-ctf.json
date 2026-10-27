@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-qcqs-integral-scalar-extension-ctf",
+ "kind": "statement",
+ "title": "Qcqs integral rational scalar extension preserves finite models and Tor intervals",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, and a finite subextension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $\\Lambda=\\underline E$, the condensed ring of continuous functions to normed $E$, or $\\Lambda=\\Omega^{\\mathrm{fin}}$, whose sections on a profinite set are continuous functions to $\\Omega$ with image in one finite subextension [sk-def-sfb-qlbar-condensed]. Put $\\mathcal F=\\{E\\}$ in the first case and let $\\mathcal F$ be all finite subextensions of $\\Omega$ in the second. For $F\\in\\mathcal F$ write $A_F=\\mathcal O_F$ with its norm topology. For each scheme $T$, use the pulled-back condensed coefficient rings $\\Lambda_T,F_T,A_{F,T}$ on the small pro-étale site, module objects, and ordinary uncompleted unbounded derived categories [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Constructibility means finite constant scalar models on a finite constructible locally closed stratification; $D_{\\mathrm{ctf}}$ means bounded constructible cohomology and finite Tor amplitude [sk-def-sfb-constructible]. A lisse module is pro-étale locally free of finite rank. A scheme is qcqs when it is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism].\n\nLet $T$ be qcqs and $F\\in\\mathcal F$. The coefficient map $A_{F,T}\\to\\Lambda_T$ is flat. The derived scalar-extension functor $T_{F,T}=\\Lambda_T\\otimes^L_{A_{F,T}}-$ [sk-def-sfb-derived-extension-of-scalars] is canonically exact termwise scalar extension and is triangulated. For every integer $q$ and every $J\\in D(A_{F,T})$, it has the natural derived cohomology identification $H^q(T_{F,T}J)\\cong\\Lambda_T\\otimes_{A_{F,T}}H^q(J)$. If $J\\in D_{\\mathrm{ctf}}(T,A_F)$ has Tor amplitude in $[a,b]$, then $T_{F,T}J\\in D_{\\mathrm{ctf}}(T,\\Lambda)$ with Tor amplitude in the same interval. On every stratum on which $H^q(J)$ has finite constant scalar models, $H^q(T_{F,T}J)$ has pro-étale locally finite free models. These assertions concern module objects with their actual relative tensors, equivalently the section-ring-sheaf realization; they impose no derived completeness or Noetherianity.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 7.7 and §7.2 for context; agent finite scalar-model/Tor-interval argument from returned item steps 1–3, using its module/section comparison and flat-resolution inputs. This is the ordinary finite-model statement, not an identification with the derived-lisse category of that paper."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "sk-def-sfb-derived-extension-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Integral rationalization has exact scalar extension by integralScalarExtension_exact. For the closure compose with the exact finite-subfield inclusion. coefficientMap_comp and Mod.extendScalarsComp identify this composite with the required extension. Both functors preserve finite colimits as left adjoints.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-sfb-qlbar-flat",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical leftDerivedFunctorIsoMapDerivedCategory and invertible leftDerivedFunctorCounit for an exact functor. Transport the triangulated structure along this comparison, with exactly the shift structure integralCTFShift. leftDerivedFunctorHomologyFunctorIso gives the natural cohomology comparison; bounded_mapDerivedCategory_obj gives boundedness.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A right exact additive functor carrying the regular module to the regular module preserves finite presentations: map the cokernel of a map between finite powers, use mapBiproduct and PreservesCokernel.iso, then conjugate the presenting map by those isomorphisms. Apply this with scalar extension and Mod.regularExtensionIso. Coefficient extension commutes with upperStar by CondensedRing.pullIso. It commutes with pullback from the point by uniqueness of left adjoints: the right adjoints agree by mapModComapIso, comapComp and naturality of the adjunction unit. Hence each specified finite constant local model extends on its original cover; in Lean these elementary assemblies are finitePresentation_map, pointExtensionIso and localModel_extension.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-regular-extension-comparison",
+    "def-sfb-pull-iso",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over each target coefficient ring, every finite scalar presentation is free of finite rank. Reuse lattice_scalar_free, finite_point_scalars and closure_point_scalars from QcqsConstructibleIntegralLatticeTree (only these proved Gaussian-elimination helpers, not its lattice-existence theorem). The point section ring is the field F or PadicAlgCl; the finite scalar matrix has a basis of its cokernel, including rank zero. models_free_cover from FiniteConstantLocalModel transports this to a free module on the given cover. The cohomology comparison and pullIso therefore give free models on each original stratum, and finite constant models prove constructibility using the same stratification.",
+   "uses": [
+    "lem-sfb-qcqs-constructible-integral-lattice-tree",
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension preserves flat module objects by Mod.extendScalars_preservesFlat. Apply the already proved source-library theorem DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj to the exact functor: it maps a flat model supported in [a,b] to a flat model with the same support. Its proof uses the bounded flat model characterization of the actual derived Tor predicate, so no monoidal structure on the scalar-extension functor or section-ring-sheaf realization is required. Transport the interval along leftDerivedFunctorIsoMapDerivedCategory. Combine with boundedness and constructibility from the preceding steps to obtain the required D_ctf assertion and the same specified interval.",
+   "uses": [
+    "lem-sfb-internal-extension-preserves-flat",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-sfb-qlbar-flat",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-sfb-pull-iso",
+  "sk-def-sfb-constructible",
+  "lem-sfb-qcqs-constructible-integral-lattice-tree",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-internal-extension-preserves-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Complete Lean proof using exact derived functors, scalar finite presentations, and the existing internal bounded-flat-model Tor API. Theorem 7.7 and section 7.2 provide context only. No internal/section comparison or section K-flat change-of-rings argument is needed.",
+  "group": "H9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat rational scalar extension of integral proetale complexes preserves bounded finite scalar model constructibility and the same Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a sheaf of modules from a complete discrete valuation ring to its fraction field preserves constructible cohomology and Tor bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))ᵒᵖ) →\\n        (x : ↥(Opposite.unop U)) →\\n          Module (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U)) (ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For any open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, and for any point $ x \\\\in U $ corresponding to a prime ideal $ \\\\mathfrak{p} $, the localization $ M\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"ModuleCat.Tilde.Localizations\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → ↑(AlgebraicGeometry.PrimeSpectrum.Top R) → Type u\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, this constructs the localization of the module $M$ with respect to the multiplicative set $\\\\m\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars from integral continuous l adic coefficients to rational coefficients preserves constructible complexes of finite Tor amplitude",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"comonadicExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.FaithfullyFlat) : ComonadicLeftAdjoint (extendScalars f)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a faithfully flat ring homomorphism $ f : R → S $, the extension of scalars functor from the category of $ R $-modules to $ S $-modules is comonadic. This me\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M ≃ₗ[R] N) ≃ M ≃ₗ[A] N\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"hasFDerivAt_of_restrictScalars\", \"module\": \"Mathlib.Analysis.Calculus.FDeriv.RestrictScalars\", \"type\": \"{g' : E →L[𝕜] F} (h : HasFDerivAt f g' x) (H : f'.restrictScalars 𝕜 = g') : HasFDerivAt f f' x\", \"doc\": \"Given a continuous linear map $ f : M_1 \\\\to M_2 $ between topological modules over a semiring $ A $, restricting scalars through the scalar tower $ R \\\\to A $ produces a continuous linear map over the \"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Linear\", \"type\": \": Functor.Linear R (DerivedCategory.Q : _ ⥤ DerivedCategory C)\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"AdicCompletion.instIsScalarTower\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] (I : Ideal R) (M : Type u_4)\\n  [inst_1 : AddCommGroup M] [inst_2 : Module R M] [inst_3 : SMul S T] [inst_4 : SMul S R] [inst_5 : SMul T R]\\n  [inst_6 : SMul S M] [inst_7 : SMul T M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTow\", \"doc\": \"Given a commutative ring $R$, an ideal $I$, an $R$-module $M$ with additive commutative group structure, and semirings $S$ and $T$ with compatible scalar actions on $R$ and $M$ satisfying the scalar t\"}\n  {\"name\": \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"(Rₛ) [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ M'] [Module Rₛ N'] [IsScalarTower R Rₛ M'] [IsScalarTower R Rₛ N']\\n  [IsLocalization S Rₛ] [Module.FinitePresentation R M] :\\n  IsLocalizedModule S (IsLocalizedModule.mapExtendScalars S f g Rₛ)\", \"doc\": \"If $ R_\\\\!_\\\\!s $ is the localization of a commutative ring $ R $ at a submonoid $ S $, and $ M $ is a finitely presented $ R $-module, then the scalar extension map from $ M $ to an $ R_\\\\!_\\\\!s $-module\"}\n  {\"name\": \"ContinuousMultilinearMap.restrictScalarsₗᵢ\", \"module\": \"Mathlib.Analysis.Normed.Module.Multilinear.Basic\", \"type\": \"{𝕜 : Type u} →\\n  {ι : Type v} →\\n    {E : ι → Type wE} →\\n      {G : Type wG} →\\n        [inst : NontriviallyNormedField 𝕜] →\\n          [inst_1 : (i : ι) → SeminormedAddCommGroup (E i)] →\\n            [inst_2 : (i : ι) → NormedSpace 𝕜 (E i)] →\\n              [inst_3 : SeminormedAddCommGroup G] →\\n        \", \"doc\": \"Given a nontrivially normed field extension $𝕜'$ over $𝕜$ with a normed algebra structure, and finite-dimensional normed spaces over $𝕜$, this constructs a linear isometric map that restricts the scal\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletion\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : S) (x : WithVal (v.valuation K)) : (↑(r • x) : v.adicCompletion K) = r • (↑x : v.adicCompletion K)\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation $ v $ preserves scalar multiplication. Specificall\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Tor|scalar.*extension.*constructible|constructible.*scalar.*extension",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"687\", \"text\": \"    · simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe, Finset.mem_image, comp_apply,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"696\", \"text\": \"    simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Tor|scalar.*extension.*constructible|constructible.*scalar.*extension",
+   "results": "2 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary scalar modules, derived t-structures, solid modules, or sheaf generators; none states the condensed integral-to-rational finite-model assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat change of rings for sheaves preserves a Tor amplitude interval and finite constant constructible models",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, RingHom.Flat.isStableUnderBaseChange, Module.FaithfullyFlat.instTensorProduct, IsSMulRegular.of_flat_of_isBaseChange, Module.Flat.rTensor_shortComplex_exact, Module.Flat.isBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary scalar modules, derived t-structures, solid modules, or sheaf generators; none states the condensed integral-to-rational finite-model assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary scalar modules, derived t-structures, solid modules, or sheaf generators; none states the condensed integral-to-rational finite-model assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of condensed integral coefficients to a rational field preserves constructible complexes and their Tor amplitude",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, CondensedMod.IsSolid, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary scalar modules, derived t-structures, solid modules, or sheaf generators; none states the condensed integral-to-rational finite-model assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a sheaf of modules over a discrete valuation ring to its fraction field preserves finite constant local models and cohomology",
+   "results": "8 hits: ModuleCat.Tilde.isLocallyFraction, SheafOfModules.LocalGeneratorsData.IsFiniteType, ModuleCat.Tilde.isFractionPrelocal, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.isLocallyFraction_pred",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary scalar modules, derived t-structures, solid modules, or sheaf generators; none states the condensed integral-to-rational finite-model assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-rational-integral-localizing-generators",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), closed-complement generator calculation: Theorem 7.7 and §7.2 for context; agent finite scalar-model/Tor-interval argument from returned item steps 1–3, using its module/section comparison and flat-resolution inputs. This is the ordinary finite-model statement, not an identification with the derived-lisse category of that paper.",
+   "via": [
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-integral-scalar-extension-ctf",
+  "worker": "stage1",
+  "summary": "Proved scalar flatness by exact integral rationalization followed, when needed, by finite-subextension-valued algebraic-closure extension. Used exact-functor cohomology, scalar finite presentations, and an explicit K-flat cancellation calculation to retain the same Tor interval. Reused existing DAG lemmas throughout; no new nodes.",
+  "blueprint": "det-sf-comp-coherence-cocycle via refinement Step (2), closed-complement generator devissage: establishes that rationalized integral finite models stay in D_ctf. No unit-level statement or route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-integral-scalar-exact",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic internal/section module equivalence identifying total tensor complexes and K-flatness, used to run the Tor test with section modules; no node of the unit gives it and it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings-independent",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "why": "Generic coefficient or homological algebra input used in the finite-model/Tor-interval argument below refinement Step (2); it supplies no alternate compactification or base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-sfb-qlbar-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-261b98fdf",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-261b98fdf (reviewer sub-agent of L); spot-checked: Read the item's 7-step proof (no new nodes) and every cited statement. The statement and stmt_deps match live exactly. Live and side-live still have the item unsplit, and there is no repair note. Step 1: the flatness inputs fit the item's coefficient rings. lem-weil-pbc-continuous-integral-scalar-exact covers any normed field, so it applies to each finite F. lem-sfb-qlbar-flat's Q̄_ℓ is sk-def-sfb-qlbar-condensed, which is the item's Ω^fin. Step 2: the exact-functor derived factorization and the cohomology comparison are used correctly, and the identification with L(Ext) goes through a K-flat resolution. Step 4: lem-weil-pbc-ringed-topoi-module-pullback-tensor applied to the pair (B, H^qJ) along a stratum, together with sk-prop-sfb-cartesian-coefficients, gives g^*(B⊗_R M) ≅ B_Z⊗_{R_Z} g^*M. Step 5: k⊗_{O_F}P ≅ k^r gives a finite constant model Λ_U^r. Tested P = O_F^n, O_F/ϖ^m, mixtures and 0. Step 6: K-flat resolution, K-flatness after change of rings, the single-factor tensor comparison and the cancellation lemma give a termwise isomorphism of complexes. Step 7: restriction of scalars reflects vanishing, so the interval [a,b] is kept. No Noetherian, ℓ-invertibility or completeness hypothesis is used. No duplicate found in the DAG. Batch-5 flags: (1) lem-pd-section-kflat-tensor-comparison is in the Poincaré-duality chapter, is unsplit, and its 628-node closure runs through pd data and adjunction nodes. It is not needed: the split node lem-pe-internal-section-tensor-comparison (sec-proetale-coefficients, no trf/pd reach) is exact, keeps underlying sheaves, preserves and reflects flat modules and K-flat complexes, and identifies the total tensor complexes. That is all Step 3 needs. FIX: replaced it in step 3, proof_deps and tool_uses, and added the definition sk-def-sfb-derived-tensor-hom, which is already in the statement closure. (2) lem-sf-ringed-kflat-single-tensor-comparison reaches only lem-trf-site-functorial-flat-resolution, which says module sheaves on a site have functorial flat resolutions. That is generic homological algebra that neither assumption states and that is not a step of their proofs, so the citation is kept. The 10 declared generic tool_uses are accepted. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-qcqs-integral-scalar-extension-ctf.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsIntegralScalarExtensionCTF",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.qcqs_integral_scalar_extension_ctf",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralCTFDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralCTFCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralCTFShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralScalarExtensionCTF",
+   "AlgebraicGeometry.ProEtale.CondensedRing.qcqs_integral_scalar_extension_ctf"
+  ],
+  "file": "lean/Sheaf/Paper/QcqsIntegralScalarExtensionCTF.lean",
+  "statement": "theorem qcqs_integral_scalar_extension_ctf (ℓ : ℕ) [Fact ℓ.Prime] (F : PadicAlgCl.FiniteIntermediateField ℓ) (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] : IntegralScalarExtensionCTF (integralCoeff ℓ F) (Profinite.continuousMapRingObj F) (integralScalarMap ℓ F) T ∧ IntegralScalarExtensionCTF (integralCoeff ℓ F) (Profinite.padicAlgClRingObj ℓ) (integralScalarMap ℓ F ≫ Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) T",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Both coefficient cases are the actual maps, paired in one theorem: F is the sole field in the finite-field case, and any finite subextension in the algebraic-closure case. The helpers name the existing total left derived functor and its canonical counit, transport the exact termwise shifts, and package precisely the clauses of this node. Naming the generic constructions before specializing shares structural arguments and avoids elaboration timeouts; no replacement derived category, tensor or scalar-extension functor is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56f501fec",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Node clauses all rendered: both Λ cases (F bound over all finite subextensions), qcqs via CompactSpace+QuasiSeparatedSpace, flatness as PreservesFiniteLimits(extendScalars), termwise = IsIso of canonical leftDerivedFunctorCounit, triangulated with CommShift.ofIso along canonical leftDerivedFunctorIsoMapDerivedCategory, functor-level natural H^q iso ∀q, D_ctf + same Tor interval [a,b], and local Mod.IsFree models on each stratum (body = IsLisseCoefficientModule, rank 0 allowed). Universes match deps and citer, no extra hypotheses, docstrings with 7 steps, only sorry. Probe: integralCoeff ℓ F = Profinite.padicIntegersRingObj ℓ F.1 and integralScalarMap ≍ padicIntegersRingObjToContinuousMapRingObj both by plain rfl (control fails), so the landed citer lem-sfb-qcqs-rational-integral-localizing-generators applies the item directly. The earlier interrupted attempt's model-swap FIX was cosmetic and is withdrawn (fixes/ empty). Advisories: Nonempty H^q iso (canonical leftDerivedFunctorHomologyFunctorIso exists, citer does not need it); coefficient owners not in stmt_deps; coefficientMap(a≫b) vs map a ≫ map b by map_comp; same-worker second reading accepted."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-61497",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261023T231534-L-3615718",
+  "kind": "interface",
+  "note": "independent cc review: proof of qcqs_integral_scalar_extension_ctf (exact derived extension, flat Tor transport, extended finite constant models, Gaussian-elimination freeness) against node lem-sfb-qcqs-integral-scalar-extension-ctf and its deps; the cartesian-coefficients import was an unused tool use, replaced by pullIso (def-sfb-pull-iso)"
+ }
+}

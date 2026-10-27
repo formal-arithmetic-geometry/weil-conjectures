@@ -1,0 +1,133 @@
+{
+ "id": "def-coef-cartesian-section-data",
+ "kind": "definition",
+ "title": "Cartesian-section adjunction presentation interfaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R$, uniformizer $\\varpi$, and $A_n=R/\\varpi^{n+1}$ for $n\\in\\mathbf N$ [def-weil-l-adic-coefficient-extension]. The following are presentation types and predicates on the existing ordinary unbounded derived categories of strict semilinear systems, not assertions of their inhabitation.\n\nFor a scheme morphism $a:W\\to s$, use the coefficient tower $n\\mapsto A_n$ with its quotient maps, and let $\\mathrm{Et}(W)$ be the derived category of strict etale systems for that tower [def-pur-etale-system-projection-data]. Its pro-etale counterpart and closed derived calculus are those of [def-coef-semilinear-derived-calculus]. A comparison-image presentation consists of the actual sequence-site inverse image $P$ and right derived direct image $R$, with the adjunction derived from the ordinary etale/pro-etale module adjunction [def-weil-pbc-site-comparison-morphism]. Define the internal-Hom representability presentation for $a$ to be the existing structure with: etale and pro-etale closed calculi; the pro-etale coefficient-system calculus; that comparison image and its tensor comparison; actual derived image along $a$; punctual sections; the ordinary sections comparison normalized by evaluation at $1$ and its derived comparison normalized by the full composed derived unit; exact finite evaluations; the identification of the two pro-etale normalization predicates; preservation of normalization by $P$; compatibility of $P$ with closed transposes; invertibility of the fiber internal-Hom comparison on normalized inputs and its identity after finite evaluation; invertibility of the etale/pro-etale internal-Hom and mapping-tower comparisons on normalized levelwise bounded constructible finite-Tor inputs; and the representing Hom bijection's evaluation formula and naturality in the arbitrary punctual test object. Internal Homs and their evaluation use [def-pur-derived-internal-hom]. All these fields belong to the presentation type; no comparison functor, map or equivalence is chosen anew.\n\nIn the geometric setting and with a realization $r$, geometry $g$, sections pushforward $s$, and symmetries $\\beta_X,\\beta_Y$ of [def-coef-finite-adjunction-system-data], define the mapping source and target to be the actual bifunctors $(M,N)\\mapsto\\mathcal H_Y(r.FM,N)$ and $(M,N)\\mapsto\\mathcal H_X(M,r.GN)$. Their finite counterparts use exactly the recorded $F_n,G_n$ and finite global internal Homs [lem-coef-derived-system-evaluation-calculus]. The enriched presentation is the existing structure comprising invertibility of the canonical internal transpose, a natural isomorphism between these mapping bifunctors whose components are derived sections of the inverse transpose, natural finite mapping isomorphisms, identification of their degree-zero maps with the specified finite adjunction, and the commuting finite-evaluation squares. The canonical transpose and global map are the ones of the realization; no arbitrary natural isomorphism replaces them.\n\nFor any ringed site with a strict coefficient tower and derived calculus $A$ as in [def-coef-semilinear-derived-calculus], define tensor-transpose coherence to be the conjunction of: evaluation of the closed transpose equals the finite closed transpose after tensor and internal-Hom evaluation, with normalized first internal-Hom input; both inverse-transpose identities; naturality of every scalar-reduction adjunct for actual system morphisms; naturality of the specified K-flat tensor-model isomorphism under morphisms of flat K-flat representatives [def-pc-kflat-complex]; and naturality of the closed transpose in both inputs. These are equations of the actual ordinary derived-system maps. The interface publicly re-exports precisely these existing definitions, with a transparent abbreviation for the internal-Hom representability presentation.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-etale-system-projection-data",
+  "def-coef-semilinear-derived-calculus",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-derived-internal-hom",
+  "def-coef-finite-adjunction-system-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraphs 2--3: internal-Hom mapping adjunction, derived global sections, coefficient evaluation and counit transposes; retained ordinary strict-system refinement in lem-coef-cartesian-section-adjoint-mates."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized coefficient systems enriched mapping adjunction presentations etale proetale internal Hom comparison tensor transpose coherence",
+   "results": "8 hits: CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.FunctorToTypes.adj, CategoryTheory.ihom.ihom_adjunction_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.ihom.coev",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; the specialized definitions already exist in the three project modules and are re-exported, not duplicated."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; the specialized definitions already exist in the three project modules and are re-exported, not duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemTensorTransposeCoherence|SystemInternalHom|FiniteAdjunctionDiagram",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; the specialized definitions already exist in the three project modules and are re-exported, not duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SystemTensorTransposeCoherence|SystemInternalHom.Representability|FiniteAdjunctionDiagram.Enriched lean/WeilConjectures; rg -n structure Enriched|structure Representability|def SystemTensorTransposeCoherence lean/Sheaf",
+   "results": "No exact upstream WeilConjectures declaration. Project definitions: FiniteAdjunctionDiagramRealization.lean:132,140,148,157,170; SystemInternalHomRepresentability.lean:109,114,203,513; SystemAdjunctionTransposeCoherence.lean:185.",
+   "date": "2026-10-24",
+   "verdict": "Reuse all existing definitions through public imports. No new copy of a notion."
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl SystemTensorTransposeCoherence|SystemInternalHom|Enriched dag/nodes/*/def-*.json; tools/blueprint_refs.py search SystemTensorTransposeCoherence; tools/blueprint_refs.py search Enriched",
+   "results": "No definition node owns the requested declarations; blueprint searches give 0 matches each. Broader Enriched/representability matches concern unrelated definitions. Existing def-coef-finite-adjunction-system-data owns the underlying realization, not these re-exported presentation types.",
+   "date": "2026-10-24",
+   "verdict": "A definition-node owner is missing, as identified by return H2; add this re-export interface node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Middle RHom calculation and final unit/counit paragraph: types of enriched realization, etale-origin comparison, and tensor-transpose coherence, before asserting their existence.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CartesianSectionData",
+  "declaration": "WeilConjectures.CartesianSectionData.Representability",
+  "declarations": [
+   "WeilConjectures.CartesianSectionData.Representability",
+   "WeilConjectures.FiniteAdjunctionDiagram.Enriched",
+   "WeilConjectures.FiniteAdjunctionDiagram.Realization.mappingSource",
+   "WeilConjectures.FiniteAdjunctionDiagram.Realization.mappingTarget",
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteMappingSource",
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteMappingTarget",
+   "WeilConjectures.SystemInternalHom.Representability",
+   "WeilConjectures.SystemInternalHom.Et",
+   "WeilConjectures.SystemInternalHom.coefficients",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.P",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.R",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.derivedAdjunction",
+   "WeilConjectures.SemilinearSections.SystemTensorTransposeCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianSectionData.lean",
+  "statement": "abbrev Representability (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {W s : Scheme.{u}} (a : W ⟶ s)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition owner requested by independent return H2. Public imports re-export the exact existing definitions listed here; the primary abbreviation is definitionally SystemInternalHom.Representability. No theorem is asserted, no data are copied, and no choice or stronger hypothesis is added."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90ce0f148",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90ce0f148",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after 7e4c RETURN H2 fixes it. New definition node def-coef-cartesian-section-data (Sheaf.Paper.CartesianSectionData) publicly re-exports Enriched, mappingSource/Target, finiteMapping*, SystemInternalHom.Representability/Et/coefficients/ComparisonImage.P,R,derivedAdjunction and SystemTensorTransposeCoherence, plus one transparent abbrev; no data copied, no choice, no sorry; same shape as NB 7c76 def-trf-blowup-square-pullback-maps (landed). Node text matches the definitions clause by clause (Representability fields, the 6 Enriched fields, the 5 coherence conjuncts) and its 8 stmt_deps cover every citation; lem-coef-derived-system-evaluation-calculus is the only record of coefficientSequenceGlobalHom and is already a base stmt_dep. Item stmt_deps = base + def-coef-finite-adjunction-system-data + the new node; the three theorem nodes are dropped; proof_deps unchanged. Only 4 files differ from side-live; the item module differs from 7e4c only in imports and the EtaleOrigin field type; signature equals lean.statement. Re-checked hypotheses (no extra assumption, no uniform bound, pro-étale universes u+1/u), all conclusion clauses (EtaleOrigin pinned by the transpose equation, conjugateEquiv mates, b invertible, degree-zero formulas, Φ.component, R lim isomorphism with both inverse identities, tensor coherence for W ∈ {X, Y}), edge cases n = 0, m = n, empty schemes, zero systems, f = id; docstrings, no hollow definitions. Source latest→main-20261024 lem-coef-finite-exceptional.proof paragraphs 2-3. No compile (no file changed). Advisory: Etale.SystemProjection.Support and SemilinearSections.Data are cited only through the new definition node; its lean.declarations lists the re-exported names."
+ }
+}

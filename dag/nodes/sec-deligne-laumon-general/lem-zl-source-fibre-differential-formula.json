@@ -1,0 +1,150 @@
+{
+ "kind": "statement",
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "lemma-base-change-differentials (Tag 01V0), lemma-smooth-omega-finite-locally-free (Tag 02G1), and sheaves.tex Tag 0098"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "agent": "B4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/sheaves.tex",
+  "place": "lemma-functoriality-differentials (the canonical map used by Tag 01V0); stalk colimits and the section-normalized pullback unit. Direct proof written by B4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free pullback module global sections tensor cotangent fibre",
+   "results": "No exact scheme differential comparison found; generic tensor pullback results only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.exists_tensorPullback_stalk_iso",
+   "results": "Stalk tensor isomorphism, but no global sections comparison.",
+   "date": "2026-10-26",
+   "verdict": "Partial match; used as an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentialsStalkFibre global sections tensorPullback",
+   "results": "No existing theorem states this comparison or injectivity consequence.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SourceFibreDifferentialSections",
+  "date": "2026-10-26",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-source-fibre-differential-sections",
+   "place": "decomposition of the source-fibre differential sections argument",
+   "via": [
+    "lem-zl-source-fibre-differential-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T152717-L-1151112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194405-L-2364817",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "id": "lem-zl-source-fibre-differential-formula",
+ "title": "Source-fibre differential comparison formula",
+ "statement": "Let k be a field, f:Y -> Spec k smooth, c:B -> Spec k, U an open of Y, z a point of U, K=kappa_U(z), T a scheme, and h:T -> Spec K and g:T -> B times_k Y satisfy the source-point factorization. Let A=Gamma(T,O_T) and p:B times_k Y -> B. There is an A-linear map D:A tensor_K bertiniCotangentFibre(f,U,z) -> Gamma(T,g^*Omega_p). For every source open W containing U.ι(z), every a in Gamma(Y,W), every b in A, and every proof hV that g maps T into the inverse image of W, D sends b tensor the differential component of bertiniLocalFirstJet(f,U,z,W,a) to b times the restriction to T of g^*(d(pr_Y^*a)). No injectivity is asserted. [def-pc-scheme, def-pc-fibre-product, def-pc-scheme-fibre, def-pc-module-pullback, def-sc-relative-differential-sheaf, lem-zl-bertini-local-first-jets].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "lem-zl-bertini-local-first-jets"
+ ],
+ "proof": [
+  {
+   "text": "Write p = pr_Y and q = pr_B. The sheaf derivation a ↦ d_q(p^sharp(a)) is relative to f: it kills base functions by the pullback square. The universal property of Omega_f therefore constructs a morphism tau:Omega_f -> p_*Omega_q with its defining formula on local differentials.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose tau with p_* of the section-normalized unit Omega_q -> g_*g^*Omega_q, and identify the composite pushforward with (g composed with p)_*. This gives phi:Omega_f -> (g composed with p)_*N, where N=g^*Omega_q. On da its value is the actual tensorPullbackSection of d_q(p^sharp(a)).",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every open V of U containing z, hg ensures that the whole of T maps into the image of V in Y. Apply phi to a section of Omega_f over this image and restrict its image to all of T. These additive maps commute with restriction. The colimit definition of the module stalk gives an additive map L from the stalk at z of the open restriction of Omega_f to Gamma(T,N). For a local scalar a, the scalar on its image is (g composed with p)^sharp(a); the factorization hg and h_alpha identify this with alpha(residue(germ(a))). Thus L is linear over O_U,z acting through this ring map.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose L with the stalk map of the canonical morphism Omega_(U/k) -> Omega_(Y/k)|_U. Extend scalars first from R=O_U,z to K=kappa_U(z) and then from K to A=Gamma(T,O_T), using alpha. The tensor-Hom adjunction produces the required A-linear map D from A tensor_K the actual cotangent fibre.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-zl-bertini-local-first-jets"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate D on b tensor (1 tensor germ(d(U.ι^sharp(a)))). The open-restriction differential morphism sends this germ to the restriction of d(a); naturality of phi then removes the intermediate restriction to U intersect W. The normalized unit formula for phi gives exactly b times the restriction to T of tensorPullbackSection g applied to d_q(p^sharp(a)). Proof irrelevance identifies every allowed choice of hV. The construction also works for empty T and a zero cotangent fibre; it uses no finite basis or smoothness.",
+   "uses": [
+    "lem-zl-bertini-local-first-jets",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "lem-zl-bertini-local-first-jets"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceFibreDifferentialSectionsAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceFibreDifferentialSectionsAux.lean",
+  "declaration": "AlgebraicGeometry.exists_source_fibre_differential_formula",
+  "declarations": [
+   "AlgebraicGeometry.exists_source_fibre_differential_formula"
+  ],
+  "statement": "theorem exists_source_fibre_differential_formula {k : Type u} [Field k] {Y B T : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [Smooth f] (c : B ⟶ Spec (.of k)) (U : Y.Opens) (z : U) (h : T ⟶ Spec ((U : Scheme).residueField z)) (g : T ⟶ pullback c f) (hg : g ≫ pullback.snd c f = h ≫ (U : Scheme).fromSpecResidueField z ≫ U.ι) (α : (U : Scheme).residueField z →+* Γ(T, ⊤)) (hα : α = ((Scheme.ΓSpecIso ((U : Scheme).residueField z)).inv ≫ h.appTop).hom) : let K := (U : Scheme).residueField z let A := Γ(T, ⊤) letI : Algebra K A := α.toAlgebra ∃ D : (A ⊗[K] bertiniCotangentFibre f U z) →ₗ[A] Γ((Scheme.Modules.tensorPullback g).obj (pullback.fst c f).relativeDifferentials, ⊤), ∀ (W : Y.Opens) (hz : U.ι z ∈ W) (hV : (⊤ : T.Opens) ≤ g ⁻¹ᵁ ((pullback.snd c f) ⁻¹ᵁ W)) (a : Γ(Y, W)) (b : A), D (b ⊗ₜ[K] (bertiniLocalFirstJet f U z W hz a).2) = b • ((Scheme.Modules.tensorPullback g).obj (pullback.fst c f).relativeDifferentials).presheaf.map (homOfLE hV).op (Scheme.Modules.tensorPullbackSection g (pullback.fst c f).relativeDifferentials ((pullback.snd c f) ⁻¹ᵁ W) ((pullback.fst c f).relativeDifferentialsDerivation.d (X := Opposite.op ((pullback.snd c f) ⁻¹ᵁ W)) ((pullback.snd c f).app W a)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-26"
+ }
+}

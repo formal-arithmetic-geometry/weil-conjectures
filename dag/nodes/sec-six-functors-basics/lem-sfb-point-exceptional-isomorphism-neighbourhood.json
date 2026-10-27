@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+ "kind": "statement",
+ "title": "A nonconstant map between point-exceptional fibres is an ambient isomorphism nearby",
+ "statement": "Let $T,S$ be integral regular Noetherian schemes of dimension $2$, with Noetherian meaning locally Noetherian and quasi-compact [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension]. Let $t\\in T$ and $s\\in S$ be closed points, with $\\dim\\mathcal O_{S,s}=2$ [def-weil-pbc-krull-dimension-ring]. Let $a:T'=\\operatorname{Bl}_tT\\to T$ and $b:S'=\\operatorname{Bl}_sS\\to S$ be the blowups of the reduced closed points [def-nagata-global-blowup]. Write $E=a^{-1}(t)$ and $F=b^{-1}(s)$ for their scheme-theoretic fibres [def-pc-scheme-fibre], with closed immersions $i_E:E\\to T'$ and $i_F:F\\to S'$ [def-weil-closed-immersion]. Let $h:T'\\to S'$ be proper [def-weil-proper-morphism] and birational, meaning that it restricts to an isomorphism between dense open subschemes [def-weil-open-immersion]. Suppose there is a morphism $v:E\\to F$ such that $h\\circ i_E=i_F\\circ v$ and the topological image $v(E)$ contains more than one point. Then there is an open subscheme $N\\subseteq S'$ containing $F$ such that $h^{-1}(N)\\to N$ is an isomorphism. Moreover, $v$ is an isomorphism and $h^{-1}(|F|)=|E|$ as underlying closed subsets of $T'$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), proof from the paragraph beginning Let E be the exceptional fibre through the conormal, unramifiedness and isomorphism-neighbourhood argument. The source centre may have local dimension one, in which case the nonconstant-image hypothesis is impossible."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-point-blowup-exceptional-conormal] to $t\\in T$. Its local dimension is either $1$ or $2$. In dimension $1$, $E$ is a one-point scheme, contradicting the hypothesis on $v(E)$. Thus it is $2$. Apply the same node to $s\\in S$, whose local dimension is $2$ by hypothesis. Consequently $E$ and $F$ are integral regular proper projective lines over $\\kappa(t)$ and $\\kappa(s)$, respectively, and their conormal bundles are their positive twists. Both are effective Cartier divisors. By [lem-sfb-regular-point-blowup-geometry], both ambient blowups $T'$ and $S'$ are integral regular Noetherian. By [rem-pc-regular-normal], their local rings and those of the regular curve $F$ are normal. No excellence, algebraic closedness or equality of residue fields has been used.",
+   "uses": [
+    "lem-sfb-point-blowup-exceptional-conormal",
+    "lem-sfb-regular-point-blowup-geometry",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "The composite $E\\hookrightarrow T'\\xrightarrow{h}S'$ is proper by [lem-weil-pbc-closed-immersion-proper]. Since $F\\hookrightarrow S'$ is separated, [lemma-nagata-proper-to-separated-target] applied over $S'$ shows that $v:E\\to F$ is proper. Its image is therefore closed. It is irreducible, since $E$ is integral, and contains more than one point. A proper irreducible closed subset of an integral one-dimensional scheme is a single closed point: otherwise its chain through its own generic point and that of the whole curve has length at least two. Thus $v$ is surjective and dominant. Let $\\eta_F$ be the generic point of $F$. By [lem-sbc-regular-cartier-generic-stalk-dvr], $\\mathcal O_{S',\\eta_F}$ is a DVR. Its only primes are zero and its maximal ideal (every nonzero prime in a local PID is maximal), so it has dimension one. The birationality required by [lem-sfb-normal-modification-codimension-one] holds: $T'$ and $S'$ are integral, so the given dense opens on which $h$ is an isomorphism contain their unique generic points, $h$ maps the generic point of $T'$ to that of $S'$, and the isomorphism of opens induces an isomorphism of the local rings there. Apply clause (2) of [lem-sfb-normal-modification-codimension-one] to the proper birational $h$, with integral, hence reduced, source, and Noetherian target $S'$ (step 1). We obtain an open $U\\subseteq S'$ containing $\\eta_F$ over which $h$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-sbc-regular-cartier-generic-stalk-dvr",
+    "lem-sfb-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "Under $h^{-1}(U)\\cong U$, the closed subscheme $E\\cap h^{-1}(U)$ becomes a closed subscheme of $F\\cap U$, because $h i_E=i_F v$. It is nonempty and contains the generic point of $F\\cap U$: $v$ is surjective and $\\eta_F\\in U$. A closed subscheme of an integral scheme containing its generic point has zero defining ideal (on an affine domain its ideal injects into the fraction field). Hence this closed subscheme equals $F\\cap U$. In particular $v$ is an isomorphism on these dense opens and induces an isomorphism of function fields. Set $k=\\kappa(s)$ and equip $E$ with its $k$-structure through $v$. The scheme $F$ is proper over $k$ by step 1; since $v$ is proper, [lem-weil-pbc-proper-composition] gives that $E$ is proper over $k$ as well. Properness implies separatedness and finite type, so $E,F$ are integral separated finite-type $k$-schemes of dimension one. The map $v$ is a proper dominant $k$-morphism, birational by the dense-open calculation, and $F$ has normal local rings. All hypotheses of [lem-trf-proper-birational-normal-curve-iso] hold; it gives that $v$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-trf-proper-birational-normal-curve-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "Form the canonical map $c:v^*\\mathcal C_{F/S'}\\to\\mathcal C_{E/T'}$ using [lem-weil-pbc-closed-immersion-conormal-functorial]. At the generic point of $E$, it is an isomorphism: on the open $U$ of step 2 the ambient map is an isomorphism and step 3 identifies the two closed subschemes. The affine formula for $c$ is the induced map on ideals modulo their squares, so those identifications identify $c$ with the isomorphism of conormal modules. In particular it is nonzero there. By [lem-sfb-point-blowup-exceptional-conormal], choose identifications of $E,F$ with projective lines carrying their conormal bundles to $\\mathcal O(1)$. Under these choices $v$ becomes an absolute isomorphism between the two projective lines and $c$ becomes a map from the pullback of the target positive twist to the source positive twist. Apply [lem-sfb-projective-line-twist-rigidity] to conclude that $c$ is an isomorphism everywhere on $E$. Its formulation permits the two originally different residue fields.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-sfb-point-blowup-exceptional-conormal",
+    "lem-sfb-projective-line-twist-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "Use $v$ to identify $E$ with $F$. Then $i_E:E\\hookrightarrow T'$ and $j=i_F\\circ v:E\\hookrightarrow S'$ are closed immersions with $h i_E=j$. The ideal defining $j$ is the ideal of $F$, with its conormal sheaf pulled back by $v$; on affine opens both are the same ideal modulo its square under the isomorphism $v$. Thus the conormal morphism for these two immersions is exactly the map $c$ in step 4. It is surjective because it is invertible. Properness of $h$ implies local finite type by [def-weil-proper-morphism]. Apply [lem-sfb-conormal-surjection-unramified] to these two immersions and $h$. For each $e\\in E$ it supplies an open neighbourhood $W_e\\subseteq T'$ on which $h|_{W_e}$ is unramified.",
+   "uses": [
+    "lem-sfb-conormal-surjection-unramified",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "For each $e\\in E$, apply [lem-weil-pbc-unramified-quasi-finite-at-points] to $h|_{W_e}$. It is quasi-finite at $e$, hence so is $h$: the same affine neighbourhoods in $W_e$ are affine open neighbourhoods in $T'$, as in [pqf-def-quasifinite]. For any $y\\in F$, choose $e=v^{-1}(y)$ by step 3. The local ring $\\mathcal O_{S',y}$ is normal by step 1, and $h$ is quasi-finite at $e$ over $y$. Clause (4) of [lem-sfb-normal-modification-codimension-one] therefore puts $y$ in the maximal open isomorphism locus $N$ of $h$. Consequently $F\\subseteq N$ and $h^{-1}(N)\\to N$ is an isomorphism, as required.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-def-quasifinite",
+    "lem-sfb-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  },
+  {
+   "text": "We already proved that $v$ is an isomorphism in step 3. Since $|F|\\subseteq N$, every point in $h^{-1}(|F|)$ lies in $h^{-1}(N)$. The isomorphism $h^{-1}(N)\\to N$ gives precisely one preimage of each point of $F$, and the inclusion $E\\hookrightarrow T'$ with $v:E\\cong F$ supplies such a preimage. Thus every point of $h^{-1}(|F|)$ is in $|E|$. The reverse inclusion is the equality $h i_E=i_F v$. Therefore $h^{-1}(|F|)=|E|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-sbc-regular-cartier-generic-stalk-dvr",
+  "lem-sfb-conormal-surjection-unramified",
+  "lem-sfb-normal-modification-codimension-one",
+  "lem-sfb-point-blowup-exceptional-conormal",
+  "lem-sfb-projective-line-twist-rigidity",
+  "lem-sfb-regular-point-blowup-geometry",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lemma-nagata-proper-to-separated-target",
+  "pqf-def-quasifinite",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), exceptional-fibre and conormal argument, lines 4929-4964."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-sfb-point-exceptional-isomorphism-neighbourhood: a proper birational morphism between regular surface point blowups mapping the exceptional fibre nonconstantly into the other exceptional fibre is an isomorphism over a neighbourhood of that fibre",
+   "results": "{\"t\": \"2026-10-22T05:13:00Z\", \"tool\": \"leanfinder\", \"query\": \"lem-sfb-point-exceptional-isomorphism-neighbourhood: a proper birational morphism between regular surface point blowups mapping the exceptional fibre nonconstantly into the other exceptional fibre is an isomorphism over a neighbourhood of that fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.specializingMap_respectsIso\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap\", \"AlgebraicGeometry.isIso_iff_stalk_iso\"], \"digest\": \"3eb3802a43fcbc82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism definitions, stalkwise isomorphism criteria, normalization maps and basic Proj chart isomorphisms do not prove the exceptional-curve rigidity assertion. The conormal-name query and source grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a proper birational morphism between point blowups of nonsingular surfaces maps the exceptional curve onto the other exceptional curve, it is an isomorphism near these curves",
+   "results": "{\"t\": \"2026-10-22T05:12:58Z\", \"tool\": \"leansearch\", \"query\": \"If a proper birational morphism between point blowups of nonsingular surfaces maps the exceptional curve onto the other exceptional curve, it is an isomorphism near these curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\"], \"digest\": \"a08ef66a84905128\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism definitions, stalkwise isomorphism criteria, normalization maps and basic Proj chart isomorphisms do not prove the exceptional-curve rigidity assertion. The conormal-name query and source grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conormal\"",
+   "results": "{\"t\": \"2026-10-22T05:11:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"conormal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism definitions, stalkwise isomorphism criteria, normalization maps and basic Proj chart isomorphisms do not prove the exceptional-curve rigidity assertion. The conormal-name query and source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|conormal.*[Ii]so|[Ii]so.*conormal|[Bb]lowup",
+   "results": "{\"t\": \"2026-10-22T05:11:23Z\", \"tool\": \"grep\", \"query\": \"exceptional|conormal.*[Ii]so|[Ii]so.*conormal|[Bb]lowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism definitions, stalkwise isomorphism criteria, normalization maps and basic Proj chart isomorphisms do not prove the exceptional-curve rigidity assertion. The conormal-name query and source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A birational map between two blown up regular surfaces that is an isomorphism on the exceptional projective lines is an isomorphism in an open neighbourhood of them",
+   "results": "{\"t\": \"2026-10-22T05:11:54Z\", \"tool\": \"leanfinder\", \"query\": \"A birational map between two blown up regular surfaces that is an isomorphism on the exceptional projective lines is an isomorphism in an open neighbourhood of them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap\"], \"digest\": \"a66cae78c218a13c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism definitions, stalkwise isomorphism criteria, normalization maps and basic Proj chart isomorphisms do not prove the exceptional-curve rigidity assertion. The conormal-name query and source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism between regular surface point blowups mapping an exceptional curve nonconstantly to the other exceptional curve is an isomorphism near that curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically @SpecializingMap).RespectsIso\", \"doc\": \"The property of a scheme morphism being a specializing map (defined via its underlying continuous map) holds for all isomorphisms of schemes. In other words, every isomorphism of schemes automatically\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap).RespectsIso\", \"doc\": \"In the category of schemes, every isomorphism has an underlying continuous map that satisfies the generalizing map property. This means that for any isomorphism of schemes, the corresponding topologic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an isomorphism if and only if its underlying continuous map of topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism and birational definitions, stalk criteria, normalization, and manifold inverse results do not establish exceptional-curve rigidity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper modification of regular surfaces taking an exceptional projective line onto another exceptional projective line is invertible in a neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalDiffeomorphAt.localInverse_eventuallyEq_left\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"(hf : IsLocalDiffeomorphAt I J n f x) : hf.localInverse ∘ f =ᶠ[nhds x] id\", \"doc\": \"For a local diffeomorphism $ f $ at $ x $, the composition of its local inverse $ f^{-1} $ with $ f $ is eventually equal to the identity function on the neighborhood filter $ \\\\mathsf{nhds}(x) $. In o\"}\n  {\"name\": \"IsLocalDiffeomorphAt.localInverse_isLocalDiffeomorphAt\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"(hf : IsLocalDiffeomorphAt I J n f x) : IsLocalDiffeomorphAt J I n (hf.localInverse) (f x)\", \"doc\": \"If $ f $ is a local diffeomorphism of class $ C^n $ at $ x $ between manifolds $ M $ and $ N $ with corners, then the local inverse of $ f $ at $ f(x) $ is also a local diffeomorphism of class $ C^n $\"}\n  {\"name\": \"IsLocalDiffeomorphAt.localInverse_eqOn_right\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"(hf : IsLocalDiffeomorphAt I J n f x) : EqOn (f ∘ hf.localInverse) id hf.localInverse.source\", \"doc\": \"For a local diffeomorphism $ f $ at $ x $, the composition of $ f $ with its local inverse $ \\\\Phi^{-1} $ satisfies $ f \\\\circ \\\\Phi^{-1} = \\\\mathrm{id} $ on the domain of $ \\\\Phi^{-1} $.\"}\n  {\"name\": \"Diffeomorph.symm\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"(h : M ≃ₘ^n⟮I, J⟯ N) : N ≃ₘ^n⟮J, I⟯ M\", \"doc\": \"Given a $C^n$ diffeomorphism $h$ from a manifold $M$ with model $I$ to a manifold $N$ with model $J$, this function constructs its inverse, which is a $C^n$ diffeomorphism from $N$ with model $J$ to $\"}\n  {\"name\": \"IsLocalDiffeomorphAt.localInverse\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"(hf : IsLocalDiffeomorphAt I J n f x) : PartialDiffeomorph J I N M n\", \"doc\": \"Given a local diffeomorphism $\\\\Phi$ between manifolds $M$ and $N$ with corners, this constructs the inverse partial diffeomorphism $N \\\\leftrightarrow M$ by swapping the source and target open subsets,\"}\n  {\"name\": \"IsLocalDiffeomorph.diffeomorph_of_bijective\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                {H : Type u_4}\", \"doc\": \"If $ f : M \\to N $ is a bijective local $ C^n $-diffeomorphism between manifolds with corners modeled on $ H $ and $ G $ over a nontrivially normed field $ \\\\mathbb{K} $, then $ f $ is a $ C^n $-diffeom\"}\n  {\"name\": \"IsLocalDiffeomorph.diffeomorphOfBijective\", \"module\": \"Mathlib.Geometry.Manifold.LocalDiffeomorph\", \"type\": \"(hf : IsLocalDiffeomorph I J n f) (hf' : Function.Bijective f) : Diffeomorph I J M N n\", \"doc\": \"If $ f : M \\\\to N $ is a bijective local $ C^n $-diffeomorphism between manifolds with corners modeled on $ H $ and $ G $ over a nontrivially normed field $ \\\\mathbb{K} $, then $ f $ is a $ C^n $-diffeo\"}\n  {\"name\": \"Diffeomorph.coe_toHomeomorph_symm\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"(h : M ≃ₘ^n⟮I, J⟯ N) : ⇑h.toHomeomorph.symm = h.symm\", \"doc\": \"For a diffeomorphism $ h $ between manifolds $ M $ and $ N $, the inverse of the underlying homeomorphism $ h.toHomeomorph $ is equal to the inverse diffeomorphism $ h^{-1} $, i.e., $ (h.toHomeomorph)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism and birational definitions, stalk criteria, normalization, and manifold inverse results do not establish exceptional-curve rigidity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"`X` and `Y` are birational if there exists a partial isomorphism between them.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : Y.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.trans\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (h₁ : X.Birational Y) (h₂ : Y.Birational Z) : X.Birational Z\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X : AlgebraicGeometry.Scheme} (sX : X ⟶ S) : AlgebraicGeometry.Scheme.BirationalOver sX sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) : Prop\", \"doc\": \"`X` and `Y` are birational over `S` if there exists a partial isomorphism between them\\nthat is compatible with the structure maps to `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X U : AlgebraicGeometry.Scheme} (f : U ⟶ X) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsDominant f] : U.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational over `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} {sX : X ⟶ S} {sY : Y ⟶ S} (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.BirationalOver sY sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.isRationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.Scheme.IsRationalOver sY] (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.IsRationalOver sX\", \"doc\": \"If a scheme `X` is `S`-birational to an `S`-rational scheme `Y`, then `X` is `S`-rational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso_isOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.PartialIso.IsOver sX sY (AlgebraicGeometry.Scheme.BirationalOver.partialIso sX sY h)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism and birational definitions, stalk criteria, normalization, and manifold inverse results do not establish exceptional-curve rigidity."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|birational.*surface|surface.*birational",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: local-isomorphism and birational definitions, stalk criteria, normalization, and manifold inverse results do not establish exceptional-curve rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-birational-surface-factorization",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Common point-blowup resolution of regular proper surfaces; Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces). Final three paragraphs of the point-factorization proof: a nonconstant map of exceptional fibres is an isomorphism, its conormal map is an isomorphism, and the ambient proper birational map is an isomorphism near the target fibre.",
+   "via": [
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+  "worker": "stage1",
+  "summary": "Q84 follows the exceptional-fibre conormal argument of Stacks 0C5R in seven explicit steps. Retains the item statement and all inherited provenance. Adds three statement-only inputs for the regular-point exceptional conormal, positive-twist rigidity for absolute projective-line isomorphisms, and the common-closed-subscheme conormal criterion. Reuses ambient blowup regularity, normal modification clauses (2) and (4), and proper birational normal-curve rigidity. Treats the local-dimension-one case as vacuous and checks every common-field hypothesis before using the curve theorem.",
+  "blueprint": "Realizes the inherited 0C5R final exceptional-fibre subargument under det-thm-sf-ctf-stability-direct-images proof (3). Read the current main-20261015 unit and direct-images proof and the recorded unit. The ancestor tool returns null on the inherited created.item chain; retain that inherited node/via provenance and give each new node its precise source sentence, prepending this item to via.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-regular-cartier-generic-stalk-dvr",
+    "why": "Generic Cartier-divisor local-ring calculation, used for the generic point of F."
+   },
+   {
+    "node": "lem-trf-proper-birational-normal-curve-iso",
+    "why": "Generic proper birational normal-curve isomorphism theorem, used after checking a common field base; it is independent of the trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "why": "Canonical conormal map and its affine ideal-mod-square formula."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic unramified implies locally quasi-finite theorem, applied on the unramified open neighbourhoods."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regular local rings are normal; a generic scheme-theoretic input, not a replacement of a six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-regular-cartier-generic-stalk-dvr",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-d5cf8e231",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-d5cf8e231 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full.\n\nSources: Stacks 0C5R (resolve.tex 4929-4964, exceptional-fibre paragraph), 0AGQ (1),(3) (C_{E/X}=O(1), positive), 0AGR, 067L, 02GF and 0BXJ. No SGA source is used.\n\nSteps 1-7 follow 0C5R:\n- 1: the d=1 source centre is excluded by #v(E)>1.\n- 2: v proper via proper-to-separated-target; surjective by the dimension-1 chain argument; DVR at eta_F; clause (2) of the normal-modification node.\n- 3: the closed subscheme containing the generic point has zero ideal; all common-field hypotheses of the curve-iso theorem are checked.\n- 4: c is a generic isomorphism by the affine formula; twist rigidity applies.\n- 5: the conormal map for (i_E, i_F v) is c, which is surjective, so h is unramified near E.\n- 6: quasi-finite on W_e, then clause (4) gives F inside N.\n- 7: elementary.\n\nNew nodes, all true and statement-only:\n- point-blowup-exceptional-conormal: global 0AGQ plus the d=1 case. The local-surface, per-surface and regular-flag blowup nodes lack the conormal identification, so it is not a duplicate.\n- projective-line-twist-rigidity: Pic=Z and ampleness preserved by an absolute isomorphism, Gamma(O)=k.\n- conormal-surjection-unramified: 067L plus 02GF plus Nakayama. Tested on a closed immersion and on x->x^n.\n\nThe item is not superseded: it is still unsplit in live and side-live, with statement and stmt_deps unchanged. The parent's step 4 matches the conclusion.\n\nBatch 5: the closure diff with and without the item proof is 4 nodes, none trf/pd. All three flagged cites were already in the base b5 closure, and all are general geometry that neither assumption gives (Varieties modification-iso-over-codim-1, 0AGR blowup regularity, proper birational onto a normal curve is an isomorphism). Accepted.\n\nAll declared tool_uses are accepted as general tools.\n\nFIX: step 2 (also relied on by step 6) applied lem-sfb-normal-modification-codimension-one without translating the item's dense-open birationality into that node's generic-point/local-ring birationality. I added that sentence and the Noetherian target S' (step 1). Corrected item: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-point-exceptional-isomorphism-neighbourhood.json; uses are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointExceptionalIsomorphismNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.point_exceptional_isomorphism_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointExceptionalIsomorphismNeighbourhood.lean",
+  "statement": "theorem point_exceptional_isomorphism_neighbourhood (T S : Scheme.{u}) [IsIntegral T] [IsIntegral S] [IsNoetherian T] [IsNoetherian S] (hT : IsRegularScheme T) (hS : IsRegularScheme S) (hdimT : topologicalKrullDim T = 2) (hdimS : topologicalKrullDim S = 2) (t : T) (s : S) (ht : IsClosed ({t} : Set T)) (hs : IsClosed ({s} : Set S)) (hdims : ringKrullDim (S.presheaf.stalk s) = 2) (h : (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowup ⟶ (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowup) [IsProper h] (hbirational : ∃ (V : (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowup.Opens) (U : (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowup.Opens), Dense (V : Set (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowup) ∧ Dense (U : Set (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowup) ∧ ∃ e : V.toScheme ≅ U.toScheme, V.ι ≫ h = e.hom ≫ U.ι) (v : (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowupMap.fiber t ⟶ (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowupMap.fiber s) (hcomm : (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowupMap.fiberι t ≫ h = v ≫ (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowupMap.fiberι s) (himage : ∃ e₁ e₂ : (IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowupMap.fiber t, v e₁ ≠ v e₂) : (∃ N : (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowup.Opens, Set.range ((IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowupMap.fiberι s) ⊆ (N : Set (IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowup) ∧ IsIso (h ∣_ N)) ∧ IsIso v ∧ h ⁻¹' Set.range ((IdealSheafData.vanishingIdeal ⟨{s}, hs⟩).blowupMap.fiberι s) = Set.range ((IdealSheafData.vanishingIdeal ⟨{t}, ht⟩).blowupMap.fiberι t)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9283f48ec",
+  "group": "NM",
+  "result": "pass",
+  "note": "Delivery changes only the item lean record plus one new module. Statement checked clause by clause: integral/regular/Noetherian/topologicalKrullDim=2 for T,S; closed points; ringKrullDim of the stalk at s = 2 (target only, as in the node); the reduced point centres via vanishingIdeal and the recorded glued blowup (no extra instances); the scheme-theoretic fibres fiber/fiberι; IsProper h; birationality as dense opens with an iso compatible with h; hcomm; himage exactly 'image has more than one point'. Conclusions: an open N containing range fiberι s with IsIso (h ∣_ N), IsIso v, and the set-preimage equality. All match the node with no stronger assumptions. Edge cases: a local-dimension-1 source centre is vacuous via himage; residue fields and characteristic unrestricted; single universe u. No definitions, sorry only, docstrings carry the 0C5R source, the blueprint id and the 7 steps; lean.statement verbatim; imports exist in side-live/Mathlib; no duplicate found in the project or Mathlib; both report sections present. No compile run (no file changed)."
+ }
+}

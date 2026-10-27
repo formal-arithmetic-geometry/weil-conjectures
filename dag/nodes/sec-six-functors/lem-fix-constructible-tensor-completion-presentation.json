@@ -1,0 +1,127 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleTensorCompletion",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-fix-constructible-tensor-completion-presentation",
+ "title": "Canonical normalized ordinary tensor-completion presentation",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension], and a scheme W [def-pc-scheme]. Use completed integral coefficients on its small pro-etale site [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients], the actual unbounded derived module category [def-weil-abstract-derived-category], and signed total tensor of cochain sheaves [def-pc-tensor-complex-sheaves]. Let T be the recorded ordinary tensor, C the canonical completion, eta its canonical unit, and e the restriction of the K-flat tensor representative comparison [def-pur-integral-derived-operations]. Assume ell is invertible in every residue field of W. There is a natural isomorphism beta:T followed by C isomorphic to the specified completed tensor. On each pair of good complexes its composite with eta and the recorded completed-tensor comparison equals e inverse followed by the localization of the canonical Roos augmentation and normalized tensor-tower map [lem-pur-integral-ambient-operation-models]. This asserts no completeness or constructibility of either input.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the recorded duality-model tensor comparison along the inclusion of flat-term K-flat good complexes. Keep the native ordinary tensor, completion, unit and canonical augmentation map in explicitly typed irreducible wrappers. Fix sheafification at the canonical coefficient universe. The actual native data are used directly; the packed ambient presentation is transported only inside the comparison proof. No new choice is made.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility in each residue field implies invertibility in each stalk by the local residue map. Apply integralAmbientOperationModels to the identity of W. Retain its normalized tensor augmentation clause, discard its other unused clause, and rewrite the copied ambient package by its proved equality with the actual raw package.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the supplied comparison beta and transport its augmentation equation through the definitional identifications of the actual categories, total tensor, representative comparison and completion unit. The equation is retained exactly; no existence theorem selecting an arbitrary tensor operation is used.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleTensorCompletionPresentation",
+  "file": "lean/Sheaf/Paper/ConstructibleTensorCompletionPresentation.lean",
+  "declaration": "WeilConjectures.ConstructibleTensorModel.tensorCompletionModel",
+  "statement": "theorem tensorCompletionModel\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    ∃ β : ordinaryTensor l E W ⋙ tensorCompletionFunctor l E W ≅\n        integralCompletedTensor l E W,\n      ∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,\n        (tensorCompletionUnit l E W).app\n            ((ordinaryTensor l E W).obj\n              (((integralOperationsGoodLocalization l E W).prod\n                (integralOperationsGoodLocalization l E W)).obj (P, Q))) ≫\n          β.hom.app (((integralOperationsGoodLocalization l E W).prod\n            (integralOperationsGoodLocalization l E W)).obj (P, Q)) ≫\n          (integralCompletedTensorComparison l E W).hom.app (P, Q) =\n        (tensorRepresentativeIso l E W).inv.app (P, Q) ≫\n          DerivedCategory.Q.map (tensorCompletionUnitMap l E W P.obj Q.obj)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized comparison between the completion of an ordinary derived sheaf tensor and its completed tensor, compatible with the canonical augmentation",
+   "results": "AdicCompletion tensor and naturality lemmas; light condensed monoidal instances.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 isoWhiskerLeft and whiskering laws.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorOperationUnit|tensor.*completion.*comparison",
+   "results": "No matches in Mathlib. Existing project integralAmbientOperationModels supplies the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs node lem-fix-constructible-tensor-completion (signature unchanged, proof via 6 proved helpers + 1 true local sorry projectiveTensorChartComplete); removed unit import IntrinsicFiniteTorsionConstructibility vs unit sk-rem-sf-pf-done realized (empty; node realized only in sk-def-sf-setting, still in public import closure); 18 direct importers compiled OK in sandbox"
+ }
+}

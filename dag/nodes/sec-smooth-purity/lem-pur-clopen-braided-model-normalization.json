@@ -1,0 +1,157 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; Tag 0G7D, sites-cohomology-lemma-factor-through-K-flat; Tag 06YU, sites-cohomology-definition-derived-tor; Tag 0FPT, sites-cohomology-lemma-symmetric-monoidal-derived. Agent normalized finite-clopen application: returned item steps 8-9."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; Tag 0G7D, sites-cohomology-lemma-factor-through-K-flat; Tag 06YU, sites-cohomology-definition-derived-tor; Tag 0FPT, sites-cohomology-lemma-symmetric-monoidal-derived. Agent normalized finite-clopen application: returned item steps 8-9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen.*monoidal|monoidal.*clopen|KFlat.*Braided",
+   "results": "{\"t\": \"2026-10-25T07:13:17Z\", \"tool\": \"grep\", \"query\": \"clopen.*monoidal|monoidal.*clopen|KFlat.*Braided\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized clopen model square and unit. The generic localization theorem is available as lem-pur-u2-normalized-braided-localization; the sheaf and cochain specialization and cancellation remain to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.lifting_isMonoidal",
+   "results": "{\"t\": \"2026-10-25T07:13:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\"], \"digest\": \"97e30298210bf705\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized clopen model square and unit. The generic localization theorem is available as lem-pur-u2-normalized-braided-localization; the sheaf and cochain specialization and cancellation remain to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A braided exact restriction of sheaf modules induces a derived braided functor normalized on K-flat complexes and on the ring unit",
+   "results": "{\"t\": \"2026-10-25T07:13:18Z\", \"tool\": \"leansearch\", \"query\": \"A braided exact restriction of sheaf modules induces a derived braided functor normalized on K-flat complexes and on the ring unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"CategoryTheory.Functor.Braided.casesOn\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.Braided.toMonoidal\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.Braided.ext\", \"CategoryTheory.Functor.LaxBraided.toLaxMonoidal\"], \"digest\": \"7d3b471a27896732\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized clopen model square and unit. The generic localization theorem is available as lem-pur-u2-normalized-braided-localization; the sheaf and cochain specialization and cancellation remain to be proved."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenKFlatMonoidalDescent",
+  "date": "2026-10-25",
+  "group": "P9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Finite clopen decomposition of the section invariant: normalized tensor calculus, via lem-pur-clopen-kflat-monoidal-descent.",
+   "via": [
+    "lem-pur-clopen-kflat-monoidal-descent",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-clopen-braided-model-normalization",
+ "kind": "statement",
+ "title": "Braided derived restriction with its normalized model and unit squares",
+ "statement": "Let j:Y→X be an open immersion of schemes, R a commutative ring sheaf on the small pro-etale site of X, and h a braided structure on ordinary module restriction. Let b be a natural isomorphism from restriction of the total tensor to total tensor of restrictions. Assume that on every (p,q)-summand b equals the inverse ordinary tensorator of h followed by the restricted summand inclusion. Assume restriction preserves K-flat complexes and all coproducts indexed in the coefficient universe. Then the specified exact derived restriction admits a braided structure d for the prescribed native symmetric monoidal structures such that ModelNormalization(j,R,b,braidedComparison(d)) holds and braidedUnit(d)=unitComparison(h), in the normalization interface [def-pur-clopen-monoidal-normalization]. The assertion does not include uniqueness of comparisons, local pure-tensor normalization, or equivalence of a finite partition. The ordinary restriction, total comparison and summand inclusions are those of [lem-pur-clopen-total-tensor-kflat-detection], and K-flatness is [def-pc-kflat-complex].",
+ "stmt_deps": [
+  "def-pur-clopen-monoidal-normalization",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Let F be ordinary clopen restriction, equipped with the given braided structure h. Exactness and preservation of coproducts imply preservation of countable colimits. The signed total-complex construction gives a braided cochain functor. Its inverse tensorator has the summand formula F(ι_pq)≫δ = δ_h≫ι_pq. The assumed summand formula for b and the coproduct universal property identify b with this inverse tensorator, degree by degree.",
+   "uses": [
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functorial flat resolutions give the categorical K-flat left derivability structure. The native tensor theorem identifies the independent-coefficient K-flat predicate with categorical K-flatness: for the reverse implication tensor the quasi-isomorphism 0→Z for an acyclic Z. Flat-term K-flat resolutions give a model for every derived object. The assumed hk therefore gives preservation of the categorical K-flat models.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the native lax braided localization functors Q_R and Q_RY and the specified exact derived restriction G, with the canonical factorization factors. Their unit maps are invertible, and their tensor maps are invertible when the appropriate input is K-flat. Apply normalizedBraidedLocalization to obtain a braided structure d on G with factors.hom monoidal for these precise structures.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pur-u2-normalized-braided-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the tensor equation of monoidality of factors.hom, cancel the native tensor maps at a K-flat pair. Their inverses are the specified native tensorIso maps; replace the cochain inverse tensorator by b using step 1. The result is exactly ModelNormalization for braidedComparison d. In the unit equation cancel the native unit maps; the cochain unit is the single-complex restriction of the ordinary coefficient ring. Its composite with the canonical localization factor is precisely unitComparison, giving the claimed equality with braidedUnit d. All arguments are valid for empty schemes and zero rings, since every map cancelled is an isomorphism without a nonzero hypothesis.",
+   "uses": [
+    "def-pur-clopen-monoidal-normalization",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-u2-normalized-braided-localization",
+  "def-pur-clopen-monoidal-normalization"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenBraidedModelNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_braided_model_normalization",
+  "statement": "theorem clopen_braided_model_normalization {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) (h : (clopenTensorRestriction.{t, u} j R).Braided) (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙ clopenTensorComplexRestriction.{t, u} j R ≅ ((clopenTensorComplexRestriction.{t, u} j R).prod (clopenTensorComplexRestriction.{t, u} j R)) ⋙ coefficientTotalTensor.{u, t + 1, t} (topology Y) ((clopenTensorRings.{t, u} j).obj R)) (hsum : ∀ (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ) (p q n : ℤ) (hpq : p + q = n), (clopenTensorRestriction.{t, u} j R).map (clopenTotalTensorSummand.{t, u} R P Q p q n hpq) ≫ (b.hom.app (P, Q)).f n = (clopenTensorComparison.{t, u} j R h (P.X p) (Q.X q)).hom ≫ clopenTotalTensorSummand.{t, u} ((clopenTensorRings.{t, u} j).obj R) ((clopenTensorComplexRestriction.{t, u} j R).obj P) ((clopenTensorComplexRestriction.{t, u} j R).obj Q) p q n hpq) (hk : ∀ P : CochainComplex (clopenTensorModules.{t, u} R) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) P → CochainComplex.IsKFlatIndependentCoefficients (J := topology Y) (R := (clopenTensorRings.{t, u} j).obj R) ((clopenTensorComplexRestriction.{t, u} j R).obj P)) (hcolim : ∀ (K : Type (max u (t + 1))), PreservesColimitsOfShape (Discrete K) (clopenTensorRestriction.{t, u} j R)) : ∃ d : (derivedRestriction.{t, u} j R).Braided, ModelNormalization.{t, u} j R b (braidedComparison.{t, u} j R d) ∧ braidedUnit.{t, u} j R d = unitComparison.{t, u} j R h",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-pur-u2-normalized-braided-localization",
+    "why": "Generic normalized braided localization applied to native tensor localizations and exact clopen restriction."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic cocontinuity of sheaf tensor supplies the cochain monoidal construction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat replacements supply resolving models."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic native monoidal localization and its prescribed computation and unit isomorphisms."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37cd4",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261025T123513-L-1875872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37cd4",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261025T123513-L-1875872",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-pur-clopen-kflat-monoidal-descent and its deps; extracted interface module diffed verbatim against clone item file; new sorry lemma clopen_braided_model_normalization vs its node and normalized-braided-localization route"
+ }
+}

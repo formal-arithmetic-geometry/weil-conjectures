@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-stack-composite-chart-refinement",
+ "kind": "statement",
+ "title": "Compatible pointwise étale charts of an iterated stack pullback",
+ "statement": "Let $S$ be a scheme and let $F,G,H$ be categories fibred in groupoids over $\\mathrm{Sch}/S$ [def-sfb-stable-pointed-moduli-groupoids]. Let $f:F\\to G$ and $g:G\\to H$ be based functors, with $f$ representable by algebraic spaces [def-trf-algebraic-space]. Fix a scheme $T/S$, a map $t:h_T\\to H$, an algebraic space $B$, and a projection $p_B:B\\to h_T$ with a specified algebraic-space presentation of $T\\times_H G$ compatible with $p_B$. Then there are an algebraic space $A$ and a projection $p_A:A\\to h_T$ presenting $T\\times_H F$ for the composite $gf$, with the following property. For every representable etale scheme chart $a:h_U\\to A$ and every $x\\in U$, there are a representable etale scheme chart $c:h_W\\to B$ and a based functor $t_W:h_W\\to G$ such that, for every algebraic-space presentation $M$ of $W\\times_G F$ compatible with a projection $q:M\\to h_W$, there are a scheme $V/S$, an etale map $r:V\\to U$, a representable etale chart $b:h_V\\to M$, and $v\\in V$ such that $r(v)=x$ and the scheme maps $V\\to T$ agree: $p_A a r=p_B c q b$. The displayed equality is written in Lean's left-to-right composition order as `r ≫ yoneda.preimage (a ≫ pA) = yoneda.preimage (b ≫ q) ≫ yoneda.preimage (c ≫ pB)`. All base-change presentations retain their actual projections and equivalences over $\\mathrm{Sch}/S$. No horizontal morphism property or nonemptiness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0300 (lemma-base-change-by-space-representable-by-space), 045B (lemma-composition-representable-transformations-property), and 03MJ (lemma-local-source-target): the property-independent iterated-test and compatible-chart construction in steps 3 and 7 of lem-sfb-stack-chartwise-smooth-etale-calculus."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-representable-pullback-over-space] to f over B, using the G-projection of its displayed test equivalence. The iterated pullback is an algebraic space A. Reassociate its triples by composing the comparison isomorphisms; the inverse inserts the repeated intermediate object and an identity isomorphism. This retains the T-projection p_A and gives HasSpaceBaseChange for gf.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a surjective étale scheme atlas W→B [def-trf-algebraic-space]. Form U×_B W by [lem-trf-space-fibre-products-etale-covers]. Its projection to U is étale and surjective by the scheme-test definitions and base-change permanence. Choose a surjective étale scheme chart V of that space. The composite r:V→U is étale and surjective, so some v maps to x. Composition and base-change permanence here use [lem-weil-pbc-etale-composition-cancellation], [lem-weil-pbc-etale-scheme-base-change], [lem-trf-surjective-morphism-composition], and [lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-surjective-morphism-composition",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define t_W by composing W→B with the G-projection of the given presentation of B. For any presentation M,q of its f-test, the same triple reassociation identifies M with A×_B W. Under this identification U×_B W→M is a base change of the étale chart U→A, hence is étale; composing the chart V gives the required b. Both routes V→T are projections of the same tuple, so they agree. This proves the displayed equality for any chosen presentation M, not just one atlas [def-sfb-stable-pointed-moduli-groupoids, lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation]. Empty U makes the pointwise assertion vacuous.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0300 (lemma-base-change-by-space-representable-by-space), 045B (lemma-composition-representable-transformations-property), and 03MJ (lemma-local-source-target): the property-independent iterated-test and compatible-chart construction in steps 3 and 7 of lem-sfb-stack-chartwise-smooth-etale-calculus.",
+  "note": "Writes out the compatible-chart calculation omitted in Tag 045B; follows the existing parent steps 3 and 7."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stack_composite_chart|composite.*chart.*refin|refin.*chart.*composite",
+   "results": "{\"t\": \"2026-10-26T08:23:15Z\", \"tool\": \"grep\", \"query\": \"stack_composite_chart|composite.*chart.*refin|refin.*chart.*composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for compatible charts of based-functor 2-fibre products. Scheme composition and étale permanence results found by semantic search are used by the parent after this property-independent refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale scheme charts for a composite of representable morphisms of stacks",
+   "results": "{\"t\": \"2026-10-26T08:23:15Z\", \"tool\": \"leansearch\", \"query\": \"Compatible etale scheme charts for a composite of representable morphisms of stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.stalkClosedPointTo_comp\", \"AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE\", \"AlgebraicGeometry.Scheme.comp_app\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc\", \"AlgebraicGeometry.Scheme.stalkMap_comp\"], \"digest\": \"009f53a397f9027c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for compatible charts of based-functor 2-fibre products. Scheme composition and étale permanence results found by semantic search are used by the parent after this property-independent refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible etale scheme charts for a composite of representable morphisms of stacks",
+   "results": "{\"t\": \"2026-10-26T08:23:16Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible etale scheme charts for a composite of representable morphisms of stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"4558bd4c5e18864d\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for compatible charts of based-functor 2-fibre products. Scheme composition and étale permanence results found by semantic search are used by the parent after this property-independent refinement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StackChartwiseSmoothEtaleCalculus",
+  "date": "2026-10-26",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms. Property-independent compatible-chart construction for stack composition, parent steps 3 and 7.",
+   "via": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StackCompositeChartRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackCompositeChartRefinement.lean",
+  "declaration": "CategoryTheory.stack_composite_chart_refinement",
+  "statement": "theorem stack_composite_chart_refinement\n    {S : Scheme.{u}}\n    {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)}\n    {H : BasedCategory.{v₃, w₃} (Over S)}\n    (hF : IsFibredInGroupoids F) (hG : IsFibredInGroupoids G)\n    (hH : IsFibredInGroupoids H) (f : BasedFunctor F G) (g : BasedFunctor G H)\n    (hf : IsRepresentableByAlgebraicSpaces f)\n    (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) H)\n    (ZB : AlgebraicSpace S) (pB : ZB.obj.obj ⟶ yoneda.obj T)\n    (hB : HasSpaceBaseChange g T t ZB pB) :\n    ∃ (ZA : AlgebraicSpace S) (pA : ZA.obj.obj ⟶ yoneda.obj T),\n      HasSpaceBaseChange (f.comp g) T t ZA pA ∧\n        ∀ (U : Over S) (a : yoneda.obj U ⟶ ZA.obj.obj),\n          AlgebraicSpace.IsEtale a → ∀ x : U.left,\n          ∃ (W : Over S) (c : yoneda.obj W ⟶ ZB.obj.obj),\n            AlgebraicSpace.IsEtale c ∧\n              ∃ tW : BasedFunctor (discreteModuli (yoneda.obj W)) G,\n                ∀ (M : AlgebraicSpace S) (q : M.obj.obj ⟶ yoneda.obj W),\n                  HasSpaceBaseChange f W tW M q →\n                    ∃ (V : Over S) (r : V ⟶ U) (b : yoneda.obj V ⟶ M.obj.obj)\n                      (v : V.left),\n                      Etale r.left ∧ AlgebraicSpace.IsEtale b ∧ r.left v = x ∧\n                        r ≫ yoneda.preimage (a ≫ pA) =\n                          yoneda.preimage (b ≫ q) ≫ yoneda.preimage (c ≫ pB)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T092907-L-3477012",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T092907-L-3477012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -67,7 +67,18 @@
   "item": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -75,5 +86,28 @@
   "by": "L",
   "result": "accepted",
   "note": "Mathlib leaf verified: restrictFunctorIsoPullback (Modules/Sheaf.lean:453), restrictAdjunction_unit_app_app (:442), Adjunction.unit_leftAdjointUniq_hom_app (Adjunction/Unique.lean:53)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackOpenRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoTensorPullback_unit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoTensorPullback",
+   "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoTensorPullback_unit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackOpenRestriction.lean",
+  "statement": "theorem restrictFunctorIsoTensorPullback_unit {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] (M : Y.Modules) : (restrictAdjunction f).unit.app M ≫ (pushforward f).map ((restrictFunctorIsoTensorPullback f).hom.app M) = (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app M",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Section 1(B) repair: the Mathlib match restrictFunctorIsoPullback compares restriction with Mathlib Scheme.Modules.pullback, not the recorded tensorPullback. The new natural comparison uses the recorded exists_tensorPullbackAdjunction and restrictAdjunction through leftAdjointUniq; the companion theorem gives its precise unit equation. Evaluation on opens and restrictAdjunction_unit_app_app give exactly the node section formula. The old mathlib_match and all other node fields are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d131493f0",
+  "group": "NP",
+  "result": "pass",
+  "note": "Every node clause is matched by the Lean: G is an arbitrary module sheaf given as its PresheafOfModules plus the sheaf-condition proof; b_u is pinned sectionwise by G(V_W→W)(β_W m); a_u is the transpose under exists_tensorPullbackAdjunction, which is unique because the recorded dependency pins the unit on every open and section; Θ is a module-presheaf morphism (natural-transformation type plus Γ(V,O_V)-linearity clause), its components are fully pinned, it satisfies the open normalization through tensorOpenSectionIso (Γ(κ_W)), and it is natural in M and G. No quasi-coherence, finiteness, non-emptiness or universe restriction; empty and zero edge cases covered. The added stmt_deps (gabber-h0 constructions, new-etale-tensor-open-section-iso) are landed, used and acyclic. The §1(B) dependency module restrictFunctorIsoTensorPullback(_unit) correctly states κ and its unit equation for the project's tensorPullback; the node previously had no lean record. Pilot gates met: helpers are real constructions, only the two theorems are sorry, source and blueprint docstrings present, no pro-étale substitute, no SGA. Advisory only: the item imports TensorPullbackOpenRestriction without using it (H9); G_T overlaps def-sfb zariskiEtaleModuleRestriction up to a canonical iso. No file changed, nothing compiled."
  }
 }

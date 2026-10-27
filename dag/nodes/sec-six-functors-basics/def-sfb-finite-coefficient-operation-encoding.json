@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-finite-coefficient-operation-encoding",
+ "kind": "definition",
+ "title": "Fixed-scalar encoding after a coefficient isomorphism",
+ "statement": "Let A be a topological commutative ring, R a condensed commutative ring, and e:R ≅ underline A_cont an isomorphism of ring objects. On any scheme T, define F_T to be termwise restriction along the inverse pulled-back coefficient isomorphism, followed by the fixed-scalar derived functor of a normalized Encoding A T. This functor is an equivalence: restriction along the inverse ring isomorphism is an exact equivalence, and so is the normalized encoding. No choice of unproved data enters F_T.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Coefficient transport and clauses (2)--(3), canonical-map identifications."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Pull the inverse ring isomorphism back from the profinite point. Restriction of scalars is inverse to restriction along its inverse; both preserve the underlying abelian sheaf and are exact. Apply the exact-functor derived construction and compose with Encoding.fixedDerived. The two functors are equivalences, hence so is their composite.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Expanded normalized coefficient transport; existing source-library proofs are used where available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*(exchange|projection).*encoding|encoding.*(exchange|projection)",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "loogle: Unknown constant `CategoryTheory.Adjunction.rightAdjointProjectionMap`",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact normalized equivalence between internal modules over a finite condensed ring and fixed coefficient proetale sheaves identifies the unit square counit base change mate and projection formula morphism",
+   "results": "Condensed.profiniteSolidCounit; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.adjunction; Condensed.profiniteSolid; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.ihomPoints_symm_comp; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of categories preserves and reflects invertibility and identifies adjunction mates, base change maps and projection formula morphisms under tensor and geometric adjunction comparisons",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.Functor.adjunction; CategoryTheory.Adjunction.isEquivalencePreservesLimits; CategoryTheory.Equivalence.toAdjunction; CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence; CategoryTheory.MorphismProperty.map_inverseImage_eq_of_isEquivalence; CategoryTheory.Functor.preservesProjectiveObjects_of_isEquivalence; CategoryTheory.Functor.reflectsColimits_of_isEquivalence",
+   "date": "2026-10-24",
+   "verdict": "General adjunction, equivalence and underived module-sheaf pullback comparisons; no match for the specified geometric derived operation statement. Reuse the recorded source-library proof or construct the operation from the existing geometric adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperBaseChange",
+  "date": "2026-10-23",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof, coefficient transport and canonical exchange/projection comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientOperationEncoding",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientOperationEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientEncoding",
+  "statement": "def coefficientEncoding (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u})\n    (E : Encoding A T) : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology T)\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientEncoding_isEquivalence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules and 7 node files vs clones/live (signature, lean records, change record users, owners of reused source decls, unit realized=[]), the two sorried encoding statements vs the pinned Encoding structure and the existing qcqs-only exchange identification"
+ }
+}

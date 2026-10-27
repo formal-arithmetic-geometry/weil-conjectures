@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-tangent-base-scalars-stalk-maps",
+ "kind": "definition",
+ "title": "Base-field tangent scalars and canonical structural stalk maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], $s:X\\to\\operatorname{Spec}k$ its structure morphism [def-weil-affine-spectrum], and $x\\in X$. Write $R_x=\\mathcal O_{X,x}$ for the structure-ring stalk [def-weil-pbc-module-stalk] and $\\kappa(x)$ for its residue field [def-weil-residue-field]. Define the structural stalk homomorphism $\\sigma_x:k\\to R_x$ as the composite of the canonical map from $k$ to its stalk at $s(x)$ with $s_x^\\sharp$. Define $\\rho_x:k\\to\\kappa(x)$ by composing $\\sigma_x$ with the residue map. The tangent space $T_{X/k,x}$ [def-sc-scheme-tangent-space], with its canonical $\\kappa(x)$-vector-space structure, is regarded as a $k$-vector space by restriction along $\\rho_x$: $a\\cdot v=\\rho_x(a)\\cdot v$. For any scheme morphism $f:Y\\to Z$, points $y\\in Y$, $z\\in Z$ and equality $e:f(y)=z$, define the identified stalk homomorphism $\\operatorname{stalkMapAt}(f,y,z,e):\\mathcal O_{Z,z}\\to\\mathcal O_{Y,y}$ by transporting the source stalk along $e$ and then applying the usual contravariant stalk map $f_y^\\sharp$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-sc-scheme-tangent-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2C, definition-tangent-space: residue-field vector space restricted to the base. Structural stalk maps: literature/stacks-project/schemes.tex Tags 01HV (lemma-spec-sheaves) and 01I1, scheme morphism stalk maps."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scheme tangent space scalars along the structural residue field map and stalk ring maps over a field",
+   "results": "{\"t\": \"2026-10-24T11:32:44Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scheme tangent space scalars along the structural residue field map and stalk ring maps over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.descResidueField\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"AlgebraicGeometry.Scheme.residue\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Hom.resLEStalkMap\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.residue_descResidueField\"], \"digest\": \"d8004422a0a9f46f\"}",
+   "date": "2026-10-24",
+   "verdict": "Related residue-field and stalk interfaces only; exact base restriction and identified stalk map are the already landed project helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTangentSpaceBaseModule\"",
+   "results": "{\"t\": \"2026-10-24T11:32:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"schemeTangentSpaceBaseModule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib hit; existing project instance found by source search."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkStructure|residueStructure|stalkMapAt|schemeTangentSpaceBaseModule",
+   "results": "{\"t\": \"2026-10-24T11:33:09Z\", \"tool\": \"grep\", \"query\": \"stalkStructure|residueStructure|stalkMapAt|schemeTangentSpaceBaseModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration under these project-specific names."
+  },
+  {
+   "tool": "grep",
+   "query": "rg declaration names in lean/WeilConjectures and lean/Sheaf; rg -l symmetric algebra and helper names in dag/nodes/def-*.json; blueprint_refs.py search symmetric / stalk / tangent scalars",
+   "results": "The four named stalk/tangent helpers occur in Sheaf.AlgebraicGeometry.PowerMapSmoothGraphLocalData as plain abbrev/def/instance; no definition node owns them. SymmetricAlgebra/ι/lift occur in Mathlib.LinearAlgebra.SymmetricAlgebra.Basic; project modules import them. Existing definition nodes concern sheaf symmetric algebras, affine/projective bundles or affine-basis graded algebras, not this module symmetric-algebra construction. The existing universal-property node is a theorem node, not the definition owner. Blueprint searches did not supply an owning definition node.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing declarations through two new existing:true definition records; no new Lean definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-tangent-cone-dimension",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical tangent-cone embedding in Milne AV I.3.6, printed p.18: base-field tangent scalars, local graded coordinate map and affine space Sym(E*). Milne I.3.6, printed p.18: hyperplanes through P transverse to the tangent space, followed by the tangent-cone dimension argument. Historical alteration/Picard branch serving det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-abelian-product-axis-rigidity; the latest direct-images proof no longer contains the historical auxiliary Picard argument.",
+   "via": [
+    "lem-sfb-point-tangent-cone-dimension",
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PowerMapSmoothGraphLocalData",
+  "declaration": "AlgebraicGeometry.PowerMapLocalData.stalkStructure",
+  "declarations": [
+   "AlgebraicGeometry.PowerMapLocalData.stalkStructure",
+   "AlgebraicGeometry.PowerMapLocalData.residueStructure",
+   "AlgebraicGeometry.PowerMapLocalData.stalkMapAt",
+   "AlgebraicGeometry.schemeTangentSpaceBaseModule"
+  ],
+  "statement": "abbrev stalkStructure (k : Type u) [Field k] (X : Scheme.{u})\n    (s : X ⟶ Spec (.of k)) (y : X) : k →+* X.presheaf.stalk y",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested on returned head bcdb6abb57e4. These four plain definitions/instance do not depend on powerMap_smooth_graph_local_data. This definition node owns exactly their structural stalk map, structural residue map, identified contravariant stalk map and base-field tangent scalar restriction. The source signatures and defining formulas were read; no Lean file or definition is copied. The primary declaration is stalkStructure; lean.declarations retains all four, including the priority-annotated tangent instance."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fbe5cb5c",
+  "group": "Q145",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fbe5cb5c",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of bcdb6abb57e4. The Lean module is byte-identical. The item changes only stmt_deps (theorem nodes lem-trf-power-map-smooth-graph-local-data and lem-weil-pbc-symmetric-algebra-universal-property replaced by new existing:true definition nodes def-sfb-tangent-base-scalars-stalk-maps and def-sfb-symmetric-algebra-construction) and lean.note. The new nodes match the source: stalkStructure/residueStructure/stalkMapAt/schemeTangentSpaceBaseModule are plain defs (toStalk≫stalkMap, residue composite, eqToHom≫stalkMap, Module.compHom) with no powerMap theorem use; Mathlib SymmetricAlgebra/ι/lift is the tensor-algebra quotient (Stacks 00DM). Their stmt_deps exist and the live DAG has no duplicate owner. Item not landed; parallel NF 8202 was RETURNED. Mathematics re-read: hypotheses, canonical F pinned on constants and degree-one classes, dim cone = dim R ≤ dim Z ≤ d, strict bound for proper Z, D clause with injective L HEq schemeTangentMap and Sym(L*) range inclusion. Edge cases d=0, Z=Y, Z={p}, cusp, components away from p, D missing p, any characteristic, universe u. Proof sorry only; docstrings and report sections present. Advisory: the Mathlib-branch definition node has status split (5 landed precedents). No compile (no file changed)."
+ }
+}

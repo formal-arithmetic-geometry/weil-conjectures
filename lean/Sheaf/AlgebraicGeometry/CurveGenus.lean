@@ -45,6 +45,7 @@ theorem Scheme.Hom.genus_baseChange_of_isAlgClosed
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] :
     (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).genus = f.genus := by
-  sorry
+  obtain ⟨_, _, _, hgenus, _⟩ := genus_jacobian_invariant (K := K) f
+  exact hgenus
 
 end AlgebraicGeometry

@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-geometric-power-orbit",
+ "kind": "statement",
+ "title": "Cyclic decomposition into geometric simple power-return summands",
+ "statement": "Let $k_0$ be a finite field, $\\ell$ a prime distinct from its characteristic, and $X/k_0$ of finite type with irreducible geometric fiber $\\bar X$. Let $V$ be an irreducible lisse source Weil sheaf [def-weil-weil-sheaf-complex, def-pod-lisse-l-adic-sheaves]. Suppose $\\bar V\\simeq\\bigoplus_{i<N}T_i$ with each $T_i$ an irreducible geometric local system. Write $F_j=((\\operatorname{Fr}^j)^{-1})_*$ for the power pullback and $\\varphi_j:F_j\\bar V\\simeq\\bar V$ for the explicitly iterated source Weil return [def-zl-source-constant-field-restriction]. There exist $r>0$, $n\\in\\mathbf N$, power algebras $W_a=(U_a,\\psi_a:F_rU_a\\simeq U_a)$ for $a<n$, and an isomorphism of power algebras $v:(\\bar V,\\varphi_r)\\simeq\\bigoplus_aW_a$ such that every $U_a$ is an irreducible geometric local system. If $i_a:U_a\\hookrightarrow\\bar V$ is the underlying morphism of the $a$-th biproduct inclusion followed by $v^{-1}$, then for every $a,b$ there are $j\\in\\mathbf N$ and $e:F_jU_a\\simeq U_b$ satisfying $e\\,;i_b=F_j(i_a)\\,;\\varphi_j$. No constant-field model or local Frobenius comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-geometric-constituents/lem-zl-geometric-constituents-any-base.proof.md",
+  "place": "Proof paragraphs 1--2: Frobenius action on isotypic blocks and the multiplicity eigenline."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-zl-source-constant-field-restriction",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Apply the geometric multiplicity-one lemma to the supplied simple decomposition, so no two distinct factors are isomorphic.",
+   "uses": [
+    "lem-zl-geometric-multiplicity-one"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each a, the return of the Frobenius pullback of its embedded summand has a nonzero component in at least one simple factor. Schur for local systems makes that component an isomorphism. Multiplicity one makes every other component zero. These chosen components therefore give embedded one-step isomorphisms and an injective self-map of the finite index set, hence a permutation sigma. This is the proved private helper monomial_return.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For an index a, take the biproduct projector p onto its sigma-orbit and conjugate it by the supplied decomposition. The one-step embedded transports show that p commutes with the Weil return. Its image as a Weil endomorphism is lisse because the forgetful functor preserves images. It is nonzero since p fixes the a-th nonzero summand. Arithmetic irreducibility makes the image inclusion an isomorphism, hence p is epic. As p is idempotent this gives p=1. Therefore every index belongs to the orbit of a. This is the proved private helper transitive_return.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on j, inserting at each successor the actual adicLowerStarCongr and adicLowerStarComp isomorphisms used by the source frobeniusPowIso. Naturality and the one-step embedding equation yield an isomorphism from the j-th geometric pullback of T_a to T_(sigma^j a), with exactly the original-return equation. This is the proved private helper iterated_return.",
+   "uses": [
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set r=orderOf(sigma)>0. The preceding power transport returns each factor to itself, so equip that factor with the resulting power structure W_a. Its embedded inclusion is an equivariant morphism into powFunctor(r)(V). Their biproduct desc m is an isomorphism: after forgetting and precomposing the inverse of mapBiproduct, it is exactly the original decomposition inverse. The forgetful functor reflects isomorphisms. Use v=(asIso m).symm. Its embedded summands are the original inclusions. Transitivity supplies j with sigma^j(a)=b, and iterated_return then proves the required final equation.",
+   "uses": [
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-geometric-multiplicity-one",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-source-constant-field-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-geometric-constituents/lem-zl-geometric-constituents-any-base.proof.md",
+  "place": "Paragraphs 1--2; multiplicity one is isolated, and the remaining monomial return, orbit projector, natural power iteration and power-algebra assembly are proved in Lean by G4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An irreducible Weil sheaf with semisimple geometric carrier has simple summands preserved by a positive power and permuted transitively by Frobenius",
+   "results": "8 hits, including Representation.IsIrreducible.toIsSimpleOrder, Module.End.IsSemisimple.pow, IsSemisimpleModule.exists_linearEquiv_dfinsupp. No source sheaf power-return orbit theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible equivariant object whose underlying object is a finite sum of simple objects splits after a power of its automorphism into a transitive orbit of simple objects",
+   "results": "8 hits, including FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, IsIsotypic.linearEquiv_fun. No source sheaf power-return orbit theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isotypic|twistedMap|frobenius.*orbit",
+   "results": "10 displayed hits in Mathlib/RingTheory/SimpleModule/Isotypic.lean and WedderburnArtin.lean; no sheaf power-return orbit theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SemisimpleFrobeniusOrbitDescent",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1--2: Frobenius action on isotypic blocks and the multiplicity eigenline.",
+   "via": [
+    "lem-zl-semisimple-frobenius-orbit-descent",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.GeometricPowerOrbit",
+  "file": "lean/Sheaf/DeligneLaumon/GeometricPowerOrbit.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_geometric_power_orbit",
+  "statement": "theorem exists_geometric_power_orbit\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]\n    (V : WeilSheaf k₀ l X) (hV : V.IsIrreducibleLisse)\n    (N : ℕ) (T : Fin N → AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n    (hT : ∀ i, IsIrreducibleAdicLocalSystem (T i)) (vT : V.obj.carrier ≅ ⨁ T) :\n    ∃ (r : ℕ) (_ : 0 < r) (n : ℕ)\n      (W : Fin n → IsoAlgebra (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X r))\n      (v : (ProEtaleWeilSheaf.powFunctor k₀ l X r).obj V.obj ≅ ⨁ W),\n      (∀ a, IsIrreducibleAdicLocalSystem (W a).carrier) ∧\n      ∀ a b, ∃ (j : ℕ)\n        (e : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).obj (W a).carrier ≅\n          (W b).carrier),\n        e.hom ≫ (biproduct.ι W b ≫ v.inv).hom.f =\n          (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).map\n            (biproduct.ι W a ≫ v.inv).hom.f ≫ (V.obj.frobeniusPowIso j).hom",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T023434-L-566540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T065802-L-3236390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-space-representable-etale-scheme-tests",
+ "kind": "statement",
+ "title": "Scheme tests and comparison maps for representable etale morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Representable, representable etale, and representable surjective etale have the scheme-test meanings in [def-trf-algebraic-space]; etale and surjective scheme morphisms mean [def-weil-etale-morphism, def-weil-surjective-morphism]. Every morphism $h_U\\to F$ from an $S$-scheme $U$ to an algebraic space $F$ is representable. For any two such scheme-source maps $h_U\\to F$ and $h_T\\to F$, the sheaf $h_U\\times_Fh_T$ is represented by a scheme. Representable etale morphisms of algebraic spaces are closed under composition and arbitrary algebraic-space base change, and include all isomorphisms. The same assertions about composition and base change hold for representable surjective etale morphisms, and isomorphisms are representable surjective etale. For a morphism $r:U\\to V$ of $S$-schemes, $h_r$ is representable etale if and only if $r$ is etale; a surjective etale scheme morphism induces a representable surjective etale morphism. Finally, let $U,V$ be $S$-schemes, let $F$ be an algebraic space, and let $a:h_U\\to F$ and $b:h_V\\to F$ be representable etale. Every scheme morphism $r:U\\to V$ satisfying $b\\circ h_r=a$ is etale. Scheme fibre products use [def-pc-fibre-product]; algebraic-space fibre products are the sheaf fibre products of [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03EC (lemma-etale-over-space), parts (1),(2), with spaces.tex Tag 025W (lemma-representable-diagonal) and the formal representable-property scheme tests; scheme permanence is supplied by the existing scheme nodes. Extracts returned proof steps 1,2,7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Identify IsRepresentable with yoneda.relativelyRepresentable by unpacking the scheme-test witnesses. Mathlib Functor.relativelyRepresentable.of_diag applied to the representable diagonal of F proves that each h_U → F is representable. A represented test square has its canonical isoPullback, whose inverse proves the scheme fibre-product assertion. This is the formal diagonal pullback argument of Tag 025W [def-trf-algebraic-space, def-pc-fibre-product, lem-pc-yoneda].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any morphism property P of schemes over S respecting isomorphisms, identify IsRepresentableWith P f with P.relative yoneda f. The forward direction is Mathlib relative.of_exists, using uniqueness of representing pullbacks up to isomorphism; the reverse direction extracts its representing square and property_snd. Pull back Etale and Surjective along Over.forget S. Their composition and isomorphism instances, transported through relative, prove the etale and surjective-etale composition clauses and the isomorphism clause [lem-weil-pbc-etale-composition-cancellation, def-weil-surjective-morphism, lem-trf-surjective-morphism-composition].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-surjective-morphism",
+    "lem-trf-surjective-morphism-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over.forget S preserves pullbacks, so scheme base-change stability gives base-change stability of both properties on Over S. Mathlib relative_isStableUnderBaseChange transports these to presheaves. Apply of_isPullback to the sheaf pullback square mapped by sheafToPresheaf, which preserves limits. This proves both base-change assertions without needing to bundle the sheaf pullback as an algebraic space [def-pc-fibre-product, lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib relative_map_iff gives IsEtale (yoneda.map r) iff Etale r.left: Yoneda is fully faithful and preserves pullbacks, and the scheme property is stable under base change. Apply relative_map separately for Etale and Surjective to prove the surjective-etale scheme-map clause [lem-pc-yoneda, lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "lem-pc-yoneda",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the comparison clause choose the representing scheme of the a-test along b. Its two projections p to U and q to V are etale: q by property_snd for a, p by the flipped representing square and the b-test. The commuting triangle gives the graph-section lift s with s ≫ p = identity and s ≫ q = r by fully faithful Yoneda and the relativelyRepresentable lift API. Etale cancellation on s.left ≫ p.left proves s.left etale; composing with q.left proves r.left etale [lem-pc-yoneda, lem-weil-pbc-etale-composition-cancellation]. No surjectivity assumption is used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-pc-yoneda",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-surjective-morphism",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 025W, 02WK, 02WL, 02WJ, formal relative-property calculus as implemented by Mathlib.CategoryTheory.MorphismProperty.Representable; spaces-properties.tex Tag 03EC(2), direct graph-section proof using scheme etale cancellation (02GW)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Representable etale morphisms of algebraic spaces compose and are stable under arbitrary base change; maps between etale scheme charts over an algebraic space are etale",
+   "results": "{\"t\": \"2026-10-22T06:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Representable etale morphisms of algebraic spaces compose and are stable under arbitrary base change; maps between etale scheme charts over an algebraic space are etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"b24fba12c4e3d44a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are scheme-morphism statements, not scheme tests over an arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; its Etale class has Scheme source and target. General representability alone does not supply the etale comparison calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The representable diagonal of an algebraic space makes every map from a scheme representable, and etale scheme-source maps satisfy cancellation",
+   "results": "{\"t\": \"2026-10-22T06:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"The representable diagonal of an algebraic space makes every map from a scheme representable, and etale scheme-source maps satisfy cancellation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"a20cbf4220ae692d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are scheme-morphism statements, not scheme tests over an arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; its Etale class has Scheme source and target. General representability alone does not supply the etale comparison calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRepresentableWith\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T06:10:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRepresentableWith\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are scheme-morphism statements, not scheme tests over an arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; its Etale class has Scheme source and target. General representability alone does not supply the etale comparison calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsRepresentableWith.*[Ee]tale|[Ee]tale.*IsRepresentableWith",
+   "results": "{\"t\": \"2026-10-22T06:10:49Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|IsRepresentableWith.*[Ee]tale|[Ee]tale.*IsRepresentableWith\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are scheme-morphism statements, not scheme tests over an arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; its Etale class has Scheme source and target. General representability alone does not supply the etale comparison calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable etale morphisms of algebraic spaces are stable under composition and base change and etale scheme charts have etale comparison maps",
+   "results": "{\"t\": \"2026-10-22T06:11:15Z\", \"tool\": \"leansearch\", \"query\": \"Representable etale morphisms of algebraic spaces are stable under composition and base change and etale scheme charts have etale comparison maps\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsRepresentableWith.*[Ee]tale|[Ee]tale.*IsRepresentableWith",
+   "results": "{\"t\": \"2026-10-22T07:12:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|IsRepresentableWith.*[Ee]tale|[Ee]tale.*IsRepresentableWith\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the hits; scheme Etale composition, base-change and cancellation in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:41,69,74,130,134 cover inputs only. No hit states the representability and scheme-test assertions over arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable etale morphisms of algebraic spaces compose and are preserved by base change",
+   "results": "{\"t\": \"2026-10-22T07:12:52Z\", \"tool\": \"leansearch\", \"query\": \"Representable etale morphisms of algebraic spaces compose and are preserved by base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.FormallyEtale.comp\", \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"292d49d0234d1920\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the hits; scheme Etale composition, base-change and cancellation in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:41,69,74,130,134 cover inputs only. No hit states the representability and scheme-test assertions over arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRepresentableWith\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T07:12:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRepresentableWith\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the hits; scheme Etale composition, base-change and cancellation in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:41,69,74,130,134 cover inputs only. No hit states the representability and scheme-test assertions over arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable etale morphisms of algebraic spaces are stable under composition and arbitrary base change; maps between etale scheme charts over a space are etale",
+   "results": "{\"t\": \"2026-10-22T07:13:02Z\", \"tool\": \"leanfinder\", \"query\": \"Representable etale morphisms of algebraic spaces are stable under composition and arbitrary base change; maps between etale scheme charts over a space are etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"a1037b4f0ce51cdf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the hits; scheme Etale composition, base-change and cancellation in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:41,69,74,130,134 cover inputs only. No hit states the representability and scheme-test assertions over arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable diagonal makes fibre products of scheme-valued points representable, and a section of an etale scheme morphism is etale",
+   "results": "{\"t\": \"2026-10-22T07:13:36Z\", \"tool\": \"leanfinder\", \"query\": \"A representable diagonal makes fibre products of scheme-valued points representable, and a section of an etale scheme morphism is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"9623070983a20bf9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the hits; scheme Etale composition, base-change and cancellation in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:41,69,74,130,134 cover inputs only. No hit states the representability and scheme-test assertions over arbitrary algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-chartwise-etale-permanence",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Basic chartwise etale permanence and covering base change needed to construct the enlarged etale site. Re-split of lem-trf-space-chartwise-etale-permanence: Returned steps 1,2,7: representable-diagonal scheme tests, representable permanence and the graph-section comparison over an algebraic space.",
+   "via": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-space-representable-etale-scheme-tests",
+  "worker": "stage1",
+  "summary": "Proved all clauses through the representable diagonal and explicit scheme tests. Reused the existing Mathlib leaves for scheme etale composition/cancellation, base change, and covering permanence, and the full Yoneda lemma. The final comparison is a graph section followed by a projection. No new nodes, no changed statement, and no separatedness or surjectivity assumption on the comparison charts.",
+  "blueprint": "Retains the historical ancestry through lem-trf-local-term-locality, polarized ampleness descent and enlarged etale-site construction. Steps 1-6 discharge the extracted scheme-test and comparison obligations of lem-trf-space-chartwise-etale-permanence (returned steps 1,2,7) at blueprint.from.place. They do not alter any chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-e8adcd29f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-e8adcd29f (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery adds no new nodes, and the statement and stmt_deps are identical to the live unsplit node (created 2026-10-22 by Q118's resolved re-split of chartwise-etale-permanence). The item has no repair note of its own, so this is an ordinary first split: 6 steps, 3909 chars. Every clause of the statement has a step. Step 1 is Stacks 025W written out: the representable diagonal is pulled back along h_{U×_S T}, and Yoneda turns the projections into scheme maps. Step 2 is 02WK: h_P≅h_T×_C A, with étaleness from composition-cancellation (2) and surjectivity from the last sentence of covering-composition. Step 3 is 02WL, a compatible-pair bijection that uses fibre-products-etale-covers only for E being an algebraic space, so it is not circular. Step 4 shows an isomorphism is represented by 1_T (an open immersion, so étale, and surjective). Step 5 is 02WJ: base-change-finite-limits (1) with u=t, the converse by testing along id, and the singleton-family covering base change for surjectivity. Step 6 proves 03EC(2) by the graph section s=(1,r): ps=1 étale and p étale give s étale by cancellation (3), so r=qs is étale by (2). It needs no separatedness or surjectivity. Stacks proves 03EC(2) through an atlas and descent; the graph-section argument is equivalent, below the unit route, and recorded in proof_origin. I read 025W, 02WJ, 02WK, 02WL, the definition of the relative representable property and 03EC in the snapshot literature. Each cited statement says what its step takes. The transitive closure of every dependency is free of cycles. All off-unit citations are mathlib-status nodes, so there is no route issue and no tool_uses. No SGA is cited. rg -L for the tags and for 'representable étale' found no duplicate (the sfb stack calculus, the a1 atlas nodes and the sibling atlas-detection node state other things). Edge cases checked: empty schemes, an open-immersion chart, a non-separated doubled-origin chart, and a closed immersion as a non-étale converse test. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceRepresentableEtaleSchemeTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.representable_etale_scheme_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceRepresentableEtaleSchemeTests.lean",
+  "statement": "theorem representable_etale_scheme_tests {S : Scheme.{u}} : (∀ (F : AlgebraicSpace S) (U : Over S) (a : yoneda.obj U ⟶ F.obj.obj), IsRepresentable a) ∧ (∀ (F : AlgebraicSpace S) (U T : Over S) (a : yoneda.obj U ⟶ F.obj.obj) (b : yoneda.obj T ⟶ F.obj.obj), ∃ P : Over S, Nonempty (Limits.pullback a b ≅ yoneda.obj P)) ∧ (∀ (A B C : AlgebraicSpace S) (f : A ⟶ B) (g : B ⟶ C), IsEtale f.hom.hom → IsEtale g.hom.hom → IsEtale (f ≫ g).hom.hom) ∧ (∀ (A B C : AlgebraicSpace S) (f : A ⟶ B) (g : C ⟶ B), IsEtale f.hom.hom → IsEtale (Limits.pullback.snd f.hom g.hom).hom) ∧ (∀ (A B : AlgebraicSpace S) (f : A ⟶ B), IsIso f → IsEtale f.hom.hom ∧ IsSurjective f.hom.hom) ∧ (∀ (A B C : AlgebraicSpace S) (f : A ⟶ B) (g : B ⟶ C), IsEtale f.hom.hom → IsSurjective f.hom.hom → IsEtale g.hom.hom → IsSurjective g.hom.hom → IsEtale (f ≫ g).hom.hom ∧ IsSurjective (f ≫ g).hom.hom) ∧ (∀ (A B C : AlgebraicSpace S) (f : A ⟶ B) (g : C ⟶ B), IsEtale f.hom.hom → IsSurjective f.hom.hom → IsEtale (Limits.pullback.snd f.hom g.hom).hom ∧ IsSurjective (Limits.pullback.snd f.hom g.hom).hom) ∧ (∀ (U V : Over S) (r : U ⟶ V), IsEtale (yoneda.map r) ↔ Etale r.left) ∧ (∀ (U V : Over S) (r : U ⟶ V), Etale r.left → Surjective r.left → IsEtale (yoneda.map r) ∧ IsSurjective (yoneda.map r)) ∧ (∀ (F : AlgebraicSpace S) (U V : Over S) (a : yoneda.obj U ⟶ F.obj.obj) (b : yoneda.obj V ⟶ F.obj.obj) (r : U ⟶ V), IsEtale a → IsEtale b → yoneda.map r ≫ b = a → Etale r.left)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The ten conjuncts jointly state every clause: scheme-source representability and fibre products, etale composition and base change, isomorphisms (including surjectivity), surjective-etale composition and base change, the scheme-map iff, surjective-etale scheme maps, and comparison maps between etale charts. Predicates and sheaf pullbacks are the recorded dependency interfaces; no new notions or statement corrections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b5bcfb10",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only the item's lean record changes against the live node (statement, stmt_deps and proof unchanged; lean.statement matches the file verbatim). The ten conjuncts cover every node clause through the recorded AlgebraicSpace predicates and the sheaf pullback: scheme-source representability, h_U x_F h_T represented by a scheme, etale composition and arbitrary base change, isomorphisms representable surjective etale, surjective-etale composition and base change, h_r etale iff r etale, surjective etale scheme maps, and the chart comparison b∘h_r=a ⇒ r etale. No extra hypotheses, one universe u as in the dependency interface, IsEtale/IsSurjective resolve to the algebraic-space predicates. Edge cases checked: empty schemes, non-surjective and non-separated charts, closed-immersion negative test. No definitions, only the main theorem is sorry, source and blueprint docstrings with all 6 proof steps, report sections present. Advisory: four plain imports are unused proof inputs; parts 3 and 4 overlap the dependency theorems isEtale_comp and etaleCover_pullback (not a duplicate notion). Not recompiled per the 2026-10-21 rule; worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261023T123551-L-1212247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

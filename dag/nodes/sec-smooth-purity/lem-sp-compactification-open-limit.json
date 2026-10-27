@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-compactification-open-limit",
+ "kind": "statement",
+ "title": "Projection normalization of the completed open limit mate",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For schemes $X,Z$ let $j:X\\hookrightarrow Z$ be a quasi-compact open immersion. Write $R_T$ for the completed integral coefficient ring on the small pro-etale site, $\\mathcal L_T$ for the specified total right derived inverse limit on strict towers of $R_T$-modules, $\\pi_{T,n}$ for its derived projection, $j_{!,R}$ for open extension and $j_{!,R}^{\\rm Tow}$ for its termwise strict-tower functor, all as in [def-sp-complete-compactification-limit-comparison]. The specified constant-diagram mate $\\lambda:\\mathcal L_Xj_{!,R}\\to j_{!,R}^{\\rm Tow}\\mathcal L_Z$ is invertible on the entire unbounded derived category. For every strict derived tower $K$ and $n\\ge0$, $\\lambda_K\\,\\pi_{Z,n}(j_{!,R}^{\\rm Tow}K)=j_{!,R}(\\pi_{X,n}(K))\\,e_{j,n,K}^{-1}$, with $e$ the canonical exact evaluation/localization comparison fixedOpenEvaluation. No boundedness, constructibility or normalization is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+ },
+ "stmt_deps": [
+  "def-sp-complete-compactification-limit-comparison",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Identify the open pro-etale site with the slice and its actual ring module extension. Localized-system exactness gives exact open extension; its canonical countable-product map is invertible by the ringed open product theorem. Both sites have exact countable products. Apply the exact-product strict-limit theorem. Its signed Roos comparison is the canonical product comparison on both summands, and its augmentation normalization identifies it by const/limit transposition with openLimit. Its projection formula becomes the displayed equation after the standard exact evaluation localization factors. This holds also for the empty and identity open.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (2): completed compactification composite and its strict derived inverse limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact product preserving functor commutes with derived inverse limit of strict towers with canonical projection normalization",
+   "results": "CategoryTheory.ExactFunctor, exactFunctor_iff, Functor.exact_tfae. These ordinary exactness assertions do not give the strict derived limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; mateEquiv_counit; unit_mateEquiv; mateEquiv_vcomp. General mate equations alone do not prove the specified mate invertible or normalize the derived projections.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|Derived).*[Ll]imit|[Ll]imit.*(derived|Derived)",
+   "results": "Mathlib functor PointwiseRightDerived/PointwiseLeftDerived and Ext files. No exact-product strict-tower/Rlim comparison. Local cbcRealizationLimitMap_isIso gives only invertibility; exactProductFunctorStrictLimit is the retained general dependency.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactificationLimitRealization",
+  "date": "2026-10-25",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (2): Projection normalization of the completed open limit mate",
+   "via": [
+    "lem-sp-complete-compactification-limit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactificationOpenLimit",
+  "file": "lean/Sheaf/Paper/CompactificationOpenLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteCompactificationLimit.compactificationOpenLimit",
+  "statement": "theorem compactificationOpenLimit {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] [QuasiCompact j] : IsIso (openLimit l E j) ∧ ∀ (K : DerivedCategory (Fixed l E X)) (n : ℕ), (openLimit l E j).app K ≫ (coefficientConstantTowerProjection l E Z n).app (((fixedOpenOrd l E j).mapDerivedCategory).obj K) = (openOrd l E j).mapDerivedCategory.map ((coefficientConstantTowerProjection l E X n).app K) ≫ (fixedOpenEvaluation l E j n).inv.app K",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.CompleteCompactificationLimitRealization",
+  "worker": "stage3",
+  "summary": "Specialization and normalization obligation for the existing strict-system proof, separated from its Lean assembly.",
+  "blueprint": "Paragraph (2), exact open extension, right derived direct image and completed strict coefficient systems.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   },
+   {
+    "node": "lem-cbc-ringed-open-extension-products",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Existing general tool already approved on the parent; needed to transport its normalized construction to the specified coefficient functors."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd90f",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162110-L-278300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd90f",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162110-L-278300",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from 3 new sorried statements) vs packet nodes, support defs (openLimit/pushLimit/fixedOpenEvaluation), proEtaleRingedExtensionByZero_products and ringedTowerPushforwardLimitComparison hypotheses, unit realized (empty); sandbox compile of 3 new modules + item + importer IntegralReconstructionComparisons OK; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

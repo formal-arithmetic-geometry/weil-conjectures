@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-smooth-zero-dimensional-singleton-open",
+ "kind": "statement",
+ "title": "Zero-dimensional smooth fibre point admits a singleton-fibre etale open",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $x\\in X$, and put $s=f(x)$. Assume there is an open subscheme $W\\subseteq X$ containing $x$ [def-weil-open-immersion] for which $f|_W:W\\to S$ is smooth [def-sbc-smooth-morphisms]. Assume that $\\dim_x(X_s)=0$, where $X_s$ is the scheme-theoretic fibre [def-pc-scheme-fibre] and dimension at a point means the minimum of the dimensions of its open neighbourhoods [def-kun-topological-dimension-at-point]. Then there exists an open subscheme $Z\\subseteq W$ containing $x$ such that $f|_Z:Z\\to S$ is etale [def-weil-etale-morphism] and $Z_s$ has underlying set $\\{x\\}$, with $x$ viewed as the corresponding point of $Z_s$. The inclusion $Z\\to X$ is an immersion (a closed immersion followed by an open immersion [def-weil-closed-immersion]). No closed-point or separability hypothesis is imposed on $x$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057G, lemma-slice-smooth, proof: entire paragraph headed \"The case d = 0\", including the final open restriction making the fibre a singleton; fibre topology from Tag 01K1, lemma-fibre-topological (schemes.tex)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension] to $f$, $x$ and the given $W$. Its smoothness and zero fibre-dimension hypotheses are exactly ours. We obtain an open $U\\subseteq W$ containing $x$ with $g=f|_U:U\\to S$ etale.",
+   "uses": [
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, case d = 0: shrinking to an etale open; the existing cited criterion supplies this shrinking."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-fibre-discrete-separable-points], $|U_s|$ is discrete, so the singleton of the point above $x$ is open. By [def-pc-scheme-fibre], the fibre projection identifies $|U_s|$ homeomorphically with the subspace $g^{-1}(s)\\subseteq |U|$. Consequently $\\{x\\}$ is open in that subspace. By the definition of subspace topology [def-kun-subspace-topology] there is an open $V\\subseteq |U|$ with $V\\cap g^{-1}(s)=\\{x\\}$. In particular $x\\in V$.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "def-kun-subspace-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field (2); schemes.tex Tag 01K1, lemma-fibre-topological; applied as in Tag 057G, d = 0."
+   }
+  },
+  {
+   "text": "Let $Z$ be the open subscheme of $U$ defined by $V$. Open subsets of an open subspace are open in the ambient space; restriction of $\\mathcal O_X$ first to $U$ and then to $V$ is its restriction to $V$. Thus [def-weil-open-immersion] identifies $Z$ with an open subscheme of $X$ contained in $U\\subseteq W$. Applying [def-pc-scheme-fibre] to $f|_Z$ identifies $|Z_s|$ with $V\\cap g^{-1}(s)=\\{x\\}$. The inclusion $Z\\to U$ is open, so [lem-weil-pbc-etale-composition-cancellation] makes it etale and makes its composite with $g$ etale. This composite is $f|_Z$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, case d = 0, final open restriction; morphisms.tex Tags 02GP and 02GN."
+   }
+  },
+  {
+   "text": "The inclusion $Z\\to X$ is an immersion in the stated sense [def-weil-closed-immersion]: factor it as the identity $Z\\to Z$ followed by its open inclusion in $X$. The identity is a closed immersion because its underlying image is all of $Z$ and its structure-sheaf map is the identity, hence surjective. No step used closedness of $x$ in $X$ or a hypothesis on its residue extension.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IO, definition-immersion, clauses (3) and (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-scheme-fibre",
+  "def-kun-subspace-topology",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057G, lemma-slice-smooth, proof, entire case d = 0; existing etale-neighbourhood criterion packages its first shrinking, and Tag 02GL with Tag 01K1 gives the final isolation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism with fibre dimension zero at a point has an open neighbourhood which is etale and whose fibre over that base point is a singleton",
+   "results": "{\"t\": \"2026-10-22T06:10:36Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism with fibre dimension zero at a point has an open neighbourhood which is etale and whose fibre over that base point is a singleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"2a3f764eabcbd6dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"singleton\"",
+   "results": "{\"t\": \"2026-10-22T06:10:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"singleton\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsEtale|IsSmooth|Etale|Smooth).*(singleton|asFiber)|(singleton|asFiber).*(IsEtale|IsSmooth|Etale|Smooth)",
+   "results": "{\"t\": \"2026-10-22T06:10:24Z\", \"tool\": \"grep\", \"query\": \"(IsEtale|IsSmooth|Etale|Smooth).*(singleton|asFiber)|(singleton|asFiber).*(IsEtale|IsSmooth|Etale|Smooth)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional smooth fibre point has an open etale neighbourhood isolating that point in its fibre",
+   "results": "{\"t\": \"2026-10-22T06:10:25Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional smooth fibre point has an open etale neighbourhood isolating that point in its fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"5b6279aadc145de6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmoothOfRelativeDimension\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:11:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmoothOfRelativeDimension\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsEtale|IsSmoothOfRelativeDimension|etaleLocus",
+   "results": "{\"t\": \"2026-10-22T06:11:44Z\", \"tool\": \"grep\", \"query\": \"class IsEtale|IsSmoothOfRelativeDimension|etaleLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"a6373df8c0acf59a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Etale/smooth definitions and standard smooth algebra criteria do not supply the open neighbourhood with singleton designated fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "(Smooth|Etale).*(singleton|fibre_dimension_zero|fiber_dimension_zero)|(singleton|fibre_dimension_zero|fiber_dimension_zero).*(Smooth|Etale)",
+   "results": "{\"t\": \"2026-10-23T09:50:36Z\", \"tool\": \"grep\", \"query\": \"(Smooth|Etale).*(singleton|fibre_dimension_zero|fiber_dimension_zero)|(singleton|fibre_dimension_zero|fiber_dimension_zero).*(Smooth|Etale)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional smooth fibre point has an open etale neighbourhood with singleton fibre",
+   "results": "{\"t\": \"2026-10-23T09:50:36Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional smooth fibre point has an open etale neighbourhood with singleton fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Topology.RelCWComplex.openCell_zero_eq_singleton\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.instIsStandardSmoothOfRelativeDimensionOfNatNatOfSubsingleton\"], \"digest\": \"d691ae9b88991d58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Etale\", \"Opens\"",
+   "results": "{\"t\": \"2026-10-23T09:50:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Etale\\\", \\\"Opens\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism with dimension zero at a fibre point admits an etale open neighbourhood isolating that point in the fibre",
+   "results": "{\"t\": \"2026-10-23T09:50:37Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism with dimension zero at a fibre point admits an etale open neighbourhood isolating that point in the fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"d0a980a0dbf23542\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*open|open.*etale|fiberHomeo|isDiscrete_preimage_singleton",
+   "results": "{\"t\": \"2026-10-23T09:53:29Z\", \"tool\": \"grep\", \"query\": \"etale.*open|open.*etale|fiberHomeo|isDiscrete_preimage_singleton\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\"], \"digest\": \"b7c102aa79d5509f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"DiscreteTopology\"",
+   "results": "{\"t\": \"2026-10-23T09:53:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"DiscreteTopology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism has discrete fibres so an open subscheme can isolate a specified fibre point",
+   "results": "{\"t\": \"2026-10-23T09:53:40Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism has discrete fibres so an open subscheme can isolate a specified fibre point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"56b793773f9cdfa0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; these provide standard smooth charts, etale definitions, open-immersion composition or fibre topology, not the stated smooth dimension-zero singleton-fibre neighbourhood."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-point-etale-immersion",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary branch: Tag 057G smooth immersion slice used after pointed finite-stage descent in lem-trf-relative-completion-etale-approximation; proof by induction on fibre dimension. This retains the imported ancestry and does not replace the current contracting-correspondence proof. Extracted from the 057G proof: zero-dimensional open singleton-fibre case (returned step 2).",
+   "via": [
+    "lem-trf-smooth-point-etale-immersion",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-zero-dimensional-singleton-open",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Read the full zero-dimensional case of Stacks 057G and its fibre-topology and etale-fibre inputs. Reused existing nodes for the etale shrinking, discrete fibre, fibre topology and etale composition. Wrote the open-subspace isolation and identity-closed-immersion factorization explicitly. No new nodes or Mathlib leaves. Searches found only ingredients, not the full item.",
+  "blueprint": "Historical auxiliary branch already recorded in blueprint.from: the zero-dimensional base case of the smooth slice used in lem-trf-relative-completion-etale-approximation, via lem-trf-smooth-point-etale-immersion. The latest lem-trf-local-term-locality proof uses contracting correspondences; this split preserves the existing auxiliary ancestry and does not replace that proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "why": "General geometric criterion gives the etale open inside the supplied smooth neighbourhood. No node of sk-i-curve-zero states this criterion; using its existing statement avoids duplicating the first half of this auxiliary lemma."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "General etale-fibre classification supplies discreteness. No node of sk-i-curve-zero gives that classification; it is used only to isolate the designated fibre point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-7ebecaea3",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-7ebecaea3 (reviewer sub-agent of L); spot-checked: Item-only split: no new nodes, statement and stmt_deps unchanged. I read the Stacks 057G d=0 paragraph (more-morphisms.tex, lemma-slice-smooth). It needs neither the closed-point nor the separability hypothesis, so the statement is true as written. Dimension at x is the topological min over open neighbourhoods, which correctly excludes the generic point of A^1. Step 1: lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension with U=W; its hypotheses match exactly. Step 2: lem-weil-pbc-etale-fibre-discrete-separable-points gives a discrete fibre, and the def-pc-scheme-fibre homeomorphism plus def-kun-subspace-topology give an open V with V∩g^{-1}(s)={x}. Step 3: open subscheme Z, |Z_s|={x} by def-pc-scheme-fibre, étale by composition-cancellation (1)+(2). Step 4: immersion = id_Z followed by the open immersion. Edge cases checked: infinite disjoint étale unions, non-closed x, empty X, non-separated S. No duplicates: the parent smooth-point-etale-immersion and sbc-smooth-separable-point-etale-slice both need separability or closedness and give a different conclusion. I accept the two declared tool_uses (generic sec-proper-base-change lemmas). No SGA source; ancestry is kept and the contracting-correspondence route is not changed. proof_deps equal the union of the steps' uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothZeroDimensionalSingletonOpen",
+  "declaration": "AlgebraicGeometry.exists_etale_open_singleton_fibre_of_smooth_of_dimension_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothZeroDimensionalSingletonOpen.lean",
+  "statement": "theorem exists_etale_open_singleton_fibre_of_smooth_of_dimension_zero {X S : Scheme.{u}} (f : X ⟶ S) (x : X) (W : X.Opens) (hx : x ∈ W) (hSmooth : Smooth (W.ι ≫ f)) (hDim : topologicalKrullDimAt (f.asFiber x) = 0) : ∃ Z : X.Opens, Z ≤ W ∧ x ∈ Z ∧ Etale (Z.ι ≫ f) ∧ Set.range ((Z.ι ≫ f).fiberι (f x) ≫ Z.ι) = {x} ∧ IsImmersion Z.ι",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfcc6946d",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. Stacks 057G d=0 needs no closed-point/separability hypothesis. Each clause matches: Smooth on W; topologicalKrullDimAt (inf over open nbhds) at f.asFiber x = 0; ∃ Z ≤ W, x ∈ Z, Etale (Z.ι ≫ f); range of fibre projection = {x} (exact, forces nonempty); IsImmersion Z.ι ≡ closed then open via isImmersion_iff_exists. No extra hypotheses or universe restriction. Edge cases checked: empty X/W, non-closed x, A^1 closed point excluded, infinite fibres. No duplicate found. sorry-only, no definitions, docstrings with source/blueprint/proof steps, Worker report and Second reading present. Not compiled by me per instruction (worker compile evidence). Nit: unneeded Topology.Defs.Induced import."
+ }
+}

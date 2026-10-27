@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-projective-source-alteration-criterion",
+ "kind": "statement",
+ "title": "Projective source and finite function field give an alteration",
+ "statement": "Let $k$ be a field, let $X$ be an integral projective finite-type $k$-scheme, let $Y$ be an integral separated finite-type $k$-scheme, and let $u:X\\to Y$ be a $k$-morphism. Here projective means admitting a closed immersion into a finite-dimensional projective space over the target, the H-projective convention; separated means that the diagonal is a closed immersion. Then $u$ is H-projective and proper. If, in addition, $u$ is dominant (its image is dense) and the induced extension $k(X)/k(Y)$ of function fields is finite, then $u$ is surjective and there exists a dense open subscheme $U\\subset Y$ such that $u^{-1}(U)\\to U$ is finite. In particular $u$ is an alteration, meaning a proper surjective morphism of integral schemes which is finite over a dense open. Its generic fibre over $\\operatorname{Spec}k(Y)$ is an integral zero-dimensional scheme with just one point and with residue field $k(X)$. The assertion allows dimension-zero schemes, arbitrary characteristic and inseparable finite extensions.\n\nNotions used: [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-kun-projective], [def-weil-closed-immersion], [def-sc-function-field], [def-pc-field-extension], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01WC (lemma-locally-projective-proper) and Tag 02NW (lemma-generically-finite, equivalence (1) and (4)); varieties.tex Tag 0B1C (item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic). The H-projectivity is the closed-graph argument expanded in retained flat-curve preparation Steps 6, 7, 9 and 12."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}k$, $a:X\\to S$ and $b:Y\\to S$ for the structure maps. Since $u$ is a $k$-morphism, $b\\circ u=a$. By [def-kun-projective], $X$ admits a closed immersion into a finite-dimensional projective space over $k$. Apply [lem-sfb-finite-constant-projective-graph] with $F=k$ (the trivial finite extension), $R=X$, $S=Y$ and $c=u$: its separatedness hypothesis on $S$ is exactly the hypothesis that the diagonal of $Y/k$ is a closed immersion. It gives an integer $N\\geq0$ and a closed immersion $i:X\\hookrightarrow\\mathbf P^N_k$ over $k$ such that $(i,u):X\\hookrightarrow\\mathbf P^N_k\\times_kY\\cong\\mathbf P^N_Y$ is a closed immersion over $Y$. Thus $u$ factors as this closed immersion followed by the projection $\\mathbf P^N_Y\\to Y$, so $u$ is H-projective.",
+   "uses": [
+    "def-kun-projective",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, closed-graph proof in the finite-projective-space convention."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-projective-implies-proper] to the finite-projective-space embedding just obtained. Hence $u$ is proper. In particular it is universally closed and of finite type by [def-weil-proper-morphism].",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper; Tag 01W1, definition-proper."
+   }
+  },
+  {
+   "text": "Now assume dominance and finiteness of $k(X)/k(Y)$. Universal closedness applied to the identity base change says that $u$ is a closed map. Therefore $u(X)$ is closed in $Y$. Dominance says its closure is $Y$, so $u(X)=Y$. This is surjectivity in [def-weil-surjective-morphism].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1, definition-proper and definition-universally-closed; elementary closed-and-dense argument."
+   }
+  },
+  {
+   "text": "Let $\\xi$ and $\\eta$ be the generic points of $X$ and $Y$, and put $L=k(X)$ and $K=k(Y)$. Since $X=\\overline{\\{\\xi\\}}$, continuity gives $u(X)\\subseteq\\overline{\\{u(\\xi)\\}}$; dominance forces $u(\\xi)=\\eta$. Choose a nonempty affine open $V=\\operatorname{Spec}R\\subset Y$, and cover $u^{-1}(V)$ by nonempty affine opens $W=\\operatorname{Spec}C$. By [lem-sc-integral-function-field-affine-fraction], $R,C$ are domains, $K=\\operatorname{Frac}R$ and $L=\\operatorname{Frac}C$ via the germ maps. The map $R\\to C$ is injective: its composite into $L$ is the composite $R\\hookrightarrow K\\hookrightarrow L$, where the second arrow is the assumed induced function-field extension. For every such $W$, [lem-sbc-finite-affine-tensor-base-change], with a singleton family, identifies $W\\times_V\\operatorname{Spec}K$ over $K$ with $\\operatorname{Spec}(C\\otimes_R K)$. These are open subschemes covering $F=X\\times_Y\\operatorname{Spec}K$: open immersions remain so by [lem-weil-pbc-open-immersion-base-change], and the covering assertion follows from their inverse-image subsets. By [lem-sbc-affine-fibre-sections-tensor], pullback of $c\\in C$ is $c\\otimes1$. Finally [lem-weil-pbc-generic-fibre-localization-domain-irreducible] identifies this algebra, after exchanging tensor factors, with the domain $B=(R\\setminus\\{0\\})^{-1}C$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sbc-finite-affine-tensor-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-sbc-affine-fibre-sections-tensor",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; schemes.tex Tag 01HV, lemma-spec-sheaves, and Tag 01JO, lemma-fibre-product-schemes, affine case; algebra.tex Tag 00DK, lemma-localize-tensor; schemes.tex Tag 01JY, lemma-base-change-immersion."
+   }
+  },
+  {
+   "text": "The map $B\\to L$, $c/r\\mapsto c/r$, is injective: denominators have nonzero images and $C\\hookrightarrow L$ is injective. It is $K$-linear. Since $L/K$ is finite, $B$ is a finite-dimensional $K$-vector subspace of $L$. By [lem-weil-pbc-finite-dimensional-domain-is-field], $B$ is a field. Its image contains $C$ and hence contains every fraction $c/d$ with $d\\ne0$; those fractions exhaust $L$ by [lem-sc-integral-function-field-affine-fraction]. Thus $B\\cong L$. The unique point of $\\operatorname{Spec}B$ maps to $\\xi$: its prime contracts to $(0)$ in $C$, using the pullback formula in Step 4 and injectivity of $C\\to B$. Each chart in Step 4 therefore has one point, and all these points coincide, since the first projection $F\\to X$ is a homeomorphism onto $u^{-1}(\\{\\eta\\})$ by [def-pc-scheme-fibre]. There is a nonempty chart because $\\xi\\in u^{-1}(V)$. Consequently $F$ has exactly one point; any one of its nonempty open charts is all of $F$, so $F\\cong\\operatorname{Spec}L$ over $K$. By [def-weil-affine-spectrum] its residue field is $L$. Its ring is a field, hence a domain, so it is integral by [def-pc-integral-scheme]; its only chain of prime ideals has length zero, so it has dimension zero.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-scheme-fibre",
+    "def-weil-affine-spectrum",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent expansion of Tag 02NW, lemma-generically-finite, condition (1), using Tag 01RV and affine localization; algebra.tex finite-dimensional domain argument."
+   }
+  },
+  {
+   "text": "The underlying set $u^{-1}(\\{\\eta\\})$ is a singleton by Step 5 and [def-pc-scheme-fibre]. Apply [lem-trf-proper-finite-fibre-finite-near] to the proper morphism $u$ at $\\eta$. It yields an open neighbourhood $U\\subseteq Y$ of $\\eta$ for which $u^{-1}(U)\\to U$ is finite. Because $\\eta$ is generic, any open containing it is dense. Together with properness and surjectivity from Steps 2 and 3, this is exactly the alteration asserted in the statement.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-trf-proper-finite-fibre-finite-near"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "literature/stacks-project/more-morphisms.tex Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood (a proper specialization of the dense-open conclusion of Tag 02NW)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "lem-trf-proper-finite-fibre-finite-near"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0C4Q (closed graph), 01WC (properness), 01RV (function fields), and the affine generic-fibre localization argument; final finite neighbourhood uses more-morphisms.tex Tag 02UP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "isProjective.*[Gg]raph\\|[Gg]raph.*isProjective",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective source separated target finite function field extension gives projective alteration",
+   "results": "8 hits: Algebra.IsSeparable.finInsepDegree_eq, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsGalois.to_isSeparable, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, Algebra.FormallyUnramified.iff_isSeparable, Algebra.FormallyEtale.iff_exists_algEquiv_prod, IsSepClosed.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsFinite",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Use the graph of a map from a projective variety to a separated variety to make it projective, then prove it surjective and finite over a dense open when its function field extension is finite.",
+   "results": "8 hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism between integral finite type schemes over a field is an H-projective alteration when its source is projective, its target separated, and the induced function field extension is finite.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.ext_of_isDominant_of_isSeparated'",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, normalization, separability and generic smoothness hits do not give the projective-source graph argument and dense-open alteration criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant map of integral varieties with projective source and separated target is proper and finite over a dense open if its function field extension is finite",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply properness, finite-map cancellation, rational maps or affine function fields; none states the full H-projectivity plus finite-function-field alteration criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "genericallyFinite|[Aa]lteration|functionField.*[Ff]inite|[Ff]inite.*functionField",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply properness, finite-map cancellation, rational maps or affine function fields; none states the full H-projectivity plus finite-function-field alteration criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a projective variety to a separated variety with finite extension of function fields is an alteration",
+   "results": "8 hits: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply properness, finite-map cancellation, rational maps or affine function fields; none states the full H-projectivity plus finite-function-field alteration criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite",
+   "results": "9 hits: AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom, AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite, AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite, AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply properness, finite-map cancellation, rational maps or affine function fields; none states the full H-projectivity plus finite-function-field alteration criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of function fields makes the generic fiber of a dominant morphism of integral varieties the spectrum of the source function field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.instFieldCarrierFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply properness, finite-map cancellation, rational maps or affine function fields; none states the full H-projectivity plus finite-function-field alteration criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-flat-curve-preparation",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained Steps 6, 7, 9 and 12: projective-source closed graph, then proper dominant finite-function-field maps are alterations.",
+   "via": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-source-alteration-criterion",
+  "worker": "stage1",
+  "summary": "Q88: kept the full statement, obtained the graph embedding from the unit's lem-sfb-finite-constant-projective-graph (F=k; maintainer-reader FIX replacing a dropped-route permanence citation), affine function-field and tensor/localization nodes, proved the generic fibre is Spec k(X) by finite-dimensional-domain algebra, and obtained the finite dense-open restriction from the existing proper-finite-fibre theorem. No new nodes. No project declaration states the full item without sorry.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained Steps 6, 7, 9 and 12: projective-source closed graph, then proper dominant finite-function-field maps are alterations.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic properness of H-projective maps, used on the graph embedding; it does not replace any constructibility argument."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Singleton specialization computes an affine generic-fibre chart as a tensor spectrum; no node of the stability unit states this calculation."
+   },
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Gives the pullback formula c maps to c tensor 1 for the chart projection, needed to identify its point in X."
+   },
+   {
+    "node": "lem-trf-proper-finite-fibre-finite-near",
+    "why": "Generic proper-morphism theorem produces a finite neighbourhood of the generic point from its singleton fibre; this is the proper case of the imported generically-finite route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-trf-proper-finite-fibre-finite-near"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-9c006ba1a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-9c006ba1a (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full against each cited statement and Stacks 02UP (more-morphisms l.12595), 0C4Q (morphisms l.10824) and 01RV (l.12705). The statement is byte-identical to live and side-live, where the item is unsplit and has no review, so the delivery is not superseded. There are no new nodes. The statement is true; I checked it on a finite field extension, inseparable Frobenius P1->P1, a surface blow-up, a non-dominant constant map, and P1 x Y -> Y with infinite function-field extension. Step 1 is correct mathematically (graph argument, 0C4Q), but it cited lem-per-h-projective-permanence, which is on route-pivot-dropped.txt line 1626. FIX: step 1 now cites lem-sfb-finite-constant-projective-graph, a reviewed node of the same unit, with F=k, R=X, S=Y, c=u. It gives i: X -> P^N_k with (i,u): X -> P^N_Y a closed immersion over Y; the item fixes no N. proof_deps were recomputed and the dropped tool_use removed. Step 2: projective implies proper, then universally closed and finite type by definition. Step 3: closed plus dense image gives surjective. Step 4: u(xi)=eta; R->C injective by naturality of germs; the singleton tensor base change uses W x_Y Spec K = W x_V Spec K; open charts cover F; c maps to c tensor 1; the localization is a domain, with all hypotheses checked. Step 5: S^-1 C is a finite-dimensional K-subspace of L and a domain, hence a field equal to Frac C = L; all charts share one point by injectivity of the fibre projection; so F = Spec L is integral and zero-dimensional. Step 6: 02UP (no Noetherian hypothesis, as in the source) gives a finite restriction over an open U containing eta, dense since eta is generic. Batch-5 flag lem-trf-proper-finite-fibre-finite-near: accepted. It is generic morphism theory; its 142-node closure has no assumption, target, trace-formula or Poincare-duality theorem node (only the Mathlib leaf lem-pod-separated-finite-type-base-change); it is not given by the trace formula or Poincare duality and is no step of their proofs. Artin-Gabber flag: the item is not in the closure of lem-per-artin-gabber-affine-curve, but the dropped citation is removed anyway by the FIX. Maintainer note: lem-sfb-proper-generic-radicial-etale-factorization (Q100) already gives surjectivity and finiteness over a dense open for steps 3 and 6. It does not give the H-projective or generic-fibre clauses, so this is an alternative route, not a duplicate. Accepted tool_uses: lem-kun-projective-implies-proper, lem-sbc-finite-affine-tensor-base-change, lem-sbc-affine-fibre-sections-tensor, lem-trf-proper-finite-fibre-finite-near. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSourceAlterationCriterion",
+  "declaration": "AlgebraicGeometry.projective_source_alteration_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSourceAlterationCriterion.lean",
+  "statement": "theorem projective_source_alteration_criterion (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsIntegral X] [IsIntegral Y] [IsHProjective (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] : IsHProjective f ∧ IsProper f ∧ (∀ [IsDominant f], (f.functionFieldMap f.apply_genericPoint_of_isDominant).hom.Finite → Surjective f ∧ (∃ U : Y.Opens, Dense (U : Set Y) ∧ IsFinite (f ∣_ U)) ∧ IsIntegral (pullback f (Y.fromSpecStalk (genericPoint Y))) ∧ topologicalKrullDim ↥(pullback f (Y.fromSpecStalk (genericPoint Y))) = 0 ∧ ∃ x : ↥(pullback f (Y.fromSpecStalk (genericPoint Y))), (∀ z : ↥(pullback f (Y.fromSpecStalk (genericPoint Y))), z = x) ∧ (pullback.fst f (Y.fromSpecStalk (genericPoint Y))) x = genericPoint X ∧ IsIso ((pullback.fst f (Y.fromSpecStalk (genericPoint Y))).residueFieldMap x))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2b0ee2811"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b0ee2811",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Checked every hypothesis and conclusion against the node and its dependencies (IsHProjective, functionFieldMap and apply_genericPoint_of_isDominant in side-live; Mathlib IsProper, IsSeparated, IsFinite, morphismRestrict, fromSpecStalk, residueField); all correct, with no extra assumptions, universes bound, no duplicate declaration and only sorry. H3 finding: 'residue field k(X)' was rendered as Nonempty (F.residueField x ≃+* X.functionField), an abstract isomorphism that is weaker than the node. FIX replaces it with the canonical clause (pullback.fst f _) x = genericPoint X ∧ IsIso ((pullback.fst f _).residueFieldMap x) and updates the docstring. Fixed module compiled clean via nt_compile --json (5.5 s, exit 0); lean-record.json carries the new verbatim statement. The citer (equivariant-flat-curve-preparation) uses only the alteration clauses, so it is unaffected."
+ }
+}

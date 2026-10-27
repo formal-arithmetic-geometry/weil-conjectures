@@ -1,0 +1,73 @@
+# Stage-1 report: lem-trf-affine-test-algebra-chart-refinement
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-affine-test-algebra-chart-refinement.json`: statement, split into six steps; Mathlib has the constituent results, but no single exact theorem or one-line specialization supplying the entire test-algebra construction and chart family was found. No new nodes; no new Mathlib leaves.
+- `citations.json`: a verbatim statement quotation for every node used in every proof step.
+- `report.md`: this report. The search command maintains `searches.jsonl` in this sandbox.
+
+## Attachments
+
+None. Searched the live project's `lean/WeilConjectures/` by the item tag, affine-test/chart-refinement names, affine refinements, finiteType_appLE and Noetherian affine-section terminology. No project declaration states all the item's conclusions. Occurrences proving only one constituent and declarations with sorry do not justify attaching the item.
+
+## WANTED
+
+None. All sources used are available in `literature/stacks-project/`.
+
+## What was wrong or missing
+
+The item had its statement, provenance and Mathlib searches, but no proof. Its statement is correct and unchanged. It is a geometric tool below the excellence/J-2 argument, and does not itself assume or assert J-2. Its proof follows precisely the affine-refinement preparation used in Stacks Tag 07R4, rather than moving a clause into a new node. The Noetherian preliminary assertions are expanded through existing algebra and scheme nodes.
+
+I read the chapter and unit records, the three-level constraints in SETUP.md, GOAL.md, the stage-1 rules, and both copies of delivery-errors sections B--E. The inherited Q91 searches and their recorded hits were read and retained. The five additional Q108 searches were actually run with msearch.py, with two different LeanFinder phrasings, Loogle, LeanSearch and source grep. LeanFinder found affineRefinement/fromAffineRefinement, and LeanSearch found finiteType_appLE and component_noetherian. The grep gave FiniteType.lean:44,48,68, Noetherian.lean:58 and Cover/Open.lean:156; I read these declarations. These support the separate constituents, while the pointwise choices and their assembly remain an actual proof. Loogle returned no hits. None of these services was unavailable.
+
+## Unfinished work
+
+None at this stage. No Lean was written or compiled. The global DAG and split checks are run only by the prescribed remote delivery tool.
+
+## Not duplicates
+
+No new nodes. Reused the existing affine-section Noetherianity, finite-type algebra Noetherianity, pointwise finite-type criterion, immersion finite-type property, composition permanence, affine-open basis, and all-affine-pairs finite-type criterion. The whole-DAG title/source/statement search and the blueprint search for “affine test” found no duplicate of the whole item. The broader blueprint searches for “locally of finite type” and “Noetherian” were used to locate the constituents. No elementary fact or item clause was promoted to a node.
+
+## Review by Q108
+
+I read Stacks morphisms.tex Tag 07R4 (lemma-J), including its first paragraph about open immersions and composition, its finite-type test algebra paragraph, and its last paragraph about affine refinements. I also read Tags 01T1 (definition-finite-type), 01T2 (lemma-locally-finite-type-characterize), 01T3 (lemma-composition-finite-type), 01T5 (lemma-immersion-locally-finite-type), and 01T6 (lemma-finite-type-noetherian); schemes.tex Tag 01IT (lemma-basis-affine-opens); properties.tex Tags 01OV (definition-noetherian) and 01OW (lemma-locally-Noetherian); and algebra.tex Tag 00FN (lemma-Noetherian-permanence). There are no new-node sources to audit.
+
+For step 1 I opened pqf-lem-affine-open-locnoeth: its statement expressly gives Noetherianity for the ring of any affine open of a locally Noetherian scheme, so it applies to V without a finite cover assumption. I opened lem-weil-pbc-finite-type-algebra-noetherian: its source ring is Noetherian and its algebra map finite type, exactly the hypotheses now available for R and B. I used the global-section assertion in def-weil-affine-spectrum and the actual affine-cover definition in pqf-def-locnoeth to exhibit a one-chart cover of Y. This does not assume a local-Noetherian preservation theorem whose statement only handles globally finite type morphisms.
+
+For step 2 I opened lem-weil-pbc-lft-pointwise-criterion. It asks for one suitable affine pair around every source point, rather than all affine pairs. Taking Y and V themselves supplies this pair and the ring map is the prescribed R to B, by def-weil-affine-spectrum and the canonical identification explicitly assumed in the item. Thus no unproved localization or affine-change lemma is hidden here.
+
+For step 3 I opened lem-weil-pbc-immersion-base-change-lft and used only its clause (2), not its base-change clause. An open immersion has the required factorization using the identity as its closed immersion. I opened lem-weil-pbc-proper-fp-permanence and used clause (e), which explicitly includes composition of locally finite type morphisms. The other finite-type composition node only states composition of globally finite type morphisms, so I did not cite it for this step. No quasi-compactness of the open inclusion is required.
+
+For step 4 I opened lem-weil-pbc-affine-opens-basis. Its statement gives an affine neighbourhood inside any specified open neighbourhood, which is exactly what the inverse image of U_i supplies. The choice of i comes from the cover at the point f(y). This takes no affineness of intersections or of inverse images for granted. Classical pointwise choice yields a function and family without imposing finiteness on I.
+
+For step 5 I opened lem-weil-pbc-lft-affine-pairs. Its forward implication gives finite type of the coordinate ring map for every pair of affine opens with the required image containment. Here f is locally of finite type by step 3, both opens are affine by hypothesis/construction, and the containment was established in step 4. It applies directly to f and does not require a new theorem about the restriction.
+
+Step 6 is elementary membership and empty-family reasoning. Each y belongs to its own W_y, proving the union equality. If B is the zero ring, Y is empty; both the empty chart family and the function from the empty set exist, even when I is empty. If I is empty, the given cover forces X empty, so there cannot be a nonempty source mapping to X. Finite fields, nonreduced finite-type algebras, V empty, repeated cover members and infinite covers introduce no additional hypotheses. The six steps each have fewer than 2000 characters, and no step conceals a separate comparison lemma.
+
+The statement dependencies introduce precisely the notions in the retained statement. Every non-elementary step cites existing statement nodes whose full statements I read; the only definition citations supply their actual data/definition, not a theorem absent from their statements. Proof dependencies are the exact union of step uses, and each use has a literal quote in citations.json. All proof-result citations are Mathlib leaves, so no off-route tool authorization is needed. I preserved the item's created record and blueprint provenance, retained the source place, filled same_as with the empty search result, and added the split report without claiming a maintainer review.
+
+
+## Repair of the 2026-10-22 landing return
+
+The return identifies head `36d783ab79f`: the reader approved its mathematics, but the side project's completed node had never been promoted to the live DAG. I continued the delivered split retained in this sandbox. The current shared repository's item is still `unsplit`, with empty `proof` and `proof_deps`; its statement, source, created provenance, chapter, unit and blueprint ancestry agree with the retained delivery. The sandbox additionally carries the six-step proof, its nine proof dependencies, the split report, and the five logged Q108 searches. I retained those arguments, citations and search records. The prescribed delivery command constructs the replacement commit on the current `origin/sheaf-dag`; no worker git command or repository edit was used.
+
+I reread every cited live node, rather than assuming the side project's completed state settled the repair. Step 1 still has the Noetherianity of every affine-open section ring in `pqf-lem-affine-open-locnoeth`, finite-type algebra Noetherianity in `lem-weil-pbc-finite-type-algebra-noetherian`, and the actual spectrum/global-section and affine-cover definitions in `def-weil-affine-spectrum` and `pqf-def-locnoeth`. Step 2 still has the existential pointwise affine-pair criterion in `lem-weil-pbc-lft-pointwise-criterion`. Step 3 still has immersion local finite type in clause (2) of `lem-weil-pbc-immersion-base-change-lft` and locally finite type composition in clause (e) of `lem-weil-pbc-proper-fp-permanence`. Step 4 still has affine neighbourhoods inside an arbitrary prescribed open in `lem-weil-pbc-affine-opens-basis`. Step 5 still has the all-affine-pairs implication in `lem-weil-pbc-lft-affine-pairs`. All ten quotations in `citations.json` are verbatim parts of these live statements, so none requires replacement. I also reread the six statement dependencies; they still define exactly the notions the item uses. The result nodes remain Mathlib leaves; no new off-unit proof tool is needed.
+
+This repair makes an actual clarification to the proof: step 4 now first proves nonemptiness of the set of admissible pairs `(a,W)` for each point, and then chooses the pair, ensuring the index function and affine family have their containment property together. Step 5 now derives image containment point by point before applying the all-affine-pairs criterion, and identifies its induced ring map with exactly the conclusion's map. The proof continues to require neither affine intersections nor affine inverse images. Each non-elementary step remains shorter than 2000 characters. The empty-source case in step 6 remains valid even for an empty index set; an empty cover with a nonempty source would contradict existence of the given morphism into the covered scheme.
+
+For this rereading I reopened morphisms.tex Tag 07R4, label lemma-J, and Tags 01T1, 01T2, 01T3, 01T5 and 01T6; schemes.tex Tag 01IT; properties.tex Tags 01OV and 01OW; and algebra.tex Tag 00FN. Their hypotheses and conclusions support the same route. I reread the retained search hits and the current Mathlib declarations for affine refinement, coordinate maps of locally finite type morphisms, and affine-section Noetherianity. They still supply constituents rather than a theorem of the entire item. No search question changed, so no search was repeated or invented. No new node, Mathlib leaf, attachment, statement change or dispute is introduced.
+
+The initial dry run of the retained split exited successfully with preflight passed at `2507f4159ec`. A final dry run is required after these proof and report changes, followed by the prescribed push. The earlier interrupted tool session had ceased running before its dry run was retried; no concurrent delivery invocation was started.
+
+
+## Repair continuation, 2026-10-23
+
+The current return entry identifies head `75425e0dc52` (2026-10-22 16:46 UTC), superseding the earlier head named in the retained repair notes above. I retained the delivered node, its six-step argument, all ten citations, the full report and five logged Q108 searches. The fresh comparison with the current shared DAG again finds the live item unsplit, with empty proof and proof dependencies, and the same statement, statement dependencies, source and blueprint ancestry. The retained sandbox already includes the earlier clarification of steps 4 and 5; those changes are preserved. The delivery tool constructs the new commit on the current live main branch and preserves the main branch's maintainer fields.
+
+I reread the complete live statements of every statement and proof dependency. None forces a change in the conclusion, dependency list or route: the affine-section Noetherianity lemma applies to the given V; the finite-type algebra lemma applies after establishing R Noetherian; the pointwise criterion supplies h; immersion clause (2) and permanence clause (e) supply f; the affine-basis lemma supplies the neighbourhoods; and the all-affine-pairs criterion supplies precisely the requested coordinate maps. The local-Noetherian definition is used only for its affine-cover definition, not its ancillary remark. All ten retained quotes remain literal substrings and cover every step use. All proof-result dependencies remain Mathlib leaves.
+
+This continuation adjusts steps 1--3 rather than sending an unchanged rebase. Step 1 now spells out the singleton affine cover witnessing local Noetherianity even for the zero ring. Step 2 explicitly supplies both affine opens, point membership and image containment for the reverse pointwise implication, identifies its ring map with the given R to B, and handles the empty source. Step 3 now explicitly substitutes h and j into clause (e) and identifies its locally-of-finite-type alternative; it uses neither global finite type nor a quasi-compactness hypothesis on j. Steps 4--6 and their simultaneous pointwise choice and covering argument remain valid for infinite I and for empty Y or I. No non-elementary step exceeds 2000 characters.
+
+For this check I reopened Stacks morphisms.tex, labels definition-finite-type, lemma-locally-finite-type-characterize, lemma-composition-finite-type, lemma-immersion-locally-finite-type, lemma-finite-type-noetherian and lemma-J (Tags 01T1, 01T2, 01T3, 01T5, 01T6 and 07R4); schemes.tex lemma-basis-affine-opens (01IT); properties.tex definition-noetherian and lemma-locally-Noetherian (01OV, 01OW); and algebra.tex lemma-Noetherian-permanence (00FN). These supply the same hypotheses and route. I also reread the retained Mathlib search results and their precise FiniteType.lean, Noetherian.lean and Cover/Open.lean declarations. The search question and item statement have not changed; repeating the searches would add no evidence. A fresh project-source search by the item tag, affine-refinement names and finiteType_appLE found no declaration stating the full item. There are no new nodes, attachments, source disputes or statement changes.
+
+The required initial dry run of the retained sandbox exited successfully at `1c48e107cde`, with preflight passed. The revised node and this report now receive a final dry run before the authorized push. Only the sandbox was written; no Lean, compiler, Lake, project checker on this machine, launcher edit or worker git command was used.

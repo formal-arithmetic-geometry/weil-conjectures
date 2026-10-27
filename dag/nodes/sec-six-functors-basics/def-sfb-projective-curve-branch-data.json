@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-projective-curve-branch-data",
+ "kind": "definition",
+ "title": "Existing projective curve branch, multiplicity and tangent data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $r\\in\\mathbf N$, and $D$ a scheme [def-pc-scheme]. Put $A=\\mathbf P^{r-1}_k$ using $r$ homogeneous coordinates [def-nagata-projective-space-base-change]. For a reduced irreducible component $Z$ of $D$, let $C_Z$ be its function-field normalization [def-weil-pbc-reduced-normalization, def-sc-normalization] and $\\nu_Z:C_Z\\to D$ the canonical composite [def-sfb-stable-pointed-curve]. A branch above $p\\in D$ is a pair $(Z,q)$ with $q\\in C_Z$ and $\\nu_Z(q)=p$, retaining its component label. Its local map is the stalk map $\\mathcal O_{D,p}\\to\\mathcal O_{C_Z,q}$, transported along this equality of points; its branch ideal is the image of $\\mathfrak m_p$ under this map. For a morphism $i:D\\to A$, the component degree is the degree of $(i\\nu_Z)^*\\mathcal O_A(1)$ with its induced $k$-structure [def-pc-projective-space-twist, def-pc-module-pullback, def-pc-degree-line-bundle]. The predicate $\\mathrm{HasMultiplicity}(D,p,t)$, for $t\\in\\mathbf N$, means that there exist $a\\in\\mathbf Z$ and $N\\in\\mathbf N$ such that for every $n\\ge N$ the length of $\\mathcal O_{D,p}/\\mathfrak m_p^{n+1}$ is finite and equals $tn+a$ [def-weil-pbc-module-length]. The tangent image of a branch is the image in $T_{A/k,i(p)}$ of the tangent map of $i\\nu_Z$, using the canonical induced residue-field isomorphism whenever that map is bijective, and transporting its point index along $\\nu_Z(q)=p$ [def-sc-scheme-tangent-space]. For a coefficient vector $a=(a_m)$ and a coordinate $x_j$ nonvanishing at $x\\in A$, its linear germ is the germ of $\\sum_m a_m x_m/x_j$ with the structural $k$-map. The line equations are coefficient vectors whose linear germ pulls back to zero along every tangent vector in this branch image, in every such coordinate frame, with the closed-point stalk transport. Order at least two means that the pullback of each linear germ to the branch local ring lies in $\\mathfrak m_q^2$; this includes the zero germ. Finally the split-node completion predicate at $p$ means the existence of a ring isomorphism $\\widehat{\\mathcal O}_{D,p}\\simeq k[[u,v]]/(uv)$ preserving the structural $k$-map [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. These are definitions only: no branch multiplicity, degree, tangent or node criterion is asserted. The constructions use [def-weil-pbc-reduced-normalization], [def-sc-normalization], [def-sfb-stable-pointed-curve], [def-pc-projective-space-twist], [def-pc-module-pullback], [def-pc-degree-line-bundle], [def-weil-pbc-module-length], [def-sc-scheme-tangent-space], [def-weil-pbc-adic-completion], and [def-weil-pbc-multivariate-power-series].",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-normalization",
+  "def-sfb-stable-pointed-curve",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-pc-degree-line-bundle",
+  "def-weil-pbc-module-length",
+  "def-sc-scheme-tangent-space",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 Theorem 8(4)--(6), printed pp.14--15; branch-local definitions use Stacks Tags 0CDV, 0C1R, 0AYR, 00K8, 00KQ, 0B2E, 0B2F, 0C1U and 0CBW, as documented in the existing declaration docstrings."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective curve normalization branches multiplicity tangent line equations completed node local ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_of_Z_eq_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"{P : Fin 3 → R} (hPz : P z = 0) :\\n  W'.Nonsingular P ↔ W'.Equation P ∧ (3 * P x ^ 2 ≠ 0 ∨ P y ^ 2 + W'.a₁ * P x * P y - W'.a₂ * P x ^ 2 ≠ 0)\", \"doc\": \"For a point $ P = [X:Y:0] $ on a projective Weierstrass curve $ W' $, $ P $ is nonsingular if and only if $ P $ satisfies the curve equation (i.e., $ X = 0 $) and $ Y \\neq 0 $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"[Nontrivial R] : W'.Nonsingular ![0, 1, 0]\", \"doc\": \"For a projective Weierstrass curve over a nontrivial ring $ R $, the point $[0:1:0]$ is nonsingular. This means that at least one of the partial derivatives of the curve's defining polynomial $ W(X,Y,\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(P : Fin 3 → R) :\\n  W'.Nonsingular P ↔\\n    W'.Equation P ∧\\n      (W'.a₁ * P y * P z - (3 * P x ^ 2 + 2 * W'.a₂ * P x * P z + W'.a₄ * P z ^ 2) ≠ 0 ∨\\n        2 * P y * P z + W'.a₁ * P x * P z + W'.a₃ * P z ^ 2 ≠ 0 ∨\\n          P y ^ 2 + W'.a₁ * P x * P y + 2 * W'.a₃ * P y * P z -\\n              (W'.a₂ *\", \"doc\": \"A point $ P = [X:Y:Z] $ on a projective Weierstrass curve over a ring $ R $ is nonsingular if and only if it satisfies the curve's homogeneous cubic equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_of_Z_ne_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"{P : Fin 3 → F} (hPz : P z ≠ 0) : W.Nonsingular P ↔ W.toAffine.Nonsingular (P x / P z) (P y / P z)\", \"doc\": \"For a projective point $ P = [X:Y:Z] $ on a Weierstrass curve $ W $ with $ Z \\neq 0 $, the point $ P $ is nonsingular on the projective curve $ W $ if and only if the corresponding affine point $ (X/Z,\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_smul\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(P : Fin 3 → R) {u : R} (hu : IsUnit u) : W'.Nonsingular (u • P) ↔ W'.Nonsingular P\", \"doc\": \"For a projective Weierstrass curve over a ring $ R $, a point $ P $ in projective space is nonsingular if and only if its scalar multiple $ u \\\\bullet P $ by a unit $ u \\\\in R^\\\\times $ is also nonsingul\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(P : Fin 3 → R) : W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \": Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_neg\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"{P : Fin 3 → F} (hP : W.Nonsingular P) : W.Nonsingular <| W.neg P\", \"doc\": \"If $ P = [X:Y:Z] $ is a nonsingular point on a projective Weierstrass curve $ W $ over a field $ F $, then its negation $ [X : -Y - a_1X - a_3Z : Z] $ is also a nonsingular point on $ W $, where $ a_1\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib search has no combined interface. Exact existing project definitions found by the local source search and recorded without copying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization branch fibre of a projective curve and local multiplicity tangent line equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [Nontrivial R], W'.NonsingularLift ⟦![0, 1, 0]⟧\", \"doc\": \"For any non-trivial commutative ring $ R $, the projective point $[0:1:0]$ on the Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ satisfies the nonsingularity condition. This means the poin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x y ℓ : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x (Polynomial.C y) =\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x (WeierstrassCurve.Affine.linePolynomial x y ℓ)\", \"doc\": \"In the coordinate ring of an affine Weierstrass curve over a commutative ring $ R $, the ideal generated by $ X - x $ and $ Y - (\\\\ell(X - x) + y) $ is equal to the ideal generated by $ X - x $ and $ Y\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_of_singular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P : Fin 3 → F},\\n  ¬W.Nonsingular P → WeierstrassCurve.Projective.Point.toAffine W P = 0\", \"doc\": \"For a projective Weierstrass curve over a field $ F $, if a point $ P $ is singular, then the affine conversion of $ P $ results in the zero element of the affine curve's point set.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_iff_of_Y_eq_negY\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P : Fin 3 → F},\\n  P 2 ≠ 0 → P 1 = W.negY P → (W.Nonsingular P ↔ W.Equation P ∧ (MvPolynomial.eval P) W.polynomialX ≠ 0)\", \"doc\": \"For a point $ P = [X:Y:Z] $ on a projective Weierstrass curve satisfying $ Z \\neq 0 $ and $ Y = -Y - a_1X - a_3Z $, the point $ P $ is nonsingular if and only if it satisfies the curve's homogeneous eq\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib search has no combined interface. Exact existing project definitions found by the local source search and recorded without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveCurveBranches|HasSplitNodeCompletion|branchIdeal|HasOrderAtLeastTwo",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib search has no combined interface. Exact existing project definitions found by the local source search and recorded without copying."
+  },
+  {
+   "tool": "rg",
+   "query": "rg -n \"ProjectiveCurveBranches|HasSplitNodeCompletion|branchIdeal\" lean/WeilConjectures lean/Sheaf; rg -n \"ProjectiveCurveBranches\\.(Ambient|Component|Branch|HasMultiplicity)|def-sfb-projective-curve-branch-data\" dag/nodes; python3 tools/blueprint_refs.py search \"projective curve branch\"",
+   "results": "Only lean/Sheaf/AlgebraicGeometry/BranchMultiplicityTangentCriterion.lean provides the twelve existing definitions. The DAG records them as auxiliary declarations of the theorem node lem-sfb-branch-multiplicity-tangent-criterion but has no separate definition node for this interface. 0 blueprint nodes match projective curve branch.",
+   "date": "2026-10-24",
+   "verdict": "Attach the twelve definitions in their existing module, exactly as required by immutable-head review 21038f6b457d; no move, copy, new Lean declaration, or use of the theorem as statement dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singular-point-jet-weight-bounds",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Definitions of normalization branches, local multiplicity and tangent equations used to state the singular-point jet estimates. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-singular-point-jet-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BranchMultiplicityTangentCriterion",
+  "declaration": "AlgebraicGeometry.ProjectiveCurveBranches.Branch",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveCurveBranches.Ambient",
+   "AlgebraicGeometry.ProjectiveCurveBranches.Component",
+   "AlgebraicGeometry.ProjectiveCurveBranches.Branch",
+   "AlgebraicGeometry.ProjectiveCurveBranches.localMap",
+   "AlgebraicGeometry.ProjectiveCurveBranches.branchIdeal",
+   "AlgebraicGeometry.ProjectiveCurveBranches.componentDegree",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasMultiplicity",
+   "AlgebraicGeometry.ProjectiveCurveBranches.tangentImage",
+   "AlgebraicGeometry.ProjectiveCurveBranches.linearGerm",
+   "AlgebraicGeometry.ProjectiveCurveBranches.lineEquations",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasOrderAtLeastTwo",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasSplitNodeCompletion"
+  ],
+  "statement": "def Branch (D : Scheme.{u}) (p : D) : Type u",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment requested by return H2+H12 for immutable head 21038f6b457d. All twelve declarations are the existing plain definitions or abbreviations in the recorded module, including branchIdeal and HasOrderAtLeastTwo. None selects data from branch_multiplicity_tangent_criterion. No Lean declaration is moved, copied or added; the theorem remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af5ebdd01",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af5ebdd01",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 21038f6b457d (H2+H12). Lean files byte-identical to 21038f. New node def-sfb-projective-curve-branch-data: existing:true on Sheaf.AlgebraicGeometry.BranchMultiplicityTangentCriterion; its 12 declarations exist as plain abbrev/def (lines 55-166), none chooses from branch_multiplicity_tangent_criterion; statement 'def Branch (D : Scheme.{u}) (p : D) : Type u' verbatim; no other owner; fields complete. It replaces the theorem in the stmt_deps of the item and of def-sfb-projective-curve-jet-weight-data; the theorem stays in proof_deps. Against base, item changes only lean and stmt_deps (+ the 2 new def nodes and def-weil-pbc-scheme-reduction). Mathematics re-read: hypotheses (alg. closed, closed immersion into P^{n+1}, connected, dim 1, generically reduced, hspan nondegenerate, hlow rational normal = P^1 + complete linear system); (1) 0/1 flag, sum 1, a>=t/2; (2) deg>=4, 0/1/2/4 jet flag, sum<=7, a>=8, not met at generic points; (3) 0/1/2 tangent flag, sum<=3, 7/2, and 4 off lines; nilradical iff. Edge cases n=0, empty X, generic points, same-component branches, any characteristic, universes. Single sorry, docstrings, verbatim statements, report sections. zeroSections is a canonical iso inherited via the landed def-sfb-weighted-monomial-basis-weight, not a new H2. Not recompiled (no file changed)."
+ }
+}

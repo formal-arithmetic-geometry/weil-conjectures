@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-projective-line-automorphism-over-field",
+ "kind": "statement",
+ "title": "A field-linear projective-line automorphism preserves the degree-one twist",
+ "statement": "Let $k$ be any field [def-weil-field], let $q:P=\\mathbf P^1_k\\to\\operatorname{Spec} k$ be the standard projective line [def-nagata-projective-space-base-change], and let $\\mathcal O_P(1)$ be its actual projective twist [def-pc-projective-space-twist]. If $a:P\\simeq P$ is a scheme isomorphism with $q\\circ a=q$, then $a^*\\mathcal O_P(1)\\simeq\\mathcal O_P(1)$ as modules [def-sc-invertible-module]. There are no restrictions on the characteristic or algebraic closure of $k$.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, field degree-one clause. The direct degree calculation uses Stacks Tag 0BXJ (divisors.tex, lemma-Pic-projective-space-UFD) and Tag 01XS (coherent.tex, section-cohomology-projective-space and lemma-cohomology-projective-space-over-ring)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The pullback of the invertible O(1) is invertible. Apply the existing field classification to obtain an integer d and an isomorphism a*O(1) ≅ O(d). The standard twists satisfy TwistData by twistData in ProjectiveSpace.LineTwist.",
+   "uses": [
+    "lem-sfb-projective-line-invertible-classification",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map a is an isomorphism over k. Pullback therefore preserves the k-vector space of global sections (the existing finrankH_pullback_of_isIso API). Consequently h0(O(d)) equals h0(O(1))=2. The monomial formula gives zero when d<0 and d+1 when d≥0. For d≥0 the monomials are indexed by exponents (d-j,j), 0≤j≤d, so the dimension is d+1 over every field.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sc-p1-monomial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The negative case contradicts 0=2. In the nonnegative case d+1=2 forces d=1. Substitute this into the classification isomorphism. No uniqueness of the classification degree or automorphism of the group Z is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-line-invertible-classification",
+  "def-sc-p1-standard",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sc-p1-monomial"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, field degree-one clause. The direct degree calculation uses Stacks Tag 0BXJ (divisors.tex, lemma-Pic-projective-space-UFD) and Tag 01XS (coherent.tex, section-cohomology-projective-space and lemma-cohomology-projective-space-over-ring).",
+  "by": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of projective line over a field preserves the twisting sheaf O(1)",
+   "results": "8 hits: AlgebraicGeometry.Proj.one_apply, OnePoint.instGLAction, WeierstrassCurve.Projective.Point.toAffine_smul, Projectivization.generalLinearGroup_smul_def, AffineEquiv.linearHom_apply, Projectivization.map.congr_simp, Projectivization.map_id, Polynomial.algEquivCMulXAddC",
+   "date": "2026-10-27",
+   "verdict": "No twist-preservation theorem: the hits concern general-linear actions, projectivization maps, and polynomial automorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"twist\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*[Pp]rojective|[Pp]rojective.*Picard|Pic.*projectiveSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching projective Picard theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineAutomorphismHyperplane",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Paragraph (2), finite diagonal components before trace: divisor-line comparison when changing the standard projective-line model. A field-linear projective-line automorphism preserves the degree-one twist.",
+   "via": [
+    "lem-sfb-projective-line-automorphism-hyperplane",
+    "lem-sfb-diagonal-trace-diagonal-pic",
+    "lem-sfb-diagonal-trace-finite-pretrace-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineAutomorphismOverField",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineAutomorphismOverField.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.automorphism_twist_one_over_field",
+  "statement": "theorem automorphism_twist_one_over_field (k : Type u) [Field k]\n    (a : ProjectiveLine (Spec (.of k)) ≅ ProjectiveLine (Spec (.of k)))\n    (ha : a.hom ≫ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) =\n      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))) :\n    Nonempty ((Scheme.Modules.pullback a.hom).obj\n      (ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) 1) ≅\n      ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) 1)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T053008-L-504335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T053008-L-504335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

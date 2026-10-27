@@ -1,0 +1,262 @@
+{
+ "id": "lem-pd-total-oplax-conjugation-summands",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Bidegree expansion of a conjugated total oplax comparison",
+ "statement": "Let $\\mathcal A_0,\\mathcal A_1,\\mathcal B_0,\\mathcal B_1$ be abelian monoidal categories [def-sp-abelian, def-sfb-monoidal-category], small relative to a fixed containing universe. Assume their tensors are additive in each variable, all small colimits exist, and tensoring on either side preserves them [def-weil-pbc-category-colimit]. Let $E_j:\\mathcal A_j\\to\\mathcal B_j$ ($j=0,1$) be additive strong monoidal equivalences, and let $F_{\\mathrm i}:\\mathcal A_0\\to\\mathcal A_1$ and $F_{\\mathrm s}:\\mathcal B_0\\to\\mathcal B_1$ be additive strong monoidal functors preserving countable coproducts [def-sfb-strong-monoidal-functor]. Fix an arbitrary natural isomorphism $a:E_1F_{\\mathrm i}\\cong F_{\\mathrm s}E_0$, not assumed monoidal. For each of these functors $G$ write $\\gamma^G_{M,N}:G(M\\otimes N)\\cong GM\\otimes GN$ for its inverse tensorator and $\\epsilon^G:G\\mathbf1\\cong\\mathbf1$ for its oplax unit. Use unbounded integer cochain complexes [def-weil-abstract-derived-category], their signed direct-sum tensor total [def-sfb-preserves-kflat-quasi-iso], and the associator and unitors induced from the ordinary ones [lem-sfb-total-tensor-homotopy]. Extend functors and $a$ termwise. Write $T_G:G\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(GP\\otimes GQ)$ for the canonical preserved-coproduct comparison with summand maps $\\gamma^G_{P^p,Q^q}$, and $j_G:G(\\mathbf1[0])\\cong\\mathbf1[0]$ for $\\epsilon^G$ in degree zero and the canonical zero-object comparisons elsewhere. Define\n$$\\widetilde\\gamma_{M,N}=(a_M\\otimes a_N)\\,\\gamma^{E_1}_{F_{\\mathrm i}M,F_{\\mathrm i}N}\\,E_1(\\gamma^{F_{\\mathrm i}}_{M,N})\\,a_{M\\otimes N}^{-1}\\,F_{\\mathrm s}((\\gamma^{E_0}_{M,N})^{-1}),$$\nand define the chain isomorphism\n$$A_{P,Q}=(a_P\\otimes a_Q)\\,T_{E_1}\\,E_1(T_{F_{\\mathrm i}})\\,a_{\\operatorname{Tot}(P\\otimes Q)}^{-1}\\,F_{\\mathrm s}(T_{E_0}^{-1}):F_{\\mathrm s}\\operatorname{Tot}(E_0P\\otimes E_0Q)\\longrightarrow\\operatorname{Tot}(F_{\\mathrm s}E_0P\\otimes F_{\\mathrm s}E_0Q).$$\nComposition in these formulas is from right to left.\nFor every integer $n$, the set $I_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$ is countable and is small in the containing universe. The functors $E_0,E_1,F_{\\mathrm i},F_{\\mathrm s}$ carry each degree-$n$ tensor coproduct cocone to a coproduct cocone. If $\\kappa_G:\\bigoplus_{I_n}GZ_{p,q}\\cong G(\\bigoplus_{I_n}Z_{p,q})$ is the canonical comparison induced by the images of the injections, then $\\kappa_G^{-1}G(\\iota_{p,q})$ is the corresponding injection. Let $\\iota_{p,q}:E_0P^p\\otimes E_0Q^q\\to\\operatorname{Tot}(E_0P\\otimes E_0Q)^n$ and let $\\iota'_{p,q}$ be the target-total injection. The full conjugation, with these canonical coproduct comparisons, satisfies\n$$A_{P,Q}^nF_{\\mathrm s}(\\iota_{p,q})=\\iota'_{p,q}\\widetilde\\gamma_{P^p,Q^q}\\qquad(p+q=n).$$\nThese component formulas give a natural chain map: its differential equation is the sum of the ordinary naturality equations with $(d_P^p,1)$ and $(1,d_Q^q)$, the second multiplied by $(-1)^p$. No boundedness or exactness of $F_{\\mathrm i},F_{\\mathrm s}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012Z, definition-associated-simple-complex, and following remark-triple-complex; agent extraction of functor-square naturality of the canonical direct-sum construction, original item Steps 1-2."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-total-tensor-homotopy"
+ ],
+ "proof": [
+  {
+   "text": "The maps $p\\mapsto(p,n-p)$ and $(p,q)\\mapsto p$ are inverse bijections $\\mathbf Z\\cong I_n$, so $I_n$ is countable and small in the containing universe. By [lem-galois-equivalence-preserves-limits], $E_0,E_1$ preserve the coproducts indexed by the discrete category on $I_n$; $F_{\\mathrm i},F_{\\mathrm s}$ preserve them by hypothesis. Thus each image cocone is a coproduct cocone. For any of these $G$ and any such family $Z$, coproduct uniqueness [def-weil-pbc-category-colimit] constructs $\\kappa_G$ with $\\kappa_G\\iota^G_{p,q}=G(\\iota^Z_{p,q})$, and constructs its inverse with $\\kappa_G^{-1}G(\\iota^Z_{p,q})=\\iota^G_{p,q}$. The two composites are identities because their restrictions to every injection are identities. This proves both the preservation assertion and the claimed canonical comparison formula.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact, applied to equivalences; canonical coproduct comparison from its universal property"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-termwise-strong-monoidal] separately to $E_0,E_1,F_{\\mathrm i},F_{\\mathrm s}$. Step 1 supplies countable coproduct preservation for the equivalences; additivity, strong monoidality and the tensor/colimit hypotheses are exactly the hypotheses here. Its $\\tau$ is the specified $T_G$, since both satisfy $T_G^nG(\\iota)=\\iota'\\gamma^G$. It gives natural chain isomorphisms $T_G$ and the stated $j_G$ (its unit $e_G^{-1}$ is our $\\epsilon^G$). Termwise $a$ is a natural chain isomorphism: its chain equation is precisely naturality of $a$ at each differential, and its inverse satisfies the equation by cancellation. Additivity makes termwise functors act on complexes and their maps [def-weil-abstract-derived-category]. The tensor of the two chain isomorphisms $a_P,a_Q$ is the chain isomorphism with summand maps $a_{P^p}\\otimes a_{Q^q}$, by the tensor construction [def-sfb-preserves-kflat-quasi-iso]. Consequently all five factors defining $A$ are natural chain isomorphisms with the indicated source and target.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "def-weil-abstract-derived-category",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes; single-functor extension supplied by lem-sfb-termwise-strong-monoidal"
+   }
+  },
+  {
+   "text": "Fix $p+q=n$. Put $X=P^p\\otimes Q^q$, $C=\\operatorname{Tot}(P\\otimes Q)$ and write $u:X\\to C^n$, $v:E_0P^p\\otimes E_0Q^q\\to\\operatorname{Tot}(E_0P\\otimes E_0Q)^n$ for the injections. Let $w:F_{\\mathrm i}P^p\\otimes F_{\\mathrm i}Q^q\\to\\operatorname{Tot}(F_{\\mathrm i}P\\otimes F_{\\mathrm i}Q)^n$. The summand formula of [lem-sfb-termwise-strong-monoidal], multiplied by the two inverse isomorphisms, gives\n$$(T_{E_0}^{-1})^n v=E_0(u)(\\gamma^{E_0}_{P^p,Q^q})^{-1}.$$\nNaturality of $a$ at $u$, with the invertible components cancelled, gives\n$$a_{C^n}^{-1}F_{\\mathrm s}(E_0(u))=E_1F_{\\mathrm i}(u)a_X^{-1}.$$\nFinally $T_{F_{\\mathrm i}}^nF_{\\mathrm i}(u)=w\\gamma^{F_{\\mathrm i}}_{P^p,Q^q}$ by the same cited summand formula. Applying functoriality to these three equalities computes the first three factors, in order of application:\n$$E_1(T_{F_{\\mathrm i}})^n a_{C^n}^{-1}F_{\\mathrm s}((T_{E_0}^{-1})^n)F_{\\mathrm s}(v)\n=E_1(w)E_1(\\gamma^{F_{\\mathrm i}}_{P^p,Q^q})a_X^{-1}F_{\\mathrm s}((\\gamma^{E_0}_{P^p,Q^q})^{-1}).$$\nAll compositions are right to left; $a_C^n=a_{C^n}$ because the extension is termwise.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; explicit agent calculation of the functor-square comparison"
+   }
+  },
+  {
+   "text": "Let $t:E_1F_{\\mathrm i}P^p\\otimes E_1F_{\\mathrm i}Q^q\\to\\operatorname{Tot}(E_1F_{\\mathrm i}P\\otimes E_1F_{\\mathrm i}Q)^n$ be the next injection. The remaining total comparison satisfies\n$$T_{E_1}^nE_1(w)=t\\gamma^{E_1}_{F_{\\mathrm i}P^p,F_{\\mathrm i}Q^q}$$\nby [lem-sfb-termwise-strong-monoidal]. The tensor-map formula in [def-sfb-preserves-kflat-quasi-iso] gives\n$$(a_P\\otimes a_Q)^nt=\\iota'_{p,q}(a_{P^p}\\otimes a_{Q^q}).$$\nSubstitute these into step 3. The resulting coefficient map after $\\iota'_{p,q}$ is exactly the five-factor definition of $\\widetilde\\gamma_{P^p,Q^q}$, hence $A_{P,Q}^nF_{\\mathrm s}(\\iota_{p,q})=\\iota'_{p,q}\\widetilde\\gamma_{P^p,Q^q}$. Every equality used canonical injections, so no additional identification of coproducts occurs. Since the $F_{\\mathrm s}(\\iota_{p,q})$ form a coproduct cocone by step 1, these restrictions determine $A^n$ uniquely [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; explicit agent calculation of the functor-square comparison"
+   }
+  },
+  {
+   "text": "Each of the five ordinary factors is natural: use tensorator naturality for E₀, naturality of a inverse at f tensor g, oplax tensorator naturality for Fi and E₁, and tensor the naturality equations for a at f and g. This proves the ordinary conjugated comparison is natural. For naturality on complexes, check after every Fs image of a tensor injection, which is sufficient by the preserved coproduct universal property. The tensor-map injection formula, the summand expansion in Steps 3–4 and ordinary naturality identify the two sides. For the signed equation, replace the component map by Fs of the source injection followed by the degree component of the already constructed chain isomorphism A. Its chain-map equation moves the target differential before A. Functoriality identifies the resulting composite with Fs applied to the source injection followed by the source tensor differential. Expand this differential using the signed total formula of [def-sfb-preserves-kflat-quasi-iso]. Additivity of Fs preserves its sum and the (-1)^p coefficient. Apply the summand expansion separately at (p+1,q) and (p,q+1); this is exactly the required signed equation. Only two terms occur, for all integer degrees. No boundedness, exactness, symmetry, or monoidality of a is used.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; explicit agent calculation of the functor-square comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-equivalence-preserves-limits",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-termwise-strong-monoidal",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012Z, definition-associated-simple-complex and remark-triple-complex for conventions; agent functor-square calculation using the existing single-functor totalization comparison. The signed equation is obtained from its chain-map equation and the source signed differential."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιTensorObj, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-24T13:21:45Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.ιTensorObj, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "grep",
+   "query": "ιTensorObj|mapBifunctorComparison|mapCochainComplex.*[δμ]",
+   "results": "{\"t\": \"2026-10-24T13:21:45Z\", \"tool\": \"grep\", \"query\": \"ιTensorObj|mapBifunctorComparison|mapCochainComplex.*[δμ]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\"], \"digest\": \"cf50d1be6ce066b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate a tensor comparison on direct sum total complexes by a natural equivalence of module functors and identify its restriction on every bidegree injection",
+   "results": "{\"t\": \"2026-10-24T13:22:13Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugate a tensor comparison on direct sum total complexes by a natural equivalence of module functors and identify its restriction on every bidegree injection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.XXIsoOfEq_hom_ιTotal\", \"HomologicalComplex₂.total.mapIso\", \"HomologicalComplex₂.XXIsoOfEq_inv_ιTotal\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.ιMapBifunctorOrZero_eq\", \"HomologicalComplex.mapBifunctor₁₂.ι_eq\", \"HomologicalComplex₂.XXIsoOfEq_hom_ιTotal_assoc\", \"HomologicalComplex₂.XXIsoOfEq_inv_ιTotal_assoc\"], \"digest\": \"3e594ffe4a284a00\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*(Monoidal|[δμ])|mapBifunctorComparison",
+   "results": "{\"t\": \"2026-10-24T13:35:35Z\", \"tool\": \"grep\", \"query\": \"mapHomologicalComplex.*(Monoidal|[δμ])|mapBifunctorComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the signed tensor total comparison under an arbitrary natural isomorphism in a square of additive strong monoidal functors, with its formula on coproduct injections",
+   "results": "{\"t\": \"2026-10-24T13:35:36Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of the signed tensor total comparison under an arbitrary natural isomorphism in a square of additive strong monoidal functors, with its formula on coproduct injections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.tensor_naturality\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\", \"CategoryTheory.Sum.natIsoOfWhiskerLeftInlInr\", \"CategoryTheory.Limits.coprodComparison_natural_assoc\", \"CategoryTheory.Limits.coprodComparisonNatTrans\", \"CategoryTheory.Functor.sumIsoExt\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_assoc\"], \"digest\": \"b676e4d68d461721\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a square of additive countable coproduct preserving strong monoidal functors E1 Fi and Fs E0 with natural isomorphism a, conjugating the signed total tensor comparison restricts to the ordinary conjugated tensorator on each bidegree",
+   "results": "{\"t\": \"2026-10-24T13:35:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a square of additive countable coproduct preserving strong monoidal functors E1 Fi and Fs E0 with natural isomorphism a, conjugating the signed total tensor comparison restricts to the ordinary conjugated tensorator on each bidegree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"CategoryTheory.GradedObject.Monoidal.ιTensorObj₄_eq\", \"HomologicalComplex.associator\", \"HomologicalComplex.HasGoodTensor₁₂\", \"CategoryTheory.GradedObject.Monoidal.tensorIso_hom\", \"CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq\", \"HomologicalComplex.HasGoodTensor₂₃\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\"], \"digest\": \"dd89c71e1c78597c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic coproduct injections and total-associator/unitor tools do not state the full conjugation through an arbitrary natural isomorphism between these two composite functors; the existing single-functor totalization result is reused, not duplicated"
+  },
+  {
+   "tool": "grep",
+   "query": "map_ιMapBifunctor_mapBifunctorComparisonX|mapBifunctorComparison.*(comp|iso|Iso|natur)",
+   "results": "{\"t\": \"2026-10-24T13:57:05Z\", \"tool\": \"grep\", \"query\": \"map_ιMapBifunctor_mapBifunctorComparisonX|mapBifunctorComparison.*(comp|iso|Iso|natur)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern binary coproduct naturality, graded trifunctor reassociation, tensor-shift comparisons or inverse tensorators; none states the arbitrary natural-isomorphism functor-square conjugation on signed total complexes. The existing single-functor theorem is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating a tensor total comparison by a natural isomorphism of functors gives the conjugated ordinary tensorator on every direct sum injection",
+   "results": "{\"t\": \"2026-10-24T13:57:06Z\", \"tool\": \"leansearch\", \"query\": \"Conjugating a tensor total comparison by a natural isomorphism of functors gives the conjugated ordinary tensorator on every direct sum injection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sumIsoExt\", \"CategoryTheory.Functor.isoSum\", \"CategoryTheory.Limits.coprodComparisonNatIso\", \"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.Functor.Monoidal.μNatIso\", \"CategoryTheory.Functor.Monoidal.tensorObjComp\", \"CategoryTheory.Functor.Monoidal.commTensorLeft\", \"CategoryTheory.Sum.functorEquivFunctorCompFstIso\"], \"digest\": \"94bf1367f4c5dcc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern binary coproduct naturality, graded trifunctor reassociation, tensor-shift comparisons or inverse tensorators; none states the arbitrary natural-isomorphism functor-square conjugation on signed total complexes. The existing single-functor theorem is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparison, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-24T13:57:06Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.mapBifunctorComparison, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomologicalComplex.mapBifunctorComparison'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern: Loogle reported an unknown identifier (the declaration is project-local); no absence conclusion drawn from this query. The subsequent valid Loogle query and two semantic searches were used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composites of additive strong monoidal functors conjugates the direct sum total tensor comparison and its bidegree injection formula",
+   "results": "{\"t\": \"2026-10-24T13:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between composites of additive strong monoidal functors conjugates the direct sum total tensor comparison and its bidegree injection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.ι_mapBifunctorComp₁₂MapObjIso_hom\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₂₃MapObjIso_hom\", \"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f\", \"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc\", \"CochainComplex.ι_mapBifunctorShift₂Iso_hom_f\", \"CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso\", \"CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc\", \"HomologicalComplex.ιOrZero_mapBifunctorAssociatorX_hom\"], \"digest\": \"b7122e0f0bfb666f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern binary coproduct naturality, graded trifunctor reassociation, tensor-shift comparisons or inverse tensorators; none states the arbitrary natural-isomorphism functor-square conjugation on signed total complexes. The existing single-functor theorem is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of coproduct comparison and totalization of the conjugated tensorator for an additive monoidal functor square",
+   "results": "{\"t\": \"2026-10-24T13:57:32Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of coproduct comparison and totalization of the conjugated tensorator for an additive monoidal functor square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coprodComparison_natural_assoc\", \"CategoryTheory.μ_naturalityᵣ_assoc\", \"CategoryTheory.μ_naturality₂_assoc\", \"CategoryTheory.μ_naturality_assoc\", \"CategoryTheory.δ_μ_app_assoc\", \"CategoryTheory.coprodComparison_tensorLeft_braiding_hom\", \"CategoryTheory.Functor.Monoidal.map_μ_δ\", \"CategoryTheory.Functor.Monoidal.map_δ_μ\"], \"digest\": \"ef228122f2d4b057\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern binary coproduct naturality, graded trifunctor reassociation, tensor-shift comparisons or inverse tensorators; none states the arbitrary natural-isomorphism functor-square conjugation on signed total complexes. The existing single-functor theorem is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "coprodComparison_natural|ι_mapBifunctorComp₁₂MapObjIso_hom|map_δ_μ",
+   "results": "{\"t\": \"2026-10-24T14:01:18Z\", \"tool\": \"grep\", \"query\": \"coprodComparison_natural|ι_mapBifunctorComp₁₂MapObjIso_hom|map_δ_μ\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/GradedObject/Trifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"f87da489f19a767c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the binary coproduct naturality, graded trifunctor reassociation and inverse tensorator hits; none states this functor-square conjugation on signed total complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-oplax-total-comparison",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded nt-target-poincare-isiso Step 2 via module/ringed comparison Step 3 and derived tensor normalization: expansion of all fixed total conjugations on bidegree summands (original item Steps 1-2).",
+   "via": [
+    "lem-pd-section-oplax-total-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-total-oplax-conjugation-summands",
+  "worker": "stage1",
+  "summary": "Proved the canonical coproduct and bidegree conjugation formulas by applying the existing single-functor total comparison and explicitly expanding all five factors. Wrote the two signed differential naturality equations. Statement unchanged; no new nodes needed.",
+  "blueprint": "No imported blueprint ancestor (ancestor returns None). Realizes seeded nt-target-poincare-isiso Step 2 through module/ringed comparison Step 3 and derived tensor normalization, specifically the original section-oplax-total-comparison Steps 1-2: countable coproducts, canonical comparisons and full summand conjugation; also its signed chain-map check."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-e80beba6f",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-e80beba6f (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, its parent and its sibling. One commit (report + item), no new nodes, no repair note; statement and stmt_deps unchanged, proof_deps equal to the union of uses. Source: Stacks 012Z (homology.tex l.4195) gives the direct-sum total with sign (-1)^p, matching def-sfb-preserves-kflat-quasi-iso. All five factors of A and of γ̃ type-check right to left. Step 1: I_n≅Z, so it is countable; E_j preserve the coproducts by the Mathlib leaf lem-galois-equivalence-preserves-limits (isEquivalence_preservesColimits) and F_i, F_s by hypothesis; κ comes from the unique factorization in def-weil-pbc-category-colimit. Step 2: the hypotheses of lem-sfb-termwise-strong-monoidal hold for all four functors, and its τ equals T_G by the same summand equation. That node is Lean-closed in slopmaster2 (mapCochainComplexμIso), so it is accepted as a tool of another unit. Steps 3–4: I recomputed T_{E0}^{-1}v=E0(u)γ^{-1}, a^{-1}F_sE0(u)=E1F_i(u)a_X^{-1}, T_{Fi}F_i(u)=wγ, T_{E1}E1(w)=tγ and (a⊗a)t=ι'(a⊗a); together they give exactly ι'γ̃. Step 5: γ̃ is natural as a composite of naturality squares (μ naturality is stated in def-sfb-strong-monoidal-functor). I recomputed both signed differential expressions; additivity of F_s carries the sign, and the two sides agree summand by summand at (d,1) and (1,d). Small case: identity functors with a=c·id gives γ̃=c on 1⊗1, as the formula predicts. a is never assumed monoidal, and nothing needs bounded complexes. No duplicate found by rg -L (the sibling constraints node covers different clauses). The parent uses this node for the abstract formula only, so this is not a restatement. 12 recorded searches across all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TotalOplaxConjugationSummands",
+  "declaration": "CategoryTheory.Functor.total_oplax_conjugation_summands",
+  "declarations": [
+   "CategoryTheory.Functor.conjugatedTensorIso",
+   "CategoryTheory.Functor.conjugatedTotalTensorIso",
+   "CategoryTheory.Functor.total_tensor_degree_countable",
+   "CategoryTheory.Functor.total_oplax_coproduct_E₀",
+   "CategoryTheory.Functor.total_oplax_coproduct_E₁",
+   "CategoryTheory.Functor.total_oplax_coproduct_Fi",
+   "CategoryTheory.Functor.total_oplax_coproduct_Fs",
+   "CategoryTheory.Functor.total_oplax_conjugation_summands",
+   "CategoryTheory.Functor.conjugatedTensorIso_naturality",
+   "CategoryTheory.Functor.conjugatedTotalTensorIso_naturality",
+   "CategoryTheory.Functor.conjugatedTotalTensorIso_differential"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/TotalOplaxConjugationSummands.lean",
+  "statement": "theorem total_oplax_conjugation_summands (P Q : CochainComplex A₀ ℤ) (p q n : ℤ) (h : p + q = n) : Fs.map (ιTensorObj ((E₀.mapHomologicalComplex (.up ℤ)).obj P) ((E₀.mapHomologicalComplex (.up ℤ)).obj Q) p q n h) ≫ (conjugatedTotalTensorIso E₀ E₁ Fi Fs (hFi := hFi) a P Q).hom.f n = (conjugatedTensorIso E₀ E₁ Fi Fs a (P.X p) (Q.X q)).hom ≫ ιTensorObj (((E₀ ⋙ Fs).mapHomologicalComplex (.up ℤ)).obj P) (((E₀ ⋙ Fs).mapHomologicalComplex (.up ℤ)).obj Q) p q n h",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c74defd9d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause. Hypotheses equal or weaker (8 independent universes; HasColimitsOfSize.{0,0} and two-sided tensor preservation, as in lem-sfb-termwise-strong-monoidal; countable-coproduct preservation for Fi/Fs; a : Fi⋙E₁≅E₀⋙Fs arbitrary, not monoidal). conjugatedTensorIso = γ̃ and conjugatedTotalTensorIso = A factor by factor (upstream mapCochainComplexμIso : GK⊗GL≅G(K⊗L) = T_G⁻¹, so orientations are right). Clauses present: I_n Countable∧Small.{0}; preservation and PreservesCoproduct.iso.hom (=κ⁻¹) ∘ G(ι) = ι for E₀,E₁,Fi,Fs; A^n Fs(ι)=ι'γ̃; naturality of γ̃ and A; summand differential with p.negOnePow, recomputed (Mathlib ε₂=ε p). Statement verbatim, lines ≤100, sorry only, docstrings with source/blueprint and steps, both report sections. Advisories: termwise μIso from theorem node uncited (established convention, cf. NQ dc72 PASS); parallel Q13 15ba delivered the same item and module, PASS WIN, not yet landed: land only one, no rebind. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T204704-L-3821476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

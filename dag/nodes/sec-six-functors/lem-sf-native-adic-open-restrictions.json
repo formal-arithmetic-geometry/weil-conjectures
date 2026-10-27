@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-native-adic-open-restrictions",
+ "kind": "statement",
+ "title": "Open restriction and disjoint pullback of native adic extension by zero",
+ "statement": "Fix a prime $\\ell$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For any scheme $X$, let $B_X$ be the locally finite continuous $\\Omega$-valued coefficient sheaf of [def-sf-native-weil-derived-framework], applied on $X_{\\mathrm{proet}}$ itself rather than on a geometric fibre, and let $\\mathcal A(X)=\\operatorname{Mod}(B_X)$. Use the same lisse and constructible conditions as that framework: lisse means pro-etale locally $B^{\\oplus r}$ with $r$ finite and allowed to depend on the covering member; constructible means locally on the scheme a finite constructible locally closed partition with lisse restrictions. For a scheme morphism $f:Y\\to X$, let $f^*M=B_Y\\otimes_{f^{-1}B_X}f^{-1}M$, with the coefficient map induced by precomposition of functions. Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion]. Let $j_!:\\mathcal A(U)\\to\\mathcal A(X)$ be sheafification of the extension-by-zero presheaf on the localized ringed site, as specified in [def-sf-native-weil-derived-framework]. For every $M\\in\\mathcal A(U)$, the adjunction unit is an isomorphism $M\\xrightarrow{\\sim}j^*j_!M$. For every scheme morphism $g:W\\to X$ whose image is disjoint from $j(U)$, the actual module pullback satisfies $g^*j_!M\\cong0$. No quasi-compactness hypothesis on $j$ or $g$ is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/OpenImmersion.lean",
+  "place": "IsIso (adicOpenImmersionLowerShriekAdjunction l j).unit, lines 115-120; isZero_adicUpperStar_adicOpenImmersionLowerShriek, lines 213-228. The first identification uses the localized ringed-site presheaf in the native framework; the second is the module adjunction calculation in the cited proof."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over locally finite continuous l adic coefficient sheaves on the pro etale site, open extension by zero restricts to the original module and pulls back to zero along a disjoint morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"ModuleCat.Tilde.res_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U)\\n  (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))) (x : ↥V),\\n  ↑((CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.map i.op)) s) x = ↑s (i x)\", \"doc\": \"For open sets $U,V$ in $\\\\operatorname{Spec}(R)$ with inclusion $i:V\\\\to U$, the restriction map $\\\\widetilde{M}(U)\\\\to \\\\widetilde{M}(V)$ satisfies $(\\\\rho_{U\\\\supset V}(s))(x) = s(i(x))$ for all sections $\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.res_zero\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.RingedSpace} {U V : TopologicalSpace.Opens ↑↑X.toPresheafedSpace} (hUV : U ≤ V),\\n  TopCat.Presheaf.restrictOpen 0 U hUV = 0\", \"doc\": \"For any ringed space $X$ and open subsets $U \\\\subseteq V$ of $X$, the restriction of the zero section over $V$ to $U$ equals the zero section over $U$. In symbols: if $0_V$ denotes the zero element in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extension\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "grep",
+   "query": "adicOpenImmersion|isZero.*[Ll]owerShriek|extensionByZero",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of extension by zero is zero for disjoint morphisms of schemes with adic coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) {U : Y.Opens} (s : Set Γ(Y, U)) : f ⁻¹' Y.zeroLocus s = X.zeroLocus ((f.app U).hom '' s)\", \"doc\": \"For schemes $X$ and $Y$, a morphism $f : X \\to Y$, an open subset $U$ of $Y$, and a set $s$ of sections of the structure sheaf over $U$, the preimage of the zero locus of $s$ in $Y$ under $f$ is equal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (s : Set Γ(X, ⊤)) : X.isoSpec.inv '' PrimeSpectrum.zeroLocus s = X.zeroLocus s\", \"doc\": \"For any affine scheme $X$ and a set $s$ of global sections of $X$, the inverse image of the zero locus of $s$ in the prime spectrum of the global sections ring $\\\\Gamma(X)$ under the canonical isomorph\"}\n  {\"name\": \"PrimeSpectrum.preimage_comap_zeroLocus_aux\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.RingHom\", \"type\": \"(f : R →+* S) (s : Set R) : comap f ⁻¹' zeroLocus s = zeroLocus (f '' s)\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and a subset $ s \\\\subseteq R $, the preimage of the zero locus $ \\\\mathcal{Z}(s) $ under the induced map $ \\\\text{comap } f : \\\\text{Spec}(S) \\\\to \\\\text{Spec}(R) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isEmpty_pullback_iff\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{f : X ⟶ S} {g : Y ⟶ S} : IsEmpty ↑(Limits.pullback f g) ↔ Disjoint (Set.range f) (Set.range g)\", \"doc\": \"The pullback of two morphisms of schemes is empty if and only if the images of the morphisms are disjoint as subsets of the target scheme.\"}\n  {\"name\": \"Finsupp.supportedEquivFinsupp_symm_apply_coe\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.Supported\", \"type\": \"(s : Set α) [DecidablePred (· ∈ s)] (f : s →₀ M) : (supportedEquivFinsupp (R := R) s).symm f = f.extendDomain\", \"doc\": \"The inverse of the canonical linear equivalence between the submodule of $\\\\alpha \\\\to_0 M$ supported on $s$ and $s \\\\to_0 M$ maps a function $f : s \\\\to_0 M$ to its extension by zero on $\\\\alpha$, i.e., $\"}\n  {\"name\": \"FractionalIdeal.extended_zero\", \"module\": \"Mathlib.RingTheory.FractionalIdeal.Extended\", \"type\": \": extended L hf (0 : FractionalIdeal M K) = 0\", \"doc\": \"The extension of the zero fractional ideal to a localized ring remains the zero ideal, i.e., mapping the zero fractional ideal through the localization homomorphism preserves its triviality.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U) (s : Set Γ(X, U)) :\\n  hU.fromSpec ⁻¹' X.zeroLocus s = PrimeSpectrum.zeroLocus s\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a set $ s $ of sections of the structure sheaf over $ U $, the preimage of the zero locus of $ s $ in $ X $ under the inclusion morphism $ \\\\operat\"}\n  {\"name\": \"PrimeSpectrum.preimage_comap_zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.RingHom\", \"type\": \"(s : Set R) : comap f ⁻¹' zeroLocus s = zeroLocus (f '' s)\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and a subset $ s \\\\subseteq R $, the preimage of the zero locus $ \\\\mathcal{V}(s) $ in the prime spectrum of $ S $ under the induced map $ \\\\mathrm{comap}\\\\, f $ co\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-open-exact-constructible",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native open-extension heart argument serving the package projection/localization clause: open-restrictions. The maintainer-seeded created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-native-weil-open-exact-constructible",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.instIsIsoFunctorAdicSheafUnitAdicOpenImmersionLowerShriekAdjunction",
+   "AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek"
+  ],
+  "note": "attached by the lead's tool attach.py 2026-10-22 05:28 UTC for group Q13, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_liveb2378f05.jsonl.gz: The first gives the invertible adjunction unit"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.instIsIsoFunctorAdicSheafUnitAdicOpenImmersionLowerShriekAdjunction",
+    "AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.instIsIsoFunctorAdicSheafUnitAdicOpenImmersionLowerShriekAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion",
+     "lines": [
+      115,
+      120
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion",
+     "lines": [
+      213,
+      228
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

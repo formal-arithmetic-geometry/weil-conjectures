@@ -1,0 +1,227 @@
+{
+ "id": "lem-per-line-twist-double-annihilator-reverse",
+ "kind": "statement",
+ "title": "Reverse map after twice the annihilating line twist",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme], $\\mathcal L$ an invertible $\\mathcal O_Z$-module [def-sc-invertible-module], $s:\\mathcal L\\to\\mathcal O_Z$ a module morphism, and $c\\geq0$. Write $\\mathcal H(r)=\\mathcal H\\otimes\\mathcal L^{\\otimes r}$ for $r\\in\\mathbf Z$, using dual tensor powers for negative $r$ [def-pur-sheaf-tensor-product]. Let $\\delta_e:\\mathcal H(r)\\to\\mathcal H(r-e)$ be induced by $s^{\\otimes e}$ for $e\\geq0$. Let $\\alpha:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of modules [def-weil-sheaf-of-modules-category]. Suppose the maps $\\delta_c:(\\ker\\alpha)(c)\\to\\ker\\alpha$ and $\\delta_c:(\\operatorname{coker}\\alpha)(c)\\to\\operatorname{coker}\\alpha$ are zero. There exists a morphism $\\beta:\\mathcal G(2c)\\to\\mathcal F$ such that\n$$\\alpha\\circ\\beta=\\delta_{2c}:\\mathcal G(2c)\\to\\mathcal G,\\qquad \\beta\\circ\\alpha(2c)=\\delta_{2c}:\\mathcal F(2c)\\to\\mathcal F.$$\nIn particular, for every integer $r$, twisting $\\beta$ gives $\\beta_r:\\mathcal G(r)\\to\\mathcal F(r-2c)$ with $\\alpha(r-2c)\\circ\\beta_r=\\delta_{2c}$. No regularity of $s$ and no finiteness of the sheaves is assumed.",
+ "source": {
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAC (lemma-factor-hom), proof paragraph beginning \"By Lemma\", the \"small detail omitted\" after the dual-comparison kernel and cokernel bound; general line-module form."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Zariski cover trivializing $\\mathcal L$. On a trivializing open $U$ choose a frame $e$, put $a=s(e)$, and identify twists with the original sheaves using $e^{\\otimes r}$ (the dual frame for $r<0$). The tensor definition gives $\\delta_c(h\\otimes e^{\\otimes c})=a^ch$. Thus $a^c$ kills every section of $\\ker\\alpha$ and of $\\operatorname{coker}\\alpha$ on every open in $U$. Let $q:\\mathcal G\\to\\operatorname{coker}\\alpha$ be the sheafified sectionwise quotient, as in the module-category description.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  },
+  {
+   "text": "For an open $V\\subseteq U$ and $g\\in\\mathcal G(V)$, linearity gives $q(a^cg)=a^cq(g)=0$. Apply the local-image statement to the ringed space $(Z,\\mathcal O_Z)$, the morphism $\\alpha$, and its canonical sheafified quotient $q$: there is an open cover $V_i$ of $V$ with $x_i\\in\\mathcal F(V_i)$ and $\\alpha(x_i)=a^cg|_{V_i}$. This uses local lifts only, not surjectivity on sections.",
+   "uses": [
+    "lem-weil-pbc-sheaf-cokernel-local-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  },
+  {
+   "text": "On $V_i\\cap V_j$, the difference $x_i-x_j$ lies in the sectionwise kernel, so $a^c(x_i-x_j)=0$. The sheaf axiom glues the $a^cx_i$ to a section $b_e(g)\\in\\mathcal F(V)$. A second family of lifts gives the same section, by the same difference calculation on intersections. Restricting the lifts proves compatibility with restriction. For $g+h$ and $tg$, use the lifts $x_i+y_j$ on a common refinement and $tx_i$, respectively; uniqueness of gluing gives $b_e(g+h)=b_e(g)+b_e(h)$ and $b_e(tg)=tb_e(g)$. Thus $b_e:\\mathcal G|_U\\to\\mathcal F|_U$ is a module-sheaf morphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  },
+  {
+   "text": "For another frame $e'=ue$ on an overlap, where $u$ is a unit, one has $a'=ua$. If $\\alpha(x)=a^cg$ locally, then $u^cx$ lifts $(a')^cg$, whence $b_{e'}(g)=(a')^cu^cx=u^{2c}b_e(g)$. Therefore the maps defined by $\\beta(g\\otimes e^{\\otimes 2c})=b_e(g)$ agree on overlaps, since $e'^{\\otimes 2c}=u^{2c}e^{\\otimes 2c}$. Apply the sheaf gluing axiom to their values on each section; equality on overlaps and uniqueness give a global linear morphism $\\beta:\\mathcal G(2c)\\to\\mathcal F$ commuting with restrictions.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  },
+  {
+   "text": "Locally $\\alpha(b_e(g))=\\alpha(a^cx)=a^{2c}g$, so $\\alpha\\beta=\\delta_{2c}$. For $f\\in\\mathcal F(V)$, the section $a^cf$ itself is a lift of $a^c\\alpha(f)$; hence $b_e(\\alpha(f))=a^{2c}f$, giving $\\beta\\alpha(2c)=\\delta_{2c}$. These equalities on the trivializing cover imply the asserted global equalities by separatedness of the sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  },
+  {
+   "text": "For $r\\in\\mathbf Z$, tensor $\\beta$ by $\\mathcal L^{\\otimes(r-2c)}$. The dual frame evaluates to $1$ on $e$, so on each trivializing open the tensor identifications give $\\beta_r(g\\otimes e^{\\otimes r})=b_e(g)\\otimes e^{\\otimes(r-2c)}$. Applying $\\alpha(r-2c)$ gives $a^{2c}g\\otimes e^{\\otimes(r-2c)}$, exactly $\\delta_{2c}$ on that frame. This proves the final clause, including negative $r$, and nowhere cancels $a$ or assumes finite generation.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-sheaf-cokernel-local-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAC, lemma-factor-hom, proof: the small detail omitted in the factorization through the dual comparison; local lift construction supplied by Q11. The source states the special blowup-twist application; this proof establishes the stated general line-module form without extra hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of sheaves of modules whose kernel and cokernel are killed by a power of a section of a line bundle has a canonical reverse map after twice that twist",
+   "results": "{\"t\": \"2026-10-24T08:44:02Z\", \"tool\": \"leanfinder\", \"query\": \"A map of sheaves of modules whose kernel and cokernel are killed by a power of a section of a line bundle has a canonical reverse map after twice that twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"SheafOfModules.generatorsOfIsCokernelFree_π\"], \"digest\": \"d05286d0278c16eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free sheaf presentations, cokernel maps and generating sections do not supply a reverse morphism with the two squared-section composite identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel and cokernel annihilated by a section of an invertible sheaf imply a reverse morphism whose composites are the square of that section",
+   "results": "{\"t\": \"2026-10-24T08:43:59Z\", \"tool\": \"leansearch\", \"query\": \"Kernel and cokernel annihilated by a section of an invertible sheaf imply a reverse morphism whose composites are the square of that section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ComposableArrows.Exact.cokerIsoKer'_hom_inv_id\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"derivationOfSectionOfKerSqZero_apply_coe\", \"SemiNormedGrp.explicitCokernel.map\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"CategoryTheory.ComposableArrows.Exact.cokerIsoKer'_inv_hom_id_assoc\", \"CategoryTheory.Limits.cokernel.map\", \"Module.Presentation.CokernelData.ofSection_lift\"], \"digest\": \"b46938d496b6cc89\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free sheaf presentations, cokernel maps and generating sections do not supply a reverse morphism with the two squared-section composite identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kernel\", \"cokernel\", \"Linear\"",
+   "results": "{\"t\": \"2026-10-24T08:43:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"kernel\\\", \\\"cokernel\\\", \\\"Linear\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free sheaf presentations, cokernel maps and generating sections do not supply a reverse morphism with the two squared-section composite identities."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat.*(ker|coker)|ker.*coker.*smul|coker.*ker.*smul",
+   "results": "{\"t\": \"2026-10-24T08:43:58Z\", \"tool\": \"grep\", \"query\": \"annihilat.*(ker|coker)|ker.*coker.*smul|coker.*ker.*smul\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free sheaf presentations, cokernel maps and generating sections do not supply a reverse morphism with the two squared-section composite identities.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If s kills the kernel and cokernel of alpha then s squared factors through alpha in the opposite direction, globally for module sheaves with line bundle twists",
+   "results": "{\"t\": \"2026-10-24T08:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"If s kills the kernel and cokernel of alpha then s squared factors through alpha in the opposite direction, globally for module sheaves with line bundle twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_π\"], \"digest\": \"3572e84d9bbc2847\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free sheaf presentations, cokernel maps and generating sections do not supply a reverse morphism with the two squared-section composite identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a section of a line bundle kills the kernel and cokernel of a morphism of module sheaves then its square factors through the morphism with a reverse map",
+   "results": "{\"t\": \"2026-10-24T09:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"If a section of a line bundle kills the kernel and cokernel of a morphism of module sheaves then its square factors through the morphism with a reverse map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.presentationOfIsCokernelFree_relations\"], \"digest\": \"7226fbae83048259\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-sheaf relations and presentations do not give a reverse morphism with both squared-section identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kernel\", \"cokernel\", \"factor\"",
+   "results": "{\"t\": \"2026-10-24T09:09:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"kernel\\\", \\\"cokernel\\\", \\\"factor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar sheafification, scalar exact sequences, flat factorization, dual annihilators, and unrelated reverse maps do not state this line-twisted reverse-map lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat.*(kernel|cokernel)|reverse.*(morphism|hom)|ker.*coker.*smul",
+   "results": "{\"t\": \"2026-10-24T09:09:44Z\", \"tool\": \"grep\", \"query\": \"annihilat.*(kernel|cokernel)|reverse.*(morphism|hom)|ker.*coker.*smul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\", \"Mathlib/Topology/Homotopy/Path.lean\", \"Mathlib/Topology/Homotopy/Basic.lean\", \"Mathlib/Topology/Homotopy/TopCat/Basic.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/EvenEquiv.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Conjugation.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Conjugation.lean\"], \"digest\": \"857b9ba3066af82b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar sheafification, scalar exact sequences, flat factorization, dual annihilators, and unrelated reverse maps do not state this line-twisted reverse-map lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of sheaves of modules with kernel and cokernel annihilated by a scalar admits a reverse morphism whose two composites are multiplication by the square of that scalar",
+   "results": "{\"t\": \"2026-10-24T09:09:45Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of sheaves of modules with kernel and cokernel annihilated by a scalar admits a reverse morphism whose two composites are multiplication by the square of that scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.SMulCandidate.mk\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"PresheafOfModules.Sheafify.zero_smul\", \"SheafOfModules.instAdditiveRestrictScalars\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.Sheafify.smul.congr_simp\", \"SheafOfModules.restrictScalars\"], \"digest\": \"95a57216a903811d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar sheafification, scalar exact sequences, flat factorization, dual annihilators, and unrelated reverse maps do not state this line-twisted reverse-map lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If kernel and cokernel of a linear map are killed by a then there is a map in the opposite direction whose composites equal multiplication by a squared",
+   "results": "{\"t\": \"2026-10-24T09:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"If kernel and cokernel of a linear map are killed by a then there is a map in the opposite direction whose composites equal multiplication by a squared\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"isSMulRegular_of_range_eq_ker\", \"LinearMap.exact_smul_id_smul_top_mkQ\", \"ModuleCat.smulShortComplex\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d\", \"ModuleCat.smulShortComplex_exact\", \"Module.Finite.exists_smul_of_comp_eq_of_isLocalizedModule\"], \"digest\": \"07288329fc082647\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar sheafification, scalar exact sequences, flat factorization, dual annihilators, and unrelated reverse maps do not state this line-twisted reverse-map lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-graded-near-projective-hom-divisibility",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization dependency below ancestor Step 3, through the rig-smooth perturbation branch; precise analytic input to Stacks 0GAQ proof, the linear obstruction bound, here obtained from local-cohomology lemma-factor-hom with a harmless larger loss. The current latest ancestor Step 3 concerns Verdier exchange and does not itself assert this algebraization lemma. More precisely, the 0GAC finite-sum Hom-divisibility input before composing with the specified differential splittings. Supporting input: Tag 0GAC (lemma-factor-hom), proof paragraph beginning \"By Lemma\", the \"small detail omitted\" after the dual-comparison kernel and cokernel bound; general line-module form.",
+   "via": [
+    "lem-per-graded-near-projective-hom-divisibility",
+    "lem-per-graded-power-split-linear-factorization",
+    "lem-per-power-split-uniform-adic-map-lifting",
+    "lem-per-rig-smooth-presentation-perturbation",
+    "lem-per-g-ring-rig-smooth-algebraization",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-line-twist-double-annihilator-reverse",
+  "worker": "stage1",
+  "summary": "Q11 expanded the omitted 0GAC reverse-map argument by local lifting, annihilator-independent gluing, explicit frame covariance, both composite identities, and arbitrary integral twists. Reused the closed cokernel local-image node and existing definitions; no new nodes or statement changes. Repeated semantic searches with a scalar phrasing and read the hits.",
+  "blueprint": "Retains the inherited from.node and via chain below lem-per-artin-gabber-affine-curve. Its current latest Step 3 is Verdier exchange, not an assertion of this algebraization input. Precisely realizes the existing supporting-source place: Stacks 0GAC lemma-factor-hom, the omitted factorization after the dual-comparison kernel/cokernel bound, used by lem-per-graded-near-projective-hom-divisibility. No change to the chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-9d6d513ae",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-9d6d513ae (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes, statement and stmt_deps unchanged. The split is the 'small detail omitted' in Stacks 0GAC lemma-factor-hom (local-cohomology.tex 5145-5150), stated in general line-module form. The parent lem-per-graded-near-projective-hom-divisibility uses exactly the twisted clause β_n with α(n-2c)β_n=δ_{2c}. Step 1: on a trivialising U, δ_c(h⊗e^c)=a^c h, so a^c kills the sections of ker α and coker α (coker is the sheafified sectionwise quotient, per def-weil-sheaf-of-modules-category). Step 2: the cited statement of lem-weil-pbc-sheaf-cokernel-local-image gives local lifts of a^c g; that node is off-unit but its Lean is closed, so it counts as a tool and needs no tool_uses entry. Step 3: lift differences lie in ker α and are killed by a^c, so the a^c x_i glue; the result is independent of the lifts and is linear. Step 4: I verified the frame change, b_{e'}=u^{2c}b_e, which matches e'^{2c}=u^{2c}e^{2c}. Step 5: both composites equal δ_{2c}; for the second, a^c f is itself a lift of a^c α(f). Step 6: tensoring with L^{r-2c} handles every r in Z. Small cases tested: c=0 (α is an isomorphism and β=α^{-1}), s=0, and Z with α=p, a=p, c=1. The 10 recorded searches cover all three kinds. No duplicates, no SGA, and the unit and chapter route are untouched. Minor remark, not a fault: the tensor node defines only powers m≥1, so the item's L^{⊗0} and negative powers rest on standard conventions it spells out. No changes; review.md written."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-canonical-point-scalar-comparison",
+ "kind": "definition",
+ "title": "Canonical normalized point module adjunction and scalar comparison",
+ "status": "split",
+ "statement": "For a scheme $Y$ and a commutative condensed ring $R$, use the actual point module inverse image $p_Y^*$ and direct image $p_{Y*,R}$ induced by the point geometric morphism [sk-def-sfb-pullback-from-point]. The datum $\\mathrm{PointAdjunctionData}(R,Y)$ of [def-sfb-field-action-transport-data] fixes these functors, their additive and exact-inverse-image structures, and their adjunction by requiring its underlying abelian-sheaf unit and counit to equal the point geometric adjunction's unit and counit. This datum has a unique inhabitant; define the canonical point adjunction to be that unique datum. For every morphism $\\varphi:R\\to R'$ of commutative condensed rings, the datum $\\mathrm{PointScalar}(\\varphi,Y)$ of [def-sfb-field-action-geometric-transport-data], formed with these canonical point adjunctions, has a unique inhabitant: its restriction square is the exact localization of the ordinary mapMod/comap comparison, and its extension square is characterized by equality of all scalar-adjunction Hom transposes. Define the canonical point scalar comparison to be that unique datum. Its extension is the ordinary unbounded K-flat derived scalar/pullback comparison, preserving insertion of $1$; composing with the geometric counit gives the already defined pointProjection. No coefficient-map flatness or completeness is required.",
+ "stmt_deps": [
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-field-action-transport-data",
+  "def-sfb-field-action-geometric-transport-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), the canonical point coefficient-projection construction and its unit/counit normalization; formal categorical construction from the recorded point and scalar adjunctions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension comparison for pullback of module objects along a monoidal functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"ModuleCat.ExtendScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → ModuleCat R → ModuleCat S\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-module $ M $, this constructs the $ S $-module obtained by extending scalars through $ f $, defined as the tensor product $ M ⊗_R S $ with scalar m\"}\n  {\"name\": \"ModuleCat.ExtendScalars.map'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {M1 M2 : ModuleCat R} → (M1 ⟶ M2) → (ModuleCat.ExtendScalars.obj' f M1 ⟶ ModuleCat.ExtendScalars.obj' f M2)\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-linear map $ φ : M_1 → M_2 $, this constructs the induced $ S $-linear map $ M_1 ⊗_R S → M_2 ⊗_R S $ by tensoring $ φ $ with the identity map on $ \"}\n  {\"name\": \"CategoryTheory.Mod_.comap_map_hom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mod_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory.MonoidalLeftAction C D]\\n  {A B : C} [inst_4 : CategoryTheory.MonObj A] [inst_5 : CategoryTh\", \"doc\": \"For a monoid homomorphism $ f: A \\\\to B $ in a monoidal category $ \\\\mathcal{C} $ acting on a category $ \\\\mathcal{D} $, and for any $ B $-module homomorphism $ g: M \\\\to N $ in $ \\\\mathcal{D} $, the under\"}\n  {\"name\": \"ModuleCat.extendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → CategoryTheory.Functor (ModuleCat R) (ModuleCat S)\", \"doc\": \"Given commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R → S $, this functor maps the category of $ R $-modules to the category of $ S $-modules by extending scalars along $ f $. For an\"}\n  {\"name\": \"CategoryTheory.Mod_.comap_obj_mod\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mod_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory.MonoidalLeftAction C D]\\n  {A B : C} [inst_4 : CategoryTheory.MonObj A] [inst_5 : CategoryTh\", \"doc\": \"For a monoid homomorphism $f: A \\to B$ in a monoidal category $\\\\mathcal{C}$ acting on a category $\\\\mathcal{D}$, and a $B$-module $M$ in $\\\\mathcal{D}$, the object part of the `comap` functor applied to \"}\n  {\"name\": \"CategoryTheory.Mod_.scalarRestriction_hom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mod_\", \"type\": \"(M N : D) [ModObj B M] [ModObj B N] (g : M ⟶ N) [IsMod_Hom B g] :\\n  letI := scalarRestriction f M\\n  letI := scalarRestriction f N\\n  IsMod_Hom A g\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ acting on a category $\\\\mathcal{D}$, a monoid homomorphism $f: A \\\\to B$ in $\\\\mathcal{C}$, and $B$-module objects $M,N \\\\in \\\\mathcal{D}$ with a $B$-module homomorp\"}\n  {\"name\": \"ModuleCat.ExtendScalars.map'_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{M₁ M₂ M₃ : ModuleCat.{v} R} (l₁₂ : M₁ ⟶ M₂) (l₂₃ : M₂ ⟶ M₃) : map' f (l₁₂ ≫ l₂₃) = map' f l₁₂ ≫ map' f l₂₃\", \"doc\": \"For any ring homomorphism $ f : R → S $ and composable $ R $-linear maps $ φ : M_1 → M_2 $ and $ ψ : M_2 → M_3 $, the extension of scalars functor satisfies $ \\\\text{Ext}_f(ψ ∘ φ) = \\\\text{Ext}_f(ψ) ∘ \\\\\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No canonical inhabitant of the recorded point-adjunction and point-scalar data types. Mathlib matches concern different constant-coefficient categories; the existing project data types specify the normalization but supply no canonical inhabitant."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The uniquely normalized canonical scalar extension and point pullback comparison on derived internal condensed module categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.hom_naturality_apply\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] {X Y : CondensedMod R} (f : X ⟶ Y) {S T : CompHausᵒᵖ} (g : S ⟶ T)\\n  (x : ↑(X.val.obj S)),\\n  (CategoryTheory.ConcreteCategory.hom (f.val.app T)) ((CategoryTheory.ConcreteCategory.hom (X.val.map g)) x) =\\n    (CategoryTheory.ConcreteCategory.hom (Y.val.map g)) ((Cat\", \"doc\": \"For any morphism $ f : X \\to Y $ between condensed modules over a ring $ R $, and for any morphism $ g : S \\to T $ in the opposite category of compact Hausdorff spaces, the diagram commutes: applying $ \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalClosed (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No canonical inhabitant of the recorded point-adjunction and point-scalar data types. Mathlib matches concern different constant-coefficient categories; the existing project data types specify the normalization but supply no canonical inhabitant."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalPointScalar|canonicalPointAdjunction|PointScalar",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No canonical inhabitant of the recorded point-adjunction and point-scalar data types. Mathlib matches concern different constant-coefficient categories; the existing project data types specify the normalization but supply no canonical inhabitant."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'canonicalPointScalar|canonicalPointAdjunction' lean/WeilConjectures lean/Sheaf dag/nodes; python3 tools/blueprint_refs.py search 'point scalar'",
+   "results": "No declaration matches; 0 blueprint nodes match 'point scalar'. Existing def-sfb-field-action-transport-data and def-sfb-field-action-geometric-transport-data provide the data types, not their canonical inhabitants.",
+   "date": "2026-10-22",
+   "verdict": "Use those data types and the existing pointProjection; only construct their uniquely normalized canonical inhabitants."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-lattice-norm-projection",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric coefficient projection: test the norm-topological coefficient on one supported rationalized integral lattice, before finite cones and shifts.",
+   "via": [
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.CanonicalPointScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTransport.canonicalPointScalar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.canonicalPointAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.canonicalPointAdjunction",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.canonicalPointScalar_existsUnique",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.canonicalPointScalar"
+  ],
+  "file": "lean/Sheaf/Paper/CanonicalPointScalarComparison.lean",
+  "statement": "def canonicalPointScalar {R R' : Coefficients.{u}} (φ : R ⟶ R') (Y : Scheme.{u}) : PointScalar φ Y",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Constructs the unique normalized inhabitants of the existing data types, retaining the exact existing pointProjection. The two uniqueness theorems are construction obligations explicitly included in this definition node; choices are determined up to equality, never made from bare existence."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4426453f2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4426453f2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the H3 RETURN of 83060bea. Diffed against the prior snapshot: the Lean differs only by 2 public imports, the CanonicalPointScalar module and node are identical, and the item stmt_deps replace det-lem-coefficient-heart-filtration with the new definition node def-sfb-locally-closed-coefficient-extension (existing:true, verbatim CoefficientHeartFiltration.lean:78-81, body openImmersionLowerShriek a.toImage ⋙ lowerStar a.imageι, stmt_deps are four definition nodes, no live id collision). The delivery also cites def-sfb-field-action-(geometric-)transport-data directly (prior advisory). Independent clause check passes: primes/char, IsSepClosed, normed IsAlgClosure Ω without completeness, finite IntermediateField E, all-continuous O/A/B with the actual inclusions, finite-type separated T, constructible immersion, lisse L0 of any rank, Q = extend(a_!L0)[0], IsIso of the counit-adjoint pointProjection with canonical data, which are pinned (PointAdjunctionData by unit/counit; PointScalar restriction by normalization, extension by transpose). Edge cases S=T=∅ and L0=0 are covered. Proofs are sorry only, and the report sections are present. Advisories: the def node cites def-weil-closed-immersion for 'locally closed immersion', and the existing docstring keeps the old blueprint tag. No compile (no FIX)."
+ }
+}

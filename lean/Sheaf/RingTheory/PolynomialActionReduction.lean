@@ -49,6 +49,43 @@ theorem exists_eq_sum_smul_of_polynomial_action
     (a : Fin n → Fin m → Fin m → R)
     (ha : ∀ (i : Fin n) (j : Fin m), x i • e j = ∑ k : Fin m, a i j k • e k) :
     ∀ z : N, ∃ c : Fin m → R, z = ∑ k : Fin m, c k • e k := by
-  sorry
+  let P := Submodule.span R (Set.range e)
+  have heP (j : Fin m) : e j ∈ P := Submodule.subset_span ⟨j, rfl⟩
+  have hgen (i : Fin n) (v : N) (hv : v ∈ P) : x i • v ∈ P := by
+    obtain ⟨c, rfl⟩ := (Submodule.mem_span_range_iff_exists_fun R).mp hv
+    rw [Finset.smul_sum]
+    apply P.sum_mem
+    intro j _
+    rw [smul_comm, ha i j]
+    exact P.smul_mem _ (P.sum_mem fun k _ ↦ P.smul_mem _ (heP k))
+  have hstable (s : S) : ∀ v ∈ P, s • v ∈ P := by
+    have hs : s ∈ Algebra.adjoin R (Set.range x) := by rw [hx]; trivial
+    induction hs using Algebra.adjoin_induction with
+    | mem s hs =>
+      obtain ⟨i, rfl⟩ := hs
+      exact hgen i
+    | algebraMap r =>
+      intro v hv
+      simpa only [IsScalarTower.algebraMap_smul] using P.smul_mem r hv
+    | add s t _ _ hs ht =>
+      intro v hv
+      rw [add_smul]
+      exact P.add_mem (hs v hv) (ht v hv)
+    | mul s t _ _ hs ht =>
+      intro v hv
+      rw [mul_smul]
+      exact hs _ (ht v hv)
+  intro z
+  have hz : z ∈ Submodule.span S (Set.range e) := by rw [he]; trivial
+  have hzP : z ∈ P := by
+    induction hz using Submodule.span_induction with
+    | mem v hv =>
+      obtain ⟨j, rfl⟩ := hv
+      exact heP j
+    | zero => exact P.zero_mem
+    | add v w _ _ hv hw => exact P.add_mem hv hw
+    | smul s v _ hv => exact hstable s v hv
+  obtain ⟨c, hc⟩ := (Submodule.mem_span_range_iff_exists_fun R).mp hzP
+  exact ⟨c, hc.symm⟩
 
 end Module

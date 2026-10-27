@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-projective-space-tilting-equivalence",
+ "kind": "statement",
+ "title": "Projective-space tilting equivalence and its derived-Hom inverse",
+ "statement": "Let $A$ be a commutative ring and $n\\geq0$. Let $X=\\operatorname{Proj}(S)$ for $S=A[x_0,\\ldots,x_n]$, with twists as in [def-pc-projective-space-twist], and put $T=\\bigoplus_{i=0}^n\\mathcal O_X(-i)$ in cochain degree zero. Define $B=\\operatorname{End}_{\\mathcal O_X}(T)$, with multiplication given by composition, acting on $T$ on the left. There is an $A$-algebra identification of $B$ with the upper triangular $(n+1)\\times(n+1)$ matrices whose $(i,j)$ entry is $S_{j-i}$ for $i\\leq j$ and zero otherwise; here $S_d$ is the free $A$-module on the monomials of total degree $d$, and matrix multiplication uses polynomial multiplication. Write $D(\\operatorname{Mod}\\!\\text{-}B)$ for the unbounded derived category [def-weil-abstract-derived-category] of right $B$-modules, and $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the derived category of $\\mathcal O_X$-modules with quasi-coherent cohomology [def-pc-derived-category]. For a right $B$-module $L$, let $V(L)$ be the sheafification of $U\\mapsto L\\otimes_B T(U)$. The total left derived functor $LV=-\\otimes_B^{\\mathbf L}T$ exists on all of $D(\\operatorname{Mod}\\!\\text{-}B)$ and induces an $A$-linear equivalence $$-\\otimes_B^{\\mathbf L}T:D(\\operatorname{Mod}\\!\\text{-}B)\\xrightarrow{\\sim}D_{\\mathrm{QCoh}}(\\mathcal O_X).$$ Its inverse is $R\\operatorname{Hom}_X(T,-)$, the global derived Hom of [def-pc-global-derived-rhom], equipped with its right $B$-action by precomposition. In particular every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ admits $M\\in D(\\operatorname{Mod}\\!\\text{-}B)$ and isomorphisms $M\\otimes_B^{\\mathbf L}T\\simeq K$ and $\\operatorname{Res}_A M\\simeq R\\operatorname{Hom}_X(T,K)$ in their respective derived categories.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQU, lemma-Pn-module-category, with equation-generator-Pn and equation-algebra-for-Pn immediately preceding it; derived tensor construction Tag 09LX (dga-lemma-tensor-with-complex-derived) and right adjoint Tag 09LY (dga-lemma-tensor-with-complex-hom-adjoint) in literature/stacks-project/dga.tex."
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "On each standard affine $U_k$, the twist bases make $T$ free of rank $n+1$ in degree zero, hence perfect. The standard cover has finitely many affine opens and affine overlaps (degree-zero localizations of the polynomial ring), so $X$ is quasi-compact and quasi-separated. The perfect-object compactness theorem gives compactness of $T$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. The finite-negative-twists generator lemma gives: $\\operatorname{Hom}(T,K[q])=0$ for every $q$ implies $K=0$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-object-compact",
+    "lem-sfb-projective-negative-twists-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, lemma-generator-P1; Tag 09M1, proposition-compact-is-perfect; opening of the proof of Tag 0BQU."
+   }
+  },
+  {
+   "text": "Twist multiplication identifies $\\mathcal O_X(-j)^\\vee=\\mathcal O_X(j)$: on each $U_k$ the pairing of the two basis elements is $1$. Perfect duality therefore identifies $R\\mathcal Hom(T,T)$ with the finite sum $\\bigoplus_{i,j=0}^n\\mathcal O_X(j-i)$ in degree zero. The monomial cohomology formula gives $H^q(X,\\mathcal O_X(j-i))=0$ for $q\\neq0$: for $n\\geq1$ the only possible positive degree is $n$, where $j-i\\geq-n$ rules out monomials with all $n+1$ exponents negative; for $n=0$ use the separate affine clause. Negative cohomology is zero for a sheaf in degree zero. Thus $\\operatorname{Hom}(T,T[q])=0$ for $q\\neq0$, using the cohomology identification for global derived Hom. In degree zero the $(i,j)$ component is $\\operatorname{Hom}(\\mathcal O_X(-j),\\mathcal O_X(-i))=H^0(X,\\mathcal O_X(j-i))=S_{j-i}$ for $i\\leq j$, and zero otherwise. Locally these morphisms multiply sections, so composition has entries $(bc)_{ij}=\\sum_k b_{ik}c_{kj}$ with polynomial multiplication. This proves precisely the claimed algebra and the left evaluation action; for $n=0$, $B=A$.",
+   "uses": [
+    "lem-pc-twist-tensor",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sfb-bundle-endomorphism-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Equation 0CS9 (equation-algebra-for-Pn) and Tag 0BQU proof, self-Ext calculation; cohomology Tag 01XT."
+   }
+  },
+  {
+   "text": "Apply the bundle-endomorphism derived adjunction to $E=T$: it constructs the total left derived functor of exactly the sheafified balanced tensor $V$, on the entire unbounded right-$B$ module derived category, with quasi-coherent image and $F(B)=T$. It also constructs the exact $A$-linear right adjoint $G$ with precomposition action and natural derived isomorphism $\\operatorname{Res}_A G(K)\\simeq R\\operatorname{Hom}_X(T,K)$. Step 1 supplies compactness in the quasi-coherent category and step 2 supplies vanishing of every nonzero self-Ext, so the compact-bundle criterion makes $F$ fully faithful with invertible unit.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction",
+    "lem-sfb-compact-bundle-self-ext-full-faithfulness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LX and 09LY, derived tensor and Hom adjunction; Tag 09LZ, fully-faithful-in-compact-case; image in D_QCoh by perfect Tag 09M3."
+   }
+  },
+  {
+   "text": "If $G(K)=0$, the adjunction cohomology formula gives $\\operatorname{Hom}(T,K[q])=H^q(G(K))=0$ for every integer $q$. The generator lemma forces $K=0$. Thus the exact-adjoint zero-kernel criterion applies to $F\\dashv G$ and proves that the unit and counit are natural isomorphisms. The $A$-linearity in step 3 makes this an $A$-linear equivalence. For any $K$, choose $M=G(K)$: the counit gives $M\\otimes_B^{\\mathbf L}T\\simeq K$, and step 3 gives the required isomorphism $\\operatorname{Res}_A M\\simeq R\\operatorname{Hom}_X(T,K)$.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQU, final paragraph; generator Tag 0A9V; exact-adjoint criterion Tag 09J1 in derived.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-object-compact",
+  "lem-sfb-projective-negative-twists-generator",
+  "lem-pc-twist-tensor",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sfb-bundle-endomorphism-derived-adjunction",
+  "lem-sfb-compact-bundle-self-ext-full-faithfulness",
+  "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQU, lemma-Pn-module-category; equations preceding it and tensor-Hom prerequisites in dga.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived category of quasi coherent sheaves on projective space equivalent to modules over endomorphisms of sum of O minus i",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective [Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives]; DerivedCategory.instLinearCochainComplexIntQ [Mathlib/Algebra/Homology/DerivedCategory/Linear]; CochainComplex.IsKProjective.Qh_map_bijective [Mathlib/Algebra/Homology/DerivedCategory/KProjective]; DerivedCategory.instLinearSingleFunctor [Mathlib/Algebra/Homology/DerivedCategory/Linear]; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex [Mathlib/CategoryTheory/Abelian/Projective/Ext]; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ [Mathlib/CategoryTheory/Abelian/LeftDerived]; CategoryTheory.ProjectiveResolution.isoExt [Mathlib/CategoryTheory/Abelian/Ext]; CategoryTheory.isZero_Tor_succ_of_projective [Mathlib/CategoryTheory/Monoidal/Tor]",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern K-projectivity, ordinary tensor-Hom, Picard groups or unrelated tilting; none gives the projective-space derived equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beilinson tilting bundle on projective space derived tensor equivalence with derived category of modules over its endomorphism algebra",
+   "results": "[leansearch] OK 8 hit(s); lTensorHomEquivHomLTensor [Mathlib.LinearAlgebra.Contraction]; IsAzumaya.tensorEquivEnd [Mathlib.Algebra.Azumaya.Basic]; dualTensorHomEquiv [Mathlib.LinearAlgebra.Contraction]; Module.Invertible.rTensorEquiv [Mathlib.RingTheory.PicardGroup]; IsAzumaya.coe_tensorEquivEnd [Mathlib.Algebra.Azumaya.Basic]; homTensorHomEquiv [Mathlib.LinearAlgebra.Contraction]; QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop [Mathlib.RingTheory.QuotSMulTop]; IsTensorProduct.of_equiv [Mathlib.RingTheory.IsTensorProduct]",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern K-projectivity, ordinary tensor-Hom, Picard groups or unrelated tilting; none gives the projective-space derived equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern K-projectivity, ordinary tensor-Hom, Picard groups or unrelated tilting; none gives the projective-space derived equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Beilinson|tilting|Pn.module.category",
+   "results": "[grep] OK 6 hit(s); Mathlib/RingTheory/Perfectoid/Untilt.lean:31 Perfectoid, Tilting equivalence, Untilt; Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean:27 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean:25 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean:35 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]; Mathlib/MeasureTheory/Measure/Tilted.lean:13 The exponential tilting of a measure `μ` on `α` by a function `f : α → ℝ` is the measure with; Mathlib/MeasureTheory/Measure/Tilted.lean:23 * `Measure.tilted μ f`: exponential tilting of `μ` by `f`, equal to",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern K-projectivity, ordinary tensor-Hom, Picard groups or unrelated tilting; none gives the projective-space derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective space vector bundle O plus O(-1) through O(-n) induces a derived Morita equivalence",
+   "results": "[leanfinder] OK 8 hit(s); CommRing.Pic [Mathlib/RingTheory/PicardGroup]; CommRing.Pic.AsModule [Mathlib/RingTheory/PicardGroup]; CommRing.Pic.instFreeAsModuleOfNat [Mathlib/RingTheory/PicardGroup]; IsProjective.iff_projective [Mathlib/Algebra/Category/ModuleCat/Projective]; Module.Projective.of_ringEquiv [Mathlib/Algebra/Module/Projective]; Module.Projective.of_equiv [Mathlib/Algebra/Module/Projective]; CommRing.Pic.mk.linearEquiv [Mathlib/RingTheory/PicardGroup]; instInvertibleCarrierOutModuleCatValSkeleton [Mathlib/RingTheory/PicardGroup]",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern K-projectivity, ordinary tensor-Hom, Picard groups or unrelated tilting; none gives the projective-space derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived equivalence from the Beilinson tilting bundle on projective space to modules over its endomorphism algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f)\", \"doc\": \"The morphism of locally ringed spaces from the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ to the affine spectrum $ \\\\text{Spec}(A_f) $ is an isomorphism, induced by the $ \\\\\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories and a projective object $ X $ in $ C $, the component of the natural transformation from the 0th left-derived functor $ L_0F $ to $ F \"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Q\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"DerivedCategory.instLinearSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C] (n : ℤ),\\n  CategoryTheory.Functor.Linear R (DerivedCategory.singleFunctor C n)\", \"doc\": \"For each integer $ n $, the single-term complex functor from an abelian category $ \\\\mathcal{C} $ to its derived category, which maps objects to chain complexes concentrated in degree $ n $, is $ R $-l\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              CategoryTheory.Functor.comp\\n                  (AlgebraicGeometry.ProjectiveSpectrum.Struc\", \"doc\": \"The composition of the structure presheaf of commutative rings on the projective spectrum with the forgetful functor to the category of sets is naturally isomorphic to the underlying sheaf of sets of \"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K L : CochainComplex C ℤ)\\n  (n : ℤ)\\n  [inst_2 :\\n    CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L]\\n  [K.IsKProjective], Function.Bijective\", \"doc\": \"If $ K $ is a K-projective cochain complex, then the function mapping cohomology classes in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ to morphisms in the localized category $ \\\\math\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no projective-space tilting equivalence; the hits give shifts, K-projectivity and ordinary projective spectrum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective space derived category equivalence tensor with sum of negative twists",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.IsTriangulated.symm\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[E.IsTriangulated] : E.symm.IsTriangulated\", \"doc\": \"An equivalence between pretriangulated categories where the forward and inverse functors commute with integer-parameterized shift operations and preserve the triangulated structures of the categories.\"}\n  {\"name\": \"CategoryTheory.shiftEquiv'\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \"(i j : A) (h : i + j = 0) : C ≌ C\", \"doc\": \"For elements $i, j$ in an additive monoid $A$ satisfying $i + j = 0$, the shift functors by $i$ and $j$ form an equivalence $C ≌ C$ where: (1) the forward functor is the shift by $i$, (2) the inverse \"}\n  {\"name\": \"CategoryTheory.Pretriangulated.opShiftFunctorEquivalence\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Opposite.Basic\", \"type\": \"(n : ℤ) : Cᵒᵖ ≌ Cᵒᵖ\", \"doc\": \"For a triangulated category $\\\\mathcal{C}$ with integer-parameterized shift functors $\\\\Sigma^n$, the shift functor $\\\\Sigma^n$ on the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ is naturally isomorphic \"}\n  {\"name\": \"CategoryTheory.shiftEquiv\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \"(n : A) : C ≌ C\", \"doc\": \"For any element $n$ in an additive monoid $A$, the shift functor by $n$ and the shift functor by $-n$ (its additive inverse) form an equivalence $C ≌ C$. This equivalence is constructed using the iden\"}\n  {\"name\": \"CategoryTheory.Equivalence.IsTriangulated.mk''\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"(h : E.inverse.IsTriangulated) : E.IsTriangulated\", \"doc\": \"If the inverse functor of an equivalence between pretriangulated categories satisfies the triangulated conditions (commuting with integer-shift operations and preserving triangulated structures), then\"}\n  {\"name\": \"CochainComplex.shiftFunctorAdd'\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Shift\", \"type\": \"(n₁ n₂ n₁₂ : ℤ) (h : n₁ + n₂ = n₁₂) : shiftFunctor C n₁₂ ≅ shiftFunctor C n₁ ⋙ shiftFunctor C n₂\", \"doc\": \"For a preadditive category $\\\\mathcal{C}$ and integers $n_1, n_2$ such that $n_1 + n_2 = n_{12}$, the composition of the shift functors $[n_1]$ and $[n_2]$ on cochain complexes in $\\\\mathcal{C}$ is natu\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.shift_opShiftFunctorEquivalence_counitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Opposite.Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ] (X : C) (m n : ℤ)\\n  (hmn :\\n    autoParam (m + n = 0) CategoryTheory.Pretriangulated.shift_opShiftFunctorEquivalence_counitIso_inv_app._auto_1),\\n  (CategoryTheory.shiftFunctor Cᵒᵖ m).map\\n      ((Cate\", \"doc\": \"For a triangulated category $\\\\mathcal{C}$ with integer-parameterized shift functors $\\\\Sigma^n$, the shift functor $\\\\Sigma^n$ on the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ is naturally isomorphic \"}\n  {\"name\": \"CategoryTheory.shiftShiftNeg\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \"(i : A) : X⟦i⟧⟦-i⟧ ≅ X\", \"doc\": \"For any element $i$ in an additive monoid $A$ and object $X$ in category $\\\\mathcal{C}$, the composition of the shift functor by $i$ followed by the shift functor by $-i$ yields an isomorphism $X⟦i⟧⟦-i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no projective-space tilting equivalence; the hits give shifts, K-projectivity and ordinary projective spectrum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no projective-space tilting equivalence; the hits give shifts, K-projectivity and ordinary projective spectrum."
+  },
+  {
+   "tool": "grep",
+   "query": "Beilinson|tilting|Pn.module.category",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Tilted.lean\", \"line\": \"13\", \"text\": \"The exponential tilting of a measure `μ` on `α` by a function `f : α → ℝ` is the measure with\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Tilted.lean\", \"line\": \"23\", \"text\": \"* `Measure.tilted μ f`: exponential tilting of `μ` by `f`, equal to\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"31\", \"text\": \"Perfectoid, Tilting equivalence, Untilt\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"line\": \"27\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean\", \"line\": \"35\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"line\": \"25\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no projective-space tilting equivalence; the hits give shifts, K-projectivity and ordinary projective spectrum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived category projective space generated by O through O(-n) derived Morita equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}\n  {\"name\": \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) [hK : K.IsKProjective] (n : ℤ),\\n  ((CategoryTheory.shiftFunctor (CochainComplex C ℤ) n).obj K).IsKProjective\", \"doc\": \"If a cochain complex $ K $ with integer indices is K-projective, then the complex obtained by shifting $ K $ by any integer $ n $ is also K-projective. This shift operation adjusts the indexing by $ n\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no projective-space tilting equivalence; the hits give shifts, K-projectivity and ordinary projective spectrum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "date": "2026-10-23",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse.",
+   "via": [
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-space-tilting-equivalence",
+  "worker": "stage1",
+  "summary": "Follows the 0BQU self-Ext, fully faithful tensor, and generator/zero-kernel proof. Reuses twist cohomology, twist tensor, perfect duality and perfect compactness. Adds four proper prerequisites, with unbounded right-module and A-linear conventions explicit; checks n=0 and the zero base ring. No statement correction.",
+  "blueprint": "Inherited direct-image proof (3) chain: ILO alteration input, relative section-image finite presentation, Stacks 0CSG twist test, and its 0BQU equivalence. Current latest direct-image proof was read; no unit route is changed. Ancestor search returns None due to the inherited broken created.item chain, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-twist-tensor",
+    "why": "Twist multiplication identifies the dual line bundles in the self-Ext calculation; this is a generic projective-space tool."
+   },
+   {
+    "node": "lem-pc-perfect-rhom-tensor-comparison",
+    "why": "Perfect duality computes the internal Hom of the finite sum of twists; no unit-specific analogue replaces it."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "The universal monomial twist cohomology computation supplies the exact vanishing range and matrix entries."
+   },
+   {
+    "node": "lem-pc-perfect-object-compact",
+    "why": "The generic qcqs perfect-object compactness result supplies compactness in the quasi-coherent category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-twist-tensor",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-perfect-object-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-1b4f75b84",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-1b4f75b84 (reviewer sub-agent of L); spot-checked: Read Stacks 0BQU with equation-generator-Pn and equation-algebra-for-Pn, and 0A9V, 09LX, 09LY, 09LZ, 09M3, 09J1 in full. The item statement is unchanged and is still unsplit in live and side-live; it serves the parent's 0CSG (5)⇒(1) steps. The matrix orientation is right: entry (i,j) is Hom(O(-j),O(-i)) = S_{j-i}, matching Stacks' first row S_0, S_1, …. Step 1: T is locally free, hence perfect; the standard cover has affine D_+(x_kx_l) overlaps, so X is qcqs and lem-pc-perfect-object-compact gives compactness in D_QCoh. Step 2: duality via twist-tensor and perfect-rhom-tensor-comparison; j-i lies in [-n,n], so twist-cohomology (ii) and the n=0 clause give every vanishing, including the endpoint -n. Steps 3 and 4 follow the 0BQU proof: full faithfulness from 09LZ, zero kernel from 0A9V, equivalence from 09J1, and M=G(K) gives both final isomorphisms. The four new nodes are exact specialisations of 0A9V, 09LX/09LY/09M3, 09LZ and 09J1, each strictly smaller than the item. The 09LZ node weakens compactness from D(O) to D_QCoh; this is checked correct (the proof applies compactness only to objects that lie in D_QCoh) and is needed, since lem-pc-perfect-object-compact gives compactness only in D_QCoh. No duplicates in the snapshot or live DAG, no SGA, and the four declared pc tool_uses are accepted as generic. Small cases checked: n=0, n=1 (Kronecker algebra), A=0, E=0. Advisory only: step 2 leaves T^∨=⊕O(i) and the flatness of the derived tensors implicit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceTiltingEquivalence",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.projectiveSpace_tilting_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.tiltingSpace",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingBundle",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingBaseScalars",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingTensor_additive",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingScalarsCompatible",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingGlobalHom",
+   "AlgebraicGeometry.ProjectiveSpace.tiltingEquivalenceStatement",
+   "AlgebraicGeometry.ProjectiveSpace.projectiveSpace_tilting_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceTiltingEquivalence.lean",
+  "statement": "theorem projectiveSpace_tilting_equivalence (A : Type u) [CommRing A] (n : ℕ) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (tiltingSpace A n).toRingedSpace))] [HasDerivedCategory.{wB} (ModuleCat.{u} (End (tiltingBundle A n))ᵐᵒᵖ)] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wG} (ModuleCat.{u} ((moduleRings (tiltingSpace A n).toRingedSpace).obj.obj (op ⊤)))] : ∃ linearInst : Linear A (SheafOfModules.{u} (moduleRings (tiltingSpace A n).toRingedSpace)), tiltingScalarsCompatible (linearInst := linearInst) A n ∧ tiltingEquivalenceStatement (linearInst := linearInst) A n",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12210c66f",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery after 5f8c RETURN (H13+H4), both repaired: def-pc-projective-space-twist record is byte-identical to the live/side-live landed record (ProjectiveSpace.twist, sorry_free, recorded by L); ProjectiveSpaceProjTwist/polynomialProjTwist removed; the item is stated on ProjectiveSpace (ULift (Fin (n+1))) (Spec A) with the recorded twist, and tiltingBaseScalars uses the structural map to Spec A. The item node differs from side-live only by its lean field; lean.statement is verbatim in the file. Clauses re-checked against Stacks 0BQU, equation-generator-Pn and equation-algebra-for-Pn (perfect.tex lines 4699-4757) and 09LX/09LY: T = coproduct of O(-i) in degree 0; End T with composition; right modules as (End T)^op; injective A-algebra rho onto the matrices with (i,j) entry homogeneous of degree j-i (orientation S_0/S_1 correct); A-linearity pinned by tiltingScalarsCompatible; V = canonical tensorObj left adjoint; IsLeftDerivedFunctor in the right direction, unbounded; inverse iso to RHom(T,-) via preadditiveCoyonedaObj; Res_A comparison to schemeGlobalDerivedHom; derived-category isomorphisms in the final clause. Edge cases n=0, n=1, A=0 covered; no extra hypotheses; universes independent. One sorry; docstrings and report sections present; no other group has stated the item. No compile: no file changed (worker reports clean scompile)."
+ }
+}

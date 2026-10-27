@@ -16,134 +16,54 @@
  ],
  "proof": [
   {
-   "text": "Regard $E$ as an algebraic space over $T$. Indeed its fppf sheaf is the sheaf of sections of $E$ with the specified composite to $T$; the sheaf condition restricts to that fibre. Its relative diagonal is a base change of its diagonal over $S$, and its original atlas, equipped with the composite map to $T$, is still representable surjective etale [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. Apply [lem-a1-space-affine-atlas-open-cover] over $T$. It gives open subspaces $E_i$ covering $E$, affine opens $T_i\\subseteq T$ through which $E_i$ maps, and affine schemes $U_i$ with representable surjective etale maps $U_i\\to E_i$. It is enough to prove each $E_i$ is a scheme by [lem-pc-schemes-criterion]: the fppf sheaf is a Zariski sheaf, the inclusions are representable open immersions, and the pullbacks of this open covering along any scheme section cover that scheme. These are precisely its three hypotheses.",
+   "text": "Apply [lem-a1-separated-lqf-affine-relation-cover] to $f:E\\to T$. Its hypotheses are exactly the two assumptions of the item. Obtain an open covering $(X_i)$ over affine opens $T_i$ with affine atlases $U_i$, affine closed kernel relations $R_i$, and quotient identifications $U_i/R_i\\simeq X_i$. Each $X_i/T_i$ retains chartwise local quasi-finiteness and testwise closed diagonal, and the quotient identifications persist after scheme base change.",
+   "uses": [
+    "lem-a1-separated-lqf-affine-relation-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX, first three proof paragraphs."
+   }
+  },
+  {
+   "text": "For each $i$ and $u\\in U_i$, apply [lem-a1-closed-relation-schematic-neighbourhood] to $X_i/T_i$ and its presentation. All its hypotheses were supplied in step 1. It gives an open subspace $W_{i,u}\\subseteq X_i$ represented by a scheme and containing the image of $u$. Surjectivity of the atlas implies these opens cover $|X_i|$. For a scheme section $h_H\\to X_i$, their pullbacks are open subschemes covering $H$: each field-valued point of $H$ maps into some $W_{i,u}$ and thus factors through its pullback.",
+   "uses": [
+    "lem-a1-closed-relation-schematic-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX, fourth and final proof paragraphs."
+   }
+  },
+  {
+   "text": "Each $X_i$ is a Zariski sheaf because it is an fppf sheaf [def-trf-algebraic-space]. The representable open subfunctors of step 2 satisfy all clauses of [lem-pc-schemes-criterion], so $X_i$ is represented by a scheme. The covering of step 1 has representable open inclusions and covers on every scheme section. The same criterion, now for the Zariski sheaf $E$, gives an isomorphism $e:h_Z\\simeq E$ for an $S$-scheme $Z$.",
    "uses": [
     "def-trf-algebraic-space",
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-a1-space-affine-atlas-open-cover",
     "lem-pc-schemes-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, first two proof paragraphs; Properties of Spaces Tags 03FY and 03JH."
+    "place": "Tag 03XX, local-to-global reductions and final sentence; Schemes Tag 01JJ."
    }
   },
   {
-   "text": "Each $E_i\\to T_i$ satisfies the hypotheses of the item. For a representable etale scheme chart $V\\to E_i$, the composite $V\\to E_i\\to E$ is again representable etale: an open immersion is etale and etale composites are etale on scheme tests [lem-weil-pbc-etale-composition-cancellation]. Thus $V\\to T$ is locally quasi-finite by hypothesis; apply clause (2) of [lem-weil-pbc-separated-lqf-base-change] along $T_i\\to T$. The source of this base change is $V\\times_TT_i=V$, since $V\\to T$ factors through the open $T_i$, so $V\\to T_i$ is locally quasi-finite. The relative diagonal of $E_i/T_i$ is the pullback of that of $E/T$ to $E_i\\times_T E_i$: the fibre products over $T_i$ and $T$ agree because $T_i\\to T$ is a monomorphism. Its scheme tests are closed immersions by [lem-weil-pbc-closed-immersion-base-change]. We henceforth write $X\\to T$ and $U\\to X$ for one such piece; both $T$ and $U$ are affine.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-separated-lqf-base-change"
-   ],
+   "text": "For $\\alpha=f\\circ e:h_Z\\to h_T$, put $g=\\alpha_Z(\\mathrm{id}_Z):Z\\to T$. Naturality gives $\\alpha_H(a)=g\\circ a$ for every $S$-scheme $H$ and $a:H\\to Z$. Thus $e$ is an isomorphism over $T$ and $Z$ with structure map $g$ has the required property.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, first two proof paragraphs: the hypotheses persist on the chosen open pieces."
-   }
-  },
-  {
-   "text": "Put $R=U\\times_XU$. The diagonal representability in [def-trf-algebraic-space] makes this a scheme. Its projections $s,t:R\\to U$ are etale and surjective by base change of the atlas [lem-trf-space-fibre-products-etale-covers]. By the fibre-product universal property it is an equivalence relation, and the map $j:R\\to U\\times_TU$ is the scheme base change of $\\Delta_{X/T}$; it is a closed immersion by the assumed testwise closedness. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] makes $U\\times_TU$ affine. The affine criterion for a closed immersion [def-weil-closed-immersion] therefore makes $R$ affine. Finally $U\\to T$ is locally quasi-finite by the chartwise hypothesis applied to $U\\to X$.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, third proof paragraph: affine etale relation R=U times_X U."
-   }
-  },
-  {
-   "text": "The fppf quotient sheaf $U/R$ is $X$. To verify this identification, a section $x\\in X(H)$ lifts on the covering $H\\times_XU\\to H$, which is a surjective etale morphism of schemes by [def-trf-algebraic-space]. Such a morphism is an fppf covering since etale means flat and locally of finite presentation [def-weil-etale-morphism, def-pc-fppf-site]. Two lifts have the same image exactly when they are related by $R(H)=U(H)\\times_{X(H)}U(H)$. These local bijections glue by the sheaf axiom, giving $U/R\\simeq X$. The same verification applies after any base change to a scheme over $T$, since the atlas remains etale surjective [lem-trf-space-fibre-products-etale-covers]. The quotient and its universal property are the ones in [lem-trf-etale-relation-quotient].",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-etale-morphism",
-    "def-pc-fppf-site",
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-trf-etale-relation-quotient"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, third proof paragraph, using Spaces Tag 0262 (lemma-space-presentation); the quotient identification is written out."
-   }
-  },
-  {
-   "text": "Fix a point $x\\in|X|$ and choose $u\\in U$ mapping to it, using surjectivity of the atlas. All hypotheses of [lem-a1-proper-etale-relation-finite-neighbourhood] hold by step 3: $U,R,T$ are affine, $U/T$ is locally quasi-finite, the relation map is closed, and $s,t$ are etale. Obtain an affine etale neighbourhood $(T',p')\\to(T,p)$, a point $u'$ over $u$, and clopen pieces $U',R'$ finite over $T'$ such that $R'$ is the full restricted relation on $U'\\subset U\\times_TT'$. Its projections $s',t'$ are etale. Here $p$ is the image of $u$ in $T$; no finiteness of the entire atlas or of $X/T$ has been assumed.",
-   "uses": [
-    "lem-a1-proper-etale-relation-finite-neighbourhood"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, fourth proof paragraph, invoking More on Groupoids Tag 03X5."
-   }
-  },
-  {
-   "text": "The finite morphisms $U',R'\\to T'$ have affine sources because $T'$ is affine [def-weil-finite-integral-morphism]. Write their coordinate rings as $A',B'$ over $D=\\Gamma(T',\\mathcal O_{T'})$. The finite set generating $B'$ as a $D$-module also generates it as an $A'$-module via either projection, since $D\\to B'$ factors through either map $A'\\to B'$. Thus $s',t'$ are finite. They are etale by step 5, hence flat and locally of finite presentation by [def-weil-etale-morphism]. They are therefore finite locally free by [def-pc-finite-locally-free]. Apply [lem-a1-finite-flat-affine-relation-quotient] over $T'$: the quotient $Q=U'/R'$ is an affine scheme.",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "def-weil-etale-morphism",
-    "def-pc-finite-locally-free",
-    "lem-a1-finite-flat-affine-relation-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, fourth proof paragraph, invoking Groupoids Tag 03BM; the finiteness of the projections is checked in coordinates."
-   }
-  },
-  {
-   "text": "By [lem-trf-etale-relation-finding-opens], the inclusion $U'\\to U\\times_TT'$ induces an open immersion $Q\\to (U\\times_TT')/(R\\times_TT')$. Its hypotheses hold: the original projections after base change are etale and surjective by [lem-trf-space-fibre-products-etale-covers], so they are flat and locally of finite presentation [def-weil-etale-morphism]; the clopen inclusion of $U'$ is an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation], hence flat and locally of finite presentation as well; and the relation on $U'$ is the full restricted relation from step 5. By step 4 the target quotient is $X_{T'}$. Thus the affine scheme $Q$ represents an open subspace $V'\\subset X_{T'}$. Its point coming from $u'$ maps to $x$.",
-   "uses": [
-    "lem-trf-etale-relation-finding-opens",
-    "lem-trf-space-fibre-products-etale-covers",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, fourth proof paragraph, invoking Spaces Tag 02WU (lemma-finding-opens)."
-   }
-  },
-  {
-   "text": "The map $V'\\to T'$ is a morphism between affine schemes; its inverse images of principal affine opens are spectra of localizations of its coordinate ring, so it is affine, and in particular quasi-affine (factor it as its identity open immersion followed by this affine map). Apply [lem-a1-etale-quasi-affine-image-scheme] to $X\\to T$, the affine etale map $T'\\to T$, and $V'$. It supplies a representable open subspace $W\\subseteq X$ whose underlying open set is the image of $|V'|$. In particular $x\\in W$. Since $x$ was arbitrary, representable opens cover $X$, and [lem-pc-schemes-criterion] makes $X$ representable: it is a Zariski sheaf and, for each section over a scheme $H$, the base changes of these representable opens are open subschemes covering $H$, so the required functor covering condition holds. Apply this to every $E_i$ from step 1 and use the same criterion once more to obtain a scheme $Z$ representing $E$. For the composite natural transformation $\\alpha:h_Z\\simeq E\\to h_T$, define $g=\\alpha_Z(\\mathrm{id}_Z):Z\\to T$. Naturality gives $\\alpha_H(a)=g\\circ a$ for every $a:H\\to Z$, so the representing isomorphism is over $T$, as required.",
-   "uses": [
-    "lem-a1-etale-quasi-affine-image-scheme",
-    "lem-pc-schemes-criterion",
-    "def-trf-algebraic-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03XX, final proof paragraph, invoking Tag 03XW (lemma-neighbourhood-scheme) and Schemes Tag 01JJ, the gluing criterion used in the proof of Properties of Spaces Tag 03JH."
+    "place": "Tag 03XX, conclusion; Yoneda naturality written out."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
-  "def-pc-fppf-site",
   "def-trf-algebraic-space",
-  "def-weil-closed-immersion",
-  "def-weil-etale-morphism",
-  "def-weil-finite-integral-morphism",
-  "lem-a1-etale-quasi-affine-image-scheme",
-  "lem-a1-finite-flat-affine-relation-quotient",
-  "lem-a1-proper-etale-relation-finite-neighbourhood",
-  "lem-a1-space-affine-atlas-open-cover",
-  "lem-pc-schemes-criterion",
-  "lem-trf-etale-relation-finding-opens",
-  "lem-trf-etale-relation-quotient",
-  "lem-trf-space-fibre-products-etale-covers",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-separated-lqf-base-change"
+  "lem-a1-closed-relation-schematic-neighbourhood",
+  "lem-a1-separated-lqf-affine-relation-cover",
+  "lem-pc-schemes-criterion"
  ],
  "proof_origin": {
   "by": "document",
@@ -237,31 +157,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-separated-locally-qf-space-representable",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Expanded Stacks 03XX into local affine atlas reduction, affine kernel relation, quotient identification, finite clopen relation refinement, finite locally free affine quotient, open quotient embedding, and schematic image descent. Four genuine supporting results are new statement-only nodes; existing fibre-product and quotient tools are reused. All chartwise, diagonal, and finiteness hypotheses are checked explicitly; no quasi-compactness is added to E or f.",
-  "blueprint": "The ancestor lem-a1-affine-hc0 requires representability of the separated etale space in its support argument, through lem-a1-separated-etale-space-scheme. These eight steps realize the auxiliary 03XX input along the exact proof in Section 0417; no chapter or unit route changes.",
+  "summary": "Human re-split repair: statement and statement dependencies unchanged. Two independent statement-only tasks retain the affine localization/presentation argument (old steps 1-4) and the finite restriction/affine quotient/schematic image argument (old steps 5-7 and the first part of 8). The parent is now a short assembly using their conclusions, the existing scheme representability criterion, and explicit Yoneda naturality. Verbatim old proof and allocation are retained in report.md.",
+  "blueprint": "The lem-a1-affine-hc0 support argument still uses lem-a1-separated-etale-space-scheme and its auxiliary Tag 03XX schemehood input. The two new tasks follow the same 03FY/0262 and 03X5/03BM/02WU/03XW route; no chapter or unit route changes.",
   "tool_uses": [
    {
-    "node": "lem-trf-space-fibre-products-etale-covers",
-    "why": "Generic algebraic-space fibre products and base change of etale atlases, needed for the schemehood auxiliary; this unit has no such general geometry result."
-   },
-   {
-    "node": "lem-trf-etale-relation-quotient",
-    "why": "Generic quotient universal property for etale relations, used to identify the atlas quotient with X; no Rankin-unit result states it."
-   },
-   {
-    "node": "lem-trf-etale-relation-finding-opens",
-    "why": "Generic restriction-of-relation quotient open immersion (02WU), exactly the tool invoked by 03XX to embed the finite affine quotient; no node in this unit supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-separated-lqf-base-change",
-    "why": "Generic scheme-level locally quasi-finite base-change theorem, applied to a chart and an open of the target; no Rankin-unit theorem gives this permanence fact."
-   },
-   {
     "node": "lem-pc-schemes-criterion",
-    "why": "General Zariski sheaf representability criterion (01JJ), used for the local schemehood gluing in 03XX instead of introducing its immediate schematic-locus consequence 03JH. No node in this unit states this generic gluing tool."
+    "why": "General representability by gluing open schemes (01JJ), used only to assemble schematic neighbourhoods and open pieces; no Rankin-unit result states this generic gluing theorem."
    }
   ]
  },
@@ -273,12 +177,12 @@
   "lem-pc-schemes-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N9-63fb10a49",
-  "group": "N9",
+  "reviewer": "NT-cc-Q124-c50c0743e",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-63fb10a49 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics against the Stacks source: 03XX with its full proof, 03XW, 03FY, 03X4/03X5 including the proof that gives (a)-(h), 03BM, 02WU and 0262. The item statement is unchanged and correct. Steps 1-8 follow the 03XX proof. I checked the hypotheses of every cited node: 01JJ (1)/(2a-c) via field points; base change of local quasi-finiteness to an open T_i; R affine because the diagonal pulls back to a closed immersion into the affine U x_T U; 03X4 (1)-(6) and 03X5 (7) from affineness, local quasi-finiteness and etaleness; u' over p' from (U')_{p'} mapping bijectively onto {u_j}; finiteness of s', t' worked out on module generators, then finite locally free; the 02WU hypotheses including the full restriction (h); and 03XW quasi-affineness via the identity map. There is no cycle: the closure of the cited nodes (329 nodes) does not contain the item. The four new nodes contain statements only and are faithful specializations of 03FY, 03XW, 03X5 and 03BM. Two of them add true extras: the 03XW node assumes V' is representable, which makes its hypothesis stronger, and the 03BM node adds surjectivity of U->M and the S-structure. None restates a clause of the item, and rg over the DAG found no duplicate. I accept the five declared tool_uses. Batch-5 check: def-trf-algebraic-space is a general definition and is already reached by batch 5 independently, via lem-a1-algebraic-space-fpqc-sheaf. The three lem-trf lemmas (02X2/041F, 02WW and 02WU) are foundations on algebraic spaces and on etale/fppf equivalence relations. Neither assumption gives them, and they are not steps of the trace-formula or Poincare-duality argument: their 323-node closure has no thm-trf, sk-*, nt-* or trace node, and it adds only 23 Stacks Spaces/Descent lemmas to the batch-5 closure. I therefore judge these citations to be outside the assumed statements. No SGA source is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-c50c0743e (reviewer sub-agent of L); spot-checked: FIX for one mechanical fault: both new nodes cite [def-pc-fibre-product, def-weil-closed-immersion] in their statements but leave both out of stmt_deps (B3). The corrected node files are in fixes/; no other field changed and the item is unchanged. The mathematics is otherwise accepted. Sources read against tags/tags: Stacks 03XX with all five proof paragraphs, 03XW and 03X4/03X5 conclusions (a)-(h) with proofs, plus the roles of 02WU, 03BM, 03FY and 0262. No SGA source is used. Re-split: old steps 1-4 (affine cover over affine T_i, permanence, affine closed kernel relation, quotient identification after base change) are the conclusions of the new node lem-a1-separated-lqf-affine-relation-cover. Old steps 5-7 and the first part of step 8 (finite clopen restriction with full restriction (h), finite locally free projections, affine Q, open embedding of Q, schematic image W containing x via 03XW) are the conclusions of lem-a1-closed-relation-schematic-neighbourhood. The 01JJ gluing and the Yoneda argument stay in the parent. Nothing was dropped; the two nodes are of comparable size and can be proved independently; neither restates the item; the parent is a 4-step assembly. Parent steps: every hypothesis of the second node is a conclusion of the first. The covering clause 01JJ (2)(c) holds because the atlas is surjective and each field point lies in some W. 01JJ is applied correctly twice, and step 4 (Yoneda over T) is elementary. Both new statements are true and were tested on E empty, X=T=U, and Spec L over Spec K for L/K Galois. Duplicate checks found none against lem-a1-space-affine-atlas-open-cover, lem-a1-etale-atlas-presentation, lem-a1-space-separated-lqf-permanence, lem-a1-proper-etale-relation-finite-neighbourhood, lem-a1-finite-flat-affine-relation-quotient, lem-a1-etale-quasi-affine-image-scheme, lem-trf-etale-quotient-affine-open-cover, lem-trf-etale-affine-quotient-representable, lem-trf-etale-relation-finding-opens or lem-a1-separated-etale-space-scheme. Batch 5: def-trf-algebraic-space, def-a1-space-open-subspace and def-a1-algebraic-space-point-classes are general definitions that the trace formula and Poincare duality do not supply and that are not steps of their proofs, so all are accepted. Tool use of lem-pc-schemes-criterion is accepted.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable",
@@ -298,5 +202,16 @@
   "result": "pass",
   "note": "Read the node, its 5 stmt_deps, Stacks 03XX (spaces-morphisms.tex l.10589), the module and the report. Every hypothesis and conclusion clause matches: chartwise IsEtale→Stacks IsLocallyQuasiFinite of yoneda.preimage(a≫f).left; IsRepresentableWith IsClosedImmersion on pullback.diagonal f over h_T; ∃ Z, g:Z⟶T, e:h_Z≅E with e.hom≫f=yoneda.map g. No extra assumptions or universe restriction. Edge cases: empty E, empty T, non-quasi-compact case, and T=S matches the citer exists_scheme_of_separated_etale. No duplicate in Sheaf/Mathlib. Node diff vs side clone is lean-only; statement is verbatim; source and blueprint docstrings and the 8-step proof docstring are present; proof is only sorry; Worker report and Second reading sections are present. nt_compile.py --json: rc=0, clean, 2.6 s. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

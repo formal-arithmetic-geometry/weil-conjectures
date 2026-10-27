@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-central-isogeny-borel-root-compatibility",
+ "kind": "statement",
+ "title": "Borel pairs and root pairings under a central isogeny",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type, with no nontrivial smooth connected normal unipotent subgroup. Unipotent means unipotent matrices in a faithful representation at geometric points. Let $H$ be a smooth connected affine $F$-group scheme of finite type, and let $q:H\\to G$ be a faithfully flat homomorphism with finite central scheme-theoretic kernel $K$. Faithfully flat means that $F[G]\\to F[H]$ makes scalar extension exact and detects zero modules; finite means finite-dimensional coordinate algebra; central means commuting after every scalar extension. Then $H$ is reductive. Borel pairs (a split maximal torus and a Borel subgroup containing it), unipotent radicals, the projections $p:B\\to T$, $p_H:B_H\\to T_H$, and roots and coroots are as in [lem-sfb-reductive-borel-pair-structure]. For every Borel pair $(B,T)$ of $G$ there is a Borel pair $(B_H,T_H)$ of $H$ with $q^{-1}(T)=T_H$, $q^{-1}(B)=B_H$, and $K\\subseteq T_H$. The restrictions $T_H\\to T$ and $B_H\\to B$ are faithfully flat. The unipotent radicals map isomorphically and the projections satisfy $p\\circ q=q|_{T_H}\\circ p_H$. Pullback $q_T^*:X^*(T)\\to X^*(T_H)$ identifies the roots and the positive and simple roots for these pairs and satisfies$$\\langle q_T^*\\lambda,\\alpha_H^\\vee\\rangle=\\langle\\lambda,\\alpha^\\vee\\rangle.$$For $H=Z\\times_F S$, where $Z$ is a split torus and $S$ is semisimple, the lifted pair has the form $T_H=Z\\times T_S$, $B_H=Z\\times B_S$ with a Borel pair in $S$; the roots and coroots are those of $S$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Proposition 18.18 (inverse image Borel and quotient flag variety); Corollary 17.84 (centre in every maximal torus); Definitions 23.1--23.2 and Propositions 23.4--23.5 (central isogenies induce root data with q(alpha)=1). Product and Borel decompositions: 21.29--21.35, 21.60 and proof of 23.13."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "Let $N\\subseteq H$ be any smooth connected normal unipotent subgroup. Factor $q|_N$ through its faithfully flat image $I\\hookrightarrow G$ using [lem-sfb-affine-homomorphism-flat-image]. By [lem-sfb-unipotent-normal-quotient-image], $I$ is smooth, connected, normal and unipotent. Reductivity of $G$ gives $I=1$, so $N\\subseteq K$ scheme-theoretically. On coordinate rings this is a quotient $F[K]\\twoheadrightarrow F[N]$ [def-weil-closed-immersion], so $F[N]$ is finite-dimensional.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-unipotent-normal-quotient-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, image argument."
+   }
+  },
+  {
+   "text": "Smoothness makes $F[N]$ reduced by [sbc-lem-smooth-geometrically-reduced]. Finite vector-space dimension makes it Artinian: a strictly descending chain of ideals strictly decreases dimension. Apply [lem-sfb-reduced-artinian-residue-product]; each residue field is $F$ by clause 1 of [lem-wf-affine-nullstellensatz-vanishing]. Thus $F[N]\\simeq F^s$. The identity gives $s>0$; connectedness excludes $s>1$, since coordinate idempotents would disconnect its spectrum. Hence $N=1$. As $N$ was arbitrary, $H$ is reductive.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, finite smooth connected subgroup is trivial; reduced Artinian algebra expansion."
+   }
+  },
+  {
+   "text": "By [lem-sfb-quotient-borel-torus-images], choose a maximal torus $T_H\\subseteq H$ mapping faithfully flatly onto the prescribed $T$. Every element of the central subgroup $K$ centralizes $T_H$, so [lem-sfb-reductive-torus-self-centralizer] gives $K\\subseteq T_H$ on all test algebras. Now if $h\\in q^{-1}(T)(A)$, locally for a faithfully flat extension choose $t\\in T_H$ with $q(t)=q(h)$. Then $ht^{-1}\\in K\\subseteq T_H$, so $h\\in T_H$ locally and hence globally, since membership in a closed subgroup descends (its defining ideal vanishes after a faithfully flat extension only if it vanishes). Consequently $q^{-1}(T)=T_H$ scheme-theoretically. The torus is split since $F$ is algebraically closed.",
+   "uses": [
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, printed pp.357--358; Proposition 17.61 and Corollary 17.84, printed pp.372,379; inverse-image equality by local lifts."
+   }
+  },
+  {
+   "text": "By step 3, $K\\subseteq T_H$ on all test algebras, so $K$ is a closed subgroup scheme of the split torus $T_H\\simeq\\mathbf G_m^r$. As $K$ has finite-dimensional coordinate algebra, [lem-sfb-split-torus-subgroups-diagonalizable] gives $K\\simeq D(M)$ for a finite abelian group $M$. Thus $q$ is a multiplicative isogeny in the explicit sense of [lem-sfb-multiplicative-isogeny-borel-comparison]. Apply that node to get $B_H=q^{-1}(B)$ a Borel and $B_H\\to B$ faithfully flat with kernel $K$. Since $T_H=q^{-1}(T)$, $T_H\\subseteq B_H$, so this is the desired Borel pair. In particular [lem-sfb-reductive-borel-pair-structure] applies to both pairs.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 18.1 and proof of Proposition 18.18, printed pp.387,391; the kernel lies in the lifted torus by step 3 (17.84)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-isogeny-root-power-laws] to $q:(H,T_H)\\to(G,T)$. Centrality gives $e_\\gamma=1$ for every root $\\gamma$ of $H$. Thus for the corresponding root $\\alpha$ of $G$, $q_T^*\\alpha=\\gamma$, $q_T\\circ\\gamma^\\vee=\\alpha^\\vee$, and $q:U_\\gamma\\to U_\\alpha$ is an isomorphism: in root coordinates it is $a\\mapsto c_\\gamma a$ with inverse $a\\mapsto c_\\gamma^{-1}a$. Since $B_H=q^{-1}(B)$, [lem-sfb-borel-root-product-coordinates] puts every positive root subgroup in the relevant unipotent radical. Thus a positive $\\gamma$ maps into $B$, so its isomorphic root subgroup has nonzero tangent weight $\\alpha$ in $\\operatorname{Lie}(B)$, making $\\alpha$ positive by [lem-sfb-reductive-borel-pair-structure]. Conversely, if $\\alpha$ is positive, $U_\\gamma$ lies in $q^{-1}(B)=B_H$, so its tangent weight $\\gamma$ is positive. Hence positive roots correspond. Pullback carries the target simple-root base to an integral basis of the source root span, and every source positive root has nonnegative integer coordinates in this basis, by [lem-sfb-reductive-borel-pair-structure] and the root bijection. Compare this basis with the source simple-root base: each is a nonnegative integer combination of the other. Substituting these expressions in a basis vector forces its coefficient $1$ to come from exactly one coefficient $1$, all other coefficients being $0$. Thus the two bases coincide, so simple roots correspond.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, printed pp.485--486; Proposition 23.4, printed p.484; root containment in 21.29, printed p.434."
+   }
+  },
+  {
+   "text": "Enumerate the positive roots of $G$ and use the corresponding enumeration for $H$. The two multiplication maps of [lem-sfb-borel-root-product-coordinates] identify $U_H$ and $U$ with the ordered products of their root subgroups. Because $q$ is a homomorphism, its restriction between these coordinates is exactly the product of the root-subgroup isomorphisms from step 5. Hence $q|_{U_H}:U_H\\xrightarrow{\\sim}U$ is a scheme isomorphism and, being a homomorphism, a group-scheme isomorphism. For every $A$-point write uniquely $b_H=u_Ht_H$ by [lem-sfb-reductive-borel-pair-structure]. Then $q(b_H)=q(u_H)q(t_H)$ with $q(u_H)\\in U(A)$ and $q(t_H)\\in T(A)$. The projections therefore give $p(q(b_H))=q(t_H)=q_T(p_H(b_H))$ on every test algebra.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.68(a),(b), printed p.445; Proposition 23.5, printed pp.485--486."
+   }
+  },
+  {
+   "text": "For every $\\lambda\\in X^*(T)$ and corresponding $\\gamma=\\alpha_H$, step 5 gives an equality of characters of $\\mathbf G_m$: $(q_T^*\\lambda)\\circ\\gamma^\\vee=\\lambda\\circ q_T\\circ\\gamma^\\vee=\\lambda\\circ\\alpha^\\vee$. By the definition of the integer character-cocharacter pairing in [lem-sfb-reductive-borel-pair-structure], their exponents agree. Thus $\\langle q_T^*\\lambda,\\alpha_H^\\vee\\rangle=\\langle\\lambda,\\alpha^\\vee\\rangle$ for arbitrary characters, not only for roots.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 23.1 and Proposition 23.5, printed pp.483,485--486; pairing by composition."
+   }
+  },
+  {
+   "text": "Now suppose $H=Z\\times_F S$. The central subgroup $Z\\times1$ centralizes $T_H$, so [lem-sfb-reductive-torus-self-centralizer] puts it in $T_H\\subseteq B_H$. Apply [lem-sfb-quotient-borel-torus-images] to the projection $H\\to S$: its images $T_S$ and $B_S$ are a maximal torus and a Borel, with $T_S\\subseteq B_S$. For either $J=T_H$ or $B_H$, a point $s$ of its image lifts faithfully flat locally to $(z,s)\\in J$; multiplying by $(z^{-1},1)\\in J$ gives $(1,s)\\in J$. This descends because $J$ is closed. Thus $J=Z\\times\\operatorname{pr}_S(J)$ scheme-theoretically, proving both product formulas.",
+   "uses": [
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-quotient-borel-torus-images"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.86, printed pp.379--380; Proposition 17.20, printed pp.357--358; product special case of the decomposition in the proof of Lemma 23.13, printed p.489."
+   }
+  },
+  {
+   "text": "For this product pair, conjugation on $\\operatorname{Lie}(H)=\\operatorname{Lie}(Z)\\oplus\\operatorname{Lie}(S)$ is trivial on the first summand and is the $T_S$-action on the second, with $Z$ acting trivially. The nonzero weights and the positive weights are therefore exactly the roots and positive roots of $S$, extended trivially across $Z$. Normalizers satisfy $N_H(T_H)=Z\\times N_S(T_S)$ by testing conjugation on the two factors, so every element of the Weyl group $W_H$ of [lem-sfb-reductive-rank-one-reflections] acts on $X^*(Z)\\oplus X^*(T_S)$ as $\\mathrm{id}\\oplus w$ with $w\\in W_S$. Let $\\alpha$ be a root of $S$, write the coroot of $(0,\\alpha)$ as $\\alpha_H^\\vee=(\\nu_Z,\\nu_S)$, and let $s=\\mathrm{id}\\oplus w$ be its reflection, so $s(x)=x-\\langle x,\\alpha_H^\\vee\\rangle(0,\\alpha)$ and $\\langle(0,\\alpha),\\alpha_H^\\vee\\rangle=2$ [lem-sfb-reductive-rank-one-reflections]. For $x=(\\chi,0)$ this gives $\\langle\\chi,\\nu_Z\\rangle=0$ for all $\\chi$, so $\\nu_Z=0$ by perfectness of the pairing [lem-sfb-reductive-borel-pair-structure]; hence $w(y)=y-\\langle y,\\nu_S\\rangle\\alpha$ and $\\langle\\alpha,\\nu_S\\rangle=2$. Put $u=w\\circ s_\\alpha\\in W_S$, where $s_\\alpha(y)=y-\\langle y,\\alpha_S^\\vee\\rangle\\alpha$. Then $u(y)=y+\\varphi(y)\\alpha$ with $\\varphi(y)=\\langle y,\\alpha_S^\\vee\\rangle-\\langle y,\\nu_S\\rangle$ and $\\varphi(\\alpha)=0$, so $u^n(y)=y+n\\varphi(y)\\alpha$. Since $W_S$ is finite, some $u^n$ with $n\\geq1$ is the identity; as $X^*(T_S)$ is torsion-free and $\\alpha\\neq0$, $\\varphi=0$, so $\\nu_S=\\alpha_S^\\vee$ by perfectness. Thus $\\alpha_H^\\vee=(1,\\alpha_S^\\vee)$, proving the final root and coroot assertion, including empty root systems.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11 and Corollary 21.12, printed pp.428--430; product and derived decomposition in the proof of Lemma 23.13, printed p.489."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-isogeny-root-power-laws",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 19.14; Proposition 17.20; 17.61 and 17.84; proof of 18.18; Theorem 21.68(a),(b); Proposition 23.5 and the product specialization of 23.13. Local-lift, pairing and product computations expanded in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A central isogeny of reductive algebraic groups identifies Borel subgroups maximal tori and root systems and preserves dominance",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [CharZero R] [IsDomain R] [Finite ι]\\n  {ι₂ : Type u_6} {M₂ : Type u_7} {N₂ : Type u_8} [inst_8 : AddCommGroup M₂] [inst_\", \"doc\": \"Given a linear isomorphism $ f : M \\to M_2 $ between $ R $-modules preserving roots up to a permutation $ e $ of indices, and assuming the Cartan matrices satisfy $ C_{e(i),e(j)} = C_{i,j} $ for all $ \"}\n  {\"name\": \"RootPairing.instIsRootSystemMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} {ι₂ : Type u_5}\\n  {M₂ : Type u_6} {N₂ : Type u_7} [inst_5 : AddCommGroup M₂] [inst_6 : Module \", \"doc\": \"Given a root system $P$ defined by a root pairing between $R$-modules $M$ and $N$, and equivalences $e$ between index sets, $f$ between modules $M$ and $M_2$, and $g$ between modules $N$ and $N_2$, th\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system associated with a Lie algebra over a field via its non-degenerate Killing form is reduced. Specifically, for a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\ma\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"RootPairing.Equiv.bijective_weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For any equivalence between root pairings $ (M, N) $ and $ (M', N') $ over a commutative ring $ R $, the associated weight map $ M \\to M' $ is bijective, i.e., both injective and surjective as an $ R $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse images of a Borel subgroup and maximal torus under a central isogeny of connected reductive groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"comap_upperCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : H ≃* G) (n : ℕ),\\n  Subgroup.comap (↑e) (upperCentralSeries G n) = upperCentralSeries H n\", \"doc\": \"For any group isomorphism $ e : H \\\\xrightarrow{\\\\sim} G $ between groups $ H $ and $ G $, and for every natural number $ n $, the preimage of the $ n $th term of the upper central series of $ G $ under\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(rootsOfUnity (max (Module.finrank R V) 1) R) → ↥(Subgroup.center (SpecialLinearGroup R V))\", \"doc\": \"The inverse function of the equivalence between the center of the special linear group $\\\\text{SL}(V)$ and the group of $n$-th roots of unity in $R$, where $n$ is the finite rank of the free $R$-module\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"Subgroup.isCoatom_comap\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Order\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (f : G ≃* H) {K : Subgroup H},\\n  IsCoatom (Subgroup.comap (↑f) K) ↔ IsCoatom K\", \"doc\": \"For a group isomorphism $ f : G \\\\to H $ and a subgroup $ K \\\\leq H $, the preimage $ f^{-1}(K) $ forms a coatom in the subgroup lattice of $ G $ if and only if $ K $ is a coatom in the subgroup lattice\"}\n  {\"name\": \"ConjClasses.mk_bijOn\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Set.BijOn ConjClasses.mk (↑(Subgroup.center G)) (ConjClasses.noncenter G)ᶜ\", \"doc\": \"The conjugacy class map induces a bijection between the center of a group $ G $ and the set of singleton conjugacy classes in $ G $. Specifically, the function $ \\\\text{ConjClasses.mk} $ restricts to a\"}\n  {\"name\": \"QuotientGroup.comap_comap_center\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Basic\", \"type\": \"∀ {G : Type u} [inst : Group G] {H₁ : Subgroup G} [inst_1 : H₁.Normal] {H₂ : Subgroup (G ⧸ H₁)} [inst_2 : H₂.Normal],\\n  Subgroup.comap (QuotientGroup.mk' H₁) (Subgroup.comap (QuotientGroup.mk' H₂) (Subgroup.center ((G ⧸ H₁) ⧸ H₂))) =\\n    Subgroup.comap (QuotientGroup.mk' (Subgroup.comap (QuotientGro\", \"doc\": \"Let $ G $ be a group with normal subgroup $ H_1 \\trianglelefteq G $, and let $ H_2 \\trianglelefteq G/H_1 $ be a normal subgroup of the quotient group. The center of the double quotient group $ (G/H_1)/H\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "central.*isogen|BorelSubgroup|root.*isogen",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central isogeny of reductive groups preserves the coroot pairing of pulled back characters",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.Hom.coroot_coweightMap\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For any homomorphism between root pairings $P$ and $Q$ over a commutative ring $R$, the composition of the coweight map $\\\\operatorname{coweightMap}(f) : N' \\\\to N$ and the coroot embedding $\\\\operatorna\"}\n  {\"name\": \"RootPairing.mem_range_coroot_of_mem_range_coreflection_of_mem_range_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{r : N ≃ₗ[R] N} {α : N} (hr : r ∈ range P.coreflection) (hα : α ∈ range P.coroot) : r • α ∈ range P.coroot\", \"doc\": \"If $ r $ is a coreflection associated with the root pairing $ P $ and $ \\\\alpha $ is a coroot of $ P $, then the action of $ r $ on $ \\\\alpha $ is also a coroot of $ P $. Formally, if $ r \\\\in \\\\text{rang\"}\n  {\"name\": \"RootPairing.root_coroot'_eq_pairing\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.coroot' i (P.root j) = P.pairing j i\", \"doc\": \"For a root pairing $P$ over a commutative ring $R$, the evaluation of the dual coroot $\\\\text{coroot}'(i)$ at the root $\\\\text{root}(j)$ equals the pairing of indices $j$ and $i$, i.e., $\\\\langle \\\\text{c\"}\n  {\"name\": \"RootPairing.root_coroot_eq_pairing\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.toLinearMap (P.root i) (P.coroot j) = P.pairing i j\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, the evaluation of the linear functional associated with the root $ i $ at the coroot $ j $ equals the pairing of indices $ i $ and $ j $. Specif\"}\n  {\"name\": \"RootPairing.coreflection_apply_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.coreflection i (P.coroot j) = P.coroot j - (P.pairing i j) • P.coroot i\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, applying the coreflection associated with index $ i $ to the coroot $ \\\\alpha_j^\\\\vee $ yields $ \\\\alpha_j^\\\\vee - \\\\langle \\\\alpha_i, \\\\alpha_j^\\\\vee \\\\\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).coroot i = P.coroot i\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n  {\"name\": \"RootPairing.pairing\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": R\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, the pairing of indices $ i $ and $ j $ is defined as the evaluation of the linear functional $ \\\\text{root'}(i) $ at the coroot $ \\\\text{coroot}(j\"}\n  {\"name\": \"RootPairing.mk.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (toLinearMap toLinearMap_1 : M →ₗ[R] N →ₗ[R] R)\\n  (e_toLinearMap : toLinearMap = toLinearMap_1) [isPerfPair_toLinearMap \", \"doc\": \"Two root pairings are equal if their underlying linear maps, root embeddings, coroot embeddings, and reflection permutations are equal, and they satisfy the perfect pairing condition with the same str\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of reductive algebraic groups induces an isogeny of root data with root subgroup maps a to c times a to a characteristic power, central exactly when all exponents are one",
+   "results": "Search returned 8 hits: RootPairing.Hom.root_weightMap, RootPairing.Hom.indexEquiv, RootPairing.Equiv.toHom, RootPairing.map, RootPairing.Hom.root_weightMap_apply, RootPairing.Equiv.mk', RootPairing.Equiv.weightEquiv, SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a root under an isogeny is a prime power multiple of a root and pushforward of its coroot has the same factor",
+   "results": "Search returned 8 hits: RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root, RootPairing.smul_coroot_eq_of_root_eq_smul, RootPairing.coroot_eq_smul_coroot_iff, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn, RootPairing.rootFormIn_self_smul_coroot, RootPairing.smul_coroot_eq_of_root_add_root_eq, RootPairing.polarizationEquiv_symm_apply_coroot, RootPairing.coroot_eq_polarizationEquiv_apply_root",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Hom, RootPairing",
+   "results": "Search returned 12 hits: RootPairing.Hom.id, RootPairing.Hom.instMonoid, RootPairing.Hom, RootPairing.Hom.indexEquiv, RootPairing.Equiv.toHom, RootPairing.Hom.coweightMap, RootPairing.Hom.weightMap, RootPairing.Hom.comp_id",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isogen.*root|root.*isogen|rootSubgroup|RootSubgroup",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isogeny of reductive algebraic groups maps root subgroups by characteristic power maps and induces a root datum isogeny",
+   "results": "Search returned 8 hits: RootDatum, IsPrimitiveRoot.autToPow.congr_simp, LieAlgebra.IsKilling.rootSystem_toLinearMap_apply, MulEquiv.mapSubgroup, RootPairing.Equiv.toEndUnit_val, RootPairing.algebraMap_coroot'In_apply, RootPairing.instIsRootSystemMap, RootPairing.Hom.mk.noConfusion",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dominant-character-highest-line",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Proof of Proposition 18.18 (inverse image Borel and quotient flag variety); Corollary 17.84 (centre in every maximal torus); Definitions 23.1--23.2 and Propositions 23.4--23.5 (central isogenies induce root data with q(alpha)=1). Product and Borel decompositions: 21.29--21.35, 21.60 and proof of 23.13.",
+   "via": [
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-central-isogeny-borel-root-compatibility",
+  "worker": "stage1",
+  "summary": "Read Milne and checked all scheme-theoretic clauses, including nonreduced central kernels. Reused the existing Borel inverse-image, root-coordinate and self-centralizer nodes; introduced three lower-level general inputs, with actual logged Mathlib searches. Proved reductivity through normal unipotent images, lifted tori by quotient images and centralizer containment, then used root power laws and ordered root coordinates for the compatibilities. Maintainer reader (2026-10-24): step 4 now takes the finite diagonalizable kernel directly from K in T_H (step 3), dropping the redundant centre citation; step 9 now derives the product coroot from the Weyl action and finiteness of W_S instead of asserting it; the two off-unit generic tool uses are declared.",
+  "blueprint": "Current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (frontmatter of det-thm-sf-ctf-stability-direct-images), paragraph (3); the inherited alteration/projective-quotient/Haboush/highest-weight prerequisite chain is retained. This split supplies the central-isogeny compatibility used in Milne 22.20 by the parent dominant-character node. blueprint_refs ancestor returns None because the inherited created.item chain is broken; retain the supplied null ancestor and complete place, rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Step 2 takes only that a smooth F-scheme is reduced, a generic scheme fact; no node of sk-thm-sf-ctf-stability states it. Same use as the accepted lem-sfb-semisimple-isogeny-invariance."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Step 2 takes only clause 1 (residue fields of a finitely generated algebra over an algebraically closed field are F), a generic Nullstellensatz fact; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-8cfb67def",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-8cfb67def (reviewer sub-agent of L); spot-checked: I read the whole delivery against Milne iAG2017: 17.20 pp.357-358, 14.7, 1.62(b), 5.59(b), 19.14, 17.84, 21.68 and 23.1-23.5 with (144)-(147). The item statement and stmt_deps are identical to the unsplit base and live node, so nothing was weakened. No other group has split it in live or side-live.\n\nThe three new nodes are statement-only, with searches logged.\n- unipotent-normal-quotient-image (14.7/1.62/5.59/19.14) is true. It differs from solvable-normal-image-geometry: unipotent, not solvable.\n- quotient-borel-torus-images (17.20+5.39) is true. It differs from multiplicative-isogeny-borel-comparison, which concerns inverse images.\n- isogeny-root-power-laws (23.5) is true. I tested it on Frobenius of SL2 (e=p) and on SL2->PGL2 in char 2 (e=1). It is not a restatement of the item: it has no Borel, positivity, U-isomorphism or product clauses, and it assumes reductivity, which the item proves.\n\nSteps 1-3 and 5-8 are correct, including the scheme-theoretic local lifts and the positive/simple-root transition-matrix argument.\n\nFixes in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-central-isogeny-borel-root-compatibility.json:\n(1) E5, step 9: the product coroot was asserted ('gives this reflection') without identifying the Weyl element s_(0,alpha) of H with s_alpha of S. The step now uses N_H(T_H)=Z x N_S(T_S), so s=id+w; the reflection identity forces nu_Z=0; u=w o s_alpha is unipotent of finite order in the finite group W_S, hence nu_S=alpha_S^vee.\n(2) Route/C8: the off-unit generic tools sbc-lem-smooth-geometrically-reduced and lem-wf-affine-nullstellensatz-vanishing (step 2) were undeclared. They are now in split_report.tool_uses, the same uses accepted on lem-sfb-semisimple-isogeny-invariance.\n(3) Step 4 now takes K inside the split torus T_H directly from step 3. The redundant citation of lem-sfb-reductive-centre-multiplicative-type is dropped and proof_deps updated.\n\nBatch 5: the closure reaches only lem-trf-smooth-fpqc-base-descent (02VL) and lem-trf-fppf-covering-base-change (021O). Both are generic Mathlib leaves, not steps of the trace formula or Poincare duality. The cited self-centralizer, rank-one-reflections, borel-pair-structure and root-subgroup nodes are algebraic-group theory that neither assumption gives, so they are accepted.\n\nblueprint.from.node is null, inherited from the base chain; I noted it for the maintainer. There is no SGA anywhere.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CentralIsogenyBorelRootCompatibility",
+  "declaration": "AlgebraicGeometry.centralIsogeny_borel_root_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.centralIsogeny_borel_root_compatibility",
+   "AlgebraicGeometry.splitTorus_semisimple_borel_root_compatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenyBorelRootCompatibility.lean",
+  "statement": "theorem centralIsogeny_borel_root_compatibility {F : Type u} [Field F] [IsAlgClosed F] (G H : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (hH : SolvableGroupStructure.IsAlgebraic H) (hHs : Smooth H.X.hom) (hHc : ConnectedSpace H.X.left) (q : H ⟶ G) (hq : q.hom.hom.left.appTop.hom.FaithfullyFlat) (hK : IsFinite (GrpObj.ker q.hom.hom).hom) (hcentral : ∀ (A : Over (Spec (.of F))) (x : A ⟶ GrpObj.ker q.hom.hom) (g : A ⟶ H.X), (x ≫ GrpObj.kerι q.hom.hom) * g = g * (x ≫ GrpObj.kerι q.hom.hom)) : ReductiveTorusCentralizer.IsReductive H ∧ ∀ (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus iT → (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) → IsBorelGroupScheme iB.hom.hom → ∀ j : T ⟶ B, j ≫ iB = iT → ∃ (TH BH : Grp (Over (Spec (.of F)))) (iTH : TH ⟶ H) (iBH : BH ⟶ H) (jH : TH ⟶ BH) (qT : TH ⟶ T) (qB : BH ⟶ B) (kT : Grp.mk (GrpObj.ker q.hom.hom) ⟶ TH) (U UH : Grp (Over (Spec (.of F)))) (iU : U ⟶ B) (iUH : UH ⟶ BH) (p : B ⟶ T) (pH : BH ⟶ TH) (qU : UH ⟶ U) (_ : IsCommMonObj (StandardGroupSchemes.multiplicative F)) (_ : IsCommMonObj T.X) (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) (_ : IsCommMonObj TH.X) (aH : ModObj TH.X H.X) (aBH : ModObj TH.X BH.X) (ΦH : Finset (Additive (TH ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (PH : RootDatum ΦH (Additive (TH ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TH))) (bH : PH.Base), ReductiveTorusCentralizer.IsMaximalTorus iTH ∧ (∃ r : ℕ, Nonempty (TH ≅ MultiplicativeType.splitTorus F r)) ∧ IsBorelGroupScheme iBH.hom.hom ∧ jH ≫ iBH = iTH ∧ IsPullback iTH.hom.hom qT.hom.hom q.hom.hom iT.hom.hom ∧ IsPullback iBH.hom.hom qB.hom.hom q.hom.hom iB.hom.hom ∧ kT.hom.hom ≫ iTH.hom.hom = GrpObj.kerι q.hom.hom ∧ qT.hom.hom.left.appTop.hom.FaithfullyFlat ∧ qB.hom.hom.left.appTop.hom.FaithfullyFlat ∧ IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ (∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) ∧ j ≫ p = 𝟙 T ∧ IsPullback iU.hom.hom (toUnit U.X) p.hom.hom η[T.X] ∧ IsIso ((fst U.X T.X ≫ iU.hom.hom) * (snd U.X T.X ≫ j.hom.hom)) ∧ IsClosedSubgroupScheme iUH.hom.hom ∧ IsNormalSubgroupScheme iUH.hom.hom ∧ Smooth UH.X.hom ∧ ConnectedSpace UH.X.left ∧ SolvableGroupStructure.IsUnipotent UH ∧ (∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ BH), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ UH, f ≫ iUH = iN) ∧ jH ≫ pH = 𝟙 TH ∧ IsPullback iUH.hom.hom (toUnit UH.X) pH.hom.hom η[TH.X] ∧ IsIso ((fst UH.X TH.X ≫ iUH.hom.hom) * (snd UH.X TH.X ≫ jH.hom.hom)) ∧ IsIso qU ∧ qU ≫ iU = iUH ≫ qB ∧ qB ≫ p = pH ≫ qT ∧ Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)) ∧ P.IsReduced ∧ aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X ∧ aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X ∧ (∀ α : Φ, P.root α = α.val) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) ∧ (∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) ∧ Module.Finite ℤ (Additive (TH ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TH)) ∧ PH.IsReduced ∧ aH.smul = (iTH.hom.hom ⊗ₘ 𝟙 H.X) ≫ GrpObj.conj H.X ∧ aBH.smul = (jH.hom.hom ⊗ₘ 𝟙 BH.X) ≫ GrpObj.conj BH.X ∧ (∀ α : ΦH, PH.root α = α.val) ∧ (∀ (χ : Additive (TH ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ TH)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (PH.toLinearMap χ ν)) ∧ (∀ χ : Additive (TH ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ ΦH ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ TH H aH χ.toMul ≠ ⊥) ∧ (∀ α : ΦH, bH.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ TH BH aBH α.val.toMul ≠ ⊥) ∧ ∃ e : Φ ≃ ΦH, (∀ α : Φ, (PH.root (e α)).toMul = qT ≫ (P.root α).toMul) ∧ (∀ α : Φ, (PH.coroot (e α)).toMul ≫ qT = (P.coroot α).toMul) ∧ (∀ α : Φ, bH.IsPos (e α) ↔ b.IsPos α) ∧ (∀ α : Φ, e α ∈ bH.support ↔ α ∈ b.support) ∧ ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (α : Φ), PH.toLinearMap (Additive.ofMul (qT ≫ χ.toMul)) (PH.coroot (e α)) = P.toLinearMap χ (P.coroot α)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states reductivity and inverse-image lifting with radicals, projections and root/coroot compatibility. The second theorem supplies the product clause for every split Borel pair of Z × S, hence for the lifted pair. Uses the actual character/cocharacter Hom lattices and pins root data and positive bases by the specifications of reductive_borel_pair_structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c27e5bd5",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; lean.statement verbatim in file; no new nodes/defs/instances, sorry-only. Hypotheses match the node with nothing stronger (IsReductive G; IsAlgebraic+Smooth+ConnectedSpace H; FaithfullyFlat on appTop Γ(G)->Γ(H); IsFinite ker; centrality on all F-scheme points). Conclusions: IsReductive H; IsPullback squares give q^-1(T)=T_H, q^-1(B)=B_H; kT gives K ⊆ T_H; qT, qB faithfully flat; U/UH and p/pH with the dependency's exact specification; IsIso qU through qB; qB≫p=pH≫qT; both root data pinned as in reductive_borel_pair_structure; e:Φ≃ΦH with root pullback, coroot pushforward, IsPos/support correspondence and the pairing equation for all λ. Product theorem holds for every split Borel pair of Z⊗S (the generality proved in steps 8-9), with TH=Z×TS, BH=Z×BS as subgroups and coroots lift 0 α_S^∨ (0 = Mathlib Grp trivial hom). Edge cases checked: μ_p kernels, empty roots, rank-0 Z, single universe u. rg found no duplicate. Docstrings carry source and blueprint. No compile (no change). Advisory: the dependency does not fix individual coroots, so theorem 1 and theorem 2 root data need not share coroot choices; the node only says coroots are as in the dependency."
+ }
+}

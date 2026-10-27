@@ -1,0 +1,127 @@
+{
+ "id": "lem-sp-reduction-orientation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-compatibilities",
+   "place": "Proof (3), Orientation: coefficient comparison of the inverse diagonal/DNC orientation at the unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite coefficient change of the normalized inverse smooth orientation",
+ "statement": "Let $D$ be the finite-field datum [def-weil-finite-field-fiber], with algebraic closure $k$ of characteristic $p$, and let $\\ell\\ne p$ be prime. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated smooth $k$-morphism of pure relative dimension $d\\ge0$, with a compactification. Let $A\\to B$ be a unital map $\\varphi$ of finite commutative rings, both killed by $\\ell^n$, where $n\\ge1$. In the ordinary etale derived module categories of the universe-lifted rings, put $\\omega_R=f_R^!R_Y$ and $L_R=R_X(d)[2d]$, with the ordered shifted-root-line model of [def-pur-finite-smooth-canonical-maps]. Fix a deformation geometry for the smooth diagonal and isomorphisms $\\alpha_R:\\omega_R\\xrightarrow{\\sim}L_R$ satisfying exactly its diagonal, t=1-normalized Rees, and integration-normalized bundle equation OrientationNormalized. Let $e$ be a CoefficientLineComparison [def-pur-finite-smooth-coefficient-arrows] for $\\varphi$ at the common exponent, including the root-power, scalar/root-generator, and derived-scalar-counit normalizations. Write $S_T=-\\otimes_A^LB$ and $\\delta:S_X\\omega_A\\to\\omega_B$ for the counit-defined exceptional coefficient mate at $A_Y$, followed by the scalar-unit multiplication map [lem-pur-exceptional-coefficient-comparison]. Then $S_X(\\alpha_A^{-1})\\,;\\,\\delta=e^{\\otimes d}\\,;\\,\\alpha_B^{-1}$. This is an equation at the coefficient unit; it does not assert compatibility of the tensor map on arbitrary inputs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Proof (3), Orientation; refined common-prime-power argument in det-sp-reduction-compatibilities Step 7"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "def-asd-compactifiable",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "lem-pur-exceptional-coefficient-comparison",
+  "det-sp-finite-general-ring"
+ ],
+ "proof": [
+  {
+   "text": "Derive IsNoetherian X and IsNoetherian Y from local finite type and quasi-compactness over the finite-field datum. Derive QuasiCompact f from compactness of X and quasi-separatedness of Y. These are the same instances explicitly used in the supplied normalization hypotheses.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply normalizedOrientation_scalar to the universe-lifted ring homomorphism, with N=M=ell^n and reflexive divisibility. Positivity follows from primality of ell. The prime setting supplies invertibility of this exponent on X and Y. Pass the supplied geometry, orientations, normalization equations and CoefficientLineComparison unchanged. This proves exactly the inverse-orientation equation at the coefficient unit.",
+   "uses": [
+    "lem-sp-finite-normalized-orientation-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Orientation; refined common-prime-power argument in det-sp-reduction-compatibilities Step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-normalized-orientation-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Proof (3), Orientation; specialize the existing normalizedOrientation_scalar theorem to a common exponent, preserving the diagonal/Rees/integration normalization route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient extension preserves normalized smooth purity orientation on the dualizing complex",
+   "results": "Algebra.Smooth.baseChange and other algebraic smoothness or coefficient lemmas; no derived orientation comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of coefficients commutes with smooth purity tensor map and normalized orientation",
+   "results": "Algebra.Extension.CotangentSpace.map_tmul, tensorCotangentInvFun_smul_mk, and Kaehler tensor base-change lemmas; none states the orientation comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothTensorDualityMap|OrientationNormalized",
+   "results": "msearch Mathlib grep: 0 hits. Project rg finds the defining normalization and general-ring existence, and quotient-only orientation lemmas; no existing arbitrary-finite-ring equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ReductionCompatibilities",
+  "date": "2026-10-25",
+  "group": "X6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ReductionOrientation",
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionOrientation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionOrientation",
+  "statement": "theorem reductionOrientation\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f]\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    [HasCompactification f]\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (n : ℕ) (hn : 1 ≤ n)\n    (hA : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} A) = 0)\n    (hB : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} B) = 0)\n    (geometry : Etale.FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (alphaA : Etale.dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f ≅\n      Etale.FiniteSmoothPurity.line (ULift.{u + 1, u} A) (ℓ ^ n) hA X d)\n    (alphaB : Etale.dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f ≅\n      Etale.FiniteSmoothPurity.line (ULift.{u + 1, u} B) (ℓ ^ n) hB X d)\n    (_ha : @Etale.FiniteSmoothPurity.OrientationNormalized (ULift.{u + 1, u} A) _ _\n      (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n) hA X Y\n      { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian\n          (X ↘ Spec (.of D.k))\n        toCompactSpace := QuasiCompact.compactSpace_of_compactSpace\n          (X ↘ Spec (.of D.k)) } f _\n      (@quasiCompact_of_compactSpace X Y f\n        (QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k)))\n        (quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of D.k)))) _ d geometry\n      ((finiteGeneralRingPrimeSetting D ℓ hℓ n hn).diagonalExponent_isUnit\n        (X ↘ Spec (.of D.k))) alphaA)\n    (_hb : @Etale.FiniteSmoothPurity.OrientationNormalized (ULift.{u + 1, u} B) _ _\n      (ℓ ^ n) (pow_pos (Fact.out : ℓ.Prime).pos n) hB X Y\n      { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian\n          (X ↘ Spec (.of D.k))\n        toCompactSpace := QuasiCompact.compactSpace_of_compactSpace\n          (X ↘ Spec (.of D.k)) } f _\n      (@quasiCompact_of_compactSpace X Y f\n        (QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k)))\n        (quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of D.k)))) _ d geometry\n      ((finiteGeneralRingPrimeSetting D ℓ hℓ n hn).diagonalExponent_isUnit\n        (X ↘ Spec (.of D.k))) alphaB)\n    (e : Etale.FiniteSmoothPurity.CoefficientLineComparison\n      (RingHom.ulift.{u + 1, u + 1, u, u} φ) (ℓ ^ n) (ℓ ^ n) hA hB X)\n :\n    (Etale.FiniteSmoothPurity.ordinaryScalar\n      (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).map alphaA.inv ≫\n        Etale.ExceptionalCoefficients.dualizingScalarMap\n          (RingHom.ulift.{u + 1, u + 1, u, u} φ) f =\n      (e.tensorPower d).hom ≫ alphaB.inv",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261025T181322-L-4152524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T103447-L-1083252",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

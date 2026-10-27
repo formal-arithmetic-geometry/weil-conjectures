@@ -86,16 +86,28 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleFreeSourceAcyclic",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleFreeSourceAcyclic.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleFreeSourceAcyclic",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleFreeSourceAcyclic.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleFreeSource_acyclic",
-  "statement": "theorem rawModuleFreeSource_acyclic\n    (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)\n    (U : S.Etale) (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [Injective I] :\n    (preadditiveCoyoneda.obj (op\n      ((upperStar AddCommGrpCat.{u + 1} f).obj\n        (RawModuleScalarComparison.freeAbelian S U)))).rightAcyclic\n      ((RawModuleScalarComparison.forget Λ X).obj I)",
+  "statement": "theorem rawModuleFreeSource_acyclic\n    (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)\n    (U : S.Etale) (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [Injective I] :\n    (preadditiveCoyoneda.obj (op\n      ((upperStar AddCommGrpCat.{u + 1} f).obj\n        (RawModuleScalarComparison.freeAbelian S U)))).rightAcyclic\n      ((moduleAbelianForget Λ X).obj I)",
   "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-13"
+  "by": "K4",
+  "date": "2026-10-25",
+  "note": "Canonical upstream theorem replaces the duplicate Sheaf declaration. The old RawModuleScalarComparison.forget is definitionally moduleAbelianForget, as checked by compiling the former statement with the upstream theorem. The statement, proof dependencies and unit route are unchanged; both parent modules already import upstream."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -108,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "C-7686a",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T152019-L-954285",
+  "landing": "20261025T051906-L-4186570",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: removed Sheaf rawModuleFreeSource_acyclic against WeilConjectures.AlgebraicGeometry.RawModuleFreeSourceAcyclic:89 (forget = abbrev moduleAbelianForget); node lean record against upstream signature; retire-items.tsv line 2477; zero importers"
  }
 }

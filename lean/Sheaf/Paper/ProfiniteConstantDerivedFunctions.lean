@@ -40,6 +40,8 @@ import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
 import Sheaf.Paper.ComponentRelativeProfiniteSite
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Paper.ProjectionMateExact
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Derived continuous functions on profinite parameters
 

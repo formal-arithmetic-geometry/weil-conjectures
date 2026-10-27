@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-relative-finite-scalar-transport",
+ "kind": "statement",
+ "title": "Derived scalar extension under the constructed relative coefficient transport",
+ "statement": "Let g:Y→X be a scheme morphism, let B,R be commutative rings in the site universe, and let f:B→R be a ring homomorphism. Native derived scalar extension from B_X to R_X followed by inverse image to Y and relativeFiniteModelDerived(g,R) is naturally isomorphic to inverse image to Y followed by relativeFiniteModelDerived(g,B) and adicFiniteExtension(f) on the equivalent small site. This is a functor isomorphism, with no cohomological or finiteness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "lem-sfb-adic-finite-reduction-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved ordinary scalar-restriction square and pass it to the standard derived localizations by mapDerivedCategoryNatIso and the composition isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  },
+  {
+   "text": "Pass the exact restriction square to the standard derived categories. Native pullback/scalar compatibility follows by composing the scalar adjunction and the inverse-image/direct-image adjunction, using the canonical restriction/direct-image comparison.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  },
+  {
+   "text": "Use K-flat resolutions and preservation of quasi-isomorphisms to construct a derived adjunction for small-site change of rings. Its left-derived universal property identifies the left adjoint with the recorded adicFiniteExtension. Compose this and the native scalar-extension adjunction with the transport equivalences. The right adjoints are identified by the derived restriction square, so uniqueness of left adjoints gives the comparison. Finally compose with the native pullback/scalar comparison.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-weil-pbc-relative-finite-coefficient-transport",
+    "lem-pur-resolving-class-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-finite-scalar-restriction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "lem-pur-resolving-class-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of sites sends inverse image constant module sheaves on slices to constant coefficient module sheaves",
+   "results": "8 hits, including CategoryTheory.Sheaf.isConstant_iff_of_equivalence and Sheaf.isConstant_iff_forget; no ringed-module comparison on these slices.",
+   "date": "2026-10-27",
+   "verdict": "Use the equivalence API, but the scalar-linear constant-module comparison still requires proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardPushforwardEquivalence\"",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence and its unit and counit component equations.",
+   "date": "2026-10-27",
+   "verdict": "Constructs the module equivalence; does not identify the project constant module or scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|pushforwardPushforwardEquivalence",
+   "results": "7 Mathlib hits in module-sheaf pushforward, quasicoherent modules and topological sheaf modules. The homology API is in the adopted WeilConjectures tree and is used directly.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific comparisons are not already present as a single Mathlib statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites transports constant module sheaves, exact derived functors and restriction of scalars",
+   "results": "8 hits: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; SheafOfModules.restrictScalars; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Equivalence.transportIsoSheafToPresheaf; Equivalence.sheafCongr; Equivalence.sheafCongrPrecoherent; Equivalence.sheafCongr.functor; ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive. These are ordinary module and sheaf transport APIs, not the project-specific relative constant or derived scalar comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; the relevant equivalence and restriction APIs are used in the explicit construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeFiniteCoefficientModel",
+  "date": "2026-10-27",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Proof (c), Tag 094I: coefficient-site comparison in finite refinement and nilpotent propagation",
+   "via": [
+    "lem-weil-pbc-relative-finite-coefficient-model",
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+    "lem-weil-pbc-normalized-tower-common-lisse-strata",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeFiniteScalarTransport",
+  "file": "lean/Sheaf/Paper/RelativeFiniteScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFiniteScalarTransport",
+  "statement": "theorem relativeFiniteScalarTransport {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {B R : Type (u + 1)} [CommRing B] [CommRing R] (f : B →+* R) :\n    Nonempty ((pbcDerivedExtend ((constantSheaf (ProEt.topology X)\n        CommRingCat.{u + 1}).map (CommRingCat.ofHom f)) ⋙\n      adicTowerPullback g (adicLisseConstantRing X R) ⋙ relativeFiniteModelDerived g R) ≅\n      (adicTowerPullback g (adicLisseConstantRing X B) ⋙\n        relativeFiniteModelDerived g B ⋙\n          adicFiniteExtension (proEtaleModelTopology Y) f))",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

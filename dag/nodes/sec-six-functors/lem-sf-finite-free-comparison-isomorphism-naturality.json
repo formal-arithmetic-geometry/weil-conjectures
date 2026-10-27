@@ -1,0 +1,305 @@
+{
+ "id": "lem-sf-finite-free-comparison-isomorphism-naturality",
+ "kind": "statement",
+ "title": "Scheme-isomorphism naturality of finite-free counit and evaluation coefficient maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $X,V,Z$ be separated finite-type $k$-schemes, $f:V\\to X$ separated of finite type, and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-scheme-morphism-properties]. On ordinary small etale derived categories use $Rf_{*,R}$, $G_R=Ri_R^!$ right adjoint to $i_{*,R}$, and $\\omega_R=a_{X,R}^{\\times}R$, where $a_X:X\\to\\operatorname{Spec}k$ and $a_{X,R}^{\\times}$ is right adjoint to the compact-support functor defined by a fixed compactification [def-weil-pbc-derived-categories, lem-exc-closed-ambient, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Write $H_R(K,M)=R\\mathcal Hom_R(K,M)$ and $D_RK=H_R(K,\\omega_R)$ [def-pur-derived-internal-hom, lem-weil-duality-pairing].\n\nLet $A\\to B$ be a finite-free homomorphism of finite commutative rings annihilated by powers of $\\ell$. For a coefficient map $a:R\\to S$ put $T_a=-\\otimes_R^LS$. Let $c_a:T_aRf_{*,R}\\to Rf_{*,S}T_a$ be the extended inverse-image counit transpose; let $b_a:T_aG_R\\to G_ST_a$ be the extended exceptional counit transpose using the inverse closed-direct-image comparison; and let $u_a:T_a\\omega_R\\to\\omega_S$ be the extended structure-morphism compact-support counit transpose. The compact-support comparison is the proper projection comparison composed with open extension by zero. Let $v_a:T_aH_R(K,M)\\to H_S(T_aK,T_aM)$ be the transpose of extended evaluation. Set $\\beta_a=H_S(1,u_a)\\circ v_{a;K,\\omega_R}$ for Verdier duality. All these are the specified morphisms, with balanced tensor associators understood.\n\nSuppose $g_X:X'\\xrightarrow{\\sim}X$, $g_V:V'\\xrightarrow{\\sim}V$, $g_Z:Z'\\xrightarrow{\\sim}Z$ and $g_s:s'\\xrightarrow{\\sim}\\operatorname{Spec}k$ are scheme isomorphisms, with $f g_V=g_X f'$, $i g_Z=g_X i'$, and $a_X g_X=g_s a_{X'}$. The primed schemes and maps satisfy the same finite-type and immersion hypotheses. Transport the chosen compactification and all coefficient actions by these isomorphisms. The induced exact site equivalences, with inverse transports given by $g^{-1}$, identify the derived tensor, scalar extension, internal Hom, the two image functors, and the right adjoints with their primed versions. For right adjoints take the unique counit-compatible transport identification. Under these identifications the transport of each of $c,b,u,v,\\beta$ equals the same named comparison for the primed diagram. These equalities hold on ordinary etale categories and on their finite-Tor constructible pro-etale realizations [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude, def-weil-exceptional-inverse-image]. They preserve evaluation, its double-dual transpose and the adjunction counits, and are compatible with composition and identity isomorphisms. In particular they apply to $X'=X=X_0\\times_{k_0}k$ and $g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ for a field automorphism $\\gamma$ of $k$ fixing $k_0$, with the corresponding $g_s$ [def-weil-global-geometric-frobenius].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-global-geometric-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme isomorphism $g:W'\\to W$, reindex site objects by $(U\\to W')\\mapsto(U\\to W'\\xrightarrow gW)$ and use $g^{-1}$ for the inverse. The underlying schemes, arrows and covering families are unchanged; the definition of the small etale site therefore gives mutually inverse covering-preserving functors. The site-equivalence lemma gives the corresponding sheaf equivalences. On modules the constant-ring action is reindexed too, so this is a ringed-topos equivalence with invertible structural ring map. The ringed-presentation transport lemma gives exact module equivalences $E_{W,R}$, their termwise derived equivalences, preservation of K-injectives, and compatibility with derived internal Hom. This applies to every finite coefficient ring in the statement, independently of whether $g$ is $k$-linear.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "lem-weil-pbc-ringed-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "The ordinary tensor comparison for $E_{W,R}$ sends the reindexed tensor $x\\otimes y$ to $E(x)\\otimes E(y)$. Its associativity, symmetry and unit equations are the equalities on these generators. The signed-total exact-monoidal-equivalence lemma gives the comparison on complexes and preservation of K-flatness, including all signs and tensor constraints. Thus, computing $T_a$ by a K-flat representative, the coefficient square $E_{W,S}T_a\\cong T'_aE_{W,R}$ sends $E(x\\otimes s)$ to $E(x)\\otimes s$. Its compatibility with tensor reassociation follows by evaluating on $((x\\otimes y)\\otimes s)$. No basis of $B$ is used. The internal-Hom comparison is the evaluation-normalized one: the closed tensor-Hom bijection characterizes its transpose by $E(\\mathrm{ev})$, so the internal-Hom isomorphism in Step 1 has this normalization.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "Write $E$ for the appropriate equivalence at each vertex. Reindexing the commuting $f$-square identifies its inverse-image functors: both evaluate a sheaf on the same base-changed object, with the same coefficient action. Adjunction conjugation then identifies $Rf_{*,R}$ and $Rf'_{*,R}$, with their actual counits. For the transported compactification $(j,p)$, the presheaf defining $j_!$ is unchanged: an object factors through $j$ exactly when its reindexed object factors through $j'$, and the summand is the same module, otherwise zero. Sheafification respects this equivalence. Exactness of $j_!$ gives the same identification on complexes. Applying the previous direct-image argument to $p$ identifies $Rp_*j_!$ with $Rp'_*j'_!$. Finally conjugate $i_*\\dashv G_R$ and $Ra_{X,!}\\dashv a_{X,R}^{\\times}$. Uniqueness of a counit-compatible right-adjoint identification pins down both transports, including $E\\omega_R\\cong\\omega'_R$ using the transported constant ring on the base.",
+   "uses": [
+    "lem-pur-adjoint-equivalence-conjugation-calculus",
+    "det-sp-unique-right-adjoint",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "Suppress the endpoint identifications of Steps 1--3. For $L_R\\dashv Q_R$ equal respectively to $f_R^*\\dashv Rf_{*,R}$, $i_{*,R}\\dashv G_R$, or $Ra_{X,R!}\\dashv a_{X,R}^{\\times}$, write $q_a:T_aL_R\\cong L_ST_a$ for the scalar comparison in the relevant direction. The specified right mate $m_a$ is characterized by\n$$\\epsilon_S\\circ L_S(m_a)=T_a(\\epsilon_R)\\circ q_a^{-1}.$$\nHere $m_a$ is $c_a$, $b_a$, or the general exceptional mate whose value at the base ring is $u_a$. These are exactly the counit-transpose normalizations in the statement. Transport preserves the counits by Step 3. For pullback and open extension, $E(q_a)=q'_a$ is the pure-tensor identity of Step 2 on the same reindexed object. For $i_*$, and for the proper projection factor, the comparison is the direct-image comparison of the first case for that morphism, so this follows by transposing its definition: both adjuncts are scalar-extended inverse-image counit followed by tensor reassociation, already preserved; composing with the open factor gives the compact-support comparison. Applying $E$ to the displayed equation consequently gives the defining equation for $m'_a$. Injectivity of the adjunction Hom bijection yields $E(m_a)=m'_a$, hence all three claimed equalities. This argument compares maps without presupposing that a right mate of an arbitrary isomorphism is invertible.",
+   "uses": [
+    "lem-pur-adjoint-equivalence-conjugation-calculus",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "Apply the monoidal-square Hom-transport lemma with $F=T_a$, $G=T'_a$, $U_R=E_{X,R}$ and $U_S=E_{X,S}$, using the pure-tensor monoidal square of Step 2. Extension of scalars $T_a$ is derived module pullback along the identity topos with ring map $R\\to S$, and $E_{X,R},E_{X,S}$ are derived pullbacks along the reindexing ringed equivalences; the canonical derived tensor comparisons make all four strong symmetric monoidal by [lem-sfb-ringed-derived-monoidal-comparisons]. Both $E_{X,S}T_a$ and $T'_aE_{X,R}$ are derived pullbacks along the same composite ringed-topos morphism, so by the monoidal composition comparisons of that lemma the square $h$ of Step 2 is a monoidal natural isomorphism. The lemma identifies the two evaluation transposes, giving $E(v_a)=v'_a$ under the endpoint identifications. Equivalently, transposing either map gives exactly $T'_aE(\\mathrm{ev}_{K,M})$ with the same balanced associator. Naturality of internal Hom and Step 4 then give\n$$E(\\beta_a)=E(H_S(1,u_a)v_a)=H'_S(1,u'_a)v'_a=\\beta'_a.$$\nThus these are equalities of the specified evaluation and Verdier maps, without any choice of an abstract isomorphism between their endpoints.",
+   "uses": [
+    "lem-coef-monoidal-square-hom-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "Evaluation is the counit of the closed tensor-Hom adjunction. Step 2 identifies that counit, and Step 5 identifies its scalar-extended transpose. The double-dual arrow $\\delta_K:K\\to D_R D_RK$ is, by its definition, the transpose of the evaluation pairing with factors interchanged. Reindexing respects the symmetry and both Hom variables, so transposing $E(\\mathrm{ev}_K)$ gives precisely $\\delta'_{EK}$. Applying the same assertion to the extended pairing shows that the coefficient comparison squares for evaluation and $\\delta$ are taken to their primed squares. The inverse-image, closed and compact-support counits are already identified in Steps 3--4. No biduality isomorphism or constructible preservation of an ambient pro-etale adjoint is needed.",
+   "uses": [
+    "lem-weil-duality-pairing",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "On pro-etale objects the same reindexing functor has the same inverse, preserves the specified coverings, and is an exact constant-module equivalence. Repeat Steps 1--2 there. The etale-to-pro-etale inclusion commutes with reindexing on objects and arrows. In the formula for $\\nu^*$, reindexing bijects the pairs $(U,W\\to U)$ and all their arrows, hence identifies their colimits and sheafifications; it also identifies the restriction functor $\\nu_*$. By counit-compatible conjugation the same holds for $R\\nu_*$. Consequently the transported exceptional composite $\\nu_Z^*G_RR\\nu_{X,*}$ and the similarly transported dualizing object identify with their primed composites, with the transported counits. Steps 4--6 therefore apply on the stated pro-etale realizations. Restricting these equalities to finite-Tor constructible inputs is legitimate: pullback of a finite locally constant stratification along an isomorphism is the same stratification reindexed, and the exact monoidal equivalence and its inverse preserve every tensor-vanishing test for a fixed Tor interval. This uses no adjunction on the whole unbounded pro-etale category.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-exceptional-inverse-image",
+    "lem-pur-adjoint-equivalence-conjugation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  },
+  {
+   "text": "For successive scheme isomorphisms, reindexing twice sends $(U\\to W'')$ to $(U\\to W''\\to W'\\to W)$, exactly the composite reindexing. Tensor generators and evaluation give the same comparisons by this formula; the right-adjoint composites and direct transport have the same counit equation, so uniqueness identifies them. Identity reindexing gives the identity by the same argument. All comparison equalities are consequently compatible with composition and identities. If $X=X_0\\times_{k_0}k$ and $\\gamma$ fixes $k_0$, the two maps $\\mathrm{id}_{X_0}$ and $\\operatorname{Spec}(\\gamma)$ define the displayed fiber-product automorphism, with inverse obtained from $\\gamma^{-1}$, and its structure square commutes with $g_s=\\operatorname{Spec}(\\gamma)$. Thus it is an instance already proved; in particular the geometric Frobenius of the cited definition is such an automorphism. This is not an assertion about absolute Frobenius on an arbitrary scheme.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-adjoint-equivalence-conjugation-calculus",
+  "det-sp-unique-right-adjoint",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-coef-monoidal-square-hom-transport",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-duality-pairing",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-global-geometric-frobenius",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Final paragraph, expanded using Stacks Tags 0037, 0B65, 03EL, 0GMX, 06YS, 07A4, 08J9 and 0FPT; no SGA route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]somorphism.*[Ss]calar|[Tt]ransport.*[Cc]ounit|rightAdjointUniq_hom_counit",
+   "results": "15 hits: Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/LinearAlgebra/Dimension/Basic.lean; Mathlib/CategoryTheory/Monoidal/Transport.lean; Mathlib/CategoryTheory/Monoidal/Transport.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: site/adjunction/module infrastructure only; none states the simultaneous specified derived coefficient-map naturality with exceptional and semilinear transports."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq_hom_counit\"",
+   "results": "2 hits: CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: site/adjunction/module infrastructure only; none states the simultaneous specified derived coefficient-map naturality with exceptional and semilinear transports."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport module sheaves by site equivalences preserves coefficient change evaluation adjunction counits and canonical projection mates",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Equivalence.sheafCongr; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj; CategoryTheory.Equivalence.sheafCongr.counitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: site/adjunction/module infrastructure only; none states the simultaneous specified derived coefficient-map naturality with exceptional and semilinear transports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free coefficient comparisons for derived images exceptional adjoints internal Hom and duality are natural under scheme isomorphisms including semilinear base automorphisms",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv; AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq; AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc; AlgebraicGeometry.Scheme.ΓSpecIso_naturality; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality; AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: site/adjunction/module infrastructure only; none states the simultaneous specified derived coefficient-map naturality with exceptional and semilinear transports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport module sheaves by site equivalences preserves coefficient change evaluation adjunction counits and canonical projection mates",
+   "results": "8 hits: LightCondensed.freeForgetAdjunction; Condensed.freeForgetAdjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; LightCondMod.LocallyConstant.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: site/adjunction/module infrastructure only; none states the simultaneous specified derived coefficient-map naturality with exceptional and semilinear transports."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof final paragraph: transport along scheme isomorphisms, including semilinear Frobenius; returned proof step 18 except elementary cofinality",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-free-comparison-isomorphism-naturality",
+  "worker": "stage1",
+  "summary": "Expanded scheme-isomorphism naturality by reindexing, exact monoidal derived transport, explicit counit equations and evaluation transposes. Reused existing generic categorical nodes; no new nodes. Corrected the semilinear example to automorphisms fixing k_0.",
+  "blueprint": "lem-coef-finite-free-extension.proof.md final paragraph: constructions use only pullback, tensor, evaluation and natural adjunction maps, hence transport along a scheme isomorphism. Steps 1--3 construct the normalized transports, 4--6 identify the named arrows, and 7--8 treat realization and coherent semilinear transport.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Exact ringed equivalences preserve K-injectives and derived internal Hom; a generic change-of-presentation tool, not a replacement geometric proof route."
+   },
+   {
+    "node": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "why": "Signed total tensor and K-flatness under exact monoidal equivalences are the generic complex calculation needed for site reindexing."
+   },
+   {
+    "node": "lem-pur-adjoint-equivalence-conjugation-calculus",
+    "why": "The explicit counit and transpose formula for conjugating any adjunction supplies normalization under site equivalences."
+   },
+   {
+    "node": "lem-coef-monoidal-square-hom-transport",
+    "why": "The generic monoidal-square identity identifies the actual evaluation transposes for coefficient change."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Derived module pullback along a ringed-topos morphism is symmetric strong monoidal with monoidal composition comparisons; supplies the strong symmetric monoidal hypotheses and the monoidal square needed by the Hom-transport lemma in Step 5 (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-pur-adjoint-equivalence-conjugation-calculus",
+  "lem-coef-monoidal-square-hom-transport",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-30b19e6f5",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-30b19e6f5 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 20 cited statements, the source final paragraph of lem-coef-finite-free-extension.proof.md (no SGA), and unit sk-thm-sf-compatibility clause (7). No repair note exists and there are no new nodes. Statement correction accepted: 'γ fixing k_0' is required for id_{X0}×Spec γ to be defined (F_{p^2}, x↦x^p counterexample). The only citer uses γ=Frob_q, which fixes F_q, so it still holds. Steps 1-4 and 6-8 hold: reindexing site equivalence, ringed-presentation transport, exact-monoidal K-flat transport, conjugation counits, unique right adjoint, the mate equation with Hom-bijection injectivity, the duality-pairing transpose, and pro-etale ν reindexing. C4 fault, repaired: Step 5 needs strong symmetric monoidal functors and a monoidal square for lem-coef-monoidal-square-hom-transport, but cited only lem-weil-pbc-ringed-topoi-derived-tensor-pullback, which gives a bare natural iso. The fix cites lem-sfb-ringed-derived-monoidal-comparisons, which gives symmetric strong monoidality and monoidal composition comparisons, so h is monoidal. It adds no cycle and no new batch-5 exposure, and is declared in tool_uses. Step 4 gets one clause covering the i_* comparison. Batch-5 flag: lem-coef-monoidal-square-hom-transport → lem-pod-closed-uncurry-laws, a Mathlib leaf of generic closed-monoidal curry/uncurry laws. It is neither assumption nor part of their proofs, so it is accepted. Tool uses accepted: ringed-presentation-transport, exact-monoidal-total-kflat, conjugation-calculus, monoidal-square-hom-transport, ringed-derived-monoidal-comparisons.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeComparisonIsomorphismNaturality",
+  "declaration": "WeilConjectures.FiniteFreeIsomorphismNaturality.finite_free_comparison_isomorphism_naturality",
+  "declarations": [
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.pull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.scalarPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.directPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.homPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.etaleClosedPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.closedPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.closedScalar",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.etaleOmegaPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.omegaPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.omegaScalar",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.Domain",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.dualPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.pullComp",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.pullId",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.pullSquare",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.imageAdj",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.supportPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.upperPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.SquareLaws",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.tensorPull",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.HomTransportLaws",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.ScalarTransportLaws",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.ImageTransportLaws",
+   "WeilConjectures.FiniteFreeIsomorphismNaturality.finite_free_comparison_isomorphism_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeComparisonIsomorphismNaturality.lean",
+  "statement": "theorem finite_free_comparison_isomorphism_naturality (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] [Algebra A B] [Module.Free A B] [Module.Finite A B] (_hA : ∃ n : ℕ, 0 < n ∧ (l ^ n : A) = 0) (_hB : ∃ n : ℕ, 0 < n ∧ (l ^ n : B) = 0) (V X Z : Scheme.{u}) [V.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))] [Z.Over (Spec (.of F.k))] [IsSeparated (V ↘ Spec (.of F.k))] [LocallyOfFiniteType (V ↘ Spec (.of F.k))] [QuasiCompact (V ↘ Spec (.of F.k))] [IsSeparated (X ↘ Spec (.of F.k))] [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))] [IsSeparated (Z ↘ Spec (.of F.k))] [LocallyOfFiniteType (Z ↘ Spec (.of F.k))] [QuasiCompact (Z ↘ Spec (.of F.k))] (f : V ⟶ X) [f.IsOver (Spec (.of F.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of F.k))] (c : Compactification (X ↘ Spec (.of F.k))) : ∀ pro : Bool, HomTransportLaws pro A X ∧ HomTransportLaws pro B X ∧ HomTransportLaws pro A V ∧ HomTransportLaws pro B V ∧ HomTransportLaws pro A Z ∧ HomTransportLaws pro B Z ∧ HomTransportLaws pro A (Spec (.of F.k)) ∧ HomTransportLaws pro B (Spec (.of F.k)) ∧ ScalarTransportLaws pro (algebraMap A B) X ∧ ScalarTransportLaws pro (algebraMap A B) V ∧ ScalarTransportLaws pro (algebraMap A B) Z ∧ ScalarTransportLaws pro (algebraMap A B) (Spec (.of F.k)) ∧ ImageTransportLaws pro A f i (X ↘ Spec (.of F.k)) c ∧ ImageTransportLaws pro B f i (X ↘ Spec (.of F.k)) c ∧ ∃ μ : ∀ W : Scheme.{u}, TensorComparison pro (algebraMap A B) W, (∀ W : Scheme.{u}, NormalizedTensor pro (algebraMap A B) W (μ W)) ∧ ∀ (V' X' Z' S' : Scheme.{u}) (f' : V' ⟶ X') (i' : Z' ⟶ X') [IsClosedImmersion i'] (a' : X' ⟶ S') [QuasiCompact a'] (gV : V' ≅ V) (gX : X' ≅ X) (gZ : Z' ≅ Z) (gS : S' ≅ Spec (.of F.k)) (sf : CommSq gV.hom f' f gX.hom) (si : CommSq gZ.hom i' i gX.hom) (sa : CommSq gX.hom a' (X ↘ Spec (.of F.k)) gS.hom), SquareLaws pro (algebraMap A B) gV gX gZ gS sf si (IsPullback.of_horiz_isIso sa) c (c.ofIsPullback (IsPullback.of_horiz_isIso sa)) (μ X) (μ X')",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The five specified squares are packaged in SquareLaws; HomTransportLaws, ScalarTransportLaws and ImageTransportLaws retain evaluation, double-dual, counit and identity/composition clauses. Helpers use existing FiniteFreeCoefficients definitions, never its downstream theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ad03bc0",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Read the node, the 13 stmt_deps, the snapshot module, the report, and the parent FiniteFreeCoefficientExtension definitions. Clause match: k, l, finite-free A->B with l-power torsion; separated finite-type V, X, Z; f; closed immersion i; fixed compactification c, primed c.ofIsPullback (the transported compactification). c, b, u, v, beta are Sites.direct, closedMap/proClosedMap, omegaScalar, homMap and dualMap (= homMap then Hom(1,u)). mu under exists is uniquely pinned by NormalizedTensor (etale HEq tensorIso; pro TensorNormalizationAux on all complexes). Typed both paths of the five SquareLaws equalities. directPull = derivedBaseChangeMap; upperPull = mate of inv Ex_!; etaleOmegaPull = dualizingComplexBaseChangeMap; closed, image and upper counit equations are the defining mate equations. Ordinary domain is top (unbounded); pro domain is Ctf. gS need not be the identity, so the Frobenius case is an instance. Identity and composition laws for Hom, scalar, image and omega are present. Node changed only in lean; statement verbatim; stmt_dep modules imported; no line over 100 characters; docstrings carry source, blueprint id and the 8 proof steps; only the theorem is sorry; no hollow definition. No compile (no change; worker reports clean compile). Maintainer note: the item imports the parent theorem module Sheaf.Paper.FiniteFreeCoefficientExtension, and lem-coef-finite-free-extension lists this item in proof_deps, so the parent's stage-3 proof hits an import cycle. Move the FiniteFreeCoefficients/Sites operation definitions into a definition-node module (precedent Q129/Q76: PASS + split note). Advisory: the item's closedPull/omegaPull generalize the parent's pullback-only Sites.closedPull/proOmegaPull to arbitrary squares; the *_iso_target fields are redundant."
+ }
+}

@@ -16,21 +16,22 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 public import Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison
 
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.AlgebraicGeometry.PullbackBoundedConstructible
+import all Sheaf.Paper.SfImmersionFiniteNormalization
+import all Sheaf.Paper.SfImmersionRoosNormalization
+import all Sheaf.Paper.CompletedPullbackReductionCoherence
+import all Sheaf.CategoryTheory.ExactTowerAugmentedCounitEvaluation
+import all Sheaf.Paper.StratumCompletionUnitRestriction
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Sheaf.Paper.IntegralCoefficientPresentationComparison
+import Sheaf.Paper.CompletedOpenExchangeTransport
+import all Sheaf.Paper.WeilTensorProduct
+import Sheaf.CategoryTheory.StrictRoosModel
+import all Sheaf.Paper.CompletedTowerPullback
+import all Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.Paper.PbcQbarCompletedPullback
+import all Sheaf.CategoryTheory.ExactAdjointTowerModels
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import Sheaf.CategoryTheory.RoosComparisonHorizontalCoherence
 
 /-!
 # Ordinary immersion pullback and strict completed pullback
@@ -45,9 +46,28 @@ universal derived counits, or the two coordinates of a strict Roos complex.
 -/
 
 @[expose] public noncomputable section
+set_option linter.unusedVariables false
+set_option linter.unusedSectionVars false
+set_option linter.unusedSimpArgs false
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+section NormalizationProofs
+
+attribute [-instance] CategoryTheory.ringedConstantTowerModulesAbelian
+attribute [-instance] CategoryTheory.ringedConstantTowerTowersAbelian
+attribute [-instance] CategoryTheory.ringedConstantTowerAdditive
+attribute [-instance] CategoryTheory.strictTowerConstantAdditive
+attribute [-instance] CategoryTheory.strictTowerLimitAdditive
+
+attribute [local irreducible] AlgebraicGeometry.Scheme.AdicCoefficients.ringSystem
+attribute [local irreducible] CategoryTheory.Limits.limit
+attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
@@ -71,7 +91,22 @@ theorem quotientEquiv_exists (n : ℕ) :
       ∀ a : PbcIntegralRing l E,
         e (Ideal.Quotient.mk ((pbcIntegralDatum l E).ideal ^ (n + 1)) a) =
           ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) a.down) := by
-  sorry
+  let e : PbcIntegralRing l E ≃+* Padic.coefficientExtensionIntegers l E :=
+    ULift.ringEquiv
+  have hI : Padic.coefficientExtensionIdeal l E (n + 1) =
+      Ideal.map e.toRingHom ((pbcIntegralDatum l E).ideal ^ (n + 1)) := by
+    simp [pbcIntegralDatum, Padic.coefficientExtensionIdeal, Ideal.map_pow,
+      Ideal.map_span, Set.image_singleton, e, pbcUniformizer]
+    rfl
+  let q := (Ideal.quotientEquiv _ _ e hI).trans ULift.ringEquiv.symm
+  refine ⟨q, ?_, ?_⟩
+  · intro a
+    rfl
+  · intro q' hq'
+    apply RingEquiv.ext
+    intro x
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    exact hq' a
 
 /-- Canonical quotient size transport, fixed on every quotient representative.
 Source: localization Step 6
@@ -99,7 +134,9 @@ theorem completedRingIso_exists (T : Scheme.{u}) :
         completedIntegralCommRingSheafUnrestricted l E T,
       ∀ n : ℕ, e.hom ≫ completedIntegralCommRingProjectionUnrestricted l E T n =
         pbcAdicProjection T (pbcIntegralDatum l E) n ≫ (finiteRingIso l E T n).hom := by
-  sorry
+  obtain ⟨_, h⟩ := (IntegralCoefficientPresentation.comparison l E T).2.2.2
+  exact (h (quotientEquiv l E)
+    (fun n ↦ (quotientEquiv_exists l E n).exists.choose_spec)).2.2.1
 
 /-- The projection-normalized identification of the two completed coefficient sheaves.
 Source: localization Step 6
@@ -116,16 +153,20 @@ abbrev transport (T : Scheme.{u}) :
 
 variable {X Y : Scheme.{u}} (f : Y ⟶ X)
 
+private theorem moduleFunctor_eq :
+    pbcActualModulePull f (pbcIntegralDatum l E) =
+      proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f) := by
+  exact completedModulePullback_eq_exact f (pbcIntegralDatum l E)
+
 /-- Equality of the two specified ordinary tensor-pullback objects.
 Source: localization Step 6, Step 1; Stacks 03EK
 (blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: the coefficient maps have the same finite projections, hence are equal.
-The recorded scalar-extension functor has changeOfRings as its actual objects;
-substitution identifies the displayed objects. -/
+Proof: the canonical exact-pullback theorem identifies the full module functors.
+Evaluating that functor equality at M gives the displayed object equality. -/
 theorem moduleObj_eq (M : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) :
     (pbcActualModulePull f (pbcIntegralDatum l E)).obj M =
       (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f)).obj M := by
-  sorry
+  exact CategoryTheory.Functor.congr_obj (moduleFunctor_eq l E f) M
 
 /-- The object identifications intertwine the actual tensor maps.
 Source: localization Step 6, Step 1
@@ -137,8 +178,9 @@ theorem moduleObj_eq_naturality
     (pbcActualModulePull f (pbcIntegralDatum l E)).map a ≫
         eqToHom (moduleObj_eq l E f N) =
       eqToHom (moduleObj_eq l E f M) ≫
-        (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f)).map a := by
-  sorry
+        (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f)).map a := by 
+  have h := moduleFunctor_eq l E f
+  simpa only [eqToIso.hom, eqToHom_app] using (eqToIso h).hom.naturality a
 
 /-- The identity-on-tensor-data ordinary pullback identification.
 Source: localization Step 6, Step 1
@@ -164,7 +206,14 @@ theorem derivedIso_exists :
         pbcActualPullCounit f (pbcIntegralDatum l E) ≫
           whiskerRight (NatTrans.mapHomotopyCategory (moduleIso l E f).hom (.up ℤ))
             DerivedCategory.Qh := by
-  sorry
+  have : (pbcActualDerivedPull f (pbcIntegralDatum l E)).IsLeftDerivedFunctor
+      (pbcActualPullCounit f (pbcIntegralDatum l E))
+      (HomotopyCategory.quasiIso
+        (pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) (.up ℤ)) := by
+    change (completedOrdinaryPullback f (pbcIntegralDatum l E)).IsLeftDerivedFunctor
+      (completedOrdinaryPullbackCounit f (pbcIntegralDatum l E)) _
+    infer_instance
+  exact exact_left_derived_iso _ _ _ _ (moduleIso l E f)
 
 /-- The counit-normalized comparison Lu* = u*, with u* computed termwise.
 Source: localization Step 6, Step 1
@@ -228,13 +277,23 @@ def restrictedComparison (n : ℕ) :
       (pbcDerivedRestrict ((pbcIntegralDatum l E).projection Y n)) ≪≫
     Functor.associator _ _ _
 
+attribute [local irreducible] pbcIntegralDatum
+
+attribute [local irreducible] reductionChange reductionDerivedChange
+attribute [local irreducible] Functor.mapHomotopyCategory
+attribute [local irreducible] Functor.mapHomotopyCategoryFactors
+attribute [local irreducible] completedReductionModuleTowerFunctor completedReductionTower
+attribute [local irreducible] Functor.mapDerivedCategory
+attribute [local irreducible] Functor.mapDerivedCategoryFactors
+attribute [local irreducible] Functor.mapDerivedCategoryFactorsh
+
 /-- The finite comparison respects its units and every quotient transition and composite.
 Source: localization Step 6, Steps 2 and 5
 (blueprint: lem-sf-immersion-completed-pullback-comparison).
-Proof: on a flat-term K-flat representative both sides are the balancing map on
-pure tensors. The coefficient quotient maps carry 1 to 1 and compose as their
-quotient homomorphisms. Therefore the unit square, each transition square and
-all successive quotient squares commute before localization. -/
+Proof: the inverse-mate unit identity gives the unit square. The normalized
+strict reduction comparison gives each transition square by naturality of derived
+tower transitions and their evaluation interchanges. Composition of localized
+evaluation transitions gives the quotient cocycle through the finite evaluation isomorphisms. -/
 theorem finite_compatibility :
     (∀ (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (n : ℕ),
       ((pbcIntegralDatum l E).pull f).map ((reductionUnit l E X n).app K) ≫
@@ -249,7 +308,9 @@ theorem finite_compatibility :
         (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c),
       reductionTransition l E T c b hbc K ≫ reductionTransition l E T b a hab K =
         reductionTransition l E T c a (hab.trans hbc) K) := by
-  sorry
+  refine ⟨fun K n ↦ generic_finite_unit (pbcIntegralDatum l E) f K n,
+    (fun K b a h ↦ generic_finite_transition (pbcIntegralDatum l E) f K b a h), ?_⟩
+  exact fun T K c b a hab hbc ↦ generic_finite_cocycle (pbcIntegralDatum l E) T K c b a hab hbc
 
 /-- Evaluation of tower pullback is ordinary pullback of the evaluated tower.
 Source: localization Step 6, Step 2
@@ -263,7 +324,7 @@ theorem moduleTowerEvaluation_eq (n : ℕ) :
       reductionTowerEvaluation X
         (reductionModuleRing X ((pbcIntegralDatum l E).completedRing X)) n ⋙
         proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f) := by
-  sorry
+  rfl
 
 /-- Derive the identity-on-levels evaluation comparison.
 Source: localization Step 6, Step 2
@@ -293,6 +354,8 @@ def completedProjection
     ((pbcIntegralDatum l E).pull f).map
       ((completedReductionEvaluation X (pbcIntegralDatum l E) n).app K)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Finite projections preserve the specified completion unit and all quotient maps.
 Source: localization Step 6, Step 5
 (blueprint: lem-sf-immersion-completed-pullback-comparison).
@@ -307,7 +370,81 @@ theorem completedProjection_compatibility :
       completedProjection l E f K b ≫
           ((pbcIntegralDatum l E).pull f).map (reductionTransition l E X b a h K) =
         completedProjection l E f K a) := by
-  sorry
+  let d := pbcIntegralDatum l E
+  have he (n : ℕ) : towerEvaluationIso l E f n = stratumTowerEvaluationIso d f n := by
+    simp only [towerEvaluationIso, stratumTowerEvaluationIso, moduleTowerEvaluation_eq,
+      eqToIso_refl]
+    rfl
+  constructor
+  · intro K n
+    change PbcCompletedDerived X d at K
+    let M := (completedReductionTower X d).obj K
+    let π := (completedRlimProjection Y (d.completedRing Y) n).app ((d.towerPull f).obj M)
+    let v := (completedReductionEvaluation X d n).app K
+    change d.ordinaryToCompleted f K ≫
+      (π ≫ (towerEvaluationIso l E f n).hom.app M ≫ (d.pull f).map v) = _
+    rw [he]
+    have hp := generic_augmented_projection d f
+      ((completedReductionAugmentation d X).app K) n
+    change d.ordinaryToCompleted f K ≫ π ≫
+      (stratumTowerEvaluationIso d f n).hom.app M = _ at hp
+    calc
+      _ = (d.ordinaryToCompleted f K ≫ π ≫
+          (stratumTowerEvaluationIso d f n).hom.app M) ≫ (d.pull f).map v := by
+        exact ((Category.assoc (d.ordinaryToCompleted f K)
+          (π ≫ (stratumTowerEvaluationIso d f n).hom.app M) ((d.pull f).map v)).trans
+          (congrArg (fun z ↦ d.ordinaryToCompleted f K ≫ z)
+            (Category.assoc π ((stratumTowerEvaluationIso d f n).hom.app M)
+              ((d.pull f).map v)))).symm
+      _ = _ := by
+        rw [hp, ← Functor.map_comp, Category.assoc]
+        erw [sfCompletedReductionAugmentation_level_unit]
+        rfl
+  · intro K b a h
+    change PbcCompletedDerived X d at K
+    let M := (completedReductionTower X d).obj K
+    let N := (d.towerPull f).obj M
+    let F := d.pull f
+    let π (n : ℕ) := (completedRlimProjection Y (d.completedRing Y) n).app N
+    let v (n : ℕ) := (stratumTowerEvaluationIso d f n).hom.app M
+    let e (n : ℕ) := (completedReductionEvaluation X d n).app K
+    let qX := (pbcTowerTransition X (pbcAdicCompletion X d) b a h).app M
+    let qY := (pbcTowerTransition Y (pbcAdicCompletion Y d) b a h).app N
+    have hv : qY ≫ v a = v b ≫ F.map qX := by
+      have hh := CategoryTheory.ExactTowerAugmentedCounit.interchange_transition
+        (stratumModulePull d f) (homOfLE h).op M
+      change qY ≫
+        (towerDerivedEvaluationInterchange (stratumModulePull d f) (op a)).hom.app M =
+        (towerDerivedEvaluationInterchange (stratumModulePull d f) (op b)).hom.app M ≫
+          F.map qX at hh
+      simpa only [v, stratumTowerEvaluationIso, towerDerivedEvaluationInterchange,
+        Iso.trans_hom, NatTrans.comp_app,
+        Functor.mapDerivedCategoryNatIso_refl, NatTrans.id_app, Category.id_comp,
+        Category.comp_id, Category.assoc] using hh
+    have hx : e b ≫ generic_reductionTransition d X b a h K = qX ≫ e a :=
+      generic_evaluation_transition d X K b a h
+    have hp : π b ≫ qY = π a := projection_transition Y (d.completedRing Y) N a b h
+    dsimp only [completedProjection]
+    rw [he, he]
+    change (π b ≫ v b ≫ F.map (e b)) ≫
+      F.map (generic_reductionTransition d X b a h K) = π a ≫ v a ≫ F.map (e a)
+    simp only [Category.assoc]
+    erw [← F.map_comp, hx, F.map_comp, ← Category.assoc (v b), ← hv,
+      ← Category.assoc, ← Category.assoc (π b), hp, Category.assoc]
+    rfl
+
+private theorem ordinary_transport_eq :
+    cbcDatumOrdinaryTransport (pbcIntegralDatum l E) f = derivedIso l E f := by
+  symm
+  apply (cbcDatumOrdinaryTransport_exists (pbcIntegralDatum l E) f).unique
+  · have hμ : moduleIso l E f =
+        eqToIso (cbcDatumModulePull_eq (pbcIntegralDatum l E) f) := by
+      exact component_iso_eqToIso (cbcDatumModulePull_eq (pbcIntegralDatum l E) f)
+        (moduleObj_eq l E f) (fun a ↦ moduleObj_eq_naturality l E f a)
+    apply normalized_exact_counit (he := cbcDatumModulePull_eq (pbcIntegralDatum l E) f)
+    simpa only [← hμ, derivedIso, pbcActualDerivedPull, pbcActualPullCounit] using
+      (derivedIso_exists l E f).exists.choose_spec
+  · exact (cbcDatumOrdinaryTransport_exists (pbcIntegralDatum l E) f).exists.choose_spec
 
 /-- Identify the two strict constructions by their specified augmentation units.
 Source: localization Step 6, Steps 2 and 5
@@ -322,7 +459,32 @@ theorem strictIso_exists :
       ∀ K : PbcCompletedDerived X (pbcIntegralDatum l E),
         (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) f).app K ≫ e.hom.app K =
           (derivedIso l E f).hom.app K ≫ (pbcIntegralDatum l E).ordinaryToCompleted f K := by
-  sorry
+  let d := pbcIntegralDatum l E
+  let e := cbcDatumActualStrictTransport d f
+  have he (K : PbcCompletedDerived X d) :
+      (pbcActualStrictCompletedPullUnit d f).app K ≫ e.hom.app K =
+        (derivedIso l E f).hom.app K ≫ d.ordinaryToCompleted f K := by
+    rw [← ordinary_transport_eq]
+    exact cbcDatumActualStrictTransport_unit d f K
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  obtain ⟨α, hα⟩ := strict_completion l E f r a ha K
+  have hcomplete := (wfCompletionReflector Y d r a ha).1
+    ((pbcActualDerivedPull f d).obj K)
+  have hsource : WfIsComplete Y d r a ha
+      ((pbcActualStrictCompletedPull d f).obj K) :=
+    (wfComplete_iso Y d r a ha α).mpr hcomplete
+  have htarget := (wfComplete_iso Y d r a ha (e.app K)).mp hsource
+  apply (cancel_epi α.inv).mp
+  apply ((wfCompletionReflector Y d r a ha).2 _ _ htarget).injective
+  rw [← hα]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  exact (he' K).trans (he K).symm
+
 
 /-- The unit-normalized identification of the actual strict construction.
 Source: localization Step 6, Step 5
@@ -340,6 +502,49 @@ def actualCompletedProjection
   (strictIso l E f).hom.app K ≫ completedProjection l E f K n ≫
     (restrictedComparison l E f n).hom.app K ≫
     (restrictedReduction l E Y n).map ((derivedIso l E f).inv.app K)
+
+private theorem scalarTransition_natural (T : Scheme.{u})
+    {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
+    {K L : DerivedCategory (pbcModules T R)} (a : K ⟶ L) :
+    (pbcDerivedExtend φ).map a ≫ pbcReductionTransition φ ψ χ h L =
+      pbcReductionTransition φ ψ χ h K ≫
+        (pbcDerivedRestrict ψ).map ((pbcDerivedExtend χ).map a) := by
+  let adj := pbcDerivedScalarAdjunction φ
+  apply (adj.homEquiv K _).injective
+  dsimp only [pbcReductionTransition]
+  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right,
+    Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  simp only [Category.assoc]
+  have hn := (pbcDerivedRestrictComp φ ψ χ h).inv.naturality
+    ((pbcDerivedExtend χ).map a)
+  dsimp only [Functor.comp_map] at hn
+  have hu := (pbcDerivedScalarAdjunction χ).unit.naturality a
+  dsimp only [Functor.id_map, Functor.comp_map] at hu
+  rw [← hn, ← Category.assoc, hu, Category.assoc]
+
+private theorem reductionTransition_natural (T : Scheme.{u})
+    (b a : ℕ) (h : a ≤ b)
+    {K L : PbcCompletedDerived T (pbcIntegralDatum l E)} (g : K ⟶ L) :
+    (restrictedReduction l E T b).map g ≫ reductionTransition l E T b a h L =
+      reductionTransition l E T b a h K ≫ (restrictedReduction l E T a).map g := by
+  dsimp only [reductionTransition, restrictedReduction, Functor.comp_map]
+  erw [← Category.assoc, ← Functor.map_comp,
+    scalarTransition_natural, Functor.map_comp, Category.assoc]
+  have hn := (pbcDerivedRestrictComp
+    (pbcAdicProjection T (pbcIntegralDatum l E) b)
+    (pbcAdicQuotient T (pbcIntegralDatum l E) b a h)
+    (pbcAdicProjection T (pbcIntegralDatum l E) a)
+    (pbcAdicProjection_comp T (pbcIntegralDatum l E) b a h)).hom.naturality
+      ((pbcDerivedExtend (pbcAdicProjection T (pbcIntegralDatum l E) a)).map g)
+  dsimp only [Functor.comp_map] at hn
+  exact (congrArg (fun z ↦
+    (pbcDerivedRestrict (pbcAdicProjection T (pbcIntegralDatum l E) b)).map
+      (pbcReductionTransition (pbcAdicProjection T (pbcIntegralDatum l E) b)
+        (pbcAdicQuotient T (pbcIntegralDatum l E) b a h)
+        (pbcAdicProjection T (pbcIntegralDatum l E) a)
+        (pbcAdicProjection_comp T (pbcIntegralDatum l E) b a h) K) ≫ z) hn).trans
+      (Category.assoc _ _ _).symm
 
 /-- The original strict comparison commutes with every actual finite projection.
 Source: localization Step 6, Steps 2 and 5
@@ -359,7 +564,24 @@ theorem actualCompletedProjection_compatibility :
       actualCompletedProjection l E f K b ≫ reductionTransition l E Y b a h
           ((pbcActualDerivedPull f (pbcIntegralDatum l E)).obj K) =
         actualCompletedProjection l E f K a) := by
-  sorry
+  constructor
+  · intro K n
+    dsimp only [actualCompletedProjection]
+    have hs := (strictIso_exists l E f).exists.choose_spec K
+    change _ ≫ (strictIso l E f).hom.app K = _ at hs
+    try simp only [Category.assoc]
+    erw [reassoc_of% hs,
+      reassoc_of% (completedProjection_compatibility l E f).1 K n,
+      reassoc_of% (finite_compatibility l E f).1 K n]
+    have hn := (reductionUnit l E Y n).naturality ((derivedIso l E f).inv.app K)
+    dsimp only [Functor.id_map] at hn
+    erw [← hn, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  · intro K b a h
+    dsimp only [actualCompletedProjection]
+    try simp only [Category.assoc]
+    erw [reductionTransition_natural l E Y b a h ((derivedIso l E f).inv.app K),
+      ← reassoc_of% (finite_compatibility l E f).2.1 K b a h,
+      reassoc_of% (completedProjection_compatibility l E f).2 K b a h]
 
 /-- The right mate of the identity-on-constant-towers inverse-image comparison.
 Source: localization Step 6, Step 4
@@ -376,6 +598,35 @@ def rlimComparison
         ((pbcIntegralDatum l E).towerPull f).map
           (((pbcIntegralDatum l E).constantRlimAdjunction X).counit.app M))
 
+private theorem mate_augmentation
+    {C D S U : Type*} [Category C] [Category D] [Category S] [Category U]
+    (DX : C ⥤ S) (LX : S ⥤ C) (DY : D ⥤ U) (LY : U ⥤ D)
+    (ax : DX ⊣ LX) (ay : DY ⊣ LY) (H : C ⥤ D) (T : S ⥤ U)
+    (j : H ⋙ DY ⟶ DX ⋙ T) (K : C) (M : S) (i : DX.obj K ⟶ M) :
+    ay.unit.app (H.obj K) ≫ LY.map (j.app K ≫ T.map i) =
+      H.map (ax.unit.app K ≫ LX.map i) ≫
+        (ay.unit.app (H.obj (LX.obj M)) ≫
+          LY.map (j.app (LX.obj M) ≫ T.map (ax.counit.app M))) := by
+  let h := ax.unit.app K ≫ LX.map i
+  have hi : DX.map h ≫ ax.counit.app M = i := by
+    dsimp only [h]
+    rw [DX.map_comp, Category.assoc]
+    have hn := ax.counit.naturality i
+    dsimp only [Functor.comp_map, Functor.id_map] at hn
+    rw [hn, ← Category.assoc]
+    exact (congrArg (fun f ↦ f ≫ i) (ax.left_triangle_components K)).trans
+      (Category.id_comp i)
+  have hn := ay.unit.naturality (H.map h)
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  have hj := j.naturality h
+  dsimp only [Functor.comp_map] at hj
+  change _ = H.map h ≫ _
+  symm
+  rw [← Category.assoc, hn, Category.assoc, ← LY.map_comp]
+  congr 1
+  rw [← Category.assoc, hj, Category.assoc, ← T.map_comp, hi]
+  rfl
+
 /-- The canonical completion comparison factors through this actual Rlim mate.
 Source: localization Step 6, Step 5
 (blueprint: lem-sf-immersion-completed-pullback-comparison).
@@ -385,12 +636,19 @@ theorem ordinaryToCompleted_eq (K : PbcCompletedDerived X (pbcIntegralDatum l E)
     (pbcIntegralDatum l E).ordinaryToCompleted f K =
       ((pbcIntegralDatum l E).pull f).map ((pbcIntegralDatum l E).completionUnit X K) ≫
         rlimComparison l E f ((completedReductionTower X (pbcIntegralDatum l E)).obj K) := by
-  sorry
+  exact mate_augmentation _ _ _ _
+    ((pbcIntegralDatum l E).constantRlimAdjunction X)
+    ((pbcIntegralDatum l E).constantRlimAdjunction Y)
+    ((pbcIntegralDatum l E).pull f) ((pbcIntegralDatum l E).towerPull f)
+    ((pbcIntegralDatum l E).derivedConstantPullbackIso f).inv K _
+    ((completedReductionAugmentation (pbcIntegralDatum l E) X).app K)
 
 /-- The ordinary module inverse image with canonical completed coefficients.
 Source: localization Step 6, Step 1
 (blueprint: lem-sf-immersion-completed-pullback-comparison). -/
-abbrev modulePull := proEtaleRingModulePullback f _ _
+abbrev modulePull :
+    pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) ⥤
+      pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E)) := proEtaleRingModulePullback f _ _
   ((pbcIntegralDatum l E).integralRingIso f)
 
 /-- Apply the specified ordinary inverse image to all terms of a complex.
@@ -414,7 +672,7 @@ theorem complexEvaluation_eq
     (n : ℕ) :
     (complexPull l E f).obj (M.asFunctor.obj (op n)) =
       ((towerComplexPull l E f).obj M).asFunctor.obj (op n) := by
-  sorry
+  rfl
 
 /-- The actual product comparison, determined by its projections.
 Source: localization Step 6, Step 4
@@ -428,6 +686,19 @@ def productComparison
     (fun n : ℕ ↦ (complexPull l E f).map
     (Pi.π (fun k : ℕ ↦ M.asFunctor.obj (op k)) n) ≫
       eqToHom (complexEvaluation_eq l E f M n))
+
+private theorem modulePull_preservesProducts [IsImmersion f] :
+    PreservesLimitsOfShape (Discrete ℕ) (modulePull l E f) := by
+  obtain ⟨_, _, _, _, _, _, h⟩ :=
+    (proEtale_immersion_inverseImage_preservesLimits f).2.2
+      ((pbcIntegralDatum l E).completedRing X)
+  obtain ⟨P, hobj, hmap, _, _, _, hP⟩ :=
+    h ((pbcIntegralDatum l E).completedRing Y) ((pbcIntegralDatum l E).integralRingIso f)
+  have he : P = modulePull l E f := CategoryTheory.Functor.ext hobj hmap
+  have : PreservesLimitsOfSize.{u + 1, u + 1} (modulePull l E f) := he ▸ hP
+  have : PreservesLimitsOfSize.{0, 0} (modulePull l E f) :=
+    preservesSmallestLimits_of_preservesLimits _
+  infer_instance
 
 /-- The coordinatewise Roos comparison, uniquely normalized by the product map.
 Source: localization Step 6, Step 4; Stacks 08TC
@@ -447,7 +718,12 @@ theorem roosIso_exists [IsImmersion f]
           biprodComparison (modulePull l E f) _ _ ≫
             biprod.map ((productComparison l E f M).f p)
               ((productComparison l E f M).f (p + 1)) := by
-  sorry
+  have := modulePull_preservesProducts l E f
+  have hpc : productComparison l E f M = roosProductComparison (modulePull l E f) M :=
+    roos_product_comparison_formula (modulePull l E f) M (complexEvaluation_eq l E f M)
+  rw [hpc]
+  exact roos_iso_unique (modulePull l E f) M
+
 
 /-- The strict Roos isomorphism; its data is fixed on both product coordinates.
 Source: localization Step 6, Step 4
@@ -468,7 +744,12 @@ theorem roosMap_exists (T : Scheme.{u})
       ∀ p : ℤ, b.f (p + 1) ≫ (strictRoosCoordinates N p).hom =
         (strictRoosCoordinates M p).hom ≫
           biprod.map ((strictRoosProductMap a).f p) ((strictRoosProductMap a).f (p + 1)) := by
-  sorry
+  refine ⟨roosF.map a, (fun p ↦ roosF_map_χ a p), ?_⟩
+  intro b hb
+  ext k : 1
+  obtain ⟨p, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+  apply (cancel_mono (strictRoosCoordinates N p).hom).1
+  exact (hb p).trans (roosF_map_χ a p).symm
 
 /-- The strict map of the actual shifted Roos cones.
 Source: localization Step 6, Step 4
@@ -487,7 +768,12 @@ theorem roosInclusion_exists (T : Scheme.{u})
     ∃! a : limit I.asFunctor ⟶ strictRoosComplex I,
       ∀ p : ℤ, a.f (p + 1) ≫ (strictRoosCoordinates I p).hom =
         biprod.lift 0 ((Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))).f (p + 1)) := by
-  sorry
+  refine ⟨roosι I, (fun p ↦ roosι_χ I p), ?_⟩
+  intro a ha
+  ext k : 1
+  obtain ⟨p, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+  apply (cancel_mono (strictRoosCoordinates I p).hom).1
+  exact (ha p).trans (roosι_χ I p).symm
 
 /-- The compatible-sequence inclusion, fixed on both cone coordinates.
 Source: localization Step 6, Step 4
@@ -508,7 +794,21 @@ theorem termwiseLimitIso_exists (T : Scheme.{u})
         (.up ℤ)).obj I ≅ limit I.asFunctor,
       ∀ (n : ℕ) (p : ℤ), e.hom.f p ≫ (limit.π I.asFunctor (op n)).f p =
         limit.π (I.X p) (op n) := by
-  sorry
+  let c := HomologicalComplex.coneOfHasLimitEval I.asFunctor
+  let hc := HomologicalComplex.isLimitConeOfHasLimitEval I.asFunctor
+  let e := (limit.isoLimitCone ⟨c, hc⟩).symm
+  have he (n : ℕ) (p : ℤ) :
+      e.hom.f p ≫ (limit.π I.asFunctor (op n)).f p =
+        limit.π (I.X p) (op n) := by
+    exact congrArg (fun f ↦ HomologicalComplex.Hom.f f p)
+      (limit.isoLimitCone_inv_π ⟨c, hc⟩ (op n))
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply limit.hom_ext
+  intro n
+  ext p : 1
+  exact (he' n.unop p).trans (he n.unop p).symm
 
 /-- The projection-normalized comparison of the two ordinary limit computations.
 Source: localization Step 6, Step 4
@@ -516,6 +816,26 @@ Source: localization Step 6, Step 4
 def termwiseLimitIso (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :=
   (termwiseLimitIso_exists l E T I).exists.choose
+
+private theorem roosMap_eq (T : Scheme.{u})
+    {M N : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ}
+    (a : M ⟶ N) : roosMap l E T a = roosF.map a := by
+  exact (roosMap_exists l E T a).unique
+    (roosMap_exists l E T a).exists.choose_spec (fun p ↦ roosF_map_χ a p)
+
+private theorem roosInclusion_eq (T : Scheme.{u})
+    (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
+    roosInclusion l E T I = roosι I := by
+  exact (roosInclusion_exists l E T I).unique
+    (roosInclusion_exists l E T I).exists.choose_spec (fun p ↦ roosι_χ I p)
+
+private theorem termwiseLimitIso_eq (T : Scheme.{u})
+    (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
+    termwiseLimitIso l E T I = ExactAdjointTowerModels.ordinaryIso.app I := by
+  apply (termwiseLimitIso_exists l E T I).unique
+    (termwiseLimitIso_exists l E T I).exists.choose_spec
+  intro n p
+  exact ExactAdjointTowerModels.ordinaryIso_components I (op n) p
 
 /-- Roos computes the recorded Rlim, naturally and with its universal derived unit.
 Source: localization Step 6, Step 4; Stacks 07KC and 08TC
@@ -543,7 +863,19 @@ theorem roosRlim_exists (T : Scheme.{u}) :
           DerivedCategory.Q.map (termwiseLimitIso l E T I).inv ≫
             (Functor.rightDerivedFunctorObjQIso
               (completedTowerLimit T ((pbcIntegralDatum l E).completedRing T)) I).inv) := by
-  sorry
+  classical
+  let R := pbcAdicCompletion T (pbcIntegralDatum l E)
+  let A := pbcModules T R
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    integralCoefficientAbLocallyBijective.{u, 0} T
+  let : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ A) :=
+    reductionTower_isGrothendieckAbelian T (reductionModuleRing T R)
+  let : HasExactLimitsOfShape (Discrete ℕ) A :=
+    ProEt.products_exact.{u, u, 0} T (reductionModuleRing T R) ℕ
+  simp only [roosMap_eq, roosInclusion_eq, termwiseLimitIso_eq]
+  exact normalized_roos_iso_unique (A := A)
 
 /-- The resolution-independent Roos identification fixed by the derived unit.
 Source: localization Step 6, Step 4
@@ -629,3 +961,5 @@ theorem immersion_completed_pullback_comparison [IsImmersion f] :
 
 end ImmersionCompletedPullback
 end AlgebraicGeometry.Scheme
+
+end NormalizationProofs

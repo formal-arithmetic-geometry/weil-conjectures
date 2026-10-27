@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-torus-extreme-weight-affine-chart",
+ "kind": "statement",
+ "title": "Extremal torus weights give affine projective attraction charts",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], let $T\\simeq\\mathbf G_m^r$ be a split torus [def-sc-group-scheme, def-sc-gm-ga], and let $E\\ne0$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace] with a rational $T$-representation, meaning a group-scheme homomorphism $T\\to\\operatorname{GL}(E)$ [def-sc-general-linear-group]. Let $X$ be a nonempty smooth connected projective $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-projective-morphism], with a $T$-equivariant closed immersion $i:X\\hookrightarrow\\mathbf P(E)$ [def-weil-closed-immersion]; $\\mathbf P(E)$ is projective space parametrizing lines [def-nagata-projective-space-base-change]. Assume that the lines $i(x)$, for $x\\in X(k)$, linearly span $E$, and that the fixed subscheme $X^T$ is a finite nonempty disjoint union of reduced $k$-points. Here $X^T$ represents points fixed by the action after every algebra extension. Write $E=\\bigoplus_{\\chi\\in\\Omega}E_\\chi$ for its decomposition into nonzero character eigenspaces, where $\\chi:T\\to\\mathbf G_m$ is a group-scheme homomorphism and $T$ acts on $E_\\chi$ by scalar $\\chi$. There exists a cocharacter $\\lambda:\\mathbf G_m\\to T$ such that the integers $m_\\chi$ given by $\\chi(\\lambda(t))=t^{m_\\chi}$ are pairwise distinct. For every such $\\lambda$, let $\\chi_0$ be the unique character of least $m_\\chi$. Then $E_{\\chi_0}$ has dimension one and its line is $i(x_0)$ for a unique $x_0\\in X^T(k)$. For any nonzero $e_0\\in E_{\\chi_0}$, define $f_0\\in E^*=\\operatorname{Hom}_k(E,k)$ by $f_0(e_0)=1$ and $f_0(E_\\chi)=0$ for $\\chi\\ne\\chi_0$. The open subscheme $U=i^{-1}(D(f_0))$, where $D(f_0)$ parametrizes lines on which $f_0$ is nonzero [def-weil-open-immersion], is affine [def-weil-affine-spectrum], and $$U(k)=\\{y\\in X(k):x_0\\in\\overline{T(k)\\cdot y}\\}.$$ The closure is in the underlying Zariski space of $X$. The case $r=0$, $X=\\operatorname{Spec}k$, $\\dim E=1$ is included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.12, printed pp.234--235 (weight decomposition); Lemma 13.51, Proposition 13.52 and Proposition 13.53(a), printed pp.274--276; the coordinate description of the open cell in the proof of Theorem 17.65, printed p.374."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-projective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-sfb-torus-projective-weight-data",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-torus-representation-weight-decomposition] to obtain the finite decomposition into nonzero character spaces. Characters of the chosen split torus are Laurent monomials: a character corresponds to a group-like Laurent polynomial, and comparing coefficients in its coproduct forces exactly one monomial, with coefficient one. Thus [lem-sfb-projective-torus-fixed-weight-schemes] applies. It gives a separating cocharacter, and, for any such cocharacter, identifies the fixed subscheme of $X$ for its action with $X^T$. Fix one, write $E_0=E_{\\chi_0}$ for its least-weight space and $m_0=m_{\\chi_0}$. Also [lem-weil-pbc-smooth-scheme-over-field-regular] makes $X$ regular and locally Noetherian; [lem-sc-regular-connected-integral] then makes the nonempty connected $X$ integral. In particular $|X|$ is irreducible.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-projective-torus-fixed-weight-schemes",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, pp.234--235; Lemma 13.51, p.274; Proposition 13.53(a), pp.275--276 (irreducibility input); Stacks Tags 056S (lemma-smooth-regular), 0569 (lemma-regular-normal), 033N (lemma-normal-locally-Noetherian)."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be the open set where the projection of the tautological line to $E_0$ is nonzero. Projection defines $p:W\\to\\mathbf P(E_0)$. Here are the coordinates, including the needed scheme-theoretic factorization. Choose a weight basis; on a chart with a least-weight coordinate $z_i\\ne0$, the coordinates of $p$ are $z_j/z_i$ for $e_j\\in E_0$, and zero for the other coordinates. They glue, since changing $i$ rescales the same projected vector. For an affine open $\\operatorname{Spec}B$ of this chart in $W$, the formulas\n$$z_j/z_i\\longmapsto t^{m_{\\chi_j}-m_0}(z_j/z_i)$$\ndefine a morphism $\\mathbf A^1_B\\to D_+(z_i)$ by [lem-weil-pbc-projective-space-standard-charts]. All exponents are nonnegative; at zero this is $p$. On $t\\ne0$ this is the given cocharacter action and lies in $X$. The affine ideal of $X\\cap D_+(z_i)$, supplied by [def-weil-closed-immersion], therefore maps to zero in $B[t,t^{-1}]$, hence in $B[t]$, since localization at the indeterminate is injective even when $B$ has zero divisors. Thus the morphism factors through $X$, and so does its value $p$ at zero. A line in $E_0$ is fixed by $T$ after every algebra extension because $T$ acts there by a scalar. The representing property of the given $X^T$ therefore makes $p$ a morphism $W\\to X^T$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 13.50 and Proposition 13.53(a), pp.274--276: minimum-weight limit formula, expanded on standard charts; Stacks Tag 01QO (lemma-closed-immersion), affine ideal description."
+   }
+  },
+  {
+   "text": "The spanning hypothesis implies $W\\ne\\varnothing$: otherwise every line $i(y)$ for $y\\in X(k)$ would have zero projection to the nonzero space $E_0$. Being a nonempty open subset of the irreducible $X$, $W$ is irreducible. The continuous image $p(|W|)$ in the finite disjoint union $|X^T|$ is consequently a singleton, say $x_0$. The morphism $p$ factors through that open-and-closed component $\\operatorname{Spec}k$, so $i(x_0)$ is a line $L\\subseteq E_0$. For every $y=[v]\\in X(k)$ with $v_0\\ne0$, we have $[v_0]=i(x_0)$, so $v_0\\in L$; when $v_0=0$ this containment also holds. Project the equality $\\operatorname{span}_k\\{i(y):y\\in X(k)\\}=E$ onto $E_0$. Its projected generators all belong to $L$, whence $E_0\\subseteq L$. As $L\\subseteq E_0$ is nonzero, $E_0=L$ has dimension one. Injectivity of the closed immersion gives uniqueness of $x_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.53(a), pp.275--276: nondegeneracy and uniqueness of the minimum-weight line; the projection argument expands the uniqueness step without requiring the full Bialynicki--Birula decomposition."
+   }
+  },
+  {
+   "text": "Choose any $e_0\\ne0$ in the now one-dimensional $E_0$ and extend it by weight bases of the other summands. Its dual coordinate $z_0$ is precisely the stated $f_0$. Thus $D(f_0)=D_+(z_0)$, which is affine with polynomial coordinates $z_j/z_0$ by [lem-weil-pbc-projective-space-standard-charts]. The affine description in [def-weil-closed-immersion] gives\n$$U=i^{-1}(D(f_0))\\simeq\\operatorname{Spec}(k[z_j/z_0:j\\ne0]/I)$$\nfor the ideal of the closed subscheme on this chart. Consequently $U$ is affine; moreover $U=W$ because $E_0$ has dimension one.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, p.374, paragraph identifying the open cell by its nonzero minimum-weight coordinate; Stacks Tag 01QO (lemma-closed-immersion), item (2)."
+   }
+  },
+  {
+   "text": "For $y=[v]\\in U(k)$, rescale $v$ so that $v_0=e_0$. The polynomial curve from step 2 is\n$$t\\longmapsto[e_0+\\sum_{\\chi\\ne\\chi_0}t^{m_\\chi-m_0}v_\\chi]\\in U.$$\nIts value at zero is $x_0$, and for $t\\in k^\\times$ it equals $\\lambda(t)y$. Since the algebraically closed field $k$ is infinite, $k^\\times$ is Zariski dense in $\\mathbf A^1_k$ (a nonzero polynomial has finitely many roots). Continuity therefore places $x_0$ in $\\overline{\\lambda(k^\\times)y}\\subseteq\\overline{T(k)y}$. Conversely, if $y\\notin U(k)$, its least-weight component is zero. Every $T(k)$-translate then belongs to the closed hyperplane $\\mathbf P(\\bigoplus_{\\chi\\ne\\chi_0}E_\\chi)$, defined by the coordinate equation $f_0=0$. Its intersection with $X$ is closed and excludes $x_0$, so $x_0\\notin\\overline{T(k)y}$. This proves exactly the asserted equality. If $r=0$, there is one weight, $W=X$ and $p=i$; the same singleton-image and spanning argument gives $\\dim E=1$, and $U=X=\\operatorname{Spec}k$ in the stated case. No nontriviality of $\\lambda$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.52, p.275, orbit-closure description; Theorem 17.65, p.374, nonzero minimum-weight coordinate description. The converse here is the invariant hyperplane equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-projective-torus-fixed-weight-schemes",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 13.53(a), pp.275--276, and the coordinate paragraph in the proof of Theorem 17.65, p.374; explicit irreducible-image projection argument replaces the tangent/attracting-point uniqueness argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected projective variety with a torus action and isolated fixed points the minimum weight line defines an affine open attraction cell equal to the set of points whose torus orbit closure contains that line",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"IsOpen.exists_smul_mem\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] (x : α) {U : Set α}, IsOpen U → U.Nonempty → ∃ c, c • x ∈ U\", \"doc\": \"In a minimal monoid action of $ M $ on a topological space $ \\\\alpha $, for every point $ x \\\\in \\\\alpha $ and every non-empty open set $ U \\\\subseteq \\\\alpha $, there exists an element $ c \\\\in M $ such th\"}\n  {\"name\": \"IsOpen.iUnion_preimage_smul\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] {U : Set α}, IsOpen U → U.Nonempty → ⋃ c, (fun x => c • x) ⁻¹' U = Set.univ\", \"doc\": \"Let $ M $ be a monoid acting minimally on a topological space $ \\\\alpha $. For any nonempty open set $ U \\\\subseteq \\\\alpha $, the union of the preimages $ \\\\bigcup_{c \\\\in M} (c \\\\cdot -)^{-1}(U) $ equals \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"AmpleSet\", \"module\": \"Mathlib/Analysis/Convex/AmpleSet\", \"type\": \"{F : Type u_1} → [inst : AddCommGroup F] → [Module ℝ F] → [TopologicalSpace F] → Set F → Prop\", \"doc\": \"A set $ s $ is called an ample set if, for every element $ x $ in $ s $, the convex hull of the connected component of $ x $ within $ s $ (with respect to the real numbers) equals the entire ambient s\"}\n  {\"name\": \"Topology.CWComplex.mapsTo\", \"module\": \"Mathlib/Topology/CWComplex/Classical/Basic\", \"type\": \"∀ {X : Type u_1} [t : TopologicalSpace X] {C : Set X} [inst : Topology.CWComplex C] (n : ℕ)\\n  (i : Topology.RelCWComplex.cell C n),\\n  ∃ I,\\n    Set.MapsTo (↑(Topology.RelCWComplex.map n i)) (Metric.sphere 0 1)\\n      (⋃ m, ⋃ (_ : m < n), ⋃ j ∈ I m, ↑(Topology.RelCWComplex.map m j) '' Metric.closedBall\", \"doc\": \"For any classical CW complex $C$, a natural number $n$, and an $n$-dimensional cell $i$ in $C$, there exists a finite collection of cells $\\\\{j\\\\}$ of dimension less than $n$ such that the characteristi\"}\n  {\"name\": \"Topology.CWComplex.mapsTo'\", \"module\": \"Mathlib/Topology/CWComplex/Classical/Basic\", \"type\": \"∀ {X : Type u} {inst : TopologicalSpace X} {C : Set X} [self : Topology.CWComplex C] (n : ℕ)\\n  (i : Topology.CWComplex.cell C n),\\n  ∃ I,\\n    Set.MapsTo (↑(Topology.CWComplex.map n i)) (Metric.sphere 0 1)\\n      (⋃ m, ⋃ (_ : m < n), ⋃ j ∈ I m, ↑(Topology.CWComplex.map m j) '' Metric.closedBall 0 1)\", \"doc\": \"For each n-dimensional cell in a classical CW complex on a topological space $X$, the characteristic map of the cell restricts to a continuous map from the boundary $\\\\partial D^n$ (unit sphere) into t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine covers of Proj, topological or CW cells, Lie-algebra weight spaces, and convex affine maps; none is the extremal-weight chart theorem for a projective torus action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bialynicki Birula open attracting cell is the complement of the hyperplane defined by projection onto the unique minimum weight eigenspace",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.RelCWComplex.openCell\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Basic\", \"type\": \"[RelCWComplex C D] (n : ℕ) (i : cell C n) : Set X\", \"doc\": \"For a relative CW complex structure on a topological space $X$ with subspace $A \\\\subseteq X$, and for each $n$-dimensional cell $i$, the open cell associated with $i$ is defined as the image of the op\"}\n  {\"name\": \"LieModule.weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, and a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspac\"}\n  {\"name\": \"LieModule.genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"Topology.RelCWComplex.Subcomplex.openCell_eq\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Subcomplex\", \"type\": \"[T2Space X] [RelCWComplex C D] (E : Subcomplex C) (n : ℕ) (i : E.I n) :\\n  openCell (C := E) n i = openCell n (i : cell C n)\", \"doc\": \"In a Hausdorff topological space $X$ with a relative CW complex structure $C$ over subspace $D$, for any subcomplex $E$ containing $D$ and any $n$-dimensional cell $i$ in $E$, the open cell associated\"}\n  {\"name\": \"LieModule.shiftedGenWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [Li\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the shifted generalized weight space associated to\"}\n  {\"name\": \"Topology.RelCWComplex.Subcomplex.openCell_subset_of_mem\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Subcomplex\", \"type\": \"[T2Space X] [RelCWComplex C D] (E : Subcomplex C) {n : ℕ} {i : cell C n} (hi : i ∈ E.I n) : openCell n i ⊆ E\", \"doc\": \"In a Hausdorff topological space $X$ with a relative CW complex structure over subspace $D$, if $E$ is a subcomplex containing the $n$-dimensional cell $i$, then the open cell associated with $i$ (def\"}\n  {\"name\": \"LieModule.genWeightSpaceOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[LieRing.IsNilpotent L] (χ : R) (x : L) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, the generalized weight space associated to a scalar $\\\\chi \\\\in R$ and element $x \\\\in \\\\mathfrak{g}$ is \"}\n  {\"name\": \"LieAlgebra.rootSpace_comap_eq_genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"(χ : H → R) : (rootSpace H χ).comap H.incl' = genWeightSpace H χ\", \"doc\": \"The preimage of the root space $\\\\mathfrak{g}_\\\\chi$ under the canonical inclusion map $\\\\mathfrak{h} \\\\hookrightarrow \\\\mathfrak{g}$ is equal to the generalized weight space associated with the root $\\\\chi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine covers of Proj, topological or CW cells, Lie-algebra weight spaces, and convex affine maps; none is the extremal-weight chart theorem for a projective torus action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weight\", \"IsAffine\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Convexity.StdSimplex.isAffineMap_weights\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.Module\", \"type\": \" (R : Type u_2) (I : Type u_5) [Semiring R] [PartialOrder R] [IsStrictOrderedRing R] : Convexity.IsAffineMap R Convexity.StdSimplex.weights\", \"doc\": \"\"}\n  {\"name\": \"Convexity.IsAffineMap.map_sum_weights\", \"module\": \"Mathlib.Geometry.Convex.ConvexSpace.Module\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} {I : Type u_5} [Semiring R] [PartialOrder R] [IsStrictOrderedRing R] [AddCommMonoid M] [Module R M] [AddCommMonoid N] [Module R N] {f : M → N} [Convexity.ConvexSpace R M] [Convexity.IsModuleConvexSpace R M] [Convexity.ConvexSpace R N] [Convexity.IsModule\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine covers of Proj, topological or CW cells, Lie-algebra weight spaces, and convex affine maps; none is the extremal-weight chart theorem for a projective torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "Bialynicki|extrem.*weight|attract.*cell|cocharacter",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine covers of Proj, topological or CW cells, Lie-algebra weight spaces, and convex affine maps; none is the extremal-weight chart theorem for a projective torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a nondegenerate projective torus representation with finite fixed locus the extremal weight space is one dimensional and its nonzero coordinate chart is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieModule.zero_lt_finrank_genWeightSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"If the generalized weight space associated to a weight function $\\\\chi : L \\\\to R$ in a Lie module $M$ is non-trivial (i.e., not equal to the zero submodule), then its finite rank as an $R$-module is st\"}\n  {\"name\": \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"There exist integers $p < 0$ and $q > 0$ such that the generalized weight spaces of the Lie module $M$ associated to the weight functions $p \\\\cdot \\\\chi_1 + \\\\chi_2$ and $q \\\\cdot \\\\chi_1 + \\\\chi_2$ are bo\"}\n  {\"name\": \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [inst_8 : P.IsCrystallograp\", \"doc\": \"The generalized weight space associated with the zero weight function in the Geck construction of a root pairing is equal to the span of the images of the basis functions $ u $ constructed in this fra\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieModule.genWeightSpace_add_chainTop\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"For a non-zero linear functional $\\\\alpha: L \\\\to R$ and a weight $\\\\beta$ of $M$, where $R$ is a torsion-free commutative domain, $L$ is a nilpotent Lie algebra over $R$, and $M$ is a torsion-free Noeth\"}\n  {\"name\": \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and given weight functions $\\\\chi_1, \\\\chi_2 : \\\\mathfrak{g} \\\\to R$, there exists a positive integer $k$\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern affine covers of Proj, topological or CW cells, Lie-algebra weight spaces, and convex affine maps; none is the extremal-weight chart theorem for a projective torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "Bialynicki|cocharacter|extrem(al|e).*weight|projective.*attract",
+   "results": "{\"t\": \"2026-10-23T22:13:15Z\", \"tool\": \"grep\", \"query\": \"Bialynicki|cocharacter|extrem(al|e).*weight|projective.*attract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic results concern Lie-module weight spaces, real asymptotic or convex cones, or the basic opens of Proj; none states the projective torus minimum-weight theorem. Loogle and whole-Mathlib grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extremal weight eigenspace of a torus representation defining a smooth projective variety with isolated fixed points has dimension one",
+   "results": "{\"t\": \"2026-10-23T22:13:15Z\", \"tool\": \"leansearch\", \"query\": \"Extremal weight eigenspace of a torus representation defining a smooth projective variety with isolated fixed points has dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.mk.sizeOf_spec\", \"LieModule.weightSpace\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\", \"LieModule.genWeightSpace\", \"LieModule.weightSpace.congr_simp\", \"LieModule.map_genWeightSpace_eq\"], \"digest\": \"fb8c8c2caf7039dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic results concern Lie-module weight spaces, real asymptotic or convex cones, or the basic opens of Proj; none states the projective torus minimum-weight theorem. Loogle and whole-Mathlib grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projectivization\", \"weight\"",
+   "results": "{\"t\": \"2026-10-23T22:13:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projectivization\\\", \\\"weight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic results concern Lie-module weight spaces, real asymptotic or convex cones, or the basic opens of Proj; none states the projective torus minimum-weight theorem. Loogle and whole-Mathlib grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the coordinate hyperplane of the unique minimum weight is an affine attraction neighbourhood for a projective algebraic torus action",
+   "results": "{\"t\": \"2026-10-23T22:13:17Z\", \"tool\": \"leanfinder\", \"query\": \"The complement of the coordinate hyperplane of the unique minimum weight is an affine attraction neighbourhood for a projective algebraic torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AmpleSet.of_one_lt_codim\", \"AffineSpace.instNeBotAsymptoticNhds\", \"asymptoticCone\", \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\", \"NumberField.mixedEmbedding.fundamentalCone\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"LieModule.eventually_genWeightSpace_smul_add_eq_bot\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\"], \"digest\": \"7187b8c65cb1d219\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic results concern Lie-module weight spaces, real asymptotic or convex cones, or the basic opens of Proj; none states the projective torus minimum-weight theorem. Loogle and whole-Mathlib grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nondegenerate smooth connected projective variety with a linear split torus action and finitely many fixed points, a least weight space is one dimensional and its nonzero coordinate chart equals the points whose torus orbit closure contains that fixed point",
+   "results": "{\"t\": \"2026-10-23T22:13:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a nondegenerate smooth connected projective variety with a linear split torus action and finitely many fixed points, a least weight space is one dimensional and its nonzero coordinate chart equals the points whose torus orbit closure contains that fixed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"LieModule.genWeightSpace_neg_add_chainBot\", \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.genWeightSpace_add_chainTop\", \"LieModule.Weight.genWeightSpaceOf_ne_bot\", \"LieModule.Weight.genWeightSpace_ne_bot\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\"], \"digest\": \"6e9f072b040699d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic results concern Lie-module weight spaces, real asymptotic or convex cones, or the basic opens of Proj; none states the projective torus minimum-weight theorem. Loogle and whole-Mathlib grep have zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-luna-borel-attraction-charts",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.65, used in the final two paragraphs of Section 17h to trap an orbit inside an affine chart. The containment-only form of its proof avoids presupposing the Chevalley equality. Supporting input for Theorem 17.65: Theorem 12.12, printed pp.234--235 (weight decomposition); Lemma 13.51, Proposition 13.52 and Proposition 13.53(a), printed pp.274--276; the coordinate description of the open cell in the proof of Theorem 17.65, printed p.374.",
+   "via": [
+    "lem-sfb-luna-borel-attraction-charts",
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-extreme-weight-affine-chart",
+  "worker": "stage1",
+  "group": "Q17",
+  "summary": "Kept the statement verbatim. Reused split-torus weight decomposition, projective fixed schemes and separating cocharacters, smooth regularity and connected regular integrality. Constructed the minimum-weight projection on charts and factored it through the finite fixed scheme; irreducibility and spanning force its image line to equal the entire minimum-weight space. Identified the affine chart and proved the precise torus orbit-closure criterion. No new nodes, no Lean attachment and no Mathlib match. Noted Milne p.276 dimension-2 typo, retaining Proposition 13.53(a) dimension 1.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain through Milne Theorem 17.65: Theorem 12.12, Lemma 13.51, Proposition 13.53(a), and the minimum-weight coordinate description at p.374. Read latest blueprint ef6f9619: direct-images proof (3) remains the proper/open compactification route. blueprint_refs.py ancestor reports null for this created auxiliary chain; no matching blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-field regularity input to irreducibility; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic connected regular scheme integrality input to the finite projection-image argument; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic affine coordinate charts for projective space, used to construct the polynomial limit and identify the affine open; no statement of this unit provides its coordinate interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-361f3278d",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-361f3278d (reviewer sub-agent of L); spot-checked: I read the item, the report and all six cited statements in full. Statement, stmt_deps, source and blueprint are identical to the Q39-snapshot copy, so nothing was weakened. No new nodes, no re-split note, no SGA. Source: Milne iAG2017, Lemma 13.51, Propositions 13.52 and 13.53(a) (pp.274–276) and the open-cell paragraph in the proof of 17.65. The printed 'dim = 2' in the proof of 13.53(a) is a typo, as the report says. Over algebraically closed k the item's spanning hypothesis is the same as Milne's nondegeneracy, because the span of X is T-stable. Step 1: the weight decomposition and the fixed-weight node supply the separating λ, P(E)^T = ⨿P(E_χ), T-invariant charts and X^T as a fibre product; their Laurent-monomial premise is shown by the group-like coefficient argument. Smooth⇒regular plus regular, connected, nonempty⇒integral gives irreducibility. Step 2: I recomputed the chart action z_j/z_i ↦ t^{m_j−m_0}z_j/z_i. All exponents are ≥0, the ideal dies in B[t,t^-1] and so in B[t] by injectivity, and p lands in X^T scheme-theoretically. Step 3: W is nonempty and irreducible, its image in the finite discrete X^T is one point, and projecting the span gives E_0=L of dimension 1; x_0 is unique since i is injective on k-points. Step 4: U is closed in the chart D_+(z_0), so it is affine (01QO clause of def-weil-closed-immersion). Step 5: the polynomial curve and density of k^× in A^1 give one inclusion; the closed T-stable hyperplane section missing x_0 gives the other. Edge cases checked: P^1 with two weights, Veronese conic with weights 0,1,2, Spec k, r=0. No duplicates: projective-attracting-cells is a different G_m stratification statement. Accepted tool_uses, all generic, with no in-unit substitute found: lem-weil-pbc-smooth-scheme-over-field-regular, lem-sc-regular-connected-integral, lem-weil-pbc-projective-space-standard-charts."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusExtremeWeightAffineChart",
+  "declaration": "AlgebraicGeometry.torus_extreme_weight_affine_chart",
+  "declarations": [
+   "AlgebraicGeometry.torus_extreme_weight_affine_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusExtremeWeightAffineChart.lean",
+  "statement": "theorem torus_extreme_weight_affine_chart (k : Type u) [Field k] [IsAlgClosed k] (E : Type v) [AddCommGroup E] [Module k E] [FiniteDimensional k E] [Nontrivial E] (I : Type u) [Fintype I] [DecidableEq I] (b : Module.Basis I k E) (T : Grp (Over (Spec (.of k)))) (r : ℕ) (_hT : Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (ρ : T.X ⟶ GeneralLinearGroup I k) [IsMonHom ρ] [pact : ModObj T.X (Over.mk (ProjectiveSpace I (Spec (.of k)) ↘ Spec (.of k)))] (_hinduced : IsInduced T ρ) (X : Over (Spec (.of k))) [Smooth X.hom] [ConnectedSpace X.left] [IsProjective X.hom] [xact : ModObj T.X X] (i : X ⟶ Over.mk (ProjectiveSpace I (Spec (.of k)) ↘ Spec (.of k))) [IsClosedImmersion i.left] (_hequiv : xact.smul ≫ i = (T.X ◁ i) ≫ pact.smul) (_hspan : Submodule.span k {e : E | ∃ y : StandardGroupSchemes.affine k k ⟶ X, Represents (CommAlgCat.of k k) (y ≫ i) (fun j ↦ b.repr e j)} = ⊤) (F : Over (Spec (.of k))) [IsFinite F.hom] [IsReduced F.left] [Nonempty F.left] (j : F ⟶ X) [IsClosedImmersion j.left] (_hfixed : ∀ (A : CommAlgCat.{u} k) (x : StandardGroupSchemes.affine k A ⟶ X), (∃ z : StandardGroupSchemes.affine k A ⟶ F, z ≫ j = x) ↔ ∀ (B : CommAlgCat.{u} k) (f : A ⟶ B) (t : StandardGroupSchemes.affine k B ⟶ T.X), t • (StandardGroupSchemes.map k f.hom ≫ x) = StandardGroupSchemes.map k f.hom ≫ x) (Ω : Type w) [Finite Ω] [DecidableEq Ω] (χ : Ω → RankOneRoots.Character T) (_hχ : Function.Injective χ) (W : Ω → Submodule k E) (_hnonzero : ∀ c : Ω, W c ≠ ⊥) (_hdirect : DirectSum.IsInternal W) (_hweights : ∀ (c : Ω) (e : E), e ∈ W c ↔ IsWeightVector b T ρ (χ c) e) : (∃ (ell : RankOneRoots.Cocharacter T) (m : Ω → ℤ), Separates T χ ell m) ∧ ∀ (ell : RankOneRoots.Cocharacter T) (m : Ω → ℤ), Separates T χ ell m → ∃ c₀ : Ω, (∀ c : Ω, c ≠ c₀ → m c₀ < m c) ∧ Module.finrank k (W c₀) = 1 ∧ (∃! x₀ : StandardGroupSchemes.affine k k ⟶ F, ∀ e₀ : E, e₀ ∈ W c₀ → e₀ ≠ 0 → Represents (CommAlgCat.of k k) (x₀ ≫ j ≫ i) (fun a ↦ b.repr e₀ a)) ∧ ∀ x₀ : StandardGroupSchemes.affine k k ⟶ F, (∀ e₀ : E, e₀ ∈ W c₀ → e₀ ≠ 0 → Represents (CommAlgCat.of k k) (x₀ ≫ j ≫ i) (fun a ↦ b.repr e₀ a)) → ∀ e₀ : E, e₀ ∈ W c₀ → e₀ ≠ 0 → ∃ f₀ : Module.Dual k E, f₀ e₀ = 1 ∧ (∀ c : Ω, c ≠ c₀ → ∀ e ∈ W c, f₀ e = 0) ∧ ∀ f : Module.Dual k E, f e₀ = 1 → (∀ c : Ω, c ≠ c₀ → ∀ e ∈ W c, f e = 0) → IsAffineOpen (i.left ⁻¹ᵁ dualOpen b f) ∧ {y : StandardGroupSchemes.affine k k ⟶ X | y.left (IsLocalRing.closedPoint k) ∈ i.left ⁻¹ᵁ dualOpen b f} = {y : StandardGroupSchemes.affine k k ⟶ X | (x₀ ≫ j).left (IsLocalRing.closedPoint k) ∈ closure (Set.range fun t : StandardGroupSchemes.affine k k ⟶ T.X ↦ (t • y).left (IsLocalRing.closedPoint k))}",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX: the unique fixed k-point x0 is now unique for the line condition alone (∃! on the line clause), and the chart/orbit-closure clauses are stated for every x0 with that line, instead of a single ∃! bundling line and chart clauses (which weakened uniqueness).",
+  "fixed_by": "NT-stage2-cc-36db26689"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36db26689",
+  "group": "Q68",
+  "result": "fix",
+  "note": "Matched every hypothesis and conclusion clause against the node, Milne pp.274-276 and the p.374 open-cell paragraph, and the dependency declarations; all match. One H3 fault: a single ∃! x₀ bundled the line condition with the chart and orbit-closure clauses, so x₀ was unique only among points satisfying both, weaker than the node's 'unique x₀ with line E_χ₀'. FIX: (∃! x₀, line condition) ∧ ∀ x₀ with that line, the chart clauses unchanged. Fixes: full module fixes/TorusExtremeWeightAffineChart.lean and fixes/<item>.lean-record.json with the verbatim statement and a note. Compiled once with the sibling module via nt_compile --json: both files clean (2.2 s, 2.0 s). New def node def-sfb-torus-projective-weight-data: fields ok, seven real defs, docstrings ok, no duplicate. Adding the landed def-sfb-tori-multiplicative-type to stmt_deps is allowed. Edge cases (r=0, Spec k, one weight, trivial cocharacter, char p) are covered. Universes are not restricted. Advisory: the RankOneRoots owner is cited only through the new def node."
+ }
+}

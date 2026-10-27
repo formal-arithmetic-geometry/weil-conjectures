@@ -14,9 +14,15 @@
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tag 0A0E, lemma-derived-completion-koszul, the principal negative-degree Koszul tower; the cone-to-quotient map and its tensor augmentations, and sites-cohomology.tex Tag 0941 for strict towers."
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Name the very same power multiplication map on the preferred single complex, and use that named map as the cone parameter. Its underlying functor map is unchanged. Cache the existing sheaf-composition instance on the essentially small site. The strict augmentation naturality proof unfolds the shared parameter before using the same mapping-cone identity. These are definitional presentation changes, not a change of complex, transition, power or augmentation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "T9, 2026-10-26: share the actual single-complex scalar map as a named definition, and cache the existing sheaf-composition proof. All original public signatures and constructions have the same mathematical meaning.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -59,7 +65,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "lean": {
@@ -99,7 +116,9 @@
    "CategoryTheory.koszulRepresentativeAugmentation",
    "CategoryTheory.koszulRepresentativeAugmentation_quotient",
    "CategoryTheory.koszulRepresentativeAugmentation_naturality",
-   "CategoryTheory.koszulStrictAugmentation"
+   "CategoryTheory.koszulStrictAugmentation",
+   "CategoryTheory.principalKoszulHasSheafCompose",
+   "CategoryTheory.principalKoszulScalarComplex"
   ]
  },
  "reviewed": {
@@ -119,22 +138,13 @@
   "note": "Statement, dependencies, canonical constructions, route-pivot compliance, edge cases, docstrings, and all three per-file scompile checks passed."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H3",
+  "reviewer": "C-ec731",
+  "group": "T9",
   "result": "pass",
-  "landing": "20261019T002616-L-2159971",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.koszulRepresentativeAugmentation_naturality",
-   "CategoryTheory.koszulRepresentativeAugmentation_quotient",
-   "CategoryTheory.koszulTensorUnitComponent_comm",
-   "CategoryTheory.principalAugmentation_naturality",
-   "CategoryTheory.principalKoszul_transition_square",
-   "CategoryTheory.principalQuotient_transition_zero"
-  ],
-  "sorry_after": []
+  "landing": "20261026T092722-L-3459472",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone statement (identical); new nodes vs Lean signatures; adapted unclaimed modules vs change records; 94-module consistent sandbox build (delivery + import chains to FiniteFreeCompletionTransport, KoszulRoosProjectionComparison, principalKoszul users, import-all users) all compiled; axioms of main/new lemmas = propext, Classical.choice, Quot.sound"
  }
 }

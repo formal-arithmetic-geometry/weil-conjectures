@@ -22,9 +22,8 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal I$ and $\\mathcal J$ for the finite-type quasi-coherent centre ideals retained by the admissibility data [def-nagata-admissible-blowup]. By [lemma-nagata-blowup-proper], $b$ is proper. Thus it is quasi-compact and separated [def-weil-proper-morphism, def-weil-finite-type-morphism], hence quasi-separated [lem-pc-separated-quasi-separated]. Since $S$ is qcqs, clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] gives that $S_1$ is qcqs, proving the last assertion of (2).",
+   "text": "By [lemma-nagata-blowup-proper], $b$ is proper, hence quasi-compact and separated [def-weil-proper-morphism, def-weil-finite-type-morphism]. It is quasi-separated by [lem-pc-separated-quasi-separated]. Since $S$ is qcqs, [lem-weil-pbc-qcqs-morphism-permanence] (2) makes $S_1$ qcqs. A finite affine cover of $U$, pulled back along the quasi-compact $b$, also shows that $b^{-1}U$ is quasi-compact.",
    "uses": [
-    "def-nagata-admissible-blowup",
     "lemma-nagata-blowup-proper",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
@@ -34,124 +33,62 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02NS, lemma-blowing-up-projective (properness); the qcqs consequence used in Tag 080Y, flat.tex remark-successive-blowups."
+    "place": "Tag 02NS, lemma-blowing-up-projective; flat.tex Tag 080Y, remark-successive-blowups."
    }
   },
   {
-   "text": "Apply [thm-nagata-composition-of-blowups], in its current blueprint_update statement, to $S$, $\\mathcal I$ and the centre $Z_1=V(\\mathcal J)$ on $S_1$. Its hypotheses are satisfied because $S$ is qcqs and both centre ideals are finite type. It gives a finite-type quasi-coherent ideal $\\mathcal K$ and an isomorphism $S_2\\cong\\operatorname{Bl}_{\\mathcal K}(S)$ over $S$ with $V(\\mathcal K)=Z\\cup b(Z_1)$. Since $Z\\cap U=\\varnothing$ and $Z_1\\cap b^{-1}(U)=\\varnothing$, this union is disjoint from $U$. Consequently $\\mathcal K|_U=\\mathcal O_U$: at every point of $U$ some local generator of $\\mathcal K$ is a unit. Thus this specified composite blowup is $U$-admissible by [def-nagata-admissible-blowup].",
+   "text": "The centre ideals are finite type by [def-nagata-admissible-blowup]. Apply [thm-nagata-composition-of-blowups] (current blueprint_update), with $S$ qcqs and both centre ideals finite type, to obtain $\\mathcal K$ with a specified $S$-isomorphism $S_2\\cong\\operatorname{Bl}_{\\mathcal K}S$ and $V(\\mathcal K)=Z\\cup b(Z_1)$. This union misses $U$: a point of $Z_1$ mapping into $U$ would lie in $b^{-1}U$. Thus $\\mathcal K|_U=\\mathcal O_U$, since its ideal stalk at every point of $U$ contains a unit. The specified composite is $U$-admissible.",
    "uses": [
-    "thm-nagata-composition-of-blowups",
-    "def-nagata-admissible-blowup"
+    "def-nagata-admissible-blowup",
+    "thm-nagata-composition-of-blowups"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080B, lemma-composition-finite-type-blowups; Tag 080K, definition-admissible-blowup; Tag 080Y, remark-successive-blowups."
+    "place": "Tag 080B, lemma-composition-finite-type-blowups; Tag 080K, definition-admissible-blowup."
    }
   },
   {
-   "text": "Set $X_i=X\\times_S S_i$, with projections $p:X_1\\to X$ and $q:X_2\\to X_1$, using the associative fibre product [def-pc-fibre-product]. Let $\\mathcal F_1$ be the first module strict transform, $\\mathcal F_2$ its strict transform along $c$, and $\\mathcal G$ the strict transform of $\\mathcal F$ for the centre $\\mathcal K$. The kernel lemma [lem-trf-strict-transform-sheaf-kernel] makes $\\mathcal F_1$ and $\\mathcal F_2$ quasi-coherent and gives epimorphisms $p^*\\mathcal F\\twoheadrightarrow\\mathcal F_1$ and $q^*\\mathcal F_1\\twoheadrightarrow\\mathcal F_2$. Pullback of the first epimorphism is an epimorphism: on stalks [lem-weil-pbc-module-stalk-pullback] identifies it with tensoring the first epimorphism, [lem-weil-pbc-module-stalk-exact] gives the surjectivity of the original stalk maps, and [lem-weil-pbc-tensor-right-exact] preserves this surjectivity. The stalk criterion of the same exactness node then gives the desired epimorphism of sheaves. Together with $(pq)^*\\cong q^*p^*$ from [def-pc-module-pullback], this gives an epimorphism $H=(pq)^*\\mathcal F\\twoheadrightarrow\\mathcal F_2$. There is also the canonical epimorphism $H\\twoheadrightarrow\\mathcal G$ from the same kernel lemma.",
+   "text": "On the associatively identified fibre products [def-pc-fibre-product], apply [lem-trf-strict-transform-comparison-epimorphism] to this $\\mathcal K$. It gives the epimorphism $\\theta:\\mathcal F_2\\twoheadrightarrow\\mathcal G$, whose kernel is supported over $V(\\mathcal K)$. By [lem-trf-iterated-transform-exceptional-support], that support set equals the inverse image of $Z_1\\cup b^{-1}Z$ and $\\mathcal F_2$ has no nonzero sections supported there. Every local kernel section is therefore zero; thus $\\ker\\theta=0$ and the epimorphism $\\theta$ is an isomorphism. Its equality after the epimorphism from $(pq)^*\\mathcal F$ uniquely determines it, proving the canonical composition assertion.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-trf-strict-transform-sheaf-kernel",
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-tensor-right-exact",
-    "def-pc-module-pullback"
+    "lem-trf-strict-transform-comparison-epimorphism",
+    "lem-trf-iterated-transform-exceptional-support",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, lemma-strict-transform-composition-blowups (1), first paragraph of proof; tensor right exactness in algebra.tex."
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof."
    }
   },
   {
-   "text": "Let $D\\subset X_2$ be the inverse image of $V(\\mathcal K)$, and let $L$ be the kernel of $H\\twoheadrightarrow\\mathcal F_2$. Off the inverse image of $Z$, the first quotient is an isomorphism by [lem-trf-strict-transform-sheaf-kernel]; off the inverse image of $Z_1$, the second is an isomorphism. Hence $L$ is supported on their union, which is contained in $D$ by step 2. The kernel $K$ of $H\\twoheadrightarrow\\mathcal G$ is precisely the subsheaf of sections supported on $D$, by that same lemma for the blowup with centre $\\mathcal K$. Thus $L\\subseteq K$ and quotienting gives a canonical epimorphism $\\mathcal F_2=H/L\\twoheadrightarrow H/K=\\mathcal G$. Its kernel is supported on $D$.",
-   "uses": [
-    "lem-trf-strict-transform-sheaf-kernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, proof, the support argument and the factorization through the second strict transform."
-   }
-  },
-  {
-   "text": "By [thm-nagata-blowup-principalizes-center], $E=b^{-1}(Z)$ is an effective Cartier divisor on $S_1$. The first strict transform $\\mathcal F_1$ has no nonzero local sections supported on the inverse image of $E$, by [lem-trf-strict-transform-sheaf-kernel]. Apply [lem-trf-strict-transform-different-centers] on $S_1$ to the module $\\mathcal F_1$ on $X_1$, the centre $Z_1$, and the Cartier divisor $E$. The product ideal $\\mathcal J\\mathcal I_E$ is finite type: locally $\\mathcal J$ has finitely many generators and $\\mathcal I_E$ has one. Under the isomorphism of blowups provided by [lemma-nagata-blowup-invertible-factor], it identifies $\\mathcal F_2$ with the strict transform for this product centre. By the kernel lemma for that centre, $\\mathcal F_2$ therefore has no nonzero local sections supported on the inverse image of $Z_1\\cup E$.",
-   "uses": [
-    "thm-nagata-blowup-principalizes-center",
-    "lem-trf-strict-transform-sheaf-kernel",
-    "lem-trf-strict-transform-different-centers",
-    "lemma-nagata-blowup-invertible-factor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, final paragraph of proof; Tag 080H (2), lemma-strict-transform-different-centers; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
-   }
-  },
-  {
-   "text": "The inverse image of $Z_1\\cup E$ in $S_2$ equals $(bc)^{-1}V(\\mathcal K)$. Indeed, over $S\\setminus Z$, [lemma-nagata-admissible-blowup-over-open] applied with preserved open $S\\setminus Z$ identifies $b$ with the identity, so a point there lies above $b(Z_1)$ exactly when its image in $S_1$ lies in $Z_1$. Above $Z$, both unions already contain every point, through $E$. The cited open is quasi-compact because on each affine in a finite cover of $S$ it is a finite union of principal opens, using the finite type of $\\mathcal I$. Pulling the equality back to $X_2$ identifies the support set of step 5 with $D$. Therefore the kernel of $\\mathcal F_2\\twoheadrightarrow\\mathcal G$ from step 4 is zero, and the map is an isomorphism. It is characterized by its composite with the epimorphism $H\\twoheadrightarrow\\mathcal F_2$, so it is canonical and agrees with the specified identification of the ambient fibre products.",
-   "uses": [
-    "lemma-nagata-admissible-blowup-over-open"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, conclusion of the proof of (1), and Tag 02OS (1)."
-   }
-  },
-  {
-   "text": "For any of the admissible blowups in (2), [lem-trf-strict-transform-sheaf-kernel] gives the quasi-coherent quotient $p^*\\mathcal F\\twoheadrightarrow\\mathcal F^b$, and identifies it with $p^*\\mathcal F$ away from the inverse image of $Z$. Since the admissible centre misses $U$, this includes the entire inverse image of $U$. By [lemma-nagata-admissible-blowup-over-open], the blowup restricted over $U$ is an isomorphism. Hence the restriction of $\\mathcal F^b$ there identifies with the original restriction of $\\mathcal F$, with its canonical pullback interpretation [def-pc-module-pullback].",
+   "text": "For a single $b$, [lem-trf-strict-transform-sheaf-kernel] gives the quasi-coherent quotient $p^*\\mathcal F\\twoheadrightarrow\\mathcal F^b$ and its isomorphism off $Z$. Since $Z\\cap U=\\varnothing$, [lemma-nagata-admissible-blowup-over-open] and [def-pc-module-pullback] identify its restriction over $U$ with $\\mathcal F|_{X_U}$. If $\\mathcal F$ is finite type, so is $p^*\\mathcal F$ by [lem-weil-pbc-module-pullback-finite-type]; composing its local finite free surjections with this quotient proves finite type of $\\mathcal F^b$ [pqf-def-coherent].",
    "uses": [
     "lem-trf-strict-transform-sheaf-kernel",
     "lemma-nagata-admissible-blowup-over-open",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "pqf-def-coherent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D, definition-strict-transform (1) and its preceding paragraph; Tag 02OS (1)."
+    "place": "Tag 080D, definition-strict-transform (1); Tag 02OS (1)."
    }
   },
   {
-   "text": "If $\\mathcal F$ is of finite type, [lem-weil-pbc-module-pullback-finite-type] makes $p^*\\mathcal F$ finite type. Locally compose its surjection from a finite free module with the quotient map $p^*\\mathcal F\\twoheadrightarrow\\mathcal F^b$ from [lem-trf-strict-transform-sheaf-kernel]. The composite is still surjective, so $\\mathcal F^b$ is finite type by [pqf-def-coherent].",
-   "uses": [
-    "lem-weil-pbc-module-pullback-finite-type",
-    "lem-trf-strict-transform-sheaf-kernel",
-    "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080D (1), definition-strict-transform; finite type as in Modules Tag 01B5."
-   }
-  },
-  {
-   "text": "Now assume $\\mathcal F$ is flat over $S$. Apply the module theorem [lem-pc-relatively-flat-module-pullback] to the base change $S_1\\to S$, with no flatness assumption on this map or on $X\\to S$. It makes $H_1=p^*\\mathcal F$ flat over $S_1$; it is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. To prove that its strict-transform quotient is itself, it remains to show that $H_1$ has no nonzero local sections supported on the inverse image of $E$, where $E$ is the effective Cartier divisor supplied by [thm-nagata-blowup-principalizes-center].",
+   "text": "If $\\mathcal F$ is flat over $S$, [lem-pc-relatively-flat-module-pullback] makes $H_1=p^*\\mathcal F$ flat over $S_1$, and [lem-weil-pbc-module-pullback-quasi-coherent] makes it quasi-coherent. The exceptional $E=b^{-1}Z$ is Cartier by [thm-nagata-blowup-principalizes-center]. Apply [lem-trf-relative-flat-cartier-support] to $H_1$ and $E$: it has no supported sections there. Thus the kernel in [lem-trf-strict-transform-sheaf-kernel] vanishes. The quotient is an isomorphism, and $\\mathcal F^b$ is flat over $S_1$.",
    "uses": [
     "lem-pc-relatively-flat-module-pullback",
     "lem-weil-pbc-module-pullback-quasi-coherent",
-    "thm-nagata-blowup-principalizes-center"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080F (2), lemma-strict-transform-flat; module base change as in morphisms.tex Tag 01U4 and algebra.tex Tag 051D."
-   }
-  },
-  {
-   "text": "Work on an affine $W=\\operatorname{Spec}A\\subset S_1$ where $E$ is cut out by a nonzerodivisor $a\\in A$, and an affine $V\\subset X_1$ mapping into $W$. Put $N=H_1(V)$; by [def-pc-scheme-module-flat-over], $N$ is flat over $A$. Apply [lem-weil-pbc-flat-tensor-exact] to the injective map $A\\xrightarrow{a}A$: after tensoring with $N$ it says that multiplication by $a$ on $N$ is injective, hence so is multiplication by $a^n$ for every $n\\geq0$. A section $t\\in N$ supported on the inverse image of $E$ restricts to zero on $D(a)$ in $V$; clause (2) of [lem-weil-pbc-affine-module-basic-open-localization], applied to the image of $a$ in $\\mathcal O_{X_1}(V)$, gives $a^nt=0$ for some $n$. Thus $t=0$. Such affines cover $X_1$, so all local supported sections vanish. By [lem-trf-strict-transform-sheaf-kernel], the kernel of $H_1\\twoheadrightarrow\\mathcal F^b$ is zero. Consequently $\\mathcal F^b\\cong p^*\\mathcal F$, and the flatness of $H_1$ from step 9 proves the remaining flatness assertion.",
-   "uses": [
-    "def-pc-scheme-module-flat-over",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-affine-module-basic-open-localization",
+    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-relative-flat-cartier-support",
     "lem-trf-strict-transform-sheaf-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080F (2), proof: vanishing of exceptional power torsion; algebra.tex Tag 00HD for flat tensor exactness and Properties Tag 07ZP for supported sections."
+    "place": "Tag 080F (2), lemma-strict-transform-flat, proof."
    }
   }
  ],
@@ -159,23 +96,18 @@
   "def-nagata-admissible-blowup",
   "def-pc-fibre-product",
   "def-pc-module-pullback",
-  "def-pc-scheme-module-flat-over",
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
   "lem-pc-relatively-flat-module-pullback",
   "lem-pc-separated-quasi-separated",
-  "lem-trf-strict-transform-different-centers",
+  "lem-trf-iterated-transform-exceptional-support",
+  "lem-trf-relative-flat-cartier-support",
+  "lem-trf-strict-transform-comparison-epimorphism",
   "lem-trf-strict-transform-sheaf-kernel",
-  "lem-weil-pbc-affine-module-basic-open-localization",
-  "lem-weil-pbc-flat-tensor-exact",
   "lem-weil-pbc-module-pullback-finite-type",
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-stalk-pullback",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-tensor-right-exact",
   "lemma-nagata-admissible-blowup-over-open",
-  "lemma-nagata-blowup-invertible-factor",
   "lemma-nagata-blowup-proper",
   "pqf-def-coherent",
   "thm-nagata-blowup-principalizes-center",
@@ -253,19 +185,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-module-admissible-blowup-calculus",
   "worker": "stage1",
-  "summary": "Retained the whole statement, corrected its composition-source tag from 080K to 080B, and supplied ten proof steps following Stacks 080Y/080I/080F. Reused all support, different-centres, module-base-change and flat-tensor tools already in the DAG; no new nodes are needed. The proof keeps the centre support equality and obtains module composition through the Cartier-centre comparison, not from the existing scheme-only composition node. Flatness is proved for modules via the existing module pullback theorem and injectivity of multiplication after flat tensoring. Added the fibre-product and qcqs definition dependencies.",
-  "blueprint": "The historical ancestry is retained through lem-trf-flattening-module-by-admissible-blowup to lem-trf-local-term-locality. This split realizes the parent flattening proof steps 6, 10, 11 and 13: successive admissible blowups compose, the module strict transforms agree, flat modules persist, and finite type persists. It follows flat.tex remark-successive-blowups (080Y), with divisors.tex 080B, 080I and 080F. No unit step is replaced.",
+  "summary": "Repair after landing refusal at c32ef784aee: rebased the retained three-node re-split onto the current DAG. Re-read all cited statements and their blueprint_update records; the archived original item and all 17 pre-existing citation occurrences still agree with the read clone. Made quasi-compactness of the second preserved open explicit, instantiated the current composition theorem with its precise qcqs/finite-type hypotheses and specified isomorphism, and made the supported-section kernel argument explicit. The item statement and three independent statement-only lemmas are retained; five assembly steps total 2691 characters. The report retains every original argument and the existing logged searches. Current repair continuation revalidated all 20 exact citation occurrences against the current DAG and distinguished the newly landed 00HD rational-cohomology node from the Cartier-support lemma; no statement or search query changed. Rebase audit on 2026-10-23: the archived base still agrees field-for-field with the current read-clone item; all cited statements and all 20 literal citation occurrences were re-read and revalidated. Distinguished the newly present 02OS component-Cartier-blowup node in the report, retaining the independently necessary exceptional-support statement. The server delivery is reconstructed on current main.",
+  "blueprint": "Historical ancestry to lem-trf-local-term-locality is retained. Within the parent flattening argument, successive-blowup reduction is realized by steps 1--3 and new comparison/support lemmas (080Y, 080B, 080I); finite-type and open permanence by step 4 (080D); flat permanence by step 5 and the new Cartier-support lemma (080F). The current main-20261015 ancestor has no flattening proof text; this repair neither introduces a new route nor changes the ancestral statement. The inherited from.place records the original proof route; each new node further names the exact returned proof steps it serves.",
   "tool_uses": [
    {
     "node": "lem-pc-relatively-flat-module-pullback",
-    "why": "Generic preservation of relative module flatness under arbitrary scheme base change; the trace-formula unit has no replacement for this module algebra tool."
-   },
-   {
-    "node": "lem-weil-pbc-affine-module-basic-open-localization",
-    "why": "Generic affine quasi-coherent-section fact: a section vanishing on D(a) is killed by a power of a. It is used to remove exceptional torsion and is not a replacement of any unit step."
+    "why": "Generic relative-module base-change flatness; used only as a tool in the existing 080F route."
    }
   ]
  },
@@ -274,12 +202,12 @@
   "lem-weil-pbc-affine-module-basic-open-localization"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q69-39920dd8b",
-  "group": "Q69",
+  "reviewer": "NT-cc-NG-81453ceee",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-39920dd8b (reviewer sub-agent of L); spot-checked: I read all ten steps of lem-trf-module-admissible-blowup-calculus. I checked each cited node's statement, using the blueprint_update for thm-nagata-composition-of-blowups and the other nagata nodes. I read the Stacks sources in divisors.tex: 080B, 080D, 080F, 080H, 080I and 080K. The statement is true and has not been weakened: it is 080B plus 080I(1) plus 080F(2) for admissible blowups, with elementary permanence facts added. Steps 1–2: S_1 is qcqs via properness, separatedness and qcqs permanence clause (2). The composition theorem's hypotheses hold, and the support union misses U. Steps 3–6 follow the proof of 080I. q^* preserves epimorphisms (shown on stalks), and the composite kernel is supported on the preimage of V(K). Different-centres is applied on S_1 with the Cartier divisor E from principalization; its no-E-supported-sections hypothesis comes from the kernel lemma. I checked the step-6 set equality c^{-1}(Z_1∪E)=(bc)^{-1}(Z∪b(Z_1)) point by point. It uses that b is an isomorphism over S∖Z, and the quasi-compactness of S∖Z is correctly justified. Steps 7–8 (agreement over U, finite type) are correct. Steps 9–10 give flatness via lem-pc-relatively-flat-module-pullback, with no hypothesis on b. On affine charts where E=V(a) with a a nonzerodivisor, a is injective on the flat module N, and the basic-open localization node gives a^n t=0, so t=0. Small cases checked: U=S, U empty, F=0, F=k[t]⊕k[t]/(t) over k[t] with centre (t) (shows the result depends on the centre), and the same centre twice. There are no new nodes and no cycle. Nothing restates the item or the cited nodes; lem-trf-strict-transform-composition is the scheme version and is not used for the module claim. I accept both declared tool_uses: lem-pc-relatively-flat-module-pullback and lem-weil-pbc-affine-module-basic-open-localization. No other off-route statement dependency is unclosed, and no SGA source is cited. For the maintainer: source.place (a maintainer-owned field) still says 080K for lemma-composition-finite-type-blowups; the correct tag is 080B. Only proof_origin was corrected, so please fix source.place on the maintainer side. I made no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-81453ceee (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the same NG re-split; c32ef784, b2e8bb0e and e2ea970e were all PASSed and then refused at landing because the side completion was not promoted. The live repair note (released, stage 1, keep_plan) still applies and the live item still has the old 10-step proof, so the item is not superseded. Delta against e2ea970e by sha256: the three new nodes are byte-identical, and the item differs only in split_report. The report adds a not-duplicate entry for lem-sfb-component-cartier-blowup. I re-read everything on this full snapshot. The item statement is byte-identical to the base. All 10 base steps are in the report appendix verbatim (exact substring test). Allocation: base 3-4 go to the comparison-epimorphism node, base 5 and the set equality of step 6 go to the iterated-exceptional-support node, and the affine part of base 10 goes to the relative-flat-Cartier-support node. The rest is in assembly steps 1-5, which total 2691 chars, and proof_deps equals the union of uses. Steps check out. (1) blowup-proper, separatedness and qcqs-permanence (2) give S_1 qcqs and b^{-1}U qc. (2) The composition BU applies (S qcqs, both centres of finite type) and gives K with |V(K)| = Z∪b(Z_1), which misses U. (3) Node A's θ has kernel supported on D, node B gives D = f_2^{-1}c^{-1}(Z_1∪E) with no sections supported there, and θ is unique because α is epi (080I, divisors.tex l.8991-9033). (4) The sheaf-kernel lemma, over-open BU and finite-type pullback give quasi-coherence, agreement over U and finite type. (5) relatively-flat-pullback (no hypothesis on b), E Cartier and node C on X_1→S_1 give flatness (080F(2)). All three new nodes are true. A: ker α is supported on c^{-1}Z_1∪(bc)^{-1}Z ⊆ D, so ker α ⊆ ker β. B: 080H(2) with J·I_E applies; for the set equality, b is injective off E, so b^{-1}b(Z_1)∪E = Z_1∪E. C: M(W) is A-flat, so a^n is injective, and 07ZP then kills a supported section. Each node is statement-only and self-contained, its stmt_deps match its citations, sources carry the right tags and labels (checked in tags/tags) and four search kinds are recorded. Edge cases J=O, I=0, D=∅, a fibre inside D and the non-flat k[t]/(t) summand all behave correctly. The full-DAG rg -L duplicate search (supported sections, strict transform, flat+Cartier+torsion) found no duplicates. No SGA is cited. Tool use lem-pc-relatively-flat-module-pullback is accepted. Advisory: node B leaves the quasi-coherence of F_1 implicit; it follows from the sheaf-kernel lemma. Maintainer notes: item source.place pairs 080K with the composition lemma and should be 080B; the new nodes lack lean_audit; promote the side completion to end the re-delivery loop."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus",
@@ -304,5 +232,16 @@
   "result": "pass",
   "note": "Statement matches the node and Stacks 080B/080I(1)/080F(2)/080D clause by clause. The comparison is a unique isomorphism fixed by a commuting square of quotients, and the fibre-product identification is fixed by both projections. Finite-type and quasi-coherence witnesses are conclusions, not hypotheses. moduleStrictTransformQuotient is real data. Proofs are sorry only, docstrings are present, lean.statement is verbatim, and nt_compile returned 0 with no warnings. Notes: def-pc-tensor-pullback-composition-iso is used but not in stmt_deps (landed, non-blocking); source.place 080K should be 080B (maintainer field)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

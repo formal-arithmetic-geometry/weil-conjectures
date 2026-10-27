@@ -1,0 +1,96 @@
+{
+ "id": "def-sf-projection-tensor-arrow-assembly",
+ "kind": "definition",
+ "title": "Generic assembly of the specified tensor comparison arrow",
+ "statement": "For categories A and B, a functor G from A to B, tensor presentations T on A and R,S on B, a comparison alpha from T followed by G to G times G followed by R, a comparison chi from R to S, and arrows a:G(K) to M and b:G(L) to N, define the arrow G(T(K,L)) to S(M,N) as alpha(K,L) followed by R(a,b) followed by chi(M,N). This is a real three-arrow composition, with no choice or postponed data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Tensor comparison composite in the Weil-equivariance realization; generic composition of its three specified arrows"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose alpha.hom at (K,L), R.map of the pair (a,b), and chi.hom at (M,N). Their endpoints match by the definition of functor composition and product.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Tensor comparison composite in the Weil-equivariance realization; generic composition of its three specified arrows"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "verdict": "Composition is provided by existing category operations; this name exposes the fixed composite generically.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorArrowAssembly",
+   "results": "No hits.",
+   "verdict": "Composition is provided by existing category operations; this name exposes the fixed composite generically.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose a natural tensor comparison with a tensor product of two cancellation arrows and a tensor completion comparison",
+   "results": "id_tensor_π_preserves_coequalizer_inv_desc, CategoryTheory.Localization.Monoidal.tensor_comp, π_tensor_id_preserves_coequalizer_inv_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, Mathlib.Tactic.Monoidal.evalHorizontalComp_cons_cons, Mathlib.Tactic.Monoidal.evalHorizontalComp_cons_nil, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso",
+   "verdict": "Composition is provided by existing category operations; this name exposes the fixed composite generically.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Specified tensorComparisonArrow composite",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorArrowAssembly",
+  "file": "lean/Sheaf/Paper/ProjectionTensorArrowAssembly.lean",
+  "declaration": "WeilConjectures.projectionTensorArrowAssembly",
+  "statement": "def projectionTensorArrowAssembly\n    {A : Type u} {B : Type v} [Category.{w} A] [Category.{z} B]\n    (T : A × A ⥤ A) (G : A ⥤ B) (R S : B × B ⥤ B)\n    (α : T ⋙ G ≅ (G.prod G) ⋙ R) (χ : R ≅ S)\n    (K L : A) (M N : B) (a : G.obj K ⟶ M) (b : G.obj L ⟶ N) :\n    G.obj (T.obj (K, L)) ⟶ S.obj (M, N)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T201914-L-2644369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T201914-L-2644369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-scalar-intrinsic-alpha-cube",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient preservation of tensor reassociation, evaluation, adjunction units and counits, and their mates in latest fix-prop-coherence.proof.md; scalar-square steps as identified below.",
+   "via": [
+    "lem-sf-system-proper-open-scalar-square",
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-free scalar naturality of the intrinsic inverse-image alpha",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix the compatible ring sequences, bases, exact scalar T, inverse-image comparison ell and open balancing beta of [def-sf-system-finite-free-scalar-data]. Let k:U→V and i:W→Z be quasi-compact open immersions and r:U→W and p:V→Z proper maps with k≫p=r≫i. For every N in Derived(A,W), the intrinsic inverse-image comparisons alpha of [lem-sf-semilinear-proper-open-mate-pasting] satisfy PB(p)(beta_i^{-1}(N)) ≫ ell_p(JA(i)N) ≫ T_V(alpha_A(N)) = alpha_B(T_W N) ≫ JB(k)(ell_r(N)) ≫ beta_k^{-1}(PA(r)N). This is an equality of whole derived systems before evaluation or proper adjunction transposition. No cartesianness, absolute separatedness, constructibility, or cohomological bound is imposed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "stmt_deps": [
+  "def-sf-system-finite-free-scalar-data",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-sf-semilinear-proper-open-comparisons",
+  "lem-pur-diagram-open-clopen-shift-models"
+ ],
+ "proof": [
+  {
+   "text": "For restrictionPush_existsUnique, naturality of the constant structural direct-image map gives the commutative coefficient-ring square. Compose the ordinary pushforward composition and coefficient-congruence isomorphisms: the resulting restriction/direct-image comparison is identity on each sequence-site section. Componentwise extensionality gives its uniqueness. ellOrdinary is its prescribed conjugate under the two composed left adjunctions. For an open immersion, its inverse-image functor is also explicit precomposition along the open site map with the inverse transpose coefficient isomorphism. Naturality of the site adjunction unit proves that the inverse mate of the restriction/direct-image comparison is invertible. Changing to the chosen inverse-image adjunction preserves invertibility. Two successive mate identities show that the open-extension/scalar inverse mate is a conjugate of that invertible comparison. Exact localization of this inverse mate proves betaInv_isIso for the stipulated ell and betaInv. For the remaining scalar cube, the geometric cartesian open comparison must commute with these coefficient comparisons: both preserve the same local pure tensors and their semilinear transitions. Open extension and inverse-image compositors satisfy the same coherence, by their unit normalizations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 0E8I (lemma-j-shriek-and-tensor); ordinary tensor/unit calculation on the diagram topos"
+   }
+  },
+  {
+   "text": "Use $V_W,b,q,s$ from [lem-sf-semilinear-proper-open-mate-pasting]; in particular $s$ is clopen without assuming that $Q$ is cartesian or that the schemes are absolutely separated. By [lem-pur-diagram-open-clopen-shift-models], restriction to $s(U)$ and its complementary open identifies whole system categories with a product, $J_sP_s$ with $(F,G)\\mapsto(F,0)$, and $\\pi_s$ with $(1,0)$. Tensor extension is componentwise under this product: restriction/tensor balancing from step 2 gives $(F,G)\\mapsto(TF,TG)$. Hence $T\\pi_{s,A}$ and $\\pi_{s,B}T$ both have components $(1,0)$ after the open and pullback comparisons. This proves equality of ordinary $B$-system maps. This product argument also covers an empty selected component or an empty complement.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-pur-diagram-open-clopen-shift-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), intrinsic clopen-factor description supplied by the cited nodes; coefficient-product calculation is agent-written"
+   }
+  },
+  {
+   "text": "The definition in [lem-sf-semilinear-proper-open-mate-pasting] is $\\alpha_{Q,C}=c_C\\circ J_{b,C}(\\pi_{s,C}P_{q,C})\\circ\\beta^{\\mathrm{geom}}_{i,p,C}$, where $c_C$ is the open/pullback compositor. Substitute step 2 for the first and last factors and step 3 for the middle factor. This gives\n$$\\beta_kP_{r,A}\\circ T_V\\alpha_{Q,A}\\circ\\ell_pJ_{i,A}\n=J_{k,B}\\ell_r\\circ\\alpha_{Q,B}T_W\\circ P_{p,B}\\beta_i.$$\nBoth sides run from $P_{p,B}T_ZJ_{i,A}$ to $J_{k,B}T_UP_{r,A}$. This is first an equality on ordinary systems. Apply the words degreewise to complexes and localize: all their functors are exact by step 1 and the cited open/inverse-image operations. The natural-transformation localization statement [lem-weil-pbc-localization-universal-property] preserves these equalities and compositions. Its descended maps are exactly the stipulated $\\ell,\\beta,\\alpha$ by the simultaneous model statement [lem-coef-semilinear-derived-sections]. Thus this is an equality in the derived category of systems itself.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization); substitution into the intrinsic alpha word"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-diagram-open-clopen-shift-models",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Extracted from lem-sf-system-proper-open-scalar-square; Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars inverse image functor comparison preserves composition and the identity and clopen projection",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalarsId and CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; no theorem for strict sheaf systems and their specified comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match: ring-module pseudofunctor laws alone do not identify the sheaf-system maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with an adjunction mate and composition of inverse image functors",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.homEquiv_extendScalarsId; CategoryTheory.mateEquiv_apply.",
+   "date": "2026-10-27",
+   "verdict": "no match: these give algebraic components or the mate formula, not the required normalized system identities"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mateEquiv_hcomp|conjugateEquiv_mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean; scalarIntrinsicAlphaCube|scalarInverseImageCoherence across lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has generic mate composition; no existing declaration for these coefficient-system cubes. Other scalar coherence modules use finite constant coefficients or different model choices.",
+   "date": "2026-10-27",
+   "verdict": "no match for the geometric scalar cube or the specified ell coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SystemProperOpenScalarSquare",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarIntrinsicAlphaCube",
+  "file": "lean/Sheaf/SixFunctors/ScalarIntrinsicAlphaCube.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.scalarIntrinsicAlphaCube",
+  "statement": "theorem scalarIntrinsicAlphaCube\n    {U V W Z : Scheme.{u}} (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (N : Derived A a W) :\n    (P B b p).map ((beta A B a b φ hφ d hd e i).inv.app N) ≫\n        (ell A B a b φ hφ d hd e p).hom.app ((J A a i).obj N) ≫\n        (T A B a b φ hφ d hd e V).map ((alpha A a k r p i h).app N) =\n      (alpha B b k r p i h).app ((T A B a b φ hφ d hd e W).obj N) ≫\n        (J B b k).map ((ell A B a b φ hφ d hd e r).hom.app N) ≫\n        (beta A B a b φ hφ d hd e k).inv.app ((P A a r).obj N)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs clone's item prefix (verbatim except private-helper rename); new sorry statements vs pinned pComp/pId/ell/alpha definitions in SemilinearProperOpenMatePasting; item proof vs node steps; both direct importers + transitive EISM compiled against delivered files"
+ }
+}

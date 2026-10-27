@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-galois-geometrically-integral-splitting",
+ "kind": "statement",
+ "title": "Finite Galois splitting into normal geometrically integral clopen components",
+ "statement": "Let $e$ be a field [def-weil-field] and let $B$ be a nonempty integral finite-type $e$-scheme [def-pc-integral-scheme] [def-weil-finite-type-morphism]. Suppose that every local ring of $B$ is an integrally closed domain and that $B$ is geometrically reduced [def-pc-geometrically-irreducible]. For every field extension $F/e$ [def-pc-field-extension], the scheme $B_F=B\\times_e\\operatorname{Spec}F$ [def-pc-fibre-product] is Noetherian, meaning that it admits a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. There exists a finite Galois extension $e_0/e$ (finite-dimensional, separable [def-weil-pbc-separable-algebraic-extension], and normal: every irreducible polynomial over $e$ with a root in $e_0$ splits over $e_0$) [def-pc-field-tower] such that the irreducible components [def-weil-irreducible-components] of $Y=B_{e_0}$ form a finite nonempty disjoint covering by nonempty open and closed subschemes $X_i$. Each $X_i$, with its induced open subscheme structure, is normal (all its local rings are integrally closed domains) and geometrically integral over $e_0$, meaning that $(X_i)_E$ is integral for every field extension $E/e_0$. The projection $p:Y\\to B$ is finite, etale and surjective [def-weil-finite-integral-morphism] [def-weil-etale-morphism] [def-weil-surjective-morphism]. If $B$ is proper over $e$ [def-weil-proper-morphism], every $X_i$ is proper over $e_0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150, first sentence: choose a finite Galois extension whose components are geometrically irreducible. Extracts returned item proof steps 1--4 including the conditional properness conclusion. Stacks varieties.tex Tag 054R, lemma-finite-extension-geometrically-irreducible-components; algebra.tex Tag 033C, lemma-normal-goes-up (normality on etale charts)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-field-tower",
+  "def-weil-irreducible-components",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "For any field extension $F/e$, finite-type base change makes $B_F$ finite type over $F$. By the definition of finite type it has a finite affine cover $\\operatorname{Spec}A_a$ with each $A_a$ a finitely generated $F$-algebra. The affine Noetherian lemma makes every $A_a$ Noetherian. This proves the asserted Noetherianity for every $F$, in particular for each extension chosen below. It uses neither separatedness of $B$ nor finite degree of $F/e$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type), 01T0 (definition-finite-type), 01T6 (lemma-finite-type-noetherian); algebra.tex Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "Apply the existing component-splitting theorem to $B/e$. It gives a field extension $L/e$ whose spectrum map is finite etale and for which every irreducible component of $B_L$ has irreducible nonempty inverse image after every extension of $L$. The extension $L/e$ is finite separable: apply the etale residue-field lemma to $e\\to L$ and the zero prime of $L$; the two residue fields are $e$ and $L$ themselves. Thus this $L$ satisfies the hypotheses of the finite-Galois receiving-extension theorem.",
+   "uses": [
+    "lem-sbc-generic-components-split",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054R (lemma-finite-extension-geometrically-irreducible-components); algebra.tex Tag 00U3 (lemma-etale-over-field)"
+   }
+  },
+  {
+   "text": "The map $p_L:B_L\\to B$ is finite and etale by base change of the spectrum map in step 2. That spectrum map is surjective since both field spectra have one point; surjective base change shows that $p_L$ is surjective, so $B_L$ is nonempty. Step 1 makes $B_L$ Noetherian, and $B$ is normal integral by hypothesis. Apply the etale normal-component theorem: write $B_L$ as a finite disjoint union of nonempty clopen normal integral open subschemes $D_i$. These are exactly its irreducible components. Indeed an irreducible subset cannot meet two disjoint clopen pieces, and each $D_i$ is itself irreducible and closed; maximality therefore identifies the components with the pieces. The index set is nonempty because their union is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-fin-etale-normal-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357 (lemma-normal-locally-finite-nr-irreducibles); algebra.tex Tag 033C (lemma-normal-goes-up); morphisms.tex Tags 01WL, 02GO; morphisms.tex Tag 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "Each $D_i$ is geometrically integral over $L$. For any field $E/L$, its base change $(D_i)_E$ is the open subscheme of $B_E$ on the inverse image of $D_i$: the restriction with the restricted structure sheaf satisfies the same fibre-product universal property. Its underlying space is irreducible and nonempty by step 2 and the component identification in step 3. Since $E$ is also an extension of $e$, the hypothesis of geometric reducedness makes $B_E$ reduced. The local rings of its open subscheme $(D_i)_E$ are the same local rings, hence reduced. Thus $(D_i)_E$ is nonempty, reduced and irreducible, hence integral. This argument works for every $E/L$, not just separable or algebraic extensions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-pc-geometrically-irreducible",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definitions Tags 035V (definition-geometrically-reduced), 020H (definition-geometrically-integral); properties.tex Tag 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "Apply the finite-Galois receiving-extension theorem to the single finite separable extension $L/e$. Obtain a finite separable normal extension $e_0/e$ and an $e$-embedding $L\\to e_0$; use this embedding for all subsequent base changes. Put $Y=B_{e_0}$ and $X_i=(D_i)_{e_0}$. Fibre-product associativity identifies $Y$ with $(B_L)_{e_0}$: both represent a map to $B$ and a compatible map to $\\operatorname{Spec}e_0$. Write $q:Y\\to B_L$ for the projection. Open-immersion base change and the restriction universal property identify $X_i$ with $q^{-1}(D_i)$ and its complementary open with $q^{-1}(B_L\\setminus D_i)$. These inverse images are complementary because inverse image commutes with set difference and unions. Likewise their pairwise intersections are empty and their union is $Y$. Thus the $X_i$ form a finite disjoint clopen cover. For every field $E/e_0$, the same universal property gives $(X_i)_E\\cong(D_i)_E$, with $E$ viewed as an $L$-field. Step 4 makes this integral. Thus every $X_i$ is geometrically integral and nonempty (take $E=e_0$). As in step 3, these integral clopen pieces are precisely the irreducible components of $Y$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT (lemma-normal-closure), 0EXM (lemma-normal-closure-galois); schemes.tex Tag 01JY (lemma-base-change-immersion); ILO X 2.3 Step 2, printed p.150, first sentence"
+   }
+  },
+  {
+   "text": "Finite dimensionality makes the ring map $e\\to e_0$ finite, so its spectrum map is finite by the affine finite-map lemma. It is etale by finite separability, and surjective because both spectra are singletons. Base change along $B\\to\\operatorname{Spec}e$ now proves that $p:Y\\to B$ is finite, etale and surjective. To check normality as well, apply the etale normal-component theorem to this $p$: $Y$ is Noetherian by step 1 and $B$ is normal integral. It expresses $Y$ as a disjoint union of normal integral open subschemes, so every local ring of $Y$ is an integrally closed domain. Each $X_i$ is an open subscheme of $Y$, and therefore has the same local rings at its points. This proves the required normality of the $X_i$ without asserting normality after an arbitrary inseparable field extension.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-fin-etale-normal-components",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WI (lemma-finite-local), 02GL (lemma-etale-over-field), 01WL (lemma-base-change-finite), 02GO (lemma-base-change-etale); properties.tex Tag 0357 (lemma-normal-locally-finite-nr-irreducibles)"
+   }
+  },
+  {
+   "text": "Finally suppose $B/e$ is proper. Proper base change makes $Y/e_0$ proper. The open inclusion $X_i\\hookrightarrow Y$ is an immersion: factor it as the identity closed immersion of $X_i$ followed by that open inclusion. Its image is closed by step 5, so the closed-image immersion criterion makes it a closed immersion. The closed-subscheme clause of the properness lemma now makes $X_i/e_0$ proper. The properness hypothesis was used only in this final step.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper), 01W5 (lemma-closed-immersion-proper); schemes.tex Tag 01IQ (lemma-immersion-when-closed)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-fin-etale-normal-components",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 054R (lemma-finite-extension-geometrically-irreducible-components), assembled with fields.tex Tags 09DT/0EXM and properties.tex Tag 0357 to justify the finite Galois choice in ILO X 2.3 Step 2, printed p.150."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normal geometrically reduced integral finite type scheme over a field becomes a finite disjoint union of normal geometrically integral open and closed components after some finite Galois field extension",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIntegral\", \"IsGalois\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*component|component.*geometrically|Galois.*splitt",
+   "results": "OK 3 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a normal geometrically reduced integral variety there exists a finite Galois extension splitting all irreducible components into normal geometrically integral clopen subschemes",
+   "results": "OK 8 hits: IsGalois.to_normal, Algebra.IsGeometricallyReduced.casesOn, Ring.instIsGaloisFractionRingNormalClosure, IsGalois.is_separable_splitting_field, IsGalois.mk, IsGalois, IsGaloisGroup.of_isFractionRing, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a finite separable normal extension over which all geometric irreducible components of a normal geometrically reduced finite type scheme descend as integral clopen pieces",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Cc]omponent|[Cc]omponent.*exists|[Ee]tale.*[Nn]ormal",
+   "results": "OK 0 hits: ; Mathlib/AlgebraicGeometry/Geometrically",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern normalization, geometric reducedness or component equivalences for an already geometrically irreducible morphism; none chooses this splitting extension with normal geometrically integral clopen components"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIntegral\", \"IsGalois\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal geometrically reduced integral finite type scheme over a field becomes a finite disjoint union of normal geometrically integral clopen components after a finite Galois field extension",
+   "results": "OK 8 hits: instTotallySeparatedSpaceAlgEquivOfIsIntegral, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization, AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*component|component.*geometrically|Galois.*splitt",
+   "results": "OK 3 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a finite Galois extension of a field over which a normal geometrically reduced variety is a disjoint union of geometrically integral components",
+   "results": "OK 8 hits: IsGalois.to_normal, IsGalois.finiteDimensional_of_finite, IsGaloisGroup.isGalois, IsGalois.mk, IsGalois.integral, IsGalois, IsGaloisGroup.finite, IsGalois.to_isSeparable",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric irreducible components of a finite type scheme descend to a finite separable normal field extension",
+   "results": "OK 8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Cc]omponent|[Cc]omponent.*exists|[Ee]tale.*[Nn]ormal",
+   "results": "OK 0 hits:  ; directory Mathlib/AlgebraicGeometry/Geometrically",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and Galois-field results, component finiteness, or component equivalences assuming geometric irreducibility do not give the finite Galois splitting with all stated scheme properties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-galois-component-presentation",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X 2.3 Step 2, printed p.150, first sentence: choose a finite Galois extension whose components are geometrically irreducible. Extracts returned item proof steps 1--4 including the conditional properness conclusion. Stacks varieties.tex Tag 054R, lemma-finite-extension-geometrically-irreducible-components; algebra.tex Tag 033C, lemma-normal-goes-up (normality on etale charts).",
+   "via": [
+    "lem-sfb-galois-component-presentation",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-galois-geometrically-integral-splitting",
+  "worker": "stage1",
+  "summary": "Q126: seven-step assembly using existing nodes only. Verified the finite-separable component split, upgraded to a receiving finite Galois extension, checked geometric reducedness on all further field extensions, etale normality, clopen components, arbitrary-field Noetherianity and conditional properness. Statement unchanged. No new nodes. Repair of returned head 9012ec0bb1e: rebased split-owned fields onto the current live unsplit node; re-read all 22 cited statements and checked all 29 retained citation occurrences. Made the inverse-image argument for the clopen cover explicit in step 5. Preserved the approved argument, exact statement and logged searches; no new nodes.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images clause (3) alteration reduction, ILO X 2.3 Step 2, printed p.150 first sentence. The ancestor command reports None for this inherited chain; retained its existing from.node and via. Whole-blueprint searches found no equivalent full statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Generic finite-separable geometric component splitting (Stacks 054R), exactly the field-splitting tool used in the ILO alteration route; the present unit has no other statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Field-theoretic normal closure for the one finite separable extension already constructed; a generic tool, with no change of the ILO route."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic normality and clopen normal integral decomposition for a Noetherian etale source over a normal integral target; used only for finite etale constant-field base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-fin-etale-normal-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-4df913ab9",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-4df913ab9 (reviewer sub-agent of L); spot-checked: Read the item and all seven steps in full; there are no new nodes. The only differences from the live unsplit node are split-owned fields (statement, stmt_deps, source and blueprint identical), and all 32 cited statements equal the live DAG's. This re-delivers the reader-approved 9012ec0bb1e head after the L return of 2026-10-22 14:47 UTC, which was the landing refusal 'side completion never promoted', not a mathematical fault. The only change is a genuine clarification of step 5: the clopen cover is now made explicit through q:Y→B_L and inverse images, so this is not an A6 re-push. Source checks: ILO X 2.3 Step 2, printed p.150 (PDF p.156), chooses the finite Galois k0 splitting the components into geometrically irreducible ones. Stacks 054R (varieties l.1848) gives the finite separable splitting and is realized by lem-sbc-generic-components-split. All proof-step tag-label pairs are correct in tags/tags; advisory only: step 1 labels 01T0 'definition-finite-type', while it is section-finite-type. No SGA source is used. Step checks: step 1 gives Noetherianity of B_F for arbitrary F (finite-type base change, then a finite affine cover, then Hilbert's basis theorem). Step 2 obtains L/e finite separable from the étale residue-field lemma with A=e, B=L, q=0. In step 3 the étale normal-components lemma applies because B_L is Noetherian and B normal integral, and its clopen integral pieces are maximal irreducible, hence the components. Step 4 is elementary and correct for every E: B_E is reduced by geometric reducedness and the inverse image is irreducible and nonempty by 054R, so (D_i)_E is integral. In step 5 the receiving-Galois node with n=1 gives a normality form equivalent to the statement's, and (X_i)_E≅(D_i)_E via τ. In step 6 p is finite, étale and surjective by base change, and normality comes only over e0 via the étale normal-components lemma. In step 7 the open inclusion with closed image is a closed immersion, and proper base change plus closed-immersion-proper (c) give properness. Edge cases: Spec e, finite separable field spectra, geometrically integral B, and purely inseparable Spec e(a^{1/p}), which the geometric-reducedness hypothesis correctly excludes. The citer lem-sfb-galois-component-presentation uses exactly these clauses. The three generic tool_uses (054R splitting, normal closure, étale normality) are accepted. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisGeometricallyIntegralSplitting",
+  "declaration": "AlgebraicGeometry.exists_finite_galois_geometrically_integral_clopen_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisGeometricallyIntegralSplitting.lean",
+  "statement": "theorem exists_finite_galois_geometrically_integral_clopen_components {e : Type u} [Field e] {B : Scheme.{u}} (f : B ⟶ Spec (CommRingCat.of e)) [IsIntegral B] [LocallyOfFiniteType f] [QuasiCompact f] [GeometricallyReduced f] (hB : ∀ b : B, IsDomain (B.presheaf.stalk b) ∧ IsIntegrallyClosed (B.presheaf.stalk b)) : (∀ (F : Type u) [Field F] [Algebra e F], IsNoetherian (pullback f (Spec.map (CommRingCat.ofHom (algebraMap e F))))) ∧ ∃ (e0 : Type u) (_ : Field e0) (_ : Algebra e e0), FiniteDimensional e e0 ∧ Algebra.IsSeparable e e0 ∧ Normal e e0 ∧ IsFinite (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))) ∧ Etale (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))) ∧ Surjective (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))) ∧ ∃ (n : ℕ) (U : Fin n → (pullback f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))).Opens), 0 < n ∧ (∀ i, IsClosed (U i : Set ↥ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))))) ∧ (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧ Set.range (fun i ↦ (U i : Set ↥ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))))) = irreducibleComponents ↥ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))) ∧ (∀ i, ∀ x : (U i).toScheme, IsDomain ((U i).toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed ((U i).toScheme.presheaf.stalk x)) ∧ (∀ i, GeometricallyIntegral ((U i).ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap e e0))))) ∧ (IsProper f → ∀ i, IsProper ((U i).ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap e e0)))))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546f5b3a6",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Only the item's lean record and a new module changed; the 14 stmt_dep records are identical to side-live and lean.statement is verbatim. Every hypothesis matches the node and none is stronger: Field e, explicit f, IsIntegral B, LocallyOfFiniteType+QuasiCompact (no separatedness), stalks that are integrally closed domains, GeometricallyReduced f. Every conclusion matches in the same quantifier order: IsNoetherian of every field base change (fields in Type u, Mathlib's geometrically convention), finite separable normal e0, the canonical pullback.fst finite/etale/surjective, 0<n clopen disjoint cover with range = irreducibleComponents, normal stalks on (U i).toScheme, GeometricallyIntegral of (U i).ι ≫ pullback.snd, and IsProper f → IsProper of each piece. Edge cases: empty B and n=0 excluded; the purely inseparable counterexample correctly excluded. One sorry theorem, no definitions, source/blueprint docstrings with all 7 proof steps, no pro-etale content, proof-dep imports exist, report has both sections. Minor: def-weil-field and def-weil-irreducible-components have null lean records but use Mathlib's Field and irreducibleComponents as other landed nodes do. Not compiled because no file changed."
+ }
+}

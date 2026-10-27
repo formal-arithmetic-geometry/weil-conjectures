@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-roos-arithmetic-normalization",
+ "kind": "statement",
+ "title": "Arithmetic restriction normalized by the actual derived-limit unit",
+ "statement": "Let A be an abelian category with countable products and inverse-tower limits, derived categories for A and its tower category, and K-injective resolutions of towers [def-weil-abstract-derived-category]. Assume its limit functor is additive. Fix e>=1 and the arithmetic restriction functor [def-sp-strict-tower-arithmetic-restriction-data], and let alpha be the ordinary limit-cone restriction. Let kappa identify the Roos functor [def-weil-strict-roos-model] with the actual total right-derived limit, normalized by the ordinary Roos inclusion and the universal derived unit, using the canonical degreewise limit-cone isomorphism. Any family r of maps of strict Roos complexes [def-sf-strict-roos-coordinate-interface] having the selection/block coordinate formula satisfies (1) its localization, followed by kappa and the exact-functor factorization, equals kappa followed by the canonical rightDerivedPullback of alpha; and (2) it sends every strict augmentation to the augmentation of the selected family, with its zero first coordinate. The hypotheses and both conclusions are exactly those in the attached Lean statement.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-weil-strict-roos-model",
+  "def-sf-strict-roos-coordinate-interface"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, arithmetic cofinality of inverse limits; agent auxiliary for Step 4 of lem-pur-compact-support-scalar-limit-reduction. The canonical right-derived-pullback unit calculation is supplied by the proved ShortExactPullback API; Tag 0941 is not claimed to state this complete normalized auxiliary."
+ },
+ "proof": [
+  {
+   "text": "Coordinate extensionality identifies the recorded family r with the canonical selection/block cone map of [lem-pur-compact-support-roos-cofinality]. Its proved naturality and ordinary kernel-inclusion square can therefore be used without choosing a new map.",
+   "uses": [
+    "lem-pur-compact-support-roos-cofinality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limit of tower complexes and the degreewise limit are compared by the canonical limit-cone isomorphism of [lem-sf-strict-roos-derived-limit-comparison]. Compose with each limit projection to verify that this isomorphism commutes with arithmetic restriction.",
+   "uses": [
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-injective tower complex the universal right-derived-limit unit is invertible. The assumed unit normalization of kappa then makes the localized Roos inclusion invertible. Cancel this inclusion; the ordinary square of Step 1, the limit comparison of Step 2, and the cochain formula rightDerivedFunctorUnitQ_rightDerivedPullback_app' prove the derived restriction equation. Both sides are natural transformations, so naturality along a quasi-isomorphic K-injective resolution extends the equation to an arbitrary tower complex. The K-injective resolution and derived functor API are those of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict augmentation has coordinates (0,a). Its composite with the selection/block map has coordinates (0,selected a), by [lem-pur-compact-support-roos-cofinality]. Coordinate extensionality identifies it with the augmentation of the selected compatible family. This includes the zero complex and e=1 without any extra assumption.",
+   "uses": [
+    "lem-pur-compact-support-roos-cofinality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stage 3 B2, 2026-10-27: fully proved abstract calculations extracted from the cofinal normalization step of the parent after replacing concrete sheaf calculations by abstract-category helpers; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"ext\"",
+   "results": "{\"t\": \"2026-10-26T22:28:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension\", \"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasPointwiseRightDerivedFunctor\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfHasPointwiseRightDerivedFunctor\"], \"digest\": \"43334cbec818c3b8\"}",
+   "date": "2026-10-27",
+   "verdict": "No single Mathlib theorem states this normalization. Use the existing proved project cofinality construction and the canonical derived-unit and K-injective-resolution APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural cofinal restriction map of Roos complexes agrees with the canonical map on right derived limits of inverse towers",
+   "results": "{\"t\": \"2026-10-26T22:28:25Z\", \"tool\": \"leanfinder\", \"query\": \"The natural cofinal restriction map of Roos complexes agrees with the canonical map on right derived limits of inverse towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.isoOfFinal\", \"InverseSystem.globalEquiv_naturality\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.arrowMap_limit\", \"localCohomology.diagramComp\", \"CategoryTheory.Functor.WellOrderInductionData.Extension.map_limit\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.arrowMap_functor_to_top\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone\\u03c0App_eq\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone\\u03c0App\"], \"digest\": \"a3ff5346ab80122e\"}",
+   "date": "2026-10-27",
+   "verdict": "No single Mathlib theorem states this normalization. Use the existing proved project cofinality construction and the canonical derived-unit and K-injective-resolution APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*[Rr]estrict|[Rr]estrict.*roos",
+   "results": "{\"t\": \"2026-10-26T22:28:25Z\", \"tool\": \"grep\", \"query\": \"roos.*[Rr]estrict|[Rr]estrict.*roos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No single Mathlib theorem states this normalization. Use the existing proved project cofinality construction and the canonical derived-unit and K-injective-resolution APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "date": "2026-10-27",
+  "group": "B2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 (Qbar-stage), independence of finite coefficient-extension models; Proof Step 4, normalization of the recorded arithmetic cofinal map.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RoosArithmeticNormalization",
+  "file": "lean/Sheaf/CategoryTheory/RoosArithmeticNormalization.lean",
+  "declaration": "CategoryTheory.roosArithmeticNormalization",
+  "declarations": [
+   "CategoryTheory.roosArithmeticNormalization"
+  ],
+  "statement": "theorem roosArithmeticNormalization (e : ℕ) (he : 1 ≤ e)\n    (α : (lim : (ℕᵒᵖ ⥤ A) ⥤ A) ⟶\n      StrictTowerArithmetic.restriction A e ⋙ lim)\n    (hα : ∀ T, α.app T = limit.pre T (StrictTowerArithmetic.index e))\n    (κ : roosF (A := A) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙\n      (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor)\n    (hk : ∀ L, DerivedCategory.Q.map (roosι L) ≫ κ.hom.app L =\n      DerivedCategory.Q.map\n        (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval L.asFunctor,\n          HomologicalComplex.isLimitConeOfHasLimitEval L.asFunctor⟩).hom ≫\n        (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctorUnitQ L)\n    (r : ∀ L : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,\n      strictRoosComplex L ⟶\n        strictRoosComplex ((StrictTowerArithmetic.complexRestriction A e).obj L))\n    (hr : ∀ L p, (r L).f (p + 1) ≫\n      (strictRoosCoordinates ((StrictTowerArithmetic.complexRestriction A e).obj L) p).hom =\n        (strictRoosCoordinates L p).hom ≫\n          biprod.map ((StrictTowerArithmetic.block e L.asFunctor).f p)\n            ((StrictTowerArithmetic.selection e L.asFunctor).f (p + 1)))\n    (K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :\n    (DerivedCategory.Q.map (r K) ≫\n        κ.hom.app ((StrictTowerArithmetic.complexRestriction A e).obj K) ≫\n        (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor.map\n          ((StrictTowerArithmetic.restriction A e).mapDerivedCategoryFactors.inv.app K) =\n      κ.hom.app K ≫\n        (Functor.rightDerivedPullback (StrictTowerArithmetic.restriction A e) α).app\n          (DerivedCategory.Q.obj K)) ∧\n      ∀ (P : CochainComplex A ℤ) (a : ∀ n : ℕ, P ⟶ K.asFunctor.obj (op n))\n        (ha : ∀ n : ℕ, a (n + 1) ≫\n          K.asFunctor.map (homOfLE (Nat.le_succ n)).op = a n)\n        (h : ∀ n : ℕ, a (e * (n + 2) - 1) ≫\n          K.asFunctor.map ((StrictTowerArithmetic.index e).map\n            (homOfLE (Nat.le_succ n)).op) = a (e * (n + 1) - 1)),\n        roosAugment a ha ≫ r K = roosAugment (fun n : ℕ ↦ a (e * (n + 1) - 1)) h",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-42efb",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261027T050536-L-234734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-42efb",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261027T050536-L-234734",
+  "kind": "interface",
+  "note": "independent cc review: moved scalarRoosComparison_existsUnique vs clone (verbatim); scalarRoosNormalization statement vs clone (unchanged); 3 delivered modules + 10 direct importers compiled together (all OK); axioms clean; new node stmt_deps vs definition owners"
+ }
+}

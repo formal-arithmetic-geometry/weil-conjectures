@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-borel-root-product-coordinates",
+ "kind": "statement",
+ "title": "Ordered root subgroup coordinates on a Borel unipotent radical",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T\\subseteq G$ and a Borel subgroup $B\\supseteq T$, with unipotent radical $U=R_u(B)$ and positive roots $\\Phi^+$ as in [lem-sfb-reductive-borel-pair-structure]. For each root $\\alpha$, let $U_\\alpha\\subseteq G$ be the root subgroup of [lem-sfb-reductive-root-subgroup-parametrizations]. If $\\Phi^+=\\{\\alpha_1,\\ldots,\\alpha_r\\}$ is any enumeration without repetitions, each inclusion $U_{\\alpha_i}\\hookrightarrow G$ factors through $U$, and multiplication is an isomorphism of $F$-schemes\n$$U_{\\alpha_1}\\times_F\\cdots\\times_F U_{\\alpha_r}\\xrightarrow{\\ \\sim\\ }U,\\qquad (u_1,\\ldots,u_r)\\longmapsto u_1\\cdots u_r.$$\nIt is $T$-equivariant for componentwise conjugation on the source and conjugation on $U$. For $r=0$ the source is $\\operatorname{Spec}F$ and the assertion says $U=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.68(a), printed p.445; the root subgroup parametrizations are 21.19, printed p.431. Empty-root case is included."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a regular cocharacter $\\lambda:\\mathbf G_m\\to T$ with $B=P(\\lambda)$ by [lem-sfb-regular-cocharacter-borel-description]. The same node gives $\\operatorname{Lie}(B)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\langle\\alpha,\\lambda\\rangle>0}\\mathfrak g_\\alpha$. By the convention in [lem-sfb-reductive-borel-pair-structure], the roots occurring in this Lie algebra are exactly $\\Phi^+$. Thus $n_i=\\langle\\alpha_i,\\lambda\\rangle$ is a strictly positive integer for every $i$, and the displayed sum is over our enumeration. These are integer character weights in all characteristics.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), proof, choice of dominant cocharacter; 21.32 and 21.35, pp.434--435."
+   }
+  },
+  {
+   "text": "Let $U_\\lambda$ be the subgroup of [lem-sfb-cocharacter-limit-smooth-structure]. It is a smooth connected normal unipotent subgroup of $P(\\lambda)=B$, so it is contained in $U=R_u(B)$ by the defining maximality of $U$ in [lem-sfb-reductive-borel-pair-structure]. Choose the isomorphisms $u_{\\alpha_i}:\\mathbf G_a\\to U_{\\alpha_i}$ of [lem-sfb-reductive-root-subgroup-parametrizations]. Over every commutative $F$-algebra $A$, their conjugation formula reads $\\lambda(t)u_{\\alpha_i}(a)\\lambda(t)^{-1}=u_{\\alpha_i}(t^{n_i}a)$. The right side extends to $t\\in\\mathbf A^1_A$ and is $1$ at zero. This is precisely the defining condition for $U_\\lambda(A)$. Hence the inclusions of all positive root subgroups factor through $U_\\lambda\\subseteq U$ as subgroup schemes, including on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), multiplication lands in B_u; Definitions 13.21 and Theorem 13.33, pp.261,265--266; root formula 21.19, p.431."
+   }
+  },
+  {
+   "text": "Differentiate the $T$-equivariant scheme isomorphism $U\\times_F T\\to B$ and projection $p:B\\to T$ in [lem-sfb-reductive-borel-pair-structure]. Tangent vectors to a product are pairs of dual-number points, so this gives $\\operatorname{Lie}(B)=\\operatorname{Lie}(U)\\oplus\\operatorname{Lie}(T)$ and $\\ker(d p)=\\operatorname{Lie}(U)$. The action of $\\lambda$ on $\\operatorname{Lie}(T)$ is trivial. On $\\mathfrak g_{\\alpha_i}$ it is $t^{n_i}$ by step 1. Equivariance forces $(t^{n_i}-1)d p(v)=0$ over $F[t,t^{-1}]$, so $d p(v)=0$ by comparing coefficients. Since $d p$ is the identity on $\\operatorname{Lie}(T)$, the decomposition from step 1 now gives $\\operatorname{Lie}(U)=\\bigoplus_i\\mathfrak g_{\\alpha_i}$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), tangent-space assertion, p.445; B=U semidirect T in Theorem 16.33(d), p.336; explicit differentiation."
+   }
+  },
+  {
+   "text": "Put $X=\\prod_i U_{\\alpha_i}$ with identity tuple $e_X$. The parametrizations in [lem-sfb-reductive-root-subgroup-parametrizations] identify it with $\\operatorname{Spec}F[z_1,\\ldots,z_r]$. Thus it is affine, connected and of finite type, and smooth: the polynomial algebra is finitely presented and a map from it lifts across a square-zero quotient by lifting its variables. The point $e_X$ is fixed by componentwise conjugation, and its tangent space is $\\bigoplus_i\\mathfrak g_{\\alpha_i}$ with $\\lambda$-weights $n_i>0$. Step 2 defines the multiplication morphism $m:X\\to U$. Over every test algebra, $(t u_1t^{-1})\\cdots(t u_rt^{-1})=t(u_1\\cdots u_r)t^{-1}$, so $m$ is $T$-equivariant and sends $e_X$ to $1$. Its differential sends $(v_i)$ to $\\sum_i v_i$: on dual numbers all cross terms contain $\\epsilon^2=0$. By step 3 and the specified tangent spaces of the root subgroup inclusions, this is an isomorphism.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), first two sentences of proof, p.445; parametrizations 21.19, p.431; explicit polynomial and dual-number calculations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-positive-weight-equivariant-inverse] to $m:X\\to U$, using conjugation through $\\lambda$ for its $\\mathbf G_m$-actions and the fixed points $e_X,1$. The source has the geometry established in step 4. The target is smooth, connected, affine and of finite type by the definition of $R_u(B)$, and the differential is the isomorphism of step 4. All source tangent weights are strictly positive. Hence $m$ is an isomorphism of $F$-schemes, with the $T$-equivariance already proved. The argument never changes the chosen order. If $r=0$, the source is $\\operatorname{Spec}F$, step 3 gives $\\operatorname{Lie}(U)=0$, and the same inverse lemma applies with the empty set of weights. Its isomorphism is the unit section, so $U=1$.",
+   "uses": [
+    "lem-sfb-positive-weight-equivariant-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.68(a), last sentences of proof, p.445, referring to Corollary 13.42, p.270; Remark 21.69, p.446, permits any order."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-positive-weight-equivariant-inverse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.68(a), printed p.445, and Remark 21.69, p.446; its tangent-space/positive-weight proof using Corollary 13.42, p.270. Containment and tangent-space calculations are spelled out using 13.33, 16.33(d), 21.19 and 21.32."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "root.*subgroup|unipotent.*radical|BorelSubgroup",
+   "results": "25 hits; inspected: Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean, Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/Algebra/Group/Subgroup/Lattice.lean, Mathlib/Algebra/Group/Subgroup/Lattice.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unipotent radical of a Borel subgroup is the product of its positive root groups",
+   "results": "8 hits; inspected: Units.posSubgroup.congr_simp, UniqueFactorizationMonoid.radical, UniqueFactorizationMonoid.primeFactors_radical, UniqueFactorizationMonoid.radical_mul_dvd, UniqueFactorizationMonoid.radical_one, UniqueFactorizationMonoid.radical_dvd_self, UniqueFactorizationMonoid.isRadical_radical, UniqueFactorizationMonoid.radical_prod",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"Borel\"",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive algebraic group multiplication of the positive root subgroups in any order is an isomorphism onto the unipotent radical of a Borel subgroup",
+   "results": "8 hits; inspected: RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieAlgebra.rootSpaceProduct_def, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, RootPairing.range_weylGroup_coweightHom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered root group coordinates identify the unipotent group of a Borel with affine space in arbitrary characteristic",
+   "results": "8 hits; inspected: RootPairing.GeckConstruction.u, RootPairing.GeckConstruction.h', RootPairing.EmbeddedG2.setOf_index_eq_univ, RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.EmbeddedG2.indexEquivAllRoots, RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe, RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u, RootPairing.GeckConstruction.v",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "root[ _-]subgroup|unipotent.{0,20}radical|BorelSubgroup",
+   "results": "3 hits; inspected: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\"",
+   "results": "6 hits; inspected: CategoryTheory.Biprod.unipotentLower, CategoryTheory.Biprod.unipotentUpper, CategoryTheory.Biprod.unipotentLower_hom, CategoryTheory.Biprod.unipotentUpper_hom, CategoryTheory.Biprod.unipotentLower_inv, CategoryTheory.Biprod.unipotentUpper_inv",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root pairings and their Lie algebras, integer radicals, categorical unipotent matrices, or the abstract SL line stabilizer; none states an ordered root subgroup product for reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "root.?subgroup|unipotent.{0,20}radical|BorelSubgroup",
+   "results": "3 hits; read: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, products of abstract additive groups and SL line stabilizers do not state the ordered product theorem for root subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication of root groups identifies a Borel unipotent radical with a product of additive group schemes",
+   "results": "8 hits; read: RootDatum, AddSubmonoid.mul, AddSubgroup.mul, MulAutMultiplicative, CategoryTheory.Grp.tensorUnit_mul, Prod.rootableBy, AddEquiv.piAddUnits, MulEquiv.piMultiplicative",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, products of abstract additive groups and SL line stabilizers do not state the ordered product theorem for root subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"Borel\"",
+   "results": "0 hits; read: none",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, products of abstract additive groups and SL line stabilizers do not state the ordered product theorem for root subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered multiplication of positive root subgroup schemes is a torus equivariant isomorphism onto the unipotent radical of a Borel subgroup in a reductive algebraic group",
+   "results": "8 hits; read: RootPairing.EmbeddedG2.indexEquivAllRoots, RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.Equiv.weightEquiv_mul, RootPairing.EmbeddedG2.indexEquivAllRoots_symm_apply, RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe, RootPairing.Equiv.root_indexEquiv_eq_smul, RootPairing.baseOf_root_eq_baseOf_coroot, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, products of abstract additive groups and SL line stabilizers do not state the ordered product theorem for root subgroup schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-primitive-cyclic-weight-bound",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Duality step: the highest weight of a dual simple module is the opposition of the original highest weight, and highest weight determines the simple module. Supporting input to Milne 22.18 and 22.19: Proposition 22.17, multiplicity and weight bound for a cyclic module generated by a Borel eigenvector. Ordered-root-factor input for the sentence in Milne 22.17: the opposite unipotent group is generated by negative root groups; specifically Milne 21.68(a), ordered multiplication for the Borel unipotent radical.",
+   "via": [
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-root-product-coordinates",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Milne 21.68(a): used existing regular-cocharacter, limit-subgroup, Borel-splitting and root-parametrization statements; expanded functorial containment and the tangent direct sum, and added only the general positive-weight equivariant inverse theorem (Milne 13.42). Checked arbitrary order, characteristic p and the empty root set. No Lean attachment or Mathlib match.",
+  "blueprint": "The inherited blueprint.from.node is null, as blueprint_refs.py ancestor confirms. Retain the exact place and via chain. This supplies the ordered-root-factor input to Milne 22.17 beneath det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches for root subgroup, 21.68, Luna, positive weight, contracting and tangent space found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-efef18448",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-efef18448 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and the new node in full against Milne iAG 21.68(a) (p.445), 21.69 (p.446) and 13.41-13.42 (pp.269-270). The item statement is unchanged and faithful to the source. Step 1: regular λ with B=P(λ), and Φ+ = the roots in Lie B, so every n_i is a positive integer. Step 2: U_λ is a smooth connected unipotent normal subgroup of P(λ), hence lies in R_u(B); the root-subgroup formula u(t^n a) extends over A^1_A with value 1 at 0 for every test algebra, so each U_α factors through U as a scheme. Step 3 (elementary): from B=U⋊T and dp equivariant, (t^n-1)dp(v)=0, so Lie U = ⊕g_α. Step 4 (elementary): X is affine space and dm is the sum map, an isomorphism onto Lie U. Step 5 applies the new node with all its hypotheses supplied, including r=0. The new node lem-sfb-positive-weight-equivariant-inverse is Milne 13.42 for T=G_m with X and Y smooth; I proved it char-free myself (graded ring argument: positive grading, then graded Nakayama, then equal dimensions) and tested Spec F, weighted triangular maps, z^p and mixed-weight surfaces. It is not a duplicate: I searched the snapshot, live and side-live DAGs for Luna, strictly definite, 13.41/13.42 and positive weights. It does not restate a clause of the item. proof_deps equals the union of the step uses. The item is unsplit in clones/live and has no repair note. Batch-5 flag: lem-trf-smooth-fpqc-base-descent is the Stacks 02VL Mathlib leaf, generic flat descent outside the trace formula and Poincaré duality, so accepted. No SGA, no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelRootProductCoordinates",
+  "declaration": "AlgebraicGeometry.borel_root_product_coordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelRootProductCoordinates.lean",
+  "statement": "theorem borel_root_product_coordinates {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ n : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F n)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (U : Grp (Over (Spec (.of F)))) (iU : U ⟶ B) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconn : ConnectedSpace U.X.left) (hUunip : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (r : ℕ) (α : Fin r → (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hαinj : Function.Injective α) (hαpos : ∀ χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), (∃ i : Fin r, α i = χ) ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ ≠ ⊥ ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥) (R : Fin r → Grp (Over (Spec (.of F)))) (iR : ∀ i : Fin r, R i ⟶ G) (hR : ∀ i : Fin r, IsClosedSubgroupScheme (iR i).hom.hom ∧ Smooth (R i).X.hom ∧ ConnectedSpace (R i).X.left ∧ @TorusCharacterTangent.IsStable F _ T G aG _ (iR i) ∧ (GrpObj.differential (iR i).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ T G aG (α i)) : ∃ k : ∀ i : Fin r, R i ⟶ U, (∀ i : Fin r, k i ≫ iU ≫ iB = iR i) ∧ IsIso ((List.ofFn (fun i : Fin r ↦ Pi.π (fun l : Fin r ↦ (R l).X) i ≫ (k i).hom.hom)).prod) ∧ ∃ (aU : ModObj T.X U.X) (aR : ∀ i : Fin r, ModObj T.X (R i).X), aU.smul ≫ iU.hom.hom = (j.hom.hom ⊗ₘ iU.hom.hom) ≫ GrpObj.conj B.X ∧ (∀ i : Fin r, (aR i).smul ≫ (iR i).hom.hom = (iT.hom.hom ⊗ₘ (iR i).hom.hom) ≫ GrpObj.conj G.X) ∧ ∀ (W : Over (Spec (.of F))) (t : W ⟶ T.X) (x : ∀ i : Fin r, W ⟶ (R i).X), (List.ofFn (fun i : Fin r ↦ (lift t (x i) ≫ (aR i).smul) ≫ (k i).hom.hom)).prod = lift t ((List.ofFn (fun i : Fin r ↦ x i ≫ (k i).hom.hom)).prod) ≫ aU.smul",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0aecd4cbd",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Checked every clause against the node, Milne 21.68(a)/21.69 and the two stmt_dep Lean records. GrpObj.conj = g h g⁻¹ matches the parametrization's hconj, so roots are not negated. hαpos equals Φ⁺ via the Borel-pair theorem's Φ and b.IsPos ↔ ws_B clauses. hR is the parametrization's uniqueness characterization (closed, smooth, connected, IsStable, dR range = weightSpace). U is given by the radical's maximality clause verbatim. Conclusion: factorization k, IsIso of the ordered List.ofFn product over the Over(Spec F) product, and aU/aR pinned to conjugation with equivariance on all test schemes W. r=0 is covered (terminal source, unit map). No characteristic or universe restriction. lean.statement equals the file signature verbatim; node unchanged apart from the lean record; one sorry, no new defs; docstrings carry source place, blueprint tag and all 5 steps. No duplicate found; consistent with the citer bruhat_longest_cell_charts. Worker reports a clean compile; no file changed, so no recompile."
+ }
+}

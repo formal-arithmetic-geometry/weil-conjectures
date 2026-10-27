@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-closed-submonoid-group-subscheme",
+ "kind": "statement",
+ "title": "Reduced Zariski closure of a monoid is a group subscheme",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a separated finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $M\\subseteq G(k)$ contain the identity and satisfy $ab\\in M$ for all $a,b\\in M$. Let $H$ be its reduced Zariski closure in $G$: on each affine open it is defined by the radical ideal of functions vanishing on $M$ in that open. Then multiplication, identity and inverse of $G$ restrict to $H$, making $H\\hookrightarrow G$ a closed subgroup scheme [def-sc-group-scheme-subgroup]. No affineness, smoothness or connectedness of $G$ or $H$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1(c): Aside 1.55, p.21 (algebraic submonoids are subgroups), with Theorem 1.45 and Corollary 1.47, pp.19--20 (closed point subgroups and reduced subgroup schemes). Applied to the reduced closure using multiplication on dense rational points; compare the closure step in the referenced Milne (2013), Proposition 4.1 proof. No single Stacks tag states this combined assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-field-valued-points",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $Z=\\overline M$ for closure in the underlying space $|G|$. Finite type gives a finite affine open cover $G=\\bigcup_i\\operatorname{Spec}A_i$ with each $A_i$ a finitely generated $k$-algebra. By [lem-wf-affine-noetherian-components] each such open is Noetherian as a topological space, and [lem-kun-finite-union-noetherian] makes $|G|$ Noetherian. Thus descending chains of closed subsets of $|G|$ stabilize. The identity point belongs to $Z$ since it belongs to $M$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "lem-kun-finite-union-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0053, label lemma-finite-union-Noetherian; finite-type affine cover from the definition; affine Noetherianity as in lem-wf-affine-noetherian-components."
+   }
+  },
+  {
+   "text": "For $g\\in G(k)$ the morphisms $L_g(x)=gx$ and $R_g(x)=xg$ have inverses $L_{g^{-1}}$ and $R_{g^{-1}}$, by the group diagrams [def-sc-group-scheme]; hence they induce homeomorphisms of $|G|$. For $m\\in M$, $R_m(M)\\subseteq M$, so $R_m(Z)=\\overline{R_m(M)}\\subseteq Z$. If $a\\in G(k)$ has underlying point in $Z$, it follows that $am\\in Z$ for every $m\\in M$. Consequently $L_a(M)\\subseteq Z$ and $L_a(Z)=\\overline{L_a(M)}\\subseteq Z$. In particular the rational points in $Z$ are closed under multiplication. These closure identities use homeomorphisms one at a time.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1(c), Aside 1.55, printed p.22 (PDF p.34), finite-monoid translation analogy; agent proof using Noetherianity rather than Ax-Grothendieck. Final realization: Theorem 1.45, printed p.19."
+   }
+  },
+  {
+   "text": "Fix $a\\in G(k)$ lying in $Z$. The subsets $Z\\supseteq L_a(Z)\\supseteq L_a^2(Z)\\supseteq\\cdots$ are closed in $|G|$, since $L_a$ is a homeomorphism, and the inclusions follow by repeatedly applying $L_a$ to $L_a(Z)\\subseteq Z$. Noetherianity established in step 1 (from [lem-wf-affine-noetherian-components, lem-kun-finite-union-noetherian]) gives $L_a^n(Z)=L_a^{n+1}(Z)$ for some $n\\geq0$. Apply $L_{a^{-n}}$ to this equality to obtain $Z=L_a(Z)$. As $1\\in Z$, there is $z\\in Z$ with $az=1$, and the inverse homeomorphism forces this point to be $a^{-1}$. Therefore $S=G(k)\\cap Z$ contains the identity and is closed under multiplication and inversion. It is closed in $G(k)$ with its subspace topology.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-kun-finite-union-noetherian",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1(c), Aside 1.55, printed p.22 (PDF p.34), finite-monoid translation analogy; agent proof using Noetherianity rather than Ax-Grothendieck. Final realization: Theorem 1.45, printed p.19."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-closed-rational-subgroup-realization] to the closed subgroup $S$ just obtained. Its reduced closure $K\\hookrightarrow G$ has multiplication, identity and inverse restricted from $G$. The inclusions $M\\subseteq S\\subseteq Z$ give $\\overline S=Z$. To identify $K$ with the $H$ in the statement, on any affine open $U$ the subset $M\\cap U$ is dense in $Z\\cap U$: every open neighbourhood in $U$ of a point of $Z\\cap U$ is also open in $G$ and meets $M$. The zero locus of any section on $U$ is closed in $U$, so a section vanishes on $M\\cap U$ exactly when it vanishes on $Z\\cap U$. By [lem-weil-pbc-reduced-induced-closed-subscheme] these are precisely the radical ideals defining the reduced induced closed scheme on $Z$. Thus both $H$ and $K$ are that same closed subscheme, and the restricted operations on $K$ supply all the required operations on $H$.",
+   "uses": [
+    "lem-sfb-closed-rational-subgroup-realization",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 1.45 and its proof, printed p.19 (PDF p.31); reduced-structure identification also Stacks Tag 01J3, schemes.tex, label lemma-reduced-closed-subscheme."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-kun-finite-union-noetherian",
+  "def-sc-group-scheme",
+  "lem-sfb-closed-rational-subgroup-realization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1(c), Aside 1.55, printed p.22 (PDF p.34), finite-monoid translation analogy; agent proof using Noetherianity rather than Ax-Grothendieck. Final realization: Theorem 1.45, printed p.19. The two translation/closure passes and the descending-chain cancellation are written by Q70."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The reduced Zariski closure of a submonoid of rational points in an algebraic group over an algebraically closed field is a closed subgroup scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"topologicalClosure_subgroupClosure_toSubmonoid\", \"module\": \"Mathlib/Topology/Algebra/Group/SubmonoidClosure\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [CompactSpace G] [inst_3 : IsTopologicalGroup G]\\n  (s : Set G), (Subgroup.closure s).topologicalClosure = (Submonoid.closure s).topologicalClosure\", \"doc\": \"For any subset $ S $ of a topological group $ G $, the topological closure of the submonoid obtained by converting the subgroup generated by $ S $ is equal to the topological closure of the submonoid \"}\n  {\"name\": \"closure_submonoidClosure_eq_closure_subgroupClosure\", \"module\": \"Mathlib/Topology/Algebra/Group/SubmonoidClosure\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [CompactSpace G] [IsTopologicalGroup G] (s : Set G),\\n  closure ↑(Submonoid.closure s) = closure ↑(Subgroup.closure s)\", \"doc\": \"For any subset $ S $ of a topological group $ G $, the topological closure of the submonoid generated by $ S $ is equal to the topological closure of the subgroup generated by $ S $. In symbols, $ \\\\ov\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  IsClosed (Set.range ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F))\", \"doc\": \"The image of the automorphism group embedding $\\\\text{Aut}(F) \\\\to \\\\prod_{X \\\\in \\\\mathcal{C}} \\\\text{Aut}(F(X))$ is a closed subset in the product topology, where each factor $\\\\text{Aut}(F(X))$ is equippe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"ProjectiveSpectrum.isClosed_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (s : Set A), IsClosed (ProjectiveSpectrum.zeroLocus 𝒜 s)\", \"doc\": \"For any subset $ s $ of a graded ring $ A $, the zero locus of $ s $ in the projective spectrum $ \\\\text{Proj}(A) $—defined as the set of all homogeneous prime ideals containing $ s $—is a closed set i\"}\n  {\"name\": \"closure_range_zpow_eq_pow\", \"module\": \"Mathlib/Topology/Algebra/Group/SubmonoidClosure\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [CompactSpace G] [IsTopologicalGroup G] (x : G),\\n  closure (Set.range fun x_1 => x ^ x_1) = closure (Set.range fun x_1 => x ^ x_1)\", \"doc\": \"In a topological group $G$, for any element $x$, the closure of the set of all integer powers $\\\\{x^n \\\\mid n \\\\in \\\\mathbb{Z}\\\\}$ is equal to the closure of the set of all natural number powers $\\\\{x^n \\\\mi\"}\n  {\"name\": \"ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (t : Set (ProjectiveSpectrum 𝒜)),\\n  ProjectiveSpectrum.zeroLocus 𝒜 ↑(ProjectiveSpectrum.vanishingIdeal t) = closure t\", \"doc\": \"For any subset $ t $ of the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, the zero locus of its vanishing ideal $I(t)$ coincides with the topological closure of $t$, i.e., $V(I(t)) = \\\\overline{t}$. \"}\n  {\"name\": \"dense_submonoidClosure_iff_subgroupClosure\", \"module\": \"Mathlib/Topology/Algebra/Group/SubmonoidClosure\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [CompactSpace G] [IsTopologicalGroup G] {s : Set G},\\n  Dense ↑(Submonoid.closure s) ↔ Dense ↑(Subgroup.closure s)\", \"doc\": \"For a subset $ s $ of a topological group $ G $, the submonoid generated by $ s $ is dense in $ G $ if and only if the subgroup generated by $ s $ is dense in $ G $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The compact-topological-group and finite abstract-group closure results have different hypotheses; scheme Zariski multiplication does not give a topological group for the ordinary product topology. None gives this group subscheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Submonoid\", \"Subgroup\", \"closure\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddSubgroup.le_closure_toAddSubmonoid\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \" {G : Type u_1} [AddGroup G] (S : Set G) : AddSubmonoid.closure S ≤ (AddSubgroup.closure S).toAddSubmonoid\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.le_closure_toSubmonoid\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \" {G : Type u_1} [Group G] (S : Set G) : Submonoid.closure S ≤ (Subgroup.closure S).toSubmonoid\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.closure_toAddSubmonoid\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \" {G : Type u_2} [AddGroup G] (S : Set G) : (AddSubgroup.closure S).toAddSubmonoid = AddSubmonoid.closure (S ∪ -S)\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.closure_toSubmonoid\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \" {G : Type u_2} [Group G] (S : Set G) : (Subgroup.closure S).toSubmonoid = Submonoid.closure (S ∪ S⁻¹)\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.closure_toAddSubmonoid_of_finite\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \" {G : Type u_1} [AddGroup G] [Finite G] {s : Set G} : (AddSubgroup.closure s).toAddSubmonoid = AddSubmonoid.closure s\", \"doc\": \"See `AddSubgroup.closure_toAddSubmonoid_of_isOfFinOrder` for a version with weaker\\nassumptions.\"}\n  {\"name\": \"Subgroup.closure_toSubmonoid_of_finite\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \" {G : Type u_1} [Group G] [Finite G] {s : Set G} : (Subgroup.closure s).toSubmonoid = Submonoid.closure s\", \"doc\": \"See `Subgroup.closure_toSubmonoid_of_isOfFinOrder` for a version with weaker assumptions.\"}\n  {\"name\": \"AddSubgroup.closure_toAddSubmonoid_of_isOfFinAddOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \" {G : Type u_1} [AddGroup G] {s : Set G} (hs : ∀ x ∈ s, IsOfFinAddOrder x) : (AddSubgroup.closure s).toAddSubmonoid = AddSubmonoid.closure s\", \"doc\": \"See `AddSubgroup.closure_toAddSubmonoid_of_finite` for a version for finite additive groups.\"}\n  {\"name\": \"Subgroup.closure_toSubmonoid_of_isOfFinOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \" {G : Type u_1} [Group G] {s : Set G} (hs : ∀ x ∈ s, IsOfFinOrder x) : (Subgroup.closure s).toSubmonoid = Submonoid.closure s\", \"doc\": \"See `Subgroup.closure_toSubmonoid_of_finite` for a version for finite groups.\"}\n  {\"name\": \"dense_addSubmonoidClosure_iff_addSubgroupClosure\", \"module\": \"Mathlib.Topology.Algebra.Group.SubmonoidClosure\", \"type\": \" {G : Type u_1} [AddGroup G] [TopologicalSpace G] [CompactSpace G] [IsTopologicalAddGroup G] {s : Set G} : Dense ↑(AddSubmonoid.closure s) ↔ Dense ↑(AddSubgroup.closure s)\", \"doc\": \"\"}\n  {\"name\": \"dense_submonoidClosure_iff_subgroupClosure\", \"module\": \"Mathlib.Topology.Algebra.Group.SubmonoidClosure\", \"type\": \" {G : Type u_1} [Group G] [TopologicalSpace G] [CompactSpace G] [IsTopologicalGroup G] {s : Set G} : Dense ↑(Submonoid.closure s) ↔ Dense ↑(Subgroup.closure s)\", \"doc\": \"\"}\n  {\"name\": \"closure_addSubmonoidClosure_eq_closure_addSubgroupClosure\", \"module\": \"Mathlib.Topology.Algebra.Group.SubmonoidClosure\", \"type\": \" {G : Type u_1} [AddGroup G] [TopologicalSpace G] [CompactSpace G] [IsTopologicalAddGroup G] (s : Set G) : closure ↑(AddSubmonoid.closure s) = closure ↑(AddSubgroup.closure s)\", \"doc\": \"\"}\n  {\"name\": \"closure_submonoidClosure_eq_closure_subgroupClosure\", \"module\": \"Mathlib.Topology.Algebra.Group.SubmonoidClosure\", \"type\": \" {G : Type u_1} [Group G] [TopologicalSpace G] [CompactSpace G] [IsTopologicalGroup G] (s : Set G) : closure ↑(Submonoid.closure s) = closure ↑(Subgroup.closure s)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The compact-topological-group and finite abstract-group closure results have different hypotheses; scheme Zariski multiplication does not give a topological group for the ordinary product topology. None gives this group subscheme."
+  },
+  {
+   "tool": "grep",
+   "query": "submonoid.*closure|closure.*submonoid|subsemigroup|closed.*monoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The compact-topological-group and finite abstract-group closure results have different hypotheses; scheme Zariski multiplication does not give a topological group for the ordinary product topology. None gives this group subscheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Zariski closed subsemigroup of an algebraic group containing the identity is a subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(G : Type u_3) → [Group G] → Type u_3\", \"doc\": \"A subgroup of a group $G$ is a subset $H \\\\subseteq G$ containing the identity element of $G$, closed under the group multiplication and taking inverses, such that $H$ itself forms a group under the in\"}\n  {\"name\": \"ClosedSubgroup.recOn\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] →\\n      {motive : ClosedSubgroup G → Sort u_1} →\\n        (t : ClosedSubgroup G) →\\n          ((toSubgroup : Subgroup G) →\\n              (isClosed' : IsClosed toSubgroup.carrier) → motive { toSubgroup := toSubgroup, isClosed' := isC\", \"doc\": \"A closed subgroup of a topological group $ G $ is a subgroup $ H $ of $ G $ that is closed in the topology of $ G $, meaning its underlying subset of $ G $ is a closed set in the topological space str\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"ClosedSubgroup.ctorIdx\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} → {inst : Group G} → {inst_1 : TopologicalSpace G} → ClosedSubgroup G → ℕ\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"Subsemigroup.closure\", \"module\": \"Mathlib.Algebra.Group.Subsemigroup.Basic\", \"type\": \"(s : Set M) : Subsemigroup M\", \"doc\": \"The subsemigroup generated by a set $ s $ in a semigroup $ M $ is the intersection of all subsemigroups of $ M $ containing $ s $.\"}\n  {\"name\": \"ClosedSubgroup.mk\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] → (toSubgroup : Subgroup G) → IsClosed toSubgroup.carrier → ClosedSubgroup G\", \"doc\": \"Given a topological group $G$, a subgroup $H$ of $G$, and a proof that the underlying set of $H$ is closed in $G$, this constructs the closed subgroup structure on $H$.\"}\n  {\"name\": \"subgroupOfIdempotent\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"{G : Type*} [Group G] [Finite G] (S : Set G) (hS1 : S.Nonempty) (hS2 : S * S = S) : Subgroup G\", \"doc\": \"In a finite group $G$, any non-empty subset $S \\\\subseteq G$ that is closed under multiplication (i.e., $S \\\\cdot S = S$) forms a subgroup of $G$. The construction verifies closure under inverses by lev\"}\n  {\"name\": \"ClosedSubgroup.instSubgroupClass\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \": SubgroupClass (ClosedSubgroup G) G\", \"doc\": \"The closed subgroups of a topological group $G$ form a subgroup class, meaning they satisfy the necessary conditions to be considered subgroups of $G$ under the given structure.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The compact-topological-group and finite abstract-group closure results have different hypotheses; scheme Zariski multiplication does not give a topological group for the ordinary product topology. None gives this group subscheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed multiplication stable subset of algebraic group is inverse stable by noetherian descending chain condition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"exists_closed_nhds_one_inv_eq_mul_subset\", \"module\": \"Mathlib/Topology/Algebra/Group/Pointwise\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] {U : Set G},\\n  U ∈ nhds 1 → ∃ V ∈ nhds 1, IsClosed V ∧ V⁻¹ = V ∧ V * V ⊆ U\", \"doc\": \"For any neighborhood $ U $ of the identity element $ 1 $ in a topological group $ G $, there exists a neighborhood $ V $ of $ 1 $ such that $ V $ is closed, $ V^{-1} = V $, and $ V \\\\cdot V \\\\subseteq U\"}\n  {\"name\": \"IsClosed.mul_closure_one_eq\", \"module\": \"Mathlib/Topology/Algebra/Group/Pointwise\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] {F : Set G},\\n  IsClosed F → F * closure {1} = F\", \"doc\": \"For any closed set $ F $ in a topological group $ G $, the product of $ F $ with the closure of the singleton set containing the identity element $ 1 $ is equal to $ F $ itself. Formally, $ F \\\\cdot \\\\o\"}\n  {\"name\": \"IsTopologicalGroup.mulInvClosureNhd.inv\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] {T W : Set G} [inst_1 : Group G],\\n  IsTopologicalGroup.mulInvClosureNhd T W → T⁻¹ = T\", \"doc\": \"In a topological group $G$, if a set $T \\\\subseteq G$ satisfies the open subgroup condition defined by the $\\\\mathrm{mulInvClosureNhd}$ inductive type (combining algebraic subgroup properties with topol\"}\n  {\"name\": \"IsTopologicalGroup.mulInvClosureNhd.mul\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] {T W : Set G} [inst_1 : Group G],\\n  IsTopologicalGroup.mulInvClosureNhd T W → W * T ⊆ W\", \"doc\": \"In a topological group $G$, if subsets $T$ and $W$ satisfy the $\\\\text{mulInvClosureNhd}$ condition (defining open subgroups), then the product set $W \\\\cdot T = \\\\{w \\\\cdot t \\\\mid w \\\\in W, t \\\\in T\\\\}$ is \"}\n  {\"name\": \"IsTopologicalGroup.exists_mulInvClosureNhd\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] [CompactSpace G] {W : Set G},\\n  IsClopen W → ∃ T, IsTopologicalGroup.mulInvClosureNhd T W\", \"doc\": \"In a topological group $G$, for every clopen set $W$ (a set that is both open and closed), there exists a neighborhood $T$ such that the multiplicative inverse closure of $T$ equals $W$. This establis\"}\n  {\"name\": \"IsTopologicalGroup.mulInvClosureNhd\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"{G : Type u_1} → [TopologicalSpace G] → Set G → Set G → [Group G] → Prop\", \"doc\": \"An inductive type defining open subgroups of a topological group, combining the algebraic structure of a subgroup with the topological property of being an open set.\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Group/ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"Subgroup.normalCore_isClosed\", \"module\": \"Mathlib/Topology/Algebra/Group/ClosedSubgroup\", \"type\": \"∀ {G : Type u} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] (H : Subgroup G),\\n  IsClosed ↑H → IsClosed ↑H.normalCore\", \"doc\": \"If $ H $ is a closed subgroup of a topological group $ G $, then the normal core of $ H $ is also closed in $ G $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The compact-topological-group and finite abstract-group closure results have different hypotheses; scheme Zariski multiplication does not give a topological group for the ordinary product topology. None gives this group subscheme."
+  },
+  {
+   "tool": "grep",
+   "query": "submonoid|Submonoid|closedSubgroup",
+   "results": "OK; 25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski closure of a multiplicatively closed set of points in an algebraic group is a subgroup",
+   "results": "OK; 8 hits; subgroupOfIdempotent, Subgroup.closure, Subgroup.toAddSubgroup'_closure, Subsemigroup.topologicalClosure, AddSubgroup.closure, Subgroup.normalClosure, Subsemigroup.isClosed_topologicalClosure, Subsemigroup.ofClass",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsGroupScheme, IsClosed",
+   "results": "OK; 0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.IsGroupScheme'",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced Zariski closure of a submonoid of rational points in an algebraic group over an algebraically closed field is a closed subgroup scheme",
+   "results": "OK; 8 hits; closure_submonoidClosure_eq_closure_subgroupClosure, dense_submonoidClosure_iff_subgroupClosure, Subgroup.isClosed_topologicalClosure, topologicalClosure_subgroupClosure_toSubmonoid, AlgebraicGeometry.Scheme.zeroLocus_isClosed, closure_range_zpow_eq_pow, Subgroup.topologicalClosure_coe, CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian space with separately continuous group multiplication the closure of a submonoid is stable under inverse",
+   "results": "OK; 8 hits; Submonoid.mem_closure_inv, Submonoid.closure_inv, closure_submonoidClosure_eq_closure_subgroupClosure, inv_closure, Submonoid.isClosed_topologicalClosure, IsTopologicalGroup.mulInvClosureNhd.inv, Submonoid.topologicalClosure, Submonoid.top_closure_mul_self_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*subgroup|subgroup.*rational|IsClosedSubgroupScheme|reduced.*subgroup",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subgroup of G(k) is the set of rational points of its reduced Zariski closure as a subgroup scheme",
+   "results": "OK; 8 hits; ClosedSubgroup, ClosedSubgroup.ctorIdx, ClosedSubgroup.mk, ClosedSubgroup.recOn, ClosedSubgroup.instSetLike, ClosedSubgroup.instSubgroupClass, ClosedSubgroup.mk.inj, ClosedSubgroup.isClosed'",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrpObj",
+   "results": "OK; 12 hits; CategoryTheory.GrpObj, CategoryTheory.Grp.mk, CategoryTheory.Grp.grp, CategoryTheory.GrpObj.inv, CategoryTheory.GrpObj.instIsIsoInv, CategoryTheory.GrpObj.instTensorUnit, CategoryTheory.GrpObj.ofIso, CategoryTheory.GrpObj.toMonObj",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski closed subgroup of the rational points of a finite type group scheme is represented by a unique reduced closed subgroup scheme",
+   "results": "OK; 8 hits; AlgebraicGeometry.IsReduced, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.Scheme.ker_toSpecΓ, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of an abstract subgroup of rational points of any algebraic group has multiplication and inversion induced from the ambient group",
+   "results": "OK; 8 hits; Subgroup.mul, Subgroup.toGroup, SubgroupClass.toGroup, Subgroup.instIsArithmeticAdjoinNegOne, closureCommutatorRepresentatives, Subgroup.instCanLiftSetCoeAndMemOfNatForallForallForallForallHMulForallForallInv, Subgroup, Subgroup.topologicalClosure",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrpObj.mulLeft",
+   "results": "OK; 0 hits; ; loogle: unknown identifier 'CategoryTheory.GrpObj.mulLeft'",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "def mulLeft|def mulRight|theorem.*mulLeft|lemma.*mulLeft",
+   "results": "OK; 1 hits; Mathlib/CategoryTheory/Monoidal/Grp.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mem_closure_inv|theorem closure_inv|variable.*CompactSpace|variable.*IsTopologicalGroup",
+   "results": "OK; 1 hits; 35",
+   "date": "2026-10-24",
+   "verdict": "no match: available results concern compact topological groups, finite abstract groups, definitions or reduced schemes; they do not provide this result for scheme Zariski topology. Unknown-identifier Loogle queries are inconclusive; valid group-object query and semantic alternatives were also run."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-positive-stabilizer",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Section 1(c): Aside 1.55, p.21 (algebraic submonoids are subgroups), with Theorem 1.45 and Corollary 1.47, pp.19--20 (closed point subgroups and reduced subgroup schemes). Applied to the reduced closure using multiplication on dense rational points; compare the closure step in the referenced Milne (2013), Proposition 4.1 proof. No single Stacks tag states this combined assertion.",
+   "via": [
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-submonoid-group-subscheme",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Retained the statement; proved multiplicative closure by successive translation homeomorphisms and inverse stability by the Noetherian descending chain of translates. Isolated only the independent closed-rational-subgroup realization theorem (Milne 1.45) as a statement-only node. Reused affine Noetherianity, finite-union Noetherianity and the unique reduced induced closed structure. No affineness, smoothness, connectedness, commutativity or characteristic assumption was added.",
+  "blueprint": "This external-source descendant has blueprint.from.node=null (confirmed by blueprint_refs.py ancestor). It realizes the reduced closure assertion in its inherited source, ultimately serving sk-thm-sf-ctf-stability through the retained created.item chain. Steps 1-3 give the monoid-to-point-subgroup argument; step 4 uses Milne 1.45. Latest chapter and unit texts were read; no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The generic unique reduced closed structure identifies the constructed subgroup with the closure specified by the item; this unit has no replacement for that scheme-theoretic construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-42ad70159",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-42ad70159 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-closed-rational-subgroup-realization, every cited statement, and Milne iAG2017 §1(c) at the cited places: Theorem 1.45 is on printed p.19 (PDF p.31) and Aside 1.55 on printed p.22 (PDF p.34). The new node is exactly the existence half of Milne 1.45, with the same hypotheses: any field, a finite-type group scheme, a closed subgroup S of G(k), H = (closure of S)_red, the operations restrict, and H(k) = S. It is strictly smaller than the item because it assumes inverse stability, which steps 1–3 prove. Its edge cases hold: S={1} over an imperfect field gives Spec k, and nondense rational points are fine. B1–B7 are satisfied. Step 1: a finite affine cover plus the Mathlib leaves lem-wf-affine-noetherian-components and lem-kun-finite-union-noetherian make |G| Noetherian. Step 2 (elementary): left and right translations are homeomorphisms by the group diagrams and are applied one at a time, giving R_m(Z) ⊆ Z and then L_a(Z) ⊆ Z, with no joint continuity used. Step 3: the descending chain of translates L_a^n(Z) stabilizes; cancelling with L_{a^-n} gives Z = L_a(Z), and bijectivity forces a^-1 into Z, so S = G(k)∩Z is a closed subgroup. Step 4: S has closure Z; M∩U is dense in Z∩U and zero loci are closed, so the item's ideals equal I_Z from lem-weil-pbc-reduced-induced-closed-subscheme (1)–(2), hence H = Z_red = K. proof_deps equals the union of the uses. The duplicate search (rg for 1.45, Zariski closure with subgroup, submonoid, subgroup of G(k)) found only narrower nodes: lem-wf-zariski-closure-subgroup, generic-matrix-locus-subgroup-closure, perfect-field-groupoid-image-closure and semisimple-cyclic-closure. There is no cycle and no SGA source. I accept the tool use of lem-weil-pbc-reduced-induced-closed-subscheme (unit sk-thm-p1). Two cosmetic points: the item's source.place and blueprint.from.place still say Aside 1.55 is on p.21, although the report claims this was corrected (only the step sources were); and the algebraically-closed hypothesis is never used. No fixes were written."
+ }
+}

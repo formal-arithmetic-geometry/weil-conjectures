@@ -27,9 +27,55 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
   "place": "Proof sentence 3 (geometric orientation and trace) and sentence 4 (formal duality exchange from evaluation and adjunction maps)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct finite integration and the uniquely finite-trace-normalized integral orientation as in the statement. For finiteDualizingPlus apply the existing etale bounded-below exceptional-image theorem to the bounded-below coefficient unit, using compactness of Y. For pullFiniteTor, integralSource_mem, and representativeTor use the equality of integral constructibility and integral finite Tor amplitude, and preservation by integral pullback and completed tensor. Uniqueness of the normalized orientation gives orientation_eq_adic and then the trace-transpose equality. Rationalize integralIso and compose with the specified exceptional mate. For ordinaryTensor_eq, first project the tensor clause of ordinaryModel_existsUnique at general coefficient parameters through the cached ordinaryMonoidal presentation, then specialize this API at the purity setting. The coefficient unit and left unitor use this same monoidal structure with the integral derived category explicit, retaining all unit and tensor normalizations. Small coefficient-model scalar associativity and Shrink.algEquiv inverse equations give the literal finite-stage transport and common-stage composite. Unfolding the published category-instance definitions proves their equality; transport the stage isomorphism along this equality before applying the common-stage inclusion. The six remaining named theorem obligations retain the complete proof plans in their Lean docstrings. The orientation, ordinary source, projection, integral isomorphism, and model-back scalar functor retain their original bodies with explicit return types in the canonical categories.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-pur-integral-operations-preserve-constructible",
+    "def-pur-canonical-purity-source-transports"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For rationalIntegralSource_eq, use the object clauses of rationalDerivedTensor_existsUnique and rationalDerivedPullback_existsUnique. Both rational operations preserve the displayed integral representatives. Reduce equality first to the integral full subcategory and then to its ambient objects. Apply the generic ambient-object formula for the inherited full-subcategory shift, proved by unfolding it in an abstract category; at the nonnegative exponent d the signed Tate line is the positive tensor power defining twist. The remaining tensor inputs agree definitionally. This preserves the specified localization shift comparison used by rationalSourceComparison.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For smoothPullAugmentation_isIso, work with an arbitrary coefficient field and separated, locally finite-type, quasi-compact morphism; the smooth-purity case is the required specialization. Apply finiteTorOrdinaryPullComplete to the ordinary completed-ring pullback of Q(C). The ambient augmentation comparison gives a module-pullback isomorphism and the exact chain-map identity. Its termwise extension and the derived pullback factorization present this complete ordinary object by the good ambient pullback complex. Apply canonicalCompletionUnitCriterion to make its specified completion unit invertible. Naturality transports invertibility to Q of the ambient complex; completionUnit_existsUnique then makes Q(roosUnit) invertible. Compose with the actual Roos tower isomorphism and then with the termwise module-pullback isomorphism. The ambient augmentation identity identifies this composite with the specified FrobeniusCoefficientTwists.pullbackAugmentation. This closes the augmentation obligation without adding a new theorem hole; the six other obligations retain their recorded plans.",
+   "uses": [
+    "lem-sf-finite-tor-ordinary-pull-complete",
+    "lem-sf-integral-pullback-augmentation-ambient",
+    "lem-fix-qcqs-completion-unit-criterion",
+    "lem-pur-integral-ambient-operation-models",
+    "def-pur-integral-derived-operations",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-pur-canonical-purity-source-transports",
+  "lem-sf-finite-tor-ordinary-pull-complete",
+  "lem-sf-integral-pullback-augmentation-ambient",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "def-pur-integral-derived-operations",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof_origin": {
+  "by": "S3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, ordinary pullback completeness and normalized Roos completion unit; existing canonical realization proof for the other clauses"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -85,7 +131,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
  "lean": {
@@ -141,7 +198,17 @@
    "WeilConjectures.RationalSmoothPurityCanonical.modelRoundtrip",
    "WeilConjectures.RationalSmoothPurityCanonical.smallModelIso",
    "WeilConjectures.RationalSmoothPurityCanonical.commonIso",
-   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso_scalar"
+   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso_scalar",
+   "WeilConjectures.RationalSmoothPurityCanonical.commonModelField",
+   "WeilConjectures.RationalSmoothPurityCanonical.commonModelAlgebra",
+   "WeilConjectures.RationalSmoothPurityCanonical.commonModelFinite",
+   "WeilConjectures.RationalSmoothPurityCanonical.transportIsoCategory",
+   "WeilConjectures.RationalSmoothPurityCanonical.commonCategory_eq",
+   "WeilConjectures.RationalSmoothPurityCanonical.ordinaryClosed",
+   "WeilConjectures.RationalSmoothPurityCanonical.tensorLeftUnitorFromPresentation",
+   "WeilConjectures.RationalSmoothPurityCanonical.ordinaryTensor_eq",
+   "WeilConjectures.RationalSmoothPurityCanonical.uniqueChosen_left",
+   "WeilConjectures.RationalSmoothPurityCanonical.ordinaryMonoidal"
   ],
   "file": "lean/Sheaf/Paper/RationalSmoothPurityCanonical.lean",
   "statement": "def rationalIso (d : ℕ) [SmoothOfRelativeDimension d f] (K : sfRationalConstructibleCategory P.coefficients.l P.extension Y) : (rationalSource P.coefficients.l P.extension f d).obj K ≅ (operation P f c S (.rational (AdicSmoothDualizing.fieldStage P))).G.obj K",
@@ -165,5 +232,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery of 7d346b RETURN (H2). Only change: item Lean l.554/556/558 `.rational (AdicSmoothDualizing.fieldStage P)` -> `.rational ⟨P.extension⟩` (fieldStage is an abbrev for exactly that, same F/G/adjunction; compile confirms defeq with rationalWeilPurityGamma's type); other 3 modules byte-identical to the reviewed head. Item stmt_deps drop cor-pur-adic-and-rational-smooth-dualizing-complexes and thm-pur-adic-reconstruction, add new def node def-pur-canonical-purity-source-transports (owns rationalSource/commonSource/commonShiftedLine used by H and b); no added theorem stmt_deps remain. lean.statement verbatim for item, both new nodes and the twist (B) record. Dep records identical to live except the accepted twist (B) lean record; the derived-pullback record differs from the old snapshot only by live drift (NQ landing). No live collisions. Substance (clauses, edge cases, F1-F3 repairs, gates) unchanged from the prior review. nt_compile --json rc=0 clean: 14.9/29.7/23.8/18.8 s. Advisory: the realization def node still cites three theorem nodes for plain defs; second reading is a self-check; def-zl-weil-ind-sheaf-category is uncited (gap predates this delivery)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f83c",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T070945-L-3715061",
+  "kind": "interface",
+  "note": "independent cc review: smoothPullAugmentation_isIso (generalized to separated/LFT/qc, proved from finiteTorOrdinaryPullComplete + integralPullbackAugmentation_ambient + canonicalCompletionUnitCriterion) and explicit-type/ordinaryMonoidal changes against node def-pur-canonical-rational-purity-realization, its proof_deps and the 3 change records; delivered module + 6 direct importers compiled in sandbox"
  }
 }

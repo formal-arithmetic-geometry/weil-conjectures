@@ -134,16 +134,16 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-ae253af29 (reviewer sub-agent of L); spot-checked: Read the full definition, eight cited statements, ILO VI 1.1–1.4 and VIII source passages. Charts, log regularity and the fs universal property agree; small cases pass. No new nodes, long proof steps, cycles or forbidden proof dependencies. Detailed checks saved in review.md; no fixes needed."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ddfe1f459",
-  "group": "Q49",
+  "reviewer": "NT-stage2-cc-68c149d54",
+  "group": "Q13",
   "result": "pass",
-  "note": "Reviewed packet, node, dependencies, source declarations, both Lean modules, docstrings, edge cases, route-pivot constraints, and compile/preflight evidence; no substantive or mechanical defects found."
+  "note": "Re-delivery of returned 955f; all three return points repaired. F1: stmt_deps cite def-sfb-tensor-pullback-structure-sheaf-map (owner of tensorPullbackObjUnitToUnit) instead of theorem lem-weil-pbc-module-pullback-structure-sheaf. F2: def-trf-log-regular-pair (owner of strictLocalGerm) cited and LogRegularPair publicly imported. F3: def-trf-fs-log-blowup (B) record keeps all 25 Q49 declarations (set diff vs side-live empty; live record unchanged since base) plus IsSaturatedLogBlowup and the 2 new fine-ideal decls; primary moved to the FineLogCoherentIdeal re-export module as the merge tool requires. Lean differs from 955f only by that import. Independent clause check: fine/no saturation, nonempty fine coherent ideal, geometric-stalk image-ideal sections, ∃ K : IdealSheafData with mono+range on every étale W, uniqueness over all L, qcoh finite type, ∃! inclusion-normalized chart tilde formula, descent, strict étale base change (bijective section maps; comap = I·O_Y) all match; edge cases (empty X, unit ideal, α(e)=0, nonsaturated, nonaffine overlaps) ok; universes u, v free. No hollow defs, sorry only. Advisory: descent clause near-tautological (content in ∃! comparisons); added stmt_deps not bracketed in text. No file changed, no compile."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup",
-  "declaration": "AlgebraicGeometry.IsSaturatedLogBlowup",
+  "module": "Sheaf.AlgebraicGeometry.FineLogCoherentIdeal",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.IsNonemptyFineCoherentIdeal",
   "declarations": [
    "AlgebraicGeometry.EtalePrelogStructure",
    "AlgebraicGeometry.EtalePrelogStructure.stalk",
@@ -169,14 +169,29 @@
    "AlgebraicGeometry.EtaleLogHom.pulledIdealStalk",
    "AlgebraicGeometry.EtaleLogHom.pullbackIdeal",
    "AlgebraicGeometry.EtaleLogStructure.IsInvertibleIdeal",
-   "AlgebraicGeometry.SaturatedLogBlowupTower"
+   "AlgebraicGeometry.SaturatedLogBlowupTower",
+   "AlgebraicGeometry.IsSaturatedLogBlowup",
+   "AlgebraicGeometry.EtaleLogStructure.ChartGeneratesIdeal",
+   "AlgebraicGeometry.EtaleLogStructure.IsNonemptyFineCoherentIdeal"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FineSaturatedLogBlowup.lean",
-  "statement": "def IsSaturatedLogBlowup {X X' : FineSaturatedLogScheme.{u}} (b : EtaleLogHom X' X) (I : X.logStructure.IdealFamily) : Prop",
+  "file": "lean/Sheaf/AlgebraicGeometry/FineLogCoherentIdeal.lean",
+  "statement": "def EtaleLogStructure.IsNonemptyFineCoherentIdeal {X : Scheme.{u}} (M : EtaleLogStructure X) (I : M.IdealFamily) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B): the recorded IsNonemptyCoherentIdeal requires IsFineSaturatedMonoid in every chart witness, so it cannot express the node’s coherent log ideal on a fine, possibly nonsaturated log scheme (ILO VIII 3.3.7). Publicly import the previous FineSaturatedLogBlowup module unchanged, retaining every fs construction, and expose ChartGeneratesIdeal and IsNonemptyFineCoherentIdeal using finite generation and injectivity into group completion only. The ideal-family, stalk, ideal-subsheaf and chart notions are exactly the recorded ones; no existing definition is replaced. Returned-head repair 955f9f7a15ff: retain the complete Q49 declaration list and its primary IsSaturatedLogBlowup, all re-exported by FineSaturatedLogBlowup, then append the two new fine-ideal declarations."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

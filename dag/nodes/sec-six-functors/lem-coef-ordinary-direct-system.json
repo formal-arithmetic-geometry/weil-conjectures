@@ -1,0 +1,129 @@
+{
+ "id": "lem-coef-ordinary-direct-system",
+ "kind": "statement",
+ "title": "Assembling ordinary direct image and its component Hom bijection",
+ "statement": "For compatible towers B_n,F_n and specified algebraic inverse images I_n along a finite-limit-preserving set-sheaf left adjoint L⊣V, suppose an OrdinaryInverseSystem P as in [lem-coef-ordinary-inverse-system] is given. Suppose each I_n.modules has a right adjoint V_n, an underlying-sheaf comparison to V, and the normalization that its linear transpose forgets to the given set-sheaf transpose, as in [lem-coef-normalized-module-adjunction]. Then there is a functor push on the actual sequence-site module categories with components V_n, whose evaluation identifications are identity on section carriers. There is a bijection between maps P.pull(M)→N and maps M→push(N). Under evaluation and the two component identifications this bijection is the specified level adjunction Hom bijection, precomposed with the inverse pull evaluation. No naturality, system adjunction, additivity or unit equation is assumed as a conclusion here: these are derived in the parent proof from the displayed component formula.",
+ "stmt_deps": [
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-normalized-module-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10. E4: explicit local-to-global proof after adding the missing local mate condition to the core."
+ },
+ "proof": [
+  {
+   "text": "Construct the componentwise direct image core with its local two-component mate condition, passing the supplied inverse system P and level adjunctions into ordinaryDirectSystem_core_exists.",
+   "uses": [
+    "lem-coef-ordinary-direct-system-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved ordinaryDirectSystem_homData_exists: assemble compatible families on the product sequence site, transport compatibility by the local mate condition, and check the equivalence and its component formula at every level. Combine the core and Hom-data records.",
+   "uses": [
+    "lem-coef-ordinary-direct-system-hom-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-ordinary-direct-system-core",
+  "lem-coef-ordinary-direct-system-hom-data"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOrdinaryRealization",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Ordinary normalized geometric realization on semilinear systems. Separate ordinary construction step: Assembling ordinary direct image and its component Hom bijection.",
+   "via": [
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module inverse image has a right adjoint whose underlying transpose is the inverse image direct image adjunction of sheaves of sets",
+   "results": "{\"t\": \"2026-10-26T08:42:07Z\", \"tool\": \"leansearch\", \"query\": \"A module inverse image has a right adjoint whose underlying transpose is the inverse image direct image adjunction of sheaves of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"a5f08730525fbd5d\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction termwise inverse image of semilinear systems of sheaves of modules",
+   "results": "{\"t\": \"2026-10-26T08:29:50Z\", \"tool\": \"leanfinder\", \"query\": \"adjunction termwise inverse image of semilinear systems of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.ιFree_mapFree_inv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafificationAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\"], \"digest\": \"5cfc224f47d0eb44\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-26T08:30:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"PresheafOfModules.colimitAdjunction\"], \"digest\": \"3bc2b9beb5471990\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|mkOfHomEquiv|additive_of_preserves",
+   "results": "{\"t\": \"2026-10-26T08:31:59Z\", \"tool\": \"grep\", \"query\": \"AlgebraicInverseImage|mkOfHomEquiv|additive_of_preserves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Order/Category/BddLat.lean\"], \"digest\": \"ff4d8ed79967adf4\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryDirectSystem.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ordinaryDirectSystem_exists",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OrdinaryDirectSystem",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_exists"
+  ],
+  "statement": "theorem ordinaryDirectSystem_exists [PreservesFiniteLimits uInv]\n    (hI : ∀ n,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n))\n    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adjSet : uInv ⊣ uPush)\n    (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅\n      underlying.{c, v, r} J' (F n) ⋙ uPush)\n    (ha : ∀ n (M : Mod.{c, v, max c v r} J (B n))\n      (N : Mod.{c, v, max c v r} J' (F n)) (f : (I n).modules.obj M ⟶ N),\n      (underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N f) ≫ (eV n).hom.app N =\n        adjSet.homEquiv _ _ ((I n).moduleUnderlying.inv.app M ≫\n          (underlying.{c, v, r} J' (F n)).map f)) :\n    Nonempty (OrdinaryDirectSystem.{c, v, r} J B τ J' uInv F σ I P V a)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T092737-L-3462069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "independent cc review: delivered ed7db1fc913b Lean (4 modules) and 4 node files vs clone sheaf-dag nodes and change record; unchanged parent/target statements diffed; direct importer GeometricOrdinaryRealization compiled against delivered modules (exit 0, 17.8 s); #print axioms clean",
+  "sorry_before": [
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_data_exists",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_transition_mate_exists"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-space-integral-qcqs-permanence",
+ "kind": "statement",
+ "title": "Quasi-compactness and separation for integral algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. An integral morphism $g:B\\to X$ is affine, quasi-compact and separated. If $X$ is quasi-compact and quasi-separated, then so is $B$. If $X$ is a scheme separated over $\\operatorname{Spec}\\mathbf Z$, then $B$ is a scheme separated over $\\operatorname{Spec}\\mathbf Z$; if $X$ is also quasi-compact, $B$ is quasi-compact. For every morphism $f:A\\to X$ with $A$ quasi-compact and $X$ quasi-separated, $f$ is quasi-compact. Every quasi-compact open subspace of a quasi-separated space is quasi-separated. These assertions also hold for the empty spaces.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03WE (lemma-affine-representable), 073B (lemma-quasi-compact-quasi-separated-permanence), 03KL (lemma-base-change-separated), 03KQ (lemma-composition-separated); affineness and separatedness on scheme tests use morphisms.tex Tag 01S7 (lemma-affine-separated)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "First reconcile the two quasi-compactness conventions. A space with quasi-compact point space has an affine surjective etale atlas by [lem-sfb-qc-space-affine-etale-atlas]. This affine scheme is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Conversely a quasi-compact surjective etale scheme atlas has quasi-compact target point space by the last assertion of [lem-a1-space-finite-affine-subatlas]. Thus the atlas convention in the cited permanence results agrees with the statement.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E3 (spaces-properties-definition-quasi-compact), 03E4 (spaces-properties-lemma-quasi-compact-space), 03H6 (spaces-properties-lemma-quasi-compact-affine-cover)."
+   }
+  },
+  {
+   "text": "For an affine scheme test $T\\to X$, the morphism $B\\times_XT\\to T$ is integral by hypothesis, hence affine by [def-weil-finite-integral-morphism]; its source is affine. Together with the assumed representability this is exactly the affine scheme-test criterion in [lem-sfb-space-affine-locality]. That node then gives quasi-compactness and separatedness of $g$, and, when $X$ is quasi-compact and quasi-separated, the same two properties for the space $B$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03WE (lemma-affine-representable), 03WG (lemma-affine-local); morphisms.tex Tags 01WH (definition-integral), 01S7 (lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "If $X$ is a scheme, [lem-sfb-space-affine-locality] applied to the affine $g$ makes $B$ a scheme. If $X\\to\\operatorname{Spec}\\mathbf Z$ is separated, compose it with the separated $g$ using [lem-sfb-space-separated-fp-composition], applied with base scheme $\\operatorname{Spec}\\mathbf Z$ to the schemes $B$ and $X$, to obtain absolute separatedness of $B$. If $X$ is quasi-compact, note that step 2 gives quasi-compactness of $g$ on affine scheme tests; by the equivalence in [lem-sfb-space-quasicompact-affine-tests] this is quasi-compactness in that node's sense, i.e. on all quasi-compact scheme tests. Test it with the quasi-compact scheme $X\\xrightarrow{1}X$: the source $B=B\\times_XX$ is quasi-compact. Step 1 identifies this with topological quasi-compactness.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03WG (lemma-affine-local), 03KQ (lemma-composition-separated), 03KG (lemma-quasi-compact-local), (1) iff (3)."
+   }
+  },
+  {
+   "text": "For arbitrary $f:A\\to X$ with $A$ quasi-compact and $X$ quasi-separated, apply the first implication of [lem-sfb-space-qcqs-permanence] to these very objects. Its quasi-compactness conventions are exactly the point-space and affine-test conventions of the item; it imposes no further hypotheses.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), part (1)."
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow X$ be an open subspace. By [def-a1-space-open-subspace], $U$ is a subfunctor, so $j$ is injective on sections. Put $Z=\\operatorname{Spec}\\mathbf Z$. The pullback of $\\Delta_{X/Z}$ along $U\\times_ZU\\to X\\times_ZX$ is $\\Delta_{U/Z}$: on every test, a pair $(u_1,u_2)$ has equal images in $X$ exactly when $u_1=u_2$, and the inverse sends $u$ to its equal pair. These identifications are natural, so give the sheaf pullback using [lem-trf-space-fibre-products-etale-covers]. Since $X$ is quasi-separated, $\\Delta_{X/Z}$ is quasi-compact on affine scheme tests, hence quasi-compact by the equivalence in [lem-sfb-space-quasicompact-affine-tests]; its base change $\\Delta_{U/Z}$ is quasi-compact by the base-change clause of the same node, hence again quasi-compact on affine scheme tests. Thus $U$ is quasi-separated; the asserted case assumes in addition that $U$ is quasi-compact.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal pullback formula; Tags 03KG (lemma-quasi-compact-local) and 03HF (lemma-base-change-quasi-compact); spaces-properties.tex Tag 03BZ (lemma-open-subspaces)."
+   }
+  },
+  {
+   "text": "None of these arguments requires a nonempty atlas or point space. The empty space has a finite empty subcover and empty diagonal; it is represented by the empty scheme, which is affine. The empty diagonal is quasi-compact and a closed immersion. Hence the same reasoning applies when a space or a fibre is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Empty cases of the definitions used above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Assembly of Tags 03WE, 03WG, 03KQ, 073B(1), 03KG and 03HF; the open-subspace absolute-diagonal identity is written explicitly as a natural equality-locus pullback, following the argument of 03KL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism of algebraic spaces over a quasi compact quasi separated target has quasi compact quasi separated source and preserves separatedness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsIntegralHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is an integral morphism and $ g $ is a separated morphism, then $ f $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hY : QuasiSeparatedSpace ↥Y] [AlgebraicGeometry.QuasiSeparated f],\\n  QuasiSeparatedSpace ↥X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine algebraic space morphisms are representable separated and quasi compact and remain so under base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.QuasiCompact",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"[Stacks Tag 03GP](https://stacks.math.columbia.edu/tag/03GP)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) : AlgebraicGeometry.Scheme.Hom.normal\", \"doc\": \"Given an qcqs morphism `f : X ⟶ Y`, which factors into `X ⟶ T ⟶ Y` with `T ⟶ Y` integral,\\nthe map `X ⟶ T` factors through `f.normalization` uniquely.\\n(See `normalization.hom_ext` for the uniqueness re\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) : AlgebraicGeometry.IsIntegralHom (Al\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) : CategoryTheory.CategoryStruct.comp \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) : CategoryTheory.CategoryStruct.comp \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) {Z : AlgebraicGeometry.Scheme} (h : T\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂) {Z : AlgebraicGeometry.Scheme} (h : Y\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*quasiCompact|quasiCompact.*integral",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral algebraic space morphism quasi compact separated base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsIntegralHom (f ≫ g)] [IsSeparated g] : IsIntegralHom f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is an integral morphism and $ g $ is a separated morphism, then $ f $ is an integral morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space",
+   "results": {
+    "t": "2026-10-23T11:57:21Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme morphisms or scheme diagonals only; Mathlib has no algebraic-space result specializing to every clause of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral algebraic space over a separated scheme is a separated scheme and maps from quasi compact spaces to quasi separated spaces are quasi compact",
+   "results": {
+    "t": "2026-10-23T11:57:21Z",
+    "tool": "leansearch",
+    "query": "An integral algebraic space over a separated scheme is a separated scheme and maps from quasi compact spaces to quasi separated spaces are quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace"
+    ],
+    "digest": "82a15f21e1f83ed7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme morphisms or scheme diagonals only; Mathlib has no algebraic-space result specializing to every clause of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsAffineHom",
+   "results": {
+    "t": "2026-10-23T11:57:22Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsAffineHom",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsIntegralHom.toIsAffineHom",
+     "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom",
+     "AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom",
+     "AlgebraicGeometry.IsIntegralHom.mk",
+     "AlgebraicGeometry.isIntegralHom_iff"
+    ],
+    "digest": "9b8eec0e98079b56"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme morphisms or scheme diagonals only; Mathlib has no algebraic-space result specializing to every clause of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness and quasi separatedness of integral algebraic space morphisms and open subspaces via absolute diagonals",
+   "results": {
+    "t": "2026-10-23T11:57:27Z",
+    "tool": "leanfinder",
+    "query": "Quasi compactness and quasi separatedness of integral algebraic space morphisms and open subspaces via absolute diagonals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact",
+     "AlgebraicGeometry.quasiSeparated_iff",
+     "AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact",
+     "AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace"
+    ],
+    "digest": "c650dce04c706d8f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme morphisms or scheme diagonals only; Mathlib has no algebraic-space result specializing to every clause of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism of algebraic spaces is affine quasi compact separated and preserves quasi compact quasi separated sources over qcqs targets",
+   "results": {
+    "t": "2026-10-23T11:57:28Z",
+    "tool": "leanfinder",
+    "query": "An integral morphism of algebraic spaces is affine quasi compact separated and preserves quasi compact quasi separated sources over qcqs targets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsIntegralHom",
+     "AlgebraicGeometry.IsIntegralHom.hasAffineProperty",
+     "AlgebraicGeometry.IsIntegralHom.toIsAffineHom",
+     "AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.isIntegralHom_iff",
+     "AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
+     "AlgebraicGeometry.IsFinite.instIsIntegralHom",
+     "AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom"
+    ],
+    "digest": "bc157a93e972ef30"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme morphisms or scheme diagonals only; Mathlib has no algebraic-space result specializing to every clause of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: hypothesis checks on the integral compactification, pullback chart, and its open image.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-integral-qcqs-permanence",
+  "worker": "stage1",
+  "summary": "Q31: retained the statement and prior searches. Reused existing affine-space locality, qcqs permanence, separated composition and quasi-compact base-change nodes; reconciled atlas and point-space quasi-compactness explicitly and proved the open-subspace diagonal identity on test sections. No new nodes, no Lean writes or compiles.",
+  "blueprint": "The existing from.place/via chain is retained. This is a foundational hypothesis-checking input below det-thm-sf-ctf-stability-direct-images (3), through the proof of Stacks 09YB(1). Read the current latest blueprint direct-image proof (3); no replacement of a unit step is made. Blueprint searches for 073B, 03WE, integral morphism of algebraic spaces and quasi compact found no equal blueprint node; ancestor command returns null, agreeing with the existing record.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Its last assertion identifies quasi-compact atlas targets with quasi-compact point spaces; this is a generic topology tool used to reconcile the existing affine-locality convention, not a replacement for any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-1ffed5241",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-1ffed5241 (reviewer sub-agent of L); spot-checked: Read all six steps of the item and the statement of every cited node; no new nodes. Stacks tags checked in tags/tags: 03WE, 03WG, 03KG, 073B, 03KQ, 03KL, 03HF, 01WH, 01S7, 03E3, 03E4, 03H6, 03BZ. Step 1 is correct: the qc-point-space and qc-atlas conventions are reconciled through qc-space-affine-etale-atlas, affine-scheme-qcqs and the last sentence of finite-affine-subatlas, and the two point topologies agree. Step 2 is correct: integral implies affine, which is the affine-test definition of affine-locality, so g is qc and separated, and B is qcqs when X is. Step 4 is the first implication of 073B in qcqs-permanence. Step 5's sectionwise diagonal identity checks out, and step 6 (empty cases) is elementary. Fault in steps 3 and 5 (C3/E6): step 2 gives quasi-compactness only on affine tests, but steps 3 and 5 used the qc-space-test convention of lem-sfb-space-quasicompact-fppf-local, and no cited node states that these agree (that is Stacks 03KG). FIX: both steps now cite the same-unit node lem-sfb-space-quasicompact-affine-tests (unsplit, empty proof_deps, so no cycle), which states the 03KG equivalence and base change. Step 3 tests g with the qc scheme X; step 5 converts, base-changes and converts back. fppf-local is removed and proof_deps re-unioned. Tool use lem-a1-space-finite-affine-subatlas (qc atlas implies qc point space) accepted. Batch-5 citations: each one reaches only def-trf-algebraic-space through general foundations of algebraic spaces, none is a trace-formula or Poincare step, so all are accepted. No SGA. Small cases checked: affine X, non-qc open in a qs space, separated non-qc scheme X, empty spaces.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceIntegralQcqsPermanence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.integral_qcqs_permanence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceIntegralQcqsPermanence.lean",
+  "statement": "theorem integral_qcqs_permanence {S : Scheme.{u}} : (∀ (B X : AlgebraicSpace S) (g : B ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) g.hom.hom → MapIsAffine g ∧ MapIsQuasiCompact g.hom.hom ∧ MapIsSeparated g ∧ (CompactSpace (Point X.obj.obj) → IsAbsolutelyQuasiSeparated X → CompactSpace (Point B.obj.obj) ∧ IsAbsolutelyQuasiSeparated B) ∧ (∀ (T : Over S), Nonempty (X.obj.obj ≅ yoneda.obj T) → T.left.IsSeparated → ∃ U : Over S, Nonempty (B.obj.obj ≅ yoneda.obj U) ∧ U.left.IsSeparated ∧ (CompactSpace T.left → CompactSpace U.left))) ∧ (∀ (A X : AlgebraicSpace S) (f : A ⟶ X), CompactSpace (Point A.obj.obj) → IsAbsolutelyQuasiSeparated X → MapIsQuasiCompact f.hom.hom) ∧ (∀ (U X : AlgebraicSpace S) (j : U ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom → CompactSpace (Point U.obj.obj) → IsAbsolutelyQuasiSeparated X → IsAbsolutelyQuasiSeparated U)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are the three independent conjuncts of one theorem. Uses the already landed absolute quasi-separatedness, affine, and separated-map predicates; their nodes are added to stmt_deps. Integrality is the existing IsRepresentableWith applied to scheme IsIntegralHom, without a new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55d490629",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read item, all 13 stmt_dep records, module, report (Worker report + Second reading by Q35 present) and the live sources of IsRepresentableWith, IsAbsolutelyQuasiSeparated (0AHR(3) affine pairs), MapIsAffine, MapIsSeparated, MapIsQuasiCompact (ProperCurveModuli), Point and Mathlib Scheme.IsSeparated (over ⊤_ = Spec Z). Integral = IsRepresentableWith IsIntegralHom; integral clause gives affine ∧ qc ∧ separated ∧ (qcqs X → qcqs B) ∧ (X ≅ yoneda T, T separated → ∃U, B ≅ yoneda U, U separated, T compact → U compact). Independent conjuncts: A qc ∧ X abs-qs → f qc (073B(1)); j representable by open immersions (a mono, so an open subspace) ∧ U qc ∧ X qs → U qs. No assumption on S, no Nonempty, empty spaces covered, quantifiers and universe u correct. Item diff vs live is only lean + 3 landed def-owner stmt_deps (allowed by brief l.177); lean.statement verbatim; no parallel landing or name clash; docstrings carry source and blueprint id with the 6 proof steps; single sorry; 3 kinds of search recorded. Advisory: MapIsQuasiCompact owner def-sfb-proper-curve-moduli reached only transitively through def-sfb-space-morphism-properties. No files changed, no compile."
+ }
+}

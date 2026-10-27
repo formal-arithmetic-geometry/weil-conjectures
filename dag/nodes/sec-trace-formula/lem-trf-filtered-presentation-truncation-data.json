@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-filtered-presentation-truncation-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Realizes Step 3 of prop-trf-trace-additivity-open-closed, paragraph 'More precisely, they form an endomorphism of this triangle of filtered origin': associated-graded compatibility for already supplied compact-support filtered functors and canonical transformations. Universal cutoff spans make the graded-compatibility step precise.",
+   "via": [
+    "lem-trf-filtered-functor-graded-comparison",
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal truncations in any finite filtered derived presentation",
+ "statement": "Let C be an abelian category and P a presentation of its finite filtered bounded-below derived category D [def-trf-finite-filtered-derived-presentation]. For every integer r there are endofunctors high(r), low(r), natural arrows inclusion:high(r)→id and quotient:id→low(r). For q<r the qth grade of high(r)M is zero, and for r≤q the qth grade of inclusion is invertible. For r≤q the qth grade of low(r)M is zero, and for q<r the qth grade of quotient is invertible. Composition with inclusion gives a bijection Hom(L,high(r)M)→Hom(L,M) whenever all grades of L below r vanish. Composition with quotient gives a bijection Hom(low(r)M,R)→Hom(M,R) whenever all grades of R at or above r vanish. These universal arrows determine the truncations up to unique compatible isomorphism. This is the structure Presentation.Truncation P, and it is nonempty.",
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1(b)–(e), 5.1.2(a)–(c), and the cutoff argument of Lemma 5.1.4(i), pp.39–41"
+ },
+ "stmt_deps": [
+  "def-trf-finite-filtered-derived-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Identify the explicit strict bounded-below condition in the concrete truncation model with CochainComplex.plus using isStrictlyGE_iff. The identity on filtered complexes is an equivalence of the two source categories and preserves graded quasi-isomorphisms. Uniqueness of localization gives an equivalence e from the concrete localization to D.",
+   "uses": [
+    "def-trf-finite-filtered-derived-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1(b)–(e), 5.1.2(a)–(c), and the cutoff argument of Lemma 5.1.4(i), pp.39–41"
+   }
+  },
+  {
+   "text": "Obtain the concrete universal truncation calculus from filteredTruncationTriangle. Its graded functors and the functors e followed by P.gr have naturally isomorphic composites with Q and the fully faithful inclusion Plus→DerivedCategory, by their representative comparisons. Lift the natural isomorphism through localization and then reflect it through the fully faithful inclusion. In the concrete model exactness of the grades applied to the cutoff triangles proves the high and low grade maps invertible in their retained ranges.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1(b)–(e), 5.1.2(a)–(c), and the cutoff argument of Lemma 5.1.4(i), pp.39–41"
+   }
+  },
+  {
+   "text": "Conjugate high and low by e. Define inclusion by e(inclusion) followed by the counit, and quotient by inverse counit followed by e(quotient). The grade comparison transports support and invertibility. The adjunction Hom equivalences for e and its inverse transport the two Hom bijections; their compatibility with composition follows from naturality of the counit and the triangle identity. No triangulated structure on e is required.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1(b)–(e), 5.1.2(a)–(c), and the cutoff argument of Lemma 5.1.4(i), pp.39–41"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-finite-filtered-derived-presentation",
+  "lem-trf-filtered-truncation-triangle",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1(b)–(e), 5.1.2(a)–(c), and the cutoff argument of Lemma 5.1.4(i), pp.39–41; categorical transport and pure-span uniqueness written by Y9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal filtration truncations on a localization are invariant under equivalence and commute with the graded functors",
+   "results": "CategoryTheory.Localization.uniq and Functor.IsLocalization.instCompOfIsEquivalence (Mathlib.CategoryTheory.Localization.Predicate); ordinary cochain and t-structure truncations.",
+   "date": "2026-10-23",
+   "verdict": "no match: localization equivalence is used in the proof but does not provide filtration truncations or the graded-span calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal high and low filtration truncations transport across equivalences of localization presentations, yielding a pure grade span whose arrows become grade isomorphisms after interval preserving exact functors",
+   "results": "HomologicalComplex.truncGEXIso, truncGE'XIso, truncLEXIso, stupidTruncXIso, truncLEIso (Mathlib.Algebra.Homology.Embedding); IsModuleFiltration.mk_int.",
+   "date": "2026-10-23",
+   "verdict": "no match: these truncate cochain degrees rather than filtrations in a localization"
+  },
+  {
+   "tool": "grep",
+   "query": "rg filtered.*trunc|trunc.*filtered|graded.*localization|localization.*graded Mathlib/Algebra/Homology Mathlib/CategoryTheory/Localization",
+   "results": "No matches. Read Mathlib.CategoryTheory.Localization.Predicate, Equivalence, and Triangulated.Pretriangulated for the general APIs used.",
+   "date": "2026-10-23",
+   "verdict": "no match for the filtered derived assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredFunctorGradedComparison",
+  "date": "2026-10-23",
+  "group": "Y9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredPresentationTruncationData",
+  "file": "lean/Sheaf/CategoryTheory/FilteredPresentationTruncationData.lean",
+  "declaration": "CategoryTheory.FiniteFilteredDerived.Presentation.truncationData",
+  "declarations": [
+   "CategoryTheory.FiniteFilteredDerived.Presentation.Truncation",
+   "CategoryTheory.FiniteFilteredDerived.Presentation.truncationData"
+  ],
+  "statement": "theorem Presentation.truncationData (P : Presentation (C := C) (D := D)) :\n    Nonempty P.Truncation",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261023T135758-L-2971959",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261023T135758-L-2971959",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

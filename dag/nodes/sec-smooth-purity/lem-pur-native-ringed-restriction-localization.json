@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-native-ringed-restriction-localization",
+ "kind": "statement",
+ "title": "Native Ringed Restriction Localization",
+ "status": "split",
+ "statement": "Continuous and cocontinuous restriction of a commutative ring sheaf commutes with sheafified sectionwise localization at any compatible global section. The restricted section is its actual pullback along the site functor. Assume the displayed commutative-ring and additive sheafification structures on both sites; site and coefficient universes remain independent. Dependencies: [lem-pur-native-ringed-restriction-hom], [def-weil-pbc-ringed-section-localization].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "sectionwise restriction of the localization presheaf is the localization presheaf of the restricted section: the rings, the sections and the universal localization lifts are identical. Apply the sheafification restriction comparison.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-hom",
+    "def-weil-pbc-ringed-section-localization",
+    "lem-pur-native-ringed-restriction-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-pur-native-ringed-restriction-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous and cocontinuous restriction of a commutative ring sheaf commutes with sheafified sectionwise localization at any compatible global section. The restricted section is its actual pullback along the site functor. Assume the displayed commutative-ring and additive sheafification structures on both sites; site and coefficient universes remain independent.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"TopCat.Presheaf.restrictOpenCommRingCat_apply\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"∀ {X : TopCat} {F : TopCat.Presheaf CommRingCat X} {V : TopologicalSpace.Opens ↑X} (f : ↑(F.obj (Opposite.op V)))\\n  (U : TopologicalSpace.Opens ↑X) (e : autoParam (U ≤ V) TopCat.Presheaf.restrictOpenCommRingCat_apply._auto_1),\\n  TopCat.Presheaf.restrictOpen f U e = (CategoryTheory.ConcreteCategory.h\", \"doc\": \"For a topological space $X$ and a presheaf $F$ of commutative rings on $X$, the restriction of a section $f$ from an open set $V$ to an open subset $U$ (where $U \\\\subseteq V$) is given by applying the\"}\n  {\"name\": \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \"(F : Dᵒᵖ ⥤ A) :\\n  toSheafify J (G.op ⋙ F) ≫ ((G.pushforwardContinuousSheafificationCompatibility A J K).hom.app F).val =\\n    whiskerLeft _ (toSheafify K _)\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is a natural isomorphism expressing that the composition of sheafificat\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) : ModuleCat.of R M ⟶ (tildeInModuleCat M).obj (op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \": G.sheafPushforwardContinuous A J K ⊣ G.sheafPushforwardCocontinuous A J K\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"{X : TopCat} (F : X.Sheaf CommRingCat) (U V : Opens X) (x) :\\n  F.1.map (homOfLE le_sup_right).op ((F.objSupIsoProdEqLocus U V).inv x) = x.1.2\", \"doc\": \"Let $F$ be a sheaf of commutative rings on a topological space $X$, and let $U$ and $V$ be two open subsets of $X$. The sheaf condition provides an isomorphism between the ring of sections $F(U \\\\cup V\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.res_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) (s : (structureSheaf R).1.obj (op U)) (x : V) :\\n  ((structureSheaf R).1.map i.op s).1 x = (s.1 (i x) :)\", \"doc\": \"For open subsets $U$ and $V$ of the prime spectrum $\\\\operatorname{Spec}(R)$ with inclusion map $i: V \\\\to U$, and for any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over \"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localization\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddOreLocalization.AddOreSet\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [AddMonoid R] (S : AddSubmonoid R) : Type u_1\", \"doc\": \"A submonoid `S` of an additive monoid `R` is (left) Ore if common summands on the right can be\\nturned into common summands on the left, and if each pair of `r : R` and `s : S` admits an Ore\\nminuend `v\"}\n  {\"name\": \"OreLocalization.OreSet\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [Monoid R] (S : Submonoid R) : Type u_1\", \"doc\": \"A submonoid `S` of a monoid `R` is (left) Ore if common factors on the right can be turned\\ninto common factors on the left, and if each pair of `r : R` and `s : S` admits an Ore numerator\\n`v : R` and \"}\n  {\"name\": \"AddOreLocalization.addOreSetComm\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_2} [AddCommMonoid R] (S : AddSubmonoid R) : AddOreLocalization.AddOreSet S\", \"doc\": \"Every submonoid of an additive commutative monoid is an Ore set.\"}\n  {\"name\": \"OreLocalization.oreSetComm\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_2} [CommMonoid R] (S : Submonoid R) : OreLocalization.OreSet S\", \"doc\": \"Every submonoid of a commutative monoid is an Ore set.\"}\n  {\"name\": \"AddOreLocalization.addOreSetBot\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [AddMonoid R] : AddOreLocalization.AddOreSet ⊥\", \"doc\": \"The trivial submonoid is an Ore set.\"}\n  {\"name\": \"OreLocalization.oreSetBot\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [Monoid R] : OreLocalization.OreSet ⊥\", \"doc\": \"The trivial submonoid is an Ore set.\"}\n  {\"name\": \"AddOreLocalization.oreMin\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] (r : R) (s : ↥S) : R\", \"doc\": \"The Ore minuend of a difference.\"}\n  {\"name\": \"OreLocalization.oreNum\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] (r : R) (s : ↥S) : R\", \"doc\": \"The Ore numerator of a fraction.\"}\n  {\"name\": \"AddOreLocalization.AddOreSet.oreMin\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} {inst✝ : AddMonoid R} {S : AddSubmonoid R} [self : AddOreLocalization.AddOreSet S] : R → ↥S → R\", \"doc\": \"The Ore minuend of a difference.\"}\n  {\"name\": \"OreLocalization.OreSet.oreNum\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_1} {inst✝ : Monoid R} {S : Submonoid R} [self : OreLocalization.OreSet S] : R → ↥S → R\", \"doc\": \"The Ore numerator of a fraction.\"}\n  {\"name\": \"AddOreLocalization.addOreSetComm_oreMin\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_2} [AddCommMonoid R] (S : AddSubmonoid R) (r : R) (s : ↥S) : AddOreLocalization.oreMin r s = r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.oreSetComm_oreNum\", \"module\": \"Mathlib.GroupTheory.OreLocalization.OreSet\", \"type\": \" {R : Type u_2} [CommMonoid R] (S : Submonoid R) (r : R) (s : ↥S) : OreLocalization.oreNum r s = r\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n localization.*(Iso|iso|equiv) Mathlib/ (local read-only Mathlib source)",
+   "results": "54 matching source lines. First matches:\nMathlib/AlgebraicGeometry/Spec.lean:323:    IsIso (IsLocalization.localizationLocalizationAtPrimeIsoLocalization M\nMathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean:661:      exact (locally_iff_of_localizationSpanTarget (isLocal_ringHomProperty P).respectsIso\nMathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:163:    refine CommRingCat.essentiallySmall_of_localizationAway (Q := Q'.isoClosure) ?_\nMathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean:270:  rw [← Algebra.norm_localization (Sₘ := K) ℤ (nonZeroDivisors ℤ)]\nMathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean:290:    rw [← Algebra.norm_localization (Sₘ := K) ℤ (nonZeroDivisors ℤ)]\nMathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean:298:  rw [← Algebra.norm_localization (Sₘ := K) ℤ (nonZeroDivisors ℤ), algebraMap_int_eq]\nMathlib/NumberTheory/NumberField/Norm.lean:39:  (Algebra.norm_localization (R := ℤ) (Rₘ := ℚ) (S := 𝓞 K) (Sₘ := K) (nonZeroDivisors ℤ) x).symm\nMathlib/NumberTheory/NumberField/Norm.lean:42:  (Algebra.trace_localization (R := ℤ) (Rₘ := ℚ) (S := 𝓞 K) (Sₘ := K) (nonZeroDivisors ℤ) x).symm\nMathlib/NumberTheory/NumberField/Basic.lean:398:  Basis.localizationLocalization ℚ (nonZeroDivisors ℤ) K (RingOfIntegers.basis K)\nMathlib/NumberTheory/NumberField/Basic.lean:403:  Basis.localizationLocalization_apply ℚ (nonZeroDivisors ℤ) K (RingOfIntegers.basis K) i\nMathlib/NumberTheory/NumberField/Basic.lean:409:  Basis.localizationLocalization_repr_algebraMap ℚ (nonZeroDivisors ℤ) K _ x i\nMathlib/NumberTheory/NumberField/Discriminant/Defs.lean:56:  rw [← Algebra.discr_localizationLocalization ℤ (nonZeroDivisors ℤ) L]",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeRingedRestrictionLocalization",
+  "file": "lean/Sheaf/CategoryTheory/NativeRingedRestrictionLocalization.lean",
+  "declaration": "CategoryTheory.NativeRestriction.localizationRestriction",
+  "statement": "theorem localizationRestriction [F.IsCocontinuous K J]\n    [HasSheafify J CommRingCat.{max c d vc vd r}]\n    [HasSheafify K CommRingCat.{max c d vc vd r}]\n    [HasSheafify J AddCommGrpCat.{max c d vc vd r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    [HasSheafify K AddCommGrpCat.{max c d vc vd r}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    (s : (R.obj ⋙ forget CommRingCat).sections) :\n    Nonempty ((restrictModules.{_, _, _, _, r} (K := K) F R).obj\n      (ringedSectionLocalizationOfUniverses R s) ≅\n        ringedSectionLocalizationOfUniverses\n          (restrictedCommRing.{_, _, _, _, r} (K := K) F R)\n          (restrictedSection.{_, _, _, _, r} F R s))",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.restrictedSection",
+   "CategoryTheory.NativeRestriction.localizationRestriction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

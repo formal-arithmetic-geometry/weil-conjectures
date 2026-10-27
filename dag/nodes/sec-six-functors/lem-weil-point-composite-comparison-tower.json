@@ -1,0 +1,393 @@
+{
+ "id": "lem-weil-point-composite-comparison-tower",
+ "kind": "statement",
+ "title": "Composite point-section pullback comparison: tower equation and actual common-stage actions",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All coefficient fields below are finite intermediate extensions of $\\Omega/\\mathbf Q_\\ell$, with valuation rings and uniformizers [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, and let $g:s\\to s$ be a scheme automorphism [def-weil-scheme-morphism-properties]. On the small pro-etale site [def-weil-pbc-proetale-site], put $\\mathcal C_E^{\\rm int}=D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], $\\mathcal C_E=D^b_c(s,E)$, the raw rationalization [def-weil-rationalization-karoubi], and $P_E=Lg_E^*$ with its specified integral, rational and common-stage actions [def-weil-derived-pullback-tensor-hom]. Let $F_E^{\\rm int}=\\Gamma(s,-)$ and $F_E=\\operatorname{Fib}_s:\\mathcal C_E\\to D^b_{\\rm fd}(E)$ be the specified point-section functors [def-weil-finite-coefficient-point], and put $H_E=F_EP_E$.\n\nFor $E\\subseteq L$, write $S_{L/E}K=K\\otimes_E L$ for rational scalar extension and $T_{L/E}A=A\\otimes_E L$ on point complexes [def-weil-point-fd-qlbar-category]. Let $\\bar\\alpha_{E,L,K}:S_{L/E}P_EK\\xrightarrow{\\sim}P_LS_{L/E}K$ and $\\bar\\varphi_{E,L,K}:F_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}F_EK$ be precisely the rationalizations of the specified completed pullback and sections comparisons [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension]. Define\n$$b_{E,L,K}=\\bar\\varphi_{E,L,P_EK}\\circ F_L(\\bar\\alpha_{E,L,K}^{-1}):H_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}H_EK.$$\n\nWrite $a^C_{N,L,E}:S_{N/L}S_{L/E}\\xrightarrow{\\sim}S_{N/E}$ for the specified scalar associator [lem-weil-scalar-extension-composition], and $a^D_{N,L,E}:T_{N/L}T_{L/E}\\xrightarrow{\\sim}T_{N/E}$ for the point-complex associator [def-weil-point-fd-qlbar-category]. The maps $b$ are natural in every rational arrow of $\\mathcal C_E$, are identities for $E=L$ under the unit identifications, and obey\n$$b_{E,N,K}\\circ H_N(a^C_{N,L,E,K})=a^D_{N,L,E,H_EK}\\circ T_{N/L}(b_{E,L,K})\\circ b_{L,N,S_{L/E}K}.$$\n\nOn the literal common-stage source $D^b_c(s,\\Omega)$ [def-weil-algebraically-closed-coefficients] and target $D^b_{\\rm fd}(\\Omega)$ [def-weil-point-fd-qlbar-category], let $u:S_{L/E}K\\to S_{L/E'}K'$ represent a morphism. The specified functors $\\operatorname{Fib}_s$ and $\\operatorname{Fib}_s\\circ Lg^*$ send it to classes represented over the same $L$ by, respectively,\n$$A_L(u)=\\bar\\varphi_{E',L,K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1},\\qquad B_L(u)=b_{E',L,K'}H_L(u)b_{E,L,K}^{-1}.$$\nIn particular $B_L(u)$ is the point-fiber image of the prescribed pullback representative $\\bar\\alpha_{E',L,K'}^{-1}P_L(u)\\bar\\alpha_{E,L,K}$. Both formulas preserve identity arrows and compositions at a common stage. If $N\\supseteq L$, scalar extension of $A_L(u)$ and $B_L(u)$, conjugated by the specified point-complex associators, equals $A_N(u_N)$ and $B_N(u_N)$, where $u_N$ is source scalar transport using $a^C$. Thus the two functor actions have the same classes for every equivalent common-stage representative, without assuming injective transition maps. No family of transformation components is an input to these assertions.\n\nFor the literal Lean realization use the canonical small coefficient model $\\operatorname{Shrink}(E)$ and the inclusions conjugated by its specified algebra equivalence with $E$, as in [def-weil-algebraically-closed-coefficients]. All finite-field families and comparison equations use these same models; the common-stage target retains the prescribed transports back to the actual subfields. The duplicated rational and common-stage helper definitions are aliases of the canonical constructions in [lem-weil-point-rational-family-common-stage-naturality]; this concerns only its definitions, not that theorem as a proof assumption.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, Weil II, (1.1.3), p. 150; (1.1.7), pp. 150-151 gives the point-transport context only. Original coefficient-descent proof steps 4-5: composite comparison b, tower interchange and identification of both prescribed common-stage functors. The completed pro-etale normalization and explicit formulas are an agent-written argument, not assertions attributed to Deligne."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-qlbar-category",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition",
+  "def-sf-point-fibre-tensor-system",
+  "lem-weil-point-rational-family-common-stage-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Rationalize the specified integral comparisons. The pullback comparison of [lem-pur-integral-operations-scalar-extension] is natural, unital and compatible with successive coefficient extension; the sections comparison of [lem-weil-point-sections-scalar-extension] has the displayed sections-tensor normalization, unit and tower equations, including after tensoring with the coefficient field. These apply at $s$ since $\\ell\\ne p$ and to $P_EK$ since the specified pullback is a functor on the integral constructible category. In the raw rationalization [def-weil-rationalization-karoubi] every arrow is a finite sum $\\sum_jv_j\\otimes c_j$. The specified actions of $P_E$ [def-weil-derived-pullback-tensor-hom] and $F_E$ [def-weil-finite-coefficient-point] send each summand to the image of $v_j$ multiplied by $c_j$. Thus each rational naturality square is the sum of $c_j$ times its integral naturality square, after embedding $E$ in the larger field. Tensoring the integral inverse identities, unit equations and tower equations gives those equations for exactly $\\bar\\alpha$ and $\\bar\\varphi$ in the statement. This verifies naturality on all rational arrows, not just arrows admitting an integral lift.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "Put $d_{E,L,K}=\\bar\\alpha_{E,L,K}^{-1}$ and $\\phi_{E,L,K}=\\bar\\varphi_{E,L,K}$. For a rational arrow $v:K\\to K'$, naturality from step 1 gives\n$$d_{E,L,K'}P_L(S_{L/E}v)=S_{L/E}(P_Ev)d_{E,L,K},\\qquad \\phi_{E,L,P_EK'}F_L(S_{L/E}P_Ev)=T_{L/E}(H_Ev)\\phi_{E,L,P_EK}.$$\nApply $F_L$ to the first equality and substitute in the second. The result is $b_{E,L,K'}H_L(S_{L/E}v)=T_{L/E}(H_Ev)b_{E,L,K}$, since $b=\\phi F_L(d)$. Every factor is an isomorphism; when $L=E$ both factors are identities under the specified units, by the unit clauses of [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension].",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "Fix $E\\subseteq L\\subseteq N$. For this calculation abbreviate $S=S_{L/E}$, $U=S_{N/L}$, $T=T_{L/E}$, $V=T_{N/L}$, $a=a^C_{N,L,E}$ and $c=a^D_{N,L,E}$. The pullback tower equation of [lem-pur-integral-operations-scalar-extension], inverted, reads\n$$d_{E,N,K}P_N(a_K)=a_{P_EK}\\,U(d_{E,L,K})\\,d_{L,N,SK}.$$\nIts associator is the scalar associator specified by [lem-weil-scalar-extension-composition]. The sections tower equation of [lem-weil-point-sections-scalar-extension] reads\n$$\\phi_{E,N,J}F_N(a_J)=c_{F_EJ}\\,V(\\phi_{E,L,J})\\,\\phi_{L,N,SJ}.$$\nThese are equations of rational derived morphisms by step 1. We will use them with $J=P_EK$; all objects remain in the stated coefficient categories.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "Expand the right side of the required $b$ equation using the notation of step 3:\n$$c_{H_EK}V(b_{E,L,K})b_{L,N,SK}\n=c_{H_EK}V(\\phi_{E,L,P_EK})V(F_Ld_{E,L,K})\\phi_{L,N,P_LSK}F_N(d_{L,N,SK}).$$\nNaturality of $\\phi_{L,N}$, supplied by [lem-weil-point-sections-scalar-extension] and rationalized in step 1, at the arrow $d_{E,L,K}:P_LSK\\to SP_EK$ replaces the middle pair $V(F_Ld)\\phi_{L,N,P_LSK}$ by $\\phi_{L,N,SP_EK}F_N(Ud)$. The sections tower equation of step 3 now changes the first three factors to $\\phi_{E,N,P_EK}F_N(a_{P_EK})$. Hence the whole product is\n$$\\phi_{E,N,P_EK}F_N(a_{P_EK}U(d_{E,L,K})d_{L,N,SK})\n=\\phi_{E,N,P_EK}F_N(d_{E,N,K}P_N(a_K))\n=b_{E,N,K}H_N(a_K),$$\nby the pullback equation of step 3 and functoriality. This is the asserted tower equation, with both associators in their displayed directions.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "For $u: S_{L/E}K\\to S_{L/E'}K'$, the actual point functor sends $[L,u]$ to $[L,A_L(u)]$ by clause 4 of [def-weil-finite-coefficient-point]. The prescribed pullback action in [def-weil-derived-pullback-tensor-hom] represents $Lg^*[L,u]$ by\n$$v=d_{E',L,K'}P_L(u)\\bar\\alpha_{E,L,K}:S_{L/E}P_EK\\to S_{L/E'}P_{E'}K'.$$\nApply clause 4 of the point functor to this very representative, with objects $P_EK,P_{E'}K'$. Its representative is\n$$\\phi_{E',L,P_{E'}K'}F_L(v)\\phi_{E,L,P_EK}^{-1}\n=(\\phi'F_L(d'))H_L(u)(F_L(\\bar\\alpha)\\phi^{-1})\n=b_{E',L,K'}H_L(u)b_{E,L,K}^{-1}.$$\nThus the second formula computes the specified composite functor, rather than merely defining another candidate action.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "At a fixed common field $L$, write either formula from step 5 as $X_L(u)=D_{K'}G_L(u)D_K^{-1}$: take $(G,D)=(F,\\phi)$ for $A$ and $(G,D)=(H,b)$ for $B$. Then\n$$X_L(1)=D_K1D_K^{-1}=1,\\qquad X_L(v)X_L(u)=D_{K''}G_L(v)(D_{K'}^{-1}D_{K'})G_L(u)D_K^{-1}=X_L(vu).$$\nThis uses only functoriality and inverse cancellation. The common-stage composition and unit conventions of [def-weil-algebraically-closed-coefficients, def-weil-point-fd-qlbar-category] are exactly these operations after passing to classes; at a field equal to an endpoint, the specified units give the same identities.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "Check further extension explicitly. Keep either choice $(G,D)$ of step 6 and put $U=S_{N/L}$, $V=T_{N/L}$, $a_K=a^C_{N,L,E,K}$ and $c_K=a^D_{N,L,E,G_EK}$, with primes for $(E',K')$. The tower equation is\n$$D_{E,N,K}G_N(a_K)=c_K V(D_{E,L,K})D_{L,N,S_{L/E}K}.$$\nFor $D=\\phi$ this is [lem-weil-point-sections-scalar-extension]; for $D=b$ it is step 4. The source transition is $u_N=a_{K'}U(u)a_K^{-1}$ [def-weil-algebraically-closed-coefficients]. Substituting these three equations in $X_N(u_N)$ gives\n$$c_{K'}V(D_{E',L,K'})D_{L,N,S_{L/E'}K'}G_N(Uu)D_{L,N,S_{L/E}K}^{-1}V(D_{E,L,K}^{-1})c_K^{-1}.$$\nNaturality of $D_{L,N}$ at the rational arrow $u$ replaces the middle three factors by $V(G_Lu)$, so this equals\n$$c_{K'}V\\bigl(D_{E',L,K'}G_L(u)D_{E,L,K}^{-1}\\bigr)c_K^{-1}=c_{K'}V(X_L(u))c_K^{-1}.$$\nThis is precisely the point-complex transition formula of [def-weil-point-fd-qlbar-category]. Naturality needed here is step 1 for $\\phi$ and step 2 for $b$, and applies even when $u$ is an arbitrary sum of rational tensors.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  },
+  {
+   "text": "If $[L,u]=[L',v]$ in the literal source, [def-weil-algebraically-closed-coefficients] says $u_N=v_N$ at some finite common extension $N\\supseteq L,L'$. Step 7 identifies the target transitions of $A_L(u),A_{L'}(v)$ with $A_N(u_N),A_N(v_N)$, which are equal; the identical argument using $B_N$ treats $B$. By the target equality criterion in [def-weil-point-fd-qlbar-category] their classes therefore agree. Together with step 6 this proves independence of representatives and of the field used for composition. Only equality at a later stage was used, so no injectivity of any transition is required. Every construction in steps 1-8 uses only the fixed functors and their scalar comparisons; no transformation component or family of such components was supplied.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final stagewise finite-coefficient-colimit clause; agent-written explicit comparison calculation, using the live specified sections and pullback comparisons. Deligne Weil II (1.1.3) supplies coefficient-localization context only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For point sections F and completed pullback P, prove that the composite scalar comparison b equals phi at P composed with F of inverse alpha, satisfies the tower cocycle, and computes common stage functor actions",
+   "results": "CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback; CategoryTheory.Meq.pullback_apply; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; CategoryTheory.Presieve.FamilyOfElements.Compatible.pullback; PresheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.whiskerLeft",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage|common.stage.*comparison|comparison.*tower.*[Nn]atur",
+   "results": "0 hits; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent scalar extension comparisons of a composite functor have a tower identity and their conjugation formulas give functors on common finite coefficient representatives",
+   "results": "0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of two scalar compatible functors on a directed system of categories gives coherent composite transition isomorphisms and conjugated maps independent of representatives",
+   "results": "Module.DirectedSystem.map_map; DirectedSystem.map_map'; FirstOrder.Language.DirectedSystem.map_map; DirectedSystem.map_map; Module.DirectLimit.map_comp; AddCommGroup.DirectLimit.map_comp; DirectLimit.map_def; Ring.DirectLimit.map_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.whiskerLeft, CategoryTheory.whiskerRight",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.whiskerLeft'",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; subdirectory Algebra/Category/ModuleCat/Presheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback associativity and maps of module direct limits do not identify the completed point sections composite b, its actual rational common-stage actions or the displayed tower square."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage|common.stage.*comparison|comparison.*tower.*natur",
+   "results": " (subdirectory CategoryTheory); 0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "; loogle: unknown identifier 'NatIso.ofComponents'; 0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension comparison for a composite of two functors is coherent under towers and determines the composite functor on a filtered common stage category",
+   "results": "PolynomialLaw.comp_toFun'; ModuleCat.ExtendScalars.map'_comp; ModuleCat.extendScalars_assoc; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.extendScalars; ModuleCat.extendScalarsComp; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalars_assoc'; 8 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension natural isomorphisms for point sections and completed pullback compose to a tower cocycle and define functors on common stage morphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; SheafOfModules.conjugateEquiv_pullbackComp_inv; 8 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars_assoc\"",
+   "results": "ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; ModuleCat.extendScalars_assoc'; 3 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|extendScalarsComp|map'_comp",
+   "results": "387; 405; 984; 992; 994 (subdirectory Algebra/Category/ModuleCat/ChangeOfRings.lean); 5 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural scalar extension comparisons for composite functors induce conjugation actions on the directed colimit of morphism groups",
+   "results": "ModuleCat.HasColimit.coconePointSMul; DirectLimit.smul_def; ModuleCat.HasColimit.coconePointSMul_apply; ModuleCat.FilteredColimits.colimitMulAction; CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul; CategoryTheory.PreGaloisCategory.action_ext_of_isGalois; CategoryTheory.PreGaloisCategory.IsNaturalSMul.naturality; CategoryTheory.PreGaloisCategory.toAut_hom_app_apply; 8 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma extendScalars_assoc|noncomputable def extendScalarsComp|theorem map.*comp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean (subdirectory Algebra/Category/ModuleCat); 4 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module scalar extension, scheme-module pullback or module colimits, not the specified completed point-section comparison and its actual rational common-stage actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-transformation-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The first cohomology-transport arrow of def-weil-global-geometric-frobenius, via def-weil-frobenius-cohomology-transport and def-weil-frobenius-point-transport: original point-naturality proof step 6 (all rational morphism tensors) and step 9 (the actual point/pullback common-stage conjugations and independence of representatives). Original coefficient-descent proof steps 4-5: composite comparison b, tower interchange and identification of both prescribed common-stage functors.",
+   "via": [
+    "lem-weil-point-transformation-coefficient-descent",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-point-composite-comparison-tower",
+  "worker": "stage1",
+  "summary": "Q06: retained the statement and all prior search evidence. Gave explicit rational naturality, inverse pullback tower equation, composite tower calculation, identification with the actual prescribed composite action, same-stage identity/composition cancellation, and further-extension conjugation. All substantive inputs are existing comparison statements; no new nodes are necessary. Equality of representatives uses eventual equality, never injectivity.",
+  "blueprint": "def-weil-global-geometric-frobenius: first cohomology-transport arrow, via its point transport and point-naturality descendants; original coefficient-descent proof steps 4-5 (composite b and actual common-stage functor actions). Current main-20261015 point-fibre stagewise-colimit clause and derived-pullback common-stage clause are realized by proof steps 1-8.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "The specified completed pullback coefficient comparison, including naturality/unit/tower, is needed for point transport; the exceptional-preservation unit does not replace this coefficient construction."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "The specified point sections coefficient comparison, including normalization and its tower equation, is needed to compute the actual point functor."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Identifies the specified rational source associator used in the coefficient tower calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-bfd551933",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-bfd551933 (reviewer sub-agent of L); spot-checked: I read all eight steps against the statements of every cited node, and they are correct; no changes made. Step 3: lem-pur-integral-operations-scalar-extension's tower clause, inverted, gives d_{E,N}P_N(a)=a U(d_{E,L})d_{L,N} with matching types, and the sections tower (lem-weil-point-sections-scalar-extension) at J=P_EK is that lemma's display, rationalized. Step 4: I recomputed the composite tower for b (φ_{L,N} naturality at d_{E,L,K}, then the sections tower, then the pullback tower) and it holds with both associators in their stated directions. Step 5: Fib_s of the pullback common-stage representative d'P_L(u)ᾱ (def-weil-derived-pullback-tensor-hom) is b'H_L(u)b^{-1} under clause 4 of def-weil-finite-coefficient-point, so B is the actual composite functor. Step 7: substituting the source transition a'U(u)a^{-1} and the tower equations gives exactly the target transition c'V(X_L u)c^{-1}. Step 8 uses only eventual equality, never injectivity. Associators: a^C (lem-weil-scalar-extension-composition) is the same χ-conjugated ordinary associator as a^int in the sections lemma and as the composition isomorphisms in lem-pur's proof (step 7). The point-complex associator c of lem-weil-derived-field-scalar-extension-tower is the rationalized a^mod. Step 1 rationalizes termwise from the raw Hom⊗E and the specified actions on morphisms, which covers arbitrary rational arrows, including the C_L arrows used in steps 4 and 7. Edge cases checked: E=L=N, g=id, zero objects and arrows, and representatives equal only at a later field. Duplicate search found no node stating this item: lem-weil-point-inverse-image-coefficient-tower is the integral g^{-1} tower, lem-weil-point-automorphism-transport-scalar-extension is the transport square, lem-trf-frobenius-transports-scalar-extension is the compact-support version, and the two Q107 siblings assume this item's content. No cycle, no new nodes, no SGA. Deligne Weil II (1.1.3) p.150 checked; it is context only, and the proof is correctly marked by:agent. Tool uses accepted: the two sk-thm-sf-compatibility comparison lemmas are used as black-box coefficient tools. The composition lemma is already in a unit the item's unit cites, so declaring it was unnecessary but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointCompositeComparisonTower",
+  "declaration": "WeilConjectures.PointCompositeComparison.tower_and_actions",
+  "declarations": [
+   "WeilConjectures.PointCompositeComparison.pullback",
+   "WeilConjectures.PointCompositeComparison.sectionsPullback",
+   "WeilConjectures.PointCompositeComparison.comparison",
+   "WeilConjectures.PointCompositeComparison.commonPullback",
+   "WeilConjectures.PointCompositeComparison.pullbackPair",
+   "WeilConjectures.PointCompositeComparison.stageAlpha",
+   "WeilConjectures.PointCompositeComparison.stageComparison",
+   "WeilConjectures.PointCompositeComparison.sectionsArrow",
+   "WeilConjectures.PointCompositeComparison.compositeArrow",
+   "WeilConjectures.PointCompositeComparison.representativeClass",
+   "WeilConjectures.PointCompositeComparison.sectionsClass",
+   "WeilConjectures.PointCompositeComparison.compositeClass",
+   "WeilConjectures.PointCompositeComparison.targetTransport",
+   "WeilConjectures.PointCompositeComparison.NaturalityAndUnit",
+   "WeilConjectures.PointCompositeComparison.Tower",
+   "WeilConjectures.PointCompositeComparison.ActualActions",
+   "WeilConjectures.PointCompositeComparison.IdentitiesAndComposition",
+   "WeilConjectures.PointCompositeComparison.Extension",
+   "WeilConjectures.PointCompositeComparison.Independent",
+   "WeilConjectures.PointCompositeComparison.tower_and_actions"
+  ],
+  "file": "lean/Sheaf/Paper/PointCompositeComparisonTower.lean",
+  "statement": "theorem tower_and_actions [IsIso g] : NaturalityAndUnit D l hl g Ω ∧ Tower D l hl g Ω ∧ ActualActions D l hl g Ω ∧ IdentitiesAndComposition D l hl g Ω ∧ Extension D l hl g Ω ∧ Independent D l hl g Ω",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the published normalized integral/rational comparisons and literal common-stage functors. The additional landed dependency supplies the proved coefficient-prime invertibility fact, avoiding an extra assumption. Helpers name composites and the six clauses of this one node; no transformation family is an input. R4: finite-field assertions use Coefficient.{u} l Ω F and coefficientInclusion, matching the canonical small models of the parent and common-stage categories. Duplicate rational pullback and stage-comparison helpers are reducible aliases of the identical canonical PointRationalFamily constructions; no new objects or morphisms are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb1f27b40",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Every clause matches the node: b is F(α⁻¹) then φ at P_E K, built from the normalized rationalized lem-pur and point-sections comparisons. Naturality covers all rational arrows; the unit clause uses sfRationalScalarUnit and fieldScalarUnit; the tower uses sfRationalScalarComp and pointFibreFdTensorTower (= fieldScalarTower, as in pointFdQbarStageComp) in the node's directions. ActualActions ties both formulas to the specified functors pointQbarFibre and commonStageDerivedPullback⋙pointQbarFibre, plus the pre-class pullback-representative equality; its HEq types are propositionally equal through the ∃! object specs. Extension uses StageSystem.tr (a^C-conjugated) against a^D conjugation; Independent assumes no injectivity and takes no η input. Records: statement verbatim, all dependency records unchanged. Added stmt_dep def-sf-point-fibre-tensor-system owns the proved finiteFieldSpecCoefficientPrimeInvertible, creates no cycle, and has the Q120 precedent. Ω : Type u is inherited from the FiniteCoefficientPoint dependency. No compile (none required, no FIX). Advisory: some owner and proof-plan imports are unused by the statement (H9); the second reading is the worker's own; IdentitiesAndComposition is trivial but stated by the node."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "R4 stage 2",
+  "old_statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All coefficient fields below are finite intermediate extensions of $\\Omega/\\mathbf Q_\\ell$, with valuation rings and uniformizers [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, and let $g:s\\to s$ be a scheme automorphism [def-weil-scheme-morphism-properties]. On the small pro-etale site [def-weil-pbc-proetale-site], put $\\mathcal C_E^{\\rm int}=D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], $\\mathcal C_E=D^b_c(s,E)$, the raw rationalization [def-weil-rationalization-karoubi], and $P_E=Lg_E^*$ with its specified integral, rational and common-stage actions [def-weil-derived-pullback-tensor-hom]. Let $F_E^{\\rm int}=\\Gamma(s,-)$ and $F_E=\\operatorname{Fib}_s:\\mathcal C_E\\to D^b_{\\rm fd}(E)$ be the specified point-section functors [def-weil-finite-coefficient-point], and put $H_E=F_EP_E$.\n\nFor $E\\subseteq L$, write $S_{L/E}K=K\\otimes_E L$ for rational scalar extension and $T_{L/E}A=A\\otimes_E L$ on point complexes [def-weil-point-fd-qlbar-category]. Let $\\bar\\alpha_{E,L,K}:S_{L/E}P_EK\\xrightarrow{\\sim}P_LS_{L/E}K$ and $\\bar\\varphi_{E,L,K}:F_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}F_EK$ be precisely the rationalizations of the specified completed pullback and sections comparisons [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension]. Define\n$$b_{E,L,K}=\\bar\\varphi_{E,L,P_EK}\\circ F_L(\\bar\\alpha_{E,L,K}^{-1}):H_LS_{L/E}K\\xrightarrow{\\sim}T_{L/E}H_EK.$$\n\nWrite $a^C_{N,L,E}:S_{N/L}S_{L/E}\\xrightarrow{\\sim}S_{N/E}$ for the specified scalar associator [lem-weil-scalar-extension-composition], and $a^D_{N,L,E}:T_{N/L}T_{L/E}\\xrightarrow{\\sim}T_{N/E}$ for the point-complex associator [def-weil-point-fd-qlbar-category]. The maps $b$ are natural in every rational arrow of $\\mathcal C_E$, are identities for $E=L$ under the unit identifications, and obey\n$$b_{E,N,K}\\circ H_N(a^C_{N,L,E,K})=a^D_{N,L,E,H_EK}\\circ T_{N/L}(b_{E,L,K})\\circ b_{L,N,S_{L/E}K}.$$\n\nOn the literal common-stage source $D^b_c(s,\\Omega)$ [def-weil-algebraically-closed-coefficients] and target $D^b_{\\rm fd}(\\Omega)$ [def-weil-point-fd-qlbar-category], let $u:S_{L/E}K\\to S_{L/E'}K'$ represent a morphism. The specified functors $\\operatorname{Fib}_s$ and $\\operatorname{Fib}_s\\circ Lg^*$ send it to classes represented over the same $L$ by, respectively,\n$$A_L(u)=\\bar\\varphi_{E',L,K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1},\\qquad B_L(u)=b_{E',L,K'}H_L(u)b_{E,L,K}^{-1}.$$\nIn particular $B_L(u)$ is the point-fiber image of the prescribed pullback representative $\\bar\\alpha_{E',L,K'}^{-1}P_L(u)\\bar\\alpha_{E,L,K}$. Both formulas preserve identity arrows and compositions at a common stage. If $N\\supseteq L$, scalar extension of $A_L(u)$ and $B_L(u)$, conjugated by the specified point-complex associators, equals $A_N(u_N)$ and $B_N(u_N)$, where $u_N$ is source scalar transport using $a^C$. Thus the two functor actions have the same classes for every equivalent common-stage representative, without assuming injective transition maps. No family of transformation components is an input to these assertions.",
+  "what": "Make explicit the canonical small coefficient models already required by the parent and common-stage family. Their original Lean predicates used literal subfields, so the parent supplied family could not be passed to them. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+   "place": "Deligne, Weil II, (1.1.3), p. 150; (1.1.7), pp. 150-151 gives the point-transport context only. Original coefficient-descent proof steps 4-5: composite comparison b, tower interchange and identification of both prescribed common-stage functors. The completed pro-etale normalization and explicit formulas are an agent-written argument, not assertions attributed to Deligne."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-point-transformation-coefficient-descent",
+    "holds": true,
+    "note": "Uses the same finite-field constructions and equations through their canonical small coefficient models; the parent assembly is included in this delivery."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-pbc-proetale-site",
+   "def-weil-derived-complete-integral-detailed",
+   "def-weil-rationalization-karoubi",
+   "def-weil-derived-pullback-tensor-hom",
+   "def-weil-finite-coefficient-point",
+   "def-weil-point-fd-qlbar-category",
+   "lem-pur-integral-operations-scalar-extension",
+   "lem-weil-point-sections-scalar-extension",
+   "def-weil-algebraically-closed-coefficients",
+   "lem-weil-scalar-extension-composition",
+   "def-sf-point-fibre-tensor-system"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f2c88",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T043315-L-1694914",
+  "kind": "interface",
+  "note": "independent cc review: item theorem and changed def bodies vs live owners PointRationalFamilyCommonStageNaturality/PointTransformationRationalNormalization (text-identical); dependency statements F.val→Coefficient (Shrink) vs node statement_change records; sandbox --all compile + #print axioms"
+ }
+}

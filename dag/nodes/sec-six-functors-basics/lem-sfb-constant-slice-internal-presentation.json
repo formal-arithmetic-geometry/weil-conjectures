@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-constant-slice-internal-presentation",
+ "kind": "statement",
+ "title": "A constant slice presentation in internal module coordinates",
+ "statement": "Let Λ be a commutative condensed ring object in universe u+1 [def-sfb-integral-models-stacks-data], X,Y schemes in universe u, f:Y→X, and k a commutative ring in universe u+1. Fix a ring-sheaf isomorphism c:underline k≅smallRing(X,Λ_X), with the sectionwise and coefficient-sized site conventions of [def-sfb-integral-models-stacks-data] and [def-sfb-affine-locally-constructible-proetale-modules]. Let N be an internal Λ_X-module, U an object of the coefficient-sized pro-etale site of Y, m,n natural numbers and q:k^m→k^n a k-linear map. Suppose the fixed-scalar inverse image of smallModules(N) restricted along c, on the slice at U, is isomorphic to the constant sheaf of coker(q) [def-weil-pbc-constant-sheaf]. Then there is an internal morphism a:Λ_{U.left}^m→Λ_{U.left}^n whose cokernel is isomorphic to (U.hom≫f)^*N [def-sfb-point-model-restriction-module]. Finite free modules mean finite biproducts of the regular module. No assertion is made that the entries of a come from the condensed point; no discrete, Noetherian or nonempty hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-point-model-restriction-module"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the equivalence E, its pointwise inverse-image comparisons and its regular-module comparison from lem-sfb-constant-slice-module-encoding. There is no presentation or matrix in that comparison lemma.",
+   "uses": [
+    "lem-sfb-constant-slice-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write F for the constant ModuleCat(k)-sheaf functor on the coefficient-sized slice. Additivity and preservation of finite biproducts give b_r:E(Λ_U^r)≅F(k^r). In Lean these are E.functor.mapBiproduct, biproduct.mapIso, the inverse F.mapBiproduct, and F applied to biproduct.isoProduct followed by ModuleCat.piIsoPi. This works also for r=0.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let q′=F(q) and a=E.functor.preimage(b_m.hom≫q′≫b_n.inv). Full faithfulness gives E(a)≫b_n.hom=b_m.hom≫q′. Compose the comparison at N, the supplied hN, and PreservesCokernel.iso F q to obtain E((U.hom≫f)^*N)≅coker(q′). PreservesCokernel.iso E.functor a followed by cokernel.mapIso for b_m,b_n identifies E(coker a) with coker(q′). Full faithfulness reflects the resulting isomorphism to (U.hom≫f)^*N≅coker a.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Reverse finite-matrix part of lem-sfb-discrete-coefficient-local-models, steps 1--2."
+ },
+ "proof_deps": [
+  "lem-sfb-constant-slice-module-encoding",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; A2 formalizes the finite-biproduct and cokernel endgame, separating the presentation-free encoding comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a constant finite free presentation on a slice site to an internal module using section module equivalence",
+   "date": "2026-10-26",
+   "results": "8 hits, including SheafOfModules.Presentation.map and quasicoherent finite-presentation APIs.",
+   "verdict": "They transport ordinary module-sheaf presentations but do not identify the internal, small-site, fixed-scalar and localized inverse images in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesCokernel.iso",
+   "date": "2026-10-26",
+   "results": "9 hits including PreservesCokernel.iso.",
+   "verdict": "This supplies the final cokernel transport once the required encoding and regular-module comparisons are established; it does not supply those comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Ii]so|[Ii]so.*finiteFree|constant.*[Pp]resentation",
+   "date": "2026-10-26",
+   "results": "3 Mathlib hits about locally constant rank. Project rg searches found InternalModuleOperationsTransport, ConstantRingModuleSheaves and ScalarNormalizedConstantModels.",
+   "verdict": "The first two are the component equivalences. ScalarNormalizedConstantModels requires a supplied normalized comparison and does not apply to arbitrary c without further transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteConstantPresentationLifting",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Lifting one constant finite matrix to discrete point matrices; A constant slice presentation in internal module coordinates",
+   "via": [
+    "lem-sfb-discrete-constant-presentation-lifting",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantSliceInternalPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSliceInternalPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constant_slice_internal_presentation",
+  "statement": "theorem constant_slice_internal_presentation\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (k : Type (u + 1)) [CommRing k]\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj Λ X))\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X))\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)\n    (m n : ℕ)\n    (q : ModuleCat.of k (Fin m → k) ⟶ ModuleCat.of k (Fin n → k))\n    (hN : Nonempty (((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n          ((coefficientModelFixedScalars _ k).obj\n            ((smallModules X (condensedRingObj Λ X) ⋙\n              ConstantCompletion.res c.hom).obj N))).over U ≅\n      (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, u} Y).over U)\n        (ModuleCat.{u + 1} k)).obj (cokernel q))) :\n    ∃ a : Mod.finiteFree (condensedRingObj Λ (AsSmall.down.obj U).left) m ⟶\n        Mod.finiteFree (condensedRingObj Λ (AsSmall.down.obj U).left) n,\n      Nonempty (pointModelRestriction Λ f N (AsSmall.down.obj U).hom ≅ cokernel a)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T100244-L-4163590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T111752-L-1724824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

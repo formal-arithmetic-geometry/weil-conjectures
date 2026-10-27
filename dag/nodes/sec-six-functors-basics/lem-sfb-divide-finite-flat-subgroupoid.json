@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-divide-finite-flat-subgroupoid",
+ "kind": "statement",
+ "title": "Division of a scheme groupoid by a finite flat subrelation",
+ "statement": "Let $S$ be a scheme and $(U,R,s,t,e,i,c)$ a groupoid scheme over $S$ [def-a1-groupoid-scheme], with $U$ affine. Let $P\\to R$ be a monomorphism of schemes through which the unit factors, and on which inverse and composition restrict to a groupoid on $U$. Assume $s|_P,t|_P:P\\to U$ are finite locally free [def-pc-finite-locally-free], $P\\to U\\times_SU$ is a monomorphism, and $j=(s,t):R\\to U\\times_SU$ is separated and locally quasi-finite. Here separated means its diagonal is a closed immersion [def-weil-closed-immersion], locally quasi-finite means locally of finite type with discrete finite-type field fibres [def-weil-finite-type-morphism], and monomorphism means injectivity on all test-scheme Hom sets. The fppf sheafification of $T\\mapsto U(T)/P(T)$ is represented by an affine $S$-scheme $\\bar U$. Its quotient map $q:U\\to\\bar U$ is finite locally free and surjective and identifies $P$ with $U\\times_{\\bar U}U$, preserving the source, target and composition. There is a groupoid scheme $(\\bar U,\\bar R,\\bar s,\\bar t,\\bar e,\\bar i,\\bar c)$ over $S$ and a morphism of groupoid schemes whose object map is $q$, such that $R\\cong(U\\times_SU)\\times_{\\bar U\\times_S\\bar U}\\bar R$ compatibly with all the groupoid operations. This is the meaning of restriction of the latter groupoid along $q$. The morphism $R\\to\\bar R$ sends $P$ into the unit: the square formed by the inclusion $P\\to R$, the map $P\\to\\bar U$ equal to $q\\circ s|_P=q\\circ t|_P$, the map $R\\to\\bar R$ and $\\bar e:\\bar U\\to\\bar R$ commutes and is cartesian, so $P=R\\times_{\\bar R,\\bar e}\\bar U$ as subschemes of $R$, and under the restriction isomorphism this agrees with the identification of $P$ with $U\\times_{\\bar U}U$ above. Moreover two $T$-points $r,r'$ of $R$ have the same image in $\\bar R(T)$ if and only if $r'=p\\circ r\\circ p'$ for some $p,p'\\in P(T)$. Fibre products, affine schemes, fppf sheafification and surjectivity use [def-pc-fibre-product], [def-weil-affine-spectrum], [def-pc-fppf-site], [def-weil-pbc-sheafification], [def-weil-surjective-morphism].",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S4 (lemma-divide-subgroupoid), hypotheses (1)-(5), and groupoids.tex Tag 03BM (proposition-finite-flat-equivalence) for surjectivity of the quotient. Unit clause and image characterization: proof of 04S4 (choice of the descent datum $\\varphi$, last paragraph) and the cartesian square in the proof of stacks-morphisms.tex Tag 06N0."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Since $s_P:P\\to U$ is finite and $U$ is affine, $P$ is affine by finite-morphism permanence (b). The subgroupoid laws and monomorphism $P\\to U\\times_SU$ make $P(T)$ an equivalence relation on $U(T)$: identities give reflexivity, inverse gives symmetry, composition gives transitivity, and the monomorphism gives at most one arrow for each ordered pair. Apply the affine finite-flat-relation quotient theorem to $(U,P)$. It gives the affine $S$-scheme $\\bar U$, the asserted sheafification, a finite locally free surjective $q$, and $P\\simeq U\\times_{\\bar U}U$ with projections $s_P,t_P$. Composition on this kernel pair is forced to send $(z,y),(y,x)$ to $(z,x)$, since there is at most one $P$-arrow with specified endpoints.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "The kernel-pair quotient-descent lemma applied to $(U,P,q)$ says that $\\{q\\}$ is an fppf covering. Every base change of $q$ is finite by finite-morphism permanence (a), and is an fppf covering by covering base change, hence flat and locally of finite presentation. Thus it is finite locally free by definition. Factoring $q^n:U^{\\times_S n}\\to\\bar U^{\\times_S n}$ into $n$ such base changes, finite-locally-free composition proves it finite locally free; it is surjective because each factor is a covering. Hence $q^n$ is an fppf covering. We use this for $n=2,3,4$ below. Base changes of these coverings are again fppf coverings, and are fpqc coverings by the fppf-to-fpqc lemma.",
+   "uses": [
+    "lem-a1-fppf-kernel-pair-quotient-descent",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-finite-locally-free-composition",
+    "def-pc-finite-locally-free",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "Use endpoint order $(t,s)$ in the construction; switching the factors identifies this with the order $(s,t)$ in the statement. Put $V=U\\times_SU$ and $B=\\bar U\\times_S\\bar U$. The kernel-pair identification gives $V\\times_BV=P\\times_SP$. For $a:x\\to y$, $p:y'\\to y$ and $p':x'\\to x$ in $P(T)$, set $\\varphi(a,(p,p'))=((p,p'),p^{-1}ap')$. This is a scheme morphism, being a composite of inverse, composition and fibre-product maps. Its inverse sends $((p,p'),a')$ to $(pa'(p')^{-1},(p,p'))$. On a triple overlap, successive transport by $(p_1,p'_1)$ and $(p_2,p'_2)$ gives $p_2^{-1}p_1^{-1}a p'_1p'_2=(p_1p_2)^{-1}a(p'_1p'_2)$, the direct transport. Thus this is a descent datum for $R\\to V$ along $V\\to B$. These formulas hold naturally for all test schemes, so also as scheme morphisms.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "The singleton $\\{V\\to B\\}$ is fppf by step 2. The structure map $R\\to V$ is $j$, separated by hypothesis in the sense of [def-weil-proper-morphism], whose definition of separatedness is the one written in the statement. By hypothesis $j$ is locally of finite type and each fibre $R_v$, $v\\in V$, is discrete. For $r\\in R_v$ the point $\\{r\\}$ is then closed in $R_v$, and $r\\in\\overline{\\{r'\\}}$ forces $r'=r$ since $\\{r'\\}$ is closed too; the closed-fibre-point criterion [lem-sfb-closed-fibre-point-quasifinite-criterion] makes $j$ quasi-finite at $r$. Thus $j$ is locally quasi-finite in the sense of [pqf-def-quasifinite], as the descent theorem requires. Apply separated-locally-quasi-finite fppf effective descent to the datum of step 3. It gives a $B$-scheme $\\bar R$ and an isomorphism $R\\simeq V\\times_B\\bar R$ identifying $\\varphi$ with canonical transport. Write $h:R\\to\\bar R$ for the projection. It is an fppf covering, since it is the base change of $V\\to B$. In particular maps out of $\\bar R$ can be descended, and their equality checked, along $h$ by representable fpqc descent and the fppf-to-fpqc lemma.",
+   "uses": [
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-proper-morphism",
+    "lem-sfb-closed-fibre-point-quasifinite-criterion",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "For $r,r'\\in R(T)$ with $h(r)=h(r')$, their endpoint pairs give a $T$-point of $V\\times_BV$. Thus there are unique $p:t(r')\\to t(r)$ and $p':s(r')\\to s(r)$ in $P(T)$. Canonical transport in the pullback $V\\times_B\\bar R$ keeps the $\\bar R$ component fixed; the formula for $\\varphi$ therefore gives $r'=p^{-1}rp'$. Conversely this formula is precisely a transport, so gives equal $h$-images. Replacing $p^{-1}$ by $p$ proves exactly the image characterization in the statement, with all compositions required to be defined. This argument uses actual $T$-points of the kernel pair, not a choice of local lifts of those points.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "Define $\\bar t,\\bar s$ by the two structure projections $\\bar R\\to B$; then $\\bar t h=qt$ and $\\bar s h=qs$. To descend inverse, use $h i:R\\to\\bar R$. On the kernel pair of $h$, step 5 writes $r'=p^{-1}rp'$, and $(r')^{-1}=(p')^{-1}r^{-1}p$ has the same $h$-image as $r^{-1}$ by step 5. Representable fpqc descent along the fppf covering $h$ therefore gives a unique morphism $\\bar i:\\bar R\\to\\bar R$ satisfying $\\bar i h=hi$. All maps are over $S$: their composites to $S$ agree after the same cover, where this follows from the original structure maps.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "For $(y,x)\\in U\\times_{\\bar U}U=P$, let $p:x\\to y$ be its arrow. Then $e(y)=p e(x)p^{-1}$, so step 5 gives $he(y)=he(x)$. Representable fpqc descent along $q$ yields $\\bar e:\\bar U\\to\\bar R$ with $\\bar e q=he$. Its source and target equal the identity, as can be checked after $q$. Moreover $p=p e(x)e(x)$ gives $h(p)=he(x)=\\bar e(qx)$ by step 5. Thus the morphism on arrows already sends $P$ into the unit, as an equality of morphisms.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "Put $D=\\bar R\\times_{\\bar s,\\bar U,\\bar t}\\bar R$, with arrows denoted $(A,B')$, and map it to $\\bar U^{\\times_S3}$ by $(\\bar s(B'),\\bar t(B')=\\bar s(A),\\bar t(A))$. Pull back $q^3$ to obtain the fppf cover $E\\to D$. Its three object lifts $(x_0,x_1,x_2)$ and the pullback isomorphism of step 4 give unique arrows $b:x_0\\to x_1$ and $a:x_1\\to x_2$ lifting $(A,B')$. Hence $hc(a,b)$ is a morphism $E\\to\\bar R$. On $E\\times_DE$, write $u_j:x_j\\to x'_j$ for the unique $P$-arrows. Step 5 gives $a'=u_2au_1^{-1}$ and $b'=u_1bu_0^{-1}$, whence $a'b'=u_2ab u_0^{-1}$. Step 5 again gives $h(a'b')=h(ab)$. Representable fpqc descent yields a unique $\\bar c:D\\to\\bar R$. Its source and target are the required ones by checking after $E\\to D$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "The resulting operations satisfy the groupoid axioms. The unit laws and inverse laws can be checked on the covering $R\\to\\bar R$: choose the lifted endpoints, and they read $e(t(a))a=a$, $ae(s(a))=a$, $a^{-1}a=e(s(a))$ and $aa^{-1}=e(t(a))$ before applying $h$. For associativity, pull the two maps on composable triples back along the fppf covering obtained from $q^4$, lifting their four vertices. Their unique lifted arrows $a,b,c$ are composable and the two values are $h((ab)c)$ and $h(a(bc))$, equal by the original groupoid law. Equality descends by representable fpqc descent. The same formulas show preservation of every operation by $(q,h)$; the pullback isomorphism already identifies objects and arrows of the restriction, so it is an isomorphism of groupoid schemes.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), proof"
+   }
+  },
+  {
+   "text": "Finally consider a $T$-point $(r,u)$ of $R\\times_{\\bar R,\\bar e}\\bar U$. Applying source and target gives $qs(r)=qt(r)=u$. The kernel-pair isomorphism of step 1 therefore gives a unique $p:s(r)\\to t(r)$ in $P(T)$. Step 7 says $h(p)=\\bar e(u)=h(r)$. In the pullback $R\\simeq V\\times_B\\bar R$, the endpoints and $h$-image determine an arrow uniquely, so $r=p$. Conversely every $p\\in P(T)$ defines such a pair, by step 7. These inverse correspondences use only fibre-product maps, naturally in $T$, and establish the claimed cartesian square as schemes. They also show that it agrees with $P\\simeq U\\times_{\\bar U}U$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S4 (lemma-divide-subgroupoid), last paragraph; stacks-morphisms.tex Tag 06N0 (lemma-DM-residual-gerbe), cartesian-square paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "def-pc-finite-locally-free",
+  "lem-a1-fppf-kernel-pair-quotient-descent",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-finite-locally-free-composition",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "def-pc-fibre-product",
+  "lem-trf-separated-lqf-fppf-effective-descent",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-proper-morphism",
+  "lem-sfb-closed-fibre-point-quasifinite-criterion",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S4 (lemma-divide-subgroupoid), with the omitted groupoid-operation and kernel-square verifications written out; Tag 06N0 (lemma-DM-residual-gerbe) for the cartesian square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme groupoid with affine objects and separated locally quasi finite relation map can be descended along a finite locally free equivalence subrelation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divide a groupoid scheme by a finite flat monomorphic subgroupoid to obtain a quotient groupoid scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} [self : CategoryTheory.PreGaloisCategory C] (G : Type u₂)\\n  [inst_1 : Group G] [Finite G], CategoryTheory.Limits.HasColimitsOfShape (CategoryTheory.SingleObj G) C\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, for every finite group $G$, the category $\\\\mathcal{C}$ admits all colimits of diagrams shaped like the single-object category associated to $G$. This means that\"}\n  {\"name\": \"CategoryTheory.Quotient.groupoid\", \"module\": \"Mathlib/CategoryTheory/Quotient\", \"type\": \"{G : Type u_2} →\\n  [inst : CategoryTheory.Groupoid G] → (r : HomRel G) → CategoryTheory.Groupoid (CategoryTheory.Quotient r)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a binary relation $R$ on each hom-set $\\\\text{Hom}(X, Y)$, the quotient category $\\\\mathcal{C}/R$ forms a groupoid. This means every morphism $f: X \\\\to Y$ in $\\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {inst_1 : CategoryTheory.PreGaloisCategory C}\\n  {F : CategoryTheory.Functor C FintypeCat} [self : CategoryTheory.PreGaloisCategory.FiberFunctor F] (G : Type u₂)\\n  [inst_2 : Group G] [Finite G], CategoryTheory.Limits.PreservesColimitsOfShape\", \"doc\": \"For any finite group $G$, a fiber functor $F$ from a pre-Galois category $\\\\mathcal{C}$ to the category of finite types preserves colimits of shape $\\\\mathcal{J} = \\\\text{SingleObj}(G)$, where $\\\\mathcal{\"}\n  {\"name\": \"ProfiniteGrp.toFiniteQuotientFunctor\", \"module\": \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits\", \"type\": \"(P : ProfiniteGrp.{u_1}) → CategoryTheory.Functor (OpenNormalSubgroup ↑P.toProfinite.toTop) FiniteGrp.{u_1}\", \"doc\": \"For a profinite group $P$, this functor maps each open normal subgroup $H$ of $P$ to the finite quotient group $P/H$ (considered as an object in the category of finite groups), and maps morphisms betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.ker\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Groupoid C] →\\n    {D : Type u_1} → [inst_1 : CategoryTheory.Groupoid D] → CategoryTheory.Functor C D → CategoryTheory.Subgroupoid C\", \"doc\": \"Given a functor $\\\\phi : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between groupoids, the kernel subgroupoid of $\\\\phi$ is the subgroupoid of $\\\\mathcal{C}$ consisting of all morphisms $f$ such that $\\\\phi(f)$ is an i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divide a groupoid scheme by a finite flat monomorphic subgroupoid to obtain a quotient groupoid scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.left_quotientAction\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \": QuotientAction α H\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$, the monoid $\\\\beta$ acts on the quotient of $\\\\alpha$ by $H$.\"}\n  {\"name\": \"QuotientGroup.Quotient.group\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \": Group (G ⧸ N)\", \"doc\": \"For any group $ G $ and its normal subgroup $ N $, the quotient set $ G/N $ of left cosets forms a group under the operation defined by $ (aN)(bN) = (ab)N $. The normality of $ N $ ensures that this o\"}\n  {\"name\": \"coe_div_coe\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"[SetLike S G] [DivisionMonoid G] [SubgroupClass S G] (H : S) : H / H = (H : Set G)\", \"doc\": \"For a subgroup $ H $ of a division monoid $ G $, the set $ H / H $ (defined as $ \\\\{ h_1 / h_2 \\\\mid h_1, h_2 \\\\in H \\\\} $) is equal to $ H $ itself.\"}\n  {\"name\": \"MulAction.QuotientAction\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} → (β : Type v) → [inst : Group α] → [inst_1 : Monoid β] → [MulAction β α] → Subgroup α → Prop\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$, the monoid $\\\\beta$ acts on the quotient of $\\\\alpha$ by $H$.\"}\n  {\"name\": \"CategoryTheory.Grp.Hom.hom_hom_div\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp_\", \"type\": \"(f g : G ⟶ H) : (f / g).hom.hom = f.hom.hom / g.hom.hom\", \"doc\": \"For any morphisms $ f, g : G \\\\to H $ between group objects $ G $ and $ H $ in a Cartesian monoidal category, the homomorphism corresponding to the division $ f/g $ satisfies $ (f/g).\\\\hom = f.\\\\hom / g.\"}\n  {\"name\": \"CategoryTheory.Quotient.groupoid\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": Groupoid (Quotient r)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a binary relation $R$ on each hom-set $\\\\text{Hom}(X, Y)$, the quotient category $\\\\mathcal{C}/R$ forms a groupoid. This means every morphism $f: X \\\\to Y$ in $\\\\mathcal\"}\n  {\"name\": \"QuotientGroup.mk_div\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \"(a b : G) : ((a / b : G) :  Q) = a / b\", \"doc\": \"For any elements $a$ and $b$ in a group $G$, the division of their images in the quotient group $G/H$ equals the image of their division in $G$, i.e., $(aH) / (bH) = (a / b)H$.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": Groupoid S.objs\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the set of objects $\\\\mathcal{S}.\\text{objs}$ (those objects in $\\\\mathcal{C}$ with non-empty isotropy in $\\\\mathcal{S}$) forms a groupoid un\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|subgroupoid|quotientGroupoid",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Basic.lean\", \"line\": \"38\", \"text\": \"/-- A subgroupoid is totally disconnected if it only has loops. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"15\", \"text\": \"# Subgroupoid\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"17\", \"text\": \"This file defines subgroupoids as `structure`s containing the subsets of arrows and their\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"21\", \"text\": \"* containment of subgroupoids is a complete lattice;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"22\", \"text\": \"* images and preimages of subgroupoids under a functor;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"23\", \"text\": \"* the notion of normality of subgroupoids and its stability under intersection and preimage;\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|subgroupoid|quotientGroupoid",
+   "results": "{\"t\": \"2026-10-23T11:50:05Z\", \"tool\": \"grep\", \"query\": \"GroupoidScheme|subgroupoid|quotientGroupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Basic.lean\"], \"digest\": \"ea6ccb1bb59f0988\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary categorical groupoids, Galois-category finite-group quotients or descent of individual scheme properties, not division of an internal scheme groupoid with the stated cartesian restriction and unit clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a scheme groupoid along a finite locally free equivalence subrelation on affine objects",
+   "results": "{\"t\": \"2026-10-23T11:50:05Z\", \"tool\": \"leansearch\", \"query\": \"Descent of a scheme groupoid along a finite locally free equivalence subrelation on affine objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"CategoryTheory.RegularEpi.desc'\"], \"digest\": \"0acbb23d09a1471b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary categorical groupoids, Galois-category finite-group quotients or descent of individual scheme properties, not division of an internal scheme groupoid with the stated cartesian restriction and unit clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T11:50:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary categorical groupoids, Galois-category finite-group quotients or descent of individual scheme properties, not division of an internal scheme groupoid with the stated cartesian restriction and unit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divide a groupoid scheme by a finite flat monomorphic subgroupoid to obtain a quotient groupoid scheme",
+   "results": "{\"t\": \"2026-10-23T11:50:07Z\", \"tool\": \"leanfinder\", \"query\": \"Divide a groupoid scheme by a finite flat monomorphic subgroupoid to obtain a quotient groupoid scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"CategoryTheory.Quotient.groupoid\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"CategoryTheory.Subgroupoid.ker\"], \"digest\": \"7bf06fd593e32226\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary categorical groupoids, Galois-category finite-group quotients or descent of individual scheme properties, not division of an internal scheme groupoid with the stated cartesian restriction and unit clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Division of a scheme groupoid by a finite flat subrelation.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-divide-finite-flat-subgroupoid",
+  "worker": "stage1",
+  "summary": "Reused the existing affine finite-flat-relation quotient, effective fppf descent, covering and morphism-descent nodes; wrote out transport, cocycle, all descended operations, groupoid laws, point-image criterion and unit kernel square. No new nodes and no statement changes.",
+  "blueprint": "Supports the recorded direct-image alteration/moduli chain through the singleton-field-cover lemma, using Stacks 04S4. Read latest/sk-thm-sf-ctf-stability-direct-images.proof.md (3); no change to its compactification/direct-image route. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports; the inherited place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic affine finite-flat equivalence-relation quotient, Stacks 03BM, required by 04S4; no result in this unit supplies it."
+   },
+   {
+    "node": "lem-trf-separated-lqf-fppf-effective-descent",
+    "why": "Generic effective descent of separated locally quasi-finite schemes, Stacks 02W8, exactly the effectivity input of 04S4; no result in this unit supplies it."
+   },
+   {
+    "node": "lem-a1-fppf-kernel-pair-quotient-descent",
+    "why": "Generic conversion of a finite locally free surjective kernel-pair quotient into an fppf cover; supplies the cover for the descent route, with no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-trf-separated-lqf-fppf-effective-descent",
+  "lem-a1-fppf-kernel-pair-quotient-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-6d80a4def",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-6d80a4def (reviewer sub-agent of L); spot-checked: I read the whole item: its inherited statement is unchanged, it now has a 10-step proof, and the delivery adds no new nodes. Its hypotheses match Stacks 04S4 (bootstrap.tex, lemma-divide-subgroupoid) (1)-(5). I read that proof in full: the descent datum phi, its inverse, the cocycle check and the use of 02W8. Steps 1-2: P is affine by finite-morphism permanence (b). P(T) is an equivalence relation on U(T), so 03BM (lem-a1-finite-flat-affine-relation-quotient) applies and gives U-bar, a finite locally free surjective q and the kernel pair. q^n is finite locally free and an fppf covering by base change and composition. Step 3: the endpoints of p^-1 a p' are correct, and the cocycle reduces to (p1p2)^-1 a (p1'p2'). Step 5: the equal-image criterion comes from canonical transport on actual T-points. Steps 6-9: inverse, unit and composition descend along h, q and the base change of q^3, with the u2 a u1^-1 compatibility; the groupoid laws are checked after h and after the base change of q^4. Step 10: the unit square is cartesian because endpoints together with the h-image determine an arrow. Small cases checked: U empty, P the unit, P=R, and a finite group G with a normal subgroup N. No cycle, and no duplicate of 04S4 elsewhere in the DAG. FIX (C1/E1), step 4: the step claimed j is locally quasi-finite 'by hypothesis'. The item defines that inline as locally of finite type with discrete field fibres, but 02W8 needs pqf-def-quasifinite (quasi-finite at every point). The corrected step now cites the same-unit node lem-sfb-closed-fibre-point-quasifinite-criterion (01TH (3)=>(1); points of a discrete fibre are closed and have no proper generization), plus def-weil-proper-morphism and pqf-def-quasifinite, all added to proof_deps. Batch-5 flags, each accepted as generic: 03BM and the kernel-pair cover are generic quotient and cover lemmas; trf fppf base change (021O), finite-locally-free composition and fppf-is-fpqc (022C) are Mathlib permanence leaves; trf 02W8 effective descent is the generic input that 04S4 itself names. None of them is a step of the proof of the trace formula or of Poincare duality. The three tool_uses are generic tools that no node of the unit supplies.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DivideFiniteFlatSubgroupoid",
+  "declaration": "AlgebraicGeometry.divide_finiteFlat_subgroupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/DivideFiniteFlatSubgroupoid.lean",
+  "statement": "theorem divide_finiteFlat_subgroupoid {S : Scheme.{u}} {U R P : Over S} [IsAffine U.left] (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e.left i.left c) (ι : P ⟶ R) [Mono ι.left] (eP : U ⟶ P) (iP : P ⟶ P) (cP : pullback (ι.left ≫ s.left) (ι.left ≫ t.left) ⟶ P.left) (hP : IsGroupoidScheme (ι.left ≫ s.left) (ι.left ≫ t.left) eP.left iP.left cP) (heP : eP ≫ ι = e) (hiP : iP ≫ ι = ι ≫ i) (hcP : ∀ (H : Scheme.{u}) (a b : H ⟶ P.left) (hab : a ≫ (ι.left ≫ s.left) = b ≫ (ι.left ≫ t.left)) (habR : (a ≫ ι.left) ≫ s.left = (b ≫ ι.left) ≫ t.left), pullback.lift a b hab ≫ cP ≫ ι.left = pullback.lift (a ≫ ι.left) (b ≫ ι.left) habR ≫ c) [(ι.left ≫ s.left).IsFiniteLocallyFree] [(ι.left ≫ t.left).IsFiniteLocallyFree] [Mono (prod.lift (ι ≫ s) (ι ≫ t))] [IsSeparated (prod.lift s t).left] [LocallyOfFiniteType (prod.lift s t).left] (hdiscrete : ∀ x : (U ⨯ U).left, DiscreteTopology ((prod.lift s t).left.fiber x)) : ∃ (Ū Rbar : Over S) (q : U ⟶ Ū) (h : R ⟶ Rbar) (sbar tbar : Rbar ⟶ Ū) (ebar : Ū ⟶ Rbar) (ibar : Rbar ⟶ Rbar) (cbar : pullback sbar.left tbar.left ⟶ Rbar.left), IsAffine Ū.left ∧ q.left.IsFiniteLocallyFree ∧ Surjective q.left ∧ IsPullback (ι ≫ s) (ι ≫ t) q q ∧ IsGroupoidScheme sbar.left tbar.left ebar.left ibar.left cbar ∧ s ≫ q = h ≫ sbar ∧ t ≫ q = h ≫ tbar ∧ e ≫ h = q ≫ ebar ∧ i ≫ h = h ≫ ibar ∧ (∀ (H : Scheme.{u}) (a b : H ⟶ R.left) (hab : a ≫ s.left = b ≫ t.left) (habbar : (a ≫ h.left) ≫ sbar.left = (b ≫ h.left) ≫ tbar.left), pullback.lift a b hab ≫ c ≫ h.left = pullback.lift (a ≫ h.left) (b ≫ h.left) habbar ≫ cbar) ∧ IsPullback (prod.lift s t) h (Limits.prod.map q q) (prod.lift sbar tbar) ∧ IsPullback ι (ι ≫ s ≫ q) h ebar ∧ (ι ≫ s ≫ q = ι ≫ t ≫ q) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over S) (uliftYoneda.{u + 1}.obj Ū) ∧ (∃ η : coequalizer (uliftYoneda.{u + 1}.map (ι ≫ s)) (uliftYoneda.{u + 1}.map (ι ≫ t)) ⟶ uliftYoneda.{u + 1}.obj Ū, coequalizer.π (uliftYoneda.{u + 1}.map (ι ≫ s)) (uliftYoneda.{u + 1}.map (ι ≫ t)) ≫ η = uliftYoneda.{u + 1}.map q ∧ ∀ F : Sheaf (Scheme.fppfTopology.over S) (Type (u + 1)), Function.Bijective (fun k : uliftYoneda.{u + 1}.obj Ū ⟶ F.obj ↦ η ≫ k)) ∧ ∀ (T : Scheme.{u}) (r r' : T ⟶ R.left), r ≫ h.left = r' ≫ h.left ↔ ∃ (p p' : T ⟶ P.left) (hpr : (p ≫ ι.left) ≫ s.left = r ≫ t.left) (hrp : (pullback.lift (p ≫ ι.left) r hpr ≫ c) ≫ s.left = (p' ≫ ι.left) ≫ t.left), r' = pullback.lift (pullback.lift (p ≫ ι.left) r hpr ≫ c) (p' ≫ ι.left) hrp ≫ c",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1055e537b",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps and records, report, module. Only the lean field changed versus live; lean.statement is verbatim; single sorry; no defs. Clause-by-clause match: affine U; P mono subgroupoid (eP/iP/cP determined since ι is mono); finite locally free s|P, t|P; P→U×_SU mono in Over S (equivalent to scheme mono); j IsSeparated + LocallyOfFiniteType + discrete Scheme.Hom.fiber (node's lqf); fppf sheafification of the pointwise coequalizer via η with π≫η=yoneda q and bijective precomposition (same pattern as landed finiteFlat_affineRelation_quotient); q finite locally free and surjective; IsPullback kernel pair; descended IsGroupoidScheme with preservation of all ops; restriction square; cartesian unit square; image iff with composability witnesses matching c(a,b)=a∘b of IsGroupoidScheme. Edge cases (empty U, finite group) and universes fine. No duplicate in live/Mathlib. Report has both sections (second reading is the author's own re-reading, accepted). Not compiled, per instructions; the worker reports a clean compile. No findings."
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-multiplicative-type-largest-subtorus",
+ "kind": "statement",
+ "title": "Largest subtorus and smooth connected subgroups of groups of multiplicative type",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. A torus is a group scheme becoming $(\\mathbf G_m)^d$ over $\\bar k$ for some integer $d\\geq0$, where $\\mathbf G_m$ is as in [def-sc-gm-ga]. A group scheme is of multiplicative type if over $\\bar k$ it is isomorphic to a closed subgroup scheme of $(\\mathbf G_m)^n$ for some $n\\geq0$. Every torus is smooth and connected. Let $D$ be of multiplicative type. There is a largest subtorus $D^t\\subseteq D$: it contains every subtorus of $D$. For every field extension $K/k$, the equality $(D^t)_K=(D_K)^t$ holds as subgroup schemes of $D_K$. Every closed subgroup scheme of a group of multiplicative type is of multiplicative type, and every smooth connected group scheme of multiplicative type is a torus. In particular every smooth connected closed subgroup scheme of a torus is a torus.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(c), printed p.232; Definition 12.14 and the following paragraph (tori; an algebraic subgroup of a torus is a torus if and only if it is smooth and connected), printed p.236; Definition 12.17 and following paragraph, printed p.236; Theorem 12.23 and Corollary 12.24, printed p.240; Notation 12.29, printed p.241."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "If $H\\subseteq D$ is a closed subgroup, extend to $\\bar k$ and choose a closed immersion $D_{\\bar k}\\hookrightarrow\\mathbf G_m^n$. Its composition with $H_{\\bar k}\\hookrightarrow D_{\\bar k}$ is a closed immersion: on coordinate rings it is the composite of two surjections, and after scalar extension these remain surjective because any lifted element still maps to its original tensor. Thus $H$ is of multiplicative type by the definition in the statement.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(c) and paragraph following Definition 12.17: closure under subgroups."
+   }
+  },
+  {
+   "text": "For a torus $T$, $T_{\\bar k}\\simeq\\mathbf G_m^d=D_{\\bar k}(\\mathbf Z^d)$. The geometric criteria show that this scheme is smooth and connected, including $d=0$. Smoothness descends along $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ by the fpqc descent lemma; this map is affine, surjective, and flat because $\\bar k$ is a nonzero vector space over $k$. The algebraic-closure criterion gives geometric connectedness of $T$, hence connectedness. The character equivalence and its scalar-extension identification give $X^*(T)\\simeq\\mathbf Z^d$ as abelian groups, so in particular this group is torsion-free.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.14, p.236; Remark 12.5, p.232; Theorem 12.23, p.240; smoothness descent and algebraic-closure test as in the cited nodes."
+   }
+  },
+  {
+   "text": "Let $H$ be smooth, connected and of multiplicative type. Its identity is a $k$-rational point, so the rational-point criterion implies that $H_{\\bar k}$ is connected. Smoothness persists under this extension by the smooth base-change clause. Write $H_{\\bar k}=D_{\\bar k}(M)$ using the character equivalence. In characteristic $p>0$, connectedness says all torsion of $M$ is $p$-primary and smoothness says there is no nonzero $p$-primary torsion; in characteristic zero connectedness directly says $M$ is torsion-free. Since $M$ is finitely generated, the finite-basis lemma gives $M\\simeq\\mathbf Z^d$, and the group-algebra identification gives $H_{\\bar k}\\simeq\\mathbf G_m^d$. Thus $H$ is a torus. Together with step 1 this proves the claimed special case for smooth connected subgroups of a torus.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph following Definition 12.17, p.236; Remark 12.5, p.232; Corollary 1.32, p.16; Definition 12.14, p.236."
+   }
+  },
+  {
+   "text": "Put $M=X^*(D)$ and $A=M_{\\mathrm{tors}}=\\{m:\\exists n>0,\\ nm=0\\}$. This subgroup is Galois-stable since $n\\sigma(m)=\\sigma(nm)$. The quotient $\\overline M=M/A$ is finitely generated by images of generators of $M$ and is torsion-free: if $n(m+A)=0$, then $nm\\in A$, so $rnm=0$ for some $r>0$, whence $m\\in A$. The finite-basis lemma gives $\\overline M\\simeq\\mathbf Z^d$. The character equivalence takes the surjection $q:M\\twoheadrightarrow\\overline M$ to a closed immersion $i:D_k(\\overline M)\\hookrightarrow D_k(M)=D$. Its source is a torus: by the scalar-extension clause, $X^*(D_k(\\overline M)_{\\bar k})\\simeq X^*(D_k(\\overline M))\\simeq\\overline M$ as abelian groups, and over $\\bar k$ the Galois group is trivial, so the character equivalence over $\\bar k$ gives $D_k(\\overline M)_{\\bar k}\\simeq D_{\\bar k}(\\overline M)\\simeq D_{\\bar k}(\\mathbf Z^d)\\simeq\\mathbf G_m^d$ by the group-algebra formula. Define $D^t$ to be this closed subtorus with inclusion $i$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.24 and its proof, p.240; Notation 12.29, p.241."
+   }
+  },
+  {
+   "text": "For any subtorus $j:T\\hookrightarrow D$, its character map $j^*:M\\to X^*(T)$ has torsion-free target by step 2. For $m\\in A$ and $nm=0$ one has $n j^*(m)=0$, hence $j^*(m)=0$. Therefore $j^*$ factors uniquely through $q:M\\to\\overline M$. Full faithfulness of the character equivalence takes this factorization to $T\\to D^t\\xrightarrow{i}D$ equal to $j$. This says exactly that the closed subgroup $T$ is contained in $D^t$, proving maximality and uniqueness as a subgroup of $D$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Notation 12.29, p.241: largest subtorus, using Theorem 12.23."
+   }
+  },
+  {
+   "text": "For any field extension $K/k$, choose an algebraic closure $\\bar K\\supseteq\\bar k$; the closed immersion $D_{\\bar k}\\hookrightarrow\\mathbf G_m^n$ stays a closed immersion after extension to $\\bar K$ (surjections of coordinate rings remain surjective, as in step 1), so $D_K$ is of multiplicative type and $(D_K)^t$ is defined by step 4 over $K$. The natural character identification $X^*(D_K)\\simeq M$ preserves element orders, and therefore identifies its torsion subgroup with $A$ and its torsion quotient with $M/A$. By compatibility with character maps, the base change of the inclusion from step 4 has the same character map $q$ as the inclusion constructed for $D_K$. Full faithfulness over $K$ gives an isomorphism of these subgroups commuting with their inclusions into $D_K$. Consequently they are the same closed subgroup scheme: $(D^t)_K=(D_K)^t$. This applies to inseparable and transcendental extensions as well.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Notation 12.29, p.241; scalar-extension compatibility of the character construction in Section 12(g), pp.239--240."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "lem-trf-fg-torsionfree-group-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Remark 12.5; Definition 12.14; paragraph following Definition 12.17; Theorem 12.23; Corollary 12.24; Notation 12.29, printed pp.232--241."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group of multiplicative type has a largest subtorus whose formation commutes with field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"UnitAddTorus\", \"module\": \"Mathlib/Analysis/Fourier/AddCircleMulti\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The additive torus of dimension $d$, defined as the product of $d$ copies of the additive circle $\\\\mathbb{R}/\\\\mathbb{Z}$.\"}\n  {\"name\": \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (s : AddSubgroup (Additive (NumberField.RingOfIntegers K)ˣ)),\\n  AddSubgroup.map (NumberField.Units.logEmbedding K) (s ⊔ Subgroup.toAddSubgroup (NumberField.Units.torsion K)) =\\n    AddSubgroup.map (NumberField.Units.logEmbedding K) s\", \"doc\": \"For any additive subgroup $ s $ of the unit group $ \\\\mathcal{O}_K^\\\\times $ of a number field $ K $, the image of the join of $ s $ with the torsion subgroup under the logarithmic embedding $ \\\\log\\\\text\"}\n  {\"name\": \"NumberField.Units.torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Basic\", \"type\": \"(K : Type u_1) → [inst : Field K] → Subgroup (NumberField.RingOfIntegers K)ˣ\", \"doc\": \"The torsion subgroup of the multiplicative group $(\\\\mathcal{O}_K)^\\\\times$ consists of all roots of unity contained in the ring of integers $\\\\mathcal{O}_K$ of a number field $K$. These are the elements\"}\n  {\"name\": \"IntermediateField.fixingSubgroup_top\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E], ⊤.fixingSubgroup = ⊥\", \"doc\": \"The subgroup of automorphisms in the Galois group $\\\\text{Gal}(E/F)$ that fix the top intermediate field $E$ is the trivial subgroup containing only the identity automorphism.\"}\n  {\"name\": \"NumberField.IsCMField.closure_realFundSystem_sup_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/CMField\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : CharZero K] [inst_2 : NumberField.IsCMField K] [inst_3 : NumberField K],\\n  Subgroup.closure (Set.range (NumberField.IsCMField.realFundSystem K)) ⊔ NumberField.Units.torsion K =\\n    NumberField.IsCMField.realUnits K ⊔ NumberField.Units.torsion K\", \"doc\": \"In a CM field $ K $, the subgroup generated by the real fundamental system of units and the torsion subgroup of the unit group $ \\\\mathcal{O}_K^\\times $ is equal to the subgroup generated by the real un\"}\n  {\"name\": \"NumberField.Units.closure_fundSystem_sup_torsion_eq_top\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],\\n  Subgroup.closure (Set.range (NumberField.Units.fundSystem K)) ⊔ NumberField.Units.torsion K = ⊤\", \"doc\": \"For the unit group $\\\\mathcal{O}_K^\\\\times$ of a number field $K$, the subgroup generated by the fundamental system of units $\\\\varepsilon_1, \\\\ldots, \\\\varepsilon_r$ and the torsion subgroup $\\\\mu(K)$ (con\"}\n  {\"name\": \"NumberField.Units.instIsCyclicSubtypeUnitsRingOfIntegersMemSubgroupTorsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [NumberField K], IsCyclic ↥(NumberField.Units.torsion K)\", \"doc\": \"For any number field $ K $, the torsion subgroup of the multiplicative group of units in its ring of integers $ \\\\mathcal{O}_K $ is cyclic. This torsion subgroup consists precisely of the roots of unit\"}\n  {\"name\": \"NumberField.Units.finiteIndex_iff_sup_torsion_finiteIndex\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Regulator\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [NumberField K] (s : Subgroup (NumberField.RingOfIntegers K)ˣ),\\n  s.FiniteIndex ↔ (s ⊔ NumberField.Units.torsion K).FiniteIndex\", \"doc\": \"A subgroup $ s $ of the unit group $ \\\\mathcal{O}_K^\\\\times $ of a number field $ K $ has finite index if and only if the subgroup generated by $ s $ and the torsion subgroup $ \\\\text{torsion}(K) $ (cons\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth geometrically connected closed subgroup of a torus is a torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"UnitAddTorus\", \"module\": \"Mathlib/Analysis/Fourier/AddCircleMulti\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The additive torus of dimension $d$, defined as the product of $d$ copies of the additive circle $\\\\mathbb{R}/\\\\mathbb{Z}$.\"}\n  {\"name\": \"UnitAddTorus.span_mFourier_closure_eq_top\", \"module\": \"Mathlib/Analysis/Fourier/AddCircleMulti\", \"type\": \"∀ {d : Type u_1} [inst : Fintype d], (Submodule.span ℂ (Set.range UnitAddTorus.mFourier)).topologicalClosure = ⊤\", \"doc\": \"Let $ G $ be a topological additive group equipped with the structure of a locally compact space, and let $ N $ be an additive subgroup of $ G $. Then the quotient group $ G/N $, endowed with the quot\"}\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"(G : Type u_1) → [inst : TopologicalSpace G] → [inst_1 : Group G] → [IsTopologicalGroup G] → Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {R : Type u_2} [inst_2 : Ring R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R] [T2Space R] (𝒢 : Subgroup (GL n R)) [DiscreteTopology ↥𝒢],\\n  DiscreteTopology ↥𝒢.adjoinNegOne\", \"doc\": \"Let $ R $ be a topological ring that is also a Hausdorff space. If $ \\\\mathcal{G} $ is a discrete subgroup of the general linear group $ \\\\mathrm{GL}(n, R) $, then the subgroup $ \\\\mathcal{G}.\\\\text{adjoi\"}\n  {\"name\": \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] [IsT\", \"doc\": \"Any topological group $G$ admits a Lie group structure modeled on the extended natural numbers $\\\\mathbb{N}^\\\\top$, where the group operations (multiplication and inversion) are smooth maps compatible w\"}\n  {\"name\": \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] [CompactSpace G] (U : OpenSubgroup G),\\n  Finite (G ⧸ ↑U)\", \"doc\": \"If $G$ is a compact topological group with continuous multiplication and $U$ is an open subgroup of $G$, then the quotient group $G/U$ is finite.\"}\n  {\"name\": \"instLieGroupRealEuclideanSpaceFinOfNatNatModelWithCornersSelfTopWithTopENatCircle\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Sphere\", \"type\": \"LieGroup (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin 1))) ⊤ Circle\", \"doc\": \"The unit circle in the complex plane, equipped with the subspace topology induced by the complex numbers and the abelian group structure under multiplication, forms a Lie group. This means the group o\"}\n  {\"name\": \"AddCircle.pathConnectedSpace\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Real\", \"type\": \"∀ (p : ℝ), PathConnectedSpace (AddCircle p)\", \"doc\": \"The additive circle $\\\\mathbb{R}/\\\\langle p \\\\rangle$ is path-connected, meaning that for any two points in the space, there exists a continuous path connecting them.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diagonalizable\", \"Subgroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonalizable|subtorus",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"line\": \"13\", \"text\": \"# Transport algebra morphisms between additive and multiplicative types.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"line\": \"120\", \"text\": \"product space is simultaneously diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"139\", \"text\": \"  declaration when the first argument has no multiplicative type-class, but argument `α` does.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"178\", \"text\": \"    If the first argument is not the argument with a multiplicative type-class, `@[to_additive]`\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group of multiplicative type has a largest subtorus whose formation commutes with field extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsMaxMulCone\", \"module\": \"Mathlib.Algebra.Order.Group.Cone\", \"type\": \"(S : Type u_3) → (G : outParam (Type u_4)) → [Inv G] → [SetLike S G] → Prop\", \"doc\": \"A property asserting that a set-like structure $ S $ over a type $ G $ equipped with an inverse operation is a maximal subset closed under multiplication and inverses. Specifically, $ S $ is a maximal\"}\n  {\"name\": \"IsAbelianGalois.toIsMulCommutative\", \"module\": \"Mathlib.FieldTheory.Galois.Abelian\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} {inst : Field K} {inst_1 : Field L} {inst_2 : Algebra K L} [self : IsAbelianGalois K L],\\n  IsMulCommutative Gal(L/K)\", \"doc\": \"For an abelian Galois extension $ L/K $, the Galois group $ \\\\operatorname{Gal}(L/K) $ is abelian.\"}\n  {\"name\": \"fixedByFinite\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] : Set (Subgroup Gal(L/K))\", \"doc\": \"The set of subgroups of the Galois group $\\\\text{Gal}(L/K)$ obtained by taking the fixing subgroup for each finite intermediate field $E$ between $K$ and $L$, where each subgroup consists of automorphi\"}\n  {\"name\": \"IsGaloisGroup.mulEquivCongr\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[IsGaloisGroup G K L] [Finite G] [IsGaloisGroup H K L] [Finite H] : G ≃* H\", \"doc\": \"Given finite Galois groups $ G $ and $ H $ of the field extension $ L/K $, this constructs a multiplicative equivalence (group isomorphism) between $ G $ and $ H $ by composing the canonical isomorphi\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints_bot\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \": (FixedPoints.intermediateField (⊥ : Subgroup G) : IntermediateField K L) = ⊤\", \"doc\": \"The subfield of $L$ fixed by the trivial subgroup of the Galois group is $L$ itself, i.e., the fixed field corresponding to the trivial subgroup $\\\\{e\\\\}$ equals the entire field extension $L$.\"}\n  {\"name\": \"IsAbelianGalois.tower_bot\", \"module\": \"Mathlib.FieldTheory.Galois.Abelian\", \"type\": \"[IsAbelianGalois K M] : IsAbelianGalois K L\", \"doc\": \"Let $ K \\\\subseteq L \\\\subseteq M $ be a tower of fields. If the extension $ M/K $ is Galois with an abelian Galois group, then the intermediate extension $ L/K $ is also Galois with an abelian Galois g\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[Finite G] [hGKL : IsGaloisGroup G K L] : IsGaloisGroup (fixingSubgroup G (F : Set L)) F L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"IsGaloisGroup.of_isGalois\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[IsGalois K L] : IsGaloisGroup Gal(L/K) K L\", \"doc\": \"If $ K/L $ is a Galois extension (i.e., algebraic, normal, and separable), then the Galois group $ \\\\text{Gal}(K/L) $ satisfies the Galois group condition over $ L $ and $ K $, meaning it acts as a mul\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: analytic tori, diagonalizable linear operators and number-field torsion units are different objects from group schemes of multiplicative type"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme of multiplicative type has a largest subtorus compatible with arbitrary extension of the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"UnitAddTorus\", \"module\": \"Mathlib/Analysis/Fourier/AddCircleMulti\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The additive torus of dimension $d$, defined as the product of $d$ copies of the additive circle $\\\\mathbb{R}/\\\\mathbb{Z}$.\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (s : AddSubgroup (Additive (NumberField.RingOfIntegers K)ˣ)),\\n  AddSubgroup.map (NumberField.Units.logEmbedding K) (s ⊔ Subgroup.toAddSubgroup (NumberField.Units.torsion K)) =\\n    AddSubgroup.map (NumberField.Units.logEmbedding K) s\", \"doc\": \"For any additive subgroup $ s $ of the unit group $ \\\\mathcal{O}_K^\\\\times $ of a number field $ K $, the image of the join of $ s $ with the torsion subgroup under the logarithmic embedding $ \\\\log\\\\text\"}\n  {\"name\": \"Subgroup.top_prod_top\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {N : Type u_5} [inst_1 : Group N], ⊤.prod ⊤ = ⊤\", \"doc\": \"The product of the top (full group) subgroups of groups $G$ and $N$ is equal to the top subgroup of the product group $G \\\\times N$, i.e., $\\\\top_G \\\\times \\\\top_N = \\\\top_{G \\\\times N}$.\"}\n  {\"name\": \"NumberField.Units.closure_fundSystem_sup_torsion_eq_top\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],\\n  Subgroup.closure (Set.range (NumberField.Units.fundSystem K)) ⊔ NumberField.Units.torsion K = ⊤\", \"doc\": \"For the unit group $\\\\mathcal{O}_K^\\\\times$ of a number field $K$, the subgroup generated by the fundamental system of units $\\\\varepsilon_1, \\\\ldots, \\\\varepsilon_r$ and the torsion subgroup $\\\\mu(K)$ (con\"}\n  {\"name\": \"MulArchimedeanClass.ballSubgroup_top\", \"module\": \"Mathlib/Algebra/Order/Archimedean/Class\", \"type\": \"∀ (M : Type u_1) [inst : CommGroup M] [inst_1 : LinearOrder M] [inst_2 : IsOrderedMonoid M], ⊤.ballSubgroup = ⊥\", \"doc\": \"The subgroup of a multiplicatively Archimedean ordered commutative group $ M $, consisting of elements whose equivalence classes lie in the right-open upper set starting at the top element $\\\\top$, is \"}\n  {\"name\": \"FiniteMulArchimedeanClass.subgroup_eq_bot\", \"module\": \"Mathlib/Algebra/Order/Archimedean/Class\", \"type\": \"∀ (M : Type u_1) [inst : CommGroup M] [inst_1 : LinearOrder M] [inst_2 : IsOrderedMonoid M],\\n  FiniteMulArchimedeanClass.subgroup ⊤ = ⊥\", \"doc\": \"In the finite multiplicative Archimedean ordered commutative group (excluding the top element, which is the equivalence class of the multiplicative identity $1$), the subgroup generated by the top ele\"}\n  {\"name\": \"MulArchimedeanClass.subgroup_eq_bot\", \"module\": \"Mathlib/Algebra/Order/Archimedean/Class\", \"type\": \"∀ (M : Type u_1) [inst : CommGroup M] [inst_1 : LinearOrder M] [inst_2 : IsOrderedMonoid M],\\n  MulArchimedeanClass.subgroup ⊤ = ⊥\", \"doc\": \"In a multiplicatively Archimedean ordered commutative group $M$, the subgroup constructed from the top upper set $\\\\top$ in the antisymmetrized Archimedean order is the trivial subgroup containing only\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine algebraic groups that become diagonalizable are algebraic tori",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine Y], Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] [IsT\", \"doc\": \"Any topological group $G$ admits a Lie group structure modeled on the extended natural numbers $\\\\mathbb{N}^\\\\top$, where the group operations (multiplication and inversion) are smooth maps compatible w\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsLieAbelianOfIsCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R]\\n  [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra], IsLieAbelian ↥H\", \"doc\": \"If $ R $ is a principal ideal domain, $ L $ is an Artinian $ R $-module, and $ \\\\mathfrak{h} $ is a Cartan subalgebra of $ L $, then $ \\\\mathfrak{h} $ is an abelian Lie algebra (i.e., its Lie bracket sa\"}\n  {\"name\": \"LieAlgebra.subsingleton_of_hasTrivialRadical_lie_abelian\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L] [h : IsLieAbelian L], Subsingleton L\", \"doc\": \"If $ L $ is an abelian Lie algebra over a commutative ring $ R $ with a trivial radical (i.e., its radical is the zero ideal), then $ L $ is trivial, meaning it contains only the zero element.\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torus\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonalizable|diagonalisable|subtorus",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"line\": \"13\", \"text\": \"# Transport algebra morphisms between additive and multiplicative types.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"139\", \"text\": \"  declaration when the first argument has no multiplicative type-class, but argument `α` does.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"178\", \"text\": \"    If the first argument is not the argument with a multiplicative type-class, `@[to_additive]`\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"line\": \"120\", \"text\": \"product space is simultaneously diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group of multiplicative type has a largest torus subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsMaxMulCone\", \"module\": \"Mathlib.Algebra.Order.Group.Cone\", \"type\": \"(S : Type u_3) → (G : outParam (Type u_4)) → [Inv G] → [SetLike S G] → Prop\", \"doc\": \"A property asserting that a set-like structure $ S $ over a type $ G $ equipped with an inverse operation is a maximal subset closed under multiplication and inverses. Specifically, $ S $ is a maximal\"}\n  {\"name\": \"GrpMaxAux\", \"module\": \"Mathlib.Algebra.Category.Grp.Basic\", \"type\": \"Type ((max u1 u2) + 1)\", \"doc\": \"An auxiliary type used in the construction of the category of groups.\"}\n  {\"name\": \"MulAction.IwasawaStructure.is_generator\", \"module\": \"Mathlib.GroupTheory.GroupAction.Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] (self : MulAction.IwasawaStructure M α),\\n  iSup self.T = ⊤\", \"doc\": \"For any group $M$ acting on a type $\\\\alpha$ with an Iwasawa structure, the supremum of the subgroups $T(a)$ for all $a \\\\in \\\\alpha$ equals the entire group $M$, i.e., $\\\\bigvee_{a \\\\in \\\\alpha} T(a) = M$.\"}\n  {\"name\": \"instIsTopologicalGroupMultiplicativeOfIsTopologicalAddGroup\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"{G} [TopologicalSpace G] [AddGroup G] [IsTopologicalAddGroup G] : IsTopologicalGroup (Multiplicative G)\", \"doc\": \"If $G$ is a topological additive group, then the multiplicative type $\\\\text{Multiplicative}\\\\, G$ inherits a topological group structure. This means that the group operations (multiplication, correspon\"}\n  {\"name\": \"OpenAddSubgroup.instMax\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → [inst_1 : TopologicalSpace G] → [ContinuousAdd G] → Max (OpenAddSubgroup G)\", \"doc\": \"The type of open additive subgroups of a topological additive group $ G $ is equipped with a maximum operation, where the maximum of any two open subgroups $ U $ and $ V $ is the subgroup generated by\"}\n  {\"name\": \"Subgroup.instNontrivialSubtypeMemTop\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \"[Nontrivial G] : Nontrivial (⊤ : Subgroup G)\", \"doc\": \"For any group $ G $, the lattice of subgroups of $ G $ has a top element, which is the entire group $ G $ itself. This instance equips the subgroup lattice with a greatest element corresponding to the\"}\n  {\"name\": \"OpenSubgroup.instTop\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \": Top (OpenSubgroup G)\", \"doc\": \"For any topological group $G$, the type of open subgroups of $G$ has a canonical top element given by $G$ itself. This instance equips the lattice of open subgroups with a top element, where the entir\"}\n  {\"name\": \"OpenSubgroup.instInhabited\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \": Inhabited (OpenSubgroup G)\", \"doc\": \"For any topological group $ G $, the lattice of open subgroups has a canonical top element given by $ G $ itself. This instance equips the type of open subgroups with a top element, where the entire g\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-type-largest-subtorus",
+  "worker": "stage1",
+  "summary": "Constructed the largest torus using the torsion-free character quotient, proved maximality by explicit factorization of character maps, and verified arbitrary scalar extension. Added the character antiequivalence and diagonalizable group-algebra criteria as two strictly prior structural inputs; reused existing geometric connectedness, smoothness and finite-basis lemmas. The statement is unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3), proper/open direct-image reduction, reaches this input through the existing alteration/moduli/PGL/reductive-radical chain. This split realizes the Milne multiplicative-type prerequisite already named in the inherited from.place; the current latest blueprint contains no separate character-classification or diagonalizable-group node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Tests geometric connectedness on the algebraic closure in step 2; a general scheme tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "The identity rational point upgrades connectedness to geometric connectedness in step 3; no node of this unit supplies the general rational-point criterion."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under field-extension base change, is used in step 3; the properness clause and the other unit route are not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-ba0577ef0",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-ba0577ef0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked them against Milne iAG2017 printed pp.230-241 (Prop 12.3, Lemma 12.4, Rem 12.5, Thm 12.8-12.9, Def 12.14/12.17, Thm 12.18, Cor 12.19, §12(g) construction, Thm 12.23, Cor 12.24-12.25, Not. 12.29). No SGA is cited. The item statement is unchanged and correct; I tested d=0, finite D, the R norm torus, mu_p in char p, mu_n for p not dividing n, and Z/6 in char 3. Steps 1-6 are sound: subgroups by composing closed immersions; tori are smooth and connected via fpqc descent and the algebraic-closure test; the rational-point criterion plus the torsion analysis gives the torus criterion; D^t=D(M/M_tors) is maximal by full faithfulness; base change uses the order-preserving character identification. The new nodes are statement-only, true, not duplicates (lem-sfb-split-torus-subgroups-diagonalizable and group-like-basis are only fragments) and do not restate the item. Batch-5 flags: lem-trf-smooth-fpqc-base-descent and lem-trf-fg-torsionfree-group-free are generic Mathlib leaves (smooth descent; f.g. torsion-free groups are free), outside the trace-formula and Poincare assumptions, so I accept them. I accept the three declared tool_uses as generic scheme lemmas. FIX: (1) step 4 only asserted that D_k(M/M_tors) becomes G_m^d over k-bar; the split clause does not cover a nontrivial Galois action, so I wrote out the derivation via the scalar-extension clause and the equivalence over k-bar. (2) Step 6 now checks that D_K is of multiplicative type. (3) B3: I added def-weil-algebraic-closure, def-pd-separable-closure and def-pc-field-extension citations and stmt_deps to the antiduality node, and def-pc-field-extension to the geometric-criteria node.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeTypeLargestSubtorus",
+  "declaration": "AlgebraicGeometry.MultiplicativeType.multiplicativeType_largestSubtorus",
+  "declarations": [
+   "AlgebraicGeometry.MultiplicativeType.multiplicativeType_largestSubtorus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeTypeLargestSubtorus.lean",
+  "statement": "theorem multiplicativeType_largestSubtorus (k : Type u) [Field k] : (∀ (T : Grp (Over (Spec (.of k)))) [IsAffine T.X.left] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom], IsTorus T → Smooth T.X.hom ∧ ConnectedSpace T.X.left) ∧ (∀ (D : Grp (Over (Spec (.of k)))) [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom], IsMultiplicativeType D → ∃ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ D), IsAffine T.X.left ∧ LocallyOfFiniteType T.X.hom ∧ QuasiCompact T.X.hom ∧ IsLargestSubtorus i ∧ ∀ (K : Type u) [Field K] [Algebra k K], IsLargestSubtorus ((baseChange (k := k) (K := K)).map i)) ∧ (∀ (D H : Grp (Over (Spec (.of k)))) [IsAffine D.X.left] [IsAffine H.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (j : H ⟶ D), IsClosedSubgroupScheme j.hom.hom → IsMultiplicativeType D → IsMultiplicativeType H) ∧ (∀ (H : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom], IsMultiplicativeType H → Smooth H.X.hom → ConnectedSpace H.X.left → IsTorus H) ∧ (∀ (T H : Grp (Over (Spec (.of k)))) [IsAffine T.X.left] [IsAffine H.X.left] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (j : H ⟶ T), IsTorus T → IsClosedSubgroupScheme j.hom.hom → Smooth H.X.hom → ConnectedSpace H.X.left → IsTorus H)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4e6ba61b",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-tori-multiplicative-type, all 7 original stmt_dep records, both delivered modules and Milne iAG2017 Thm 12.9, Def 12.14/12.17 with following paragraphs, Notation 12.29. Records: item changes only stmt_deps (+new node) and lean; both lean.statement fields verbatim; new node meets H12 fields; report has all sections. Five conjunctions match the node: torus => smooth+connected; exists D^t with IsLargestSubtorus and IsLargestSubtorus(baseChange.map i) for all K/k (subobject equality); closed subgroups of mult type are mult type; smooth connected mult type => torus; special case for subgroups of a torus. IsTorus is a Grp iso to splitTorus over AlgebraicClosure k (rank 0 = trivial group); IsMultiplicativeType is a closed subgroup inclusion of G_kbar into a split torus; baseChange = Over.pullback(Spec.map algebraMap).mapGrp, canonical. Edge cases (d=0, finite D, mu_p char p, mu_n, char 0, arbitrary K) and Type u universes ok. H4 searches: no other torus or multiplicative-type predicate in project Lean, DAG, parallel snapshots or Mathlib. No hollow defs, only sorry, docstrings carry source places and steps 1-6, lines <=100. Advisory only: Thm 12.9 is on printed p.235, not p.232 (item) / p.233 (new node, modules). Compile not reproduced; no files changed."
+ }
+}

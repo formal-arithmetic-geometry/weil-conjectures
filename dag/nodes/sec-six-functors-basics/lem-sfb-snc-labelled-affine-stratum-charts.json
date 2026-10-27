@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-snc-labelled-affine-stratum-charts",
+ "kind": "statement",
+ "title": "Labelled affine SNC charts with integral deepest stratum",
+ "statement": "Let $k$ be a field, $Y$ a regular separated finite-type $k$-scheme [def-weil-regular-scheme], and $D=\\bigcup_{a\\in A}D_a$ a reduced strict normal crossings boundary with its finite labelled components [def-trf-strict-normal-crossings-boundary]. For $I\\subseteq A$ put $Y_I=Y\\setminus\\bigcup_{a\\notin I}D_a$ and let $S=(\\bigcap_{i\\in I}D_i)\\cap Y_I$ have its reduced structure. There is a finite family of affine open subschemes $V=\\operatorname{Spec}B\\subseteq Y_I$ whose intersections with $S$ cover $S$, such that $B$ is a regular Noetherian domain, $V$ is separated, each pulled-back $D_i$ has ideal $(t_i)$, and at every point of $V$ the subtuple of the $t_i$ vanishing there extends to a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. With $J=(t_i)_{i\\in I}$, $S\\cap V=\\operatorname{Spec}(B/J)$ is nonempty integral regular, hence connected. For empty $S$ use the empty family; for $I=\\varnothing$ the intersection means $Y$, $J=0$, and $S\\cap V=V$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Remark 4.2.2(i), printed p.118; Stacks 00NR (algebra.tex, lemma-regular-quotient-regular); agent affine-component refinement of the regular-intersection criterion."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Regularity makes Y locally Noetherian and finite type over the field makes it quasi-compact, hence Noetherian. For J equal to the sum of the selected component ideals, the supplied intersection condition makes J.subscheme regular. It is reduced. The kernel of its closed immersion is the vanishing ideal of its closed image; hence J equals J.radical. This identifies the scheme-theoretic intersection with the required reduced structure without a uniqueness construction.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-finite-type-morphism",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 0569 (lemma-regular-normal); ILO VIII Remark 4.2.2(i), printed p.118"
+   }
+  },
+  {
+   "text": "For a singleton component intersection the stalk quotient is regular of codimension one. The regular-quotient kernel-parameters theorem gives an initial parameter sequence generating its kernel; the quotient dimension formula forces its length to be one. IsRegularImmersion.of_stalk spreads this regular generator to affine neighbourhoods. For finitely many labelled components take their common open neighbourhood and then an affine open inside it. Restriction of ideal sheaves preserves their principal generators, giving actual ideal equalities for all the labels simultaneously.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-affine-opens-basis",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 00NQ (lemma-regular-ring-CM); affine localization argument"
+   }
+  },
+  {
+   "text": "At each point, filter the ordered equation list to the vanishing labels K. Its germs generate precisely the kernel of the surjective map from the ambient stalk R to the regular K-intersection stalk S. Choose a minimal finite generating set of the maximal ideal of S and lift its list through this surjection. Appending these lifts to the labelled equations generates the maximal ideal of R: map the generated ideal to the maximal ideal of S, pull back, and use that it contains the kernel. The number of lifts is dim S by regularity, so the concatenated list has length |K|+dim S=dim R by the intersection hypothesis. It is a regular parameter system with the required ordered sublist. The affine stalk localization equivalence transports both the list and the vanishing criterion to B_q.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 00NR; etale.tex Tag 0BIA (lemma-strict-normal-crossings), converse proof"
+   }
+  },
+  {
+   "text": "Apply the existing regular normal decomposition to Y and J.subscheme. Choose the clopen integral components through the point in each. The image of the complement of the chosen intersection component is closed under the closed immersion. Intersect its complement with the chosen ambient component and with the complement of all unselected divisors. Choose the common affine neighbourhood from Step 2 inside this open. Its open immersion into the ambient integral component makes it integral. The affine intersection chart factors by an open immersion through the chosen integral intersection component and contains the original point, hence is integral too.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 0569 (lemma-regular-normal), 033M (lemma-normal-Noetherian); agent affine-component refinement"
+   }
+  },
+  {
+   "text": "For the resulting affine open U, its ring B is Noetherian and its prime localizations are the regular stalks, so B is regular. Integrality gives that B is a domain. The sum of the labelled principal ideals is J(U). The affine subscheme-cover pullback square, composed with the quotient-ring equivalence for this equality, gives the residual isomorphism over Spec B. Since J.radical=J from Step 1 this is exactly the radical-intersection pullback in the statement. Its quotient spectrum is integral by Step 4 and regular because it is an open subscheme of the regular intersection, and therefore connected. The affine terminal morphism is separated. If I is empty, the ideal is zero, the quotient homomorphism is bijective, and its spectrum is an isomorphism.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OW (lemma-locally-Noetherian); affine description of closed subschemes and integrality"
+   }
+  },
+  {
+   "text": "Construct one such chart at each point of the stratum. Their open images cover it. The underlying Noetherian space makes every subset compact, so choose a finite subcover and enumerate its indices by a finite ordinal. Each chosen chart retains all the established properties. For the empty stratum choose the empty indexed family; the empty selected-component case is already covered by the zero-ideal calculation in Step 5.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 0051 (definition-noetherian), 04ZA (lemma-Noetherian-quasi-compact), parts (1)–(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-affine-opens-basis",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-noetherian-ring",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII Remark 4.2.2(i), printed pp.118–119; Stacks 00NR and 0BIA; A3 Lean proof by regular-immersion spreading, lifted quotient maximal-ideal generators, two clopen integral-component refinements, and finite compact selection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Labelled equations of a strict normal crossings divisor extend to regular parameters on affine opens with connected integral deepest stratum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  (TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.fromNormalization f).base).obj ↑U =\\n    AlgebraicGeometry.Scheme.Hom.opensRange (\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.affineBasisCover.I₀ → CommRingCat\", \"doc\": \"For a scheme $X$ and an element $i$ in the zeroth component of its affine basis cover, this function constructs the commutative ring obtained by localizing the ring of the affine open subscheme corres\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and affine-cover declarations do not construct labelled SNC equations or the integral deepest-stratum charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular scheme with regular intersections of boundary components admits affine charts with independent local equations and integral stratum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).I₀ = ι\", \"doc\": \"Given a commutative ring $ R $, an index type $ \\\\iota $, and a function $ s: \\\\iota \\\\to R $, if the ideal generated by the image of $ s $ equals the entire ring $ R $, then the index set $ I_0 $ of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.affineBasisCover.I₀ → CommRingCat\", \"doc\": \"For a scheme $X$ and an element $i$ in the zeroth component of its affine basis cover, this function constructs the commutative ring obtained by localizing the ring of the affine open subscheme corres\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (x : ↥(AlgebraicGeometry.Spec R)),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).idx x =\\n    have this := ⋯;\\n    this.choose\", \"doc\": \"If the ideal generated by a set $\\\\{s_i\\\\}$ in a commutative ring $R$ equals the entire ring $R$, then for every prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R)$, there exists an index $i$ such tha\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  ↑((AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).X i) = Localization.Away (s i)\", \"doc\": \"For a commutative ring $ R $ and a family of elements $ s_i $ indexed by $ i : ι $, if the ideal generated by $ \\\\{s_i\\\\} $ equals the entire ring $ R $, then the $ i $-th open set in the constructed af\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤) (i : ι),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).f i =\\n    AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (↑R) (Localization.Away (s i))))\", \"doc\": \"Given a commutative ring $ R $, elements $ s_i $ indexed by $ ι $, and the condition that the ideal generated by $ \\\\{s_i\\\\} $ equals $ R $, the affine open cover's morphism for each index $ i $ is indu\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_affine_inter\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V → ∀ x ∈ U ⊓ V, ∃ f g, X.basicOpen f = X.basicOpen g ∧ x ∈ X.basicOpen f\", \"doc\": \"For any affine open subsets $U$ and $V$ of a scheme $X$, and for any point $x$ in their intersection $U \\\\cap V$, there exist sections $f \\\\in \\\\Gamma(U, \\\\mathcal{O}_X)$ and $g \\\\in \\\\Gamma(V, \\\\mathcal{O}_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and affine-cover declarations do not construct labelled SNC equations or the integral deepest-stratum charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Labelled equations of a strict normal crossings divisor extend to regular parameters on affine opens with connected integral deepest stratum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineOpensRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : U.toScheme.affineOpens ≃ { V : X.affineOpens // V ≤ U }\", \"doc\": \"For a scheme $ X $ and an open subset $ U $, there is a bijection between the affine open subsets of the restricted scheme $ U $ and the affine open subsets of $ X $ that are contained within $ U $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) : f.fromNormalization ⁻¹ᵁ U = (f.normalizationOpenCover.f U).opensRange\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) {U : X.affineOpens} (f : Γ(X, U)) : X.affineOpens\", \"doc\": \"For a scheme $ X $, given an affine open subset $ U $ of $ X $ and a section $ f $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, the basic open subset $ D(f) = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X, X.basicOpen r)\", \"doc\": \"For a scheme $ X $, an open subset $ U $ of $ X $, and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (consisting of points where the germ of \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (s : (structureSheaf R).1.obj (op U)) {ι : Type*} (t : Finset ι) (a h : ι → R)\\n  (iDh : ∀ i : ι, PrimeSpectrum.basicOpen (h i) ⟶ U) (h_cover : U ≤ ⨆ i ∈ t, PrimeSpectrum.basicOpen (h i))\\n  (hs :\\n    ∀ i : ι,\\n      (const R (a i) (h i) (PrimeSpectrum.basicOpen (h i))\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and affine-cover declarations do not construct labelled SNC equations or the integral deepest-stratum charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and affine-cover declarations do not construct labelled SNC equations or the integral deepest-stratum charts"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|strictNormal|regular.*[Ss]tratum",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"line\": \"37\", \"text\": \"      obtain ⟨x, rfl⟩ := AlgEquiv.restrictNormalHom_surjective M x\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"line\": \"38\", \"text\": \"      obtain ⟨y, rfl⟩ := AlgEquiv.restrictNormalHom_surjective M y\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"151\", \"text\": \"    α ∈ L.fixingSubgroup ↔ α.restrictNormalHom L = 1 := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"153\", \"text\": \"    AlgEquiv.restrictNormalHom_apply]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"52\", \"text\": \"* `InfiniteGalois.restrictNormalHomContinuous` : Any `restrictNormalHom` is continuous.\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"78\", \"text\": \"  FiniteGrp.ofHom (AlgEquiv.restrictNormalHom L₂.unop)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"85\", \"text\": \"  ConcreteCategory.ext (AlgEquiv.restrictNormalHom_id _ _)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"101\", \"text\": \"  apply IsScalarTower.AlgEquiv.restrictNormalHom_comp k L₃ L₂ L₁\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"135\", \"text\": \"    val := fun L ↦ σ.restrictNormalHom L.unop\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"136\", \"text\": \"    (AlgEquiv.restrictNormalHom_surjective (F := F) (K₁ := K') (E := E))\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"411\", \"text\": \"lemma IntermediateField.restrictNormalHom_ker (E : IntermediateField K L) [Normal K E] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"412\", \"text\": \"    (restrictNormalHom E).ker = E.fixingSubgroup := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"414\", \"text\": \"    restrictNormalHom_apply, Subtype.forall, mem_fixingSubgroup_iff, implies_true]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"434\", \"text\": \"  QuotientGroup.liftEquiv _ (restrictNormalHom_surjective L) <|\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"96\", \"text\": \"      rcases restrictNormalHom_surjective K f with ⟨σ, hσ⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"98\", \"text\": \"      rw [← hσ, restrictNormalHom_apply (adjoin L {x}).1 σ ⟨x, mem⟩]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"122\", \"text\": \"    fixedField H ⊓ L = lift (fixedField (Subgroup.map (restrictNormalHom L) H)) := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"134\", \"text\": \"    exact AlgEquiv.restrictNormal_commutes σ L ⟨x, xL⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"141\", \"text\": \"    have : ((restrictNormalHom L σ) ⟨x, xL⟩).1 = x := by rw [h σ hσ]\"}\n  {\"file\": \"Mathlib/FieldTheory/AbelRuffini.lean\", \"line\": \"61\", \"text\": \"  Group.isSolvable_of_surjective (AlgEquiv.restrictNormalHom_surjective q.SplittingField)\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"175\", \"text\": \"  let g := f.restrictNormal' E\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"176\", \"text\": \"  rw [← show E.val.comp ↑g = f from DFunLike.ext_iff.mpr (f.restrictNormal_commutes E),\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"209\", \"text\": \"    (ϕ.liftNormal E).restrictNormal K₁ = ϕ :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"212\", \"text\": \"      (Eq.trans (AlgHom.restrictNormal_commutes _ K₁ x) (ϕ.liftNormal_commutes E x))\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"226\", \"text\": \"    (χ.liftNormal E).restrictNormal K₁ = χ :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization and affine-cover declarations do not construct labelled SNC equations or the integral deepest-stratum charts"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|strictNormalCrossing|deepestStratum",
+   "results": "{\"t\": \"2026-10-22T07:08:29Z\", \"tool\": \"grep\", \"query\": \"normalCrossing|strictNormalCrossing|deepestStratum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular scheme with a strict normal crossings boundary has affine neighbourhoods with integral regular intersections of labelled components",
+   "results": "{\"t\": \"2026-10-22T07:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A regular scheme with a strict normal crossings boundary has affine neighbourhoods with integral regular intersections of labelled components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\"], \"digest\": \"a438282244c79776\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T07:08:29Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: Ideal.Quotient is not a Loogle identifier; corrected by the IsRegularLocalRing query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine charts of a strict normal crossings divisor with labelled parameter equations and integral regular deepest stratum",
+   "results": "{\"t\": \"2026-10-22T07:08:35Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine charts of a strict normal crossings divisor with labelled parameter equations and integral regular deepest stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\"], \"digest\": \"4d0294cb959f4049\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-22T07:09:03Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsRegularLocalRing\", \"IsRegularLocalRing.toIsLocalRing\", \"IsRegularLocalRing.of_isRegularRing_of_isLocalRing\", \"IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing\", \"IsRegularLocalRing.toIsNoetherian\", \"IsRegularLocalRing.of_ringEquiv\", \"IsRegularLocalRing.spanFinrank_maximalIdeal\", \"IsRegularRing.isRegularLocalRing_localization\"], \"digest\": \"97e2e1879adec364\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous local defining equations for finitely many regular codimension one closed subschemes on a regular scheme",
+   "results": "{\"t\": \"2026-10-22T07:09:05Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous local defining equations for finitely many regular codimension one closed subschemes on a regular scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.zeroLocus_biInf\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\"], \"digest\": \"f4be2e912647a5cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.cross|strict.normal|stratum",
+   "results": "{\"t\": \"2026-10-22T07:21:33Z\", \"tool\": \"grep\", \"query\": \"normal.cross|strict.normal|stratum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general affine covers, ideal sheaves or definitions of regular local rings, not labelled SNC charts with integral deepest stratum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 1, 2: Labelled affine SNC charts with integral deepest stratum.",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-labelled-affine-stratum-charts",
+  "worker": "stage1",
+  "summary": "Q71 split using existing nodes only. Wrote out simultaneous denominator clearing, the cotangent basis argument at every point, two component refinements followed by an affine shrinking, scheme-theoretic equality with the reduced stratum, finite selection and the empty cases. No statement change. No exact project attachment or Mathlib match.",
+  "blueprint": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 1, 2: Labelled affine SNC charts with integral deepest stratum. Steps 1–3 give labelled SNC equations; Steps 4–6 give integral affine deepest-stratum charts. The inherited ancestor command returns None; the existing provenance and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Local-algebra kernel theorem used to make each labelled codimension-one ideal principal; it does not assert existence of the required charts. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Parameter quotient dimensions determine that a codimension-one component has a single local equation. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-normal and clopen integral component decomposition used twice in the affine shrinking; it does not replace the tame-boundary route. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic permanence of Noetherianity under an open restriction. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Uniqueness identifies the scheme-theoretic regular intersection with the reduced stratum in the item. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine stalk localization needed for ideal generation and regularity of affine coordinate rings. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Principal opens remain affine and their restriction rings are localizations. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-image-noetherian",
+    "why": "A closed affine intersection has a Noetherian quotient coordinate ring. No node of the constructible finite-Tor stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Affineness supplies separatedness of each chart. No node of the constructible finite-Tor stability unit states this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-affine-source-morphism-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-fabefe6c9",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-fabefe6c9 (reviewer sub-agent of L); spot-checked: I read all six steps against the statements they cite, plus ILO VIII Rem 4.2.2(i)-(ii) pp.118-119 and Stacks 00NR (algebra.tex l.25750). The delivery adds no new nodes, and the statement and stmt_deps are byte-identical to the live side node (unsplit). The item and its via chain are not on route-pivot-dropped, and there is no re-split note on the item; the Q16 parent note does not apply to it. No SGA is cited. proof_deps equal the union of step uses, every cited id exists, and steps run 557-1314 chars. Step 1: Y is Noetherian (regular plus finite type), Z=C_I∩Y_I is regular hence normal and reduced, and reduced-induced uniqueness gives Z=S. Step 2: the J={i} codimension clause, kernel-parameters and the parameter-quotient dimension force K_i=(u_i); denominator clearing over finitely many generators is written out (E5 satisfied) and gives L_iC_f=(a_i) on an affine D(f). Step 3: at every x the vanishing set K gives Q=O_{C_K,x}, regular of dimension d-|K|; the cotangent kernel has dimension |K|, so extending to a basis and applying Nakayama gives a regular system of parameters (00NR in the converse direction). Step 4: two regular-normal component refinements and the affine basis give integral V and S∩V. Restricting the ideal equalities to an arbitrary affine V is elementary via the closed-immersion affine description (advisory only). Step 5: B is Noetherian, regular and a domain, Spec(B/J) is integral regular hence connected, and V is separated as affine-source. Step 6: DCC makes S quasi-compact, giving a finite subfamily; the S=∅ and I=∅ cases are handled. Edge cases tested: dimension 0, a single divisor in A^2, the axes xy, and xy(x+y), which the codimension clause excludes as in ILO (ii). Duplicate search (rg -L 'normal crossings'): the sfb parameter criterion, trf etale-coordinate-divisor-parameters and the sfb pointed common refinement differ from the item. The 9 declared tool_uses are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCLabelledAffineStratumCharts",
+  "declaration": "AlgebraicGeometry.exists_sncAffineStratumCharts",
+  "declarations": [
+   "AlgebraicGeometry.SNCAffineStratumChart",
+   "AlgebraicGeometry.exists_sncAffineStratumCharts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCLabelledAffineStratumCharts.lean",
+  "statement": "theorem exists_sncAffineStratumCharts (k : Type u) [Field k] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (a : ℕ) (C : Fin a → Y.IdealSheafData) (hC : Function.Injective (fun i ↦ (C i).support) ∧ (∀ i, IsIntegral (C i).subscheme ∧ IsRegularScheme (C i).subscheme) ∧ D.support = ⨆ i, (C i).support ∧ ∀ s : Finset (Fin a), ∀ z : (⨆ i ∈ s, C i).subscheme, IsRegularScheme (⨆ i ∈ s, C i).subscheme ∧ ringKrullDim (Y.presheaf.stalk ((⨆ i ∈ s, C i).subschemeι z)) = ringKrullDim ((⨆ i ∈ s, C i).subscheme.presheaf.stalk z) + (s.card : ℕ)) (I : Finset (Fin a)) : ∃ (n : ℕ) (Q : Fin n → SNCAffineStratumChart C I), (∀ x : Y, x ∈ (⨆ i ∈ I, C i).support → (∀ i : Fin a, i ∉ I → x ∉ (C i).support) → ∃ (j : Fin n) (z : Spec (Q j).B), (Q j).v z = x) ∧ ((¬ ∃ x : Y, x ∈ (⨆ i ∈ I, C i).support ∧ ∀ i : Fin a, i ∉ I → x ∉ (C i).support) → n = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "SNCAffineStratumChart packages precisely one chart in the theorem; all data are explicit structure fields. The reduced intersection is pulled back from Y along an open immersion whose image avoids the unselected components, equivalently the reduced stratum of Y_I. This avoids a dependency on the downstream universal-residual-chart module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c95f7cddc",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Only the item node's lean field changed (identical otherwise to the live side node, which has no binding). The statement is verbatim in the file. hC copies the existential witness clauses of IsStrictNormalCrossingsBoundary word for word, so it is not a stronger assumption. All node clauses are rendered: open-immersion charts avoiding components outside I that cover S; B regular, Noetherian and a domain; V separated; labelled ideal equalities via comap = ofIdealTop span{t_i}; the order-preserving vanishing sublist of t lies in an RSOP of B_q, equivalent to 'extends'; residualIso over Spec B to the pullback of the radical stratum; Spec(B/J) integral (so nonempty), regular and connected; empty S gives n=0; I=∅ gives J=0 and an iso. Edge cases checked: empty Y/S, I=∅, a=0, dimension 0, axes, three concurrent lines. The universe u is forced by Spec k. No duplicate declarations; SNCResidualChart downstream is a different notion with matching conventions. Imports exist; docstrings carry source, blueprint and six proof steps; sorry only. No changes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261023T120512-L-621761",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

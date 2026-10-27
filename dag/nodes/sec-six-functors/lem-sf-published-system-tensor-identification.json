@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-published-system-tensor-identification",
+ "kind": "statement",
+ "title": "Identification of the published tensor comparison for one inverse image",
+ "statement": "Fix a prime l and a finite extension E/Q_l, and any scheme morphism f:X→Y. Let d_f be publishedSystemAmbientPullIso l E f. Use the systemClosed structures and systemTensorModel models of pullbackTensorCalculus to construct the ambient tensor comparison on the sequence site. For every M,N in coefficientSequenceDerived l E Y, d_f(T_Y(M,N));mu_ambient(f)(M,N) = mu_published(f)(M,N);T_X(d_f(M),d_f(N)). This identifies the two comparisons for one morphism, without a composition claim. [def-pur-completed-pullback-tensor-comparison] [lem-sf-system-pullback-compositor-identification] [lem-sf-ambient-pullback-tensor-coherence] [def-sf-published-system-ambient-presentation]",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-sf-system-pullback-compositor-identification",
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "def-sf-published-system-ambient-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7, labels lemma-pullback-tensor-product and lemma-adjoint; sites-modules.tex Tags 03D3 and 03EL, label lemma-tensor-product-pullback."
+ },
+ "proof": [
+  {
+   "text": "Identify the ordinary inverse-image presentations using sequence_inverse_eq. The ambient normalized ordinary comparison sends the unit of x tensor y to the tensor of the two units. Its inverse total chain comparison therefore satisfies the defining formula of pullbackTensorSequenceCochain on every summand; adjunction-unit injectivity and pure-tensor extensionality identify it with the published comparison.",
+   "uses": [
+    "lem-sf-system-pullback-compositor-identification",
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the ambient representative rectangle and insert the chain identification. The exact-localization and tensor-model isomorphisms give precisely the forward rectangle defining pullbackTensorSystemComparison. Restriction to flat-term K-flat pairs is faithful, so cancellation proves the stated comparison equation for arbitrary unbounded pairs. No sequence transition is inverted.",
+   "uses": [
+    "lem-sf-system-pullback-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-pullback-compositor-identification",
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-sf-system-pullback-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Representative normalization in the proof of lemma-pullback-tensor-product, and the adjunction/localization construction of the compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor comparison for derived inverse image agrees with its comparison on K-flat representatives",
+   "results": "8 hits, including LinearMap.tensorKerEquiv_apply and CategoryTheory.RepresentablyFlat.of_iso; no identification of these two presentations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the project representative and localization API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition compatibility of derived inverse image tensor comparison",
+   "results": "8 hits, including SheafOfModules.conjugateEquiv_pullbackComp_inv and SheafOfModules.pushforwardComp_inv_app_val_app.",
+   "date": "2026-10-26",
+   "verdict": "Relevant ordinary pullback APIs, but no identification of the specified system presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_model_rigidity|TensorComparisonModel|map_leftDerivedTensorComparison_app_app_comp",
+   "results": "msearch grep returned no hits. Repository rg finds CochainTensorModelRigidity, SystemPullbackTensorNormalization and the source-library left-derived tensor composition law.",
+   "date": "2026-10-26",
+   "verdict": "The representative rigidity lemma detects equality; matching its representative equation to the published one remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PublishedSystemTensorComposition",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence of fix-prop-projection-formula, via ambient proper/open pasting: Identification of the published tensor comparison for one inverse image",
+   "via": [
+    "lem-sf-published-system-tensor-composition",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PublishedSystemTensorIdentification",
+  "file": "lean/Sheaf/SixFunctors/PublishedSystemTensorIdentification.lean",
+  "declaration": "WeilConjectures.publishedSystemTensorIdentification",
+  "statement": "theorem publishedSystemTensorIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M N : coefficientSequenceDerived l E Y) :\n    (WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app\n        ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M, N)) ≫\n      ((publishedSystemAmbientData l E).tensor f).hom.app (M, N) =\n    (pullbackTensorSystemComparison l E f).hom.app (M, N) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom ((WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app M)\n          ((WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (only explicit .{u} universe annotations, same elaborated type) and vs SystemTensorComposition; 2 new sorry identifications vs Compositors (sections/conjugate/pullComp_model) and ambient pushComp/comp/derivedComp/tensorData normalizations; node records vs Lean; direct importer AmbientProperOpenPasting compiled against the 6 delivered modules (rc 0); #print axioms (transport sorry-free, sorryAx only from the 2 new holes and upstream holes)"
+ }
+}

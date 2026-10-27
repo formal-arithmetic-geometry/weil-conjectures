@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-dg-homotopy-acyclic-localization",
+ "kind": "statement",
+ "title": "The DG homotopy category and its acyclic Verdier class",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Let $K(A,d)$ be the category of right DG $A$-modules with degree-zero $A$-linear chain maps modulo homotopy: $f\\sim g$ if $f-g=d_Nh+hd_M$ for a degree-$-1$ right $A$-linear map $h:M\\to N$. Use shifts $M[k]^i=M^{i+k}$ with differential $(-1)^kd_M$ and unchanged right action. For a chain map $f:M\\to N$, set $C(f)^i=N^i\\oplus M^{i+1}$ with differential $d(y,x)=(d_Ny+f(x),-d_Mx)$ and componentwise right action. Declare triangles distinguished when they are isomorphic in $K(A,d)$ to a cone triangle $M\\xrightarrow{f}N\\xrightarrow{i}C(f)\\xrightarrow{-p}M[1]$, where $i(y)=(y,0)$ and $p(y,x)=x$, so that the third map sends $(y,x)$ to $-x$. Let $\\mathcal E$ be the full subcategory on acyclic modules, meaning $H^i(M)=\\ker(d_M:M^i\\to M^{i+1})/d_M(M^{i-1})=0$ for every integer $i$. Then $K(A,d)$ is a triangulated category [def-weil-triangulated-category], and $\\mathcal E$ is a strictly full triangulated subcategory [def-weil-triangulated-subcategory]. The class $W_{\\mathcal E}$ of morphisms $u:X\\to Y$ admitting a distinguished triangle $X\\xrightarrow{u}Y\\to Z\\to X[1]$ with $Z\\in\\mathcal E$ is exactly the class of morphisms inducing isomorphisms on every $H^i$. No boundedness or commutativity hypothesis on $A$ or the modules is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KJ, proposition-homotopy-category-triangulated; Tag 09KW, lemma-acyclic, including its identification of the associated cone multiplicative system with quasi-isomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "def-sfb-dg-homotopy-structure"
+ ],
+ "proof": [
+  {
+   "text": "Write $K_A=K(A,d)$ and $T_f=(X,Y,C(f),f,i_f,-p_f)$. Homotopy is an additive congruence: sums and negatives of homotopies remain homotopies, and composing $h$ with chain maps $a,b$ gives the homotopy $bha$. Hence the quotient has abelian Hom groups and bilinear composition. The zero module and componentwise finite direct sums retain their zero and biproduct identities in the quotient. Shifts preserve the DG rule: for $m\\in M[k]^n$, $(-1)^kd_M(ma)=(-1)^kd_M(m)a+(-1)^nm\\,d_A(a)$. They send a homotopy $h$ to $(-1)^kh$, are additive, and satisfy $[k][l]=[k+l]$. For the cone, $d_C^2(y,x)=(d_Yf(x)-fd_X(x),0)=0$; in its second coordinate $-d_X(xa)=(-d_Xx)a+(-1)^nx\\,d_A(a)$ for $x\\in X^{n+1}$, and the first coordinate has the same DG rule. Thus the stated cones and their maps exist. Every quotient morphism has a chain representative and hence a cone triangle. Moreover $C(1_X)$ contracts by $h(y,x)=(0,y)$, since $dh+hd=1$, so $T_{1_X}$ is isomorphic via $(1,1,0)$ to $(X,X,0,1,0,0)$. Together with isomorphism closure by definition, these are the additive, shift and TR1 requirements of [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Definitions of homotopy, shift and cone; Tag 09KH, lemma-homotopy-category-pre-triangulated, TR1; signed convention of Tag 09KF."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dg-cone-rotation] to each chain map $f$. It identifies both the rotation of $T_f$ and its inverse rotation with standard cone triangles, with exactly the negative projection and the rotated last arrow $-f[1]$. Rotating a triangle isomorphism is again a triangle isomorphism. Therefore both rotation and inverse rotation preserve the class declared distinguished, proving TR2.",
+   "uses": [
+    "lem-sfb-dg-cone-rotation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KB and 09KC, lemma-rotate-cone and lemma-rotate-triangle; Tag 09KH, TR2."
+   }
+  },
+  {
+   "text": "For TR3, choose isomorphisms putting both distinguished triangles in standard cone form $T_f,T_{f'}$, and conjugate the specified first square by their first two components. Represent its two maps by chain maps $a:X\\to X'$, $b:Y\\to Y'$. Commutativity in $K_A$ supplies a degree-$-1$ $A$-linear $h$ with $bf-f'a=d_{Y'}h+hd_X$. Define $c:C(f)\\to C(f')$ by $c(y,x)=(by+hx,ax)$. Its upper-right chain-map equation is $d_{Y'}h+f'a=bf-hd_X$, exactly that homotopy equation; the other entries use that $a,b$ are chain maps. It is $A$-linear and satisfies $ci_f=i_{f'}b$ and $(-p_{f'})c=a[1](-p_f)$. Undoing the chosen triangle isomorphisms gives TR3. Together with steps 1 and 2 this makes $K_A$ pre-triangulated.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KD, lemma-functorial-cone, explicit matrix with homotopy bf-f′a; Tag 09KH, TR3."
+   }
+  },
+  {
+   "text": "For composable representatives $f:X\\to Y$, $g:Y\\to Z$, apply [lem-sfb-dg-composite-cone-contraction]. Its maps $\\alpha(y,x)=(gy,x)$, $\\beta(z,x)=(z,fx)$ and $\\gamma(z,y)=(-y,0)$ give a triangle on $C(f),C(gf),C(g)$ isomorphic to $T_\\alpha$, hence distinguished. The four octahedral squares hold on representatives: $\\alpha i_f=i_{gf}g$, $(-p_{gf})\\alpha=-p_f$, $\\beta i_{gf}=i_g$, and $(-p_g)\\beta=f[1](-p_{gf})$. The final arrow is precisely $\\gamma=i_f[1](-p_g)$. This gives the octahedron required in [def-weil-triangulated-category] for the three standard cone triangles.",
+   "uses": [
+    "lem-sfb-dg-composite-cone-contraction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KI, lemma-two-split-injections, in cone coordinates; Tag 09KJ, proposition-homotopy-category-triangulated, TR4."
+   }
+  },
+  {
+   "text": "Now take any three prescribed distinguished triangles with first arrows $[f],[g],[gf]$. By TR3 already proved, the identity square on the first two objects extends from each standard cone triangle to the corresponding prescribed triangle. By [lem-sf-triangle-morphism-iso], valid for a pre-triangulated category, each third component is an isomorphism. If these are $c_f,c_g,c_{gf}$, replace $\\alpha,\\beta,\\gamma$ by $c_{gf}\\alpha c_f^{-1}$, $c_g\\beta c_{gf}^{-1}$, $c_f[1]\\gamma c_g^{-1}$. The triangle equations for the $c$'s substitute into the four equalities of step 4, and its final-arrow equality becomes the composite of the prescribed arrow to $Y[1]$ with the prescribed arrow from $Y[1]$. The fourth triangle remains distinguished by isomorphism closure. Thus TR4 holds for arbitrary prescribed triangles and $K_A$ is triangulated.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KJ, arbitrary-cone reduction; derived.tex Tag 014A, lemma-third-isomorphism-triangle, and Tag 014C, lemma-easier-axiom-four."
+   }
+  },
+  {
+   "text": "Cohomology is well-defined on $K_A$: if $f-g=dh+hd$ and $x$ is a cycle, then $(f-g)x=d(hx)$, so $H^n(f)=H^n(g)$. Identity and composition on cycles descend to identity and composition on their quotients, so every $H^n$ is a functor and preserves isomorphisms. For a shift, kernels are unchanged and images are unchanged because multiplication by $(-1)^k$ is invertible; hence $H^n(M[k])=H^{n+k}(M)$ under the underlying-group identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic, underlying cohomology functors; definitions of homotopy and shift."
+   }
+  },
+  {
+   "text": "We verify the cone criterion directly. Suppose all $H^n(f)$ are bijective. For a degree-$n$ cycle $(y,x)$ in $C(f)$, $d_Xx=0$ and $d_Yy=-fx$. Injectivity of $H^{n+1}(f)$ gives $x=d_Xt$ for $t\\in X^n$. Then $y+ft$ is closed; surjectivity of $H^n(f)$ gives a cycle $z\\in X^n$ and $w\\in Y^{n-1}$ with $y+ft=fz+d_Yw$. Consequently $(y,x)=d_C(w,z-t)$, proving acyclicity. Conversely suppose $C(f)$ acyclic. A cycle $y\\in Y^n$ gives a cone cycle $(y,0)$, so $(y,0)=d_C(w,t)$ for $w\\in Y^{n-1},t\\in X^n$; then $d_Xt=0$ and $y=d_Yw+ft$, proving surjectivity of $H^n(f)$. If $x\\in X^n$ is closed and $fx=d_Yy$, then $(-y,x)$ is a cone cycle of degree $n-1$. Writing it as $d_C(w,t)$ yields $x=-d_Xt$, proving injectivity. Thus $C(f)$ is acyclic exactly when every $H^n(f)$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic; direct cycle computation for the cone and cohomology defined in the statement, spelling out the cone long-exact-sequence criterion without an uncited boundary comparison."
+   }
+  },
+  {
+   "text": "The zero module is acyclic. Step 6 shows that acyclicity is invariant under every isomorphism of $K_A$ and under every positive or negative shift; hence the full subcategory $\\mathcal E$ is strictly full and shift-closed. If $X\\to Y\\to Z\\to X[1]$ is distinguished with $X,Z$ acyclic, choose a cone normal form $T_f$; its corresponding source and cone are acyclic by isomorphism invariance. Step 7 implies that $H^n(f)$ is an isomorphism for every $n$, and its source cohomology is zero, so its target cohomology is zero as well. Thus $Y$ is acyclic. These are exactly the closure conditions of [def-weil-triangulated-subcategory], so $\\mathcal E$ is a strictly full triangulated subcategory of the triangulated category proved in step 5.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic; closure conditions in derived.tex Tag 05QM, definition-triangulated-subcategory."
+   }
+  },
+  {
+   "text": "For a morphism $u$ choose a chain-map representative $f$. If all $H^n(u)$ are isomorphisms, step 7 makes $C(f)$ acyclic, and $T_f$ is the distinguished triangle witnessing $u\\in W_{\\mathcal E}$. Conversely, a distinguished triangle witnessing $u\\in W_{\\mathcal E}$ is isomorphic to some $T_f$. Its cone is acyclic by step 6, so step 7 makes every $H^n(f)$ invertible. The first square of that triangle isomorphism expresses $H^n(u)$ as $H^n(f)$ composed on either side with isomorphisms. Thus every $H^n(u)$ is invertible. This proves precisely the equality of classes in the statement. All constructions above are finite sums, shifts, quotients of Hom groups and explicit $A$-linear maps in the fixed universes; no boundedness or commutativity has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic, identification of the cone class with quasi-isomorphisms; universe remark following its proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-sfb-dg-cone-rotation",
+  "lem-sfb-dg-composite-cone-contraction",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KH and 09KJ (TR1-TR4), using the existing cone-coordinate rotation and iterated-cone lemmas; Tag 09KW (acyclic subcategory and cone class), with its underlying cone cohomology criterion expanded into explicit cycle calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|quasiIso_eq_trW_subcategoryAcyclic|subcategoryAcyclic.*IsTriangulated",
+   "results": "{\"t\": \"2026-10-24T00:40:35Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|DifferentialGraded|quasiIso_eq_trW_subcategoryAcyclic|subcategoryAcyclic.*IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\"], \"digest\": \"5887ce8ef867c6b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary cochain complexes in a fixed abelian category. Read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and DerivedCategory/KProjective.lean:43-48. These do not construct the DG-module homotopy category, its triangulation or the underlying-cohomology comparison for an arbitrary DG algebra; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy category of modules over a differential graded algebra is triangulated and acyclic modules define quasi isomorphisms by cones",
+   "results": "{\"t\": \"2026-10-24T00:40:36Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy category of modules over a differential graded algebra is triangulated and acyclic modules define quasi isomorphisms by cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instPretriangulatedIntUp\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"HomotopyCategory.mappingCone_triangleh_distinguished\", \"instCategoryHomotopyCategory\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.quasiIso\"], \"digest\": \"7e41ead4a98639d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary cochain complexes in a fixed abelian category. Read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and DerivedCategory/KProjective.lean:43-48. These do not construct the DG-module homotopy category, its triangulation or the underlying-cohomology comparison for an arbitrary DG algebra; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"subcategoryAcyclic\"",
+   "results": "{\"t\": \"2026-10-24T00:40:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"subcategoryAcyclic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsClosedUnderIsomorphismsIntUpSubcategoryAcyclic\", \"HomotopyCategory.subcategoryAcyclic\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic\"], \"digest\": \"38db28532163e518\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary cochain complexes in a fixed abelian category. Read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and DerivedCategory/KProjective.lean:43-48. These do not construct the DG-module homotopy category, its triangulation or the underlying-cohomology comparison for an arbitrary DG algebra; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy category of differential graded modules over a DG algebra is triangulated and acyclic modules form a triangulated subcategory whose cone equivalences are exactly quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-24T00:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy category of differential graded modules over a DG algebra is triangulated and acyclic modules form a triangulated subcategory whose cone equivalences are exactly quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomotopyCategory.subcategoryAcyclic\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\"], \"digest\": \"45ec4f527a5bf40f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary cochain complexes in a fixed abelian category. Read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and DerivedCategory/KProjective.lean:43-48. These do not construct the DG-module homotopy category, its triangulation or the underlying-cohomology comparison for an arbitrary DG algebra; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a general associative differential graded ring the homotopy category of right DG modules has mapping cone triangles and acyclic objects define the Verdier quotient",
+   "results": "{\"t\": \"2026-10-24T00:41:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a general associative differential graded ring the homotopy category of right DG modules has mapping cone triangles and acyclic objects define the Verdier quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HasDerivedCategory.standard\", \"DerivedCategory\", \"HasDerivedCategory\", \"HomotopyCategory.instIsTriangulatedIntUp\"], \"digest\": \"7b5f336d0a01a2a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary cochain complexes in a fixed abelian category. Read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and DerivedCategory/KProjective.lean:43-48. These do not construct the DG-module homotopy category, its triangulation or the underlying-cohomology comparison for an arbitrary DG algebra; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|quasiIso_eq_trW_subcategoryAcyclic",
+   "results": "{\"t\": \"2026-10-24T01:18:36Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|DifferentialGraded|quasiIso_eq_trW_subcategoryAcyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\"], \"digest\": \"c181b699d7aea101\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and HomotopyCategory/Triangulated.lean:206. These are ordinary cochain complexes in a fixed (pre)additive or abelian category, not right DG modules over an arbitrary graded algebra with nonzero differential. Neither the DG category nor its A-linear homotopy/cone comparison is provided by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes of differential graded module maps over a DG ring with cone triangles form a triangulated category",
+   "results": "{\"t\": \"2026-10-24T01:18:36Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy classes of differential graded module maps over a DG ring with cone triangles form a triangulated category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsTriangulated.mk\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory.mappingCone_triangleh_distinguished\", \"instCategoryHomotopyCategory\", \"Homotopy.noConfusionType\", \"Homotopy\"], \"digest\": \"329fad0d795b6094\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and HomotopyCategory/Triangulated.lean:206. These are ordinary cochain complexes in a fixed (pre)additive or abelian category, not right DG modules over an arbitrary graded algebra with nonzero differential. Neither the DG category nor its A-linear homotopy/cone comparison is provided by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic",
+   "results": "{\"t\": \"2026-10-24T01:18:37Z\", \"tool\": \"loogle\", \"query\": \"HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic\"], \"digest\": \"8c4a18a22ad0bf34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and HomotopyCategory/Triangulated.lean:206. These are ordinary cochain complexes in a fixed (pre)additive or abelian category, not right DG modules over an arbitrary graded algebra with nonzero differential. Neither the DG category nor its A-linear homotopy/cone comparison is provided by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an associative differential graded algebra the homotopy category of right DG modules is triangulated and its acyclic cone morphisms are exactly quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-24T01:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"For an associative differential graded algebra the homotopy category of right DG modules is triangulated and its acyclic cone morphisms are exactly quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\"], \"digest\": \"d2c73c990bc26a2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and HomotopyCategory/Triangulated.lean:206. These are ordinary cochain complexes in a fixed (pre)additive or abelian category, not right DG modules over an arbitrary graded algebra with nonzero differential. Neither the DG category nor its A-linear homotopy/cone comparison is provided by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic cone criterion for quasi-isomorphisms of modules over an arbitrary differential graded ring and the Verdier acyclic subcategory of its homotopy category",
+   "results": "{\"t\": \"2026-10-24T01:19:12Z\", \"tool\": \"leanfinder\", \"query\": \"Acyclic cone criterion for quasi-isomorphisms of modules over an arbitrary differential graded ring and the Verdier acyclic subcategory of its homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"HomotopyCategory.subcategoryAcyclic\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"HomotopyCategory.instIsClosedUnderIsomorphismsIntUpSubcategoryAcyclic\", \"CochainComplex.IsKInjective.rightOrthogonal\"], \"digest\": \"da84db5bfd78cd00\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean:31-76 and HomotopyCategory/Triangulated.lean:206. These are ordinary cochain complexes in a fixed (pre)additive or abelian category, not right DG modules over an arbitrary graded algebra with nonzero differential. Neither the DG category nor its A-linear homotopy/cone comparison is provided by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₃_of_isIso₁₂",
+   "results": "{\"t\": \"2026-10-24T01:24:00Z\", \"tool\": \"grep\", \"query\": \"isIso₃_of_isIso₁₂\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\"], \"digest\": \"40e18fdac7a26c22\"}",
+   "date": "2026-10-24",
+   "verdict": "match for the already existing cited Mathlib leaf lem-sf-triangle-morphism-iso, not for this DG item: CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ at Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:516 applies after step 3, before TR4."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-homotopically-projective-hom-derived",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRL, lemma-homotopy-colimit, including its proof with canonical maps; Tag 09QI, lemma-derived-products, clauses (1) and (2). Within lem-sfb-dg-sequential-colimit-triangle, step 2 (Tag 09QI part (2), direct sums are derived coproducts): the Hom comparison of Tag 09KY part (1) for the homotopically projective replacements. 09KY proof: the triangulated homotopy category in which the cone of the quasi-isomorphism is acyclic; apply the general left-orthogonal localization theorem to this class.",
+   "via": [
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-homotopy-acyclic-localization",
+  "worker": "stage1",
+  "summary": "N6: retained the full statement; reused the existing DG cone-rotation and composite-cone-contraction nodes instead of creating duplicates. Checked the DG signs and all four octahedral squares, used the pre-triangulated triangle-isomorphism leaf to handle prescribed cones, and proved the acyclic cone criterion by explicit cycles before deducing strict fullness, triangulated closure and the stated W class. No new nodes.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRL, lemma-homotopy-colimit, including its proof with canonical maps; Tag 09QI, lemma-derived-products, clauses (1) and (2). Within lem-sfb-dg-sequential-colimit-triangle, step 2 (Tag 09QI part (2), direct sums are derived coproducts): the Hom comparison of Tag 09KY part (1) for the homotopically projective replacements. 09KY proof: the triangulated homotopy category in which the cone of the quasi-isomorphism is acyclic; apply the general left-orthogonal localization theorem to this class. Latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited effectivity branch. blueprint_refs ancestor returns None: retained inherited null ancestor and via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-342c05dc7",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-342c05dc7 (reviewer sub-agent of L); spot-checked: Read the item's 9-step split in full and recomputed every step by hand. The delivery creates no new nodes, leaves the statement and stmt_deps unchanged, and has no re-split note. Sources: Stacks dga.tex 09KH (l.1008), 09KJ (l.1130, TR4 via 014C/09KI) and 09KW (l.2551). The item claims less than 09KW (no saturation), and that statement is the base statement, unchanged. Step 1: shifted Leibniz rule, cone d²=0 and Leibniz, contraction h(y,x)=(0,y) of C(1). Step 2: TR2 in both directions from both clauses of lem-sfb-dg-cone-rotation, including rot⁻¹rot=T. Step 3: c=(b,h;0,a) is a chain map exactly when bf-f'a=dh+hd, and both squares commute. Step 4: all four octahedral squares and γ=i_f[1](-p_g) checked on coordinates, against the statement of lem-sfb-dg-composite-cone-contraction. Step 5: prescribed cones handled by TR3 plus the pre-triangulated leaf lem-sf-triangle-morphism-iso (014A), with the conjugated α', β', γ' recomputed, so the argument is not circular. Steps 6, 7 and 9: cone acyclic iff quasi-isomorphism by explicit cycles, all degrees checked. Step 8: closure conditions of def-weil-triangulated-subcategory. Small cases: f=0, f=1, ×2 on ℤ, and zero source or target. No commutativity, d_A=0 or boundedness is used. Duplicate search over 09K* tags and keywords: lem-sfb-dg-quasi-isomorphism-localization and lem-sfb-dg-derived-admissible-triangles concern D(A,d); lem-coef-dg-* are general dg-category criteria with no acyclic or W clauses. None duplicates this item. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgHomotopyAcyclicLocalization",
+  "declaration": "CategoryTheory.DgAlgebra.homotopy_acyclic_localization",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.HomotopyStructure.AcyclicLocalization",
+   "CategoryTheory.DgAlgebra.homotopy_acyclic_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgHomotopyAcyclicLocalization.lean",
+  "statement": "theorem homotopy_acyclic_localization (A : Algebra.{u}) : ∃ s : HomotopyStructure A, @HomotopyStructure.AcyclicLocalization A s",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae7d9a58f",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, Stacks 09KH/09KJ/09KW, both modules and the landed DgAlgebraDerivedCategory. Homotopy relation f-g=dh+hd with h A-linear, no sign, consistent with the module Leibniz rule; shift and cone come from the landed ShiftComparison/ConeComparison (Mathlib cone, swapped coordinates, third map -p); distinguished_iff, additive structure (faithful underlying functor, full quotient) and H^n (functor equality) are all pinned, so the existence form is not a weakening. Conjuncts: IsTriangulated, IsClosedUnderIsomorphisms, ObjectProperty.IsTriangulated, trW = all-H^n-iso. No extra hypotheses; zero algebra, zero modules, f=0 and f=id covered. Item changed only lean/stmt_deps (new def node added); statements verbatim; new-node fields, searches, docstrings with 9 proof steps and conventions OK; sorry only. Maintainer note: Q46's concurrently reviewed lem-sfb-dg-composite-cone-contraction (dec62ea) adds def-sfb-dg-module-cone-calculus with ModuleHomotopyCategory, the same quotient under different names; whichever lands second should reuse the first."
+ }
+}

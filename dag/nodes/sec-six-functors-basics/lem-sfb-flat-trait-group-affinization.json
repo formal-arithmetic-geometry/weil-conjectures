@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-flat-trait-group-affinization",
+ "kind": "statement",
+ "title": "Group structure on the affinization of a flat separated trait group",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $G\\to S$ be a flat, separated group scheme of finite type [def-weil-flat-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism]. A group scheme here has multiplication $m:G\\times_SG\\to G$, identity $e:S\\to G$ and inverse $i:G\\to G$ satisfying the group diagrams; the product is the fibre product [def-pc-base-change]. Put $A=\\Gamma(G,\\mathcal O_G)$ and $H=\\operatorname{Spec}A$, with the $S$-structure induced by $R\\to A$. Let $u:G\\to H$ be the canonical morphism corresponding to $\\mathrm{id}_A$ [lem-weil-pbc-morphism-into-affine-scheme]. Then $H$ has an $S$-group-scheme structure for which $u$ is a group homomorphism. More precisely, for the projections $p_1,p_2:G\\times_SG\\to G$, the natural homomorphism $A\\otimes_R A\\to\\Gamma(G\\times_SG,\\mathcal O)$ sending $a\\otimes b$ to $p_1^*a\\,p_2^*b$ is an isomorphism, and multiplication, identity and inverse on $H$ are induced by $m^*,e^*,i^*$ through this isomorphism. No finite generation of $A$ as an $R$-algebra and no affineness of $G$ are assumed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/qrg.pdf: Proposition 3.1, printed p.5, paragraph beginning with the ring of global sections: the spectrum has a natural group structure even before finite generation of its ring is known. The product-of-sections assertion spells out the flat-over-a-DVR construction underlying that paragraph."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The hypotheses give that $G$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. The module $\\mathcal O_G$ is invertible (it is free of rank one on itself) [def-sc-invertible-module]. Apply [lem-sc-flat-invertible-sections-torsion-free] with this module and the domain $R$: $A$ is torsion-free over $R$. A DVR is a PID by [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-torsion-free-module-flat] makes $A$ flat over $R$. In particular $H\\to S$ is flat by [lem-weil-pbc-flat-morphism-affine-criterion]. This uses no finite generation of $A$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-sc-invertible-module",
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1); torsion-freeness argument in more-morphisms.tex, Tag 0EX8, lemma-triviality-generic-fibre-valuation-ring, general-case proof."
+   }
+  },
+  {
+   "text": "Let $q=u\\times_S\\mathrm{id}_G:G\\times_SG\\to H\\times_SG$. For every affine open $U=\\operatorname{Spec}B$ of the second copy of $G$, $B$ is flat over $R$ by [lem-weil-pbc-flat-morphism-affine-criterion]. Thus [lem-weil-pbc-flat-base-change-global-sections-qcqs] gives $\\Gamma(G\\times_SU,\\mathcal O)=A\\otimes_RB$. By [lem-weil-pbc-fibre-product-affine-spectra], $\\Gamma(H\\times_SU,\\mathcal O)=A\\otimes_RB$ as well. Under these two identifications $q^*$ fixes $a\\otimes b$: its value is the product of the pullbacks of $a$ and $b$, since $u^*$ is $\\mathrm{id}_A$ by the definition of $u$. These are the actual pullback maps, so commute with restriction. The map between the two direct-image ring sheaves on $G$ is therefore an isomorphism on an affine basis, hence on all opens: local inverses agree on overlaps by uniqueness, and glue by the sheaf axiom. Taking sections over $G$ proves that $q^*$ on global sections is an isomorphism. Finally apply [lem-weil-pbc-flat-base-change-global-sections-qcqs] to $G$ and the flat affine base change $H\\to S$ from step 1; it identifies $\\Gamma(H\\times_SG,\\mathcal O)$ with $A\\otimes_RA$. The composite is precisely $\\beta_2:a\\otimes b\\mapsto p_1^*a\\,p_2^*b$, proving the asserted isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, (2) with i=0; schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes. The basis-and-gluing assembly is written here."
+   }
+  },
+  {
+   "text": "We also need injectivity in three factors to check associativity. The calculation of step 2 works with the second factor replaced by $G\\times_SG$ or $H\\times_SG$: both have affine open covers by products of affine opens, whose rings are $B\\otimes_RC$ by [lem-weil-pbc-fibre-product-affine-spectra]. The factors $B,C$ are flat over $R$ by [lem-weil-pbc-flat-morphism-affine-criterion]. The tensor ring is flat: $B\\to B\\otimes_RC$ is flat by [lem-weil-pbc-flat-module-base-change], and its composite with the flat map $R\\to B$ is flat by [lem-weil-pbc-flat-ring-map-comp]. These product charts cover the second factor, so its stalks are flat and the factor is flat over $S$. By [lem-weil-pbc-flat-morphism-affine-criterion], every affine open of that factor has flat section ring. Thus on its entire affine basis the same application of [lem-weil-pbc-flat-base-change-global-sections-qcqs] identifies pullback under replacement of the first $G$ by $H$ with $\\mathrm{id}_{A\\otimes_R(B\\otimes_RC)}$; the local inverses glue as in step 2. Replace the first two factors successively in $G^3$, allowing a permutation of factors. Each replacement induces an isomorphism on global sections. For the resulting $H^2\\times_SG$, apply flat base change to $G$ with affine base $H^2=\\operatorname{Spec}(A\\otimes_RA)$, whose ring is flat by the same argument. Consequently pullback by $u^3:G^3\\to H^3$ is the isomorphism $\\beta_3:A^{\\otimes_R3}\\to\\Gamma(G^3,\\mathcal O)$ sending $a\\otimes b\\otimes c$ to the product of their three pullbacks. In particular it is injective. All powers here mean fibre powers over $S$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology (2); algebra.tex Tags 00HI (lemma-flat-base-change) and 00HC (lemma-composition-flat); schemes.tex Tag 01I4."
+   }
+  },
+  {
+   "text": "Set $\\Delta=\\beta_2^{-1}\\circ m^*:A\\to A\\otimes_RA$, $\\epsilon=e^*:A\\to R$, and $\\sigma=i^*:A\\to A$. They are $R$-algebra homomorphisms, because $m,e,i$ are $S$-morphisms. By [lem-weil-pbc-fibre-product-affine-spectra], $H\\times_SH=\\operatorname{Spec}(A\\otimes_RA)$. Take $m_H=\\operatorname{Spec}\\Delta$, $e_H=\\operatorname{Spec}\\epsilon$, and $i_H=\\operatorname{Spec}\\sigma$, using the contravariant spectrum construction [def-weil-affine-spectrum]. They are $S$-morphisms since their ring maps preserve $R$. Their definitions give $m_H\\circ(u\\times u)=u\\circ m$, $e_H=u\\circ e$, and $i_H\\circ u=u\\circ i$: by [lem-weil-pbc-morphism-into-affine-scheme] these equalities can be checked on sections, where they say respectively $\\beta_2\\Delta=m^*$, $\\epsilon=e^*$, and $\\sigma=i^*$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I1 (lemma-morphism-into-affine) and 01I4 (lemma-fibre-product-affine-schemes); explicit construction of the group operations in Prasad–Yu Proposition 3.1, p.5."
+   }
+  },
+  {
+   "text": "Check the group diagrams, rather than assuming them from the construction. For maps $v,w:H^n\\to H$, equality after precomposition by $u^n$ implies $v=w$: the affine-target correspondence [lem-weil-pbc-morphism-into-affine-scheme] turns this into $\\beta_n v^*=\\beta_n w^*$, and $\\beta_n$ is injective for $n=1,2,3$ (respectively $\\mathrm{id}_A$, step 2 and step 3). Precompose the two associative products on $H^3$ by $u^3$. By step 4 the composites become $u\\circ m\\circ(m\\times\\mathrm{id})$ and $u\\circ m\\circ(\\mathrm{id}\\times m)$, equal by associativity on $G$. The two unit diagrams on $H$, precomposed by $u$, become $u\\circ m\\circ(e,\\mathrm{id})=u$ and $u\\circ m\\circ(\\mathrm{id},e)=u$. The two inverse diagrams, precomposed by $u$, become $u\\circ m\\circ(i,\\mathrm{id})=u\\circ e\\circ(G\\to S)$ and the corresponding equality with the factors reversed. These are precisely the identity and inverse axioms on $G$. The injectivity just proved descends all these equalities to $H$. Thus $H$ is an $S$-group scheme; step 4 makes $u$ a homomorphism and gives exactly the three specified pullbacks. No assertion that $u$ is surjective, that $G$ is affine, or that $A$ is finitely generated was used.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, definition-group-scheme, group diagrams; verification using the explicit comparisons of steps 2–3 and schemes.tex Tag 01I1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-sc-invertible-module",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Explicit local-and-gluing assembly from Tag 02KH and Tag 01I4, filling the natural-group-structure assertion in online Prasad–Yu Proposition 3.1, p.5. Local archive of Prasad–Yu WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of products of flat schemes over a discrete valuation ring form the tensor product giving the affinization a Hopf algebra structure",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, TensorProduct.instHopfAlgebra, Module.Flat.instTensorProduct, AlgebraicGeometry.AffineScheme.Γ, HopfAlgCat.tensorObj_carrier, AlgebraicGeometry.Scheme.ΓSpecIso, TensorProduct.antipode_def",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Group.Affine supplies HopfAlgebra structures on global sections only under an IsAffine hypothesis on G (Group/Affine.lean, line 336), which is unavailable here. General affine-scheme product and Hopf-algebra tensor results do not prove the global-sections product comparison for a nonaffine flat trait group. Both semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "affinization|affinisation|[Hh]opf.*[Ss]ection|[Ss]ection.*[Hh]opf|[Gg]lobal.*[Pp]roduct",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Group.Affine supplies HopfAlgebra structures on global sections only under an IsAffine hypothesis on G (Group/Affine.lean, line 336), which is unavailable here. General affine-scheme product and Hopf-algebra tensor results do not prove the global-sections product comparison for a nonaffine flat trait group. Both semantic phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Γ\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Group.Affine supplies HopfAlgebra structures on global sections only under an IsAffine hypothesis on G (Group/Affine.lean, line 336), which is unavailable here. General affine-scheme product and Hopf-algebra tensor results do not prove the global-sections product comparison for a nonaffine flat trait group. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of global functions of a flat separated finite type group scheme over a discrete valuation ring is a group scheme and the canonical map is a homomorphism",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.ValuativeCommSq.i₁, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.ValuativeCommSq.i₂, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.ValuativeCommSq.algebra, AlgebraicGeometry.ValuativeCommSq.valuationRing",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Group.Affine supplies HopfAlgebra structures on global sections only under an IsAffine hypothesis on G (Group/Affine.lean, line 336), which is unavailable here. General affine-scheme product and Hopf-algebra tensor results do not prove the global-sections product comparison for a nonaffine flat trait group. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affinization preserves products of flat quasi compact separated schemes over a discrete valuation ring and hence takes group schemes to affine group schemes",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Group.Affine supplies HopfAlgebra structures on global sections only under an IsAffine hypothesis on G (Group/Affine.lean, line 336), which is unavailable here. General affine-scheme product and Hopf-algebra tensor results do not prove the global-sections product comparison for a nonaffine flat trait group. Both semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "affinization|affinisation|[Hh]opf.*[Ss]ection|[Ss]ection.*[Hh]opf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine group global-sections instance at Mathlib/AlgebraicGeometry/Group/Affine.lean:337 requires IsAffine G. The pullbackSpecIso hit is the affine-factor tensor formula already supplied by an existing DAG leaf, not the nonaffine product comparison or this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a flat group scheme over a discrete valuation ring form a Hopf algebra",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.AffineScheme.Γ, GroupLike.instCommGroup, HopfAlgebraStruct.noConfusionType, AlgebraicGeometry.Scheme.ΓSpecIso, HopfAlgCat.concreteCategory, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine group global-sections instance at Mathlib/AlgebraicGeometry/Group/Affine.lean:337 requires IsAffine G. The pullbackSpecIso hit is the affine-factor tensor formula already supplied by an existing DAG leaf, not the nonaffine product comparison or this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Γ\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine group global-sections instance at Mathlib/AlgebraicGeometry/Group/Affine.lean:337 requires IsAffine G. The pullbackSpecIso hit is the affine-factor tensor formula already supplied by an existing DAG leaf, not the nonaffine product comparison or this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on a product of flat schemes over a principal ideal domain are the tensor product",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.carrierEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine group global-sections instance at Mathlib/AlgebraicGeometry/Group/Affine.lean:337 requires IsAffine G. The pullbackSpecIso hit is the affine-factor tensor formula already supplied by an existing DAG leaf, not the nonaffine product comparison or this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affinization of a flat separated finite type group scheme over a discrete valuation ring is a group scheme",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine group global-sections instance at Mathlib/AlgebraicGeometry/Group/Affine.lean:337 requires IsAffine G. The pullbackSpecIso hit is the affine-factor tensor formula already supplied by an existing DAG leaf, not the nonaffine product comparison or this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-generic-affine-group-affine",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, printed p.5, paragraph beginning with the ring of global sections: the spectrum has a natural group structure even before finite generation of its ring is known. The product-of-sections assertion spells out the flat-over-a-DVR construction underlying that paragraph.",
+   "via": [
+    "lem-sfb-dvr-generic-affine-group-affine",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-trait-group-affinization",
+  "worker": "stage1",
+  "summary": "Proved the product-of-sections comparison by two flat base changes and sheaf gluing, checked the three-factor comparison explicitly, then constructed the operations and descended each group diagram using injectivity on global sections. All inputs already exist in the DAG; no new nodes or changed statements.",
+  "blueprint": "Inherited blueprint.from.node is null and blueprint_refs.py ancestor confirms None; same_as searches of the whole current blueprint found no affinization statement. This is the supporting input to the Prasad–Yu Proposition 3.1 Raynaud-affineness paragraph already specified by blueprint.from.place and its inherited via chain, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "General torsion-freeness of sections on a flat scheme, applied only to the rank-one free module O_G; the current unit does not supply this commutative-algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-invertible-sections-torsion-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-d30f1278c",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d30f1278c (reviewer sub-agent of L); spot-checked: First split: the statement, stmt_deps and blueprint fields are identical to live/side-live, there is no repair note, there are no new nodes and no fixes. I read all five steps against every cited statement and against the Stacks sources: 0AUW (more-algebra.tex:4954), 0EX8, 02KH (2) at i=0 (coherent.tex:948), 01I4, 01I1 and 022S. Step 1: G is qcqs; A is torsion-free via lem-sc-flat-invertible-sections-torsion-free with L=O_G, so A is flat over the PID R (no finiteness needed) and H is flat over S. Step 2: on each affine open U=Spec B of the second G, flat base change identifies both Γ(G×U) and Γ(H×U) with A⊗B, and q^* is the identity there. The isomorphism glues over the affine basis, and a last base change along the flat H→S gives exactly β2. I checked the composite a⊗b ↦ p1^*a·p2^*b. Step 3: the product charts are flat via base change and composition of flat maps; two factor replacements and a base change along Spec(A⊗A) give β3, which is injective. Steps 4 and 5: Δ=β2^{-1}m^*, ε=e^*, σ=i^*. The relations follow because (u×u)^♯=β2, and the group axioms pass down to H because maps into an affine target are determined by global sections and β1, β2, β3 are injective. Both steps are correctly marked elementary. Small cases I tested: G_a, G_m, μ_p in residue characteristic p, a proper elliptic curve (A=R, u not injective) and a disconnected special fibre. No hypothesis is added and none is dropped. Separatedness is used only through quasi-separatedness, and the parent Raynaud lemma is not cited, so there is no cycle (70-node closure checked). No duplicate: the Γ-tensor nodes in the DAG are over a field only. Mathlib's Hopf structure on Γ needs IsAffine, so the item is not a Mathlib leaf. Accepted tool_use: lem-sc-flat-invertible-sections-torsion-free (unit sk-prop-av-cube), a generic torsion-freeness fact used as a black box. Minor, not this delivery's fault: Prasad–Yu is not in literature/LIST.md (the source was set by the item's creator, Q128; the worker read it online)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FlatTraitAffinization",
+  "declaration": "AlgebraicGeometry.exists_group_affinization_of_flat_trait",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FlatTraitAffinization.lean",
+  "statement": "theorem exists_group_affinization_of_flat_trait (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] (G : Over (Spec R)) [GrpObj G] [Flat G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : IsPushout ((Scheme.ΓSpecIso R).inv ≫ G.hom.appTop) ((Scheme.ΓSpecIso R).inv ≫ G.hom.appTop) (pullback.fst G.hom G.hom).appTop (pullback.snd G.hom G.hom).appTop ∧ ∃ (_ : GrpObj (Over.mk (Spec.map ((Scheme.ΓSpecIso R).inv ≫ G.hom.appTop)))), ∃ u : G ⟶ Over.mk (Spec.map ((Scheme.ΓSpecIso R).inv ≫ G.hom.appTop)), u.left = G.left.toSpecΓ ∧ IsMonHom u",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical tensor comparison is stated equivalently as the pushout square of commutative rings over R with legs the actual projection pullbacks. The group structure is on Spec Γ(G) with the induced R-structure; the over-arrow is required to have underlying map G.toSpecΓ. IsMonHom gives multiplication and unit compatibility, and GrpObj.inv_hom gives inverse compatibility, hence the three specified induced operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5164a4c09",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Hypotheses match the node exactly: IsDomain+IsDiscreteValuationRing, GrpObj over Spec R, Flat, IsSeparated (recorded decl of def-weil-proper-morphism, no properness), LocallyOfFiniteType+QuasiCompact; no IsAffine/finite generation/smoothness. A=Γ(G,⊤) with actual R-map (ΓSpecIso R).inv≫G.hom.appTop, H=Over.mk(Spec.map ρ), u pinned by u.left=toSpecΓ. Tensor clause is IsPushout with projection-pullback legs (pushout in CommRingCat = A⊗_R A, i.e. canonical map is iso). IsMonHom+GrpObj.inv_hom with β2 iso and u*=id force operations Spec(β2⁻¹m*),Spec(e*),Spec(i*). No competing Mathlib MonObj/GrpObj instance (Group/Affine needs Bialgebra/Hopf on Γ). Edge cases trivial group, elliptic curve (A=R), G_a, G_m, μ_p, empty G fine; single universe u. No existing declaration (Mathlib Hopf on Γ needs IsAffine), no live collision; docstrings with source place, blueprint tag and 5 proof steps; sorry only; statement verbatim. Not recompiled per instructions; worker compile evidence accepted."
+ }
+}

@@ -1,0 +1,456 @@
+{
+ "id": "lem-sfb-field-action-topos-coefficients",
+ "kind": "statement",
+ "title": "Field action topos with normalized point and coefficient transport",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure [def-pd-separable-closure], $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Use small sites in the compatible universes of [def-weil-size-convention]. For a profinite set $P$ put $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over its finite quotients [lem-weil-pbc-profinite-test-object-functor].\n\nLet $\\operatorname{Cond}$ denote sheaves of sets on profinite sets with finite jointly surjective coverings, and $\\operatorname{Cond}^{\\underline G}$ its category of internal $\\underline G$-actions. There is an equivalence of topoi $E:\\operatorname{Sh}(s_{\\mathrm{proet}})\\simeq\\operatorname{Cond}^{\\underline G}$ with the following normalization. Its underlying condensed sheaf is $(EF)(P)=F(\\bar s[P])$. On the dense free subsite of profinite $G$-sets, every map $G\\times T\\to G\\times P$ is uniquely $(g,t)\\mapsto(gb(t),f(t))$ with continuous $f:T\\to P$ and $b:T\\to G$; its restriction agrees with the action-site convention $(f,b)(h,c)=(fh,c\\,h^*b)$ of [lem-sfb-internal-action-site-presentation]. These identifications preserve covering families and are natural in profinite tests.\n\nFor $p_s:\\operatorname{Sh}(s_{\\mathrm{proet}})\\to\\operatorname{Cond}$ defined by the test objects [sk-def-sfb-pullback-from-point] and $p_G:\\operatorname{Cond}^{\\underline G}\\to\\operatorname{Cond}$ with trivial-action inverse image [lem-sfb-action-topos-geometric-restriction], $Ep_s^{-1}\\cong p_G^{-1}$ as finite-product-preserving inverse images. The conjugate right-adjoint comparison identifies $p_{s*}F(P)=F(s[P])$ with the subobject of $F(\\bar s[P])$ fixed after every profinite base change. The inclusion is restriction along $\\bar s[P]\\to s[P]$; the comparison is the sheaf equalizer for this cover with kernel pair $G\\times G\\times P$ in the profinite $G$-set presentation. In particular, for every commutative condensed ring $R$, this comparison identifies $E(p_s^{-1}R)$ with $R$ with trivial action as ring objects, including multiplication and unit, naturally in ring morphisms.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.9-4.1.10, pp. 27-28; agent refinement by the free action subsite, normalized point inverse image and ring structure. Exact combined reference WANTED."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-sfb-profinite-action-base-coefficients",
+  "def-sfb-profinite-action-parameters",
+  "def-weil-pbc-proetale-qcqs-subsite"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-field-profinite-galois-site], the qcqs subsite $\\mathcal B_s$ is dense and is equivalent, with its induced topology, to $\\mathbf{Prof}_G$. Apply [lem-pc-fppf-dense-sheaf-equivalence] to $\\mathcal B_s\\subset s_{\\mathrm{proet}}$ with values in sets. The functor is fully faithful, the topology is induced and every object is covered by the subsite, exactly as required; the sites are small in the stipulated universes, so the required set-valued limits exist. Thus restriction identifies $\\operatorname{Sh}(s_{\\mathrm{proet}})$ with $\\operatorname{Sh}(\\mathbf{Prof}_G)$. Write $H$ for the image of $F$. The cited field-site statement identifies $H(P_{\\mathrm{triv}})=F(s[P])$ and $H(G\\times P)=F(\\bar s[P])$, naturally in $P$, and identifies the test map with projection.",
+   "uses": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9-4.1.10, pp. 27-28; dense-subsite restriction as in Mathlib CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean, IsDenseSubsite instance"
+   }
+  },
+  {
+   "text": "Let $\\mathcal D\\subset\\mathbf{Prof}_G$ be the full subcategory on $G\\times P$, with left translation on $G$. Every $Q$ is covered by $G\\times |Q|\\to Q$, $(g,q)\\mapsto gq$: this is continuous, equivariant and surjective, since $q$ is the image of $(1,q)$. If $v:G\\times T\\to G\\times P$ is equivariant, write $v(1,t)=(b(t),f(t))$. Then $v(g,t)=(gb(t),f(t))$; $f,b$ are continuous by restriction and projection. Conversely this formula is continuous and equivariant for any such $f,b$, and evaluation at $(1,t)$ proves uniqueness. The composite of $(h,c)$ followed by $(f,b)$ sends $(g,u)$ to $(gc(u)b(h(u)),f(h(u)))$, hence is $(fh,c\\,h^*b)$, including for noncommutative $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28; agent calculation on the free profinite G-objects"
+   }
+  },
+  {
+   "text": "A finite family $(f_i,b_i):G\\times T_i\\to G\\times P$ is jointly surjective exactly when the $f_i:T_i\\to P$ are: for $f_i(t)=p$ the preimage of $(g,p)$ is $(gb_i(t)^{-1},t)$. These are exactly the action-site covering families. This also verifies the induced topology on $\\mathcal D$: any covering sieve on a free object contains a finite jointly surjective family $Q_i\\to G\\times P$; composing with the free covers $G\\times |Q_i|\\to Q_i$ of step 2 yields a finite free covering family in that sieve. Conversely every such free covering family is covering in $\\mathbf{Prof}_G$. Thus $\\mathcal D$ is a full dense subsite with precisely the action-site topology. The formulas commute with pullback of profinite parameters. Empty spaces and empty covers satisfy the same statements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, covering criterion; agent verification of the induced free-subsite topology"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-fppf-dense-sheaf-equivalence] again, now to $\\mathcal D\\subset\\mathbf{Prof}_G$, using steps 2-3 and the same small set-valued limits. Put $C=\\mathbf{Prof}$ with its finite jointly surjective topology and $K=\\underline G$, so $K(T)=C(T,G)$. The base site has finite limits. Step 2 identifies $\\mathcal D$ with $C_K$, and step 3 identifies their topologies. Now [lem-sfb-action-topos-geometric-restriction] gives $\\operatorname{Sh}(C_K)\\simeq\\operatorname{Cond}^{\\underline G}$. Composing gives $E$. Its underlying sheaf is $M(P)=H(G\\times P)=F(\\bar s[P])$. For $b:T\\to G$ its action is restriction by $(1_T,b)$, so the restriction along $(f,b)$ is $b\\cdot f^*$. This proves the asserted sign and order convention and naturality, including on morphisms of sheaves. As an equivalence of topos categories, $E$ and its inverse preserve finite limits.",
+   "uses": [
+    "lem-pc-fppf-dense-sheaf-equivalence",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), separable-closure descent infrastructure; agent free-subsite construction using the existing internal-action equivalence"
+   }
+  },
+  {
+   "text": "The cover $q:G\\times P\\to P_{\\mathrm{triv}}$ has kernel pair $G\\times G\\times P$ with diagonal left action. Identify it with the free object $G\\times(G\\times P)$ by $(g,h,p)\\mapsto(g,gh,p)$, with inverse $(g_1,g_2,p)\\mapsto(g_1,g_1^{-1}g_2,p)$. Its projections are $(g,h,p)\\mapsto(g,p)$ and $(g,h,p)\\mapsto(gh,p)$. The sheaf equalizer of [def-weil-pbc-sites-and-cohomology] therefore identifies $H(P_{\\mathrm{triv}})$, by restriction along $q$, with those $x\\in M(P)$ satisfying $\\operatorname{pr}_P^*x=h\\cdot\\operatorname{pr}_P^*x$ in $M(G\\times P)$, where $h$ is the first coordinate. Pulling back along $(b,t):T\\to G\\times P$ says $b\\cdot t^*x=t^*x$ for every profinite $T$, $t:T\\to P$, $b:T\\to G$. Conversely that condition with $T=G\\times P$, $b=h$, $t=\\operatorname{pr}_P$ gives the equalizer equation. These identifications commute with profinite restriction and with maps of $F$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28; sheaf equalizer (Stacks sites.tex, Tag 00VM, definition-sheaf-sets); explicit free coordinates on the kernel pair"
+   }
+  },
+  {
+   "text": "Denote the subobject of $M$ in step 5 by $\\operatorname{Inv}(M)$. It is a sheaf: local fixed sections glue uniquely in $M$, and their fixedness after each base change is checked on the pulled-back cover by uniqueness. For any condensed sheaf $A$, a sheaf map $A\\to\\operatorname{Inv}(M)$ is exactly an equivariant map from $A$ with trivial action to $M$: equivariance is precisely that every image section and all its restrictions satisfy the equations of step 5. These inverse factorizations are natural in $A,M$. Since $p_G^{-1}$ is trivial action by [lem-sfb-action-topos-geometric-restriction], this describes its right adjoint $p_{G*}$. Step 5 consequently gives a natural isomorphism $p_{s*}F\\simeq p_{G*}EF$, with the required restriction inclusion and universal fixedness, not merely invariance under the abstract elements of $G$.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalization of the arithmetic/geometric descent adjunction by the sheaf equalizer"
+   }
+  },
+  {
+   "text": "The point inverse image in [lem-weil-pbc-profinite-point-pullback] is a geometric inverse image on sets; its abelian version and right adjoint are the ones specified in [sk-def-sfb-pullback-from-point]. Thus $p_{s*}F(P)=F(s[P])$ is the right adjoint used in step 6. Conjugating $p_s^{-1}\\dashv p_{s*}$ by $E$ gives a left adjoint $Ep_s^{-1}$ to $p_{s*}E^{-1}$. Step 6 identifies this right adjoint with $p_{G*}$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to obtain the unique natural isomorphism $\\alpha:Ep_s^{-1}\\simeq p_G^{-1}$ whose mate is exactly the comparison of step 6 (use its inverse for the orientation $R_2\\to R_1$ in that lemma). Both functors preserve finite products: $p_s^{-1}$ and $p_G^{-1}$ are geometric inverse images and $E$ is an equivalence. Naturality of $\\alpha$ at the two product projections makes its product comparison $\\alpha_A\\times\\alpha_B$, and the terminal comparison is unique.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent application to the normalized point right adjoints"
+   }
+  },
+  {
+   "text": "Apply $\\alpha$ to the underlying sheaf of a commutative condensed ring $R$. For every operation $o:R^n\\to R$, naturality and the product compatibility of step 7 give $\\alpha_R\\circ Ep_s^{-1}(o)=p_G^{-1}(o)\\circ\\alpha_R^n$, using the canonical product comparisons. For $n=0$ this includes the unit and zero; $n=1$ includes negation; $n=2$ includes multiplication and addition. Hence $\\alpha_R$ is an isomorphism of ring objects to $R$ with trivial action. Naturality at any ring morphism $R\\to R'$ gives the claimed ring-morphism square. For $G=1$ the equalizer has identical arrows and $\\alpha$ has the expected trivial-action normalization; for $P=\\varnothing$ the sheaf values are terminal. No algebraic closedness, finite Galois group, discreteness of coefficients, or invariant-section exactness was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent finite-product normalization and explicit transport of the ring operations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-profinite-galois-site",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-sfb-action-topos-geometric-restriction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-profinite-point-pullback",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.9-4.1.10, pp. 27-28, followed by the explicit free-subsite and normalized-adjunction argument written here; the combined normalization is not stated in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pro etale topos of a field is equivalent to condensed sets with continuous Galois action, carrying pulled back rings to trivial actions",
+   "results": {
+    "t": "2026-10-22T06:00:53Z",
+    "tool": "leanfinder",
+    "query": "The pro etale topos of a field is equivalent to condensed sets with continuous Galois action, carrying pulled back rings to trivial actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction",
+     "LightCondSet.isDiscrete_tfae",
+     "CondensedSet.isDiscrete_tfae",
+     "InfiniteGalois.asProfiniteGaloisGroupFunctor",
+     "CondensedSet.LocallyConstant.iso",
+     "CondensedMod.isDiscrete_tfae",
+     "profiniteToCondensed",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet"
+    ],
+    "digest": "d5f06ca62df26a8f"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: finite discrete Galois-category equivalences, profinite Galois groups and condensed presentations do not state this normalized field/action topos and coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves on profinite Galois sets restricted to free G sets identify arithmetic sections with internal invariants and preserve ring objects",
+   "results": {
+    "t": "2026-10-22T06:00:42Z",
+    "tool": "leansearch",
+    "query": "Sheaves on profinite Galois sets restricted to free G sets identify arithmetic sections with internal invariants and preserve ring objects",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Galois\"",
+   "results": {
+    "t": "2026-10-22T06:00:42Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Galois\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: finite discrete Galois-category equivalences, profinite Galois groups and condensed presentations do not state this normalized field/action topos and coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois|proetale|pro_etale).*([Tt]opos|[Ss]heaf|[Ii]nvariant)|([Tt]opos|[Ss]heaf).*(Galois|proetale)",
+   "results": {
+    "t": "2026-10-22T06:00:42Z",
+    "tool": "grep",
+    "query": "(Galois|proetale|pro_etale).*([Tt]opos|[Ss]heaf|[Ii]nvariant)|([Tt]opos|[Ss]heaf).*(Galois|proetale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/IsGaloisGroup/Defs.lean",
+     "Mathlib/RingTheory/Invariant/Basic.lean",
+     "Mathlib/RingTheory/SimpleModule/Isotypic.lean",
+     "Mathlib/RingTheory/SimpleModule/Isotypic.lean",
+     "Mathlib/FieldTheory/Galois/IsGaloisGroup.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean"
+    ],
+    "digest": "b973430bfda86f76"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: finite discrete Galois-category equivalences, profinite Galois groups and condensed presentations do not state this normalized field/action topos and coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field pro etale geometric morphism to condensed sets becomes trivial inflation under the free profinite Galois action site equivalence",
+   "results": {
+    "t": "2026-10-22T06:01:40Z",
+    "tool": "leanfinder",
+    "query": "A field pro etale geometric morphism to condensed sets becomes trivial inflation under the free profinite Galois action site equivalence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.locallyConstantIsoFinYoneda",
+     "LightCondensed.locallyConstantIsoFinYoneda",
+     "profiniteToCondensed",
+     "Condensed.isoLocallyConstantOfIsColimit",
+     "Condensed.ofSheafForgetProfinite"
+    ],
+    "digest": "6f99ac87c6894aa7"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: finite discrete Galois-category equivalences, profinite Galois groups and condensed presentations do not state this normalized field/action topos and coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|pro_etale|Galois).*(topos|condensed)|(topos|condensed).*(proetale|Galois)",
+   "results": {
+    "t": "2026-10-22T09:35:03Z",
+    "tool": "grep",
+    "query": "(proetale|pro_etale|Galois).*(topos|condensed)|(topos|condensed).*(proetale|Galois)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field pro etale sheaf topos is the category of internal Galois actions on condensed sets",
+   "results": {
+    "t": "2026-10-22T09:35:03Z",
+    "tool": "leansearch",
+    "query": "A field pro etale sheaf topos is the category of internal Galois actions on condensed sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed",
+     "Condensed.ofSheafForgetCompHaus",
+     "LightCondensed",
+     "instCategoryCondensed",
+     "Condensed.lanSheafProfinite",
+     "instCategoryLightCondensed",
+     "Condensed.ofSheafCompHaus",
+     "CondensedSet"
+    ],
+    "digest": "bc6a717565bace14"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Galois\"",
+   "results": {
+    "t": "2026-10-22T09:35:03Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Galois\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pro etale topos of a field is equivalent to condensed sets with continuous Galois action and identifies point pullback with trivial action",
+   "results": {
+    "t": "2026-10-22T09:35:05Z",
+    "tool": "leanfinder",
+    "query": "The pro etale topos of a field is equivalent to condensed sets with continuous Galois action and identifies point pullback with trivial action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "CondensedSet.LocallyConstant.iso",
+     "profiniteToCondensed",
+     "LightProfinite.toCondensed",
+     "LightCondSet.LocallyConstant.iso",
+     "CondensedSet.isDiscrete_tfae",
+     "lightCondSetToTopCat_obj_carrier",
+     "CondensedSet.topCatAdjunctionCounitEquiv"
+    ],
+    "digest": "47064d511714223d"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(action|galois)|(action|galois).*sheaf",
+   "results": {
+    "t": "2026-10-22T09:35:32Z",
+    "tool": "grep",
+    "query": "sheaf.*(action|galois)|(action|galois).*sheaf",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean"
+    ],
+    "digest": "bd929200e87bbae7"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on profinite continuous G sets are internal actions in condensed sets by restriction to free G spaces",
+   "results": {
+    "t": "2026-10-22T09:35:34Z",
+    "tool": "leanfinder",
+    "query": "Sheaves on profinite continuous G sets are internal actions in condensed sets by restriction to free G spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.ofSheafForgetProfinite",
+     "Condensed.ofSheafProfinite",
+     "Condensed.isSheafProfinite",
+     "Condensed.profiniteFree",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "Condensed.profiniteSolid"
+    ],
+    "digest": "1f631e5c846aa0d7"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the normalized field/action topos and point-coefficient transport. Hits provide condensed/profinite presentations or generic sheaf facts, not the claimed Galois topos equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-galois-global-descent",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input; returned global-descent proof steps 1-3: Field action topos with normalized point and coefficient transport.",
+   "via": [
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-action-topos-coefficients",
+  "worker": "stage1",
+  "summary": "Q89 reused the existing field-site, dense-subsite, internal-action and adjoint-comparison statements. Wrote the free-arrow and cover calculations, the kernel-pair universal-invariants equalizer, and the finite-product/ring normalization explicitly. No new nodes or statement changes. Added the existing set-valued point geometric-morphism node to disambiguate the abelian formulation of the original point reference.",
+  "blueprint": "Main-20261015 six-functors-basics direct-images proof paragraph (3), separable-closure descent infrastructure; realizes the inherited blueprint.from.place. This created-node chain has null blueprint.from.node, as confirmed by blueprint_refs ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic geometric inverse image from profinite tests on sets, used to identify the existing point morphism, not to replace any stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of left adjoints with a prescribed mate, used after the descent equalizer has already identified the right adjoints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-98a1525c5",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-98a1525c5 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full, and Bhatt–Scholze Example 4.1.10 (pp. 27-28: separable closure, profinite continuous G-sets, finite jointly surjective covers). The statement is byte-identical to live, which is still unsplit, so the delivery is not superseded; no repair note and no new nodes. The added stmt_dep lem-weil-pbc-profinite-point-pullback supplies the set-valued point morphism, which the abelian sk-def-sfb-pullback-from-point lacks; accepted. Steps checked: (1) dense-subsite hypotheses met by lem-sfb-field-profinite-galois-site. (2) Free-arrow formula and composite (fh, c h^*b) match the action-site composition, including for noncommutative G. (3) Covers and induced topology: (f,b)=(f,1)(1,b) with (1,b) invertible, sieves pass through the free covers. (4) Prof is small with finite limits and K=underline G; (1,b)^* is a left action and (f,b)^*=b·f^*. (5) The kernel pair via (g,h,p)->(g,gh,p) has projections (pr_P,1) and (pr_P,h), so the equalizer means universal internal fixedness. (6) Inv is right adjoint to trivial inflation. (7) Conjugate lemma orientation checked: delta is the inverse of the step-6 comparison and alpha is unique. (8) Ring operations for n=0,1,2 and naturality in ring maps. Edge cases G=1, P empty, infinite and noncommutative G, imperfect k. No duplicate found by rg over dag/nodes; neighbouring nodes are module or derived level, and lem-sfb-geometric-sections-adjunction cites the item. No SGA. Tool uses accepted: lem-weil-pbc-profinite-point-pullback (generic set point morphism) and the conjugate Mathlib leaf (declaration unnecessary). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldActionToposCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTopos.field_action_topos_coefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.Cond",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.transport",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.FieldSheaves",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.coefficientSet",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.arithmetic",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.Normalization",
+   "AlgebraicGeometry.ProEtale.FieldActionTopos.field_action_topos_coefficients"
+  ],
+  "file": "lean/Sheaf/Paper/FieldActionToposCoefficients.lean",
+  "statement": "theorem field_action_topos_coefficients (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] : Nonempty (Normalization k Ω)",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair H2: plain AsSmall profinite-site, group-action and coefficient data are cited through def-sfb-profinite-action-base-coefficients, existing on the landed module, not through its presentation theorem. H4: uses the recorded freeAction, and spells out qcqs and test forgetful functors. H3: geometric_galois fixes the actual Spec.map sigma automorphisms by both pullback coordinates; no relabeling by a group automorphism remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce59a902a",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 902340878c53 (H2/H4/H3); all three fixed. H2: theorem stmt_dep lem-sfb-profinite-action-coherent-presentation removed. New def-sfb-profinite-action-base-coefficients has an existing:true record on the landed ProfiniteActionCoherentPresentation: 12 decls (Base, parameter, baseCoverage, base_site, groupPresheaf, group_isSheaf, Actions, base_transport, coefficient, coefficientSets(_isSheaf), trivialCoefficient), all present; statement verbatim (lines 72-73); TeX matches the Lean; H12 fields OK; not on base; no other owner. H4: freeAction used, def-sfb-profinite-action-parameters cited; qcqsOver/testOver spelled out as qcqsInclusion⋙forget and profiniteToProEtOf⋙forget; def-weil-pbc-proetale-qcqs-subsite cited. Both added deps are landed with lean records, allowed by stage2_delivery STMT_DEPS MAY GAIN LANDED NODES; FieldProfiniteGaloisSite is a private proof import only. H3: geometric_galois pins ⟨𝟙,const σ⟩ by pullback.fst unchanged and pullback.snd ≫ Spec.map σ. Orientation checked: Spec.map g ↦ Spec.map(g∘σ) = g*σ, matching arrow (g·b(t), f(t)); consistent with comp label f.label*K.map g.label (⟨1,σ⟩≫⟨1,τ⟩=⟨1,στ⟩ = A_τ∘A_σ), so the structure is satisfiable; ψ-twist counter-model excluded up to inner twists (naturally isomorphic). Item node differs from live only in lean/stmt_deps; record statement verbatim; no line >100; docstrings with 8 steps; sorry only; edge cases (P=∅, n=0, G=1, noncommutative G, non-discrete R) unchanged. Advisory: SetActions owned by base-cited theorem node lem-sfb-action-topos-geometric-restriction. No compile: no FIX made."
+ }
+}

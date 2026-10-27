@@ -1,0 +1,253 @@
+{
+ "id": "lem-a1-separated-affine-pair-neighbourhoods",
+ "kind": "statement",
+ "title": "Separatedness from pairwise affine separated neighbourhoods",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Suppose that for every pair of affine open subschemes $A,B\\subseteq X$ there is an open subscheme $W\\subseteq X$ containing $A\\cup B$ such that $W$ is separated over $S=\\operatorname{Spec}\\mathbf Z$, meaning that $\\Delta_W:W\\to W\\times_S W$ is a closed immersion [def-weil-proper-morphism, def-weil-closed-immersion, def-pc-fibre-product]. Then the absolute diagonal $\\Delta_X:X\\to X\\times_SX$ is a closed immersion. Consequently $X$ is separated and quasi-separated [def-weil-quasi-separated-morphism]. There is no quasi-compactness hypothesis on $X$ or on the witnessing opens $W$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0AP6, paragraph following definition-ind-quasi-affine: separatedness from a separated open containing each pair of affine opens; explicit absolute-diagonal formulation"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}\\mathbf Z$, $Y=X\\times_SX$, with projections $p,q$. For each pair of affine opens $A,B$ choose a witnessing separated open $W$. By [lem-weil-pbc-open-fibre-product], $W\\times_SW$ is the open $p^{-1}W\\cap q^{-1}W$ in $Y$. These opens cover $Y$: for $y\\in Y$, choose affine neighbourhoods $A$ of $p(y)$ and $B$ of $q(y)$; their witness contains both projections, hence $y$. For each such open take an affine open cover, which exists since it is a scheme. Together these give an affine open cover $(T_i)$ of $Y$, each $T_i$ contained in one $W\\times_SW$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AP6, paragraph after definition-ind-quasi-affine; Schemes Tag 01JR, lemma-open-fibre-product"
+   }
+  },
+  {
+   "text": "Fix one witness $W$. The inverse image of $W\\times_SW=p^{-1}W\\cap q^{-1}W$ under $\\Delta_X$ is exactly $W$, since $p\\Delta_X=q\\Delta_X=\\mathrm{id}_X$. By [lem-weil-pbc-open-preimage-fibre-product] it is the pullback open subscheme. Its map to $W\\times_SW$ is $\\Delta_W$: both projections are the identity on $W$, so uniqueness in [def-pc-fibre-product] identifies the maps. Thus for $T_i\\subseteq W\\times_SW$, the restricted morphisms $\\Delta_X^{-1}(T_i)\\to T_i$ and $\\Delta_W^{-1}(T_i)\\to T_i$ are identical, including their structure-sheaf maps.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tag 01JR, lemma-open-fibre-product, applied to the diagonal; explicit universal-property calculation"
+   }
+  },
+  {
+   "text": "The hypothesis says $\\Delta_W$ is a closed immersion. Apply part (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] to the affine open $T_i$ of $W\\times_SW$. Its inverse image is affine and the induced ring map on sections is surjective. Step 2 supplies exactly these assertions for $\\Delta_X$ over $T_i$. Since the $T_i$ cover $Y$, part (2) of the same cited criterion proves that $\\Delta_X$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 01QO, lemma-closed-immersion, (1) implies (2) and (3) implies (1)"
+   }
+  },
+  {
+   "text": "By [def-weil-proper-morphism], the closed-immersion assertion for $\\Delta_X$ means that $X\\to S$ is separated. Apply [lem-pc-separated-quasi-separated] to this structure morphism to conclude that it is quasi-separated, hence $X$ is quasi-separated. Every cover above may be infinite; no step takes a finite subcover or assumes $X$ or $W$ quasi-compact.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tag 01KK, definition-separated, and following paragraph, using Tag 01K7, lemma-closed-immersion-quasi-compact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-scheme",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0AP6 paragraph after definition-ind-quasi-affine, expanded by the affine-target criterion of Morphisms Tag 01QO and the open-product formula of Schemes Tag 01JR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme X is separated if every pair of affine opens is contained in a separated open subscheme; cover the target of the diagonal by W times W",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme X is separated if every pair of affine opens is contained in a separated open subscheme; cover the target of the diagonal by W times W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\"], \"digest\": \"34e484f38307b8fb\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separatedness of a scheme follows from the existence of a separated open neighbourhood containing each pair of affine open subschemes",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:19:30Z\", \"tool\": \"leanfinder\", \"query\": \"Separatedness of a scheme follows from the existence of a separated open neighbourhood containing each pair of affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\"], \"digest\": \"eab99fac6e087b68\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme is separated when each pair of affine opens is contained in a separated open subscheme",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:39Z\", \"tool\": \"leansearch\", \"query\": \"A scheme is separated when each pair of affine opens is contained in a separated open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.IsSeparated.mk\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\"], \"digest\": \"5058fed7ba278059\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"IsAffineOpen\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:17:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparated\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "isSeparated_of|IsSeparated.*[Uu]nion|[Pp]air.*[Ss]eparated",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T06:17:38Z\", \"tool\": \"grep\", \"query\": \"isSeparated_of|IsSeparated.*[Uu]nion|[Pp]air.*[Ss]eparated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"be4697eb5283d0d3\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "separated.*[Pp]air|[Pp]air.*separated|exists.*[Ss]eparated|[Ss]eparated.*exists",
+   "subdirectory": "AlgebraicGeometry/Morphisms/Separated.lean",
+   "results": "{\"t\": \"2026-10-22T06:19:19Z\", \"tool\": \"grep\", \"query\": \"separated.*[Pp]air|[Pp]air.*separated|exists.*[Ss]eparated|[Ss]eparated.*exists\", \"sub\": \"AlgebraicGeometry/Morphisms/Separated.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: separatedness of affine or quasi-affine schemes and locality of a morphism on its target do not supply the pairwise separated-neighbourhood criterion for an arbitrary scheme. The required cover of the absolute diagonal target must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "isSeparated_of|[Pp]air.*[Ss]eparated|[Ss]eparated.*[Nn]eigh",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T07:34:26Z\", \"tool\": \"grep\", \"query\": \"isSeparated_of|[Pp]air.*[Ss]eparated|[Ss]eparated.*[Nn]eigh\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"be4697eb5283d0d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits define separatedness, give affine/quasi-affine cases or quasi-separatedness, or construct directed covers; none gives the pairwise separated-neighbourhood criterion. isSeparated_of_injective concerns injective morphisms, not the present hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a scheme is a closed immersion if any two affine opens are contained in a separated open",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:34:26Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal of a scheme is a closed immersion if any two affine opens are contained in a separated open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.mk\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\"], \"digest\": \"4838275e05ddf4f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits define separatedness, give affine/quasi-affine cases or quasi-separatedness, or construct directed covers; none gives the pairwise separated-neighbourhood criterion. isSeparated_of_injective concerns injective morphisms, not the present hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsAffineOpen",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:34:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsAffineOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: No declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is separated if every pair of affine open subschemes lies in a separated open subscheme",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:34:31Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme is separated if every pair of affine open subschemes lies in a separated open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.Scheme.isSeparated_iff\"], \"digest\": \"43665f059e182f70\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits define separatedness, give affine/quasi-affine cases or quasi-separatedness, or construct directed covers; none gives the pairwise separated-neighbourhood criterion. isSeparated_of_injective concerns injective morphisms, not the present hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separatedness from a directed cover by separated open subschemes without quasi compactness",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:35:25Z\", \"tool\": \"leanfinder\", \"query\": \"Separatedness from a directed cover by separated open subschemes without quasi compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.Scheme.Cover.LocallyDirected.ofIsBasisOpensRange\", \"AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_X\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\"], \"digest\": \"88718154f47dc8b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits define separatedness, give affine/quasi-affine cases or quasi-separatedness, or construct directed covers; none gives the pairwise separated-neighbourhood criterion. isSeparated_of_injective concerns injective morphisms, not the present hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-ind-quasi-affine-permanence",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber Tag 0APK input to lem-a1-affine-hc0: separatedness needed after its affine-local reduction. Extracts old permanence Steps 5-7: pairwise separated neighbourhoods, cover of the absolute diagonal target, and closed-image/topology/sheaf-surjectivity check.",
+   "via": [
+    "lem-a1-ind-quasi-affine-permanence",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-separated-affine-pair-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Expanded the pairwise-neighbourhood observation into an affine cover of the absolute diagonal target, an explicit pullback identification, and applications of the existing closed-immersion affine-cover criterion and separated-implies-quasi-separated node. No new nodes; no quasi-compactness assumption. Retained the statement and inherited search records, and added the actual Q02 searches.",
+  "blueprint": "Supports the Gabber 0APK input below lem-a1-affine-hc0, specifically the separatedness argument of the ind-quasi-affine permanence branch recorded in blueprint.from.place; realizes the existing route without changing the Rankin–Selberg unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic scheme-theoretic tool for the absolute diagonal argument; it does not replace a step of the Rankin–Selberg unit and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic scheme-theoretic tool for the absolute diagonal argument; it does not replace a step of the Rankin–Selberg unit and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Generic scheme-theoretic tool for the absolute diagonal argument; it does not replace a step of the Rankin–Selberg unit and no node of that unit states this general fact."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme-theoretic tool for the absolute diagonal argument; it does not replace a step of the Rankin–Selberg unit and no node of that unit states this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-c3b8ac136",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c3b8ac136 (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes and there is no repair note. The statement is true: it is the general form of the Stacks argument in more-morphisms.tex:19528-19534 (Tag 0AP6, paragraph after definition-ind-quasi-affine) that a scheme is separated when every two affine opens lie in a separated open. It assumes no quasi-compactness. Its stmt_deps match the notions it uses. The only citer, lem-a1-ind-quasi-affine-permanence (clause 3, with W = A ∪ B quasi-affine), uses exactly this hypothesis. No duplicate found: grep over the DAG and blueprint_refs search turned up nothing with the same content. Step 1: lem-weil-pbc-open-fibre-product applies with U = S (Tag 01JR, schemes.tex:3196). The opens p^-1W ∩ q^-1W cover X ×_S X by choosing affine neighbourhoods of the two projections of a point; affine covers of these opens give the affine cover T_i. Step 2 (marked elementary): Δ_X^-1(W ×_S W) = W, and the restriction of Δ_X is Δ_W by uniqueness in the fibre product, via the open-preimage pullback lemma. Step 3: parts (1) and (2) of lem-weil-pbc-closed-immersion-affine-cover-criterion apply as stated (Tag 01QO, morphisms.tex:56, (1)⇒(2) and (3)⇒(1)). Step 4: separated holds by def-weil-proper-morphism and quasi-separated by lem-pc-separated-quasi-separated. Edge cases checked: empty X, affine X, infinite disjoint unions, and the doubled-origin line (the hypothesis correctly fails). I accept the four declared generic tool uses, all Mathlib-status scheme lemmas. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedAffinePairNeighbourhoods",
+  "declaration": "AlgebraicGeometry.Scheme.separated_of_affine_pair_neighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedAffinePairNeighbourhoods.lean",
+  "statement": "theorem separated_of_affine_pair_neighbourhoods (X : Scheme.{u}) (h : ∀ A B : X.Opens, IsAffineOpen A → IsAffineOpen B → ∃ W : X.Opens, A ⊔ B ≤ W ∧ W.toScheme.IsSeparated) : IsClosedImmersion (pullback.diagonal (terminal.from X)) ∧ X.IsSeparated ∧ QuasiSeparated (terminal.from X)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28dd8cb43",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0AP6 clause by clause: arbitrary Scheme.{u}; ∀ affine opens A B, ∃ open W with A ⊔ B ≤ W and W.toScheme.IsSeparated (closed-immersion diagonal over the terminal scheme, i.e. Spec ULift ℤ); conclusions IsClosedImmersion (pullback.diagonal (terminal.from X)) ∧ X.IsSeparated ∧ QuasiSeparated (terminal.from X). No quasi-compactness, extra instance or universe restriction. Recorded dependency declarations used directly (IsSeparated listed in def-weil-proper-morphism declarations; QuasiSeparated record). Node differs from live only in lean; lean.statement verbatim; live has no lean binding yet. Docstrings carry source place, blueprint id and all 4 proof steps; sorry only, no defs. Report has Worker report and Second reading sections. Own search of Mathlib Separated.lean: no duplicate. Edge cases (empty X, affine X, A=B/empty, infinite disjoint unions, doubled origin) checked. No change, so no compile."
+ }
+}

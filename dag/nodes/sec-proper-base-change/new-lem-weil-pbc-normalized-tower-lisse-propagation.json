@@ -1,0 +1,135 @@
+{
+ "id": "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+ "kind": "statement",
+ "title": "Normalized tower lissity propagation from native level-zero models",
+ "statement": "theorem normalizedTower_lisse_of_native_strata\n    (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (S : Stratification X) (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)))\n    (hnative : ∀ (i : Fin S.n) (q : ℤ),\n      ∃ c : (proEtaleSheafInverseImage (S.immersion i) CommRingCat.{u + 1}).obj\n          (adicLisseConstantRing X (A ⧸ d.ideal ^ (0 + 1))) ≅\n          adicLisseConstantRing (S.domain i) (A ⧸ d.ideal ^ (0 + 1)),\n        NormalizedNativeSieveFiniteLisse (S.domain i)\n          (A ⧸ d.ideal ^ (0 + 1))\n          ((proEtaleRingModulePullback (S.immersion i)\n            (adicLisseConstantRing X (A ⧸ d.ideal ^ (0 + 1)))\n            (adicLisseConstantRing (S.domain i) (A ⧸ d.ideal ^ (0 + 1))) c).obj\n            ((pbcRestrict (pbcLevelConstantComparison X d 0).hom).obj\n              ((DerivedCategory.homologyFunctor _ q).obj (M.level 0))))) :\n    ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule (S.immersion i)\n        (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage (S.immersion i)).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback (S.immersion i)\n                ((pbcAdicRings X d).obj (op n))).obj (M.level n)))) ",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I; finite refinement and nilpotent propagation in local-effectivity step 3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-constructible-stratification",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Restrict each level along pbcLevelConstantComparison to obtain a native constant-coefficient complex K_n. Exact restriction transfers the common upper bound. At level zero use finite_native_models_relative_lisse for the supplied arbitrary coefficient isomorphism. Exact inverse-image homology and the identity-coefficient pullback comparison give relative finite lissity of the pulled-back K_0.",
+   "uses": [
+    "lem-weil-pbc-finite-native-relative-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  },
+  {
+   "text": "Induct through successive quotient maps A/I^(n+2) to A/I^(n+1). Each map is surjective and its kernel has square zero: I^(2(n+1)) lies in I^(n+2). The coefficient-comparison naturality square and uniqueness of left adjoints identify derived scalar extension of K_(n+1) with K_n using tower normalization. Apply relative_finite_lisse_of_nilpotent_reduction and the induction hypothesis.",
+   "uses": [
+    "lem-weil-pbc-relative-nilpotent-lissity",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  },
+  {
+   "text": "The derived pullback/restriction comparison and exact restriction homology identify the native conclusion with the exact coefficient-restricted cohomology in the statement, independently for each stratum and degree.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-native-relative-lisse",
+  "lem-weil-pbc-relative-nilpotent-lissity",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized adic tower level zero finite lisse models propagate to all nilpotent quotient levels",
+   "results": "No matching theorem; only generic adic completion and locally constant module results.",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRelativelyFiniteLisseModule",
+   "results": "Unknown project identifier outside the project library.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTower_lisse_of_native_strata",
+   "results": "New declaration only.",
+   "date": "2026-10-27",
+   "verdict": "No prior declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTowerCommonLisseStrata",
+  "group": "J4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normalized-tower-common-lisse-strata",
+   "place": "Proof steps 2--3; nilpotent propagation",
+   "via": [
+    "lem-weil-pbc-normalized-tower-common-lisse-strata"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedTowerLissePropagation",
+  "file": "lean/Sheaf/Paper/NormalizedTowerLissePropagation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalizedTower_lisse_of_native_strata",
+  "statement": "theorem normalizedTower_lisse_of_native_strata\n    (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (S : Stratification X) (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)))\n    (hnative : ∀ (i : Fin S.n) (q : ℤ),\n      ∃ c : (proEtaleSheafInverseImage (S.immersion i) CommRingCat.{u + 1}).obj\n          (adicLisseConstantRing X (A ⧸ d.ideal ^ (0 + 1))) ≅\n          adicLisseConstantRing (S.domain i) (A ⧸ d.ideal ^ (0 + 1)),\n        NormalizedNativeSieveFiniteLisse (S.domain i)\n          (A ⧸ d.ideal ^ (0 + 1))\n          ((proEtaleRingModulePullback (S.immersion i)\n            (adicLisseConstantRing X (A ⧸ d.ideal ^ (0 + 1)))\n            (adicLisseConstantRing (S.domain i) (A ⧸ d.ideal ^ (0 + 1))) c).obj\n            ((pbcRestrict (pbcLevelConstantComparison X d 0).hom).obj\n              ((DerivedCategory.homologyFunctor _ q).obj (M.level 0))))) :\n    ∀ (i : Fin S.n) (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule (S.immersion i)\n        (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage (S.immersion i)).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback (S.immersion i)\n                ((pbcAdicRings X d).obj (op n))).obj (M.level n)))) ",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T222720-L-685757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T012947-L-2352163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-corank-one-centralizer-reductivity-test",
+ "kind": "statement",
+ "title": "Reductivity detected by codimension-one torus centralizers",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $H$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Closed subgroup schemes are as in [def-sc-group-scheme-subgroup]. A torus is a closed subgroup isomorphic to $\\mathbf G_m^r$ for some $r\\geq0$, with $\\mathbf G_m(A)=A^\\times$; maximal means maximal among these subgroups. A smooth affine group is unipotent if all its geometric points in a faithful finite-dimensional matrix representation satisfy $(u-I)^n=0$ for some $n\\geq1$. Reductive means having no nontrivial smooth connected normal unipotent closed subgroup. Let $T\\subseteq H$ be a maximal torus with scheme-theoretic centralizer $C_H(T)=T$. Here $C_H(K)(A)$ consists of elements commuting with $K(A')$ after every commutative $A$-algebra extension $A'$. Put $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and let $\\Psi\\subseteq X\\setminus\\{0\\}$ be the nonzero character weights of the conjugation action of $T$ on $\\operatorname{Lie}(H)$, the tangent space at the identity [def-sc-scheme-tangent-space]. For $\\alpha\\in\\Psi$, put $L_\\alpha=X\\cap\\mathbf Q\\alpha$ and $T_\\alpha=\\operatorname{Spec}k[X/L_\\alpha]\\subseteq T=\\operatorname{Spec}k[X]$, where $k[M]$ is the group algebra with basis $e^m$ and multiplication $e^me^n=e^{m+n}$. Thus $T_\\alpha$ is the largest torus in $\\ker\\alpha$ and has codimension one. Then $H$ is reductive if and only if $C_H(T_\\alpha)$ is reductive for every $\\alpha\\in\\Psi$. This includes $\\Psi=\\varnothing$. All weights are torus characters; there is no restriction on characteristic.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Lemma 3.1.10, printed p.87, full statement, including empty nonzero-weight set; torus kernels are defined by the saturated character subgroup, not by their possibly nonreduced scheme-theoretic identity components."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "First check the subtori in the statement. Choose $T\\simeq\\mathbf G_m^r$. Characters correspond to the group-like Laurent monomials by [lem-sfb-group-algebra-group-like-basis], so $X\\simeq\\mathbf Z^r$. For nonzero $\\alpha$, $L_\\alpha=X\\cap\\mathbf Q\\alpha$ is a rank-one saturated subgroup: $nx\\in L_\\alpha$, $n\\ne0$, implies $x\\in\\mathbf Q\\alpha$. Thus $X/L_\\alpha$ is finitely generated torsion-free, and is free by [lem-trf-fg-torsionfree-group-free]; its rank is $r-1$ by tensoring with $\\mathbf Q$. The quotient of group algebras defines the displayed closed inclusion, and [lem-sfb-diagonalizable-group-geometric-criteria] makes $T_\\alpha$ a split torus of rank $r-1$. The restriction of $\\alpha$ is zero since $\\alpha\\in L_\\alpha$. If a torus $S\\subseteq\\ker\\alpha$ is given, every $x\\in L_\\alpha$ has $nx=m\\alpha$ for some $n>0$; its restriction to $S$ is torsion, hence zero since the character group of a split torus is free. Therefore $S$ factors through $T_\\alpha$, verifying the largest-torus assertion. If $H$ is reductive, apply [lem-sfb-reductive-torus-fixed-subgroup] to each $T_\\alpha\\subseteq H$. It gives exactly the required reductivity of $C_H(T_\\alpha)$.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "lem-trf-fg-torsionfree-group-free",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-reductive-torus-fixed-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "For the converse assume every $C_H(T_\\alpha)$ is reductive. Let $N\\subseteq H$ be an arbitrary smooth connected normal unipotent closed subgroup; it suffices to prove $N=1$. Write $\\mathfrak h=\\operatorname{Lie}(H)$, $\\mathfrak n=\\operatorname{Lie}(N)$, and use the bijections $E_{H,R}:\\mathfrak h\\otimes_kR\\to\\ker(H(R[\\delta])\\to H(R))$ and the representation $\\operatorname{Ad}_H:H\\to\\operatorname{GL}(\\mathfrak h)$ of [lem-sfb-affine-group-dual-number-calculus]; the conjugation action of $T$ on $\\mathfrak h$ in the statement is $\\operatorname{Ad}_H|_T$. By its closed-subgroup clause, $\\mathrm di:\\mathfrak n\\to\\mathfrak h$ is injective and $E_{H,R}$ maps $\\mathfrak n\\otimes_kR$ onto $N(R[\\delta])\\cap\\ker(H(R[\\delta])\\to H(R))$. For $t\\in T(R)$ and $u\\in\\mathfrak n\\otimes_kR$, normality [def-sc-group-scheme-subgroup] over the algebra $R[\\delta]$ gives $tE_{H,R}(u)t^{-1}\\in N(R[\\delta])$, and this element still reduces to $e$; hence $\\operatorname{Ad}_H(t)u\\in\\mathfrak n\\otimes_kR$, and likewise for $t^{-1}$. Thus $t\\mapsto\\operatorname{Ad}_H(t)|_{\\mathfrak n\\otimes_kR}$ is a family of group homomorphisms $T(R)\\to\\operatorname{GL}(\\mathfrak n)(R)$, natural in $R$, hence (Yoneda on affine $k$-schemes) a homomorphism of $k$-group schemes $\\rho:T\\to\\operatorname{GL}(\\mathfrak n)$ for which $\\mathrm di$ is equivariant. Apply [lem-sfb-split-torus-representation-weight-decomposition] to $(\\mathfrak n,\\rho)$: it is the direct sum of its character weight spaces $\\mathfrak n_\\chi$. Equivariance and injectivity of $\\mathrm di\\otimes_kR$ give $\\mathfrak n_\\chi\\subseteq\\mathfrak h_\\chi$. In particular any nonzero $\\chi$ for which $\\mathfrak n_\\chi\\ne0$ belongs to the set $\\Psi$ of the statement.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "For any subtorus $S\\subseteq T$, put $C_S=C_H(S)$ and $W_S=N\\times_H C_S$. The centralizer theorem [lem-sfb-torus-centralizer-smooth-connected] (here $\\bar k=k$, so connected is geometrically connected) makes $C_S$ a smooth connected closed subgroup representing the centralizer functor. The fibre product [def-pc-fibre-product] is a closed subgroup of $N$ and of $H$; on affine coordinate rings it is a quotient of $k[N]$, hence is affine of finite type. Its points are $W_S(A)=N(A)\\cap C_S(A)$: exactly the elements of $N$ fixed by conjugation by $S$ after every algebra extension. Apply [lem-sfb-torus-fixed-scheme-smooth] with $X=N$, the action $S\\times N\\to N$ restricted from conjugation by normality of $N$, and $F=W_S$; $N$ is smooth affine of finite type, so $W_S$ is smooth. For the tangent space, [lem-sfb-lie-normalizer-centralizer-invariants] with $G=H$, $K=S$, $C=C_S$ gives $\\operatorname{Lie}(C_S)=\\mathfrak h^S$ inside $\\mathfrak h$. The closed-subgroup clause of [lem-sfb-affine-group-dual-number-calculus] with $R=k$, applied to $W_S$, $N$ and $C_S$ inside $H$, identifies each tangent space with the points of $H(k[\\delta])$ over $e$ that lie in the subgroup; since $W_S(k[\\delta])=N(k[\\delta])\\cap C_S(k[\\delta])$, $\\operatorname{Lie}(W_S)=\\mathfrak n\\cap\\mathfrak h^S$. As $\\rho$ of step 2 is the restriction of $\\operatorname{Ad}_H$ and $\\mathrm di\\otimes_kR$ is injective, $\\mathfrak n\\cap\\mathfrak h^S=\\mathfrak n^S$, the vectors $v$ with $\\rho_R(s)(v\\otimes1)=v\\otimes1$ for all $R$ and $s\\in S(R)$. These equalities concern the full fixed functor on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "def-pc-fibre-product",
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "lem-sfb-lie-normalizer-centralizer-invariants",
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\Psi$ and take $S=T_\\alpha$. Let $M_\\alpha=W_S^0$. By [lem-sfb-finite-type-group-identity-subgroup], this is a connected open and closed subgroup of $W_S$, in particular closed in $C_S$ and of finite type. It is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. It is unipotent: restricting a faithful matrix representation of $N$ to this closed subgroup is still faithful, and every geometric matrix remains unipotent. For $c\\in C_S(k)$, conjugation preserves $N$ by normality, and preserves $C_S$ because $c$ commutes with $S$; consequently it preserves $W_S$ as a subgroup scheme. It fixes the identity, so it preserves the connected component $M_\\alpha$ with its open-subscheme structure. As $C_S$ is smooth, [lem-sfb-smooth-ambient-normality-geometric] makes $M_\\alpha$ normal in $C_S$. Reductivity of $C_S$, which is the converse hypothesis for this $\\alpha$, now gives $M_\\alpha=1$. Since $M_\\alpha\\hookrightarrow W_S$ is open and contains the identity, every dual-number tangent vector at the identity factors through it (its underlying space has one point). Thus $\\operatorname{Lie}(W_S)=\\operatorname{Lie}(M_\\alpha)=0$ by [def-sc-scheme-tangent-space]. Combined with step 3, $\\mathfrak n^{T_\\alpha}=0$.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-smooth-ambient-normality-geometric",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "If $v\\in\\mathfrak n_\\alpha$ with $\\alpha\\in\\Psi$, then every $t\\in T_\\alpha(R)$ acts on $v\\otimes1$ by the scalar $\\alpha_R(t)=1$. Hence $\\mathfrak n_\\alpha\\subseteq\\mathfrak n^{T_\\alpha}=0$ by step 4. Step 2 says these are all possible nonzero character weights of $\\mathfrak n$. Its direct-sum decomposition therefore gives $\\mathfrak n=\\mathfrak n_0=\\mathfrak n^T$. If $\\Psi$ is empty the same conclusion follows immediately from step 2; no choice of a character was made.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "Take $S=T$ in step 3 and let $M=W_T^0$. The identity-component result [lem-sfb-finite-type-group-identity-subgroup] and smooth restriction [lem-weil-pbc-smooth-restrict-open-subschemes] show that $M$ is a smooth connected closed subgroup of $N$. It is unipotent by restriction of the same faithful representation. The assumed scheme-theoretic equality $C_H(T)=T$ identifies $W_T$ with $N\\times_H T$, so $M\\hookrightarrow H$ factors as a closed subgroup inclusion $M\\hookrightarrow T$. Apply [lem-sfb-unipotent-to-multiplicative-trivial] to this homomorphism: the source is unipotent and the target is a torus, hence of multiplicative type. It is the trivial homomorphism, and is a monomorphism, so $M=1$. The open immersion $M\\hookrightarrow W_T$ induces an equality of tangent spaces at the identity, by the dual-number factorization just used in step 4 [def-sc-scheme-tangent-space]. Consequently step 3 gives $\\mathfrak n^T=\\operatorname{Lie}(W_T)=\\operatorname{Lie}(M)=0$.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  },
+  {
+   "text": "Steps 5 and 6 give $\\operatorname{Lie}(N)=T_{N/k,e}=0$. Since $\\kappa(e)=k$, [lem-sc-rational-tangent-cotangent-duality] identifies $T_{N/k,e}$ with $(\\mathfrak m_e/\\mathfrak m_e^2)^\\vee$, which is therefore zero; this is $\\operatorname{Lie}(N)$ in the sense of [lem-sfb-smooth-subgroup-tangent-generation]. Apply that node to the smooth connected affine group $G=N$, the empty finite family of smooth connected subgroups, and its trivial closed subgroup $K=1$. The empty family spans the zero tangent space, so that statement gives $N=1$. Since $N$ was an arbitrary smooth connected normal unipotent closed subgroup of $H$, this proves reductivity by its stated definition. The argument covers $H=1$, $T=1$, and $\\Psi=\\varnothing$.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the torus weight argument of Conrad, Lemma 3.1.10, printed p.87 (online; local copy WANTED), using Milne 10.12--10.21, 13.1, 17.59. The identity-component variation below avoids assuming connectedness of a fixed subgroup."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-group-algebra-group-like-basis",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-reductive-torus-fixed-subgroup",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "def-pc-fibre-product",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "lem-sfb-lie-normalizer-centralizer-invariants",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of the weight-space argument of Conrad Lemma 3.1.10 (printed p.87; online source, local PDF WANTED), using Milne 10.12--10.21, Theorem 13.1, Corollary 17.59 and the existing identity-component, normality and tangent-generation nodes. Testing arbitrary normal unipotent N and taking identity components avoids a separate fixed-subgroup connectedness lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group over an algebraically closed field with self centralizing maximal torus is reductive if the centralizer of every codimension one subtorus killed by a nonzero adjoint weight is reductive",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsLieAbelianOfIsCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R]\\n  [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra], IsLieAbelian ↥H\", \"doc\": \"If $ R $ is a principal ideal domain, $ L $ is an Artinian $ R $-module, and $ \\\\mathfrak{h} $ is a Cartan subalgebra of $ L $, then $ \\\\mathfrak{h} $ is an abelian Lie algebra (i.e., its Lie bracket sa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra Cartan/Killing-form and characteristic-zero radical statements are not reductivity of algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected affine group over an algebraically closed field with self centralizing maximal torus is reductive if the centralizer of every codimension one subtorus killed by a nonzero adjoint weight is reductive",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) (hα : α.IsNonZero) : finrank K (rootSpace H α) = 1\", \"doc\": \"For a non-zero weight $\\\\alpha$ in the Cartan subalgebra $\\\\mathfrak{h}$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the finite rank of the root space associated t\"}\n  {\"name\": \"LieAlgebra.IsKilling.corootSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) : LieSubmodule K H L\", \"doc\": \"For a weight $\\\\alpha : \\\\mathfrak{h} \\\\to K$, this constructs the Lie submodule of $\\\\mathfrak{h}$ obtained as the image of the coroot space $\\\\mathfrak{g}_\\\\alpha \\\\otimes_K \\\\mathfrak{g}_{-\\\\alpha} \\\\to \\\\mat\"}\n  {\"name\": \"Subgroup.centralizer\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"(s : Set G) : Subgroup G\", \"doc\": \"The centralizer of a subset $ S $ in a group $ G $ is the subgroup consisting of all elements of $ G $ that commute with every element of $ S $. This set is closed under multiplication and taking inve\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"module\": \"Mathlib.Algebra.Lie.Weights.IsSimple\", \"type\": \"[IsSimple K L] : (rootSystem H).IsIrreducible\", \"doc\": \"For a simple Lie algebra $ L $ over a field $ K $, the root system associated with $ L $ via the non-degenerate Killing form is irreducible.\"}\n  {\"name\": \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) : IsCompl α.ker (K ∙ coroot α)\", \"doc\": \"For any weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$ of a Lie algebra $L$ over a field $K$ with non-degenerate Killing form, the kernel of $\\\\alpha$ and the $K$-span of the coroot of $\\\\alph\"}\n  {\"name\": \"LieAlgebra.IsKilling.corootSpace_eq_bot_iff\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"{α : Weight K H L} : corootSpace α = ⊥ ↔ α.IsZero\", \"doc\": \"For a weight $\\\\alpha$, the coroot space associated with $\\\\alpha$ is the trivial subspace $\\\\{0\\\\}$ if and only if $\\\\alpha$ is the zero weight (i.e., $\\\\alpha(x) = 0$ for all $x$ in the Cartan subalgebra \"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(h : Module.finrank R V ≤ 1) : Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra Cartan/Killing-form and characteristic-zero radical statements are not reductivity of algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra Cartan/Killing-form and characteristic-zero radical statements are not reductivity of algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|[Uu]nipotent[Rr]adical|[Mm]aximal[Tt]orus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra Cartan/Killing-form and characteristic-zero radical statements are not reductivity of algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A self centralizing maximal torus detects trivial unipotent radical by reductivity of centralizers of kernels of all adjoint weights",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.IsKilling.iInf_ker_weight_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L], ⨅ α, LieModule.Weight.ker = ⊥\", \"doc\": \"The intersection of the kernels of all weights $\\\\alpha$ in the Lie algebra is the trivial submodule $\\\\{0\\\\}$, i.e., $\\\\bigwedge_{\\\\alpha : \\\\text{Weight } K H L} \\\\ker(\\\\alpha) = \\\\{0\\\\}$.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra Cartan/Killing-form and characteristic-zero radical statements are not reductivity of algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|unipotentRadical|maximalTorus",
+   "results": "{\"t\": \"2026-10-24T03:55:09Z\", \"tool\": \"grep\", \"query\": \"reductive|unipotentRadical|maximalTorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\"], \"digest\": \"d761836b500ad783\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group invariants, manifold Lie groups, or unrelated notions; none identifies the tangent space of a scheme-theoretic fixed subgroup in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductivity of a smooth connected affine algebraic group is detected by centralizers of codimension one subtori",
+   "results": "{\"t\": \"2026-10-24T03:55:09Z\", \"tool\": \"leansearch\", \"query\": \"Reductivity of a smooth connected affine algebraic group is detected by centralizers of codimension one subtori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"AddSubgroup.centralizer_univ\", \"Subgroup.centralizer_eq_top_iff_subset\", \"AddSubgroup.centralizer_eq_top_iff_subset\", \"Subalgebra.centralizer_eq_top_iff_subset\", \"LieAlgebra.hasCentralRadical_iff\", \"AddSubgroup.characteristic_centralizer\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\"], \"digest\": \"cf30fca27c5faec4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group invariants, manifold Lie groups, or unrelated notions; none identifies the tangent space of a scheme-theoretic fixed subgroup in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T03:55:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group invariants, manifold Lie groups, or unrelated notions; none identifies the tangent space of a scheme-theoretic fixed subgroup in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth affine algebraic group with a self centralizing maximal torus is reductive if all centralizers of corank one subtori coming from adjoint weights are reductive",
+   "results": "{\"t\": \"2026-10-24T03:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth affine algebraic group with a self centralizing maximal torus is reductive if all centralizers of corank one subtori coming from adjoint weights are reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instIsLieAbelianOfIsCartanSubalgebra\", \"LieAlgebra.IsSemisimple\"], \"digest\": \"99f1149cd7e53b73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group invariants, manifold Lie groups, or unrelated notions; none identifies the tangent space of a scheme-theoretic fixed subgroup in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent radical vanishes if its Lie algebra has no nonzero torus weights and the maximal torus is self centralizing",
+   "results": "{\"t\": \"2026-10-24T03:58:22Z\", \"tool\": \"leanfinder\", \"query\": \"The unipotent radical vanishes if its Lie algebra has no nonzero torus weights and the maximal torus is self centralizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\"], \"digest\": \"d463c339b67937f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group invariants, manifold Lie groups, or unrelated notions; none identifies the tangent space of a scheme-theoretic fixed subgroup in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-fibre-openness",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2)); Supporting proof of Proposition 3.1.9: Lemma 3.1.10, printed p.87, full statement, including empty nonzero-weight set; torus kernels are defined by the saturated character subgroup, not by their possibly nonreduced scheme-theoretic identity components.",
+   "via": [
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-corank-one-centralizer-reductivity-test",
+  "worker": "stage1",
+  "summary": "Checked full statement of Conrad Lemma 3.1.10, including empty weights and saturated torus kernels. Proved both implications with existing centralizer, fixed-scheme smoothness, normality, weight decomposition, dual-number calculus, centralizer-Lie and tangent-generation statements. No mathematical change to the item; inserted the existing closed-subgroup definition citation. Maintainer reader FIX: the delivered new differentiation and fixed-subspace node was dropped, since lem-sfb-affine-group-dual-number-calculus and lem-sfb-lie-normalizer-centralizer-invariants already give what steps 2 and 3 use; step 7 cites lem-sc-rational-tangent-cotangent-duality for the dual-number versus (m/m^2)^dual form of Lie.",
+  "blueprint": "The inherited ancestry is null (blueprint_refs.py ancestor prints None). The recorded from.place traces det-thm-sf-ctf-stability-direct-images proof (3), alteration input, through the integral Chevalley construction and Proposition 3.1.9 to Lemma 3.1.10. Steps 1--7 supply this exact corank-one criterion prerequisite without altering any unit or chapter route; no matching blueprint statement was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic restriction of a smooth scheme morphism to an open identity component; no new proof route, and no statement of this unit gives smooth restriction."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Step 7 only: identifies the dual-number tangent space at the k-rational identity with (m_e/m_e^2)^dual, the form of Lie used by lem-sfb-smooth-subgroup-tangent-generation; generic scheme fact, no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-14556a444",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-14556a444 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the duplicate candidates. Conrad's PDF is not available locally, so I checked the agent-written proof on its own terms; Milne 17.59 (p.371) gives the forward direction. The item statement is unchanged, apart from the added closed-subgroup stmt_dep. I tested it on H=T, H=1, rank 0, G_m acting on G_a, and a weight t^p in characteristic p. All seven steps are correct: saturated L_alpha and the largest-torus argument, weight containment, smoothness of W_S through the fixed-scheme node, normality of W_S^0 in C_S through the ambient-normality node, the weight-zero assembly, C_H(T)=T combined with unipotent-to-torus triviality, and empty-family tangent generation. FIX (2 points). (C5) The new node is true (I checked the fixed clause through R[eps] -> R', eps -> eps_R', and on mu_p), but it is redundant: two reviewed nodes already on the delivery base give what steps 2-3 use, lem-sfb-affine-group-dual-number-calculus (E_R, Ad, closed-subgroup kernel) and lem-sfb-lie-normalizer-centralizer-invariants (Lie(C)=g^K). I dropped the node and rewrote steps 2-3 with the few-line T-stability and Lie(W_S) = n meet h^S = n^S derivations. (C1) Step 7 used the (m_e/m_e^2)^dual form of Lie from the generation node without citing the identification; it now cites lem-sc-rational-tangent-cotangent-duality, added to tool_uses. I recomputed proof_deps, found no cycles, and nothing else cites the dropped node. Batch 5: all six flagged citations reach only generic trf facts (fg torsion-free => free, flat tensor, smooth fibre criterion, component openness, algebraic-space notions), none of them the trace formula or Poincare duality, so I accept them. No SGA; live still has the item unsplit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CorankOneCentralizerReductivity",
+  "declaration": "AlgebraicGeometry.ReductiveTorusCentralizer.corankOneCentralizer_reductive_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CorankOneCentralizerReductivity.lean",
+  "statement": "theorem corankOneCentralizer_reductive_iff {k : Type u} [Field k] [IsAlgClosed k] (H T : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] [ConnectedSpace H.X.left] (i : T ⟶ H) (hT : IsMaximalTorus i) (hself : ∀ (A : Type u) [CommRing A] [Algebra k A], centralizerPoints i A = Set.range (fun t : StandardGroupSchemes.affine k A ⟶ T.X ↦ t ≫ i.hom.hom)) (a : ModObj T.X H.X) (ha : a.smul = (i.hom.hom ⊗ₘ 𝟙 H.X) ≫ CategoryTheory.GrpObj.conj H.X) (Ψ : Set (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))) (hΨ : ∀ χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k), χ ∈ Ψ ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace k _ T H a χ ≠ ⊥) (S : Ψ → Grp (Over (Spec (.of k)))) (j : ∀ α : Ψ, S α ⟶ Grp.mk (CategoryTheory.GrpObj.ker α.val.hom.hom)) (hS : ∀ α : Ψ, MultiplicativeType.IsLargestSubtorus (j α)) (C : Ψ → Grp (Over (Spec (.of k)))) (c : ∀ α : Ψ, C α ⟶ H) (hc : ∀ α : Ψ, IsClosedSubgroupScheme (c α).hom.hom) (hC : ∀ (α : Ψ) (A : Type u) [CommRing A] [Algebra k A], centralizerPoints (j α ≫ Grp.ofHom (CategoryTheory.GrpObj.kerι α.val.hom.hom) ≫ i) A = Set.range (fun x : StandardGroupSchemes.affine k A ⟶ (C α).X ↦ x ≫ (c α).hom.hom)) : IsReductive H ↔ ∀ α : Ψ, IsReductive (C α)",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical T_alpha is supplied as the largest subtorus of the actual scheme-theoretic kernel, using MultiplicativeType.IsLargestSubtorus. This uniquely characterizes Spec k[X/(X intersect Q alpha)] with its inclusion, also for nonprimitive characters in characteristic p. The centralizer families are specified by closed inclusions and equality with centralizerPoints on all algebras. Uses the existing character tangent weight spaces and reductivity definitions; adds their three already-landed definition nodes to stmt_deps. No statement correction or new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f12cfa52f",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Only lean and 3 landed definition-node stmt_deps were added (tori-multiplicative-type, reductive-torus-centralizer-terminology, torus-character-tangent-weights); lean.statement is verbatim in the file. Clause by clause: IsMaximalTorus (closed, torus, maximal); hself = scheme-theoretic C_H(T)=T via centralizerPoints on all A-algebra extensions; ha pins the ModObj action to GrpObj.conj (x*y*x⁻¹); hΨ = nontrivial actual characters with nonzero weightSpace, so p-multiples are kept; S α/j α = IsLargestSubtorus inside the pullback kernel GrpObj.ker, which pins Spec k[X/(X∩Qα)] uniquely incl. α=pβ in char p; C α is a closed subgroup pinned by centralizerPoints of the composite inclusion; the conclusion is the iff. Edge cases: Ψ=∅, H=T=1, rank 1, G_m⋉G_a, one universe u; no extra assumptions. No duplicate theorem, no new defs, sorry only, docstrings carry source+blueprint+7 steps, imports per rule 7, lines ≤100, report has both sections. Compile not reproduced (no change). Advisory: the public SchemeTangentSpace import serves the original stmt_dep while the signature uses GrpObj.Lie."
+ }
+}

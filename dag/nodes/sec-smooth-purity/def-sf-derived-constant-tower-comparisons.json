@@ -1,0 +1,112 @@
+{
+ "id": "def-sf-derived-constant-tower-comparisons",
+ "kind": "definition",
+ "title": "Canonical derived constant-tower evaluation and exact-functor comparison",
+ "status": "split",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. Put $\\operatorname{Tow}(\\mathcal E)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal E)$ for $\\mathcal E=\\mathcal A,\\mathcal B$ [def-weil-inverse-system], and choose the ordinary unbounded derived categories of $\\mathcal A,\\mathcal B,\\operatorname{Tow}(\\mathcal A),\\operatorname{Tow}(\\mathcal B)$, with independent morphism universe bounds [def-weil-abstract-derived-category]. Let $C_{\\mathcal E}:\\mathcal E\\to\\operatorname{Tow}(\\mathcal E)$ be the constant functor and $E_n^{\\mathcal E}:\\operatorname{Tow}(\\mathcal E)\\to\\mathcal E$ evaluation at positive level $n$. Package the additive structure [def-weil-pbc-additive-functor] of $C_{\\mathcal E}$ by its preservation of binary products. For an additive exact functor $G$ (preserving finite limits and finite colimits [def-galois-exact-functor]), write $D(G)$ for its termwise localization, $c(G,H):D(H\\circ G)\\xrightarrow{\\sim}D(H)\\circ D(G)$ for the canonical composition comparison, and $\\iota_{\\mathcal E}:D(\\mathrm{id}_{\\mathcal E})\\xrightarrow{\\sim}\\mathrm{id}_{D(\\mathcal E)}$ for the identity comparison. Write $D(\\alpha)$ for the localized isomorphism induced by an ordinary natural isomorphism $\\alpha$. Define the canonical constant-tower evaluation by the composite\n$$s_n^{\\mathcal E}:D(E_n^{\\mathcal E})D(C_{\\mathcal E})\\xrightarrow{c(C_{\\mathcal E},E_n^{\\mathcal E})^{-1}}D(E_n^{\\mathcal E}C_{\\mathcal E})\\xrightarrow{D(\\epsilon_n^{\\mathcal E})}D(\\mathrm{id}_{\\mathcal E})\\xrightarrow{\\iota_{\\mathcal E}}\\mathrm{id}_{D(\\mathcal E)},$$\nwhere $\\epsilon_n^{\\mathcal E}:E_n^{\\mathcal E}C_{\\mathcal E}\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal E}$ is the ordinary constant/evaluation identity. For an additive exact functor $F:\\mathcal B\\to\\mathcal A$, let $F^{\\operatorname{Tow}}$ be postcomposition by $F$ and let $\\gamma_F:F^{\\operatorname{Tow}}C_{\\mathcal B}\\xrightarrow{\\sim}C_{\\mathcal A}F$ be the ordinary identity-component comparison. Define\n$$j_F:D(F^{\\operatorname{Tow}})D(C_{\\mathcal B})\\xrightarrow{c(C_{\\mathcal B},F^{\\operatorname{Tow}})^{-1}}D(F^{\\operatorname{Tow}}C_{\\mathcal B})\\xrightarrow{D(\\gamma_F)}D(C_{\\mathcal A}F)\\xrightarrow{c(F,C_{\\mathcal A})}D(C_{\\mathcal A})D(F).$$\nThese are specified composites of the canonical localization comparisons, with natural number index $k$ in Lean representing positive tower level $k+1$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-additive-functor",
+  "def-galois-exact-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6 / immersion comparison Step 5: canonical constant/evaluation and constant/exact-pullback comparisons j, s_n and s'_n in lem-sf-exact-tower-augmented-counit-evaluation; exact termwise localization as in Stacks derived.tex, Tag 015F, lemma-right-derived-exact-functor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived constant tower evaluation and interchange with an exact functor",
+   "results": "8 hits: CategoryTheory.constantPresheafAdj, CategoryTheory.Functor.constCompEvaluationObj_inv_app, CategoryTheory.Functor.constCompEvaluationObj_hom_app, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.constCompEvaluationObj, CategoryTheory.evaluationUncurried, CategoryTheory.lanEvaluationIsoColim, CategoryTheory.evaluation",
+   "date": "2026-10-22",
+   "verdict": "Ordinary comparisons and exact-derived ingredients only; attach the existing project constructions without duplicating them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived constant inverse sequence evaluation identity and exact functor constant diagram comparison",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.constCompEvaluationObj_inv_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.Functor.constComp_inv_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app, DerivedCategory.singleFunctorsPostcompQIso_inv_hom",
+   "date": "2026-10-22",
+   "verdict": "No specialized derived constant-tower definition in Mathlib; use the already published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedConstantTowerEvaluation|ringedConstantTowerPullback|ringedConstantTowerAdditive",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match in msearch service; project definitions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ringedConstantTowerEvaluation|ringedConstantTowerPullback|ringedConstantTowerAdditive in dag/nodes, lean/WeilConjectures, lean/Sheaf and lean/.lake/packages/mathlib/Mathlib; blueprint_refs.py search constant tower / constant evaluation / constant-tower",
+   "results": "The three declarations are in Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization; no occurrences in WeilConjectures or Mathlib and no definition node owns them. The theorem node lem-weil-pbc-constant-tower-pushforward-normalization lists them as helpers. Blueprint searches: constant tower has 2 matches (def-weil-pbc-completed-pullback, det-sp-tower-classes); constant evaluation has 0; constant-tower has 2 (det-sp-tower-classes, lem-weil-pbc-intrinsic-to-tower-complete). None defines these canonical composites.",
+   "date": "2026-10-22",
+   "verdict": "Add definition ownership by existing:true as explicitly requested in the independent H2 return; no new Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exact-tower-augmented-counit-evaluation",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization Step 6 / immersion comparison Step 5: normalized constant-tower evaluation and constant/exact-pullback isomorphisms for evaluation of the augmented counit.",
+   "via": [
+    "lem-sf-exact-tower-augmented-counit-evaluation",
+    "lem-sf-completed-pullback-mate-factorization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization",
+  "declaration": "CategoryTheory.ringedConstantTowerEvaluation",
+  "declarations": [
+   "CategoryTheory.ringedConstantTowerEvaluation",
+   "CategoryTheory.ringedConstantTowerPullback",
+   "CategoryTheory.ringedConstantTowerAdditive"
+  ],
+  "statement": "def ringedConstantTowerEvaluation\n    (A : Type uA) [Category.{vA} A] [Abelian A]\n    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] (n : ℕᵒᵖ) :\n    (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapDerivedCategory ⋙\n        ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅ 𝟭 (DerivedCategory A)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership requested by the independent H2 return. These unchanged declarations are explicit composites of mapDerivedCategoryCompIso, mapDerivedCategoryNatIso, mapDerivedCategoryIdIso and the ordinary identity-component comparisons, together with the constant-functor additive instance. They are not selected from the normalization theorem. No source module is copied or modified."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd647c885",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd647c885",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 0b1df570. The Lean module is byte-identical, and on the item only stmt_deps and lean.note text changed. Both theorem stmt_deps are dropped. The item now cites def-sbc-tower-derived-evaluation-interchange and def-coef-tower-derived-evaluation-transition (both landed existing:true owners) and the new def-sf-derived-constant-tower-comparisons, an existing:true record on the unchanged RingedConstantTowerPushforwardNormalization. Checked against live source l.44-83: s_n = compIso.symm ≫ NatIso(constCompEvaluationObj) ≫ IdIso and j_F = compIso.symm ≫ NatIso(compConstIso.symm) ≫ compIso match the node's composites and directions; they are explicit defs, not .choose. lean.statement is verbatim and declarations lists all 3. The node's stmt_deps exist; §5 fields are present with 3 search tools. No competing owner: side-live dag grep finds none, and def-pur-derived-constant-pullback-comparison and def-cbc-strict-constant-tower-operations are other notions. Mathematics re-read and unchanged: canonical j, t, s, d; L', counit and π pinned by IsRightDerivedFunctor, _hκ, _hadj, hπ; real helpers; all clauses, chains, identity and naturality squares; no product or IsIso assumption; universes independent. Advisory H9: two plain imports are justified as stmt_dep/proof_dep modules. No compile (no file changed)."
+ }
+}

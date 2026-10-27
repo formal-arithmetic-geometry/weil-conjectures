@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-tower-open-adjunction-unit-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the exact open adjunction unit in fixed tower coordinates",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a section-model base b as in [def-sp-tower-shriek-data]. Let j:U → T be an open immersion, g its recorded Geometry, and o an Open operation with its specified ordinary adjunction, ordinary evaluation comparisons and termwise derived unit. For every n and every object C in the ordinary unbounded derived category of coefficient systems on U, evaluation of the derived unit, followed by the specified pullEvaluation at j_!C and finite inverse image of openEvaluation at C, equals the unit of the finite derived open adjunction at C_n. The finite adjunction is obtained from finiteOpenAdjunction by canonical right derivation and the exact-pullback comparison rightDerivedFunctorIsoMapDerivedCategory. This asserts only one adjunction-unit equation: it has no tensor, projection arrow, compactification, Tor hypothesis or invertibility assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), evaluation of the open projection transpose; Open.unit_evaluation and Open.unit_termwise"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Substitute Open.unit_termwise and the definition of openEvaluation as exact localization of its ordinary comparison. Transport generic pullEvaluation_model through Geometry.coefficients, transitions and pull_eq; ordinaryPullEvaluation_eq for both Geometry and Open identifies the ordinary comparison used there. Apply Open.unit_evaluation degree by degree to complexes. Naturality and the associativity and identity laws of mapDerivedCategoryCompIso cancel the localization comparison factors. The finite right-derived adjunction transported along rightDerivedFunctorIsoMapDerivedCategory has the same localized ordinary unit by its canonical unit factorization. Equality descends along the ordinary derived localization, yielding the displayed unit equation. This uses the universal property of localization, not faithfulness of tower evaluation.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), evaluation of the open projection transpose; Open.unit_evaluation and Open.unit_termwise"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), evaluation of the open projection transpose; Open.unit_evaluation and Open.unit_termwise"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived open extension by zero adjunction unit commutes with evaluation of a tower of sheaves at a finite level",
+   "results": "Eight ordinary sheaf restriction and sheafification unit comparisons; none concerns the exact localization of the recorded varying-coefficient tower open adjunction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization_unit_app",
+   "results": "The generic localization unit formula in Mathlib.CategoryTheory.Localization.Adjunction; it does not identify the concrete Open and Geometry comparisons.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "open_adjunction_unit_evaluation|unit_termwise|pullEvaluation_model",
+   "results": "Mathlib grep found zero matches. Local source search found ordinary Open.unit_evaluation and Open.unit_termwise in SmoothPurityTowerShriekData, and generic Geometry.pullEvaluation_model in SemilinearGeometryDerived; no concrete derived open-unit evaluation theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerCompactSupportProjectionFormula",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (3), tower projection formula, evaluation of the open-unit transpose",
+   "via": [
+    "lem-sp-tower-compact-support-projection-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerOpenAdjunctionEvaluation",
+  "file": "lean/Sheaf/Paper/TowerOpenAdjunctionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.open_adjunction_unit_evaluation",
+  "statement": "theorem open_adjunction_unit_evaluation (b : Base l E)\n    {U T : Scheme.{u}} {j : U ⟶ T} [IsOpenImmersion j]\n    {g : Geometry l E b j} (o : Open l E b j g) (n : ℕ) (C : D l E U) :\n    (Ev l E U n).map (o.derivedAdjunction.unit.app C) ≫\n        (g.pullEvaluation n).hom.app ((openD l E b o).obj C) ≫\n        (proEtaleConstantRingDerivedPullback (R l E n) j).map\n          ((openEvaluation l E b o n).hom.app C) =\n      (Adjunction.unit\n        (((finiteOpenAdjunction l E b j n).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight\n          (proEtaleConstantRingPullback (R l E n) j).rightDerivedFunctorIsoMapDerivedCategory)).app\n        ((Ev l E U n).obj C)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.TowerCompactSupportProjectionFormula",
+  "worker": "stage3",
+  "summary": "Split only the concrete open-adjunction unit normalization from the unconditional open projection evaluation calculation. The item proves the tensor and transpose calculation; the main invertibility theorem is unchanged.",
+  "blueprint": "Integral direct-image proof paragraph (3), evaluation of the open-unit transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Uses only generic exact-localization comparison formulas for the actual semilinear system adjunction, without replacing any integral-adjunction step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T022740-L-416695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T022740-L-416695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

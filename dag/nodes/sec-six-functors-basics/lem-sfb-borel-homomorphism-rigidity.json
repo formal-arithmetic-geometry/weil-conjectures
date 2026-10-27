@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-borel-homomorphism-rigidity",
+ "kind": "statement",
+ "title": "Homomorphisms of connected affine groups are determined by restriction to a Borel",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G,H$ be smooth connected affine $k$-group schemes of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $B\\subseteq G$ be a Borel subgroup [def-sfb-borel-subgroup-scheme], a maximal smooth connected solvable closed subgroup scheme [def-sc-group-scheme-subgroup]. For any commutative $k$-algebra $R$, write $G_R=G\\times_k\\operatorname{Spec}R$, and likewise for $H_R$ and $B_R$; these are the scalar extensions of the group schemes [def-pc-fibre-product, def-weil-affine-spectrum]. If $f_1,f_2:G_R\\to H_R$ are homomorphisms of $R$-group schemes and their restrictions to $B_R$ agree as scheme morphisms, then $f_1=f_2$ as morphisms of $R$-group schemes. The algebra $R$ need not be reduced, and no reductivity or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.21, printed p.358, including its arbitrary k-algebra R clause; Section 17b, printed p.353, for the connected group-variety and algebraically closed base conventions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to the closed subgroup $B\\subseteq G$, obtaining $q:G\\to X$. Its statement supplies coset fibres on every test scheme and fpqc-local lifts. Since $G$ is smooth connected affine of finite type and $B$ is smooth connected and maximal solvable, [lem-sfb-borel-quotient-proper-geometry] applies: $X$ is a smooth geometrically integral proper separated finite-type $k$-scheme. In particular $X$ is nonempty, reduced, connected and quasi-compact. Write $p:X_R\\to\\operatorname{Spec}R$ and let $x_0=q(1)\\in X(k)$; its scalar extension is a section $s:\\operatorname{Spec}R\\to X_R$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-borel-quotient-proper-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, X=G/B; Theorem 5.28, p.105; Theorem 17.9, p.354."
+   }
+  },
+  {
+   "text": "Define the $R$-morphism $\\delta:G_R\\to H_R$ by multiplication and inversion, $\\delta(g)=f_1(g)f_2(g)^{-1}$. For every $R$-scheme $T$ and $g\\in G_R(T), b\\in B_R(T)$, the common restriction gives $f_1(b)=f_2(b)$, and the group identities give $$\\delta(gb)=f_1(g)f_1(b)f_2(b)^{-1}f_2(g)^{-1}=\\delta(g).$$ Thus $\\delta$ is right $B_R$-invariant as a scheme morphism, since the calculation holds on all test schemes. No commutativity of $H$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, the coset-invariant difference morphism."
+   }
+  },
+  {
+   "text": "The quotient statement [lem-sfb-algebraic-group-homogeneous-quotient] gives the following descent explicitly. For any $R$-scheme $T$ and $x:T\\to X_R$, regard $x$ as a $k$-map to $X$ and choose its fpqc-local lifts $g_i:T_i\\to G$. Pairing $g_i$ with $T_i\\to\\operatorname{Spec}R$ makes them $R$-maps to $G_R$. On an overlap $T_i\\times_T T_j$, the coset-fibre clause gives $b_{ij}=g_i^{-1}g_j\\in B(T_i\\times_T T_j)$, so step 2 gives $\\delta(g_i)=\\delta(g_j)$. By [lem-weil-pbc-fpqc-representable-descent] these maps glue uniquely to $d_T(x):T\\to H_R$. Their composites to $\\operatorname{Spec}R$ agree with the structure map locally and hence globally by the uniqueness clause of the same descent statement, so $d_T(x)$ is over $R$. Comparing any two lift covers on their overlaps proves independence of choices; pulling a lift cover back proves naturality in $T$, again by uniqueness. Hence Yoneda gives an $R$-morphism $d:X_R\\to H_R$ with $d q_R=\\delta$. Here Yoneda is simply evaluation on the universal point of $X_R$: $d=d_{X_R}(1_{X_R})$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, general-R functor descent; fpqc gluing: Stacks Tag 023Q, descent.tex, lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "The one-component case of [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] gives the canonical isomorphism $k\\xrightarrow{\\sim}\\Gamma(X,\\mathcal O_X)$. It applies because $k$ is algebraically closed and $X$ is nonempty proper reduced connected. The map $\\operatorname{Spec}R\\to\\operatorname{Spec}k$ is flat by [lem-pc-flat-field], including when $R$ has nilpotents. Apply [lem-pc-flat-cohomology-separated] to $X\\to\\operatorname{Spec}k$, $M=\\mathcal O_X$, $S=R$ and degree zero. Its compactness and separation hypotheses follow from step 1, and the structure sheaf is quasi-coherent. Degree-zero cohomology is global sections, with its canonical identification [lem-sc-open-cohomology-zero-sections]. The comparison formula of [def-pc-flat-cohomology-comparison] therefore gives the bijection $$R\\otimes_k\\Gamma(X,\\mathcal O_X)\\longrightarrow\\Gamma(X_R,\\mathcal O_{X_R}),\\qquad r\\otimes a\\longmapsto r\\,a|_{X_R}.$$ On pure tensors this preserves multiplication and unit, so it is a ring isomorphism. Composing with $\\Gamma(X,\\mathcal O_X)=k$ proves that the actual structure map $p^\\sharp:R\\to\\Gamma(X_R,\\mathcal O_{X_R})$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-pc-flat-field",
+    "lem-pc-flat-cohomology-separated",
+    "lem-sc-open-cohomology-zero-sections",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, global sections after scalar extension; Stacks Tag 0BUG, varieties.tex, lemma-proper-geometrically-reduced-global-sections; Tag 02KH, coherent.tex, lemma-flat-base-change-cohomology, degree zero."
+   }
+  },
+  {
+   "text": "As $H$ is affine, write $H=\\operatorname{Spec}A$; by [lem-weil-pbc-fibre-product-affine-spectra] applied to $k\\to A$ and $k\\to R$, $H_R=\\operatorname{Spec}A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}R\\cong\\operatorname{Spec}(A\\otimes_k R)=\\operatorname{Spec}(R\\otimes_k A)$, with the projection to $\\operatorname{Spec}R$ given by $r\\mapsto 1\\otimes r$. Use [lem-weil-pbc-morphism-into-affine-scheme] for the target $H_R$. The morphism $d$ corresponds to an $R$-algebra map $$d^\\sharp:R\\otimes_k A\\longrightarrow\\Gamma(X_R,\\mathcal O_{X_R}).$$ Set $c^\\sharp=(p^\\sharp)^{-1}d^\\sharp$. The same affine-target bijection gives an $R$-map $c:\\operatorname{Spec}R\\to H_R$. Since $(cp)^\\sharp=p^\\sharp c^\\sharp=d^\\sharp$, its injectivity proves $d=cp$. In particular this is equality of scheme morphisms over an arbitrary $R$, rather than only equality on geometric points.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, affineness of the target; Stacks Tag 01I1, schemes.tex, lemma-morphism-into-affine."
+   }
+  },
+  {
+   "text": "Evaluate along the section $s=q_R1_{G_R}$. Since group homomorphisms preserve the identity, $$c=ds=\\delta1_{G_R}=1_{H_R}.$$ Thus $\\delta=dq_R$ is the constant identity morphism. For every $R$-scheme $T$ and $g\\in G_R(T)$, $f_1(g)f_2(g)^{-1}=1$ gives $f_1(g)=f_2(g)$. Evaluating this natural equality on the universal point of $G_R$ proves $f_1=f_2$. If $R$ is the zero ring, all the scalar-extended schemes are empty and the asserted equality holds uniquely as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.21, p.358, evaluation at the identity and final all-algebras conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-pc-flat-field",
+  "lem-pc-flat-cohomology-separated",
+  "lem-sc-open-cohomology-zero-sections",
+  "def-pc-flat-cohomology-comparison",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.21, printed p.358, including its arbitrary k-algebra R clause; Section 17b, printed p.353, for the connected group-variety and algebraically closed base conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel|borel",
+   "results": "{\"t\": \"2026-10-23T23:45:04Z\", \"tool\": \"grep\", \"query\": \"Borel|borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two homomorphisms of algebraic groups are equal if their restrictions to a Borel subgroup are equal",
+   "results": "{\"t\": \"2026-10-23T23:45:04Z\", \"tool\": \"leansearch\", \"query\": \"Two homomorphisms of algebraic groups are equal if their restrictions to a Borel subgroup are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GrpCat.hom_ext_iff\", \"GrpCat.hom_ext\", \"ProfiniteGrp.Hom.ext\", \"CommGrpCat.Hom.ext_iff\", \"galRestrict'.congr_simp\", \"AlgHom.restrictNormal.congr_simp\", \"GrpCat.Hom.ext_iff\", \"ProfiniteGrp.Hom.ext_iff\"], \"digest\": \"903bc902ec15d7b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"hom\"",
+   "results": "{\"t\": \"2026-10-23T23:45:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of connected affine algebraic groups agreeing on a Borel subgroup agree after arbitrary algebra base change",
+   "results": "{\"t\": \"2026-10-23T23:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of connected affine algebraic groups agreeing on a Borel subgroup agree after arbitrary algebra base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.ext_of_isAffine\", \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\"], \"digest\": \"00df59c96b07d10d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|borel|borel_homomorphism",
+   "results": "{\"t\": \"2026-10-23T23:45:36Z\", \"tool\": \"grep\", \"query\": \"Borel|borel|borel_homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Function.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Ergodic/Conservative.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\"], \"digest\": \"003ca7c227cb033a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of homomorphisms from a linear algebraic group to a maximal connected solvable subgroup is injective",
+   "results": "{\"t\": \"2026-10-23T23:45:38Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of homomorphisms from a linear algebraic group to a maximal connected solvable subgroup is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.toGLPos_injective\", \"Matrix.SpecialLinearGroup.mapGL_inj\", \"Matrix.SpecialLinearGroup.mapGL_injective\", \"SpecialLinearGroup.toGeneralLinearGroup_injective\", \"ProfiniteGrp.toLimit_injective\", \"solvable_of_solvable_injective\", \"iteratedWreathToPermHomInj\", \"MonoidHom.FixedPointFree.commutatorMap_injective\"], \"digest\": \"694feabc3fe7883e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|borel|homomorphism.*rigid",
+   "results": "{\"t\": \"2026-10-24T00:15:26Z\", \"tool\": \"grep\", \"query\": \"Borel|borel|homomorphism.*rigid\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-target extensionality, abstract-group restrictions, purely inseparable field maps and root-pairing maps do not assert Borel restriction rigidity. Read AffineScheme.lean:154 and AffineSpace.lean:128; the latter extensionality requires equality of every coordinate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a maximal connected solvable subgroup determines a homomorphism of smooth connected algebraic groups",
+   "results": "{\"t\": \"2026-10-24T00:15:26Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to a maximal connected solvable subgroup determines a homomorphism of smooth connected algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieHom.surjective_rangeRestrict\", \"AlgEquiv.restrictNormalHom\", \"MulHom.restrict\", \"groupCohomology.H1InfRes_g\", \"Polynomial.Gal.restrictComp\", \"Function.Surjective.lieAlgebra_isSolvable\", \"MonoidHom.restrict\", \"solvable_of_solvable_injective\"], \"digest\": \"0739b784021f27e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-target extensionality, abstract-group restrictions, purely inseparable field maps and root-pairing maps do not assert Borel restriction rigidity. Read AffineScheme.lean:154 and AffineSpace.lean:128; the latter extensionality requires equality of every coordinate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"hom\"",
+   "results": "{\"t\": \"2026-10-24T00:15:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-target extensionality, abstract-group restrictions, purely inseparable field maps and root-pairing maps do not assert Borel restriction rigidity. Read AffineScheme.lean:154 and AffineSpace.lean:128; the latter extensionality requires equality of every coordinate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of connected affine algebraic groups agreeing on a Borel subgroup are equal after arbitrary algebra base change",
+   "results": "{\"t\": \"2026-10-24T00:15:28Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of connected affine algebraic groups agreeing on a Borel subgroup are equal after arbitrary algebra base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\"], \"digest\": \"e183367dea4a2229\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-target extensionality, abstract-group restrictions, purely inseparable field maps and root-pairing maps do not assert Borel restriction rigidity. Read AffineScheme.lean:154 and AffineSpace.lean:128; the latter extensionality requires equality of every coordinate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of algebraic group scheme homomorphisms to a Borel subgroup is injective over nonreduced coefficient rings",
+   "results": "{\"t\": \"2026-10-24T00:17:08Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of algebraic group scheme homomorphisms to a Borel subgroup is injective over nonreduced coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.injective_restrictDomain\", \"AlgHom.IsArithFrobAt.restrict_injective\", \"RootPairing.Hom.weightHom_injective\", \"IsPurelyInseparable.injective_comp_algebraMap\", \"RootPairing.Equiv.weightHom_injective\", \"RootPairing.Hom.coweightHom_injective\", \"RootPairing.Equiv.coweightHom_injective\", \"IsPRadical.injective_comp\"], \"digest\": \"2482bb69f52cf5fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-target extensionality, abstract-group restrictions, purely inseparable field maps and root-pairing maps do not assert Borel restriction rigidity. Read AffineScheme.lean:154 and AffineSpace.lean:128; the latter extensionality requires equality of every coordinate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-borel-equals-group",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413. General low-dimensional input: Corollary 17.27, before its application to the proper image subgroup in Theorem 20.16(c) implies (d). Supporting input in Corollary 17.27: Proposition 17.23(b) implies (c), whose proof establishes that a nilpotent Borel subgroup equals its ambient connected group. Supporting rigidity: Milne Proposition 17.21, printed p.358, used through inner automorphisms in Proposition 17.22.",
+   "via": [
+    "lem-sfb-nilpotent-borel-equals-group",
+    "lem-sfb-connected-group-dimension-two-solvable",
+    "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-homomorphism-rigidity",
+  "worker": "stage1",
+  "summary": "Preserved the full arbitrary-algebra statement of Milne Proposition 17.21. Gave explicit right-coset descent on test schemes, canonical global-section base change, affine-target factorization and identity evaluation. Reused all supporting nodes; no new nodes and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413. General low-dimensional input: Corollary 17.27, before its application to the proper image subgroup in Theorem 20.16(c) implies (d). Supporting input in Corollary 17.27: Proposition 17.23(b) implies (c), whose proof establishes that a nilpotent Borel subgroup equals its ambient connected group. Supporting rigidity: Milne Proposition 17.21, printed p.358, used through inner automorphisms in Proposition 17.22. Realizes the rigidity sub-argument by the source Proposition 17.21; current latest blueprint has no duplicate Borel rigidity statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic global-function or coherent-cohomology tool; the present unit supplies the algebraic-group quotient geometry but no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "Generic global-function or coherent-cohomology tool; the present unit supplies the algebraic-group quotient geometry but no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-open-cohomology-zero-sections",
+    "why": "Generic global-function or coherent-cohomology tool; the present unit supplies the algebraic-group quotient geometry but no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "def-pc-flat-cohomology-comparison",
+    "why": "Generic global-function or coherent-cohomology tool; the present unit supplies the algebraic-group quotient geometry but no replacement for this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-pc-flat-cohomology-separated",
+  "lem-sc-open-cohomology-zero-sections",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c2f793b91",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c2f793b91 (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps and the statement of every cited node, against Milne iAG 2017 Prop. 17.21 (printed p.358, PDF p.370). Both parts of that proof are covered: the R=k argument and the general-R argument. There are no new nodes, and the statement and stmt_deps are unchanged. The only citer (nilpotent-borel-equals-group) uses Int(n) for n in N(R), so it needs the arbitrary-R form; lem-sfb-homomorphism-borel-rigidity is only the R=k case. The steps are correct. Step 1: the quotient and Borel proper-geometry hypotheses hold (G affine, so separated; B smooth, connected and maximal solvable). Step 2: the δ(gb) calculation is right. Step 3: coset clause on overlaps, then fpqc descent (023Q leaf); the over-R property and independence of choices both come from uniqueness. Step 4: 0BUG one-component case gives k=Γ(X); k→R flat; 02KH comparison β^0 with b⊗x↦b·p^*x and H^0=Γ, so p^♯:R→Γ(X_R) is an isomorphism, including for non-reduced R. Step 5: 01I1 bijection, c^♯=(p^♯)^{-1}d^♯. Step 6: c=ds=δ(e)=e. Small cases checked: B=G, 𝔾_m, SL2 with Borel and P^1, R=k[ε]/ε², R=0. FIX: step 5 used H_R≅Spec(R⊗_kA) with no citation; it now cites lem-weil-pbc-fibre-product-affine-spectra (Mathlib pullbackSpecIso), added to the step's uses and to proof_deps. Off-unit tool uses, to be recorded by the maintainer: pc-flat-cohomology-separated, def-pc-flat-cohomology-comparison, sc-open-cohomology-zero-sections, weil-pbc proper-reduced global-sections-product; these are generic, with no in-unit node to cite. The three batch-5 closures (def-trf-scheme-algebraic-space; lem-trf-smooth-fpqc-base-descent; def-trf-schematically-dense-open via the 0BUG Chow chain) are a general definition and generic descent/coherent results, not steps of the trace formula or Poincaré duality, so they are acceptable. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelHomomorphismRigidity",
+  "declaration": "AlgebraicGeometry.hom_ext_of_borel_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelHomomorphismRigidity.lean",
+  "statement": "theorem hom_ext_of_borel_baseChange {k : Type u} [Field k] [IsAlgClosed k] (G H B : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [GrpObj B] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth H.hom] [ConnectedSpace H.left] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (i : B ⟶ G) (hB : IsBorelGroupScheme i) (R : Type u) [CommRing R] [Algebra k R] (f₁ f₂ : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).obj G ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).obj H) [IsMonHom f₁] [IsMonHom f₂] (h : ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).map i ≫ f₁).left = ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).map i ≫ f₂).left) : f₁ = f₂",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4eca5a00",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Every clause matches Milne Prop 17.21 and the node: alg. closed k; G,H in Over(Spec k) with GrpObj, smooth, connected, affine, LOFT+QC (finite type per its dep record); B by i with the full IsBorelGroupScheme (closed subgroup, smooth, connected, solvable, factorization-maximal); arbitrary CommRing R with Algebra k R, no Nontrivial/Reduced, so R=0 and k[ε]/ε² are covered; G_R,H_R as canonical Over.pullback; f1,f2 IsMonHom for Mathlib's grpObjObj structure (global Over.cartesianMonoidalCategory, Pullbacks.lean:712, plus Over.pullback Braided); restriction equality as .left scheme maps; conclusion f1=f2. Statement verbatim; only the lean field changed; universe u is the standard Scheme.{u} convention. No duplicate: the R=k sibling lem-sfb-homomorphism-borel-rigidity has no Lean. No defs, proof exactly sorry, source/blueprint/6-step docstrings present, proof_dep imports exist, report has both sections. No compile run (no file changed); relied on the worker's clean compile. No findings."
+ }
+}

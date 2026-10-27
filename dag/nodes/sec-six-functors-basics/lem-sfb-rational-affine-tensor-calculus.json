@@ -1,0 +1,167 @@
+{
+ "id": "lem-sfb-rational-affine-tensor-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-induction",
+   "place": "Induction proof, steps 1--7, corresponding separate ambient calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rational positive Tate tensor powers: bounded constructibility and composition",
+ "statement": "Fix ell, rational coefficients E or the specified algebraic closure, and a positive-characteristic field k of characteristic different from ell [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed; sk-def-sfb-dc-setting]. Define T(f,d) as ordinary derived inverse image along f followed by derived tensor with the recorded sectionwise degree-d Tate power transported back to internal modules, followed by shift [2d] [sk-def-sp-tate-twist; def-sfb-module-upper-star]. For separated finite-type k-schemes, T(f,d) preserves Dbc [sk-def-sfb-constructible]. For all composable k-morphisms f:X to Y and g:Y to Z, T(g,d) followed by T(f,e) is naturally isomorphic to T(f followed by g,d+e). Degree zero tensor with its shift is naturally the identity; degree one is the original internal-line tensor.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "First paragraph (composition and induction); second paragraph (preservation)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sp-tate-twist",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-constructible",
+  "def-sfb-rational-localizing-twist",
+  "def-sfb-rational-tate-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The internal/sectionwise module equivalence identifies its tensor unit and tensor product with the recorded sectionwise unit and tensor product. Induction gives an isomorphism from the transported nonnegative signed power to the corresponding internal tensor power. Rank-one local freeness of the Tate line gives exact sectionwise tensor, hence internal flatness. A K-flat single complex comparison identifies the single of the internal tensor power with the corresponding power in the derived monoidal category.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-c2-internal-section-module-flatness",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "First paragraph (composition and induction); second paragraph (preservation)."
+   }
+  },
+  {
+   "text": "Use the existing locallyFree_of_trivial_cover helper from IntegralTateLineConstructible to transport the common sectionwise root-cover trivializations to raw internal inverse image. The lisse_of_raw_free helper from CoefficientHeartLisseRestriction transports these free models to the normalized coefficient pullback. Thus the rational Tate line is lisse and has finite constant local models. Its single complex and the tensor unit are constructible. Rational tensor closure gives all nonnegative derived powers by induction. Exact derived pullback preserves bounded constructibility, and triangulated shift closure supplies the shift. These arguments include the empty scheme and degree zero.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-sfb-integral-tate-line-constructible",
+    "new-det-lem-coefficient-heart-common-stratification-lisse",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "det-thm-sf-pf-field-tensor",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "det-proper-base-change-unbounded-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "First paragraph (composition and induction); second paragraph (preservation)."
+   }
+  },
+  {
+   "text": "Use Cartesian inverse image of the internal Tate line and its single-complex comparison. Strong monoidality identifies inverse image of a tensor power with the power of inverse image. Associate tensor powers and add their nonnegative exponents. Commute exact derived pullback and derived tensor past shifts, compose inverse images by leftDerivedUpperStarComp, and add shifts. Whisker these natural isomorphisms with the transported-power comparisons to obtain the stated functor isomorphism on the unbounded categories. Degree-one and degree-zero identifications are the original equivalence unit and tensor/shift unitors.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-rational-tate-pullback-comparison",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-upper-star-comp",
+    "det-proper-base-change-unbounded-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+    "place": "First paragraph (composition and induction); second paragraph (preservation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-tate-twist",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-c2-internal-section-module-flatness",
+  "def-coefficient-twists-detailed",
+  "lem-sfb-integral-tate-line-constructible",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "det-thm-sf-pf-field-tensor",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "det-proper-base-change-unbounded-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-star-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "J6: internal positive-power comparisons, the existing slice trivialization and lisse transport helpers, rational tensor closure and natural shifted-pullback composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor powers of a locally free rank one sheaf commute with inverse image and preserve bounded constructible derived objects",
+   "results": "8 hits, including SheafOfModules.freeFunctorCompPullbackIso and the sheaf inverse-image exactness instances.",
+   "date": "2026-10-24",
+   "verdict": "No direct match to the rational internal-module tensor calculus or restricted compact-support adjunction. Reuse the underlying categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorRight, CategoryTheory.Adjunction",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No packaged affine-space induction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorRight|Tate|constructible; AffineSpace.sumIso; leftDerivedUpperStarComp",
+   "results": "Mathlib affine-space sum/reindex isomorphisms; source derived pullback composition; Sheaf.SixFunctors.FieldTensor.tensorClosureRational and the internal/sectionwise tensor comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the affine-space coordinate and derived categorical APIs; no full induction theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceRationalInduction",
+  "date": "2026-10-24",
+  "group": "E1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalAffineTensorCalculus",
+  "file": "lean/Sheaf/Paper/RationalAffineTensorCalculus.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalAffineTensorCalculus",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTatePowerFunctor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTatePull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTatePowerOneIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTatePowerZeroIso"
+  ],
+  "statement": "theorem rationalAffineTensorCalculus (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ)) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] : (∀ (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ), ∀ K, constantModelBoundedConstructible (RationalP1.coefficient ℓ c).X Y K → constantModelBoundedConstructible (RationalP1.coefficient ℓ c).X X ((rationalTatePull ℓ c f d).obj K)) ∧ (∀ (X Y Z : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] (d e : ℕ), Nonempty (rationalTatePull ℓ c g d ⋙ rationalTatePull ℓ c f e ≅ rationalTatePull ℓ c (f ≫ g) (d + e)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-55a0e",
+  "group": "J6",
+  "result": "fix",
+  "landing": "20261025T163736-L-810752",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 55a0 identical to c248ab4 (Lean/node/change record byte-identical); proof vs node lem-sfb-rational-affine-tensor-calculus; fixed module + importer AffineSpaceRationalInduction compiled together against current build (exit 0); axioms = propext, sorryAx (imported sorried statements), Classical.choice, Quot.sound"
+ }
+}

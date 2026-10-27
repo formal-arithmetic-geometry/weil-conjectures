@@ -141,5 +141,57 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.etalePointedMapRigidity"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.etalePointedMapRigidity",
+     "module": "WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity",
+     "lines": [
+      23,
+      65
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $B$ be a commutative local ring, $\\Omega$ a field, and $\\beta:B\\to\\Omega$ a local ring map. Let $f:X\\to S$ be an etale morphism of schemes [def-pc-scheme]. If $u,v:\\operatorname{Spec}B\\to X$ satisfy $f\\circ u=f\\circ v$ and $u\\circ\\operatorname{Spec}\\beta=v\\circ\\operatorname{Spec}\\beta$, then $u=v$. Henselianity of $B$, algebraic closure of $\\Omega$, and locality of $u$ and $v$ are not assumed.",
+  "proof": [
+   {
+    "text": "The equality $f\\circ u=f\\circ v$ defines $d=(u,v):\\operatorname{Spec}B\\to X\\times_SX$. The diagonal $\\Delta:X\\to X\\times_SX$ of an etale morphism is an open immersion (Stacks 02GE). By the pointed equality and the universal property of the fibre product, $d\\circ\\operatorname{Spec}\\beta=(u\\circ\\operatorname{Spec}\\beta,u\\circ\\operatorname{Spec}\\beta)=\\Delta\\circ u\\circ\\operatorname{Spec}\\beta$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Since $\\beta$ is local, $\\operatorname{Spec}\\beta$ sends the unique point of $\\operatorname{Spec}\\Omega$ to the closed point of $\\operatorname{Spec}B$. Evaluating the preceding equality there shows that $d$ sends the closed point into the open subset $\\Delta(X)$. Every point of the local scheme $\\operatorname{Spec}B$ is a generization of its closed point, and open subsets are stable under generization, so $d(\\operatorname{Spec}B)\\subseteq\\Delta(X)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Hence $d$ factors through the open immersion $\\Delta$, say $d=\\Delta\\circ l$. The two projections $X\\times_SX\\to X$ both restrict to the identity along $\\Delta$, so composing $d=\\Delta\\circ l$ with them gives $u=l$ and $v=l$. Hence $u=v$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

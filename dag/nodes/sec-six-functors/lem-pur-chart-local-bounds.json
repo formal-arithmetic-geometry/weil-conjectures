@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-chart-local-bounds",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Steps 1--3: the local smooth-then-closed bound for one chart, before the maximum and descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exceptional interval bounds on one selected affine chart",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], finite-type k-schemes X,Y, a separated finite-type k-morphism f:X→Y, and finite affine chart data C [def-pur-affine-chart-cover]. Select one base index v and one chart index i. Write u:U→X for its open inclusion, d for its embedding dimension, i_U:U→A^d_V for its recorded closed embedding, and W for its recorded open complement. Suppose (W,A^d_V) satisfies HasOpenComplementCondition at P.Coefficient with constant c∈ℕ [def-exc-open-complement-bound]. For any integers a≤b: (i) for every K in the constructible interval [a,b] on Y [def-weil-constructible-intervals], Lu^* Rf!K is constructible in [a-2d,b-2d+c+1]; (ii) for every bounded constructible finite-Tor K on Y with Tor amplitude [a,b] [def-weil-finite-tor-amplitude], Lu^* Rf!K has Tor amplitude [a-2d,b-2d+c+1], tested against all module sheaves [def-weil-proetale-tor-amplitude]. The exceptional functor is the specified transported functor [def-weil-exceptional-inverse-image]. No maxima over charts and no global descent conclusion are asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Steps 1--3: the local smooth-then-closed bound for one chart, before the maximum and descent"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-sbc-affine-space",
+  "def-exc-open-complement-bound",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-chart-cover",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Restrict K to V. Exact open inverse image preserves its constructible interval. For a finite-Tor input it preserves the same Tor interval; bounded constructibility follows by applying its constructible clause to any cohomological interval of K. The level in explicitExceptional_preservation is written hn+1; use P.level_pos to identify P.level with (P.level-1)+1.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "thm-exc-explicit-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the constructible-origin witness and the witnessed base-open and affine-chart exceptional comparisons. These identify the restriction along u of Rf!K with the closed exceptional image of the smooth projection exceptional image of K restricted to V. Choose the compactifications used by the specified exceptional construction and use compactification independence to identify them with the lifts. The chart factorization is exactly C.embedding_over; the intermediate open into the pullback is supplied by C.chart_contained. No exceptional preservation is used to construct this comparison.",
+   "uses": [
+    "lem-pur-affine-chart-exceptional-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-space projection is separated and smooth of pure relative dimension d. Apply smooth_exceptional_preservation separately to the constructible and the Tor inputs. It gives [a-2d,b-2d], and for the Tor input also bounded constructibility. Apply closedEtaleTransport_bounds to the chosen embedding, complement and bound c; its first clause gives the constructible interval without any Tor hypothesis, and its second gives the Tor interval. Both resulting intervals are [a-2d,b-2d+c+1]. Transfer along the chart comparison.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "cor-pur-smooth-admissibility",
+    "lem-pur-closed-etale-transport-bounds"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-exc-open-adjoint",
+  "thm-exc-explicit-preservation",
+  "lem-pur-affine-chart-exceptional-identification",
+  "sbc-lem-affine-space-smooth",
+  "cor-pur-smooth-admissibility",
+  "lem-pur-closed-etale-transport-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Steps 1--3: the local smooth-then-closed bound for one chart, before the maximum and descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image preserves constructible intervals by affine chart bounds and finite open descent",
+   "results": "8 hits: chevalley_mvPolynomial_mvPolynomial, PrimeSpectrum.exists_range_eq_of_isConstructible, IccLeftChart, IccRightChart, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AmpleSet.preimage, IccLeftChart_extend_interior_pos, Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exceptional\", \"interval\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*chart|chart.*exceptional|closed.*[Tt]ransport",
+   "results": "2 hits: Mathlib/CategoryTheory/Monoidal/Closed/Transport.lean, Mathlib/CategoryTheory/Monoidal/Closed/Transport.lean",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityGeneralAdmissibility",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityChartLocalBounds",
+  "file": "lean/Sheaf/Paper/PurityChartLocalBounds.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.chart_local_bounds",
+  "statement": "theorem chart_local_bounds (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n    [QuasiCompact (X ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Y ↘ Spec (.of P.field.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (C : Scheme.PurityAffineChartCover f)\n    (v : Fin C.baseCount) (i : Fin (C.chartCount v)) (c : ℕ)\n    (hc : @Scheme.HasOpenComplementCondition P.Coefficient _ _ _ _\n      (C.complement v i).ι inferInstance (C.complement_quasiCompact v i) c)\n    (a b : ℤ) (hab : a ≤ b) :\n    (∀ K, constructibleInterval P.coefficients.l P.extension P.level P.level_pos Y a b K →\n      constructibleInterval P.coefficients.l P.extension P.level P.level_pos\n        (C.chartOpen v i).toScheme\n        (a - 2 * (C.embeddingDimension v i : ℤ))\n        (b - 2 * (C.embeddingDimension v i : ℤ) + (c : ℤ) + 1)\n        ((proEtaleConstantRingDerivedPullback P.Ring (C.chartOpen v i).ι).obj\n          ((P.exceptionalInverseImage f).obj K))) ∧\n    (∀ K, finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K →\n      Scheme.HasProEtaleTorAmplitude Y P.Ring K a b →\n      Scheme.HasProEtaleTorAmplitude (C.chartOpen v i).toScheme P.Ring\n        ((proEtaleConstantRingDerivedPullback P.Ring (C.chartOpen v i).ι).obj\n          ((P.exceptionalInverseImage f).obj K))\n        (a - 2 * (C.embeddingDimension v i : ℤ))\n        (b - 2 * (C.embeddingDimension v i : ℤ) + (c : ℤ) + 1))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8fb8",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T101313-L-3681333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8fb8",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T101313-L-3681333",
+  "kind": "interface",
+  "note": "independent cc review: general_admissibility proof + new chart_local_bounds/purityOpenTensorTestVanishing vs node thm-pur-general-admissibility, unit sk-prop-sf-rf-shriek-preservation realized modules, clone signatures; set compile + #print axioms in /tmp/q4rev"
+ }
+}

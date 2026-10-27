@@ -1,0 +1,117 @@
+{
+ "id": "lem-sp-normalized-tate-line-over-field",
+ "kind": "statement",
+ "title": "Normalized Tate coefficient comparison over a field",
+ "statement": "Let Λ be a finite commutative ring with a normalized HasTateTwist datum: its Kummer coordinate boundary has invertible exceptional adjunct over separated schemes locally of finite type over fields. Let N>0 annihilate Λ, k be any field, and N be invertible on Spec k [def-pc-scheme]. In the ordinary etale module derived category [def-weil-pbc-derived-categories], the degree-one Tate object is isomorphic to the degree-zero single complex of μ_N tensored from Z/N with Λ, defined in [def-asd-finite-etale-tate-twist]. No arbitrary-base descent or compatibility of the selected isomorphism is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Refinement of lem-sp-normalized-tate-line-comparison, proof step 2"
+ },
+ "proof": [
+  {
+   "text": "For the zero section s of A1_k, put W=Rs! of the constant complex. The coordinate normalization of the specified datum gives Rs!(T(1)[2]) isomorphic to the unit (the adopted-source nonempty_iso_rightDerivedUpperShriek_affineLineZero). The invertibility, shift and pullback clauses of the datum and the co-projection derivedTensorRightCompRightDerivedUpperShriekIso identify this with W tensor T_k(1)[2]. This is the shifted-twist co-projection argument of lem-pur-immersion-twist; all other identifications are unitors.",
+   "uses": [
+    "lem-pur-immersion-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same argument to the concrete roots-of-unity Tate datum. Its normalization is the proved adopted-source hasKummerClass_isNormalized in TateTwist.Normalized, obtained by its affine-line Kummer computation. Thus W tensor C[2] and W tensor T[2] are both the unit. Symmetry gives C[2] tensor W equal to the unit. The composite T[2] -> unit tensor T[2] -> (C[2] tensor W) tensor T[2] -> C[2] tensor (W tensor T[2]) -> C[2] tensor unit -> C[2] identifies the shifted lines, and full faithfulness of shift cancels [2].",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the concrete TateTwistObjectIsoSingleFunctor. Identify the published finiteEtaleTateLine with scalar extension of the abelian roots-of-unity sheaf by uniqueness of left adjoints: additive maps of Z/N modules are automatically Z/N linear. The proved extendScalarsRootsOfUnityIsoTateTwistSheaf supplies root-level independence for N annihilating Λ and invertible on k. Map this isomorphism through the single functor and compose. All arguments work for a zero coefficient ring as well.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-immersion-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Source-plan refinement; proved by Y8 using the adopted-source declarations named in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale normalized Tate twist is isomorphic to the roots of unity sheaf",
+   "results": "8 hits: modularCyclotomicCharacter', modularCyclotomicCharacter.spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter, modularCyclotomicCharacter.aux_spec, modularCyclotomicCharacter.unique, modularCyclotomicCharacter'.unique', modularCyclotomicCharacter.toFun_spec",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Functor.FullyFaithful.preimageIso_hom, CategoryTheory.Functor.FullyFaithful.preimageIso_inv, CategoryTheory.Functor.FullyFaithful.isoEquiv_apply, CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply, CategoryTheory.Functor.FullyFaithful.homNatIso'",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTateLine|finiteEtaleTateLine.*tateObject|isIso_unit.*generic",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no match for this etale coefficient statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.NormalizedTateLineComparison",
+  "date": "2026-10-26",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Normalized Tate coefficient comparison over a field",
+   "via": [
+    "lem-normalized-projective-line-adjunction",
+    "lem-sp-normalized-tate-line-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.NormalizedTateLineOverField",
+  "file": "lean/Sheaf/SmoothPurity/NormalizedTateLineOverField.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_normalizedTateLineOverField",
+  "statement": "theorem nonempty_normalizedTateLineOverField\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]\n    [HasTateTwist.IsNormalized Λ] (N : ℕ) (_hN : 0 < N) (hΛ : (N : Λ) = 0)\n    (k : Type u) [Field k] [HasInvertibleExponent Λ (Spec (.of k))]\n    (hk : IsUnit (N : Γ(Spec (.of k), ⊤))) :\n    Nonempty (tateObject Λ (Spec (.of k)) 1 ≅\n      (_root_.DerivedCategory.singleFunctor _ 0).obj\n        (Scheme.finiteEtaleTateLine (Spec (.of k)) N Λ hΛ))",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203847-L-2863491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203847-L-2863491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

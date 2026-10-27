@@ -1,0 +1,163 @@
+{
+ "id": "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+ "kind": "statement",
+ "title": "Finite free presheaf local dual separation",
+ "statement": "For a prime l, a scheme X, and a pro-affine etale representable U over X, let R be the completed coefficient ring [def-pur-twist-coefficient-rings], F the free R-presheaf on the universe-lifted representable of U [sk-def-pe-morphisms], and P its module sheafification [def-weil-presheaf-modules-sheafification], on the small pro-etale site [def-weil-pbc-proetale-site]. For every pro-etale object W and every y in F(W) whose image under the sheafification unit eta:F to P is nonzero, there is an R-linear map from P|W to the unit R-module whose value on eta(y) at W is nonzero. Nonzero y alone is insufficient, because the free presheaf need not be separated.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-morphisms",
+  "def-pur-twist-coefficient-rings",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite-support local generator argument before sheafification descent"
+ },
+ "proof": [
+  {
+   "text": "Expand the section as a finite support sum. Assuming every slice dual vanishes, use natural scalar interpolation on each residue-field fiber and extend each scalar test through the free module and sheafification adjunctions. The slice unit remains locally bijective by continuous restriction, so the extension exists. Evaluating gives zero sum of coefficients in each residue-field equality class.",
+   "uses": [
+    "lem-sfb-completed-affine-coefficient-model",
+    "lem-sfb-completed-affine-fiber-interpolation",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the closed-pattern cover to this finite family and its zero fiber-class sums. On each member equal generators have zero total coefficient. A fully proved finite setoid partition identity gives vanishing of the restricted free section. Naturality of the sheafification unit and separatedness give zero sheafification image, contradicting the hypothesis.",
+   "uses": [
+    "lem-sfb-completed-affine-pattern-cover",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-completed-affine-coefficient-model",
+  "lem-sfb-completed-affine-fiber-interpolation",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-completed-affine-pattern-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "document": "lean/Sheaf/Paper/CompletedAffineFreePresheafLocalDual.lean",
+  "place": "completedAffineFree_presheaf_localDual and private scalar_test_extends and sum_smul_eq_zero_of_class_sums",
+  "note": "Complete Lean assembly of the finite-support argument, with coefficient coordinates, finite scalar interpolation, and closed-pattern cover isolated as strict geometric substeps. No change to the repaired nonzero-image statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dual separation of a finite free presheaf section on a representable",
+   "results": "Module.forall_dual_apply_eq_zero_iff applies to projective modules but does not construct the required natural slice maps; no exact sheaf theorem found.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local dual functional free representable sheafification",
+   "results": "PresheafOfModules.freeHomEquiv and sheafificationAdjunction provide the extension interfaces; no geometric clopen graph separation theorem exists.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeHomEquiv",
+   "results": "Found freeHomEquiv and free_hom_ext, but they do not prove finite-support geometric separation.",
+   "date": "2026-10-27",
+   "verdict": "Interface only."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*representable.*dual|local.*dual",
+   "results": "No existing theorem in Sheaf or WeilConjectures matches this finite-support pro-etale statement.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAffineFreeLocalDual",
+  "date": "2026-10-27",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-completed-affine-free-local-dual",
+   "place": "finite-support presheaf substep",
+   "via": [
+    "lem-sfb-completed-affine-free-local-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAffineFreePresheafLocalDual",
+  "file": "lean/Sheaf/Paper/CompletedAffineFreePresheafLocalDual.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffineFree_presheaf_localDual",
+  "statement": "theorem completedAffineFree_presheaf_localDual (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom)\n    (W : X.ProEt) :\n    let R := Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)\n    let F := (PresheafOfModules.free R.obj).obj\n      (uliftYoneda.{u + 1}.obj U.unop)\n    let P := (PresheafOfModules.sheafification (𝟙 R.obj)).obj F\n    ∀ y : F.obj (op W),\n      (((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app F).app\n        (op W) y) ≠ 0 →\n      ∃ (φ : P.over W ⟶ SheafOfModules.unit (R.over W)),\n        φ.val.app (op (Over.mk (𝟙 W)))\n          (((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app F).app\n            (op W) y) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050600-L-240049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T064438-L-2178011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "W3 stage 2",
+  "old_statement": "For a prime l, a scheme X, and a pro-affine etale representable U over X, let R be the completed coefficient ring, F the free R-presheaf on the universe-lifted representable of U, and P the sheafification of F. For every pro-etale object W and every nonzero y in F(W), there is an R-linear map from P|W to the unit R-module whose value on the sheafification image of y at W is nonzero.",
+  "what": "The old hypothesis y != 0 is false. Take X=Spec(F_2) and U=W=X disjoint union X, an affine finite etale object. The four maps a=00, b=11, c=01, d=10 are distinct globally. The free element [a]+[b]-[c]-[d] has coefficient 1 at a, hence is nonzero, but restricts to zero on each summand of W and therefore has zero image in sheafification. Every linear sheaf map sends that image to zero. The corrected hypothesis asks for eta(y) != 0. The consumer can and now does case-split on eta(y), so its unchanged detection statement still follows. The private free_presheaf_swap_kernel theorem formally verifies the general algebraic and sheaf-separatedness obstruction; the concrete scheme instantiation is explained in the change record.",
+  "source": {
+   "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+   "place": "completedAffineFree_localDual_detect: sheafified finite-support detection, including its closed-stratum proof sketch"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-completed-affine-free-local-dual",
+    "holds": true,
+    "note": "The sheafified detection theorem is unchanged. After lifting a restricted section to y, case-split on eta(y)=0 rather than y=0; apply the corrected lemma only in the nonzero-image case. The adapted proof is delivered together."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Write y as a finite free sum of basis maps with completed coefficients. Present U as a cofiltered limit of affine etale stages and refine W by the finitely many clopen graph equalities of those stage maps. On each resulting closed clopen stratum, define the characteristic-function functional selecting one equality class.",
+    "uses": [
+     "sk-def-pe-morphisms",
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The selected class has a nonzero coefficient by choosing a class in the finite support and a stratum where its coefficient is nonzero. The characteristic-function map extends through the free-module and sheafification adjunctions to the required slice sheaf map, and its value on the sheafification image of y is nonzero.",
+    "uses": [
+     "def-pur-twist-coefficient-rings"
+    ],
+    "elementary": false
+   }
+  ]
+ }
+}

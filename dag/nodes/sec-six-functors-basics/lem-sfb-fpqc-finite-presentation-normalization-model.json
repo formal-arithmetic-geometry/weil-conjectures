@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-fpqc-finite-presentation-normalization-model",
+ "kind": "statement",
+ "title": "Finite-presentation fpqc forms acquire models over a normalized semi-trait",
+ "statement": "A semi-trait here is $S=\\operatorname{Spec}R$, where $R$ is a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring] of Krull dimension one (every strict chain of prime ideals has length at most one, and a chain of length one exists) with finitely many maximal ideals; in particular a trait is allowed. An fpqc sheaf means a contravariant set-valued functor on $S$-schemes satisfying the covering equalizer condition of [def-weil-pbc-fpqc-covering]. Let $F$ be such a sheaf and $p:S^{\\prime}\\to S$ an fpqc morphism of schemes. Suppose $F_{S^{\\prime}}$ is represented by a flat separated scheme $P$ of finite presentation over $S^{\\prime}$ [def-sbc-locally-finite-presentation]. Flatness is [def-weil-flat-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Put $K=\\operatorname{Frac}R$. There exists a finite field extension $L/K$ such that, for the integral closure $R_L$ of $R$ in $L$ (the elements of $L$ satisfying a monic polynomial over $R$, [def-weil-pbc-integral-closure]) and $S_L=\\operatorname{Spec}R_L$, the sheaf $F_{S_L}$ is represented by a flat separated $S_L$-scheme $Y$ of finite presentation. Moreover $S_L$ is a semi-trait and $q:S_L\\to S$ is integral, surjective, flat and quasi-compact, hence fpqc, with finite underlying fibres [def-weil-finite-integral-morphism]. Neither $R_L$ finite as an $R$-module nor excellence of $R$ is asserted.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Lemma 4.2.1, printed pp.55-56, flat separated specialization; Krull-Akizuki gives the normalized semi-trait. Model properties are preserved by fpqc base change/descent (Stacks Tags 02KU, 02KY, 02L0, 02L2). Local archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Refine the singleton fpqc cover $S^{\\prime}\\to S$ by the cited finite affine-open refinement $\\operatorname{Spec}B\\to S^{\\prime}\\to S$. Its composite to $S$ is flat and surjective. Restrict the representing bijection of $P$ along this refinement. The resulting scheme $P_B$ is of finite presentation by base-change permanence. Apply the finite-type-stage approximation to $R,B,F,P_B$: obtain $C\\subseteq B$, a flat surjective finite-presentation morphism $T=\\operatorname{Spec}C\\to S$, and a finite-presentation $T$-scheme $Q$ representing $F_T$.",
+   "uses": [
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-dedekind-fpqc-model-finite-type-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Lemma 4.2.1, printed pp.55-56 (primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf read online; local archive WANTED)."
+   }
+  },
+  {
+   "text": "Apply the normalization-local-sections lemma to $T\\to S$. All its hypotheses hold: $R$ is the given semilocal Noetherian normal one-dimensional domain, $S$ and $T$ are affine, and step 1 supplies flatness, surjectivity and finite presentation. Obtain a finite extension $L/K$ and a finite open covering $U_j$ of $S_L$, with $S$-maps $u_j:U_j\\to T$. Restricting the representing bijection $F_T\\cong h_Q$ along $u_j$ gives $F_{U_j}\\cong h_{Q\\times_TU_j}$. This uses an actual map to $T$, rather than set-theoretic containment of images.",
+   "uses": [
+    "lem-sfb-flat-cover-normalization-local-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Lemma 4.2.1, printed pp.55-56 (primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf read online; local archive WANTED)."
+   }
+  },
+  {
+   "text": "For each $j$ define the subfunctor $G_j\\subseteq F_{S_L}$ by those sections on $V\\to S_L$ for which $V\\to S_L$ factors through $U_j$. It is represented by $Q\\times_TU_j$ viewed over $S_L$: its $V$-points are precisely a factorization through $U_j$ and a section of $F(V)$. For any $a\\in F_{S_L}(V)$, its pullback of $G_j$ is the open subscheme $V\\times_{S_L}U_j$; these opens cover $V$. The fpqc sheaf condition implies the Zariski sheaf condition, since open coverings are fpqc. Thus the cited scheme criterion, with all four clauses verified, represents $F_{S_L}$ by an $S_L$-scheme $Y$.",
+   "uses": [
+    "lem-pc-schemes-criterion",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Lemma 4.2.1, printed pp.55-56 (primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf read online; local archive WANTED)."
+   }
+  },
+  {
+   "text": "The integral-closure theorem makes $R_L$ a Noetherian normal domain of dimension one, and makes $q:S_L\\to S$ surjective with finite fibres. Each maximal ideal of $R_L$ contracts to a maximal ideal of $R$ by the cited integral-contraction theorem. Thus the maximal ideals of $R_L$ form a subset of the union of the finitely many fibres over maximal ideals of $R$, so there are finitely many. The inclusion $R_L\\subset L$ makes $R_L$ torsion-free over $R$: if $0\\ne r\\in R$ and $rb=0$ in the field $L$, then $b=0$. Torsion-free flatness over a Dedekind domain gives flatness of $q$. The integral-closure definition gives integrality; $q$ is quasi-compact by qcqs permanence (1), since its source and target are affine. Flatness, surjectivity and quasi-compactness give the singleton fpqc covering condition. This proves every assertion about $S_L$ and $q$, without claiming module-finiteness.",
+   "uses": [
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09IG, lemma-integral-closure-Dedekind; more-algebra.tex Tag 0AUW; integral maximal-ideal contraction, and Topologies Tag 022B."
+   }
+  },
+  {
+   "text": "Let $X^{\\prime}=\\operatorname{Spec}B$ be the affine refinement of step 1, with its $S$-morphism $h:X^{\\prime}\\to S^{\\prime}$ and flat surjective composite $g:X^{\\prime}\\to S$, and put $E=X^{\\prime}\\times_SS_L$ with projection $e:E\\to S_L$. By covering base change applied to the fpqc covering $\\{g\\}$, $\\{e\\}$ is an fpqc covering of $S_L$, so $e$ is flat and surjective. Since $X^{\\prime}$, $S$ and $S_L$ are affine, $E=\\operatorname{Spec}(B\\otimes_RR_L)$ is affine, so $e$ is quasi-compact by qcqs permanence (1). The pullback $S^{\\prime}\\times_SS_L\\to S_L$ of the original cover is not used, since the singleton covering condition does not make it quasi-compact. Both $Y\\times_{S_L}E$ and $P\\times_{S^{\\prime}}E$, formed along $E\\to X^{\\prime}\\xrightarrow{h}S^{\\prime}$, represent $F_E$; applying their representing bijections to the universal points gives mutually inverse $E$-morphisms. The latter model is flat and separated by the cited base-change lemmas, and of finite presentation by qcqs permanence (3). Descend flatness, separatedness, local finite presentation and quasi-compactness of $Y\\to S_L$ along $e$ using the four cited descent statements; $e$ is flat, surjective and quasi-compact, as the separatedness and quasi-compactness statements require. Finally separatedness implies quasi-separatedness by the cited leaf. Together local finite presentation, quasi-compactness and quasi-separatedness are finite presentation. These are all the properties required of $Y$.",
+   "uses": [
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L2 (lemma-descending-property-flat), 02KU (lemma-descending-property-separated), 02KY (lemma-descending-property-locally-finite-presentation), 02KQ (lemma-descending-property-quasi-compact); finite presentation assembled as in Tag 02L0 (lemma-descending-property-finite-presentation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-pc-schemes-criterion",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sfb-dedekind-fpqc-model-finite-type-stage",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "lem-sfb-flat-cover-normalization-local-sections",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Lemma 4.2.1, printed pp.55-56 (primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf read online; local archive WANTED). Assembly checked against the primary scan and the local Stacks sources; the two independent ingredients remain statement-only nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf represented by a finitely presented scheme on a faithfully flat cover of a semilocal Dedekind scheme becomes a scheme after normalization in a finite extension of the fraction field",
+   "results": "{\"t\": \"2026-10-24T11:44:55Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf represented by a finitely presented scheme on a faithfully flat cover of a semilocal Dedekind scheme becomes a scheme after normalization in a finite extension of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"a68c0b4de97405e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions assume schemes already exist; limit-factorization and property-descent hits do not construct a model of an fpqc sheaf after normalizing the base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite presentation fpqc form of a scheme over a discrete valuation ring becomes representable after an integral faithfully flat normalization cover",
+   "results": "{\"t\": \"2026-10-24T11:44:53Z\", \"tool\": \"leansearch\", \"query\": \"A finite presentation fpqc form of a scheme over a discrete valuation ring becomes representable after an integral faithfully flat normalization cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"7630a138b2aefb9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions assume schemes already exist; limit-factorization and property-descent hits do not construct a model of an fpqc sheaf after normalizing the base"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"IsRepresentable\"",
+   "results": "{\"t\": \"2026-10-24T11:44:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"IsRepresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions assume schemes already exist; limit-factorization and property-descent hits do not construct a model of an fpqc sheaf after normalizing the base"
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz.*descent|descent.*normaliz|fpqc.*represent",
+   "results": "{\"t\": \"2026-10-24T11:44:52Z\", \"tool\": \"grep\", \"query\": \"normaliz.*descent|descent.*normaliz|fpqc.*represent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions assume schemes already exist; limit-factorization and property-descent hits do not construct a model of an fpqc sheaf after normalizing the base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective models for finitely presented scheme descent data over a trait after a finite extension of the generic field",
+   "results": "{\"t\": \"2026-10-24T11:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"Effective models for finitely presented scheme descent data over a trait after a finite extension of the generic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"a2fdbd6bb9767532\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions assume schemes already exist; limit-factorization and property-descent hits do not construct a model of an fpqc sheaf after normalizing the base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf over a semilocal Dedekind domain represented by a flat separated finitely presented scheme on an fpqc cover is representable after normalization in a finite field extension",
+   "results": "{\"t\": \"2026-10-24T12:37:06Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf over a semilocal Dedekind domain represented by a flat separated finitely presented scheme on an fpqc cover is representable after normalization in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\"], \"digest\": \"f85dd37ef19570d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization and local representability APIs do not provide the finite-extension model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz.*(fpqc|[Ff]inite[Pp]resentation)|fpqc.*normaliz",
+   "results": "{\"t\": \"2026-10-24T12:39:12Z\", \"tool\": \"grep\", \"query\": \"normaliz.*(fpqc|[Ff]inite[Pp]resentation)|fpqc.*normaliz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization and local representability APIs do not provide the finite-extension model theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of an fpqc form after normalization of a semilocal Dedekind domain in a finite field extension",
+   "results": "{\"t\": \"2026-10-24T12:39:13Z\", \"tool\": \"leansearch\", \"query\": \"Representability of an fpqc form after normalization of a semilocal Dedekind domain in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"93e41e2a4f9830d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization and local representability APIs do not provide the finite-extension model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-flat-group-fpqc-effectivity",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Lemma 4.2.1, printed pp.55-56, flat separated specialization; Krull-Akizuki gives the normalized semi-trait. Model properties are preserved by fpqc base change/descent (Stacks Tags 02KU, 02KY, 02L0, 02L2).",
+   "via": [
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fpqc-finite-presentation-normalization-model",
+  "worker": "stage1",
+  "summary": "Split the two independent ingredients of Anantharaman 4.2.1: approximation of the fpqc model to a finite type flat stage and local sections of that stage after finite normalization. Assemble via open subfunctors, reuse the existing integral-closure finite-fibre theorem, and explicitly descend all model properties from the original cover. Statement unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited Neron strict-local descent prerequisite through the existing via chain; Anantharaman 4.2.1 pp.55-56 realizes this prerequisite. ancestor returns None; retained null and full via chain. Latest blueprint and whole-DAG searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-singleton-affine-refinement",
+    "why": "Reduce the arbitrary singleton fpqc cover of the affine semi-trait to an affine flat surjection before approximation."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Assemble the models on base opens as representable open subfunctors; this is generic scheme representability, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Krull-Akizuki supplies the Noetherian normal one-dimensional normalization and its finite surjective fibres without a Nagata hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Descend the named morphism property from the original fpqc scheme model after constructing Y. No same-unit node provides this property descent."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Descend the named morphism property from the original fpqc scheme model after constructing Y. No same-unit node provides this property descent."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "why": "Descend the named morphism property from the original fpqc scheme model after constructing Y. No same-unit node provides this property descent."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Descend the named morphism property from the original fpqc scheme model after constructing Y. No same-unit node provides this property descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-pc-schemes-criterion",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-fpqc-descend-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-2320794b2",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-2320794b2 (reviewer sub-agent of L); spot-checked: Read the item, both new statement-only nodes (finite-type-stage, flat-cover-normalization-local-sections) and every cited statement. Checked Stacks descent.tex lemma-descending-property-separated and lemma-descending-property-quasi-compact, which need a qc cover. Anantharaman 4.2.1 is not archived locally; I checked the route against my own knowledge of the lemma (approximation by 01ZM + 0AUW, quasi-sections 05GU, normal closure with prime conjugacy 0BRI). Both new nodes are true, are not duplicates (closest is lem-sfb-trait-absolute-normalization-local-sections: DVR plus algebraic closure, a different statement) and do not restate the item. Steps 1-4 check. Step 5 gap: it descended along S'xS_L -> S_L and called it quasi-compact. Under def-weil-pbc-fpqc-covering a singleton fpqc covering need not be qc (e.g. an infinite disjoint union of copies of S), yet the separated and qc descent lemmas require qc. FIX: step 5 now descends along e: X'xS_L -> S_L, where X'=Spec B is the affine refinement from step 1. Covering base change makes e flat and surjective, E is affine so e is qc by permanence (1), and the model P xS' E is formed via X' -> S'. The refinement lemma is added to step 5's uses. Statement and deps are unchanged; nothing is weakened; no SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcFinitePresentationNormalizationModel",
+  "declaration": "AlgebraicGeometry.exists_fpqc_finite_presentation_normalization_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcFinitePresentationNormalizationModel.lean",
+  "statement": "theorem exists_fpqc_finite_presentation_normalization_model (R K : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] [Finite (MaximalSpectrum R)] [Field K] [Algebra R K] [IsFractionRing R K] (hdim : ringKrullDim R = 1) (F : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ Type v) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (CommRingCat.of R))) F) (S' : Scheme.{u}) (p : S' ⟶ Spec (CommRingCat.of R)) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage (Spec (CommRingCat.of R))) (P : Over S') (hP : Nonempty (((Over.map p).op ⋙ F).RepresentableBy P)) [Flat P.hom] [IsSeparated P.hom] [LocallyOfFinitePresentation P.hom] [QuasiCompact P.hom] [QuasiSeparated P.hom] : ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : Algebra R L) (_ : IsScalarTower R K L) (_ : FiniteDimensional K L), IsNoetherianRing (integralClosure R L) ∧ IsDomain (integralClosure R L) ∧ IsIntegrallyClosed (integralClosure R L) ∧ ringKrullDim (integralClosure R L) = 1 ∧ Finite (MaximalSpectrum (integralClosure R L)) ∧ IsIntegralHom (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ∧ Flat (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ∧ Presieve.singleton (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ∈ Scheme.fpqcPrecoverage (Spec (CommRingCat.of R)) ∧ (∀ s : Spec (CommRingCat.of R), Finite ((Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))) ⁻¹' {s})) ∧ ∃ Y : Over (Spec (CommRingCat.of (integralClosure R L))), Flat Y.hom ∧ IsSeparated Y.hom ∧ LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom ∧ Nonempty (Functor.RepresentableBy ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L))))).op ⋙ F) Y)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-284d3c061",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Checked every clause of the node against AlgebraicGeometry.exists_fpqc_finite_presentation_normalization_model. Semi-trait: IsDomain, IsNoetherianRing, IsIntegrallyClosed, ringKrullDim = 1 (equality), Finite MaximalSpectrum. K is a fraction field (IsFractionRing). F is a sheaf for fpqcTopology.over Spec R with all u-scheme tests. p is a singleton fpqcPrecoverage cover with no added qc. P represents (Over.map p).op ⋙ F and is flat, separated, LFP+qc+qs. Conclusion: an existential finite L/K with the R-algebra structure pinned by IsScalarTower; the actual integralClosure R L; the five semi-trait ring clauses; canonical q integral, surjective, flat, qc and in fpqcPrecoverage with finite point fibres; Y flat, separated, of finite presentation and representing (Over.map q).op ⋙ F. No module-finiteness or excellence. The free value universe v is allowed by Mathlib's RepresentableBy, and no universe is unbound. Node differs from live only in lean; no parallel landing. Statement field verbatim; proof sorry only; no definitions; docstrings carry the source place, the blueprint id and the 5 proof steps. All 7 proof imports exist in side-live. Report has both sections. No file changed, so no compile."
+ }
+}

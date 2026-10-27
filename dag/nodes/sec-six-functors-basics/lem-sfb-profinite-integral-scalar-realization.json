@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-profinite-integral-scalar-realization",
+ "kind": "statement",
+ "title": "Continuous realization and reductions of integral finite scalar models",
+ "statement": "Work in the small-site and indexing universes of [def-weil-size-convention]. For a profinite space $P$ (compact Hausdorff and totally disconnected), equip $\\operatorname{Prof}/P$ with finite jointly surjective covering families. For a topological commutative ring $T$, write $R_T(Q\\xrightarrow{a}P)=C(Q,T)$, with pointwise operations and pullback of continuous functions. Use ordinary internal $R_T$-modules [sk-def-sfb-module-objects] and their ordinary uncompleted derived category [def-weil-abstract-derived-category]. Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, and $O=\\mathcal O_E$, with its valuation topology and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Give a finitely presented scalar $O$-module $B$ [def-sc-finitely-presented-module] the quotient topology from any finite presentation $O^m\\to O^n\\to B\\to0$. This topology is independent of the presentation; $B$ is a compact Hausdorff profinite topological module and $B\\cong\\varprojlim_{k\\ge1}B/\\pi^kB$ as a topological module. The canonical map from the scalar model $R_O\\otimes_{\\underline O}\\underline B$ (discrete constant underlines [def-weil-pbc-constant-sheaf], ordinary scalar extension [def-sfb-modobj-extension]) to the sheaf $Q\\mapsto C(Q,B)$ is an isomorphism. For any two such $B,C$, every morphism $v:B_{R_O}\\to C_{R_O}$ is induced by a unique continuous map $\\widetilde v:P\\times B\\to C$ whose restriction to each $\\{p\\}\\times B$ is $O$-linear: on $Q\\xrightarrow{a}P$ it sends $b$ to $[q\\mapsto\\widetilde v(a(q),b(q))]$. Its reduction induces maps of finite locally constant module bundles $B/\\pi^kB\\to C/\\pi^kC$ on $P$, compatible with the actual quotient transitions. The canonical map identifies the sheaf kernel of $v$ with the ordinary inverse limit of the sheaf kernels of these reduction maps. Here a finite locally constant bundle is a finite disjoint union of products of clopen subsets of $P$ with finite discrete modules. No surjectivity or stabilization hypothesis is imposed on the reduction-kernel transitions. Zero modules and empty $P$ are allowed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1, Remark 3.2; agent finite-presentation and compact-reduction lemma. Compare Stacks 08YN (topology, proposition-projective-in-category-hausdorff-qc) for local lifting."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-modobj-extension",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite_module_topology for the module topology, continuous_scalar_comparison for the normalized scalar extension, and universal_section_morphism for the unique representing family. The quotient transition identity is proved directly by quotient induction. The reduction family is locally constant by evaluating finitely many chosen lifts in the finite quotient. The kernel comparison is bijective by the homeomorphism of the positive reduction limit for the source and injectivity of the corresponding limit map for the target; compatible sequences reconstruct a continuous section coordinatewise.",
+   "uses": [
+    "lem-sfb-integral-finite-module-topology",
+    "lem-sfb-integral-continuous-scalar-comparison",
+    "lem-sfb-profinite-universal-section-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2; compact reduction and universal-section arguments"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-finite-module-topology",
+  "lem-sfb-integral-continuous-scalar-comparison",
+  "lem-sfb-profinite-universal-section-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Remark 3.2, with the finite presentation and reduction arguments made explicit in the Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(continuous|Continuous|Condensed).*([Ff]inite[Pp]resentation|[Ff]initely[Pp]resented).*(quotient|limit)|(profinite|Profinite).*scalar.*module",
+   "results": "{\"t\": \"2026-10-25T10:33:59Z\", \"tool\": \"grep\", \"query\": \"(continuous|Continuous|Condensed).*([Ff]inite[Pp]resentation|[Ff]initely[Pp]resented).*(quotient|limit)|(profinite|Profinite).*scalar.*module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: finite-presentation predicates, discrete condensation and ordinary scalar modules do not give the continuous compact module realization or its morphism and reduction normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The condensed sheaf of a finitely presented p-adic integer module is scalar extension of its discrete constant module and is reconstructed from finite uniformizer quotients",
+   "results": "{\"t\": \"2026-10-25T10:33:59Z\", \"tool\": \"leansearch\", \"query\": \"The condensed sheaf of a finitely presented p-adic integer module is scalar extension of its discrete constant module and is reconstructed from finite uniformizer quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.isDiscrete_tfae\", \"LightCondensed.lanLightCondSet\", \"ModuleCat.tildeInModuleCat\", \"CondensedSet.LocallyConstant.iso\", \"LightCondensed.IsDiscrete\", \"Condensed.lanCondensedSet\", \"CondensedAb\", \"LightCondensed.discreteUnderlyingAdj\"], \"digest\": \"b233b69da12990ee\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: finite-presentation predicates, discrete condensation and ordinary scalar modules do not give the continuous compact module realization or its morphism and reduction normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-25T10:33:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Condensed.instFinalOppositeDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceCostructuredArrowFintypeCatProfiniteOpToProfiniteOpPtAsLimitConeFunctorOp\"], \"digest\": \"02b951db77695d61\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: finite-presentation predicates, discrete condensation and ordinary scalar modules do not give the continuous compact module realization or its morphism and reduction normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented module over the integers of a finite p-adic field realized by sheaf scalar extension on profinite sets is the sheaf of continuous maps into its compact quotient topology and equals the inverse limit of its finite quotients",
+   "results": "{\"t\": \"2026-10-25T10:34:02Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented module over the integers of a finite p-adic field realized by sheaf scalar extension on profinite sets is the sheaf of continuous maps into its compact quotient topology and equals the inverse limit of its finite quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteFree\", \"Condensed.profiniteSolid\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.finFree\", \"LightCondMod.ofSheafLightProfinite\", \"BDeRhamPlus\", \"LightCondMod.LocallyConstant.functorToPresheaves\"], \"digest\": \"2e8330c81af7053e\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: finite-presentation predicates, discrete condensation and ordinary scalar modules do not give the continuous compact module realization or its morphism and reduction normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensation of finitely presented scalar modules over finite rings and local fields commutes with a finite scalar presentation, on the site of profinite spaces over P",
+   "results": "{\"t\": \"2026-10-25T10:36:33Z\", \"tool\": \"leansearch\", \"query\": \"Condensation of finitely presented scalar modules over finite rings and local fields commutes with a finite scalar presentation, on the site of profinite spaces over P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"CondensedMod\", \"Module.FinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation.mk\", \"Module.FinitePresentation.trans\", \"instFinitePresentationTensorProduct\", \"Module.Presentation.restrictScalars\"], \"digest\": \"1b10deae846b232d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: finite-presentation predicates, discrete condensation and ordinary scalar modules do not give the continuous compact module realization or its morphism and reduction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTopologicalModule|topologicalModule.*[Ff]inite[Pp]resentation|continuous.*scalar.*realization|[Ff]inite[Pp]resentation.*[Cc]ondensed",
+   "results": "{\"t\": \"2026-10-25T11:47:03Z\", \"tool\": \"grep\", \"query\": \"ofTopologicalModule|topologicalModule.*[Ff]inite[Pp]resentation|continuous.*scalar.*realization|[Ff]inite[Pp]resentation.*[Cc]ondensed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous sheaves of finitely presented integral p-adic modules are the ordinary scalar extension of their discrete constant sheaves on profinite sets over a base",
+   "results": "{\"t\": \"2026-10-25T11:47:03Z\", \"tool\": \"leansearch\", \"query\": \"Continuous sheaves of finitely presented integral p-adic modules are the ordinary scalar extension of their discrete constant sheaves on profinite sets over a base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.isDiscrete_tfae\", \"LightCondensed.discrete\", \"LightCondensed.lanLightCondSet\", \"LightCondensed.discreteUnderlyingAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.isFinitePresentation\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"Condensed.lanCondensedSet\"], \"digest\": \"d5f364a93c5be5d3\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Module\", \"continuous\"",
+   "results": "{\"t\": \"2026-10-25T11:47:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"Module\\\", \\\"continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over the ring of integers of a p-adic local field have compact quotient topology, and scalar extension from the discrete constant sheaf on profinite sets is the sheaf of continuous maps",
+   "results": "{\"t\": \"2026-10-25T11:47:04Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely presented modules over the ring of integers of a p-adic local field have compact quotient topology, and scalar extension from the discrete constant sheaf on profinite sets is the sheaf of continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"Condensed.finFree\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.LocallyConstant.functor\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functor\"], \"digest\": \"8cb1dd5f729450ee\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "toCondensed|toSheaf.*[Mm]od|[Ff]inite[Pp]resentation|[Cc]ontinuous[Ll]inear",
+   "results": "{\"t\": \"2026-10-25T11:47:51Z\", \"tool\": \"grep\", \"query\": \"toCondensed|toSheaf.*[Mm]od|[Ff]inite[Pp]resentation|[Cc]ontinuous[Ll]inear\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\"], \"digest\": \"a6d154b73564bc86\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf linear map between continuous function modules on profinite spaces over P is a jointly continuous family of linear maps between compact finitely presented modules, whose kernel is the limit of kernels modulo powers of a uniformizer",
+   "results": "{\"t\": \"2026-10-25T11:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf linear map between continuous function modules on profinite spaces over P is a jointly continuous family of linear maps between compact finitely presented modules, whose kernel is the limit of kernels modulo powers of a uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"Condensed.profiniteSolid\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CondensedMod\"], \"digest\": \"9c53cde3828c5c24\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: constructors of condensed modules, discrete constant sheaves, free/solid modules and topological embedding functors do not state the finite-presentation integral scalar realization with its relative morphism and kernel-reduction clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-constant-model-relation-hull",
+  "date": "2026-10-25",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Continuous realization and reductions of integral finite scalar models.",
+   "via": [
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-profinite-integral-scalar-realization",
+  "worker": "stage1",
+  "summary": "Uses the existing DVR Smith-normal-form leaf and integer profinite-tower theorem; proves the topology, scalar sheaf comparison by explicit pullback covers, morphism evaluation, finite bundle reductions, and ordinary kernel limit. No new nodes and no statement change beyond explicit definition citations.",
+  "blueprint": "Supports det-sf-comp-coherence-cocycle, Refinement isomorphisms paragraph via det-sf-comp-coherence-refinement (2): the descendant general-base boundary/support argument needs continuous finite scalar models and their actual reduction kernels. The nine steps supply this auxiliary input without changing the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The scalar DVR and uniformizer factorization are coefficient arithmetic, needed for diagonal quotient topology; this compactification unit contains no coefficient arithmetic theorem."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "The coefficient ring topology and its actual residue tower are generic coefficient tools; the unit has no scalar topological reconstruction theorem."
+   },
+   {
+    "node": "lem-sfb-continuous-abelian-profinite-sheaf",
+    "why": "Continuous-map descent is used on the profinite slice; no theorem of this compactification unit provides that general sheaf construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "The general sheafification criterion applies after explicit cover-local tensor lifts; it replaces no compactification step."
+   },
+   {
+    "node": "lem-sfb-modobj-kernels",
+    "why": "The general lifting of a sheaf kernel action to an internal module kernel is categorical infrastructure, absent from the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-continuous-abelian-profinite-sheaf",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NF-aaf7c3a7c",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-aaf7c3a7c (reviewer sub-agent of L); spot-checked: I read all nine steps against the cited statements and the source; review.md has the details. The statement matches the base copy word for word, except for three added citations: def-sc-finitely-presented-module, def-weil-pbc-constant-sheaf and def-sfb-modobj-extension. Each exists and defines the notion it is cited for. The delivery has no new nodes. Source: Hemo–Richarz–Scholbach, Example 3.1 (continuous-map sheaf) and Remark 3.2 (constant-sheaf scalar extension). The rest of the proof is correctly marked agent-written. Steps 1–3: Smith normal form (exists_smith_normal_form_of_le leaf) and the DVR clauses give B ≅ O^r ⊕ ⊕O/π^e. The diagonal map O^n → product is a continuous surjection from a compact to a Hausdorff space, so it is a quotient map (compact-Hausdorff leaf). Lifting generators makes the topology independent of the presentation. The integers-profinite-tower node gives B ≅ lim B/π^k, and torsion summands are constant from k = e on. Step 4: the adjunction, the constant-sheaf property, the tensor universal property and Yoneda identify a(C(Q,O)⊗B) with the scalar model, and θ is the canonical map. Steps 5–6: the covers Q×_B O^n and Q×_N O^m are profinite and surjective, N is closed because B is Hausdorff, and the local-bijectivity leaf finishes. Step 7: evaluating v on the universal section over P×B (profinite by step 1) and pulling back along the graph gives the formula, with fibrewise linearity at point objects. Step 8: finitely many lifts give a finite clopen partition, and the transition squares commute. Step 9: kernel sequences glue through step 3 (applied to B and to C), and lem-sfb-modobj-kernels gives the module kernel; no Mittag–Leffler argument is used. Small cases checked: v = π on O (each reduction kernel is nonzero, transitions are zero, the limit is 0), O/π^e, zero modules, empty P, P a point. I found no duplicate in the DAG; I read normed-coefficient-realization, finite-discrete-encoded-constant-fp, admissible-scalar-model-cohomology, compact-adic-continuous-identification and procyclic-scalar-cochain-evaluation. Route: the unit uses nagata-sketch-comp-category, which covers the DVR lemma. I accept the declared tool_uses (integers-profinite-tower, continuous-abelian-profinite-sheaf, the sheafification leaf, the Lean-closed modobj-kernels) as generic black boxes that replace no unit step. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteIntegralScalarRealization",
+  "declaration": "Profinite.IntegralScalar.integral_scalar_realization",
+  "declarations": [
+   "Profinite.IntegralScalar.integral_scalar_realization"
+  ],
+  "file": "lean/Sheaf/Topology/ProfiniteIntegralScalarRealization.lean",
+  "statement": "theorem integral_scalar_realization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Statement l E",
+  "branch": "newtargets-dag",
+  "by": "S7",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The original definitions are unchanged and re-exported from ProfiniteIntegralScalarDefinitions. The theorem is reduced to three strictly smaller steps, with direct proofs of quotient naturality, finite clopen reductions and kernel reconstruction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e86f8041c",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read the node, all 8 stmt_deps, the module, the report and the dependency sources (CoefficientExtension, IntegersProfiniteTower topology, ContinuousMapCondensedRing). Topology, compactness/profiniteness, the π^(k+1) limit homeomorphism, the normalized scalar comparison (φ, M₀, M and e all pinned), the reduction bundles, transitions and the sectionwise kernel-limit bijection all match the node. Edge cases (zero modules, empty P, torsion, v=π) are covered; no hollow defs; one sorry; owners cited. H3 FIX: MorphismStatement `∃! g, Represents g ∧ (kernel-limit clauses)` restricted ṽ-uniqueness to families also meeting the content-bearing kernel clause; replaced by `∃ g, (∀ g', Represents g' ↔ g' = g) ∧ …`. Signature unchanged; the record pins it verbatim. The fixed file compiled clean via nt_compile --json (6.9 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5874f",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T164307-L-992819",
+  "kind": "interface",
+  "note": "independent cc review: item integral_scalar_realization (signature unchanged) proved from finite_module_topology, continuous_scalar_comparison, universal_section_morphism (true, strictly smaller, steps 1-3/4-6/7) + proved private helpers; 24 definitions verbatim-diffed against the published module and re-exported via public import; node fields/tool_uses deletion vs brief-stage3"
+ }
+}

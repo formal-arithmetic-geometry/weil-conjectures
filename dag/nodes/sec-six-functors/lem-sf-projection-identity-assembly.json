@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-projection-identity-assembly",
+ "kind": "statement",
+ "title": "Assembly of the normalized identity projection at each coefficient stage",
+ "statement": "Fix a six-functor operation datum $S$ of [def-fix-six-functor-datum], a space $X$, and one of its four coefficient stages. Write $U=S.\\mathrm{pull}(\\operatorname{id}_X)$. There is a unique $e:U\\xrightarrow{\\sim}\\operatorname{id}$ such that $e_{UM}\\circ\\kappa_M=t_M$ for every $M$, where $\\kappa$ is the supplied identity compositor and $t$ is transport along the identity composition equation. For every compactification $c$ of $\\operatorname{id}_X$, let $\\sigma_c$ be the supplied proper identification followed by the right-adjoint mate of $e$. Then the compact-support projection of [def-sf-constructible-projection-mates] satisfies $$(1_K\\otimes e_L)\\circ\\sigma_{c,K\\otimes UL}\\circ\\operatorname{PF}^c_{K,L}=\\sigma_{c,K}\\otimes1_L.$$ At finite coefficients $K$ is arbitrary bounded constructible and $L$ is bounded constructible finite-Tor, and $e_L$ is restricted through the full inclusion. At integral coefficients $K,L$ are bounded constructible and only $L$ belongs to the datum uniform finite-Tor domain. At rational and common coefficients both are arbitrary bounded constructible objects. Four proved Lean stage lemmas realize this statement, with no additional hole in their module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "At finite coefficients, derive sfIntrinsicPullbackId, compose with mapDerivedCategoryIdIso, and cancel the fully faithful constructible inclusion along finitePullback. The resulting identity isomorphism makes the identity inverse image full and faithful. At the three higher stages use [lem-sf-projection-identity-pullback-units].",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "lem-sf-projection-identity-pullback-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the source of the identity compositor along id_comp. Cancel the fully faithful inverse-image functor from its inverse compositor to construct an isomorphism e with identity. Naturality at e_M identifies e_(UM) with U(e_M); the compositor inverse/hom equation proves normalization. For two normalized candidates cancel the invertible compositor, then use naturality at an invertible unit component and cancel its image under U. These are the proved generic helpers normalizedIdentityUnit, normalizedIdentityUnitTransport, identityUnit_unique and normalizedIdentityUnitProperty.",
+   "uses": [
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-sf-projection-identity-proper-counit] for the direct-image identity projection. The proper-coincidence clauses of [lem-sf-projection-finite-stage-laws, lem-sf-projection-integral-stage-laws, lem-sf-projection-field-stage-laws] identify tensor(properIdentification) followed by the proper projection with the compact-support projection followed by properIdentification. Compose with the counit mate and tensor(e_L), substitute the proper identity equation, and combine the two tensor maps by functoriality. This gives the stated support equation for every compactification. The generic helper identityProjection_of_proper proves this composition calculation, and normalizedIdentityUnitProperty packages it with existence and uniqueness. The four stage lemmas have no sorry.",
+   "uses": [
+    "def-sf-constructible-projection-mates",
+    "lem-sf-projection-identity-proper-counit",
+    "lem-sf-projection-finite-stage-laws",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-projection-field-stage-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-projection-field-stage-laws",
+  "lem-sf-projection-finite-stage-laws",
+  "lem-sf-projection-identity-proper-counit",
+  "lem-sf-projection-identity-pullback-units",
+  "lem-sf-projection-integral-stage-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor isomorphic to the identity has a unique unit compatible with its composition isomorphism",
+   "results": "Eight hits, including Adjunction.unitAsIsoOfIso, isIso_unit_of_iso and leftAdjointIdIso. These concern generic adjunctions, not the supplied coefficient-stage pullback units or tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the normalized six-functor operation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity pullback functors have a natural identity unit normalized by composition and the proper counit projection formula becomes identity under this unit",
+   "results": "Eight hits for Over.pullbackId and ChosenPullbacksAlong identity unit and counit lemmas; these concern ordinary over-category pullbacks.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for finite, completed, rationalized and common-stage sheaf operations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(assoc|identity|tensorAction)",
+   "results": "Mathlib search returned generic projection/identity hits only. Repository search found ProjectionSystemCoherence (an identity equation on explicit system models), CoherentRationalPullbackIdentity and CommonStagePullbackIdentity (units requiring a simultaneous comparison system), and the existing constructible proper-coincidence laws. None states either of these two assertions on an arbitrary supplied SixFunctorDatum.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generic full-faithful cancellation and naturality calculations in Lean; the remaining coefficient-specific steps are the two lower nodes. The stage proper-coincidence laws supply transport to compact support."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionIdentityAssembly",
+  "file": "lean/Sheaf/Paper/ProjectionIdentityAssembly.lean",
+  "declaration": "WeilConjectures.projectionIdentity_finite",
+  "declarations": [
+   "WeilConjectures.projectionIdentity_finite",
+   "WeilConjectures.projectionIdentity_integral",
+   "WeilConjectures.projectionIdentity_rational",
+   "WeilConjectures.projectionIdentity_common"
+  ],
+  "statement": "theorem projectionIdentity_finite (S : SixFunctorOperationDatum D C E n hn) :\n    (∀ X : SixFunctorSpace D,\n      letI : IsProper (𝟙 X : X ⟶ X).hom.left := by\n        change IsProper (𝟙 X.obj.left)\n        infer_instance\n      ∃! e : S.finite.pull (𝟙 X) ≅ 𝟭 (sixFunctorFiniteCategory D C E n hn X),\n        (∀ M : sixFunctorFiniteCategory D C E n hn X,\n          (S.finite.pullComposition (𝟙 X) (𝟙 X)).hom.app M ≫\n              e.hom.app ((S.finite.pull (𝟙 X)).obj M) =\n            eqToHom (congrArg (fun f ↦ (S.finite.pull f).obj M)\n              (Category.id_comp (𝟙 X)))) ∧\n        ∀ (c : Compactification (𝟙 X : X ⟶ X).hom.left) (K : sixFunctorFiniteCategory D C E n hn X)\n          (L : finiteTorConstructibleCategory C.l E n hn X.obj.left),\n          CompactSupportFiniteProjection.component S.toSixFunctorFiniteOperations (𝟙 X) c K L ≫\n            ((S.finite.properIdentification (𝟙 X) c ≪≫\n              ((S.finite.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n                Adjunction.id)).hom.app\n              (((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations\n          X).obj K).obj ((CompactSupportFiniteProjection.torPull S.toSixFunctorFiniteOperations\n          (𝟙 X)).obj L)) ≫\n            ((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations X).obj\n          K).map ((ObjectProperty.isoMk\n              (finiteTorConstructible C.l E n hn X.obj.left)\n              (X := (CompactSupportFiniteProjection.torPull\n                S.toSixFunctorFiniteOperations (𝟙 X)).obj L) (Y := L)\n              ((intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι.mapIso\n                (e.app ⟨L.obj, L.property.1⟩)))).hom =\n          ((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations X).map\n            (((S.finite.properIdentification (𝟙 X) c ≪≫\n              ((S.finite.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n                Adjunction.id)).hom.app K)).app L)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-00817",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T012828-L-2337118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-00817",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T012828-L-2337118",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules/nodes vs prop-sf-pf-coherence node, unit sk-prop-sf-pf-coherence uses+realized of sk-prop-sf-pf-reduction/sk-thm-sf-pf-proetale, SixFunctorOperationDatum pinning, sandbox compile + #print axioms"
+ }
+}

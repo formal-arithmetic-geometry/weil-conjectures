@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-fibrewise-rational-map",
+ "kind": "definition",
+ "title": "Fibrewise dense opens and relative rational maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], with morphisms $f:X\\to S$ and $g:Y\\to S$. Fibres are scheme-theoretic base changes [def-pc-base-change]. An open $U\\subseteq X$ is $S$-dense if its inverse image under $X_s\\to X$ is dense for every $s\\in S$. A fibrewise partial map from $f$ to $g$ consists of an $S$-dense open $U$ and an $S$-morphism $a:U\\to Y$. Two such representatives $(U,a),(V,b)$ are equivalent when there is an $S$-dense open $B\\subseteq U\\cap V$ on which $a$ and $b$ agree. An $S$-rational map is the quotient by this relation. A fibrewise partial isomorphism consists of $S$-dense opens $U\\subseteq X$, $H\\subseteq Y$ and an $S$-isomorphism $e:U\\simeq H$; its underlying partial map is $U\\xrightarrow{e}H\\hookrightarrow Y$. An $S$-rational map is $S$-birational if it is represented by such a fibrewise partial isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §2.5, printed pp.55–56 (PDF pp.61–62), definitions of S-dense open and S-rational map; the representative-isomorphism form used in §4.3 Proposition 5, printed pp.107–108. Primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open subsets dense in every fibre and rational maps over a base scheme",
+   "results": "{\"t\": \"2026-10-24T11:53:04Z\", \"tool\": \"leansearch\", \"query\": \"Open subsets dense in every fibre and rational maps over a base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.IsDominant.mk\"], \"digest\": \"e4ac29746a39667a\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching fibrewise notion: the hits are ordinary dense-open rational maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative rational maps are classes of morphisms on open subsets dense in every scheme theoretic fibre",
+   "results": "{\"t\": \"2026-10-24T11:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"Relative rational maps are classes of morphisms on open subsets dense in every scheme theoretic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\"], \"digest\": \"4e9a2533ae3cf9cb\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching fibrewise notion: the hits are ordinary dense-open rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "FiberwiseRational|FiberwisePartial|IsFiberwiseDense|[fF]ib[er]*wise.*[rR]ational",
+   "results": "{\"t\": \"2026-10-24T11:53:06Z\", \"tool\": \"grep\", \"query\": \"FiberwiseRational|FiberwisePartial|IsFiberwiseDense|[fF]ib[er]*wise.*[rR]ational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matches in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "FiberwiseRationalMap|FiberwisePartialMap|IsFiberwiseDense|SmoothTraitLocalExtension|AgreesOnPullback|stalkBaseChange; rg lean/WeilConjectures lean/Sheaf",
+   "results": "No matches. Other fibre-density searches find inline Dense (f.fiberι s preimage U) in GoodCurvesFibreDensity and GenericOpenFibreDensity, but no named fibrewise density or rational-map notion.",
+   "date": "2026-10-24",
+   "verdict": "No existing project or upstream declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-trait-local-rational-spreading",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The definitions of T-dense opens, T-rational maps and T-birational maps in the local-spreading statement; BLR §2.5, printed pp.55–56.",
+   "via": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiberwiseRationalMap",
+  "declaration": "AlgebraicGeometry.Scheme.FiberwiseRationalMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsFiberwiseDense",
+   "AlgebraicGeometry.Scheme.FiberwisePartialMap",
+   "AlgebraicGeometry.Scheme.FiberwisePartialMap.Equiv",
+   "AlgebraicGeometry.Scheme.FiberwiseRationalMap",
+   "AlgebraicGeometry.Scheme.FiberwisePartialIso",
+   "AlgebraicGeometry.Scheme.FiberwisePartialIso.toPartialMap",
+   "AlgebraicGeometry.Scheme.FiberwiseRationalMap.IsBirational"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiberwiseRationalMap.lean",
+  "statement": "def Scheme.FiberwiseRationalMap {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) : Type u",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3068402c6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3068402c6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read the item, the new def node def-sfb-fibrewise-rational-map, both modules, the statement deps and Mathlib Scheme.Hom.fiber/fiberι/genericPoints. Item diff vs side-live: only lean and the added stmt_dep, with statement, proof and proof_deps unchanged. Both lean.statement fields are verbatim in their files. Hypotheses match the node: smooth + LocallyOfFiniteType + QuasiCompact on z, v, w and IsSeparated on w only; hh is equivalent to h over Z_E since Z_E→Z is mono. The DVR claim for the stalks is concluded, not assumed, and is true. The local hypothesis is correct: the domain contains the whole generic fibre and is fibrewise dense, and AgreesOnPullback on D×_V V_E = V_L is equivalent to d|V_L = h_L. The extension, birational and uniqueness (any open B) clauses match. The R' base-change clause holds for arbitrary X, and e' is fixed as e×_T T'. The def node matches BLR 2.5 with real data and no sorry. No hollow defs; the only sorry is the main proof; docstrings carry the 15 steps and source places. def-weil-closed-immersion stmt_dep is spurious but harmless. Note for landing: about ten parallel unlanded S2 copies of the fibrewise-density notion (N5, NF, NZ/Q42, Q15, Q04, Q110/Q39, Q114, Q47); the first lander owns it and the rest rebind. No files changed, so no compile."
+ }
+}

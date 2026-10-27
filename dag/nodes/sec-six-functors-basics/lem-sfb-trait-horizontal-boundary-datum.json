@@ -1,0 +1,679 @@
+{
+ "id": "lem-sfb-trait-horizontal-boundary-datum",
+ "kind": "statement",
+ "title": "A compatible horizontal Cartier boundary for a descended affine open",
+ "statement": "Let $B\\to C$ be a faithfully flat homomorphism of discrete valuation rings, and put $K=\\operatorname{Frac}B$, $L=\\operatorname{Frac}C$ (their localizations at nonzero elements), $S=\\operatorname{Spec}B$ and $S'=\\operatorname{Spec}C$ [def-sc-discrete-valuation-ring, def-weil-pbc-faithfully-flat-ring-map, def-weil-affine-spectrum]. Let $X'\\to S'$ be smooth separated of finite type, with descent datum $\\alpha$ relative to $S'/S$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-pd-descent-datum]. Separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose the generic datum is realized by a $K$-scheme $X_0$ with $X_0\\times_KL\\simeq X'_L$ [def-pc-base-change]. Let $U\\to S$ be affine, and suppose an isomorphism $U\\times_SS'\\simeq U'\\subseteq X'$ realizes the restricted datum on an invariant affine open $U'$ dense in every geometric fibre [def-weil-open-immersion]. Require also an open immersion $U_K\\hookrightarrow X_0$ inducing $U'_L\\hookrightarrow X'_L$. Then there is an effective Cartier divisor $D_0\\subseteq X_0$ with support $X_0\\setminus U_K$. Its schematic closure $D'$ in $X'$ is an effective Cartier divisor with support $X'\\setminus U'$ [def-nagata-effective-cartier-ideal, def-pc-divisor-line-bundle]. Schematic closure here means the closed subscheme with ideal $\\ker(\\mathcal O_{X'}\\to j_*\\mathcal O_{(D_0)_L})$, where $j:(D_0)_L\\to X'$ is the composite inclusion. Over $S'\\times_SS'$, the datum identifies the two pulled-back closed subschemes $p_0^*D'$ and $p_1^*D'$. It consequently gives an isomorphism between the pullbacks of the invertible module $\\mathcal O_{X'}(D')$ satisfying the same cocycle as $\\alpha$ [def-sc-invertible-module, def-pc-module-pullback]. The empty divisor is permitted. No group structure or ampleness is asserted.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 proof, case (a), printed p.160 (PDF p.166): choose the generic boundary divisor and close it in the smooth trait scheme; schematic closure and flat pullback give the datum on the divisor and its associated line. EGA IV4, 21.12.7 supplies the generic boundary divisor. Local BLR PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pd-descent-datum",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose uniformizers $\\pi_B,\\pi_C$. A DVR is Noetherian since its ideals are principal. Its dimension is one by [lem-sc-dvr-dimension-one], so its principal maximal ideal makes it regular local; its only other prime is $(0)$, whose localization is its fraction field, regular of dimension zero. Thus $B,C,K,L$ are regular rings. The map $B\\to C$ is injective: $C$ is flat over the domain $B$, hence torsion-free, and $1_C\\ne0$. Surjectivity on spectra gives a prime of $C$ above the nonzero maximal ideal of $B$; it must be the maximal ideal of $C$. Thus the image of $\\pi_B$ is a nonzero nonunit. The DVR power theorem writes it as $u\\pi_C^e$ with $e\\ge1$. Consequently $C\\otimes_BK=C[1/\\pi_B]=C[1/\\pi_C]=L$. Also $X'_L$ is the principal open where $\\pi_C$ is invertible, by principal localization and open-immersion base change.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr); Tag 00IE; localization at a uniformizer."
+   }
+  },
+  {
+   "text": "Every point of $X'$ has a smooth affine neighbourhood over an affine open of $\\operatorname{Spec}C$. Such a nonempty base open is either $\\operatorname{Spec}C$ or $\\operatorname{Spec}L$. Smooth restriction and the affine smoothness equivalence turn these into smooth ring maps from $C$ or $L$. Regularity ascends along those maps, so the affine coordinate rings are regular and Noetherian. Stalk localization shows that every local ring of $X'$ is regular local. Finite type over the affine base gives quasi-compactness, so $X'$ is Noetherian. The regular-local UFD theorem, with the empty parameter list, makes all its stalks UFDs. Smoothness also makes $X'\\to S'$ flat. At a point of the special fibre its stalk is flat over $C$, so $\\pi_C$ is nonzero there by torsion-freeness. At a point of the generic fibre it is a unit. These observations will exclude vertical generic points. Finally $X'$ is an absolutely separated scheme by the separated-over-affine lemma.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-pc-smooth-flat",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036D (lemma-regular-local-smooth), ascent; Algebra Tag 07NF; More on Algebra Tag 0AG0 (lemma-regular-local-UFD)."
+   }
+  },
+  {
+   "text": "The morphism $X'_L\\to\\operatorname{Spec}L$ is smooth, separated and finite type by the smooth, separated, locally-finite-type and quasi-compact base-change statements. The field cover $\\operatorname{Spec}L\\to\\operatorname{Spec}K$ is fpqc. Apply smoothness, separatedness, local finite type and quasi-compact fpqc descent to the already given $X_0$. It follows that $X_0$ is smooth separated finite type over $K$. It is regular and locally Noetherian by smooth-field regularity, and quasi-compact by finite type, hence Noetherian. Regular-normal decomposition writes it as a finite disjoint union of integral open-and-closed schemes $X_i$. Density of $U'_L$ in the ordinary generic fibre follows from density after algebraic closure: a nonempty open stays nonempty after field extension by faithful flatness and spectrum surjectivity. A nonempty $X_i$ meets $U_K$: otherwise its nonempty pullback to $L$ would be an open disjoint from the dense $U'_L$. Nonemptiness and this density test can be checked on affine spectra using faithful flatness of field scalar extension and surjectivity on spectra.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-lft-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02VL, 02KU, 02KX, 02KQ; Varieties Tag 056S; Properties Tags 0569 and 033M."
+   }
+  },
+  {
+   "text": "The scheme $U_K$ is affine by affine-morphism base change from $U\\to S$ and affine permanence. Put $U_i=U_K\\cap X_i$. It is a nonempty affine open of $X_i$: it is open and closed in $U_K$, and is the closed subscheme whose ideal is zero on $U_i$ and the unit ideal on its open complement. It is therefore affine by closed-immersion affineness and affine permanence. The restrictions $X_i\\to\\operatorname{Spec}K$ are smooth, and are separated finite type because they are open-and-closed pieces of the Noetherian $X_0$. Apply [lem-sfb-smooth-affine-cartier-boundary] to each $X_i,U_i$. On the finite disjoint union define $D_0$ by these divisor ideals on its open-and-closed pieces. There are no overlaps between distinct pieces, so these ideals define a Cartier divisor, with support $X_0\\setminus U_K$. If $X_0$ is empty the same prescription gives the empty divisor. Pullback to $L$ is Cartier by flat Cartier pullback; call the resulting divisor $E\\subset X'_L$. Its support is $X'_L\\setminus U'_L$: the complement of a closed subscheme pulls back to the complement of its inverse-image closed subscheme, as is immediate from the local ideal equations.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-smooth-affine-cartier-boundary",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-pc-flat-pullback-effective-cartier-ideal",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCW (lemma-complement-open-affine-effective-cartier-divisor), componentwise; Tag 02OO (6), flat Cartier pullback."
+   }
+  },
+  {
+   "text": "Let $g:E\\to X'$ be the inclusion through the generic open. It is quasi-compact: over an affine open $W=\\operatorname{Spec}R\\subset X'$, its inverse image is a closed subscheme of the principal affine open $W[1/\\pi_C]$, hence affine. Thus $g$ is affine and therefore quasi-compact. Define $D'=\\operatorname{SIm}(g)$. The quasi-compact scheme-image kernel statement identifies its ideal with $\\ker(\\mathcal O_{X'}\\to g_*\\mathcal O_E)$, exactly the closure requested in the statement. The image-support statement gives $|D'|=\\overline{|E|}$. Flat image base change to the generic open, followed by the image-of-closed-immersion statement, gives $D'\\cap X'_L=E$ as closed subschemes. In particular multiplicities have not been discarded.",
+   "uses": [
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-scheme-image-flat-base-change",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R8, 01RA, 081I (lemma-flat-base-change-scheme-theoretic-image); the principal open is localization at the uniformizer."
+   }
+  },
+  {
+   "text": "The factorial-complement extension theorem applies to $X'_L\\subset X'$ and $E$: step 2 gives local Noetherianity and UFD stalks on the complement. Choose an effective Cartier divisor $H\\subset X'$ restricting to $E$. This theorem asserts only an extension; it does not identify that extension with the schematic closure. Fix $x\\in X'$ and put $A=\\mathcal O_{X',x}$ and $a=\\pi_C\\in A$. The canonical local-spectrum morphism $c:\\operatorname{Spec}A\\to X'$ is flat. Pulling the image $D'$ back along $c$ is therefore the scheme-theoretic image of $E\\times_{X'}\\operatorname{Spec}A$. If $h\\in A$ is a local Cartier equation of $H$ at $x$, this source is the closed subscheme defined by $h$ in $\\operatorname{Spec}A[1/a]$. Here $h\\ne0$ since it is a nonzerodivisor in the domain $A$, and $a\\ne0$ by step 2. The kernel formula gives its image ideal as $J=\\{b\\in A:\\exists n\\ge0,\\ a^nb\\in(h)\\}$.",
+   "uses": [
+    "lem-sfb-cartier-extension-factorial-complement",
+    "def-nagata-effective-cartier-ideal",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-scheme-image-flat-base-change",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8 (lemma-closure-effective-cartier-divisor), closure construction and local reduction; Morphisms Tag 081I."
+   }
+  },
+  {
+   "text": "Factor $h$ in the UFD $A$ and let $h_0$ be the product, with the same exponents, of precisely those prime factors of $h$ which do not divide $a$; the product may be $1$. Then $J=(h_0)$. Indeed $a^nb\\in(h)$ forces every retained prime power to divide $b$, since its prime does not divide $a$; conversely, if $h_0\\mid b$, a sufficiently large power of $a$ supplies all the deleted prime powers, giving $h\\mid a^nb$. Thus $J$ is generated by the nonzero element $h_0$, a nonzerodivisor. The canonical local-spectrum stalk identification makes $J$ the stalk ideal of $D'$ at $x$. This holds at every $x$. Apply the stalk-nonzerodivisor Cartier spreading theorem to the closed subscheme $D'$ of the locally Noetherian $X'$; it proves that $D'$ is an effective Cartier divisor. This saturation computation, rather than the arbitrary extension $H$, is what proves Cartierness of the specified schematic closure.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-stalk-nonzerodivisor-cartier-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, proof, prime-power equation for the closure; Tag 0AG8 (lemma-effective-Cartier-in-points)."
+   }
+  },
+  {
+   "text": "The open $U'$ is dense in $X'$. To see this, each irreducible component of the regular Noetherian $X'$ is open and closed by regular-normal decomposition. At its generic point the local ring is a field. Step 2 says $\\pi_C$ is nonzero there, hence a unit, so this component meets $X'_L$. Its generic open consequently meets $U'_L$, which is dense by hypothesis, and therefore $U'$ meets every component and is dense. The same hypothesis gives density of $U'$ in the ordinary special fibre: if a nonempty fibre open missed $U'$, its pullback to an algebraic closure of the residue field would be nonempty by field-extension faithful flatness and spectrum surjectivity, contradicting geometric-fibre density. No special fibre is required to be nonempty.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCV, density hypothesis; BLR 6.5 Theorem 1, case (a), fibrewise density of the chosen affine open."
+   }
+  },
+  {
+   "text": "Write $Z=X'\\setminus U'$. The affine-boundary codimension theorem applies since $X'$ is absolutely separated and locally Noetherian and $U'$ is dense affine. Each generic point $\\xi$ of a component of $Z$ has $\\dim\\mathcal O_{X',\\xi}=1$. Such points exist by sobriety of schemes. None is in the special fibre: if it were, the dimension-one local domain $A=\\mathcal O_{X',\\xi}$ would contain the nonzero $\\pi_C$ in its maximal ideal. Its only primes are $(0)$ and the maximal ideal, so no strictly smaller prime contains $\\pi_C$. By the local-spectrum generalization correspondence, $\\xi$ would then be a generic point of an irreducible component of the special fibre. A dense open in that fibre must contain this point, contrary to $\\xi\\in Z$. Hence every component of $Z$ has its generic point in $Z\\cap X'_L=|E|$. Thus $Z=\\overline{|E|}$: one inclusion follows since $Z$ is closed and contains $|E|$, the other by taking closures of these generic points. Step 5 now gives $|D'|=Z$. This also handles $Z=\\varnothing$.",
+   "uses": [
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCV (lemma-complement-affine-open); the horizontal-support argument in BLR 6.5 Theorem 1, printed pp.160-161."
+   }
+  },
+  {
+   "text": "Put $T=S'\\times_SS'$ and let $Y_i=X'\\times_{S',p_i}T$ with projection $q_i:Y_i\\to X'$. These projections are flat: over $W=\\operatorname{Spec}R\\subset X'$, they are the maps on spectra of $R\\to R\\otimes_B C$ (with the appropriate $C$ factor), which are faithfully flat by faithfully-flat ring base change and flat by the affine criterion. Apply flat scheme-image base change to $g:E\\to X'$ along each $q_i$. It identifies $q_i^*D'$ with the scheme-theoretic image of the corresponding pullback of $E$. Over $T_K$, those two pullbacks of $E=(D_0)_L$ are identified by $\\alpha$, since the generic datum is the one induced by the specified model $X_0$ and $D_0$ is a closed subscheme of that model. They are empty off $T_K$ as source schemes. Under $\\alpha:Y_0\\simeq Y_1$, the two source morphisms into $Y_i$ therefore agree. Their kernel ideals and scheme-theoretic images agree. Hence $\\alpha$ identifies $q_0^*D'$ and $q_1^*D'$ as closed subschemes over all of $T$, including their multiplicities.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-scheme-image-flat-base-change",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I; BLR 6.5 Theorem 1, case (a), printed p.160, equality of the two pulled-back divisors."
+   }
+  },
+  {
+   "text": "Let $I$ be the Cartier ideal of $D'$ and put $M'=I^\\vee=\\mathcal O_{X'}(D')$. It is invertible by the divisor-line invertibility theorem. Flat Cartier pullback identifies $q_i^*I$ with the ideal of $q_i^*D'$. The identification in step 10 induces an isomorphism between these ideals along $\\alpha$. Dualizing its inverse gives the required forward isomorphism on their associated lines, using divisor-line flat pullback. The comparisons can be chosen canonically: for a ring map $A\\to R$ and a free rank-one ideal $I=(h)$, the map $R\\otimes_A I^\\vee\\to(R\\otimes_AI)^\\vee$ sends $b\\otimes\\lambda$ to $(c\\otimes s\\mapsto bc\\lambda(s))$. On the frame $h$ it is an isomorphism. This formula is independent of the frame (replacing $h$ by $uh$ replaces the dual frame by $u^{-1}$), and so glues. It also commutes with successive scalar extension and with isomorphisms of ideals, directly by its displayed formula. Thus this construction gives a datum on the specified line itself.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-pc-divisor-line-bundle-invertible",
+    "lem-pc-flat-pullback-effective-cartier-ideal",
+    "lem-pc-divisor-line-bundle-flat-pullback",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4U (lemma-pullback-effective-Cartier-divisors); Tag 02OO (6); definition of the divisor line as the dual ideal."
+   }
+  },
+  {
+   "text": "On $S'\\times_SS'\\times_SS'$, the two composites of the induced ideal maps are equal: they are the restrictions of the maps of structure sheaves induced by the two equal composites in the cocycle for $\\alpha$. Taking the dual of the inverse preserves this equality and its direction. The scalar-extension comparisons of step 11 commute with composition by the displayed tensor formula, so the line isomorphism satisfies precisely the same cocycle. The identity-cover and empty-divisor cases give respectively the identity construction and the usual datum on $\\mathcal O_{X'}$. This completes every asserted clause; no group law or positivity input has entered.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "BLR 6.5 Theorem 1, case (a), printed p.160, datum on the pair; functoriality of the dual of an invertible ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-finite-type-morphism",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-pc-smooth-flat",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-smooth-affine-cartier-boundary",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lem-sfb-cartier-extension-factorial-complement",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "lem-sfb-affine-open-boundary-codimension-one",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-pd-descent-datum",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-divisor-line-bundle-invertible",
+  "lem-pc-divisor-line-bundle-flat-pullback",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "BLR 6.5 Theorem 1 case (a), checked in the online primary scan; detailed assembly from Stacks 0BCW, 0BCV, 0BD8, 081I, 0AG8, with an explicit local saturation calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The closure of a descended effective Cartier divisor on the generic fibre of a smooth DVR scheme has compatible descent datum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → {A : CommRingCat} → (X ⟶ AlgebraicGeometry.Spec A) → CommRingCat\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, where $A$ is a commutative ring, this defines the coordinate ring of the scheme-theoretic image of $f$. It is the quotient ring $A / I$, wh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X ⟶ AlgebraicGeometry.Spec A) → X ⟶ AlgebraicGeometry.Spec (AlgebraicGeometry.specTargetImage f)\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this defines the canonical morphism from $X$ to the scheme-theoretic image of $f$. The scheme-theoretic image is the affine scheme $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (Z : TopologicalSpace.Closeds ↥X),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal Z).map f =\\n    AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\\n      (TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' \", \"doc\": \"For schemes $X$ and $Y$, a morphism $f: X \\to Y$, and a closed subset $Z$ of $X$, the pushforward of the vanishing ideal sheaf of $Z$ under $f$ equals the vanishing ideal sheaf of the closure of the im\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → (U : ↑X.affineOpens) → I.glueDataObj U ⟶ ↑↑U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, this morphism is defined as the composition of the canonical ring homomorphism $\\\\mathcal{O}_X(U) \\\\to \\\\ma\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant fibrewise dense affine open in a smooth trait scheme has a horizontal effective Cartier boundary preserved by descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  [AlgebraicGeometry.QuasiCompact f],\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Scheme.Hom.toImage f) (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\\n    (AlgebraicGeometry.Scheme.Hom.imageι f) (AlgebraicGeome\", \"doc\": \"Given a quasi-compact immersion $ f : X \\\\to Y $ of schemes, the square formed by the canonical morphism from $ X $ to the image subscheme $ f.\\\\text{image} $, the lift to the cobord $ f.\\\\text{liftCobor\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [inst : AlgebraicGeometry.IsImmersion f] → X ⟶ ↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)\", \"doc\": \"Given an immersion $ f : X \\to Y $ of schemes, this constructs a morphism from $ X $ to the cobord of the image of $ f $ in $ Y $. The cobord is defined as the complement of the set difference between \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartierDivisor\", \"DescentDatum\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(divisor|cartier).*(descent|closure)|descent.*divisor",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/Kaplansky.lean\", \"line\": \"91\", \"text\": \"  have := divisor_closure_eq_closure _ _ (hsubset hx₂)\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"181\", \"text\": \"and `L` has no zero smul divisors by `A`, the integral closure `C` of `A` in `L` is\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"190\", \"text\": \"and `L` has no zero smul divisors by `A`, the `A`-rank of the integral closure `C` of `A` in `L`\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"87\", \"text\": \"theorem divisor_closure_eq_closure [CommMonoidWithZero M₀] [IsCancelMulZero M₀]\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The closure of a descended effective Cartier divisor on the generic fibre of a smooth DVR scheme has compatible descent datum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"(X : Scheme.{u}) : (MorphismProperty.Over @IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsClosedImmersion f → Sort u} →\\n      (t : AlgebraicGeometry.IsClosedImmersion f) →\\n        ([toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f] →\\n            (isClosedEmbedding : Topology.IsClosedEmbeddin\", \"doc\": \"Given a property $ P $ of closed immersions $ f: X \\to Y $, if $ P $ holds for any closed immersion constructed from a closed embedding of topological spaces and surjective maps on stalks, then $ P $ h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal Cartier boundary of a smooth scheme over a discrete valuation ring compatible with faithfully flat descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.R\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"For schemes $X$ and $Y$ with a morphism $f: X \\\\to Y$, this function associates to each valuative commutative square involving $f$ a type representing the conditions or data required by the valuative c\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.K\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"The fraction field component in the valuative criterion commutative square for a morphism of schemes, representing the field of fractions of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Algebra self.R self.K\", \"doc\": \"For each valuative commutative square involving a morphism of schemes $f: X \\to Y$, this function equips the fraction field component $K$ with the structure of an algebra over the commutative ring $R$ \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of an effective Cartier divisor on a generic fibre is Cartier on a regular locally factorial scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → {U : X.Opens} → Set ↑(X.presheaf.obj (Opposite.op U)) → Set ↥X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → TopologicalSpace.Closeds ↥X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → TopologicalSpace.Closeds ↥X → X.IdealSheafData\", \"doc\": \"Given a scheme $X$ and a closed subset $Z \\\\subseteq X$, this defines the corresponding vanishing ideal sheaf, denoted $\\\\mathcal{I}_Z$. This is a sheaf of ideals of the structure sheaf $\\\\mathcal{O}_X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" (X : AlgebraicGeometry.Scheme) : Type u\", \"doc\": \"A structure that contains the data to uniquely define an ideal sheaf, consisting of\\n1. an ideal `I(U) ≤ Γ(X, U)` for every affine open `U`\\n2. a proof that `I(D(f)) = I(U)_f` for every affine open `U` \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.nilradical\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.IdealSheafData\", \"doc\": \"The nilradical of a scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instAdd\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Add X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteLattice X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteSemilatticeSup X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : IdemCommSemiring X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instMul\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Mul X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instOne\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : One X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instPartialOrder\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : PartialOrder X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : SemilatticeInf X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instZero\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Zero X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instPowNat\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Pow X.IdealSheafData ℕ\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|horizontal.*divisor|divisor.*closure",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a generic effective Cartier divisor on a smooth discrete valuation ring scheme with descent datum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"(P : MorphismProperty Scheme.{u}) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property $ P $ on schemes is said to be source-local if a morphism $ f $ satisfies $ P $ whenever there exists a covering sieve $ \\\\mathcal{U} $ of the source scheme $ X $ such that for ever\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal Cartier boundary of a smooth scheme over a discrete valuation ring compatible with faithfully flat descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.R\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"For schemes $X$ and $Y$ with a morphism $f: X \\\\to Y$, this function associates to each valuative commutative square involving $f$ a type representing the conditions or data required by the valuative c\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.K\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"The fraction field component in the valuative criterion commutative square for a morphism of schemes, representing the field of fractions of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Algebra self.R self.K\", \"doc\": \"For each valuative commutative square involving a morphism of schemes $f: X \\to Y$, this function equips the fraction field component $K$ with the structure of an algebra over the commutative ring $R$ \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of an effective Cartier divisor on a generic fibre is Cartier on a regular locally factorial scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → {U : X.Opens} → Set ↑(X.presheaf.obj (Opposite.op U)) → Set ↥X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → TopologicalSpace.Closeds ↥X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → TopologicalSpace.Closeds ↥X → X.IdealSheafData\", \"doc\": \"Given a scheme $X$ and a closed subset $Z \\\\subseteq X$, this defines the corresponding vanishing ideal sheaf, denoted $\\\\mathcal{I}_Z$. This is a sheaf of ideals of the structure sheaf $\\\\mathcal{O}_X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" (X : AlgebraicGeometry.Scheme) : Type u\", \"doc\": \"A structure that contains the data to uniquely define an ideal sheaf, consisting of\\n1. an ideal `I(U) ≤ Γ(X, U)` for every affine open `U`\\n2. a proof that `I(D(f)) = I(U)_f` for every affine open `U` \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.nilradical\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.IdealSheafData\", \"doc\": \"The nilradical of a scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instAdd\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Add X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteLattice X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteSemilatticeSup X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : IdemCommSemiring X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instMul\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Mul X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instOne\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : One X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instPartialOrder\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : PartialOrder X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : SemilatticeInf X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instZero\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Zero X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instPowNat\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : Pow X.IdealSheafData ℕ\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|horizontal.*divisor|divisor.*closure",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a generic effective Cartier divisor on a smooth discrete valuation ring scheme with descent datum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"(P : MorphismProperty Scheme.{u}) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property $ P $ on schemes is said to be source-local if a morphism $ f $ satisfies $ P $ whenever there exists a covering sieve $ \\\\mathcal{U} $ of the source scheme $ X $ such that for ever\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smoothness charts, valuative squares, basic ideal-sheaf data or local closures of morphism properties; none gives Cartier closure with its horizontal support and compatible scheme and line descent datum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-field-trait-descent",
+  "date": "2026-10-24",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 6.5 Theorem 1 proof, case (a), printed p.160 (PDF p.166): choose the generic boundary divisor and close it in the smooth trait scheme; schematic closure and flat pullback give the datum on the divisor and its associated line. EGA IV4, 21.12.7 supplies the generic boundary divisor. Local BLR PDF WANTED; primary scan read online.",
+   "via": [
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-horizontal-boundary-datum",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing DAG nodes throughout; descended the generic geometric hypotheses, constructed a boundary componentwise, proved Cartierness of the specified closure by prime-power saturation in regular local UFDs, excluded vertical affine-boundary components, and wrote the ideal and dual-line cocycle explicitly. No new nodes.",
+  "blueprint": "BLR 6.5 Theorem 1 case (a), printed p.160, supporting effective descent below the direct-image constructibility route. Read latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. The ancestor command returns None, matching the inherited null from.node; no unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-flat-pullback-effective-cartier-ideal",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-of-closed-immersion",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-invertible",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-flat-pullback",
+    "why": "Generic scheme or local-algebra tool for the BLR horizontal-divisor construction; it supplies only its stated geometric/algebraic property and does not replace a step of the constructibility unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dvr-dimension-one",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-pc-smooth-flat",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-pc-divisor-line-bundle-invertible",
+  "lem-pc-divisor-line-bundle-flat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-e4750b057",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-e4750b057 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps and every cited statement. The delivery is one commit with no new nodes, and the statement and stmt_deps are verbatim the live unsplit node. Steps 6-7 follow the proof of Stacks 0BD8 (divisors.tex l.7093, read), with the local equation made explicit: J={b : a^n b∈(h)}=(h_0), where h_0 drops the prime factors of h that divide π_C. I checked both inclusions in the UFD. Stalk spreading then makes the prescribed closure D' Cartier; H from the extension node only supplies h. Steps 5 and 10 use flat scheme-image base change (081I, morphisms.tex l.4965, read). The q_i are flat on charts R→R⊗_B C. The preimage of X'_L is the part over T_K, because inverting π_C is the same as inverting π_B. So α identifies q_0^*D' and q_1^*D' as closed subschemes. Step 9: a codim-1 generic point of the boundary that lay in the special fibre would be a generic point of a component of X'_s, which contradicts fibrewise density; so the support is X'∖U'. Every hypothesis of the cited nodes checks: affine-boundary codim (separated, locally Noetherian, dense affine), smooth-affine-cartier-boundary on the integral components, and fpqc descent along Spec L→Spec K. I tested A^1⊃G_m, U'=X', an empty special fibre and ramified e>1. Batch 5: lem-trf-flat-module-torsionfree-domain (0539), lem-trf-regular-local-ufd-boundary-factorization (0AG0), lem-trf-smooth-fpqc-base-descent (02VL) and lem-trf-ufd-height-one (0AFT), reached through the two sfb nodes, are generic commutative-algebra and descent lemmas. Neither the trace formula nor Poincaré duality gives them, and none is a step of their proofs, so all are accepted. I accept the declared tool_uses: generic leaves and lemmas used as black boxes. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitHorizontalBoundaryDatum",
+  "declaration": "AlgebraicGeometry.TraitHorizontalBoundary.exists_horizontal_boundary",
+  "declarations": [
+   "AlgebraicGeometry.TraitHorizontalBoundary.lineIsoAt",
+   "AlgebraicGeometry.TraitHorizontalBoundary.IsLineCocycle",
+   "AlgebraicGeometry.TraitHorizontalBoundary.exists_horizontal_boundary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitHorizontalBoundaryDatum.lean",
+  "statement": "theorem exists_horizontal_boundary (B C K L : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [CommRing C] [IsDomain C] [IsDiscreteValuationRing C] [Algebra B C] [Module.FaithfullyFlat B C] [Field K] [Algebra B K] [IsFractionRing B K] [Field L] [Algebra C L] [IsFractionRing C L] [Algebra K L] [Algebra B L] [IsScalarTower B C L] [IsScalarTower B K L] (X : Over (Spec (.of C))) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (α : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap B C))) X) (Xη : Over (Spec (.of L))) (r : Xη.left ⟶ X.left) (hr : IsPullback r Xη.hom X.hom (Spec.map (CommRingCat.ofHom (algebraMap C L)))) (X₀ : Over (Spec (.of K))) (q : Xη.left ⟶ X₀.left) (hq : IsPullback q Xη.hom X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))) (hgeneric : ∀ (T : Scheme.{u}) (a b : T ⟶ Xη.left) (h : (a ≫ r ≫ X.hom) ≫ Spec.map (CommRingCat.ofHom (algebraMap B C)) = (b ≫ r ≫ X.hom) ≫ Spec.map (CommRingCat.ofHom (algebraMap B C))), (α.transport (a ≫ r ≫ X.hom) (b ≫ r ≫ X.hom) h (Over.homMk (a ≫ r) rfl)).left = b ≫ r ↔ a ≫ q = b ≫ q) (U : Over (Spec (.of B))) [IsAffineHom U.hom] (W : X.left.Opens) [IsAffine W.toScheme] (uW : W.toScheme ⟶ U.left) (huW : IsPullback uW (W.ι ≫ X.hom) U.hom (Spec.map (CommRingCat.ofHom (algebraMap B C)))) (hrestricted : ∀ (T : Scheme.{u}) (a b : T ⟶ W.toScheme) (h : (a ≫ W.ι ≫ X.hom) ≫ Spec.map (CommRingCat.ofHom (algebraMap B C)) = (b ≫ W.ι ≫ X.hom) ≫ Spec.map (CommRingCat.ofHom (algebraMap B C))), (α.transport (a ≫ W.ι ≫ X.hom) (b ≫ W.ι ≫ X.hom) h (Over.homMk (a ≫ W.ι) rfl)).left = b ≫ W.ι ↔ a ≫ uW = b ≫ uW) (hdense : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of C)), Dense ((pullback.fst X.hom s) ⁻¹' (W : Set X.left))) (UK : Over (Spec (.of K))) (v : UK.left ⟶ U.left) (hv : IsPullback v UK.hom U.hom (Spec.map (CommRingCat.ofHom (algebraMap B K)))) (iK : UK.left ⟶ X₀.left) [IsOpenImmersion iK] (hiK : iK ≫ X₀.hom = UK.hom) (hopen : ∀ (T : Scheme.{u}) (a : T ⟶ W.toScheme) (l : T ⟶ Spec (.of L)) (b : T ⟶ UK.left) (c : T ⟶ Xη.left), a ≫ W.ι ≫ X.hom = l ≫ Spec.map (CommRingCat.ofHom (algebraMap C L)) → b ≫ v = a ≫ uW → b ≫ UK.hom = l ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)) → c ≫ r = a ≫ W.ι → c ≫ Xη.hom = l → b ≫ iK = c ≫ q) : ∃ (D₀ : X₀.left.IdealSheafData) (D' : X.left.IdealSheafData), D₀.IsInvertible ∧ (D₀.support : Set X₀.left) = (Set.range iK)ᶜ ∧ (∀ V : X.left.affineOpens, D'.ideal V = RingHom.ker (((D₀.comap q).subschemeι ≫ r).app V.1).hom) ∧ D'.IsInvertible ∧ (D'.support : Set X.left) = (W : Set X.left)ᶜ ∧ D'.comap (pullback.fst (X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap B C))) (Spec.map (CommRingCat.ofHom (algebraMap B C)))) = D'.comap α.toHom ∧ (Scheme.Modules.dual D'.toModules).IsInvertible ∧ ∃ φ : (Scheme.Modules.tensorPullback (pullback.fst (X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap B C))) (Spec.map (CommRingCat.ofHom (algebraMap B C))))).obj (Scheme.Modules.dual D'.toModules) ≅ (Scheme.Modules.tensorPullback α.toHom).obj (Scheme.Modules.dual D'.toModules), IsLineCocycle α (Scheme.Modules.dual D'.toModules) φ",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published transport form of Over.DescentDatum. Universal transport ideal equality is the full double-overlap closed-subscheme equality; IsLineCocycle evaluates its associated line isomorphism on triples via the section-normalized tensor-pullback comparisons. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24a842a2b",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read node (unchanged vs side-live except lean), module, report, Over.DescentDatum (transport/toHom/transport_transport), Mathlib IdealSheafData.comap (=ker of pullback.fst to subscheme), IsInvertible/toModules/dual/tensorPullbackSectionComp owners. Hypotheses match: FF DVR map, fraction fields pinned by towers, X smooth+IsSeparated+LFT+QC, alpha, generic model via IsPullback + hgeneric iff (pins restricted transport to X0's canonical one; not stronger), U affine over S, W affine with huW and hrestricted (implies invariance), hdense over all alg-closed Omega:Type u, iK open immersion with hopen base-change compatibility. Conclusion: D0 Cartier with support (range iK)^c; D' affine-sectionwise kernel of O_X'->j_*O_(D0)_L exactly the node's schematic closure; D' Cartier with support W^c; full ideal equality D'.comap fst = D'.comap alpha.toHom; dual invertible; exists phi with IsLineCocycle (real helpers, cocycle checked). Advisory: phi existential, not tied to ideal identification; suffices for the sole citer (smooth-group trait descent -> polarized affine fpqc effectivity) and not vacuous. Edge cases empty X, U'=X', empty fibres, ramified, disconnected X0 OK. lean.statement verbatim; docstrings/source/blueprint present; single sorry; no file changed, no compile run."
+ }
+}

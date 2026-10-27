@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-projective-bundle-local-normal-form",
+ "kind": "statement",
+ "title": "Local integer normal forms on projective bundles",
+ "statement": "Let S be a scheme [def-pc-scheme], E a quasi-coherent finite locally free module of constant rank r >= 2 [def-amb-finite-locally-free-module], and D any normalized tautological quotient on p:P(E)->S [lem-trf-projective-bundle-quotient-geometry]. For every invertible L on P(E) [def-sc-invertible-module] and s in S there are an open neighbourhood U of s and m in Z with L restricted to p^{-1}U isomorphic to D.line^{tensor m} restricted to p^{-1}U, using [def-pc-module-pullback] and [def-sfb-locally-constant-line-twist]. If S is isomorphic to Spec k for a field k, then for every invertible L there is a unique integer m with L isomorphic to D.line^{tensor m}. No coefficient descent or compatibility with tensor products is asserted.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, local normal form; field calculation in Stacks divisors.tex Tag 0BXJ; coherent.tex Tag 07VK; limits.tex Tag 0B8W for arbitrary-base approximation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-locally-constant-line-twist"
+ ],
+ "proof": [
+  {
+   "text": "For a fixed invertible L and point s, the fibre-degree theorem gives an integer m and an isomorphism between the fibre restrictions of L and integerLinePower D.line m. The latter is invertible: nonnegative powers are tensor products of the line, and negative powers are tensor products of its dual. Apply fibre-isomorphism spreading to these two lines. Its neighbourhood and isomorphism give the local normal form.",
+   "uses": [
+    "lem-sfb-projective-bundle-fiber-degree",
+    "lem-sfb-projective-bundle-fiber-iso-spread",
+    "def-sfb-locally-constant-line-twist",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "Remark 4.2.7, fibre generator lifting and proper shrinking; Stacks coherent.tex Tag 07VK and limits.tex Tag 0B8W for arbitrary-base approximation."
+   }
+  },
+  {
+   "text": "Over S isomorphic to Spec k, the base has a single point s. Apply the local clause there. Its neighbourhood equals the whole base. Pull the restriction isomorphism back along the inverse of the top-open scheme isomorphism, and use tensor-pullback identity and composition comparisons to obtain a global isomorphism L to the m-th power. For any competing degree n, pull both global isomorphisms to the fibre at s and apply uniqueness in the fibre-degree theorem. This gives n=m. The Lean proof uses explicit identity/composition comparisons, so it does not identify distinct restriction constructions definitionally.",
+   "uses": [
+    "lem-sfb-projective-bundle-fiber-degree",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-bundle-fiber-degree",
+  "lem-sfb-projective-bundle-fiber-iso-spread",
+  "def-sfb-locally-constant-line-twist",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7; the original four steps separated into fibre degree (Stacks 0BXJ) and isomorphism spreading (07VK, 0B8W), combined by top-open pullback and fibre uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertible sheaf on a projective bundle is locally over the base an integer power of the tautological line",
+   "results": "msearch: 8 hits, all basic Proj sections/structure-sheaf declarations, including Proj.pow_apply and Proj.mul_apply; none classifies line bundles or gives relative local normal forms.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a line bundle locally a relative integer twist on a projective bundle descends uniquely to a line bundle on the base",
+   "results": "msearch: 8 hits, including CommRing.Pic, CommRing.Pic.ext_iff, CommRing.Pic.mk_eq_one, and basic Proj.ext; none is projective-bundle line descent.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstantLineTwist|Pic.*Projective|Projective.*Pic; full DAG title search for projective Picard/invertible/local twist; blueprint_refs.py search projective bundle picard and locally constant line twist",
+   "results": "msearch Mathlib: three irrelevant projective-object/product-measure hits. Local repository: only the item defines HasPicardClassification and IsLocallyTwist; ProjectiveSpace.LineInvertibleClassification treats P1 over a field, ProjectiveSpace.PicardPn is a cohomology theorem. Full DAG title search found the item and its weaker P1 field/fibrewise statements; neither proves the new parts. Both blueprint searches gave 0 matches.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundlePicardClassification",
+  "date": "2026-10-27",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Picard-classification proof steps 1-4: field charts, fibre generator lifting and affine-limit descent.",
+   "via": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleLocalNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleLocalNormalForm.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_local_normal_form",
+  "statement": "theorem projective_bundle_local_normal_form (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)\n    (D : TautologicalQuotient E) :\n    (∀ (L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules),\n      L.IsInvertible → ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ m : ℤ,\n        Nonempty ((tensorPullback\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj L ≅\n          (tensorPullback\n            ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj\n            (integerLinePower D.line D.invertible m))) ∧\n    (∀ (k : Type u) [Field k], (S ≅ Spec (CommRingCat.of k)) →\n      ∀ L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules,\n        L.IsInvertible → ∃! m : ℤ, Nonempty (L ≅ integerLinePower D.line D.invertible m))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T094510-L-235261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T112322-L-1570750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

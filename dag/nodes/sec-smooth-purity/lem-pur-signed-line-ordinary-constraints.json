@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-signed-line-ordinary-constraints",
+ "kind": "statement",
+ "title": "Signed line OrdinaryConstraints",
+ "statement": "For any module sheaf P over a commutative ring sheaf A, there exist the ordinary unit, positive-power reassociation isomorphisms and negative-positive evaluation transformations satisfying OrdinaryLineConstraints(A,P) [def-pur-signed-line-ordinary-constraint-data]. They are natural in the module tensored on the left and have exactly the unit, reassociation and contraction pure-section formulas of that definition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data",
+  "def-pur-signed-line-ordinary-constraint-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Construct the right unitor by scalar multiplication and the positive product by the sheaf tensor associator. Pure tensors determine their naturality. Construct evaluation as sheafification of the explicit internal-Hom pairing; reassociate and contract the last two factors, then apply the right unitor. Tensor generation proves naturality, and the sheafification adjunction gives exactly the three pure-section formulas.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pur-sheaf-line-evaluation-inverse-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLineOrdinaryConstraints",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLineOrdinaryConstraints.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.signed_line_ordinary_constraints",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.signed_line_ordinary_constraints"
+  ],
+  "statement": "theorem signed_line_ordinary_constraints (P : KFlatFixedTensor.Modules A) :\n  ∃ ordinaryUnit : siteSheafTensorRight (signedLinePower.{u, v, w} P 0) ≅ 𝟭 _,\n  ∃ ordinaryProduct : ∀ n : ℕ,\n    siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⋙\n        siteSheafTensorRight (signedLinePower.{u, v, w} P 1) ≅\n      siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 2))),\n  ∃ ordinaryEvaluation : ∀ n : ℕ,\n    siteSheafTensorRight (signedLinePower.{u, v, w} P (.negSucc n)) ⋙\n      siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⟶ 𝟭 _,\n    (∀ (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)\n      (x : N.val.obj V) (r : A.obj.obj V),\n      (ordinaryUnit.hom.app N).val.app V\n        (siteSheafTensorTmul N (signedLinePower.{u, v, w} P 0) V x r) =\n          @SMul.smul (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.obj V)\n            (N.val.obj V) inferInstance r x) ∧\n    (∀ (n : ℕ) (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)\n      (x : N.val.obj V) (y : (scalarTensorPower A P (n + 1)).val.obj V)\n      (q : P.val.obj V),\n      ((ordinaryProduct n).hom.app N).val.app V\n        (siteSheafTensorTmul _ P V\n          (siteSheafTensorTmul N (scalarTensorPower A P (n + 1)) V x y) q) =\n        siteSheafTensorTmul N (scalarTensorPower A P (n + 2)) V x\n          (siteSheafTensorTmul (scalarTensorPower A P (n + 1)) P V y q)) ∧\n    (∀ (n : ℕ) (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)\n      (x : N.val.obj V) (φ : (signedLinePower.{u, v, w} P (.negSucc n)).val.obj V)\n      (y : (scalarTensorPower A P (n + 1)).val.obj V),\n      ((ordinaryEvaluation n).app N).val.app V\n        (siteSheafTensorTmul _ (scalarTensorPower A P (n + 1)) V\n          (siteSheafTensorTmul N (signedLinePower.{u, v, w} P (.negSucc n)) V x φ) y) =\n        @SMul.smul (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.obj V)\n          (N.val.obj V) inferInstance (φ.app (op (Over.mk (𝟙 V.unop))) y) x)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

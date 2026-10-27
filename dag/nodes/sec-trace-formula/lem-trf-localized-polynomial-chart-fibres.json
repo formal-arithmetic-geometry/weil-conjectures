@@ -1,0 +1,290 @@
+{
+ "id": "lem-trf-localized-polynomial-chart-fibres",
+ "kind": "statement",
+ "title": "Localized quasi-finite polynomial charts and their field fibres",
+ "statement": "Let $A$ be a commutative local ring with maximal ideal $\\mathfrak m$ and residue field $k=A/\\mathfrak m$ (local means that $\\mathfrak m$ is its unique maximal ideal). Let $D$ be a finite type commutative $A$-algebra [def-weil-pbc-finite-type-algebra], put $E=D\\otimes_Ak$ [def-weil-pbc-module-tensor-product], and let $Q\\subset E$ be prime, with inverse image $\\mathfrak q\\subset D$. Suppose $n=\\dim_Q\\operatorname{Spec}E$ is a finite nonnegative integer [def-weil-affine-spectrum, def-kun-topological-dimension-at-point]. There exist $g\\in D\\setminus\\mathfrak q$ and an $A$-algebra map $\\alpha:A[t_1,\\ldots,t_n]\\to B=D_g$ [def-weil-pbc-mv-polynomial-ring, def-weil-ring-localization-away] such that $B$ is finite type over $A$ and $\\alpha$ is finite type and quasi-finite at every prime [def-weil-pbc-ring-map-quasi-finite-at-prime]. For every field $c$ equipped with a map $A\\to c$, the induced map $\\alpha_c:c[t_1,\\ldots,t_n]\\to B\\otimes_Ac$ is finite type and quasi-finite at every prime, the target is finite type over $c$, and there is a canonical $c$-algebra isomorphism $B\\otimes_Ac\\cong(D\\otimes_Ac)_{g\\otimes1}$, sending $b\\otimes\\lambda$ to the product of the images of $b$ and $\\lambda$. For $c=k$ its spectrum identifies with the basic open $D_E(g\\otimes1)$; the point $Q$ corresponds to a prime $Q_g$ of $T=B\\otimes_Ak$, and $\\dim_{Q_g}\\operatorname{Spec}T=n$. If additionally $A\\subset D$ are integral domains and $K=\\operatorname{Frac}(A)$, then $g\\ne0$, $B$ is a domain containing $A$, and, writing $F=D\\otimes_AK$ and $H=B\\otimes_AK$, $H\\cong F_{g\\otimes1}$ is a nonzero domain with $\\operatorname{Frac}(H)\\cong\\operatorname{Frac}(F)$ over $K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), passage to a principal quasi-finite polynomial chart and the induced maps on both fibres, with localization identifications made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Because $Q$ is proper, the map $k\\to E/Q$ is injective. Hence $\\mathfrak q\\cap A=\\mathfrak m$. The residue field $\\kappa(\\mathfrak m)$ is $k$: every denominator outside $\\mathfrak m$ already has invertible image in $A/\\mathfrak m$. Thus the fibre ring in [lem-weil-pbc-quasi-finite-over-polynomial-algebra], for $R=A$, $S=D$, and prime $\\mathfrak q$, is exactly $E$. Its point $\\ker(E\\to\\kappa(\\mathfrak q))$ is $Q$: by [lem-weil-pbc-fibre-ring-primes-bijection] the primes of $E$ correspond bijectively to the primes of $D$ over $\\mathfrak m$ by inverse image, with inverse $\\mathfrak q\\mapsto\\ker(E\\to\\kappa(\\mathfrak q))$, and $Q$ has inverse image $\\mathfrak q$. Its dimension hypothesis is the given $n$. Apply that node to obtain $g\\notin\\mathfrak q$ and $\\alpha:A[t_1,\\ldots,t_n]\\to B=D_g$, of finite type and quasi-finite at every prime.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QE (lemma-quasi-finite-over-polynomial-algebra), applied in the proof of Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres)."
+   }
+  },
+  {
+   "text": "Choose algebra generators $d_1,\\ldots,d_r$ of $D$ over $A$. Every element of $B=D_g$ is $d/g^j$, so $d_1/1,\\ldots,d_r/1,1/g$ generate $B$ over $A$. For any $A$-field $c$, these generators tensored with $1$ generate $B\\otimes_Ac$ over $c$: pure tensors span the tensor product and $b\\otimes\\lambda=(b\\otimes1)(1\\otimes\\lambda)$. This proves both finite type assertions directly.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization) and 00CX (lemma-tensor-product); finite-generation argument for the chart and fibres of Tag 00QK."
+   }
+  },
+  {
+   "text": "Fix any $A\\to c$. Set $P=A[t_1,\\ldots,t_n]$ and $P_c=c[t_1,\\ldots,t_n]$. By [lem-weil-pbc-polynomial-scalar-extension], scalar extension identifies the polynomial source with $P_c$. Define $P_c\\to B\\otimes_Ac$ by $t_i\\mapsto\\alpha(t_i)\\otimes1$ and $\\lambda\\mapsto1\\otimes\\lambda$; the polynomial universal property gives this map and its agreement with the scalar extension $\\alpha_c$. Apply [lem-weil-pbc-quasi-finite-four-rings] with $R=P$, $S=B$, $R'=P_c$, and $S'=B\\otimes_Ac$. Its square commutes on coefficients and variables. Every pure tensor is the product of an image from $B$ and the image of a constant from $P_c$, and such tensors span $S'$, so its generation hypothesis holds. At each prime of $S'$, the contracted prime of $B$ satisfies the hypothesis by step 1. The node gives finite type and quasi-finiteness of $\\alpha_c$ at every prime.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-quasi-finite-four-rings",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PN (lemma-four-rings), used for the field-fibre maps in Tag 00QK."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebra-localization-away-base-change] with base $A$, algebra $D$, second algebra $c$, and element $g$. It gives the canonical $c$-algebra isomorphism $B\\otimes_Ac\\simeq(D\\otimes_Ac)_{g\\otimes1}$ with formula $(d/g^j)\\otimes\\lambda\\mapsto(d\\otimes\\lambda)/(g\\otimes1)^j$. Since every $b\\in B$ has this fraction form, it is precisely the formula in the statement: multiply the image of $b$ by the image of $\\lambda$.",
+   "uses": [
+    "lem-weil-pbc-algebra-localization-away-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 00DL (lemma-tensor-product-localization), algebra base-change consequence."
+   }
+  },
+  {
+   "text": "For $c=k$, write $\\bar g=g\\otimes1$. Since $\\mathfrak q$ is the inverse image of $Q$, $g\\notin\\mathfrak q$ implies $\\bar g\\notin Q$. Apply [lem-weil-pbc-localization-spectrum-embedding] to $E$ and the powers of $\\bar g$, and use step 4. It identifies $\\operatorname{Spec}T$ with the basic open $D_E(\\bar g)$ and gives the unique prime $Q_g$ above $Q$. This is an open neighbourhood of $Q$. By [lem-weil-pbc-dimension-at-point-open-subspace], its dimension at $Q$ is the dimension of $\\operatorname{Spec}E$ at $Q$, namely $n$. A homeomorphism identifies open neighbourhoods and chains of irreducible closed subsets, hence preserves this dimension. Therefore $\\dim_{Q_g}\\operatorname{Spec}T=n$.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization); topology.tex Tag 0055 (definition-Krull), item (4)."
+   }
+  },
+  {
+   "text": "Assume $A\\subset D$ are domains. Since $0\\in\\mathfrak q$ and $g\\notin\\mathfrak q$, $g\\ne0$. The fraction relation in [def-weil-ring-localization-away] shows $D\\to B$ is injective: $d/1=0$ implies $g^jd=0$, hence $d=0$. If $(d/g^i)(e/g^j)=0$, then $g^lde=0$ for some $l$, so $d=0$ or $e=0$. Thus $B$ is a nonzero domain containing $A$. Apply [lem-weil-pbc-generic-fibre-localization-domain-irreducible] separately to $A\\subset D$ and $A\\subset B$, interchanging tensor factors by $x\\otimes y\\mapsto y\\otimes x$. It makes $F$ and $H$ nonzero domains and identifies the generic fibres with localization at the nonzero elements of $A$. For $F$, the fraction relation shows $D\\to F$ is injective because all these denominators are nonzero in $D$. Thus $g\\otimes1\\ne0$ in $F$. Step 4 with $c=K$ gives $H\\simeq F_{g\\otimes1}$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM (section-localization), fraction equality; Tag 00DK (lemma-tensor-localization), generic fibre of Tag 00QK."
+   }
+  },
+  {
+   "text": "Put $u=g\\otimes1\\in F$, so $u\\ne0$ and $H\\simeq F_u$. The fraction relation makes $F\\to F_u$ injective. The inclusion $F\\to\\operatorname{Frac}(F)$ sends $u$ to a unit, so [lem-weil-pbc-ring-localization-universal-property] extends it to $F_u\\to\\operatorname{Frac}(F)$ by $x/u^i\\mapsto x/u^i$. This is injective since a zero fraction has zero numerator. For any injective map $f$ from a domain to a field, the formula $a/b\\mapsto f(a)/f(b)$ extends it to the fraction field: cross-multiplication verifies well-definedness, and denominators remain nonzero. Apply this formula to obtain $\\operatorname{Frac}(F_u)\\to\\operatorname{Frac}(F)$ and, conversely, $\\operatorname{Frac}(F)\\to\\operatorname{Frac}(F_u)$ from $F\\hookrightarrow F_u$. They are inverse: on $x/y$ and on $(x/u^i)/(y/u^j)$ their composites return the original fraction. Both fix $K$ because they extend the structural maps from $F$. Transporting along step 4 gives $\\operatorname{Frac}(H)\\simeq\\operatorname{Frac}(F)$ over $K$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization); fraction construction of Tag 00CM (section-localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), polynomial-chart passage, expanded using Tags 00QE, 00PN, 00DK, 00DL, 00E3 and 00CP, and topology Tag 0055."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra at a prime with local fibre dimension n admits a principal localization quasi finite over a polynomial algebra in n variables and this chart persists on field fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S]\\n  [Algebra.FiniteType R T] (s : S) [IsLocalization.Away s T], Algebra.Q\", \"doc\": \"If $ S $ is an integral $ R $-algebra, $ T $ is a finitely generated $ R $-algebra, and $ T $ is the localization of $ S $ at the powers of some element $ s \\\\in S $, then $ T $ is a quasi-finite $ R $\"}\n  {\"name\": \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ localizes to span $ S $ as an $ R $-module, then $ f $ is quasi-finite. Specifically, when the localization of $ R $ generates $ S $ as an $ R $-module, the indu\"}\n  {\"name\": \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to its localization at an element $ r $ is quasi-finite, i.e., the localization is finitely generated as an $ R $-module.\"}\n  {\"name\": \"Algebra.EssFiniteType.cond\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.EssFiniteType R S],\\n  ∃ s, IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑s)) S) (IsUnit.submonoid S)) S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ S $ is of essential finite type over $ R $, then there exists a finite set $ s $ such that $ S $ is the localizatio\"}\n  {\"name\": \"instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"module\": \"Mathlib/RingTheory/RingHom/Finite\", \"type\": \"∀ {R : Type u_5} {S : Type u_6} [inst : CommRing R] {P : Ideal R} [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.Finite R S] [inst_4 : P.IsPrime],\\n  Module.Finite (Localization.AtPrime P) (Localization (Algebra.algebraMapSubmonoid S P.primeCompl))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a finitely generated $ R $-module, and let $ P $ be a prime ideal of $ R $. The localization of $ S $ at the image of $ P^c $ (the complement of $ P\"}\nQuasiFiniteAt.baseChange and RingHom.QuasiFinite.isStableUnderBaseChange address preservation once a map is given; they do not construct a polynomial chart with n equal to the local fibre dimension or give the localization comparison. The other hits concern isolated points or fixed maps. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, MvPolynomial",
+   "results": "[loogle] OK 0 hit(s)\nQuasiFiniteAt.baseChange and RingHom.QuasiFinite.isStableUnderBaseChange address preservation once a map is given; they do not construct a polynomial chart with n equal to the local fibre dimension or give the localization comparison. The other hits concern isolated points or fixed maps. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*[Pp]olynomial|[Pp]olynomial.*quasiFinite|quasiFinite.*[Bb]aseChange",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"116\", \"text\": \"  HasRingHomProperty.isStableUnderBaseChange RingHom.QuasiFinite.isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.RingTheory.QuasiFinite.Polynomial\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"28\", \"text\": \"  The key is `Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt`\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"42\", \"text\": \"    `Polynomial.map_under_lt_comap_of_quasiFiniteAt`:`(p ∩ R)[X] < p ∩ R<x>` to get a contradiction.\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"397\", \"text\": \"  have : Algebra.WeaklyQuasiFiniteAt R' (Q.comap g.toRingHom) := .baseChange P _ <| by\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"481\", \"text\": \"    (Polynomial.not_ker_le_map_C_of_surjective_of_weaklyQuasiFiniteAt _ H₀ p)\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"line\": \"61\", \"text\": \"lemma QuasiFinite.isStableUnderBaseChange : IsStableUnderBaseChange QuasiFinite := by\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Polynomial.lean\", \"line\": \"85\", \"text\": \"  exact Polynomial.not_weaklyQuasiFiniteAt (Q.asIdeal.comap g'.toRingHom) inferInstance\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"44\", \"text\": \"-- See `Mathlib/RingTheory/QuasiFinite/Polynomial.lean`\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"361\", \"text\": \"lemma QuasiFiniteAt.baseChange (p : Ideal S) [p.IsPrime] [QuasiFiniteAt R p]\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"525\", \"text\": \"  have : Algebra.QuasiFiniteAt p.ResidueField qF.asIdeal := .baseChange q _\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"559\", \"text\": \"  have : Algebra.QuasiFiniteAt p.ResidueField q' := .baseChange q _ hq'\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"167\", \"text\": \"/-- Use `Algebra.QuasiFiniteAt.baseChange` instead for `Algebra.QuasiFiniteAt R p`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"192\", \"text\": \"  have := QuasiFiniteAt.baseChange (R := R) (S := _) (A := A ⧸ q.under A)\"}\nQuasiFiniteAt.baseChange and RingHom.QuasiFinite.isStableUnderBaseChange address preservation once a map is given; they do not construct a polynomial chart with n equal to the local fibre dimension or give the localization comparison. The other hits concern isolated points or fixed maps. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite polynomial chart near a prime with prescribed fibre dimension and compatibility of the principal open with scalar extension",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\nservice unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a quasi finite polynomial factorization on a principal open through a given prime with n equal to local fibre dimension, compatible with tensoring by any field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsPrime] (q : Ideal S) [inst_4 : q.IsPrime] [q.LiesOver p] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R q],\\n  ∃ s ∉ q, ∀ (q' : Ideal S), q'.IsPrime → q' ≠ q → q'.LiesOver p → s\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra of essential finite type. For a prime ideal $ \\\\mathfrak{p} \\\\subseteq R $ and a prime ideal $ \\\\mathfrak{q} \\\\subseteq S $ lying over \"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n  {\"name\": \"Polynomial.map_under_lt_comap_of_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (f : Polynomial R →ₐ[R] S) (P : Ideal S) [inst_3 : P.IsPrime] [Algebra.QuasiFiniteAt R P],\\n  Ideal.map Polynomial.C (Ideal.under R P) < Ideal.comap (↑f) P\", \"doc\": \"Given a ring homomorphism $ f : R[X] \\\\to S $, a prime ideal $ P \\\\subseteq S $, and the condition that $ P $ is quasi-finite over $ R $, the image of the contraction of $ P $ under the constant polynom\"}\n  {\"name\": \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"module\": \"Mathlib/RingTheory/DedekindDomain/PID\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] (S : Type u_2) [inst_2 : CommRing S] [inst_3 : Algebra R S]\\n  [Module.IsTorsionFree R S] [Module.Finite R S] (p : Ideal R),\\n  p ≠ ⊥ →\\n    ∀ [inst_6 : p.IsPrime] {Sₚ : Type u_3} [inst_7 : CommRing Sₚ] [inst_8 : Algebra S Sₚ]\\n      [IsLocalizat\", \"doc\": \"If $ P $ is a nonzero prime ideal in the localized ring $ S_P $, then $ P $ is a normalized prime factor of the ideal generated by $ p $ in $ S_P $, where $ p $ is the image of the algebra map from $ \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Polynomial.instFiniteUniversalFactorizationRing\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n),\\n  Module.Finite R (Polynomial.UniversalFactorizationRing m k hn p)\", \"doc\": \"For a commutative ring $ R $ and integers $ m, k $ with $ n = m + k $, the universal factorization ring $ \\\\text{UniversalFactorizationRing}_{m,k}(n) $ is finitely generated as an $ R $-module. This me\"}\nQuasiFiniteAt.baseChange and RingHom.QuasiFinite.isStableUnderBaseChange address preservation once a map is given; they do not construct a polynomial chart with n equal to the local fibre dimension or give the localization comparison. The other hits concern isolated points or fixed maps. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*polynomial|polynomial.*quasiFinite|exists_quasiFinite",
+   "results": "{\"t\": \"2026-10-23T09:20:36Z\", \"tool\": \"grep\", \"query\": \"quasiFinite.*polynomial|polynomial.*quasiFinite|exists_quasiFinite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Polynomial.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"496248ed02fbe059\"}; Hits concern fixed quasi-finite maps, localization or finite fibres; none constructs the chart with all field-fibre and fraction-field clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T09:20:37Z\", \"tool\": \"loogle\", \"query\": \"Algebra.QuasiFinite, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits concern fixed quasi-finite maps, localization or finite fibres; none constructs the chart with all field-fibre and fraction-field clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra at a fibre point of dimension n has a principal localization quasi finite over a polynomial algebra in n variables with compatible field fibres",
+   "results": "{\"t\": \"2026-10-23T09:20:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra at a fibre point of dimension n has a principal localization quasi finite over a polynomial algebra in n variables with compatible field fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt\", \"Algebra.QuasiFinite.finite_fiber\", \"RingHom.finiteType_holdsForLocalizationAway\", \"RingHom.finiteType_ofLocalizationSpan\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\"], \"digest\": \"36b15bd31622d33b\"}; Hits concern fixed quasi-finite maps, localization or finite fibres; none constructs the chart with all field-fibre and fraction-field clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra locally quasi finite over a polynomial ring in the dimension of its fibre",
+   "results": "{\"t\": \"2026-10-23T09:22:28Z\", \"tool\": \"leansearch\", \"query\": \"finite type algebra locally quasi finite over a polynomial ring in the dimension of its fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"Algebra.QuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"Algebra.QuasiFinite.recOn\", \"RingHom.QuasiFinite.of_finite\", \"Algebra.QuasiFinite.mk\", \"RingHom.QuasiFinite\"], \"digest\": \"6728d77ea24625fc\"}; Hits concern fixed quasi-finite maps, localization or finite fibres; none constructs the chart with all field-fibre and fraction-field clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Noether normalization of a finite type ring map by a quasi finite map from affine space with arbitrary base change and localized generic fibre",
+   "results": "{\"t\": \"2026-10-23T09:22:34Z\", \"tool\": \"leanfinder\", \"query\": \"local Noether normalization of a finite type ring map by a quasi finite map from affine space with arbitrary base change and localized generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isLocal\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"RingHom.QuasiFinite.propertyIsLocal\", \"RingHom.EssFiniteType.holdsForLocalization\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"Algebra.EssFiniteType.cond\"], \"digest\": \"81b17ed67d478067\"}; Hits concern fixed quasi-finite maps, localization or finite fibres; none constructs the chart with all field-fibre and fraction-field clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-domain-fibre-dimensions",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Re-split of the valuation-domain dimension argument: old proof steps 3–4 and the fraction-field identification in step 5 (localized chart and scalar extension).",
+   "via": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-localized-polynomial-chart-fibres",
+  "worker": "stage1",
+  "summary": "Seven-step assembly from existing nodes: 00QE chart, explicit finite generators, 00PN on every field fibre, algebra localization comparison, open-subspace dimension, generic domains and explicit fraction-field inverse maps. No new nodes; statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Re-split of the valuation-domain dimension argument: old proof steps 3–4 and the fraction-field identification in step 5 (localized chart and scalar extension).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "why": "Generic algebra/topology tool for the existing 00QK valuation-fibre branch; the trace-formula unit supplies no polynomial normalization, four-rings algebra lemma, or open-subspace dimension theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "Generic algebra/topology tool for the existing 00QK valuation-fibre branch; the trace-formula unit supplies no polynomial normalization, four-rings algebra lemma, or open-subspace dimension theorem."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic algebra/topology tool for the existing 00QK valuation-fibre branch; the trace-formula unit supplies no polynomial normalization, four-rings algebra lemma, or open-subspace dimension theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-f1a6e3761",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-f1a6e3761 (reviewer sub-agent of L); spot-checked: I read the item's 7 steps in full, every cited statement, Stacks 00QK (proof), 00QE (l.31170) and 00PN (l.30293). The statement is unchanged against side-live, where the item is still unsplit, so the delivery is not superseded; it was created by Q55's re-split of lem-trf-valuation-domain-fibre-dimensions and supplies everything the parent's step 2 uses. Step 1: q∩A=m because k→E/Q is injective, and κ(m)=k because A is local. The identification of the 00QE fibre point ker(E→κ(q)) with Q used the fibre-prime bijection without citing it. FIX: I cited lem-weil-pbc-fibre-ring-primes-bijection (a Mathlib leaf) in step 1 and added it to proof_deps. Step 2: generators d_i/1 and 1/g, and pure tensors (b⊗1)(1⊗λ); elementary. Step 3: 00PN with R=A[t], S=B, R'=c[t], S'=B⊗c; the square commutes on constants and variables, S⊗R'→S' is surjective, and α is quasi-finite at the contracted primes by step 1. Step 4: the localization base-change node gives the c-algebra isomorphism with the stated formula. Step 5: 00E3 gives D_E(ḡ)∋Q, the open-subspace node gives the dimension at Q, and transport along the homeomorphism is elementary. Step 6: g≠0, D_g is a domain, and the generic-fibre node applies to A↪D and A↪B, so g⊗1≠0 in F. Step 7: explicit inverse fraction-field maps over K. Edge cases checked: n=0, A a field, an arbitrary field c with B⊗c=0 (Z_(p), F_p, Q), non-Noetherian A, E=0 excluded by Q. I accept the declared tool uses for 00QE, 00PN and dimension-at-point-open-subspace; the other cited statements are Mathlib leaves. There are no new nodes and no duplicates, and no SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedPolynomialChartFibres",
+  "declaration": "Algebra.exists_localizedPolynomialChart_fibres",
+  "declarations": [
+   "Algebra.localizedPolynomialChartFieldMap",
+   "Algebra.exists_localizedPolynomialChart_fibres"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalizedPolynomialChartFibres.lean",
+  "statement": "theorem exists_localizedPolynomialChart_fibres (A : Type u) (D : Type v) [CommRing A] [IsLocalRing A] [CommRing D] [Algebra A D] [Algebra.FiniteType A D] (Q : PrimeSpectrum (IsLocalRing.ResidueField A ⊗[A] D)) (n : ℕ) (hdim : topologicalKrullDimAt Q = (n : WithBot ℕ∞)) : ∃ (g : D) (_ : g ∉ (Q.comap (TensorProduct.includeRight (R := A) (A := IsLocalRing.ResidueField A) (B := D)).toRingHom).asIdeal) (α : MvPolynomial (Fin n) A →ₐ[A] Localization.Away g) (hft : α.toRingHom.FiniteType), Algebra.FiniteType A (Localization.Away g) ∧ (∀ p : PrimeSpectrum (Localization.Away g), @IsQuasiFiniteAtPrime (MvPolynomial (Fin n) A) (Localization.Away g) _ _ α.toRingHom.toAlgebra hft p) ∧ (∀ (c : Type w) [Field c] [Algebra A c], ∃ hftc : (localizedPolynomialChartFieldMap A D c n g α).toRingHom.FiniteType, (∀ p : PrimeSpectrum (c ⊗[A] Localization.Away g), @IsQuasiFiniteAtPrime (MvPolynomial (Fin n) c) (c ⊗[A] Localization.Away g) _ _ (localizedPolynomialChartFieldMap A D c n g α).toRingHom.toAlgebra hftc p) ∧ Algebra.FiniteType c (c ⊗[A] Localization.Away g) ∧ ∃ e : c ⊗[A] Localization.Away g ≃ₐ[c] Localization.Away ((1 : c) ⊗ₜ[A] g), ∀ (d : D) (j : ℕ) (a : c), e (a ⊗ₜ[A] IsLocalization.mk' (M := Submonoid.powers g) (Localization.Away g) d ⟨g ^ j, j, rfl⟩) = IsLocalization.mk' (M := Submonoid.powers ((1 : c) ⊗ₜ[A] g)) (Localization.Away ((1 : c) ⊗ₜ[A] g)) (a ⊗ₜ[A] d) ⟨((1 : c) ⊗ₜ[A] g) ^ j, j, rfl⟩) ∧ (∃ e : PrimeSpectrum (IsLocalRing.ResidueField A ⊗[A] Localization.Away g) ≃ₜ (PrimeSpectrum.basicOpen ((1 : IsLocalRing.ResidueField A) ⊗ₜ[A] g)), (∀ p, (e p).val = p.comap (TensorProduct.map (AlgHom.id A (IsLocalRing.ResidueField A)) (IsScalarTower.toAlgHom A D (Localization.Away g))).toRingHom) ∧ ∃ Qg : PrimeSpectrum (IsLocalRing.ResidueField A ⊗[A] Localization.Away g), (e Qg).val = Q ∧ topologicalKrullDimAt Qg = (n : WithBot ℕ∞)) ∧ (∀ [IsDomain A] [IsDomain D], Function.Injective (algebraMap A D) → g ≠ 0 ∧ IsDomain (Localization.Away g) ∧ Function.Injective (algebraMap A (Localization.Away g)) ∧ IsDomain (FractionRing A ⊗[A] D) ∧ IsDomain (FractionRing A ⊗[A] Localization.Away g) ∧ Nonempty ((FractionRing A ⊗[A] Localization.Away g) ≃ₐ[FractionRing A] Localization.Away ((1 : FractionRing A) ⊗ₜ[A] g)) ∧ Nonempty (FractionRing (FractionRing A ⊗[A] Localization.Away g) ≃ₐ[FractionRing A] FractionRing (FractionRing A ⊗[A] D)))",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15342c6ff",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records, Stacks 00QK/00QE context, module and report. Every hypothesis matches (local ring, finite type D, prime Q of k⊗D, topologicalKrullDimAt Q = n); domain/injectivity assumptions apply only to the final clause. Conclusions: g∉q, α : A[t]→ₐ[A] D_g, finite type and IsQuasiFiniteAtPrime at every prime (same shape as the recorded 00QE interface); for every field c (universe-polymorphic) the aeval helper α_c (real data, the canonical base change) is finite type and quasi-finite, the target is finite type, and the c-algebra iso B⊗c≅(D⊗c)_{1⊗g} is pinned by its full fraction formula; at c=k, a homeomorphism onto the basic open whose map is fixed as the canonical comap, with Qg↦Q and dimension n; domain case gives g≠0, B a domain containing A, F and H domains, H≅F_g, Frac(H)≃ₐ[K]Frac(F) (Nonempty; no formula in the node, and the citer needs only trdeg). Edge cases n=0, c with B⊗c=0, non-Noetherian A, nilpotents covered; universes bound; lean.statement verbatim; no new nodes, no duplicate notion, docstrings carry source and blueprint, only sorry. Not recompiled (no file changed)."
+ }
+}

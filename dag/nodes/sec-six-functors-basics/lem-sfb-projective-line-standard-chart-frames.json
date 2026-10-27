@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-projective-line-standard-chart-frames",
+ "kind": "statement",
+ "title": "Free generators on the standard projective-line charts",
+ "statement": "Let $k$ be a field [def-weil-field], $P=\\mathbf P^1_k$ with standard charts $U_i$ [def-sc-p1-standard], and $L$ an invertible $\\mathcal O_P$-module [def-sc-invertible-module]. For every $i\\in\\{0,1\\}$ there exists $g_i\\in\\Gamma(U_i,L)$ which is a free generator on every subopen of $U_i$ [def-sc-local-free-generator].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, proof specialized to n=1 over a field; StandardChartFrames"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-p1-standard",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "The source polyEquivChart identifies each chart ring with k[t], taking the other coordinate as variable. Transport the domain and PID instances of [lem-pur-polynomial-field-pid] across this ring equivalence.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-pur-polynomial-field-pid"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section module of L on the affine chart is invertible by [lem-sc-affine-invertible-sections]. Over the PID chart ring [lem-pur-pid-invertible-module-trivial] (implemented by CommRing.Pic.mk_eq_one_iff and the subsingleton instance) supplies a linear isomorphism of sections with the ring.",
+   "uses": [
+    "lem-sc-affine-invertible-sections",
+    "lem-pur-pid-invertible-module-trivial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse image of 1 is a generator of the section module. The proved source theorem Scheme.Modules.isFreeGenerator_of_bijective_smul localizes this basis to basic opens and then all subopens, so this section is a free generator in the sense of [def-sc-local-free-generator].",
+   "uses": [
+    "def-sc-local-free-generator",
+    "lem-sc-affine-invertible-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "lem-pur-polynomial-field-pid",
+  "lem-sc-affine-invertible-sections",
+  "lem-pur-pid-invertible-module-trivial",
+  "def-sc-local-free-generator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, explicit two-chart computation; coordinate identification also Constructions Tag 01M7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of regular functions on the intersection of the two standard affine charts of the projective line is the Laurent polynomial ring",
+   "results": "8 hits: LaurentPolynomial, LaurentPolynomial.isLocalization, instModulePolynomial, Polynomial.toLaurentAlg_apply, Polynomial.toLaurent_eq_zero, instIsScalarTowerPolynomial, algebraPolynomial, Polynomial.toLaurent.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero homogeneous localization of k[X,Y] at XY is isomorphic to Laurent polynomials in X/Y",
+   "results": "8 hits: LaurentPolynomial.isLocalization, mk'_one_X, RatFunc.laurent, LaurentPolynomial.mk'_eq, mk'_one_X_pow, Polynomial.toLaurent_X, RatFunc.laurentAux_ofFractionRing_mk, RatFunc.coe_X.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "grep",
+   "query": "LaurentPolynomial.eval₂|bijective_sum_awayMonomial|laurentExponents",
+   "results": "0 Mathlib matches through msearch. Local source inspection found bijective_sum_awayMonomial in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections and polynomial chart coordinates in LineDifferentials, but no concrete Laurent overlap evaluation theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.LineInvertibleClassification",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof of lem-sfb-projective-line-invertible-classification: StandardChartFrames",
+   "via": [
+    "lem-sfb-projective-line-invertible-classification",
+    "lem-sfb-projective-line-twist-rigidity",
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardChartFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/StandardChartFrames.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.exists_standardChart_frames",
+  "statement": "theorem exists_standardChart_frames (k : Type u) [Field k]\n    (L : (ProjectiveLine (Spec (.of k))).Modules) [Scheme.Modules.IsInvertible L]\n    (i : ULift.{u} (Fin 2)) :\n    ∃ g : Γ(L, standardOpen _ (Spec (.of k)) i), Scheme.Modules.IsFreeGenerator g",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094333-L-215633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094333-L-215633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

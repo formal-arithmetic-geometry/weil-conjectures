@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-zariski-etale-pseudocoherent-rhom",
+ "kind": "statement",
+ "title": "Zariski to etale pullback preserves derived Hom from pseudo-coherent complexes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Write $\\epsilon_X:(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})\\to(X_{\\mathrm{Zar}},\\mathcal O_X)$ for the canonical morphism of ringed sites and use its exact module pullback $\\epsilon_X^*$ [lem-sfb-derived-etale-zariski-equivalence]. Work in the ordinary unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Let $K,L\\in D(\\mathcal O_X)$, with $K$ pseudo-coherent [def-pur-pseudo-coherent-complex] and $H^i(L)=0$ for every $i<a$ for some integer $a$. The canonical pullback comparison is a natural isomorphism in $D(\\mathcal O_{X,\\mathrm{et}})$:\n$$\\epsilon_X^*R\\mathcal Hom_{\\mathcal O_X}(K,L)\\xrightarrow{\\sim}R\\mathcal Hom_{\\mathcal O_{X,\\mathrm{et}}}(\\epsilon_X^*K,\\epsilon_X^*L).$$\nHere derived internal Hom is [def-pur-derived-internal-hom]. The canonical comparison is defined as follows: represent $K,L$ by complexes $\\mathcal K^\\bullet,\\mathcal L^\\bullet$, let $\\mathcal L^\\bullet\\to\\mathcal I^\\bullet$ and $\\epsilon_X^*\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ be the fixed K-injective replacements of [def-pur-derived-internal-hom], and use the Hom complexes of [def-pur-hom-complex]. In degree $n$, map $\\epsilon_X^*\\prod_p\\mathcal Hom(\\mathcal K^p,\\mathcal I^{p+n})$ to $\\prod_p\\mathcal Hom(\\epsilon_X^*\\mathcal K^p,\\epsilon_X^*\\mathcal I^{p+n})$ by the projections and $h\\mapsto\\epsilon_X^*h$ on local sections, then postcompose with $\\epsilon_X^*\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$. Since $\\epsilon_X^*$ is exact, $\\epsilon_X^*\\mathcal L^\\bullet\\to\\mathcal J^\\bullet$ is a quasi-isomorphism, so the target complex $\\mathcal Hom^\\bullet(\\epsilon_X^*\\mathcal K^\\bullet,\\mathcal J^\\bullet)$ represents $R\\mathcal Hom(\\epsilon_X^*K,\\epsilon_X^*L)$. Naturality is contravariant in $K$ and covariant in $L$, within the indicated domains. Neither quasi-coherence of $L$ nor a Noetherian hypothesis on $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JP, lemma-descend-RHom, case (1); epsilon of equation-epsilon, exact by Tag 08H8, lemma-epsilon-flat; the canonical map of sites-cohomology.tex remark-prepare-fancy-base-change, written on Hom complexes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "def-weil-abstract-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\epsilon_X^*$. It is exact by [lem-sfb-derived-etale-zariski-equivalence], so applying it termwise preserves cohomology and quasi-isomorphisms: apply exactness to the kernels, images and quotients defining each cohomology sheaf. For arbitrary representatives $A,B$, put $I=I(B)$ and $J=I(TI)$. The projections and pullback of module maps give $c_{A,I}:T\\mathcal Hom^\\bullet(A,I)\\to\\mathcal Hom^\\bullet(TA,TI)$. On a homogeneous family $f$, applying $T$ to $d_I f-(-1)^n f d_A$ gives $d_{TI}(Tf)-(-1)^n(Tf)d_{TA}$, so this is a chain map. Postcompose with $TI\\to J$. The map $TB\\to TI\\to J$ is a quasi-isomorphism and $J$ is K-injective; hence the target is a representative of $R\\mathcal Hom(TK,TL)$ by [def-pur-derived-internal-hom]. All component maps commute with precomposition and postcomposition, and the replacements are functorial. Both resulting bifunctors invert quasi-isomorphisms by that definition and exactness of $T$. Thus the natural transformation descends through localization [def-weil-abstract-derived-category], contravariantly in $K$ and covariantly in $L$. This is precisely the comparison specified in the statement; no preservation of infinite products is used.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "It suffices to check that this map is a quasi-isomorphism over a Zariski open covering: the opens are also an etale covering, and a morphism of sheaves is an isomorphism when it is so on a covering. Derived internal Hom restricts to the Hom of the restricted objects by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Pullback along $\\epsilon$ commutes with restriction to opens by the comparison in [lem-trf-zariski-etale-functor-comparison-square], applied to an open immersion. The representatives in step 1 also restrict compatibly: K-injective complexes remain K-injective on slice sites by [lem-pur-kinjective-restrict-localized]. Projections, pullback of maps and postcomposition all restrict componentwise. Replacing a restricted resolution by the fixed local resolution gives the same derived morphism, by the representative independence in [def-pur-derived-internal-hom]. We may therefore use local representatives for both inputs and test the locally specified comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "By the local finite-free formulation of pseudo-coherence in [def-pur-pseudo-coherent-complex], choose such an open $U$ on which $K$ is represented by a complex $P$ of finite free $\\mathcal O_U$-modules, with $P^p=0$ for $p>b$. Choose any representative $B$ of $L|_U$ and replace it by its good lower truncation $F$: put $F^q=0$ for $q<a$, $F^a=\\operatorname{coker}(d_B^{a-1})$ and $F^q=B^q$ for $q>a$, with the induced differential. The quotient map $B\\to F$ induces the identity on cohomology in degrees at least $a$ and an isomorphism between zero objects below $a$; hence it is a quasi-isomorphism by [def-weil-abstract-derived-category]. Exactness of $T=\\epsilon_U^*$ gives representatives $TP,TF$ of the pulled-back objects. Pullback sends $\\mathcal O_U^{\\oplus r}$ to $\\mathcal O_{U,\\mathrm{et}}^{\\oplus r}$ and sends zero to zero, so $TP$ is again bounded above finite free and $TF$ is bounded below.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-trf-zariski-etale-functor-comparison-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-bounded-free-rhom-model] first to the Zariski ringed site with $P,F$ and then to the small etale ringed site with $TP,TF$. Its hypotheses hold by step 3 (finite free is a direct summand of itself). Thus the two derived internal Homs are represented respectively by $H=\\mathcal Hom^\\bullet(P,F)$ and $H'=\\mathcal Hom^\\bullet(TP,TF)$. In degree $n$, only $a-n\\leq p\\leq b$ can contribute; the products in these Hom complexes are finite biproducts. Their differential is $d_F f-(-1)^n f d_P$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "For a finite free $E=\\mathcal O_U^{\\oplus r}$ and any module sheaf $G$, evaluation on the $r$ basis sections identifies $\\mathcal Hom(E,G)$ with $G^{\\oplus r}$, directly from [def-pur-sheaf-hom]. Since $T$ is exact and additive, it preserves finite biproducts. Under the identifications $TE=\\mathcal O_{U,\\mathrm{et}}^{\\oplus r}$ and $T(G^{\\oplus r})=(TG)^{\\oplus r}$, the pullback-Hom map sends a tuple $(g_1,\\ldots,g_r)$ to the same tuple. It is therefore an isomorphism, including $r=0$. Apply this to every $P^p,F^{p+n}$ and to the finite degree-$n$ biproduct of step 4. The resulting isomorphisms $TH^n\\to(H')^n$ commute with the differential by the calculation in step 1, giving a chain isomorphism $c_{P,F}:TH\\xrightarrow{\\sim}H'$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "Verify that the chain isomorphism just obtained represents the fixed comparison, rather than merely an unspecified isomorphism of its endpoints. Let $i:F\\to I=I(F)$ and $j:TI\\to J=I(TI)$ be the fixed augmentations. There is a commuting square whose upper arrow is $c_{P,F}:T\\mathcal Hom(P,F)\\to\\mathcal Hom(TP,TF)$, whose left arrow is $T\\mathcal Hom(P,i)$, whose right arrow is $\\mathcal Hom(TP,j\\circ Ti)$, and whose lower arrow is $\\mathcal Hom(TP,j)\\circ c_{P,I}$. Commutativity holds componentwise since pulling back a composite equals composing its pullbacks. The left arrow is a quasi-isomorphism by [lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso] and exactness of $T$. The right arrow is a quasi-isomorphism by the same node on the etale site: $TP$ is bounded above finite free, $TF$ is bounded below, $J$ is K-injective and $j\\circ Ti$ is a quasi-isomorphism. The node explicitly allows an unbounded K-injective target. After localization the vertical arrows are the canonical Hom-model identifications of [def-pur-derived-internal-hom]. The lower arrow is exactly step 1 on representatives $P,F$. It is an isomorphism because the upper arrow and both vertical arrows are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  },
+  {
+   "text": "Steps 2 and 6 show that the original comparison is locally a quasi-isomorphism on an open covering. Its maps on cohomology sheaves are therefore isomorphisms globally, so it is an isomorphism in the unbounded derived category [def-weil-abstract-derived-category]. Together with the naturality established in step 1 this proves the claimed natural isomorphism. The only restrictions used on the inputs were the local bounded-above finite-free model for $K$ and the lower cohomology bound for $L$; no quasi-coherence of $L$ or Noetherian assumption occurred.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, proof of case (1); Hom-model normalization uses sites-cohomology.tex Tag 08JI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-pseudo-coherent-complex",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JP, lemma-descend-RHom, case (1), with explicit comparison to the fixed K-injective representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(RHom|internalHom|internal_hom).*(etale|étale)|(etale|étale).*(RHom|internalHom|internal_hom)",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"grep\", \"query\": \"(RHom|internalHom|internal_hom).*(etale|étale)|(etale|étale).*(RHom|internalHom|internal_hom)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski to small etale exact pullback commutes with derived sheaf Hom for pseudo coherent source bounded below target",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"leansearch\", \"query\": \"Zariski to small etale exact pullback commutes with derived sheaf Hom for pseudo coherent source bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"51d787f3d10d2d1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"etale\"",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback of derived internal Hom for a pseudo coherent complex and a bounded below complex on a scheme",
+   "results": "{\"t\": \"2026-10-23T11:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"Etale pullback of derived internal Hom for a pseudo coherent complex and a bounded below complex on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\"], \"digest\": \"545444e9afb97c60\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of topology from Zariski to etale preserves derived sheaf Hom out of a bounded above finite free complex",
+   "results": "{\"t\": \"2026-10-23T11:29:55Z\", \"tool\": \"leanfinder\", \"query\": \"Change of topology from Zariski to etale preserves derived sheaf Hom out of a bounded above finite free complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"718cdb5cb54dec6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski to etale pullback preserves derived internal Hom from pseudo coherent complexes to bounded below complexes",
+   "results": "{\"t\": \"2026-10-23T12:26:08Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski to etale pullback preserves derived internal Hom from pseudo coherent complexes to bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"fa94c5ad1121d665\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary pullback, categorical pullbacks or flat scheme morphisms; none compares the derived internal Homs in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T12:26:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.congrHom\", \"CategoryTheory.Limits.pullback.congrHom_hom\", \"CategoryTheory.Limits.pullback.congrHom_inv\", \"AlgebraicGeometry.instIsOverHomSchemeTransPullbackSymmetryOverSpecOfInferInstanceOverClassPullbackSpecIso'\", \"AlgebraicGeometry.instIsMonHomOverSchemeSpecOfAsOverHomTransPullbackSymmetryOverInferInstanceOverClassPullbackSpecIso'\", \"CategoryTheory.Limits.FormalCoproduct.instHasLimitWidePullbackShapeToTypeSimplexCategoryOrderHomFinHAddNatLenOfNatWideCospanObjInclFromIsTerminalIncl\", \"CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left\", \"CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_fst\"], \"digest\": \"3e90e842b22f2039\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary pullback, categorical pullbacks or flat scheme morphisms; none compares the derived internal Homs in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(RHom|internalHom|internal_hom).*(etale|zariski)|(etale|zariski).*(RHom|internalHom|internal_hom)",
+   "results": "{\"t\": \"2026-10-23T12:26:36Z\", \"tool\": \"grep\", \"query\": \"(RHom|internalHom|internal_hom).*(etale|zariski)|(etale|zariski).*(RHom|internalHom|internal_hom)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary pullback, categorical pullbacks or flat scheme morphisms; none compares the derived internal Homs in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact change of topology pullback commutes with derived sheaf Hom for pseudo coherent source and bounded below target",
+   "results": "{\"t\": \"2026-10-23T12:26:37Z\", \"tool\": \"leansearch\", \"query\": \"Exact change of topology pullback commutes with derived sheaf Hom for pseudo coherent source and bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_assoc\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\"], \"digest\": \"6987415e278cb6a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary pullback, categorical pullbacks or flat scheme morphisms; none compares the derived internal Homs in this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of ringed sites: flat inverse image of derived sheaf Hom out of a bounded above finite free complex, with bounded below second argument",
+   "results": "{\"t\": \"2026-10-23T12:27:04Z\", \"tool\": \"leanfinder\", \"query\": \"Change of ringed sites: flat inverse image of derived sheaf Hom out of a bounded above finite free complex, with bounded below second argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"CategoryTheory.compatiblePreservingOfFlat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"SheafOfModules.bijective_pushforwardSections\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"8ae166d7d05f8e65\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary pullback, categorical pullbacks or flat scheme morphisms; none compares the derived internal Homs in this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-etale-derived-hom-realization",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom. Affine chart reduction: Tag 08JP (lemma-descend-RHom), case (1), combined with perfect.tex lemma-identify-pseudo-coherent-noetherian and lemma-quasi-coherence-internal-hom (affine clause (3)(a)). Supporting comparison: Tag 08JP, case (1), change from Zariski derived internal Hom to small-etale derived internal Hom.",
+   "via": [
+    "lem-sfb-affine-etale-derived-hom-realization",
+    "lem-sfb-space-coherent-derived-internal-hom",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-etale-pseudocoherent-rhom",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08JP(1), using existing ringed-site half-bounded Hom models and their arbitrary K-injective augmentation comparison. Wrote the finite-free coordinate calculation and the commuting square identifying the canonical morphism. No new nodes: all substantive inputs already exist; no statement change. Searches found no project attachment or Mathlib match.",
+  "blueprint": "Supporting comparison in the existing ancestry place: 08JP(1) used in the affine chart reduction for coherent internal Hom; realizes its local free-model argument and verifies the fixed canonical arrow. Whole-blueprint searches for 08JP and 08JI found no imported duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site or change-of-topology tool for the local Hom-complex argument of Stacks 08JP(1); it does not replace any constructibility unit route."
+   },
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "Generic ringed-site or change-of-topology tool for the local Hom-complex argument of Stacks 08JP(1); it does not replace any constructibility unit route."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic ringed-site or change-of-topology tool for the local Hom-complex argument of Stacks 08JP(1); it does not replace any constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic ringed-site or change-of-topology tool for the local Hom-complex argument of Stacks 08JP(1); it does not replace any constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso",
+    "why": "Generic ringed-site or change-of-topology tool for the local Hom-complex argument of Stacks 08JP(1); it does not replace any constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-dffdffd6a",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-dffdffd6a (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 08JP(1) in spaces-perfect.tex, 08H8, 08JI and remark-prepare-fancy-base-change. The statement and stmt_deps are unchanged against clones/live, where the item is still unsplit, so nothing is weakened. There are 0 new nodes and no SGA citation. Step 1: I checked the chain-map identity, the K-injective target and the descent through localization. Step 2: the slice restriction of RHom, ε commuting with opens via the comparison square for arbitrary modules, and K-injectivity after restriction are all statements of cited nodes. Step 3: def-pur-pseudo-coherent-complex gives local bounded-above finite free models directly, and I checked the good truncation τ≥a. Steps 4-6: the 08JI model and quasi-iso nodes apply on both ringed sites, and the quasi-iso node allows an unbounded K-injective target. The finite-free coordinate isomorphism holds, and I checked that the commuting square identifies the fixed canonical arrow. Step 7: local isomorphisms on cohomology sheaves glue. Edge cases checked: empty interval, r=0, unbounded P, L not quasi-coherent. No duplicates: the only other 08JP nodes are the Noetherian affine parent and the coherence-on-spaces node. Batch-5: lem-trf-zariski-etale-functor-comparison-square is the generic change-of-topology comparison of descent 03FH/03LC, not part of the trace-formula or Poincaré-duality statements or proofs, and it was already a stmt_dep of the base stmt_dep lem-sfb-derived-etale-zariski-equivalence, so I accept it. I accept all tool_uses as generic ringed-site tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiEtalePseudoCoherentRHom",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.zariski_etale_pseudoCoherent_rhom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleRHomSite",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomInclusion",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomTopology",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomRing",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleRHomModules",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomRestriction",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomExtension",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleRHomSection",
+   "AlgebraicGeometry.Scheme.Modules.zariskiRHom",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleRHom",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.complexExtension",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.derivedExtension",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.derivedFactors",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.representativeTarget",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.targetIdentification",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtalePseudoCoherentRHomData.sourceIdentification",
+   "AlgebraicGeometry.Scheme.Modules.zariski_etale_pseudoCoherent_rhom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiEtalePseudoCoherentRHom.lean",
+  "statement": "theorem zariski_etale_pseudoCoherent_rhom (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (ZariskiEtaleRHomModules X)] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (c : ZariskiEtaleModuleContext X) : ∃ d : ZariskiEtalePseudoCoherentRHomData X c, ∀ A B : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ, d.comparison.app (op (DerivedCategory.Q.obj A), DerivedCategory.Q.obj B) ≫ d.targetIdentification A B = d.sourceIdentification A B",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The target is stated on the equivalent small affine etale basis by actual restriction, keeping the original module universe. The data record supplies the restriction equivalence and exactness, and fixes the ordinary, chain and derived comparisons by local-section, product-projection and fixed K-injective localization equations. Its isIso field is precisely the pseudo-coherent / bounded-below claim; comparison is a natural transformation on both full ordinary module derived categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a573538a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Matches node and Stacks 08JP(1): arbitrary scheme X, X.IsPseudoCoherent K, existential cohomology lower bound on L, no QCoh/Noetherian assumption. The comparison is a natural transformation on full D^op x D, with isIso exactly under the two hypotheses. ordinary is pinned by the local pulled-back section equation, complex by the homComplexπ projections, and comparison by the fixed K-injective representative equation, whose targetIdentification is an iso (ε exact); the composite is exactly the node's. The étale target is on SmallModel.{u} X.AffineEtale (homComplex on X.Etale lands in u+1), reached by actual restriction with identity ring map, with restriction_equivalence asserted (dense subsite); this matches the size convention, imposes no universe equality, and has no named duplicate. Only the item's lean field changed; no new nodes; lean.statement verbatim; lines <=100; sole sorry is the main theorem; docstrings carry source+blueprint; private imports = proof_dep modules (required by brief §3). Not recompiled (no change); worker compile and dry run reported clean. Advisories: coefficientHomResolution(+Iso)/ringedSiteHomAugmentation/ZariskiEtaleModuleContext owners (def-coef-hom-representative-evaluation, def-trf-ringed-site-ordinary-hom-comparison, def-sfb-scheme-zariski-etale-module-constructions) are not in stmt_deps, which are unchanged since base and could not be changed by the group; the second reading was by the same worker."
+ }
+}

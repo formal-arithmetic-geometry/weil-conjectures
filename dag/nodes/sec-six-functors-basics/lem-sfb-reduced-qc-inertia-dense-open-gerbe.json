@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+ "kind": "statement",
+ "title": "A reduced stack with quasi-compact inertia has a dense open gerbe",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. Use algebraic stacks [def-sfb-algebraic-moduli-stack], algebraic spaces [def-trf-algebraic-space], and morphisms and $2$-fibre products of fibred groupoids [def-sfb-stable-pointed-moduli-groupoids]. Quasi-compactness is [def-sfb-stack-qcqs-morphism], and point spaces have the topology of [lem-sfb-stack-point-topology]. Let $\\mathcal X/S$ be an algebraic stack which is reduced, meaning that it admits a smooth surjective scheme atlas whose local rings have no nonzero nilpotents. Define $I_{\\mathcal X/S}=\\mathcal X\\times_{\\mathcal X\\times_S\\mathcal X}\\mathcal X$, with both maps the relative diagonal; its projection to $\\mathcal X$ is the inertia projection (equivalently, it forgets the automorphism in a pair $(x,\\alpha:x\\xrightarrow{\\sim}x)$). Suppose this projection is quasi-compact. Then there exist an algebraic open substack $\\mathcal U\\subseteq\\mathcal X$, an algebraic space $Q/S$, and a gerbe $p:\\mathcal U\\to Q$, such that $|\\mathcal U|$ is open and dense in $|\\mathcal X|$. An open substack is a strictly full substack whose pullback by every scheme is an open subscheme. A morphism $p:\\mathcal U\\to Q$ to an algebraic space is a gerbe if for every scheme $T\\to Q$ its fibre groupoid has objects fppf locally on $T$, and any two objects of that fibre groupoid are isomorphic fppf locally on $T$ [def-pc-fppf-site]. No quasi-compactness of $\\mathcal X$, Noetherianity, finite-type hypothesis, or quasi-separatedness hypothesis is imposed. The empty stack is allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06RC (proposition-open-stratum); gerbe means a gerbe over an algebraic space, as in the discussion preceding proposition-when-gerbe."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-pc-fppf-site",
+  "lem-sfb-stack-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose the reduced smooth surjective atlas $p:P\\to\\mathcal X$ supplied by the hypothesis, and write $x\\in\\mathcal X(P)$ for its object. Put $R=P\\times_{\\mathcal X}P$, with source and target $s,t$, and $G=\\operatorname{Aut}_P(x)$. The representable diagonal and [lem-sfb-stack-diagonal-space-source-representability] make $R$ an algebraic space. Its two projections are smooth surjective base changes of $p$ by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The scheme pullback of inertia along $p$ is $G$: an object consists of $(y,\\alpha,a:x\\simeq y)$, which is sent to $a^{-1}\\alpha a\\in\\operatorname{Aut}(x)$; the inverse uses $y=x,a=1$. These mutually inverse identifications respect pullback. By [lem-sfb-inertia-locally-finite-type], $G\\to P$ is locally of finite type. Quasi-compactness of the inertia projection, through [lem-sfb-representable-stack-quasicompact-tests], says its scheme base change $G\\to P$ is quasi-compact as a map of algebraic spaces. Thus this map is of finite type over the reduced scheme $P$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-inertia-locally-finite-type",
+    "lem-sfb-representable-stack-quasicompact-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC (proposition-open-stratum), choose a presentation; Tag 06PR (lemma-presentation-inertia), objectwise identification written out; Tag 050Q (lemma-inertia)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-maximal-flat-lfp-base-open] to $G\\to P$ and call its largest good base open $W$. Its existence requires no finiteness assumptions. Every etale scheme chart of $P$ is reduced by [etale-proposition-etale-reduced], so $P$ is reduced in the sense of the next node. Apply [lem-sfb-space-reduced-generic-flat-finite-presentation] to this finite-type morphism over reduced $P$, obtaining a dense open $D\\subseteq P$ where the stabilizer is flat and locally of finite presentation. The maximality clause gives $D\\subseteq W$, so $W$ is dense in $P$. In particular no finiteness assertion about the irreducible components of $P$ is used.",
+   "uses": [
+    "lem-sfb-space-maximal-flat-lfp-base-open",
+    "lem-sfb-space-reduced-generic-flat-finite-presentation",
+    "etale-proposition-etale-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC, largest W and density; spaces-morphisms.tex Tag 06QS; spaces-descent.tex Tag 06R2. Etale charts of the reduced atlas are reduced: etale.tex Tag 025O."
+   }
+  },
+  {
+   "text": "The two pullbacks $s^*G$ and $t^*G$ to $R$ are isomorphic: an arrow $r:x_a\\xrightarrow{\\sim}x_b$ sends an automorphism $g$ of $x_a$ to $rgr^{-1}$ of $x_b$; conjugation by $r^{-1}$ is the inverse. This formula is natural on every test scheme, hence is an isomorphism of the representing spaces over $R$. Since $s,t$ are smooth, they are flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The pullback equality of [lem-sfb-space-maximal-flat-lfp-base-open] identifies the maximal good base opens of $s^*G$ and $t^*G$ with $s^{-1}W$ and $t^{-1}W$. The conjugation isomorphism gives equality of these opens. Thus $W$ is invariant under the presentation relation, as an equality of open subspaces rather than only of geometric points.",
+   "uses": [
+    "lem-sfb-space-maximal-flat-lfp-base-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06R4 (lemma-property-G-invariant), conjugation argument with Tag 06R2; the conjugation map and inverse are written explicitly."
+   }
+  },
+  {
+   "text": "By [lem-sfb-invariant-open-substack-descent], the invariant open $W\\subseteq P$ corresponds to an open substack $\\mathcal U\\subseteq\\mathcal X$ with $P\\times_{\\mathcal X}\\mathcal U=W$. The restricted map $W\\to\\mathcal U$ is smooth surjective, being the base change of $p$, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The diagonal of $\\mathcal U$ is the restriction of that of $\\mathcal X$, and is representable by algebraic spaces: an isomorphism between two objects in a strictly full substack is exactly the same isomorphism as in $\\mathcal X$. $\\mathcal U$ is an etale stack: its isomorphism sheaves are those of $\\mathcal X$, and if an object $x\\in\\mathcal X(T)$ restricts into $\\mathcal U$ on an etale cover $\\{T_i\\to T\\}$, then the open subscheme $T\\times_{\\mathcal X}\\mathcal U\\subseteq T$ contains the images of all $T_i$, so it is $T$ and $x\\in\\mathcal U(T)$. Therefore $W$ is a smooth scheme atlas and $\\mathcal U$ is algebraic by [def-sfb-algebraic-moduli-stack].",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC, descent of the invariant open; stacks-properties.tex Tag 0507 (lemma-substacks-presentation), open case."
+   }
+  },
+  {
+   "text": "The point-topology theorem [lem-sfb-stack-point-topology] makes $|p|$ continuous and surjective. The inverse image of $|\\mathcal U|$ is $|W|$ by the cartesian open square. To check this on field-valued representatives, membership in the open substack is unchanged by an isomorphism after a field extension, and a point of a scheme lies in an open subscheme exactly when its field-valued representative factors through it. Thus $|\\mathcal U|$ is open by the atlas criterion. For any nonempty open $O\\subseteq|\\mathcal X|$, its inverse image in $|P|$ is nonempty open and meets the dense set $|W|$. Its image lies in $O\\cap|\\mathcal U|$, proving density. If $P$ is empty then $\\mathcal X$ is empty and the same assertion is vacuous.",
+   "uses": [
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC, density of the descended open, using the quotient topology of stacks-properties.tex Tag 04XL (lemma-topology-points)."
+   }
+  },
+  {
+   "text": "Strict fullness identifies $I_{\\mathcal U/S}$ with $I_{\\mathcal X/S}\\times_{\\mathcal X}\\mathcal U$: its objects are precisely $u\\in\\mathcal U(T)$ equipped with automorphisms of that same object in $\\mathcal X(T)$, and the arrows obey the same conjugation equation. Pulling its projection back along the smooth surjective atlas $W\\to\\mathcal U$ therefore gives $G_W\\to W$. This map is flat and locally of finite presentation by the defining property of $W$. The projection is representable by algebraic spaces by [lem-sfb-inertia-locally-finite-type]. Since the atlas is flat locally finitely presented by [lem-sfb-stack-chartwise-smooth-etale-calculus], [lem-sfb-representable-fppf-etale-open-descent] descends both properties from $G_W\\to W$ to $I_{\\mathcal U/S}\\to\\mathcal U$.",
+   "uses": [
+    "lem-sfb-inertia-locally-finite-type",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC, final paragraph; inertia restriction is the open-immersion instance of Tag 06R5 (lemma-monomorphism-cartesian-square-inertia), proved here on objects; descent Tags 06PZ and 06Q8."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-inertia-algebraic-space-quotient] to $\\mathcal U$: it gives the algebraic space $Q$ which is the fppf sheafification of $T\\mapsto\\operatorname{Ob}(\\mathcal U(T))/\\cong$, and its natural map $\\pi:\\mathcal U\\to Q$. This cited statement alone does not assert the gerbe clause, which we now check. The etale-stack convention is an fppf stack by [lem-sfb-etale-smooth-atlas-fppf-descent]. For every scheme $T\\to Q$, the local-representative assertion of [lem-weil-pbc-site-sheafification-sections-local] gives an fppf cover on which its section of $Q$ is represented by an object of $\\mathcal U$. If two objects of the fibre over this section are given, their isomorphism classes have equal images in $Q(T)$; the local-equality assertion of that same node gives an fppf cover where the classes agree, hence where an isomorphism of the two objects exists by the definition of isomorphism classes. Every such isomorphism lies over the identity section in the discrete sheaf $Q$. These are exactly the two gerbe conditions in the statement, after every $T\\to Q$. This also yields the empty gerbe over the empty algebraic space when $\\mathcal X$ is empty.",
+   "uses": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ (proposition-when-gerbe), conclusion via Tag 06QD (lemma-gerbe-over-iso-classes); gerbe conditions checked from the local-section and local-equality sheafification theorem, Tags 00WB and 00WK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-inertia-locally-finite-type",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-sfb-space-maximal-flat-lfp-base-open",
+  "lem-sfb-space-reduced-generic-flat-finite-presentation",
+  "etale-proposition-etale-reduced",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06RC (proposition-open-stratum), using Tags 06QS, 06R2, 06R4 and 06QJ; the omitted largest-open argument is exposed as a general statement-only input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic stack with quasi compact inertia has a dense open substack which is a gerbe over an algebraic space",
+   "results": "{\"t\": \"2026-10-23T13:40:34Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced algebraic stack with quasi compact inertia has a dense open substack which is a gerbe over an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.exists_le_and_germ_injective\"], \"digest\": \"065c15502709f4cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gerbe\"",
+   "results": "{\"t\": \"2026-10-23T13:40:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gerbe\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe|open.stratum",
+   "results": "{\"t\": \"2026-10-23T13:40:31Z\", \"tool\": \"grep\", \"query\": \"gerbe|open.stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact inertia morphism on a reduced algebraic stack gives a dense open gerbe",
+   "results": "{\"t\": \"2026-10-23T13:40:32Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact inertia morphism on a reduced algebraic stack gives a dense open gerbe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\"], \"digest\": \"f666fa79a5b6ed0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness for inertia yields a dense open gerbe in any reduced Artin stack with quasi compact inertia",
+   "results": "{\"t\": \"2026-10-23T13:46:31Z\", \"tool\": \"leanfinder\", \"query\": \"Generic flatness for inertia yields a dense open gerbe in any reduced Artin stack with quasi compact inertia\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"e12b5ccac6d8d73e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic stack with quasi compact inertia has a dense open substack that is a gerbe over an algebraic space",
+   "results": "{\"t\": \"2026-10-23T14:56:49Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced algebraic stack with quasi compact inertia has a dense open substack that is a gerbe over an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.exists_le_and_germ_injective\"], \"digest\": \"065c15502709f4cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returned scheme spreading-out and topology results, LeanSearch returned reduced scheme predicates, Loogle and grep found no gerbe. These do not supply the algebraic-stack conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gerbe\"",
+   "results": "{\"t\": \"2026-10-23T14:56:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gerbe\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returned scheme spreading-out and topology results, LeanSearch returned reduced scheme predicates, Loogle and grep found no gerbe. These do not supply the algebraic-stack conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe|genericFlat|generic_flatness|generic_flat",
+   "results": "{\"t\": \"2026-10-23T14:56:47Z\", \"tool\": \"grep\", \"query\": \"gerbe|genericFlat|generic_flatness|generic_flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returned scheme spreading-out and topology results, LeanSearch returned reduced scheme predicates, Loogle and grep found no gerbe. These do not supply the algebraic-stack conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced algebraic stack with quasi compact inertia has a dense open gerbe",
+   "results": "{\"t\": \"2026-10-23T14:56:47Z\", \"tool\": \"leansearch\", \"query\": \"A reduced algebraic stack with quasi compact inertia has a dense open gerbe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsReduced.casesOn\", \"AlgebraicGeometry.IsReduced.recOn\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"d60b8903dae2d5ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returned scheme spreading-out and topology results, LeanSearch returned reduced scheme predicates, Loogle and grep found no gerbe. These do not supply the algebraic-stack conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-stack-spectral-point-space",
+  "date": "2026-10-23",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: existence of closed points in the source and target of the integral Zariski-main factor; Noetherianity is only used for the original finite-type stacks. General topological input: Tag 0DQN, used for sobriety before selecting minimal closed subsets. Supporting lemma: Tag 06RC (proposition-open-stratum); gerbe means a gerbe over an algebraic space, as in the discussion preceding proposition-when-gerbe.",
+   "via": [
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+  "worker": "stage1",
+  "summary": "Read the full proof of Tag 06RC and its generic-flatness and invariant-maximal-open inputs. Retained the exact statement, reused the existing locally-finite-type inertia, qc test, invariant-open, fppf property-descent, point-topology and quotient nodes. Created two strictly smaller general algebraic-space inputs, with actual Mathlib searches; wrote the conjugation and inertia pullback identifications explicitly and proved the gerbe clauses from the existing sheafification-locality node. No Noetherian or separation assumption was added.",
+  "blueprint": "Supports the inherited spectral-point-space prerequisite below latest det-thm-sf-ctf-stability-direct-images, proof (3), within its existing alteration/moduli dependency chain. Steps follow Tag 06RC: reduced atlas and stabilizer; generic flat maximal base open; conjugation invariance; open descent; density; inertia descent; gerbe over the isomorphism-class space. blueprint_refs.py ancestor returned None, as in the inherited blueprint.from.node, which is retained.",
+  "tool_uses": [
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "step 2: etale scheme charts of the reduced atlas P are reduced (Tag 025O), the hypothesis of the space generic-flatness node; generic scheme fact, Lean-closed, no node of the unit states it"
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "step 7: local representatives and local equality for fppf sheafification of the isomorphism-class presheaf (Tags 00WB, 00WK); generic site fact, Lean-closed, no node of the unit states it"
+   }
+  ]
+ },
+ "tool_uses": [
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-c5f34858f",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-c5f34858f (reviewer sub-agent of L); spot-checked: Read Stacks 06RC in full, together with 06QS, 06R2 (largest open of the base) and 06R4 (conjugation invariance). I also read every cited node's statement. The item statement matches 06RC with no added hypotheses; the empty case is allowed. New node lem-sfb-space-maximal-flat-lfp-base-open is exactly 06R2 for flat∧lfp. Its base-change clause is correctly limited to flat lfp g: pulling back along a closed point would make it false. New node lem-sfb-space-reduced-generic-flat-finite-presentation is 06QS with F=O_X and claims only lfp, which avoids the non-qs issue. Tested on Spec k[t,x]/(tx)→A^1 and on the base k[ε]/ε². Neither new node is a duplicate (compared with 0DSJ, 05W2, 0DZI, and the sbc integral-base generic flatness nodes) and neither restates a clause of the item. Steps 1-7 checked: the T-point identification of G; qc via 050T(ii⇒i) in the def-sfb-stack-qcqs sense; s^{-1}W=t^{-1}W via the conjugation iso plus clause (2); descent via 0507; density is elementary; inertia descent via 04XD; gerbe clauses via 00WB/00WK on the 06QJ quotient. Two repairs to the item. (C1) Step 2 now cites etale-proposition-etale-reduced (025O, Lean-closed) to show P's étale charts are reduced, which the generic-flatness hypothesis needs. Step 4 now argues that 𝒰 is an étale stack. proof_deps updated; split_report.tool_uses declares 025O and the sheafification node (both generic and Lean-closed). Batch-5 flags: every one reaches sec-trace-formula only through def-trf-algebraic-space, or is the general space fibre-product lemma 02X2. All are foundational, outside the trace formula and Poincaré duality, so accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-stack-lqc-lfp-topology-comparison",
+ "kind": "statement",
+ "title": "Etale-fppf comparison under locally finitely presented flat comparisons",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. Use also the big fppf topology of [def-sfb-stack-quasi-coherent-algebra]. Let $F$ be a presheaf of $\\mathcal O_{\\mathcal X}$-modules on an algebraic stack $\\mathcal X/S$. Assume that $F$ is locally quasi-coherent: its restriction to each $U_{\\mathrm{et}}$ is the associated etale sheaf of a quasi-coherent Zariski module [def-weil-pbc-etale-site, pqf-def-coherent], with value $\\Gamma(V,v^*F_U)$ at $v:V\\to U$. Assume only that for arrows over flat, locally finitely presented scheme maps $u:U\\to V$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation], the canonical tensor comparison $u^*F|_{V_{\\mathrm{et}}}\\to F|_{U_{\\mathrm{et}}}$ is an isomorphism [def-pc-module-pullback]. Then $F$ is an fppf sheaf. For the identity-of-fibred-category morphism $\\epsilon:\\mathcal X_{\\mathrm{fppf}}\\to\\mathcal X_{\\mathrm{et}}$, the canonical map $\\epsilon_*F[0]\\to R\\epsilon_*F$ is an isomorphism in the derived category of etale structure-module sheaves [def-weil-abstract-derived-category]. For every morphism $h:\\mathcal X\\to\\mathcal Y$ of algebraic stacks and every $i\\geq0$, $R^ih_{\\mathrm{fppf},*}F$ is canonically the fppf sheafification of $R^ih_{\\mathrm{et},*}(\\epsilon_*F)$ [def-weil-pbc-sheafification]. Direct images use the fibre-product section formula and higher direct images use injective resolutions [def-sp-injective-resolutions]. This assertion does not say that the etale higher direct image is already an fppf sheaf.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 076T (lemma-lqc-flat-base-change-fppf-sheaf) and 075R (lemma-compare-fppf-etale), (1), (3)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "pqf-def-coherent",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-module-pullback",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\{x_a\\to x\\}$ be an fppf covering over $\\{u_a:U_a\\to U\\}$ and let $M$ be the quasi-coherent Zariski module giving $F|_{U_{\\mathrm{et}}}$. Each $u_a$ is flat and locally finitely presented, so the assumed comparisons identify $F(x_a)$ with $\\Gamma(U_a,u_a^*M)$. The pullback compatibility in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies the small-etale tensor pullback with the associated etale sheaf of $u_a^*M$. The same holds on the pairwise fibre products: the underlying maps to $U$ are composites of base changes of the $u_a$, hence are again flat and locally finitely presented by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Naturality of the tensor comparisons identifies the two overlap restrictions with the pullback restrictions of sections of $M$. By [lem-trf-fppf-covering-is-fpqc] the underlying cover is fpqc, and [lem-sc-etale-qcoherent-descent-fpqc-sections], applied with $T=U$ and $f=\\mathrm{id}_U$, gives existence and uniqueness of a glued section in $\\Gamma(U,M)=F(x)$. This proves the fppf sheaf condition, including the empty cover of the empty scheme. No comparisons on nonflat maps were used.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076T, proof, using Descent Tag 03DT."
+   }
+  },
+  {
+   "text": "The module categories on the chosen small ringed sites are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck] and have enough injectives by [lem-sp-grothendieck-enough-injectives]; thus choose a nonnegative injective resolution. For an object $x$ over a scheme $U$, [lem-sfb-fibred-test-object-ringed-localization] identifies the localized fppf ringed site with $(\\mathit{Sch}/U)_{\\mathrm{fppf}}$, taking $F|_x$ to $G=x^{-1}F$ and $\\mathrm{id}_x$ to $\\mathrm{id}_U$. Restriction to the localized site is exact and has an exact left adjoint by [lem-pur-site-restriction-module-adjunction-exact]; hence it preserves injectives by [lem-sp-right-adjoint-preserves-injectives]. An equivalence of module categories preserves injectives and exact sequences. Therefore an injective resolution $F\\to I^\\bullet$ restricts to an injective resolution of $G$, with section complex $I^\\bullet(x)$. Thus object cohomology $H^q_{\\mathrm{fppf}}(x,F)$ is computed by the big-scheme section cohomology $H^q((\\mathit{Sch}/U)_{\\mathrm{fppf}},G)$.",
+   "uses": [
+    "lem-sfb-fibred-test-object-ringed-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(1), localization calculation; Tags 06W9 and 075F, first equality."
+   }
+  },
+  {
+   "text": "Suppose $U$ in step 2 is affine. The restriction of $G=x^{-1}F$ to $U_{\\mathrm{et}}$ is exactly $F|_{U_{\\mathrm{et}}}$, so it is the associated sheaf of a quasi-coherent Zariski module. For a flat locally finitely presented $g:V\\to U$, choose a cartesian lift $x_V\\to x$. Its comparison is the assumed comparison for $F$, since $G$ evaluates $F$ on those lifts. Thus $G$ satisfies precisely the two hypotheses of [lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity]. This gives $H^q_{\\mathrm{fppf}}(x,F)=0$ for every $q>0$ by step 2. Notice that $G$ need not be the cartesian quasi-coherent extension on every object of the big site; its behaviour on nonflat $V\\to U$ is irrelevant to this application.",
+   "uses": [
+    "lem-sfb-fibred-test-object-ringed-localization",
+    "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(1), affine vanishing via Descent Tag 0756."
+   }
+  },
+  {
+   "text": "The comparison $\\epsilon$ is given by the identity functor on the fibred category. By [lem-sfb-ringed-site-higher-image-cohomology-sheafification], $R^q\\epsilon_*F$ is the etale module sheafification of $x\\mapsto H^q_{\\mathrm{fppf}}(x,F)$. Every object $x$ over $U$ has an etale covering by its restrictions to affine opens of $U$, using the affine-open basis in the definition of a scheme [def-pc-scheme]; these restrictions are covering arrows by [def-sfb-stack-quasi-coherent-algebra] and the stated big-etale convention. The presheaf in positive degree vanishes on these affine objects by step 3. Its associated sheaf is zero: every local representative restricts to zero on this covering. In degree zero the map $\\epsilon_*F\\to R^0\\epsilon_*F$ is the identity; all negative cohomology groups are zero. Consequently the canonical map $\\epsilon_*F[0]\\to R\\epsilon_*F$ is a quasi-isomorphism, hence an isomorphism in the derived category [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+    "def-pc-scheme",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(1), sheafification of object cohomology and the affine-open test."
+   }
+  },
+  {
+   "text": "We also need the cohomology comparison implicit in the source. The left adjoint to $\\epsilon_*$ is fppf module sheafification of an etale module, by the universal property [def-weil-presheaf-modules-sheafification]. It is exact: kernels are computed on sections and preserved by module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact]; an etale epimorphism has locally liftable sections on etale covers, which are fppf covers, so its fppf sheafification is again epic. Hence $\\epsilon_*$ preserves injectives by [lem-sp-right-adjoint-preserves-injectives]. For an injective resolution $F\\to I^\\bullet$, step 4 says that $\\epsilon_*F\\to\\epsilon_*I^\\bullet$ is an exact augmented complex; its terms are injective. It therefore computes etale cohomology. The complexes of global sections $\\Gamma(\\mathcal X_{\\mathrm{et}},\\epsilon_*I^\\bullet)$ and $\\Gamma(\\mathcal X_{\\mathrm{fppf}},I^\\bullet)$ are identical, since global sections are the same compatible families on the same category. This proves the canonical etale--fppf cohomology comparison in every degree. For coefficient maps choose resolution lifts by [lem-weil-pbc-injective-resolution-lift-exists]; [lem-weil-pbc-derived-functor-map-via-lift] identifies their section-cohomology maps with the canonical derived maps independently of the lift. For arrows of test objects restrict a single resolution to its two localized sites using step 2: these remain injective resolutions, and restriction commutes with the identical section maps. This proves naturality for those arrows and for scalar multiplication.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(2), injective-resolution form of the Leray argument."
+   }
+  },
+  {
+   "text": "Let $y$ be a test object of $\\mathcal Y$ over $V$ and put $\\mathcal X_y=\\mathcal X\\times_{\\mathcal Y}(\\mathit{Sch}/V)$, the $2$-fibre product of categories fibred in groupoids over $\\mathit{Sch}/S$ [def-sfb-algebraic-moduli-stack], with its big etale and fppf sites and structure sheaf as in [def-sfb-stack-quasi-coherent-algebra]; steps 1--5 use only that $\\mathcal X_y$ is fibred in groupoids, never its algebraicity. Its projection $p_y$ sends an object over a scheme $T$ to an object of $\\mathcal X$ over that same $T$, and an arrow over $u$ to an arrow over the same $u$. The restricted presheaf $F_y=p_y^{-1}F$ has exactly the small-etale restriction of $F$ at that image object, and an arrow over a flat locally finitely presented scheme map has precisely the comparison of $F$ at its image arrow. Thus local quasi-coherence and the required comparisons hold for $F_y$, directly from their definitions, and step 1 applied to $\\mathcal X_y$ shows that $F_y$ is an fppf sheaf. Also $p_y^{-1}(\\epsilon_*F)=\\epsilon_*F_y$, both being the same presheaf. Repeat steps 2--5 with $\\mathcal X_y,F_y$. For an arrow $y'\\to y$ over $V'\\to V$, the induced functor $a:\\mathcal X_{y'}\\to\\mathcal X_y$ satisfies $a^{-1}F_y=F_{y'}$ and $a^{-1}\\epsilon_*=\\epsilon_*a^{-1}$; choose fppf injective resolutions $F_y\\to J^\\bullet$, $F_{y'}\\to J'^\\bullet$ and a lift $a^{-1}J^\\bullet\\to J'^\\bullet$ [lem-weil-pbc-injective-resolution-lift-exists]. Applying $\\epsilon_*$ gives a lift between the etale injective resolutions of step 5, and by [lem-weil-pbc-derived-functor-map-via-lift] both the etale and the fppf restriction maps are the cohomology of the same map of section complexes. The same holds for multiplication by a function on $V$, which acts by the identical coefficient multiplication on these complexes. Hence the comparison of step 5 for $\\mathcal X_y$ is compatible with restrictions and scalar actions.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(3), verification of (a) and (b) for pr^{-1}F; Tags 06WL and 075D(3),(4), written directly on objects and arrows."
+   }
+  },
+  {
+   "text": "For each $i\\geq0$, apply [lem-sfb-stack-higher-image-fibre-cohomology-presheaf] for both topologies. Step 6 identifies its cohomology presheaves $P^i_{\\mathrm{et},\\epsilon_*F}$ and $P^i_{\\mathrm{fppf},F}$ by their canonical maps, including restrictions and scalar actions. Write $P^i$ for the resulting common module presheaf. Then $R^ih_{\\mathrm{et},*}(\\epsilon_*F)=(P^i)^{\\#_{\\mathrm{et}}}$ and $R^ih_{\\mathrm{fppf},*}F=(P^i)^{\\#_{\\mathrm{fppf}}}$. For any fppf module sheaf $N$, which is also an etale sheaf, the universal property [def-weil-presheaf-modules-sheafification] identifies maps $(P^i)^{\\#_{\\mathrm{et}}}\\to N$ with maps $P^i\\to N$. Hence fppf sheafification of $(P^i)^{\\#_{\\mathrm{et}}}$ is canonically $(P^i)^{\\#_{\\mathrm{fppf}}}$. This gives exactly the stated higher-direct-image isomorphism. This argument uses no preservation of local quasi-coherence by $h_*$ and makes no assertion that $(P^i)^{\\#_{\\mathrm{et}}}$ is itself an fppf sheaf.",
+   "uses": [
+    "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075R(3), final sheafification argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-fibred-test-object-ringed-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+  "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+  "def-pc-scheme",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-abstract-derived-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-higher-image-fibre-cohomology-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 076T and 075R(1)--(3), with localization and injective-resolution details written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fppf|Fppf|change.*topology",
+   "results": "{\"t\": \"2026-10-23T13:59:19Z\", \"tool\": \"grep\", \"query\": \"fppf|Fppf|change.*topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"Mathlib/Topology/Category/LightProfinite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Coverage.lean\"], \"digest\": \"12f23fce77cdae68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the fppf topology and sheafification constructions, but not this acyclicity and topology comparison for locally quasi-coherent stack modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\"",
+   "results": "{\"t\": \"2026-10-23T13:59:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfTopology\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology\", \"AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\"], \"digest\": \"419fa6232936f8a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the fppf topology and sheafification constructions, but not this acyclicity and topology comparison for locally quasi-coherent stack modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally quasi coherent fppf module sheaves with flat locally finitely presented comparison maps are acyclic for the morphism from fppf to etale topology",
+   "results": "{\"t\": \"2026-10-23T13:59:20Z\", \"tool\": \"leansearch\", \"query\": \"Locally quasi coherent fppf module sheaves with flat locally finitely presented comparison maps are acyclic for the morphism from fppf to etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent.rec\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"9cceb141a34b75e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the fppf topology and sheafification constructions, but not this acyclicity and topology comparison for locally quasi-coherent stack modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally quasi coherent fppf module sheaves with flat locally finitely presented comparison maps are acyclic for the morphism from fppf to etale topology",
+   "results": "{\"t\": \"2026-10-23T13:59:24Z\", \"tool\": \"leanfinder\", \"query\": \"Locally quasi coherent fppf module sheaves with flat locally finitely presented comparison maps are acyclic for the morphism from fppf to etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"e5366d19035126de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the fppf topology and sheafification constructions, but not this acyclicity and topology comparison for locally quasi-coherent stack modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale and fppf cohomology comparison for locally quasi coherent modules with flat comparison maps and sheafification of higher direct images",
+   "results": "{\"t\": \"2026-10-23T13:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"Etale and fppf cohomology comparison for locally quasi coherent modules with flat comparison maps and sheafification of higher direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toPresheaf_map_toSheafify\"], \"digest\": \"ee908f68efca8247\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the fppf topology and sheafification constructions, but not this acyclicity and topology comparison for locally quasi-coherent stack modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale fppf comparison of locally quasi coherent modules on algebraic stacks with flat locally finitely presented comparison isomorphisms",
+   "results": "{\"t\": \"2026-10-23T20:01:47Z\", \"tool\": \"leanfinder\", \"query\": \"Etale fppf comparison of locally quasi coherent modules on algebraic stacks with flat locally finitely presented comparison isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"b45fd8138af3777f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fppf topology, general module sheafification and quasi-coherence constructors do not state this weak-comparison stack theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi coherent presheaf on an algebraic stack with flat locally finitely presented comparison isomorphisms is an fppf sheaf and has no higher direct images from fppf to etale topology",
+   "results": "{\"t\": \"2026-10-23T20:01:43Z\", \"tool\": \"leansearch\", \"query\": \"A locally quasi coherent presheaf on an algebraic stack with flat locally finitely presented comparison isomorphisms is an fppf sheaf and has no higher direct images from fppf to etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition\", \"SheafOfModules.QuasicoherentData.mk\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"a026ec38620097d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fppf topology, general module sheafification and quasi-coherence constructors do not state this weak-comparison stack theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\"",
+   "results": "{\"t\": \"2026-10-23T20:01:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfTopology\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology\", \"AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\"], \"digest\": \"419fa6232936f8a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fppf topology, general module sheafification and quasi-coherence constructors do not state this weak-comparison stack theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "lqc|locally.?quasi.?coherent|compare.*fppf|fppf.*compare",
+   "results": "{\"t\": \"2026-10-23T20:01:43Z\", \"tool\": \"grep\", \"query\": \"lqc|locally.?quasi.?coherent|compare.*fppf|fppf.*compare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fppf topology, general module sheafification and quasi-coherence constructors do not state this weak-comparison stack theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf higher direct images are the fppf sheafification of etale higher direct images for locally quasi coherent stack module sheaves",
+   "results": "{\"t\": \"2026-10-23T20:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"Fppf higher direct images are the fppf sheafification of etale higher direct images for locally quasi coherent stack module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafification_map\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafificationCompToSheaf\"], \"digest\": \"668a100900e1334f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fppf topology, general module sheafification and quasi-coherence constructors do not state this weak-comparison stack theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-higher-images-flat-comparison",
+  "date": "2026-10-23",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons.",
+   "via": [
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-lqc-lfp-topology-comparison",
+  "worker": "stage1",
+  "summary": "Checked 076T and 075R against the imported statement. Kept only flat locally finitely presented comparisons throughout; reused fpqc section descent, generic module localization, and the ringed-site higher-image formula. Added three statement-only inputs: fibred ringed localization, affine fppf acyclicity under weak comparisons, and arbitrary-stack fibre-cohomology sheafification. The canonical higher-direct-image comparison is assembled from common cohomology presheaves, without claiming etale higher images are fppf sheaves. No statement change or Lean attachment.",
+  "blueprint": "Newest literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3); follows the inherited generic stack-cohomology prerequisite below the alteration/moduli chain, without changing a unit step. The ancestor command returns None for this inherited chain; its null from.node and full via chain are retained. Searches of the whole blueprint for fppf, fppf cohomology, fibred ringed, 0756, 06W9, 075G, 075R and 076T found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic covering-calculus input: applies section descent to the fppf cover."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "why": "Generic quasi-coherent section descent, with no stack-topology cohomology assertion."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact localization adjunction for modules; needed to restrict injective resolutions."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic abelian-category adjunction criterion used for localization and topology comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic module-sheafification exactness, used to check the comparison left adjoint."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic compatibility of Zariski and etale quasi-coherent module pullbacks used in the section-descent step."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic existence of augmentation-preserving maps of injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-map-via-lift",
+    "why": "Generic resolution formula for canonical derived-functor maps, including independence of the chosen lift."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck property for modules over an arbitrary ring sheaf on a small site."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence of injectives, ensuring that the resolutions used throughout can be chosen."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-d5c3897af",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-d5c3897af (reviewer sub-agent of L); spot-checked: Read in full: Stacks 076T and 075R (1)-(3) with proofs, 06W0/06W9/definition-pullback, 075F, 075G, and descent 0756 (parasitic proof); no SGA. The item statement is unchanged and matches 076T/075R. Steps 1-5 and 7 are correct. Step 1 uses the explicit (a^*F)_et≅a_et^*F_et comparison, fpqc descent with f=id, and lfp/flat composition plus base change for the overlaps. Step 2 uses the 06W9 equivalence, and restriction preserves injectives via the exact j_! adjoint. Step 3 checks both hypotheses of the affine node for G=x^{-1}F. Step 4: identity continuous functor, sheafified presheaf vanishing on affine objects. Step 5: ε^*=fppf sheafification is exact, so ε_*I^• is an injective resolution. Step 7: universal property of sheafification. The 3 new nodes are true, statement-only, sourced and searched. They are not duplicates: affine-scheme-fppf-qcoh-acyclic is only the special case G=F^a; ringed-site-higher-image and the representable-restriction nodes do not cover fibre stacks; quasi-coherent-scheme-restriction states the slice equivalence only for quasi-coherent F. None restates a clause of the item. Fault, repaired (C4/E5), step 6: it called X_y an algebraic stack by def-sfb-algebraic-moduli-stack, which that definition does not state (and steps 1-5 never need it). It justified the sheaf property of F_y only by 'coverings go to coverings', and asserted compatibility along X_{y'}→X_y with 'the same section maps'. The rewritten step 6 says X_y is a 2-fibre product of fibred categories and gets the sheaf property from step 1 applied to X_y. Restriction compatibility now follows from a lift a^{-1}J→J' pushed by ε_*, using lem-weil-pbc-injective-resolution-lift-exists and derived-functor-map-via-lift, both already in proof_deps. No new citations; proof_deps = union of uses. Batch-5 flags: lem-trf-fppf-covering-is-fpqc (Mathlib leaf), lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, chartwise calculus, and the sfb stack/groupoid definitions are generic covering, qcoh and definition inputs, not steps of the trace formula or Poincaré duality. Accepted, as are the 10 generic split_report.tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

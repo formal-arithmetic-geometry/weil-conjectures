@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-trait-flat-group-fpqc-effectivity",
+ "kind": "statement",
+ "title": "Fpqc effectivity for separated flat group schemes over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $F$ be a contravariant functor from $S$-schemes to groups, with no commutativity assumption, whose underlying set-valued functor is an fpqc sheaf: for every fpqc covering $\\{U_i\\to U\\}$ [def-weil-pbc-fpqc-covering], the map $F(U)\\to\\prod_iF(U_i)$ identifies $F(U)$ with the equalizer of the two restriction maps to $\\prod_{i,j}F(U_i\\times_U U_j)$ [def-pc-fibre-product]. Suppose there is an fpqc morphism of schemes $p:T\\to S$ [def-weil-pbc-fpqc-covering] such that the restriction $F_T$ to $T$-schemes is represented, as a group sheaf, by a separated flat group scheme $P\\to T$ locally of finite presentation [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A group scheme has multiplication, identity and inverse morphisms satisfying the group identities, and separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Then $F$ is represented by an $S$-scheme. Neither $P$ nor its generic fibre is required to be quasi-compact; smoothness and an affine-neighbourhood condition are not hypotheses.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Anantharaman, Schemas en groupes, espaces homogenes et espaces algebriques sur une base de dimension 1, Memoires SMF 33 (1973), Theorem 4.A, printed p.53, flat case over a trait; proof 4.2 Steps 4-6, printed pp.57-62, including the reduction from local finite presentation to finite-presentation open pieces. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf Corrected after return b9ec6f96471: the sheaf hypothesis is fpqc, not merely fppf; the stronger topology is necessary for descent along the specified fpqc cover."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-component-open lemma to the given $F,p,P$. Obtain the open subgroup $H$ and the covering open subfunctors $U_a$, with $H_T$ and $(U_a)_T$ flat separated and of finite presentation. Keep its integral fpqc covers $B_a\\to S$ with finite underlying fibres, where $B_a$ is the semi-trait obtained by normalization in a finite, possibly ramified field extension, and the finite almost homogeneous decompositions over them. No total quasi-compactness of $P$ is inferred.",
+   "uses": [
+    "lem-sfb-flat-trait-group-finite-component-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 5, Lemma 4.2.4 and following action argument, printed pp.59-61; generic-only extension using ramified normalization is stated in the cited component lemma (E2 repair)."
+   }
+  },
+  {
+   "text": "First, $H$, every $U_a$ and their restrictions to schemes over any $S$-scheme are fpqc sheaves: given an fpqc covering $\\{V_i\\to V\\}$ and compatible sections $s_i$ of the open subfunctor, they glue to a unique $s\\in F(V)$ by the sheaf property of $F$; the open subscheme of $V$ over which $s$ lies in the subfunctor contains the image of every $V_i$, and these images cover $V$, so it is $V$. Apply the normalization-model lemma to the fpqc sheaf $H$, using the finite-presentation model $H_T$ from step 1. It gives an integral fpqc normalization $S_L\\to S$ with finite underlying fibres and a flat separated finite-presentation scheme $N$ representing $H_{S_L}$. Its group law is represented by scheme maps: multiply the universal points on $N\\times_{S_L}N$ to define multiplication, use the identity on $S_L$, and invert the universal point on $N$; the representing bijections turn the group identities into the corresponding diagram equalities. Under left translation $N$ is homogeneous under itself: the inverse to $(g,x)\\mapsto(gx,x)$ is $(y,x)\\mapsto(yx^{-1},x)$. The affine-neighbourhood lemma with $G=X=N$ therefore gives (FA). Since $S_L$ is Noetherian and $N$ is of finite presentation, the locally-Noetherian lemma makes $N$ locally Noetherian. The integral fpqc affine-descent lemma now represents $H$ by a flat separated finite-presentation $S$-scheme with (FA); its model and cover hypotheses are precisely those just obtained.",
+   "uses": [
+    "lem-sfb-fpqc-finite-presentation-normalization-model",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 4, printed p.57, applied to the finite-presentation open subgroup of Step 5."
+   }
+  },
+  {
+   "text": "Fix $a$. By step 1, $B_a\\to S$ is an integral fpqc cover with finite underlying fibres, and $B_a$ is a Noetherian semi-trait. The group $H_{B_a}$ is a scheme by step 2, flat and separated by the cited base-change lemmas, and of finite type by the cited finite-type base-change lemma (finite presentation includes finite type). Its action on $(U_a)_{B_a}$ is the action of step 1. This uses no etaleness of $B_a\\to S$.",
+   "uses": [
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 6, printed p.61, with the cited component lemma allowing ramified normalization covers for generic-only pieces."
+   }
+  },
+  {
+   "text": "Put $B=B_a$ and apply the normalization-model lemma to $(U_a)_B$. Pull back the original fpqc cover and its model; the flat/separated base-change lemmas and clause (3) of qcqs-morphism permanence retain flatness, separatedness and finite presentation. Obtain an integral fpqc normalization $V\\to B$ with finite fibres and a flat separated finite-presentation scheme $X$ representing $(U_a)_V$. The acting group $H_V$ is a flat separated finite-type scheme by the same three base-change lemmas as step 3. The finite homogeneous open cover of step 1 pulls back to $X$: its local solutions to $h x=y$ pull back along every test-scheme map, so the action remains almost homogeneous over $V$. Apply the affine-neighbourhood lemma to $H_V$ acting on $X$ to get (FA). The locally-Noetherian lemma applies to $X/V$ since $V$ is Noetherian and $X$ is of finite presentation. Apply the integral fpqc affine-descent lemma to $V\\to B$ to represent $(U_a)_B$ by a flat separated finite-presentation scheme with (FA).",
+   "uses": [
+    "lem-sfb-fpqc-finite-presentation-normalization-model",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Steps 4 and 6, printed pp.57 and 61; apply the almost homogeneous argument to each open piece."
+   }
+  },
+  {
+   "text": "Apply integral fpqc affine descent once more, now to the sheaf $U_a$ and $B_a\\to S$. Its scheme over $B_a$ has (FA) by step 4 and is locally Noetherian by the cited locally-Noetherian lemma (it is of finite presentation over the Noetherian scheme $B_a$). Its original fpqc model is the finite-presentation scheme $(U_a)_T$ of step 1. Thus $U_a$ is represented by an $S$-scheme. This argument applies independently to every $a$; it needs no uniform finite cover for all pieces.",
+   "uses": [
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 6, printed p.61, using the general integral fpqc descent criterion on each normalization cover; etaleness is not needed."
+   }
+  },
+  {
+   "text": "The underlying functor of $F$ is a Zariski sheaf: every Zariski open covering is fpqc, so its matching sections glue uniquely by the assumed equalizer condition. Steps 1 and 5 supply a set-indexed family of representable subfunctors $U_a\\subseteq F$, whose inclusions are representable open immersions and which covers on every scheme test. All clauses of the cited representability criterion hold. It gives an $S$-scheme representing $F$.",
+   "uses": [
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-pc-schemes-criterion",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ, schemes.tex lemma-glue-functors; Anantharaman 4.2 Step 6, printed p.61."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-schemes-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-flat-trait-group-finite-component-opens",
+  "lem-sfb-fpqc-finite-presentation-normalization-model",
+  "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+  "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Proof (3), inherited trait group-scheme descent input; assembly follows primary scan of Anantharaman 4.2 Steps 4-6, printed pp.57-62. Local archive WANTED; https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group sheaf on a discrete valuation ring represented by a separated flat locally finitely presented scheme after an fpqc cover is representable",
+   "results": "{\"t\": \"2026-10-24T11:08:30Z\", \"tool\": \"leanfinder\", \"query\": \"A group sheaf on a discrete valuation ring represented by a separated flat locally finitely presented scheme after an fpqc cover is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"f98d69c94e34e892\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective faithfully flat descent of separated flat locally finitely presented group schemes over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T11:08:31Z\", \"tool\": \"leansearch\", \"query\": \"Effective faithfully flat descent of separated flat locally finitely presented group schemes over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.toFlat\", \"RingHom.FaithfullyFlat\", \"RingHom.FaithfullyFlat.flat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Module.FaithfullyFlat.recOn\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\"], \"digest\": \"cef4080e582cc5a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-24T11:08:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|group.*descent|descent.*group",
+   "results": "{\"t\": \"2026-10-24T11:08:31Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|group.*descent|descent.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Anantharaman effective fpqc descent of locally finite type separated group schemes over a one dimensional normal base",
+   "results": "{\"t\": \"2026-10-24T11:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"Anantharaman effective fpqc descent of locally finite type separated group schemes over a one dimensional normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite\"], \"digest\": \"d857754c25000ed3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*group|group.*fpqc|GroupScheme",
+   "results": "{\"t\": \"2026-10-24T11:20:10Z\", \"tool\": \"grep\", \"query\": \"fpqc.*group|group.*fpqc|GroupScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: corrected fpqc-sheaf formulation; representability hits require open representable subfunctors, group-Yoneda hits assume an already representable functor, and flat-descent hits descend properties rather than group-scheme objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fpqc descent of separated flat locally finitely presented group schemes over a discrete valuation ring for fpqc sheaves of groups",
+   "results": "{\"t\": \"2026-10-24T11:20:10Z\", \"tool\": \"leansearch\", \"query\": \"Effective fpqc descent of separated flat locally finitely presented group schemes over a discrete valuation ring for fpqc sheaves of groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.recOn\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"ba9ebe0278cdf0e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: corrected fpqc-sheaf formulation; representability hits require open representable subfunctors, group-Yoneda hits assume an already representable functor, and flat-descent hits descend properties rather than group-scheme objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Fpqc\"",
+   "results": "{\"t\": \"2026-10-24T11:20:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Fpqc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: corrected fpqc-sheaf formulation; representability hits require open representable subfunctors, group-Yoneda hits assume an already representable functor, and flat-descent hits descend properties rather than group-scheme objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf of groups over a discrete valuation ring represented by a separated flat locally finitely presented scheme after an fpqc cover is represented by a scheme",
+   "results": "{\"t\": \"2026-10-24T11:20:11Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf of groups over a discrete valuation ring represented by a separated flat locally finitely presented scheme after an fpqc cover is represented by a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Flat\"], \"digest\": \"71c1ee4ba4d15ec9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: corrected fpqc-sheaf formulation; representability hits require open representable subfunctors, group-Yoneda hits assume an already representable functor, and flat-descent hits descend properties rather than group-scheme objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group valued functor satisfying fpqc descent over a trait is representable if it has a separated flat locally finitely presented group scheme model on an fpqc base cover",
+   "results": "{\"t\": \"2026-10-24T11:20:55Z\", \"tool\": \"leanfinder\", \"query\": \"A group valued functor satisfying fpqc descent over a trait is representable if it has a separated flat locally finitely presented group scheme model on an fpqc base cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"CategoryTheory.yonedaGrpObjRepresentableBy\", \"CategoryTheory.RepresentablyFlat\", \"CategoryTheory.essImage_yonedaGrp\", \"CategoryTheory.GrpObj.ofRepresentableBy_yonedaGrpObjRepresentableBy\", \"CategoryTheory.Grp_Class.ofRepresentableBy_yonedaGrpObjRepresentableBy\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"f2661320e000f59c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: corrected fpqc-sheaf formulation; representability hits require open representable subfunctors, group-Yoneda hits assume an already representable functor, and flat-descent hits descend properties rather than group-scheme objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf of groups over a discrete valuation ring represented fpqc locally by a separated flat locally finitely presented group scheme is representable",
+   "results": "{\"t\": \"2026-10-24T11:40:31Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf of groups over a discrete valuation ring represented fpqc locally by a separated flat locally finitely presented group scheme is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"dd2d70c828944cbd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: group object effectivity over a trait is not stated; hits assume representable open charts, already existing scheme morphisms, or concern modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fpqc sheaf of groups over a trait represented fpqc locally by a separated flat group scheme locally of finite presentation is a scheme",
+   "results": "{\"t\": \"2026-10-24T11:43:29Z\", \"tool\": \"leansearch\", \"query\": \"An fpqc sheaf of groups over a trait represented fpqc locally by a separated flat group scheme locally of finite presentation is a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.Presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"7a1d1c3f0bbb286d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: group object effectivity over a trait is not stated; hits assume representable open charts, already existing scheme morphisms, or concern modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-24T11:43:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: group object effectivity over a trait is not stated; hits assume representable open charts, already existing scheme morphisms, or concern modules"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|group.*fpqc|fpqc.*group",
+   "results": "{\"t\": \"2026-10-24T11:43:30Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|group.*fpqc|fpqc.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: group object effectivity over a trait is not stated; hits assume representable open charts, already existing scheme morphisms, or concern modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective faithfully flat descent of a locally finite type separated group scheme over a trait without a quasi compactness hypothesis",
+   "results": "{\"t\": \"2026-10-24T11:45:25Z\", \"tool\": \"leanfinder\", \"query\": \"Effective faithfully flat descent of a locally finite type separated group scheme over a trait without a quasi compactness hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat\"], \"digest\": \"0e97089f46f1b029\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: group object effectivity over a trait is not stated; hits assume representable open charts, already existing scheme morphisms, or concern modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-space-schematicity",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input, schematicity of the descended group space; Theorem 4.A, printed p.53, flat case over a trait; proof 4.2 Steps 4-6, printed pp.57-62, including the reduction from local finite presentation to finite-presentation open pieces Corrected after return b9ec6f96471: the sheaf hypothesis is fpqc, not merely fppf; the stronger topology is necessary for descent along the specified fpqc cover.",
+   "via": [
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-flat-group-fpqc-effectivity",
+  "worker": "stage1",
+  "summary": "Split the fpqc effectivity proof into normalization models, almost homogeneous affine neighbourhoods, integral fpqc affine descent, and finite-presentation invariant component opens. Reused existing scheme gluing and base-change nodes. Kept the corrected fpqc sheaf hypothesis, arbitrary components, noncommutative groups and possibly nonexcellent DVRs. E2 repair: the component lemma allows normalization in finite possibly ramified extensions, with the generic-coset argument and explicit ramified counterexample checked in the report; no finite-etale assumption remains on the covers used in the assembly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), through inherited strict-local trait group descent. Current latest blueprint proof read. Anantharaman 4.2 Step 4 is realized by steps 2 and 4, Step 5 by step 1, Step 6 by steps 3-6. The ancestry script returns None because the historical created.item chain ends at a Lean module, so from.node remains null and the full existing via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic scheme base-change or open-cover representability tool used in assembling the inherited trait descent input; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme base-change or open-cover representability tool used in assembling the inherited trait descent input; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme base-change or open-cover representability tool used in assembling the inherited trait descent input; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme base-change or open-cover representability tool used in assembling the inherited trait descent input; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Noetherian/base-change or covering-definition input verifying the hypotheses of the inherited trait descent argument; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Noetherian/base-change or covering-definition input verifying the hypotheses of the inherited trait descent argument; no replacement of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Generic Noetherian/base-change or covering-definition input verifying the hypotheses of the inherited trait descent argument; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-schemes-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-bbfcf6ef2",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-bbfcf6ef2 (reviewer sub-agent of L); spot-checked: Source caveat: Anantharaman (Mém. SMF 33, 4.A, 4.1–4.2) is not in literature/ (WANTED), and network access is blocked, so I judged the statements mathematically rather than against the source. Fixed one gap: step 2 used without proof that the open subfunctors H and U_a (and their base changes) are fpqc sheaves. It now says why: glue in F; the open locus where the glued section lies in the subfunctor contains the images of a jointly surjective cover, so it is everything. def-weil-pbc-fpqc-covering was added to the step's uses. The fixed item file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-trait-flat-group-fpqc-effectivity.json. The E2 point of return 1373c117 is repaired. The component-opens node now takes B_a = Spec of the integral closure of R in a finite, possibly ramified extension. Krull–Akizuki, integrality, lying over and torsion-freeness make this an integral, surjective, flat, qc cover with finite fibres by a Noetherian normal semi-trait; this needs neither excellence nor finiteness over R. The returned Z²/K(√π) example now satisfies the statement (L⊗L = L×L gives singleton pieces). The generic-coset argument is sound: H_K contains F_K^0, Galois orbits of cosets are finite, U_T is f.p. because D(π) is f.p., and the inverse (y,x)↦(yx⁻¹,x) needs no rational point or commutativity. Special-fibre pieces restrict to components of the source's finite étale cover, which are normalizations of the required form. Also tested: the Néron lft model of G_m. The other three new nodes are byte-identical to the returned head; I rechecked them on small cases: normalization-model with L=K; affine neighbourhoods with trivial G (ZMT gives quasi-affine) and G=X; integral descent along a Galois field extension. Steps 1–6 check out against the full statements of every cited node: 01JJ clauses (1) and (2a–c), the flat, separated and finite-type base change, qcqs-permanence (3), and pqf-lem-locnoeth-lft. Stability under base change of the fppf-surjective action map is part of the component node. The removed coproduct citation is cited nowhere. No duplicates found by rg -L over dag/nodes (almost homogeneous, Anantharaman, Krull–Akizuki, finite-set affine neighbourhoods: ten candidates read), and no new node restates the item. B1–B9 hold. I accept the tool_uses: 01JJ gluing, the Mathlib-leaf base-change lemmas, and the fpqc covering definition.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitFlatGroupFpqcEffectivity",
+  "declaration": "AlgebraicGeometry.trait_flat_group_fpqc_effectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitFlatGroupFpqcEffectivity.lean",
+  "statement": "theorem trait_flat_group_fpqc_effectivity (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (F : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ GrpCat.{v}) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (CommRingCat.of R))) (F ⋙ forget GrpCat)) {T : Scheme.{u}} (p : T ⟶ Spec (CommRingCat.of R)) [Flat p] [Surjective p] [QuasiCompact p] (P : Over T) [hP : GrpObj P] [IsSeparated P.hom] [Flat P.hom] [LocallyOfFinitePresentation P.hom] (hmodel : ∃ e : (((Over.map p).op ⋙ F) ⋙ forget GrpCat).RepresentableBy P, GrpObj.ofRepresentableBy P ((Over.map p).op ⋙ F) e = hP) : (F ⋙ forget GrpCat).IsRepresentable",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91596e522",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and Anantharaman Thm 4.A: DVR R, S = Spec R, noncommutative group-valued F whose underlying sets form an fpqc sheaf over S, F_T via Over.map p, P a separated, flat, locally finitely presented group object over T, model condition GrpObj.ofRepresentableBy = hP (group law fixed), conclusion F representable over S. p is written as flat+surjective+quasi-compact; this gives the same theorem as a singleton fpqc covering because S is affine. No extra quasi-compactness of P, smoothness, affine-neighbourhood condition or commutativity. Scheme and group-value universes are independent. lean.statement is verbatim in the file; only the lean field was added to the node, no statement change. Source and blueprint docstrings present, proof steps in the docstring, sorry only, no new definitions. Note, not a delivery fault: the component-opens node used in proof step 1 assumes a strictly henselian DVR, as the worker flagged; this is a proof-plan gap for the dependency graph, not a statement fault. No files changed, so no compile."
+ }
+}

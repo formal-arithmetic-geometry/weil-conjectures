@@ -1,0 +1,300 @@
+{
+ "id": "lem-sp-etale-compact-support-tor-window",
+ "kind": "statement",
+ "title": "Open flat models and the compact-support Tor window",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. Let $U,W,V$ be separated finite-type $k$-schemes and let $U\\xrightarrow j W\\xrightarrow r V$ be $k$-morphisms, with $j$ an open immersion and $r$ proper [sk-def-sfb-dc-setting, def-weil-open-immersion, def-weil-proper-morphism]. Let $R$ be any finite commutative ring annihilated by a power of $\\ell$. Use the ordinary small-etale constant-ring module derived categories [def-weil-pbc-derived-categories], constructibility [def-weil-pbc-etale-constructible-sheaf], and Tor amplitude [def-kun-tor-amplitude]. For integers $a\\le b$, let $K$ be bounded constructible of Tor amplitude in $[a,b]$ on $U$, and let $P$ be any representing cochain complex of flat constructible $R_U$-modules, zero outside $[a,b]$ [def-pc-cochain-complex-modules, def-pc-flat-sheaf-modules]. Termwise extension by zero $j_!P$ [def-weil-pbc-extension-by-zero] represents $Dj_!K$, has flat constructible terms, is zero outside $[a,b]$, and is K-flat [def-pc-kflat-complex]. Thus $Dj_!K$ is bounded constructible of Tor amplitude in $[a,b]$. There exists an integer $e\\ge0$ depending only on $r$ such that every geometric fibre has torsion etale cohomology zero in degrees greater than $2e$, and for every $R,a,b,K,P$ as above, $Rr_*Dj_!K$ is bounded constructible of Tor amplitude in $[a,b+2e]$. Here $Rr_*Dj_!$ is the ordinary compactification functor of [def-amb-etale-compact-support].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; the open flatness calculation followed by the geometric-fibre bound and proper finite-Tor theorem in the retained chart-domain proof, Steps 2--3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-tor-amplitude",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "sk-def-sfb-dc-setting",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-extension-by-zero",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Quasi-compactness of V follows from its quasi-compact structure morphism to Spec k. Apply lem-sfb-finite-proper-geometric-cd-bound to r and retain its nonnegative e and torsion cohomology clause. Convert F.IsTorsion to its colimit characterization with lem-weil-pbc-torsion-sheaf-characterizations. Algebraically closed fields are separably closed. An integer i>2e is nonnegative, hence i=Int.toNat(i); the natural-degree vanishing gives exactly the required integer-degree bound, before any coefficient or input choices.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-proper-geometric-cd-bound",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0A3V, 00P3, 0F0V and 03QU, via the uniform geometric-fibre bound; local torsion as in the blueprint sk-def-pbc"
+   }
+  },
+  {
+   "text": "Let J=j_! and E=J(P). Exactness of J and mapDerivedCategoryFactors identify Q(E) with D(J)(Q(P)), then the given isomorphism Q(P)~=K identifies it with D(J)(K). An additive functor sends zero objects to zero, so E retains the support [a,b].",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; localization of an exact functor"
+   }
+  },
+  {
+   "text": "Use the open-extension flatness clause of lem-sfb-open-closed-flatness, proved in the adopted source as flat_openImmersionLowerShriek_obj. The open restriction is the input by the adjunction unit; the closed-complement restriction is zero. Every geometric point factors through the open or the closed complement, so the geometric-fibre flatness criterion gives flatness of j_!P^q. The braiding transports the assumed exact tensorRight(P^q) to exact tensorLeft(P^q), giving the source flat predicate and returning its right tensor clause for E.",
+   "uses": [
+    "lem-sfb-open-closed-flatness",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER; adopted source WeilConjectures/SixFunctors/Etale/Derived/Stability/FlatModelGeneration.lean, flat_openImmersionLowerShriek_obj"
+   }
+  },
+  {
+   "text": "W is locally Noetherian by finite type over k, hence the open immersion j is quasi-compact. Convert finite-value constructibility to source constructibility by lem-weil-pbc-constructible-etale-module-sheaf-comparison; apply lem-fin-extension-by-zero and convert back. This gives constructible terms. The exact-functor derived homology isomorphism H^q(K) followed by J ~= H^q(D(J)(K)) transports constructibility and all cohomology vanishing bounds from the given bounded constructibility of K. Thus D(J)(K) is bounded constructible; constructibility of cohomology is not deduced from constructibility of terms.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-fin-extension-by-zero",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-extension-by-zero.md",
+    "place": "Constructible extension by zero along a quasi-compact open; exact functors commute with homology"
+   }
+  },
+  {
+   "text": "The complex E has flat terms and vanishes outside [a,b]. CochainComplex.isStrictlyGE_iff and isStrictlyLE_iff give its strict degree bounds. The source bounded-flat criterion CochainComplex.kFlat_of_bounded_of_flat proves K-flatness in the exact monoidal category used by the statement. Apply lem-kun-flat-bounded-tor-amplitude, transport along Q(E)~=D(J)(K), and use DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn to obtain the required etale Tor interval [a,b].",
+   "uses": [
+    "lem-kun-flat-bounded-tor-amplitude",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ; bounded flat Tor-amplitude implication, Tag 08G1"
+   }
+  },
+  {
+   "text": "For the fibre hypothesis of det-ctf-finite-proper-tor, every section killed by ell^n has finite additive order since ell>0. Such a sectionwise torsion sheaf is locally torsion, so Step 1 gives the IsZero cohomology bound with d=2e. Apply the proper finite-Tor theorem to r, R, and D(J)(K), using bounded constructibility from Step 4 and Tor amplitude from Step 5. Simplifying the natural-to-integer cast of 2e gives [a,b+2e]. The theorem uses the unbounded rightDerivedLowerStar itself, which is the proper factor in def-amb-etale-compact-support; no bounded-below comparison or change of coefficient category is needed.",
+   "uses": [
+    "det-ctf-finite-proper-tor",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.md",
+    "place": "Proper finite-Tor theorem with d=2e"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-proper-geometric-cd-bound",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-amb-etale-compact-support",
+  "lem-sfb-open-closed-flatness",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-fin-extension-by-zero",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "def-kun-tor-amplitude",
+  "det-ctf-finite-proper-tor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+  "place": "R3 Lean proof: ordinary etale open/proper factorization; reuse source open-flatness and bounded-flat K-flat criteria and the existing locally torsion uniform fibre bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of a bounded flat constructible etale complex followed by proper direct image preserves Tor amplitude with a uniform geometric fibre cohomological bound",
+   "results": "{\"t\": \"2026-10-22T05:56:07Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero of a bounded flat constructible etale complex followed by proper direct image preserves Tor amplitude with a uniform geometric fibre cohomological bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"232ff0b2642f7a5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract derived degree bounds, ordinary etale loci, or compact support of continuous functions, not the etale open/proper finite-Tor window"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compact support direct image has Tor amplitude in a b plus twice the fibre dimension over arbitrary finite primary coefficients",
+   "results": "{\"t\": \"2026-10-22T05:56:07Z\", \"tool\": \"leanfinder\", \"query\": \"Etale compact support direct image has Tor amplitude in a b plus twice the fibre dimension over arbitrary finite primary coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"d2da146c284cd408\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract derived degree bounds, ordinary etale loci, or compact support of continuous functions, not the etale open/proper finite-Tor window"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"torAmplitude\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract derived degree bounds, ordinary etale loci, or compact support of continuous functions, not the etale open/proper finite-Tor window"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek|extensionByZero",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"grep\", \"query\": \"[Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek|extensionByZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\"], \"digest\": \"bc5d1e3802cc6e5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract derived degree bounds, ordinary etale loci, or compact support of continuous functions, not the etale open/proper finite-Tor window"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported etale cohomology preserves constructible finite Tor complexes with an explicit cohomological interval",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"leansearch\", \"query\": \"Compactly supported etale cohomology preserves constructible finite Tor complexes with an explicit cohomological interval\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|extensionByZero|openImmersionLowerShriek",
+   "results": "{\"t\": \"2026-10-22T06:51:03Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|extensionByZero|openImmersionLowerShriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme flatness/etaleness, generic exact functors or derived cohomological bounds, not this ordinary etale constructible finite-Tor compactification assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image of finite coefficient constructible etale complexes preserves finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T06:51:03Z\", \"tool\": \"leansearch\", \"query\": \"Proper direct image of finite coefficient constructible etale complexes preserves finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"CategoryTheory.Functor.preservesHomologyOfExact\", \"Algebra.FormallyEtale.instTensorProduct\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\"], \"digest\": \"8bc75eab218b9dc2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme flatness/etaleness, generic exact functors or derived cohomological bounds, not this ordinary etale constructible finite-Tor compactification assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:51:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"torAmplitude\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme flatness/etaleness, generic exact functors or derived cohomological bounds, not this ordinary etale constructible finite-Tor compactification assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of bounded flat constructible etale complexes preserves flatness and proper direct image has Tor amplitude controlled by geometric fibre cohomological dimension",
+   "results": "{\"t\": \"2026-10-22T06:51:10Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero of bounded flat constructible etale complexes preserves flatness and proper direct image has Tor amplitude controlled by geometric fibre cohomological dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"d89b96bb5e843c9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme flatness/etaleness, generic exact functors or derived cohomological bounds, not this ordinary etale constructible finite-Tor compactification assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism sends bounded constructible finite Tor complexes of etale modules with amplitude a b to amplitude a b plus fibre dimension bound",
+   "results": "{\"t\": \"2026-10-22T06:52:08Z\", \"tool\": \"leanfinder\", \"query\": \"A proper morphism sends bounded constructible finite Tor complexes of etale modules with amplitude a b to amplitude a b plus fibre dimension bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"DerivedCategory.isGE_Q_obj_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"ba7426c3c8fdb193\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme flatness/etaleness, generic exact functors or derived cohomological bounds, not this ordinary etale constructible finite-Tor compactification assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-ctf-chart-domain",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts paragraph, canonical chart isomorphism: compactification preserves the ordinary etale finite-Tor domain (retained chart-domain proof Steps 2--3)",
+   "via": [
+    "lem-sp-etale-ctf-chart-domain"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-compact-support-tor-window",
+  "worker": "stage1",
+  "group": "Q05",
+  "summary": "Retained the statement verbatim, expanded the open model, flatness, constructibility and K-flat arguments, and applied existing uniform geometric-fibre and proper finite-Tor bounds. No new nodes. Added the bounded-constructible definition dependency; recorded actual Mathlib searches and the 06YQ source correction for the existing K-flat lemma.",
+  "blueprint": "Realizes the finite-Tor compactification domain used in det-sp-reduction-exceptional, Charts, via the retained chart-domain Steps 2--3; follows the open/proper route of sk-lem-sp-reduction Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proper-geometric-fibre-torsion-bound",
+    "why": "Uniform torsion cohomology bound for a proper map over a quasi-compact base, used as a general geometric tool; the coefficient-comparison unit supplies no such bound."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of ordinary etale extension by zero, a general sheaf tool needed for termwise representatives and cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "General ringed-site sheaf tensor identity used to verify flatness, not a replacement for any coefficient-comparison step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "General identification of etale inverse image with restriction to the localized site, used to match the ringed-slice tensor identity with ordinary module inverse image in the flatness calculation (added by the reviewer)."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact ordinary constant-coefficient inverse image used in the flatness calculation."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ringed-site bounded-above-flat K-flat criterion, independent of the coefficient-comparison route."
+   },
+   {
+    "node": "det-ctf-finite-proper-tor",
+    "why": "Ordinary etale proper-direct-image finite-Tor estimate, used as the proper factor in the compactification explicitly required by the unit."
+   },
+   {
+    "node": "lem-kun-flat-bounded-tor-amplitude",
+    "why": "Bounded flat complexes in [a,b] have Tor amplitude [a,b] for the derived tensor of def-kun-tor-amplitude; generic homological tool replacing the ringed-site criterion whose derived tensor model differs (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-exact",
+  "det-ctf-finite-proper-tor",
+  "lem-kun-flat-bounded-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-14c515c40",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-14c515c40 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against the statements of every cited node and Stacks 0E8I/03DJ/010N/06YQ/08G1/0F12/0A3V. There are no new nodes. The statement is byte-identical to the base; the stmt_deps add def-weil-pbc-constructible-complexes, which 'bounded constructible' uses. The item is unsplit in live and side-live, has no repair note, cites no SGA, and was created 2026-10-22 so it is not in the 10-19 drop list. Every argument of the old chart-domain Steps 2-3 (Q03 packet:359-367) is carried. Hypotheses checked: e:=c from the fibre bound (r proper, V quasi-compact, all torsion sheaves); ell^n kills R and is invertible on the schemes for lem-fin-extension-by-zero; det-ctf with X=W, Y=V, A=R, d=2e gives exactly [a,b+2e]. Edge cases checked: U empty, U=W, empty W or V, R=0, a=b, e=0, negative a. FIX, 3 repairs. (1) C1/C3, Step 3: the slice restriction was identified with j^* with no node. It now cites lem-weil-pbc-etale-inverse-image-restriction and parts (1)-(3) of prop-weil-pbc-inverse-image-modules-exact (this repair was kept from an earlier run in this directory, after my own check). (2) C4, Step 5: lem-sp-ringed-site-tor-flat-model is stated with the derived tensor of lem-weil-pbc-site-derived-tensor-descent, not the def-kun-derived-tensor that def-kun-tor-amplitude uses. Through its proof it also adds about 59 trf/pod/poincare nodes to the closure (lem-trf-frobenius-open-square, lem-poincare-*), which the mechanical check did not flag. It is replaced by the existing lem-kun-flat-bounded-tor-amplitude, which states exactly the def-kun Tor interval for a bounded flat complex; its closure has 154 nodes and no trf node, and it is already in the base closure. (3) Step 7: added that the D^+ Rr_* of def-weil-pbc-direct-image (used by det-ctf) and the unbounded Rr_* of def-amb agree on the bounded object, both being Q(r_*I) for a K-injective resolution. tool_uses: removed the ringed-site entry, added the two new citations, accepted the rest as generic tools. Batch 5: lem-sfb-proper-geometric-fibre-torsion-bound is a cd bound (generic Nagata/limit trf defs in its closure) and det-ctf-finite-proper-tor is a finiteness input that the old parent already cited; neither is a trace-formula or Poincare-duality step, so both are accepted. After the fix the closure holds only det-ctf's 22 generic trf/pod nodes and no sec-poincare-duality node. Maintainer notes: lem-pc-bounded-above-flat-kflat-site has source 06YS, which should be 06YQ; lem-sfb-proper-geometric-fibre-torsion-bound overlaps lem-sfb-finite-proper-geometric-cd-bound.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportTorWindow",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCompactSupport_torWindow",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportTorWindow.lean",
+  "statement": "theorem exists_etaleCompactSupport_torWindow (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] (hp : 0 < p) (hℓ : ℓ.Prime) (hpℓ : p ≠ ℓ) {W V : Scheme.{u}} [W.Over (Spec (.of k))] [V.Over (Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] (r : W ⟶ V) [r.IsOver (Spec (.of k))] [IsProper r] : ∃ e : ℕ, (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ V) (F : Sheaf (pullback r v).smallEtaleTopology AddCommGrpCat.{u + 1}), F.IsTorsion → ∀ i : ℤ, (2 * (e : ℤ)) < i → Subsingleton ((cohomology AddCommGrpCat.{u + 1} (pullback r v) i).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧ ∀ (U : Scheme.{u}) [U.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] (j : U ⟶ W) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] (R : Type (u + 1)) [CommRing R] [Finite R], (∃ n : ℕ, 1 ≤ n ∧ (ℓ ^ n : ℕ) • (1 : R) = 0) → ∀ (a b : ℤ), a ≤ b → ∀ (K : DerivedCategoryModule R U), DerivedCategory.isBoundedConstructible R U K → DerivedCategory.hasTorAmplitudeIn R U a b K → ∀ (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ), Nonempty (_root_.DerivedCategory.Q.obj P ≅ K) → (∀ q : ℤ, exactFunctor _ _ (MonoidalCategory.tensorRight (P.X q))) → (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X q)) → (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) → Nonempty (_root_.DerivedCategory.Q.obj (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapHomologicalComplex (.up ℤ)).obj P) ≅ ((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory).obj K) ∧ (∀ q : ℤ, exactFunctor _ _ (MonoidalCategory.tensorRight ((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj (P.X q)))) ∧ (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj (P.X q))) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapHomologicalComplex (.up ℤ)).obj P).X q)) ∧ (HomologicalComplex.quasiIso (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} R)) (.up ℤ)).kFlat (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapHomologicalComplex (.up ℤ)).obj P) ∧ DerivedCategory.isBoundedConstructible R W (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory).obj K) ∧ DerivedCategory.hasTorAmplitudeIn R W a b (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory).obj K) ∧ DerivedCategory.isBoundedConstructible R V ((rightDerivedLowerStar (ModuleCat.{u + 1} R) r).obj (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory).obj K)) ∧ DerivedCategory.hasTorAmplitudeIn R V a (b + 2 * (e : ℤ)) ((rightDerivedLowerStar (ModuleCat.{u + 1} R) r).obj (((openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategory).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Statement-fidelity repair of the existing Q148 module: the node quantifies over all torsion sheaves, meaning locally torsion (Sheaf.IsTorsion), whereas the previous signature required every group of sections to be torsion. These differ for infinite disjoint unions. Replace only that premise with the existing locally torsion predicate. Every other mathematical hypothesis and conclusion is retained. The node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdcf2bbca",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Lean-only re-delivery of the Q148-PASSed module. The only change replaces the sectionwise fibre-torsion premise (∀ T s, ∃ n≠0, n•s=0) with F.IsTorsion, which is exactly the locally torsion definition (SheafCohomology/Basic.lean:75) and matches the node's 'torsion sheaf' (Stacks 03SA). The weaker premise makes the ∃ e clause stronger, as the node requires, and it remains true by Stacks 0A3V. IsTorsion is reached by public imports via EtaleTorAmplitude→DerivedCategories. lean.statement is verbatim in the file; universes and binders are unchanged; docstrings carry the source, blueprint id and 7 steps; proof is sorry. All other clauses are byte-identical and re-checked against the node. No Lean importers. Nothing compiled (no file changed). Advisory for stage 3: the Lean of proof-only dep lem-sfb-proper-geometric-fibre-torsion-bound is still sectionwise; bridge via the colimit of n-torsion subsheaves."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261023T151948-L-427689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

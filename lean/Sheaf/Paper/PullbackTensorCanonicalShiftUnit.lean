@@ -630,6 +630,34 @@ private lemma representative_naturality
         (((totalTensor.{uC, vC, r} R).obj P').map b))).trans (square_comp ha hb)
 
 
+/-- The canonical K-flat representative isomorphisms are natural jointly in both factors.
+This is the fixed-factor naturality argument used in the proof of canonical shift and unit
+compatibility: apply the naturality of each fixed-factor computation and compose the squares.
+Source: the proof of `pullback_tensor_canonical_shift_unit`, representative naturality.
+(blueprint: lem-weil-pbc-pullback-tensor-canonical-shift-unit). -/
+theorem canonicalRepresentativeIso_naturality
+    [(DR).CommShift₂Int] (hc :
+      HasCanonicalTensorShifts (R := R))
+    (P Q P' Q' : CochainComplex (Modules.{uC, vC, r} (C := C) (J := J) R) ℤ)
+    (hp : P.IsKFlatIndependentCoefficients) (hq : Q.IsKFlatIndependentCoefficients)
+    (hp' : P'.IsKFlatIndependentCoefficients) (hq' : Q'.IsKFlatIndependentCoefficients)
+    (hf : ∀ n, IsFlatOnSite (J := J) (R := R) (P.X n))
+    (hg : ∀ n, IsFlatOnSite (J := J) (R := R) (Q.X n))
+    (hf' : ∀ n, IsFlatOnSite (J := J) (R := R) (P'.X n))
+    (hg' : ∀ n, IsFlatOnSite (J := J) (R := R) (Q'.X n))
+    (a : P ⟶ P') (b : Q ⟶ Q') :
+    DerivedCategory.Q.map
+        (((totalTensor.{uC, vC, r} (C := C) (J := J) R).map a).app Q ≫ ((totalTensor.{uC, vC, r}
+          (C := C) (J := J) R).obj P').map b) ≫
+        (canonicalRepresentativeIso.{uC, vC, r, wR} R P' Q' hp' hq' hf' hg').hom =
+      (canonicalRepresentativeIso.{uC, vC, r, wR} R P Q hp hq hf hg).hom ≫
+        (((TR).map (DerivedCategory.Q.map a)).app
+          (DerivedCategory.Q.obj Q) ≫
+          ((TR).obj (DerivedCategory.Q.obj P')).map
+            (DerivedCategory.Q.map b)) :=
+  representative_naturality (R := R) hc P Q P' Q' hp hq hp' hq' hf hg hf' hg' a b
+
+
 omit [HasDerivedCategory.{wR} (Modules.{uC, vC, r} R)] in
 @[no_expose] private abbrev resolvingProperty : ObjectProperty (CochainComplex (MR) ℤ) :=
   fun P ↦ P.IsKFlatIndependentCoefficients ∧

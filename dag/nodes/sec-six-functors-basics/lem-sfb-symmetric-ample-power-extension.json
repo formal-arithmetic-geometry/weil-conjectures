@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-symmetric-ample-power-extension",
+ "kind": "statement",
+ "title": "Ample extensions of powers of symmetric lines on the abelian open",
+ "statement": "Let $T$ be a normal integral Noetherian affine scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $q:H\\to T$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$. A commutative group scheme has multiplication, inverse and identity satisfying the group identities and commutativity; separated means that the diagonal is a closed immersion. Every geometric fibre is semiabelian: over an algebraically closed residue-field extension $k$ it fits into an exact sequence of fppf sheaves of commutative groups $1\\to(\\mathbf G_{m,k})^r\\to H_k\\to A\\to1$, for some integer $r\\geq0$ and a proper smooth geometrically connected $k$-group scheme $A$ (an abelian variety); here $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication. Let $V\\subseteq T$ be a dense open [def-weil-open-immersion] over which $H_V\\to V$ is proper [def-weil-proper-morphism], hence an abelian scheme. Let $M$ be an invertible module [def-sc-invertible-module] on $H_V$, with a rigidification $e_V^*M\\simeq\\mathcal O_V$, and suppose $[-1]^*M\\simeq M$ (symmetry). Module pullback is tensor inverse image [def-pc-module-pullback]. Assume $M$ is relatively ample: it is ample on the inverse image of every affine open of $V$ [def-weil-pbc-ample-invertible-module]. There exists an affine open covering $T=\\bigcup_iT_i$ such that, for each nonempty $T_i$, there are an integer $n_i\\geq1$ and a rigidified invertible module $B_i$ on $H_{T_i}$ which is relatively ample over $T_i$, together with a rigidification-preserving isomorphism $B_i|_{H_{V\\cap T_i}}\\simeq M^{\\otimes n_i}|_{H_{V\\cap T_i}}$. In particular $B_i$ is ample on $H_{T_i}$. This is an existence theorem: no line module on all of $H$ is supplied as input.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "XI Theorem 1.13, symmetric ample power-extension assertion, used in Moret-Bailly, Pinceaux de varietes abeliennes, VI Proposition 3.1, connected-fibre case. Original local WANTED; normal semiabelian formulation and local rigidification made explicit by Q124, agent responsibility."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sfb-semiabelian-geometric-fibres"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-semiabelian-cubical-rigidification](a) to the abelian scheme $H_V\\to V$ and the given rigidification of $M$. The group is smooth separated of finite presentation with geometrically connected fibres by the hypotheses, and is proper over $V$. We obtain the unique compatible cubical structure on $M$; it preserves the prescribed rigidification.",
+   "uses": [
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, abelian-scheme theorem of the cube."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-symmetric-cubical-extension] with $S=T$, $G=H$, $U=V$ and the cubical line $M$ from step 1. The base is normal integral Noetherian, the morphism has the stipulated semiabelian fibres, and $V$ is dense. Symmetry of the underlying module is exactly the hypothesis $[-1]^*M\\simeq M$. Obtain a cubical rigidified line $B$ on $H$ and a rigidification-preserving isomorphism $B|_{H_V}\\simeq M$. This application supplies an extension of $M$ itself.",
+   "uses": [
+    "lem-sfb-normal-symmetric-cubical-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3, extension of symmetric cubical lines."
+   }
+  },
+  {
+   "text": "Because $T$ is integral and $V$ is dense open, its generic point $\\eta$ lies in $V$. Apply [lem-trf-scheme-relative-ample-base-change] to $H_V\\to V$, its relatively ample line $M$, and $\\operatorname{Spec}\\kappa(\\eta)\\to V$. The target is affine, so $M_\\eta$ is ample. The isomorphism of step 2 identifies $B_\\eta$ with $M_\\eta$; hence $B_\\eta$ is ample and symmetric. By [lem-weil-pbc-proper-base-change], applied to $H_V\\to V$ and the same map, $H_\\eta$ is proper.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 0893 (lemma-ample-base-change) and Tag 01W4 (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-cubical-generic-ampleness] to the supplied cubical line $B$ of step 2. Its base and group hypotheses are precisely those checked in step 2, and step 3 verifies properness of the generic fibre and ampleness and symmetry of $B_\\eta$. Thus $B$ is relatively ample over $T$.",
+   "uses": [
+    "lem-sfb-normal-cubical-generic-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "VI 3.1, normal connected-fibre cubical ampleness criterion."
+   }
+  },
+  {
+   "text": "Take the one-member affine open covering $T_1=T$, the integer $n_1=1$, and $B_1=B$. The rigidified isomorphism in step 2 is the required one to $M^{\\otimes1}\\simeq M$. Relative ampleness includes ampleness on the inverse image of the affine open $T$ itself, which is $H$. These choices give every asserted clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "Elementary assembly and the definition of relative ampleness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semiabelian-cubical-rigidification",
+  "lem-sfb-normal-symmetric-cubical-extension",
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sfb-normal-cubical-generic-ampleness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "Cubical assembly: I 2.6, II 3.3, VI 3.1; local sources WANTED; online Lan statements cross-checked, not a claim to have read the missing originals."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric rigidified ample line bundle on the abelian open part of a semiabelian scheme over a normal noetherian base has a positive tensor power extending to a relatively ample line bundle",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud extension of a power of a symmetric ample invertible sheaf from a dense abelian open of a semiabelian scheme",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; CommRing.relPic; Algebra.Extension.infinitesimal; AlgebraicGeometry.Scheme.nilradical; AlgebraicGeometry.instIsAffineHomιBasicOpen; Module.Ray.map_symm; AlgebraicGeometry.RingedSpace.basicOpen_pow; AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Invertible\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "Semiabelian|semiabelian|cubical|rigidified|Raynaud",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; affine-space, structure-sheaf localization, Picard groups of rings and categorical symmetry do not construct a relatively ample extension of an invertible sheaf on a semiabelian group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-group-generic-ampleness",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step.",
+   "via": [
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symmetric-ample-power-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Gave the canonical cubical structure, symmetric cubical extension, generic-fibre ampleness by existing base-change, and supplied-object cubical ampleness assembly. It yields n=1. Four statement-only prerequisites (one definition and three theorems) expose the machinery instead of citing Raynaud as an unexplained existence assertion. Missing local originals are WANTED; normal-base criterion marked agent responsibility.",
+  "blueprint": "No matching node in latest blueprint; search cubical, semiabelian, rigidified, generic ampleness. Retained inherited null blueprint.from.node and via chain. Realizes the Raynaud supporting input under det-thm-sf-ctf-stability-direct-images proof (3) through the stated Picard-theta route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-relative-ample-base-change",
+    "why": "Generic scheme-theoretic preservation of relative ampleness under pullback to the generic point; used only as a tool, with no trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-relative-ample-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-c6e412ca3",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-c6e412ca3 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes (def-sfb-cubical-rigidified-line plus three statement-only lemmas), the cited nodes and the definition nodes. Raynaud and Moret-Bailly are not in literature/ and are correctly marked WANTED with proof_origin agent. I checked the statements against the public PDF of Lan's revised thesis. Prop 3.2.3.1 (CUB to rigidified Pic is an equivalence for an abelian scheme, or a normal base with semiabelian fibres) matches the canonical-cube node. Prop 3.3.2.2(1) (Res fully faithful over a normal base) and Thm 3.3.2.3(2) (a symmetric cubical L_U extends) give exactly the extension node. Lemma 4.2.1.6 with Remark 4.2.1.3 (L cubical, L_eta symmetric: L ample iff L_eta ample, via Raynaud XI 1.16 and cube uniqueness) gives the ampleness node; its normal-base scope beyond Lan Ch. 4 is recorded as agent responsibility. Definition checked: the D_3 signs, the cocycle, and that the normalisation at e is harmless. Small cases checked: a DVR, a constant E x S over a normal cone (a non-symmetric degree-0 line does not extend, so symmetry is needed), and an affine G_m special fibre. Steps 1-5 check hypothesis by hypothesis: eta lies in V, ampleness of M_eta comes from Tag 0893 applied to Spec kappa(eta), and n=1 with the single cover {T} is a stronger conclusion while the statement is unchanged. There is no cycle; the parent regular-group node is not cited, and the new ampleness node generalises it. No repair note, no SGA. Batch 5: lem-trf-scheme-relative-ample-base-change is the general Stacks 0893 lemma, outside both assumptions and not part of their proofs, so it is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricAmplePowerExtension",
+  "declaration": "AlgebraicGeometry.symmetricAmplePowerExtension",
+  "declarations": [
+   "AlgebraicGeometry.amplePowerRigidification",
+   "AlgebraicGeometry.amplePowerOpenMap",
+   "AlgebraicGeometry.amplePowerOpenRigidification",
+   "AlgebraicGeometry.symmetricAmplePowerExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricAmplePowerExtension.lean",
+  "statement": "theorem symmetricAmplePowerExtension {T : Scheme.{u}} [IsAffine T] [IsIntegral T] [IsLocallyNoetherian T] (hT : ∀ t : T, IsDomain (T.presheaf.stalk t) ∧ IsIntegrallyClosed (T.presheaf.stalk t)) (H : Grp (Over T)) [IsCommMonObj H.X] [Smooth H.X.hom] [IsSeparated H.X.hom] [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom] (hH : HasSemiabelianGeometricFibres H) (V : T.Opens) (hV : Dense (V : Set T)) [IsProper (pullback.snd H.X.hom V.ι)] (M : (pullback H.X.hom V.ι).Modules) [M.IsInvertible] (r : (Scheme.Modules.tensorPullback (sectionBaseChange H.X.hom η[H.X].left (Over.w η[H.X]) (Over.mk V.ι))).obj M ≅ 𝟙_ V.toScheme.Modules) (symmetry : (Scheme.Modules.tensorPullback ι[((Over.pullback V.ι).mapGrp.obj H).X].left).obj M ≅ M) (hM : ∀ A : V.toScheme.Opens, IsAffineOpen A → ∃ h : ((Scheme.Modules.tensorPullback ((pullback.snd H.X.hom V.ι) ⁻¹ᵁ A).ι).obj M).IsInvertible, @Scheme.Modules.IsAmple _ ((Scheme.Modules.tensorPullback ((pullback.snd H.X.hom V.ι) ⁻¹ᵁ A).ι).obj M) h) : ∃ (I : Type u) (W : I → T.Opens), (⨆ i, W i) = ⊤ ∧ (∀ i, IsAffineOpen (W i)) ∧ ∀ i, Nonempty (W i) → ∃ n : ℕ, 1 ≤ n ∧ ∃ (B : (pullback H.X.hom (W i).ι).Modules) (hB : B.IsInvertible), (∀ A : (W i).toScheme.Opens, IsAffineOpen A → ∃ h : ((Scheme.Modules.tensorPullback ((pullback.snd H.X.hom (W i).ι) ⁻¹ᵁ A).ι).obj B).IsInvertible, @Scheme.Modules.IsAmple _ ((Scheme.Modules.tensorPullback ((pullback.snd H.X.hom (W i).ι) ⁻¹ᵁ A).ι).obj B) h) ∧ @Scheme.Modules.IsAmple _ B hB ∧ ∃ rB : (Scheme.Modules.tensorPullback (sectionBaseChange H.X.hom η[H.X].left (Over.w η[H.X]) (Over.mk (W i).ι))).obj B ≅ 𝟙_ (W i).toScheme.Modules, ∃ α : (Scheme.Modules.tensorPullback (amplePowerOpenMap H.X.hom (inf_le_right : V ⊓ W i ≤ W i))).obj B ≅ (Scheme.Modules.tensorPullback (amplePowerOpenMap H.X.hom (inf_le_left : V ⊓ W i ≤ V))).obj (M.tensorPow n), (Scheme.Modules.tensorPullback (sectionBaseChange H.X.hom η[H.X].left (Over.w η[H.X]) (Over.mk (V ⊓ W i).ι))).map α.hom ≫ (amplePowerOpenRigidification H.X.hom η[H.X].left (Over.w η[H.X]) (inf_le_left : V ⊓ W i ≤ V) (M.tensorPow n) (amplePowerRigidification (sectionBaseChange H.X.hom η[H.X].left (Over.w η[H.X]) (Over.mk V.ι)) M r n)).hom = (amplePowerOpenRigidification H.X.hom η[H.X].left (Over.w η[H.X]) (inf_le_right : V ⊓ W i ≤ W i) B rB).hom",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-semiabelian-geometric-fibres, added to stmt_deps. The three concrete helper definitions express induced tensor-power and open-restriction rigidifications; the overlap equation requires the extension comparison to preserve them. No extension on H is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1db073b8c",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Item JSON = live except lean + added landed def stmt_dep def-sfb-semiabelian-geometric-fibres (allowed); lean.statement verbatim. All clauses match: normal (stalks IsDomain∧IsIntegrallyClosed), affine+IsIntegral+IsLocallyNoetherian, Grp (Over T)+IsCommMonObj, Smooth/IsSeparated/LFP+QuasiCompact (exact fp), HasSemiabelianGeometricFibres, dense V, IsProper pullback.snd, invertible M with sectionBaseChange rigidification r, symmetry via inverse of base-changed group, relative ampleness over affine opens of V; conclusion ∃ I:Type u cover by affines, nonempty members → n≥1, invertible B rel.+abs. ample, rB, α with rigidification equation. Helpers have real data, docstrings, listed in declarations. Edge cases (empty T/members, V=T, rank 0, n=0, universes) ok. Lines ≤100, imports used/proof-dep, sorry only. Advisory: boundaryPullback* comparisons (def-sc-tensor-pullback-power-comparison, Classical.choose adjunction) used in helpers without stmt_dep; immaterial since any base-unit change is absorbed by rescaling α by q^*u. No compile (no change)."
+ }
+}

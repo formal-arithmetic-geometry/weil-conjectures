@@ -82,7 +82,32 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
+     "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+     "lines": [
+      281,
+      311
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -107,11 +132,16 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $U$ be Noetherian and let $C$ be a constructible torsion abelian sheaf on\n$U_{\\Et}$. There are finite morphisms $h_i:V_i\\to U$ and finite abelian groups\n$M_i$ with a monomorphism\n$C\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a Noetherian commutative ring, let $U$ be a Noetherian scheme\nand let $C$ be a constructible sheaf of $\\Lambda$-modules on $U_{\\Et}$\n[def-weil-pbc-etale-constructible-sheaf], [def-weil-pbc-etale-sheaves]. There\nare finitely many finite morphisms $h_i:V_i\\to U$ and finitely generated\n$\\Lambda$-modules $M_i$ with a monomorphism of sheaves of $\\Lambda$-modules\n$C\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$ [def-weil-pbc-direct-image],\nwhere $\\underline{M_i}$ is the constant sheaf of $\\Lambda$-modules with value\n$M_i$ on $(V_i)_{\\Et}$.",
   "proof": [
    {
-    "text": "*Step 1: the local model at a point.* For every geometric point $\\bar x\\to U$,\nconstructibility gives a finite separable extension $K/\\kappa(x)$ and a finite\nabelian group $M$ for which $C$ is constant with value $M$ over\n$\\operatorname{Spec}K$. Let $Z\\subset U$ be the reduced closure of $x$, let\n$V\\to Z$ be the normalization of $Z$ in $K$, and let\n$\\operatorname{Spec}K\\to V$ be the generic inclusion. The scheme $V$ is\nintegral and normal with function field $K$; this is the classical\nnormalization of an integral scheme in a finite extension of its function\nfield (Stacks Project, Morphisms, Lemma 29.54.13, Tag\n[035L](https://stacks.math.columbia.edu/tag/035L)).",
+    "text": "*Step 1: the local model at a point.* For every geometric point $\\bar x\\to U$,\nconstructibility gives a finite separable extension $K/\\kappa(x)$ and a\nfinitely generated $\\Lambda$-module $M$ for which $C$ is constant with value $M$\nover $\\operatorname{Spec}K$. Let $Z\\subset U$ be the reduced closure of $x$, let\n$V\\to Z$ be the normalization of $Z$ in $K$, and let\n$\\operatorname{Spec}K\\to V$ be the generic inclusion. The scheme $V$ is\nintegral and normal with function field $K$; this is the classical\nnormalization of an integral scheme in a finite extension of its function\nfield (Stacks Project, Morphisms, Lemma 29.54.13, Tag\n[035L](https://stacks.math.columbia.edu/tag/035L)).",
     "uses": [],
     "elementary": null
    },
@@ -135,7 +165,7 @@
     "elementary": false
    },
    {
-    "text": "*Step 6: finite selection.* The finite-selection statement\n[lem-weil-pbc-constructible-noetherian-finite-selection] now produces a finite\nset of indices for which the direct sum of the maps of Step 5 is injective on\nevery geometric stalk; a map of sheaves injective on every geometric stalk is\na monomorphism by conservativity of geometric stalks. This is the Noetherian\nconstruction of Stacks Project, Lemma 59.74.3 (Tag\n[09Z6](https://stacks.math.columbia.edu/tag/09Z6)).",
+    "text": "*Step 6: finite selection.* For a finite ring $\\Lambda$ the finite-selection\nstatement [lem-weil-pbc-constructible-noetherian-finite-selection] produces a\nfinite set of the maps of Step 5 whose joint map\n$C\\to\\bigoplus_i(h_i)_*\\underline{M_i}$ is a monomorphism. For a general\nNoetherian ring $\\Lambda$ the same argument applies: for every finite subfamily\nthe kernel of the joint map is a subsheaf of the constructible sheaf $C$, hence\nconstructible, so the locus of points where the joint map fails to be injective\non the geometric stalk is constructible; these loci have empty intersection\n(each point is detected by the map of Step 5 built at that point), so by\ncompactness of the constructible topology finitely many subfamilies already have\nempty intersection of failure loci, and their union gives a joint map injective\non every geometric stalk, hence a monomorphism by conservativity of geometric\nstalks. This is the Noetherian construction of Stacks Project, Lemma 59.74.3\n(Tag [09Z6](https://stacks.math.columbia.edu/tag/09Z6)).",
     "uses": [
      "lem-weil-pbc-constructible-noetherian-finite-selection"
     ],
@@ -147,6 +177,6 @@
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

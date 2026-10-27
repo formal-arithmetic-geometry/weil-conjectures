@@ -1,0 +1,180 @@
+{
+ "id": "lem-trf-hilbert-samuel-near-component-incidence",
+ "kind": "statement",
+ "title": "Incidence with each component at a Hilbert--Samuel near point",
+ "statement": "Let $X$ be a reduced scheme of finite type over $\\mathbf Q$, with an immersion $i:X\\to Z$ into a smooth $\\mathbf Q$-scheme with structure morphism $p$ [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms]. Let $I$ be a quasi-coherent ideal sheaf, with closed centre $C=I.\\mathrm{subscheme}$ smooth over $\\mathbf Q$. Assume the restriction to $C$ of the normalized Hilbert--Samuel function $H_X$ is locally constant [def-trf-hilbert-samuel-invariant]. Put $X'=I.\\mathrm{strictTransform}(\\mathrm{id}_X)$ and write $\\pi:X'\\to X$ [def-nagata-global-blowup, def-nagata-strict-transform]. Let $y\\in X'$ be any scheme point with $\\pi(y)\\in C$ and $H_{X',y}=H_{X,\\pi(y)}$. For every irreducible component $W$ of $X$ containing $\\pi(y)$ [def-weil-irreducible-components], one has $y\\in\\overline{\\pi^{-1}(W\\setminus C)}$. No dimension assertion, upstairs component classification, rationality or closedness of $y$, or exclusion of components contained in $C$ is part of this statement.",
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-length",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "def-trf-hilbert-samuel-invariant"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.13, p.94, synchronization discussion; agent-written normal-cone component-incidence argument, steps 1--3 of lem-trf-hilbert-samuel-equality-component-rigidity, with the closure identification from step 4. Stacks divisors.tex Tags 0804 and 080E for the Rees and strict-transform calculations. Bennett/Hironaka input is the existing near-normal-cone statement, not asserted to be proved in ILO."
+ },
+ "proof": [
+  {
+   "text": "Set x=pi(y). Choose z on the smooth closed centre above x. The intrinsic blowup/strict-transform isomorphism of Tag 080E identifies the two local rings, maximal-ideal-power quotient lengths, and residue fields over Q, hence their normalized functions. Work on an affine neighbourhood of $x$ in which the given locally closed embedding becomes closed. The finite-type hypothesis over the field $\\mathbf Q$ makes $X$ Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; it has finitely many components by [lem-weil-pbc-noetherian-finitely-many-components]. Shrink away components not containing $x$. Apply [lem-trf-hilbert-samuel-near-normal-cone] to the given $C,x,y$. All its hypotheses, including smoothness of the centre, local constancy of the extended function on it, and equality of the two sequences, are exactly the assumptions here. In its notation $G$ is $A$-flat and $S=G\\otimes_A k\\simeq B[T_1,\\ldots,T_e]$ with $e\\ge1$, and $y\\in\\operatorname{Proj}(S)$ lies in $\\operatorname{Proj}(k[T_1,\\ldots,T_e])$. This is a scheme-point statement, so it includes nonclosed points and transcendental residue extensions.",
+   "uses": [
+    "thm-nagata-strict-transform-is-blowup",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-trf-hilbert-samuel-near-normal-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, printed p.94: agent-written equality-case component argument via normal-flatness and the near-point linear vertex. Lower normal-cone theorem: Cossart--Jannsen--Saito Theorems 2.2--2.3 and 2.14, archival copy WANTED; elementary Rees computations use Stacks divisors.tex Tags 0804 and 080E."
+   }
+  },
+  {
+   "text": "The components through $x$ correspond to the minimal primes $\\mathfrak p$ of $R=\\mathcal O_{X,x}$ by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Indeed, on an affine neighbourhood the minimal primes contained in the prime of $x$ survive localization and give precisely its minimal primes: contraction and extension preserve inclusions, and a minimal prime below a contracted prime is still contained in the prime of $x$. For each such prime apply [lem-trf-normal-cone-directrix-minimal-primes]. Its hypotheses hold: $R$ is reduced, Noetherian and contains $\\mathbf Q$; $I\\subseteq\\mathfrak m$ since $x\\in C$; and Step 1 supplied both flatness and the required graded polynomial decomposition. Thus $S\\twoheadrightarrow k[T_1,\\ldots,T_e]$ factors through $S_{\\mathfrak p}=\\operatorname{gr}_{\\bar I}(R/\\mathfrak p)\\otimes_A k$. The homogeneous prime of $y$ therefore contains $\\ker(S\\to S_{\\mathfrak p})$, and it avoids the irrelevant ideal. Hence $y$ belongs to the closed subset $\\operatorname{Proj}(S_{\\mathfrak p})$ of $\\operatorname{Proj}(S)$ for EVERY component through $x$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-trf-normal-cone-directrix-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, printed p.94: agent-written equality-case component argument via normal-flatness and the near-point linear vertex. Lower normal-cone theorem: Cossart--Jannsen--Saito Theorems 2.2--2.3 and 2.14, archival copy WANTED; elementary Rees computations use Stacks divisors.tex Tags 0804 and 080E."
+   }
+  },
+  {
+   "text": "Here is the fibre calculation interpreting Step 2. For a reduced component $Z$ through $x$, its strict transform $Z'$ in the ambient blowup is its intrinsic blowup in the extended centre ideal by [thm-nagata-strict-transform-is-blowup]. The affine blowup is $\\operatorname{Proj}(\\bigoplus_{n\\ge0}\\bar I^nt^n)$ by [def-nagata-affine-blowup, def-nagata-rees-algebra]. Take its fibre at $x$ using [lemma-nagata-relative-proj-base-change-arbitrary]. Since $I$ acts by zero on $k$, the degree-$n$ coefficient of its fibre algebra is\n$$\\bar I^n\\otimes_R k=(\\bar I^n/\\bar I^{n+1})\\otimes_A k.$$\nThe equality follows because $I\\bar I^n=\\bar I^{n+1}$; it respects multiplication. This gives precisely $\\operatorname{Proj}(S_{\\mathfrak p})$ after localization at $x$, with its inclusion into the exceptional fibre of $X'$. Therefore Step 2 says $y\\in Z'$ for each $Z$ through $x$. If $Z\\subseteq C$ near $x$, then $\\bar I=0$ on its local ring and $S_{\\mathfrak p}$ has no positive degrees, so its Proj is empty. Step 2 excludes that possibility; such components were not excluded in the assumptions.",
+   "uses": [
+    "thm-nagata-strict-transform-is-blowup",
+    "def-nagata-affine-blowup",
+    "def-nagata-rees-algebra",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, printed p.94: agent-written equality-case component argument via normal-flatness and the near-point linear vertex. Lower normal-cone theorem: Cossart--Jannsen--Saito Theorems 2.2--2.3 and 2.14, archival copy WANTED; elementary Rees computations use Stacks divisors.tex Tags 0804 and 080E."
+   }
+  },
+  {
+   "text": "For the fixed reduced component W, its strict transform in the intrinsic blowup has underlying image closure(pi inverse-image of (W minus C)): by the definition of scheme-theoretic strict transform it is the closure of the unchanged reduced component open, and its schematic closure has this topological support. Therefore the point membership in the component Proj established in step 3 is exactly y in that closure. This is incidence only and asserts neither that this closure is an ambient component nor any dimension equality.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-strict-transform-over-complement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-strict-transform-is-blowup",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-trf-hilbert-samuel-near-normal-cone",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-trf-normal-cone-directrix-minimal-primes",
+  "def-nagata-affine-blowup",
+  "def-nagata-rees-algebra",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-nagata-strict-transform",
+  "lemma-nagata-strict-transform-over-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.13, p.94, synchronization discussion; agent-written normal-cone component-incidence argument, steps 1--3 of lem-trf-hilbert-samuel-equality-component-rigidity, with the closure identification from step 4. Stacks divisors.tex Tags 0804 and 080E for the Rees and strict-transform calculations. Bennett/Hironaka input is the existing near-normal-cone statement, not asserted to be proved in ILO.",
+  "note": "A grouping of genuine steps of the existing component-rigidity argument; not claimed as a verbatim theorem in ILO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A near point of a permissible blowup lies in the closure of the inverse image of every irreducible component through its image",
+   "results": "8 hits, including Scheme.range_fromSpecStalk, genericPoints.component, Scheme.preimage_eq_top_of_closedPoint_mem, IsIrreducible.isGenericPoint_genericPoint_closure. None states near-point component incidence.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of Hilbert Samuel functions at a near blowup point forces it to belong to the strict transform of each irreducible component through its image",
+   "results": "8 hits, including Scheme.germToFunctionField.congr_simp, Proj.awayι.congr_simp, exists_of_res_eq_of_qcqs, Scheme.residueFieldCongr. No match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|normalCone.*[Cc]omponent|[Cc]omponent.*normalCone",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HilbertSamuelEqualityComponentRigidity",
+  "date": "2026-10-26",
+  "group": "Z9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. This lemma isolates steps 1--3 of lem-trf-hilbert-samuel-equality-component-rigidity.",
+   "via": [
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertSamuelNearComponentIncidence",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertSamuelNearComponentIncidence.lean",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.near_point_mem_component_closure",
+  "statement": "theorem near_point_mem_component_closure {X Z : Scheme.{u}} (p : Z ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ Z) [Smooth p] [IsImmersion i] [IsReduced X] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] (I : X.IdealSheafData) [Smooth (I.subschemeι ≫ i ≫ p)] (hconstant : IsLocallyConstant (fun c : I.subscheme ↦ function (i ≫ p) (I.subschemeι c))) (y : I.strictTransform (𝟙 X)) (hy : strictTransformToSource (𝟙 X) I.blowupMap I.support.compl y ∈ I.support) (hnear : function (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl ≫ i ≫ p) y = function (i ≫ p) (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl y)) (W : Set X) (hW : W ∈ irreducibleComponents X) (hpoint : strictTransformToSource (𝟙 X) I.blowupMap I.support.compl y ∈ W) : y ∈ closure (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl ⁻¹' (W \\ (I.support : Set X)))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093140-L-3543842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093140-L-3543842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

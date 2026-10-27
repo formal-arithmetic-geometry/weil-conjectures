@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "The irreducible components of the Noetherian scheme $X$ form a finite set by [lem-weil-pbc-noetherian-finitely-many-components]. If $X$ is empty, take $I=\\varnothing$; then $Y$ and $Z$ are empty and all assertions are vacuous. Assume henceforth that $X$ is nonempty. Every point of $X$ lies on an irreducible component by [lem-sc-irreducible-components-cover].",
+   "text": "The components of the Noetherian scheme $X$ form a finite set by [lem-weil-pbc-noetherian-finitely-many-components]. Component coverage [lem-sc-irreducible-components-cover] applies to $X$ and $Y$. The proof works uniformly when either scheme or either component union is empty.",
    "uses": [
     "lem-weil-pbc-noetherian-finitely-many-components",
     "lem-sc-irreducible-components-cover"
@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "Let $C$ be an irreducible component of $Y$. It is a closed irreducible subset of $X$, and by [lem-sc-irreducible-components-cover] it is contained in an irreducible component $D$ of $X$. If $C\\subsetneq D$, then $U=D\\setminus C$ is a nonempty open subset of the irreducible space $D$. Apply [new-node-irreducible-open-complement-dimension] to $D$, with $d=1$ and this $U$. Since $D$ has dimension $1$, the result gives an integer $e<1$ with $\\dim C\\le e$, hence $\\dim C\\le0$. This contradicts the hypothesis that every irreducible component of $Y$ has dimension $1$. Therefore $C=D$ is an irreducible component of $X$.",
+   "text": "For a component $C$ of $Y$, its image under the closed embedding $i$ is closed and irreducible. By [lem-sc-irreducible-components-cover] it lies in an ambient component $D$. Restricting $i$ gives a closed embedding $C\\to D$. If it were not surjective, its range would have nonempty open complement $U$ in the irreducible space $D$. By [new-node-irreducible-open-complement-dimension], the closed complement of $U$ is empty or has dimension at most an integer $e<1$, hence at most zero. The embedding identifies $C$ homeomorphically with this complement, contradicting its dimension one. Therefore the image of $C$ equals $D$.",
    "uses": [
     "lem-sc-irreducible-components-cover",
     "new-node-irreducible-open-complement-dimension"
@@ -42,10 +42,9 @@
    }
   },
   {
-   "text": "Let $I$ be the subset of the finite component set of $X$ consisting of those components that occur as a component $C$ of $Y$ in Step 2. Every point of $Y$ lies on a component of $Y$ by [lem-sc-irreducible-components-cover] applied to the underlying space of $Y$, and Step 2 identifies that component with a member of $I$. Conversely every member of $I$ is contained in $Y$. Thus $|Y|$ is exactly the union of the components in $I$. Because $Y$ is reduced and is a closed subscheme with this support, uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies $Y$ with the reduced closed union of those components.",
+   "text": "Define $I$ as the set of images under $i$ of the components of $Y$. Step 2 shows $I\\subseteq\\operatorname{Irr}(X)$. Component coverage [lem-sc-irreducible-components-cover] shows $\\operatorname{range}(i)=\\bigcup I$, since every point of $Y$ lies on a component and every component image is contained in the range.",
    "uses": [
-    "lem-sc-irreducible-components-cover",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "lem-sc-irreducible-components-cover"
    ],
    "elementary": false,
    "source": {
@@ -54,10 +53,10 @@
    }
   },
   {
-   "text": "Let $J$ be the complementary subset of the finite component set of $X$, and let $W=\\bigcup_{D\\in J}|D|$. This is closed. If $x\\in|X|\\setminus|Y|$, choose an irreducible component $D$ containing $x$ by [lem-sc-irreducible-components-cover]. It cannot lie in $I$, because every component in $I$ is contained in $Y$; hence $x\\in W$. Thus $|X|\\setminus|Y|\\subseteq W$ and its closure is contained in $W$. Conversely, for $D\\in J$, let $\\eta_D$ be its generic point from [lem-sc-scheme-sober]. If $\\eta_D\\in|Y|$, the closedness of $Y$ would imply $D=\\overline{\\{\\eta_D\\}}\\subseteq|Y|$, which is impossible: by Step 3, $|Y|=\\bigcup_{C\\in I}C$, so irreducibility of $D$ forces $D$ into one selected $C$ (repeatedly apply the two-closed-set definition to this finite union); maximality of components then gives $D=C\\in I$. Hence $\\eta_D\\in|X|\\setminus|Y|$, and $D=\\overline{\\{\\eta_D\\}}$ is contained in the closure of $|X|\\setminus|Y|$. Taking the finite union over $J$ gives $W=\\overline{|X|\\setminus|Y|}$.",
+   "text": "For any subset $S$ of the finite ambient component set, prove $\\overline{(\\bigcup S)^c}=\\bigcup(\\operatorname{Irr}(X)\\setminus S)$. The right side is closed, and component coverage [lem-sc-irreducible-components-cover] puts every point outside the selected union in it. Conversely, for a component $D$ outside $S$, Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton identifies $D$ with the closure of the complement of the union of all other components. Since $S$ is contained among those other components, closure monotonicity puts $D$ in the desired closure. Apply this identity to $I$ and use the stipulated range of $j$.",
    "uses": [
-    "lem-sc-irreducible-components-cover",
-    "lem-sc-scheme-sober"
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover"
    ],
    "elementary": false,
    "source": {
@@ -66,22 +65,20 @@
    }
   },
   {
-   "text": "By definition, $Z$ is the reduced induced closed subscheme on $W$. The irreducible components of the finite union $W=\\bigcup_{D\\in J}D$ are exactly the members of $J$: if $E$ is irreducible in $W$, the finite closed cover $E=\\bigcup_{D\\in J}(E\\cap D)$ forces $E\\subseteq D$ for one $D$, by repeated use of the two-closed-set definition. Each $D\\in J$ is itself irreducible and closed in $W$, and no one contains another by maximality in $X$. Thus the maximal irreducible subsets of $W$ are precisely these $D$. Therefore every irreducible component of $Z$ has dimension $1$, and $Z$ is the reduced closed union of all components of $X$ not in $I$. If $J=\\varnothing$, then $W$ and $Z$ are empty and this conclusion is vacuous.",
+   "text": "For a component $C$ of $Z$, its irreducible image is contained in the finite closed cover by components $D$ outside $I$. Mathlib isIrreducible_iff_sUnion_isClosed puts that image in one such $D$. Since all of $D$ lies in the range of the embedding $j$, its preimage is homeomorphic to $D$ and is irreducible. It contains $C$, so maximality of $C$ makes the preimage equal to $C$. Thus $j(C)=D$, and the homeomorphism preserves dimension. Apply the hypothesis on the dimensions of ambient components. If $Z$ is empty there are no components to check.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), first paragraph, with the finite-component closure argument written out; Tags 004W (lemma-irreducible) and 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "Apply the component-union closure identity of Step 4 again to $\\operatorname{Irr}(X)\\setminus I$. Set difference cancellation gives $\\overline{\\operatorname{range}(j)^c}=\\bigcup I=\\operatorname{range}(i)$. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme], applied to the given reduced closed immersion $i$, provides the required isomorphism to the vanishing-ideal subscheme and its equality over $X$. The same argument includes empty and full component selections.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), first paragraph, with the finite-component closure argument written out; Tags 004W (lemma-irreducible) and 01IS (lemma-scheme-sober)."
-   }
-  },
-  {
-   "text": "Put $V=|X|\\setminus|Z|=|X|\\setminus W$. Every $x\\in V$ lies on a component of $X$ by [lem-sc-irreducible-components-cover], and that component must be in $I$ because each component in $J$ lies in $W$. Thus $V\\subseteq|Y|$, so $\\overline V\\subseteq|Y|$ since $Y$ is closed. Conversely, for $D\\in I$, take its generic point $\\eta_D$ from [lem-sc-scheme-sober]. If $\\eta_D\\in W$, then $\\eta_D\\in C$ for some $C\\in J$; closedness of $C$ gives $D=\\overline{\\{\\eta_D\\}}\\subseteq C$, and maximality of components gives $D=C$, contradicting $I\\cap J=\\varnothing$. Hence $\\eta_D\\in V$ and $D\\subseteq\\overline V$. The union over $I$ gives $|Y|\\subseteq\\overline V$, proving $\\overline{|X|\\setminus|Z|}=|Y|$. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] now identifies the reduced induced closed subscheme on this support with $Y$. The argument includes $I=\\varnothing$ and $J=\\varnothing$, so both empty-complement cases are covered.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-sc-scheme-sober",
-    "lem-sc-irreducible-components-cover"
    ],
    "elementary": false,
    "source": {
@@ -94,13 +91,12 @@
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lem-sc-irreducible-components-cover",
   "new-node-irreducible-open-complement-dimension",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-sc-scheme-sober"
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Expands the component-union argument in Tag 0E38 (lemma-closed-subscheme-nodal-curve), first proof paragraph, using the existing general dimension-drop node; writes out the finite-component complementary-closure and double-complement arguments using Tags 004W, 01IS and 01J3."
+  "place": "Tag 0E38, first proof paragraph; formalized by J3 using dimension drop, finite component covers, Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton, and reduced-induced uniqueness (Tags 01J3 and 01J4). Replaces the generic-point portions by the general topological exclusive-open closure lemma; preserves the component-union route."
  },
  "mathlib_searches": [
   {
@@ -270,5 +266,26 @@
   "result": "pass",
   "note": "Node diff touches only the lean record; lean.statement appears verbatim in the file; one sorry, no definitions. Clauses match the node: IsReduced plus IsNoetherian (= locally Noetherian and quasi-compact, as the node defines it); dimension 1 for components of X and of Y via topologicalKrullDim on the subspace; Y is a reduced closed immersion; Z is any reduced closed immersion with range = closure of the complement, which is equivalent by the uniqueness clause of reduced_induced_closed_subscheme; ∃ I ⊆ irreducibleComponents with range i = ⋃₀I and range j = ⋃₀(comps \\ I); components of Z have dimension 1; double complement is an isomorphism over X with the canonical vanishingIdeal subscheme. Edge cases checked: X, Y or Z empty, meeting components, single universe u. Docstrings carry Stacks 0E38/01J3/01J4, the blueprint tag and the 6-step proof. Duplicate search (rg on side lean, dag nodes, slopmaster2) found nothing. nt_compile.py --json: rc 0, no errors or warnings, 2.6 s; a probe confirmed real elaboration (deliberate error caught, axioms include only sorryAx beyond the standard three). Report has a Worker report and the standard post-2026-10-17 Second reading line. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261023T102932-L-3008803",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

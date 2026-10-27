@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-nodal-chart-boundary-shrinking",
+ "kind": "statement",
+ "title": "Shrinking a nodal model chart to make its parameter invertible off a boundary",
+ "statement": "Let $V$ be a scheme [def-pc-scheme], let $h\\in\\Gamma(V,\\mathcal O_V)$, and put $W=\\operatorname{Spec}_V(\\mathcal O_V[u,v]/(uv-h))$, the gluing of these affine spectra [def-weil-affine-spectrum]. Let $e:U\\to W$ be etale [def-weil-etale-morphism], write $p:U\\to V$ for its structure map, and fix $t\\in U$ such that $e(t)$ belongs to the closed subscheme $N=V(u,v)\\subset W$ [def-weil-closed-immersion]. Let $T\\subset V$ be a closed subset and suppose $p$ is smooth over $V\\setminus T$ [def-sbc-smooth-morphisms]. Under the projection isomorphism $N\\simeq V(h)$, let $Z$ be the image of $N\\setminus e(U)$. Then $Z$ is closed in $V$, $p(t)\\notin Z$, and for $V^\\circ=V\\setminus Z$ and $U^\\circ=U\\times_VV^\\circ$ [def-pc-base-change] every point of $V(h)\\cap V^\\circ$ has its corresponding node in the image of $U^\\circ$. The given point $t$ remains in $U^\\circ$, and $h|_{V^\\circ\\setminus T}$ is invertible. No surjectivity of $e$ on all of $W$, no properness, and no reducedness assumption on $V(h)$ are imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI Proposition 1.9 proof, printed p. 71, equation (1.a): the function h invertible on Y minus T; explicit neighbourhood shrinking for the Stacks curves.tex Tag 0CBY model."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-trf-universal-nodal-model"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open $\\operatorname{Spec}A\\subset V$, setting $u=v=0$ gives $(A[u,v]/(uv-h))/(u,v)=A/(h)$. These coefficient-preserving identifications agree under restriction, hence give the projection isomorphism $N\\simeq V(h)$ as schemes. By [def-weil-closed-immersion], this projection identifies $|N|$ with a closed subspace of $V$. By [lem-weil-pbc-etale-morphism-open-map], $e(U)$ is open in $W$. Consequently $N\\setminus e(U)$ is closed in $N$, and its image $Z$ is closed in $V$. Since $e(t)\\in N\\cap e(U)$, its image $p(t)$ does not lie in $Z$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9 proof, printed p. 71, equation (1.a); explicit closed-complement shrinking for the model of Stacks Tag 0CBY."
+   }
+  },
+  {
+   "text": "For $s\\in V(h)\\cap V^\\circ$, let $n_s$ be the unique corresponding point of $N$. The definition of $Z$ implies $n_s\\in e(U)$, so choose $r\\in U$ with $e(r)=n_s$. Then $p(r)=s\\in V^\\circ$. Base change to an open subscheme is restriction to its inverse image by [lem-weil-pbc-open-fibre-product]; thus $r$ belongs to $U^\\circ=U\\times_VV^\\circ$ and maps to the corresponding node in $W\\times_VV^\\circ$. The same argument and $p(t)\\notin Z$ show that $t$ remains in $U^\\circ$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9 proof, equation (1.a): neighbourhood restriction retaining all nodes over the surviving zero locus."
+   }
+  },
+  {
+   "text": "By [lem-trf-nodal-polynomial-free-flat], $\\pi:W\\to V$ is flat and locally of finite presentation. Apply [lem-trf-nodal-model-etale-smooth-locus] with $X=W$, $Y=V$, $f=\\pi$, $b=\\operatorname{id}_V$, $q=e$, and the given $p$ and $e$. The identities are etale by [def-weil-etale-morphism], and $\\pi e=p$, so all hypotheses hold. It follows that $p$ is nonsmooth at every $r\\in U$ with $e(r)\\in N$. If $s\\in V(h)\\cap(V^\\circ\\setminus T)$, step 2 supplies such an $r$ above $s$. But $p$ is smooth over the open $V\\setminus T$ by hypothesis, hence is smooth at $r$, a contradiction. Therefore $V(h)\\cap(V^\\circ\\setminus T)=\\varnothing$.",
+   "uses": [
+    "lem-trf-nodal-polynomial-free-flat",
+    "lem-trf-nodal-model-etale-smooth-locus",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9 proof, printed p. 71: h invertible on Y minus T; nonsmooth-model test from morphisms.tex Tag 01V9."
+   }
+  },
+  {
+   "text": "Put $O=V^\\circ\\setminus T$. For any affine open $\\operatorname{Spec}A\\subset O$, write $a=h|_{\\operatorname{Spec}A}$. Step 3 says that no prime of $A$ contains $a$. If $(a)$ were proper, a maximal ideal containing it would be prime, a contradiction. Hence $ac=1$ for some $c\\in A$. The inverse sections so obtained agree on overlaps, since any two inverses of the same element are equal; the structure sheaf glues them to an inverse of $h|_O$. This also covers the empty open. Thus $h|_O$ is invertible, with no hypothesis on nilpotents in $V(h)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9 proof, printed p. 71, equation (1.a): local-to-global interpretation of h invertible on Y minus T."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "lem-trf-nodal-model-etale-smooth-locus",
+  "lem-trf-nodal-polynomial-free-flat",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI Proposition 1.9 proof, printed p. 71, equation (1.a), expanded into a closed-complement neighbourhood argument using the Stacks 0CBY model and its smooth locus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale open image in the nodal model xy=h containing a node can be restricted over a base neighborhood to contain the entire node locus; smoothness outside a boundary forces h invertible there.",
+   "results": "{\"t\": \"2026-10-22T06:10:02Z\", \"tool\": \"leanfinder\", \"query\": \"An etale open image in the nodal model xy=h containing a node can be restricted over a base neighborhood to contain the entire node locus; smoothness outside a boundary forces h invertible there.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.mem_etaleLocus_iff\", \"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\"], \"digest\": \"60ea1a23d61f35eb\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shrink the base of an etale chart of xy=a by removing the closed complement of its image in the zero section over V(a).",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"leansearch\", \"query\": \"Shrink the base of an etale chart of xy=a by removing the closed complement of its image in the zero section over V(a).\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsOpenMap\"",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsOpenMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|node.locus|smoothing.parameter",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"grep\", \"query\": \"nodal|node.locus|smoothing.parameter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|node.locus|smoothing.parameter",
+   "results": "{\"t\": \"2026-10-23T09:34:07Z\", \"tool\": \"grep\", \"query\": \"nodal|node.locus|smoothing.parameter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every field k the affine curve xy=0 is not smooth at its origin",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"leansearch\", \"query\": \"For every field k the affine curve xy=0 is not smooth at its origin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Affine.nonsingular_zero\", \"WeierstrassCurve.Affine.nonsingular_iff_variableChange\", \"WeierstrassCurve.Affine.nonsingular_iff'\", \"WeierstrassCurve.Affine.nonsingular_iff\", \"WeierstrassCurve.Projective.nonsingular_of_Z_ne_zero\", \"WeierstrassCurve.Affine.Point.some_ne_zero\", \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\"], \"digest\": \"037054935fa8299d\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Removing the closed complement of an open subset of the zero section gives a neighbourhood on the base of a nodal curve chart",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"leansearch\", \"query\": \"Removing the closed complement of an open subset of the zero section gives a neighbourhood on the base of a nodal curve chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.Opens.compl\", \"TopologicalSpace.Closeds.compl\", \"AlgebraicGeometry.RingedSpace.zeroLocus_singleton\", \"Bundle.contMDiffAt_zeroSection\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"Bundle.contMDiffWithinAt_zeroSection\", \"AlgebraicGeometry.LocallyRingedSpace.basicOpen_zero\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\"], \"digest\": \"b8e2783c73ab7c74\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsSmooth\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsSmooth\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection Spec A[u,v]/(uv-h) to Spec A is not smooth at any point where u and v both vanish",
+   "results": "{\"t\": \"2026-10-23T09:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"The projection Spec A[u,v]/(uv-h) to Spec A is not smooth at any point where u and v both vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Projective.nonsingular_zero\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.basicOpen_subset_smoothLocus_iff\"], \"digest\": \"93f3004f28fe35f1\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian criterion for the smooth locus of a hypersurface xy minus a over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-23T09:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"Jacobian criterion for the smooth locus of a hypersurface xy minus a over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"936f0a4b69fcc9eb\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink the base of an etale chart of xy=h containing a node so all remaining nodes lie in its image and h is invertible off the nonsmooth boundary",
+   "results": "{\"t\": \"2026-10-23T09:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"Shrink the base of an etale chart of xy=h containing a node so all remaining nodes lie in its image and h is invertible off the nonsmooth boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.hasMap\", \"Algebra.exists_etale_of_isEtaleAt\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePresentation.P\"], \"digest\": \"fcf437f320736881\"}; Read search-0.txt through search-6.txt. Generic smooth and etale loci, standard smooth presentations and Weierstrass nonsingularity do not state this closed-complement shrinking and boundary invertibility result. The topological complements and zero-locus singleton facts cover only elementary substeps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-etale-chart",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input of lem-trf-local-term-locality (1)--(2), ILO VI Proposition 1.9 equation (1.a): the closed-complement base shrinking and smoothness-away-from-boundary argument in old step 3 of lem-trf-nodal-etale-chart.",
+   "via": [
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-chart-boundary-shrinking",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved closedness by the closed node-section isomorphism and etale openness, retained every surviving node by inverse-image restriction, and excluded zeros off the boundary using the existing nodal smooth-locus equivalence. Added one statement-only helper for the algebraic free basis and flatness of the arbitrary-base model, rather than duplicating its smooth-locus statement. Wrote the inversion and gluing argument explicitly.",
+  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality (1)--(2) via the existing nodal-etale-chart chain: ILO VI Proposition 1.9 equation (1.a), the parameter h invertible away from T. The latest blueprint uses contracting correspondences; this split preserves the assigned historical auxiliary node and does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic identification of base change along an open immersion with inverse-image restriction; needed only to retain the chosen points in U circ."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-f385b9e4a",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-f385b9e4a (reviewer sub-agent of L); spot-checked: I read the item, the new node, the parent lem-trf-nodal-etale-chart step 4 and every cited statement. Source: ILO VI Prop 1.9, printed p.71, eq. (1.a) ('h inversible sur Y−T'); Stacks curves.tex section-etale-local-nodal model (0CBY). Item steps: (1) N≅V(h) is a closed immersion and e(U) is open, so Z is closed; N→V is injective, so p(t)∉Z. (2) U×_V V° = p⁻¹(V°) by open-fibre-product, so the chosen lifts survive. (3) lem-trf-nodal-model-etale-smooth-locus applies with X=W, f=π, b=id, q=e (πe=p), so p is nonsmooth exactly over N; this contradicts smoothness over V∖T. (4) h lies in no prime, so it is a unit, and the inverses glue. Edge cases h=0, T=V, nilpotent h and h a unit are all fine. The statement is unchanged and the route is unchanged; no SGA source is used. Fault: the basis clause of the new node lem-trf-nodal-polynomial-free-flat (1,uⁿ,vⁿ an A-basis of A[u,v]/(uv−a) over any ring) duplicates the existing lem-sfb-binomial-laurent-normal-form (Q51). FIX: the node is restated as flatness plus local finite presentation of Spec B→Spec A and of the glued W→V; def-weil-pbc-free-module is dropped from its stmt_deps, and its future split should cite the existing basis node. Item step 3 is unaffected. The tool_use of lem-weil-pbc-open-fibre-product is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalChartBoundaryShrinking",
+  "declaration": "AlgebraicGeometry.nodalChart_boundary_shrinking",
+  "declarations": [
+   "AlgebraicGeometry.nodalChartCoordinate",
+   "AlgebraicGeometry.nodalChartMissedNodes",
+   "AlgebraicGeometry.nodalChart_boundary_shrinking"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NodalChartBoundaryShrinking.lean",
+  "statement": "theorem nodalChart_boundary_shrinking {V U : Scheme.{u}} (h : Γ(V, ⊤)) (e : U ⟶ pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) [Etale e] (t : U) (ht : e t ∈ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocus (Set.range (nodalChartCoordinate h))) (T : Set V) (hT : IsClosed T) (hSmooth : Smooth (pullback.snd (C := Scheme.{u}) (e ≫ pullback.snd (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) (Scheme.Opens.ι (X := V) ⟨Tᶜ, hT.isOpen_compl⟩))) : IsClosed (nodalChartMissedNodes h e) ∧ (e ≫ pullback.snd (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) t ∉ nodalChartMissedNodes h e ∧ ∃ Vcirc : V.Opens, (Vcirc : Set V) = (nodalChartMissedNodes h e)ᶜ ∧ (∀ s : V, s ∈ V.zeroLocus {h} → s ∈ Vcirc → ∃ r : pullback (C := Scheme.{u}) (e ≫ pullback.snd (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) Vcirc.ι, (e ≫ pullback.snd (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) ((pullback.fst (C := Scheme.{u}) (e ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h)) Vcirc.ι) r) = s ∧ e ((pullback.fst (C := Scheme.{u}) (e ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h)) Vcirc.ι) r) ∈ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocus (Set.range (nodalChartCoordinate h))) ∧ (∃ t' : pullback (C := Scheme.{u}) (e ≫ pullback.snd (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)) Vcirc.ι, (pullback.fst (C := Scheme.{u}) (e ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h)) Vcirc.ι) t' = t) ∧ IsUnit (V.presheaf.map (homOfLE (le_top : Vcirc ⊓ (⟨Tᶜ, hT.isOpen_compl⟩ : V.Opens) ≤ ⊤)).op h)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the universal-model definitions registered by def-trf-universal-nodal-model with existing: true in the unchanged landed module Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel. No conclusion of exists_etale_nodal_local_model is used. The relative model is the canonical scheme pullback; coordinates and the missed-node set are real constructions in this module. The two unstated proof dependencies nodal-polynomial-free-flat and nodal-model-etale-smooth-locus have no module to import yet."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e698b0a07",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of a6d95ac. The Lean file is byte-identical. The theorem stmt_dep lem-trf-nodal-family-etale-local-model is replaced by the new def node def-trf-universal-nodal-model: existing:true on the unchanged module Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel, listing all 11 plain defs. The item's used decls (nodalModelBaseMap, nodalBaseMap, nodalModelRing) are among them. The statement matches each def; the source is Stacks curves.tex section-etale-local-nodal / 0CBY. stmt_deps are 4 defs, no cycle; the signature is verbatim from def; H12 fields are present; no landed module is moved or edited. The item statement was re-checked clause by clause (Z closed, p t∉Z, V° = Zᶜ, node lifts in U×_V V°, t survives, IsUnit of h on V°⊓Tᶜ), with edge cases h=0, nilpotent, unit, T=V and universes: correct. The second reading is now genuine (11 clauses). No compile, since no file changed."
+ }
+}

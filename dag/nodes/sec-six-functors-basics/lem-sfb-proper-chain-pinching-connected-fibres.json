@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-proper-chain-pinching-connected-fibres",
+ "kind": "statement",
+ "title": "Connected fibres of proper chains under two-branch pinching",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $C,W\\to S$ be projective flat finitely presented families with nodal geometric curve fibres [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $B,N$ be finite etale $S$-schemes and $B\\to N$ finite etale of constant degree two [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Supply closed immersions $B\\hookrightarrow C$ and $B\\hookrightarrow W$ into their relative smooth loci [def-weil-closed-immersion]. Suppose $h:W\\to C$ carries these immersions to one another and factors as a finite chain $W=V_m\\to\\cdots\\to V_0=C$ of proper morphisms with nonempty geometrically connected fibres [def-weil-proper-morphism]. This means each fibre stays nonempty and connected after every field extension of its residue field [def-weil-residue-field]. Length zero and empty $B,N$ are allowed. Let $X=C\\amalg_BN$ and $Y=W\\amalg_BN$ be the scheme pushouts [def-weil-pbc-category-colimit], assumed projective over $S$, with both squares cartesian, finite surjective curve-to-pushout maps, closed immersions from $N$, complement isomorphisms $C\\setminus B\\cong X\\setminus N$ and $W\\setminus B\\cong Y\\setminus N$, and pushout squares remaining pushouts after base change to every geometric fibre [def-pc-fibre-product, def-weil-open-immersion], and let $p:Y\\to X$ be induced by $h$ and the identity of $N$. Then $h$ and $p$ are proper with nonempty geometrically connected fibres. For every geometric point $\\bar s\\to S$, if $X_{\\bar s}$ is nonempty and connected, so is $Y_{\\bar s}$. No connectedness of $C_{\\bar s}$, $W_{\\bar s}$ or the intermediate $V_{j,\\bar s}$ is assumed. Here nodal geometric curve fibres are nonempty reduced geometric fibres of pure dimension one whose nonsmooth closed points over an algebraically closed field $\\Omega$ have completed local ring $\\Omega[[u,v]]/(uv)$; they may be disconnected [def-weil-geometric-fibre, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent connected-fibre consequence of Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), quotient topology and geometric branch pinching; old common-model step 10, including closed-image composition for proper chains."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sfb-nodal-geometric-fibre-local-rings"
+ ],
+ "proof": [
+  {
+   "text": "Composition gives properness of $h$ (the identity if $m=0$). Projectivity gives properness of $X,Y$ over $S$, and hence separatedness of $X/S$. The induced $S$-morphism $p:Y\\to X$ is therefore proper by proper-over-separated.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01WC (lemma-locally-projective-proper), 01W6 (lemma-image-proper-scheme-closed)."
+   }
+  },
+  {
+   "text": "Fix any field-valued point $c:\\operatorname{Spec}L\\to C$. Put $F_j=V_j\\times_C\\operatorname{Spec}L$. We prove $F_j$ nonempty connected by induction, starting with $F_0=\\operatorname{Spec}L$. The map $F_j\\to F_{j-1}$ is a base change of the given proper link. Its fibre at $t\\in F_{j-1}$ is the link fibre extended to $\\kappa(t)$, hence nonempty connected by hypothesis. It is thus surjective and closed, so has the quotient topology: a set with closed preimage is the image of that preimage and is closed. The connected-preimage lemma, applied to the whole connected target, proves $F_j$ connected. This holds for every $L$ and $c$, giving all the asserted fibres of $h$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0377 (lemma-connected-fibres-quotient-topology-connected-components), with morphisms.tex Tag 01W4 (lemma-base-change-proper); agent induction over the links."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $\\Omega$ and $x:\\operatorname{Spec}\\Omega\\to X$. Write $Z=Y\\times_X\\operatorname{Spec}\\Omega$ and $E=W\\times_X\\operatorname{Spec}\\Omega$. The natural $E\\to Z$ is the base change of the assumed finite surjection $W\\to Y$, hence finite surjective and continuous. If $x$ is off $N$, the complement isomorphism identifies $C\\times_X\\operatorname{Spec}\\Omega$ with a single point $c=\\operatorname{Spec}\\Omega$. Thus $E=W\\times_C\\operatorname{Spec}\\Omega$ is nonempty connected by step 2. Its continuous surjective image $Z$ is nonempty connected: a separation of $Z$ would pull back to a separation of $E$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), complement description; morphisms.tex Tags 01WL (lemma-base-change-finite), 01S1 (lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "If $x$ lies on $N$, it factors uniquely as $n:\\operatorname{Spec}\\Omega\\to N\\hookrightarrow X$, since the ideal of the closed immersion maps to zero in the field $\\Omega$. Apply the geometric-fibre decomposition to $B\\to N$: it is finite, hence proper, separated and quasi-compact. Its degree two gives exactly two copies of $\\operatorname{Spec}\\Omega$, denoted $b_1,b_2$. The cartesian square in the hypotheses identifies $C\\times_X\\operatorname{Spec}\\Omega$ with this fibre of $B\\to N$. Base change of this finite coproduct therefore identifies $E$ with $F_1\\amalg F_2$, where $F_i=W\\times_{C,b_i}\\operatorname{Spec}\\Omega$. Both $F_i$ are nonempty connected by step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-etale-geometric-fibre-compact-sections",
+    "def-pc-fibre-product",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), cartesian square; finite etale geometric-fibre splitting: etale-cohomology.tex Tag 09Z9 (lemma-normal-scheme-with-alg-closed-function-field), assertion (1)."
+   }
+  },
+  {
+   "text": "The two sections $b_i$ in the marked subscheme of $W$ give points $z_i\\in F_i$. Their images in $Z$ coincide: the pushout relation on $Y$ sends each marked branch to the point specified by $n$, and both projections to $\\operatorname{Spec}\\Omega$ are the identity. The connected images of $F_1,F_2$ thus meet. They cover $Z$ by the surjectivity in step 3. Explicitly, in any clopen separation of $Z$, each connected image lies in one side, their common point forces the same side, and coverage makes the other side empty. Therefore $Z$ is nonempty connected.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), defining commutative square; elementary separation argument."
+   }
+  },
+  {
+   "text": "Steps 3--5 apply to every algebraically closed geometric point of $X$. For any $x_0\\in X$, apply the algebraic-closure criterion to the $\\kappa(x_0)$-scheme $Y_{x_0}$: its base change to an algebraic closure is the connected nonempty $Z$ just proved. Thus every fibre of $p$ stays nonempty connected after every residue-field extension. Finally $p_{\\bar s}:Y_{\\bar s}\\to X_{\\bar s}$ is proper; its fibres are residue-field extensions of fibres of $p$, so are nonempty connected. It is a closed surjection and therefore quotient. If $X_{\\bar s}$ is nonempty connected, the connected-preimage lemma gives nonempty connected $Y_{\\bar s}$. For $B=N=\\varnothing$ only the off-$N$ case occurs. For $m=0$ the induction is its base case. No total space or intermediate fibre was assumed connected.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0377 (lemma-connected-fibres-quotient-topology-connected-components); varieties.tex Tags 0387 (lemma-characterize-geometrically-connected), 054N (lemma-geometrically-connected-check-after-extension); proper base change 01W4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-over-separated",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-etale-geometric-fibre-compact-sections",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-geometrically-connected-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Connected-fibre consequence of the cartesian and quotient identifications in Tag 0E25, combined with topology.tex Tag 0377. The argument is written by Q133, not asserted to be the statement of 0E25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pinch|GeometricallyConnected|geometricallyConnected",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"grep\", \"query\": \"pinch|GeometricallyConnected|geometricallyConnected\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"f48fd85825251808\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between conductor pushouts induced by a chain of proper maps with connected geometric fibres also has connected geometric fibres",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"leansearch\", \"query\": \"A map between conductor pushouts induced by a chain of proper maps with connected geometric fibres also has connected geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushout.map\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"IsProperMap.comp\", \"CategoryTheory.Under.pushoutComp\", \"CategoryTheory.PreGaloisCategory.PreservesIsConnected\", \"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\"], \"digest\": \"d8844ff53c1aa88b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"geometricallyConnected\"",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"geometricallyConnected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected\", \"AlgebraicGeometry.GeometricallyConnected\", \"AlgebraicGeometry.instSurjectiveOfGeometricallyConnected\", \"AlgebraicGeometry.GeometricallyConnected.eq_geometrically\", \"AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace\", \"AlgebraicGeometry.GeometricallyConnected.mk\", \"AlgebraicGeometry.geometricallyConnected_iff\", \"AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField\"], \"digest\": \"4a9e1be6c72e7ce6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected geometric fibres of a finite chain of proper surjections are preserved after pinching the two branch points of each node",
+   "results": "{\"t\": \"2026-10-22T07:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"Connected geometric fibres of a finite chain of proper surjections are preserved after pinching the two branch points of each node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"CategoryTheory.PreGaloisCategory.fiber_in_connected_component\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"CategoryTheory.PreGaloisCategory.nonempty_fiber_of_isConnected\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"AlgebraicGeometry.pointsPi_surjective\"], \"digest\": \"43627e09c03ef464\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper chain with connected fibres remains connected after gluing two branches in both source and target even when the normalizations are disconnected",
+   "results": "{\"t\": \"2026-10-22T07:28:13Z\", \"tool\": \"leanfinder\", \"query\": \"A proper chain with connected fibres remains connected after gluing two branches in both source and target even when the normalizations are disconnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sigma.isConnected_iff\", \"IsConnected.biUnion_of_chain\", \"IsConnected.iUnion_of_chain\", \"Sum.isConnected_iff\", \"IsPreconnected.biUnion_of_chain\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"IsConnected.biUnion_of_reflTransGen\", \"Sigma.isPreconnected_iff\"], \"digest\": \"f62d81b564b5343e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|GeometricallyConnected",
+   "results": "{\"t\": \"2026-10-23T04:25:55Z\", \"tool\": \"grep\", \"query\": \"pinch|GeometricallyConnected\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"f48fd85825251808\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: properness and base-change results, Galois-category fibres and general topology do not state the two-branch scheme pinching assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected geometric fibres are preserved by gluing pairs of sections in source and target of a proper map",
+   "results": "{\"t\": \"2026-10-23T04:25:56Z\", \"tool\": \"leansearch\", \"query\": \"Connected geometric fibres are preserved by gluing pairs of sections in source and target of a proper map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"AlgebraicGeometry.IsProper.instCompScheme\"], \"digest\": \"c6086d84f05433e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: properness and base-change results, Galois-category fibres and general topology do not state the two-branch scheme pinching assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T04:25:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: properness and base-change results, Galois-category fibres and general topology do not state the two-branch scheme pinching assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain of proper morphisms with geometrically connected fibres induces a proper morphism with geometrically connected fibres on two branch pinching pushouts",
+   "results": "{\"t\": \"2026-10-23T04:26:07Z\", \"tool\": \"leanfinder\", \"query\": \"A chain of proper morphisms with geometrically connected fibres induces a proper morphism with geometrically connected fibres on two branch pinching pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\"], \"digest\": \"54a9e8845efb005e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: properness and base-change results, Galois-category fibres and general topology do not state the two-branch scheme pinching assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjections with connected fibres descend through finite quotients identifying the same two marked points",
+   "results": "{\"t\": \"2026-10-23T04:27:49Z\", \"tool\": \"leanfinder\", \"query\": \"Proper surjections with connected fibres descend through finite quotients identifying the same two marked points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"LightProfinite.surjective_transitionMap\", \"LightProfinite.proj_surjective\", \"LightProfinite.surjective_transitionMapLE\", \"IsCoveringMap.const_of_comp\", \"ContinuousMap.exists_lift_sigma\", \"IsCoveringMap.constOn_of_comp\", \"DiscreteQuotient.exists_of_compat\"], \"digest\": \"59f2582c9a6461b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: properness and base-change results, Galois-category fibres and general topology do not state the two-branch scheme pinching assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent connected-fibre consequence of Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), quotient topology and geometric branch pinching; old common-model step 10, including closed-image composition for proper chains.",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-chain-pinching-connected-fibres",
+  "worker": "stage1",
+  "summary": "Retained the statement and wrote the proper-chain induction and the geometric pinched-fibre calculation explicitly. Reused existing properness, quotient-connectedness, finite-surjection base change, etale geometric-fibre splitting and finite-coproduct base change nodes. No new nodes. Checked disconnected models, zero-length chains and empty branch schemes.",
+  "blueprint": "Inherited ancestor: det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-common-nodal-model step 6 (old step 10): connectedness survives conductor pinching of a proper connected-fibre chain. The existing null from.node and via list are retained as imported; current main-20261015 proof (3) is read.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projectivity implies properness, a generic scheme tool needed for Y over S and separatedness of X over S; no local unit replacement is involved."
+   },
+   {
+    "node": "lem-sfb-etale-geometric-fibre-compact-sections",
+    "why": "Only its first clause is used: a separated quasi-compact etale geometric fibre is the canonical finite coproduct of geometric points. This is a generic geometric-fibre tool, independent of the sheaf clauses and of the alteration route."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "The algebraic-closure test upgrades the pinched geometric-fibre calculation to all residue-field extensions; this is a generic scheme connectedness criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-etale-geometric-fibre-compact-sections",
+  "lem-weil-geometrically-connected-algebraic-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-6eecf3b88",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-6eecf3b88 (reviewer sub-agent of L); spot-checked: First split of Q02's node, not a 2026-10-21 re-split (no repair note). Statement and stmt_deps are the same as live/side-live, and there are no new nodes. I read all six steps against the cited statements; every one holds. Step 1: composition gives h proper, projectivity gives X and Y proper over S, and proper-over-separated (01W6(2)) gives p proper. Step 2: induction on F_j = V_j×_C Spec L with base F_0 = Spec L. Each map is a base change of a proper link, hence a closed surjection with nonempty connected fibres and so a quotient map; the 0377 node then gives F_j connected. This proves geometric connectedness of the fibres of h. Step 3: E = W×_Y Z, so E→Z is finite surjective by 01WL and 01S1. Off N, the cartesian square and the complement isomorphism give C×_XΩ = Spec Ω, so E = W×_CΩ is connected. Step 4: x factors through N. Applied to B→N, the first clause of the etale-geometric-fibre node (checked against 09Z9(1), etale-cohomology.tex:14312) gives two sheets because the degree is 2, and coproduct base change gives E = F_1⊔F_2. Step 5 is genuinely elementary: the marked points z_i = (i_W b_i, id) have the same image (j_N n, id) by the pushout relation and h i_W = i_C. The two connected images meet and cover Z. Step 6: the algebraic-closure criterion (0387/054N) gives p geometrically connected fibres. p_s̄ is a proper surjection with connected fibres, so 0377 gives Y_s̄ connected. Edge cases checked: m=0, B=N=∅, two P^1's pinched at one point, contracted trees, non-closed x, characteristic 2. Unused hypotheses (flatness, nodality, trait, smooth loci, pushouts surviving geometric base change) are kept, so no target is weakened. No SGA. Accepted tool uses: projective-implies-proper, the first clause of the etale-geometric-fibre node, and the algebraic-closure test. Batch-5 flag on lem-sfb-etale-geometric-fibre-compact-sections: the only sec-trace-formula node its closure reaches is the general definition def-trf-schematically-dense-open (through its H^0_c clause). The step uses only the generic fact that an étale geometric fibre is a finite disjoint union of points, which is neither trace formula nor Poincaré duality nor part of their proofs, so the citation stands. Minor: the report mentions a citations.json the commit does not contain; this is not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperChainPinchingConnectedFibres",
+  "declaration": "AlgebraicGeometry.proper_chain_pinching_connected_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperChainPinchingConnectedFibres.lean",
+  "statement": "theorem proper_chain_pinching_connected_fibres (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (C W B N X Y : Over (Spec (.of R))) [IsHProjective C.hom] [IsHProjective W.hom] [Flat C.hom] [Flat W.hom] [LocallyOfFinitePresentation C.hom] [LocallyOfFinitePresentation W.hom] (hCnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback C.hom g) ∧ IsReduced (pullback C.hom g) ∧ (pullback C.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback C.hom g), IsClosed ({x} : Set ↥(pullback C.hom g)) → x ∉ (pullback.snd C.hom g).smoothLocus → Nonempty (NodalFiber.completedLocalRing x ≃+* NodalFiber.powerSeriesQuotient Ω)) (hWnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback W.hom g) ∧ IsReduced (pullback W.hom g) ∧ (pullback W.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback W.hom g), IsClosed ({x} : Set ↥(pullback W.hom g)) → x ∉ (pullback.snd W.hom g).smoothLocus → Nonempty (NodalFiber.completedLocalRing x ≃+* NodalFiber.powerSeriesQuotient Ω)) [IsFinite B.hom] [IsFinite N.hom] [Etale B.hom] [Etale N.hom] (q : B ⟶ N) [IsFinite q.left] [Etale q.left] (hqdeg : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ N.left), Nat.card ↥(pullback q.left z) = 2) (iC : B ⟶ C) (iW : B ⟶ W) [IsClosedImmersion iC.left] [IsClosedImmersion iW.left] (hiCsmooth : ∀ b : B.left, iC.left b ∈ C.hom.smoothLocus) (hiWsmooth : ∀ b : B.left, iW.left b ∈ W.hom.smoothLocus) (h : W ⟶ C) (hmarks : iW ≫ h = iC) (m : ℕ) (V : Fin (m + 1) → Scheme.{u}) (hV0 : V 0 = C.left) (hVm : V (Fin.last m) = W.left) (v : ∀ j : Fin m, V j.succ ⟶ V j.castSucc) (cv : ∀ j : Fin (m + 1), V j ⟶ C.left) (hcv0 : cv 0 = eqToHom hV0) (hcvstep : ∀ j : Fin m, v j ≫ cv j.castSucc = cv j.succ) (hcvlast : cv (Fin.last m) = eqToHom hVm ≫ h.left) (hvproper : ∀ j : Fin m, IsProper (v j)) (hvconnected : ∀ j : Fin m, GeometricallyConnected (v j)) (c : C ⟶ X) (w : W ⟶ Y) (nX : N ⟶ X) (nY : N ⟶ Y) (p : Y ⟶ X) (hp : w ≫ p = h ≫ c) (hpN : nY ≫ p = nX) (hpushC : IsPushout iC.left q.left c.left nX.left) (hpushW : IsPushout iW.left q.left w.left nY.left) (hpullC : IsPullback iC.left q.left c.left nX.left) (hpullW : IsPullback iW.left q.left w.left nY.left) [IsHProjective X.hom] [IsHProjective Y.hom] [IsFinite c.left] [IsFinite w.left] [Surjective c.left] [Surjective w.left] [IsClosedImmersion nX.left] [IsClosedImmersion nY.left] (hcompC : ∃ (UX : X.left.Opens) (UC : C.left.Opens), (UX : Set X.left) = (Set.range nX.left)ᶜ ∧ (UC : Set C.left) = (Set.range iC.left)ᶜ ∧ c.left ⁻¹ᵁ UX = UC ∧ IsIso (morphismRestrict c.left UX)) (hcompW : ∃ (UY : Y.left.Opens) (UW : W.left.Opens), (UY : Set Y.left) = (Set.range nY.left)ᶜ ∧ (UW : Set W.left) = (Set.range iW.left)ᶜ ∧ w.left ⁻¹ᵁ UY = UW ∧ IsIso (morphismRestrict w.left UY)) (hpushCbase : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), IsPushout ((Over.pullback g).map iC).left ((Over.pullback g).map q).left ((Over.pullback g).map c).left ((Over.pullback g).map nX).left) (hpushWbase : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), IsPushout ((Over.pullback g).map iW).left ((Over.pullback g).map q).left ((Over.pullback g).map w).left ((Over.pullback g).map nY).left) : IsProper h.left ∧ GeometricallyConnected h.left ∧ IsProper p.left ∧ GeometricallyConnected p.left ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), ConnectedSpace ↥(pullback X.hom g) → ConnectedSpace ↥(pullback Y.hom g)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e4931138",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read the node, the stmt_dep records, the module and the report. The item diff against side-live is only lean plus stmt_deps gaining the landed def-sfb-nodal-geometric-fibre-local-rings. Clause check: DVR; IsHProjective/Flat/LFP; nodal fibres (Nonempty, IsReduced, IsPureDimension 1, closed nonsmooth points with NodalFiber completion ≃+* Ω[[u,v]]/(uv)) with no connectedness assumed; finite étale B, N, q with degree two counted at geometric points; closed immersions into smoothLocus; hmarks; chain composites pinned by hcv0/hcvstep/hcvlast (m=0 gives h the identity); IsProper and GeometricallyConnected links; IsPushout and IsPullback squares; projective X, Y; finite surjective c, w; closed immersions nX, nY; complement isomorphisms via morphismRestrict on exact complement opens; pushouts stable under Over.pullback g; p fixed by hp/hpN. Conclusion has all clauses, and ConnectedSpace includes nonemptiness. Edge cases m=0, B=N=∅, disconnected fibres, any characteristic and Type u test fields are fine. No existing declaration clashes; statement verbatim; docstrings carry source, blueprint and six steps; sorry only; report sections present. No file changed, so no compile."
+ }
+}

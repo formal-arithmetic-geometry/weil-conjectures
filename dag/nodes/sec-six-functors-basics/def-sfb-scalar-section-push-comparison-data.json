@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-scalar-section-push-comparison-data",
+ "kind": "definition",
+ "title": "Fixed section pushforward comparison in scalar functor notation",
+ "status": "split",
+ "statement": "Let $R$ be a commutative condensed ring and $h:U\\to V$ a scheme morphism. Use the unbounded internal direct image $F_{h,R}$ of [def-sfb-internal-derived-scalar-comparisons], the localized section equivalences $\\bar E_{R,U},\\bar E_{R,V}$ of [def-pd-section-derived-tensor-data], and the specified section direct image $F^s_{h,R}$ and canonical derived pushforward realization of [def-pd-section-derived-realization]. Define $\\operatorname{scalarSectionPushComparison}(R,h):F_{h,R}\\bar E_{R,V}\\simeq\\bar E_{R,U}F^s_{h,R}$ (apply the left functor first) to be exactly that existing derived pushforward comparison, after unfolding the internal name $F$. There is no additional choice or compatibility theorem. Retain independent small pro-etale site object and morphism universes and arbitrary unbounded complexes.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "Paragraph (1), realization of the canonical scalar restriction/direct-image comparison. Stacks Tag 07A6; published ScalarGeometricExchangeRectangle.lean, scalarSectionPushComparison, a transparent alias of ModuleRingedComparison.derivedPushComparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarRestrictionPull|scalarRestrictionPush|scalarCoefficientPull|scalarTensorPull|sectionScalarRestriction|SectionTensorNormalized|scalarSectionPushComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived internal module scalar restriction pullback comparison and its right mate, restricted regular coefficient pullback, tensor pullback, section scalar tensor normalization and section pushforward realization",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.pushforward, PresheafOfModules.restrictScalarsObj, Derivation.restrictScalars, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar restriction pullback mate and tensor normalization under an internal module section equivalence",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "rg",
+   "query": "scalarRestrictionPull|scalarRestrictionPush|scalarCoefficientUnit|scalarCoefficientPull|scalarTensorPull|sectionScalarRestriction|sectionScalarTensor|sectionScalarCoefficient|SectionTensorNormalized|scalarSectionPushComparison in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search sectionScalarRestriction and scalarRestrictionPull",
+   "results": "No upstream definitions. Existing Sheaf definitions in InternalScalarMateProjection, InternalScalarPullbackNormalization and ScalarGeometricExchangeRectangle. DAG declaration-owner scan finds only theorem nodes, no definition owner for these exact names. Existing def-sfb-internal-section-scalar-pullback-comparison-data owns the other four section comparison declarations; it is cited, not duplicated. The similarly named quotient section predicate is in a distinct namespace and is a different notion.",
+   "date": "2026-10-23",
+   "verdict": "Add definition ownership records on unchanged published modules; no new Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-coefficient-square-normalization",
+  "date": "2026-10-23",
+  "group": "Q79"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "Paragraph (1), realization of the canonical scalar restriction/direct-image comparison. Stacks Tag 07A6; published ScalarGeometricExchangeRectangle.lean, scalarSectionPushComparison, a transparent alias of ModuleRingedComparison.derivedPushComparison.",
+   "via": [
+    "lem-sfb-flat-coefficient-square-normalization",
+    "lem-sfb-coefficient-push-filtered-legs"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarGeometricExchangeRectangle",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionPushComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionPushComparison"
+  ],
+  "statement": "def scalarSectionPushComparison\n    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj R] [IsCommMonObj R]\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]\n    {U V : Scheme.{u}} (h : U ⟶ V) :\n    F R h ⋙ ModuleRingedComparison.derivedFunctor R V ≅\n      ModuleRingedComparison.derivedFunctor R U ⋙\n        ModuleRingedComparison.derivedPushforward R h",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by immutable-head H2 review of d53b89647312. Plain definitions on the unchanged published module; no choice from a theorem, no moved or copied declaration. All listed helper definitions belong to this construction. The complete signatures and clause correspondence are in the worker report."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48f7da5cf",
+  "group": "Q79",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48f7da5cf",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of d53b8964. Lean file byte-identical to returned head; item node changes only stmt_deps/lean.note: the theorem stmt_deps lem-sfb-internal-scalar-mate-projection and lem-sfb-scalar-geometric-exchange-rectangle are replaced by three new existing:true def nodes (def-sfb-scalar-restriction-tensor-comparison-data owning scalarRestrictionPull/Push, scalarCoefficientUnit/Pull, scalarTensorPull; def-sfb-section-scalar-tensor-normalization-data owning sectionScalarRestriction/Tensor/Coefficient, SectionTensorNormalized; def-sfb-scalar-section-push-comparison-data owning scalarSectionPushComparison) plus existing def-sfb-internal-section-scalar-pullback-comparison-data, def-sfb-internal-derived-scalar-comparisons, def-pd-section-module-operations-data, def-pd-section-derived-tensor-data and def-pd-section-derived-realization; mate theorem kept in proof_deps. Verified against side-live modules: all plain defs with real bodies, statements verbatim, TeX matches bodies (b, mate d, v, rho, mu directions), fields complete, no competing def owner live, item still split, no cycle. Substance re-read: hypotheses no stronger, flatness/exact pullback/unit/d/theta=lambda/section-pinned d/final display all match the node; edge cases fine; sorry only; docstrings ok. Advisory: base-era scalarDerivedRestriction etc. owned by uncited def nodes; owned decls' docstrings name theorem nodes. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261024T015051-L-2318376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalar_geometric_exchange_rectangle"
+  ],
+  "sorry_after": []
+ }
+}

@@ -29,12 +29,11 @@ Results: local/builds/last.json, the log in local/build.log.
 
 Landings of a batch (tools/batch_land.py; the landing's record carries `batch`) were not compiled one by one on the
 server before they landed, so the build checks for them what that compile checked, after `lake build` has succeeded and
-before anything is published (batch_checks): every file of theirs compiles alone within SHEAF_FILE_TIMEOUT, no
-declaration of their modules uses an axiom beyond propext, Classical.choice and Quot.sound, and none has a `sorry` the
-delivery's text check did not see. The time is the one Lake prints for the file in this build; only a file over the
-limit there (the build runs many files at once, so its time is an upper bound) is compiled once more, alone, with
-tools/lean_file.sh, and fails when that reaches the limit. The axioms and the sorries are read from the compiled modules
-by one probe file that imports them. A finding makes the build red, with the module among the failing ones and the
+before anything is published (batch_checks): no declaration of their modules uses an axiom beyond propext,
+Classical.choice and Quot.sound, and none has a `sorry` the delivery's text check did not see. Their compile time is not
+checked here (2026-10-25, the human: the delivery's own single-file compile is enough; the 60 s re-time at landing ran
+at nice 19 under full load and took out two deliveries that compile). The axioms and the sorries are read from the
+compiled modules by one probe file that imports them. A finding makes the build red, with the module among the failing ones and the
 finding in `batch_checks` of last.json.
 Options (coord/sheaf.env): SHEAF_BUILD_THREADS (default 3), SHEAF_BUILD_POLL seconds (10).
 The packages in lean/.lake/packages are shared with the copy through a link and must never be rebuilt from it: the
@@ -63,6 +62,8 @@ CFG = li.config()
 CLONE = ld.LOCAL / "buildtree"
 LOG = ld.B / "build.log"
 THREADS = CFG.get("SHEAF_BUILD_THREADS", "3")
+FAILFAST = CFG.get("SHEAF_BUILD_FAILFAST", "1") == "1"
+FAILFAST_GRACE = int(CFG.get("SHEAF_BUILD_FAILFAST_GRACE", "90"))
 POLL = float(CFG.get("SHEAF_BUILD_POLL", "10"))
 TOOLS = pathlib.Path(__file__).resolve().parent
 LOCK_SECS = float(CFG.get("SHEAF_BUILD_LOCK_TIMEOUT", "900"))  # wait for a running merge to finish
@@ -72,7 +73,99 @@ def run(cmd, **kw):
     return subprocess.run(cmd, capture_output=True, text=True, **kw)
 
 
-def commit_tree(inflight: list[dict]):
+def superseded(inflight: list[dict], included: list[dict]) -> set:
+    """(record id, path) of the held-back files that a newer included landing wrote. 2026-10-26: a retry holds back the
+    landings after the red build; their previous version of a file was put back even when a newer included take-out
+    (tools/red_rework.py, group L) had moved the file to quarantine/, so the retry built the importer of a removed module
+    again ("bad import" UniformConstructibleExt, retry 5 of 13:20:40). The newer included landing's version stays."""
+    last = {}
+    for r in included:
+        for f in r.get("files") or []:
+            last[f["path"]] = max(last.get(f["path"], 0), r.get("seq") or 0)
+    # 2026-10-27: not for the root files that only list imports: an included landing's version of them is written on
+    # top of the held-back landing's import lines (retry 2 of 16:26:22: TargetsCheck kept the line of
+    # WeilConjectures.PoincareDuality.Poincare, whose held-back restore was taken out of the build copy); for those the
+    # held-back version is put back as before and clean_root_imports() drops the lines of modules not in the copy
+    return {(r["id"], f["path"]) for r in inflight for f in r.get("files") or []
+            if last.get(f["path"], 0) > (r.get("seq") or 0) and f["path"] not in ROOT_FILES}
+
+
+ROOT_FILES = ("WeilConjectures.lean", "TargetsCheck.lean")
+
+
+def clean_root_imports() -> None:
+    """In the build copy, the root files that only list imports lose the lines of project modules the copy does not
+    have (a held-back or taken-out module): they would fail the build with "bad import" / "no such file"."""
+    for rel in ROOT_FILES:
+        f = CLONE / rel
+        if not f.is_file():
+            continue
+        t = f.read_text(errors="ignore"); keep, gone = [], []
+        for line in t.split("\n"):
+            m = re.match(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)\s*$", line)
+            if m and m.group(1).startswith(("Sheaf.", "WeilConjectures.")) and not _clone_file(m.group(1)):
+                gone.append(m.group(1)); continue
+            keep.append(line)
+        if gone:
+            f.write_text("\n".join(keep))
+            print(f"{ld.now()} build copy: {rel} without the import line(s) of {len(gone)} module(s) not in the copy: "
+                  f"{' '.join(gone[:6])}", flush=True)
+
+
+def _clone_file(m: str) -> bool:
+    p = CLONE.joinpath(*m.split(".")).with_suffix(".lean")
+    return p.is_file() or CLONE.joinpath("Comparator", *m.split(".")).with_suffix(".lean").is_file()
+
+
+def blocked_targets() -> list[str]:
+    """2026-10-26 (the human): target libraries blocked by a quarantine (tools/red_rework.py) are left out until every
+    module they need is back; then local/builds/blocked-targets.json is removed and everything builds again. [] = the
+    default targets. 2026-10-27 00:30: computed on the BUILD COPY (local/buildtree), not on lean/: a retry holds back
+    landings, so WeilConjectures.Statement was in lean/ (a held-back restore) but not in the build copy; the block was
+    released and Solution failed with "no such file" (retries 1-3 of 16:26:22). Also run before the red-tree cache
+    lookup, and its result is part of the cache key (source_id), so a cached red of the unblocked targets is not reused
+    once the library is blocked."""
+    bf = ld.B / "blocked-targets.json"
+    bt = ld.read_json(bf) or {}
+    try:
+        for lib, rel in (("Solution", "Comparator/Weil/Solution.lean"), ("SheafChallenge", "Challenge.lean")):
+            rf = CLONE / rel
+            if not rf.is_file():
+                continue
+            seen, st, miss = set(), list(li.imports_of(rf.read_text(errors="ignore"))), []
+            while st:
+                m = st.pop()
+                if m in seen or not m.startswith(("Sheaf.", "WeilConjectures.", "Comparator.", "Weil.")):
+                    continue
+                seen.add(m)
+                fm = CLONE.joinpath(*m.split(".")).with_suffix(".lean")
+                if not fm.is_file():
+                    fm = CLONE.joinpath("Comparator", *m.split(".")).with_suffix(".lean")
+                if fm.is_file():
+                    st.extend(li.imports_of(fm.read_text(errors="ignore")))
+                else:
+                    miss.append(m)
+            if miss:
+                bt.setdefault("libs", {})[lib] = sorted(set(bt.get("libs", {}).get(lib, [])) | set(miss))
+                bt.setdefault("since", ld.now())
+                ld.write_json(bf, bt)
+    except Exception as e:  # noqa: BLE001
+        print(f"{ld.now()} blocked-target scan failed: {e!r}", flush=True)
+    if not bt.get("libs"):
+        return []
+    libs = {lib for lib, mods in bt["libs"].items() if any(not _clone_file(m) for m in mods)}
+    if not libs:
+        bf.unlink(missing_ok=True)
+        print(f"{ld.now()} blocked target libraries released: their modules are back", flush=True)
+        return []
+    m_ = re.search(r'^defaultTargets\s*=\s*\[([^\]]*)\]', (CLONE / "lakefile.toml").read_text(), re.M)
+    targets = [x for x in re.findall(r'"([^"]+)"', m_.group(1)) if x not in libs] if m_ else []
+    print(f"{ld.now()} target libraries blocked by quarantined modules (rework first lane): "
+          f"{' '.join(sorted(libs))}; building {' '.join(targets)}", flush=True)
+    return targets
+
+
+def commit_tree(inflight: list[dict], skip: set = frozenset()):
     """Commit the repository holding the Lean sources, with the previous version of every file of the landings held
     back (newest first, so that the oldest previous version of a file is the one that stays). Called by snapshot()
     with coord/.merge.lock held."""
@@ -83,6 +176,8 @@ def commit_tree(inflight: list[dict]):
     run(["git", "add", "-A"], cwd=repo)
     for r in inflight:
         for f in r["files"]:
+            if (r["id"], f["path"]) in skip:
+                continue
             try:
                 rel = str((li.LEAN / f["path"]).relative_to(repo))
             except ValueError:
@@ -194,7 +289,9 @@ def _snapshot(allowed):
         waiting = ld.records(ld.REQUESTS)
         held = [] if allowed is None else [r for r in waiting if r["id"] not in allowed]
         inflight = sorted(ld.records(ld.INFLIGHT) + held, key=lambda r: r["id"], reverse=True)
-        commit = commit_tree(inflight)
+        _hid = {r["id"] for r in held}
+        skip = superseded(held, [r for r in waiting if r["id"] not in _hid]) if held else set()
+        commit = commit_tree(inflight, skip)
         CLONE.mkdir(parents=True, exist_ok=True)
         r = run(["rsync", "-a", "-i", "--delete", "--exclude=/.lake", "--exclude=/.sandbox", "--exclude=/.quarantine",
                  "--exclude=/.git", f"{li.LEAN}/", f"{CLONE}/"])
@@ -203,6 +300,8 @@ def _snapshot(allowed):
         changed = any(x and not x.startswith(".d") for x in r.stdout.split("\n"))
         for rec in inflight:
             for f in rec["files"]:
+                if (rec["id"], f["path"]) in skip:
+                    continue
                 dst, bk = CLONE / f["path"], ld.BACKUP / rec["id"] / f["path"]
                 if f["existed"]:
                     shutil.copy2(bk, dst)
@@ -240,11 +339,48 @@ def failing_modules(log: str) -> list[str]:
     return sorted(set(out))
 
 
-def suspects(failing: list[str], included: list[dict]) -> list[dict]:
+def clone_imports() -> dict:
+    """module -> its imports, for the sources of the build copy (exactly what this build compiled)."""
     imports = {}
     for d in li.library_dirs():
         for p in (CLONE / d).rglob("*.lean"):
             imports[".".join(p.relative_to(CLONE).with_suffix("").parts)] = li.imports_of(p.read_text(errors="ignore"))
+    for p in CLONE.glob("*.lean"):
+        imports[p.stem] = li.imports_of(p.read_text(errors="ignore"))
+    return imports
+
+
+def save_graph(commit, graph) -> None:
+    """The import graph of the build copy, for tools/batch_land.py land_rest (local/builds/last-graph.pkl)."""
+    import pickle
+    tmp = ld.B / "last-graph.pkl.tmp"
+    with open(tmp, "wb") as fh:
+        pickle.dump({"commit": commit, "graph": graph}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+    os.replace(tmp, ld.B / "last-graph.pkl")
+
+
+def clean_landings(included, failing, text, checks, graph):
+    """2026-10-25 (the human: each build finds what fails, those go out, the rest lands from that same build): the
+    landings of a red build none of whose modules failed or imports (transitively) a failing module; they compiled in
+    this build. Their batch checks (probe, time) run here as for a green build. Returns (ids, checks, failing)."""
+    if not failing or "build cycle detected" in text or not re.search(r"Some required \w+ logged failures", text):
+        return [], checks, failing          # an incomplete or unreadable red: nothing lands from it
+    def ok(failing):
+        blocked = set(failing) | li.downstream(set(failing), graph)
+        return [r for r in included if not ({f["module"] for f in r["files"]} & blocked)]
+    cand = ok(failing)
+    if cand and not checks:
+        more = batch_checks(cand, text)
+        if more:
+            checks = more
+            failing = sorted(set(failing) | {c["module"] for c in more})
+            cand = ok(failing)
+    return sorted(r["id"] for r in cand), checks, failing
+
+
+def suspects(failing: list[str], included: list[dict], imports: dict | None = None) -> list[dict]:
+    if imports is None:
+        imports = clone_imports()
     memo: dict = {}
     out = []
     for r in included:
@@ -325,18 +461,9 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
     if not mods:
         return []
     import stage3_delivery as s3
-    limit = float(CFG.get("SHEAF_FILE_TIMEOUT", "60"))
+    # 2026-10-25 (the human): no 60 s re-time at landing; the delivery's own single-file compile already met the
+    # limit (a re-time under full load at nice 19 took out files that compile in 15-41 s)
     out = []
-    for m, secs in sorted(build_times(log).items()):
-        if m in mods and secs > limit:
-            env = {k: v for k, v in os.environ.items() if k != "SHEAF_GROUP"}
-            alone = run(["bash", str(TOOLS / "lean_file.sh"), str(CLONE / mods[m][1])],
-                        env=dict(env, SHEAF_TREE=str(CLONE), SHEAF_FILE_TIMEOUT=f"{limit:g}"))
-            if alone.returncode == 124:
-                out.append({"module": m, "kind": "overtime", "landing": mods[m][0]["id"],
-                            "message": f"{m} took {secs:g} s in the global build and does not compile alone within "
-                                       f"{limit:g} s, the limit for one file (SHEAF_FILE_TIMEOUT; tools/lean_file.sh): the "
-                                       "cause is a definition the file uses; find it and change it."})
     todo = sorted(m for m in mods if m not in {c["module"] for c in out})
     res = run_probe(todo) if todo else {}
     alone = [m for m in todo if not res[m]["ran"]] if len(todo) > 1 else []
@@ -380,7 +507,7 @@ def publish():
     try:
         dst = li.LEAN / ".lake" / "build"
         dst.mkdir(parents=True, exist_ok=True)
-        r = run(["rsync", "-a", "--delete", "--delay-updates", f"{CLONE / '.lake' / 'build'}/", f"{dst}/"])
+        r = run(["rsync", "-a", "--delete", "--delay-updates", "--exclude=/ir", f"{CLONE / '.lake' / 'build'}/", f"{dst}/"])   # C output: nobody compiles native code from the published copy
         if r.returncode != 0:
             raise SystemExit("publishing failed: " + r.stderr.strip())
         lib = dst / "lib" / "lean"
@@ -467,6 +594,12 @@ def main() -> int:
             if not last or last["result"] != "red":
                 print("--retry follows a red build; the last build was not red."); return 2
             allowed = set(last.get("included", [])) | {r["id"] for r in ld.records(ld.REQUESTS) if r["group"] == "M"}
+            # 2026-10-25 (the human: a red round is retried on the same snapshot until green): the landings the red
+            # handling itself wrote are take-outs, not new work: the rework move of a failing module no landing wrote
+            # (tools/red_rework.py), the public imports the compiler named, an import cycle broken. Held back, they
+            # would put the failing module back into the retry.
+            allowed |= {r["id"] for r in ld.records(ld.REQUESTS) if r["group"] == "L" and str(r.get("time", "")) >= str(last.get("time", ""))
+                        and str(r.get("note", "")).startswith(("red build", "break import cycle"))}
         if only is not None:
             allowed = only
         snap = snapshot(allowed)
@@ -480,13 +613,27 @@ def main() -> int:
             if wait and ld.records(ld.REQUESTS):
                 continue
             print("Nothing landed since the last green build."); return 0
-        source_id = source_fingerprint(CLONE)
+        clean_root_imports()
+        targets = blocked_targets()
+        source_id = source_fingerprint(CLONE) + (('|targets:' + ','.join(targets)) if targets else '')
         red_trees = ld.read_json(ld.B / 'red-trees.json') or {}
         cached = red_trees.get(source_id)
         if cached and cached.get('compiler_red'):
             result = dict(cached['result'], time=ld.now(), commit=commit, seconds=0,
                           included=sorted(r['id'] for r in included),
                           suspects=suspects(cached['result'].get('failing', []), included))
+            # 2026-10-25: the clean landings of this snapshot (same sources as the cached red, which ran to the end):
+            # none of their modules fails or imports a failing module; tools/batch_land.py land_rest lands them
+            result['clean'] = []
+            if isinstance(cached['result'].get('clean'), list) and result.get('failing'):
+                try:
+                    graph = clone_imports()
+                    blocked = set(result['failing']) | li.downstream(set(result['failing']), graph)
+                    result['clean'] = sorted(r['id'] for r in included if not ({f['module'] for f in r['files']} & blocked))
+                    save_graph(commit, graph)
+                except Exception as e:   # noqa: BLE001
+                    result['clean'] = []
+                    print('clean landings not computed:', repr(e)[:300], flush=True)
             ld.write_json(ld.B / 'last.json', result)
             alert((included[0].get('batch') if included else None), ' '.join(result.get('failing', [])),
                   'same red sources requested; compile skipped', 'batch recovery or maintainer source repair')
@@ -510,11 +657,48 @@ def main() -> int:
                                               "has_interface": has_interface, "pid": os.getpid(),
                                               "mode": "retry" if retry else "only" if only is not None else ""})
         with open(LOG, "w") as log:
-            proc = subprocess.Popen(["nice", "-n", "0", "lake", "build"], cwd=CLONE, stdout=log, stderr=subprocess.STDOUT,
+            # 2026-10-26 (the human): the global build runs with transparent huge pages off as the single-file compiles do
+            # (tools/thp-off, PR_SET_THP_DISABLE, inherited by lake's lean processes)
+            thp = [str(pathlib.Path(__file__).resolve().parent / "thp-off")] if os.access(pathlib.Path(__file__).resolve().parent / "thp-off", os.X_OK) else []
+            # 2026-10-26 (the human): target libraries blocked by a quarantine (tools/red_rework.py) are left out until
+            # every module they need is back in the library; then the file is removed and everything builds again
+            # target libraries: blocked_targets(), computed on the build copy before the red-tree cache lookup
+            proc = subprocess.Popen(thp + ["nice", "-n", "0", "lake", "build"] + targets, cwd=CLONE, stdout=log, stderr=subprocess.STDOUT,
                                     env=dict(os.environ, LEAN_NUM_THREADS=THREADS), start_new_session=True)
             restart = False
+            failed_at, seen = None, 0
+            # 2026-10-27 (the human): a module that fails while Lake still runs is dispatched at once (early_poll)
+            early = {"pos": 0, "wait": [], "sent": set(), "procs": [], "commit": commit,
+                     "bt": (ld.read_json(ld.B / "current.json") or {}).get("time"),
+                     "on": CFG.get("SHEAF_EARLY_RED", "1") == "1" and only is None}
             while proc.poll() is None:
                 time.sleep(POLL)
+                if early["on"]:
+                    try:
+                        early_poll(early)
+                    except Exception as e:  # noqa: BLE001  (never let the early dispatch touch the build)
+                        print(f"{ld.now()} early red dispatch: {e!r}"[:300], flush=True)
+                # 2026-10-24 (the human: report a failure at once, not with the last module of a 1-2 h build): the
+                # first failing module stops the build after FAILFAST_GRACE seconds (failures of the same moment come
+                # with it); the red is handled at once (tools/batch_land.py mechanical_red) and the next build goes on
+                # from everything compiled so far (Lake keeps it), so a red costs little more than one build in all.
+                if FAILFAST:
+                    try:
+                        with open(LOG, errors="ignore") as fh:
+                            fh.seek(seen); chunk = fh.read(); seen = fh.tell()
+                    except OSError:
+                        chunk = ""
+                    if failed_at is None and re.search(r"^\u2716 \[", chunk, re.M):
+                        failed_at = time.time()
+                        print(f"{ld.now()} a module failed: the build stops in {FAILFAST_GRACE} s", flush=True)
+                    if failed_at is not None and time.time() - failed_at >= FAILFAST_GRACE:
+                        os.killpg(proc.pid, signal.SIGTERM)
+                        try:
+                            proc.wait(timeout=30)
+                        except subprocess.TimeoutExpired:
+                            os.killpg(proc.pid, signal.SIGKILL); proc.wait()
+                        print(f"{ld.now()} build stopped after the first failure(s) (fail-fast)", flush=True)
+                        break
                 if has_interface or retry or only is not None:
                     continue
                 new = [r for r in ld.records(ld.REQUESTS) if r["id"] not in ids and r["kind"] == "interface"]
@@ -542,6 +726,84 @@ def main() -> int:
             ld.write_json(ld.B / "current.json", dict(cur, finished=ld.now()))
 
 
+ERRDIR = li.ROOT / "coord" / "build-errors"
+
+
+def early_poll(st: dict) -> None:
+    """2026-10-27 (the human: a module failing in the running build goes to the queue at once, not when a 40-minute
+    build ends): reads the new complete lines of the log; a module whose `✖ [n/N] ... M` line appeared in the previous
+    poll (its job's messages are printed by then) goes to tools/early_red.py dispatch, a detached process at nice 10
+    (build-errors file, the writer's return or a rework item in the queue; it never touches lean/). Each module once."""
+    for p in list(st["procs"]):
+        if p.poll() is not None:
+            st["procs"].remove(p)
+    try:
+        with open(LOG, "rb") as fh:
+            fh.seek(st["pos"]); data = fh.read()
+    except OSError:
+        return
+    found = []
+    k = data.rfind(b"\n")
+    if k >= 0:
+        st["pos"] += k + 1
+        found = [m for m in re.findall(r"^\u2716 \[\d+/\d+\] \w+ (\S+)", data[:k + 1].decode(errors="ignore"), re.M)
+                 if m not in st["sent"]]
+    send = [m for m in dict.fromkeys(st["wait"]) if m not in st["sent"]]
+    st["wait"] = found
+    if not send or not st.get("bt"):
+        return
+    st["sent"].update(send)
+    with open(ld.B / "early-red.log", "a") as out:
+        st["procs"].append(subprocess.Popen(
+            ["nice", "-n", "10", sys.executable, str(TOOLS / "early_red.py"), "dispatch", "--build-time", st["bt"],
+             "--commit", str(st["commit"] or "-"), *send], cwd=li.ROOT, stdout=out, stderr=subprocess.STDOUT,
+            stdin=subprocess.DEVNULL, start_new_session=True))
+    print(f"{ld.now()} failing while the build runs, dispatched now (tools/early_red.py): {' '.join(send[:8])}", flush=True)
+
+
+def save_errors(text: str, failing: list[str], commit) -> None:
+    """2026-10-23 (the human): whoever repairs a failing module gets the compiler's full message, not only its name.
+    Lake prints each module's job as one block (`✖ [i/N] Building M` and its output up to the next job line): it is
+    kept in coord/build-errors/<module>.txt (the newest failure of that module; trace lines dropped)."""
+    want = set(failing)
+    blocks, cur = {}, None
+    for line in text.split("\n"):
+        m = re.match(r"^[✖✔⚠] \[\d+/\d+\] \S+ (\S+)", line)
+        if m:
+            cur = m.group(1) if line.startswith("✖") and m.group(1) in want else None
+            if cur is not None:
+                blocks.setdefault(cur, [])
+            continue
+        if cur is not None and not line.startswith("trace:"):
+            blocks[cur].append(line)
+    ERRDIR.mkdir(parents=True, exist_ok=True)
+    for mod, lines in blocks.items():
+        body = "\n".join(lines).strip()
+        if len(body) > 20000:
+            body = body[:20000] + "\n… (cut)"
+        (ERRDIR / f"{mod}.txt").write_text(f"# global build {ld.now()} of {str(commit)[:10]}: {mod} failed\n{body}\n")
+
+
+def corrupt_artifacts(text: str) -> list[str]:
+    """The compiled files of the build copy that Lean could not read (`failed to read file '….olean'`): each is deleted
+    with the other files of its module (.ilean, .trace, .hash, …) so that Lake rebuilds it. Only files under
+    local/buildtree/.lake/build; a package's file (shared, never rebuilt from the copy) is only reported."""
+    out = []
+    root = (CLONE / ".lake" / "build").resolve()
+    for p in sorted(set(re.findall(r"failed to read file '([^']+\.olean)'", text))):
+        f = pathlib.Path(p).resolve()
+        if root not in f.parents:
+            print(f"note: unreadable compiled file outside the build copy, not deleted: {p}", flush=True)
+            continue
+        stem = f.name[:-len(".olean")]
+        for g in f.parent.glob(stem + ".*"):
+            if g.is_file() and g.name.split(".")[0] == stem.split(".")[0]:
+                g.unlink(missing_ok=True)
+        out.append(str(f))
+        print(f"deleted the unreadable compiled file {f} and its module's other files", flush=True)
+    return out
+
+
 def finish_result(included, commit, text, elapsed, preempted, source_id, red_trees, *, compiler_ok):
     """Publish or record one live-loop result, including a probe-only record retry."""
     ids = {r['id'] for r in included}
@@ -567,20 +829,40 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
         clear_alert()
         print(f"GREEN in {result['seconds']} s; {len(ids)} landing(s) verified; compiled files published.")
         return 0
+    if not built and corrupt_artifacts(text):
+        # 2026-10-25: a compiled file Lean cannot read (left truncated by a full disk or a killed write) says nothing
+        # about the sources: it is deleted from the build copy and rebuilt; nothing recorded
+        print("INFRASTRUCTURE failure (unreadable compiled files deleted, they are rebuilt); nothing recorded.", flush=True)
+        return 1
     if not built and re.search(r"no space left on device|resource exhausted|Cannot allocate memory|out of memory", text):
         # an infrastructure failure says nothing about the sources: not cached, not attributed, rebuilt by the loop
         print("INFRASTRUCTURE failure (disk or memory); nothing recorded, the same sources will be rebuilt.", flush=True)
         time.sleep(120)
         return 1
     failing = sorted(set(failing_modules(text)) | {c["module"] for c in checks})
-    sus = suspects(failing, included)
-    result.update(result="red", source_fingerprint=source_id, failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks)
+    graph, clean = clone_imports(), []
+    try:
+        clean, checks, failing = clean_landings(included, failing, text, checks, graph)
+        if checks:
+            errors = errors + ["error: " + c["message"] for c in checks if "error: " + c["message"] not in errors]
+        save_graph(commit, graph)
+    except Exception as e:   # noqa: BLE001
+        clean = []
+        print("clean landings not computed:", repr(e)[:300], flush=True)
+    try:
+        save_errors(text, failing, commit)
+    except Exception as e:   # noqa: BLE001  (never let the error copy stop the result)
+        print("save_errors failed:", repr(e)[:200], flush=True)
+    sus = suspects(failing, included, graph)
+    result.update(result="red", source_fingerprint=source_id, failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks,
+                  clean=clean)
     ld.write_json(ld.B / "last.json", result)
     red_trees[source_id] = {'compiler_red': compiler_red, 'result': result}
     ld.write_json(ld.B / 'red-trees.json', red_trees)
     if not sus or any(c['kind'] == 'probe' and not c.get('landing') for c in checks):
         alert((included[0].get('batch') if included else None), ' '.join(failing), 'unattributed red/probe failure', 'maintainer diagnosis or batch withdrawal')
-    print(f"RED in {result['seconds']} s; nothing published. Failing: {' '.join(failing[:12]) or '-'}")
+    print(f"RED in {result['seconds']} s; nothing published. Failing: {' '.join(failing[:12]) or '-'}; "
+          f"{len(clean)} of {len(ids)} landing(s) compiled cleanly and land once the failures are taken out (tools/batch_land.py land_rest)")
     for x in errors[:12]:
         print("  " + x[:300])
     if sus:

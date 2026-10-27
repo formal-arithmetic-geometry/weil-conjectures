@@ -1,0 +1,120 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "date": "2026-10-26",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-ordinary-direct-system-core-components",
+   "place": "Constructing the semilinear horizontal direct-image maps by transposing the inverse-image restriction comparison.",
+   "via": [
+    "lem-coef-ordinary-direct-system-core-components",
+    "lem-coef-ordinary-direct-system-core"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized adjunctions for sheaves of modules give a natural isomorphism between right adjoints and restriction of scalars",
+   "results": "{\"t\": \"2026-10-26T13:47:13Z\", \"tool\": \"leansearch\", \"query\": \"Normalized adjunctions for sheaves of modules give a natural isomorphism between right adjoints and restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.restrictScalars\"], \"digest\": \"97db42cd7a70cec6\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned module restriction adjunctions do not provide the normalized comparison between the supplied sheaf adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint commutes with restriction of scalars when normalized underlying adjunctions agree",
+   "results": "{\"t\": \"2026-10-26T13:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint commutes with restriction of scalars when normalized underlying adjunctions agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.extendRestrictScalarsAdj\", \"Rep.instIsRightAdjointActionModuleCatRes\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\"], \"digest\": \"09582123c13eb852\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned module restriction adjunctions do not provide the normalized comparison between the supplied sheaf adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*restrictScalars|restrictScalars.*rightAdjoint|normalized_right_restriction",
+   "results": "{\"t\": \"2026-10-26T13:46:53Z\", \"tool\": \"grep\", \"query\": \"rightAdjoint.*restrictScalars|restrictScalars.*rightAdjoint|normalized_right_restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"b3e99170a2310c71\"}; local rg of lean/WeilConjectures and lean/Sheaf for normalized_right_restriction, directRestrictions_exists, and rightAdjoint/restrictScalars in either order found no match.",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned module restriction adjunctions do not provide the normalized comparison between the supplied sheaf adjoints"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": null,
+ "id": "lem-coef-ordinary-direct-restriction-comparison",
+ "kind": "statement",
+ "title": "Normalized direct-image coefficient-restriction comparison",
+ "statement": "For the coefficient systems of [def-coef-semilinear-system-models] and the algebraic inverse images I_n of [lem-coef-ordinary-inverse-system], suppose the adjacent coefficient squares commute. Let uInv preserve finite limits and admit right adjoint uPush. Suppose each I_n.modules has right adjoint V_n, and supplied isomorphisms eV_n identify the underlying sheaf of V_n(N) with uPush of the underlying sheaf of N, compatibly with the supplied Hom adjunction as in [lem-coef-normalized-module-adjunction]. For every n ≤ m there is a natural isomorphism res(F_m → F_n) ⋙ V_m ≅ V_n ⋙ res(B_m → B_n), whose underlying map composed with eV_n is eV_m of the scalar-restricted object.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-normalized-module-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, direct images of modules and the normalized transpose, applied to coefficient restriction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7: the right-adjoint restriction map is the transpose of the restricted counit."
+ },
+ "proof": [
+  {
+   "text": "Iterate the adjacent ring square by forming the natural transformation of the ring sequences. Use the existing inverse-image scalar-restriction comparison at every n ≤ m.",
+   "uses": [
+    "lem-pur-inverse-image-scalar-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the forward inverse-image comparison at V_n(N) with the restricted counit, then transpose at m. The normalized Hom equations and naturality identify its underlying map with eV_n followed by the inverse of eV_m. Underlying sheaves reflect isomorphisms, so the transposed map is invertible. Its inverse gives the required restriction comparison. Its underlying normalization and faithfulness prove naturality, and hence the natural isomorphism.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-inverse-image-scalar-restriction-comparison",
+  "def-coef-semilinear-system-models"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryDirectRestrictions",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryDirectRestrictions.lean",
+  "declaration": "WeilConjectures.SemilinearSections.directRestrictions_exists",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.DirectRestrictions",
+   "WeilConjectures.SemilinearSections.directRestrictions_exists"
+  ],
+  "statement": "theorem directRestrictions_exists [PreservesFiniteLimits uInv]\n    (hI : ∀ n,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n))\n    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adjSet : uInv ⊣ uPush)\n    (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅\n      underlying.{c, v, r} J' (F n) ⋙ uPush)\n    (ha : ∀ n (M : Mod.{c, v, max c v r} J (B n))\n      (N : Mod.{c, v, max c v r} J' (F n)) (f : (I n).modules.obj M ⟶ N),\n      (underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N f) ≫ (eV n).hom.app N =\n        adjSet.homEquiv _ _ ((I n).moduleUnderlying.inv.app M ≫\n          (underlying.{c, v, r} J' (F n)).map f)) :\n    Nonempty (DirectRestrictions.{c, v, r} J B τ J' F σ V uPush eV)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "independent cc review: delivered ed7db1fc913b Lean (4 modules) and 4 node files vs clone sheaf-dag nodes and change record; unchanged parent/target statements diffed; direct importer GeometricOrdinaryRealization compiled against delivered modules (exit 0, 17.8 s); #print axioms clean"
+ }
+}

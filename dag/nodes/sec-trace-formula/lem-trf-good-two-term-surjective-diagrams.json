@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-good-two-term-surjective-diagrams",
+ "kind": "statement",
+ "title": "Surjective good diagrams and their fibre-product composition",
+ "statement": "Let $A$ be a commutative ring. Call an integer cochain complex good if it is zero outside degrees $-1,0$ and its two terms are direct summands of finite free $A$-modules [def-weil-pbc-projective-module]. A chain map is a quasi-isomorphism if it induces isomorphisms on all $H^i=\\ker(d^i)/\\operatorname{im}(d^{i-1})$ [def-weil-abstract-derived-category]; a homotopy $f\\simeq g$ means $f-g=dh+hd$ with $h$ of degree $-1$. Every quasi-isomorphism $a:P\\to Q$ between good complexes has a good diagram $P\\xleftarrow{b}M\\xrightarrow{c}Q$, meaning that $b,c$ are degreewise surjective quasi-isomorphisms and $c\\simeq ab$. More specifically, for every finite free surjection $p:F\\to Q^{-1}$, such a diagram is given by $M=[P^{-1}\\oplus F\\xrightarrow{d_P\\oplus1}P^0\\oplus F]$, $b$ the projection, $c^{-1}(x,f)=a^{-1}(x)+p(f)$, and $c^0(x,f)=a^0(x)+d_Qp(f)$. Moreover, for degreewise surjective quasi-isomorphisms $u:M\\to Q$ and $v:N\\to Q$ between good complexes, their termwise fibre product $M\\times_QN$ is good and both projections are degreewise surjective quasi-isomorphisms. Consequently diagrams for $a:P\\to Q$ and $a':Q\\to R$ compose by this fibre product to a good diagram for $a'a$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM (lemma-determinant-two-term-complexes), existence of good diagrams and the fibre product M_123 in the composition paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free surjection $p:F\\to Q^{-1}$: the projection from a finite free module having $Q^{-1}$ as a direct summand does this. Fix any such $p$. In each degree, $P^i\\oplus F$ is a direct summand of a finite free module: take the direct sum of the given inclusion and retraction for $P^i$ with the identity of $F$. Thus the displayed $M$, with $d_M(x,f)=(d_Px,f)$, is good. The projection $b$ is a surjective chain map. Its cycles in degree $-1$ are exactly $(x,0)$ with $d_Px=0$, and $\\operatorname{im}(d_M)=\\operatorname{im}(d_P)\\oplus F$. Hence $H^{-1}(b)$ and $H^0(b)$ are isomorphisms; all other cohomology groups vanish.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "The prescribed $c$ is a chain map since $d_Q(a^{-1}x+p(f))=a^0d_Px+d_Qp(f)=c^0d_M(x,f)$. Define $h^0:M^0\\to Q^{-1}$ by $h^0(x,f)=p(f)$, with all other components zero. In degree $-1$, $(c-ab)^{-1}(x,f)=p(f)=h^0d_M(x,f)$; in degree $0$, $(c-ab)^0(x,f)=d_Qp(f)=d_Qh^0(x,f)$. Thus $c-ab=dh+hd$. The cited homotopy-invariance statement gives $H^i(c)=H^i(a)H^i(b)$, an isomorphism. Therefore $c$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "The map $c^{-1}$ is surjective because $p$ is. For any $y\\in Q^0$, surjectivity of $H^0(a)$ supplies $x\\in P^0$ and $z\\in Q^{-1}$ with $y=a^0x+d_Qz$. Choose $f\\in F$ with $p(f)=z$; then $c^0(x,f)=y$. Outside these two degrees the target is zero. Consequently both legs are degreewise surjective quasi-isomorphisms and the homotopy in step 2 makes this a good diagram for $a$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "For the given $u:M\\to Q$, $v:N\\to Q$, put $B^i=\\{(m,n)\\in M^i\\oplus N^i\\mid u^im=v^in\\}$ with differential $(d_M,d_N)$; the chain-map equations show that it preserves this submodule. Both projections are surjective, by surjectivity of the opposite leg. Since $Q^i$ is projective, the cited splitting statement gives a section $s_i$ of $v^i$ and a retraction $N^i\\to\\ker(v^i)$. Thus $\\ker(v^i)$ is a direct summand of $N^i$, hence of a finite free module by composing the inclusions and retractions. The mutually inverse maps $(m,k)\\mapsto(m,s_i(u^im)+k)$ and $(m,n)\\mapsto(m,n-s_i(u^im))$ identify $B^i$ with $M^i\\oplus\\ker(v^i)$, again a direct summand of a finite free module. Hence $B$ is good.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-ses-projective-quotient-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "Write $K^{-1}=\\ker(v^{-1})$, $K^0=\\ker(v^0)$. The restricted differential $d_K:K^{-1}\\to K^0$ is injective: a cycle in its kernel is a degree $-1$ cohomology class killed by the injective $H^{-1}(v)$, and there are no degree $-1$ boundaries. For $k\\in K^0$, injectivity of $H^0(v)$ gives $n\\in N^{-1}$ with $d_Nn=k$. Now $v^{-1}n$ is a cycle of $Q$; surjectivity of $H^{-1}(v)$ gives a cycle $z\\in N^{-1}$ with $v^{-1}z=v^{-1}n$ (again there are no boundaries in degree $-1$). Therefore $n-z\\in K^{-1}$ maps to $k$. This proves that $d_K$ is bijective.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "For $\\pi_M:B\\to M$, every cycle $m\\in M^{-1}$ has a lift $(m,n)\\in B^{-1}$. Its differential is $(0,d_Nn)$ with $d_Nn\\in K^0$. By step 5 subtract $(0,k)$ with $d_Kk=d_Nn$, obtaining a cycle lifting $m$. A cycle in the kernel of this projection is $(0,k)$ with $d_Kk=0$, hence zero; this proves bijectivity on $H^{-1}$. On $H^0$, surjectivity follows from surjectivity of $\\pi_M^0$. If $(m,n)\\in B^0$ maps to a boundary $m=d_Mm'$, lift $m'$ to $(m',n')\\in B^{-1}$. Subtraction of its differential leaves $(0,n-d_Nn')$ in $K^0$, which is a boundary by step 5. Thus $H^0(\\pi_M)$ is injective too. All other degrees vanish. Interchanging $(M,u)$ and $(N,v)$ in steps 5 and 6 proves the same for $\\pi_N$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  },
+  {
+   "text": "Write the two diagrams as $(b_{12},c_{12})$ and $(b_{23},c_{23})$, and choose homotopies $c_{12}-ab_{12}=dh+hd$, $c_{23}-a'b_{23}=dh'+h'd$. Form $B=M_{12}\\times_QM_{23}$ using $c_{12}$ and $b_{23}$. Steps 4--6 apply and $c_{12}\\pi_{12}=b_{23}\\pi_{23}$. Its outer legs $b_{12}\\pi_{12}$ and $c_{23}\\pi_{23}$ are surjective; their cohomology maps are composites of isomorphisms, so they are quasi-isomorphisms. Finally, with $H=h'\\pi_{23}+a'h\\pi_{12}$, the chain-map equations give\n$$c_{23}\\pi_{23}-a'ab_{12}\\pi_{12}=(c_{23}-a'b_{23})\\pi_{23}+a'(c_{12}-ab_{12})\\pi_{12}=dH+Hd.$$\nThis is the required good diagram for $a'a$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-ses-projective-quotient-splits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM (lemma-determinant-two-term-complexes), proof: existence of good diagrams and fibre-product composition; elementwise details supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a homotopy equivalence between two term finite projective complexes factors up to homotopy as a span of surjective quasi isomorphisms closed under pullback",
+   "results": "8 hits: ComplexShape.QFactorsThroughHomotopy, CategoryTheory.ProjectiveResolution.homotopyEquiv, HomotopyEquiv.isKProjective, instQFactorsThroughHomotopyDown, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, instQFactorsThroughHomotopyIntUp, HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences, CategoryTheory.ProjectiveResolution.liftHomotopy. Homotopy cylinders add a third degree; projective resolution and general quasi-isomorphism facts do not give this two-term finite-projective construction or its fibre-product assertion. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a map of projective two term complexes admits a degreewise surjective mapping cylinder roof whose projections remain quasi isomorphisms under fiber product",
+   "results": "8 hits: HomologicalComplex.cylinder.desc, HomologicalComplex.cylinder.π, HomologicalComplex.cylinder, HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁, HomologicalComplex.cylinder.inrX, HomologicalComplex.cylinder.inlX, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.cylinder.ι₁. Homotopy cylinders add a third degree; projective resolution and general quasi-isomorphism facts do not give this two-term finite-projective construction or its fibre-product assertion. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two term projective complexes quasi isomorphism surjective span common refinement degreewise fiber product",
+   "results": "8 hits: QuasiIso, HomologicalComplex.quasiIso, quasiIso_comp, quasiIso_of_isIso, CategoryTheory.ShortComplex.QuasiIso.casesOn, quasiIsoAt_comp, quasiIsoAt_iff, CategoryTheory.ShortComplex.QuasiIso.isIso. Homotopy cylinders add a third degree; projective resolution and general quasi-isomorphism facts do not give this two-term finite-projective construction or its fibre-product assertion. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"pullback\"",
+   "results": "0 hits: . Homotopy cylinders add a third degree; projective resolution and general quasi-isomorphism facts do not give this two-term finite-projective construction or its fibre-product assertion. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "goodDiagram|surjective.*quasi|quasi.*surjective|quasiIso.*pullback",
+   "results": "0 hits: . Homotopy cylinders add a third degree; projective resolution and general quasi-isomorphism facts do not give this two-term finite-projective construction or its fibre-product assertion. No exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "goodDiagram|good_diagram|surjective.*quasiIso|quasiIso.*pullback",
+   "results": "0 hits: . Cylinder and homotopy-invariance hits do not state this construction; the ordinary cylinder adds a degree. No exact match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two term projective complexes surjective quasi isomorphism span pullback",
+   "results": "8 hits: QuasiIso, CategoryTheory.ShortComplex.QuasiIso.casesOn, CategoryTheory.ShortComplex.QuasiIso.mk, CategoryTheory.ShortComplex.quasiIso_comp, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.ShortComplex.quasiIso_iff_comp_left, CategoryTheory.ShortComplex.quasiIso_of_isIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso. General quasi-isomorphism definitions, composition, and localization; no two-term finite-projective surjective refinement or its explicit formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"pullback\"",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a quasi isomorphism between two term finite projective complexes admits a common degreewise surjective quasi isomorphic refinement",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.ProjectiveResolution.mk.inj, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.ProjectiveResolution.quasiIso, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.extMk_surjective, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective. Projective resolutions, K-projectivity and CM5b injective factorizations do not give this two-term finite-projective span and pullback construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(pullback|epi)|pullback.*quasiIso|cylinder|homologyMap_eq",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean. Cylinder and homotopy-invariance hits do not state this construction; the ordinary cylinder adds a degree. No exact match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullbacks of degreewise surjective quasi isomorphisms of bounded complexes of finitely generated projective modules",
+   "results": "8 hits: CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.IsKProjective.leftOrthogonal, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'. Projective resolutions, K-projectivity and CM5b injective factorizations do not give this two-term finite-projective span and pullback construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-two-term-determinant",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine two-term determinant functors from good diagrams. Supporting argument: Tag 0FJM (lemma-determinant-two-term-complexes), existence of good diagrams and the fibre product M_123 in the composition paragraph.",
+   "via": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-good-two-term-surjective-diagrams",
+  "worker": "stage1",
+  "summary": "Read Tag 0FJM and its preceding conditions (1)--(3). Retained the statement and its explicit construction. Expanded degree-zero surjectivity, the homotopy, finite-projectivity of the pullback terms, the two-term kernel calculation, both projection cohomology checks, and the composite homotopy. Reused the existing projective-splitting and homotopy-invariance Mathlib leaves; no new nodes. No project declaration states the item.",
+  "blueprint": "The inherited auxiliary from lem-trf-local-term-locality proof (1)--(2), via the determinant/adjunction chain: realizes the Tag 0FJM good-diagram construction and fibre-product paragraph used by lem-trf-affine-two-term-determinant; preserves this supporting route. Whole-blueprint searches for surjective quasi-isomorphism and good diagram found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-09a537e3a",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-09a537e3a (reviewer sub-agent of L); spot-checked: I read Stacks Tag 0FJM (more-algebra.tex lemma-determinant-two-term-complexes, line 37124) and its conditions (1)-(3) at lines 36949-36951. The item's statement is unchanged and is not weakened. Its good complex, good diagram, explicit M, b, c (c = a^{-1}+p and a^0+d_Q p) and the termwise fibre product M_12 x_{L_2} M_23 match the source exactly. The coefficients are A-modules and there is no base change. I checked every step by hand. Step 1: cycles and boundaries of M, so b is a quasi-isomorphism. Step 2: the chain-map identity and the homotopy h^0(x,f)=p(f) in both degrees; clause (b) of lem-weil-pbc-homotopic-maps-equal-cohomology gives H(c)=H(a)H(b). Step 3: c^0 is surjective, using surjectivity of H^0(a) and Q^1=0. Step 4: Q^i is projective, so lem-weil-pbc-ses-projective-quotient-splits gives a section and a retraction, and the explicit mutually inverse maps give B^i = M^i + ker v^i, a summand of a finite free module. Step 5: d_K is bijective, using injectivity of H^{-1}(v) and H^0(v) and surjectivity of H^{-1}(v), with no degree -1 boundaries. Step 6: pi_M is bijective on H^{-1} and H^0, and the case of pi_N is symmetric. Step 7: I recomputed H = h' pi_23 + a' h pi_12: dH+Hd equals c_23 pi_23 - a'a b_12 pi_12, using c_12 pi_12 = b_23 pi_23. Edge cases checked: Q^{-1}=0 with F=0, the zero ring, complexes in degree 0 only, and the contractible complex [E -1-> E]. No new nodes, no cycle (all proof_deps are definitions or Mathlib leaves), and no SGA. The citers lem-sfb-two-term-cofactor-naturality step 3 and lem-trf-affine-two-term-determinant step 2 use exactly the stated clauses. Advisory: lem-trf-two-term-kernel-normalization and lem-trf-surjective-two-term-determinant-calculus also state the kernel fact, as part of larger determinant statements; step 5 proves it elementarily inline, which is acceptable. No tool_uses and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GoodTwoTermSurjectiveDiagrams",
+  "declaration": "Module.good_two_term_surjective_diagrams",
+  "declarations": [
+   "Module.IsGoodTwoTermComplex",
+   "Module.TwoTermComplex.contractibleSummand",
+   "Module.contractibleProjection_commutes",
+   "Module.TwoTermComplex.contractibleProjection",
+   "Module.contractibleComparison_commutes",
+   "Module.TwoTermComplex.contractibleComparison",
+   "Module.GoodTwoTermSurjectiveDiagram",
+   "Module.fiberNeg",
+   "Module.fiberZero",
+   "Module.fiberDifferential_mem",
+   "Module.fiberDifferential",
+   "Module.fiberProduct",
+   "Module.fiberProjectionLeft_commutes",
+   "Module.fiberProjectionLeft",
+   "Module.fiberProjectionRight_commutes",
+   "Module.fiberProjectionRight",
+   "Module.good_two_term_surjective_diagrams"
+  ],
+  "file": "lean/Sheaf/TraceFormula/GoodTwoTermSurjectiveDiagrams.lean",
+  "statement": "theorem good_two_term_surjective_diagrams {R : Type u} [CommRing R] {P Q : TwoTermComplex.{u, v} R} [Module.Finite R P.neg] [Module.Projective R P.neg] [Module.Finite R P.zero] [Module.Projective R P.zero] [Module.Finite R Q.neg] [Module.Projective R Q.neg] [Module.Finite R Q.zero] [Module.Projective R Q.zero] (a : TwoTermMap P Q) (ha : a.QuasiIso) : (∀ (F : Type v) [AddCommGroup F] [Module R F] [Module.Finite R F] [Module.Free R F] (p : F →ₗ[R] (↑Q.neg : Type v)), Function.Surjective p → ∃ d : GoodTwoTermSurjectiveDiagram P Q a (P.contractibleSummand F), d.left = P.contractibleProjection F ∧ d.right = P.contractibleComparison a F p) ∧ (∀ {M N : TwoTermComplex.{u, v} R} (u : TwoTermMap M Q) (v : TwoTermMap N Q), IsGoodTwoTermComplex M → IsGoodTwoTermComplex N → u.DegreewiseSurjective → u.QuasiIso → v.DegreewiseSurjective → v.QuasiIso → IsGoodTwoTermComplex (fiberProduct u v) ∧ (fiberProjectionLeft u v).DegreewiseSurjective ∧ (fiberProjectionLeft u v).QuasiIso ∧ (fiberProjectionRight u v).DegreewiseSurjective ∧ (fiberProjectionRight u v).QuasiIso) ∧ (∀ {S : TwoTermComplex.{u, v} R} (a' : TwoTermMap Q S) {M N : TwoTermComplex.{u, v} R} (d : GoodTwoTermSurjectiveDiagram P Q a M) (d' : GoodTwoTermSurjectiveDiagram Q S a' N), ∃ e : GoodTwoTermSurjectiveDiagram P S (TwoTermMap.comp a' a) (fiberProduct d.right d'.left), e.left = TwoTermMap.comp d.left (fiberProjectionLeft d.right d'.left) ∧ e.right = TwoTermMap.comp d'.right (fiberProjectionRight d.right d'.left))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer fix (H3): the fibre-product composition clause now pins the composite legs to b12 ∘ π12 and c23 ∘ π23 (TwoTermMap.comp d.left (fiberProjectionLeft ..), TwoTermMap.comp d'.right (fiberProjectionRight ..)) instead of a bare Nonempty diagram, as the node's 'compose by this fibre product' and the citer lem-trf-affine-two-term-determinant step 1 require. Docstrings added to the five maps whose well-definedness lemmas are sorried; statement docstring now carries the seven proof steps.",
+  "fixed_by": "NT-stage2-cc-6ccff3130"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ccff3130",
+  "group": "Q47",
+  "result": "fix",
+  "note": "Read the node, the stmt_deps (Module.Projective, DerivedCategory), the recorded TwoTermComplex/TwoTermMap/QuasiIso encoding, Stacks 0FJM (good diagrams, existence, M_123 composition), the module and the citers (affine-two-term-determinant step 1, cofactor-naturality step 2). Goodness, quasi-iso, the degree -1 homotopy, the explicit M/b/c formulas and the fibre product with both surjective quasi-iso projections are faithful. H3 fix: the composition conjunct gave only Nonempty of a good diagram over fiberProduct d.right d'.left with arbitrary legs; it now pins e.left = comp d.left (fiberProjectionLeft ..) and e.right = comp d'.right (fiberProjectionRight ..), as the node's 'compose by this fibre product' and citer step 1 (T_c12 T_r = T_b23 T_s) require. Added docstrings to the 5 data defs whose descriptions sat on their sorried well-definedness lemmas; main docstring now carries the 7 proof steps. Advisory: the fibre-product clause carries redundant P/a hypotheses (instantiate P:=Q, a:=id). Fixed file compiled once via nt_compile --json: 8.3 s, rc 0, clean. Fix files: complete module + lean-record.json with the new verbatim statement."
+ }
+}

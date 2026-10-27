@@ -1,0 +1,235 @@
+{
+ "id": "def-pur-general-chart-comparisons",
+ "kind": "definition",
+ "title": "Canonical comparisons between successive smooth etale chart sources",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite coefficient setting $P$, $k=\\overline{\\mathbf F}_q$ and $A=\\mathcal O_E/\\varpi_E^n$, $n\\ge1$, of [def-pur-conventions]. Use the actual finite exceptional inverse image [def-weil-exceptional-inverse-image], pullback [def-weil-derived-pullback-tensor-hom], section invariants [def-pur-section-invariant], normal cones [def-pur-normal-bundle], and the canonical diagonal chart data [def-pur-diagonal-dnc-chart-data]. This definition extends the canonical chart comparisons to successive smooth chart sources, not only to affine-space targets.\n\nLet $g:X\\to Y$ and $h:U\\to Y$ be separated quasi-compact smooth morphisms [def-weil-proper-morphism, def-weil-finite-type-morphism] of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], $e:U\\to X$ etale [def-weil-etale-morphism], and $eg=h$. Put $W_U=U\\times_YU$, $W_X=X\\times_YX$, with first projections $p_U,p_X$, diagonals $s_U,s_X$, $m=e\\times e:W_U\\to W_X$, and $M=W_X\\times_XU$. The map $a:W_U\\to M$ is the pullback lift of $(m,p_U)$; its first projection is $m$ and $mp_X=p_Ue$. It is etale, separated, quasi-compact, and takes $s_U$ to the base change of $s_X$. These geometric typing assertions, and the projection equation defining the lift, are included in this construction. For a finite-type $k$-structure $a_Y:Y\\to\\operatorname{Spec}k$, define $q_e:C(p_U,s_U)\\xrightarrow{\\sim}Le^*C(p_X,s_X)$ by inverse etale restriction along $a$ followed by inverse smooth section base change, then the canonical etale/pro-etale comparison. The restriction is the counit-normalized one of [lem-pur-section-etale-restriction-coherence], using a graph-normalized compact-support presentation [def-sp-etale-compact-support-normalization].\n\nThe map $m$ pulls the diagonal ideal into the diagonal ideal, on every affine restriction. Define the extended-Rees map by $t\\mapsto t$, $f/t\\mapsto e^*f/t$. Its restriction to the zero fibre, formed by the actual zero-fibre pullback universal property, is $n_e:N_{s_U/W_U}\\to N_{s_X/W_X}$. The zero-fibre compatibility needed for this lift is included as a typing assertion. The map $n_e$ gives a Cartesian normal-bundle square over $e$ and preserves zero sections; its degree-one map is $[f]\\mapsto[e^*f]$. Define $r_e:C(\\pi_{N_U},0)\\xrightarrow{\\sim}Le^*C(\\pi_{N_X},0)$ by inverse smooth exceptional section base change for this actual normal square and the canonical site comparisons. These geometric assertions and no unspecified map are inputs to the construction.\n\nPut $\\omega_g=Rg^!A_Y$. For separated finite-type $e$ as above define $c_e$ to be precisely the standing morphism $c_{g,e,A_Y}$ of [pur9-def-upper-shriek-composition], not an unspecified isomorphism. Define $\\rho_e$ at $\\omega_g$ by the counit-normalized etale adjoint-locality identification with its comparison-unit isomorphisms. Define $\\epsilon_e:\\omega_{eg}\\xrightarrow{\\sim}Le^*\\omega_g$ by inverse counit-normalized etale locality, transported by the same site comparisons. Equality $eg=h$ acts only through the equality-induced dualizing isomorphism. The ordinary normalization presentations are parameters to these constructions, never an orientation choice.\n\nFor an affine scheme $V$, define a chart of dimension $d$ to be an affine scheme $X$ with an etale coordinate map $X\\to\\mathbf A^d_V$ [def-sbc-affine-space]. Its projection is the coordinate map followed by standard projection; its local finite type and smoothness of pure dimension $d$ are the corresponding composition facts. A chart map is an etale map of its affine sources over $V$. Identity and composition are those of scheme morphisms. The standard chart has source $\\mathbf A^d_V$ and identity coordinates, and every chart has its coordinate map to this standard chart. For these charts name $C_g$, $C_{N_g}$, $\\alpha_g$, $q_e$, $r_e$, $\\epsilon_e$ as just defined, and name $\\delta_g$ as the unique normalized DNC comparison of [thm-pur-dnc-invariance]. Finally $Re_!\\omega_{eg}$ means the actual compact-support value, for the domain assertion in the coherence theorem. No orientation is part of any chart or chart map.\n\nThe coefficient unit and counit-preserving etale exceptional identification are exactly the constructions of [def-pur-chart-coefficient-adjoint-data]. For $X=\\mathbf A^d_Y$ and $g=p$, the self-product map, intermediate pullback lift, extended-Rees map, zero-fibre normal map, ordinary source comparison, pro-etale source comparison and normal comparison are equal to the corresponding canonical affine-chart constructions of [def-pur-chart-affine-comparison-data], for every normalized presentation $N$. These seven equalities identify the specialization, rather than introducing second choices of $q_e$ or $r_e$.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "lem-pur-section-etale-restriction-coherence",
+  "def-sp-etale-compact-support-normalization",
+  "pur9-def-upper-shriek-composition",
+  "def-sbc-affine-space",
+  "thm-pur-dnc-invariance",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pur-chart-coefficient-adjoint-data",
+  "def-pur-chart-affine-comparison-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts"
+ },
+ "proof": [
+  {
+   "text": "The pullback.map projection equation proves selfMap_fst. Exhibit sourceLift as the base change of e along the second projection of the intermediate pullback, using the universal property twice. Etaleness follows by base change; separatedness and quasi-compactness follow by cancellation against the intermediate projection. The two projections prove the diagonal equation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts"
+   }
+  },
+  {
+   "text": "Functoriality of closed-immersion kernels gives the diagonal-ideal bound on every affine open. The coefficientwise deformationSpaceMap projection equation and the zero-fibre pullback equation prove normalCondition. These use the prescribed coefficient map, without choosing a comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "def-pur-diagonal-dnc-chart-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts"
+   }
+  },
+  {
+   "text": "Reuse the proved general chartGeometry helper from ChartNormalDifferential to remove the complementary off-diagonal components, producing an etale Cartesian centre square with ambient O. For any flat Cartesian square of closed centres, construct the normal comparison by the coefficientwise t-quotient data zeroPairData of SectionReesBaseChangeEtale. On affine opens flatness identifies the extended Rees base change as a ring pushout; quotienting by t and gluing yields the Cartesian normal square. Cancel the Cartesian centre square to obtain the projections to the centres, and use pairMap_compatible to identify the zero sections. Apply this both to O in the full self-product (identity base) and to O mapping to the target self-product. The first normal comparison is an isomorphism. Check composition of Rees maps on affine opens with the intermediate affine image under the open immersion; the ring maps compose by extendedReesAlgebraMap_comp and appLE_comp_appLE. The closed zero-fibre inclusion then identifies the composite normal map with the specified normalMap. Transport the second normal square and its zero sections through the first comparison isomorphism.",
+   "uses": [
+    "lem-pur-chart-normal-differential",
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts"
+   }
+  },
+  {
+   "text": "The seven affine-specialization equalities are definitional, including equality of all proposition-valued witnesses by proof irrelevance. Smoothness of a chart projection follows by composing the dimension-zero etale coordinate map with the relative-dimension-d affine-space projection.",
+   "uses": [
+    "def-pur-chart-affine-comparison-data",
+    "def-sbc-affine-space",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-pur-diagonal-dnc-chart-data",
+  "lem-pur-chart-normal-differential",
+  "lem-trf-section-rees-base-change-etale",
+  "def-pur-chart-affine-comparison-data",
+  "def-sbc-affine-space",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G6",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1--4; composition-coherence proof Step 1, successive etale charts; general pullback geometry and coefficientwise flat Rees base change, reusing proved private interfaces explicitly named in proof Step 3"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of diagonal section invariants and normal cones under an etale morphism between smooth schemes",
+   "results": "[leansearch] OK 8 hit(s): IsEtale.instIsSmooth, Scheme.Etale, IsEtale, IsEtale.instIsStableUnderBaseChangeScheme, IsImmersion.instDiagonalScheme, IsEtale.instFormallyUnramified, HasAffineProperty.diagonal_iff, FormallyUnramified.isOpenImmersion_diagonal.",
+   "date": "2026-10-24",
+   "verdict": "No canonical derived chart comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of diagonal section invariants and normal cones under an etale morphism between smooth schemes",
+   "results": "[leanfinder] OK 8 hit(s): IsEtale.instIsSmooth, Scheme.Etale, IsEtale, IsEtale.instFormallyUnramified, IsEtale.instHasOfPostcompPropertyScheme, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, IsSmooth.",
+   "date": "2026-10-24",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceLift|normalGeometry|ChartComparisons",
+   "results": "[grep] OK 0 hit(s) in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sourceLift|normalGeometry|ChartComparisons lean/WeilConjectures lean/Sheaf; rg -l sourceLift|normalGeometry|normalMap|sourceOrdinary dag/nodes/sec-smooth-purity; tools/blueprint_refs.py search \"chart comparison\"",
+   "results": "No upstream general comparison. ChartDncVectorFactors has sourceLift/source/normal restricted to an affine-space target, and normal maps also occur for same-base section pairs. No arbitrary smooth-target chart comparison. Blueprint search returned five unrelated Nagata chart-comparison nodes. Existing canonical primitives are reused.",
+   "date": "2026-10-24",
+   "verdict": "A general chart-map construction is missing; the existing specialization cannot express the successive-source composition equations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-chart-exceptional-mate-coherence",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1: counit comparisons for successive etale charts; orientation chart proof Steps 1--4.",
+   "via": [
+    "lem-pur-chart-exceptional-mate-coherence",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.GeneralChartComparisons",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartComparisons.q",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.selfMap",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.selfMap_fst",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.sourceLift",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.sourceLift_geometry",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.sourceOrdinary",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.source",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.idealCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.deformation",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.normalCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.normalMap",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.normalGeometry",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.normal",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.affine_specialization",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.omega",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.epsilon",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.composition",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.rho",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Chart",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Chart.proj",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Chart.locallyOfFiniteType",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Chart.smooth",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Map",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Map.id",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.Map.comp",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.standard",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.coordinate",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.sectionObject",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.normalSection",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.alpha",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.delta",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.q",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.r",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.omegaCongr",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.eps",
+   "WeilConjectures.PurityFiniteSetting.ChartComparisons.supportOmega"
+  ],
+  "file": "lean/Sheaf/Paper/GeneralChartComparisons.lean",
+  "statement": "def q (P : PurityFiniteSetting.{u}) {V : Scheme.{u}} [IsAffine V] {d : ℕ} (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV] {C B : Chart V d} (e : Map C B) (N : Etale.EtaleCompactSupportNormalization P.Coefficient)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4181a94c4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4181a94c4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery for the 4af079ce RETURN. F1 fixed: the item no longer cites theorem lem-pur-chart-dnc-vector-factors; its stmt_deps add only the new def nodes def-pur-general-chart-comparisons and def-pur-chart-affine-comparison-data. The latter is an existing:true owner of ChartFactors.selfMap..beta with its statement field verbatim; its lem-trf-finite-ring-section-deformation dep is genuine (bundleOrientation needs bundleAdjoint_isIso). F2 fixed: delta inlined as Dnc.existsUnique_dncInvariance.exists.choose; chartCoefficientUnit/chartEtaleIdentification owned by the existing:true def-pur-chart-coefficient-adjoint-data (JSON read from the commit, not in the snapshot), whose TeX matches the Lean body. F3 fixed: affine_specialization states 7 equalities with ChartFactors, true by unfolding (general bodies = ChartFactors with p:=g). Item module unchanged; all clauses re-checked (IsIso c, D^b_c/etale-origin domain, c≫rho=eps, three equations with Tate, Identity/Composition). d=0, empty schemes, ramified E covered; single universe u. No hollow defs, sorry only in theorems, statements verbatim, all deps exist, no cycle, report sections present. Advisory: upstream theorem-owned diagonalDualizing*/Dnc.* helpers cited only transitively via def-pur-diagonal-dnc-chart-data. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T095341-L-3376288",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

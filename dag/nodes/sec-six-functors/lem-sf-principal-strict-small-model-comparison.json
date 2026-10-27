@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-principal-strict-small-model-comparison",
+ "kind": "statement",
+ "title": "Unit-compatible total strict principal Koszul comparison on the canonical small model",
+ "statement": "Let C be a category with independently sized objects and morphisms, J a topology and R a sheaf of commutative rings in a universe containing both site universes. Use the module categories, strict principal Koszul tensor tower, specified total right-derived limit and normalized strict augmentation of [def-sf-regular-roos-koszul-data]. Let t be any global section and Q any unbounded cochain complex. On the canonical coefficient-universe small model [def-sf-koszul-small-model-completed-tensor], write S for the restricted ring and a for the restricted section, and use independent derived localization universes on the original and small sites. For every singleton presentation D of [def-weil-pbc-ringed-koszul-system] there is an isomorphism from the derived-equivalence image of koszulCompletion(R,Q,t) to D.completion at the derived-equivalence image of Q(Q). This isomorphism carries the image of the actual normalized koszulUnit to D.unit at that object. No completeness, reflection, exact-product, regularity or K-flatness assertion or assumption is involved.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941; sites-modules.tex Tags 03DA and 03DG. The comparison step of lem-sf-principal-strict-limit-reflector."
+ },
+ "stmt_deps": [
+  "def-sf-regular-roos-koszul-data",
+  "def-sf-koszul-small-model-completed-tensor",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Restrict along the canonical small-site equivalence. The exact module equivalence and its inverse preserve K-injective complexes, including complexes of strict towers. Compare ordinary inverse limits through this equivalence and derive the comparison by the right-derived universal properties. It respects the specified comparison maps, without assuming exact products.",
+   "uses": [
+    "def-sf-koszul-small-model-completed-tensor",
+    "def-sf-koszul-total-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the singleton strict dual-tower comparison on the small site. Transport finite tensor products through restriction to compare with the restricted native principal tower. The dual transition is (t,1), and the tensor symmetry has sign one on the degree-zero augmentation. Thus the comparison preserves the strict augmentation itself.",
+   "uses": [
+    "lem-pur-principal-koszul-dual-tower-comparison",
+    "lem-sf-ringed-site-equivalence-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived inverse limits to this strict tower comparison and compose with D.tensorFactors. Naturality of the normalized right-derived comparison at the ordinary map into the limit carries the actual normalized unit to D.unitOnComplex. The localization representative formula for D.unit and naturality change the representative to the derived-equivalence image of Q(Q), giving the stated unit equation.",
+   "uses": [
+    "def-sf-normalized-strict-tower-augmentation",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-koszul-small-model-completed-tensor",
+  "def-sf-koszul-total-derived-limit",
+  "lem-pur-principal-koszul-dual-tower-comparison",
+  "lem-sf-ringed-site-equivalence-tensor",
+  "def-sf-normalized-strict-tower-augmentation",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E, with the size and normalization comparisons expanded for the existing Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites preserves local derived completeness and the normalized total derived inverse limit of a strict augmented Koszul tower",
+   "results": "AdicCompletion.ofAlgEquiv, AdicCompletion.congr, Ring.DirectLimit.ringEquiv and uniform completion equivalences; none concerns sheaf derived localization tests or strict Koszul augmentation units.",
+   "date": "2026-10-26",
+   "verdict": "No match. Ordinary adic completion equivalences do not give either comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of ringed sites transports the total derived inverse limit of an augmented principal Koszul tower with its unit and reflects local derived completeness",
+   "results": "AdicCompletion.map_exact; LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure; LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor.",
+   "date": "2026-10-26",
+   "verdict": "No exact Koszul or local-test comparison. The general derivability results supply only localization infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "CategoryTheory.Functor.rightDerivedUnique, Mathlib.CategoryTheory.Functor.Derived.RightDerived.",
+   "date": "2026-10-26",
+   "verdict": "Useful uniqueness of derived functors; it does not identify the augmented tensor towers or their local localization tests."
+  },
+  {
+   "tool": "grep",
+   "query": "smallModelComplete|principalKoszul_dual_tower_comparison|derivedInternalHom.*[Ee]quiv",
+   "results": "msearch: no Mathlib hits. Direct rg of lean/Sheaf found NativeRestriction.smallModelComplete (AsSmall and same localization universe, covering-sieve divisibility) and principalKoszul_dual_tower_comparison (small equal-universe site before deriving), but neither is either new statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The new steps combine the available transport and singleton interfaces while preserving the specified units and independently sized derived categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B4",
+  "item": "Sheaf.SixFunctors.PrincipalStrictLimitReflector",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Principal strict limit reflector: Unit-compatible total strict principal Koszul comparison on the canonical small model",
+   "via": [
+    "lem-sf-principal-strict-limit-reflector",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PrincipalStrictSmallModelComparison",
+  "file": "lean/Sheaf/SixFunctors/PrincipalStrictSmallModelComparison.lean",
+  "declaration": "CategoryTheory.RegularRoosKoszul.principal_strict_small_model_comparison",
+  "statement": "theorem principal_strict_small_model_comparison\n    (t : (SheafOfModules.unit (ring.{c, v, r} R)).sections)\n    (Q : CochainComplex (Modules.{c, v, r} R) ℤ)\n    (D : RingedKoszulLimitPresentation (KoszulSmallModel.ring.{c, v, max c v r} R) 1\n      (fun _ ↦ KoszulSmallModel.globalSection.{c, v, max c v r} R ⟨t.val, t.property⟩)) :\n    ∃ e : (KoszulSmallModel.derivedEquiv.{c, v, max c v r, w, w₀} R).functor.obj\n        (koszulCompletion R Q t) ≅\n        D.completion.obj ((KoszulSmallModel.derivedEquiv.{c, v, max c v r, w, w₀} R).functor.obj\n          (DerivedCategory.Q.obj Q)),\n      (KoszulSmallModel.derivedEquiv.{c, v, max c v r, w, w₀} R).functor.map\n          (koszulUnit.{c, v, r, w} R (DerivedCategory.Q.obj Q) Q (Iso.refl _) t) ≫\n        e.hom = D.unit ((KoszulSmallModel.derivedEquiv.{c, v, max c v r, w, w₀} R).functor.obj\n          (DerivedCategory.Q.obj Q))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T091140-L-3313794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T091140-L-3313794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

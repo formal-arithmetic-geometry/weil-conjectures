@@ -7,27 +7,10 @@ module
 
 public import Sheaf.Paper.SfCbcExtensionZeroCompletion
 public import Sheaf.Paper.CompletionMateComparison
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.Paper.PbcActualStrictPullback
-import Sheaf.Paper.CompletedPullbackReduction
-import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Sheaf.Paper.SmallSiteReducedCompletionUnit
+import Sheaf.Paper.SmallSiteDirectImageReconstruction
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
-import Sheaf.CategoryTheory.RingedToposMorphism
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.CompletedPullbackUnitTower
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.ConstantTowerDirectImageNormalization
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.Paper.ProEtaleConstantReductionTower
 /-! # Normalized reconstruction of composable completed operations
 
 Source: blueprint fix-lem-exchanges, Proof Step 5, and its strict-diagram refinement
@@ -430,6 +413,72 @@ structure SfCbcNormalizedFamily (hunit : SfCbcReducedUnitsInvertible d) : Prop w
         ((sfCbcMorphism u).directLimitIso _).hom.app
           (((sfCbcSite U).reduction _ (sfCbcModelIdeal d)).obj K)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem sfCbcDirectQ_app {U V : Scheme.{t}} (u : U ⟶ V)
+    (K : (sfCbcSite U).derived (ULift.{t + 1, t} A)) :
+    (sfCbcDirectQ d u).app K =
+      (sfCbcMorphism u).towerProjection _ (sfCbcModelIdeal d) K := by
+  simp only [sfCbcDirectQ, AdicSites.Morphism.towerProjection, Adjunction.homEquiv_unit,
+    NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Functor.map_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem sfCbcWord_concatenation (hunit : SfCbcReducedUnitsInvertible d)
+    {S U T : Scheme.{t}} (W : SfCbcWord S U) (V : SfCbcWord U T)
+    (K : (sfCbcSite S).derived (ULift.{t + 1, t} A)) :
+    ((W.append V).q d hunit).app K ≫
+        (SfCbcWord.appendStrictIso W V).hom.app
+          (((sfCbcSite S).reduction _ (sfCbcModelIdeal d)).obj K) =
+      ((sfCbcSite T).reduction _ (sfCbcModelIdeal d)).map
+          ((SfCbcWord.appendCompleteIso d W V).hom.app K) ≫
+        (V.q d hunit).app ((W.complete d).obj K) ≫
+        (V.strict (A := A)).map ((W.q d hunit).app K) := by
+  induction V with
+  | nil =>
+      simp [SfCbcWord.append, SfCbcWord.q, SfCbcWord.complete, SfCbcWord.strict,
+        SfCbcWord.appendCompleteIso, SfCbcWord.appendStrictIso]
+  | @snoc U T V F ih =>
+      simp only [SfCbcWord.append, SfCbcWord.q, SfCbcWord.complete, SfCbcWord.strict,
+        SfCbcWord.appendCompleteIso, SfCbcWord.appendStrictIso, NatTrans.comp_app,
+        whiskerLeft_app, whiskerRight_app, Iso.trans_hom, isoWhiskerRight_hom,
+        Functor.associator_hom_app, Functor.comp_map, Category.comp_id, Category.assoc]
+      have hn := (F.q d hunit).naturality
+        ((SfCbcWord.appendCompleteIso d W V).hom.app K)
+      simp only [Functor.comp_map] at hn
+      rw [← Functor.map_comp, ih, Functor.map_comp, Functor.map_comp]
+      rw [← Category.assoc, ← hn, Category.assoc]
+      rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem sfCbcExpression_parenthesization (hunit : SfCbcReducedUnitsInvertible d)
+    {S T : Scheme.{t}} (E : SfCbcExpression S T)
+    (K : (sfCbcSite S).derived (ULift.{t + 1, t} A)) :
+    (E.flatten.q d hunit).app K ≫
+        (E.strictIso (A := A)).hom.app
+          (((sfCbcSite S).reduction _ (sfCbcModelIdeal d)).obj K) =
+      ((sfCbcSite T).reduction _ (sfCbcModelIdeal d)).map
+        ((E.completeIso d).hom.app K) ≫ (E.q d hunit).app K := by
+  induction E with
+  | word W =>
+      simp [SfCbcExpression.flatten, SfCbcExpression.strictIso,
+        SfCbcExpression.completeIso, SfCbcExpression.q]
+  | @comp S U T E F ihE ihF =>
+      simp only [SfCbcExpression.flatten, SfCbcExpression.strictIso,
+        SfCbcExpression.completeIso, SfCbcExpression.q, SfCbcExpression.complete,
+        SfCbcExpression.strict, Iso.trans_hom, isoWhiskerRight_hom, isoWhiskerLeft_hom,
+        NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Functor.map_comp,
+        Category.assoc]
+      rw [reassoc_of% (sfCbcWord_concatenation d hunit E.flatten F.flatten K),
+        ← Functor.map_comp_assoc, ihE, Functor.map_comp_assoc]
+      have hn := (F.flatten.q d hunit).naturality ((E.completeIso d).hom.app K)
+      simp only [Functor.comp_map] at hn
+      rw [← reassoc_of% hn]
+      have hd := (F.strictIso (A := A)).hom.naturality ((E.q d hunit).app K)
+      simp only [Functor.comp_obj] at hd
+      rw [hd, reassoc_of% (ihF ((E.complete d).obj K))]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- Normalized strict-diagram reconstruction for finite composable words.
 The finite perfect quotients, torsion quotient and Noetherianness are packaged in d,
 with finiteness of every positive quotient explicit. All schemes and all unbounded
@@ -483,6 +532,93 @@ theorem sfCbcCompactSupportCompositionLimit
     {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
     [∀ n : ℕ, Finite (A ⧸ d.ideal ^ (n + 1))] :
     ∃ hunit : SfCbcReducedUnitsInvertible d, SfCbcNormalizedFamily d hunit := by
-  sorry
+  let := d.noetherian
+  let : IsNoetherianRing (ULift.{t + 1, t} A) :=
+    isNoetherianRing_of_ringEquiv A ULift.ringEquiv.symm
+  have hunit : SfCbcReducedUnitsInvertible d := fun T ↦
+    AdicSites.reductionCompletionUnit_isIso (sfCbcSite T) _ (sfCbcModelIdeal d)
+  have hf {S T : Scheme.{t}} (F : SfCbcLetter S T)
+      (K : (sfCbcSite S).derived (ULift.{t + 1, t} A))
+      (hK : (sfCbcSite S).IsComplete _ (sfCbcModelIdeal d) K) :
+      (sfCbcSite T).IsComplete _ (sfCbcModelIdeal d) ((F.complete d).obj K) := by
+    cases F with
+    | pullback u => exact ((sfCbcSite _).completion_properties _ _).1 _
+    | directImage u => exact (sfCbcMorphism u).push_complete _ _ K hK
+    | openExtension j hj => exact ((sfCbcSite _).completion_properties _ _).1 _
+  have hq {S T : Scheme.{t}} (F : SfCbcLetter S T)
+      (K : (sfCbcSite S).derived (ULift.{t + 1, t} A))
+      (hK : (sfCbcSite S).IsComplete _ (sfCbcModelIdeal d) K) :
+      IsIso ((F.q d hunit).app K) := by
+    cases F with
+    | pullback u =>
+        dsimp only [SfCbcLetter.q, NatTrans.comp_app, whiskerLeft_app]
+        infer_instance
+    | directImage u =>
+        change IsIso ((sfCbcDirectQ d u).app K)
+        rw [sfCbcDirectQ_app]
+        exact (AdicSites.smallSiteDirectImageReconstruction (sfCbcMorphism u) d K hK).1
+    | openExtension j hj =>
+        let := hj
+        dsimp only [SfCbcLetter.q, NatTrans.comp_app, whiskerLeft_app]
+        infer_instance
+  have hw {S T : Scheme.{t}} (W : SfCbcWord S T)
+      (K : (sfCbcSite S).derived (ULift.{t + 1, t} A))
+      (hK : (sfCbcSite S).IsComplete _ (sfCbcModelIdeal d) K) :
+      (sfCbcSite T).IsComplete _ (sfCbcModelIdeal d) ((W.complete d).obj K) ∧
+        IsIso ((W.q d hunit).app K) := by
+    induction W with
+    | nil =>
+        refine ⟨hK, ?_⟩
+        simp only [SfCbcWord.q, NatTrans.comp_app, Functor.leftUnitor_hom_app,
+          Functor.rightUnitor_inv_app, Category.comp_id]
+        exact ⟨⟨𝟙 _, by simp [SfCbcWord.complete], by simp [SfCbcWord.strict]⟩⟩
+    | snoc W F ih =>
+        obtain ⟨hW, hqW⟩ := ih
+        have := hq F ((W.complete d).obj K) hW
+        refine ⟨hf F ((W.complete d).obj K) hW, ?_⟩
+        simp only [SfCbcWord.q, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
+        infer_instance
+  refine ⟨hunit, ?_⟩
+  constructor
+  · intro S T W K hK
+    exact (hw W K hK).2
+  · intro S T W K hK
+    obtain ⟨hW, hqW⟩ := hw W K hK
+    have := ((sfCbcSite T).completion_properties _ _).2.2 _ |>.mpr hW
+    dsimp only [SfCbcWord.a, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
+    infer_instance
+  · intro T K
+    simp [SfCbcWord.q]
+  · intro T K
+    simp only [SfCbcWord.a, SfCbcWord.q, SfCbcWord.complete, NatTrans.comp_app,
+      whiskerLeft_app, whiskerRight_app, Functor.comp_obj, Functor.id_obj,
+      Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Category.comp_id]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  · exact sfCbcWord_concatenation d hunit
+  · exact sfCbcExpression_parenthesization d hunit
+  · intro S T E K
+    have he := sfCbcExpression_parenthesization d hunit E K
+    dsimp only [SfCbcWord.a, SfCbcExpression.a, NatTrans.comp_app,
+      whiskerLeft_app, whiskerRight_app]
+    rw [Category.assoc, ← CategoryTheory.Functor.map_comp, he,
+      CategoryTheory.Functor.map_comp, ← Category.assoc]
+    have hn := ((sfCbcSite T).unit _ (sfCbcModelIdeal d)).naturality
+      ((E.completeIso d).hom.app K)
+    simp only [Functor.id_map, ConstantCompletion.completion,
+      Functor.comp_map] at hn
+    exact (congrArg (fun k ↦ k ≫
+      ((sfCbcSite T).rlim _).map ((E.q d hunit).app K)) hn.symm).trans
+        (Category.assoc _ _ _)
+  · intro U V u K hK
+    dsimp only [SfCbcWord.a, SfCbcWord.q, SfCbcWord.complete, SfCbcLetter.q,
+      SfCbcLetter.complete, SfCbcLetter.strict, NatTrans.comp_app, whiskerLeft_app,
+      whiskerRight_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+      Functor.comp_obj, Functor.id_obj]
+    simp only [SfCbcWord.q, SfCbcLetter.q, NatTrans.comp_app,
+      whiskerLeft_app, whiskerRight_app, Functor.leftUnitor_hom_app,
+      Functor.rightUnitor_inv_app, Category.comp_id]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    rw [sfCbcDirectQ_app]
+    exact (AdicSites.smallSiteDirectImageReconstruction (sfCbcMorphism u) d K hK).2
 
 end AlgebraicGeometry.Scheme

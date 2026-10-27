@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-integral-section-scalar-models",
+ "kind": "statement",
+ "title": "Integral section comparison on scalar realizations",
+ "statement": "Fix a prime l, a finite extension E of Q_l, its valuation ring A, and any scheme X. For every finitely presented ordinary A-module N, its actual continuous scalar extension to the condensed point [lem-sfb-continuous-scalar-finite-presentation], followed by inverse image from the point, the fixed integral section functor [def-sfb-integral-section-action-transport], and restriction along the detailed completed coefficient isomorphism [def-sfb-integral-completed-coefficient-transport], is isomorphic to the completed constant realization [def-weil-pbc-integral-stratified-perfect-models] of N restricted along ULift.down:ULift A to A. There is no arbitrary internal module or local-model predicate in this assertion.",
+ "stmt_deps": [
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-sfb-continuous-scalar-finite-presentation"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), scalar local models; explicit comparison of the recorded coefficient presentations in step 7 of the integral constructibility bridge."
+ },
+ "proof": [
+  {
+   "text": "Use the two actual composite functors sectionRealization and completedRealization. Both preserve finite colimits: continuousScalarFunctor and point inverse image are left adjoints, integralSectionFunctor is an equivalence, detailed coefficient restriction is exact, ordinary restriction along ULift.down is an equivalence, and integralConstantModule is exact. Hence both functors are additive. The rank-one comparison [lem-sfb-integral-section-regular-scalars] supplies an isomorphism commuting with every endomorphism of the lifted regular module.",
+   "uses": [
+    "def-sfb-integral-section-action-transport",
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "lem-sfb-integral-section-regular-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an ordinary finite free presentation N isomorphic to cokernel f, using the ordinary_presentation construction accompanying continuous scalar finite presentation. Identify each finite free module with a finite biproduct of the lifted regular module. Apply preservation of biproducts to both functors and the rank-one isomorphism to every summand. Check naturality on each matrix entry using biproduct injections and projections and the rank-one scalar square. This proves that the images of f form an isomorphic cokernel diagram. Compose the preserved-cokernel isomorphisms, cokernel.mapIso, and the images of N isomorphic to cokernel f. This argument includes zero ranks, torsion modules and empty schemes.",
+   "uses": [
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "lem-sfb-integral-section-regular-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-sfb-continuous-scalar-finite-presentation",
+  "lem-sfb-integral-section-regular-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3); K7 formalizes the biproduct-matrix and cokernel argument from the original plan. Only its rank-one coefficient-normalization calculation remains separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reconstructing internal modules as sheaves of modules commutes with scalar extension from a constant ring and with inverse image along a morphism of sites",
+   "results": {
+    "t": "2026-10-26T00:45:49Z",
+    "tool": "leansearch",
+    "query": "Reconstructing internal modules as sheaves of modules commutes with scalar extension from a constant ring and with inverse image along a morphism of sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules",
+     "PresheafOfModules.Sheafify.SMulCandidate.h",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.mk",
+     "PresheafOfModules.Sheafify.map_smul",
+     "PresheafOfModules.restrictScalarsObj",
+     "PresheafOfModules.pullback",
+     "ModuleCat.tildeInModuleCat"
+    ],
+    "digest": "c1a33fab96cd1831"
+   },
+   "date": "2026-10-26",
+   "verdict": "Only generic sheaf and scalar-restriction APIs; no comparison for the fixed integral section functor, completed coefficient normalization, and localized site."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": {
+    "t": "2026-10-26T00:45:49Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.restrictScalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.restrictScalars_map_val"
+    ],
+    "digest": "e9c522decffc41f9"
+   },
+   "date": "2026-10-26",
+   "verdict": "Only generic sheaf and scalar-restriction APIs; no comparison for the fixed integral section functor, completed coefficient normalization, and localized site."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModule|AlgebraicInverseImage|continuousScalarFunctor",
+   "results": {
+    "t": "2026-10-26T00:45:49Z",
+    "tool": "grep",
+    "query": "sectionModule|AlgebraicInverseImage|continuousScalarFunctor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "Only generic sheaf and scalar-restriction APIs; no comparison for the fixed integral section functor, completed coefficient normalization, and localized site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSectionMemberModels",
+  "date": "2026-10-26",
+  "group": "T6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral case (step 2 of the current split), and the integral paragraph of sk-prop-open-coefficients.proof.md applying sk-lem-integral-models(2). The member comparison is step 7 of lem-sfb-integral-constructible-completion-bridge, through lem-sfb-integral-section-local-models and lem-sfb-integral-section-member-models. The ancestor is recovered from the existing blueprint.from links; legacy created.item entries stop at module identifiers.",
+   "via": [
+    "lem-sfb-integral-section-member-models",
+    "lem-sfb-integral-section-local-models",
+    "lem-sfb-integral-constructible-completion-bridge"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionScalarModels",
+  "file": "lean/Sheaf/Paper/IntegralSectionScalarModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionScalarModels",
+  "statement": "theorem integralSectionScalarModels (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u})\n    (N : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))\n    (hN : Module.FinitePresentation (Padic.coefficientExtensionIntegers l E) N) :\n    Nonempty ((SheafOfModules.restrictScalars.{u + 1}\n      (Scheme.integralDetailedCoefficientComparison X l E).hom).obj\n      ((integralSectionFunctor l E X).obj\n        (((upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E)).obj\n          ((let A := Padic.coefficientExtensionIntegers l E\n            letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n            continuousScalarFunctor A).obj N))) ≅\n      (Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)).obj\n        ((ModuleCat.restrictScalars\n          (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+*\n            Padic.coefficientExtensionIntegers l E).toRingHom).obj N))",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T071127-L-3851275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261026T100310-L-4175883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

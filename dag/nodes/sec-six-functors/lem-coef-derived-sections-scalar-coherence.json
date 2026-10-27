@@ -1,0 +1,328 @@
+{
+ "id": "lem-coef-derived-sections-scalar-coherence",
+ "kind": "statement",
+ "title": "Coherent unit-normalized scalar comparison for unbounded derived global sections",
+ "statement": "Let $\\mathcal C$ be a site small in a universe containing all coefficients [def-weil-pbc-sites-and-cohomology]. For each sheaf of commutative rings $R$ on $\\mathcal C$, use module sheaves [def-weil-sheaf-of-modules-category] and ordinary unbounded derived categories [def-weil-abstract-derived-category]; every complex of $R$-modules has a K-injective resolution [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist]. Put $\\Gamma_R(M)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal C)}(1,M_{ab})$, with its abelian group structure, and let $H_R=R\\Gamma_R:D(R)\\to D(\\operatorname{Ab})$ have universal derived unit $\\eta_R$ [def-sfb-right-derived-functor]. For $a:R\\to S$, let $r_{R,S}:D(S)\\to D(R)$ be termwise exact restriction of scalars [def-pc-sheaf-restrict-scalars]. Under the underived equality $\\Gamma_Rr_{R,S}=\\Gamma_S$, there is a unique natural transformation\n$$\\sigma_{R,S}:H_S\\longrightarrow H_Rr_{R,S},\\qquad \\sigma_{R,S,QM}\\circ\\eta_{S,M}=\\eta_{R,r_{R,S}M}$$\nfor every complex $M$ of $S$-modules. This transformation is an isomorphism. It is the canonical derived direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for the coefficient morphism $f:(\\operatorname{Sh}(\\mathcal C),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$, whose module direct image is restriction of scalars [lem-weil-pbc-restriction-ringed-topos-module-direct-image], followed by the global-sections ringed-topos morphism $g_R:(\\operatorname{Sh}(\\mathcal C),R)\\to(\\operatorname{Set},\\mathbf Z)$ [def-weil-pbc-ringed-topos-morphism]. Here $\\operatorname{Set}$ is presented by the one-object site with only its identity arrow and maximal covering sieve; the inverse image of $g_R$ is the constant-sheaf functor [def-weil-pbc-constant-sheaf], its direct image is global sections, and its structural ring map is $\\underline{\\mathbf Z}\\to R$. Under the exact identification of $\\mathbf Z$-modules on that singleton site with abelian groups [lem-weil-pbc-singleton-site-module-comparison], its module direct image is $\\Gamma_R$. In particular, if $L$ is an $S$-K-injective complex and $j:r_{R,S}L\\to K$ is an $R$-K-injective resolution, then $\\Gamma(j)$ is a quasi-isomorphism and represents $\\sigma_{R,S,QL}$ under the canonical resolution identifications. For every composable $R\\to S\\to T$, identifying the identical scalar actions $r_{R,S}r_{S,T}=r_{R,T}$, the same comparisons satisfy\n$$\\sigma_{R,T}=(\\sigma_{R,S}r_{S,T})\\circ\\sigma_{S,T},\\qquad \\sigma_{R,R}=1_{H_R}.$$\nAll comparisons are natural in the derived module argument. No flatness or injective-preservation hypothesis on scalar restriction is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specializes to coefficient restriction followed by the global-sections ringed-topos morphism and fixes the comparison by universal derived units, including their composition law (former steps 5-6)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-singleton-site-module-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write C(r) for restriction on complexes and r for its descent to derived categories. Restriction leaves underlying abelian sheaves and all arrows unchanged. The sectionwise kernel and sheafified-cokernel descriptions therefore give the same kernels and cokernels before and after restriction, with restricted ring action. Thus C(r) preserves quasi-isomorphisms and descends by localization. The identical scalar actions give C(r_{R,S})C(r_{S,T})=C(r_{R,T}) and r_{R,R}=id, compatibly with localization. Moreover r itself, with identity unit, is a total right derived functor of C(r): both sides of its derived universal property are the natural transformations obtained by precomposition with localization. This is a bijection by the localization universal property. Hence the total derived direct image of an exact scalar restriction is canonically r, with this normalization. In Lean, exactness is reflected by the faithful forgetful functor to abelian sheaves; its preservation of colimits is supplied by moduleSheaves_colimits_forgetful. The formal presentation names the existing composition and identity isomorphisms of restriction, then lifts them termwise. Forgetful-sheaf identities lift through global sections and complexes to prove their compatibility.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E: exact coefficient restriction specialization; localization universal property and derived-unit convention"
+   }
+  },
+  {
+   "text": "For a set E, a map from its constant presheaf to a sheaf F is exactly an E-indexed family of maps 1 to F, by taking the component at each e in E. Sheafification's adjunction therefore gives Hom(underline E,F)=Hom(E,Hom(1,F)). The constant-presheaf functor preserves finite limits objectwise, and set sheafification preserves finite limits, so their composite does also. This constructs the geometric morphism to Set, presented by the stated singleton site, without requiring a terminal object of C. The maps n to n times 1 in each R(U) commute with restrictions and extend uniquely from the constant presheaf Z to a ring-sheaf map underline Z to R. This supplies g_R as a ringed-topos morphism. Assemble the geometric adjunction and ring map as RingData and apply ringData_inducedModules. Evaluation on the punctual site gives the underlying-set comparison. Naturality with biproduct inclusions and projections makes this comparison additive, hence an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topos-induced-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "sites.tex, Tag 0H7J (example-constant-sheaf), Tag 06UN (definition-global-sections), Tag 00WJ (lemma-sheafification-exact); ringed structure as in Tag 01D3"
+   }
+  },
+  {
+   "text": "Use the coefficient ringed-topos morphism f supplied by the restriction/direct-image lemma. By the definition of module direct image, g_R sends M to Hom(1,M_ab), with its abelian operations and the usual integer action. Evaluation on the singleton site identifies this Z-module direct image with Gamma_R. The underlying geometric morphisms g_R f and g_S coincide; their structural maps agree since a(n times 1_R)=n times 1_S. Their module direct images are therefore Gamma_R C(r)=Gamma_S, including all maps. Apply the unbounded ringed-topos composition theorem to f followed by g_R. In particular, for S-K-injective L and any R-K-injective resolution j:C(r)L to K, Gamma(j) is a quasi-isomorphism; it represents kappa_{g_R,f,QL} with the theorem's canonical resolution identifications. The sites C and the singleton site are small in the common coefficient universe, so this theorem applies. The Lean proof uses exact evaluation directly: forget to abelian sheaves, use the bottom-topology equivalence with presheaves, and evaluate. Transport the quasi-isomorphism through the additive comparison; the general singleton tensor/derived equivalence is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), coefficient morphism followed by g_R; canonical K-injective representative formula"
+   }
+  },
+  {
+   "text": "The natural family eta_{R,C(r)M}, using Gamma_R C(r)=Gamma_S and r Q_S=Q_R C(r), is a transformation Q_Ab Gamma_S to H_R r Q_S. Apply the bijection in the universal property of (H_S,eta_S), with G=H_R r. Its unique preimage is a natural transformation sigma_{R,S}:H_S to H_R r. By the defining bijection its components satisfy sigma_{R,S,Q_SM} eta_{S,M}=eta_{R,C(r)M} for every complex M. This proves existence and uniqueness with precisely the required normalization, before any invertibility assertion.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent unit normalization of the specialization of Tag 0D6E; def-sfb-right-derived-functor universal bijection"
+   }
+  },
+  {
+   "text": "Let L be S-K-injective and choose an R-K-injective resolution j:C(r)L to K. Existence is guaranteed for this small ringed site. The derived units eta_{S,L} and eta_{R,K} are isomorphisms. Naturality of eta_R at j reads H_R(Q_R j) eta_{R,C(r)L}=eta_{R,K} Q_Ab Gamma(j). Thus the normalization from step 4 gives the explicit formula\nsigma_{R,S,Q_SL}=H_R(Q_R j)^{-1} eta_{R,K} Q_Ab Gamma(j) eta_{S,L}^{-1}.\nHere Q_R j is invertible by localization, and Q_Ab Gamma(j) is invertible by step 3's composition theorem. Every factor is therefore invertible. For an arbitrary S-complex M choose a K-injective resolution s:M to L. Since r is exact, Q_S s and its image under H_R r are invertible; naturality gives sigma_{Q_SM}=(H_R r)(Q_S s)^{-1} sigma_{Q_SL} H_S(Q_S s), so every component of sigma is invertible.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E canonical resolution formula, combined with derived-unit naturality and K-injective resolutions; no preservation of K-injectives by r"
+   }
+  },
+  {
+   "text": "Identify Rf_* with r using the normalized exact-functor descent of step 1, and R(g_R f)_* with H_S using their identical underived functor and its derived unit. At S-K-injective L the source resolution identification is eta_{S,L}; at rL the target identification with Q_Ab Gamma(K) is eta_{R,K}^{-1} H_R(Q_R j). Consequently the resolution formula for kappa in step 3 gives exactly the formula for sigma in step 5. They agree on every Q_SL. Naturality at any K-injective resolution Q_S s, an isomorphism, gives equality at Q_SM; every derived object has a complex representative. Hence sigma is the canonical direct-image composition comparison, and Gamma(j) represents it under these canonical identifications. This also makes the representative formula independent of choices of j and K.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-sfb-right-derived-functor",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E: identify the canonical comparison by its K-injective representative formula"
+   }
+  },
+  {
+   "text": "For R to S to T and any T-complex M, precompose the proposed composite with eta_{T,M}. Using step 4 twice gives\n((sigma_{R,S} r_{S,T}) sigma_{S,T})_{Q_TM} eta_{T,M}\n= sigma_{R,S,Q_S C(r_{S,T})M} eta_{S,C(r_{S,T})M}\n= eta_{R,C(r_{R,S})C(r_{S,T})M}\n= eta_{R,C(r_{R,T})M}.\nThus the composite and sigma_{R,T} have the same image in the universal bijection for H_T with target H_R r_{R,T}; injectivity proves their equality as natural transformations. Similarly id_{H_R} precomposed with eta_R is eta_R, so uniqueness gives sigma_{R,R}=id_{H_R}. These are equalities of the already natural derived transformations. All arguments used exactness of restriction and the ringed-topos composition theorem, never flatness of a ring map or preservation of injectives by restriction.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent coherence calculation from the universal derived units; specialization of Tag 0D6E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topos-induced-modules",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent T6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent derives the unit-normalized coefficient specialization and writes out the cocycle, using sites.tex Tags 0H7J, 06UN, 00WJ for g_R. Lean implementation uses Mathlib localization lifting and derived-functor descent; the ordinary punctual comparison follows from the underlying set comparison and biproduct naturality. T6: all seven steps proved in Lean; explicit underived transport maps avoid repeated scalar-action conversion. No new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Dd]erived|[Dd]erived.*restrictScalars|[Rr]ightDerived.*[Ss]ection|[Ss]ection.*[Rr]ightDerived",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"rightDerived\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections are independent of the sheaf of coefficient rings after restriction of scalars",
+   "results": "; 8 hits: SheafOfModules.restrictScalars, CategoryTheory.Sheaf.Γ, SheafOfModules.instAdditiveRestrictScalars, AlgebraicGeometry.LocallyRingedSpace.Γ, CategoryTheory.Sheaf.ΓRes_naturality, SheafOfModules.restrictScalars_map_val, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.Scheme.Γ_def",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of sheaves of commutative rings, derived global sections commute with exact restriction of scalars canonically, normalized by derived units and coherently for composition",
+   "results": "; 8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitToPushforwardObjUnit, CategoryTheory.Sheaf.ΓRes_map_assoc, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitHomEquiv_symm_comp, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|IsRightDerivedFunctor",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded cohomology of module sheaves is canonically unchanged by restricting their coefficient ring, with the comparison uniquely specified by the total right derived functor unit",
+   "results": "; 8 hits: CategoryTheory.Sheaf.H, groupCohomology.resNatTrans, CategoryTheory.Sheaf.cohomologyPresheaf, groupCohomology.resNatTrans_app, CategoryTheory.Sheaf.cohomologyPresheafFunctor, groupCohomology.coindIso, ContinuousCohomology.homogeneousCochains, groupCohomologyIsoExt",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary restriction and global sections, or cohomology groups, do not supply the unit-normalized unbounded scalar comparison with its coefficient cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Dd]erived|[Dd]erived.*restrictScalars|[Rr]ightDerived.*[Ss]ection",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived section maps, abelian-sheaf cohomology groups, and sheafification interfaces do not give the unit-normalized unbounded scalar comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived global sections comparison for restriction of coefficient rings is a natural isomorphism",
+   "results": "; 8 hits: CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, CategoryTheory.Sheaf.ΓNatIsoSectionsFunctor, AlgebraicGeometry.StructureSheaf.globalSectionsIso, CategoryTheory.Sheaf.natTransΓRes",
+   "date": "2026-10-22",
+   "verdict": "no match: underived section maps, abelian-sheaf cohomology groups, and sheafification interfaces do not give the unit-normalized unbounded scalar comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"restrictScalars\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived section maps, abelian-sheaf cohomology groups, and sheafification interfaces do not give the unit-normalized unbounded scalar comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of ring sheaves, the comparison of unbounded derived global sections with restriction of scalars is invertible and uniquely normalized by the derived unit",
+   "results": "; 8 hits: SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-22",
+   "verdict": "no match: underived section maps, abelian-sheaf cohomology groups, and sheafification interfaces do not give the unit-normalized unbounded scalar comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded cohomology of sheaves of modules does not depend on the ring acting on the underlying abelian sheaf",
+   "results": "; 8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.HomComplex.Cocycle.instModule, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: underived section maps, abelian-sheaf cohomology groups, and sheafification interfaces do not give the unit-normalized unbounded scalar comparison and its coefficient cocycle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-sequence-global-sections-evaluation",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last mapping-complex comparisons, through lem-coef-derived-system-evaluation-calculus, returned step 12 first half; extracted from the global-sections evaluation proof in response to the 2026-10-22 re-split note. Scalar comparison via global sections and its derived-unit composition normalization (former steps 5-6).",
+   "via": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-derived-sections-scalar-coherence",
+  "worker": "stage1",
+  "summary": "NU preserves the statement and splits the unit-normalized scalar comparison into exact descent, construction of g_R, the existing 0D6E K-injective composition formula, universal-unit existence, invertibility, identification with the canonical comparison, and explicit unit cocycle/identity calculations. No new nodes; no flatness or injective-preservation assumption.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: first and last mapping-complex comparisons through lem-coef-derived-system-evaluation-calculus and lem-coef-sequence-global-sections-evaluation; isolates their coefficient/global-sections comparison and its composition normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "why": "Identifies arbitrary same-site scalar restriction as a module direct image; the biduality unit supplies no general ringed-topos realization."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Identifies Z-modules on the singleton site with abelian groups, including derived categories; a generic site presentation tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the unbounded ringed-topos composition isomorphism and the quasi-isomorphism Gamma(j); the unit does not reprove this generic derived-category theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-565451bf9",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-565451bf9 (reviewer sub-agent of L); spot-checked: I read the statement, all 7 steps, every cited statement and the source in full. Stacks 0D6E (sites-cohomology.tex l.4011-4030) proves R(gf)_*=Rg_*Rf_* for ringed topoi. Statement: byte-identical to the Q76 FIX 9cc6a5b6 that created this node, so it is not weakened. It is true: cohomology does not depend on the ring. No flatness is assumed and the proof does not use preservation of injectives. I tested the singleton site, R=S, Z->Z/2, the empty site and the zero ring. Steps: (1) exact descent of r with identity unit; I checked the bijection Nat(r,G)->Nat(rQ,GQ), which holds by the localization universal property. (2) Builds g_R from the sheafification adjunction, the constant sheaf, set-sheafification exactness (a Mathlib leaf) and n->n*1. (3) f has the right orientation for a:R->S and its module direct image is restriction. The singleton site gives Z-modules = Ab. The step takes exactly the stated 0D6E-node clause that g_*j is a quasi-isomorphism representing kappa. (4) Universal bijection with G=H_R r gives a unique sigma. (5) I checked the formula sigma_QL = H_R(Qj)^-1 eta_{R,K} QGamma(j) eta_{S,L}^-1 and every factor is invertible; it extends to all M by naturality. (6) The resolution identifications match kappa, and I checked their directions. (7) The cocycle follows from step 4 applied twice plus injectivity, and the identity law from r_RR=id. This matches the parent lem-coef-sequence-global-sections-evaluation step 5. There are no new nodes. My rg -L search for 0D6E and for forget/restriction-of-scalars cohomology nodes found only scheme-specific, degreewise or bounded comparisons, so nothing is a duplicate. Route: prop-pur-kinjective-resolutions-exist is on the route via sk-def-sf-operations. I accept the three declared tool_uses in sk-thm-properbasechange (restriction as direct image, singleton-site comparison, 0D6E composition) as generic tools. No SGA, the item is not in the dropped list, and proof_deps equals the union of the step uses. One minor remark, not a fault: only the proof of lem-weil-pbc-restriction-ringed-topos-module-direct-image, not its statement, says the geometric morphism is the identity; step 3 needs only the module direct images."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedSectionsScalarCoherence",
+  "declaration": "CategoryTheory.CoefficientDerivedSections.derivedSectionsScalarCoherence",
+  "declarations": [
+   "CategoryTheory.CoefficientDerivedSections.coefficientModules",
+   "CategoryTheory.CoefficientDerivedSections.coefficientRestriction",
+   "CategoryTheory.CoefficientDerivedSections.coefficientRestriction_additive",
+   "CategoryTheory.CoefficientDerivedSections.coefficientSections",
+   "CategoryTheory.CoefficientDerivedSections.coefficientSections_additive",
+   "CategoryTheory.CoefficientDerivedSections.coefficientComplexRestriction",
+   "CategoryTheory.CoefficientDerivedSections.coefficientComplexSections",
+   "CategoryTheory.CoefficientDerivedSections.coefficientRestrictionComp",
+   "CategoryTheory.CoefficientDerivedSections.coefficientComplexRestrictionComp",
+   "CategoryTheory.CoefficientDerivedSections.coefficientRestrictionId",
+   "CategoryTheory.CoefficientDerivedSections.coefficientComplexRestrictionId",
+   "CategoryTheory.CoefficientDerivedSections.coefficientRestrictionForget",
+   "CategoryTheory.CoefficientDerivedSections.coefficientSectionsRestriction",
+   "CategoryTheory.CoefficientDerivedSections.coefficientComplexSectionsRestriction",
+   "CategoryTheory.CoefficientDerivedSections.sectionsPoint",
+   "CategoryTheory.CoefficientDerivedSections.sectionsPointTopology",
+   "CategoryTheory.CoefficientDerivedSections.sectionsPointIntegers",
+   "CategoryTheory.CoefficientDerivedSections.sectionsPointAbelian",
+   "CategoryTheory.CoefficientDerivedSections.sectionsPointSets",
+   "CategoryTheory.CoefficientDerivedSections.CoefficientSectionsGeometry",
+   "CategoryTheory.CoefficientDerivedSections.derivedSectionsScalarCoherence",
+   "CategoryTheory.CoefficientDerivedSections.coefficientSections_preservesFiniteLimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedSectionsScalarCoherence.lean",
+  "statement": "theorem derivedSectionsScalarCoherence\n    [∀ R : Sheaf J CommRingCat.{u}, HasDerivedCategory.{w} (coefficientModules R)]\n    [HasDerivedCategory.{w} AddCommGrpCat.{u}] :\n    (∀ R : Sheaf J CommRingCat.{u}, CoefficientSectionsGeometry R) ∧\n    ∃ (H : ∀ R : Sheaf J CommRingCat.{u},\n        DerivedCategory (coefficientModules R) ⥤ DerivedCategory AddCommGrpCat.{u})\n      (η : ∀ R : Sheaf J CommRingCat.{u},\n        coefficientComplexSections R ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ H R),\n      (∀ R : Sheaf J CommRingCat.{u}, (H R).IsRightDerivedFunctor (η R)\n        (HomologicalComplex.quasiIso (coefficientModules R) (ComplexShape.up ℤ))) ∧\n      (∀ (R : Sheaf J CommRingCat.{u}) (I : CochainComplex (coefficientModules R) ℤ),\n        I.IsKInjective → IsIso ((η R).app I)) ∧\n      ∃ (r : ∀ {R S : Sheaf J CommRingCat.{u}}, (R ⟶ S) →\n          DerivedCategory (coefficientModules S) ⥤ DerivedCategory (coefficientModules R))\n        (ν : ∀ {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S),\n          DerivedCategory.Q ⋙ r a ≅ coefficientComplexRestriction a ⋙ DerivedCategory.Q)\n        (σ : ∀ {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S), H S ⟶ r a ⋙ H R),\n        (∀ {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S),\n          IsIso (σ a) ∧\n          (∀ M : CochainComplex (coefficientModules S) ℤ,\n            (η S).app M ≫ (σ a).app (DerivedCategory.Q.obj M) =\n              DerivedCategory.Q.map ((coefficientComplexSectionsRestriction a).hom.app M) ≫\n              (η R).app ((coefficientComplexRestriction a).obj M) ≫\n                (H R).map ((ν a).inv.app M)) ∧\n          (∀ τ : H S ⟶ r a ⋙ H R,\n            (∀ M : CochainComplex (coefficientModules S) ℤ,\n              (η S).app M ≫ τ.app (DerivedCategory.Q.obj M) =\n                DerivedCategory.Q.map ((coefficientComplexSectionsRestriction a).hom.app M) ≫\n                  (η R).app ((coefficientComplexRestriction a).obj M) ≫\n                  (H R).map ((ν a).inv.app M)) → τ = σ a) ∧\n          ∀ (I : CochainComplex (coefficientModules S) ℤ), I.IsKInjective →\n          ∀ (K : CochainComplex (coefficientModules R) ℤ), K.IsKInjective →\n          ∀ (j : (coefficientComplexRestriction a).obj I ⟶ K), ∀ [QuasiIso j],\n            QuasiIso ((coefficientComplexSections R).map j) ∧\n            (η S).app I ≫ (σ a).app (DerivedCategory.Q.obj I) ≫\n              (H R).map ((ν a).hom.app I) ≫ (H R).map (DerivedCategory.Q.map j) =\n                DerivedCategory.Q.map ((coefficientComplexSectionsRestriction a).hom.app I) ≫\n                  DerivedCategory.Q.map ((coefficientComplexSections R).map j) ≫\n                    (η R).app K) ∧\n        (∀ {R S T : Sheaf J CommRingCat.{u}} (a : R ⟶ S) (b : S ⟶ T),\n          ∃ c : r (a ≫ b) ≅ r b ⋙ r a,\n            (∀ M : CochainComplex (coefficientModules T) ℤ,\n              c.hom.app (DerivedCategory.Q.obj M) ≫\n                (r a).map ((ν b).hom.app M) ≫\n                  (ν a).hom.app ((coefficientComplexRestriction b).obj M) ≫\n                    DerivedCategory.Q.map ((coefficientComplexRestrictionComp a b).hom.app M) =\n                    (ν (a ≫ b)).hom.app M) ∧\n            ∀ X : DerivedCategory (coefficientModules T),\n              (σ (a ≫ b)).app X ≫ (H R).map (c.hom.app X) =\n                (σ b).app X ≫ (σ a).app ((r b).obj X)) ∧\n        ∀ R : Sheaf J CommRingCat.{u}, ∃ i : r (𝟙 R) ≅ 𝟭 _,\n          (∀ M : CochainComplex (coefficientModules R) ℤ,\n            i.hom.app (DerivedCategory.Q.obj M) = (ν (𝟙 R)).hom.app M ≫\n              DerivedCategory.Q.map ((coefficientComplexRestrictionId R).hom.app M)) ∧\n          ∀ X : DerivedCategory (coefficientModules R),\n            (σ (𝟙 R)).app X ≫ (H R).map (i.hom.app X) = 𝟙 ((H R).obj X)",
+  "branch": "newtargets-dag",
+  "by": "T6",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The coefficient category remains the original abbreviation with native instances. Functor definitions and explicit canonical underived transport maps avoid repeated unfolding. CoefficientSectionsGeometry names exactly the original geometric clause. All original mathematical conclusions and hypotheses are retained; the proof constructs the ringed-topos map, descends exact restriction, and applies the derived universal property."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4331a655c",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Delivery = item lean record + one module DerivedSectionsScalarCoherence.lean; lean.statement matches the file signature exactly (script check); item not dropped, not landed by another group; report sections present. Clauses checked: small site u, Prop sheafify instances only; ringedSiteModules; Γ_R = toSheaf ⋙ Sheaf.Γ (06UN); H,η universal pair (IsRightDerivedFunctor) with η iso on K-injectives; r with ν pinned to degreewise restrictScalars; σ with the unit equation, uniqueness over all τ, IsIso; QuasiIso Γ(j) plus the representative formula (follows from the unit equation and η-naturality); g_R RingedToposMorphism with constant-sheaf inverse image and ring map pinned to n·1 on toSheafify constants; cocycle via a ν-pinned c (re-derived, correct orientation) and identity law via a ν-pinned i. Edge cases (empty site, zero ring, Z→Z/2, identity, singleton site) and universes fine; universe-u copy of the singleton site forced by RingedToposMorphism's same-universe sites. No hollow defs, sorry only on the theorem, docstrings present. Advisory: σ=κ (0D6E) rendered via its unit normalization rather than by instantiating ringedToposDerivedPushforwardComposition (equivalent; the sole citer uses only iso/unit/cocycle); g_R identifications are Nonempty isos; five unused plain imports. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f2bd8",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261024T191241-L-285816",
+  "kind": "interface",
+  "note": "independent cc review: delivered DerivedSectionsScalarCoherence.lean + node + change record vs live clone and old statement; the explicit transports are Iso.refl-based identities, so the new statement is equivalent; item + 5 direct importers + SpaceGradedCohomologyFinite compiled in sandbox, all exit 0; axioms propext/Classical.choice/Quot.sound"
+ }
+}

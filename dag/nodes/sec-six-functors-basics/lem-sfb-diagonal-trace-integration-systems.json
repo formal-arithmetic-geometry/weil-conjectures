@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-diagonal-trace-integration-systems",
+ "kind": "statement",
+ "title": "The completed diagonal integral is a limit of a degree-zero system map",
+ "statement": "Let l be prime, Y,P=P1(Y),W=P×Y P Noetherian with recorded localizations and l invertible on Y. Let D be simultaneous derived reduction on W and δ the normalized completed diagonal characterized by IsDiagonalLimit. For either projection f:W→P and any Result t over ULift(Q_l) for f, there is a SupportedSource a for t.Rc and a SingleTowerLimitWitness over DiagonalMod(l,P) for the scalar restriction of a.hom≫t.Rc.map(δ)≫t.trace. In particular the witness consists of one actual degree-zero tower endomorphism, its identity finite evaluations, the specified t.LS.R functor on the derived system category, the specified restricted coefficient-unit tower, and an invertible source comparison commuting with the completed integral. It does not infer equality of arbitrary derived arrows from evaluation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), constructing, evaluating, and comparing the whole-system endomorphism"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-normalized-source",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "lem-sfb-single-tower-limit-identity",
+  "def-sfb-diagonal-trace-sources"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized supported source for the chosen projection and its derived direct image.",
+   "uses": [
+    "lem-sfb-diagonal-trace-supported-source-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For that source, assemble the strict-system diagonal class and trace into one degree-zero tower endomorphism, and pass it through the normalized direct-image/limit comparison to obtain the specified tower witness.",
+   "uses": [
+    "lem-sfb-diagonal-trace-limit-witness-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-supported-source-existence",
+  "lem-sfb-diagonal-trace-limit-witness-existence"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), split into supported-source construction and tower-witness assembly",
+  "by": "R3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line completed trace and integral of the diagonal is identity",
+   "results": "8 hits: normalized algebra traces and linear-map traces, with no sheaf-theoretic projective-line trace.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hits including the full and faithful singleFunctor instances and the exact single-object comparison.",
+   "date": "2026-10-23",
+   "verdict": "Use the Mathlib full and faithful instances to prove degree-zero detection."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|mapBiprod_inv_map_desc",
+   "results": "12 hits, including the exact single-object comparison in ExactFunctor.lean and the biproduct comparison lemma in Limits/Preserves/Shapes/Biproducts.lean.",
+   "date": "2026-10-23",
+   "verdict": "These prove categorical assembly but do not construct the geometric presentation."
+  },
+  {
+   "tool": "rg",
+   "query": "TowerClasses|DiagonalTrace.(Result|Presentation)|SupportedSource|IsIntegration in lean/Sheaf and lean/WeilConjectures",
+   "results": "TowerClasses and the trace presentation are records; no theorem supplies their inhabitants. Existing trace matches are definitions and consumers.",
+   "date": "2026-10-23",
+   "verdict": "The geometric existence step is separate from categorical assembly."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "normalized trace presentation; completed trace; degree-zero system endomorphism",
+   "results": "0 blueprint nodes for all three searches.",
+   "date": "2026-10-23",
+   "verdict": "No exact smaller blueprint statement; retain the parent trace route."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of inverse systems detects equality of morphisms between single objects in derived category",
+   "results": "8 hits including HasDerivedCategory.standard and DerivedCategory.singleFunctorsPostcompQIso_inv_hom; no exact tower detection theorem. See the recorded searches.jsonl entry at 2026-10-23T13:37:07Z.",
+   "date": "2026-10-23",
+   "verdict": "Use Mathlib full and faithful singleFunctor and prove the tower detection argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerTrace",
+  "date": "2026-10-23",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), constructing, evaluating, and comparing the whole-system endomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceIntegrationSystems",
+  "file": "lean/Sheaf/Paper/DiagonalTraceIntegrationSystems.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_integrationSystems",
+  "statement": "theorem diagonalTrace_integrationSystems\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : IsDiagonalLimit l Y hY D δ)\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (t : Result l (ULift.{u} (Padic l)) f) :\n    ∃ a : SupportedSource l Y f t.Rc,\n      ∃ s : SingleTowerLimitWitness (DiagonalMod l (ProjectiveLine Y))\n        ((diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n          (a.hom ≫ t.Rc.R.map δ ≫ t.trace)),\n        s.tower = t.restrictionS.F.obj\n          (SpTowerClasses.coefficient (ProjectiveLine Y)\n            (SpTowerClasses.Arings l (ULift.{u} (Padic l)) (ProjectiveLine Y))) ∧\n        s.limitFunctor = t.LS.R",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-beeda",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261023T231004-L-3527995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T201003-L-3355162",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

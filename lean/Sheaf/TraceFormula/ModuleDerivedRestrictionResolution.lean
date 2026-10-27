@@ -19,16 +19,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.CategoryTheory.RingedSiteModules
 
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Module derived restriction on injective section complexes
@@ -51,6 +43,176 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits
+
+namespace CategoryTheory
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+-- The identity composition comparison has identity components on representatives.
+private lemma module_compUnit_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (X : HomotopyCategory C (.up ℤ)) :
+    (Functor.rightDerivedFunctorCompUnit F G).app X =
+      G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj X) ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app X) := by
+  have hi := (Functor.mapHomotopyCategoryCompIso
+    (Iso.refl (F ⋙ G)) (.up ℤ)).inv_hom_id_app X
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at hi
+  simp [Functor.rightDerivedFunctorCompUnit, hi]
+
+-- Normalize the canonical composition isomorphism against the derived units.
+private lemma module_leray_fac
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.Additive] [G.Additive] [H.Additive] [F.PreservesKInjectiveComplexes]
+    (e : F ⋙ G ≅ H) (X : HomotopyCategory C (.up ℤ)) :
+    G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj X) ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app X) ≫
+        (Functor.rightDerivedFunctorCompIso' F G e).hom.app (DerivedCategory.Qh.obj X) =
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X) ≫
+        H.rightDerivedFunctorUnit.app X := by
+  have hc := Functor.rightDerivedNatTrans_app
+    (F ⋙ G).rightDerivedFunctor (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
+    (F ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F G)
+    (HomotopyCategory.quasiIso C (.up ℤ)) (𝟙 _) X
+  change (F ⋙ G).rightDerivedFunctorUnit.app X ≫
+    (F.rightDerivedFunctorCompIso G).hom.app (DerivedCategory.Qh.obj X) = _ at hc
+  simp only [NatTrans.id_app, Category.id_comp] at hc
+  rw [← Category.assoc, ← module_compUnit_app F G X, ← hc]
+  simp only [Functor.rightDerivedFunctorCompIso', Iso.trans_hom, NatTrans.comp_app,
+    Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
+  exact Functor.rightDerivedNatTrans_app _ _ _ _
+    (HomotopyCategory.quasiIso C (.up ℤ))
+    (Functor.whiskerRight (NatTrans.mapHomotopyCategory e.hom (.up ℤ)) DerivedCategory.Qh) X
+
+-- Compute the derived transpose before inverting the comparison units.
+private lemma module_restriction_fac
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (L : C ⥤ D) (R : D ⥤ C) (G : C ⥤ E) (H : D ⥤ E)
+    [L.Additive] [R.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [R.PreservesKInjectiveComplexes]
+    (adj : L ⊣ R) (e : R ⋙ G ≅ H)
+    (M : HomotopyCategory C (.up ℤ)) :
+    G.rightDerivedFunctorUnit.app M ≫
+        G.rightDerivedFunctor.map
+          (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Qh.obj M)) ≫
+        (Functor.rightDerivedFunctorCompIso' R G e).hom.app
+          (L.mapDerivedCategory.obj (DerivedCategory.Qh.obj M)) ≫
+        H.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.hom.app M) =
+      DerivedCategory.Qh.map
+        ((G.mapHomotopyCategory (.up ℤ)).map
+            ((adj.mapHomotopyCategory (.up ℤ)).unit.app M) ≫
+          (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app
+            ((L.mapHomotopyCategory (.up ℤ)).obj M)) ≫
+        H.rightDerivedFunctorUnit.app ((L.mapHomotopyCategory (.up ℤ)).obj M) := by
+  let T := (L.mapHomotopyCategory (.up ℤ)).obj M
+  have hu := (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+    (HomotopyCategory.quasiIso _ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    R.rightDerivedFunctorUnit M
+  have hn := (Functor.rightDerivedFunctorCompIso' R G e).hom.naturality
+    (L.mapDerivedCategoryFactorsh.hom.app M)
+  have hg := G.rightDerivedFunctorUnit.naturality
+    ((adj.mapHomotopyCategory (.up ℤ)).unit.app M)
+  have hc := module_leray_fac R G H e T
+  dsimp only [Functor.comp_map] at hn hg
+  erw [← hn]
+  erw [← Functor.map_comp_assoc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  erw [← reassoc_of% hg, hc, ← DerivedCategory.Qh.map_comp_assoc]
+
+-- Evaluate the generic identity on K-injective representatives before specializing sites.
+private theorem module_chain
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (L : C ⥤ D) (R : D ⥤ C) (G : C ⥤ E) (H : D ⥤ E)
+    [L.Additive] [R.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [R.PreservesKInjectiveComplexes]
+    (adj : L ⊣ R) (e : R ⋙ G ≅ H)
+    (I : CochainComplex C ℤ)
+    (J : CochainComplex D ℤ)
+    [I.IsKInjective] [J.IsKInjective]
+    (j : (L.mapHomologicalComplex (.up ℤ)).obj I ⟶ J) :
+    (G.rightDerivedFunctorObjQIso I).hom ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex
+              (Functor.whiskerRight adj.unit G ≫ Functor.whiskerLeft L e.hom) (.up ℤ)).app I ≫
+            (H.mapHomologicalComplex (.up ℤ)).map j) ≫
+      (H.rightDerivedFunctorObjQIso J).inv =
+    G.rightDerivedFunctor.map
+        (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app
+          (DerivedCategory.Q.obj I)) ≫
+      (Functor.rightDerivedFunctorCompIso' R G e).hom.app
+        (L.mapDerivedCategory.obj (DerivedCategory.Q.obj I)) ≫
+      H.rightDerivedFunctor.map
+        (L.mapDerivedCategoryFactors.hom.app I ≫
+          DerivedCategory.Q.map j) := by
+  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I
+  let U := (L.mapHomotopyCategory (.up ℤ)).obj K
+  let v := (G.mapHomologicalComplex (.up ℤ)).map
+      ((adj.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
+    (NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
+      ((L.mapHomologicalComplex (.up ℤ)).obj I)
+  have hfactor : L.mapDerivedCategoryFactorsh.hom.app K =
+      L.mapDerivedCategoryFactors.hom.app I := by
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    repeat erw [CategoryTheory.Functor.map_id]
+    repeat erw [Category.comp_id]
+    repeat erw [Category.id_comp]
+  have hquotient : DerivedCategory.Qh.map
+      (((G.mapHomotopyCategory (.up ℤ)).map
+          ((adj.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
+        (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app U) ≫
+        (H.mapHomotopyCategory (.up ℤ)).map
+          ((HomotopyCategory.quotient _ (.up ℤ)).map j)) =
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex
+          (Functor.whiskerRight adj.unit G ≫ Functor.whiskerLeft L e.hom) (.up ℤ)).app I ≫
+          (H.mapHomologicalComplex (.up ℤ)).map j) := by
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+    change DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+      (v ≫ (H.mapHomologicalComplex (.up ℤ)).map j)) = _
+    rfl
+  have hc := module_restriction_fac L R G H adj e K
+  rw [hfactor] at hc
+  have hj := H.rightDerivedFunctorUnit.naturality
+    ((HomotopyCategory.quotient _ (.up ℤ)).map j)
+  dsimp only [Functor.comp_map] at hj
+  have hc' := congrArg (fun t ↦ t ≫ H.rightDerivedFunctor.map (DerivedCategory.Q.map j)) hc
+  simp only [Category.assoc] at hc'
+  erw [← hj, ← DerivedCategory.Qh.map_comp_assoc] at hc'
+  erw [hquotient] at hc'
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, asIso_hom, asIso_inv]
+  repeat erw [CategoryTheory.Functor.map_id]
+  repeat erw [Category.id_comp]
+  repeat erw [Category.comp_id]
+  rw [← cancel_epi (G.rightDerivedFunctorUnit.app K)]
+  erw [IsIso.hom_inv_id_assoc]
+  simp only [Functor.map_comp] at hc' ⊢
+  exact hc'.symm
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
@@ -158,6 +320,37 @@ theorem moduleDerivedRestrictionResolution
           ((upperStar (ModuleCat.{u + 1} Λ) u).mapDerivedCategoryFactors.hom.app
               (moduleInjectiveComplexUnderlying I) ≫
             DerivedCategory.Q.map a) := by
-  sorry
+  let L := upperStar (ModuleCat.{u + 1} Λ) u
+  let R := lowerStar (ModuleCat.{u + 1} Λ) u
+  let G := Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let H := Sheaf.Γ T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u
+  let e := lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) u
+  let I₀ := moduleInjectiveComplexUnderlying I
+  let v := (G.mapHomologicalComplex (.up ℤ)).map
+      ((adj.mapHomologicalComplex (.up ℤ)).unit.app I₀) ≫
+    (NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
+      ((L.mapHomologicalComplex (.up ℤ)).obj I₀) ≫
+    (H.mapHomologicalComplex (.up ℤ)).map a
+  have hw' : w = v := by
+    ext i : 1
+    change w.f i = G.map (adj.unit.app (I₀.X i)) ≫
+      e.hom.app (L.obj (I₀.X i)) ≫ H.map (a.f i)
+    have hs : G.map (adj.unit.app (I₀.X i)) ≫
+        e.hom.app (L.obj (I₀.X i)) =
+        globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) u (I₀.X i) := by
+      dsimp only [G, e, lowerStarCompGlobalSectionsIso, Functor.isoWhiskerLeft_hom,
+        Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.whiskerLeft_app]
+      erw [← Category.assoc, (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ) terminalIsTerminal).hom.naturality
+          (adj.unit.app (I₀.X i))]
+      rfl
+    rw [← Category.assoc, hs, hw i]
+  have hc := CategoryTheory.module_chain L R G H adj e
+    (moduleInjectiveComplexUnderlying I) (moduleInjectiveComplexUnderlying J) a
+  dsimp only [rightDerivedGlobalSections, mapDerivedUpperStarLowerStarAdjunction,
+    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso]
+  rw [hw']
+  exact hc
 
 end AlgebraicGeometry.Etale

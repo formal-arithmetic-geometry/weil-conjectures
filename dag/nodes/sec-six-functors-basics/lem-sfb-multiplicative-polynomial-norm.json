@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-multiplicative-polynomial-norm",
+ "kind": "statement",
+ "title": "Characteristic polynomial and root formula for a polynomial norm",
+ "statement": "Let $E$ be a nonzero finite-dimensional associative unital $\\mathbf Q$-algebra [def-weil-finite-dimensional-subspace], let $d>0$, and let $\\delta:E\\to\\mathbf Q$ satisfy $\\delta(1)=1$ and $\\delta(xy)=\\delta(x)\\delta(y)$. Assume that in a rational basis of $E$, $\\delta$ is represented by a homogeneous polynomial of degree $d$, meaning every nonzero monomial has total degree $d$ [def-weil-pbc-mv-polynomial-ring]. For $u\\in E$, the function $t\\mapsto\\delta(t1-u)$ is represented by a unique monic polynomial $P_u\\in\\mathbf Q[X]$ of degree $d$ [def-weil-polynomial-ring]. If $L/\\mathbf Q$ is a field extension splitting $P_u$ and $a_1,\\ldots,a_d\\in L$ are its roots counted with multiplicity, then for every $F\\in\\mathbf Q[T]$,\n$$\\delta(F(u))=\\prod_{i=1}^d F(a_i)\\quad\\text{in }L.$$\nIf $u$ is annihilated by a monic polynomial in $\\mathbf Z[T]$, then every coefficient of $P_u$ belongs to $\\mathbf Z\\subset\\mathbf Q$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.22, printed p.51 (root product identity), with normalization and homogeneity as in Proposition 10.13 and Theorem 10.9, printed pp.47–48. The integral-coefficient conclusion is the general polynomial-norm version of Theorem 10.9; details supplied in the report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a rational basis $e_1,\\ldots,e_n$ of $E$ and a homogeneous representing polynomial $D\\in\\mathbf Q[Z_1,\\ldots,Z_n]$. Write $1=\\sum b_je_j$ and $u=\\sum v_je_j$. Substitution in [def-weil-pbc-mv-polynomial-ring] gives $P(X)=D(Xb_1-v_1,\\ldots,Xb_n-v_n)$. Each monomial of $D$ has total degree $d$, so this has degree at most $d$; its coefficient of $X^d$ is $D(b)=\\delta(1)=1$. Thus $P$ is monic of degree $d$, and $P(t)=\\delta(t1-u)$ on $\\mathbf Q$. Any other representing polynomial agrees with $P$ at the infinite set $\\mathbf Q$, hence is equal to $P$ by [lem-trf-polynomial-infinite-evaluation-identity]. Call it $P_u$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  },
+  {
+   "text": "The last sentence of [lem-sfb-bounded-line-polynomial-interpolation] says that polynomials over an infinite field are determined by their values on every finite coordinate space. Write $e_i e_j=\\sum_k c_{ijk}e_k$ with $c_{ijk}\\in\\mathbf Q$, and put $m_k(Z,W)=\\sum_{i,j}c_{ijk}Z_iW_j$. Multiplicativity of $\\delta$ says $D(m(Z,W))-D(Z)D(W)$ vanishes on all rational tuples. Polynomial determination makes this the zero polynomial. For any extension field $K/\\mathbf Q$, give $K^n$ multiplication $m$, identity $b$, and componentwise addition; the associativity and unit equations hold because the structure constants satisfy those equations in $\\mathbf Q$. Evaluate the same polynomial $D$ on $K^n$ to obtain $\\delta_K$. The zero polynomial identity proves $\\delta_K(xy)=\\delta_K(x)\\delta_K(y)$ and $\\delta_K(b)=1$. Direct monomial evaluation gives $\\delta_K(cx)=c^d\\delta_K(x)$, so $\\delta_K(cb)=c^d$ and $\\delta_K(0)=0$ since $d>0$. Its restriction to rational coordinates is $\\delta$, and $\\delta_K(tb-u)=P_u(t)$ for every $t\\in K$. These constructions use only polynomial evaluation [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "lem-sfb-bounded-line-polynomial-interpolation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  },
+  {
+   "text": "Let $L$ be the given splitting extension. Choose an algebraic closure $K$ of $L$ using [def-weil-algebraic-closure]; the inclusion $L\\to K$ is injective. By [lem-weil-alg-closed-linear-factorization], every nonzero $F\\in\\mathbf Q[T]$ factors over $K$ as $c\\prod_{j=1}^m(T-b_j)$, with $c\\ne0$ and $m=\\deg F$. The same factorization lemma for the monic $P_u$ gives its $d$ linear factors, which are the prescribed $a_i$ transported from $L$. Substitution of $u$ in the factorization of $F$ is valid in the coordinate algebra of step 2: scalars are central and all factors are polynomials in the single element $u$, so they commute even when $E$ is not commutative.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  },
+  {
+   "text": "For $F\\ne0$, multiplicativity and homogeneity from step 2 give $\\delta_K(F(u))=c^d\\prod_{j=1}^m\\delta_K(u-b_j1)=c^d(-1)^{dm}\\prod_{j=1}^mP_u(b_j)$. Substitute $P_u(b_j)=\\prod_{i=1}^d(b_j-a_i)$ and reverse each of the $dm$ differences. The two signs cancel, leaving $c^d\\prod_{i,j}(a_i-b_j)=\\prod_{i=1}^d F(a_i)$. The left side is the image of the rational number $\\delta(F(u))$. Both sides lie in $L$, so injectivity of $L\\to K$ gives the claimed equality in $L$. This includes nonzero constants ($m=0$, empty products). If $F=0$, its evaluation has norm $\\delta(0)=0$, and the right side is zero because $d>0$. All products count the given roots with multiplicity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  },
+  {
+   "text": "For integrality choose a monic $H\\in\\mathbf Z[T]$ with $H(u)=0$. Work in an algebraic closure $K$ of $\\mathbf Q$ as supplied by [def-weil-algebraic-closure], and factor $P_u$ and $H$ there by [lem-weil-alg-closed-linear-factorization]. Let $a$ be any root of $P_u$. The polynomial identity $H(T)-H(a)=(T-a)Q_a(T)$ follows termwise from $T^r-a^r=(T-a)\\sum_{j=0}^{r-1}T^{r-1-j}a^j$. If $H(a)\\ne0$, evaluation at $u$ gives $(u-a1)Q_a(u)=-H(a)1$, hence $(u-a1)(-Q_a(u)/H(a))=1$. Apply $\\delta_K$: the left product has norm $\\delta_K(u-a1)\\delta_K(-Q_a(u)/H(a))=(-1)^dP_u(a)\\delta_K(-Q_a(u)/H(a))=0$, whereas $\\delta_K(1)=1$. This contradiction proves $H(a)=0$ for every root $a$ of $P_u$. No claim that $P_u$ annihilates $u$ is used.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  },
+  {
+   "text": "In the factorizations of step 5, let $r_a$ be the number of occurrences of $a$ among the $d$ roots of $P_u$, and let $s_a$ be its number of occurrences among the roots of $H$. Whenever $r_a>0$, step 5 gives $H(a)=0$; evaluating the linear factorization of $H$ in the field $K$ shows some factor vanishes, so $s_a\\geq1$. Thus $r_a\\leq d s_a$ for every $a$. The finite product $\\prod_a(T-a)^{d s_a-r_a}$, taken over roots occurring in either factorization, multiplied by $P_u$ equals $H^d$. Therefore $P_u\\mid H^d$ in $K[T]$, with explicit quotient even for repeated roots. Apply [lem-sfb-polynomial-divisibility-field-extension] to $\\mathbf Q\\to K$, $p=P_u$ and $q=H^d$: the same divisibility holds in $\\mathbf Q[T]$. The integer polynomial $H^d$ is monic, since its leading coefficient is $1^d$. Now [lem-weil-monic-divisor-integral] applies to the monic rational divisor $P_u$ of this monic integer polynomial, and gives every coefficient of $P_u$ in $\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-polynomial-divisibility-field-extension",
+    "lem-weil-monic-divisor-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-polynomial-infinite-evaluation-identity",
+  "lem-sfb-bounded-line-polynomial-interpolation",
+  "def-weil-algebraic-closure",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-sfb-polynomial-divisibility-field-extension",
+  "lem-weil-monic-divisor-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.22 and proof, printed p.51; normalization and homogeneity as in Proposition 10.13, pp.47–48. Agent expansion of scalar extension, signs and integrality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative homogeneous polynomial norm on a finite free integer algebra gives monic integer characteristic polynomials and resultant identities",
+   "results": "8 hits; top: LinearMap.polyCharpoly_monic, Algebra.discr, ClassGroup.normBound, LinearMap.charpoly_monic, Algebra.norm_one_add_smul, Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly, associated_norm_prod_smith, Algebra.discr_powerBasis_eq_norm",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.*polynomial|polynomial.*multiplicative|resultant|polynomialLaw",
+   "results": "16 hits; top: Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/Polynomial/Resultant/Basic.lean, Mathlib/RingTheory/Polynomial/Resultant/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resultant\"",
+   "results": "12 hits; top: Polynomial.resultant, Polynomial.resultant_self_eq_zero, Polynomial.resultant_eq_zero_of_lt_lt, Polynomial.isUnit_resultant_iff_isCoprime, Polynomial.resultant_self, Polynomial.resultant_ne_zero, Polynomial.resultant_zero_left_deg, Polynomial.resultant_zero_right_deg",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized homogeneous multiplicative polynomial function on a rational algebra has a monic characteristic polynomial and a product formula for polynomial evaluations",
+   "results": "8 hits; top: Polynomial.normalize_eq_self_iff_monic, Polynomial.Splits.aeval_eq_prod_aroots_of_monic, Polynomial.aeval_eq_prod_aroots_sub_of_monic_of_splits, Polynomial.aeval_mul, Polynomial.eval_homogenize, Polynomial.leadingCoeff_mul_prod_normalizedFactors, Polynomial.homogenize_mul, Polynomial.homogenize",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PolynomialLaw\", \"mul\"",
+   "results": "11 hits; top: PolynomialLaw.instSMul, PolynomialLaw.instMulAction, PolynomialLaw.smul, PolynomialLaw.one_smul, PolynomialLaw.zero_smul, PolynomialLaw.one_tmul_ground, PolynomialLaw.one_tmul_ground_apply', PolynomialLaw.add_smul",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous multiplicative polynomial function on a finite dimensional rational algebra evaluated at X minus u has roots annihilated by any polynomial annihilating u",
+   "results": "8 hits; top: Polynomial.aeval_root_of_mapAlg_eq_multiset_prod_X_sub_C, Polynomial.isRoot_of_aeval_algebraMap_eq_zero, Polynomial.annIdealGenerator_aeval_eq_zero, scaleRoots_aeval_eq_zero_of_aeval_mk'_eq_zero, num_isRoot_scaleRoots_of_aeval_eq_zero, minpolyDiv_eval_eq_zero_of_ne_of_aeval_eq_zero, MvPolynomial.aeval_toPolynomialAdjoinImageCompl_eq_zero, IsAlgebraic.exists_nonzero_coeff_and_aeval_eq_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant norms and polynomial-law scalar operations do not give this theorem for arbitrary multiplicative polynomial functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized homogeneous multiplicative polynomial function on a finite dimensional rational algebra has a root product formula for evaluation of polynomials",
+   "results": "{\"t\": \"2026-10-23T13:09:04Z\", \"tool\": \"leanfinder\", \"query\": \"A normalized homogeneous multiplicative polynomial function on a finite dimensional rational algebra has a root product formula for evaluation of polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aeval_root_of_mapAlg_eq_multiset_prod_X_sub_C\", \"Polynomial.map_sub_roots_sprod_eq_prod_map_eval\", \"Polynomial.map_sub_sprod_roots_eq_prod_map_eval\", \"Polynomial.Splits.aeval_eq_prod_aroots\", \"Polynomial.integralNormalization_aeval_eq_zero\", \"Polynomial.integralNormalization_eval₂_leadingCoeff_mul\", \"num_isRoot_scaleRoots_of_aeval_eq_zero\", \"Polynomial.aeval_eq_prod_aroots_sub_of_splits\"], \"digest\": \"5168003a80c91320\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: determinant norms, polynomial-law scalar actions and integral coefficient lemmas do not state the result for an arbitrary normalized multiplicative homogeneous polynomial function. Root-product and scalar-extension arguments still need proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous multiplicative polynomial map on an algebra stays multiplicative after scalar extension",
+   "results": "{\"t\": \"2026-10-23T13:12:15Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous multiplicative polynomial map on an algebra stays multiplicative after scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize_smul\", \"AlgHom.extendScalars\", \"LinearMap.ltoFun\", \"Polynomial.homogenizeLM\", \"MvPolynomial.IsHomogeneous.map\", \"PolyEquivTensor.toFunAlgHom\", \"PolynomialLaw.smul\", \"MvPolynomial.instIsScalarTower\"], \"digest\": \"1fa6372959977f7b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: determinant norms, polynomial-law scalar actions and integral coefficient lemmas do not state the result for an arbitrary normalized multiplicative homogeneous polynomial function. Root-product and scalar-extension arguments still need proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PolynomialLaw\", \"mul\"",
+   "results": "{\"t\": \"2026-10-23T13:12:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"PolynomialLaw\\\", \\\"mul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"PolynomialLaw.instSMul\", \"PolynomialLaw.instMulAction\", \"PolynomialLaw.smul\", \"PolynomialLaw.one_smul\", \"PolynomialLaw.zero_smul\", \"PolynomialLaw.one_tmul_ground\", \"PolynomialLaw.one_tmul_ground_apply'\", \"PolynomialLaw.add_smul\"], \"digest\": \"999642c92d05ae54\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: determinant norms, polynomial-law scalar actions and integral coefficient lemmas do not state the result for an arbitrary normalized multiplicative homogeneous polynomial function. Root-product and scalar-extension arguments still need proof."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.*polynomial|polynomial.*multiplicative|homogeneous.*norm",
+   "results": "{\"t\": \"2026-10-23T13:28:40Z\", \"tool\": \"grep\", \"query\": \"multiplicative.*polynomial|polynomial.*multiplicative|homogeneous.*norm\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\"], \"digest\": \"8edb293229bdfea2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: determinant norms, polynomial-law scalar actions and integral coefficient lemmas do not state the result for an arbitrary normalized multiplicative homogeneous polynomial function. Root-product and scalar-extension arguments still need proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous polynomial multiplicative norm on a rational algebra gives integral characteristic polynomial coefficients for integral algebra elements",
+   "results": "{\"t\": \"2026-10-23T13:24:45Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous polynomial multiplicative norm on a rational algebra gives integral characteristic polynomial coefficients for integral algebra elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isIntegral_norm\", \"IsIntegral.coeff_of_exists_smul_mem_lifts\", \"PowerBasis.repr_mul_isIntegral\", \"IsIntegral.coeff_of_isFractionRing\", \"IsIntegral.coeff\", \"Polynomial.integralNormalization_aeval_eq_zero\", \"PowerBasis.toMatrix_isIntegral\", \"IsAlmostIntegral.coeff\"], \"digest\": \"7ca3f3f4a951801c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: determinant norms, polynomial-law scalar actions and integral coefficient lemmas do not state the result for an arbitrary normalized multiplicative homogeneous polynomial function. Root-product and scalar-extension arguments still need proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, Lemma 10.22, printed p.51 (root product identity), with normalization and homogeneity as in Proposition 10.13 and Theorem 10.9, printed pp.47–48. The integral-coefficient conclusion is the general polynomial-norm version of Theorem 10.9; details supplied in the report.",
+   "via": [
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-polynomial-norm",
+  "worker": "stage1",
+  "summary": "Read Milne I Lemma 10.22. Constructed the monic polynomial by homogeneous coordinate substitution, extended multiplicativity by the existing polynomial-determination clause, computed the exact sign and leading scalar in the root product, and proved integrality by root containment, divisibility by H^d, field-extension descent and the existing Gauss lemma. Reused existing factorization, algebraic-closure and polynomial-identity nodes; created one exact Mathlib leaf.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, Lemma 10.22, printed p.51 (root product identity), with normalization and homogeneity as in Proposition 10.13 and Theorem 10.9, printed pp.47–48. The integral-coefficient conclusion is the general polynomial-norm version of Theorem 10.9; details supplied in the report. This split expands the polynomial-norm input to the inherited abelian Tate-characteristic-polynomial/level-rigidity prerequisite; no change to the unit route. The ancestor command returns null, so that value and the inherited via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-bf3582115",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-bf3582115 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the source in full and changed nothing. Source: Milne AV I Lemma 10.22, printed p.51 (proof by 'after extending K' and a product line, sign ±). The item uses δ(t1−u), which makes the sign exactly +, and adds integrality, so proof_origin=agent is correct. Step 1: P=D(Xb−v), whose X^d coefficient is D(b)=δ(1)=1, so P is monic; uniqueness follows from the trf infinite-evaluation leaf. Step 2: D(m(Z,W))−D(Z)D(W) vanishes on Q^{2n}, so it is 0 by the determination clause of lem-sfb-bounded-line-polynomial-interpolation (an unconditional clause). This gives δ_K multiplicative and degree-d homogeneous, with δ_K(0)=0. Every evaluation is in a field, so a noncommutative E is fine. Steps 3–4: I checked the factorization over an algebraic closure of L, central scalars, and the signs c^d(−1)^{dm}∏(b_j−a_i)=∏F(a_i), including F=0 and constant F. Step 5: H(a)≠0 would make u−a1 right-invertible, giving 0=δ_K(1)=1; this is correct and needs no Cayley–Hamilton. Step 6: r_a≤d≤ds_a gives P_u|H^d in K[T]; this descends to Q[T] by the new leaf, and the Gauss leaf lem-weil-monic-divisor-integral then gives P_u∈Z[T]. New node: an exact match for Polynomial.map_dvd_map' at FieldDivision.lean:597–604 ([Field R] from line 298, [Field k], R→+*k, zero handled). It is self-contained, its searches are real, and rg -L over dag/nodes finds no duplicate. Every off-unit citation is a Mathlib leaf, so no tool_uses are needed, and there is no cycle. Batch-5: lem-trf-polynomial-infinite-evaluation-identity (Polynomial.eq_of_infinite_eval_eq) and lem-sfb-bounded-line-polynomial-interpolation (whose closure reaches only trf Mathlib leaves eq_of_infinite_eval_eq and funext_set) are generic polynomial algebra. Neither is the trace formula, Poincaré duality, or a step of their proofs, so both are accepted. Small cases checked: E=Q with x^d; Q×Q with xy and x²y; M_2 with det; integral u=2."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MultiplicativePolynomialNorm",
+  "declaration": "Algebra.exists_characteristicPolynomial_of_multiplicative_homogeneous",
+  "file": "lean/Sheaf/RingTheory/MultiplicativePolynomialNorm.lean",
+  "statement": "theorem exists_characteristicPolynomial_of_multiplicative_homogeneous (E : Type u) [Ring E] [Algebra ℚ E] [Nontrivial E] [FiniteDimensional ℚ E] (d : ℕ) (hd : 0 < d) (δ : E → ℚ) (h_one : δ 1 = 1) (h_mul : ∀ x y : E, δ (x * y) = δ x * δ y) (h_poly : ∃ (n : ℕ) (b : Module.Basis (Fin n) ℚ E) (D : MvPolynomial (Fin n) ℚ), D.IsHomogeneous d ∧ ∀ x : E, δ x = MvPolynomial.eval (b.repr x) D) (u : E) : ∃ P : Polynomial ℚ, P.Monic ∧ P.natDegree = d ∧ (∀ t : ℚ, P.eval t = δ (t • (1 : E) - u)) ∧ (∀ Q : Polynomial ℚ, (∀ t : ℚ, Q.eval t = δ (t • (1 : E) - u)) → Q = P) ∧ (∀ (L : Type v) [Field L] [Algebra ℚ L] (a : Fin d → L), P.map (algebraMap ℚ L) = ∏ i : Fin d, (Polynomial.X - Polynomial.C (a i)) → ∀ F : Polynomial ℚ, algebraMap ℚ L (δ (Polynomial.aeval u F)) = ∏ i : Fin d, Polynomial.aeval (a i) F) ∧ ((∃ H : Polynomial ℤ, H.Monic ∧ Polynomial.eval₂ (Int.castRingHom E) u H = 0) → ∀ k : ℕ, ∃ z : ℤ, P.coeff k = (z : ℚ))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aa3b4fad",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read item node, 3 stmt_deps (FiniteDimensional, MvPolynomial, Polynomial), Milne AV I Lemma 10.22 p.51, report and module. Snapshot node = side-live except lean record; lean.statement verbatim in the file. Clause match exact: Ring/Algebra ℚ/Nontrivial/FiniteDimensional E (noncommutative allowed), 0<d, δ(1)=1, multiplicative, ∃ basis+homogeneous D with δ = eval∘repr; P monic, natDegree d, eval = δ(t•1−u), uniqueness among all representing Q (true over ℚ); ∀ L:Type v with P.map = ∏(X−C a_i), algebraMap(δ(aeval u F)) = ∏ aeval (a i) F; monic integer annihilator ⇒ integer coeffs. Math verified (leading coeff D(b)=1, sign cancellation incl. F=0/constant F, right-inverse contradiction, P∣H^d + Gauss). Universes u,v independent. No defs, sorry only, docstrings carry source/blueprint/6-step plan, no name collision, imports fine. No compile (no file changed). No findings."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with the invertible twist by associativity of derived tensor, using the reduced coefficient twists of def-coefficient-twists-detailed; ordinary signed maps and derived single-complex computation."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: compatibility of finite scalar reduction with invertible signed coefficient twists.",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_origin": "H2, 2026-10-26: existence is delegated to a strict witness node; uniqueness is proved directly by adjunction homEquiv injectivity and Iso.ext. J2 changes only the computational representation of the complete original HEq predicate: Pointwise for the actual finiteTensorLineComparisonData expands to the same actual adjunction hom equivalence and full original single-functor/restriction composite. No mathematical statement or hypothesis changes.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized extension of scalars for signed powers and internal duals of a rank one sheaf",
+   "results": "8 hits: NormedSpace.normalize_smul, LinearMap.extendScalarsOfIsLocalizationEquiv, Bornology.IsVonNBounded.extend_scalars, LinearMap.extendTo𝕜, ModuleCat.extendRestrictScalarsAdj, LinearEquiv.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.norm_extendTo𝕜'_apply_sq. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of scalar extension on a flat rank one module sheaf is an isomorphism in the derived category",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, PresheafOfModules.sheafificationAdjunction, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, SheafOfModules.pushforwardSections_unitHomEquiv. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Dd]ual|extend.*[Dd]ual|homEquiv.*injective",
+   "results": "25 hits: Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-pur-finite-tensor-line-derived-existence",
+ "title": "Unique prescribed derived signed-line comparison at one exponent",
+ "statement": "Fix a finite coefficient setting P [def-pur-conventions], levels $1\\le m\\le n=P.level$, a scheme T over $\\operatorname{Spec}(P.field.k)$, and any normalized family c of ordinary signed semilinear maps as in [def-pur-finite-tensor-reduction-data]. For every fixed integer r there exists a unique isomorphism b from Q(A_T(r)[0]) to B_T(r)[0] whose image under the actual scalar-adjunction hom bijection is the single-complex image of c_r in fixed-scalar coordinates followed by the inverse exact-restriction/single comparison. This states existence at one exponent for an already given ordinary normalized family; it does not assert ordinary existence or a chosen family.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existence witness for the prescribed transpose at the fixed exponent r.",
+   "uses": [
+    "lem-pur-finite-tensor-line-derived-existence-witness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fully proved generic pointwise_unique API to the actual transpose data. Its proof is precisely the previous HEq transitivity, homEquiv injectivity and Iso.ext argument, formed before concrete specialization.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "def-pur-transposed-family-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-tensor-line-derived-existence-witness",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-transposed-family-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorLineDerivedExistence",
+  "file": "lean/Sheaf/Paper/FiniteTensorLineDerivedExistence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorLineDerivedComparison",
+  "statement": "theorem existsUnique_finiteTensorLineDerivedComparison (P : PurityFiniteSetting.{u})\n    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) (T : Scheme.{u})\n    [T.Over (Spec (.of P.field.k))]\n    (c : P.FiniteTensorLineMaps m hm hmn T)\n    (hc : P.FiniteTensorLineMapsNormalized m hm hmn T c) (r : ℤ) :\n    ∃! b : (P.finiteTensorReduction m hm hmn T).obj (P.finiteTensorFixedLine T r) ≅\n        (P.finiteReductionSetting m hm).finiteTensorFixedLine T r,\n      (P.finiteTensorLineComparisonData m hm hmn T).Pointwise c r b",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorLineDerivedComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T203628-L-2835384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

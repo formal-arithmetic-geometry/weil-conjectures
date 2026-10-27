@@ -1,0 +1,217 @@
+{
+ "id": "def-pur-completed-pullback-tower-realizations",
+ "kind": "definition",
+ "title": "Coherent reduction and strict tower realization data",
+ "status": "split",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension]. For every scheme W and morphism f:X→Y use the actual coherent coefficient systems [def-coef-ringed-sequence-site] and their derived evaluation calculus [lem-coef-derived-system-evaluation-calculus]. Construct their sequence-site pullback and direct-image adjunction from the canonical constant-section ring map [def-trf-integral-comparison-sequence-systems]. Construct the ordinary coherent reduction left adjoint to completed scalar restriction followed by the inverse limit. Fix its derived reduction model by its adjunction unit on flat K-flat complexes, and fix each finite evaluation by the actual quotient-extension unit. Fix direct evaluation by identity on sections, and inverse evaluation by the corresponding adjunction mate. Reorder restricted coherent complexes into completed-module towers. Fix the total-limit/Roos comparison on K-injective towers by the limit-projection augmentation and zero second cone coordinate [def-sf-strict-roos-functor]. Fix the pullback and tensor tower comparisons by their prescribed finite components, using the strict finite pullback tower [def-a1-integral-finite-pullback-tower]. In particular, for each coherent complex C, pullbackTensorLimitRoos identifies the actual total limit of Q(C) with Q of the strict Roos complex of its restricted tower. All existing existence/uniqueness obligations retain their full displayed normalizations, with no boundedness or termwise-flatness hypothesis added. Finite coefficient rings and their finite instances use [def-pur-finite-pullback-tensor-construction]. Construct the coherent reference pullback and tensor from reduction, sequence pullback/tensor and total limit. Fix the actual integral pullback and tensor models by their full strict Roos realizations. State K-flat preservation for coherent reduction and sequence inverse image, with no termwise-flatness assumption. Fix the ordinary coherent tensor/pullback comparison by its full finite components on flat K-flat representatives, and its derived comparison by the universal reduction counits and that cochain comparison. All these existing normalizations and their uniqueness clauses are retained verbatim.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sf-strict-roos-functor",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941, 08TC and 07A4; the same coherent reduction, limit-projection Roos augmentation and finite pullback/tensor normalization sources as the original completed-comparison declarations."
+ },
+ "proof": [
+  {
+   "text": "Use the existing core for the sequence ring map, adjunctions, exactness and identity/mate evaluation data, and for the unique ordinary finite evaluation and derived reduction models fixed there by their transpose equations (the actual quotient unit followed by the nth limit projection, and the right-derived limit unit after the ordinary unit); these equations fix the required units, not just isomorphism classes.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Released repair order 2026-10-27: assembly; def-pur-completed-pullback-tower-core (declarations pullbackTensorReductionEvaluation_existsUnique, pullbackTensorReductionModel_existsUnique)"
+   }
+  },
+  {
+   "text": "Apply the normalized total-limit/Roos model of the core to the exact scalar-restriction localization comparison. Their composite is pullbackTensorLimitRoos. Its K-injective formula is exactly the limit-projection lift with zero shifted coordinate, so both cone coordinates and the actual derived unit are retained.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-sf-strict-roos-functor",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Released repair order 2026-10-27: assembly; def-pur-completed-pullback-tower-core (pullbackTensorRoosModel_existsUnique), def-sf-strict-roos-functor, def-coef-ringed-sequence-site"
+   }
+  },
+  {
+   "text": "Use the strict pullback tower comparison of the core and the tensor tower node, each with its prescribed level components. Their uniqueness is uniqueness of strict tower maps with actual quotient transitions. Apply the Roos functor to those whole tower isomorphisms; this supplies the strict reference realizations used in the next step.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-pur-coherent-tensor-tower",
+    "def-sf-strict-roos-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Released repair order 2026-10-27: assembly; def-pur-completed-pullback-tower-core (pullbackTensorPullbackTower_existsUnique), lem-pur-coherent-tensor-tower, def-sf-strict-roos-functor"
+   }
+  },
+  {
+   "text": "The reduction K-flatness node makes the coherent tensor model applicable to good integral pairs. The two integral realization nodes then identify the actual completed operations with the reference reduction/pullback-or-tensor/limit constructions, with exactly their full good-representative components and uniqueness clauses.",
+   "uses": [
+    "lem-pur-coherent-reduction-kflat",
+    "lem-pur-integral-pullback-roos-realization",
+    "lem-pur-integral-tensor-roos-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Released repair order 2026-10-27: assembly of the declaration-level obligations; lem-pur-coherent-reduction-kflat, lem-pur-integral-pullback-roos-realization, lem-pur-integral-tensor-roos-realization"
+   }
+  },
+  {
+   "text": "Select the unit-normalized cochain comparison of the cochain node. The sequence K-flatness node allows it on every K-flat pair, without flat-term assumptions. The derived system comparison node fixes its descent by the displayed universal-model square. These selected data supply the final coherent pullback/tensor comparison before taking a limit.",
+   "uses": [
+    "lem-pur-sequence-pullback-tensor-cochain",
+    "lem-pur-sequence-pullback-kflat",
+    "lem-pur-coherent-derived-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Released repair order 2026-10-27: assembly of the declaration-level obligations; lem-pur-sequence-pullback-tensor-cochain, lem-pur-sequence-pullback-kflat, lem-pur-coherent-derived-pullback-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-sf-strict-roos-functor",
+  "def-coef-ringed-sequence-site",
+  "lem-pur-coherent-tensor-tower",
+  "lem-pur-coherent-reduction-kflat",
+  "lem-pur-integral-pullback-roos-realization",
+  "lem-pur-integral-tensor-roos-realization",
+  "lem-pur-sequence-pullback-tensor-cochain",
+  "lem-pur-sequence-pullback-kflat",
+  "lem-pur-coherent-derived-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Released stage-1 repair order 2026-10-27; existing Stacks-derived coherent quotient, Roos and tensor/pullback constructions, with each named normalized obligation delegated separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inverse systems of sheaves of modules reduction inverse limit adjunction and Roos complex model",
+   "results": "SheafOfModules.createsLimit, evaluationPreservesLimit and hasLimit supply general limit facts; no complete normalized coherent reduction/Roos package.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing project constructions and proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq, unit_leftAdjointUniq_hom and component formulas.",
+   "date": "2026-10-27",
+   "verdict": "The existing construction already uses the appropriate adjunction API; no replacement needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|SequenceModule",
+   "results": "0 Mathlib hits from msearch. Repository search finds the existing coherent sequence and strict Roos definitions.",
+   "date": "2026-10-27",
+   "verdict": "Preserve the project-specific normalized realizations."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "declaration": "WeilConjectures.pullbackTensorLimitRoos",
+  "declarations": [
+   "WeilConjectures.pullbackTensorTensorTowerLevel",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower",
+   "WeilConjectures.pullbackTensorLimitRoos",
+   "WeilConjectures.pullbackTensorReferencePullback",
+   "WeilConjectures.pullbackTensorReferenceTensor",
+   "WeilConjectures.pullbackTensorReferencePullbackModel",
+   "WeilConjectures.pullbackTensorIntegralPullbackModel_existsUnique",
+   "WeilConjectures.pullbackTensorIntegralPullbackModel",
+   "WeilConjectures.pullbackTensorReductionGood",
+   "WeilConjectures.pullbackTensorSystemModel",
+   "WeilConjectures.pullbackTensorReferenceTensorModel",
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorIntegralTensorModel",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceCochain",
+   "WeilConjectures.pullbackTensorSequenceGood",
+   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+   "WeilConjectures.pullbackTensorSystemComparison",
+   "WeilConjectures.pullbackTensorIntegralTensorNormalization"
+  ],
+  "statement": "def pullbackTensorLimitRoos (W : Scheme.{u})\n    (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :\n    (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj C) ≅\n      DerivedCategory.Q.obj (integralOperationsRoos (pullbackTensorRestrictedTower l E W C))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NF-45279ba35",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-45279ba35 (reviewer sub-agent of L); spot-checked: Re-split check: the old 16 steps are all retained and nothing was shortened. Old steps 1-8 were already delegated to def-pur-completed-pullback-tower-core. Old step 10 is now item step 2. Old steps 9 and 11-16 are now seven new statement-only nodes, each matching its Lean header (read in sandbox J6 CompletedPullbackTensorComparison.lean, lines 339-935); the five-step assembly is about 1.5k characters. Fault (C5/D1 duplicate): four new nodes restate obligations of the existing reviewed core node. These are lem-pur-coherent-reduction-model, -reduction-evaluation, -roos-model and -pullback-tower. Core already owns pullbackTensorReductionModel/ReductionEvaluation/RoosModel/PullbackTower_existsUnique in lean.declarations, its statement fixes them, and its proof steps 5-8 carry them. The report concedes that the order's count of eleven predates the move into Core. Fixed by dropping the four. Item steps 1-3 now cite core and proof_deps were recomputed. The same-unit tool_use (core) is removed; no tool_uses accepted. tensor-tower states a_{W,n} inline from core. integral-pullback-roos-realization states m, rho, a, B_f^0 and c inline, adding stmt_deps core and def-a1-integral-finite-pullback-tower. integral-tensor-roos-realization states m and rho inline and cites core. No cycle, and no remaining citation of a dropped id. Truth checks: tensor tower is a strict levelwise pure-tensor check. Reduction K-flatness holds because good inputs have flat terms, so Stacks 0G7E (sites-cohomology l.3508) applies. The cochain comparison is Stacks 03EL, with uniqueness by adjunction plus generators. The derived square was checked term by term (D_f tau_Y, zeta, delta x delta against delta_Tot, q(z), tau_X). The two realizations match the Reference*Model bodies and follow by descent. Advisory: sequence-pullback-kflat (arbitrary K-flat input, as in the existing header) goes beyond 0G7E, which needs flat terms; F_f=f^{-1} and the pro-etale topos has enough points, so it is plausible, but the node's taker must settle whether stalks of an arbitrary K-flat complex are K-flat. blueprint.from.node null is accepted (broken created.item chain). Stage 2 must move lean ownership from the item to the new nodes.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorReductionGood",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceGood",
+   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "worker": "stage1",
+  "summary": "Released repair obeyed for the item's own obligations: seven declaration-level statement-only tasks (tensor tower, integral pullback and tensor Roos realizations, reduction and sequence K-flatness, sequence cochain and derived pullback/tensor comparisons), with the inherited proof-step arguments retained in their split_report.retained_arguments. The four obligations pullbackTensorReductionModel/ReductionEvaluation/RoosModel/PullbackTower_existsUnique belong to the existing def-pur-completed-pullback-tower-core (its lean declarations and proof steps 5-8); the reviewer dropped the four new nodes that restated them and cites the core instead. Statement and stmt_deps unchanged; five-step assembly shorter than 3000 characters. No Lean file changed.",
+  "blueprint": "Finite reduction and scalar extension coherence for def-weil-frobenius-coefficient-twists; parent chain lem-pur-derived-pullback-tensor-iso / def-pur-completed-pullback-tensor-comparison preserved."
+ }
+}

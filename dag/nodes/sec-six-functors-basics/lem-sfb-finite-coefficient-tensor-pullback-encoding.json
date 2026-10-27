@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-finite-coefficient-tensor-pullback-encoding",
+ "kind": "statement",
+ "title": "Normalized finite coefficient tensors commute with derived pullback",
+ "statement": "Let A be a finite discrete commutative topological ring, R a commutative condensed ring, e:R ≅ coefficient(A) an isomorphism of ring objects, and E_T a normalized Encoding A T on each scheme T, as in [def-sfb-finite-coefficient-operation-encoding]. Write F_T for the constructed coefficientEncoding. For every scheme morphism p:X → Y there are natural isomorphisms alpha:F_Y ⋙ Lp*_ordinary ≅ Lp*_internal ⋙ F_X and m_T:F_T(K tensor_internal L) ≅ F_T(K) tensor_ordinary F_T(L) for T=X,Y. For the published pullback tensor comparisons phi and phi0 these satisfy CategoryTheory.Adjunction.ComparisonCompatible alpha phi phi0 m_X m_Y: F_X(phi(a,b)) followed by m_X equals alpha inverse at a tensor b, then Lp*_ordinary(m_Y), then phi0, then the tensor of alpha at a and b. Only derived pullbacks and tensor bifunctors occur; no projection morphism or direct-image invertibility is asserted. The data are bundled in TensorPullbackCompatibility, with tensor bifunctors inferred from the native pullback comparisons; the theorem asserts Nonempty of this data. The native projection contexts bundle the published adjunctions and pullback tensor comparisons without changing them; their projection is definitionally the published canonical projection.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Transport paragraph and clause (3); expanded steps 1--2 of lem-sfb-finite-coefficient-projection-encoding."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-coefficient-operation-encoding",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-finite-derived-functors"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual heart encoding N_T=Res(e inverse)_T followed by the given ordinary and fixed encoding equivalences. Its factors are additive equivalences, so it is exact and an equivalence. The explicitly constructed identity-on-sections direct-image square determines the heart pullback comparison by conjugation and uniqueness of left adjoints. Apply [lem-sfb-finite-coefficient-heart-tensor-square] to obtain compatible strong monoidal structures on N_X,N_Y and monoidality of this fixed heart comparison. This is the sole remaining concrete normalization step, with no derived construction included.",
+   "uses": [
+    "lem-sfb-finite-coefficient-heart-tensor-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact monoidal equivalences preserve flat objects. Apply the proved generic composition/naturality identity Functor.map_leftDerivedTensorComparison_comp_eq_of_iso to the four heart functors. It gives ComparisonCompatible for their actual total left derived functors and tensor comparisons. The identities in [new-proetale-derived-module-pullback-monoidal] identify the internal published comparison with this generic one; the ordinary comparison has the generic definition.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For T=X,Y compose the exact-functor isomorphism L(N_T) ≅ D(N_T) with mapDerivedCategoryCompIso. Its target is definitionally the original coefficientEncoding functor. Transport the two tensor isomorphisms and the pullback square across these isomorphisms. Naturality of the isomorphisms and of the tensor comparison proves ComparisonCompatible after transport; the private comparisonCompatible_transport lemma contains this calculation. Bundle the transported data in TensorPullbackCompatibility. No native context, public statement, or tensor is changed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-coefficient-heart-tensor-square",
+  "new-proetale-derived-module-pullback-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Transport paragraph and clause (3); use the proved generic derived-square calculus, leaving only the normalized square on the abelian hearts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized constant coefficient encoding of internal module sheaves commutes with derived tensor products and derived geometric pullbacks",
+   "results": "constantCommuteCompose; SheafOfModules.sheafificationCompPullback; SheafOfModules.pullbackObjFreeIso; Scheme.Modules.pullbackPushforwardAdjunction. These are underived constant-sheaf and pullback tools, not the specified unbounded internal/fixed tensor square.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use the stated normalized tensor and geometric comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "Unknown identifier in Mathlib search. Repository search finds the proved generic projection-mate theorem in WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate.",
+   "date": "2026-10-25",
+   "verdict": "The categorical assembly already exists, but not this concrete tensor-compatible pullback square."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|finiteCoefficientTensorPullbackEncoding|coefficientEncoding in Mathlib/CategoryTheory; tensor.*pullback|pullback.*tensor in the imported blueprint and dag/nodes",
+   "results": "No Mathlib hit for the concrete encoding. Existing lem-sp-categorical-projection-mate-square is the generic categorical assembly; lem-sf-finite-discrete-encoding-tensor-tor supplies the tensor-only part at R=coefficient A. The integral quotient tensor coherence has a different scalar extension and fixed coefficient stages. No duplicate of this internal-to-fixed finite-coefficient pullback square.",
+   "date": "2026-10-25",
+   "verdict": "A new concrete compatibility step is needed; do not restate the generic mate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientProjectionEncoding",
+  "date": "2026-10-25",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Transport paragraph, tensor/pullback compatibility for clause (3); steps 1--2 of the projection-encoding proof.",
+   "via": [
+    "lem-sfb-finite-coefficient-projection-encoding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientTensorPullbackEncoding",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientTensorPullbackEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientTensorPullbackEncoding",
+  "statement": "theorem finiteCoefficientTensorPullbackEncoding\n    (e : Mon.mk R ≅ Mon.mk (coefficient A))\n    (E : ∀ T : Scheme.{u}, Encoding A T)\n    {X Y : Scheme.{u}} (p : X ⟶ Y) :\n    Nonempty (Adjunction.TensorPullbackCompatibility\n      (coefficientEncoding A e Y (E Y)) (coefficientEncoding A e X (E X))\n      (internalProjectionContext R p).comparison\n      (ordinaryProjectionContext (ULift.{u + 1} A) p).comparison)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.Adjunction.TensorPullbackCompatibility",
+   "CategoryTheory.Adjunction.TensorPullbackCompatibility.projection_isIso_iff_of_equivalences",
+   "CategoryTheory.Adjunction.ProjectionContext",
+   "CategoryTheory.Adjunction.ProjectionContext.projection",
+   "CategoryTheory.Adjunction.ProjectionContext.projection_isIso_iff",
+   "AlgebraicGeometry.ProEtale.internalProjectionContext",
+   "AlgebraicGeometry.ProEtale.ordinaryProjectionContext",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientTensorPullbackEncoding"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T202221-L-2695356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T002325-L-76293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

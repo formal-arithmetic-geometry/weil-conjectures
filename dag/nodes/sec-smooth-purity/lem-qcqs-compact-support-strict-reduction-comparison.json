@@ -1,0 +1,142 @@
+{
+ "id": "lem-qcqs-compact-support-strict-reduction-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Normalized qcqs proper/open realization: Strict reduction comparison and recorded native-limit coordinates",
+   "via": [
+    "lem-qcqs-compact-support-normalized-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict reduction comparison and recorded native-limit coordinates",
+ "statement": "Let l be a prime, E a finite extension of Q_l, and k any field in which l is invertible. Let X,Y be finite-type k-schemes and f:X→Y a separated finite-type k-morphism with a fixed compactification c=(j,p). Use the integral coefficient categories and reductions of [def-weil-completed-integral-coefficients, def-weil-integral-derived-reduction, def-weil-derived-complete-integral-detailed]. There exist reduction/total-limit calculi SX,SY of [lem-coef-derived-system-evaluation-calculus], a natural transformation beta from the actual ambient completed proper/open image followed by SY.reduction into the native sequence SX.reduction followed by varying-ring j! and Rp*, and a natural isomorphism gamma from the recorded integral compact-support functor of [def-weil-compact-support-finite-action] into the total limit of that native sequence. At every positive level n+1 and every ambient input, beta evaluated in the reductionEvaluation and nativeEvaluation coordinates equals the actual proper/open scalar comparison in finiteReductionIso and finiteImageIso coordinates. On each integral constructible input gamma followed by the native total-limit projection and nativeEvaluation equals the finite scalar-adjunction unit followed by restriction of sfCompactSupportFiniteReductionIso. Beta is a map of whole derived coefficient systems, with the actual quotient transitions, and is not asserted invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Proof of sk-prop-scalar-six-compact-support; Bhatt--Scholze 6.7.6, 6.7.7 and 6.1.13; Stacks 0941 and 0F7J",
+  "note": "Agent-stated proper/open realization prerequisite; proof details in module docstring."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-varying-ring-operations",
+  "def-coef-ringed-sequence-site",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the strict reduction data subclaim to obtain SX, SY and beta with the required finite-coordinate equation.",
+   "uses": [
+    "lem-qcqs-compact-support-strict-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the total-limit projection subclaim to the same SX and SY to obtain gamma with the required projection equation, then package beta and gamma with the two equations.",
+   "uses": [
+    "lem-qcqs-compact-support-strict-reduction-gamma"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-strict-reduction-data",
+  "lem-qcqs-compact-support-strict-reduction-gamma"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Parent theorem assembled from the strict reduction data and total-limit projection subclaims"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation into the right adjoint is obtained from the adjunction unit and a natural transformation between left adjoints",
+   "results": "CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.unit_naturality; these supply formal adjunction identities, not the compact-support strict comparison or rigidity.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural morphism into derived inverse limit uniquely prescribed finite reduction projections",
+   "results": "Profinite.exists_hom; LightProfinite.proj_comp_transitionMapLE; CategoryTheory.Limits.comp_lim_obj_ext. None concerns derived coefficient systems or natural compact-support comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "No hits; service reports unknown identifier. Local Mathlib Adjunction/Basic.lean supplies homEquiv_naturality_left and homEquiv_naturality_right, used for formal transposition only.",
+   "date": "2026-10-27",
+   "verdict": "no geometric match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg compactSupport.*[Ll]ift|[Nn]ormalizedLift; rg reduction_ext|jointly.*faithful|faithful.*evaluation|evaluation.*faithful on lean/Sheaf and lean/WeilConjectures; rg homEquiv_naturality in Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "results": "The item and its downstream QcqsCompactSupportRealization; downstream CompactificationStrictRealization cannot be imported without a cycle. integral_reductions_jointly_faithful requires FiniteFieldDatum and a SixFunctorSpace, so does not apply to the arbitrary base field in this item. Mathlib has the generic adjunction calculus.",
+   "date": "2026-10-27",
+   "verdict": "no existing theorem with this scope"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportNormalizedLift",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportStrictReductionComparison",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportStrictReductionComparison.lean",
+  "declaration": "WeilConjectures.qcqsCompactSupport_strictReductionComparison",
+  "statement": "theorem qcqsCompactSupport_strictReductionComparison :\n    ∃ (SX : CoefficientDerivedSystemCalculus l E X)\n      (SY : CoefficientDerivedSystemCalculus l E Y),\n    let N := SX.reduction ⋙ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.i ⋙\n      ProEtale.VaryingRing.P (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.g\n    let e (n : ℕ) : N ⋙ coefficientSequenceDerivedEvaluation l E Y n ≅\n        scalarReductionDerivedExtension l E X n ⋙\n          sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c :=\n      Functor.isoWhiskerLeft SX.reduction (compactSupportSystemEvaluation l E c n) ≪≫\n        Functor.isoWhiskerRight (SX.reductionEvaluation n)\n          (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)))\n    ∃ (β : image (completed l E) c ⋙ SY.reduction ⟶ N)\n      (γ : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙\n          (sfIntegralConstructible l E Y).ι ≅\n        (sfIntegralConstructible l E X).ι ⋙ N ⋙\n          coefficientSequenceLimit l E Y),\n      (∀ (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ),\n        (SY.reductionEvaluation n).inv.app ((image (completed l E) c).obj K) ≫\n            (coefficientSequenceDerivedEvaluation l E Y n).map (β.app K) ≫\n            (e n).hom.app K =\n          (finiteReductionIso l E Y n).inv.app ((image (completed l E) c).obj K) ≫\n            (comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app K ≫\n            (finiteImageIso l E n c).hom.app\n              ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj\n                K) ≫\n            (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1))\n              c).map ((finiteReductionIso l E X n).hom.app K)) ∧\n      (∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),\n        γ.hom.app K ≫ (coefficientSequenceProjection l E Y n).app\n              ((N).obj K.obj) ≫\n            (coefficientFiniteDerivedRestriction l E Y n).map\n              ((e n).hom.app K.obj) =\n          (coefficientFiniteAdjunction l E Y n).unit.app\n              ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).obj ≫\n            (coefficientFiniteDerivedRestriction l E Y n).map\n              (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T222741-L-690514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T012818-L-2334557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

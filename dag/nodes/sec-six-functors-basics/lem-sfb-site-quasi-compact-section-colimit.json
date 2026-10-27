@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-site-quasi-compact-section-colimit",
+ "kind": "statement",
+ "title": "Sections of filtered sheaf colimits over quasi-compact site objects",
+ "statement": "Let $\\mathcal C$ be a small site and $\\operatorname{Ab}(\\mathcal C)$ its category of abelian sheaves [def-weil-pbc-sites-and-cohomology]. Call an object $W$ quasi-compact if every covering $\\{V_a\\to W\\}_{a\\in A}$ admits a covering refinement $\\{T_b\\to W\\}_{b\\in B}$ together with a map $\\alpha:B\\to A$ with finite image and factorizations $T_b\\to V_{\\alpha(b)}\\to W$. Let $D$ be a small filtered category (nonempty, with a cocone on every finite diagram), let $G:D\\to\\operatorname{Ab}(\\mathcal C)$ be a diagram and let $L=\\varinjlim_DG$ in abelian sheaves [def-weil-pbc-category-colimit]. For every quasi-compact $W$, the canonical homomorphism $\\varinjlim_dG_d(W)\\to L(W)$ is injective. If $W$ has a cofinal system of finite covering families $\\{W_a\\to W\\}_{a\\in A}$ for which every pairwise fibre product $W_a\\times_WW_b$ is quasi-compact, then this canonical homomorphism is an isomorphism. Here cofinal means that every covering of $W$ is refined by one of those families, and refinement means that each refining arrow factors through some original covering arrow.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738, lemma-directed-colimits-sections, parts (2) and (4); definition-quasi-compact in the same section. Abelian version: Modules on Sites, lemma-limits-colimits-abelian-sheaves; the cohomology lemma-colim-works-over-collection applies this sections result to abelian sheaves in its first proof paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Put $P(V)=\\varinjlim_dG_d(V)$ in abelian groups, with restrictions induced by the restrictions of the $G_d$; functoriality follows by checking the colimit coprojections. The abelian-sheaf colimit construction identifies $L$ with $P^\\#$, compatibly with these coprojections. Sheafification of an abelian presheaf on underlying sets is set sheafification. Consequently the local-sections theorem applies to the underlying set map $\\eta:P\\to L$: every section of $L$ locally lifts to $P$, and equality of the images of two sections of $P(V)$ holds on a covering of $V$ already in $P$. Work in one universe containing the site, covering indices, diagram and group values; thus all the small-colimit and sheafification hypotheses of the cited statements hold.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, proof (2),(4); Tag 00WK, lemma-sections-sheafification; Tag 00YR, section-sheaves-algebraic-structures; Tag 03CO, lemma-limits-colimits-abelian-sheaves (4)"
+   }
+  },
+  {
+   "text": "The forgetful functor from abelian groups to sets preserves the filtered colimit defining each $P(V)$. The elementwise filtered-set-colimit theorem therefore gives: every $p\\in P(V)$ is represented by $t\\in G_i(V)$, and if $t,t'\\in G_i(V)$ have the same image in $P(V)$, some single arrow $a:i\\to j$ satisfies $G(a)_V(t)=G(a)_V(t')$. The same applies to restrictions of these sections and to zero. We use these two conclusions below for the groups $P(V)$, not for $L(V)$ before its comparison has been proved injective.",
+   "uses": [
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, proof (2),(4), eventual equality in sectionwise filtered colimits"
+   }
+  },
+  {
+   "text": "For any quasi-compact object $V$, suppose $t\\in G_i(V)$ maps to zero in $L(V)$. Step 1 supplies a covering $\\{V_a\\to V\\}$ on which its class in $P$ is zero. Step 2 gives, for each $a$, an arrow $f_a:i\\to j_a$ killing $t|_{V_a}$. By quasi-compactness choose a covering $\\{T_b\\to V\\}$ factoring through the $V_{\\alpha(b)}$ with $A_0=\\alpha(B)$ finite. Apply filteredness to the finite diagram consisting of one labelled copy of $i$, one labelled copy of each $j_a$ for $a\\in A_0$, and the arrows $f_a$. Its cocone gives $h:i\\to k$ and $h_a:j_a\\to k$ with $h=h_a f_a$. Naturality shows $G(h)_V(t)$ restricts to zero on every $T_b$. Sheaf separatedness for this covering gives $G(h)_V(t)=0$. If $A_0$ is empty, use $k=i$, $h=\\mathrm{id}$ and the same separatedness for the empty covering. Finally any element of the kernel of $P(V)\\to L(V)$ has a representative $t$ by step 2, so its eventual vanishing makes that element zero. This proves injectivity and, more precisely, eventual vanishing for a section at a specified stage.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, proof (2); Tag 090H, definition-quasi-compact"
+   }
+  },
+  {
+   "text": "Now impose the finite-cover hypothesis on $W$, and take $s\\in L(W)$. By step 1 it lifts to sections of $P$ on some covering of $W$. Choose a covering $\\{W_a\\to W\\}_{a\\in A}$ from the specified cofinal system refining it. Restrict the chosen local lifts along the factorization maps, and use step 2 to represent them by $t_a\\in G_{i_a}(W_a)$. The set $A$ is finite. A cocone in $D$ on the finite discrete diagram of its labelled indices gives $i$ and arrows $b_a:i_a\\to i$. Replace $t_a$ by $G(b_a)t_a$. Thus all local lifts lie in $G_i$ and still have images $s|_{W_a}$ in $L$, by the cocone equations. If the cover is empty, choose any $i$, which exists because $D$ is nonempty; no local lift is required.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, proof (4), choosing finitely many local representatives"
+   }
+  },
+  {
+   "text": "For each $(a,b)\\in A^2$, put $Z_{ab}=W_a\\times_WW_b$ with its two projections. The difference of the restrictions of $t_a$ and $t_b$ is in $G_i(Z_{ab})$ and maps to zero in $L(Z_{ab})$, since both images restrict $s$ along the same composite to $W$. Each $Z_{ab}$ is quasi-compact by hypothesis. The eventual-vanishing assertion proved in step 3 gives $f_{ab}:i\\to j_{ab}$ killing that difference. A cocone on the finite star diagram of all $f_{ab}$ gives a single $h:i\\to k$ factoring through every $f_{ab}$. Hence the sections $G(h)t_a$ agree on every pairwise fibre product. The sheaf equalizer condition for $G_k$ glues them to $t\\in G_k(W)$. Its image in $L(W)$ restricts to $s|_{W_a}$ for all $a$, so separatedness of $L$ makes that image $s$. For an empty cover take $k=i$ and use the equalizer condition on the empty family, which gives the unique section and the same equality. This proves surjectivity. The object $W$ is itself quasi-compact: a covering $\\{V_c\\to W\\}_{c\\in C}$ is refined by a family $\\{W_a\\to W\\}_{a\\in A}$ of the system, and choosing for each $a$ one $c=\\alpha(a)$ with $W_a\\to W$ factoring through $V_c$ gives $\\alpha:A\\to C$ with finite image since $A$ is finite. Hence step 3 applies to $V=W$; together with it, the comparison is a bijective homomorphism. Its inverse preserves addition because, for images $x,y$, the unique preimage of $x+y$ is the sum of their unique preimages; thus it is an isomorphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, proof (4), eventual matching on overlaps and gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738, lemma-directed-colimits-sections, proofs of (2) and (4); abelian comparison via sites-modules.tex Tag 03CO and sites.tex Tag 00YR. Finite-diagram cocones express the argument for arbitrary small filtered categories."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a site, sections over a quasi compact object inject into filtered sheaf colimits; they commute with filtered colimits when finite covers with quasi compact overlaps are cofinal",
+   "results": "Search returned 8 hits; recorded top hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.isSheaf_pointwiseColimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, LightProfinite.hasSheafify, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a filtered colimit of sheaves over a quasi compact site object with finite covers and quasi compact intersections equal the filtered colimit of sections",
+   "results": "Search returned 8 hits; recorded top hits: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, CategoryTheory.isSheaf_pointwiseColimit, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, SheafOfModules.Presentation.isColimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.SheafedSpace.colimit_exists_rep, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of sheaves evaluated at an object with cofinal finite covers and quasi compact pairwise overlaps",
+   "results": "Search returned 8 hits; recorded top hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite, CategoryTheory.Sheaf.instHasColimitsOfShape, CategoryTheory.Sheaf.createsColimitOfIsSheaf, CategoryTheory.isSheaf_pointwiseColimit, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, AlgebraicGeometry.SheafedSpace.instCreatesColimitsOfShapePresheafedSpaceForgetToPresheafedSpaceOfSmallOfHasLimitsOfShapeOpposite, CategoryTheory.Sheaf.instHasFiniteColimits",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact objects in a Grothendieck site evaluation of filtered sheaf colimits finite covers quasi compact intersections",
+   "results": "Search returned 8 hits; recorded top hits: AlgebraicGeometry.Scheme.quasiCompactCover, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.quasiCompactCover_iff, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"colimit\"",
+   "results": "Search returned 12 hits; recorded top hits: CategoryTheory.Presheaf.colimitOfRepresentable, CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension, CategoryTheory.Presheaf.isColimitTautologicalCocone, CategoryTheory.Presheaf.isColimitTautologicalCocone', CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"PreservesFilteredColimits\"",
+   "results": "Search returned 0 hits; recorded top hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*section|section.*colimit|preserves.*[Ff]iltered|[Ff]iltered.*[Cc]olimit",
+   "results": "Search returned 21 hits; recorded top hits: Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean; source subdirectory CategoryTheory/Sites",
+   "date": "2026-10-23",
+   "verdict": "no match: colimit existence and extensive-topology pointwise-colimit results do not give the quasi-compact-object criterion on an arbitrary site; inspected Sites/Coherent/ExtensiveColimits.lean:34-44 and Sites/Limits.lean. The project has stronger-class hypotheses in CohomologyFilteredColimit.lean:209-291, not this objectwise criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact|filtered.*colimit|colimit.*filtered",
+   "results": "23 hits; Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean. Subdirectory: CategoryTheory/Sites",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give colimit existence, sheafification comparisons, point fibres, or extensive-topology pointwise colimits, not this quasi-compact-object criterion for arbitrary sites. Read Sites/Limits.lean:213,240 and Coherent/ExtensiveColimits.lean:34-44. Project CohomologyFilteredColimit.lean:209-291 assumes stronger finite-cover/nerve hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"colimit\"",
+   "results": "12 hits; CategoryTheory.Presheaf.colimitOfRepresentable, CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension, CategoryTheory.Presheaf.isColimitTautologicalCocone, CategoryTheory.Presheaf.isColimitTautologicalCocone', CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give colimit existence, sheafification comparisons, point fibres, or extensive-topology pointwise colimits, not this quasi-compact-object criterion for arbitrary sites. Read Sites/Limits.lean:213,240 and Coherent/ExtensiveColimits.lean:34-44. Project CohomologyFilteredColimit.lean:209-291 assumes stronger finite-cover/nerve hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a general site sections of filtered colimits of abelian sheaves inject over quasi compact objects and are bijective for cofinal finite covers with quasi compact overlaps",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify, CategoryTheory.GrothendieckTopology.W.isLocallyInjective, SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give colimit existence, sheafification comparisons, point fibres, or extensive-topology pointwise colimits, not this quasi-compact-object criterion for arbitrary sites. Read Sites/Limits.lean:213,240 and Coherent/ExtensiveColimits.lean:34-44. Project CohomologyFilteredColimit.lean:209-291 assumes stronger finite-cover/nerve hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections over a quasi compact object of a site commute with filtered colimits of abelian sheaves under cofinal finite covers with quasi compact overlaps",
+   "results": "8 hits; CategoryTheory.Limits.colimitLimitIso, AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Sheaf.createsColimitOfIsSheaf, CategoryTheory.isSheaf_pointwiseColimit, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give colimit existence, sheafification comparisons, point fibres, or extensive-topology pointwise colimits, not this quasi-compact-object criterion for arbitrary sites. Read Sites/Limits.lean:213,240 and Coherent/ExtensiveColimits.lean:34-44. Project CohomologyFilteredColimit.lean:209-291 assumes stronger finite-cover/nerve hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a filtered colimit of sheaves on an arbitrary site at an object with finite covering refinements and quasi compact pairwise intersections",
+   "results": "8 hits; CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.isSheaf_pointwiseColimit, CategoryTheory.Sheaf.createsColimitOfIsSheaf, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.Sheaf.instHasColimitsOfShape, CategoryTheory.Sheaf.instHasFiniteColimits, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, AlgebraicGeometry.SheafedSpace.colimit_exists_rep",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give colimit existence, sheafification comparisons, point fibres, or extensive-topology pointwise colimits, not this quasi-compact-object criterion for arbitrary sites. Read Sites/Limits.lean:213,240 and Coherent/ExtensiveColimits.lean:34-44. Project CohomologyFilteredColimit.lean:209-291 assumes stronger finite-cover/nerve hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-site-finite-cover-cohomology-colimit",
+  "date": "2026-10-23",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Filtered colimits of etale cohomology on algebraic spaces. Tag 073E proof, first sentence: application of Tag 0739 to the qcqs objects of the enlarged etale site. Supporting input: Tag 0739, first paragraph, applying Tag 0738(2),(4) to degree zero.",
+   "via": [
+    "lem-sfb-site-finite-cover-cohomology-colimit",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-site-quasi-compact-section-colimit",
+  "worker": "stage1",
+  "summary": "Kept both clauses and the weaker finite-image-refinement definition of quasi-compactness. Reused existing general-site sheafification, underlying-set and filtered-colimit nodes. Wrote local-to-eventual vanishing, common-stage coherence, finite-overlap matching and gluing in the item itself; no new nodes. Checked empty coverings and non-poset filtered categories. No exact project Lean attachment.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) route through Tag 0739 degree zero and Tag 0738(2),(4), as specified in blueprint.from.place. The current latest blueprint direct-images proof (3) has no separate node for this general-site sections criterion. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local lifting and local equality for sheafification on any small site, used with the sectionwise colimit presheaf; no node of this unit supplies this general-site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-6ced9c22d",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-6ced9c22d (reviewer sub-agent of L); spot-checked: Read Stacks sites.tex 090H (definition-quasi-compact) and 0738 (lemma-directed-colimits-sections) (2),(4) with their proofs. The item statement matches them: it uses 090H's finite-image refinement and extends the result to abelian sheaves via 03CO/00YR. It is unchanged against live, which is still unsplit, so no other group has taken it over. I opened all 7 cited statements and each step uses only what that statement says: colimit = sheafification of the sectionwise colimit; underlying-set sheafification; local lifts and local equality (00WK); forgetful preservation; elementwise clauses (1) and (3). Steps 1-4 are correct. Step 3 works for non-poset D (finite-star cocone) and does not need the refining cover to be finite. I checked empty covers, singleton self-overlaps, parallel arrows and the [0,1] example. One gap: step 5 used 'step 3 for V=W', but step 3 needs V quasi-compact and the bijectivity clause does not assume that W is. Stacks derives it explicitly from lemma-conclude-quasi-compact. FIX: one elementary sentence added to step 5 (a refining family with finite index set A gives an index map with finite image). Only proof[4].text changed; the corrected node is in fixes/dag/nodes/sec-six-functors-basics/. No duplicates: aux-site-filtered-colimit-sections-inverse needs all coverings finite, and the others are étale, pro-étale or topological-space specialisations or give local lifts only. No blueprint node covers the general-site case. Accepted tool_use: lem-weil-pbc-site-sheafification-sections-local, a generic sheafification fact from unit sk-thm-p1. No SGA. Advisory, inherited from the base: blueprint.from.node is null on the item and its parent, although the place text names det-thm-sf-ctf-stability-direct-images, a blueprint node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteQuasiCompactSectionColimit",
+  "declaration": "CategoryTheory.Sheaf.quasiCompact_section_colimit",
+  "file": "lean/Sheaf/CategoryTheory/SiteQuasiCompactSectionColimit.lean",
+  "statement": "theorem quasiCompact_section_colimit {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) {D : Type u} [SmallCategory D] [IsFiltered D] (G : D ⥤ Sheaf J.toGrothendieck AddCommGrpCat.{u}) (W : C) : ((∀ (A : Type u) (V : A → C) (f : ∀ a, V a ⟶ W), Presieve.ofArrows V f ∈ J W → ∃ (B : Type u) (T : B → C) (g : ∀ b, T b ⟶ W) (α : B → A) (h : ∀ b, T b ⟶ V (α b)), Set.Finite (Set.range α) ∧ (∀ b, h b ≫ f (α b) = g b) ∧ Presieve.ofArrows T g ∈ J W) → Function.Injective (colimit.post G ((sheafSections J.toGrothendieck AddCommGrpCat.{u}).obj (op W)))) ∧ ((∀ (A : Type u) (V : A → C) (f : ∀ a, V a ⟶ W), Presieve.ofArrows V f ∈ J W → ∃ (B : Type u) (_ : Finite B) (T : B → C) (g : ∀ b, T b ⟶ W), Presieve.ofArrows T g ∈ J W ∧ (∀ b, ∃ (a : A) (h : T b ⟶ V a), h ≫ f a = g b) ∧ ∀ b b', ∃ (P : C) (p : P ⟶ T b) (q : P ⟶ T b'), IsPullback p q (g b) (g b') ∧ ∀ (E : Type u) (Z : E → C) (k : ∀ e, Z e ⟶ P), Presieve.ofArrows Z k ∈ J P → ∃ (F : Type u) (Y : F → C) (l : ∀ t, Y t ⟶ P) (β : F → E) (m : ∀ t, Y t ⟶ Z (β t)), Set.Finite (Set.range β) ∧ (∀ t, m t ≫ k (β t) = l t) ∧ Presieve.ofArrows Y l ∈ J P) → IsIso (colimit.post G ((sheafSections J.toGrothendieck AddCommGrpCat.{u}).obj (op W))))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13af08d5d",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clauses match node/090H/0738(2),(4): inline finite-image qc (same as lem-trf-site-quasicompact-sheafification-criterion, no def node exists), colimit.post is the canonical evaluated-coprojection map; clause 1 Injective under qc W; clause 2 'every covering refined by finite covering with some qc pullback per pair' ≡ cofinal system (one-representative qc only strengthens; step 5 proves it), W qc derived as in node; IsIso conclusion. No extra pullback/finite/composition assumptions (contrast siteFilteredColimit_sections_isIso hfinite). Universe u for site/index/D/coefficients per node step 1 and project convention. Empty covers, non-poset D OK. Docstrings with source+blueprint, 5-step proof, sorry only, statement verbatim, no name clash, live node unchanged except lean. No compile needed (no change)."
+ }
+}

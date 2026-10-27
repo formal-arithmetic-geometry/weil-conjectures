@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-lft-field-group-neutral-component",
+ "kind": "statement",
+ "title": "The finite-type neutral component of a locally finite type group over an arbitrary field",
+ "statement": "Let $k$ be any field [def-weil-field], and let $G$ be a group scheme over $k$ [def-sc-group-scheme] locally of finite type [def-weil-finite-type-morphism]. Write $e\\in |G|$ for the point of its identity section, and let $C$ be the connected component of $e$, meaning the maximal connected subset containing $e$ [def-weil-connected-scheme]. Then $C$ is open and closed in $|G|$. With the open-subscheme structure, $G^0=C$ is a subgroup scheme of $G$ [def-weil-open-immersion], is of finite type over $k$, and is geometrically irreducible (after every field extension its underlying space is nonempty and irreducible) [def-pc-geometrically-irreducible]. For every field extension $K/k$, the open subschemes of $G_K$ satisfy\n$$(G^0)_K=(G_K)^0,$$\nwhere base change is as in [def-pc-base-change] and the component on the right contains the base-changed identity. Neither quasi-compactness of $G$, perfectness of $k$, nor smoothness, reducedness or commutativity of $G$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R, proposition-connected-component: canonical quasi-compact geometrically irreducible identity subgroup for any field. Openness in the locally finite type case: topology.tex Tags 04MF (lemma-locally-Noetherian-locally-connected) and 04ME (lemma-locally-connected), with local Noetherianity over a field. Field-extension equality is the component characterization applied to its geometrically connected clopen subgroup."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian: its only ideals are $(0)$ and $(1)$. Thus $\\operatorname{Spec}k$ is locally Noetherian by pqf-def-locnoeth. Apply pqf-lem-locnoeth-lft to $G\\to\\operatorname{Spec}k$, which is locally of finite type by hypothesis, to obtain local Noetherianity of $G$. Consequently lem-sc-locnoeth-components-locally-finite makes the irreducible components of $G$ locally finite; no quasi-compactness of $G$ is required.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-locnoeth-components-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, locally finite type specialization; Morphisms Tag 01T6 (lemma-finite-type-noetherian), Topology Tag 0052 (lemma-Noetherian)."
+   }
+  },
+  {
+   "text": "Distinct irreducible components of $G$ are disjoint. Indeed, fix $x\\in G$ and an affine open $U=\\operatorname{Spec}A$ containing it, with corresponding prime $\\mathfrak p$. The local ring $A_{\\mathfrak p}=\\mathcal O_{G,x}$ has a unique minimal prime by lem-sfb-group-local-minimal-prime. The inclusion-preserving prime correspondence in lem-weil-pbc-primes-of-localization identifies its minimal primes with the minimal primes of $A$ contained in $\\mathfrak p$: any prime strictly below such a prime is still contained in $\\mathfrak p$, so minimality is preserved both ways. By lem-weil-pbc-spec-irreducible-components-minimal-primes, exactly one irreducible component of $U$ contains $x$. The injectivity of intersection with $U$ from lem-sc-components-open-injection implies that at most one irreducible component of $G$ contains $x$. Every point belongs to one by lem-sc-irreducible-components-cover. Hence exactly one does.",
+   "uses": [
+    "lem-sfb-group-local-minimal-prime",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sc-components-open-injection",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), part (1); affine component description (Algebra Tag 00ES) and localization correspondence (Algebra Tag 00E3)."
+   }
+  },
+  {
+   "text": "Let $Z$ be the unique irreducible component containing $e$, supplied by lem-sfb-group-local-minimal-prime. It is closed by def-weil-irreducible-components. At any $z\\in Z$, choose an open neighbourhood $V$ meeting only finitely many irreducible components, by step 1. Remove from $V$ every component in this finite list other than $Z$. Step 2 shows that none contains $z$; closedness of components shows that the result is an open neighbourhood of $z$. Since components cover $G$ by lem-sc-irreducible-components-cover, this neighbourhood is contained in $Z$. Thus $Z$ is open and closed. Irreducibility implies connectedness directly: a nontrivial clopen separation would express $Z$ as the union of two proper closed subsets. Hence $Z\\subseteq C$ by maximality of $C$. Connectedness of $C$ prevents it from meeting both $Z$ and its clopen complement. Since $e\\in Z$, we obtain $C=Z$. Give $C$ its open-subscheme structure. Its reduction has exactly the reduced induced structure on $Z$: both sheaves are obtained by restricting $\\mathcal O_G$ to the open subset $Z$ and quotienting by the nilradical. By lem-sfb-group-local-minimal-prime this reduced scheme is geometrically irreducible. By lem-weil-pbc-reduction-universal-homeomorphism its map to $C$ remains a homeomorphism after every field extension. Therefore $C$ itself is geometrically irreducible, including its original nilpotent structure.",
+   "uses": [
+    "lem-sfb-group-local-minimal-prime",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-connected-scheme",
+    "def-weil-open-immersion",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M, parts (2)-(3); Tag 0B7R, identification of the neutral component. Schemes Tag 01J4 (reduction); Morphisms Tag 054M (reduction-universal-homeomorphism)."
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-open-fibre-product (with $U=\\operatorname{Spec}k$, $V=W=C$), $C\\times_kC$ is the open subscheme $\\mathrm{pr}_1^{-1}(C)\\cap\\mathrm{pr}_2^{-1}(C)$ of $G\\times_kG$, so multiplication restricts to it; likewise $C\\times_kC\\times_kC$ is open in $G\\times_kG\\times_kG$. The product $C\\times_k C$ is irreducible by lem-sc-irreducible-product-over-field, since both factors are geometrically irreducible by step 3. It is therefore connected, and its multiplication image in $G$ is connected and contains $e$ (the image of $(e,e)$). It lies in $C$ by maximality of the connected component. Inversion also has connected image on $C$ and fixes $e$, so its image lies in $C$. Here continuous images preserve connectedness because a clopen separation of an image pulls back to a clopen separation of the source. The unit has image $e\\in C$. Apply lem-weil-pbc-morphism-factors-through-open-subscheme to these three maps to obtain multiplication, inversion and unit on $C$. They satisfy the group diagrams: composing either side of each diagram with $C\\hookrightarrow G$ gives the corresponding group diagram of $G$; uniqueness of factorization through the open immersion makes the original sides equal. Thus $C$ is an open subgroup scheme and its inclusion is a homomorphism. This uses the open scheme structure, not the reduction.",
+   "uses": [
+    "lem-sc-irreducible-product-over-field",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sc-group-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proof: factor the unit, inversion and multiplication; use the open-immersion factorization instead of the general flat closed-immersion criterion."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-irreducible-group-quasi-compact to the group scheme $C$ of step 4, irreducible by step 3. Hence $C$ is quasi-compact. It is locally of finite type over $k$: for any $c\\in C$, take an affine finite-type chart $\\operatorname{Spec}A\\subseteq G$ containing $c$; principal affine opens are a basis, so some $D(f)$ contains $c$ and lies in $C\\cap\\operatorname{Spec}A$. Its algebra $A_f$ is generated over $k$ by finite generators of $A$ together with $f^{-1}$. These charts cover $C$ and quasi-compactness gives a finite subcover. By def-weil-finite-type-morphism this is finite type over $k$.",
+   "uses": [
+    "lem-sfb-irreducible-group-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P (lemma-irreducible-group-scheme-over-field-qc); Tag 0B7R, part (4); Morphisms Tag 01T0 (finite type)."
+   }
+  },
+  {
+   "text": "Fix any field extension $K/k$ and let $p:G_K\\to G$ be its projection. By lem-weil-pbc-open-immersion-base-change, the pullback of $C\\hookrightarrow G$ is an open immersion, and by lem-weil-pbc-open-fibre-product (with $U=V=\\operatorname{Spec}k$, $W=C$) its image is $p^{-1}(C)$; likewise the pullback of the complementary open $G\\setminus C$ has image $p^{-1}(G\\setminus C)$. These complementary inverse images give a clopen decomposition of $G_K$, with the pullback open-subscheme structures. Geometric irreducibility of $C$ says that $C_K$ is nonempty and irreducible, hence connected. The base-changed unit factors through $C_K$ by the fibre-product definition of base change. Thus $C_K$ lies in the connected component of $e_K$ in $G_K$. Conversely this component cannot meet both pieces of the clopen decomposition and contains $e_K\\in C_K$, so it lies in $C_K$. Their underlying subsets are equal. The component is therefore open, and both scheme structures are the restriction of $\\mathcal O_{G_K}$ to this same subset. This proves $(G^0)_K=(G_K)^0$ as open subschemes, for every extension $K/k$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible",
+    "def-weil-open-immersion",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, geometric irreducibility, with the clopen characterization; Schemes Tag 01JY (lemma-base-change-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sfb-group-local-minimal-prime",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-components-open-injection",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-pc-geometrically-irreducible",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sc-group-scheme",
+  "lem-sfb-irreducible-group-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R (proposition-connected-component), using its group-theoretic inputs Tags 047M and 0B7P. Local Noetherian component openness and field-extension equality written out using existing DAG tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent",
+   "results": "{\"t\": \"2026-10-24T11:03:28Z\", \"tool\": \"grep\", \"query\": \"identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme-group identity-component declaration in the AlgebraicGeometry source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type group scheme over a field has a quasi compact geometrically connected identity component",
+   "results": "{\"t\": \"2026-10-24T11:03:29Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type group scheme over a field has a quasi compact geometrically connected identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\"], \"digest\": \"92e7799628f8929a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local finite type, local Noetherianity and affine compactness, not the identity subgroup or its geometric connectedness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"connectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T11:03:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"connectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations match the two names."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a group scheme locally of finite type over any field is a geometrically irreducible open and closed finite type subgroup and commutes with field extensions",
+   "results": "{\"t\": \"2026-10-24T11:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a group scheme locally of finite type over any field is a geometrically irreducible open and closed finite type subgroup and commutes with field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\"], \"digest\": \"40da35219f0fce81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned types concern geometric reducedness, individual scheme compactness facts or ordinary topological groups; none constructs the identity subgroup scheme over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary field the connected component containing the unit of a locally algebraic group is quasi compact and stable under extension of scalars",
+   "results": "{\"t\": \"2026-10-24T11:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"Over an arbitrary field the connected component containing the unit of a locally algebraic group is quasi compact and stable under extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"Subgroup.connectedComponentOfOne\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"QuasispectrumRestricts.compactSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\"], \"digest\": \"c73d6f0784ec651d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned types concern geometric reducedness, individual scheme compactness facts or ordinary topological groups; none constructs the identity subgroup scheme over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent",
+   "results": "{\"t\": \"2026-10-24T11:28:40Z\", \"tool\": \"grep\", \"query\": \"identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme-group identity component declaration in AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally algebraic group identity component quasi compact geometrically irreducible arbitrary field",
+   "results": "{\"t\": \"2026-10-24T11:28:41Z\", \"tool\": \"leansearch\", \"query\": \"Locally algebraic group identity component quasi compact geometrically irreducible arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"IsCompact.locallyCompactSpace_of_mem_nhds_of_group\", \"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"OpenNormalSubgroup.pathComponentOne\", \"AlgebraicGeometry.IsLocalIso.le_of_isZariskiLocalAtSource\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"f4e73e1392d3e0ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary topological-group components, reducedness or individual scheme finiteness tools, not this group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, connectedComponent",
+   "results": "{\"t\": \"2026-10-24T11:28:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, connectedComponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations match the pattern"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group scheme locally of finite type over an arbitrary field, the neutral component is a geometrically irreducible finite type open subgroup stable under field extension",
+   "results": "{\"t\": \"2026-10-24T11:28:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a group scheme locally of finite type over an arbitrary field, the neutral component is a geometrically irreducible finite type open subgroup stable under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.pathComponentOne\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"OpenNormalSubgroup.pathComponentOne\", \"AddSubgroup.connectedComponentOfZero\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"OpenNormalSubgroup.pathComponentOne_carrier\"], \"digest\": \"801d80088ff31240\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary topological-group components, reducedness or individual scheme finiteness tools, not this group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected component containing the unit of a locally algebraic group over a field is quasi compact and formation commutes with extension of scalars",
+   "results": "{\"t\": \"2026-10-24T11:29:03Z\", \"tool\": \"leanfinder\", \"query\": \"The connected component containing the unit of a locally algebraic group over a field is quasi compact and formation commutes with extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\"], \"digest\": \"d08133007bb08b2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary topological-group components, reducedness or individual scheme finiteness tools, not this group-scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-special-neutral-finite-type-open",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent prerequisite; repair of the lft effectivity argument: Finite-type special-neutral open subgroup and its strict-local translates. Field-group input to the special-fibre construction and its invariance under scalar extension.",
+   "via": [
+    "lem-sfb-trait-special-neutral-finite-type-open",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-lft-field-group-neutral-component",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-field statement and all clauses. Six steps derive clopen geometric irreducibility from the existing local-minimal-prime and locally finite component tools, construct the open subgroup by factorization, deduce finite type from irreducible-group quasi-compactness and prove extension-of-scalars equality. No new nodes. No perfectness, reducedness, smoothness or quasi-compactness of G is used.",
+  "blueprint": "The inherited place is det-thm-sf-ctf-stability-direct-images proof (3), the strict-local trait descent subroute recorded in blueprint.from.place. Read the current latest blueprint direct-images proof (3). The identity-component auxiliary is not a separate blueprint statement; whole-blueprint searches for neutral component, identity component and 0B7R found no same statement. Preserve the inherited null from.node and via chain reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic local Noetherian topology input for openness; the unit has no replacement for local finiteness of irreducible components."
+   },
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Generic product irreducibility over a field, needed to restrict multiplication; the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-irreducible-product-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-40d05f15a",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-40d05f15a (reviewer sub-agent of L); spot-checked: Read the item's six steps in full against Stacks groupoids.tex 0B7R (l.1012) and its inputs 047M (l.786) and 0B7P, plus topology 04MF. The statement keeps every 0B7R clause on an arbitrary field, puts the open-subscheme structure on G^0 and adds no hypotheses. The delivery creates no new nodes, and the dependency closure (211 nodes) does not contain the item. Every cited unit is in the route, and I accept the two generic tool_uses (locnoeth components locally finite; irreducible product over a field). Step checks: step 1 gets local finiteness from 01T6. Step 2 gets disjoint components from the unique minimal prime at every point plus the localization prime bijection, the minimal-primes/components lemma and open injection. Step 3 shows Z=C is clopen and geometrically irreducible, transporting from Z_red=C_red through the universal homeomorphism of the reduction. Step 4 builds the open subgroup from the geometrically irreducible product and unique factorization through the open. Step 5 gets quasi-compactness from the irreducible-group node plus a D(f) refinement. Step 6 proves base change through a clopen decomposition. Tested Spec k, G_a, mu_3/Q, alpha_p, the infinite constant group and inseparable K/k. FIX (C4): step 6 took the image p^{-1}(C) from lem-weil-pbc-open-immersion-base-change, which states only that the base change is an open immersion. Step 4 used without saying it that C×_kC is open in G×_kG. Both now cite the existing mathlib node lem-weil-pbc-open-fibre-product (image p^{-1}(V)∩q^{-1}(W)); I added it to step 4/6 uses and to proof_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LftFieldGroupNeutralComponent",
+  "declaration": "AlgebraicGeometry.lftFieldGroup_neutralComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/LftFieldGroupNeutralComponent.lean",
+  "statement": "theorem lftFieldGroup_neutralComponent (k : Type u) [Field k] (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] : ∃ U : G.left.Opens, (U : Set G.left) = connectedComponent (GrpObj.onePoint G) ∧ IsClosed (U : Set G.left) ∧ GeometricallyIrreducible (U.ι ≫ G.hom) ∧ LocallyOfFiniteType (U.ι ≫ G.hom) ∧ QuasiCompact (U.ι ≫ G.hom) ∧ (∀ (K : Type u) [Field K] [Algebra k K], (pullback.fst G.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' (U : Set G.left) = connectedComponent (GrpObj.onePoint ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G))) ∧ ∃ gC : GrpObj (Over.mk (U.ι ≫ G.hom)), @IsMonHom _ _ _ _ _ gC.toMonObj _ (Over.homMk (V := G) U.ι)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8c11f1bb",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement matches the file signature exactly. Every clause matches the node and Stacks 0B7R: field k, GrpObj G over Spec k, only LocallyOfFiniteType (no qc/alg-closed/perfect/smooth/reduced/commutative); C = connectedComponent of GrpObj.onePoint as Opens + IsClosed; finite type = LocallyOfFiniteType ∧ QuasiCompact per the def-weil-finite-type-morphism record; GeometricallyIrreducible (includes nonempty); ∃ GrpObj on the open subscheme with IsMonHom inclusion (mono, so a subgroup); for all K : Type u the pullback.fst preimage equals connectedComponent of onePoint of Over.pullback obj G (def-pc-base-change convention). Edge cases Spec k, infinite constant group, G_a, alpha_p/mu_p, mu_3/Q, inseparable K checked. H4: GrpObj.identityComponentOpens needs QuasiCompact, locallyAlgebraicGroup_identityComponent needs IsAlgClosed, no duplicate. Docstrings carry source and blueprint and the 6 proof steps; proof is sorry; no definitions; imports exist; report sections present. Not recompiled; no findings."
+ }
+}

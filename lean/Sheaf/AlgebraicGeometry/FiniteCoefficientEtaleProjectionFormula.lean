@@ -16,12 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.SfFiniteEtaleProjectionFormula
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
 /-!
 # The finite-coefficient projection formula on the small étale site
 
@@ -61,6 +57,10 @@ noncomputable def finiteCoefficientProjectionCompactification
   letI : QuasiSeparatedSpace Y :=
     quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (CommRingCat.of D.k))
   HasCompactification.compactification f
+
+attribute [local instance 2000] CommRing.toRing
+attribute [local irreducible] projectionMapOfCompactification
+  derivedTensorRightDerivedLowerShriek rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
 /-- The canonical compact-support projection transformation is invertible at the stated
 finite coefficients and bounded constructible inputs, with finite Tor amplitude for `L`.
@@ -123,6 +123,9 @@ theorem isIso_projectionMap_coefficientExtensionRing
     IsIso (((projectionMapOfCompactification
       (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))
       (finiteCoefficientProjectionCompactification D f)).app K).app L) := by
-  sorry
+  obtain ⟨a, b, _hab, hTor⟩ := _hLt
+  exact sf_finite_etale_projection_formula l E n _hn f
+    (finiteCoefficientProjectionCompactification D f) K L _hKc _hKb _hLc _hLb
+    ⟨a, b, hTor⟩
 
 end AlgebraicGeometry.Etale

@@ -8,10 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen
-import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos
 
 /-!
 # Infinitely many closed points in a positive-dimensional irreducible closed subset
@@ -28,30 +24,36 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+-- The original signature retains irreducibility, though the proof works without it.
+set_option linter.unusedVariables false in
 /-- An irreducible closed subset of positive topological Krull dimension in a scheme locally
 of finite type over a field contains infinitely many ambient closed points. Source: Stacks
 Project, Varieties, Tags 0478 and 0A21, and the affine positive-dimension argument in Algebra
 (blueprint: lem-sc-positive-dimensional-locally-algebraic-closed-points).
 
-Proof:
-1. Give `Z` its reduced induced closed subscheme structure using
-   `lem-weil-pbc-reduced-induced-closed-subscheme`. Its closed immersion into `X` makes it
-   locally of finite type over `k`. Choose an affine open `U = Spec R` meeting `Z`.
-   The intersection `V = U ∩ Z` is `Spec A`, where `A = R/I` for the radical ideal defining
-   `V`. Irreducibility makes `I` prime, so `A` is a finite type domain over `k`.
-   By `lem-sc-dimension-locally-algebraic` (Tag 0A21), the nonempty open `V` has the same
-   positive dimension as `Z`, so `A` has positive ring Krull dimension.
-2. Apply `lem-sc-fg-domain-positive-dimension-infinite-maximals` to `A`. Its infinitely many
-   maximal ideals give distinct closed points of `V`; their inverse images in `R` are
-   maximal ideals and thus give closed points of `U`.
-3. By `lem-sc-affine-maximal-points-closed-in-lft-scheme` (Tag 0478), each of these points
-   is closed in `X`. All lie in `Z`, so `Z ∩ closedPoints X` is infinite. -/
+Proof: The scheme `X` is Jacobson by Mathlib's locally finite type theorem (Tag 0478),
+and the closed subspace `Z` is therefore Jacobson. The closed embedding of `Z` identifies
+its closed points with the ambient closed points lying in `Z`. If there were only finitely
+many of these, `JacobsonSpace.discreteTopology` would make `Z` discrete. Its topological
+Krull dimension would then be at most zero, contradicting the positive dimension. -/
 theorem infinite_closedPoints_inter_of_topologicalKrullDim_pos
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [LocallyOfFiniteType (X ↘ Spec (.of k))]
     (Z : Set X) (hZclosed : IsClosed Z) (hZirred : IsIrreducible Z)
     (hZdim : 0 < topologicalKrullDim Z) :
     (Z ∩ closedPoints X).Infinite := by
-  sorry
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace (X ↘ Spec (.of k))
+  have hι := hZclosed.isClosedEmbedding_subtypeVal
+  have : JacobsonSpace Z := JacobsonSpace.of_isClosedEmbedding hι
+  by_contra hfinite
+  have hfinite : (Z ∩ closedPoints X).Finite := Set.not_infinite.mp hfinite
+  have hpre : (Subtype.val ⁻¹' (Z ∩ closedPoints X) : Set Z).Finite :=
+    hfinite.preimage Subtype.val_injective.injOn
+  have heq : (Subtype.val ⁻¹' (Z ∩ closedPoints X) : Set Z) = closedPoints Z := by
+    rw [Set.preimage_inter, hι.preimage_closedPoints]
+    ext x
+    simp
+  have : DiscreteTopology Z := JacobsonSpace.discreteTopology (heq ▸ hpre)
+  exact (not_lt_of_ge (topologicalKrullDim_zero_of_discreteTopology Z)) hZdim
 
 end AlgebraicGeometry

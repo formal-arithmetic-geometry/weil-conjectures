@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-refinement-projection-words",
+ "kind": "definition",
+ "title": "Explicit factors for refinement projection pasting",
+ "statement": "Record the actual finite and simultaneous-system maps in the refinement projection calculation: gamma inserts the canonical identity pushforward and applies the proper/open mate, comp is the conjugate proper compositor followed by the refinement equality, delta is the open tensor comparison followed by the compactification pullback comparison, and inner is proper projection along the refinement followed by the inverse pullback compositor. Local is the tensor equation at the inner square; Composition is projection compatibility with the outer proper compositor. The definitions retain every identity and equality transport. The output tensor has its actual first-variable action, curried at finite coefficients and uncurried for systems, together with its functoriality equation. Record also the native compactification projection components and their proved equations as outer projection followed by the image of delta; the categorical pasting theorem is available directly with these native components.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence; explicit component calculation using Stacks 0B56 and 0DV0"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula along composite adjunction and natural tensor map",
+   "results": "8 hits, including CategoryTheory.Adjunction.comp_counit_app and comp; none states the geometric normalized equations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open adjunction mate tensor identity and projection composition compatibility",
+   "results": "8 hits on general monoidal adjunction tensor maps and rigid mates, no matching normalized refinement equation.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_(comp|conjugate)",
+   "results": "0 hits in search service. Local rg found the upstream general projection composition and conjugate lemmas.",
+   "date": "2026-10-25",
+   "verdict": "general tools available; no geometric normalized equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RefinementProjectionCounit",
+  "date": "2026-10-25",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence: normalized inner proper/open square and outer proper projection pasting.",
+   "via": [
+    "lem-sf-refinement-projection-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RefinementProjectionWords",
+  "file": "lean/Sheaf/SixFunctors/RefinementProjectionWords.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.RefinementProjection.Words",
+  "statement": "structure Words (X B C Y : Type*) [Category X] [Category B] [Category C] [Category Y]",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null,
+  "mathlib": null
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "independent cc review: item proof (Words.pasteNative from Local + proved Composition) against lem-sf-refinement-projection-counit and its plan; finiteComparison indexIso and finiteProjection presentation against change record (no users, item has 0 importers); new local-tensor sorry against plan step 2 and the pinned Compositors/ProperOpenCoherence; axioms on a scratch copy (sorryAx only from the local-tensor sorry and upstream ambientProperOpenPasting)"
+ }
+}

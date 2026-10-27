@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-rational-projection-comparison-equations",
+ "kind": "statement",
+ "title": "Rational transport of projection comparison equations",
+ "statement": "Fix a finite-field datum D, coefficient datum C and finite extension E of Q_l. Let H be SixFunctorHigherOperations D C E [def-sf-operation-stages]. Suppose CompactSupportProjectionCoherence H.integral H.integralTensor H.integralExchange holds on the second-input predicate finiteTorConstructibleIntegral. Then CompactSupportProjectionCoherence H.rational H.rationalTensor H.rationalExchange holds on all second inputs [def-sf-projection-comparison-equations]. No invertibility or naturality is asserted, and no separatedness is imposed on the structure morphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and finite/common coefficient-field paragraphs, together with the coherence sentence of fix-prop-projection-formula"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-projection-comparison-equations"
+ ],
+ "proof": [
+  {
+   "text": "Use the unchanged-object raw rationalization to write each rational input as the localization of its integral object. Establish invertibility of the coefficient prime on each finite-type scheme over the fixed field, and apply integral_residue_tor to make every integral second input admissible. This is the private proved helper integral_finiteTor.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use rationalProjectionTensorFunctorEq to construct one shared natural tensor comparison. Apply rationalProjectionTensorCompatibility to identify the localized compact-support component and the localized proper counit mate with their rational components through the explicitly defined source, target, properSource, and properTarget endpoint isomorphisms. This lower statement assumes none of the four comparison equations.",
+   "uses": [
+    "lem-sf-rational-projection-tensor-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove refinement and proper coincidence by precomposing with the invertible source comparison. Naturality of the shared tensor comparison and rationalization.compactification (or properIdentity together with compactification) move the first factor through this comparison. Use the local projection square, map the integral equality forward, then use naturality of the rational refinement or proper identification to identify the target. Cancel only the source isomorphism. These are the proved private refinement_transfer and proper_transfer calculations.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composition, source_composition expands the tensor of the support compositor by rationalization.composition. projection_first and projection_second move the inner support and outer pullback comparisons through the rational projection. The local projection squares and naturality of the support comparison identify the left three-factor path with the image of the integral path followed by doubleTarget. For the right path, tensor_second and rationalization.pullComposition give inner_composition; naturality of the double support comparison and rationalization.composition give target_composition. Apply localization to the integral equation and cancel the source isomorphism. This is the complete private composition_transfer proof.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the pentagon, triple_left and triple_right expand both compositor paths using rationalization.composition and naturality of the support comparisons, with a common threefold endpoint isomorphism triple. Apply localization to the integral heterogeneous equality. support_transport and comparison_transport retain exactly the compactification cast induced by Category.assoc, allowing cancellation of the two transported source isomorphisms. This is the complete private pentagon_transfer proof.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-rational-projection-tensor-compatibility",
+  "def-sf-operation-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; explicit forward transport and cancellation calculations by S1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization transports compact support projection formula coherence and associativity pentagon",
+   "results": "CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc; Localization.Monoidal.pentagon and its auxiliary lemmas; general localization composition laws.",
+   "date": "2026-10-26",
+   "verdict": "Monoidal associator coherence is available, but not these compact-support compositor and proper-counit equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula isomorphism rational localization field coefficients compact support naturality coherence",
+   "results": "Proj.awayMap_awayToSection; PrimeSpectrum.mapPiLocalization_naturality; other unrelated scheme localization maps.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_isIso",
+   "results": "No hits; unknown identifier 'Functor.map_isIso'. Local Mathlib Iso.lean provides IsIso.of_isIso_comp_left/right and isIso_comp_left/right_iff.",
+   "date": "2026-10-26",
+   "verdict": "Generic isomorphism transport is available and proved directly in the item; it does not prove comparison coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "CompactSupportProjectionCoherence|compactSupportProjectionCoherence|projection.*[Cc]oherence; rg CompactSupportProjectionLaws in Mathlib, WeilConjectures, Sheaf",
+   "results": "msearch grep: zero hits. Local search found CompactSupportProjectionLaws only in ConstructibleProjectionMates, the three stage-law modules, their assembly and consumers. ProjectionFormulaCoherence assumes SixFunctorDatum and imports CompactSupportProjectionFormula; it would be circular here.",
+   "date": "2026-10-26",
+   "verdict": "No existing predicate separating the four equations and no usable theorem transporting them for an operation datum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFieldStages",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Rational transport of projection comparison equations in the field transport and coherence argument",
+   "via": [
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalProjectionComparisonEquations",
+  "file": "lean/Sheaf/Paper/RationalProjectionComparisonEquations.lean",
+  "declaration": "WeilConjectures.compactSupportProjectionCoherence_rational",
+  "statement": "theorem compactSupportProjectionCoherence_rational\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (H : SixFunctorHigherOperations D C E)\n    (hH : CompactSupportProjectionCoherence H.integral H.integralTensor H.integralExchange\n      (fun X K ↦ finiteTorConstructibleIntegral C.l E X.obj.left K.obj)) :\n    CompactSupportProjectionCoherence H.rational H.rationalTensor H.rationalExchange\n      (fun _ _ ↦ True)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002539-L-97221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T070917-L-3694057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

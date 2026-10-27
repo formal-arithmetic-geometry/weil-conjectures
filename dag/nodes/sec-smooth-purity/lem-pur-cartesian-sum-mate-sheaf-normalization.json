@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-cartesian-sum-mate-sheaf-normalization",
+ "kind": "statement",
+ "title": "The Cartesian sum mate preserves its section in the common direct image",
+ "statement": "Let A be any commutative ring and let (b,q,p,v) be a Cartesian square of arbitrary schemes, with b,v separated etale; q,p are arbitrary. Let beta:S_v p^* -> q^* S_b be the canonical sheaf sum base-change isomorphism [def-weil-pbc-etale-shriek-base-change-map], using sum extension [def-weil-pbc-etale-sum-extension]. Let theta:q_* S_v -> S_b p_* be its right mate under q^* adjoint q_* and p^* adjoint p_* [def-kun-unbounded-exchange]. For every sheaf F on W, theta_F followed by p_*(c_b,F) and the b,p direct-image compositor equals c_v,q_*F followed by the q,v compositor to (bp)_*F, where c is the graph-defined map from sum extension to direct image [def-weil-pbc-etale-shriek-to-star-map]. No properness, compactification, derived category, finiteness of coefficients, or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F sheaf transpose step; etale-cohomology.tex Tags 03S6 (base change by uniqueness of left adjoints), 0F4L (graph extension into direct image)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "For the four sheaf adjunctions v! ⊣ v*, p* ⊣ p_*, q* ⊣ q_*, and b! ⊣ b*, apply the unit equation of leftAdjointUniq to the chosen sum base-change isomorphism. Postcompose with the counit for q* ⊣ q_*, use naturality, and cancel the triangle identity. The resulting equation identifies the v!-transpose of the forward mate theta after the ordinary etale base-change map with q_* of the unit of b! ⊣ b*.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the graph-defined units on an etale test object U over Y'. Cartesian pullback identifies the graph target for b over U times_Y' W with the pullback along q of the graph target for v over U. The identification is the pullbackMapComparison followed by the inverse b,p compositor and the q,v compositor. Its composite with the graph of b is the pullback of the graph of v, as checked on all pullback projections. Thus extension of the section agrees on the graph. On the complement, transport by the inverse identification and project to the graph target of v: a point in both ranges would belong to both the graph and its complement. Factor the disjoint map through the open complement, where graph extension vanishes. Apply graph_hom_ext to prove the unit equation for restriction functors.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-to-star-map",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sum-to-direct-image comparison is the adjoint of the graph-defined unit. Transport the graph unit equation from localization restriction to upperStar by upperStarIsoLocalizationRestriction and baseChangeMap_flip_eq. Naturality of ordinary base change, the mate unit equation from the first step, and injectivity of the v! adjunction Hom equivalence give theta followed by p_* of the comparison. Finally apply the b,p direct-image compositor to obtain the specified equality in (bp)_* F. Empty graphs require no separate cases and identity squares are included in the same triangle-identity calculation.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-etale-shriek-to-star-map",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L; the underived graph/adjunction calculation used by more-etale.tex Tag 0F7F. Formalized directly with the existing graph-extension and left-adjoint uniqueness APIs.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a Cartesian square of schemes with separated etale horizontal arrows, the sheaf mate of sum base change agrees with the canonical inclusion into the common direct image",
+   "results": "Eight hits: pullbackPushforwardAdjunction, mateEquiv_square, relative gluing, pullback carriers, separatedness under base change, coproduct pullback, MayerVietorisSquare. No sheaf support normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image etale sum extension commute Cartesian square derived mate compact support",
+   "results": "Eight general etale and scheme-limit matches; none identifies the chosen compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve generic adjunction-mate identities; useful for categorical calculations only.",
+   "date": "2026-10-27",
+   "verdict": "Use abstract mate identities, not a replacement for geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriekToLowerStar.*baseChange|baseChange.*etaleLowerShriekToLowerStar",
+   "results": "No Mathlib hits. Project searches found the graph normalization and nested-etale-summand theorem, but no normalization of the Cartesian sheaf mate.",
+   "date": "2026-10-27",
+   "verdict": "The geometric steps need statements; existing derived-mate lemmas handle the categorical part."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived mate square between exact functors and right derived direct images satisfies the same unit equation as the ordinary sheaf mate",
+   "results": "Eight generic derived adjunction unit facts. The local library already proves derivedExact_mateEquiv_app_fac and exact_localization_inverse_mate, which are used in the new complete categorical proof.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project categorical lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper support composition comparison for a commuting square of schemes is normalized by the sheaf inclusion into the common direct image and the unbounded right derived functor unit",
+   "results": "Eight generic scheme and sheaf pushforward-composition matches. No compact-support tower normalization against the right-derived unit.",
+   "date": "2026-10-27",
+   "verdict": "No exact normalization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperInterchange",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7F (lemma-shriek-proper-and-open-base-change), 0F7J (lemma-shriek-composition), and item (3) in the final paragraph of Tag 0F7L; parent steps 3, 4 and 5. The common-support identification is the sheaf composition used explicitly in the proof of 0F7B.",
+   "via": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower",
+    "lem-pur-graph-proper-interchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianSumMateSheafNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianSumMateSheafNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartesian_sum_mate_sheaf_normalization",
+  "statement": "theorem cartesian_sum_mate_sheaf_normalization\n    (A : Type (u + 1)) [CommRing A]\n    {W Y' Z Y : Scheme.{u}}\n    (q : W ⟶ Y') (p : Z ⟶ Y)\n    (b : W ⟶ Z) [Etale b] [IsSeparated b]\n    (v : Y' ⟶ Y) [Etale v] [IsSeparated v]\n    (sq : IsPullback b q p v) :\n    let θ := (mateEquiv\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)\n      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans\n    (∀ F : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A),\n      θ.app F ≫\n          (lowerStar (ModuleCat.{u + 1} A) p).map\n            (etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) b F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) b p).hom.app F =\n        etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) v\n            ((lowerStar (ModuleCat.{u + 1} A) q).obj F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) q v (b ≫ p) sq.w).hom.app F)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T065854-L-2484616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T084347-L-3672712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

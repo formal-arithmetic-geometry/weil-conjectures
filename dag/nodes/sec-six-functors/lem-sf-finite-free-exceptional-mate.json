@@ -1,0 +1,254 @@
+{
+ "id": "lem-sf-finite-free-exceptional-mate",
+ "kind": "statement",
+ "title": "Finite-free scalar extension and a counit-normalized right-adjoint mate",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings with an $A$-basis $b_1,\\ldots,b_r$ of $B$. Let $\\mathcal C,\\mathcal D$ be small sites, use constant coefficient module derived categories, and let $T_{\\mathcal C},T_{\\mathcal D}$ and $U_{\\mathcal C},U_{\\mathcal D}$ be derived scalar extension and restriction [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category], [lem-pur-derived-change-of-rings], [def-pc-sheaf-restrict-scalars]. Let $F_R:D(\\mathcal C,R)\\to D(\\mathcal D,R)$ and $G_R:D(\\mathcal D,R)\\to D(\\mathcal C,R)$ be additive functors with specified adjunctions $F_R\\dashv G_R$ (natural Hom bijections with units and counits satisfying the triangle identities), counits $\\varepsilon_R$, for $R=A,B$. Require $G_B$ to preserve coefficient multiplication: $G_B(a\\,\\mathrm{id}_N)=a\\,\\mathrm{id}_{G_BN}$ for every $a\\in B$ and $N\\in D(\\mathcal D,B)$ (in particular this holds for a $B$-linear functor). Suppose there is a natural isomorphism\n$$c:T_{\\mathcal D}F_A\\xrightarrow{\\sim}F_BT_{\\mathcal C}.$$\nRequire its restriction normalization: there is a natural identification $U_{\\mathcal D}F_B\\cong F_AU_{\\mathcal C}$ under which $U_{\\mathcal D}(c_P)$ is the finite-sum comparison $(F_AP)^{\\oplus r}\\to F_A(P^{\\oplus r})$, with components $F_A$ of the basis inclusions.\n\nThe natural representing isomorphism $\\theta_N:U_{\\mathcal C}G_BN\\xrightarrow{\\sim}G_AU_{\\mathcal D}N$ is characterized by the successive adjunction bijections\n$$\\operatorname{Hom}_A(P,U_{\\mathcal C}G_BN)\\cong\\operatorname{Hom}_B(T_{\\mathcal C}P,G_BN)\\cong\\operatorname{Hom}_B(F_BT_{\\mathcal C}P,N)\\cong\\operatorname{Hom}_B(T_{\\mathcal D}F_AP,N)\\cong\\operatorname{Hom}_A(F_AP,U_{\\mathcal D}N)\\cong\\operatorname{Hom}_A(P,G_AU_{\\mathcal D}N).$$\nDefine $b_M:T_{\\mathcal C}G_AM\\to G_BT_{\\mathcal D}M$ as the $F_B\\dashv G_B$ transpose of $T_{\\mathcal D}(\\varepsilon_{A,M})\\circ c_{G_AM}^{-1}$. Then $b_M$ is a natural isomorphism and\n$$\\varepsilon_{B,T_{\\mathcal D}M}\\circ F_B(b_M)=T_{\\mathcal D}(\\varepsilon_{A,M})\\circ c_{G_AM}^{-1}.$$\nUnder $\\theta_{T_{\\mathcal D}M}$ and $UT\\cong(-)^{\\oplus r}$, its restriction is the finite-sum comparison $(G_AM)^{\\oplus r}\\to G_A(M^{\\oplus r})$ with $j$-th component $G_A$ of the $j$-th inclusion and inverse given by $G_A$ of the projections. The resulting $B$-linear map is independent of the basis used to verify invertibility.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct scalar extension as sheafified ordinary extension of scalars. The given finite basis makes the module extension functor exact. At each object of the site, the ordinary module basis theorem identifies the direct sum with restriction of extension; the sheaf adjunction unit has exactly these columns. Evaluate cochain complexes degreewise to obtain the same isomorphism on complexes. Localize the exact adjunction: its unit formula and the two functor comparison isomorphisms transport the columns to the derived category. Every derived object has a complex representative, so the basis desc is invertible everywhere. Its inverse gives the required coordinates. The comparison isomorphism exhibits this exact extension as its left derived functor. Restriction reflects isomorphisms on sheaves objectwise, and on derived categories by homology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  },
+  {
+   "text": "Compose the scalar and given adjunctions, transporting the second left adjoint along c. Their rightAdjointUniq isomorphism is theta. The characterization of rightAdjointUniq by the counit, followed by naturality of the Hom equivalences, gives exactly the displayed fivefold Hom chain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  },
+  {
+   "text": "The categorical mate of c inverse has the stated counit equation by mateEquiv_counit. Applying the inverse Hom equivalence to that equation proves uniqueness. Each component is a B-linear derived morphism, and the multiplication hypothesis identifies multiplication on G_B with its image under G_B.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  },
+  {
+   "text": "Apply the Hom-chain characterization of theta to the composite of the scalar unit with U(b). The first adjunction gives b, the B-adjunction gives its counit expression, and precomposition by c cancels c inverse. Naturality of the second scalar unit and the A-adjunction triangle identity give theta U(b) eta_C = G_A(eta_D).",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  },
+  {
+   "text": "For every basis element, commute multiplication through the B-linear component b, use the multiplication hypothesis on G_B, and apply naturality of theta. Substitute the preceding unit identity and the basis-column equations of the two scalar presentations. The resulting column is exactly G_A of the corresponding biproduct inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  },
+  {
+   "text": "The functorial biproduct isomorphism of the additive functor G_A gives inverse maps desc(G_A iota_j) and lift(G_A pi_j), including for the empty basis. The column computation conjugates U(b) to this isomorphism. Derived restriction reflects isomorphisms, hence every component b is invertible and the natural transformation is an isomorphism. The counit uniqueness result is independent of the basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 1; R2 direct exact module-valued-sheaf construction, derived localization, scalar-unit and basis-column proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of scalar rings commutes with right adjoints to additive functors by the counit mate and finite biproducts",
+   "results": "8 hits. Condensed.freeForgetAdjunction; ModuleCat.adj; ModuleCat.RestrictionCoextensionAdj.unit'; PresheafOfModules.freeAdjunction; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.counit'; LightCondensed.freeForgetAdjunction; ModuleCat.ExtendRestrictScalarsAdj.counit",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "12 hits. CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|[Cc]oeff.*[Mm]ate|finiteFree.*[Aa]djoint",
+   "results": "21 hits. Mathlib/LinearAlgebra/RootSystem/BaseExists.lean; Mathlib/LinearAlgebra/RootSystem/BaseExists.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free change of scalar rings commutes with right adjoints to additive functors by the counit mate and finite biproducts",
+   "results": "8 hits. ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.counit_app; CategoryTheory.Free.lift; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a right adjoint after exact finite free scalar extension agrees with original right adjoint and makes counit mate an isomorphism",
+   "results": "8 hits. ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.extendRestrictScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension counit mate of additive adjoints restriction finite biproduct comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.Mat_.embeddingLiftIso",
+   "date": "2026-10-22",
+   "verdict": "no match: searches give ordinary module adjunctions and categorical mate infrastructure, not the derived sheaf assertion or its coordinate normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterated_mateEquiv_conjugateEquiv\"",
+   "results": "4 hits: CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Bicategory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.Bicategory.iterated_mateEquiv_conjugateEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: searches give ordinary module adjunctions and categorical mate infrastructure, not the derived sheaf assertion or its coordinate normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv_conjugateEquiv|mapBiproduct|isIso_mateEquiv_app_of_isIso_biproductDesc",
+   "results": "20 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Preadditive/Mat.lean, Mathlib/CategoryTheory/Preadditive/Mat.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Monoidal/Preadditive.lean, Mathlib/CategoryTheory/Monoidal/Preadditive.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: searches give ordinary module adjunctions and categorical mate infrastructure, not the derived sheaf assertion or its coordinate normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of scalars mate right adjoint additive functor biproduct",
+   "results": "8 hits: ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Mat_.additiveObjIsoBiproduct, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, CategoryTheory.Mat_.lift, CategoryTheory.Mat_.instHasBiproductιObjEmbeddingXOfAdditive",
+   "date": "2026-10-22",
+   "verdict": "no match: searches give ordinary module adjunctions and categorical mate infrastructure, not the derived sheaf assertion or its coordinate normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear functor preserves scalar multiplication finite free basis right adjoint mate",
+   "results": "8 hits: ModuleCat.adj_homEquiv, ModuleCat.adj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, Rep.linearization_ε_hom, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.RestrictionCoextensionAdj.unit', fromModuleCatToModuleCatLinearEquivtoModuleCatObj",
+   "date": "2026-10-22",
+   "verdict": "no match: searches give ordinary module adjunctions and categorical mate infrastructure, not the derived sheaf assertion or its coordinate normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof paragraph 1: counit-defined closed-exceptional and dualizing comparison; returned proof step 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-free-exceptional-mate",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: additivity does not imply coefficient linearity; the conjugation-twist example violates the final column formula. Added preservation of B multiplication by G_B, removed unused scheme-specific derived-category dependency, and supplied explicit unit, column and inverse calculations. Reviewer FIX: the new node lem-sf-site-finite-free-scalar-coordinates was dropped as a duplicate; step 1 cites lem-sfb-derived-finite-free-scalar-coordinates, lem-pur-sheaf-ring-derived-coefficient-adjunction and lem-sfb-dc-hom-scalar-adjunction.",
+  "blueprint": "Realizes lem-coef-finite-free-extension.proof.md paragraph 1: the counit-defined closed-exceptional comparison from the finite-free starting case, without any SGA route.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic representable full faithfulness represents the natural Hom chain; it does not replace the coefficient-comparison route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Explicit categorical mate definition fixes the counit normalization."
+   },
+   {
+    "node": "lem-sfb-derived-finite-free-scalar-coordinates",
+    "why": "Arbitrary-site derived finite-basis scalar coordinates; no node of sk-thm-sf-compatibility gives them."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Normalized derived scalar extension/restriction adjunction on an arbitrary small site."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Conservativity of derived restriction of scalars on an arbitrary small site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-812fca21c",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-812fca21c (reviewer sub-agent of L); spot-checked: The item's statement change is right. The base statement (Q33 re-split, old step 6) is false: I recomputed the conjugation-twist counterexample (A=B=Q(i), r=1, basis i, H self-adjoint twist, c=-1 forced by the normalization). It gives theta U(b)=id, but the column comes out as i^{-1}(-i)=-1 instead of G_A(iota_1)=1. The added hypothesis that G_B preserves multiplication by B is the minimal fix. It holds for the citer's uses (i_* -| Ri^!, Ra_{X!} -| a_X^x), because a right adjoint of a B-linear functor is B-linear by counit naturality; the citer's step should say so (advisory). Dropping the stmt_dep def-weil-pbc-derived-categories is right. Source: blueprint main-20261015 lem-coef-finite-free-extension.proof.md paragraph 1 (counit-defined closed exceptional comparison); no SGA. I checked steps 2-6 by hand: Yoneda gives theta; the mate counit identity holds; tracing U(b)eta through the chain gives G_A(eta_M) by eta-naturality and the triangle identity, and the normalization of c is never used; the columns are G_A(iota_j) by naturality of theta in N plus the linearity hypothesis; the inverse comes from the biproduct identities; r=0 is fine. Fault (C5): the new node lem-sf-site-finite-free-scalar-coordinates duplicates existing base nodes. lem-sfb-derived-finite-free-scalar-coordinates gives exactness, T=D(E) and UT=(-)^d with columns b_j(x)x on arbitrary small sites. lem-pur-sheaf-ring-derived-coefficient-adjunction gives derived T-|U with unit x(x)1. lem-sfb-dc-hom-scalar-adjunction gives that U is conservative. The i_a formula follows in two lines from the unit. FIX: the node is dropped; step 1 is rewritten to cite these three nodes, with the basis-to-theta and i_a computation written out; uses of steps 4-6 and proof_deps updated; the stray 'd' sentence reworded; the three nodes added to tool_uses as cross-unit infrastructure. No cycles (checked the closures). Statement unchanged from the delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeExceptionalMate",
+  "declaration": "CategoryTheory.finiteFreeExceptionalMate_isIso",
+  "declarations": [
+   "CategoryTheory.finiteFreeExceptionalTheta",
+   "CategoryTheory.finiteFreeExceptionalMate",
+   "CategoryTheory.finiteFreeExceptionalHomMap",
+   "CategoryTheory.finiteFreeExceptionalSumComparison",
+   "CategoryTheory.finiteFreeExceptionalSumInverse",
+   "CategoryTheory.FiniteFreeExceptionalScalarPresentation",
+   "CategoryTheory.finiteFreeExceptionalMate_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeExceptionalMate.lean",
+  "statement": "theorem finiteFreeExceptionalMate_isIso : ∃ (SC : FiniteFreeExceptionalScalarPresentation.{max u a b vA vB, w, a, vA} J r basis) (SD : FiniteFreeExceptionalScalarPresentation.{max u a b vA vB, w, b, vB} K r basis), ∀ (FA : DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} A)) ⥤ DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} A))) (GA : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} A)) ⥤ DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} A))) (FB : DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} B)) ⥤ DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} B))) (GB : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} B)) ⥤ DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} B))) [FA.Additive] [GA.Additive] [FB.Additive] [GB.Additive] (aA : FA ⊣ GA) (aB : FB ⊣ GB) (c : FA ⋙ SD.T ≅ SC.T ⋙ FB) (multiplication : ∀ (a : B) (N : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} B))), GB.map (a • 𝟙 N) = a • 𝟙 (GB.obj N)) (ρ : FB ⋙ (Sheaf.restrictScalars K (algebraMap A B)).mapDerivedCategory ≅ (Sheaf.restrictScalars J (algebraMap A B)).mapDerivedCategory ⋙ FA) (normalization : ∀ P : DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} A)), (Sheaf.restrictScalars K (algebraMap A B)).mapDerivedCategory.map (c.hom.app P) ≫ ρ.hom.app (SC.T.obj P) ≫ FA.map (SC.coordinates P).hom = (SD.coordinates (FA.obj P)).hom ≫ finiteFreeExceptionalSumComparison FA r P), (∀ (P : DerivedCategory (Sheaf J (ModuleCat.{max u a b vA vB} A))) (N : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} B))) (f : P ⟶ ((Sheaf.restrictScalars J (algebraMap A B)).mapDerivedCategory).obj (GB.obj N)), f ≫ (finiteFreeExceptionalTheta SC.adj SD.adj aA aB c).hom.app N = finiteFreeExceptionalHomMap SC.adj SD.adj aA aB c P N f) ∧ IsIso (finiteFreeExceptionalMate aA aB c) ∧ (∀ M : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} A)), FB.map ((finiteFreeExceptionalMate aA aB c).app M) ≫ aB.counit.app (SD.T.obj M) = c.inv.app (GA.obj M) ≫ SD.T.map (aA.counit.app M)) ∧ (∀ b' : GA ⋙ SC.T ⟶ SD.T ⋙ GB, (∀ M, FB.map (b'.app M) ≫ aB.counit.app (SD.T.obj M) = c.inv.app (GA.obj M) ≫ SD.T.map (aA.counit.app M)) → b' = finiteFreeExceptionalMate aA aB c) ∧ (∀ M : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} A)), (SC.coordinates (GA.obj M)).inv ≫ (Sheaf.restrictScalars J (algebraMap A B)).mapDerivedCategory.map ((finiteFreeExceptionalMate aA aB c).app M) ≫ (finiteFreeExceptionalTheta SC.adj SD.adj aA aB c).hom.app (SD.T.obj M) ≫ GA.map (SD.coordinates M).hom = finiteFreeExceptionalSumComparison GA r M) ∧ (∀ M : DerivedCategory (Sheaf K (ModuleCat.{max u a b vA vB} A)), finiteFreeExceptionalSumComparison GA r M ≫ finiteFreeExceptionalSumInverse GA r M = 𝟙 _ ∧ finiteFreeExceptionalSumInverse GA r M ≫ finiteFreeExceptionalSumComparison GA r M = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Constant coefficients use the equivalent fixed-ring ModuleCat-valued sheaf presentation (lem-cbc-constant-ring-module-sheaves). Scalar presentations with universal counit, normalized adjunction and actual basis columns are existential conclusions, not assumed input comparisons. Theta is constructed by rightAdjointUniq of the composed adjunctions; the mate is constructed by mateEquiv without a basis. The counit uniqueness clause expresses basis independence. Coefficient and module universes are the common max of site sizes and ring size, and the chosen derived Hom universe w remains independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-712bb33b0",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Re-delivery of e4a7 (RETURN H2). Diff vs e4a7: only the removed public import of Sheaf.CategoryTheory.ConstantRingModuleSheaves and stmt_deps without lem-cbc-constant-ring-module-sheaves; stmt_deps now equal the five base deps; node differs from live only in lean; lean.statement verbatim. Independent clause-by-clause reading: hypotheses multiplication, c : FA ⋙ SD.T ≅ SC.T ⋙ FB, rho+normalization match the node; theta = rightAdjointUniq(sC.comp aB, (aA.comp sD).ofNatIsoLeft c) matches the displayed Hom chain order (ofNatIsoLeft precomposes c.hom); mate = mateEquiv of c.inv; IsIso, counit equation, uniqueness (basis independence), column clause desc(GA ι_j) (re-derived via theta U(b) eta = GA(eta) and multiplication), inverse lift(GA π_j). Scalar presentations pinned (universal pair, unit normalization, columns); no hollow defs; only the theorem's sorry; docstrings carry the source place, the blueprint tag and steps 1-6; r=0 covered; no SGA or pro-etale substitute. Advisory: ring universe ≥ site sizes (ULift); fixed-ring derived change-of-rings presentation could later become a shared §1(B) module; rho/normalization unused by the proof but in the node; report.md still describes the removed lem-cbc dep as added (stale prose). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190805-L-75428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-integral-space-finite-presentation-limit",
+ "kind": "statement",
+ "title": "Finite finitely presented approximation of an integral algebraic-space morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with algebraic spaces over $S$ as in [def-trf-algebraic-space] and universes as in [def-weil-size-convention]. Let $p:Y\\to X$ be an integral morphism of algebraic spaces, with $X$ quasi-compact and quasi-separated. Quasi-compact means that every open cover of the underlying point space has a finite subcover; quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on scheme tests. The point topology is [def-a1-space-point-topology]. A morphism of algebraic spaces is finite (respectively integral, affine) when every base change by a scheme is represented by a finite (respectively integral, affine) scheme morphism [def-weil-finite-integral-morphism, pqf-def-affine-morphism]. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. There exist a small nonempty directed set $I$, algebraic spaces $Y_i$ over $X$, affine transition morphisms $t_{ji}:Y_j\\to Y_i$ for $j\\ge i$, and compatible $X$-morphisms $p_i:Y\\to Y_i$ such that each $Y_i\\to X$ is finite and of finite presentation, each $Y_i$ is quasi-compact and quasi-separated, and $(Y,(p_i))$ is a limit of the system in algebraic spaces over $X$. Here the limit is in algebraic spaces over $X$: for each algebraic space $W$ over $X$, $X$-morphisms $W\\to Y$ correspond bijectively to compatible families of $X$-morphisms $W\\to Y_i$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "The morphism $p$ is affine by the definition of an integral scheme morphism on each scheme test. Apply the relative-Spec anti-equivalence to obtain the quasi-coherent algebra $\\mathcal A=p_*\\mathcal O_Y$ and $Y\\simeq\\operatorname{Spec}_X(\\mathcal A)$ over $X$. Its integral-property test shows that $\\mathcal A$ is integral. Apply the integral-algebra approximation theorem with the given qcqs base $X$. It supplies a small nonempty directed set $I$ and a colimit cocone $\\mathcal A_i\\to\\mathcal A$ in quasi-coherent algebras, with each $\\mathcal A_i$ finite and finitely presented as an algebra. In particular we do not assume the maps to $\\mathcal A$ are inclusions.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-integral-algebra-fp-colimit",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "Set $Y_i=\\operatorname{Spec}_X(\\mathcal A_i)$. Contravariance applied to the transition and cocone algebra maps gives $t_{ji}:Y_j\\to Y_i$ and $p_i:Y\\to Y_i$; functoriality gives their compatibility equations. The relative-Spec property tests give finite, finitely presented $Y_i\\to X$. The existing affine-locality statement gives qcqs $Y_i$, using the chart/topological quasi-compactness equivalence in [lem-a1-space-etale-open-image]. For transition affineness, choose an affine surjective etale chart $U\\to X$ by [lem-sfb-qc-space-affine-etale-atlas]. Put $V_i=Y_i\\times_XU$; these are affine schemes by relative Spec. Then $V_i\\to Y_i$ is surjective etale (base change of the atlas), and the base change of $t_{ji}$ along it is $V_j\\to V_i$. The target affine scheme $V_i$ is separated by [lem-weil-pbc-affine-morphism-permanence] applied to $V_i\\to\\operatorname{Spec}\\mathbf Z$. Thus [lem-weil-pbc-affine-source-separated-target-affine-morphism] makes $V_j\\to V_i$ affine. Apply the etale-target criterion of [lem-sfb-space-affine-locality] to obtain affine $t_{ji}$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-affine-locality",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "The existing affine-limit theorem gives a sheaf limit $L$ of the spaces $Y_i$ over $S$, represented by an algebraic space, with affine projections $q_i:L\\to Y_i$. Choose $i_0\\in I$. Define $L\\to X$ by $L\\xrightarrow{q_{i_0}}Y_{i_0}\\to X$. For any $i$, choose $j\\ge i,i_0$; the cone identities and the fact that transitions are over $X$ show $q_i$ has this same composite to $X$. Thus this cone is also a limit over $X$: the unique map supplied by the limit over $S$ for a cone from $W/X$ is over $X$, as checked after $q_{i_0}$. Its structural map to $X$ is affine, being the composite of the affine $q_{i_0}$ and $Y_{i_0}\\to X$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "The algebra colimit universal property and the anti-equivalence show that the cone $(Y,(p_i))$ is a limit in the full subcategory of spaces affine over $X$: for every quasi-coherent algebra $\\mathcal B$, compatible algebra maps $\\mathcal A_i\\to\\mathcal B$ correspond uniquely to $\\mathcal A\\to\\mathcal B$, hence to maps $\\operatorname{Spec}_X(\\mathcal B)\\to Y$. The cone with vertex $L$ is a limit in that same full subcategory by step 3. Both $L$ and $Y$ are affine over $X$. The unique cone maps between these two limiting cones are inverse, since both composites have the projections of the identity and uniqueness forces them to be identities. Therefore the canonical cone map $Y\\to L$ is an isomorphism over $X$. Transporting the universal property of $L$ across it gives the required bijection for every algebraic space $W/X$, with the specified projections $p_i$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-integral-algebra-fp-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), relative-Spec proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-space-integral-algebra-fp-colimit",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-affine-locality",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-sfb-space-affine-limits-schematic-stages"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 09YA, relative-Spec proof, with the limit universal property supplied by the existing affine-limit node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism of algebraic spaces with quasi compact quasi separated target is a directed inverse limit of finite finitely presented morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral algebraic spaces are limits of finite presentation finite spaces with affine transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every integral morphism of schemes is affine, i.e., if $ f: X \\\\to Y $ is an integral morphism of schemes, then $ f $ is necessarily an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsFinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*limit.*finite",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Probability/ProductMeasure.lean\", \"line\": \"582\", \"text\": \"  rw [← lintegral_map hf (measurable_restrict _), isProjectiveLimit_infinitePi μ]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "approximation of integral algebraic space morphisms by finite finitely presented morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*colimit.*finite|integral.*limit.*finite",
+   "results": "{\"t\": \"2026-10-23T10:07:53Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|integral.*colimit.*finite|integral.*limit.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral algebraic space morphism is an inverse limit of finite morphisms of finite presentation",
+   "results": "{\"t\": \"2026-10-23T10:07:54Z\", \"tool\": \"leansearch\", \"query\": \"An integral algebraic space morphism is an inverse limit of finite morphisms of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"07739b9ee7626777\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T10:07:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"LocallyOfFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every integral morphism of algebraic spaces over a qcqs target is a directed inverse limit of finite finitely presented algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T10:20:29Z\", \"tool\": \"leanfinder\", \"query\": \"Every integral morphism of algebraic spaces over a qcqs target is a directed inverse limit of finite finitely presented algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"1e1c3c98d460ab0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ordinary rings, or module presentations; none states the assertion for arbitrary algebraic spaces or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-scheme-cover",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction.",
+   "via": [
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-space-finite-presentation-limit",
+  "worker": "stage1",
+  "summary": "Read Tag 09YA and its relative-Spec and algebra inputs. Preserved the statement; split into four steps with two general statement-only inputs. Reused the newly synced affine-locality node and proved transition affineness by etale charts and existing scheme affine lemmas. Constructed a limit among all spaces and compared its affine cone with Y.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. The four steps realize the relative-Spec proof of Tag 09YA, a prerequisite below the recorded ILO/de Jong alteration route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only its general equivalence of point-topological and chart quasi-compactness is used."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Its scheme affine-separatedness clause is applied to the affine target chart over Spec Z."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "why": "Its general scheme affineness criterion supplies the chartwise transition map; no unit-specific approximation theorem is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-74c5807f5",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-74c5807f5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 09YA (spaces-limits l.2722), 082C(2) (l.2462) and 081V/081W (spaces-morphisms l.3762/3835). The item statement is 09YA plus three properties of the relative-Spec construction (affine transitions, qcqs stages, limit over X for arbitrary W), and steps 2-4 prove them; it agrees with how its only citer, noetherian-space-finite-scheme-cover, uses it. Step 1: integral implies affine by def-weil-finite-integral-morphism; relative Spec gives A=p_*O_Y and its integral test; the fp-colimit node supplies the colimit, with integrality defined the same way in both nodes. Step 2: Y_i qcqs from the last clause of affine-locality, with the chart vs |X| quasi-compactness equivalence from a1-etale-open-image. Transitions are affine via U from qc-space-affine-etale-atlas, V_i=Spec A_i(U), the fibre-product base change, the affine-source/separated-target lemma and the target-étale criterion of affine-locality. One line is left to the reader: V_i -> Spec Z is affine, which follows from the cited source-separated lemma. Step 3: affine-limits-schematic-stages needs only small, nonempty, directed and affine transitions; the slice-over-X argument is correct. Step 4: limit in the affine-over-X subcategory, then comparison with L by uniqueness of cone maps. Both new nodes are statement-only, self-contained and true; I tested them on affine X, R/J with J not finitely generated, k to kbar and empty X. They are strictly below the item and restate none of its clauses. Duplicate search (rg -L by tags and key words, blueprint_refs) found only scheme analogues (weil-pbc relative-spec, integral-algebra colimit, integral-morphism-limit-of-finite). Tool uses: a1-space-etale-open-image accepted as declared. trf-space-fibre-products-etale-covers is off-route and undeclared; I accept it as a generic space-foundations tool. Batch 5: all ten listed citations are space definitions or foundational lemmas, not steps of the trace-formula or Poincaré-duality proofs, so they are outside both assumptions. No SGA. No changes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralSpaceFinitePresentationLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_finitePresentation_limit_of_integral",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralSpaceFinitePresentationLimit.lean",
+  "statement": "theorem exists_finite_finitePresentation_limit_of_integral {S : Scheme.{u}} {Y X : AlgebraicSpace S} (p : Y ⟶ X) (hp : IsRepresentableWith (fun _ _ f ↦ IsIntegralHom f.left) p.hom.hom) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) : ∃ (I : Type u) (_ : PartialOrder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : Iᵒᵖ ⥤ Over X) (π : (Functor.const Iᵒᵖ).obj (Over.mk p) ⟶ D), (∀ i : Iᵒᵖ, IsRepresentableWith (fun _ _ f ↦ IsFinite f.left) (D.obj i).hom.hom.hom ∧ MapIsQuasiCompact (D.obj i).hom.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal (D.obj i).hom.hom.hom) ∧ MapIsLocallyOfFinitePresentation (D.obj i).hom ∧ CompactSpace (Point (D.obj i).left.obj.obj) ∧ ∀ (U V : Over S) (a : yoneda.obj U ⟶ (D.obj i).left.obj.obj) (b : yoneda.obj V ⟶ (D.obj i).left.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) ∧ (∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsRepresentableWith (fun _ _ g ↦ IsAffineHom g.left) (D.map f).left.hom.hom) ∧ Nonempty (IsLimit (Cone.mk (Over.mk p) π))",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Integral, finite and affine use the recorded scheme predicates through IsRepresentableWith. Absolute quasi-separatedness is the equivalent affine-pair fibre-product compactness test of Stacks 0AHR, not relative quasi-separatedness over S. The diagram and its limit cone live in Over X, retaining the full universal property for all algebraic spaces over X. The two added already-landed definition nodes supply the reused chartwise local finite presentation and MapIsQuasiCompact interfaces; no definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c400eeacb",
+  "group": "N7",
+  "result": "pass",
+  "note": "Every clause matches Tag 09YA and the node: integral p via IsRepresentableWith IsIntegralHom; X qc as CompactSpace of Point; absolute qs as the affine-pair test of Stacks 0AHR, the same idiom as landed modules; small nonempty directed poset I; D : Iᵒᵖ ⥤ Over X with cone π; stages finite and of finite presentation (MapIsQuasiCompact of the map and its diagonal, MapIsLocallyOfFinitePresentation) and qcqs; affine transitions; IsLimit in Over X, i.e. the bijection for every W/X. Only node change: two landed def stmt_deps, both used. lean.statement verbatim; no definitions, proof is sorry; source/blueprint docstrings and 4-step proof present; report sections present. Edge cases (empty X, identity p, non-qcqs S, universes) and the citer noetherian-space-finite-scheme-cover are consistent. Advisory H9: proof-only private imports, one redundant. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,429 @@
+{
+ "id": "lem-sfb-reductive-cocharacter-parabolic-geometry",
+ "kind": "statement",
+ "title": "Cocharacter parabolics, split radicals and projective homogeneous quotients",
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology, def-sfb-solvable-group-structure]: it is smooth, affine, geometrically connected and of finite type, and over an algebraic closure has no nontrivial smooth connected normal unipotent subgroup. Smoothness, connectedness, and finite type are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. A smooth affine group is unipotent if its geometric points are unipotent matrices in a faithful finite-dimensional representation. Let $\\lambda:\\mathbf G_m\\to G$ be a homomorphism [def-sc-gm-ga]. For every commutative $k$-algebra $A$, define $P_\\lambda(A)$ to consist of $g\\in G(A)$ for which $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends to a morphism $\\mathbf A^1_A\\to G_A$; here $\\mathbf A^1_A=\\operatorname{Spec}A[t]$. Define $U_\\lambda(A)$ by requiring this extension to have value $1$ at zero. Define $Z_\\lambda(A)$ by requiring $g$ to commute with $\\lambda(s)$ after every $A$-algebra extension and for every unit $s$. These functors are represented by smooth geometrically connected closed subgroup schemes [def-sc-group-scheme-subgroup], $U_\\lambda$ is normal in $P_\\lambda$, and evaluation at zero is a retraction $r_\\lambda:P_\\lambda\\to Z_\\lambda$ with kernel $U_\\lambda$. Multiplication gives an isomorphism $U_\\lambda\\rtimes Z_\\lambda\\simeq P_\\lambda$, with product $(u,z)(v,w)=(uzvz^{-1},zw)$. The group $U_\\lambda$ is split unipotent: it admits a finite series of smooth connected closed subgroups, each normal in its predecessor, with quotients $\\mathbf G_a$ [def-sc-gm-ga]. The quotient sheaf $G/P_\\lambda$, namely fppf sheafification of $A\\mapsto G(A)/P_\\lambda(A)$ for faithfully flat finitely presented coverings, is represented by a smooth projective geometrically integral $k$-scheme $X_\\lambda$. Projective means admitting a closed immersion into some projective space [def-pc-projective-morphism]; geometrically integral means nonempty, reduced and irreducible after every field extension. The projection $G\\to X_\\lambda$ is a smooth surjective right $P_\\lambda$-torsor of finite presentation: $(g,p)\\mapsto(g,gp)$ is an isomorphism $G\\times_kP_\\lambda\\simeq G\\times_{X_\\lambda}G$, and its geometric fibres are integral. The scheme $G$ is geometrically integral. Formation of $P_\\lambda,U_\\lambda,Z_\\lambda,r_\\lambda$ and $X_\\lambda$ commutes with every field extension $L/k$ [def-pc-field-extension, def-pc-fibre-product]. Finally, let $T\\subseteq G$ be a split maximal torus [def-sfb-tori-multiplicative-type] and suppose $\\lambda$ factors through $T$. If $\\alpha\\circ\\lambda(t)=t^{n_\\alpha}$ has $n_\\alpha\\ne0$ for every nontrivial $T$-character $\\alpha$ occurring in the conjugation representation on the tangent space $\\operatorname{Lie}(G)$ at $1$, then $Z_\\lambda=T$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-projective-morphism",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-split-unipotent-series",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-cocharacter-limit-functors"
+ ],
+ "proof": [
+  {
+   "text": "Construct the limit functors over $k$, before extending the field. For the conjugation action $c$ on the smooth affine scheme $G$, apply [lem-sfb-smooth-affine-concentrator] with invariant smooth closed subscheme $G$, and then with the identity subscheme $e=\\operatorname{Spec}k$. These give smooth closed schemes $P$ and $U$ and the universal limit morphism $C:\\mathbf A^1\\times P\\to G$. Products and inverses of extended orbit maps extend the orbit of a product and inverse, so these are closed subgroup schemes. Construct the fixed scheme $Z$ by imposing the coefficients of $c^*(f)-1\\otimes f$ for $f\\in k[G]$ in $k[t,t^{-1}]\\otimes_k k[G]$; its points over every test algebra are precisely the stated universal commuting points. This is a closed subgroup and is smooth by [lem-sfb-torus-fixed-scheme-smooth], applied to $\\mathbf G_m$ acting on $G$. All three constructions represent the actual test-algebra functors, including on nonreduced algebras.",
+   "uses": [
+    "lem-sfb-smooth-affine-concentrator",
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(a), pp.265--266; Definition 13.21, Proposition 13.23 and the definition of Z, pp.261--264."
+   }
+  },
+  {
+   "text": "The identities $C(s,C(t,g))=C(st,g)$ and $C(t,gh)=C(t,g)C(t,h)$ hold first when $s,t$ are invertible and hence everywhere: on coordinate rings, Laurent restriction $A[s,t]\\hookrightarrow A[s^{\\pm1},t^{\\pm1}]$ is injective for every algebra $A$. Set $t=0$ in the first identity. This says that $r(g)=C(0,g)$ is fixed under conjugation by $\\lambda$, so $r:P\\to Z$. The second identity makes $r$ a homomorphism. For $z\\in Z$, its orbit is constant, so $r(z)=z$. By the definition of $U$, $\\ker r=U$; thus $U$ is normal. Multiplication and $g\\mapsto(g r(g)^{-1},r(g))$ are mutually inverse morphisms $U\\times Z\\rightleftarrows P$. Indeed $r(g r(g)^{-1})=1$. Multiplying $uz$ and $vw$ yields $u(zvz^{-1})zw$, giving exactly the displayed semidirect-product group law.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(b) and its proof, p.266; explicit limit and inverse formulas."
+   }
+  },
+  {
+   "text": "For any extension $L/k$, an $L$-algebra $A$ has $G_L(A)=G(A)$, and the same orbit map in $G(A[t,t^{-1}])$ extends to $G(A[t])$ in either description. Thus the base changes of $P,U,Z$ represent the three functors for $G_L,\\lambda_L$; evaluation at $t=0$ also agrees, giving $r_L$. In particular over an algebraic closure $\\bar k$, [lem-sfb-cocharacter-limit-smooth-structure] says these three represented functors are connected. Their representing schemes are the schemes already constructed, by the uniqueness of a representing object. The geometric-connectedness criterion [lem-weil-geometrically-connected-algebraic-closure] now shows that $P,U,Z$ are geometrically connected over $k$. This establishes the connectedness and all subgroup base-extension clauses without assuming $k$ perfect.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(e), pp.265--266; functor definitions of P, U and Z, pp.263--264."
+   }
+  },
+  {
+   "text": "Write $\\mathfrak g=\\operatorname{Lie}(G)$. Use [lem-sfb-affine-group-dual-number-calculus] to identify infinitesimal points with $\\mathfrak g\\otimes_k A$ and conjugation with the algebraic adjoint action. By [lem-sfb-gm-representation-weight-basis], $\\mathfrak g=\\bigoplus_n\\mathfrak g_n$ for the action of $\\lambda$. For an infinitesimal point represented by $v=\\sum_n v_n$, its conjugated tangent vector is $\\sum_n t^n v_n$. It extends polynomially across zero exactly when all negative-weight components vanish, and specializes to zero exactly when the weight-zero component also vanishes. Consequently $\\operatorname{Lie}(U)=\\bigoplus_{n>0}\\mathfrak g_n$ and $\\operatorname{Lie}(Z)=\\mathfrak g_0$. The first equality has no invariant subspace for the conjugation action of the split torus $\\mathbf G_m$. The general action criterion [lem-sfb-split-torus-no-invariants-unipotence], applied to the smooth geometrically connected affine group $U$, therefore supplies its finite $\\mathbf G_a$ quotient series over $k$ and its unipotence. This uses integer characters, including in characteristic $p$ when a nonzero weight may be divisible by $p$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-split-torus-no-invariants-unipotence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(c), pp.265--266, and proof of Proposition 17.60, p.372."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to the closed subgroup $P\\subset G$ to obtain a separated finite-type quotient $q:G\\to X$, flat, surjective and finitely presented. Its equality-of-images criterion identifies its kernel pair with $G\\times P$ by $(g,p)\\mapsto(g,gp)$; the inverse sends $(g,h)$ to $(g,g^{-1}h)$. These formulas are morphisms on all tests, since the criterion makes $g^{-1}h$ factor through $P$. The map $q$ is itself an fppf covering, and so are its pullbacks by [lem-trf-fppf-covering-base-change]. Thus every test point of $X$ lifts fppf locally to $G$, and the kernel-pair criterion says that any two lifts differ exactly by $P$. This proves that $X$ represents the fppf sheafification of the right-coset functor, with the required right torsor identity. After every $L/k$, the pulled-back covering and the same identity give the same description of $X_L$ as $G_L/P_L$. Uniqueness of sheafification gives the canonical, not just abstract, base-extension isomorphism.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 5.28 and Corollary 5.27, p.105; the torsor identity of Lemma 5.24."
+   }
+  },
+  {
+   "text": "Pull $q$ back along its fpqc cover $q:G\\to X$. Its pullback is the projection $G\\times P\\to G$, smooth since $P$ is smooth and smoothness is preserved by base change [lem-pc-proper-base-change](2). Hence $q$ is smooth by [lem-trf-smooth-fpqc-base-descent]. Since $G\\to\\operatorname{Spec}k$ is smooth and $q$ is a flat surjective locally finitely presented map, [lem-sbc-smooth-flat-surjective-source-descent] makes $X$ smooth over $k$. Over every extension field, $G$ is nonempty and connected and maps surjectively to $X$ by [lem-weil-pbc-surjective-base-change], so $X$ is nonempty and connected as a continuous image. Thus $X$ is geometrically connected. Apply [lem-trf-smooth-connected-fibre-normal-integrality] to the structure morphisms of $G$ and $X$: their unique fibres are geometrically connected and their structure morphisms are smooth. It follows that $G$ and $X$ are geometrically integral.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.26, p.105; Proposition 7.15 and proof, pp.142--143; smooth connected integral geometry."
+   }
+  },
+  {
+   "text": "It remains to prove properness, and then projectivity, of $X$. Work over $F=\\bar k$. The reductive Borel-pair node supplies a maximal torus $T$ and its root datum; the cocharacter-conjugacy node permits conjugating $\\lambda$ into $T$. The conjugation also carries its limit subgroup to the conjugate subgroup, directly from the orbit formula: if $g\\lambda g^{-1}=\\nu$ then $P_\\nu=gP_{F}g^{-1}$, and right multiplication $x\\mapsto xg^{-1}$ on $G_F$ descends to an isomorphism $G_F/P_F\\simeq G_F/P_\\nu$ of the represented coset sheaves. Hence we may and do replace $\\lambda$ by $\\nu$, so that $\\lambda$ factors through $T$. Choose an integral cocharacter $\\mu$ off all the finitely many root hyperplanes. Such a choice exists in the cocharacter lattice: in a lattice basis evaluate each nonzero integral linear form at $(1,M,\\ldots,M^{r-1})$ and avoid its finitely many integer zeros. For $N$ sufficiently large, $\\lambda\\prime=N\\lambda+\\mu$ is regular and retains the sign of every nonzero $\\langle\\alpha,\\lambda\\rangle$. Therefore $\\langle\\alpha,\\lambda\\prime\\rangle>0$ implies $\\langle\\alpha,\\lambda\\rangle\\geq0$. In rank zero the root set is empty and take $\\lambda\\prime=0$. By [lem-sfb-regular-cocharacter-borel-description], $B=P_{\\lambda\\prime}$ is a Borel containing $T$, with positive roots exactly those with positive $\\lambda\\prime$-pairing.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-cocharacter-conjugate-maximal-torus",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, first paragraph of proof, p.544; Proposition 21.29, pp.433--434."
+   }
+  },
+  {
+   "text": "For every positive root $\\alpha$ of $B$, [lem-sfb-reductive-root-subgroup-parametrizations] gives $\\lambda(t)u_\\alpha(a)\\lambda(t)^{-1}=u_\\alpha(t^{n_\\alpha}a)$. Here $n_\\alpha\\geq0$ by the preceding step, so this formula extends to $\\mathbf A^1$ over every test algebra; hence $U_\\alpha\\subset P$. Also $T\\subset P$, since it commutes with $\\lambda$. The Borel-pair node writes $B=R_u(B)\\rtimes T$, and [lem-sfb-borel-root-product-coordinates] writes every test-algebra point of $R_u(B)$ as the product of its positive root-group coordinates. Products of the displayed extensions show that the entire inclusion $B\\to G$ factors through $P$, scheme-theoretically. The nested quotient node gives a surjection $G_F/B\\to G_F/P_F=X_F$. Its source is proper by [lem-sfb-borel-quotient-proper-geometry], and the target is separated and finite type. Thus [lem-weil-pbc-image-universally-closed] makes $X_F$ proper. Finally [lem-pc-proper-descends-field] descends properness to $X/k$.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-weil-pbc-image-universally-closed",
+    "lem-pc-proper-descends-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, p.544; Theorem 17.16 and Proposition 7.15; Stacks Tag 03GN, label lemma-image-proper-is-proper, and Tag 02L1, label lemma-descending-property-proper."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-affine-homogeneous-quotient-projective-immersion] with the smooth affine $G$ and its closed subgroup $P$ to obtain $j:X\\hookrightarrow\\mathbf P^N_k$. Its target is separated and its source is now proper, so [lem-weil-pbc-proper-over-separated] makes $j$ proper. Then [lem-weil-pbc-proper-immersion-closed] makes $j$ a closed immersion. This is exactly the finite-projective-space convention of projectivity in the statement, not just properness or projectivity after scalar extension.",
+   "uses": [
+    "lem-sfb-affine-homogeneous-quotient-projective-immersion",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 7.18, p.143, and 8.43, p.161; Stacks Tag 01W6, label lemma-image-proper-scheme-closed, and Schemes Tag 01IQ, label lemma-immersion-when-closed."
+   }
+  },
+  {
+   "text": "To check the fibre assertion, let $x\\in X$, extend $\\kappa(x)$ to an algebraic closure $\\Omega$, and consider $G_x\\times_{\\kappa(x)}\\Omega$. This is nonempty by surjectivity and is finite type (the quotient is finitely presented). Over $\\Omega$ it has a rational point: finite-type schemes over a field are Jacobson and their closed-point residue fields over an algebraically closed field are the field, by the two cited closed-point nodes. A chosen point and the torsor identity identify this geometric fibre with $P_\\Omega$. It is connected by geometric connectedness of $P$. The algebraic-closure connectedness criterion therefore says $G_x$ is geometrically connected. Its smoothness is inherited from $q$ by base change. Apply [lem-trf-smooth-connected-fibre-normal-integrality] to $q$: every fibre remains nonempty and integral after every extension of its residue field. In particular its geometric fibres are integral as claimed.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.27, p.105, and Proposition 7.15, pp.142--143; smooth connected integral geometry."
+   }
+  },
+  {
+   "text": "For the last clause, extend to $\\bar k$. Maximality of $T_{\\bar k}$ follows from [lem-sfb-maximal-torus-field-extension]. The weight decomposition of [lem-sfb-reductive-rank-one-reflections] is $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\ne0}\\mathfrak g_\\alpha$. The assumed nonzero integer pairings eliminate every nontrivial-character summand from the $\\lambda$-weight-zero part. Hence the tangent calculation in step 4 gives $\\operatorname{Lie}(Z)=\\operatorname{Lie}(T)$ over $\\bar k$. We already have $T\\subset Z$, and $Z$ is smooth connected. Apply [lem-sfb-smooth-subgroup-tangent-generation] with ambient group $Z$, the single subgroup $T$, and closed subgroup $K=T$; the tangent-spanning hypothesis is exactly this equality. It gives $Z_{\\bar k}=T_{\\bar k}$. On the affine coordinate rings, the ideal of $T$ inside $Z$ tensors to zero over the field extension, so it was zero: a nonzero vector over $k$ stays nonzero after extension of a basis. Thus $Z=T$ over $k$, including the empty-root and trivial-group cases.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 21.29, printed p.434; maximal-torus scalar extension of 17.82."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-affine-concentrator",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-split-torus-no-invariants-unipotence",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-cocharacter-conjugate-maximal-torus",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-nested-homogeneous-quotient-geometry",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-pc-proper-descends-field",
+  "lem-sfb-affine-homogeneous-quotient-projective-immersion",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.33 and proof, pp.265--266; proof of Proposition 17.60, p.372; proof of Theorem 25.1, p.544; quotient geometry in 5.24--5.28, 7.15--7.18 and 8.43; regular-centralizer argument in proof of 21.29, p.434. Explicit functorial, descent and dual-number details supplied in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cocharacter|[Pp]arabolic|[Bb]orel",
+   "results": "{\"t\": \"2026-10-24T03:37:59Z\", \"tool\": \"grep\", \"query\": \"cocharacter|[Pp]arabolic|[Bb]orel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/MeasurableSpace/Card.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\"], \"digest\": \"508008f549b38c6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocharacter of a split reductive group defines a parabolic subgroup with Levi centralizer and split unipotent kernel",
+   "results": "{\"t\": \"2026-10-24T03:38:00Z\", \"tool\": \"leansearch\", \"query\": \"A cocharacter of a split reductive group defines a parabolic subgroup with Levi centralizer and split unipotent kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.IsParabolic\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Sylow.characteristic_of_normal\", \"AddSubgroup.characteristic_centralizer\", \"Subgroup.characteristic_centralizer\", \"Rep.instIsLeftAdjointSubtypeMemSubgroupCoindFunctorSubtype\", \"Sylow.toSubgroup\", \"GroupExtension.Splitting.conjAct\"], \"digest\": \"e2f35edac6a8ba68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Parabolic\"",
+   "results": "{\"t\": \"2026-10-24T03:38:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.IsParabolic\", \"Matrix.parabolicEigenvalue\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic.neg\", \"Matrix.IsParabolic.of_neg\", \"Matrix.isParabolic_neg_iff\", \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"Matrix.isParabolic_iff_of_upperTriangular\"], \"digest\": \"81492834a0352a7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocharacter parabolic subgroups of a split reductive algebraic group have split unipotent radicals and smooth projective quotients",
+   "results": "{\"t\": \"2026-10-24T03:38:04Z\", \"tool\": \"leanfinder\", \"query\": \"Cocharacter parabolic subgroups of a split reductive algebraic group have split unipotent radicals and smooth projective quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"0208f1e8ba448efd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one parameter subgroup defines a smooth parabolic group as a semidirect product of a split unipotent group and a Levi centralizer",
+   "results": "{\"t\": \"2026-10-24T03:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"A one parameter subgroup defines a smooth parabolic group as a semidirect product of a split unipotent group and a Levi centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Subgroup.IsRegularAtInfty\", \"Subgroup.widthInfty\", \"instLieAddGroupOfNatWithTopENat\", \"Subgroup.IsArithmetic\", \"upperCentralSeriesAux\", \"Subgroup.strictPeriods\", \"RootPairing.GeckConstruction.instHasTrivialRadical\"], \"digest\": \"4f17d714c08dd631\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsReductive|IsParabolicSubgroup|cocharacter|unipotentRadical",
+   "results": "{\"t\": \"2026-10-24T03:47:52Z\", \"tool\": \"grep\", \"query\": \"IsReductive|IsParabolicSubgroup|cocharacter|unipotentRadical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every maximal torus of an algebraic group remains maximal under extension of fields and cocharacter parabolics commute with scalar extension",
+   "results": "{\"t\": \"2026-10-24T03:47:52Z\", \"tool\": \"leansearch\", \"query\": \"Every maximal torus of an algebraic group remains maximal under extension of fields and cocharacter parabolics commute with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.restrictScalars_coe_root\", \"Algebra.IsAlgebraic.extendScalars\", \"RootPairing.restrictScalars_coe_coroot\", \"IntermediateField.coe_extendScalars\", \"tangentConeAt_mono_field\", \"IntermediateField.restrictScalars_top\", \"IntermediateField.extendScalars_top\", \"AlgHom.extendScalars\"], \"digest\": \"f653101ed66bf185\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T03:47:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive group over a field the quotient by a cocharacter parabolic is projective and the unipotent radical is split",
+   "results": "{\"t\": \"2026-10-24T03:47:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a reductive group over a field the quotient by a cocharacter parabolic is projective and the unipotent radical is split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.HasTrivialRadical\"], \"digest\": \"9754e508b42f32a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements and semisimple Lie algebras do not state a theorem about reductive group schemes or their homogeneous quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocharacter of a reductive group defines a smooth parabolic subgroup with projective quotient and a split unipotent radical",
+   "results": "{\"t\": \"2026-10-24T04:20:50Z\", \"tool\": \"leanfinder\", \"query\": \"A cocharacter of a reductive group defines a smooth parabolic subgroup with projective quotient and a split unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.corootSpace\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"1546556d3f6dc6f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results about parabolic 2 by 2 matrices, Lie algebras, differential Lie groups and general smooth algebras do not state this algebraic group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Parabolic\"",
+   "results": "{\"t\": \"2026-10-24T04:20:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.IsParabolic\", \"Matrix.parabolicEigenvalue\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic.neg\", \"Matrix.IsParabolic.of_neg\", \"Matrix.isParabolic_neg_iff\", \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"Matrix.isParabolic_iff_of_upperTriangular\"], \"digest\": \"81492834a0352a7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results about parabolic 2 by 2 matrices, Lie algebras, differential Lie groups and general smooth algebras do not state this algebraic group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|IsParabolicSubgroup|unipotentRadical",
+   "results": "{\"t\": \"2026-10-24T04:20:48Z\", \"tool\": \"grep\", \"query\": \"cocharacter|IsParabolicSubgroup|unipotentRadical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results about parabolic 2 by 2 matrices, Lie algebras, differential Lie groups and general smooth algebras do not state this algebraic group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group over a field has smooth cocharacter limit parabolics with split unipotent kernel and smooth projective homogeneous quotient",
+   "results": "{\"t\": \"2026-10-24T04:26:17Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group over a field has smooth cocharacter limit parabolics with split unipotent kernel and smooth projective homogeneous quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieGroup\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Algebra.Smooth.recOn\", \"Algebra.smoothLocus\", \"LieGroup.recOn\", \"GrpCat.limitGroup\", \"LieGroup.casesOn\", \"Rep.instInjective\"], \"digest\": \"f952bddf85f75e36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results about parabolic 2 by 2 matrices, Lie algebras, differential Lie groups and general smooth algebras do not state this algebraic group-scheme theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-characteristic-sequence",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf.",
+   "via": [
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "worker": "stage1",
+  "summary": "Constructed the limit and fixed functors over the ground field, made evaluation and its semidirect inverse explicit, proved base-extension and tangent formulas on all test algebras, and reused the algebraically closed group and homogeneous-quotient nodes for connectedness, Borel containment, properness, smoothness and integrality. Two strictly more general statement-only inputs expose the split-torus action criterion and projective immersion of an arbitrary affine homogeneous quotient. No statement change or Lean attachment.",
+  "blueprint": "Supports the existing from.place chain, ending with the split-reductive characteristic sequence used in the proof of direct-image constructibility, det-thm-sf-ctf-stability-direct-images (3). Steps 1--4 realize the cocharacter limit/retraction and split-kernel prerequisite; steps 5--10 realize its quotient geometry and field-extension clauses; step 11 realizes the regular-centralizer input. The inherited nearest blueprint ancestor is null (tools/blueprint_refs.py ancestor reports None); retained that value and recorded exact Milne proof places rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic scheme-theoretic tool for descent, base change, closed points, smooth integral fibres or properness, used exactly as its statement specifies; the cocharacter unit contains no replacement for this general scheme operation."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-theoretic tool for descent, base change, closed points, smooth integral fibres or properness, used exactly as its statement specifies; the cocharacter unit contains no replacement for this general scheme operation."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme-theoretic tool for descent, base change, closed points, smooth integral fibres or properness, used exactly as its statement specifies; the cocharacter unit contains no replacement for this general scheme operation."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic scheme-theoretic tool for descent, base change, closed points, smooth integral fibres or properness, used exactly as its statement specifies; the cocharacter unit contains no replacement for this general scheme operation."
+   },
+   {
+    "node": "lem-pc-proper-descends-field",
+    "why": "Generic scheme-theoretic tool for descent, base change, closed points, smooth integral fibres or properness, used exactly as its statement specifies; the cocharacter unit contains no replacement for this general scheme operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-proper-descends-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-981170abb",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-981170abb (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 11 steps), both new nodes and the statements of all 33 cited nodes, against Milne iAG 13.33 and proof (pp.265-266), 16.62-16.63 (p.347), 17.60 (p.372), 7.17-7.18 (p.143), 8.43 (p.161), 21.29 (pp.433-434) and 25.1 (p.544). This is the item's first split, not a 2026-10-21 re-split. All steps are correct. Steps 1-2: concentrator with Z=G and Z=e, Z cut out by Laurent coefficients and smooth by the torus-fixed-scheme node, retraction and semidirect law shown by Laurent injectivity. Step 3: base change plus the closed-field limit node plus the connectedness criterion. Step 4: dual-number check that Lie U is the positive weights and Lie Z is weight 0, then Milne 16.63 as the new node. Steps 5-6: kernel-pair inverse, fppf sheafification, fpqc descent of smoothness, source descent, integrality node. Steps 7-8: regular lambda' = N lambda + mu with the 25.1 sign implication, root groups contained in P, B contained in P scheme-theoretically, G/B proper so G/P proper by 03GN, field descent of properness. Step 9: the immersion becomes a closed immersion by 01W6 and 01IQ. Step 10: geometric fibre is isomorphic to P_Omega. Step 11: Lie Z = Lie T, tangent generation over kbar, ideal descent gives Z = T. New nodes: split-torus-no-invariants-unipotence is exactly Milne 16.63, valid over imperfect fields, with tori and reductive cases tested against the hypothesis. affine-homogeneous-quotient-projective-immersion is Milne 7.17/7.18 and asserts only an immersion (A^1 = G_a/1 shows properness cannot be claimed). No duplicates found in DAG or blueprint searches, and neither restates an item clause. Batch-5: every listed lem-trf/sfb citation is a general scheme or group tool (fppf/fpqc base change, smooth descent, smooth fibre integrality, torus coordinates, algebraic-space definition), not part of the trace formula or Poincare duality, so accepted. Declared tool_uses accepted (geometric-connectedness criterion, proper/smooth base change, source descent, fibre integrality, field descent of properness). No SGA cited. FIX 1: new split-torus node now cites def-sc-scheme-tangent-space for the tangent space (statement and stmt_deps, B3). FIX 2: step 7 now spells out the replacement of lambda by nu = g lambda g^-1, with P_nu = g P g^-1 and G/P isomorphic to G/P_nu by right translation. Inherited null blueprint.from.node is a base fault.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveCocharacterParabolicGeometry",
+  "declaration": "AlgebraicGeometry.ReductiveCocharacter.reductive_cocharacter_parabolic_geometry",
+  "declarations": [
+   "AlgebraicGeometry.ReductiveCocharacter.LimitGeometry",
+   "AlgebraicGeometry.ReductiveCocharacter.SemidirectGeometry",
+   "AlgebraicGeometry.ReductiveCocharacter.QuotientGeometry",
+   "AlgebraicGeometry.ReductiveCocharacter.IsRegular",
+   "AlgebraicGeometry.ReductiveCocharacter.reductive_cocharacter_parabolic_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveCocharacterParabolicGeometry.lean",
+  "statement": "theorem reductive_cocharacter_parabolic_geometry {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) (lam : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ G) : GeometricallyIntegral G.X.hom ∧ ∃ (P U Z : Grp (Over (Spec (.of k)))) (iP : P ⟶ G) (iU : U ⟶ G) (iZ : Z ⟶ G) (jU : U ⟶ P) (jZ : Z ⟶ P) (r : P ⟶ Z) (X : Over (Spec (.of k))) (q : G.X ⟶ X), LimitGeometry lam iP iU iZ jU jZ r ∧ SemidirectGeometry jU jZ ∧ SolvableGroupStructure.IsUnipotent U ∧ (∃ n : ℕ, SplitUnipotentLength U n) ∧ QuotientGeometry iP X q ∧ (∀ (L : Type u) [Field L] [Algebra k L], ∃ e : Grp.mk (StandardGroupSchemes.multiplicative L) ≅ (MultiplicativeType.baseChange (K := L)).obj (Grp.mk (StandardGroupSchemes.multiplicative k)), e.hom.hom.hom.left ≫ pullback.fst (StandardGroupSchemes.multiplicative k).hom (Spec.map (CommRingCat.ofHom (algebraMap k L))) = Spec.map (CommRingCat.ofHom (LaurentPolynomial.eval₂ (LaurentPolynomial.C.comp (algebraMap k L)) (unitOfInvertible (LaurentPolynomial.T 1)))) ∧ LimitGeometry (e.hom ≫ (MultiplicativeType.baseChange (K := L)).map lam) ((MultiplicativeType.baseChange (K := L)).map iP) ((MultiplicativeType.baseChange (K := L)).map iU) ((MultiplicativeType.baseChange (K := L)).map iZ) ((MultiplicativeType.baseChange (K := L)).map jU) ((MultiplicativeType.baseChange (K := L)).map jZ) ((MultiplicativeType.baseChange (K := L)).map r) ∧ QuotientGeometry ((MultiplicativeType.baseChange (K := L)).map iP) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).obj X) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).map q)) ∧ ∀ (T : Grp (Over (Spec (.of k)))) (iT : T ⟶ G), ReductiveTorusCentralizer.IsMaximalTorus iT → (∃ n : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k n)) → ∀ nu : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ T, nu ≫ iT = lam → IsRegular iT nu → ∃ e : T ≅ Z, e.hom ≫ iZ = iT",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the recorded all-algebra orbit-extension predicates and split additive series. The scalar-extension isomorphism of G_m is fixed by its Laurent coordinate. Regularity uses the recorded tangent character spaces after algebraic closure, and nontriviality of the composed character is equivalent to its nonzero integer exponent. The quotient is specified by an fppf covering with the canonical right-action kernel pair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9aece86ed",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery of 8a616f7a8131, which was returned only for H2 (a theorem node in stmt_deps used just for plain defs). Lean module is byte-identical to the one already reviewed as mathematically correct (single sorry; lean.statement appears exactly in the file). Item stmt_deps now cites the new def-sfb-cocharacter-limit-functors in place of lem-sfb-cocharacter-limit-smooth-structure, which stays in proof_deps. The new node's existing:true record lists IsOrbitExtension, parabolicPoints, unipotentPoints and centralizerPoints, with the signature copied exactly from side-live CocharacterLimitSmoothStructure.lean. The definitions match Milne Def 13.21, Prop 13.24 and pp.263-264 and do not depend on the theorem. Its stmt_deps (field, group scheme, gm-ga, fibre product) are sufficient, and no other node owns these definitions. The item record differs from live only in stmt_deps and lean; the item is not landed yet. Worker report and Second reading sections are present. Cosmetic only: the live docstrings name the theorem node as blueprint, and blueprint.from.node is null. No compile, since no file was changed."
+ }
+}

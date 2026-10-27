@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-finite-principal-support-unit-assembly",
+ "kind": "statement",
+ "title": "Finite principal-support vanishing assembles the specified derived open unit",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and for every scheme $W$ put $\\Lambda_W=p_W^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use internal modules on the small pro-etale sites [sk-def-sfb-module-objects, def-weil-pbc-proetale-site], their ordinary unbounded derived categories, total derived direct images and the specified derived adjunctions [sk-def-sfb-module-derived-pushpull]. Let $X=\\operatorname{Spec}S$ be affine, $r\\geq0$, $f_1,\\ldots,f_r\\in S$, and $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$. For $J\\subseteq\\{1,\\ldots,r\\}$ put $X_J=X[1/\\prod_{b\\in J}f_b]$, $K_J=K|_{X_J}$, and $i_J:X_J\\hookrightarrow X$. For $a\\notin J$ let $d_{a,J}:D_{a,J}=V(f_a)\\hookrightarrow X_J$, with complementary principal open $e_{J,a}:X_{J\\cup\\{a\\}}\\hookrightarrow X_J$. Define $R\\underline\\Gamma_{D_{a,J}}$ as the right derived functor of $M\\mapsto d_{a,J}^*\\ker(M\\to e_{J,a,*}e_{J,a}^*M)$ [det-lem-formal-closed-support-adjunction]. Assume\n$$R\\underline\\Gamma_{D_{a,J}}(K_J)=0\\quad\\text{for every }J\\text{ and }a\\notin J.$$\nThen the actual adjunction unit $\\eta_J:K\\to R(i_J)_*i_J^*K$ is an isomorphism for every $J$. Under the comparison $R(i_{J\\cup\\{a\\}})_*\\cong R(i_J)_*R(e_{J,a})_*$ conjugate to canonical pullback composition, its unit satisfies\n$$\\eta_{J\\cup\\{a\\}}=R(i_J)_*(\\eta_{e_{J,a},K_J})\\circ\\eta_J.$$\nThus every ordering of a finite set gives the same specified unit, with the empty-set unit the identity under the canonical identity-functor comparisons. All isomorphisms are in the derived category, including when $K=0$, $X$ is empty, $r=0$, or some indicated closed subschemes are empty.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent finite-support assembly using the existing localization-triangle node and normalized derived-adjunction node, not asserted verbatim by this tag."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-lem-formal-closed-support-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "All restrictions in the statement are the specified module pullbacks. By [det-prop-sfb-module-pullback-exact-main] they are exact for this arbitrary commutative condensed $\\Lambda$. The exact-functor clause of [sk-def-sfb-derived-categories] identifies their left derived functors with termwise restriction. Thus the specified adjunctions of [sk-def-sfb-module-derived-pushpull] read $i_J^*\\dashv R(i_J)_*$ and $e_{J,a}^*\\dashv R(e_{J,a})_*$ on the ordinary unbounded internal-module derived categories, and $K_J=i_J^*K$ with the canonical restriction comparisons.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.md",
+    "place": "Exactness statement; exact-functor and adjunction conventions in sk-def-sfb-derived-categories and sk-def-sfb-module-derived-pushpull"
+   }
+  },
+  {
+   "text": "Fix $J$ and $a\\notin J$. The open $e=e_{J,a}$ is quasi-compact: for any affine open $W\\subset X_J$, its inverse image is the principal affine open $D(f_a|_W)$ of $W$. Apply [det-lem-formal-closed-support-adjunction](4) on $X_J$ with $d=d_{a,J}$ to obtain the distinguished triangle $d_*R\\underline\\Gamma_{D_{a,J}}K_J\\to K_J\\xrightarrow{\\eta_{e,K_J}}Re_*e^*K_J\\to(d_*R\\underline\\Gamma_{D_{a,J}}K_J)[1]$. Its first object is zero by the assumed vanishing (the additive $d_*$ sends zero to zero). Rotate this triangle using [def-weil-triangulated-category]: the third object of the rotated triangle is zero. The criterion [lem-kun-distinguished-cone-zero] therefore proves that the actual unit $\\eta_{e,K_J}$ is an isomorphism.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
+    "def-weil-triangulated-category",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
+    "place": "Clause (4), with Stacks derived.tex Tag 05QR, label lemma-third-object-zero, after rotation"
+   }
+  },
+  {
+   "text": "Put $i=i_J$, $e=e_{J,a}$ and $h=i_{J\\cup\\{a\\}}=ie$. By [prop-sfb-module-left-derived-upper-star-comp], the canonical restriction comparison is $Lh^*\\cong Le^*Li^*$. Conjugate its inverse by [def-weil-pbc-adjunction-conjugate] to obtain $Rh_*\\cong Ri_*Re_*$, exactly the comparison stipulated in the item. Here is the unit identity explicitly: for adjunctions $L_1\\dashv R_1,L_2\\dashv R_2$ and $\\tau:L_2\\xrightarrow{\\sim}L_1$, substitute the defining formula for $\\tau^c$; naturality of $\\eta_2$, naturality of $\\tau$ and then $R_2$ applied to the triangle identity $\\varepsilon_{1,L_1K}\\circ L_1(\\eta_{1,K})=1_{L_1K}$ give $\\tau^c_{L_1K}\\circ\\eta_{1,K}=R_2(\\tau_K)\\circ\\eta_{2,K}$. Take $(L_1,R_1)=(Lh^*,Rh_*)$ and $(L_2,R_2)=(Le^*Li^*,Ri_*Re_*)$. The unit of this latter composite adjunction is $Ri_*(\\eta_{e,i^*K})\\circ\\eta_{i,K}$ by [def-weil-pbc-composite-adjunction]. After the canonical target restriction comparison, the displayed identity is precisely $\\eta_{J\\cup\\{a\\}}=R(i_J)_*(\\eta_{e_{J,a},K_J})\\circ\\eta_J$. This proves equality of the specified maps, not merely existence of some isomorphism between their targets.",
+   "uses": [
+    "prop-sfb-module-left-derived-upper-star-comp",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition (conjugation by the pullback comparison); categories.tex Tag 0DV0, label lemma-compose-counits, and the explicit conjugate-unit calculation"
+   }
+  },
+  {
+   "text": "For $J=\\varnothing$, the canonical identification $X_\\varnothing\\cong X$ identifies restriction with the identity. Under [def-weil-pbc-composite-adjunction] the identity adjunction has identity unit. Conjugate the identity comparison on the left adjoint by [def-weil-pbc-adjunction-conjugate]. The unit identity calculated in step 3 then says that the specified unit for $i_\\varnothing$ becomes $1_K$ under the canonical right-adjoint comparison. In particular $\\eta_\\varnothing$ is invertible.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, label lemma-compose-counits; identity adjunction and conjugation, specialized unit calculation of step 3"
+   }
+  },
+  {
+   "text": "Induct on the cardinality of $J\\subseteq\\{1,\\ldots,r\\}$. The base is step 4. If $J\\ne\\varnothing$, choose $a\\in J$ and set $I=J\\setminus\\{a\\}$. Then $|I|<|J|$ and $a\\notin I$. The hypothesis of the item and step 2 give invertibility of $\\eta_{e_{I,a},K_I}$; the induction hypothesis gives invertibility of $\\eta_I$. A functor carries an inverse to an inverse, so $R(i_I)_*(\\eta_{e_{I,a},K_I})$ is invertible. Step 3 identifies their composite with $\\eta_J$, which is therefore invertible. This covers every subset $J$, rather than only initial segments of one ordering.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent finite induction from Tag 0D6E, label lemma-derived-pushforward-composition, using steps 2–4"
+   }
+  },
+  {
+   "text": "For any ordering of a finite subset, start with the unit of step 4 and apply the equality of step 3 at each insertion. Induction on the length of this list identifies its composite with the one fixed morphism $\\eta_J$. Two orderings hence give equal morphisms after the stipulated comparisons, without selecting cone isomorphisms. The argument permits $r=0$ and $K=0$. If $X$ or some $X_J$ is empty, all constructions still take place in the corresponding module derived category. If a closed complement is empty, step 2 has zero first term; if a principal open is empty, the same triangle and the assumed support vanishing force $K_J=0$. Thus no nonemptiness, regularity or non-zero-divisor hypothesis on the $f_a$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent finite-support assembly and edge cases, from the normalized unit identity in steps 3–4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-module-pullback-exact-main",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-lem-formal-closed-support-adjunction",
+  "def-weil-triangulated-category",
+  "lem-kun-distinguished-cone-zero",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, label lemma-derived-pushforward-composition; formal finite induction using the existing all-coefficient localization triangle, Stacks 05QR and 0DV0. No claim that the entire assembly is stated verbatim in Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"unit\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the finite-support unbounded internal-module unit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing local cohomology on each successive principal complement implies the derived open adjunction unit is invertible for a finite union of closed supports",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Module.isOpen_freeLocus, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the finite-support unbounded internal-module unit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(localCohomology|localizationTriangle|sectionsWithSupport).*(unit|IsIso)|unit.*(localCohomology|sectionsWithSupport)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the finite-support unbounded internal-module unit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing derived sections with support implies invertibility of the open restriction pushforward unit under a finite sequence of punctures",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite sequence of open immersions with zero derived sections with support has invertible composite adjunction unit normalized by derived pushforward composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the finite-support unbounded internal-module unit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing derived sections with closed support makes the derived open restriction pushforward adjunction unit an isomorphism for successive principal opens",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, AlgebraicGeometry.Scheme.Opens.topIso, AlgebraicGeometry.morphismRestrictRestrictBasicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general derived-adjunction identities, ordinary scheme-module restriction maps and unrelated restriction/localization facts do not state the all-condensed-coefficient unbounded support-vanishing assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "(localCohomology|localizationTriangle|sectionsWithSupport).*(unit|IsIso)|unit.*(localCohomology|sectionsWithSupport)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general derived-adjunction identities, ordinary scheme-module restriction maps and unrelated restriction/localization facts do not state the all-condensed-coefficient unbounded support-vanishing assembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"unit\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general derived-adjunction identities, ordinary scheme-module restriction maps and unrelated restriction/localization facts do not state the all-condensed-coefficient unbounded support-vanishing assembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing local cohomology for successive closed complements implies the canonical derived open adjunction unit is invertible",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', stalkSkyscraperSheafAdjunction, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived'_counit, TopologicalSpace.Opens.adjunction_counit_app_self",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general derived-adjunction identities, ordinary scheme-module restriction maps and unrelated restriction/localization facts do not state the all-condensed-coefficient unbounded support-vanishing assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite composite of open restrictions with vanishing support fibers has invertible unit and the composite unit is independent of the ordering",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, Function.locallyFinsuppWithin.restrict_eqOn_compl, TopCat.Presheaf.restrict_restrict, Function.locallyFinsuppWithin.restrict_apply, AlgebraicGeometry.Scheme.Hom.resLE_map, Finsupp.restrictDom_comp_subtype",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general derived-adjunction identities, ordinary scheme-module restriction maps and unrelated restriction/localization facts do not state the all-condensed-coefficient unbounded support-vanishing assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-puncture-invariance",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), one-term full-root boundary calculation: single-coordinate supported vanishing followed by finite puncture induction with the specified units (returned item steps 1, 3 and 4).",
+   "via": [
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-principal-support-unit-assembly",
+  "worker": "stage1",
+  "summary": "Six-step formal assembly with unchanged statement. Check arbitrary condensed coefficients and unbounded internal module scope, quasi-compact principal complements, actual-unit normalization by conjugation, empty-set unit, finite-subset induction and ordering independence. Reuse existing localization, exactness, pullback-composition, conjugation and zero-cone nodes; no new nodes.",
+  "blueprint": "Paragraph (3), one-term full-root boundary calculation: single-coordinate supported vanishing followed by finite puncture induction with the specified units (returned item steps 1, 3 and 4).",
+  "tool_uses": [
+   {
+    "node": "det-lem-formal-closed-support-adjunction",
+    "why": "All-condensed-coefficient unbounded supported localization triangle, applied to each principal complement; generic support tool rather than a replacement of the unit route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of arbitrary condensed module pullback, to identify restriction with its total derived functor."
+   },
+   {
+    "node": "prop-sfb-module-left-derived-upper-star-comp",
+    "why": "Canonical composition of arbitrary condensed module derived pullbacks, whose conjugate is the comparison explicitly specified in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-formal-closed-support-adjunction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "prop-sfb-module-left-derived-upper-star-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-c2befb947",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-c2befb947 (reviewer sub-agent of L); spot-checked: FIX for one wrong identity in step 3. I read the item and all six steps; the delivery adds no new nodes and leaves the statement unchanged. The item is still unsplit live, has no repair note and is not in the dropped list. Its parent, lem-sfb-root-tower-puncture-invariance (step 3), applies it exactly as stated. No SGA is used; Stacks tags 0D6E, 05QR and 0DV0 match their labels. Step 1: module pullback is exact (det-prop-sfb-module-pullback-exact-main), so its left derived functor is termwise pullback (sk-def-sfb-derived-categories). Step 2: X_J is affine, so the principal open is quasi-compact. Clause (4) of det-lem-formal-closed-support-adjunction gives a triangle whose first object is zero by hypothesis; that node's proof shows the middle arrow is the actual open unit. After rotation, lem-kun-distinguished-cone-zero makes the unit an iso. Step 3 had the fault: its conjugate-unit identity τ^c∘η1 = R2τ∘η2 is true, but the step derived it from the wrong triangle identity, R1ε1∘η1R1=1. The calculation needs naturality of η2 and τ, then R2 applied to ε1L1∘L1η1=1. The corrected step is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-principal-support-unit-assembly.json; nothing else changed. The orientation is right: the inverse of the comparison Lh*≅Le*Li* has conjugate Rh_*≅Ri_*Re_*, and the composite unit is Ri_*(η_e)∘η_i. Steps 4–6 are correct: the empty-set unit is the identity under the item's stipulated comparison, the induction on |J| covers every subset, and every ordering gives the same η_J. Edge cases checked: r=0, f_a a unit (empty closed part), f_a=0 or nilpotent (the hypothesis forces K_J=0), K=0, X empty. The item stays at arbitrary condensed Λ and unbounded categories. No duplicate found among the root-tower, clean-open-unit and unit-chain nodes. I accept the three tool_uses (localization triangle, pullback exactness, pullback composition) as generic formal tools that do not replace the unit's route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePrincipalSupportUnitAssembly",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.finite_principal_support_unit_assembly",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.openSet",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.openScheme",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.inclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.step",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.divisor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.pullbackComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.pushforwardComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.unitTargetComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.emptyPullbackComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.emptyPushforwardComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.emptyTargetComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.assembledUnit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.FinitePrincipalSupport.finite_principal_support_unit_assembly"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePrincipalSupportUnitAssembly.lean",
+  "statement": "theorem finite_principal_support_unit_assembly (K : DerivedCategory (supportModules Λ (Spec (.of S)))) (hvanish : ∀ (J : Finset (Fin r)) (a : Fin r), a ∉ J → IsZero ((closedSupport Λ (divisor f J a) (step f J a)).rightDerivedFunctor.obj ((moduleObjectDerivedPullback Λ (inclusion f J)).obj K))) : (∀ J : Finset (Fin r), IsIso ((derivedUpperStarLowerStarAdjunction Λ (inclusion f J)).unit.app K)) ∧ (∀ (J : Finset (Fin r)) (a : Fin r), a ∉ J → (derivedUpperStarLowerStarAdjunction Λ (inclusion f (insert a J))).unit.app K ≫ (unitTargetComparison f Λ J a K).hom = (derivedUpperStarLowerStarAdjunction Λ (inclusion f J)).unit.app K ≫ (moduleObjectDerivedPushforward Λ (inclusion f J)).map ((derivedUpperStarLowerStarAdjunction Λ (step f J a)).unit.app ((moduleObjectDerivedPullback Λ (inclusion f J)).obj K))) ∧ ((derivedUpperStarLowerStarAdjunction Λ (inclusion f ∅)).unit.app K ≫ (emptyTargetComparison f Λ K).hom = 𝟙 K) ∧ (∀ l : List (Fin r), l.Nodup → assembledUnit f Λ K l = (derivedUpperStarLowerStarAdjunction Λ (inclusion f l.toFinset)).unit.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper definitions construct exactly the principal opens, closed divisors, specified conjugate comparisons and finite ordered assembly in the statement. The empty open is represented by X itself with identity inclusion, so its canonical identity-functor normalization is literal. No hypothesis or clause is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29bf112f4",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Only lean changed (snapshot vs live diff); dep nodes identical; no new nodes/repairs/statement_change. lean.statement verbatim, 13 decls present, single sorry, real helper data. Clauses match the node: arbitrary commutative condensed Λ (MonObj+IsCommMonObj), Spec S, f : Fin r → S, unbounded K; X_J = J.inf basicOpen (X itself for ∅), actual ι inclusions, divisor = pullback of Spec(S/(f_a)) along i_J (full closed subscheme); hvanish = IsZero of (closedSupport divisor step).rightDerivedFunctor at L i_J^* K for all J, a∉J; conjunct 1 IsIso of the actual derivedUpperStarLowerStarAdjunction unit; conjunct 2 via conjugateIsoEquiv of the inverse canonical leftDerivedUpperStarComp, correct orientation and true by unit_conjugateEquiv + Adjunction.comp unit; conjunct 3 empty unit = 𝟙 under leftDerivedUpperStarId conjugate; conjunct 4 Nodup lists assemble to η_{toFinset}. Edge cases r=0, empty X, K=0, unit/nilpotent f_a ok; universes Scheme.{u}/Ab.{u+1}, no extra equality. Advisory: stage-1-inherited theorem stmt_dep det-lem-formal-closed-support-adjunction supplies plain closedSupport/supportModules, now owned by existing:true def-sfb-condensed-closed-support-functor (not added by this delivery, so no H2); leftDerivedUpperStarComp/Id owners only in proof_deps; ClosedImmersion/ProfiniteCondensedRing imports possibly unneeded. No compile run (no file changed); report has no compile log; landing compile is the check."
+ }
+}

@@ -1,0 +1,391 @@
+{
+ "id": "lem-sf-localized-signed-dual-presentation",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-dualizable",
+   "place": "Old proof steps 5–6: term comparison and signed bounded local dual presentation (middle sentence of prop-sf-dualizable.proof.md). Also makes explicit the actual bounded-complex representative required when the local rational model initially has localized differentials.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Strictification and signed dual presentation of bounded localized complexes",
+ "statement": "Let $\\mathcal C$ be a small site, $A$ a commutative ring, $t\\in A$, and $R$ a sheaf of commutative $A$-algebras. Use sheaves of $R$-modules, their derived category $D(R)$, and the scalar localization $Q_t:D(R)\\to D(R)[1/t]$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-linear-scalar-localization], in the universe of [def-weil-size-convention]. Write $\\mathcal M=\\operatorname{Mod}_R(\\mathcal C)$ and $Q_t^0:\\mathcal M\\to\\mathcal M[1/t]$ for raw scalar localization of this $A$-linear module-sheaf category. Every cochain complex $\\overline P$ in $\\mathcal M[1/t]$ that is zero outside $[a,b]$ admits a cochain complex $P$ in $\\mathcal M$, zero outside the same interval and with the same underlying module objects in degrees $r\\in[a,b]$ (the integral terms outside this interval are chosen to be zero), and a chain isomorphism $(Q_t^0)_*P\\cong\\overline P$. In particular their images in the derived category of $\\mathcal M[1/t]$ are isomorphic. Localized finite-free-retract presentations of the terms are preserved by this identification; no lift of the retraction maps themselves is required. This assertion allows nonzero $t$-power-torsion defects in chosen numerators of successive localized differentials.  For an actual $P$ as above, or any cochain complex $P$ of $R$-module sheaves, zero outside an integer interval $[a,b]$. Suppose that for each $r\\in[a,b]$ there are $m_r\\geq0$ and morphisms $i_r:Q_t(P^r[0])\\to Q_t(R^{\\oplus m_r}[0])$ and $p_r:Q_t(R^{\\oplus m_r}[0])\\to Q_t(P^r[0])$ with $p_ri_r=1$. These are degreewise localized retractions; no integral or chain-level splitting is assumed. Fix a K-injective resolution $j:R[0]\\to I$ [def-pur-derived-internal-hom], and set $D=\\mathcal Hom_R^\\bullet(P,R[0])$, $T=\\mathcal Hom_R^\\bullet(P,I)$ [def-pur-hom-complex]. Then the surviving Hom projections identify\n$$D^q=\\mathcal Hom_R(P^{-q},R),\\qquad d_D^q(\\phi)=(-1)^{q+1}\\phi\\circ d_P^{-q-1},\\qquad D^q=0\\quad(q\\notin[-b,-a]).$$\nFor every $q$, $Q_t(D^q[0])$ admits a retraction from $Q_t(R^{\\oplus m_{-q}}[0])$, taking $m_r=0$ outside $[a,b]$. For each $r$, postcomposition with $j$ gives an isomorphism\n$$Q_t\\bigl(\\mathcal Hom_R(P^r,R)[0]\\bigr)\\xrightarrow{\\sim}Q_t\\bigl(\\mathcal Hom_R^\\bullet(P^r[0],I)\\bigr).$$\nThe actual chain map $c_P:D\\to T$ is postcomposition with $j$, natural contravariantly under chain maps in $P$; the single-term comparisons are natural under module maps and their $A[1/t]$-linear extensions. In particular, $D$ is a bounded complex with the allowed localized finite-free-retract terms, before any assertion that $Q_t(c_P)$ is invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JI (lemma-Rhom-complex-of-direct-summands-finite-free) and 08JJ (lemma-dual-perfect-complex); agent-written scalar-localized extension, old proof steps 5–6. The lift of a bounded localized complex is an additional agent-written denominator/zero-defect construction making the rational local-model sentence precise; it is not attributed to those Stacks tags."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-linear-scalar-localization",
+  "def-sf-rational-term-hom-data",
+  "def-sc-signed-sheaf-dual-complex",
+  "def-weil-pbc-scalar-localization-coefficient-actions"
+ ],
+ "proof": [
+  {
+   "text": "First treat the lifting assertion. Abbreviate $Q_t^0$ to $Q^0$. By [def-weil-linear-scalar-localization] and [lem-weil-pbc-localization-tensor], each localized Hom module is the fraction module of [def-weil-pbc-module-localization-away]. Explicitly $u\\otimes(c/t^n)\\mapsto cu/t^n$; tensor balancing gives the inverse $u/t^n\\mapsto u\\otimes t^{-n}$. If $a>b$, all objects are zero and the zero complex gives the assertion. Otherwise write the finitely many differentials $\\overline d^r$ ($a\\leq r<b$) as $f_r/t^{e_r}$. Let $e=\\max(\\{0\\}\\cup\\{e_r\\})$ and replace $f_r$ by $t^{e-e_r}f_r$, so every $\\overline d^r=t^{-e}Q^0(f_r)$. Set $f_r=0$ outside that range. This includes $a=b$, when there are no differentials.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "lem-weil-pbc-localization-tensor",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); Tags 07JZ and 07K0 (definition-localization-module, lemma-universal-property-localization-module). The finite denominator and defect calculation is agent-written."
+   }
+  },
+  {
+   "text": "The complex relation gives $t^{-2e}Q^0(f_{r+1}f_r)=0$, hence $Q^0(f_{r+1}f_r)=0$. By the fraction equality in [def-weil-pbc-module-localization-away], for each $a\\leq r\\leq b-2$ there is $N_r\\geq0$ with $t^{N_r}f_{r+1}f_r=0$ in the original Hom module. Choose $N=\\max(\\{0\\}\\cup\\{N_r\\})$ and define $P^r=\\overline P^r$ for $a\\leq r\\leq b$ and $P^r=0$ for $r\\notin[a,b]$ (a term $\\overline P^r$ with $r\\notin[a,b]$ is only a zero object of $\\mathcal M[1/t]$ and may be a nonzero $t$-power-torsion sheaf in $\\mathcal M$, for instance any object when $t$ is nilpotent), and $d_P^r=t^N f_r$. Then $d_P^{r+1}d_P^r=t^{2N}f_{r+1}f_r=t^{2N-N_r}(t^{N_r}f_{r+1}f_r)=0$. Outside the indicated finite range the composite contains a zero map. Thus this is an actual complex on the same objects, zero outside $[a,b]$; no numerator was assumed to square to zero before this multiplication.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); Tags 07JZ and 07K0 (definition-localization-module, lemma-universal-property-localization-module). The finite denominator and defect calculation is agent-written."
+   }
+  },
+  {
+   "text": "Set $h=e+N$. For $a\\leq r\\leq b$ put $s^r=t^{h(b-r)}1_{\\overline P^r}$, a morphism in $\\mathcal M[1/t]$, and use the unique zero-object isomorphisms outside $[a,b]$. These components give $s:(Q^0)_*P\\to\\overline P$, since\n$$s^{r+1}Q^0(d_P^r)=t^{h(b-r-1)+N}Q^0(f_r)=t^{h(b-r)-e}Q^0(f_r)=\\overline d^r s^r.$$\nEvery $s^r$ is invertible, with inverse $t^{-h(b-r)}1$, so the componentwise inverse is a chain inverse. Their images remain inverse after passing to the derived category. Retractions of a term transport by $i\\mapsto i(s^r)^{-1}$ and $p\\mapsto s^r p$, whose composite is $1$. This transports existing localized retractions and does not lift them to integral maps.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); Tags 07JZ and 07K0 (definition-localization-module, lemma-universal-property-localization-module). The finite denominator and defect calculation is agent-written."
+   }
+  },
+  {
+   "text": "For the remaining assertions take any actual bounded $P$. Apply [lem-sc-hom-complex-to-single] to $L=P$, $N=R$: its surviving product projection identifies $\\mathcal Hom_R^\\bullet(P,R[0])$ with the signed dual of [def-sc-signed-sheaf-dual-complex]. Thus $D^q=\\mathcal Hom_R(P^{-q},R)$ and $d_D^q(\\phi)=-(-1)^q\\phi d_P^{-q-1}=(-1)^{q+1}\\phi d_P^{-q-1}$. If $q\\notin[-b,-a]$, then $P^{-q}=0$, and a map from the zero module is zero, giving $D^q=0$. No exactness or projectivity assertion is used in this identification. For the explicitly normalized projections, use [lem-sc-hom-complex-projections]: the normalized projection is homComplexπ composed with the single degree-zero identification. Its product universal property makes the sole nonzero factor invertible, and its differential equation gives the same displayed sign after transporting the single complex degree-zero term. The sole surviving product projection is invertible by the existing proved RationalTermHom.soleFactorIsIso, imported for proof access; no second proof of this product lemma is introduced.",
+   "uses": [
+    "lem-sc-hom-complex-to-single",
+    "def-sc-signed-sheaf-dual-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product projections and differential; Tags 08JI and 08JJ motivate the finite-summand comparison, whose scalar-localized version is the cited existing node."
+   }
+  },
+  {
+   "text": "For each $r\\in[a,b]$ apply [lem-sf-rational-term-hom-comparison] with $F=P^r$ and the displayed $i_r,p_r$. Its hypotheses are precisely retractions in $D(R)[1/t]$, so no integral splitting is needed. It gives both the invertibility of the stated postcomposition map $Q_t(\\mathcal Hom_R(P^r,R)[0])\\to Q_t(\\mathcal Hom_R^\\bullet(P^r[0],I))$ and a retraction of its source from $Q_t(R^{\\oplus m_r}[0])$. Taking $r=-q$ gives the asserted retraction for $Q_t(D^q[0])$. Outside $[a,b]$ take $F=0$, $m_r=0$ and the unique maps between zero objects; the same lemma applies. Its final clause supplies naturality under module maps and their $A[1/t]$-linear extensions.",
+   "uses": [
+    "lem-sf-rational-term-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product projections and differential; Tags 08JI and 08JJ motivate the finite-summand comparison, whose scalar-localized version is the cited existing node."
+   }
+  },
+  {
+   "text": "By the covariant chain-map functoriality in [def-pur-hom-complex], postcomposition with $j$ gives the actual chain map $c_P:D\\to T$. Explicitly $(c_P^q\\phi)^u=j^{u+q}\\phi^u$. Since $d_Ij=jd_{R[0]}$, the defining Hom differential gives $d_T(j\\phi)=j\\,d_D(\\phi)$. For a chain map $v:P'\\to P$, precomposition and postcomposition commute: $(j\\phi)v=j(\\phi v)$ componentwise, which is the asserted contravariant naturality square. These formulas also show that this map uses the single-term comparisons already specified. The bounded support and localized finite-free-retract terms of $D$ were established in the preceding steps; none of these conclusions asserts invertibility of $Q_t(c_P)$ for a general bounded $P$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), product projections and differential; Tags 08JI and 08JJ motivate the finite-summand comparison, whose scalar-localized version is the cited existing node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-localization-tensor",
+  "def-weil-pbc-module-localization-away",
+  "lem-sc-hom-complex-to-single",
+  "def-sc-signed-sheaf-dual-complex",
+  "lem-sf-rational-term-hom-comparison",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 08JI, 08JJ for the Hom model; the scalar-localized strictification is the explicit finite fraction/zero-defect argument using algebra.tex Tags 00DK, 07JZ, 07K0. Lean proof uses IsLocalizedModule.surj and eq_iff_exists, finite interval suprema, scalar component isomorphisms, and the normalized chosen Hom projection API. The surviving-factor isomorphism reuses RationalTermHom.soleFactorIsIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HomComplex|homComplex|internalHom|dual_projective",
+   "results": "Actual logged result: 25 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Module.Dual",
+   "results": "Actual logged result: 0 hits; none.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of sheaf modules which are finite free retracts after scalar localization has a bounded signed ordinary sheaf Hom dual whose terms are localized finite free retracts",
+   "results": "Actual logged result: 8 hits; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CochainComplex.IsKProjective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and finite coefficient field extension preserve bounded local finite free retract dual models in scalar localized derived categories of sheaves and their common finite stage category",
+   "results": "Actual logged result: 8 hits; SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual_projective|Module.Dual|dual.*retract",
+   "results": "Actual logged result: 20 hits; Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual_projective\"",
+   "results": "Actual logged result: 1 hits; Module.dual_projective.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed sheaf Hom dual of a bounded cochain complex with rational finite projective terms has rational finite projective terms and natural comparison to a K injective Hom model",
+   "results": "Actual logged result: 8 hits; CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.isKProjective_of_op, CochainComplex.IsKInjective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The signed internal Hom dual of a bounded complex of sheaf modules with finite projective terms after scalar localization is a bounded local model of its derived dual",
+   "results": "Actual logged result: 0 hits; none. service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local bounded projective derived dual models commute with slice restriction and finite coefficient field extension in a common stage category",
+   "results": "Actual logged result: 0 hits; none. service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "denominator|clear.*denom|strictif|scalar.*localiz",
+   "results": "Actual logged result: 0 hits; none.  Read all hits: derived-category localization instances, bounded roof replacement, module localization/lifting, or complex-shape embeddings; no bounded complex lifting in a raw scalar-localized sheaf category, with torsion-defect killing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a bounded complex in a scalar localized module category by clearing denominators in its differentials",
+   "results": "Actual logged result: 8 hits; Module.FinitePresentation.exists_lift_of_isLocalizedModule, LocalizedModule.lift', LocalizedModule.lift'_smul, LocalizedModule.divBy, HomologicalComplex.liftCycles, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, CategoryTheory.ShortComplex.liftCycles.  Read all hits: derived-category localization instances, bounded roof replacement, module localization/lifting, or complex-shape embeddings; no bounded complex lifting in a raw scalar-localized sheaf category, with torsion-defect killing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Localization\"",
+   "results": "Actual logged result: 2 hits; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HomotopyCategory.Plus.instIsLocalizationPlusInjectiveObjectQuotientInverseImageQuasiIsoMapCochainComplexPlusι.  Read all hits: derived-category localization instances, bounded roof replacement, module localization/lifting, or complex-shape embeddings; no bounded complex lifting in a raw scalar-localized sheaf category, with torsion-defect killing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite complex over a category with t inverted has a chain isomorphic integral lift with the same terms after multiplying differentials by powers of t",
+   "results": "Actual logged result: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, ComplexShape.Embedding.HasLift, ComplexShape.Embedding.homEquiv_symm_apply, DerivedCategory.right_fac_of_isStrictlyLE, ComplexShape.Embedding.isIso_liftExtend_f_iff, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.dgoToHomologicalComplex.  Read all hits: derived-category localization instances, bounded roof replacement, module localization/lifting, or complex-shape embeddings; no bounded complex lifting in a raw scalar-localized sheaf category, with torsion-defect killing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex in the scalar localization of an additive category of module sheaves lifts to an actual bounded complex by clearing differential denominators and killing finitely many square zero defects",
+   "results": "Actual logged result: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE.  Read all hits: derived-category localization instances, bounded roof replacement, module localization/lifting, or complex-shape embeddings; no bounded complex lifting in a raw scalar-localized sheaf category, with torsion-defect killing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|clear.*denominator|scalar.*localiz",
+   "results": "{\"t\": \"2026-10-22T07:15:02Z\", \"tool\": \"grep\", \"query\": \"strictif|clear.*denominator|scalar.*localiz\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned candidates: ordinary module dual/tensor Hom, external Hom/K-injectivity, quasi-isomorphism localization and complex-shape extension are not this raw scalar-localization lifting plus signed internal sheaf-dual assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The signed internal sheaf Hom dual of a bounded complex with scalar localized finite free retract terms has finite free retract terms and termwise derived Hom comparison",
+   "results": "{\"t\": \"2026-10-22T07:15:02Z\", \"tool\": \"leansearch\", \"query\": \"The signed internal sheaf Hom dual of a bounded complex with scalar localized finite free retract terms has finite free retract terms and termwise derived Hom comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquiv\", \"CategoryTheory.sheafHom\", \"CategoryTheory.ShortComplex.hasLeftHomology_iff_op\", \"Module.dual_free\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison\", \"CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison'_of_homologyData\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁\"], \"digest\": \"43decd230bfd3859\"} Read the returned candidates: ordinary module dual/tensor Hom, external Hom/K-injectivity, quasi-isomorphism localization and complex-shape extension are not this raw scalar-localization lifting plus signed internal sheaf-dual assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-22T07:15:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"HomotopyCategory.Plus.instIsLocalizationPlusInjectiveObjectQuotientInverseImageQuasiIsoMapCochainComplexPlusι\"], \"digest\": \"34c3b160b956ff6f\"} Read the returned candidates: ordinary module dual/tensor Hom, external Hom/K-injectivity, quasi-isomorphism localization and complex-shape extension are not this raw scalar-localization lifting plus signed internal sheaf-dual assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex in a scalar localized additive category lifts on the same objects by clearing differential denominators and killing square zero torsion defects",
+   "results": "{\"t\": \"2026-10-22T07:15:03Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex in a scalar localized additive category lifts on the same objects by clearing differential denominators and killing square zero torsion defects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.Q\", \"ComplexShape.Embedding.liftExtend\", \"ComplexShape.Embedding.HasLift\", \"HomologicalComplexUpToQuasiIso\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"ComplexShape.Embedding.homRestrict_hasLift\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"282a54fc6211e3c0\"} Read the returned candidates: ordinary module dual/tensor Hom, external Hom/K-injectivity, quasi-isomorphism localization and complex-shape extension are not this raw scalar-localization lifting plus signed internal sheaf-dual assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A signed dual Hom complex of bounded sheaf modules has localized finite projective terms and natural comparison to a K injective Hom model",
+   "results": "{\"t\": \"2026-10-22T07:15:04Z\", \"tool\": \"leanfinder\", \"query\": \"A signed dual Hom complex of bounded sheaf modules has localized finite projective terms and natural comparison to a K injective Hom model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.I_X\", \"CochainComplex.IsKInjective\", \"CochainComplex.cm5b.I\", \"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.isKInjective_of_injective\"], \"digest\": \"398f4792b7934bdc\"} Read the returned candidates: ordinary module dual/tensor Hom, external Hom/K-injectivity, quasi-isomorphism localization and complex-shape extension are not this raw scalar-localization lifting plus signed internal sheaf-dual assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-dualizable",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-localized-signed-dual-presentation",
+  "worker": "stage1",
+  "summary": "Q127: retained the statement; gave explicit common-denominator, torsion-defect and diagonal chain-isomorphism formulas. Reused signed Hom and rational term-comparison nodes; no new nodes. Checked nilpotent t, empty and one-term support, and zero retraction rank.",
+  "blueprint": "prop-sf-dualizable.proof.md, middle sentence on the bounded finite-projective dual, expanded by original parent steps 5–6 and the additional bounded localized lift. Searched the whole blueprint for signed dual and strictification; no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-hom-complex-to-single",
+    "why": "Generic internal Hom into a single sheaf, independent of coefficient geometry; the unit does not restate its product projection theorem."
+   },
+   {
+    "node": "def-sc-signed-sheaf-dual-complex",
+    "why": "Defines the signed dual used in the generic Hom identification."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor",
+    "why": "Generic module tensor-localization identification used for the Hom modules of the raw scalar category; this is a Mathlib leaf."
+   },
+   {
+    "node": "def-weil-pbc-module-localization-away",
+    "why": "Fraction equality and its zero criterion provide the explicit torsion-defect calculation; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-hom-complex-to-single",
+  "def-sc-signed-sheaf-dual-complex",
+  "lem-weil-pbc-localization-tensor",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-1e8d98a53",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-1e8d98a53 (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full, plus the Stacks sources 00DK/07JZ/07K0 and 08JI/08JJ/0A8X and the blueprint prop-sf-dualizable.proof.md. The statement, stmt_deps and blueprint are byte-identical to the Q110 base, where the item was created unsplit; there is no repair note, so the re-split node-count rule does not apply and zero new nodes is fine. Steps 1-3 are correct: common denominator via the tensor-localization and fraction nodes, the defect killed by t^N with 2N>=N_r, and rescaling s^r=t^{h(b-r)} with h=e+N (I recomputed the exponent identity and found every exponent >=0). Step 4 sign checked against def-pur-hom-complex: (-1)^{q+1}, support [-b,-a]. Step 5 matches the hypotheses of lem-sf-rational-term-hom-comparison exactly (localized retraction, fixed K-injective j) and makes no cycle. Step 6 is the functoriality of the Hom complex. One fault, fixed (E5): Step 2 set P^r = Pbar^r for all r, but a term of Pbar outside [a,b] is only a zero object of M[1/t] and can be a nonzero t-power-torsion sheaf (any object when t is nilpotent). That breaks 'P zero outside [a,b]'. The fix restricts P^r = Pbar^r to a<=r<=b and sets P^r = 0 elsewhere, matching Step 3's zero-object isomorphisms; only proof[1].text changes. Small cases checked: a>b, a=b, m_r=0, t in {0, 1, nilpotent}, and a Z-module torsion defect. No duplicates found by rg. Accepted tool uses: lem-sc-hom-complex-to-single and def-sc-signed-sheaf-dual-complex as generic; the other two declared nodes are Mathlib leaves. The report's note that lem-weil-pbc-localization-tensor's tag should be 00DK, not 00DE, is correct; that node is not edited here.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalizedSignedDualPresentation",
+  "declaration": "CategoryTheory.LocalizedSignedDual.localized_signed_dual_presentation",
+  "declarations": [
+   "CategoryTheory.LocalizedSignedDual.Modules",
+   "CategoryTheory.LocalizedSignedDual.Complex",
+   "CategoryTheory.LocalizedSignedDual.free",
+   "CategoryTheory.LocalizedSignedDual.dual",
+   "CategoryTheory.LocalizedSignedDual.resolvedDual",
+   "CategoryTheory.LocalizedSignedDual.dualProjection",
+   "CategoryTheory.LocalizedSignedDual.postcompose",
+   "CategoryTheory.LocalizedSignedDual.dualMap",
+   "CategoryTheory.LocalizedSignedDual.resolvedDualMap",
+   "CategoryTheory.LocalizedSignedDual.bounded_localized_complex_lift",
+   "CategoryTheory.LocalizedSignedDual.rawDerivedObject",
+   "CategoryTheory.LocalizedSignedDual.bounded_localized_complex_lift_derived",
+   "CategoryTheory.LocalizedSignedDual.postcompose_natural",
+   "CategoryTheory.LocalizedSignedDual.localized_signed_dual_presentation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedSignedDualPresentation.lean",
+  "statement": "theorem localized_signed_dual_presentation (A : Type v) [CommRing A] (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) (I : Complex R) [I.IsKInjective] (j : RationalTermHom.single R (RationalTermHom.coefficients R) ⟶ I) [QuasiIso j] : (fun [_linear : Linear A (Modules R)] ↦ ∃ e : ∀ F : Modules R, RationalTermHom.ordinary R F ≅ RationalTermHom.resolved R (RationalTermHom.single R (RationalTermHom.coefficients R)) F, RationalTermHom.IsNormalized R e ∧ (∀ (F G : Modules R) (f : F ⟶ G), RationalTermHom.ordinaryMap R f ≫ RationalTermHom.comparison R e j F = RationalTermHom.comparison R e j G ≫ RationalTermHom.resolvedMap R I f) ∧ (∀ (P : Complex R) (a₀ b₀ : ℤ) (m : ℤ → ℕ), (∀ r : ℤ, r < a₀ ∨ b₀ < r → IsZero (P.X r)) → (∀ r : ℤ, r < a₀ ∨ b₀ < r → m r = 0) → (∀ r : ℤ, a₀ ≤ r → r ≤ b₀ → ∃ i : RationalTermHom.localizedObject R A t (RationalTermHom.single R (P.X r)) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R (free R (m r))), ∃ p : RationalTermHom.localizedObject R A t (RationalTermHom.single R (free R (m r))) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R (P.X r)), i ≫ p = 𝟙 _) → Nonempty (DerivedCategory.Q.obj (dual R P) ≅ DerivedCategory.Q.obj (signedSheafDualComplex (R := R) P (RationalTermHom.coefficients R))) ∧ (∀ q : ℤ, IsIso (dualProjection R P q)) ∧ (∀ q : ℤ, (dual R P).d q (q + 1) ≫ dualProjection R P (q + 1) = dualProjection R P q ≫ ((q + 1).negOnePow • SheafOfModules.homObjMap (P.d (-(q + 1)) (-q)) (𝟙 (RationalTermHom.coefficients R)))) ∧ (∀ q : ℤ, q < -b₀ ∨ -a₀ < q → IsZero ((dual R P).X q)) ∧ (∀ q : ℤ, ∃ i : RationalTermHom.localizedObject R A t (RationalTermHom.single R ((dual R P).X q)) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R (free R (m (-q)))), ∃ p : RationalTermHom.localizedObject R A t (RationalTermHom.single R (free R (m (-q)))) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R ((dual R P).X q)), i ≫ p = 𝟙 _) ∧ (∀ r : ℤ, IsIso (RationalTermHom.localizedMap R A t (RationalTermHom.comparison R e j (P.X r))))) ∧ ∃ b : ∀ F G : Modules R, (RationalTermHom.localizedObject R A t (RationalTermHom.single R F) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R G)) →ₗ[ Localization.Away t] (RationalTermHom.localizedObject R A t (RationalTermHom.ordinary R G) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.ordinary R F)), ∃ z : ∀ F G : Modules R, (RationalTermHom.localizedObject R A t (RationalTermHom.single R F) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R G)) →ₗ[ Localization.Away t] (RationalTermHom.localizedObject R A t (RationalTermHom.resolved R I G) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.resolved R I F)), (∀ (F G : Modules R) (f : F ⟶ G), b F G (RationalTermHom.localizedMap R A t ((CochainComplex.singleFunctor _ 0).map f)) = RationalTermHom.localizedMap R A t (RationalTermHom.ordinaryMap R f) ∧ z F G (RationalTermHom.localizedMap R A t ((CochainComplex.singleFunctor _ 0).map f)) = RationalTermHom.localizedMap R A t (RationalTermHom.resolvedMap R I f)) ∧ (∀ (F G : Modules R) (f : RationalTermHom.localizedObject R A t (RationalTermHom.single R F) ⟶ RationalTermHom.localizedObject R A t (RationalTermHom.single R G)), b F G f ≫ RationalTermHom.localizedMap R A t (RationalTermHom.comparison R e j F) = RationalTermHom.localizedMap R A t (RationalTermHom.comparison R e j G) ≫ z F G f)) (_linear := scalarLocalizationCoefficientLinear A R a)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Four theorem statements collectively render the node: integral strictification and retraction transport; its actual derived-category image after canonical transport of the unique zero morphisms; contravariant chain-map naturality; signed dual presentation and normalized localized term comparisons, including all-fraction naturality. All helper data are explicit specializations or maps of the recorded dependency functors. The only correction restricts integral object equality to [a,b], exactly as the reviewed proof already does. Repair of returned head 4350f9693de0: def-sf-rational-term-hom-data owns the existing RationalTermHom definitions used in this signature. The comparison theorem remains only a proof dependency; its conclusion is not required to form the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5484a4275",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery repairing the H2/B3 return of 4350f969. Item Lean module byte-identical to the earlier head; stmt_deps now cite the new definition node def-sf-rational-term-hom-data (existing:true on the unchanged live module Sheaf.Algebra.Homology.RationalTermHomComparison) instead of the theorem lem-sf-rational-term-hom-comparison, which stays in proof_deps. Checked in side-live: all 12 recorded declarations are plain defs with no hidden variables; projection is pinned by eq_chosen to the homComplex_projections_exists projections. All 11 RationalTermHom names used by the item are in the record, including projection, which the theorem node omitted. The comparison signature is verbatim. The new node's normalization, comparison and locObj/locMap text matches the Lean; its stmt_deps are 8 existing definition nodes, so there is no cycle. Neither node is landed in side-live and there is no repair note. Mathematics re-checked: the §1(C) restriction of object equality to [a,b] is right (ℤ/2 counterexample, t=2) and the 2-citer audit holds; the dual sign (−1)^{q+1} matches the HomComplex convention and signedSheafDualComplex; support, rank-m(−q) retractions, derived-form iso, K-injective QuasiIso j, postcompose naturality and pinned b/z extensions are present; no invertibility of Q_t(c_P) is claimed; edge cases a>b, a=b, m=0, t∈{0,1,nilpotent} and torsion defects pass. Theorems are sorry, definitions non-hollow, docstrings present. Advisories: localizedMap generalizes over the Linear instance (pinned in the item); the derived corollary is vacuous without an Abelian instance on M[1/t]; the DerivedInternalHomOfUniverses import is unused by the statement. No files changed and no compile run; the worker reports a clean compile (10.5 s/12.0 s) and a dry run passing at 576341a6549.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "NN stage 2",
+  "old_statement": "Let $\\mathcal C$ be a small site, $A$ a commutative ring, $t\\in A$, and $R$ a sheaf of commutative $A$-algebras. Use sheaves of $R$-modules, their derived category $D(R)$, and the scalar localization $Q_t:D(R)\\to D(R)[1/t]$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-linear-scalar-localization], in the universe of [def-weil-size-convention]. Write $\\mathcal M=\\operatorname{Mod}_R(\\mathcal C)$ and $Q_t^0:\\mathcal M\\to\\mathcal M[1/t]$ for raw scalar localization of this $A$-linear module-sheaf category. Every cochain complex $\\overline P$ in $\\mathcal M[1/t]$ that is zero outside $[a,b]$ admits a cochain complex $P$ in $\\mathcal M$, zero outside the same interval and with the same underlying module objects, and a chain isomorphism $(Q_t^0)_*P\\cong\\overline P$. In particular their images in the derived category of $\\mathcal M[1/t]$ are isomorphic. Localized finite-free-retract presentations of the terms are preserved by this identification; no lift of the retraction maps themselves is required. This assertion allows nonzero $t$-power-torsion defects in chosen numerators of successive localized differentials.  For an actual $P$ as above, or any cochain complex $P$ of $R$-module sheaves, zero outside an integer interval $[a,b]$. Suppose that for each $r\\in[a,b]$ there are $m_r\\geq0$ and morphisms $i_r:Q_t(P^r[0])\\to Q_t(R^{\\oplus m_r}[0])$ and $p_r:Q_t(R^{\\oplus m_r}[0])\\to Q_t(P^r[0])$ with $p_ri_r=1$. These are degreewise localized retractions; no integral or chain-level splitting is assumed. Fix a K-injective resolution $j:R[0]\\to I$ [def-pur-derived-internal-hom], and set $D=\\mathcal Hom_R^\\bullet(P,R[0])$, $T=\\mathcal Hom_R^\\bullet(P,I)$ [def-pur-hom-complex]. Then the surviving Hom projections identify\n$$D^q=\\mathcal Hom_R(P^{-q},R),\\qquad d_D^q(\\phi)=(-1)^{q+1}\\phi\\circ d_P^{-q-1},\\qquad D^q=0\\quad(q\\notin[-b,-a]).$$\nFor every $q$, $Q_t(D^q[0])$ admits a retraction from $Q_t(R^{\\oplus m_{-q}}[0])$, taking $m_r=0$ outside $[a,b]$. For each $r$, postcomposition with $j$ gives an isomorphism\n$$Q_t\\bigl(\\mathcal Hom_R(P^r,R)[0]\\bigr)\\xrightarrow{\\sim}Q_t\\bigl(\\mathcal Hom_R^\\bullet(P^r[0],I)\\bigr).$$\nThe actual chain map $c_P:D\\to T$ is postcomposition with $j$, natural contravariantly under chain maps in $P$; the single-term comparisons are natural under module maps and their $A[1/t]$-linear extensions. In particular, $D$ is a bounded complex with the allowed localized finite-free-retract terms, before any assertion that $Q_t(c_P)$ is invertible.",
+  "what": "The same underlying module objects can only be retained inside [a,b]. Outside it an object can be zero in the raw localized category while nonzero integrally: e.g. a nonzero Z/2 module outside the interval with A=Z and t=2, or any nonzero object for t=0. Requiring both the same integral objects everywhere and integral zero support is false. This corrects only that phrase to match the already-reviewed proof[1] and proof[2], which explicitly set integral terms to zero outside the interval. Added statement dependencies expose the existing signed-dual, normalized term-comparison definitions and canonical coefficient-action interfaces used in the Lean statement.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+   "place": "Opening sentence: choose a local bounded complex. Its agent-written scalar-localized strictification is the reviewed item proof steps 2-3, which explicitly retain the original objects only inside [a,b] and use integral zero objects outside. The extension, not present in Stacks, is already recorded as agent-written in the item source. No change to the blueprint unit statement or its proof route."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-coefficient-dual-model-transport",
+    "holds": true,
+    "note": "Applies the termwise scalar functor to the localized chain isomorphism and uses the same support. It does not require equality of integral terms outside the interval."
+   },
+   {
+    "id": "prop-sf-dualizable",
+    "holds": true,
+    "note": "Uses the actual bounded lift with the same rational retract terms. Its argument never requires retaining nonzero integral torsion objects outside the support; all used clauses remain unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-size-convention",
+   "def-weil-pbc-sites-and-cohomology",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-abstract-derived-category",
+   "def-pc-cochain-complex-modules",
+   "def-pur-hom-complex",
+   "def-pur-derived-internal-hom",
+   "def-weil-linear-scalar-localization"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261023T151900-L-419067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

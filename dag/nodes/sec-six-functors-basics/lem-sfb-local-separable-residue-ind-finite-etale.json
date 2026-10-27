@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-local-separable-residue-ind-finite-etale",
+ "kind": "statement",
+ "title": "Prescribed separable residue extensions by finite etale local rings",
+ "statement": "Let $(R,\\mathfrak m,k)$ be a nonzero commutative local ring, where $\\mathfrak m$ is its unique maximal ideal and $k=R/\\mathfrak m$. Let $E/k$ be a separable algebraic field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension]. There exist a small nonempty directed poset $I$ and a system of nonzero local $R$-algebras $R_i$, with local injective structural and transition maps, such that every $R_i$ is finite etale over $R$ and every transition $R_i\\to R_j$ is finite etale. Here finite means finitely generated as a module and etale means that the induced morphism of affine spectra is etale [def-weil-etale-morphism]. There are compatible embeddings $\\kappa_i=R_i/\\mathfrak mR_i\\hookrightarrow E$, the ideals $\\mathfrak mR_i$ are maximal, and $\\bigcup_i\\kappa_i=E$. The colimit $R_E=\\varinjlim_iR_i$ [def-weil-pbc-category-colimit] is a nonzero local ring, all $R_i\\to R_E$ are local injective maps, its maximal ideal is $\\mathfrak mR_E$, and its residue field is identified with $E$. A map of local rings is local when the inverse image of the target maximal ideal is the source maximal ideal. Moreover, suppose $R\\to S$ is local, $S$ is strictly henselian [def-weil-pbc-henselian-terminology], and a $k$-embedding $E\\hookrightarrow S/\\mathfrak m_S$ extending the residue map is specified. For every $i$ there is a unique local $R$-map $R_i\\to S$ inducing the specified map $\\kappa_i\\to S/\\mathfrak m_S$. These maps are compatible and induce a local $R$-map $R_E\\to S$ with the specified residue map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 09E0 (lemma-colimit-finite-etale-given-residue-field), local finite-etale system, and 04GT (lemma-strictly-henselian-functorial-prepare), uniqueness of residue-compatible target maps; maximal ideals and local colimit assertions make explicit the local system in 09E0."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "First give the successor construction. Suppose $A$ is nonzero local with residue field $k\\subseteq F\\subseteq E$, and $x\\in E$. Its minimal polynomial $p\\in F[T]$ is monic of positive degree and $F[T]/(p)=F(x)$ by [lem-weil-pbc-minimal-polynomial-quotient-field-iso]. It is separable by [lem-sfb-separable-algebraic-intermediate-base] and [def-weil-pbc-separable-algebraic-extension]. Lift its coefficients to a monic $f\\in A[T]$ and put $B=A[T]/(f)$. By [lem-weil-pbc-monic-quotient-free], $B$ is finite free with basis $1,T,\\ldots,T^{\\deg p-1}$, the map $A\\to B$ is injective, and $B/\\mathfrak m_AB=F(x)$ with its specified embedding in $E$.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-sfb-separable-algebraic-intermediate-base",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "The ring $B$ just constructed is local. For each $b\\in B$, apply [lem-weil-pbc-endomorphism-finite-module-monic] to multiplication by $b$ on $B$ and evaluate the annihilating polynomial on $1$: $b$ is integral over $A$. By [lem-weil-pbc-integral-maximal-contracts-maximal], every maximal ideal of $B$ contracts to $\\mathfrak m_A$, and hence contains $\\mathfrak m_AB$. The quotient is the field $F(x)$, so this is the unique maximal ideal. The map $A\\to B$ is local. Coprimality of $p,p\\prime$ means that the class of $f\\prime$ in $B/\\mathfrak m_AB$ is invertible [def-pc-separable-polynomial]; thus $f\\prime$ is a unit of the local ring $B$. Consequently $B$ equals its localization at $f\\prime$, and [lem-weil-pbc-standard-etale-monic-derivative] makes $A\\to B$ etale. This proves every assertion about the successor map, without assuming $A$ henselian.",
+   "uses": [
+    "lem-weil-pbc-endomorphism-finite-module-monic",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "def-pc-separable-polynomial",
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-well-ordering-theorem] and [lem-trf-well-order-ordinal-enumeration], enumerate the underlying set of $E$ as $(x_\\alpha)_{\\alpha<\\theta}$ for a set-sized ordinal $\\theta$. Use [lem-weil-pbc-transfinite-recursion] to construct a continuous tower starting at $A_0=R$: at successor $\\alpha+1$ apply steps 1--2 to $A_\\alpha$ and $x_\\alpha$; at a nonzero limit take the ring direct limit with its canonical maps. Inductively the maps are injective and local, $A_\\alpha$ has maximal ideal $\\mathfrak mA_\\alpha$, and a residue map $\\psi_\\alpha:A_\\alpha\\to E$ has this kernel and field image $F_\\alpha$. At a limit this is verified directly: represent elements at stages and identify two representatives when they agree later; injectivity lets us regard the colimit as a union. An element outside the union of the stage maximal ideals has an inverse at its own stage, while an element in that union maps to zero in $E$ and cannot be a unit. That union is exactly $\\mathfrak mA_\\lambda$, since ideal expressions use finitely many elements and thus belong to one stage. Its quotient is the union of the $F_\\alpha$. Successor injectivity is the power-basis assertion of step 1, and successor maximal-ideal equality is step 2. Thus induction supplies all invariants also at $\\theta$. The image of $\\psi_\\theta$ contains every $x_\\alpha$, so $A=A_\\theta$ has residue field exactly $E$.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-trf-well-order-ordinal-enumeration",
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-transfinite-finite-etale-union] to the tower: it is set-sized, all successor maps are finite etale by steps 1--2, every transition is injective by step 3, and the limit-stage cocones are the required colimits. Let $I$ be the set of finite-etale $R$-subalgebras $B\\subseteq A$, ordered by inclusion, and put $R_i=B_i$. It is a small nonempty directed poset and its union is $A$. The structural and transition maps are injective inclusions. If $B_i\\subseteq B_j$, a finite list generating $B_j$ as an $R$-module also generates it as a $B_i$-module. Both affine spectra are etale over $\\operatorname{Spec}R$, so [lem-weil-pbc-etale-composition-cancellation](3) makes $B_i\\to B_j$ etale. Thus every transition is finite etale.",
+   "uses": [
+    "lem-sfb-transfinite-finite-etale-union",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "Each $B_i$ is local, with local map into $A$. Indeed, for every $a\\in A$, choose a finite-etale $R$-subalgebra containing it. The multiplication-endomorphism argument of step 2, using [lem-weil-pbc-endomorphism-finite-module-monic], shows that $a$ is integral over $R$, and hence over $B_i$ by the same monic equation. For any maximal ideal $\\mathfrak n$ of $B_i$, [lem-weil-pbc-integral-injective-lying-over] gives a prime of $A$ above it, and [lem-weil-pbc-integral-prime-over-maximal-maximal] makes that prime maximal. Since $A$ is local, it must be $\\mathfrak m_A$; hence $\\mathfrak n=\\mathfrak m_A\\cap B_i$. This proves uniqueness of the maximal ideal and locality. The same argument applied to $R\\subseteq B_i$ (or the known local composite $R\\to A$) shows its contraction to $R$ is $\\mathfrak m$, so $R\\to B_i$ is local. Nonzeroness follows from the injection $R\\hookrightarrow B_i$.",
+   "uses": [
+    "lem-weil-pbc-endomorphism-finite-module-monic",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "Now identify the maximal ideal of $B_i$. Its closed fibre $C_i=B_i/\\mathfrak mB_i=k\\otimes_R B_i$ is etale over $k$ by [lem-weil-pbc-etale-ring-base-change]. It is nonzero and local, since $\\mathfrak mB_i$ is contained in the maximal ideal just found. By [lem-weil-pbc-etale-algebra-over-field-product], $C_i$ is a finite product of finite separable fields. A nonzero local product of fields has exactly one factor: if there were two, the idempotent with coordinates $1,0,\\ldots$ would have neither itself nor its complement a unit, contradicting locality. Thus $C_i$ is a field and $\\mathfrak mB_i=\\mathfrak m_{B_i}$. Restrict $\\psi_\\theta$ to $B_i$ to obtain the embedding $\\kappa_i=C_i\\hookrightarrow E$, with kernel $\\mathfrak m_A\\cap B_i=\\mathfrak mB_i$. They are compatible and their union is $E$, since $A=\\bigcup_iB_i$ and $\\psi_\\theta$ is surjective. All transition maps are local because contraction of $\\mathfrak m_A$ through inclusions is transitive.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "The ring $A$ is the colimit of the inclusion system $(B_i)$: for a compatible family of ring maps, define its value on $a\\in A$ using any $B_i$ containing $a$. Directedness gives agreement of choices and preservation of addition and multiplication at a common stage; uniqueness follows from the union. Therefore identify $R_E=\\varinjlim_iB_i$ with $A$. Step 3 gives nonzeroness, maximal ideal $\\mathfrak mR_E$ and residue field $E$; steps 4--6 give local injective coprojections. This also proves the colimit assertion as an $R$-algebra, since the constructed map preserves the structural map from $R$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, using the monogenic construction and limit stages of Tag 03C3 (lemma-flat-local-given-residue-field)"
+   }
+  },
+  {
+   "text": "Finally let the target $S$ and the specified embedding $E\\hookrightarrow S/\\mathfrak m_S$ be as in the statement. Strict henselianity implies henselianity by [def-weil-pbc-henselian-terminology]. Apply [lem-weil-pbc-map-into-henselian-colimit] to the single etale algebra $B_i$, the prime $\\mathfrak mB_i$, and the specified residue map $\\kappa_i\\hookrightarrow E\\hookrightarrow S/\\mathfrak m_S$. The inverse image of $\\mathfrak m_S$ in $R$ is $\\mathfrak m$ because $R\\to S$ is local; the residue-field map is a $k$-map by hypothesis. The lemma gives exactly one local residue-compatible $R$-map $h_i:B_i\\to S$. For $i\\leq j$, $h_j|_{B_i}$ is local and induces the same residue map as $h_i$, so uniqueness implies equality. The colimit property now gives $h:R_E\\to S$. For $a\\in B_i$, $h(a)\\in\\mathfrak m_S$ iff $a\\in\\mathfrak mB_i$; as these ideals have union $\\mathfrak mR_E$, $h$ is local. Reduction agrees with the specified embedding on every $\\kappa_i$, hence on their union $E$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 08HQ (lemma-map-into-henselian), 08HR (lemma-map-into-henselian-colimit), and 04GT (lemma-strictly-henselian-functorial-prepare)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-sfb-separable-algebraic-intermediate-base",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-endomorphism-finite-module-monic",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-trf-well-order-ordinal-enumeration",
+  "lem-weil-pbc-transfinite-recursion",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-transfinite-finite-etale-union",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09E0, proof via 03C3; residue-compatible maps via 08HQ/08HR (the general input to 04GT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every separable algebraic residue field extension of a local ring is realized by a directed union of finite etale local algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give residue-field properties and factorization lifting, not existence of the directed finite-etale local system with prescribed residue and target compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsLocalRing.ResidueField",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"IsLocalRing.finrank_eq_finrank_residueField\", \"module\": \"Mathlib.RingTheory.LocalRing.Etale\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing S] [IsLocalRing R] [Module.Finite R S] [FaithfulSMul R S] [Algebra.Etale R S] : Module.finrank R S = Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)\", \"doc\": \"For finite étale extensions of local rings,\\n`finrank R S = finrank (ResidueField R) (ResidueField S)`.\"}\n  {\"name\": \"IsLocalRing.minpoly_map_residue\", \"module\": \"Mathlib.RingTheory.LocalRing.Etale\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing S] [IsLocalRing R] [Module.Finite R S] [FaithfulSMul R S] [Algebra.Etale R S] {β : S} (hadj : R[β] = ⊤) : Polynomial.map (IsLocalRing.residue R) (minpoly R β) = minpoly (IsLocalRing.ResidueField R) ((IsLocalRing.resi\", \"doc\": \"For a monogenic étale extension of local rings, the minimal polynomial of `β`\\nmaps to the minimal polynomial of `β mod m_S` over the residue field.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give residue-field properties and factorization lifting, not existence of the directed finite-etale local system with prescribed residue and target compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*(Etale|colimit)|colimit.*[Ee]tale|[Ee]tale.*residueField",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"line\": \"104\", \"text\": \"lemma finrank_eq_finrank_residueField [Algebra.Etale R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"694\", \"text\": \"lemma _root_.Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime.{u}\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"231\", \"text\": \"    Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime p f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give residue-field properties and factorization lifting, not existence of the directed finite-etale local system with prescribed residue and target compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize a separable algebraic field extension as the residue field of an ind finite etale local extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instIsAlgebraicResidueFieldOfIsIntegral\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Instances\", \"type\": \"[p.IsPrime] [q.IsPrime] [Algebra.IsIntegral A B] : Algebra.IsAlgebraic p.ResidueField q.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if $B$ is an integral algebra over $A$, then the residue field of $\\\\mathfrak\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.IsSeparable.isAlgebraic\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"[Nontrivial F] [Algebra.IsSeparable F K] : Algebra.IsAlgebraic F K\", \"doc\": \"Every separable algebra $ K $ over a nontrivial commutative ring $ F $ is algebraic over $ F $. That is, if $ F $ is a nontrivial commutative ring and $ K $ is a separable $ F $-algebra, then every el\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"IsSepClosure.recOn\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {K : Type v} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {motive : IsSepClosure k K → Sort u_1} →\\n            (t : IsSepClosure k K) →\\n              ((sep_closed : IsSepClosed K) → (separable : Algebra.IsSeparable k K) → motive ⋯) →\", \"doc\": \"The proposition that a field extension $ K $ of $ k $ is a separable closure, meaning $ K $ is an algebraic extension of $ k $ that is separably closed (has no nontrivial finite separable extensions) \"}\n  {\"name\": \"instIsSeparableResidueFieldOfQuotientIdeal\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Instances\", \"type\": \"[p.IsMaximal] [q.IsMaximal] [Algebra.IsSeparable (A ⧸ p) (B ⧸ q)] : Algebra.IsSeparable p.ResidueField q.ResidueField\", \"doc\": \"If the quotient rings $ A/p $ and $ B/q $ are separable algebras, then the residue fields of the maximal ideals $ p $ and $ q $ are also separable algebras.\"}\n  {\"name\": \"Algebra.IsSeparable.finInsepDegree_eq\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"[Algebra.IsSeparable F E] : finInsepDegree F E = 1\", \"doc\": \"If $ E $ is a separable algebra over $ F $, then the finite inseparable degree of the field extension $ E/F $, defined as the finite rank of $ E $ as a module over the separable closure of $ F $ in $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give residue-field properties and factorization lifting, not existence of the directed finite-etale local system with prescribed residue and target compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct local ring extension with prescribed separable residue field as filtered colimit of finite etale algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give residue-field properties and factorization lifting, not existence of the directed finite-etale local system with prescribed residue and target compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Directed finite etale local ring extensions realize prescribed separable residue extension and lift compatibly to any strictly henselian local target",
+   "results": "{\"t\": \"2026-10-24T07:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"Directed finite etale local ring extensions realize prescribed separable residue extension and lift compatibly to any strictly henselian local target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"HenselianLocalRing.TFAE\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\"], \"digest\": \"7ec0aed58398ab2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: factorization-lifting, HenselianLocalRing.TFAE and field-algebra classifications do not construct this directed local system with compatible target maps."
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*(Etale|colimit)|colimit.*[Ee]tale|[Ee]tale.*residueField",
+   "results": "{\"t\": \"2026-10-24T09:05:50Z\", \"tool\": \"grep\", \"query\": \"residueField.*(Etale|colimit)|colimit.*[Ee]tale|[Ee]tale.*residueField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"c2e9e3ff210112bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field properties, factorization lifting and henselian root lifting do not construct the prescribed ind-finite-etale local extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsLocalRing.ResidueField",
+   "results": "{\"t\": \"2026-10-24T09:05:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsLocalRing.ResidueField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_eq_finrank_residueField\", \"IsLocalRing.minpoly_map_residue\"], \"digest\": \"9e11b821b503de0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field properties, factorization lifting and henselian root lifting do not construct the prescribed ind-finite-etale local extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an ind finite etale local ring extension with prescribed separable algebraic residue field and unique residue compatible maps to henselian rings",
+   "results": "{\"t\": \"2026-10-24T09:05:50Z\", \"tool\": \"leansearch\", \"query\": \"Construct an ind finite etale local ring extension with prescribed separable algebraic residue field and unique residue compatible maps to henselian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"RingHom.Etale\", \"Field.henselian\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.of_isSeparable\"], \"digest\": \"ce60b6a97237e47d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field properties, factorization lifting and henselian root lifting do not construct the prescribed ind-finite-etale local extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize an algebraic separable extension of the residue field of an arbitrary local ring by a directed system of finite etale local algebras",
+   "results": "{\"t\": \"2026-10-24T09:05:51Z\", \"tool\": \"leanfinder\", \"query\": \"Realize an algebraic separable extension of the residue field of an arbitrary local ring by a directed system of finite etale local algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"instIsSeparableResidueFieldOfQuotientIdeal\"], \"digest\": \"bef40f2f31e7bcd0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field properties, factorization lifting and henselian root lifting do not construct the prescribed ind-finite-etale local extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separable algebraic residue field extension of a local ring lifts to a directed union of finite etale local rings",
+   "results": "{\"t\": \"2026-10-24T09:05:53Z\", \"tool\": \"leanfinder\", \"query\": \"A separable algebraic residue field extension of a local ring lifts to a directed union of finite etale local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"c3ae5fb10598f7f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field properties, factorization lifting and henselian root lifting do not construct the prescribed ind-finite-etale local extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-strict-residue-square",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Strict residue and completion reduction in the proof of Epp. Strict residue extension before completion: the general 09ET input, including preservation of the lower uniformizer. Supporting input: 09ET first paragraph (09E0 construction) and second paragraph (04GT compatible maps).",
+   "via": [
+    "lem-sfb-dvr-strict-residue-square",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-separable-residue-ind-finite-etale",
+  "worker": "stage1",
+  "summary": "Expanded 09E0 into the monic successor construction, continuous residue-field tower, general transfinite finite-etale union input, and explicit locality, closed-fibre, colimit and target-map checks. Statement unchanged. One new statement-only algebra lemma; reused the existing generic algebra and henselian mapping nodes.",
+  "blueprint": "Historical support chain under the former direct-images proof (3); latest direct-images proof (3) contains no assertion of this auxiliary algebra result, so from.node remains null as ancestor reports. Steps follow the unchanged Stacks 09E0/04GT route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "def-weil-pbc-separable-algebraic-extension",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-endomorphism-finite-module-monic",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "def-pc-separable-polynomial",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-standard-etale-monic-derivative",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-transfinite-recursion",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic algebraic input used with its full stated hypotheses in the numbered proof; the historical unit route supplies no replacement for this local-ring or henselian mapping tool."
+   },
+   {
+    "node": "lem-weil-pbc-well-ordering-theorem",
+    "why": "Foundational set-theoretic tool to index the residue-field construction by a set ordinal; the historical unit supplies no replacement for well-ordering and ordinal enumeration."
+   },
+   {
+    "node": "lem-trf-well-order-ordinal-enumeration",
+    "why": "Foundational set-theoretic tool to index the residue-field construction by a set ordinal; the historical unit supplies no replacement for well-ordering and ordinal enumeration."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-endomorphism-finite-module-monic",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-transfinite-recursion",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-trf-well-order-ordinal-enumeration"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-98968eca9",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-98968eca9 (reviewer sub-agent of L); spot-checked: Shape: one commit; report has its review section; item statement and stmt_deps identical to the earlier unsplit snapshot. Source read: Stacks algebra.tex 09E0 (statement and proof), 03C3 (proof, transfinite-recursion paragraph) and 08HQ through lem-weil-pbc-map-into-henselian-colimit. Step checks: 1, the minimal-polynomial quotient F[T]/p=F(x), separability over the intermediate field F, and the monic quotient that is free with closed fibre F(x). 2, B is integral over A; maximal ideals contract to m_A, so B is local; Up+Vp'=1 makes f' a unit, so B=B_{f'} is standard etale. 3, transfinite recursion with explicit invariants; at limits the nonunits are the union of the stage maximal ideals, which is mA_lambda; psi is surjective onto E. 4, the new node's hypotheses checked; transitions B_i to B_j are module-finite and etale by cancellation (3). 5, lying over (00GQ) and 00GS give B_i local with local inclusions. 6, etale base change and 00U3 make the closed fibre a single field, so mB_i is maximal and kappa_i embeds in E with union E. 7, the colimit universal property, correctly marked elementary. 8, 08HQ for a single etale algebra gives exactly one map with preimage mB_i inducing tau; uniqueness gives compatibility, and the colimit map is local with the specified residue map. New node lem-sfb-transfinite-finite-etale-union: statement-only, self-contained, source 09E0. True: I proved it myself by descending the finite etale successor to a finite etale subalgebra of A_alpha; faithful flatness of A_alpha over the finite etale subalgebras makes the descended algebra embed. Small cases checked: theta=0, the zero ring, first limit omega, degree-1 successors. It has no local, residue or henselian content, so it does not restate the item. Searching the whole DAG for 09E0, ind-etale and directed unions of finite etale subalgebras finds no duplicate. Batch-5 flag: lem-trf-well-order-ordinal-enumeration is a status-mathlib set-theory leaf (Stacks 05N1) with no proof_deps. It is not part of the trace formula or of Poincare duality, and no other ordinal-enumeration node exists, so the citation is accepted. The generic algebra tool_uses in split_report are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalSeparableResidueIndFiniteEtale",
+  "declaration": "IsLocalRing.exists_local_separable_residue_ind_finite_etale",
+  "declarations": [
+   "IsLocalRing.LocalSeparableResidueFiniteEtaleSystem",
+   "IsLocalRing.exists_local_separable_residue_ind_finite_etale"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalSeparableResidueIndFiniteEtale.lean",
+  "statement": "theorem exists_local_separable_residue_ind_finite_etale (R E : Type u) [CommRing R] [IsLocalRing R] [Field E] [Algebra (ResidueField R) E] [Algebra.IsSeparable (ResidueField R) E] : ∃ P : LocalSeparableResidueFiniteEtaleSystem R E, ∀ (S : Type v) [CommRing S] [Algebra R S] [IsStrictlyHenselianLocalRing S] [IsLocalHom (algebraMap R S)] (τ : E →+* ResidueField S), τ.comp (algebraMap (ResidueField R) E) = ResidueField.map (algebraMap R S) → ∃ (h : ∀ i : P.I, P.diagram.obj i →ₐ[R] S), (∀ i : P.I, IsLocalHom (h i)) ∧ (∀ i : P.I, (residue S).comp (h i).toRingHom = (τ.comp (P.residueEmbedding i)).comp (residue (P.diagram.obj i))) ∧ (∀ (i : P.I) (g : P.diagram.obj i →ₐ[R] S), IsLocalHom g → (residue S).comp g.toRingHom = (τ.comp (P.residueEmbedding i)).comp (residue (P.diagram.obj i)) → g = h i) ∧ (∀ (i j : P.I) (hij : i ≤ j), (h j).comp (P.diagram.map (homOfLE hij)).hom = h i) ∧ ∃ f : P.cocone.pt →ₐ[R] S, IsLocalHom f ∧ (∀ i : P.I, f.comp (P.cocone.ι.app i).hom = h i) ∧ (residue S).comp f.toRingHom = τ.comp (P.residueIso.toRingHom.comp (residue P.cocone.pt))",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2c3092d8",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records (Algebra, Algebra.IsSeparable, AlgebraicGeometry.Etale, colimit via Cocone+IsColimit, IsStrictlyHenselianLocalRing read at side-live Henselian.lean:122), Stacks 09E0 (algebra.tex l.44643) and 04GT (l.43338), module and report (Worker report + Second reading by Q143 present). Every clause matches: nonempty directed small I; nonzero local stages with local injective module-finite etale (Spec.map) structural and transition maps; mR_i maximal, compatible k-embeddings kappa_i into E with union E; R-algebra colimit nonzero local with local injective coprojections, m_{R_E}=mR_E, residueIso pinned by the coprojections; for strictly henselian S (independent universe v) with a local R->S and tau extending the residue map: unique local R-maps per stage with the given residue map (= 04GT condition), compatible, inducing a local colimit map with residue tau. The witness structure holds real data, is used only existentially and is not hollow; the only sorry is the theorem proof; source/blueprint docstrings and step-by-step proof docstring present; lean.statement verbatim; no statement_change; no existing declaration found. Note: E shares universe u with R, harmless since E algebraic over k has an isomorphic copy in Type u. No recompile: no file changed."
+ }
+}

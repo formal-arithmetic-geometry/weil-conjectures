@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+ "kind": "statement",
+ "title": "Higher stack direct images as sheafified fibre cohomology presheaves",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $h:\\mathcal X\\to\\mathcal Y$ a morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack]. Use their inherited big fppf sites, categories fibred in groupoids, $2$-fibre products and structure sheaves of [def-sfb-stack-quasi-coherent-algebra, def-sfb-stable-pointed-moduli-groupoids]. Also use the big etale sites on the same objects and arrows, with coverings lying over jointly surjective etale scheme maps [def-weil-etale-morphism] and the same structure sheaves. Fix $\\tau\\in\\{\\mathrm{et},\\mathrm{fppf}\\}$ and a structure-module sheaf $M$ on $\\mathcal X_\\tau$ [def-weil-sheaf-of-modules-category]. For a test object $y$ of $\\mathcal Y$ over $V$, put $\\mathcal X_y=\\mathcal X\\times_{\\mathcal Y}(\\mathit{Sch}/V)$ and let $p_y:\\mathcal X_y\\to\\mathcal X$ be the projection; $p_y^{-1}M$ means precomposition, with the unchanged structure ring on each scheme test object. Direct image has the section formula $(h_{\\tau,*}M)(y)=\\Gamma(\\mathcal X_y,p_y^{-1}M)$. For each $q\\geq0$, define\n$$P^q_{\\tau,M}(y)=H^q(\\mathcal X_{y,\\tau},p_y^{-1}M),$$\nwhere cohomology and higher direct images are computed using injective resolutions in all structure-module sheaves [def-sp-injective-resolutions]. The restriction maps of $P^q_{\\tau,M}$ are the canonical cohomology restriction maps from base change of test objects, and the action of $\\Gamma(V,\\mathcal O_V)$ is induced by pullback of functions. Then the canonical cocycle-to-cohomology-sheaf map induces an isomorphism of module sheaves\n$$(P^q_{\\tau,M})^{\\#_\\tau}\\xrightarrow{\\sim}R^q h_{\\tau,*}M,$$\nwhere module sheafification is [def-weil-presheaf-modules-sheafification]. This is natural in $M$ and compatible with the indicated restrictions and scalar actions. There is no representability, quasi-compactness, quasi-separatedness, quasi-coherence or flatness assumption on $h$ or $M$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075G (lemma-pushforward-restriction), its formula and injective-resolution proof; naturality is induced by restrictions and resolution maps in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-etale-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-stack-fibre-cohomology-presheaf",
+  "def-sfb-stack-big-etale-module-functors",
+  "def-sfb-stack-fppf-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Use the resolution-existence clause of lem-sfb-module-resolution-derived-presheaf-comparison on the chosen small ringed site $\\mathcal X_\\tau$ to choose $M[0]\\to I^\\bullet$ with injective module terms and $I^n=0$ for $n<0$. Put $K^\\bullet=h_{\\tau,*}I^\\bullet$. By lem-weil-pbc-derived-functor-map-via-lift, $R^qh_{\\tau,*}M\\cong\\mathcal H^q(K^\\bullet)$. Here $h_*$ is additive and left exact: by its section formula a section of a kernel is a compatible family of sections in the kernels, and kernels of modules are sectionwise by def-weil-sheaf-of-modules-category. Let $L^\\bullet$ be the underlying presheaf complex of $K^\\bullet$, and put $Q^q=\\ker d_L^q/\\operatorname{im}d_L^{q-1}$ in module presheaves. These kernels and quotients are sectionwise: the usual module kernels and quotients inherit the semilinear restriction maps and satisfy the universal properties object by object. Thus $Q^q(y)=H^q(K^\\bullet(y))$, with the induced restrictions and $\\Gamma(V,\\mathcal O_V)$-action. For $q=0$ the incoming term is zero.",
+   "uses": [
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075G, lemma-pushforward-restriction, injective-resolution proof, lines 3895-3924."
+   }
+  },
+  {
+   "text": "For each test object $y/V$, lem-sfb-stack-test-fibre-restriction-injectives makes $p_y^{-1}I^\\bullet$ an injective resolution of $p_y^{-1}M$: exactness preserves the augmented resolution and each term remains injective. Consequently the injective-resolution computation in lem-weil-pbc-derived-functor-map-via-lift gives\n$$P^q_{\\tau,M}(y)\\cong H^q\\Gamma(\\mathcal X_y,p_y^{-1}I^\\bullet)=H^q(K^\\bullet(y))=Q^q(y).$$\nThe middle equality is the direct-image section formula in the statement, degree by degree. For an arrow $a:y'\\to y$, let $r_a:\\mathcal X_{y'}\\to\\mathcal X_y$ be base change. On each term the restriction of a compatible family $(s_z)_z$ is $(s_{r_a(z')})_{z'}$. Since $p_y r_a=p_{y'}$ up to the specified fibre-product identification, this is exactly the restriction map of $h_*I^n$. Applying cohomology therefore gives the canonical cohomology restriction, computed on these restricted resolutions, so the displayed identifications form a presheaf isomorphism $P^q_{\\tau,M}\\cong Q^q$. A function $b\\in\\Gamma(V,\\mathcal O_V)$ acts on a section over $T\\to V$ by multiplication by its pullback to $T$. The differentials are module-linear, so cycles and boundaries inherit this action. For $a$ over $u:V'\\to V$, the equality $(bs)|_{y'}=u^*(b)s|_{y'}$ holds already on the section complexes. Hence the presheaf isomorphism is an isomorphism of structure-module presheaves.",
+   "uses": [
+    "lem-sfb-stack-test-fibre-restriction-injectives",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075G, lemma-pushforward-restriction, injective-resolution proof, lines 3895-3924."
+   }
+  },
+  {
+   "text": "Module sheafification on $\\mathcal Y_\\tau$ is exact by lem-weil-pbc-ringed-site-module-sheafification-exact. Apply lem-sp-exact-functor-preserves-homology (c) to the three terms around degree $q$ of $L^\\bullet$. It gives\n$$(Q^q)^{\\#_\\tau}\\cong\\mathcal H^q((L^\\bullet)^{\\#_\\tau}).$$\nEach $L^n$ underlies the sheaf $K^n$. The universal property in def-weil-presheaf-modules-sheafification identifies $(L^n)^{\\#_\\tau}$ with $K^n$: extend the identity map to the sheafification, and both composites are identities by uniqueness. Uniqueness also makes these identifications commute with differentials. Combining with steps 1 and 2 gives\n$$(P^q_{\\tau,M})^{\\#_\\tau}\\cong(Q^q)^{\\#_\\tau}\\cong\\mathcal H^q(K^\\bullet)\\cong R^qh_{\\tau,*}M.$$\nThe homology comparison in (c) respects cycle inclusions and quotient projections. Its map before sheafification sends a cycle to its class in the cohomology sheaf. Thus this is precisely the asserted canonical cocycle map. Every arrow is a module morphism, so the isomorphism respects the indicated scalar actions.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075G, lemma-pushforward-restriction, injective-resolution proof, lines 3895-3924."
+   }
+  },
+  {
+   "text": "For a module morphism $v:M\\to N$, choose a second such resolution $N\\to J^\\bullet$. The statement of lem-weil-pbc-injective-resolution-lift-exists supplies an augmentation-preserving module chain map $t:I^\\bullet\\to J^\\bullet$ lifting $v$. Its restrictions $p_y^{-1}t$ are maps of the injective resolutions from step 2. By lem-weil-pbc-derived-functor-map-via-lift, the maps on fibre cohomology and on $R^qh_*$ are computed respectively by $H^q\\Gamma(p_y^{-1}t)$ and $\\mathcal H^q(h_*t)$. Both send a represented cycle $z$ to the class represented by $t^q(z)$; this commutes with the restriction formula in step 2. Naturality of the exact-functor homology comparison in lem-sp-exact-functor-preserves-homology (c), followed by the uniqueness of sheafification in def-weil-presheaf-modules-sheafification, therefore yields $R^qh_*(v)\\circ\\sigma_M=\\sigma_N\\circ(P^q(v))^{\\#_\\tau}$. Taking $v=\\mathrm{id}_M$ with two different resolutions identifies the construction for both choices with the identity maps of the fixed derived groups and higher-image sheaf, by the same derived-map formula. Thus the isomorphism is independent of the resolution and natural in $M$. All constructions have been in all structure-module sheaves; no geometric finiteness, representability, quasi-coherence or flatness condition was used.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075G, lemma-pushforward-restriction, injective-resolution proof, lines 3895-3924."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-stack-test-fibre-restriction-injectives",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-injective-resolution-lift-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075G, lemma-pushforward-restriction, injective-resolution proof, lines 3895-3924."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images for a morphism of algebraic stacks on big sites are sheafifications of cohomology of the two fiber products with test schemes",
+   "results": "{\"t\": \"2026-10-23T20:01:15Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images for a morphism of algebraic stacks on big sites are sheafifications of cohomology of the two fiber products with test schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\"], \"digest\": \"1e39af1b8cac3e11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pushforward and cohomology-presheaf constructors do not identify higher stack direct images with cohomology of these fibre stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The higher direct image of a module sheaf along a morphism of algebraic stacks is the sheafification of the fiber product cohomology presheaf",
+   "results": "{\"t\": \"2026-10-23T20:01:14Z\", \"tool\": \"leansearch\", \"query\": \"The higher direct image of a module sheaf along a morphism of algebraic stacks is the sheafification of the fiber product cohomology presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafify\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafifyMap\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.sheafification\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"7301359dd972629b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pushforward and cohomology-presheaf constructors do not identify higher stack direct images with cohomology of these fibre stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "{\"t\": \"2026-10-23T20:01:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pushforward and cohomology-presheaf constructors do not identify higher stack direct images with cohomology of these fibre stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|[Ss]tack.*[Cc]ohom|[Cc]ohom.*[Ss]tack",
+   "results": "{\"t\": \"2026-10-23T20:01:14Z\", \"tool\": \"grep\", \"query\": \"higherDirectImage|[Ss]tack.*[Cc]ohom|[Cc]ohom.*[Ss]tack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\"], \"digest\": \"ab0f5a719523282f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pushforward and cohomology-presheaf constructors do not identify higher stack direct images with cohomology of these fibre stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the presheaf of cohomology on inverse image fiber categories computes derived pushforward of modules on algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T20:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of the presheaf of cohomology on inverse image fiber categories computes derived pushforward of modules on algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward_map_val\"], \"digest\": \"202755730d7b3077\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pushforward and cohomology-presheaf constructors do not identify higher stack direct images with cohomology of these fibre stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|cohomologyPresheaf|sheafificationCompToSheaf",
+   "results": "{\"t\": \"2026-10-23T21:17:49Z\", \"tool\": \"grep\", \"query\": \"higherDirectImage|cohomologyPresheaf|sheafificationCompToSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"623a17ea7d703cc3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomologyPresheaf is an Ext-valued abelian-sheaf definition; module pushforward and sheafification declarations are underived. None supplies the fibre-stack module comparison of Stacks 075G in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "{\"t\": \"2026-10-23T21:17:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomologyPresheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"485552ea358de5c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomologyPresheaf is an Ext-valued abelian-sheaf definition; module pushforward and sheafification declarations are underived. None supplies the fibre-stack module comparison of Stacks 075G in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The higher direct image of a module on a big stack site is the sheafification of the fibre cohomology presheaf",
+   "results": "{\"t\": \"2026-10-23T21:17:50Z\", \"tool\": \"leansearch\", \"query\": \"The higher direct image of a module on a big stack site is the sheafification of the fibre cohomology presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafify\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafifyMap\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"PresheafOfModules.sheafification\", \"CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber\", \"PresheafOfModules.sheafification_map\", \"TopCat.Presheaf.sheafifyStalkIso\"], \"digest\": \"c261a2c0409a0ede\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomologyPresheaf is an Ext-valued abelian-sheaf definition; module pushforward and sheafification declarations are underived. None supplies the fibre-stack module comparison of Stacks 075G in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of module sheaves along algebraic stack morphisms on big etale and fppf sites equal sheafified fibre stack cohomology",
+   "results": "{\"t\": \"2026-10-23T21:17:52Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of module sheaves along algebraic stack morphisms on big etale and fppf sites equal sheafified fibre stack cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\"], \"digest\": \"273e0a6c257e6709\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomologyPresheaf is an Ext-valued abelian-sheaf definition; module pushforward and sheafification declarations are underived. None supplies the fibre-stack module comparison of Stacks 075G in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifying the cohomology of the complex of sections over test scheme fibre products computes the right derived stack pushforward of modules",
+   "results": "{\"t\": \"2026-10-23T21:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafifying the cohomology of the complex of sections over test scheme fibre products computes the right derived stack pushforward of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pushforwardNatTrans\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"ec50761a4c055aa6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomologyPresheaf is an Ext-valued abelian-sheaf definition; module pushforward and sheafification declarations are underived. None supplies the fibre-stack module comparison of Stacks 075G in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-lfp-topology-comparison",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison.",
+   "via": [
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+  "worker": "stage1",
+  "summary": "Followed Stacks 075G on all structure-module sheaves for both inherited big topologies. Kept the statement, isolated exact injective-preserving test-fibre restriction, and wrote the resolution, semilinear restrictions, exact sheafification and naturality arguments with existing general nodes.",
+  "blueprint": "Realizes the sheafified fibre-cohomology comparison input at the end of the existing from.place chain below det-thm-sf-ctf-stability-direct-images, proof (3). Read the current latest blueprint unit and proof (3); no unit route changed. The ancestor command returns None, retained as null."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-22e1952b9",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-22e1952b9 (reviewer sub-agent of L); spot-checked: I read Stacks 075G (lemma-pushforward-restriction, lines 3875-3924), 06X2 (lemma-pullback-injective-modules), 06X1, 06WY(3) and 06TS. The item statement is byte-identical to the live base and is still unsplit on live; it specialises 075G correctly to τ∈{ét,fppf} with Mod(O_X) coefficients and adds no hypothesis on h. Step 1: the resolution-existence clause of lem-sfb-module-resolution-derived-presheaf-comparison plus the derived-map-via-lift leaf give R^q h_*M ≅ H^q(h_*I); kernels and quotients are sectionwise. Step 2: the new node gives an exact injective-preserving p_y^{-1}. The 2-fibre-product triple model gives p_y r_a = p_{y'} on the nose, so restrictions and scalar actions are written out explicitly. Step 3: module sheafification is exact (Mathlib leaf), the exact-functor homology clause (c) applies, and (L^n)^# ≅ K^n follows by uniqueness. Step 4: lift existence plus the derived-map formula give naturality and independence of the resolution. The new node lem-sfb-stack-test-fibre-restriction-injectives is true by 06X2: p_y is a base change of the representable map Sch/V→Y, hence faithful, and X_y is algebraic, hence has equalizers (06WY). I tested it on h=id, an empty fibre and a non-representable h. It is statement-only, self-contained and has no duplicate: the trf Ext-acyclicity node is weaker and in a forbidden chapter, and the sbc, fppf-inverse-image, big-étale-calculus and slice-restriction nodes all differ. It is strictly smaller than the item. No cycle (DFS over the snapshot), no SGA citation, and no tool_uses are needed. Batch 5: the three flagged citations are general definitions (algebraic stack, big site and structure sheaf, CFG and 2-fibre products), already stmt_deps of the base item. They reach only trf definitions, not steps of the trace-formula or Poincaré-duality proofs, so they are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackHigherImageFibreCohomology",
+  "declaration": "CategoryTheory.moduli_higherImage_fibreCohomology_presheaf",
+  "declarations": [
+   "CategoryTheory.moduliCohomologySheafification",
+   "CategoryTheory.moduliCohomologySheafification_preservesFiniteLimits",
+   "CategoryTheory.moduliCohomologySheafification_preservesFiniteColimits",
+   "CategoryTheory.moduliCohomologyImageComplex",
+   "CategoryTheory.moduliCohomologyImagePresheafComplex",
+   "CategoryTheory.moduliCohomologySheafifiedComplexIso",
+   "CategoryTheory.moduliCohomologyResolutionComparison",
+   "CategoryTheory.moduliCohomologyFibreResolutionComparison",
+   "CategoryTheory.moduli_higherImage_fibreCohomology_presheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackHigherImageFibreCohomology.lean",
+  "statement": "theorem moduli_higherImage_fibreCohomology_presheaf {S : AlgebraicGeometry.Scheme.{u}} {F G : BasedCategory.{v, w} (Over S)} (hF : IsAlgebraicModuliStack F) (hG : IsAlgebraicModuliStack G) (a : BasedFunctor F G) (τ : ModuliCohomologyTopology) (q : ℕ) : (∃ σ : moduliFibreCohomologyPresheaf hF.1.1 hG.1.1 a τ q ⋙ moduliCohomologySheafification G hG.1.1 τ ≅ moduliCohomologyHigherImage hF.1.1 hG.1.1 a τ q, ∀ (M : ModuliCohomologyModules F hF.1.1 τ) (I : InjectiveResolution M), σ.hom.app M = moduliCohomologyResolutionComparison hF.1.1 hG.1.1 a τ q I) ∧ ∀ y : G.obj, ∃ e : moduliFibreCohomologyPresheaf hF.1.1 hG.1.1 a τ q ⋙ moduliCohomologyEvaluation G hG.1.1 τ y ≅ moduliCohomologyFibreGroups hF.1.1 hG.1.1 a y τ q, (∀ (M : ModuliCohomologyModules F hF.1.1 τ) (I : InjectiveResolution M) (J : InjectiveResolution ((moduliCohomologyFibreRestriction hF.1.1 hG.1.1 a y τ).obj M)) (t : ((moduliCohomologyFibreRestriction hF.1.1 hG.1.1 a y τ).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ⟶ J.cocomplex), (moduliCohomologyFibreRestriction hF.1.1 hG.1.1 a y τ).map (I.ι.f 0) ≫ t.f 0 = J.ι.f 0 → e.hom.app M = moduliCohomologyFibreResolutionComparison hF.1.1 hG.1.1 a y τ q I J t) ∧ ∀ (M : ModuliCohomologyModules F hF.1.1 τ) (b : (moduliCohomologyRings G hG.1.1 τ).obj.obj (op y)) (x : ((moduliFibreCohomologyPresheaf hF.1.1 hG.1.1 a τ q).obj M).obj (op y)), e.hom.app M (b • x) = ((moduliCohomologyGlobalSections (moduliCohomologyFibre a y) (moduliCohomologyFibre_isFibred hF.1.1 hG.1.1 a y) τ).rightDerived q).map (moduliCohomologyFibreScalar hF.1.1 hG.1.1 a y τ M b) (e.hom.app M x)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2c35b26e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Rebase of 4a1f (PASS) after Q22 def-sfb-stack-big-etale-module-functors landed via Q57: the Q22 copy is dropped. All three Lean modules (StackHigherImageFibreCohomology, StackFibreCohomology, StackFppfModuleFunctors), the item node and the new nodes def-sfb-stack-fibre-cohomology-presheaf/def-sfb-stack-fppf-module-functors are byte-identical to 4a1f. The snapshot Q22 node and live StackBigEtaleModuleFunctors.lean are identical to the carried copy; the base contains the owner, so no drop_nodes is needed. All other snapshot nodes match live; the item differs from live only in lean and stmt_deps; lean.statement is verbatim in its file for all three records; no live clash for the new nodes or names. Maths re-read vs Stacks 075G: tau et/fppf selectors, all module sheaves, arbitrary BasedFunctor, comma test fibre, sigma pinned for every I, e_y pinned for every I/J/augmentation-compatible t, scalar clause, NatIsos in M, independent universes, edge cases q=0/empty fibre/M=0/h=id. Defs are real data; only Prop obligations are sorried. Advisories: no explicit P^q restriction vs fibre base-change clause; some unused imports. No file changed, no compile."
+ }
+}

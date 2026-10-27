@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-proetale-tensor-descent-data",
+ "kind": "statement",
+ "title": "Complex-level setup for pro-etale tensor-comparison descent",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism and let $R,S$ be commutative ring sheaves on the small pro-etale sites with an identification $f^{-1}R\\simeq S$ [def-weil-pbc-proetale-operations]. Write $F=f_R^*$, $Q$ for localization to the unbounded derived category [def-weil-abstract-derived-category], and $\\mathcal P_R$ for the flat-term K-flat representative class [def-sfb-proetale-tensor-model]. Then (1) $F$ preserves this class; (2) restriction along $(\\mathcal P_R\\to D(R))^2$ is fully faithful on functors with target $D(S)$; and (3) the specified ordinary signed-total comparison [def-sp-proetale-ordinary-tensor-pullback-total] forms a natural isomorphism $\\operatorname{Tot}(FP\\otimes_S FQ)\\simeq F\\operatorname{Tot}(P\\otimes_R Q)$ on all complex pairs, whose inverse component at $(P,Q)$ is the inverse of the existing canonical total comparison. No derived tensor comparison is asserted in this setup lemma.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category",
+  "def-sfb-proetale-tensor-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/categories.tex",
+  "place": "Tags 07A4, lemma-pullback-tensor-product; 0G7E, lemma-pullback-K-flat; 04VK, localization universal property."
+ },
+ "proof": [
+  {
+   "text": "Instantiate ringed-topos K-flat pullback with the normalized algebraic inverse image and identified scalar extension. Its module and map formulas are definitional, so it preserves K-flatness and site-flatness of the terms.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve each homotopy object by a flat-term K-flat complex. Transport monoidal flatness to site-flatness with siteSheafTensorRightIso. Apply resolvingRepresentativesFullyFaithfulWhiskering and transfer along quotientCompQhIso.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form NatIso.ofComponents from the existing total isomorphisms. Naturality on each tensor summand follows from inverse ordinary tensor naturality. The inverse component equation is definitional.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A4 proof, explicit complex comparison and resolution restriction setup."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor pullback isomorphism on cochain complexes and fully faithful restriction to flat K-flat representatives",
+   "results": "8 hits, including Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.freeFunctorCompPullbackIso, mapBifunctorFlipIso naturality and projective/injective resolution components.",
+   "date": "2026-10-27",
+   "verdict": "No exact combined setup theorem; use existing project K-flat preservation and resolving restriction lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including NatIso.ofComponents and its hom/inverse component equations.",
+   "date": "2026-10-27",
+   "verdict": "Use this constructor for the natural total comparison; it does not establish the site-specific setup."
+  },
+  {
+   "tool": "grep",
+   "query": "map₂HomologicalComplex|fullyFaithfulWhiskeringLeft",
+   "results": "7 hits: Mathlib/Algebra/Homology/Bifunctor.lean:302,315; Mathlib/CategoryTheory/Localization/Predicate.lean:278; SerreClass/Localization.lean:525,529,532,535.",
+   "date": "2026-10-27",
+   "verdict": "Generic total tensor and localization tools exist; the specialized setup is proved from existing project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCanonicalTensorPullback",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Canonical tensor pullback: complex-level representative setup before descent.",
+   "via": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTensorPullbackDescentData",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorPullbackDescentData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleTensorPullbackDescentData",
+  "statement": "theorem proEtaleTensorPullbackDescentData :\n    (∀ (P : CochainComplex (proEtaleRingModules Y R) ℤ),\n      proEtaleFlatRepresentatives Y R P →\n        proEtaleFlatRepresentatives X S\n          (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P)) ∧\n    Nonempty (((whiskeringLeft\n      ((proEtaleFlatRepresentatives Y R).FullSubcategory ×\n        (proEtaleFlatRepresentatives Y R).FullSubcategory)\n      (DerivedCategory (proEtaleRingModules Y R) ×\n        DerivedCategory (proEtaleRingModules Y R))\n      (DerivedCategory (proEtaleRingModules X S))).obj\n      (((proEtaleFlatRepresentatives Y R).ι ⋙ DerivedCategory.Q).prod\n        ((proEtaleFlatRepresentatives Y R).ι ⋙ DerivedCategory.Q))).FullyFaithful) ∧\n    ∃ e :\n    ((((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).prod\n      ((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ))) ⋙\n      Functor.uncurry.obj ((proEtaleOrdinaryTensor X S).map₂HomologicalComplex\n        (.up ℤ) (.up ℤ) (.up ℤ))) ≅\n    (Functor.uncurry.obj ((proEtaleOrdinaryTensor Y R).map₂HomologicalComplex\n      (.up ℤ) (.up ℤ) (.up ℤ))) ⋙\n      (proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ),\n    ∀ P Q : CochainComplex (proEtaleRingModules Y R) ℤ,\n      e.inv.app (P, Q) = (proEtaleTensorPullbackTotalIso f R S c P Q).inv",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-67945",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T235852-L-1462983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-67945",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T235852-L-1462983",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (byte-identical); Models module vs clone item prefix (verbatim modulo renamed private helpers); delivered set + all 37 direct importers compiled against it; slow importers timed against published originals; axioms of the 4 main theorems; node lean records/proof_deps vs Lean"
+ }
+}

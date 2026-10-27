@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-projective-curve-isom-graphs",
+ "kind": "statement",
+ "title": "Isomorphism graphs of projective flat curves",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth] and let $X\\to S$ and $Y\\to S$ be projective [def-kun-projective], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] morphisms of schemes [def-pc-scheme] with geometric fibres of dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. The functor $T\\mapsto\\operatorname{Isom}_T(X\\times_ST,Y\\times_ST)$, with pullback along morphisms of $S$-schemes [def-pc-fibre-product], is represented by a scheme $J$ separated and of finite presentation over $S$ [def-weil-proper-morphism]. Its representing bijection is the graph construction: a $T$-point gives the closed subscheme $\\Gamma\\subset X_T\\times_TY_T$ whose two projections to $X_T$ and $Y_T$ are isomorphisms, and the associated isomorphism is the second projection composed with the inverse of the first. These bijections commute with arbitrary base change. No stability, smoothness, connectedness or marking hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp); scheme realization by projective graphs, using quot.tex Tag 0D01 (proposition-hilb), Tag 0D1B (lemma-Mor-into-Hilb-open), and moduli.tex Tags 0DPN (lemma-Mor-s-lfp), 0DPP (lemma-Isom-in-Mor)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose projective embeddings and apply the numerical-cover lemma. It gives Noetherian affine opens $U$, proper flat finitely presented restrictions, the Segre embedding of $E=X_U\\times_UY_U$, and one coordinate Hilbert polynomial $R$ for all geometric isomorphism graphs.",
+   "uses": [
+    "lem-sfb-curve-graph-fixed-polynomial-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), numerical quasi-compactness paragraph and displayed graph Euler calculation; perfect.tex Tag 0B9T (lemma-chi-locally-constant-geometric); varieties.tex Tag 0AYX (lemma-degree-tensor-product); Segre and coordinate-ring comparison as recorded in the parent steps 1, 2 and 5."
+   }
+  },
+  {
+   "text": "Apply the bounded-double-graph lemma to each $E/U$ and $R$. It gives a separated finitely presented $J_U$ representing graphs with both projections invertible. The inverse formula $p_Y\\circ p_X^{-1}$ identifies its points with isomorphisms, naturally under every pullback.",
+   "uses": [
+    "lem-sfb-bounded-double-graph-hilbert-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), final bounded-open argument; quot.tex Tags 0D1A (lemma-Mor-into-Hilb), 0D1B (lemma-Mor-into-Hilb-open); the projective Hilbert scheme realization and Noetherian permanence in parent steps 3, 4 and 6."
+   }
+  },
+  {
+   "text": "Projectivity gives properness, hence separatedness, of both families. Apply the Zariski gluing lemma to the cover and the natural graph representatives $J_U$. It yields the separated finitely presented global representative, both graph formulas, and compatibility with every base change, without imposing Noetherianity on the new base.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sfb-isom-graph-representatives-zariski-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JB (lemma-glue), gluing scheme morphisms and inverse identities; Tag 01JJ (lemma-glue-functors), open-subfunctor representability; moduli-curves.tex Tag 0DSQ (lemma-curves-diagonal-separated-fp), target-local separatedness and finite presentation. This is parent proof steps 7, 8 and 9 with the local graph representatives as hypotheses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-graph-fixed-polynomial-cover",
+  "lem-sfb-bounded-double-graph-hilbert-locus",
+  "lem-pc-projective-proper",
+  "lem-sfb-isom-graph-representatives-zariski-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ, lemma-curves-diagonal-separated-fp, numerical graph boundedness; scheme realization through projective Hilbert components and Tags 0D1A/0D1B; gluing by Schemes Tag 01JJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism functor between projective flat finitely presented families of curves is a separated scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-22T03:45:03Z\", \"tool\": \"leanfinder\", \"query\": \"The isomorphism functor between projective flat finitely presented families of curves is a separated scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\"], \"digest\": \"99bbd5af649d1179\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj separatedness and preservation of finite presentation do not represent the functor of curve isomorphisms; no Hilbert or Isom scheme construction was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "{\"t\": \"2026-10-22T03:45:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Isom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.isoMk\", \"AlgebraicGeometry.SheafedSpace.isoMk_hom\", \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\"], \"digest\": \"cbbe266771e5c4aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj separatedness and preservation of finite presentation do not represent the functor of curve isomorphisms; no Hilbert or Isom scheme construction was found."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|isomFunctor|isomScheme|IsomScheme",
+   "results": "{\"t\": \"2026-10-22T03:45:01Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|isomFunctor|isomScheme|IsomScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj separatedness and preservation of finite presentation do not represent the functor of curve isomorphisms; no Hilbert or Isom scheme construction was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of isomorphisms between projective flat curves by graphs in the Hilbert scheme",
+   "results": "{\"t\": \"2026-10-22T03:45:02Z\", \"tool\": \"leansearch\", \"query\": \"Representability of isomorphisms between projective flat curves by graphs in the Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RepresentablyFlat.of_iso\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.Scheme.Hom\"], \"digest\": \"78612486f47360db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj separatedness and preservation of finite presentation do not represent the functor of curve isomorphisms; no Hilbert or Isom scheme construction was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs of isomorphisms of proper flat curves form a scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-22T03:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs of isomorphisms of proper flat curves form a scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"c8f058d7ee08e5d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj separatedness and preservation of finite presentation do not represent the functor of curve isomorphisms; no Hilbert or Isom scheme construction was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism functor between projective flat finitely presented curves represented by a separated scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-22T04:02:41Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphism functor between projective flat finitely presented curves represented by a separated scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"ea1fd2c74601cfde\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective chart isomorphisms, separatedness of Proj, and the general local representability criterion do not state representability of curve isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "{\"t\": \"2026-10-22T04:02:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Isom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.isoMk\", \"AlgebraicGeometry.SheafedSpace.isoMk_hom\", \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\"], \"digest\": \"cbbe266771e5c4aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective chart isomorphisms, separatedness of Proj, and the general local representability criterion do not state representability of curve isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|IsomScheme|isomFunctor|isomScheme",
+   "results": "{\"t\": \"2026-10-22T04:02:41Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|IsomScheme|isomFunctor|isomScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective chart isomorphisms, separatedness of Proj, and the general local representability criterion do not state representability of curve isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of automorphisms of a projective flat family of curves",
+   "results": "{\"t\": \"2026-10-22T04:02:42Z\", \"tool\": \"leansearch\", \"query\": \"Representability of automorphisms of a projective flat family of curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"Module.Flat.of_projective\", \"Rep.ofAlgebraAut\", \"CategoryTheory.RepresentablyFlat.of_iso\", \"CategoryTheory.PreGaloisCategory.AutGalois\", \"AlgebraicGeometry.Flat.comp\", \"Rep.ofAlgebraAutOnUnits\", \"AlgebraicGeometry.Flat.mk\"], \"digest\": \"56e956d621864edf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective chart isomorphisms, separatedness of Proj, and the general local representability criterion do not state representability of curve isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs of isomorphisms between projective schemes form an open subscheme of the Hilbert scheme",
+   "results": "{\"t\": \"2026-10-22T04:02:44Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs of isomorphisms between projective schemes form an open subscheme of the Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\"], \"digest\": \"38b29e7b38de143a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective chart isomorphisms, separatedness of Proj, and the general local representability criterion do not state representability of curve isomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: the statement stays verbatim; all nine old steps are distributed to three comparable statement-only unsplit nodes: numerical affine cover and graph polynomial (old 1,2,5), bounded double-graph Hilbert locus (old 3,4,6), and Zariski graph gluing with arbitrary base change (old 7,8,9). The parent is only their short assembly. The complete original arguments are preserved verbatim in the report, assigned to the new tasks. Each new node has actual logged searches.",
+  "blueprint": "The inherited null blueprint ancestor was confirmed with blueprint_refs.py ancestor. This realizes the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite, through stable-pointed curve Isom rigidity; the present graph scheme and its boundedness follow Stacks 0DSQ, not a different alteration route. The inherited route is unchanged. The three new tasks carry old steps 1,2,5; 3,4,6; and 7,8,9 respectively. Parent steps 1-3 assemble these tasks.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper theorem for each family."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-segre",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-pc-schemes-criterion",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-b28e2e5c0",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-b28e2e5c0 (reviewer sub-agent of L); spot-checked: This answers the human re-split note (released 05:47Z, commit 06:05Z). Statement, lean, blueprint and reviewed fields are byte-identical to live, which still has O4's 85a3c4ed 9-step split; no parallel re-split exists. The parent proof is 3 steps and 878 chars (was 7931). I checked by script that all 9 old step texts are kept verbatim in the report and assigned to new nodes. Node 1, lem-sfb-curve-graph-fixed-polynomial-cover, carries old steps 1, 2 and 5: the Noetherian affine cover; Euler constancy of O, L and N by the 0B9T node (all flat and fp since the families are flat); chi(L^n)=n deg L+chi(O) by 0AYX induction, needing only proper dimension at most 1 with no reducedness; the Segre embedding (01WD) with M=pr*L(x)pr*N; the graph value R(n)=n(dX+dY)+cX=PX+PY-PY(0); and the coordinate-ring=Euler comparison through the node from O4's FIX, which is ideal-independent. Node 2, lem-sfb-bounded-double-graph-hilbert-locus, carries old steps 3, 4 and 6. The Hilbert node needs Noetherian U. The graphs-open node (0D1A/0D1B) is applied in both directions; both targets are proper, hence separated. Every geometric fibre of a T-point is a geometric-point graph, so J lies in H_R, open there. H_R is projective over Noetherian U, so J is Noetherian and J->U is separated and fp. Base change to arbitrary U' follows from the Hilbert node. Node 3, lem-sfb-isom-graph-representatives-zariski-gluing, carries old steps 7, 8 and 9: the sheaf property by the 01JB mapping property (schemes.tex l.2545, read); 01JJ hypotheses (1) and (2a-c) verified (l.2893); target locality of separated and LFP, then QC and QS; graphs closed by separatedness; base change is formal. It is not circular, since it assumes only local representatives. Item steps: step 1 gets exactly node 1's hypotheses from the item; node 1's outputs supply node 2's hypotheses, with R integer-coefficient hence numerical; lem-pc-projective-proper supplies node 3's separatedness. The three new statements are comparable in size (~2.0-2.4k chars). None restates the item: node 1 is numerical only, node 2 is conditional with no dimension bound, node 3 is pure gluing. All are unsplit with empty proofs and real Stacks tag/label sources; searches are recorded. Small cases checked: P^1 gives R=2n+1, a conic in P^3; an elliptic cubic gives R=6n; Spec k[e] gives R=2; empty fibres give 0; cX!=cY is vacuous. Not duplicates: lem-sfb-flat-projective-hilbert-polynomial-locality (given family), lem-sfb-proper-curve-automorphism-scheme (Aut over a field), the lem-sc immersion-locus gluing nodes. No SGA; route is Stacks 0DSQ. Maintainer notes: the item tool_uses still lists the old proof's tools and needs a refresh at merge; the landed Lean's imports and docstring follow the old proof_deps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveIsomGraphs",
+  "declaration": "AlgebraicGeometry.exists_projective_curve_isom_graphs",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveIsomGraphs.lean",
+  "statement": "theorem exists_projective_curve_isom_graphs {S X Y : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) (g : Y ⟶ S) [IsHProjective f] [IsHProjective g] [Flat f] [Flat g] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (hX : ∀ s : S, topologicalKrullDim (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) ≤ 1) (hY : ∀ s : S, topologicalKrullDim (pullback g (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) ≤ 1) : ∃ J : Over S, IsSeparated J.hom ∧ LocallyOfFinitePresentation J.hom ∧ QuasiCompact J.hom ∧ QuasiSeparated J.hom ∧ ∃ e : ∀ T : Over S, (T ⟶ J) ≃ (Over.mk (pullback.fst T.hom f) ≅ Over.mk (pullback.fst T.hom g)), (∀ (T' T : Over S) (h : T' ⟶ T) (a : T ⟶ J), ((Over.pullback f).map h).left ≫ (e T a).hom.left = (e T' (h ≫ a)).hom.left ≫ ((Over.pullback g).map h).left) ∧ (∀ (T : Over S) (a : T ⟶ J), ∃ (D : Scheme.{u}) (i : D ⟶ pullback (pullback.fst T.hom f) (pullback.fst T.hom g)), IsClosedImmersion i ∧ ∃ (p : D ≅ pullback T.hom f) (q : D ≅ pullback T.hom g), i ≫ pullback.fst _ _ = p.hom ∧ i ≫ pullback.snd _ _ = q.hom ∧ p.inv ≫ q.hom = (e T a).hom.left) ∧ (∀ (T : Over S) (D : Scheme.{u}) (i : D ⟶ pullback (pullback.fst T.hom f) (pullback.fst T.hom g)), IsClosedImmersion i → ∀ (p : D ≅ pullback T.hom f) (q : D ≅ pullback T.hom g), i ≫ pullback.fst _ _ = p.hom → i ≫ pullback.snd _ _ = q.hom → ∃! a : T ⟶ J, (e T a).hom.left = p.inv ≫ q.hom)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d5a91c9d",
+  "group": "O4",
+  "result": "pass",
+  "note": "Node unchanged from the stage-1 PASS except the lean record. The statement field matches the file signature verbatim. Hypotheses: IsLocallyNoetherian S; IsHProjective, Flat, LFP+QC+QS for f and g (recorded conventions; QC/QS are already implied by IsProper); geometric-fibre topologicalKrullDim <= 1 along the recorded residue-field algebraic-closure point. Conclusion: J : Over S that is IsSeparated, LFP, QC, QS; e T : (T ⟶ J) ≃ isomorphisms in Over T of the base changes; naturality via the canonical Over.pullback maps (pins the base change, so arbitrary base change follows); closed-immersion graph clauses in both directions with p.inv ≫ q.hom = e a. The graph clauses are consequences of separatedness, a faithful rendering, not hollow. Edge cases covered: empty S/X/Y, fibre dimension below one, nonreduced test schemes. Single universe u, no unbound variables. Imports follow brief-stage2:104 (public for stmt_deps, plain for stated proof deps; the 4 unstated proof nodes are left unimported). Docstrings carry the source place, the blueprint id and the 9-step proof. No existing Isom/Hilbert declaration in side-live or slopmaster2. Only sorry; no hollow definitions; no pro-étale substitute. Report has Worker report and Second reading sections. Not recompiled (2026-10-21 rule); the worker reports a clean scompile."
+ }
+}

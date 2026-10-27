@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-jacobson-marked-free-complex-lift",
+ "kind": "statement",
+ "title": "Lifting a prescribed finite-free derived model modulo a Jacobson ideal",
+ "statement": "Let $R$ be a commutative unital ring and $I\\subset R$ an ideal such that every element of $1+I$ is invertible. Let $K\\in D(R)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Write $Q_R$ and $Q_{R/I}$ for the localization functors from complexes to the respective derived categories, and write $L=-\\otimes_R^{\\mathbf L}R/I$ for derived extension of scalars [lem-pur-derived-change-of-rings] on the one-object point site. Let $F^\\bullet$ be a complex of finite free $R/I$-modules, let $b\\in\\mathbb Z$, and assume $F^i=0$ for $i>b$. For every specified isomorphism $\\alpha:L(K)\\xrightarrow{\\sim}Q_{R/I}(F^\\bullet)$, there exist a complex $P^\\bullet$ of finite free $R$-modules with $P^i=0$ for $i>b$, an isomorphism $\\beta:Q_R(P^\\bullet)\\xrightarrow{\\sim}K$, and an isomorphism of complexes $\\theta:P^\\bullet\\otimes_R R/I\\xrightarrow{\\sim}F^\\bullet$ such that\n$$Q_{R/I}(\\theta)\\circ c_P=\\alpha\\circ L(\\beta),$$\nwhere $c_P:L(Q_R(P^\\bullet))\\xrightarrow{\\sim}Q_{R/I}(P^\\bullet\\otimes_R R/I)$ is the canonical comparison computed on the bounded-above free, hence K-flat, complex $P^\\bullet$. No nilpotence of $I$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCB, lemma-lift-complex-stably-frees, finite-free case; Tag 0BCA, lemma-lift-complex, proof with delta chosen to represent the inverse of the specified alpha; preservation of the cutoff follows by finite Nakayama (Tag 00DV)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R/I$, and write $\\overline M=S\\otimes_R M$ for modules and termwise for complexes. Use the class $\\mathcal P$ of finite projective $R$-modules in the lifting lemmas. This class satisfies their sum/summand condition: projectivity of a direct sum follows by lifting its two component maps along a surjection; projectivity of a summand follows by extending a map by zero on its complement and restricting a lift. For finiteness, concatenate generating sets for a sum and project a finite generating set onto a summand. These are the lifting characterization of projectivity and direct-sum operations, with no freeness claim about arbitrary projective summands. Maps between class members that are surjective after reduction are surjective by the cited finite Nakayama consequence. The zero module belongs to the class.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-sc-finite-module-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), hypotheses (1)--(3); Tag 00DV (algebra-lemma-NAK), clause (6)"
+   }
+  },
+  {
+   "text": "Pseudo-coherence supplies a bounded-above finite-free complex $H$ and $h:Q_RH\\xrightarrow{\\sim}K$. Free modules are projective and projective modules are flat, so $H$ is K-flat by the bounded-above flat criterion. Its canonical computation isomorphism is $c_H:L(Q_RH)\\xrightarrow{\\sim}Q_S\\overline H$. The bounded-above projective complex $F$ represents every derived map out of $Q_SF$ by a chain map. Choose $\\delta:F\\to\\overline H$ whose derived class is exactly\n$$Q_S\\delta=c_H\\circ L(h^{-1})\\circ\\alpha^{-1}.$$\nThis is an isomorphism, so $\\delta$ is a quasi-isomorphism. This choice retains the specified marking rather than merely choosing some isomorphism between the two derived objects.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-free-module-projective",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-ring-derived-map-representative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), first paragraph, choosing delta; Tag 064B (derived-lemma-morphisms-from-projective-complex); Tag 064K (more-algebra-lemma-derived-tor-quasi-isomorphism)"
+   }
+  },
+  {
+   "text": "Form the actual cone $C=\\operatorname{Cone}(\\delta)$, with $C^i=\\overline H^i\\oplus F^{i+1}$ and differential $(x,y)\\mapsto(d_Hx+\\delta y,-d_Fy)$. The cone-properties node makes it bounded above and acyclic. Each term is a finite-free $S$-module, hence is the reduction of a finite-free $R$-module, which belongs to $\\mathcal P$. Apply the acyclic-complex lifting node to this $C$ and the class verified in step 1. It gives a bounded-above acyclic $R$-complex $A$ with finite projective terms and an isomorphism $e:\\overline A\\xrightarrow{\\sim}C$. No nilpotence or completeness is used in this application.",
+   "uses": [
+    "lem-sc-complex-lift-cone-properties",
+    "lem-sc-complex-lift-acyclic-projective",
+    "lem-weil-pbc-free-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), cone paragraph; Tag 0BC9 (lemma-lift-acyclic-complex)"
+   }
+  },
+  {
+   "text": "The strict-map node lifts the cone inclusion $j:\\overline H\\to C$ to $f:H\\to A$ with $e\\circ\\overline f=j$. Let $B=\\operatorname{coker}(f)$ as an actual complex, with quotient $g:A\\to B$. The cone-cokernel node identifies $\\overline B$ with $F[1]$ and says that the reduced cokernel sequence is split in every degree. Choose its canonical identification $\\eta:\\overline B\\xrightarrow{\\sim}F[1]$: in degree $i$ the quotient class of $a$ maps to the second coordinate of $e^i(\\overline a)$. It is well-defined and bijective because the reduced quotient is the cokernel of $x\\mapsto(x,0)$, and it commutes with differentials because the second cone differential is $-d_F$. Thus $\\eta\\circ\\overline g=\\operatorname{pr}_F\\circ e$. For each $i$, apply the reduced-splitting node to $H^i\\to A^i\\to B^i$. Its first two terms lie in $\\mathcal P$, and $\\overline B^i\\cong F^{i+1}$ is the reduction of a finite free module. Hence the original sequence is short exact and $B^i\\in\\mathcal P$. It is split in each degree by projectivity of $B^i$. Boundedness above follows from $B^i$ being a quotient of $A^i$.",
+   "uses": [
+    "lem-sc-complex-lift-strict-map",
+    "lem-sc-complex-lift-cone-cokernel",
+    "lem-sc-projective-class-reduced-splitting",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), dotted arrow, cokernel, and final split-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "Set $P=B[-1]$ and let $\\theta:\\overline P\\xrightarrow{\\sim}F$ be $\\eta[-1]$, with the canonical cancellation of the shifts. The terms of $P$ are finite projective. Because $\\overline P^i\\cong F^i$ is free, the finite-projective/free-reduction node makes every $P^i$ free. For $i>b$ its reduction is zero. Apply the finite Nakayama surjectivity node to $0\\to P^i$: its reduction is surjective, so the original map is surjective and $P^i=0$. This preserves the specified cutoff even though the acyclic lift may initially have had a larger bound. The complexes $H,A,B,P$ have projective, hence flat, terms and are bounded above, so all four are K-flat by the cited criterion.",
+   "uses": [
+    "lem-sc-finite-projective-free-mod-ideal",
+    "lem-sc-finite-module-surjective-mod-ideal",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0BCB (lemma-lift-complex-stably-frees), final assertion; 0BC6 (lemma-isomorphic-finite-projective-lifts); 00DV (algebra-lemma-NAK), clause (6); 064K"
+   }
+  },
+  {
+   "text": "The sequence $0\\to H\\xrightarrow f A\\xrightarrow g B\\to0$ has its canonical derived triangle and boundary $s:Q_RB\\to Q_RH[1]$. Acyclicity identifies $Q_RA$ with zero: the map $0\\to A$ is a quasi-isomorphism. Exactness of Hom into this triangle and its rotations makes $s$ an isomorphism: for every $W$, $\\operatorname{Hom}(W,s)$ is surjective and has zero kernel because the adjacent Hom groups into $Q_RA$ and $Q_RA[1]$ vanish. Taking $W=Q_RH[1]$ gives a right inverse and injectivity for $W=Q_RB$ makes it a left inverse. Write $t:Q_RP\\xrightarrow{\\sim}Q_RH$ for $s[-1]$ under the canonical shifts and put $\\beta=h\\circ t$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (derived-lemma-derived-canonical-delta-functor); Tag 0149 (derived-lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Compute the boundary of the reduced sequence using $e$ and $\\eta$. It is the boundary of\n$$0\\to\\overline H\\xrightarrow{x\\mapsto(x,0)}\\operatorname{Cone}(\\delta)\\xrightarrow{(x,y)\\mapsto y}F[1]\\to0.$$\nFor its displayed splittings $\\pi(x,y)=x$ and $u(y)=(0,y)$, the degree-$i$ boundary is $\\pi^{i+1}d_C^iu^i(y)=\\delta^{i+1}(y)$. The degreewise-split derived-triangle node therefore identifies this canonical boundary with $Q_S(\\delta[1])$. In particular this calculation fixes the sign using the cone convention with third arrow minus the projection; no unspecified triangle isomorphism is chosen. Apply the ringed K-flat pullback/SES node on the point site to $R\\to S$ and the sequence of step 6. Its flat-term and K-flat hypotheses were checked in step 5. Its boundary and shift identities, shifted by $-1$, give\n$$c_H\\circ L(t)=Q_S(\\delta)\\circ Q_S(\\theta)\\circ c_P.$$\nHere $\\theta$ is precisely the shifted quotient map fixed in step 5, so the comparison uses the same marking and not a replacement of it.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-sfb-ringed-kflat-pullback-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014I (derived-definition-split-ses), 014L (derived-lemma-the-same-up-to-isomorphisms), 0152; derived pullback as in sites-cohomology.tex, Tag 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "By the choice in step 2, $Q_S(\\delta)\\circ\\alpha\\circ L(h)=c_H$. Substitute the equation of step 7 and $\\beta=h\\circ t$ to obtain\n$$\\alpha\\circ L(\\beta)=\\alpha\\circ L(h)\\circ c_H^{-1}\\circ Q_S(\\delta)\\circ Q_S(\\theta)\\circ c_P=Q_S(\\theta)\\circ c_P.$$\nTogether with the finite freeness and exact cutoff of step 5, these are all the required data and the required equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCA (lemma-lift-complex), concluding identification, with the specified delta retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel",
+  "lem-sc-projective-class-reduced-splitting",
+  "lem-sc-finite-projective-free-mod-ideal",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-sfb-ringed-kflat-pullback-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA (lemma-lift-complex), specialized to finite projectives with finite-free reduction; marking made explicit using derived.tex Tags 014I, 014L, 0152 and the existing ringed K-flat SES compatibility node. This supplies the marked finite-free case of Tag 0BCB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lift.*[Cc]omplex|[Cc]omplex.*lift|[Pp]seudo[Cc]oherent",
+   "results": "{\"t\": \"2026-10-23T23:33:15Z\", \"tool\": \"grep\", \"query\": \"lift.*[Cc]omplex|[Cc]omplex.*lift|[Pp]seudo[Cc]oherent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"bc8b9333a8290a76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Nakayama, module lifting, adic completeness and maps of complexes do not lift a prescribed derived finite-free model with its marking; no exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Free",
+   "results": "{\"t\": \"2026-10-23T23:33:15Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Nakayama, module lifting, adic completeness and maps of complexes do not lift a prescribed derived finite-free model with its marking; no exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a chosen finite free complex representing the derived reduction of a pseudo coherent object modulo a Jacobson radical ideal",
+   "results": "{\"t\": \"2026-10-23T23:33:15Z\", \"tool\": \"leansearch\", \"query\": \"Lift a chosen finite free complex representing the derived reduction of a pseudo coherent object modulo a Jacobson radical ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isIso_liftCycles_iff\", \"IsAdicComplete.lift\", \"IsAdicComplete.of_comp_lift\", \"CochainComplex.liftCycles_shift_homologyπ_assoc\", \"CategoryTheory.ShortComplex.Exact.liftFromProjective\", \"Hausdorffification.lift_comp_of\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\"], \"digest\": \"fb3afd2bb2651577\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Nakayama, module lifting, adic completeness and maps of complexes do not lift a prescribed derived finite-free model with its marking; no exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a prescribed bounded above finite free model and its derived marking modulo an ideal in the Jacobson radical",
+   "results": "{\"t\": \"2026-10-23T23:33:16Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a prescribed bounded above finite free model and its derived marking modulo an ideal in the Jacobson radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.exists_smodEq_untiltAux\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"IsAdicComplete.StrictMono.mk_lift\", \"Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"HenselianRing\", \"IsAdicComplete.henselianRing\"], \"digest\": \"842673d73389105e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Nakayama, module lifting, adic completeness and maps of complexes do not lift a prescribed derived finite-free model with its marking; no exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent derived module admits a finite stably free complex lifting any prescribed reduction over a Jacobson ideal",
+   "results": "{\"t\": \"2026-10-23T23:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudo coherent derived module admits a finite stably free complex lifting any prescribed reduction over a Jacobson ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot\", \"Module.free_of_flat_of_finrank_eq\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Module.free_of_lTensor_residueField_injective\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.FinitePresentation.exists_free_localizedModule_powers\"], \"digest\": \"955fda21a186fc34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Nakayama, module lifting, adic completeness and maps of complexes do not lift a prescribed derived finite-free model with its marking; no exact or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nil-ring-pseudocoherent-derived-limit",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited formal effectivity prerequisite: the invocation of Stacks 0BCB in the proof of 0CQF, with the prescribed derived marking retained from the choice of delta in 0BCA.",
+   "via": [
+    "lem-sfb-nil-ring-pseudocoherent-derived-limit",
+    "lem-sfb-nil-ring-perfect-derived-limit",
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-jacobson-marked-free-complex-lift",
+  "worker": "stage1",
+  "summary": "Checked the prescribed-marking strengthening of 0BCB against the actual 0BCA cone construction. Reused the existing cone, acyclic lift, strict lift, reduced splitting, Nakayama and normalized triangle-comparison nodes; no new nodes. Chose delta for the inverse of alpha, retained the actual cokernel identification, computed the boundary sign with explicit splittings, and detected the original cutoff by finite Nakayama. Statement unchanged; no nilpotence used.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): inherited formal-effectivity input along the original chain recorded in blueprint.from.via. The created.item chain has no imported ancestor (blueprint_refs ancestor returned None); retained the inherited null from.node and precise from.place rather than inventing one. No unit route or unit realization field changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-module-surjective-mod-ideal",
+    "why": "Finite Nakayama detects surjectivity and vanishing over a Jacobson quotient; a generic algebra tool, not a replacement of the six-functor route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Computes derived extension on bounded-above flat module complexes; a generic homological algebra tool needed for the canonical marking."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic algebra/derived-category tool used with its exact hypotheses, below the inherited formal-effectivity route; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-complex-lift-cone-properties",
+    "why": "The actual cone of the prescribed quasi-isomorphism is acyclic and bounded above; a generic cone tool retaining delta."
+   },
+   {
+    "node": "lem-sc-complex-lift-acyclic-projective",
+    "why": "Lifts the acyclic cone in the finite-projective class; generic algebraic lifting prerequisite to the inherited formal-effectivity argument."
+   },
+   {
+    "node": "lem-sc-complex-lift-strict-map",
+    "why": "Gives a strict lift of the cone inclusion, needed to form the actual cokernel and retain its marking."
+   },
+   {
+    "node": "lem-sc-complex-lift-cone-cokernel",
+    "why": "Identifies the actual reduced cokernel and its degreewise splitting; a generic complex calculation."
+   },
+   {
+    "node": "lem-sc-projective-class-reduced-splitting",
+    "why": "Promotes reduced split injectivity to the original finite-projective short exact sequence."
+   },
+   {
+    "node": "lem-sc-finite-projective-free-mod-ideal",
+    "why": "Makes the lifted finite-projective terms free when their reductions are free; generic algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel",
+  "lem-sc-projective-class-reduced-splitting",
+  "lem-sc-finite-projective-free-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-fbfd51486",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-fbfd51486 (reviewer sub-agent of L); spot-checked: I read all 8 steps and all 19 cited statements. The statement is unchanged from live (still unsplit there), with no new nodes and no repair note. It follows Stacks 0BCA (l.19389-19466) specialized as in 0BCB with the class of finite projectives: 𝒫 meets acyclic-projective (1)-(3) and the iff sum/summand condition, and Nakayama is 00DV(6) via lem-sc-finite-module-surjective-mod-ideal with a finite target. Step 2 chooses δ with Q(δ)=c_H L(h⁻¹)α⁻¹ through derived-map-representative, so the marking is kept. Steps 3-5 cover cone-properties, acyclic lift, strict lift (e∘f̄=j), cone-cokernel with an explicit η, reduced splitting with B^i∈𝒫, freeness by 0BC6, and the cutoff b by Nakayama on 0→P^i. In step 6, s is an iso because Q(A)=0 (Hom exactness on rotations). For step 7 I checked by hand that −p∘q⁻¹ equals π d u for a degreewise split sequence, so the boundary is Q(δ[1]) and naturality under (id,e,η) applies. The ringed K-flat SES node fits on the point site (u=id, flat-term K-flat complexes, no flatness of u needed). Its ε equals the item's c by the universal property of the left derived functor of S⊗_R−, which I accept as elementary. Step 8's algebra recomputed gives αL(β)=Q(θ)c_P. Edge cases: I=0, F=0, R=Z_(p) with I=(p) (not nilpotent). No duplicate: the nilpotent marked lift is a special case, and the 0BCB/0BCA nodes are unmarked. The declared tool_uses are generic algebra and I accept them. Batch-5: lem-trf-geometric-inverse-image-exact (exactness of geometric inverse image, 04JC) is a generic topos fact, not part of the trace formula or Poincaré proofs, so it is OK. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobsonMarkedFreeComplexLift",
+  "declaration": "DerivedCategory.exists_marked_finiteFree_lift_of_jacobson",
+  "file": "lean/Sheaf/RingTheory/JacobsonMarkedFreeComplexLift.lean",
+  "statement": "theorem exists_marked_finiteFree_lift_of_jacobson {R : Type u} [CommRing R] (I : Ideal R) (hunits : ∀ x : I, IsUnit (1 + (x : R))) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (L : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (ModuleCat.{max u v} (R ⧸ I))) (ε : Q ⋙ L ⟶ (ModuleCat.extendScalars.{u, u, max u v} (Ideal.Quotient.mk I)).mapHomologicalComplex (.up ℤ) ⋙ Q) [L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat.{max u v} R) (.up ℤ))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (F : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (b : ℤ) (hFbound : F.IsStrictlyLE b) (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i)) (α : L.obj K ≅ Q.obj F) : ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ) (β : Q.obj P ≅ K) (θ : ((ModuleCat.extendScalars.{u, u, max u v} (Ideal.Quotient.mk I)).mapHomologicalComplex (.up ℤ)).obj P ≅ F), P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) ∧ ε.app P ≫ Q.map θ.hom = L.map β.hom ≫ α.hom",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-099af85bf",
+  "group": "NI",
+  "result": "pass",
+  "note": "Only the lean field differs from live, plus the new module JacobsonMarkedFreeComplexLift. Clause by clause the Lean matches the node: the 1+I units condition is exact with no nilpotence; IsPseudoCoherent K; F is finite free with IsStrictlyLE b; alpha is universally quantified; P/beta/theta are existential with the same b and finite free terms; the equation eps.app P ≫ Q.map theta = L.map beta ≫ alpha is Q(theta)∘c_P = alpha∘L(beta), directions checked. (L, eps, IsLeftDerivedFunctor) are the universal fields of the recorded OrdinaryDerivedChangeOfRings generalized to max u v, matching the landed nilpotent sibling; no universe restriction. Edge cases I=0, F=0, zero ring, I=top, Z_(p), negative b are covered. No duplicate: the nilpotent marked lifts are special cases and exists_stablyFree_lift_mod_ideal is unmarked with no cutoff. Docstrings carry source and blueprint tags and all 8 proof steps; statement field verbatim; all imports exist; proof is sorry only; report sections present. No file changed, so no compile. No findings."
+ }
+}

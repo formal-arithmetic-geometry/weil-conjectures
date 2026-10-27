@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-countable-finite-lists",
+ "kind": "statement",
+ "title": "Finite lists over a countable type are countable",
+ "statement": "Work in the universes of [def-weil-size-convention], and use countability as in [def-sfb-countable-set]. Let $X$ be any countable type. The type $\\operatorname{List}(X)$ of all finite ordered lists of elements of $X$, including the empty list, is countable.",
+ "source": {
+  "document": "Mathlib/Logic/Equiv/List.lean",
+  "place": "List.countable, lines 66–68 (instance for any countable type; explicit list encoding appears immediately above)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-countable-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Countable.*List|List.*Countable|countable_list",
+   "results": "{\"t\": \"2026-10-24T00:34:06Z\", \"tool\": \"grep\", \"query\": \"Countable.*List|List.*Countable|countable_list\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Logic/Encodable/Pi.lean\", \"Mathlib/Logic/Equiv/List.lean\", \"Mathlib/Logic/Equiv/Array.lean\", \"Mathlib/SetTheory/Cardinal/Arithmetic.lean\", \"Mathlib/SetTheory/Cardinal/Free.lean\"], \"digest\": \"b8df0df872769b64\"}",
+   "date": "2026-10-24",
+   "verdict": "match: List.countable, Mathlib/Logic/Equiv/List.lean:66–68, exact; the source and its type were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If X is countable then List X is countable",
+   "results": "{\"t\": \"2026-10-24T00:34:06Z\", \"tool\": \"leansearch\", \"query\": \"If X is countable then List X is countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"List.countable\", \"Denumerable.denumerableList\", \"Cardinal.mk_list_eq_aleph0\", \"Countable.to_set\", \"Set.Countable\", \"Cardinal.mk_list_le_max\", \"Cardinal.mk_list_eq_mk\", \"Set.to_countable\"], \"digest\": \"5ddaca2afc6f63a9\"}",
+   "date": "2026-10-24",
+   "verdict": "match: List.countable, Mathlib/Logic/Equiv/List.lean:66–68, exact; the source and its type were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"List\"",
+   "results": "{\"t\": \"2026-10-24T00:34:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Countable\\\", \\\"List\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"List.countable\", \"Encodable.List.Vector.countable\"], \"digest\": \"dccb576b95c664c9\"}",
+   "date": "2026-10-24",
+   "verdict": "match: List.countable, Mathlib/Logic/Equiv/List.lean:66–68, exact; the source and its type were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite lists of elements of a countable type form a countable type",
+   "results": "{\"t\": \"2026-10-24T00:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"Finite lists of elements of a countable type form a countable type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"List.countable\", \"Array.countable\", \"Finset.countable\", \"Encodable.List.Vector.countable\", \"Denumerable.denumerableList\", \"Finite.to_countable\", \"Cardinal.mk_list_eq_aleph0\", \"Set.Countable.setOf_finite\"], \"digest\": \"b868232764c1cdef\"}",
+   "date": "2026-10-24",
+   "verdict": "match: List.countable, Mathlib/Logic/Equiv/List.lean:66–68, exact; the source and its type were read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "List.countable",
+  "file": "Mathlib/Logic/Equiv/List.lean",
+  "line": 66,
+  "how": "exact: instance _root_.List.countable {α : Type*} [Countable α] : Countable (List α), lines 66–68; no nonemptiness or infinitude hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-submodule-representative",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRM, lemma-countable, proof (2) to (1), countable module representative and countable property-(P) resolution paragraphs; Tags 09KN, lemma-good-quotient, and 09KP, lemma-resolve. The homogeneous basis and height are the graded splittings in property (P). Supporting subargument: Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction. Finite-sum countability in the countable generated DG submodule: finite ordered lists over a countable alphabet are countable.",
+   "via": [
+    "lem-sfb-dg-countable-submodule-representative",
+    "lem-sfb-dg-countable-semi-free-resolution",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

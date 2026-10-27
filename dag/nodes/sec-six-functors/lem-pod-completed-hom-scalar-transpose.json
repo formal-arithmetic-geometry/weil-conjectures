@@ -1,0 +1,356 @@
+{
+ "id": "lem-pod-completed-hom-scalar-transpose",
+ "kind": "statement",
+ "title": "Completed internal-Hom scalar transpose on perfect point models",
+ "statement": "Fix $s=\\operatorname{Spec}k$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient extensions $E\\subset L\\subset\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Write $R=\\mathcal O_E$, $S=\\mathcal O_L$, $B=\\widehat{\\mathcal O}_{E,s}$, $B'=\\widehat{\\mathcal O}_{L,s}$ [def-weil-completed-integral-coefficients]. Let $P$ be a bounded complex of finite-projective $R$-modules [def-pc-perfect-ring-complex], $P_L=P\\otimes_R S$, and $P^\\vee=\\operatorname{Hom}_R^\\bullet(P,R[0])$. Constant module sheaves are denoted by underlines [def-weil-proetale-locally-constant-sheaf]. Set $K=B\\otimes_{\\underline R}\\underline P$, $H=B\\otimes_{\\underline R}\\underline{P^\\vee}$, $K_L=B'\\otimes_{\\underline S}\\underline{P_L}$, and $J_L=B'\\otimes_{\\underline S}\\underline{\\operatorname{Hom}_S^\\bullet(P_L,S[0])}$ [def-pur-sheaf-tensor-product, def-pur-hom-complex]. Assume $K,H\\in D^b_c(s,R)$ [def-weil-derived-complete-integral-detailed]. Use their ordinary finite-projective internal-Hom identifications and the specified completed evaluation of [lem-pod-point-completed-evaluation]. These models and their evaluation tensor products lie in the derived-complete bounded constructible categories and have finite Tor amplitude [def-weil-finite-tor-amplitude], uniformly over all finite reductions.\nPut $F=-\\otimes_B^L B'$ and let $\\chi:F\\xrightarrow{\\sim}T_{L/E}$ be the canonical strict-cone completion map [lem-weil-finite-free-completed-scalar-comparison], where $T_{L/E}$ is [def-weil-integral-scalar-extension]. Fix the quotient-normalized comparison of [lem-pur-integral-operations-scalar-extension]: its tensor map at every finite quotient sends $(x\\otimes\\bar a)\\otimes(y\\otimes\\bar b)$ to $(x\\otimes y)\\otimes\\bar a\\bar b$, compatibly with the quotient transitions, and its internal-Hom arrow $\\delta:T_{L/E}H\\to R\\mathcal Hom_{B'}(T_{L/E}K,B')$ is the transpose of the extended completed evaluation.\nUnder $FK\\cong K_L$, given by $(b\\otimes x)\\otimes b'\\mapsto bb'\\otimes(x\\otimes1)$ with inverse $b'\\otimes(x\\otimes a)\\mapsto(1\\otimes x)\\otimes ab'$, and the analogous Hom-model identifications, the conjugate of $\\delta$ by $\\chi$ is the actual cochain map\n$$\\gamma:FH\\longrightarrow J_L,\\qquad \\gamma(h\\otimes a)(z\\otimes b)=h(z)ab.$$\nHere $h$ is a local homogeneous $B$-linear functional on $K$, $z$ a local homogeneous section of $K$, and $a,b$ local sections of $B'$, with the scalar images understood. Its uncurried evaluation is $(-1)^{\\deg z\\deg h}h(z)ab$. The compatibility with $\\chi$ is equality of the maps from the ordinary models to the strict quotient towers, including the quotient-map product components and zero shifted-product components of the completion maps, and hence equality in $D(B')$. The maps are natural on all derived morphisms of perfect models. For $L=E$ they are the identity under multiplication and completeness. For $E\\subset L\\subset M$ they respect the specified integral associator obtained by conjugating the ordinary tensor associator by $\\chi$; at every quotient the two successive coefficient multiplications and direct multiplication are the same. No assertion about taking sections is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-perfect-ring-complex",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-hom-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pod-point-completed-evaluation",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Pass the original characteristic, boundedness, termwise finite-projectivity and six finite-Tor constructibility hypotheses unchanged to lem-pod-scalar-hom-derived-normalization. That node handles the bounded-flat and K-flat representative arguments. The parent does not reconstruct those arguments or assume any sheaf term is globally projective.",
+   "uses": [
+    "lem-pod-scalar-hom-derived-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "The displayed map FK to K_L and its displayed inverse are balanced: moving r in R or a in S across a tensor has exactly the same effect as multiplying its image in B'. Their composites send (b tensor x) tensor b' to (1 tensor x) tensor bb'=(b tensor x) tensor b' and send b' tensor (x tensor a) to ab' tensor (x tensor 1)=b' tensor (x tensor a). They preserve differentials because all coefficient scalars have degree zero. The same balancing identifies FH with the extension of the dual model. These constructions commute with restrictions, so sheafification of the presheaf tensors gives the claimed sheaf-complex identifications. Use [def-pur-sheaf-tensor-product]. Stage-3 partial implementation: the ordinary transport of the two scalar implementations is the inverse of the already proved ordinaryScalarModelIso in IntegralScalarExtensionConstructible, extended termwise. Its generator equation follows by applying the inverse to ordinaryScalarModelIso_transport and cancelling the isomorphism. For uniqueness, compare the hom components degree by degree using completedScalar_tensor_ext. This proves ordinaryTransport_existsUnique without changing either ordinary scalar construction; The coefficient identification coefficientBaseChange_existsUnique is obtained by transporting the proved scalar-extension unit isomorphism of [lem-pd-sheaf-scalar-extension-constraint-coherence] through the ordinary tensor witness and then Mathlib singleMapHomologicalComplex. Its multiplication formula follows from unitForward_tmul, functoriality on tensor generators and the degree-zero single-complex comparison. Tensor-presentation extensionality and to_single_hom_ext prove uniqueness. modelBaseChange_existsUnique remains open.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "Apply lem-pod-scalar-hom-cochain-pairing to h,h_L and the chosen modelBaseChange k. Its hypotheses are exactly the two given Hom normalizations and modelBaseChange_existsUnique.choose_spec. It gives an actual cochain map gamma, together with gamma(a tensor f)(k(b tensor z))=image(h(f)(z))*a*b for every pair of degrees summing to zero and every local section. Its conclusion does not already include any derived comparison, signed uncurrying or completion square; those are supplied in the next three steps.",
+   "uses": [
+    "lem-pod-scalar-hom-cochain-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "Construct signed uncurrying using the existing totalTensor functor map on gamma followed by h_L (definitionally mapBifunctorMap(identity,gamma followed by h_L)), followed by the proved evaluation chain map of lem-pod-point-sheaf-hom-maps. Fix the countable-totalization and tensor zero-preservation instances explicitly. The summand inclusion identity for mapBifunctorMap and moduleTmul_map from lem-pur-module-tensor-generator-calculus send totalElement(z,f) to totalElement(z,(gamma followed by h_L)(f)). The evaluation formula is therefore (-1)^(p*j) times the value supplied by the ordinary chain formula. Applying the coefficient single-complex identification preserves this integer scalar multiplication.",
+   "uses": [
+    "lem-pod-point-sheaf-hom-maps",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 08J9 (lemma-internal-hom, K-flat/K-injective proof) and 0FPT (lemma-symmetric-monoidal-derived)"
+   }
+  },
+  {
+   "text": "Write A'_m=(S/varpi_L^m)_s and let q_m:B' to A'_m be the quotient. Reduce e' and the ordinary scalar-association map on the representatives of step 1. The two uncurried routes at m, with the quotient-normalized tensor comparison stipulated in the item, both send (z tensor bar b) tensor (h tensor bar a) to (-1)^(pj) q_m(h(z)) bar a bar b. Quotient transitions commute with this formula since they are ring maps. The completed tensor operation is the strict limit of these reduction tensors by [def-pur-integral-derived-operations]. The completion augmentations of [lem-weil-finite-free-completed-scalar-comparison] have the family of quotient maps as product component and zero shifted-product component. A strict tower map acts diagonally on the two products by [def-weil-strict-roos-model]. In the coordinates F(X)^(r+1)=P(X)^r direct-sum P(X)^(r+1) fixed by [def-weil-strict-roos-model], both composites in source degree r+1 are exactly (0,(q_m e')_m): applying the diagonal tower map to (0,(q_m)_m) gives this pair, as does augmenting after e'. This proves equality of actual maps into the specified shifted cones, not an inference that equality after reduction detects arbitrary derived maps. The identical computation over B, with L=E, identifies the ordinary evaluation e with the specified completed evaluation under the identity completion comparisons. For completion_implementation_transport, use the existing normalization proof of integralScalarCompletionChain_existsUnique to identify the selected chain map with the termwise ordinaryScalarModelIso followed by completedScalarChainComparison. Identify ordinaryTransport with the inverse of that same termwise isomorphism using its tensor-normalized uniqueness. Cancellation gives the strict chain equality. The cochain scalar model supplies a natural counit and its universal left-derived property; cache its actual counit in a private definition and use its proved component normalization. Universal uniqueness of left-derived functors transports the ordinary scalar functor along ordinaryTransport. The other derived implementation transport is the identity on the definitionally identical completed scalar functor. The scalarCompletion and completedScalarComparison representative equations, together with the strict chain equality, give the comparison square on good complexes. Localization extends the equality and proves uniqueness of both transports. This proves completion_implementation_transport without changing any public definition or signature. H3 proves CompletionSquare for every cochain map f: naturality supplies the square; witnessTensor_naturality moves f across an ordinary tensor generator, so the completion normalization supplies the quotient coordinate; associativity and the zero shifted-coordinate normalization supply the last coordinate. Apply this separately to gamma and to the constructed signed evaluation.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-strict-roos-model",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "Apply lem-pod-scalar-hom-derived-normalization to the gamma from step 3. Supply modelBaseChange and coefficientBaseChange and their already stated generator normalizations, and the original h,h_L Hom normalizations and ordinary-to-derived isomorphism hypotheses. Its conclusion is definitionally the identifiedTranspose equality. Combine it with gamma, the local formula, the signed evaluation from step 4 and CompletionSquare for both maps from step 5 to prove ModelResult. Separately, completed_conjugation is the definition of scalarHomCompleteInputs: cancel the output scalarCompletionIso with its inverse, combine the internal-Hom functor maps and cancel the opposite input and output comparison isomorphisms. This separate cancellation requires no implementation transport.",
+   "uses": [
+    "lem-pod-scalar-hom-derived-normalization",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "The operation comparison of [lem-pur-integral-operations-scalar-extension] is natural on the derived categories, and chi is natural there by [lem-weil-finite-free-completed-scalar-comparison]. The balancing isomorphisms of step 2 are the canonical tensor identifications, and the Hom-model identifications are the canonical ordinary-to-derived Hom maps stipulated in the hypotheses. They commute with tensor morphisms and precomposition. Thus conjugating the naturality square of delta by these identifications proves naturality of gamma for every derived morphism of perfect models. In particular this argument includes inverse quasi-isomorphisms; it does not require that all sheaf-derived morphisms be represented by cochain maps between the fixed models. For a cochain map u the square reads gamma_P(u^vee h tensor a)(z tensor b)=h(u(z))ab=(u_L^vee gamma_Q(h tensor a))(z tensor b). The formal derived_coherence naturality clause is exactly scalarHomOrdinary_naturality specialized to M=model(P), M'=model(Q), N=N'=B[0], a=v and b=identity. Rewrite the image of the identity by the ordinary derived scalar functor as identity. This includes arbitrary derived v.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "For L=E, multiply away the scalar factors. The formula becomes h tensor a mapped to the functional z mapped to h(z)a, which is exactly the functional ah corresponding to h tensor a. Hence gamma is the identity under multiplication. The identity case of [lem-weil-finite-free-completed-scalar-comparison] identifies chi with the specified completeness map; the coordinate equality of step 5 gives the same identity for the completed comparison. Formally, the identity conjunct of derived_coherence is the Hom conjunct (.2.2) of scalarOperationsOrdinary_unit, with the scheme map chosen to be the identity on Spec(k).",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  },
+  {
+   "text": "For E contained in L contained in M put B''=widehat O_(M,s). Evaluate the two successive scalar maps on ((h tensor a) tensor c) and ((z tensor b) tensor d), with a,b in B' and c,d in B''. The result is h(z) i(a)i(b)cd, where i:B' to B''. Applying the ordinary balanced associators first gives h tensor i(a)c and z tensor i(b)d, whose direct gamma value is the same product. The signed uncurrying on either route multiplies by the same (-1)^(pj). At each M-quotient reduction these products are still equal and commute with transition ring maps. Both maps to the strict cone have these equal quotient product components and zero shifted-product components: the completion augmentations of [lem-weil-finite-free-completed-scalar-comparison] are strict augmentations and strict tower maps act diagonally on both products by [def-weil-strict-roos-model], as in step 5. Finally the specified integral associator is, by the stipulated hypothesis, obtained by conjugating this ordinary associator with chi. Substitute that definition: each adjacent chi inverse followed by chi cancels, chi being invertible on these derived-complete objects by [lem-weil-finite-free-completed-scalar-comparison], leaving exactly the ordinary equality just checked. This proves the required integral tower equation and its quotient-coordinate normalization. Formally, the tower conjunct of derived_coherence is the Hom conjunct (.2.2) of scalarOperationsOrdinary_tower, evaluated at the two displayed derived model objects and at the identity scheme map.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-scalar-hom-derived-normalization",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pod-scalar-hom-cochain-pairing",
+  "lem-pod-point-sheaf-hom-maps",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-pur-integral-derived-operations",
+  "def-weil-strict-roos-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6.; explicit model calculation using Stacks Tags 0A8X, 08J9 and 0FPT; Q8 stage-3 partial proof: ordinary tensor transport by the existing proved model isomorphism and tensor-generator extensionality; completed conjugation by categorical cancellation; derived coherence by direct specialization of the recorded naturality, unit and tower comparison theorems. G2 stage-3 partial proof: coefficientBaseChange_existsUnique by the proved sheaf scalar-unit comparison and Mathlib single-complex transport; completion_implementation_transport by cancellation of the proved strict chain-model formulas, the universal derived-change-of-rings comparison and localization on good representatives. H3 decomposition: completed_hom_scalar_transpose is proved from the separate ordinary-chain and derived-normalization nodes, with signed evaluation and both CompletionSquares proved directly. modelBaseChange_existsUnique remains open. One original hole is closed and two strictly smaller holes are added; this is a decomposition, not a net proof gain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completed pro etale coefficient internal Hom scalar comparison transpose evaluation strict quotient towers",
+   "results": "AdicCompletion.transitionMap_comp_eval; AdicCompletion.transitionMap_comp_eval_apply; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.eval_lift; StandardEtalePresentation.toPresentation_algebra_smul; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.of_comp_lift; StandardEtalePair.homEquiv_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and adic module completion APIs do not identify the specified strict-tower sheaf map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev",
+   "results": "CategoryTheory.ihom.ev; CategoryTheory.ihom.ihom_adjunction_counit; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev; CategoryTheory.MonoidalClosed.uncurry_ihom_map; CategoryTheory.MonoidalClosed.uncurry_eq; CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app; CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc; CategoryTheory.MonoidalClosed.uncurry_pre",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and adic module completion APIs do not identify the specified strict-tower sheaf map"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*ihom|[Cc]omplet.*[Ee]val",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/Lean/Meta/RefinedDiscrTree/Encode.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and adic module completion APIs do not identify the specified strict-tower sheaf map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived completion scalar extension internal Hom transpose evaluation finite projective constant sheaves",
+   "results": "CategoryTheory.constantSheafAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; ModuleCat.CoextendScalars.obj'; CategoryTheory.Sheaf.ΓHomEquiv; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; CondensedSet.LocallyConstant.functorFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and adic module completion APIs do not identify the specified strict-tower sheaf map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective completed coefficient sheaf dual scalar extension chain map quotient tower normalization",
+   "results": "SheafOfModules.Presentation.map_π_eq; AlgebraicGeometry.Proj.awayMap_awayToSection; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.Presentation.mapGenerators; Rep.standardComplex.x_projective; ModuleCat.projectiveResolution; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and adic module completion APIs do not identify the specified strict-tower sheaf map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry",
+   "results": "CategoryTheory.MonoidalClosed.uncurry; CategoryTheory.MonoidalClosed.uncurry_injective; CategoryTheory.MonoidalClosed.uncurry_curry; CategoryTheory.MonoidalClosed.curry_uncurry; CategoryTheory.MonoidalClosed.curry_eq_iff; CategoryTheory.MonoidalClosed.eq_curry_iff; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev; CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*ihom|[Cc]omplet.*[Ee]val",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/NumberTheory/LocalField/Basic.lean; Mathlib/Topology/UniformSpace/CompareReals.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective complex dual base change sheaf derived completion evaluation natural comparison",
+   "results": "IsBaseChange.toDualBaseChange_tmul; IsBaseChange.dual; Module.Dual.baseChange; IsBaseChange.toDual; IsBaseChange.toDualBaseChange; IsBaseChange.toDual_apply; Module.Dual.eval_naturality; Module.Dual.baseChange_baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed coefficient sheaf internal Hom scalar extension transpose signed evaluation strict quotient cone",
+   "results": "SheafOfModules.Presentation.map_π_eq; LightCondensed.ihomPoints; SheafOfModules.Presentation.mapGenerators; SheafOfModules.generatorsOfIsCokernelFree_π; LightCondensed.ihomPoints_symm_comp; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_apply; localCohomology.diagram",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_apply_tmul|baseChange_baseChange|uncurry_injective",
+   "results": "Mathlib/Logic/Function/Basic.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change dual of bounded finite projective complex evaluation natural with derived completion",
+   "results": "Ext; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId; HomologicalComplex.evalCompCoyonedaCorepresentable; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.Functor.mapProjectiveResolution_complex; Module.dual_projective; CochainComplex.isKProjective_of_op; CochainComplex.isKProjective_of_projective",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dual base change and abstract currying do not state the completed coefficient-sheaf strict-tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-scalar-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Completed-model part of returned steps 1, 3, 5 and 6.",
+   "via": [
+    "lem-pod-point-scalar-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-completed-hom-scalar-transpose",
+  "worker": "stage1",
+  "summary": "Q32: split the completed sheaf-level scalar transpose into model computation, signed derived uncurrying, both strict-cone coordinates, derived naturality, identity and tower equations; reuse existing DAG ingredients and create no nodes. Statement unchanged. Rebase repair: reread all current cited statements and make the Roos coordinate order explicit in step 5.",
+  "blueprint": "Realizes the coefficient-ring internal-Hom sentence of lem-pod-point-dualizing-complex, through the completed-model portion of lem-pod-point-scalar-hom-evaluation. The blueprint omits this scalar/sign/strict-cone calculation; the proof is agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flat criterion for bounded flat models; the point unit does not state this criterion."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of ordinary derived scalar extension and quotient reduction."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Generic K-flat/K-injective chain normalization of the derived tensor-Hom adjunction, to fix the evaluation sign."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic derived tensor-Hom bijection and Koszul symmetry; used to identify a transpose by its uncurrying."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Canonical natural strict-cone completion comparison already specified in the item."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Derived naturality of the operation comparison already stipulated in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-80bbafed9",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-80bbafed9 (reviewer sub-agent of L); spot-checked: This is a re-delivery of head 47a2af09. That head got a reader FIX, but the landing refused it because the side completion had never been promoted (coord/returns/Q32.md, 07:54 UTC), which is a tooling fault, not a mathematical one. The item is still unsplit live and has no repair note of its own, so the re-split rules do not apply. Compared with 47a2, this head has no new nodes and an unchanged statement, stmt_deps and proof_deps. The only change is that step 5 now names the Roos coordinates explicitly: F(X)^{r+1}=P(X)^r⊕P(X)^{r+1}, where both routes give (0,(q_m e')_m). This matches def-weil-strict-roos-model (strict augmentation (0,(γ_n)), diagonal strict maps) and the χ coordinates of lem-weil-finite-free-completed-scalar-comparison. I re-read every cited statement and re-checked all nine steps. Small cases: P=R[0] gives multiplication. P=R[-1] gives the K⊗H sign (-1)^{pj}, which σ cancels. The Hom-differential sign makes γ a cochain map. Ramified L/E and non-free projective terms cause no problem. In step 4 the chain-transpose hypotheses hold: P=K_L is K-flat with flat terms, E is K-injective and A is arbitrary. The previous FIX was lost in this head, so I re-applied it on top of the new step 5. (1) Step 1 now also obtains J_L≅RHom_{B'}(K_L,B') from lem-pod-point-completed-evaluation applied to L and P_L, which steps 4 and 6 need. (2) Step 9 used χ invertibility and strict-cone coordinates while marked elementary with no uses. It now cites lem-weil-finite-free-completed-scalar-comparison and def-weil-strict-roos-model with elementary=false; proof_deps is unchanged. All 6 tool_uses are accepted. Advisory: lem-zl-specified-hom-scalar-evaluation and lem-pod-point-projective-dual-tensor-models overlap parts of the proof but neither duplicates the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedHomScalarTranspose",
+  "declaration": "WeilConjectures.CompletedHomScalarTranspose.completed_hom_scalar_transpose",
+  "declarations": [
+   "WeilConjectures.CompletedHomScalarTranspose.F",
+   "WeilConjectures.CompletedHomScalarTranspose.integerMap",
+   "WeilConjectures.CompletedHomScalarTranspose.PL",
+   "WeilConjectures.CompletedHomScalarTranspose.value",
+   "WeilConjectures.CompletedHomScalarTranspose.homMap",
+   "WeilConjectures.CompletedHomScalarTranspose.HomNormalized",
+   "WeilConjectures.CompletedHomScalarTranspose.modelBaseChange_existsUnique",
+   "WeilConjectures.CompletedHomScalarTranspose.modelBaseChange",
+   "WeilConjectures.CompletedHomScalarTranspose.ordinaryTransport_existsUnique",
+   "WeilConjectures.CompletedHomScalarTranspose.ordinaryTransport",
+   "WeilConjectures.CompletedHomScalarTranspose.coefficientBaseChange_existsUnique",
+   "WeilConjectures.CompletedHomScalarTranspose.coefficientBaseChange",
+   "WeilConjectures.CompletedHomScalarTranspose.identifiedTranspose",
+   "WeilConjectures.CompletedHomScalarTranspose.CompletionSquare",
+   "WeilConjectures.CompletedHomScalarTranspose.ModelResult",
+   "WeilConjectures.CompletedHomScalarTranspose.completed_hom_scalar_transpose",
+   "WeilConjectures.CompletedHomScalarTranspose.completion_implementation_transport",
+   "WeilConjectures.CompletedHomScalarTranspose.completed_conjugation",
+   "WeilConjectures.CompletedHomScalarTranspose.derived_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedHomScalarTranspose.lean",
+  "statement": "theorem completed_hom_scalar_transpose (_hl : l ≠ D.p) (P : CochainComplex (ModuleCat.{u + 1} (PointCompletedEvaluation.R l E)) ℤ) (lo hi : ℤ) (_hlo : P.IsStrictlyGE lo) (_hhi : P.IsStrictlyLE hi) (_hP : ∀ n : ℤ, Module.Projective (PointCompletedEvaluation.R l E) (P.X n) ∧ Module.Finite (PointCompletedEvaluation.R l E) (P.X n)) (_hmodelsE : ∀ C ∈ [PointCompletedEvaluation.model D l E P, PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P), PointCompletedEvaluation.total D l E (PointCompletedEvaluation.model D l E P) (PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P))], finiteTorConstructibleIntegral l E (Spec (.of D.k)) (DerivedCategory.Q.obj C)) (_hmodelsL : ∀ C ∈ [PointCompletedEvaluation.model D l L (PL l E L ι P), PointCompletedEvaluation.model D l L (PointCompletedEvaluation.dual l L (PL l E L ι P)), PointCompletedEvaluation.total D l L (PointCompletedEvaluation.model D l L (PL l E L ι P)) (PointCompletedEvaluation.model D l L (PointCompletedEvaluation.dual l L (PL l E L ι P)))], finiteTorConstructibleIntegral l L (Spec (.of D.k)) (DerivedCategory.Q.obj C)) (h : PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P) ≅ PointDerivedHom.sheafHom.{u, u} D.k (PointCompletedEvaluation.B D l E) (PointCompletedEvaluation.model D l E P) (PointCompletedEvaluation.coefficient D l E)) (_hh : HomNormalized D l E P h) (_hd : IsIso (homMap D l E P h)) (hL : PointCompletedEvaluation.model D l L (PointCompletedEvaluation.dual l L (PL l E L ι P)) ≅ PointDerivedHom.sheafHom.{u, u} D.k (PointCompletedEvaluation.B D l L) (PointCompletedEvaluation.model D l L (PL l E L ι P)) (PointCompletedEvaluation.coefficient D l L)) (_hhL : HomNormalized D l L (PL l E L ι P) hL) (_hdL : IsIso (homMap D l L (PL l E L ι P) hL)) : ModelResult D l E L ι P h hL",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main model result is accompanied by completion_implementation_transport, completed_conjugation and derived_coherence for the strict-cone, completed comparison, derived naturality, identity and tower clauses. Helper aliases reuse the recorded point models; all chosen comparison data are uniquely characterized on actual tensor generators."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4fc8bddf",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Lean matches the node clause by clause. Hypotheses equal the dependency's Result binders: HomNormalized and IsIso homMap are verbatim _hom_normalized/_derivedHom_isIso, so h is pinned; ctf hypotheses on K,H,K⊗H and K_L,J_L,K_L⊗J_L as proof step 1 states. FK≅K_L forward/inverse exact (∃!); γ actual chain map with h(z)ab and Q γ ≫ homMap_L = conjugated scalarHomOrdinary. completed_conjugation is definitional from scalarHomCompleteInputs. completion_implementation_transport ties χ (completedScalarComparison) to scalarCompletion via strict-cone chain equality and ∃! transports. CompletionSquare = proof step 5 coordinates; signed ev (-1)^{pj}. derived_coherence specializes dependency naturality/unit/tower Hom clauses with arbitrary derived v. Edge cases P=0, R[0], R[-1], L=E, ramified, non-free terms all fine; one universe u. No hollow defs, all sorry, docstrings OK, statement verbatim, no import cycle. Only fault: H11 dispatcher-wording second reading -> FIX fixes/lem-pod-completed-hom-scalar-transpose.report.md (worker report verbatim + independent clause-by-clause reading). Advisories: ev tied to γ only by formula; uncited def owners reached via stmt_dep modules (def-pod-point-derived-hom-models, def-sf-integral-hom-reduction-models, def-trf-integral-scalar-tower-functors); integerMap one-line ULift helper."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T065907-L-3287331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

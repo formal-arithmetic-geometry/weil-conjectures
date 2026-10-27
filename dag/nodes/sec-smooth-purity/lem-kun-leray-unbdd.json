@@ -62,7 +62,32 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.GlobalSections",
+     "lines": [
+      57,
+      65
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "lean": {
@@ -85,5 +110,26 @@
   "group": "NQ",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable files, source and dependency interfaces, exact signature, coefficient universes, canonicity, and edge cases. scompile.py passed without warnings; only standard axioms occur. The disclosed pre-existing spectral-sequence proof error does not invalidate the existing K-injective comparison."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be a qcqs morphism of schemes with\n$\\kuncd(f)<\\infty$ and let $n\\ge1$. Then\n\n$$\n\\RGamma(X_{\\Et},E)\\cong\\RGamma\\bigl(Y_{\\Et},Rf_*E\\bigr)\n$$\n\ncanonically for every $E\\in D(X_{\\Et},\\kunZn)$.",
+  "proof": [
+   {
+    "text": "For $E\\in D(X_{\\Et},\\kunZn)$ the Grothendieck spectral sequence of\nthe composite $\\Gamma(Y_{\\Et},-)\\circ Rf_*$\n([thm-sp-truncation-e2] in the\nglobal-section form) has\n\n$$\nE_2^{p,q}=H^p\\bigl(Y_{\\Et},R^qf_*E\\bigr)\n\\Longrightarrow H^{p+q}(X_{\\Et},E),\n$$\n\nthe abutment being $\\RGamma(X_{\\Et},E)$ by\n[def-kun-rgamma-unbounded]. Since $\\kuncd(f)<\\infty$ by\nhypothesis, $R^qf_*E=0$ for all $q>d$ with $d=\\kuncd(f)$\n([def-kun-cd]), so the spectral sequence is confined to the\nfinitely many columns $0\\le q\\le d$; a half-plane spectral sequence\nwith finitely many columns converges strongly without any boundedness\nhypothesis on $E$, and its edge map in degree $n$ is the canonical\nmap $H^n(Y_{\\Et},Rf_*E)\\to H^n(X_{\\Et},E)$. For $E$ bounded below\nthis edge map is an isomorphism by [lem-kun-leray-bdd]; the\nfiniteness of the columns forces the same for arbitrary $E$, since\neach abutment is computed from finitely many columns. Hence\n$\\RGamma(X_{\\Et},E)\\cong\\RGamma(Y_{\\Et},Rf_*E)$.",
+    "uses": [
+     "thm-sp-truncation-e2",
+     "def-kun-rgamma-unbounded",
+     "def-kun-cd",
+     "lem-kun-leray-bdd"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

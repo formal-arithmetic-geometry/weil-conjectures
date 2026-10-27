@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-relation-incidence-open-model",
+ "kind": "statement",
+ "title": "Incidence open models for a restricted fppf-relation quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $R,U,U'$ be $S$-schemes, and let $j=(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] identify $R(T)$ with an equivalence relation on $U(T)$ for every $S$-scheme $T$. Assume $s,t$ are surjective, flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and $g:U'\\to U$ is flat and locally of finite presentation, without a surjectivity assumption. Set $R'=U'\\times_{g,U,s}R\\times_{t,U,g}U'$. On $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site] let $F$ and $F'$ be the sheafifications [def-weil-pbc-sheafification] of the pointwise quotient presheaves $U(-)/R(-)$ and $U'(-)/R'(-)$, and let $\\alpha:F'\\to F$ be their canonical map. Assume $\\alpha_T:F'(T)\\to F(T)$ is injective for every $T$. Write $h_X(T)=\\operatorname{Mor}_S(T,X)$ for a representable functor, $q:h_U\\to F$ for the quotient map, $E=U'\\times_{g,U,s}R$, and $p=t\\circ\\operatorname{pr}_R:E\\to U$. Then $p$ is flat and locally of finite presentation, its set-theoretic image $W=p(E)$ is open in $U$, and its factor $E\\to W$, with $W$ given its open subscheme structure [def-weil-open-immersion], is surjective, flat and locally of finite presentation. For every $S$-morphism $v:V\\to U$, put $W_V=v^{-1}(W)$. There is a natural isomorphism over $h_V$, $h_{W_V}\\simeq h_V\\times_{F,q\\circ h_v,\\alpha}F'$. These isomorphisms commute with pullback along every $V_1\\to V$ over $U$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU (lemma-finding-opens), open image and the two directions of the representing property after a lift to U; returned proof steps 3-5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The projection $\\operatorname{pr}_R:E=U'\\times_U R\\to R$ is the base change of $g$ along $s$. By [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] it is flat and locally of finite presentation. Apply [lem-pc-flat-compose] and [lem-sbc-locally-finite-presentation-composition] to this projection followed by $t$: the resulting $p:E\\to U$ is flat and locally of finite presentation. Neither application uses surjectivity of $g$, quasi-compactness, or quasi-separatedness; only the local-finite-presentation part of clause (3) is used.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], $W=p(E)$ is open. Give it its open subscheme structure. By [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique $p_W:E\\to W$ with inclusion followed after $p_W$ equal to $p$. The square with top arrow $1_E$, bottom arrow $W\\hookrightarrow U$ and vertical arrows $p_W,p$ is Cartesian: a pair of maps to $E$ and $W$ with the same image in $U$ has its $W$ coordinate uniquely determined by its $E$ coordinate, using the uniqueness in the same factorization lemma. Thus $p_W$ is a base change of $p$ and is flat and locally of finite presentation by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). It is surjective by the definition of $W$. Consequently $\\{p_W:E\\to W\\}$ is an fppf covering by [def-pc-fppf-site].",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "For the big fppf topology over S, the range of a monomorphic map between sheaves is a sheaf: Subfunctor.toRange is an isomorphism, and Subfunctor.eq_sheafify then says local image membership is actual image membership. A morphism whose singleton sieve covers induces a locally surjective Yoneda map by stability under pullback. Apply this to E → W. The relation coequalizer equation and hα imply α q'(b)=q(p); hence q(W → U) is locally in the image of α, and the closed-range observation gives its unique preimage zW. By Yoneda this defines βW and its commuting square.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "The universal property hη' implies that η' is locally surjective even in the stated small value universe. Let H be the subsheaf obtained by locally closing its image in F'. The factorization η':P'→H extends uniquely to l:F'→H. The uniqueness part gives l followed by H→F' equal to the identity; therefore H=F'. This is an elementary image-subsheaf proof of local representability from the given sheafification property. The coequalizer projection is sectionwise surjective (evaluation preserves coequalizers, which are epimorphisms of types). Composition shows q' locally surjective.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "Given a:T→U and z in F'(T) with q(a)=α(z), take the covering image sieve of z under q'. For each f:Z→T in this sieve choose c:Z→U' with q'(c)=z|Z. Naturality and hα give q(gc)=q(af). Apply [lem-trf-etale-relation-kernel-pair] sectionwise to obtain d:Z→R with sd=gc and td=af. The pullback universal property [def-pc-fibre-product] yields ce:Z→E. Thus af=ce p factors through W. The sieve of local lifts of a to h_W is covering.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "The representables h_W and h_U are fppf sheaves by subcanonicity (also on Over S), and h_W→h_U is monomorphic. Apply the closed-range observation to the covering sieve from the preceding step to obtain the unique l:T→W with li=a. Its βW image equals z because their α-images equal q(a). This proves the universal lifting property of the sheaf pullback; monicity of h_W→h_U gives uniqueness. Test-objectwise pullbacks are presheaf pullbacks.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  },
+  {
+   "text": "For v:V→U form the usual restriction map v⁻¹(W)→W. The square with the two open inclusions is Cartesian in schemes and therefore in Over S. Apply the limit-preserving Yoneda functor and paste with the pullback h_W→h_U of α. Set β(V,v) to the restriction map followed by βW. For k:V1→V and kW as in the statement, the two maps to W agree after composition with its monomorphic inclusion in U; cancel this inclusion. Functoriality of Yoneda and composition with βW give the displayed naturality equation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), incidence open image and last two paragraphs, specialized to a lift V to U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-trf-etale-relation-kernel-pair",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU (lemma-finding-opens), incidence cover and representing property; formalized with the closed-range subsheaf form of sheaf descent and the image-subsheaf proof of local representability"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*relation|relation.*quotient|saturat.*open|open.*saturat",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The incidence image of a flat locally finitely presented relation represents the pullback to its atlas of a restricted quotient sheaf",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Flat",
+   "results": "AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented equivalence relation R on U and a flat locally finitely presented map g from U prime to U, the open image of U prime times U R represents the restricted quotient sheaf after pullback to U",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f; AlgebraicGeometry.PresheafedSpace.GlueData.pullback_base; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t; AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq; AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The saturation of the image of a flat locally finitely presented scheme morphism under an equivalence relation is open and represents the inverse image of the restricted quotient sheaf",
+   "results": "AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap; AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open; Algebra.isOpen_smoothLocus; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap; AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*relation|relation.*quotient|incidence",
+   "results": "{\"t\": \"2026-10-22T06:58:24Z\", \"tool\": \"grep\", \"query\": \"quotient.*relation|relation.*quotient|incidence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, scheme open immersions or unrelated coequalizers/gluing; none states the incidence quotient-sheaf model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The open incidence image of a flat locally finitely presented relation represents the inverse image of the restricted fppf quotient sheaf",
+   "results": "{\"t\": \"2026-10-22T06:58:25Z\", \"tool\": \"leansearch\", \"query\": \"The open incidence image of a flat locally finitely presented relation represents the inverse image of the restricted fppf quotient sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.recOn\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\"], \"digest\": \"367f3b03b041c12f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, scheme open immersions or unrelated coequalizers/gluing; none states the incidence quotient-sheaf model"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T06:58:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, scheme open immersions or unrelated coequalizers/gluing; none states the incidence quotient-sheaf model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented equivalence relation of schemes, the incidence image is open and represents the pullback of a restricted fppf quotient sheaf",
+   "results": "{\"t\": \"2026-10-22T06:58:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented equivalence relation of schemes, the incidence image is open and represents the pullback of a restricted fppf quotient sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"AlgebraicGeometry.Scheme.GlueData.f_open\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\"], \"digest\": \"05c3d04c3cef93cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, scheme open immersions or unrelated coequalizers/gluing; none states the incidence quotient-sheaf model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturating a flat locally finitely presented scheme map by a flat equivalence relation gives an open subfunctor of the quotient after pullback to the presenting scheme",
+   "results": "{\"t\": \"2026-10-22T06:59:01Z\", \"tool\": \"leanfinder\", \"query\": \"Saturating a flat locally finitely presented scheme map by a flat equivalence relation gives an open subfunctor of the quotient after pullback to the presenting scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"SheafOfModules.Presentation.map_generators_I\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_preimage\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\"], \"digest\": \"6c37d6bf038e5c19\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, scheme open immersions or unrelated coequalizers/gluing; none states the incidence quotient-sheaf model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-relation-finding-opens",
+  "date": "2026-10-22",
+  "group": "Q103"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the quotient-by-etale-relation proof of lem-trf-etale-relation-quotient: the affine summand quotients embed as open subspaces of the total quotient. Tag 02WU (lemma-finding-opens), open image and the two directions of the representing property after a lift to U; returned proof steps 3-5.",
+   "via": [
+    "lem-trf-etale-relation-finding-opens",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-relation-incidence-open-model",
+  "worker": "stage1",
+  "summary": "Proved the incidence open model directly by geometric permanence, the pulled-back incidence fppf cover, gluing with the assumed injectivity, and the converse using local quotient representatives and the existing kernel-pair theorem. Both naturality assertions are checked on sections. Statement unchanged; no new nodes.",
+  "blueprint": "Geometric quotient-presentation support beneath lem-trf-local-term-locality via the recorded ancestry, specifically the incidence-open portion of Tag 02WU used in lem-trf-etale-relation-finding-opens. This is a generic support lemma, not an assertion about the trace-class source or its stalk.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representation theorem for sheafification of the quotient presheaf on the big fppf site; its corrected large value universe is explicitly respected. No node of this unit supplies that generic fact."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-36cac8ae7",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-36cac8ae7 (reviewer sub-agent of L); spot-checked: Read Stacks spaces.tex Tag 02WU (lemma-finding-opens) in full, all 7 steps, and the statement of every cited node. The proof is correct. Step 1: pr_R is the base change of g along s, so it is flat (Flat.isStableUnderBaseChange) and locally of finite presentation (qcqs-permanence clause (3), which has no qcqs hypothesis), and it is then composed with t. Step 2: W=p(E) is open by UniversallyOpen.of_flat. The square for E->W is Cartesian because W->U is a monomorphism, so {E->W} is an fppf covering. Steps 3-4: the covering T x_W E is pulled back, then the sheaf equalizer and injectivity of alpha give a unique lift z_T. Step 5: local representatives of the sheafification (accepted tool_use of lem-weil-pbc-site-sheafification-sections-local, a generic 00WB/00WK result from unit sk-thm-p1) plus the same-unit kernel-pair node, which needs only a monomorphic equivalence relation, give the maps r_i. Steps 6-7: joint surjectivity of the covering gives va(T) in W, the factorization through W is unique, and naturality and base change along V1->V are checked on sections. Hypotheses match 02WU and the parent lem-trf-etale-relation-finding-opens: g is not assumed surjective, and injectivity of alpha is an assumption here because the parent's Step 2 proves it. The item is a strict sub-lemma, not a restatement of the parent. Not superseded: live and side-live are unsplit. No repair note, no dropped entry, no cycle, no SGA. Duplicate search by rg -L for 02WU, finding-opens and U'/R' found only étale-only nodes (lem-trf-etale-relation-quotient, lem-trf-etale-affine-quotient-representable, lem-a1-space-etale-open-image); same_as [] stands. Mathlib searches: grep, Loogle and two LeanFinder runs, with LeanSearch honestly recorded as unavailable (rate limit). Edge cases checked: empty U' or T, g=id, diagonal R with g an open immersion, diagonal R with g finite flat. FIX: Steps 3 and 5 used the compatibility alpha∘q'=q∘h_g, which is the universal property of sheafification, without citing it. I added [def-weil-pbc-sheafification] to both steps' text and uses and recomputed proof_deps. The statement and all other fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelationIncidenceOpenModel",
+  "declaration": "AlgebraicGeometry.Scheme.relation_incidence_open_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelationIncidenceOpenModel.lean",
+  "statement": "theorem relation_incidence_open_model {S : Scheme.{u}} {R U U' : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Surjective s.left] [Flat s.left] [LocallyOfFinitePresentation s.left] [Surjective t.left] [Flat t.left] [LocallyOfFinitePresentation t.left] (g : U' ⟶ U) [Flat g.left] [LocallyOfFinitePresentation g.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun f : F.obj ⟶ G.obj ↦ η ≫ f)) (F' : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η' : coequalizer (yoneda.map (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.fst g s)) (yoneda.map (pullback.snd (pullback.snd g s ≫ t) g)) ⟶ F'.obj) (hη' : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun f : F'.obj ⟶ G.obj ↦ η' ≫ f)) (α : F'.obj ⟶ F.obj) (hα : (coequalizer.π (yoneda.map (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.fst g s)) (yoneda.map (pullback.snd (pullback.snd g s ≫ t) g)) ≫ η') ≫ α = yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)) (hα_injective : ∀ T : Over S, Function.Injective (α.app (op T))) : Flat (pullback.snd g s ≫ t).left ∧ LocallyOfFinitePresentation (pullback.snd g s ≫ t).left ∧ ∃ W : U.left.Opens, (W : Set U.left) = Set.range (pullback.snd g s ≫ t).left ∧ (∃ pW : (pullback g s).left ⟶ W.toScheme, pW ≫ W.ι = (pullback.snd g s ≫ t).left ∧ Surjective pW ∧ Flat pW ∧ LocallyOfFinitePresentation pW) ∧ ∃ β : ∀ (V : Over S) (v : V ⟶ U), yoneda.obj (Over.mk ((v.left ⁻¹ᵁ W).ι ≫ V.hom)) ⟶ F'.obj, (∀ (V : Over S) (v : V ⟶ U), IsPullback (yoneda.map (Over.homMk (v.left ⁻¹ᵁ W).ι rfl)) (β V v) (yoneda.map v ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)) α) ∧ ∀ (V₁ V : Over S) (v : V ⟶ U) (k : V₁ ⟶ V) (kW : Over.mk (((k ≫ v).left ⁻¹ᵁ W).ι ≫ V₁.hom) ⟶ Over.mk ((v.left ⁻¹ᵁ W).ι ≫ V.hom)), kW ≫ Over.homMk (v.left ⁻¹ᵁ W).ι rfl = Over.homMk ((k ≫ v).left ⁻¹ᵁ W).ι rfl ≫ k → yoneda.map kW ≫ β V v = β V₁ (k ≫ v)",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24a93a2aa",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Only the lean record changed vs side-live; no other group has landed the item. Clause-by-clause match with the node and Stacks 02WU: Mono(prod.lift s t)+hrel = monomorphic equivalence relation; s,t surjective/flat/lfp; g flat/lfp, not surjective; R' = actual iterated pullback with the source endpoints; F,F' via the sheafification universal property (same interface as parent etale_relation_finding_opens and the kernel-pair module); alpha pinned uniquely by hα (epi coequalizer + hη' injective); sectionwise injectivity. Conclusions: p flat/lfp; W : Opens with W = range p; pW with pW ≫ W.ι = p, surjective/flat/lfp; IsPullback giving h_{W_V} ≅ h_V ×_F F' over h_V (β forced since α mono, not hollow); compatibility along k : V₁ → V with the canonical kW (exists, so not vacuous). No definitions; sole sorry is the item; docstrings carry source place, blueprint tag and all 7 steps; lean.statement verbatim; one universe u, autoImplicit false; no extra hypotheses. Edge cases (empty U'/T, g = id, diagonal R with open-immersion or non-injective g, empty preimage) fine. No recompile (no file changed); worker reports clean compile and OK dry run. Advisory: the compatibility clause follows from the IsPullback clause plus α mono, kept because the node states it."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261023T105603-L-3578889",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

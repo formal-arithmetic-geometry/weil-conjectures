@@ -15,81 +15,73 @@
  ],
  "proof": [
   {
-   "text": "By [def-pc-perfect-ring-complex], choose a bounded cochain complex $P$ of finitely generated projective $B$-modules, zero outside $[a,b]$, and an isomorphism $QP\\cong C$. To apply the ringed-site canonical-map statement below, use the one-object site with only its identity morphism and bottom topology, as in [def-pc-perfect-rhom-base-change-map] for $B\\xrightarrow{1}B$. A module sheaf on this site is precisely its single $B$-module of sections, and a morphism is precisely a linear map. Evaluation at that object and the constant one-object construction are inverse functors; their formulas identify kernels, tensor products and Hom with the ordinary module operations. They consequently identify complexes, quasi-isomorphisms, their localizations and the derived Hom defined using K-injectives. Write $H$ for the product total Hom complex [def-sc-module-total-hom-complex].",
+   "text": "By [def-pc-perfect-ring-complex], choose a bounded finite-projective complex $P$, supported in $[a,b]$, and an isomorphism $e:QP\\xrightarrow{\\sim}C$. Put $O=B[0]$, $E=H(P,O)$ and $F=H(E,O)$. By [lem-trf-finite-projective-hom-dual-involution], $E$ is bounded finite-projective, supported in $[-b,-a]$, and the signed evaluation $\\delta_P:P\\xrightarrow{\\sim}F$ is a chain isomorphism.",
    "uses": [
     "def-pc-perfect-ring-complex",
-    "def-pc-perfect-rhom-base-change-map",
-    "def-sc-module-total-hom-complex"
+    "lem-trf-finite-projective-hom-dual-involution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof"
+    "place": "Tag 07VI, lemma-dual-perfect-complex, bounded finite-projective Hom dual and signed double evaluation; Tag 0FNG, section-sign-rules; actual Hom coordinates and differential in section-hom-complexes (Tag 0A8H)."
    }
   },
   {
-   "text": "Put $E=H(P,B[0])$. In degree $r$ the product defining $H$ has only one possibly nonzero factor, namely $E^r=\\operatorname{Hom}_B(P^{-r},B)$; projection to it and insertion of zero in all other coordinates are mutually inverse. Its differential is $d_E^r(\\phi)=(-1)^{r+1}\\phi d_P^{-r-1}$, whose square is zero since $d_P^2=0$. Thus $E$ vanishes outside $[-b,-a]$. By [lem-sf-finite-projective-dual] every $E^r$ is finitely generated projective. Applying [lem-pod-projective-hom-evaluation-model] to $P,B[0]$ identifies $QE$ with $R\\operatorname{Hom}_B(QP,B)$, and hence with $R\\operatorname{Hom}_B(C,B)$. The definition [def-pc-perfect-ring-complex] now proves the first conclusion.",
+   "text": "Both $P$ and $E$ are bounded above with projective terms. Apply [lem-trf-projective-bidual-representative-comparison] with $T=P$, $D=E$: it identifies the ordinary-module and one-object ringed-site Hom models, supplies the two K-injective-augmentation quasi-isomorphisms, and gives $\\gamma_P:QE\\cong(QP)^\\vee$, $\\gamma_E:QF\\cong(QE)^\\vee$. Thus $(QP)^\\vee$ is represented by the bounded finite-projective complex $E$. Since $e^\\vee:C^\\vee\\cong(QP)^\\vee$, [def-pc-perfect-ring-complex] proves that $C^\\vee$ is perfect.",
    "uses": [
-    "def-sc-module-total-hom-complex",
-    "lem-sf-finite-projective-dual",
-    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-projective-bidual-representative-comparison",
     "def-pc-perfect-ring-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07VI, lemma-dual-perfect-complex, termwise dual construction; Tag 0A66, lemma-RHom-out-of-projective"
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, including the map to the K-injective Hom model; sites-cohomology.tex Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit transpose and naturality; sites.tex Tag 00X9, section-topoi, punctual topos. Terminal-site Hom and resolution transport are the explicit specialization needed for the returned parent proof steps 1 and 3."
    }
   },
   {
-   "text": "Check the ordinary-representative hypotheses of [lem-sfb-ringed-site-duality-maps]. Both $P$ and $E$ are bounded above and projective termwise, so [lem-pod-projective-hom-evaluation-model] applies to each, with arbitrary target. In particular the two maps\n$$H(P,B[0])\\longrightarrow H(P,I(B[0])),\\qquad H(E,B[0])\\longrightarrow H(E,I(B[0]))$$\nare quasi-isomorphisms. Indeed for either first complex $T$, naturality of the canonical comparison identifies the localization of $H(T,B[0]\\to I(B[0]))$ with $R\\operatorname{Hom}_B(QT,Q(B[0]\\to I(B[0])))$, conjugated by those comparison isomorphisms. The latter is invertible because the resolution map is a quasi-isomorphism, which localization inverts. A complex map whose localization is invertible is a quasi-isomorphism, as its induced cohomology maps are then invertible; this is the cohomology factorization in [def-weil-abstract-derived-category]. Here $I$ is the fixed K-injective resolution of [def-pur-derived-internal-hom], and its Hom complex is exactly the specified derived Hom. Thus $QH(E,B[0])$ represents the double derived dual, with the particular representative identifications required by the canonical-map node. That node's bidual clause requires no K-flatness assumption.",
+   "text": "The same representative comparison gives $(\\gamma_P)^\\vee b_{QP}=\\gamma_E Q(\\delta_P)$. The right side is invertible, since localization takes the chain isomorphism $\\delta_P$ to an isomorphism. Since $(\\gamma_P)^\\vee$ is also invertible, $b_{QP}$ is invertible.",
    "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-pod-projective-hom-evaluation-model",
-    "def-weil-abstract-derived-category",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A66, lemma-RHom-out-of-projective, and Tag 07VI"
-   }
-  },
-  {
-   "text": "Under Step 3's comparisons, [lem-sfb-ringed-site-duality-maps] represents the canonical bidual map by\n$$\\delta_P:P\\longrightarrow H(E,B[0]),\\qquad x\\longmapsto(\\phi\\longmapsto(-1)^{p|\\phi|}\\phi(x)),\\quad x\\in P^p.$$\nOnly $|\\phi|=-p$ contributes, so its degree-$p$ component is $(-1)^p$ times ordinary evaluation $P^p\\to(P^p)^{**}$, an isomorphism by [lem-sf-finite-projective-dual]. The sign is necessary for the chain-map equation: for $\\phi\\in E^{-p-1}$ one has $d_E\\phi=(-1)^p\\phi d_P$, and hence\n$$(d_{H(E,B)}\\delta_P(x))(\\phi)=-(-1)^p\\delta_P(x)(d_E\\phi)=(-1)^{p+1}\\phi(d_Px)=\\delta_P(d_Px)(\\phi).$$\nAll other Hom components are zero. Multiplying this chain-map equation by the degreewise inverses shows that they form an inverse chain map. Therefore $\\delta_P$ is a chain isomorphism, and its localization is invertible.",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-sf-finite-projective-dual",
-    "def-sc-module-total-hom-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit specialization; Section 0A8X, section-hom-complexes; more-algebra.tex Tags 07VI (lemma-dual-perfect-complex) and 0FNG (section-sign-rules)"
-   }
-  },
-  {
-   "text": "The canonical bidual map of [lem-sfb-ringed-site-duality-maps] is natural in its input, and the representative comparisons of [lem-pod-projective-hom-evaluation-model] are natural in both variables. For $e:QP\\xrightarrow{\\sim}C$ their naturality square is $b_C e=R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(e,B),B)b_{QP}$. The right factor $b_{QP}$ is invertible by Step 4, and the other two factors are images of isomorphisms under functors. Solving this equality for $b_C$ proves that the actual canonical evaluation $C\\to R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(C,B),B)$ is invertible. The zero ring, zero complex, and an odd shift of a finite projective module obey the same formulas: in odd degree the component evaluation has the unit sign $-1$, rather than the unsigned evaluation.",
-   "uses": [
-    "lem-pod-projective-hom-evaluation-model",
-    "lem-sfb-ringed-site-duality-maps"
+    "lem-trf-projective-bidual-representative-comparison"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A97, lemma-internal-hom-evaluate, functoriality of canonical biduality; more-algebra.tex Tag 0A66 projective Hom-model naturality"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, including the map to the K-injective Hom model; sites-cohomology.tex Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit transpose and naturality; sites.tex Tag 00X9, section-topoi, punctual topos. Terminal-site Hom and resolution transport are the explicit specialization needed for the returned parent proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "Naturality from [lem-trf-projective-bidual-representative-comparison] gives $b_C e=e^{\\vee\\vee}b_{QP}$, hence $b_C=e^{\\vee\\vee}b_{QP}e^{-1}$. Each factor is invertible, proving that the Koszul transpose $b_C$ is invertible. This uses the actual canonical map, rather than merely an unspecified isomorphism of its source and target.",
+   "uses": [
+    "lem-trf-projective-bidual-representative-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, including the map to the K-injective Hom model; sites-cohomology.tex Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit transpose and naturality; sites.tex Tag 00X9, section-topoi, punctual topos. Terminal-site Hom and resolution transport are the explicit specialization needed for the returned parent proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "The statement fixes the derived tensor $\\otimes^{\\mathbf L}_B$ with unit $O=B[0]$ and lets the braiding $\\sigma$ be arbitrary; its canonical evaluation is formed with $\\sigma$. Through the one-object identification of [lem-trf-projective-bidual-representative-comparison], [lem-sf-ringed-derived-closed-symmetric-monoidal] makes $D(B)$ closed: $-\\otimes^{\\mathbf L}_BL$ is left adjoint to $R\\operatorname{Hom}_B(L,-)$, with coefficient evaluation as counit. So the canonical evaluation is $b^\\sigma_C$, the transpose of $\\mathrm{ev}_{C,O}\\circ\\sigma_{C,C^\\vee}$; for the Koszul symmetry it is the map $b_C$ of Steps 3--4. Since $C$ is perfect, [lem-zl-ring-derived-dualizable-perfect] makes it dualizable for $\\otimes^{\\mathbf L}_B$. Then [lem-trf-dualizable-braided-canonical-bidual] shows that $b^\\sigma_C$ is an isomorphism for every braiding $\\sigma$. This proves the second conclusion as stated, and Steps 3--4 are its explicit Koszul case.",
+   "uses": [
+    "lem-trf-projective-bidual-representative-comparison",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-zl-ring-derived-dualizable-perfect",
+    "lem-trf-dualizable-braided-canonical-bidual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFP, definition-dual; Tag 0FFQ, lemma-left-dual; with more-algebra.tex Tag 07VI, lemma-dual-perfect-complex (perfect complexes are the dualizable objects)."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-rhom-base-change-map",
   "def-pc-perfect-ring-complex",
-  "def-pur-derived-internal-hom",
-  "def-sc-module-total-hom-complex",
-  "def-weil-abstract-derived-category",
-  "lem-pod-projective-hom-evaluation-model",
-  "lem-sf-finite-projective-dual",
-  "lem-sfb-ringed-site-duality-maps"
+  "lem-trf-finite-projective-hom-dual-involution",
+  "lem-trf-projective-bidual-representative-comparison",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-zl-ring-derived-dualizable-perfect",
+  "lem-trf-dualizable-braided-canonical-bidual"
  ],
  "proof_origin": {
   "by": "document",
@@ -201,38 +193,36 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-perfect-complex-derived-biduality",
   "worker": "stage1",
-  "summary": "Split the generic derived biduality statement using the bounded finite-projective representative from the perfect-complex definition, the termwise finite-projective dual, the projective Hom-complex model, and the signed canonical evaluation calculation of Stacks Tag 07VI. No new nodes were created because every non-elementary ingredient already exists in the DAG.",
-  "blueprint": "Realizes the finite-projective biduality input in the existing ancestor route: lem-trf-local-term-locality proof (2), through the nearby-cycle relative-duality polynomial-chart branch recorded in blueprint.from. Steps 1–2 give the bounded finite-projective dual, Steps 3–4 identify and invert its canonical signed double evaluation, and Step 5 transports the map naturally. The enclosing unit sk-i-curve-zero is unchanged; this generic algebra tool does not replace its normal-cone route.",
+  "summary": "Repair of the human re-split order: two independent statement-only nodes retain the bounded product-Hom/sign calculation and the terminal-site/K-injective/canonical-map comparison; four short assembly steps retain perfectness and natural transport. The item statement and statement dependencies are unchanged. Reviewer FIX (Q109 maintainer reader, 2026-10-23): the statement corrected on 2026-10-18 equips D(B) with an arbitrary braiding and forms the canonical evaluation with it, while Steps 3-4 invert only the Koszul transpose; Step 5 adds the arbitrary-braiding case via dualizability of perfect complexes and a new statement-only categorical node.",
+  "blueprint": "Realizes the finite-projective biduality input in the existing ancestor route: lem-trf-local-term-locality proof (2), through the nearby-cycle relative-duality polynomial-chart branch recorded in blueprint.from. Step 1 gives the bounded finite-projective dual and the signed chain isomorphism, Step 2 the perfectness of the dual, Steps 3-4 identify and invert the Koszul canonical double evaluation and transport it naturally, and Step 5 treats the equipped arbitrary braiding. The enclosing unit sk-i-curve-zero is unchanged; this generic algebra tool does not replace its normal-cone route. Re-split: old steps 2 and 4 are the Hom-dual-involution node; old steps 1 and 3 and the naturality assertion of step 5 are the projective-bidual-representative-comparison node. The parent only chooses a representative and composes the resulting isomorphisms.",
   "tool_uses": [
    {
-    "node": "lem-sf-finite-projective-dual",
-    "why": "Generic ordinary finite-projective duality and reflexivity are used as a tool for each term; the trace-formula route does not restate this module theorem."
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Step 5 takes from its statement only that derived internal Hom is right adjoint to derived tensor with evaluation counit, on the one-object site; no node of sk-i-curve-zero states this closed structure."
    },
    {
-    "node": "lem-pod-projective-hom-evaluation-model",
-    "why": "Generic projective Hom-complex computation of derived internal Hom and evaluation is used as a tool; the trace-formula route supplies no replacement."
-   },
-   {
-    "node": "lem-sfb-ringed-site-duality-maps",
-    "why": "Generic canonical derived evaluation and bidual maps on a ringed site identify the signed chain map with the canonical map; no trace-formula node supplies this interface."
+    "node": "lem-zl-ring-derived-dualizable-perfect",
+    "why": "Step 5 takes only the direction perfect => dualizable for the derived tensor of D(B); no node of sk-i-curve-zero states it."
    }
   ]
  },
  "tool_uses": [
   "lem-sf-finite-projective-dual",
   "lem-pod-projective-hom-evaluation-model",
-  "lem-sfb-ringed-site-duality-maps"
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-zl-ring-derived-dualizable-perfect"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q63-09d289f6a",
-  "group": "Q63",
+  "reviewer": "NT-cc-Q109-3d5182408",
+  "group": "Q109",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-09d289f6a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited node statements, and Stacks sources (Tags 07VI, 0A66, 0A97 and Hom/sign sections). Verified hypotheses, coefficient category, identity base-change specialization, signed chain-map calculation, naturality, edge cases, searches, route compliance, and absence of duplicates/cycles/long hidden lemmas. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-3d5182408 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the released re-split note, the base 5-step proof, and Stacks 07VI and 0A66 (more-algebra), 0A97 (sites-cohomology), 00X9 (sites) and 0FFP/0FFQ/0FFR (categories). The re-split is sound. Old steps 2 and 4 (coordinates, d_E=(-1)^{r+1}φd_P, d_F=-(d_P)^{**}, δ=(-1)^p ev, the chain-map sign, the inverse and naturality) became lem-trf-finite-projective-hom-dual-involution; I checked all of it by hand on B=0, P=0, B[1], B→B by 1 and ℤ→ℤ by 2. Old steps 1, 3 and 5 (one-object transport, the H(S,η_O) quasi-isomorphisms for bounded-above projective S, (γ_T)^∨b=γ_D Q(δ_T), naturality) became lem-trf-projective-bidual-representative-comparison; the types check, and it is true without finite generation (it asserts no invertibility). Neither node restates the item. The assembly is short, no SGA is cited, and there is no cycle. The overlaps lem-sfb-ringed-site-bounded-dual-components, lem-zl-bounded-projective-complex-dual-pairing and lem-sfb-ringed-signed-bidual-localization are not one-line specializations. FIX (E1/E6): the statement corrected on 2026-10-18 equips D(B) with an arbitrary braiding, and the canonical map is formed with it (Lean docstring: 'taken for the given braiding'), but steps 3-4 invert only the Koszul transpose. I added a statement-only node, lem-trf-dualizable-braided-canonical-bidual: for any braiding on a right-closed monoidal category, the transpose X→[[X,1],1] of ev∘σ for a dualizable X is an isomorphism. It is the mirror of the sorry-free project lemma isIso_toIhomIhomUnit. Its source is Stacks 0FFP/0FFQ; three Mathlib greps were run, and LeanSearch and Loogle are recorded as unavailable because the network is blocked here. I also added item step 5, which uses lem-sf-ringed-derived-closed-symmetric-monoidal (the tensor-Hom adjunction on the one-object site via the comparison node) and lem-zl-ring-derived-dualizable-perfect (perfect ⇒ dualizable), both declared in split_report.tool_uses. proof_deps, split_report.summary and blueprint were corrected (the delivered text named a nonexistent 'Step 5'). The statement and stmt_deps are unchanged. Steps 3-4 remain the explicit Koszul case, and step 2 still needs both delivered nodes, so that case is not idle. Maintainer: the earlier Q97 FIX landings were refused only for side-to-live promotion; please make sure this one is applied.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectComplexDerivedBiduality",
@@ -275,5 +265,16 @@
    }
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

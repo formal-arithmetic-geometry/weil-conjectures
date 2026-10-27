@@ -1,0 +1,81 @@
+{
+ "id": "lem-sfb-ind-fp-idempotence",
+ "kind": "statement",
+ "title": "Idempotence of the filtered-colimit hull of finitely presentable objects",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a universe $U$ for small indexing categories and Hom sets [def-weil-size-convention]. Let $\\mathcal A$ be a category locally small in $U$ [def-weil-pbc-category-colimit], and let $P$ be a property of its objects. Suppose each $P$-object is finitely presentable: $\\operatorname{Hom}_{\\mathcal A}(C,-)$ preserves every existing $U$-small filtered colimit whenever $P(C)$ holds. Write $\\operatorname{ind}_U(P)$ for the property of being isomorphic to a colimit of a $U$-small filtered diagram all of whose objects satisfy $P$. Then $\\operatorname{ind}_U(\\operatorname{ind}_U(P))=\\operatorname{ind}_U(P)$ as object properties. No assumption that every object of $\\mathcal A$ is a filtered colimit of finitely presentable objects is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart.proof.md",
+  "place": "Filtered colimits and direct sums paragraph; general flattening theorem, Mathlib CategoryTheory.ObjectProperty.ind_ind, ObjectProperty/Ind.lean lines 58–66."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a locally small category the operation of taking small filtered colimits of finitely presentable objects is idempotent",
+   "results": "8 hits: CategoryTheory.IsLocallyFinitelyPresentable, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι, CategoryTheory.isCardinalPresentable_of_isColimit, CategoryTheory.IsFinitelyAccessibleCategory.instEssentiallySmallIsFinitelyPresentable, CategoryTheory.IsLocallyPresentable, CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable, CategoryTheory.ObjectProperty.isFinitelyPresentable",
+   "date": "2026-10-24",
+   "verdict": "match: ObjectProperty.ind_ind states this equality; the leanfinder phrasing returned related presentability infrastructure, while leansearch, loogle and grep identify the exact theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The filtered colimit closure of finitely presented objects is idempotent",
+   "results": "8 hits: CategoryTheory.ObjectProperty.ind_ind, CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.ObjectProperty.colimitsClosure.of_colimitPresentation, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, CategoryTheory.ObjectProperty.colimitsClosure.below.of_colimitPresentation, CategoryTheory.ObjectProperty.colimitsCardinalClosure_le_isCardinalPresentable",
+   "date": "2026-10-24",
+   "verdict": "match: ObjectProperty.ind_ind states this equality; the leanfinder phrasing returned related presentability infrastructure, while leansearch, loogle and grep identify the exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.ind_ind",
+   "results": "1 hits: CategoryTheory.ObjectProperty.ind_ind",
+   "date": "2026-10-24",
+   "verdict": "match: ObjectProperty.ind_ind states this equality; the leanfinder phrasing returned related presentability infrastructure, while leansearch, loogle and grep identify the exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma ind_ind",
+   "results": "1 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
+   "date": "2026-10-24",
+   "verdict": "match: ObjectProperty.ind_ind states this equality; the leanfinder phrasing returned related presentability infrastructure, while leansearch, loogle and grep identify the exact theorem."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ObjectProperty.ind_ind",
+  "file": "Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
+  "line": 59,
+  "how": "exact: lines 59–66, with w the fixed indexing/Hom universe, P the given object property, and h its finite-presentability hypothesis. The definition of ind is at lines 44–46; it quantifies over SmallCategory indices. Finite presentability means Hom preserves filtered colimits, as in CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimitsOfSize (Mathlib/CategoryTheory/Presentable/Finite.lean lines 67–69)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fp2-ind-realization",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), preservation of direct sums on the localizing hull: corrected Noetherian heart route; abstract passage from a weak Serre FP2 heart to its filtered-colimit hull. Flattening the filtered-colimit presentations used in this heart route.",
+   "via": [
+    "lem-sfb-fp2-ind-realization",
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

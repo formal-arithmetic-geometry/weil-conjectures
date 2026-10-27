@@ -1,0 +1,178 @@
+{
+ "id": "lem-pur-native-integral-tate-finite-representation",
+ "kind": "statement",
+ "title": "Finite etale representation of one native integral Tate level",
+ "statement": "Let ell be prime, let Y be an arbitrary scheme on which ell is invertible, let E be a finite subextension of the fixed p-adic algebraic closure, and let n be a natural number. The underlying sheaf of sets of spIntegralTwistLevel Y ell E n from [sk-def-sp-tate-twist] is the lifted Yoneda sheaf of a finite etale object V of the small pro-etale site of Y. This is a single positive level of exponent n+1. It makes no assertion about tower transitions, infinite limits, or inverse image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+ },
+ "stmt_deps": [
+  "sk-def-sp-tate-twist",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use spIntegralTwistLevel_comparison from the native twist definition to identify the underlying native level with change of rings of the recorded roots module along the constant quotient coefficient map. This is precisely the finite-level tensor comparison already stated in the library.",
+   "uses": [
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+   }
+  },
+  {
+   "text": "Use the proved purTwistIntegralBasis theorem of lem-pur-twist-integral-basis. The equality spIntegers_eq identifies that integral ring with the native integer ring. Base change of its finite basis along Z_ell -> Z_ell/(ell^(n+1)) identifies the integer quotient with a finite free module over this scalar quotient. PadicInt.ker_toZModPow and quotientKerEquivOfSurjective identify the scalar quotient with ZMod (ell^(n+1)). The quotient tensor equivalence and the integer-ring equality transport this basis to the native quotient. Any additive equivalence of modules over ZMod is automatically linear, so the basis works for the unique map in the native comparison; lift universes.",
+   "uses": [
+    "lem-pur-twist-integral-basis",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+   }
+  },
+  {
+   "text": "Apply constantFiniteFree_sectionBasis to the two finite coefficient rings. Its natural sectionwise bases feed the proved sheafifiedTensorIso helper of lem-pur-constant-finite-free-power-iso. This identifies the underlying scalar extension with a finite product of the original root sheaf. The fully faithful inclusion of sheaves into presheaves and the limit-preserving forgetful functor to sets give the same finite product in set sheaves.",
+   "uses": [
+    "lem-pur-constant-finite-free-section-basis",
+    "lem-pur-constant-finite-free-power-iso",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+   }
+  },
+  {
+   "text": "For N=ell^(n+1), the residue-field unit hypothesis implies N is a unit in global sections by the local-ring residue criterion and the germ criterion for units. Set R=Gamma(Y,O_Y). Pull back affineRootsOver R N along Y -> Spec R. Monicity of X^N-1 makes its adjoin-root algebra finite. AdjoinRoot.etale_X_pow_sub_C makes it etale since N is invertible. These properties survive base change. The base-change clause of affineRoots_representability gives natural bijections between maps into this pullback and Nth roots in the units of the test scheme. Compose with the canonical section equivalence of the pro-etale root kernel; compatibility with its inclusion into units proves naturality and hence the lifted Yoneda isomorphism.",
+   "uses": [
+    "lem-asd-affine-roots-representability",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+   }
+  },
+  {
+   "text": "Build a limiting finite fan of copies of this pro-etale object by induction. The empty product is the identity of Y; the successor is a binary fibre product. The forgetful functor to schemes over Y preserves binary products, so the structure morphism of the product is an isomorphism followed by a base change and a finite etale morphism. It is finite etale. Lifted Yoneda preserves products. Compose its product representation with the inverse finite-basis comparison to obtain the asserted representative, also on the empty base.",
+   "uses": [
+    "lem-asd-affine-roots-representability",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-sheaf",
+  "lem-asd-affine-roots-representability",
+  "lem-pur-constant-finite-free-power-iso",
+  "lem-pur-constant-finite-free-section-basis",
+  "lem-pur-twist-integral-basis",
+  "sk-def-sp-tate-twist",
+  "lem-route-sp-integral-twist-level-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, finite-level representation followed by base change of the inverse limit. T6: implemented using the existing native comparison, integral basis, constant finite-free tensor coordinates, and explicit root schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf inverse image preserves a limit when the base change functor on sites preserves limits of representing objects",
+   "results": "8 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.preservesLimitsOfShape_presheafToSheaf, CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize, CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits",
+   "date": "2026-10-25",
+   "verdict": "no match: no representation theorem for the native finite Tate tensor level"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale.*[Ll]imit|[Ll]imit.*WeaklyEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: no representation theorem for the native finite Tate tensor level"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient Tate twist is represented by a finite etale group scheme",
+   "results": "8 hits: Algebra.Etale.finitePresentation, RingHom.Etale, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsFinite.toIsAffineHom, TannakaDuality.FiniteGroup.leftRegular, AlgebraicGeometry.IsEtale, Algebra.Etale.recOn",
+   "date": "2026-10-25",
+   "verdict": "no match: no representation theorem for the native finite Tate tensor level"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of roots of unity with a finite quotient of the integers of a p-adic extension is represented by a finite etale scheme",
+   "results": "8 hits: cyclotomicCharacter.spec, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter, cyclotomicCharacter.toFun_apply, Algebra.Etale.baseChange, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-25",
+   "verdict": "no match: no representation theorem for the native finite Tate tensor level"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*(representable|finiteEtale)|rootsOfUnity.*(representable|finiteEtale)",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: no representation theorem for the native finite Tate tensor level"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeIntegralTateTowerLimit",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Integral twist paragraph, assertion that the finite coefficient/root sheaf is represented by a finite etale scheme.",
+   "via": [
+    "lem-pur-native-integral-tate-tower-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeIntegralTateFiniteRepresentation",
+  "file": "lean/Sheaf/Paper/NativeIntegralTateFiniteRepresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spIntegralTwistLevel_finiteEtale_representation",
+  "statement": "theorem spIntegralTwistLevel_finiteEtale_representation\n    (Y : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    [∀ y : Y, Invertible (ℓ : Y.residueField y)]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :\n    ∃ V : Y.ProEt, IsFinite V.hom ∧ Etale V.hom ∧\n      Nonempty ((Scheme.ProEt.topology Y).uliftYoneda.{u + 1}.obj V ≅\n        (sheafCompose (Scheme.ProEt.topology Y) (forget AddCommGrpCat.{u + 1})).obj\n          (spIntegralTwistLevel Y ℓ E n).X)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T164934-L-1135274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T203232-L-2793980",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

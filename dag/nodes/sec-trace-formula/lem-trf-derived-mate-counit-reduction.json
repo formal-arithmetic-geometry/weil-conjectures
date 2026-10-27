@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-derived-mate-counit-reduction",
+ "kind": "statement",
+ "title": "Reduction of a derived mate using the unprimed counit",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] in a common universe [def-weil-size-convention], with derived categories [def-weil-abstract-derived-category] and bounded-below derived categories [def-weil-pbc-bounded-derived-subcategories]. Write $K^+(\\mathcal C)$ for bounded-below cochain complexes modulo chain homotopy, $q:K^+(\\mathcal C)\\to D^+(\\mathcal C)$ for localization at quasi-isomorphisms, and $K(F)$ for termwise application of an additive functor. Let $L:\\mathcal B\\to\\mathcal A$, $L':\\mathcal B'\\to\\mathcal A'$, $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$ be exact additive functors. Put $E=D(L)$, $E'=D(L')$, $T=D(G)$ and $S=D(H)$, with their canonical natural localization isomorphisms $\\phi_{F,V}:D(F)(qV)\\xrightarrow{\\sim}qK(F)V$ [lem-weil-pbc-exact-functor-derived-factorization]. Let $\\sigma:L'G\\to HL$ be an arbitrary natural transformation, and let $\\sigma^K:K(L')K(G)\\to K(H)K(L)$ be its termwise transformation on $K^+$. Assume $\\mathcal A,\\mathcal A'$ have enough injectives, meaning that every object embeds into an injective object [def-sp-injective-resolutions]. Give additive right adjoints $R,R'$ and adjunctions $L\\dashv R$, $L'\\dashv R'$. Write $\\eta'^K,\\varepsilon^K$ for their termwise homotopy unit and counit [lem-weil-pbc-termwise-adjunction-homotopy]. Let $U=\\mathbf R R$, $U'=\\mathbf R R'$ with natural comparison maps $\\alpha:qK(R)\\to Uq$, $\\alpha':qK(R')\\to U'q$ [lem-weil-pbc-right-derived-plus-injective]. Use the canonical derived adjunctions $E\\dashv U$ and $E'\\dashv U'$, with primed unit $\\eta'^D$ and unprimed counit $\\varepsilon^D$, normalized by the unit and counit identities of [lem-trf-bounded-below-derived-adjunction]. For $N\\in K^+(\\mathcal B)$ put\n$$A_N=\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}),\\qquad B_N=\\phi_{H,K(L)N}\\circ S(\\phi_{L,N}).$$ Let $\\theta:E'T\\to SE$ be any natural transformation satisfying $B_N\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ A_N$ for all $N\\in K^+(\\mathcal B)$, and write $m:TU\\to U'S$ for its mate [def-weil-pbc-adjunction-mate]. For $P\\in K^+(\\mathcal A)$ put $X=qP$, $N=K(R)P$, $Z=qK(G)N$, $h=\\phi_{H,P}$, $t=T(\\alpha_P)\\circ\\phi_{G,N}^{-1}$ and\n$$d=K(H)(\\varepsilon^K_P)\\circ\\sigma^K_N:K(L')K(G)N\\to K(H)P.$$\nThen\n$$U'(h)\\circ m_X\\circ t=U'(q(d))\\circ U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z.$$\nThis identity is valid for noninvertible $\\sigma$, $\\alpha_P$, and $\\alpha'$, without assuming that $H$ preserves injectives.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "Old proof steps 4 and 5: derivedPlus_mateEquiv_app_fac, lines 439–451 and 454–482 (mate expansion, naturality, counit comparison, and use of hθ)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-bounded-below-derived-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Put $u=\\alpha_P$ and $a=\\phi_{G,N}$. By the component definition of the mate [def-weil-pbc-adjunction-mate],\n$$m_X=U'(S(\\varepsilon^D_X))\\circ U'(\\theta_{UX})\\circ\\eta'^D_{TU X}.$$\nNaturality of the unit at $t:Z\\to TU X$ gives $\\eta'^D_{TU X}\\circ t=U'(E'(t))\\circ\\eta'^D_Z$. Thus\n$$U'(h)m_Xt=U'\\bigl(h\\circ S(\\varepsilon^D_X)\\circ\\theta_{UX}\\circ E'(t)\\bigr)\\circ\\eta'^D_Z.$$",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 439–450: hmate and unit naturality h₁; also naturality at the invertible localization component"
+   }
+  },
+  {
+   "text": "Since $t=T(u)\\circ a^{-1}$, naturality of $\\theta$ at $u:qN\\to UX$ says\n$$\\theta_{UX}\\circ E'(t)=S(E(u))\\circ\\theta_{qN}\\circ E'(a^{-1}).$$\nConsequently the morphism inside $U'$ in Step 1 is\n$$h\\circ S(\\varepsilon^D_X\\circ E(u))\\circ\\theta_{qN}\\circ E'(a^{-1}).$$\nThis uses naturality at a morphism, not inversion of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 451 and 461–462: h₂ and its substitution"
+   }
+  },
+  {
+   "text": "Set $s=\\phi_{L,N}$ and $e=\\varepsilon^K_P:K(L)N\\to P$. The unprimed counit identity of [lem-trf-bounded-below-derived-adjunction] at $P$ is\n$$\\varepsilon^D_X\\circ E(u)=q(e)\\circ s.$$\nSubstitution in Step 2 gives the inside morphism\n$$h\\circ S(q(e))\\circ S(s)\\circ\\theta_{qN}\\circ E'(a^{-1}).$$",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 452 and 462: h₃, the unprimed counit comparison"
+   }
+  },
+  {
+   "text": "Write $f=\\phi_{H,K(L)N}$ and $b=\\phi_{L',K(G)N}$. Naturality of the localization comparison [lem-weil-pbc-exact-functor-derived-factorization] at $e$ gives\n$$h\\circ S(q(e))=q(K(H)(e))\\circ f.$$\nThe assumed square identity is $f\\circ S(s)\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ b\\circ E'(a)$. Therefore the inside morphism of Step 3 equals\n$$q(K(H)(e))\\circ q(\\sigma^K_N)\\circ b\\circ E'(a)\\circ E'(a^{-1})=q(d)\\circ b.$$\nHere functoriality cancels only $a\\circ a^{-1}$ and combines the two localized homotopy morphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 459–460 and 467–482: h₈, h₉ and the key equality"
+   }
+  },
+  {
+   "text": "Insert $q(d)\\circ b$ into Step 1 and use functoriality of $U'$:\n$$U'(h)\\circ m_X\\circ t=U'(q(d))\\circ U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z.$$\nNo step inverts $\\sigma$, $u$, or $\\alpha'$, and no step requires $K(H)P$ to consist of injectives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 483–484: final functoriality and reassociation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "derivedPlus_mateEquiv_app_fac, lines 439–484: explicit intermediate counit reduction from its naturality calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For derived adjunctions the mate of an exact square precomposed with a right derived comparison unit reduces by the counit factorization to the derived transpose of the localized counit composite",
+   "results": "{\"t\": \"2026-10-22T06:04:10Z\", \"tool\": \"leanfinder\", \"query\": \"For derived adjunctions the mate of an exact square precomposed with a right derived comparison unit reduces by the counit factorization to the derived transpose of the localized counit composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"d167374cdb683e03\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_apply supplies the ordinary component formula and derivedε_fac_app a single counit comparison; neither states the combined two-adjunction, exact-square comparison-unit reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*fac|mateEquiv.*naturality|derived.*counit",
+   "results": "{\"t\": \"2026-10-22T06:04:27Z\", \"tool\": \"grep\", \"query\": \"mateEquiv.*fac|mateEquiv.*naturality|derived.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"22246c82d7933e6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_apply supplies the ordinary component formula and derivedε_fac_app a single counit comparison; neither states the combined two-adjunction, exact-square comparison-unit reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv, Adjunction.counit",
+   "results": "{\"t\": \"2026-10-22T06:04:28Z\", \"tool\": \"loogle\", \"query\": \"mateEquiv, Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'mateEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'mateEquiv'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mate of a square of exact functors after composing the right derived unit reduces to right derived functor applied to the localized counit square composite",
+   "results": "{\"t\": \"2026-10-22T06:05:08Z\", \"tool\": \"leansearch\", \"query\": \"Mate of a square of exact functors after composing the right derived unit reduces to right derived functor applied to the localized counit square composite\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expand the mate as unit square counit and use naturality with a noninvertible comparison morphism then replace the counit using a derived adjunction factorization",
+   "results": "{\"t\": \"2026-10-22T06:05:24Z\", \"tool\": \"leanfinder\", \"query\": \"Expand the mate as unit square counit and use naturality with a noninvertible comparison morphism then replace the counit using a derived adjunction factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc\"], \"digest\": \"9c1067765d58d1a1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_apply supplies the ordinary component formula and derivedε_fac_app a single counit comparison; neither states the combined two-adjunction, exact-square comparison-unit reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_apply",
+   "results": "{\"t\": \"2026-10-22T06:05:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\"], \"digest\": \"d87c4380b757ebd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_apply supplies the ordinary component formula and derivedε_fac_app a single counit comparison; neither states the combined two-adjunction, exact-square comparison-unit reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_apply|derivedε_fac_app|derivedPlus_mateEquiv_app_fac",
+   "results": "{\"t\": \"2026-10-23T09:24:58Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_apply|derivedε_fac_app|derivedPlus_mateEquiv_app_fac\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"0117faabc7baae02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_apply",
+   "results": "{\"t\": \"2026-10-23T09:24:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\"], \"digest\": \"d87c4380b757ebd4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an exact square the mate after the right derived comparison is computed by applying the primed right derived functor to the localized square followed by the counit",
+   "results": "{\"t\": \"2026-10-23T09:24:58Z\", \"tool\": \"leansearch\", \"query\": \"For an exact square the mate after the right derived comparison is computed by applying the primed right derived functor to the localized square followed by the counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Functor.IsRightDerivedFunctor.recOn\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.Functor.IsRightDerivedFunctor\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedε.congr_simp\"], \"digest\": \"5063eb81652e11c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expand an adjunction mate and use naturality and the derived counit comparison to compute it after precomposing the right derived comparison morphism",
+   "results": "{\"t\": \"2026-10-23T09:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"Expand an adjunction mate and use naturality and the derived counit comparison to compute it after precomposing the right derived comparison morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"1868779ca04b99cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": "{\"t\": \"2026-10-23T09:27:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\"], \"digest\": \"436104c56e3339bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering a mate with a morphism into the right adjoint and an exact localization isomorphism, then replacing the counit using its comparison factorization",
+   "results": "{\"t\": \"2026-10-23T09:27:28Z\", \"tool\": \"leanfinder\", \"query\": \"Whiskering a mate with a morphism into the right adjoint and an exact localization isomorphism, then replacing the counit using its comparison factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.Localization.ε_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.Localization.η_app\", \"CategoryTheory.Adjunction.Localization.η\", \"CategoryTheory.Adjunction.Localization.ε\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"eb502906a53971db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the mate definition, individual derived unit/counit identities, or localization of adjunctions; none gives this combined two-adjunction reduction under the stated square hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-below-derived-mate-model",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization first descent via the ph/etale comparison: the canonical arrow identification in Stacks 0DDJ(2), specifically computation of a derived mate by its underived square on complexes. Extraction: Old proof steps 4 and 5: derivedPlus_mateEquiv_app_fac, lines 439–451 and 454–482 (mate expansion, naturality, counit comparison, and use of hθ).",
+   "via": [
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-mate-counit-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the mate, wrote both naturality substitutions and the unprimed counit comparison explicitly, then used the assumed square factorization and naturality of the exact localization comparison. All facts are existing nodes or elementary functoriality; no new node is needed. Statement and hypotheses retained.",
+  "blueprint": "lem-trf-local-term-locality, latest proof (1)–(2): normal-cone specialization route, through the existing ph/etale descent comparison chain; this item supplies the counit calculation extracted from steps 4–5 of lem-trf-bounded-below-derived-mate-model. No change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-af1ed7397",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-af1ed7397 (reviewer sub-agent of L); spot-checked: This is the item's own first one-level split. It has no new nodes, and its statement matches exactly what step 2 of the parent lem-trf-bounded-below-derived-mate-model applies. I recomputed all five steps by hand. (1) The mate component from def-weil-pbc-adjunction-mate with L1=E, R1=U, L2=E', R2=U', G=T, H=S, followed by η'^D naturality at t=T(α_P)φ_G^{-1}. (2) θ naturality at u=α_P, with no inversion. (3) The counit identity ε^D_{qP}E(α_P)=q(ε^K_P)φ_{L,K(R)P} of lem-trf-bounded-below-derived-adjunction; its hypotheses hold and nothing is needed on B. (4) Naturality of φ_H at e (lem-weil-pbc-exact-functor-derived-factorization) and hθ, with B_N=fS(s) and A_N=bE'(a), give q(d)b, and every domain and codomain checks. (5) Functoriality of U'. The steps follow PlusAdjunction.lean: hmate 439–446, h₁/h₂/h₃ 450–452, h₈/h₉ and key 459–482. Edge cases: σ=0 makes θ_{qN}=0 and both sides 0; with identity functors the statement reduces correctly; only the φ's are inverted. Route: all uses are same-unit nodes or mathlib-leaf notions, so no tool_uses are needed. The duplicate grep over mate/counit/right-derived nodes finds only geometric nodes and the sibling transpose-unit node. Searches cover LeanFinder, Loogle, LeanSearch (unavailable, recorded as such) and grep. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.DerivedMateCounitReduction",
+  "declaration": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_counit_reduction",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/DerivedMateCounitReduction.lean",
+  "statement": "theorem derivedPlus_mateEquiv_counit_reduction {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'} [Category.{vA} A] [Category.{vB} B] [Category.{vA'} A'] [Category.{vB'} B'] [Abelian A] [Abelian B] [Abelian A'] [Abelian B'] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wA'} A'] [HasDerivedCategory.{wB'} B'] [EnoughInjectives A] [EnoughInjectives A'] {L : B ⥤ A} {R : A ⥤ B} {L' : B' ⥤ A'} {R' : A' ⥤ B'} {G : B ⥤ B'} {H : A ⥤ A'} [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits L'] [PreservesFiniteColimits L'] [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (adj : L ⊣ R) (adj' : L' ⊣ R') (σ : TwoSquare G L L' H) (θ : TwoSquare G.mapDerivedCategoryPlus L.mapDerivedCategoryPlus L'.mapDerivedCategoryPlus H.mapDerivedCategoryPlus) (hθ : ∀ N : HomotopyCategory.Plus B, θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫ H.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N) ≫ H.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj N) = L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫ L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫ DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N)) (P : HomotopyCategory.Plus A) : G.mapDerivedCategoryPlusFactorsh.inv.app (R.mapHomotopyCategoryPlus.obj P) ≫ G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app P) ≫ (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app (DerivedCategory.Plus.Qh.obj P) ≫ R'.rightDerivedFunctorPlus.map (H.mapDerivedCategoryPlusFactorsh.hom.app P) = adj'.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj (G.mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj P))) ≫ R'.rightDerivedFunctorPlus.map (L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj P))) ≫ R'.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app (R.mapHomotopyCategoryPlus.obj P) ≫ H.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app P)))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-915ba9911"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-915ba9911",
+  "group": "Q32",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause (σ, θ, hθ = B_N∘θ = q(σ^K)∘A_N; LHS U'(h)∘m_X∘t; RHS U'(q d)∘U'(φ_L')∘η'_Z). Identity recomputed by hand: mateEquiv_apply, unit naturality, θ-naturality at α_P, derivedPlus_counit_app_fac, φ_H naturality, hθ. No inverse of σ, α_P or α' is used. Dependency records, docstrings, sorry body and report sections are in order; the declaration name is new. Finding H3/H9: silent universe restriction. The delivery puts all four categories in Type u / Category.{v} / HasDerivedCategory.{w}, while the landed parent lem-trf-bounded-below-derived-mate-model (step 2 applies this item) and upstream derivedPlus_mateEquiv_app_fac use independent universes. FIX: fixes/DerivedMateCounitReduction.lean with 12 independent universes matching the parent (diff limited to the universe line and binders), plus fixes/lem-trf-derived-mate-counit-reduction.lean-record.json with the new verbatim statement. refit_record reports no problems; nt_compile --json is clean (1.7 s, exit 0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091020-L-3295610",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.derivedPlus_mateEquiv_counit_reduction"
+  ],
+  "sorry_after": []
+ }
+}

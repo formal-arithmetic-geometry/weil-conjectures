@@ -1,0 +1,95 @@
+{
+ "id": "sk-lem-pd-generic-restriction",
+ "kind": "statement",
+ "title": "Restriction to a geometric generic fibre",
+ "statement": "Here $\\omega_X$ and $\\delta_K$ are the dualizing complex and the double-dual morphism of\n[sk-def-ops].\n\nLet $B/k$ be a smooth integral curve and\n$\\bar\\eta=\\operatorname{Spec}\\overline{k(B)}$. For a finite-type\n$B$-scheme $T$ let $g_T\\colon T_{\\bar\\eta}=T\\times_B\\bar\\eta\\to T$ be\nthe projection, with pullback\n$g_T^*\\colon D(T_{\\mathrm{pro\\acute et}},A)\\to D(T_{\\bar\\eta,\\mathrm{pro\\acute et}},A)$. For finite\n$A$, bounded constructible complexes $L$ on $T$ and $K,M$ on\n$X$, a separated finite-type $B$-morphism $h\\colon T\\to X$, and a closed\nimmersion $i\\colon Z\\hookrightarrow X$, there are isomorphisms in\n$D(X_{\\bar\\eta,\\mathrm{pro\\acute et}},A)$, resp. $D(Z_{\\bar\\eta,\\mathrm{pro\\acute et}},A)$,\ncompatible with evaluation\n\n$$\\begin{aligned}\n g_X^*Rh_*L&\\simeq Rh_{\\bar\\eta,*}g_T^*L,\\\\\n g_Z^*i^!M&\\simeq i_{\\bar\\eta}^!g_X^*M,\\\\\n g_X^*\\cHom_X(K,M)&\\simeq\n \\cHom_{X_{\\bar\\eta}}(g_X^*K,g_X^*M)\n \\quad(K\\in\\Dctf(X,A)).\n\\end{aligned}$$\n\nConsequently, when $B=\\mathbf A^1_k$, locally on $X$\n\n$$\n g_X^*\\omega_X\\simeq\\omega_{X_{\\bar\\eta}}(1)[2],\n$$\n\nand the two internal-Hom comparisons identify\n$g_X^*\\delta_K$ with $\\delta_{g_X^*K}$; the extra invertible\ntwist and shift cancel in the double dual.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors/sk-lem-pd-generic-restriction/_section.md",
+  "place": "node sk-lem-pd-generic-restriction, order 2388"
+ },
+ "stmt_deps": [
+  "sk-def-ops"
+ ],
+ "proof": [
+  {
+   "text": "The comparisons are proved in the order stated, each from the\nprevious ones: direct image by continuity along a limit of étale\nmaps, $i^!$ by the localization triangle, internal Hom by\ndévissage to generators $t_!P$, and the twist by a closed embedding\ninto affine space.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "By [sk-prop-ctf-finite-comparison], with finite coefficients\n$\\Dctf(X,A)$ and the direct images are computed by their classical\nétale counterparts. A separable closure of\n$k(B)$ is the inverse limit of nonempty affine opens in the\nnormalizations of $B$ in its finite separable extensions, with\nthe branch loci removed. Each stage is étale over an open of\n$B$. Smooth base change (the section on smooth base change)\ncommutes $Rh_*$ with these stagewise pullbacks. Every affine object\nétale over the limit descends to a stage. Continuity of\nfinite-coefficient étale cohomology for affine transition maps\nthen commutes their derived sections, degree by degree, with this\nfiltered limit. Thus the first comparison passes to the separable\nclosure. A purely inseparable extension induces the same classical\nétale topos, so passage to the algebraic closure gives the asserted\ncomparison. The argument uses the comparison for bounded-below\ncomplexes and a bound on $\\operatorname{cd}_\\ell$ holding\nuniformly over the stages. This is [det-pd-generic-direct-image].",
+   "uses": [
+    "det-pd-generic-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the second comparison, let $j$ be the open complement of\n$i$ and pull back\n\n$$\n i_*i^!M\\longrightarrow M\\longrightarrow Rj_*j^*M\n \\longrightarrow.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The first comparison treats $Rj_*$; pullback commutes with closed\ndirect image. The pulled-back triangle is therefore the closed-support\ntriangle on the generic fibre. Full faithfulness of\n$i_{\\bar\\eta,*}$ identifies the fibres and proves the second\ncomparison.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For internal Hom, reduce its first variable by the finite smooth\nstratification to $K=t_!P$, where $t$ is the inclusion of a\nstratum and $P$ is locally perfect on it. Then\n\n$$\n \\cHom_X(t_!P,M)\n \\simeq Rt_*(P^\\vee\\otimes^{\\mathbf L}t^!M).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The first two comparisons, a factorization of $t$ into an open\nand a closed immersion, and dualizability of $P$ prove the claim\non these generators; finite cones prove it for $K$. All complexes\nused remain bounded constructible by [sk-lem-pd-preservation].\nThe second and third comparisons are [det-pd-generic-closed-hom].",
+   "uses": [
+    "sk-lem-pd-preservation",
+    "det-pd-generic-closed-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally, on an affine open of $X$ choose a closed immersion over\n$\\mathbf A^1_k$ into $\\mathbf A^r_{\\mathbf A^1_k}$.\nComposition and smooth purity compute its dualizing complex as\n$i^!A(r+1)[2r+2]$, whereas that of the geometric generic fibre\nis $i_{\\bar\\eta}^!A(r)[2r]$. The closed-support comparison gives\nthe displayed twist. All comparisons were formed from localization,\npullback and adjunction, so they preserve evaluation. Applying the\ninternal-Hom comparison twice cancels the twist and shift and gives\nthe assertion about $\\delta$; see [det-pd-generic-dualizing-twist].",
+   "uses": [
+    "det-pd-generic-dualizing-twist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pd-generic-direct-image",
+  "sk-lem-pd-preservation",
+  "det-pd-generic-closed-hom",
+  "det-pd-generic-dualizing-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors/sk-lem-pd-generic-restriction/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2388,
+ "blueprint_uses": [
+  "sk-def-ops",
+  "sk-prop-ctf-finite-comparison",
+  "sk-lem-pd-preservation"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-lem-pd-generic-restriction",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-pd-generic-restriction"
+}

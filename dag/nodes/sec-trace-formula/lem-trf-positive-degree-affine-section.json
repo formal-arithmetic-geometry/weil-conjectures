@@ -1,0 +1,327 @@
+{
+ "id": "lem-trf-positive-degree-affine-section",
+ "kind": "statement",
+ "title": "Positive degree produces a nonzero section with affine nonvanishing locus",
+ "statement": "Let $k$ be a field [def-weil-field], let $C$ be an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension], and let $\\mathcal N$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Assume $\\deg_k(\\mathcal N)=\\chi(C,\\mathcal N)-\\chi(C,\\mathcal O_C)>0$ [def-pc-degree-line-bundle]. Then there exist an integer $n\\ge1$ and a nonzero global section $s\\in\\Gamma(C,\\mathcal N^{\\otimes n})$ such that its nonvanishing open $C_s$ [def-weil-pbc-ample-invertible-module] is affine. Tensor powers are those of [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5X, lemma-ample-curve, proof, second paragraph beginning Assume degree positive: growth of sections, finite closed boundary, evaluation kernel, and affine nonvanishing locus (varieties.tex lines 10016-10036)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pc-degree-line-bundle",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-proper-field-invertible-coherent], $C$ is Noetherian and every invertible module on it is coherent. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], its underlying topology is Noetherian (the descending-chain condition for closed subsets). Integrality gives that $C$ is nonempty and irreducible [def-pc-integral-scheme]. By [lem-sc-scheme-sober], every irreducible closed subset has a unique generic point; this implies the Kolmogorov property, since two points with identical closures would be two generic points of the same irreducible closed subset. Choose a point of $C$ and a nonempty affine open $U$ containing it by [lem-weil-pbc-affine-opens-basis]. Apply [lem-sc-nonempty-open-complement-finite-dim-le-one] to $U$: the hypotheses are now Noetherian, quasi-sober, Kolmogorov, irreducible and dimension one. Thus $C\\setminus U=\\{x_1,\\ldots,x_t\\}$ is finite, and [lem-sc-dim-one-point-outside-open-closed] makes every $x_i$ closed.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, second proof paragraph: choose a finite closed boundary with affine complement; expanded using Tags 01IS and 01IT and the existing dimension-one topological lemmas."
+   }
+  },
+  {
+   "text": "For each $x_i$, properness includes finite type [def-weil-proper-morphism]. Choose a finite-type affine chart $\\operatorname{Spec}A_i$ containing $x_i$ using the affine-cover definition [def-weil-finite-type-morphism]. The closed point corresponds to a maximal ideal $\\mathfrak m_i$ (its closure in the spectrum is $V(\\mathfrak m_i)$). Its residue field is $A_i/\\mathfrak m_i$ [def-weil-residue-field], which is generated over $k$ by the images of any finite algebra-generating family of $A_i$. Apply [lem-weil-pbc-zariski-lemma] to conclude $d_i=\\dim_k\\kappa(x_i)<\\infty$. Put $B=\\sum_{i=1}^t d_i\\in\\mathbf Z_{\\ge0}$, with $B=0$ if $t=0$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, second proof paragraph, parenthetical Nullstellensatz argument; Algebra Tag 00FV, theorem-nullstellensatz (1)."
+   }
+  },
+  {
+   "text": "Put $d=\\deg_k(\\mathcal N)>0$ and $a=\\chi(C,\\mathcal O_C)$. Tensor products of invertible modules are invertible by [lem-weil-pbc-invertible-pullback-tensor], so induction gives invertibility of $\\mathcal N^{\\otimes m}$ for every $m\\ge0$. Its degree is $md$: the base case is $\\deg_k\\mathcal O_C=a-a=0$ by [def-pc-degree-line-bundle]; in the induction step [lem-trf-curve-degree-tensor-additive] gives $\\deg_k(\\mathcal N^{\\otimes(m+1)})=\\deg_k(\\mathcal N^{\\otimes m})+d$. Rearranging the definition of degree yields $\\chi(C,\\mathcal N^{\\otimes m})=md+a$. No ampleness or smoothness is used.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, displayed growth formula; Tag 0AYX, lemma-degree-tensor-product, rank-one case."
+   }
+  },
+  {
+   "text": "For each $m$, the module $\\mathcal N^{\\otimes m}$ is coherent by [lem-trf-proper-field-invertible-coherent]. Its cohomology is finite-dimensional and its Euler characteristic is the alternating sum of the cohomology dimensions by [lem-pc-euler-characteristic-well-defined]. Since $C$ is Noetherian of dimension one, [lem-sc-noetherian-cohomology-above-dimension] gives $H^q(C,\\mathcal N^{\\otimes m})=0$ for $q>1$. By the definition of sheaf cohomology [pqf-def-cohomology], $H^0=\\Gamma$. Hence $h^0_m=\\dim_k\\Gamma(C,\\mathcal N^{\\otimes m})=md+a+h^1_m\\ge md+a$. Since $d$ is a positive integer, take the integer $n=B+|a|+1\\ge1$; then $nd+a\\ge n+a\\ge B+1>B$, and therefore $h^0_n>B$.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, displayed growth formula and the strict dimension inequality; Cohomology Tag 02UZ, proposition-vanishing-Noetherian, and Cohomology of Schemes Tags 02O5 and 02O6."
+   }
+  },
+  {
+   "text": "Let $V=\\Gamma(C,\\mathcal N^{\\otimes n})$ and form the $k$-linear evaluation map $e:V\\to\\prod_{i=1}^t\\mathcal N^{\\otimes n}(x_i)$, $s\\mapsto(s(x_i))_i$, taking germs and then reducing modulo the maximal ideal. Local rank-one trivializations [def-sc-invertible-module] identify each fibre with $\\kappa(x_i)$ as a vector space over that field, so the target has $k$-dimension $B$: concatenate a $k$-basis of each of these finitely many factors. Because $\\dim_k V>B$, evaluation cannot be injective: the images of a basis of $V$ would otherwise be a linearly independent family larger than a basis of its target. Thus there are distinct vectors with the same evaluation; subtracting gives $0\\ne s\\in\\ker e$. In particular $s(x_i)=0$ for every $i$. This is elementary finite-dimensional linear algebra, not a surjectivity assertion about $e$.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, second proof paragraph: hence we can find a nonzero section vanishing at all boundary points."
+   }
+  },
+  {
+   "text": "By the definition of the nonvanishing locus [def-weil-pbc-ample-invertible-module], the equalities $s(x_i)=0$ imply $C_s\\subseteq C\\setminus\\{x_1,\\ldots,x_t\\}=U$. Apply [lem-sc-affine-cap-section-open] to the affine open $U$ and the section $s$ of the invertible module $\\mathcal N^{\\otimes n}$. It says $U\\cap C_s$ is affine; this open equals $C_s$ by the containment just proved. The integer $n\\ge1$ and the nonzero section $s$ therefore have exactly the required properties.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, lemma-ample-curve, end of second proof paragraph, explicitly applying Properties Tag 01PV, lemma-affine-cap-s-open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-pc-degree-line-bundle",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "pqf-def-cohomology",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5X, lemma-ample-curve, second proof paragraph (lines 10016-10036), with its stated Nullstellensatz and affine-intersection inputs made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proper integral curve over a field a positive degree line bundle has a nonzero global section of a positive tensor power whose nonvanishing locus is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n\nThe closest hits concern structure-sheaf localization and powers, not production of an affine-locus section from positive line-bundle degree.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible sheaf of positive Euler characteristic degree on a one dimensional integral proper scheme there is a power and a section vanishing at the finite boundary of an affine open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n\nThe closest hits concern structure-sheaf localization and powers, not production of an affine-locus section from positive line-bundle degree.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"degree\", \"section\"",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry'\n\nInvalid namespace-only identifier in this query; this is not evidence of absence. A corrected substring query was run as well.",
+   "date": "2026-10-22",
+   "verdict": "invalid query; corrected query below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle of positive degree on a proper integral curve has a nonzero tensor power section with affine nonvanishing open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f : X.presheaf.obj (op U)) (n : ℕ) (h : 0 < n) : X.basicOpen (f ^ n) = X.basicOpen f\", \"doc\": \"For a ringed space $ X $, an open subset $ U $, a section $ f $ of the structure sheaf over $ U $, and a positive natural number $ n $, the basic open set defined by $ f^n $ coincides with the basic o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{n : ℕ} (h : 0 < n) : X.basicOpen (f ^ n) = X.basicOpen f\", \"doc\": \"For any positive integer $n$ and section $f$ over an open subset $U$ of a scheme $X$, the basic open set defined by $f^n$ coincides with the basic open set defined by $f$, i.e., $X.\\text{basicOpen}(f^n\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} [CompactSpace X] [QuasiSeparatedSpace X] {f s : Γ(X, ⊤)} (hf : f |_ X.basicOpen s = 0) :\\n  ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) (U : X.Opens) (hU : IsAffineOpen U) (f : Γ(X, U)) (x : Γ(X, X.basicOpen f)) :\\n  ∃ (n : ℕ) (y : Γ(X, U)), y |_ X.basicOpen f = (f |_ X.basicOpen f) ^ n * x\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme.{u}) {U : X.Opens} (hU : IsCompact U.1) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.component_nontrivial\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(X : Scheme.{u}) (U : X.Opens) [Nonempty U] : Nontrivial Γ(X, U)\", \"doc\": \"For any scheme $X$ and any non-empty open subset $U$ of $X$, the ring of global sections $\\\\Gamma(X, U)$ is non-trivial (i.e., contains at least two distinct elements).\"}\n  {\"name\": \"ProjectiveSpectrum.basicOpen_pow\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(f : A) (n : ℕ) (hn : 0 < n) : basicOpen 𝒜 (f ^ n) = basicOpen 𝒜 f\", \"doc\": \"For any homogeneous element $ f $ in a graded ring $ A $ and any positive integer $ n $, the basic open set in the projective spectrum $ \\\\text{Proj}(A) $ defined by $ f^n $ is equal to the basic open \"}\n\nThe closest hits concern structure-sheaf localization and powers, not production of an affine-locus section from positive line-bundle degree.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "positive.*degree.*section|degree.*affine|affine.*degree|affine.*nonvanishing",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"line\": \"202\", \"text\": \"an affine open cover of `Proj ℬ` consisting of `D(f(s))` for `s ∈ A` positive degree. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"line\": \"41\", \"text\": \"of degree `4`. Clearing the denominators of their corresponding affine rational functions in\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"31\", \"text\": \"ways, which is done in `WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis` and in the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"48\", \"text\": \"* `WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis`: the degree of the norm of an\"}\n\nThe closest hits concern structure-sheaf localization and powers, not production of an affine-locus section from positive line-bundle degree. Search directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degree\", \"IsAffineOpen\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "positive.*degree.*section|degree.*affine|affine.*nonvanishing",
+   "results": "Actual search: 1 hit(s); Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean. Hits concern structure-sheaf localization, function fields or elliptic-curve formulas, not positive-degree line-bundle sections on arbitrary proper integral curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive degree line bundle on a proper integral curve has a section of a tensor power with affine nonvanishing locus",
+   "results": "Actual search: 8 hit(s); AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.RingedSpace.basicOpen_pow, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.Scheme.component_nontrivial, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan. Hits concern structure-sheaf localization, function fields or elliptic-curve formulas, not positive-degree line-bundle sections on arbitrary proper integral curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degree\", \"IsAffineOpen\"",
+   "results": "Actual search: 0 hit(s); . Hits concern structure-sheaf localization, function fields or elliptic-curve formulas, not positive-degree line-bundle sections on arbitrary proper integral curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a proper one dimensional integral scheme powers of a line bundle with positive Euler characteristic degree have sections vanishing on a finite set of closed points",
+   "results": "Actual search: 8 hit(s); AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero. Hits concern structure-sheaf localization, function fields or elliptic-curve formulas, not positive-degree line-bundle sections on arbitrary proper integral curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive degree invertible sheaf on a proper integral curve over a field has a nonzero section of a positive tensor power with affine nonvanishing locus",
+   "results": "Actual search: 8 hit(s); AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.instFieldCarrierFunctionField. Hits concern structure-sheaf localization, function fields or elliptic-curve formulas, not positive-degree line-bundle sections on arbitrary proper integral curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-integral-curve-ample-degree",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). Extracted supporting argument: Tag 0B5X, lemma-ample-curve, proof, second paragraph beginning Assume degree positive: growth of sections, finite closed boundary, evaluation kernel, and affine nonvanishing locus (varieties.tex lines 10016-10036).",
+   "via": [
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-positive-degree-affine-section",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0B5X second paragraph over an arbitrary field. Expanded the finite closed boundary, finite residue fields, degree induction, H0 growth, elementary evaluation-kernel argument, and affine-intersection conclusion. All substantive ingredients already have nodes, so no new nodes were introduced. The statement is unchanged; the smooth/H0=k Lean ampleness results do not cover it.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). Extracted supporting argument: Tag 0B5X, lemma-ample-curve, proof, second paragraph beginning Assume degree positive: growth of sections, finite closed boundary, evaluation kernel, and affine nonvanishing locus (varieties.tex lines 10016-10036). This split realizes precisely the positive-degree-to-affine-section supporting argument, not the ampleness theorem that uses it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Passes from a Noetherian scheme to its underlying Noetherian topological space, needed for finite boundary; generic scheme topology tool. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Supplies quasi-sobriety and uniqueness of generic points, hence T0, for the finite-complement topological theorem. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Chooses one nonempty affine open; generic scheme-topology tool. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "why": "Gives finiteness of the boundary of a nonempty open of an integral Noetherian curve; no replacement of the unit route. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-sc-dim-one-point-outside-open-closed",
+    "why": "Gives closedness of boundary points in an irreducible T0 dimension-one space. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Proves boundary residue fields finite over the arbitrary base field, using their finite algebra presentations. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Supplies finite-dimensional coherent cohomology and the finite alternating Euler sum for any proper field scheme. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Supplies the general Zariski cohomological vanishing above dimension one. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Supplies affineness of the intersection of an affine open with a line-bundle nonvanishing locus, exactly the tool cited by 0B5X. No node of sk-i-curve-zero gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Supplies closure of invertible modules under tensor products, needed before applying degree additivity. No node of sk-i-curve-zero gives this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-affine-cap-section-open",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-204e04d01",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-204e04d01 (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full against Stacks varieties.tex 0B5X, second proof paragraph (lines 10016-10036), and Properties 01PV (properties.tex:4288). The statement is unchanged from live (live is still unsplit, so not superseded); the earlier searches are kept and there are no new nodes. Step 1: every hypothesis of lem-sc-nonempty-open-complement-finite-dim-le-one and lem-sc-dim-one-point-outside-open-closed is established; T0 is correctly derived from unique generic points. Step 2: a finite-type chart, the closed point as a maximal ideal and the Zariski lemma give [kappa(x_i):k]<inf. Step 3: degree additivity (dim<=1) and the base case deg O=0 give chi(N^m)=md+a. Step 4: coherence, finite-dimensional cohomology and vanishing for q>1 give h0>=md+a; n=B+|a|+1 gives h0_n>B, checked for a<0. Step 5: the elementary kernel argument uses fibres of k-dimension d_i. Step 6: C_s is contained in U, and affine-cap-section-open gives C_s affine. Every off-unit tool use is recorded in tool_uses and is generic. The 0B5X nodes elsewhere (smooth, or k algebraically closed, or the converse direction) are not duplicates. No SGA citations. Edge cases checked: t=0, negative chi(O_C), non-rational points."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveDegreeAffineSection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_nonzero_section_affine_of_degree_pos",
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveDegreeAffineSection.lean",
+  "statement": "theorem exists_nonzero_section_affine_of_degree_pos (k : Type u) [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = (1 : WithBot ℕ∞)) (N : C.Modules) [N.IsInvertible] (hdeg : 0 < N.degree k) : ∃ n : ℕ, 1 ≤ n ∧ ∃ s : (N.tensorPow n).val.presheaf.obj (Opposite.op ⊤), s ≠ 0 ∧ ∃ U : C.Opens, IsAffineOpen U ∧ (U : Set C) = nonvanishingLocus (N.tensorPow n) s",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7669a9916",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Lean/node/records correct vs Stacks 0B5X varieties.tex 10016-10036: arbitrary Field k, IsIntegral, IsProper (C ↘ Spec k), topologicalKrullDim = 1, IsInvertible, 0 < degree (=χ(N)-χ(O), EulerChar.lean:285); ∃ n≥1 (ℕ), s≠0 in Γ(tensorPow n), ∃ affine U with ↑U = nonvanishingLocus (pinned to C_s). Edge cases ok (empty excluded by IsIntegral; t=0, non-rational points, χ(O)<0 need no extra hypotheses; no smoothness/H0=k), common universe u required by degree API only; sorry-only, no defs, docstrings ok, imports exist/no cycle, no duplicate theorem. tensorPow via SheafOfModules.monoidalCategory = accepted def-pur-sheaf-tensor-product convention (advisory). Sole fault H11: delivered second reading is a dispatcher self-check → FIX fixes/lem-trf-positive-degree-affine-section.report.md (worker report verbatim + real clause-by-clause second reading). No Lean changed, no compile."
+ }
+}

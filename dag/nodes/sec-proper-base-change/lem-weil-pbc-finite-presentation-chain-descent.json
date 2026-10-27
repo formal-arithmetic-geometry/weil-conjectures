@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-chain-descent",
+ "kind": "statement",
+ "title": "Finite-presentation chain descent with finite comparison",
+ "statement": "For a qcqs inverse system of schemes indexed by a directed preorder, with affine transition maps and specified limit, let E be a finitely presented model over a stage. A finite family of chains A_i→B_i→C_i→lim D, with each vertex finitely presented and qcqs over the limit, and a finite surjection ∐A_i→E_limit compatible with structure maps, descends to a later stage preserving finite etale C_i→D_i, open A_i→B_i and smooth proper B_i→C_i whenever those properties hold at the limit. The original objects have cartesian comparisons commuting with the chain arrows; the coproduct comparison is cartesian and its target comparison is over the limit. No generic points, field extensions, radicial covers, or fibre geometry occur. Empty families are permitted. [def-pc-scheme] [def-pc-fibre-product] [lem-weil-pbc-limit-affine-transition]",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01ZM, 01ZO, 07RR, 07RP, 0EUU, 0C0C, 081F; application in more-morphisms.tex, Tag 0GK7 diagram-descent paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite-family descent to the disjoint union of the three vertex families. Refine its stage together with the prescribed stage of E, and pull E back to that common stage. Use arrow descent for the finite family of edges A→B, B→C and A→E. Lift each descended edge into the pullback target by the universal property. These are morphisms over the base, so all structure-map equations hold at this stage without a separate equality-descent application. The arrow-descent equalities retain the original arrows after limit pullback.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-family-descent",
+    "lem-weil-pbc-finite-presentation-arrows-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the finite coproduct of the descended A vertices and its arrow to the model of E. Finite coproducts of cartesian squares are cartesian, as in AlgebraicGeometry.isPullback_sigmaDesc. The source is qcqs: compactness is preserved by the finite disjoint union, and quasi-separatedness follows by intersecting compact opens on each clopen component. Cancellation for local finite presentation gives the hypothesis needed by property descent for each edge and for the coproduct comparison. Transfer the original arrow properties through the cartesian comparisons, apply finite and surjectivity descent to the comparison, finite and etale descent to C→base, open-immersion descent to A→B, and smooth and proper descent to B→C. Each property persists by base change. The intersection of these finitely many eventual conditions supplies one common stage, also for an empty indexed family.",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-descend-open-immersion-qcqs",
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-eventually-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the final vertex models by pullback to the chosen common stage, with their canonical cartesian comparisons. Pullback projection identities preserve both chain arrows. Identify the iterated base change of E with pullback(e,D.map a) using horizontal pullback pasting and the unique isomorphism between pullbacks. Compose the comparison arrow and target comparison with this isomorphism. Coproduct pullback compatibility followed by pullback cancellation proves the final cartesian square, and the second projection identity proves its required equation over the limit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-finite-presentation-arrows-descent",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-eventually-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01ZM(1)-(2), 01ZO, 07RR, 07RP, 0EUU, 0C0C and 081F; more-morphisms.tex Tag 0GK7 diagram-descent paragraph; Lean assembly by E9 using existing declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of finitely presented chains A to B to C over an inverse limit descends to a common stage preserving finite surjective comparison maps, etale, smooth proper and open immersion properties",
+   "results": "8 hits;  AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-25",
+   "verdict": "No theorem packages the finite chains and their simultaneous morphism properties; use the stated object, arrow, equality and property descent declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "12 hits: definition and closure under composition, base change, pullback projections, open immersions, and restrictions; no finite-diagram descent theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use these closure instances in the parent proof; the finite-chain descent still needs object, arrow, equality and property descent."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*stage|finite.*diagram",
+   "results": "0 hits;  ",
+   "date": "2026-10-25",
+   "verdict": "No theorem packages the finite chains and their simultaneous morphism properties; use the stated object, arrow, equality and property descent declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnmarkedCurveDiagramModel",
+  "date": "2026-10-25",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-unmarked-curve-diagram-model",
+   "place": "proof steps 2 and 3, finite diagram and morphism-property descent",
+   "via": [
+    "lem-weil-pbc-unmarked-curve-diagram-model"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationChainDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationChainDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_chain_stage",
+  "statement": "theorem exists_finitePresentation_chain_stage\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : Iᵒᵖ)\n    (E : Scheme.{u}) (e : E ⟶ D.obj i₀)\n    [LocallyOfFinitePresentation e] [QuasiCompact e] [QuasiSeparated e]\n    {κ : Type v} [Finite κ] (A B C : κ → Scheme.{u})\n    (j₀ : ∀ i, A i ⟶ B i) (p₀ : ∀ i, B i ⟶ C i)\n    (t₀ : ∀ i, C i ⟶ c.pt)\n    [∀ i, LocallyOfFinitePresentation (j₀ i ≫ p₀ i ≫ t₀ i)]\n    [∀ i, QuasiCompact (j₀ i ≫ p₀ i ≫ t₀ i)]\n    [∀ i, QuasiSeparated (j₀ i ≫ p₀ i ≫ t₀ i)]\n    [∀ i, LocallyOfFinitePresentation (p₀ i ≫ t₀ i)]\n    [∀ i, QuasiCompact (p₀ i ≫ t₀ i)]\n    [∀ i, QuasiSeparated (p₀ i ≫ t₀ i)]\n    [∀ i, LocallyOfFinitePresentation (t₀ i)]\n    [∀ i, QuasiCompact (t₀ i)] [∀ i, QuasiSeparated (t₀ i)]\n    (ν₀ : (∐ A) ⟶ pullback e (c.π.app i₀))\n    (hν₀ : IsFinite ν₀ ∧ Surjective ν₀)\n    (hcomm : ∀ i, Sigma.ι A i ≫ ν₀ ≫ pullback.snd _ _ =\n      j₀ i ≫ p₀ i ≫ t₀ i)\n    (ht₀ : ∀ i, IsFinite (t₀ i) ∧ Etale (t₀ i))\n    (hj₀ : ∀ i, IsOpenImmersion (j₀ i))\n    (hp₀ : ∀ i, Smooth (p₀ i) ∧ IsProper (p₀ i)) :\n    ∃ (i : Iᵒᵖ) (a : i ⟶ i₀)\n      (T Y Ybar : κ → Scheme.{u}) (t : ∀ k, T k ⟶ D.obj i)\n      (j : ∀ k, Y k ⟶ Ybar k) (p : ∀ k, Ybar k ⟶ T k)\n      (ν : (∐ Y) ⟶ pullback e (D.map a)),\n      IsFinite ν ∧ Surjective ν ∧\n      (∀ k, Sigma.ι Y k ≫ ν ≫ pullback.snd _ _ = j k ≫ p k ≫ t k) ∧\n      (∀ k, IsFinite (t k) ∧ Etale (t k)) ∧\n      (∀ k, IsOpenImmersion (j k)) ∧ (∀ k, Smooth (p k) ∧ IsProper (p k)) ∧\n      ∃ (hA : ∀ k, A k ⟶ Y k) (hB : ∀ k, B k ⟶ Ybar k)\n        (hC : ∀ k, C k ⟶ T k),\n        (∀ k, IsPullback (hA k) (j₀ k ≫ p₀ k ≫ t₀ k)\n            (j k ≫ p k ≫ t k) (c.π.app i) ∧\n          IsPullback (hB k) (p₀ k ≫ t₀ k) (p k ≫ t k) (c.π.app i) ∧\n          IsPullback (hC k) (t₀ k) (t k) (c.π.app i) ∧\n          hA k ≫ j k = j₀ k ≫ hB k ∧ hB k ≫ p k = p₀ k ≫ hC k) ∧\n        ∃ aE : pullback e (c.π.app i₀) ⟶ pullback e (D.map a),\n          IsPullback (Limits.Sigma.map hA) ν₀ ν aE ∧\n            aE ≫ pullback.snd _ _ = pullback.snd _ _ ≫ c.π.app i",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T180652-L-4018609",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T205924-L-3407366",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
